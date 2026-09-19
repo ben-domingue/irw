@@ -11,7 +11,8 @@
 ##
 ##  construct name        tags.csv, 55% of tables
 ##  dictionary Description biblio.csv, 98% -- the widest signal we have
-##  structured tags       construct type / sample / tool / item format / language
+##  structured tags       construct type / tool / item format (not sample or
+##                        language: those describe a study, not a construct)
 ##  instrument label      itemtext_metadata.csv, 14%
 ##  Context Text          tags sheet column 4          RESTRICTED
 ##  item wording          items_alltext.Rdata          RESTRICTED
@@ -52,6 +53,8 @@
 ##Usage:
 ##  Rscript 03b_describe.R                 # describe uncached units
 ##  Rscript 03b_describe.R --sample        # the stratified 20-row sample
+##  Rscript 03b_describe.R --units-from=F  # redescribe the units in an earlier
+##                                         # construct_descriptions.csv
 ##  Rscript 03b_describe.R --limit=20      # first 20 uncached units
 ##  Rscript 03b_describe.R --review        # raw vs rewrite for flagged units
 ##  Rscript 03b_describe.R --list-models   # what the gateway actually offers
@@ -164,6 +167,12 @@ list_models <- function() {
     cat(paste(sort(ids), collapse = "\n"), "\n")
 }
 
+##Token totals for the run. The key cannot report its own spend (the usage
+##routes are outside its scope), so the per-completion `usage` block is the only
+##cost signal we get -- summed here and printed at the end.
+USAGE <- new.env()
+USAGE$calls <- 0; USAGE$prompt <- 0; USAGE$completion <- 0
+
 ##The gateway is LiteLLM behind an OpenAI-compatible surface, so this does NOT
 ##reuse 02_biblio.R's anthropic_chat(): same httr/jsonlite idiom, different auth
 ##header and a different path to the reply text.
@@ -179,6 +188,10 @@ describe_chat <- function(prompt) {
         code <- status_code(r)
         if (code == 200) {
             parsed <- fromJSON(rawToChar(r$content), simplifyVector = FALSE)
+            u <- parsed$usage
+            USAGE$calls <- USAGE$calls + 1
+            if (!is.null(u$prompt_tokens))     USAGE$prompt     <- USAGE$prompt + u$prompt_tokens
+            if (!is.null(u$completion_tokens)) USAGE$completion <- USAGE$completion + u$completion_tokens
             if (length(parsed$choices) == 0) return(NA_character_)
             return(trimws(parsed$choices[[1]]$message$content))
         }
@@ -471,11 +484,11 @@ build_bundle <- function(rows, items) {
     add("Dataset table name(s)", paste(head(rows$table, 5), collapse = ", "), "table_name")
     add("Instrument", f(rows$instrument), "instrument")
     add("Dataset description", f(rows$description), "dictionary_description")
+    ##Sample and language are facts about a study, not a construct, and are
+    ##left out so the model has nothing to write them from (see prompt_describe).
     add("Construct type", f(rows$construct_type), "tags")
-    add("Sample", f(rows$sample), "tags")
     add("Measurement tool", f(rows$tool), "tags")
     add("Item format", f(rows$item_format), "tags")
-    add("Language", f(rows$language), "tags")
     add("Excerpt from the source paper", f(rows$context_text), "context_text", TRUE)
 
     it <- unlist(items[intersect(rows$table, names(items))], use.names = FALSE)
@@ -493,19 +506,29 @@ build_bundle <- function(rows, items) {
          restricted = restricted)
 }
 
+##Construct only, ruled by Ben 2026-09-19. One description serves every table
+##that shares a construct name -- 90 names span more than one study -- so
+##anything true of a single study (who, where, how many, what was found) would
+##be wrong for the others. Sample facts already live in the tags and metadata.
 prompt_describe <- function(bundle) {
     paste0(
-"You are describing what a psychometric or educational dataset measures, for a\n",
-"research data repository. Below is everything known about one construct.\n\n",
-"Write ONE description of 1-2 sentences saying what is measured, and where the\n",
-"evidence supports it, who was measured and how. Requirements:\n",
+"You are describing a psychological or educational CONSTRUCT for a research\n",
+"data repository. The same description will be shown for every dataset that\n",
+"measures this construct, across different studies. Below is the evidence from\n",
+"the dataset(s) at hand; use it only to understand the construct.\n\n",
+"Write ONE description of 1-2 sentences saying what the construct is and what\n",
+"aspects of it are measured. Requirements:\n",
+"  - Describe the construct, not the study. Do NOT mention the sample, the\n",
+"    participants, their number, age, country or setting, the study's aims,\n",
+"    its design or conditions, or anything it found.\n",
+"  - Do not report reliability, validity or any other statistic.\n",
 "  - Write in your own words and your own sentence structure.\n",
 "  - Do not copy any run of ", N_GRAM, "+ consecutive words from anything below.\n",
 "  - Do not quote item wording. Describe what the items ask about instead.\n",
 "  - State only what the evidence supports; do not speculate or embellish.\n",
 "  - Do not evaluate the instrument's quality.\n",
 "  - Output the description only. No preamble, no heading, no commentary.\n",
-"  - If the evidence is too thin to say anything specific, write exactly:\n",
+"  - If the evidence is too thin to say what the construct is, write exactly:\n",
 "    INSUFFICIENT\n\n",
 "EVIDENCE\n--------\n", bundle$text)
 }
@@ -603,7 +626,19 @@ if (OPT_REVIEW) { review_flagged(units, cache); quit(save = "no") }
 all_keys <- unique(units$unit_key)
 todo_keys <- setdiff(all_keys, cache$unit_key)
 
-if (OPT_SAMPLE) {
+##An earlier sample's units, reread from its construct_key column, so a prompt
+##change can be judged on the same constructs rather than a fresh draw -- the
+##stratified draw moves whenever tags.csv does.
+OPT_UNITS <- flag_val("--units-from")
+if (!is.na(OPT_UNITS)) {
+    prev <- read.csv(OPT_UNITS, stringsAsFactors = FALSE, colClasses = "character")
+    picked <- intersect(unique(prev$construct_key), all_keys)
+    gone <- setdiff(unique(prev$construct_key), all_keys)
+    if (length(gone)) cat("--units-from: no longer a unit: ", paste(gone, collapse = ", "), "\n", sep = "")
+    todo_keys <- picked
+    cache <- cache[!cache$unit_key %in% picked, ]
+    cat("--units-from: ", length(todo_keys), " unit(s) from ", OPT_UNITS, "\n", sep = "")
+} else if (OPT_SAMPLE) {
     ##A stratified 20, not the first 20: the corpus has very different evidence
     ##profiles and a sample that misses them teaches nothing.
     ntok <- function(x) ifelse(is.na(x), 0L, lengths(strsplit(trimws(x), "\\s+")))
@@ -626,6 +661,9 @@ if (OPT_SAMPLE) {
         picked <- c(picked, sample(pool, min(want[[s]], length(pool))))
     }
     todo_keys <- picked
+    ##A rerun of the sample redescribes the same units (fixed seed); drop their
+    ##cached rows so the rbind below replaces them instead of duplicating them.
+    cache <- cache[!cache$unit_key %in% picked, ]
     cat("--sample: ", length(todo_keys), " stratified units\n", sep = "")
 } else if (!is.na(OPT_LIMIT)) {
     todo_keys <- head(todo_keys, OPT_LIMIT)
@@ -724,6 +762,12 @@ if (OPT_STUBCOPY) {
 
 if (length(new)) cache <- rbind(cache, do.call(rbind, new))
 write_cache(cache)
+
+if (USAGE$calls > 0) {
+    cat("tokens: ", USAGE$calls, " call(s), ", USAGE$prompt, " prompt + ",
+        USAGE$completion, " completion (mean ", round(USAGE$prompt / USAGE$calls),
+        " + ", round(USAGE$completion / USAGE$calls), " per call)\n", sep = "")
+}
 
 ##--------------------------------------------------------------- outputs ----
 
