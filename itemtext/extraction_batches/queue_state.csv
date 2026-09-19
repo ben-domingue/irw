@@ -1216,9 +1216,9 @@ yin_2022_values_importance,done,batch_239,2026-09-16T14:04:15-07:00
 yu_2025_bedtime_procrastination,done,batch_240,2026-09-16T14:07:30
 yu_2025_physical_activity,done,batch_240,2026-09-16T14:07:30
 yuebo_2024_netbenefit,done,batch_240,2026-09-16T14:07:30
-yuebo_2024_satisfaction,pending,,
-yuebo_2024_srvquality,pending,,
-yuebo_2024_sysquality,pending,,
+yuebo_2024_satisfaction,done,batch_241,2026-09-18T19:14:43-07:00
+yuebo_2024_srvquality,done,batch_241,2026-09-18T19:14:43-07:00
+yuebo_2024_sysquality,done,batch_241,2026-09-18T19:14:43-07:00
 yuebo_2024_tck,pending,,
 yuebo_2024_tk,pending,,
 yuebo_2024_tpack,pending,,

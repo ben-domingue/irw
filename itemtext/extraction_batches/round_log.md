@@ -20455,3 +20455,44 @@ choice. That is exactly why the status is PARTIAL and not VERIFIED.
 **CAP REACHED.** `batch_240` is the batch named as the round cap in Step 0 of the round prompt.
 This round completed it, so the series stops here: the next firing will self-cancel on the
 "batch_240 already exists" stop condition. Resuming requires a human to raise the cap.
+
+## batch_241 — 2026-09-18 19:14–19:4x PDT — 3 tables — **3 written / 0 blocked / 0 failed** (yield 3/3 = 100%)
+
+First round after the cap was raised from batch_240 to **batch_290** (commit 216c5669). Three agents,
+one per table. All three are `yuebo_2024_*` siblings from one deposit (PLOS ONE
+10.1371/journal.pone.0297515, CC BY 4.0: S1 Data `.s001` CSV + S1 Appendix `.s002` DOCX). Each agent
+was told which files belonged to the other two.
+
+Tables: `yuebo_2024_satisfaction` (US1–US4), `yuebo_2024_srvquality` (SEQ1–SEQ4),
+`yuebo_2024_sysquality` (SQ1–SQ4). Each has 4 items × resp 1–5, so 20 rows.
+- All three are `paper_explicit`: the appendix Code column matches the S1 Data header, which is the IRW
+  item code. All are **VERIFIED**. sysquality also matches per-item resp counts cell for cell between
+  source and live (for example SQ4 16/26/87/100/16).
+- All three are `translated_substitute` / `study_supplied` / `language=Chinese`. The deposit has 0
+  CJK characters, so these are later-backfill candidates, like batch_240's `netbenefit`.
+- `option_text` is blank throughout (the source says "5-point Likert" and prints no anchors).
+
+Gates: normalize (1 file, blanks→NA) · audit_batch 3 PASS, no anomalies · verify_batch PASS=3 ·
+lint clean · irw-validate ok ×3 · check_provenance: 0 machine_translation tables missing a
+public-page entry. Its `mixed` REVIEW list of 19 tables predates this batch and has none of its tables.
+
+**Step 5b orchestrator re-check — CONFIRMED.** I checked batch_240's warning about the US-code
+collision against the cached S1 files:
+- S1 Data headers are `USE1..USE5` and `US1..US4`.
+- The appendix codes BOTH its "Continuous Use" block (5 rows) and its "User Satisfaction" block (4 rows)
+  as `US1..`.
+- The shipped satisfaction wording comes from the User Satisfaction block, which is correct.
+
+**For `yuebo_2024_use` (still pending): its wording is the appendix block coded US1–US5, not USE.**
+
+**Notable:**
+- **Provenance citation slip, fixed in this batch:** two agents cited the first author as "Yuebo Q". The
+  article JATS gives `<surname>Yuebo</surname><given-names>Li</given-names>`, so the citation should read
+  "Yuebo L". I corrected both batch_241 sidecars before the merge. **batch_240's `netbenefit` provenance
+  row carries the same "Yuebo Q" slip and was left untouched** — fix it at triage.
+- The satisfaction agent could not reproduce the paper's published VIFs for US1–US4 from S1 Data
+  (3.360/4.243/4.088/4.202 published vs ≈3.0/4.5/4.4/4.4). It was not used as evidence, and the
+  mapping does not depend on it.
+- One agent's `table_context.R` hung for more than 5 minutes on a full `irw_fetch` and was abandoned;
+  ground truth came from `table_sets.R` instead. The process had already exited by merge time.
+- Queue: **130 pending remain, 0 in_progress.** Cap (batch_290) not reached.
