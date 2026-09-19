@@ -27,6 +27,18 @@ def convert_to_irw_split(input_file):
             df_all[col] = df_all[col].replace(scale_mapper)
             df_all[col] = pd.to_numeric(df_all[col], errors='coerce')
 
+    # Item responses come from the raw SPSS codes, not from mapping value labels
+    # back to numbers. The .sav labels RFQ8 backwards (1='strongly agree',
+    # 7='strongly disagree'; RFQ1-RFQ7 run the other way), and only the endpoints
+    # carry labels, so the label route swapped RFQ8's 1 and 7 while leaving 2-6
+    # alone. The raw codes follow the same direction for all eight items: the
+    # deposit's RFQu8 recode matches RFQu2/4/5/6. Covariates keep their labels.
+    df_raw = pd.read_spss(input_file, convert_categoricals=False)
+    item_re = re.compile(r"^(RFQ|GHQ|DERS|ECR|BPI)_?\d+$")
+    for col in df_all.columns:
+        if item_re.match(col):
+            df_all[col] = df_raw[col]
+
     if 'id' not in df_all.columns:
         df_all['id'] = df_all.index + 1
 
