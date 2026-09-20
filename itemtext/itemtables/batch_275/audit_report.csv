@@ -1,0 +1,4 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"avilatamayo_2022_work_life","PASS",7,7,TRUE,TRUE,FALSE,TRUE,0,0,""
+"avilatamayo_2022_workf_div","PASS",6,6,TRUE,TRUE,FALSE,TRUE,0,0,""
+"busch_2022_course_exacerbate","PASS",17,17,TRUE,TRUE,FALSE,TRUE,0,0,""

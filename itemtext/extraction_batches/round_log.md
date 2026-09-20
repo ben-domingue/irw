@@ -21777,3 +21777,52 @@ names rather than counted off appendix rows, and each dimension's last appendix 
 "En general / Overall, the company…" summary item.
 
 Cap (`batch_299`) not reached; 73 pending remain.
+
+## batch_275 — 2026-09-20 13:09–13:20 PDT
+
+3 tables, 3 agents. **written 3 / blocked 0 / failed 0 — yield 3/3 (100%).** No kills,
+no retries, no rate limits. Numbered 275 (highest below 300 is 274; the 300–304
+hole is now fully occupied by irw#2228, which is why "highest + 1" must ignore it).
+
+Tables: `avilatamayo_2022_work_life` (49 rows), `avilatamayo_2022_workf_div` (42),
+`busch_2022_course_exacerbate` (34).
+
+Gates: normalize_nulls 0 of 3 changed; audit_batch **PASS 3, no anomalies** (so no
+Step 5c WARNs to explain); verify_batch PASS=3; lint_verification 3 rows, no problems;
+irw-validate ok on all 3; check_provenance clean (the one REVIEW line, `ye_2025_q25_scale`
+translation_source=mixed, is pre-existing and not from this round).
+
+Verification: 2 PARTIAL (both avilatamayo, route 9+3+8 — response-frequency matching is
+decisive on the option axis, but within-subscale ORDER rests on presentation order alone
+because the paper publishes no per-item statistic anywhere), 1 VERIFIED (busch, route 1 —
+S1 Appendix Table S5's per-aspect regression refits to <=0.0050 across all 17 items with a
+bijection and nearest rival >=0.058). All 3 merged into mapping_verification.csv (1197 -> 1200).
+
+### Step 5b — orchestrator re-checks, one of which changed the record
+
+- **Confirmed** `work_life`'s missing item: live codes are 5.1, 5.2, 5.4…5.8 — code **5.3
+  is genuinely absent** from the deposit, matching the item the paper says it dropped for a
+  loading < .50. Its wording is published nowhere.
+- **Confirmed** `workf_div`'s n split from aggregates alone: 2597 rows = 432 + 5x433, exactly
+  the one mean-imputed non-integer cell the agent reported the processing script dropping.
+- **CITATION ERRORS, corrected in both batches.** Crossref gives 10.1371/journal.pone.0266711
+  exactly TWO authors — Ávila-Tamayo, Diego Fernando; Bayona, Jaime Andrés. A three-author
+  citation ("Rodriguez-Salazar M, Fernandez-Rodriguez V") is **fabricated** and had propagated
+  into batch_274's `work_envir` row AND one batch_275 row; the other batch_275 row had the
+  initials wrong (KJ, not DF). Note the shape of this: the `work_life` agent correctly flagged
+  the batch_274 citation as wrong, and its own row was still wrong. An agent's finding is a
+  lead, not a verdict — all four rows are now `Avila-Tamayo DF, Bayona JA (2022)`.
+- **Also corrected**: batch_274 `empl_stab` cited an "S2 Appendix". The PLOS page labels the
+  supplements S1 Appendix / S1 Dataset — there is no S2 Appendix (the FILE is `…s002.docx`,
+  which is what confused it). batch_274 is un-uploaded (`uploaded=''`), so both fixes land
+  before anything is stamped.
+
+### Carried caveat, not a defect in this round
+
+`work_life`'s observed Cronbach's α = 0.8835 vs the paper's .90. Recomputing all seven ICSR
+subscales reproduces five published alphas to 2 d.p. and misses exactly two — and those two
+are among the three subscales that lost an item, so the published figures were most likely
+computed pre-drop. Unresolvable from the deposit and it does not bear on text-to-code mapping.
+Recorded in provenance, notes and the public_note.
+
+Cap (`batch_299`) not reached. Queue: 70 pending.
