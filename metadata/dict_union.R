@@ -873,11 +873,14 @@ apply_license_attribution <- function(biblio, label = "core",
 ##dictionary's `Original License`; only `Derived License` was blank, which is
 ##all it takes for this stopgap to fire. They now come from dictionary_auto.csv.
 ##
-##Three NC deposits found by the same sweep are deliberately STILL HERE --
-##4fdw9, t3a9r and g8dvj publish CC BY-NC. `Permission via Email` may record a
-##broader individual grant than the public NC terms, so stamping NC downstream
-##could narrow what IRW may redistribute, and NC is Ben's call
-##(ruling 2026-09-04). Awaiting that on #2302; do not "finish the sweep" here.
+##The three NC deposits from the same sweep (4fdw9, t3a9r, g8dvj, 21 rows) were
+##held here for a ruling and are now gone too. RULED BY BEN, 2026-09-20 on
+###2302: mirror the deposit, `CC BY-NC 4.0`. The argument for keeping the
+##interim value was that an emailed grant might be broader than the public NC
+##terms -- but no email for any of the three is on file in licenseinfo/emails/,
+##so the interim value asserted a permission nobody could produce, and the NC
+##binds whoever downloads the IRW table rather than IRW (the
+##bicb-j_ishiguro_2025 shape, #2002).
 ##
 ##Two more came off by running that checker: osf.io/c6rqy (christensen_2018_*,
 ##CC0) and osf.io/twgcu (schoen_2019_to_2022_mkt, CC BY 4.0) publish a licence
@@ -888,13 +891,10 @@ apply_license_attribution <- function(biblio, label = "core",
 ##asks the OSF API whether each listed project publishes a licence and exits
 ##non-zero if one does.
 ##
-##The list is 9 projects, 46 tables.
+##The list is 6 projects, 25 tables.
 OSF_PERMISSION_PROJECTS <- c(
     "75crd",  # 15  parentalempathy_gonzalez_2021_*
-    "4fdw9",  # 10  darkfactorfrench_pischel_2026_*   CC BY-NC on OSF; held, #2302
-    "t3a9r",  #  7  transyouth_leshin_2026_*          CC BY-NC on OSF; held, #2302
     "69nwe",  #  4  smpi_lorenzoluaces_2020_*
-    "g8dvj",  #  4  morgan_2026_music_personality_*   CC BY-NC on OSF; held, #2302
     "kqxd5",  #  2  west_2021_aggnet_*
     "snmqt",  #  2  mclaughlin_samuel_2025_*
     "9cm75",  #  1  steinberg_2023_mentalizing_momentary
