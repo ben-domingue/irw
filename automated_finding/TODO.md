@@ -49,15 +49,16 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   read. The page lives in the datapages/irw repo
   (`irw_site/itemtext_issues.qmd`) and is edited there, not here.
 
-- [ ] **Is a Prolific ID PII for our purposes?** `10.1038/s41598-023-33749-0`
-  (OSF `v7k3d`) publishes 772 live 24-hex Prolific account IDs beside
-  mental-health-disorder, medication and head-injury fields. A Prolific ID is
-  not in the blanket rule's enumerated list, but it is a persistent
-  cross-study identifier that Prolific tells researchers never to publish.
-  Skipped conservatively pending ben-domingue's call; reversible either way.
-  If it is not PII, the deposit is 697 x 85 with HADS and DERS blocks and
-  worth processing. Both this and the PERMA deposit below are arguably worth
-  telling the depositors about, as with the zenodo.10069489 email.
+- [x] **Prolific IDs: replaced, not disqualifying** (ben-domingue,
+  2026-09-20). A platform participant ID is a pure identifier, so it is
+  swapped for the row index -- never a hash, which is a re-linkable
+  pseudonym -- and the candidate ships. All other PII still skips the whole
+  candidate. Recorded in the skill's PII section and BATCH_LOG.md 2026-09-20d.
+  The candidate that prompted it, `10.1038/s41598-023-33749-0`, still did not
+  ship: its data sits on a PRIVATE, unlicensed OSF node reachable only
+  through the review link the paper publishes, so it is a licence skip and is
+  logged in `license_blocked_candidates.csv`. No author email, per
+  ben-domingue.
 
 - [x] **UCLA Loneliness Scale: verdict is `ship`** (2026-09-20). The quote
   test found nothing to quote -- Fetzer's own UCLA pages reproduce the scale
