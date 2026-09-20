@@ -1903,8 +1903,8 @@ E
 5
 43
 Disponível em: http://2011.igem.org. Acesso em: 18 nov. 2014 (adaptado).
-Expressa em termos do comprimento de onda (Ȝ), a 
-espessura mínima é igual a","A","Ȝ
+Expressa em termos do comprimento de onda (λ), a 
+espessura mínima é igual a","A","λ
 4
 .",1,NA,NA,NA,NA,"Portuguese","A"
 "enem_2015_1mil_cn","enem_2015_1mil_cn_1",82658,"ENEM 2015 - CN","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
@@ -1974,8 +1974,8 @@ E
 5
 43
 Disponível em: http://2011.igem.org. Acesso em: 18 nov. 2014 (adaptado).
-Expressa em termos do comprimento de onda (Ȝ), a 
-espessura mínima é igual a","A","Ȝ
+Expressa em termos do comprimento de onda (λ), a 
+espessura mínima é igual a","A","λ
 2
 .",0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2015_1mil_cn","enem_2015_1mil_cn_1",82658,"ENEM 2015 - CN","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
@@ -2045,8 +2045,8 @@ E
 5
 43
 Disponível em: http://2011.igem.org. Acesso em: 18 nov. 2014 (adaptado).
-Expressa em termos do comprimento de onda (Ȝ), a 
-espessura mínima é igual a","A","3Ȝ
+Expressa em termos do comprimento de onda (λ), a 
+espessura mínima é igual a","A","3λ
 4
 .",0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2015_1mil_cn","enem_2015_1mil_cn_1",82658,"ENEM 2015 - CN","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
@@ -2116,8 +2116,8 @@ E
 5
 43
 Disponível em: http://2011.igem.org. Acesso em: 18 nov. 2014 (adaptado).
-Expressa em termos do comprimento de onda (Ȝ), a 
-espessura mínima é igual a","A","Ȝ.",0,NA,NA,NA,NA,"Portuguese","D"
+Expressa em termos do comprimento de onda (λ), a 
+espessura mínima é igual a","A","λ.",0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2015_1mil_cn","enem_2015_1mil_cn_1",82658,"ENEM 2015 - CN","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE CIÊNCIAS HUMANAS E SUAS TECNOLOGIAS
 PROVA DE CIÊNCIAS DA NATUREZA E SUAS TECNOLOGIAS
@@ -2185,8 +2185,8 @@ E
 5
 43
 Disponível em: http://2011.igem.org. Acesso em: 18 nov. 2014 (adaptado).
-Expressa em termos do comprimento de onda (Ȝ), a 
-espessura mínima é igual a","A","2Ȝ.",0,NA,NA,NA,NA,"Portuguese","E"
+Expressa em termos do comprimento de onda (λ), a 
+espessura mínima é igual a","A","2λ.",0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2015_1mil_cn","enem_2015_1mil_cn_1",37144,"ENEM 2015 - CN","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE CIÊNCIAS HUMANAS E SUAS TECNOLOGIAS
 PROVA DE CIÊNCIAS DA NATUREZA E SUAS TECNOLOGIAS
@@ -10184,10 +10184,10 @@ CADERNO
 AZUL2015",NA,"O aproveitamento de resíduos florestais vem se 
 tornando cada dia mais atrativo, pois eles são uma fonte 
 renovável de energia. A figura representa a queima de 
-um bio-óleo extraído do resíduo de madeira, sendo ∆H 1
+um bio-óleo extraído do resíduo de madeira, sendo ΔH 1
 a variação de entalpia devido à queima de 1 g desse 
 bio-óleo, resultando em gás carbônico e água líquida, e 
-∆H2 a variação de entalpia envolvida na conversão de 1 g 
+ΔH2 a variação de entalpia envolvida na conversão de 1 g 
 de água no estado gasoso para o estado líquido.
 Energia
 Bio-óleo + O  (g)
@@ -10250,10 +10250,10 @@ CADERNO
 AZUL2015",NA,"O aproveitamento de resíduos florestais vem se 
 tornando cada dia mais atrativo, pois eles são uma fonte 
 renovável de energia. A figura representa a queima de 
-um bio-óleo extraído do resíduo de madeira, sendo ∆H 1
+um bio-óleo extraído do resíduo de madeira, sendo ΔH 1
 a variação de entalpia devido à queima de 1 g desse 
 bio-óleo, resultando em gás carbônico e água líquida, e 
-∆H2 a variação de entalpia envolvida na conversão de 1 g 
+ΔH2 a variação de entalpia envolvida na conversão de 1 g 
 de água no estado gasoso para o estado líquido.
 Energia
 Bio-óleo + O  (g)
@@ -10316,10 +10316,10 @@ CADERNO
 AZUL2015",NA,"O aproveitamento de resíduos florestais vem se 
 tornando cada dia mais atrativo, pois eles são uma fonte 
 renovável de energia. A figura representa a queima de 
-um bio-óleo extraído do resíduo de madeira, sendo ∆H 1
+um bio-óleo extraído do resíduo de madeira, sendo ΔH 1
 a variação de entalpia devido à queima de 1 g desse 
 bio-óleo, resultando em gás carbônico e água líquida, e 
-∆H2 a variação de entalpia envolvida na conversão de 1 g 
+ΔH2 a variação de entalpia envolvida na conversão de 1 g 
 de água no estado gasoso para o estado líquido.
 Energia
 Bio-óleo + O  (g)
@@ -10382,10 +10382,10 @@ CADERNO
 AZUL2015",NA,"O aproveitamento de resíduos florestais vem se 
 tornando cada dia mais atrativo, pois eles são uma fonte 
 renovável de energia. A figura representa a queima de 
-um bio-óleo extraído do resíduo de madeira, sendo ∆H 1
+um bio-óleo extraído do resíduo de madeira, sendo ΔH 1
 a variação de entalpia devido à queima de 1 g desse 
 bio-óleo, resultando em gás carbônico e água líquida, e 
-∆H2 a variação de entalpia envolvida na conversão de 1 g 
+ΔH2 a variação de entalpia envolvida na conversão de 1 g 
 de água no estado gasoso para o estado líquido.
 Energia
 Bio-óleo + O  (g)
@@ -10448,10 +10448,10 @@ CADERNO
 AZUL2015",NA,"O aproveitamento de resíduos florestais vem se 
 tornando cada dia mais atrativo, pois eles são uma fonte 
 renovável de energia. A figura representa a queima de 
-um bio-óleo extraído do resíduo de madeira, sendo ∆H 1
+um bio-óleo extraído do resíduo de madeira, sendo ΔH 1
 a variação de entalpia devido à queima de 1 g desse 
 bio-óleo, resultando em gás carbônico e água líquida, e 
-∆H2 a variação de entalpia envolvida na conversão de 1 g 
+ΔH2 a variação de entalpia envolvida na conversão de 1 g 
 de água no estado gasoso para o estado líquido.
 Energia
 Bio-óleo + O  (g)
