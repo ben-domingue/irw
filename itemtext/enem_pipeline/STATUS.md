@@ -437,6 +437,39 @@ reading this file:
     known-bad source character, with the evidence written down" -- and it is a
     one-line check that should precede any decoder change.
 
+49. A commit message can describe infrastructure that is not in the
+    commit. The previous commit credited 41_staleness.py, 42_rebuild.py and
+    "post-passes as pipeline steps" as the evidence for its fixes. None were
+    committed: 31_assemble_batch.py copied a HARDCODED LIST of 16 filenames
+    into each batch directory, and every script written after that list was
+    frozen lived only outside the repo. Ben caught it by running
+    `git diff -- '**/*.py'` and finding it empty. The lesson is not "write a
+    better message" -- it is that a list of files to copy will always fall
+    behind the directory it is copying from. The pipeline now lives in the
+    repo once, at itemtext/enem_pipeline/, and the batch directories keep a
+    build record instead of copies.
+
+50. Geometric superscript detection is a five-bug problem, and every bug ships
+    silently because the result still READS as text:
+      - an f/o span split read as a subscript: "conf_orme", "transf_ormacao"
+      - a ONE-CHARACTER anchor matching mid-word: "T"+"A" is a real
+        temperature subscript and also the start of TANTOS, PATRIOTA, HUERTAS
+      - adjacent script runs each marked: "10^-^4" for 10^-4
+      - an alphabetic script that does not END at a token boundary
+      - uppercase word splits, which the lowercase rule did not cover
+    The rules that survived: a script must change case or follow a
+    digit/symbol; an alphabetic script must start AND end at a token boundary;
+    adjacent runs collapse. Every one of those was found by SAMPLING the
+    output, never by a gate -- there is no structural check that can see
+    "conf_orme". Sample the output of any heuristic before believing its count.
+
+51. Scope a fix by asking what the SOURCE contains. INEP's accessibility
+    booklets spell notation out in words, so they carry almost no superscript
+    spans at all -- the 2019 LEDOR booklet has zero. That single measurement
+    bounded the superscript work to the standard-booklet years instead of all
+    eleven, and it is the same fact that explains why only those years have
+    items whose stem is too short to answer.
+
 ## Open decisions for Mateus / Ben
 
 - Nothing outstanding as of 2026-09-15: decoders for 2018 and 2021 authorised,
