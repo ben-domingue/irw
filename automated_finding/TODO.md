@@ -5,17 +5,17 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
 ## From the 2026-09-16 PMC batch (written up 2026-09-19)
 
-- [ ] **9 item text tables need uploading** to `irw_text` — they are in
-  `automated_finding/itemtext_output/`, gated clean (`validate_items.R`,
-  `audit_batch.R` 9/9 PASS, `irw-validate`), and the response tables they join
-  to went up 2026-09-19. `red_up <dir>` takes `irw_text` as its default for a
-  directory of `*__items.csv`. Once they land, stamp `uploaded=<date>` on the
-  nine new `itemtext_provenance.csv` rows and on their
-  `itemtext/mapping_verification.csv` rows — all blank until then.
+- [x] **9 item text tables uploaded** to `irw_text` (ben-domingue, confirmed
+  2026-09-19) and stamped `uploaded=2026-09-19` on the nine
+  `itemtext_provenance.csv` rows and the nine
+  `itemtext/mapping_verification.csv` rows. They sit on the draft until the
+  next version release, so `check_issues_page.R` reads their page entries as
+  orphans; that is acknowledged in `itemtext/fixes/issues_page_orphans_ack.csv`
+  and resolves on release.
 
-- [ ] **Four of those nine owe an issues-page entry when they land**, because
-  they carry a non-empty `public_note`. Drafts, to apply to
-  `irw_site/itemtext_issues.qmd`:
+- [x] **Four issues-page entries applied 2026-09-19** to
+  `irw_site/itemtext_issues.qmd` (868 entries now), for the four of the nine
+  carrying a non-empty `public_note`:
   - `codella_2020_school_efficacy` — "Item text is the study's administered
     Italian wording, but the 1-5 scale anchors and the shared stem 'How well
     can you' are recorded in English: the source publishes those two only in
