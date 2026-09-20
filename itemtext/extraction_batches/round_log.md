@@ -21137,3 +21137,75 @@ outlived its table by two weeks. Both it and `_ocs`'s are removed here.
 
 Also unimported, and the same shape as the CWB block #1967 found missing: the deposit's real
 Organizational Commitment responses appear to be absent from IRW entirely.
+
+## batch_265 — 2026-09-20
+
+3 tables, all TISP (Mede et al. 2025, OSF 5c3qd): `mede_2025_goals_priority`,
+`mede_2025_goals_tackle`, `mede_2025_normperc`.
+
+**Written 3 / blocked 0 / failed 0 — yield 3/3 (100%).** Circuit breaker not
+approached (0% failed).
+
+Numbering: highest existing directory below 300 was `batch_264`, so this round is
+`batch_265`. The 200–205 and 300–304 holes (irw#1945, irw#2228) were skipped as
+required; `batch_300`–`batch_304` are present on this branch from main and are not ours.
+
+All three are `mapping_basis=data_labels` via derivation pattern 1 —
+`data/mede_2025_tisp.py` melts every `ds_main.csv` column carrying the table's prefix
+by name, so each IRW item code IS the source column name. The core QSF's
+`ChoiceDataExportTags` tie every export column to its choice Display text, and the
+master `.docx` prints the same statements each followed by its code in parentheses.
+Step 5b therefore exempt for all three; `verification_merged.csv` carries three
+NOT_NEEDED rows (written into both the batch file and the permanent tracker, so the
+lint came back clean), and no `verify_*.R` scripts are expected —
+`verify_batch.R` reports MISSING(exempt)=3, which is the correct outcome here.
+
+Gates: `normalize_nulls.R` 0 of 3 normalized; `audit_batch.R` 3 PASS, no anomalies
+(so no WARNs to explain under Step 5c); `lint_verification.R` 3 rows, no problems;
+`irw-validate` ok on all three; `check_provenance.R` clean for this batch (its one
+REVIEW line, `ye_2025_q25_scale` `translation_source=mixed`, is pre-existing and
+unrelated).
+
+**Step 5b orchestrator re-checks.** Two agent claims were independently confirmed
+rather than taken on trust:
+
+- `irw_table_sets()` (server-side, no export) returns exactly 4 / 4 / 6 items with
+  resp 1–5 on each table, and the live item codes are the self-describing ones the
+  agents mapped (`GOALS_PRIO_{defense,energy,health,poverty}`,
+  `GOALS_TACKLE_{...}`, `NORMPERC_{advocate,communicate,independent,integrate,involved,outreach}`).
+  This corroborates the data_labels exemption from the corpus side.
+- The `normperc` rights determination is the round's one public-facing judgement, so
+  it was checked against a second source. The agent read CC BY 4.0 off the IOP page
+  for Cologna, Knutti, Oreskes & Siegrist (2021), *Environ. Res. Lett.* 16:024011 —
+  the upstream of five of the six NORMPERC statements. IOP is bot-walled to a 14KB
+  stub from here, so the check went via the Crossref API (called without a contact
+  email): version-of-record licence
+  `http://creativecommons.org/licenses/by/4.0`, start 2021-01-21. **Confirmed.** The
+  returned title ("Majority of German citizens, US citizens and climate scientists
+  support policy advocacy by climate researchers and expect greater political
+  engagement") also confirms the correct upstream article. So this is not the
+  `mede_2025_clim_government` situation (Hickman et al., CC BY-NC-ND → blocked); no
+  register row written.
+
+Notable, for triage rather than action:
+
+- All three ship the **English core questionnaire for a 37-language, 68-country
+  administration**, following the `szameitat_2015_*` ruling and the batch_263/264
+  siblings. Per-sample translations exist in the deposit
+  (`05_survey-materials/questionnaire/countries/`) but the one-text-per-item schema
+  cannot carry 37 versions. Disclosed in each `public_note`.
+- All three ladders were administered with **endpoints labelled only**, so
+  `option_text` is blank for resp 2–4 on every item. Not padded with the scale
+  numbers, per standard.
+- Both GOALS questions (QID54/QID55) sit in one block with no page break. The
+  `goals_tackle` agent deliberately did **not** prepend QID54's text as a lead-in —
+  QID54 is its own question, unlike the `clim_weather` pair. The two agents
+  independently produced consistent treatments of the shared matrix.
+- Response data clean on all three: every item uses all 5 levels, and on both GOALS
+  tables per-item n equals COUNT(DISTINCT id), so no duplicated id×item.
+- One hidden Qualtrics artifact appears on both QID54 and QID58: an inherited
+  `ChoiceGroups` label "Informational media use" with `HideTitle=true`, never shown to
+  respondents. Correctly not shipped by either agent.
+
+Cap not reached (`batch_271` does not exist). Queue after this round: 100 pending,
+0 in_progress.

@@ -1291,9 +1291,9 @@ mede_2025_clim_government,blocked,batch_263,2026-09-19T10:00:12-07:00
 mede_2025_clim_polsupport,done,batch_264,2026-09-19T10:24:00-07:00
 mede_2025_clim_weather_future,done,batch_264,2026-09-19T10:24:00-07:00
 mede_2025_clim_weather_past,done,batch_264,2026-09-19T10:24:00-07:00
-mede_2025_goals_priority,pending,,
-mede_2025_goals_tackle,pending,,
-mede_2025_normperc,pending,,
+mede_2025_goals_priority,done,batch_265,2026-09-20T11:08:34
+mede_2025_goals_tackle,done,batch_265,2026-09-20T11:08:34
+mede_2025_normperc,done,batch_265,2026-09-20T11:08:34
 mede_2025_outspokenness,pending,,
 mede_2025_sciengage,pending,,
 mede_2025_sciinfo,pending,,
