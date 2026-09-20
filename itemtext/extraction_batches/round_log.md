@@ -22220,3 +22220,60 @@ Gates: `normalize_nulls` fixed 1 file (aiquipa, 36 lines). `audit_batch` 3/3 PAS
 **Step 5b re-check changed a recorded number.** Re-ran the aiquipa 21-subset sweep independently: the load-bearing claim holds — `{COD1,COD2,COD3,COD4,COD7}` reproduces the scored `Codicia` column at 498/498 and is the unique exact match — but the agent's runner-up figures were wrong (reported 181/498 and 154/498; actually 212/498 for `{COD1,COD2,COD3,COD4,COD6}` and 191/498 for `{COD1,COD2,COD3,COD6,COD7}`). The gap is narrower than reported but still decisive, and PARTIAL remains the right status. Evidence string corrected in both `verification_merged.csv` and the permanent tracker, and the correction recorded in `notes.csv`. Both hoai level-count vector claims were re-derived from the workbook and **confirmed exactly**, 0 identical pairs in each group.
 
 Queue after this round: 1130 done / 276 blocked / 60 excluded / 13 failed / **49 pending**. Circuit breaker not tripped (0% failed). Cap `batch_299` not reached.
+
+## batch_283 — 2026-09-20T15:01 → 15:2x
+
+3 tables claimed, 3 agents (one per table). **written 3 / blocked 0 / failed 0 — yield 100%.**
+Circuit breaker: 0% failed, not tripped. No rate limit, no kill, no retry.
+
+Tables: `ramadan_2026_ai_awareness` (6 items), `ramadan_2026_applied_practice` (8),
+`ramadan_2026_attitudes` (8). All three are sibling blocks of ONE source: Mendeley Data
+10.17632/xd27t4g547 v1, CC BY 4.0, two files (`arabic_genai_competency_data.csv`,
+`codebook.csv`), no associated article. Administered Arabic in `item_text`, the depositor's
+own English in `item_text_translated` (`translation_source=study_supplied` — IRW translated
+nothing, so nothing is owed on the issues page).
+
+**Gates:** normalize_nulls 2 of 3 fixed; audit_batch PASS 3/3, no anomalies (so no Step 5c
+WARNs to explain); verify_batch PASS 3/3; lint_verification 3 rows, no problems;
+irw-validate ok on all three; check_provenance clean (its one REVIEW line, `ye_2025_q25_scale`
+`translation_source=mixed`, is pre-existing and not from this round).
+
+**Orchestrator intervention — mapping_basis harmonised (Step 5b).** The three agents split on
+the SAME deposit structure: ai_awareness called it `paper_explicit`, the other two
+`data_labels`. Settled on `paper_explicit` for all three — the code-to-text tie lives in a
+SEPARATE deposit file (`codebook.csv`) keyed on the data file's variable names, while the data
+CSV's header row carries bare codes, so no label in the data file itself ties code to text. The
+two siblings had claimed a Step 5b exemption on the derivation pattern (`item` IS the source
+column name, pattern 1); that claim is correct and stands, but the orchestrator ran the route
+anyway rather than ship two of three siblings unverified. Both VERIFIED, and both now carry a
+`verification_*.csv` row and a re-runnable `verify_*.R` (VERDICT: PASS). All three tables
+verify by response-frequency fingerprint: every live item's 1–5 count vector reproduces the raw
+deposit column of the same name cell for cell and matches no other column — the live-vs-raw
+match matrix is exactly the identity (6×6, 8×8, 8×8), so no permutation of the item codes is
+consistent with the data. None of the three establishes the `resp`↔`option_text` direction; the
+deposit stores bare integers and publishes no per-label counts. Said so in each evidence string.
+
+**Step 5b re-check of agent claims.** The attitudes agent's Step 3b naming finding was
+confirmed by reading the codebook directly: the eight AS items are all tagged dimension
+"4 Aspiration & Vision" and read as aspiration statements, against an IRW table named
+`..._attitudes`. (The AP block is tagged "2 Functional Application" against `applied_practice` —
+a fair paraphrase.) This is a dictionary/naming question, NOT an itemtext defect: item set, resp
+set and per-item mapping all verify exactly, so no wrong content ships. Recorded in notes.csv,
+no GitHub issue filed from this round — left for human triage.
+
+**Caveat shared by all three (disclosed in every `public_note`):** `option_text` ships in
+ENGLISH while `item_text` is Arabic. The deposit gives the 1–5 anchors only as the codebook's
+English coding string ("5=strongly agree … 1=strongly disagree") and never prints the Arabic
+anchors respondents read; with two files and no article, they are unrecoverable within the
+deposit. `option_text_translated` left blank rather than inventing Arabic — the
+`aguirre_camacho_2021_champion` shape. `instructions`/`section_prompt` blank throughout: no
+administered instruction text is published.
+
+**For the next round:** the fourth sibling `ramadan_2026_perceived_competence` (PC1–PC6) is
+still `pending` and comes from this same deposit. Codebook rows PC5 and PC6 look identical at a
+glance and are NOT — they differ only in the closing phrase, "on the linguistic side" vs "on the
+literary side" (Arabic al-lughawī vs al-adabī), checked in full in both languages. Do not
+collapse or dedupe them.
+
+Queue after this round: 1133 done / 276 blocked / 13 failed / 60 excluded / **46 pending**.
+Cap is batch_299; not reached.
