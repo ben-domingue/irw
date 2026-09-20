@@ -12,11 +12,15 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   Scientific Reports rows that may be trial-level or single-item panels.
   See BATCH_LOG.md 2026-09-20 for the four largest by shape.
 
-- [ ] **`10.3390/bs15020224` licence is unverified.** The sweep's only
-  `good` row (Behavioral Sciences, 403 x 63, behavioral-emotional regulation
-  instrument) reports `license=unknown`. MDPI is normally CC BY; confirm on
-  the source page before writing a script, per the standing rule that
-  `unknown` is not verified.
+- [x] **`10.3390/bs15020224` licence verified CC BY 4.0** (Crossref + Europe
+  PMC core), and so are the other 33 `unknown` rows — the `unknown` was a
+  connector defect, now fixed. See BATCH_LOG.md 2026-09-20b. All 25
+  actionable leads are CC BY; no licence question is outstanding.
+
+- [ ] **Re-check past PMC rows ledgered under the old licence bug.**
+  `pmc_seen_dois.csv` predates the `license_lookup_failed` fix, so some
+  already-retired DOIs will say `license_unknown*` where the record says
+  CC BY. Cheap: the same 34-row re-check loop, pointed at the ledger.
 
 - [ ] **241 scouted terms remain ranked and unrun** in
   `runs/pmc_term_scout_2026-09-19.csv` (58% of the measured pool). A second

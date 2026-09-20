@@ -14585,3 +14585,47 @@ Bookkeeping: 50 `search_terms_log.csv` rows and the `pmc_seen_dois.csv`
 append are committed **with** this write-up on the branch, not pushed to main
 ahead of review — the open hazard on both scheduled routines. Per-run CSVs
 stay in `runs/`.
+
+### 2026-09-20b — every `unknown` licence in that sweep was actually CC BY
+
+Verifying the one `good` row's licence turned up a defect rather than an
+answer. `10.3390/bs15020224` reported `license=unknown`; Crossref and Europe
+PMC's own core record both say CC BY 4.0. Re-checking **all 34** `unknown`
+rows from the sweep: **34 of 34 resolve to `cc-by`**, minutes after the run,
+with the same function and the same PMCIDs. None was a property of the
+article.
+
+`fetch_core_license()` read an empty `resultList` as `""`, which
+`check_license()` normalises to `unknown`. Europe PMC returns well-formed
+bodies with no results under load — the same stub-body behaviour
+`_europepmc_get` already retries HTTP errors for — so nothing failed in a way
+the code could see: 0 `QUERY FAILED` lines and 0 retries in the run log.
+
+That verdict is sticky and it is consequential. The DOI goes into
+`pmc_seen_dois.csv` carrying a note that the terms could not be confirmed,
+and the standing rule is to skip a candidate whose licence is not explicitly
+verified. In this one batch it mislabelled **19 actionable rows** — the only
+`good` row plus 18 `human_assistance` — as unverified. It is the fourth
+instance in this log of a real failure wearing a nothing-here label.
+
+**Fixed** (`irw_discover_pmc.py`, 4 tests, suite of 80 passes):
+
+- An empty result is retried three times with backoff, then returns
+  `LICENSE_LOOKUP_FAILED` rather than `""`. A record that IS read and simply
+  carries no `license` field still returns `""` — that one is a real absence,
+  and is not retried.
+- `process_one()` maps the sentinel to a new `license_lookup_failed` flag,
+  added to `INCONCLUSIVE_FLAGS`, so the DOI is **not** ledgered and a later
+  run retries it — the same treatment `download_failed` already gets.
+
+**Consequence for this batch: all 25 actionable leads are CC BY**, including
+`10.3390/bs15020224`. No licence question is outstanding, and the 15 non-
+actionable `unknown` rows (`no_usable_file`, `below_min_n`, ...) are rejected
+on their own merits rather than on licence grounds.
+
+Worth a separate check some day: `pmc_seen_dois.csv` holds DOIs ledgered by
+every earlier PMC run under the old behaviour, and the same empty-result
+window will have hit some of them. That is not the 2026-09-19 tail question
+(which was about Data Availability statements and is closed) — it is
+specifically "how many past rows say `license_unknown*` when the record says
+CC BY". Cheap to measure with the same re-check loop used here.
