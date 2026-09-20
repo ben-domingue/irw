@@ -21542,3 +21542,64 @@ concern, so 1 = "Strongly disagree". The override is correct.
    not a demonstrated error. I did not open an issue.
 
 Queue: 85 pending, 0 in_progress. Cap (`batch_299`) not reached.
+
+## batch_271 — 2026-09-20
+
+3 tables, all three **written / 0 blocked / 0 failed** (yield 3/3 = 100%). Numbered 271
+(highest below 300 was 270; the 300–304 hole belongs to irw#2228).
+
+- `wesselmann_2018_ostracism` — 70 rows (10 items x 7 levels), OES-Adults from the PLOS
+  S1 `.sav` variable labels, corroborated 10/10 against the authors' OSF codebook.
+- `wesselmann_2018_social_support` — 75 rows (15 x 5), DRRI Postdeployment Social Support
+  from the same `.sav`, 15/15 against the codebook.
+- `afaya_2020_complications_knowledge` — 21 rows (7 x 3), the `kc` block of the deposit's
+  own 66-item codebook (PLOS S1 Data).
+
+All three are `mapping_basis=data_labels` with pattern-1 derivation (the IRW item code IS
+the source column name, melted unrenamed), so Step 5b is exempt: three NOT_NEEDED rows
+written into both `verification_merged.csv` and the permanent tracker, and no `verify_*.R`.
+
+Gates: normalize 0/3 changed; `audit_batch.R` **3 PASS, no anomalies** (so no Step 5c WARNs
+to explain); `verify_batch.R` MISSING(exempt)=3; `lint_verification.R` clean; `irw-validate`
+ok on all three; `check_provenance.R` clean (the one REVIEW line, `ye_2025_q25_scale`
+translation_source=mixed, is pre-existing and not this round's).
+
+**Step 5b orchestrator re-check — all three agents' data claims reproduce exactly**
+(`item_stats.R` on the live tables): ostracism per-item n = 125,125,125,125,**124**,125,125,
+**122**,125,125 and per-item maxima = 7,6,6,7,6,7,6,7,7,7, both as reported; `social6` (2.85)
+and `social8` (3.48) are indeed the two lowest of the 15 means, next lowest `social14` 3.61;
+`kc6_hyposexual` does carry the highest mean (2.05) and the lowest floor% (27.0) of the seven.
+Nothing had to be corrected.
+
+Notable, non-blocking:
+- **Ostracism public note trimmed by the orchestrator**, on the extracting agent's own flag.
+  It originally led with "option_text is blank at resp 2,3,5,6" — but the `.sav` has no value
+  labels and the codebook prints only 1/4/7, so that is a gap the source never published and
+  sits below the issues-page bar. The note now carries only the concrete text deviation: `ost3`
+  ships the study's own grammatical error, "In general, others treatment as if I am invisible.",
+  identical in both study sources and left unnormalised.
+- **Social support: a codebook misprint was corrected against the paper.** The OSF codebook's
+  rating-scale line prints position 1 as "Strongly Agree", duplicating position 5 (the same
+  misprint it makes for DRRI Deployment Concerns). Anchor 1 ships as "Strongly Disagree" per the
+  paper's "1-Strongly Disagree, 5-Strongly Agree" and the NCPTSD scale page. Direction confirmed
+  on data: the file's own `support` composite matches the keyed mean to max |diff| 0.000 vs 0.533
+  for the plain raw mean, r = -0.550 with chronic ostracism reproduces the paper's -.55, keyed
+  alpha 0.902 vs the paper's .90. Disclosed in the public note.
+- **Afaya instrument mismatch (Step 3b), real and disclosed.** The paper's Methods names "the 23
+  item diabetes knowledge test questionnaire (DKT)" from Michigan, but the deposit administers 66
+  knowledge items in seven labelled blocks (gk 11, kd 13, km 7, ke 4, kom 10, kf 14, kc 7). The
+  seven live items are exactly the `kc` block under the codebook's own "Knowledge of Complications"
+  header — right subscale, wrong instrument name in the paper — so `instrument` names the study's
+  own questionnaire rather than asserting DKT-23. `correct_response` left blank for all seven: the
+  paper says each question has one correct answer but neither it nor the codebook says which, and a
+  key would be IRW adjudicating medical fact.
+- Rights: no blocks. Wesselmann items come from a CC BY 4.0 deposit; the DRRI is NCPTSD-authored
+  with free downloads and no reserved right (LOT-R shape), and the OES originator (Carter-Sowell's
+  2010 Purdue dissertation) has no locatable clause — silence is permission. Afaya's upstream MDRC
+  clause is attribution-only. No register rows written. One caveat worth a later reader's eye: the
+  MDRC quote comes from a search-engine extract, because `medresearch.umich.edu/survey-instruments`
+  403s automated fetches and web.archive.org was down during the round — an already non-blocking
+  clause, so no hash was banked.
+
+Queue after this round: 1098 done / 275 blocked / 82 pending / 60 excluded / 13 failed.
+Cap is batch_299 — not reached, next firing proceeds.
