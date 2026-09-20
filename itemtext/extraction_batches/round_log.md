@@ -22075,3 +22075,61 @@ items under CC BY 4.0 / CC0 deposits; the EMA's originating publication (Guimar�
 2008) states no restrictive term and has no register row.
 
 Cap (`batch_299`) not reached; queue has 58 pending.
+
+## batch_280 — 2026-09-20 14:19–14:35
+
+3 tables claimed, 3 written, 0 blocked, 0 failed. **Yield 3/3 (100%).** Circuit breaker
+not triggered (0 failed). 3 agents, the standing setting since 2026-09-11; no kills, no
+retries, no rate limits. Round numbered 280 per Step 1's second hole — `batch_300`–`304`
+now all exist on this branch (irw#2228's hand-built line), so "highest + 1" was computed
+over directories below 300 only.
+
+| table | rows | mapping_basis | verification |
+|---|---|---|---|
+| `rogers_2021_financial_knowledge` | 26 (13 items × 2) | paper_explicit | **VERIFIED** — explicit `[Qn]` codes in the deposit's own questionnaire + route 1 (paper Table 1) |
+| `hoai_2026_academic_achievement` | 20 (4 items × 5) | paper_explicit | **PARTIAL** — route 9 + codebook code labels |
+| `hoai_2026_cognitive_presence` | 20 (4 items × 5) | paper_explicit | **VERIFIED** — codebook code labels + VN/EN distinctive-content crosswalk |
+
+Gates: normalize_nulls (2 of 3 files normalized), audit_batch **3 PASS, no anomalies**
+(so no Step 5c WARNs to explain), verify_batch **PASS=3**, lint_verification 0 ERROR /
+0 WARN / 1 INFO (the rogers row hedges but still asserts a full item-axis tie — VERIFIED
+stands per the 2026-09-08 item-axis rule), `irw-validate` ok on all three,
+check_provenance clean. All three are paper_explicit, so no NOT_NEEDED rows were owed.
+
+**Two deposits, both CC BY 4.0, both shipping their own codebook.** The two `hoai_2026_*`
+tables share Mendeley `10.17632/tdsspksw83`, whose `codebook.docx` names each variable
+beside its statement and whose `README.docx` says the Vietnamese version is the
+administered instrument — so Vietnamese ships in the base fields and the authors' own
+English in the `_translated` twins (`translation_source=study_supplied`, not the
+`translated_substitute` fallback). The two agents read that shared source concurrently and
+wrote only their own table's files; no collision. `academic_achievement` is PARTIAL and
+`cognitive_presence` VERIFIED for a real reason, not an inconsistency: the CP block has
+four lexically distinctive stems that pin each VN sentence to exactly one EN statement,
+while the AA block's four sentences are near-paraphrases, so its VN↔EN pairing rests on
+shared position plus semantics and no data route tests it. The PARTIAL evidence says so.
+
+`rogers_2021_financial_knowledge` (Mendeley `10.17632/fzw7dthwh6`) is the stronger case:
+the deposited questionnaire prints the data's variable code in brackets before every stem
+and says so in its own footnote, and the paper's Table 1 reproduces from live data to
+0.005 pp over 26 cells with 0/200 random code permutations fitting.
+
+**Step 5b orchestrator re-check — all three checkable claims confirmed**, numbers recorded
+in `notes.csv`. (1) Q10's `R$ 1.000.00` is verbatim from `FinalForm.pdf`; the re-check adds
+something the agent's note did not say — the period-for-comma is *systematic* in that
+source (Q1 prints `R$ 150.00` the same way), so a reviewer should not read it as a
+transcription slip. (2) The 3–5 alternatives including "Não sei" really are published
+(14 occurrences), so the public_note's reasoning is factual. (3) Flat n=232 per item
+confirmed independently: `irw_table_sets()` gives n_rows=3016 / 13 items = 232.0 exactly.
+
+Caveat carried by `rogers_2021_financial_knowledge`: `resp` is 0/1 **correctness**, not the
+alternative chosen, so `option_text` is the `.dta`'s own `Resposta incorreta`/`Resposta
+correta` value labels and the published multiple-choice alternatives are deliberately not
+shipped — nothing in the live table encodes which one was selected. `correct_response` is
+blank for the same reason (no published key; asserting one would be IRW-generated content
+with no vocabulary value covering it). Its English is IRW-generated
+(`translation_source=machine_translation`), so an issues-page entry is owed on upload;
+check_provenance currently lists it as HELD, which is correct — nothing ships until a human
+uploads it.
+
+Queue after this round: 1124 done / 276 blocked / 13 failed / 60 excluded / **55 pending**.
+Cap is `batch_299` — not reached; the next firing continues.
