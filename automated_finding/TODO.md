@@ -3,6 +3,20 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## From the 2026-09-19 PMC tail measurement
+
+- [x] **The unaudited PMC seen-DOI tail is closed, measured not skipped.**
+  2,809 ledger DOIs had no recorded verdict; a seeded 100-row probe found 3
+  naming a repository against #2203's 17%, 35% licence-blocked, and 44 of 47
+  statements saying "available from the author on request". ~21 hours of
+  network for a projected 10 leads. See BATCH_LOG.md 2026-09-19. Reopen only
+  if the connector changes — `pmc_tail_probe.py` re-runs the measurement.
+
+- [ ] **One live lead from the probe: `10.1038/s41598-026-57813-7`**
+  (Scientific Reports), whose Data Availability statement names OSF `s2hfg`.
+  Triaged `human_assistance` — worth a look when a PMC batch is next worked.
+  Cheap: the deposit is already resolved, nothing needs re-discovering.
+
 ## From the 2026-09-14 repos weekly batch
 
 - [x] **DR-NTU 10.21979/N9/P5WUGI** — taken on Ben's NC approval

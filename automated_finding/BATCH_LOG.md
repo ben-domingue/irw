@@ -14439,3 +14439,57 @@ and out-of-range cells costs ~0.3% of cells and yields seven tables) and was
 imputed rather than on a documented raw file. Re-openable only by obtaining
 the pre-imputation file from the authors. No licence problem — this is not a
 `license_blocked_candidates.csv` row.
+
+## 2026-09-19 — The unaudited PMC seen-DOI tail, measured and closed
+
+`pmc_seen_dois.csv` holds 3,167 DOIs. The Data Availability re-mine in #2203
+covered **260** of them — the subset whose pre-fix triage verdict survived in
+a committed CSV, filtered to `no_usable_file` and not already in the
+dictionary or `human_review/`. The other rows' verdicts died with their
+`runs/` CSVs, so nothing recorded whether they had been retired on the
+supplementary-file path alone. After excluding DOIs already in IRW or
+`human_review/` (2,603 of them), **2,809 were unaudited**.
+
+Rather than pay ~2,800 core lookups plus full-text fetches to find out, a
+seeded random 100 was probed through the DAS path only
+(`pmc_tail_probe.py --sample 100 --seed 20260919`, read-only; it appends to
+no ledger). Result:
+
+| flag | n |
+|---|---|
+| `statement_no_link` | 44 |
+| `license_restricted` | 35 |
+| `no_statement` | 18 |
+| `human_assistance` | 1 |
+| `no_usable_file` | 1 |
+| `not_item_response` | 1 |
+
+**3 of 100 named a repository**, against 43 of 260 (17%) in #2203. Two causes,
+both visible above and both consequences of the #2203 selection rule rather
+than of the connector: 35% of the tail is licence-blocked (Scientific Reports
+and Heliyon carry a large non-open fraction, which the `no_usable_file`
+pre-filter had already removed), and of the 47 articles that do carry a
+statement, 44 say the data are available from the author on request.
+
+**Closed, not run.** Measured cost to finish the tail is ~30s/DOI under
+Europe PMC's rate limit — about 21 hours of network — for a projected ~28
+`human_assistance` rows and, at #2203's conversion (12 `human_assistance` →
+2 `worth_retrying` + 4 `recoverable_format` + 0 `good`), roughly 10 leads and
+0–3 tables. That is the worst work-per-table rate available in the pipeline
+right now, and the tail is not competing with anything: the same hours spent
+on fresh terms against the same journals have shipped tables as recently as
+2026-09-16. This entry exists so the question is not re-derived — the tail is
+measured, not merely skipped.
+
+The one live lead is carried in `TODO.md`: `10.1038/s41598-026-57813-7`, whose
+statement names OSF `s2hfg`, triaged `human_assistance`. The other two links
+were `10.1038/s41598-025-89762-y` (OSF `k47ta`, nothing usable resolved) and
+`10.1007/s11336-024-09982-5` (OSF `KZY3D`, `not_item_response`) — both
+rejects, recorded here so they are not re-opened.
+
+Per-run CSVs stayed in `runs/` and are not committed, per the README's
+"where files live" rule; the numbers above are the durable record.
+`pmc_tail_probe.py` is committed as a standing tool — it takes `--seen` and
+`--exclude-run`, so the same measurement can be re-run against the PLOS
+ledger or against this one after a connector change, which is the only
+circumstance that would reopen the question.
