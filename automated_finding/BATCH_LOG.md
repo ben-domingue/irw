@@ -14601,3 +14601,272 @@ that currently publish (`sample` SETTING facet, `measurement tool`,
 `#2206` vocabulary's first real use. `pop_2023_*` ships with `sample` blank on
 purpose: an online snowball sample recruited through social media is not a
 panel or a crowdwork platform, and no setting atom fits.
+## 2026-09-19 — The unaudited PMC seen-DOI tail, measured and closed
+
+`pmc_seen_dois.csv` holds 3,167 DOIs. The Data Availability re-mine in #2203
+covered **260** of them — the subset whose pre-fix triage verdict survived in
+a committed CSV, filtered to `no_usable_file` and not already in the
+dictionary or `human_review/`. The other rows' verdicts died with their
+`runs/` CSVs, so nothing recorded whether they had been retired on the
+supplementary-file path alone. After excluding DOIs already in IRW or
+`human_review/` (2,603 of them), **2,809 were unaudited**.
+
+Rather than pay ~2,800 core lookups plus full-text fetches to find out, a
+seeded random 100 was probed through the DAS path only
+(`pmc_tail_probe.py --sample 100 --seed 20260919`, read-only; it appends to
+no ledger). Result:
+
+| flag | n |
+|---|---|
+| `statement_no_link` | 44 |
+| `license_restricted` | 35 |
+| `no_statement` | 18 |
+| `human_assistance` | 1 |
+| `no_usable_file` | 1 |
+| `not_item_response` | 1 |
+
+**3 of 100 named a repository**, against 43 of 260 (17%) in #2203. Two causes,
+both visible above and both consequences of the #2203 selection rule rather
+than of the connector: 35% of the tail is licence-blocked (Scientific Reports
+and Heliyon carry a large non-open fraction, which the `no_usable_file`
+pre-filter had already removed), and of the 47 articles that do carry a
+statement, 44 say the data are available from the author on request.
+
+**Closed, not run.** Measured cost to finish the tail is ~30s/DOI under
+Europe PMC's rate limit — about 21 hours of network — for a projected ~28
+`human_assistance` rows and, at #2203's conversion (12 `human_assistance` →
+2 `worth_retrying` + 4 `recoverable_format` + 0 `good`), roughly 10 leads and
+0–3 tables. That is the worst work-per-table rate available in the pipeline
+right now, and the tail is not competing with anything: the same hours spent
+on fresh terms against the same journals have shipped tables as recently as
+2026-09-16. This entry exists so the question is not re-derived — the tail is
+measured, not merely skipped.
+
+The one live lead is carried in `TODO.md`: `10.1038/s41598-026-57813-7`, whose
+statement names OSF `s2hfg`, triaged `human_assistance`. The other two links
+were `10.1038/s41598-025-89762-y` (OSF `k47ta`, nothing usable resolved) and
+`10.1007/s11336-024-09982-5` (OSF `KZY3D`, `not_item_response`) — both
+rejects, recorded here so they are not re-opened.
+
+Per-run CSVs stayed in `runs/` and are not committed, per the README's
+"where files live" rule; the numbers above are the durable record.
+`pmc_tail_probe.py` is committed as a standing tool — it takes `--seen` and
+`--exclude-run`, so the same measurement can be re-run against the PLOS
+ledger or against this one after a connector change, which is the only
+circumstance that would reopen the question.
+
+## 2026-09-20 — Recycled-term PMC sweep: 695 candidates, 25 actionable leads
+
+First deliberate (non-scheduled) PMC sweep since the manual `pmc_batch1-6`
+runs. The premise: `search_terms_log.csv` holds ~2,900 distinct queries, but
+only 118 rows had ever been run against the Europe-PMC surface, and the two
+scheduled routines cycle a fixed 125-term list. That leaves a large pool of
+terms already *proven* at the repository connectors and never tried here —
+the same recycling argument PLOS batch 12 made, one surface over.
+
+**Term selection, measured rather than guessed.** 291 English
+instrument/task terms were extracted as: logged in `search_terms_log.csv`,
+never against a `pmc*` output file, not in the monthly `FULL_TERM_LIST` or
+`HIGH_YIELD_TERMS`, ASCII, and either carrying an instrument keyword
+(scale/inventory/questionnaire/task/...) or reading as a proper name.
+Translated variants were dropped on purpose: `is_relevant()` is title-only
+and these journals publish in English, which the results confirm —
+`cognitieve test`, `kognitiver Test` and `test cognitif` returned 2 hits
+each.
+
+`pmc_term_scout.py` (new, committed) then measured all 291 with one lite
+Europe PMC search apiece — ~1 request per term via an ISSN OR-group rather
+than one per term-journal — counting hits that are relevant, supplementary-
+bearing, and not already excluded by the dictionary, `human_review/` or
+`pmc_seen_dois.csv`. Result: 2,649 new DOIs across 291 terms, median 8 per
+term, 19 terms at zero. The head is cognitive tasks (`spatial Stroop task`
+52, `digit span task` 45, `montreal cognitive assessment` 45) ahead of the
+questionnaires (`Maslach Burnout Inventory` 24, `WHO-5 Well-Being Index` 23).
+The top 50 carried 42% of the total, and that was the cut run.
+
+**Known flaw in the scout's projection, fix before reusing it.** It caps a
+term at 500 hits across all journals combined, while the connector paginates
+to 300 *per journal per term*. Most head terms hit that cap, so the scout
+under-counts exactly the terms that matter most. It is a ranking tool, not a
+volume estimate — the top-50 projection of 1,096 came in at 695 actual
+candidates, and the error is not even in a consistent direction, because
+cross-term deduplication cuts the other way.
+
+**The run** (`runs/run_sweep.sh`, 50 terms x 11 journals, 550 queries, ~2h20m):
+
+| flag | n | |
+|---|---|---|
+| `no_usable_file` | 398 | 57% |
+| `license_restricted` | 202 | 29% |
+| `human_assistance` | 50 | |
+| `below_min_n` | 15 | |
+| `download_failed` | 10 | transient, not ledgered, a rerun retries them |
+| `external_unresolved` | 8 | |
+| `not_item_response` | 6 | |
+| `pii_suspected` | 3 | |
+| `already_in_irw` | 1 | |
+| `file_too_large` | 1 | |
+| `good` | 1 | |
+
+The 29% licence loss is what the 2026-09-19 tail probe predicted (35%) and
+lands on the same journals — Scientific Reports and Heliyon carry a large
+non-open fraction.
+
+**Step 2b** (`irw_retriage_ha.py`, chained in `run_sweep.sh` because this
+connector's plain CLI does not chain it the way the scheduled wrappers do)
+resolved the 50 `human_assistance` rows: 12 `recoverable_format`, 12
+`worth_retrying`, 12 `aggregate_continuous`, 11 `human_review` (archived to
+`human_review/human_review_pmc_2026-09-20.csv`), 3 `not_item_response`.
+
+**25 actionable leads: 1 `good` + 12 `recoverable_format` + 12
+`worth_retrying`.** Largest by shape: `10.1038/s41598-026-57381-w` (21,343 x
+23, CC BY), `10.1038/s41598-026-66551-9` (20,415 x 12, CC BY),
+`10.1038/s41598-024-58598-3` (11,861 x 45, CC BY), `10.1186/s12889-022-14103-x`
+(1,394 x 20, CC BY). Rank by instrument shape, not response count, before
+working them — several of the large Scientific Reports rows are likely to be
+trial-level or single-item panels.
+
+**The one `good` row needs its licence verified before anything else.**
+`10.3390/bs15020224` (Behavioral Sciences, 403 x 63, behavioral-emotional
+regulation instrument) reports `license=unknown`. MDPI is normally CC BY, but
+`unknown` is not verified and the rule does not bend for a likely answer.
+
+**3 PII skips**, per the blanket rule — logged here, no standing file, since
+there is no path to un-blocking them: `10.1038/s41598-022-06620-x` (OSF
+`y3ud7`) and `10.1038/s41598-022-19163-y` (OSF `verhb`), both reached through
+their Data Availability link, and `10.1186/s12889-023-15134-8`, which ships a
+column literally named `CD [Email account]`.
+
+**The remaining 241 scouted terms are ranked and unworked** in
+`runs/pmc_term_scout_2026-09-19.csv` — a second batch starts from that file
+rather than from another scout, and the 58% of pool yield they carry is the
+best-measured acquisition surface currently on the books.
+
+Bookkeeping: 50 `search_terms_log.csv` rows and the `pmc_seen_dois.csv`
+append are committed **with** this write-up on the branch, not pushed to main
+ahead of review — the open hazard on both scheduled routines. Per-run CSVs
+stay in `runs/`.
+
+### 2026-09-20b — every `unknown` licence in that sweep was actually CC BY
+
+Verifying the one `good` row's licence turned up a defect rather than an
+answer. `10.3390/bs15020224` reported `license=unknown`; Crossref and Europe
+PMC's own core record both say CC BY 4.0. Re-checking **all 34** `unknown`
+rows from the sweep: **34 of 34 resolve to `cc-by`**, minutes after the run,
+with the same function and the same PMCIDs. None was a property of the
+article.
+
+`fetch_core_license()` read an empty `resultList` as `""`, which
+`check_license()` normalises to `unknown`. Europe PMC returns well-formed
+bodies with no results under load — the same stub-body behaviour
+`_europepmc_get` already retries HTTP errors for — so nothing failed in a way
+the code could see: 0 `QUERY FAILED` lines and 0 retries in the run log.
+
+That verdict is sticky and it is consequential. The DOI goes into
+`pmc_seen_dois.csv` carrying a note that the terms could not be confirmed,
+and the standing rule is to skip a candidate whose licence is not explicitly
+verified. In this one batch it mislabelled **19 actionable rows** — the only
+`good` row plus 18 `human_assistance` — as unverified. It is the fourth
+instance in this log of a real failure wearing a nothing-here label.
+
+**Fixed** (`irw_discover_pmc.py`, 4 tests, suite of 80 passes):
+
+- An empty result is retried three times with backoff, then returns
+  `LICENSE_LOOKUP_FAILED` rather than `""`. A record that IS read and simply
+  carries no `license` field still returns `""` — that one is a real absence,
+  and is not retried.
+- `process_one()` maps the sentinel to a new `license_lookup_failed` flag,
+  added to `INCONCLUSIVE_FLAGS`, so the DOI is **not** ledgered and a later
+  run retries it — the same treatment `download_failed` already gets.
+
+**Consequence for this batch: all 25 actionable leads are CC BY**, including
+`10.3390/bs15020224`. No licence question is outstanding, and the 15 non-
+actionable `unknown` rows (`no_usable_file`, `below_min_n`, ...) are rejected
+on their own merits rather than on licence grounds.
+
+Worth a separate check some day: `pmc_seen_dois.csv` holds DOIs ledgered by
+every earlier PMC run under the old behaviour, and the same empty-result
+window will have hit some of them. That is not the 2026-09-19 tail question
+(which was about Data Availability statements and is closed) — it is
+specifically "how many past rows say `license_unknown*` when the record says
+CC BY". Cheap to measure with the same re-check loop used here.
+
+## 2026-09-20c — Working the sweep's leads: 18 tables, 269,737 responses
+
+Six deposits opened from the 25 actionable leads. Four shipped, two were
+skipped on PII, one is rejected on content.
+
+**Shipped (18 tables, all CC BY 4.0, all `create` not replace):**
+
+| deposit | tables | responses |
+|---|---|---|
+| `10.3390/bs15020224` Peruvian BERQ-PA | 2 | 19,344 |
+| `10.7717/peerj.20280` ICF-RS-17 rehabilitation | 1 | 87,516 |
+| `10.1038/s41598-022-26653-6` Polish RAS + 8 | 9 | 27,938 |
+| `10.1038/s41598-022-10019-z` Canadian pet panel | 5 | 122,927 |
+| `10.1038/s41598-023-37195-w` climate risk pre/post | 1 | 12,012 |
+
+Three decisions in there are worth finding again:
+
+- **`lopezodar_2025`: the ERQ is held, deliberately.** The paper documents the
+  Peruvian ERQ as 7-point; the deposited ERQ1-10 hold five levels (0-4) across
+  all 403 respondents. That is not a 7-point scale with unused extremes, and
+  the level count disagreeing means the responses cannot be mapped to the
+  documented anchors at all. BERQ in the same file is 0-4 against a documented
+  1-5 — a re-indexing, shipped as recorded. GHQ-28 is 0-3, exactly as
+  documented. One file, three instruments, three different answers.
+- **`adamczyk_2022_ras`: the samples disagreed on scoring direction.**
+  Validation sample 1 deposits items 4 and 7 raw (RAS4 mean 1.88) plus
+  reverse-scored copies; the other two samples deposit only the reversed
+  direction (4.24, 4.15). Merging as-deposited would have put two opposite
+  scale directions under one item code — `resp_ambiguous`, #1827. The table
+  takes val1's reversed columns; after harmonisation RAS4 reads 4.24/4.12/4.15
+  across the three samples. The depositors' own columns, nothing recomputed.
+- **`karlsson_2023`: a stray letter nearly cost an item.** The codebook lists
+  Post_Risk_DV_1..6; the file has `MPost_Risk_DV_4`. Its variable label is
+  word-for-word Pre_Risk_DV_4's, so it is item 4. Unrenamed, the table would
+  have shipped five paired items and one orphan, and every gate would have
+  passed.
+
+**Two PII skips, both public deposits, both worth an email:**
+
+- **`10.1038/s41598-026-57354-z` (PERMA-Profiler, French)** — OSF `53t8c`
+  publishes full dates of birth (day/month/year, 584 distinct over 612 rows)
+  next to self-generated initials-plus-digits codes (`EJO3070`) and ten
+  psychiatric diagnosis columns (anxiety, OCD, PTSD, psychotic, depressive,
+  bipolar, dissociative). DOB is named in the blanket rule; the compounding
+  with stigmatised clinical data is the 2026-08-12 shape exactly.
+- **`10.1038/s41598-023-33749-0` (social frailty)** — OSF `v7k3d`'s
+  `dat_used.xlsx` carries a live `Prolific ID` column, 772 distinct 24-hex
+  account identifiers, alongside mental-health-disorder, current-medications
+  and head-injury fields; a second sheet lists more Prolific IDs.
+  **This one extends the rule rather than applying it.** A Prolific ID is not
+  in the rule's enumerated list (names, emails, birthdates, IP/GPS, national
+  ID), but it is a persistent cross-study account identifier that Prolific's
+  own guidance says never to publish. Skipped conservatively, and flagged in
+  TODO.md as a rule question for ben-domingue — it is reversible either way.
+
+**One content rejection.** `10.1186/s12889-022-14103-x` (BMC Public Health,
+380 older Americans x 6 waves) is seven single-item measures of different
+constructs on four different scales, plus a `soc_support_imputed` column.
+There is no instrument. Same shape as DVN/QUVQIR, rejected 2026-09-14.
+
+**Item text: none shipped, and the reason is mostly rights, not effort.**
+The Amiot deposit is otherwise an ideal `data_labels` source — full stems in
+the SPSS variable labels, value labels on every scale point of four blocks —
+but `itemtext/instrument_rights_register.csv` already blocks the PSS
+(irw#1955), the MLQ (irw#1945) and the SWLS corpus-wide, and the Subjective
+Vitality Scale sits inside the full-scope CSDT ruling of 2026-09-09. The
+GHQ-28 in `lopezodar_2025` is blocked by the GHQ family entry. What is left
+is genuinely open rather than blocked, and is queued in TODO.md: the UCLA
+Loneliness Scale has no register verdict at all, and the ICF-RS-17's 17
+category names sit in the paper's own Tables 3-4.
+
+Every table was checked with `run_qc`; no `fail` anywhere. The warnings that
+did fire were each explained rather than waved through — ceiling effects on
+satisfaction items, an unendorsed top category on GHQ28's suicidality item,
+ICF's b/d chapter prefixes reading as two instruments, and the longitudinal
+`dup_id_item` on the two tables that carry `wave`.
+
+18 `dictionary_auto.csv` rows staged, one per table, via `stage_dict_row.py`;
+the 18 `irw_output/` CSVs are on disk in the worktree awaiting upload.

@@ -235,20 +235,49 @@ def from_pmc(query: str, journal: str):
 _RE_PMCID = re.compile(r"(PMC\d+)")
 
 
-def fetch_core_license(pmcid: str) -> str:
+# Returned when the core record could not be read at all, as distinct from a
+# record that was read and carries no license. See fetch_core_license.
+LICENSE_LOOKUP_FAILED = "__lookup_failed__"
+
+
+def fetch_core_license(pmcid: str, attempts: int = 3) -> str:
     """One core-record lookup for the `license` field. Separate from the
     Phase-1 lite search because resultType=core is a meaningfully heavier
     response (full abstract, author list, etc.) -- not worth paying for
     every search hit, only for candidates that already passed relevance +
-    hasSuppl filtering."""
-    data = _europepmc_get({
-        "query": f"PMCID:{pmcid}",
-        "resultType": "core",
-        "pageSize": 1,
-        "format": "json",
-    })
-    results = (data or {}).get("resultList", {}).get("result", [])
-    return results[0].get("license", "") if results else ""
+    hasSuppl filtering.
+
+    An EMPTY resultList is not "this article has no licence" -- it is a
+    failed lookup. Europe PMC returns well-formed bodies with no results
+    under load (the same stub-body behaviour `_europepmc_get` retries HTTP
+    errors for), and this function used to read that as `""`, which
+    `check_license` then normalised to `unknown`. That verdict is sticky:
+    the DOI is written to the seen ledger with a licence note saying the
+    terms could not be confirmed, and the standing rule is to skip an
+    unverified candidate. The 2026-09-20 recycled-term sweep is what
+    measured the cost -- 34 of its 34 `unknown` rows re-checked as `cc-by`
+    minutes later, 19 of them on actionable candidates including the run's
+    only `good` row. Nothing in the log marked it, because nothing had
+    failed in a way the code could see.
+
+    So: retry an empty result, and if it stays empty return
+    LICENSE_LOOKUP_FAILED rather than `""`. A record that IS read and
+    carries no license field still returns `""` -- that one is a real
+    absence.
+    """
+    for attempt in range(attempts):
+        data = _europepmc_get({
+            "query": f"PMCID:{pmcid}",
+            "resultType": "core",
+            "pageSize": 1,
+            "format": "json",
+        })
+        results = (data or {}).get("resultList", {}).get("result", [])
+        if results:
+            return results[0].get("license", "") or ""
+        if attempt < attempts - 1:
+            time.sleep(2 * (attempt + 1))
+    return LICENSE_LOOKUP_FAILED
 
 
 # JATS puts the Data Availability statement in a <sec sec-type=...>, a
@@ -326,6 +355,12 @@ def process_one(hit: Hit) -> dict:
                 "license": "", **empty_meta}
 
     license_raw = fetch_core_license(pmcid)
+    if license_raw == LICENSE_LOOKUP_FAILED:
+        # Inconclusive, so the DOI is NOT ledgered and a later run retries it.
+        return {**base, "flag": "license_lookup_failed", "license": "",
+                "reasons": "could not read the Europe PMC core record for this "
+                           "PMCID after 3 attempts -- licence unread, not absent",
+                **empty_meta}
     license_norm, blocked, unknown = check_license(license_raw)
     base["license"] = license_norm
     if blocked:
@@ -470,7 +505,7 @@ SEEN_DOIS_PATH = "pmc_seen_dois.csv"
 # failure, not a verdict about the data. Recording these in the cross-run
 # ledger would retire the DOI forever on the strength of a transient 500 or
 # a crash, so they are left out and picked up by a later run.
-INCONCLUSIVE_FLAGS = {"download_failed", "error"}
+INCONCLUSIVE_FLAGS = {"download_failed", "error", "license_lookup_failed"}
 
 
 def load_seen_dois(path: str = SEEN_DOIS_PATH) -> set:

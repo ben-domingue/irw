@@ -3,6 +3,102 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## From the 2026-09-20 recycled-term PMC sweep
+
+- [ ] **25 actionable leads, none worked yet.** 1 `good` + 12
+  `recoverable_format` + 12 `worth_retrying`, in
+  `runs/pmc_recycled_2026-09-20.csv` and its `.retriage_ha.csv`. Rank by
+  instrument shape before response count — several of the largest are
+  Scientific Reports rows that may be trial-level or single-item panels.
+  See BATCH_LOG.md 2026-09-20 for the four largest by shape.
+
+- [x] **`10.3390/bs15020224` licence verified CC BY 4.0** (Crossref + Europe
+  PMC core), and so are the other 33 `unknown` rows — the `unknown` was a
+  connector defect, now fixed. See BATCH_LOG.md 2026-09-20b. All 25
+  actionable leads are CC BY; no licence question is outstanding.
+
+- [ ] **Re-check past PMC rows ledgered under the old licence bug.**
+  `pmc_seen_dois.csv` predates the `license_lookup_failed` fix, so some
+  already-retired DOIs will say `license_unknown*` where the record says
+  CC BY. Cheap: the same 34-row re-check loop, pointed at the ledger.
+
+- [ ] **241 scouted terms remain ranked and unrun** in
+  `runs/pmc_term_scout_2026-09-19.csv` (58% of the measured pool). A second
+  batch starts from that file — no new scout needed. Fix the scout's 500-hit
+  cross-journal cap first if its counts are to be used as a volume estimate
+  rather than a ranking (see BATCH_LOG.md 2026-09-20).
+
+## From the 2026-09-20 lead-working pass
+
+- [ ] **18 tables / 269,737 responses + 1 item text table staged, need uploading.**
+  All CC BY 4.0, all creates. `lopezodar_2025_berq` + `_ghq28`,
+  `li_2025_icf_rs17`, nine `adamczyk_2022_*`, five `amiot_2022_*`,
+  `karlsson_2023_climate_risk`. The 18 matching `dictionary_auto.csv` rows are
+  committed, so biblio needs no paste -- `metadata/02_biblio.R` unions them.
+  Item text: `itemtext_output/amiot_2022_ucla_loneliness__items.csv` (80 rows)
+  goes to `irw_text` SECOND, after the response tables are live -- it is a
+  dangling reference otherwise. Then stamp `uploaded=<date>` on its
+  `itemtext_provenance.csv` row, which is blank until you confirm.
+
+- [ ] **`amiot_2022_ucla_loneliness` owes an issues-page entry when it ships.**
+  Its `public_note` is non-empty, which forces a public callout: 418 of the
+  2,424 respondents (17.2%) answered in French and the deposit carries only
+  the English wording, so the shipped item text is not what those respondents
+  read. The page lives in the datapages/irw repo
+  (`irw_site/itemtext_issues.qmd`) and is edited there, not here.
+
+- [ ] **Is a Prolific ID PII for our purposes?** `10.1038/s41598-023-33749-0`
+  (OSF `v7k3d`) publishes 772 live 24-hex Prolific account IDs beside
+  mental-health-disorder, medication and head-injury fields. A Prolific ID is
+  not in the blanket rule's enumerated list, but it is a persistent
+  cross-study identifier that Prolific tells researchers never to publish.
+  Skipped conservatively pending ben-domingue's call; reversible either way.
+  If it is not PII, the deposit is 697 x 85 with HADS and DERS blocks and
+  worth processing. Both this and the PERMA deposit below are arguably worth
+  telling the depositors about, as with the zenodo.10069489 email.
+
+- [x] **UCLA Loneliness Scale: verdict is `ship`** (2026-09-20). The quote
+  test found nothing to quote -- Fetzer's own UCLA pages reproduce the scale
+  with no permission, copyright or distribution statement, unlike the DSES
+  copy in the same collection, and SPARQtools publishes all 20 items with no
+  terms. Registered in `itemtext/instrument_rights_register.csv`.
+  `amiot_2022_ucla_loneliness__items.csv` is extracted and gated (80 rows,
+  `data_labels`); both tatala tables are unparked below.
+
+- [ ] **`li_2025_icf_rs17` item text is one table away.** The 17 ICF category
+  names are printed in the paper's Tables 3-4 (`paper_explicit`, so it needs
+  a Step 5b `verify_li_2025_icf_rs17.R`, not the cheap gate). The item codes
+  are ICF codes, so the mapping is unambiguous -- this is the most tractable
+  itemtext follow-up the batch produced.
+
+- [x] **`lopezodar_2025` ERQ stays held, no author query** (ben-domingue,
+  2026-09-20: not worth one at this stage). The paper documents the Peruvian
+  ERQ as 7-point; the deposited ERQ1-ERQ10 hold five levels (0-4) across all
+  403 respondents, so the responses cannot be mapped to the documented
+  anchors. The reason is recorded in `data/lopezodar_2025_berq.py` and the
+  dictionary Notes, which is the durable part. 4,030 responses if anyone
+  reopens it.
+
+- [ ] **~19 actionable leads from the sweep are still unworked**, in
+  `runs/pmc_recycled_2026-09-20.csv` and its `.retriage_ha.csv`. Six deposits
+  were opened out of 25 leads. Rank by instrument shape, not response count:
+  the two largest by nominal response count (21,343 x 23 and 20,415 x 12, both
+  `.RDS` behind OSF links) are social-network and VR-trial data and were
+  deliberately left for last.
+
+## From the 2026-09-19 PMC tail measurement
+
+- [x] **The unaudited PMC seen-DOI tail is closed, measured not skipped.**
+  2,809 ledger DOIs had no recorded verdict; a seeded 100-row probe found 3
+  naming a repository against #2203's 17%, 35% licence-blocked, and 44 of 47
+  statements saying "available from the author on request". ~21 hours of
+  network for a projected 10 leads. See BATCH_LOG.md 2026-09-19. Reopen only
+  if the connector changes — `pmc_tail_probe.py` re-runs the measurement.
+
+- [ ] **One live lead from the probe: `10.1038/s41598-026-57813-7`**
+  (Scientific Reports), whose Data Availability statement names OSF `s2hfg`.
+  Triaged `human_assistance` — worth a look when a PMC batch is next worked.
+  Cheap: the deposit is already resolved, nothing needs re-discovering.
 ## From the 2026-09-16 PMC batch (written up 2026-09-19)
 
 - [x] **9 item text tables uploaded** to `irw_text` (ben-domingue, confirmed
@@ -90,16 +186,17 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   (`processing_notes/Licensing.txt` has the template shape). See BATCH_LOG.md
   2026-09-08b.
 
-- [ ] **Tatala 2023 item text: whose call is the Religious Experience
-  Scale?** `tatala_2023_ucla_loneliness` and
-  `tatala_2023_religious_experience` shipped as response tables; the wording
-  is fully in hand (verbatim English stems in the SPSS variable labels) but
-  was held. UCLA1-20 is settled -- Russell's R-UCLA is third-party and stays
-  held. RES1-17 is not: this paper's first author is an author of the
-  Religious Experience Scale, so the originator-licence rule may well let the
-  17 stems ship under the article's CC BY. That is ben-domingue's call, not
-  a script's. If yes, it is a cheap win -- the item codes already match the
-  response tables exactly.
+- [ ] **Tatala 2023 item text: UNPARKED, both tables ready to extract**
+  (ben-domingue, 2026-09-20). Both rights questions are now answered and
+  registered in `itemtext/instrument_rights_register.csv`: the UCLA
+  Loneliness Scale is `ship` on the quote test, and the Religious Experience
+  Scale is `ship` on the originator basis -- this paper's first author is an
+  author of the RES and published it in a CC BY article, so the rights holder
+  is the one who released it openly. Both `tatala_2023_ucla_loneliness` and
+  `tatala_2023_religious_experience` already have verbatim English stems in
+  the deposit's SPSS variable labels and item codes that match the response
+  tables exactly, so this is a `data_labels` extraction with no
+  reconstruction: cheap, and the cheapest itemtext work currently queued.
 
 ## From the 2026-09-02 monthly repos sweep
 
