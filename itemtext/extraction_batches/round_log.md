@@ -21873,3 +21873,78 @@ Neither `song_2025_cs` nor `song_2025_er` is covered by the SLS rights-register 
 No blocked tables, so no `pending_index_notes.csv` rows owed. No rate limit or spend cap hit.
 Cap not reached (cap is `batch_299`; this is 276). Numbering skipped the 300–304 irw#2228 hole:
 `batch_300`–`batch_304` exist on this branch but were excluded from the max, so 275 + 1 = 276.
+
+## batch_277 — 2026-09-20 13:34–13:47 PDT — 3 tables, 3 agents
+
+Numbering: highest existing directory below 300 is `batch_276`, so 277. (The 300–304
+hole is now fully occupied by the irw#2228 line — `batch_300`–`batch_304` all exist on
+this branch. Neither hole was in play.)
+
+**written 2 / blocked 1 / failed 0 — yield 67%.** Circuit breaker not tripped (0% failed).
+
+All three tables come from ONE source: Song, Xu, Tang & Leong (2025), PLOS ONE
+20(5):e0323811, CC BY 4.0 — the same article batch_276 shipped `cs` and `er` from. Each
+agent re-fetched `article.xml` and `s001.xlsx` independently; both hash byte-identical to
+batch_276's copies (`c980d7f0…`, `28d72fc5…`), which is real corroboration rather than a
+shared cache.
+
+- **song_2025_pj** — DONE, pass with caveats. 20 rows, 4 items × resp 1–5.
+  mapping_basis=paper_explicit, text_source=translated_substitute /
+  translation_source=study_supplied (administered in Chinese, back-translated; zero CJK
+  anywhere in the record, so `_translated` is empty by fallback). Verification PARTIAL —
+  route 1 vs Table 2 matches 4/4 items on mean/SD/EK/skew (largest residual 0.0013,
+  closest pair PJ2 vs PJ4 still separated by 0.214 on EK); PARTIAL because the route pins
+  code identity, not wording.
+- **song_2025_pwb** — DONE, pass with caveats. 15 rows, 3 items × resp 1–5. Same
+  provenance shape. Verification VERIFIED — published moments reproduce to 3 dp for all
+  three items, live per-level counts equal the S1 xlsx cell for cell, every pair separated
+  (smallest gap 0.060, PWB2 vs PWB3, resting on SD and EK since their means differ by only
+  0.056).
+- **song_2025_lwb** — BLOCKED on instrument rights, retry test NO. Not an availability
+  failure: the wording was located, transcribed and verified (route 1 would have been
+  VERIFIED) before the block was found. LWB3 is verbatim Diener SWLS item 3 and **already
+  matches the existing SWLS register row's `match_item_text` substring "important things i
+  want in life"** — the orchestrator re-checked the register and confirmed the match is
+  mechanical, not inferred. SWLS is verdict=block (Ben, 2026-09-09). LWB1 is SWLS item 1
+  arriving via Zheng et al.'s (2015) EWBS. No partial ship: only LWB2 is SWLS-free,
+  validate_items.R is a set-equality gate, and a 1-item table is barred regardless. Block
+  is effective — item codes are bare, so no wording leaks via the response table. A
+  `block` row for family `EWBS-LWB` (`match_item_code ^LWB[0-9]$`) was appended to
+  `instrument_rights_register.csv`, and the full argument plus banked evidence is in
+  `itemtables/pending_index_notes.csv`. Does NOT reach the siblings — PWB shipped this
+  round and the pending WWB block carries no SWLS wording.
+
+**Source defect found and independently confirmed (Step 5b).** PLOS Table 3 prints the
+same sentence — "Are your department's procedures consistent with ethical standards?" —
+against BOTH PJ3 and PJ4, with different loadings (0.883 vs 0.869). The agent reported
+this; the orchestrator re-derived it from the JATS XML rather than taking it on trust, and
+the two rows are byte-identical. So one of the two codes has no published wording. The
+sentence ships on PJ3 and PJ4's `item_text` is blank, on the copy-down reading — that
+direction is an inference and is labelled as one in the note, provenance and public_note.
+Nothing was invented and the duplicate was not shipped twice. Worth a GitHub issue against
+the source, not against IRW.
+
+**Gates.** normalize_nulls 0 of 2 normalized; audit_batch PASS 1 / WARN 1; verify_batch
+PASS 2; lint_verification 0 ERROR / 1 WARN; `irw-validate` ok on both files;
+check_provenance clean for this batch (the one flagged row, `ye_2025_q25_scale`
+translation_source=mixed, is pre-existing and unrelated).
+
+**WARN explained (Step 5c).** `song_2025_pj`: "25% of rows have blank item_text | 100% of
+rows have blank option_text". Neither is a response-data defect. The 25% is exactly PJ4's
+five rows — the PLOS duplication above, i.e. a defect in the SOURCE publication. The 100%
+is the absence of published anchors ("A five-point Likert scale was used", no labels
+anywhere, bare integers in the deposit); nothing was padded with the resp number. The
+lint WARN on `song_2025_pwb` is the same option_text gap and is likewise correct.
+
+**Dictionary corrections owed (Step 3b), both reported independently and consistent with
+what batch_276 found for `cs`/`er`.** The IRW Descriptions read "Servant-leadership survey
+block PJ (unlabeled construct)" and "… block PWB (unlabeled construct) … N=486". Wrong on
+both counts in each case: Table 3 labels them "Procedure justice" (α 0.830, CR 0.838, AVE
+0.661) and "Psychological wellbeing" (α 0.718, CR 0.724, AVE 0.640), neither is an SLS
+dimension (Measures sources the wellbeing scale to Zheng et al. and Becker et al.), and N
+is 485 — the xlsx has 486 rows, one blank for every item. Suggested replacements are in
+`notes.csv`. This is now four tables from this one article carrying the same wrong
+Description; the whole `song_2025_*` family likely needs one dictionary pass.
+
+Cap (`batch_299`) not reached. Queue after this round: 64 pending, 276 blocked, 13 failed,
+60 excluded, 1115 done.
