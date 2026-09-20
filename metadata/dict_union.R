@@ -862,32 +862,43 @@ apply_license_attribution <- function(biblio, label = "core",
 ##overwrite a real one. When a depositor later sets a licence, record it in
 ##dictionary_auto.csv and delete the project here.
 ##
-##That has happened once: osf.io/3xvys (parenting_anunciacao_2025_*, 6 tables)
-##was listed here until the depositor set CC BY 4.0 on 2026-09-08 (#2058). It
-##now comes from dictionary_auto.csv, so the list is 22 projects, 109 tables.
+##That happened first for osf.io/3xvys (parenting_anunciacao_2025_*, 6 tables),
+##listed here until the depositor set CC BY 4.0 on 2026-09-08 (#2058).
+##
+##THE PREMISE IS "THE DEPOSIT IS SILENT", AND IT MUST BE CHECKED AGAINST THE OSF
+##API, NOT ASSUMED. Eleven projects were listed here whose node-level licence
+##field was set all along, so 61 rows published `Permission via Email` over an
+##explicit CC BY / CC BY-SA / CC0 / MIT grant (#2302, all 245 OSF deposits in
+##biblio queried 2026-09-19). Every one already carried the right value in the
+##dictionary's `Original License`; only `Derived License` was blank, which is
+##all it takes for this stopgap to fire. They now come from dictionary_auto.csv.
+##
+##Three NC deposits found by the same sweep are deliberately STILL HERE --
+##4fdw9, t3a9r and g8dvj publish CC BY-NC. `Permission via Email` may record a
+##broader individual grant than the public NC terms, so stamping NC downstream
+##could narrow what IRW may redistribute, and NC is Ben's call
+##(ruling 2026-09-04). Awaiting that on #2302; do not "finish the sweep" here.
+##
+##Two more came off by running that checker: osf.io/c6rqy (christensen_2018_*,
+##CC0) and osf.io/twgcu (schoen_2019_to_2022_mkt, CC BY 4.0) publish a licence
+##and the sheet already records it, so the fill never fired on them -- stale
+##entries rather than a defect, removed so the check can run clean.
+##
+##BEFORE ADDING AN ENTRY, run metadata/check_osf_permission_projects.py -- it
+##asks the OSF API whether each listed project publishes a licence and exits
+##non-zero if one does.
+##
+##The list is 9 projects, 46 tables.
 OSF_PERMISSION_PROJECTS <- c(
-    "qtqpb",  # 19  eammi_grahe_2018_*
     "75crd",  # 15  parentalempathy_gonzalez_2021_*
-    "4fdw9",  # 10  darkfactorfrench_pischel_2026_*
-    "rjbx2",  #  9  hachenberger_2025_*
-    "3w6ap",  #  7  kazarovytska_2026_*
-    "t3a9r",  #  7  transyouth_leshin_2026_*
-    "zevcs",  #  7  personalitychange_kramer_2025_*
-    "6nm2s",  #  6  thirdpartypunishmentunfairsharing_mcauliffe_*
-    "rf9k8",  #  5  talaifar_2025_*
+    "4fdw9",  # 10  darkfactorfrench_pischel_2026_*   CC BY-NC on OSF; held, #2302
+    "t3a9r",  #  7  transyouth_leshin_2026_*          CC BY-NC on OSF; held, #2302
     "69nwe",  #  4  smpi_lorenzoluaces_2020_*
-    "g8dvj",  #  4  morgan_2026_music_personality_*
-    "c6rqy",  #  2  christensen_2018_*
-    "gvx7s",  #  2  itemrandom_buchanan
+    "g8dvj",  #  4  morgan_2026_music_personality_*   CC BY-NC on OSF; held, #2302
     "kqxd5",  #  2  west_2021_aggnet_*
     "snmqt",  #  2  mclaughlin_samuel_2025_*
-    "umdg3",  #  2  haehner_2026_personality_subsaharan_*
     "9cm75",  #  1  steinberg_2023_mentalizing_momentary
-    "frwq4",  #  1  kay_2025_antonyms
-    "mbywd",  #  1  west_2022_psychnet_pclsv
-    "thdf5",  #  1  vollbracht_et_al_2026_ambulatory_assessment
-    "twgcu",  #  1  schoen_2019_to_2022_mkt
-    "zajk6"   #  1  kalimahnorms_alzahrani
+    "mbywd"   #  1  west_2022_psychnet_pclsv
 )
 OSF_PERMISSION_VALUE <- "Permission via Email"
 
