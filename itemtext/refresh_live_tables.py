@@ -32,6 +32,18 @@ draft as live is how the batch_015 set read as published for the hours between
 upload and release. But it is also not missing, and a checker that cannot tell
 those apart cries wolf on every table in the release window. So each row carries
 a `status` of `published` or `draft`.
+
+Listing a draft needs a `data.edit`-scoped token, which is more than a snapshot
+reader should hold: the CI job that runs this daily is given a read-only one, so
+it gets a 403 on `next` and only ever sees the published side. That is not worth
+failing over -- what CI gates on (a live table that owes the issues page an
+entry) is computed from the published rows alone. So an unreadable draft is not
+an error: the shard's `draft` rows are carried forward from the previous
+snapshot unchanged, the header records that they were, and a refresh run with a
+full-scope token (Ben's, during the bookkeeping pass) is what actually moves
+them. Carrying forward is the conservative direction -- a stale `draft` row at
+worst suppresses an ORPHAN warning for a table that was really released, while
+dropping it would invent one for every table in the release window.
 """
 
 from __future__ import annotations
@@ -50,6 +62,10 @@ from red_up.targets import load_registry, text_shards  # noqa: E402
 
 OUT = HERE / "live_tables.csv"
 SUFFIX = "__items"
+
+
+class DraftUnreadable(Exception):
+    """The shard has a draft, but this token may not list it (needs data.edit)."""
 
 
 def _list(owner: str, shard: str, version: str) -> set[str] | None:
@@ -79,37 +95,77 @@ def _list(owner: str, shard: str, version: str) -> set[str] | None:
                 "not_found" in low or "not found" in low or "404" in low
             ):
                 return None
+            # A read-only token can see `current` but not `next`; Redivis calls
+            # that missing scope, not missing data. Distinguished from the case
+            # above because they mean opposite things: no draft exists vs. a
+            # draft may exist and this run cannot see it.
+            if version == "next" and (
+                "insufficient_scope" in low or "data.edit" in low
+            ):
+                raise DraftUnreadable(shard) from exc
             raise
     # Item-text tables end in __items; the bare name is what provenance.csv,
     # the dictionary and the issues page all use.
     return {n[: -len(SUFFIX)] if n.endswith(SUFFIX) else n for n in names}
 
 
-def fetch() -> list[tuple[str, str, str]]:
-    """(bare table name, shard, status) for every item-text table."""
+def fetch() -> tuple[list[tuple[str, str, str]], list[str]]:
+    """((bare table name, shard, status), shards whose draft could not be read)."""
     owner, targets = load_registry()
     rows: list[tuple[str, str, str]] = []
+    unreadable: list[str] = []
+    prior: list[tuple[str, str, str]] | None = None
     for shard in text_shards(targets):
         published = _list(owner, shard.name, "current") or set()
-        draft = _list(owner, shard.name, "next")
         rows += [(t, shard.name, "published") for t in published]
+        try:
+            draft = _list(owner, shard.name, "next")
+        except DraftUnreadable:
+            # Read-only token. Keep what the last full-scope refresh saw, minus
+            # anything that has since been released -- a carried row is a claim
+            # about the release window, and a published table is past it.
+            unreadable.append(shard.name)
+            if prior is None:
+                prior = read_rows()
+            rows += [(t, sh, st) for t, sh, st in prior
+                     if sh == shard.name and st == "draft" and t not in published]
+            continue
         if draft is not None:
             # Draft-only: uploaded, not yet released. A table the draft DROPS is
             # a staged withdrawal and stays `published` here -- it is still what
             # a reader can fetch today, which is what this file records.
             rows += [(t, shard.name, "draft") for t in draft - published]
     rows.sort()
-    return rows
+    return rows, unreadable
 
 
-def render(rows: list[tuple[str, str, str]], asof: str) -> str:
+def render(rows: list[tuple[str, str, str]], asof: str,
+           unreadable: list[str] | None = None,
+           carried_from: str | None = None) -> str:
     head = [
         f"# item-text tables in the Redivis shards as of {asof}",
         "# status=published: a reader can fetch it. status=draft: uploaded, not released yet.",
         "# generated -- do not hand-edit; rerun itemtext/refresh_live_tables.py (irw#1828)",
-        "table,shard,status",
     ]
+    if unreadable:
+        # Says so in the file itself, because the alternative is a `draft` row
+        # whose date silently means something older than the header claims.
+        head.append(
+            "# draft not listable by this token (needs data.edit) for "
+            + ", ".join(sorted(unreadable))
+            + f"; its draft rows carried forward from the snapshot taken {carried_from}"
+        )
+    head.append("table,shard,status")
     return "\n".join(head + [f"{t},{sh},{st}" for t, sh, st in rows]) + "\n"
+
+
+def read_rows(path: Path = OUT) -> list[tuple[str, str, str]]:
+    """The snapshot's rows as (table, shard, status). Missing file -> []."""
+    if not path.exists():
+        return []
+    body = [ln for ln in path.read_text().splitlines()
+            if ln and not ln.startswith("#")]
+    return [(r["table"], r["shard"], r["status"]) for r in csv.DictReader(body)]
 
 
 def read_snapshot(path: Path = OUT) -> tuple[dict[str, str], str | None]:
@@ -117,18 +173,25 @@ def read_snapshot(path: Path = OUT) -> tuple[dict[str, str], str | None]:
     if not path.exists():
         return {}, None
     asof = None
-    lines = path.read_text().splitlines()
-    for line in lines:
+    for line in path.read_text().splitlines():
+        # The first `as of` line is the header date; a later comment may mention
+        # an older date it carried rows forward from, which is not this one.
         if line.startswith("#") and " as of " in line:
             asof = line.rsplit(" as of ", 1)[1].strip()
             break
-    body = [ln for ln in lines if ln and not ln.startswith("#")]
-    return {r["table"]: r["status"] for r in csv.DictReader(body)}, asof
+    return {t: st for t, _, st in read_rows(path)}, asof
 
 
 def main() -> int:
     check = "--check" in sys.argv[1:]
-    rows = fetch()
+    _, prior_asof = read_snapshot()
+    rows, unreadable = fetch()
+    if unreadable:
+        print("WARNING: could not list the draft of "
+              + ", ".join(sorted(unreadable))
+              + " (token lacks data.edit); its draft rows are carried forward "
+              + f"from the snapshot taken {prior_asof}. Rerun with a full-scope "
+              + "token to move them.")
     if check:
         have, asof = read_snapshot()
         want = {t: st for t, _, st in rows}
@@ -142,7 +205,8 @@ def main() -> int:
             print(f"  {t}: snapshot says {was}, Redivis says {now}")
         print(f"\n{len(drift)} table(s) drifted -- rerun without --check")
         return 1
-    OUT.write_text(render(rows, dt.date.today().isoformat()))
+    OUT.write_text(render(rows, dt.date.today().isoformat(),
+                          unreadable, prior_asof))
     n_pub = sum(1 for _, _, st in rows if st == "published")
     print(f"wrote {OUT.relative_to(SRC)}: {n_pub} published, "
           f"{len(rows) - n_pub} in draft")
