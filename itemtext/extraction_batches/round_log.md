@@ -21666,3 +21666,62 @@ clause remains carried rather than freshly hashed — non-blocking, and not the
 text source for any of these tables.
 
 Cap not reached (cap is batch_299). 79 pending remain.
+
+## batch_273 — 2026-09-20 12:47–12:5x
+
+3 tables, one agent each: `afaya_2020_general_knowledge`, `afaya_2020_medication_knowledge`,
+`afaya_2020_monitoring_knowledge` — the last three knowledge blocks of the Afaya 2020 Ghana
+diabetes deposit, completing the set begun in batch_271/272 (diet, exercise, footcare).
+
+**Written 3 / blocked 0 / failed 0. Yield 100%.** Circuit breaker not tripped.
+
+Numbering: highest existing directory below 300 was `batch_272`, so this round is `batch_273`.
+The `batch_300`–`batch_304` directories on this branch belong to irw#2228 and were excluded from
+the max, per Step 1's second hole.
+
+Gates: `normalize_nulls.R` 0 of 3 normalized (already canonical); `audit_batch.R` 3/3 **PASS**, no
+anomalies and therefore no WARNs to explain under Step 5c; `verify_batch.R` MISSING(exempt)×3;
+`lint_verification.R` 3 rows, no problems; `irw-validate` ok on all three; `check_provenance.R`
+clean (91 IRW-generated tables, 0 without an issues-page entry — the lone REVIEW line,
+`ye_2025_q25_scale` / `translation_source=mixed`, is pre-existing and not from this round).
+
+All three are `mapping_basis=data_labels` / `text_source=study_materials`, so no verification
+sidecars were owed. Three NOT_NEEDED rows were written into BOTH the batch's own
+`verification_merged.csv` and the permanent `mapping_verification.csv` (now 1194 rows), which is
+why the lint came back clean rather than flagging three tables as unverified.
+
+**Step 5b — orchestrator re-check of the round's own claims, all confirmed with numbers:**
+- S1 Data re-downloaded independently by the orchestrator: sha256
+  `fa2b99f0d23219d36d5da5b1325813dc512b412d2ee21f25d8cbb7e63c3bd951`, 188,640 bytes — matches
+  what all three agents reported and what batch_271 recorded for the sibling tables.
+- Every shipped `item_text` diffed against the codebook's own `Variable label`, keyed by
+  `Variable name`, straight from `Sheet1`: **28 items, 0 mismatches** (11 gk + 10 kom + 7 km).
+  For a `data_labels` table this is the mapping check itself, not a proxy for it.
+- The instrument discrepancy two agents flagged for `public_note` is real and is now confirmed
+  by the orchestrator rather than taken on report. The article does say "23 item diabetes
+  knowledge test questionnaire (DKT) developed by scholars from the University of Michigan",
+  while the deposit administers a 66-item Yes/No/Don't-know battery in seven blocks. Checked
+  against the deposited English questionnaire (S1 File, 72,120 chars extracted — substantive,
+  17 hits for "glucose"): **0 hits for "Obesity", "double dose", "thirst", "abrasion",
+  "Shaking", "proper site"**, and 0 of 28 shipped stems found verbatim. So the shipped wording
+  is the study's own battery, present in the codebook and not in the DKT section; `instrument`
+  correctly names the study questionnaire rather than asserting DKT-23.
+
+Notable, carried in `notes.csv`/`provenance.csv` rather than being defects:
+- `correct_response` blank throughout — the study says one answer is correct but never published
+  a key, and some items (`kom1_name`, `kom7_site`) are self-report with no correct answer at all.
+- Bilingual administration (English or Dagbani, forward/back translated). English ships as the
+  administered base; the deposited Dagbani questionnaire (S2 File) covers only
+  demographics/SDSCA/MMAS-8/DKT and contains no Dagbani rendering of these blocks, so
+  `_translated` columns were omitted rather than emitted empty.
+- Step 3b earned its place here. The same codebook holds a separate `MEDICATION ADHERENCE SCALE`
+  (Morisky MMAS-8) at row 409 and a second `Glucose Monitoring` self-care block at row 385. MMAS-8
+  carries a **`block` verdict in `instrument_rights_register.csv`** (fee + permission, irw#1945) —
+  it does not reach these tables, and no MMAS-8 wording ships. The deposit's prefixes are
+  non-mnemonic (`km` = monitoring, `kom` = medication), so the blocks were fixed by the codebook
+  headers and the sentences, not by the prefix.
+- Source typography shipped unnormalised (inconsistent terminal stops, mid-sentence capitals,
+  curly apostrophe in "Don't know"). Trailing spaces in several codebook *variable-name* cells
+  were stripped; shipped codes are the data sheet's exact headers.
+
+Three agents per round, no kills, no retries, ~3.5 min wall clock for the dispatch.
