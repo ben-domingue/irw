@@ -1335,10 +1335,10 @@ o ácido aminometilfosfônico (AMPA) e o N-metilglicina
 (sarcosina):
 Glifosato
 Sarcosina AMPA
-H3C NH
+H_3C NH
 O
 OH
-H2N
+H_2N
 O
 OH
 OH
@@ -1346,12 +1346,7 @@ P
 AMARANTE JR., O. P . et al. Química Nova, São Paulo, v. 25, n. 3, 2002 (adaptado).
 A partir do texto e dos produtos de degradação 
 apresentados, a estrutura química que representa o 
-glifosato é:","B","O
-OH
-OH
-PH2N
-O
-O",0,NA,NA,NA,NA,"Portuguese","A"
+glifosato é:","B",NA,0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2013_1mil_cn","enem_2013_1mil_cn_1",11792,"ENEM 2013 - CN","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 EXAME NACIONAL DO ENSINO MÉDIO
 A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL.
@@ -1434,10 +1429,10 @@ o ácido aminometilfosfônico (AMPA) e o N-metilglicina
 (sarcosina):
 Glifosato
 Sarcosina AMPA
-H3C NH
+H_3C NH
 O
 OH
-H2N
+H_2N
 O
 OH
 OH
@@ -1445,12 +1440,7 @@ P
 AMARANTE JR., O. P . et al. Química Nova, São Paulo, v. 25, n. 3, 2002 (adaptado).
 A partir do texto e dos produtos de degradação 
 apresentados, a estrutura química que representa o 
-glifosato é:","B","O
-OH
-OH
-PHO
-O
-NH",1,NA,NA,NA,NA,"Portuguese","B"
+glifosato é:","B",NA,1,NA,NA,NA,NA,"Portuguese","B"
 "enem_2013_1mil_cn","enem_2013_1mil_cn_1",11792,"ENEM 2013 - CN","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 EXAME NACIONAL DO ENSINO MÉDIO
 A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL.
@@ -1533,10 +1523,10 @@ o ácido aminometilfosfônico (AMPA) e o N-metilglicina
 (sarcosina):
 Glifosato
 Sarcosina AMPA
-H3C NH
+H_3C NH
 O
 OH
-H2N
+H_2N
 O
 OH
 OH
@@ -1544,11 +1534,7 @@ P
 AMARANTE JR., O. P . et al. Química Nova, São Paulo, v. 25, n. 3, 2002 (adaptado).
 A partir do texto e dos produtos de degradação 
 apresentados, a estrutura química que representa o 
-glifosato é:","B","HO
-O NH2 O
-OH
-OH
-P",0,NA,NA,NA,NA,"Portuguese","C"
+glifosato é:","B",NA,0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2013_1mil_cn","enem_2013_1mil_cn_1",11792,"ENEM 2013 - CN","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 EXAME NACIONAL DO ENSINO MÉDIO
 A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL.
@@ -1631,10 +1617,10 @@ o ácido aminometilfosfônico (AMPA) e o N-metilglicina
 (sarcosina):
 Glifosato
 Sarcosina AMPA
-H3C NH
+H_3C NH
 O
 OH
-H2N
+H_2N
 O
 OH
 OH
@@ -1642,12 +1628,7 @@ P
 AMARANTE JR., O. P . et al. Química Nova, São Paulo, v. 25, n. 3, 2002 (adaptado).
 A partir do texto e dos produtos de degradação 
 apresentados, a estrutura química que representa o 
-glifosato é:","B","O
-OH
-OH
-PH2N
-O
-O",0,NA,NA,NA,NA,"Portuguese","D"
+glifosato é:","B",NA,0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2013_1mil_cn","enem_2013_1mil_cn_1",11792,"ENEM 2013 - CN","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 EXAME NACIONAL DO ENSINO MÉDIO
 A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL.
@@ -1730,10 +1711,10 @@ o ácido aminometilfosfônico (AMPA) e o N-metilglicina
 (sarcosina):
 Glifosato
 Sarcosina AMPA
-H3C NH
+H_3C NH
 O
 OH
-H2N
+H_2N
 O
 OH
 OH
@@ -1741,12 +1722,7 @@ P
 AMARANTE JR., O. P . et al. Química Nova, São Paulo, v. 25, n. 3, 2002 (adaptado).
 A partir do texto e dos produtos de degradação 
 apresentados, a estrutura química que representa o 
-glifosato é:","B","O
-OH
-OH
-POH2N
-O
-O",0,NA,NA,NA,NA,"Portuguese","E"
+glifosato é:","B",NA,0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2013_1mil_cn","enem_2013_1mil_cn_1",11817,"ENEM 2013 - CN","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 EXAME NACIONAL DO ENSINO MÉDIO
 A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL.
@@ -1829,7 +1805,7 @@ resistência com a temperatura é conhecida.
 +
 10 V
 470 Ω 470 Ω
-RS = 100 Ω 120 Ω
+R_S = 100 Ω 120 Ω
 Voltímetro
 Para um valor de temperatura em que R S = 100 Ω, a 
 leitura apresentada pelo voltímetro será de","D","+ 6,2 V.",0,NA,NA,NA,NA,"Portuguese","A"
@@ -1915,7 +1891,7 @@ resistência com a temperatura é conhecida.
 +
 10 V
 470 Ω 470 Ω
-RS = 100 Ω 120 Ω
+R_S = 100 Ω 120 Ω
 Voltímetro
 Para um valor de temperatura em que R S = 100 Ω, a 
 leitura apresentada pelo voltímetro será de","D","+ 1,7 V.",0,NA,NA,NA,NA,"Portuguese","B"
@@ -2001,7 +1977,7 @@ resistência com a temperatura é conhecida.
 +
 10 V
 470 Ω 470 Ω
-RS = 100 Ω 120 Ω
+R_S = 100 Ω 120 Ω
 Voltímetro
 Para um valor de temperatura em que R S = 100 Ω, a 
 leitura apresentada pelo voltímetro será de","D","+ 0,3 V.",0,NA,NA,NA,NA,"Portuguese","C"
@@ -2087,7 +2063,7 @@ resistência com a temperatura é conhecida.
 +
 10 V
 470 Ω 470 Ω
-RS = 100 Ω 120 Ω
+R_S = 100 Ω 120 Ω
 Voltímetro
 Para um valor de temperatura em que R S = 100 Ω, a 
 leitura apresentada pelo voltímetro será de","D","– 0,3 V.",1,NA,NA,NA,NA,"Portuguese","D"
@@ -2173,7 +2149,7 @@ resistência com a temperatura é conhecida.
 +
 10 V
 470 Ω 470 Ω
-RS = 100 Ω 120 Ω
+R_S = 100 Ω 120 Ω
 Voltímetro
 Para um valor de temperatura em que R S = 100 Ω, a 
 leitura apresentada pelo voltímetro será de","D","– 6,2 V.",0,NA,NA,NA,NA,"Portuguese","E"
@@ -4064,7 +4040,7 @@ g. se ausentar da sala de provas levando consigo o
 CADERNO DE QUESTÕES antes do prazo estabelecido 
 e/ou o CARTÃO-RESPOSTA a qualquer tempo;
 h. não cumprir com o disposto no edital do Exame.",NA,"Sabe-se que o aumento da concentração de gases como 
-CO2, CH4 e N2O na atmosfera é um dos fatores responsáveis 
+CO_2, CH_4 e N_2O na atmosfera é um dos fatores responsáveis 
 pelo agravamento do efeito estufa. A agricultura é uma das 
 atividades humanas que pode contribuir tanto para a emissão 
 quanto para o sequestro desses gases, dependendo do 
@@ -4145,7 +4121,7 @@ g. se ausentar da sala de provas levando consigo o
 CADERNO DE QUESTÕES antes do prazo estabelecido 
 e/ou o CARTÃO-RESPOSTA a qualquer tempo;
 h. não cumprir com o disposto no edital do Exame.",NA,"Sabe-se que o aumento da concentração de gases como 
-CO2, CH4 e N2O na atmosfera é um dos fatores responsáveis 
+CO_2, CH_4 e N_2O na atmosfera é um dos fatores responsáveis 
 pelo agravamento do efeito estufa. A agricultura é uma das 
 atividades humanas que pode contribuir tanto para a emissão 
 quanto para o sequestro desses gases, dependendo do 
@@ -4153,7 +4129,7 @@ manejo da matéria orgânica do solo.
 ROSA, A. H.; COELHO, J. C. R. Cadernos Temáticos de Química Nova na Escola,
 São Paulo, n. 5, nov. 2003 (adaptado).
 De que maneira as práticas agrícolas podem ajudar a 
-minimizar o agravamento do efeito estufa?","C","Liberando o CO2 presente no solo.",0,NA,NA,NA,NA,"Portuguese","B"
+minimizar o agravamento do efeito estufa?","C","Liberando o CO_2 presente no solo.",0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2013_1mil_cn","enem_2013_1mil_cn_1",13976,"ENEM 2013 - CN","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 EXAME NACIONAL DO ENSINO MÉDIO
 A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL.
@@ -4226,7 +4202,7 @@ g. se ausentar da sala de provas levando consigo o
 CADERNO DE QUESTÕES antes do prazo estabelecido 
 e/ou o CARTÃO-RESPOSTA a qualquer tempo;
 h. não cumprir com o disposto no edital do Exame.",NA,"Sabe-se que o aumento da concentração de gases como 
-CO2, CH4 e N2O na atmosfera é um dos fatores responsáveis 
+CO_2, CH_4 e N_2O na atmosfera é um dos fatores responsáveis 
 pelo agravamento do efeito estufa. A agricultura é uma das 
 atividades humanas que pode contribuir tanto para a emissão 
 quanto para o sequestro desses gases, dependendo do 
@@ -4307,7 +4283,7 @@ g. se ausentar da sala de provas levando consigo o
 CADERNO DE QUESTÕES antes do prazo estabelecido 
 e/ou o CARTÃO-RESPOSTA a qualquer tempo;
 h. não cumprir com o disposto no edital do Exame.",NA,"Sabe-se que o aumento da concentração de gases como 
-CO2, CH4 e N2O na atmosfera é um dos fatores responsáveis 
+CO_2, CH_4 e N_2O na atmosfera é um dos fatores responsáveis 
 pelo agravamento do efeito estufa. A agricultura é uma das 
 atividades humanas que pode contribuir tanto para a emissão 
 quanto para o sequestro desses gases, dependendo do 
@@ -4388,7 +4364,7 @@ g. se ausentar da sala de provas levando consigo o
 CADERNO DE QUESTÕES antes do prazo estabelecido 
 e/ou o CARTÃO-RESPOSTA a qualquer tempo;
 h. não cumprir com o disposto no edital do Exame.",NA,"Sabe-se que o aumento da concentração de gases como 
-CO2, CH4 e N2O na atmosfera é um dos fatores responsáveis 
+CO_2, CH_4 e N_2O na atmosfera é um dos fatores responsáveis 
 pelo agravamento do efeito estufa. A agricultura é uma das 
 atividades humanas que pode contribuir tanto para a emissão 
 quanto para o sequestro desses gases, dependendo do 
@@ -5721,7 +5697,7 @@ uma doença que atinge os ossos. Ela se caracteriza pela
 diminuição substancial de massa óssea, tornando os 
 ossos frágeis e mais suscetíveis a fraturas.
 Disponível em: www.anvisa.gov.br. Acesso em: 1 ago. 2012 (adaptado).
-Considerando-se o valor de 6 × 1023 mol–1 para a constante 
+Considerando-se o valor de 6 × 1023 mol^–1 para a constante 
 de Avogadro e a massa molar do cálcio igual a 40 g/mol, 
 qual a quantidade mínima diária de átomos de cálcio a ser 
 ingerida para que uma pessoa supra suas necessidades?","B","7,5 × 1021",0,NA,NA,NA,NA,"Portuguese","A"
@@ -5804,7 +5780,7 @@ uma doença que atinge os ossos. Ela se caracteriza pela
 diminuição substancial de massa óssea, tornando os 
 ossos frágeis e mais suscetíveis a fraturas.
 Disponível em: www.anvisa.gov.br. Acesso em: 1 ago. 2012 (adaptado).
-Considerando-se o valor de 6 × 1023 mol–1 para a constante 
+Considerando-se o valor de 6 × 1023 mol^–1 para a constante 
 de Avogadro e a massa molar do cálcio igual a 40 g/mol, 
 qual a quantidade mínima diária de átomos de cálcio a ser 
 ingerida para que uma pessoa supra suas necessidades?","B","1,5 × 1022",1,NA,NA,NA,NA,"Portuguese","B"
@@ -5887,7 +5863,7 @@ uma doença que atinge os ossos. Ela se caracteriza pela
 diminuição substancial de massa óssea, tornando os 
 ossos frágeis e mais suscetíveis a fraturas.
 Disponível em: www.anvisa.gov.br. Acesso em: 1 ago. 2012 (adaptado).
-Considerando-se o valor de 6 × 1023 mol–1 para a constante 
+Considerando-se o valor de 6 × 1023 mol^–1 para a constante 
 de Avogadro e a massa molar do cálcio igual a 40 g/mol, 
 qual a quantidade mínima diária de átomos de cálcio a ser 
 ingerida para que uma pessoa supra suas necessidades?","B","7,5 × 1023",0,NA,NA,NA,NA,"Portuguese","C"
@@ -5970,7 +5946,7 @@ uma doença que atinge os ossos. Ela se caracteriza pela
 diminuição substancial de massa óssea, tornando os 
 ossos frágeis e mais suscetíveis a fraturas.
 Disponível em: www.anvisa.gov.br. Acesso em: 1 ago. 2012 (adaptado).
-Considerando-se o valor de 6 × 1023 mol–1 para a constante 
+Considerando-se o valor de 6 × 1023 mol^–1 para a constante 
 de Avogadro e a massa molar do cálcio igual a 40 g/mol, 
 qual a quantidade mínima diária de átomos de cálcio a ser 
 ingerida para que uma pessoa supra suas necessidades?","B","1,5 × 1025",0,NA,NA,NA,NA,"Portuguese","D"
@@ -6053,7 +6029,7 @@ uma doença que atinge os ossos. Ela se caracteriza pela
 diminuição substancial de massa óssea, tornando os 
 ossos frágeis e mais suscetíveis a fraturas.
 Disponível em: www.anvisa.gov.br. Acesso em: 1 ago. 2012 (adaptado).
-Considerando-se o valor de 6 × 1023 mol–1 para a constante 
+Considerando-se o valor de 6 × 1023 mol^–1 para a constante 
 de Avogadro e a massa molar do cálcio igual a 40 g/mol, 
 qual a quantidade mínima diária de átomos de cálcio a ser 
 ingerida para que uma pessoa supra suas necessidades?","B","4,8 × 1025",0,NA,NA,NA,NA,"Portuguese","E"
@@ -7124,8 +7100,8 @@ Esse método consiste na dissolução do gás cloro
 numa solução sob pressão e sua aplicação na água a 
 ser desinfectada. As equações das reações químicas 
 envolvidas são:
-Cl2 (g) + 2 H2O (l)  HClO (aq) + H3O+ (aq) + Cl− (aq)
-HClO (aq) + H2O (l)  H3O+ (aq) + ClO− (aq)        pKa = − log Ka = 7,53
+Cl_2 (g) + 2 H_2O (l)  HClO (aq) + H_3O^+ (aq) + Cl− (aq)
+HClO (aq) + H_2O (l)  H3O+ (aq) + ClO^− (aq)        pKa = − log K_a = 7,53
 A ação desinfetante é controlada pelo ácido 
 hipocloroso, que possui um potencial de desinfecção 
 cerca de 80 vezes superior ao ânion hipoclorito. O pH do 
@@ -7210,8 +7186,8 @@ Esse método consiste na dissolução do gás cloro
 numa solução sob pressão e sua aplicação na água a 
 ser desinfectada. As equações das reações químicas 
 envolvidas são:
-Cl2 (g) + 2 H2O (l)  HClO (aq) + H3O+ (aq) + Cl− (aq)
-HClO (aq) + H2O (l)  H3O+ (aq) + ClO− (aq)        pKa = − log Ka = 7,53
+Cl_2 (g) + 2 H_2O (l)  HClO (aq) + H_3O^+ (aq) + Cl− (aq)
+HClO (aq) + H_2O (l)  H3O+ (aq) + ClO^− (aq)        pKa = − log K_a = 7,53
 A ação desinfetante é controlada pelo ácido 
 hipocloroso, que possui um potencial de desinfecção 
 cerca de 80 vezes superior ao ânion hipoclorito. O pH do 
@@ -7296,8 +7272,8 @@ Esse método consiste na dissolução do gás cloro
 numa solução sob pressão e sua aplicação na água a 
 ser desinfectada. As equações das reações químicas 
 envolvidas são:
-Cl2 (g) + 2 H2O (l)  HClO (aq) + H3O+ (aq) + Cl− (aq)
-HClO (aq) + H2O (l)  H3O+ (aq) + ClO− (aq)        pKa = − log Ka = 7,53
+Cl_2 (g) + 2 H_2O (l)  HClO (aq) + H_3O^+ (aq) + Cl− (aq)
+HClO (aq) + H_2O (l)  H3O+ (aq) + ClO^− (aq)        pKa = − log K_a = 7,53
 A ação desinfetante é controlada pelo ácido 
 hipocloroso, que possui um potencial de desinfecção 
 cerca de 80 vezes superior ao ânion hipoclorito. O pH do 
@@ -7382,8 +7358,8 @@ Esse método consiste na dissolução do gás cloro
 numa solução sob pressão e sua aplicação na água a 
 ser desinfectada. As equações das reações químicas 
 envolvidas são:
-Cl2 (g) + 2 H2O (l)  HClO (aq) + H3O+ (aq) + Cl− (aq)
-HClO (aq) + H2O (l)  H3O+ (aq) + ClO− (aq)        pKa = − log Ka = 7,53
+Cl_2 (g) + 2 H_2O (l)  HClO (aq) + H_3O^+ (aq) + Cl− (aq)
+HClO (aq) + H_2O (l)  H3O+ (aq) + ClO^− (aq)        pKa = − log K_a = 7,53
 A ação desinfetante é controlada pelo ácido 
 hipocloroso, que possui um potencial de desinfecção 
 cerca de 80 vezes superior ao ânion hipoclorito. O pH do 
@@ -7468,8 +7444,8 @@ Esse método consiste na dissolução do gás cloro
 numa solução sob pressão e sua aplicação na água a 
 ser desinfectada. As equações das reações químicas 
 envolvidas são:
-Cl2 (g) + 2 H2O (l)  HClO (aq) + H3O+ (aq) + Cl− (aq)
-HClO (aq) + H2O (l)  H3O+ (aq) + ClO− (aq)        pKa = − log Ka = 7,53
+Cl_2 (g) + 2 H_2O (l)  HClO (aq) + H_3O^+ (aq) + Cl− (aq)
+HClO (aq) + H_2O (l)  H3O+ (aq) + ClO^− (aq)        pKa = − log K_a = 7,53
 A ação desinfetante é controlada pelo ácido 
 hipocloroso, que possui um potencial de desinfecção 
 cerca de 80 vezes superior ao ânion hipoclorito. O pH do 
@@ -8003,8 +7979,7 @@ T
 Dó central Dó maior
 T
 A razão entre as frequências do Dó central e do Dó 
-maior é de:","A","1
-2",1,NA,NA,NA,NA,"Portuguese","A"
+maior é de:","A","1/2",1,NA,NA,NA,NA,"Portuguese","A"
 "enem_2013_1mil_cn","enem_2013_1mil_cn_1",30198,"ENEM 2013 - CN","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 EXAME NACIONAL DO ENSINO MÉDIO
 A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL.
@@ -8250,8 +8225,7 @@ T
 Dó central Dó maior
 T
 A razão entre as frequências do Dó central e do Dó 
-maior é de:","A","1
-4",0,NA,NA,NA,NA,"Portuguese","D"
+maior é de:","A","1/4",0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2013_1mil_cn","enem_2013_1mil_cn_1",30198,"ENEM 2013 - CN","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 EXAME NACIONAL DO ENSINO MÉDIO
 A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL.
@@ -8821,11 +8795,9 @@ g. se ausentar da sala de provas levando consigo o
 CADERNO DE QUESTÕES antes do prazo estabelecido 
 e/ou o CARTÃO-RESPOSTA a qualquer tempo;
 h. não cumprir com o disposto no edital do Exame.",NA,"Em um dia sem vento, ao saltar de um avião, um paraquedista cai verticalmente até atingir a velocidade limite. No instante 
-em que o paraquedas é aberto (instante TA), ocorre a diminuição de sua velocidade de queda. Algum tempo após a abertura 
+em que o paraquedas é aberto (instante T_A), ocorre a diminuição de sua velocidade de queda. Algum tempo após a abertura 
 do paraquedas, ele passa a ter velocidade de queda constante, que possibilita sua aterrissagem em segurança. 
-Que gráfico representa a força resultante sobre o paraquedista, durante o seu movimento de queda?","B","Força 
-resultante
-Tempo0 TA",0,NA,NA,NA,NA,"Portuguese","A"
+Que gráfico representa a força resultante sobre o paraquedista, durante o seu movimento de queda?","B",NA,0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2013_1mil_cn","enem_2013_1mil_cn_1",33532,"ENEM 2013 - CN","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 EXAME NACIONAL DO ENSINO MÉDIO
 A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL.
@@ -8898,11 +8870,9 @@ g. se ausentar da sala de provas levando consigo o
 CADERNO DE QUESTÕES antes do prazo estabelecido 
 e/ou o CARTÃO-RESPOSTA a qualquer tempo;
 h. não cumprir com o disposto no edital do Exame.",NA,"Em um dia sem vento, ao saltar de um avião, um paraquedista cai verticalmente até atingir a velocidade limite. No instante 
-em que o paraquedas é aberto (instante TA), ocorre a diminuição de sua velocidade de queda. Algum tempo após a abertura 
+em que o paraquedas é aberto (instante T_A), ocorre a diminuição de sua velocidade de queda. Algum tempo após a abertura 
 do paraquedas, ele passa a ter velocidade de queda constante, que possibilita sua aterrissagem em segurança. 
-Que gráfico representa a força resultante sobre o paraquedista, durante o seu movimento de queda?","B","Força 
-resultante
-Tempo0 TA",1,NA,NA,NA,NA,"Portuguese","B"
+Que gráfico representa a força resultante sobre o paraquedista, durante o seu movimento de queda?","B",NA,1,NA,NA,NA,NA,"Portuguese","B"
 "enem_2013_1mil_cn","enem_2013_1mil_cn_1",33532,"ENEM 2013 - CN","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 EXAME NACIONAL DO ENSINO MÉDIO
 A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL.
@@ -8975,11 +8945,9 @@ g. se ausentar da sala de provas levando consigo o
 CADERNO DE QUESTÕES antes do prazo estabelecido 
 e/ou o CARTÃO-RESPOSTA a qualquer tempo;
 h. não cumprir com o disposto no edital do Exame.",NA,"Em um dia sem vento, ao saltar de um avião, um paraquedista cai verticalmente até atingir a velocidade limite. No instante 
-em que o paraquedas é aberto (instante TA), ocorre a diminuição de sua velocidade de queda. Algum tempo após a abertura 
+em que o paraquedas é aberto (instante T_A), ocorre a diminuição de sua velocidade de queda. Algum tempo após a abertura 
 do paraquedas, ele passa a ter velocidade de queda constante, que possibilita sua aterrissagem em segurança. 
-Que gráfico representa a força resultante sobre o paraquedista, durante o seu movimento de queda?","B","Força 
-resultante
-Tempo0 TA",0,NA,NA,NA,NA,"Portuguese","C"
+Que gráfico representa a força resultante sobre o paraquedista, durante o seu movimento de queda?","B",NA,0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2013_1mil_cn","enem_2013_1mil_cn_1",33532,"ENEM 2013 - CN","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 EXAME NACIONAL DO ENSINO MÉDIO
 A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL.
@@ -9052,11 +9020,9 @@ g. se ausentar da sala de provas levando consigo o
 CADERNO DE QUESTÕES antes do prazo estabelecido 
 e/ou o CARTÃO-RESPOSTA a qualquer tempo;
 h. não cumprir com o disposto no edital do Exame.",NA,"Em um dia sem vento, ao saltar de um avião, um paraquedista cai verticalmente até atingir a velocidade limite. No instante 
-em que o paraquedas é aberto (instante TA), ocorre a diminuição de sua velocidade de queda. Algum tempo após a abertura 
+em que o paraquedas é aberto (instante T_A), ocorre a diminuição de sua velocidade de queda. Algum tempo após a abertura 
 do paraquedas, ele passa a ter velocidade de queda constante, que possibilita sua aterrissagem em segurança. 
-Que gráfico representa a força resultante sobre o paraquedista, durante o seu movimento de queda?","B","Força 
-resultante
-Tempo0 TA",0,NA,NA,NA,NA,"Portuguese","D"
+Que gráfico representa a força resultante sobre o paraquedista, durante o seu movimento de queda?","B",NA,0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2013_1mil_cn","enem_2013_1mil_cn_1",33532,"ENEM 2013 - CN","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 EXAME NACIONAL DO ENSINO MÉDIO
 A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL.
@@ -9129,11 +9095,9 @@ g. se ausentar da sala de provas levando consigo o
 CADERNO DE QUESTÕES antes do prazo estabelecido 
 e/ou o CARTÃO-RESPOSTA a qualquer tempo;
 h. não cumprir com o disposto no edital do Exame.",NA,"Em um dia sem vento, ao saltar de um avião, um paraquedista cai verticalmente até atingir a velocidade limite. No instante 
-em que o paraquedas é aberto (instante TA), ocorre a diminuição de sua velocidade de queda. Algum tempo após a abertura 
+em que o paraquedas é aberto (instante T_A), ocorre a diminuição de sua velocidade de queda. Algum tempo após a abertura 
 do paraquedas, ele passa a ter velocidade de queda constante, que possibilita sua aterrissagem em segurança. 
-Que gráfico representa a força resultante sobre o paraquedista, durante o seu movimento de queda?","B","Força 
-resultante
-Tempo0 TA",0,NA,NA,NA,NA,"Portuguese","E"
+Que gráfico representa a força resultante sobre o paraquedista, durante o seu movimento de queda?","B",NA,0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2013_1mil_cn","enem_2013_1mil_cn_1",36735,"ENEM 2013 - CN","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 EXAME NACIONAL DO ENSINO MÉDIO
 A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL.
@@ -9206,14 +9170,14 @@ g. se ausentar da sala de provas levando consigo o
 CADERNO DE QUESTÕES antes do prazo estabelecido 
 e/ou o CARTÃO-RESPOSTA a qualquer tempo;
 h. não cumprir com o disposto no edital do Exame.",NA,"A formação frequente de grandes volumes de pirita 
-(FeS2) em uma variedade de depósitos minerais favorece 
+(FeS_2) em uma variedade de depósitos minerais favorece 
 a formação de soluções ácidas ferruginosas, conhecidas 
 como “drenagem ácida de minas”. Esse fenômeno tem 
 sido bastante pesquisado pelos cientistas e representa 
 uma grande preocupação entre os impactos da mineração 
 no ambiente. Em contato com oxigênio, a 25 °C, a pirita 
 sofre reação, de acordo com a equação química:
-4 FeS2 (s) + 15 O2 (g) + 2 H2O (l) → 2 Fe2(SO4)3 (aq) + 2 H2SO4 (aq)
+4 FeS_2 (s) + 15 O_2 (g) + 2 H2O (l) → 2 Fe2(SO_4)3 (aq) + 2 H_2SO4 (aq)
 FIGUEIREDO, B. R. Minérios e ambiente. Campinas: Unicamp, 2000.
 Para corrigir os problemas ambientais causados por 
 essa drenagem, a substância mais recomendada a ser 
@@ -9290,14 +9254,14 @@ g. se ausentar da sala de provas levando consigo o
 CADERNO DE QUESTÕES antes do prazo estabelecido 
 e/ou o CARTÃO-RESPOSTA a qualquer tempo;
 h. não cumprir com o disposto no edital do Exame.",NA,"A formação frequente de grandes volumes de pirita 
-(FeS2) em uma variedade de depósitos minerais favorece 
+(FeS_2) em uma variedade de depósitos minerais favorece 
 a formação de soluções ácidas ferruginosas, conhecidas 
 como “drenagem ácida de minas”. Esse fenômeno tem 
 sido bastante pesquisado pelos cientistas e representa 
 uma grande preocupação entre os impactos da mineração 
 no ambiente. Em contato com oxigênio, a 25 °C, a pirita 
 sofre reação, de acordo com a equação química:
-4 FeS2 (s) + 15 O2 (g) + 2 H2O (l) → 2 Fe2(SO4)3 (aq) + 2 H2SO4 (aq)
+4 FeS_2 (s) + 15 O_2 (g) + 2 H2O (l) → 2 Fe2(SO_4)3 (aq) + 2 H_2SO4 (aq)
 FIGUEIREDO, B. R. Minérios e ambiente. Campinas: Unicamp, 2000.
 Para corrigir os problemas ambientais causados por 
 essa drenagem, a substância mais recomendada a ser 
@@ -9374,14 +9338,14 @@ g. se ausentar da sala de provas levando consigo o
 CADERNO DE QUESTÕES antes do prazo estabelecido 
 e/ou o CARTÃO-RESPOSTA a qualquer tempo;
 h. não cumprir com o disposto no edital do Exame.",NA,"A formação frequente de grandes volumes de pirita 
-(FeS2) em uma variedade de depósitos minerais favorece 
+(FeS_2) em uma variedade de depósitos minerais favorece 
 a formação de soluções ácidas ferruginosas, conhecidas 
 como “drenagem ácida de minas”. Esse fenômeno tem 
 sido bastante pesquisado pelos cientistas e representa 
 uma grande preocupação entre os impactos da mineração 
 no ambiente. Em contato com oxigênio, a 25 °C, a pirita 
 sofre reação, de acordo com a equação química:
-4 FeS2 (s) + 15 O2 (g) + 2 H2O (l) → 2 Fe2(SO4)3 (aq) + 2 H2SO4 (aq)
+4 FeS_2 (s) + 15 O_2 (g) + 2 H2O (l) → 2 Fe2(SO_4)3 (aq) + 2 H_2SO4 (aq)
 FIGUEIREDO, B. R. Minérios e ambiente. Campinas: Unicamp, 2000.
 Para corrigir os problemas ambientais causados por 
 essa drenagem, a substância mais recomendada a ser 
@@ -9458,14 +9422,14 @@ g. se ausentar da sala de provas levando consigo o
 CADERNO DE QUESTÕES antes do prazo estabelecido 
 e/ou o CARTÃO-RESPOSTA a qualquer tempo;
 h. não cumprir com o disposto no edital do Exame.",NA,"A formação frequente de grandes volumes de pirita 
-(FeS2) em uma variedade de depósitos minerais favorece 
+(FeS_2) em uma variedade de depósitos minerais favorece 
 a formação de soluções ácidas ferruginosas, conhecidas 
 como “drenagem ácida de minas”. Esse fenômeno tem 
 sido bastante pesquisado pelos cientistas e representa 
 uma grande preocupação entre os impactos da mineração 
 no ambiente. Em contato com oxigênio, a 25 °C, a pirita 
 sofre reação, de acordo com a equação química:
-4 FeS2 (s) + 15 O2 (g) + 2 H2O (l) → 2 Fe2(SO4)3 (aq) + 2 H2SO4 (aq)
+4 FeS_2 (s) + 15 O_2 (g) + 2 H2O (l) → 2 Fe2(SO_4)3 (aq) + 2 H_2SO4 (aq)
 FIGUEIREDO, B. R. Minérios e ambiente. Campinas: Unicamp, 2000.
 Para corrigir os problemas ambientais causados por 
 essa drenagem, a substância mais recomendada a ser 
@@ -9542,14 +9506,14 @@ g. se ausentar da sala de provas levando consigo o
 CADERNO DE QUESTÕES antes do prazo estabelecido 
 e/ou o CARTÃO-RESPOSTA a qualquer tempo;
 h. não cumprir com o disposto no edital do Exame.",NA,"A formação frequente de grandes volumes de pirita 
-(FeS2) em uma variedade de depósitos minerais favorece 
+(FeS_2) em uma variedade de depósitos minerais favorece 
 a formação de soluções ácidas ferruginosas, conhecidas 
 como “drenagem ácida de minas”. Esse fenômeno tem 
 sido bastante pesquisado pelos cientistas e representa 
 uma grande preocupação entre os impactos da mineração 
 no ambiente. Em contato com oxigênio, a 25 °C, a pirita 
 sofre reação, de acordo com a equação química:
-4 FeS2 (s) + 15 O2 (g) + 2 H2O (l) → 2 Fe2(SO4)3 (aq) + 2 H2SO4 (aq)
+4 FeS_2 (s) + 15 O_2 (g) + 2 H2O (l) → 2 Fe2(SO_4)3 (aq) + 2 H_2SO4 (aq)
 FIGUEIREDO, B. R. Minérios e ambiente. Campinas: Unicamp, 2000.
 Para corrigir os problemas ambientais causados por 
 essa drenagem, a substância mais recomendada a ser 
@@ -10445,7 +10409,7 @@ plataforma. Considere um elevador hidráulico cuja área
 da cabeça do pistão seja cinco vezes maior do que a 
 área da tubulação que sai da bomba. Desprezando o 
 atrito e considerando uma aceleração gravitacional de 
-10 m/s2, deseja-se elevar uma pessoa de 65 kg em uma 
+10 m/s^2, deseja-se elevar uma pessoa de 65 kg em uma 
 cadeira de rodas de 15 kg sobre a plataforma de 20 kg.
 Qual deve ser a força exercida pelo motor da bomba 
 sobre o fluido, para que o cadeirante seja elevado com 
@@ -10531,7 +10495,7 @@ plataforma. Considere um elevador hidráulico cuja área
 da cabeça do pistão seja cinco vezes maior do que a 
 área da tubulação que sai da bomba. Desprezando o 
 atrito e considerando uma aceleração gravitacional de 
-10 m/s2, deseja-se elevar uma pessoa de 65 kg em uma 
+10 m/s^2, deseja-se elevar uma pessoa de 65 kg em uma 
 cadeira de rodas de 15 kg sobre a plataforma de 20 kg.
 Qual deve ser a força exercida pelo motor da bomba 
 sobre o fluido, para que o cadeirante seja elevado com 
@@ -10617,7 +10581,7 @@ plataforma. Considere um elevador hidráulico cuja área
 da cabeça do pistão seja cinco vezes maior do que a 
 área da tubulação que sai da bomba. Desprezando o 
 atrito e considerando uma aceleração gravitacional de 
-10 m/s2, deseja-se elevar uma pessoa de 65 kg em uma 
+10 m/s^2, deseja-se elevar uma pessoa de 65 kg em uma 
 cadeira de rodas de 15 kg sobre a plataforma de 20 kg.
 Qual deve ser a força exercida pelo motor da bomba 
 sobre o fluido, para que o cadeirante seja elevado com 
@@ -10703,7 +10667,7 @@ plataforma. Considere um elevador hidráulico cuja área
 da cabeça do pistão seja cinco vezes maior do que a 
 área da tubulação que sai da bomba. Desprezando o 
 atrito e considerando uma aceleração gravitacional de 
-10 m/s2, deseja-se elevar uma pessoa de 65 kg em uma 
+10 m/s^2, deseja-se elevar uma pessoa de 65 kg em uma 
 cadeira de rodas de 15 kg sobre a plataforma de 20 kg.
 Qual deve ser a força exercida pelo motor da bomba 
 sobre o fluido, para que o cadeirante seja elevado com 
@@ -10789,7 +10753,7 @@ plataforma. Considere um elevador hidráulico cuja área
 da cabeça do pistão seja cinco vezes maior do que a 
 área da tubulação que sai da bomba. Desprezando o 
 atrito e considerando uma aceleração gravitacional de 
-10 m/s2, deseja-se elevar uma pessoa de 65 kg em uma 
+10 m/s^2, deseja-se elevar uma pessoa de 65 kg em uma 
 cadeira de rodas de 15 kg sobre a plataforma de 20 kg.
 Qual deve ser a força exercida pelo motor da bomba 
 sobre o fluido, para que o cadeirante seja elevado com 
@@ -14374,14 +14338,14 @@ essencial possui aproximadamente 80%, em massa, da
 substância. Uma de suas aplicações é na fabricação de 
 produtos que atraem abelhas, especialmente do gênero 
 Apis, pois seu cheiro é semelhante a um dos feromônios 
-liberados por elas. Sua fórmula molecular é C10H16O, com 
+liberados por elas. Sua fórmula molecular é C10H_16O, com 
 uma cadeia alifática de oito carbonos, duas insaturações, 
 nos carbonos 2 e 6; e dois grupos substituintes metila, nos 
 carbonos 3 e 7. O citral possui dois isômeros geométricos, 
 sendo o trans o que mais contribui para o forte odor.
 Para que se consiga atrair um maior número de abelhas 
 para uma determinada região, a molécula que deve estar 
-presente em alta concentração no produto a ser utilizado é:","A","O",1,NA,NA,NA,NA,"Portuguese","A"
+presente em alta concentração no produto a ser utilizado é:","A",NA,1,NA,NA,NA,NA,"Portuguese","A"
 "enem_2013_1mil_cn","enem_2013_1mil_cn_1",42570,"ENEM 2013 - CN","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 EXAME NACIONAL DO ENSINO MÉDIO
 A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL.
@@ -14459,14 +14423,14 @@ essencial possui aproximadamente 80%, em massa, da
 substância. Uma de suas aplicações é na fabricação de 
 produtos que atraem abelhas, especialmente do gênero 
 Apis, pois seu cheiro é semelhante a um dos feromônios 
-liberados por elas. Sua fórmula molecular é C10H16O, com 
+liberados por elas. Sua fórmula molecular é C10H_16O, com 
 uma cadeia alifática de oito carbonos, duas insaturações, 
 nos carbonos 2 e 6; e dois grupos substituintes metila, nos 
 carbonos 3 e 7. O citral possui dois isômeros geométricos, 
 sendo o trans o que mais contribui para o forte odor.
 Para que se consiga atrair um maior número de abelhas 
 para uma determinada região, a molécula que deve estar 
-presente em alta concentração no produto a ser utilizado é:","A","O",0,NA,NA,NA,NA,"Portuguese","B"
+presente em alta concentração no produto a ser utilizado é:","A",NA,0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2013_1mil_cn","enem_2013_1mil_cn_1",42570,"ENEM 2013 - CN","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 EXAME NACIONAL DO ENSINO MÉDIO
 A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL.
@@ -14544,14 +14508,14 @@ essencial possui aproximadamente 80%, em massa, da
 substância. Uma de suas aplicações é na fabricação de 
 produtos que atraem abelhas, especialmente do gênero 
 Apis, pois seu cheiro é semelhante a um dos feromônios 
-liberados por elas. Sua fórmula molecular é C10H16O, com 
+liberados por elas. Sua fórmula molecular é C10H_16O, com 
 uma cadeia alifática de oito carbonos, duas insaturações, 
 nos carbonos 2 e 6; e dois grupos substituintes metila, nos 
 carbonos 3 e 7. O citral possui dois isômeros geométricos, 
 sendo o trans o que mais contribui para o forte odor.
 Para que se consiga atrair um maior número de abelhas 
 para uma determinada região, a molécula que deve estar 
-presente em alta concentração no produto a ser utilizado é:","A","O",0,NA,NA,NA,NA,"Portuguese","C"
+presente em alta concentração no produto a ser utilizado é:","A",NA,0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2013_1mil_cn","enem_2013_1mil_cn_1",42570,"ENEM 2013 - CN","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 EXAME NACIONAL DO ENSINO MÉDIO
 A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL.
@@ -14629,14 +14593,14 @@ essencial possui aproximadamente 80%, em massa, da
 substância. Uma de suas aplicações é na fabricação de 
 produtos que atraem abelhas, especialmente do gênero 
 Apis, pois seu cheiro é semelhante a um dos feromônios 
-liberados por elas. Sua fórmula molecular é C10H16O, com 
+liberados por elas. Sua fórmula molecular é C10H_16O, com 
 uma cadeia alifática de oito carbonos, duas insaturações, 
 nos carbonos 2 e 6; e dois grupos substituintes metila, nos 
 carbonos 3 e 7. O citral possui dois isômeros geométricos, 
 sendo o trans o que mais contribui para o forte odor.
 Para que se consiga atrair um maior número de abelhas 
 para uma determinada região, a molécula que deve estar 
-presente em alta concentração no produto a ser utilizado é:","A","O",0,NA,NA,NA,NA,"Portuguese","D"
+presente em alta concentração no produto a ser utilizado é:","A",NA,0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2013_1mil_cn","enem_2013_1mil_cn_1",42570,"ENEM 2013 - CN","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 EXAME NACIONAL DO ENSINO MÉDIO
 A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL.
@@ -14714,14 +14678,14 @@ essencial possui aproximadamente 80%, em massa, da
 substância. Uma de suas aplicações é na fabricação de 
 produtos que atraem abelhas, especialmente do gênero 
 Apis, pois seu cheiro é semelhante a um dos feromônios 
-liberados por elas. Sua fórmula molecular é C10H16O, com 
+liberados por elas. Sua fórmula molecular é C10H_16O, com 
 uma cadeia alifática de oito carbonos, duas insaturações, 
 nos carbonos 2 e 6; e dois grupos substituintes metila, nos 
 carbonos 3 e 7. O citral possui dois isômeros geométricos, 
 sendo o trans o que mais contribui para o forte odor.
 Para que se consiga atrair um maior número de abelhas 
 para uma determinada região, a molécula que deve estar 
-presente em alta concentração no produto a ser utilizado é:","A","O",0,NA,NA,NA,NA,"Portuguese","E"
+presente em alta concentração no produto a ser utilizado é:","A",NA,0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2013_1mil_cn","enem_2013_1mil_cn_1",43164,"ENEM 2013 - CN","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 EXAME NACIONAL DO ENSINO MÉDIO
 A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL.

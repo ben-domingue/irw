@@ -36,7 +36,7 @@ presentes em óleos vegetais e gorduras animais, entre
 outros, e álcoois de baixa massa molar, como o metanol 
 ou etanol, na presença de um catalisador, de acordo com 
 a equação química:
-3 CH3OH
+3 CH_3OH
 CH
 CH
 CH
@@ -96,7 +96,7 @@ presentes em óleos vegetais e gorduras animais, entre
 outros, e álcoois de baixa massa molar, como o metanol 
 ou etanol, na presença de um catalisador, de acordo com 
 a equação química:
-3 CH3OH
+3 CH_3OH
 CH
 CH
 CH
@@ -156,7 +156,7 @@ presentes em óleos vegetais e gorduras animais, entre
 outros, e álcoois de baixa massa molar, como o metanol 
 ou etanol, na presença de um catalisador, de acordo com 
 a equação química:
-3 CH3OH
+3 CH_3OH
 CH
 CH
 CH
@@ -216,7 +216,7 @@ presentes em óleos vegetais e gorduras animais, entre
 outros, e álcoois de baixa massa molar, como o metanol 
 ou etanol, na presença de um catalisador, de acordo com 
 a equação química:
-3 CH3OH
+3 CH_3OH
 CH
 CH
 CH
@@ -276,7 +276,7 @@ presentes em óleos vegetais e gorduras animais, entre
 outros, e álcoois de baixa massa molar, como o metanol 
 ou etanol, na presença de um catalisador, de acordo com 
 a equação química:
-3 CH3OH
+3 CH_3OH
 CH
 CH
 CH
@@ -508,7 +508,7 @@ A ozonólise, reação utilizada na indústria madeireira
 para a produção de papel, é também utilizada em 
 escala de laboratório na síntese de aldeídos e cetonas. 
 As duplas ligações dos alcenos são clivadas pela oxidação 
-com o ozônio (O3), em presença de água e zinco metálico, 
+com o ozônio (O_3), em presença de água e zinco metálico, 
 e a reação produz aldeídos e/ou cetonas, dependendo do 
 grau de substituição da ligação dupla. Ligações duplas 
 dissubstituídas geram cetonas, enquanto as ligações 
@@ -566,7 +566,7 @@ A ozonólise, reação utilizada na indústria madeireira
 para a produção de papel, é também utilizada em 
 escala de laboratório na síntese de aldeídos e cetonas. 
 As duplas ligações dos alcenos são clivadas pela oxidação 
-com o ozônio (O3), em presença de água e zinco metálico, 
+com o ozônio (O_3), em presença de água e zinco metálico, 
 e a reação produz aldeídos e/ou cetonas, dependendo do 
 grau de substituição da ligação dupla. Ligações duplas 
 dissubstituídas geram cetonas, enquanto as ligações 
@@ -624,7 +624,7 @@ A ozonólise, reação utilizada na indústria madeireira
 para a produção de papel, é também utilizada em 
 escala de laboratório na síntese de aldeídos e cetonas. 
 As duplas ligações dos alcenos são clivadas pela oxidação 
-com o ozônio (O3), em presença de água e zinco metálico, 
+com o ozônio (O_3), em presença de água e zinco metálico, 
 e a reação produz aldeídos e/ou cetonas, dependendo do 
 grau de substituição da ligação dupla. Ligações duplas 
 dissubstituídas geram cetonas, enquanto as ligações 
@@ -682,7 +682,7 @@ A ozonólise, reação utilizada na indústria madeireira
 para a produção de papel, é também utilizada em 
 escala de laboratório na síntese de aldeídos e cetonas. 
 As duplas ligações dos alcenos são clivadas pela oxidação 
-com o ozônio (O3), em presença de água e zinco metálico, 
+com o ozônio (O_3), em presença de água e zinco metálico, 
 e a reação produz aldeídos e/ou cetonas, dependendo do 
 grau de substituição da ligação dupla. Ligações duplas 
 dissubstituídas geram cetonas, enquanto as ligações 
@@ -740,7 +740,7 @@ A ozonólise, reação utilizada na indústria madeireira
 para a produção de papel, é também utilizada em 
 escala de laboratório na síntese de aldeídos e cetonas. 
 As duplas ligações dos alcenos são clivadas pela oxidação 
-com o ozônio (O3), em presença de água e zinco metálico, 
+com o ozônio (O_3), em presença de água e zinco metálico, 
 e a reação produz aldeídos e/ou cetonas, dependendo do 
 grau de substituição da ligação dupla. Ligações duplas 
 dissubstituídas geram cetonas, enquanto as ligações 
@@ -1869,9 +1869,9 @@ Descrição do esquema reacional:
 Uma molécula de ácido salicílico (cadeia carbônica que contém um anel ligado no carbono 1 ao grupo COOH, por 
 meio de ligação simples, e ligado no carbono 2 ao grupo hidroxila (OH), também por meio de ligação simples) reage 
 com uma molécula de anidrido acético (cadeia carbônica com oxigênio no centro, ligado por meio de ligação simples 
-a dois grupos C dupla O ligação simples com CH3) em presença de ácido sulfúrico e produz uma molécula de ácido 
+a dois grupos C dupla O ligação simples com CH_3) em presença de ácido sulfúrico e produz uma molécula de ácido 
 acetilsalicílico (cadeia carbônica que contém um anel ligado no carbono 1 ao grupo COOH por meio de ligação 
-simples, e ligado no carbono 2 ao grupo O ligação simples para C dupla O, e ligação simples para CH3 também por 
+simples, e ligado no carbono 2 ao grupo O ligação simples para C dupla O, e ligação simples para CH_3 também por 
 meio de ligação simples) e uma molécula de ácido acético (CH3 ligação simples com o grupo COOH).
 Após a síntese, o AAS é purificado e o rendimento final é de aproximadamente 50 por cento. Devido às suas 
 propriedades farmacológicas (antitérmico, analgésico, anti-inflamatório e antitrombótico), o AAS é utilizado como 
@@ -1915,9 +1915,9 @@ Descrição do esquema reacional:
 Uma molécula de ácido salicílico (cadeia carbônica que contém um anel ligado no carbono 1 ao grupo COOH, por 
 meio de ligação simples, e ligado no carbono 2 ao grupo hidroxila (OH), também por meio de ligação simples) reage 
 com uma molécula de anidrido acético (cadeia carbônica com oxigênio no centro, ligado por meio de ligação simples 
-a dois grupos C dupla O ligação simples com CH3) em presença de ácido sulfúrico e produz uma molécula de ácido 
+a dois grupos C dupla O ligação simples com CH_3) em presença de ácido sulfúrico e produz uma molécula de ácido 
 acetilsalicílico (cadeia carbônica que contém um anel ligado no carbono 1 ao grupo COOH por meio de ligação 
-simples, e ligado no carbono 2 ao grupo O ligação simples para C dupla O, e ligação simples para CH3 também por 
+simples, e ligado no carbono 2 ao grupo O ligação simples para C dupla O, e ligação simples para CH_3 também por 
 meio de ligação simples) e uma molécula de ácido acético (CH3 ligação simples com o grupo COOH).
 Após a síntese, o AAS é purificado e o rendimento final é de aproximadamente 50 por cento. Devido às suas 
 propriedades farmacológicas (antitérmico, analgésico, anti-inflamatório e antitrombótico), o AAS é utilizado como 
@@ -1961,9 +1961,9 @@ Descrição do esquema reacional:
 Uma molécula de ácido salicílico (cadeia carbônica que contém um anel ligado no carbono 1 ao grupo COOH, por 
 meio de ligação simples, e ligado no carbono 2 ao grupo hidroxila (OH), também por meio de ligação simples) reage 
 com uma molécula de anidrido acético (cadeia carbônica com oxigênio no centro, ligado por meio de ligação simples 
-a dois grupos C dupla O ligação simples com CH3) em presença de ácido sulfúrico e produz uma molécula de ácido 
+a dois grupos C dupla O ligação simples com CH_3) em presença de ácido sulfúrico e produz uma molécula de ácido 
 acetilsalicílico (cadeia carbônica que contém um anel ligado no carbono 1 ao grupo COOH por meio de ligação 
-simples, e ligado no carbono 2 ao grupo O ligação simples para C dupla O, e ligação simples para CH3 também por 
+simples, e ligado no carbono 2 ao grupo O ligação simples para C dupla O, e ligação simples para CH_3 também por 
 meio de ligação simples) e uma molécula de ácido acético (CH3 ligação simples com o grupo COOH).
 Após a síntese, o AAS é purificado e o rendimento final é de aproximadamente 50 por cento. Devido às suas 
 propriedades farmacológicas (antitérmico, analgésico, anti-inflamatório e antitrombótico), o AAS é utilizado como 
@@ -2007,9 +2007,9 @@ Descrição do esquema reacional:
 Uma molécula de ácido salicílico (cadeia carbônica que contém um anel ligado no carbono 1 ao grupo COOH, por 
 meio de ligação simples, e ligado no carbono 2 ao grupo hidroxila (OH), também por meio de ligação simples) reage 
 com uma molécula de anidrido acético (cadeia carbônica com oxigênio no centro, ligado por meio de ligação simples 
-a dois grupos C dupla O ligação simples com CH3) em presença de ácido sulfúrico e produz uma molécula de ácido 
+a dois grupos C dupla O ligação simples com CH_3) em presença de ácido sulfúrico e produz uma molécula de ácido 
 acetilsalicílico (cadeia carbônica que contém um anel ligado no carbono 1 ao grupo COOH por meio de ligação 
-simples, e ligado no carbono 2 ao grupo O ligação simples para C dupla O, e ligação simples para CH3 também por 
+simples, e ligado no carbono 2 ao grupo O ligação simples para C dupla O, e ligação simples para CH_3 também por 
 meio de ligação simples) e uma molécula de ácido acético (CH3 ligação simples com o grupo COOH).
 Após a síntese, o AAS é purificado e o rendimento final é de aproximadamente 50 por cento. Devido às suas 
 propriedades farmacológicas (antitérmico, analgésico, anti-inflamatório e antitrombótico), o AAS é utilizado como 
@@ -2053,9 +2053,9 @@ Descrição do esquema reacional:
 Uma molécula de ácido salicílico (cadeia carbônica que contém um anel ligado no carbono 1 ao grupo COOH, por 
 meio de ligação simples, e ligado no carbono 2 ao grupo hidroxila (OH), também por meio de ligação simples) reage 
 com uma molécula de anidrido acético (cadeia carbônica com oxigênio no centro, ligado por meio de ligação simples 
-a dois grupos C dupla O ligação simples com CH3) em presença de ácido sulfúrico e produz uma molécula de ácido 
+a dois grupos C dupla O ligação simples com CH_3) em presença de ácido sulfúrico e produz uma molécula de ácido 
 acetilsalicílico (cadeia carbônica que contém um anel ligado no carbono 1 ao grupo COOH por meio de ligação 
-simples, e ligado no carbono 2 ao grupo O ligação simples para C dupla O, e ligação simples para CH3 também por 
+simples, e ligado no carbono 2 ao grupo O ligação simples para C dupla O, e ligação simples para CH_3 também por 
 meio de ligação simples) e uma molécula de ácido acético (CH3 ligação simples com o grupo COOH).
 Após a síntese, o AAS é purificado e o rendimento final é de aproximadamente 50 por cento. Devido às suas 
 propriedades farmacológicas (antitérmico, analgésico, anti-inflamatório e antitrombótico), o AAS é utilizado como 
@@ -2916,7 +2916,7 @@ Descrição da figura:
 amianto.
 • A semicélula da esquerda contém um ânodo de carbono (polo positivo da célula eletroquímica) que está ligado 
 ao polo positivo de uma bateria.
-• Essa semicélula é alimentada por uma solução aquosa de NaCl, e ocorre liberação de Cl2 gasoso através de 
+• Essa semicélula é alimentada por uma solução aquosa de NaCl, e ocorre liberação de Cl_2 gasoso através de 
 um orifício em sua parte superior.
 • A semicélula da direita contém um cátodo de carbono (polo negativo da célula eletroquímica) que está ligado 
 ao polo negativo da bateria.
@@ -2962,7 +2962,7 @@ Descrição da figura:
 amianto.
 • A semicélula da esquerda contém um ânodo de carbono (polo positivo da célula eletroquímica) que está ligado 
 ao polo positivo de uma bateria.
-• Essa semicélula é alimentada por uma solução aquosa de NaCl, e ocorre liberação de Cl2 gasoso através de 
+• Essa semicélula é alimentada por uma solução aquosa de NaCl, e ocorre liberação de Cl_2 gasoso através de 
 um orifício em sua parte superior.
 • A semicélula da direita contém um cátodo de carbono (polo negativo da célula eletroquímica) que está ligado 
 ao polo negativo da bateria.
@@ -3008,7 +3008,7 @@ Descrição da figura:
 amianto.
 • A semicélula da esquerda contém um ânodo de carbono (polo positivo da célula eletroquímica) que está ligado 
 ao polo positivo de uma bateria.
-• Essa semicélula é alimentada por uma solução aquosa de NaCl, e ocorre liberação de Cl2 gasoso através de 
+• Essa semicélula é alimentada por uma solução aquosa de NaCl, e ocorre liberação de Cl_2 gasoso através de 
 um orifício em sua parte superior.
 • A semicélula da direita contém um cátodo de carbono (polo negativo da célula eletroquímica) que está ligado 
 ao polo negativo da bateria.
@@ -3054,7 +3054,7 @@ Descrição da figura:
 amianto.
 • A semicélula da esquerda contém um ânodo de carbono (polo positivo da célula eletroquímica) que está ligado 
 ao polo positivo de uma bateria.
-• Essa semicélula é alimentada por uma solução aquosa de NaCl, e ocorre liberação de Cl2 gasoso através de 
+• Essa semicélula é alimentada por uma solução aquosa de NaCl, e ocorre liberação de Cl_2 gasoso através de 
 um orifício em sua parte superior.
 • A semicélula da direita contém um cátodo de carbono (polo negativo da célula eletroquímica) que está ligado 
 ao polo negativo da bateria.
@@ -3100,7 +3100,7 @@ Descrição da figura:
 amianto.
 • A semicélula da esquerda contém um ânodo de carbono (polo positivo da célula eletroquímica) que está ligado 
 ao polo positivo de uma bateria.
-• Essa semicélula é alimentada por uma solução aquosa de NaCl, e ocorre liberação de Cl2 gasoso através de 
+• Essa semicélula é alimentada por uma solução aquosa de NaCl, e ocorre liberação de Cl_2 gasoso através de 
 um orifício em sua parte superior.
 • A semicélula da direita contém um cátodo de carbono (polo negativo da célula eletroquímica) que está ligado 
 ao polo negativo da bateria.
@@ -4200,7 +4200,7 @@ dando origem a sais de amônio (NH4X), de acordo com a
 equação química genérica:
 Descrição da equação química genérica:
 Os reagentes HX (gasoso) + NH 3 (gasoso) formam o 
-produto NH4X (sólido).
+produto NH_4X (sólido).
 A fixação de moléculas de vapor de água pelos núcleos 
 de condensação ocorre por","D","ligações iônicas.",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2017_1mil_cn","enem_2017_1mil_cn_1",56286,"ENEM 2017 - CN","PROVA DE CIÊNCIAS DA NATUREZA E SUAS TECNOLOGIAS
@@ -4245,7 +4245,7 @@ dando origem a sais de amônio (NH4X), de acordo com a
 equação química genérica:
 Descrição da equação química genérica:
 Os reagentes HX (gasoso) + NH 3 (gasoso) formam o 
-produto NH4X (sólido).
+produto NH_4X (sólido).
 A fixação de moléculas de vapor de água pelos núcleos 
 de condensação ocorre por","D","interações dipolo-dipolo.",0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2017_1mil_cn","enem_2017_1mil_cn_1",56286,"ENEM 2017 - CN","PROVA DE CIÊNCIAS DA NATUREZA E SUAS TECNOLOGIAS
@@ -4290,7 +4290,7 @@ dando origem a sais de amônio (NH4X), de acordo com a
 equação química genérica:
 Descrição da equação química genérica:
 Os reagentes HX (gasoso) + NH 3 (gasoso) formam o 
-produto NH4X (sólido).
+produto NH_4X (sólido).
 A fixação de moléculas de vapor de água pelos núcleos 
 de condensação ocorre por","D","interações dipolo-dipolo induzido.",0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2017_1mil_cn","enem_2017_1mil_cn_1",56286,"ENEM 2017 - CN","PROVA DE CIÊNCIAS DA NATUREZA E SUAS TECNOLOGIAS
@@ -4335,7 +4335,7 @@ dando origem a sais de amônio (NH4X), de acordo com a
 equação química genérica:
 Descrição da equação química genérica:
 Os reagentes HX (gasoso) + NH 3 (gasoso) formam o 
-produto NH4X (sólido).
+produto NH_4X (sólido).
 A fixação de moléculas de vapor de água pelos núcleos 
 de condensação ocorre por","D","interações íon-dipolo.",1,NA,NA,NA,NA,"Portuguese","D"
 "enem_2017_1mil_cn","enem_2017_1mil_cn_1",56286,"ENEM 2017 - CN","PROVA DE CIÊNCIAS DA NATUREZA E SUAS TECNOLOGIAS
@@ -4380,7 +4380,7 @@ dando origem a sais de amônio (NH4X), de acordo com a
 equação química genérica:
 Descrição da equação química genérica:
 Os reagentes HX (gasoso) + NH 3 (gasoso) formam o 
-produto NH4X (sólido).
+produto NH_4X (sólido).
 A fixação de moléculas de vapor de água pelos núcleos 
 de condensação ocorre por","D","ligações covalentes.",0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2017_1mil_cn","enem_2017_1mil_cn_1",59829,"ENEM 2017 - CN","PROVA DE CIÊNCIAS DA NATUREZA E SUAS TECNOLOGIAS
@@ -4424,10 +4424,7 @@ pelos pontos de máxima e de mínima alturas, h máx e hmín,
 respectivamente.
 Esquematicamente, o esboço do gráfico da energia 
 cinética da criança em função de sua posição vertical na 
-situação descrita é:","C","Ec
-0
-h
-hmín hmáx",0,NA,NA,NA,NA,"Portuguese","A"
+situação descrita é:","C",NA,0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2017_1mil_cn","enem_2017_1mil_cn_1",59829,"ENEM 2017 - CN","PROVA DE CIÊNCIAS DA NATUREZA E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
 EXAME NACIONAL DO ENSINO MÉDIO
@@ -4469,10 +4466,7 @@ pelos pontos de máxima e de mínima alturas, h máx e hmín,
 respectivamente.
 Esquematicamente, o esboço do gráfico da energia 
 cinética da criança em função de sua posição vertical na 
-situação descrita é:","C","hmín hmáx
-Ec
-0
-h",0,NA,NA,NA,NA,"Portuguese","B"
+situação descrita é:","C",NA,0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2017_1mil_cn","enem_2017_1mil_cn_1",59829,"ENEM 2017 - CN","PROVA DE CIÊNCIAS DA NATUREZA E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
 EXAME NACIONAL DO ENSINO MÉDIO
@@ -4514,10 +4508,7 @@ pelos pontos de máxima e de mínima alturas, h máx e hmín,
 respectivamente.
 Esquematicamente, o esboço do gráfico da energia 
 cinética da criança em função de sua posição vertical na 
-situação descrita é:","C","0
-h
-hmín hmáx
-Ec",1,NA,NA,NA,NA,"Portuguese","C"
+situação descrita é:","C",NA,1,NA,NA,NA,NA,"Portuguese","C"
 "enem_2017_1mil_cn","enem_2017_1mil_cn_1",59829,"ENEM 2017 - CN","PROVA DE CIÊNCIAS DA NATUREZA E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
 EXAME NACIONAL DO ENSINO MÉDIO
@@ -4559,10 +4550,7 @@ pelos pontos de máxima e de mínima alturas, h máx e hmín,
 respectivamente.
 Esquematicamente, o esboço do gráfico da energia 
 cinética da criança em função de sua posição vertical na 
-situação descrita é:","C","hmín hmáx
-Ec
-0
-h",0,NA,NA,NA,NA,"Portuguese","D"
+situação descrita é:","C",NA,0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2017_1mil_cn","enem_2017_1mil_cn_1",59829,"ENEM 2017 - CN","PROVA DE CIÊNCIAS DA NATUREZA E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
 EXAME NACIONAL DO ENSINO MÉDIO
@@ -4604,10 +4592,7 @@ pelos pontos de máxima e de mínima alturas, h máx e hmín,
 respectivamente.
 Esquematicamente, o esboço do gráfico da energia 
 cinética da criança em função de sua posição vertical na 
-situação descrita é:","C","hmín hmáx
-Ec
-0
-h",0,NA,NA,NA,NA,"Portuguese","E"
+situação descrita é:","C",NA,0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2017_1mil_cn","enem_2017_1mil_cn_1",59980,"ENEM 2017 - CN","PROVA DE CIÊNCIAS DA NATUREZA E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
 EXAME NACIONAL DO ENSINO MÉDIO
@@ -6324,7 +6309,7 @@ com sua caligrafia usual, considerando as letras maiúsculas e minúsculas, a se
 Diversos produtos naturais podem ser obtidos de 
 plantas por processo de extração. O lapachol é da classe 
 das naftoquinonas. Sua estrutura apresenta uma hidroxila 
-enólica (pKa = 6,0) que permite que este composto seja 
+enólica (pK_a = 6,0) que permite que este composto seja 
 isolado da serragem dos ipês por extração com solução 
 adequada, seguida de filtração simples. Considere que 
 pKa igual a menos log de K a, em que K a é a constante 
@@ -6377,7 +6362,7 @@ com sua caligrafia usual, considerando as letras maiúsculas e minúsculas, a se
 Diversos produtos naturais podem ser obtidos de 
 plantas por processo de extração. O lapachol é da classe 
 das naftoquinonas. Sua estrutura apresenta uma hidroxila 
-enólica (pKa = 6,0) que permite que este composto seja 
+enólica (pK_a = 6,0) que permite que este composto seja 
 isolado da serragem dos ipês por extração com solução 
 adequada, seguida de filtração simples. Considere que 
 pKa igual a menos log de K a, em que K a é a constante 
@@ -6431,7 +6416,7 @@ com sua caligrafia usual, considerando as letras maiúsculas e minúsculas, a se
 Diversos produtos naturais podem ser obtidos de 
 plantas por processo de extração. O lapachol é da classe 
 das naftoquinonas. Sua estrutura apresenta uma hidroxila 
-enólica (pKa = 6,0) que permite que este composto seja 
+enólica (pK_a = 6,0) que permite que este composto seja 
 isolado da serragem dos ipês por extração com solução 
 adequada, seguida de filtração simples. Considere que 
 pKa igual a menos log de K a, em que K a é a constante 
@@ -6485,7 +6470,7 @@ com sua caligrafia usual, considerando as letras maiúsculas e minúsculas, a se
 Diversos produtos naturais podem ser obtidos de 
 plantas por processo de extração. O lapachol é da classe 
 das naftoquinonas. Sua estrutura apresenta uma hidroxila 
-enólica (pKa = 6,0) que permite que este composto seja 
+enólica (pK_a = 6,0) que permite que este composto seja 
 isolado da serragem dos ipês por extração com solução 
 adequada, seguida de filtração simples. Considere que 
 pKa igual a menos log de K a, em que K a é a constante 
@@ -6539,7 +6524,7 @@ com sua caligrafia usual, considerando as letras maiúsculas e minúsculas, a se
 Diversos produtos naturais podem ser obtidos de 
 plantas por processo de extração. O lapachol é da classe 
 das naftoquinonas. Sua estrutura apresenta uma hidroxila 
-enólica (pKa = 6,0) que permite que este composto seja 
+enólica (pK_a = 6,0) que permite que este composto seja 
 isolado da serragem dos ipês por extração com solução 
 adequada, seguida de filtração simples. Considere que 
 pKa igual a menos log de K a, em que K a é a constante 
@@ -8299,20 +8284,12 @@ de lâmpadas energeticamente mais eficientes e mais duráveis do que as incandes
 experimento de laboratório, pretende-se associar duas pilhas em série para acender um LED azul que requer 3,6 volts 
 para o seu funcionamento. Considere as semirreações de redução e seus respectivos potenciais mostrados no quadro.
 Semirreação de redução E  (V)
-Ce4+ (aq) + e− → Ce3+ (aq) +1,61
-Cr2O7
-2− (aq) + 14 H+ (aq) + 6 e− → 2 Cr3+ (aq) + 7 H2O (l) +1,33
-Ni2+ (aq) + 2 e− → Ni (s) −0,25
-Zn2+ (aq) + 2 e− → Zn (s) −0,76
-Qual associação em série de pilhas fornece diferença de potencial, nas condições-padrão, suficiente para acender o LED azul?","C","LED
-Grafite
-GrafiteKCI KCI
-Zn
-Ce4+ e Ce3+
-Ni2+ Zn2+ Cr2O7
-2− ,
-H+ e Cr3+
-Ni",0,NA,NA,NA,NA,"Portuguese","A"
+Ce^4+ (aq) + e^− → Ce^3+ (aq) +1,61
+Cr_2O7
+2^− (aq) + 14 H^+ (aq) + 6 e^− → 2 Cr^3+ (aq) + 7 H_2O (l) +1,33
+Ni^2+ (aq) + 2 e^− → Ni (s) −0,25
+Zn^2+ (aq) + 2 e^− → Zn (s) −0,76
+Qual associação em série de pilhas fornece diferença de potencial, nas condições-padrão, suficiente para acender o LED azul?","C",NA,0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2017_1mil_cn","enem_2017_1mil_cn_1",82421,"ENEM 2017 - CN","PROVA DE CIÊNCIAS DA NATUREZA E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
 EXAME NACIONAL DO ENSINO MÉDIO
@@ -8347,20 +8324,12 @@ de lâmpadas energeticamente mais eficientes e mais duráveis do que as incandes
 experimento de laboratório, pretende-se associar duas pilhas em série para acender um LED azul que requer 3,6 volts 
 para o seu funcionamento. Considere as semirreações de redução e seus respectivos potenciais mostrados no quadro.
 Semirreação de redução E  (V)
-Ce4+ (aq) + e− → Ce3+ (aq) +1,61
-Cr2O7
-2− (aq) + 14 H+ (aq) + 6 e− → 2 Cr3+ (aq) + 7 H2O (l) +1,33
-Ni2+ (aq) + 2 e− → Ni (s) −0,25
-Zn2+ (aq) + 2 e− → Zn (s) −0,76
-Qual associação em série de pilhas fornece diferença de potencial, nas condições-padrão, suficiente para acender o LED azul?","C","LED
-Grafite
-GrafiteKCI KCI
-Ni
-Ce4+ e Ce3+ Ni2+Zn2+
-Zn
-Cr2O7
-2− ,
-H+ e Cr3+",0,NA,NA,NA,NA,"Portuguese","B"
+Ce^4+ (aq) + e^− → Ce^3+ (aq) +1,61
+Cr_2O7
+2^− (aq) + 14 H^+ (aq) + 6 e^− → 2 Cr^3+ (aq) + 7 H_2O (l) +1,33
+Ni^2+ (aq) + 2 e^− → Ni (s) −0,25
+Zn^2+ (aq) + 2 e^− → Zn (s) −0,76
+Qual associação em série de pilhas fornece diferença de potencial, nas condições-padrão, suficiente para acender o LED azul?","C",NA,0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2017_1mil_cn","enem_2017_1mil_cn_1",82421,"ENEM 2017 - CN","PROVA DE CIÊNCIAS DA NATUREZA E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
 EXAME NACIONAL DO ENSINO MÉDIO
@@ -8395,19 +8364,12 @@ de lâmpadas energeticamente mais eficientes e mais duráveis do que as incandes
 experimento de laboratório, pretende-se associar duas pilhas em série para acender um LED azul que requer 3,6 volts 
 para o seu funcionamento. Considere as semirreações de redução e seus respectivos potenciais mostrados no quadro.
 Semirreação de redução E  (V)
-Ce4+ (aq) + e− → Ce3+ (aq) +1,61
-Cr2O7
-2− (aq) + 14 H+ (aq) + 6 e− → 2 Cr3+ (aq) + 7 H2O (l) +1,33
-Ni2+ (aq) + 2 e− → Ni (s) −0,25
-Zn2+ (aq) + 2 e− → Zn (s) −0,76
-Qual associação em série de pilhas fornece diferença de potencial, nas condições-padrão, suficiente para acender o LED azul?","C","LED
-Grafite Grafite
-KCI KCI Ni
-Ce4+ e Ce3+ Ni2+Zn2+
-Zn
-Cr2O7
-2− ,
-H+ e Cr3+",1,NA,NA,NA,NA,"Portuguese","C"
+Ce^4+ (aq) + e^− → Ce^3+ (aq) +1,61
+Cr_2O7
+2^− (aq) + 14 H^+ (aq) + 6 e^− → 2 Cr^3+ (aq) + 7 H_2O (l) +1,33
+Ni^2+ (aq) + 2 e^− → Ni (s) −0,25
+Zn^2+ (aq) + 2 e^− → Zn (s) −0,76
+Qual associação em série de pilhas fornece diferença de potencial, nas condições-padrão, suficiente para acender o LED azul?","C",NA,1,NA,NA,NA,NA,"Portuguese","C"
 "enem_2017_1mil_cn","enem_2017_1mil_cn_1",82421,"ENEM 2017 - CN","PROVA DE CIÊNCIAS DA NATUREZA E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
 EXAME NACIONAL DO ENSINO MÉDIO
@@ -8442,20 +8404,12 @@ de lâmpadas energeticamente mais eficientes e mais duráveis do que as incandes
 experimento de laboratório, pretende-se associar duas pilhas em série para acender um LED azul que requer 3,6 volts 
 para o seu funcionamento. Considere as semirreações de redução e seus respectivos potenciais mostrados no quadro.
 Semirreação de redução E  (V)
-Ce4+ (aq) + e− → Ce3+ (aq) +1,61
-Cr2O7
-2− (aq) + 14 H+ (aq) + 6 e− → 2 Cr3+ (aq) + 7 H2O (l) +1,33
-Ni2+ (aq) + 2 e− → Ni (s) −0,25
-Zn2+ (aq) + 2 e− → Zn (s) −0,76
-Qual associação em série de pilhas fornece diferença de potencial, nas condições-padrão, suficiente para acender o LED azul?","C","LED
-Grafite Grafite
-KCI KCI
-Ni
-Ce4+ e Ce3+ Ni2+ Zn2+
-Zn
-Cr2O7
-2− ,
-H+ e Cr3+",0,NA,NA,NA,NA,"Portuguese","D"
+Ce^4+ (aq) + e^− → Ce^3+ (aq) +1,61
+Cr_2O7
+2^− (aq) + 14 H^+ (aq) + 6 e^− → 2 Cr^3+ (aq) + 7 H_2O (l) +1,33
+Ni^2+ (aq) + 2 e^− → Ni (s) −0,25
+Zn^2+ (aq) + 2 e^− → Zn (s) −0,76
+Qual associação em série de pilhas fornece diferença de potencial, nas condições-padrão, suficiente para acender o LED azul?","C",NA,0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2017_1mil_cn","enem_2017_1mil_cn_1",82421,"ENEM 2017 - CN","PROVA DE CIÊNCIAS DA NATUREZA E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
 EXAME NACIONAL DO ENSINO MÉDIO
@@ -8490,19 +8444,12 @@ de lâmpadas energeticamente mais eficientes e mais duráveis do que as incandes
 experimento de laboratório, pretende-se associar duas pilhas em série para acender um LED azul que requer 3,6 volts 
 para o seu funcionamento. Considere as semirreações de redução e seus respectivos potenciais mostrados no quadro.
 Semirreação de redução E  (V)
-Ce4+ (aq) + e− → Ce3+ (aq) +1,61
-Cr2O7
-2− (aq) + 14 H+ (aq) + 6 e− → 2 Cr3+ (aq) + 7 H2O (l) +1,33
-Ni2+ (aq) + 2 e− → Ni (s) −0,25
-Zn2+ (aq) + 2 e− → Zn (s) −0,76
-Qual associação em série de pilhas fornece diferença de potencial, nas condições-padrão, suficiente para acender o LED azul?","C","LED
-Grafite Grafite
-KCI KCI Ni
-Ce4+ e Ce3+ Ni2+Zn2+
-Zn
-Cr2O7
-2− ,
-H+ e Cr3+",0,NA,NA,NA,NA,"Portuguese","E"
+Ce^4+ (aq) + e^− → Ce^3+ (aq) +1,61
+Cr_2O7
+2^− (aq) + 14 H^+ (aq) + 6 e^− → 2 Cr^3+ (aq) + 7 H_2O (l) +1,33
+Ni^2+ (aq) + 2 e^− → Ni (s) −0,25
+Zn^2+ (aq) + 2 e^− → Zn (s) −0,76
+Qual associação em série de pilhas fornece diferença de potencial, nas condições-padrão, suficiente para acender o LED azul?","C",NA,0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2017_1mil_cn","enem_2017_1mil_cn_1",83923,"ENEM 2017 - CN","PROVA DE CIÊNCIAS DA NATUREZA E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
 EXAME NACIONAL DO ENSINO MÉDIO
@@ -9707,7 +9654,7 @@ poderá levar seu CADERNO DE QUESTÕES ao deixar em definitivo a sala de prova n
 que antecedem o término das provas.
 ATENÇÃO: transcreva no espaço apropriado do seu CARTÃO-RESPOSTA, 
 com sua caligrafia usual, considerando as letras maiúsculas e minúsculas, a seguinte frase:",NA,"O ferro é encontrado na natureza na forma de seus minérios, tais como a hematita ( alfa-Fe2O3), a magnetita 
-(Fe3O4) e a wustita (FeO). Na siderurgia, o ferro-gusa é obtido pela fusão de minérios de ferro em altos fornos em 
+(Fe_3O4) e a wustita (FeO). Na siderurgia, o ferro-gusa é obtido pela fusão de minérios de ferro em altos fornos em 
 condições adequadas. Uma das etapas nesse processo é a formação de monóxido de carbono. O CO (gasoso) é 
 utilizado para reduzir o FeO (sólido), conforme a equação química:
 Descrição da equação química:
@@ -9715,13 +9662,13 @@ Os reagentes FeO (sólido) + CO (gasoso) formam os produtos Fe (sólido) + CO2 (
 Considere as seguintes equações termoquímicas:
 Descrição das três equações termoquímicas:
 Primeira equação:
-• Os reagentes Fe2O3 (sólido) + 3 CO (gasoso) formam os produtos 2 Fe (sólido) + 3 CO2 (gasoso). 
+• Os reagentes Fe_2O3 (sólido) + 3 CO (gasoso) formam os produtos 2 Fe (sólido) + 3 CO2 (gasoso). 
 • Variação de entalpia igual a −25 quilojoules por mol de Fe2O3.
 Segunda equação:
-• Os reagentes 3 FeO (sólido) + CO2 (gasoso) formam os produtos Fe3O4 (sólido) + CO (gasoso).
+• Os reagentes 3 FeO (sólido) + CO2 (gasoso) formam os produtos Fe3O_4 (sólido) + CO (gasoso).
 • Variação de entalpia igual a −36 quilojoules por mol de CO2.
 Terceira equação:
-• Os reagentes 2 Fe3O4 (sólido) + CO2 (gasoso) formam os produtos 3 Fe2O3 (sólido) + CO (gasoso).
+• Os reagentes 2 Fe_3O4 (sólido) + CO2 (gasoso) formam os produtos 3 Fe_2O3 (sólido) + CO (gasoso).
 • Variação de entalpia igual a +47 quilojoules por mol de CO2.
 O valor mais próximo de variação de entalpia , em quilojoule por mol  de FeO, para a reação indicada do  
 FeO (sólido) com o CO (gasoso) é","B","−14.",0,NA,NA,NA,NA,"Portuguese","A"
@@ -9755,7 +9702,7 @@ poderá levar seu CADERNO DE QUESTÕES ao deixar em definitivo a sala de prova n
 que antecedem o término das provas.
 ATENÇÃO: transcreva no espaço apropriado do seu CARTÃO-RESPOSTA, 
 com sua caligrafia usual, considerando as letras maiúsculas e minúsculas, a seguinte frase:",NA,"O ferro é encontrado na natureza na forma de seus minérios, tais como a hematita ( alfa-Fe2O3), a magnetita 
-(Fe3O4) e a wustita (FeO). Na siderurgia, o ferro-gusa é obtido pela fusão de minérios de ferro em altos fornos em 
+(Fe_3O4) e a wustita (FeO). Na siderurgia, o ferro-gusa é obtido pela fusão de minérios de ferro em altos fornos em 
 condições adequadas. Uma das etapas nesse processo é a formação de monóxido de carbono. O CO (gasoso) é 
 utilizado para reduzir o FeO (sólido), conforme a equação química:
 Descrição da equação química:
@@ -9763,13 +9710,13 @@ Os reagentes FeO (sólido) + CO (gasoso) formam os produtos Fe (sólido) + CO2 (
 Considere as seguintes equações termoquímicas:
 Descrição das três equações termoquímicas:
 Primeira equação:
-• Os reagentes Fe2O3 (sólido) + 3 CO (gasoso) formam os produtos 2 Fe (sólido) + 3 CO2 (gasoso). 
+• Os reagentes Fe_2O3 (sólido) + 3 CO (gasoso) formam os produtos 2 Fe (sólido) + 3 CO2 (gasoso). 
 • Variação de entalpia igual a −25 quilojoules por mol de Fe2O3.
 Segunda equação:
-• Os reagentes 3 FeO (sólido) + CO2 (gasoso) formam os produtos Fe3O4 (sólido) + CO (gasoso).
+• Os reagentes 3 FeO (sólido) + CO2 (gasoso) formam os produtos Fe3O_4 (sólido) + CO (gasoso).
 • Variação de entalpia igual a −36 quilojoules por mol de CO2.
 Terceira equação:
-• Os reagentes 2 Fe3O4 (sólido) + CO2 (gasoso) formam os produtos 3 Fe2O3 (sólido) + CO (gasoso).
+• Os reagentes 2 Fe_3O4 (sólido) + CO2 (gasoso) formam os produtos 3 Fe_2O3 (sólido) + CO (gasoso).
 • Variação de entalpia igual a +47 quilojoules por mol de CO2.
 O valor mais próximo de variação de entalpia , em quilojoule por mol  de FeO, para a reação indicada do  
 FeO (sólido) com o CO (gasoso) é","B","−17.",1,NA,NA,NA,NA,"Portuguese","B"
@@ -9803,7 +9750,7 @@ poderá levar seu CADERNO DE QUESTÕES ao deixar em definitivo a sala de prova n
 que antecedem o término das provas.
 ATENÇÃO: transcreva no espaço apropriado do seu CARTÃO-RESPOSTA, 
 com sua caligrafia usual, considerando as letras maiúsculas e minúsculas, a seguinte frase:",NA,"O ferro é encontrado na natureza na forma de seus minérios, tais como a hematita ( alfa-Fe2O3), a magnetita 
-(Fe3O4) e a wustita (FeO). Na siderurgia, o ferro-gusa é obtido pela fusão de minérios de ferro em altos fornos em 
+(Fe_3O4) e a wustita (FeO). Na siderurgia, o ferro-gusa é obtido pela fusão de minérios de ferro em altos fornos em 
 condições adequadas. Uma das etapas nesse processo é a formação de monóxido de carbono. O CO (gasoso) é 
 utilizado para reduzir o FeO (sólido), conforme a equação química:
 Descrição da equação química:
@@ -9811,13 +9758,13 @@ Os reagentes FeO (sólido) + CO (gasoso) formam os produtos Fe (sólido) + CO2 (
 Considere as seguintes equações termoquímicas:
 Descrição das três equações termoquímicas:
 Primeira equação:
-• Os reagentes Fe2O3 (sólido) + 3 CO (gasoso) formam os produtos 2 Fe (sólido) + 3 CO2 (gasoso). 
+• Os reagentes Fe_2O3 (sólido) + 3 CO (gasoso) formam os produtos 2 Fe (sólido) + 3 CO2 (gasoso). 
 • Variação de entalpia igual a −25 quilojoules por mol de Fe2O3.
 Segunda equação:
-• Os reagentes 3 FeO (sólido) + CO2 (gasoso) formam os produtos Fe3O4 (sólido) + CO (gasoso).
+• Os reagentes 3 FeO (sólido) + CO2 (gasoso) formam os produtos Fe3O_4 (sólido) + CO (gasoso).
 • Variação de entalpia igual a −36 quilojoules por mol de CO2.
 Terceira equação:
-• Os reagentes 2 Fe3O4 (sólido) + CO2 (gasoso) formam os produtos 3 Fe2O3 (sólido) + CO (gasoso).
+• Os reagentes 2 Fe_3O4 (sólido) + CO2 (gasoso) formam os produtos 3 Fe_2O3 (sólido) + CO (gasoso).
 • Variação de entalpia igual a +47 quilojoules por mol de CO2.
 O valor mais próximo de variação de entalpia , em quilojoule por mol  de FeO, para a reação indicada do  
 FeO (sólido) com o CO (gasoso) é","B","−50.",0,NA,NA,NA,NA,"Portuguese","C"
@@ -9851,7 +9798,7 @@ poderá levar seu CADERNO DE QUESTÕES ao deixar em definitivo a sala de prova n
 que antecedem o término das provas.
 ATENÇÃO: transcreva no espaço apropriado do seu CARTÃO-RESPOSTA, 
 com sua caligrafia usual, considerando as letras maiúsculas e minúsculas, a seguinte frase:",NA,"O ferro é encontrado na natureza na forma de seus minérios, tais como a hematita ( alfa-Fe2O3), a magnetita 
-(Fe3O4) e a wustita (FeO). Na siderurgia, o ferro-gusa é obtido pela fusão de minérios de ferro em altos fornos em 
+(Fe_3O4) e a wustita (FeO). Na siderurgia, o ferro-gusa é obtido pela fusão de minérios de ferro em altos fornos em 
 condições adequadas. Uma das etapas nesse processo é a formação de monóxido de carbono. O CO (gasoso) é 
 utilizado para reduzir o FeO (sólido), conforme a equação química:
 Descrição da equação química:
@@ -9859,13 +9806,13 @@ Os reagentes FeO (sólido) + CO (gasoso) formam os produtos Fe (sólido) + CO2 (
 Considere as seguintes equações termoquímicas:
 Descrição das três equações termoquímicas:
 Primeira equação:
-• Os reagentes Fe2O3 (sólido) + 3 CO (gasoso) formam os produtos 2 Fe (sólido) + 3 CO2 (gasoso). 
+• Os reagentes Fe_2O3 (sólido) + 3 CO (gasoso) formam os produtos 2 Fe (sólido) + 3 CO2 (gasoso). 
 • Variação de entalpia igual a −25 quilojoules por mol de Fe2O3.
 Segunda equação:
-• Os reagentes 3 FeO (sólido) + CO2 (gasoso) formam os produtos Fe3O4 (sólido) + CO (gasoso).
+• Os reagentes 3 FeO (sólido) + CO2 (gasoso) formam os produtos Fe3O_4 (sólido) + CO (gasoso).
 • Variação de entalpia igual a −36 quilojoules por mol de CO2.
 Terceira equação:
-• Os reagentes 2 Fe3O4 (sólido) + CO2 (gasoso) formam os produtos 3 Fe2O3 (sólido) + CO (gasoso).
+• Os reagentes 2 Fe_3O4 (sólido) + CO2 (gasoso) formam os produtos 3 Fe_2O3 (sólido) + CO (gasoso).
 • Variação de entalpia igual a +47 quilojoules por mol de CO2.
 O valor mais próximo de variação de entalpia , em quilojoule por mol  de FeO, para a reação indicada do  
 FeO (sólido) com o CO (gasoso) é","B","−64.",0,NA,NA,NA,NA,"Portuguese","D"
@@ -9899,7 +9846,7 @@ poderá levar seu CADERNO DE QUESTÕES ao deixar em definitivo a sala de prova n
 que antecedem o término das provas.
 ATENÇÃO: transcreva no espaço apropriado do seu CARTÃO-RESPOSTA, 
 com sua caligrafia usual, considerando as letras maiúsculas e minúsculas, a seguinte frase:",NA,"O ferro é encontrado na natureza na forma de seus minérios, tais como a hematita ( alfa-Fe2O3), a magnetita 
-(Fe3O4) e a wustita (FeO). Na siderurgia, o ferro-gusa é obtido pela fusão de minérios de ferro em altos fornos em 
+(Fe_3O4) e a wustita (FeO). Na siderurgia, o ferro-gusa é obtido pela fusão de minérios de ferro em altos fornos em 
 condições adequadas. Uma das etapas nesse processo é a formação de monóxido de carbono. O CO (gasoso) é 
 utilizado para reduzir o FeO (sólido), conforme a equação química:
 Descrição da equação química:
@@ -9907,16 +9854,16 @@ Os reagentes FeO (sólido) + CO (gasoso) formam os produtos Fe (sólido) + CO2 (
 Considere as seguintes equações termoquímicas:
 Descrição das três equações termoquímicas:
 Primeira equação:
-• Os reagentes Fe2O3 (sólido) + 3 CO (gasoso) formam os produtos 2 Fe (sólido) + 3 CO2 (gasoso). 
+• Os reagentes Fe_2O3 (sólido) + 3 CO (gasoso) formam os produtos 2 Fe (sólido) + 3 CO2 (gasoso). 
 • Variação de entalpia igual a −25 quilojoules por mol de Fe2O3.
 Segunda equação:
-• Os reagentes 3 FeO (sólido) + CO2 (gasoso) formam os produtos Fe3O4 (sólido) + CO (gasoso).
+• Os reagentes 3 FeO (sólido) + CO2 (gasoso) formam os produtos Fe3O_4 (sólido) + CO (gasoso).
 • Variação de entalpia igual a −36 quilojoules por mol de CO2.
 Terceira equação:
-• Os reagentes 2 Fe3O4 (sólido) + CO2 (gasoso) formam os produtos 3 Fe2O3 (sólido) + CO (gasoso).
+• Os reagentes 2 Fe_3O4 (sólido) + CO2 (gasoso) formam os produtos 3 Fe_2O3 (sólido) + CO (gasoso).
 • Variação de entalpia igual a +47 quilojoules por mol de CO2.
 O valor mais próximo de variação de entalpia , em quilojoule por mol  de FeO, para a reação indicada do  
-FeO (sólido) com o CO (gasoso) é","B","−100.",0,NA,NA,NA,NA,"Portuguese","E"
+FeO (sólido) com o CO (gasoso) é","B","−_100.",0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2017_1mil_cn","enem_2017_1mil_cn_1",88958,"ENEM 2017 - CN","PROVA DE CIÊNCIAS DA NATUREZA E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
 EXAME NACIONAL DO ENSINO MÉDIO

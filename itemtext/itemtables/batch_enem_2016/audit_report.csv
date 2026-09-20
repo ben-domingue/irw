@@ -1,5 +1,5 @@
 "table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
 "enem_2016_1mil_ch","WARN",45,45,TRUE,TRUE,TRUE,TRUE,0,2.2,"2.2% of rows have blank option_text | 1 of 45 items have NO option_text rows while others do (54683)"
-"enem_2016_1mil_cn","WARN",45,45,TRUE,TRUE,TRUE,TRUE,0,8.9,"8.9% of rows have blank option_text | 4 of 45 items have NO option_text rows while others do (44432, 86572, 97497, 97711) | option_text is just the resp value for 1 row(s) (resp: 0) -- unlabeled scale points should be blank, not padded with the number"
+"enem_2016_1mil_cn","WARN",45,45,TRUE,TRUE,TRUE,TRUE,0,6.7,"6.7% of rows have blank option_text | 3 of 45 items have NO option_text rows while others do (44432, 97497, 97711) | option_text is just the resp value for 1 row(s) (resp: 0) -- unlabeled scale points should be blank, not padded with the number"
 "enem_2016_1mil_lc","WARN",50,50,TRUE,TRUE,TRUE,TRUE,0,0,"row-count anomaly (possible item-code conflation or missingness skew), median=1e+06: 22565, 23559, 23733, 27055, 30170, 39570, 40290, 54904, 55307, 55970"
-"enem_2016_1mil_mt","WARN",45,45,TRUE,TRUE,TRUE,TRUE,0,4.4,"4.4% of rows have blank option_text | 2 of 45 items have NO option_text rows while others do (32221, 60291)"
+"enem_2016_1mil_mt","WARN",45,45,TRUE,TRUE,TRUE,TRUE,0,4.4,"4.4% of rows have blank option_text | 2 of 45 items have NO option_text rows while others do (32221, 42955)"

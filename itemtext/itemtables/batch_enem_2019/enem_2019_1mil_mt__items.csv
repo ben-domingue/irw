@@ -1541,8 +1541,8 @@ desafio aumenta seu nível em uma unidade. Caso haja
 empate no confronto, ambos os jogadores aumentam 
 seus níveis em uma unidade.
 Durante um jogo, o jogador J1, de nível 4 e experiência 5, 
-irá atacar o jogador J2, de nível 2 e experiência 6.
-O jogador J1 venceu esse confronto porque a diferença 
+irá atacar o jogador J_2, de nível 2 e experiência 6.
+O jogador J_1 venceu esse confronto porque a diferença 
 entre sua força de ataque e a força de defesa de seu 
 oponente era","B","112.",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2019_1mil_mt","enem_2019_1mil_mt_1",117612,"ENEM 2019 - MT","ATENÇÃO: transcreva no espaço apropriado do seu CARTÃO-RESPOSTA,
@@ -1595,8 +1595,8 @@ desafio aumenta seu nível em uma unidade. Caso haja
 empate no confronto, ambos os jogadores aumentam 
 seus níveis em uma unidade.
 Durante um jogo, o jogador J1, de nível 4 e experiência 5, 
-irá atacar o jogador J2, de nível 2 e experiência 6.
-O jogador J1 venceu esse confronto porque a diferença 
+irá atacar o jogador J_2, de nível 2 e experiência 6.
+O jogador J_1 venceu esse confronto porque a diferença 
 entre sua força de ataque e a força de defesa de seu 
 oponente era","B","88.",1,NA,NA,NA,NA,"Portuguese","B"
 "enem_2019_1mil_mt","enem_2019_1mil_mt_1",117612,"ENEM 2019 - MT","ATENÇÃO: transcreva no espaço apropriado do seu CARTÃO-RESPOSTA,
@@ -1649,8 +1649,8 @@ desafio aumenta seu nível em uma unidade. Caso haja
 empate no confronto, ambos os jogadores aumentam 
 seus níveis em uma unidade.
 Durante um jogo, o jogador J1, de nível 4 e experiência 5, 
-irá atacar o jogador J2, de nível 2 e experiência 6.
-O jogador J1 venceu esse confronto porque a diferença 
+irá atacar o jogador J_2, de nível 2 e experiência 6.
+O jogador J_1 venceu esse confronto porque a diferença 
 entre sua força de ataque e a força de defesa de seu 
 oponente era","B","60.",0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2019_1mil_mt","enem_2019_1mil_mt_1",117612,"ENEM 2019 - MT","ATENÇÃO: transcreva no espaço apropriado do seu CARTÃO-RESPOSTA,
@@ -1703,8 +1703,8 @@ desafio aumenta seu nível em uma unidade. Caso haja
 empate no confronto, ambos os jogadores aumentam 
 seus níveis em uma unidade.
 Durante um jogo, o jogador J1, de nível 4 e experiência 5, 
-irá atacar o jogador J2, de nível 2 e experiência 6.
-O jogador J1 venceu esse confronto porque a diferença 
+irá atacar o jogador J_2, de nível 2 e experiência 6.
+O jogador J_1 venceu esse confronto porque a diferença 
 entre sua força de ataque e a força de defesa de seu 
 oponente era","B","28.",0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2019_1mil_mt","enem_2019_1mil_mt_1",117612,"ENEM 2019 - MT","ATENÇÃO: transcreva no espaço apropriado do seu CARTÃO-RESPOSTA,
@@ -1757,8 +1757,8 @@ desafio aumenta seu nível em uma unidade. Caso haja
 empate no confronto, ambos os jogadores aumentam 
 seus níveis em uma unidade.
 Durante um jogo, o jogador J1, de nível 4 e experiência 5, 
-irá atacar o jogador J2, de nível 2 e experiência 6.
-O jogador J1 venceu esse confronto porque a diferença 
+irá atacar o jogador J_2, de nível 2 e experiência 6.
+O jogador J_1 venceu esse confronto porque a diferença 
 entre sua força de ataque e a força de defesa de seu 
 oponente era","B","24.",0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2019_1mil_mt","enem_2019_1mil_mt_1",117635,"ENEM 2019 - MT","ATENÇÃO: transcreva no espaço apropriado do seu CARTÃO-RESPOSTA,
@@ -4665,10 +4665,10 @@ LARANJA
 EXAME NACIONAL DO ENSINO MÉDIO
 PROVA DE CIÊNCIAS DA NATUREZA E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS",NA,"Uma construtora pretende conectar um reservatório 
-central (Rc) em formato de um cilindro, com raio interno 
+central (R_c) em formato de um cilindro, com raio interno 
 igual a 2 metros e altura interna igual a 3,30 metros, a 
-quatro reservatórios cilíndricos auxiliares (R 1, R2, R3 e 
-R4), os quais possuem raios internos e alturas internas 
+quatro reservatórios cilíndricos auxiliares (R 1, R_2, R_3 e 
+R_4), os quais possuem raios internos e alturas internas 
 medindo 1,5 metro.
 As ligações entre o reservatório central e os 
 auxiliares são feitas por canos cilíndricos com  
@@ -4715,10 +4715,10 @@ LARANJA
 EXAME NACIONAL DO ENSINO MÉDIO
 PROVA DE CIÊNCIAS DA NATUREZA E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS",NA,"Uma construtora pretende conectar um reservatório 
-central (Rc) em formato de um cilindro, com raio interno 
+central (R_c) em formato de um cilindro, com raio interno 
 igual a 2 metros e altura interna igual a 3,30 metros, a 
-quatro reservatórios cilíndricos auxiliares (R 1, R2, R3 e 
-R4), os quais possuem raios internos e alturas internas 
+quatro reservatórios cilíndricos auxiliares (R 1, R_2, R_3 e 
+R_4), os quais possuem raios internos e alturas internas 
 medindo 1,5 metro.
 As ligações entre o reservatório central e os 
 auxiliares são feitas por canos cilíndricos com  
@@ -4765,10 +4765,10 @@ LARANJA
 EXAME NACIONAL DO ENSINO MÉDIO
 PROVA DE CIÊNCIAS DA NATUREZA E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS",NA,"Uma construtora pretende conectar um reservatório 
-central (Rc) em formato de um cilindro, com raio interno 
+central (R_c) em formato de um cilindro, com raio interno 
 igual a 2 metros e altura interna igual a 3,30 metros, a 
-quatro reservatórios cilíndricos auxiliares (R 1, R2, R3 e 
-R4), os quais possuem raios internos e alturas internas 
+quatro reservatórios cilíndricos auxiliares (R 1, R_2, R_3 e 
+R_4), os quais possuem raios internos e alturas internas 
 medindo 1,5 metro.
 As ligações entre o reservatório central e os 
 auxiliares são feitas por canos cilíndricos com  
@@ -4815,10 +4815,10 @@ LARANJA
 EXAME NACIONAL DO ENSINO MÉDIO
 PROVA DE CIÊNCIAS DA NATUREZA E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS",NA,"Uma construtora pretende conectar um reservatório 
-central (Rc) em formato de um cilindro, com raio interno 
+central (R_c) em formato de um cilindro, com raio interno 
 igual a 2 metros e altura interna igual a 3,30 metros, a 
-quatro reservatórios cilíndricos auxiliares (R 1, R2, R3 e 
-R4), os quais possuem raios internos e alturas internas 
+quatro reservatórios cilíndricos auxiliares (R 1, R_2, R_3 e 
+R_4), os quais possuem raios internos e alturas internas 
 medindo 1,5 metro.
 As ligações entre o reservatório central e os 
 auxiliares são feitas por canos cilíndricos com  
@@ -4865,10 +4865,10 @@ LARANJA
 EXAME NACIONAL DO ENSINO MÉDIO
 PROVA DE CIÊNCIAS DA NATUREZA E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS",NA,"Uma construtora pretende conectar um reservatório 
-central (Rc) em formato de um cilindro, com raio interno 
+central (R_c) em formato de um cilindro, com raio interno 
 igual a 2 metros e altura interna igual a 3,30 metros, a 
-quatro reservatórios cilíndricos auxiliares (R 1, R2, R3 e 
-R4), os quais possuem raios internos e alturas internas 
+quatro reservatórios cilíndricos auxiliares (R 1, R_2, R_3 e 
+R_4), os quais possuem raios internos e alturas internas 
 medindo 1,5 metro.
 As ligações entre o reservatório central e os 
 auxiliares são feitas por canos cilíndricos com  
@@ -10313,7 +10313,7 @@ a flor é rosa. Considere que a Hydrangea cor-de-rosa mais
 valorizada comercialmente numa determinada região seja 
 aquela produzida em solo com pH inferior a 8. Sabe-se 
 que pH é igual a menos log de x na base 10, em que x 
-é a concentração de íon hidrogênio (H+).
+é a concentração de íon hidrogênio (H^+).
 Para produzir a Hydrangea cor-de-rosa de maior 
 valor comercial, deve-se preparar o solo de modo que  
 x assuma","E","qualquer valor acima de 10-8.",0,NA,NA,NA,NA,"Portuguese","A"
@@ -10354,10 +10354,10 @@ a flor é rosa. Considere que a Hydrangea cor-de-rosa mais
 valorizada comercialmente numa determinada região seja 
 aquela produzida em solo com pH inferior a 8. Sabe-se 
 que pH é igual a menos log de x na base 10, em que x 
-é a concentração de íon hidrogênio (H+).
+é a concentração de íon hidrogênio (H^+).
 Para produzir a Hydrangea cor-de-rosa de maior 
 valor comercial, deve-se preparar o solo de modo que  
-x assuma","E","qualquer valor positivo inferior a 10-7.",0,NA,NA,NA,NA,"Portuguese","B"
+x assuma","E","qualquer valor positivo inferior a 10-^7.",0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2019_1mil_mt","enem_2019_1mil_mt_1",9779,"ENEM 2019 - MT","ATENÇÃO: transcreva no espaço apropriado do seu CARTÃO-RESPOSTA,
 com sua caligrafia usual, considerando as letras maiúsculas e minúsculas, a seguinte frase:
 Temos todo o tempo do mundo.
@@ -10395,7 +10395,7 @@ a flor é rosa. Considere que a Hydrangea cor-de-rosa mais
 valorizada comercialmente numa determinada região seja 
 aquela produzida em solo com pH inferior a 8. Sabe-se 
 que pH é igual a menos log de x na base 10, em que x 
-é a concentração de íon hidrogênio (H+).
+é a concentração de íon hidrogênio (H^+).
 Para produzir a Hydrangea cor-de-rosa de maior 
 valor comercial, deve-se preparar o solo de modo que  
 x assuma","E","valores maiores que 7 e menores que 8.",0,NA,NA,NA,NA,"Portuguese","C"
@@ -10436,7 +10436,7 @@ a flor é rosa. Considere que a Hydrangea cor-de-rosa mais
 valorizada comercialmente numa determinada região seja 
 aquela produzida em solo com pH inferior a 8. Sabe-se 
 que pH é igual a menos log de x na base 10, em que x 
-é a concentração de íon hidrogênio (H+).
+é a concentração de íon hidrogênio (H^+).
 Para produzir a Hydrangea cor-de-rosa de maior 
 valor comercial, deve-se preparar o solo de modo que  
 x assuma","E","valores maiores que 70 e menores que 80.",0,NA,NA,NA,NA,"Portuguese","D"
@@ -10477,7 +10477,7 @@ a flor é rosa. Considere que a Hydrangea cor-de-rosa mais
 valorizada comercialmente numa determinada região seja 
 aquela produzida em solo com pH inferior a 8. Sabe-se 
 que pH é igual a menos log de x na base 10, em que x 
-é a concentração de íon hidrogênio (H+).
+é a concentração de íon hidrogênio (H^+).
 Para produzir a Hydrangea cor-de-rosa de maior 
 valor comercial, deve-se preparar o solo de modo que  
-x assuma","E","valores maiores que 10-8 e menores que 10-7.",1,NA,NA,NA,NA,"Portuguese","E"
+x assuma","E","valores maiores que 10-^8 e menores que 10-7.",1,NA,NA,NA,NA,"Portuguese","E"

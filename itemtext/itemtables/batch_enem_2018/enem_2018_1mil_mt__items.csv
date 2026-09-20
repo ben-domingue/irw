@@ -1439,7 +1439,7 @@ em 90 minutos, mas sua velocidade média foi de
 por hora , a equipe Gama concluiu seu caminho 
 em 60 minutos.
 Com base nesses dados, foram comparadas as 
-distâncias dBeta; dAlpha e dGama percorridas pelas 
+distâncias d_Beta; d_Alpha e dGama percorridas pelas 
 três equipes.
 A ordem das distâncias percorridas pelas equipes Alpha, 
 Beta e Gama é","A","dGama menor que dBeta menor que dAlpha.",1,NA,NA,NA,NA,"Portuguese","A"
@@ -1483,7 +1483,7 @@ em 90 minutos, mas sua velocidade média foi de
 por hora , a equipe Gama concluiu seu caminho 
 em 60 minutos.
 Com base nesses dados, foram comparadas as 
-distâncias dBeta; dAlpha e dGama percorridas pelas 
+distâncias d_Beta; d_Alpha e dGama percorridas pelas 
 três equipes.
 A ordem das distâncias percorridas pelas equipes Alpha, 
 Beta e Gama é","A","dAlpha igual a dBeta menor que dGama.",0,NA,NA,NA,NA,"Portuguese","B"
@@ -1527,7 +1527,7 @@ em 90 minutos, mas sua velocidade média foi de
 por hora , a equipe Gama concluiu seu caminho 
 em 60 minutos.
 Com base nesses dados, foram comparadas as 
-distâncias dBeta; dAlpha e dGama percorridas pelas 
+distâncias d_Beta; d_Alpha e dGama percorridas pelas 
 três equipes.
 A ordem das distâncias percorridas pelas equipes Alpha, 
 Beta e Gama é","A","dGama menor que dBeta igual a dAlpha.",0,NA,NA,NA,NA,"Portuguese","C"
@@ -1571,7 +1571,7 @@ em 90 minutos, mas sua velocidade média foi de
 por hora , a equipe Gama concluiu seu caminho 
 em 60 minutos.
 Com base nesses dados, foram comparadas as 
-distâncias dBeta; dAlpha e dGama percorridas pelas 
+distâncias d_Beta; d_Alpha e dGama percorridas pelas 
 três equipes.
 A ordem das distâncias percorridas pelas equipes Alpha, 
 Beta e Gama é","A","dBeta menor que dAlpha menor que dGama.",0,NA,NA,NA,NA,"Portuguese","D"
@@ -1615,7 +1615,7 @@ em 90 minutos, mas sua velocidade média foi de
 por hora , a equipe Gama concluiu seu caminho 
 em 60 minutos.
 Com base nesses dados, foram comparadas as 
-distâncias dBeta; dAlpha e dGama percorridas pelas 
+distâncias d_Beta; d_Alpha e dGama percorridas pelas 
 três equipes.
 A ordem das distâncias percorridas pelas equipes Alpha, 
 Beta e Gama é","A","dGama menor que dAlpha menor que dBeta.",0,NA,NA,NA,NA,"Portuguese","E"
@@ -6717,7 +6717,7 @@ Descrição do quadro 2:
 Quadro com as informações: Tipo de salto, Nota 
 de partida, Estimativa da soma das notas dos juízes e 
 Probabilidade de obter a nota.
-Tipo de salto: T1; Nota de partida: 2,2; Estimativa 
+Tipo de salto: T_1; Nota de partida: 2,2; Estimativa 
 da soma das notas dos juízes: 57; Probabilidade de 
 obter a nota: 89,76 por cento.
 Tipo de salto: T2; Nota de partida: 2,4; Estimativa 
@@ -6736,7 +6736,7 @@ O atleta optará pelo salto com a maior probabilidade
 de obter a nota estimada, de maneira que lhe permita 
 alcançar o primeiro lugar.
 Considerando essas condições, o salto que o atleta 
-deverá escolher é o de tipo","C","T1.",0,NA,NA,NA,NA,"Portuguese","A"
+deverá escolher é o de tipo","C","T_1.",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2018_1mil_mt","enem_2018_1mil_mt_1",61172,"ENEM 2018 - MT","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES:
 1. Este CADERNO DE QUESTÕES contém 90 questões numeradas de 91 a 180, dispostas da seguinte maneira:
 a) questões de número 91 a 135, relativas à área de Ciências da Natureza e suas Tecnologias;
@@ -6791,7 +6791,7 @@ Descrição do quadro 2:
 Quadro com as informações: Tipo de salto, Nota 
 de partida, Estimativa da soma das notas dos juízes e 
 Probabilidade de obter a nota.
-Tipo de salto: T1; Nota de partida: 2,2; Estimativa 
+Tipo de salto: T_1; Nota de partida: 2,2; Estimativa 
 da soma das notas dos juízes: 57; Probabilidade de 
 obter a nota: 89,76 por cento.
 Tipo de salto: T2; Nota de partida: 2,4; Estimativa 
@@ -6865,7 +6865,7 @@ Descrição do quadro 2:
 Quadro com as informações: Tipo de salto, Nota 
 de partida, Estimativa da soma das notas dos juízes e 
 Probabilidade de obter a nota.
-Tipo de salto: T1; Nota de partida: 2,2; Estimativa 
+Tipo de salto: T_1; Nota de partida: 2,2; Estimativa 
 da soma das notas dos juízes: 57; Probabilidade de 
 obter a nota: 89,76 por cento.
 Tipo de salto: T2; Nota de partida: 2,4; Estimativa 
@@ -6939,7 +6939,7 @@ Descrição do quadro 2:
 Quadro com as informações: Tipo de salto, Nota 
 de partida, Estimativa da soma das notas dos juízes e 
 Probabilidade de obter a nota.
-Tipo de salto: T1; Nota de partida: 2,2; Estimativa 
+Tipo de salto: T_1; Nota de partida: 2,2; Estimativa 
 da soma das notas dos juízes: 57; Probabilidade de 
 obter a nota: 89,76 por cento.
 Tipo de salto: T2; Nota de partida: 2,4; Estimativa 
@@ -7013,7 +7013,7 @@ Descrição do quadro 2:
 Quadro com as informações: Tipo de salto, Nota 
 de partida, Estimativa da soma das notas dos juízes e 
 Probabilidade de obter a nota.
-Tipo de salto: T1; Nota de partida: 2,2; Estimativa 
+Tipo de salto: T_1; Nota de partida: 2,2; Estimativa 
 da soma das notas dos juízes: 57; Probabilidade de 
 obter a nota: 89,76 por cento.
 Tipo de salto: T2; Nota de partida: 2,4; Estimativa 
@@ -9699,10 +9699,10 @@ apresentados os rankings dos juízes e a frequência de
 cada ranking.
 Descrição do quadro: 
 Quadro com as informações: “Ranking” e “Colocações”.
-Ranking I: 1o Ana; 2o Bia; 3o Caio; 4o Dani; 5o Edu.
-Ranking II: 1o Dani; 2o Caio; 3o Edu; 4o Ana; 5o Bia.
-Ranking III: 1o Bia; 2o Ana; 3o Caio; 4o Edu; 5o Dani.
-Ranking IV: 1o Edu; 2o Ana; 3o Dani; 4o Bia; 5o Caio.
+Ranking I: 1^o Ana; 2^o Bia; 3o Caio; 4^o Dani; 5^o Edu.
+Ranking II: 1^o Dani; 2^o Caio; 3^o Edu; 4^o Ana; 5^o Bia.
+Ranking III: 1^o Bia; 2^o Ana; 3o Caio; 4o Edu; 5o Dani.
+Ranking IV: 1^o Edu; 2^o Ana; 3o Dani; 4o Bia; 5o Caio.
 A poesia vencedora foi a de","E","Edu.",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2018_1mil_mt","enem_2018_1mil_mt_1",98294,"ENEM 2018 - MT","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES:
 1. Este CADERNO DE QUESTÕES contém 90 questões numeradas de 91 a 180, dispostas da seguinte maneira:
@@ -9746,10 +9746,10 @@ apresentados os rankings dos juízes e a frequência de
 cada ranking.
 Descrição do quadro: 
 Quadro com as informações: “Ranking” e “Colocações”.
-Ranking I: 1o Ana; 2o Bia; 3o Caio; 4o Dani; 5o Edu.
-Ranking II: 1o Dani; 2o Caio; 3o Edu; 4o Ana; 5o Bia.
-Ranking III: 1o Bia; 2o Ana; 3o Caio; 4o Edu; 5o Dani.
-Ranking IV: 1o Edu; 2o Ana; 3o Dani; 4o Bia; 5o Caio.
+Ranking I: 1^o Ana; 2^o Bia; 3o Caio; 4^o Dani; 5^o Edu.
+Ranking II: 1^o Dani; 2^o Caio; 3^o Edu; 4^o Ana; 5^o Bia.
+Ranking III: 1^o Bia; 2^o Ana; 3o Caio; 4o Edu; 5o Dani.
+Ranking IV: 1^o Edu; 2^o Ana; 3o Dani; 4o Bia; 5o Caio.
 A poesia vencedora foi a de","E","Dani.",0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2018_1mil_mt","enem_2018_1mil_mt_1",98294,"ENEM 2018 - MT","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES:
 1. Este CADERNO DE QUESTÕES contém 90 questões numeradas de 91 a 180, dispostas da seguinte maneira:
@@ -9793,10 +9793,10 @@ apresentados os rankings dos juízes e a frequência de
 cada ranking.
 Descrição do quadro: 
 Quadro com as informações: “Ranking” e “Colocações”.
-Ranking I: 1o Ana; 2o Bia; 3o Caio; 4o Dani; 5o Edu.
-Ranking II: 1o Dani; 2o Caio; 3o Edu; 4o Ana; 5o Bia.
-Ranking III: 1o Bia; 2o Ana; 3o Caio; 4o Edu; 5o Dani.
-Ranking IV: 1o Edu; 2o Ana; 3o Dani; 4o Bia; 5o Caio.
+Ranking I: 1^o Ana; 2^o Bia; 3o Caio; 4^o Dani; 5^o Edu.
+Ranking II: 1^o Dani; 2^o Caio; 3^o Edu; 4^o Ana; 5^o Bia.
+Ranking III: 1^o Bia; 2^o Ana; 3o Caio; 4o Edu; 5o Dani.
+Ranking IV: 1^o Edu; 2^o Ana; 3o Dani; 4o Bia; 5o Caio.
 A poesia vencedora foi a de","E","Caio.",0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2018_1mil_mt","enem_2018_1mil_mt_1",98294,"ENEM 2018 - MT","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES:
 1. Este CADERNO DE QUESTÕES contém 90 questões numeradas de 91 a 180, dispostas da seguinte maneira:
@@ -9840,10 +9840,10 @@ apresentados os rankings dos juízes e a frequência de
 cada ranking.
 Descrição do quadro: 
 Quadro com as informações: “Ranking” e “Colocações”.
-Ranking I: 1o Ana; 2o Bia; 3o Caio; 4o Dani; 5o Edu.
-Ranking II: 1o Dani; 2o Caio; 3o Edu; 4o Ana; 5o Bia.
-Ranking III: 1o Bia; 2o Ana; 3o Caio; 4o Edu; 5o Dani.
-Ranking IV: 1o Edu; 2o Ana; 3o Dani; 4o Bia; 5o Caio.
+Ranking I: 1^o Ana; 2^o Bia; 3o Caio; 4^o Dani; 5^o Edu.
+Ranking II: 1^o Dani; 2^o Caio; 3^o Edu; 4^o Ana; 5^o Bia.
+Ranking III: 1^o Bia; 2^o Ana; 3o Caio; 4o Edu; 5o Dani.
+Ranking IV: 1^o Edu; 2^o Ana; 3o Dani; 4o Bia; 5o Caio.
 A poesia vencedora foi a de","E","Bia.",0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2018_1mil_mt","enem_2018_1mil_mt_1",98294,"ENEM 2018 - MT","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES:
 1. Este CADERNO DE QUESTÕES contém 90 questões numeradas de 91 a 180, dispostas da seguinte maneira:
@@ -9887,8 +9887,8 @@ apresentados os rankings dos juízes e a frequência de
 cada ranking.
 Descrição do quadro: 
 Quadro com as informações: “Ranking” e “Colocações”.
-Ranking I: 1o Ana; 2o Bia; 3o Caio; 4o Dani; 5o Edu.
-Ranking II: 1o Dani; 2o Caio; 3o Edu; 4o Ana; 5o Bia.
-Ranking III: 1o Bia; 2o Ana; 3o Caio; 4o Edu; 5o Dani.
-Ranking IV: 1o Edu; 2o Ana; 3o Dani; 4o Bia; 5o Caio.
+Ranking I: 1^o Ana; 2^o Bia; 3o Caio; 4^o Dani; 5^o Edu.
+Ranking II: 1^o Dani; 2^o Caio; 3^o Edu; 4^o Ana; 5^o Bia.
+Ranking III: 1^o Bia; 2^o Ana; 3o Caio; 4o Edu; 5o Dani.
+Ranking IV: 1^o Edu; 2^o Ana; 3o Dani; 4o Bia; 5o Caio.
 A poesia vencedora foi a de","E","Ana.",1,NA,NA,NA,NA,"Portuguese","E"

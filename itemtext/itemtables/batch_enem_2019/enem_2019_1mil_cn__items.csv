@@ -1117,13 +1117,13 @@ lático. As equações termoquímicas para a combustão
 da glicose e do ácido lático são, respectivamente, 
 mostradas a seguir:
 Descrição das equações químicas:
-Os reagentes C6H12O6 (sólido) mais 6 O2 (gasoso) 
+Os reagentes C_6^H12O6 (sólido) mais 6 O2 (gasoso) 
 formam os produtos 6 CO 2 (gasoso) mais 6 H 2O 
 (líquido). Variação de entalpia de combustão igual a 
 −2 800 quilojoules.
-Os reagentes CH3CH(OH)COOH (sólido) mais 3 O2 
+Os reagentes CH_3CH(OH)COOH (sólido) mais 3 O2 
 (gasoso) formam os produtos 3 CO 2 (gasoso) mais 
-3 H2O (líquido). Variação de entalpia de combustão 
+3 H_2O (líquido). Variação de entalpia de combustão 
 igual a −1 344 quilojoules.
 O processo anaeróbico é menos vantajoso 
 energeticamente porque","A","libera 112 quilojoules por mol de glicose.",1,NA,NA,NA,NA,"Portuguese","A"
@@ -1166,13 +1166,13 @@ lático. As equações termoquímicas para a combustão
 da glicose e do ácido lático são, respectivamente, 
 mostradas a seguir:
 Descrição das equações químicas:
-Os reagentes C6H12O6 (sólido) mais 6 O2 (gasoso) 
+Os reagentes C_6^H12O6 (sólido) mais 6 O2 (gasoso) 
 formam os produtos 6 CO 2 (gasoso) mais 6 H 2O 
 (líquido). Variação de entalpia de combustão igual a 
 −2 800 quilojoules.
-Os reagentes CH3CH(OH)COOH (sólido) mais 3 O2 
+Os reagentes CH_3CH(OH)COOH (sólido) mais 3 O2 
 (gasoso) formam os produtos 3 CO 2 (gasoso) mais 
-3 H2O (líquido). Variação de entalpia de combustão 
+3 H_2O (líquido). Variação de entalpia de combustão 
 igual a −1 344 quilojoules.
 O processo anaeróbico é menos vantajoso 
 energeticamente porque","A","libera 467 quilojoules por mol de glicose.",0,NA,NA,NA,NA,"Portuguese","B"
@@ -1215,13 +1215,13 @@ lático. As equações termoquímicas para a combustão
 da glicose e do ácido lático são, respectivamente, 
 mostradas a seguir:
 Descrição das equações químicas:
-Os reagentes C6H12O6 (sólido) mais 6 O2 (gasoso) 
+Os reagentes C_6^H12O6 (sólido) mais 6 O2 (gasoso) 
 formam os produtos 6 CO 2 (gasoso) mais 6 H 2O 
 (líquido). Variação de entalpia de combustão igual a 
 −2 800 quilojoules.
-Os reagentes CH3CH(OH)COOH (sólido) mais 3 O2 
+Os reagentes CH_3CH(OH)COOH (sólido) mais 3 O2 
 (gasoso) formam os produtos 3 CO 2 (gasoso) mais 
-3 H2O (líquido). Variação de entalpia de combustão 
+3 H_2O (líquido). Variação de entalpia de combustão 
 igual a −1 344 quilojoules.
 O processo anaeróbico é menos vantajoso 
 energeticamente porque","A","libera 2 688 quilojoules por mol de glicose.",0,NA,NA,NA,NA,"Portuguese","C"
@@ -1264,13 +1264,13 @@ lático. As equações termoquímicas para a combustão
 da glicose e do ácido lático são, respectivamente, 
 mostradas a seguir:
 Descrição das equações químicas:
-Os reagentes C6H12O6 (sólido) mais 6 O2 (gasoso) 
+Os reagentes C_6^H12O6 (sólido) mais 6 O2 (gasoso) 
 formam os produtos 6 CO 2 (gasoso) mais 6 H 2O 
 (líquido). Variação de entalpia de combustão igual a 
 −2 800 quilojoules.
-Os reagentes CH3CH(OH)COOH (sólido) mais 3 O2 
+Os reagentes CH_3CH(OH)COOH (sólido) mais 3 O2 
 (gasoso) formam os produtos 3 CO 2 (gasoso) mais 
-3 H2O (líquido). Variação de entalpia de combustão 
+3 H_2O (líquido). Variação de entalpia de combustão 
 igual a −1 344 quilojoules.
 O processo anaeróbico é menos vantajoso 
 energeticamente porque","A","absorve 1 344 quilojoules por mol de glicose.",0,NA,NA,NA,NA,"Portuguese","D"
@@ -1313,13 +1313,13 @@ lático. As equações termoquímicas para a combustão
 da glicose e do ácido lático são, respectivamente, 
 mostradas a seguir:
 Descrição das equações químicas:
-Os reagentes C6H12O6 (sólido) mais 6 O2 (gasoso) 
+Os reagentes C_6^H12O6 (sólido) mais 6 O2 (gasoso) 
 formam os produtos 6 CO 2 (gasoso) mais 6 H 2O 
 (líquido). Variação de entalpia de combustão igual a 
 −2 800 quilojoules.
-Os reagentes CH3CH(OH)COOH (sólido) mais 3 O2 
+Os reagentes CH_3CH(OH)COOH (sólido) mais 3 O2 
 (gasoso) formam os produtos 3 CO 2 (gasoso) mais 
-3 H2O (líquido). Variação de entalpia de combustão 
+3 H_2O (líquido). Variação de entalpia de combustão 
 igual a −1 344 quilojoules.
 O processo anaeróbico é menos vantajoso 
 energeticamente porque","A","absorve 2 800 quilojoules por mol de glicose.",0,NA,NA,NA,NA,"Portuguese","E"
@@ -1566,7 +1566,7 @@ uma lâmpada através de dois fios: um que parte do
 eletrodo poroso e outro que parte do eletrodo de 
 zinco. A lâmpada está acesa.
 No funcionamento da bateria, a espécie química formada 
-no ânodo é","E","H2 (gasoso).",0,NA,NA,NA,NA,"Portuguese","A"
+no ânodo é","E","H_2 (gasoso).",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2019_1mil_cn","enem_2019_1mil_cn_1",117868,"ENEM 2019 - CN","ATENÇÃO: transcreva no espaço apropriado do seu CARTÃO-RESPOSTA,
 com sua caligrafia usual, considerando as letras maiúsculas e minúsculas, a seguinte frase:
 Temos todo o tempo do mundo.
@@ -1619,7 +1619,7 @@ uma lâmpada através de dois fios: um que parte do
 eletrodo poroso e outro que parte do eletrodo de 
 zinco. A lâmpada está acesa.
 No funcionamento da bateria, a espécie química formada 
-no ânodo é","E","O2 (gasoso).",0,NA,NA,NA,NA,"Portuguese","B"
+no ânodo é","E","O_2 (gasoso).",0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2019_1mil_cn","enem_2019_1mil_cn_1",117868,"ENEM 2019 - CN","ATENÇÃO: transcreva no espaço apropriado do seu CARTÃO-RESPOSTA,
 com sua caligrafia usual, considerando as letras maiúsculas e minúsculas, a seguinte frase:
 Temos todo o tempo do mundo.
@@ -1672,7 +1672,7 @@ uma lâmpada através de dois fios: um que parte do
 eletrodo poroso e outro que parte do eletrodo de 
 zinco. A lâmpada está acesa.
 No funcionamento da bateria, a espécie química formada 
-no ânodo é","E","H2O (líquido).",0,NA,NA,NA,NA,"Portuguese","C"
+no ânodo é","E","H_2O (líquido).",0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2019_1mil_cn","enem_2019_1mil_cn_1",117868,"ENEM 2019 - CN","ATENÇÃO: transcreva no espaço apropriado do seu CARTÃO-RESPOSTA,
 com sua caligrafia usual, considerando as letras maiúsculas e minúsculas, a seguinte frase:
 Temos todo o tempo do mundo.
@@ -1778,7 +1778,7 @@ uma lâmpada através de dois fios: um que parte do
 eletrodo poroso e outro que parte do eletrodo de 
 zinco. A lâmpada está acesa.
 No funcionamento da bateria, a espécie química formada 
-no ânodo é","E","Zn(OH)4 de carga 2− (aquoso).",1,NA,NA,NA,NA,"Portuguese","E"
+no ânodo é","E","Zn(OH)_4 de carga 2− (aquoso).",1,NA,NA,NA,NA,"Portuguese","E"
 "enem_2019_1mil_cn","enem_2019_1mil_cn_1",117875,"ENEM 2019 - CN","ATENÇÃO: transcreva no espaço apropriado do seu CARTÃO-RESPOSTA,
 com sua caligrafia usual, considerando as letras maiúsculas e minúsculas, a seguinte frase:
 Temos todo o tempo do mundo.
@@ -2036,7 +2036,7 @@ contêm um pouco de gelo e verifica que a massa de
 gelo que se fundiu no recipiente B foi o dobro da que se 
 fundiu no recipiente A.
 A razão 
-kA
+k^A
 kB
  é mais próxima de","B","0,50.",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2019_1mil_cn","enem_2019_1mil_cn_1",117883,"ENEM 2019 - CN","ATENÇÃO: transcreva no espaço apropriado do seu CARTÃO-RESPOSTA,
@@ -2087,7 +2087,7 @@ contêm um pouco de gelo e verifica que a massa de
 gelo que se fundiu no recipiente B foi o dobro da que se 
 fundiu no recipiente A.
 A razão 
-kA
+k^A
 kB
  é mais próxima de","B","0,67.",1,NA,NA,NA,NA,"Portuguese","B"
 "enem_2019_1mil_cn","enem_2019_1mil_cn_1",117883,"ENEM 2019 - CN","ATENÇÃO: transcreva no espaço apropriado do seu CARTÃO-RESPOSTA,
@@ -2138,7 +2138,7 @@ contêm um pouco de gelo e verifica que a massa de
 gelo que se fundiu no recipiente B foi o dobro da que se 
 fundiu no recipiente A.
 A razão 
-kA
+k^A
 kB
  é mais próxima de","B","0,75.",0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2019_1mil_cn","enem_2019_1mil_cn_1",117883,"ENEM 2019 - CN","ATENÇÃO: transcreva no espaço apropriado do seu CARTÃO-RESPOSTA,
@@ -2189,7 +2189,7 @@ contêm um pouco de gelo e verifica que a massa de
 gelo que se fundiu no recipiente B foi o dobro da que se 
 fundiu no recipiente A.
 A razão 
-kA
+k^A
 kB
  é mais próxima de","B","1,33.",0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2019_1mil_cn","enem_2019_1mil_cn_1",117883,"ENEM 2019 - CN","ATENÇÃO: transcreva no espaço apropriado do seu CARTÃO-RESPOSTA,
@@ -2240,7 +2240,7 @@ contêm um pouco de gelo e verifica que a massa de
 gelo que se fundiu no recipiente B foi o dobro da que se 
 fundiu no recipiente A.
 A razão 
-kA
+k^A
 kB
  é mais próxima de","B","2,00.",0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2019_1mil_cn","enem_2019_1mil_cn_1",117890,"ENEM 2019 - CN","ATENÇÃO: transcreva no espaço apropriado do seu CARTÃO-RESPOSTA,
@@ -2278,14 +2278,14 @@ passeio (bicicleta B). Os pneus de ambas as bicicletas
 têm as mesmas características, exceto que a largura 
 dos pneus de A é menor que a largura dos pneus 
 de B. Ao calibrarem os pneus das bicicletas A e B, 
-respectivamente com pressões de calibração pA e pB, os 
+respectivamente com pressões de calibração p_A e pB, os 
 amigos observam que o pneu da bicicleta A deforma, sob 
 mesmos esforços, muito menos que o pneu da bicicleta B.  
 Pode-se considerar que as massas de ar comprimido no 
-pneu da bicicleta A, mA, e no pneu da bicicleta B, mB, 
+pneu da bicicleta A, m_A, e no pneu da bicicleta B, mB, 
 são diretamente proporcionais aos seus volumes.
 Comparando as pressões e massas de ar comprimido 
-nos pneus das bicicletas, temos:","B","pA menor que pB e mA menor que mB",0,NA,NA,NA,NA,"Portuguese","A"
+nos pneus das bicicletas, temos:","B","pA menor que pB e mA menor que m_B",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2019_1mil_cn","enem_2019_1mil_cn_1",117890,"ENEM 2019 - CN","ATENÇÃO: transcreva no espaço apropriado do seu CARTÃO-RESPOSTA,
 com sua caligrafia usual, considerando as letras maiúsculas e minúsculas, a seguinte frase:
 Temos todo o tempo do mundo.
@@ -2321,14 +2321,14 @@ passeio (bicicleta B). Os pneus de ambas as bicicletas
 têm as mesmas características, exceto que a largura 
 dos pneus de A é menor que a largura dos pneus 
 de B. Ao calibrarem os pneus das bicicletas A e B, 
-respectivamente com pressões de calibração pA e pB, os 
+respectivamente com pressões de calibração p_A e pB, os 
 amigos observam que o pneu da bicicleta A deforma, sob 
 mesmos esforços, muito menos que o pneu da bicicleta B.  
 Pode-se considerar que as massas de ar comprimido no 
-pneu da bicicleta A, mA, e no pneu da bicicleta B, mB, 
+pneu da bicicleta A, m_A, e no pneu da bicicleta B, mB, 
 são diretamente proporcionais aos seus volumes.
 Comparando as pressões e massas de ar comprimido 
-nos pneus das bicicletas, temos:","B","pA maior que pB e mA menor que mB",1,NA,NA,NA,NA,"Portuguese","B"
+nos pneus das bicicletas, temos:","B","pA maior que pB e mA menor que m_B",1,NA,NA,NA,NA,"Portuguese","B"
 "enem_2019_1mil_cn","enem_2019_1mil_cn_1",117890,"ENEM 2019 - CN","ATENÇÃO: transcreva no espaço apropriado do seu CARTÃO-RESPOSTA,
 com sua caligrafia usual, considerando as letras maiúsculas e minúsculas, a seguinte frase:
 Temos todo o tempo do mundo.
@@ -2364,11 +2364,11 @@ passeio (bicicleta B). Os pneus de ambas as bicicletas
 têm as mesmas características, exceto que a largura 
 dos pneus de A é menor que a largura dos pneus 
 de B. Ao calibrarem os pneus das bicicletas A e B, 
-respectivamente com pressões de calibração pA e pB, os 
+respectivamente com pressões de calibração p_A e pB, os 
 amigos observam que o pneu da bicicleta A deforma, sob 
 mesmos esforços, muito menos que o pneu da bicicleta B.  
 Pode-se considerar que as massas de ar comprimido no 
-pneu da bicicleta A, mA, e no pneu da bicicleta B, mB, 
+pneu da bicicleta A, m_A, e no pneu da bicicleta B, mB, 
 são diretamente proporcionais aos seus volumes.
 Comparando as pressões e massas de ar comprimido 
 nos pneus das bicicletas, temos:","B","pA maior que pB e mA igual a mB",0,NA,NA,NA,NA,"Portuguese","C"
@@ -2407,11 +2407,11 @@ passeio (bicicleta B). Os pneus de ambas as bicicletas
 têm as mesmas características, exceto que a largura 
 dos pneus de A é menor que a largura dos pneus 
 de B. Ao calibrarem os pneus das bicicletas A e B, 
-respectivamente com pressões de calibração pA e pB, os 
+respectivamente com pressões de calibração p_A e pB, os 
 amigos observam que o pneu da bicicleta A deforma, sob 
 mesmos esforços, muito menos que o pneu da bicicleta B.  
 Pode-se considerar que as massas de ar comprimido no 
-pneu da bicicleta A, mA, e no pneu da bicicleta B, mB, 
+pneu da bicicleta A, m_A, e no pneu da bicicleta B, mB, 
 são diretamente proporcionais aos seus volumes.
 Comparando as pressões e massas de ar comprimido 
 nos pneus das bicicletas, temos:","B","pA menor que pB e mA igual a mB",0,NA,NA,NA,NA,"Portuguese","D"
@@ -2450,14 +2450,14 @@ passeio (bicicleta B). Os pneus de ambas as bicicletas
 têm as mesmas características, exceto que a largura 
 dos pneus de A é menor que a largura dos pneus 
 de B. Ao calibrarem os pneus das bicicletas A e B, 
-respectivamente com pressões de calibração pA e pB, os 
+respectivamente com pressões de calibração p_A e pB, os 
 amigos observam que o pneu da bicicleta A deforma, sob 
 mesmos esforços, muito menos que o pneu da bicicleta B.  
 Pode-se considerar que as massas de ar comprimido no 
-pneu da bicicleta A, mA, e no pneu da bicicleta B, mB, 
+pneu da bicicleta A, m_A, e no pneu da bicicleta B, mB, 
 são diretamente proporcionais aos seus volumes.
 Comparando as pressões e massas de ar comprimido 
-nos pneus das bicicletas, temos:","B","pA maior que pB e mA maior que mB",0,NA,NA,NA,NA,"Portuguese","E"
+nos pneus das bicicletas, temos:","B","pA maior que pB e mA maior que m_B",0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2019_1mil_cn","enem_2019_1mil_cn_1",117979,"ENEM 2019 - CN","ATENÇÃO: transcreva no espaço apropriado do seu CARTÃO-RESPOSTA,
 com sua caligrafia usual, considerando as letras maiúsculas e minúsculas, a seguinte frase:
 Temos todo o tempo do mundo.
@@ -4645,15 +4645,15 @@ Descrição do quadro:
 Quadro com: fração; faixa de temperatura, em 
 grau Celsius; exemplos de produto(s) e número 
 de átomos de carbono (hidrocarboneto de fórmula 
-geral CnH2n+2), respectivamente:
+geral C_nH2n+2), respectivamente:
 Fração 1: Até 20 graus Celsius, gás natural e gás de 
-cozinha (GLP), C1 a C4.
+cozinha (GLP), C_1 a C_4.
 Fração 2: 30 a 180 graus Celsius, gasolina, C 6 a 
-C12.
-Fração 3: 170 a 290 graus Celsius, querosene, C11 a 
-C16.
-Fração 4: 260 a 350 graus Celsius, óleo diesel, C14 a 
-C18.
+C_12.
+Fração 3: 170 a 290 graus Celsius, querosene, C_11 a 
+C_16.
+Fração 4: 260 a 350 graus Celsius, óleo diesel, C_14 a 
+C_18.
 Na fração 4, a separação dos compostos ocorre em 
 temperaturas mais elevadas porque","D","suas densidades são maiores.",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2019_1mil_cn","enem_2019_1mil_cn_1",49600,"ENEM 2019 - CN","ATENÇÃO: transcreva no espaço apropriado do seu CARTÃO-RESPOSTA,
@@ -4697,15 +4697,15 @@ Descrição do quadro:
 Quadro com: fração; faixa de temperatura, em 
 grau Celsius; exemplos de produto(s) e número 
 de átomos de carbono (hidrocarboneto de fórmula 
-geral CnH2n+2), respectivamente:
+geral C_nH2n+2), respectivamente:
 Fração 1: Até 20 graus Celsius, gás natural e gás de 
-cozinha (GLP), C1 a C4.
+cozinha (GLP), C_1 a C_4.
 Fração 2: 30 a 180 graus Celsius, gasolina, C 6 a 
-C12.
-Fração 3: 170 a 290 graus Celsius, querosene, C11 a 
-C16.
-Fração 4: 260 a 350 graus Celsius, óleo diesel, C14 a 
-C18.
+C_12.
+Fração 3: 170 a 290 graus Celsius, querosene, C_11 a 
+C_16.
+Fração 4: 260 a 350 graus Celsius, óleo diesel, C_14 a 
+C_18.
 Na fração 4, a separação dos compostos ocorre em 
 temperaturas mais elevadas porque","D","o número de ramificações é maior.",0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2019_1mil_cn","enem_2019_1mil_cn_1",49600,"ENEM 2019 - CN","ATENÇÃO: transcreva no espaço apropriado do seu CARTÃO-RESPOSTA,
@@ -4749,15 +4749,15 @@ Descrição do quadro:
 Quadro com: fração; faixa de temperatura, em 
 grau Celsius; exemplos de produto(s) e número 
 de átomos de carbono (hidrocarboneto de fórmula 
-geral CnH2n+2), respectivamente:
+geral C_nH2n+2), respectivamente:
 Fração 1: Até 20 graus Celsius, gás natural e gás de 
-cozinha (GLP), C1 a C4.
+cozinha (GLP), C_1 a C_4.
 Fração 2: 30 a 180 graus Celsius, gasolina, C 6 a 
-C12.
-Fração 3: 170 a 290 graus Celsius, querosene, C11 a 
-C16.
-Fração 4: 260 a 350 graus Celsius, óleo diesel, C14 a 
-C18.
+C_12.
+Fração 3: 170 a 290 graus Celsius, querosene, C_11 a 
+C_16.
+Fração 4: 260 a 350 graus Celsius, óleo diesel, C_14 a 
+C_18.
 Na fração 4, a separação dos compostos ocorre em 
 temperaturas mais elevadas porque","D","sua solubilidade no petróleo é maior.",0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2019_1mil_cn","enem_2019_1mil_cn_1",49600,"ENEM 2019 - CN","ATENÇÃO: transcreva no espaço apropriado do seu CARTÃO-RESPOSTA,
@@ -4801,15 +4801,15 @@ Descrição do quadro:
 Quadro com: fração; faixa de temperatura, em 
 grau Celsius; exemplos de produto(s) e número 
 de átomos de carbono (hidrocarboneto de fórmula 
-geral CnH2n+2), respectivamente:
+geral C_nH2n+2), respectivamente:
 Fração 1: Até 20 graus Celsius, gás natural e gás de 
-cozinha (GLP), C1 a C4.
+cozinha (GLP), C_1 a C_4.
 Fração 2: 30 a 180 graus Celsius, gasolina, C 6 a 
-C12.
-Fração 3: 170 a 290 graus Celsius, querosene, C11 a 
-C16.
-Fração 4: 260 a 350 graus Celsius, óleo diesel, C14 a 
-C18.
+C_12.
+Fração 3: 170 a 290 graus Celsius, querosene, C_11 a 
+C_16.
+Fração 4: 260 a 350 graus Celsius, óleo diesel, C_14 a 
+C_18.
 Na fração 4, a separação dos compostos ocorre em 
 temperaturas mais elevadas porque","D","as forças intermoleculares são mais intensas.",1,NA,NA,NA,NA,"Portuguese","D"
 "enem_2019_1mil_cn","enem_2019_1mil_cn_1",49600,"ENEM 2019 - CN","ATENÇÃO: transcreva no espaço apropriado do seu CARTÃO-RESPOSTA,
@@ -4853,15 +4853,15 @@ Descrição do quadro:
 Quadro com: fração; faixa de temperatura, em 
 grau Celsius; exemplos de produto(s) e número 
 de átomos de carbono (hidrocarboneto de fórmula 
-geral CnH2n+2), respectivamente:
+geral C_nH2n+2), respectivamente:
 Fração 1: Até 20 graus Celsius, gás natural e gás de 
-cozinha (GLP), C1 a C4.
+cozinha (GLP), C_1 a C_4.
 Fração 2: 30 a 180 graus Celsius, gasolina, C 6 a 
-C12.
-Fração 3: 170 a 290 graus Celsius, querosene, C11 a 
-C16.
-Fração 4: 260 a 350 graus Celsius, óleo diesel, C14 a 
-C18.
+C_12.
+Fração 3: 170 a 290 graus Celsius, querosene, C_11 a 
+C_16.
+Fração 4: 260 a 350 graus Celsius, óleo diesel, C_14 a 
+C_18.
 Na fração 4, a separação dos compostos ocorre em 
 temperaturas mais elevadas porque","D","a cadeia carbônica é mais difícil de ser quebrada.",0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2019_1mil_cn","enem_2019_1mil_cn_1",54381,"ENEM 2019 - CN","ATENÇÃO: transcreva no espaço apropriado do seu CARTÃO-RESPOSTA,
@@ -4897,7 +4897,7 @@ sendo mais explorada por diversas razões. A seguir são mostradas três estrutu
 Bixina (presente no urucum)
 Licopeno (presente no tomate)
 β-caroteno (presente na cenoura e na laranja)
-COOCH3
+COOCH_3
 HOOC
 HAMERSKI, L.; REZENDE, M. J. C.; SILVA, B. V. Usando as cores da natureza para atender aos desejos do consumidor:  
 substâncias naturais como corantes na indústria alimentícia. Revista Virtual de Química, n. 3, 2013.
@@ -4935,7 +4935,7 @@ sendo mais explorada por diversas razões. A seguir são mostradas três estrutu
 Bixina (presente no urucum)
 Licopeno (presente no tomate)
 β-caroteno (presente na cenoura e na laranja)
-COOCH3
+COOCH_3
 HOOC
 HAMERSKI, L.; REZENDE, M. J. C.; SILVA, B. V. Usando as cores da natureza para atender aos desejos do consumidor:  
 substâncias naturais como corantes na indústria alimentícia. Revista Virtual de Química, n. 3, 2013.
@@ -4973,7 +4973,7 @@ sendo mais explorada por diversas razões. A seguir são mostradas três estrutu
 Bixina (presente no urucum)
 Licopeno (presente no tomate)
 β-caroteno (presente na cenoura e na laranja)
-COOCH3
+COOCH_3
 HOOC
 HAMERSKI, L.; REZENDE, M. J. C.; SILVA, B. V. Usando as cores da natureza para atender aos desejos do consumidor:  
 substâncias naturais como corantes na indústria alimentícia. Revista Virtual de Química, n. 3, 2013.
@@ -5011,7 +5011,7 @@ sendo mais explorada por diversas razões. A seguir são mostradas três estrutu
 Bixina (presente no urucum)
 Licopeno (presente no tomate)
 β-caroteno (presente na cenoura e na laranja)
-COOCH3
+COOCH_3
 HOOC
 HAMERSKI, L.; REZENDE, M. J. C.; SILVA, B. V. Usando as cores da natureza para atender aos desejos do consumidor:  
 substâncias naturais como corantes na indústria alimentícia. Revista Virtual de Química, n. 3, 2013.
@@ -5049,7 +5049,7 @@ sendo mais explorada por diversas razões. A seguir são mostradas três estrutu
 Bixina (presente no urucum)
 Licopeno (presente no tomate)
 β-caroteno (presente na cenoura e na laranja)
-COOCH3
+COOCH_3
 HOOC
 HAMERSKI, L.; REZENDE, M. J. C.; SILVA, B. V. Usando as cores da natureza para atender aos desejos do consumidor:  
 substâncias naturais como corantes na indústria alimentícia. Revista Virtual de Química, n. 3, 2013.
@@ -6219,7 +6219,7 @@ O polímero PET reage com 2 n do composto A, sob condições de altas temperatur
 dois produtos. O reagente PET é um polímero de n monômeros com a estrutura, entre colchetes, de um anel 
 aromático com grupo CO ligado ao carbono 1 e COO ligado ao carbono 4. O oxigênio do grupo COO do carbono 4 
 faz ligação simples com o grupo CH 2CH2O. Um dos produtos formado tem n moléculas de um composto que 
-contém um anel aromático com grupos COOCH3 ligados aos carbonos 1 e 4. O outro produto formado tem mais 
+contém um anel aromático com grupos COOCH_3 ligados aos carbonos 1 e 4. O outro produto formado tem mais 
 n moléculas do composto HOCH2CH2OH.
 O composto A, representado no esquema de reação, é o","B","metano.",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2019_1mil_cn","enem_2019_1mil_cn_1",81478,"ENEM 2019 - CN","ATENÇÃO: transcreva no espaço apropriado do seu CARTÃO-RESPOSTA,
@@ -6257,7 +6257,7 @@ O polímero PET reage com 2 n do composto A, sob condições de altas temperatur
 dois produtos. O reagente PET é um polímero de n monômeros com a estrutura, entre colchetes, de um anel 
 aromático com grupo CO ligado ao carbono 1 e COO ligado ao carbono 4. O oxigênio do grupo COO do carbono 4 
 faz ligação simples com o grupo CH 2CH2O. Um dos produtos formado tem n moléculas de um composto que 
-contém um anel aromático com grupos COOCH3 ligados aos carbonos 1 e 4. O outro produto formado tem mais 
+contém um anel aromático com grupos COOCH_3 ligados aos carbonos 1 e 4. O outro produto formado tem mais 
 n moléculas do composto HOCH2CH2OH.
 O composto A, representado no esquema de reação, é o","B","metanol.",1,NA,NA,NA,NA,"Portuguese","B"
 "enem_2019_1mil_cn","enem_2019_1mil_cn_1",81478,"ENEM 2019 - CN","ATENÇÃO: transcreva no espaço apropriado do seu CARTÃO-RESPOSTA,
@@ -6295,7 +6295,7 @@ O polímero PET reage com 2 n do composto A, sob condições de altas temperatur
 dois produtos. O reagente PET é um polímero de n monômeros com a estrutura, entre colchetes, de um anel 
 aromático com grupo CO ligado ao carbono 1 e COO ligado ao carbono 4. O oxigênio do grupo COO do carbono 4 
 faz ligação simples com o grupo CH 2CH2O. Um dos produtos formado tem n moléculas de um composto que 
-contém um anel aromático com grupos COOCH3 ligados aos carbonos 1 e 4. O outro produto formado tem mais 
+contém um anel aromático com grupos COOCH_3 ligados aos carbonos 1 e 4. O outro produto formado tem mais 
 n moléculas do composto HOCH2CH2OH.
 O composto A, representado no esquema de reação, é o","B","éter metílico.",0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2019_1mil_cn","enem_2019_1mil_cn_1",81478,"ENEM 2019 - CN","ATENÇÃO: transcreva no espaço apropriado do seu CARTÃO-RESPOSTA,
@@ -6333,7 +6333,7 @@ O polímero PET reage com 2 n do composto A, sob condições de altas temperatur
 dois produtos. O reagente PET é um polímero de n monômeros com a estrutura, entre colchetes, de um anel 
 aromático com grupo CO ligado ao carbono 1 e COO ligado ao carbono 4. O oxigênio do grupo COO do carbono 4 
 faz ligação simples com o grupo CH 2CH2O. Um dos produtos formado tem n moléculas de um composto que 
-contém um anel aromático com grupos COOCH3 ligados aos carbonos 1 e 4. O outro produto formado tem mais 
+contém um anel aromático com grupos COOCH_3 ligados aos carbonos 1 e 4. O outro produto formado tem mais 
 n moléculas do composto HOCH2CH2OH.
 O composto A, representado no esquema de reação, é o","B","ácido etanoico.",0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2019_1mil_cn","enem_2019_1mil_cn_1",81478,"ENEM 2019 - CN","ATENÇÃO: transcreva no espaço apropriado do seu CARTÃO-RESPOSTA,
@@ -6371,7 +6371,7 @@ O polímero PET reage com 2 n do composto A, sob condições de altas temperatur
 dois produtos. O reagente PET é um polímero de n monômeros com a estrutura, entre colchetes, de um anel 
 aromático com grupo CO ligado ao carbono 1 e COO ligado ao carbono 4. O oxigênio do grupo COO do carbono 4 
 faz ligação simples com o grupo CH 2CH2O. Um dos produtos formado tem n moléculas de um composto que 
-contém um anel aromático com grupos COOCH3 ligados aos carbonos 1 e 4. O outro produto formado tem mais 
+contém um anel aromático com grupos COOCH_3 ligados aos carbonos 1 e 4. O outro produto formado tem mais 
 n moléculas do composto HOCH2CH2OH.
 O composto A, representado no esquema de reação, é o","B","anidrido etanoico.",0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2019_1mil_cn","enem_2019_1mil_cn_1",82236,"ENEM 2019 - CN","ATENÇÃO: transcreva no espaço apropriado do seu CARTÃO-RESPOSTA,
@@ -6590,15 +6590,15 @@ espécies em meio básico, expressos no quadro.
 Descrição do quadro:
 Quadro com as semirreações de redução e os 
 respectivos potenciais padrão de redução, em volt.
-O reagente 2 H2O mais 2 elétrons forma os produtos 
+O reagente 2 H_2O mais 2 elétrons forma os produtos 
 H2 + 2 OH de carga negativa: –0,83 volt.
 O reagente Co(OH) 2 mais 2 elétrons forma os 
 produtos Co + 2 OH de carga negativa: –0,73 volt.
 O reagente Cu(OH) 2 mais 2 elétrons forma os 
 produtos Cu + 2 OH de carga negativa: –0,22 volt.
-Os reagentes PbO + H2O mais 2 elétrons formam os 
+Os reagentes PbO + H_2O mais 2 elétrons formam os 
 produtos Pb + 2 OH de carga negativa: –0,58 volt.
-O reagente Al(OH)4 de carga negativa mais 3 elétrons 
+O reagente Al(OH)_4 de carga negativa mais 3 elétrons 
 forma os produtos Al + 4 OH de carga negativa: 
 –2,33 volts.
 O reagente Fe(OH) 2 mais 2 elétrons forma os 
@@ -6646,15 +6646,15 @@ espécies em meio básico, expressos no quadro.
 Descrição do quadro:
 Quadro com as semirreações de redução e os 
 respectivos potenciais padrão de redução, em volt.
-O reagente 2 H2O mais 2 elétrons forma os produtos 
+O reagente 2 H_2O mais 2 elétrons forma os produtos 
 H2 + 2 OH de carga negativa: –0,83 volt.
 O reagente Co(OH) 2 mais 2 elétrons forma os 
 produtos Co + 2 OH de carga negativa: –0,73 volt.
 O reagente Cu(OH) 2 mais 2 elétrons forma os 
 produtos Cu + 2 OH de carga negativa: –0,22 volt.
-Os reagentes PbO + H2O mais 2 elétrons formam os 
+Os reagentes PbO + H_2O mais 2 elétrons formam os 
 produtos Pb + 2 OH de carga negativa: –0,58 volt.
-O reagente Al(OH)4 de carga negativa mais 3 elétrons 
+O reagente Al(OH)_4 de carga negativa mais 3 elétrons 
 forma os produtos Al + 4 OH de carga negativa: 
 –2,33 volts.
 O reagente Fe(OH) 2 mais 2 elétrons forma os 
@@ -6702,22 +6702,22 @@ espécies em meio básico, expressos no quadro.
 Descrição do quadro:
 Quadro com as semirreações de redução e os 
 respectivos potenciais padrão de redução, em volt.
-O reagente 2 H2O mais 2 elétrons forma os produtos 
+O reagente 2 H_2O mais 2 elétrons forma os produtos 
 H2 + 2 OH de carga negativa: –0,83 volt.
 O reagente Co(OH) 2 mais 2 elétrons forma os 
 produtos Co + 2 OH de carga negativa: –0,73 volt.
 O reagente Cu(OH) 2 mais 2 elétrons forma os 
 produtos Cu + 2 OH de carga negativa: –0,22 volt.
-Os reagentes PbO + H2O mais 2 elétrons formam os 
+Os reagentes PbO + H_2O mais 2 elétrons formam os 
 produtos Pb + 2 OH de carga negativa: –0,58 volt.
-O reagente Al(OH)4 de carga negativa mais 3 elétrons 
+O reagente Al(OH)_4 de carga negativa mais 3 elétrons 
 forma os produtos Al + 4 OH de carga negativa: 
 –2,33 volts.
 O reagente Fe(OH) 2 mais 2 elétrons forma os 
 produtos Fe + 2 OH de carga negativa: –0,88 volt.
 Qual é a outra espécie que está presente na composição 
 da mistura sólida comercial para aumentar sua 
-eficiência?","A","Cu(OH)2",0,NA,NA,NA,NA,"Portuguese","C"
+eficiência?","A","Cu(OH)_2",0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2019_1mil_cn","enem_2019_1mil_cn_1",82364,"ENEM 2019 - CN","ATENÇÃO: transcreva no espaço apropriado do seu CARTÃO-RESPOSTA,
 com sua caligrafia usual, considerando as letras maiúsculas e minúsculas, a seguinte frase:
 Temos todo o tempo do mundo.
@@ -6758,22 +6758,22 @@ espécies em meio básico, expressos no quadro.
 Descrição do quadro:
 Quadro com as semirreações de redução e os 
 respectivos potenciais padrão de redução, em volt.
-O reagente 2 H2O mais 2 elétrons forma os produtos 
+O reagente 2 H_2O mais 2 elétrons forma os produtos 
 H2 + 2 OH de carga negativa: –0,83 volt.
 O reagente Co(OH) 2 mais 2 elétrons forma os 
 produtos Co + 2 OH de carga negativa: –0,73 volt.
 O reagente Cu(OH) 2 mais 2 elétrons forma os 
 produtos Cu + 2 OH de carga negativa: –0,22 volt.
-Os reagentes PbO + H2O mais 2 elétrons formam os 
+Os reagentes PbO + H_2O mais 2 elétrons formam os 
 produtos Pb + 2 OH de carga negativa: –0,58 volt.
-O reagente Al(OH)4 de carga negativa mais 3 elétrons 
+O reagente Al(OH)_4 de carga negativa mais 3 elétrons 
 forma os produtos Al + 4 OH de carga negativa: 
 –2,33 volts.
 O reagente Fe(OH) 2 mais 2 elétrons forma os 
 produtos Fe + 2 OH de carga negativa: –0,88 volt.
 Qual é a outra espécie que está presente na composição 
 da mistura sólida comercial para aumentar sua 
-eficiência?","A","Fe(OH)2",0,NA,NA,NA,NA,"Portuguese","D"
+eficiência?","A","Fe(OH)_2",0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2019_1mil_cn","enem_2019_1mil_cn_1",82364,"ENEM 2019 - CN","ATENÇÃO: transcreva no espaço apropriado do seu CARTÃO-RESPOSTA,
 com sua caligrafia usual, considerando as letras maiúsculas e minúsculas, a seguinte frase:
 Temos todo o tempo do mundo.
@@ -6814,15 +6814,15 @@ espécies em meio básico, expressos no quadro.
 Descrição do quadro:
 Quadro com as semirreações de redução e os 
 respectivos potenciais padrão de redução, em volt.
-O reagente 2 H2O mais 2 elétrons forma os produtos 
+O reagente 2 H_2O mais 2 elétrons forma os produtos 
 H2 + 2 OH de carga negativa: –0,83 volt.
 O reagente Co(OH) 2 mais 2 elétrons forma os 
 produtos Co + 2 OH de carga negativa: –0,73 volt.
 O reagente Cu(OH) 2 mais 2 elétrons forma os 
 produtos Cu + 2 OH de carga negativa: –0,22 volt.
-Os reagentes PbO + H2O mais 2 elétrons formam os 
+Os reagentes PbO + H_2O mais 2 elétrons formam os 
 produtos Pb + 2 OH de carga negativa: –0,58 volt.
-O reagente Al(OH)4 de carga negativa mais 3 elétrons 
+O reagente Al(OH)_4 de carga negativa mais 3 elétrons 
 forma os produtos Al + 4 OH de carga negativa: 
 –2,33 volts.
 O reagente Fe(OH) 2 mais 2 elétrons forma os 
@@ -6885,9 +6885,9 @@ reações sequenciais, conforme as equações 1 e 2. Na
 primeira, há conversão de glicose do sangue em ácido 
 glucônico, gerando peróxido de hidrogênio:
 Descrição da equação 1:
-Os reagentes C6H12O6 (aquoso) mais O 2 (gasoso) 
+Os reagentes C_6H12O6 (aquoso) mais O 2 (gasoso) 
 mais H2O (líquido), na presença de enzimas, formam 
-os produtos C6H12O7 (aquoso) mais H2O2 (aquoso).
+os produtos C_6H12O7 (aquoso) mais H_2O2 (aquoso).
 Na segunda, o peróxido de hidrogênio reage com íons 
 iodeto gerando o íon tri-iodeto, água e oxigênio.
 Descrição da equação 2:
@@ -6952,9 +6952,9 @@ reações sequenciais, conforme as equações 1 e 2. Na
 primeira, há conversão de glicose do sangue em ácido 
 glucônico, gerando peróxido de hidrogênio:
 Descrição da equação 1:
-Os reagentes C6H12O6 (aquoso) mais O 2 (gasoso) 
+Os reagentes C_6H12O6 (aquoso) mais O 2 (gasoso) 
 mais H2O (líquido), na presença de enzimas, formam 
-os produtos C6H12O7 (aquoso) mais H2O2 (aquoso).
+os produtos C_6H12O7 (aquoso) mais H_2O2 (aquoso).
 Na segunda, o peróxido de hidrogênio reage com íons 
 iodeto gerando o íon tri-iodeto, água e oxigênio.
 Descrição da equação 2:
@@ -7019,9 +7019,9 @@ reações sequenciais, conforme as equações 1 e 2. Na
 primeira, há conversão de glicose do sangue em ácido 
 glucônico, gerando peróxido de hidrogênio:
 Descrição da equação 1:
-Os reagentes C6H12O6 (aquoso) mais O 2 (gasoso) 
+Os reagentes C_6H12O6 (aquoso) mais O 2 (gasoso) 
 mais H2O (líquido), na presença de enzimas, formam 
-os produtos C6H12O7 (aquoso) mais H2O2 (aquoso).
+os produtos C_6H12O7 (aquoso) mais H_2O2 (aquoso).
 Na segunda, o peróxido de hidrogênio reage com íons 
 iodeto gerando o íon tri-iodeto, água e oxigênio.
 Descrição da equação 2:
@@ -7086,9 +7086,9 @@ reações sequenciais, conforme as equações 1 e 2. Na
 primeira, há conversão de glicose do sangue em ácido 
 glucônico, gerando peróxido de hidrogênio:
 Descrição da equação 1:
-Os reagentes C6H12O6 (aquoso) mais O 2 (gasoso) 
+Os reagentes C_6H12O6 (aquoso) mais O 2 (gasoso) 
 mais H2O (líquido), na presença de enzimas, formam 
-os produtos C6H12O7 (aquoso) mais H2O2 (aquoso).
+os produtos C_6H12O7 (aquoso) mais H_2O2 (aquoso).
 Na segunda, o peróxido de hidrogênio reage com íons 
 iodeto gerando o íon tri-iodeto, água e oxigênio.
 Descrição da equação 2:
@@ -7153,9 +7153,9 @@ reações sequenciais, conforme as equações 1 e 2. Na
 primeira, há conversão de glicose do sangue em ácido 
 glucônico, gerando peróxido de hidrogênio:
 Descrição da equação 1:
-Os reagentes C6H12O6 (aquoso) mais O 2 (gasoso) 
+Os reagentes C_6H12O6 (aquoso) mais O 2 (gasoso) 
 mais H2O (líquido), na presença de enzimas, formam 
-os produtos C6H12O7 (aquoso) mais H2O2 (aquoso).
+os produtos C_6H12O7 (aquoso) mais H_2O2 (aquoso).
 Na segunda, o peróxido de hidrogênio reage com íons 
 iodeto gerando o íon tri-iodeto, água e oxigênio.
 Descrição da equação 2:

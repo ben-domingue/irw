@@ -797,8 +797,8 @@ as emissões na geração e transmissão da eletricidade,
 fecha parêntese. A reação de combustão do etanol pode 
 ser representada pela equação química:
 Descrição da equação química: Os reagentes 
-C2H5OH, abre parêntese, líquido, fecha parêntese, 
-mais 3 O2, abre parêntese, gasoso, fecha parêntese, 
+C_2H5OH, abre parêntese, líquido, fecha parêntese, 
+mais 3 O_2, abre parêntese, gasoso, fecha parêntese, 
 formam os produtos 2 CO 2, abre parêntese, gasoso, 
 fecha parêntese, mais 3 H2O, abre parêntese, gasoso, 
 fecha parêntese.
@@ -856,8 +856,8 @@ as emissões na geração e transmissão da eletricidade,
 fecha parêntese. A reação de combustão do etanol pode 
 ser representada pela equação química:
 Descrição da equação química: Os reagentes 
-C2H5OH, abre parêntese, líquido, fecha parêntese, 
-mais 3 O2, abre parêntese, gasoso, fecha parêntese, 
+C_2H5OH, abre parêntese, líquido, fecha parêntese, 
+mais 3 O_2, abre parêntese, gasoso, fecha parêntese, 
 formam os produtos 2 CO 2, abre parêntese, gasoso, 
 fecha parêntese, mais 3 H2O, abre parêntese, gasoso, 
 fecha parêntese.
@@ -915,8 +915,8 @@ as emissões na geração e transmissão da eletricidade,
 fecha parêntese. A reação de combustão do etanol pode 
 ser representada pela equação química:
 Descrição da equação química: Os reagentes 
-C2H5OH, abre parêntese, líquido, fecha parêntese, 
-mais 3 O2, abre parêntese, gasoso, fecha parêntese, 
+C_2H5OH, abre parêntese, líquido, fecha parêntese, 
+mais 3 O_2, abre parêntese, gasoso, fecha parêntese, 
 formam os produtos 2 CO 2, abre parêntese, gasoso, 
 fecha parêntese, mais 3 H2O, abre parêntese, gasoso, 
 fecha parêntese.
@@ -974,8 +974,8 @@ as emissões na geração e transmissão da eletricidade,
 fecha parêntese. A reação de combustão do etanol pode 
 ser representada pela equação química:
 Descrição da equação química: Os reagentes 
-C2H5OH, abre parêntese, líquido, fecha parêntese, 
-mais 3 O2, abre parêntese, gasoso, fecha parêntese, 
+C_2H5OH, abre parêntese, líquido, fecha parêntese, 
+mais 3 O_2, abre parêntese, gasoso, fecha parêntese, 
 formam os produtos 2 CO 2, abre parêntese, gasoso, 
 fecha parêntese, mais 3 H2O, abre parêntese, gasoso, 
 fecha parêntese.
@@ -1033,8 +1033,8 @@ as emissões na geração e transmissão da eletricidade,
 fecha parêntese. A reação de combustão do etanol pode 
 ser representada pela equação química:
 Descrição da equação química: Os reagentes 
-C2H5OH, abre parêntese, líquido, fecha parêntese, 
-mais 3 O2, abre parêntese, gasoso, fecha parêntese, 
+C_2H5OH, abre parêntese, líquido, fecha parêntese, 
+mais 3 O_2, abre parêntese, gasoso, fecha parêntese, 
 formam os produtos 2 CO 2, abre parêntese, gasoso, 
 fecha parêntese, mais 3 H2O, abre parêntese, gasoso, 
 fecha parêntese.
@@ -6615,7 +6615,7 @@ invés de cair, ele continua andando no vazio e só quando
 percebe que não há nada sob seus pés é que ele para 
 de andar e cai verticalmente. No entanto, para observar 
 uma trajetória de queda num experimento real, pode-se 
-lançar uma bolinha, com velocidade constante (V0), sobre 
+lançar uma bolinha, com velocidade constante (V_0), sobre 
 a superfície de uma mesa e verificar o seu movimento de 
 queda até o chão. 
 Qual figura melhor representa a trajetória de queda da bolinha?","D",NA,0,NA,NA,NA,NA,"Portuguese","A"
@@ -6654,7 +6654,7 @@ invés de cair, ele continua andando no vazio e só quando
 percebe que não há nada sob seus pés é que ele para 
 de andar e cai verticalmente. No entanto, para observar 
 uma trajetória de queda num experimento real, pode-se 
-lançar uma bolinha, com velocidade constante (V0), sobre 
+lançar uma bolinha, com velocidade constante (V_0), sobre 
 a superfície de uma mesa e verificar o seu movimento de 
 queda até o chão. 
 Qual figura melhor representa a trajetória de queda da bolinha?","D",NA,0,NA,NA,NA,NA,"Portuguese","B"
@@ -6693,7 +6693,7 @@ invés de cair, ele continua andando no vazio e só quando
 percebe que não há nada sob seus pés é que ele para 
 de andar e cai verticalmente. No entanto, para observar 
 uma trajetória de queda num experimento real, pode-se 
-lançar uma bolinha, com velocidade constante (V0), sobre 
+lançar uma bolinha, com velocidade constante (V_0), sobre 
 a superfície de uma mesa e verificar o seu movimento de 
 queda até o chão. 
 Qual figura melhor representa a trajetória de queda da bolinha?","D",NA,0,NA,NA,NA,NA,"Portuguese","C"
@@ -6732,7 +6732,7 @@ invés de cair, ele continua andando no vazio e só quando
 percebe que não há nada sob seus pés é que ele para 
 de andar e cai verticalmente. No entanto, para observar 
 uma trajetória de queda num experimento real, pode-se 
-lançar uma bolinha, com velocidade constante (V0), sobre 
+lançar uma bolinha, com velocidade constante (V_0), sobre 
 a superfície de uma mesa e verificar o seu movimento de 
 queda até o chão. 
 Qual figura melhor representa a trajetória de queda da bolinha?","D",NA,1,NA,NA,NA,NA,"Portuguese","D"
@@ -6771,7 +6771,7 @@ invés de cair, ele continua andando no vazio e só quando
 percebe que não há nada sob seus pés é que ele para 
 de andar e cai verticalmente. No entanto, para observar 
 uma trajetória de queda num experimento real, pode-se 
-lançar uma bolinha, com velocidade constante (V0), sobre 
+lançar uma bolinha, com velocidade constante (V_0), sobre 
 a superfície de uma mesa e verificar o seu movimento de 
 queda até o chão. 
 Qual figura melhor representa a trajetória de queda da bolinha?","D",NA,0,NA,NA,NA,NA,"Portuguese","E"
@@ -6834,7 +6834,7 @@ humano após tratamento convencional, segundo
 Resolução Conama número 357/2005: OD maior ou 
 igual a 5 miligramas por litro e DBO menor ou igual a 
 5 miligramas por litro.
-OD e DBO (mg L−1)
+OD e DBO (mg L^−1)
 14 
 12
 10
@@ -6927,7 +6927,7 @@ humano após tratamento convencional, segundo
 Resolução Conama número 357/2005: OD maior ou 
 igual a 5 miligramas por litro e DBO menor ou igual a 
 5 miligramas por litro.
-OD e DBO (mg L−1)
+OD e DBO (mg L^−1)
 14 
 12
 10
@@ -7020,7 +7020,7 @@ humano após tratamento convencional, segundo
 Resolução Conama número 357/2005: OD maior ou 
 igual a 5 miligramas por litro e DBO menor ou igual a 
 5 miligramas por litro.
-OD e DBO (mg L−1)
+OD e DBO (mg L^−1)
 14 
 12
 10
@@ -7113,7 +7113,7 @@ humano após tratamento convencional, segundo
 Resolução Conama número 357/2005: OD maior ou 
 igual a 5 miligramas por litro e DBO menor ou igual a 
 5 miligramas por litro.
-OD e DBO (mg L−1)
+OD e DBO (mg L^−1)
 14 
 12
 10
@@ -7206,7 +7206,7 @@ humano após tratamento convencional, segundo
 Resolução Conama número 357/2005: OD maior ou 
 igual a 5 miligramas por litro e DBO menor ou igual a 
 5 miligramas por litro.
-OD e DBO (mg L−1)
+OD e DBO (mg L^−1)
 14 
 12
 10
@@ -10158,12 +10158,12 @@ Eu fiz meu próprio caminho e meu caminho me fez.
 quanto ao sistema ABO, em que 25% dos indivíduos 
 pertencem ao grupo O e 16%, ao grupo A homozigotos. 
 Considerando que: p = frequência de I A; q = frequência 
-de IB; e r = frequência de i, espera-se encontrar:
+de I^B; e r = frequência de i, espera-se encontrar:
 Grupo Genótipos Frequências
-A IAIA e IAi p2 + 2pr
-B IBIB e IBi q2 + 2qr
+A IAIA e I^Ai p^2 + 2pr
+B IBIB e I^Bi q^2 + 2qr
 AB IAIB  2pq
-O ii   r2
+O ii   r^2
 A porcentagem de doadores compatíveis para alguém do 
 grupo B nessa população deve ser de","D","1 1%.",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2020_1mil_cn","enem_2020_1mil_cn_1",98228,"ENEM 2020 - CN","LARANJA
@@ -10199,12 +10199,12 @@ Eu fiz meu próprio caminho e meu caminho me fez.
 quanto ao sistema ABO, em que 25% dos indivíduos 
 pertencem ao grupo O e 16%, ao grupo A homozigotos. 
 Considerando que: p = frequência de I A; q = frequência 
-de IB; e r = frequência de i, espera-se encontrar:
+de I^B; e r = frequência de i, espera-se encontrar:
 Grupo Genótipos Frequências
-A IAIA e IAi p2 + 2pr
-B IBIB e IBi q2 + 2qr
+A IAIA e I^Ai p^2 + 2pr
+B IBIB e I^Bi q^2 + 2qr
 AB IAIB  2pq
-O ii   r2
+O ii   r^2
 A porcentagem de doadores compatíveis para alguém do 
 grupo B nessa população deve ser de","D","19%.",0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2020_1mil_cn","enem_2020_1mil_cn_1",98228,"ENEM 2020 - CN","LARANJA
@@ -10240,12 +10240,12 @@ Eu fiz meu próprio caminho e meu caminho me fez.
 quanto ao sistema ABO, em que 25% dos indivíduos 
 pertencem ao grupo O e 16%, ao grupo A homozigotos. 
 Considerando que: p = frequência de I A; q = frequência 
-de IB; e r = frequência de i, espera-se encontrar:
+de I^B; e r = frequência de i, espera-se encontrar:
 Grupo Genótipos Frequências
-A IAIA e IAi p2 + 2pr
-B IBIB e IBi q2 + 2qr
+A IAIA e I^Ai p^2 + 2pr
+B IBIB e I^Bi q^2 + 2qr
 AB IAIB  2pq
-O ii   r2
+O ii   r^2
 A porcentagem de doadores compatíveis para alguém do 
 grupo B nessa população deve ser de","D","26%.",0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2020_1mil_cn","enem_2020_1mil_cn_1",98228,"ENEM 2020 - CN","LARANJA
@@ -10281,12 +10281,12 @@ Eu fiz meu próprio caminho e meu caminho me fez.
 quanto ao sistema ABO, em que 25% dos indivíduos 
 pertencem ao grupo O e 16%, ao grupo A homozigotos. 
 Considerando que: p = frequência de I A; q = frequência 
-de IB; e r = frequência de i, espera-se encontrar:
+de I^B; e r = frequência de i, espera-se encontrar:
 Grupo Genótipos Frequências
-A IAIA e IAi p2 + 2pr
-B IBIB e IBi q2 + 2qr
+A IAIA e I^Ai p^2 + 2pr
+B IBIB e I^Bi q^2 + 2qr
 AB IAIB  2pq
-O ii   r2
+O ii   r^2
 A porcentagem de doadores compatíveis para alguém do 
 grupo B nessa população deve ser de","D","36%.",1,NA,NA,NA,NA,"Portuguese","D"
 "enem_2020_1mil_cn","enem_2020_1mil_cn_1",98228,"ENEM 2020 - CN","LARANJA
@@ -10322,11 +10322,11 @@ Eu fiz meu próprio caminho e meu caminho me fez.
 quanto ao sistema ABO, em que 25% dos indivíduos 
 pertencem ao grupo O e 16%, ao grupo A homozigotos. 
 Considerando que: p = frequência de I A; q = frequência 
-de IB; e r = frequência de i, espera-se encontrar:
+de I^B; e r = frequência de i, espera-se encontrar:
 Grupo Genótipos Frequências
-A IAIA e IAi p2 + 2pr
-B IBIB e IBi q2 + 2qr
+A IAIA e I^Ai p^2 + 2pr
+B IBIB e I^Bi q^2 + 2qr
 AB IAIB  2pq
-O ii   r2
+O ii   r^2
 A porcentagem de doadores compatíveis para alguém do 
 grupo B nessa população deve ser de","D","60%.",0,NA,NA,NA,NA,"Portuguese","E"

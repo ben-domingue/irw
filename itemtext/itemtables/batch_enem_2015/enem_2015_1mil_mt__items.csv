@@ -4510,7 +4510,7 @@ Questões de 91 a 95 (opção inglês)",NA,"Em uma central de atendimento, cem p
 receberam senhas numeradas de 1 até 100. Uma das 
 senhas é sorteada ao acaso.
 Qual é a probabilidade de a senha sorteada ser um 
-número de 1 a 20?","C",NA,0,NA,NA,NA,NA,"Portuguese","A"
+número de 1 a 20?","C","1/100",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2015_1mil_mt","enem_2015_1mil_mt_1",14712,"ENEM 2015 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -4637,7 +4637,7 @@ Questões de 91 a 95 (opção inglês)",NA,"Em uma central de atendimento, cem p
 receberam senhas numeradas de 1 até 100. Uma das 
 senhas é sorteada ao acaso.
 Qual é a probabilidade de a senha sorteada ser um 
-número de 1 a 20?","C",NA,0,NA,NA,NA,NA,"Portuguese","B"
+número de 1 a 20?","C","19/100",0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2015_1mil_mt","enem_2015_1mil_mt_1",14712,"ENEM 2015 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -4764,7 +4764,7 @@ Questões de 91 a 95 (opção inglês)",NA,"Em uma central de atendimento, cem p
 receberam senhas numeradas de 1 até 100. Uma das 
 senhas é sorteada ao acaso.
 Qual é a probabilidade de a senha sorteada ser um 
-número de 1 a 20?","C",NA,1,NA,NA,NA,NA,"Portuguese","C"
+número de 1 a 20?","C","20/100",1,NA,NA,NA,NA,"Portuguese","C"
 "enem_2015_1mil_mt","enem_2015_1mil_mt_1",14712,"ENEM 2015 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -4891,7 +4891,7 @@ Questões de 91 a 95 (opção inglês)",NA,"Em uma central de atendimento, cem p
 receberam senhas numeradas de 1 até 100. Uma das 
 senhas é sorteada ao acaso.
 Qual é a probabilidade de a senha sorteada ser um 
-número de 1 a 20?","C",NA,0,NA,NA,NA,NA,"Portuguese","D"
+número de 1 a 20?","C","21/100",0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2015_1mil_mt","enem_2015_1mil_mt_1",14712,"ENEM 2015 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -5018,7 +5018,7 @@ Questões de 91 a 95 (opção inglês)",NA,"Em uma central de atendimento, cem p
 receberam senhas numeradas de 1 até 100. Uma das 
 senhas é sorteada ao acaso.
 Qual é a probabilidade de a senha sorteada ser um 
-número de 1 a 20?","C",NA,0,NA,NA,NA,NA,"Portuguese","E"
+número de 1 a 20?","C","80/100",0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2015_1mil_mt","enem_2015_1mil_mt_1",28651,"ENEM 2015 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -12833,7 +12833,7 @@ condições, o engenheiro determinou uma expressão que
 fornece a altura h do vidro em função da medida n de sua 
 base, em metros.
 A expressão algébrica que determina a altura do vidro é","E","log (
-n + √n2 + 4
+n + √^n2 + 4
 ) − log (
 n − √n2 + 4
 )22",0,NA,NA,NA,NA,"Portuguese","A"
@@ -13262,7 +13262,7 @@ condições, o engenheiro determinou uma expressão que
 fornece a altura h do vidro em função da medida n de sua 
 base, em metros.
 A expressão algébrica que determina a altura do vidro é","E","log (
-n + √n2 + 4
+n + √^n2 + 4
 )2",0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2015_1mil_mt","enem_2015_1mil_mt_1",81781,"ENEM 2015 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
@@ -13403,7 +13403,7 @@ condições, o engenheiro determinou uma expressão que
 fornece a altura h do vidro em função da medida n de sua 
 base, em metros.
 A expressão algébrica que determina a altura do vidro é","E","2 log (
-n + √n2 + 4
+n + √^n2 + 4
 )2",1,NA,NA,NA,NA,"Portuguese","E"
 "enem_2015_1mil_mt","enem_2015_1mil_mt_1",29167,"ENEM 2015 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
@@ -17604,7 +17604,7 @@ Essa indústria recebeu a encomenda de uma malha
 de proteção solar para ser aplicada em um vidro retangular 
 de 5 m de largura por 9 m de comprimento.
 A medida de d, em milímetros, para que a taxa de 
-cobertura da malha seja de 75% é","A","2",1,NA,NA,NA,NA,"Portuguese","A"
+cobertura da malha seja de 75% é","A",NA,1,NA,NA,NA,NA,"Portuguese","A"
 "enem_2015_1mil_mt","enem_2015_1mil_mt_1",49204,"ENEM 2015 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -17753,7 +17753,7 @@ Essa indústria recebeu a encomenda de uma malha
 de proteção solar para ser aplicada em um vidro retangular 
 de 5 m de largura por 9 m de comprimento.
 A medida de d, em milímetros, para que a taxa de 
-cobertura da malha seja de 75% é","A","1",0,NA,NA,NA,NA,"Portuguese","B"
+cobertura da malha seja de 75% é","A",NA,0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2015_1mil_mt","enem_2015_1mil_mt_1",49204,"ENEM 2015 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -17902,8 +17902,7 @@ Essa indústria recebeu a encomenda de uma malha
 de proteção solar para ser aplicada em um vidro retangular 
 de 5 m de largura por 9 m de comprimento.
 A medida de d, em milímetros, para que a taxa de 
-cobertura da malha seja de 75% é","A","11
-3",0,NA,NA,NA,NA,"Portuguese","C"
+cobertura da malha seja de 75% é","A",NA,0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2015_1mil_mt","enem_2015_1mil_mt_1",49204,"ENEM 2015 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -18052,8 +18051,7 @@ Essa indústria recebeu a encomenda de uma malha
 de proteção solar para ser aplicada em um vidro retangular 
 de 5 m de largura por 9 m de comprimento.
 A medida de d, em milímetros, para que a taxa de 
-cobertura da malha seja de 75% é","A","4
-3",0,NA,NA,NA,NA,"Portuguese","D"
+cobertura da malha seja de 75% é","A",NA,0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2015_1mil_mt","enem_2015_1mil_mt_1",49204,"ENEM 2015 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -18202,7 +18200,7 @@ Essa indústria recebeu a encomenda de uma malha
 de proteção solar para ser aplicada em um vidro retangular 
 de 5 m de largura por 9 m de comprimento.
 A medida de d, em milímetros, para que a taxa de 
-cobertura da malha seja de 75% é","A","2",0,NA,NA,NA,NA,"Portuguese","E"
+cobertura da malha seja de 75% é","A",NA,0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2015_1mil_mt","enem_2015_1mil_mt_1",15876,"ENEM 2015 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -19670,8 +19668,7 @@ as mostradas em branco.
 LG
 Disponível em: www.gebh.net. Acesso em: 30 out. 2013 (adaptado).
 O número de formas distintas de se acomodar a família 
-nesse voo é calculado por","A","9!
-2!",1,NA,NA,NA,NA,"Portuguese","A"
+nesse voo é calculado por","A","9!/2!",1,NA,NA,NA,NA,"Portuguese","A"
 "enem_2015_1mil_mt","enem_2015_1mil_mt_1",60361,"ENEM 2015 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -19804,8 +19801,7 @@ as mostradas em branco.
 LG
 Disponível em: www.gebh.net. Acesso em: 30 out. 2013 (adaptado).
 O número de formas distintas de se acomodar a família 
-nesse voo é calculado por","A","9!
-7! × 2!",0,NA,NA,NA,NA,"Portuguese","B"
+nesse voo é calculado por","A","9!/7! × 2!",0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2015_1mil_mt","enem_2015_1mil_mt_1",60361,"ENEM 2015 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -27350,7 +27346,7 @@ b
 − a a0
 x
 Considere que o volume aproximado dessa bola é 
-dado por V = 4ab2.
+dado por V = 4ab^2.
 O volume dessa bola, em função apenas de b, é dado por","B","8b3",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2015_1mil_mt","enem_2015_1mil_mt_1",61391,"ENEM 2015 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
@@ -27487,7 +27483,7 @@ b
 − a a0
 x
 Considere que o volume aproximado dessa bola é 
-dado por V = 4ab2.
+dado por V = 4ab^2.
 O volume dessa bola, em função apenas de b, é dado por","B","6b3",1,NA,NA,NA,NA,"Portuguese","B"
 "enem_2015_1mil_mt","enem_2015_1mil_mt_1",61391,"ENEM 2015 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
@@ -27624,7 +27620,7 @@ b
 − a a0
 x
 Considere que o volume aproximado dessa bola é 
-dado por V = 4ab2.
+dado por V = 4ab^2.
 O volume dessa bola, em função apenas de b, é dado por","B","5b3",0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2015_1mil_mt","enem_2015_1mil_mt_1",61391,"ENEM 2015 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
@@ -27761,7 +27757,7 @@ b
 − a a0
 x
 Considere que o volume aproximado dessa bola é 
-dado por V = 4ab2.
+dado por V = 4ab^2.
 O volume dessa bola, em função apenas de b, é dado por","B","4b3",0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2015_1mil_mt","enem_2015_1mil_mt_1",61391,"ENEM 2015 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
@@ -27898,7 +27894,7 @@ b
 − a a0
 x
 Considere que o volume aproximado dessa bola é 
-dado por V = 4ab2.
+dado por V = 4ab^2.
 O volume dessa bola, em função apenas de b, é dado por","B","2b3",0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2015_1mil_mt","enem_2015_1mil_mt_1",41659,"ENEM 2015 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
@@ -28033,23 +28029,7 @@ realize entre 300 e 500 ligações, será cobrado um valor
 fixo mensal de R$ 32,00.
 Com base nos elementos apresentados, o gráfico que 
 melhor representa a relação entre o valor mensal pago 
-nesse plano e o número de ligações feitas é:","B","50    100 150 200 250 300 350 400
-número de 
-ligações
-Valor mensal pago por 
-plano em reais
-33
-30
-27
-24
-21
-18
-15
-12
-9
-6
-3
-0",0,NA,NA,NA,NA,"Portuguese","A"
+nesse plano e o número de ligações feitas é:","B",NA,0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2015_1mil_mt","enem_2015_1mil_mt_1",41659,"ENEM 2015 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -28183,22 +28163,7 @@ realize entre 300 e 500 ligações, será cobrado um valor
 fixo mensal de R$ 32,00.
 Com base nos elementos apresentados, o gráfico que 
 melhor representa a relação entre o valor mensal pago 
-nesse plano e o número de ligações feitas é:","B","50    100 150 200 250 300 350 400
-33
-30
-27
-24
-21
-18
-15
-12
-9
-6
-3
-0 número de 
-ligações
-Valor mensal pago por 
-plano em reais",1,NA,NA,NA,NA,"Portuguese","B"
+nesse plano e o número de ligações feitas é:","B",NA,1,NA,NA,NA,NA,"Portuguese","B"
 "enem_2015_1mil_mt","enem_2015_1mil_mt_1",41659,"ENEM 2015 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -28332,22 +28297,7 @@ realize entre 300 e 500 ligações, será cobrado um valor
 fixo mensal de R$ 32,00.
 Com base nos elementos apresentados, o gráfico que 
 melhor representa a relação entre o valor mensal pago 
-nesse plano e o número de ligações feitas é:","B","50    100 150 200 250 300 350 400
-33
-30
-27
-24
-21
-18
-15
-12
-9
-6
-3
-0 número de 
-ligações
-Valor mensal pago por 
-plano em reais",0,NA,NA,NA,NA,"Portuguese","C"
+nesse plano e o número de ligações feitas é:","B",NA,0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2015_1mil_mt","enem_2015_1mil_mt_1",41659,"ENEM 2015 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -28481,22 +28431,7 @@ realize entre 300 e 500 ligações, será cobrado um valor
 fixo mensal de R$ 32,00.
 Com base nos elementos apresentados, o gráfico que 
 melhor representa a relação entre o valor mensal pago 
-nesse plano e o número de ligações feitas é:","B","50    100 150 200 250 300 350 400
-33
-30
-27
-24
-21
-18
-15
-12
-9
-6
-3
-0 número de 
-ligações
-Valor mensal pago por 
-plano em reais",0,NA,NA,NA,NA,"Portuguese","D"
+nesse plano e o número de ligações feitas é:","B",NA,0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2015_1mil_mt","enem_2015_1mil_mt_1",41659,"ENEM 2015 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -28630,22 +28565,7 @@ realize entre 300 e 500 ligações, será cobrado um valor
 fixo mensal de R$ 32,00.
 Com base nos elementos apresentados, o gráfico que 
 melhor representa a relação entre o valor mensal pago 
-nesse plano e o número de ligações feitas é:","B","50    100 150 200 250 300 350 400
-33
-30
-27
-24
-21
-18
-15
-12
-9
-6
-3
-0 número de 
-ligações
-Valor mensal pago por 
-plano em reais",0,NA,NA,NA,NA,"Portuguese","E"
+nesse plano e o número de ligações feitas é:","B",NA,0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2015_1mil_mt","enem_2015_1mil_mt_1",31374,"ENEM 2015 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -29478,7 +29398,7 @@ Questões de 91 a 95 (opção inglês)",NA,"Para economizar em suas contas mensa
 um reservatório para armazenar a água captada das 
 chuvas, que tenha capacidade suficiente para abastecer 
 a família por 20 dias. Cada pessoa da família consome, 
-diariamente, 0,08 m3 de água.
+diariamente, 0,08 m^3 de água.
 Para que os objetivos da família sejam atingidos, a 
 capacidade mínima, em litros, do reservatório a ser 
 construído deve ser","E","16.",0,NA,NA,NA,NA,"Portuguese","A"
@@ -29609,7 +29529,7 @@ Questões de 91 a 95 (opção inglês)",NA,"Para economizar em suas contas mensa
 um reservatório para armazenar a água captada das 
 chuvas, que tenha capacidade suficiente para abastecer 
 a família por 20 dias. Cada pessoa da família consome, 
-diariamente, 0,08 m3 de água.
+diariamente, 0,08 m^3 de água.
 Para que os objetivos da família sejam atingidos, a 
 capacidade mínima, em litros, do reservatório a ser 
 construído deve ser","E","800.",0,NA,NA,NA,NA,"Portuguese","B"
@@ -29740,7 +29660,7 @@ Questões de 91 a 95 (opção inglês)",NA,"Para economizar em suas contas mensa
 um reservatório para armazenar a água captada das 
 chuvas, que tenha capacidade suficiente para abastecer 
 a família por 20 dias. Cada pessoa da família consome, 
-diariamente, 0,08 m3 de água.
+diariamente, 0,08 m^3 de água.
 Para que os objetivos da família sejam atingidos, a 
 capacidade mínima, em litros, do reservatório a ser 
 construído deve ser","E","1 600.",0,NA,NA,NA,NA,"Portuguese","C"
@@ -29871,7 +29791,7 @@ Questões de 91 a 95 (opção inglês)",NA,"Para economizar em suas contas mensa
 um reservatório para armazenar a água captada das 
 chuvas, que tenha capacidade suficiente para abastecer 
 a família por 20 dias. Cada pessoa da família consome, 
-diariamente, 0,08 m3 de água.
+diariamente, 0,08 m^3 de água.
 Para que os objetivos da família sejam atingidos, a 
 capacidade mínima, em litros, do reservatório a ser 
 construído deve ser","E","8 000.",0,NA,NA,NA,NA,"Portuguese","D"
@@ -30002,7 +29922,7 @@ Questões de 91 a 95 (opção inglês)",NA,"Para economizar em suas contas mensa
 um reservatório para armazenar a água captada das 
 chuvas, que tenha capacidade suficiente para abastecer 
 a família por 20 dias. Cada pessoa da família consome, 
-diariamente, 0,08 m3 de água.
+diariamente, 0,08 m^3 de água.
 Para que os objetivos da família sejam atingidos, a 
 capacidade mínima, em litros, do reservatório a ser 
 construído deve ser","E","16 000.",1,NA,NA,NA,NA,"Portuguese","E"
@@ -30838,8 +30758,8 @@ preços mais baixos, o que ocorre no mês de produção
 máxima da safra.
 A partir de uma série histórica, observou-se que o preço 
 P, em reais, do quilograma de um certo produto sazonal 
-pode ser descrito pela função P(x) = 8 + 5cos (
-πx − π
+pode ser descrito pela função P(^x) = 8 + 5^cos (
+π^x − π
 )6
 ,
 onde x representa o mês do ano, sendo x = 1 associado 
@@ -30980,8 +30900,8 @@ preços mais baixos, o que ocorre no mês de produção
 máxima da safra.
 A partir de uma série histórica, observou-se que o preço 
 P, em reais, do quilograma de um certo produto sazonal 
-pode ser descrito pela função P(x) = 8 + 5cos (
-πx − π
+pode ser descrito pela função P(^x) = 8 + 5^cos (
+π^x − π
 )6
 ,
 onde x representa o mês do ano, sendo x = 1 associado 
@@ -31122,8 +31042,8 @@ preços mais baixos, o que ocorre no mês de produção
 máxima da safra.
 A partir de uma série histórica, observou-se que o preço 
 P, em reais, do quilograma de um certo produto sazonal 
-pode ser descrito pela função P(x) = 8 + 5cos (
-πx − π
+pode ser descrito pela função P(^x) = 8 + 5^cos (
+π^x − π
 )6
 ,
 onde x representa o mês do ano, sendo x = 1 associado 
@@ -31264,8 +31184,8 @@ preços mais baixos, o que ocorre no mês de produção
 máxima da safra.
 A partir de uma série histórica, observou-se que o preço 
 P, em reais, do quilograma de um certo produto sazonal 
-pode ser descrito pela função P(x) = 8 + 5cos (
-πx − π
+pode ser descrito pela função P(^x) = 8 + 5^cos (
+π^x − π
 )6
 ,
 onde x representa o mês do ano, sendo x = 1 associado 
@@ -31406,8 +31326,8 @@ preços mais baixos, o que ocorre no mês de produção
 máxima da safra.
 A partir de uma série histórica, observou-se que o preço 
 P, em reais, do quilograma de um certo produto sazonal 
-pode ser descrito pela função P(x) = 8 + 5cos (
-πx − π
+pode ser descrito pela função P(^x) = 8 + 5^cos (
+π^x − π
 )6
 ,
 onde x representa o mês do ano, sendo x = 1 associado 

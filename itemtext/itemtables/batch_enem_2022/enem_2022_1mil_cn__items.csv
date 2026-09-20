@@ -876,7 +876,7 @@ C	ligação	dupla	C,	ligação	simples	CH3.
 Vanilina	(no	óleo	de	baunilha):	Anel	aromático	com	três	grupos:	Primeiro	grupo:	C	ligação	dupla	O,	ligação	simples	
 H;	Segundo	grupo:	O	ligação	simples	CH3;	T erceiro	grupo:	ligação	simples	OH.
 Eugenol (no óleo de cravos): Anel aromático com três grupos: Primeiro grupo: CH 2	ligação	simples	CH,	ligação	
-dupla CH2;	Segundo	grupo:	O	ligação	simples	CH3;	T erceiro	grupo:	ligação	simples	OH.
+dupla CH_2;	Segundo	grupo:	O	ligação	simples	CH3;	T erceiro	grupo:	ligação	simples	OH.
 Cinamaldeído	(no	óleo	de	canela):	Anel	aromático	com	o	grupo	CH	ligação	dupla	CH,	ligação	simples	C,	ligação	
 dupla	O	ligação	simples	H.
 HO
@@ -957,7 +957,7 @@ C	ligação	dupla	C,	ligação	simples	CH3.
 Vanilina	(no	óleo	de	baunilha):	Anel	aromático	com	três	grupos:	Primeiro	grupo:	C	ligação	dupla	O,	ligação	simples	
 H;	Segundo	grupo:	O	ligação	simples	CH3;	T erceiro	grupo:	ligação	simples	OH.
 Eugenol (no óleo de cravos): Anel aromático com três grupos: Primeiro grupo: CH 2	ligação	simples	CH,	ligação	
-dupla CH2;	Segundo	grupo:	O	ligação	simples	CH3;	T erceiro	grupo:	ligação	simples	OH.
+dupla CH_2;	Segundo	grupo:	O	ligação	simples	CH3;	T erceiro	grupo:	ligação	simples	OH.
 Cinamaldeído	(no	óleo	de	canela):	Anel	aromático	com	o	grupo	CH	ligação	dupla	CH,	ligação	simples	C,	ligação	
 dupla	O	ligação	simples	H.
 HO
@@ -1038,7 +1038,7 @@ C	ligação	dupla	C,	ligação	simples	CH3.
 Vanilina	(no	óleo	de	baunilha):	Anel	aromático	com	três	grupos:	Primeiro	grupo:	C	ligação	dupla	O,	ligação	simples	
 H;	Segundo	grupo:	O	ligação	simples	CH3;	T erceiro	grupo:	ligação	simples	OH.
 Eugenol (no óleo de cravos): Anel aromático com três grupos: Primeiro grupo: CH 2	ligação	simples	CH,	ligação	
-dupla CH2;	Segundo	grupo:	O	ligação	simples	CH3;	T erceiro	grupo:	ligação	simples	OH.
+dupla CH_2;	Segundo	grupo:	O	ligação	simples	CH3;	T erceiro	grupo:	ligação	simples	OH.
 Cinamaldeído	(no	óleo	de	canela):	Anel	aromático	com	o	grupo	CH	ligação	dupla	CH,	ligação	simples	C,	ligação	
 dupla	O	ligação	simples	H.
 HO
@@ -1119,7 +1119,7 @@ C	ligação	dupla	C,	ligação	simples	CH3.
 Vanilina	(no	óleo	de	baunilha):	Anel	aromático	com	três	grupos:	Primeiro	grupo:	C	ligação	dupla	O,	ligação	simples	
 H;	Segundo	grupo:	O	ligação	simples	CH3;	T erceiro	grupo:	ligação	simples	OH.
 Eugenol (no óleo de cravos): Anel aromático com três grupos: Primeiro grupo: CH 2	ligação	simples	CH,	ligação	
-dupla CH2;	Segundo	grupo:	O	ligação	simples	CH3;	T erceiro	grupo:	ligação	simples	OH.
+dupla CH_2;	Segundo	grupo:	O	ligação	simples	CH3;	T erceiro	grupo:	ligação	simples	OH.
 Cinamaldeído	(no	óleo	de	canela):	Anel	aromático	com	o	grupo	CH	ligação	dupla	CH,	ligação	simples	C,	ligação	
 dupla	O	ligação	simples	H.
 HO
@@ -1200,7 +1200,7 @@ C	ligação	dupla	C,	ligação	simples	CH3.
 Vanilina	(no	óleo	de	baunilha):	Anel	aromático	com	três	grupos:	Primeiro	grupo:	C	ligação	dupla	O,	ligação	simples	
 H;	Segundo	grupo:	O	ligação	simples	CH3;	T erceiro	grupo:	ligação	simples	OH.
 Eugenol (no óleo de cravos): Anel aromático com três grupos: Primeiro grupo: CH 2	ligação	simples	CH,	ligação	
-dupla CH2;	Segundo	grupo:	O	ligação	simples	CH3;	T erceiro	grupo:	ligação	simples	OH.
+dupla CH_2;	Segundo	grupo:	O	ligação	simples	CH3;	T erceiro	grupo:	ligação	simples	OH.
 Cinamaldeído	(no	óleo	de	canela):	Anel	aromático	com	o	grupo	CH	ligação	dupla	CH,	ligação	simples	C,	ligação	
 dupla	O	ligação	simples	H.
 HO
@@ -2180,13 +2180,13 @@ esses mesmos decompositores. De decompositores,
 parte uma seta para amônia (NH 3) e amônio (NH 4 
 de	 carga	positiva).	As	 bactérias	nitrificantes	fazem	a	
 nitrificação	da	 amônia	 e	 amônio	 com	 uma	 seta	 que	
-vai para nitritos (NO2 de carga negativa). As bactérias 
-nitrificantes	transformam	nitritos	em	 nitratos	(NO3 de 
+vai para nitritos (NO_2 de carga negativa). As bactérias 
+nitrificantes	transformam	nitritos	em	 nitratos	(NO_3 de 
 carga negativa). Dos nitratos, partem duas setas, 
 uma	 que	 indica	 assimilação	 pelas	 plantas	 e	 outra	
 que	 indica	 bactérias	 desnitrificantes.	 Das	 bactérias	
 desnitrificantes,	a	seta	continua	para	o	ar	e	retorna	ao	
-ciclo	para	bactérias	fixadoras	de	N2, nos nódulos das 
+ciclo	para	bactérias	fixadoras	de	N_2, nos nódulos das 
 raízes de leguminosas. Dessas mesmas bactérias, 
 uma	seta	indica	que	elas	farão,	no	solo,	a	amonificação,	
 seguindo a seta para amônia (NH3) e amônio (NH4 de 
@@ -2198,7 +2198,7 @@ nitrificantesNitrificaçãoAmonificação
 Bactérias fixadoras
 de N2 no solo Bactérias nitrificantes
 Bactérias fixa-
-doras de N2 nos 
+doras de N_2 nos 
 nódulos de raízes 
 de leguminosas
 Bactérias
@@ -2209,17 +2209,17 @@ aeróbicas e anaeróbicas)
 Decompositores
 Amônia e Amônio
 (NH3) (NH4
-+) Nitritos (NO2
++) Nitritos (NO_2
 −
 )
-Nitratos (NO3
+Nitratos (NO_3
 −
 )
 A chuva ácida interfere no ciclo do nitrogênio, 
 principalmente,	 por	 proporcionar	 uma	 diminuição	 do	 pH	
 do	 solo	 e	 da	 atmosfera,	 alterando	 a	 concentração	 dos	
 compostos presentes nesse ciclo.
-Em	um	solo	de	menor	pH,	será	favorecida	a	formação	de:","C","N2",0,NA,NA,NA,NA,"Portuguese","A"
+Em	um	solo	de	menor	pH,	será	favorecida	a	formação	de:","C","N_2",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2022_1mil_cn","enem_2022_1mil_cn_1",28632,"ENEM 2022 - CN","11
 LARANJA
 2º DIA
@@ -2261,13 +2261,13 @@ esses mesmos decompositores. De decompositores,
 parte uma seta para amônia (NH 3) e amônio (NH 4 
 de	 carga	positiva).	As	 bactérias	nitrificantes	fazem	a	
 nitrificação	da	 amônia	 e	 amônio	 com	 uma	 seta	 que	
-vai para nitritos (NO2 de carga negativa). As bactérias 
-nitrificantes	transformam	nitritos	em	 nitratos	(NO3 de 
+vai para nitritos (NO_2 de carga negativa). As bactérias 
+nitrificantes	transformam	nitritos	em	 nitratos	(NO_3 de 
 carga negativa). Dos nitratos, partem duas setas, 
 uma	 que	 indica	 assimilação	 pelas	 plantas	 e	 outra	
 que	 indica	 bactérias	 desnitrificantes.	 Das	 bactérias	
 desnitrificantes,	a	seta	continua	para	o	ar	e	retorna	ao	
-ciclo	para	bactérias	fixadoras	de	N2, nos nódulos das 
+ciclo	para	bactérias	fixadoras	de	N_2, nos nódulos das 
 raízes de leguminosas. Dessas mesmas bactérias, 
 uma	seta	indica	que	elas	farão,	no	solo,	a	amonificação,	
 seguindo a seta para amônia (NH3) e amônio (NH4 de 
@@ -2279,7 +2279,7 @@ nitrificantesNitrificaçãoAmonificação
 Bactérias fixadoras
 de N2 no solo Bactérias nitrificantes
 Bactérias fixa-
-doras de N2 nos 
+doras de N_2 nos 
 nódulos de raízes 
 de leguminosas
 Bactérias
@@ -2290,17 +2290,17 @@ aeróbicas e anaeróbicas)
 Decompositores
 Amônia e Amônio
 (NH3) (NH4
-+) Nitritos (NO2
++) Nitritos (NO_2
 −
 )
-Nitratos (NO3
+Nitratos (NO_3
 −
 )
 A chuva ácida interfere no ciclo do nitrogênio, 
 principalmente,	 por	 proporcionar	 uma	 diminuição	 do	 pH	
 do	 solo	 e	 da	 atmosfera,	 alterando	 a	 concentração	 dos	
 compostos presentes nesse ciclo.
-Em	um	solo	de	menor	pH,	será	favorecida	a	formação	de:","C","NH3",0,NA,NA,NA,NA,"Portuguese","B"
+Em	um	solo	de	menor	pH,	será	favorecida	a	formação	de:","C","NH_3",0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2022_1mil_cn","enem_2022_1mil_cn_1",28632,"ENEM 2022 - CN","11
 LARANJA
 2º DIA
@@ -2342,13 +2342,13 @@ esses mesmos decompositores. De decompositores,
 parte uma seta para amônia (NH 3) e amônio (NH 4 
 de	 carga	positiva).	As	 bactérias	nitrificantes	fazem	a	
 nitrificação	da	 amônia	 e	 amônio	 com	 uma	 seta	 que	
-vai para nitritos (NO2 de carga negativa). As bactérias 
-nitrificantes	transformam	nitritos	em	 nitratos	(NO3 de 
+vai para nitritos (NO_2 de carga negativa). As bactérias 
+nitrificantes	transformam	nitritos	em	 nitratos	(NO_3 de 
 carga negativa). Dos nitratos, partem duas setas, 
 uma	 que	 indica	 assimilação	 pelas	 plantas	 e	 outra	
 que	 indica	 bactérias	 desnitrificantes.	 Das	 bactérias	
 desnitrificantes,	a	seta	continua	para	o	ar	e	retorna	ao	
-ciclo	para	bactérias	fixadoras	de	N2, nos nódulos das 
+ciclo	para	bactérias	fixadoras	de	N_2, nos nódulos das 
 raízes de leguminosas. Dessas mesmas bactérias, 
 uma	seta	indica	que	elas	farão,	no	solo,	a	amonificação,	
 seguindo a seta para amônia (NH3) e amônio (NH4 de 
@@ -2360,7 +2360,7 @@ nitrificantesNitrificaçãoAmonificação
 Bactérias fixadoras
 de N2 no solo Bactérias nitrificantes
 Bactérias fixa-
-doras de N2 nos 
+doras de N_2 nos 
 nódulos de raízes 
 de leguminosas
 Bactérias
@@ -2371,17 +2371,17 @@ aeróbicas e anaeróbicas)
 Decompositores
 Amônia e Amônio
 (NH3) (NH4
-+) Nitritos (NO2
++) Nitritos (NO_2
 −
 )
-Nitratos (NO3
+Nitratos (NO_3
 −
 )
 A chuva ácida interfere no ciclo do nitrogênio, 
 principalmente,	 por	 proporcionar	 uma	 diminuição	 do	 pH	
 do	 solo	 e	 da	 atmosfera,	 alterando	 a	 concentração	 dos	
 compostos presentes nesse ciclo.
-Em	um	solo	de	menor	pH,	será	favorecida	a	formação	de:","C","NH4 de carga positiva",1,NA,NA,NA,NA,"Portuguese","C"
+Em	um	solo	de	menor	pH,	será	favorecida	a	formação	de:","C","NH_4 de carga positiva",1,NA,NA,NA,NA,"Portuguese","C"
 "enem_2022_1mil_cn","enem_2022_1mil_cn_1",28632,"ENEM 2022 - CN","11
 LARANJA
 2º DIA
@@ -2423,13 +2423,13 @@ esses mesmos decompositores. De decompositores,
 parte uma seta para amônia (NH 3) e amônio (NH 4 
 de	 carga	positiva).	As	 bactérias	nitrificantes	fazem	a	
 nitrificação	da	 amônia	 e	 amônio	 com	 uma	 seta	 que	
-vai para nitritos (NO2 de carga negativa). As bactérias 
-nitrificantes	transformam	nitritos	em	 nitratos	(NO3 de 
+vai para nitritos (NO_2 de carga negativa). As bactérias 
+nitrificantes	transformam	nitritos	em	 nitratos	(NO_3 de 
 carga negativa). Dos nitratos, partem duas setas, 
 uma	 que	 indica	 assimilação	 pelas	 plantas	 e	 outra	
 que	 indica	 bactérias	 desnitrificantes.	 Das	 bactérias	
 desnitrificantes,	a	seta	continua	para	o	ar	e	retorna	ao	
-ciclo	para	bactérias	fixadoras	de	N2, nos nódulos das 
+ciclo	para	bactérias	fixadoras	de	N_2, nos nódulos das 
 raízes de leguminosas. Dessas mesmas bactérias, 
 uma	seta	indica	que	elas	farão,	no	solo,	a	amonificação,	
 seguindo a seta para amônia (NH3) e amônio (NH4 de 
@@ -2441,7 +2441,7 @@ nitrificantesNitrificaçãoAmonificação
 Bactérias fixadoras
 de N2 no solo Bactérias nitrificantes
 Bactérias fixa-
-doras de N2 nos 
+doras de N_2 nos 
 nódulos de raízes 
 de leguminosas
 Bactérias
@@ -2452,17 +2452,17 @@ aeróbicas e anaeróbicas)
 Decompositores
 Amônia e Amônio
 (NH3) (NH4
-+) Nitritos (NO2
++) Nitritos (NO_2
 −
 )
-Nitratos (NO3
+Nitratos (NO_3
 −
 )
 A chuva ácida interfere no ciclo do nitrogênio, 
 principalmente,	 por	 proporcionar	 uma	 diminuição	 do	 pH	
 do	 solo	 e	 da	 atmosfera,	 alterando	 a	 concentração	 dos	
 compostos presentes nesse ciclo.
-Em	um	solo	de	menor	pH,	será	favorecida	a	formação	de:","C","NO2 de carga negativa",0,NA,NA,NA,NA,"Portuguese","D"
+Em	um	solo	de	menor	pH,	será	favorecida	a	formação	de:","C","NO_2 de carga negativa",0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2022_1mil_cn","enem_2022_1mil_cn_1",28632,"ENEM 2022 - CN","11
 LARANJA
 2º DIA
@@ -2504,13 +2504,13 @@ esses mesmos decompositores. De decompositores,
 parte uma seta para amônia (NH 3) e amônio (NH 4 
 de	 carga	positiva).	As	 bactérias	nitrificantes	fazem	a	
 nitrificação	da	 amônia	 e	 amônio	 com	 uma	 seta	 que	
-vai para nitritos (NO2 de carga negativa). As bactérias 
-nitrificantes	transformam	nitritos	em	 nitratos	(NO3 de 
+vai para nitritos (NO_2 de carga negativa). As bactérias 
+nitrificantes	transformam	nitritos	em	 nitratos	(NO_3 de 
 carga negativa). Dos nitratos, partem duas setas, 
 uma	 que	 indica	 assimilação	 pelas	 plantas	 e	 outra	
 que	 indica	 bactérias	 desnitrificantes.	 Das	 bactérias	
 desnitrificantes,	a	seta	continua	para	o	ar	e	retorna	ao	
-ciclo	para	bactérias	fixadoras	de	N2, nos nódulos das 
+ciclo	para	bactérias	fixadoras	de	N_2, nos nódulos das 
 raízes de leguminosas. Dessas mesmas bactérias, 
 uma	seta	indica	que	elas	farão,	no	solo,	a	amonificação,	
 seguindo a seta para amônia (NH3) e amônio (NH4 de 
@@ -2522,7 +2522,7 @@ nitrificantesNitrificaçãoAmonificação
 Bactérias fixadoras
 de N2 no solo Bactérias nitrificantes
 Bactérias fixa-
-doras de N2 nos 
+doras de N_2 nos 
 nódulos de raízes 
 de leguminosas
 Bactérias
@@ -2533,17 +2533,17 @@ aeróbicas e anaeróbicas)
 Decompositores
 Amônia e Amônio
 (NH3) (NH4
-+) Nitritos (NO2
++) Nitritos (NO_2
 −
 )
-Nitratos (NO3
+Nitratos (NO_3
 −
 )
 A chuva ácida interfere no ciclo do nitrogênio, 
 principalmente,	 por	 proporcionar	 uma	 diminuição	 do	 pH	
 do	 solo	 e	 da	 atmosfera,	 alterando	 a	 concentração	 dos	
 compostos presentes nesse ciclo.
-Em	um	solo	de	menor	pH,	será	favorecida	a	formação	de:","C","NO3 de carga negativa",0,NA,NA,NA,NA,"Portuguese","E"
+Em	um	solo	de	menor	pH,	será	favorecida	a	formação	de:","C","NO_3 de carga negativa",0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2022_1mil_cn","enem_2022_1mil_cn_1",126560,"ENEM 2022 - CN","11
 LARANJA
 2º DIA
@@ -3890,7 +3890,7 @@ Não queira perder a sua alma
 11
 2 ",NA,"Em uma aula prática de bioquímica, para medir a atividade catalítica da enzima catalase, foram realizados seis ensaios 
 independentes,	nas	mesmas	condições,	variando-se	apenas	a	temperatura.	A	catalase	decompõe	o	peróxido	de	hidrogênio	
-(H2O2),	produzindo	água	e	oxigênio.	Os	resultados	dos	ensaios	estão	apresentados	no	quadro.
+(H_2O2),	produzindo	água	e	oxigênio.	Os	resultados	dos	ensaios	estão	apresentados	no	quadro.
 Descrição do quadro: Dados em três colunas. A primeira apresenta os ensaios de 1 a 6, a segunda, as respectivas 
 temperaturas,	em	grau	Celsius,	e	a	terceira,	os	resultados	dos	ensaios,	em	termos	de	decomposição	de	H2O2, em  
 10 elevado a menos 12 mol por minuto.
@@ -3902,7 +3902,7 @@ Ensaio 5: Temperatura 30 e Resultado 3,6.
 Ensaio 6: Temperatura 35 e Resultado 3,1.
 Ensaio Temperatura (°C)
 Resultado
-Decomposição de H2O2 
+Decomposição de H_2O2 
 10 12−⎛
 ⎝
 ⎜
@@ -3950,7 +3950,7 @@ Não queira perder a sua alma
 11
 2 ",NA,"Em uma aula prática de bioquímica, para medir a atividade catalítica da enzima catalase, foram realizados seis ensaios 
 independentes,	nas	mesmas	condições,	variando-se	apenas	a	temperatura.	A	catalase	decompõe	o	peróxido	de	hidrogênio	
-(H2O2),	produzindo	água	e	oxigênio.	Os	resultados	dos	ensaios	estão	apresentados	no	quadro.
+(H_2O2),	produzindo	água	e	oxigênio.	Os	resultados	dos	ensaios	estão	apresentados	no	quadro.
 Descrição do quadro: Dados em três colunas. A primeira apresenta os ensaios de 1 a 6, a segunda, as respectivas 
 temperaturas,	em	grau	Celsius,	e	a	terceira,	os	resultados	dos	ensaios,	em	termos	de	decomposição	de	H2O2, em  
 10 elevado a menos 12 mol por minuto.
@@ -3962,7 +3962,7 @@ Ensaio 5: Temperatura 30 e Resultado 3,6.
 Ensaio 6: Temperatura 35 e Resultado 3,1.
 Ensaio Temperatura (°C)
 Resultado
-Decomposição de H2O2 
+Decomposição de H_2O2 
 10 12−⎛
 ⎝
 ⎜
@@ -4010,7 +4010,7 @@ Não queira perder a sua alma
 11
 2 ",NA,"Em uma aula prática de bioquímica, para medir a atividade catalítica da enzima catalase, foram realizados seis ensaios 
 independentes,	nas	mesmas	condições,	variando-se	apenas	a	temperatura.	A	catalase	decompõe	o	peróxido	de	hidrogênio	
-(H2O2),	produzindo	água	e	oxigênio.	Os	resultados	dos	ensaios	estão	apresentados	no	quadro.
+(H_2O2),	produzindo	água	e	oxigênio.	Os	resultados	dos	ensaios	estão	apresentados	no	quadro.
 Descrição do quadro: Dados em três colunas. A primeira apresenta os ensaios de 1 a 6, a segunda, as respectivas 
 temperaturas,	em	grau	Celsius,	e	a	terceira,	os	resultados	dos	ensaios,	em	termos	de	decomposição	de	H2O2, em  
 10 elevado a menos 12 mol por minuto.
@@ -4022,7 +4022,7 @@ Ensaio 5: Temperatura 30 e Resultado 3,6.
 Ensaio 6: Temperatura 35 e Resultado 3,1.
 Ensaio Temperatura (°C)
 Resultado
-Decomposição de H2O2 
+Decomposição de H_2O2 
 10 12−⎛
 ⎝
 ⎜
@@ -4070,7 +4070,7 @@ Não queira perder a sua alma
 11
 2 ",NA,"Em uma aula prática de bioquímica, para medir a atividade catalítica da enzima catalase, foram realizados seis ensaios 
 independentes,	nas	mesmas	condições,	variando-se	apenas	a	temperatura.	A	catalase	decompõe	o	peróxido	de	hidrogênio	
-(H2O2),	produzindo	água	e	oxigênio.	Os	resultados	dos	ensaios	estão	apresentados	no	quadro.
+(H_2O2),	produzindo	água	e	oxigênio.	Os	resultados	dos	ensaios	estão	apresentados	no	quadro.
 Descrição do quadro: Dados em três colunas. A primeira apresenta os ensaios de 1 a 6, a segunda, as respectivas 
 temperaturas,	em	grau	Celsius,	e	a	terceira,	os	resultados	dos	ensaios,	em	termos	de	decomposição	de	H2O2, em  
 10 elevado a menos 12 mol por minuto.
@@ -4082,7 +4082,7 @@ Ensaio 5: Temperatura 30 e Resultado 3,6.
 Ensaio 6: Temperatura 35 e Resultado 3,1.
 Ensaio Temperatura (°C)
 Resultado
-Decomposição de H2O2 
+Decomposição de H_2O2 
 10 12−⎛
 ⎝
 ⎜
@@ -4130,7 +4130,7 @@ Não queira perder a sua alma
 11
 2 ",NA,"Em uma aula prática de bioquímica, para medir a atividade catalítica da enzima catalase, foram realizados seis ensaios 
 independentes,	nas	mesmas	condições,	variando-se	apenas	a	temperatura.	A	catalase	decompõe	o	peróxido	de	hidrogênio	
-(H2O2),	produzindo	água	e	oxigênio.	Os	resultados	dos	ensaios	estão	apresentados	no	quadro.
+(H_2O2),	produzindo	água	e	oxigênio.	Os	resultados	dos	ensaios	estão	apresentados	no	quadro.
 Descrição do quadro: Dados em três colunas. A primeira apresenta os ensaios de 1 a 6, a segunda, as respectivas 
 temperaturas,	em	grau	Celsius,	e	a	terceira,	os	resultados	dos	ensaios,	em	termos	de	decomposição	de	H2O2, em  
 10 elevado a menos 12 mol por minuto.
@@ -4142,7 +4142,7 @@ Ensaio 5: Temperatura 30 e Resultado 3,6.
 Ensaio 6: Temperatura 35 e Resultado 3,1.
 Ensaio Temperatura (°C)
 Resultado
-Decomposição de H2O2 
+Decomposição de H_2O2 
 10 12−⎛
 ⎝
 ⎜
@@ -4756,7 +4756,7 @@ gás e o aumento da temperatura.
 Gás
 Ácido
 Mármore
-O gás obtido no experimento é o:","C","H2",0,NA,NA,NA,NA,"Portuguese","A"
+O gás obtido no experimento é o:","C","H_2",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2022_1mil_cn","enem_2022_1mil_cn_1",97761,"ENEM 2022 - CN","11
 LARANJA
 2º DIA
@@ -4795,7 +4795,7 @@ gás e o aumento da temperatura.
 Gás
 Ácido
 Mármore
-O gás obtido no experimento é o:","C","O2",0,NA,NA,NA,NA,"Portuguese","B"
+O gás obtido no experimento é o:","C","O_2",0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2022_1mil_cn","enem_2022_1mil_cn_1",97761,"ENEM 2022 - CN","11
 LARANJA
 2º DIA
@@ -4834,7 +4834,7 @@ gás e o aumento da temperatura.
 Gás
 Ácido
 Mármore
-O gás obtido no experimento é o:","C","CO2",1,NA,NA,NA,NA,"Portuguese","C"
+O gás obtido no experimento é o:","C","CO_2",1,NA,NA,NA,NA,"Portuguese","C"
 "enem_2022_1mil_cn","enem_2022_1mil_cn_1",97761,"ENEM 2022 - CN","11
 LARANJA
 2º DIA
@@ -4912,7 +4912,7 @@ gás e o aumento da temperatura.
 Gás
 Ácido
 Mármore
-O gás obtido no experimento é o:","C","Cl2",0,NA,NA,NA,NA,"Portuguese","E"
+O gás obtido no experimento é o:","C","Cl_2",0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2022_1mil_cn","enem_2022_1mil_cn_1",78716,"ENEM 2022 - CN","11
 LARANJA
 2º DIA
@@ -5513,9 +5513,9 @@ espontâneo	 e	 provoca	 a	 deterioração	 de	 metais	 como
 o ferro, que, em presença de oxigênio e água, sofre 
 oxidação,	conforme	ilustra	a	equação	química:
 Descrição da equação química: 4 Fe (sólido) reage 
-com 2 H2O (líquido) e 3 O2 gasoso formando o produto 
+com 2 H_2O (líquido) e 3 O2 gasoso formando o produto 
 2 Fe2O3 hidratado (sólido).
-4 Fe (s) + 2 H2O (l) + 3 O2 (g)  →  2 Fe2O3⋅H2O (s)
+4 Fe (s) + 2 H_2O (l) + 3 O_2 (g)  →  2 Fe_2O3⋅H2O (s)
 Uma forma de garantir a durabilidade da estrutura 
 metálica e a sua resistência à umidade consiste na 
 deposição	 de	 filmes	 finos	 nanocerâmicos	 à	 base	 de	
@@ -5564,9 +5564,9 @@ espontâneo	 e	 provoca	 a	 deterioração	 de	 metais	 como
 o ferro, que, em presença de oxigênio e água, sofre 
 oxidação,	conforme	ilustra	a	equação	química:
 Descrição da equação química: 4 Fe (sólido) reage 
-com 2 H2O (líquido) e 3 O2 gasoso formando o produto 
+com 2 H_2O (líquido) e 3 O2 gasoso formando o produto 
 2 Fe2O3 hidratado (sólido).
-4 Fe (s) + 2 H2O (l) + 3 O2 (g)  →  2 Fe2O3⋅H2O (s)
+4 Fe (s) + 2 H_2O (l) + 3 O_2 (g)  →  2 Fe_2O3⋅H2O (s)
 Uma forma de garantir a durabilidade da estrutura 
 metálica e a sua resistência à umidade consiste na 
 deposição	 de	 filmes	 finos	 nanocerâmicos	 à	 base	 de	
@@ -5615,9 +5615,9 @@ espontâneo	 e	 provoca	 a	 deterioração	 de	 metais	 como
 o ferro, que, em presença de oxigênio e água, sofre 
 oxidação,	conforme	ilustra	a	equação	química:
 Descrição da equação química: 4 Fe (sólido) reage 
-com 2 H2O (líquido) e 3 O2 gasoso formando o produto 
+com 2 H_2O (líquido) e 3 O2 gasoso formando o produto 
 2 Fe2O3 hidratado (sólido).
-4 Fe (s) + 2 H2O (l) + 3 O2 (g)  →  2 Fe2O3⋅H2O (s)
+4 Fe (s) + 2 H_2O (l) + 3 O_2 (g)  →  2 Fe_2O3⋅H2O (s)
 Uma forma de garantir a durabilidade da estrutura 
 metálica e a sua resistência à umidade consiste na 
 deposição	 de	 filmes	 finos	 nanocerâmicos	 à	 base	 de	
@@ -5666,9 +5666,9 @@ espontâneo	 e	 provoca	 a	 deterioração	 de	 metais	 como
 o ferro, que, em presença de oxigênio e água, sofre 
 oxidação,	conforme	ilustra	a	equação	química:
 Descrição da equação química: 4 Fe (sólido) reage 
-com 2 H2O (líquido) e 3 O2 gasoso formando o produto 
+com 2 H_2O (líquido) e 3 O2 gasoso formando o produto 
 2 Fe2O3 hidratado (sólido).
-4 Fe (s) + 2 H2O (l) + 3 O2 (g)  →  2 Fe2O3⋅H2O (s)
+4 Fe (s) + 2 H_2O (l) + 3 O_2 (g)  →  2 Fe_2O3⋅H2O (s)
 Uma forma de garantir a durabilidade da estrutura 
 metálica e a sua resistência à umidade consiste na 
 deposição	 de	 filmes	 finos	 nanocerâmicos	 à	 base	 de	
@@ -5717,9 +5717,9 @@ espontâneo	 e	 provoca	 a	 deterioração	 de	 metais	 como
 o ferro, que, em presença de oxigênio e água, sofre 
 oxidação,	conforme	ilustra	a	equação	química:
 Descrição da equação química: 4 Fe (sólido) reage 
-com 2 H2O (líquido) e 3 O2 gasoso formando o produto 
+com 2 H_2O (líquido) e 3 O2 gasoso formando o produto 
 2 Fe2O3 hidratado (sólido).
-4 Fe (s) + 2 H2O (l) + 3 O2 (g)  →  2 Fe2O3⋅H2O (s)
+4 Fe (s) + 2 H_2O (l) + 3 O_2 (g)  →  2 Fe_2O3⋅H2O (s)
 Uma forma de garantir a durabilidade da estrutura 
 metálica e a sua resistência à umidade consiste na 
 deposição	 de	 filmes	 finos	 nanocerâmicos	 à	 base	 de	
@@ -7226,7 +7226,7 @@ H
 O
 H
 O
-OHOH O+
+OHOH O^+
 O
 OH
 H
@@ -7307,7 +7307,7 @@ H
 O
 H
 O
-OHOH O+
+OHOH O^+
 O
 OH
 H
@@ -7388,7 +7388,7 @@ H
 O
 H
 O
-OHOH O+
+OHOH O^+
 O
 OH
 H
@@ -7469,7 +7469,7 @@ H
 O
 H
 O
-OHOH O+
+OHOH O^+
 O
 OH
 H
@@ -7550,7 +7550,7 @@ H
 O
 H
 O
-OHOH O+
+OHOH O^+
 O
 OH
 H
@@ -7609,10 +7609,10 @@ OOH
 O OH
 ONa
 NaO
-+  2 NaOH +  2 H2O
++  2 NaOH +  2 H_2O
 Ácido tartárico
 (massa molar: 150 g mol
-−1
+−^1
 )
 A	concentração	de	ácido	tartárico	no	vinho	analisado	é	mais	próxima	de:","B","1,8 grama por litro",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2022_1mil_cn","enem_2022_1mil_cn_1",44969,"ENEM 2022 - CN","11
@@ -7659,10 +7659,10 @@ OOH
 O OH
 ONa
 NaO
-+  2 NaOH +  2 H2O
++  2 NaOH +  2 H_2O
 Ácido tartárico
 (massa molar: 150 g mol
-−1
+−^1
 )
 A	concentração	de	ácido	tartárico	no	vinho	analisado	é	mais	próxima	de:","B","2,4 gramas por litro",1,NA,NA,NA,NA,"Portuguese","B"
 "enem_2022_1mil_cn","enem_2022_1mil_cn_1",44969,"ENEM 2022 - CN","11
@@ -7709,10 +7709,10 @@ OOH
 O OH
 ONa
 NaO
-+  2 NaOH +  2 H2O
++  2 NaOH +  2 H_2O
 Ácido tartárico
 (massa molar: 150 g mol
-−1
+−^1
 )
 A	concentração	de	ácido	tartárico	no	vinho	analisado	é	mais	próxima	de:","B","3,6 gramas por litro",0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2022_1mil_cn","enem_2022_1mil_cn_1",44969,"ENEM 2022 - CN","11
@@ -7759,10 +7759,10 @@ OOH
 O OH
 ONa
 NaO
-+  2 NaOH +  2 H2O
++  2 NaOH +  2 H_2O
 Ácido tartárico
 (massa molar: 150 g mol
-−1
+−^1
 )
 A	concentração	de	ácido	tartárico	no	vinho	analisado	é	mais	próxima	de:","B","4,8 gramas por litro",0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2022_1mil_cn","enem_2022_1mil_cn_1",44969,"ENEM 2022 - CN","11
@@ -7809,10 +7809,10 @@ OOH
 O OH
 ONa
 NaO
-+  2 NaOH +  2 H2O
++  2 NaOH +  2 H_2O
 Ácido tartárico
 (massa molar: 150 g mol
-−1
+−^1
 )
 A	concentração	de	ácido	tartárico	no	vinho	analisado	é	mais	próxima	de:","B","9,6 gramas por litro",0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2022_1mil_cn","enem_2022_1mil_cn_1",97727,"ENEM 2022 - CN","11
@@ -8272,17 +8272,17 @@ funcionais que podem ser ionizados:
 • carboxila: ligação	simples	COOH, cujo pKa é igual 
 a 1,8;
 • amino: ligação	simples	NH2, que pode ser convertido 
-em amínio (ligação	simples	NH3 de carga positiva, cujo 
+em amínio (ligação	simples	NH_3 de carga positiva, cujo 
 pKa é igual a 7,9);
 • tiol: ligação	simples	SH, cujo pKa é igual a 10,5.
-Sabe-se	que	pKa é igual a menos logaritmo de Ka.
+Sabe-se	que	pK_a é igual a menos logaritmo de Ka.
 Descrição da estrutura química da penicilamina: 
 No centro da estrutura representada, há 2 átomos de 
 carbono	com	ligação	simples	entre	si.	Cada	carbono	faz	
 três ligações simples com outros grupos. No primeiro 
-carbono,	estão	ligados:	um	grupo	SH,	um	grupo	CH3 e 
-outro grupo CH3.	No	segundo	carbono,	estão	ligados:	
-um grupo H, um grupo COOH e um grupo NH2.
+carbono,	estão	ligados:	um	grupo	SH,	um	grupo	CH_3 e 
+outro grupo CH_3.	No	segundo	carbono,	estão	ligados:	
+um grupo H, um grupo COOH e um grupo NH_2.
 SH C C
 CH3
 CH3
@@ -8340,17 +8340,17 @@ funcionais que podem ser ionizados:
 • carboxila: ligação	simples	COOH, cujo pKa é igual 
 a 1,8;
 • amino: ligação	simples	NH2, que pode ser convertido 
-em amínio (ligação	simples	NH3 de carga positiva, cujo 
+em amínio (ligação	simples	NH_3 de carga positiva, cujo 
 pKa é igual a 7,9);
 • tiol: ligação	simples	SH, cujo pKa é igual a 10,5.
-Sabe-se	que	pKa é igual a menos logaritmo de Ka.
+Sabe-se	que	pK_a é igual a menos logaritmo de Ka.
 Descrição da estrutura química da penicilamina: 
 No centro da estrutura representada, há 2 átomos de 
 carbono	com	ligação	simples	entre	si.	Cada	carbono	faz	
 três ligações simples com outros grupos. No primeiro 
-carbono,	estão	ligados:	um	grupo	SH,	um	grupo	CH3 e 
-outro grupo CH3.	No	segundo	carbono,	estão	ligados:	
-um grupo H, um grupo COOH e um grupo NH2.
+carbono,	estão	ligados:	um	grupo	SH,	um	grupo	CH_3 e 
+outro grupo CH_3.	No	segundo	carbono,	estão	ligados:	
+um grupo H, um grupo COOH e um grupo NH_2.
 SH C C
 CH3
 CH3
@@ -8407,17 +8407,17 @@ funcionais que podem ser ionizados:
 • carboxila: ligação	simples	COOH, cujo pKa é igual 
 a 1,8;
 • amino: ligação	simples	NH2, que pode ser convertido 
-em amínio (ligação	simples	NH3 de carga positiva, cujo 
+em amínio (ligação	simples	NH_3 de carga positiva, cujo 
 pKa é igual a 7,9);
 • tiol: ligação	simples	SH, cujo pKa é igual a 10,5.
-Sabe-se	que	pKa é igual a menos logaritmo de Ka.
+Sabe-se	que	pK_a é igual a menos logaritmo de Ka.
 Descrição da estrutura química da penicilamina: 
 No centro da estrutura representada, há 2 átomos de 
 carbono	com	ligação	simples	entre	si.	Cada	carbono	faz	
 três ligações simples com outros grupos. No primeiro 
-carbono,	estão	ligados:	um	grupo	SH,	um	grupo	CH3 e 
-outro grupo CH3.	No	segundo	carbono,	estão	ligados:	
-um grupo H, um grupo COOH e um grupo NH2.
+carbono,	estão	ligados:	um	grupo	SH,	um	grupo	CH_3 e 
+outro grupo CH_3.	No	segundo	carbono,	estão	ligados:	
+um grupo H, um grupo COOH e um grupo NH_2.
 SH C C
 CH3
 CH3
@@ -8474,17 +8474,17 @@ funcionais que podem ser ionizados:
 • carboxila: ligação	simples	COOH, cujo pKa é igual 
 a 1,8;
 • amino: ligação	simples	NH2, que pode ser convertido 
-em amínio (ligação	simples	NH3 de carga positiva, cujo 
+em amínio (ligação	simples	NH_3 de carga positiva, cujo 
 pKa é igual a 7,9);
 • tiol: ligação	simples	SH, cujo pKa é igual a 10,5.
-Sabe-se	que	pKa é igual a menos logaritmo de Ka.
+Sabe-se	que	pK_a é igual a menos logaritmo de Ka.
 Descrição da estrutura química da penicilamina: 
 No centro da estrutura representada, há 2 átomos de 
 carbono	com	ligação	simples	entre	si.	Cada	carbono	faz	
 três ligações simples com outros grupos. No primeiro 
-carbono,	estão	ligados:	um	grupo	SH,	um	grupo	CH3 e 
-outro grupo CH3.	No	segundo	carbono,	estão	ligados:	
-um grupo H, um grupo COOH e um grupo NH2.
+carbono,	estão	ligados:	um	grupo	SH,	um	grupo	CH_3 e 
+outro grupo CH_3.	No	segundo	carbono,	estão	ligados:	
+um grupo H, um grupo COOH e um grupo NH_2.
 SH C C
 CH3
 CH3
@@ -8495,7 +8495,7 @@ Penicilamina
 Qual estrutura derivada da penicilamina é 
 predominantemente encontrada na urina?","C","Descrição da estrutura química: Estrutura 
 derivada da penicilamina com os grupos: S de 
-carga negativa, COOH e NH3 de carga positiva.
+carga negativa, COOH e NH_3 de carga positiva.
 C C
 CH3
 CH3 H
@@ -8541,17 +8541,17 @@ funcionais que podem ser ionizados:
 • carboxila: ligação	simples	COOH, cujo pKa é igual 
 a 1,8;
 • amino: ligação	simples	NH2, que pode ser convertido 
-em amínio (ligação	simples	NH3 de carga positiva, cujo 
+em amínio (ligação	simples	NH_3 de carga positiva, cujo 
 pKa é igual a 7,9);
 • tiol: ligação	simples	SH, cujo pKa é igual a 10,5.
-Sabe-se	que	pKa é igual a menos logaritmo de Ka.
+Sabe-se	que	pK_a é igual a menos logaritmo de Ka.
 Descrição da estrutura química da penicilamina: 
 No centro da estrutura representada, há 2 átomos de 
 carbono	com	ligação	simples	entre	si.	Cada	carbono	faz	
 três ligações simples com outros grupos. No primeiro 
-carbono,	estão	ligados:	um	grupo	SH,	um	grupo	CH3 e 
-outro grupo CH3.	No	segundo	carbono,	estão	ligados:	
-um grupo H, um grupo COOH e um grupo NH2.
+carbono,	estão	ligados:	um	grupo	SH,	um	grupo	CH_3 e 
+outro grupo CH_3.	No	segundo	carbono,	estão	ligados:	
+um grupo H, um grupo COOH e um grupo NH_2.
 SH C C
 CH3
 CH3
@@ -8562,7 +8562,7 @@ Penicilamina
 Qual estrutura derivada da penicilamina é 
 predominantemente encontrada na urina?","C","Descrição da estrutura química: Estrutura 
 derivada da penicilamina com os grupos: SH, 
-COOH e NH3 de carga positiva.
+COOH e NH_3 de carga positiva.
 SH C C
 CH3
 CH3 H
@@ -8641,7 +8641,7 @@ F
 ρ
 P
 ρ
-fe
+f_e
 ρ
 N",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2022_1mil_cn","enem_2022_1mil_cn_1",85445,"ENEM 2022 - CN","11
@@ -8709,7 +8709,7 @@ indicação	do	vetor	F . No centro de massa há duas
 setas, uma vertical para cima, indicando vetor 
 N, e uma vertical para baixo indicando o vetor P. 
 No	ponto	onde	a	barra	toca	o	chão,	há	uma	seta	
-horizontal para a esquerda, indicando o vetor fe.
+horizontal para a esquerda, indicando o vetor f_e.
 CM
 ρ
 F
@@ -8785,7 +8785,7 @@ indicação	do	vetor	F . No ponto onde a barra toca
 o	 chão,	 há	 três	 setas:	 uma	 vertical	 para	 cima,	
 indicando o vetor N, uma seta vertical para baixo, 
 indicando vetor P, e uma horizontal para a direita, 
-indicando o vetor fe.
+indicando o vetor f_e.
 CM
 ρ
 F
@@ -8861,7 +8861,7 @@ indicação	do	vetor	F .	No	centro	de	massa,	há	duas
 setas: uma vertical para cima, indicando o vetor 
 N, e uma vertical para baixo, indicando o vetor P. 
 No	ponto	onde	a	barra	toca	o	chão,	há	uma	seta	
-horizontal para a esquerda, indicando o vetor fe.
+horizontal para a esquerda, indicando o vetor f_e.
 CM
 ρ
 F
@@ -8937,7 +8937,7 @@ indicação	do	vetor	F .	No	centro	de	massa,	há	uma
 seta vertical para baixo, indicando o vetor P. No 
 ponto	onde	a	 barra	toca	o	 chão,	há	duas	setas:	
 uma vertical para cima, indicando o vetor N, e uma 
-horizontal para a direita, indicando o vetor fe.
+horizontal para a direita, indicando o vetor f_e.
 CM
 ρ
 F
@@ -9427,10 +9427,10 @@ a 17,0 e a de microrganismos igual a 0,9.
 Amostra de cana-de-açúcar
 RB72 RB84 RB92 SP79 SP80
 Concentração	inicial	
-de sacarose (g L−1) 13,0 18,0 16,0 14,0 17,0
+de sacarose (g L^−1) 13,0 18,0 16,0 14,0 17,0
 Concentração	de	
 microrganismos 
-(mg L−1)
+(mg L^−1)
 0,7 0,8 0,6 0,5 0,9
 Pretende-se	escolher	 o	 tipo	 de	 cana-de-açúcar	que	
 conterá o maior teor de sacarose 10 horas após o corte e 
@@ -9497,10 +9497,10 @@ a 17,0 e a de microrganismos igual a 0,9.
 Amostra de cana-de-açúcar
 RB72 RB84 RB92 SP79 SP80
 Concentração	inicial	
-de sacarose (g L−1) 13,0 18,0 16,0 14,0 17,0
+de sacarose (g L^−1) 13,0 18,0 16,0 14,0 17,0
 Concentração	de	
 microrganismos 
-(mg L−1)
+(mg L^−1)
 0,7 0,8 0,6 0,5 0,9
 Pretende-se	escolher	 o	 tipo	 de	 cana-de-açúcar	que	
 conterá o maior teor de sacarose 10 horas após o corte e 
@@ -9567,10 +9567,10 @@ a 17,0 e a de microrganismos igual a 0,9.
 Amostra de cana-de-açúcar
 RB72 RB84 RB92 SP79 SP80
 Concentração	inicial	
-de sacarose (g L−1) 13,0 18,0 16,0 14,0 17,0
+de sacarose (g L^−1) 13,0 18,0 16,0 14,0 17,0
 Concentração	de	
 microrganismos 
-(mg L−1)
+(mg L^−1)
 0,7 0,8 0,6 0,5 0,9
 Pretende-se	escolher	 o	 tipo	 de	 cana-de-açúcar	que	
 conterá o maior teor de sacarose 10 horas após o corte e 
@@ -9637,10 +9637,10 @@ a 17,0 e a de microrganismos igual a 0,9.
 Amostra de cana-de-açúcar
 RB72 RB84 RB92 SP79 SP80
 Concentração	inicial	
-de sacarose (g L−1) 13,0 18,0 16,0 14,0 17,0
+de sacarose (g L^−1) 13,0 18,0 16,0 14,0 17,0
 Concentração	de	
 microrganismos 
-(mg L−1)
+(mg L^−1)
 0,7 0,8 0,6 0,5 0,9
 Pretende-se	escolher	 o	 tipo	 de	 cana-de-açúcar	que	
 conterá o maior teor de sacarose 10 horas após o corte e 
@@ -9707,10 +9707,10 @@ a 17,0 e a de microrganismos igual a 0,9.
 Amostra de cana-de-açúcar
 RB72 RB84 RB92 SP79 SP80
 Concentração	inicial	
-de sacarose (g L−1) 13,0 18,0 16,0 14,0 17,0
+de sacarose (g L^−1) 13,0 18,0 16,0 14,0 17,0
 Concentração	de	
 microrganismos 
-(mg L−1)
+(mg L^−1)
 0,7 0,8 0,6 0,5 0,9
 Pretende-se	escolher	 o	 tipo	 de	 cana-de-açúcar	que	
 conterá o maior teor de sacarose 10 horas após o corte e 
@@ -11080,7 +11080,7 @@ simples entre o grupo COOH e um carbono ligado a
 dois Cl e um H), que forma o ácido etanodioico (dois 
 grupos COOH ligados entre si). O ácido etanodioico 
 forma o ácido metanoico (COOH ligado ao H), que 
-forma,	como	produtos	finais	de	degradação,	H2O, CO2 
+forma,	como	produtos	finais	de	degradação,	H_2O, CO2 
 e Cl de carga negativa.
 A
 A
@@ -11170,7 +11170,7 @@ simples entre o grupo COOH e um carbono ligado a
 dois Cl e um H), que forma o ácido etanodioico (dois 
 grupos COOH ligados entre si). O ácido etanodioico 
 forma o ácido metanoico (COOH ligado ao H), que 
-forma,	como	produtos	finais	de	degradação,	H2O, CO2 
+forma,	como	produtos	finais	de	degradação,	H_2O, CO2 
 e Cl de carga negativa.
 A
 A
@@ -11260,7 +11260,7 @@ simples entre o grupo COOH e um carbono ligado a
 dois Cl e um H), que forma o ácido etanodioico (dois 
 grupos COOH ligados entre si). O ácido etanodioico 
 forma o ácido metanoico (COOH ligado ao H), que 
-forma,	como	produtos	finais	de	degradação,	H2O, CO2 
+forma,	como	produtos	finais	de	degradação,	H_2O, CO2 
 e Cl de carga negativa.
 A
 A
@@ -11350,7 +11350,7 @@ simples entre o grupo COOH e um carbono ligado a
 dois Cl e um H), que forma o ácido etanodioico (dois 
 grupos COOH ligados entre si). O ácido etanodioico 
 forma o ácido metanoico (COOH ligado ao H), que 
-forma,	como	produtos	finais	de	degradação,	H2O, CO2 
+forma,	como	produtos	finais	de	degradação,	H_2O, CO2 
 e Cl de carga negativa.
 A
 A
@@ -11440,7 +11440,7 @@ simples entre o grupo COOH e um carbono ligado a
 dois Cl e um H), que forma o ácido etanodioico (dois 
 grupos COOH ligados entre si). O ácido etanodioico 
 forma o ácido metanoico (COOH ligado ao H), que 
-forma,	como	produtos	finais	de	degradação,	H2O, CO2 
+forma,	como	produtos	finais	de	degradação,	H_2O, CO2 
 e Cl de carga negativa.
 A
 A

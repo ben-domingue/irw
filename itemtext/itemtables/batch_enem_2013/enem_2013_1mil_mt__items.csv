@@ -1827,8 +1827,7 @@ Uma forma de avaliar uma alteração no sistema de
 senhas é a verificação do coeficiente de melhora, que é 
 a razão do novo número de possibilidades de senhas em 
 relação ao antigo.
-O coeficiente de melhora da alteração recomendada é","A","626
-106",1,NA,NA,NA,NA,"Portuguese","A"
+O coeficiente de melhora da alteração recomendada é","A","626/10^6",1,NA,NA,NA,NA,"Portuguese","A"
 "enem_2013_1mil_mt","enem_2013_1mil_mt_1",31416,"ENEM 2013 - MT","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -1987,8 +1986,7 @@ Uma forma de avaliar uma alteração no sistema de
 senhas é a verificação do coeficiente de melhora, que é 
 a razão do novo número de possibilidades de senhas em 
 relação ao antigo.
-O coeficiente de melhora da alteração recomendada é","A","62!
-10!",0,NA,NA,NA,NA,"Portuguese","B"
+O coeficiente de melhora da alteração recomendada é","A","62!/10!",0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2013_1mil_mt","enem_2013_1mil_mt_1",31416,"ENEM 2013 - MT","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -2147,8 +2145,7 @@ Uma forma de avaliar uma alteração no sistema de
 senhas é a verificação do coeficiente de melhora, que é 
 a razão do novo número de possibilidades de senhas em 
 relação ao antigo.
-O coeficiente de melhora da alteração recomendada é","A","62! 4!
-10! 56!",0,NA,NA,NA,NA,"Portuguese","C"
+O coeficiente de melhora da alteração recomendada é","A","62! 4!/10! 56!",0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2013_1mil_mt","enem_2013_1mil_mt_1",31416,"ENEM 2013 - MT","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -2466,7 +2463,7 @@ Uma forma de avaliar uma alteração no sistema de
 senhas é a verificação do coeficiente de melhora, que é 
 a razão do novo número de possibilidades de senhas em 
 relação ao antigo.
-O coeficiente de melhora da alteração recomendada é","A","626 − 106",0,NA,NA,NA,NA,"Portuguese","E"
+O coeficiente de melhora da alteração recomendada é","A","626 − 10^6",0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2013_1mil_mt","enem_2013_1mil_mt_1",9746,"ENEM 2013 - MT","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -7380,8 +7377,7 @@ R
 3
 A razão que representa a quantidade de cadeiras 
 reservadas do setor 3 em relação ao total de cadeiras 
-desse mesmo setor é","A","17
-70",1,NA,NA,NA,NA,"Portuguese","A"
+desse mesmo setor é","A","17/70",1,NA,NA,NA,NA,"Portuguese","A"
 "enem_2013_1mil_mt","enem_2013_1mil_mt_1",51219,"ENEM 2013 - MT","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -7535,8 +7531,7 @@ R
 3
 A razão que representa a quantidade de cadeiras 
 reservadas do setor 3 em relação ao total de cadeiras 
-desse mesmo setor é","A","17
-53",0,NA,NA,NA,NA,"Portuguese","B"
+desse mesmo setor é","A","17/53",0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2013_1mil_mt","enem_2013_1mil_mt_1",51219,"ENEM 2013 - MT","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -7690,8 +7685,7 @@ R
 3
 A razão que representa a quantidade de cadeiras 
 reservadas do setor 3 em relação ao total de cadeiras 
-desse mesmo setor é","A","53
-70",0,NA,NA,NA,NA,"Portuguese","C"
+desse mesmo setor é","A","53/70",0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2013_1mil_mt","enem_2013_1mil_mt_1",51219,"ENEM 2013 - MT","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -7845,8 +7839,7 @@ R
 3
 A razão que representa a quantidade de cadeiras 
 reservadas do setor 3 em relação ao total de cadeiras 
-desse mesmo setor é","A","53
-17",0,NA,NA,NA,NA,"Portuguese","D"
+desse mesmo setor é","A","53/17",0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2013_1mil_mt","enem_2013_1mil_mt_1",51219,"ENEM 2013 - MT","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -8000,7 +7993,7 @@ R
 3
 A razão que representa a quantidade de cadeiras 
 reservadas do setor 3 em relação ao total de cadeiras 
-desse mesmo setor é","A","70",0,NA,NA,NA,NA,"Portuguese","E"
+desse mesmo setor é","A","70/17",0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2013_1mil_mt","enem_2013_1mil_mt_1",44921,"ENEM 2013 - MT","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -8168,8 +8161,7 @@ Número de compradores
 A loja sorteará um brinde entre os compradores do 
 produto A e outro brinde entre os compradores do produto B.
 Qual a probabilidade de que os dois sorteados tenham 
-feito suas compras em fevereiro de 2012?","A","1
-20",1,NA,NA,NA,NA,"Portuguese","A"
+feito suas compras em fevereiro de 2012?","A","1/20",1,NA,NA,NA,NA,"Portuguese","A"
 "enem_2013_1mil_mt","enem_2013_1mil_mt_1",44921,"ENEM 2013 - MT","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -8337,8 +8329,7 @@ Número de compradores
 A loja sorteará um brinde entre os compradores do 
 produto A e outro brinde entre os compradores do produto B.
 Qual a probabilidade de que os dois sorteados tenham 
-feito suas compras em fevereiro de 2012?","A","3
-242",0,NA,NA,NA,NA,"Portuguese","B"
+feito suas compras em fevereiro de 2012?","A","3/242",0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2013_1mil_mt","enem_2013_1mil_mt_1",44921,"ENEM 2013 - MT","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -8506,8 +8497,7 @@ Número de compradores
 A loja sorteará um brinde entre os compradores do 
 produto A e outro brinde entre os compradores do produto B.
 Qual a probabilidade de que os dois sorteados tenham 
-feito suas compras em fevereiro de 2012?","A","5
-22",0,NA,NA,NA,NA,"Portuguese","C"
+feito suas compras em fevereiro de 2012?","A","5/22",0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2013_1mil_mt","enem_2013_1mil_mt_1",44921,"ENEM 2013 - MT","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -8675,8 +8665,7 @@ Número de compradores
 A loja sorteará um brinde entre os compradores do 
 produto A e outro brinde entre os compradores do produto B.
 Qual a probabilidade de que os dois sorteados tenham 
-feito suas compras em fevereiro de 2012?","A","6
-25",0,NA,NA,NA,NA,"Portuguese","D"
+feito suas compras em fevereiro de 2012?","A","6/25",0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2013_1mil_mt","enem_2013_1mil_mt_1",44921,"ENEM 2013 - MT","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -8844,8 +8833,7 @@ Número de compradores
 A loja sorteará um brinde entre os compradores do 
 produto A e outro brinde entre os compradores do produto B.
 Qual a probabilidade de que os dois sorteados tenham 
-feito suas compras em fevereiro de 2012?","A","7
-15",0,NA,NA,NA,NA,"Portuguese","E"
+feito suas compras em fevereiro de 2012?","A","7/15",0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2013_1mil_mt","enem_2013_1mil_mt_1",41848,"ENEM 2013 - MT","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -11305,8 +11293,7 @@ inglês, 500 falam espanhol e 300 não falam qualquer um
 desses idiomas.
 Escolhendo-se um aluno dessa escola ao acaso e 
 sabendo-se que ele não fala inglês, qual a probabilidade 
-de que esse aluno fale espanhol?","A","1
-2",1,NA,NA,NA,NA,"Portuguese","A"
+de que esse aluno fale espanhol?","A","1/2",1,NA,NA,NA,NA,"Portuguese","A"
 "enem_2013_1mil_mt","enem_2013_1mil_mt_1",8962,"ENEM 2013 - MT","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -11456,8 +11443,7 @@ inglês, 500 falam espanhol e 300 não falam qualquer um
 desses idiomas.
 Escolhendo-se um aluno dessa escola ao acaso e 
 sabendo-se que ele não fala inglês, qual a probabilidade 
-de que esse aluno fale espanhol?","A","5
-8",0,NA,NA,NA,NA,"Portuguese","B"
+de que esse aluno fale espanhol?","A","5/8",0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2013_1mil_mt","enem_2013_1mil_mt_1",8962,"ENEM 2013 - MT","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -11607,8 +11593,7 @@ inglês, 500 falam espanhol e 300 não falam qualquer um
 desses idiomas.
 Escolhendo-se um aluno dessa escola ao acaso e 
 sabendo-se que ele não fala inglês, qual a probabilidade 
-de que esse aluno fale espanhol?","A","1
-4",0,NA,NA,NA,NA,"Portuguese","C"
+de que esse aluno fale espanhol?","A","1/4",0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2013_1mil_mt","enem_2013_1mil_mt_1",8962,"ENEM 2013 - MT","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -11758,8 +11743,7 @@ inglês, 500 falam espanhol e 300 não falam qualquer um
 desses idiomas.
 Escolhendo-se um aluno dessa escola ao acaso e 
 sabendo-se que ele não fala inglês, qual a probabilidade 
-de que esse aluno fale espanhol?","A","5
-6",0,NA,NA,NA,NA,"Portuguese","D"
+de que esse aluno fale espanhol?","A","5/6",0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2013_1mil_mt","enem_2013_1mil_mt_1",8962,"ENEM 2013 - MT","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -11909,8 +11893,7 @@ inglês, 500 falam espanhol e 300 não falam qualquer um
 desses idiomas.
 Escolhendo-se um aluno dessa escola ao acaso e 
 sabendo-se que ele não fala inglês, qual a probabilidade 
-de que esse aluno fale espanhol?","A","5
-14",0,NA,NA,NA,NA,"Portuguese","E"
+de que esse aluno fale espanhol?","A","5/14",0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2013_1mil_mt","enem_2013_1mil_mt_1",41660,"ENEM 2013 - MT","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -12061,11 +12044,7 @@ IV — é o quadrado formado pelos vértices (1, 1), (2, 1), (2, 2) e (1, 2);
 V — é o ponto (0, 0).
 A seguir, o professor representa corretamente os cinco conjuntos sobre uma mesma malha quadriculada, composta 
 de quadrados com lados medindo uma unidade de comprimento, cada, obtendo uma figura.
-Qual destas figuras foi desenhada pelo professor?","E","9
-y
--9 9
-x
--9",0,NA,NA,NA,NA,"Portuguese","A"
+Qual destas figuras foi desenhada pelo professor?","E",NA,0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2013_1mil_mt","enem_2013_1mil_mt_1",41660,"ENEM 2013 - MT","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -12216,11 +12195,7 @@ IV — é o quadrado formado pelos vértices (1, 1), (2, 1), (2, 2) e (1, 2);
 V — é o ponto (0, 0).
 A seguir, o professor representa corretamente os cinco conjuntos sobre uma mesma malha quadriculada, composta 
 de quadrados com lados medindo uma unidade de comprimento, cada, obtendo uma figura.
-Qual destas figuras foi desenhada pelo professor?","E","9
-y
--9 9
-x
--9",0,NA,NA,NA,NA,"Portuguese","B"
+Qual destas figuras foi desenhada pelo professor?","E",NA,0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2013_1mil_mt","enem_2013_1mil_mt_1",41660,"ENEM 2013 - MT","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -12371,10 +12346,7 @@ IV — é o quadrado formado pelos vértices (1, 1), (2, 1), (2, 2) e (1, 2);
 V — é o ponto (0, 0).
 A seguir, o professor representa corretamente os cinco conjuntos sobre uma mesma malha quadriculada, composta 
 de quadrados com lados medindo uma unidade de comprimento, cada, obtendo uma figura.
-Qual destas figuras foi desenhada pelo professor?","E","3
-y
--3 3 x
--3",0,NA,NA,NA,NA,"Portuguese","C"
+Qual destas figuras foi desenhada pelo professor?","E",NA,0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2013_1mil_mt","enem_2013_1mil_mt_1",41660,"ENEM 2013 - MT","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -12525,10 +12497,7 @@ IV — é o quadrado formado pelos vértices (1, 1), (2, 1), (2, 2) e (1, 2);
 V — é o ponto (0, 0).
 A seguir, o professor representa corretamente os cinco conjuntos sobre uma mesma malha quadriculada, composta 
 de quadrados com lados medindo uma unidade de comprimento, cada, obtendo uma figura.
-Qual destas figuras foi desenhada pelo professor?","E","3
-y
--3 3 x
--3",0,NA,NA,NA,NA,"Portuguese","D"
+Qual destas figuras foi desenhada pelo professor?","E",NA,0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2013_1mil_mt","enem_2013_1mil_mt_1",41660,"ENEM 2013 - MT","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -12679,10 +12648,7 @@ IV — é o quadrado formado pelos vértices (1, 1), (2, 1), (2, 2) e (1, 2);
 V — é o ponto (0, 0).
 A seguir, o professor representa corretamente os cinco conjuntos sobre uma mesma malha quadriculada, composta 
 de quadrados com lados medindo uma unidade de comprimento, cada, obtendo uma figura.
-Qual destas figuras foi desenhada pelo professor?","E","3
-y
--3 3 x
--3",1,NA,NA,NA,NA,"Portuguese","E"
+Qual destas figuras foi desenhada pelo professor?","E",NA,1,NA,NA,NA,NA,"Portuguese","E"
 "enem_2013_1mil_mt","enem_2013_1mil_mt_1",51275,"ENEM 2013 - MT","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -12835,7 +12801,7 @@ C
 A função real que expressa a parábola, no plano 
 cartesiano da figura, é dada pela lei f(x) = 3
 2
-x2 – 6x + C, 
+x^2 – 6x + C, 
 onde C é a medida da altura do líquido contido na taça, em 
 centímetros. Sabe-se que o ponto V, na figura, representa 
 o vértice da parábola, localizado sobre o eixo x.
@@ -12993,7 +12959,7 @@ C
 A função real que expressa a parábola, no plano 
 cartesiano da figura, é dada pela lei f(x) = 3
 2
-x2 – 6x + C, 
+x^2 – 6x + C, 
 onde C é a medida da altura do líquido contido na taça, em 
 centímetros. Sabe-se que o ponto V, na figura, representa 
 o vértice da parábola, localizado sobre o eixo x.
@@ -13151,7 +13117,7 @@ C
 A função real que expressa a parábola, no plano 
 cartesiano da figura, é dada pela lei f(x) = 3
 2
-x2 – 6x + C, 
+x^2 – 6x + C, 
 onde C é a medida da altura do líquido contido na taça, em 
 centímetros. Sabe-se que o ponto V, na figura, representa 
 o vértice da parábola, localizado sobre o eixo x.
@@ -13309,7 +13275,7 @@ C
 A função real que expressa a parábola, no plano 
 cartesiano da figura, é dada pela lei f(x) = 3
 2
-x2 – 6x + C, 
+x^2 – 6x + C, 
 onde C é a medida da altura do líquido contido na taça, em 
 centímetros. Sabe-se que o ponto V, na figura, representa 
 o vértice da parábola, localizado sobre o eixo x.
@@ -13467,7 +13433,7 @@ C
 A função real que expressa a parábola, no plano 
 cartesiano da figura, é dada pela lei f(x) = 3
 2
-x2 – 6x + C, 
+x^2 – 6x + C, 
 onde C é a medida da altura do líquido contido na taça, em 
 centímetros. Sabe-se que o ponto V, na figura, representa 
 o vértice da parábola, localizado sobre o eixo x.
@@ -14390,9 +14356,9 @@ Questões de 91 a 95 (opção inglês)",NA,"A Lei da Gravitação Universal, de 
 estabelece a intensidade da força de atração entre duas 
 massas. Ela é representada pela expressão:
 F = G  
-m1m2
+m1m_2
 d 2
-onde m1 e m 2 correspondem às massas dos corpos, d à 
+onde m_1 e m 2 correspondem às massas dos corpos, d à 
 distância entre eles, G à constante universal da gravitação 
 e F à força que um corpo exerce sobre o outro.
 O esquema representa as trajetórias circulares de 
@@ -14581,9 +14547,9 @@ Questões de 91 a 95 (opção inglês)",NA,"A Lei da Gravitação Universal, de 
 estabelece a intensidade da força de atração entre duas 
 massas. Ela é representada pela expressão:
 F = G  
-m1m2
+m1m_2
 d 2
-onde m1 e m 2 correspondem às massas dos corpos, d à 
+onde m_1 e m 2 correspondem às massas dos corpos, d à 
 distância entre eles, G à constante universal da gravitação 
 e F à força que um corpo exerce sobre o outro.
 O esquema representa as trajetórias circulares de 
@@ -14772,9 +14738,9 @@ Questões de 91 a 95 (opção inglês)",NA,"A Lei da Gravitação Universal, de 
 estabelece a intensidade da força de atração entre duas 
 massas. Ela é representada pela expressão:
 F = G  
-m1m2
+m1m_2
 d 2
-onde m1 e m 2 correspondem às massas dos corpos, d à 
+onde m_1 e m 2 correspondem às massas dos corpos, d à 
 distância entre eles, G à constante universal da gravitação 
 e F à força que um corpo exerce sobre o outro.
 O esquema representa as trajetórias circulares de 
@@ -14963,9 +14929,9 @@ Questões de 91 a 95 (opção inglês)",NA,"A Lei da Gravitação Universal, de 
 estabelece a intensidade da força de atração entre duas 
 massas. Ela é representada pela expressão:
 F = G  
-m1m2
+m1m_2
 d 2
-onde m1 e m 2 correspondem às massas dos corpos, d à 
+onde m_1 e m 2 correspondem às massas dos corpos, d à 
 distância entre eles, G à constante universal da gravitação 
 e F à força que um corpo exerce sobre o outro.
 O esquema representa as trajetórias circulares de 
@@ -15154,9 +15120,9 @@ Questões de 91 a 95 (opção inglês)",NA,"A Lei da Gravitação Universal, de 
 estabelece a intensidade da força de atração entre duas 
 massas. Ela é representada pela expressão:
 F = G  
-m1m2
+m1m_2
 d 2
-onde m1 e m 2 correspondem às massas dos corpos, d à 
+onde m_1 e m 2 correspondem às massas dos corpos, d à 
 distância entre eles, G à constante universal da gravitação 
 e F à força que um corpo exerce sobre o outro.
 O esquema representa as trajetórias circulares de 
@@ -15347,7 +15313,7 @@ de limpeza do reservatório, toda a água precisa ser
 escoada. O escoamento da água é feito por seis ralos, 
 e dura 6 horas quando o reservatório está cheio. 
 Esta indústria construirá um novo reservatório, com 
-capacidade de 500 m3, cujo escoamento da água deverá 
+capacidade de 500 m^3, cujo escoamento da água deverá 
 ser realizado em 4 horas, quando o reservatório estiver 
 cheio. Os ralos utilizados no novo reservatório deverão 
 ser idênticos aos do já existente.
@@ -15500,7 +15466,7 @@ de limpeza do reservatório, toda a água precisa ser
 escoada. O escoamento da água é feito por seis ralos, 
 e dura 6 horas quando o reservatório está cheio. 
 Esta indústria construirá um novo reservatório, com 
-capacidade de 500 m3, cujo escoamento da água deverá 
+capacidade de 500 m^3, cujo escoamento da água deverá 
 ser realizado em 4 horas, quando o reservatório estiver 
 cheio. Os ralos utilizados no novo reservatório deverão 
 ser idênticos aos do já existente.
@@ -15653,7 +15619,7 @@ de limpeza do reservatório, toda a água precisa ser
 escoada. O escoamento da água é feito por seis ralos, 
 e dura 6 horas quando o reservatório está cheio. 
 Esta indústria construirá um novo reservatório, com 
-capacidade de 500 m3, cujo escoamento da água deverá 
+capacidade de 500 m^3, cujo escoamento da água deverá 
 ser realizado em 4 horas, quando o reservatório estiver 
 cheio. Os ralos utilizados no novo reservatório deverão 
 ser idênticos aos do já existente.
@@ -15806,7 +15772,7 @@ de limpeza do reservatório, toda a água precisa ser
 escoada. O escoamento da água é feito por seis ralos, 
 e dura 6 horas quando o reservatório está cheio. 
 Esta indústria construirá um novo reservatório, com 
-capacidade de 500 m3, cujo escoamento da água deverá 
+capacidade de 500 m^3, cujo escoamento da água deverá 
 ser realizado em 4 horas, quando o reservatório estiver 
 cheio. Os ralos utilizados no novo reservatório deverão 
 ser idênticos aos do já existente.
@@ -15959,7 +15925,7 @@ de limpeza do reservatório, toda a água precisa ser
 escoada. O escoamento da água é feito por seis ralos, 
 e dura 6 horas quando o reservatório está cheio. 
 Esta indústria construirá um novo reservatório, com 
-capacidade de 500 m3, cujo escoamento da água deverá 
+capacidade de 500 m^3, cujo escoamento da água deverá 
 ser realizado em 4 horas, quando o reservatório estiver 
 cheio. Os ralos utilizados no novo reservatório deverão 
 ser idênticos aos do já existente.
@@ -16871,7 +16837,7 @@ TECNOLOGIAS
 Questões de 91 a 135
 Questões de 91 a 95 (opção inglês)",NA,"Num parque aquático existe uma piscina infantil na 
 forma de um cilindro circular reto, de 1 m de profundidade 
-e volume igual a 12 m3, cuja base tem raio R e centro O. 
+e volume igual a 12 m^3, cuja base tem raio R e centro O. 
 Deseja-se construir uma ilha de lazer seca no interior 
 dessa piscina, também na forma de um cilindro circular 
 reto, cuja base estará no fundo da piscina e com centro 
@@ -17030,7 +16996,7 @@ TECNOLOGIAS
 Questões de 91 a 135
 Questões de 91 a 95 (opção inglês)",NA,"Num parque aquático existe uma piscina infantil na 
 forma de um cilindro circular reto, de 1 m de profundidade 
-e volume igual a 12 m3, cuja base tem raio R e centro O. 
+e volume igual a 12 m^3, cuja base tem raio R e centro O. 
 Deseja-se construir uma ilha de lazer seca no interior 
 dessa piscina, também na forma de um cilindro circular 
 reto, cuja base estará no fundo da piscina e com centro 
@@ -17189,7 +17155,7 @@ TECNOLOGIAS
 Questões de 91 a 135
 Questões de 91 a 95 (opção inglês)",NA,"Num parque aquático existe uma piscina infantil na 
 forma de um cilindro circular reto, de 1 m de profundidade 
-e volume igual a 12 m3, cuja base tem raio R e centro O. 
+e volume igual a 12 m^3, cuja base tem raio R e centro O. 
 Deseja-se construir uma ilha de lazer seca no interior 
 dessa piscina, também na forma de um cilindro circular 
 reto, cuja base estará no fundo da piscina e com centro 
@@ -17348,7 +17314,7 @@ TECNOLOGIAS
 Questões de 91 a 135
 Questões de 91 a 95 (opção inglês)",NA,"Num parque aquático existe uma piscina infantil na 
 forma de um cilindro circular reto, de 1 m de profundidade 
-e volume igual a 12 m3, cuja base tem raio R e centro O. 
+e volume igual a 12 m^3, cuja base tem raio R e centro O. 
 Deseja-se construir uma ilha de lazer seca no interior 
 dessa piscina, também na forma de um cilindro circular 
 reto, cuja base estará no fundo da piscina e com centro 
@@ -17507,7 +17473,7 @@ TECNOLOGIAS
 Questões de 91 a 135
 Questões de 91 a 95 (opção inglês)",NA,"Num parque aquático existe uma piscina infantil na 
 forma de um cilindro circular reto, de 1 m de profundidade 
-e volume igual a 12 m3, cuja base tem raio R e centro O. 
+e volume igual a 12 m^3, cuja base tem raio R e centro O. 
 Deseja-se construir uma ilha de lazer seca no interior 
 dessa piscina, também na forma de um cilindro circular 
 reto, cuja base estará no fundo da piscina e com centro 
@@ -18415,7 +18381,7 @@ na seguinte proporção: 1 parte de cimento, 4 partes de
 areia e 2 partes de brita. Para construir o contrapiso 
 de uma garagem, uma construtora encomendou um 
 caminhão betoneira com 14 m3 de concreto.
-Qual é o volume de cimento, em m3, na carga de concreto 
+Qual é o volume de cimento, em m^3, na carga de concreto 
 trazido pela betoneira?","B","1,75",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2013_1mil_mt","enem_2013_1mil_mt_1",37252,"ENEM 2013 - MT","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
@@ -18564,7 +18530,7 @@ na seguinte proporção: 1 parte de cimento, 4 partes de
 areia e 2 partes de brita. Para construir o contrapiso 
 de uma garagem, uma construtora encomendou um 
 caminhão betoneira com 14 m3 de concreto.
-Qual é o volume de cimento, em m3, na carga de concreto 
+Qual é o volume de cimento, em m^3, na carga de concreto 
 trazido pela betoneira?","B","2,00",1,NA,NA,NA,NA,"Portuguese","B"
 "enem_2013_1mil_mt","enem_2013_1mil_mt_1",37252,"ENEM 2013 - MT","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
@@ -18713,7 +18679,7 @@ na seguinte proporção: 1 parte de cimento, 4 partes de
 areia e 2 partes de brita. Para construir o contrapiso 
 de uma garagem, uma construtora encomendou um 
 caminhão betoneira com 14 m3 de concreto.
-Qual é o volume de cimento, em m3, na carga de concreto 
+Qual é o volume de cimento, em m^3, na carga de concreto 
 trazido pela betoneira?","B","2,33",0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2013_1mil_mt","enem_2013_1mil_mt_1",37252,"ENEM 2013 - MT","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
@@ -18862,7 +18828,7 @@ na seguinte proporção: 1 parte de cimento, 4 partes de
 areia e 2 partes de brita. Para construir o contrapiso 
 de uma garagem, uma construtora encomendou um 
 caminhão betoneira com 14 m3 de concreto.
-Qual é o volume de cimento, em m3, na carga de concreto 
+Qual é o volume de cimento, em m^3, na carga de concreto 
 trazido pela betoneira?","B","4,00",0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2013_1mil_mt","enem_2013_1mil_mt_1",37252,"ENEM 2013 - MT","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
@@ -19011,7 +18977,7 @@ na seguinte proporção: 1 parte de cimento, 4 partes de
 areia e 2 partes de brita. Para construir o contrapiso 
 de uma garagem, uma construtora encomendou um 
 caminhão betoneira com 14 m3 de concreto.
-Qual é o volume de cimento, em m3, na carga de concreto 
+Qual é o volume de cimento, em m^3, na carga de concreto 
 trazido pela betoneira?","B","8,00",0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2013_1mil_mt","enem_2013_1mil_mt_1",44109,"ENEM 2013 - MT","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
@@ -33418,8 +33384,7 @@ Qual deve ser o menor valor da razão l
 BD
  para que uma 
 bandeja tenha capacidade de portar exatamente quatro 
-copos de uma só vez?","D","14
-5",0,NA,NA,NA,NA,"Portuguese","B"
+copos de uma só vez?","D","14/5",0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2013_1mil_mt","enem_2013_1mil_mt_1",43849,"ENEM 2013 - MT","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -33725,8 +33690,7 @@ Qual deve ser o menor valor da razão l
 BD
  para que uma 
 bandeja tenha capacidade de portar exatamente quatro 
-copos de uma só vez?","D","24
-5",1,NA,NA,NA,NA,"Portuguese","D"
+copos de uma só vez?","D","24/5",1,NA,NA,NA,NA,"Portuguese","D"
 "enem_2013_1mil_mt","enem_2013_1mil_mt_1",43849,"ENEM 2013 - MT","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -33879,7 +33843,7 @@ Qual deve ser o menor valor da razão l
 BD
  para que uma 
 bandeja tenha capacidade de portar exatamente quatro 
-copos de uma só vez?","D","28",0,NA,NA,NA,NA,"Portuguese","E"
+copos de uma só vez?","D","28/5",0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2013_1mil_mt","enem_2013_1mil_mt_1",13512,"ENEM 2013 - MT","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -34819,7 +34783,7 @@ A
 B
 A projeção ortogonal da trajetória dos pontos A e B, sobre 
 o plano do chão da gangorra, quando esta se encontra 
-em movimento, é:","B","A B",0,NA,NA,NA,NA,"Portuguese","A"
+em movimento, é:","B",NA,0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2013_1mil_mt","enem_2013_1mil_mt_1",43001,"ENEM 2013 - MT","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -34974,7 +34938,7 @@ A
 B
 A projeção ortogonal da trajetória dos pontos A e B, sobre 
 o plano do chão da gangorra, quando esta se encontra 
-em movimento, é:","B","A B",1,NA,NA,NA,NA,"Portuguese","B"
+em movimento, é:","B",NA,1,NA,NA,NA,NA,"Portuguese","B"
 "enem_2013_1mil_mt","enem_2013_1mil_mt_1",43001,"ENEM 2013 - MT","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -35129,7 +35093,7 @@ A
 B
 A projeção ortogonal da trajetória dos pontos A e B, sobre 
 o plano do chão da gangorra, quando esta se encontra 
-em movimento, é:","B","A B",0,NA,NA,NA,NA,"Portuguese","C"
+em movimento, é:","B",NA,0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2013_1mil_mt","enem_2013_1mil_mt_1",43001,"ENEM 2013 - MT","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -35284,7 +35248,7 @@ A
 B
 A projeção ortogonal da trajetória dos pontos A e B, sobre 
 o plano do chão da gangorra, quando esta se encontra 
-em movimento, é:","B","A B",0,NA,NA,NA,NA,"Portuguese","D"
+em movimento, é:","B",NA,0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2013_1mil_mt","enem_2013_1mil_mt_1",43001,"ENEM 2013 - MT","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -35439,4 +35403,4 @@ A
 B
 A projeção ortogonal da trajetória dos pontos A e B, sobre 
 o plano do chão da gangorra, quando esta se encontra 
-em movimento, é:","B","A B",0,NA,NA,NA,NA,"Portuguese","E"
+em movimento, é:","B",NA,0,NA,NA,NA,NA,"Portuguese","E"

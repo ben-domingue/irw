@@ -1269,8 +1269,7 @@ Nível de envasamento
 da garrafa
 Qual esboço de gráfi  co melhor representa a variação da 
 altura do líquido em função do tempo, na garrafa indicada 
-na imagem?","B","altura
-tempo0",0,NA,NA,NA,NA,"Portuguese","A"
+na imagem?","B",NA,0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2020_1mil_mt","enem_2020_1mil_mt_1",111530,"ENEM 2020 - MT","LARANJA
 Eu fiz meu próprio caminho e meu caminho me fez.
 2
@@ -1311,8 +1310,7 @@ Nível de envasamento
 da garrafa
 Qual esboço de gráfi  co melhor representa a variação da 
 altura do líquido em função do tempo, na garrafa indicada 
-na imagem?","B","altura
-tempo0",1,NA,NA,NA,NA,"Portuguese","B"
+na imagem?","B",NA,1,NA,NA,NA,NA,"Portuguese","B"
 "enem_2020_1mil_mt","enem_2020_1mil_mt_1",111530,"ENEM 2020 - MT","LARANJA
 Eu fiz meu próprio caminho e meu caminho me fez.
 2
@@ -1353,8 +1351,7 @@ Nível de envasamento
 da garrafa
 Qual esboço de gráfi  co melhor representa a variação da 
 altura do líquido em função do tempo, na garrafa indicada 
-na imagem?","B","altura
-tempo0",0,NA,NA,NA,NA,"Portuguese","C"
+na imagem?","B",NA,0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2020_1mil_mt","enem_2020_1mil_mt_1",111530,"ENEM 2020 - MT","LARANJA
 Eu fiz meu próprio caminho e meu caminho me fez.
 2
@@ -1395,8 +1392,7 @@ Nível de envasamento
 da garrafa
 Qual esboço de gráfi  co melhor representa a variação da 
 altura do líquido em função do tempo, na garrafa indicada 
-na imagem?","B","altura
-tempo0",0,NA,NA,NA,NA,"Portuguese","D"
+na imagem?","B",NA,0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2020_1mil_mt","enem_2020_1mil_mt_1",111530,"ENEM 2020 - MT","LARANJA
 Eu fiz meu próprio caminho e meu caminho me fez.
 2
@@ -1437,8 +1433,7 @@ Nível de envasamento
 da garrafa
 Qual esboço de gráfi  co melhor representa a variação da 
 altura do líquido em função do tempo, na garrafa indicada 
-na imagem?","B","altura
-0 tempo",0,NA,NA,NA,NA,"Portuguese","E"
+na imagem?","B",NA,0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2020_1mil_mt","enem_2020_1mil_mt_1",111566,"ENEM 2020 - MT","LARANJA
 Eu fiz meu próprio caminho e meu caminho me fez.
 2
@@ -4824,23 +4819,7 @@ R$
 55
 5 10 15 20 25 300
 O lucro é determinado pela diferença: Receita – Custo. 
-O gráfico que representa o lucro dessa empresa, em função da quantidade de itens produzidos, é","A","R$
-5
-−5
-−10
-−15
-−20
-10
-15
-20
-25
-30
-35
-40
-5 10 20 25 300
-Quantidade de 
-itens produzidos
-15",1,NA,NA,NA,NA,"Portuguese","A"
+O gráfico que representa o lucro dessa empresa, em função da quantidade de itens produzidos, é","A",NA,1,NA,NA,NA,NA,"Portuguese","A"
 "enem_2020_1mil_mt","enem_2020_1mil_mt_1",49630,"ENEM 2020 - MT","LARANJA
 Eu fiz meu próprio caminho e meu caminho me fez.
 2
@@ -4890,23 +4869,7 @@ R$
 55
 5 10 15 20 25 300
 O lucro é determinado pela diferença: Receita – Custo. 
-O gráfico que representa o lucro dessa empresa, em função da quantidade de itens produzidos, é","A","R$
-5
-−5
-−10
-−15
-−20
-−25
-−30
-−35
-−40
-10
-15
-20
-5 10 20 25 300
-Quantidade de 
-itens produzidos
-15",0,NA,NA,NA,NA,"Portuguese","B"
+O gráfico que representa o lucro dessa empresa, em função da quantidade de itens produzidos, é","A",NA,0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2020_1mil_mt","enem_2020_1mil_mt_1",49630,"ENEM 2020 - MT","LARANJA
 Eu fiz meu próprio caminho e meu caminho me fez.
 2
@@ -4956,22 +4919,7 @@ R$
 55
 5 10 15 20 25 300
 O lucro é determinado pela diferença: Receita – Custo. 
-O gráfico que representa o lucro dessa empresa, em função da quantidade de itens produzidos, é","A","R$
-5
-−5
-10
-15
-20
-25
-30
-35
-40
-45
-50
-55
-5 10 20 25 300
-Quantidade de 
-itens produzidos",0,NA,NA,NA,NA,"Portuguese","C"
+O gráfico que representa o lucro dessa empresa, em função da quantidade de itens produzidos, é","A",NA,0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2020_1mil_mt","enem_2020_1mil_mt_1",49630,"ENEM 2020 - MT","LARANJA
 Eu fiz meu próprio caminho e meu caminho me fez.
 2
@@ -5021,23 +4969,7 @@ R$
 55
 5 10 15 20 25 300
 O lucro é determinado pela diferença: Receita – Custo. 
-O gráfico que representa o lucro dessa empresa, em função da quantidade de itens produzidos, é","A","R$
-5
-−5
-10
-15
-20
-25
-30
-35
-40
-45
-50
-55
-5 10 20 25 300
-Quantidade de 
-itens produzidos
-15",0,NA,NA,NA,NA,"Portuguese","D"
+O gráfico que representa o lucro dessa empresa, em função da quantidade de itens produzidos, é","A",NA,0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2020_1mil_mt","enem_2020_1mil_mt_1",49630,"ENEM 2020 - MT","LARANJA
 Eu fiz meu próprio caminho e meu caminho me fez.
 2
@@ -5087,23 +5019,7 @@ R$
 55
 5 10 15 20 25 300
 O lucro é determinado pela diferença: Receita – Custo. 
-O gráfico que representa o lucro dessa empresa, em função da quantidade de itens produzidos, é","A","R$
-5
-−5
-10
-15
-20
-25
-30
-35
-40
-45
-50
-55
-5 10 20 25 300
-Quantidade de 
-itens produzidos
-15",0,NA,NA,NA,NA,"Portuguese","E"
+O gráfico que representa o lucro dessa empresa, em função da quantidade de itens produzidos, é","A",NA,0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2020_1mil_mt","enem_2020_1mil_mt_1",49782,"ENEM 2020 - MT","LARANJA
 Eu fiz meu próprio caminho e meu caminho me fez.
 2
@@ -5919,7 +5835,7 @@ A pessoa escolherá um desses depósitos para realizar
 sua compra, considerando os preços do cimento e do fre-
 te oferecidos em cada opção. 
 Se a pessoa decidir pela opção mais econômica, o depósito 
-escolhido para a realização dessa compra será o","C","A.",0,NA,NA,NA,NA,"Portuguese","A"
+escolhido para a realização dessa compra será o","C",NA,0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2020_1mil_mt","enem_2020_1mil_mt_1",60666,"ENEM 2020 - MT","LARANJA
 Eu fiz meu próprio caminho e meu caminho me fez.
 2
@@ -5980,7 +5896,7 @@ A pessoa escolherá um desses depósitos para realizar
 sua compra, considerando os preços do cimento e do fre-
 te oferecidos em cada opção. 
 Se a pessoa decidir pela opção mais econômica, o depósito 
-escolhido para a realização dessa compra será o","C","B.",0,NA,NA,NA,NA,"Portuguese","B"
+escolhido para a realização dessa compra será o","C",NA,0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2020_1mil_mt","enem_2020_1mil_mt_1",60666,"ENEM 2020 - MT","LARANJA
 Eu fiz meu próprio caminho e meu caminho me fez.
 2
@@ -6041,7 +5957,7 @@ A pessoa escolherá um desses depósitos para realizar
 sua compra, considerando os preços do cimento e do fre-
 te oferecidos em cada opção. 
 Se a pessoa decidir pela opção mais econômica, o depósito 
-escolhido para a realização dessa compra será o","C","C.",1,NA,NA,NA,NA,"Portuguese","C"
+escolhido para a realização dessa compra será o","C",NA,1,NA,NA,NA,NA,"Portuguese","C"
 "enem_2020_1mil_mt","enem_2020_1mil_mt_1",60666,"ENEM 2020 - MT","LARANJA
 Eu fiz meu próprio caminho e meu caminho me fez.
 2
@@ -6102,7 +6018,7 @@ A pessoa escolherá um desses depósitos para realizar
 sua compra, considerando os preços do cimento e do fre-
 te oferecidos em cada opção. 
 Se a pessoa decidir pela opção mais econômica, o depósito 
-escolhido para a realização dessa compra será o","C","D.",0,NA,NA,NA,NA,"Portuguese","D"
+escolhido para a realização dessa compra será o","C",NA,0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2020_1mil_mt","enem_2020_1mil_mt_1",60666,"ENEM 2020 - MT","LARANJA
 Eu fiz meu próprio caminho e meu caminho me fez.
 2
@@ -6163,7 +6079,7 @@ A pessoa escolherá um desses depósitos para realizar
 sua compra, considerando os preços do cimento e do fre-
 te oferecidos em cada opção. 
 Se a pessoa decidir pela opção mais econômica, o depósito 
-escolhido para a realização dessa compra será o","C","E.",0,NA,NA,NA,NA,"Portuguese","E"
+escolhido para a realização dessa compra será o","C",NA,0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2020_1mil_mt","enem_2020_1mil_mt_1",62498,"ENEM 2020 - MT","LARANJA
 Eu fiz meu próprio caminho e meu caminho me fez.
 2

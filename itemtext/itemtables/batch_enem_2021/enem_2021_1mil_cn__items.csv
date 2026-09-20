@@ -1002,8 +1002,8 @@ minúsculo é igual a A vezes fração de numerador delta
 T maiúsculo e denominador, abre parêntese, fração de 
 numerador d1 e denominador k1 somada à fração de 
 numerador d2 e denominador k2, fecha parêntese, em 
-que d1 e d2 são as espessuras dos dois materiais, e k1 e 
-k2 são as condutividades de cada material. Os materiais 
+que d_1 e d_2 são as espessuras dos dois materiais, e k_1 e 
+k_2 são as condutividades de cada material. Os materiais 
 mais comuns no mercado para panelas são o alumínio  
 (k = 20 watts por metro por Kelvin), o ferro ( k = 8 watts 
 por metro por Kelvin) e o aço ( k = 5 watts por metro por 
@@ -1063,8 +1063,8 @@ minúsculo é igual a A vezes fração de numerador delta
 T maiúsculo e denominador, abre parêntese, fração de 
 numerador d1 e denominador k1 somada à fração de 
 numerador d2 e denominador k2, fecha parêntese, em 
-que d1 e d2 são as espessuras dos dois materiais, e k1 e 
-k2 são as condutividades de cada material. Os materiais 
+que d_1 e d_2 são as espessuras dos dois materiais, e k_1 e 
+k_2 são as condutividades de cada material. Os materiais 
 mais comuns no mercado para panelas são o alumínio  
 (k = 20 watts por metro por Kelvin), o ferro ( k = 8 watts 
 por metro por Kelvin) e o aço ( k = 5 watts por metro por 
@@ -1124,8 +1124,8 @@ minúsculo é igual a A vezes fração de numerador delta
 T maiúsculo e denominador, abre parêntese, fração de 
 numerador d1 e denominador k1 somada à fração de 
 numerador d2 e denominador k2, fecha parêntese, em 
-que d1 e d2 são as espessuras dos dois materiais, e k1 e 
-k2 são as condutividades de cada material. Os materiais 
+que d_1 e d_2 são as espessuras dos dois materiais, e k_1 e 
+k_2 são as condutividades de cada material. Os materiais 
 mais comuns no mercado para panelas são o alumínio  
 (k = 20 watts por metro por Kelvin), o ferro ( k = 8 watts 
 por metro por Kelvin) e o aço ( k = 5 watts por metro por 
@@ -1185,8 +1185,8 @@ minúsculo é igual a A vezes fração de numerador delta
 T maiúsculo e denominador, abre parêntese, fração de 
 numerador d1 e denominador k1 somada à fração de 
 numerador d2 e denominador k2, fecha parêntese, em 
-que d1 e d2 são as espessuras dos dois materiais, e k1 e 
-k2 são as condutividades de cada material. Os materiais 
+que d_1 e d_2 são as espessuras dos dois materiais, e k_1 e 
+k_2 são as condutividades de cada material. Os materiais 
 mais comuns no mercado para panelas são o alumínio  
 (k = 20 watts por metro por Kelvin), o ferro ( k = 8 watts 
 por metro por Kelvin) e o aço ( k = 5 watts por metro por 
@@ -1246,8 +1246,8 @@ minúsculo é igual a A vezes fração de numerador delta
 T maiúsculo e denominador, abre parêntese, fração de 
 numerador d1 e denominador k1 somada à fração de 
 numerador d2 e denominador k2, fecha parêntese, em 
-que d1 e d2 são as espessuras dos dois materiais, e k1 e 
-k2 são as condutividades de cada material. Os materiais 
+que d_1 e d_2 são as espessuras dos dois materiais, e k_1 e 
+k_2 são as condutividades de cada material. Os materiais 
 mais comuns no mercado para panelas são o alumínio  
 (k = 20 watts por metro por Kelvin), o ferro ( k = 8 watts 
 por metro por Kelvin) e o aço ( k = 5 watts por metro por 
@@ -1493,16 +1493,16 @@ Temperatura
 operacional (°C) Eletrólito Semirreações nos eletrodos
 AFC 90 - 100 Hidróxido de potássio aquoso
 H2 + 2 OH [notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]2 H 2O + 2 e [notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]1  __
-2  O2 + H2O + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]2 OH[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]MSFC 600 - 1 000 Carbonatos de lítio, sódio 
+2  O2 + H^2O + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]2 OH[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]MSFC 600 - 1 000 Carbonatos de lítio, sódio 
 e/ou potássio fundidos
-H2 + CO3
+H2 + CO_3
 2[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]H2O + CO2 +2  e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]1  __
 2 
- O2 + CO2 + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]CO3
+ O2 + CO_2 + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]CO3
 2[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]PEM 60 - 100 Ácido 
 poliperfl uorossulfônico sólido H2 [notação não extraível da fonte original (gerada por IA): seta de reação química]2  H+ + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]1  __
 2 
- O2 + 2 H+ + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]H2O
+ O2 + 2 H^+ + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]H2O
 PAFC 175 - 200 Ácido fosfórico líquido
 SOFC 600 - 1 000 Óxido de zircônio(IV) sólido
 Testes operacionais com esses tipos de células têm indicado que as melhores alternativas para veículos são as 
@@ -1549,16 +1549,16 @@ Temperatura
 operacional (°C) Eletrólito Semirreações nos eletrodos
 AFC 90 - 100 Hidróxido de potássio aquoso
 H2 + 2 OH [notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]2 H 2O + 2 e [notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]1  __
-2  O2 + H2O + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]2 OH[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]MSFC 600 - 1 000 Carbonatos de lítio, sódio 
+2  O2 + H^2O + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]2 OH[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]MSFC 600 - 1 000 Carbonatos de lítio, sódio 
 e/ou potássio fundidos
-H2 + CO3
+H2 + CO_3
 2[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]H2O + CO2 +2  e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]1  __
 2 
- O2 + CO2 + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]CO3
+ O2 + CO_2 + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]CO3
 2[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]PEM 60 - 100 Ácido 
 poliperfl uorossulfônico sólido H2 [notação não extraível da fonte original (gerada por IA): seta de reação química]2  H+ + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]1  __
 2 
- O2 + 2 H+ + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]H2O
+ O2 + 2 H^+ + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]H2O
 PAFC 175 - 200 Ácido fosfórico líquido
 SOFC 600 - 1 000 Óxido de zircônio(IV) sólido
 Testes operacionais com esses tipos de células têm indicado que as melhores alternativas para veículos são as 
@@ -1605,16 +1605,16 @@ Temperatura
 operacional (°C) Eletrólito Semirreações nos eletrodos
 AFC 90 - 100 Hidróxido de potássio aquoso
 H2 + 2 OH [notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]2 H 2O + 2 e [notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]1  __
-2  O2 + H2O + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]2 OH[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]MSFC 600 - 1 000 Carbonatos de lítio, sódio 
+2  O2 + H^2O + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]2 OH[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]MSFC 600 - 1 000 Carbonatos de lítio, sódio 
 e/ou potássio fundidos
-H2 + CO3
+H2 + CO_3
 2[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]H2O + CO2 +2  e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]1  __
 2 
- O2 + CO2 + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]CO3
+ O2 + CO_2 + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]CO3
 2[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]PEM 60 - 100 Ácido 
 poliperfl uorossulfônico sólido H2 [notação não extraível da fonte original (gerada por IA): seta de reação química]2  H+ + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]1  __
 2 
- O2 + 2 H+ + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]H2O
+ O2 + 2 H^+ + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]H2O
 PAFC 175 - 200 Ácido fosfórico líquido
 SOFC 600 - 1 000 Óxido de zircônio(IV) sólido
 Testes operacionais com esses tipos de células têm indicado que as melhores alternativas para veículos são as 
@@ -1661,16 +1661,16 @@ Temperatura
 operacional (°C) Eletrólito Semirreações nos eletrodos
 AFC 90 - 100 Hidróxido de potássio aquoso
 H2 + 2 OH [notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]2 H 2O + 2 e [notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]1  __
-2  O2 + H2O + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]2 OH[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]MSFC 600 - 1 000 Carbonatos de lítio, sódio 
+2  O2 + H^2O + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]2 OH[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]MSFC 600 - 1 000 Carbonatos de lítio, sódio 
 e/ou potássio fundidos
-H2 + CO3
+H2 + CO_3
 2[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]H2O + CO2 +2  e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]1  __
 2 
- O2 + CO2 + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]CO3
+ O2 + CO_2 + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]CO3
 2[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]PEM 60 - 100 Ácido 
 poliperfl uorossulfônico sólido H2 [notação não extraível da fonte original (gerada por IA): seta de reação química]2  H+ + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]1  __
 2 
- O2 + 2 H+ + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]H2O
+ O2 + 2 H^+ + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]H2O
 PAFC 175 - 200 Ácido fosfórico líquido
 SOFC 600 - 1 000 Óxido de zircônio(IV) sólido
 Testes operacionais com esses tipos de células têm indicado que as melhores alternativas para veículos são as 
@@ -1717,16 +1717,16 @@ Temperatura
 operacional (°C) Eletrólito Semirreações nos eletrodos
 AFC 90 - 100 Hidróxido de potássio aquoso
 H2 + 2 OH [notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]2 H 2O + 2 e [notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]1  __
-2  O2 + H2O + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]2 OH[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]MSFC 600 - 1 000 Carbonatos de lítio, sódio 
+2  O2 + H^2O + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]2 OH[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]MSFC 600 - 1 000 Carbonatos de lítio, sódio 
 e/ou potássio fundidos
-H2 + CO3
+H2 + CO_3
 2[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]H2O + CO2 +2  e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]1  __
 2 
- O2 + CO2 + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]CO3
+ O2 + CO_2 + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]CO3
 2[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]PEM 60 - 100 Ácido 
 poliperfl uorossulfônico sólido H2 [notação não extraível da fonte original (gerada por IA): seta de reação química]2  H+ + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]1  __
 2 
- O2 + 2 H+ + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]H2O
+ O2 + 2 H^+ + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]H2O
 PAFC 175 - 200 Ácido fosfórico líquido
 SOFC 600 - 1 000 Óxido de zircônio(IV) sólido
 Testes operacionais com esses tipos de células têm indicado que as melhores alternativas para veículos são as 
@@ -2195,7 +2195,7 @@ composição de referência, com pH entre 5,5 e 6,5, e,
 para a solução nutritiva preparada, com pH igual a 4,3.
 Macronutrientes: N, abre parêntese, NH4 com carga 
 positiva, fecha parêntese; concentrações: 1,0 e 0,8.
-P, abre parêntese, H2PO4 com carga negativa, fecha 
+P, abre parêntese, H_2PO4 com carga negativa, fecha 
 parêntese; concentrações: 1,0 e 1,0.
 K com carga positiva; concentrações: 6,0 e 3,5.
 Ca com carga positiva 2; concentrações: 4,0 e 3,0.
@@ -2213,16 +2213,16 @@ Solução nutritiva
 preparada
 (pH = 4,3)
 Macronutrientes
-N (NH4
+N (NH_4
 +) 1,0 0,8
-P (H2PO4
+P (H_2PO4
 [notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]) 1,0 1,0
-K+ 6,0 3,5
-Ca2+ 4,0 3,0
+K^+ 6,0 3,5
+Ca^2+ 4,0 3,0
 SO4
 2[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]2,0 1,0
 Micronutrientes
-Fe2+ 90 × 10[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]3 70 × 10[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]3
+Fe^2+ 90 × 10[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]3 70 × 10[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]3
 Cl[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]- 4,5 × 10 [notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]3
 Para correção do pH da solução nutritiva preparada, esse 
 produtor pode empregar uma solução de","E","ácido fosfórico, H3PO4.",0,NA,NA,NA,NA,"Portuguese","A"
@@ -2277,7 +2277,7 @@ composição de referência, com pH entre 5,5 e 6,5, e,
 para a solução nutritiva preparada, com pH igual a 4,3.
 Macronutrientes: N, abre parêntese, NH4 com carga 
 positiva, fecha parêntese; concentrações: 1,0 e 0,8.
-P, abre parêntese, H2PO4 com carga negativa, fecha 
+P, abre parêntese, H_2PO4 com carga negativa, fecha 
 parêntese; concentrações: 1,0 e 1,0.
 K com carga positiva; concentrações: 6,0 e 3,5.
 Ca com carga positiva 2; concentrações: 4,0 e 3,0.
@@ -2295,19 +2295,19 @@ Solução nutritiva
 preparada
 (pH = 4,3)
 Macronutrientes
-N (NH4
+N (NH_4
 +) 1,0 0,8
-P (H2PO4
+P (H_2PO4
 [notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]) 1,0 1,0
-K+ 6,0 3,5
-Ca2+ 4,0 3,0
+K^+ 6,0 3,5
+Ca^2+ 4,0 3,0
 SO4
 2[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]2,0 1,0
 Micronutrientes
-Fe2+ 90 × 10[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]3 70 × 10[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]3
+Fe^2+ 90 × 10[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]3 70 × 10[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]3
 Cl[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]- 4,5 × 10 [notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]3
 Para correção do pH da solução nutritiva preparada, esse 
-produtor pode empregar uma solução de","E","sulfato de cálcio, CaSO4.",0,NA,NA,NA,NA,"Portuguese","B"
+produtor pode empregar uma solução de","E","sulfato de cálcio, CaSO_4.",0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2021_1mil_cn","enem_2021_1mil_cn_1",117867,"ENEM 2021 - CN","1 NE202 ME
 21ENE20 MM 2E 0N 2E 11 E2 N0 E2 MM 2E 0N 2E 11 E2 N0 E2E MM 20N 2E 11 E2 N0 E2 MM 2E 0N 2E 11 E2 N0 E2 MM 2E 0N 2E 11 E2 N0 E2 MM 2E 0N 2E 11 E2 N0 E2 MM 2E 0N 2E 11 E2 N02 MEM 2E 0N 2E 11 E2 N0 E2 MM 2E 0N 2E 11 E2 N0 E2 MM 2E 0N 2E 1
 11
@@ -2359,7 +2359,7 @@ composição de referência, com pH entre 5,5 e 6,5, e,
 para a solução nutritiva preparada, com pH igual a 4,3.
 Macronutrientes: N, abre parêntese, NH4 com carga 
 positiva, fecha parêntese; concentrações: 1,0 e 0,8.
-P, abre parêntese, H2PO4 com carga negativa, fecha 
+P, abre parêntese, H_2PO4 com carga negativa, fecha 
 parêntese; concentrações: 1,0 e 1,0.
 K com carga positiva; concentrações: 6,0 e 3,5.
 Ca com carga positiva 2; concentrações: 4,0 e 3,0.
@@ -2377,16 +2377,16 @@ Solução nutritiva
 preparada
 (pH = 4,3)
 Macronutrientes
-N (NH4
+N (NH_4
 +) 1,0 0,8
-P (H2PO4
+P (H_2PO4
 [notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]) 1,0 1,0
-K+ 6,0 3,5
-Ca2+ 4,0 3,0
+K^+ 6,0 3,5
+Ca^2+ 4,0 3,0
 SO4
 2[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]2,0 1,0
 Micronutrientes
-Fe2+ 90 × 10[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]3 70 × 10[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]3
+Fe^2+ 90 × 10[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]3 70 × 10[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]3
 Cl[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]- 4,5 × 10 [notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]3
 Para correção do pH da solução nutritiva preparada, esse 
 produtor pode empregar uma solução de","E","óxido de alumínio, A[UNDECODED-g34]2O3.",0,NA,NA,NA,NA,"Portuguese","C"
@@ -2441,7 +2441,7 @@ composição de referência, com pH entre 5,5 e 6,5, e,
 para a solução nutritiva preparada, com pH igual a 4,3.
 Macronutrientes: N, abre parêntese, NH4 com carga 
 positiva, fecha parêntese; concentrações: 1,0 e 0,8.
-P, abre parêntese, H2PO4 com carga negativa, fecha 
+P, abre parêntese, H_2PO4 com carga negativa, fecha 
 parêntese; concentrações: 1,0 e 1,0.
 K com carga positiva; concentrações: 6,0 e 3,5.
 Ca com carga positiva 2; concentrações: 4,0 e 3,0.
@@ -2459,16 +2459,16 @@ Solução nutritiva
 preparada
 (pH = 4,3)
 Macronutrientes
-N (NH4
+N (NH_4
 +) 1,0 0,8
-P (H2PO4
+P (H_2PO4
 [notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]) 1,0 1,0
-K+ 6,0 3,5
-Ca2+ 4,0 3,0
+K^+ 6,0 3,5
+Ca^2+ 4,0 3,0
 SO4
 2[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]2,0 1,0
 Micronutrientes
-Fe2+ 90 × 10[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]3 70 × 10[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]3
+Fe^2+ 90 × 10[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]3 70 × 10[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]3
 Cl[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]- 4,5 × 10 [notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]3
 Para correção do pH da solução nutritiva preparada, esse 
 produtor pode empregar uma solução de","E","cloreto de ferro(2), FeC[UNDECODED-g34]2.",0,NA,NA,NA,NA,"Portuguese","D"
@@ -2523,7 +2523,7 @@ composição de referência, com pH entre 5,5 e 6,5, e,
 para a solução nutritiva preparada, com pH igual a 4,3.
 Macronutrientes: N, abre parêntese, NH4 com carga 
 positiva, fecha parêntese; concentrações: 1,0 e 0,8.
-P, abre parêntese, H2PO4 com carga negativa, fecha 
+P, abre parêntese, H_2PO4 com carga negativa, fecha 
 parêntese; concentrações: 1,0 e 1,0.
 K com carga positiva; concentrações: 6,0 e 3,5.
 Ca com carga positiva 2; concentrações: 4,0 e 3,0.
@@ -2541,16 +2541,16 @@ Solução nutritiva
 preparada
 (pH = 4,3)
 Macronutrientes
-N (NH4
+N (NH_4
 +) 1,0 0,8
-P (H2PO4
+P (H_2PO4
 [notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]) 1,0 1,0
-K+ 6,0 3,5
-Ca2+ 4,0 3,0
+K^+ 6,0 3,5
+Ca^2+ 4,0 3,0
 SO4
 2[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]2,0 1,0
 Micronutrientes
-Fe2+ 90 × 10[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]3 70 × 10[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]3
+Fe^2+ 90 × 10[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]3 70 × 10[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]3
 Cl[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]- 4,5 × 10 [notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]3
 Para correção do pH da solução nutritiva preparada, esse 
 produtor pode empregar uma solução de","E","hidróxido de potássio, KOH.",1,NA,NA,NA,NA,"Portuguese","E"
@@ -4747,7 +4747,7 @@ condutor é a presença de ligações duplas conjugadas ao
 longo da cadeia principal do polímero.
 ROCHA FILHO, R. C. Polímeros condutores: descoberta e aplicações.  
 Química Nova na Escola, n. 12, 2000 (adaptado).
-Um exemplo desse polímero é representado pela estrutura","D","n",0,NA,NA,NA,NA,"Portuguese","A"
+Um exemplo desse polímero é representado pela estrutura","D",NA,0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2021_1mil_cn","enem_2021_1mil_cn_1",46813,"ENEM 2021 - CN","1 NE202 ME
 21ENE20 MM 2E 0N 2E 11 E2 N0 E2 MM 2E 0N 2E 11 E2 N0 E2E MM 20N 2E 11 E2 N0 E2 MM 2E 0N 2E 11 E2 N0 E2 MM 2E 0N 2E 11 E2 N0 E2 MM 2E 0N 2E 11 E2 N0 E2 MM 2E 0N 2E 11 E2 N02 MEM 2E 0N 2E 11 E2 N0 E2 MM 2E 0N 2E 11 E2 N0 E2 MM 2E 0N 2E 1
 11
@@ -4788,8 +4788,7 @@ condutor é a presença de ligações duplas conjugadas ao
 longo da cadeia principal do polímero.
 ROCHA FILHO, R. C. Polímeros condutores: descoberta e aplicações.  
 Química Nova na Escola, n. 12, 2000 (adaptado).
-Um exemplo desse polímero é representado pela estrutura","D","O
-n",0,NA,NA,NA,NA,"Portuguese","B"
+Um exemplo desse polímero é representado pela estrutura","D",NA,0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2021_1mil_cn","enem_2021_1mil_cn_1",46813,"ENEM 2021 - CN","1 NE202 ME
 21ENE20 MM 2E 0N 2E 11 E2 N0 E2 MM 2E 0N 2E 11 E2 N0 E2E MM 20N 2E 11 E2 N0 E2 MM 2E 0N 2E 11 E2 N0 E2 MM 2E 0N 2E 11 E2 N0 E2 MM 2E 0N 2E 11 E2 N0 E2 MM 2E 0N 2E 11 E2 N02 MEM 2E 0N 2E 11 E2 N0 E2 MM 2E 0N 2E 11 E2 N0 E2 MM 2E 0N 2E 1
 11
@@ -4830,7 +4829,7 @@ condutor é a presença de ligações duplas conjugadas ao
 longo da cadeia principal do polímero.
 ROCHA FILHO, R. C. Polímeros condutores: descoberta e aplicações.  
 Química Nova na Escola, n. 12, 2000 (adaptado).
-Um exemplo desse polímero é representado pela estrutura","D","n",0,NA,NA,NA,NA,"Portuguese","C"
+Um exemplo desse polímero é representado pela estrutura","D",NA,0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2021_1mil_cn","enem_2021_1mil_cn_1",46813,"ENEM 2021 - CN","1 NE202 ME
 21ENE20 MM 2E 0N 2E 11 E2 N0 E2 MM 2E 0N 2E 11 E2 N0 E2E MM 20N 2E 11 E2 N0 E2 MM 2E 0N 2E 11 E2 N0 E2 MM 2E 0N 2E 11 E2 N0 E2 MM 2E 0N 2E 11 E2 N0 E2 MM 2E 0N 2E 11 E2 N02 MEM 2E 0N 2E 11 E2 N0 E2 MM 2E 0N 2E 11 E2 N0 E2 MM 2E 0N 2E 1
 11
@@ -4871,7 +4870,7 @@ condutor é a presença de ligações duplas conjugadas ao
 longo da cadeia principal do polímero.
 ROCHA FILHO, R. C. Polímeros condutores: descoberta e aplicações.  
 Química Nova na Escola, n. 12, 2000 (adaptado).
-Um exemplo desse polímero é representado pela estrutura","D","n",1,NA,NA,NA,NA,"Portuguese","D"
+Um exemplo desse polímero é representado pela estrutura","D",NA,1,NA,NA,NA,NA,"Portuguese","D"
 "enem_2021_1mil_cn","enem_2021_1mil_cn_1",46813,"ENEM 2021 - CN","1 NE202 ME
 21ENE20 MM 2E 0N 2E 11 E2 N0 E2 MM 2E 0N 2E 11 E2 N0 E2E MM 20N 2E 11 E2 N0 E2 MM 2E 0N 2E 11 E2 N0 E2 MM 2E 0N 2E 11 E2 N0 E2 MM 2E 0N 2E 11 E2 N0 E2 MM 2E 0N 2E 11 E2 N02 MEM 2E 0N 2E 11 E2 N0 E2 MM 2E 0N 2E 11 E2 N0 E2 MM 2E 0N 2E 1
 11
@@ -4912,9 +4911,7 @@ condutor é a presença de ligações duplas conjugadas ao
 longo da cadeia principal do polímero.
 ROCHA FILHO, R. C. Polímeros condutores: descoberta e aplicações.  
 Química Nova na Escola, n. 12, 2000 (adaptado).
-Um exemplo desse polímero é representado pela estrutura","D","O
-O
-n",0,NA,NA,NA,NA,"Portuguese","E"
+Um exemplo desse polímero é representado pela estrutura","D",NA,0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2021_1mil_cn","enem_2021_1mil_cn_1",48911,"ENEM 2021 - CN","1 NE202 ME
 21ENE20 MM 2E 0N 2E 11 E2 N0 E2 MM 2E 0N 2E 11 E2 N0 E2E MM 20N 2E 11 E2 N0 E2 MM 2E 0N 2E 11 E2 N0 E2 MM 2E 0N 2E 11 E2 N0 E2 MM 2E 0N 2E 11 E2 N0 E2 MM 2E 0N 2E 11 E2 N02 MEM 2E 0N 2E 11 E2 N0 E2 MM 2E 0N 2E 11 E2 N0 E2 MM 2E 0N 2E 1
 11
@@ -4953,10 +4950,10 @@ da sacarose contida no melaço. Um desses formadores
 50 gramas  de etanol a partir de 100 gramas  de glicose, 
 conforme a equação química descrita.
 Descrição da imagem: Equação química em que o 
-reagente C6H12O6 é submetido à fermentação alcoólica 
-e forma os produtos 2 CH3CH2OH mais 2 CO2.
+reagente C_6H12O6 é submetido à fermentação alcoólica 
+e forma os produtos 2 CH_3CH2OH mais 2 CO2.
 C6H12O6
-Fermentação alcoólica 2 CH3CH2OH + 2 CO2
+Fermentação alcoólica 2 CH3CH2OH + 2 CO_2
 Em uma condição específica de fermentação, obtém-se  
 80 por cento de conversão em etanol que, após sua 
 purificação, apresenta densidade igual a 0,80 grama por 
@@ -5002,10 +4999,10 @@ da sacarose contida no melaço. Um desses formadores
 50 gramas  de etanol a partir de 100 gramas  de glicose, 
 conforme a equação química descrita.
 Descrição da imagem: Equação química em que o 
-reagente C6H12O6 é submetido à fermentação alcoólica 
-e forma os produtos 2 CH3CH2OH mais 2 CO2.
+reagente C_6H12O6 é submetido à fermentação alcoólica 
+e forma os produtos 2 CH_3CH2OH mais 2 CO2.
 C6H12O6
-Fermentação alcoólica 2 CH3CH2OH + 2 CO2
+Fermentação alcoólica 2 CH3CH2OH + 2 CO_2
 Em uma condição específica de fermentação, obtém-se  
 80 por cento de conversão em etanol que, após sua 
 purificação, apresenta densidade igual a 0,80 grama por 
@@ -5051,10 +5048,10 @@ da sacarose contida no melaço. Um desses formadores
 50 gramas  de etanol a partir de 100 gramas  de glicose, 
 conforme a equação química descrita.
 Descrição da imagem: Equação química em que o 
-reagente C6H12O6 é submetido à fermentação alcoólica 
-e forma os produtos 2 CH3CH2OH mais 2 CO2.
+reagente C_6H12O6 é submetido à fermentação alcoólica 
+e forma os produtos 2 CH_3CH2OH mais 2 CO2.
 C6H12O6
-Fermentação alcoólica 2 CH3CH2OH + 2 CO2
+Fermentação alcoólica 2 CH3CH2OH + 2 CO_2
 Em uma condição específica de fermentação, obtém-se  
 80 por cento de conversão em etanol que, após sua 
 purificação, apresenta densidade igual a 0,80 grama por 
@@ -5100,10 +5097,10 @@ da sacarose contida no melaço. Um desses formadores
 50 gramas  de etanol a partir de 100 gramas  de glicose, 
 conforme a equação química descrita.
 Descrição da imagem: Equação química em que o 
-reagente C6H12O6 é submetido à fermentação alcoólica 
-e forma os produtos 2 CH3CH2OH mais 2 CO2.
+reagente C_6H12O6 é submetido à fermentação alcoólica 
+e forma os produtos 2 CH_3CH2OH mais 2 CO2.
 C6H12O6
-Fermentação alcoólica 2 CH3CH2OH + 2 CO2
+Fermentação alcoólica 2 CH3CH2OH + 2 CO_2
 Em uma condição específica de fermentação, obtém-se  
 80 por cento de conversão em etanol que, após sua 
 purificação, apresenta densidade igual a 0,80 grama por 
@@ -5149,10 +5146,10 @@ da sacarose contida no melaço. Um desses formadores
 50 gramas  de etanol a partir de 100 gramas  de glicose, 
 conforme a equação química descrita.
 Descrição da imagem: Equação química em que o 
-reagente C6H12O6 é submetido à fermentação alcoólica 
-e forma os produtos 2 CH3CH2OH mais 2 CO2.
+reagente C_6H12O6 é submetido à fermentação alcoólica 
+e forma os produtos 2 CH_3CH2OH mais 2 CO2.
 C6H12O6
-Fermentação alcoólica 2 CH3CH2OH + 2 CO2
+Fermentação alcoólica 2 CH3CH2OH + 2 CO_2
 Em uma condição específica de fermentação, obtém-se  
 80 por cento de conversão em etanol que, após sua 
 purificação, apresenta densidade igual a 0,80 grama por 
@@ -5198,23 +5195,23 @@ como as apresentadas no quadro.
 Descrição da imagem: 
 Quadro com os nomes, fórmulas e aromas de 
 algumas substâncias, respectivamente.
-Benzoato de metila; C6H5CO2CH3; kiwi.
+Benzoato de metila; C_6H5CO2CH3; kiwi.
 Acetato de isoamila; CH 3CO2, abre parêntese, CH 2, 
 fecha parêntese, 2, CH, abre parêntese, CH 3, fecha 
 parêntese, 2; banana.
-Acetato de benzila; CH3CO2CH2C6H5; pêssego.
+Acetato de benzila; CH_3CO2CH2C6H_5; pêssego.
 Propanoato de isobutila; CH 3CH2CO2CH2CH, abre 
-parêntese, CH3, fecha parêntese, 2; rum.
-Antranilato de metila; C6H4NH2CO2CH3; uva.
+parêntese, CH_3, fecha parêntese, 2; rum.
+Antranilato de metila; C_6H4NH2CO2CH_3; uva.
 Nome Fórmula Aroma
 Benzoato de 
 metila C6H5CO2CH3 Kiwi
 Acetato de 
-isoamila CH3CO2(CH2)2CH(CH3)2 Banana
+isoamila CH3CO2(CH_2)2CH(CH_3)2 Banana
 Acetato de 
 benzila CH3CO2CH2C6H5 Pêssego
 Propanoato de 
-isobutila CH3CH2CO2CH2CH(CH3)2 Rum
+isobutila CH3CH_2CO2CH2CH(CH_3)2 Rum
 Antranilato de 
 metila C6H4NH2CO2CH3 Uva
 O aroma do flavorizante derivado do ácido etanoico e que 
@@ -5257,23 +5254,23 @@ como as apresentadas no quadro.
 Descrição da imagem: 
 Quadro com os nomes, fórmulas e aromas de 
 algumas substâncias, respectivamente.
-Benzoato de metila; C6H5CO2CH3; kiwi.
+Benzoato de metila; C_6H5CO2CH3; kiwi.
 Acetato de isoamila; CH 3CO2, abre parêntese, CH 2, 
 fecha parêntese, 2, CH, abre parêntese, CH 3, fecha 
 parêntese, 2; banana.
-Acetato de benzila; CH3CO2CH2C6H5; pêssego.
+Acetato de benzila; CH_3CO2CH2C6H_5; pêssego.
 Propanoato de isobutila; CH 3CH2CO2CH2CH, abre 
-parêntese, CH3, fecha parêntese, 2; rum.
-Antranilato de metila; C6H4NH2CO2CH3; uva.
+parêntese, CH_3, fecha parêntese, 2; rum.
+Antranilato de metila; C_6H4NH2CO2CH_3; uva.
 Nome Fórmula Aroma
 Benzoato de 
 metila C6H5CO2CH3 Kiwi
 Acetato de 
-isoamila CH3CO2(CH2)2CH(CH3)2 Banana
+isoamila CH3CO2(CH_2)2CH(CH_3)2 Banana
 Acetato de 
 benzila CH3CO2CH2C6H5 Pêssego
 Propanoato de 
-isobutila CH3CH2CO2CH2CH(CH3)2 Rum
+isobutila CH3CH_2CO2CH2CH(CH_3)2 Rum
 Antranilato de 
 metila C6H4NH2CO2CH3 Uva
 O aroma do flavorizante derivado do ácido etanoico e que 
@@ -5316,23 +5313,23 @@ como as apresentadas no quadro.
 Descrição da imagem: 
 Quadro com os nomes, fórmulas e aromas de 
 algumas substâncias, respectivamente.
-Benzoato de metila; C6H5CO2CH3; kiwi.
+Benzoato de metila; C_6H5CO2CH3; kiwi.
 Acetato de isoamila; CH 3CO2, abre parêntese, CH 2, 
 fecha parêntese, 2, CH, abre parêntese, CH 3, fecha 
 parêntese, 2; banana.
-Acetato de benzila; CH3CO2CH2C6H5; pêssego.
+Acetato de benzila; CH_3CO2CH2C6H_5; pêssego.
 Propanoato de isobutila; CH 3CH2CO2CH2CH, abre 
-parêntese, CH3, fecha parêntese, 2; rum.
-Antranilato de metila; C6H4NH2CO2CH3; uva.
+parêntese, CH_3, fecha parêntese, 2; rum.
+Antranilato de metila; C_6H4NH2CO2CH_3; uva.
 Nome Fórmula Aroma
 Benzoato de 
 metila C6H5CO2CH3 Kiwi
 Acetato de 
-isoamila CH3CO2(CH2)2CH(CH3)2 Banana
+isoamila CH3CO2(CH_2)2CH(CH_3)2 Banana
 Acetato de 
 benzila CH3CO2CH2C6H5 Pêssego
 Propanoato de 
-isobutila CH3CH2CO2CH2CH(CH3)2 Rum
+isobutila CH3CH_2CO2CH2CH(CH_3)2 Rum
 Antranilato de 
 metila C6H4NH2CO2CH3 Uva
 O aroma do flavorizante derivado do ácido etanoico e que 
@@ -5375,23 +5372,23 @@ como as apresentadas no quadro.
 Descrição da imagem: 
 Quadro com os nomes, fórmulas e aromas de 
 algumas substâncias, respectivamente.
-Benzoato de metila; C6H5CO2CH3; kiwi.
+Benzoato de metila; C_6H5CO2CH3; kiwi.
 Acetato de isoamila; CH 3CO2, abre parêntese, CH 2, 
 fecha parêntese, 2, CH, abre parêntese, CH 3, fecha 
 parêntese, 2; banana.
-Acetato de benzila; CH3CO2CH2C6H5; pêssego.
+Acetato de benzila; CH_3CO2CH2C6H_5; pêssego.
 Propanoato de isobutila; CH 3CH2CO2CH2CH, abre 
-parêntese, CH3, fecha parêntese, 2; rum.
-Antranilato de metila; C6H4NH2CO2CH3; uva.
+parêntese, CH_3, fecha parêntese, 2; rum.
+Antranilato de metila; C_6H4NH2CO2CH_3; uva.
 Nome Fórmula Aroma
 Benzoato de 
 metila C6H5CO2CH3 Kiwi
 Acetato de 
-isoamila CH3CO2(CH2)2CH(CH3)2 Banana
+isoamila CH3CO2(CH_2)2CH(CH_3)2 Banana
 Acetato de 
 benzila CH3CO2CH2C6H5 Pêssego
 Propanoato de 
-isobutila CH3CH2CO2CH2CH(CH3)2 Rum
+isobutila CH3CH_2CO2CH2CH(CH_3)2 Rum
 Antranilato de 
 metila C6H4NH2CO2CH3 Uva
 O aroma do flavorizante derivado do ácido etanoico e que 
@@ -5434,23 +5431,23 @@ como as apresentadas no quadro.
 Descrição da imagem: 
 Quadro com os nomes, fórmulas e aromas de 
 algumas substâncias, respectivamente.
-Benzoato de metila; C6H5CO2CH3; kiwi.
+Benzoato de metila; C_6H5CO2CH3; kiwi.
 Acetato de isoamila; CH 3CO2, abre parêntese, CH 2, 
 fecha parêntese, 2, CH, abre parêntese, CH 3, fecha 
 parêntese, 2; banana.
-Acetato de benzila; CH3CO2CH2C6H5; pêssego.
+Acetato de benzila; CH_3CO2CH2C6H_5; pêssego.
 Propanoato de isobutila; CH 3CH2CO2CH2CH, abre 
-parêntese, CH3, fecha parêntese, 2; rum.
-Antranilato de metila; C6H4NH2CO2CH3; uva.
+parêntese, CH_3, fecha parêntese, 2; rum.
+Antranilato de metila; C_6H4NH2CO2CH_3; uva.
 Nome Fórmula Aroma
 Benzoato de 
 metila C6H5CO2CH3 Kiwi
 Acetato de 
-isoamila CH3CO2(CH2)2CH(CH3)2 Banana
+isoamila CH3CO2(CH_2)2CH(CH_3)2 Banana
 Acetato de 
 benzila CH3CO2CH2C6H5 Pêssego
 Propanoato de 
-isobutila CH3CH2CO2CH2CH(CH3)2 Rum
+isobutila CH3CH_2CO2CH2CH(CH_3)2 Rum
 Antranilato de 
 metila C6H4NH2CO2CH3 Uva
 O aroma do flavorizante derivado do ácido etanoico e que 
@@ -6497,7 +6494,7 @@ comprimento 1 e a barra mais longa corresponde ao
 comprimento 2. 
 Comprimento 1
 Comprimento 2
-Considere f1 e v1, respectivamente, como a frequência 
+Considere f_1 e v_1, respectivamente, como a frequência 
 fundamental e a velocidade de propagação do som 
 emitido pela barra de menor comprimento, e f 2 e v 2 são 
 essas mesmas grandezas para o som emitido pela barra 
@@ -6547,7 +6544,7 @@ comprimento 1 e a barra mais longa corresponde ao
 comprimento 2. 
 Comprimento 1
 Comprimento 2
-Considere f1 e v1, respectivamente, como a frequência 
+Considere f_1 e v_1, respectivamente, como a frequência 
 fundamental e a velocidade de propagação do som 
 emitido pela barra de menor comprimento, e f 2 e v 2 são 
 essas mesmas grandezas para o som emitido pela barra 
@@ -6597,7 +6594,7 @@ comprimento 1 e a barra mais longa corresponde ao
 comprimento 2. 
 Comprimento 1
 Comprimento 2
-Considere f1 e v1, respectivamente, como a frequência 
+Considere f_1 e v_1, respectivamente, como a frequência 
 fundamental e a velocidade de propagação do som 
 emitido pela barra de menor comprimento, e f 2 e v 2 são 
 essas mesmas grandezas para o som emitido pela barra 
@@ -6647,7 +6644,7 @@ comprimento 1 e a barra mais longa corresponde ao
 comprimento 2. 
 Comprimento 1
 Comprimento 2
-Considere f1 e v1, respectivamente, como a frequência 
+Considere f_1 e v_1, respectivamente, como a frequência 
 fundamental e a velocidade de propagação do som 
 emitido pela barra de menor comprimento, e f 2 e v 2 são 
 essas mesmas grandezas para o som emitido pela barra 
@@ -6697,7 +6694,7 @@ comprimento 1 e a barra mais longa corresponde ao
 comprimento 2. 
 Comprimento 1
 Comprimento 2
-Considere f1 e v1, respectivamente, como a frequência 
+Considere f_1 e v_1, respectivamente, como a frequência 
 fundamental e a velocidade de propagação do som 
 emitido pela barra de menor comprimento, e f 2 e v 2 são 
 essas mesmas grandezas para o som emitido pela barra 
@@ -6958,12 +6955,12 @@ Descrição da imagem:
 Ciclo do cobre com as etapas numeradas de 1 a 5.
 Etapa 1 - O cobre reage com HNO 3, formando Cu, 
 abre parêntese, NO3, fecha parêntese, 2.
-Etapa 2 - O Cu, abre parêntese, NO3, fecha parêntese, 
+Etapa 2 - O Cu, abre parêntese, NO_3, fecha parêntese, 
 2, reage com NaOH, formando Cu, abre parêntese, 
 OH, fecha parêntese, 2.
 Etapa 3 - O Cu, abre parêntese, OH, fecha parêntese, 
 2, sofre aquecimento, formando CuO.
-Etapa 4 - O CuO reage com H2SO4, formando CuSO4.
+Etapa 4 - O CuO reage com H2SO_4, formando CuSO_4.
 Etapa 5 - O CuSO 4 reage com Zn e HCl, formando 
 cobre. 
 Cu
@@ -6971,7 +6968,7 @@ CuOCuSO4
 Zn, HCl
 V III
 III
-HNO3 Cu(NO3)2 Cu(OH)2
+HNO_3 Cu(NO_3)2 Cu(OH)_2
 NaOH
 IV
 H2SO4 Δ
@@ -7015,12 +7012,12 @@ Descrição da imagem:
 Ciclo do cobre com as etapas numeradas de 1 a 5.
 Etapa 1 - O cobre reage com HNO 3, formando Cu, 
 abre parêntese, NO3, fecha parêntese, 2.
-Etapa 2 - O Cu, abre parêntese, NO3, fecha parêntese, 
+Etapa 2 - O Cu, abre parêntese, NO_3, fecha parêntese, 
 2, reage com NaOH, formando Cu, abre parêntese, 
 OH, fecha parêntese, 2.
 Etapa 3 - O Cu, abre parêntese, OH, fecha parêntese, 
 2, sofre aquecimento, formando CuO.
-Etapa 4 - O CuO reage com H2SO4, formando CuSO4.
+Etapa 4 - O CuO reage com H2SO_4, formando CuSO_4.
 Etapa 5 - O CuSO 4 reage com Zn e HCl, formando 
 cobre. 
 Cu
@@ -7028,7 +7025,7 @@ CuOCuSO4
 Zn, HCl
 V III
 III
-HNO3 Cu(NO3)2 Cu(OH)2
+HNO_3 Cu(NO_3)2 Cu(OH)_2
 NaOH
 IV
 H2SO4 Δ
@@ -7072,12 +7069,12 @@ Descrição da imagem:
 Ciclo do cobre com as etapas numeradas de 1 a 5.
 Etapa 1 - O cobre reage com HNO 3, formando Cu, 
 abre parêntese, NO3, fecha parêntese, 2.
-Etapa 2 - O Cu, abre parêntese, NO3, fecha parêntese, 
+Etapa 2 - O Cu, abre parêntese, NO_3, fecha parêntese, 
 2, reage com NaOH, formando Cu, abre parêntese, 
 OH, fecha parêntese, 2.
 Etapa 3 - O Cu, abre parêntese, OH, fecha parêntese, 
 2, sofre aquecimento, formando CuO.
-Etapa 4 - O CuO reage com H2SO4, formando CuSO4.
+Etapa 4 - O CuO reage com H2SO_4, formando CuSO_4.
 Etapa 5 - O CuSO 4 reage com Zn e HCl, formando 
 cobre. 
 Cu
@@ -7085,7 +7082,7 @@ CuOCuSO4
 Zn, HCl
 V III
 III
-HNO3 Cu(NO3)2 Cu(OH)2
+HNO_3 Cu(NO_3)2 Cu(OH)_2
 NaOH
 IV
 H2SO4 Δ
@@ -7129,12 +7126,12 @@ Descrição da imagem:
 Ciclo do cobre com as etapas numeradas de 1 a 5.
 Etapa 1 - O cobre reage com HNO 3, formando Cu, 
 abre parêntese, NO3, fecha parêntese, 2.
-Etapa 2 - O Cu, abre parêntese, NO3, fecha parêntese, 
+Etapa 2 - O Cu, abre parêntese, NO_3, fecha parêntese, 
 2, reage com NaOH, formando Cu, abre parêntese, 
 OH, fecha parêntese, 2.
 Etapa 3 - O Cu, abre parêntese, OH, fecha parêntese, 
 2, sofre aquecimento, formando CuO.
-Etapa 4 - O CuO reage com H2SO4, formando CuSO4.
+Etapa 4 - O CuO reage com H2SO_4, formando CuSO_4.
 Etapa 5 - O CuSO 4 reage com Zn e HCl, formando 
 cobre. 
 Cu
@@ -7142,7 +7139,7 @@ CuOCuSO4
 Zn, HCl
 V III
 III
-HNO3 Cu(NO3)2 Cu(OH)2
+HNO_3 Cu(NO_3)2 Cu(OH)_2
 NaOH
 IV
 H2SO4 Δ
@@ -7186,12 +7183,12 @@ Descrição da imagem:
 Ciclo do cobre com as etapas numeradas de 1 a 5.
 Etapa 1 - O cobre reage com HNO 3, formando Cu, 
 abre parêntese, NO3, fecha parêntese, 2.
-Etapa 2 - O Cu, abre parêntese, NO3, fecha parêntese, 
+Etapa 2 - O Cu, abre parêntese, NO_3, fecha parêntese, 
 2, reage com NaOH, formando Cu, abre parêntese, 
 OH, fecha parêntese, 2.
 Etapa 3 - O Cu, abre parêntese, OH, fecha parêntese, 
 2, sofre aquecimento, formando CuO.
-Etapa 4 - O CuO reage com H2SO4, formando CuSO4.
+Etapa 4 - O CuO reage com H2SO_4, formando CuSO_4.
 Etapa 5 - O CuSO 4 reage com Zn e HCl, formando 
 cobre. 
 Cu
@@ -7199,7 +7196,7 @@ CuOCuSO4
 Zn, HCl
 V III
 III
-HNO3 Cu(NO3)2 Cu(OH)2
+HNO_3 Cu(NO_3)2 Cu(OH)_2
 NaOH
 IV
 H2SO4 Δ
@@ -10301,7 +10298,7 @@ No carbono 1: C com ligação dupla ao O e ligação
 simples ao OH.
 No carbono 2: O com ligação simples ao C, que, por sua 
 vez, está ligado a outro O, por meio de ligação dupla e 
-ao CH3, por meio de ligação simples.
+ao CH_3, por meio de ligação simples.
 Ácido acetilsalicílico
 OHO
 O
@@ -10361,7 +10358,7 @@ No carbono 1: C com ligação dupla ao O e ligação
 simples ao OH.
 No carbono 2: O com ligação simples ao C, que, por sua 
 vez, está ligado a outro O, por meio de ligação dupla e 
-ao CH3, por meio de ligação simples.
+ao CH_3, por meio de ligação simples.
 Ácido acetilsalicílico
 OHO
 O
@@ -10421,7 +10418,7 @@ No carbono 1: C com ligação dupla ao O e ligação
 simples ao OH.
 No carbono 2: O com ligação simples ao C, que, por sua 
 vez, está ligado a outro O, por meio de ligação dupla e 
-ao CH3, por meio de ligação simples.
+ao CH_3, por meio de ligação simples.
 Ácido acetilsalicílico
 OHO
 O
@@ -10481,7 +10478,7 @@ No carbono 1: C com ligação dupla ao O e ligação
 simples ao OH.
 No carbono 2: O com ligação simples ao C, que, por sua 
 vez, está ligado a outro O, por meio de ligação dupla e 
-ao CH3, por meio de ligação simples.
+ao CH_3, por meio de ligação simples.
 Ácido acetilsalicílico
 OHO
 O
@@ -10541,7 +10538,7 @@ No carbono 1: C com ligação dupla ao O e ligação
 simples ao OH.
 No carbono 2: O com ligação simples ao C, que, por sua 
 vez, está ligado a outro O, por meio de ligação dupla e 
-ao CH3, por meio de ligação simples.
+ao CH_3, por meio de ligação simples.
 Ácido acetilsalicílico
 OHO
 O

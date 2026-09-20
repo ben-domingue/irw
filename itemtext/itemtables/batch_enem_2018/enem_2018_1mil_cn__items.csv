@@ -1742,7 +1742,7 @@ instalada à direita e a ventoinha foi instalada à esquerda,
 em ambos os carros.
 Os estudantes ligaram as ventoinhas, aguardaram o 
 fluxo de ar ficar permanente e determinaram os módulos 
-das velocidades médias dos carros A (VA) e B (VB) para o 
+das velocidades médias dos carros A (VA) e B (V_B) para o 
 mesmo intervalo de tempo.
 A respeito das intensidades das velocidades médias 
 e do sentido de movimento do carro A, os estudantes 
@@ -1792,7 +1792,7 @@ instalada à direita e a ventoinha foi instalada à esquerda,
 em ambos os carros.
 Os estudantes ligaram as ventoinhas, aguardaram o 
 fluxo de ar ficar permanente e determinaram os módulos 
-das velocidades médias dos carros A (VA) e B (VB) para o 
+das velocidades médias dos carros A (VA) e B (V_B) para o 
 mesmo intervalo de tempo.
 A respeito das intensidades das velocidades médias 
 e do sentido de movimento do carro A, os estudantes 
@@ -1843,7 +1843,7 @@ instalada à direita e a ventoinha foi instalada à esquerda,
 em ambos os carros.
 Os estudantes ligaram as ventoinhas, aguardaram o 
 fluxo de ar ficar permanente e determinaram os módulos 
-das velocidades médias dos carros A (VA) e B (VB) para o 
+das velocidades médias dos carros A (VA) e B (V_B) para o 
 mesmo intervalo de tempo.
 A respeito das intensidades das velocidades médias 
 e do sentido de movimento do carro A, os estudantes 
@@ -1894,7 +1894,7 @@ instalada à direita e a ventoinha foi instalada à esquerda,
 em ambos os carros.
 Os estudantes ligaram as ventoinhas, aguardaram o 
 fluxo de ar ficar permanente e determinaram os módulos 
-das velocidades médias dos carros A (VA) e B (VB) para o 
+das velocidades médias dos carros A (VA) e B (V_B) para o 
 mesmo intervalo de tempo.
 A respeito das intensidades das velocidades médias 
 e do sentido de movimento do carro A, os estudantes 
@@ -1945,7 +1945,7 @@ instalada à direita e a ventoinha foi instalada à esquerda,
 em ambos os carros.
 Os estudantes ligaram as ventoinhas, aguardaram o 
 fluxo de ar ficar permanente e determinaram os módulos 
-das velocidades médias dos carros A (VA) e B (VB) para o 
+das velocidades médias dos carros A (VA) e B (V_B) para o 
 mesmo intervalo de tempo.
 A respeito das intensidades das velocidades médias 
 e do sentido de movimento do carro A, os estudantes 
@@ -2165,7 +2165,7 @@ Em dois outros recipientes A e B contendo 2 litros de
 NaCl, respectivamente.
 Quando o cloreto de sódio é adicionado à água 
 pura ocorre sua dissociação formando os íons Na + e 
-Cl−. Considere que esses íons ocupam os espaços 
+Cl^−. Considere que esses íons ocupam os espaços 
 intermoleculares na solução.
 Nestes recipientes, a posição de equilíbrio do densímetro 
 está representada em:","D",NA,0,NA,NA,NA,NA,"Portuguese","A"
@@ -2207,7 +2207,7 @@ Em dois outros recipientes A e B contendo 2 litros de
 NaCl, respectivamente.
 Quando o cloreto de sódio é adicionado à água 
 pura ocorre sua dissociação formando os íons Na + e 
-Cl−. Considere que esses íons ocupam os espaços 
+Cl^−. Considere que esses íons ocupam os espaços 
 intermoleculares na solução.
 Nestes recipientes, a posição de equilíbrio do densímetro 
 está representada em:","D",NA,0,NA,NA,NA,NA,"Portuguese","B"
@@ -2249,7 +2249,7 @@ Em dois outros recipientes A e B contendo 2 litros de
 NaCl, respectivamente.
 Quando o cloreto de sódio é adicionado à água 
 pura ocorre sua dissociação formando os íons Na + e 
-Cl−. Considere que esses íons ocupam os espaços 
+Cl^−. Considere que esses íons ocupam os espaços 
 intermoleculares na solução.
 Nestes recipientes, a posição de equilíbrio do densímetro 
 está representada em:","D",NA,0,NA,NA,NA,NA,"Portuguese","C"
@@ -2291,7 +2291,7 @@ Em dois outros recipientes A e B contendo 2 litros de
 NaCl, respectivamente.
 Quando o cloreto de sódio é adicionado à água 
 pura ocorre sua dissociação formando os íons Na + e 
-Cl−. Considere que esses íons ocupam os espaços 
+Cl^−. Considere que esses íons ocupam os espaços 
 intermoleculares na solução.
 Nestes recipientes, a posição de equilíbrio do densímetro 
 está representada em:","D",NA,1,NA,NA,NA,NA,"Portuguese","D"
@@ -2333,7 +2333,7 @@ Em dois outros recipientes A e B contendo 2 litros de
 NaCl, respectivamente.
 Quando o cloreto de sódio é adicionado à água 
 pura ocorre sua dissociação formando os íons Na + e 
-Cl−. Considere que esses íons ocupam os espaços 
+Cl^−. Considere que esses íons ocupam os espaços 
 intermoleculares na solução.
 Nestes recipientes, a posição de equilíbrio do densímetro 
 está representada em:","D",NA,0,NA,NA,NA,NA,"Portuguese","E"
@@ -3394,7 +3394,7 @@ em torno de uma posição de equilíbrio média (círculos
 cheios), que é diferente para cada temperatura. A distância 
 de ligação pode variar sobre toda a extensão das linhas 
 horizontais, identificadas com o valor da temperatura, de 
-T1 a T4 (temperaturas crescentes).
+T_1 a T_4 (temperaturas crescentes).
 T = 0 K
 0
 Energia de ligação
@@ -3450,7 +3450,7 @@ em torno de uma posição de equilíbrio média (círculos
 cheios), que é diferente para cada temperatura. A distância 
 de ligação pode variar sobre toda a extensão das linhas 
 horizontais, identificadas com o valor da temperatura, de 
-T1 a T4 (temperaturas crescentes).
+T_1 a T_4 (temperaturas crescentes).
 T = 0 K
 0
 Energia de ligação
@@ -3506,7 +3506,7 @@ em torno de uma posição de equilíbrio média (círculos
 cheios), que é diferente para cada temperatura. A distância 
 de ligação pode variar sobre toda a extensão das linhas 
 horizontais, identificadas com o valor da temperatura, de 
-T1 a T4 (temperaturas crescentes).
+T_1 a T_4 (temperaturas crescentes).
 T = 0 K
 0
 Energia de ligação
@@ -3562,7 +3562,7 @@ em torno de uma posição de equilíbrio média (círculos
 cheios), que é diferente para cada temperatura. A distância 
 de ligação pode variar sobre toda a extensão das linhas 
 horizontais, identificadas com o valor da temperatura, de 
-T1 a T4 (temperaturas crescentes).
+T_1 a T_4 (temperaturas crescentes).
 T = 0 K
 0
 Energia de ligação
@@ -3618,7 +3618,7 @@ em torno de uma posição de equilíbrio média (círculos
 cheios), que é diferente para cada temperatura. A distância 
 de ligação pode variar sobre toda a extensão das linhas 
 horizontais, identificadas com o valor da temperatura, de 
-T1 a T4 (temperaturas crescentes).
+T_1 a T_4 (temperaturas crescentes).
 T = 0 K
 0
 Energia de ligação
@@ -4374,7 +4374,7 @@ na coleção da instituição, que poderia ter sido usado como uma pilha, simila
 pilha, datada de cerca de 200 anos antes de Cristo, é constituída de um pequeno vaso de barro (argila) no qual foram 
 instalados um tubo de cobre, uma barra de ferro (aparentemente corroída por ácido) e uma tampa de betume (asfalto), 
 conforme ilustrado. Considere que os potenciais-padrão de redução do ferro (Fe de carga 2+ para Fe), do hidrogênio 
-(H de carga positiva para H2) e do cobre (Cu de carga 2+ para Cu) são, respectivamente, iguais a −0,44 volt, 0,00 volt 
+(H de carga positiva para H_2) e do cobre (Cu de carga 2+ para Cu) são, respectivamente, iguais a −0,44 volt, 0,00 volt 
 e +0,34 volt. 
 Nessa suposta pilha, qual dos componentes atuaria como cátodo?
 Descrição das figuras:
@@ -4422,7 +4422,7 @@ na coleção da instituição, que poderia ter sido usado como uma pilha, simila
 pilha, datada de cerca de 200 anos antes de Cristo, é constituída de um pequeno vaso de barro (argila) no qual foram 
 instalados um tubo de cobre, uma barra de ferro (aparentemente corroída por ácido) e uma tampa de betume (asfalto), 
 conforme ilustrado. Considere que os potenciais-padrão de redução do ferro (Fe de carga 2+ para Fe), do hidrogênio 
-(H de carga positiva para H2) e do cobre (Cu de carga 2+ para Cu) são, respectivamente, iguais a −0,44 volt, 0,00 volt 
+(H de carga positiva para H_2) e do cobre (Cu de carga 2+ para Cu) são, respectivamente, iguais a −0,44 volt, 0,00 volt 
 e +0,34 volt. 
 Nessa suposta pilha, qual dos componentes atuaria como cátodo?
 Descrição das figuras:
@@ -4470,7 +4470,7 @@ na coleção da instituição, que poderia ter sido usado como uma pilha, simila
 pilha, datada de cerca de 200 anos antes de Cristo, é constituída de um pequeno vaso de barro (argila) no qual foram 
 instalados um tubo de cobre, uma barra de ferro (aparentemente corroída por ácido) e uma tampa de betume (asfalto), 
 conforme ilustrado. Considere que os potenciais-padrão de redução do ferro (Fe de carga 2+ para Fe), do hidrogênio 
-(H de carga positiva para H2) e do cobre (Cu de carga 2+ para Cu) são, respectivamente, iguais a −0,44 volt, 0,00 volt 
+(H de carga positiva para H_2) e do cobre (Cu de carga 2+ para Cu) são, respectivamente, iguais a −0,44 volt, 0,00 volt 
 e +0,34 volt. 
 Nessa suposta pilha, qual dos componentes atuaria como cátodo?
 Descrição das figuras:
@@ -4518,7 +4518,7 @@ na coleção da instituição, que poderia ter sido usado como uma pilha, simila
 pilha, datada de cerca de 200 anos antes de Cristo, é constituída de um pequeno vaso de barro (argila) no qual foram 
 instalados um tubo de cobre, uma barra de ferro (aparentemente corroída por ácido) e uma tampa de betume (asfalto), 
 conforme ilustrado. Considere que os potenciais-padrão de redução do ferro (Fe de carga 2+ para Fe), do hidrogênio 
-(H de carga positiva para H2) e do cobre (Cu de carga 2+ para Cu) são, respectivamente, iguais a −0,44 volt, 0,00 volt 
+(H de carga positiva para H_2) e do cobre (Cu de carga 2+ para Cu) são, respectivamente, iguais a −0,44 volt, 0,00 volt 
 e +0,34 volt. 
 Nessa suposta pilha, qual dos componentes atuaria como cátodo?
 Descrição das figuras:
@@ -4566,7 +4566,7 @@ na coleção da instituição, que poderia ter sido usado como uma pilha, simila
 pilha, datada de cerca de 200 anos antes de Cristo, é constituída de um pequeno vaso de barro (argila) no qual foram 
 instalados um tubo de cobre, uma barra de ferro (aparentemente corroída por ácido) e uma tampa de betume (asfalto), 
 conforme ilustrado. Considere que os potenciais-padrão de redução do ferro (Fe de carga 2+ para Fe), do hidrogênio 
-(H de carga positiva para H2) e do cobre (Cu de carga 2+ para Cu) são, respectivamente, iguais a −0,44 volt, 0,00 volt 
+(H de carga positiva para H_2) e do cobre (Cu de carga 2+ para Cu) são, respectivamente, iguais a −0,44 volt, 0,00 volt 
 e +0,34 volt. 
 Nessa suposta pilha, qual dos componentes atuaria como cátodo?
 Descrição das figuras:
@@ -5212,7 +5212,7 @@ glicose no organismo humano libera energia, conforme
 ilustra a equação química, sendo que aproximadamente 
 40 por cento dela é disponibilizada para atividade muscular.
 Descrição da equação química:
-Os reagentes C6H12O6 (sólido) mais 6 O2 (gasoso) 
+Os reagentes C_6^H12O6 (sólido) mais 6 O2 (gasoso) 
 formam os produtos 6 CO 2 (gasoso) mais 6 H 2O
 (líquido). Variação de entalpia igual a –2 800 quilojoules.
 Considere as massas molares (em grama por mol):
@@ -5262,7 +5262,7 @@ glicose no organismo humano libera energia, conforme
 ilustra a equação química, sendo que aproximadamente 
 40 por cento dela é disponibilizada para atividade muscular.
 Descrição da equação química:
-Os reagentes C6H12O6 (sólido) mais 6 O2 (gasoso) 
+Os reagentes C_6^H12O6 (sólido) mais 6 O2 (gasoso) 
 formam os produtos 6 CO 2 (gasoso) mais 6 H 2O
 (líquido). Variação de entalpia igual a –2 800 quilojoules.
 Considere as massas molares (em grama por mol):
@@ -5312,7 +5312,7 @@ glicose no organismo humano libera energia, conforme
 ilustra a equação química, sendo que aproximadamente 
 40 por cento dela é disponibilizada para atividade muscular.
 Descrição da equação química:
-Os reagentes C6H12O6 (sólido) mais 6 O2 (gasoso) 
+Os reagentes C_6^H12O6 (sólido) mais 6 O2 (gasoso) 
 formam os produtos 6 CO 2 (gasoso) mais 6 H 2O
 (líquido). Variação de entalpia igual a –2 800 quilojoules.
 Considere as massas molares (em grama por mol):
@@ -5362,7 +5362,7 @@ glicose no organismo humano libera energia, conforme
 ilustra a equação química, sendo que aproximadamente 
 40 por cento dela é disponibilizada para atividade muscular.
 Descrição da equação química:
-Os reagentes C6H12O6 (sólido) mais 6 O2 (gasoso) 
+Os reagentes C_6^H12O6 (sólido) mais 6 O2 (gasoso) 
 formam os produtos 6 CO 2 (gasoso) mais 6 H 2O
 (líquido). Variação de entalpia igual a –2 800 quilojoules.
 Considere as massas molares (em grama por mol):
@@ -5412,7 +5412,7 @@ glicose no organismo humano libera energia, conforme
 ilustra a equação química, sendo que aproximadamente 
 40 por cento dela é disponibilizada para atividade muscular.
 Descrição da equação química:
-Os reagentes C6H12O6 (sólido) mais 6 O2 (gasoso) 
+Os reagentes C_6^H12O6 (sólido) mais 6 O2 (gasoso) 
 formam os produtos 6 CO 2 (gasoso) mais 6 H 2O
 (líquido). Variação de entalpia igual a –2 800 quilojoules.
 Considere as massas molares (em grama por mol):
@@ -6703,7 +6703,7 @@ sua utilização em diversos processos. A reação de
 substituição nucleofílica entre o anidrido acético e a 
 hidroxilamina está representada.
 O
-+  NH2OH
++  NH_2OH
 Anidrido
 acético
 O
@@ -6771,7 +6771,7 @@ sua utilização em diversos processos. A reação de
 substituição nucleofílica entre o anidrido acético e a 
 hidroxilamina está representada.
 O
-+  NH2OH
++  NH_2OH
 Anidrido
 acético
 O
@@ -6839,7 +6839,7 @@ sua utilização em diversos processos. A reação de
 substituição nucleofílica entre o anidrido acético e a 
 hidroxilamina está representada.
 O
-+  NH2OH
++  NH_2OH
 Anidrido
 acético
 O
@@ -6907,7 +6907,7 @@ sua utilização em diversos processos. A reação de
 substituição nucleofílica entre o anidrido acético e a 
 hidroxilamina está representada.
 O
-+  NH2OH
++  NH_2OH
 Anidrido
 acético
 O
@@ -6975,7 +6975,7 @@ sua utilização em diversos processos. A reação de
 substituição nucleofílica entre o anidrido acético e a 
 hidroxilamina está representada.
 O
-+  NH2OH
++  NH_2OH
 Anidrido
 acético
 O
@@ -7042,13 +7042,13 @@ silício. Nessas células, o corante adsorvido sobre o TiO2 é responsável por 
 excitado (S*) é capaz de transferir elétrons para o TiO 2. Um esquema dessa célula e os processos envolvidos estão 
 ilustrados na figura. A conversão de energia solar em elétrica ocorre por meio da sequência de reações apresentadas.
 Corante Eletrodo de Pt
-Eletrodo de TiO2
+Eletrodo de TiO_2
 com corante
 Mediador de
  carga
 e−e−
 hv
-S/S+
+S/S^+
 S*
 I−
 I3
@@ -7062,16 +7062,16 @@ TiO2|S + hν → TiO2|S* (1)
 (4)
 TiO2|S* → TiO2|S+ + e−
 1
-2 I3
+2 I^3
 − + e− →    I−3
 2
-TiO2|S+ +    I− → TiO2|S +    I3
+TiO2|S+ +    I^− → TiO2|S +    I3
 −3
 2
 1
 2
 LONGO, C.; DE PAOLI, M.-A. Dye-Sensitized Solar Cells: A Successful Combination of Materials. Journal of the Brazilian Chemical Society, n. 6, 2003 (adaptado).
-A reação 3 é fundamental para o contínuo funcionamento da célula solar, pois","B","reduz íons I− a I3
+A reação 3 é fundamental para o contínuo funcionamento da célula solar, pois","B","reduz íons I^− a I_3
 −.",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2018_1mil_cn","enem_2018_1mil_cn_1",76034,"ENEM 2018 - CN","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES:
 1. Este CADERNO DE QUESTÕES contém 90 questões numeradas de 91 a 180, dispostas da seguinte maneira:
@@ -7103,13 +7103,13 @@ silício. Nessas células, o corante adsorvido sobre o TiO2 é responsável por 
 excitado (S*) é capaz de transferir elétrons para o TiO 2. Um esquema dessa célula e os processos envolvidos estão 
 ilustrados na figura. A conversão de energia solar em elétrica ocorre por meio da sequência de reações apresentadas.
 Corante Eletrodo de Pt
-Eletrodo de TiO2
+Eletrodo de TiO_2
 com corante
 Mediador de
  carga
 e−e−
 hv
-S/S+
+S/S^+
 S*
 I−
 I3
@@ -7123,10 +7123,10 @@ TiO2|S + hν → TiO2|S* (1)
 (4)
 TiO2|S* → TiO2|S+ + e−
 1
-2 I3
+2 I^3
 − + e− →    I−3
 2
-TiO2|S+ +    I− → TiO2|S +    I3
+TiO2|S+ +    I^− → TiO2|S +    I3
 −3
 2
 1
@@ -7163,13 +7163,13 @@ silício. Nessas células, o corante adsorvido sobre o TiO2 é responsável por 
 excitado (S*) é capaz de transferir elétrons para o TiO 2. Um esquema dessa célula e os processos envolvidos estão 
 ilustrados na figura. A conversão de energia solar em elétrica ocorre por meio da sequência de reações apresentadas.
 Corante Eletrodo de Pt
-Eletrodo de TiO2
+Eletrodo de TiO_2
 com corante
 Mediador de
  carga
 e−e−
 hv
-S/S+
+S/S^+
 S*
 I−
 I3
@@ -7183,10 +7183,10 @@ TiO2|S + hν → TiO2|S* (1)
 (4)
 TiO2|S* → TiO2|S+ + e−
 1
-2 I3
+2 I^3
 − + e− →    I−3
 2
-TiO2|S+ +    I− → TiO2|S +    I3
+TiO2|S+ +    I^− → TiO2|S +    I3
 −3
 2
 1
@@ -7223,13 +7223,13 @@ silício. Nessas células, o corante adsorvido sobre o TiO2 é responsável por 
 excitado (S*) é capaz de transferir elétrons para o TiO 2. Um esquema dessa célula e os processos envolvidos estão 
 ilustrados na figura. A conversão de energia solar em elétrica ocorre por meio da sequência de reações apresentadas.
 Corante Eletrodo de Pt
-Eletrodo de TiO2
+Eletrodo de TiO_2
 com corante
 Mediador de
  carga
 e−e−
 hv
-S/S+
+S/S^+
 S*
 I−
 I3
@@ -7243,10 +7243,10 @@ TiO2|S + hν → TiO2|S* (1)
 (4)
 TiO2|S* → TiO2|S+ + e−
 1
-2 I3
+2 I^3
 − + e− →    I−3
 2
-TiO2|S+ +    I− → TiO2|S +    I3
+TiO2|S+ +    I^− → TiO2|S +    I3
 −3
 2
 1
@@ -7283,13 +7283,13 @@ silício. Nessas células, o corante adsorvido sobre o TiO2 é responsável por 
 excitado (S*) é capaz de transferir elétrons para o TiO 2. Um esquema dessa célula e os processos envolvidos estão 
 ilustrados na figura. A conversão de energia solar em elétrica ocorre por meio da sequência de reações apresentadas.
 Corante Eletrodo de Pt
-Eletrodo de TiO2
+Eletrodo de TiO_2
 com corante
 Mediador de
  carga
 e−e−
 hv
-S/S+
+S/S^+
 S*
 I−
 I3
@@ -7303,16 +7303,16 @@ TiO2|S + hν → TiO2|S* (1)
 (4)
 TiO2|S* → TiO2|S+ + e−
 1
-2 I3
+2 I^3
 − + e− →    I−3
 2
-TiO2|S+ +    I− → TiO2|S +    I3
+TiO2|S+ +    I^− → TiO2|S +    I3
 −3
 2
 1
 2
 LONGO, C.; DE PAOLI, M.-A. Dye-Sensitized Solar Cells: A Successful Combination of Materials. Journal of the Brazilian Chemical Society, n. 6, 2003 (adaptado).
-A reação 3 é fundamental para o contínuo funcionamento da célula solar, pois","B","transfere elétrons para o eletrodo de TiO2.",0,NA,NA,NA,NA,"Portuguese","E"
+A reação 3 é fundamental para o contínuo funcionamento da célula solar, pois","B","transfere elétrons para o eletrodo de TiO_2.",0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2018_1mil_cn","enem_2018_1mil_cn_1",82306,"ENEM 2018 - CN","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES:
 1. Este CADERNO DE QUESTÕES contém 90 questões numeradas de 91 a 180, dispostas da seguinte maneira:
 a) questões de número 91 a 135, relativas à área de Ciências da Natureza e suas Tecnologias;

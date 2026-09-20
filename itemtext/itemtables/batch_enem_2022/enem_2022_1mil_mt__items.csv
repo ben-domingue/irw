@@ -6269,9 +6269,9 @@ todas as estrelas.
 Considere duas estrelas E e F, sendo que a estrela E 
 tem metade do raio da estrela F e o dobro da temperatura 
 de F.
-Indique por LE e LF suas respectivas luminosidades.
+Indique por L_E e L_F suas respectivas luminosidades.
 A	relação	entre	as	luminosidades	dessas	duas	estrelas	é	
-dada por","D","LE é igual a LF dividido por 2",0,NA,NA,NA,NA,"Portuguese","A"
+dada por","D","L_E é igual a L_F dividido por 2",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2022_1mil_mt","enem_2022_1mil_mt_1",61248,"ENEM 2022 - MT","11
 LARANJA
 2º DIA
@@ -6310,9 +6310,9 @@ todas as estrelas.
 Considere duas estrelas E e F, sendo que a estrela E 
 tem metade do raio da estrela F e o dobro da temperatura 
 de F.
-Indique por LE e LF suas respectivas luminosidades.
+Indique por L_E e L_F suas respectivas luminosidades.
 A	relação	entre	as	luminosidades	dessas	duas	estrelas	é	
-dada por","D","LE é igual a LF dividido por 4",0,NA,NA,NA,NA,"Portuguese","B"
+dada por","D","L_E é igual a L_F dividido por 4",0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2022_1mil_mt","enem_2022_1mil_mt_1",61248,"ENEM 2022 - MT","11
 LARANJA
 2º DIA
@@ -6351,9 +6351,9 @@ todas as estrelas.
 Considere duas estrelas E e F, sendo que a estrela E 
 tem metade do raio da estrela F e o dobro da temperatura 
 de F.
-Indique por LE e LF suas respectivas luminosidades.
+Indique por L_E e L_F suas respectivas luminosidades.
 A	relação	entre	as	luminosidades	dessas	duas	estrelas	é	
-dada por","D","LE é igual a LF",0,NA,NA,NA,NA,"Portuguese","C"
+dada por","D","L_E é igual a L_F",0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2022_1mil_mt","enem_2022_1mil_mt_1",61248,"ENEM 2022 - MT","11
 LARANJA
 2º DIA
@@ -6392,9 +6392,9 @@ todas as estrelas.
 Considere duas estrelas E e F, sendo que a estrela E 
 tem metade do raio da estrela F e o dobro da temperatura 
 de F.
-Indique por LE e LF suas respectivas luminosidades.
+Indique por L_E e L_F suas respectivas luminosidades.
 A	relação	entre	as	luminosidades	dessas	duas	estrelas	é	
-dada por","D","LE é igual a 4 vezes LF",1,NA,NA,NA,NA,"Portuguese","D"
+dada por","D","L_E é igual a 4 vezes L_F",1,NA,NA,NA,NA,"Portuguese","D"
 "enem_2022_1mil_mt","enem_2022_1mil_mt_1",61248,"ENEM 2022 - MT","11
 LARANJA
 2º DIA
@@ -6433,9 +6433,9 @@ todas as estrelas.
 Considere duas estrelas E e F, sendo que a estrela E 
 tem metade do raio da estrela F e o dobro da temperatura 
 de F.
-Indique por LE e LF suas respectivas luminosidades.
+Indique por L_E e L_F suas respectivas luminosidades.
 A	relação	entre	as	luminosidades	dessas	duas	estrelas	é	
-dada por","D","LE é igual a 8 vezes LF",0,NA,NA,NA,NA,"Portuguese","E"
+dada por","D","L_E é igual a 8 vezes L_F",0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2022_1mil_mt","enem_2022_1mil_mt_1",63204,"ENEM 2022 - MT","11
 LARANJA
 2º DIA
@@ -6471,7 +6471,7 @@ caixas-d’água	(1, 2, 3, 4 e 5), todos em formato de cilindro
 reto de base circular. Os modelos 2, 3, 4 e 5 têm as 
 especificações	de	suas	dimensões	dadas	em	relação	às	
 dimensões do modelo 1, cuja profundidade é P e área da 
-base é Ab, como segue:
+base é A_b, como segue:
 • modelo 2: o dobro da profundidade e a metade da 
 área da base do modelo 1;
 • modelo 3: o dobro da profundidade e a metade do 
@@ -6518,7 +6518,7 @@ caixas-d’água	(1, 2, 3, 4 e 5), todos em formato de cilindro
 reto de base circular. Os modelos 2, 3, 4 e 5 têm as 
 especificações	de	suas	dimensões	dadas	em	relação	às	
 dimensões do modelo 1, cuja profundidade é P e área da 
-base é Ab, como segue:
+base é A_b, como segue:
 • modelo 2: o dobro da profundidade e a metade da 
 área da base do modelo 1;
 • modelo 3: o dobro da profundidade e a metade do 
@@ -6565,7 +6565,7 @@ caixas-d’água	(1, 2, 3, 4 e 5), todos em formato de cilindro
 reto de base circular. Os modelos 2, 3, 4 e 5 têm as 
 especificações	de	suas	dimensões	dadas	em	relação	às	
 dimensões do modelo 1, cuja profundidade é P e área da 
-base é Ab, como segue:
+base é A_b, como segue:
 • modelo 2: o dobro da profundidade e a metade da 
 área da base do modelo 1;
 • modelo 3: o dobro da profundidade e a metade do 
@@ -6612,7 +6612,7 @@ caixas-d’água	(1, 2, 3, 4 e 5), todos em formato de cilindro
 reto de base circular. Os modelos 2, 3, 4 e 5 têm as 
 especificações	de	suas	dimensões	dadas	em	relação	às	
 dimensões do modelo 1, cuja profundidade é P e área da 
-base é Ab, como segue:
+base é A_b, como segue:
 • modelo 2: o dobro da profundidade e a metade da 
 área da base do modelo 1;
 • modelo 3: o dobro da profundidade e a metade do 
@@ -6659,7 +6659,7 @@ caixas-d’água	(1, 2, 3, 4 e 5), todos em formato de cilindro
 reto de base circular. Os modelos 2, 3, 4 e 5 têm as 
 especificações	de	suas	dimensões	dadas	em	relação	às	
 dimensões do modelo 1, cuja profundidade é P e área da 
-base é Ab, como segue:
+base é A_b, como segue:
 • modelo 2: o dobro da profundidade e a metade da 
 área da base do modelo 1;
 • modelo 3: o dobro da profundidade e a metade do 
@@ -7517,20 +7517,20 @@ PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
 Não queira perder a sua alma
 11
 2 ",NA,"Cada	número	que	identifica	uma	agência	bancária	tem	
-quatro dígitos: N1, N2, N3, N4	mais	um	dígito	verificador	N5, 
+quatro dígitos: N_1, N_2, N3, N4	mais	um	dígito	verificador	N_5, 
 sendo todos esses dígitos números naturais pertencentes 
 ao conjunto formado por 0, 1, 2, 3, 4, 5, 6, 7, 8 e 9.  
-Para	a	determinação	de	N5,	primeiramente	multiplica-se 
+Para	a	determinação	de	N_5,	primeiramente	multiplica-se 
 ordenadamente os quatro primeiros dígitos do 
 número da agência por 5, 4, 3 e 2, respectivamente,  
-somam-se	os	resultados	e	obtém-se	S	é igual a 5 vezes N1 
-mais 4 vezes N2 mais 3 vezes N3 mais 2 vezes N4.
+somam-se	os	resultados	e	obtém-se	S	é igual a 5 vezes N_1 
+mais 4 vezes N_2 mais 3 vezes N_3 mais 2 vezes N_4.
 Posteriormente,	 encontra-se	 o	 resto	 da	 divisão	 de	 
 S por 11, denotando por R esse resto. Dessa forma, N5 é 
 a diferença 11 menos R.
 Considere o número de uma agência bancária cujos 
 quatro	primeiros	dígitos	são	0100.
-Qual	é	o	dígito	verificador	N5 dessa agência bancária?","C","0",0,NA,NA,NA,NA,"Portuguese","A"
+Qual	é	o	dígito	verificador	N_5 dessa agência bancária?","C","0",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2022_1mil_mt","enem_2022_1mil_mt_1",75829,"ENEM 2022 - MT","11
 LARANJA
 2º DIA
@@ -7562,20 +7562,20 @@ PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
 Não queira perder a sua alma
 11
 2 ",NA,"Cada	número	que	identifica	uma	agência	bancária	tem	
-quatro dígitos: N1, N2, N3, N4	mais	um	dígito	verificador	N5, 
+quatro dígitos: N_1, N_2, N3, N4	mais	um	dígito	verificador	N_5, 
 sendo todos esses dígitos números naturais pertencentes 
 ao conjunto formado por 0, 1, 2, 3, 4, 5, 6, 7, 8 e 9.  
-Para	a	determinação	de	N5,	primeiramente	multiplica-se 
+Para	a	determinação	de	N_5,	primeiramente	multiplica-se 
 ordenadamente os quatro primeiros dígitos do 
 número da agência por 5, 4, 3 e 2, respectivamente,  
-somam-se	os	resultados	e	obtém-se	S	é igual a 5 vezes N1 
-mais 4 vezes N2 mais 3 vezes N3 mais 2 vezes N4.
+somam-se	os	resultados	e	obtém-se	S	é igual a 5 vezes N_1 
+mais 4 vezes N_2 mais 3 vezes N_3 mais 2 vezes N_4.
 Posteriormente,	 encontra-se	 o	 resto	 da	 divisão	 de	 
 S por 11, denotando por R esse resto. Dessa forma, N5 é 
 a diferença 11 menos R.
 Considere o número de uma agência bancária cujos 
 quatro	primeiros	dígitos	são	0100.
-Qual	é	o	dígito	verificador	N5 dessa agência bancária?","C","6",0,NA,NA,NA,NA,"Portuguese","B"
+Qual	é	o	dígito	verificador	N_5 dessa agência bancária?","C","6",0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2022_1mil_mt","enem_2022_1mil_mt_1",75829,"ENEM 2022 - MT","11
 LARANJA
 2º DIA
@@ -7607,20 +7607,20 @@ PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
 Não queira perder a sua alma
 11
 2 ",NA,"Cada	número	que	identifica	uma	agência	bancária	tem	
-quatro dígitos: N1, N2, N3, N4	mais	um	dígito	verificador	N5, 
+quatro dígitos: N_1, N_2, N3, N4	mais	um	dígito	verificador	N_5, 
 sendo todos esses dígitos números naturais pertencentes 
 ao conjunto formado por 0, 1, 2, 3, 4, 5, 6, 7, 8 e 9.  
-Para	a	determinação	de	N5,	primeiramente	multiplica-se 
+Para	a	determinação	de	N_5,	primeiramente	multiplica-se 
 ordenadamente os quatro primeiros dígitos do 
 número da agência por 5, 4, 3 e 2, respectivamente,  
-somam-se	os	resultados	e	obtém-se	S	é igual a 5 vezes N1 
-mais 4 vezes N2 mais 3 vezes N3 mais 2 vezes N4.
+somam-se	os	resultados	e	obtém-se	S	é igual a 5 vezes N_1 
+mais 4 vezes N_2 mais 3 vezes N_3 mais 2 vezes N_4.
 Posteriormente,	 encontra-se	 o	 resto	 da	 divisão	 de	 
 S por 11, denotando por R esse resto. Dessa forma, N5 é 
 a diferença 11 menos R.
 Considere o número de uma agência bancária cujos 
 quatro	primeiros	dígitos	são	0100.
-Qual	é	o	dígito	verificador	N5 dessa agência bancária?","C","7",1,NA,NA,NA,NA,"Portuguese","C"
+Qual	é	o	dígito	verificador	N_5 dessa agência bancária?","C","7",1,NA,NA,NA,NA,"Portuguese","C"
 "enem_2022_1mil_mt","enem_2022_1mil_mt_1",75829,"ENEM 2022 - MT","11
 LARANJA
 2º DIA
@@ -7652,20 +7652,20 @@ PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
 Não queira perder a sua alma
 11
 2 ",NA,"Cada	número	que	identifica	uma	agência	bancária	tem	
-quatro dígitos: N1, N2, N3, N4	mais	um	dígito	verificador	N5, 
+quatro dígitos: N_1, N_2, N3, N4	mais	um	dígito	verificador	N_5, 
 sendo todos esses dígitos números naturais pertencentes 
 ao conjunto formado por 0, 1, 2, 3, 4, 5, 6, 7, 8 e 9.  
-Para	a	determinação	de	N5,	primeiramente	multiplica-se 
+Para	a	determinação	de	N_5,	primeiramente	multiplica-se 
 ordenadamente os quatro primeiros dígitos do 
 número da agência por 5, 4, 3 e 2, respectivamente,  
-somam-se	os	resultados	e	obtém-se	S	é igual a 5 vezes N1 
-mais 4 vezes N2 mais 3 vezes N3 mais 2 vezes N4.
+somam-se	os	resultados	e	obtém-se	S	é igual a 5 vezes N_1 
+mais 4 vezes N_2 mais 3 vezes N_3 mais 2 vezes N_4.
 Posteriormente,	 encontra-se	 o	 resto	 da	 divisão	 de	 
 S por 11, denotando por R esse resto. Dessa forma, N5 é 
 a diferença 11 menos R.
 Considere o número de uma agência bancária cujos 
 quatro	primeiros	dígitos	são	0100.
-Qual	é	o	dígito	verificador	N5 dessa agência bancária?","C","8",0,NA,NA,NA,NA,"Portuguese","D"
+Qual	é	o	dígito	verificador	N_5 dessa agência bancária?","C","8",0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2022_1mil_mt","enem_2022_1mil_mt_1",75829,"ENEM 2022 - MT","11
 LARANJA
 2º DIA
@@ -7697,20 +7697,20 @@ PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
 Não queira perder a sua alma
 11
 2 ",NA,"Cada	número	que	identifica	uma	agência	bancária	tem	
-quatro dígitos: N1, N2, N3, N4	mais	um	dígito	verificador	N5, 
+quatro dígitos: N_1, N_2, N3, N4	mais	um	dígito	verificador	N_5, 
 sendo todos esses dígitos números naturais pertencentes 
 ao conjunto formado por 0, 1, 2, 3, 4, 5, 6, 7, 8 e 9.  
-Para	a	determinação	de	N5,	primeiramente	multiplica-se 
+Para	a	determinação	de	N_5,	primeiramente	multiplica-se 
 ordenadamente os quatro primeiros dígitos do 
 número da agência por 5, 4, 3 e 2, respectivamente,  
-somam-se	os	resultados	e	obtém-se	S	é igual a 5 vezes N1 
-mais 4 vezes N2 mais 3 vezes N3 mais 2 vezes N4.
+somam-se	os	resultados	e	obtém-se	S	é igual a 5 vezes N_1 
+mais 4 vezes N_2 mais 3 vezes N_3 mais 2 vezes N_4.
 Posteriormente,	 encontra-se	 o	 resto	 da	 divisão	 de	 
 S por 11, denotando por R esse resto. Dessa forma, N5 é 
 a diferença 11 menos R.
 Considere o número de uma agência bancária cujos 
 quatro	primeiros	dígitos	são	0100.
-Qual	é	o	dígito	verificador	N5 dessa agência bancária?","C","9",0,NA,NA,NA,NA,"Portuguese","E"
+Qual	é	o	dígito	verificador	N_5 dessa agência bancária?","C","9",0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2022_1mil_mt","enem_2022_1mil_mt_1",82581,"ENEM 2022 - MT","11
 LARANJA
 2º DIA
@@ -8173,8 +8173,8 @@ Não queira perder a sua alma
 11
 2 ",NA,"Um atleta iniciou seu treinamento visando as competições 
 de	 fim	 de	 ano.	 Seu	 treinamento	consiste	em	 cinco	tipos	
-diferentes de treinos: treino T1, treino T2, treino T3, treino T4 
-e treino T5. A sequência dos treinamentos deve seguir esta 
+diferentes de treinos: treino T1, treino T2, treino T_3, treino T_4 
+e treino T_5. A sequência dos treinamentos deve seguir esta 
 ordem:
 Dia Treino
 Primeiro T1
@@ -8192,11 +8192,11 @@ Décimo segundo T5
 Décimo terceiro R
 A	 letra	 R	 significa	 repouso.	 Após	 completar	 a	
 sequência de treinamentos, o atleta começa novamente  
-a sequência a partir do treino T1 e segue a ordem descrita. 
+a sequência a partir do treino T_1 e segue a ordem descrita. 
 Após 24 semanas completas de treinamento, se dará o 
 início das competições.
 A sequência de treinamentos que o atleta realizará na 
-vigésima quarta semana de treinos é","B","T3  R  T4  R  R  T5  R.",0,NA,NA,NA,NA,"Portuguese","A"
+vigésima quarta semana de treinos é","B","T_3  R  T_4  R  R  T_5  R.",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2022_1mil_mt","enem_2022_1mil_mt_1",85013,"ENEM 2022 - MT","11
 LARANJA
 2º DIA
@@ -8229,8 +8229,8 @@ Não queira perder a sua alma
 11
 2 ",NA,"Um atleta iniciou seu treinamento visando as competições 
 de	 fim	 de	 ano.	 Seu	 treinamento	consiste	em	 cinco	tipos	
-diferentes de treinos: treino T1, treino T2, treino T3, treino T4 
-e treino T5. A sequência dos treinamentos deve seguir esta 
+diferentes de treinos: treino T1, treino T2, treino T_3, treino T_4 
+e treino T_5. A sequência dos treinamentos deve seguir esta 
 ordem:
 Dia Treino
 Primeiro T1
@@ -8248,11 +8248,11 @@ Décimo segundo T5
 Décimo terceiro R
 A	 letra	 R	 significa	 repouso.	 Após	 completar	 a	
 sequência de treinamentos, o atleta começa novamente  
-a sequência a partir do treino T1 e segue a ordem descrita. 
+a sequência a partir do treino T_1 e segue a ordem descrita. 
 Após 24 semanas completas de treinamento, se dará o 
 início das competições.
 A sequência de treinamentos que o atleta realizará na 
-vigésima quarta semana de treinos é","B","R  T3  R  T4  R  R  T5.",1,NA,NA,NA,NA,"Portuguese","B"
+vigésima quarta semana de treinos é","B","R  T_3  R  T_4  R  R  T_5.",1,NA,NA,NA,NA,"Portuguese","B"
 "enem_2022_1mil_mt","enem_2022_1mil_mt_1",85013,"ENEM 2022 - MT","11
 LARANJA
 2º DIA
@@ -8285,8 +8285,8 @@ Não queira perder a sua alma
 11
 2 ",NA,"Um atleta iniciou seu treinamento visando as competições 
 de	 fim	 de	 ano.	 Seu	 treinamento	consiste	em	 cinco	tipos	
-diferentes de treinos: treino T1, treino T2, treino T3, treino T4 
-e treino T5. A sequência dos treinamentos deve seguir esta 
+diferentes de treinos: treino T1, treino T2, treino T_3, treino T_4 
+e treino T_5. A sequência dos treinamentos deve seguir esta 
 ordem:
 Dia Treino
 Primeiro T1
@@ -8304,11 +8304,11 @@ Décimo segundo T5
 Décimo terceiro R
 A	 letra	 R	 significa	 repouso.	 Após	 completar	 a	
 sequência de treinamentos, o atleta começa novamente  
-a sequência a partir do treino T1 e segue a ordem descrita. 
+a sequência a partir do treino T_1 e segue a ordem descrita. 
 Após 24 semanas completas de treinamento, se dará o 
 início das competições.
 A sequência de treinamentos que o atleta realizará na 
-vigésima quarta semana de treinos é","B","R  T4  R  R  T5  R  T1.",0,NA,NA,NA,NA,"Portuguese","C"
+vigésima quarta semana de treinos é","B","R  T_4  R  R  T_5  R  T_1.",0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2022_1mil_mt","enem_2022_1mil_mt_1",85013,"ENEM 2022 - MT","11
 LARANJA
 2º DIA
@@ -8341,8 +8341,8 @@ Não queira perder a sua alma
 11
 2 ",NA,"Um atleta iniciou seu treinamento visando as competições 
 de	 fim	 de	 ano.	 Seu	 treinamento	consiste	em	 cinco	tipos	
-diferentes de treinos: treino T1, treino T2, treino T3, treino T4 
-e treino T5. A sequência dos treinamentos deve seguir esta 
+diferentes de treinos: treino T1, treino T2, treino T_3, treino T_4 
+e treino T_5. A sequência dos treinamentos deve seguir esta 
 ordem:
 Dia Treino
 Primeiro T1
@@ -8360,11 +8360,11 @@ Décimo segundo T5
 Décimo terceiro R
 A	 letra	 R	 significa	 repouso.	 Após	 completar	 a	
 sequência de treinamentos, o atleta começa novamente  
-a sequência a partir do treino T1 e segue a ordem descrita. 
+a sequência a partir do treino T_1 e segue a ordem descrita. 
 Após 24 semanas completas de treinamento, se dará o 
 início das competições.
 A sequência de treinamentos que o atleta realizará na 
-vigésima quarta semana de treinos é","B","R  R  T5  R  T1  R  R.",0,NA,NA,NA,NA,"Portuguese","D"
+vigésima quarta semana de treinos é","B","R  R  T_5  R  T_1  R  R.",0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2022_1mil_mt","enem_2022_1mil_mt_1",85013,"ENEM 2022 - MT","11
 LARANJA
 2º DIA
@@ -8397,8 +8397,8 @@ Não queira perder a sua alma
 11
 2 ",NA,"Um atleta iniciou seu treinamento visando as competições 
 de	 fim	 de	 ano.	 Seu	 treinamento	consiste	em	 cinco	tipos	
-diferentes de treinos: treino T1, treino T2, treino T3, treino T4 
-e treino T5. A sequência dos treinamentos deve seguir esta 
+diferentes de treinos: treino T1, treino T2, treino T_3, treino T_4 
+e treino T_5. A sequência dos treinamentos deve seguir esta 
 ordem:
 Dia Treino
 Primeiro T1
@@ -8416,11 +8416,11 @@ Décimo segundo T5
 Décimo terceiro R
 A	 letra	 R	 significa	 repouso.	 Após	 completar	 a	
 sequência de treinamentos, o atleta começa novamente  
-a sequência a partir do treino T1 e segue a ordem descrita. 
+a sequência a partir do treino T_1 e segue a ordem descrita. 
 Após 24 semanas completas de treinamento, se dará o 
 início das competições.
 A sequência de treinamentos que o atleta realizará na 
-vigésima quarta semana de treinos é","B","R  T5  R  T1  R  R  T2.",0,NA,NA,NA,NA,"Portuguese","E"
+vigésima quarta semana de treinos é","B","R  T_5  R  T_1  R  R  T_2.",0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2022_1mil_mt","enem_2022_1mil_mt_1",85228,"ENEM 2022 - MT","11
 LARANJA
 2º DIA
@@ -8453,9 +8453,9 @@ Não queira perder a sua alma
 11
 2 ",NA,"Em	uma	sala	de	cinema,	para	garantir	que	os	espectadores	vejam	toda	a	imagem	projetada	na	tela,	a	disposição	das	
 poltronas	deve	obedecer	à	norma	técnica	da	Associação	Brasileira	de	Normas	Técnicas	(ABNT),	que	faz	as	seguintes	indicações:
-• Distância mínima (Dmínimo)	entre	a	tela	de	projeção	e	o	encosto	da	poltrona	da	primeira	fileira	deve	ser	de,	pelo	
+• Distância mínima (D_mínimo)	entre	a	tela	de	projeção	e	o	encosto	da	poltrona	da	primeira	fileira	deve	ser	de,	pelo	
 menos, 60 por cento da largura (L) da tela.
-• Distância máxima (Dmáximo)	entre	a	tela	de	projeção	e	o	encosto	da	poltrona	da	última	fileira	deve	ser	o	dobro	
+• Distância máxima (D_máximo)	entre	a	tela	de	projeção	e	o	encosto	da	poltrona	da	última	fileira	deve	ser	o	dobro	
 da largura (L) da tela, sendo aceitável uma distância de até 2,9 vezes a largura (L) da tela.
 Para	o	espaçamento	entre	as	fileiras	de	poltronas,	é	considerada	a	distância	de	1	metro	entre	os	encostos	de	
 poltronas	em	duas	fileiras	consecutivas.
@@ -8465,8 +8465,8 @@ Descrição da imagem:
 Figura	distribuída	em	dois	esquemas	em	que,	o	esquema	à	esquerda	apresenta	um	trapézio	isósceles.	A	figura	à	
 esquerda apresenta um trapézio isósceles cuja base menor mede L e cuja altura mede Daceitável igual a 2,9 vezes L.
 Esse trapézio é seccionado por dois segmentos de reta paralelos às bases, o primeiro a uma distância da tela 
-de Dmínimo igual a 0,6 vezes L, representando o alinhamento dos encostos das poltronas já instaladas da primeira 
-fileira,	e	o	segundo,	a	uma	distância	da	tela	Dmáximo igual a 2 vezes L, indicando o alinhamento dos encostos das 
+de D_mínimo igual a 0,6 vezes L, representando o alinhamento dos encostos das poltronas já instaladas da primeira 
+fileira,	e	o	segundo,	a	uma	distância	da	tela	D_máximo igual a 2 vezes L, indicando o alinhamento dos encostos das 
 poltronas	da	última	fileira	já	instalada.
 Há	uma	região	destacada,	compreendida	entre	o	segundo	segmento	e	a	base	maior	do	trapézio,	denominada	
 Área de instalação de novas poltronas.
@@ -8521,9 +8521,9 @@ Não queira perder a sua alma
 11
 2 ",NA,"Em	uma	sala	de	cinema,	para	garantir	que	os	espectadores	vejam	toda	a	imagem	projetada	na	tela,	a	disposição	das	
 poltronas	deve	obedecer	à	norma	técnica	da	Associação	Brasileira	de	Normas	Técnicas	(ABNT),	que	faz	as	seguintes	indicações:
-• Distância mínima (Dmínimo)	entre	a	tela	de	projeção	e	o	encosto	da	poltrona	da	primeira	fileira	deve	ser	de,	pelo	
+• Distância mínima (D_mínimo)	entre	a	tela	de	projeção	e	o	encosto	da	poltrona	da	primeira	fileira	deve	ser	de,	pelo	
 menos, 60 por cento da largura (L) da tela.
-• Distância máxima (Dmáximo)	entre	a	tela	de	projeção	e	o	encosto	da	poltrona	da	última	fileira	deve	ser	o	dobro	
+• Distância máxima (D_máximo)	entre	a	tela	de	projeção	e	o	encosto	da	poltrona	da	última	fileira	deve	ser	o	dobro	
 da largura (L) da tela, sendo aceitável uma distância de até 2,9 vezes a largura (L) da tela.
 Para	o	espaçamento	entre	as	fileiras	de	poltronas,	é	considerada	a	distância	de	1	metro	entre	os	encostos	de	
 poltronas	em	duas	fileiras	consecutivas.
@@ -8533,8 +8533,8 @@ Descrição da imagem:
 Figura	distribuída	em	dois	esquemas	em	que,	o	esquema	à	esquerda	apresenta	um	trapézio	isósceles.	A	figura	à	
 esquerda apresenta um trapézio isósceles cuja base menor mede L e cuja altura mede Daceitável igual a 2,9 vezes L.
 Esse trapézio é seccionado por dois segmentos de reta paralelos às bases, o primeiro a uma distância da tela 
-de Dmínimo igual a 0,6 vezes L, representando o alinhamento dos encostos das poltronas já instaladas da primeira 
-fileira,	e	o	segundo,	a	uma	distância	da	tela	Dmáximo igual a 2 vezes L, indicando o alinhamento dos encostos das 
+de D_mínimo igual a 0,6 vezes L, representando o alinhamento dos encostos das poltronas já instaladas da primeira 
+fileira,	e	o	segundo,	a	uma	distância	da	tela	D_máximo igual a 2 vezes L, indicando o alinhamento dos encostos das 
 poltronas	da	última	fileira	já	instalada.
 Há	uma	região	destacada,	compreendida	entre	o	segundo	segmento	e	a	base	maior	do	trapézio,	denominada	
 Área de instalação de novas poltronas.
@@ -8589,9 +8589,9 @@ Não queira perder a sua alma
 11
 2 ",NA,"Em	uma	sala	de	cinema,	para	garantir	que	os	espectadores	vejam	toda	a	imagem	projetada	na	tela,	a	disposição	das	
 poltronas	deve	obedecer	à	norma	técnica	da	Associação	Brasileira	de	Normas	Técnicas	(ABNT),	que	faz	as	seguintes	indicações:
-• Distância mínima (Dmínimo)	entre	a	tela	de	projeção	e	o	encosto	da	poltrona	da	primeira	fileira	deve	ser	de,	pelo	
+• Distância mínima (D_mínimo)	entre	a	tela	de	projeção	e	o	encosto	da	poltrona	da	primeira	fileira	deve	ser	de,	pelo	
 menos, 60 por cento da largura (L) da tela.
-• Distância máxima (Dmáximo)	entre	a	tela	de	projeção	e	o	encosto	da	poltrona	da	última	fileira	deve	ser	o	dobro	
+• Distância máxima (D_máximo)	entre	a	tela	de	projeção	e	o	encosto	da	poltrona	da	última	fileira	deve	ser	o	dobro	
 da largura (L) da tela, sendo aceitável uma distância de até 2,9 vezes a largura (L) da tela.
 Para	o	espaçamento	entre	as	fileiras	de	poltronas,	é	considerada	a	distância	de	1	metro	entre	os	encostos	de	
 poltronas	em	duas	fileiras	consecutivas.
@@ -8601,8 +8601,8 @@ Descrição da imagem:
 Figura	distribuída	em	dois	esquemas	em	que,	o	esquema	à	esquerda	apresenta	um	trapézio	isósceles.	A	figura	à	
 esquerda apresenta um trapézio isósceles cuja base menor mede L e cuja altura mede Daceitável igual a 2,9 vezes L.
 Esse trapézio é seccionado por dois segmentos de reta paralelos às bases, o primeiro a uma distância da tela 
-de Dmínimo igual a 0,6 vezes L, representando o alinhamento dos encostos das poltronas já instaladas da primeira 
-fileira,	e	o	segundo,	a	uma	distância	da	tela	Dmáximo igual a 2 vezes L, indicando o alinhamento dos encostos das 
+de D_mínimo igual a 0,6 vezes L, representando o alinhamento dos encostos das poltronas já instaladas da primeira 
+fileira,	e	o	segundo,	a	uma	distância	da	tela	D_máximo igual a 2 vezes L, indicando o alinhamento dos encostos das 
 poltronas	da	última	fileira	já	instalada.
 Há	uma	região	destacada,	compreendida	entre	o	segundo	segmento	e	a	base	maior	do	trapézio,	denominada	
 Área de instalação de novas poltronas.
@@ -8657,9 +8657,9 @@ Não queira perder a sua alma
 11
 2 ",NA,"Em	uma	sala	de	cinema,	para	garantir	que	os	espectadores	vejam	toda	a	imagem	projetada	na	tela,	a	disposição	das	
 poltronas	deve	obedecer	à	norma	técnica	da	Associação	Brasileira	de	Normas	Técnicas	(ABNT),	que	faz	as	seguintes	indicações:
-• Distância mínima (Dmínimo)	entre	a	tela	de	projeção	e	o	encosto	da	poltrona	da	primeira	fileira	deve	ser	de,	pelo	
+• Distância mínima (D_mínimo)	entre	a	tela	de	projeção	e	o	encosto	da	poltrona	da	primeira	fileira	deve	ser	de,	pelo	
 menos, 60 por cento da largura (L) da tela.
-• Distância máxima (Dmáximo)	entre	a	tela	de	projeção	e	o	encosto	da	poltrona	da	última	fileira	deve	ser	o	dobro	
+• Distância máxima (D_máximo)	entre	a	tela	de	projeção	e	o	encosto	da	poltrona	da	última	fileira	deve	ser	o	dobro	
 da largura (L) da tela, sendo aceitável uma distância de até 2,9 vezes a largura (L) da tela.
 Para	o	espaçamento	entre	as	fileiras	de	poltronas,	é	considerada	a	distância	de	1	metro	entre	os	encostos	de	
 poltronas	em	duas	fileiras	consecutivas.
@@ -8669,8 +8669,8 @@ Descrição da imagem:
 Figura	distribuída	em	dois	esquemas	em	que,	o	esquema	à	esquerda	apresenta	um	trapézio	isósceles.	A	figura	à	
 esquerda apresenta um trapézio isósceles cuja base menor mede L e cuja altura mede Daceitável igual a 2,9 vezes L.
 Esse trapézio é seccionado por dois segmentos de reta paralelos às bases, o primeiro a uma distância da tela 
-de Dmínimo igual a 0,6 vezes L, representando o alinhamento dos encostos das poltronas já instaladas da primeira 
-fileira,	e	o	segundo,	a	uma	distância	da	tela	Dmáximo igual a 2 vezes L, indicando o alinhamento dos encostos das 
+de D_mínimo igual a 0,6 vezes L, representando o alinhamento dos encostos das poltronas já instaladas da primeira 
+fileira,	e	o	segundo,	a	uma	distância	da	tela	D_máximo igual a 2 vezes L, indicando o alinhamento dos encostos das 
 poltronas	da	última	fileira	já	instalada.
 Há	uma	região	destacada,	compreendida	entre	o	segundo	segmento	e	a	base	maior	do	trapézio,	denominada	
 Área de instalação de novas poltronas.
@@ -8725,9 +8725,9 @@ Não queira perder a sua alma
 11
 2 ",NA,"Em	uma	sala	de	cinema,	para	garantir	que	os	espectadores	vejam	toda	a	imagem	projetada	na	tela,	a	disposição	das	
 poltronas	deve	obedecer	à	norma	técnica	da	Associação	Brasileira	de	Normas	Técnicas	(ABNT),	que	faz	as	seguintes	indicações:
-• Distância mínima (Dmínimo)	entre	a	tela	de	projeção	e	o	encosto	da	poltrona	da	primeira	fileira	deve	ser	de,	pelo	
+• Distância mínima (D_mínimo)	entre	a	tela	de	projeção	e	o	encosto	da	poltrona	da	primeira	fileira	deve	ser	de,	pelo	
 menos, 60 por cento da largura (L) da tela.
-• Distância máxima (Dmáximo)	entre	a	tela	de	projeção	e	o	encosto	da	poltrona	da	última	fileira	deve	ser	o	dobro	
+• Distância máxima (D_máximo)	entre	a	tela	de	projeção	e	o	encosto	da	poltrona	da	última	fileira	deve	ser	o	dobro	
 da largura (L) da tela, sendo aceitável uma distância de até 2,9 vezes a largura (L) da tela.
 Para	o	espaçamento	entre	as	fileiras	de	poltronas,	é	considerada	a	distância	de	1	metro	entre	os	encostos	de	
 poltronas	em	duas	fileiras	consecutivas.
@@ -8737,8 +8737,8 @@ Descrição da imagem:
 Figura	distribuída	em	dois	esquemas	em	que,	o	esquema	à	esquerda	apresenta	um	trapézio	isósceles.	A	figura	à	
 esquerda apresenta um trapézio isósceles cuja base menor mede L e cuja altura mede Daceitável igual a 2,9 vezes L.
 Esse trapézio é seccionado por dois segmentos de reta paralelos às bases, o primeiro a uma distância da tela 
-de Dmínimo igual a 0,6 vezes L, representando o alinhamento dos encostos das poltronas já instaladas da primeira 
-fileira,	e	o	segundo,	a	uma	distância	da	tela	Dmáximo igual a 2 vezes L, indicando o alinhamento dos encostos das 
+de D_mínimo igual a 0,6 vezes L, representando o alinhamento dos encostos das poltronas já instaladas da primeira 
+fileira,	e	o	segundo,	a	uma	distância	da	tela	D_máximo igual a 2 vezes L, indicando o alinhamento dos encostos das 
 poltronas	da	última	fileira	já	instalada.
 Há	uma	região	destacada,	compreendida	entre	o	segundo	segmento	e	a	base	maior	do	trapézio,	denominada	
 Área de instalação de novas poltronas.
@@ -9865,8 +9865,7 @@ Considere que, em todas as partidas, a probabilidade
 de qualquer um dos dois times vencer é sempre 1
 2 .
 Qual	é	a	probabilidade	de	o	time	campeão	ser	aquele	que 
-venceu a primeira partida da World Series?","C","35
-64",0,NA,NA,NA,NA,"Portuguese","A"
+venceu a primeira partida da World Series?","C","35/64",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2022_1mil_mt","enem_2022_1mil_mt_1",86840,"ENEM 2022 - MT","11
 LARANJA
 2º DIA
@@ -9906,8 +9905,7 @@ Considere que, em todas as partidas, a probabilidade
 de qualquer um dos dois times vencer é sempre 1
 2 .
 Qual	é	a	probabilidade	de	o	time	campeão	ser	aquele	que 
-venceu a primeira partida da World Series?","C","40
-64",0,NA,NA,NA,NA,"Portuguese","B"
+venceu a primeira partida da World Series?","C","40/64",0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2022_1mil_mt","enem_2022_1mil_mt_1",86840,"ENEM 2022 - MT","11
 LARANJA
 2º DIA
@@ -9947,8 +9945,7 @@ Considere que, em todas as partidas, a probabilidade
 de qualquer um dos dois times vencer é sempre 1
 2 .
 Qual	é	a	probabilidade	de	o	time	campeão	ser	aquele	que 
-venceu a primeira partida da World Series?","C","42
-64",1,NA,NA,NA,NA,"Portuguese","C"
+venceu a primeira partida da World Series?","C","42/64",1,NA,NA,NA,NA,"Portuguese","C"
 "enem_2022_1mil_mt","enem_2022_1mil_mt_1",86840,"ENEM 2022 - MT","11
 LARANJA
 2º DIA
@@ -9988,8 +9985,7 @@ Considere que, em todas as partidas, a probabilidade
 de qualquer um dos dois times vencer é sempre 1
 2 .
 Qual	é	a	probabilidade	de	o	time	campeão	ser	aquele	que 
-venceu a primeira partida da World Series?","C","44
-64",0,NA,NA,NA,NA,"Portuguese","D"
+venceu a primeira partida da World Series?","C","44/64",0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2022_1mil_mt","enem_2022_1mil_mt_1",86840,"ENEM 2022 - MT","11
 LARANJA
 2º DIA
@@ -10029,7 +10025,7 @@ Considere que, em todas as partidas, a probabilidade
 de qualquer um dos dois times vencer é sempre 1
 2 .
 Qual	é	a	probabilidade	de	o	time	campeão	ser	aquele	que 
-venceu a primeira partida da World Series?","C","52",0,NA,NA,NA,NA,"Portuguese","E"
+venceu a primeira partida da World Series?","C","52/64",0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2022_1mil_mt","enem_2022_1mil_mt_1",89637,"ENEM 2022 - MT","11
 LARANJA
 2º DIA

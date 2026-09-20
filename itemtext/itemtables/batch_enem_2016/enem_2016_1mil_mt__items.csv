@@ -4664,7 +4664,7 @@ Uma expressão que fornece o custo para revestir
 uma parede de área A (em metro quadrado), situada 
 a D metros da fonte sonora, é
 A
-500 . 81","B",". D2",0,NA,NA,NA,NA,"Portuguese","A"
+500 . 81","B",". D^2",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2016_1mil_mt","enem_2016_1mil_mt_1",24747,"ENEM 2016 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -4723,8 +4723,7 @@ Uma expressão que fornece o custo para revestir
 uma parede de área A (em metro quadrado), situada 
 a D metros da fonte sonora, é
 A
-500 . 81","B","500 . A
-D2",1,NA,NA,NA,NA,"Portuguese","B"
+500 . 81","B","500 . A/D^2",1,NA,NA,NA,NA,"Portuguese","B"
 "enem_2016_1mil_mt","enem_2016_1mil_mt_1",24747,"ENEM 2016 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -4783,7 +4782,7 @@ Uma expressão que fornece o custo para revestir
 uma parede de área A (em metro quadrado), situada 
 a D metros da fonte sonora, é
 A
-500 . 81","B","500 . D2
+500 . 81","B","500 . D^2
 A",0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2016_1mil_mt","enem_2016_1mil_mt_1",24747,"ENEM 2016 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
@@ -4843,8 +4842,7 @@ Uma expressão que fornece o custo para revestir
 uma parede de área A (em metro quadrado), situada 
 a D metros da fonte sonora, é
 A
-500 . 81","B","500 . A . D2
-81",0,NA,NA,NA,NA,"Portuguese","D"
+500 . 81","B","500 . A . D^2/81",0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2016_1mil_mt","enem_2016_1mil_mt_1",24747,"ENEM 2016 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -4903,7 +4901,7 @@ Uma expressão que fornece o custo para revestir
 uma parede de área A (em metro quadrado), situada 
 a D metros da fonte sonora, é
 A
-500 . 81","B","500 . 3 . D2
+500 . 81","B","500 . 3 . D^2
 A",0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2016_1mil_mt","enem_2016_1mil_mt_1",96774,"ENEM 2016 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
@@ -5433,7 +5431,7 @@ existentes e que, ao tomar um caminho que chegue a
 uma área distinta da IV, o adolescente necessariamente 
 passa por ela ou retorna.
 Nessas condições, a probabilidade de ele chegar à área 
-IV sem passar por outras áreas e sem retornar é igual a","C",NA,0,NA,NA,NA,NA,"Portuguese","A"
+IV sem passar por outras áreas e sem retornar é igual a","C","1/96",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2016_1mil_mt","enem_2016_1mil_mt_1",60291,"ENEM 2016 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -5502,7 +5500,7 @@ existentes e que, ao tomar um caminho que chegue a
 uma área distinta da IV, o adolescente necessariamente 
 passa por ela ou retorna.
 Nessas condições, a probabilidade de ele chegar à área 
-IV sem passar por outras áreas e sem retornar é igual a","C",NA,0,NA,NA,NA,NA,"Portuguese","B"
+IV sem passar por outras áreas e sem retornar é igual a","C","1/64",0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2016_1mil_mt","enem_2016_1mil_mt_1",60291,"ENEM 2016 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -5571,7 +5569,7 @@ existentes e que, ao tomar um caminho que chegue a
 uma área distinta da IV, o adolescente necessariamente 
 passa por ela ou retorna.
 Nessas condições, a probabilidade de ele chegar à área 
-IV sem passar por outras áreas e sem retornar é igual a","C",NA,1,NA,NA,NA,NA,"Portuguese","C"
+IV sem passar por outras áreas e sem retornar é igual a","C","5/24",1,NA,NA,NA,NA,"Portuguese","C"
 "enem_2016_1mil_mt","enem_2016_1mil_mt_1",60291,"ENEM 2016 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -5640,7 +5638,7 @@ existentes e que, ao tomar um caminho que chegue a
 uma área distinta da IV, o adolescente necessariamente 
 passa por ela ou retorna.
 Nessas condições, a probabilidade de ele chegar à área 
-IV sem passar por outras áreas e sem retornar é igual a","C",NA,0,NA,NA,NA,NA,"Portuguese","D"
+IV sem passar por outras áreas e sem retornar é igual a","C","1/4",0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2016_1mil_mt","enem_2016_1mil_mt_1",60291,"ENEM 2016 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -5709,7 +5707,7 @@ existentes e que, ao tomar um caminho que chegue a
 uma área distinta da IV, o adolescente necessariamente 
 passa por ela ou retorna.
 Nessas condições, a probabilidade de ele chegar à área 
-IV sem passar por outras áreas e sem retornar é igual a","C",NA,0,NA,NA,NA,NA,"Portuguese","E"
+IV sem passar por outras áreas e sem retornar é igual a","C","5/12",0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2016_1mil_mt","enem_2016_1mil_mt_1",45081,"ENEM 2016 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -6132,7 +6130,7 @@ massa de pão):
 Recomenda-se a ingestão do pão que possui a maior 
 concentração de fibras.
 Disponível em: www.blog.saude.gov.br. Acesso em: 25 fev. 2013.
-A marca a ser escolhida é","B","A.",0,NA,NA,NA,NA,"Portuguese","A"
+A marca a ser escolhida é","B",NA,0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2016_1mil_mt","enem_2016_1mil_mt_1",42955,"ENEM 2016 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -6190,7 +6188,7 @@ massa de pão):
 Recomenda-se a ingestão do pão que possui a maior 
 concentração de fibras.
 Disponível em: www.blog.saude.gov.br. Acesso em: 25 fev. 2013.
-A marca a ser escolhida é","B","B.",1,NA,NA,NA,NA,"Portuguese","B"
+A marca a ser escolhida é","B",NA,1,NA,NA,NA,NA,"Portuguese","B"
 "enem_2016_1mil_mt","enem_2016_1mil_mt_1",42955,"ENEM 2016 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -6248,7 +6246,7 @@ massa de pão):
 Recomenda-se a ingestão do pão que possui a maior 
 concentração de fibras.
 Disponível em: www.blog.saude.gov.br. Acesso em: 25 fev. 2013.
-A marca a ser escolhida é","B","C.",0,NA,NA,NA,NA,"Portuguese","C"
+A marca a ser escolhida é","B",NA,0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2016_1mil_mt","enem_2016_1mil_mt_1",42955,"ENEM 2016 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -6306,7 +6304,7 @@ massa de pão):
 Recomenda-se a ingestão do pão que possui a maior 
 concentração de fibras.
 Disponível em: www.blog.saude.gov.br. Acesso em: 25 fev. 2013.
-A marca a ser escolhida é","B","D.",0,NA,NA,NA,NA,"Portuguese","D"
+A marca a ser escolhida é","B",NA,0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2016_1mil_mt","enem_2016_1mil_mt_1",42955,"ENEM 2016 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -6364,7 +6362,7 @@ massa de pão):
 Recomenda-se a ingestão do pão que possui a maior 
 concentração de fibras.
 Disponível em: www.blog.saude.gov.br. Acesso em: 25 fev. 2013.
-A marca a ser escolhida é","B","E.",0,NA,NA,NA,NA,"Portuguese","E"
+A marca a ser escolhida é","B",NA,0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2016_1mil_mt","enem_2016_1mil_mt_1",32221,"ENEM 2016 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -7613,11 +7611,11 @@ CADERNO
 7
 AZUL",NA,"Um posto de saúde registrou a quantidade de vacinas 
 aplicadas contra febre amarela nos últimos cinco meses:
-• 1o mês: 21; 
-• 2o mês: 22; 
-• 3o mês: 25; 
-• 4o mês: 31; 
-• 5o mês: 21.
+• 1^o mês: 21; 
+• 2^o mês: 22; 
+• 3^o mês: 25; 
+• 4^o mês: 31; 
+• 5^o mês: 21.
 No início do primeiro mês, esse posto de saúde tinha 
 228 vacinas contra febre amarela em estoque. A política de 
 reposição do estoque prevê a aquisição de novas vacinas, 
@@ -7676,11 +7674,11 @@ CADERNO
 7
 AZUL",NA,"Um posto de saúde registrou a quantidade de vacinas 
 aplicadas contra febre amarela nos últimos cinco meses:
-• 1o mês: 21; 
-• 2o mês: 22; 
-• 3o mês: 25; 
-• 4o mês: 31; 
-• 5o mês: 21.
+• 1^o mês: 21; 
+• 2^o mês: 22; 
+• 3^o mês: 25; 
+• 4^o mês: 31; 
+• 5^o mês: 21.
 No início do primeiro mês, esse posto de saúde tinha 
 228 vacinas contra febre amarela em estoque. A política de 
 reposição do estoque prevê a aquisição de novas vacinas, 
@@ -7739,11 +7737,11 @@ CADERNO
 7
 AZUL",NA,"Um posto de saúde registrou a quantidade de vacinas 
 aplicadas contra febre amarela nos últimos cinco meses:
-• 1o mês: 21; 
-• 2o mês: 22; 
-• 3o mês: 25; 
-• 4o mês: 31; 
-• 5o mês: 21.
+• 1^o mês: 21; 
+• 2^o mês: 22; 
+• 3^o mês: 25; 
+• 4^o mês: 31; 
+• 5^o mês: 21.
 No início do primeiro mês, esse posto de saúde tinha 
 228 vacinas contra febre amarela em estoque. A política de 
 reposição do estoque prevê a aquisição de novas vacinas, 
@@ -7802,11 +7800,11 @@ CADERNO
 7
 AZUL",NA,"Um posto de saúde registrou a quantidade de vacinas 
 aplicadas contra febre amarela nos últimos cinco meses:
-• 1o mês: 21; 
-• 2o mês: 22; 
-• 3o mês: 25; 
-• 4o mês: 31; 
-• 5o mês: 21.
+• 1^o mês: 21; 
+• 2^o mês: 22; 
+• 3^o mês: 25; 
+• 4^o mês: 31; 
+• 5^o mês: 21.
 No início do primeiro mês, esse posto de saúde tinha 
 228 vacinas contra febre amarela em estoque. A política de 
 reposição do estoque prevê a aquisição de novas vacinas, 
@@ -7865,11 +7863,11 @@ CADERNO
 7
 AZUL",NA,"Um posto de saúde registrou a quantidade de vacinas 
 aplicadas contra febre amarela nos últimos cinco meses:
-• 1o mês: 21; 
-• 2o mês: 22; 
-• 3o mês: 25; 
-• 4o mês: 31; 
-• 5o mês: 21.
+• 1^o mês: 21; 
+• 2^o mês: 22; 
+• 3^o mês: 25; 
+• 4^o mês: 31; 
+• 5^o mês: 21.
 No início do primeiro mês, esse posto de saúde tinha 
 228 vacinas contra febre amarela em estoque. A política de 
 reposição do estoque prevê a aquisição de novas vacinas, 
@@ -9064,7 +9062,7 @@ CADERNO
 AZUL",NA,"Densidade absoluta (d) é a razão entre a massa de um 
 corpo e o volume por ele ocupado. Um professor propôs à 
 sua turma que os alunos analisassem a densidade de três 
-corpos: dA, dB, dC. Os alunos verificaram que o corpo A 
+corpos: d_A, d_B, d_C. Os alunos verificaram que o corpo A 
 possuía 1,5 vez a massa do corpo B e esse, por sua vez, 
 tinha 3
 4
@@ -9122,7 +9120,7 @@ CADERNO
 AZUL",NA,"Densidade absoluta (d) é a razão entre a massa de um 
 corpo e o volume por ele ocupado. Um professor propôs à 
 sua turma que os alunos analisassem a densidade de três 
-corpos: dA, dB, dC. Os alunos verificaram que o corpo A 
+corpos: d_A, d_B, d_C. Os alunos verificaram que o corpo A 
 possuía 1,5 vez a massa do corpo B e esse, por sua vez, 
 tinha 3
 4
@@ -9180,7 +9178,7 @@ CADERNO
 AZUL",NA,"Densidade absoluta (d) é a razão entre a massa de um 
 corpo e o volume por ele ocupado. Um professor propôs à 
 sua turma que os alunos analisassem a densidade de três 
-corpos: dA, dB, dC. Os alunos verificaram que o corpo A 
+corpos: d_A, d_B, d_C. Os alunos verificaram que o corpo A 
 possuía 1,5 vez a massa do corpo B e esse, por sua vez, 
 tinha 3
 4
@@ -9238,7 +9236,7 @@ CADERNO
 AZUL",NA,"Densidade absoluta (d) é a razão entre a massa de um 
 corpo e o volume por ele ocupado. Um professor propôs à 
 sua turma que os alunos analisassem a densidade de três 
-corpos: dA, dB, dC. Os alunos verificaram que o corpo A 
+corpos: d_A, d_B, d_C. Os alunos verificaram que o corpo A 
 possuía 1,5 vez a massa do corpo B e esse, por sua vez, 
 tinha 3
 4
@@ -9296,7 +9294,7 @@ CADERNO
 AZUL",NA,"Densidade absoluta (d) é a razão entre a massa de um 
 corpo e o volume por ele ocupado. Um professor propôs à 
 sua turma que os alunos analisassem a densidade de três 
-corpos: dA, dB, dC. Os alunos verificaram que o corpo A 
+corpos: d_A, d_B, d_C. Os alunos verificaram que o corpo A 
 possuía 1,5 vez a massa do corpo B e esse, por sua vez, 
 tinha 3
 4
@@ -10767,8 +10765,7 @@ composto por vinte e seis letras e que uma letra maiúscula
 difere da minúscula em uma senha.
 Disponível em: www.infowester.com. Acesso em: 14 dez. 2012.
 O número total de senhas possíveis para o cadastramento 
-nesse site é dado por","E","102 . 522 . 4! 
-2!",0,NA,NA,NA,NA,"Portuguese","C"
+nesse site é dado por","E","102 . 522 . 4!/2!",0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2016_1mil_mt","enem_2016_1mil_mt_1",39762,"ENEM 2016 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -10824,8 +10821,7 @@ composto por vinte e seis letras e que uma letra maiúscula
 difere da minúscula em uma senha.
 Disponível em: www.infowester.com. Acesso em: 14 dez. 2012.
 O número total de senhas possíveis para o cadastramento 
-nesse site é dado por","E","102 . 262 . 4! 
-2! . 2!",0,NA,NA,NA,NA,"Portuguese","D"
+nesse site é dado por","E","102 . 262 . 4!/2! . 2!",0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2016_1mil_mt","enem_2016_1mil_mt_1",39762,"ENEM 2016 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -10881,8 +10877,7 @@ composto por vinte e seis letras e que uma letra maiúscula
 difere da minúscula em uma senha.
 Disponível em: www.infowester.com. Acesso em: 14 dez. 2012.
 O número total de senhas possíveis para o cadastramento 
-nesse site é dado por","E","102 . 522 . 4! 
-2! . 2!",1,NA,NA,NA,NA,"Portuguese","E"
+nesse site é dado por","E","102 . 522 . 4!/2! . 2!",1,NA,NA,NA,NA,"Portuguese","E"
 "enem_2016_1mil_mt","enem_2016_1mil_mt_1",95265,"ENEM 2016 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -14467,11 +14462,11 @@ E
 )3E 0
 ,
 sendo E a energia, em kWh, liberada pelo terremoto e 
-E0 uma constante real positiva. Considere que  E 1 e 
+E_0 uma constante real positiva. Considere que  E 1 e 
 E2 representam as energias liberadas nos terremotos 
 ocorridos no Japão e na China, respectivamente.
 Disponível em: www.terra.com.br. Acesso em: 15 ago. 2013 (adaptado).
-Qual a relação entre E1 e E2?","C","E1 = E2 + 2",0,NA,NA,NA,NA,"Portuguese","A"
+Qual a relação entre E1 e E2?","C","E1 = E_2 + 2",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2016_1mil_mt","enem_2016_1mil_mt_1",60315,"ENEM 2016 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -14532,11 +14527,11 @@ E
 )3E 0
 ,
 sendo E a energia, em kWh, liberada pelo terremoto e 
-E0 uma constante real positiva. Considere que  E 1 e 
+E_0 uma constante real positiva. Considere que  E 1 e 
 E2 representam as energias liberadas nos terremotos 
 ocorridos no Japão e na China, respectivamente.
 Disponível em: www.terra.com.br. Acesso em: 15 ago. 2013 (adaptado).
-Qual a relação entre E1 e E2?","C","E1 = 102 . E2",0,NA,NA,NA,NA,"Portuguese","B"
+Qual a relação entre E1 e E2?","C","E1 = 102 . E_2",0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2016_1mil_mt","enem_2016_1mil_mt_1",60315,"ENEM 2016 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -14597,11 +14592,11 @@ E
 )3E 0
 ,
 sendo E a energia, em kWh, liberada pelo terremoto e 
-E0 uma constante real positiva. Considere que  E 1 e 
+E_0 uma constante real positiva. Considere que  E 1 e 
 E2 representam as energias liberadas nos terremotos 
 ocorridos no Japão e na China, respectivamente.
 Disponível em: www.terra.com.br. Acesso em: 15 ago. 2013 (adaptado).
-Qual a relação entre E1 e E2?","C","E1 = 103 . E2",1,NA,NA,NA,NA,"Portuguese","C"
+Qual a relação entre E1 e E2?","C","E1 = 103 . E_2",1,NA,NA,NA,NA,"Portuguese","C"
 "enem_2016_1mil_mt","enem_2016_1mil_mt_1",60315,"ENEM 2016 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -14662,13 +14657,13 @@ E
 )3E 0
 ,
 sendo E a energia, em kWh, liberada pelo terremoto e 
-E0 uma constante real positiva. Considere que  E 1 e 
+E_0 uma constante real positiva. Considere que  E 1 e 
 E2 representam as energias liberadas nos terremotos 
 ocorridos no Japão e na China, respectivamente.
 Disponível em: www.terra.com.br. Acesso em: 15 ago. 2013 (adaptado).
 Qual a relação entre E1 e E2?","C","E1 = 10
 9
-7 . E2",0,NA,NA,NA,NA,"Portuguese","D"
+7 . E_2",0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2016_1mil_mt","enem_2016_1mil_mt_1",60315,"ENEM 2016 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -14729,10 +14724,10 @@ E
 )3E 0
 ,
 sendo E a energia, em kWh, liberada pelo terremoto e 
-E0 uma constante real positiva. Considere que  E 1 e 
+E_0 uma constante real positiva. Considere que  E 1 e 
 E2 representam as energias liberadas nos terremotos 
 ocorridos no Japão e na China, respectivamente.
 Disponível em: www.terra.com.br. Acesso em: 15 ago. 2013 (adaptado).
 Qual a relação entre E1 e E2?","C","E1 = 9
 7
-. E2",0,NA,NA,NA,NA,"Portuguese","E"
+. E_2",0,NA,NA,NA,NA,"Portuguese","E"

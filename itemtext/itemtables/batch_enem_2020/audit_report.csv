@@ -2,4 +2,4 @@
 "enem_2020_1mil_ch","PASS",45,45,TRUE,TRUE,TRUE,TRUE,0,0,""
 "enem_2020_1mil_cn","WARN",44,44,TRUE,TRUE,TRUE,TRUE,0,4.5,"4.5% of rows have blank option_text | 2 of 44 items have NO option_text rows while others do (83584, 90016) | option_text is just the resp value for 2 row(s) (resp: 1) -- unlabeled scale points should be blank, not padded with the number"
 "enem_2020_1mil_lc","WARN",50,50,TRUE,TRUE,TRUE,TRUE,0,0,"row-count anomaly (possible item-code conflation or missingness skew), median=1e+06: 111973, 112060, 112080, 23296, 54896, 60777, 62053, 66641, 86186, 98143"
-"enem_2020_1mil_mt","WARN",44,44,TRUE,TRUE,TRUE,TRUE,0,4.5,"4.5% of rows have blank option_text | 2 of 44 items have NO option_text rows while others do (30344, 111491)"
+"enem_2020_1mil_mt","WARN",44,44,TRUE,TRUE,TRUE,TRUE,0,11.4,"11.4% of rows have blank option_text | 5 of 44 items have NO option_text rows while others do (30344, 49630, 60666, 111491, 111530)"
