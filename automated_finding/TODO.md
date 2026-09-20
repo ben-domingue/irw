@@ -30,17 +30,19 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
 ## From the 2026-09-20 lead-working pass
 
-- [ ] **18 tables / 269,737 responses + 1 item text table staged, need uploading.**
-  All CC BY 4.0, all creates. `lopezodar_2025_berq` + `_ghq28`,
-  `li_2025_icf_rs17`, nine `adamczyk_2022_*`, five `amiot_2022_*`,
-  `karlsson_2023_climate_risk`. The 18 matching `dictionary_auto.csv` rows are
-  committed, so biblio needs no paste -- `metadata/02_biblio.R` unions them.
-  Item text: `itemtext_output/amiot_2022_ucla_loneliness__items.csv` (80 rows)
-  goes to `irw_text` SECOND, after the response tables are live -- it is a
-  dangling reference otherwise. Then stamp `uploaded=<date>` on its
-  `itemtext_provenance.csv` row, which is blank until you confirm.
+- [x] **18 tables / 269,737 responses + 1 item text table uploaded**
+  (ben-domingue, confirmed 2026-09-20). All 18 `irw_output/` CSVs went to the
+  newest warehouse shard and
+  `amiot_2022_ucla_loneliness__items.csv` to **`irw_text_2`**, not `irw_text`
+  -- item text is sharded the same way the warehouse is, and `red_up` picks
+  the newest shard itself, so that is expected rather than a misroute (the
+  corpus already splits UCLA tables across both shards). The
+  `itemtext_provenance.csv` row is stamped `uploaded=2026-09-20`. Biblio needs
+  no action: the 18 `dictionary_auto.csv` rows are on main and
+  `metadata/02_biblio.R` unions them on its next run.
 
-- [ ] **`amiot_2022_ucla_loneliness` owes an issues-page entry when it ships.**
+- [ ] **`amiot_2022_ucla_loneliness` owes an issues-page entry -- it is now
+  live.**
   Its `public_note` is non-empty, which forces a public callout: 418 of the
   2,424 respondents (17.2%) answered in French and the deposit carries only
   the English wording, so the shipped item text is not what those respondents
