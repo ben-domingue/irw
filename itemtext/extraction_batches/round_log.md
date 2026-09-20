@@ -22206,3 +22206,17 @@ Three agents per round, per Ben's 2026-09-11 setting. No kills, no rate limits, 
 Queue after this round: 1127 done / 276 blocked / 13 failed / 60 excluded / **52 pending**.
 Circuit breaker not tripped (0 failed of 3 = 0%). Cap is `batch_299` — not reached; the next
 firing continues.
+
+## batch_282 — 2026-09-20 14:49–15:0x
+
+3 tables, 3 agents (one per table). **Written 3 / blocked 0 / failed 0 — yield 3/3 (100%).**
+
+- `hoai_2026_student_engagement` — 20 rows (SE1–SE4 × 1–5). Mendeley doi:10.17632/tdsspksw83 V1, CC BY 4.0. Administered Vietnamese in the base fields, authors' own English in the `_translated` twins (`translation_source=study_supplied`, so IRW translated nothing). `mapping_basis=paper_explicit`, VERIFIED.
+- `hoai_2026_teaching_presence` — 25 rows (TP1–TP5 × 1–5). Same deposit, same treatment. `paper_explicit`, VERIFIED. Step 3b clean: the statements are the study's own wording for Community-of-Inquiry constructs, not the Arbaugh et al. CoI survey wording.
+- `aiquipa_2026_dgs` — 35 rows (COD1–COD7 × 1–5). Mendeley doi:10.17632/w5f55333p4.2, CC BY 4.0, Dispositional Greed Scale, Peruvian adaptation. Administered Spanish in the base fields. `paper_explicit`, **PARTIAL** (route 3 pins the 5-vs-2 partition but not the order within `{1,2,3,4,7}` nor COD5-vs-COD6). `translation_source=mixed` with a `public_note`: COD3 and COD7 English was written by IRW because the adaptation changed those two items' sense. `option_text` left blank throughout — the deposit publishes no anchors anywhere, and they were deliberately not back-filled from the original DGS.
+
+Gates: `normalize_nulls` fixed 1 file (aiquipa, 36 lines). `audit_batch` 3/3 PASS, **no WARNs** (so nothing owed under Step 5c). `verify_batch` 3/3 PASS. `lint_verification` clean. `irw-validate` ok on all three. `check_provenance` clean — aiquipa's `mixed` row owes no issues-page entry yet because it is HELD (never uploaded); it will re-enter that check when it ships.
+
+**Step 5b re-check changed a recorded number.** Re-ran the aiquipa 21-subset sweep independently: the load-bearing claim holds — `{COD1,COD2,COD3,COD4,COD7}` reproduces the scored `Codicia` column at 498/498 and is the unique exact match — but the agent's runner-up figures were wrong (reported 181/498 and 154/498; actually 212/498 for `{COD1,COD2,COD3,COD4,COD6}` and 191/498 for `{COD1,COD2,COD3,COD6,COD7}`). The gap is narrower than reported but still decisive, and PARTIAL remains the right status. Evidence string corrected in both `verification_merged.csv` and the permanent tracker, and the correction recorded in `notes.csv`. Both hoai level-count vector claims were re-derived from the workbook and **confirmed exactly**, 0 identical pairs in each group.
+
+Queue after this round: 1130 done / 276 blocked / 60 excluded / 13 failed / **49 pending**. Circuit breaker not tripped (0% failed). Cap `batch_299` not reached.
