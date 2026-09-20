@@ -15,6 +15,7 @@ library(jsonlite)
 library(purrr)
 source("bibtex_overrides.R")
 bibtex_overrides <- read_bibtex_overrides("bibtex_overrides.csv")
+source("bibtex_doi_check.R")  ## #2301: a cached citation must name the row's own DOI
 
 add_json_field <- function(key, value) {
   if (!is.na(value)) {
@@ -302,6 +303,17 @@ getrows<-function(l) {
     ## only; the sheet is untouched, and each entry disarms itself the moment
     ## someone corrects the sheet by hand. See DESCRIPTION_OVERRIDES.
     biblio <- apply_description_overrides(biblio, name)
+    ## LAST, and deliberately so (#2301). refresh_biblio_from_dict() and
+    ## apply_data_doi() above both move DOI cells *after* the fetch stage has
+    ## run, which is how 58 rows came to cite a different, real, unrelated paper:
+    ## the sheet's DOI was corrected, the cached BibTeX fetched against the old
+    ## value was never invalidated, and nothing compared the two. Refetch the
+    ## rows whose citation names a DOI the row no longer claims, then refuse to
+    ## write a biblio where any still does. See bibtex_doi_check.R.
+    stale <- refetch_stale_bibtex(biblio, fetch_bibtex_from_doi, name)
+    biblio <- stale$biblio
+    readr::write_csv(stale$log, sub("\\.csv$", "_bibtex_refetch_log.csv", file.out))
+    assert_bibtex_doi_consistent(biblio, name)
 
     biblio<-biblio[,
                    c("table","DOI__for_paper_", "DOI__for_data_", "Reference_x",
