@@ -22133,3 +22133,76 @@ uploads it.
 
 Queue after this round: 1124 done / 276 blocked / 13 failed / 60 excluded / **55 pending**.
 Cap is `batch_299` — not reached; the next firing continues.
+
+## batch_281 — 2026-09-20T14:34:59-07:00 — 3 tables, 3 written / 0 blocked / 0 failed (yield 3/3 = 100%)
+
+Tables: `hoai_2026_instructional_design_quality` (IDQ1–IDQ5, 25 rows),
+`hoai_2026_learning_experience` (LE1–LE4, 20 rows), `hoai_2026_social_presence` (SP1–SP4,
+20 rows). All three `done`.
+
+Numbering: highest existing directory below 300 is `batch_280`, so this round is `batch_281`.
+The 300–304 hole (irw#2228, whose `batch_300`–`batch_304` are all on this branch now) was
+skipped as the prompt requires — "highest + 1" over *all* directories would have produced
+`batch_305` and jumped 24 numbers past the cap's own series.
+
+All three come from the same Mendeley deposit as batch_280's `hoai_2026_academic_achievement`
+and `hoai_2026_cognitive_presence` — doi:10.17632/tdsspksw83 V1, CC BY 4.0 (licence re-fetched
+from the Mendeley public API by each agent independently today, not taken on trust from the
+prior round). Each agent re-derived the mapping from `codebook.docx`'s MEASUREMENT VARIABLES
+table and the administered `Questionaire_VN.docx`, and each checked the selection rule in
+`data/hoai_2026_blended_learning.py` for its own prefix rather than assuming it: the rules are
+`^IDQ[0-9]+$`, `LE`+digits and `^SP[0-9]+$`, so no construct's codes bleed into another's
+(`SP` vs `SE`/`SQ` was the live collision risk and it does not occur). The IRW item code *is*
+the workbook column header in all three cases — no positional assignment anywhere.
+
+Gates: `normalize_nulls.R` 0 of 3 normalized; `audit_batch.R` **PASS ×3, no anomalies**;
+`verify_batch.R` **PASS ×3**; `lint_verification.R` 3 rows, 0 ERROR, 1 WARN; `irw-validate`
+ok on all three; `check_provenance.R` exit 0. No `data_labels` tables this round, so no
+NOT_NEEDED rows were owed in either file.
+
+**Step 5b orchestrator re-check — every agent claim confirmed, from the live table rather than
+the deposit workbook.** `item_stats.R` reproduces all three claimed per-item response-count
+vectors to the cell (IDQ ceilings 65/73/68/79/58 of 580 = 11.2/12.6/11.7/13.6/10.0%; LE floors
+4/1/3/2 = 0.7/0.2/0.5/0.3%; SP ceilings 66/58/54/63 = 11.4/10.0/9.3/10.9%). The floor claims
+hold exactly: IDQ1 `min=2` — no respondent chose level 1 at all — and SP1–SP3 `min=2` with
+SP4's single level-1 response (0.2% of 580) being the sole observation the live resp set's
+inclusion of 1 rests on. The re-check also adds a corroborating leg the agents did not run:
+within each table the (floor_pct, ceiling_pct) pairs are **pairwise distinct in the live data**,
+so the tails separate every item from every other one independently of the deposit — which
+matters because means cannot do it here (four IDQ items tie at 3.56, SP1–SP3 at 3.55–3.56,
+LE1/LE3/LE4 at 3.54–3.55, and `item_stats.R` flags all three sets as inseparable by mean).
+
+The single lint WARN was reviewed and deliberately not actioned, with the reasoning written into
+`notes.csv`: it asks whether `hoai_2026_social_presence` should be PARTIAL because its evidence
+says "does not establish". The hedge is about the `resp`↔`option_text` **anchor direction**,
+which is untestable in principle for this deposit — the workbook stores bare integers and
+publishes no per-label counts — and it is identical for all three tables here and for both hoai
+tables in batch_280; only this row's phrasing tripped the pattern match. Step 5b's status is
+about whether the route distinguishes every *item*, and here three independent legs plus the
+orchestrator's floor/ceiling check all do. VERIFIED stands.
+
+Worth noting against batch_280: `hoai_2026_academic_achievement` went PARTIAL on the same source
+because its VN→EN pairing was a sentence-by-sentence semantic reading. All three agents this
+round instead ran a *counted* one-to-one crosswalk (each VN phrase occurring exactly once in the
+VN questionnaire, its English counterpart exactly once in the EN questionnaire and codebook), and
+put it in the re-runnable `verify_<table>.R`. That is the difference between the two statuses, and
+it is the better pattern for the two hoai tables still queued.
+
+One prediction did not hold: the IDQ agent expected an `audit_batch.R` coverage flag on
+IDQ1/`resp=1` (a printed anchor nobody used). `audit_batch.R` returned PASS with no anomalies.
+Shipping all five printed anchors per item is correct either way — the unused level is a property
+of the response data, not an itemtext defect, so no `public_note` is owed on any of the three.
+
+Rights: no blocks. The instrument is the authors' own doctoral questionnaire (Community of
+Inquiry *constructs*, but not the Arbaugh et al. CoI survey wording — Step 3b checked explicitly
+for the SP block, none of Arbaugh's 9 SP stems are present), published in full under CC BY 4.0.
+`instrument_rights_register.csv` has no row reaching it; the register's SWLS `block` row does not
+reach LE1, which is course satisfaction rather than life satisfaction. No register rows written —
+a round may write only `block` rows. The README's "for academic research purposes only" line sits
+inside a CC BY 4.0 grant and reserves no right in the *wording*, so it is not a block.
+
+Three agents per round, per Ben's 2026-09-11 setting. No kills, no rate limits, no retries.
+
+Queue after this round: 1127 done / 276 blocked / 13 failed / 60 excluded / **52 pending**.
+Circuit breaker not tripped (0 failed of 3 = 0%). Cap is `batch_299` — not reached; the next
+firing continues.
