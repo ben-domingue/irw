@@ -679,6 +679,32 @@ output-format one:
   `pii_blocked_candidates.csv` standing file — unlike a license issue,
   there's no path to later un-blocking a PII-flagged candidate, so nothing
   needs to persist past the batch writeup.
+
+  **Narrowed 2026-09-20 for ONE identifier class: a platform participant
+  ID.** ben-domingue ruled that a Prolific/MTurk-style account ID does not
+  disqualify a candidate — it is replaced, and the dataset ships. The
+  reasoning is that such a column is a pure identifier: it is never an item
+  and never a covariate, so IRW's output is unchanged whether it is there or
+  not, and IRW's `id` is a row index anyway. Everything else in the rule is
+  untouched — names, emails, birthdates, IP/GPS, national ID numbers and
+  free-text clinical narratives still disqualify the whole candidate.
+
+  **Replace it with the row index, never a hash of it.** A hash looks
+  anonymous and is not: 24-hex Prolific IDs are enumerable from other public
+  deposits, so anyone holding such a list can hash it and re-link. The row
+  index has no preimage, links a respondent across the tables built from one
+  wide file, and links to nothing outside the deposit.
+
+  The candidate that prompted this ruling did not ship, for an unrelated
+  reason worth knowing before the next one: `10.1038/s41598-023-33749-0` is
+  a CC BY 4.0 article whose data sits on a PRIVATE OSF node with no licence,
+  reachable only through the `?view_only=` review link its Data Availability
+  statement publishes. The article's licence does not reach it — the
+  source-licence rule (ECR-R, 2026-09-04) points at the unlicensed node — so
+  it is a licence skip, logged in `license_blocked_candidates.csv`. Check
+  `public:` on an OSF node before treating its contents as openly licensed;
+  `api.osf.io/v2/nodes/<id>/` 401s without a token when the node is private,
+  and a tokenless file download returns an HTML page rather than failing.
 - **License.** Only proceed if the license is explicitly verified as open
   (`cc0`, `cc-by`, `cc-by-sa`, or equivalent) on the source page itself. A
   triage `license` of `unknown` does not count as verified — skip. A bare

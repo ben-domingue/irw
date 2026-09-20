@@ -30,32 +30,35 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
 ## From the 2026-09-20 lead-working pass
 
-- [ ] **18 tables / 269,737 responses + 1 item text table staged, need uploading.**
-  All CC BY 4.0, all creates. `lopezodar_2025_berq` + `_ghq28`,
-  `li_2025_icf_rs17`, nine `adamczyk_2022_*`, five `amiot_2022_*`,
-  `karlsson_2023_climate_risk`. The 18 matching `dictionary_auto.csv` rows are
-  committed, so biblio needs no paste -- `metadata/02_biblio.R` unions them.
-  Item text: `itemtext_output/amiot_2022_ucla_loneliness__items.csv` (80 rows)
-  goes to `irw_text` SECOND, after the response tables are live -- it is a
-  dangling reference otherwise. Then stamp `uploaded=<date>` on its
-  `itemtext_provenance.csv` row, which is blank until you confirm.
+- [x] **18 tables / 269,737 responses + 1 item text table uploaded**
+  (ben-domingue, confirmed 2026-09-20). All 18 `irw_output/` CSVs went to the
+  newest warehouse shard and
+  `amiot_2022_ucla_loneliness__items.csv` to **`irw_text_2`**, not `irw_text`
+  -- item text is sharded the same way the warehouse is, and `red_up` picks
+  the newest shard itself, so that is expected rather than a misroute (the
+  corpus already splits UCLA tables across both shards). The
+  `itemtext_provenance.csv` row is stamped `uploaded=2026-09-20`. Biblio needs
+  no action: the 18 `dictionary_auto.csv` rows are on main and
+  `metadata/02_biblio.R` unions them on its next run.
 
-- [ ] **`amiot_2022_ucla_loneliness` owes an issues-page entry when it ships.**
+- [ ] **`amiot_2022_ucla_loneliness` owes an issues-page entry -- it is now
+  live.**
   Its `public_note` is non-empty, which forces a public callout: 418 of the
   2,424 respondents (17.2%) answered in French and the deposit carries only
   the English wording, so the shipped item text is not what those respondents
   read. The page lives in the datapages/irw repo
   (`irw_site/itemtext_issues.qmd`) and is edited there, not here.
 
-- [ ] **Is a Prolific ID PII for our purposes?** `10.1038/s41598-023-33749-0`
-  (OSF `v7k3d`) publishes 772 live 24-hex Prolific account IDs beside
-  mental-health-disorder, medication and head-injury fields. A Prolific ID is
-  not in the blanket rule's enumerated list, but it is a persistent
-  cross-study identifier that Prolific tells researchers never to publish.
-  Skipped conservatively pending ben-domingue's call; reversible either way.
-  If it is not PII, the deposit is 697 x 85 with HADS and DERS blocks and
-  worth processing. Both this and the PERMA deposit below are arguably worth
-  telling the depositors about, as with the zenodo.10069489 email.
+- [x] **Prolific IDs: replaced, not disqualifying** (ben-domingue,
+  2026-09-20). A platform participant ID is a pure identifier, so it is
+  swapped for the row index -- never a hash, which is a re-linkable
+  pseudonym -- and the candidate ships. All other PII still skips the whole
+  candidate. Recorded in the skill's PII section and BATCH_LOG.md 2026-09-20d.
+  The candidate that prompted it, `10.1038/s41598-023-33749-0`, still did not
+  ship: its data sits on a PRIVATE, unlicensed OSF node reachable only
+  through the review link the paper publishes, so it is a licence skip and is
+  logged in `license_blocked_candidates.csv`. No author email, per
+  ben-domingue.
 
 - [x] **UCLA Loneliness Scale: verdict is `ship`** (2026-09-20). The quote
   test found nothing to quote -- Fetzer's own UCLA pages reproduce the scale
