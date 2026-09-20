@@ -22343,3 +22343,69 @@ Notable:
 
 Queue after this round: 1136 done, 276 blocked, 60 excluded, 43 pending, 13 failed; 0 in_progress.
 Circuit breaker not tripped (0 failed). Cap is batch_299 — **not reached**, 284 < 299.
+
+---
+
+## batch_285 — 2026-09-20
+
+3 tables claimed, **3 written / 0 blocked / 0 failed** — yield 3/3 (100%). Three agents, per the
+2026-09-11 setting; no kills, no retries. Numbering: highest below 300 was `batch_284`, so this round
+is `batch_285`; 300–304 exist on this branch but belong to irw#2228 and were excluded from the
+"highest + 1" computation.
+
+| table | rows | mapping_basis | Step 5b | status |
+|---|---|---|---|---|
+| `pellerin2020_asti` | 49 (7 × 7) | paper_order | routes 5+1, **PARTIAL** | done |
+| `wu2021_empathy` | 105 (21 × 5) | paper_order | routes 3+5+8, **PARTIAL** | done |
+| `offlinefriend_ofaq` | 185 (37 × 5) | paper_explicit | routes 1+9, **VERIFIED** | done |
+
+**Gates:** normalize_nulls fixed 2 of 3; audit_batch **PASS ×3, no anomalies** (so no Step 5c WARNs to
+explain); verify_batch **PASS ×3**; lint_verification 0 ERROR / 1 WARN; `irw-validate` ok on all three;
+`check_provenance.R` clean (`wu2021_empathy` shows as HELD — its `machine_translation` issues-page entry
+is owed on upload, not now). No whole-table exports: every agent used `--table-sets`.
+
+**The one lint WARN is adjudicated, not a finding.** `offlinefriend_ofaq` was flagged "VERIFIED but its
+evidence hedges" on a *does not establish* clause. That clause is about a limit **outside** the route's
+scope — route 1 pins each code to a number in the study's own item list and cannot detect an error
+*inside* that list, and it does not adjudicate the three administered-form vs scale-document wording
+differences. Within scope the route separates every item from every other: 36 of 37 codes uniquely claim
+their own published (M,SD) with every runner-up ≥2.4× further, and item 37 falls out as the residue of a
+bijection over 37 codes. VERIFIED stands; reasoning appended to `notes.csv`.
+
+### Orchestrator re-checks (Step 5b), both confirming the agent
+
+1. **Source misprint in Satchell et al. (2021) Table 1 — CONFIRMED.** Re-ran
+   `verify_offlinefriend_ofaq.R`: item 37's published mean 2.82 against an observed 2.276, while its
+   published SD 1.12 reproduces at 1.123. 2.82 is a verbatim repeat of item 35's printed mean. Item 37
+   is pinned by exclusion, and this is a defect in the *paper*, not in the table or the itemtext.
+2. **`wu2021_empathy` is misnamed — CONFIRMED, already filed.** B1–B21 are the 21-item Occupation
+   Expectation Scale (Wu & Li, 2001), not an empathy scale. The tie is direct rather than inferential:
+   the shipped wording reconstructs the deposit's own 职业期望 composite as mean(B1..B21) to 5.3e-15
+   over n=506, and least squares recovers a unique 8/8/5 subscale partition (max resid 1.1e-13).
+   Tracked by **irw#2198** (open) — no new issue filed. Its sibling response-data defect (B vs
+   `wu2021_panas` G at r=−0.9875, disattenuating to an impossible −1.112) is **irw#2195** (open),
+   likewise already filed and unresolved. Not an itemtext problem, but it makes this table's
+   *responses* suspect.
+
+### Other notable
+
+- **Both PARTIALs are honest and determinate, not retryable.** `pellerin2020_asti`: scoring all 5040
+  permutations against the live French matrix ranks the shipped mapping first (r=0.8987 vs 0.8962),
+  fixing ST_4/ST_6/ST_7, but ASTI2 vs ASTI7 and ASTI4 vs ASTI16 stay within 0.009 of each other and are
+  not separated. `wu2021_empathy`: subscale membership is established 21/21 and the extremes order as
+  content predicts, but B13 (3.248) vs B14 (3.219) and B20 (2.949) vs B21 (2.976) are interchangeable
+  under every route run. Both limits are named in the respective `public_note`.
+- **Two fallback-language disclosures.** `pellerin2020_asti` was administered in French and ships the
+  ASTI's published English (`translated_substitute` / `official_instrument_english`) — the OSF deposit
+  holds exactly two files, neither carrying French wording, and the article has no supplement.
+  `wu2021_empathy` ships the administered Chinese with IRW's own English in the `_translated` columns.
+- **Administered wording preferred over the published wording, twice, deliberately.**
+  `offlinefriend_ofaq` ships the administered questionnaire verbatim including its typo at item 18
+  ("Arguments **with** arisen …"), not the scale document's corrected form. `wu2021_empathy` ships the
+  administered importance grid (不太重要 … 很重要) rather than the paper's "completely disagree …
+  completely agree" description. Both recorded in provenance.
+- **Rights: no register rows written.** No quotable restriction was located for any of the three
+  instruments; per the standing rule a round may write `block` but never `ship`.
+
+Queue after this round: 1139 done, 276 blocked, 60 excluded, 40 pending, 13 failed; 0 in_progress.
+Circuit breaker not tripped (0 failed). Cap is batch_299 — **not reached**, 285 < 299.
