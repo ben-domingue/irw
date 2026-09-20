@@ -1369,6 +1369,12 @@ python3 refresh_live_tables.py     # needs Redivis credentials; ~2 API calls
 Rscript ../.claude/skills/irw-auto-itemtext/scripts/check_issues_page.R
 ```
 
+Run the refresh **here**, locally, even though `.github/workflows/itemtext-issues.yml`
+runs it daily: that job's token is read-only, so it cannot list a draft and carries
+the previous snapshot's `draft` rows forward untouched (it prints a `WARNING:` and
+the file's header records it). A table you have just uploaded but not released is
+therefore only visible to the snapshot after a local, full-scope run.
+
 `uploaded` records **when**, and only that. Whether a table is live is read from
 `live_tables.csv` — a committed snapshot of the published (and draft) shards,
 because a hand-kept liveness column has been wrong in both directions:
