@@ -870,9 +870,9 @@ encontradas em óleos vegetais.
 Descrição das estruturas químicas:
 Benzaldeído	(no	óleo	de	amêndoas):	Anel	aromático	com	o	grupo	C	ligação	dupla	O,	ligação	simples	H.
 Salicilato	de	metila	(no	óleo	de	gaultéria):	Anel	aromático	com	dois	grupos:	Primeiro	grupo:	C	ligação	dupla	O,	
-ligação	simples	O,	ligação	simples	CH3;	Segundo	grupo:	ligação	simples	OH.
+ligação	simples	O,	ligação	simples	CH_3;	Segundo	grupo:	ligação	simples	OH.
 Anetol	(no	óleo	de	anis):	Anel	aromático	com	dois	grupos:	Primeiro	grupo:	O	ligação	simples	CH3; Segundo grupo: 
-C	ligação	dupla	C,	ligação	simples	CH3.
+C	ligação	dupla	C,	ligação	simples	CH_3.
 Vanilina	(no	óleo	de	baunilha):	Anel	aromático	com	três	grupos:	Primeiro	grupo:	C	ligação	dupla	O,	ligação	simples	
 H;	Segundo	grupo:	O	ligação	simples	CH3;	T erceiro	grupo:	ligação	simples	OH.
 Eugenol (no óleo de cravos): Anel aromático com três grupos: Primeiro grupo: CH 2	ligação	simples	CH,	ligação	
@@ -951,9 +951,9 @@ encontradas em óleos vegetais.
 Descrição das estruturas químicas:
 Benzaldeído	(no	óleo	de	amêndoas):	Anel	aromático	com	o	grupo	C	ligação	dupla	O,	ligação	simples	H.
 Salicilato	de	metila	(no	óleo	de	gaultéria):	Anel	aromático	com	dois	grupos:	Primeiro	grupo:	C	ligação	dupla	O,	
-ligação	simples	O,	ligação	simples	CH3;	Segundo	grupo:	ligação	simples	OH.
+ligação	simples	O,	ligação	simples	CH_3;	Segundo	grupo:	ligação	simples	OH.
 Anetol	(no	óleo	de	anis):	Anel	aromático	com	dois	grupos:	Primeiro	grupo:	O	ligação	simples	CH3; Segundo grupo: 
-C	ligação	dupla	C,	ligação	simples	CH3.
+C	ligação	dupla	C,	ligação	simples	CH_3.
 Vanilina	(no	óleo	de	baunilha):	Anel	aromático	com	três	grupos:	Primeiro	grupo:	C	ligação	dupla	O,	ligação	simples	
 H;	Segundo	grupo:	O	ligação	simples	CH3;	T erceiro	grupo:	ligação	simples	OH.
 Eugenol (no óleo de cravos): Anel aromático com três grupos: Primeiro grupo: CH 2	ligação	simples	CH,	ligação	
@@ -1032,9 +1032,9 @@ encontradas em óleos vegetais.
 Descrição das estruturas químicas:
 Benzaldeído	(no	óleo	de	amêndoas):	Anel	aromático	com	o	grupo	C	ligação	dupla	O,	ligação	simples	H.
 Salicilato	de	metila	(no	óleo	de	gaultéria):	Anel	aromático	com	dois	grupos:	Primeiro	grupo:	C	ligação	dupla	O,	
-ligação	simples	O,	ligação	simples	CH3;	Segundo	grupo:	ligação	simples	OH.
+ligação	simples	O,	ligação	simples	CH_3;	Segundo	grupo:	ligação	simples	OH.
 Anetol	(no	óleo	de	anis):	Anel	aromático	com	dois	grupos:	Primeiro	grupo:	O	ligação	simples	CH3; Segundo grupo: 
-C	ligação	dupla	C,	ligação	simples	CH3.
+C	ligação	dupla	C,	ligação	simples	CH_3.
 Vanilina	(no	óleo	de	baunilha):	Anel	aromático	com	três	grupos:	Primeiro	grupo:	C	ligação	dupla	O,	ligação	simples	
 H;	Segundo	grupo:	O	ligação	simples	CH3;	T erceiro	grupo:	ligação	simples	OH.
 Eugenol (no óleo de cravos): Anel aromático com três grupos: Primeiro grupo: CH 2	ligação	simples	CH,	ligação	
@@ -1113,9 +1113,9 @@ encontradas em óleos vegetais.
 Descrição das estruturas químicas:
 Benzaldeído	(no	óleo	de	amêndoas):	Anel	aromático	com	o	grupo	C	ligação	dupla	O,	ligação	simples	H.
 Salicilato	de	metila	(no	óleo	de	gaultéria):	Anel	aromático	com	dois	grupos:	Primeiro	grupo:	C	ligação	dupla	O,	
-ligação	simples	O,	ligação	simples	CH3;	Segundo	grupo:	ligação	simples	OH.
+ligação	simples	O,	ligação	simples	CH_3;	Segundo	grupo:	ligação	simples	OH.
 Anetol	(no	óleo	de	anis):	Anel	aromático	com	dois	grupos:	Primeiro	grupo:	O	ligação	simples	CH3; Segundo grupo: 
-C	ligação	dupla	C,	ligação	simples	CH3.
+C	ligação	dupla	C,	ligação	simples	CH_3.
 Vanilina	(no	óleo	de	baunilha):	Anel	aromático	com	três	grupos:	Primeiro	grupo:	C	ligação	dupla	O,	ligação	simples	
 H;	Segundo	grupo:	O	ligação	simples	CH3;	T erceiro	grupo:	ligação	simples	OH.
 Eugenol (no óleo de cravos): Anel aromático com três grupos: Primeiro grupo: CH 2	ligação	simples	CH,	ligação	
@@ -1194,9 +1194,9 @@ encontradas em óleos vegetais.
 Descrição das estruturas químicas:
 Benzaldeído	(no	óleo	de	amêndoas):	Anel	aromático	com	o	grupo	C	ligação	dupla	O,	ligação	simples	H.
 Salicilato	de	metila	(no	óleo	de	gaultéria):	Anel	aromático	com	dois	grupos:	Primeiro	grupo:	C	ligação	dupla	O,	
-ligação	simples	O,	ligação	simples	CH3;	Segundo	grupo:	ligação	simples	OH.
+ligação	simples	O,	ligação	simples	CH_3;	Segundo	grupo:	ligação	simples	OH.
 Anetol	(no	óleo	de	anis):	Anel	aromático	com	dois	grupos:	Primeiro	grupo:	O	ligação	simples	CH3; Segundo grupo: 
-C	ligação	dupla	C,	ligação	simples	CH3.
+C	ligação	dupla	C,	ligação	simples	CH_3.
 Vanilina	(no	óleo	de	baunilha):	Anel	aromático	com	três	grupos:	Primeiro	grupo:	C	ligação	dupla	O,	ligação	simples	
 H;	Segundo	grupo:	O	ligação	simples	CH3;	T erceiro	grupo:	ligação	simples	OH.
 Eugenol (no óleo de cravos): Anel aromático com três grupos: Primeiro grupo: CH 2	ligação	simples	CH,	ligação	
@@ -2189,7 +2189,7 @@ desnitrificantes,	a	seta	continua	para	o	ar	e	retorna	ao
 ciclo	para	bactérias	fixadoras	de	N_2, nos nódulos das 
 raízes de leguminosas. Dessas mesmas bactérias, 
 uma	seta	indica	que	elas	farão,	no	solo,	a	amonificação,	
-seguindo a seta para amônia (NH3) e amônio (NH4 de 
+seguindo a seta para amônia (NH_3) e amônio (NH_4 de 
 carga positiva), fechando o ciclo.
 Plantas
 Assimilação
@@ -2270,7 +2270,7 @@ desnitrificantes,	a	seta	continua	para	o	ar	e	retorna	ao
 ciclo	para	bactérias	fixadoras	de	N_2, nos nódulos das 
 raízes de leguminosas. Dessas mesmas bactérias, 
 uma	seta	indica	que	elas	farão,	no	solo,	a	amonificação,	
-seguindo a seta para amônia (NH3) e amônio (NH4 de 
+seguindo a seta para amônia (NH_3) e amônio (NH_4 de 
 carga positiva), fechando o ciclo.
 Plantas
 Assimilação
@@ -2351,7 +2351,7 @@ desnitrificantes,	a	seta	continua	para	o	ar	e	retorna	ao
 ciclo	para	bactérias	fixadoras	de	N_2, nos nódulos das 
 raízes de leguminosas. Dessas mesmas bactérias, 
 uma	seta	indica	que	elas	farão,	no	solo,	a	amonificação,	
-seguindo a seta para amônia (NH3) e amônio (NH4 de 
+seguindo a seta para amônia (NH_3) e amônio (NH_4 de 
 carga positiva), fechando o ciclo.
 Plantas
 Assimilação
@@ -2432,7 +2432,7 @@ desnitrificantes,	a	seta	continua	para	o	ar	e	retorna	ao
 ciclo	para	bactérias	fixadoras	de	N_2, nos nódulos das 
 raízes de leguminosas. Dessas mesmas bactérias, 
 uma	seta	indica	que	elas	farão,	no	solo,	a	amonificação,	
-seguindo a seta para amônia (NH3) e amônio (NH4 de 
+seguindo a seta para amônia (NH_3) e amônio (NH_4 de 
 carga positiva), fechando o ciclo.
 Plantas
 Assimilação
@@ -2513,7 +2513,7 @@ desnitrificantes,	a	seta	continua	para	o	ar	e	retorna	ao
 ciclo	para	bactérias	fixadoras	de	N_2, nos nódulos das 
 raízes de leguminosas. Dessas mesmas bactérias, 
 uma	seta	indica	que	elas	farão,	no	solo,	a	amonificação,	
-seguindo a seta para amônia (NH3) e amônio (NH4 de 
+seguindo a seta para amônia (NH_3) e amônio (NH_4 de 
 carga positiva), fechando o ciclo.
 Plantas
 Assimilação
@@ -3890,9 +3890,9 @@ Não queira perder a sua alma
 11
 2 ",NA,"Em uma aula prática de bioquímica, para medir a atividade catalítica da enzima catalase, foram realizados seis ensaios 
 independentes,	nas	mesmas	condições,	variando-se	apenas	a	temperatura.	A	catalase	decompõe	o	peróxido	de	hidrogênio	
-(H_2O2),	produzindo	água	e	oxigênio.	Os	resultados	dos	ensaios	estão	apresentados	no	quadro.
+(H_2O_2),	produzindo	água	e	oxigênio.	Os	resultados	dos	ensaios	estão	apresentados	no	quadro.
 Descrição do quadro: Dados em três colunas. A primeira apresenta os ensaios de 1 a 6, a segunda, as respectivas 
-temperaturas,	em	grau	Celsius,	e	a	terceira,	os	resultados	dos	ensaios,	em	termos	de	decomposição	de	H2O2, em  
+temperaturas,	em	grau	Celsius,	e	a	terceira,	os	resultados	dos	ensaios,	em	termos	de	decomposição	de	H_2O_2, em  
 10 elevado a menos 12 mol por minuto.
 Ensaio 1: Temperatura 10 e Resultado 8,0.
 Ensaio 2: Temperatura 15 e Resultado 10,5.
@@ -3902,7 +3902,7 @@ Ensaio 5: Temperatura 30 e Resultado 3,6.
 Ensaio 6: Temperatura 35 e Resultado 3,1.
 Ensaio Temperatura (°C)
 Resultado
-Decomposição de H_2O2 
+Decomposição de H_2O_2 
 10 12−⎛
 ⎝
 ⎜
@@ -3950,9 +3950,9 @@ Não queira perder a sua alma
 11
 2 ",NA,"Em uma aula prática de bioquímica, para medir a atividade catalítica da enzima catalase, foram realizados seis ensaios 
 independentes,	nas	mesmas	condições,	variando-se	apenas	a	temperatura.	A	catalase	decompõe	o	peróxido	de	hidrogênio	
-(H_2O2),	produzindo	água	e	oxigênio.	Os	resultados	dos	ensaios	estão	apresentados	no	quadro.
+(H_2O_2),	produzindo	água	e	oxigênio.	Os	resultados	dos	ensaios	estão	apresentados	no	quadro.
 Descrição do quadro: Dados em três colunas. A primeira apresenta os ensaios de 1 a 6, a segunda, as respectivas 
-temperaturas,	em	grau	Celsius,	e	a	terceira,	os	resultados	dos	ensaios,	em	termos	de	decomposição	de	H2O2, em  
+temperaturas,	em	grau	Celsius,	e	a	terceira,	os	resultados	dos	ensaios,	em	termos	de	decomposição	de	H_2O_2, em  
 10 elevado a menos 12 mol por minuto.
 Ensaio 1: Temperatura 10 e Resultado 8,0.
 Ensaio 2: Temperatura 15 e Resultado 10,5.
@@ -3962,7 +3962,7 @@ Ensaio 5: Temperatura 30 e Resultado 3,6.
 Ensaio 6: Temperatura 35 e Resultado 3,1.
 Ensaio Temperatura (°C)
 Resultado
-Decomposição de H_2O2 
+Decomposição de H_2O_2 
 10 12−⎛
 ⎝
 ⎜
@@ -4010,9 +4010,9 @@ Não queira perder a sua alma
 11
 2 ",NA,"Em uma aula prática de bioquímica, para medir a atividade catalítica da enzima catalase, foram realizados seis ensaios 
 independentes,	nas	mesmas	condições,	variando-se	apenas	a	temperatura.	A	catalase	decompõe	o	peróxido	de	hidrogênio	
-(H_2O2),	produzindo	água	e	oxigênio.	Os	resultados	dos	ensaios	estão	apresentados	no	quadro.
+(H_2O_2),	produzindo	água	e	oxigênio.	Os	resultados	dos	ensaios	estão	apresentados	no	quadro.
 Descrição do quadro: Dados em três colunas. A primeira apresenta os ensaios de 1 a 6, a segunda, as respectivas 
-temperaturas,	em	grau	Celsius,	e	a	terceira,	os	resultados	dos	ensaios,	em	termos	de	decomposição	de	H2O2, em  
+temperaturas,	em	grau	Celsius,	e	a	terceira,	os	resultados	dos	ensaios,	em	termos	de	decomposição	de	H_2O_2, em  
 10 elevado a menos 12 mol por minuto.
 Ensaio 1: Temperatura 10 e Resultado 8,0.
 Ensaio 2: Temperatura 15 e Resultado 10,5.
@@ -4022,7 +4022,7 @@ Ensaio 5: Temperatura 30 e Resultado 3,6.
 Ensaio 6: Temperatura 35 e Resultado 3,1.
 Ensaio Temperatura (°C)
 Resultado
-Decomposição de H_2O2 
+Decomposição de H_2O_2 
 10 12−⎛
 ⎝
 ⎜
@@ -4070,9 +4070,9 @@ Não queira perder a sua alma
 11
 2 ",NA,"Em uma aula prática de bioquímica, para medir a atividade catalítica da enzima catalase, foram realizados seis ensaios 
 independentes,	nas	mesmas	condições,	variando-se	apenas	a	temperatura.	A	catalase	decompõe	o	peróxido	de	hidrogênio	
-(H_2O2),	produzindo	água	e	oxigênio.	Os	resultados	dos	ensaios	estão	apresentados	no	quadro.
+(H_2O_2),	produzindo	água	e	oxigênio.	Os	resultados	dos	ensaios	estão	apresentados	no	quadro.
 Descrição do quadro: Dados em três colunas. A primeira apresenta os ensaios de 1 a 6, a segunda, as respectivas 
-temperaturas,	em	grau	Celsius,	e	a	terceira,	os	resultados	dos	ensaios,	em	termos	de	decomposição	de	H2O2, em  
+temperaturas,	em	grau	Celsius,	e	a	terceira,	os	resultados	dos	ensaios,	em	termos	de	decomposição	de	H_2O_2, em  
 10 elevado a menos 12 mol por minuto.
 Ensaio 1: Temperatura 10 e Resultado 8,0.
 Ensaio 2: Temperatura 15 e Resultado 10,5.
@@ -4082,7 +4082,7 @@ Ensaio 5: Temperatura 30 e Resultado 3,6.
 Ensaio 6: Temperatura 35 e Resultado 3,1.
 Ensaio Temperatura (°C)
 Resultado
-Decomposição de H_2O2 
+Decomposição de H_2O_2 
 10 12−⎛
 ⎝
 ⎜
@@ -4130,9 +4130,9 @@ Não queira perder a sua alma
 11
 2 ",NA,"Em uma aula prática de bioquímica, para medir a atividade catalítica da enzima catalase, foram realizados seis ensaios 
 independentes,	nas	mesmas	condições,	variando-se	apenas	a	temperatura.	A	catalase	decompõe	o	peróxido	de	hidrogênio	
-(H_2O2),	produzindo	água	e	oxigênio.	Os	resultados	dos	ensaios	estão	apresentados	no	quadro.
+(H_2O_2),	produzindo	água	e	oxigênio.	Os	resultados	dos	ensaios	estão	apresentados	no	quadro.
 Descrição do quadro: Dados em três colunas. A primeira apresenta os ensaios de 1 a 6, a segunda, as respectivas 
-temperaturas,	em	grau	Celsius,	e	a	terceira,	os	resultados	dos	ensaios,	em	termos	de	decomposição	de	H2O2, em  
+temperaturas,	em	grau	Celsius,	e	a	terceira,	os	resultados	dos	ensaios,	em	termos	de	decomposição	de	H_2O_2, em  
 10 elevado a menos 12 mol por minuto.
 Ensaio 1: Temperatura 10 e Resultado 8,0.
 Ensaio 2: Temperatura 15 e Resultado 10,5.
@@ -4142,7 +4142,7 @@ Ensaio 5: Temperatura 30 e Resultado 3,6.
 Ensaio 6: Temperatura 35 e Resultado 3,1.
 Ensaio Temperatura (°C)
 Resultado
-Decomposição de H_2O2 
+Decomposição de H_2O_2 
 10 12−⎛
 ⎝
 ⎜
@@ -4966,7 +4966,7 @@ Machos expostos à atrazina: 0,3.
 Fêmeas controle: 0,5.
 Machos
 controle
-Concentração do hormônio (ng mL−1)
+Concentração do hormônio (ng mL^−1)
 Machos
 expostos
 à atrazina
@@ -5034,7 +5034,7 @@ Machos expostos à atrazina: 0,3.
 Fêmeas controle: 0,5.
 Machos
 controle
-Concentração do hormônio (ng mL−1)
+Concentração do hormônio (ng mL^−1)
 Machos
 expostos
 à atrazina
@@ -5102,7 +5102,7 @@ Machos expostos à atrazina: 0,3.
 Fêmeas controle: 0,5.
 Machos
 controle
-Concentração do hormônio (ng mL−1)
+Concentração do hormônio (ng mL^−1)
 Machos
 expostos
 à atrazina
@@ -5170,7 +5170,7 @@ Machos expostos à atrazina: 0,3.
 Fêmeas controle: 0,5.
 Machos
 controle
-Concentração do hormônio (ng mL−1)
+Concentração do hormônio (ng mL^−1)
 Machos
 expostos
 à atrazina
@@ -5238,7 +5238,7 @@ Machos expostos à atrazina: 0,3.
 Fêmeas controle: 0,5.
 Machos
 controle
-Concentração do hormônio (ng mL−1)
+Concentração do hormônio (ng mL^−1)
 Machos
 expostos
 à atrazina
@@ -5513,9 +5513,9 @@ espontâneo	 e	 provoca	 a	 deterioração	 de	 metais	 como
 o ferro, que, em presença de oxigênio e água, sofre 
 oxidação,	conforme	ilustra	a	equação	química:
 Descrição da equação química: 4 Fe (sólido) reage 
-com 2 H_2O (líquido) e 3 O2 gasoso formando o produto 
+com 2 H_2O (líquido) e 3 O_2 gasoso formando o produto 
 2 Fe2O3 hidratado (sólido).
-4 Fe (s) + 2 H_2O (l) + 3 O_2 (g)  →  2 Fe_2O3⋅H2O (s)
+4 Fe (s) + 2 H_2O (l) + 3 O_2 (g)  →  2 Fe_2O_3⋅H_2O (s)
 Uma forma de garantir a durabilidade da estrutura 
 metálica e a sua resistência à umidade consiste na 
 deposição	 de	 filmes	 finos	 nanocerâmicos	 à	 base	 de	
@@ -5564,9 +5564,9 @@ espontâneo	 e	 provoca	 a	 deterioração	 de	 metais	 como
 o ferro, que, em presença de oxigênio e água, sofre 
 oxidação,	conforme	ilustra	a	equação	química:
 Descrição da equação química: 4 Fe (sólido) reage 
-com 2 H_2O (líquido) e 3 O2 gasoso formando o produto 
+com 2 H_2O (líquido) e 3 O_2 gasoso formando o produto 
 2 Fe2O3 hidratado (sólido).
-4 Fe (s) + 2 H_2O (l) + 3 O_2 (g)  →  2 Fe_2O3⋅H2O (s)
+4 Fe (s) + 2 H_2O (l) + 3 O_2 (g)  →  2 Fe_2O_3⋅H_2O (s)
 Uma forma de garantir a durabilidade da estrutura 
 metálica e a sua resistência à umidade consiste na 
 deposição	 de	 filmes	 finos	 nanocerâmicos	 à	 base	 de	
@@ -5615,9 +5615,9 @@ espontâneo	 e	 provoca	 a	 deterioração	 de	 metais	 como
 o ferro, que, em presença de oxigênio e água, sofre 
 oxidação,	conforme	ilustra	a	equação	química:
 Descrição da equação química: 4 Fe (sólido) reage 
-com 2 H_2O (líquido) e 3 O2 gasoso formando o produto 
+com 2 H_2O (líquido) e 3 O_2 gasoso formando o produto 
 2 Fe2O3 hidratado (sólido).
-4 Fe (s) + 2 H_2O (l) + 3 O_2 (g)  →  2 Fe_2O3⋅H2O (s)
+4 Fe (s) + 2 H_2O (l) + 3 O_2 (g)  →  2 Fe_2O_3⋅H_2O (s)
 Uma forma de garantir a durabilidade da estrutura 
 metálica e a sua resistência à umidade consiste na 
 deposição	 de	 filmes	 finos	 nanocerâmicos	 à	 base	 de	
@@ -5666,9 +5666,9 @@ espontâneo	 e	 provoca	 a	 deterioração	 de	 metais	 como
 o ferro, que, em presença de oxigênio e água, sofre 
 oxidação,	conforme	ilustra	a	equação	química:
 Descrição da equação química: 4 Fe (sólido) reage 
-com 2 H_2O (líquido) e 3 O2 gasoso formando o produto 
+com 2 H_2O (líquido) e 3 O_2 gasoso formando o produto 
 2 Fe2O3 hidratado (sólido).
-4 Fe (s) + 2 H_2O (l) + 3 O_2 (g)  →  2 Fe_2O3⋅H2O (s)
+4 Fe (s) + 2 H_2O (l) + 3 O_2 (g)  →  2 Fe_2O_3⋅H_2O (s)
 Uma forma de garantir a durabilidade da estrutura 
 metálica e a sua resistência à umidade consiste na 
 deposição	 de	 filmes	 finos	 nanocerâmicos	 à	 base	 de	
@@ -5717,9 +5717,9 @@ espontâneo	 e	 provoca	 a	 deterioração	 de	 metais	 como
 o ferro, que, em presença de oxigênio e água, sofre 
 oxidação,	conforme	ilustra	a	equação	química:
 Descrição da equação química: 4 Fe (sólido) reage 
-com 2 H_2O (líquido) e 3 O2 gasoso formando o produto 
+com 2 H_2O (líquido) e 3 O_2 gasoso formando o produto 
 2 Fe2O3 hidratado (sólido).
-4 Fe (s) + 2 H_2O (l) + 3 O_2 (g)  →  2 Fe_2O3⋅H2O (s)
+4 Fe (s) + 2 H_2O (l) + 3 O_2 (g)  →  2 Fe_2O_3⋅H_2O (s)
 Uma forma de garantir a durabilidade da estrutura 
 metálica e a sua resistência à umidade consiste na 
 deposição	 de	 filmes	 finos	 nanocerâmicos	 à	 base	 de	
@@ -7612,7 +7612,7 @@ NaO
 +  2 NaOH +  2 H_2O
 Ácido tartárico
 (massa molar: 150 g mol
-−^1
+−1
 )
 A	concentração	de	ácido	tartárico	no	vinho	analisado	é	mais	próxima	de:","B","1,8 grama por litro",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2022_1mil_cn","enem_2022_1mil_cn_1",44969,"ENEM 2022 - CN","11
@@ -7662,7 +7662,7 @@ NaO
 +  2 NaOH +  2 H_2O
 Ácido tartárico
 (massa molar: 150 g mol
-−^1
+−1
 )
 A	concentração	de	ácido	tartárico	no	vinho	analisado	é	mais	próxima	de:","B","2,4 gramas por litro",1,NA,NA,NA,NA,"Portuguese","B"
 "enem_2022_1mil_cn","enem_2022_1mil_cn_1",44969,"ENEM 2022 - CN","11
@@ -7712,7 +7712,7 @@ NaO
 +  2 NaOH +  2 H_2O
 Ácido tartárico
 (massa molar: 150 g mol
-−^1
+−1
 )
 A	concentração	de	ácido	tartárico	no	vinho	analisado	é	mais	próxima	de:","B","3,6 gramas por litro",0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2022_1mil_cn","enem_2022_1mil_cn_1",44969,"ENEM 2022 - CN","11
@@ -7762,7 +7762,7 @@ NaO
 +  2 NaOH +  2 H_2O
 Ácido tartárico
 (massa molar: 150 g mol
-−^1
+−1
 )
 A	concentração	de	ácido	tartárico	no	vinho	analisado	é	mais	próxima	de:","B","4,8 gramas por litro",0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2022_1mil_cn","enem_2022_1mil_cn_1",44969,"ENEM 2022 - CN","11
@@ -7812,7 +7812,7 @@ NaO
 +  2 NaOH +  2 H_2O
 Ácido tartárico
 (massa molar: 150 g mol
-−^1
+−1
 )
 A	concentração	de	ácido	tartárico	no	vinho	analisado	é	mais	próxima	de:","B","9,6 gramas por litro",0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2022_1mil_cn","enem_2022_1mil_cn_1",97727,"ENEM 2022 - CN","11
@@ -8269,13 +8269,13 @@ tratamento de várias doenças. Esse composto é excretado
 na urina, cujo pH se situa entre 5 e 7. A penicilamina, cuja 
 fórmula estrutural plana está apresentada, possui três grupos 
 funcionais que podem ser ionizados:
-• carboxila: ligação	simples	COOH, cujo pKa é igual 
+• carboxila: ligação	simples	COOH, cujo pK_a é igual 
 a 1,8;
-• amino: ligação	simples	NH2, que pode ser convertido 
+• amino: ligação	simples	NH_2, que pode ser convertido 
 em amínio (ligação	simples	NH_3 de carga positiva, cujo 
 pKa é igual a 7,9);
-• tiol: ligação	simples	SH, cujo pKa é igual a 10,5.
-Sabe-se	que	pK_a é igual a menos logaritmo de Ka.
+• tiol: ligação	simples	SH, cujo pK_a é igual a 10,5.
+Sabe-se	que	pK_a é igual a menos logaritmo de K_a.
 Descrição da estrutura química da penicilamina: 
 No centro da estrutura representada, há 2 átomos de 
 carbono	com	ligação	simples	entre	si.	Cada	carbono	faz	
@@ -8293,7 +8293,7 @@ Penicilamina
 Qual estrutura derivada da penicilamina é 
 predominantemente encontrada na urina?","C","Descrição da estrutura química: Estrutura 
 derivada da penicilamina com os grupos: S de 
-carga negativa, COO de carga negativa e NH2.
+carga negativa, COO de carga negativa e NH_2.
 C C
 CH3
 CH3
@@ -8337,13 +8337,13 @@ tratamento de várias doenças. Esse composto é excretado
 na urina, cujo pH se situa entre 5 e 7. A penicilamina, cuja 
 fórmula estrutural plana está apresentada, possui três grupos 
 funcionais que podem ser ionizados:
-• carboxila: ligação	simples	COOH, cujo pKa é igual 
+• carboxila: ligação	simples	COOH, cujo pK_a é igual 
 a 1,8;
-• amino: ligação	simples	NH2, que pode ser convertido 
+• amino: ligação	simples	NH_2, que pode ser convertido 
 em amínio (ligação	simples	NH_3 de carga positiva, cujo 
 pKa é igual a 7,9);
-• tiol: ligação	simples	SH, cujo pKa é igual a 10,5.
-Sabe-se	que	pK_a é igual a menos logaritmo de Ka.
+• tiol: ligação	simples	SH, cujo pK_a é igual a 10,5.
+Sabe-se	que	pK_a é igual a menos logaritmo de K_a.
 Descrição da estrutura química da penicilamina: 
 No centro da estrutura representada, há 2 átomos de 
 carbono	com	ligação	simples	entre	si.	Cada	carbono	faz	
@@ -8361,7 +8361,7 @@ Penicilamina
 Qual estrutura derivada da penicilamina é 
 predominantemente encontrada na urina?","C","Descrição da estrutura química: Estrutura 
 derivada da penicilamina com os grupos: S de 
-carga negativa, COOH e NH2.
+carga negativa, COOH e NH_2.
 C C
 CH3
 CH3
@@ -8404,13 +8404,13 @@ tratamento de várias doenças. Esse composto é excretado
 na urina, cujo pH se situa entre 5 e 7. A penicilamina, cuja 
 fórmula estrutural plana está apresentada, possui três grupos 
 funcionais que podem ser ionizados:
-• carboxila: ligação	simples	COOH, cujo pKa é igual 
+• carboxila: ligação	simples	COOH, cujo pK_a é igual 
 a 1,8;
-• amino: ligação	simples	NH2, que pode ser convertido 
+• amino: ligação	simples	NH_2, que pode ser convertido 
 em amínio (ligação	simples	NH_3 de carga positiva, cujo 
 pKa é igual a 7,9);
-• tiol: ligação	simples	SH, cujo pKa é igual a 10,5.
-Sabe-se	que	pK_a é igual a menos logaritmo de Ka.
+• tiol: ligação	simples	SH, cujo pK_a é igual a 10,5.
+Sabe-se	que	pK_a é igual a menos logaritmo de K_a.
 Descrição da estrutura química da penicilamina: 
 No centro da estrutura representada, há 2 átomos de 
 carbono	com	ligação	simples	entre	si.	Cada	carbono	faz	
@@ -8428,7 +8428,7 @@ Penicilamina
 Qual estrutura derivada da penicilamina é 
 predominantemente encontrada na urina?","C","Descrição da estrutura química: Estrutura 
 derivada da penicilamina com os grupos: SH, 
-COO de carga negativa e NH3 de carga positiva.
+COO de carga negativa e NH_3 de carga positiva.
 SH C C
 CH3
 CH3 H
@@ -8471,13 +8471,13 @@ tratamento de várias doenças. Esse composto é excretado
 na urina, cujo pH se situa entre 5 e 7. A penicilamina, cuja 
 fórmula estrutural plana está apresentada, possui três grupos 
 funcionais que podem ser ionizados:
-• carboxila: ligação	simples	COOH, cujo pKa é igual 
+• carboxila: ligação	simples	COOH, cujo pK_a é igual 
 a 1,8;
-• amino: ligação	simples	NH2, que pode ser convertido 
+• amino: ligação	simples	NH_2, que pode ser convertido 
 em amínio (ligação	simples	NH_3 de carga positiva, cujo 
 pKa é igual a 7,9);
-• tiol: ligação	simples	SH, cujo pKa é igual a 10,5.
-Sabe-se	que	pK_a é igual a menos logaritmo de Ka.
+• tiol: ligação	simples	SH, cujo pK_a é igual a 10,5.
+Sabe-se	que	pK_a é igual a menos logaritmo de K_a.
 Descrição da estrutura química da penicilamina: 
 No centro da estrutura representada, há 2 átomos de 
 carbono	com	ligação	simples	entre	si.	Cada	carbono	faz	
@@ -8538,13 +8538,13 @@ tratamento de várias doenças. Esse composto é excretado
 na urina, cujo pH se situa entre 5 e 7. A penicilamina, cuja 
 fórmula estrutural plana está apresentada, possui três grupos 
 funcionais que podem ser ionizados:
-• carboxila: ligação	simples	COOH, cujo pKa é igual 
+• carboxila: ligação	simples	COOH, cujo pK_a é igual 
 a 1,8;
-• amino: ligação	simples	NH2, que pode ser convertido 
+• amino: ligação	simples	NH_2, que pode ser convertido 
 em amínio (ligação	simples	NH_3 de carga positiva, cujo 
 pKa é igual a 7,9);
-• tiol: ligação	simples	SH, cujo pKa é igual a 10,5.
-Sabe-se	que	pK_a é igual a menos logaritmo de Ka.
+• tiol: ligação	simples	SH, cujo pK_a é igual a 10,5.
+Sabe-se	que	pK_a é igual a menos logaritmo de K_a.
 Descrição da estrutura química da penicilamina: 
 No centro da estrutura representada, há 2 átomos de 
 carbono	com	ligação	simples	entre	si.	Cada	carbono	faz	
@@ -11065,8 +11065,8 @@ tanques de estocagem ou de manejo inapropriado de resíduos
 industriais, ele se encontra presente em águas subterrâneas, 
 nas	quais	forma	uma	fase	líquida	densa	não	aquosa	(DNAPL)	
 que se deposita no fundo do aquífero. Essa tecnologia de 
-descontaminação	emprega	o	íon	persulfato	(S2O8 de carga dois 
-menos), que é convertido no radical •SO4 de carga negativa 
+descontaminação	emprega	o	íon	persulfato	(S_2O_8 de carga dois 
+menos), que é convertido no radical •SO_4 de carga negativa 
 por minerais que contêm Fe(3). O esquema representa de 
 forma	simplificada	o	mecanismo	de	ação	química	sobre	o	TCE	
 e	a	formação	dos	produtos	de	degradação.
@@ -11080,7 +11080,7 @@ simples entre o grupo COOH e um carbono ligado a
 dois Cl e um H), que forma o ácido etanodioico (dois 
 grupos COOH ligados entre si). O ácido etanodioico 
 forma o ácido metanoico (COOH ligado ao H), que 
-forma,	como	produtos	finais	de	degradação,	H_2O, CO2 
+forma,	como	produtos	finais	de	degradação,	H_2O, CO_2 
 e Cl de carga negativa.
 A
 A
@@ -11155,8 +11155,8 @@ tanques de estocagem ou de manejo inapropriado de resíduos
 industriais, ele se encontra presente em águas subterrâneas, 
 nas	quais	forma	uma	fase	líquida	densa	não	aquosa	(DNAPL)	
 que se deposita no fundo do aquífero. Essa tecnologia de 
-descontaminação	emprega	o	íon	persulfato	(S2O8 de carga dois 
-menos), que é convertido no radical •SO4 de carga negativa 
+descontaminação	emprega	o	íon	persulfato	(S_2O_8 de carga dois 
+menos), que é convertido no radical •SO_4 de carga negativa 
 por minerais que contêm Fe(3). O esquema representa de 
 forma	simplificada	o	mecanismo	de	ação	química	sobre	o	TCE	
 e	a	formação	dos	produtos	de	degradação.
@@ -11170,7 +11170,7 @@ simples entre o grupo COOH e um carbono ligado a
 dois Cl e um H), que forma o ácido etanodioico (dois 
 grupos COOH ligados entre si). O ácido etanodioico 
 forma o ácido metanoico (COOH ligado ao H), que 
-forma,	como	produtos	finais	de	degradação,	H_2O, CO2 
+forma,	como	produtos	finais	de	degradação,	H_2O, CO_2 
 e Cl de carga negativa.
 A
 A
@@ -11245,8 +11245,8 @@ tanques de estocagem ou de manejo inapropriado de resíduos
 industriais, ele se encontra presente em águas subterrâneas, 
 nas	quais	forma	uma	fase	líquida	densa	não	aquosa	(DNAPL)	
 que se deposita no fundo do aquífero. Essa tecnologia de 
-descontaminação	emprega	o	íon	persulfato	(S2O8 de carga dois 
-menos), que é convertido no radical •SO4 de carga negativa 
+descontaminação	emprega	o	íon	persulfato	(S_2O_8 de carga dois 
+menos), que é convertido no radical •SO_4 de carga negativa 
 por minerais que contêm Fe(3). O esquema representa de 
 forma	simplificada	o	mecanismo	de	ação	química	sobre	o	TCE	
 e	a	formação	dos	produtos	de	degradação.
@@ -11260,7 +11260,7 @@ simples entre o grupo COOH e um carbono ligado a
 dois Cl e um H), que forma o ácido etanodioico (dois 
 grupos COOH ligados entre si). O ácido etanodioico 
 forma o ácido metanoico (COOH ligado ao H), que 
-forma,	como	produtos	finais	de	degradação,	H_2O, CO2 
+forma,	como	produtos	finais	de	degradação,	H_2O, CO_2 
 e Cl de carga negativa.
 A
 A
@@ -11335,8 +11335,8 @@ tanques de estocagem ou de manejo inapropriado de resíduos
 industriais, ele se encontra presente em águas subterrâneas, 
 nas	quais	forma	uma	fase	líquida	densa	não	aquosa	(DNAPL)	
 que se deposita no fundo do aquífero. Essa tecnologia de 
-descontaminação	emprega	o	íon	persulfato	(S2O8 de carga dois 
-menos), que é convertido no radical •SO4 de carga negativa 
+descontaminação	emprega	o	íon	persulfato	(S_2O_8 de carga dois 
+menos), que é convertido no radical •SO_4 de carga negativa 
 por minerais que contêm Fe(3). O esquema representa de 
 forma	simplificada	o	mecanismo	de	ação	química	sobre	o	TCE	
 e	a	formação	dos	produtos	de	degradação.
@@ -11350,7 +11350,7 @@ simples entre o grupo COOH e um carbono ligado a
 dois Cl e um H), que forma o ácido etanodioico (dois 
 grupos COOH ligados entre si). O ácido etanodioico 
 forma o ácido metanoico (COOH ligado ao H), que 
-forma,	como	produtos	finais	de	degradação,	H_2O, CO2 
+forma,	como	produtos	finais	de	degradação,	H_2O, CO_2 
 e Cl de carga negativa.
 A
 A
@@ -11425,8 +11425,8 @@ tanques de estocagem ou de manejo inapropriado de resíduos
 industriais, ele se encontra presente em águas subterrâneas, 
 nas	quais	forma	uma	fase	líquida	densa	não	aquosa	(DNAPL)	
 que se deposita no fundo do aquífero. Essa tecnologia de 
-descontaminação	emprega	o	íon	persulfato	(S2O8 de carga dois 
-menos), que é convertido no radical •SO4 de carga negativa 
+descontaminação	emprega	o	íon	persulfato	(S_2O_8 de carga dois 
+menos), que é convertido no radical •SO_4 de carga negativa 
 por minerais que contêm Fe(3). O esquema representa de 
 forma	simplificada	o	mecanismo	de	ação	química	sobre	o	TCE	
 e	a	formação	dos	produtos	de	degradação.
@@ -11440,7 +11440,7 @@ simples entre o grupo COOH e um carbono ligado a
 dois Cl e um H), que forma o ácido etanodioico (dois 
 grupos COOH ligados entre si). O ácido etanodioico 
 forma o ácido metanoico (COOH ligado ao H), que 
-forma,	como	produtos	finais	de	degradação,	H_2O, CO2 
+forma,	como	produtos	finais	de	degradação,	H_2O, CO_2 
 e Cl de carga negativa.
 A
 A

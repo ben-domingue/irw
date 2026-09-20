@@ -1540,7 +1540,7 @@ o confronto aquele cuja força for maior. O vencedor do
 desafio aumenta seu nível em uma unidade. Caso haja 
 empate no confronto, ambos os jogadores aumentam 
 seus níveis em uma unidade.
-Durante um jogo, o jogador J1, de nível 4 e experiência 5, 
+Durante um jogo, o jogador J_1, de nível 4 e experiência 5, 
 irá atacar o jogador J_2, de nível 2 e experiência 6.
 O jogador J_1 venceu esse confronto porque a diferença 
 entre sua força de ataque e a força de defesa de seu 
@@ -1594,7 +1594,7 @@ o confronto aquele cuja força for maior. O vencedor do
 desafio aumenta seu nível em uma unidade. Caso haja 
 empate no confronto, ambos os jogadores aumentam 
 seus níveis em uma unidade.
-Durante um jogo, o jogador J1, de nível 4 e experiência 5, 
+Durante um jogo, o jogador J_1, de nível 4 e experiência 5, 
 irá atacar o jogador J_2, de nível 2 e experiência 6.
 O jogador J_1 venceu esse confronto porque a diferença 
 entre sua força de ataque e a força de defesa de seu 
@@ -1648,7 +1648,7 @@ o confronto aquele cuja força for maior. O vencedor do
 desafio aumenta seu nível em uma unidade. Caso haja 
 empate no confronto, ambos os jogadores aumentam 
 seus níveis em uma unidade.
-Durante um jogo, o jogador J1, de nível 4 e experiência 5, 
+Durante um jogo, o jogador J_1, de nível 4 e experiência 5, 
 irá atacar o jogador J_2, de nível 2 e experiência 6.
 O jogador J_1 venceu esse confronto porque a diferença 
 entre sua força de ataque e a força de defesa de seu 
@@ -1702,7 +1702,7 @@ o confronto aquele cuja força for maior. O vencedor do
 desafio aumenta seu nível em uma unidade. Caso haja 
 empate no confronto, ambos os jogadores aumentam 
 seus níveis em uma unidade.
-Durante um jogo, o jogador J1, de nível 4 e experiência 5, 
+Durante um jogo, o jogador J_1, de nível 4 e experiência 5, 
 irá atacar o jogador J_2, de nível 2 e experiência 6.
 O jogador J_1 venceu esse confronto porque a diferença 
 entre sua força de ataque e a força de defesa de seu 
@@ -1756,7 +1756,7 @@ o confronto aquele cuja força for maior. O vencedor do
 desafio aumenta seu nível em uma unidade. Caso haja 
 empate no confronto, ambos os jogadores aumentam 
 seus níveis em uma unidade.
-Durante um jogo, o jogador J1, de nível 4 e experiência 5, 
+Durante um jogo, o jogador J_1, de nível 4 e experiência 5, 
 irá atacar o jogador J_2, de nível 2 e experiência 6.
 O jogador J_1 venceu esse confronto porque a diferença 
 entre sua força de ataque e a força de defesa de seu 
@@ -10316,7 +10316,7 @@ que pH é igual a menos log de x na base 10, em que x
 é a concentração de íon hidrogênio (H^+).
 Para produzir a Hydrangea cor-de-rosa de maior 
 valor comercial, deve-se preparar o solo de modo que  
-x assuma","E","qualquer valor acima de 10-8.",0,NA,NA,NA,NA,"Portuguese","A"
+x assuma","E","qualquer valor acima de 10^-8.",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2019_1mil_mt","enem_2019_1mil_mt_1",9779,"ENEM 2019 - MT","ATENÇÃO: transcreva no espaço apropriado do seu CARTÃO-RESPOSTA,
 com sua caligrafia usual, considerando as letras maiúsculas e minúsculas, a seguinte frase:
 Temos todo o tempo do mundo.
@@ -10357,7 +10357,7 @@ que pH é igual a menos log de x na base 10, em que x
 é a concentração de íon hidrogênio (H^+).
 Para produzir a Hydrangea cor-de-rosa de maior 
 valor comercial, deve-se preparar o solo de modo que  
-x assuma","E","qualquer valor positivo inferior a 10-^7.",0,NA,NA,NA,NA,"Portuguese","B"
+x assuma","E","qualquer valor positivo inferior a 10^-7.",0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2019_1mil_mt","enem_2019_1mil_mt_1",9779,"ENEM 2019 - MT","ATENÇÃO: transcreva no espaço apropriado do seu CARTÃO-RESPOSTA,
 com sua caligrafia usual, considerando as letras maiúsculas e minúsculas, a seguinte frase:
 Temos todo o tempo do mundo.
@@ -10480,4 +10480,4 @@ que pH é igual a menos log de x na base 10, em que x
 é a concentração de íon hidrogênio (H^+).
 Para produzir a Hydrangea cor-de-rosa de maior 
 valor comercial, deve-se preparar o solo de modo que  
-x assuma","E","valores maiores que 10-^8 e menores que 10-7.",1,NA,NA,NA,NA,"Portuguese","E"
+x assuma","E","valores maiores que 10-^8 e menores que 10^-7.",1,NA,NA,NA,NA,"Portuguese","E"

@@ -80,7 +80,7 @@ e reutilizado. Uma das opções possíveis envolve a
 produção de matérias-primas, como o etilenoglicol 
 (1,2-etanodiol), a partir de objetos compostos de PET 
 pós-consumo.
-HO C C O CH2 CH2 O H
+HO C C O CH_2 CH_2 O H
 n
 O O
 Disponível em: www.abipet.org.br. Acesso em: 27 fev. 2012 (adaptado).
@@ -167,7 +167,7 @@ e reutilizado. Uma das opções possíveis envolve a
 produção de matérias-primas, como o etilenoglicol 
 (1,2-etanodiol), a partir de objetos compostos de PET 
 pós-consumo.
-HO C C O CH2 CH2 O H
+HO C C O CH_2 CH_2 O H
 n
 O O
 Disponível em: www.abipet.org.br. Acesso em: 27 fev. 2012 (adaptado).
@@ -254,7 +254,7 @@ e reutilizado. Uma das opções possíveis envolve a
 produção de matérias-primas, como o etilenoglicol 
 (1,2-etanodiol), a partir de objetos compostos de PET 
 pós-consumo.
-HO C C O CH2 CH2 O H
+HO C C O CH_2 CH_2 O H
 n
 O O
 Disponível em: www.abipet.org.br. Acesso em: 27 fev. 2012 (adaptado).
@@ -341,7 +341,7 @@ e reutilizado. Uma das opções possíveis envolve a
 produção de matérias-primas, como o etilenoglicol 
 (1,2-etanodiol), a partir de objetos compostos de PET 
 pós-consumo.
-HO C C O CH2 CH2 O H
+HO C C O CH_2 CH_2 O H
 n
 O O
 Disponível em: www.abipet.org.br. Acesso em: 27 fev. 2012 (adaptado).
@@ -428,7 +428,7 @@ e reutilizado. Uma das opções possíveis envolve a
 produção de matérias-primas, como o etilenoglicol 
 (1,2-etanodiol), a partir de objetos compostos de PET 
 pós-consumo.
-HO C C O CH2 CH2 O H
+HO C C O CH_2 CH_2 O H
 n
 O O
 Disponível em: www.abipet.org.br. Acesso em: 27 fev. 2012 (adaptado).
@@ -1800,7 +1800,7 @@ prático. O seu funcionamento é baseado na correspondência
 entre valores de temperatura e de diferença de potencial 
 elétrico. Por exemplo, podemos usar o circuito elétrico 
 apresentado, no qual o elemento sensor de temperatura 
-ocupa um dos braços do circuito (Rs) e a dependência da 
+ocupa um dos braços do circuito (R_s) e a dependência da 
 resistência com a temperatura é conhecida.
 +
 10 V
@@ -1886,7 +1886,7 @@ prático. O seu funcionamento é baseado na correspondência
 entre valores de temperatura e de diferença de potencial 
 elétrico. Por exemplo, podemos usar o circuito elétrico 
 apresentado, no qual o elemento sensor de temperatura 
-ocupa um dos braços do circuito (Rs) e a dependência da 
+ocupa um dos braços do circuito (R_s) e a dependência da 
 resistência com a temperatura é conhecida.
 +
 10 V
@@ -1972,7 +1972,7 @@ prático. O seu funcionamento é baseado na correspondência
 entre valores de temperatura e de diferença de potencial 
 elétrico. Por exemplo, podemos usar o circuito elétrico 
 apresentado, no qual o elemento sensor de temperatura 
-ocupa um dos braços do circuito (Rs) e a dependência da 
+ocupa um dos braços do circuito (R_s) e a dependência da 
 resistência com a temperatura é conhecida.
 +
 10 V
@@ -2058,7 +2058,7 @@ prático. O seu funcionamento é baseado na correspondência
 entre valores de temperatura e de diferença de potencial 
 elétrico. Por exemplo, podemos usar o circuito elétrico 
 apresentado, no qual o elemento sensor de temperatura 
-ocupa um dos braços do circuito (Rs) e a dependência da 
+ocupa um dos braços do circuito (R_s) e a dependência da 
 resistência com a temperatura é conhecida.
 +
 10 V
@@ -2144,7 +2144,7 @@ prático. O seu funcionamento é baseado na correspondência
 entre valores de temperatura e de diferença de potencial 
 elétrico. Por exemplo, podemos usar o circuito elétrico 
 apresentado, no qual o elemento sensor de temperatura 
-ocupa um dos braços do circuito (Rs) e a dependência da 
+ocupa um dos braços do circuito (R_s) e a dependência da 
 resistência com a temperatura é conhecida.
 +
 10 V
@@ -5697,7 +5697,7 @@ uma doença que atinge os ossos. Ela se caracteriza pela
 diminuição substancial de massa óssea, tornando os 
 ossos frágeis e mais suscetíveis a fraturas.
 Disponível em: www.anvisa.gov.br. Acesso em: 1 ago. 2012 (adaptado).
-Considerando-se o valor de 6 × 1023 mol^–1 para a constante 
+Considerando-se o valor de 6 × 10^23 mol^–1 para a constante 
 de Avogadro e a massa molar do cálcio igual a 40 g/mol, 
 qual a quantidade mínima diária de átomos de cálcio a ser 
 ingerida para que uma pessoa supra suas necessidades?","B","7,5 × 1021",0,NA,NA,NA,NA,"Portuguese","A"
@@ -5780,7 +5780,7 @@ uma doença que atinge os ossos. Ela se caracteriza pela
 diminuição substancial de massa óssea, tornando os 
 ossos frágeis e mais suscetíveis a fraturas.
 Disponível em: www.anvisa.gov.br. Acesso em: 1 ago. 2012 (adaptado).
-Considerando-se o valor de 6 × 1023 mol^–1 para a constante 
+Considerando-se o valor de 6 × 10^23 mol^–1 para a constante 
 de Avogadro e a massa molar do cálcio igual a 40 g/mol, 
 qual a quantidade mínima diária de átomos de cálcio a ser 
 ingerida para que uma pessoa supra suas necessidades?","B","1,5 × 1022",1,NA,NA,NA,NA,"Portuguese","B"
@@ -5863,7 +5863,7 @@ uma doença que atinge os ossos. Ela se caracteriza pela
 diminuição substancial de massa óssea, tornando os 
 ossos frágeis e mais suscetíveis a fraturas.
 Disponível em: www.anvisa.gov.br. Acesso em: 1 ago. 2012 (adaptado).
-Considerando-se o valor de 6 × 1023 mol^–1 para a constante 
+Considerando-se o valor de 6 × 10^23 mol^–1 para a constante 
 de Avogadro e a massa molar do cálcio igual a 40 g/mol, 
 qual a quantidade mínima diária de átomos de cálcio a ser 
 ingerida para que uma pessoa supra suas necessidades?","B","7,5 × 1023",0,NA,NA,NA,NA,"Portuguese","C"
@@ -5946,7 +5946,7 @@ uma doença que atinge os ossos. Ela se caracteriza pela
 diminuição substancial de massa óssea, tornando os 
 ossos frágeis e mais suscetíveis a fraturas.
 Disponível em: www.anvisa.gov.br. Acesso em: 1 ago. 2012 (adaptado).
-Considerando-se o valor de 6 × 1023 mol^–1 para a constante 
+Considerando-se o valor de 6 × 10^23 mol^–1 para a constante 
 de Avogadro e a massa molar do cálcio igual a 40 g/mol, 
 qual a quantidade mínima diária de átomos de cálcio a ser 
 ingerida para que uma pessoa supra suas necessidades?","B","1,5 × 1025",0,NA,NA,NA,NA,"Portuguese","D"
@@ -6029,7 +6029,7 @@ uma doença que atinge os ossos. Ela se caracteriza pela
 diminuição substancial de massa óssea, tornando os 
 ossos frágeis e mais suscetíveis a fraturas.
 Disponível em: www.anvisa.gov.br. Acesso em: 1 ago. 2012 (adaptado).
-Considerando-se o valor de 6 × 1023 mol^–1 para a constante 
+Considerando-se o valor de 6 × 10^23 mol^–1 para a constante 
 de Avogadro e a massa molar do cálcio igual a 40 g/mol, 
 qual a quantidade mínima diária de átomos de cálcio a ser 
 ingerida para que uma pessoa supra suas necessidades?","B","4,8 × 1025",0,NA,NA,NA,NA,"Portuguese","E"
@@ -7100,8 +7100,8 @@ Esse método consiste na dissolução do gás cloro
 numa solução sob pressão e sua aplicação na água a 
 ser desinfectada. As equações das reações químicas 
 envolvidas são:
-Cl_2 (g) + 2 H_2O (l)  HClO (aq) + H_3O^+ (aq) + Cl− (aq)
-HClO (aq) + H_2O (l)  H3O+ (aq) + ClO^− (aq)        pKa = − log K_a = 7,53
+Cl_2 (g) + 2 H_2O (l)  HClO (aq) + H_3O^+ (aq) + Cl^− (aq)
+HClO (aq) + H_2O (l)  H3O+ (aq) + ClO^− (aq)        pK_a = − log K_a = 7,53
 A ação desinfetante é controlada pelo ácido 
 hipocloroso, que possui um potencial de desinfecção 
 cerca de 80 vezes superior ao ânion hipoclorito. O pH do 
@@ -7186,8 +7186,8 @@ Esse método consiste na dissolução do gás cloro
 numa solução sob pressão e sua aplicação na água a 
 ser desinfectada. As equações das reações químicas 
 envolvidas são:
-Cl_2 (g) + 2 H_2O (l)  HClO (aq) + H_3O^+ (aq) + Cl− (aq)
-HClO (aq) + H_2O (l)  H3O+ (aq) + ClO^− (aq)        pKa = − log K_a = 7,53
+Cl_2 (g) + 2 H_2O (l)  HClO (aq) + H_3O^+ (aq) + Cl^− (aq)
+HClO (aq) + H_2O (l)  H3O+ (aq) + ClO^− (aq)        pK_a = − log K_a = 7,53
 A ação desinfetante é controlada pelo ácido 
 hipocloroso, que possui um potencial de desinfecção 
 cerca de 80 vezes superior ao ânion hipoclorito. O pH do 
@@ -7272,8 +7272,8 @@ Esse método consiste na dissolução do gás cloro
 numa solução sob pressão e sua aplicação na água a 
 ser desinfectada. As equações das reações químicas 
 envolvidas são:
-Cl_2 (g) + 2 H_2O (l)  HClO (aq) + H_3O^+ (aq) + Cl− (aq)
-HClO (aq) + H_2O (l)  H3O+ (aq) + ClO^− (aq)        pKa = − log K_a = 7,53
+Cl_2 (g) + 2 H_2O (l)  HClO (aq) + H_3O^+ (aq) + Cl^− (aq)
+HClO (aq) + H_2O (l)  H3O+ (aq) + ClO^− (aq)        pK_a = − log K_a = 7,53
 A ação desinfetante é controlada pelo ácido 
 hipocloroso, que possui um potencial de desinfecção 
 cerca de 80 vezes superior ao ânion hipoclorito. O pH do 
@@ -7358,8 +7358,8 @@ Esse método consiste na dissolução do gás cloro
 numa solução sob pressão e sua aplicação na água a 
 ser desinfectada. As equações das reações químicas 
 envolvidas são:
-Cl_2 (g) + 2 H_2O (l)  HClO (aq) + H_3O^+ (aq) + Cl− (aq)
-HClO (aq) + H_2O (l)  H3O+ (aq) + ClO^− (aq)        pKa = − log K_a = 7,53
+Cl_2 (g) + 2 H_2O (l)  HClO (aq) + H_3O^+ (aq) + Cl^− (aq)
+HClO (aq) + H_2O (l)  H3O+ (aq) + ClO^− (aq)        pK_a = − log K_a = 7,53
 A ação desinfetante é controlada pelo ácido 
 hipocloroso, que possui um potencial de desinfecção 
 cerca de 80 vezes superior ao ânion hipoclorito. O pH do 
@@ -7444,8 +7444,8 @@ Esse método consiste na dissolução do gás cloro
 numa solução sob pressão e sua aplicação na água a 
 ser desinfectada. As equações das reações químicas 
 envolvidas são:
-Cl_2 (g) + 2 H_2O (l)  HClO (aq) + H_3O^+ (aq) + Cl− (aq)
-HClO (aq) + H_2O (l)  H3O+ (aq) + ClO^− (aq)        pKa = − log K_a = 7,53
+Cl_2 (g) + 2 H_2O (l)  HClO (aq) + H_3O^+ (aq) + Cl^− (aq)
+HClO (aq) + H_2O (l)  H3O+ (aq) + ClO^− (aq)        pK_a = − log K_a = 7,53
 A ação desinfetante é controlada pelo ácido 
 hipocloroso, que possui um potencial de desinfecção 
 cerca de 80 vezes superior ao ânion hipoclorito. O pH do 
@@ -9177,7 +9177,7 @@ sido bastante pesquisado pelos cientistas e representa
 uma grande preocupação entre os impactos da mineração 
 no ambiente. Em contato com oxigênio, a 25 °C, a pirita 
 sofre reação, de acordo com a equação química:
-4 FeS_2 (s) + 15 O_2 (g) + 2 H2O (l) → 2 Fe2(SO_4)3 (aq) + 2 H_2SO4 (aq)
+4 FeS_2 (s) + 15 O_2 (g) + 2 H_2O (l) → 2 Fe_2(SO_4)_3 (aq) + 2 H_2SO_4 (aq)
 FIGUEIREDO, B. R. Minérios e ambiente. Campinas: Unicamp, 2000.
 Para corrigir os problemas ambientais causados por 
 essa drenagem, a substância mais recomendada a ser 
@@ -9261,7 +9261,7 @@ sido bastante pesquisado pelos cientistas e representa
 uma grande preocupação entre os impactos da mineração 
 no ambiente. Em contato com oxigênio, a 25 °C, a pirita 
 sofre reação, de acordo com a equação química:
-4 FeS_2 (s) + 15 O_2 (g) + 2 H2O (l) → 2 Fe2(SO_4)3 (aq) + 2 H_2SO4 (aq)
+4 FeS_2 (s) + 15 O_2 (g) + 2 H_2O (l) → 2 Fe_2(SO_4)_3 (aq) + 2 H_2SO_4 (aq)
 FIGUEIREDO, B. R. Minérios e ambiente. Campinas: Unicamp, 2000.
 Para corrigir os problemas ambientais causados por 
 essa drenagem, a substância mais recomendada a ser 
@@ -9345,7 +9345,7 @@ sido bastante pesquisado pelos cientistas e representa
 uma grande preocupação entre os impactos da mineração 
 no ambiente. Em contato com oxigênio, a 25 °C, a pirita 
 sofre reação, de acordo com a equação química:
-4 FeS_2 (s) + 15 O_2 (g) + 2 H2O (l) → 2 Fe2(SO_4)3 (aq) + 2 H_2SO4 (aq)
+4 FeS_2 (s) + 15 O_2 (g) + 2 H_2O (l) → 2 Fe_2(SO_4)_3 (aq) + 2 H_2SO_4 (aq)
 FIGUEIREDO, B. R. Minérios e ambiente. Campinas: Unicamp, 2000.
 Para corrigir os problemas ambientais causados por 
 essa drenagem, a substância mais recomendada a ser 
@@ -9429,7 +9429,7 @@ sido bastante pesquisado pelos cientistas e representa
 uma grande preocupação entre os impactos da mineração 
 no ambiente. Em contato com oxigênio, a 25 °C, a pirita 
 sofre reação, de acordo com a equação química:
-4 FeS_2 (s) + 15 O_2 (g) + 2 H2O (l) → 2 Fe2(SO_4)3 (aq) + 2 H_2SO4 (aq)
+4 FeS_2 (s) + 15 O_2 (g) + 2 H_2O (l) → 2 Fe_2(SO_4)_3 (aq) + 2 H_2SO_4 (aq)
 FIGUEIREDO, B. R. Minérios e ambiente. Campinas: Unicamp, 2000.
 Para corrigir os problemas ambientais causados por 
 essa drenagem, a substância mais recomendada a ser 
@@ -9513,7 +9513,7 @@ sido bastante pesquisado pelos cientistas e representa
 uma grande preocupação entre os impactos da mineração 
 no ambiente. Em contato com oxigênio, a 25 °C, a pirita 
 sofre reação, de acordo com a equação química:
-4 FeS_2 (s) + 15 O_2 (g) + 2 H2O (l) → 2 Fe2(SO_4)3 (aq) + 2 H_2SO4 (aq)
+4 FeS_2 (s) + 15 O_2 (g) + 2 H_2O (l) → 2 Fe_2(SO_4)_3 (aq) + 2 H_2SO_4 (aq)
 FIGUEIREDO, B. R. Minérios e ambiente. Campinas: Unicamp, 2000.
 Para corrigir os problemas ambientais causados por 
 essa drenagem, a substância mais recomendada a ser 
@@ -14338,7 +14338,7 @@ essencial possui aproximadamente 80%, em massa, da
 substância. Uma de suas aplicações é na fabricação de 
 produtos que atraem abelhas, especialmente do gênero 
 Apis, pois seu cheiro é semelhante a um dos feromônios 
-liberados por elas. Sua fórmula molecular é C10H_16O, com 
+liberados por elas. Sua fórmula molecular é C_10H_16O, com 
 uma cadeia alifática de oito carbonos, duas insaturações, 
 nos carbonos 2 e 6; e dois grupos substituintes metila, nos 
 carbonos 3 e 7. O citral possui dois isômeros geométricos, 
@@ -14423,7 +14423,7 @@ essencial possui aproximadamente 80%, em massa, da
 substância. Uma de suas aplicações é na fabricação de 
 produtos que atraem abelhas, especialmente do gênero 
 Apis, pois seu cheiro é semelhante a um dos feromônios 
-liberados por elas. Sua fórmula molecular é C10H_16O, com 
+liberados por elas. Sua fórmula molecular é C_10H_16O, com 
 uma cadeia alifática de oito carbonos, duas insaturações, 
 nos carbonos 2 e 6; e dois grupos substituintes metila, nos 
 carbonos 3 e 7. O citral possui dois isômeros geométricos, 
@@ -14508,7 +14508,7 @@ essencial possui aproximadamente 80%, em massa, da
 substância. Uma de suas aplicações é na fabricação de 
 produtos que atraem abelhas, especialmente do gênero 
 Apis, pois seu cheiro é semelhante a um dos feromônios 
-liberados por elas. Sua fórmula molecular é C10H_16O, com 
+liberados por elas. Sua fórmula molecular é C_10H_16O, com 
 uma cadeia alifática de oito carbonos, duas insaturações, 
 nos carbonos 2 e 6; e dois grupos substituintes metila, nos 
 carbonos 3 e 7. O citral possui dois isômeros geométricos, 
@@ -14593,7 +14593,7 @@ essencial possui aproximadamente 80%, em massa, da
 substância. Uma de suas aplicações é na fabricação de 
 produtos que atraem abelhas, especialmente do gênero 
 Apis, pois seu cheiro é semelhante a um dos feromônios 
-liberados por elas. Sua fórmula molecular é C10H_16O, com 
+liberados por elas. Sua fórmula molecular é C_10H_16O, com 
 uma cadeia alifática de oito carbonos, duas insaturações, 
 nos carbonos 2 e 6; e dois grupos substituintes metila, nos 
 carbonos 3 e 7. O citral possui dois isômeros geométricos, 
@@ -14678,7 +14678,7 @@ essencial possui aproximadamente 80%, em massa, da
 substância. Uma de suas aplicações é na fabricação de 
 produtos que atraem abelhas, especialmente do gênero 
 Apis, pois seu cheiro é semelhante a um dos feromônios 
-liberados por elas. Sua fórmula molecular é C10H_16O, com 
+liberados por elas. Sua fórmula molecular é C_10H_16O, com 
 uma cadeia alifática de oito carbonos, duas insaturações, 
 nos carbonos 2 e 6; e dois grupos substituintes metila, nos 
 carbonos 3 e 7. O citral possui dois isômeros geométricos, 
@@ -14852,7 +14852,7 @@ de árvores nessas florestas afeta temporariamente a
 concentração de O 2 e de CO 2 próximo à superfície do 
 solo onde elas caíram.
 A concentração de O 2 próximo ao solo, no local da 
-queda, será","A","maior, pois haverá economia de O2 pela ausência das 
+queda, será","A","maior, pois haverá economia de O_2 pela ausência das 
 árvores mortas.",0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2013_1mil_cn","enem_2013_1mil_cn_1",43164,"ENEM 2013 - CN","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 EXAME NACIONAL DO ENSINO MÉDIO

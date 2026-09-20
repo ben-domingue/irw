@@ -25,7 +25,9 @@ DEPS = [
                                     "43_normalize_glyphs.py",
                                     "46_strip_option_letter.py",
                                     "48_mark_scripts.py",
-                                    "49_option_conventions.py"]),
+                                    "49_option_conventions.py",
+                                    "53_stacked_fractions.py",
+                                    "54_relocate_descriptions.py"]),
 ]
 
 REPO = os.path.expanduser("~/irw/itemtext/itemtables")

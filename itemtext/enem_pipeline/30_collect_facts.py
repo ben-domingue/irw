@@ -33,14 +33,32 @@ FIGURE_STEM = re.compile(
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 T = "/scratch/users/mazzafe/itemtext_years"
-DIRS = {"2018": "2018/out_v8", "2021": "2021/out_v8",
-        "2024": "2024/items", "2025": "2025/items_sp"}
+# WHERE EACH YEAR'S TABLES COME FROM. This is the assembler's copy source,
+# and getting it wrong is how a fix gets reverted for the third time.
+#
+# 42_rebuild.py writes out_rb/ for every year in its RECIPE, and
+# 41_staleness.py's committed_matches_pipeline() compares the shipped tables
+# against exactly that directory. So out_rb IS the canonical build, and the
+# assembler has to copy from it -- otherwise `31_assemble_batch.py` silently
+# rewinds the repo to whatever those older directories happened to hold.
+# It pointed at 2018/out_v8, 2021/out_v8 and the bare year roots, all of
+# which predate the stacked-fraction pass, the description relocation and the
+# script-marker fixes. Nothing would have reported it: the tables would still
+# have passed every content gate, just with the corrections gone.
+#
+# 2024 and 2025 are NOT in 42_rebuild.py's RECIPE (they are built from the
+# DOSVOX text edition, not from booklet PDFs), so they keep their own dirs.
+DIRS = {"2024": "2024/items", "2025": "2025/items_sp"}
+REBUILT = {"2013", "2015", "2016", "2017", "2018", "2019",
+           "2020", "2021", "2022"}
 YEARS = ["2013", "2015", "2016", "2017", "2018", "2019",
          "2020", "2021", "2022", "2024", "2025"]
 AREAS = ["ch", "cn", "lc", "mt"]
 
 
 def year_dir(y):
+    if y in REBUILT:
+        return os.path.join(T, y, "out_rb")
     return os.path.join(T, DIRS.get(y, y))
 
 

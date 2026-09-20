@@ -470,6 +470,116 @@ reading this file:
     eleven, and it is the same fact that explains why only those years have
     items whose stem is too short to answer.
 
+52. A GREEN GATE IS NOT A CORRECT ITEM, and the clearest proof is the stacked
+    fraction. `AC = 7/5 BD` extracts as "AC = 7 BD5". Every character is
+    genuine, none is missing, item_set_match stays TRUE, resp_set_match stays
+    TRUE, the control-character count stays zero -- and the arithmetic is
+    gone. The 100-item model check found it because a model TRIED TO ANSWER
+    the item and could not. That is a different instrument from a gate, and
+    it is the only one that caught this class. Run it.
+
+53. A stacked numerator is printed at FULL BODY SIZE on a raised baseline, so
+    the size test in 48_mark_scripts.py cannot see it by construction. Chasing
+    it with a better size threshold is wasted effort; the only reliable signal
+    is the fraction bar, which is a DRAWING, not text. When a text-layer
+    heuristic keeps missing something, check whether the evidence is even in
+    the text layer.
+
+54. THE STORED STEM KEEPS THE LINE BREAK THE FRACTION WAS PRINTED ACROSS.
+    The page text normalises to "54 100"; the CSV holds "54\n100". A pattern
+    built against the normalised page text matches nothing in the CSV, and
+    silently: the rewrite loop runs, reports five rows rewritten, and changes
+    no bytes. Two patterns, one per representation, and count with the one
+    that matches the thing you are editing.
+
+55. AN ITEM IS FIVE ROWS. Rewriting the first row whose item matches leaves
+    four rows carrying the old stem. `break` after the first hit is the bug,
+    and the diff looks plausible because one row really did change.
+
+56. NOT EVERY THIN RULE IS A FRACTION BAR. 2013 MT 43849's "razao l/BD"
+    carries two, 3pt apart: the fraction bar at y=347.14 spanning x
+    202.10-220.08, and the SEGMENT OVERLINE on BD at y=349.99 spanning
+    203.50-219.09 -- the width of the glyphs. Both sit between the same
+    numerator and denominator words, so a bar count says two fractions where
+    the text has one and the count test refuses a correct fix. It is right
+    to: overline and fraction bar are not separable by geometry at that
+    tolerance. Supply the answer by hand, with the coordinates written down;
+    do not loosen the rule to swallow the case. (Deduping drawings by rounded
+    position is still worth doing -- rules DO get stroked twice -- it just
+    is not what was happening here.)
+
+57. A FIGURE DESCRIPTION AT THE PAGE FOOT MAY BELONG TO A DIFFERENT ITEM.
+    INEP's accessibility editions collect some descriptions after the last
+    item's options; they describe an item earlier on the page or on the next
+    one. The parser attaches them to the item they physically follow. 2018 CN
+    59858 -- energy from oxidising glucose -- shipped with a description of an
+    electrical circuit. Look for the owner before stripping: all three found
+    had one, already shipped and carrying no description of its own, so the
+    right fix was a move, not a deletion.
+
+58. `pkill -f <script>` matched the shell that ran it and killed the whole
+    command, losing the edit that was queued behind it. Get the pid and kill
+    the pid.
+
+59. ONE OVERSIZED GLYPH MIS-SIZES A WHOLE LINE. `body = max(span size)` on a
+    line containing a 12pt reaction arrow reports 12 for a 9.75pt line, so the
+    script test (`size >= body*0.85` -> `>= 10.2`) classifies the ORDINARY
+    TEXT as script. 2016 CN shipped "H_2^O", "CH_3^OH", and -- where a 12pt
+    kra stood in for the equilibrium arrow -- "C^6H5O−", with even the digit
+    flipped to a superscript. Take the body size as the CHARACTER-WEIGHTED
+    MODE of the line, so one glyph cannot outvote the text it sits in.
+
+60. MEASURE THE OFFSET FROM THE BODY BASELINE, NOT FROM WHATEVER SITS LOWEST.
+    `base = max(bbox[3])` over all spans is normally the SUBSCRIPTS' bottom
+    edge, so every offset was taken against a reference already pushed down by
+    the thing being measured. Restrict the baseline to spans at body size.
+
+61. A TRUNCATED CONTEXT IS NOT A BOUNDARY CLAIM. The start-boundary guard
+    exists because a one-character left context is not an anchor (trap 50,
+    "T_ANTOS"). But CTX=24 truncation puts "S2 (s) + 15 O2 (g) + 2 H" in front
+    of the subscript of H2O, and its first character lands inside "FeS" -- so
+    the guard rejected a valid, 24-character-anchored span. Apply the guard
+    only when the context was NOT truncated.
+
+62. CONTINUATION IS NOT PROXIMITY, AND ABUTMENT IS NOT OVERLAP. Collapsing any
+    same-kind mark "within 6 characters" ate the second subscript of
+    "(SO_4)_3" and "H_2SO_4". Replacing that with exact abutment fixed those
+    and broke Ce4+, which arrives as a TWO-character span "4+" plus a
+    one-character span "+" -- overlapping, not abutting -- and shipped
+    "Ce^4^+". The test that works is an END CURSOR: a mark is redundant when
+    it starts at or before the end of the run already marked, and the cursor
+    advances even when nothing is emitted (or a three-span run keeps its
+    third span). Both of those were bugs I introduced while fixing the first
+    one, and neither was caught by the regression suite -- one by reading the
+    diff, one by the suite. Unit-test the five shapes; do not reason about it.
+
+63. THE INTERACTION BETWEEN TWO POST-PASSES IS ITSELF A DEFECT SURFACE.
+    53_stacked_fractions.py locates a row by an exact context substring taken
+    from the page. 48_mark_scripts.py runs before it and inserts characters
+    into that same text. Any marker landing inside a context window silently
+    stops the fraction pass from finding its row -- no error, no count, just a
+    fraction that stays flattened. Re-run the FULL gate set after changing any
+    pass, not only the gate for the pass you changed.
+
+64. THE ASSEMBLER'S COPY SOURCE IS ITSELF A REVERT HAZARD, AND THE REFUSAL
+    GATE DOES NOT COVER IT. `31_assemble_batch.py` copies from the paths in
+    facts.json, and those pointed at 2018/out_v8, 2021/out_v8 and the bare
+    year roots -- all of which predate the stacked-fraction pass, the
+    description relocation and the script-marker fixes. Running the assembler
+    would have rewound every one of them, for the THIRD time. The gate in
+    UNFIXED catches a reverted option letter, a bad glyph, page furniture, a
+    duplicate option and a misplaced description; it cannot catch a reverted
+    FRACTION or a reverted SUBSCRIPT, because both leave text that reads
+    perfectly well.
+    The rule: out_rb IS the canonical build, because that is the directory
+    41_staleness.py's committed_matches_pipeline() compares the shipped
+    tables against. Anything else that claims to be a copy source is stale by
+    construction. 2024 and 2025 are the exception -- they come from the DOSVOX
+    text edition, not from booklet PDFs, so they are not in 42_rebuild.py's
+    RECIPE and keep their own directories; a fix to one of those years has to
+    be applied to its SOURCE directory as well as to the repo, or the
+    assembler reverts it.
+
 ## Open decisions for Mateus / Ben
 
 - Nothing outstanding as of 2026-09-15: decoders for 2018 and 2021 authorised,

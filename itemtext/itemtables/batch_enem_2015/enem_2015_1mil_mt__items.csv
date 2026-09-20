@@ -2248,10 +2248,8 @@ descrito na carta da mesa. O objetivo do jogo é verificar
 qual jogador consegue o maior número de pares. Iniciado 
 o jogo, a carta virada na mesa e as cartas da mão de um 
 jogador são como no esquema:
-6
-8
-6
-8
+6/8
+6/8
 75%
 3,4
 34%
@@ -2399,10 +2397,8 @@ descrito na carta da mesa. O objetivo do jogo é verificar
 qual jogador consegue o maior número de pares. Iniciado 
 o jogo, a carta virada na mesa e as cartas da mão de um 
 jogador são como no esquema:
-6
-8
-6
-8
+6/8
+6/8
 75%
 3,4
 34%
@@ -2550,10 +2546,8 @@ descrito na carta da mesa. O objetivo do jogo é verificar
 qual jogador consegue o maior número de pares. Iniciado 
 o jogo, a carta virada na mesa e as cartas da mão de um 
 jogador são como no esquema:
-6
-8
-6
-8
+6/8
+6/8
 75%
 3,4
 34%
@@ -2701,10 +2695,8 @@ descrito na carta da mesa. O objetivo do jogo é verificar
 qual jogador consegue o maior número de pares. Iniciado 
 o jogo, a carta virada na mesa e as cartas da mão de um 
 jogador são como no esquema:
-6
-8
-6
-8
+6/8
+6/8
 75%
 3,4
 34%
@@ -2852,10 +2844,8 @@ descrito na carta da mesa. O objetivo do jogo é verificar
 qual jogador consegue o maior número de pares. Iniciado 
 o jogo, a carta virada na mesa e as cartas da mão de um 
 jogador são como no esquema:
-6
-8
-6
-8
+6/8
+6/8
 75%
 3,4
 34%
@@ -7185,7 +7175,7 @@ Questões de 91 a 95 (opção inglês)",NA,"Para resolver o problema de abasteci
 foi decidida, numa reunião do condomínio, a construção de 
 uma nova cisterna. A cisterna atual tem formato cilíndrico, 
 com 3 m de altura e 2 m de diâmetro, e estimou-se que a 
-nova cisterna deverá comportar 81 m3 de água, mantendo 
+nova cisterna deverá comportar 81 m^3 de água, mantendo 
 o formato cilíndrico e a altura da atual. Após a inauguração 
 da nova cisterna a antiga será desativada. Utilize 3,0 como 
 aproximação para π.
@@ -7317,7 +7307,7 @@ Questões de 91 a 95 (opção inglês)",NA,"Para resolver o problema de abasteci
 foi decidida, numa reunião do condomínio, a construção de 
 uma nova cisterna. A cisterna atual tem formato cilíndrico, 
 com 3 m de altura e 2 m de diâmetro, e estimou-se que a 
-nova cisterna deverá comportar 81 m3 de água, mantendo 
+nova cisterna deverá comportar 81 m^3 de água, mantendo 
 o formato cilíndrico e a altura da atual. Após a inauguração 
 da nova cisterna a antiga será desativada. Utilize 3,0 como 
 aproximação para π.
@@ -7449,7 +7439,7 @@ Questões de 91 a 95 (opção inglês)",NA,"Para resolver o problema de abasteci
 foi decidida, numa reunião do condomínio, a construção de 
 uma nova cisterna. A cisterna atual tem formato cilíndrico, 
 com 3 m de altura e 2 m de diâmetro, e estimou-se que a 
-nova cisterna deverá comportar 81 m3 de água, mantendo 
+nova cisterna deverá comportar 81 m^3 de água, mantendo 
 o formato cilíndrico e a altura da atual. Após a inauguração 
 da nova cisterna a antiga será desativada. Utilize 3,0 como 
 aproximação para π.
@@ -7581,7 +7571,7 @@ Questões de 91 a 95 (opção inglês)",NA,"Para resolver o problema de abasteci
 foi decidida, numa reunião do condomínio, a construção de 
 uma nova cisterna. A cisterna atual tem formato cilíndrico, 
 com 3 m de altura e 2 m de diâmetro, e estimou-se que a 
-nova cisterna deverá comportar 81 m3 de água, mantendo 
+nova cisterna deverá comportar 81 m^3 de água, mantendo 
 o formato cilíndrico e a altura da atual. Após a inauguração 
 da nova cisterna a antiga será desativada. Utilize 3,0 como 
 aproximação para π.
@@ -7713,7 +7703,7 @@ Questões de 91 a 95 (opção inglês)",NA,"Para resolver o problema de abasteci
 foi decidida, numa reunião do condomínio, a construção de 
 uma nova cisterna. A cisterna atual tem formato cilíndrico, 
 com 3 m de altura e 2 m de diâmetro, e estimou-se que a 
-nova cisterna deverá comportar 81 m3 de água, mantendo 
+nova cisterna deverá comportar 81 m^3 de água, mantendo 
 o formato cilíndrico e a altura da atual. Após a inauguração 
 da nova cisterna a antiga será desativada. Utilize 3,0 como 
 aproximação para π.
@@ -12833,7 +12823,7 @@ condições, o engenheiro determinou uma expressão que
 fornece a altura h do vidro em função da medida n de sua 
 base, em metros.
 A expressão algébrica que determina a altura do vidro é","E","log (
-n + √^n2 + 4
+n + √n^2 + 4
 ) − log (
 n − √n2 + 4
 )22",0,NA,NA,NA,NA,"Portuguese","A"
@@ -13262,7 +13252,7 @@ condições, o engenheiro determinou uma expressão que
 fornece a altura h do vidro em função da medida n de sua 
 base, em metros.
 A expressão algébrica que determina a altura do vidro é","E","log (
-n + √^n2 + 4
+n + √n^2 + 4
 )2",0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2015_1mil_mt","enem_2015_1mil_mt_1",81781,"ENEM 2015 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
@@ -13403,7 +13393,7 @@ condições, o engenheiro determinou uma expressão que
 fornece a altura h do vidro em função da medida n de sua 
 base, em metros.
 A expressão algébrica que determina a altura do vidro é","E","2 log (
-n + √^n2 + 4
+n + √n^2 + 4
 )2",1,NA,NA,NA,NA,"Portuguese","E"
 "enem_2015_1mil_mt","enem_2015_1mil_mt_1",29167,"ENEM 2015 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
@@ -30758,8 +30748,8 @@ preços mais baixos, o que ocorre no mês de produção
 máxima da safra.
 A partir de uma série histórica, observou-se que o preço 
 P, em reais, do quilograma de um certo produto sazonal 
-pode ser descrito pela função P(^x) = 8 + 5^cos (
-π^x − π
+pode ser descrito pela função P(x) = 8 + 5cos (
+πx − π
 )6
 ,
 onde x representa o mês do ano, sendo x = 1 associado 
@@ -30900,8 +30890,8 @@ preços mais baixos, o que ocorre no mês de produção
 máxima da safra.
 A partir de uma série histórica, observou-se que o preço 
 P, em reais, do quilograma de um certo produto sazonal 
-pode ser descrito pela função P(^x) = 8 + 5^cos (
-π^x − π
+pode ser descrito pela função P(x) = 8 + 5cos (
+πx − π
 )6
 ,
 onde x representa o mês do ano, sendo x = 1 associado 
@@ -31042,8 +31032,8 @@ preços mais baixos, o que ocorre no mês de produção
 máxima da safra.
 A partir de uma série histórica, observou-se que o preço 
 P, em reais, do quilograma de um certo produto sazonal 
-pode ser descrito pela função P(^x) = 8 + 5^cos (
-π^x − π
+pode ser descrito pela função P(x) = 8 + 5cos (
+πx − π
 )6
 ,
 onde x representa o mês do ano, sendo x = 1 associado 
@@ -31184,8 +31174,8 @@ preços mais baixos, o que ocorre no mês de produção
 máxima da safra.
 A partir de uma série histórica, observou-se que o preço 
 P, em reais, do quilograma de um certo produto sazonal 
-pode ser descrito pela função P(^x) = 8 + 5^cos (
-π^x − π
+pode ser descrito pela função P(x) = 8 + 5cos (
+πx − π
 )6
 ,
 onde x representa o mês do ano, sendo x = 1 associado 
@@ -31326,8 +31316,8 @@ preços mais baixos, o que ocorre no mês de produção
 máxima da safra.
 A partir de uma série histórica, observou-se que o preço 
 P, em reais, do quilograma de um certo produto sazonal 
-pode ser descrito pela função P(^x) = 8 + 5^cos (
-π^x − π
+pode ser descrito pela função P(x) = 8 + 5cos (
+πx − π
 )6
 ,
 onde x representa o mês do ano, sendo x = 1 associado 

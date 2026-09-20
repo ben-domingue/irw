@@ -6708,10 +6708,8 @@ Figura 1 Figura 2 Figura 3
 O
 O⇒ ⇒
 • Em seguida, no papel dobrado da Figura 3, considerar o ponto R , sobre o segmento OM, sendo M  o ponto 
-médio do lado do quadrado original, de modo que OR = 1
-4 OM, traçar um arco de circunferência de raio 
-medindo 1
-2 OM com centro no ponto R , obtendo a Figura 4. Por último, recortar o papel ao longo do arco 
+médio do lado do quadrado original, de modo que OR = 1/4 OM, traçar um arco de circunferência de raio 
+medindo 1/2 OM com centro no ponto R , obtendo a Figura 4. Por último, recortar o papel ao longo do arco 
 de circunferência e excluir a parte que contém o setor circular, obtendo o papel dobrado, conforme Figura 5.
 RO M ⇒
 Figura 4 Figura 5
@@ -6753,10 +6751,8 @@ Figura 1 Figura 2 Figura 3
 O
 O⇒ ⇒
 • Em seguida, no papel dobrado da Figura 3, considerar o ponto R , sobre o segmento OM, sendo M  o ponto 
-médio do lado do quadrado original, de modo que OR = 1
-4 OM, traçar um arco de circunferência de raio 
-medindo 1
-2 OM com centro no ponto R , obtendo a Figura 4. Por último, recortar o papel ao longo do arco 
+médio do lado do quadrado original, de modo que OR = 1/4 OM, traçar um arco de circunferência de raio 
+medindo 1/2 OM com centro no ponto R , obtendo a Figura 4. Por último, recortar o papel ao longo do arco 
 de circunferência e excluir a parte que contém o setor circular, obtendo o papel dobrado, conforme Figura 5.
 RO M ⇒
 Figura 4 Figura 5
@@ -6798,10 +6794,8 @@ Figura 1 Figura 2 Figura 3
 O
 O⇒ ⇒
 • Em seguida, no papel dobrado da Figura 3, considerar o ponto R , sobre o segmento OM, sendo M  o ponto 
-médio do lado do quadrado original, de modo que OR = 1
-4 OM, traçar um arco de circunferência de raio 
-medindo 1
-2 OM com centro no ponto R , obtendo a Figura 4. Por último, recortar o papel ao longo do arco 
+médio do lado do quadrado original, de modo que OR = 1/4 OM, traçar um arco de circunferência de raio 
+medindo 1/2 OM com centro no ponto R , obtendo a Figura 4. Por último, recortar o papel ao longo do arco 
 de circunferência e excluir a parte que contém o setor circular, obtendo o papel dobrado, conforme Figura 5.
 RO M ⇒
 Figura 4 Figura 5
@@ -6843,10 +6837,8 @@ Figura 1 Figura 2 Figura 3
 O
 O⇒ ⇒
 • Em seguida, no papel dobrado da Figura 3, considerar o ponto R , sobre o segmento OM, sendo M  o ponto 
-médio do lado do quadrado original, de modo que OR = 1
-4 OM, traçar um arco de circunferência de raio 
-medindo 1
-2 OM com centro no ponto R , obtendo a Figura 4. Por último, recortar o papel ao longo do arco 
+médio do lado do quadrado original, de modo que OR = 1/4 OM, traçar um arco de circunferência de raio 
+medindo 1/2 OM com centro no ponto R , obtendo a Figura 4. Por último, recortar o papel ao longo do arco 
 de circunferência e excluir a parte que contém o setor circular, obtendo o papel dobrado, conforme Figura 5.
 RO M ⇒
 Figura 4 Figura 5
@@ -6888,10 +6880,8 @@ Figura 1 Figura 2 Figura 3
 O
 O⇒ ⇒
 • Em seguida, no papel dobrado da Figura 3, considerar o ponto R , sobre o segmento OM, sendo M  o ponto 
-médio do lado do quadrado original, de modo que OR = 1
-4 OM, traçar um arco de circunferência de raio 
-medindo 1
-2 OM com centro no ponto R , obtendo a Figura 4. Por último, recortar o papel ao longo do arco 
+médio do lado do quadrado original, de modo que OR = 1/4 OM, traçar um arco de circunferência de raio 
+medindo 1/2 OM com centro no ponto R , obtendo a Figura 4. Por último, recortar o papel ao longo do arco 
 de circunferência e excluir a parte que contém o setor circular, obtendo o papel dobrado, conforme Figura 5.
 RO M ⇒
 Figura 4 Figura 5
@@ -7517,7 +7507,7 @@ PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
 Não queira perder a sua alma
 11
 2 ",NA,"Cada	número	que	identifica	uma	agência	bancária	tem	
-quatro dígitos: N_1, N_2, N3, N4	mais	um	dígito	verificador	N_5, 
+quatro dígitos: N_1, N_2, N_3, N_4	mais	um	dígito	verificador	N_5, 
 sendo todos esses dígitos números naturais pertencentes 
 ao conjunto formado por 0, 1, 2, 3, 4, 5, 6, 7, 8 e 9.  
 Para	a	determinação	de	N_5,	primeiramente	multiplica-se 
@@ -7526,7 +7516,7 @@ número da agência por 5, 4, 3 e 2, respectivamente,
 somam-se	os	resultados	e	obtém-se	S	é igual a 5 vezes N_1 
 mais 4 vezes N_2 mais 3 vezes N_3 mais 2 vezes N_4.
 Posteriormente,	 encontra-se	 o	 resto	 da	 divisão	 de	 
-S por 11, denotando por R esse resto. Dessa forma, N5 é 
+S por 11, denotando por R esse resto. Dessa forma, N_5 é 
 a diferença 11 menos R.
 Considere o número de uma agência bancária cujos 
 quatro	primeiros	dígitos	são	0100.
@@ -7562,7 +7552,7 @@ PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
 Não queira perder a sua alma
 11
 2 ",NA,"Cada	número	que	identifica	uma	agência	bancária	tem	
-quatro dígitos: N_1, N_2, N3, N4	mais	um	dígito	verificador	N_5, 
+quatro dígitos: N_1, N_2, N_3, N_4	mais	um	dígito	verificador	N_5, 
 sendo todos esses dígitos números naturais pertencentes 
 ao conjunto formado por 0, 1, 2, 3, 4, 5, 6, 7, 8 e 9.  
 Para	a	determinação	de	N_5,	primeiramente	multiplica-se 
@@ -7571,7 +7561,7 @@ número da agência por 5, 4, 3 e 2, respectivamente,
 somam-se	os	resultados	e	obtém-se	S	é igual a 5 vezes N_1 
 mais 4 vezes N_2 mais 3 vezes N_3 mais 2 vezes N_4.
 Posteriormente,	 encontra-se	 o	 resto	 da	 divisão	 de	 
-S por 11, denotando por R esse resto. Dessa forma, N5 é 
+S por 11, denotando por R esse resto. Dessa forma, N_5 é 
 a diferença 11 menos R.
 Considere o número de uma agência bancária cujos 
 quatro	primeiros	dígitos	são	0100.
@@ -7607,7 +7597,7 @@ PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
 Não queira perder a sua alma
 11
 2 ",NA,"Cada	número	que	identifica	uma	agência	bancária	tem	
-quatro dígitos: N_1, N_2, N3, N4	mais	um	dígito	verificador	N_5, 
+quatro dígitos: N_1, N_2, N_3, N_4	mais	um	dígito	verificador	N_5, 
 sendo todos esses dígitos números naturais pertencentes 
 ao conjunto formado por 0, 1, 2, 3, 4, 5, 6, 7, 8 e 9.  
 Para	a	determinação	de	N_5,	primeiramente	multiplica-se 
@@ -7616,7 +7606,7 @@ número da agência por 5, 4, 3 e 2, respectivamente,
 somam-se	os	resultados	e	obtém-se	S	é igual a 5 vezes N_1 
 mais 4 vezes N_2 mais 3 vezes N_3 mais 2 vezes N_4.
 Posteriormente,	 encontra-se	 o	 resto	 da	 divisão	 de	 
-S por 11, denotando por R esse resto. Dessa forma, N5 é 
+S por 11, denotando por R esse resto. Dessa forma, N_5 é 
 a diferença 11 menos R.
 Considere o número de uma agência bancária cujos 
 quatro	primeiros	dígitos	são	0100.
@@ -7652,7 +7642,7 @@ PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
 Não queira perder a sua alma
 11
 2 ",NA,"Cada	número	que	identifica	uma	agência	bancária	tem	
-quatro dígitos: N_1, N_2, N3, N4	mais	um	dígito	verificador	N_5, 
+quatro dígitos: N_1, N_2, N_3, N_4	mais	um	dígito	verificador	N_5, 
 sendo todos esses dígitos números naturais pertencentes 
 ao conjunto formado por 0, 1, 2, 3, 4, 5, 6, 7, 8 e 9.  
 Para	a	determinação	de	N_5,	primeiramente	multiplica-se 
@@ -7661,7 +7651,7 @@ número da agência por 5, 4, 3 e 2, respectivamente,
 somam-se	os	resultados	e	obtém-se	S	é igual a 5 vezes N_1 
 mais 4 vezes N_2 mais 3 vezes N_3 mais 2 vezes N_4.
 Posteriormente,	 encontra-se	 o	 resto	 da	 divisão	 de	 
-S por 11, denotando por R esse resto. Dessa forma, N5 é 
+S por 11, denotando por R esse resto. Dessa forma, N_5 é 
 a diferença 11 menos R.
 Considere o número de uma agência bancária cujos 
 quatro	primeiros	dígitos	são	0100.
@@ -7697,7 +7687,7 @@ PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
 Não queira perder a sua alma
 11
 2 ",NA,"Cada	número	que	identifica	uma	agência	bancária	tem	
-quatro dígitos: N_1, N_2, N3, N4	mais	um	dígito	verificador	N_5, 
+quatro dígitos: N_1, N_2, N_3, N_4	mais	um	dígito	verificador	N_5, 
 sendo todos esses dígitos números naturais pertencentes 
 ao conjunto formado por 0, 1, 2, 3, 4, 5, 6, 7, 8 e 9.  
 Para	a	determinação	de	N_5,	primeiramente	multiplica-se 
@@ -7706,7 +7696,7 @@ número da agência por 5, 4, 3 e 2, respectivamente,
 somam-se	os	resultados	e	obtém-se	S	é igual a 5 vezes N_1 
 mais 4 vezes N_2 mais 3 vezes N_3 mais 2 vezes N_4.
 Posteriormente,	 encontra-se	 o	 resto	 da	 divisão	 de	 
-S por 11, denotando por R esse resto. Dessa forma, N5 é 
+S por 11, denotando por R esse resto. Dessa forma, N_5 é 
 a diferença 11 menos R.
 Considere o número de uma agência bancária cujos 
 quatro	primeiros	dígitos	são	0100.
@@ -8173,7 +8163,7 @@ Não queira perder a sua alma
 11
 2 ",NA,"Um atleta iniciou seu treinamento visando as competições 
 de	 fim	 de	 ano.	 Seu	 treinamento	consiste	em	 cinco	tipos	
-diferentes de treinos: treino T1, treino T2, treino T_3, treino T_4 
+diferentes de treinos: treino T_1, treino T_2, treino T_3, treino T_4 
 e treino T_5. A sequência dos treinamentos deve seguir esta 
 ordem:
 Dia Treino
@@ -8229,7 +8219,7 @@ Não queira perder a sua alma
 11
 2 ",NA,"Um atleta iniciou seu treinamento visando as competições 
 de	 fim	 de	 ano.	 Seu	 treinamento	consiste	em	 cinco	tipos	
-diferentes de treinos: treino T1, treino T2, treino T_3, treino T_4 
+diferentes de treinos: treino T_1, treino T_2, treino T_3, treino T_4 
 e treino T_5. A sequência dos treinamentos deve seguir esta 
 ordem:
 Dia Treino
@@ -8285,7 +8275,7 @@ Não queira perder a sua alma
 11
 2 ",NA,"Um atleta iniciou seu treinamento visando as competições 
 de	 fim	 de	 ano.	 Seu	 treinamento	consiste	em	 cinco	tipos	
-diferentes de treinos: treino T1, treino T2, treino T_3, treino T_4 
+diferentes de treinos: treino T_1, treino T_2, treino T_3, treino T_4 
 e treino T_5. A sequência dos treinamentos deve seguir esta 
 ordem:
 Dia Treino
@@ -8341,7 +8331,7 @@ Não queira perder a sua alma
 11
 2 ",NA,"Um atleta iniciou seu treinamento visando as competições 
 de	 fim	 de	 ano.	 Seu	 treinamento	consiste	em	 cinco	tipos	
-diferentes de treinos: treino T1, treino T2, treino T_3, treino T_4 
+diferentes de treinos: treino T_1, treino T_2, treino T_3, treino T_4 
 e treino T_5. A sequência dos treinamentos deve seguir esta 
 ordem:
 Dia Treino
@@ -8397,7 +8387,7 @@ Não queira perder a sua alma
 11
 2 ",NA,"Um atleta iniciou seu treinamento visando as competições 
 de	 fim	 de	 ano.	 Seu	 treinamento	consiste	em	 cinco	tipos	
-diferentes de treinos: treino T1, treino T2, treino T_3, treino T_4 
+diferentes de treinos: treino T_1, treino T_2, treino T_3, treino T_4 
 e treino T_5. A sequência dos treinamentos deve seguir esta 
 ordem:
 Dia Treino
@@ -8463,7 +8453,7 @@ Uma sala de cinema, cuja largura da tela mede 12 metros, está montada em confor
 ABNT	e	tem	suas	dimensões	especificadas	na	figura.
 Descrição da imagem: 
 Figura	distribuída	em	dois	esquemas	em	que,	o	esquema	à	esquerda	apresenta	um	trapézio	isósceles.	A	figura	à	
-esquerda apresenta um trapézio isósceles cuja base menor mede L e cuja altura mede Daceitável igual a 2,9 vezes L.
+esquerda apresenta um trapézio isósceles cuja base menor mede L e cuja altura mede D_aceitável igual a 2,9 vezes L.
 Esse trapézio é seccionado por dois segmentos de reta paralelos às bases, o primeiro a uma distância da tela 
 de D_mínimo igual a 0,6 vezes L, representando o alinhamento dos encostos das poltronas já instaladas da primeira 
 fileira,	e	o	segundo,	a	uma	distância	da	tela	D_máximo igual a 2 vezes L, indicando o alinhamento dos encostos das 
@@ -8531,7 +8521,7 @@ Uma sala de cinema, cuja largura da tela mede 12 metros, está montada em confor
 ABNT	e	tem	suas	dimensões	especificadas	na	figura.
 Descrição da imagem: 
 Figura	distribuída	em	dois	esquemas	em	que,	o	esquema	à	esquerda	apresenta	um	trapézio	isósceles.	A	figura	à	
-esquerda apresenta um trapézio isósceles cuja base menor mede L e cuja altura mede Daceitável igual a 2,9 vezes L.
+esquerda apresenta um trapézio isósceles cuja base menor mede L e cuja altura mede D_aceitável igual a 2,9 vezes L.
 Esse trapézio é seccionado por dois segmentos de reta paralelos às bases, o primeiro a uma distância da tela 
 de D_mínimo igual a 0,6 vezes L, representando o alinhamento dos encostos das poltronas já instaladas da primeira 
 fileira,	e	o	segundo,	a	uma	distância	da	tela	D_máximo igual a 2 vezes L, indicando o alinhamento dos encostos das 
@@ -8599,7 +8589,7 @@ Uma sala de cinema, cuja largura da tela mede 12 metros, está montada em confor
 ABNT	e	tem	suas	dimensões	especificadas	na	figura.
 Descrição da imagem: 
 Figura	distribuída	em	dois	esquemas	em	que,	o	esquema	à	esquerda	apresenta	um	trapézio	isósceles.	A	figura	à	
-esquerda apresenta um trapézio isósceles cuja base menor mede L e cuja altura mede Daceitável igual a 2,9 vezes L.
+esquerda apresenta um trapézio isósceles cuja base menor mede L e cuja altura mede D_aceitável igual a 2,9 vezes L.
 Esse trapézio é seccionado por dois segmentos de reta paralelos às bases, o primeiro a uma distância da tela 
 de D_mínimo igual a 0,6 vezes L, representando o alinhamento dos encostos das poltronas já instaladas da primeira 
 fileira,	e	o	segundo,	a	uma	distância	da	tela	D_máximo igual a 2 vezes L, indicando o alinhamento dos encostos das 
@@ -8667,7 +8657,7 @@ Uma sala de cinema, cuja largura da tela mede 12 metros, está montada em confor
 ABNT	e	tem	suas	dimensões	especificadas	na	figura.
 Descrição da imagem: 
 Figura	distribuída	em	dois	esquemas	em	que,	o	esquema	à	esquerda	apresenta	um	trapézio	isósceles.	A	figura	à	
-esquerda apresenta um trapézio isósceles cuja base menor mede L e cuja altura mede Daceitável igual a 2,9 vezes L.
+esquerda apresenta um trapézio isósceles cuja base menor mede L e cuja altura mede D_aceitável igual a 2,9 vezes L.
 Esse trapézio é seccionado por dois segmentos de reta paralelos às bases, o primeiro a uma distância da tela 
 de D_mínimo igual a 0,6 vezes L, representando o alinhamento dos encostos das poltronas já instaladas da primeira 
 fileira,	e	o	segundo,	a	uma	distância	da	tela	D_máximo igual a 2 vezes L, indicando o alinhamento dos encostos das 
@@ -8735,7 +8725,7 @@ Uma sala de cinema, cuja largura da tela mede 12 metros, está montada em confor
 ABNT	e	tem	suas	dimensões	especificadas	na	figura.
 Descrição da imagem: 
 Figura	distribuída	em	dois	esquemas	em	que,	o	esquema	à	esquerda	apresenta	um	trapézio	isósceles.	A	figura	à	
-esquerda apresenta um trapézio isósceles cuja base menor mede L e cuja altura mede Daceitável igual a 2,9 vezes L.
+esquerda apresenta um trapézio isósceles cuja base menor mede L e cuja altura mede D_aceitável igual a 2,9 vezes L.
 Esse trapézio é seccionado por dois segmentos de reta paralelos às bases, o primeiro a uma distância da tela 
 de D_mínimo igual a 0,6 vezes L, representando o alinhamento dos encostos das poltronas já instaladas da primeira 
 fileira,	e	o	segundo,	a	uma	distância	da	tela	D_máximo igual a 2 vezes L, indicando o alinhamento dos encostos das 
@@ -9862,8 +9852,7 @@ a essa fase jogam, entre si, até sete partidas. O primeiro
 desses times que completar quatro vitórias é declarado 
 campeão.
 Considere que, em todas as partidas, a probabilidade 
-de qualquer um dos dois times vencer é sempre 1
-2 .
+de qualquer um dos dois times vencer é sempre 1/2 .
 Qual	é	a	probabilidade	de	o	time	campeão	ser	aquele	que 
 venceu a primeira partida da World Series?","C","35/64",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2022_1mil_mt","enem_2022_1mil_mt_1",86840,"ENEM 2022 - MT","11
@@ -9902,8 +9891,7 @@ a essa fase jogam, entre si, até sete partidas. O primeiro
 desses times que completar quatro vitórias é declarado 
 campeão.
 Considere que, em todas as partidas, a probabilidade 
-de qualquer um dos dois times vencer é sempre 1
-2 .
+de qualquer um dos dois times vencer é sempre 1/2 .
 Qual	é	a	probabilidade	de	o	time	campeão	ser	aquele	que 
 venceu a primeira partida da World Series?","C","40/64",0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2022_1mil_mt","enem_2022_1mil_mt_1",86840,"ENEM 2022 - MT","11
@@ -9942,8 +9930,7 @@ a essa fase jogam, entre si, até sete partidas. O primeiro
 desses times que completar quatro vitórias é declarado 
 campeão.
 Considere que, em todas as partidas, a probabilidade 
-de qualquer um dos dois times vencer é sempre 1
-2 .
+de qualquer um dos dois times vencer é sempre 1/2 .
 Qual	é	a	probabilidade	de	o	time	campeão	ser	aquele	que 
 venceu a primeira partida da World Series?","C","42/64",1,NA,NA,NA,NA,"Portuguese","C"
 "enem_2022_1mil_mt","enem_2022_1mil_mt_1",86840,"ENEM 2022 - MT","11
@@ -9982,8 +9969,7 @@ a essa fase jogam, entre si, até sete partidas. O primeiro
 desses times que completar quatro vitórias é declarado 
 campeão.
 Considere que, em todas as partidas, a probabilidade 
-de qualquer um dos dois times vencer é sempre 1
-2 .
+de qualquer um dos dois times vencer é sempre 1/2 .
 Qual	é	a	probabilidade	de	o	time	campeão	ser	aquele	que 
 venceu a primeira partida da World Series?","C","44/64",0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2022_1mil_mt","enem_2022_1mil_mt_1",86840,"ENEM 2022 - MT","11
@@ -10022,8 +10008,7 @@ a essa fase jogam, entre si, até sete partidas. O primeiro
 desses times que completar quatro vitórias é declarado 
 campeão.
 Considere que, em todas as partidas, a probabilidade 
-de qualquer um dos dois times vencer é sempre 1
-2 .
+de qualquer um dos dois times vencer é sempre 1/2 .
 Qual	é	a	probabilidade	de	o	time	campeão	ser	aquele	que 
 venceu a primeira partida da World Series?","C","52/64",0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2022_1mil_mt","enem_2022_1mil_mt_1",89637,"ENEM 2022 - MT","11

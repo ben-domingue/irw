@@ -173,6 +173,15 @@ def rebuild(y, outdir):
          "--items-dir", outdir, "--apply"])
     run([sys.executable, os.path.join(HERE, "49_option_conventions.py"),
          "--items-dir", outdir, "--apply"])
+    # Stacked fractions and misplaced figure descriptions. Both are invisible
+    # to every content gate -- the first leaves the text complete but the
+    # arithmetic gone, the second makes the stem LONGER than it should be --
+    # so they have to run here, where a rebuild cannot lose them, rather than
+    # being applied to the batch copies by hand.
+    run([sys.executable, os.path.join(HERE, "53_stacked_fractions.py"),
+         "--items-dir", outdir, "--year", y, "--apply"])
+    run([sys.executable, os.path.join(HERE, "54_relocate_descriptions.py"),
+         "--items-dir", outdir, "--year", y, "--apply"])
     return outdir
 
 def main():

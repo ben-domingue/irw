@@ -7927,7 +7927,7 @@ CADERNO
 AZUL",NA,"Uma liga metálica sai do forno a uma temperatura de 
 3 000 °C e diminui 1% de sua temperatura a cada 30 min.
 Use 0,477 como aproximação para log 10(3) e 1,041 
-como aproximação para log10(11).
+como aproximação para log_10(11).
 O tempo decorrido, em hora, até que a liga atinja 30 °C é 
 mais próximo de","D","22.",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2016_1mil_mt","enem_2016_1mil_mt_1",10052,"ENEM 2016 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
@@ -7979,7 +7979,7 @@ CADERNO
 AZUL",NA,"Uma liga metálica sai do forno a uma temperatura de 
 3 000 °C e diminui 1% de sua temperatura a cada 30 min.
 Use 0,477 como aproximação para log 10(3) e 1,041 
-como aproximação para log10(11).
+como aproximação para log_10(11).
 O tempo decorrido, em hora, até que a liga atinja 30 °C é 
 mais próximo de","D","50.",0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2016_1mil_mt","enem_2016_1mil_mt_1",10052,"ENEM 2016 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
@@ -8031,7 +8031,7 @@ CADERNO
 AZUL",NA,"Uma liga metálica sai do forno a uma temperatura de 
 3 000 °C e diminui 1% de sua temperatura a cada 30 min.
 Use 0,477 como aproximação para log 10(3) e 1,041 
-como aproximação para log10(11).
+como aproximação para log_10(11).
 O tempo decorrido, em hora, até que a liga atinja 30 °C é 
 mais próximo de","D","100.",0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2016_1mil_mt","enem_2016_1mil_mt_1",10052,"ENEM 2016 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
@@ -8083,7 +8083,7 @@ CADERNO
 AZUL",NA,"Uma liga metálica sai do forno a uma temperatura de 
 3 000 °C e diminui 1% de sua temperatura a cada 30 min.
 Use 0,477 como aproximação para log 10(3) e 1,041 
-como aproximação para log10(11).
+como aproximação para log_10(11).
 O tempo decorrido, em hora, até que a liga atinja 30 °C é 
 mais próximo de","D","200.",1,NA,NA,NA,NA,"Portuguese","D"
 "enem_2016_1mil_mt","enem_2016_1mil_mt_1",10052,"ENEM 2016 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
@@ -8135,7 +8135,7 @@ CADERNO
 AZUL",NA,"Uma liga metálica sai do forno a uma temperatura de 
 3 000 °C e diminui 1% de sua temperatura a cada 30 min.
 Use 0,477 como aproximação para log 10(3) e 1,041 
-como aproximação para log10(11).
+como aproximação para log_10(11).
 O tempo decorrido, em hora, até que a liga atinja 30 °C é 
 mais próximo de","D","400.",0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2016_1mil_mt","enem_2016_1mil_mt_1",32969,"ENEM 2016 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
@@ -9064,8 +9064,7 @@ corpo e o volume por ele ocupado. Um professor propôs à
 sua turma que os alunos analisassem a densidade de três 
 corpos: d_A, d_B, d_C. Os alunos verificaram que o corpo A 
 possuía 1,5 vez a massa do corpo B e esse, por sua vez, 
-tinha 3
-4
+tinha 3/4
  da massa do corpo C. Observaram, ainda, que o 
 volume do corpo A era o mesmo do corpo B e 20% maior 
 do que o volume do corpo C.
@@ -9122,8 +9121,7 @@ corpo e o volume por ele ocupado. Um professor propôs à
 sua turma que os alunos analisassem a densidade de três 
 corpos: d_A, d_B, d_C. Os alunos verificaram que o corpo A 
 possuía 1,5 vez a massa do corpo B e esse, por sua vez, 
-tinha 3
-4
+tinha 3/4
  da massa do corpo C. Observaram, ainda, que o 
 volume do corpo A era o mesmo do corpo B e 20% maior 
 do que o volume do corpo C.
@@ -9180,8 +9178,7 @@ corpo e o volume por ele ocupado. Um professor propôs à
 sua turma que os alunos analisassem a densidade de três 
 corpos: d_A, d_B, d_C. Os alunos verificaram que o corpo A 
 possuía 1,5 vez a massa do corpo B e esse, por sua vez, 
-tinha 3
-4
+tinha 3/4
  da massa do corpo C. Observaram, ainda, que o 
 volume do corpo A era o mesmo do corpo B e 20% maior 
 do que o volume do corpo C.
@@ -9238,8 +9235,7 @@ corpo e o volume por ele ocupado. Um professor propôs à
 sua turma que os alunos analisassem a densidade de três 
 corpos: d_A, d_B, d_C. Os alunos verificaram que o corpo A 
 possuía 1,5 vez a massa do corpo B e esse, por sua vez, 
-tinha 3
-4
+tinha 3/4
  da massa do corpo C. Observaram, ainda, que o 
 volume do corpo A era o mesmo do corpo B e 20% maior 
 do que o volume do corpo C.
@@ -9296,8 +9292,7 @@ corpo e o volume por ele ocupado. Um professor propôs à
 sua turma que os alunos analisassem a densidade de três 
 corpos: d_A, d_B, d_C. Os alunos verificaram que o corpo A 
 possuía 1,5 vez a massa do corpo B e esse, por sua vez, 
-tinha 3
-4
+tinha 3/4
  da massa do corpo C. Observaram, ainda, que o 
 volume do corpo A era o mesmo do corpo B e 20% maior 
 do que o volume do corpo C.
@@ -10344,8 +10339,7 @@ parábola como eixo vertical, obteve a seguinte equação
 para a parábola:
 y = 9 − x2, sendo x e y medidos em metros. 
 Sabe-se que a área sob uma parábola como esta é 
-igual a 2
-3
+igual a 2/3
  da área do retângulo cujas dimensões são, 
 respectivamente, iguais à base e à altura da entrada do túnel.
 Qual é a área da parte frontal da tampa de concreto, em 
@@ -10406,8 +10400,7 @@ parábola como eixo vertical, obteve a seguinte equação
 para a parábola:
 y = 9 − x2, sendo x e y medidos em metros. 
 Sabe-se que a área sob uma parábola como esta é 
-igual a 2
-3
+igual a 2/3
  da área do retângulo cujas dimensões são, 
 respectivamente, iguais à base e à altura da entrada do túnel.
 Qual é a área da parte frontal da tampa de concreto, em 
@@ -10468,8 +10461,7 @@ parábola como eixo vertical, obteve a seguinte equação
 para a parábola:
 y = 9 − x2, sendo x e y medidos em metros. 
 Sabe-se que a área sob uma parábola como esta é 
-igual a 2
-3
+igual a 2/3
  da área do retângulo cujas dimensões são, 
 respectivamente, iguais à base e à altura da entrada do túnel.
 Qual é a área da parte frontal da tampa de concreto, em 
@@ -10530,8 +10522,7 @@ parábola como eixo vertical, obteve a seguinte equação
 para a parábola:
 y = 9 − x2, sendo x e y medidos em metros. 
 Sabe-se que a área sob uma parábola como esta é 
-igual a 2
-3
+igual a 2/3
  da área do retângulo cujas dimensões são, 
 respectivamente, iguais à base e à altura da entrada do túnel.
 Qual é a área da parte frontal da tampa de concreto, em 
@@ -10592,8 +10583,7 @@ parábola como eixo vertical, obteve a seguinte equação
 para a parábola:
 y = 9 − x2, sendo x e y medidos em metros. 
 Sabe-se que a área sob uma parábola como esta é 
-igual a 2
-3
+igual a 2/3
  da área do retângulo cujas dimensões são, 
 respectivamente, iguais à base e à altura da entrada do túnel.
 Qual é a área da parte frontal da tampa de concreto, em 

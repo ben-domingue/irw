@@ -849,9 +849,9 @@ da Educação
 CADERNO
 1
 AZUL",NA,"Nucleófilos (Nu^−) são bases de Lewis que reagem com haletos de alquila, por meio de uma reação chamada 
-substituição nucleofílica (SN), como mostrado no esquema:
+substituição nucleofílica (S_N), como mostrado no esquema:
 R–X + Nu^− → R–Nu + X− (R = grupo alquila e X = halogênio)
-A reação de S_N entre metóxido de sódio (Nu− = CH_3O−) e brometo de metila fornece um composto orgânico pertencente 
+A reação de S_N entre metóxido de sódio (Nu^− = CH_3O−) e brometo de metila fornece um composto orgânico pertencente 
 à função","A","éter.",1,NA,NA,NA,NA,"Portuguese","A"
 "enem_2016_1mil_cn","enem_2016_1mil_cn_1",16893,"ENEM 2016 - CN","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE CIÊNCIAS HUMANAS E SUAS TECNOLOGIAS
@@ -893,9 +893,9 @@ da Educação
 CADERNO
 1
 AZUL",NA,"Nucleófilos (Nu^−) são bases de Lewis que reagem com haletos de alquila, por meio de uma reação chamada 
-substituição nucleofílica (SN), como mostrado no esquema:
+substituição nucleofílica (S_N), como mostrado no esquema:
 R–X + Nu^− → R–Nu + X− (R = grupo alquila e X = halogênio)
-A reação de S_N entre metóxido de sódio (Nu− = CH_3O−) e brometo de metila fornece um composto orgânico pertencente 
+A reação de S_N entre metóxido de sódio (Nu^− = CH_3O−) e brometo de metila fornece um composto orgânico pertencente 
 à função","A","éster.",0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2016_1mil_cn","enem_2016_1mil_cn_1",16893,"ENEM 2016 - CN","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE CIÊNCIAS HUMANAS E SUAS TECNOLOGIAS
@@ -937,9 +937,9 @@ da Educação
 CADERNO
 1
 AZUL",NA,"Nucleófilos (Nu^−) são bases de Lewis que reagem com haletos de alquila, por meio de uma reação chamada 
-substituição nucleofílica (SN), como mostrado no esquema:
+substituição nucleofílica (S_N), como mostrado no esquema:
 R–X + Nu^− → R–Nu + X− (R = grupo alquila e X = halogênio)
-A reação de S_N entre metóxido de sódio (Nu− = CH_3O−) e brometo de metila fornece um composto orgânico pertencente 
+A reação de S_N entre metóxido de sódio (Nu^− = CH_3O−) e brometo de metila fornece um composto orgânico pertencente 
 à função","A","álcool.",0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2016_1mil_cn","enem_2016_1mil_cn_1",16893,"ENEM 2016 - CN","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE CIÊNCIAS HUMANAS E SUAS TECNOLOGIAS
@@ -981,9 +981,9 @@ da Educação
 CADERNO
 1
 AZUL",NA,"Nucleófilos (Nu^−) são bases de Lewis que reagem com haletos de alquila, por meio de uma reação chamada 
-substituição nucleofílica (SN), como mostrado no esquema:
+substituição nucleofílica (S_N), como mostrado no esquema:
 R–X + Nu^− → R–Nu + X− (R = grupo alquila e X = halogênio)
-A reação de S_N entre metóxido de sódio (Nu− = CH_3O−) e brometo de metila fornece um composto orgânico pertencente 
+A reação de S_N entre metóxido de sódio (Nu^− = CH_3O−) e brometo de metila fornece um composto orgânico pertencente 
 à função","A","haleto.",0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2016_1mil_cn","enem_2016_1mil_cn_1",16893,"ENEM 2016 - CN","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE CIÊNCIAS HUMANAS E SUAS TECNOLOGIAS
@@ -1025,9 +1025,9 @@ da Educação
 CADERNO
 1
 AZUL",NA,"Nucleófilos (Nu^−) são bases de Lewis que reagem com haletos de alquila, por meio de uma reação chamada 
-substituição nucleofílica (SN), como mostrado no esquema:
+substituição nucleofílica (S_N), como mostrado no esquema:
 R–X + Nu^− → R–Nu + X− (R = grupo alquila e X = halogênio)
-A reação de S_N entre metóxido de sódio (Nu− = CH_3O−) e brometo de metila fornece um composto orgânico pertencente 
+A reação de S_N entre metóxido de sódio (Nu^− = CH_3O−) e brometo de metila fornece um composto orgânico pertencente 
 à função","A","hidrocarboneto.",0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2016_1mil_cn","enem_2016_1mil_cn_1",16901,"ENEM 2016 - CN","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE CIÊNCIAS HUMANAS E SUAS TECNOLOGIAS
@@ -1081,7 +1081,7 @@ nproduto
 em que n corresponde ao número de mols. O metanol 
 pode ser obtido pela reação entre brometo de metila e 
 hidróxido de sódio, conforme a equação química:
-CH3^Br + NaOH → CH_3^OH + NaBr
+CH3Br + NaOH → CH_3OH + NaBr
 As massas molares (em g/mol) desses elementos 
 são: H = 1; C = 12; O = 16; Na = 23; Br = 80.
 O rendimento molar da reação, em que 32 g de metanol 
@@ -1139,7 +1139,7 @@ nproduto
 em que n corresponde ao número de mols. O metanol 
 pode ser obtido pela reação entre brometo de metila e 
 hidróxido de sódio, conforme a equação química:
-CH3^Br + NaOH → CH_3^OH + NaBr
+CH3Br + NaOH → CH_3OH + NaBr
 As massas molares (em g/mol) desses elementos 
 são: H = 1; C = 12; O = 16; Na = 23; Br = 80.
 O rendimento molar da reação, em que 32 g de metanol 
@@ -1197,7 +1197,7 @@ nproduto
 em que n corresponde ao número de mols. O metanol 
 pode ser obtido pela reação entre brometo de metila e 
 hidróxido de sódio, conforme a equação química:
-CH3^Br + NaOH → CH_3^OH + NaBr
+CH3Br + NaOH → CH_3OH + NaBr
 As massas molares (em g/mol) desses elementos 
 são: H = 1; C = 12; O = 16; Na = 23; Br = 80.
 O rendimento molar da reação, em que 32 g de metanol 
@@ -1255,7 +1255,7 @@ nproduto
 em que n corresponde ao número de mols. O metanol 
 pode ser obtido pela reação entre brometo de metila e 
 hidróxido de sódio, conforme a equação química:
-CH3^Br + NaOH → CH_3^OH + NaBr
+CH3Br + NaOH → CH_3OH + NaBr
 As massas molares (em g/mol) desses elementos 
 são: H = 1; C = 12; O = 16; Na = 23; Br = 80.
 O rendimento molar da reação, em que 32 g de metanol 
@@ -1313,7 +1313,7 @@ nproduto
 em que n corresponde ao número de mols. O metanol 
 pode ser obtido pela reação entre brometo de metila e 
 hidróxido de sódio, conforme a equação química:
-CH3^Br + NaOH → CH_3^OH + NaBr
+CH3Br + NaOH → CH_3OH + NaBr
 As massas molares (em g/mol) desses elementos 
 são: H = 1; C = 12; O = 16; Na = 23; Br = 80.
 O rendimento molar da reação, em que 32 g de metanol 
@@ -2375,7 +2375,7 @@ esquematizado. A bateria apresenta resistência interna
 desprezível, e os fios possuem resistência nula.
 Um técnico fez uma análise do circuito para prever a 
 corrente elétrica nos pontos: A, B, C, D e E; e rotulou 
-essas correntes de I_A, I_B, IC, ID e IE, respectivamente.
+essas correntes de I_A, I_B, I_C, I_D e I_E, respectivamente.
 A
 B
 C
@@ -2431,7 +2431,7 @@ esquematizado. A bateria apresenta resistência interna
 desprezível, e os fios possuem resistência nula.
 Um técnico fez uma análise do circuito para prever a 
 corrente elétrica nos pontos: A, B, C, D e E; e rotulou 
-essas correntes de I_A, I_B, IC, ID e IE, respectivamente.
+essas correntes de I_A, I_B, I_C, I_D e I_E, respectivamente.
 A
 B
 C
@@ -2487,7 +2487,7 @@ esquematizado. A bateria apresenta resistência interna
 desprezível, e os fios possuem resistência nula.
 Um técnico fez uma análise do circuito para prever a 
 corrente elétrica nos pontos: A, B, C, D e E; e rotulou 
-essas correntes de I_A, I_B, IC, ID e IE, respectivamente.
+essas correntes de I_A, I_B, I_C, I_D e I_E, respectivamente.
 A
 B
 C
@@ -2543,7 +2543,7 @@ esquematizado. A bateria apresenta resistência interna
 desprezível, e os fios possuem resistência nula.
 Um técnico fez uma análise do circuito para prever a 
 corrente elétrica nos pontos: A, B, C, D e E; e rotulou 
-essas correntes de I_A, I_B, IC, ID e IE, respectivamente.
+essas correntes de I_A, I_B, I_C, I_D e I_E, respectivamente.
 A
 B
 C
@@ -2599,7 +2599,7 @@ esquematizado. A bateria apresenta resistência interna
 desprezível, e os fios possuem resistência nula.
 Um técnico fez uma análise do circuito para prever a 
 corrente elétrica nos pontos: A, B, C, D e E; e rotulou 
-essas correntes de I_A, I_B, IC, ID e IE, respectivamente.
+essas correntes de I_A, I_B, I_C, I_D e I_E, respectivamente.
 A
 B
 C
@@ -5264,16 +5264,16 @@ na combustão completa da borracha vulcanizada, alguns são poluentes e provocam
 escapem para a atmosfera, esses gases podem ser borbulhados em uma solução aquosa contendo uma substância 
 adequada. Considere as informações das substâncias listadas no quadro.
 Substância Equilíbrio em solução aquosa Valor da constante de equilíbrio
-Fenol C6H5^OH + H_2^O ⇌  C^6H5O− + H^3O+ 1,3 × 10^−10
-Piridina C5H5^N + H_2^O ⇌  C5^H5NH+ + OH^− 1,7 × 10^−9
-Metilamina CH3NH_2 + H_2^O ⇌  CH3^NH3
+Fenol C6H5OH + H_2O ⇌  C_6H_5O^− + H_3O^+ 1,3 × 10^−10
+Piridina C5H5N + H_2O ⇌  C_5H_5NH^+ + OH^− 1,7 × 10^−9
+Metilamina CH3NH_2 + H_2O ⇌  CH_3NH_3
 + + OH− 4,4 × 10^−4
 Hidrogenofosfato de potássio HPO_4
-2− + H_2^O ⇌  H_2^PO4
+2− + H_2O ⇌  H_2PO_4
 − + OH^− 2,8 × 10^−2
 Hidrogenosulfato de potássio HSO_4
-− + H2O ⇌  SO4
-2− + H_3O^+ 3,1 × 10^−2
+− + H2O ⇌  SO_4
+2− + H3O+ 3,1 × 10^−2
 Dentre as substâncias listadas no quadro, aquela capaz de remover com maior eficiência os gases poluentes é o(a)","D","fenol.",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2016_1mil_cn","enem_2016_1mil_cn_1",40112,"ENEM 2016 - CN","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE CIÊNCIAS HUMANAS E SUAS TECNOLOGIAS
@@ -5319,16 +5319,16 @@ na combustão completa da borracha vulcanizada, alguns são poluentes e provocam
 escapem para a atmosfera, esses gases podem ser borbulhados em uma solução aquosa contendo uma substância 
 adequada. Considere as informações das substâncias listadas no quadro.
 Substância Equilíbrio em solução aquosa Valor da constante de equilíbrio
-Fenol C6H5^OH + H_2^O ⇌  C^6H5O− + H^3O+ 1,3 × 10^−10
-Piridina C5H5^N + H_2^O ⇌  C5^H5NH+ + OH^− 1,7 × 10^−9
-Metilamina CH3NH_2 + H_2^O ⇌  CH3^NH3
+Fenol C6H5OH + H_2O ⇌  C_6H_5O^− + H_3O^+ 1,3 × 10^−10
+Piridina C5H5N + H_2O ⇌  C_5H_5NH^+ + OH^− 1,7 × 10^−9
+Metilamina CH3NH_2 + H_2O ⇌  CH_3NH_3
 + + OH− 4,4 × 10^−4
 Hidrogenofosfato de potássio HPO_4
-2− + H_2^O ⇌  H_2^PO4
+2− + H_2O ⇌  H_2PO_4
 − + OH^− 2,8 × 10^−2
 Hidrogenosulfato de potássio HSO_4
-− + H2O ⇌  SO4
-2− + H_3O^+ 3,1 × 10^−2
+− + H2O ⇌  SO_4
+2− + H3O+ 3,1 × 10^−2
 Dentre as substâncias listadas no quadro, aquela capaz de remover com maior eficiência os gases poluentes é o(a)","D","piridina.",0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2016_1mil_cn","enem_2016_1mil_cn_1",40112,"ENEM 2016 - CN","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE CIÊNCIAS HUMANAS E SUAS TECNOLOGIAS
@@ -5374,16 +5374,16 @@ na combustão completa da borracha vulcanizada, alguns são poluentes e provocam
 escapem para a atmosfera, esses gases podem ser borbulhados em uma solução aquosa contendo uma substância 
 adequada. Considere as informações das substâncias listadas no quadro.
 Substância Equilíbrio em solução aquosa Valor da constante de equilíbrio
-Fenol C6H5^OH + H_2^O ⇌  C^6H5O− + H^3O+ 1,3 × 10^−10
-Piridina C5H5^N + H_2^O ⇌  C5^H5NH+ + OH^− 1,7 × 10^−9
-Metilamina CH3NH_2 + H_2^O ⇌  CH3^NH3
+Fenol C6H5OH + H_2O ⇌  C_6H_5O^− + H_3O^+ 1,3 × 10^−10
+Piridina C5H5N + H_2O ⇌  C_5H_5NH^+ + OH^− 1,7 × 10^−9
+Metilamina CH3NH_2 + H_2O ⇌  CH_3NH_3
 + + OH− 4,4 × 10^−4
 Hidrogenofosfato de potássio HPO_4
-2− + H_2^O ⇌  H_2^PO4
+2− + H_2O ⇌  H_2PO_4
 − + OH^− 2,8 × 10^−2
 Hidrogenosulfato de potássio HSO_4
-− + H2O ⇌  SO4
-2− + H_3O^+ 3,1 × 10^−2
+− + H2O ⇌  SO_4
+2− + H3O+ 3,1 × 10^−2
 Dentre as substâncias listadas no quadro, aquela capaz de remover com maior eficiência os gases poluentes é o(a)","D","metilamina.",0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2016_1mil_cn","enem_2016_1mil_cn_1",40112,"ENEM 2016 - CN","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE CIÊNCIAS HUMANAS E SUAS TECNOLOGIAS
@@ -5429,16 +5429,16 @@ na combustão completa da borracha vulcanizada, alguns são poluentes e provocam
 escapem para a atmosfera, esses gases podem ser borbulhados em uma solução aquosa contendo uma substância 
 adequada. Considere as informações das substâncias listadas no quadro.
 Substância Equilíbrio em solução aquosa Valor da constante de equilíbrio
-Fenol C6H5^OH + H_2^O ⇌  C^6H5O− + H^3O+ 1,3 × 10^−10
-Piridina C5H5^N + H_2^O ⇌  C5^H5NH+ + OH^− 1,7 × 10^−9
-Metilamina CH3NH_2 + H_2^O ⇌  CH3^NH3
+Fenol C6H5OH + H_2O ⇌  C_6H_5O^− + H_3O^+ 1,3 × 10^−10
+Piridina C5H5N + H_2O ⇌  C_5H_5NH^+ + OH^− 1,7 × 10^−9
+Metilamina CH3NH_2 + H_2O ⇌  CH_3NH_3
 + + OH− 4,4 × 10^−4
 Hidrogenofosfato de potássio HPO_4
-2− + H_2^O ⇌  H_2^PO4
+2− + H_2O ⇌  H_2PO_4
 − + OH^− 2,8 × 10^−2
 Hidrogenosulfato de potássio HSO_4
-− + H2O ⇌  SO4
-2− + H_3O^+ 3,1 × 10^−2
+− + H2O ⇌  SO_4
+2− + H3O+ 3,1 × 10^−2
 Dentre as substâncias listadas no quadro, aquela capaz de remover com maior eficiência os gases poluentes é o(a)","D","hidrogenofosfato de potássio.",1,NA,NA,NA,NA,"Portuguese","D"
 "enem_2016_1mil_cn","enem_2016_1mil_cn_1",40112,"ENEM 2016 - CN","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE CIÊNCIAS HUMANAS E SUAS TECNOLOGIAS
@@ -5484,16 +5484,16 @@ na combustão completa da borracha vulcanizada, alguns são poluentes e provocam
 escapem para a atmosfera, esses gases podem ser borbulhados em uma solução aquosa contendo uma substância 
 adequada. Considere as informações das substâncias listadas no quadro.
 Substância Equilíbrio em solução aquosa Valor da constante de equilíbrio
-Fenol C6H5^OH + H_2^O ⇌  C^6H5O− + H^3O+ 1,3 × 10^−10
-Piridina C5H5^N + H_2^O ⇌  C5^H5NH+ + OH^− 1,7 × 10^−9
-Metilamina CH3NH_2 + H_2^O ⇌  CH3^NH3
+Fenol C6H5OH + H_2O ⇌  C_6H_5O^− + H_3O^+ 1,3 × 10^−10
+Piridina C5H5N + H_2O ⇌  C_5H_5NH^+ + OH^− 1,7 × 10^−9
+Metilamina CH3NH_2 + H_2O ⇌  CH_3NH_3
 + + OH− 4,4 × 10^−4
 Hidrogenofosfato de potássio HPO_4
-2− + H_2^O ⇌  H_2^PO4
+2− + H_2O ⇌  H_2PO_4
 − + OH^− 2,8 × 10^−2
 Hidrogenosulfato de potássio HSO_4
-− + H2O ⇌  SO4
-2− + H_3O^+ 3,1 × 10^−2
+− + H2O ⇌  SO_4
+2− + H3O+ 3,1 × 10^−2
 Dentre as substâncias listadas no quadro, aquela capaz de remover com maior eficiência os gases poluentes é o(a)","D","hidrogenosulfato de potássio.",0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2016_1mil_cn","enem_2016_1mil_cn_1",40320,"ENEM 2016 - CN","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE CIÊNCIAS HUMANAS E SUAS TECNOLOGIAS
@@ -6560,7 +6560,7 @@ afinidade que a substância tem com ambientes apolares,
 podendo ser avaliada por seu coeficiente de partição.
 X = OH   (Testosterona)
 X = H( Composto 1)
-X = CH3 (Composto 2)
+X = CH_3 (Composto 2)
 CH3
 CH3
 HH
@@ -6617,7 +6617,7 @@ afinidade que a substância tem com ambientes apolares,
 podendo ser avaliada por seu coeficiente de partição.
 X = OH   (Testosterona)
 X = H( Composto 1)
-X = CH3 (Composto 2)
+X = CH_3 (Composto 2)
 CH3
 CH3
 HH
@@ -6674,7 +6674,7 @@ afinidade que a substância tem com ambientes apolares,
 podendo ser avaliada por seu coeficiente de partição.
 X = OH   (Testosterona)
 X = H( Composto 1)
-X = CH3 (Composto 2)
+X = CH_3 (Composto 2)
 CH3
 CH3
 HH
@@ -6731,7 +6731,7 @@ afinidade que a substância tem com ambientes apolares,
 podendo ser avaliada por seu coeficiente de partição.
 X = OH   (Testosterona)
 X = H( Composto 1)
-X = CH3 (Composto 2)
+X = CH_3 (Composto 2)
 CH3
 CH3
 HH
@@ -6788,7 +6788,7 @@ afinidade que a substância tem com ambientes apolares,
 podendo ser avaliada por seu coeficiente de partição.
 X = OH   (Testosterona)
 X = H( Composto 1)
-X = CH3 (Composto 2)
+X = CH_3 (Composto 2)
 CH3
 CH3
 HH
@@ -9202,7 +9202,7 @@ CADERNO
 AZUL",NA,"O benzeno, um importante solvente para a indústria química, é obtido industrialmente pela destilação do 
 petróleo. Contudo, também pode ser sintetizado pela trimerização do acetileno catalisada por ferro metálico sob altas 
 temperaturas, conforme a equação química:
-3 C_2^H2 (g) → C_6^H6 (l)
+3 C_2H_2 (g) → C_6H_6 (l)
 A energia envolvida nesse processo pode ser calculada indiretamente pela variação de entalpia das reações de 
 combustão das substâncias participantes, nas mesmas condições experimentais:
 I. C 2H2 (g) + 5
@@ -9254,7 +9254,7 @@ CADERNO
 AZUL",NA,"O benzeno, um importante solvente para a indústria química, é obtido industrialmente pela destilação do 
 petróleo. Contudo, também pode ser sintetizado pela trimerização do acetileno catalisada por ferro metálico sob altas 
 temperaturas, conforme a equação química:
-3 C_2^H2 (g) → C_6^H6 (l)
+3 C_2H_2 (g) → C_6H_6 (l)
 A energia envolvida nesse processo pode ser calculada indiretamente pela variação de entalpia das reações de 
 combustão das substâncias participantes, nas mesmas condições experimentais:
 I. C 2H2 (g) + 5
@@ -9306,7 +9306,7 @@ CADERNO
 AZUL",NA,"O benzeno, um importante solvente para a indústria química, é obtido industrialmente pela destilação do 
 petróleo. Contudo, também pode ser sintetizado pela trimerização do acetileno catalisada por ferro metálico sob altas 
 temperaturas, conforme a equação química:
-3 C_2^H2 (g) → C_6^H6 (l)
+3 C_2H_2 (g) → C_6H_6 (l)
 A energia envolvida nesse processo pode ser calculada indiretamente pela variação de entalpia das reações de 
 combustão das substâncias participantes, nas mesmas condições experimentais:
 I. C 2H2 (g) + 5
@@ -9358,7 +9358,7 @@ CADERNO
 AZUL",NA,"O benzeno, um importante solvente para a indústria química, é obtido industrialmente pela destilação do 
 petróleo. Contudo, também pode ser sintetizado pela trimerização do acetileno catalisada por ferro metálico sob altas 
 temperaturas, conforme a equação química:
-3 C_2^H2 (g) → C_6^H6 (l)
+3 C_2H_2 (g) → C_6H_6 (l)
 A energia envolvida nesse processo pode ser calculada indiretamente pela variação de entalpia das reações de 
 combustão das substâncias participantes, nas mesmas condições experimentais:
 I. C 2H2 (g) + 5
@@ -9410,7 +9410,7 @@ CADERNO
 AZUL",NA,"O benzeno, um importante solvente para a indústria química, é obtido industrialmente pela destilação do 
 petróleo. Contudo, também pode ser sintetizado pela trimerização do acetileno catalisada por ferro metálico sob altas 
 temperaturas, conforme a equação química:
-3 C_2^H2 (g) → C_6^H6 (l)
+3 C_2H_2 (g) → C_6H_6 (l)
 A energia envolvida nesse processo pode ser calculada indiretamente pela variação de entalpia das reações de 
 combustão das substâncias participantes, nas mesmas condições experimentais:
 I. C 2H2 (g) + 5

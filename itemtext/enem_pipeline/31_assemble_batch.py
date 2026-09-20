@@ -108,6 +108,13 @@ OPTION_RULE = (
 # is present in the file about to be copied, the pass has not been run on the
 # PIPELINE output, and assembling would ship the unfixed text. So: refuse, and
 # name the pass that is missing.
+LATE_DESC = re.compile(r"Descri[\u00e7c][\u00e3a]o\s+d(?:o|a|e|os|as)\b[^:]{0,90}:")
+LATE_DESC_CLOSER = re.compile(
+    r"(\?|\u00e9 mais pr[\u00f3o]xim[ao] de|corresponde a|deve ser|ser[\u00e1a] de|"
+    r"[\u00e9e] igual a|em que|classificado como|da seguinte maneira|"
+    r"respectivamente|[\u00e9e],? aproximadamente,?)\s*$", re.I)
+KEEP_LATE_DESC = {"78578", "141775", "87450", "59546", "89518"}
+
 UNFIXED = [
     ("46_strip_option_letter.py", "options still prefixed with their own letter",
      lambda rs: sum(1 for r in rs
@@ -119,10 +126,23 @@ UNFIXED = [
                     for ch in ("\u00fe", "\u021c", "\u0138", "\ufb01", "\ufb02",
                                "\uf02b", "\uf02d", "\uf0de", "\uf072"))),
     ("26_strip_page_furniture.py", "printed page furniture",
-     lambda rs: any(re.search(r"\*[A-Za-z0-9]{5,}\*|\.indb|"
+     lambda rs: any(re.search(r"\*[A-Za-z0-9]{5,}\*|\.ind[bd]|"
                               r"\d\s*[\u00ba\u00b0o]\s*dia\s*\|",
                               (r.get("item_text") or "") + (r.get("option_text") or ""))
                     for r in rs)),
+    # R13. A description that starts late in the stem AND follows a question
+    # closer describes something the item has already stopped talking about.
+    # KEEP_LATE_DESC is the audited allow-list from 54_relocate_descriptions.py:
+    # "Descricao das alternativas" legitimately follows the question, as do the
+    # two verified own-figure cases and the recipient of a relocation.
+    ("54_relocate_descriptions.py", "a figure description on the wrong item",
+     lambda rs: any(
+         r["item"] not in KEEP_LATE_DESC
+         and (lambda st, ms: ms and ms[-1].start() >= len(st) * 0.55
+              and LATE_DESC_CLOSER.search(st[:ms[-1].start()].rstrip()))(
+                  re.sub(r"\s+", " ", r.get("item_text") or ""),
+                  list(LATE_DESC.finditer(re.sub(r"\s+", " ", r.get("item_text") or ""))))
+         for r in rs)),
     ("49_option_conventions.py", "two options with identical text",
      lambda rs: (lambda v: len(v) >= 2 and len(v) != len(set(v)))(
          [(r.get("option_text") or "").strip() for r in rs

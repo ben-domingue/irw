@@ -176,3 +176,76 @@ Response CSVs are the #1942-corrected build, not the pre-fix ones.
 - A year where LC's 50-over-45 structure does not hold.
 - Any case where following a rule here would require inventing an item code,
   an option letter, or a `resp` value.
+
+## R12. Stacked fractions are restored from the bar, not from the text
+
+A printed fraction is a numerator, a drawn rule and a denominator. Text
+extraction reads them in layout order and emits two ordinary tokens, so `7/5`
+becomes `7 5` and `OR = (1/4) OM` becomes `OR = 1 4 OM`. No character is wrong
+and nothing is missing, so **every content gate stays green while the
+arithmetic is gone**.
+
+R12 exists because a stacked numerator is printed at *full body size* on a
+raised baseline. The size test in `48_mark_scripts.py` cannot see it by
+construction. The only reliable signal is the bar, which is a drawing.
+
+`53_stacked_fractions.py` restores them, and its rule is deliberately narrow —
+a missed fraction is better than an invented one:
+
+1. A bar is a drawn rect no taller than 1.8pt, 3–70pt wide, clear of the
+   header and footer bands. Identical rects are deduped: the same rule is
+   sometimes stroked twice, and that is one bar.
+2. Any two bars sharing a baseline are a table rule, not a fraction.
+3. Text must sit tightly above **and** below, each no wider than 1.25× the bar
+   and centred on it within 30%. Word bboxes carry the font's ascender and
+   descender, so the numerator's box dips *below* the bar and the
+   denominator's rises *above* it — the tolerances must allow for that or
+   nothing matches.
+4. The flattened form must actually occur in that page's reading order, with
+   token boundaries on both outer edges.
+5. The shipped row is located by an exact context substring, so the rewrite is
+   anchored to the item the bar was measured in.
+6. Rewrite only where the flattened form occurs in the row exactly as often as
+   the page has bars for that pair. **Any mismatch is reported, not guessed.**
+
+Steps 4 and 6 are what keep `ABO` from becoming `AB/O`, an axis label reading
+`anos x` from becoming `s/x`, and `Teste 1:` from becoming `Teste/1`.
+
+Two traps inside the rule itself, both silent:
+
+- The page text is normalised to single spaces, but **the stored stem keeps the
+  line break the fraction was printed across** (`'54\n100'`). Matching stored
+  text with the page pattern finds nothing while reporting success.
+- Rewriting the first matching row is not enough. An item is five rows, one per
+  option, each carrying the same stem.
+
+Where the rule declines — side-by-side fractions on one printed line, or a
+reading order that separates the numerator from its denominator entirely — the
+fix goes in `PATCH_STEM` with the page it was read off cited. Nothing goes in
+that table that cannot be verified that way.
+
+## R13. A figure description may belong to a different item
+
+The accessibility editions usually set a figure description inline. Some are
+collected **at the foot of the page**, after the last item's options, and those
+describe an item printed earlier on the page or on the next one. A parser that
+attaches trailing text to the item it follows puts them on the wrong item.
+
+Again no gate can see it: the stem is longer than it should be, not shorter.
+2018 CN 59858 asks about the energy released by oxidising glucose and its stem
+ended with a description of an electrical circuit.
+
+The audit in `54_relocate_descriptions.py` flags any stem whose last
+`Descrição ...:` block starts in its final 45% *and* follows a question closer
+— a well-formed item describes its figure before asking about it. Three things
+trip it and only the first is a defect:
+
+- **misplaced** — belongs to another item; goes in `MOVES` with the evidence;
+- **option set** — `Descrição das alternativas` describes the five options, so
+  it correctly follows the question;
+- **own figure** — printed after the options but genuinely this item's.
+
+Never strip a misplaced description without first looking for its owner. All
+three found so far had one, each already shipped and each carrying no
+description of its own, so the fix was a move. `--apply` refuses to run if the
+audit turns up a case in neither list.
