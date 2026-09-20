@@ -22000,3 +22000,78 @@ items, batch_277) and does not reach WWB1–3; the existing SLS block row names
 `song_2025_ep/fg/hu/st` and does not reach SC. Both checked explicitly rather than assumed.
 
 Cap (`batch_299`) not reached; queue has 61 pending.
+
+---
+
+## batch_279 — 2026-09-20 14:07–14:20 PDT
+
+3 tables, 3 agents (one per table). **3 written / 0 blocked / 0 failed — yield 3/3 (100%).**
+Circuit breaker not triggered. Numbered 279 because "highest + 1" is computed over
+directories below 300 only; `batch_300`–`batch_304` on this branch belong to irw#2228.
+
+| table | outcome | mapping_basis | verification |
+|---|---|---|---|
+| `qin_2025_cultural_identity` | written, 18 rows (3 × 6) | `paper_explicit` | VERIFIED — explicit code labels + per-respondent source join + Table 7 reproduction |
+| `wang_2026_veteran_expectations` | written, 21 rows (3 × 7) | `paper_explicit` | VERIFIED — explicit code labels + per-item response-count matching |
+| `ribeiro_2019_academic_motivation` | written, 203 rows (29 × 7) | `data_labels` | NOT_NEEDED (exempt) |
+
+**Gates.** `normalize_nulls` 0 of 3 changed. `audit_batch` 3 PASS, no anomalies.
+`verify_batch` 2 PASS + 1 MISSING(exempt). `lint_verification` 3 rows, **0 ERROR**, 2 WARN.
+`irw-validate` ok on all three. `check_provenance` clean (exit 0; the one `mixed` row it
+reports is `ye_2025_q25_scale`, not ours).
+
+Both lint WARNs are explained in `notes.csv` per Step 5c and neither is an itemtext defect:
+`qin`'s blank `option_text` is a source gap (the article prints no anchors for its 1–6
+scale, and padding levels with their own numbers is forbidden); `wang`'s "VERIFIED but the
+evidence hedges" is a hedge about whether the *deposit's own* column labelling is right,
+which no route can reach — the route itself fully discriminates (live per-item resp 1–7
+count vectors match the deposit columns exactly and are pairwise distinct, 3 of 9
+cross-comparisons equal = the diagonal only).
+
+**Step 5b orchestrator re-check — one agent claim confirmed, and it exposes a conflict with
+another line's shipped table.** The `ribeiro` agent claimed the Mendeley `.sav` files carry
+value labels for all seven scale points. Re-read independently with `pyreadstat`: confirmed,
+and identical across AmostraA, AmostraB and all 29 item variables (1 distinct label set
+across 29 vars) — 1 = *Nenhuma Correspondência*, 2 = *Muito Pouca Correspondência*,
+3 = *Pouca Correspondência*, 4 = *Alguma Correspondência*, 5 = *Moderada Correspondência*,
+6 = *Muita Correspondência*, 7 = *Total Correspondênia* (typo in source; shipped with the
+Annex's spelling, disclosed).
+
+**CONFLICT, for the irw#2228 owner.** `MotAcademica_Ribeiro_2019` (batch_304) is the same
+instrument and the same 29 × 7 = 203 grid from the same study, read from the paper's *Anexo*
+instead of the `.sav`. It ships `resp=2` as "Pouca correspondência" and leaves 3, 4 and 5 as
+`NA` because the Anexo typesets "Moderada correspondência" across points 3–5. The `.sav`
+value labels are authoritative over the typeset answer strip, so that table is not merely
+under-labelled — it is **wrong at `resp=2`**. Its provenance records `uploaded=NA`, so it is
+plausibly still pre-upload and cheap to correct. Separately, the two tables look like
+duplicate coverage of one dataset (both 1157 ids / 33,553 rows); that is a corpus question
+for the metadata line, not for a round.
+
+**Step 3b.** One real mismatch caught: the four earlier `wang_2026_*` tables (batches
+217/218) are a **different study** — Wang Y & Zou B, `10.1371/journal.pone.0346229`, TAM
+constructs on 1–5 with 500 respondents. This table is Wang S & Zhang Z,
+`10.1371/journal.pone.0351162`, 624 Guizhou veterans on 1–7, codes B1–B3. Nothing was
+reused; the table name is correct. `qin_2025_cultural_identity` *does* share its source with
+the batch_149/150 siblings, and the agent found Table 7 reachable as XML markup rather than
+only as the image batch_150 had to read — a cheaper route for any further siblings.
+
+**Response-data defect worth an issue (source-side, not itemtext).**
+`wang_2026_veteran_expectations`: the paper reports and analyses 525 valid responses, but the
+deposit and the live table both hold 624, with nothing marking which 525. The published
+Cronbach's α of 0.76 (Table 2) recomputes to 0.66 on the 624 (r: B2–B3 0.62, B1–B3 0.29,
+B1–B2 0.24). Also note its Table 1 is published **image-only**, so the item text is an
+image transcription and deserves a human spot-check.
+
+**Language.** All three are non-English administrations. `ribeiro` ships Portuguese base +
+IRW English in `_translated` (`machine_translation` — an issues-page entry is owed on
+shipping; `check_provenance` already lists it as HELD, so nothing is owed yet). `qin` and
+`wang` both hit the 2026-09-01 English fallback: no CJK anywhere in article or deposit, so
+the authors' English ships in the base fields with `language=Chinese`. `wang`'s
+`language=Chinese` is an *inference* from where and to whom the survey ran — the paper never
+states it — and is recorded as such.
+
+**Rights.** No new `instrument_rights_register.csv` rows. All three are the studies' own
+items under CC BY 4.0 / CC0 deposits; the EMA's originating publication (Guimarães & Bzuneck
+2008) states no restrictive term and has no register row.
+
+Cap (`batch_299`) not reached; queue has 58 pending.
