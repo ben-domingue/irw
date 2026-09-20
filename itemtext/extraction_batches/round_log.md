@@ -21476,3 +21476,69 @@ dictionary Description is misleading on its own; worth the same treatment `natur
 batch_226. The public_note covers the shipped table.
 
 Queue after this round: 1092 done / 275 blocked / 88 pending / 60 excluded / 13 failed.
+
+## batch_270 — 2026-09-20T12:09 → 12:30
+
+3 tables claimed, **3 written / 0 blocked / 0 failed — 100% yield.** Three agents
+(the 2026-09-11 setting). No kills, no rate limits, no retries.
+
+- `pierro_2018_locomotion_s4` — RMQ Locomotion, Study 4 (PLOS ONE 13(3):e0193357,
+  S4 .sav). 12 items × 1–6. mapping_basis=paper_order, text_source=translated_substitute
+  (Italian administration, English RMQ base text), option_text endpoint-only per the paper.
+  Step 5b **PARTIAL**. Stored **already reverse-recoded** — verified, not assumed: the .sav's
+  own `locomotion` composite = the plain unrecoded mean (max |diff| 0.0, N=189), the stored
+  direction reproduces all three published Study 4 statistics (α 0.8320 / M 4.3743 / SD 0.6192
+  vs .83 / 4.37 / .62) while un-recoding misses all three, and after un-recoding exactly
+  `locR6` (−0.256) and `locR9` (−0.403) go negative. So `locR6`/`locR9` ship flipped anchors.
+  Note this is *not* inherited from the siblings: `_s1` stores recoded, `_s3` stores raw.
+  What is NOT established: nothing separates the ten positive items from one another, nor
+  locR6 from locR9.
+- `pierro_2018_tf_present_s4` — Temporal Focus Scale, Present subscale. 4 items × 2–7.
+  Step 5b **NO_ROUTE on the item↔text axis**, matching `tf_past_s4`. Subscale *identity* is
+  nailed down hard (live M 5.115 / SD 1.001 / α 0.854 vs Table 4's Present 5.12 / 1.00 / .85,
+  L1 0.010 against 0.160 Past and 0.540 Future, plus the entire published correlation row to
+  within .004) — but every one of those numbers is permutation-invariant over the four codes.
+  The agent did new work batch_139 did not: it recovered Shipp 2009 item numbers for three of
+  the four from PMC7851924 Table 3. The fourth is Shipp 5 *or* 10 and ships last. Two
+  cross-sample falsification attempts against the Italian validation disagree by one adjacent
+  swap each, so nothing decides TFpresent2/3/4. A public_note ships.
+- `wesselmann_2018_drri` — **DRRI-2 Section G "Deployment Concerns" / Perceived Threat**,
+  12 items × 1–5, mapping_basis=**data_labels** (verify script exempt, NOT_NEEDED row written
+  to both the batch file and the tracker). Step 3b settled by three independent sources; it is
+  *not* the Post-Deployment Social Support subscale, which is the deposit's `social1-social15`
+  and the still-queued sibling `wesselmann_2018_social_support`.
+
+**Gates.** normalize_nulls 0 of 3 changed; audit_batch **3/3 PASS, no anomalies** (so no
+Step 5c WARN explanations owed); verify_batch 2 PASS + 1 MISSING(exempt); lint_verification
+3 rows, no problems; `irw-validate` ok on all three; `check_provenance.R` clean (the one
+`translation_source=mixed` review line is `ye_2025_q25_scale`, unrelated to this round).
+
+**Step 5b orchestrator re-check — the DRRI agent overrode a source, so I re-checked it
+myself against `s001.sav`, and it holds exactly.** 12/12 live item codes' `item_text` equals
+the SPSS variable label by exact string comparison; the .sav carries **0** value-label sets,
+so the anchors necessarily came from elsewhere; the file's own `concern` composite equals the
+unreversed mean of drri1..drri12 at max |diff| **0.0** against **4.0** reversed; α 0.9025
+(n=117) reproduces the paper's .90; r = +0.403 traitanx, +0.394 stateanx, +0.393 ptsd,
+−0.179 support. Reading the codebook directly confirms the misprint the agent overrode: it
+prints `[Rating Scale: Strongly Agree, Somewhat Disagree, Neither Agree nor Disagree;
+Somewhat Agree, Strongly Agree]` — anchor 1 duplicated from anchor 5. High raw = more
+concern, so 1 = "Strongly disagree". The override is correct.
+
+**Two cross-table observations, neither a defect in this round's output:**
+1. That codebook misprint is **not local to the DRRI block** — the identical malformed rating
+   scale is copy-pasted under the Civilian-Based Social Support and PCL-5 headings too.
+   batch_223 hit it independently on `wesselmann_2018_pcl` and handled it the same way (shipped
+   NCPTSD anchors, disclosed in its public_note). The still-queued `wesselmann_2018_social_support`
+   will hit it a third time: the next round's agent should expect it and not treat it as new.
+2. The DRRI has **no row** in `instrument_rights_register.csv`. The NCPTSD page's only qualifier
+   ("intended for use by qualified mental health professionals and researchers") is verbatim the
+   clause already ratified `ship_with_note` for PCL-5 and LEC-5. The agent correctly wrote no
+   register row (rounds may write `block` only). **For Ben:** three NCPTSD instruments now share
+   one clause — a DRRI `ship_with_note` row may be worth banking.
+3. Flagged by the tf_present agent, logged not filed: the two batch_139 siblings used
+   inconsistent within-subscale order conventions on the same .sav — `tf_past_s4` ascending Shipp
+   order (1, 6, 9, 11), `tf_future_s4` 3, 12, 10, 7 (Olsen et al.'s listing, miscited there as
+   "Andersen & Sorensen"). Both are self-declared unverified, so this is a consistency question,
+   not a demonstrated error. I did not open an issue.
+
+Queue: 85 pending, 0 in_progress. Cap (`batch_299`) not reached.
