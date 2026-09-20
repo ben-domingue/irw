@@ -21111,3 +21111,29 @@ check_label_claims.py with no flags), lint_verification (1 WARN: uti_newlands_20
 - talaifar_2025_study1_lifestyle_survey: its PARTIAL is a supplementary route. The item-to-code tie is the codebook printing each item against the data's column names, so it needs no note.
 - mede_2025 (4 tables): each round checked for the Hickman 2021 upstream that blocked clim_government, and found no attribution for these batteries. Clear.
 - Blocks from the chain: uti_newlands_2023_rutiiq (PARED Insights licence; **register row owed, human**), mede_2025_clim_government (Hickman NC-ND upstream), and christiannationalism_davis2021 (response-data defect: item codes are shifted one source column).
+
+### The marcatto `_ocs` duplicate retired — 2026-09-19
+
+irw#2287, and the second time this deposit has produced one. `_ocs` held the same 12,166 rows,
+553 participants, 22 items and covariates as `_dtw`, and **its item codes are `dtw` codes** — the
+first five rows read back from the live table are `dtw4`, `dtw13`, `dtw15`, `dtw15`, `dtw5`, and
+sorted on `(id, item)` the two frames are identical. So the name promised the Organizational
+Commitment scale and the table held the Dark Tetrad at Work scale, which is the reason `_cwb`
+went in #1967.
+
+Located in **shard 1, `item_response_warehouse`**, and no other, with no open draft on that
+dataset. Ben deleted it and published: 990 tables remain and `_dtw` survives, both asserted by
+the tool (`tools/retire_marcatto_ocs.py`) rather than eyeballed.
+
+**This corrects the #1967 entry above.** That round described the sibling family as "`_ocb`,
+`_ocs`, `_snaq`, each named for what it holds". That was wrong about `_ocs`. **`_ocb` and `_snaq`
+have not been given the same test** — a lead, not a finding.
+
+**The dictionary row is kept, marked private, not deleted.** `v54.0` and every earlier version
+still serve the table, so a deleted row would leave a pinned reader with nothing to explain what
+they are reading. Note the asymmetry the `_cwb` case exposed: `metadata.csv` and `tags.csv` rows
+drop themselves when a table leaves Redivis, but **`biblio.csv` does not** — `_cwb`'s biblio row
+outlived its table by two weeks. Both it and `_ocs`'s are removed here.
+
+Also unimported, and the same shape as the CWB block #1967 found missing: the deposit's real
+Organizational Commitment responses appear to be absent from IRW entirely.
