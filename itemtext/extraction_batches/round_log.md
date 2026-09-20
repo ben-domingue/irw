@@ -21948,3 +21948,55 @@ Description; the whole `song_2025_*` family likely needs one dictionary pass.
 
 Cap (`batch_299`) not reached. Queue after this round: 64 pending, 276 blocked, 13 failed,
 60 excluded, 1115 done.
+
+## batch_278 — 2026-09-20 13:50–14:05 PDT
+
+3 tables claimed, 3 agents (one per table, per the 2026-09-11 setting). No kills, no
+retries, no rate limits.
+
+**written 3 / blocked 0 / failed 0 — yield 3/3 (100%).**
+
+| table | rows | mapping_basis | verification |
+|---|---|---|---|
+| `song_2025_sc` | 30 (6 items × resp 1–5) | paper_explicit | VERIFIED — paper labels + route 1 per-item stats |
+| `song_2025_wwb` | 15 (3 items × resp 1–5) | paper_explicit | VERIFIED — paper labels + route 1 per-item stats |
+| `dou2025_ans` | 108 (18 items × resp 1–6) | data_labels (positional derivation, so re-run not asserted) | VERIFIED — positional re-run + route 1 descriptives |
+
+Numbering: `batch_278` = highest-below-300 (277) + 1. The 300–304 hole is now fully
+populated on this branch (300–304 all present from the irw#2228 merge); computing over
+directories below 300 handled it as the prompt requires.
+
+**Gates.** normalize_nulls 0/3 changed; audit_batch 3 PASS, no anomalies; verify_batch
+3 PASS; lint_verification 0 ERROR / 3 WARN (all the same expected blank-`option_text`
+WARN, explained in notes.csv per Step 5c); `irw-validate` clean on all three;
+check_provenance clean (dou2025_ans correctly listed as HELD machine_translation — it
+owes an issues-page line when it is stamped, not now).
+
+**Step 5b — both data claims independently re-checked by the orchestrator, both confirmed.**
+- `song_2025_sc` keying split: recomputed from the deposit S1 workbook (n=485). SC1–SC5
+  correlate +0.564…+0.700 with each other and −0.341…−0.529 with SC6; against PJ1 the
+  five run −0.376…−0.488 while SC6 runs +0.533. So SC1–SC5 are the reversed block and a
+  higher stored `resp` means less agreement with the shipped sentence. Shipped as a
+  `public_note`. The Table 2 flip reproduces too: live SC2 2.113 → printed 2.887, SC3
+  2.111 → 2.889, SC6 3.981 → 1.019, i.e. paper mean = 5 − live mean for the SC block only.
+  One range correction: the agent reported the SC-vs-PJ correlations as −0.43…−0.53;
+  against PJ1 they are −0.376…−0.488. Direction and conclusion unaffected.
+- `dou2025_ans` "no 7 anywhere": recomputed from the raw workbook. Across all 18 ANS
+  columns the counts are 1:162, 2:332, 3:688, 4:3119, 5:5197, 6:3966 = 13464 = 18 × 748,
+  so every administered cell is accounted for and none is a 7. The paper's seven-point
+  gloss describes Świątek's original scale, not this administration; blank `option_text`
+  is correct, not a gap.
+
+**Step 3b / dictionary drift — two rows worth correcting.** The dictionary calls both
+`song_2025_sc` and `song_2025_wwb` "unlabeled construct". SC is the six-item **Service
+climate** scale (Kralj & Solnet 2010, upstream Schneider/White/Paul 1998); WWB is the
+**Work wellbeing** dimension of the EWBS (Zheng et al. 2015). The sc agent appended one
+`note_only` row to `itemtables/pending_index_notes.csv` (306 rows, still parses); the
+WWB one is recorded in notes.csv only.
+
+**Rights.** No new `instrument_rights_register.csv` rows (a round may write `block`, never
+`ship`). The existing EWBS block row is scoped to the *life*-wellbeing subscale (SWLS
+items, batch_277) and does not reach WWB1–3; the existing SLS block row names
+`song_2025_ep/fg/hu/st` and does not reach SC. Both checked explicitly rather than assumed.
+
+Cap (`batch_299`) not reached; queue has 61 pending.
