@@ -15,9 +15,13 @@ def process_parenting_data_final(file_path):
         '4. Escolaridade': 'cov_education_level',
         '5. Em que estado você reside?': 'cov_state',
         '6. Em comparação com a sua cidade, em qual classe social você se encontra?': 'cov_social_class',
-        '7. Quantos filhos você tem?': 'cov_children_count',
-        'Nome completo e idade do(s) seu(s) filho(s)': 'cov_children_details',
-        'Se você deseja escrever algum comentário (impressões, críticas, depoimentos, sugestões etc), utilize este espaço:': 'cov_comments'
+        '7. Quantos filhos você tem?': 'cov_children_count'
+        # NOT shipped (irw#2255, 2026-09-19): the source asks for each child's full name and
+        # age, and the comment box is free text that can name people. Both were published as
+        # covariates until the tables were withdrawn; leave them out of demo_map so they are
+        # dropped with the other unmapped source columns.
+        #   'Nome completo e idade do(s) seu(s) filho(s)': 'cov_children_details',
+        #   'Se você deseja escrever algum comentário ...': 'cov_comments'
     }
     
     df.rename(columns=demo_map, inplace=True)
