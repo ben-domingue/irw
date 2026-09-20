@@ -85,6 +85,17 @@ jobs:
         working-directory: metadata
         run: Rscript tests/test_bibtex_overrides.R
 
+      # A cached citation must name its own row's DOI (#2301). 58 biblio rows
+      # shipped a BibTeX entry for a different, real, unrelated paper: the
+      # sheet's enumerated DOIs were corrected (#1764), and the citations
+      # fetched against the old values were never invalidated, because they
+      # were not blank. The last assertions in this test run the gate over the
+      # four shipped biblio exports, so a stale citation fails the pull request
+      # that would ship it rather than being found by reading a bibliography.
+      - name: BibTeX cites the row's own DOI
+        working-directory: metadata
+        run: Rscript tests/test_bibtex_doi_check.R
+
       # The dictionary union (#1732). Runs offline -- dict_union.R touches no
       # network -- so the merge rule is checked on every PR rather than only
       # when someone remembers to run it. Its load-bearing assertion is that a

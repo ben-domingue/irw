@@ -165,6 +165,17 @@ export — but they differ in *granularity*, and that difference is deliberate:
 > `DOI (for paper)`, the paper cell is cleared *in the export*, never in the
 > sheet, and every cleared cell is named in the provenance file.
 
+> **`OSF_PERMISSION_PROJECTS` in `metadata/dict_union.R` asserts a fact about
+> the outside world.** It stamps `Derived_License = "Permission via Email"` on
+> the OSF deposits that state no licence, blank cells only. Its premise is that
+> the deposit is *silent*, and when that is wrong the stopgap quietly publishes
+> a weaker licence than the source grants -- 61 rows across eleven projects did,
+> until #2302. Run
+> [`metadata/check_osf_permission_projects.py`](metadata/check_osf_permission_projects.py)
+> before adding an entry and whenever the list is touched; it asks the OSF API
+> and exits non-zero on any project that publishes a licence. A project that
+> does gets its value from `dictionary_auto.csv` and leaves the list (#2058).
+
 > **Do not delete the rename in `metadata/tag_normalize.R`.** Its comment says to
 > fix the sheet itself once the Sheets-write question is resolved, which reads as
 > temporary. It is not. The rename is idempotent, and it also repairs rows entered
