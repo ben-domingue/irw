@@ -21349,3 +21349,79 @@ No rate limits, no quota errors, no full-table export performed. Queue after thi
 `willvul`.
 
 Cap (`batch_271`) not reached — 4 rounds remain.
+
+## batch_268 — 2026-09-20
+
+3 tables claimed, 3 agents (one per table). **Written 2 / blocked 1 / failed 0.** Yield 2/3 = 67%.
+Failed rate 0% — circuit breaker not tripped. Cap is `batch_271`; not reached, round ends normally.
+
+Numbering: highest existing directory **below 300** was `batch_267`, so this round is `batch_268`.
+The 300–304 hole (irw#2228) is now fully populated on this branch — `batch_300`…`batch_304` all
+exist — so a naive "highest + 1" would have produced `batch_305` and skipped three numbers.
+
+**Gates:** normalize_nulls 0 of 2 normalized; audit_batch **2 PASS, no anomalies** (no WARNs, so
+nothing owed under Step 5c); verify_batch 1 PASS + 1 MISSING(exempt); lint_verification 2 rows,
+no problems; `irw-validate` ok on both; `check_provenance.R` exit 0 (91 IRW-generated tables,
+0 without an issues-page entry).
+
+**mede_2025_willvul — done.** 15 rows = 3 items × 5 levels (`WILLVUL_ppl|gov|you`).
+`mapping_basis=data_labels`, `text_source=study_materials`. The thirteenth TISP sibling; source is
+the same OSF 5c3qd (CC-By 4.0) deposit and Scientific Data descriptor as batches 263–267, and the
+QSF/.docx were copied from the batch_266/267 cache with both sha256s re-verified rather than
+re-downloaded. Verified for this table specifically: `SCALES["mede_2025_willvul"] = ("WILLVUL_", 1, 5)`
+with `make_scale()` melting prefix-matched columns by name (derivation pattern 1), and QSF block
+`WILLVUL` holding exactly `QID62/63/64`. Unlike the matrix siblings these are three separate MC
+questions with no `ChoiceDataExportTags`, so the code↔text tie is each question's own `DataExportTag`
+plus `RecodeValues {4:1,…,8:5}`. **Near-miss guarded:** a fourth `WILLVUL_`-prefixed element,
+`QID100 = WILLVUL_intro`, is a Qualtrics descriptive-text element with no data column — absent from
+the live item set, and used as `instructions`. Step 5b exempt → `NOT_NEEDED` row, no `verify_*.R`.
+Caveats in notes.csv: 37-language administration with English core wording shipped; ladder points
+2–4 administered unlabelled and shipped blank, not padded; item-specific anchors (`WILLVUL_you` runs
+"No control at all".."Very strong control" while the other two run "Not at all".."Very strongly").
+
+**wang_2016_study1_authalien — done, and the round's real finding.** 20 rows = 4 items × 5 levels,
+104 respondents. `mapping_basis=reconstructed`, `text_source=translated_substitute`,
+`translation_source=official_instrument_english` (Chinese administration; PLOS `s001.sav` carries
+zero variable or value labels, no questionnaire supplement). **The anchors are REVERSED relative to
+the sibling.** Wang's Measures section states "1 (strongly disagree) to 5 (strongly agree)", but the
+four self-alienation columns in the PLOS deposit are stored already reverse-scored, so the shipped
+`option_text` puts "strongly agree" at resp=1 and "strongly disagree" at resp=5 — the opposite of
+what `wang_2016_study1_authliving` ships. Copying the sibling's anchors would have been confidently
+wrong, which is exactly the near-miss the sibling warning exists for.
+*Step 5b orchestrator re-check (this claim overrides a published source, so it was re-derived
+independently, not just re-run):* all four items correlate **positively** with the live
+`wang_2016_study1_se` 10-item total — authalien1 +0.327, authalien2 +0.466, authalien3 +0.606,
+authalien4 +0.567 (n=104, se_total M/SD 38.0/5.1 vs published 38.34/5.08). Raw self-alienation must
+correlate negatively with self-esteem, so the stored coding is the reversed one. The stored-as-is
+12-item authenticity total gives M 42.0 / SD 6.2 against the paper's 42.49 / 6.18, while the rival
+"stored raw" reading (flipping the alienation and external-influence blocks) moves it to 37.0.
+Confirmed; the agent's numbers reproduce exactly. Verification status **PARTIAL** and correctly so:
+block identity and stored direction are established, but *which* of Wood et al. (2008) AS items
+2/7/10/12 each code is comes from canonical ascending subscale numbering and nothing in the data
+separates four same-polarity items on one 1–5 range (item-rest r 0.534/0.657/0.819/0.725).
+One disclosed transcription deviation: cic.edu's typo "I fell as if" corrected to "I feel as if".
+
+**feminist_perspectives — blocked (rights), retry test NO.** Availability was never the bar. The
+table is Open Psychometrics' administration of the **Feminist Perspectives Scale Form 2** (Henley,
+Meng, O'Brien, McCarthy & Sockloskie, 1998, *Psychology of Women Quarterly* 22:317–348); 60 items ×
+5 levels, item codes are bare integers 1–60 which *are* source columns Q1–Q60 (number-preserving
+rename in `data/feminist_perspectives.R`), Step 3b passes, and the numbered wording is printed in
+full at emerge.ucsd.edu. The block is the rights holder's own notice, which **reserves** rights
+rather than disclaiming fitness: permission "for research and educational purposes only", an express
+prohibition on personnel screening, and a requirement that the notice travel with every copy. IRW
+redistributes via Redivis and cannot condition downstream users' purposes (irw#1945). No
+open-licensed source exists to launder the wording — the Open Psychometrics deposit ships response
+data only and its codebook defers to Henley et al.; EMERGE is "All Rights Reserved"; femscale carves
+the 60 question strings out of its MIT licence. A `block` row was appended to
+`instrument_rights_register.csv` (row 102) and a row to `itemtables/pending_index_notes.csv`.
+Changing the outcome needs a relicensing or a ruling from Ben — a human action, hence `blocked`,
+not `failed`.
+
+**Lead for a future round (not acted on):** `wang_2016_study1_authexternal` is still `pending` and is
+the same shape — its items correlate +0.26..+0.38 with the live self-esteem total, so it is very
+likely also stored reverse-scored and will need flipped anchors. Indirectly corroborated here: the
+counterfactual above flips the alienation *and* external blocks together and moves the published
+total from 42.5 to 37.0. `wang_2016_study3_auth` (already shipped) is **not** implicated — it was
+built from raw Chinese labels via `MAP_CN5`, so its ascending anchors are a different case.
+
+No rate limit, spend cap or systemic access issue; no dictionary or metadata problem found.
