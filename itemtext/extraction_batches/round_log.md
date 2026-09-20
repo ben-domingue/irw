@@ -22526,3 +22526,50 @@ themselves, not about item text.
 
 No audit WARNs this round, so Step 5c had nothing to explain. No rate limits or spend caps hit.
 Cap (`batch_299`) not reached.
+
+## batch_288 — 2026-09-20 16:39–16:5x
+
+3 tables, 3 agents (one per table). **written 2 / blocked 1 / failed 0** — yield 67%.
+Circuit breaker not tripped (0% failed).
+
+- **yandun2026_attention** — DONE. 25 rows (5 items x 5 levels). figshare 10.6084/m9.figshare.32114668.v1,
+  CC BY 4.0; item text is the workbook's own indicator header row. mapping_basis=data_labels,
+  text_source=translated_substitute (translation_source=study_supplied; Spanish administered, only the
+  authors' English exists in the deposit, so `_translated` is empty). Verification VERIFIED: the claimed
+  column order 5,6,7,8,9 reproduces 500/500 live responses and is the only one of 120 permutations that
+  does (next best 366/500). Does NOT verify the option_text<->resp axis — endpoints only, 2/3/4 unlabelled
+  and left blank, not padded. Sibling tables from this deposit shipped in batches 233/234.
+- **FACIT_YOUNT_2021_clinic10** — DONE. 36 rows (18 items x 2 levels). Harvard Dataverse
+  doi:10.7910/DVN/IBFK5H, CC0 1.0, SPSS value/variable labels. mapping_basis=data_labels (NOT_NEEDED
+  tracker row). **Step 3b name mismatch, benign:** despite the table name these are NOT FACIT Dyspnea
+  items — they are the study's own medical-conditions checklist (`clinic10ever1_*`, "ever had"), and the
+  dictionary Description already matches the data, so nothing needs correcting upstream. Resp axis
+  cross-checked anyway against the raw .sav: 36/36 per-item x per-level cells reproduce, confirming 1=Yes,
+  0=No. Rights checked and do not bar it — nothing shipped is FACIT or PROMIS wording.
+  **Flag for a later round: `FACIT_YOUNT_2021_limitations` (the facitx*/facit2x* items) IS the FACIT
+  Dyspnea instrument and will need a licence determination; on FACIT.org's own language it looks like a block.**
+- **mekheimer_2026_paf** — BLOCKED (retry test NO; determinate, data defect makes item text unattachable).
+  The wording IS published (Additional file 4, figshare 31387855, CC BY 4.0: full Perceived Academic Freedom
+  Scale) but cannot be attached to PAF_1..PAF_10. Orchestrator re-checked all three contradictions against
+  live data and CONFIRMED them: resp set 1-7 with 375/1600 (23.4%) above the top printed 5-point anchor;
+  live means total 46 vs the paper's q1..q10 total 38.5, matching no 10-wide window of q1..q38; and
+  PAF_7 - PAF_3 taking exactly one distinct value (+1) over all 160 respondents, cor = 1.000000000000.
+  One agent figure did NOT reproduce and was corrected in notes.csv: inter-item |r| across the other nine
+  is **0.31**-1.00 (5 of 36 pairs at |r| >= 0.95), not the 0.83 floor the agent reported.
+  Verification status NO_ROUTE (mapping contradicted, not merely unverified). pending_index_notes.csv row added.
+
+**Gates.** normalize_nulls 0 of 2 changed; audit_batch 2/2 PASS, no anomalies (so no Step 5c WARNs to
+explain beyond the one below); verify_batch PASS=1 + MISSING(exempt)=1; lint_verification 3 rows, no
+problems. irw-validate: yandun ok; FACIT one WARN `name_charset` — the live table name is capitalised
+upstream and the itemtext filename must match it, so it is unfixable here and is not an itemtext defect.
+check_provenance passes (1490 rows / 294 files; the one `mixed` REVIEW line is pre-existing `ye_2025_q25_scale`).
+
+**Notable, beyond the tables themselves.**
+- Dictionary fix wanted: `mekheimer_2026_paf`'s Description expands PAF as "Professional Academic
+  Functioning scale"; the instrument is "Perceived Academic Freedom".
+- Corpus trust: this is the **third of four** `mekheimer_2026` tables whose deposit fails against the
+  paper (cai and id blocked in batch_287, paf here). The N=160 deposit does not reproduce the paper's
+  N=496 analyses at all, and the exact affine PAF_3/PAF_7 pair suggests the deposited file may be
+  constructed rather than raw. Worth a response-data issue independent of item text.
+
+Cap (`batch_299`) not reached; queue has 31 pending, 0 in_progress.
