@@ -21826,3 +21826,50 @@ computed pre-drop. Unresolvable from the deposit and it does not bear on text-to
 Recorded in provenance, notes and the public_note.
 
 Cap (`batch_299`) not reached. Queue: 70 pending.
+
+## batch_276 — 2026-09-20 13:22–13:40
+
+3 tables, 3 agents (one per table). **Written 3 / blocked 0 / failed 0 — yield 100%.**
+
+| table | verification | notes |
+|---|---|---|
+| `yang_2025_intercultural_contact` | PARTIAL (routes 9+3, route 8 weak) | 45 rows, 9 items × 5 anchors |
+| `song_2025_cs` | VERIFIED (route 1) | 20 rows, CS1–CS4 |
+| `song_2025_er` | VERIFIED (explicit code labels + route 1) | 25 rows, ER1–ER5 |
+
+**Gates, all clean.** normalize_nulls 0/3 changed; audit_batch 3 PASS, **zero WARNs**;
+verify_batch PASS=3; lint_verification 0 ERROR / 2 WARN; `irw-validate` ok on all three;
+`check_provenance.R` exit 0. Merge sidecars deleted by explicit name, not by glob.
+All three are `paper_explicit`, none `data_labels`, so every written table already carried a
+verification row and no NOT_NEEDED rows were owed in either file.
+
+The 2 lint WARNs are both "option_text ships blank" on the song tables. Correct, not a
+defect: the article publishes only "A five-point Likert scale was used" and prints no anchor
+labels, so option_text is blank per the never-pad rule. Explained in notes.csv.
+
+**Step 5b, orchestrator re-checks of agent claims:**
+- CONFIRMED from the cached `article.xml`: Song et al.'s Table 3 prints **PJ3 and PJ4 with
+  verbatim-identical wording** ("Are your department's procedures consistent with ethical
+  standards?"), and **ER2/ER3 as bare descriptors** rather than items. Both are defects in the
+  published source, not the extraction. `song_2025_pj` is still in the queue — whoever takes it
+  inherits the PJ3/PJ4 collision.
+- CONFIRMED: `metadata/tags.csv` records `primary language(s): chi` for
+  `yang_2025_intercultural_contact`, but the shipped CSV has **0 CJK characters** and transcribes
+  an English questionnaire with English anchors. The tag is not corroborated by the extraction.
+  Flagged, not acted on.
+- **NOT CONFIRMED — unverified lead.** Both song agents report the IRW dictionary Description for
+  `song_2025_*` reads "Servant-leadership survey block XX (unlabeled construct)", wrong for CS
+  (Customer satisfaction) and ER (Employee retention). This is uncheckable from the worktree:
+  `metadata/metadata.csv` has no Description column, so the claim concerns the dictionary Google
+  Sheet. Needs a human to confirm before any correction is filed. Recorded in notes.csv only.
+
+Also noted by the agents and worth carrying forward: Song's Tables 2 and 3 are **plain text inside
+`article.xml`**, so no sibling table needs OCR of `t002.png`/`t003.png`; and Table 2's SD is the
+**population** SD (ddof=0), which makes sample-SD checks look like near-misses at 3 dp.
+
+Neither `song_2025_cs` nor `song_2025_er` is covered by the SLS rights-register block that stopped
+`song_2025_ep/_fg/_hu/_st` — both are separately-sourced scales, no `match_item_text` reaches them.
+
+No blocked tables, so no `pending_index_notes.csv` rows owed. No rate limit or spend cap hit.
+Cap not reached (cap is `batch_299`; this is 276). Numbering skipped the 300–304 irw#2228 hole:
+`batch_300`–`batch_304` exist on this branch but were excluded from the max, so 275 + 1 = 276.
