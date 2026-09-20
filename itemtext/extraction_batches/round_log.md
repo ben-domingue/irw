@@ -21603,3 +21603,66 @@ Notable, non-blocking:
 
 Queue after this round: 1098 done / 275 blocked / 82 pending / 60 excluded / 13 failed.
 Cap is batch_299 — not reached, next firing proceeds.
+
+## batch_272 — 2026-09-20T12:35-07:00
+
+3 tables claimed, 3 agents (one per table), all from the same PLOS deposit as
+batch_271's `afaya_2020_complications_knowledge`.
+
+**Written 3 / blocked 0 / failed 0 — yield 3/3 (100%).** Circuit breaker not
+approached (0% failed).
+
+| table | rows | items | mapping_basis | outcome |
+|---|---|---|---|---|
+| afaya_2020_diet_knowledge | 39 | 13 (kd) | data_labels | done |
+| afaya_2020_exercise_knowledge | 12 | 4 (ke) | data_labels | done |
+| afaya_2020_footcare_knowledge | 42 | 14 (kf) | data_labels | done |
+
+Gates: normalize_nulls 0 of 3 changed; audit_batch 3 PASS, no anomalies and no
+WARNs (so Step 5c is vacuous this round); verify_batch 3 MISSING(exempt);
+lint_verification 3 rows, no problems; `irw-validate` ok on all three;
+check_provenance exit 0 (its only flagged lines — 5 held/withdrawn tables and
+`ye_2025_q25_scale`'s `mixed` — are pre-existing and not this batch's).
+All three are `data_labels` with pattern-1 derivation, so Step 5b is exempt and
+three NOT_NEEDED rows were written to BOTH `verification_merged.csv` and the
+permanent `mapping_verification.csv`.
+
+**Step 5b orchestrator check — an agent finding CONFIRMED, and two sibling notes
+corrected as a result.** The footcare agent reported that the article has three
+Supporting Information files, not one, and that the Dagbani questionnaire is
+deposited — contradicting batch_271's shipped note ("S1 Data is the only
+supplement", "the Dagbani wording appears nowhere in the deposit"). Verified
+independently by direct fetch: `.s001` xlsx 188,640 B (codebook/data), `.s002`
+docx 23,411 B (English questionnaire), `.s003` docx 24,696 B (Dagbani
+questionnaire), `.s004` 404. The diet and exercise agents had both repeated the
+stale claim; their `note` fields in `provenance.csv` and `notes.csv` were
+rewritten to the verified account. The *conclusion* survives for a stronger
+reason than the one originally given: neither questionnaire file contains the
+Yes/No/Don't-know knowledge battery in either language, so there is no Dagbani
+rendering of these items in the deposit to ship — the blank `translation_source`
+and absent `_translated` columns stand.
+
+Also resolved a discrepancy *between* agents. The footcare agent grepped both
+questionnaires for "Diabetes Knowledge Test" and got zero hits, which is a
+search artifact: `.s002`'s header is typographically broken across docx runs as
+"Diabetes Know l edge Test Q uestionnaire". Read positionally, items 47–69 are
+exactly 23 items and are the Michigan DKT-23 in four-option multiple-choice
+form. That **independently confirms** the instrument discrepancy all three
+tables disclose: the DKT-23 the Methods names really is in this deposit, and it
+is demonstrably not the 66-item Yes/No/Don't-know battery IRW ships. The blocks
+therefore correctly name the study's own questionnaire rather than asserting
+DKT-23.
+
+Useful for the three afaya tables still queued (general/medication/monitoring):
+**the deposit's block prefixes are not mnemonic** — `km` is monitoring and `kom`
+is medication. Fix block identity from the codebook's own row headers in
+Sheet1, never from the prefix.
+
+`correct_response` is blank on all three: the paper states each question has one
+correct answer but never says which, and IRW will not adjudicate medical fact.
+Rights clean (CC BY 4.0 PLOS deposit); the upstream MDRC terms page still 403s
+behind Cloudflare and web.archive.org has no copy, so that attribution-only
+clause remains carried rather than freshly hashed — non-blocking, and not the
+text source for any of these tables.
+
+Cap not reached (cap is batch_299). 79 pending remain.
