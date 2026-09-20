@@ -22473,3 +22473,56 @@ Verification tracker: skalka **VERIFIED**, ilearnathome **PARTIAL**, wooly **NOT
 
 Queue after this round: 1142 done, 276 blocked, 60 excluded, 37 pending, 13 failed; 0 in_progress.
 Circuit breaker not tripped (0 failed). Cap is batch_299 — **not reached**, 286 < 299.
+
+## batch_287 — 2026-09-20
+
+3 tables claimed (`mekheimer_2026_cai`, `mekheimer_2026_flp`, `mekheimer_2026_id`), 3 agents,
+one per table. **written 1 / blocked 2 / failed 0 — yield 33%.** Circuit breaker NOT tripped
+(0 failed; the two blocks are determinate source-data verdicts, not pipeline faults).
+
+Numbering: 300–304 now all exist on this branch (irw#2228's line has grown past its `batch_301`),
+so "highest + 1" was computed over directories below 300 → 287, per the Step 1 second hole.
+
+All three agents returned clean: three `__items.csv`, all four gates PASS, `irw-validate` ok,
+`lint_verification` clean, `check_provenance` exit 0. **Step 5b then overturned two of them.**
+
+**The finding.** All four scales in Mekheimer & Abdelhalim (doi:10.1186/s40862-025-00378-1) come
+from one figshare deposit, and the paper's Additional file 2 tabulates every questionnaire item as
+`q1..q38` interleaved with its scale subtotals. Those subtotals reproduce exactly (diff 0.00000 for
+all six sections), which fixes **CAI = q11..q28** and **ID = q29..q38**. `mekheimer_2026_flp`
+matches that same file BY NAME to <0.006 on all four items, so the N=160 deposit and the N=496
+SPSS output describe the same responses and their means are directly comparable. Against that
+scale:
+
+- **`mekheimer_2026_cai` — codes shifted +4.** Live `CAI_1..CAI_18` match window `q15..q32`
+  (rmse 0.0055), not the `q11..q28` the paper assigns to the CAI (rmse 0.4400). Next-best of 21
+  windows is 52x worse. The last four columns overrun into the Identity Dissonance scale
+  (q29..q32), so these 18 columns are not the 18 CAI items. The agent's `paper_explicit` mapping
+  (appendix item n → `CAI_n`) is positively contradicted, not merely unverified.
+- **`mekheimer_2026_id` — codes unidentifiable.** Live `ID_1..ID_10` match no q window at all
+  (best of 29, maxabs 0.4738); `ID_1`'s mean 4.58125 exceeds the largest q mean anywhere (4.36290);
+  and the live resp range is 2..7 against 5-point published items. The id agent had independently
+  flagged the 5-anchor-vs-1-7 conflict and recorded NO_ROUTE — this escalates it from "order
+  unverified" to "instrument identity contradicted".
+
+Both CSVs are **quarantined, not shipped** (`itemtables/batch_287/quarantine/`), with their verify
+scripts. Re-runnable evidence: `quarantine/orchestrator_check_mekheimer_2026_codeshift.R`
+(VERDICT: PASS). Both classified `blocked` — retry test NO, an unchanged retry reproduces this
+exactly; changing it needs a corrected deposit or an author clarification. Rows added to
+`itemtables/pending_index_notes.csv`.
+
+**Shipped: `mekheimer_2026_flp`** (4 items × 4 resp levels, 16 rows), mapping_basis
+`paper_explicit`, verification VERIFIED via self-describing codes + exact reproduction of per-item
+n/mean from the raw workbook. Caveat in notes.csv: the scale has five anchors but nobody chose
+Beginner, so resp is 2–5 and only four option rows per item ship.
+
+Notable beyond the round: **the sibling `mekheimer_2026_paf` (still `pending`) is from the same
+deposit and should be treated as suspect** until the column-labelling question is resolved — PAF is
+q1..q10 on the paper's scale. Also worth a human look: the deposit reports N=160 while every SPSS
+output reports N=496, yet their means agree to ~0.005 across 22 variables, which is ~10x tighter
+than sampling noise would allow for a 160-of-496 subsample. That points at the deposit being a
+derived extract rather than an independent sample, and is a question about the response tables
+themselves, not about item text.
+
+No audit WARNs this round, so Step 5c had nothing to explain. No rate limits or spend caps hit.
+Cap (`batch_299`) not reached.
