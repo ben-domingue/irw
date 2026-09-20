@@ -22409,3 +22409,67 @@ bijection over 37 codes. VERIFIED stands; reasoning appended to `notes.csv`.
 
 Queue after this round: 1139 done, 276 blocked, 60 excluded, 40 pending, 13 failed; 0 in_progress.
 Circuit breaker not tripped (0 failed). Cap is batch_299 — **not reached**, 285 < 299.
+
+## batch_286 — 2026-09-20 16:00–16:20 PDT
+
+3 tables claimed, **3 written / 0 blocked / 0 failed** (yield 3/3 = 100%). Three agents, one table each.
+Tables: `wooly_hartman2022`, `ilearnathome_regalado_2025`, `skalka2025_ai_literacy`.
+
+Gates: `normalize_nulls.R` fixed 1 of 3 files (skalka, 270 lines). `audit_batch.R` **3 PASS, no
+anomalies** — so no WARNs to explain under Step 5c. `verify_batch.R` 2 PASS + 1 MISSING(exempt)
+(`wooly_hartman2022` is `data_labels`). `lint_verification.R` 3 rows, no problems. `irw-validate`
+ok on all three files, nothing to report. `check_provenance.R` exit 0 (the one REVIEW line,
+`ye_2025_q25_scale` / `translation_source=mixed`, is pre-existing and not from this round).
+
+Verification tracker: skalka **VERIFIED**, ilearnathome **PARTIAL**, wooly **NOT_NEEDED**
+(data_labels) — written into both `verification_merged.csv` and `mapping_verification.csv`.
+
+- **All three sources ship their own instrument document, which is why the yield was clean.** OSF
+  bn4xy's six `.sav` files label every knowledge column with the administered stem and value-label
+  every alternative (wooly); Zenodo 15116678's `DATA.xlsx` carries a `Questions` codebook sheet
+  (ilearnathome); the figshare deposit ships `AI_Literacy_survey.pdf` printing all 50 items prefixed
+  with the exact code the data CSV uses as a column name (skalka). In all three the IRW item code IS
+  the source column name — no positional step anywhere in the round.
+
+- **Step 5b orchestrator re-checks — all three agents' numeric claims confirmed, one wording
+  correction.** Every claim that was headed for a public note was re-derived independently:
+  - skalka `resp=0`: confirmed exactly. `item_stats.R` shows min=0 on exactly 19 of 50 items
+    (BI1–5, C1–5, IM1–4, S1–5) and min=1 on the other 31. The covariate split is NOT checkable from
+    the live table — it has no AI-coursework covariate — so it was re-run against the deposit CSV:
+    742 zero-hours vs 463 rest, S4 0.617/0.125, S2 0.612/0.127, IM4 0.590/0.119. Agent's figures
+    reproduce to 3 dp.
+  - wooly M\*A\*S\*H keying: confirmed exactly from `study2.sav`. Value labels are
+    {1 Gene Washington, 2 Maxwell Klinger, 3 Larry Swit}; crosstab Q8 × Q8correct gives 3→1 for 11
+    cases and 2→0 for 34, i.e. 45 respondents keyed against "Larry Swit" rather than the
+    supplement's bolded "Maxwell Klinger".
+  - ilearnathome PARTIAL evidence: confirmed. n=909 for all 15 items; Q12 is the argmax mean (2.0)
+    and the only item above 30% "Never" (0.339); Q1 has the highest "Always" (0.91, next Q11 0.86).
+  - **Corrected before it shipped:** the wooly `public_note` said the four TV items "carry 1023–1286
+    rows against the 15 song items' 1561". `irw_fetch` says every one of the 19 items emits **1561
+    rows**; what differs is how many carry a score (Q4 1023, Q6 1052, Q8 1026, Q75 1286 non-missing).
+    The shortfall is 275–538 rows with an **empty `resp`**, not absent rows. Both the public_note and
+    notes.csv were rewritten to say observations rather than rows. This is the Step 5b case exactly:
+    the finding was real, the sentence about it was not.
+
+- **Response-data observation worth its own look (not an itemtext defect):** `wooly_hartman2022`
+  ships rows whose required `resp` is empty — 275–538 on each of Q4correct/Q6correct/Q8correct/
+  Q75correct, because those four TV items store no value for their "I Don't Know" choice while the
+  15 song items score "I Don't Know" (=5) as 0. Recorded in notes.csv against that table.
+
+- **One fallback-language disclosure.** `ilearnathome_regalado_2025` was administered in Spanish in
+  Chiclayo, Peru (the workbook leaves covariate categories in Spanish) but only the authors' English
+  exists in the deposit, which is the whole in-scope corpus — `translated_substitute` /
+  `study_supplied`, `_translated` columns omitted per the fallback rule, public_note says the shipped
+  wording is not what respondents read. No IRW-generated English anywhere in this round, so nothing
+  is owed on the public issues page (check_provenance agrees).
+
+- **Unrelated data note:** the ilearnathome Zenodo abstract describes a stratified sample of 305
+  educators while `DATA.xlsx` and the live table both carry 909 respondents (confirmed: n=909 per
+  item). Logged in notes.csv, not an item-text problem.
+
+- **Rights: no register rows written.** All three instruments are the authors' own, published in full
+  in CC BY 4.0 deposits; no fee/permission/NC/ND/no-redistribution clause quotable for any of them.
+  Per the standing rule a round may write `block` but never `ship`.
+
+Queue after this round: 1142 done, 276 blocked, 60 excluded, 37 pending, 13 failed; 0 in_progress.
+Circuit breaker not tripped (0 failed). Cap is batch_299 — **not reached**, 286 < 299.
