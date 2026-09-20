@@ -20,9 +20,16 @@ study2_df[] <- lapply(study2_df, function(col) { # Remove column labels for each
   attr(col, "label") <- NULL
   return(col)
 })
+# irw#2255, 2026-09-19: the Study 2 tables were withdrawn because `id` was the source's
+# `Nama` column -- the respondent's name. Names are replaced by sequential integers, assigned
+# in order of first appearance so each respondent still links across the PSR/PPSR/PSI tables
+# and across their rated figures. The name itself is dropped before anything is written.
+# (Study 3 below is unaffected: its id comes from the deposit's own `ID` column.)
 study2_df <- study2_df |>
   select(-Usia, -JK, -Universitas, -Angkatan, -Email, -PSRP, -PPSR, -PSIP) |>
-  rename(id=Nama, figure=Tokoh)
+  rename(figure=Tokoh) |>
+  mutate(id = as.integer(factor(Nama, levels = unique(Nama)))) |>
+  select(-Nama)
 
 study2_psr_df <- study2_df |>
   select(id, figure, starts_with("a"))
