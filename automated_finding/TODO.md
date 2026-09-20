@@ -5,9 +5,11 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
 ## From the 2026-09-20 recycled-term PMC sweep
 
-- [ ] **25 actionable leads, none worked yet.** 1 `good` + 12
-  `recoverable_format` + 12 `worth_retrying`, in
-  `runs/pmc_recycled_2026-09-20.csv` and its `.retriage_ha.csv`. Rank by
+- [x] **25 actionable leads triaged into `pmc_leads_2026-09-20.csv`**
+  (tracked). 4 shipped, 1 blocked on licence, 1 skipped on PII, 1 rejected on
+  content, 18 unworked -- the unworked ones are the open item further up this
+  file. Superseded as a task; kept for the counts. Original: 1 `good` + 12
+  `recoverable_format` + 12 `worth_retrying`. Rank by
   instrument shape before response count — several of the largest are
   Scientific Reports rows that may be trial-level or single-item panels.
   See BATCH_LOG.md 2026-09-20 for the four largest by shape.
