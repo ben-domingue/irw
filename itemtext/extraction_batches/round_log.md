@@ -21425,3 +21425,54 @@ total from 42.5 to 37.0. `wang_2016_study3_auth` (already shipped) is **not** im
 built from raw Chinese labels via `MAP_CN5`, so its ascending anchors are a different case.
 
 No rate limit, spend cap or systemic access issue; no dictionary or metadata problem found.
+
+## batch_269 — 2026-09-20 11:57–12:10
+
+3 tables claimed, 3 agents (one per table). **Written 3 / blocked 0 / failed 0 — yield 100%.**
+Numbered 269 (highest below 300 was 268; the 300–304 hole belongs to irw#2228). Cap batch_299 not reached.
+
+| table | result | mapping_basis | verification |
+|---|---|---|---|
+| `wang_2016_study1_authexternal` | 20 rows (4 items × 5) | reconstructed | PARTIAL, routes 6 + 3 |
+| `wolf_2017_study2_video_liking` | 30 rows (6 items × 5) | data_labels | NOT_NEEDED (derivation pattern 1) |
+| `pierro_2018_assessment_s4` | 72 rows (12 items × 6) | paper_order | PARTIAL, routes 3 + 6 (+1 corroborative) |
+
+**Gates:** normalize_nulls 2 of 3 fixed; audit_batch 3 PASS, **no WARNs** (so nothing owed under Step 5c);
+verify_batch PASS/PASS/MISSING(exempt); lint_verification 3 rows, no problems; `irw-validate` ok on all
+three; `check_provenance.R` clean — 0 IRW-generated tables without an issues-page entry. Its one REVIEW
+line (`ye_2025_q25_scale`, translation_source=mixed) is pre-existing and not from this round.
+
+**Step 5b — orchestrator re-check.** Re-ran wolf's data-defect claim independently from the live table
+(the one public claim with no verify script, since it is Step 5b exempt). **Confirmed:** cross-polarity
+r −0.43…−0.70, within-polarity +0.52…+0.74, n=264 complete; reverse-scoring like2/like4/like6 gives
+mean 3.70 SD 0.91 against the deposit composite's reported 3.657/0.908, raw 6-item mean 2.90 vs 2.889.
+The wang and pierro claims were reproduced by their own verify scripts under verify_batch (both PASS).
+
+**Two tables ship flipped anchors — both established from data, not assumed.**
+- `wang_2016_study1_authexternal`: stored already reverse-scored, so resp=1 is "strongly agree",
+  the opposite of the paper's stated administration *and* of sibling `authliving`. r(item, live se
+  total) = +0.320/+0.384/+0.379/+0.260 where raw AEI must be negative; the 12-column authenticity sum
+  reproduces Wang Table 1 (42.49/6.19 vs 42.49/6.18, r .606 vs .61, alpha .809 vs .81) while flipping
+  only this block gives alpha .447 / r .289. This is exactly what batch_268 predicted for this table.
+- `pierro_2018_assessment_s4`: assR1/assR5/assR11 stored already recoded — as stored, alpha .7737 /
+  M 3.6521 / SD .6729 against published .77/3.65/.67; flipped gives .5946/3.4427/.5380, missing all three.
+
+**Carry-forward for later rounds.**
+- `pierro_2018_locomotion_s4` and `pierro_2018_tf_present_s4` are still pending and come from the same
+  S4 `.sav`. **Do not copy the s1-style verify script**: in the *stored* direction the "three lowest
+  item-total" test does NOT isolate the reverse triple here (ass2 0.345 sits between assR5 0.328 and
+  assR11 0.352). The raw-direction item-rest sign test is what carries it.
+- Both PARTIALs are partial for the same reason: the block and its direction are verified, but a
+  permutation *within* a same-polarity block would not be detectable. Order rests on canonical
+  subscale numbering in both cases.
+- Both also ship English for a non-English administration (Chinese / Italian) under
+  translated_substitute — no source wording is recoverable in either deposit (neither `.sav` carries
+  variable labels). Both disclosed in public_note.
+
+**Metadata finding (wolf).** The scale `wolf_2017_study2_video_liking` is **never described, named or
+reported anywhere in the published paper** — it exists only in the Study 2 deposit. It is also not
+"liking": only like4/like5 are liking proper, the rest are calm, happiness and satisfaction. The
+dictionary Description is misleading on its own; worth the same treatment `nature_connect` got in
+batch_226. The public_note covers the shipped table.
+
+Queue after this round: 1092 done / 275 blocked / 88 pending / 60 excluded / 13 failed.
