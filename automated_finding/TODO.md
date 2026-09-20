@@ -3,6 +3,27 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## From the 2026-09-20 recycled-term PMC sweep
+
+- [ ] **25 actionable leads, none worked yet.** 1 `good` + 12
+  `recoverable_format` + 12 `worth_retrying`, in
+  `runs/pmc_recycled_2026-09-20.csv` and its `.retriage_ha.csv`. Rank by
+  instrument shape before response count — several of the largest are
+  Scientific Reports rows that may be trial-level or single-item panels.
+  See BATCH_LOG.md 2026-09-20 for the four largest by shape.
+
+- [ ] **`10.3390/bs15020224` licence is unverified.** The sweep's only
+  `good` row (Behavioral Sciences, 403 x 63, behavioral-emotional regulation
+  instrument) reports `license=unknown`. MDPI is normally CC BY; confirm on
+  the source page before writing a script, per the standing rule that
+  `unknown` is not verified.
+
+- [ ] **241 scouted terms remain ranked and unrun** in
+  `runs/pmc_term_scout_2026-09-19.csv` (58% of the measured pool). A second
+  batch starts from that file — no new scout needed. Fix the scout's 500-hit
+  cross-journal cap first if its counts are to be used as a volume estimate
+  rather than a ranking (see BATCH_LOG.md 2026-09-20).
+
 ## From the 2026-09-19 PMC tail measurement
 
 - [x] **The unaudited PMC seen-DOI tail is closed, measured not skipped.**

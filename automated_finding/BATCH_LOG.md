@@ -14493,3 +14493,95 @@ Per-run CSVs stayed in `runs/` and are not committed, per the README's
 `--exclude-run`, so the same measurement can be re-run against the PLOS
 ledger or against this one after a connector change, which is the only
 circumstance that would reopen the question.
+
+## 2026-09-20 — Recycled-term PMC sweep: 695 candidates, 25 actionable leads
+
+First deliberate (non-scheduled) PMC sweep since the manual `pmc_batch1-6`
+runs. The premise: `search_terms_log.csv` holds ~2,900 distinct queries, but
+only 118 rows had ever been run against the Europe-PMC surface, and the two
+scheduled routines cycle a fixed 125-term list. That leaves a large pool of
+terms already *proven* at the repository connectors and never tried here —
+the same recycling argument PLOS batch 12 made, one surface over.
+
+**Term selection, measured rather than guessed.** 291 English
+instrument/task terms were extracted as: logged in `search_terms_log.csv`,
+never against a `pmc*` output file, not in the monthly `FULL_TERM_LIST` or
+`HIGH_YIELD_TERMS`, ASCII, and either carrying an instrument keyword
+(scale/inventory/questionnaire/task/...) or reading as a proper name.
+Translated variants were dropped on purpose: `is_relevant()` is title-only
+and these journals publish in English, which the results confirm —
+`cognitieve test`, `kognitiver Test` and `test cognitif` returned 2 hits
+each.
+
+`pmc_term_scout.py` (new, committed) then measured all 291 with one lite
+Europe PMC search apiece — ~1 request per term via an ISSN OR-group rather
+than one per term-journal — counting hits that are relevant, supplementary-
+bearing, and not already excluded by the dictionary, `human_review/` or
+`pmc_seen_dois.csv`. Result: 2,649 new DOIs across 291 terms, median 8 per
+term, 19 terms at zero. The head is cognitive tasks (`spatial Stroop task`
+52, `digit span task` 45, `montreal cognitive assessment` 45) ahead of the
+questionnaires (`Maslach Burnout Inventory` 24, `WHO-5 Well-Being Index` 23).
+The top 50 carried 42% of the total, and that was the cut run.
+
+**Known flaw in the scout's projection, fix before reusing it.** It caps a
+term at 500 hits across all journals combined, while the connector paginates
+to 300 *per journal per term*. Most head terms hit that cap, so the scout
+under-counts exactly the terms that matter most. It is a ranking tool, not a
+volume estimate — the top-50 projection of 1,096 came in at 695 actual
+candidates, and the error is not even in a consistent direction, because
+cross-term deduplication cuts the other way.
+
+**The run** (`runs/run_sweep.sh`, 50 terms x 11 journals, 550 queries, ~2h20m):
+
+| flag | n | |
+|---|---|---|
+| `no_usable_file` | 398 | 57% |
+| `license_restricted` | 202 | 29% |
+| `human_assistance` | 50 | |
+| `below_min_n` | 15 | |
+| `download_failed` | 10 | transient, not ledgered, a rerun retries them |
+| `external_unresolved` | 8 | |
+| `not_item_response` | 6 | |
+| `pii_suspected` | 3 | |
+| `already_in_irw` | 1 | |
+| `file_too_large` | 1 | |
+| `good` | 1 | |
+
+The 29% licence loss is what the 2026-09-19 tail probe predicted (35%) and
+lands on the same journals — Scientific Reports and Heliyon carry a large
+non-open fraction.
+
+**Step 2b** (`irw_retriage_ha.py`, chained in `run_sweep.sh` because this
+connector's plain CLI does not chain it the way the scheduled wrappers do)
+resolved the 50 `human_assistance` rows: 12 `recoverable_format`, 12
+`worth_retrying`, 12 `aggregate_continuous`, 11 `human_review` (archived to
+`human_review/human_review_pmc_2026-09-20.csv`), 3 `not_item_response`.
+
+**25 actionable leads: 1 `good` + 12 `recoverable_format` + 12
+`worth_retrying`.** Largest by shape: `10.1038/s41598-026-57381-w` (21,343 x
+23, CC BY), `10.1038/s41598-026-66551-9` (20,415 x 12, CC BY),
+`10.1038/s41598-024-58598-3` (11,861 x 45, CC BY), `10.1186/s12889-022-14103-x`
+(1,394 x 20, CC BY). Rank by instrument shape, not response count, before
+working them — several of the large Scientific Reports rows are likely to be
+trial-level or single-item panels.
+
+**The one `good` row needs its licence verified before anything else.**
+`10.3390/bs15020224` (Behavioral Sciences, 403 x 63, behavioral-emotional
+regulation instrument) reports `license=unknown`. MDPI is normally CC BY, but
+`unknown` is not verified and the rule does not bend for a likely answer.
+
+**3 PII skips**, per the blanket rule — logged here, no standing file, since
+there is no path to un-blocking them: `10.1038/s41598-022-06620-x` (OSF
+`y3ud7`) and `10.1038/s41598-022-19163-y` (OSF `verhb`), both reached through
+their Data Availability link, and `10.1186/s12889-023-15134-8`, which ships a
+column literally named `CD [Email account]`.
+
+**The remaining 241 scouted terms are ranked and unworked** in
+`runs/pmc_term_scout_2026-09-19.csv` — a second batch starts from that file
+rather than from another scout, and the 58% of pool yield they carry is the
+best-measured acquisition surface currently on the books.
+
+Bookkeeping: 50 `search_terms_log.csv` rows and the `pmc_seen_dois.csv`
+append are committed **with** this write-up on the branch, not pushed to main
+ahead of review — the open hazard on both scheduled routines. Per-run CSVs
+stay in `runs/`.
