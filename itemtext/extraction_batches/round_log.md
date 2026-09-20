@@ -21280,3 +21280,72 @@ No rate limits, no quota errors, no export performed. Queue after this round: 97
 scipop, sdo, trust_scientists, willvul.
 
 Cap (`batch_271`) not reached — 5 rounds remain.
+
+## batch_267 — 2026-09-20 11:22–11:35 (3 tables, 3 agents)
+
+`mede_2025_scipop`, `mede_2025_sdo`, `mede_2025_trust_scientists` — the next three TISP
+(Mede et al. 2025, *Scientific Data* 12:114, CC BY 4.0; OSF `5c3qd`) siblings after batches
+263–266.
+
+**Written 3 / blocked 0 / failed 0 — yield 100%.** All three `status=done`. No circuit-breaker
+condition (0 failed of 3).
+
+Gates, all clean: `normalize_nulls.R` 0 of 3 normalized (agents already wrote the convention);
+`audit_batch.R` 3 PASS, **no WARNs** (so Step 5c had nothing to explain); `verify_batch.R`
+3× MISSING(exempt); `lint_verification.R` 3 rows no problems; `irw-validate` ok on all three;
+`check_provenance.R` clean for this batch (the one standing REVIEW line, `ye_2025_q25_scale`
+`translation_source=mixed`, is pre-existing and unrelated).
+
+All three are `mapping_basis=data_labels` on derivation pattern 1 — `data/mede_2025_tisp.py`
+melts `ds_main.csv` columns by name off a prefix (`SCIPOP_`, `SDO_`, `TRUST_SCI_`), so the IRW
+item code IS the source column name. Each agent confirmed the pattern for its own table rather
+than inheriting it. Step 5b therefore exempt: three NOT_NEEDED rows written to **both**
+`verification_merged.csv` and `mapping_verification.csv`, no `verify_<table>.R`.
+
+Notable:
+- **`trust_scientists` is structurally unlike its siblings** — not a matrix but twelve separate
+  single-answer questions (QID66–74, QID92–94) in block `TRUST_SCI`, so the item code is each
+  *question's* `DataExportTag`, not a choice tag. Four other `TRUST*` questions exist
+  (`TRUST_PEW`, `TRUST_METHOD`, `TRUST_OPEN`, `CLIM_TRUST`); none carries the `TRUST_SCI_`
+  prefix and none is in the live item set. The battery lead-in ships in `instructions` and was
+  removed from `TRUST_SCI_expert`'s `item_text` — a deliberate deviation from source layout,
+  recorded in provenance.
+- **`scipop`'s attention check is correctly absent.** `QID78`'s ninth matrix row is
+  `ATTCHECK_RES` ("please select 'strongly disagree'"); its column lacks the `SCIPOP_` prefix,
+  so the script excludes it and it is not in the live item set. Not shipped.
+- **`sdo` stores RAW, un-reversed responses.** Per-item means 8.0182 / 7.5200 (pro-equality)
+  against 4.8577 / 3.1143 — anyone scoring this table must reverse the first two. Recorded in
+  notes; a property of the response data, not an itemtext defect.
+- Step 3b: `sdo` = Pratto et al. (2013) *SPPS* 4:587–599 short-form SDO, confirmed match.
+  `trust_scientists` is "based on Besley et al. 2021" (*Science Communication* 43:3–32) but the
+  descriptor is explicit that the 12-item scale was developed for TISP; the METI is named only
+  as the option TISP **rejected**, and none of its wording ships.
+- Scale labels: `scipop` 1–5 labelled at endpoints only, so resp 2–4 ship blank `option_text`
+  (not padded). `sdo` 1–10 likewise (1 = Extremely oppose, 10 = Extremely favor).
+  `trust_scientists` labels every point on every item (item-specific semantic differentials),
+  so nothing is blank there.
+- Rights: no block on any of the three. No fee/permission/NC/ND/no-redistribution clause
+  quotable for Pratto 2013 (SAGE 403) or Besley 2021 (closed, article-level licence only), and
+  the shipped words are in every case TISP's own CC BY 4.0 text. Silence is permission; no
+  `instrument_rights_register.csv` row written (a round may never write `ship`).
+- Language: unchanged from the 263–266 siblings — English core questionnaire in the base
+  fields, `language` carrying the 37-entry list, caveat in `public_note`.
+
+**Step 5b orchestrator re-check** (server-side aggregates, no export):
+- `sdo` reproduces exactly — per-item means 8.0182 / 7.5200 / 4.8577 / 3.1143 to 4 dp, and
+  reverse-scoring the two pro-equality items over the 70,603 complete responders gives
+  M = 3.6075, SD = 1.7667 against the descriptor's weighted M = 3.62, SD = 1.76. Confirmed.
+- `scipop` and `trust_scientists` per-item n ranges confirmed (71,863–71,891 and
+  71,873–71,892), as is the trust ordering (intellig 4.2 > qualified 4.0 > expert 3.9;
+  open/otherviews 3.3, trans 3.4).
+- **One correction.** The `trust_scientists` agent reported the mean of the twelve item means
+  as 3.625; it is **3.6303**. Still consistent with the descriptor's weighted M = 3.62, so the
+  conclusion stands, but the figure as written was wrong and was corrected in
+  `provenance.csv`, `verification_merged.csv` and `mapping_verification.csv`, each noting the
+  re-check. Same class as the `anh_2026_finbehavior` precedent — an agent's finding is a lead.
+
+No rate limits, no quota errors, no full-table export performed. Queue after this round:
+94 pending, 1087 done, 274 blocked, 13 failed, 60 excluded. One TISP sibling still pending:
+`willvul`.
+
+Cap (`batch_271`) not reached — 4 rounds remain.
