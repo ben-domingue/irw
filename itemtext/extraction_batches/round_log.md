@@ -22277,3 +22277,69 @@ collapse or dedupe them.
 
 Queue after this round: 1133 done / 276 blocked / 13 failed / 60 excluded / **46 pending**.
 Cap is batch_299; not reached.
+
+## batch_284 — 2026-09-20
+
+3 tables, 3 agents (one per table). **Written 3 / blocked 0 / failed 0 — yield 3/3 (100%).**
+Numbered 284 = highest directory below 300 (283) + 1; the 300–304 hole is now fully occupied by
+irw#2228's hand-built line (all five exist), so the skip rule applied as written.
+
+- `ramadan_2026_perceived_competence` — done. 30 rows (PC1–PC6 × 5). mapping_basis=paper_explicit,
+  text_source=study_materials, translation_source=study_supplied. Fourth and final dimension block of
+  the Mendeley deposit 10.17632/xd27t4g547 that batch_283 took three tables from; both deposit sha256s
+  reproduce. Step 5b route 9 VERIFIED — 6×6 live-vs-raw fingerprint match matrix is exactly the
+  identity, 858 live = 858 raw = dictionary 858.
+- `preschool_sel_emt` — done. 144 rows (48 items × 3). mapping_basis=data_labels from the study's own
+  SPSS file (LDbase 38d4a723…, ODC-By); the CC BY-NC-SA codebook PDF was deliberately NOT used as a
+  text source, so `instructions` is blank. Step 5b route 9 VERIFIED. Opaque table name — the source
+  hunt was the bulk of the work.
+- `pellerin2020_3dws` — done. 84 rows (12 items × 7). 3D-WS-12, administered in FRENCH; no French
+  wording in the OSF deposit (osf.io/45aq3) or the Frontiers article, so text_source=translated_substitute
+  with translation_source=official_instrument_english (Ardelt's own published 3D-WS-12 PDF, free, no
+  fee/NC/ND/permission term — not blocked, no instrument_rights_register row written). mapping_basis=reconstructed,
+  Step 5b PARTIAL (routes 6+1+5): reflective block pinned outright, the affective within-pair order and
+  the entire cognitive within-facet order remain inference. Step 3b confirmed this is the 3D-WS block and
+  not the deposit's separate ASTI (`ST_1..ST_7`); the unclaimed sibling `pellerin2020_asti` was not touched.
+
+Gates: normalize_nulls fixed 1 of 3 files (pellerin, 85 lines). audit_batch **3 PASS, no anomalies**
+(so Step 5c had nothing to explain). verify_batch **PASS=3**. lint_verification 0 ERROR / 1 WARN.
+irw-validate clean on all three. check_provenance exit 0.
+
+Notable:
+
+1. **The one lint WARN is not a defect.** `preschool_sel_emt` is flagged "VERIFIED but its evidence
+   hedges". Status kept: the hedge is level-1 source trust (is the .sav's own label-to-column
+   assignment right) plus SPSS 255-char label truncation, neither about discriminating items — all 48
+   items match their identically-named source column's 0/1/2 counts cell-for-cell and all 48 triples
+   are distinct. Recorded in notes.csv.
+
+2. **Step 5b re-check changed a public note (pellerin2020_3dws).** The agent's recovered scoring key
+   was confirmed independently — the 11-column keyed mean (Cog_1 dropped, 7−x, Refl_1/Aff_1/Aff_2 raw)
+   equals P.Wisdom to 4.441e-15 — but ONLY on the 674 complete **wave-0** records. Pooled across all
+   1010 person-wave records the same rule misses by 1.727, because P.Wisdom is a baseline covariate
+   repeated across waves; my first reproduction attempt failed for exactly that reason before I found
+   the wave restriction. The Cog_1 anomaly is real and negative (−0.210/−0.209/−0.212 vs keyed
+   Refl_2/Refl_3/Refl_4 at wave 0), but the note's original "−0.21 to −0.23" silently mixed the wave-0
+   and pooled samples, so the public_note was tightened to state both numbers and their samples. Same
+   class as the anh_2026 "exactly 3.000" case.
+
+3. **CROSS-TABLE CONFLICT NEEDING A HUMAN — `preschool_sel_emt` vs published `preschool_sel_akt`.**
+   All 48 EMT item codes also live in the `preschool_sel_akt` response table (65 items = 17 AKT + 48
+   EMT), and the already-published akt itemtext carries different wording for **42 of the 48**. Most is
+   stylistic — this batch ships the v35 .sav's full interviewer administration script (`emta1_1s_t1`:
+   "Look at her face. point to Key expression … ") where akt ships the short stem ("Show me which one
+   of these feels the same as this one (Mad)"). But `emta2_4s_t1` is a genuine CONTENT conflict:
+   published "nice **drawing** was just **torn up** by a mean kid" vs the v35 label "nice **block
+   tower** was just **kicked over** by a mean kid". One is wrong. Two IRW tables publishing the same
+   item codes with different text is irw#1611 territory; **this table should not be uploaded alongside
+   the existing akt itemtext until a human settles which wording is right.** Orchestrator-confirmed,
+   not just reported.
+
+4. **Dictionary/description mismatch (not an itemtext defect), `ramadan_2026_perceived_competence`.**
+   The codebook tags all six PC items dimension "3 Prompt Engineering & Critical Appraisal" while the
+   IRW table is named perceived_competence — same class as the sibling `attitudes` / "4 Aspiration &
+   Vision". Also confirmed PC5/PC6 are NOT duplicates (they differ only linguistic vs literary, the
+   same contrast that separates PC1 from PC2), so collapsing them would have been wrong.
+
+Queue after this round: 1136 done, 276 blocked, 60 excluded, 43 pending, 13 failed; 0 in_progress.
+Circuit breaker not tripped (0 failed). Cap is batch_299 — **not reached**, 284 < 299.
