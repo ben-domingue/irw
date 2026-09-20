@@ -21209,3 +21209,74 @@ Notable, for triage rather than action:
 
 Cap not reached (`batch_271` does not exist). Queue after this round: 100 pending,
 0 in_progress.
+
+## batch_266 — 2026-09-20T11:10-07:00
+
+3 tables claimed (TISP / Mede et al. 2025 continued): `mede_2025_outspokenness`,
+`mede_2025_sciengage`, `mede_2025_sciinfo`. 3 agents, one per table.
+
+**Written 3 / blocked 0 / failed 0. Yield 3/3 = 100%.** Circuit breaker not tripped.
+
+All three are the same deposit as batches 263–265 (OSF 5c3qd, Sci Data 12:114, CC BY 4.0),
+and all three resolved to `mapping_basis=data_labels` via derivation pattern 1 —
+`data/mede_2025_tisp.py` melts every `ds_main.csv` column matching the table's prefix **by
+name**, so the IRW item code IS the source column name, and the core QSF's
+`ChoiceDataExportTags` tie each column to its choice text, corroborated statement-by-statement
+against the master `.docx` (which prints each statement followed by its code in parentheses).
+Step 5b exempt for all three, so no `verify_*.R` scripts: `verify_batch.R` reports
+MISSING(exempt)=3, which is the expected result, not a gap. NOT_NEEDED rows written into both
+`verification_merged.csv` and the permanent `mapping_verification.csv` (3 rows added, tracker
+now 1174).
+
+Gates: `normalize_nulls.R` 0 of 3 normalized; `audit_batch.R` **3 PASS, no anomalies** (so no
+Step 5c WARN explanations are owed); `lint_verification.R` 3 rows, no problems; `irw-validate`
+ok on all three; `check_provenance.R` exit 0 (the only flag is the pre-existing
+`ye_2025_q25_scale` `translation_source=mixed` REVIEW, not from this batch).
+
+Row counts: outspokenness 15 rows (3 items × 5), sciengage 28 (4 × 7), sciinfo 70 (10 × 7).
+
+**Step 5b orchestrator re-check — every agent claim confirmed exactly** (server-side GROUP BY
+via `.irw_query_tibble` on `qualified_reference`, no export). Items 3 / 4 / 10; live rows
+215,638 / 287,182 / 714,665; **zero duplicated id×item on all 17 items** (`n == COUNT(DISTINCT
+id)` everywhere); per-item n 71,874–71,882, 71,745–71,879 and 71,085–71,805; every item uses
+every level (5, 7, 7). The sciengage mean ordering the agent used as corroboration reproduces:
+conversations 4.0 > messengers 3.1 > socialmedia 2.7 > publicprotests 1.8. The outspokenness
+note cites an unweighted 3-item score against the paper's published weighted M=3.87 SD=0.98 —
+recomputed over the 71,833 respondents with all 3 items: **M=3.90, SD=0.96, range 1–5**, which
+matches the agent's 3.896/0.956 and the published figure.
+
+Notable:
+- **Three questions share the `SCIINFO` tag.** The agent found QID9 (`SCIINFO`, 10 rows),
+  QID51 (`SCIINFO_MEDIATED`, 4) and QID52 (`SCIINFO_NONMEDIATED`, 2) in the QSF. Only QID9's
+  ten `ChoiceDataExportTags` are live item codes; the variants' tags appear in neither the live
+  item set nor `ds_main.csv`. Had those columns existed, the script's prefix match would have
+  swept them in as extra items — worth remembering for the remaining TISP siblings.
+- **The "Informational media use" ChoiceGroup is vestigial everywhere, including on SCIINFO.**
+  batch_265 flagged it as a copy-paste artifact on QID54/QID58 and guessed it might be genuine
+  on the SCIINFO matrix it appears to have come from. It is not: on QID9 it is
+  `HideTitle: true`, `ChoiceGroupOrder: null`, with no choice assigned, and the master `.docx`
+  prints no such heading. Not shipped, correctly, and that guess is now closed.
+- **Rights: no block on any of the three.** sciengage and sciinfo are attributed to no prior
+  instrument (no "based on"/"adapted from", no reference superscript). outspokenness is "based
+  on McKeever et al." (2017, JMCQ 94:812–832, doi:10.1177/1077699016670121) "but reworded";
+  the SAGE page returned **HTTP 403** (Cloudflare) so its text could not be read, but Crossref
+  lists only a text-and-data-mining licence for the article and no instrument-level term. Under
+  the PANAS rule a publisher's copyright on an article is not a term governing the instrument,
+  so silence is permission. `instrument_rights_register.csv` has no matching row for any of the
+  three; no register row written (a round may never write `ship`). This is NOT the
+  `mede_2025_clim_government` situation (Hickman, CC BY-NC-ND), which remains blocked.
+- Scale-label deviation, disclosed per table: outspokenness is a 1–5 ladder labelled at the
+  endpoints only, so resp 2–4 ship blank `option_text` (not padded with their own numbers).
+  sciengage and sciinfo are 1–7 **frequency** scales labelled at every point, so nothing is
+  blank there — the padding rule never bites.
+- Language, unchanged from the 263–265 siblings: English core questionnaire in the base fields,
+  `text_source=study_materials`, `language` carrying the full 37-entry list, per the
+  szameitat_2015_* ruling (Ben, 2026-09-11). Per-sample translations exist in
+  `05_survey-materials/questionnaire/countries/` but the one-text-per-item schema cannot carry
+  37 versions; caveat shipped in `public_note` on all three.
+
+No rate limits, no quota errors, no export performed. Queue after this round: 97 pending,
+1084 done, 274 blocked, 13 failed, 60 excluded. TISP siblings still pending:
+scipop, sdo, trust_scientists, willvul.
+
+Cap (`batch_271`) not reached — 5 rounds remain.
