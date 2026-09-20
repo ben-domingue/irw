@@ -21725,3 +21725,55 @@ Notable, carried in `notes.csv`/`provenance.csv` rather than being defects:
   were stripped; shipped codes are the data sheet's exact headers.
 
 Three agents per round, no kills, no retries, ~3.5 min wall clock for the dispatch.
+
+## batch_274 — 2026-09-20 12:56–13:1x PT
+
+3 tables, 3 agents (one per table), all three siblings of one source file.
+
+**Written 3 / blocked 0 / failed 0 — yield 3/3 (100%).**
+
+| table | rows | mapping_basis | Step 5b |
+|---|---|---|---|
+| avilatamayo_2022_empl_stab | 49 (7 items × 7) | paper_order | PARTIAL |
+| avilatamayo_2022_skills_dev | 42 (6 items × 7) | paper_order | PARTIAL |
+| avilatamayo_2022_work_envir | 35 (5 items × 7) | paper_order | PARTIAL |
+
+Source for all three: Avila-Tamayo et al. (2022), PLOS ONE 10.1371/journal.pone.0266711,
+CC BY 4.0 — Spanish-speaking validation of the ICSR Q (Mory, Wirtz & Göttel 2016). The S1/S2
+Appendix .docx prints all 45 retained items as a parallel Spanish|English table; the S1 Dataset
+.sav supplies the 1–7 anchors as value labels. Spanish ships in the base fields (`language=Spanish`),
+the authors' own English in the `_translated` twins (`translation_source=study_supplied`). All three
+agents independently declined to emit `instructions_translated`: no English instructions paragraph is
+published anywhere in the deposit, and none was machine-translated. No new full exports — agents used
+`irw_table_sets()` and existing local cache.
+
+**Gates:** normalize_nulls fixed 1 file (empl_stab, 50 lines); audit_batch PASS 3/3, no anomalies
+(so no Step 5c WARNs to explain); verify_batch PASS 3/3; lint_verification clean (3 rows, no problems);
+irw-validate ok on all three; check_provenance passed — the one REVIEW line (`ye_2025_q25_scale`,
+translation_source=mixed) is pre-existing and not from this round.
+
+**Why all three are PARTIAL, not VERIFIED.** Route 9 (response-frequency matching against the .sav)
+is decisive on the OPTION axis in every case — 49/49, 42/42 and 35/35 item × level cell counts
+reproduce exactly, 0 mismatches — so the anchors attach to `resp` in the source's own order and the
+data is stored raw. What no route establishes is the order of item texts WITHIN a subscale: the
+appendix numbers none of its rows and the paper publishes no per-item statistic (Fig 2 is a
+second-order path diagram, Tables 1–3 are construct-level). work_envir adds route 3 (composite
+M 4.7689 / SD 1.3707 / α 0.8776 vs published 4.77 / 1.37 / .87). Each agent stated in its evidence
+exactly which positions remain unpinned.
+
+**Step 5b orchestrator re-check (empl_stab) — claim CONFIRMED, made more precise.** The agent reported
+live per-item n of 431–433 caused by the script dropping "a mean-imputed 4.368159 substitute". Re-read
+the .sav directly: 433 complete rows, no NA, but FOUR non-integer cells across THREE items with three
+distinct values — 4.368159 (item 1.1), 4.41791 (1.2), 4.685 (1.5, two cells) — giving live n of
+432/432/433/433/431/433/433. The reported range is right; the single named value was not the whole
+story. This is a property of the SOURCE data (authors shipped mean-imputed values inline with raw
+responses), not an itemtext defect. Also re-computed the route-7 marker evidence: corrected item-total
+r = .619/.765/.780/.780/.804/.695/.828, confirming item 1.7 highest and 1.1 lowest exactly as claimed,
+with 1.3 and 1.4 tied at .780 — a further reason for PARTIAL. Both notes recorded in notes.csv.
+
+**Sibling convention, for the two avilatamayo tables still queued** (`work_life`, `workf_div`): the
+appendix reproduces RETAINED items only, so numbering gaps (3.1, 5.3) must be read off the .sav column
+names rather than counted off appendix rows, and each dimension's last appendix row is an
+"En general / Overall, the company…" summary item.
+
+Cap (`batch_299`) not reached; 73 pending remain.
