@@ -1,4 +1,4 @@
-# item-text tables in the Redivis shards as of 2026-09-19
+# item-text tables in the Redivis shards as of 2026-09-20
 # status=published: a reader can fetch it. status=draft: uploaded, not released yet.
 # generated -- do not hand-edit; rerun itemtext/refresh_live_tables.py (irw#1828)
 table,shard,status
@@ -171,6 +171,7 @@ brederecke_2020_sis,irw_text,published
 broadband_inventories,irw_text,published
 bscs_fadplus_goto2021,irw_text,published
 buczel_2022_inoculation_belief,irw_text,published
+bukhori_2024_dass,irw_text_2,draft
 bukurov_2022_sf36,irw_text,published
 burgess_2025_soas,irw_text,published
 busch_2022_course_alleviate,irw_text,published
@@ -230,6 +231,7 @@ chuemchit_2024_partner_violence,irw_text,published
 cinar_tanriverdi_2023_gad7,irw_text,published
 coach_chen_2022_hdrs,irw_text,published
 coach_chen_2022_phq9,irw_text,published
+codella_2020_school_efficacy,irw_text_2,draft
 cogcontrol_gyurkovics_2019_flanker,irw_text,published
 cogcontrol_gyurkovics_2019_mwprobe,irw_text_2,published
 cogcontrol_gyurkovics_2019_sart,irw_text,published
@@ -255,7 +257,6 @@ corti_2023_academic_adaptation,irw_text,published
 cox_2024_feedback_perceptions,irw_text,published
 criticalperiod_syntax,irw_text,published
 cucchi_2018_kims,irw_text,published
-cucchi_2018_pts,irw_text,published
 cucchi_2018_rfq,irw_text,published
 cucchi_2018_scoff,irw_text,published
 cugmas_2021_elderly_social_support,irw_text,published
@@ -371,6 +372,8 @@ fisher_2019_belonging,irw_text,published
 fisher_2019_preparedness,irw_text,published
 fisher_2019_structure,irw_text,published
 fisher_temperment,irw_text,published
+fitz_2024_numeracy,irw_text_2,draft
+fitz_2024_polknow,irw_text_2,draft
 fivpei_perrig_2023_pxi,irw_text,published
 florida_twins_auth,irw_text,published
 florida_twins_behavior_cads,irw_text,published
@@ -1006,6 +1009,8 @@ pilch_2021_personality_ipip20,irw_text_2,published
 pilch_2021_protection_motivation,irw_text_2,published
 polca_cheating,irw_text,published
 polca_election,irw_text_2,published
+pop_2023_mp_concern,irw_text_2,draft
+pop_2023_mp_media,irw_text_2,draft
 powell_2018_affect,irw_text_2,published
 powell_2018_qcae,irw_text_2,published
 powell_2018_trust,irw_text_2,published
@@ -1038,9 +1043,11 @@ psychtools_geras,irw_text,published
 psychtools_msq,irw_text,published
 psychtools_sai,irw_text,published
 ptacek2023_dass21,irw_text_2,published
-ptcichina_zhan_2024,irw_text_2,published
 qaslu_lopez_2024,irw_text,published
 qaslu_prado_2024,irw_text,published
+qi_2024_mspss,irw_text_2,draft
+qi_2024_phq9,irw_text_2,draft
+qi_2024_somatic,irw_text_2,draft
 qi_2025_dark_triad,irw_text_2,published
 qi_2025_panas,irw_text_2,published
 qi_2025_self_concept_clarity,irw_text_2,published

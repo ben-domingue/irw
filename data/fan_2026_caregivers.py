@@ -5,7 +5,7 @@ Two instruments reach IRW from the deposited raw file, both with full English
 item labels in the column names:
 
   * Simplified Coping Style Questionnaire (SCSQ), 20 items, 0-3
-  * Zarit Burden Interview (ZBI), 24 items, 0-4
+  * Caregiver Burden Inventory (CBI, Novak & Guest 1989), 24 items, 0-4
 
 The file's third block, `social_support_01..32`, is NOT a 32-item scale and is
 deliberately left out. It is the Social Support Rating Scale (SSRS), whose 10
@@ -51,7 +51,7 @@ COV_COLS = {
 SCALES = {
     # Simplified Coping Style Questionnaire, 20 items, 0 (never) - 3 (often)
     "fan_2026_coping": ("coping_", (0, 3)),
-    # Zarit Burden Interview, 24 items, 0 (never) - 4 (nearly always)
+    # Caregiver Burden Inventory (CBI), 24 items, 0 (never) - 4 (nearly always)
     "fan_2026_care_burden": ("care_burden_", (0, 4)),
 }
 

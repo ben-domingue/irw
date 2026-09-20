@@ -14440,6 +14440,167 @@ imputed rather than on a documented raw file. Re-openable only by obtaining
 the pre-imputation file from the authors. No licence problem — this is not a
 `license_blocked_candidates.csv` row.
 
+## 2026-09-16c — PMC weekly + monthly bucket: 33 tables, 372,121 responses
+
+*Written up retroactively 2026-09-19. The code for this batch merged the same
+day it was processed (`cdb1e6ef`, PRs #2219 and #2220) but no log entry or TODO
+line was written, so for three days the 33 CSVs sat in `irw_output/` with
+nothing in the repo explaining what they were.*
+
+**Source.** The two Europe-PMC connector runs of 2026-09-16: the weekly
+high-yield run (#2216) and the monthly full sweep (#2217, `--mode full
+--limit 150` across 125 construct terms and the `JOURNALS` list, 123
+candidates). Fifteen deposits were worked out of that combined bucket — twelve
+survey deposits plus three animal-cognition ones — all **CC BY 4.0**, all
+downloaded at run time from Europe PMC except `fitz_2024`, which comes from
+Harvard Dataverse.
+
+**Shipped: 33 tables / 372,121 responses.** Largest are
+`morano_2019_enjoyment` and `_self_efficacy` (56,140 each),
+`codella_2020_school_efficacy` (47,544) and `fitz_2024_numeracy` (30,722);
+smallest are the four trial-level animal tables (640–2,753). Every table
+passes `irw-validate --profile upload`; the remaining output is warnings only
+(category non-use, `imputed_values` heuristics, and `sample_floor` on the
+animal tables).
+
+**The triage bucket was wrong on four deposits, in the safe direction.**
+`codella_2020`, `bukhori_2024` and `ding_2025` were classified
+`aggregate_continuous` or `human_review` by `irw_retriage_ha.py` and are in
+fact clean item-level data. The bucket is computed from reason text without
+re-reading the file, so a parsing failure — banner row, two-row header,
+headerless tsv — reads as "not item responses". Worth remembering when a
+future batch's `human_review` pile looks unpromising: the flag describes the
+parse, not the data.
+
+**Three per-table calls, each also in the script header and the dictionary
+Notes cell:**
+
+- `lev_ari_2021_*` carries `wave`, but its `id` does **not** link people
+  across the two waves — the deposit's `code` column is null, zero or
+  duplicated too often to serve as a participant id.
+- `fitz_2024_numeracy` is scored by parsing the authors' own replication `.do`
+  file at run time rather than by reimplementing their key, with one stated
+  difference: their recode counts a blank as incorrect, and blanks are dropped
+  here instead.
+- `acevedo_triana_2017_tmaze`'s `resp` is **which arm** the rat entered, not
+  whether it was right: no arm is correct in a spontaneous-alternation T-maze.
+  Modelling it as accuracy is the obvious wrong thing to do with it.
+
+**The four animal tables were accepted on ben-domingue's 2026-09-16 ruling**
+that the 100-id floor is a survey-shaped proxy — each person answering each
+item once — and that a trials-based design inverts that shape. Ten monkeys ×
+~290 trials is 2,802 observations. `sample_floor` warns rather than blocks, so
+nothing was overridden. A no-response is not a wrong answer in any of them:
+the capuchin scoring column's third value (2, no answer) and the rat sheet's
+1,022 no-entry trials are dropped, not scored 0. `santaca_2025` deliberately
+emits no `rt` — the deposit's latency column is a logarithm of unstated base.
+
+**Two pipeline changes came out of it.** `resp_raw` was added to the
+validator's known-column set (datastandard.md lists it and insists on that
+spelling over `raw_resp`, but `cov_prefix` did not know it, so the validator
+warned about the one spelling the standard asks for). And #2224 was filed
+rather than fixed: `dup_id_item` accepts only wave/timepoint/date as the
+column explaining a repeat, though `_checks.py` says in a comment that trial
+columns belong in that set — which is why `martinez_2024_capuchin` emits
+`date` in Unix seconds.
+
+**Dictionary rows** were staged with the batch: 33 rows in
+`dictionary_auto.csv`, which `metadata/02_biblio.R` unions into the sheet
+export on every run, so there is no paste step and nothing further to do on
+the biblio side.
+
+**Upload:** ben-domingue uploaded the 33 tables to the Redivis draft
+2026-09-19. Tags and item text follow below.
+
+### Item text, done retroactively 2026-09-19 (Step 3.5 was skipped at the time)
+
+The batch shipped 33 response tables and not one row of item text, and nothing
+recorded why. Going back over all fifteen deposits with the Step 3.5 test —
+*is the text already in hand?* — nine tables' worth was, and three deposits
+turned out to be carrying item wording that the batch never looked at.
+
+**Shipped (9 tables, in `itemtext_output/`, gated and awaiting upload):**
+
+| table | where the text was | note |
+|---|---|---|
+| `pop_2023_mp_concern`, `pop_2023_mp_media` | the deposit's own numbered column headers, plus Appendices S3/S4 — the authors' Romanian questionnaire and their English version of it | administered Romanian ships in the base fields, English in `_translated` |
+| `codella_2020_school_efficacy` | English in the sheet's header row, **Italian in the row the processing script drops** as non-numeric | anchors and the shared stem exist in English only — `public_note` |
+| `bukhori_2024_dass` | row 1 of the deposit's two-row header, each item Malay then English | no anchors published in either language, so no option text |
+| `fitz_2024_numeracy`, `fitz_2024_polknow` | the article's Supplementary Material, "Survey Question Wording and Coding" | `correct_response` from the same supplement |
+| `qi_2024_phq9`, `qi_2024_mspss`, `qi_2024_somatic` | the deposit's own **"English-language codebook"** (s002.docx): every code against its text and its anchors | English codebook, Chinese administration — `translated_substitute`, `language=Chinese`, `public_note` |
+
+All nine pass `validate_items.R` (item and resp sets exact), `audit_batch.R`
+(9/9 PASS, no anomalies) and `irw-validate`, with `mapping_verification.csv`
+rows recording how each mapping was pinned.
+
+**Blocked on the wording's rights — text in hand, not shipped (3 tables).**
+Each is now a row in `itemtext/instrument_rights_register.csv` with the clause
+quoted:
+
+- **`bukhori_2024_iat`** — the IAT is Stoelting's: *"No part of this product
+  may be reproduced, translated, stored in a retrieval system, or transmitted
+  in any form or by any means … without written permission from the
+  publisher."* All 20 items are in the deposit's header in Malay and English.
+  This is the WHOQOL shape — an explicit bar on reproduction, honoured even
+  though our copy came from a CC BY article.
+- **`qi_2024_ciss`** — MHS's terms name *"adaptation and reproduction of
+  protected test items"*. All 21 items are in the codebook.
+- **`aziz_2020_adherence`** — the MMAS carries both a fee and a permission
+  requirement (*"Permission for use is required. A license agreement is
+  available from…"*), and MALMAS is its Malay adaptation. The whole survey is
+  in the deposit's Questionnaire S1, in Malay and English.
+
+**Escalated, not decided: `aziz_2020_bmq`.** Same file, 18 items in hand. The
+originator's own terms could not be quoted; what is findable says the
+copyright is Horne's and that the questionnaire is obtained from him, which
+reads as a distribution practice rather than a stated term. SKILL.md says
+escalate rather than decide when the drafting is genuinely ambiguous.
+
+**Two findings that are about the response tables, not the item text:**
+
+- **`qi_2024_somatic` carries 15 items of a 20-item instrument.** The codebook
+  prints SSS1..SSS20 and a 20–80 total range. Five columns in the deposit's SSS
+  block carry stray PHQ/GAD names and were excluded from the response table as
+  unidentifiable. They are the missing SSS items: the deposit's own
+  `SSS Total score` equals sum(SSS1..SSS15) + those five for **293 of 293**
+  respondents, and equals the 15-item sum for none. Which of SSS16..SSS20 each
+  one is remains open, so nothing was amended here. Carried in TODO.md.
+- **`fitz_2024_numeracy`'s item 2 is scored more strictly than the published
+  analysis.** Table SM2's per-item proportions correct match the shipped table
+  to ±0.01 for 10 of 11 items; `numeracy2` (BIG BUCKS) is 0.514 here against
+  0.64 published. The shipped scoring applies the authors' own .do file key
+  exactly — counting the 304 respondents who answered "100" as correct would
+  reproduce ~0.62 — so the released key and the published table disagree with
+  each other. Also carried in TODO.md.
+
+**Skipped, with both label levels named (20 tables).** `arbinaga_2025_*`: the
+`.sav`'s variable labels are the bare column names (`AAQ1` → "AAQ1") and its
+value labels exist only for covariates — neither level carries item wording.
+`lev_ari_2021_*`: the `.sav` has no variable labels at all and one value-labelled
+variable (`BMInew`), none for items. `morano_2019_*` (`Self-efficacy1..4`,
+`Enjoyment1..4`), `pan_2023_*` (`a1..c19`), `ding_2025_*` (headerless tsv) and
+`qi_2024_pss10` (absent from the codebook, and the PSS is blocked in the
+register anyway): item codes only, so the published instrument would be needed.
+`fan_2026_*`: the column names are terse English glosses
+(`care_burden_06_cannot_enjoy_life`) that pin the mapping but are not the
+administered Chinese wording — SCSQ and CBI items are one hop away in their
+published sources. The four animal tables have no item text by nature: `item`
+is a trial or a stimulus probe.
+
+**One dictionary defect found and fixed while doing this.**
+`fan_2026_care_burden` was described as the Zarit Burden Interview in its
+dictionary row and in `data/fan_2026_caregivers.py`. It is the **Caregiver
+Burden Inventory** (Novak & Guest, 1989) — the paper names it, and the ZBI has
+22 items where this has the CBI's 24 on 0–4. Corrected in both places.
+
+**Tags.** All 33 tables were untagged on the live sheet and in
+`tags_auto.csv`; 33 `claude-auto` rows are staged, filling the four columns
+that currently publish (`sample` SETTING facet, `measurement tool`,
+`item format`, `primary language(s)`), plus `Age Range = Not applicable
+(non-person)` and `Sample = Animal` on the four animal tables, which is the
+`#2206` vocabulary's first real use. `pop_2023_*` ships with `sample` blank on
+purpose: an online snowball sample recruited through social media is not a
+panel or a crowdwork platform, and no setting atom fits.
 ## 2026-09-19 — The unaudited PMC seen-DOI tail, measured and closed
 
 `pmc_seen_dois.csv` holds 3,167 DOIs. The Data Availability re-mine in #2203
