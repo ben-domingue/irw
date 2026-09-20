@@ -28,6 +28,52 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   cross-journal cap first if its counts are to be used as a volume estimate
   rather than a ranking (see BATCH_LOG.md 2026-09-20).
 
+## From the 2026-09-20 lead-working pass
+
+- [ ] **18 tables / 269,737 responses staged in `irw_output/`, need uploading.**
+  All CC BY 4.0, all creates. `lopezodar_2025_berq` + `_ghq28`,
+  `li_2025_icf_rs17`, nine `adamczyk_2022_*`, five `amiot_2022_*`,
+  `karlsson_2023_climate_risk`. The 18 matching `dictionary_auto.csv` rows are
+  committed, so biblio needs no paste -- `metadata/02_biblio.R` unions them.
+  No item text ships with this batch, so there is no second upload.
+
+- [ ] **Is a Prolific ID PII for our purposes?** `10.1038/s41598-023-33749-0`
+  (OSF `v7k3d`) publishes 772 live 24-hex Prolific account IDs beside
+  mental-health-disorder, medication and head-injury fields. A Prolific ID is
+  not in the blanket rule's enumerated list, but it is a persistent
+  cross-study identifier that Prolific tells researchers never to publish.
+  Skipped conservatively pending ben-domingue's call; reversible either way.
+  If it is not PII, the deposit is 697 x 85 with HADS and DERS blocks and
+  worth processing. Both this and the PERMA deposit below are arguably worth
+  telling the depositors about, as with the zenodo.10069489 email.
+
+- [ ] **The UCLA Loneliness Scale has no rights verdict.** It is not in
+  `itemtext/instrument_rights_register.csv` either way, which currently blocks
+  item text for `amiot_2022_ucla_loneliness` (an otherwise perfect
+  `data_labels` source: full stems in the SPSS variable labels, value labels
+  on every scale point) and keeps `tatala_2023_ucla_loneliness` parked. One
+  quote test against Russell's own distribution settles both. Cheap and
+  well-specified.
+
+- [ ] **`li_2025_icf_rs17` item text is one table away.** The 17 ICF category
+  names are printed in the paper's Tables 3-4 (`paper_explicit`, so it needs
+  a Step 5b `verify_li_2025_icf_rs17.R`, not the cheap gate). The item codes
+  are ICF codes, so the mapping is unambiguous -- this is the most tractable
+  itemtext follow-up the batch produced.
+
+- [ ] **`lopezodar_2025` ERQ: ask the authors what scale was administered.**
+  The paper documents the Peruvian ERQ as 7-point (1-7); the deposited
+  ERQ1-ERQ10 hold five levels (0-4) across all 403 respondents. Held rather
+  than shipped -- the level count disagrees, so the responses cannot be mapped
+  to the documented anchors. 4,030 responses if it resolves.
+
+- [ ] **~19 actionable leads from the sweep are still unworked**, in
+  `runs/pmc_recycled_2026-09-20.csv` and its `.retriage_ha.csv`. Six deposits
+  were opened out of 25 leads. Rank by instrument shape, not response count:
+  the two largest by nominal response count (21,343 x 23 and 20,415 x 12, both
+  `.RDS` behind OSF links) are social-network and VR-trial data and were
+  deliberately left for last.
+
 ## From the 2026-09-19 PMC tail measurement
 
 - [x] **The unaudited PMC seen-DOI tail is closed, measured not skipped.**

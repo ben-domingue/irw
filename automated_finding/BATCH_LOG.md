@@ -14629,3 +14629,83 @@ window will have hit some of them. That is not the 2026-09-19 tail question
 (which was about Data Availability statements and is closed) — it is
 specifically "how many past rows say `license_unknown*` when the record says
 CC BY". Cheap to measure with the same re-check loop used here.
+
+## 2026-09-20c — Working the sweep's leads: 18 tables, 269,737 responses
+
+Six deposits opened from the 25 actionable leads. Four shipped, two were
+skipped on PII, one is rejected on content.
+
+**Shipped (18 tables, all CC BY 4.0, all `create` not replace):**
+
+| deposit | tables | responses |
+|---|---|---|
+| `10.3390/bs15020224` Peruvian BERQ-PA | 2 | 19,344 |
+| `10.7717/peerj.20280` ICF-RS-17 rehabilitation | 1 | 87,516 |
+| `10.1038/s41598-022-26653-6` Polish RAS + 8 | 9 | 27,938 |
+| `10.1038/s41598-022-10019-z` Canadian pet panel | 5 | 122,927 |
+| `10.1038/s41598-023-37195-w` climate risk pre/post | 1 | 12,012 |
+
+Three decisions in there are worth finding again:
+
+- **`lopezodar_2025`: the ERQ is held, deliberately.** The paper documents the
+  Peruvian ERQ as 7-point; the deposited ERQ1-10 hold five levels (0-4) across
+  all 403 respondents. That is not a 7-point scale with unused extremes, and
+  the level count disagreeing means the responses cannot be mapped to the
+  documented anchors at all. BERQ in the same file is 0-4 against a documented
+  1-5 — a re-indexing, shipped as recorded. GHQ-28 is 0-3, exactly as
+  documented. One file, three instruments, three different answers.
+- **`adamczyk_2022_ras`: the samples disagreed on scoring direction.**
+  Validation sample 1 deposits items 4 and 7 raw (RAS4 mean 1.88) plus
+  reverse-scored copies; the other two samples deposit only the reversed
+  direction (4.24, 4.15). Merging as-deposited would have put two opposite
+  scale directions under one item code — `resp_ambiguous`, #1827. The table
+  takes val1's reversed columns; after harmonisation RAS4 reads 4.24/4.12/4.15
+  across the three samples. The depositors' own columns, nothing recomputed.
+- **`karlsson_2023`: a stray letter nearly cost an item.** The codebook lists
+  Post_Risk_DV_1..6; the file has `MPost_Risk_DV_4`. Its variable label is
+  word-for-word Pre_Risk_DV_4's, so it is item 4. Unrenamed, the table would
+  have shipped five paired items and one orphan, and every gate would have
+  passed.
+
+**Two PII skips, both public deposits, both worth an email:**
+
+- **`10.1038/s41598-026-57354-z` (PERMA-Profiler, French)** — OSF `53t8c`
+  publishes full dates of birth (day/month/year, 584 distinct over 612 rows)
+  next to self-generated initials-plus-digits codes (`EJO3070`) and ten
+  psychiatric diagnosis columns (anxiety, OCD, PTSD, psychotic, depressive,
+  bipolar, dissociative). DOB is named in the blanket rule; the compounding
+  with stigmatised clinical data is the 2026-08-12 shape exactly.
+- **`10.1038/s41598-023-33749-0` (social frailty)** — OSF `v7k3d`'s
+  `dat_used.xlsx` carries a live `Prolific ID` column, 772 distinct 24-hex
+  account identifiers, alongside mental-health-disorder, current-medications
+  and head-injury fields; a second sheet lists more Prolific IDs.
+  **This one extends the rule rather than applying it.** A Prolific ID is not
+  in the rule's enumerated list (names, emails, birthdates, IP/GPS, national
+  ID), but it is a persistent cross-study account identifier that Prolific's
+  own guidance says never to publish. Skipped conservatively, and flagged in
+  TODO.md as a rule question for ben-domingue — it is reversible either way.
+
+**One content rejection.** `10.1186/s12889-022-14103-x` (BMC Public Health,
+380 older Americans x 6 waves) is seven single-item measures of different
+constructs on four different scales, plus a `soc_support_imputed` column.
+There is no instrument. Same shape as DVN/QUVQIR, rejected 2026-09-14.
+
+**Item text: none shipped, and the reason is mostly rights, not effort.**
+The Amiot deposit is otherwise an ideal `data_labels` source — full stems in
+the SPSS variable labels, value labels on every scale point of four blocks —
+but `itemtext/instrument_rights_register.csv` already blocks the PSS
+(irw#1955), the MLQ (irw#1945) and the SWLS corpus-wide, and the Subjective
+Vitality Scale sits inside the full-scope CSDT ruling of 2026-09-09. The
+GHQ-28 in `lopezodar_2025` is blocked by the GHQ family entry. What is left
+is genuinely open rather than blocked, and is queued in TODO.md: the UCLA
+Loneliness Scale has no register verdict at all, and the ICF-RS-17's 17
+category names sit in the paper's own Tables 3-4.
+
+Every table was checked with `run_qc`; no `fail` anywhere. The warnings that
+did fire were each explained rather than waved through — ceiling effects on
+satisfaction items, an unendorsed top category on GHQ28's suicidality item,
+ICF's b/d chapter prefixes reading as two instruments, and the longitudinal
+`dup_id_item` on the two tables that carry `wave`.
+
+18 `dictionary_auto.csv` rows staged, one per table, via `stage_dict_row.py`;
+the 18 `irw_output/` CSVs are on disk in the worktree awaiting upload.
