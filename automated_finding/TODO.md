@@ -3,6 +3,56 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## From the 2026-09-16 PMC batch (written up 2026-09-19)
+
+- [ ] **9 item text tables need uploading** to `irw_text` — they are in
+  `automated_finding/itemtext_output/`, gated clean (`validate_items.R`,
+  `audit_batch.R` 9/9 PASS, `irw-validate`), and the response tables they join
+  to went up 2026-09-19. `red_up <dir>` takes `irw_text` as its default for a
+  directory of `*__items.csv`. Once they land, stamp `uploaded=<date>` on the
+  nine new `itemtext_provenance.csv` rows and on their
+  `itemtext/mapping_verification.csv` rows — all blank until then.
+
+- [ ] **Four of those nine owe an issues-page entry when they land**, because
+  they carry a non-empty `public_note`. Drafts, to apply to
+  `irw_site/itemtext_issues.qmd`:
+  - `codella_2020_school_efficacy` — "Item text is the study's administered
+    Italian wording, but the 1-5 scale anchors and the shared stem 'How well
+    can you' are recorded in English: the source publishes those two only in
+    English."
+  - `qi_2024_phq9`, `qi_2024_mspss` — "The item text is the study's own
+    English-language codebook; the questionnaire was administered in Chinese,
+    so this is not the wording respondents read."
+  - `qi_2024_somatic` — the same, plus "The source instrument has 20 items and
+    this IRW table carries 15."
+
+- [ ] **`qi_2024_somatic` is missing 5 of the instrument's 20 items, and they
+  are recoverable.** The deposit's SSS block has 20 columns; five carry stray
+  PHQ/GAD names and were excluded when the table was built. They are the
+  missing SSS items — `SSS Total score` equals sum(SSS1..SSS15) + those five
+  for 293/293 respondents and equals the 15-item sum for none. What is not
+  settled is which of `SSS16`..`SSS20` each stray column is: they are
+  interleaved among the labelled ones (positions 2, 3, 4, 6, 8 of the block),
+  so column order does not identify them, and the item texts (sweating and
+  trembling; worry about illness; breathing and sighing; throat blockage;
+  urinary frequency) would have to be matched some other way. Adding them
+  means reshipping the table, so it is a decision, not a fix.
+
+- [ ] **`fitz_2024_numeracy` item 2 disagrees with the published proportion
+  correct.** Table SM2 reports 0.64 for the BIG BUCKS item; the shipped table
+  gives 0.514, and the other ten items match the supplement to ±0.01. The
+  scoring applies the authors' own replication `.do` key exactly, so this is
+  the released key disagreeing with the published table, not a processing
+  error. Counting the 304 respondents who answered "100" as correct reproduces
+  ~0.62. Worth an author email if anything is done about it at all.
+
+- [ ] **`aziz_2020_bmq` item text is held pending a rights call (Ben).** All 18
+  BMQ items are in hand — the deposit's Questionnaire S1 prints the survey in
+  Malay and English under CC BY — but no clause reserving a right could be
+  quoted from the originator; what is findable says only that the copyright is
+  Rob Horne's and that the questionnaire is obtained from him. Escalated per
+  SKILL.md rather than decided either way; the register row is `escalate`.
+
 ## From the 2026-09-14 repos weekly batch
 
 - [x] **DR-NTU 10.21979/N9/P5WUGI** — taken on Ben's NC approval
