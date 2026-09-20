@@ -14870,3 +14870,54 @@ ICF's b/d chapter prefixes reading as two instruments, and the longitudinal
 
 18 `dictionary_auto.csv` rows staged, one per table, via `stage_dict_row.py`;
 the 18 `irw_output/` CSVs are on disk in the worktree awaiting upload.
+
+## 2026-09-20d — The Prolific-ID ruling, and the candidate that prompted it (skipped on licence)
+
+**The ruling (ben-domingue, 2026-09-20).** A platform participant ID —
+Prolific, MTurk and the like — does **not** disqualify a candidate under the
+blanket PII rule. It is replaced and the data ships. A column of that kind is
+a pure identifier: never an item, never a covariate, so IRW's output is
+identical whether it is in the source or not. Everything else in the rule
+stands — names, emails, birthdates, IP/GPS, national ID numbers and
+free-text clinical narratives still skip the whole candidate. Recorded as a
+narrowing in the skill, with the reason it is narrow.
+
+**Replace with the row index, never a hash.** A hash of a Prolific ID is a
+stable pseudonym, not anonymisation: 24-hex IDs are enumerable from other
+public deposits, so a holder of such a list can hash it and re-link. The row
+index has no preimage.
+
+**The candidate itself did not ship, and not for a PII reason.**
+`10.1038/s41598-023-33749-0` (Demichelis et al., social frailty and emotion
+regulation) is structurally one of the best things the sweep found — 790 UK
+adults, 53,718 responses across HADS-A (7), HADS-D (7), DERS (36), a social
+frailty index (8) and PSS-10 (10), two missing cells in total. All five
+tables were built and QC'd clean before the block was found, then withdrawn.
+
+**Two things the triage row said were wrong, both checked late:**
+
+- *Licence.* Triage recorded `cc-by-sa`. The article's own JATS licence block
+  and Crossref both say **CC BY 4.0**. But the article's licence is not the
+  data's: OSF node `v7k3d` is **private** (`public: False`, and the API 401s
+  without a token), reachable only through the `?view_only=` anonymised
+  peer-review link that the paper's Data Availability statement publishes,
+  and it carries **no licence at all**. A tokenless download returns an HTML
+  page rather than failing, which is how this stayed invisible. Under the
+  source-licence rule (ECR-R, 2026-09-04) the unlicensed node governs, so
+  `datastandard.md`'s missing-licence stop applies. Logged in
+  `license_blocked_candidates.csv` with the processing decisions already
+  worked out, in case the licence is ever resolved.
+- *"Already public".* This entry's own author argued during the batch that
+  the deposit's PII exposure was already realised and that IRW would only be
+  mirroring it. That was wrong on the same fact: the node is private, so an
+  IRW table linking it would have increased exposure, not mirrored it.
+
+**No author email**, ruled by ben-domingue: not worth contacting authors for
+a candidate we are skipping. That leaves unsent a second thing worth knowing
+— the published view-only link exposes 772 live Prolific account IDs beside
+free-text diagnoses, dosed medication lists and personal narratives. It is
+recorded in `license_blocked_candidates.csv` rather than acted on.
+
+**Check `public:` on an OSF node before treating its contents as openly
+licensed.** That is the reusable lesson here, and it is cheap:
+`api.osf.io/v2/nodes/<id>/` answers it in one request.
