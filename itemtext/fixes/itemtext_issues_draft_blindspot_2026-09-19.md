@@ -8,7 +8,16 @@ drops, and 14 were unaccounted for. These are the 3 of those 14 that clear the b
 7 went into `fixes/issues_page_dropped.csv`; 3 (`ali_2021_phq9`, `conner_2017_lot`,
 `pemaiw_qiu_2020_dass`) are pilot-era backfills whose code->text derivation was never recorded
 and need a mapping re-check before they can be ruled either way; 1 (`cucchi_2018_pts`) is an
-IRI rights withdrawal, not a page entry.
+IRI rights matter, not a page entry, and its withdrawal has ALREADY SHIPPED.
+
+CORRECTION, same day: `cucchi_2018_pts` was first reported here as still published, on the
+strength of `live_tables.csv`, which lists it as `published` in `irw_text`. It is not.
+`get_itemtext` against irw_version 393 (released 2026-09-19T15:05:07Z) returns
+`available: false`, 0 items -- the IRI withdrawal shipped. The snapshot file is dated
+2026-09-19 and its mtime is later than that release, so it over-reports a withdrawn table
+rather than merely lagging; treat a `published` row in it as a claim to verify, not a fact,
+and re-run refresh_live_tables.py. The three tables the entries above describe WERE each
+confirmed live against v393 by the same route.
 
 DO NOT paste while datapages/irw#212 is open -- it appends at the same closing marker.
 Backfill the `public_note` for each of these three in its provenance row at the same time,
