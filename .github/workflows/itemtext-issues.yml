@@ -71,10 +71,22 @@ jobs:
       - name: Refresh live_tables.csv
         id: refresh
         env:
-          # Read-only token, as in version-manifest.yml.
+          # Read-only token, as in version-manifest.yml. It can list a released
+          # version but not a draft -- Redivis wants data.edit for `next`, which
+          # is more than a snapshot reader should hold. So the refresh carries
+          # the previous snapshot's draft rows forward here and says so in the
+          # file; only a local run with Ben's token moves them. Nothing this job
+          # gates on is affected: DUE is computed from the published rows.
           REDIVIS_API_TOKEN: ${{ secrets.REDIVIS_API_TOKEN }}
         run: |
-          python3 itemtext/refresh_live_tables.py
+          set -o pipefail
+          python3 itemtext/refresh_live_tables.py 2>&1 | tee refresh.txt
+          # Carrying draft rows forward is expected here, but it is still the
+          # snapshot going partly stale, so it is never silent.
+          if grep -q '^WARNING:' refresh.txt; then
+            echo "::warning::$(grep '^WARNING:' refresh.txt | head -1)"
+          fi
+          rm -f refresh.txt
           # The header carries the snapshot date, so compare the table rows only;
           # a date-only change is not worth a PR.
           if git diff -U0 -- itemtext/live_tables.csv | grep -E '^[+-][^+#-]' -q; then
