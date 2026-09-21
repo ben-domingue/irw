@@ -21,7 +21,10 @@ df <- df |>
                names_to = 'item',
                values_to = 'resp') |>
   # remove character from item ID 
-  mutate(item = as.numeric(str_replace(item, 'q', '')))
+  mutate(item = as.numeric(str_replace(item, 'q', ''))) |>
+  # the archive codes "no answer chosen" as 0 and a second sentinel as -1, both
+  # mapped to NA above; those cells are not observations, so they are not rows
+  drop_na(resp)
 
 # print response values
 table(df$resp)

@@ -104,6 +104,13 @@ drop a1 a2_a a2_b a2_c a2_d a3 a4 a5 a6 a7 a8 a9 a10 a11 a12
 
 drop if missing(item) | item == ""
 
+* The reshape above emits one row per person-item CELL, not per person-item
+* OBSERVATION: the sentinel recodes at the top turn "no sabe" / "no responde" /
+* "no aplica" into missing, and most remaining blanks are structurally-skipped
+* follow-ups the respondent was never shown. Those are not responses, so they
+* are not rows. Retained values are untouched.
+drop if missing(resp)
+
 * encode any needed variables
 gen resp2 = resp
 drop resp
@@ -147,6 +154,13 @@ use `long_ee', clear
 drop ee1_a ee1_b ee1_c ee2 ee3 ee4 ee5
 
 drop if missing(item) | item == ""
+
+* The reshape above emits one row per person-item CELL, not per person-item
+* OBSERVATION: the sentinel recodes at the top turn "no sabe" / "no responde" /
+* "no aplica" into missing, and most remaining blanks are structurally-skipped
+* follow-ups the respondent was never shown. Those are not responses, so they
+* are not rows. Retained values are untouched.
+drop if missing(resp)
 
 * encode any needed variables
 gen resp2 = resp
@@ -192,6 +206,13 @@ drop oo1 oo2 oo3_a oo3_b oo4 oo5 oo6 oo7_a1 oo7_a2 oo7_a3 oo7_a4 oo7_a5 oo7_a6 o
 
 drop if missing(item) | item == ""
 
+* The reshape above emits one row per person-item CELL, not per person-item
+* OBSERVATION: the sentinel recodes at the top turn "no sabe" / "no responde" /
+* "no aplica" into missing, and most remaining blanks are structurally-skipped
+* follow-ups the respondent was never shown. Those are not responses, so they
+* are not rows. Retained values are untouched.
+drop if missing(resp)
+
 * encode any needed variables
 gen resp2 = resp
 drop resp
@@ -235,6 +256,13 @@ use `long_u', clear
 drop u1 u1_a u2 u2_a u3 u3_a u4 u4_a u5 u5_a u6 u6_a u7 u7_a u8 u8_a u9 u9_a u10 u10_a u11 u11_a u12 u13 u14 u15 u15_a u16 u16_a u17 u17_a u18_a u18_b u18_c u19 u20 u21 u22
 
 drop if missing(item) | item == ""
+
+* The reshape above emits one row per person-item CELL, not per person-item
+* OBSERVATION: the sentinel recodes at the top turn "no sabe" / "no responde" /
+* "no aplica" into missing, and most remaining blanks are structurally-skipped
+* follow-ups the respondent was never shown. Those are not responses, so they
+* are not rows. Retained values are untouched.
+drop if missing(resp)
 
 * encode any needed variables
 gen resp2 = resp
@@ -280,6 +308,13 @@ drop yy1 yy2 yy3 yy4 yy5 yy5_a
 
 drop if missing(item) | item == ""
 
+* The reshape above emits one row per person-item CELL, not per person-item
+* OBSERVATION: the sentinel recodes at the top turn "no sabe" / "no responde" /
+* "no aplica" into missing, and most remaining blanks are structurally-skipped
+* follow-ups the respondent was never shown. Those are not responses, so they
+* are not rows. Retained values are untouched.
+drop if missing(resp)
+
 * encode any needed variables
 gen resp2 = resp
 drop resp
@@ -323,6 +358,13 @@ use `long_ss', clear
 drop ss1 ss2_a ss2_b ss2_c ss3 ss4 ss5 ss6 ss7_a ss7_b ss7_c ss7_d ss8
 
 drop if missing(item) | item == ""
+
+* The reshape above emits one row per person-item CELL, not per person-item
+* OBSERVATION: the sentinel recodes at the top turn "no sabe" / "no responde" /
+* "no aplica" into missing, and most remaining blanks are structurally-skipped
+* follow-ups the respondent was never shown. Those are not responses, so they
+* are not rows. Retained values are untouched.
+drop if missing(resp)
 
 * encode any needed variables
 gen resp2 = resp
@@ -368,6 +410,13 @@ drop vv1_a vv1_b vv1_c vv2 vv3
 
 drop if missing(item) | item == ""
 
+* The reshape above emits one row per person-item CELL, not per person-item
+* OBSERVATION: the sentinel recodes at the top turn "no sabe" / "no responde" /
+* "no aplica" into missing, and most remaining blanks are structurally-skipped
+* follow-ups the respondent was never shown. Those are not responses, so they
+* are not rows. Retained values are untouched.
+drop if missing(resp)
+
 * encode any needed variables
 gen resp2 = resp
 drop resp
@@ -411,6 +460,13 @@ use `long_g', clear
 drop g1 g2 g3_a g3_b g3_c g3_d g3_e g3_f g4_a g4_b g4_c g4_d g4_e
 
 drop if missing(item) | item == ""
+
+* The reshape above emits one row per person-item CELL, not per person-item
+* OBSERVATION: the sentinel recodes at the top turn "no sabe" / "no responde" /
+* "no aplica" into missing, and most remaining blanks are structurally-skipped
+* follow-ups the respondent was never shown. Those are not responses, so they
+* are not rows. Retained values are untouched.
+drop if missing(resp)
 
 * encode any needed variables
 gen resp2 = resp
@@ -456,6 +512,13 @@ drop h1 h2_a h2_b h2_c h2_d h3_a h3_b h3_c h3_d h3_e h4_a h4_b h4_c
 
 drop if missing(item) | item == ""
 
+* The reshape above emits one row per person-item CELL, not per person-item
+* OBSERVATION: the sentinel recodes at the top turn "no sabe" / "no responde" /
+* "no aplica" into missing, and most remaining blanks are structurally-skipped
+* follow-ups the respondent was never shown. Those are not responses, so they
+* are not rows. Retained values are untouched.
+drop if missing(resp)
+
 * encode any needed variables
 gen resp2 = resp
 drop resp
@@ -500,6 +563,13 @@ drop rr1 rr2_a rr2_b rr2_c rr2_d rr2_e rr3 rr4_a rr4_b rr4_c rr4_d rr5_a rr5_b r
 
 drop if missing(item) | item == ""
 
+* The reshape above emits one row per person-item CELL, not per person-item
+* OBSERVATION: the sentinel recodes at the top turn "no sabe" / "no responde" /
+* "no aplica" into missing, and most remaining blanks are structurally-skipped
+* follow-ups the respondent was never shown. Those are not responses, so they
+* are not rows. Retained values are untouched.
+drop if missing(resp)
+
 * encode any needed variables
 gen resp2 = resp
 drop resp
@@ -543,6 +613,13 @@ use `long_f', clear
 drop f1 f2_a f2_b f2_c f2_d f2_e f2_f f3_a f3_b f3_c f3_d f3_e f3_f f4 f4_1 f4_2 f4_3 f4_4 f4_88 f4_99 f5_a f5_b f5_c f6
 
 drop if missing(item) | item == ""
+
+* The reshape above emits one row per person-item CELL, not per person-item
+* OBSERVATION: the sentinel recodes at the top turn "no sabe" / "no responde" /
+* "no aplica" into missing, and most remaining blanks are structurally-skipped
+* follow-ups the respondent was never shown. Those are not responses, so they
+* are not rows. Retained values are untouched.
+drop if missing(resp)
 
 * encode any needed variables
 gen resp2 = resp

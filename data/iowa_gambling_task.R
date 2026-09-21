@@ -2,9 +2,18 @@ library(tidyverse)
 library(readr)
 library(janitor)
 
-choice95 <- read_csv('choice_95.csv')
-choice100 <- read_csv('choice_100.csv')
-choice150 <- read_csv('choice_150.csv')
+# Each source CSV has one MORE field per data row than it has header names,
+# because the leading subject-label column is unnamed. Left to itself read_csv
+# lines the names up from the left, so "Choice_1" lands on the subject label,
+# "Choice_2" on trial 1, and the final trial of every study has no name and is
+# dropped. Name the first column explicitly so the trials line up and none is lost.
+read_igt <- function(path, n_trials) {
+  read_csv(path, col_names = c("subj", paste0("trial_", seq_len(n_trials))),
+           skip = 1, show_col_types = FALSE)
+}
+choice95 <- read_igt('choice_95.csv', 95)
+choice100 <- read_igt('choice_100.csv', 100)
+choice150 <- read_igt('choice_150.csv', 150)
 
 # batch process datasets in enviroment
 all_objects <- ls()
@@ -17,9 +26,9 @@ for (name in dataframe_names) {
   
   # convert the variable names to lowercase
   new_names <- tolower(names(dataset))
-  # add df name to beginning of choice variable names to distinguish choice_2 from df choice100 from choice_2 from df choice150
+  # add df name to beginning of trial variable names to distinguish trial_2 from df choice100 from trial_2 from df choice150
   new_names <- paste0(name, new_names)
-  new_names <- if_else(str_detect(new_names, 'choice_1$'), 'id', new_names)
+  new_names <- if_else(str_detect(new_names, 'subj$'), 'id', new_names)
   
   # reassign new names to dataframe
   names(dataset) <- new_names
