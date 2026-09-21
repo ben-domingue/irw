@@ -22976,3 +22976,64 @@ Notable:
   independently fetched and hashed that page today.
 
 Cap (batch_299) not reached. 13 rows remain pending; the next round is batch_295.
+
+## batch_295 — 2026-09-20 18:44–19:0x
+
+3 tables claimed, 3 agents (one per table), **3 written / 0 blocked / 0 failed — yield 3/3**.
+Circuit breaker not tripped (0% failed).
+
+| table | source | items | resp | basis |
+|---|---|---|---|---|
+| spain_2025_democracy_system | CIS 3497, P.2 + P.7 + P.11 | 3 (p2, p7, p11) | {1,2} | data_labels |
+| spain_2025_democracy_trust | CIS 3497, [P10GR] | 10 (p10gr_1..10) | 0–10 | data_labels |
+| spain_2025_ageism_agreement | CIS 3493 "EDADISMO", [P5] | 4 (p5_1..p5_4) | {1,2,4,5} | data_labels |
+
+Gates: normalize_nulls 0 of 3 changed; audit_batch **3 PASS, no anomalies** (no WARNs, so
+nothing owed under Step 5c); verify_batch MISSING(exempt)=3; lint_verification 3 rows, no
+problems; irw-validate ok on all three; check_provenance rc=0. All three are data_labels, so
+no verify_*.R was written and all three tracker rows are NOT_NEEDED (written into BOTH the
+batch's verification_merged.csv and mapping_verification.csv, now 1258 rows).
+
+Step 5b — orchestrator re-checked all three agents' claims independently, and **every number
+reproduced**:
+- Live side, `irw_table_sets(per_item=TRUE)`, server-side, no export: system 3854/3981/3979;
+  trust 4002/4007/3973/3968/3966/3986/3972/3994/3983/3941 (n_rows 39792); ageism
+  4925/4944/4827/4919 (n_rows 19615). Counts are mutually distinct within every table, so the
+  check separates every item from every other item in all three — no near-ties this round.
+- Source side, re-derived from the cached deposits rather than trusting the agents: applying the
+  do-files' own filters to 3497_num.csv gives P2 3854 / P7 3981 / P11 3979, and to 3493_num.csv
+  gives P5_1..4 4925/4944/4827/4919. Both reproduce the live side exactly. The ageism agent's
+  "168 of 20024 code-3 cells" also checks out (48+29+53+38 over 5006×4).
+- Shipped ageism item_text and option_text compared character-for-character against 3493.sav's
+  variable and value labels: identical for all four items and all four shipped codes.
+
+Notable:
+- **system is NOT a grid, and correctly does not pretend to be.** `data/spain_2025_democracy.do`
+  Bookmark 1 stacks three unrelated standalone questions (`local survey_cols p2 p7 p11`) —
+  pride in the transition, sufficiency of anti-corruption mechanisms, need for new forms of
+  citizen participation. They share no carrier stem, so `instructions` and `section_prompt` are
+  both NA and each question's full wording sits in `item_text`. This is a deliberate departure
+  from the batch_293/294 siblings; do not "fix" it toward the family pattern.
+- The family's sentinel handling continues to differ per block and each time it is the source,
+  not a defect: system drops 8/9 everywhere plus a P2-only volunteered code 3 "(NO LEER) Le es
+  indiferente" (9 of 4010 cells); ageism drops 8/9 plus the not-read-aloud code 3 "(NO LEER)
+  Regular"; trust drops **only** 98/99, has no midpoint category at all, and so ships a
+  contiguous 0–10.
+- trust's 0–10 scale labels only its endpoints in both cues3497.pdf and the .sav value labels
+  (which store bare numerals '1'…'9'), so option_text is correctly BLANK for resp 1–9 — not
+  padded with the scale point's own number.
+- Two verbatim-transcription calls, both disclosed rather than silently corrected: CIS's own
+  P.10 carrier question carries an unbalanced quotation mark ("…10 'total confianza?"), shipped
+  as-is; and cues3497.pdf prints P.11's affirmative anchor unaccented as "Si" while P.2/P.7
+  print it accented, so option_text follows the .sav's accented "Sí" for all three.
+- **Escalated again (rounds may not write ship rows):** the CIS-family
+  instrument_rights_register.csv row is still owed. It now covers the 3493 study too — the
+  ageism agent verified CIS's reuse conditions independently for 3493 rather than inheriting the
+  3497 verdict (page sha256 1d79e49e…c4e062b3), reaching the same affirmative-grant conclusion.
+  Nine spain_2025_ageism_* tables remain queued behind that decision.
+- The three tables are HELD, not uploaded, so no issues-page entry is owed yet for their
+  IRW-generated English; check_provenance lists them under the HELD exemption. Entries fall due
+  when they ship. Note the irw_site checkout is on branch itemtext/issues-batch-300-304, so
+  that check was reported-but-not-enforced this round.
+
+Cap (batch_299) not reached. 10 rows remain pending; the next round is batch_296.
