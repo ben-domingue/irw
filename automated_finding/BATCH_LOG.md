@@ -14921,3 +14921,37 @@ recorded in `license_blocked_candidates.csv` rather than acted on.
 **Check `public:` on an OSF node before treating its contents as openly
 licensed.** That is the reusable lesson here, and it is cheap:
 `api.osf.io/v2/nodes/<id>/` answers it in one request.
+
+## 2026-09-20e — The batch's own leads were about to die in `runs/`
+
+Asked whether the work would survive a cleared context, the honest answer was
+no, and for the reason this log has already recorded once about someone else.
+
+The sweep's 25 actionable leads and its 291-term ranking existed **only** in
+`automated_finding/runs/`, which is gitignored in full and lives in one
+worktree on one machine. `BATCH_LOG.md` named the four largest leads. The
+other twenty-one were nowhere durable — while all 695 candidate DOIs are in
+`pmc_seen_dois.csv`, so the next run skips them. That is a permanent false
+negative by construction, and it is the identical shape to the #2203 defect
+diagnosed at the start of this same batch: only 260 of 3,167 ledger DOIs
+could be re-mined, because the rest's verdicts had died with their `runs/`
+CSVs.
+
+The "don't commit per-run CSVs" rule was followed correctly. What was missed
+is the rule of thumb sitting next to it: *if deleting it after the batch
+write-up would lose information, it does not belong in `runs/`*. A flag
+breakdown does not. A list of live leads whose DOIs are already ledgered does.
+
+Promoted to tracked top-level files, the same class as
+`plos_deferred_candidates.csv`:
+
+- **`pmc_leads_2026-09-20.csv`** — all 25 leads with a `status` column: 4
+  shipped, 1 blocked on licence, 1 skipped on PII, 1 rejected on content, 18
+  unworked. Each row keeps the flag, n, items, data file and external link,
+  so a lead can be opened without re-running anything.
+- **`pmc_term_backlog.csv`** — all 291 scouted terms with their measured
+  yields and a `run_2026_09_20` column marking the 50 already swept. 241
+  unrun, 1,553 new DOIs projected pre-dedup.
+
+The general rule is now written into the skill's "where files live" section
+rather than left as this batch's lesson.

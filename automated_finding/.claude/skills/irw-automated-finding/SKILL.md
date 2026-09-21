@@ -115,7 +115,23 @@ the environment, not to skip the check.
    `repo_triage_seen_keys.csv`, `license_blocked_candidates.csv`,
    `plos_deferred_candidates.csv`, any `pii_blocked_candidates.csv`, the
    `biblio_*.csv` handed to the user for the dictionary sheet, plus
-   `BATCH_LOG.md`, `TODO.md`, and the `human_review/` directory. Rule of
+   `BATCH_LOG.md`, `TODO.md`, and the `human_review/` directory.
+
+   **A batch's unworked leads and its unrun ranked terms are standing
+   records too** (added 2026-09-20). A sweep's per-run triage CSV is
+   disposable only once every actionable row has landed somewhere durable,
+   and "the four largest leads are named in BATCH_LOG" is not that: the
+   other twenty exist solely in a gitignored file, while their DOIs are
+   already in `pmc_seen_dois.csv`, so a later run skips them and they are
+   permanently invisible. That is the identical shape to the #2203 defect,
+   where only 260 of 3,167 ledger DOIs could be re-mined because the rest's
+   verdicts died with their `runs/` CSVs. So write the leads to a tracked
+   top-level `<mode>_leads_<date>.csv` carrying a `status` column
+   (`unworked`/`shipped`/`blocked_licence`/`skipped_pii`/`rejected_content`)
+   and a note, and if the batch ranked more terms than it ran, write the
+   ranking to a tracked backlog CSV with a column marking which were run.
+   `pmc_leads_2026-09-20.csv` and `pmc_term_backlog.csv` are the worked
+   examples. Rule of
    thumb: if deleting it after the batch write-up would lose information,
    it does not belong in `runs/`.
 6. **Pick a discovery mode before running anything.** There are three
