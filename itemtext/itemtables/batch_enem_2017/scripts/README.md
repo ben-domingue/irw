@@ -22,7 +22,8 @@ batch, so the build can be reproduced exactly:
 | 29_decode_2021_notation.py | 29_decode_2021_notation.v3.py | `d9c0fa833f287e1ce128cd363bd4dac1` |
 | 43_normalize_glyphs.py | 43_normalize_glyphs.v1.py | `90db23205f06ad41a9ccd0d4f119b7a8` |
 | 46_strip_option_letter.py | 46_strip_option_letter.v3.py | `86b69494098458373fb90d662417ddde` |
-| 48_mark_scripts.py | 48_mark_scripts.v6.py | `286d15d03b799de95c40dc9b00d41124` |
+| 48_mark_scripts.py | 48_mark_scripts.v7.py | `b87714d40e5db5c174b331dd7851acf6` |
 | 49_option_conventions.py | 49_option_conventions.v2.py | `a7c7870a5774efa50e1ce52d3e1acb66` |
 | 53_stacked_fractions.py | 53_stacked_fractions.v1.py | `eecd7aa92e357e3e1d05c548ab64624c` |
 | 54_relocate_descriptions.py | 54_relocate_descriptions.v1.py | `5445a1f88bd48a2f315dfa1c29182f88` |
+| 55_recover_tables.py | 55_recover_tables.v1.py | `cf542ff149350b004527ec0c4cd13884` |

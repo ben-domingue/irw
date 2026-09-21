@@ -2616,7 +2616,7 @@ Quantidade de jogadores: 05; número de partidas: 10.
 Quantidade de jogadores: 06; número de partidas: 15.
 Quantidade de jogadores: 07; número de partidas: 21.
 Se a quantidade de jogadores for 8, quantas partidas 
-serão realizadas?","E","64",0,NA,NA,NA,NA,"Portuguese","A"
+serão realizadas?","E","6^4",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2017_1mil_mt","enem_2017_1mil_mt_1",38563,"ENEM 2017 - MT","PROVA DE CIÊNCIAS DA NATUREZA E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
 EXAME NACIONAL DO ENSINO MÉDIO
@@ -5996,7 +5996,7 @@ linhas: a primeira referente ao número de dente da
 coroa e a segunda, ao número de dentes da catraca; 
 e seis colunas, uma para cada engrenagem, em que 
 estão dispostos os seguintes dados:
-Primeira engrenagem - número de dentes da coroa: 46; 
+Primeira engrenagem - número de dentes da coroa: 4^6; 
 número de dentes da catraca: 24
 Segunda engrenagem - número de dentes da coroa: 
 36; número de dentes da catraca: 22
@@ -6067,7 +6067,7 @@ linhas: a primeira referente ao número de dente da
 coroa e a segunda, ao número de dentes da catraca; 
 e seis colunas, uma para cada engrenagem, em que 
 estão dispostos os seguintes dados:
-Primeira engrenagem - número de dentes da coroa: 46; 
+Primeira engrenagem - número de dentes da coroa: 4^6; 
 número de dentes da catraca: 24
 Segunda engrenagem - número de dentes da coroa: 
 36; número de dentes da catraca: 22
@@ -6138,7 +6138,7 @@ linhas: a primeira referente ao número de dente da
 coroa e a segunda, ao número de dentes da catraca; 
 e seis colunas, uma para cada engrenagem, em que 
 estão dispostos os seguintes dados:
-Primeira engrenagem - número de dentes da coroa: 46; 
+Primeira engrenagem - número de dentes da coroa: 4^6; 
 número de dentes da catraca: 24
 Segunda engrenagem - número de dentes da coroa: 
 36; número de dentes da catraca: 22
@@ -6209,7 +6209,7 @@ linhas: a primeira referente ao número de dente da
 coroa e a segunda, ao número de dentes da catraca; 
 e seis colunas, uma para cada engrenagem, em que 
 estão dispostos os seguintes dados:
-Primeira engrenagem - número de dentes da coroa: 46; 
+Primeira engrenagem - número de dentes da coroa: 4^6; 
 número de dentes da catraca: 24
 Segunda engrenagem - número de dentes da coroa: 
 36; número de dentes da catraca: 22
@@ -6280,7 +6280,7 @@ linhas: a primeira referente ao número de dente da
 coroa e a segunda, ao número de dentes da catraca; 
 e seis colunas, uma para cada engrenagem, em que 
 estão dispostos os seguintes dados:
-Primeira engrenagem - número de dentes da coroa: 46; 
+Primeira engrenagem - número de dentes da coroa: 4^6; 
 número de dentes da catraca: 24
 Segunda engrenagem - número de dentes da coroa: 
 36; número de dentes da catraca: 22

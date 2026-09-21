@@ -411,7 +411,7 @@ gás (2), tóxico (6) e corrosivo (8). Os quatro dígitos da
 parte inferior correspondem ao “Número ONU”, que 
 identifica o produto transportado.
 Considerando a identificação apresentada no caminhão, 
-o código 1005 corresponde à substância","C","eteno (C2H4).",0,NA,NA,NA,NA,"Portuguese","A"
+o código 1005 corresponde à substância","C","eteno (C_2H_4).",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2018_1mil_cn","enem_2018_1mil_cn_1",111408,"ENEM 2018 - CN","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES:
 1. Este CADERNO DE QUESTÕES contém 90 questões numeradas de 91 a 180, dispostas da seguinte maneira:
 a) questões de número 91 a 135, relativas à área de Ciências da Natureza e suas Tecnologias;
@@ -458,7 +458,7 @@ gás (2), tóxico (6) e corrosivo (8). Os quatro dígitos da
 parte inferior correspondem ao “Número ONU”, que 
 identifica o produto transportado.
 Considerando a identificação apresentada no caminhão, 
-o código 1005 corresponde à substância","C","nitrogênio (N2).",0,NA,NA,NA,NA,"Portuguese","B"
+o código 1005 corresponde à substância","C","nitrogênio (N_2).",0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2018_1mil_cn","enem_2018_1mil_cn_1",111408,"ENEM 2018 - CN","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES:
 1. Este CADERNO DE QUESTÕES contém 90 questões numeradas de 91 a 180, dispostas da seguinte maneira:
 a) questões de número 91 a 135, relativas à área de Ciências da Natureza e suas Tecnologias;
@@ -505,7 +505,7 @@ gás (2), tóxico (6) e corrosivo (8). Os quatro dígitos da
 parte inferior correspondem ao “Número ONU”, que 
 identifica o produto transportado.
 Considerando a identificação apresentada no caminhão, 
-o código 1005 corresponde à substância","C","amônia (NH3).",1,NA,NA,NA,NA,"Portuguese","C"
+o código 1005 corresponde à substância","C","amônia (NH_3).",1,NA,NA,NA,NA,"Portuguese","C"
 "enem_2018_1mil_cn","enem_2018_1mil_cn_1",111408,"ENEM 2018 - CN","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES:
 1. Este CADERNO DE QUESTÕES contém 90 questões numeradas de 91 a 180, dispostas da seguinte maneira:
 a) questões de número 91 a 135, relativas à área de Ciências da Natureza e suas Tecnologias;
@@ -552,7 +552,7 @@ gás (2), tóxico (6) e corrosivo (8). Os quatro dígitos da
 parte inferior correspondem ao “Número ONU”, que 
 identifica o produto transportado.
 Considerando a identificação apresentada no caminhão, 
-o código 1005 corresponde à substância","C","propano (C3H8).",0,NA,NA,NA,NA,"Portuguese","D"
+o código 1005 corresponde à substância","C","propano (C_3H_8).",0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2018_1mil_cn","enem_2018_1mil_cn_1",111408,"ENEM 2018 - CN","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES:
 1. Este CADERNO DE QUESTÕES contém 90 questões numeradas de 91 a 180, dispostas da seguinte maneira:
 a) questões de número 91 a 135, relativas à área de Ciências da Natureza e suas Tecnologias;
@@ -599,7 +599,7 @@ gás (2), tóxico (6) e corrosivo (8). Os quatro dígitos da
 parte inferior correspondem ao “Número ONU”, que 
 identifica o produto transportado.
 Considerando a identificação apresentada no caminhão, 
-o código 1005 corresponde à substância","C","dióxido de carbono (CO2).",0,NA,NA,NA,NA,"Portuguese","E"
+o código 1005 corresponde à substância","C","dióxido de carbono (CO_2).",0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2018_1mil_cn","enem_2018_1mil_cn_1",111411,"ENEM 2018 - CN","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES:
 1. Este CADERNO DE QUESTÕES contém 90 questões numeradas de 91 a 180, dispostas da seguinte maneira:
 a) questões de número 91 a 135, relativas à área de Ciências da Natureza e suas Tecnologias;
@@ -2513,7 +2513,7 @@ carbono, por meio de processos capazes de interconverter diferentes formas da en
 Nesse ciclo, a formação de combustíveis está vinculada à conversão de energia Descrição do fluxograma:
 Fluxograma cíclico composto por quatro caixas de textos interligadas por setas que apontam no sentido horário. 
 Do “Processo 1” parte uma seta para “Combustíveis reduzidos e O_2”, de onde parte outra seta para “Processo 2”, de 
-onde parte outra seta para “CO2 e H2O”, fechando o ciclo com uma seta que retorna ao “Processo 1”.","E","térmica em cinética.",0,NA,NA,NA,NA,"Portuguese","A"
+onde parte outra seta para “CO2 e H_2O”, fechando o ciclo com uma seta que retorna ao “Processo 1”.","E","térmica em cinética.",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2018_1mil_cn","enem_2018_1mil_cn_1",111637,"ENEM 2018 - CN","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES:
 1. Este CADERNO DE QUESTÕES contém 90 questões numeradas de 91 a 180, dispostas da seguinte maneira:
 a) questões de número 91 a 135, relativas à área de Ciências da Natureza e suas Tecnologias;
@@ -2545,7 +2545,7 @@ carbono, por meio de processos capazes de interconverter diferentes formas da en
 Nesse ciclo, a formação de combustíveis está vinculada à conversão de energia Descrição do fluxograma:
 Fluxograma cíclico composto por quatro caixas de textos interligadas por setas que apontam no sentido horário. 
 Do “Processo 1” parte uma seta para “Combustíveis reduzidos e O_2”, de onde parte outra seta para “Processo 2”, de 
-onde parte outra seta para “CO2 e H2O”, fechando o ciclo com uma seta que retorna ao “Processo 1”.","E","química em térmica.",0,NA,NA,NA,NA,"Portuguese","B"
+onde parte outra seta para “CO2 e H_2O”, fechando o ciclo com uma seta que retorna ao “Processo 1”.","E","química em térmica.",0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2018_1mil_cn","enem_2018_1mil_cn_1",111637,"ENEM 2018 - CN","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES:
 1. Este CADERNO DE QUESTÕES contém 90 questões numeradas de 91 a 180, dispostas da seguinte maneira:
 a) questões de número 91 a 135, relativas à área de Ciências da Natureza e suas Tecnologias;
@@ -2577,7 +2577,7 @@ carbono, por meio de processos capazes de interconverter diferentes formas da en
 Nesse ciclo, a formação de combustíveis está vinculada à conversão de energia Descrição do fluxograma:
 Fluxograma cíclico composto por quatro caixas de textos interligadas por setas que apontam no sentido horário. 
 Do “Processo 1” parte uma seta para “Combustíveis reduzidos e O_2”, de onde parte outra seta para “Processo 2”, de 
-onde parte outra seta para “CO2 e H2O”, fechando o ciclo com uma seta que retorna ao “Processo 1”.","E","eletroquímica em calor.",0,NA,NA,NA,NA,"Portuguese","C"
+onde parte outra seta para “CO2 e H_2O”, fechando o ciclo com uma seta que retorna ao “Processo 1”.","E","eletroquímica em calor.",0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2018_1mil_cn","enem_2018_1mil_cn_1",111637,"ENEM 2018 - CN","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES:
 1. Este CADERNO DE QUESTÕES contém 90 questões numeradas de 91 a 180, dispostas da seguinte maneira:
 a) questões de número 91 a 135, relativas à área de Ciências da Natureza e suas Tecnologias;
@@ -2609,7 +2609,7 @@ carbono, por meio de processos capazes de interconverter diferentes formas da en
 Nesse ciclo, a formação de combustíveis está vinculada à conversão de energia Descrição do fluxograma:
 Fluxograma cíclico composto por quatro caixas de textos interligadas por setas que apontam no sentido horário. 
 Do “Processo 1” parte uma seta para “Combustíveis reduzidos e O_2”, de onde parte outra seta para “Processo 2”, de 
-onde parte outra seta para “CO2 e H2O”, fechando o ciclo com uma seta que retorna ao “Processo 1”.","E","cinética em eletromagnética.",0,NA,NA,NA,NA,"Portuguese","D"
+onde parte outra seta para “CO2 e H_2O”, fechando o ciclo com uma seta que retorna ao “Processo 1”.","E","cinética em eletromagnética.",0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2018_1mil_cn","enem_2018_1mil_cn_1",111637,"ENEM 2018 - CN","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES:
 1. Este CADERNO DE QUESTÕES contém 90 questões numeradas de 91 a 180, dispostas da seguinte maneira:
 a) questões de número 91 a 135, relativas à área de Ciências da Natureza e suas Tecnologias;
@@ -2641,7 +2641,7 @@ carbono, por meio de processos capazes de interconverter diferentes formas da en
 Nesse ciclo, a formação de combustíveis está vinculada à conversão de energia Descrição do fluxograma:
 Fluxograma cíclico composto por quatro caixas de textos interligadas por setas que apontam no sentido horário. 
 Do “Processo 1” parte uma seta para “Combustíveis reduzidos e O_2”, de onde parte outra seta para “Processo 2”, de 
-onde parte outra seta para “CO2 e H2O”, fechando o ciclo com uma seta que retorna ao “Processo 1”.","E","eletromagnética em química.",1,NA,NA,NA,NA,"Portuguese","E"
+onde parte outra seta para “CO2 e H_2O”, fechando o ciclo com uma seta que retorna ao “Processo 1”.","E","eletromagnética em química.",1,NA,NA,NA,NA,"Portuguese","E"
 "enem_2018_1mil_cn","enem_2018_1mil_cn_1",111653,"ENEM 2018 - CN","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES:
 1. Este CADERNO DE QUESTÕES contém 90 questões numeradas de 91 a 180, dispostas da seguinte maneira:
 a) questões de número 91 a 135, relativas à área de Ciências da Natureza e suas Tecnologias;
@@ -8143,6 +8143,7 @@ comprimento, em perigo, produz uma corrente em torno
 de 2 ampères e uma voltagem de 600 volts.
 O quadro apresenta a potência aproximada de 
 equipamentos elétricos.
+Equipamento elétrico Potência aproximada (watt) Exaustor 150 Computador 300 Aspirador de pó 600 Churrasqueira elétrica 1 200 Secadora de roupas 3 600
 O equipamento elétrico que tem potência similar àquela 
 produzida por esse peixe em perigo é o(a)","D","exaustor.",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2018_1mil_cn","enem_2018_1mil_cn_1",86222,"ENEM 2018 - CN","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES:
@@ -8177,6 +8178,7 @@ comprimento, em perigo, produz uma corrente em torno
 de 2 ampères e uma voltagem de 600 volts.
 O quadro apresenta a potência aproximada de 
 equipamentos elétricos.
+Equipamento elétrico Potência aproximada (watt) Exaustor 150 Computador 300 Aspirador de pó 600 Churrasqueira elétrica 1 200 Secadora de roupas 3 600
 O equipamento elétrico que tem potência similar àquela 
 produzida por esse peixe em perigo é o(a)","D","computador.",0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2018_1mil_cn","enem_2018_1mil_cn_1",86222,"ENEM 2018 - CN","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES:
@@ -8211,6 +8213,7 @@ comprimento, em perigo, produz uma corrente em torno
 de 2 ampères e uma voltagem de 600 volts.
 O quadro apresenta a potência aproximada de 
 equipamentos elétricos.
+Equipamento elétrico Potência aproximada (watt) Exaustor 150 Computador 300 Aspirador de pó 600 Churrasqueira elétrica 1 200 Secadora de roupas 3 600
 O equipamento elétrico que tem potência similar àquela 
 produzida por esse peixe em perigo é o(a)","D","aspirador de pó.",0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2018_1mil_cn","enem_2018_1mil_cn_1",86222,"ENEM 2018 - CN","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES:
@@ -8245,6 +8248,7 @@ comprimento, em perigo, produz uma corrente em torno
 de 2 ampères e uma voltagem de 600 volts.
 O quadro apresenta a potência aproximada de 
 equipamentos elétricos.
+Equipamento elétrico Potência aproximada (watt) Exaustor 150 Computador 300 Aspirador de pó 600 Churrasqueira elétrica 1 200 Secadora de roupas 3 600
 O equipamento elétrico que tem potência similar àquela 
 produzida por esse peixe em perigo é o(a)","D","churrasqueira elétrica.",1,NA,NA,NA,NA,"Portuguese","D"
 "enem_2018_1mil_cn","enem_2018_1mil_cn_1",86222,"ENEM 2018 - CN","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES:
@@ -8279,6 +8283,7 @@ comprimento, em perigo, produz uma corrente em torno
 de 2 ampères e uma voltagem de 600 volts.
 O quadro apresenta a potência aproximada de 
 equipamentos elétricos.
+Equipamento elétrico Potência aproximada (watt) Exaustor 150 Computador 300 Aspirador de pó 600 Churrasqueira elétrica 1 200 Secadora de roupas 3 600
 O equipamento elétrico que tem potência similar àquela 
 produzida por esse peixe em perigo é o(a)","D","secadora de roupas.",0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2018_1mil_cn","enem_2018_1mil_cn_1",87205,"ENEM 2018 - CN","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES:
@@ -8318,6 +8323,7 @@ Foi considerado o mesmo consumo de energia tanto no
 percurso de ida quanto no de volta.
 O quadro resume alguns dados aproximados sobre 
 esses combustíveis.
+Combustível Densidade (g mL−1) Calor de combustão (kcal g−1) Etanol 0,8 −6 Gasolina 0,7 −10
 O volume de etanol combustível, em litro, consumido no 
 percurso de volta é mais próximo de","D","27.",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2018_1mil_cn","enem_2018_1mil_cn_1",87205,"ENEM 2018 - CN","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES:
@@ -8357,6 +8363,7 @@ Foi considerado o mesmo consumo de energia tanto no
 percurso de ida quanto no de volta.
 O quadro resume alguns dados aproximados sobre 
 esses combustíveis.
+Combustível Densidade (g mL−1) Calor de combustão (kcal g−1) Etanol 0,8 −6 Gasolina 0,7 −10
 O volume de etanol combustível, em litro, consumido no 
 percurso de volta é mais próximo de","D","32.",0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2018_1mil_cn","enem_2018_1mil_cn_1",87205,"ENEM 2018 - CN","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES:
@@ -8396,6 +8403,7 @@ Foi considerado o mesmo consumo de energia tanto no
 percurso de ida quanto no de volta.
 O quadro resume alguns dados aproximados sobre 
 esses combustíveis.
+Combustível Densidade (g mL−1) Calor de combustão (kcal g−1) Etanol 0,8 −6 Gasolina 0,7 −10
 O volume de etanol combustível, em litro, consumido no 
 percurso de volta é mais próximo de","D","37.",0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2018_1mil_cn","enem_2018_1mil_cn_1",87205,"ENEM 2018 - CN","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES:
@@ -8435,6 +8443,7 @@ Foi considerado o mesmo consumo de energia tanto no
 percurso de ida quanto no de volta.
 O quadro resume alguns dados aproximados sobre 
 esses combustíveis.
+Combustível Densidade (g mL−1) Calor de combustão (kcal g−1) Etanol 0,8 −6 Gasolina 0,7 −10
 O volume de etanol combustível, em litro, consumido no 
 percurso de volta é mais próximo de","D","58.",1,NA,NA,NA,NA,"Portuguese","D"
 "enem_2018_1mil_cn","enem_2018_1mil_cn_1",87205,"ENEM 2018 - CN","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES:
@@ -8474,6 +8483,7 @@ Foi considerado o mesmo consumo de energia tanto no
 percurso de ida quanto no de volta.
 O quadro resume alguns dados aproximados sobre 
 esses combustíveis.
+Combustível Densidade (g mL−1) Calor de combustão (kcal g−1) Etanol 0,8 −6 Gasolina 0,7 −10
 O volume de etanol combustível, em litro, consumido no 
 percurso de volta é mais próximo de","D","67.",0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2018_1mil_cn","enem_2018_1mil_cn_1",87724,"ENEM 2018 - CN","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES:

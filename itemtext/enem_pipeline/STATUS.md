@@ -580,6 +580,28 @@ reading this file:
     be applied to its SOURCE directory as well as to the repo, or the
     assembler reverts it.
 
+65. THE OBVIOUS FILTER FOR "MISSING TABLE" IS MOSTLY FALSE POSITIVES, and the
+    false positives are instructive. "quadro" is an ordinary Portuguese word
+    ("reverter esse quadro", "quadro agudo de degradação", "no quadro de
+    multiplicidade étnica"), a theatre scene ("Segundo quadro", Dias Gomes),
+    and a comic-strip panel. Requiring a DEICTIC reference -- the stem
+    pointing at the table as an object that presents data -- cuts 75 hits to
+    51, and sorting by digit count separates the years whose tables are
+    inline from the ones whose tables are gone. 4 of 51 were real.
+
+66. A LENGTH RATIO IS THE WRONG INSTRUMENT FOR "MISSING PROSE". Comparing the
+    shipped stem to the printed one reported 47 of 128 items short, because
+    the printed side had not been cut at the option block and ran into the
+    next item. Cutting it properly gave 6. And of those, the outliers are
+    graph AXIS NUMBERS and SOURCE CREDITS, not prose -- one "gap" is a line of
+    mojibake the standard booklet has and our text correctly does not. Ask the
+    question directly instead of inferring it from a size.
+
+67. AN "ALREADY APPLIED?" CHECK NEEDS A DISTINCTIVE PROBE. Testing whether the
+    inserted text's first and last TOKEN are present skipped 2018 MT 98294:
+    its table begins "Ranking" and ends "5", both of which already occur in
+    that stem. The pass reported it as done and changed nothing.
+
 ## Open decisions for Mateus / Ben
 
 - Nothing outstanding as of 2026-09-15: decoders for 2018 and 2021 authorised,

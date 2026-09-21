@@ -1278,7 +1278,7 @@ Os reagentes CoCl 2, abre parêntese, sólido
 azul, fecha parêntese, mais 6 H 2O, abre parêntese, 
 gasoso, fecha parêntese, formam, em equilíbrio 
 químico, o produto CoCl 2
-.6H2O, abre parêntese, 
+.6H_2O, abre parêntese, 
 sólido rosa, fecha parêntese, com um delta H, abre 
 parêntese, variação de entalpia, fecha parêntese, 
 menor que zero.
@@ -1325,7 +1325,7 @@ Os reagentes CoCl 2, abre parêntese, sólido
 azul, fecha parêntese, mais 6 H 2O, abre parêntese, 
 gasoso, fecha parêntese, formam, em equilíbrio 
 químico, o produto CoCl 2
-.6H2O, abre parêntese, 
+.6H_2O, abre parêntese, 
 sólido rosa, fecha parêntese, com um delta H, abre 
 parêntese, variação de entalpia, fecha parêntese, 
 menor que zero.
@@ -1372,7 +1372,7 @@ Os reagentes CoCl 2, abre parêntese, sólido
 azul, fecha parêntese, mais 6 H 2O, abre parêntese, 
 gasoso, fecha parêntese, formam, em equilíbrio 
 químico, o produto CoCl 2
-.6H2O, abre parêntese, 
+.6H_2O, abre parêntese, 
 sólido rosa, fecha parêntese, com um delta H, abre 
 parêntese, variação de entalpia, fecha parêntese, 
 menor que zero.
@@ -1419,7 +1419,7 @@ Os reagentes CoCl 2, abre parêntese, sólido
 azul, fecha parêntese, mais 6 H 2O, abre parêntese, 
 gasoso, fecha parêntese, formam, em equilíbrio 
 químico, o produto CoCl 2
-.6H2O, abre parêntese, 
+.6H_2O, abre parêntese, 
 sólido rosa, fecha parêntese, com um delta H, abre 
 parêntese, variação de entalpia, fecha parêntese, 
 menor que zero.
@@ -1466,7 +1466,7 @@ Os reagentes CoCl 2, abre parêntese, sólido
 azul, fecha parêntese, mais 6 H 2O, abre parêntese, 
 gasoso, fecha parêntese, formam, em equilíbrio 
 químico, o produto CoCl 2
-.6H2O, abre parêntese, 
+.6H_2O, abre parêntese, 
 sólido rosa, fecha parêntese, com um delta H, abre 
 parêntese, variação de entalpia, fecha parêntese, 
 menor que zero.
@@ -1881,9 +1881,9 @@ parêntese, é uma enzima que atua no intestino
 humano hidrolisando o dissacarídeo sacarose, 
 nos monossacarídeos glicose e frutose. Em um 
 estudo cinético da reação de hidrólise da sacarose, 
-abre parêntese, C 12H22O11, fecha parêntese, foram 
+abre parêntese, C 12H_22O11, fecha parêntese, foram 
 dissolvidos 171 gramas de sacarose em 500 mililitros  
-de água. Observou-se que, a cada 100 minutos de 
+de água. Observou-se que, a cada 10^0 minutos de 
 reação, a concentração de sacarose foi reduzida à 
 metade, qualquer que fosse o momento escolhido como 
 tempo inicial. As massas molares dos elementos H, C e O 
@@ -1924,9 +1924,9 @@ parêntese, é uma enzima que atua no intestino
 humano hidrolisando o dissacarídeo sacarose, 
 nos monossacarídeos glicose e frutose. Em um 
 estudo cinético da reação de hidrólise da sacarose, 
-abre parêntese, C 12H22O11, fecha parêntese, foram 
+abre parêntese, C 12H_22O11, fecha parêntese, foram 
 dissolvidos 171 gramas de sacarose em 500 mililitros  
-de água. Observou-se que, a cada 100 minutos de 
+de água. Observou-se que, a cada 10^0 minutos de 
 reação, a concentração de sacarose foi reduzida à 
 metade, qualquer que fosse o momento escolhido como 
 tempo inicial. As massas molares dos elementos H, C e O 
@@ -1967,9 +1967,9 @@ parêntese, é uma enzima que atua no intestino
 humano hidrolisando o dissacarídeo sacarose, 
 nos monossacarídeos glicose e frutose. Em um 
 estudo cinético da reação de hidrólise da sacarose, 
-abre parêntese, C 12H22O11, fecha parêntese, foram 
+abre parêntese, C 12H_22O11, fecha parêntese, foram 
 dissolvidos 171 gramas de sacarose em 500 mililitros  
-de água. Observou-se que, a cada 100 minutos de 
+de água. Observou-se que, a cada 10^0 minutos de 
 reação, a concentração de sacarose foi reduzida à 
 metade, qualquer que fosse o momento escolhido como 
 tempo inicial. As massas molares dos elementos H, C e O 
@@ -2010,9 +2010,9 @@ parêntese, é uma enzima que atua no intestino
 humano hidrolisando o dissacarídeo sacarose, 
 nos monossacarídeos glicose e frutose. Em um 
 estudo cinético da reação de hidrólise da sacarose, 
-abre parêntese, C 12H22O11, fecha parêntese, foram 
+abre parêntese, C 12H_22O11, fecha parêntese, foram 
 dissolvidos 171 gramas de sacarose em 500 mililitros  
-de água. Observou-se que, a cada 100 minutos de 
+de água. Observou-se que, a cada 10^0 minutos de 
 reação, a concentração de sacarose foi reduzida à 
 metade, qualquer que fosse o momento escolhido como 
 tempo inicial. As massas molares dos elementos H, C e O 
@@ -2053,9 +2053,9 @@ parêntese, é uma enzima que atua no intestino
 humano hidrolisando o dissacarídeo sacarose, 
 nos monossacarídeos glicose e frutose. Em um 
 estudo cinético da reação de hidrólise da sacarose, 
-abre parêntese, C 12H22O11, fecha parêntese, foram 
+abre parêntese, C 12H_22O11, fecha parêntese, foram 
 dissolvidos 171 gramas de sacarose em 500 mililitros  
-de água. Observou-se que, a cada 100 minutos de 
+de água. Observou-se que, a cada 10^0 minutos de 
 reação, a concentração de sacarose foi reduzida à 
 metade, qualquer que fosse o momento escolhido como 
 tempo inicial. As massas molares dos elementos H, C e O 
@@ -2933,7 +2933,7 @@ ao quadrado até atingir a velocidade de 72 quilômetros
 por hora e, a partir daí, prossegue com velocidade 
 constante. Você deve ajustar os semáforos A, B e C de 
 modo que eles mudem para a cor verde quando o veículo 
-estiver a 100 metros de cruzá-los, para que ele não tenha 
+estiver a 10^0 metros de cruzá-los, para que ele não tenha 
 que reduzir a velocidade em nenhum momento.
 Considerando essas condições, aproximadamente 
 quanto tempo depois da abertura do semáforo O os 
@@ -2979,7 +2979,7 @@ ao quadrado até atingir a velocidade de 72 quilômetros
 por hora e, a partir daí, prossegue com velocidade 
 constante. Você deve ajustar os semáforos A, B e C de 
 modo que eles mudem para a cor verde quando o veículo 
-estiver a 100 metros de cruzá-los, para que ele não tenha 
+estiver a 10^0 metros de cruzá-los, para que ele não tenha 
 que reduzir a velocidade em nenhum momento.
 Considerando essas condições, aproximadamente 
 quanto tempo depois da abertura do semáforo O os 
@@ -3025,7 +3025,7 @@ ao quadrado até atingir a velocidade de 72 quilômetros
 por hora e, a partir daí, prossegue com velocidade 
 constante. Você deve ajustar os semáforos A, B e C de 
 modo que eles mudem para a cor verde quando o veículo 
-estiver a 100 metros de cruzá-los, para que ele não tenha 
+estiver a 10^0 metros de cruzá-los, para que ele não tenha 
 que reduzir a velocidade em nenhum momento.
 Considerando essas condições, aproximadamente 
 quanto tempo depois da abertura do semáforo O os 
@@ -3071,7 +3071,7 @@ ao quadrado até atingir a velocidade de 72 quilômetros
 por hora e, a partir daí, prossegue com velocidade 
 constante. Você deve ajustar os semáforos A, B e C de 
 modo que eles mudem para a cor verde quando o veículo 
-estiver a 100 metros de cruzá-los, para que ele não tenha 
+estiver a 10^0 metros de cruzá-los, para que ele não tenha 
 que reduzir a velocidade em nenhum momento.
 Considerando essas condições, aproximadamente 
 quanto tempo depois da abertura do semáforo O os 
@@ -3117,7 +3117,7 @@ ao quadrado até atingir a velocidade de 72 quilômetros
 por hora e, a partir daí, prossegue com velocidade 
 constante. Você deve ajustar os semáforos A, B e C de 
 modo que eles mudem para a cor verde quando o veículo 
-estiver a 100 metros de cruzá-los, para que ele não tenha 
+estiver a 10^0 metros de cruzá-los, para que ele não tenha 
 que reduzir a velocidade em nenhum momento.
 Considerando essas condições, aproximadamente 
 quanto tempo depois da abertura do semáforo O os 
@@ -4593,7 +4593,7 @@ carbono, que, por sua vez, está ligado a um átomo de
 hidrogênio e a um átomo de cloro. Essa unidade de 
 repetição ocorre n vezes.
 Qual foi o gás liberado majoritariamente na decomposição 
-térmica desse tipo de plástico?","E","H2",0,NA,NA,NA,NA,"Portuguese","A"
+térmica desse tipo de plástico?","E","H_2",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2020_1mil_cn","enem_2020_1mil_cn_1",76371,"ENEM 2020 - CN","LARANJA
 Eu fiz meu próprio caminho e meu caminho me fez.
 2
@@ -4650,7 +4650,7 @@ carbono, que, por sua vez, está ligado a um átomo de
 hidrogênio e a um átomo de cloro. Essa unidade de 
 repetição ocorre n vezes.
 Qual foi o gás liberado majoritariamente na decomposição 
-térmica desse tipo de plástico?","E","Cl2",0,NA,NA,NA,NA,"Portuguese","B"
+térmica desse tipo de plástico?","E","Cl_2",0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2020_1mil_cn","enem_2020_1mil_cn_1",76371,"ENEM 2020 - CN","LARANJA
 Eu fiz meu próprio caminho e meu caminho me fez.
 2
@@ -4764,7 +4764,7 @@ carbono, que, por sua vez, está ligado a um átomo de
 hidrogênio e a um átomo de cloro. Essa unidade de 
 repetição ocorre n vezes.
 Qual foi o gás liberado majoritariamente na decomposição 
-térmica desse tipo de plástico?","E","CO2",0,NA,NA,NA,NA,"Portuguese","D"
+térmica desse tipo de plástico?","E","CO_2",0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2020_1mil_cn","enem_2020_1mil_cn_1",76371,"ENEM 2020 - CN","LARANJA
 Eu fiz meu próprio caminho e meu caminho me fez.
 2
@@ -7842,7 +7842,7 @@ Considere que a aceleração da gravidade seja
 igual a 10 m s −2 e que a densidade da água seja de 
 ρ = 1 000 kg m −3.
 Em minutos, qual é o tempo de descompressão a que o 
-mergulhador deverá ser submetido?","C","100",0,NA,NA,NA,NA,"Portuguese","A"
+mergulhador deverá ser submetido?","C","10^0",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2020_1mil_cn","enem_2020_1mil_cn_1",84444,"ENEM 2020 - CN","LARANJA
 Eu fiz meu próprio caminho e meu caminho me fez.
 2

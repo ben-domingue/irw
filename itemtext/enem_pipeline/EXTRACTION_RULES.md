@@ -177,6 +177,55 @@ Response CSVs are the #1942-corrected build, not the pre-fix ones.
 - Any case where following a rule here would require inventing an item code,
   an option letter, or a `resp` value.
 
+## R14. A table the accessibility edition dropped is recovered from the standard one
+
+The accessibility editions normally transcribe a table into prose --
+`Descrição do quadro: ...`. Sometimes they do not: the stem still points at
+the table (*"O quadro apresenta a potência aproximada de equipamentos
+elétricos"*) and the numbers are simply gone. The standard edition prints them.
+
+This matters because IRW item text is read for **linguistic complexity**, not
+for answerability. A word count over an item whose table vanished is a word
+count of the wrong item. (Conversely, an undescribed *figure* costs only
+answerability, and under that framing is not a defect worth chasing.)
+
+No gate sees it: the stem is shorter than it should be, and well-formed.
+
+**Scope it by measuring, because the obvious filter is mostly false
+positives.** Asking "which stems point at a quadro/tabela and carry no
+transcription of it?" returns 51 stems. They sort out as:
+
+- **2013 / 2015 / 2016** come from the standard booklet, which has no
+  `Descrição` convention at all -- their tables are already inline as a column
+  dump (2013 MT 42907 carries 51 digits; 2016 MT 53721, 268). All false
+  positives, and they are the majority.
+- Three more are ordinary Portuguese or an already-described table:
+  *"Segundo quadro"* is a scene in a Dias Gomes play (2017 LC 31891),
+  *"quadros"* are comic-strip panels (2022 LC 140567), and 2021 CN 84331's
+  table is described as *"Descrição da imagem: Quadro intitulado ..."*.
+
+Four real cases remain, all 2018 -- and 2018 is not an outlier (28% of its
+items carry a `Descrição` block, against 23-36% across the accessibility
+years), so this is scattered, not systematic.
+
+Two things the ratio-based version of this scan got wrong, both worth
+avoiding: measuring the printed stem WITHOUT cutting the option block reports
+47 of 128 items as short when the true figure is 6; and the remaining ratio
+outliers are dominated by graph axis numbers and source credits rather than
+prose -- 2018 LC 87507's "gap" is a line of mojibake that the standard booklet
+has and our text correctly does not.
+
+`55_recover_tables.py` carries the four, each transcribed from the standard
+booklet and citing its page, laid out the way that edition extracts (header
+cells then values, column order) so the corpus stays internally consistent.
+Every character is INEP's own, so **no `gerada por IA` marking is owed** --
+this is the standard-booklet gap-filling R2 already prescribes.
+
+Anchors tolerate an optional `_` or `^` between any two characters. Hard-coding
+the markers couples this pass to `48_mark_scripts.py`, and a change there would
+break the anchor silently.
+
+
 ## R12. Stacked fractions are restored from the bar, not from the text
 
 A printed fraction is a numerator, a drawn rule and a denominator. Text

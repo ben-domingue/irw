@@ -31,7 +31,7 @@ Eu fiz meu próprio caminho e meu caminho me fez.
 12",NA,"Um motociclista planeja realizar uma viagem 
 cujo destino fica a 500 quilômetros de sua casa. 
 Sua moto consome 5 litros de gasolina para cada 
-100 quilômetros rodados, e o tanque da moto tem 
+10^0 quilômetros rodados, e o tanque da moto tem 
 capacidade para 22 litros. Pelo mapa, observou 
 que no trajeto da viagem o último posto disponível 
 para reabastecimento, chamado Estrela, fica a 80 
@@ -78,7 +78,7 @@ Eu fiz meu próprio caminho e meu caminho me fez.
 12",NA,"Um motociclista planeja realizar uma viagem 
 cujo destino fica a 500 quilômetros de sua casa. 
 Sua moto consome 5 litros de gasolina para cada 
-100 quilômetros rodados, e o tanque da moto tem 
+10^0 quilômetros rodados, e o tanque da moto tem 
 capacidade para 22 litros. Pelo mapa, observou 
 que no trajeto da viagem o último posto disponível 
 para reabastecimento, chamado Estrela, fica a 80 
@@ -125,7 +125,7 @@ Eu fiz meu próprio caminho e meu caminho me fez.
 12",NA,"Um motociclista planeja realizar uma viagem 
 cujo destino fica a 500 quilômetros de sua casa. 
 Sua moto consome 5 litros de gasolina para cada 
-100 quilômetros rodados, e o tanque da moto tem 
+10^0 quilômetros rodados, e o tanque da moto tem 
 capacidade para 22 litros. Pelo mapa, observou 
 que no trajeto da viagem o último posto disponível 
 para reabastecimento, chamado Estrela, fica a 80 
@@ -172,7 +172,7 @@ Eu fiz meu próprio caminho e meu caminho me fez.
 12",NA,"Um motociclista planeja realizar uma viagem 
 cujo destino fica a 500 quilômetros de sua casa. 
 Sua moto consome 5 litros de gasolina para cada 
-100 quilômetros rodados, e o tanque da moto tem 
+10^0 quilômetros rodados, e o tanque da moto tem 
 capacidade para 22 litros. Pelo mapa, observou 
 que no trajeto da viagem o último posto disponível 
 para reabastecimento, chamado Estrela, fica a 80 
@@ -219,7 +219,7 @@ Eu fiz meu próprio caminho e meu caminho me fez.
 12",NA,"Um motociclista planeja realizar uma viagem 
 cujo destino fica a 500 quilômetros de sua casa. 
 Sua moto consome 5 litros de gasolina para cada 
-100 quilômetros rodados, e o tanque da moto tem 
+10^0 quilômetros rodados, e o tanque da moto tem 
 capacidade para 22 litros. Pelo mapa, observou 
 que no trajeto da viagem o último posto disponível 
 para reabastecimento, chamado Estrela, fica a 80 
@@ -896,7 +896,7 @@ Lote
 4
 1 1
 10
-1010
+10^10
 4
 4 4
 2
@@ -975,7 +975,7 @@ Lote
 4
 1 1
 10
-1010
+10^10
 4
 4 4
 2
@@ -1054,7 +1054,7 @@ Lote
 4
 1 1
 10
-1010
+10^10
 4
 4 4
 2
@@ -1133,7 +1133,7 @@ Lote
 4
 1 1
 10
-1010
+10^10
 4
 4 4
 2
@@ -1212,7 +1212,7 @@ Lote
 4
 1 1
 10
-1010
+10^10
 4
 4 4
 2
@@ -2513,7 +2513,7 @@ distintos são:
 • Tipo AB: ambos os antígenos estão presentes;
 • Tipo O: nenhum dos antígenos está presente.
 Foram coletadas amostras de sangue de 200 pessoas 
-e, após análise laboratorial, foi identificado que em 100 
+e, após análise laboratorial, foi identificado que em 10^0 
 amostras está presente o antígeno A, em 110 amostras 
 há presença do antígeno B e em 20 amostras nenhum 
 dos antígenos está presente.
@@ -2559,7 +2559,7 @@ distintos são:
 • Tipo AB: ambos os antígenos estão presentes;
 • Tipo O: nenhum dos antígenos está presente.
 Foram coletadas amostras de sangue de 200 pessoas 
-e, após análise laboratorial, foi identificado que em 100 
+e, após análise laboratorial, foi identificado que em 10^0 
 amostras está presente o antígeno A, em 110 amostras 
 há presença do antígeno B e em 20 amostras nenhum 
 dos antígenos está presente.
@@ -2605,7 +2605,7 @@ distintos são:
 • Tipo AB: ambos os antígenos estão presentes;
 • Tipo O: nenhum dos antígenos está presente.
 Foram coletadas amostras de sangue de 200 pessoas 
-e, após análise laboratorial, foi identificado que em 100 
+e, após análise laboratorial, foi identificado que em 10^0 
 amostras está presente o antígeno A, em 110 amostras 
 há presença do antígeno B e em 20 amostras nenhum 
 dos antígenos está presente.
@@ -2651,7 +2651,7 @@ distintos são:
 • Tipo AB: ambos os antígenos estão presentes;
 • Tipo O: nenhum dos antígenos está presente.
 Foram coletadas amostras de sangue de 200 pessoas 
-e, após análise laboratorial, foi identificado que em 100 
+e, após análise laboratorial, foi identificado que em 10^0 
 amostras está presente o antígeno A, em 110 amostras 
 há presença do antígeno B e em 20 amostras nenhum 
 dos antígenos está presente.
@@ -2697,13 +2697,13 @@ distintos são:
 • Tipo AB: ambos os antígenos estão presentes;
 • Tipo O: nenhum dos antígenos está presente.
 Foram coletadas amostras de sangue de 200 pessoas 
-e, após análise laboratorial, foi identificado que em 100 
+e, após análise laboratorial, foi identificado que em 10^0 
 amostras está presente o antígeno A, em 110 amostras 
 há presença do antígeno B e em 20 amostras nenhum 
 dos antígenos está presente.
 Dessas pessoas que foram submetidas à coleta de 
 sangue, o número das que possuem o tipo sanguíneo A 
-é igual a","C","100.",0,NA,NA,NA,NA,"Portuguese","E"
+é igual a","C","10^0.",0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2020_1mil_mt","enem_2020_1mil_mt_1",24338,"ENEM 2020 - MT","LARANJA
 Eu fiz meu próprio caminho e meu caminho me fez.
 2
@@ -3576,7 +3576,7 @@ paralelepípedo retângulo reto com volume igual a
 edifício, a caixa-d’água tem dimensões 2 centímetros 
 por 3,51 centímetros por 4 centímetros.
 Dado: 1 decímetro cúbico é igual a 1 litro.
-A escala usada pelo arquiteto foi","B","1 para 100",1,NA,NA,NA,NA,"Portuguese","B"
+A escala usada pelo arquiteto foi","B","1 para 10^0",1,NA,NA,NA,NA,"Portuguese","B"
 "enem_2020_1mil_mt","enem_2020_1mil_mt_1",32975,"ENEM 2020 - MT","LARANJA
 Eu fiz meu próprio caminho e meu caminho me fez.
 2
@@ -3684,7 +3684,7 @@ paralelepípedo retângulo reto com volume igual a
 edifício, a caixa-d’água tem dimensões 2 centímetros 
 por 3,51 centímetros por 4 centímetros.
 Dado: 1 decímetro cúbico é igual a 1 litro.
-A escala usada pelo arquiteto foi","B","1 para 100 000",0,NA,NA,NA,NA,"Portuguese","E"
+A escala usada pelo arquiteto foi","B","1 para 10^0 000",0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2020_1mil_mt","enem_2020_1mil_mt_1",37286,"ENEM 2020 - MT","LARANJA
 Eu fiz meu próprio caminho e meu caminho me fez.
 2
@@ -5336,7 +5336,7 @@ S
 O quadrado PRST, com lado de medida 1, é o ponto de partida. O segundo quadrado é construído sob ele 
 tomando-se o ponto médio da base do quadrado anterior e criando-se um novo quadrado, cujo lado corresponde à 
 metade dessa base. Essa sequência de construção se repete recursivamente.
-Qual é a medida do lado do centésimo quadrado construído de acordo com esse padrão?","B","Um meio elevado a 100.",0,NA,NA,NA,NA,"Portuguese","A"
+Qual é a medida do lado do centésimo quadrado construído de acordo com esse padrão?","B","Um meio elevado a 10^0.",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2020_1mil_mt","enem_2020_1mil_mt_1",55387,"ENEM 2020 - MT","LARANJA
 Eu fiz meu próprio caminho e meu caminho me fez.
 2
@@ -5568,7 +5568,7 @@ Em qual dia foi aplicada a metodologia mais eficiente?
 Descrição dos gráficos de colunas:
 Gráfico de peças produzidas em cada um dos cinco 
 dias da semana.
-Dia 1: 800 peças; Dia 2: 1 000 peças; Dia 3: 1 100 
+Dia 1: 800 peças; Dia 2: 1 000 peças; Dia 3: 1 10^0 
 peças; Dia 4: 1 800 peças; Dia 5: 1 400 peças.
 Gráfico de horas trabalhadas em cada um dos 
 cinco dias da semana.
@@ -5617,7 +5617,7 @@ Em qual dia foi aplicada a metodologia mais eficiente?
 Descrição dos gráficos de colunas:
 Gráfico de peças produzidas em cada um dos cinco 
 dias da semana.
-Dia 1: 800 peças; Dia 2: 1 000 peças; Dia 3: 1 100 
+Dia 1: 800 peças; Dia 2: 1 000 peças; Dia 3: 1 10^0 
 peças; Dia 4: 1 800 peças; Dia 5: 1 400 peças.
 Gráfico de horas trabalhadas em cada um dos 
 cinco dias da semana.
@@ -5666,7 +5666,7 @@ Em qual dia foi aplicada a metodologia mais eficiente?
 Descrição dos gráficos de colunas:
 Gráfico de peças produzidas em cada um dos cinco 
 dias da semana.
-Dia 1: 800 peças; Dia 2: 1 000 peças; Dia 3: 1 100 
+Dia 1: 800 peças; Dia 2: 1 000 peças; Dia 3: 1 10^0 
 peças; Dia 4: 1 800 peças; Dia 5: 1 400 peças.
 Gráfico de horas trabalhadas em cada um dos 
 cinco dias da semana.
@@ -5715,7 +5715,7 @@ Em qual dia foi aplicada a metodologia mais eficiente?
 Descrição dos gráficos de colunas:
 Gráfico de peças produzidas em cada um dos cinco 
 dias da semana.
-Dia 1: 800 peças; Dia 2: 1 000 peças; Dia 3: 1 100 
+Dia 1: 800 peças; Dia 2: 1 000 peças; Dia 3: 1 10^0 
 peças; Dia 4: 1 800 peças; Dia 5: 1 400 peças.
 Gráfico de horas trabalhadas em cada um dos 
 cinco dias da semana.
@@ -5764,7 +5764,7 @@ Em qual dia foi aplicada a metodologia mais eficiente?
 Descrição dos gráficos de colunas:
 Gráfico de peças produzidas em cada um dos cinco 
 dias da semana.
-Dia 1: 800 peças; Dia 2: 1 000 peças; Dia 3: 1 100 
+Dia 1: 800 peças; Dia 2: 1 000 peças; Dia 3: 1 10^0 
 peças; Dia 4: 1 800 peças; Dia 5: 1 400 peças.
 Gráfico de horas trabalhadas em cada um dos 
 cinco dias da semana.
@@ -6387,7 +6387,7 @@ de resina, esculpindo o objeto desejado. O produto
 final da impressão é uma escultura microscópica de 
 três dimensões. 
 A escultura apresentada é uma miniatura de 
-um carro de Fórmula 1, com 100 micrômetros de 
+um carro de Fórmula 1, com 10^0 micrômetros de 
 comprimento. Um micrômetro é a milionésima parte de 
 um metro.
 Usando notação científica, qual é a representação do 
@@ -6429,7 +6429,7 @@ de resina, esculpindo o objeto desejado. O produto
 final da impressão é uma escultura microscópica de 
 três dimensões. 
 A escultura apresentada é uma miniatura de 
-um carro de Fórmula 1, com 100 micrômetros de 
+um carro de Fórmula 1, com 10^0 micrômetros de 
 comprimento. Um micrômetro é a milionésima parte de 
 um metro.
 Usando notação científica, qual é a representação do 
@@ -6471,7 +6471,7 @@ de resina, esculpindo o objeto desejado. O produto
 final da impressão é uma escultura microscópica de 
 três dimensões. 
 A escultura apresentada é uma miniatura de 
-um carro de Fórmula 1, com 100 micrômetros de 
+um carro de Fórmula 1, com 10^0 micrômetros de 
 comprimento. Um micrômetro é a milionésima parte de 
 um metro.
 Usando notação científica, qual é a representação do 
@@ -6513,7 +6513,7 @@ de resina, esculpindo o objeto desejado. O produto
 final da impressão é uma escultura microscópica de 
 três dimensões. 
 A escultura apresentada é uma miniatura de 
-um carro de Fórmula 1, com 100 micrômetros de 
+um carro de Fórmula 1, com 10^0 micrômetros de 
 comprimento. Um micrômetro é a milionésima parte de 
 um metro.
 Usando notação científica, qual é a representação do 
@@ -6555,7 +6555,7 @@ de resina, esculpindo o objeto desejado. O produto
 final da impressão é uma escultura microscópica de 
 três dimensões. 
 A escultura apresentada é uma miniatura de 
-um carro de Fórmula 1, com 100 micrômetros de 
+um carro de Fórmula 1, com 10^0 micrômetros de 
 comprimento. Um micrômetro é a milionésima parte de 
 um metro.
 Usando notação científica, qual é a representação do 
@@ -6786,7 +6786,7 @@ formato de um paralelepípedo reto-retângulo de madeira,
 sobre a qual estão fi  xadas três hastes verticais que 
 sustentam uma esfera de 30 centímetros de diâmetro, 
 que fi  ca centralizada sobre a base de madeira. O troféu 
-tem 100 centímetros de altura, incluída sua base.
+tem 10^0 centímetros de altura, incluída sua base.
 Descrição da fi  gura 1:Desenho de um troféu cuja 
 forma é um paralelepípedo reto-retângulo de base 
 quadrada de lados medindo 50 centímetros, no qual 
@@ -6848,7 +6848,7 @@ formato de um paralelepípedo reto-retângulo de madeira,
 sobre a qual estão fi  xadas três hastes verticais que 
 sustentam uma esfera de 30 centímetros de diâmetro, 
 que fi  ca centralizada sobre a base de madeira. O troféu 
-tem 100 centímetros de altura, incluída sua base.
+tem 10^0 centímetros de altura, incluída sua base.
 Descrição da fi  gura 1:Desenho de um troféu cuja 
 forma é um paralelepípedo reto-retângulo de base 
 quadrada de lados medindo 50 centímetros, no qual 
@@ -6910,7 +6910,7 @@ formato de um paralelepípedo reto-retângulo de madeira,
 sobre a qual estão fi  xadas três hastes verticais que 
 sustentam uma esfera de 30 centímetros de diâmetro, 
 que fi  ca centralizada sobre a base de madeira. O troféu 
-tem 100 centímetros de altura, incluída sua base.
+tem 10^0 centímetros de altura, incluída sua base.
 Descrição da fi  gura 1:Desenho de um troféu cuja 
 forma é um paralelepípedo reto-retângulo de base 
 quadrada de lados medindo 50 centímetros, no qual 
@@ -6972,7 +6972,7 @@ formato de um paralelepípedo reto-retângulo de madeira,
 sobre a qual estão fi  xadas três hastes verticais que 
 sustentam uma esfera de 30 centímetros de diâmetro, 
 que fi  ca centralizada sobre a base de madeira. O troféu 
-tem 100 centímetros de altura, incluída sua base.
+tem 10^0 centímetros de altura, incluída sua base.
 Descrição da fi  gura 1:Desenho de um troféu cuja 
 forma é um paralelepípedo reto-retângulo de base 
 quadrada de lados medindo 50 centímetros, no qual 
@@ -7034,7 +7034,7 @@ formato de um paralelepípedo reto-retângulo de madeira,
 sobre a qual estão fi  xadas três hastes verticais que 
 sustentam uma esfera de 30 centímetros de diâmetro, 
 que fi  ca centralizada sobre a base de madeira. O troféu 
-tem 100 centímetros de altura, incluída sua base.
+tem 10^0 centímetros de altura, incluída sua base.
 Descrição da fi  gura 1:Desenho de um troféu cuja 
 forma é um paralelepípedo reto-retângulo de base 
 quadrada de lados medindo 50 centímetros, no qual 
@@ -9190,7 +9190,7 @@ deixar o local
 Parado
 Carro de som
 Obs.: a figura não está em escala (considere as medidas dadas).
-Segundo a metodologia descrita, o número estimado de pessoas presentes a essa manifestação foi igual a","B","104 000.",1,NA,NA,NA,NA,"Portuguese","B"
+Segundo a metodologia descrita, o número estimado de pessoas presentes a essa manifestação foi igual a","B","10^4 000.",1,NA,NA,NA,NA,"Portuguese","B"
 "enem_2020_1mil_mt","enem_2020_1mil_mt_1",85945,"ENEM 2020 - MT","LARANJA
 Eu fiz meu próprio caminho e meu caminho me fez.
 2
@@ -9407,7 +9407,7 @@ Um veículo, de um determinado modelo, pode vir munido de um dos dois tipos de c
 • Tipo B: informa a quantidade de quilômetro que o veículo é capaz de percorrer com um litro de combustível.
 Um veículo utiliza o computador do Tipo A, e ao final de uma viagem o condutor viu apresentada na tela a 
 informação “X dividido por 100”.
-Caso o seu veículo utilizasse o computador do Tipo B, o valor informado na tela seria obtido pela operação","C","X vezes 100",0,NA,NA,NA,NA,"Portuguese","A"
+Caso o seu veículo utilizasse o computador do Tipo B, o valor informado na tela seria obtido pela operação","C","X vezes 10^0",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2020_1mil_mt","enem_2020_1mil_mt_1",86282,"ENEM 2020 - MT","LARANJA
 Eu fiz meu próprio caminho e meu caminho me fez.
 2
@@ -9444,7 +9444,7 @@ Um veículo, de um determinado modelo, pode vir munido de um dos dois tipos de c
 • Tipo B: informa a quantidade de quilômetro que o veículo é capaz de percorrer com um litro de combustível.
 Um veículo utiliza o computador do Tipo A, e ao final de uma viagem o condutor viu apresentada na tela a 
 informação “X dividido por 100”.
-Caso o seu veículo utilizasse o computador do Tipo B, o valor informado na tela seria obtido pela operação","C","X dividido por 100",0,NA,NA,NA,NA,"Portuguese","B"
+Caso o seu veículo utilizasse o computador do Tipo B, o valor informado na tela seria obtido pela operação","C","X dividido por 10^0",0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2020_1mil_mt","enem_2020_1mil_mt_1",86282,"ENEM 2020 - MT","LARANJA
 Eu fiz meu próprio caminho e meu caminho me fez.
 2
@@ -9481,7 +9481,7 @@ Um veículo, de um determinado modelo, pode vir munido de um dos dois tipos de c
 • Tipo B: informa a quantidade de quilômetro que o veículo é capaz de percorrer com um litro de combustível.
 Um veículo utiliza o computador do Tipo A, e ao final de uma viagem o condutor viu apresentada na tela a 
 informação “X dividido por 100”.
-Caso o seu veículo utilizasse o computador do Tipo B, o valor informado na tela seria obtido pela operação","C","100 dividido por X",1,NA,NA,NA,NA,"Portuguese","C"
+Caso o seu veículo utilizasse o computador do Tipo B, o valor informado na tela seria obtido pela operação","C","10^0 dividido por X",1,NA,NA,NA,NA,"Portuguese","C"
 "enem_2020_1mil_mt","enem_2020_1mil_mt_1",86282,"ENEM 2020 - MT","LARANJA
 Eu fiz meu próprio caminho e meu caminho me fez.
 2
@@ -9595,7 +9595,7 @@ deles, em percentual, ocorrida no mês de novembro.
 Descrição do gráfico de colunas: O gráfico 
 apresenta o preço de cada perfume, em real.
 Perfume Um: 200 reais; Perfume Dois: 170 reais; 
-Perfume Três: 150 reais; Perfume Quatro: 100 
+Perfume Três: 150 reais; Perfume Quatro: 10^0 
 reais; Perfume Cinco: 80 reais.
 Descrição do gráfico de setores: O gráfico 
 apresenta a quantidade vendida de cada perfume, 
@@ -9648,7 +9648,7 @@ deles, em percentual, ocorrida no mês de novembro.
 Descrição do gráfico de colunas: O gráfico 
 apresenta o preço de cada perfume, em real.
 Perfume Um: 200 reais; Perfume Dois: 170 reais; 
-Perfume Três: 150 reais; Perfume Quatro: 100 
+Perfume Três: 150 reais; Perfume Quatro: 10^0 
 reais; Perfume Cinco: 80 reais.
 Descrição do gráfico de setores: O gráfico 
 apresenta a quantidade vendida de cada perfume, 
@@ -9701,7 +9701,7 @@ deles, em percentual, ocorrida no mês de novembro.
 Descrição do gráfico de colunas: O gráfico 
 apresenta o preço de cada perfume, em real.
 Perfume Um: 200 reais; Perfume Dois: 170 reais; 
-Perfume Três: 150 reais; Perfume Quatro: 100 
+Perfume Três: 150 reais; Perfume Quatro: 10^0 
 reais; Perfume Cinco: 80 reais.
 Descrição do gráfico de setores: O gráfico 
 apresenta a quantidade vendida de cada perfume, 
@@ -9754,7 +9754,7 @@ deles, em percentual, ocorrida no mês de novembro.
 Descrição do gráfico de colunas: O gráfico 
 apresenta o preço de cada perfume, em real.
 Perfume Um: 200 reais; Perfume Dois: 170 reais; 
-Perfume Três: 150 reais; Perfume Quatro: 100 
+Perfume Três: 150 reais; Perfume Quatro: 10^0 
 reais; Perfume Cinco: 80 reais.
 Descrição do gráfico de setores: O gráfico 
 apresenta a quantidade vendida de cada perfume, 
@@ -9807,7 +9807,7 @@ deles, em percentual, ocorrida no mês de novembro.
 Descrição do gráfico de colunas: O gráfico 
 apresenta o preço de cada perfume, em real.
 Perfume Um: 200 reais; Perfume Dois: 170 reais; 
-Perfume Três: 150 reais; Perfume Quatro: 100 
+Perfume Três: 150 reais; Perfume Quatro: 10^0 
 reais; Perfume Cinco: 80 reais.
 Descrição do gráfico de setores: O gráfico 
 apresenta a quantidade vendida de cada perfume, 

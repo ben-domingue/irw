@@ -182,6 +182,10 @@ def rebuild(y, outdir):
          "--items-dir", outdir, "--year", y, "--apply"])
     run([sys.executable, os.path.join(HERE, "54_relocate_descriptions.py"),
          "--items-dir", outdir, "--year", y, "--apply"])
+    # Table contents the accessibility edition dropped. Runs last because its
+    # anchors are sentences in the finished stem.
+    run([sys.executable, os.path.join(HERE, "55_recover_tables.py"),
+         "--items-dir", outdir, "--year", y, "--apply"])
     return outdir
 
 def main():
