@@ -138,6 +138,8 @@ flag_val <- function(prefix, default = NA) {
 }
 
 OPT_REVIEW   <- has_flag("--review")
+OPT_GATEREP  <- has_flag("--gate-report")
+OPT_GATETEST <- has_flag("--gate-test")
 OPT_LIST     <- has_flag("--list-models")
 OPT_STUB     <- has_flag("--stub")
 OPT_STUBCOPY <- has_flag("--stub-copy")
@@ -421,6 +423,251 @@ fetch_abstract <- function(doi, reference) {
 
 ##One row per live table, carrying every signal we hold for it, then grouped
 ##into units. A unit is a construct name where one exists, else a single table.
+##--------------------------------------------------- the unit-rule gate ----
+##
+##THE FAILURE THIS PREVENTS (#2308). The unit of description is the construct,
+##which is why all 26 PISA tables read alike instead of drifting apart. It
+##breaks when a `construct name` is not a construct.
+##
+##Eight tables -- `coach_chen_2022_adl`, `..._phq9`, `..._hdrs`, `..._whoqol` and
+##four more -- all carry the construct name "The Chinese Older Adult
+##Collaborations in Health (COACH) Study". That is the STUDY's name. So the
+##generator treated ADL, PHQ-9, HDRS and WHOQOL as one unit, wrote a single
+##description blending six unrelated instruments, and published it against all
+##eight tables. Nothing caught it: the output is fluent, and the rights guard has
+##nothing to catch. It is the specific reason #1406 is paused.
+##
+##THE RULE. Unit = construct name, EXCEPT where the name trips either detector
+##below -- then unit = the table. The construct names are already published in
+##tags.csv and editing them would rewrite published data, so nothing is edited:
+##only what the generator TRUSTS changes. 126 tables get their own description
+##instead of one shared across a study; the other ~4,047 are unaffected.
+##
+##FALSE POSITIVES ARE CHEAP AND THE DETECTORS ARE TUNED LOOSE ON PURPOSE. A
+##false positive costs a redundant per-table description -- never a wrong one.
+##A false negative reproduces the COACH failure silently. So "Positive and
+##Negative Affect Schedule (PANAS) - positive affect" and "Full Scale IQ Test
+##(Short-Term Memory, Reasoning, and Verbal)" trip the lexical rule, are real
+##construct names, and are left tripping.
+##
+##This also resolves open question (c) on #1406: whether construct names should
+##be exempt from the 6-gram overlap check. Any name reaching the model has now
+##passed the title test, so its overlap is a genuine construct term rather than a
+##study title. No exemption; the guard stands.
+
+##Single words match on a word boundary, phrases as substrings. `project` must
+##not fire on "projective", which is a real item format.
+TITLE_WORDS   <- c("study", "project", "cohort", "longitudinal", "program")
+TITLE_PHRASES <- c("evidence from", "the impact of", "constructs in")
+##A name this long that is also this many words is prose, whatever it contains.
+TITLE_MAX_CHARS <- 55
+TITLE_MAX_WORDS <- 6
+
+looks_like_a_title <- function(name) {
+    n  <- tolower(trimws(as.character(name)))
+    ok <- !is.na(n) & n != ""
+    hit <- rep(FALSE, length(n))
+    for (w in TITLE_WORDS) hit <- hit | (ok & grepl(paste0("\\b", w, "\\b"), n))
+    for (w in TITLE_PHRASES) hit <- hit | (ok & grepl(w, n, fixed = TRUE))
+    words <- vapply(strsplit(n, "[[:space:]]+"), length, integer(1))
+    hit | (ok & nchar(n) > TITLE_MAX_CHARS & words > TITLE_MAX_WORDS)
+}
+
+##The deposit a table came from, as far as its NAME reveals it: everything up to
+##and including the first 4-digit year, else the first two underscore tokens.
+##  coach_chen_2022_adl               -> coach_chen_2022
+##  sun_2025_morality_study1_nemotion -> sun_2025
+##  gilbert_meta_27                   -> gilbert_meta
+##  project_kids_wj_ap                -> project_kids
+##Deliberately crude. It only has to answer "same deposit or not", and a name is
+##the only signal available here -- biblio's DOI is blank for many of these rows.
+dataset_prefix <- function(table) {
+    t <- tolower(as.character(table))
+    has_year <- grepl("_(?:19|20)[0-9]{2}(?:_|$)", t, perl = TRUE)
+    ##Lazy `.*?`, so it stops at the FIRST year rather than the last.
+    with_year <- sub("^(.*?_(?:19|20)[0-9]{2})(?:_.*)?$", "\\1", t, perl = TRUE)
+    first_two <- vapply(strsplit(t, "_", fixed = TRUE),
+                        function(p) paste(p[seq_len(min(2L, length(p)))],
+                                          collapse = "_"),
+                        character(1))
+    ifelse(has_year, with_year, first_two)
+}
+
+##Structural: one construct name spanning 3+ tables that ALL come from a single
+##deposit. A genuine construct recurs ACROSS studies -- that is what makes it a
+##construct -- so a name confined to one deposit and spread over several of its
+##tables is far more likely to be that deposit's title. This is the detector that
+##matters: it catches title-like names the wordlist misses, and a false negative
+##here is the COACH failure.
+STRUCTURAL_MIN_TABLES <- 3
+
+apply_title_gate <- function(d) {
+    d$gate_reason <- NA_character_
+    d$gate_unit   <- NA_character_
+    is_con <- d$unit_kind == "construct"
+    if (!any(is_con)) return(d)
+
+    ##Promoted to the unit, not the row: unit_key is the NORMALISED name, so two
+    ##raw spellings can share a key. If either reads as a title, the unit splits.
+    lex_keys <- unique(d$unit_key[is_con & looks_like_a_title(d$construct_name)])
+
+    prefix <- dataset_prefix(d$table)
+    con    <- d[is_con, , drop = FALSE]
+    pfx    <- prefix[is_con]
+    n_tab  <- tapply(con$table, con$unit_key, function(x) length(unique(x)))
+    n_pfx  <- tapply(pfx,       con$unit_key, function(x) length(unique(x)))
+    str_keys <- names(n_tab)[n_tab >= STRUCTURAL_MIN_TABLES & n_pfx == 1L]
+
+    ##Only units covering 2+ tables can be gated, because splitting a one-table
+    ##unit changes nothing: its description is already that table's alone. This
+    ##is not a tuning knob, it is what makes the count mean something -- 337 of
+    ##the 2,025 distinct construct names are over 55 characters and 6 words, and
+    ##the overwhelming majority sit on a single table where the gate is a no-op.
+    ##Flagging them would report 372 names where 36 are at issue (#2308).
+    multi <- names(which(tapply(d$table, d$unit_key,
+                                function(x) length(unique(x))) >= 2L))
+    flagged <- is_con & d$unit_key %in% union(lex_keys, str_keys) &
+               d$unit_key %in% multi
+    reason <- ifelse(d$unit_key %in% lex_keys,
+                     ifelse(d$unit_key %in% str_keys, "lexical + structural", "lexical"),
+                     "structural")
+    d$gate_reason[flagged] <- reason[flagged]
+    ##The unit the table WOULD have shared, kept so the report can count units
+    ##rather than raw names -- two spellings can normalise to one key, and
+    ##counting names would disagree with the message below.
+    d$gate_unit <- NA_character_
+    d$gate_unit[flagged] <- d$unit_key[flagged]
+    ##Keep the name that was flagged, for the report; only the UNIT changes.
+    d$unit_key[flagged]  <- paste0("table:", d$table[flagged])
+    d$unit_kind[flagged] <- "table"
+
+    ##Count what was GATED, not what matched: a matched one-table name is a no-op
+    ##and reporting it would overstate the change by an order of magnitude.
+    gated <- intersect(union(lex_keys, str_keys), multi)
+    cat("gate: ", length(gated), " construct name(s) read as a study title -> ",
+        sum(flagged), " table(s) described individually (",
+        length(intersect(lex_keys, gated)), " lexical, ",
+        length(intersect(str_keys, gated)), " structural; ",
+        length(setdiff(union(lex_keys, str_keys), multi)),
+        " one-table name(s) matched and were left alone)\n", sep = "")
+    d
+}
+
+##Reproduces #2308's table: which names were gated, why, and how many tables
+##each covers. Costs no model call, so it is the cheap way to re-audit the
+##detectors after tags.csv moves.
+gate_report <- function(d) {
+    g <- d[!is.na(d$gate_reason), , drop = FALSE]
+    if (!nrow(g)) { cat("gate: nothing flagged.\n"); return(invisible(NULL)) }
+    agg <- aggregate(list(tables = g$table),
+                     by = list(construct_name = g$construct_name,
+                               flagged_by = g$gate_reason),
+                     FUN = length)
+    ex <- aggregate(list(example = g$table),
+                    by = list(construct_name = g$construct_name),
+                    FUN = function(x) sort(x)[1])
+    agg <- merge(agg, ex, by = "construct_name")
+    agg <- agg[order(-agg$tables, agg$construct_name), ]
+    cat("\n", length(unique(g$gate_unit)), " unit(s) across ", nrow(agg),
+        " construct name(s), ", sum(agg$tables), " table(s)",
+        " (", round(100 * sum(agg$tables) / nrow(d), 1), "% of ", nrow(d),
+        ")\n\n", sep = "")
+    print(agg[, c("tables", "construct_name", "flagged_by", "example")],
+          row.names = FALSE)
+    invisible(agg)
+}
+
+##The gate has to be checkable without a model call or a sheet read, so the cases
+##from #2308 are asserted directly. `--gate-test` exits non-zero on a miss.
+gate_self_test <- function() {
+    fail <- 0L
+    ck <- function(cond, what) {
+        if (isTRUE(cond)) cat("  ok   - ", what, "\n", sep = "")
+        else { cat("  FAIL - ", what, "\n", sep = ""); fail <<- fail + 1L }
+    }
+
+    ck(looks_like_a_title("The Chinese Older Adult Collaborations in Health (COACH) Study"),
+       "the COACH study title is caught lexically")
+    ck(looks_like_a_title("The Impact of Maternal Literacy and Participation Programs"),
+       "`the impact of` is caught")
+    ck(looks_like_a_title("Can Economic Assistance Shape Combatant Support in Wartime? Experimental Evidence from Afghanistan"),
+       "`evidence from` is caught")
+    ck(looks_like_a_title("Cognitive and Language Development Constructs in Children"),
+       "`constructs in` is caught")
+    ck(looks_like_a_title("Psychometric Properties of a German Version of the Emotion Regulation Questionnaire-Short Form"),
+       "a long many-worded name with no keyword is caught on length")
+
+    ##Must NOT fire: these are the names the generator exists to share.
+    ck(!looks_like_a_title("Big Five"), "`Big Five` is not a title")
+    ck(!looks_like_a_title("Depression"), "a one-word construct is not a title")
+    ck(!looks_like_a_title("Projective item format"),
+       "`project` does not fire on `projective`")
+    ck(!looks_like_a_title("Mathematics achievement"),
+       "a short two-word construct is not a title")
+    ck(!looks_like_a_title(NA), "a missing construct name is not a title")
+    ck(!looks_like_a_title(""), "an empty construct name is not a title")
+
+    ck(identical(dataset_prefix("coach_chen_2022_adl"), "coach_chen_2022"),
+       "the prefix stops at the year")
+    ck(identical(dataset_prefix("sun_2025_morality_study1_nemotion"), "sun_2025"),
+       "the prefix stops at the FIRST year, not the last token")
+    ck(identical(dataset_prefix("gilbert_meta_27"), "gilbert_meta"),
+       "a yearless name falls back to two tokens")
+    ck(identical(dataset_prefix("project_kids_wj_ap"), "project_kids"),
+       "`project_kids` is one deposit")
+    ck(identical(dataset_prefix("fullscaleiq"), "fullscaleiq"),
+       "a single-token name is its own prefix")
+
+    ##THE ONE THAT MATTERS. The eight COACH tables must come back as eight units.
+    coach <- data.frame(
+        table = c("coach_chen_2022_adl", "coach_chen_2022_phq9",
+                  "coach_chen_2022_hdrs", "coach_chen_2022_whoqol",
+                  "coach_chen_2022_csq", "coach_chen_2022_gad",
+                  "coach_chen_2022_iadl", "coach_chen_2022_mmse"),
+        construct_name = "The Chinese Older Adult Collaborations in Health (COACH) Study",
+        unit_key = "construct:the chinese older adult collaborations in health coach study",
+        unit_kind = "construct", stringsAsFactors = FALSE)
+    out <- apply_title_gate(coach)
+    ck(length(unique(out$unit_key)) == 8L,
+       "the eight COACH tables become eight units")
+    ck(all(out$unit_kind == "table"), "and none of them is still a construct unit")
+    ck(all(!is.na(out$gate_reason)), "each records why it was gated")
+
+    ##A construct spanning several DEPOSITS is exactly what the shared unit is
+    ##for, so the structural rule must leave it alone.
+    pisa <- data.frame(
+        table = c("pisa_2012_math", "pisa_2015_math", "pisa_2018_math",
+                  "timss_2019_math", "naep_2022_math"),
+        construct_name = "Mathematics achievement",
+        unit_key = "construct:mathematics achievement",
+        unit_kind = "construct", stringsAsFactors = FALSE)
+    out <- apply_title_gate(pisa)
+    ck(length(unique(out$unit_key)) == 1L,
+       "a construct spanning five deposits keeps ONE shared unit")
+
+    ##Two tables from one deposit is under the threshold: a two-table deposit
+    ##sharing a construct is the ordinary case, not a title.
+    two <- data.frame(
+        table = c("smith_2020_a", "smith_2020_b"),
+        construct_name = "Working memory",
+        unit_key = "construct:working memory",
+        unit_kind = "construct", stringsAsFactors = FALSE)
+    ck(length(unique(apply_title_gate(two)$unit_key)) == 1L,
+       "two tables from one deposit stay a shared unit")
+
+    ##A table with no construct name was already keyed on itself and must be
+    ##left exactly as it was.
+    none <- data.frame(table = "x_2020_y", construct_name = NA_character_,
+                       unit_key = "table:x_2020_y", unit_kind = "table",
+                       stringsAsFactors = FALSE)
+    ck(identical(apply_title_gate(none)$unit_key, "table:x_2020_y"),
+       "an untagged table is untouched")
+
+    cat("\n", if (fail == 0L) "PASS" else "FAIL", " -- ", fail,
+        " failure(s)\n", sep = "")
+    quit(save = "no", status = if (fail == 0L) 0L else 1L)
+}
+
 build_units <- function(sheet, ex) {
     meta <- read_csv_if("metadata.csv")
     if (is.null(meta)) stop("metadata.csv not found -- run stage 01 first.")
@@ -464,7 +711,8 @@ build_units <- function(sheet, ex) {
     cn <- trimws(gsub("\\s+", " ", cn))
     d$unit_key  <- ifelse(is.na(cn) | cn == "", paste0("table:", d$table), paste0("construct:", cn))
     d$unit_kind <- ifelse(grepl("^construct:", d$unit_key), "construct", "table")
-    d
+    ##...except where the name is a study title rather than a construct (#2308).
+    apply_title_gate(d)
 }
 
 ##The bundle the model sees, plus the restricted strings the output is checked
@@ -602,6 +850,9 @@ review_flagged <- function(units, ch) {
 ##------------------------------------------------------------------ main ----
 
 if (OPT_LIST) { list_models(); quit(save = "no") }
+##Before anything that reads the sheet or needs a gateway key: the gate is pure
+##and must be checkable offline.
+if (OPT_GATETEST) gate_self_test()
 
 ex    <- load_exclusions()
 items <- load_itemtext(ex)
@@ -621,6 +872,7 @@ cat("tables: ", nrow(units), " | units: ", length(unique(units$unit_key)),
     " | cache: ", nrow(cache), "\n", sep = "")
 
 if (OPT_REVIEW) { review_flagged(units, cache); quit(save = "no") }
+if (OPT_GATEREP) { gate_report(units); quit(save = "no") }
 
 ##Which units to describe.
 all_keys <- unique(units$unit_key)

@@ -32,6 +32,11 @@ metadata/**/*.txt
 # from the rulings in itemtext_standard.md and must be reviewable in a diff --
 # a table missing from it is a table whose barred wording can reach a paraphrase.
 !metadata/itemtext_rights_exclusions.csv
+##One description per table, keyed on the construct where a construct name is
+##real (#1406). Tracked because it is what gets reviewed and what goes to
+##Redivis; `describe_cache.csv` stays ignored on purpose -- it is per-run state,
+##and the cache guard exists to keep restricted text out of it.
+!metadata/construct_descriptions.csv
 # Curated citation inputs, reviewed against their recorded primary sources.
 !metadata/bibtex_overrides.csv
 
