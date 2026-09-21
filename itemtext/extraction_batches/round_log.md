@@ -22702,3 +22702,71 @@ labels and frequencies.
    for the transyouth_leshin_2026_* family at batch_189/190.
 
 Cap (batch_299) not reached. 25 pending rows remain.
+
+## batch_291 — 2026-09-20 17:29–17:55
+
+3 tables, 3 agents (one per table). **written 3 / blocked 0 / failed 0 — yield 100%.**
+Numbering note: highest existing below 300 was `batch_290`, so this round is `batch_291`;
+the 300–304 hole (irw#2228, arrived by merge from main) was skipped as the prompt requires.
+
+- `covid_travel_mackenzie_2021` — DONE. 444 rows, 74 items × 6. Harvard Dataverse
+  doi:10.7910/DVN/FN8RZK v3, CC0 1.0; the deposit ships `meta_data.txt`, a data dictionary keyed
+  by the exact column names the processing script pivots into `item`, so mapping_basis=data_labels
+  with zero inference. Verification VERIFIED (route 9): 444/444 item × level cells match the
+  labelled source cell-for-cell, 0 of 74 items match under reversed option order, all 74 count
+  vectors distinct. `verify_*.R` PASS.
+- `opladen2025_fkg` — DONE. 80 rows, 20 items × 4. OSF osf.io/58xb9 `Data - Rawdata.xlsx`
+  (md5 51aec995d684eeb2d33bb06784e2eeca, same file batch_122 recorded for the sibling
+  `opladen2025_wi`), `Readme` sheet ties FKG_1..FKG_20 to administered German wording and value
+  labels. data_labels. Verification VERIFIED though exempt: 0 of 80 cells differ, 20/20 count
+  vectors mutually distinct; resp direction corroborated semantically. `verify_*.R` PASS.
+- `opladen2025_fks` — DONE. 88 rows, 17 items. Same deposit and `Readme`, 17/17 codes labelled.
+  data_labels, derivation pattern 1 → verification NOT_NEEDED, no `verify_*.R` (correct;
+  verify_batch reports MISSING(exempt)).
+
+Gates: normalize_nulls fixed 1 file (covid), audit_batch **3/3 PASS with no anomalies** (so no
+Step 5c WARN explanations owed), verify_batch PASS/PASS/MISSING(exempt), lint_verification clean
+(3 rows, no problems), `irw-validate` ok on all three, `check_provenance.R` no failures — its only
+output was pre-existing and unrelated to this batch (the `ye_2025_q25_scale` `mixed` review row,
+and a not-enforced notice because the irw_site checkout sits on `itemtext/issues-batch-300-304`,
+not main). No IRW-generated English ships in this round: all three are study_supplied /
+study_materials.
+
+### Step 5b — orchestrator re-checks of the agents' own claims (all three confirmed)
+
+1. **fks `resp=0` is a data defect** (agent's claim, category (b)). Confirmed against the live
+   table: exactly **3 rows** carry resp=0, one each on FKS_15/FKS_16/FKS_18, all from **one
+   participant, id `SGNXX`**, who contributes only those 3 of the table's 3,573 rows. That is
+   what makes per-item n 211 for those three items and 210 for the other fourteen
+   (`irw_table_sets`, server-side). The agent's account was exactly right, id included.
+2. **Both dictionary Descriptions are wrong** (category (c), about to be filed). Verified
+   verbatim in `metadata/biblio.csv`: fkg reads "Body feelings questionnaire FKG (20 items)…",
+   fks reads "Body schema questionnaire FKS (17 items)…". The fks re-identification was
+   independently grounded too — the deposit's own SPSS syntax line
+   `*recoding Questionnaire of bodydysmorphic symptoms (FKS)*` is present in the deposit file.
+3. **covid's two-scale caveat.** Confirmed from the shipped CSV: the 74 items partition exactly
+   **48 behaviour-frequency** (Never…Everyday) and **26 attitude** (Strongly disagree…Strongly
+   agree), both on resp 0–5. `resp` must not be pooled across items; this is the table's
+   `public_note`.
+
+### Findings for triage
+
+- **Metadata fix owed, three tables.** `opladen2025_fkg` is the *Fragebogen zu Körper und
+  Gesundheit* (health catastrophising, 1–4), not a "body feelings questionnaire";
+  `opladen2025_fks` is the *Fragebogen körperdysmorpher Symptome* (BDD screener, 1–5), not a
+  "body schema questionnaire". Both Descriptions were written from the processing script's own
+  guessed gloss — the same failure logged for `opladen2025_wi` in batch_122, so
+  **`opladen2025_edeq` is worth checking too.** `pending_index_notes.csv` rows written for both
+  (fkg by its agent; fks by the orchestrator, which the agent correctly deferred rather than race).
+- `covid_travel_mackenzie_2021`'s Description ("Travel Attitudes during COVID-19") undersells the
+  table — only 26 of 74 items are attitudes. Recorded in `notes.csv`, not escalated.
+- **Rights, both opladen tables: shipped on silence, not on a positive grant.** No clause
+  reserving a right is quotable for either FKG or FKS; neither has a distributor page stating
+  terms. No register row written (a round may not write a `ship` verdict) — worth a human eye.
+- fkg's FKG_16 has no `resp=1` observation (0/19/69/122); the anchor row ships anyway since the
+  instrument offered it. Not flagged by audit.
+- Both opladen tables' `item_text_translated` carries the deposit's **short English content
+  glosses**, not sentence-level translations — same handling as `opladen2025_wi`, disclosed in
+  each `public_note`.
+
+Cap not reached (`batch_299` does not exist). 22 rows remain pending.
