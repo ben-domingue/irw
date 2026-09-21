@@ -86,6 +86,9 @@ Ruled by the user 2026-09-15, following 2023:
   would be joined to responses as if it were printed. `correct_response` and
   `resp_raw` keep the options addressable.
 - Never generate an `option_text`.
+- Text recovered from INEP's own standard booklet is not generated text
+  and is not marked. R15 has the two conditions; anything outside them is
+  generated text and belongs to this rule.
 
 ## R6. No translations
 
@@ -176,6 +179,7 @@ Response CSVs are the #1942-corrected build, not the pre-fix ones.
 - A year where LC's 50-over-45 structure does not hold.
 - Any case where following a rule here would require inventing an item code,
   an option letter, or a `resp` value.
+- A recovery that does not satisfy **both** of R15's conditions.
 
 ## R14. A table the accessibility edition dropped is recovered from the standard one
 
@@ -219,7 +223,8 @@ has and our text correctly does not.
 booklet and citing its page, laid out the way that edition extracts (header
 cells then values, column order) so the corpus stays internally consistent.
 Every character is INEP's own, so **no `gerada por IA` marking is owed** --
-this is the standard-booklet gap-filling R2 already prescribes.
+this is the standard-booklet gap-filling R2 already prescribes, and R15 states
+the conditions under which that holds.
 
 Anchors tolerate an optional `_` or `^` between any two characters. Hard-coding
 the markers couples this pass to `48_mark_scripts.py`, and a change there would
@@ -298,3 +303,37 @@ Never strip a misplaced description without first looking for its owner. All
 three found so far had one, each already shipped and each carrying no
 description of its own, so the fix was a move. `--apply` refuses to run if the
 audit turns up a case in neither list.
+
+## R15. Text recovered from INEP's own booklet is not generated text
+
+Ruled 2026-09-21 (#2226), on the four 2018 items R14 recovered.
+
+Filling a gap in an accessibility edition from INEP's own standard booklet is
+gap-filling under R2, and owes **no inline `(gerada por IA)` and no
+`description_source=partly_generated`**. Every character is INEP's, written by
+INEP for the same application of the same exam. Marking it would put an AI
+provenance flag on text no model wrote, which misstates the provenance in the
+other direction — anyone filtering the corpus on generated text would drop
+prose that is as printed as the stem around it.
+
+The ruling covers a recovery only where **both** conditions hold:
+
+1. **The source is the standard booklet for the same exam and year** — the
+   other edition of the paper the candidates in the response tables actually
+   sat, at that year's `standard_prova_codes` (R0).
+2. **The stem already points at the missing content** — the item says a
+   *quadro*, *tabela* or *gráfico* is there and only its contents are gone.
+   The recovery restores what the item already claims and adds nothing the
+   item does not call for.
+
+Anything else is outside R15 and goes to R11 before it ships, not after:
+
+- content reconstructed from any other source — another year, another booklet
+  colour, a press reprint of the question, a model's own knowledge;
+- content inserted where the stem does not call for it, which is authoring a
+  stimulus rather than recovering one.
+
+R15 is not a route around R5. It is the narrower statement that text INEP
+wrote never entered R5's scope in the first place; anything that falls outside
+these two conditions is generated text and carries R5's markings, if it is
+ruled shippable at all.

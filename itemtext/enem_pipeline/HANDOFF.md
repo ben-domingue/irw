@@ -6,7 +6,7 @@ traps most likely to bite. This file is the longer narrative of how the
 thirteen years were built, kept for the detail RESUME.md compresses.
 
 Then `STATUS.md` (per-year state + traps 1-67) and `EXTRACTION_RULES.md`
-(R0-R14, the contract every year must satisfy).
+(R0-R15, the contract every year must satisfy).
 
 Last updated 2026-09-16. Everything below was observed, not predicted.
 

@@ -4,7 +4,7 @@
 (the contract) and `STATUS.md` (per-year state and 67 documented traps).**
 
 Last updated **2026-09-21**. Branch `mateus/itemtext-enem-allyears`,
-HEAD **`667b1fcc`**, pushed, working tree clean. Nothing running.
+pushed, working tree clean. Nothing running.
 
 ---
 
@@ -48,7 +48,7 @@ a flat symlink farm over the **#1942-CORRECTED** CSVs in
 
 | what | who |
 |---|---|
-| Ben's response to the 2026-09-21 comment | Ben — nothing to do until he replies |
+| merge | Ben — he ruled on the recovered tables 2026-09-21 and asked for it as a named rule *in this PR*; R15 is that rule, and he said he would merge once it landed |
 | Redivis upload, **after merge** | manual: `red_up itemtables` |
 | the three 2021 tables carry `description_source=partly_generated` and owe a line on the public issues page (ruling 2026-09-11) | after merge |
 
@@ -70,6 +70,10 @@ documented as rules:
 - **R14 dropped tables** — the same editions sometimes keep the sentence
   pointing at a table and lose the numbers. Recovered from the standard
   booklet.
+- **R15 recovery is not generation** — Ben's ruling of 2026-09-21: text taken
+  from INEP's own standard booklet owes no `(gerada por IA)` marking, on two
+  conditions — same exam and year, and the stem already points at the missing
+  content. Anything wider goes to R11 before it ships.
 
 Four font pathologies were repaired inside the PDFs (CID-keyed CFF with no
 glyph names; `/gNNN` names with incomplete ToUnicode; SymbolMT over Adobe
@@ -135,7 +139,7 @@ that are nobody's fault.
 ```
 ~/enem/itemtext_run/allyears/          the working pipeline (source of truth)
   RESUME.md          this file
-  EXTRACTION_RULES.md  R0-R14, the contract
+  EXTRACTION_RULES.md  R0-R15, the contract
   STATUS.md          per-year state + traps 1-67
   MODEL_CHECK_100.md the 100-item check and its six misses
   PR_BODY.md         the PR body as posted
