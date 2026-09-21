@@ -718,6 +718,106 @@ local({
           "a longer id starting with a listed id is not matched")
 })
 
+##------------------------------------------- Derived from Original licence ---
+##Same load-bearing property as the OSF fill above, plus a second one: the
+##mapping must refuse everything that is a decision rather than a copy. A
+##wrongly derived NC or ND is worse than the blank it replaced, because a blank
+##is visibly a question and a licence string is not (#2040).
+local({
+    mk <- function(original, derived = NA_character_, table = "a_2020") {
+        data.frame(table = table, Original_License = original,
+                   Derived_License = derived, stringsAsFactors = FALSE)
+    }
+    ap <- function(d) suppressMessages(apply_derived_license(d, "core"))
+
+    for (lic in c("CC0 1.0", "CC BY 4.0", "CC BY-SA 4.0", "MIT",
+                  "GPL-2.0", "GPL-3.0", "LGPL-3.0", "ODbL 1.0", "ODC-By")) {
+        out <- ap(mk(lic))
+        check(identical(out$biblio$Derived_License[1], lic),
+              paste0(dQuote(lic), " carries forward unchanged"))
+        check(identical(out$log$basis[1], "derived"),
+              paste0(dQuote(lic), " is logged as mechanical"))
+    }
+
+    ##THE ONE THAT MATTERS. Each of these is a judgement about what a depositor
+    ##granted, so the column must stay blank and stay visible as a question.
+    ##datastandard.md:17-33: NC is ben-domingue's call only; ND and unlicensed
+    ##are hard stops; `Permission via Email` needs the grant on file, and in this
+    ##column it is sometimes the OSF stopgap rather than evidence of an email at
+    ##all (#2302).
+    for (lic in c("CC BY-NC 4.0", "CC BY-NC-SA 4.0", "CC BY-NC-ND",
+                  "CC BY-ND 4.0", "Custom", "Permission via Email",
+                  "Missing (NA)", "", NA_character_)) {
+        out <- ap(mk(lic))
+        check(dict_blank(out$biblio$Derived_License[1]),
+              paste0(dQuote(as.character(lic)),
+                     " is never derived -- it needs a decision"))
+        check(nrow(out$log) == 0L,
+              paste0(dQuote(as.character(lic)), " writes no log row"))
+    }
+
+    ##A human value wins the cell it occupies, for every spelling of the source
+    ##licence -- otherwise this would relicense a table on its own authority.
+    check(identical(ap(mk("CC0 1.0", derived = "CC BY 4.0"))$biblio$Derived_License[1],
+                    "CC BY 4.0"),
+          "a recorded Derived License is never overwritten by the derivation")
+    check(identical(ap(mk("CC BY-NC 4.0", derived = "CC BY-NC 4.0"))$biblio$Derived_License[1],
+                    "CC BY-NC 4.0"),
+          "an approved NC row keeps the NC value the human recorded")
+
+    for (empty in list(NA_character_, "", "NA")) {
+        check(identical(ap(mk("CC BY 4.0", derived = empty))$biblio$Derived_License[1],
+                        "CC BY 4.0"),
+              paste0("the sheet's blank spelling ", dQuote(as.character(empty)),
+                     " counts as blank here too"))
+    }
+
+    ##Spelling and case are not relicensing -- biblio_norm() treats them as
+    ##equal for this column, and so must this.
+    for (spelled in c("cc by 4.0", "  CC BY 4.0  ", "CC  BY  4.0")) {
+        check(identical(ap(mk(spelled))$biblio$Derived_License[1], "CC BY 4.0"),
+              paste0(dQuote(spelled), " normalises to the canonical spelling"))
+    }
+
+    ##The one assumption in the mapping is labelled as one, so a reviewer can
+    ##find it. `CC-BY (unspecified)` names no version; reading it as 4.0 was
+    ##ruled by ben-domingue 2026-09-20.
+    out <- ap(mk("CC-BY (unspecified)"))
+    check(identical(out$biblio$Derived_License[1], "CC BY 4.0"),
+          "CC-BY (unspecified) is read as 4.0")
+    check(identical(out$log$basis[1], "assumed-version"),
+          "and is logged as an assumption, not as mechanical")
+
+    ##A biblio without the source column predates #2032 and must pass through
+    ##untouched rather than error.
+    legacy <- data.frame(table = "a_2020", Derived_License = NA_character_,
+                         stringsAsFactors = FALSE)
+    check(identical(ap(legacy)$biblio, legacy),
+          "a biblio with no Original_License column is returned unchanged")
+
+    ##The log is the review surface, so it must name the source it read.
+    out <- ap(mk("CC0 1.0", table = "z_2020"))
+    check(identical(out$log$table[1], "z_2020") &&
+          identical(out$log$original[1], "CC0 1.0") &&
+          identical(out$log$derived[1], "CC0 1.0"),
+          "the log records the table, the source licence and the derived value")
+})
+
+local({
+    check(!anyDuplicated(names(DERIVED_LICENSE_MECHANICAL)),
+          "no source licence is mapped twice")
+    check(!any(names(DERIVED_LICENSE_MECHANICAL) %in% names(DERIVED_LICENSE_ASSUMED)),
+          "the mechanical and assumed tables do not overlap")
+    check(all(names(DERIVED_LICENSE_MECHANICAL) ==
+              tolower(names(DERIVED_LICENSE_MECHANICAL))),
+          "every mapping key is lowercase, as the lookup expects")
+    ##A restrictive licence reaching the mechanical table is the failure this
+    ##whole function has to not have, so assert it structurally as well.
+    check(!any(grepl("nc|nd|custom|permission",
+                     names(DERIVED_LICENSE_MECHANICAL))),
+          "no NC, ND, Custom or Permission entry is in the mechanical table")
+})
+
 local({
     check(!anyDuplicated(OSF_PERMISSION_PROJECTS),
           "no OSF project is listed twice")

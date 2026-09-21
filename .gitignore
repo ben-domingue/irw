@@ -60,6 +60,15 @@ metadata/**/*.txt
 !metadata/comps_biblio_bibtex_refetch_log.csv
 !metadata/nominal_biblio_bibtex_refetch_log.csv
 !metadata/simsyn_biblio_bibtex_refetch_log.csv
+##Which `Derived_License` cells were derived from `Original License`, and on
+##what basis (#2040). Committed for the same reason as the refresh log: the
+##review question is "does every one of these read correctly?", which is a short
+##list, not a diff. `basis` separates the mechanical carry-forwards from the one
+##case that assumes a licence version the source did not state.
+!metadata/biblio_license_log.csv
+!metadata/comps_biblio_license_log.csv
+!metadata/nominal_biblio_license_log.csv
+!metadata/simsyn_biblio_license_log.csv
 .env
 .Rproj.user
 .DS_Store

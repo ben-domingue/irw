@@ -24,6 +24,34 @@ Also fixed that day, no action needed now:
   `racialsocialnormsbrazilianstudents_portella_2022`).
 - `altahla_2024_swls` existed in two shards; deleted from shard 4.
 
+## NEW: 02_biblio.R derives a blank `Derived_License` (#2040)
+
+First run with `apply_derived_license()`. Expect two things in the stage 02 log,
+and a third that is not new but will look it.
+
+1. A line reading `core: derived Derived_License on N row(s) (... mechanical,
+   ... assumed version); M row(s) still have none`. The derivations are listed
+   in the new **`biblio_license_log.csv`** (one per source, same shape as the
+   refresh logs). **Read that file, not the biblio.csv diff** -- it is a short
+   list with the source licence beside each derived value, which is the form the
+   review question takes.
+2. `basis = assumed-version` should appear on about 3 rows, all
+   `CC-BY (unspecified)` read as `CC BY 4.0`. That is the one entry in the
+   mapping that asserts a version the source did not state (ben-domingue,
+   2026-09-20). Everything else is a carry-forward.
+3. Not new, but this is the first run to show it: the refresh will fill about 42
+   `Derived_License` cells for `chile_2024_safety_*` and flip about 80 rows from
+   `Permission via Email` to a real licence. The second group is #2302's
+   correction landing, not a relicensing -- those deposits publish a licence and
+   the old value was the `OSF_PERMISSION_PROJECTS` stopgap.
+
+Replayed against the live sheet and the committed `biblio.csv` on 2026-09-20:
+live tables with no licence went **68 -> 26** on the refresh alone, then
+**26 -> 8** on the derivation. The 8 that remain are the honest queue and are
+listed on #2266; nothing in this change touches them, because each is a decision
+rather than a copy (3 are stale rows for the withdrawn `2024_online_addiction_*`,
+3 are NC, 2 need a permission grant on file).
+
 ## 1. NEW: 01_metadata.R now refreshes existing rows (`refresh.per.run`)
 
 This is the fix for the "47 tables have a stale n_responses" item that used to
