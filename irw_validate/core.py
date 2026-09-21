@@ -56,6 +56,28 @@ def is_item_text(label: str) -> bool:
     return _table_name(label).endswith(ITEMS_SUFFIX)
 
 
+def _addressable_key(df):
+    """The (item, address) key an option row is joined on, per #1945/#2185.
+
+    Returns the key frame and a short name for the address column, so a finding
+    can say which column actually collided. `resp` is the address where it is
+    populated; `raw_resp` is the fallback the schema provides for sources that
+    print options with no scoring key. Returns (None, "resp") when there is no
+    `item` column to key on at all.
+    """
+    if "item" not in df.columns:
+        return None, "resp"
+    if "resp" not in df.columns:
+        if "raw_resp" in df.columns:
+            return df[["item", "raw_resp"]].copy(), "raw_resp"
+        return df[["item"]].copy(), "resp"
+    if "raw_resp" not in df.columns:
+        return df[["item", "resp"]].copy(), "resp"
+    key = df[["item"]].copy()
+    key["addr"] = df["resp"].where(df["resp"].notna(), df["raw_resp"])
+    return key, "resp-or-raw_resp"
+
+
 def _validate_item_text(df, label: str, profile: str) -> Report:
     """The item text schema: check what applies, and say nothing about the rest."""
     report = Report(label=label, profile=profile, kind="item_text")
@@ -68,9 +90,28 @@ def _validate_item_text(df, label: str, profile: str) -> Report:
             f"missing required columns for item text: {', '.join(missing)}",
             table=table, group="core"))
         return report
-    keys = [c for c in ("item", "resp") if c in df.columns]
+    # THE KEY IS THE ADDRESSABLE ONE, NOT `resp` (#2232).
+    #
+    # The settled rule (#1945/#2185) is that an option row must be addressable:
+    # it carries `resp`, or -- where the source prints bare options with no
+    # scoring key -- `raw_resp`. Keying on `resp` alone broke that in two
+    # directions at once, because two pandas calls disagree about what a null
+    # key means. `duplicated()` treats NaN as equal to NaN, so with `resp`
+    # blank every option row of an item collided; `groupby` DROPS NaN keys by
+    # default, so the frame that would have told the two faults apart came back
+    # empty and the run fell through to a message asserting the option text was
+    # identical when it was the only thing distinguishing the rows. On
+    # gilbert_meta_70 those rows read "gaadee", "kauaa", "kainchee" -- three
+    # different words a child was asked to name.
+    #
+    # So both calls key on `resp` where it is populated and `raw_resp` where it
+    # is not. A row with NEITHER populated has no address at all, still
+    # collides, and is still reported -- that is the defect this check exists
+    # for, and it is the case the previous fix attempt lost by dropping unkeyed
+    # rows instead of falling back.
     report.checks_run.append("dup_item_resp")
-    dup = int(df.duplicated(subset=keys).sum()) if keys else 0
+    key_cols, addr_desc = _addressable_key(df)
+    dup = int(key_cols.duplicated().sum()) if key_cols is not None else 0
 
     # A scored table is a different object. Where `correct_response` is
     # populated, `resp` is a scoring key (0 wrong / 1 right) rather than a point
@@ -105,23 +146,30 @@ def _validate_item_text(df, label: str, profile: str) -> Report:
         # both "Strongly agree" and "Strongly disagree", which is two opposite
         # scale directions written into one table and is worse than a duplicate.
         conflicting = 0
-        if "option_text" in df.columns:
-            per_key = df.groupby(keys)["option_text"].nunique(dropna=False)
+        if "option_text" in df.columns and key_cols is not None:
+            # dropna=False on the GROUPBY as well. The parameter of the same
+            # name on nunique() governs the values; this one governs the keys,
+            # and without it a row with no addressable key vanishes from the
+            # comparison rather than being judged by it.
+            per_key = df.groupby([key_cols[c] for c in key_cols.columns],
+                                 dropna=False)["option_text"].nunique(dropna=False)
             conflicting = int((per_key > 1).sum())
         if conflicting:
             report.findings.append(Finding(
                 "resp_ambiguous", "error",
                 f"{conflicting} response value(s) carry more than one option label -- "
-                f"the same `resp` is documented as meaning two different things, so "
+                f"the same item+{addr_desc} is documented as meaning two different things, so "
                 f"nothing joining item text to responses can resolve it. Usually two "
                 f"opposite scale directions merged into one table.",
                 table=table, group="core"))
         else:
             report.findings.append(Finding(
                 "dup_item_resp", "error",
-                f"{dup} duplicate item+resp rows with identical option text -- an item "
-                f"text table carries one row per response option, so a repeat is a "
-                f"doubled upload (#1810)",
+                f"{dup} duplicate item+{addr_desc} rows with identical option text -- "
+                f"an item text table carries one row per response option, so a repeat "
+                f"is a doubled upload (#1810). Rows carrying neither `resp` nor "
+                f"`raw_resp` have no addressable key and count here: nothing can join "
+                f"them to a response (#2232)",
                 table=table, group="core"))
     for finding in extra.check_name(table):
         report.checks_run.append(finding.check)
