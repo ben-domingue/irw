@@ -23113,3 +23113,72 @@ the HELD exemption and entries fall due when they ship. The irw_site checkout is
 `itemtext/issues-batch-300-304`, so that disclosure check was again reported-but-not-enforced.
 
 Cap (batch_299) not reached. 7 rows remain pending; the next round is batch_297.
+
+## batch_297 — 2026-09-20T19:05-07:00
+
+3 tables claimed, 3 agents (one per table). **Written 3 / blocked 0 / failed 0 — yield 3/3 (100%).**
+All three from CIS (Centro de Investigaciones Sociológicas) Estudio nº 3493 "Edadismo", fieldwork
+10–16 Jan 2025, microdata deposit MD3493.zip (md5 d84e87d65056d8ceac4d31ccbced1bc0) — the same
+deposit as batch_294/295/296. Each agent was told explicitly which sibling blocks belonged to the
+other two; no cross-writes occurred.
+
+- `spain_2025_ageism_elderpriority` — done. 77 rows (7 items × 11 levels), P6_1..P6_7, do-file
+  Bookmark 3. 0–10 priority scale **anchored at the ends only**: `option_text` populated for 0
+  ("Ninguna prioridad") and 10 ("Máxima prioridad") and correctly left **blank for 1–9** rather than
+  padded with the scale numbers. No age filter on this block (all 5,006 interviews); only 98/99
+  dropped, so code 0 is a substantive rating, not N.P.
+- `spain_2025_ageism_elderslights` — done. 24 rows (6 items × 4 options), P13_1..P13_6, Bookmark 8.
+  Live `resp=4` is a recode: CIS coded the fourth category 7 "Ninguna vez"; the do-file maps 7→4 for
+  contiguity. Scale runs 1 = most frequent → 4 = never. Block sits inside the 65+ filter (1,030 of
+  5,006 respondents), which is the whole of its base.
+- `spain_2025_ageism_problems` — done. 8 rows (2 items × 4 levels), P1/P2, Bookmark 1. Confirmed NOT
+  a uniform matrix block, as briefed: P.2's entire administered wording is the elliptical "¿Y los/as
+  jóvenes de menos de 35 años?", inheriting P.1's response frame. Correctly shipped as two standalone
+  `item_text` entries under one trivial `section_id` with `instructions`/`section_prompt` NA — P.2 was
+  not padded into a reconstructed sentence, and P.1's stem was not duplicated upward. Value-label sets
+  labels14/labels15 are byte-identical, so the shared option list was verified rather than assumed
+  (the batch_296 `comparison` sibling's three sets turned out NOT to be identical). `resp` is
+  non-contiguous {1,2,4,5} **by design** — Bookmark 1 drops code 3, the not-read-aloud volunteered
+  midpoint "(NO LEER) Ni muchos ni pocos" (150 of 10,012 cells), a substantive answer rather than a
+  refusal. Exactly 2 distinct items: satisfies the no-single-item rule, but at the minimum.
+
+All three `mapping_basis=data_labels` (`text_source=study_materials`,
+`translation_source=machine_translation`): 3493.sav's variable labels tie each source column to its
+wording verbatim, and all three derivations are core-model pattern 1 (`rename *, lower` over a
+literal column list — `item` IS the lowercased source column name, nothing positional). Step 5b is
+therefore exempt for all three; all three agents checked the mapping against the data anyway and all
+three rows are recorded NOT_NEEDED with real numbers rather than left blank.
+
+**Gates, all green:** normalize_nulls 0 of 3 changed; audit_batch 3 PASS, **no WARNs** (so Step 5c has
+nothing to explain); verify_batch MISSING(exempt)×3; lint_verification 3 rows no problems;
+`irw-validate` ok on all three; `check_provenance.R` clean — the three new tables appear under HELD
+(extracted and gated, never uploaded), so no issues-page entry is owed yet. Note check_provenance
+reports the irw_site checkout is on branch `itemtext/issues-batch-300-304`, not main, so its
+disclosure check is REPORTED BUT NOT ENFORCED this round.
+
+**Step 5b orchestrator re-check (independent, no export):** all three agents' per-item n claims were
+re-run against `irw_table_sets(per_item=TRUE)` and match exactly, item by item —
+elderpriority 4976/4981/4987/4997/4974/4939/4929 (sum 34,783 = n_rows), elderslights
+1024/1024/1020/1018/1024/1026 (sum 6,136), problems 4758/4871 (sum 9,629). The elderslights agent's
+own caveat is confirmed and worth keeping: three of its items tie at n=1024, so **per-item n alone is
+not decisive there** — its cell-level 24/24 distribution match is what distinguishes every item.
+
+Two things carried forward for a human:
+1. **CIS-family rights verdict is escalated, again.** All three agents independently read the CIS
+   reuse conditions (Ley 37/2007: commercial + non-commercial reuse, free non-exclusive assignment,
+   conditioned on attribution / non-alteration / no claim of official status), found no block, and
+   correctly declined to write a `ship` row to `instrument_rights_register.csv`. A round may never
+   write one. Note the three agents recorded three DIFFERENT sha256 hashes for that page fetched the
+   same day — the elderslights agent diagnosed this as session-varying markup with identical
+   operative clauses, which is plausible but means the hash is not a usable integrity check for this
+   page.
+2. **One character-level source conflict, resolved 2-of-3 and recorded:** `cues3493.pdf` prints "las
+   **A**dministraciones públicas" in p6_5 where the .sav label and the published marginals both print
+   it lowercase. The .sav/marginals form shipped, matching the batch_296 `bureaucracy` resolution —
+   but the batch_296 `difficulty` sibling resolved its analogous case the other way, so the CIS
+   family is knowingly inconsistent on capitalisation across batches. Worth one human ruling rather
+   than a per-table coin flip.
+
+Circuit breaker: not tripped (0 failed of 3). Cap (`batch_299`) not reached. Queue: 4 pending remain
+(`spain_2025_ageism_youthpriority`, `spain_2025_ageism_youthslights`, `Zanesco_2023_Golleretal2020`,
+`rdatasets_gssabortion`).
