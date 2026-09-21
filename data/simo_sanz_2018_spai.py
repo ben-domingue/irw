@@ -24,6 +24,7 @@ import os
 import numpy as np
 import pandas as pd
 import pyreadstat
+from irw_validate.compat import run_qc
 
 RAW = os.environ.get("SPAI_SAV", "journal.pone.0205389_S1_File.sav")
 OUTDIR = os.path.join(os.path.dirname(__file__), "..", "automated_finding", "irw_output")
@@ -94,6 +95,11 @@ def main():
     n = long["id"].nunique()
     assert n >= 100, f"below the 100-id floor: {n}"
     print(f"{len(long):,} responses | {n:,} ids | {long['item'].nunique()} items")
+
+    bad = [c for c in run_qc(long, permitted_values=[1, 2, 3, 4],
+                             item_constructs={i: "simo_sanz_2018_spai" for i in long["item"].unique()})
+           if c.status == "fail"]
+    assert not bad, f"run_qc failures: {[(c.name, c.detail) for c in bad]}"
 
     os.makedirs(OUTDIR, exist_ok=True)
     out = os.path.join(OUTDIR, "simo_sanz_2018_spai.csv")

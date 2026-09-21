@@ -40,6 +40,7 @@
 import os
 import pandas as pd
 import pyreadstat
+from irw_validate.compat import run_qc
 
 RAW = os.environ.get("CORNIU_SAV", "KOERNER_SCS_for OSF data sharing (2018 01 15).SAV")
 OUTDIR = os.path.join(os.path.dirname(__file__), "..", "automated_finding", "irw_output")
@@ -93,6 +94,11 @@ def main():
         long = long[["id", "item", "resp"] + cov_cols]
         n = long["id"].nunique()
         assert n >= 100, f"{table}: below the 100-id floor: {n}"
+
+        bad = [c for c in run_qc(long, permitted_values=permitted,
+                                 item_constructs={i: table for i in long["item"].unique()})
+               if c.status == "fail"]
+        assert not bad, f"{table}: run_qc failures: {[(c.name, c.detail) for c in bad]}"
 
         out = os.path.join(OUTDIR, f"{table}.csv")
         long.to_csv(out, index=False)

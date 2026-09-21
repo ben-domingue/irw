@@ -44,6 +44,7 @@
 # the article's own appendix; that is a later pass.
 import os
 import pandas as pd
+from irw_validate.compat import run_qc
 
 RAW = os.environ.get("ENDERS_CSV", "Raw Data.csv")
 OUTDIR = os.path.join(os.path.dirname(__file__), "..", "automated_finding", "irw_output")
@@ -130,6 +131,11 @@ def main():
         long = long[["id", "item", "resp"] + cov_cols]
         n = long["id"].nunique()
         assert n >= 100, f"{table}: below the 100-id floor: {n}"
+
+        bad = [c for c in run_qc(long, permitted_values=permitted,
+                                 item_constructs={i: table for i in long["item"].unique()})
+               if c.status == "fail"]
+        assert not bad, f"{table}: run_qc failures: {[(c.name, c.detail) for c in bad]}"
 
         out = os.path.join(OUTDIR, f"{table}.csv")
         assert not os.path.exists(out) or table in SCALES, "output name collision"

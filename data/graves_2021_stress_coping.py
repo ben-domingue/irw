@@ -29,6 +29,7 @@
 # (Cohen's PSS-10; Carver's Brief-COPE) rather than study materials.
 import os
 import pandas as pd
+from irw_validate.compat import run_qc
 
 RAW = os.environ.get("GRAVES_CSV", "journal.pone.0255634_S1_Dataset.csv")
 OUTDIR = os.path.join(os.path.dirname(__file__), "..", "automated_finding", "irw_output")
@@ -98,6 +99,11 @@ def main():
         long = long[["id", "item", "resp"] + cov_cols]
         n = long["id"].nunique()
         assert n >= 100, f"{table}: below the 100-id floor: {n}"
+
+        bad = [c for c in run_qc(long, permitted_values=permitted,
+                                 item_constructs={i: table for i in long["item"].unique()})
+               if c.status == "fail"]
+        assert not bad, f"{table}: run_qc failures: {[(c.name, c.detail) for c in bad]}"
 
         out = os.path.join(OUTDIR, f"{table}.csv")
         long.to_csv(out, index=False)

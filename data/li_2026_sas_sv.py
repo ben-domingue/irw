@@ -29,6 +29,7 @@
 # translated substitute rather than the wording respondents read.
 import os
 import pandas as pd
+from irw_validate.compat import run_qc
 
 RAW = os.environ.get("LI_XLSX", "Original data.xlsx")
 OUTDIR = os.path.join(os.path.dirname(__file__), "..", "automated_finding", "irw_output")
@@ -63,6 +64,11 @@ def main():
     n = long["id"].nunique()
     assert n >= 100, f"below the 100-id floor: {n}"
     print(f"{len(long):,} responses | {n:,} ids | {long['item'].nunique()} items")
+
+    bad = [c for c in run_qc(long, permitted_values=[1, 2, 3, 4, 5, 6],
+                             item_constructs={i: "li_2026_sas_sv" for i in long["item"].unique()})
+           if c.status == "fail"]
+    assert not bad, f"run_qc failures: {[(c.name, c.detail) for c in bad]}"
 
     os.makedirs(OUTDIR, exist_ok=True)
     out = os.path.join(OUTDIR, "li_2026_sas_sv.csv")
