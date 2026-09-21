@@ -22866,3 +22866,61 @@ tables. `datastandard.md` bars response-data intake under any NC/ND restriction,
 `hannachi_2025_eco_anxiety_*` response tables are live off this CC BY-NC-SA 4.0 deposit.
 
 Cap (batch_299) not reached. 19 pending rows remain.
+
+## batch_293 — 2026-09-20 18:13–18:30
+
+3 tables claimed (3 agents, one per table): `spain_2025_democracy_efficacy`,
+`spain_2025_democracy_internal`, `spain_2025_democracy_judiciary`.
+
+**Written 3 / blocked 0 / failed 0 — yield 3/3 (100%).** All three `status=done`.
+Circuit breaker not tripped (0 failed).
+
+All three are one question block each of a single source: CIS (Spain) Estudio 3497,
+*Calidad de la democracia (III)*, April 2025 — microdata deposit `MD3497.zip`, whose
+`3497.sav` carries variable **and** value labels. All three are therefore
+`mapping_basis=data_labels`: `data/spain_2025_democracy.do` only does `rename *, lower`,
+so the IRW `item` code IS the source column name (P8DE→efficacy, P3AP→internal,
+P4JU→judiciary).
+
+**Gates.** normalize_nulls: 1 of 3 normalized (internal, 21 lines). audit_batch: 3 PASS,
+no anomalies, no WARNs to explain. verify_batch: efficacy PASS, internal + judiciary
+MISSING(exempt) — correct, both data_labels. lint_verification: 3 rows, no problems.
+irw-validate: all three ok. check_provenance: clean; all three correctly reported as HELD
+(extracted, not uploaded), so no issues-page entry is owed yet — each will re-enter that
+check when it ships.
+
+**Step 5b — orchestrator re-check, all three agents' numbers confirmed.** One
+`irw_table_sets(per_item=TRUE)` call per table (server-side, no export used anywhere this
+round):
+- efficacy 3979/3983/3967/3956 — matches the agent's re-derivation from `3497_num.csv` exactly.
+- judiciary 3977/3989/3973/3834, n_rows 15773 — matches exactly.
+- internal: the agent reported 20 per-item×per-level cells; they sum to
+  3972/3892/3902/3856/3979, which matches live per-item n exactly for all five items.
+- `resp` is `{1,2,4,5}` in the live data for all three, confirming the reported gap is real:
+  CIS code 3 is the not-read-aloud midpoint "(NO LEER) Ni de acuerdo ni en desacuerdo", which
+  the `.do` discards along with 8 (N.S.) and 9 (N.C.). No option row ships for 3, by design.
+
+**Notable / for the human.**
+- **Translation.** CIS publishes this questionnaire in Spanish only, so the base fields are
+  Spanish and the English `_translated` twins are IRW-produced:
+  `translation_source=machine_translation` on all three. Three issues-page entries are owed
+  at upload; `public_note` is written and ready in each provenance row.
+- **Rights.** CIS's reuse conditions (fetched 2026-09-20) are an affirmative grant —
+  commercial and non-commercial reuse, copying, modification and extraction, conditional only
+  on attribution ("Origen de los datos: Centro de Investigaciones Sociológicas"),
+  non-distortion and no implied endorsement (Ley 37/2007). Ship-shaped, so per the rule that a
+  round never writes a `ship` row, no `instrument_rights_register.csv` entry was written by any
+  agent. **Worth a human-written CIS-family row**: it would cover the 5 remaining queued
+  `spain_2025_democracy_*` tables plus the `spain_2025_ageism_*` family and the earlier
+  `spain_*` tables.
+- **Sibling structure (all three agents converged on this independently).** One deposit covers
+  all eight `spain_2025_democracy_*` tables: P2/P7/P11→system, P3P→parties, P3AP→internal,
+  P4JU→judiciary, P5ME→media, P8DE→efficacy, P10GR→trust (0–10 confidence, sentinels 98/99),
+  P12→priorities. Every one is a `data_labels` extraction from the same `3497.sav`, already
+  cached under `.cache/spain_2025_democracy_*/`. The remaining five should be cheap.
+  `spain_2025_ageism.do` is a separate CIS study number.
+- **Verification-route warning for the siblings.** The published marginals (`es3497mar`) are
+  **weighted** (`PESO`, per FT3497) and diverge from unweighted live counts by up to ~10pt.
+  Anyone verifying a sibling table should use the raw `3497_num.csv`, not the marginals.
+
+Cap (`batch_299`) not reached; 16 pending rows remain.
