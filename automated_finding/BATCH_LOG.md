@@ -15163,3 +15163,50 @@ recorded per-table in `itemtext_provenance.csv`:
   labels are just the uppercased column names (`VAXHES_1` -> "VAXHES_1"), and
   there is no codebook among the five files. The batteries are in the article's
   appendix.
+
+### 2026-09-20 (cont. 3) — uploaded, and the batch's remaining leads recorded out of `runs/`
+
+**All 21 response tables uploaded** (ben-domingue, confirmed 2026-09-20), and
+`bentall_2021_over_purchasing__items.csv` with them. `irw_output/` and
+`itemtext_output/` are empty as expected. `itemtext_provenance.csv` and
+`itemtext/mapping_verification.csv` are stamped `uploaded=2026-09-20` on the
+one `bentall` row each; the other 20 provenance rows are not-shipped records
+and stay deliberately unstamped.
+
+The 21 `dictionary_auto.csv` rows reach the sheet through
+`metadata/02_biblio.R` on the next pipeline run — nothing to paste.
+
+**The 24 `aggregate_continuous` rows**, recorded here so nothing in this batch
+depends on a gitignored `runs/` file. None is adjudicated yet: each needs a
+composite-vs-continuous call (a genuine per-item continuous response ships, a
+subscale total does not), and the `unknown`-licence ones are gated regardless.
+
+| DOI | Title | Lic | N |
+|---|---|---|---|
+| 10.1371/journal.pone.0251720 | Supporting families to protect child health: Parenti | unknown | 761 |
+| 10.1371/journal.pone.0267637 | Validity and reliability of the Polish version of th | unknown | 688 |
+| 10.1371/journal.pone.0300681 | Antecedents of social media addiction in high and lo | unknown | 481 |
+| 10.1371/journal.pone.0121018 | Common and Distinct Impacts of Autistic Traits and A | cc-by | 472 |
+| 10.1371/journal.pone.0235550 | Health literacy strengths and limitations among rura | cc-by | 436 |
+| 10.1371/journal.pone.0254595 | Arabic validation and cross-cultural adaptation of t | unknown | 350 |
+| 10.1371/journal.pone.0316060 | Altercentrism and a change in perspective on the sel | unknown | 345 |
+| 10.1371/journal.pone.0168612 | Unveiling the Structure of Cognitive Vulnerability f | cc-by | 304 |
+| 10.1371/journal.pone.0191534 | Mid-term sustained relief from headaches after ballo | cc-by | 286 |
+| 10.1371/journal.pone.0231033 | Analyses of medical coping styles and related factor | cc-by | 285 |
+| 10.1371/journal.pone.0305414 | Validation of the patient reported experiences and o | cc-by | 281 |
+| 10.1371/journal.pone.0274454 | Factors associated with self-care behavior in patien | cc-by | 278 |
+| 10.1371/journal.pone.0308086 | Validity testing of the Korean version of the Health | cc-by | 278 |
+| 10.1371/journal.pone.0143794 | The Role of Compassion in Altruistic Helping and Pun | cc-by | 271 |
+| 10.1371/journal.pone.0213104 | Altruistic decisions are influenced by the allocatio | cc-by | 240 |
+| 10.1371/journal.pone.0299352 | Healthy Minds Index: A brief measure of the core dim | unknown | 237 |
+| 10.1371/journal.pone.0282220 | Moderating the link between discrimination and adver | cc-by | 221 |
+| 10.1371/journal.pone.0277475 | Psychopathic tendencies are selectively associated w | cc-by | 177 |
+| 10.1371/journal.pone.0167887 | Does an Integrated Care Intervention for COPD Patien | cc-by | 171 |
+| 10.1371/journal.pone.0231395 | Assessing beliefs about emotions: Development and va | cc-by | 161 |
+| 10.1371/journal.pone.0169183 | Heightened Olfactory Sensitivity in Young Females wi | cc-by | 112 |
+| 10.1371/journal.pone.0169829 | Can Early Intervention Improve Maternal Well-Being?  | cc-by | 102 |
+| 10.1371/journal.pone.0195579 | Correlation between physical markers and psychiatric | cc-by | 101 |
+| 10.1371/journal.pone.0244717 | Testing a mindfulness meditation mobile app for the  | unknown | 100 |
+Together with the 38 open-licensed leads listed in the first 2026-09-20 entry
+(5 now worked, 33 open), that is the whole actionable residue of this batch.
+The `runs/` CSVs can now be deleted whenever, without losing anything.

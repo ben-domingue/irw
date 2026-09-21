@@ -111,15 +111,15 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   moot until the German wording is obtained anyway -- the deposit's labels are
   English glosses -- so it is not blocking the response tables.
 
-- [ ] **21 tables + 1 item text table need uploading/pasting.**
-  All 21 CSVs in `irw_output/` go to the newest shard -- `simo_sanz_2018_spai`
-  (76,908), `bentall_2021_over_purchasing` (27,594), the three `coroiu_2018_*`
-  (114,775) and the sixteen `enders_2022_*` (213,468), 432,745 responses in
-  all; `itemtext_output/bentall_2021_over_purchasing__items.csv` goes to
-  `irw_text` **after** the response tables are live. All 21 dictionary rows are
-  staged in `dictionary_auto.csv` (no pasting needed since #1732). Once Ben
-  confirms, stamp `uploaded=<date>` on the `bentall` row in
-  `itemtext_provenance.csv` and in `itemtext/mapping_verification.csv`. The other 20 provenance rows are not-shipped records and stay unstamped.
+- [x] **21 tables + 1 item text table uploaded** (ben-domingue, confirmed
+  2026-09-20): `simo_sanz_2018_spai` (76,908), `bentall_2021_over_purchasing`
+  (27,594), three `coroiu_2018_*` (114,775) and sixteen `enders_2022_*`
+  (213,468) -- 432,745 responses. `bentall_2021_over_purchasing__items.csv`
+  went up with them and is stamped `uploaded=2026-09-20` in both
+  `itemtext_provenance.csv` and `itemtext/mapping_verification.csv`. The other
+  20 provenance rows are not-shipped records and stay unstamped. The 21
+  `dictionary_auto.csv` rows reach the sheet via `metadata/02_biblio.R` on the
+  next pipeline run.
 
 - [ ] **33 of the 38 open-licensed leads still unworked** (cc-by/cc0, N>=100) out of the
   98-row `human_assistance` bucket — 44 `recoverable_format` + 14
@@ -136,9 +136,8 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
 - [ ] **24 `aggregate_continuous` rows need a composite-vs-continuous call.**
   Not yet adjudicated; some will be genuine per-item continuous responses and
-  some will be subscale totals. Rows in
-  `runs/plos_recycled_2026-09-20_retriage_ha.csv` (disposable — re-derivable
-  from the triage CSV).
+  some will be subscale totals. All 24 are listed in `BATCH_LOG.md`
+  (2026-09-20 cont. 3), so this no longer depends on anything in `runs/`.
 
 ## From the 2026-09-19 PMC tail measurement
 
