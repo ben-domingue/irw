@@ -15210,3 +15210,64 @@ subscale total does not), and the `unknown`-licence ones are gated regardless.
 Together with the 38 open-licensed leads listed in the first 2026-09-20 entry
 (5 now worked, 33 open), that is the whole actionable residue of this batch.
 The `runs/` CSVs can now be deleted whenever, without losing anything.
+
+### 2026-09-20 (cont. 4) — four more deposits: 14 tables / 121,130 responses
+
+All four CC BY 4.0. Two were verified on the deposit rather than the article:
+figshare 32109184 via `api.figshare.com/v2/articles/32109184`.
+
+**`nolte_2017_hlq_*` — 9 tables, 45,338 responses.** Nolte et al. 2017,
+`10.1371/journal.pone.0172340`, N=1,058 German adults with chronic conditions.
+The HLQ is nine scales with **no overall score by design**, and the nine split
+across two response formats (scales 1-5 on 1-4, scales 6-9 on 1-5), which
+`datastandard.md` forbids mixing anyway — so nine tables. Scale membership is
+the published 4/4/5/5/5 + 5/6/5/5 structure, independently confirmed against
+the German variable labels; the column order in the `.sav` agrees, which is a
+check rather than the source. `T3_Group` is a sampling group, not a treatment,
+so it rides as `cov_`.
+
+**The HLQ is the batch's one cheap item-text case, and it is blocked on rights
+rather than on recovery.** The `.sav` carries all 44 items in the **German
+wording respondents read** plus both anchor sets in German — exactly what the
+administered-language columns want. But the HLQ is licensed by Deakin
+University and has no entry in `instrument_rights_register.csv`. Escalated,
+not decided; if it clears, this is a one-pass job. Carried in TODO.md.
+
+**`li_2026_sas_sv` — 18,420 responses.** Li & Mao 2026, `10.1371/journal.pone.0349016`,
+N=1,842. SAS-SV, 10 items on 1-6. The deposit's `PSQI1..PSQI7` are **not**
+shipped: those are the seven PSQI *component scores*, each computed from one or
+more of the instrument's 19 underlying questions, so they are composites rather
+than responses. The 19 questions are not in the deposit.
+
+**`graves_2021_*` — 2 tables, 38,011 responses.** Graves et al. 2021,
+`10.1371/journal.pone.0255634`. PSS-10 (0-4) and Brief-COPE (28 items, 1-4).
+`prepost` is carried as `cov_prepost`, **not** as `wave`: the file has no person
+identifier and 607 + 448 = 1,055 rows, so there is no way to link a pre row to
+its post row, and a `wave` column would assert a within-person design the data
+cannot support.
+
+**`roy_2024_*` — 2 tables, 19,361 responses.** Roy et al. 2024,
+`10.1371/journal.pone.0315687`, N=1,019. Five candidate blocks, two shipped,
+and the three exclusions are the interesting part — each is re-asserted in the
+script rather than trusted to a comment:
+- **ISI is 100% missing** — every cell of all seven columns is empty.
+- **The PSS-4 block is unresolvable.** The file also carries `pss1_new..pss4_new`,
+  and the analysed `pss_sc` equals sum(`pss*_new`) for 99.9% of rows but
+  sum(`pss1..4`) for 5.6%. `pss*_new` is not derivable from `pss1..4`: across
+  all sixteen column pairings neither identity nor reversal matches above 26%,
+  which is chance for a 5-point scale. One block is mislabelled and the deposit
+  cannot say which, so neither ships.
+- **`aw1..aw10` is not one scale** — `aw1/8/9/10` take 0-4 while `aw2..aw7` take
+  {0,2,3,5,6}, gaps at 1 and 4, i.e. a multi-select coding. `aw1` also holds a
+  lone 43 at row 901 against a 0-4 range: a data-entry error isolated to one
+  cell of one item, which is the per-item diagnostic, not a pooled min/max one.
+
+**QC.** `run_qc()` on all 14 with source-documented `permitted_values` and
+explicit `item_constructs`: **0 fails.** Seven `imputed_values*` warnings. Two
+(`BC11`, `phq8`) are ordinary floor effects at the scale minimum. The other
+five are **interior-mode** concentrations on the HLQ's 4- and 5-point agreement
+scales, which the floor-effect argument does not cover — so they were checked a
+different way: every flagged item still carries 21-42 genuine missing cells in
+the source `.sav` and only integer anchors. A mean-imputed column has no
+missing left (that is the point of imputing) and contains a fractional
+constant. Neither holds, so these are real modal-response concentrations.

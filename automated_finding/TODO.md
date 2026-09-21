@@ -121,16 +121,39 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   `dictionary_auto.csv` rows reach the sheet via `metadata/02_biblio.R` on the
   next pipeline run.
 
-- [ ] **33 of the 38 open-licensed leads still unworked** (cc-by/cc0, N>=100) out of the
+- [ ] **14 tables need uploading** (a second batch, after the 21 already up):
+  nine `nolte_2017_hlq_*` (45,338), `li_2026_sas_sv` (18,420),
+  `graves_2021_pss10` + `graves_2021_brief_cope` (38,011), `roy_2024_phq9` +
+  `roy_2024_sas_sv` (19,361) -- 121,130 responses. All 14 dictionary rows are
+  staged in `dictionary_auto.csv`. No item text ships with this batch, so
+  `irw_output/` alone goes up and no provenance row gets stamped.
+
+- [ ] **HLQ item text is one rights call away from being free (Ben).** The
+  Nolte deposit carries all 44 HLQ items in the administered German wording in
+  its SPSS variable labels, plus both anchor sets in German -- the cheap case,
+  and it would satisfy the administered-language columns with no translation
+  step. The HLQ is licensed by Deakin University and has no entry in
+  `itemtext/instrument_rights_register.csv`. This is the highest-value item
+  text blocked on rights in this batch; the SCS/CSES call below is worth less
+  because that deposit's labels are English glosses anyway.
+
+- [ ] **Two author queries worth sending from the Roy deposit**
+  (`10.1371/journal.pone.0315687`): its PSS-4 block cannot be reconciled with
+  the score the paper analysed (see BATCH_LOG.md 2026-09-20 cont. 4), and its
+  ISI block is entirely empty in the deposit. Both would be recoverable data.
+
+- [ ] **29 of the 38 open-licensed leads still unworked** (cc-by/cc0, N>=100) out of the
   98-row `human_assistance` bucket — 44 `recoverable_format` + 14
   `worth_retrying` before the license and N gates. The full ranked list is in
   `BATCH_LOG.md` (2026-09-20), because `runs/` is gitignored. Worked so far: `pone.0205389` and
   `pone.0246339` shipped, `pone.0167571` rejected as aggregate-only (see
   BATCH_LOG.md). `pone.0190771` (3 tables) and `pone.0276082` (16 tables) also shipped.
-  Next unworked by size: `pone.0349016` (figshare, smartphone addiction +
-  sleep, 1,842 x 17, CC BY verified on the figshare record), `pone.0256686`
-  (CAPE-P15, 1,594 x 72), `pone.0323124` (parental rejection / cyberbullying,
-  1,567 x 82). Most are RULE 10b
+  Also worked: `pone.0172340` (9 tables), `pone.0349016` (1),
+  `pone.0255634` (2), `pone.0315687` (2). Next unworked by size:
+  `pone.0256686` (CAPE-P15, 1,594 x 72) and `pone.0284383` -- for both, the
+  triage row's SI file index is wrong (`s001` is a TIFF figure and a PDF
+  respectively), so enumerate `extract_si_files()` before downloading --
+  then `pone.0323124` (parental rejection / cyberbullying, 1,567 x 82). Most are RULE 10b
   `resp_scale_mixed`, i.e. one questionnaire carrying several instruments —
   re-read by block prefix and ship one file per scale.
 
