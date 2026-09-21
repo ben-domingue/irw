@@ -3,6 +3,21 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## From the 2026-09-21 repos weekly batch
+
+- [ ] **DVN/QQ369L** (Vietnam 2026 National Assembly Election voter survey,
+  cc0) — `human_assistance`, unclassified by this routine. No column met the
+  id heuristic; row position was used as a fallback person id. Needs a human
+  to confirm one row per respondent before it's trusted.
+- [ ] **DVN/OHBD3D** ("Old Friends or New Connections?" social
+  interaction/well-being, cc0, N=305) — `human_assistance`, unclassified by
+  this routine. `resp` has >50 unique values post-melt, likely
+  continuous/aggregate rather than ordinal item responses.
+- [ ] **Dryad 10.5061/dryad.hx3ffbgvs** (gaming motivation among college
+  students) — `download_failed` (401 Unauthorized). Retryable; left out of
+  `repo_triage_seen_keys.csv` so a later run picks it up automatically. No
+  action needed unless it keeps failing.
+
 ## From the 2026-09-20 recycled-term PMC sweep
 
 - [x] **25 actionable leads triaged into `pmc_leads_2026-09-20.csv`**
