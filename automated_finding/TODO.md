@@ -121,6 +121,21 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   `dictionary_auto.csv` rows reach the sheet via `metadata/02_biblio.R` on the
   next pipeline run.
 
+- [x] **Tags staged for all 35 tables of this batch** (2026-09-20). This was
+  missed on both the 21-table and 14-table handoffs -- the dictionary rows went
+  in and the tag rows did not -- and was caught only when ben asked. 35
+  `claude-auto` rows in `tags/tags_auto.csv`, filling the four columns that
+  currently publish per `tags/scoring/results_comparison_2026-09-03.txt`
+  (`primary language(s)`, `item format`, `measurement tool`, and the SETTING
+  facet of `sample`); the held columns are left blank. `Rscript
+  tests/test_tags_union.R` passes. Recruitment channel was read from each
+  paper's Methods rather than guessed: Qualtrics panels for `bentall`/`enders`
+  (`Internet-based`), health-insurance + chronic-condition recruitment for
+  `nolte` (`Clinical`), students for `li`/`graves`/`roy` (`Educational`), and
+  blank for `simo_sanz` and `coroiu_2018_*` -- the latter was face-to-face
+  interviewing in participants' homes by a survey institute, which no SETTING
+  atom names.
+
 - [ ] **14 tables need uploading** (a second batch, after the 21 already up):
   nine `nolte_2017_hlq_*` (45,338), `li_2026_sas_sv` (18,420),
   `graves_2021_pss10` + `graves_2021_brief_cope` (38,011), `roy_2024_phq9` +
