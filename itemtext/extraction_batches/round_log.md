@@ -22573,3 +22573,53 @@ check_provenance passes (1490 rows / 294 files; the one `mixed` REVIEW line is p
   constructed rather than raw. Worth a response-data issue independent of item text.
 
 Cap (`batch_299`) not reached; queue has 31 pending, 0 in_progress.
+
+## batch_289 — 2026-09-20 17:0x
+
+3 tables claimed, all three from the SAME source deposit (Harvard Dataverse
+doi:10.7910/DVN/LXKJIV, Goldberg's ESCS Behavioral Report Inventory, CC0 1.0).
+
+**written 3 / blocked 0 / failed 0 — yield 3/3 (100%).**
+
+| table | rows | mapping_basis | gate |
+|---|---|---|---|
+| goldberg_2018_bri_bri  | 2000 (400 items x 5) | data_labels | PASS |
+| goldberg_2018_bri_feel | 120 (24 x 5)         | data_labels | PASS |
+| goldberg_2018_bri_food | 100 (20 x 5)         | data_labels | PASS |
+
+All four gates clean: audit_batch 3 PASS / 0 WARN, verify_batch 3
+MISSING(exempt) (all data_labels), lint_verification 3 rows no problems,
+irw-validate ok on all three, check_provenance clean for this batch (its one
+REVIEW line, `ye_2025_q25_scale` translation_source=mixed, is pre-existing and
+unrelated). normalize_nulls fixed bri_bri only. Three NOT_NEEDED rows written
+into BOTH verification_merged.csv and mapping_verification.csv.
+
+Notable — why this round was easy: the deposit ships `BRI_items.txt`, the
+study's own SPSS `variable labels` / `value labels` syntax, and
+`data/goldberg_2018_escs.py` melts `BRI.tab` with no rename, so the IRW item
+code IS the source column name on all three tables (derivation pattern 1). No
+mapping was inferred anywhere in this batch. This is the embedded-label case
+SKILL.md tells agents to prefer, and it is worth noting that the remaining
+`goldberg_2018_bri_ofood` and `goldberg_2018_sbo` sit on the same deposit.
+
+Step 5b orchestrator re-checks — both public notes confirmed, numbers exact:
+- bri_feel, "the four positively worded items are stored RAW": the top four
+  item means are exactly feel5 4.3, feel17 4.2, feel14 4.0, feel10 3.9, with a
+  clear gap to the next item (feel13, 2.5) and a floor item feel12 ("Thought
+  about killing myself.") at 1.1. Confirmed as written.
+- bri_food, "resp=5 is Not Applicable, used at 0.1-11.1%": confirmed exactly —
+  food18 ("Use yogurt instead of sour cream?") 11.08% highest, food15 ("Eat at
+  least two vegetables ... at dinner?") 0.13% lowest.
+- bri_bri option_text carries one option set per resp level, no padded numeric
+  anchors, 400 distinct items / 2000 rows.
+
+Source-document caveats, disclosed in notes.csv rather than silently resolved:
+bri_bri's BRI.pdf is internally inconsistent about which category holds exactly
+15 occurrences (page 1 says 4, the running header on pp.2-16 and the SPSS value
+labels say 5) — page 1's definitional wording ships. bri_feel's PDF has no text
+layer and was transcribed from the page image, and its administered form drops
+a "that" the SPSS label carries on FEEL11; the administered wording ships.
+bri_food follows the printed form over two defective SPSS labels ("rolles",
+and food20 truncated at the SPSS character cap).
+
+Cap (batch_299) not reached. 28 pending rows remain.
