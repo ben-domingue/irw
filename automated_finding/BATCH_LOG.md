@@ -15038,3 +15038,52 @@ before they are worth anything.
 
 **Leads are unworked as of this entry.** Discovery, triage and Step 2b are
 done; no `data/*.py` script has been written from this batch yet.
+
+### 2026-09-20 (cont.) — first three leads worked: 2 tables / 104,502 responses
+
+Top of the ranked list, opened rather than counted. All three are CC BY 4.0,
+verified on the article page and again in Crossref metadata, and each deposit
+has exactly one tabular SI file, so there was no wrong-file risk.
+
+**Shipped (2 tables, 104,502 responses):**
+
+- `simo_sanz_2018_spai` — **76,908 responses, 2,958 ids, 26 items.**
+  Simó-Sanz et al. 2018, `10.1371/journal.pone.0205389`. The Spanish SPAI,
+  i1..i26 on 1-4, complete for every respondent, shipped as `SPAI_1..SPAI_26`
+  with 18 demographic/usage covariates. `SPAI_tot`, `SPAI_FINAL` and the four
+  factor scores are composites of those 26 items and are dropped.
+  *Item text: not shipped.* Both label levels checked and both effectively
+  empty — the `.sav` has **no** variable labels at all (0 of 52 columns) and
+  value labels for exactly one variable (`estudios`, an education covariate).
+  The administered Spanish wording is printed item-by-item in the article's own
+  Table 2; a later pass should start there rather than re-derive this.
+
+- `bentall_2021_over_purchasing` — **27,594 responses, 3,066 ids, 9 items.**
+  Bentall et al. 2021, `10.1371/journal.pone.0246339`. *Item text: shipped*
+  (variable labels give each item's object, value labels give all five anchors,
+  and the shared stem is quoted verbatim from the Measures section). Gates:
+  `validate_items.R` PASS on both sets, `audit_batch.R` PASS with no anomalies,
+  `irw-validate` clean, per-item issues scan clean — no `itemtext_issues.qmd`
+  entry owed. `mapping_verification.csv` row is `data_labels` / `NOT_NEEDED`.
+
+**Rejected (1):** `10.1371/journal.pone.0167571` (Duarte et al. 2017, shame and
+eating behaviours, triaged `recoverable_format` at 2,236 x 20) is **aggregate-
+only**. Every one of its 23 columns is a subscale total — `DASS21_Depression`,
+`WEMWBS`, `WFES`, `WFFSCRS_*`, `TFEQ_*` — with no constituent items anywhere in
+the deposit. Nothing to ship. This is the third instance in this log of a
+`n_items` count that counts columns rather than instrument items, and is why
+the 38-lead list above should be read as leads, not as tables.
+
+**QC.** `run_qc()` run on both outputs with source-documented `permitted_values`
+(1-4 and 1-5) and explicit `item_constructs`: **0 fails**. One
+`imputed_values*` warning each — `SPAI_18` at 60% and `Stock_2` (Water) at 69%
+— and both are floor effects at the scale minimum, not imputation: the modal
+value is the bottom anchor in both cases, every value is an integer, and mean
+imputation would have produced a fractional constant. Both scripts assert
+integrality and on-scale membership, and balance their books (every source
+column is an item, a covariate, a named composite, or a named drop, asserted).
+
+`bentall`'s `gender` column is dropped rather than guessed at: it carries 536
+zeros and three `-99`s that the file's own value labels do not define (they run
+1..5). The depositors' own clean binary `Gender_b` is carried as `cov_gender`
+instead.

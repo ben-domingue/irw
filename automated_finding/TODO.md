@@ -96,13 +96,23 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
 ## From the 2026-09-20 PLOS recycled-term sweep
 
-- [ ] **38 open-licensed leads unworked** (cc-by/cc0, N>=100) out of the
+- [ ] **2 tables + 1 item text table need uploading/pasting.**
+  `irw_output/simo_sanz_2018_spai.csv` (76,908 responses) and
+  `irw_output/bentall_2021_over_purchasing.csv` (27,594) go to the newest
+  shard; `itemtext_output/bentall_2021_over_purchasing__items.csv` goes to
+  `irw_text` **after** the response tables are live. Both dictionary rows are
+  staged in `dictionary_auto.csv` (no pasting needed since #1732). Once Ben
+  confirms, stamp `uploaded=<date>` on the `bentall` row in
+  `itemtext_provenance.csv` and in `itemtext/mapping_verification.csv`. The
+  `simo_sanz` provenance row is a not-shipped record and stays unstamped.
+
+- [ ] **35 of the 38 open-licensed leads still unworked** (cc-by/cc0, N>=100) out of the
   98-row `human_assistance` bucket — 44 `recoverable_format` + 14
   `worth_retrying` before the license and N gates. The full ranked list is in
-  `BATCH_LOG.md` (2026-09-20), because `runs/` is gitignored. Largest first:
-  `pone.0246339` (pandemic buying, 3,066 x 47), `pone.0205389` (SPAI
-  smartphone addiction, 2,958 x 43), `pone.0190771` (German Self-Compassion
-  Scale, 2,448 x 55), `pone.0167571` (shame/self-criticism/eating, 2,236 x 20),
+  `BATCH_LOG.md` (2026-09-20), because `runs/` is gitignored. Worked so far: `pone.0205389` and
+  `pone.0246339` shipped, `pone.0167571` rejected as aggregate-only (see
+  BATCH_LOG.md). Next unworked by size: `pone.0190771` (German
+  Self-Compassion Scale, 2,448 x 55), 
   `pone.0276082` (conspiracy beliefs, CC0, 2,065 x 241). Most are RULE 10b
   `resp_scale_mixed`, i.e. one questionnaire carrying several instruments —
   re-read by block prefix and ship one file per scale.
