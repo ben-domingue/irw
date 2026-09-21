@@ -44,6 +44,7 @@ FILE_TABLE_MAP = {
     "itemtext_metadata": "itemtext_metadata",  # 08_itemtext.R, 2026-08-02
     "collections": "collections",                # 10_collections.R, issue #1633
     "collection_members": "collection_members",  # 10_collections.R, issue #1633
+    "construct_descriptions": "construct_descriptions",  # 03b_describe.R, #1406/#2308
 }
 
 SRC = next(p for p in Path(__file__).resolve().parents if (p / "red_up").is_dir())

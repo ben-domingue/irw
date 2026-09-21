@@ -125,6 +125,7 @@ if [[ ! -f "$METADATA_DIR/01_metadata.R" ]]; then
 fi
 
 declare -A STAGE_SCRIPT=( [01]=01_metadata.R [02]=02_biblio.R [03]=03_tags.R
+                          [03b]=03b_describe.R
                           [05]=05_comps.R [06]=06_nominal.R [07]=07_simsyn.R
                           [08]=08_itemtext.R [10]=10_collections.R
                           [11]=11_status.R [12]=12_stragglers.R
@@ -142,6 +143,7 @@ declare -A STAGE_OUTPUTS=(
   [01]="metadata.csv"
   [02]="biblio.csv comps_biblio.csv nominal_biblio.csv simsyn_biblio.csv"
   [03]="tags.csv nominal_tags.csv"
+  [03b]="construct_descriptions.csv"
   [05]="comps_metadata.csv"
   [06]="nominal_metadata.csv"
   [07]="simsyn_metadata.csv"
@@ -151,6 +153,13 @@ declare -A STAGE_OUTPUTS=(
   [12]=""   # writes straggler_watch.tsv -- reported separately below
   [09]=""   # writes JSON, not a keyed CSV -- reported separately below
 )
+# 03b is a REGISTERED stage but deliberately NOT in the default order, so
+# `run_pipeline.sh 03b` works while the weekly run does not call it. It is the
+# only stage that contacts a model, so it is the only one with a per-run cost,
+# and #1406 is paused on that cost being ben-domingue's decision. Putting it
+# here would make the Monday Action start spending without anyone choosing to.
+# It joins this list when #1406 is unpaused -- one word, and the wiring is
+# already done (#2308).
 DEFAULT_ORDER=(01 02 03 05 06 07 08 10 11 12 09)
 
 # Join key for the diff, per output file. Everything is keyed on `table` except
