@@ -94,6 +94,101 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   OSF links) are social-network and VR-trial data and were deliberately left
   for last.
 
+## From the 2026-09-20 PLOS recycled-term sweep
+
+- [ ] **Permissions outreach is now a tracked programme: irw#2331.** The four
+  rights calls and the author-query items scattered through this file are
+  folded into it -- Class A (instrument wording, 72 blocked register rows),
+  Class B (data licensing, the 28 standing `license_blocked_candidates.csv`
+  rows + 17 OSF rows + ANES follow-up), Class C (data clarification: Roy,
+  Enders, Sanchez, zenodo.16310936, the two anonymous-author deposits),
+  Class D (the zenodo.10069489 PII disclosure, which should not queue behind
+  the rest). Templates and the standing `outreach_log.csv` are in
+  `processing_notes/outreach/`. Next concrete step is the by-hand triage of the
+  72 block/escalate rows into commercial / controlled / academic, then
+  `sweep_instrument_rights.py` for a tables-gated count to rank by.
+
+- [ ] **The second PSS-4 administration in `enders_2022_*` is unexplained.**
+  The Qualtrics export carries the PSS-4 block twice; the copies genuinely
+  disagree (44-83% of rows per item, item-wise correlations
+  +0.64/-0.54/-0.58/+0.75), so it is two real administrations rather than a
+  duplicated upload. Nothing in the README, `Analyses.do` or the article says
+  what the second one is, so only the first shipped. If it is a retest it is a
+  free second `wave` on 2,054 respondents. Worth one author email.
+
+- [ ] **Rights call needed on two instruments before their item text can ship
+  (Ben).** Neff's Self-Compassion Scale and Judge et al.'s Core Self-Evaluations
+  Scale have no entry in `itemtext/instrument_rights_register.csv`, and
+  `coroiu_2018_scs` / `coroiu_2018_cses` are now live candidates. Note this is
+  moot until the German wording is obtained anyway -- the deposit's labels are
+  English glosses -- so it is not blocking the response tables.
+
+- [x] **21 tables + 1 item text table uploaded** (ben-domingue, confirmed
+  2026-09-20): `simo_sanz_2018_spai` (76,908), `bentall_2021_over_purchasing`
+  (27,594), three `coroiu_2018_*` (114,775) and sixteen `enders_2022_*`
+  (213,468) -- 432,745 responses. `bentall_2021_over_purchasing__items.csv`
+  went up with them and is stamped `uploaded=2026-09-20` in both
+  `itemtext_provenance.csv` and `itemtext/mapping_verification.csv`. The other
+  20 provenance rows are not-shipped records and stay unstamped. The 21
+  `dictionary_auto.csv` rows reach the sheet via `metadata/02_biblio.R` on the
+  next pipeline run.
+
+- [x] **Tags staged for all 35 tables of this batch** (2026-09-20). This was
+  missed on both the 21-table and 14-table handoffs -- the dictionary rows went
+  in and the tag rows did not -- and was caught only when ben asked. 35
+  `claude-auto` rows in `tags/tags_auto.csv`, filling the four columns that
+  currently publish per `tags/scoring/results_comparison_2026-09-03.txt`
+  (`primary language(s)`, `item format`, `measurement tool`, and the SETTING
+  facet of `sample`); the held columns are left blank. `Rscript
+  tests/test_tags_union.R` passes. Recruitment channel was read from each
+  paper's Methods rather than guessed: Qualtrics panels for `bentall`/`enders`
+  (`Internet-based`), health-insurance + chronic-condition recruitment for
+  `nolte` (`Clinical`), students for `li`/`graves`/`roy` (`Educational`), and
+  blank for `simo_sanz` and `coroiu_2018_*` -- the latter was face-to-face
+  interviewing in participants' homes by a survey institute, which no SETTING
+  atom names.
+
+- [ ] **14 tables need uploading** (a second batch, after the 21 already up):
+  nine `nolte_2017_hlq_*` (45,338), `li_2026_sas_sv` (18,420),
+  `graves_2021_pss10` + `graves_2021_brief_cope` (38,011), `roy_2024_phq9` +
+  `roy_2024_sas_sv` (19,361) -- 121,130 responses. All 14 dictionary rows are
+  staged in `dictionary_auto.csv`. No item text ships with this batch, so
+  `irw_output/` alone goes up and no provenance row gets stamped.
+
+- [ ] **HLQ item text is one rights call away from being free (Ben).** The
+  Nolte deposit carries all 44 HLQ items in the administered German wording in
+  its SPSS variable labels, plus both anchor sets in German -- the cheap case,
+  and it would satisfy the administered-language columns with no translation
+  step. The HLQ is licensed by Deakin University and has no entry in
+  `itemtext/instrument_rights_register.csv`. This is the highest-value item
+  text blocked on rights in this batch; the SCS/CSES call below is worth less
+  because that deposit's labels are English glosses anyway.
+
+- [ ] **Two author queries worth sending from the Roy deposit**
+  (`10.1371/journal.pone.0315687`): its PSS-4 block cannot be reconciled with
+  the score the paper analysed (see BATCH_LOG.md 2026-09-20 cont. 4), and its
+  ISI block is entirely empty in the deposit. Both would be recoverable data.
+
+- [ ] **29 of the 38 open-licensed leads still unworked** (cc-by/cc0, N>=100) out of the
+  98-row `human_assistance` bucket — 44 `recoverable_format` + 14
+  `worth_retrying` before the license and N gates. The full ranked list is in
+  `BATCH_LOG.md` (2026-09-20), because `runs/` is gitignored. Worked so far: `pone.0205389` and
+  `pone.0246339` shipped, `pone.0167571` rejected as aggregate-only (see
+  BATCH_LOG.md). `pone.0190771` (3 tables) and `pone.0276082` (16 tables) also shipped.
+  Also worked: `pone.0172340` (9 tables), `pone.0349016` (1),
+  `pone.0255634` (2), `pone.0315687` (2). Next unworked by size:
+  `pone.0256686` (CAPE-P15, 1,594 x 72) and `pone.0284383` -- for both, the
+  triage row's SI file index is wrong (`s001` is a TIFF figure and a PDF
+  respectively), so enumerate `extract_si_files()` before downloading --
+  then `pone.0323124` (parental rejection / cyberbullying, 1,567 x 82). Most are RULE 10b
+  `resp_scale_mixed`, i.e. one questionnaire carrying several instruments —
+  re-read by block prefix and ship one file per scale.
+
+- [ ] **24 `aggregate_continuous` rows need a composite-vs-continuous call.**
+  Not yet adjudicated; some will be genuine per-item continuous responses and
+  some will be subscale totals. All 24 are listed in `BATCH_LOG.md`
+  (2026-09-20 cont. 3), so this no longer depends on anything in `runs/`.
+
 ## From the 2026-09-19 PMC tail measurement
 
 - [x] **The unaudited PMC seen-DOI tail is closed, measured not skipped.**
@@ -194,17 +289,12 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   (`processing_notes/Licensing.txt` has the template shape). See BATCH_LOG.md
   2026-09-08b.
 
-- [ ] **Tatala 2023 item text: UNPARKED, both tables ready to extract**
-  (ben-domingue, 2026-09-20). Both rights questions are now answered and
-  registered in `itemtext/instrument_rights_register.csv`: the UCLA
-  Loneliness Scale is `ship` on the quote test, and the Religious Experience
-  Scale is `ship` on the originator basis -- this paper's first author is an
-  author of the RES and published it in a CC BY article, so the rights holder
-  is the one who released it openly. Both `tatala_2023_ucla_loneliness` and
-  `tatala_2023_religious_experience` already have verbatim English stems in
-  the deposit's SPSS variable labels and item codes that match the response
-  tables exactly, so this is a `data_labels` extraction with no
-  reconstruction: cheap, and the cheapest itemtext work currently queued.
+- [x] **Tatala 2023 item text: ALREADY RULED, no call needed** (noticed
+  2026-09-20). `instrument_rights_register.csv` carries "Religious Experience
+  Scale (RES, 17 items), Tatala et al." as `verdict=ship`, and the UCLA
+  Loneliness Scale as `ship` too. Both tables can be extracted whenever an
+  itemtext pass picks them up; this was queued as an open question for
+  ben-domingue in error.
 
 ## From the 2026-09-02 monthly repos sweep
 

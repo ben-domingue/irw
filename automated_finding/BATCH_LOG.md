@@ -14955,3 +14955,319 @@ Promoted to tracked top-level files, the same class as
 
 The general rule is now written into the skill's "where files live" section
 rather than left as this batch's lesson.
+
+## 2026-09-20 — PLOS recycled-term sweep: 0 good, but 38 open-licensed leads out of the `human_assistance` bucket
+
+Run: `irw_discover_plos.py`, plosone only, 24 terms, 498 candidates,
+`runs/plos_recycled_2026-09-20_triage.csv`. Terms are **recycled**, per the
+term-selection rule: every one was drawn from `search_terms_log.csv` rows whose
+`file` never mentions PLOS, and none collides case-insensitively with a prior
+`plos_batch*` row. The unused-for-PLOS pool stands at 2,233 unique terms
+(848 of them English-looking), so this is nowhere near exhausted.
+
+Dedup did real work before any network call: 2,605 DOIs excluded as already in
+the dictionary or already logged in `human_review/`, plus 4,943 already in
+`plos_seen_dois.csv`.
+
+**Triage flags (498):** 305 `no_usable_file`, 98 `human_assistance`,
+40 `below_min_n`, 17 `external_unresolved`, 15 `download_failed`,
+11 `not_item_response`, 8 `pii_suspected`, 3 `already_in_irw`, 1 `timeout`.
+**0 `good`** — which is now the third PLOS/PMC run running in a row to report
+zero, and is again not the real yield figure.
+
+**Step 2b ran** (`irw_retriage_ha.py`), sub-classifying the 98:
+44 `recoverable_format`, 24 `aggregate_continuous`, 14 `worth_retrying`,
+9 `human_review`, 7 `not_item_response`. The 9 `human_review` rows archived
+themselves to `human_review/human_review_plos_2026-09-20.csv`.
+
+The `recoverable_format` bucket is dominated by RULE 10b (`resp_scale_mixed`
+with `n_participants >= 100`) — one questionnaire carrying several instruments
+on different response scales, which `datastandard.md` answers with one file per
+scale. That is the same shape that turned the whole 2026-09-01 bucket into 21
+tables and the 2026-09-08 bucket into 35, so "0 good" should not be read as a
+dry run.
+
+**38 leads are open-licensed with N >= 100** (cc-by/cc0, `recoverable_format`
+or `worth_retrying`). `runs/` is gitignored, so the actionable list is recorded
+here rather than in a committed CSV:
+
+| DOI | Title | Lic | N | items | bucket |
+|---|---|---|---|---|---|
+| 10.1371/journal.pone.0246339 | Pandemic buying: Testing a psychological model of over-pur | cc-by | 3066 | 47 | recoverable_format |
+| 10.1371/journal.pone.0205389 | Smartphone Addiction Inventory (SPAI): Translation, adapta | cc-by | 2958 | 43 | recoverable_format |
+| 10.1371/journal.pone.0190771 | Structural validation of the Self-Compassion Scale with a  | cc-by | 2448 | 55 | recoverable_format |
+| 10.1371/journal.pone.0167571 | The Impact of Shame, Self-Criticism and Social Rank on Eat | cc-by | 2236 | 20 | recoverable_format |
+| 10.1371/journal.pone.0276082 | On the relationship between conspiracy theory beliefs, mis | cc0 | 2065 | 241 | recoverable_format |
+| 10.1371/journal.pone.0349016 | Network analysis of smartphone addiction and sleep disorde | cc-by | 1842 | 17 | recoverable_format |
+| 10.1371/journal.pone.0256686 | The Community Assessment of Psychic Experiences-Positive s | cc-by | 1594 | 72 | recoverable_format |
+| 10.1371/journal.pone.0323124 | From home to the screen: How parental rejection fuels cybe | cc-by | 1567 | 82 | recoverable_format |
+| 10.1371/journal.pone.0332417 | Individual differences in feelings of certainty surroundin | cc-by | 1242 | 34 | recoverable_format |
+| 10.1371/journal.pone.0268838 | How many cyberbullying(s)? A non-unitary perspective for o | cc-by | 1228 | 25 | worth_retrying |
+| 10.1371/journal.pone.0172340 | German translation, cultural adaptation, and validation of | cc-by | 1058 | 52 | recoverable_format |
+| 10.1371/journal.pone.0255634 | Gender differences in perceived stress and coping among co | cc-by | 1055 | 68 | recoverable_format |
+| 10.1371/journal.pone.0315687 | Prevalence and predictors of functional gastrointestinal d | cc-by | 1019 | 54 | recoverable_format |
+| 10.1371/journal.pone.0294777 | University makes me angry: Investigating stimulus-response | cc-by | 621 | 69 | recoverable_format |
+| 10.1371/journal.pone.0284383 | Medical decision making beyond evidence: Correlates of bel | cc-by | 599 | 24 | recoverable_format |
+| 10.1371/journal.pone.0330146 | Development of a COVID-19 Vaccination Anxiety Scale to mea | cc-by | 500 | 96 | recoverable_format |
+| 10.1371/journal.pone.0255750 | Anxious temperament and cyberchondria as mediated by fear  | cc-by | 499 | 13 | recoverable_format |
+| 10.1371/journal.pone.0272803 | A network analysis of problematic smartphone use in Japane | cc-by | 487 | 13 | recoverable_format |
+| 10.1371/journal.pone.0289559 | Trait anxiety and depressive rumination mediate the effect | cc-by | 447 | 9 | recoverable_format |
+| 10.1371/journal.pone.0288386 | No relations between executive functions and dimensional m | cc-by | 440 | 5 | recoverable_format |
+| 10.1371/journal.pone.0176924 | Assessment of the accuracy of a new tool for the screening | cc-by | 415 | 35 | worth_retrying |
+| 10.1371/journal.pone.0267321 | Psychometric properties of the Arabic version of the Exist | cc-by | 400 | 48 | worth_retrying |
+| 10.1371/journal.pone.0133907 | Which and How Many Patients Should Be Included in Randomis | cc-by | 395 | 10 | worth_retrying |
+| 10.1371/journal.pone.0324075 | Relationships between fatigue severity scale (FSS)/ scale  | cc-by | 374 | 36 | recoverable_format |
+| 10.1371/journal.pone.0264497 | Traumatic stress, depression, and non-bereavement grief fo | cc-by | 328 | 130 | recoverable_format |
+| 10.1371/journal.pone.0183467 | Relationship between parenting stress and informant discre | cc-by | 299 | 37 | recoverable_format |
+| 10.1371/journal.pone.0278092 | Translation and psychometric evaluation of Smartphone Addi | cc-by | 279 | 17 | recoverable_format |
+| 10.1371/journal.pone.0172471 | An empirical examination of the factor structure of compas | cc-by | 206 | 82 | recoverable_format |
+| 10.1371/journal.pone.0255460 | Relationship between interoceptive sensibility and somatof | cc-by | 205 | 18 | recoverable_format |
+| 10.1371/journal.pone.0186536 | Family functioning, parenting stress and quality of life i | cc-by | 202 | 13 | recoverable_format |
+| 10.1371/journal.pone.0256001 | Complementary treatment comparison for chronic pain manage | cc-by | 200 | 91 | worth_retrying |
+| 10.1371/journal.pone.0263821 | Antiepileptic drug adherence in children in southern Ethio | cc-by | 192 | 61 | recoverable_format |
+| 10.1371/journal.pone.0135377 | Smokers Show Lower Levels of Psychological Well-Being and  | cc-by | 181 | 276 | recoverable_format |
+| 10.1371/journal.pone.0137081 | Heterogeneous Determinants of Quality of Life in Different | cc-by | 157 | 34 | recoverable_format |
+| 10.1371/journal.pone.0222929 | Cognitive impairment in multiple sclerosis: An exploratory | cc-by | 150 | 39 | recoverable_format |
+| 10.1371/journal.pone.0229771 | Validation of the Dutch version of the primary care resour | cc-by | 144 | 2 | worth_retrying |
+| 10.1371/journal.pone.0248409 | Emotion regulation, mindfulness, and self-compassion among | cc-by | 129 | 174 | worth_retrying |
+| 10.1371/journal.pone.0357496 | Polish adaptation and validation of the sustainable career | cc-by | 128 | 9 | recoverable_format |
+Not on that list and deliberately so: 16 `unknown` / 2 `no-license` rows in the
+same two buckets (license gate — not verified open, so not worked), and the 24
+`aggregate_continuous` rows, which need a composite-vs-continuous call each
+before they are worth anything.
+
+**Leads are unworked as of this entry.** Discovery, triage and Step 2b are
+done; no `data/*.py` script has been written from this batch yet.
+
+### 2026-09-20 (cont.) — first three leads worked: 2 tables / 104,502 responses
+
+Top of the ranked list, opened rather than counted. All three are CC BY 4.0,
+verified on the article page and again in Crossref metadata, and each deposit
+has exactly one tabular SI file, so there was no wrong-file risk.
+
+**Shipped (2 tables, 104,502 responses):**
+
+- `simo_sanz_2018_spai` — **76,908 responses, 2,958 ids, 26 items.**
+  Simó-Sanz et al. 2018, `10.1371/journal.pone.0205389`. The Spanish SPAI,
+  i1..i26 on 1-4, complete for every respondent, shipped as `SPAI_1..SPAI_26`
+  with 18 demographic/usage covariates. `SPAI_tot`, `SPAI_FINAL` and the four
+  factor scores are composites of those 26 items and are dropped.
+  *Item text: not shipped.* Both label levels checked and both effectively
+  empty — the `.sav` has **no** variable labels at all (0 of 52 columns) and
+  value labels for exactly one variable (`estudios`, an education covariate).
+  The administered Spanish wording is printed item-by-item in the article's own
+  Table 2; a later pass should start there rather than re-derive this.
+
+- `bentall_2021_over_purchasing` — **27,594 responses, 3,066 ids, 9 items.**
+  Bentall et al. 2021, `10.1371/journal.pone.0246339`. *Item text: shipped*
+  (variable labels give each item's object, value labels give all five anchors,
+  and the shared stem is quoted verbatim from the Measures section). Gates:
+  `validate_items.R` PASS on both sets, `audit_batch.R` PASS with no anomalies,
+  `irw-validate` clean, per-item issues scan clean — no `itemtext_issues.qmd`
+  entry owed. `mapping_verification.csv` row is `data_labels` / `NOT_NEEDED`.
+
+**Rejected (1):** `10.1371/journal.pone.0167571` (Duarte et al. 2017, shame and
+eating behaviours, triaged `recoverable_format` at 2,236 x 20) is **aggregate-
+only**. Every one of its 23 columns is a subscale total — `DASS21_Depression`,
+`WEMWBS`, `WFES`, `WFFSCRS_*`, `TFEQ_*` — with no constituent items anywhere in
+the deposit. Nothing to ship. This is the third instance in this log of a
+`n_items` count that counts columns rather than instrument items, and is why
+the 38-lead list above should be read as leads, not as tables.
+
+**QC.** `run_qc()` run on both outputs with source-documented `permitted_values`
+(1-4 and 1-5) and explicit `item_constructs`: **0 fails**. One
+`imputed_values*` warning each — `SPAI_18` at 60% and `Stock_2` (Water) at 69%
+— and both are floor effects at the scale minimum, not imputation: the modal
+value is the bottom anchor in both cases, every value is an integer, and mean
+imputation would have produced a fractional constant. Both scripts assert
+integrality and on-scale membership, and balance their books (every source
+column is an item, a covariate, a named composite, or a named drop, asserted).
+
+`bentall`'s `gender` column is dropped rather than guessed at: it carries 536
+zeros and three `-99`s that the file's own value labels do not define (they run
+1..5). The depositors' own clean binary `Gender_b` is carried as `cov_gender`
+instead.
+
+### 2026-09-20 (cont. 2) — two more deposits: 19 tables / 328,243 responses
+
+**`coroiu_2018_*` — 3 tables, 114,775 responses.** Coroiu et al. 2018,
+`10.1371/journal.pone.0190771`, N=2,448 German general population. The data is
+on OSF, not in the article, so the licence was verified **on the node itself**
+via the OSF API (`public=true`, CC-By Attribution 4.0) rather than inherited
+from the PLOS article — the article's CC BY says nothing about an external
+deposit. Three instruments at item level, one file each:
+`coroiu_2018_scs` (Self-Compassion Scale, 26 items, 1-5; 63,501),
+`coroiu_2018_cses` (Core Self-Evaluations, 12 items, 1-5; 29,297),
+`coroiu_2018_phq9` (PHQ-9, 9 items, 0-3; 21,977). The GAD-2 is two items, which
+is not a scale, so it rides as two covariates.
+
+**`enders_2022_*` — 16 tables, 213,468 responses.** Enders, Uscinski, Klofstad &
+Stoler 2022, `10.1371/journal.pone.0276082`, N=2,055 US adults, **CC0** verified
+on the OSF node. Sixteen instruments ride in one survey.
+
+Built from the deposit's **raw Qualtrics export, not its `Clean Data.dta`** —
+the README calls the latter "the 'clean' (i.e., recoded) dataset", and
+`Analyses.do` lines 401-402 reverse-code two PSS-4 items into it
+(`replace pss4_2 = (pss4_2 * -1) + 4`). `datastandard.md` says not to recode
+reverse-scored items, so the raw export is the correct source. This is the
+general lesson: **on a deposit that ships both, "clean" is a claim about the
+authors' analysis, not about the data, and the file name is the only warning
+you get.**
+
+Three findings worth carrying:
+
+- **The Dark Triad block is three constructs, not one.** It first shipped as a
+  single 12-item table; `run_qc()`'s `multi_scale*` warning flagged the three
+  repeated prefixes, and the deposit's own `Analyses.do` settles it — it enters
+  `manipulate`, `narcissism` and `psychopathy` as three separate predictors, never
+  a composite. Split into three 4-item tables on that evidence. This is what the
+  warning is for: the prefixes alone would not have justified the split, and the
+  source-side model specification did.
+- **`COVCONS_8`, `MISC_9` and `VICTIM_5` are single-valued** across all 2,055
+  respondents — embedded attention checks ("select 'agree'"), not responses.
+  Dropped, with the degeneracy asserted in the script rather than assumed.
+- **The PSS-4 block appears twice in the export** (`PSS4_1..4` and a second
+  copy). The two copies genuinely disagree — 44% to 83% of rows differ per item,
+  item-wise correlations +0.64/-0.54/-0.58/+0.75 — so this is two real
+  administrations, not a duplicated upload (cf. the "zero disagreement =
+  duplication" rule, which correctly does *not* fire here). Nothing in the
+  README, the `.do` or the article says what the second one is, so only the
+  first ships and the second is left alone rather than invented into a `wave`.
+  Carried in TODO.md.
+
+`ZIP` is present in the raw export and deliberately not carried. It is not a
+PII-skip under the pipeline rule (no names, emails, birthdates, IP/GPS or
+national IDs), but ZIP alongside `YEARBORN` and gender is quasi-identifying and
+has no psychometric value, so it stays out of the output.
+
+**QC.** `run_qc()` on all 19 with source-documented `permitted_values` and
+explicit `item_constructs`: **0 fails.** Three `imputed_values*` warnings, all
+floor/ceiling effects on integer scales, each checked rather than waved past —
+`PHQ9_9` (suicidal ideation) 94.5% at 0 in a general population, `SCILIT_4`
+88.8% correct on a dichotomous knowledge test, `CONFLICT_12` 96.9% at 0 on a
+rare-event checklist. Mean imputation would have produced a fractional constant
+in each case; every value is an integer.
+
+**Item text: not shipped for any of the 19**, and the reason differs by deposit,
+recorded per-table in `itemtext_provenance.csv`:
+- `coroiu_2018_*` — both label levels checked and both populated, but the labels
+  are elided English glosses of a **German** administration (the CSES value
+  labels still read "5=stimme vollkommen zu"), so they are neither verbatim nor
+  the wording respondents read. Independently, Neff's SCS and Judge et al.'s
+  CSES have **no entry in `instrument_rights_register.csv`** — escalated, not
+  decided. The PHQ family is `verdict=ship`, so for `coroiu_2018_phq9` the
+  blocker is the wording alone, and the freely-distributed German PHQ-9 is the
+  right source for a later pass.
+- `enders_2022_*` — no wording exists in the deposit at any level: the Qualtrics
+  question-text header row was stripped before deposit, the `.dta`'s variable
+  labels are just the uppercased column names (`VAXHES_1` -> "VAXHES_1"), and
+  there is no codebook among the five files. The batteries are in the article's
+  appendix.
+
+### 2026-09-20 (cont. 3) — uploaded, and the batch's remaining leads recorded out of `runs/`
+
+**All 21 response tables uploaded** (ben-domingue, confirmed 2026-09-20), and
+`bentall_2021_over_purchasing__items.csv` with them. `irw_output/` and
+`itemtext_output/` are empty as expected. `itemtext_provenance.csv` and
+`itemtext/mapping_verification.csv` are stamped `uploaded=2026-09-20` on the
+one `bentall` row each; the other 20 provenance rows are not-shipped records
+and stay deliberately unstamped.
+
+The 21 `dictionary_auto.csv` rows reach the sheet through
+`metadata/02_biblio.R` on the next pipeline run — nothing to paste.
+
+**The 24 `aggregate_continuous` rows**, recorded here so nothing in this batch
+depends on a gitignored `runs/` file. None is adjudicated yet: each needs a
+composite-vs-continuous call (a genuine per-item continuous response ships, a
+subscale total does not), and the `unknown`-licence ones are gated regardless.
+
+| DOI | Title | Lic | N |
+|---|---|---|---|
+| 10.1371/journal.pone.0251720 | Supporting families to protect child health: Parenti | unknown | 761 |
+| 10.1371/journal.pone.0267637 | Validity and reliability of the Polish version of th | unknown | 688 |
+| 10.1371/journal.pone.0300681 | Antecedents of social media addiction in high and lo | unknown | 481 |
+| 10.1371/journal.pone.0121018 | Common and Distinct Impacts of Autistic Traits and A | cc-by | 472 |
+| 10.1371/journal.pone.0235550 | Health literacy strengths and limitations among rura | cc-by | 436 |
+| 10.1371/journal.pone.0254595 | Arabic validation and cross-cultural adaptation of t | unknown | 350 |
+| 10.1371/journal.pone.0316060 | Altercentrism and a change in perspective on the sel | unknown | 345 |
+| 10.1371/journal.pone.0168612 | Unveiling the Structure of Cognitive Vulnerability f | cc-by | 304 |
+| 10.1371/journal.pone.0191534 | Mid-term sustained relief from headaches after ballo | cc-by | 286 |
+| 10.1371/journal.pone.0231033 | Analyses of medical coping styles and related factor | cc-by | 285 |
+| 10.1371/journal.pone.0305414 | Validation of the patient reported experiences and o | cc-by | 281 |
+| 10.1371/journal.pone.0274454 | Factors associated with self-care behavior in patien | cc-by | 278 |
+| 10.1371/journal.pone.0308086 | Validity testing of the Korean version of the Health | cc-by | 278 |
+| 10.1371/journal.pone.0143794 | The Role of Compassion in Altruistic Helping and Pun | cc-by | 271 |
+| 10.1371/journal.pone.0213104 | Altruistic decisions are influenced by the allocatio | cc-by | 240 |
+| 10.1371/journal.pone.0299352 | Healthy Minds Index: A brief measure of the core dim | unknown | 237 |
+| 10.1371/journal.pone.0282220 | Moderating the link between discrimination and adver | cc-by | 221 |
+| 10.1371/journal.pone.0277475 | Psychopathic tendencies are selectively associated w | cc-by | 177 |
+| 10.1371/journal.pone.0167887 | Does an Integrated Care Intervention for COPD Patien | cc-by | 171 |
+| 10.1371/journal.pone.0231395 | Assessing beliefs about emotions: Development and va | cc-by | 161 |
+| 10.1371/journal.pone.0169183 | Heightened Olfactory Sensitivity in Young Females wi | cc-by | 112 |
+| 10.1371/journal.pone.0169829 | Can Early Intervention Improve Maternal Well-Being?  | cc-by | 102 |
+| 10.1371/journal.pone.0195579 | Correlation between physical markers and psychiatric | cc-by | 101 |
+| 10.1371/journal.pone.0244717 | Testing a mindfulness meditation mobile app for the  | unknown | 100 |
+Together with the 38 open-licensed leads listed in the first 2026-09-20 entry
+(5 now worked, 33 open), that is the whole actionable residue of this batch.
+The `runs/` CSVs can now be deleted whenever, without losing anything.
+
+### 2026-09-20 (cont. 4) — four more deposits: 14 tables / 121,130 responses
+
+All four CC BY 4.0. Two were verified on the deposit rather than the article:
+figshare 32109184 via `api.figshare.com/v2/articles/32109184`.
+
+**`nolte_2017_hlq_*` — 9 tables, 45,338 responses.** Nolte et al. 2017,
+`10.1371/journal.pone.0172340`, N=1,058 German adults with chronic conditions.
+The HLQ is nine scales with **no overall score by design**, and the nine split
+across two response formats (scales 1-5 on 1-4, scales 6-9 on 1-5), which
+`datastandard.md` forbids mixing anyway — so nine tables. Scale membership is
+the published 4/4/5/5/5 + 5/6/5/5 structure, independently confirmed against
+the German variable labels; the column order in the `.sav` agrees, which is a
+check rather than the source. `T3_Group` is a sampling group, not a treatment,
+so it rides as `cov_`.
+
+**The HLQ is the batch's one cheap item-text case, and it is blocked on rights
+rather than on recovery.** The `.sav` carries all 44 items in the **German
+wording respondents read** plus both anchor sets in German — exactly what the
+administered-language columns want. But the HLQ is licensed by Deakin
+University and has no entry in `instrument_rights_register.csv`. Escalated,
+not decided; if it clears, this is a one-pass job. Carried in TODO.md.
+
+**`li_2026_sas_sv` — 18,420 responses.** Li & Mao 2026, `10.1371/journal.pone.0349016`,
+N=1,842. SAS-SV, 10 items on 1-6. The deposit's `PSQI1..PSQI7` are **not**
+shipped: those are the seven PSQI *component scores*, each computed from one or
+more of the instrument's 19 underlying questions, so they are composites rather
+than responses. The 19 questions are not in the deposit.
+
+**`graves_2021_*` — 2 tables, 38,011 responses.** Graves et al. 2021,
+`10.1371/journal.pone.0255634`. PSS-10 (0-4) and Brief-COPE (28 items, 1-4).
+`prepost` is carried as `cov_prepost`, **not** as `wave`: the file has no person
+identifier and 607 + 448 = 1,055 rows, so there is no way to link a pre row to
+its post row, and a `wave` column would assert a within-person design the data
+cannot support.
+
+**`roy_2024_*` — 2 tables, 19,361 responses.** Roy et al. 2024,
+`10.1371/journal.pone.0315687`, N=1,019. Five candidate blocks, two shipped,
+and the three exclusions are the interesting part — each is re-asserted in the
+script rather than trusted to a comment:
+- **ISI is 100% missing** — every cell of all seven columns is empty.
+- **The PSS-4 block is unresolvable.** The file also carries `pss1_new..pss4_new`,
+  and the analysed `pss_sc` equals sum(`pss*_new`) for 99.9% of rows but
+  sum(`pss1..4`) for 5.6%. `pss*_new` is not derivable from `pss1..4`: across
+  all sixteen column pairings neither identity nor reversal matches above 26%,
+  which is chance for a 5-point scale. One block is mislabelled and the deposit
+  cannot say which, so neither ships.
+- **`aw1..aw10` is not one scale** — `aw1/8/9/10` take 0-4 while `aw2..aw7` take
+  {0,2,3,5,6}, gaps at 1 and 4, i.e. a multi-select coding. `aw1` also holds a
+  lone 43 at row 901 against a 0-4 range: a data-entry error isolated to one
+  cell of one item, which is the per-item diagnostic, not a pooled min/max one.
+
+**QC.** `run_qc()` on all 14 with source-documented `permitted_values` and
+explicit `item_constructs`: **0 fails.** Seven `imputed_values*` warnings. Two
+(`BC11`, `phq8`) are ordinary floor effects at the scale minimum. The other
+five are **interior-mode** concentrations on the HLQ's 4- and 5-point agreement
+scales, which the floor-effect argument does not cover — so they were checked a
+different way: every flagged item still carries 21-42 genuine missing cells in
+the source `.sav` and only integer anchors. A mean-imputed column has no
+missing left (that is the point of imputing) and contains a fractional
+constant. Neither holds, so these are real modal-response concentrations.
