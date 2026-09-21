@@ -5,9 +5,11 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
 ## From the 2026-09-20 recycled-term PMC sweep
 
-- [ ] **25 actionable leads, none worked yet.** 1 `good` + 12
-  `recoverable_format` + 12 `worth_retrying`, in
-  `runs/pmc_recycled_2026-09-20.csv` and its `.retriage_ha.csv`. Rank by
+- [x] **25 actionable leads triaged into `pmc_leads_2026-09-20.csv`**
+  (tracked). 4 shipped, 1 blocked on licence, 1 skipped on PII, 1 rejected on
+  content, 18 unworked -- the unworked ones are the open item further up this
+  file. Superseded as a task; kept for the counts. Original: 1 `good` + 12
+  `recoverable_format` + 12 `worth_retrying`. Rank by
   instrument shape before response count — several of the largest are
   Scientific Reports rows that may be trial-level or single-item panels.
   See BATCH_LOG.md 2026-09-20 for the four largest by shape.
@@ -22,11 +24,12 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   already-retired DOIs will say `license_unknown*` where the record says
   CC BY. Cheap: the same 34-row re-check loop, pointed at the ledger.
 
-- [ ] **241 scouted terms remain ranked and unrun** in
-  `runs/pmc_term_scout_2026-09-19.csv` (58% of the measured pool). A second
-  batch starts from that file — no new scout needed. Fix the scout's 500-hit
-  cross-journal cap first if its counts are to be used as a volume estimate
-  rather than a ranking (see BATCH_LOG.md 2026-09-20).
+- [ ] **241 scouted terms remain ranked and unrun**, now in the tracked
+  `pmc_term_backlog.csv` (291 rows, `run_2026_09_20` marks the 50 already
+  swept). 1,553 new DOIs projected pre-dedup, 58% of the measured pool. A
+  second batch starts from that file -- no new scout needed. Fix the scout's
+  500-hit cross-journal cap first if its counts are to be used as a volume
+  estimate rather than a ranking (see BATCH_LOG.md 2026-09-20).
 
 ## From the 2026-09-20 lead-working pass
 
@@ -82,12 +85,14 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   dictionary Notes, which is the durable part. 4,030 responses if anyone
   reopens it.
 
-- [ ] **~19 actionable leads from the sweep are still unworked**, in
-  `runs/pmc_recycled_2026-09-20.csv` and its `.retriage_ha.csv`. Six deposits
-  were opened out of 25 leads. Rank by instrument shape, not response count:
-  the two largest by nominal response count (21,343 x 23 and 20,415 x 12, both
-  `.RDS` behind OSF links) are social-network and VR-trial data and were
-  deliberately left for last.
+- [ ] **18 of the sweep's 25 leads are unworked**, now in the tracked
+  `pmc_leads_2026-09-20.csv` (was only in a gitignored `runs/` CSV -- see
+  BATCH_LOG.md 2026-09-20e). Every row carries `status`, the flag, n, items,
+  the data file and the external link, so a lead can be opened without
+  re-running anything. Rank by instrument shape, not response count: the two
+  largest by nominal count (21,343 x 23 and 20,415 x 12, both `.RDS` behind
+  OSF links) are social-network and VR-trial data and were deliberately left
+  for last.
 
 ## From the 2026-09-19 PMC tail measurement
 
