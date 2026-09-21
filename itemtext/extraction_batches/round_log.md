@@ -23037,3 +23037,79 @@ Notable:
   that check was reported-but-not-enforced this round.
 
 Cap (batch_299) not reached. 10 rows remain pending; the next round is batch_296.
+
+## batch_296 — 2026-09-20 18:55–19:0x
+
+Tables (3, three agents, one per table): `spain_2025_ageism_bureaucracy`,
+`spain_2025_ageism_comparison`, `spain_2025_ageism_difficulty` — all three from CIS Estudio 3493
+"Edadismo", continuing the family that batch_295 opened with `spain_2025_ageism_agreement`.
+
+**Written 3 / blocked 0 / failed 0. Yield 3/3 = 100%.** No kills, no retries, no rate limits.
+All gates clean: normalize_nulls 0 of 3 changed; audit_batch **3 PASS, no anomalies** (so no
+Step 5c WARN explanations are owed); verify_batch 3 MISSING(exempt); lint_verification 3 rows,
+no problems; `irw-validate` ok on all three (2 checks each); check_provenance 1515 rows over 302
+files, no failure.
+
+All three are `mapping_basis=data_labels`, so Step 5b was exempt and each got a NOT_NEEDED row in
+both `verification_merged.csv` and the permanent `mapping_verification.csv` (now 1261 rows). The
+mapping is tied at two independent levels in every case: `3493.sav`'s VARIABLE labels carry each
+statement verbatim and its VALUE labels carry the anchors, and `data/spain_2025_ageism.do`
+(Bookmarks 5, 6, 7) sets `item` to the lowercased source column name over a literal variable
+list — core-model pattern 1, nothing positional.
+
+**Step 5b orchestrator re-check: every agent's numbers confirmed exactly, both halves.**
+Recomputed from the deposit's `3493_num.csv` by applying each bookmark's own missing-code filter,
+and compared against `irw_table_sets(per_item=TRUE)` on the live tables (server-side aggregates;
+no Redivis export was spent this round):
+- bureaucracy, drop 0/6/8/9 → 992 / 994 / 976 / 995 / 1009 / 1019, sum 5985 = live `n_rows`.
+- comparison, drop 3/8/9 → p8 4508, p9 4804, p10 4693, sum 14005 = live `n_rows`.
+- difficulty, drop 0/3/6/8/9 → 993 / 998 / 911 / 938 / 996, sum 4836 = live `n_rows`.
+Within each table the per-item counts are mutually distinct, so the check distinguishes every item
+from every other — no permutation of a block's items is consistent with the data.
+
+Also independently confirmed, since it is a claim about the response data:
+- **P.11 and P.12 are a filtered block, asked only of respondents aged 65+.** Exactly 1,030 of the
+  5,006 deposit rows are 65+, and exactly those 1,030 have any non-zero P11 code — zero
+  off-diagonal cases. So these tables' ~1,028–1,030 unique ids are that subsample, not the study's
+  5,006 interviews. The marginals' stated N=1.189 for P.11 is the **weighted** base, which is why
+  their percentages do not reproduce from raw counts. Not a defect.
+- Sentinel handling again differs per block and again it is the source, not a defect: difficulty
+  drops code 6 "(NO LEER) N.P., ya que nunca ha necesitado realizar esta gestión" — 144 cells
+  (15/9/64/51/5), concentrated on p12_3 and p12_4 — which is a substantive "never had to do this"
+  category rather than a refusal, and is disclosed in its `public_note`. bureaucracy drops the
+  same code 6 (131 cells). comparison drops a volunteered code 3 (451 cells: 161/108/182).
+- difficulty's scale runs 1 "Muy fácil" → 5 "Muy difícil" but ships `resp` {1,2,4,5}: the
+  volunteered midpoint 3 "(NO LEER) Regular" (107 cells) is dropped, so the gap is expected.
+  bureaucracy's direction is likewise inverted relative to intuition — 1 = "En muchas ocasiones",
+  4 = "Nunca".
+- **comparison's per-question anchor check paid off.** Its three value-label sets (labels38/39/40)
+  are *not* identical: they agree on 1 "Sí" / 2 "No", but each words the volunteered code 3
+  differently ("En ambos por igual" / "Ambos por igual" / "Hay preocupación por ambos por igual").
+  The .do drops 3 for all three, so one shared option row is safe here — but it would have been
+  wrong had code 3 survived. A stacked-questions table must not be assumed to share one scale.
+- Shape: comparison stacks three standalone questions (P8, P9, P10) with no shared carrier stem,
+  so `instructions`/`section_prompt` are NA and the full question sits in `item_text` — the
+  `spain_2025_democracy_system` shape, deliberately not the P.5-grid shape of the agreement
+  sibling. Do not "fix" it toward the family pattern.
+- Transcription calls, disclosed not silently corrected: cues3493.pdf prints the affirmative
+  anchor unaccented as "Si", so option_text follows the .sav's accented "Sí" (same call as
+  batch_295); "Administración Pública" follows the questionnaire's capitalisation over the .sav's;
+  and bureaucracy resolved three cosmetic PDF-vs-.sav divergences in favour of the .sav, which the
+  marginals match.
+
+**Escalated again (a round may never write a `ship` row):** the CIS-family
+`instrument_rights_register.csv` row is STILL owed, now for the third round running. All three
+agents re-verified CIS's reuse conditions independently rather than inheriting batch_294/295's
+verdict, and all three reached the same affirmative grant — commercial and non-commercial reuse
+under Ley 37/2007 with a free non-exclusive IP assignment, conditioned only on attribution,
+non-distortion, date-of-update and no claim of official status. Note the page's sha256 differs on
+every fetch (d2c7f15a…, c5607a3f…, and batch_295's 1d79e49e…); the markup is session-varying while
+the operative clauses are identical across all fetches, so do not read the hash mismatch as the
+terms having changed. **Six `spain_2025_ageism_*` tables remain queued behind this decision.**
+
+The three tables are HELD, not uploaded, so no issues-page entry is owed yet for their
+IRW-generated English (`translation_source=machine_translation`); check_provenance lists them under
+the HELD exemption and entries fall due when they ship. The irw_site checkout is still on branch
+`itemtext/issues-batch-300-304`, so that disclosure check was again reported-but-not-enforced.
+
+Cap (batch_299) not reached. 7 rows remain pending; the next round is batch_297.
