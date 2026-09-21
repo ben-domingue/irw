@@ -1366,9 +1366,9 @@ FACIT_YOUNT_2021_clinic10,done,batch_288,2026-09-20T16:53:57
 goldberg_2018_bri_bri,done,batch_289,2026-09-20T17:06:26
 goldberg_2018_bri_feel,done,batch_289,2026-09-20T17:06:26
 goldberg_2018_bri_food,done,batch_289,2026-09-20T17:06:26
-goldberg_2018_bri_ofood,pending,,
-goldberg_2018_sbo,pending,,
-parental_text_intervention,pending,,
+goldberg_2018_bri_ofood,done,batch_290,2026-09-20T17:13:17
+goldberg_2018_sbo,done,batch_290,2026-09-20T17:13:17
+parental_text_intervention,blocked,batch_290,2026-09-20T17:13:17
 covid_travel_mackenzie_2021,pending,,
 opladen2025_fkg,pending,,
 opladen2025_fks,pending,,

@@ -22623,3 +22623,82 @@ bri_food follows the printed form over two defective SPSS labels ("rolles",
 and food20 truncated at the SPSS character cap).
 
 Cap (batch_299) not reached. 28 pending rows remain.
+
+## batch_290 — 2026-09-20T17:13 (3 tables, 3 agents)
+
+Tables: goldberg_2018_bri_ofood, goldberg_2018_sbo, parental_text_intervention.
+**written 2 / blocked 1 / failed 0** — yield 2/3 = 67%. Circuit breaker not
+approached (0 failed). Numbering: highest existing below 300 was batch_289, so
+290; the 300–304 hole (irw#2228) was skipped as the prompt requires.
+
+Gates: normalize_nulls 0 of 2 normalized; audit_batch **2 PASS, no anomalies**
+(so Step 5c has nothing to explain); verify_batch MISSING(exempt)×2 — both
+written tables are data_labels and owe no verify script; lint_verification
+2 rows, no problems; `irw-validate` ok on both, nothing to report;
+check_provenance clean for this batch (its one REVIEW line, ye_2025_q25_scale
+`translation_source=mixed`, is pre-existing and not ours). Note the issues-page
+checkout is on branch `itemtext/issues-batch-300-304`, so its disclosure check
+reported but did not enforce — neither table here ships IRW-generated content,
+so nothing was owed either way.
+
+Both written tables are `data_labels`; NOT_NEEDED rows were written into BOTH
+verification_merged.csv and mapping_verification.csv, and lint came back clean.
+
+**goldberg_2018_bri_ofood** — 29 items × 5 = 145 rows. "ofood" is NOT a variant
+of the bri_food block: BRI.pdf pp.14–15 carry a separate administered form,
+"OTHER FOOD HABITS" (18 fat-related foods on p.14, 11 fibre/produce items on
+p.15), and BRI.tab columns 477–505 are ofood1..ofood29. Same CC0 deposit
+doi:10.7910/DVN/LXKJIV as batch_289's three BRI scales; data/goldberg_2018_escs.py
+melts BRI.tab with no rename, so the IRW code IS the source column name.
+Caveat shipped in public_note: the table pools **two different 1–5 anchor sets**
+under one resp column, so resp is not on a common metric across the two blocks.
+
+**goldberg_2018_sbo** — 430 items × 5 = 2,150 rows. A different deposit,
+doi:10.7910/DVN/WV5BYC, "(23) Survey of Beliefs and Opinions", Saucier, CC0 1.0.
+item_text ships the administered form over the SPSS labels in 22 cases (17
+truncated at the 116-char cap, 5 differing in wording); s380 is the reverse —
+the printed form clips it mid-sentence, so the complete variable label ships.
+public_note: resp=3 is the form's "?" box, which mixes neutrality with
+"don't understand the statement".
+
+**parental_text_intervention** — BLOCKED (rights), retry test **NO**. Wording was
+located, extracted and gate-passed; the licence is what stops it. The only
+publication of the 19 wordings is the study's own deposit doi:10.7910/DVN/XUEU90,
+CC BY-NC-SA 4.0 (API latestVersion.license). The 80 gate-passing candidate rows
+are banked at .cache/parental_text_intervention/candidate__items.csv and ship
+unchanged if unblocked. Access trick worth reusing: the raw .dta is guestbook-gated
+(guestbookID 400) but the DDI export carries the same variable labels, value
+labels and frequencies.
+
+### Step 5b — orchestrator re-checks of the agents' own claims (all CONFIRMED)
+- ofood, "exactly two items never reach 5": confirmed — ofood15 (French fries,
+  n=759, mean 1.8, max 4) and ofood2 (Beef, steaks or roasts, n=770, mean 2.1,
+  max 4); all 27 others span 1–5 and no item has min > 1.
+- ofood, the two-anchor-block claim, checked structurally against the shipped
+  CSV: an exact 18/11 split at every one of the five resp levels
+  (resp=1 → "Never or less than once a MONTH" ×18 vs "Never or less than once a
+  WEEK" ×11, … resp=5 → "5 times a WEEK or more" ×18 vs "About once a DAY or
+  more" ×11), 29 distinct items, 145 rows, no padded numeric anchors.
+- sbo, the marker means: confirmed against the live table — s393 "Men are
+  superior to women" 1.3 vs s37 "No ethnic group is superior…" 4.6, s3 3.6,
+  s18 2.0, across 430 items × 703 persons, item means spanning 1.2–4.8.
+- parental, the Step 3b mismatch: confirmed independently from
+  data/parental_text_intervention.R — it selects `starts_with('s_ss_')` and then
+  assigns item = row_number() over unique() of the pivoted names, so the live
+  items are the fall STUDENT-SURVEY outcome/implementation measures, not the
+  parental text-message intervention the table name and dictionary Description
+  describe. Worth correcting upstream regardless of the rights outcome.
+
+### Two things for Ben
+1. **CC BY-NC-SA ruling wanted, on an already-built candidate.** The block above
+   applies the standing CC BY-NC precedent (transyouth_leshin_2026_parents_support,
+   gilbert_meta_32, ieswriting_molloy_2022), but the AUDIT register row of
+   2026-09-19 ("NC escalated per the NC rule and ruled SHIP; IRW is
+   non-commercial") pulls the other way. The candidate is gated and banked, so a
+   ruling either way costs nothing further.
+2. **Response-side licence review owed**, same table: datastandard.md bars
+   response-data intake under any NC/ND restriction, yet this response table is
+   live in IRW off a CC BY-NC-SA 4.0 deposit. Same open question already flagged
+   for the transyouth_leshin_2026_* family at batch_189/190.
+
+Cap (batch_299) not reached. 25 pending rows remain.
