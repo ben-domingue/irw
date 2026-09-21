@@ -1,0 +1,44 @@
+CLASS C — data clarification. Not a permissions request.
+
+When you email, remember to:
+1. cc itemresponsewarehouse@stanford.edu and bdomingue@stanford.edu
+2. state the exact columns/values in question -- a vague question gets a vague
+   answer, and these have usually already survived one round of guessing
+3. say what you will do with each possible answer, so the cost of replying is
+   one line rather than a conversation
+4. log the send in processing_notes/outreach/outreach_log.csv
+
+###email text below
+Hello,
+
+My name is Ben Domingue. I am an associate professor in the Graduate School of
+Education at Stanford University. I maintain the Item Response Warehouse (IRW),
+a public repository of item response datasets: https://itemresponsewarehouse.org
+
+I am working with the data you deposited alongside [PAPER], which I would like
+to include. The licence is clear and I am not writing about permissions -- I
+have one factual question I cannot answer from the deposit or the paper.
+
+[QUESTION. State it concretely, naming columns and values. E.g.: "The file has
+both PSS4_1..PSS4_4 and pss1_new..pss4_new. The analysed score pss_sc equals
+the sum of the _new columns for 99.9% of rows, but the sum of the first four
+for only 5.6%, and I cannot recover one block from the other by reversal. Which
+block holds the responses as collected?"]
+
+[WHAT EACH ANSWER MEANS. E.g.: "If the _new columns are the collected
+responses, I will use those and drop the others. If they are a recode, I will
+use the originals. Either way I would leave the reverse-scoring as you
+recorded it."]
+
+A one-line answer is plenty -- there is no need to prepare anything. If it is
+easier to send the underlying file, that works too, but it is not necessary.
+
+For context on what inclusion involves: the IRW reformats data into a common
+long format (one row per person-item response), publishes it with a citation
+and link back to your deposit, and carries your licence through unchanged.
+
+Thank you very much,
+Ben
+
+Data. [link]
+Paper. [link]

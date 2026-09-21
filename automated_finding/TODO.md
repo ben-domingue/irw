@@ -96,6 +96,18 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
 ## From the 2026-09-20 PLOS recycled-term sweep
 
+- [ ] **Permissions outreach is now a tracked programme: irw#2331.** The four
+  rights calls and the author-query items scattered through this file are
+  folded into it -- Class A (instrument wording, 72 blocked register rows),
+  Class B (data licensing, the 28 standing `license_blocked_candidates.csv`
+  rows + 17 OSF rows + ANES follow-up), Class C (data clarification: Roy,
+  Enders, Sanchez, zenodo.16310936, the two anonymous-author deposits),
+  Class D (the zenodo.10069489 PII disclosure, which should not queue behind
+  the rest). Templates and the standing `outreach_log.csv` are in
+  `processing_notes/outreach/`. Next concrete step is the by-hand triage of the
+  72 block/escalate rows into commercial / controlled / academic, then
+  `sweep_instrument_rights.py` for a tables-gated count to rank by.
+
 - [ ] **The second PSS-4 administration in `enders_2022_*` is unexplained.**
   The Qualtrics export carries the PSS-4 block twice; the copies genuinely
   disagree (44-83% of rows per item, item-wise correlations
@@ -277,17 +289,12 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   (`processing_notes/Licensing.txt` has the template shape). See BATCH_LOG.md
   2026-09-08b.
 
-- [ ] **Tatala 2023 item text: UNPARKED, both tables ready to extract**
-  (ben-domingue, 2026-09-20). Both rights questions are now answered and
-  registered in `itemtext/instrument_rights_register.csv`: the UCLA
-  Loneliness Scale is `ship` on the quote test, and the Religious Experience
-  Scale is `ship` on the originator basis -- this paper's first author is an
-  author of the RES and published it in a CC BY article, so the rights holder
-  is the one who released it openly. Both `tatala_2023_ucla_loneliness` and
-  `tatala_2023_religious_experience` already have verbatim English stems in
-  the deposit's SPSS variable labels and item codes that match the response
-  tables exactly, so this is a `data_labels` extraction with no
-  reconstruction: cheap, and the cheapest itemtext work currently queued.
+- [x] **Tatala 2023 item text: ALREADY RULED, no call needed** (noticed
+  2026-09-20). `instrument_rights_register.csv` carries "Religious Experience
+  Scale (RES, 17 items), Tatala et al." as `verdict=ship`, and the UCLA
+  Loneliness Scale as `ship` too. Both tables can be extracted whenever an
+  itemtext pass picks them up; this was queued as an open question for
+  ben-domingue in error.
 
 ## From the 2026-09-02 monthly repos sweep
 
