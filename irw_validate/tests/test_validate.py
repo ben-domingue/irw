@@ -463,6 +463,101 @@ class Cli(unittest.TestCase):
             1, "resp_variation* should still block")
 
 
+class RewordedMessages(unittest.TestCase):
+    """#2314: six checks said things the data does not support. The claims are
+    gone; the gate decisions they rode on are unchanged."""
+
+    def _detail(self, df, check, profile="triage"):
+        report = validate_frame(df, profile=profile)
+        hits = [f.message for f in report.findings if f.check == check]
+        self.assertTrue(hits, f"{check} did not fire")
+        return hits[0]
+
+    # item 1 -- imputed_values* reports concentration, not a cause
+    def test_concentration_no_longer_names_mean_imputation(self):
+        detail = self._detail(FIXTURES["no_variation"](), "imputed_values*")
+        self.assertNotIn("possible mean imputation", detail)
+        self.assertIn("does not establish a cause", detail)
+        self.assertIn("reports response concentration only", detail)
+
+    def test_every_concentrated_item_is_counted_not_just_the_first(self):
+        # three items, all fully concentrated: the old check broke after the
+        # first and named it alone, reading as though it were the only one
+        df = F(id=[1, 2, 3] * 3, item=["a"] * 3 + ["b"] * 3 + ["c"] * 3,
+               resp=[7] * 9)
+        self.assertIn("3 of 3 item(s)",
+                      self._detail(df, "imputed_values*"))
+
+    # item 3 -- dup_id_item reports the tested keys and the residual
+    def test_a_present_occasion_column_is_tested_not_assumed(self):
+        # wave is present, and keying on it changes nothing: id 1 / item a
+        # repeats within wave 1. The old message called this "likely ok".
+        df = F(id=[1, 1, 1, 2], item=["a"] * 4, resp=[1, 2, 3, 4],
+               wave=[1, 1, 2, 1])
+        detail = self._detail(df, "dup_id_item")
+        self.assertNotIn("likely ok", detail)
+        self.assertIn("excess row(s) remain", detail)
+        self.assertIn("wave", detail)
+
+    def test_the_residual_counts_the_full_key_combination(self):
+        # trial restarts inside each wave, so neither column keys a row alone;
+        # one genuine excess row survives both together
+        df = F(id=[1, 1, 1], item=["a"] * 3, resp=[1, 2, 3],
+               wave=[1, 1, 1], trial_number=[1, 1, 2])
+        detail = self._detail(df, "dup_id_item")
+        self.assertIn("1 excess row(s) remain", detail)
+        self.assertIn("trial_number", detail)
+
+    def test_a_key_that_does_resolve_is_reported_as_such(self):
+        detail = self._detail(FIXTURES["dup_with_wave"](), "dup_id_item")
+        self.assertIn("made unique by wave", detail)
+
+    def test_the_gate_rescue_still_uses_the_same_keys(self):
+        # the hoisted helper must not change which repeats the gate forgives
+        df = F(id=[1, 1], item=["a", "a"], resp=[1, 2], trial_number=[1, 2])
+        report = validate_frame(df, profile="upload")
+        self.assertNotIn("dup_id_item", [f.check for f in report.findings])
+        self.assertIn("dup_id_item:resolved_by_trial_number", report.checks_run)
+
+    # item 4 -- id_na / resp_na distinguish typed nulls from parsed tokens
+    def test_missing_value_wording_is_profile_aware(self):
+        df = F(id=[1, 2, 3], item=["a", "b", "c"], resp=[1, None, 3])
+        triage = self._detail(df, "resp_na", profile="triage")
+        upload = self._detail(df, "resp_na", profile="upload")
+        self.assertIn("may be empty cells or literal 'NA'-style text", triage)
+        self.assertIn("read as a response on this profile", upload)
+        self.assertNotEqual(triage, upload)
+
+    # item 6 -- zero numeric categories is not one response value
+    def test_stored_text_reports_zero_categories_not_one(self):
+        detail = self._detail(FIXTURES["nonnumeric_resp"](), "resp_variation*")
+        self.assertIn("3 distinct value(s) are stored as text", detail)
+        self.assertIn("not one response value", detail)
+
+    def test_a_genuinely_constant_response_still_says_one(self):
+        self.assertIn("1 unique numeric value",
+                      self._detail(FIXTURES["no_variation"](), "resp_variation*"))
+
+    def test_resp_variation_still_blocks_the_gate_either_way(self):
+        for fixture in ("nonnumeric_resp", "no_variation"):
+            with self.subTest(fixture=fixture):
+                report = validate_frame(FIXTURES[fixture](), profile="upload")
+                self.assertIn("resp_variation*",
+                              [f.check for f in report.errors])
+
+    # item 7 -- a trailing space is not a second construct
+    def test_prefix_grouping_trims_whitespace(self):
+        # F246's shape: "question " and "question" are one 35-label group
+        items = [f"question {i}" for i in range(1, 6)] + \
+                [f"question{i}" for i in range(6, 11)] + \
+                [f"scale_{i}" for i in range(1, 4)]
+        df = F(id=list(range(1, len(items) + 1)), item=items,
+               resp=list(range(1, len(items) + 1)))
+        detail = self._detail(df, "multi_scale*")
+        self.assertIn("2 repeated prefixes", detail)
+        self.assertNotIn("'question '", detail)
+
+
 class ExitCodes(unittest.TestCase):
     def test_exit_code_contract(self):
         clean = validate_frame(FIXTURES["clean"](), profile="upload")

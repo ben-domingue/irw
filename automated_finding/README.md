@@ -358,14 +358,14 @@ suffix, counts).
 |---|---|
 | `resp_direction*` | Cannot auto-verify coding direction within items — confirm no unreversed items |
 | `resp_ordinal*` | >50 unique resp values after melt — likely aggregate/continuous data, not item responses. Verify which: a composite/subscale sum is not a response and must be dropped; a genuinely continuous per-item response (e.g. a 0–100 slider) is legitimate — keep `resp` as a float, don't coerce to integer |
-| `multi_scale*` | Item prefixes suggest groups (`warn`); verify their constructs in the source before any split |
-| `imputed_values*` | Column names or value distributions suggest imputed data — IRW requires removal |
+| `multi_scale*` | Item prefixes repeat in groups (`warn`); verify their constructs in the source before any split. Prefixes are whitespace-trimmed before grouping, so `question ` and `question` are one group (#2314) |
+| `imputed_values*` | Two signals. A column name matching `_imp`/`_imputed`/`_filled`/`_flag` says imputed columns may be present, and IRW requires their removal. Separately, a report that some items' responses are concentrated on one value (>60%): that is an observation about the distribution and **not** evidence of imputation — binary and ordered-category items reach those shares legitimately (#2314) |
 | `date_numeric*` / `date_range*` | `date` column not numeric or too small for Unix seconds |
 | `rt_units*` / `rt_negative*` | `rt` looks like milliseconds, or has negative values |
 | `item_level_cols*` | Item-level columns (`itemcov_`, `rater`, `item_family`) excluded from melt — verify alignment |
 | `cov_prefix` | Unrecognized columns — prefix with `cov_` if person-level covariates |
 | `treat_binary*` | `treat` has values other than 0/1 |
-| `dup_id_item` | Duplicate id+item rows (error without a longitudinal column) |
+| `dup_id_item` | Duplicate id+item rows (error without a longitudinal column). The warning names the occasion columns actually tested and the excess rows that survive them, individually and combined — it does not call a repeat benign just because a `wave` column exists (#2314) |
 | `license_unknown*` | License not recognised as a known open license — verify before submission |
 | `density*` | Very sparse matrix — fine for adaptive designs, otherwise verify |
 
