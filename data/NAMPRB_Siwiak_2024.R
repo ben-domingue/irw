@@ -21,7 +21,16 @@ ssub_df <- df |>
   select(id, sample, starts_with("SSUB"), -ends_with("mean"))
 retest_ssub_df <- ssub_df[ssub_df$sample == 5, c("id", "sample", paste0("SSUB_RETEST_", 1:20))]
 
-colnames(retest_ssub_df) <- gsub("RETEST", "NAB", colnames(retest_ssub_df)) # Rename retest as they are the same questions as wave 1
+# Rename retest as they are the same questions as wave 1. SSUB_RETEST_N is the
+# retest of item N, whose first-administration column is SSUB_NAB_N or SSUB_TRB_N
+# depending on factor; a blanket gsub("RETEST", "NAB") relabels the five TRB items
+# (1, 5, 14, 15, 19) and so creates five item codes that exist at only one wave.
+# Map each retest column onto its own first-administration name instead.
+wave0 <- grep("^SSUB_(NAB|TRB)_[0-9]+$", colnames(ssub_df), value = TRUE)
+names(wave0) <- sub("^SSUB_(NAB|TRB)_", "", wave0)
+rt <- grep("^SSUB_RETEST_", colnames(retest_ssub_df))
+colnames(retest_ssub_df)[rt] <- unname(
+  wave0[sub("^SSUB_RETEST_", "", colnames(retest_ssub_df)[rt])])
 retest_ssub_df <- pivot_longer(retest_ssub_df, cols=-c("id", "sample"), names_to="item", values_to="resp")
 retest_ssub_df$wave <- 1
 
