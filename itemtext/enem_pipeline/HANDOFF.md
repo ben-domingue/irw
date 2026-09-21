@@ -1,7 +1,12 @@
 # ENEM item text — handoff
 
-**Start here.** Then `STATUS.md` (per-year state + 26 documented traps) and
-`EXTRACTION_RULES.md` (R0-R11, the contract every year must satisfy).
+**Superseded as the entry point: read `RESUME.md` first.** It carries the
+current state, the verification results, what is waiting on whom, and the
+traps most likely to bite. This file is the longer narrative of how the
+thirteen years were built, kept for the detail RESUME.md compresses.
+
+Then `STATUS.md` (per-year state + traps 1-67) and `EXTRACTION_RULES.md`
+(R0-R14, the contract every year must satisfy).
 
 Last updated 2026-09-16. Everything below was observed, not predicted.
 
