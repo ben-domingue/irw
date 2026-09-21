@@ -15087,3 +15087,79 @@ column is an item, a covariate, a named composite, or a named drop, asserted).
 zeros and three `-99`s that the file's own value labels do not define (they run
 1..5). The depositors' own clean binary `Gender_b` is carried as `cov_gender`
 instead.
+
+### 2026-09-20 (cont. 2) — two more deposits: 19 tables / 328,243 responses
+
+**`coroiu_2018_*` — 3 tables, 114,775 responses.** Coroiu et al. 2018,
+`10.1371/journal.pone.0190771`, N=2,448 German general population. The data is
+on OSF, not in the article, so the licence was verified **on the node itself**
+via the OSF API (`public=true`, CC-By Attribution 4.0) rather than inherited
+from the PLOS article — the article's CC BY says nothing about an external
+deposit. Three instruments at item level, one file each:
+`coroiu_2018_scs` (Self-Compassion Scale, 26 items, 1-5; 63,501),
+`coroiu_2018_cses` (Core Self-Evaluations, 12 items, 1-5; 29,297),
+`coroiu_2018_phq9` (PHQ-9, 9 items, 0-3; 21,977). The GAD-2 is two items, which
+is not a scale, so it rides as two covariates.
+
+**`enders_2022_*` — 16 tables, 213,468 responses.** Enders, Uscinski, Klofstad &
+Stoler 2022, `10.1371/journal.pone.0276082`, N=2,055 US adults, **CC0** verified
+on the OSF node. Sixteen instruments ride in one survey.
+
+Built from the deposit's **raw Qualtrics export, not its `Clean Data.dta`** —
+the README calls the latter "the 'clean' (i.e., recoded) dataset", and
+`Analyses.do` lines 401-402 reverse-code two PSS-4 items into it
+(`replace pss4_2 = (pss4_2 * -1) + 4`). `datastandard.md` says not to recode
+reverse-scored items, so the raw export is the correct source. This is the
+general lesson: **on a deposit that ships both, "clean" is a claim about the
+authors' analysis, not about the data, and the file name is the only warning
+you get.**
+
+Three findings worth carrying:
+
+- **The Dark Triad block is three constructs, not one.** It first shipped as a
+  single 12-item table; `run_qc()`'s `multi_scale*` warning flagged the three
+  repeated prefixes, and the deposit's own `Analyses.do` settles it — it enters
+  `manipulate`, `narcissism` and `psychopathy` as three separate predictors, never
+  a composite. Split into three 4-item tables on that evidence. This is what the
+  warning is for: the prefixes alone would not have justified the split, and the
+  source-side model specification did.
+- **`COVCONS_8`, `MISC_9` and `VICTIM_5` are single-valued** across all 2,055
+  respondents — embedded attention checks ("select 'agree'"), not responses.
+  Dropped, with the degeneracy asserted in the script rather than assumed.
+- **The PSS-4 block appears twice in the export** (`PSS4_1..4` and a second
+  copy). The two copies genuinely disagree — 44% to 83% of rows differ per item,
+  item-wise correlations +0.64/-0.54/-0.58/+0.75 — so this is two real
+  administrations, not a duplicated upload (cf. the "zero disagreement =
+  duplication" rule, which correctly does *not* fire here). Nothing in the
+  README, the `.do` or the article says what the second one is, so only the
+  first ships and the second is left alone rather than invented into a `wave`.
+  Carried in TODO.md.
+
+`ZIP` is present in the raw export and deliberately not carried. It is not a
+PII-skip under the pipeline rule (no names, emails, birthdates, IP/GPS or
+national IDs), but ZIP alongside `YEARBORN` and gender is quasi-identifying and
+has no psychometric value, so it stays out of the output.
+
+**QC.** `run_qc()` on all 19 with source-documented `permitted_values` and
+explicit `item_constructs`: **0 fails.** Three `imputed_values*` warnings, all
+floor/ceiling effects on integer scales, each checked rather than waved past —
+`PHQ9_9` (suicidal ideation) 94.5% at 0 in a general population, `SCILIT_4`
+88.8% correct on a dichotomous knowledge test, `CONFLICT_12` 96.9% at 0 on a
+rare-event checklist. Mean imputation would have produced a fractional constant
+in each case; every value is an integer.
+
+**Item text: not shipped for any of the 19**, and the reason differs by deposit,
+recorded per-table in `itemtext_provenance.csv`:
+- `coroiu_2018_*` — both label levels checked and both populated, but the labels
+  are elided English glosses of a **German** administration (the CSES value
+  labels still read "5=stimme vollkommen zu"), so they are neither verbatim nor
+  the wording respondents read. Independently, Neff's SCS and Judge et al.'s
+  CSES have **no entry in `instrument_rights_register.csv`** — escalated, not
+  decided. The PHQ family is `verdict=ship`, so for `coroiu_2018_phq9` the
+  blocker is the wording alone, and the freely-distributed German PHQ-9 is the
+  right source for a later pass.
+- `enders_2022_*` — no wording exists in the deposit at any level: the Qualtrics
+  question-text header row was stripped before deposit, the `.dta`'s variable
+  labels are just the uppercased column names (`VAXHES_1` -> "VAXHES_1"), and
+  there is no codebook among the five files. The batteries are in the article's
+  appendix.

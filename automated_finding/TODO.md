@@ -96,24 +96,41 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
 ## From the 2026-09-20 PLOS recycled-term sweep
 
-- [ ] **2 tables + 1 item text table need uploading/pasting.**
-  `irw_output/simo_sanz_2018_spai.csv` (76,908 responses) and
-  `irw_output/bentall_2021_over_purchasing.csv` (27,594) go to the newest
-  shard; `itemtext_output/bentall_2021_over_purchasing__items.csv` goes to
-  `irw_text` **after** the response tables are live. Both dictionary rows are
+- [ ] **The second PSS-4 administration in `enders_2022_*` is unexplained.**
+  The Qualtrics export carries the PSS-4 block twice; the copies genuinely
+  disagree (44-83% of rows per item, item-wise correlations
+  +0.64/-0.54/-0.58/+0.75), so it is two real administrations rather than a
+  duplicated upload. Nothing in the README, `Analyses.do` or the article says
+  what the second one is, so only the first shipped. If it is a retest it is a
+  free second `wave` on 2,054 respondents. Worth one author email.
+
+- [ ] **Rights call needed on two instruments before their item text can ship
+  (Ben).** Neff's Self-Compassion Scale and Judge et al.'s Core Self-Evaluations
+  Scale have no entry in `itemtext/instrument_rights_register.csv`, and
+  `coroiu_2018_scs` / `coroiu_2018_cses` are now live candidates. Note this is
+  moot until the German wording is obtained anyway -- the deposit's labels are
+  English glosses -- so it is not blocking the response tables.
+
+- [ ] **21 tables + 1 item text table need uploading/pasting.**
+  All 21 CSVs in `irw_output/` go to the newest shard -- `simo_sanz_2018_spai`
+  (76,908), `bentall_2021_over_purchasing` (27,594), the three `coroiu_2018_*`
+  (114,775) and the sixteen `enders_2022_*` (213,468), 432,745 responses in
+  all; `itemtext_output/bentall_2021_over_purchasing__items.csv` goes to
+  `irw_text` **after** the response tables are live. All 21 dictionary rows are
   staged in `dictionary_auto.csv` (no pasting needed since #1732). Once Ben
   confirms, stamp `uploaded=<date>` on the `bentall` row in
-  `itemtext_provenance.csv` and in `itemtext/mapping_verification.csv`. The
-  `simo_sanz` provenance row is a not-shipped record and stays unstamped.
+  `itemtext_provenance.csv` and in `itemtext/mapping_verification.csv`. The other 20 provenance rows are not-shipped records and stay unstamped.
 
-- [ ] **35 of the 38 open-licensed leads still unworked** (cc-by/cc0, N>=100) out of the
+- [ ] **33 of the 38 open-licensed leads still unworked** (cc-by/cc0, N>=100) out of the
   98-row `human_assistance` bucket — 44 `recoverable_format` + 14
   `worth_retrying` before the license and N gates. The full ranked list is in
   `BATCH_LOG.md` (2026-09-20), because `runs/` is gitignored. Worked so far: `pone.0205389` and
   `pone.0246339` shipped, `pone.0167571` rejected as aggregate-only (see
-  BATCH_LOG.md). Next unworked by size: `pone.0190771` (German
-  Self-Compassion Scale, 2,448 x 55), 
-  `pone.0276082` (conspiracy beliefs, CC0, 2,065 x 241). Most are RULE 10b
+  BATCH_LOG.md). `pone.0190771` (3 tables) and `pone.0276082` (16 tables) also shipped.
+  Next unworked by size: `pone.0349016` (figshare, smartphone addiction +
+  sleep, 1,842 x 17, CC BY verified on the figshare record), `pone.0256686`
+  (CAPE-P15, 1,594 x 72), `pone.0323124` (parental rejection / cyberbullying,
+  1,567 x 82). Most are RULE 10b
   `resp_scale_mixed`, i.e. one questionnaire carrying several instruments —
   re-read by block prefix and ship one file per scale.
 
