@@ -922,6 +922,122 @@ apply_osf_permission <- function(biblio, label = "core",
 }
 
 ##---------------------------------------------------------------------------
+##Derived_License from Original_License, where the sheet records the source
+##licence and nobody has said what IRW redistributes under (#2040).
+##
+##THE PROBLEM. `Derived_License` is the only licence column that reaches
+##biblio.csv and the Redivis `biblio` table (#2032), and the site emits no
+##landing page for a table whose `Derived_License` is blank
+##(irw_site/landing/page_rules.R:10-12, queued as #2266). Measured against the
+##live sheet 2026-09-20: 117 rows marked `Public Reshare? = Public` have a blank
+##`Derived License` and 111 of them record an `Original License`. The information
+##exists; it just never reaches the column every client reads, so
+##`irw_explore()`, `irw_filter(license=)` and the MCP `rights` object all report
+##silence for data IRW is actively redistributing.
+##
+##WHY HERE AND NOT IN THE SHEET. 117 hand-edited cells is not the fix; per #1690
+##the sheet is the human entry surface, not a deployment target. This is the same
+##export-time shape as apply_data_doi(), apply_osf_permission() and
+##apply_description_overrides(): the sheet is never written, and a human value
+##always wins the cell it occupies.
+##
+##THE MAPPING IS NOT A JUDGEMENT CALL, AND IS DELIBERATELY NARROW.
+##datastandard.md:17-33 is the authority. Only licences that permit
+##redistribution and carry forward unchanged are derived. Everything that would
+##require deciding what a depositor actually granted is left blank on purpose, so
+##it stays visible as a question:
+##
+##  * NC -- ben-domingue's call only, never automatic. Where he approves, the
+##    restriction propagates rather than disappears, so the value that belongs
+##    here is a decision, not a copy.
+##  * ND and unlicensed -- hard stops with no judgement call. Reshaping to long
+##    format is a modification, which neither permits.
+##  * `Custom` and `Permission via Email` -- the derived terms are a reading of
+##    a specific grant. Note that `Permission via Email` in this column is
+##    sometimes the OSF_PERMISSION_PROJECTS stopgap rather than evidence of an
+##    email at all (#2302), which is exactly why it cannot be copied forward.
+##
+##`CC-BY (unspecified)` is the one entry that asserts something the source did
+##not: it names no version. Reading it as 4.0 was ruled by ben-domingue
+##2026-09-20 (3 rows), and it is logged as `assumed` rather than `derived` so the
+##assumption stays auditable instead of blending into the mechanical set.
+##
+##ORDERING. This runs AFTER apply_osf_permission(). That list is a checked
+##assertion about deposits that publish no licence, with its own verification
+##script, and #2302 corrected it nine days ago; running first would silently
+##pre-empt a live decision. Filling only what is still blank afterwards is the
+##smaller and reversible choice.
+DERIVED_LICENSE_MECHANICAL <- c(
+    ##Explicitly open per datastandard.md:17.
+    "cc0 1.0"        = "CC0 1.0",
+    "cc by 4.0"      = "CC BY 4.0",
+    "cc by-sa 4.0"   = "CC BY-SA 4.0",
+    ##Open code/data licences. Not named in datastandard.md, which is about
+    ##dataset intake, but all five already appear as published Derived_License
+    ##values in biblio.csv (GPL-3.0 on 92 rows, ODbL 1.0 on 23, GPL-2.0 on 18,
+    ##ODC-By on 6, MIT on 3), so deriving them asserts nothing new about the
+    ##corpus. Ruled by ben-domingue 2026-09-20.
+    "mit"            = "MIT",
+    "gpl-2.0"        = "GPL-2.0",
+    "gpl-3.0"        = "GPL-3.0",
+    "lgpl-3.0"       = "LGPL-3.0",
+    "odbl 1.0"       = "ODbL 1.0",
+    "odc-by"         = "ODC-By"
+)
+
+##Kept separate from the mechanical table so the log can say which rows rest on
+##an assumed version. See the note above.
+DERIVED_LICENSE_ASSUMED <- c("cc-by (unspecified)" = "CC BY 4.0")
+
+apply_derived_license <- function(biblio, label = "core", log.file = NULL) {
+    empty_log <- data.frame(table = character(0), original = character(0),
+                            derived = character(0), basis = character(0),
+                            stringsAsFactors = FALSE)
+    if (!all(c("Original_License", "Derived_License") %in% names(biblio))) {
+        if (!is.null(log.file)) readr::write_csv(empty_log, log.file)
+        return(list(biblio = biblio, log = empty_log))
+    }
+
+    ##Spelling and case are not relicensing -- the same normalisation
+    ##biblio_norm() uses for this column.
+    key <- tolower(gsub("\\s+", " ", trimws(as.character(biblio$Original_License))))
+    open_hit    <- match(key, names(DERIVED_LICENSE_MECHANICAL))
+    assumed_hit <- match(key, names(DERIVED_LICENSE_ASSUMED))
+
+    blank_derived <- dict_blank(biblio$Derived_License)
+    value <- rep(NA_character_, nrow(biblio))
+    basis <- rep(NA_character_, nrow(biblio))
+    value[!is.na(open_hit)]    <- unname(DERIVED_LICENSE_MECHANICAL[open_hit[!is.na(open_hit)]])
+    basis[!is.na(open_hit)]    <- "derived"
+    value[!is.na(assumed_hit)] <- unname(DERIVED_LICENSE_ASSUMED[assumed_hit[!is.na(assumed_hit)]])
+    basis[!is.na(assumed_hit)] <- "assumed-version"
+
+    move <- blank_derived & !is.na(value)
+    move[is.na(move)] <- FALSE
+
+    log <- data.frame(table    = biblio$table[move],
+                      original = as.character(biblio$Original_License)[move],
+                      derived  = value[move],
+                      basis    = basis[move],
+                      stringsAsFactors = FALSE)
+    log <- log[order(log$table), , drop = FALSE]
+    biblio$Derived_License[move] <- value[move]
+
+    ##What was NOT derived is the point of the message: it is the queue that
+    ##needs a human, and reporting only the successes would hide it.
+    held <- dict_blank(biblio$Derived_License)
+    message(label, ": derived Derived_License on ", sum(move), " row(s) (",
+            sum(log$basis == "derived"), " mechanical, ",
+            sum(log$basis == "assumed-version"), " assumed version); ",
+            sum(held), " row(s) still have none and need a rights decision")
+    if (!is.null(log.file)) {
+        readr::write_csv(log, log.file)
+        message("  wrote ", nrow(log), " derivation row(s) to ", log.file)
+    }
+    list(biblio = biblio, log = log)
+}
+
+##---------------------------------------------------------------------------
 ##The shape of a table name (#2079).
 ##
 ##Nothing in the dictionary path ever asserted that `table` holds a table NAME.
