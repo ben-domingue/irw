@@ -167,3 +167,54 @@ class DraftUnreadable(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class QueueDivergence(unittest.TestCase):
+    """The queue/live cross-check (irw#2230). Offline: both sides are files."""
+
+    LIVE = {"shipped": "published", "stale_pending": "published",
+            "stale_blocked": "published", "unlisted": "published",
+            "in_the_draft": "draft", "waiting_to_upload": "published"}
+
+    def _queue(self, rows):
+        out = Path(self.enterContext(tempfile.TemporaryDirectory()))
+        f = out / "queue_state.csv"
+        f.write_text("table,status,batch,timestamp\n"
+                     + "".join(f"{t},{s},,\n" for t, s in rows))
+        return f
+
+    def test_published_but_not_done_is_reported(self):
+        # The irw#2230 defect: the queue says there is work to do on a table
+        # whose item text a reader can already fetch.
+        q = self._queue([("shipped", "done"), ("stale_pending", "pending"),
+                         ("stale_blocked", "blocked")])
+        drift = rlt.queue_divergence(self.LIVE, rlt.read_queue(q))
+        self.assertEqual(drift, [("stale_blocked", "blocked"),
+                                 ("stale_pending", "pending")])
+
+    def test_done_but_not_yet_uploaded_is_not_reported(self):
+        # Every batch looks like this between merging and upload. Reporting it
+        # would fire on healthy work and train the reader to skip the output.
+        q = self._queue([("merged_not_up", "done")])
+        self.assertEqual(rlt.queue_divergence(self.LIVE, rlt.read_queue(q)), [])
+
+    def test_a_draft_is_not_published(self):
+        # A table in `next` is not something a reader can fetch, so a pending
+        # queue row for it is not yet wrong.
+        q = self._queue([("in_the_draft", "pending")])
+        self.assertEqual(rlt.queue_divergence(self.LIVE, rlt.read_queue(q)), [])
+
+    def test_a_table_with_no_queue_row_is_not_drift(self):
+        # The queue is a worklist seeded from a candidate set, not a register
+        # of the corpus; several hundred live tables have never been in it.
+        q = self._queue([("shipped", "done")])
+        self.assertEqual(rlt.queue_divergence(self.LIVE, rlt.read_queue(q)), [])
+
+    def test_a_missing_queue_file_is_not_an_error(self):
+        self.assertEqual(rlt.read_queue(Path("/nonexistent/queue_state.csv")), {})
+
+    def test_the_report_never_raises_on_a_broken_queue(self):
+        # A watcher that can break the thing it watches is worse than none:
+        # the refresh is the job, and this is a comment on it.
+        with mock.patch.object(rlt, "read_queue", side_effect=OSError("boom")):
+            rlt.report_divergence(self.LIVE)   # must not raise
