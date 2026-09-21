@@ -17,7 +17,13 @@
 ##`xiannation` -- the item the scale is named for -- never appeared at all.
 ##Confirmed against the deposit by matching each source column's response
 ##distribution to the published label's, a 1:1 shift with no ambiguity. Found via
-##the item-text re-audit checkpoint on #2255; see #2326.
+##the item-text re-audit checkpoint on #2255; see #2327.
+##
+##The correction is live: item_response_warehouse v55.1, released 2026-09-21.
+##Re-verified against the deposit after release -- six correct labels, no literal
+##"NA", 1,378 ids matched per item, zero mismatched responses. The row count is
+##unchanged at 8,268, so a count(*) check proves nothing here; the set of distinct
+##`item` values is what proves the fix shipped.
 ##
 ##Indexing `items` by position at all was the hazard, so this pairs the name and
 ##the column in one step and cannot drift again.
