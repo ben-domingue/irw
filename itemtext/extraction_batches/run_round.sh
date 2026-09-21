@@ -219,14 +219,318 @@ mkdir -p "$LOG_DIR"
   # to revisit. See the header for why this posture is defensible here and would
   # not be on a cloud runner.
   #
+  # --- Death reporting -------------------------------------------------------
+  #
+  # DETECTION AND REPORTING ONLY. Nothing below repairs anything: it never resets
+  # a queue row, never commits, never promotes or deletes a partial batch.
+  # Reconciling a dead round is a HUMAN decision -- BATCH_PROCESS.md Step 0 and
+  # round_prompt_v1.md Step 0 both say so deliberately, because a killed round
+  # has usually finished real work that a blind reset would discard.
+  #
+  # Everything here is derived from ARTIFACTS ON DISK, never from the agent's
+  # report. The harness surfaces an agent's FIRST assistant message, not its
+  # last, so an agent killed on its closing message is indistinguishable from
+  # one that died before reading anything. That misclassified 2 of 3 agents in
+  # batch_019 -- two of which had FINISHED, one with a complete 65-row items CSV
+  # already on disk. The transcript is likewise never read here; the narrow
+  # API-limit grep above is a separate, low-precision check.
+  #
+  # Residual limitation, worth knowing: if the OOM killer takes THIS WRAPPER
+  # rather than the `claude` child, none of this runs. The backstops are then the
+  # next round's dirty-worktree and in_progress guards -- which is a second
+  # reason the stanza is appended to round_log.md (tracked) and not only written
+  # to the cron log (cron_logs/ is gitignored, so it is not worktree state).
+
+  # Does CSV $1 carry a row whose FIRST field is $2?
+  #
+  # `awk -F,` is correct here ONLY because it reads field 1 and nothing else: a
+  # table name never contains a comma, so a quoted field carrying commas can only
+  # occur AFTER field 1. provenance.csv, notes.csv and verification_merged.csv
+  # all have such fields (source_ref, note, public_note, evidence). DO NOT extend
+  # this to read field 2 or later -- "also check mapping_basis" is the obvious
+  # future change and it is exactly the one that breaks. Use a real CSV reader
+  # (python3 csv) if that is ever needed.
+  #
+  # Strips a trailing CR -- queue_state.csv and several batch CSVs are CRLF --
+  # and one leading/trailing double quote, because some batches are written
+  # QUOTE_ALL (batch_018, 202-205, 239, 244, 246, 248, 252, 254).
+  _csv_has_table() {
+    [[ -f "$1" ]] || return 1
+    awk -F, -v t="$2" '
+      NR>1 { f=$1; gsub(/\r/,"",f); sub(/^"/,"",f); sub(/"$/,"",f)
+             if (f == t) { found=1; exit } }
+      END  { exit(found ? 0 : 1) }' "$1" 2>/dev/null
+  }
+
+  # Coverage accepts EITHER shape: the per-table sidecar, which exists only
+  # between Step 2 and Step 3, or a row in the batch-level file that Step 3
+  # merges it into before DELETING the sidecar. A check that demanded the
+  # sidecars would score every post-Step-3 death PARTIAL on every table, and a
+  # check that demanded the merged file would do the same to every pre-Step-3
+  # death. Accepting either is what makes this blind to where the death landed.
+  _has_prov()  { [[ -f "$_bd/provenance_$1.csv"   ]] || _csv_has_table "$_bd/provenance.csv"          "$1"; }
+  _has_notes() { [[ -f "$_bd/notes_$1.csv"        ]] || _csv_has_table "$_bd/notes.csv"               "$1"; }
+  _has_verif() { [[ -f "$_bd/verification_$1.csv" ]] || _csv_has_table "$_bd/verification_merged.csv" "$1"; }
+
+  # Work out which batch this round claimed, and which tables, FROM DISK.
+  # Priority order matters; each fallback is announced rather than silent.
+  _resolve_claim() {
+    local t s b _rest
+    _claimed_batch=""
+    _claimed_tables=()
+    _claim_source="no claim found on disk"
+    _claim_mismatch=""
+
+    # (1) in_progress rows. Step 1 rewrites queue_state.csv with status AND
+    # batch=batch_<NNN> BEFORE dispatching, so these name both the batch and the
+    # tables even if the agent died before Step 3's mkdir. `while IFS=, read` is
+    # safe against THIS file only -- queue_state.csv is unquoted end to end; it
+    # is not safe against provenance/notes/verification.
+    while IFS=, read -r t s b _rest; do
+      t="${t%$'\r'}"; s="${s%$'\r'}"; b="${b%$'\r'}"
+      [[ "$s" == "in_progress" ]] || continue
+      [[ -z "$_claimed_batch" ]] && _claimed_batch="$b"
+      _claimed_tables+=("$t")
+    done < <(tail -n +2 "$QUEUE")
+    [[ ${#_claimed_tables[@]} -gt 0 ]] && _claim_source="in_progress rows in queue_state.csv"
+
+    # (2) The directory this round created, if Step 1's mkdir ran. Disagreement
+    # is reported, not resolved silently.
+    if [[ -n "$batch_dir" ]]; then
+      local from_dir; from_dir="$(basename "$batch_dir")"
+      if [[ -z "$_claimed_batch" ]]; then
+        _claimed_batch="$from_dir"
+      elif [[ "$_claimed_batch" != "$from_dir" ]]; then
+        _claim_mismatch="queue rows name $_claimed_batch but this round created $from_dir"
+      fi
+    fi
+
+    # (3) Any row naming that batch, whatever its status -- the case where Step 5
+    # already flipped the rows and the death came later (commit, push, log).
+    if [[ ${#_claimed_tables[@]} -eq 0 && -n "$_claimed_batch" ]]; then
+      while IFS=, read -r t s b _rest; do
+        [[ "${b%$'\r'}" == "$_claimed_batch" ]] && _claimed_tables+=("${t%$'\r'}")
+      done < <(tail -n +2 "$QUEUE")
+      _claim_source="queue rows naming $_claimed_batch (no in_progress rows remain)"
+    fi
+
+    _bd=""
+    [[ -n "$_claimed_batch" ]] && _bd="$ITEMTEXT/itemtables/$_claimed_batch"
+
+    # Union in any items CSV on disk whose row was already flipped or never
+    # written. A filename the queue does not know about is itself worth seeing.
+    if [[ -n "$_bd" && -d "$_bd" ]]; then
+      local f base known
+      for f in "$_bd"/*__items.csv; do
+        [[ -e "$f" ]] || continue
+        base="$(basename "$f")"; base="${base%__items.csv}"
+        known=0
+        for t in ${_claimed_tables[@]+"${_claimed_tables[@]}"}; do
+          [[ "$t" == "$base" ]] && { known=1; break; }
+        done
+        [[ "$known" -eq 0 ]] && _claimed_tables+=("$base")
+      done
+    fi
+  }
+
+  # The queue's own view of a table. Printed as a cross-check a human can act on,
+  # NEVER branched on: it is written by the orchestrator, and a dead orchestrator
+  # leaves in_progress on tables whose files are complete. That is the batch_019
+  # misclassification in one line.
+  _queue_status() {
+    awk -F, -v t="$1" '
+      NR>1 { f=$1; gsub(/\r/,"",f); sub(/^"/,"",f); sub(/"$/,"",f)
+             if (f == t) { s=$2; gsub(/\r/,"",s); print s; exit } }' "$QUEUE" 2>/dev/null
+  }
+
+  _build_stanza() {
+    local t state items prov notes verif vscr qst b
+    b="${_claimed_batch:-(none)}"
+
+    echo "## ${_claimed_batch:-unknown batch} — INCOMPLETE (detected by run_round.sh, $(date -Is))"
+    echo
+    echo '```text'
+    echo "ROUND DID NOT COMPLETE -- ${_claimed_batch:-no batch claimed}"
+    echo
+    if [[ "$rc" -ne 0 ]]; then
+      echo "Agent exit status : $rc"
+      [[ -n "$round_sig_name" ]] \
+        && echo "                    KILLED BY $round_sig_name (128 + $round_sig). It did not finish."
+    else
+      echo "Agent exit status : 0 -- but the round's post-condition failed, so exit 0"
+      echo "                    did not mean it finished. (A 429 kill exits 0; so did"
+      echo "                    batch_020, which backgrounded its gates and ended its turn.)"
+    fi
+    echo
+    if [[ ${#_claimed_tables[@]} -gt 0 ]]; then
+      echo "Claimed tables    : ${#_claimed_tables[@]}, from $_claim_source"
+    fi
+    [[ -n "$_claim_mismatch" ]] && echo "WARNING           : $_claim_mismatch"
+    if [[ -z "$_claimed_batch" ]]; then
+      echo
+      echo "No claim on disk. The agent died before Step 1 rewrote queue_state.csv,"
+      echo "or never started. Nothing to reconcile; the exit status above is the only"
+      echo "evidence. No batch directory was created."
+    elif [[ ! -d "$_bd" ]]; then
+      echo "Batch directory   : $_bd -- ABSENT"
+      echo
+      echo "The agent claimed tables but died before Step 1's mkdir, so no extraction"
+      echo "artifact can exist. Every claimed table below is NOTHING for that reason."
+    else
+      echo "Batch directory   : $_bd"
+      echo -n "Batch-level files : "
+      for f in audit_report.csv notes.csv provenance.csv verification_merged.csv; do
+        [[ -f "$_bd/$f" ]] && echo -n "$f " || echo -n "(no $f) "
+      done
+      echo
+      echo -n "Items CSVs        : "
+      ls "$_bd"/*__items.csv 2>/dev/null | wc -l
+    fi
+    if [[ ${#_claimed_tables[@]} -eq 0 ]]; then
+      echo
+      echo "No tables to inventory."
+    else
+    echo
+    printf '%-46s %-18s %-5s %-5s %-5s %-5s %-6s %s\n' \
+      TABLE STATE items prov notes verif vfy.R "queue"
+    printf '%-46s %-18s %-5s %-5s %-5s %-5s %-6s %s\n' \
+      "----------------------------------------------" "------------------" \
+      "-----" "-----" "-----" "-----" "------" "-----"
+    for t in ${_claimed_tables[@]+"${_claimed_tables[@]}"}; do
+      items="no"; prov="no"; notes="no"; verif="no"; vscr="no"
+      [[ -n "$_bd" && -f "$_bd/${t}__items.csv" ]] && items="yes"
+      [[ -n "$_bd" ]] && _has_prov  "$t" && prov="yes"
+      [[ -n "$_bd" ]] && _has_notes "$t" && notes="yes"
+      [[ -n "$_bd" ]] && _has_verif "$t" && verif="yes"
+      [[ -n "$_bd" && -f "$_bd/verify_$t.R" ]] && vscr="yes"
+      qst="$(_queue_status "$t")"
+
+      # THE PREDICATE. Only the items CSV and provenance decide it.
+      #
+      # provenance is the one artifact a subagent must write for its table
+      # "clean or not" (round_prompt_v1 Step 2). The others are deliberately
+      # NOT in the predicate:
+      #   - notes is conditional -- required only when a table "didn't get a
+      #     clean pass". batch_280's two hoai_2026_* tables are written and have
+      #     no notes row.
+      #   - verification is written by the subagent only when mapping_basis is
+      #     not data_labels, and the NOT_NEEDED row for a data_labels table is
+      #     minted by the ORCHESTRATOR at Step 3. So a data_labels table killed
+      #     between Step 2 and Step 3 legitimately has no verification artifact
+      #     of either shape. Requiring it would mark exactly the pre-merge
+      #     deaths PARTIAL.
+      #   - verify_<table>.R is absent from plainly completed batches (289, 294,
+      #     296, 297 each ship 3 items CSVs and 0 verify_*.R).
+      # All four are printed above as context, and none is judged on.
+      if   [[ "$items" == "yes" && "$prov" == "yes" ]]; then state="COMPLETE"
+      elif [[ "$items" == "yes" ]];                   then state="PARTIAL"
+      elif [[ "$prov"  == "yes" ]];                   then state="NO-CSV (documented)"
+      elif [[ "$notes" == "yes" || "$verif" == "yes" || "$vscr" == "yes" \
+              || -d "$ITEMTEXT/.cache/$t" ]];         then state="PARTIAL"
+      else                                                 state="NOTHING"
+      fi
+      printf '%-46s %-18s %-5s %-5s %-5s %-5s %-6s %s\n' \
+        "$t" "$state" "$items" "$prov" "$notes" "$verif" "$vscr" "${qst:-?}"
+    done
+    echo
+    cat <<'LEGEND'
+COMPLETE            items CSV + provenance. The table finished.
+PARTIAL             items CSV with no provenance (an ORPHAN -- quarantine it, do
+                    not promote it), or traces with no items CSV.
+NO-CSV (documented) no items CSV but provenance is written. This is what a table
+                    the agent BLOCKED looks like: Step 2 tells a blocking agent
+                    to write no CSV but to write provenance anyway, so this is an
+                    agent that RAN TO COMPLETION AND REACHED A VERDICT. Read its
+                    notes row for the retry test. blocked vs failed is not split
+                    here -- that distinction lives in the notes prose and is a
+                    human call.
+NOTHING             no artifact at all. The agent never got to this table.
+
+items/prov are the only columns the states are derived from. notes, verif, vfy.R
+and queue are CONTEXT ONLY -- see the comment in run_round.sh for why each is
+excluded. `queue` is the orchestrator's own classification; where it disagrees
+with the files, the FILES are the evidence.
+LEGEND
+    fi
+    echo
+    echo "RECONCILE BY HAND. Nothing below has been run."
+    echo
+    if [[ -n "$_claimed_batch" ]]; then
+      echo "  cd $ITEMTEXT"
+      echo "  ls -l itemtables/$_claimed_batch"
+      echo "  awk -F, 'NR>1 && \$2==\"in_progress\"' extraction_batches/queue_state.csv"
+      echo "  Rscript .claude/skills/irw-auto-itemtext/scripts/normalize_nulls.R    itemtables/$_claimed_batch"
+      echo "  Rscript .claude/skills/irw-auto-itemtext/scripts/audit_batch.R        itemtables/$_claimed_batch"
+      echo "  Rscript .claude/skills/irw-auto-itemtext/scripts/verify_batch.R       itemtables/$_claimed_batch"
+      echo "  Rscript .claude/skills/irw-auto-itemtext/scripts/lint_verification.R  itemtables/$_claimed_batch"
+      echo "  git -C $WORKTREE status --porcelain"
+    else
+      echo "  git -C $WORKTREE status --porcelain"
+      echo "  awk -F, 'NR>1 && \$2==\"in_progress\"' $QUEUE"
+    fi
+    echo
+    cat <<'TAIL'
+Then decide each table by hand per itemtext/BATCH_PROCESS.md and edit
+queue_state.csv yourself. Resetting in_progress rows to pending is a HUMAN
+decision: a dead round often finished work a blind reset would discard. Orphaned
+__items.csv with no provenance are QUARANTINED, NOT PROMOTED.
+
+This stanza left round_log.md dirty on purpose. The runner refuses a dirty
+worktree, so the queue stays stopped until you commit or discard it -- which is
+the point. Do not commit it as a way of clearing the stop.
+
+Nothing was repaired, reset, committed, promoted or deleted.
+TAIL
+    echo '```'
+  }
+
+  # Emit the stanza to BOTH sinks from ONE build, so the copies cannot drift:
+  # stdout (reaching the terminal and cron_logs/ through the tee at the bottom of
+  # this subshell) and an append to the tracked round_log.md. Appending can fail
+  # without changing the round's exit path.
+  report_round_incomplete() {
+    local stanza
+    _resolve_claim
+    stanza="$(_build_stanza)"
+    echo
+    printf '%s\n' "$stanza"
+    printf '\n%s\n' "$stanza" >> "$ITEMTEXT/extraction_batches/round_log.md" \
+      || echo "WARNING: could not append the stanza to round_log.md."
+    return 0
+  }
+  # --- end death reporting ---------------------------------------------------
+
   # Keep a copy of the transcript so the rate-limit check below can read it; the
   # copy is deleted at the end of the round.
   _agent_out="$(mktemp -t round_agent.XXXXXX)"
   claude -p "$(cat "$PROMPT")" \
     --dangerously-skip-permissions 2>&1 | tee "$_agent_out"
+  # PIPESTATUS[0] is correct for a signalled child through a pipe: bash reports
+  # it as 128+N. Decode it, because "exit 137" on its own says nothing and 137 is
+  # the common death on this laptop.
+  #
+  # One caveat: a 137 raised by `claude` itself (its own child was OOM-killed and
+  # it propagated the status) is indistinguishable from a 137 delivered TO
+  # `claude`. For reporting purposes that distinction does not matter -- either
+  # way the round did not finish.
   rc="${PIPESTATUS[0]}"
+  round_sig=""
+  round_sig_name=""
+  if (( rc > 128 )); then
+    round_sig=$(( rc - 128 ))
+    case "$round_sig" in
+      9)  round_sig_name="SIGKILL -- the OOM killer, or an external kill -9";;
+      15) round_sig_name="SIGTERM";;
+      2)  round_sig_name="SIGINT (Ctrl-C)";;
+      1)  round_sig_name="SIGHUP (terminal closed)";;
+      *)  round_sig_name="signal $round_sig";;
+    esac
+  fi
   echo
   echo "Round agent exited $rc at $(date -Is)."
+  if [[ -n "$round_sig_name" ]]; then
+    echo "  -> KILLED BY $round_sig_name (rc = 128 + $round_sig). It did NOT finish."
+  fi
 
   # The batch this round created: present now, absent before. If the round made
   # none (it stood down, or died before Step 3) this is empty, and every check
@@ -286,6 +590,10 @@ mkdir -p "$LOG_DIR"
   fi
   rm -f "$_agent_out"
 
+  # Report BEFORE the early exit. This line used to be the whole story for a
+  # signal death: the round exited with a bare status and no inventory of what it
+  # claimed or what survived, which is the common death and the silent one.
+  [[ "$rc" -ne 0 ]] && report_round_incomplete
   [[ "$rc" -ne 0 ]] && exit "$rc"
 
   # Exit 0 does not mean the round finished. It has now failed to mean that for two
@@ -318,6 +626,7 @@ mkdir -p "$LOG_DIR"
     [[ -n "$batch_dir" ]] || echo "  - no new batch directory was created (Step 3 never finished)"
     [[ "$wrote_any" -eq 0 || -f "$batch_dir/audit_report.csv" ]] || echo "  - no audit_report.csv in $batch_dir (Step 4 never finished)"
     echo
+    report_round_incomplete
     if [[ -n "$batch_dir" ]]; then
       echo "Do not re-run. The extraction work is probably intact -- check $batch_dir,"
       echo "run the Step 4 gates, and close the round out by hand per BATCH_PROCESS.md."
@@ -400,6 +709,7 @@ rc="${PIPESTATUS[0]}"
 if [[ "$rc" -ne 0 ]]; then
   echo
   echo "ROUND FAILED (exit $rc). Log: $LOG_FILE"
+  (( rc > 128 )) && echo "Exit $rc = killed by signal $(( rc - 128 )) (137 = SIGKILL/OOM, 143 = SIGTERM)."
   echo "Nothing was published -- rounds cannot publish -- but the queue may have"
   echo "rows left in_progress, which blocks every later round until you reconcile"
   echo "them. Check the batch directory before touching queue_state.csv: a killed"
