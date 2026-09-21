@@ -39,9 +39,12 @@ EXEMPT = {("ben-domingue/irw", 1702)}
 
 # --- explicit assignments, 2026-09-06 triage -------------------------------
 
-P1_WRONG_NOW = [2002, 2001, 1996, 1973, 1972, 1971, 1969, 1965, 1964, 1960, 1952,
-                1951, 1950, 1942, 1929, 1927, 1925, 1924, 1898, 1875, 1864, 1856,
-                1849, 1842, 1816, 1754, 1694, 1342]
+# Added after the pass: anything later found to be serving a wrong answer has to
+# be listed here, not just labelled by hand. `wrong-now` is not in ADD_ONLY, so a
+# hand-set label that this list does not know about is removed on the next run.
+P1_WRONG_NOW = [2313, 2029, 2002, 2001, 1996, 1973, 1972, 1971, 1969, 1965, 1964,
+                1960, 1952, 1951, 1950, 1942, 1929, 1927, 1925, 1924, 1898, 1875,
+                1864, 1856, 1849, 1842, 1816, 1754, 1694, 1342]
 # Wrong, but the affected share is not yet known — an audit, not a repair.
 P1_OTHER = [1955, 1954, 1897, 1690, 1571, 1474]
 P2 = [1992, 1985, 1970, 1962, 1961, 1940, 1863, 1837, 1828, 1817, 1810, 1792,
