@@ -14955,3 +14955,86 @@ Promoted to tracked top-level files, the same class as
 
 The general rule is now written into the skill's "where files live" section
 rather than left as this batch's lesson.
+
+## 2026-09-20 — PLOS recycled-term sweep: 0 good, but 38 open-licensed leads out of the `human_assistance` bucket
+
+Run: `irw_discover_plos.py`, plosone only, 24 terms, 498 candidates,
+`runs/plos_recycled_2026-09-20_triage.csv`. Terms are **recycled**, per the
+term-selection rule: every one was drawn from `search_terms_log.csv` rows whose
+`file` never mentions PLOS, and none collides case-insensitively with a prior
+`plos_batch*` row. The unused-for-PLOS pool stands at 2,233 unique terms
+(848 of them English-looking), so this is nowhere near exhausted.
+
+Dedup did real work before any network call: 2,605 DOIs excluded as already in
+the dictionary or already logged in `human_review/`, plus 4,943 already in
+`plos_seen_dois.csv`.
+
+**Triage flags (498):** 305 `no_usable_file`, 98 `human_assistance`,
+40 `below_min_n`, 17 `external_unresolved`, 15 `download_failed`,
+11 `not_item_response`, 8 `pii_suspected`, 3 `already_in_irw`, 1 `timeout`.
+**0 `good`** — which is now the third PLOS/PMC run running in a row to report
+zero, and is again not the real yield figure.
+
+**Step 2b ran** (`irw_retriage_ha.py`), sub-classifying the 98:
+44 `recoverable_format`, 24 `aggregate_continuous`, 14 `worth_retrying`,
+9 `human_review`, 7 `not_item_response`. The 9 `human_review` rows archived
+themselves to `human_review/human_review_plos_2026-09-20.csv`.
+
+The `recoverable_format` bucket is dominated by RULE 10b (`resp_scale_mixed`
+with `n_participants >= 100`) — one questionnaire carrying several instruments
+on different response scales, which `datastandard.md` answers with one file per
+scale. That is the same shape that turned the whole 2026-09-01 bucket into 21
+tables and the 2026-09-08 bucket into 35, so "0 good" should not be read as a
+dry run.
+
+**38 leads are open-licensed with N >= 100** (cc-by/cc0, `recoverable_format`
+or `worth_retrying`). `runs/` is gitignored, so the actionable list is recorded
+here rather than in a committed CSV:
+
+| DOI | Title | Lic | N | items | bucket |
+|---|---|---|---|---|---|
+| 10.1371/journal.pone.0246339 | Pandemic buying: Testing a psychological model of over-pur | cc-by | 3066 | 47 | recoverable_format |
+| 10.1371/journal.pone.0205389 | Smartphone Addiction Inventory (SPAI): Translation, adapta | cc-by | 2958 | 43 | recoverable_format |
+| 10.1371/journal.pone.0190771 | Structural validation of the Self-Compassion Scale with a  | cc-by | 2448 | 55 | recoverable_format |
+| 10.1371/journal.pone.0167571 | The Impact of Shame, Self-Criticism and Social Rank on Eat | cc-by | 2236 | 20 | recoverable_format |
+| 10.1371/journal.pone.0276082 | On the relationship between conspiracy theory beliefs, mis | cc0 | 2065 | 241 | recoverable_format |
+| 10.1371/journal.pone.0349016 | Network analysis of smartphone addiction and sleep disorde | cc-by | 1842 | 17 | recoverable_format |
+| 10.1371/journal.pone.0256686 | The Community Assessment of Psychic Experiences-Positive s | cc-by | 1594 | 72 | recoverable_format |
+| 10.1371/journal.pone.0323124 | From home to the screen: How parental rejection fuels cybe | cc-by | 1567 | 82 | recoverable_format |
+| 10.1371/journal.pone.0332417 | Individual differences in feelings of certainty surroundin | cc-by | 1242 | 34 | recoverable_format |
+| 10.1371/journal.pone.0268838 | How many cyberbullying(s)? A non-unitary perspective for o | cc-by | 1228 | 25 | worth_retrying |
+| 10.1371/journal.pone.0172340 | German translation, cultural adaptation, and validation of | cc-by | 1058 | 52 | recoverable_format |
+| 10.1371/journal.pone.0255634 | Gender differences in perceived stress and coping among co | cc-by | 1055 | 68 | recoverable_format |
+| 10.1371/journal.pone.0315687 | Prevalence and predictors of functional gastrointestinal d | cc-by | 1019 | 54 | recoverable_format |
+| 10.1371/journal.pone.0294777 | University makes me angry: Investigating stimulus-response | cc-by | 621 | 69 | recoverable_format |
+| 10.1371/journal.pone.0284383 | Medical decision making beyond evidence: Correlates of bel | cc-by | 599 | 24 | recoverable_format |
+| 10.1371/journal.pone.0330146 | Development of a COVID-19 Vaccination Anxiety Scale to mea | cc-by | 500 | 96 | recoverable_format |
+| 10.1371/journal.pone.0255750 | Anxious temperament and cyberchondria as mediated by fear  | cc-by | 499 | 13 | recoverable_format |
+| 10.1371/journal.pone.0272803 | A network analysis of problematic smartphone use in Japane | cc-by | 487 | 13 | recoverable_format |
+| 10.1371/journal.pone.0289559 | Trait anxiety and depressive rumination mediate the effect | cc-by | 447 | 9 | recoverable_format |
+| 10.1371/journal.pone.0288386 | No relations between executive functions and dimensional m | cc-by | 440 | 5 | recoverable_format |
+| 10.1371/journal.pone.0176924 | Assessment of the accuracy of a new tool for the screening | cc-by | 415 | 35 | worth_retrying |
+| 10.1371/journal.pone.0267321 | Psychometric properties of the Arabic version of the Exist | cc-by | 400 | 48 | worth_retrying |
+| 10.1371/journal.pone.0133907 | Which and How Many Patients Should Be Included in Randomis | cc-by | 395 | 10 | worth_retrying |
+| 10.1371/journal.pone.0324075 | Relationships between fatigue severity scale (FSS)/ scale  | cc-by | 374 | 36 | recoverable_format |
+| 10.1371/journal.pone.0264497 | Traumatic stress, depression, and non-bereavement grief fo | cc-by | 328 | 130 | recoverable_format |
+| 10.1371/journal.pone.0183467 | Relationship between parenting stress and informant discre | cc-by | 299 | 37 | recoverable_format |
+| 10.1371/journal.pone.0278092 | Translation and psychometric evaluation of Smartphone Addi | cc-by | 279 | 17 | recoverable_format |
+| 10.1371/journal.pone.0172471 | An empirical examination of the factor structure of compas | cc-by | 206 | 82 | recoverable_format |
+| 10.1371/journal.pone.0255460 | Relationship between interoceptive sensibility and somatof | cc-by | 205 | 18 | recoverable_format |
+| 10.1371/journal.pone.0186536 | Family functioning, parenting stress and quality of life i | cc-by | 202 | 13 | recoverable_format |
+| 10.1371/journal.pone.0256001 | Complementary treatment comparison for chronic pain manage | cc-by | 200 | 91 | worth_retrying |
+| 10.1371/journal.pone.0263821 | Antiepileptic drug adherence in children in southern Ethio | cc-by | 192 | 61 | recoverable_format |
+| 10.1371/journal.pone.0135377 | Smokers Show Lower Levels of Psychological Well-Being and  | cc-by | 181 | 276 | recoverable_format |
+| 10.1371/journal.pone.0137081 | Heterogeneous Determinants of Quality of Life in Different | cc-by | 157 | 34 | recoverable_format |
+| 10.1371/journal.pone.0222929 | Cognitive impairment in multiple sclerosis: An exploratory | cc-by | 150 | 39 | recoverable_format |
+| 10.1371/journal.pone.0229771 | Validation of the Dutch version of the primary care resour | cc-by | 144 | 2 | worth_retrying |
+| 10.1371/journal.pone.0248409 | Emotion regulation, mindfulness, and self-compassion among | cc-by | 129 | 174 | worth_retrying |
+| 10.1371/journal.pone.0357496 | Polish adaptation and validation of the sustainable career | cc-by | 128 | 9 | recoverable_format |
+Not on that list and deliberately so: 16 `unknown` / 2 `no-license` rows in the
+same two buckets (license gate — not verified open, so not worked), and the 24
+`aggregate_continuous` rows, which need a composite-vs-continuous call each
+before they are worth anything.
+
+**Leads are unworked as of this entry.** Discovery, triage and Step 2b are
+done; no `data/*.py` script has been written from this batch yet.

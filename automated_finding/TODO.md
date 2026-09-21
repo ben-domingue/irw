@@ -94,6 +94,25 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   OSF links) are social-network and VR-trial data and were deliberately left
   for last.
 
+## From the 2026-09-20 PLOS recycled-term sweep
+
+- [ ] **38 open-licensed leads unworked** (cc-by/cc0, N>=100) out of the
+  98-row `human_assistance` bucket — 44 `recoverable_format` + 14
+  `worth_retrying` before the license and N gates. The full ranked list is in
+  `BATCH_LOG.md` (2026-09-20), because `runs/` is gitignored. Largest first:
+  `pone.0246339` (pandemic buying, 3,066 x 47), `pone.0205389` (SPAI
+  smartphone addiction, 2,958 x 43), `pone.0190771` (German Self-Compassion
+  Scale, 2,448 x 55), `pone.0167571` (shame/self-criticism/eating, 2,236 x 20),
+  `pone.0276082` (conspiracy beliefs, CC0, 2,065 x 241). Most are RULE 10b
+  `resp_scale_mixed`, i.e. one questionnaire carrying several instruments —
+  re-read by block prefix and ship one file per scale.
+
+- [ ] **24 `aggregate_continuous` rows need a composite-vs-continuous call.**
+  Not yet adjudicated; some will be genuine per-item continuous responses and
+  some will be subscale totals. Rows in
+  `runs/plos_recycled_2026-09-20_retriage_ha.csv` (disposable — re-derivable
+  from the triage CSV).
+
 ## From the 2026-09-19 PMC tail measurement
 
 - [x] **The unaudited PMC seen-DOI tail is closed, measured not skipped.**
