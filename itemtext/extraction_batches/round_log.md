@@ -22924,3 +22924,55 @@ round):
   Anyone verifying a sibling table should use the raw `3497_num.csv`, not the marginals.
 
 Cap (`batch_299`) not reached; 16 pending rows remain.
+
+## batch_294 — 2026-09-20
+
+3 tables claimed, 3 agents (one per table), all from CIS Estudio 3497 "Calidad de la
+democracia (III)" (April 2025), continuing the spain_2025_democracy_* family begun in
+batch_293.
+
+**Written 3 / blocked 0 / failed 0 — yield 100%.** Circuit breaker not triggered.
+
+| table | items × resp | mapping_basis | status |
+|---|---|---|---|
+| spain_2025_democracy_media | 4 × 4 (P5ME) | data_labels | done |
+| spain_2025_democracy_parties | 5 × 4 (P3P) | data_labels | done |
+| spain_2025_democracy_priorities | 8 × 4 (P12) | data_labels | done |
+
+Gates: normalize_nulls 0 of 3 normalized; audit_batch 3/3 PASS with **no WARNs** (so Step 5c
+had nothing to explain); verify_batch 3× MISSING(exempt); lint_verification clean (3 rows, all
+NOT_NEEDED, written into both verification_merged.csv and mapping_verification.csv);
+irw-validate ok on all three; check_provenance clean — all three are HELD, so no issues-page
+entry is owed yet.
+
+All three are Step 5b-exempt: 3497.sav carries both variable labels (column → statement) and
+value labels (code → anchor), and data/spain_2025_democracy.do sets item = the lowercased
+source column name, so nothing is positional.
+
+**Step 5b orchestrator re-check — every agent claim reproduced exactly** via
+irw_table_sets(per_item=TRUE), no export: media n_rows 15778, per-item 3929/3949/3918/3982,
+resp {1,2,4,5}; parties 19670, 3976/3964/3967/3891/3872, resp {1,2,4,5}; priorities 31787,
+3975/3973/3963/3964/3973/3987/3974/3978, resp {1,2,3,4}. Nothing had to be corrected.
+
+Notable:
+- **P12 breaks the family pattern, correctly.** Priorities is not an agree/disagree grid but a
+  four-point priority scale (Muy/Bastante/Poco/Nada prioritario) whose code 3 is a real
+  read-aloud category the .do file KEEPS — so its resp set is contiguous {1,2,3,4} with an
+  option row for every level, unlike the {1,2,4,5} of efficacy/internal/judiciary/media/parties,
+  where CIS's not-read-aloud "(NO LEER) Ni de acuerdo ni en desacuerdo" midpoint is dropped with
+  8/9. Do not "fix" that asymmetry; it is the source.
+- The priorities agent flagged honestly that p12_2 and p12_5 share n=3973, so the count check
+  alone would not separate those two items — the mapping rests on the .sav variable labels,
+  which do. Recorded in provenance rather than papered over.
+- **Within-family inconsistency worth a human eye:** media, parties, efficacy and internal ship
+  the trailing interviewer direction "(ENTREVISTADOR/A: LEA CADA UNO DE ELLOS Y ANOTE LA
+  RESPUESTA)" inside `instructions`; judiciary (batch_293) deliberately dropped it as not
+  participant-facing. Both readings are defensible; the family should settle on one.
+- **Escalated (rounds may not write ship rows):** a CIS-family instrument_rights_register.csv
+  row is owed, covering all eight spain_2025_democracy_* tables and the 13 spain_2025_* tables
+  still queued. CIS's reuse conditions are an affirmative grant of commercial and non-commercial
+  reuse (copia, difusión, modificación, adaptación, extracción, reordenación, combinación) under
+  Ley 37/2007, conditioned only on attribution, non-distortion and no-endorsement. Two agents
+  independently fetched and hashed that page today.
+
+Cap (batch_299) not reached. 13 rows remain pending; the next round is batch_295.
