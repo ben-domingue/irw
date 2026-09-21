@@ -22770,3 +22770,99 @@ study_materials.
   each `public_note`.
 
 Cap not reached (`batch_299` does not exist). 22 rows remain pending.
+
+## batch_292 — 2026-09-20 17:56–18:12
+
+3 tables, 3 agents (one per table). **written 2 / blocked 1 / failed 0 — yield 67%.**
+Circuit breaker NOT tripped (failed = 0 of 3 = 0%; the one no-CSV table is a determinate
+rights block, which does not count). Numbering: highest existing below 300 was `batch_291`,
+so this round is `batch_292`; the 300–304 hole (irw#2228) was skipped as the prompt requires,
+and all five of those directories are now present on this branch by merge from main.
+
+All three tables come from one source, OSF node `osf.io/djcex` (Hannachi & Somat 2025,
+"Exploring eco-anxiety continuum: calibrating scales with item response theory"), and the
+round turned on a single question the three agents answered three different ways: **what
+licence governs the wording, as opposed to the instrument.** The deposit is CC BY-NC-SA 4.0.
+
+- `hannachi_2025_eco_anxiety_cas` — DONE. 65 rows, 13 items × resp 0–4, French with English
+  `item_text_translated`. mapping_basis=data_labels (codebook sheet `Feuil1` rows 56–68 tie
+  `CCAS1..CCAS13` to the full French sentence; the processing script only lowercases the column
+  name). Shipped text is NOT from the NC-SA deposit: it is transcribed from the CC BY 4.0
+  supplement of the French CAS validation (Mouguiama-Daouda et al. 2022, doi:10.5334/pb.1137.s1),
+  which is identical character-for-character to the codebook for all 13 — which is itself the
+  proof the study administered the published French version. Verification VERIFIED, `verify_*.R`
+  PASS: all 13 × 5 published category counts from Supplementary S5.1 reproduce the live table
+  exactly, all 13 profiles distinct.
+- `hannachi_2025_eco_anxiety_heas` — DONE. 65 rows, 13 items × resp 0–4. mapping_basis=paper_explicit
+  from the authors' own CC BY 4.0 OSF preprint (osf.io/yvjd3 v3) Appendix, which prints each
+  administered French item beside the authors' English back-translation and indexes them
+  `HEAS 1`..`HEAS 13`. Verification VERIFIED, `verify_*.R` PASS: all 65 published category counts
+  reproduce exactly (means to 0.01 — heas2's printed M of 1.14 disagrees with the 1.1348 its own
+  printed frequencies imply, a source-internal rounding wrinkle, so counts are the discriminating
+  evidence); all 13 vectors distinct.
+- `hannachi_2025_eco_anxiety_cope` — **BLOCKED on rights, retry test NO.** See below.
+
+### The block, and the sibling divergence that produced it (Step 5b)
+
+The `_cope` agent returned a clean pass: 140 rows, 28 items, data_labels, gates green. The
+orchestrator withdrew it. Its rights analysis was sound but addressed only the UPSTREAM
+instrument — Carver's Brief COPE page grants use and adaptation and reserves nothing, which is
+true and was independently quoted — and never reached the SOURCE DEPOSIT licence, which is the
+actual bar. Its two siblings both identified NC-SA independently and routed around it to CC BY
+publications; `_cope` has no such route, because the CC BY preprint discusses coping but prints
+none of the 28 stems (orchestrator checked: 0 occurrences of the shared stem "Le changement
+climatique m'a conduit à"), and Carver's canonical English is not a substitute — this study
+readapted the stems AND renumbered them (denial COP3/COP21, substance COP4/COP22, religion
+COP7/COP27, humour COP16/COP28, against Carver's 3/8, 4/11, 22/27, 18/28). Applying the same
+bar the previous round applied to `parental_text_intervention`. 140-row candidate banked at
+`.cache/hannachi_2025_eco_anxiety_cope/candidate__items.csv`; ships if unblocked, but **not
+unchanged** — see the anchor finding below. `check_provenance.R` independently classifies it as
+HELD, so no issues-page entry is owed for its machine translation while it does not ship.
+
+Orchestrator re-checks, all done against the sources rather than the reports:
+
+1. **Licence, CONFIRMED and re-derived.** All three agents called the node CC BY-NC-SA 4.0.
+   Resolved the id rather than trusting them: `api.osf.io/v2/licenses/60bf99e058510b0009a5a9a9/`
+   → "CC-BY Attribution-NonCommercial-ShareAlike 4.0 International".
+2. **The anchor divergence, and `_cope` was wrong.** `_cope` shipped `option_text` "pas du
+   tout" (resp=0) / "tout à fait" (resp=4); `_cas` and `_heas` both left option_text blank and
+   `_heas` explicitly declined those anchors. Dumped the codebook: column F ("scale") holds
+   **exactly one cell in the entire sheet**, row 2, against the separate 26-item emotion block
+   (EM1–EM26, rows 2–27), reading "échelle de likert :1- pas du tout ,2,3,4,5 - tout à fait" —
+   stated as **1–5** where the stored coding is **0–4**, and carrying no statement about the
+   COPE rows 28–55, which have no scale cell at all. `_heas` was right on both counts. Recorded
+   against the banked candidate so the anchors are cleared before any future ship.
+3. **Three items' responses ship twice, CONFIRMED.** `data/hannachi_2025_eco_anxiety.py`
+   (`SHARED_CAS_HEAS`, lines 23–26) emits the deposit's merged columns `CCAS2/HEAS8`,
+   `CCAS9/HEAS9`, `CCAS11/HEAS10` into BOTH tables, as cas2/heas8, cas9/heas9, cas11/heas10.
+   Counted them in the raw deposit CSV: n=534 each, 303/102/66/33/30, 329/109/56/32/8,
+   344/106/46/26/12 — exactly the counts `verify_batch` reproduces for heas8/9/10. So 1,602
+   responses are live in both tables. Faithful to a study that administered those items once for
+   two instruments, and the item text is right in both places, but pooling the tables
+   double-counts, and a corpus duplicate detector will flag the pair. Logged `note_only`.
+
+### Gates
+
+`normalize_nulls.R` fixed 2 files (literal "NA" → blank in `_cas`'s option_text). `audit_batch.R`
+**2/2 PASS, no anomalies** — no WARNs, so Step 5c has nothing to explain. `verify_batch.R`
+PASS=2. `lint_verification.R` 0 ERROR / 1 WARN: `_heas` evidence says option_text ships blank,
+which is correct and expected — the study publishes the 0–4 anchors only as an English gloss
+and never the French anchor wording respondents actually read, so nothing was padded. Same is
+true of `_cas`. `irw-validate` ok on both. `check_provenance.R` passed.
+
+### For Ben
+
+**The CC BY-NC(-SA) ruling is now blocking a second table in two rounds, and this pair is a
+sharper test case than the last one.** `parental_text_intervention` (batch_290) and
+`hannachi_2025_eco_anxiety_cope` are both fully extracted, fully gated and banked, blocked only
+by a bare NC-SA deposit licence — while the 2026-09-19 AUDIT register row ("NC escalated per the
+NC rule and ruled SHIP; IRW is non-commercial") points the other way. What makes this round the
+better test: the *same deposit* shipped two tables and blocked a third, purely on whether the
+wording happened to be re-published under CC BY elsewhere. Either ruling costs nothing further
+to apply — both candidates ship unchanged (modulo `_cope`'s two anchors) or stay held.
+
+Also outstanding, unchanged from batch_290: **response-side licence review**, now for three more
+tables. `datastandard.md` bars response-data intake under any NC/ND restriction, yet all three
+`hannachi_2025_eco_anxiety_*` response tables are live off this CC BY-NC-SA 4.0 deposit.
+
+Cap (batch_299) not reached. 19 pending rows remain.
