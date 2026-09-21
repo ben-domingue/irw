@@ -1,0 +1,61 @@
+CLASS A — instrument wording rights.
+
+When you email, remember to:
+1. cc itemresponsewarehouse@stanford.edu and bdomingue@stanford.edu
+2. insert the instrument name, the item count, and links at the end
+3. name the specific version/edition -- rights often differ between the
+   original and a short form or a translation
+4. log the send in processing_notes/outreach/outreach_log.csv
+
+WHAT THIS ASK IS, AND IS NOT. The ask is permission to redistribute the item
+wording alongside response data that is already openly licensed. It is not a
+licence to administer the instrument, not a request for scoring keys or norms,
+and not commercial use. Say so explicitly -- most refusals we have on record
+read as though the writer assumed a broader request.
+
+###email text below
+Hello,
+
+My name is Ben Domingue. I am an associate professor in the Graduate School of
+Education at Stanford University. I maintain the Item Response Warehouse (IRW),
+a public repository of item response datasets used for psychometric and
+methodological research: https://itemresponsewarehouse.org
+
+The IRW holds response data from studies that administered the [INSTRUMENT].
+That response data is already public under an open licence from the original
+investigators. What the IRW cannot currently show is the text of the items
+themselves, so a user can see that a respondent answered 3 to item 7 without
+being able to see what item 7 asked. For methodological work -- differential
+item functioning, item difficulty modelling, cross-instrument comparison --
+that wording is often what makes the data usable.
+
+I am writing to ask whether you would permit the IRW to publish the [N] item
+stems and response options of the [INSTRUMENT] alongside that response data,
+with attribution to you and a citation to the original publication.
+
+To be clear about the scope of what I am asking:
+
+- This is not a request to license the instrument for administration. Anyone
+  wanting to use the [INSTRUMENT] in their own study would still come to you.
+- It covers the item wording and response anchors only -- not scoring keys,
+  norms, manuals, or interpretive material.
+- It is limited to the specific version named above.
+- The IRW is non-commercial and freely accessible.
+- I would attribute the instrument to you on the record for every dataset that
+  uses it, in a form you are welcome to specify.
+
+If it would help, I am glad to add a note recording any conditions you would
+like attached -- for example that the wording is pinned to one version, that
+derivative translations are not licensed, or specific citation language. If you
+would rather not have the wording redistributed, that is an entirely
+satisfactory answer and I will record it so that neither I nor anyone working
+on the IRW asks you again.
+
+I am happy to discuss any questions or concerns.
+
+Thank you for your consideration,
+Ben
+
+Instrument. [name, version, item count]
+Example dataset in the IRW. [link]
+IRW data standard. https://itemresponsewarehouse.org/standard.html
