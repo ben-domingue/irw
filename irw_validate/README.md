@@ -181,6 +181,12 @@ the count and up to five examples. A genuinely empty CSV field (including
 `""`) remains missing: partial missingness is a `resp_na` warning; an entirely
 missing response column still blocks. No source file or input frame is edited.
 
+Because of that, `id_na` / `item_na` / `resp_na` word themselves by profile. On
+`upload` and `legacy` the loader keeps `NA`-style text as a response, so a
+missing value counted here is an empty cell. On `triage` and for the `data/`
+callers the reader parses those tokens as missing, so the count may mix the two
+and the message says so instead of implying a count of empty cells (#2314).
+
 CSV/TSV/TXT validation makes a second pass reading only `resp` with pandas'
 default NA-token conversion disabled. Other columns keep their existing
 parsing behavior, and clean numeric response columns still infer numeric types.

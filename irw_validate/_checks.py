@@ -33,6 +33,43 @@ OCCASION = ("rt", "rater", "wave", "timepoint", "date", "trialnum", "trial",
             "order", "session", "occasion", "period", "block", "subtest")
 
 
+def occasion_columns(df) -> list:
+    """Occasion columns present that may legitimately key a repeated id+item.
+
+    `rt` is in OCCASION for naming purposes but is excluded here: it is a
+    measurement, and rounding it would silently merge rows (#1842 blocks I
+    and J). `trial_*` columns count -- the published trial tables index their
+    trials as `trial_number`, `trial_num`, `trial_index` or `trial_block`.
+
+    Hoisted out of core.py so `dup_id_item`'s message and the gate's rescue
+    cannot disagree about which keys were considered (#2314).
+    """
+    cols = [c for c in OCCASION if c != "rt" and c in df.columns]
+    cols += [c for c in df.columns
+             if str(c).startswith("trial_") and c not in cols]
+    return cols
+
+
+def resolve_occasion(df, cols):
+    """Which occasion key makes id+item unique, and what survives if none does.
+
+    Returns ``(resolved_by, residual)``. Keys are tested individually in `cols`
+    order, then all of them together -- a design can be keyed by more than one
+    at once (`rr98_accuracy` restarts its trial index inside each block, so
+    neither column identifies a row alone and both together identify it
+    exactly). `residual` is the excess-row count under the full combination:
+    what a reader would still have to explain, which is the number the old
+    "likely ok" wording asserted away without measuring (#2314).
+    """
+    for col in cols:
+        if not df.duplicated(subset=["id", "item", col]).any():
+            return col, 0
+    if len(cols) > 1 and not df.duplicated(subset=["id", "item"] + cols).any():
+        return "+".join(cols), 0
+    residual = int(df.duplicated(subset=["id", "item"] + cols).sum())
+    return None, residual
+
+
 @dataclass
 class Check:
     name: str
@@ -291,7 +328,7 @@ def _response_scale_checks(df, resp_num, permitted_values, item_constructs):
 
 def run_qc(df: pd.DataFrame, coercion_method: str = "",
            original_cols: list = None, permitted_values=None,
-           item_constructs=None) -> list:
+           item_constructs=None, profile: str = "") -> list:
     """QC checks. The first block is ported directly from the IRW's official
     validate_irw.R (statuses: pass=OK, warn=NOTE, fail=ERROR). The second block
     is extra heuristics we add on top, clearly labelled.
@@ -314,13 +351,34 @@ def run_qc(df: pd.DataFrame, coercion_method: str = "",
         return checks  # nothing else is meaningful without these
     checks.append(Check("required_columns", "pass", "id/item/resp present"))
 
-    # NAs in required columns: all-NA = ERROR, some-NA = NOTE
+    # NAs in required columns: all-NA = ERROR, some-NA = NOTE.
+    #
+    # Whether a literal "NA"-style token counts as missing depends on who read
+    # the file. validate_file() keeps such tokens as text for the gate profiles
+    # (#2029); triage and the data/ callers let the reader parse them as
+    # missing. So the same table yields different counts here, and the message
+    # must not claim more than the profile can support. 22 finding/column pairs
+    # in the #1728 sample had zero source typed nulls and tokens parsed as
+    # missing, which the old bare "N NAs" reported as if they were the same
+    # thing (#2314 item 4).
+    if profile in ("upload", "legacy"):
+        na_note = ("Literal 'NA'-style text is read as a response on this "
+                   "profile, not as missing, so these are empty cells in the "
+                   "frame as read.")
+    else:
+        na_note = ("These may be empty cells or literal 'NA'-style text the "
+                   "reader parsed as missing; the two are not distinguished "
+                   "here.")
     for col in IRW_REQUIRED:
         n_na = df[col].isna().sum()
         if n_na == len(df):
-            checks.append(Check(f"{col}_na", "fail", f"{col} is entirely NA"))
+            checks.append(Check(f"{col}_na", "fail",
+                                f"{col} has no usable values: all {len(df)} "
+                                f"row(s) are missing. {na_note}"))
         elif n_na > 0:
-            checks.append(Check(f"{col}_na", "warn", f"{col} has {n_na} NAs"))
+            checks.append(Check(f"{col}_na", "warn",
+                                f"{col} has {n_na} missing value(s). "
+                                f"{na_note}"))
 
     # resp must be numeric (ERROR)
     resp_num = pd.to_numeric(df["resp"], errors="coerce")
@@ -339,9 +397,23 @@ def run_qc(df: pd.DataFrame, coercion_method: str = "",
                             f"{dups} duplicate id+item rows with no "
                             "wave/timepoint/date column"))
     elif dups > 0:
-        checks.append(Check("dup_id_item", "warn",
-                            f"{dups} duplicate id+item rows "
-                            f"(longitudinal column {longitudinal} present — likely ok)"))
+        # The old wording said "likely ok" on the mere PRESENCE of a wave /
+        # timepoint / date column, without testing whether it explains anything.
+        # 14 of 15 sampled reassurances were wrong: the repeats survived every
+        # accepted occasion key and their full combination, F185 retaining 4,552
+        # excess key rows after `wave` and `trial_number` (#2314 item 3). Report
+        # what was tested and what is left instead of reassuring.
+        occ = occasion_columns(df)
+        resolved_by, residual = resolve_occasion(df, occ)
+        tested = ", ".join(occ) if occ else "none"
+        if resolved_by is not None:
+            detail = (f"{dups} duplicate id+item rows, made unique by "
+                      f"{resolved_by} (occasion columns tested: {tested})")
+        else:
+            detail = (f"{dups} duplicate id+item rows; {residual} excess row(s) "
+                      f"remain after keying on every occasion column present, "
+                      f"individually and combined (tested: {tested})")
+        checks.append(Check("dup_id_item", "warn", detail))
     else:
         checks.append(Check("dup_id_item", "pass", "id+item rows unique"))
 
@@ -373,10 +445,25 @@ def run_qc(df: pd.DataFrame, coercion_method: str = "",
     # ===== extra heuristics (beyond the official validator) ===============
 
     # resp scale sanity — flag a resp that looks continuous/mis-parsed
+    # `ncat` counts NUMERIC categories: text becomes NaN under the coercion
+    # above and drops out. So stored text gives zero categories, not one, and
+    # saying "1 unique value" of a column holding five distinct labels was
+    # simply false (#2314 item 6). The numeric-response requirement is
+    # unchanged -- both cases still fail, and resp_variation* is still a
+    # GATE_ERROR -- but the two are no longer described as the same thing.
     ncat = resp_num.nunique()
-    if ncat <= 1:
+    if ncat == 0:
+        stored = df["resp"].dropna().nunique()
+        if stored == 0:
+            detail = "resp has no values at all"
+        else:
+            detail = (f"resp has no numeric values: {stored} distinct value(s) "
+                      "are stored as text. IRW requires numeric responses. This "
+                      "is zero numeric categories, not one response value.")
+        checks.append(Check("resp_variation*", "fail", detail))
+    elif ncat == 1:
         checks.append(Check("resp_variation*", "fail",
-                            "resp has no variation (1 unique value)"))
+                            "resp has no variation (1 unique numeric value)"))
     elif ncat > 50:
         checks.append(Check("resp_ordinal*", "warn",
                             f"{ncat} distinct resp values — confirm continuous, "
@@ -400,17 +487,35 @@ def run_qc(df: pd.DataFrame, coercion_method: str = "",
             checks.append(Check("imputed_values*", "warn",
                                 f"Columns suggest imputed values may be present: "
                                 f"{imputed_signals}. IRW requires their removal."))
-    # Mean-imputation signature: any item where one value accounts for >60% of rows.
+    # Response concentration: any item where one value accounts for >60% of rows.
+    #
+    # This used to be reported as "possible mean imputation". It was 52% of all
+    # alert volume in the #1728 triage pass and 0 of 30 sampled messages were
+    # supported -- all 30 came back cannot-tell, because a table cannot
+    # establish WHY it looks the way it does. Valid binary or ordered-category
+    # data exceeds a 60% modal share routinely. So the check keeps its
+    # observation and drops its causal claim (#2314 item 1).
+    #
+    # It also used to break after the first hit and then name that one item, so
+    # the message read as though it were the only concentrated item. Count them
+    # all and say so.
     if resp_num.notna().any():
-        by_item = df.groupby("item")["resp"]
-        for item_name, grp in by_item:
+        concentrated = []
+        for item_name, grp in df.groupby("item")["resp"]:
             vc = grp.value_counts(normalize=True)
             if not vc.empty and vc.iloc[0] > 0.60:
-                checks.append(Check("imputed_values*", "warn",
-                                    f"Item '{item_name}' has one resp value "
-                                    f"accounting for {vc.iloc[0]:.0%} of responses "
-                                    "— possible mean imputation."))
-                break  # one warning is enough
+                concentrated.append((item_name, float(vc.iloc[0])))
+        if concentrated:
+            worst_item, worst_share = max(concentrated, key=lambda t: t[1])
+            n_items = df["item"].nunique()
+            checks.append(Check(
+                "imputed_values*", "warn",
+                f"{len(concentrated)} of {n_items} item(s) have a single resp "
+                f"value covering over 60% of their responses (highest: "
+                f"'{worst_item}' at {worst_share:.0%}). This reports response "
+                "concentration only and does not establish a cause: binary and "
+                "ordered-category items reach these shares legitimately. Check "
+                "the source if you need to know whether values were imputed."))
 
     # P1 #5: date column validation.
     if "date" in df.columns:
@@ -459,7 +564,11 @@ def run_qc(df: pd.DataFrame, coercion_method: str = "",
 
     # Prefixes are a review hint: MC/CR can be two formats of one construct.
     if "item" in df.columns:
-        prefixes = [re.split(r"[\d_]", str(i))[0].lower()
+        # Trim first: F246 carries both `question ` (21 labels) and `question`
+        # (14), which are one 35-label group and were counted as two (#2314
+        # item 7). Whitespace only -- the source item IDs are never rewritten,
+        # and the normalized prefix is deliberately not reported as a construct.
+        prefixes = [re.split(r"[\d_]", str(i).strip())[0].strip().lower()
                     for i in df["item"].unique() if str(i)]
         prefix_counts = pd.Series(prefixes).value_counts()
         dominant = prefix_counts[prefix_counts >= 3]

@@ -49,11 +49,21 @@ validate_irw <- function(df, label="") {
         # @check id_na
         # @check item_na
         # @check resp_na
+        ## A bare "N NAs" conflates a typed null with an "NA"-style token that
+        ## read.csv parsed as missing, and the two mean different things at
+        ## upload (#2029, #2314). This side cannot tell them apart -- say so
+        ## rather than implying a count of empty cells.
+        na_note <- paste("These may be empty cells or literal 'NA'-style text",
+                         "that the reader parsed as missing; the two are not",
+                         "distinguished here.")
         for (col in required) {
             if (all(is.na(df[[col]])))
-                issues <- c(issues, paste(col, "is entirely NA"))
+                issues <- c(issues, paste0(col, " has no usable values: all ",
+                                           nrow(df), " row(s) are missing. ",
+                                           na_note))
             else if (any(is.na(df[[col]])))
-                notes <- c(notes, paste(col, "has", sum(is.na(df[[col]])), "NAs"))
+                notes <- c(notes, paste0(col, " has ", sum(is.na(df[[col]])),
+                                         " missing value(s). ", na_note))
         }
 
         # @check resp_numeric
@@ -65,13 +75,50 @@ validate_irw <- function(df, label="") {
             issues <- c(issues, paste("resp is not numeric (class:", class(df$resp), ")"))
 
         # @check dup_id_item
+        ## The reassurance used to fire on the mere PRESENCE of a wave /
+        ## timepoint / date column, without testing whether it explained
+        ## anything. 14 of 15 sampled reassurances were wrong -- the repeats
+        ## survived every accepted occasion key and their full combination
+        ## (#1728, #2314). Test the keys and report what is left.
+        ##
+        ## `rt` is deliberately absent: it is a measurement, and letting it key
+        ## a row would silently merge rows that differ only by rounding.
         known_longitudinal <- c("wave", "timepoint", "date")
         has_longitudinal   <- any(known_longitudinal %in% names(df))
+        occasion <- c("rater", "wave", "timepoint", "date", "trialnum", "trial",
+                      "order", "session", "occasion", "period", "block",
+                      "subtest")
+        occ <- c(intersect(occasion, names(df)),
+                 grep("^trial_", names(df), value = TRUE))
+        occ <- unique(occ)
         dups <- sum(duplicated(df[, c("id", "item")]))
-        if (dups > 0 && !has_longitudinal)
+        if (dups > 0 && !has_longitudinal) {
             issues <- c(issues, paste(dups, "duplicate id+item rows with no wave/timepoint/date column"))
-        else if (dups > 0)
-            notes <- c(notes, paste(dups, "duplicate id+item rows (longitudinal column present — likely ok)"))
+        } else if (dups > 0) {
+            resolved <- NULL
+            for (col in occ)
+                if (!any(duplicated(df[, c("id", "item", col)]))) {
+                    resolved <- col
+                    break
+                }
+            if (is.null(resolved) && length(occ) > 1 &&
+                !any(duplicated(df[, c("id", "item", occ)])))
+                resolved <- paste(occ, collapse = "+")
+            if (!is.null(resolved)) {
+                notes <- c(notes, paste0(dups, " duplicate id+item rows, made ",
+                                         "unique by ", resolved,
+                                         " (occasion columns tested: ",
+                                         paste(occ, collapse = ", "), ")"))
+            } else {
+                residual <- sum(duplicated(df[, c("id", "item", occ)]))
+                notes <- c(notes, paste0(dups, " duplicate id+item rows; ",
+                                         residual, " excess row(s) remain after ",
+                                         "keying on every occasion column ",
+                                         "present, individually and combined ",
+                                         "(tested: ",
+                                         paste(occ, collapse = ", "), ")"))
+            }
+        }
     }
 
     # @check cov_prefix

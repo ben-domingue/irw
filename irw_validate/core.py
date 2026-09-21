@@ -5,7 +5,8 @@ import os
 from pathlib import Path
 
 from . import extra
-from ._checks import OCCASION, irw_metadata, run_qc
+from ._checks import (irw_metadata, occasion_columns,
+                      resolve_occasion, run_qc)
 from .model import STANDARD_VERSION, Finding, Report, severity_for
 
 #: Above this, a full pandas load is not worth it inside the uploader's hot
@@ -148,7 +149,8 @@ def validate_frame(df, *, label: str = "", profile: str = "upload",
                         coercion_method=context.get("coercion_method", ""),
                         original_cols=context.get("original_cols"),
                         permitted_values=context.get("permitted_values"),
-                        item_constructs=context.get("item_constructs")):
+                        item_constructs=context.get("item_constructs"),
+                        profile=profile):
         report.checks_run.append(check.name)
         severity = severity_for(check.name, check.status, profile)
         if severity is None:
@@ -175,35 +177,20 @@ def validate_frame(df, *, label: str = "", profile: str = "upload",
     # the arm, not the occasion, and a person appearing twice under them is a
     # real question rather than an explanation.
     if profile in ("upload", "legacy") and {"id", "item"}.issubset(df.columns):
-        # `rt` is in OCCASION for naming purposes but must never be what makes
-        # rows unique -- it is a measurement, and rounding it would silently
-        # merge rows (#1842 blocks I and J).
-        # `trial_*` columns count too: the 24 published trial tables index
-        # their trials as `trial_number`, `trial_num`, `trial_index` or
-        # `trial_block`, next to an `item` that always identifies the probe
-        # (standard C5; ruled 2026-09-19 -- the older reading, that `item` is
-        # uninformative in trial data and `trial_` carries the probe, is
-        # deprecated).
-        occasion_cols = tuple(c for c in OCCASION if c != "rt") + tuple(
-            c for c in df.columns if str(c).startswith("trial_"))
+        # Which columns count, and why `rt` does not, is documented on
+        # occasion_columns() in _checks.py. Both live there rather than here so
+        # that this rescue and `dup_id_item`'s own message test the same keys
+        # and cannot drift (#2314). resolve_occasion() tries each column alone,
+        # then all of them together -- a design can be keyed by more than one at
+        # once: `rr98_accuracy` is trials within blocks, where `trial` restarts
+        # at 1 in each block, so neither column identifies a row alone and both
+        # together identify it exactly. Same shape for a session x exercise
+        # index. The `trial_*` reading was ruled 2026-09-19 (standard C5): the
+        # 24 published trial tables index trials as `trial_number`,
+        # `trial_num`, `trial_index` or `trial_block`, next to an `item` that
+        # always identifies the probe.
         if any(f.check == "dup_id_item" for f in report.findings):
-            resolved_by = None
-            for col in occasion_cols:
-                if col in df.columns and not df.duplicated(subset=["id", "item", col]).any():
-                    resolved_by = col
-                    break
-            # A design can be keyed by more than one occasion column at once, and
-            # testing them only one at a time misses that. `rr98_accuracy` is
-            # trials within blocks: `trial` restarts at 1 in each block, so
-            # neither column identifies a row alone and both together identify
-            # it exactly. Same shape for a session x exercise index. So if no
-            # single column resolves the repeat, try every occasion column
-            # present together before calling it a defect.
-            if resolved_by is None:
-                present = [c for c in occasion_cols if c in df.columns]
-                if len(present) > 1 and not df.duplicated(
-                        subset=["id", "item"] + present).any():
-                    resolved_by = "+".join(present)
+            resolved_by, _residual = resolve_occasion(df, occasion_columns(df))
             if resolved_by is not None:
                 report.findings = [f for f in report.findings
                                    if f.check != "dup_id_item"]
