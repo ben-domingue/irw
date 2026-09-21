@@ -204,6 +204,10 @@ getrows<-function(l) {
     ## biblio_refresh_log.csv. Derived rather than configured so all four
     ## sources get one without four more list entries.
     file.refresh <- if (is.null(l$file.refresh)) sub("\\.csv$", "_refresh_log.csv", file.out) else l$file.refresh
+    ## Which licences this run derived, and on what basis. Same reasoning as the
+    ## refresh log above: 78 derived cells is a list a person can read, where the
+    ## same change in biblio.csv is a 78-row diff among thousands (#2040).
+    file.license <- if (is.null(l$file.license)) sub("\\.csv$", "_license_log.csv", file.out) else l$file.license
     ## Read the current biblio file
     user <- redivis$user(user)
     dataset <- user$dataset(dataset)
@@ -294,6 +298,14 @@ getrows<-function(l) {
     ## Blank-only fill for the OSF deposits that set no licence; the sheet
     ## always wins, so a real licence recorded later supersedes it.
     biblio <- apply_osf_permission(biblio, name)
+    ## Record what IRW redistributes under, where the sheet says what the SOURCE
+    ## licensed and nobody has filled the derived column (#2040). Blank-only,
+    ## and only for licences that carry forward unchanged -- NC, ND, `Custom`,
+    ## `Permission via Email` and an absent source licence are all left blank on
+    ## purpose, because each is a decision rather than a copy. Runs after
+    ## apply_osf_permission() deliberately; see the note on the function.
+    derived_lic <- apply_derived_license(biblio, name, log.file = file.license)
+    biblio <- derived_lic$biblio
     ## Same carry-through, for the paper/deposit DOI split (#1690).
     biblio <- apply_data_doi(biblio, irw_dict, name)
     ## Correct the Descriptions that name an instrument the table does not
