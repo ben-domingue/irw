@@ -23650,3 +23650,30 @@ administered nothing. The table name points at the secondary source.
 
 Noted at triage: its `public_note` was EMPTY, so had it shipped the blank `item_text` would have
 reached users undisclosed. Moot now, but that is the shape the issues page exists to catch.
+
+### 2026-09-22 — 29 tables uploaded to the irw_text_2 draft (NOT released, NOT stamped)
+
+Ben approved the upload after a `--dry-run` showed a draft was already open at
+`datapages.irw_text_2:next` and all 29 planned as NEW (so no append, no doubling). `red_up
+--dataset irw_text_2 --yes itemtables/clean` sent 29/29, exit 0.
+
+**Verified independently of red_up's own report**: every one of the 29 staged CSVs was re-read
+locally and its row count compared against the draft table's `numRows` via the SDK —
+**29/29 exact match, no errors**. red_up's own row-count verification agreed.
+
+**Four tables carried uploads from an EARLIER run that the replace cleared**
+(`chile_2023_children-adolescents-survey_aa`, both `christensen_2018_wsssf_*`,
+`dwyer_2019_clinton_activist`). Nothing was doubled — `red_up` replaces rather than appends — but
+it means the draft had been written to before today.
+
+**THE DRAFT CONTAINS 32 TABLES, NOT 29.** Three are not from this line and will publish with the
+release: `pilch_2021_ipip20_validation__items` (100 rows), `pilch_2021_preventive_behavior__items`
+(20 rows), `pilch_2021_preventive_vas__items` (63 rows). All three carry real rows — they are NOT
+the empty-shell failure mode of irw#2262 — but they came from another session and nobody in this
+one reviewed them. **Confirm they are meant to go out before releasing.**
+
+`uploaded` deliberately left EMPTY in every provenance.csv and in mapping_verification.csv.
+Stamping waits on Ben's confirmation that the release happened; a stamp ahead of the fact is
+worse than none. The shipped `__items.csv` files also stay in `clean/` and their batch dirs until
+then. #2356 stays OPEN until after the release and the stamp/cleanup pass — squash-merging first
+causes add/add conflicts and silently restores the CSVs that pass deletes.
