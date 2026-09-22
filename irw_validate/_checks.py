@@ -529,21 +529,66 @@ def run_qc(df: pd.DataFrame, coercion_method: str = "",
                                 f"date max={d.max():.0f} — looks too small for "
                                 "Unix seconds; verify units"))
 
-    # P1 #6: rt column validation.
+    # P1 #6: rt column validation. The standard reads `rt` as the seconds one
+    # item response took, so the checks here test that sentence from three
+    # sides: the units, the values, and whether the column is item-level at
+    # all. The old units threshold (median > 60000) only caught a table whose
+    # median item took over 16 hours of seconds; a source recording
+    # milliseconds usually lands far below that and passed silently.
     if "rt" in df.columns:
         rt = pd.to_numeric(df["rt"], errors="coerce")
         if rt.isna().mean() > 0.1:
             checks.append(Check("rt_numeric*", "warn",
                                 "rt column is not numeric"))
         elif rt.notna().any():
-            if rt.median() > 60000:
+            med = float(rt.median())
+            if med > 1000:
                 checks.append(Check("rt_units*", "warn",
-                                    f"rt median={rt.median():.0f} — likely "
-                                    "milliseconds, not seconds (IRW requires "
-                                    "seconds)"))
+                                    f"rt median={med:.0f} — read as seconds "
+                                    f"that is {med / 60:.0f} minutes for a "
+                                    "single item response. If the source "
+                                    "recorded milliseconds, divide by 1000; "
+                                    "IRW requires seconds. If the time really "
+                                    "is that long, say so in the processing "
+                                    "notes."))
             if (rt < 0).any():
                 checks.append(Check("rt_negative*", "warn",
                                     "rt has negative values"))
+            zero_share = float((rt == 0).mean())
+            if zero_share > 0.01:
+                checks.append(Check("rt_zero*", "warn",
+                                    f"{zero_share:.0%} of rt values are "
+                                    "exactly 0. No response takes no time, so "
+                                    "these are a sentinel (missing, timed out, "
+                                    "carried over) rather than a measurement — "
+                                    "verify against the source and blank them "
+                                    "if they are not times."))
+            # An `rt` that never varies across the items answered at one
+            # occasion is not the time that item took: it is the duration of
+            # the whole beep/survey/block, copied onto every row. Only occasion
+            # keys other than rt can define "one sitting" (`occasion_columns`
+            # excludes rt for the same reason).
+            keys = [c for c in occasion_columns(df) if c in df.columns]
+            if keys and "id" in df.columns and "item" in df.columns:
+                sub = df.loc[rt.notna(), ["id", "item"] + keys].copy()
+                sub["__rt"] = rt[rt.notna()]
+                grp = sub.groupby(["id"] + keys, observed=True)
+                n_items = grp["item"].nunique()
+                multi = n_items[n_items > 1].index
+                if len(multi) >= 20:
+                    constant = grp["__rt"].nunique().loc[multi].eq(1)
+                    share = float(constant.mean())
+                    if share > 0.9:
+                        checks.append(Check("rt_item_level*", "warn",
+                                            f"rt is identical across the items "
+                                            f"answered at the same occasion in "
+                                            f"{share:.0%} of {len(multi)} "
+                                            f"person-occasions (keyed by "
+                                            f"{keys}). That is an occasion-level "
+                                            "duration or latency, not the "
+                                            "per-item response time `rt` means "
+                                            "in the standard — rename it to a "
+                                            "`cov_` column or document it."))
 
     # treat column should be 0/1 if present
     if "treat" in df.columns:

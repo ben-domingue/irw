@@ -311,6 +311,64 @@ class RepeatedMeasures(unittest.TestCase):
         self.assertIn("dup_id_item", [f.check for f in report.findings])
 
 
+class ResponseTimes(unittest.TestCase):
+    """`rt` is the seconds ONE item response took (standard.qmd). Each check
+    below tests that sentence from a different side. The shapes come from
+    openesm_0018_bailon, an ESM table whose `rt` is the latency from beep to
+    response -- one value per beep, copied onto both items, 0 where nobody
+    answered -- which the old median>60000 units check passed in silence."""
+
+    def _esm(self, rt_per_wave):
+        rows = []
+        for pid in range(1, 41):
+            for wave, rt in enumerate(rt_per_wave, start=1):
+                for item in ("arousal", "valence"):
+                    rows.append({"id": pid, "item": item, "resp": 3,
+                                 "wave": wave, "rt": rt})
+        return pd.DataFrame(rows)
+
+    def test_an_occasion_level_rt_is_named_as_such(self):
+        report = validate_frame(self._esm([12, 300, 45]), label="esm_2024.csv")
+        finding = next(f for f in report.findings if f.check == "rt_item_level*")
+        self.assertIn("100% of 120 person-occasions", finding.message)
+
+    def test_a_genuinely_item_level_rt_is_not_flagged(self):
+        df = self._esm([12, 300, 45])
+        df["rt"] = [3, 9] * (len(df) // 2)
+        names = [f.check for f in validate_frame(df, label="esm_2024.csv").findings]
+        self.assertNotIn("rt_item_level*", names)
+
+    def test_zero_response_times_are_flagged_as_a_sentinel(self):
+        df = self._esm([0, 300, 45])
+        finding = next(f for f in validate_frame(df, label="esm_2024.csv").findings
+                       if f.check == "rt_zero*")
+        self.assertIn("33%", finding.message)
+
+    def test_a_stray_zero_is_not_worth_a_warning(self):
+        df = self._esm([12, 300, 45])
+        df.loc[0, "rt"] = 0
+        names = [f.check for f in validate_frame(df, label="esm_2024.csv").findings]
+        self.assertNotIn("rt_zero*", names)
+
+    def test_millisecond_units_are_caught_well_below_the_old_threshold(self):
+        # 1.4 s and 2.6 s recorded as ms: the old check needed a median of
+        # 60000 before it said anything.
+        df = self._esm([1400, 2600])
+        finding = next(f for f in validate_frame(df, label="esm_2024.csv").findings
+                       if f.check == "rt_units*")
+        self.assertIn("milliseconds", finding.message)
+
+    def test_plausible_seconds_say_nothing_about_units(self):
+        names = [f.check for f in
+                 validate_frame(self._esm([4, 11, 30]), label="esm_2024.csv").findings]
+        self.assertNotIn("rt_units*", names)
+
+    def test_none_of_the_rt_checks_block_an_upload(self):
+        report = validate_frame(self._esm([0, 1400, 2600]), label="esm_2024.csv")
+        self.assertEqual([], [f.check for f in report.errors
+                              if f.check.startswith("rt_")])
+
+
 class TableNames(unittest.TestCase):
     def test_every_table_suffix_is_stripped(self):
         from irw_validate.core import _table_name
