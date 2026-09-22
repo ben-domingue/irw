@@ -1,4 +1,4 @@
-# item-text tables in the Redivis shards as of 2026-09-21
+# item-text tables in the Redivis shards as of 2026-09-22
 # status=published: a reader can fetch it. status=draft: uploaded, not released yet.
 # generated -- do not hand-edit; rerun itemtext/refresh_live_tables.py (irw#1828)
 table,shard,status
@@ -244,6 +244,7 @@ chen2022b_socsupport,irw_text,published
 chen_2021_acculturation,irw_text,published
 chen_2021_enculturation,irw_text,published
 chen_2022_sasc,irw_text,published
+chile_2023_children-adolescents-survey_aa,irw_text_2,published
 chile_2023_social-welfare-survey_ee,irw_text,published
 chile_2023_social-welfare-survey_f,irw_text,published
 chile_2023_social-welfare-survey_g,irw_text,published
@@ -254,6 +255,8 @@ chile_2023_social-welfare-survey_ss,irw_text_2,published
 chile_2023_social-welfare-survey_u,irw_text_2,published
 chinvararak_2021_phq15,irw_text,published
 choy_2022_extraneous_events,irw_text,published
+christensen_2018_wsssf_2171,irw_text_2,published
+christensen_2018_wsssf_5831,irw_text_2,published
 chuemchit_2024_nonpartner_violence,irw_text,published
 chuemchit_2024_partner_violence,irw_text,published
 cinar_tanriverdi_2023_gad7,irw_text,published
@@ -324,6 +327,7 @@ dulger2024_wordcompletion,irw_text,published
 dumas_Organisciak_2022,irw_text,published
 dussel_2022_pcl17,irw_text,published
 dvivdtws_ppmial_marcatto_2023_dtw,irw_text_2,published
+dwyer_2019_clinton_activist,irw_text_2,published
 dwyer_2019_clinton_cesd,irw_text,published
 eammi_grahe_2018_american_dream,irw_text,published
 eammi_grahe_2018_belong,irw_text,published
@@ -717,6 +721,7 @@ karajko2025_ai_risk,irw_text,published
 karajko2025_ai_trust,irw_text,published
 karpudewan_2022_stp_cca,irw_text_2,published
 karpudewan_2022_stp_efa,irw_text_2,published
+kermen_2022_self_efficacy,irw_text_2,published
 kfcovid_Li2020,irw_text_2,published
 kfcovid_fear_li2020,irw_text,published
 khattak_2026_attitude,irw_text_2,published
@@ -748,6 +753,7 @@ kraft_todd_2017_warmth,irw_text_2,published
 kuczyk_2024_facemask_fba,irw_text_2,published
 kuczyk_2024_facemask_fbe,irw_text_2,published
 kuehner_2017_mw_rumination,irw_text_2,published
+kumlander_2018_scs,irw_text_2,published
 kushnir2017_anrt,irw_text,published
 kushnir2017_bfi,irw_text_2,published
 kushnir2017_ftnd,irw_text_2,published
@@ -900,6 +906,7 @@ mhscdc_fried_2020_procrastination,irw_text,published
 mhscdc_fried_2020_se,irw_text_2,published
 mhscdc_fried_2020_smartphone,irw_text_2,published
 mhscdc_fried_2020_tired,irw_text,published
+milavic_2019_psisysf,irw_text_2,published
 mindfulness_assessment,irw_text_2,published
 mistry_2022_hardship,irw_text_2,published
 mobility,irw_text_2,published
@@ -1100,7 +1107,10 @@ pierro_2018_tf_past_s4,irw_text_2,published
 pierro_2018_tf_present_s4,irw_text_2,published
 pilch_2021_coping_behavior,irw_text_2,published
 pilch_2021_fear_covid19,irw_text_2,published
+pilch_2021_ipip20_validation,irw_text_2,published
 pilch_2021_personality_ipip20,irw_text_2,published
+pilch_2021_preventive_behavior,irw_text_2,published
+pilch_2021_preventive_vas,irw_text_2,published
 pilch_2021_protection_motivation,irw_text_2,published
 polca_carcinoma,irw_text_2,published
 polca_cheating,irw_text,published
@@ -1174,6 +1184,7 @@ ravenscroft_2017_transition,irw_text_2,published
 rd_eppscqrk_kipkemoi_2024_scq,irw_text,published
 rd_ppcsedsof_afable_2023,irw_text,published
 rd_ppcvdos_padconacns_jinbo_2019_dos,irw_text,published
+rdatasets_gssabortion,irw_text_2,published
 regalado_2023_tourism_value,irw_text_2,published
 reinecke_2018_online_vigilance,irw_text_2,published
 reinwarth_2023_domain_importance,irw_text_2,published
@@ -1187,6 +1198,9 @@ riasec,irw_text,published
 ribeiro_2019_academic_motivation,irw_text_2,published
 rightwing_authoritariansim,irw_text_2,published
 rinaldi_2021_mas,irw_text_2,published
+risticdedic_2025_dhq_currentstate,irw_text_2,published
+risticdedic_2025_dhq_expectation,irw_text_2,published
+risticdedic_2025_dhq_importance,irw_text_2,published
 rmet_higgins_2022_rmet,irw_text,published
 rmet_higgins_2022_tom,irw_text,published
 roar_lexical,irw_text_2,published
@@ -1281,6 +1295,23 @@ song_2025_pj,irw_text_2,published
 song_2025_pwb,irw_text_2,published
 song_2025_sc,irw_text_2,published
 song_2025_wwb,irw_text_2,published
+spain_2025_ageism_agreement,irw_text_2,published
+spain_2025_ageism_bureaucracy,irw_text_2,published
+spain_2025_ageism_comparison,irw_text_2,published
+spain_2025_ageism_difficulty,irw_text_2,published
+spain_2025_ageism_elderpriority,irw_text_2,published
+spain_2025_ageism_elderslights,irw_text_2,published
+spain_2025_ageism_problems,irw_text_2,published
+spain_2025_ageism_youthpriority,irw_text_2,published
+spain_2025_ageism_youthslights,irw_text_2,published
+spain_2025_democracy_efficacy,irw_text_2,published
+spain_2025_democracy_internal,irw_text_2,published
+spain_2025_democracy_judiciary,irw_text_2,published
+spain_2025_democracy_media,irw_text_2,published
+spain_2025_democracy_parties,irw_text_2,published
+spain_2025_democracy_priorities,irw_text_2,published
+spain_2025_democracy_system,irw_text_2,published
+spain_2025_democracy_trust,irw_text_2,published
 spanishmegastudy,irw_text,published
 spelling2pronounce_edwards2023,irw_text,published
 srivani_2022_education4,irw_text_2,published
@@ -1398,6 +1429,7 @@ torok_2025_social_media_effects,irw_text,published
 tpi_vangsness_2019,irw_text,published
 tran_2023_gad7,irw_text_2,published
 tran_2023_phq9,irw_text_2,published
+trivia_fastrich_2017,irw_text_2,published
 tsai_2017_treeit_tam_bi,irw_text_2,published
 tsai_2017_treeit_tam_peou,irw_text_2,published
 tsai_2017_treeit_tam_pu,irw_text_2,published
