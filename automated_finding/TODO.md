@@ -26,13 +26,17 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
 ## From the 2026-09-22 PMC sweep (batch 2)
 
-- [ ] **7 tables + 3 item text tables need uploading** (the whole 2026-09-22
-  batch, for one upload). Beyond the Pilch four below: `bate_2019_srq` (8,300),
+- [x] **7 tables + 3 item text tables uploaded** (ben-domingue, confirmed
+  2026-09-22): 27,195 responses. The three shipped item text tables are stamped
+  `uploaded=2026-09-22` in both `itemtext_provenance.csv` and
+  `itemtext/mapping_verification.csv`; the four not-shipped provenance records
+  stay unstamped. Dictionary and tag rows reach the sheet via
+  `metadata/02_biblio.R` and `03_tags.R` on the next pipeline run. Original: Beyond the Pilch four below: `bate_2019_srq` (8,300),
   `kaigaishi_2024_primate_cognition` (6,356), `maes_2020_ospaq` (1,537) --
   27,195 responses in total across the batch. All 7 dictionary rows and 7 tag
   rows are staged. Item text ships for three of the Pilch tables only.
 
-- [ ] **The Pilch four** (peerj.11263, Pilch 2021):
+- [x] **The Pilch four** (peerj.11263, Pilch 2021) -- uploaded with the batch:
   `pilch_2021_fcv19s_validation` (2,275), `pilch_2021_ipip20_validation` (6,220),
   `pilch_2021_preventive_behavior` (1,532), `pilch_2021_preventive_vas` (975) --
   11,002 responses. Item text ships for all but `fcv19s_validation`. Response
