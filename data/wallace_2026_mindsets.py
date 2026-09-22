@@ -68,6 +68,7 @@ from pathlib import Path
 
 import pandas as pd
 import pyreadstat
+from irw_validate.compat import run_qc
 
 warnings.filterwarnings("ignore")
 
@@ -278,6 +279,8 @@ def _write(df: pd.DataFrame, out_name: str) -> None:
                                 kind="stable").reset_index(drop=True)
     assert df["id"].notna().all() and df["item"].notna().all()
     assert pd.api.types.is_numeric_dtype(df["resp"]) and df["resp"].notna().all()
+    bad = [c for c in run_qc(df) if c.status == "fail"]
+    assert not bad, (out_name, [(c.name, c.detail) for c in bad])
     df.to_csv(OUT / out_name, index=False)
     rng = f"[{df['resp'].min():g},{df['resp'].max():g}]"
     print(f"{out_name:26s} rows={len(df):>6,} ids={df['id'].nunique():>5} "
