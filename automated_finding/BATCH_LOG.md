@@ -15543,3 +15543,21 @@ Staged: 3 more `dictionary_auto.csv` rows, 3 `tags_auto.csv` rows
 atom added 2026-09-19, paired with `Age Range = Not applicable (non-person)` as
 that vocabulary requires), 3 `itemtext_provenance.csv` rows.
 
+### 2026-09-22 — batch uploaded
+
+ben-domingue confirmed the upload of all 7 response tables (27,195 responses)
+and the 3 Pilch item text tables. `itemtext_provenance.csv` and
+`itemtext/mapping_verification.csv` are stamped `uploaded=2026-09-22` for
+`pilch_2021_ipip20_validation`, `pilch_2021_preventive_behavior` and
+`pilch_2021_preventive_vas`. The four not-shipped provenance records
+(`pilch_2021_fcv19s_validation`, `bate_2019_srq`, `maes_2020_ospaq`,
+`kaigaishi_2024_primate_cognition`) stay unstamped by design -- they record
+where the text is, not a shipment.
+
+The 7 `dictionary_auto.csv` rows and 7 `tags_auto.csv` rows are on main and
+reach the sheet on the next `metadata/02_biblio.R` / `03_tags.R` run; nothing
+further is needed for them.
+
+PMC batch 2 is closed: 176 candidates triaged, 14 leads all terminal, 7 tables
+shipped, 191 ranked terms left in `pmc_term_backlog.csv` for batch 3.
+
