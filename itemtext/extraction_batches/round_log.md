@@ -23555,3 +23555,55 @@ the owning agency beside a CC BY deposit.
 
 Circuit breaker: not tripped (0 failed of 3).
 Queue after this round: 18 pending, 0 in_progress. Cap (batch_320) NOT reached.
+
+## TRIAGE 2026-09-22 — batches 298, 299, 305, 306, 307, 308
+
+One triage pass over the six untriaged batches (298/299 from 2026-09-21; 305-308 from the
+2026-09-22 chain). 15 tables written, 2 blocked across the six rounds, 0 failed.
+
+**Gates re-run live, not taken from the round reports** (BATCH_PROCESS "Triage and staging" step 1):
+`normalize_nulls` 0 of 15 files needed changing (the rounds had already normalised);
+`audit_batch` 13 PASS / 2 WARN, reproducing each round's own result exactly against current live
+data; `verify_batch` 9 PASS + 6 MISSING(exempt) — all six exemptions are the documented
+`data_labels` case, not failures; `lint_verification` 0 ERROR / 0 WARN over all six batches, with
+one INFO on `christensen_2018_wsssf_5831` where a hedge is correctly cleared by the 2026-09-08
+item-axis rule. Nothing new surfaced against live data.
+
+**Item axis checked for every staged table**: `item_set_match` and `resp_set_match` both TRUE and
+`n_items_live == n_items_candidate` for all 12, so none has the preussmattsson shape.
+
+**STAGED to itemtables/clean/ (12).** rdatasets_gssabortion; dwyer_2019_clinton_activist;
+kumlander_2018_scs; milavic_2019_psisysf; risticdedic_2025_dhq_currentstate; trivia_fastrich_2017;
+kermen_2022_self_efficacy; risticdedic_2025_dhq_expectation; risticdedic_2025_dhq_importance;
+chile_2023_children-adolescents-survey_aa; christensen_2018_wsssf_2171; christensen_2018_wsssf_5831.
+Only `*__items.csv` was copied (the uploader walks the directory recursively). Rights: no block on
+any of the 12, and correctly no `ship` row was written to instrument_rights_register.csv by any
+round — the SCS, AICS, DHQ, kermen/GSE, Chapman WSS-SF and EANNA cases are all recorded as
+escalations in the round logs instead.
+
+**HELD (3), all awaiting Ben — not held silently, raised in the session summary:**
+1. `Zanesco_2023_Golleretal2020` — option-only item table (100% blank `item_text`, the batch_298
+   WARN). irw#1770 bars option-only when the stems sit one hop away; the round argued they are
+   demonstrably unpublished. Confirm or reverse.
+2. `spain_2025_ageism_youthpriority` and `_youthslights` — the CIS-family register row is still
+   parked; it now gates 14 of 16 `spain_2025_*` tables.
+
+**WARN dispositions.** `trivia_fastrich_2017` STAGED: the row-count anomaly is a property of the
+response data (per-item counts 340-742, smooth unimodal, nothing near 2x median, which is what
+conflation would look like), not an item-text defect. Two things about it for a human glance:
+it sits on the index workbook's `xz_todo` tab (flagged-for-later, not claimed, no STOP), and five
+item codes carry two administered wordings from mid-study fixes (poisonous->venomous,
+county->country, gas marks->gas masks, plus a mojibake author name) with the corrected wording
+shipping. `Zanesco_2023_Golleretal2020` WARN: held, see above.
+
+**NOT uploaded and NOT stamped.** Nothing here reached Redivis; `uploaded` is deliberately EMPTY in
+every provenance.csv. Stamping ahead of a confirmed upload is worse than not stamping.
+
+**Owed after any upload + release:** issues-page entries (BATCH_PROCESS step 8), including the
+`kumlander_2018_scs` disclosure that English for resp 2-4 was rendered by IRW where the study
+published English only for the two scale endpoints (`translation_source=mixed`), and the
+`milavic_2019_psisysf` anchor-contradiction note.
+
+**Gate caveat carried from the chain:** `check_provenance`'s disclosure half was REPORTED BUT NOT
+ENFORCED in these rounds — the `irw_site` checkout it reads is on branch `validate-pin-1-2-0`, not
+main. The provenance half ran clean. Worth a re-run once that checkout is back on main.
