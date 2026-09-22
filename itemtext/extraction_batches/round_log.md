@@ -23370,3 +23370,59 @@ grant rather than silence. (2) AICS — no restrictive clause locatable, and IRW
 from the CC BY 4.0 PLOS deposit's own SPSS labels, so silence-is-permission.
 
 Queue after this round: 27 pending, 0 in_progress. Cap (batch_320) NOT reached.
+
+## batch_306 — 2026-09-22 04:38–04:52 — 3 tables, 3 written / 0 blocked / 0 failed (yield 3/3 = 100%)
+
+Numbering: 299 + 1 = 300 lands in the 300–304 hole claimed by irw#2228, and `batch_305` is ours
+and complete, so this round is **`batch_306`** and the series continues consecutively from here
+toward the cap. Three agents, one per table (the 2026-09-11 setting).
+
+- `trivia_fastrich_2017` — 488 rows (244 items × 2), mapping_basis `data_labels`, VERIFIED.
+  The live table carries the wording itself as `cov_question`, so a server-side GROUP BY (no
+  export) ties all 244 codes to their own text and 0/244 to any other. Five codes (135, 167,
+  224, 234, 267) carry two administered wordings — mid-study fixes of poisonous→venomous,
+  county→country, gas marks→gas masks and a mojibake author name; the corrected wording ships.
+  `option_text` is the 0/1 scoring of `Memory.sACC`, not a participant option.
+- `milavic_2019_psisysf` — 90 rows (18 items × 5), mapping_basis `paper_explicit`, VERIFIED.
+  All 18 items reproduce their own Table 1 row (M/SD/%Min/%Max), largest deviation 0.005, and
+  uniqueness was tested as well as agreement (min margin to runner-up 0.181), so the two
+  near-tied mean pairs are separated. Administered in Croatian; the Croatian wording is not
+  recoverable from the deposit, so English ships as `translated_substitute` /
+  `translation_source=study_supplied`.
+- `risticdedic_2025_dhq_currentstate` — 630 rows (30 items × 21), mapping_basis `data_labels`,
+  verification NOT_NEEDED (exempt). Step 3b mattered here: the three DHQ dimensions share one
+  30-statement pool but have different stems, and only the current-state stem ships. Siblings
+  `_expectation` and `_importance` were read but not built; they remain pending.
+
+Gates: normalize_nulls fixed 2 of 3; audit_batch 2 PASS / 1 WARN; verify_batch 2 PASS + 1
+MISSING (the documented `data_labels` exemption, not a failure); lint_verification clean;
+`irw-validate` clean on all three; check_provenance clean. Note check_provenance again reported
+that the irw_site checkout is on branch `validate-pin-1-2-0`, so its disclosure check is
+reported but NOT enforced.
+
+Step 5c — the one WARN, `trivia_fastrich_2017` row-count anomaly (median 613.5): explained in
+notes.csv and it is a property of the RESPONSE DATA, not an itemtext defect. Per-item counts run
+340–742 in a smooth unimodal spread with nothing near 2× the median, which is what conflation
+would look like; participants each saw a random subset of the pool. The five reworded codes are
+not among the flagged items and their variants sum to ordinary totals.
+
+Step 5b — both source-overriding claims independently re-checked by the orchestrator, and both
+held:
+- The Milavić paper really does contradict itself on the anchors. Methods (article text) says
+  "1 (= almost never) to 5 (= almost always)"; the Table 1 footnote, which is image-only, says
+  "1 = strongly disagree" / "5 = strongly agree". The agent shipped the footnote's labels —
+  correct, as that footnote is attached to these 18 items. Disclosed in public_note. The (R)
+  markers on items 7, 8, 9, 16, 17, 18 were confirmed against the same image.
+- The `development3` SPSS label typo is real, and the corroboration is stronger than the agent
+  reported: within the SAME .sav, `development3_currentstate` and `development3_expectation`
+  read "developed tho address" while `development3_importance` reads "developed to address".
+  The correction is fixed by the source's own sibling variable, not only by the questionnaire.
+
+Rights: no block. One `ship`-shaped case (DHQ) is the depositing authors' own instrument under
+CC BY 4.0 on Zenodo; PSIS-Y and the Fastrich trivia pool ship under silence-is-permission. Per
+the standing rule, no `ship` row was written to instrument_rights_register.csv.
+
+Flag for triage: `trivia_fastrich_2017` sits on the index workbook's `xz_todo` tab
+(flagged-for-later, not claimed, no STOP), so extraction proceeded — worth a human glance.
+
+Queue after this round: 24 pending, 0 in_progress. Cap (batch_320) NOT reached.
