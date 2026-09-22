@@ -92,7 +92,13 @@ page_entries <- unique(tolower(trimws(gsub('^["\']|["\']$', "",
 # invisible here -- which is how 60 tables shipping project-generated English
 # came to owe an issues-page entry with nothing reporting it (#1777, 2026-09-02).
 # A reconciler that silently does not see half the corpus is worse than none.
-provs <- c(Sys.glob("itemtables/batch_*/provenance.csv"),
+# itemtables/pilot/ was the same blind spot one directory over: its eight rows
+# are all stamped 2026-09-04, and while this glob was batch-only,
+# preussmattsson_2022_ownership was reported STAMP OWED forever (its batch_205
+# re-extraction carries NA and the stamped pilot row was not read), while
+# iwasa_2016_padua_inventory owed a page entry that nothing could report
+# (2026-09-21). Glob the directories under itemtables/, do not name them.
+provs <- c(Sys.glob("itemtables/*/provenance.csv"),
            Sys.glob("language_backfill/*provenance.csv"))
 provs <- provs[file.exists(provs)]
 if (!length(provs)) stop("no provenance.csv found -- run from itemtext/")
