@@ -23248,3 +23248,50 @@ must not be read as an all-clear.
 
 Cap (`batch_299`) NOT reached. **Queue is down to its last pending table, `rdatasets_gssabortion`** —
 so the next round is both the final queue round and the cap round.
+
+## batch_299 — 2026-09-21
+
+1 table claimed (the last `pending` row in the queue), 1 agent. **Written 1 / blocked 0 /
+failed 0 — yield 1/1 (100%).** No circuit-breaker concern.
+
+- `rdatasets_gssabortion` — CLEAN PASS. 7 items x 2 options = 14 rows. The GSS
+  abortion-attitudes battery (ABDEFECT, ABNOMORE, ABHLTH, ABPOOR, ABRAPE, ABSINGLE,
+  ABANY). mapping_basis=`data_labels` **by derivation, not assertion**: `data/Rdatasets.R`
+  subsets the stevedata port by name and sets `item = names(x)[i]`, so the IRW item code
+  IS the source column name — an identity bijection, and the codes are self-describing on
+  top of that. text_source=`canonical_instrument` (verbatim GSS codebook wording via
+  gssrdoc; the Rdatasets port only paraphrases each variable, so it pins the mapping but
+  is not the administered wording — the bitew_2020 pattern). Step 5b status=`NOT_NEEDED`.
+
+Gates: normalize 0/1 changed; audit_batch **PASS, no anomalies** (no WARNs to explain
+under Step 5c); verify_batch **PASS**; lint_verification clean (1 row, no problems);
+`irw-validate` ok, 2 checks nothing to report; `check_provenance.R` clean — its one REVIEW
+line (`ye_2025_q25_scale`, translation_source=mixed) is pre-existing and not from this round.
+
+Step 5b orchestrator re-check: the agent's two numeric claims were re-derived by running
+`verify_batch.R` here rather than taken from its report. Both reproduce. Live share of
+resp=1 vs GSS published yes/(yes+no) marginals: abhlth 89.61/89.79, abrape 81.39/81.71,
+abdefect 79.67/79.67, abpoor 47.23/48.15, abnomore 44.61/45.83, absingle 44.15/45.21,
+abany 41.40/43.32 — largest deviation 1.92 points against a 3.0 tolerance, rank order
+identical across all 7 (Spearman 1.000), in the direction expected because the port stops
+short of 2024. That also pins the option axis: the flipped reading would put abhlth at
+10.39% against a published 89.79%. Honest limit, recorded by the agent and confirmed here:
+the marginal route alone does NOT separate abnomore from absingle (0.4 points live, ~1 SE
+at these n) — the identity bijection is what distinguishes every item, which is why the
+row is NOT_NEEDED rather than VERIFIED.
+
+Response-data note (not an itemtext defect): `abany` has n=36,794 against ~44,000 for the
+other six items, because abany was first asked in 1977 and sits on a different GSS ballot
+rotation. A design feature of the survey, not missingness introduced by the IRW script.
+
+Rights: no quotable restriction locatable. Only gss.norc.org's site-footer copyright
+notice, which is a notice about the site rather than a term on the instrument (the PANAS
+case); norc.org's terms page carries no substantive clause; the wording is republished in
+full by NORC's own codebook, ICPSR, Berkeley SDA and gssrdoc. Silence is permission.
+
+**QUEUE EXHAUSTED.** This was the last `pending` row. Final state: done 1175 / blocked 280 /
+failed 13 / excluded 60 (the 52 enem* tables plus 8 others), 0 pending. The next firing will
+self-cancel on the Step 0 "zero rows with status==pending" condition — that is the queue
+being finished, not a fault. The round cap (batch_320) was NOT reached and is now moot
+unless a human adds work: the 13 `failed` rows are the retryable remainder, and the 280
+`blocked` ones each carry a row in pending_index_notes.csv saying what would have to change.
