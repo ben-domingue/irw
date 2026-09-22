@@ -35,7 +35,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "irw-validate"
-version = "1.1.1"
+version = "1.2.0"
 description = "Check a table against the Item Response Warehouse format, with an exit code"
 readme = "README.md"
 requires-python = ">=3.9"
