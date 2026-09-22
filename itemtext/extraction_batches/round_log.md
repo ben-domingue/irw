@@ -23677,3 +23677,42 @@ Stamping waits on Ben's confirmation that the release happened; a stamp ahead of
 worse than none. The shipped `__items.csv` files also stay in `clean/` and their batch dirs until
 then. #2356 stays OPEN until after the release and the stamp/cleanup pass — squash-merging first
 causes add/add conflicts and silently restores the CSVs that pass deletes.
+
+### 2026-09-22 — post-release bookkeeping complete (release, stamps, issues page, GitHub issues)
+
+Ben released **irw_text_2 v6.3** (880 tables; `red_up.drafts` reports "no draft", the release
+tell). `live_tables.csv` refreshed: 1575 published, 0 in draft — exactly +32 on the pre-release
+1543, confirming the 29 from this line plus the 3 `pilch_2021_*` tables from another session.
+
+**Stamped** `uploaded=2026-09-22` on 29 rows across 11 batch `provenance.csv` files and 29 rows in
+`mapping_verification.csv`. Each file was rewritten only in the convention it round-trips
+byte-identically in, verified per file first — batch provenance mixes MINIMAL and QUOTE_ALL across
+batches, `mapping_verification.csv` is QUOTE_ALL/CRLF. Files that round-trip in NO convention were
+left untouched; none held a released table. The diff was exactly the target lines, no reformatting.
+
+**Shipped `__items.csv` deleted** from their batch folders after sha256-matching each against the
+uploaded copy (29/29 identical). Sidecars stay. `itemtables/clean/` left for Ben to clear.
+
+**Issues page (BATCH_PROCESS step 8): 29 entries applied, DUE now zero.** 27 of the 29 were DUE;
+`rdatasets_gssabortion` and `christensen_2018_wsssf_5831` were not, and entries were written for
+them anyway after reading their notes. 28 entries came from `draft_issues_qmd.R`; the
+`christensen_2018_wsssf_5831` entry is HAND-WRITTEN off its `notes.csv` — the drafter sees only
+`public_note`. That table's `option_text` is item-dependent (it stores keyed scores, so `resp=1` is
+'True' on 42 items and 'False' on the 18 reverse-keyed ones), which is exactly the kind of
+text-vs-table mismatch the page exists for. PR: **datapages/irw#225**, branched from origin/main in
+a scratch worktree so the local `irw_site` checkout (on another session's `validate-pin-1-2-0`) was
+never touched. Verified before opening: `yaml.load` gives 1005 entries, no duplicates, zero DUE.
+
+**Two GitHub issues filed from this chain's findings**, both of which the round logs had recorded
+as "no issue was filed":
+- **irw#2364** — retire `dvivdtws_ppmial_marcatto_2023_ocb` and `_snaq`, the last two copies of
+  `_dtw`. This answers the open question in #2287's own body; with `_cwb` (#1967) and `_ocs`
+  (#2287) the whole family duplicates `_dtw`, and the deposit's real OCS/OCB/CWB/SNAQ responses
+  appear not to be in IRW at all. Deletion is a Redivis action on published response tables, so Ben's.
+- **irw#2365** — the `chile_2023_children-adolescents-survey_*` family breaches the 40-char intake
+  cap (41-43 chars) and carries hyphens; unfixable from an item-text round because the item table
+  must reproduce the live name exactly. Four more siblings are still queued.
+
+Still open: #2356 can now be merged (squash, NO --delete-branch); five ship-shaped rights
+escalations await register rows (SCS, AICS, DHQ, kermen/GSE, Chapman WSS-SF, EANNA); the
+`trivia_fastrich_2017` `xz_todo` glance; 18 queue rows left unrun by Ben's call.
