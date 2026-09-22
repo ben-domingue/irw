@@ -15271,3 +15271,182 @@ different way: every flagged item still carries 21-42 genuine missing cells in
 the source `.sav` and only integer anchors. A mean-imputed column has no
 missing left (that is the point of imputing) and contains a fractional
 constant. Neither holds, so these are real modal-response concentrations.
+
+## 2026-09-22 — PMC batch 2 (recycled ranked terms, second sweep off `pmc_term_backlog.csv`)
+
+Ran `irw_discover_pmc.py` over the **top 50 unrun terms** from
+`pmc_term_backlog.csv`, ranked by projected new DOIs (612 of the 1,553
+projected across all 241 unrun terms). No new term scout — this is the second
+batch the 2026-09-20 scout was built to feed. Terms appended to
+`search_terms_log.csv` and marked `run_2026_09_22=yes` in the backlog; 191
+ranked terms remain unrun.
+
+Dedup excluded 2,626 dictionary DOIs, 1,017 `human_review/` DOIs and 3,851
+`pmc_seen_dois.csv` DOIs before any fetch. 550 journal×term queries over 9
+journals → **176 candidates triaged**, ~55 min wall-clock.
+
+| flag | n |
+|---|---|
+| `no_usable_file` | 80 |
+| `license_restricted` | 69 |
+| `human_assistance` | 16 |
+| `external_unresolved` | 3 |
+| `download_failed` | 3 |
+| `below_min_n` | 2 |
+| `not_item_response` | 2 |
+| `pii_suspected` | 1 |
+
+**Zero `good` rows.** Consistent with the connector's documented ~1% base
+rate on a 176-row pool; the yield is in the `human_assistance` bucket.
+
+**Step 2b did NOT run automatically, and this is a real gap in the manual
+path.** SKILL.md says the scheduled connectors call `irw_retriage_ha.py`
+unconditionally — that is true of `irw_discover_pmc_monthly.py`, but
+`irw_discover_pmc.py` invoked by hand runs no retriage and emits no
+`refined_flag` column. Run by hand here (`runs/pmc_batch2_retriage_ha.csv`),
+which archived 3 rows to `human_review/human_review_pmc_2026-09-22.csv`.
+Anyone firing the non-monthly script directly must do the same.
+
+Retriage of the 16: `recoverable_format` 5, `aggregate_continuous` 4,
+`worth_retrying` 4, `human_review` 3.
+
+**10 unworked leads + 3 licence-blocked + 1 PII skip → `pmc_leads_2026-09-22.csv`** (tracked,
+with `status`/`note`, per the 2026-09-20 rule that a batch's unworked leads
+are a standing record and must not die in `runs/`). All 13 are `unworked`.
+Ranked by instrument shape, not response count. Largest unworked by shape:
+`10.7717/peerj.6672` (coastal MPA preference classes, 4,485×21),
+`10.1038/s41598-024-77912-7` (grooming network / inhibitory control,
+3,024×31), `10.7717/peerj.15826` (MCI in type 2 diabetes, 328×30),
+`10.7717/peerj.11263` (Polish Fear of COVID-19 validation, 383×18). Most
+`recoverable_format` rows failed QC on `resp_scale_mixed` — the familiar
+one-questionnaire-several-instruments shape, so re-read by block prefix and
+ship one file per scale.
+
+**The `unknown` licences are CORRECT, not a defect** — and the first pass of
+this write-up got that wrong, which is worth recording because the mistake is
+an easy one to repeat. All five `unknown` rows reach their data through a
+Data Availability link, so `triage_external_link()` checks **the deposit's**
+licence, not the article's, per the source-licence rule (ECR-R, 2026-09-04).
+Checking the three actionable ones against Crossref returned CC BY 4.0 and
+looked like the 2026-09-20 lookup defect recurring. That was the wrong check:
+Crossref describes the *article*. The deposits themselves are
+`osf.io/s4kwv` (public, **no licence set**), `osf.io/zkwna` (public, **no
+licence set**) and `osf.io/zjnsb` (404 without a token — private or
+withdrawn). `unknown` is the right verdict on all three and the skip is
+correct; "fixing" it would have let an article's CC BY launder an unlicensed
+deposit, which is precisely what that rule exists to stop.
+
+All three are structurally strong and blocked purely on licence, so they are
+appended to `license_blocked_candidates.csv` (now 32 rows) and carry
+`status=blocked_licence` in the leads CSV. That leaves **10 unworked leads**,
+not 13.
+
+`license_restricted` at 69/176 (39%) is **not** that defect: 68 are
+`cc-by-nc-nd` and 1 `cc-by-nc`, genuinely outside IRW's open set. Correctly
+excluded, nothing to reopen.
+
+**PII skip: `10.1186/s12889-020-09096-4`** (German physical activity
+self-efficacy scale). Its SI `.xlsx` carries a `Date_of_birth` column — the
+blanket whole-candidate skip, not the 2026-09-20 platform-participant-ID
+carve-out, which covers only pure account identifiers. No standing file, per
+policy; recorded here and in the leads CSV as `status=skipped_pii`.
+
+**Watch the OSF review link on `10.1186/s12889-023-17109-1`**: its
+`external_link` is a `?view_only=` node, the exact private-unlicensed-node
+trap from 2026-09-20. Its triaged data file is a direct SI attachment, so the
+article's CC BY may well cover what was read — but confirm `public:` on the
+node before touching anything fetched through that link.
+
+No processing scripts written, no item text, nothing to upload from this
+batch yet.
+
+### 2026-09-22 follow-up — Step 2b wired into the manual connectors
+
+`irw_discover_pmc.py` and `irw_discover_plos.py` now call
+`chain_step2b(args.out, run=True)` at the end of `main()`, the same call
+`irw_discover_pmc_monthly.py` has made since #2076. Both are the same triage
+code as their `_monthly` wrappers but a different `main()`, which is how they
+were missed: #2076 fixed `irw_batch_updated --retriage`, the follow-up fixed
+the two scheduled wrappers, and nobody checked the hand-fired entry points.
+Smoke-tested by calling `chain_step2b` on a copy of this batch's triage CSV --
+`refined_flag` present, `human_review/` archive idempotent (merges and dedups
+on `doi`, still 3 rows / 3 distinct DOIs after a second pass).
+
+`irw_discover_monthly.py` was checked and deliberately left alone: it is
+discovery-only, emits `source/title/doi/published/url` with no `flag` column,
+and its candidates reach Step 2b through `irw_batch_updated --retriage`.
+`chain_step2b`'s docstring previously listed it as one of the connectors that
+needed the fix; corrected.
+
+### 2026-09-22 — lead 1 of 10 worked: peerj.11263 (Pilch 2021, Polish FCV-19S validation)
+
+**4 tables, 11,002 responses**, all CC BY 4.0, all `run_qc`-clean.
+
+| table | rows | ids | items | resp |
+|---|---|---|---|---|
+| `pilch_2021_fcv19s_validation` | 2,275 | 325 | 7 | 1-5 |
+| `pilch_2021_ipip20_validation` | 6,220 | 311 | 20 | 1-5 |
+| `pilch_2021_preventive_behavior` | 1,532 | 383 | 4 | 1-5 |
+| `pilch_2021_preventive_vas` | 975 | 325 | 3 | 0-100 |
+
+**The find that shaped the batch: Sample 1 is already in the IRW.** The deposit
+has two sheets. Sample 1 (n=383) is the SAME SAMPLE as PLOS ONE
+10.1371/journal.pone.0258606, live since batch_140 as `pilch_2021_fear_covid19`
+and siblings. Same first author, same year, both Polish, N 383 vs 397 -- close
+enough to be worth checking rather than assuming, so it was checked on the
+responses themselves: 206 of Sample 1's 206 distinct fear1-7 patterns occur in
+the PLOS file, and the item means agree to three decimals
+(2.595/2.423/1.525/... vs 2.592/2.421/1.532/...). Sample 1 is the PLOS file
+minus its 4 FCV-19S-incomplete rows. Its fear1-7 is therefore NOT shipped.
+Sample 2 (n=325) is genuinely distinct: zero shared IPIP response patterns,
+visibly different means.
+
+Sample 1's `Preventive1-4` block DOES ship -- a different instrument (4 items,
+1-5) from anything in the PLOS deposit (BEH1-10, 1-7), so new data about an
+already-present sample. Its ids do not link to the live tables and nothing
+claims they do.
+
+The paper's Method confirms the recruitment for both samples: 708 community
+members via online social-media advertisements, 15 May - 15 Jun 2020.
+
+**Item text: shipped for 3 of 4** (the deposit's "Materials" sheet carries every
+item in administered Polish with an English gloss, plus each block's anchors --
+the cheap case). `pilch_2021_fcv19s_validation` is the exception and is NOT a
+re-derivation problem: the full Polish and English FCV-19S wording is in hand,
+but the Fear of COVID-19 Scale (Ahorsu et al.) has no row in
+`itemtext/instrument_rights_register.csv`. One rights call away.
+
+Gates: `normalize_nulls.R` (3 fixed), `validate_items.R --resp-csv` PASS x3,
+`audit_batch.R --resp-dir` 3/3 PASS no anomalies, `irw-validate` clean,
+`check_provenance.R` exit 0. `itemtext_output/` holds nothing but `*__items.csv`.
+
+**Step 5b, and a verification that first said FAIL on a correct mapping.** The
+IPIP mapping is `paper_explicit` (the Materials sheet lists 20 stems under a
+heading naming the range IPIP1-IPIP20), so it needed a real check. The first
+draft's rival test was a cyclic shift of the text by k positions -- which is
+worthless here, because the IPIP-BFM-20 partition {i, i+5, i+10, i+15} maps onto
+ITSELF under any shift, so every k yields a valid five-block partition and only
+relabels which block is Extraversion. It duly reported the shipped mapping
+losing to k=1, i.e. FAIL. The test that works is per-item: for each item, which
+block do the responses put it closest to, and is that the block its text claims?
+**20 of 20**, own-block affinity 0.232-0.563 against next-best 0.023-0.283,
+beating all 2000 random stem-to-code permutations (mean 4.10/20, max 11/20).
+Recorded PARTIAL, not VERIFIED -- it pins each item to its FACTOR, not its stem;
+swapping IPIP1 with IPIP11 would change none of the numbers. The dead-end test
+is documented in `verify_pilch_2021_ipip20_validation.R` so it is not
+re-invented. The two small author-constructed blocks are honest `NO_ROUTE`:
+3 and 4 unidimensional items, no published per-item values, no polarity
+contrast, so nothing in the responses survives a swap.
+
+No issues-page entry is owed: the per-item scan found no observed resp without
+an option row, no blank `item_text`, and no stem shared across items. The blank
+`option_text` cells (60 of 100 on the IPIP, 57 of 63 on the VAS) are unlabeled
+scale points -- required to be blank, and specifically NOT padded from the
+English gloss, which labels all five points where the administered Polish labels
+only the endpoints.
+
+Staged: 4 `dictionary_auto.csv` rows via `stage_dict_row.py`, 4 `claude-auto`
+rows in `tags/tags_auto.csv` (`metadata/tests/test_tags_union.R` passes), 4
+`itemtext_provenance.csv` rows (3 shipped + 1 not-shipped record), 3
+`itemtext/mapping_verification.csv` rows.
+
