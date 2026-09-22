@@ -1,16 +1,65 @@
 """Wallace et al. (2026) mindsets converter.
 
-Recode: Study S2c stored its certainty items (certain1-3) reverse-anchored
-(1 = very certain, 7 = very uncertain), the opposite of the other studies
-(1 = not at all, 7 = very much). Those rows are rewritten as 8 - resp so that
-higher always means more certain, and are flagged with itemcov_recoded = 1 in
-wallace_2026_certain.
+Seven studies (Study 2 in the main text; S1a, S1b, S1c, S2a, S2b, S2c in the
+supplement), each a two-condition experiment in which the mindset of an
+organization -- MCM Consulting in S1a/S1b/S2a/S2b, XYZ Organization in S1c/S2c,
+a professor in Study 2 -- was manipulated. `cov_study` records the study,
+numbered in the order above (Study 2 = 1, S1a = 2, ... S2c = 7).
 
 Treatment: the source column Mindset is the randomly assigned condition, coded
-+1 / -1 with no value labels. -1 is the fixed-mindset condition and +1 is the
-growth-mindset condition (confirmed in all seven studies: the fixed-belief
-manipulation-check items are agreed with more strongly at -1). It is written as
-treat = 1 for growth (+1) and treat = 0 for fixed (-1).
++1 / -1 with no value labels. +1 is the growth-mindset condition and -1 is the
+fixed-mindset condition, written as treat = 1 / 0. Confirming this needs care,
+because the manipulation-check items are anchored 1 = Strongly agree: under
+Mindset = +1 participants score ~5.3-5.9 on "the organization seems to believe
+people have a certain amount of intelligence and can't change it", i.e. they
+*disagreed* that the culture was fixed. Holds in all seven studies.
+
+Response direction. Almost every agreement item in this deposit runs
+1 = Strongly agree ... 7 = Strongly disagree, so a HIGH resp means LESS
+agreement. That applies to wallace_2026_fit, _cengage, _climate, _mcm_check,
+_mcm_culture, _iqbelief, _interest_org, _s2_like, _s2_engage, _s2_perf,
+_s2_warmcomp, _s2_verbalmath, _s2c_mc, _s2c_uncertmind, _s2c_covidcert,
+_s2c_desirecert and _s2c_pfi. The rating-scale items vary: _interest, _belong,
+_concern, _learn, _apply, _rec, _certain, _reflection and _s2_profcert all run
+1 = low ... 7 = high after the recodes below, while _s2c_metacog and
+_s2c_selfcert run 1 = very much ... 7 = not at all, and _s2c_intoluncert runs
+1 = describes me extremely well ... 7 = does not describe me, as deposited.
+
+Note that wallace_2026_interest (S1c, Study 2; 1 = not at all ... 7 = extremely)
+and wallace_2026_interest_org (S1a/S1b/S2a/S2b/S2c; 1 = strongly agree) measure
+the same construct in opposite directions. They are left as deposited -- each
+table is internally consistent -- but anyone pooling the two must flip one.
+
+Recodes. Where one table pools studies whose anchors ran in opposite
+directions, the minority is rewritten as 8 - resp so the table is internally
+consistent, and those rows carry itemcov_recoded = 1. This affects Study S2c
+only, which printed its response options in reverse order relative to S1c and
+Study 2 for the certainty items (1 = Very Certain ... 7 = Very Uncertain,
+against 1 = Not at all ... 7 = Very much elsewhere) and for belong1-5,
+concern1-5, learn1-3, apply1-2 and rec1-2 (1 = extremely / very much ...
+7 = not at all, against 1 = not at all elsewhere). Tables built from a single
+study, and tables whose studies agree, are left as deposited and have no
+itemcov_recoded column.
+
+itemcov_design in wallace_2026_certain records how certainty was elicited:
+S1c and Study 2 asked three differently worded global questions after the whole
+intelligence-beliefs block (three_item_scale), while every other study
+interleaved one identically worded rating after each belief item
+(per_response). itemcov_scale_version in wallace_2026_mcm_check records which
+of the three manipulation-check versions a row came from; they are the same
+construct asked about different referents.
+
+itemcov_reverse_keyed marks the items a scale scores in reverse relative to its
+other items (malleable*_MCM against fixed*_MCM, MCMmanip2R/4R, IQB2R, belong4R,
+warm3R). It is relative to the other items in the table, not to the response
+anchors.
+
+IQbelief*T* naming is inconsistent across studies: in S1a/S1b/S2a/S2b
+IQbelief1T2 is the second *item* ("Your intelligence is something about you
+that you can't change very much"), not item 1 at a second timepoint. Studies
+that did measure beliefs twice use `wave`.
+
+Source: https://osf.io/dqw9f/ (download osfstorage to data/dqw9f-osfstorage-archive).
 """
 from __future__ import annotations
 
@@ -48,6 +97,14 @@ COV_MAP = {
     "politicalorientation": "cov_political_orientation",
     "similarstudy": "cov_similar_study",
 }
+
+
+# Study S2c administered several scales with the response options printed in the
+# opposite order from S1c / Study 2 (see the module docstring). _f marks those
+# columns for the 8 - resp rewrite that _collect applies.
+def _f(study: str, col: str) -> str:
+    """Prefix col with '-' when this study's anchors run the other way."""
+    return f"-{col}" if study == "s2c" else col
 
 
 def _dweck3(study):
@@ -110,10 +167,10 @@ SCALES = {
                 ("organized", "organized", None, 0), ("good_place", "goodplace", None, 0)],
     },
     "belong.csv": {
-        s: [("belong1", "belong1", None, 0), ("belong2", "belong2", None, 0),
-            ("belong3", "belong3", None, 0),
-            ("belong4R" if s != "s2" else "belong4", "belong4R", None, 1),
-            ("belong5", "belong5", None, 0)]
+        s: [(_f(s, "belong1"), "belong1", None, 0), (_f(s, "belong2"), "belong2", None, 0),
+            (_f(s, "belong3"), "belong3", None, 0),
+            (_f(s, "belong4R" if s != "s2" else "belong4"), "belong4R", None, 1),
+            (_f(s, "belong5"), "belong5", None, 0)]
         for s in ("s1c", "s2", "s2c")
     },
     "fit.csv": {s: [(f"fit{i}", f"fit{i}", None, 0) for i in (1, 2, 3)]
@@ -123,7 +180,7 @@ SCALES = {
         "s2c": [(f"Cengage{i}", f"cengage{i}", None, 0) for i in (1, 2, 3)],
         "s2":  [(f"Cengage{i}", f"cengage{i}", None, 0) for i in (1, 2, 3, 4)],
     },
-    "concern.csv": {s: [(f"concern{i}", f"concern{i}", None, 0) for i in range(1, 6)]
+    "concern.csv": {s: [(_f(s, f"concern{i}"), f"concern{i}", None, 0) for i in range(1, 6)]
                     for s in ("s1c", "s2c")},
     "interest.csv": {s: [(f"interest{i}", f"interest{i}", None, 0) for i in (1, 2, 3)]
                      for s in ("s1c", "s2")},
@@ -134,11 +191,11 @@ SCALES = {
         "s2b": [("interestwork_MCM", "interest_org", None, 0)],
         "s2c": [("interest", "interest_org", None, 0)],
     },
-    "learn.csv": {s: [(f"learn{i}", f"learn{i}", None, 0) for i in (1, 2, 3)]
+    "learn.csv": {s: [(_f(s, f"learn{i}"), f"learn{i}", None, 0) for i in (1, 2, 3)]
                   for s in ("s1c", "s2c")},
-    "apply.csv": {s: [(f"apply{i}", f"apply{i}", None, 0) for i in (1, 2)]
+    "apply.csv": {s: [(_f(s, f"apply{i}"), f"apply{i}", None, 0) for i in (1, 2)]
                   for s in ("s1c", "s2c")},
-    "rec.csv": {s: [(f"rec{i}", f"rec{i}", None, 0) for i in (1, 2)]
+    "rec.csv": {s: [(_f(s, f"rec{i}"), f"rec{i}", None, 0) for i in (1, 2)]
                 for s in ("s1c", "s2c")},
     "reflection.csv": {
         s: [(f"{m}{k}", f"{m}_item{k}", None, 0)
@@ -240,6 +297,7 @@ def _collect(spec_by_study, dfs, cov_by_study, reverse_map=None, version_map=Non
             sub = pd.DataFrame({"id": df["id"], "resp": (8 - s) if flip else s})
             sub = sub.dropna(subset=["resp"])
             sub["item"] = item
+            sub["itemcov_recoded"] = int(flip)
             if wave is not None:
                 sub["wave"] = wave
             if reverse_map is not None:
@@ -248,7 +306,12 @@ def _collect(spec_by_study, dfs, cov_by_study, reverse_map=None, version_map=Non
                 sub["itemcov_scale_version"] = version_map.get(item)
             sub = sub.merge(cov_by_study[study], on="id", how="left")
             parts.append(sub)
-    return pd.concat(parts, ignore_index=True) if parts else None
+    if not parts:
+        return None
+    out = pd.concat(parts, ignore_index=True)
+    if not out["itemcov_recoded"].any():
+        out = out.drop(columns=["itemcov_recoded"])
+    return out
 
 
 def build() -> None:
@@ -263,9 +326,12 @@ def build() -> None:
                         reverse_map=(True if need_rev else None),
                         version_map=version)
         if long is not None and out_name == "certain.csv":
-            long["itemcov_recoded"] = (long["cov_study"] == STUDY_NUM["s2c"]).astype(int)
-            long["itemcov_design"] = long["item"].map(
-                lambda i: "per_response" if i.startswith("certain_item") else "three_item_scale")
+            # S1c and Study 2 asked three differently worded global certainty
+            # questions after the whole intelligence-beliefs block; every other
+            # study interleaved one certainty rating after each belief item.
+            long["itemcov_design"] = long["cov_study"].map(
+                lambda st: "three_item_scale"
+                if st in (STUDY_NUM["s1c"], STUDY_NUM["s2"]) else "per_response")
         if long is not None:
             _write(long, out_name)
 
