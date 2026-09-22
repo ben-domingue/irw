@@ -23630,3 +23630,23 @@ is 17 PASS. Item and resp sets match live for all 17.
 
 **All 17 STAGED to itemtables/clean/**, which now holds 29 tables (12 from the 2026-09-22 triage
 pass + these 17). Still nothing uploaded and nothing stamped.
+
+### 2026-09-22 — Zanesco_2023_Golleretal2020 PARKED (Ben)
+
+Ben's call under irw#1770: the table is option-only and stays out of the upload. Moved to
+`fixes/Zanesco_2023_Golleretal2020__items.PARKED.csv` with a README; sidecars stay in
+`itemtables/batch_298/` so the batch still documents it. Rights were never the issue (no block) —
+this is an item-text sufficiency call.
+
+The fact that decided it: `T1`..`T36` are **36 repeated administrations of one probe question**,
+not 36 questions, so the absent `item_text` is a single sentence that would repeat on all 180
+rows. What the file adds over the response table is a shared 5-point scale plus one instrument
+label. The stem is genuinely unpublished (encrypted `.ebs2` ScriptContents, no stimulus column in
+the export, paywalled version of record, and the 2020 paper quotes only the paired FIRST probe).
+
+Also recorded in the README, true either way: the item codes belong to Goller, Banks & Meier
+(2020)'s SART, not to a Zanesco instrument — Zanesco et al. ran an IRT re-analysis and
+administered nothing. The table name points at the secondary source.
+
+Noted at triage: its `public_note` was EMPTY, so had it shipped the blank `item_text` would have
+reached users undisclosed. Moot now, but that is the shape the issues page exists to catch.
