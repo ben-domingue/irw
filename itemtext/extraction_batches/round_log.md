@@ -23607,3 +23607,26 @@ published English only for the two scale endpoints (`translation_source=mixed`),
 **Gate caveat carried from the chain:** `check_provenance`'s disclosure half was REPORTED BUT NOT
 ENFORCED in these rounds — the `irw_site` checkout it reads is on branch `validate-pin-1-2-0`, not
 main. The provenance half ran clean. Worth a re-run once that checkout is back on main.
+
+### 2026-09-22 — CIS register row ratified (Ben), 17 spain_2025_* tables released from hold
+
+Ben ratified the reading ten `spain_2025_*` agents reached independently across batches 295-298:
+CIS's reuse conditions are an affirmative grant, reserving no right under the irw#1945 test.
+One `allow` row written to `instrument_rights_register.csv` (115 rows now), scoped to the CIS
+originator and the `spain_2025_*` family. A round may never write a `ship`/`allow` row; this one
+is the human ratification those escalations were waiting on.
+
+**Deliberately no `source_sha256`.** The CIS conditions page carries session-varying markup and
+produced four distinct hashes across batches 294-296 for identical operative clauses, so a hash
+mismatch must not be read as a licence change; the row says to verify by re-reading the clause.
+The percent-encoded URL trap is recorded in the row too (the unencoded form 404s).
+
+**The count is 17, not the 14 carried in earlier summaries** — nine `spain_2025_democracy_*` and
+eight `spain_2025_ageism_*`, spread over batches 293-298, all with `uploaded` empty.
+
+Gates re-run on batches 293-297 before staging (they were held, so never gate-checked at triage):
+normalize_nulls 0 of 15 changed, audit_batch 15 PASS / 0 WARN. With the two batch_298 tables that
+is 17 PASS. Item and resp sets match live for all 17.
+
+**All 17 STAGED to itemtables/clean/**, which now holds 29 tables (12 from the 2026-09-22 triage
+pass + these 17). Still nothing uploaded and nothing stamped.
