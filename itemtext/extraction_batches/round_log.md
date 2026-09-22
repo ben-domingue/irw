@@ -23182,3 +23182,69 @@ Two things carried forward for a human:
 Circuit breaker: not tripped (0 failed of 3). Cap (`batch_299`) not reached. Queue: 4 pending remain
 (`spain_2025_ageism_youthpriority`, `spain_2025_ageism_youthslights`, `Zanesco_2023_Golleretal2020`,
 `rdatasets_gssabortion`).
+
+## batch_298 — 2026-09-21
+
+3 tables, 3 agents (one per table, per the 2026-09-11 three-agent setting). No kills, no retries,
+no rate limit. **Written 3 / blocked 0 / failed 0 — yield 3/3 (100%).** Circuit breaker not tripped
+(0 failed). Numbering note: "highest + 1" computed over directories below 300 (297 -> 298); the
+300-304 hole belongs to irw#2228, whose batch_300/301 arrived here by a merge from main.
+
+| table | basis | rows | verification |
+|---|---|---|---|
+| `spain_2025_ageism_youthpriority` | data_labels | 77 (7 items x 11) | NOT_NEEDED (exempt by derivation) |
+| `spain_2025_ageism_youthslights`  | data_labels | 16 (4 items x 4)  | NOT_NEEDED (exempt by derivation) |
+| `Zanesco_2023_Golleretal2020`     | paper_explicit | 180 (36 items x 5) | PARTIAL, verify VERDICT: PASS |
+
+Gates: `normalize_nulls` 0 of 3 changed; `audit_batch` 2 PASS / 1 WARN; `verify_batch` 1 PASS +
+2 MISSING(exempt); `lint_verification` 3 rows, no problems; `irw-validate` 2 ok + 1 WARN; 
+`check_provenance` 1521 rows / 304 files, no failure. **No ERROR anywhere.** Both new `spain_*`
+tables register correctly as HELD, so no issues-page entry is owed until they ship.
+
+The one audit WARN is `Zanesco_2023_Golleretal2020`: 100% of rows blank `item_text`, explained in
+`notes.csv` as a source-publication gap. Goller/Banks/Meier (2020), its preregistration and Zanesco
+et al. (2024) all *describe* the second (attentional-focus) probe while quoting the paired first
+probe verbatim; the OSF E-Prime `.ebs2` `ScriptContents` is an encrypted blob, the E-Prime export has
+`ProbeD.RESP`/`ProbeD.RT` but no stimulus-text column, and the Memory & Cognition version is not OA.
+No stem was invented.
+
+**FOR THE HUMAN — one decision.** That table consequently ships `option_text` + `instrument` only,
+i.e. it is an **option-only item table**. irw#1770 bars option-only text when the stems sit one hop
+away; here they are demonstrably unpublished, so the rule's condition is not met and it was shipped
+rather than parked under `itemtext/fixes/`. Confirm or reverse that call — it is the only judgment in
+this batch that a gate cannot settle.
+
+Step 3b did real work on that table: the name points at a secondary source, and the item codes belong
+to **Goller, Banks & Meier (2020)**'s SART, not to any Zanesco instrument (Zanesco et al. administered
+nothing — it is an IRT re-analysis). Specifically the *second* of two paired probes: probe 1 has six
+categorical options, probe 2 is the five-point depth rating, and the live table has 36 items x 5 resp
+levels, matching "Only the attentional focus probe (second probe question) was examined herein."
+
+Orchestrator re-checks (Step 5b), all three agent findings verified against the deposit:
+1. **Zanesco scope — CONFIRMED.** Live table has 366 participants where the source analysed 355:
+   `data/Zanesco_2023.py` drops the `Exclude` column but keeps the 11 `Exclude=1` rows. All 366 give
+   mean 2.539 (SD 0.906); restricted to `Exclude==0`, N=355 / 2.508 / 0.880, identical at 3 dp to
+   published, against 3.492 reversed. A response-table scope difference, not an itemtext defect.
+2. **P16 universe — CONFIRMED, and the sibling correction NARROWED.** `[P16]` carries `Filtros: Si
+   EDAD>34 ir a P17.` and the marginals head the page `SOLO A QUIENES TIENEN 34 ANOS O MENOS`; exactly
+   975 of 5006 respondents are aged 18-34 and exactly those 975 have a non-zero `P16_1`, zero
+   off-diagonal. So [P16] is asked of 18-34s, not of all under-65s. **But the batch_297 `elderslights`
+   row did NOT mislocate the `EDAD<65` filter** — it correctly placed it under `[P11]`, contrary to
+   how the agent reported it. Its only error was the phrase "[P16] block asked of under-65s"; that one
+   clause was corrected in `itemtables/batch_297/provenance.csv` (unuploaded). Only sibling file touched.
+3. **Non-contiguous resp — CONFIRMED.** Raw `P16_1` codes 0/1/2/3/4/7/8/9 (counts
+   4031/76/109/1/240/545/1/3); dropping 0/3/8/9 and recoding 7->5 gives the live `{1,2,4,5}` with a
+   hole at 3, `resp=4` keeping its own anchor `Pocas veces`. A deliberate do-file recode, not a defect.
+   Note it recodes 7->**5**, where the P13 sibling recodes 7->4 — the family is knowingly inconsistent here.
+
+Carried forward: the CIS **weighted-vs-unweighted N** artefact now has two independent sightings
+(youthpriority's 4-69-row gaps; youthslights' published 1.104 against 975 unweighted interviews). It
+is a property of CIS's tabulation, not of the IRW data, and does not need re-diagnosing next round.
+CIS rights read the same for the ninth and tenth tables of the family — affirmative grant, no block —
+and **no `ship` row was written** to `instrument_rights_register.csv`, correctly. One trap recorded by
+the youthslights agent: the unencoded `.../condiciones-reutilizacion-datos-del-cis` URL serves a 404,
+so only the percent-encoded `reutilizaci%C3%B3n` form is live and a clause missing from the 404 page
+must not be read as an all-clear.
+
+Cap (`batch_299`) NOT reached. **Queue is down to its last pending table, `rdatasets_gssabortion`** —
+so the next round is both the final queue round and the cap round.
