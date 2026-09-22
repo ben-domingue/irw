@@ -23426,3 +23426,65 @@ Flag for triage: `trivia_fastrich_2017` sits on the index workbook's `xz_todo` t
 (flagged-for-later, not claimed, no STOP), so extraction proceeded — worth a human glance.
 
 Queue after this round: 24 pending, 0 in_progress. Cap (batch_320) NOT reached.
+
+---
+
+## batch_307 — 2026-09-22 (3 tables: 3 written / 0 blocked / 0 failed — yield 3/3)
+
+Numbering: 305 and 306 are this line's own last two rounds, so the series continues consecutively
+at **307**. "Highest below 300, plus one" lands on 300, inside the 300–304 hole claimed by irw#2228;
+the redirect target 305 is now taken, so the successor rule applies as written after the hole.
+307 keeps the cap (`batch_320`) a number this line will actually reach.
+
+Tables: `risticdedic_2025_dhq_expectation` (630 rows, 30 items × 21 resp, data_labels),
+`risticdedic_2025_dhq_importance` (630 rows, data_labels),
+`kermen_2022_self_efficacy` (85 rows, 17 items × 5 resp, paper_order, verification PARTIAL).
+
+Gates: normalize_nulls fixed 1 of 3 (kermen, 86 lines); audit_batch **3/3 PASS, no anomalies**
+(so no Step 5c explanations are owed); verify_batch PASS 1 / MISSING(exempt) 2 — the two DHQ
+tables are data_labels with a name-preserving suffix-strip, so no verify script is owed;
+lint_verification 3 rows, no problems; irw-validate clean on all three; check_provenance exit 0
+after the batch_306 repair below.
+
+**Repaired a defect in batch_306's provenance.csv, which was failing check_provenance.R for this
+round.** The `trivia_fastrich_2017` row was written in the 9-column `key_source` shape while the
+merge took its header from the first sidecar, which was 8-column. That left one ragged row, and
+R's reader responded by treating column 1 as row names and shifting every field left — which
+surfaced as three bogus "UNKNOWN vocabulary" complaints naming source_ref strings as
+translation_source values. Rewritten with the 9-column header and a blank key_source on the other
+two rows; `key_source=source_published` on the trivia row is preserved, and no text changed.
+The lesson for the merge step: when sidecars disagree on width, the widest header wins — taking
+the first file's header silently corrupts every row that carries more.
+
+Step 5b — all three orchestrator re-checks held, and one was decisive rather than merely
+confirmatory:
+- kermen's claim that the 11 declared reverse-scored items are stored ALREADY REVERSED is
+  correct, and the counterfactual settles it: as stored, the total is mean 61.54 / SD 9.75,
+  reproducing the source paper exactly, with all 17 corrected item-total correlations positive
+  (0.235–0.554). Reversing those 11 now gives 45.14 / 5.84 and item-totals running −0.246 to
+  0.418. The shipped anchor direction for those 11 items is therefore right. Independently
+  confirmed the deposit's `data.sav` carries NO variable labels and NO value labels for b1–b17,
+  which is what makes `paper_order` the honest basis here rather than a shortcut.
+- The `development3_expectation` SPSS typo is real — the label reads "developed tho address" —
+  and the codebook prints "developed to address" 6 times and "tho" never. Note this is the same
+  typo batch_306 documented in the currentstate facet: within one .sav, the currentstate and
+  expectation labels carry it and the importance label does not.
+- The importance facet's codebook-vs-.sav disagreement is real and was resolved the right way:
+  the codebook prints "educational program." 6 times against "programme." 24 times, and
+  "introduced to and are encouraged" 6 times; the administered master questionnaire reads
+  "programme" and "introduced to and encouraged", agreeing with the .sav labels that ship.
+
+kermen ships IRW-generated English (`translation_source=machine_translation`), so it **owes an
+entry on the public issues page when it is uploaded**. check_provenance currently lists it under
+HELD — extracted and gated, never uploaded — so nothing is owed yet; shipping it stamps it and it
+re-enters that check. Its public_note already states that the 11 reverse items' anchors run
+opposite to the other six.
+
+Rights: no block on any of the three, and no `ship` row written to instrument_rights_register.csv.
+The DHQ is the depositing authors' own instrument under CC BY 4.0. For kermen the agent correctly
+declined to read two restriction-shaped things as terms: SAGE's "request permissions" link is a
+notice about the Sherer et al. article, and TOAD's "contact the author" boilerplate is a
+third-party directory's recommendation — neither reserves a right over the instrument.
+
+Circuit breaker: not tripped (0 failed of 3).
+Queue after this round: 21 pending, 0 in_progress. Cap (batch_320) NOT reached.
