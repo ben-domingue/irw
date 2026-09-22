@@ -7810,3 +7810,4 @@ date,query,output_file,notes
 2026-09-22,technology acceptance model questionnaire,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
 2026-09-22,work-family conflict scale,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
 2026-09-22,working memory task accuracy,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
+2026-09-22,[weekly] 15 terms x journals=plosone,runs/plos_monthly_candidates_weekly_2026-09-22.csv,plos monthly-script automated run; mode=weekly; 56 candidates triaged; 15/15 terms visited (14 hit per-term cap 4)
