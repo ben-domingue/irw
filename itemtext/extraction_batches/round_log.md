@@ -23488,3 +23488,70 @@ third-party directory's recommendation — neither reserves a right over the ins
 
 Circuit breaker: not tripped (0 failed of 3).
 Queue after this round: 21 pending, 0 in_progress. Cap (batch_320) NOT reached.
+
+## batch_308 — 2026-09-22 06:38–07:05 PDT
+
+3 tables claimed, 3 agents (one per table). **Written 3 / blocked 0 / failed 0 — yield 3/3 (100%).**
+
+| table | outcome | mapping_basis | verification |
+|---|---|---|---|
+| `christensen_2018_wsssf_2171` | written (120 rows, 60 items) | reconstructed | PARTIAL, routes 2+6 |
+| `christensen_2018_wsssf_5831` | written (120 rows, 60 items) | paper_explicit | VERIFIED, code labels + routes 3/8 |
+| `chile_2023_children-adolescents-survey_aa` | written (83 rows, 38 items) | data_labels | VERIFIED, route 9 |
+
+Numbering: highest below 300 is 199-era continuation; 300–304 are irw#2228's hole and 305–307 are
+ours, so this round is **batch_308** (the series after the hole runs 305, 306, 307, 308, …).
+
+Gates: normalize_nulls fixed 1 of 3 files (christensen_2018_wsssf_2171, 121 lines); audit_batch
+**3 PASS, no anomalies** (so no Step 5c WARNs to explain); verify_batch **3 PASS**;
+lint_verification 0 ERROR / 0 WARN / 1 INFO (the 5831 evidence hedges on within-cluster ordering
+but asserts a full item-axis tie via the SI-1 code-label match, so VERIFIED stands under the
+2026-09-08 item-axis rule); check_provenance clean.
+
+**verify_batch initially reported NO VERDICT for `christensen_2018_wsssf_2171` and this was not a
+real failure.** Two causes, both fixed: a transient `cannot open URL https://osf.io/download/r2xdf/`
+(the URL returns 200 on retry), and the verify script read its items CSV by a bare relative path,
+so it only worked with the batch directory as CWD. Patched to resolve the path from `--file=` like
+the sibling script does; the batch now re-runs clean from the repo root. Worth watching for in
+future rounds — a CWD-relative read in a verify script looks exactly like a mapping failure.
+
+**irw-validate: 1 ERROR, and it is a pre-existing corpus defect, not this round's.**
+`chile_2023_children-adolescents-survey_aa` is 41 characters against a 40-char intake cap, and
+carries hyphens (name_charset WARN). The itemtext `table` column must reproduce the live name
+exactly, so neither is fixable from an itemtext round. It is a family problem, not a one-off — of
+the five published `chile_2023_children-adolescents-survey_*` tables, `_cp_a` and `_cp_c` are 43
+characters, `_aa` is 41, and `_g`/`_n` sit exactly at 40. Renaming the published response tables
+(or waiving the check for them) is a human decision; four more of these siblings are still in the
+queue and every one of them will re-raise it.
+
+Step 5b re-checks (orchestrator, independent of the agents):
+- **Confirmed** the chile agent's response-data finding, exactly as stated. `irw_table_sets` gives
+  38 items, resp {0,1,2,3,4,5}, and the shipped CSV's item axis matches live 38/38 with an empty
+  setdiff both ways. Exactly ten items are the non-substantive checkboxes of the multi-select
+  blocks — a8_78/87/88/99 and a9_78/87/88/99 ("A nadie", "No aplica", "No sabe", "No responde")
+  plus a11_88/99 — and the agent correctly did NOT include a8_77/a9_77 ("A otra persona") or
+  a11_77 ("Otra cosa"), which are substantive "other" alternatives. The `.do` file's `mvdecode`
+  never touched them because they are column names, not stored values. Disclosed in the public_note.
+- **Confirmed** the christensen keying finding by re-running the verify scripts: `resp` is the
+  *scored* value, so 1 means the schizotypy-keyed answer and the literal True/False it stands for
+  differs by item. The 5831 script reproduces the paper's Table 1 subscale M/SD/range to two
+  decimals on all four scales and finds 0 of 120 shipped rows disagreeing with that keying, with
+  18 reversed items; the 2171 agent independently reported 18 of 60 items where a reader assuming
+  1 = "True" would misread. Two agents, two sources, same 18 — mutual corroboration, and it is in
+  both public_notes.
+
+Notable beyond that: the WSS-SF wording is not in the study's own OSF deposit for 2171 (five
+variable labels in the whole `.sav`), so that agent went to Appendix A of Winterstein et al. (2011)
+via web.archive.org after `libres.uncg.edu` refused connections and unomaha was Cloudflare-403; the
+5831 agent found all 60 items printed verbatim *with their live item codes* in the same OSF node's
+SI docx, which is why the two tables have different mapping_basis for the same instrument. The
+chile dictionary Description ("principal activities and relationships with others") understates the
+module, which is Educación y Percepción — a loose description, not a Step 3b instrument mismatch.
+
+Rights: no block on any of the three, and no `ship` row written to instrument_rights_register.csv.
+The Chapman scales are unpublished instruments distributed on request — an availability statement,
+not a reserved right — and the EANNA questionnaire is the Chilean state's own, published in full by
+the owning agency beside a CC BY deposit.
+
+Circuit breaker: not tripped (0 failed of 3).
+Queue after this round: 18 pending, 0 in_progress. Cap (batch_320) NOT reached.
