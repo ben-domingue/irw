@@ -26,7 +26,13 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
 ## From the 2026-09-22 PMC sweep (batch 2)
 
-- [ ] **4 tables + 3 item text tables need uploading** (peerj.11263, Pilch 2021):
+- [ ] **7 tables + 3 item text tables need uploading** (the whole 2026-09-22
+  batch, for one upload). Beyond the Pilch four below: `bate_2019_srq` (8,300),
+  `kaigaishi_2024_primate_cognition` (6,356), `maes_2020_ospaq` (1,537) --
+  27,195 responses in total across the batch. All 7 dictionary rows and 7 tag
+  rows are staged. Item text ships for three of the Pilch tables only.
+
+- [ ] **The Pilch four** (peerj.11263, Pilch 2021):
   `pilch_2021_fcv19s_validation` (2,275), `pilch_2021_ipip20_validation` (6,220),
   `pilch_2021_preventive_behavior` (1,532), `pilch_2021_preventive_vas` (975) --
   11,002 responses. Item text ships for all but `fcv19s_validation`. Response
@@ -44,7 +50,21 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   Note the live `pilch_2021_fear_covid19` from the sibling PLOS study is in the
   same position.
 
-- [ ] **9 actionable leads unworked**, all in the tracked
+- [x] **All 14 leads worked, batch closed** (2026-09-22): 4 shipped, 4
+  blocked on licence, 5 rejected on content, 1 skipped on PII. Every row of
+  `pmc_leads_2026-09-22.csv` carries a terminal status and a reason. Superseded
+  as a task; kept for the counts. Original text follows.
+
+- [ ] **`dup_id_item` disagrees with the upload gate on `trial_*` keys.**
+  `run_qc`'s check decides fail-vs-note from `("wave", "timepoint", "date")`
+  alone (`irw_validate/_checks.py` ~line 404), so it hard-fails a table keyed by
+  `trial_number` -- which `datastandard.md` says is exactly what distinguishes
+  repeated responses, and which the same module's own `occasion_columns()`
+  already counts for the rescue path. The upload profile passes such a table;
+  `compat.run_qc` fails it. Reproducible on a 4-column synthetic frame. Wants
+  its own change with tests rather than a drive-by patch.
+
+- [x] **9 actionable leads unworked**, all in the tracked
   `pmc_leads_2026-09-22.csv`. Ranked by instrument shape, not response count.
   Largest by shape: `10.7717/peerj.6672` (4,485x21),
   `10.1038/s41598-024-77912-7` (3,024x31), `10.7717/peerj.15826` (328x30).

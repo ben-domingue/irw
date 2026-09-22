@@ -15450,3 +15450,96 @@ rows in `tags/tags_auto.csv` (`metadata/tests/test_tags_union.R` passes), 4
 `itemtext_provenance.csv` rows (3 shipped + 1 not-shipped record), 3
 `itemtext/mapping_verification.csv` rows.
 
+### 2026-09-22 cont. — the remaining 9 leads worked; batch closed
+
+All 14 rows of `pmc_leads_2026-09-22.csv` now carry a terminal status. Nothing
+is left unworked.
+
+**3 more tables, 16,193 responses** (batch total **7 tables / 27,195
+responses**):
+
+| table | rows | ids | items | resp |
+|---|---|---|---|---|
+| `bate_2019_srq` | 8,300 | 415 | 20 | 1-5 |
+| `kaigaishi_2024_primate_cognition` | 6,356 | 138 | 8 | 0/1 |
+| `maes_2020_ospaq` | 1,537 | 385 | 4 | 0-100 |
+
+`bate_2019_srq` merges the paper's two independently-recruited samples
+(civilian n=264, police n=151) into one file with `cov_study` and an id offset,
+which the abstract licenses outright -- the SRQ was "calibrated using a top-end
+civilian sample (Experiment 1)" and then examined "in pools of police
+(Experiment 2)". Experiment 3 is excluded: that sheet holds only an SRQ total,
+and a composite is not a response.
+
+`kaigaishi_2024_primate_cognition` is a macaque battery, and **non-human is not
+a skip reason** -- `datastandard.md` defines `id` as the focal unit measured.
+Shipped as ONE table rather than three: the workbook's physical/social/
+inhibition sheets are domains of one battery given to one colony (kept as
+`itemcov_domain`), and split apart none clears the 100-subject floor (81/109/123,
+per-task 75-123). Pooled: 138 subjects. **The deposit's own `trial` counter does
+not uniquely index a trial** -- 36 (subject, task, trial) triples repeat, 20 with
+an identical timestamp (`ginco` has six rows of cylinder trial 1 at 2022-02-09
+16:58) -- so `trial_number` is a sequential index within subject and task in the
+file's row order, with the source counter kept as `trial_source`.
+
+`maes_2020_ospaq` ships percentages as continuous `resp`. 999 is a sentinel
+(3 cells, dropped). The four items are meant to total 100 and for 28 respondents
+do not; those ship exactly as deposited rather than being rescaled, since that is
+the respondents' own arithmetic.
+
+**Six leads did not ship**, each for a stated reason rather than silence:
+
+- `peerj.6672` — a discrete choice experiment (299 respondents x 5 tasks x 3
+  alternatives). `resp` would be which attribute bundle was picked; not item
+  response data. Triage's "4,485 participants" were alternative rows.
+- `peerj.15826` — clinical biomarker table (ALT, HbA1c, eGFR) plus a single MoCA
+  TOTAL. The only cognitive measure is a composite.
+- `s41598-024-52756-3` — the supplement is summary tables T1-T7 (correlations,
+  mean DERS scores), no raw responses.
+- `s41598-025-34929-w` — demographics for 104 dogs plus summary/correlation
+  tables, no trial-level responses.
+- `s41598-024-64722-0` — the Zenodo deposit IS genuinely CC BY 4.0 and holds real
+  trial data, but only **58 participants**, below the N>=100 floor. Triage's
+  n=2,765 was again the row count; this is the third time in this batch that
+  ranking by response count pointed at the wrong thing.
+- `s41598-024-70692-0` — **licence skip**. Its OSF node `fgwvk` returns 401
+  without a token, i.e. private, reachable only through the `?view_only=` review
+  link the paper publishes. The article's CC BY does not reach an unlicensed
+  private node. Same shape as `10.1038/s41598-023-33749-0`; logged in
+  `license_blocked_candidates.csv`, which is now 33 rows.
+
+**The validator caught a real disagreement inside itself.** ben asked whether
+the final tables were going through the new validator; they were going through
+`compat.run_qc` only. Running the upload profile surfaced that the two gates
+disagree on the macaque table: `run_qc`'s `dup_id_item` decides fail-vs-note from
+`("wave", "timepoint", "date")` alone (`_checks.py` ~line 404) and hard-fails a
+table keyed by `trial_number`, even though `datastandard.md` says a `trial_`
+index is exactly what tells repeated responses apart, and even though the same
+module's own `occasion_columns()` counts `trial_*` for the rescue path. The
+upload gate applies that rescue and passes. Confirmed on a minimal synthetic
+frame: `irw-validate` passes an id/item/trial_number table that `run_qc` fails.
+All four scripts in this batch now gate on
+`irw_validate.validate_frame(..., profile="upload")`. **The inconsistency in
+`_checks.py` is left as an open TODO rather than patched here** -- it is a
+shared component and wants its own change with tests.
+
+All 7 tables: `IRW Data Standard 1.0: conforms`, `IRW upload gate: passes`.
+Warnings explained rather than ignored -- `imputed_values*` on three tables is
+floor/ceiling concentration with no fractional values anywhere (`SRQ12` runs
+0.2/1/7/20/72% up the scale; `fear3` runs 75/17/6/1/1% down it; `transp` is a
+binary task at 36.6% success, which the check text itself calls legitimate), and
+OSPAQ's `resp_ordinal*` (54 distinct values) and `resp_scale_nested_support` are
+the percentage scale and its sum-to-100 constraint, not a construct split.
+
+**No item text from these three**, each recorded in `itemtext_provenance.csv`
+with where the text actually is: `bate_2019_srq` has bare codes and no label
+level at all (plain .xlsx), so the wording is a paper-transcription job;
+`maes_2020_ospaq`'s headers are posture LABELS, not the administered stems, and
+inventing one is forbidden; `kaigaishi_2024_primate_cognition` is not-applicable
+rather than not-shipped, since its items are tasks no subject read.
+
+Staged: 3 more `dictionary_auto.csv` rows, 3 `tags_auto.csv` rows
+(`test_tags_union.R` passes; the macaque table uses the `Animal` respondent-type
+atom added 2026-09-19, paired with `Age Range = Not applicable (non-person)` as
+that vocabulary requires), 3 `itemtext_provenance.csv` rows.
+

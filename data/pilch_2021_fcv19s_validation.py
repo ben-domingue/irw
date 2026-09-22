@@ -60,7 +60,7 @@ import requests
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT / "automated_finding"))
-from irw_validate.compat import run_qc  # noqa: E402
+import irw_validate  # noqa: E402
 
 OUT_DIR = REPO_ROOT / "automated_finding" / "irw_output"
 SUPP = "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC8083179/supplementaryFiles"
@@ -135,8 +135,12 @@ def finish(long, table, lo, hi, n_items, continuous=False):
     assert long["id"].nunique() >= 100, f"{table}: below the 100-id floor"
     assert long["item"].nunique() == n_items, f"{table}: expected {n_items} items"
     assert long["item"].nunique() > 1, f"{table}: single-item table"
-    bad = [c for c in run_qc(long) if c.status == "fail"]
-    assert not bad, [(c.name, c.detail) for c in bad]
+    # The upload profile is the gate an upload actually faces; compat.run_qc
+    # is the older triage behaviour and the two can disagree.
+    report = irw_validate.validate_frame(long, label=table,
+                                         profile="upload")
+    assert report.conforms and not report.errors, \
+        [(f.name, f.detail) for f in report.errors]
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     long.to_csv(OUT_DIR / f"{table}.csv", index=False)
