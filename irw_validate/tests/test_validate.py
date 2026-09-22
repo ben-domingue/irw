@@ -6,7 +6,8 @@ read `.name` / `.status` / `.detail` off the result, and `run_qc` had no test
 coverage at all before this file. GOLDEN pins the exact emission order and
 status of every check for eight fixtures. The original move preserved behavior;
 PR #1697 explicitly corrects a spurious range finding on text-only responses,
-while retaining their numeric failures.
+while retaining their numeric failures. #2314 excludes missing responses from
+the numeric denominator; all-missing responses still fail the missingness check.
 """
 from __future__ import annotations
 
@@ -43,14 +44,15 @@ FIXTURES = {
     "unprefixed_cov": lambda: F(id=[1, 2], item=["a", "b"], resp=[1, 2], age=[30, 40]),
 }
 
-#: Captured before the 2026-09-02 move, with one reviewed PR #1697 change:
+#: Captured before the 2026-09-02 move, with reviewed corrections:
 #: all-text responses retain numeric failures, not a spurious numeric-range finding.
+#: #2314 excludes missing responses from resp_numeric; all-null still fails resp_na.
 GOLDEN = {
     "clean": [("required_columns", "pass"), ("resp_numeric", "pass"),
               ("dup_id_item", "pass")],
     "missing_col": [("required_columns", "fail")],
     "all_na_resp": [("required_columns", "pass"), ("resp_na", "fail"),
-                    ("resp_numeric", "fail"), ("dup_id_item", "pass"),
+                    ("resp_numeric", "pass"), ("dup_id_item", "pass"),
                     ("resp_variation*", "fail"), ("density*", "warn")],
     "dup_id_item": [("required_columns", "pass"), ("resp_numeric", "pass"),
                     ("dup_id_item", "fail")],

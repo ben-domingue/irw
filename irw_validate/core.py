@@ -196,15 +196,10 @@ def validate_frame(df, *, label: str = "", profile: str = "upload",
                                    if f.check != "dup_id_item"]
                 report.checks_run.append(f"dup_id_item:resolved_by_{resolved_by}")
 
-    # `resp_numeric` as inherited from run_qc measures how many values parse as
-    # numbers over ALL rows, so a float column with missing values fails it --
-    # NaN does not parse. That conflates "not a number" with "not present", and
-    # `resp_na` already reports the second. In the legacy sweep it flagged
-    # 16_personalityfactors, whose resp is float64 and 99% non-null.
-    #
-    # Triage keeps the inherited behaviour (50 callers depend on it); the gate
-    # profiles re-judge it over non-null values only. Every present value must
-    # parse: the inherited 99% tolerance hid rare literal "NA" responses (#2029).
+    # run_qc now excludes nulls from its numeric denominator (#2314 item 2),
+    # but retains the raw/core/triage 99% threshold. The gate profiles still
+    # re-judge strictly: EVERY present value must parse. The inherited 99%
+    # tolerance hid rare literal "NA" responses (#2029).
     if profile in ("upload", "legacy") and "resp" in df.columns:
         import pandas as pd
         present = df["resp"].dropna()

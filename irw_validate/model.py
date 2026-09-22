@@ -125,9 +125,10 @@ class Report:
 
         None for item text, which Standard 1.0 does not cover, and under the
         `core` and `triage` profiles. Those keep the inherited readings of C4
-        (99% of values numeric) and C5 (only wave/timepoint/date explain a
-        repeat) for their callers, and the standard is the gate's reading: a
-        rater design would be called nonconforming there and conforming here.
+        (99% of non-missing values numeric) and C5 (only wave/timepoint/date
+        explain a repeat) for their callers, and the standard is the gate's
+        reading: a rater design would be called nonconforming there and
+        conforming here.
         """
         if self.kind != "responses" or self.profile not in ("upload", "legacy"):
             return None

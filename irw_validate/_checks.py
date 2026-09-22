@@ -380,12 +380,23 @@ def run_qc(df: pd.DataFrame, coercion_method: str = "",
                                 f"{col} has {n_na} missing value(s). "
                                 f"{na_note}"))
 
-    # resp must be numeric (ERROR)
+    # Judge numeric parsing only among present responses. Missingness belongs
+    # to resp_na above, not to the nonnumeric count (#2314 item 2). Preserve
+    # the raw/triage 99% threshold; upload/legacy separately require every
+    # present value to parse in core.py.
     resp_num = pd.to_numeric(df["resp"], errors="coerce")
-    if resp_num.notna().mean() < 0.99:
+    present = df["resp"].notna()
+    n_present = int(present.sum())
+    n_numeric = int(resp_num[present].notna().sum())
+    if not n_present:
+        checks.append(Check("resp_numeric", "pass",
+                            "No non-missing resp values to check; "
+                            "missingness is reported by resp_na"))
+    elif n_numeric / n_present < 0.99:
         checks.append(Check("resp_numeric", "fail",
                             f"resp is not numeric (only "
-                            f"{resp_num.notna().mean():.0%} parse as numbers)"))
+                            f"{n_numeric}/{n_present} non-missing responses "
+                            f"parse as numbers, {n_numeric / n_present:.0%})"))
     else:
         checks.append(Check("resp_numeric", "pass", "resp is numeric"))
 
