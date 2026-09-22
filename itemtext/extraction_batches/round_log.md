@@ -23295,3 +23295,78 @@ self-cancel on the Step 0 "zero rows with status==pending" condition — that is
 being finished, not a fault. The round cap (batch_320) was NOT reached and is now moot
 unless a human adds work: the 13 `failed` rows are the retryable remainder, and the 280
 `blocked` ones each carry a row in pending_index_notes.csv saying what would have to change.
+
+## batch_305 — 2026-09-22
+
+3 tables claimed, 3 agents. **written 2 / blocked 1 / failed 0** — yield 2/3 (67%).
+Circuit breaker NOT tripped: 0% failed against the 30% threshold. No rate limit, no quota
+event, no kill; all three agents returned their own reports.
+
+Numbering: "highest + 1" over directories below 300 gives 300, which lands in the 300–304
+hole claimed by irw#2228 (batch_300–304 all now exist on this branch), so this round is
+**batch_305** per the Step 1 rule. Series continues 306, 307, …
+
+Gates, all on the merged batch: normalize_nulls fixed 2/2 files; audit_batch **2 PASS, zero
+WARN** (so nothing owed under Step 5c); verify_batch 1 PASS + 1 MISSING(exempt, data_labels);
+lint_verification 2 rows, no problems; `irw-validate` ok on both, nothing to report;
+check_provenance 1,525 rows / 306 files clean. Note check_provenance's disclosure half was
+REPORTED BUT NOT ENFORCED — the irw_site checkout is on branch `validate-pin-1-2-0`, not main.
+
+**kumlander_2018_scs — written, 130 rows (26 items × 5).** Finnish administration; item_text/
+option_text carry the Finnish from PLOS ONE 10.1371/journal.pone.0207706 S1 Table, `_translated`
+holds the study's own English. mapping_basis=paper_explicit (the .sav labels give the item
+NUMBER, not its words), text_source=study_materials, translation_source=**mixed** — English for
+resp 2–4 was rendered by IRW, the study published English only for the two endpoints. That is
+disclosed in public_note and owes an issues-page line when the table ships; it is HELD, so
+nothing is owed yet. Verification VERIFIED, route 1: refitting S2 Table's wave-1 two-factor
+model (lavaan, MLR, FIML, 1710 ids) reproduces 25/26 published loadings to ≤0.0005, and
+within-factor loadings are distinct to 3 dp, so no pair can be swapped. instructions left
+blank by design — no Finnish instruction text is published, and Neff's English is not what
+this sample read.
+
+  *Source defect (in the paper, not in IRW):* S2 Table prints .707 for SCOMP19 while its own
+  residual variance in that row is .631 — 1−.607²=.632 vs 1−.707²=.500. Orchestrator
+  re-ran verify_kumlander_2018_scs.R independently: largest deviation 0.0005 with scomp19
+  taken as .607, versus −0.100 against the printed value. Confirmed; a supplement typo.
+
+**dwyer_2019_clinton_activist — written, 48 rows (8 items × 6).** Klar & Kasser's Activist
+Identity and Commitment Scale, from PLOS ONE 10.1371/journal.pone.0221754 S1 File (.sav).
+mapping_basis=**data_labels** and exempt from Step 5b: `data/dwyer_2019_clinton_activism.py`
+melts `ACTIVIST_COLS=[f"Activist_{i}" for i in 1..8]` with `var_name="item"`, so the IRW item
+code IS the source column name — no rename, no positional assignment. NOT_NEEDED rows written
+into BOTH verification_merged.csv and the permanent tracker, so lint came back clean first try.
+
+  *Caveat, disclosed in public_note:* administered 0–5 (the value labels literally read
+  "0 = Strongly disagree" … "5 = Strongly agree") but stored as SPSS codes 1–6, so each IRW
+  `resp` is one higher than the number the respondent saw. Orchestrator confirmed the shipped
+  side: resp 1–6 maps monotonically onto the six anchors, 1,336 live rows = 8 × 167, and no
+  scale point was padded with its own number.
+
+**dvivdtws_ppmial_marcatto_2023_ocb — BLOCKED, retry test NO.** Not an OCB table: it is a
+fourth copy of `dvivdtws_ppmial_marcatto_2023_dtw` under a name promising Organizational
+Citizenship Behavior. Agent matched all 22 per-item 1–5 response-count distributions cell for
+cell against the raw `dtw1..dtw22` columns of OSF osf.io/8mj73 `data.csv`. **Orchestrator
+re-checked independently** (Step 5b, server-side aggregates only, no export): `_ocb`, `_dtw`
+and `_snaq` all return n_rows=12,166, the identical 22-item set dtw1..dtw22, and the identical
+resp set {1,2,3,4,5}. Confirmed. Correct item text for these rows is already live under `_dtw`
+(uploaded 2026-09-05, batch_028), so extracting here would ship a duplicate itemtext table for
+a duplicate response table. Determinate — an unchanged retry reaches the same verdict; flipping
+it needs a human decision. Row added to pending_index_notes.csv. Left `blocked`, not
+`excluded`, because the table is still live in IRW.
+
+  *Lead for a human, not acted on by this round:* this answers the open question in **#2287**'s
+  own body — "worth checking `_ocb` and `_snaq` on the same test before this is closed." Both
+  fail it. With #1967 (`_cwb`, deleted) and #2287 (`_ocs`, deleted), the whole family
+  `_cwb`/`_ocs`/`_ocb`/`_snaq` duplicates `_dtw`, and only `_dtw` is named for what it holds.
+  The deposit's real OCS, OCB, CWB and SNAQ responses appear not to be in IRW at all. Worth a
+  comment on #2287 or a retirement issue covering `_ocb` + `_snaq` together; no issue was filed.
+  The agent's re-runnable evidence sits at `.cache/dvivdtws_ppmial_marcatto_2023_ocb/
+  evidence_duplicate.R` (blocked tables carry no verify_*.R in the batch dir).
+
+Rights: two `ship`-shaped cases escalated, neither written to instrument_rights_register.csv
+per the rule that a round may write a `block` row but never a `ship` row. (1) SCS — Neff's own
+information sheet grants use "for any purpose whatsoever" plus translation, an affirmative
+grant rather than silence. (2) AICS — no restrictive clause locatable, and IRW's wording came
+from the CC BY 4.0 PLOS deposit's own SPSS labels, so silence-is-permission.
+
+Queue after this round: 27 pending, 0 in_progress. Cap (batch_320) NOT reached.
