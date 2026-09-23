@@ -191,6 +191,18 @@ def process_study_from_excel(excel_file, output_dir, study_num):
 
     output_files = []
     for construct, construct_df in constructs.items():
+        # #2339: studies 2-5 each number participants from 1, so id is only
+        # unique within a study. Key it by study before tables are combined.
+        construct_df['id'] = [f"s{study_num}_{i}" for i in construct_df['id']]
+        # Study 3 runs LexTALE (word/nonword) and StuVoc on overlapping words;
+        # 'rascal' is a LexTALE item and 'rascal  ' a StuVoc item. Name the
+        # LexTALE items before whitespace is normalised so they stay distinct.
+        if construct == 'lextale':
+            construct_df['item'] = 'lextale_' + construct_df['item'].astype(str)
+        # Source headers in studies 2-4 carry trailing/double spaces
+        # ('puritan  '), which split one word into several items.
+        construct_df['item'] = construct_df['item'].astype(str).str.replace(r'\s+', ' ', regex=True).str.strip()
+        assert not construct_df.duplicated(['id', 'item']).any(), (study_num, construct)
         construct_df['cov_study'] = study_num
         filename = f"vermeiren_study_{study_num}_2022_{construct}.csv"
         filepath = os.path.join(output_dir, filename)
@@ -213,6 +225,7 @@ def combine_constructs_across_studies(all_study_files, output_dir):
     for out_name, dfs in constructs_dict.items():
         if len(dfs) > 1:
             combined_df = pd.concat(dfs, ignore_index=True)
+            assert not combined_df.duplicated(['id', 'item']).any(), out_name
             cols = [c for c in combined_df.columns if c != 'cov_study']
             cov_idx = next((i for i, c in enumerate(cols) if c.startswith('cov_')), len(cols))
             if 'cov_study' in combined_df.columns:
@@ -270,6 +283,8 @@ def main():
         2: vocab_dir / 'Student vocabulary test study 2' / 'Student_vocabulary_test_study2.xlsx',
         3: vocab_dir / 'Student vocabulary test study 3' / 'student_vocabulary_test_study3.xlsx',
         4: vocab_dir / 'student vocabulary test study 4' / 'student vocabulary test study 4.xlsx',
+        # Not in the OSF deposit (osf.io/ef3s4): its study 5 folder holds only the
+        # unscored Study5_answers.xlsx, though the authors' own R script reads this name.
         5: vocab_dir / 'Student vocabulary test study 5' / 'student_vocabulary_test_study5.xlsx',
     }
     all_study_files = []

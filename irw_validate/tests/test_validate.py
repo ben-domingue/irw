@@ -224,6 +224,60 @@ class ItemText(unittest.TestCase):
         self.assertIn("resp_ambiguous", checks)
         self.assertNotIn("dup_item_resp", checks)
 
+    def _unkeyed(self, raw=True, words=("gaadee", "kauaa", "kainchee")):
+        """gilbert_meta_70's shape: printed options, no scoring key.
+
+        Three different words a child was asked to name, one row each, `resp`
+        blank throughout because the deposit publishes no key. With `raw`
+        false the rows carry no address at all, which is the defect.
+        """
+        rows = {k: [] for k in ("table", "item", "item_text", "resp",
+                                "raw_resp", "option_text")}
+        for w in words:
+            rows["table"].append("g_2024_naming")
+            rows["item"].append("std12")
+            rows["item_text"].append("name the picture")
+            rows["resp"].append(None)
+            rows["raw_resp"].append(w if raw else None)
+            rows["option_text"].append(w)
+        return pd.DataFrame(rows)
+
+    def test_option_rows_keyed_by_raw_resp_are_addressable(self):
+        # #2232: the rule (#1945/#2185) is that an option row carries `resp`
+        # OR `raw_resp`. Keying on `resp` alone made every such row a
+        # duplicate of its siblings and then reported their option text as
+        # identical, when it was the only thing telling them apart.
+        report = validate_frame(self._unkeyed(), label="g_2024_naming__items.csv")
+        checks = [f.check for f in report.errors]
+        self.assertNotIn("dup_item_resp", checks)
+        self.assertNotIn("resp_ambiguous", checks)
+
+    def test_rows_with_neither_resp_nor_raw_resp_still_fail(self):
+        # The case the fix must NOT lose: no address at all means nothing can
+        # join these rows to a response, so they stay a finding. Dropping
+        # unkeyed rows from the comparison would silently pass them.
+        report = validate_frame(self._unkeyed(raw=False),
+                                label="g_2024_naming__items.csv")
+        self.assertFalse(report.ok, report.findings)
+        self.assertTrue([f for f in report.errors
+                         if f.check in ("dup_item_resp", "resp_ambiguous")],
+                        [f.check for f in report.errors])
+
+    def test_a_doubled_raw_resp_table_is_still_caught(self):
+        # Addressability is not a way out of the doubled-upload check: repeat
+        # the same three rows and the raw_resp key collides exactly as resp
+        # would.
+        df = pd.concat([self._unkeyed(), self._unkeyed()], ignore_index=True)
+        report = validate_frame(df, label="g_2024_naming__items.csv")
+        self.assertIn("dup_item_resp", [f.check for f in report.errors])
+
+    def test_the_finding_names_the_addressable_key(self):
+        df = pd.concat([self._unkeyed(), self._unkeyed()], ignore_index=True)
+        report = validate_frame(df, label="g_2024_naming__items.csv")
+        msg = [f.message for f in report.errors if f.check == "dup_item_resp"][0]
+        self.assertIn("raw_resp", msg)
+        self.assertNotIn("item+resp rows", msg)
+
     def test_missing_item_text_columns_block(self):
         df = pd.DataFrame({"id": [1], "item": ["a"], "resp": [1]})
         report = validate_frame(df, label="t_2024_scale__items.csv")

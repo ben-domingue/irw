@@ -31,8 +31,9 @@ data_1b <- data_1b[!is.na(data_1b$Age), ]
 data_3c <- data_3c[!is.na(data_3c$Q4.4), ]
 data_2 <- data_2[!is.na(data_2$Q57), ]
 
-# Check if Q8 is correct
-for (dataset in list("data_1b", "data_3a", "data_3b", "data_3c")) {
+# Check if Q8 is correct (Maxwell Klinger = 2 in every study; Study 2's own
+# Q8correct keys Larry Swit = 3, so it is recomputed here too -- #2335)
+for (dataset in list("data_1b", "data_2", "data_3a", "data_3b", "data_3c")) {
   assign(dataset, get(dataset) %>% mutate(Q8correct = ifelse(Q8 == 2, 1, 0)))
 }
 
@@ -84,4 +85,11 @@ long_data_list <- lapply(data_list, function(df) {
 
 AVI_S_data <- bind_rows(long_data_list)
 
-save(AVI_S_data, file = "AVI-S.RData") ##bd note: saved as wooly_hartman2022 
+# the TV-show items have no code for "I don't know", so those responses are
+# missing; drop them rather than ship empty resp rows (#2335)
+AVI_S_data <- AVI_S_data %>%
+  filter(!is.na(resp)) %>%
+  rename(cov_age = age) %>%
+  mutate(across(everything(), zap_labels))
+
+write.csv(AVI_S_data, "wooly_hartman2022.csv", row.names = FALSE, na = "")
