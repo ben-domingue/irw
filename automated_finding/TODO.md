@@ -68,9 +68,8 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   (retroactive audits paused); fixing it is a replace in `irw_text_2` plus a
   rewrite of its issues-page entry.
 
-- [ ] **Issues-page entry owed for `pilch_2021_fcv19s_validation`**: the
-  `public_note` in `itemtext_provenance.csv` (items 5-7 differ from Table 1)
-  needs carrying into `irw_site/itemtext_issues.qmd`, which is hand YAML.
+- [x] **Issues-page entry for `pilch_2021_fcv19s_validation`** (items 5-7
+  differ from Table 1) -- added in datapages/irw#227.
 
 - [x] **All 14 leads worked, batch closed** (2026-09-22): 4 shipped, 4
   blocked on licence, 5 rejected on content, 1 skipped on PII. Every row of
