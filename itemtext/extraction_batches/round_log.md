@@ -23818,3 +23818,37 @@ it to be withdrawn. `tools/withdraw_zung_sas.py` is written and dry-run clean (t
 delete.** Ben runs `APPLY=1 python3 tools/withdraw_zung_sas.py`. That opens an `irw_text` draft
 separate from the `irw_text_2` one, and both need releasing. There is no issues-page entry to
 remove.
+
+## batch_310 — 2026-09-23T09:56-07:00 — 3 tables, 3 written / 0 blocked / 0 failed (yield 3/3)
+
+Tables: `chile_2023_children-adolescents-survey_n`, `imos_1984`, `mboya_2020_gds15`. Three agents, no kills.
+
+- **`chile_..._n`** (data_labels, study_materials, machine_translation, public_note): EANNA 2023 5–8-year-old
+  questionnaire (`Cuestionario_Ninos_y_Ninas_5_a_8_anos_EANNA_2023.pdf`), codebook sheet '3. NN'. 41 items,
+  87 rows. Agent: 88/88 codebook item×value frequencies equal live; 40/41 profiles distinct (n8_87/n8_99 both
+  12 "Sí", disjoint respondents). Caveats in notes: n10's never-chosen 5th option not shipped (resp-set gate);
+  scale direction varies by item (n5 1=Mal..3=Bien vs n6/n9 reversed), stored as coded; n7_*/n8_* are 0/1
+  pick-all columns incl. A nadie/No aplica/No sabe/No responde. No response-data defects (unlike `_cp_c`).
+- **`imos_1984`** (paper_explicit, VERIFIED): official IMO 1984 English paper. All 48 problem×mark cells match
+  the IMO's official 1984 individual results (192 contestants); 0/15 problem pairs identical. Maths
+  transcribed from a page render with `^` superscripts and problem 5's display inequality inline — a human
+  spot-check of problems 2, 5, 6 against the PDF is worthwhile. No day split printed, so one section (as imos_1994).
+- **`mboya_2020_gds15`** (data_labels, study_materials): GDS-15 item labels from the deposit's
+  `depression_data.dta`. The five positively worded items (satisfy0, spirt0, hapy0, alive0, energy0) point
+  at undefined value-label sets, so their direction (1 = depressive answer = "no") is inferred. Administered
+  language unknown (paper paywalled, 403); no language column shipped. If the paper says Kiswahili, the
+  provenance should become translated_substitute/study_supplied.
+
+Gates: normalize_nulls 2 of 3 fixed (quoted "NA"); audit_batch **3 PASS**, no WARNs; verify_batch 1 PASS +
+2 MISSING(exempt, data_labels); lint_verification clean; irw-validate 0 ERROR, 1 WARN (`name_charset` on
+`_n`, the family's hyphens, irw#2365 — `_n` is 40 chars, under the cap); check_provenance exit 0.
+
+Step 5b re-checks (orchestrator, all **confirmed**):
+- mboya direction: summing the 15 items as stored from the deposit .dta separates `gdsgrp` perfectly
+  (sums 0–5 → all 0, counts 22/28/21/41/30/27; 6–15 → all 1); flipping the five positive items breaks it
+  (e.g. sum 8: 21 vs 37). gdsgrp mean 0.44. Live per-item means equal the deposit's (n=304 each).
+- chile_n: live counts n9 3594/1301/210, n16 772/4284, n8_87 and n8_99 12 each — as reported.
+
+Tracker: imos_1984 VERIFIED + 2 NOT_NEEDED rows added to mapping_verification.csv and the batch file.
+Circuit breaker: not tripped (0 failed of 3).
+Queue after this round: 12 pending, 0 in_progress. Cap (batch_320) NOT reached.

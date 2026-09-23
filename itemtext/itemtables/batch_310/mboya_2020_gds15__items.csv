@@ -1,0 +1,31 @@
+"table","section_id","item","instrument","instructions","section_prompt","item_text","correct_response","option_text","resp"
+"mboya_2020_gds15","mboya_2020_gds15_1","satisfy0","Geriatric Depression Scale, 15-item short form (GDS-15)",NA,NA,"are you basically satisfied with your life",NA,"yes",0
+"mboya_2020_gds15","mboya_2020_gds15_1","satisfy0","Geriatric Depression Scale, 15-item short form (GDS-15)",NA,NA,"are you basically satisfied with your life",NA,"no",1
+"mboya_2020_gds15","mboya_2020_gds15_1","drop1","Geriatric Depression Scale, 15-item short form (GDS-15)",NA,NA,"have you dropped many of your activities and interests",NA,"no",0
+"mboya_2020_gds15","mboya_2020_gds15_1","drop1","Geriatric Depression Scale, 15-item short form (GDS-15)",NA,NA,"have you dropped many of your activities and interests",NA,"yes",1
+"mboya_2020_gds15","mboya_2020_gds15_1","feel1","Geriatric Depression Scale, 15-item short form (GDS-15)",NA,NA,"do you feel that your life is empty",NA,"no",0
+"mboya_2020_gds15","mboya_2020_gds15_1","feel1","Geriatric Depression Scale, 15-item short form (GDS-15)",NA,NA,"do you feel that your life is empty",NA,"yes",1
+"mboya_2020_gds15","mboya_2020_gds15_1","bored1","Geriatric Depression Scale, 15-item short form (GDS-15)",NA,NA,"do you often get bored",NA,"no",0
+"mboya_2020_gds15","mboya_2020_gds15_1","bored1","Geriatric Depression Scale, 15-item short form (GDS-15)",NA,NA,"do you often get bored",NA,"yes",1
+"mboya_2020_gds15","mboya_2020_gds15_1","spirt0","Geriatric Depression Scale, 15-item short form (GDS-15)",NA,NA,"are you in good spirits most of the time",NA,"yes",0
+"mboya_2020_gds15","mboya_2020_gds15_1","spirt0","Geriatric Depression Scale, 15-item short form (GDS-15)",NA,NA,"are you in good spirits most of the time",NA,"no",1
+"mboya_2020_gds15","mboya_2020_gds15_1","fraid1","Geriatric Depression Scale, 15-item short form (GDS-15)",NA,NA,"are you afraid that something  bad is going to happen",NA,"no",0
+"mboya_2020_gds15","mboya_2020_gds15_1","fraid1","Geriatric Depression Scale, 15-item short form (GDS-15)",NA,NA,"are you afraid that something  bad is going to happen",NA,"yes",1
+"mboya_2020_gds15","mboya_2020_gds15_1","hapy0","Geriatric Depression Scale, 15-item short form (GDS-15)",NA,NA,"do you feel happy most of the time",NA,"yes",0
+"mboya_2020_gds15","mboya_2020_gds15_1","hapy0","Geriatric Depression Scale, 15-item short form (GDS-15)",NA,NA,"do you feel happy most of the time",NA,"no",1
+"mboya_2020_gds15","mboya_2020_gds15_1","hepless1","Geriatric Depression Scale, 15-item short form (GDS-15)",NA,NA,"do you often feel helpless",NA,"no",0
+"mboya_2020_gds15","mboya_2020_gds15_1","hepless1","Geriatric Depression Scale, 15-item short form (GDS-15)",NA,NA,"do you often feel helpless",NA,"yes",1
+"mboya_2020_gds15","mboya_2020_gds15_1","stay1","Geriatric Depression Scale, 15-item short form (GDS-15)",NA,NA,"do you prefer to stay at home rather than going out and doing new things",NA,"no",0
+"mboya_2020_gds15","mboya_2020_gds15_1","stay1","Geriatric Depression Scale, 15-item short form (GDS-15)",NA,NA,"do you prefer to stay at home rather than going out and doing new things",NA,"yes",1
+"mboya_2020_gds15","mboya_2020_gds15_1","memo1","Geriatric Depression Scale, 15-item short form (GDS-15)",NA,NA,"do you feel that you have more problems with memory than most people",NA,"no",0
+"mboya_2020_gds15","mboya_2020_gds15_1","memo1","Geriatric Depression Scale, 15-item short form (GDS-15)",NA,NA,"do you feel that you have more problems with memory than most people",NA,"yes",1
+"mboya_2020_gds15","mboya_2020_gds15_1","alive0","Geriatric Depression Scale, 15-item short form (GDS-15)",NA,NA,"do you think it is wonderful to be alive",NA,"yes",0
+"mboya_2020_gds15","mboya_2020_gds15_1","alive0","Geriatric Depression Scale, 15-item short form (GDS-15)",NA,NA,"do you think it is wonderful to be alive",NA,"no",1
+"mboya_2020_gds15","mboya_2020_gds15_1","worth1","Geriatric Depression Scale, 15-item short form (GDS-15)",NA,NA,"do you feel pretty worthless the way you are now",NA,"no",0
+"mboya_2020_gds15","mboya_2020_gds15_1","worth1","Geriatric Depression Scale, 15-item short form (GDS-15)",NA,NA,"do you feel pretty worthless the way you are now",NA,"yes",1
+"mboya_2020_gds15","mboya_2020_gds15_1","energy0","Geriatric Depression Scale, 15-item short form (GDS-15)",NA,NA,"do you feel full of energy",NA,"yes",0
+"mboya_2020_gds15","mboya_2020_gds15_1","energy0","Geriatric Depression Scale, 15-item short form (GDS-15)",NA,NA,"do you feel full of energy",NA,"no",1
+"mboya_2020_gds15","mboya_2020_gds15_1","hopless1","Geriatric Depression Scale, 15-item short form (GDS-15)",NA,NA,"do you feel that your situation is hopeless",NA,"no",0
+"mboya_2020_gds15","mboya_2020_gds15_1","hopless1","Geriatric Depression Scale, 15-item short form (GDS-15)",NA,NA,"do you feel that your situation is hopeless",NA,"yes",1
+"mboya_2020_gds15","mboya_2020_gds15_1","better1","Geriatric Depression Scale, 15-item short form (GDS-15)",NA,NA,"do you think that most people are better than you",NA,"no",0
+"mboya_2020_gds15","mboya_2020_gds15_1","better1","Geriatric Depression Scale, 15-item short form (GDS-15)",NA,NA,"do you think that most people are better than you",NA,"yes",1
