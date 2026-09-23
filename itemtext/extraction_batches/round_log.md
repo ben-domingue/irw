@@ -23737,3 +23737,49 @@ local (20/4, 60/12). Stamped `uploaded=2026-09-23` in both provenance files and
 **Not released on #2162.** Ben closed #2162 on 2026-09-23 without a ruling and said not to treat the
 close as dispositive, so `shen_2020_sas20`, `schmidt_2017_fas` and `shin2024_creactability_*` ×3
 stay held.
+
+## batch_309 — 2026-09-23 09:39–09:55 PDT
+
+3 tables claimed, 3 agents (one per table). **Written 3 / blocked 0 / failed 0 — yield 3/3 (100%).**
+
+| table | outcome | mapping_basis | verification |
+|---|---|---|---|
+| `chile_2023_children-adolescents-survey_cp_a` | written (60 rows, 30 items) | data_labels | VERIFIED, route 9 (verify script PASS) |
+| `chile_2023_children-adolescents-survey_cp_c` | written (337 rows, 42 items) | data_labels | VERIFIED, route 9 + hh:mm means (verify script PASS) |
+| `chile_2023_children-adolescents-survey_g` | written (32 rows, 8 items) | data_labels | NOT_NEEDED (agent's route-9 check 32/32 recorded in evidence) |
+
+Numbering: 305–308 exist, so the post-hole series continues at **batch_309**.
+
+Sources: `_cp_a` (Acontecimientos) and `_cp_c` (Cuidador principal) are modules of the EANNA caregiver
+questionnaire, codebook sheet '2. Cuidador(a) Principal'; `_g` is the ECLIS bullying block of the
+9–17 self-administered questionnaire, sheet '5. Autoaplicado' (8-item subscale of Aron, Milicic &
+Armijo 2012; item g1_3 is positively worded and stored raw, disclosed). All three ship Spanish
+administered wording with project-generated English in `_translated` (machine_translation, public_notes
+written). Rights: state questionnaire beside a CC BY deposit; no register row written.
+
+Gates: normalize_nulls 0 of 3 changed; audit_batch **2 PASS / 1 WARN** (`_cp_c`, blank option_text on
+the hh:mm hours items — expected, explained in notes.csv per Step 5c); verify_batch 2 PASS + 1
+MISSING(exempt, data_labels); lint_verification clean; check_provenance exit 0 (the three tables join
+the "issues-page line owed" list, as `_aa` did). **irw-validate: 2 ERROR (`name_length`, 43 chars on
+`_cp_a`/`_cp_c`) + 3 WARN (`name_charset`)** — the known family defect, irw#2365, not fixable from an
+itemtext round. `_g` is exactly 40 chars.
+
+Step 5b re-checks (orchestrator, server-side queries, all **confirmed** as stated):
+- **`_cp_c` cp9_1..4 hold 89.5 = the questionnaire's "88:88" don't-know code**, which the .do file's
+  mvdecode misses and its hh:mm conversion turns into 88+88/60. Live: 52/64/85/101 rows at exactly
+  89.5; means 1.92/1.56/1.04/0.76 with it vs 1.66/1.24/0.61/0.24 without. Shipped option_text "No sabe"
+  for 89.5 so the table is at least self-describing; the fix (recode to NA) is a response-table change.
+- **`_cp_c` cp2_1..cp2_9 (reasons for starting work)**: per-id count of items =1 is 0 for 5,115, 1 for
+  179, 2 for 4, 3 for 2, **all nine for 3,493** — the same in the deposit and codebook, so it is a
+  source coding fault faithfully reproduced. The public_note says not to analyse these nine as recorded.
+- **`_cp_a`**: 529,770 rows, 234,407 NULL resp (skip-routed rows kept), 17,659 ids. The agent's
+  household-duplication finding (household-level shock questions repeated across 3,311 multi-child
+  households, 3,792 ids copying another's answers) comes from the deposit .dta and was not re-derived
+  here; it is disclosed in notes and public_note.
+- **`_g`**: 99,888 rows = 8 × 12,486 ids; 110–111 NULL per item (≈-98 Sin Dato + not-in-school routing).
+
+Worth a GitHub issue (not filed by this round): the `_cp_c` 89.5 code and the cp2_1..9 all-ones block
+are response-data defects in a published table; both could ride on irw#2365's family cleanup.
+
+Circuit breaker: not tripped (0 failed of 3).
+Queue after this round: 15 pending, 0 in_progress. Cap (batch_320) NOT reached.
