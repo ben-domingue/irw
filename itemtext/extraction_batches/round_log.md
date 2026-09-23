@@ -23993,3 +23993,6 @@ SSIS t05157-000 need a PsycNET login).
 Draft now 19 added + 1 removed: `MotAcademica_Ribeiro_2019__items` was deleted from the irw_text_2
 draft by another session (not this one; #2313 item 14 lists it as a duplicate of
 ribeiro_2019_academic_motivation). Releasing will delete it from current — flagged to Ben.
+- **SSIS → HOLD** (`hyatt_2023_aggression_s3_ssis`, Ben 2026-09-23): silence. psytests.org hosts the
+  scale but is a third-party aggregator, not the rights holder; the PsycTESTS permissions field
+  (t05157-000) is the one source that could settle it.
