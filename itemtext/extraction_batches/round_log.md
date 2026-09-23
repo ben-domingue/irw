@@ -23934,3 +23934,32 @@ Circuit breaker: not tripped (0 failed of 3).
 Queue after this round: 0 pending, 0 in_progress (1199 done, 286 blocked, 13 failed, 60 excluded). Cap (batch_320) NOT reached, but the queue is exhausted, so the next firing will stand down on Step 0. Retrying the 13 failed rows is a human decision.
 **Applied 2026-09-23 by Ben:** `zhou_2016_anxiety__items` deleted from the `irw_text` draft
 (695 -> 694, only the target removed). It takes effect when that draft is released.
+
+## 2026-09-23 — triage of batch_309–314 (the last 18 queue rows): 7 uploaded, 10 held on silence
+
+Chain: 6 rounds, 17 written / 1 blocked (`ren_2019_cpti`, off-by-one labels) / 0 failed; queue now
+exhausted. Gates re-run live on all six batches: normalize_nulls 0 of 17, audit_batch 15 PASS / 2 WARN
+(`_cp_c` blank options on hh:mm items; `hyatt_aeq` pooled-administration row counts — both explained
+by their rounds, benign), verify_batch PASS or exempt throughout, lint 1 WARN (`hyatt_s3_cast`
+VERIFIED-with-hedge; orchestrator's review keeps VERIFIED, agreed).
+
+**Uploaded to the irw_text_2 draft (7) — no new rights ruling needed:** the four EANNA
+`chile_2023_children-adolescents-survey_{cp_a,cp_c,g,n}` (the state agency's own questionnaire beside
+its CC BY dataset; sibling `_aa` released 2026-09-22), `temesgen_2025_elephant_conserv_attitude`
+(authors' own statements, CC BY), `hyatt_2023_aggression_aeq` (AEQ developed in the same paper),
+`milson_2026_self_esteem` (RSES register row = ship). Dry run 7 NEW; verified with write creds,
+COUNT(*)/COUNT(DISTINCT item) match all 7; stamped `uploaded=2026-09-23` (4 provenance files +
+7 mapping rows); CSVs sha-matched and removed. Draft now holds 15.
+
+**HELD — silence on a named third-party instrument, each needs its own register row (per the
+held-release entry above: #2162's close is not a general silence ruling):** GDS (`mboya_2020_gds15`),
+IMO 1984 problems (`imos_1984`), ACME (`hyatt_s3_acme`), CAST-12 (`hyatt_s3_cast`), DAQ + 2 Buss-Perry
+items (`hyatt_s3_daq`), SSIS/O'Meara 2011 (`hyatt_s3_ssis`), PPP/Curry et al. 1994 in Kim's Korean
+adaptation (`moon_2023_{pregnancy_stress,spousal_support,selfesteem}`), Lee et al. 2013 Korean
+proficiency (`moon_2023_korean_proficiency`).
+
+**Leads for a human (no issue filed):** `_cp_c` response data — 89.5 is the 'don't know' code in
+cp9_1..4, and 3,493/8,793 caregivers have all nine cp2 reasons marked (could ride on irw#2365);
+`hyatt_2023_aggression_s3_cast` live table is missing one CAST_7P response (339 vs 340);
+`ren_2019_cpti` labels off by one vs published loadings, plus the `ren2019_scpv`/`ren_2019_scpv`
+duplicate pair wants a dedup decision.
