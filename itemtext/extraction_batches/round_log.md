@@ -23963,3 +23963,7 @@ cp9_1..4, and 3,493/8,793 caregivers have all nine cp2 reasons marked (could rid
 `hyatt_2023_aggression_s3_cast` live table is missing one CAST_7P response (339 vs 340);
 `ren_2019_cpti` labels off by one vs published loadings, plus the `ren2019_scpv`/`ren_2019_scpv`
 duplicate pair wants a dedup decision.
+
+**Follow-up, 2026-09-23: `imos_1984` uploaded.** Ben agreed a bare "© International Mathematical
+Olympiad" notice is not a reserved right; new `ship` register row (IMO 1984 paper, match_* left empty
+so it cannot sweep). Dry run 1 NEW, uploaded, COUNT 48/6 matches, stamped, CSV removed. Draft now 16.
