@@ -23973,3 +23973,23 @@ Yesavage's own page (web.stanford.edu/~yesavage/GDS.html, sha256 9f33c899…): "
 in the public domain due to it being partly the result of Federal support." Read as covering GDS-15.
 Uploaded, COUNT matches, stamped, CSV removed. Draft now 17. Eight tables remain held on silence
 (hyatt_2023_aggression_s3_{acme,cast,daq,ssis}, moon_2023_*).
+
+**Follow-up, 2026-09-23: rulings on the eight silence-held tables** (after a targeted rights search
+of each originator; PsycTESTS permission fields were unreadable to agents — DAQ t03155-000,
+SSIS t05157-000 need a PsycNET login).
+- **ACME → ship** (`hyatt_2023_aggression_s3_acme`): co-author Lynam's page, "Feel free to use it",
+  full form attached, no licence text. Register row added. Uploaded, 180/36 verified, stamped.
+- **Korean proficiency (Lee et al. 2013) → ship** (`moon_2023_korean_proficiency`): the originating
+  article is CC BY-NC but prints no item wording (a generic four-domain self-rating); the shipped
+  English is Moon & Kim's own. Narrow ruling, register row says so. Uploaded, 20/4 verified, stamped.
+- **CAST → HOLD** (`hyatt_2023_aggression_s3_cast`): the table is the 18-item CAST, which Buckels's
+  2023 chapter calls unpublished and "distributed to other researchers"; no public version, no grant.
+- **PPP → HOLD** (`moon_2023_{pregnancy_stress,spousal_support,selfesteem}`): silence, plus an
+  unconfirmed lead that Curry transferred rights to Dr. Linda Bullock, who grants permission on
+  request — confirm before any ship.
+- **DAQ → HOLD** (`hyatt_2023_aggression_s3_daq`): open download on Denson's page but no grant; two
+  items are Buss-Perry AQ items, whose revision WPS sells.
+- **SSIS** (`hyatt_2023_aggression_s3_ssis`): still pending Ben's call.
+Draft now 19 added + 1 removed: `MotAcademica_Ribeiro_2019__items` was deleted from the irw_text_2
+draft by another session (not this one; #2313 item 14 lists it as a duplicate of
+ribeiro_2019_academic_motivation). Releasing will delete it from current — flagged to Ben.
