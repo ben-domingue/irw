@@ -15271,3 +15271,293 @@ different way: every flagged item still carries 21-42 genuine missing cells in
 the source `.sav` and only integer anchors. A mean-imputed column has no
 missing left (that is the point of imputing) and contains a fractional
 constant. Neither holds, so these are real modal-response concentrations.
+
+## 2026-09-22 — PMC batch 2 (recycled ranked terms, second sweep off `pmc_term_backlog.csv`)
+
+Ran `irw_discover_pmc.py` over the **top 50 unrun terms** from
+`pmc_term_backlog.csv`, ranked by projected new DOIs (612 of the 1,553
+projected across all 241 unrun terms). No new term scout — this is the second
+batch the 2026-09-20 scout was built to feed. Terms appended to
+`search_terms_log.csv` and marked `run_2026_09_22=yes` in the backlog; 191
+ranked terms remain unrun.
+
+Dedup excluded 2,626 dictionary DOIs, 1,017 `human_review/` DOIs and 3,851
+`pmc_seen_dois.csv` DOIs before any fetch. 550 journal×term queries over 9
+journals → **176 candidates triaged**, ~55 min wall-clock.
+
+| flag | n |
+|---|---|
+| `no_usable_file` | 80 |
+| `license_restricted` | 69 |
+| `human_assistance` | 16 |
+| `external_unresolved` | 3 |
+| `download_failed` | 3 |
+| `below_min_n` | 2 |
+| `not_item_response` | 2 |
+| `pii_suspected` | 1 |
+
+**Zero `good` rows.** Consistent with the connector's documented ~1% base
+rate on a 176-row pool; the yield is in the `human_assistance` bucket.
+
+**Step 2b did NOT run automatically, and this is a real gap in the manual
+path.** SKILL.md says the scheduled connectors call `irw_retriage_ha.py`
+unconditionally — that is true of `irw_discover_pmc_monthly.py`, but
+`irw_discover_pmc.py` invoked by hand runs no retriage and emits no
+`refined_flag` column. Run by hand here (`runs/pmc_batch2_retriage_ha.csv`),
+which archived 3 rows to `human_review/human_review_pmc_2026-09-22.csv`.
+Anyone firing the non-monthly script directly must do the same.
+
+Retriage of the 16: `recoverable_format` 5, `aggregate_continuous` 4,
+`worth_retrying` 4, `human_review` 3.
+
+**10 unworked leads + 3 licence-blocked + 1 PII skip → `pmc_leads_2026-09-22.csv`** (tracked,
+with `status`/`note`, per the 2026-09-20 rule that a batch's unworked leads
+are a standing record and must not die in `runs/`). All 13 are `unworked`.
+Ranked by instrument shape, not response count. Largest unworked by shape:
+`10.7717/peerj.6672` (coastal MPA preference classes, 4,485×21),
+`10.1038/s41598-024-77912-7` (grooming network / inhibitory control,
+3,024×31), `10.7717/peerj.15826` (MCI in type 2 diabetes, 328×30),
+`10.7717/peerj.11263` (Polish Fear of COVID-19 validation, 383×18). Most
+`recoverable_format` rows failed QC on `resp_scale_mixed` — the familiar
+one-questionnaire-several-instruments shape, so re-read by block prefix and
+ship one file per scale.
+
+**The `unknown` licences are CORRECT, not a defect** — and the first pass of
+this write-up got that wrong, which is worth recording because the mistake is
+an easy one to repeat. All five `unknown` rows reach their data through a
+Data Availability link, so `triage_external_link()` checks **the deposit's**
+licence, not the article's, per the source-licence rule (ECR-R, 2026-09-04).
+Checking the three actionable ones against Crossref returned CC BY 4.0 and
+looked like the 2026-09-20 lookup defect recurring. That was the wrong check:
+Crossref describes the *article*. The deposits themselves are
+`osf.io/s4kwv` (public, **no licence set**), `osf.io/zkwna` (public, **no
+licence set**) and `osf.io/zjnsb` (404 without a token — private or
+withdrawn). `unknown` is the right verdict on all three and the skip is
+correct; "fixing" it would have let an article's CC BY launder an unlicensed
+deposit, which is precisely what that rule exists to stop.
+
+All three are structurally strong and blocked purely on licence, so they are
+appended to `license_blocked_candidates.csv` (now 32 rows) and carry
+`status=blocked_licence` in the leads CSV. That leaves **10 unworked leads**,
+not 13.
+
+`license_restricted` at 69/176 (39%) is **not** that defect: 68 are
+`cc-by-nc-nd` and 1 `cc-by-nc`, genuinely outside IRW's open set. Correctly
+excluded, nothing to reopen.
+
+**PII skip: `10.1186/s12889-020-09096-4`** (German physical activity
+self-efficacy scale). Its SI `.xlsx` carries a `Date_of_birth` column — the
+blanket whole-candidate skip, not the 2026-09-20 platform-participant-ID
+carve-out, which covers only pure account identifiers. No standing file, per
+policy; recorded here and in the leads CSV as `status=skipped_pii`.
+
+**Watch the OSF review link on `10.1186/s12889-023-17109-1`**: its
+`external_link` is a `?view_only=` node, the exact private-unlicensed-node
+trap from 2026-09-20. Its triaged data file is a direct SI attachment, so the
+article's CC BY may well cover what was read — but confirm `public:` on the
+node before touching anything fetched through that link.
+
+No processing scripts written, no item text, nothing to upload from this
+batch yet.
+
+### 2026-09-22 follow-up — Step 2b wired into the manual connectors
+
+`irw_discover_pmc.py` and `irw_discover_plos.py` now call
+`chain_step2b(args.out, run=True)` at the end of `main()`, the same call
+`irw_discover_pmc_monthly.py` has made since #2076. Both are the same triage
+code as their `_monthly` wrappers but a different `main()`, which is how they
+were missed: #2076 fixed `irw_batch_updated --retriage`, the follow-up fixed
+the two scheduled wrappers, and nobody checked the hand-fired entry points.
+Smoke-tested by calling `chain_step2b` on a copy of this batch's triage CSV --
+`refined_flag` present, `human_review/` archive idempotent (merges and dedups
+on `doi`, still 3 rows / 3 distinct DOIs after a second pass).
+
+`irw_discover_monthly.py` was checked and deliberately left alone: it is
+discovery-only, emits `source/title/doi/published/url` with no `flag` column,
+and its candidates reach Step 2b through `irw_batch_updated --retriage`.
+`chain_step2b`'s docstring previously listed it as one of the connectors that
+needed the fix; corrected.
+
+### 2026-09-22 — lead 1 of 10 worked: peerj.11263 (Pilch 2021, Polish FCV-19S validation)
+
+**4 tables, 11,002 responses**, all CC BY 4.0, all `run_qc`-clean.
+
+| table | rows | ids | items | resp |
+|---|---|---|---|---|
+| `pilch_2021_fcv19s_validation` | 2,275 | 325 | 7 | 1-5 |
+| `pilch_2021_ipip20_validation` | 6,220 | 311 | 20 | 1-5 |
+| `pilch_2021_preventive_behavior` | 1,532 | 383 | 4 | 1-5 |
+| `pilch_2021_preventive_vas` | 975 | 325 | 3 | 0-100 |
+
+**The find that shaped the batch: Sample 1 is already in the IRW.** The deposit
+has two sheets. Sample 1 (n=383) is the SAME SAMPLE as PLOS ONE
+10.1371/journal.pone.0258606, live since batch_140 as `pilch_2021_fear_covid19`
+and siblings. Same first author, same year, both Polish, N 383 vs 397 -- close
+enough to be worth checking rather than assuming, so it was checked on the
+responses themselves: 206 of Sample 1's 206 distinct fear1-7 patterns occur in
+the PLOS file, and the item means agree to three decimals
+(2.595/2.423/1.525/... vs 2.592/2.421/1.532/...). Sample 1 is the PLOS file
+minus its 4 FCV-19S-incomplete rows. Its fear1-7 is therefore NOT shipped.
+Sample 2 (n=325) is genuinely distinct: zero shared IPIP response patterns,
+visibly different means.
+
+Sample 1's `Preventive1-4` block DOES ship -- a different instrument (4 items,
+1-5) from anything in the PLOS deposit (BEH1-10, 1-7), so new data about an
+already-present sample. Its ids do not link to the live tables and nothing
+claims they do.
+
+The paper's Method confirms the recruitment for both samples: 708 community
+members via online social-media advertisements, 15 May - 15 Jun 2020.
+
+**Item text: shipped for 3 of 4** (the deposit's "Materials" sheet carries every
+item in administered Polish with an English gloss, plus each block's anchors --
+the cheap case). `pilch_2021_fcv19s_validation` is the exception and is NOT a
+re-derivation problem: the full Polish and English FCV-19S wording is in hand,
+but the Fear of COVID-19 Scale (Ahorsu et al.) has no row in
+`itemtext/instrument_rights_register.csv`. One rights call away.
+
+Gates: `normalize_nulls.R` (3 fixed), `validate_items.R --resp-csv` PASS x3,
+`audit_batch.R --resp-dir` 3/3 PASS no anomalies, `irw-validate` clean,
+`check_provenance.R` exit 0. `itemtext_output/` holds nothing but `*__items.csv`.
+
+**Step 5b, and a verification that first said FAIL on a correct mapping.** The
+IPIP mapping is `paper_explicit` (the Materials sheet lists 20 stems under a
+heading naming the range IPIP1-IPIP20), so it needed a real check. The first
+draft's rival test was a cyclic shift of the text by k positions -- which is
+worthless here, because the IPIP-BFM-20 partition {i, i+5, i+10, i+15} maps onto
+ITSELF under any shift, so every k yields a valid five-block partition and only
+relabels which block is Extraversion. It duly reported the shipped mapping
+losing to k=1, i.e. FAIL. The test that works is per-item: for each item, which
+block do the responses put it closest to, and is that the block its text claims?
+**20 of 20**, own-block affinity 0.232-0.563 against next-best 0.023-0.283,
+beating all 2000 random stem-to-code permutations (mean 4.10/20, max 11/20).
+Recorded PARTIAL, not VERIFIED -- it pins each item to its FACTOR, not its stem;
+swapping IPIP1 with IPIP11 would change none of the numbers. The dead-end test
+is documented in `verify_pilch_2021_ipip20_validation.R` so it is not
+re-invented. The two small author-constructed blocks are honest `NO_ROUTE`:
+3 and 4 unidimensional items, no published per-item values, no polarity
+contrast, so nothing in the responses survives a swap.
+
+No issues-page entry is owed: the per-item scan found no observed resp without
+an option row, no blank `item_text`, and no stem shared across items. The blank
+`option_text` cells (60 of 100 on the IPIP, 57 of 63 on the VAS) are unlabeled
+scale points -- required to be blank, and specifically NOT padded from the
+English gloss, which labels all five points where the administered Polish labels
+only the endpoints.
+
+Staged: 4 `dictionary_auto.csv` rows via `stage_dict_row.py`, 4 `claude-auto`
+rows in `tags/tags_auto.csv` (`metadata/tests/test_tags_union.R` passes), 4
+`itemtext_provenance.csv` rows (3 shipped + 1 not-shipped record), 3
+`itemtext/mapping_verification.csv` rows.
+
+### 2026-09-22 cont. — the remaining 9 leads worked; batch closed
+
+All 14 rows of `pmc_leads_2026-09-22.csv` now carry a terminal status. Nothing
+is left unworked.
+
+**3 more tables, 16,193 responses** (batch total **7 tables / 27,195
+responses**):
+
+| table | rows | ids | items | resp |
+|---|---|---|---|---|
+| `bate_2019_srq` | 8,300 | 415 | 20 | 1-5 |
+| `kaigaishi_2024_primate_cognition` | 6,356 | 138 | 8 | 0/1 |
+| `maes_2020_ospaq` | 1,537 | 385 | 4 | 0-100 |
+
+`bate_2019_srq` merges the paper's two independently-recruited samples
+(civilian n=264, police n=151) into one file with `cov_study` and an id offset,
+which the abstract licenses outright -- the SRQ was "calibrated using a top-end
+civilian sample (Experiment 1)" and then examined "in pools of police
+(Experiment 2)". Experiment 3 is excluded: that sheet holds only an SRQ total,
+and a composite is not a response.
+
+`kaigaishi_2024_primate_cognition` is a macaque battery, and **non-human is not
+a skip reason** -- `datastandard.md` defines `id` as the focal unit measured.
+Shipped as ONE table rather than three: the workbook's physical/social/
+inhibition sheets are domains of one battery given to one colony (kept as
+`itemcov_domain`), and split apart none clears the 100-subject floor (81/109/123,
+per-task 75-123). Pooled: 138 subjects. **The deposit's own `trial` counter does
+not uniquely index a trial** -- 36 (subject, task, trial) triples repeat, 20 with
+an identical timestamp (`ginco` has six rows of cylinder trial 1 at 2022-02-09
+16:58) -- so `trial_number` is a sequential index within subject and task in the
+file's row order, with the source counter kept as `trial_source`.
+
+`maes_2020_ospaq` ships percentages as continuous `resp`. 999 is a sentinel
+(3 cells, dropped). The four items are meant to total 100 and for 28 respondents
+do not; those ship exactly as deposited rather than being rescaled, since that is
+the respondents' own arithmetic.
+
+**Six leads did not ship**, each for a stated reason rather than silence:
+
+- `peerj.6672` — a discrete choice experiment (299 respondents x 5 tasks x 3
+  alternatives). `resp` would be which attribute bundle was picked; not item
+  response data. Triage's "4,485 participants" were alternative rows.
+- `peerj.15826` — clinical biomarker table (ALT, HbA1c, eGFR) plus a single MoCA
+  TOTAL. The only cognitive measure is a composite.
+- `s41598-024-52756-3` — the supplement is summary tables T1-T7 (correlations,
+  mean DERS scores), no raw responses.
+- `s41598-025-34929-w` — demographics for 104 dogs plus summary/correlation
+  tables, no trial-level responses.
+- `s41598-024-64722-0` — the Zenodo deposit IS genuinely CC BY 4.0 and holds real
+  trial data, but only **58 participants**, below the N>=100 floor. Triage's
+  n=2,765 was again the row count; this is the third time in this batch that
+  ranking by response count pointed at the wrong thing.
+- `s41598-024-70692-0` — **licence skip**. Its OSF node `fgwvk` returns 401
+  without a token, i.e. private, reachable only through the `?view_only=` review
+  link the paper publishes. The article's CC BY does not reach an unlicensed
+  private node. Same shape as `10.1038/s41598-023-33749-0`; logged in
+  `license_blocked_candidates.csv`, which is now 33 rows.
+
+**The validator caught a real disagreement inside itself.** ben asked whether
+the final tables were going through the new validator; they were going through
+`compat.run_qc` only. Running the upload profile surfaced that the two gates
+disagree on the macaque table: `run_qc`'s `dup_id_item` decides fail-vs-note from
+`("wave", "timepoint", "date")` alone (`_checks.py` ~line 404) and hard-fails a
+table keyed by `trial_number`, even though `datastandard.md` says a `trial_`
+index is exactly what tells repeated responses apart, and even though the same
+module's own `occasion_columns()` counts `trial_*` for the rescue path. The
+upload gate applies that rescue and passes. Confirmed on a minimal synthetic
+frame: `irw-validate` passes an id/item/trial_number table that `run_qc` fails.
+All four scripts in this batch now gate on
+`irw_validate.validate_frame(..., profile="upload")`. **The inconsistency in
+`_checks.py` is left as an open TODO rather than patched here** -- it is a
+shared component and wants its own change with tests.
+
+All 7 tables: `IRW Data Standard 1.0: conforms`, `IRW upload gate: passes`.
+Warnings explained rather than ignored -- `imputed_values*` on three tables is
+floor/ceiling concentration with no fractional values anywhere (`SRQ12` runs
+0.2/1/7/20/72% up the scale; `fear3` runs 75/17/6/1/1% down it; `transp` is a
+binary task at 36.6% success, which the check text itself calls legitimate), and
+OSPAQ's `resp_ordinal*` (54 distinct values) and `resp_scale_nested_support` are
+the percentage scale and its sum-to-100 constraint, not a construct split.
+
+**No item text from these three**, each recorded in `itemtext_provenance.csv`
+with where the text actually is: `bate_2019_srq` has bare codes and no label
+level at all (plain .xlsx), so the wording is a paper-transcription job;
+`maes_2020_ospaq`'s headers are posture LABELS, not the administered stems, and
+inventing one is forbidden; `kaigaishi_2024_primate_cognition` is not-applicable
+rather than not-shipped, since its items are tasks no subject read.
+
+Staged: 3 more `dictionary_auto.csv` rows, 3 `tags_auto.csv` rows
+(`test_tags_union.R` passes; the macaque table uses the `Animal` respondent-type
+atom added 2026-09-19, paired with `Age Range = Not applicable (non-person)` as
+that vocabulary requires), 3 `itemtext_provenance.csv` rows.
+
+### 2026-09-22 — batch uploaded
+
+ben-domingue confirmed the upload of all 7 response tables (27,195 responses)
+and the 3 Pilch item text tables. `itemtext_provenance.csv` and
+`itemtext/mapping_verification.csv` are stamped `uploaded=2026-09-22` for
+`pilch_2021_ipip20_validation`, `pilch_2021_preventive_behavior` and
+`pilch_2021_preventive_vas`. The four not-shipped provenance records
+(`pilch_2021_fcv19s_validation`, `bate_2019_srq`, `maes_2020_ospaq`,
+`kaigaishi_2024_primate_cognition`) stay unstamped by design -- they record
+where the text is, not a shipment.
+
+The 7 `dictionary_auto.csv` rows and 7 `tags_auto.csv` rows are on main and
+reach the sheet on the next `metadata/02_biblio.R` / `03_tags.R` run; nothing
+further is needed for them.
+
+PMC batch 2 is closed: 176 candidates triaged, 14 leads all terminal, 7 tables
+shipped, 191 ranked terms left in `pmc_term_backlog.csv` for batch 3.
+

@@ -24,12 +24,81 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   already-retired DOIs will say `license_unknown*` where the record says
   CC BY. Cheap: the same 34-row re-check loop, pointed at the ledger.
 
-- [ ] **241 scouted terms remain ranked and unrun**, now in the tracked
-  `pmc_term_backlog.csv` (291 rows, `run_2026_09_20` marks the 50 already
-  swept). 1,553 new DOIs projected pre-dedup, 58% of the measured pool. A
-  second batch starts from that file -- no new scout needed. Fix the scout's
-  500-hit cross-journal cap first if its counts are to be used as a volume
-  estimate rather than a ranking (see BATCH_LOG.md 2026-09-20).
+## From the 2026-09-22 PMC sweep (batch 2)
+
+- [x] **7 tables + 3 item text tables uploaded** (ben-domingue, confirmed
+  2026-09-22): 27,195 responses. The three shipped item text tables are stamped
+  `uploaded=2026-09-22` in both `itemtext_provenance.csv` and
+  `itemtext/mapping_verification.csv`; the four not-shipped provenance records
+  stay unstamped. Dictionary and tag rows reach the sheet via
+  `metadata/02_biblio.R` and `03_tags.R` on the next pipeline run. Original: Beyond the Pilch four below: `bate_2019_srq` (8,300),
+  `kaigaishi_2024_primate_cognition` (6,356), `maes_2020_ospaq` (1,537) --
+  27,195 responses in total across the batch. All 7 dictionary rows and 7 tag
+  rows are staged. Item text ships for three of the Pilch tables only.
+
+- [x] **The Pilch four** (peerj.11263, Pilch 2021) -- uploaded with the batch:
+  `pilch_2021_fcv19s_validation` (2,275), `pilch_2021_ipip20_validation` (6,220),
+  `pilch_2021_preventive_behavior` (1,532), `pilch_2021_preventive_vas` (975) --
+  11,002 responses. Item text ships for all but `fcv19s_validation`. Response
+  tables first (`red_up irw_output`), then `red_up itemtext_output`. Dictionary
+  and tag rows are already staged; stamp `uploaded=` in
+  `itemtext_provenance.csv` and `itemtext/mapping_verification.csv` only after
+  ben confirms.
+
+- [ ] **FCV-19S rights call (Ben) -- item text is otherwise free.** The
+  peerj.11263 deposit prints all seven Fear of COVID-19 Scale items in
+  administered Polish with an English gloss and all five anchors. The
+  instrument (Ahorsu et al. 2020) has no row in
+  `itemtext/instrument_rights_register.csv`, so nothing ships. This is the
+  cheap case blocked purely on rights -- no re-derivation needed if it clears.
+  Note the live `pilch_2021_fear_covid19` from the sibling PLOS study is in the
+  same position.
+
+- [x] **All 14 leads worked, batch closed** (2026-09-22): 4 shipped, 4
+  blocked on licence, 5 rejected on content, 1 skipped on PII. Every row of
+  `pmc_leads_2026-09-22.csv` carries a terminal status and a reason. Superseded
+  as a task; kept for the counts. Original text follows.
+
+- [ ] **`dup_id_item` disagrees with the upload gate on `trial_*` keys.**
+  `run_qc`'s check decides fail-vs-note from `("wave", "timepoint", "date")`
+  alone (`irw_validate/_checks.py` ~line 404), so it hard-fails a table keyed by
+  `trial_number` -- which `datastandard.md` says is exactly what distinguishes
+  repeated responses, and which the same module's own `occasion_columns()`
+  already counts for the rescue path. The upload profile passes such a table;
+  `compat.run_qc` fails it. Reproducible on a 4-column synthetic frame. Wants
+  its own change with tests rather than a drive-by patch.
+
+- [x] **9 actionable leads unworked**, all in the tracked
+  `pmc_leads_2026-09-22.csv`. Ranked by instrument shape, not response count.
+  Largest by shape: `10.7717/peerj.6672` (4,485x21),
+  `10.1038/s41598-024-77912-7` (3,024x31), `10.7717/peerj.15826` (328x30).
+  `10.7717/peerj.11263` is done -- shipped 2026-09-22. Most `recoverable_format` rows are
+  `resp_scale_mixed` -- re-read by block prefix, one file per scale.
+
+- [x] **The `unknown` licences are correct, not a defect** (checked
+  2026-09-22). They arrive via Data Availability links, so the *deposit's*
+  licence governs, not the article's: `osf.io/s4kwv` and `osf.io/zkwna` are
+  public with no licence set, `osf.io/zjnsb` 404s without a token. All three
+  are now in `license_blocked_candidates.csv`. Do not "fix" this by falling
+  back to the article licence -- that is the laundering the source-licence
+  rule forbids.
+
+- [x] **Manual connectors now chain Step 2b** (fixed 2026-09-22). Both
+  `irw_discover_pmc.py` and `irw_discover_plos.py` call
+  `chain_step2b(args.out, run=True)` at end of `main()`, the same call the
+  `_monthly` wrappers make; `chain_step2b`'s docstring records why the manual
+  path was missed. `irw_discover_monthly.py` deliberately does not chain it --
+  it is discovery-only, emits no `flag` column, and its candidates reach Step
+  2b via `irw_batch_updated --retriage`.
+
+- [ ] **191 scouted terms remain ranked and unrun** in `pmc_term_backlog.csv`
+  (`run_2026_09_22` marks this batch's 50). ~941 new DOIs projected pre-dedup.
+  A third batch starts from that file -- no new scout needed.
+
+- [x] **241 scouted terms ranked and unrun** -- batch 2 swept the top 50 on
+  2026-09-22; superseded by the 191-term item above. The scout's 500-hit
+  cross-journal cap is still unfixed, so treat its counts as a ranking only,
+  never a volume estimate (see BATCH_LOG.md 2026-09-20).
 
 ## From the 2026-09-20 lead-working pass
 

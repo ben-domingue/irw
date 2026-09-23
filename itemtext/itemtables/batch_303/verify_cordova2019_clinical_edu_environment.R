@@ -10,15 +10,16 @@
 #   table of the live IRW table, cell for cell.
 # Route 2: the four PHEEM negative items (7, 8, 11, 13) are the four low-mean
 #   items in the live data -- an independent confirmation of the numbering.
-xl <- ".cache/batch_303/cordova.xlsx"
-if (!file.exists(xl)) stop("missing cached deposit file: ", xl)
+source(".claude/skills/irw-auto-itemtext/scripts/verify_cache.R")
+
+xl <- cached_source(".cache/batch_303/cordova.xlsx",
+      "https://dataverse.harvard.edu/api/access/datafile/3454046")
 if (!requireNamespace("readxl", quietly = TRUE)) stop("needs readxl")
 
 d <- as.data.frame(irw::irw_fetch("cordova2019_clinical_edu_environment"))
 if (!nrow(d)) stop("irw_fetch returned no rows -- nothing was checked")
 d$item <- as.character(d$item)
-items <- read.csv("itemtables/batch_303/cordova2019_clinical_edu_environment__items.csv",
-                  stringsAsFactors = FALSE, na.strings = "NA", encoding = "UTF-8")
+items <- shipped_items("cordova2019_clinical_edu_environment", "itemtables/batch_303/cordova2019_clinical_edu_environment__items.csv")
 
 x <- readxl::read_excel(xl)
 hdr <- names(x)

@@ -384,14 +384,25 @@ def chain_step2b(triage_csv, *, run=True, stream=None):
 
     Step 2b was retitled REQUIRED on 2026-09-07 (#2076), which also gave
     irw_batch_updated.py a --retriage flag to chain it in-process. That fix
-    reached exactly one of the four triage entry points: the three scheduled
-    connectors (irw_discover_plos_monthly.py, irw_discover_pmc_monthly.py,
-    irw_discover_monthly.py) import irw_triage_updated directly and never
-    touch irw_batch_updated, so the step stayed unreachable for precisely the
-    unattended runs it was written for -- the 2026-09-08 PLOS weekly run
-    committed 13 unclassified human_assistance rows nineteen hours after
-    #2076 merged. Sharing one implementation is what keeps the next entry
-    point from missing it too.
+    reached exactly one entry point: the scheduled article connectors
+    (irw_discover_plos_monthly.py, irw_discover_pmc_monthly.py) import
+    irw_triage_updated directly and never touch irw_batch_updated, so the
+    step stayed unreachable for precisely the unattended runs it was written
+    for -- the 2026-09-08 PLOS weekly run committed 13 unclassified
+    human_assistance rows nineteen hours after #2076 merged.
+
+    The MANUAL connectors (irw_discover_pmc.py, irw_discover_plos.py) were
+    then missed in turn, for a year's worth of the same reason: they are the
+    same code path as their _monthly wrappers but a different main(). The
+    2026-09-22 PMC batch-2 sweep is what caught it -- a hand-fired run whose
+    16 human_assistance rows had no refined_flag and whose 3 human_review
+    rows were never archived until the step was run by hand. Both call this
+    now. irw_discover_monthly.py deliberately does NOT: it is discovery-only
+    and emits no flag column, so its candidates reach Step 2b through
+    irw_batch_updated --retriage instead.
+
+    Sharing one implementation is what keeps the next entry point from
+    missing it too.
 
     Returns the retriage output path, or None if there was nothing to do.
     """

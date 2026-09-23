@@ -7760,3 +7760,54 @@ date,query,output_file,notes
 2026-09-21,psychological resilience,runs/monthly_candidates_weekly_2026-09-21.csv,"monthly automated run; 3 candidates; sources=osf,dataverse,datacite; since=2026-06-23"
 2026-09-21,procrastination,runs/monthly_candidates_weekly_2026-09-21.csv,"monthly automated run; 4 candidates; sources=osf,dataverse,datacite; since=2026-09-07"
 2026-09-21,growth mindset,runs/monthly_candidates_weekly_2026-09-21.csv,"monthly automated run; 4 candidates; sources=dataverse,datacite; since=2026-09-02; not_searched=osf"
+2026-09-22,Anxiety Sensitivity Index,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
+2026-09-22,Basic Psychological Need Satisfaction Scale,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
+2026-09-22,Body Shape Questionnaire,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
+2026-09-22,Compassion Scale,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
+2026-09-22,Corsi block-tapping task,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
+2026-09-22,Difficulties in Emotion Regulation Scale,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
+2026-09-22,Fear of COVID-19 Scale,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
+2026-09-22,Illness Attitude Scales,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
+2026-09-22,Insomnia Severity Index,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
+2026-09-22,Kessler Psychological Distress Scale,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
+2026-09-22,Meaning in Life Questionnaire,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
+2026-09-22,Need for Cognition Scale,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
+2026-09-22,Perceived Organizational Support Scale,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
+2026-09-22,Ruminative Response Scale,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
+2026-09-22,Sensation Seeking Scale,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
+2026-09-22,acculturation scale,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
+2026-09-22,attachment style questionnaire,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
+2026-09-22,attentional bias task,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
+2026-09-22,cognitive ability battery,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
+2026-09-22,cognitive ability test,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
+2026-09-22,continuous performance task,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
+2026-09-22,dual-task performance,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
+2026-09-22,family functioning scale,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
+2026-09-22,fatigue severity scale,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
+2026-09-22,food neophobia scale,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
+2026-09-22,graphic rating scale,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
+2026-09-22,health literacy questionnaire,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
+2026-09-22,impulsivity scale,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
+2026-09-22,marital satisfaction scale,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
+2026-09-22,medication adherence scale,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
+2026-09-22,mental rotation test,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
+2026-09-22,national assessment,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
+2026-09-22,numeracy scale,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
+2026-09-22,personality questionnaire,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
+2026-09-22,physical activity questionnaire,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
+2026-09-22,relationship assessment scale,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
+2026-09-22,religiosity scale,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
+2026-09-22,resilience scale,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
+2026-09-22,response resolution rating scale,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
+2026-09-22,rumination response scale,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
+2026-09-22,self-efficacy scale,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
+2026-09-22,sf-36 health survey,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
+2026-09-22,sleep quality index,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
+2026-09-22,slider scale,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
+2026-09-22,social desirability scale,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
+2026-09-22,stop signal task,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
+2026-09-22,student engagement scale,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
+2026-09-22,technology acceptance model questionnaire,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
+2026-09-22,work-family conflict scale,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
+2026-09-22,working memory task accuracy,runs/pmc_batch2_triage.csv,PMC batch 2; recycled from pmc_term_backlog.csv ranked-unrun; 176 candidates over 9 journals
+2026-09-22,[weekly] 15 terms x journals=plosone,runs/plos_monthly_candidates_weekly_2026-09-22.csv,plos monthly-script automated run; mode=weekly; 56 candidates triaged; 15/15 terms visited (14 hit per-term cap 4)

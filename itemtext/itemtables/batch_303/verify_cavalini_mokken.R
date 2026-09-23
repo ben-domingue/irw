@@ -10,7 +10,11 @@
 #   counts exactly.
 # Route 2: every shipped item_text is a line of the man page, in order.
 # Route 3: the shipped anchors are the man page's own 0-3 labels.
-tb <- ".cache/batch_303/mokken.tar.gz"
+source(".claude/skills/irw-auto-itemtext/scripts/verify_cache.R")
+
+tb <- cached_source(".cache/batch_303/mokken.tar.gz",
+      c("https://cran.r-project.org/src/contrib/mokken_3.1.2.tar.gz",
+            "https://cran.r-project.org/src/contrib/Archive/mokken/mokken_3.1.2.tar.gz"))
 if (!file.exists(tb)) stop("missing cached source: ", tb)
 ex <- file.path(tempdir(), "mokken_src"); dir.create(ex, showWarnings = FALSE)
 utils::untar(tb, exdir = ex)
@@ -23,8 +27,7 @@ src <- get("cavalini", envir = e)
 d <- as.data.frame(irw::irw_fetch("cavalini_mokken"))
 if (!nrow(d)) stop("irw_fetch returned no rows -- nothing was checked")
 d$item <- as.character(d$item)
-items <- read.csv("itemtables/batch_303/cavalini_mokken__items.csv",
-                  stringsAsFactors = FALSE, na.strings = "NA")
+items <- shipped_items("cavalini_mokken", "itemtables/batch_303/cavalini_mokken__items.csv")
 
 cat("=== Route 1: reproduce the live table from the packaged data ===\n")
 cat(sprintf("  packaged cavalini: %d x %d, columns %s ... %s\n",

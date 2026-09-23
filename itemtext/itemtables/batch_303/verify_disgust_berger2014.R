@@ -12,15 +12,17 @@
 #   so the shipped anchors apply in the printed direction.
 # Route 3: the section split shipped here (1-14 agreement, 15-27 disgust rating)
 #   is the split printed in the Hebrew PDF and in the DS-R master copy.
-raw <- ".cache/batch_303/dv_2509243.bin"   # tab file
-syn <- ".cache/batch_303/dv_2509396.bin"   # syntax in txt format
-for (p in c(raw, syn)) if (!file.exists(p)) stop("missing cached deposit file: ", p)
+source(".claude/skills/irw-auto-itemtext/scripts/verify_cache.R")
+
+raw <- cached_source(".cache/batch_303/dv_2509243.bin",      # tab file
+                     "https://dataverse.harvard.edu/api/access/datafile/2509243")
+syn <- cached_source(".cache/batch_303/dv_2509396.bin",      # syntax in txt format
+                     "https://dataverse.harvard.edu/api/access/datafile/2509396")
 
 d <- as.data.frame(irw::irw_fetch("disgust_berger2014"))
 if (!nrow(d)) stop("irw_fetch returned no rows -- nothing was checked")
 d$item <- as.character(d$item)
-items <- read.csv("itemtables/batch_303/disgust_berger2014__items.csv",
-                  stringsAsFactors = FALSE, na.strings = "NA", encoding = "UTF-8")
+items <- shipped_items("disgust_berger2014", "itemtables/batch_303/disgust_berger2014__items.csv")
 
 hdr <- strsplit(readLines(raw, n = 1, warn = FALSE), "\t")[[1]]
 qcols <- grep("^Q", hdr, value = TRUE)

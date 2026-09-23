@@ -482,6 +482,18 @@ def main():
 
     print(f"\n{n_done} candidates processed -> {args.out}")
 
+    # Step 2b, in-process -- same call the scheduled connectors make. This
+    # script triages off irw_triage_updated and never reaches
+    # irw_batch_updated's --retriage flag, so a run fired BY HAND produced a
+    # triage CSV with no refined_flag at all: the not_item_response rows
+    # can't be dropped, the human_review rows can't be archived, and the
+    # whole human_assistance bucket becomes nobody's job. #2076 fixed the
+    # irw_batch_updated path and the monthly wrappers; the manual entry
+    # points were missed, and the 2026-09-22 PMC batch-2 sweep is what
+    # caught it -- 16 human_assistance rows, Step 2b run by hand afterwards.
+    from irw_retriage_ha import chain_step2b
+    chain_step2b(args.out, run=True)
+
 
 if __name__ == "__main__":
     main()
