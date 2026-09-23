@@ -23783,3 +23783,29 @@ are response-data defects in a published table; both could ride on irw#2365's fa
 
 Circuit breaker: not tripped (0 failed of 3).
 Queue after this round: 15 pending, 0 in_progress. Cap (batch_320) NOT reached.
+## 2026-09-23 — held-pool release: 4 more tables to the irw_text_2 draft
+
+Ben ruled on three instruments from the #2162 set, rows registered in 34bf9777:
+
+- **HBSC FAS II → `ship`**: `schmidt_2017_fas` (batch_169). The shipped German is the study's own
+  CC BY data labels (Swiss wording, not HBSC's protocol text); HBSC's registration is "to allow us
+  to track use", which is not a licence.
+- **Creactability → `ship`**: `shin2024_creactability_adaptability`, `_creativity` (batch_172),
+  `_quickness` (batch_173). An originator, Won Jae Lee, republished the items under CC BY 4.0, which
+  makes this a grant, not silence.
+- **Zung SAS → `block`**: `shen_2020_sas20` stays held. Mapi ePROVIDE gates the scale behind a
+  login. **`zhou_2016_anxiety` is live Zung text; whether to withdraw it is still Ben's decision.**
+
+This supersedes the earlier entry's "stay held" for these four. #2162's close is still not a
+general silence ruling. Each release above rests on its own register row.
+
+Gates re-run live: normalize_nulls 0 of 5 would change, audit_batch PASS ×5 (written to a scratch
+path so the batches' audit_report.csv are untouched), verify_batch PASS ×5, lint 0 ERROR / 1 WARN
+(`science_ltm`, unrelated). Pre-flight: clean/ held exactly the 4, cmp identical, all unstamped,
+none in the draft. `red_up` dry run: 4 NEW → upload 4/4. Verified with write creds: all 4 `added`,
+none `changed`; COUNT(*)/COUNT(DISTINCT item) match local (13/4, 21/3, 18/3, 21/3). Stamped
+`uploaded=2026-09-23` in 3 provenance files + mapping_verification.csv (8 rows, +10 bytes each).
+**The 4 `__items.csv` files are NOT yet deleted** (the permission check blocked the delete); they
+are stamped, so `clear_uploaded_itemtables.py` will pick them up. `pilch_2021_fcv19s_validation`
+appeared in the draft during this upload; it came from another session, not this one.
+Issues-page entries owed after release.
