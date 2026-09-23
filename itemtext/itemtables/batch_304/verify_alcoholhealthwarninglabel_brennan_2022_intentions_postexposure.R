@@ -19,7 +19,10 @@
 #   (polychoric rho = .72). Recompute an ordinary correlation as a sanity check
 #   -- it should be high and positive, which also fixes the direction (1 =
 #   'definitely will not' through 4 = 'definitely will').
-xml <- ".cache/batch_304/brennan.xml"
+source(".claude/skills/irw-auto-itemtext/scripts/verify_cache.R")
+
+xml <- cached_source(".cache/batch_304/brennan.xml",
+       "https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0276189&type=manuscript")
 if (!file.exists(xml)) stop("missing cached paper text: ", xml)
 
 d <- as.data.frame(irw::irw_fetch("alcoholhealthwarninglabel_brennan_2022_intentions_postexposure"))

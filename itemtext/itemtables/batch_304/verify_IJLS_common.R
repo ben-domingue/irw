@@ -11,15 +11,18 @@
 #   already reversed and encodes that ONLY in the value labels.
 # Route 3: the readme carries the same wording, so the labels are not a
 #   one-source claim.
+source(".claude/skills/irw-auto-itemtext/scripts/verify_cache.R")
+
 ijls_verify <- function(table, cols, strip_rev = TRUE) {
-    sav <- ".cache/batch_304/IJLS.sav"
-    rme <- ".cache/batch_304/IJLS_readme.txt"
-    for (p in c(sav, rme)) if (!file.exists(p)) stop("missing cached deposit file: ", p)
+    sav <- cached_source(".cache/batch_304/IJLS.sav",
+                         "https://dataverse.nl/api/access/datafile/378450")
+    rme <- cached_source(".cache/batch_304/IJLS_readme.txt",
+                         "https://dataverse.nl/api/access/datafile/378452")
     if (!requireNamespace("haven", quietly = TRUE)) stop("needs haven")
     d <- as.data.frame(irw::irw_fetch(table))
     if (!nrow(d)) stop("irw_fetch returned no rows -- nothing was checked")
-    items <- read.csv(sprintf("itemtables/batch_304/%s__items.csv", table),
-                      stringsAsFactors = FALSE, na.strings = "NA", encoding = "UTF-8")
+    items <- shipped_items(table,
+                            sprintf("itemtables/batch_304/%s__items.csv", table))
     s <- haven::read_sav(sav)
 
     cat("=== Route 1: shipped text == .sav variable labels ===\n")

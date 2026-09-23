@@ -11,15 +11,16 @@
 #   deposit under that rule.
 # Route 3: the 9/6 subscale split shipped in the instrument string is the
 #   deposit's own CFA code, not this project's reading of the items.
-sav <- ".cache/batch_303/EHAS_CFA.sav"
-if (!file.exists(sav)) stop("missing cached deposit file: ", sav)
+source(".claude/skills/irw-auto-itemtext/scripts/verify_cache.R")
+
+sav <- cached_source(".cache/batch_303/EHAS_CFA.sav",
+       "https://osf.io/download/dysv5/")
 if (!requireNamespace("haven", quietly = TRUE)) stop("needs haven")
 
 d <- as.data.frame(irw::irw_fetch("anxiety_gastro_symptoms"))
 if (!nrow(d)) stop("irw_fetch returned no rows -- nothing was checked")
 d$item <- as.character(d$item)
-items <- read.csv("itemtables/batch_303/anxiety_gastro_symptoms__items.csv",
-                  stringsAsFactors = FALSE, na.strings = "NA", encoding = "UTF-8")
+items <- shipped_items("anxiety_gastro_symptoms", "itemtables/batch_303/anxiety_gastro_symptoms__items.csv")
 s <- haven::read_sav(sav)
 cols <- paste0("aehas", 1:15)
 
