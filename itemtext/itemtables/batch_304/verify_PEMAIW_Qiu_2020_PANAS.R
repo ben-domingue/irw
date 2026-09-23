@@ -11,15 +11,16 @@
 #   same order and prints the five anchors.
 # Route 3: the positive/negative split the PDF's scoring key gives must show up
 #   in the data as two blocks.
-csvf <- ".cache/batch_304/panas_IR.csv"
-pdff <- ".cache/batch_304/materials_PANAS20.pdf"
-for (p in c(csvf, pdff)) if (!file.exists(p)) stop("missing cached deposit file: ", p)
+source(".claude/skills/irw-auto-itemtext/scripts/verify_cache.R")
 
+csvf <- cached_source(".cache/batch_304/panas_IR.csv",
+        "https://osf.io/download/7ayh2/")
+pdff <- cached_source(".cache/batch_304/materials_PANAS20.pdf",
+        "https://osf.io/download/6hg7d/")
 d <- as.data.frame(irw::irw_fetch("PEMAIW_Qiu_2020_PANAS"))
 if (!nrow(d)) stop("irw_fetch returned no rows -- nothing was checked")
 d$item <- as.character(d$item)
-items <- read.csv("itemtables/batch_304/PEMAIW_Qiu_2020_PANAS__items.csv",
-                  stringsAsFactors = FALSE, na.strings = "NA")
+items <- shipped_items("PEMAIW_Qiu_2020_PANAS", "itemtables/batch_304/PEMAIW_Qiu_2020_PANAS__items.csv")
 cols <- sprintf("PANAS_%d", 1:20)
 
 cat("=== Route 1: the Qualtrics question row ===\n")

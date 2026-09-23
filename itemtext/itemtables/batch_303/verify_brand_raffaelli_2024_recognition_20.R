@@ -13,17 +13,25 @@
 # Route 3: the old/new structure is visible in the data -- odd-numbered lists
 #   recognise the low half and reject the high half, even lists the reverse --
 #   which also fixes resp 1 = Old rather than 1 = New.
+# ResearchBox publishes no per-file endpoint, so a cold cache costs the whole
+# box (~140 MB) for these three. The zip is not kept; the members are.
+source(".claude/skills/irw-auto-itemtext/scripts/verify_cache.R")
+
 cbB <- ".cache/batch_303/rbox/Raw_Brand_Memory_Task_Prolific.xlsx___CODEBOOK.csv"
 cbL <- ".cache/batch_303/rbox/Raw_Logo_Memory_Task_Prolific.xlsx___CODEBOOK.csv"
 qB  <- ".cache/batch_303/rbox/Brand_Memory_Task_Prolific.qsf"
-for (p in c(cbB, cbL, qB)) if (!file.exists(p)) stop("missing cached deposit file: ", p)
+cached_zip_members(
+    c(cbB, cbL, qB),
+    c("Raw_Brand_Memory_Task_Prolific.xlsx___CODEBOOK.csv",
+      "Raw_Logo_Memory_Task_Prolific.xlsx___CODEBOOK.csv",
+      "Brand_Memory_Task_Prolific.qsf"),
+    "https://s3.wasabisys.com/zipballs.researchbox.org/ResearchBox_1892.zip")
 
 d <- as.data.frame(irw::irw_fetch("brand_raffaelli_2024_recognition_20"))
 if (!nrow(d)) stop("irw_fetch returned no rows -- nothing was checked")
 d$item <- as.character(d$item)
 d$n <- as.integer(sub("_recognition$", "", d$item))
-items <- read.csv("itemtables/batch_303/brand_raffaelli_2024_recognition_20__items.csv",
-                  stringsAsFactors = FALSE, na.strings = "NA")
+items <- shipped_items("brand_raffaelli_2024_recognition_20", "itemtables/batch_303/brand_raffaelli_2024_recognition_20__items.csv")
 
 nums <- function(p) {
     z <- read.csv(p, header = FALSE, stringsAsFactors = FALSE)

@@ -15,15 +15,16 @@
 # Route 3: the English questionnaire contradicts the Portuguese on the third
 #   item (it prints the options descending). Print both, and show the data side
 #   with the Portuguese: binge correlates POSITIVELY with the other two.
-rmd <- ".cache/batch_303/audit_processing.Rmd"
-enp <- ".cache/batch_303/audit_q_en.pdf"
-for (p in c(rmd, enp)) if (!file.exists(p)) stop("missing cached deposit file: ", p)
+source(".claude/skills/irw-auto-itemtext/scripts/verify_cache.R")
 
+rmd <- cached_source(".cache/batch_303/audit_processing.Rmd",
+       "https://osf.io/download/9yde5/")
+enp <- cached_source(".cache/batch_303/audit_q_en.pdf",
+       "https://osf.io/download/a4mds/")
 d <- as.data.frame(irw::irw_fetch("audit_BrummerHoffman_2021"))
 if (!nrow(d)) stop("irw_fetch returned no rows -- nothing was checked")
 d$item <- as.character(d$item); d$resp <- as.numeric(d$resp)
-items <- read.csv("itemtables/batch_303/audit_BrummerHoffman_2021__items.csv",
-                  stringsAsFactors = FALSE, na.strings = "NA", encoding = "UTF-8")
+items <- shipped_items("audit_BrummerHoffman_2021", "itemtables/batch_303/audit_BrummerHoffman_2021__items.csv")
 rl <- readLines(rmd, warn = FALSE, encoding = "UTF-8")
 
 cat("=== Route 1: the renames name the items and carry the question text ===\n")

@@ -11,13 +11,14 @@
 #   (A: 5.45, B: 5.39). Recompute those from Amostra A.
 # Route 2: the deposit reproduces the live table (both samples stacked).
 # Route 3: the demotivation items the paper names should be the low-mean ones.
-tab <- ".cache/batch_304/MotAcademica_A.tab"
-if (!file.exists(tab)) stop("missing cached deposit file: ", tab)
+source(".claude/skills/irw-auto-itemtext/scripts/verify_cache.R")
+
+tab <- cached_source(".cache/batch_304/MotAcademica_A.tab",
+       "https://dataverse.harvard.edu/api/access/datafile/3557415")
 d <- as.data.frame(irw::irw_fetch("MotAcademica_Ribeiro_2019"))
 if (!nrow(d)) stop("irw_fetch returned no rows -- nothing was checked")
 d$item <- as.character(d$item)
-items <- read.csv("itemtables/batch_304/MotAcademica_Ribeiro_2019__items.csv",
-                  stringsAsFactors = FALSE, na.strings = "NA", encoding = "UTF-8")
+items <- shipped_items("MotAcademica_Ribeiro_2019", "itemtables/batch_304/MotAcademica_Ribeiro_2019__items.csv")
 x <- read.table(tab, header = TRUE, sep = "\t")
 it <- sprintf("Item%d", 1:29)
 
@@ -35,7 +36,8 @@ cat("  That fixes the numbering: a permuted ItemN would not land two named\n")
 cat("  means on the second decimal.\n")
 
 cat("\n=== Route 2: the deposit reproduces the live table ===\n")
-tab2 <- ".cache/batch_304/MotAcademica_B.tab"
+tab2 <- cached_source(".cache/batch_304/MotAcademica_B.tab",
+        "https://dataverse.harvard.edu/api/access/datafile/3557414")
 if (file.exists(tab2)) {
     y <- read.table(tab2, header = TRUE, sep = "\t")
     src <- rbind(x[, it], y[, it])

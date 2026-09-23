@@ -10,7 +10,11 @@
 #   decides on her own' is the least-supported of these four reasons in every
 #   published reading of the 1986 British Social Attitudes data, and it is the
 #   only item here below .5.
-tb <- ".cache/batch_304/ltm.tar.gz"
+source(".claude/skills/irw-auto-itemtext/scripts/verify_cache.R")
+
+tb <- cached_source(".cache/batch_304/ltm.tar.gz",
+      c("https://cran.r-project.org/src/contrib/ltm_1.2-0.tar.gz",
+            "https://cran.r-project.org/src/contrib/Archive/ltm/ltm_1.2-0.tar.gz"))
 if (!file.exists(tb)) stop("missing cached source: ", tb)
 ex <- file.path(tempdir(), "ltm_src"); dir.create(ex, showWarnings = FALSE)
 utils::untar(tb, exdir = ex, files = "ltm/data/Abortion.rda")
@@ -21,8 +25,7 @@ e <- new.env(); load(rda, envir = e); src <- get("Abortion", envir = e)
 d <- as.data.frame(irw::irw_fetch("abortion"))
 if (!nrow(d)) stop("irw_fetch returned no rows -- nothing was checked")
 d$item <- as.character(d$item)
-items <- read.csv("itemtables/batch_304/abortion__items.csv",
-                  stringsAsFactors = FALSE, na.strings = "NA")
+items <- shipped_items("abortion", "itemtables/batch_304/abortion__items.csv")
 
 cat("=== Route 1: reproduce the live table from data(Abortion) ===\n")
 cat(sprintf("  packaged Abortion: %d x %d, columns %s\n", nrow(src), ncol(src),
