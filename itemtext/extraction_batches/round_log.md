@@ -23809,3 +23809,12 @@ none `changed`; COUNT(*)/COUNT(DISTINCT item) match local (13/4, 21/3, 18/3, 21/
 are stamped, so `clear_uploaded_itemtables.py` will pick them up. `pilch_2021_fcv19s_validation`
 appeared in the draft during this upload; it came from another session, not this one.
 Issues-page entries owed after release.
+
+**Follow-up, same day.** The 4 uploaded `__items.csv` files were removed with `git rm` after matching
+their sha256 against the uploaded copies. The Zung block extends to **`zhou_2016_anxiety`**, which is
+live in `irw_text` with all 20 canonical Zung English items and has no provenance row. Ben asked for
+it to be withdrawn. `tools/withdraw_zung_sas.py` is written and dry-run clean (target present in
+`irw_text:current`, no draft open). **Not applied: the permission check blocked the Redivis
+delete.** Ben runs `APPLY=1 python3 tools/withdraw_zung_sas.py`. That opens an `irw_text` draft
+separate from the `irw_text_2` one, and both need releasing. There is no issues-page entry to
+remove.
