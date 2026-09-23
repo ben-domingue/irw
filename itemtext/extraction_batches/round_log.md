@@ -24048,3 +24048,39 @@ Gates: normalize_nulls 1 of 3 changed (rodriguezmuniz, blank fields → NA, 85 l
 - ren_2024_phq9: 36 rows (9×4), paper_order (P1..P9 carry no labels in the xlsx/.sav, and the paper doesn't print the items), canonical English PHQ-9 as translated_substitute/official_instrument_english for a Chinese administration. The PHQ rights register row is ship. PARTIAL: P9 is pinned as the floor item (mean 1.170) and {P1,P2} as the top-correlated pair (r=.584). Order within P3..P8 and between P1/P2 is not established. **Offset, orchestrator-confirmed:** resp 1–4 = the paper's 0–3 + 1. On live data, sum(resp−1) over 1587 respondents (all with 9 items) gives M 4.6 / SD 4.7, against Table 2's 4.57/4.71. public_note set.
 - rodriguezmuniz_2016_washback_survey: 85 rows (17×5), paper_explicit (the paper's Table 8 numbering 1..17 = the S1 .xls headers Q1..Q17), English from Table 8 as translated_substitute/study_supplied. language=Spanish is inferred from the Asturias sample, since the paper does not name the language. PARTIAL (verify PASS): means within 0.020 for 17/17, and 0 of 136 pairwise swaps fit as well as the identity. Q11↔Q16 is thin (keep 0.022 vs swap 0.037) and rests mainly on the numbering. Published-statistic residuals, reproduced independently by verify_batch: SD Q17 0.805 vs 1.05, Q15 0.97 vs 1.05, and Q5 median 4 vs 3. These are probably missing-data handling or misprints, not a mapping issue; the data are left as deposited.
 **Cap reached:** batch_320 is the Step 0 cap. No further rounds until a human raises it.
+
+## 2026-09-23 — triage of batch_315–320 (irw#2381 slice 1, rounds 1–6): 16 uploaded, 2 held
+
+Chain: 6 rounds, 18 written / 0 blocked / 0 failed; stopped at the batch_320 cap (then raised to
+batch_330, 397bc732). All 18 came from the 257 re-audit tables that need no rights call
+(oneoff/itemtext-rights-bank/). Gates re-run in a detached checkout of 397bc732 so the runner tree
+stayed clean: normalize_nulls 0 of 18, audit_batch 17 PASS / 1 WARN (`goldberg_2018_ipip`: 1,286 h/x/e/s
+items carry no option_text because no deposit publishes those forms' anchors; explained by its round),
+verify_batch PASS or MISSING(exempt), lint_verification clean on all six.
+
+**Uploaded to the irw_text_2 draft (16):** BPAQ_Christopher_2024_PCL5 (NCPTSD clause quoted, per its
+ship_with_note row), FomoNegativeAffect_cremer_2026_phq, cfq_ruiz_2025_dass, clipa_2025_mslq,
+dass21_medical_graduates_bangladesh, di_riso_2025_contact_behavior, fraijo_2022_mslq,
+gabriel_2026_knowledge_correct, gerard_2018_metatraits, goldberg_2018_ipip, hoorani_2022_ps,
+lee_2020_vr_usability, magiccats_ozono_2020, portella_2022_racial_attitudes, ren_2024_phq9,
+rodriguezmuniz_2016_washback_survey. Staged outside `clean/` (which still holds 29 already-live files
+from 09-22). Dry run 16 NEW to irw_text_2:next; Ben uploaded; verified with write creds, numRows match
+16/16; stamped `uploaded=2026-09-23` (6 provenance files + 16 mapping rows); CSVs byte-matched to the
+staged copies and removed. Staged copies and md5s kept in oneoff/itemtext-rights-bank/.
+
+**HELD for Ben (2):**
+- `dass21_depression_anxiety_stress` — identity: the same 262 respondents as live `falih_2026_dass21`
+  (5,500/5,502 cells equal; the two that differ are out-of-range resp=4). Same shape as the ren SCPV pair.
+- `hermans_2015_dm1_rods` — thin text: item_text is the S1 legend's terse label per code ("bend and
+  pickup"), not administered wording; the piterova bar.
+
+**Issues page:** 15 entries drafted and rewritten with the verified numbers in
+oneoff/itemtext-rights-bank/issues_entries_315-320.yaml (parses in R and Python). Apply after release.
+Dropped: gerard_2018_metatraits (clean, below the bar); the two held tables get none. Added one the drafter
+could not see: cfq_ruiz_2025_dass (English columns are the official DASS-21, a parallel form, not a
+translation of the deposited Spanish).
+
+**Leads, not acted on:** `gabriel_2026_knowledge_correct` stores true/false judgements, not correctness
+(name, dictionary Description and build-script comment all wrong); `FomoNegativeAffect_cremer_2026_phq`
+dictionary Description says "past two weeks", administered past month; `lee_2020_vr_usability` Usability7
+M12 = 10 vs the paper's stats; `goldberg_2018_ipip` n1-n24 duplicate `goldberg_2018_bri_feel` responses.
