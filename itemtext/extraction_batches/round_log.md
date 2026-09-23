@@ -23912,3 +23912,13 @@ only the pre-existing `mixed` review note (ye_2025_q25_scale, kumlander_2018_scs
   defect; verify_ren_2019_cpti.R re-run VERDICT: PASS. The duplicate pair itself may deserve a dedup decision. pending_index_notes row added.
 Tracker: 2 NOT_NEEDED + 1 NO_ROUTE rows added to mapping_verification.csv and the batch file. Circuit breaker: not tripped (0 failed of 3).
 Queue after this round: 6 pending, 0 in_progress. Cap (batch_320) NOT reached.
+
+## batch_313 — 2026-09-23T10:34 → 10:42 PDT — 3 tables, 3 agents
+Written 3 / blocked 0 / failed 0 (yield 100%). All from one source (PeerJ 11:e16295, Europe PMC supplementary zip: .sav + English questionnaire s002.pdf); moon_2023_spousal_support is the same source's fourth scale and remains pending.
+Gates: normalize_nulls fixed 1 file (selfesteem, blank options); audit_batch 3 PASS, no WARNs; verify_batch PASS=2 + 1 exempt (data_labels); lint 0 ERROR / 0 WARN / 1 INFO; irw-validate 3 ok; check_provenance exit 0, nothing for batch_313.
+- moon_2023_korean_proficiency: 20 rows, data_labels (.sav variable labels), study_materials. Caveat: the paper's Measures text says "5-point (1=not at all to 4=very good)", which contradicts itself. The .sav and questionnaire both have 1=Never..5=Very good and the live data use 1-5, so the table follows those.
+- moon_2023_pregnancy_stress: 44 rows, paper_explicit (s002 prints codes beside the items), VERIFIED. Only endpoints are labelled; 2/3 are blank.
+- moon_2023_selfesteem: 44 rows, paper_explicit, VERIFIED. se3/se5/se9/se10/selfesteem11 are stored already reverse-scored, so option anchors are flipped on those five (stored mean 3.18/0.42 vs paper 3.19/0.42; total r +.265/-.210 vs paper +.263/-.180). SOURCE DISCREPANCY: the paper's alpha 0.75 reproduces only under the flipped reading. Orchestrator re-check from live: stored alpha 0.64, flipped 0.76, confirmed. se8 is keyed positive by the study, contrary to RSES; flagged in public_note.
+All three were administered in five languages but only the English form is published. Language lists all five with no _translated columns (szameitat precedent); disclosed in public_note.
+Tracker: 2 VERIFIED + 1 NOT_NEEDED rows added to mapping_verification.csv and verification_merged.csv. Circuit breaker: not tripped (0 failed of 3).
+Queue after this round: 3 pending, 0 in_progress. Cap (batch_320) NOT reached.
