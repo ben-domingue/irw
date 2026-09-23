@@ -23896,3 +23896,19 @@ Step 5b re-checks (orchestrator, all **confirmed**):
 Tracker: aeq PARTIAL, cast VERIFIED, and an acme NOT_NEEDED row, each added to mapping_verification.csv and to
 the batch file. Circuit breaker: not tripped (0 failed of 3).
 Queue after this round: 9 pending, 0 in_progress. Cap (batch_320) NOT reached.
+
+## batch_312 — 2026-09-23 (3 tables, 3 agents)
+
+Tables: hyatt_2023_aggression_s3_daq, hyatt_2023_aggression_s3_ssis, ren_2019_cpti.
+Result: **2 written / 1 blocked / 0 failed** (yield 2/3). All gates clean: normalize_nulls 0 changed; audit_batch 2 PASS, no WARNs;
+verify_batch MISSING(exempt)=2 (both data_labels); lint_verification 3 rows, no problems; irw-validate ok x2; check_provenance
+only the pre-existing `mixed` review note (ye_2025_q25_scale, kumlander_2018_scs), nothing from this batch.
+- s3_daq: 217 rows (31 items x 7), data_labels from AEQ_Study 3.sav. Caveat: DAQ5 and DAQ11 are Buss-Perry items standing in
+  for the published DAQ's 5 and 11 — orchestrator re-check confirms identical labels to BAPQ5p/BPAQ11v with r=.79/.61; shipped as
+  labelled with a public_note. No reversed items (subscale composites = stored means).
+- s3_ssis: 50 rows (10 x 5), data_labels; it is the Short Sadistic Impulse Scale (not Pearson's SSIS). ssis8r stored
+  reverse-scored, option_text reversed — orchestrator re-check: composite matches stored 384/384, flipped 25/384.
+- ren_2019_cpti: BLOCKED (retry test NO) — duplicate of ren2019_cpti (batch_155), same figshare deposit, same CPTI column-label
+  defect; verify_ren_2019_cpti.R re-run VERDICT: PASS. The duplicate pair itself may deserve a dedup decision. pending_index_notes row added.
+Tracker: 2 NOT_NEEDED + 1 NO_ROUTE rows added to mapping_verification.csv and the batch file. Circuit breaker: not tripped (0 failed of 3).
+Queue after this round: 6 pending, 0 in_progress. Cap (batch_320) NOT reached.
