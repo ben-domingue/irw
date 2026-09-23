@@ -18,10 +18,15 @@ TITLE = ("The Body in Focus: A Transdiagnostic Comparison of Body Checking "
 UA    = {"User-Agent": "irw-batch/1.0 (research)"}
 
 # German clinical questionnaires answered once per participant (n≈216):
-#   EDEQ  — Eating Disorder Examination Questionnaire (28 items; 0-6)
-#   WI    — body image scale (14 items; scale TBC)
-#   FKG   — Fragebogen Körpergefühl, body feelings questionnaire (20 items)
-#   FKS   — Fragebogen Körperschema, body schema questionnaire (~17 items)
+#   EDEQ  — Eating Disorder Examination Questionnaire (28 items; stored 1-7,
+#           which the deposit's syntax recodes to 0-6; items 13-18 are counts)
+#   WI    — Whiteley Index (14 items, 1-2); the syntax scores its three
+#           subscales: bodily preoccupation, disease phobia, disease conviction
+#   FKG   — 20 health/illness-cognition items on 1-4, never named or scored in
+#           the deposit; the wording points to the Fragebogen zu Körper und
+#           Gesundheit (Hiller et al., 1997), which is an inference
+#   FKS   — Fragebogen körperdysmorpher Symptome (Buhlmann et al., 2009), a
+#           body dysmorphic disorder screener; 17 of its 18 items, 1-5 (#2334)
 # EDEQ_Regelblutung is a binary menstruation item — excluded.
 SCALES = {
     "edeq": [f"EDEQ_{i}" for i in range(1, 29)],
@@ -31,6 +36,15 @@ SCALES = {
              "FKS_8", "FKS_9", "FKS_10", "FKS_11", "FKS_12", "FKS_13",
              "FKS_14", "FKS_15", "FKS_16", "FKS_17", "FKS_18"],
 }
+
+# Response levels the instrument defines. Seven participants never filled in
+# the trait questionnaires, and the xlsx export fills their cells with blanks
+# or garbage (denormal floats such as "8,1047E-320") that to_numeric turns
+# into NaN -- except SGNXX's FKS_15/16/18, which come out as a literal 0. The
+# deposit's own syntax (RECODE FKS_* (1=0)...(5=4)) sends a raw 0 to
+# system-missing, and its mean_FKS (N=217, mean 1.0248, SD .90281) reproduces
+# exactly only when those cells are missing. (#2334)
+VALID_RANGE = {"fks": (1, 5)}
 
 COV_MAP = {
     "vpcode (anonymized)": "id",
@@ -87,6 +101,9 @@ def convert():
         )
         long["resp"] = pd.to_numeric(long["resp"], errors="coerce")
         long = long.dropna(subset=["resp"]).reset_index(drop=True)
+        if scale in VALID_RANGE:
+            lo, hi = VALID_RANGE[scale]
+            long = long[long["resp"].between(lo, hi)].reset_index(drop=True)
         long = long.sort_values(["id", "item"]).reset_index(drop=True)
 
         fname = f"opladen2025_{scale}.csv"

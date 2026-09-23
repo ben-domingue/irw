@@ -739,6 +739,22 @@ DESCRIPTION_OVERRIDES <- list(
         ##which comes from rule:cname:promis -- the construct name derived from
         ##this Description -- and so self-corrects on the next 10_collections.R.
         why = "3 response levels; every PROMIS fatigue short form is 5-point"
+    ),
+    list(
+        table      = "opladen2025_fks",
+        issue      = "#2334",
+        superseded = "Body schema questionnaire FKS (17 items); German clinical sample BN/BDD/IAD N≈211; 0-5",
+        corrected  = paste("Fragebogen körperdysmorpher Symptome (FKS; Buhlmann et al., 2009),",
+                           "a German self-report screener for body dysmorphic disorder",
+                           "(17 of 18 items; FKS_2 absent from the deposit); German clinical",
+                           "sample BN/BDD/IAD N≈210; 1-5"),
+        ##The deposit's SPSS syntax (Data - Codes.pdf, osf.io/58xb9) heads the
+        ##block "*recoding Questionnaire of bodydysmorphic symptoms (FKS)*" and
+        ##scores mean_specific_BDD / mean_assoc_BDD from it; the item wording is
+        ##appearance preoccupation, mirror checking and reassurance seeking. The
+        ##"0-5" came from three corrupt 0 cells on one participant, removed by
+        ##the same fix, which also takes N from 211 to 210.
+        why = "the deposit's syntax names the block bodydysmorphic symptoms (FKS) and scores BDD subscales from it"
     )
 )
 
