@@ -345,14 +345,26 @@ Starred names (`*`) are additional checks beyond the R validator subset.
 Response-scale findings and documentation-input warnings are described in the
 [shared validator](../irw_validate/README.md#response-scale-evidence).
 
-`composite_items*` is one of the more consequential: a summary table melts
-into a perfectly well-formed id/item/resp frame and passes every structural
-check, so the only tell is what the items are NAMED. All labels naming a
-computed score (`Pre`/`Post`, `*_total`, `*_score`, `subscale_*`) is a `fail`
--> human_assistance; some is a `warn`. Matching is token-wise, so `meaning_1`
-doesn't trip on "mean" and a real item like `pre_anxiety_3` doesn't trip on
-"pre" (only a whole-label `pre`/`post`, optionally with a short subscale
-suffix, counts).
+`composite_items*` reports item-label naming-pattern matches, their count
+and examples. Labels alone do not establish that responses are computed
+scores, and the finding does not instruct contributors to drop rows.
+Intentional score derivation can be explained in the processing-script
+header; this adds no review step at upload. The existing raw routing remains:
+all labels matching is a `fail` -> human_assistance; a subset is a `warn`.
+Default upload/legacy profiles keep either case at warning severity; strict
+mode still blocks warnings. Reconsidering all-match severity is separate
+(#2369).
+
+Score-word matching is token-wise: `*_total`, `*_score` and `subscale_*`
+match, as can sentence labels containing "mean" or "sum"; `meaning_1` and
+`scoreboard_2` do not. The pre/post branch matches the whole stripped label,
+case-insensitively: `pre`, `post`, `baseline`, and `followup`/`follow-up`/
+`follow_up`/`follow up`, optionally followed by exactly one `-`, `_` or space
+and one or two letters/digits. This keeps `pre-A`, `post_F`, `pre_1` and
+`post-12`, but excludes `poster`, `preen`, `preto`, `Pre63`, `PRE1`, empty
+suffixes such as `pre-`, and longer labels such as `pre_anxiety_3`.
+Narrowing the matches can remove a finding or turn an all-match failure into
+a subset warning; the severity policy itself is unchanged (#2314).
 
 | Warning | Meaning |
 |---|---|
