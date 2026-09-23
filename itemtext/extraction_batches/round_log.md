@@ -23967,3 +23967,9 @@ duplicate pair wants a dedup decision.
 **Follow-up, 2026-09-23: `imos_1984` uploaded.** Ben agreed a bare "© International Mathematical
 Olympiad" notice is not a reserved right; new `ship` register row (IMO 1984 paper, match_* left empty
 so it cannot sweep). Dry run 1 NEW, uploaded, COUNT 48/6 matches, stamped, CSV removed. Draft now 16.
+
+**Follow-up, 2026-09-23: `mboya_2020_gds15` uploaded.** Ben ratified a GDS `ship` register row on
+Yesavage's own page (web.stanford.edu/~yesavage/GDS.html, sha256 9f33c899…): "The original scale is
+in the public domain due to it being partly the result of Federal support." Read as covering GDS-15.
+Uploaded, COUNT matches, stamped, CSV removed. Draft now 17. Eight tables remain held on silence
+(hyatt_2023_aggression_s3_{acme,cast,daq,ssis}, moon_2023_*).
