@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
-"""Item text for the three shippable pilch_2021 (peerj.11263) tables.
+"""Item text for the four pilch_2021 (peerj.11263) tables.
 
 The deposit's own "Materials" sheet carries every item in the administered
 Polish with an English translation beside it, plus the response anchors for
 each block -- the cheap case in Step 3.5.
 
-NOT generated here: pilch_2021_fcv19s_validation. The Fear of COVID-19 Scale
-(Ahorsu et al.) has no row in itemtext/instrument_rights_register.csv, and the
-wording is the instrument's, not these authors'. One rights call away.
+pilch_2021_fcv19s_validation was held on 2026-09-22 because the Fear of
+COVID-19 Scale had no row in itemtext/instrument_rights_register.csv. Ben
+cleared it 2026-09-23 (register row FCV-19S, verdict ship: Ahorsu et al.
+published the scale in their own CC BY 4.0 article), and it is block 4 below.
 
 Administered language is Polish, so the base text fields hold the Polish and
 the English goes in the parallel *_translated fields (itemtext_standard.md,
@@ -157,6 +158,26 @@ def main():
                 vas,
                 "Preventive behaviors during the pandemic "
                 "(author-constructed, 3 items, 0-100 visual analogue scale)", mat))
+
+    # ---- 4. FCV-19S, Sample 2 (1-5 agreement) ----------------------------
+    # Materials rows 24-30 are numbered [1.]-[7.] under the heading "Fear of
+    # Covid-19, POLISH (fear 1-fear 7) Sample 1, Sample 2", matching fear1-7.
+    # The English column is Ahorsu et al.'s Appendix wording verbatim.
+    # Anchors at rows 33-37 label all five points in both languages; their
+    # leading "1 " .. "5 " is the resp code, not part of what was shown.
+    #
+    # Items 5-7 in this sheet differ in wording from the paper's own Table 1
+    # (which the live pilch_2021_fear_covid19 carries): Table 1 adds "w
+    # mediach spolecznosciowych" to item 5 and rephrases 6 and 7. The sheet
+    # is the deposited questionnaire for both samples, so it is what was
+    # administered and it is what ships (the cordova2019 ruling, 2026-09-19).
+    fear = [(i, clean(mat.iloc[32 + i, 0]).split(" ", 1)[1],
+             clean(mat.iloc[32 + i, 1]).split(" ", 1)[1]) for i in range(1, 6)]
+    write("pilch_2021_fcv19s_validation",
+          build("pilch_2021_fcv19s_validation",
+                [(f"fear{i}", 23 + i) for i in range(1, 8)],
+                fear,
+                "Fear of COVID-19 Scale (FCV-19S), Polish version", mat))
 
 
 if __name__ == "__main__":
