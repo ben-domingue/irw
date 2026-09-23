@@ -23716,3 +23716,24 @@ as "no issue was filed":
 Still open: #2356 can now be merged (squash, NO --delete-branch); five ship-shaped rights
 escalations await register rows (SCS, AICS, DHQ, kermen/GSE, Chapman WSS-SF, EANNA); the
 `trivia_fastrich_2017` `xz_todo` glance; 18 queue rows left unrun by Ben's call.
+
+## 2026-09-23 — held-pool release: 2 tables to the irw_text_2 draft
+
+Of the 41 done-but-not-live tables, two were unblocked by Ben's rulings today and uploaded:
+
+- **`wesselmann_2018_drri` (batch_270)** — Ben: "intention is not a restriction; licences are
+  restrictions." New `ship_with_note` register row for DRRI-2 (NCPTSD), same clause as PCL-5/LEC-5.
+- **`ngo_2025_green_pbc` (batch_117)** — held only for its empty `public_note`, now written
+  (order-inferred code→wording tie, blank anchors, language unstated, item 4's missing period).
+
+Gates re-run live on both batches first: normalize_nulls 0 of 2 would change, audit_batch 2 PASS,
+verify_batch 1 PASS + 1 MISSING(exempt, data_labels), lint clean. (audit_batch rewrites the whole
+batch's `audit_report.csv` with only the tables still on disk, so both reports were restored.)
+`red_up` dry run → upload, 2 NEW. Verified with write creds: draft set is exactly
+`bailon_2020_covidaffect` (another session's) + these two; COUNT(*) / COUNT(DISTINCT item) match
+local (20/4, 60/12). Stamped `uploaded=2026-09-23` in both provenance files and
+`mapping_verification.csv`; CSVs sha-matched and deleted. Issues-page entries owed after release.
+
+**Not released on #2162.** Ben closed #2162 on 2026-09-23 without a ruling and said not to treat the
+close as dispositive, so `shen_2020_sas20`, `schmidt_2017_fas` and `shin2024_creactability_*` ×3
+stay held.
