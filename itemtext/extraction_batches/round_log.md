@@ -23852,3 +23852,47 @@ Step 5b re-checks (orchestrator, all **confirmed**):
 Tracker: imos_1984 VERIFIED + 2 NOT_NEEDED rows added to mapping_verification.csv and the batch file.
 Circuit breaker: not tripped (0 failed of 3).
 Queue after this round: 12 pending, 0 in_progress. Cap (batch_320) NOT reached.
+
+## batch_311 — 2026-09-23T10:09-07:00 — 3 tables, 3 written / 0 blocked / 0 failed (yield 3/3)
+
+Tables: `hyatt_2023_aggression_aeq`, `hyatt_2023_aggression_s3_acme`, `hyatt_2023_aggression_s3_cast` — all from
+the Hyatt et al. 2023 OSF project (fuz6h). Three agents, no kills. Numbering: highest existing was batch_310, so 311
+(outside both reserved holes). Siblings `_s3_daq` / `_s3_ssis` left pending for the next round; they share the same
+`AEQ_Study 3.sav`, so that round's agents can reuse `.cache/hyatt_2023_aggression_s3_acme/study3.sav`.
+
+- **`_aeq`** (paper_order, study_materials, PARTIAL): 140 items / 700 rows in four sections (prelim1 66, prelim2 27,
+  s1 31, final aeq01–16), wording from the authors' per-version instrument docs on OSF. Mapping evidence: Study 1
+  Table 2 loadings reproduced (max gap .014), Studies 2–3 Table 3 within .005, cross-study same-wording means r
+  .944/.976/.946, valence class 64/66, 27/27, 30/31. **Source override:** the paper's Tables 2–3 order aeq09–16
+  differently (and word aeq13 differently) from the appendix, the Study 2 doc and the Study 3 .sav labels; shipped
+  the label order (public_note). Five prelim1 `_r` items are stored reverse-scored, so their labels run 1 = Very
+  likely. A "2 = Somewhat likely" typo in two version docs corrected to "Somewhat unlikely" per the paper.
+- **`_s3_acme`** (data_labels, study_materials): ACME (Vachon & Lynam 2016), 36 items / 180 rows, labels from the
+  .sav. **Source override:** the 22 `cr`/`dr`/`rr` items are stored reverse-scored, so option labels reversed on
+  them (public_note). Instructions blank (none in the .sav or syntax file).
+- **`_s3_cast`** (data_labels, study_materials, VERIFIED + verify script): CAST, 18 items / 126 rows, points 2–6
+  unlabelled in the source so left blank. **Source override:** `cast_6vr` and `cast_16vir` stored reverse-scored,
+  anchors reversed. **Response-data defect:** one `CAST_7P` response, coded 8 (= point 6) in the .sav, is missing
+  from the live table (339 vs 340). It is not an itemtext problem, and no issue has been filed yet. Worth a look
+  at the processing script's out-of-range handling.
+
+Gates: normalize_nulls 1 of 3 fixed (blank→NA in `_cast`); audit_batch 2 PASS + 1 WARN (`_aeq` row-count
+anomaly, which is the design: aeq01–16 were answered by two studies, the development items by one; explained in
+notes); verify_batch 2 PASS + 1 MISSING(exempt, `_acme` data_labels); lint_verification 0 ERROR, 1 WARN (`_cast`
+VERIFIED with a hedge; reviewed and kept VERIFIED because the item axis is pinned by 18 distinct frequency vectors,
+and the hedge covers only one weak correlation); irw-validate all 3 ok; check_provenance exit 0 (only the standing
+`mixed` review list: ye_2025_q25_scale, kumlander_2018_scs).
+
+Step 5b re-checks (orchestrator, all **confirmed**):
+- acme: reversed×non-reversed correlations 273/308 positive, range −0.11 to 0.55; share at 5 on 10dr/21dr/6dr/2dr
+  67/73/63/51%. That matches the report exactly. (A naive `r$` suffix match catches 28 items; the bare trailing
+  `r` is the Resonance subscale letter.)
+- cast: VerbSadism equals the mean of the stored items for 338/338 complete rows (12 flipped); VicariousSadism
+  338/338 (74 flipped). Within-wave r of 16vir with the vicarious items is weak (.08/.03) but positive. CAST_7P .sav
+  counts 297/24/9/7/2 plus one code 8; live 297/24/9/7/2.
+- aeq: the .sav's AEQ1–16 variable labels match the shipped aeq01–16 text 16/16 (AEQ10 differs only by an
+  embedded line break), confirming the label order over the paper's table order.
+
+Tracker: aeq PARTIAL, cast VERIFIED, and an acme NOT_NEEDED row, each added to mapping_verification.csv and to
+the batch file. Circuit breaker: not tripped (0 failed of 3).
+Queue after this round: 9 pending, 0 in_progress. Cap (batch_320) NOT reached.
