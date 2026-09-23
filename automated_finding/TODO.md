@@ -45,14 +45,31 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   `itemtext_provenance.csv` and `itemtext/mapping_verification.csv` only after
   ben confirms.
 
-- [ ] **FCV-19S rights call (Ben) -- item text is otherwise free.** The
-  peerj.11263 deposit prints all seven Fear of COVID-19 Scale items in
-  administered Polish with an English gloss and all five anchors. The
-  instrument (Ahorsu et al. 2020) has no row in
-  `itemtext/instrument_rights_register.csv`, so nothing ships. This is the
-  cheap case blocked purely on rights -- no re-derivation needed if it clears.
-  Note the live `pilch_2021_fear_covid19` from the sibling PLOS study is in the
-  same position.
+- [x] **FCV-19S rights call -- cleared, item text shipped** (2026-09-23).
+  The hold was wrong on the standing rule: a missing register row is silence,
+  and silence does not block. Better than silence, Ahorsu et al. 2020 print
+  all seven items in the Appendix of their own CC BY 4.0 article
+  (PMC7100496), so the rights holders published it openly. Register row
+  `FCV-19S` added (verdict `ship`); it also covers, after the fact, the five
+  FCV-19S item text tables that were already live (`fcv19s_hossain_2022_fear`,
+  `fcv19s_hossain_2022__fear`, `kfcovid_fear_li2020`,
+  `odachi_2022_fear_covid19`, `pilch_2021_fear_covid19`) -- the old note here
+  saying the sibling was "in the same position" was wrong, it was published.
+  `pilch_2021_fcv19s_validation__items` (35 rows) is in the `irw_text_2`
+  draft, COUNT(*) 35 / 7 items / 5 resp verified; release is Ben's. Mapping
+  VERIFIED against Table 1 (28/28 values, `verify_pilch_2021_fcv19s_validation.R`).
+
+- [ ] **Lead, not worked: the live `pilch_2021_fear_covid19` item text may not
+  be the administered wording.** It carries the paper's Table 1 Polish; the
+  deposit's Materials sheet -- the questionnaire for both samples, and the
+  source the new table ships -- differs on items 5-7, and it also prints all
+  five Polish anchors, which that table's public note says "are not
+  published". Same sample 1 respondents. Logged, not swept
+  (retroactive audits paused); fixing it is a replace in `irw_text_2` plus a
+  rewrite of its issues-page entry.
+
+- [x] **Issues-page entry for `pilch_2021_fcv19s_validation`** (items 5-7
+  differ from Table 1) -- added in datapages/irw#227.
 
 - [x] **All 14 leads worked, batch closed** (2026-09-22): 4 shipped, 4
   blocked on licence, 5 rejected on content, 1 skipped on PII. Every row of
