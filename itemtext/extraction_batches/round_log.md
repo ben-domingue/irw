@@ -23932,3 +23932,5 @@ Gates: audit_batch 3 PASS, no anomalies; verify_batch PASS=3; lint 3 rows, no pr
 Process: moon's table_context.R did a full irw_fetch export (small table). The tracker append was done as raw CRLF lines; an R write.csv round-trip would have reformatted all 1346 rows.
 Circuit breaker: not tripped (0 failed of 3).
 Queue after this round: 0 pending, 0 in_progress (1199 done, 286 blocked, 13 failed, 60 excluded). Cap (batch_320) NOT reached, but the queue is exhausted, so the next firing will stand down on Step 0. Retrying the 13 failed rows is a human decision.
+**Applied 2026-09-23 by Ben:** `zhou_2016_anxiety__items` deleted from the `irw_text` draft
+(695 -> 694, only the target removed). It takes effect when that draft is released.
