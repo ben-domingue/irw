@@ -24006,7 +24006,7 @@ Gates: normalize_nulls 0 of 3 changed; audit_batch 3 PASS, no anomalies (no WARN
 - cfq_ruiz_2025_dass: 84 rows (21×4). paper_explicit, study_materials: the Spanish DASS-21 PDF on OSF sv9c3, with official UNSW English in `_translated`. Step 3b: the CFQ-named study's table is its DASS-21, which is correct. PARTIAL: subscale blocks, 19/21 items with own-subscale max (permutation p<.0005); the misses are DASS14 and DASS18, the irritability items. Caveats: the deposited Spanish is a hybrid of Daza 2002 and Bados López wording, and item 11 appears in neither. The paper's full text could not be retrieved to confirm that all five countries used the same form. DASS rights register: ship. The FAQ sha256 is unchanged.
 Cap check: the Step 0 cap is batch_320, so it is not reached.
 
-## batch_316 — 2026-09-23T15:31 → 15:50 PDT — 3 tables, 3 written / 0 blocked / 0 failed (yield 3/3)
+## batch_316 — 2026-09-23T15:31 → 15:37 PDT — 3 tables, 3 written / 0 blocked / 0 failed (yield 3/3)
 
 Three agents, no kills. Numbering: highest existing (outside the 200–205 / 300–304 holes) was batch_315, so this is 316. Queue after round: 37 pending.
 Gates: normalize_nulls 1 of 3 changed (clipa, blank option_text → NA, 405 lines); audit_batch 3 PASS, no anomalies (no WARNs, nothing owed under Step 5c); verify_batch PASS=1, MISSING(exempt)=2 (data_labels); lint 3 rows, no problems; irw-validate upload profile ok ×3; check_provenance exit 0, nothing for batch_316 (issues checkout is on validate-pin-1-2-0, so disclosure is reported and not enforced; the 24 owed entries are pre-existing).
