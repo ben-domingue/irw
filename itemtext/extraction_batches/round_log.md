@@ -24688,3 +24688,26 @@ irw-validate ok x3; check_provenance exit 0 (only the standing `mixed` review li
 - **Dictionary fix owed, now for all three kern_2021 tables** (connectedness→Course design, engagement→Educator style,
   learning→Life skills): table names/Descriptions and data/kern_2021_positive_edu.py header comment. Not filed.
 Queue: 10 pending, 0 in_progress. Cap (batch_348) not reached.
+
+## batch_342 — 2026-09-23T21:41 (3 tables, 3 agents)
+Written 3 / blocked 0 / failed 0 → done 3 (yield 3/3). Circuit breaker: 0% failed.
+Gates: normalize_nulls 0 of 3 changed; audit_batch PASS x3 (no WARNs); verify_batch MISSING(exempt) x3 (all data_labels);
+lint clean; irw-validate ok x3; check_provenance exit 0 (only the standing `mixed` review list: ye_2025_q25_scale, kumlander_2018_scs).
+All three come from one deposit (Manolika, Harvard Dataverse doi:10.7910/DVN/23NDKX, CC0, .sav read format=original) and are
+data_labels / translated_substitute / study_supplied, language=Greek: the survey was given in Greek, and the Greek wording
+was never published, so the study's own English ships. NOT_NEEDED tracker rows are in both verification_merged.csv and
+mapping_verification.csv.
+- manolika_2021_mini_ipip — done. item_text = the .sav variable labels, 20/20, matching the canonical Donnellan 2006 wording.
+  **Source value labels are wrong for the ten *R columns.** Those columns are stored already reverse-scored, so option_text for
+  R items ships reversed (1=Strongly Agree..5=Strongly Disagree). Agent: facet alphas/means as stored reproduce paper Table 1
+  (e.g. E .71/3.50 vs .71/3.52); un-reversing gives alphas of -0.07..-0.63. **Orchestrator re-check on live data:** every R item
+  correlates positively with the same-facet forward items (+0.18 to +0.58, e.g. 20R~05 .58, 06R~01 .49), so this is confirmed.
+- manolika_2021_movie_preferences — done. 21 film genres (the "Genres of movies" columns). Three short codes were expanded to
+  the manuscript appendix names (SciFi_11, Crime_06 "Crime thriller", Thriller_18 "Psychological thriller"), confirmed by
+  reproducing the Supp. Table B loadings (.62/.61, .54/.54; all 21 within .03). The appendix numbering swaps pairs 1/2 and 6/7
+  relative to the column suffixes, so matching was done by name.
+- manolika_2021_reading_preferences — done. 27 book genres; the appendix numbering matches the column suffixes 27/27. Five
+  names follow the appendix where it differs from the column name (Comics_12 "Comic", News_16, Nature_23, SciFi_25,
+  Entertainment_11). The wording source is the accepted manuscript (hsu-hh.de), not the closed APA version.
+- Sibling manolika_2021_dirty_dozen is not in the queue (not claimed; nothing done).
+Queue: 7 pending, 0 in_progress. Cap (batch_348) not reached.
