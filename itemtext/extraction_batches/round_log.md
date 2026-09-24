@@ -25049,3 +25049,15 @@ Queue: 19 pending, 0 in_progress. Cap (batch_379) not reached.
 - Step 5b: the orchestrator re-tabulated 3406_num.csv P10_*, P11_*, P14–P16 directly, and every agent-reported 8/9 count matched. It also confirmed the P16 label/questionnaire discrepancy in ES3406.utf8.txt line 188 vs cues3406 P.16.
 - Gates: normalize 0 of 3; audit 3 PASS, no anomalies; verify_batch MISSING(exempt)=3; lint clean (3 NOT_NEEDED rows in both verification_merged.csv and the tracker); irw-validate ok ×3; check_provenance exit 0 (new tables appear only in the unenforced held-table disclosure list).
 Queue: 16 pending, 0 in_progress. Cap (batch_379) not reached.
+
+## batch_373 — 2026-09-24T09:31 (3 tables: 3 written / 0 blocked / 0 failed, yield 100%)
+Tables: spain_2023_science_engagement, spain_2023_science_functions, spain_2023_science_future (CIS Estudio 3406, cached at .cache/spain_2023_science_benefits/). Three agents, one per table, no kills.
+- Numbering: highest below 300 is 299, which would give 305 under the 300–304 hole rule. 305–372 already exist, so this round took the next consecutive number, batch_373.
+- All three use `data_labels`/`study_materials` with `machine_translation`, because CIS publishes the questionnaire in Spanish only. Step 5b is exempt, so NOT_NEEDED rows went into both verification_merged.csv and the tracker.
+- `spain_2023_science_engagement`: P.6_1–P.6_4, 20 rows, resp 1 = "Muy a menudo" … 5 = "Nunca". The questionnaire's stray "¿" is kept as printed and disclosed.
+- `spain_2023_science_functions`: P.9_1–P.9_5, 25 rows, resp 1 = "Mucho" … 5 = "Nada".
+- `spain_2023_science_future`: P.12–P.13, 8 rows, with resp {1, 2, 4, 5}. Code 3 is "(NO LEER) Regular", which the .do sets to missing without renumbering, so there is no option row for 3. This is a property of the response data, not an itemtext defect.
+- Step 5b: the orchestrator re-tabulated 3406_num.csv (N=2924) for P6_1–P6_4, P9_1, P9_5, P12 and P13. Every count the agents reported matched, including the 8/9 codes and P12/P13 code 3 (28 and 60). cues3406.txt line 247 confirms that [P12] code 3 is "(NO LEER) Regular".
+- Gates: normalize 0 of 3; audit 3 PASS, no anomalies; verify_batch MISSING(exempt)=3; lint clean; irw-validate ok ×3; check_provenance exit 0 (the new tables appear only in the unenforced held-table disclosure list).
+- Housekeeping: the Python claim rewrite first wrote LF endings and converted the whole CRLF queue file. It was restored to CRLF before dispatch, so the diff is only the three rows.
+Queue: 13 pending, 0 in_progress. Cap (batch_379) not reached.
