@@ -24288,3 +24288,27 @@ Three agents, no kills. Two sun_2025_morality_study3 siblings (OSF 9ndt2 / wvq64
 Gates: normalize fixed 1 file (talaifar). audit 1 PASS + 1 WARN. verify_batch 1 PASS + 1 exempt. lint clean (2 rows).
 irw-validate ok ×2. check_provenance exit 0 (its 2 `mixed` REVIEW items are pre-existing). Circuit breaker 0% failed.
 Cap (batch_330) not reached. 4 pending rows remain.
+
+## batch_328 — 2026-09-23T18:26 (claim) → 18:35 (close), 3 agents, 3 tables
+
+Written 3 / blocked 0 / failed 0. Yield 3/3. Circuit breaker 0% failed.
+
+- teicher_2015_mace_verbal (4 items, reconstructed, study_materials, VERIFIED): S3 MACE-X items 1, 2, 4, 5; item 3
+  ("Yelled or screamed") is left out because the paper dropped it for misfit. Live % Yes 30.76/41.05/30.00/13.90 vs Table 5's
+  30.8/41.0/30.0/13.9. The closest pair, Swore/Afraid, is also told apart by the distress follow-up that only items 4 and 5 carry.
+- teicher_2015_mace_peer_verbal (5 items, reconstructed, study_materials, VERIFIED): MACE-X items 39–43. Live % Yes
+  59.33/65.05/48.29/46.86/21.90 vs Table 6's 59.3/65.0/48.3/46.9/21.9. Both close out the batch_184 note that the availability
+  audit had wrongly marked these two UNAVAILABLE. The existing MACE `ship` rights-register row was applied.
+- yao_2020_gad (7 items, paper_order, translated_substitute / official_instrument_english, PARTIAL): the deposit says all measures
+  were given in Chinese but contains no Chinese text, and the paper is closed (403). The wording is the official English GAD-7
+  from phqscreeners.com, disclosed in public_note. The existing PHQ/GAD `ship` row was applied. Cross-instrument content twins pin
+  gad4 (BAI "unable to relax", 0.551 vs 0.508) and gad6 (BDI irritability), and the marker means put {gad5, gad7} as the two
+  lowest (0.41/0.42). gad1–3 are not told apart, nor gad5 from gad7. Two expected BAI twins missed (BAI5→gad3, BAI10→gad4); both
+  are disclosed in the notes as low-discrimination.
+
+Orchestrator Step 5b: re-ran irw_fetch on all three tables. The % Yes values, n = 1050/1050/1026, and the GAD item means all
+match what the agents reported. Gates: normalize 0 changes. audit 3 PASS. verify_batch 3 PASS. lint clean (3 rows).
+irw-validate ok ×3. check_provenance exit 0 (only the pre-existing `mixed` REVIEW items). The mapping_verification.csv tracker
+gets 3 rows appended raw (CRLF). An R round-trip re-encoded 6 unrelated older rows, so it was reverted rather than committed.
+
+Cap (batch_330) not reached. 1 pending row remains (zhu_2026_llm_meteorology_performance).
