@@ -25157,3 +25157,27 @@ for Ben before any text ships. CSVs kept.
 **Lead:** data/spain_2013_services.do recodes only 8/9, so CIS 0 'No procede' (declared MISSING in ES2986) survives as
 resp 0 in 7 tables (complaints, importance, inpersonsat, internet, internetout, othercontact, purpose). Item text ships
 'No procede' option rows with a public_note warning; drop them after a .do fix + response re-upload.
+
+## batch_379 — 2026-09-24T10:59 (3 tables: 1 written / 2 blocked / 0 failed, yield 33%)
+Tables: DMCT_Addis_2020_MCT, PBS_Surrain_2019_PoB, arzamoncunill_2023_epq_admin. These are the first three of #2381 slice 05 (rights-cleared re-audit tables). Three agents, one per table, no kills.
+- Numbering: batch_378 was the highest existing, so this round is batch_379. Rounds since 305 number consecutively, so the Step 1 "below 300 only" rule no longer applies as written. Taken literally it now resolves to batch_305, which already exists. That sentence in the prompt needs a human edit.
+- `arzamoncunill_2023_epq_admin` WRITTEN: 21 items, 141 rows. Sibling of epq_clinical (batch_007).
+  - Provenance: paper_explicit / study_materials / translation_source=mixed.
+  - Text: administered Spanish from S3 for the 14 retained items. E30 and E47 carry the authors' English. The other 12 English renderings are IRW's own, so an issues-page line is owed at upload.
+  - E5, E6, E38, E45 and E46 carry only S5's English descriptor. They were dropped in the factor analysis, and no wording for them was published in any language.
+  - E37 and E39 have item_text left blank on purpose. S5's descriptors contradict the paper's elimination narrative on those two items, and the agent reproduced the elimination steps on live data (0.48/0.61 against the paper's 0.479/0.611).
+  - Verification PARTIAL. A 5-component PCA of the 14 retained items reproduces Table 3: max deviation 0.035, and each item's nearest row is its own. The pairs E5/E6 and E45/E46 are pinned only as pairs.
+- `DMCT_Addis_2020_MCT` BLOCKED (data defect, retry test NO): live resp is the answer key, not accuracy.
+  - Orchestrator re-check: 0 of 44 items vary across 92 ids (24 constant at 1, 20 at 2). rt is stored as character.
+  - The real 0/1 accuracy is the long MC_acc column in OSF vf27z, which data/DMCT_Addis_2020.r ignores.
+  - The mapping and stimulus key are ready once resp is rebuilt (.cache/DMCT_Addis_2020_MCT/stimulus_key_staged.csv).
+  - The table name is still wrong: the source is Suggate 2024, not "Addis 2020" (first raised in batch_027).
+- `PBS_Surrain_2019_PoB` BLOCKED (data defect, retry test NO): the processing script stacks two OSF files that number the PoB items differently, so PoB4 and PoB6–PoB10 mean different questions in Study 1 and Study 2.
+  - Orchestrator re-check from live means, which line up by content rather than by code: S2 PoB4 4.04 ≈ S1 PoB6 3.9 (S1 PoB4 is 4.69); S2 PoB5 3.6 ≈ S1 PoB7 3.5; S2 PoB10 5.0 ≈ S1 PoB13 4.9.
+  - The agent also finds that all 319 Study 2 respondents are Study 1 respondents again (exact match on age plus 16 items). Identical POB+ means across the two groups fit that.
+  - Fix: rebuild from the Study 1 file only. It then becomes a data_labels extraction from the OSF codebook.
+- Step 5b: the agent reported that the paper's Table 4 has its billing and marketing rows swapped. Orchestrator confirmed: live alpha is billing (E42–44) 0.830 and marketing (E28–30) 0.740, against the paper's 0.742 / 0.842. This is a paper error, not an IRW one.
+- All three agents' table_context.R calls ran irw_fetch, and all three tables were small or already cached.
+- Gates: normalize 0 of 1; audit 1 WARN (blank item_text 13/141 = E37/E39; blank option_text 99/141 = unlabeled resp 2–6; explained in notes.csv); verify_batch PASS=1; lint clean; irw-validate ok; check_provenance exit 0.
+- Two response-table fixes are owed (DMCT resp/rt, PBS stacking); pending_index_notes rows written for both. No GitHub issue filed from this headless round.
+Queue: 40 pending, 0 in_progress. Cap (batch_402) not reached.
