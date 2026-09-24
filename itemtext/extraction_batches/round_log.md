@@ -24441,3 +24441,17 @@ lint 0 ERROR / 2 WARN (explained in notes), irw-validate ok 1/1, check_provenanc
 - **PII in the public source deposit (orchestrator-confirmed):** OSF 9dps4 (public=True) base_t1.xlsx carries
   nome, e_mail, telefone, data_de_nascimento; the agent also reports the same for the 2026 RData. The IRW table has
   none of it. Local cached copies deleted. Needs Ben's attention (tell the authors?).
+
+## 2026-09-23 — ruling: an NC-ND version of record governs study-authored wording (ai_fear_dong_2026, anunciacao_2025)
+
+The slice-02 chain stopped on its 1-in-5 rule after batch_331 (3 of 6 blocked). All three blocks were one question:
+study-authored items posted on an unlicensed OSF deposit, where the article's version of record is CC BY-NC-ND 4.0.
+**Ben ruled 2026-09-23: the NC-ND VoR governs; block.** Two register block rows were added (AIFEAR-Dong2026,
+SEL-Anunciacao2025). Queue: ai_fear_dong_2026_own_fear/_other_fear moved done -> blocked (their __items.csv stay
+in batch_330 as a record and must NOT be uploaded); the four queued anunciacao_2025_emotional_* rows moved pending ->
+blocked (batch=rights_2026-09-23). That settles 9 tables.
+
+The re-audit recorded these as "silence (own items)" and never read the VoR licence. A Crossref licence sweep of the
+208 tables left in #2381 slices 2–6 (35 DOIs; 21 are DataCite/data DOIs with no Crossref record) found no other
+NC/ND licence, so the gap is confined to these two deposits. The fix belongs in the triage brief for #2382: check
+the article VoR licence (Crossref `license`) before writing "silence (own items)".
