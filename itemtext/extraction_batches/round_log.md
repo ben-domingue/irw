@@ -25085,3 +25085,15 @@ Tables: spain_2023_science_technology, spain_2023_science_utility (CIS Estudio 3
 - Step 5b: the orchestrator re-tabulated 3406_num.csv for P4ES_* and P7ES_*, and every per-item count matched the agents' live counts, as did the 8/9 totals (212 and 27). It also re-tabulated 3508_num.csv for P16_*: code 3 = 7/12/11/19/8/19/21 (97), 8/9 = 1,409, and 398 not asked (code 0). All match the agent.
 - Gates: normalize 0 of 3; audit 3 PASS, no anomalies; verify_batch MISSING(exempt)=3; lint clean (3 NOT_NEEDED rows in both verification_merged.csv and the tracker); irw-validate ok ×3; check_provenance exit 0 (the new tables appear only in the unenforced held-table disclosure list).
 Queue: 7 pending (all spain_2026_love_*), 0 in_progress. Cap (batch_379) not reached.
+
+## batch_376 — 2026-09-24T10:15 (3 tables: 3 written / 0 blocked / 0 failed, yield 100%)
+Tables: spain_2026_love_association, spain_2026_love_attitudes, spain_2026_love_conceptions (CIS Estudio 3508 'Percepción social del amor', read-only from the source cache at .cache/spain_2026_love_apps/). Three agents, one per table, no kills.
+- Numbering: batch_375 was the highest existing, so this round is batch_376.
+- All three are `data_labels` / `study_materials` / `machine_translation`, with CIS register row 117 applied. Each one rebuilds exactly to the live table from 3508_num.csv.
+- `spain_2026_love_association`: P.3 [P3_1..9], 36 rows, resp {1,2,4,5} = Mucho/Bastante/Poco/Nada. The .do drops code 3 "(NO LEER) Regular" (143) and 8/9 (250). Rebuild: 44,670 rows / 5,006 ids. Anti-swap check: building from the P1_* columns gives 22,376 resp mismatches.
+- `spain_2026_love_attitudes`: P.4 [P4_1..8], 32 rows, resp {1,2,4,5} = Muy/Bastante/Poco/Nada de acuerdo. It drops code 3 (143) and 8/9 (376). Rebuild: 39,537 / 5,007. "media naranja" is rendered "better half".
+- `spain_2026_love_conceptions`: P.10–P.13, four separate yes/no questions with no shared lead-in, so there is one trivial section with blank instructions and prompt. 8 rows, 1 = Sí, 2 = No. It drops 8/9 (232). Rebuild: 19,796 / 5,005.
+- Step 5b: I re-tabulated 3508_num.csv (N=5007, `;`-separated, BOM) for P3_*, P4_*, P10–P13. Every per-item count reported by the agents matched, and so did the code-3 counts (P3 16/23/6/33/9/30/4/9/13; P4 21/27/22/19/9/10/15/20), the 8/9 totals (250/376/232) and the post-drop rows and ids (44,670/5,006; 39,537/5,007; 19,796/5,005).
+- The dictionary defect still stands for the whole love_* family: the biblio Reference says "Percepción de la prostitución" (see batch_375). It needs a human edit to the dictionary sheet.
+- Gates: normalize 0 of 3; audit 3 PASS, no anomalies; verify_batch MISSING(exempt)=3; lint clean (3 NOT_NEEDED rows, in both verification_merged.csv and the tracker); irw-validate ok ×3; check_provenance exit 0.
+Queue: 4 pending (love_desire/gestures/importance/usage), 0 in_progress. Cap (batch_379) not reached.
