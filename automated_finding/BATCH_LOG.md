@@ -15691,3 +15691,10 @@ and `itemtext/mapping_verification.csv` are stamped `uploaded=2026-09-23` for al
 8 item text tables. The three `ge_2021_*` not-shipped provenance records stay
 unstamped by design. Still open: the 4 language-note issues-page entries and the
 Chen 2023 prefix decision (TODO.md).
+
+Issues-page entries for the four language-note tables added in datapages/irw#239.
+The Sison pair was kept: the paper states "Survey questions were in English and
+Tagalog (local language)" and the codebook codes consent "Yes/Oo", so the
+Tagalog respondents saw is real and unpublished. Chen 2023
+(`10.1016/j.heliyon.2023.e15742`) left out per ben-domingue -- a duplicated-row
+file is a trust problem, not a trimming job. PMC batch 3 is closed.
