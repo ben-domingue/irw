@@ -25119,3 +25119,23 @@ Table: spain_2026_love_usage (CIS Estudio 3508 'Percepción social del amor', re
 - The dictionary defect still stands for the whole love_* family: the biblio Reference says "Percepción de la prostitución" (see batch_375). It needs a human edit to the dictionary sheet.
 - Gates: normalize 0 of 1; audit 1 WARN (explained above); verify_batch MISSING(exempt)=1; lint clean (1 NOT_NEEDED row, in both verification_merged.csv and the tracker); irw-validate ok; check_provenance exit 0.
 Queue: 0 pending, 0 in_progress. **The queue is exhausted**, and the next firing will stop at Step 0. Cap (batch_379) not reached.
+
+## 2026-09-24 — triage of #2381 slice 3 (batch_346–361): 45 uploaded to irw_text, 2 held
+
+Rounds: 47 queued (cc69e87e); 46 written, 1 blocked (name length). Every round's audit PASS. Two chain attempts died at
+the pre-round fetch on intermittent GitHub SSH `publickey` failures (nothing claimed); the chain now forces HTTPS via
+GIT_CONFIG_* env. First upload to **irw_text** (irw_text_2 is full, #2403), with `--dataset irw_text` after a dry run
+showing 45 NEW and none present in any shard. Claude uploaded under the 2026-09-07 delegation after the four-check
+pre-flight, then verified rows, COUNT(DISTINCT item) and no duplicate rows in the draft: 45/45; draft diff dropped
+nothing. Ben released it 2026-09-24 (the same release carried the 44 ENEM 2013–2025 tables from #2226). Stamped
+`uploaded=2026-09-24` in 16 provenance files and 45 mapping rows (byte-wise, each edit re-parsed); removed the 45 CSVs.
+Issues-page entries: oneoff/itemtext-rights-bank/issues_entries_346-361.yaml (40 entries; the 5 goldberg_2018_prs
+tables have no public caveat).
+
+**HELD:** `alan_2018_teacher_warmth` (batch_347) — paper says some teaching-style items were adapted from OECD TALIS
+2013 without saying which; no OECD/TALIS register row. `nguyen_2026_autonomy_school_autonomy_support` (batch_352) —
+live name 44 chars > 40 (jian-wen shape). Both in oneoff/itemtext-rights-bank/holds_for_ben.md; CSVs kept.
+
+**Lead:** nguyen_2026_autonomy_* items split into two negatively correlated blocks ({pressure, motivation, family}
+vs {support, voice, choice, ownership}) — one block may be stored reversed (unproven); deposit composites C and O
+don't match their items (IRW drops composites).
