@@ -382,6 +382,24 @@ be deleted from a session — https://claude.ai/code/routines.
 - **Merging the weekly pipeline PR.** The diff is the thing to read on Monday.
 - **Item-text extraction rounds**, and the discovery sweeps above.
 
+## 7. Where things go inside a directory
+
+Each working directory (`automated_finding/`, `itemtext/`, `metadata/`, `tags/`)
+keeps live scripts and standing records at its top level, and anything that is
+only kept for the record goes into a subfolder:
+
+| Subfolder | Holds |
+|---|---|
+| `archive/` | Finished workstreams, one-time reports, spent one-off scripts. Nothing that runs reads them |
+| `logs/`, `pipeline_logs/`, `runs/` | Output a run writes for review (`runs/` is gitignored and can be thrown away) |
+| topic folders (`leads/`, `naming_audit/`, `itemtext_verification/`, `tags/age_range/`, `tools/withdrawals/`) | Everything for one job or one kind of record together, with a README naming whatever reads it by path |
+
+The directory's own README has the full layout. Before moving a file, `git grep`
+its path. Scripts, skills, workflows and provenance records cite files by
+path, and some readers skip a missing file without saying so (`03_tags.R`'s
+`file.derived`). History docs such as `BATCH_LOG.md` and `round_log.md` keep the
+path the file had when they were written.
+
 ## Two rules
 
 **1. A fact lives in exactly one place; everything else links to it.**
