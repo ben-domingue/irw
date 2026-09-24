@@ -25359,3 +25359,24 @@ Tables: goldberg_2018_spa_spey, goldberg_2018_spa_talents, matosaslopez_2022_bar
   - All as reported.
 - Gates: normalize 0 of 2; audit 2 PASS, no anomalies; verify_batch MISSING(exempt)=2 (data_labels); lint clean (2 NOT_NEEDED rows in both files); irw-validate ok x2; check_provenance exit 0 (only the standing 4-table `mixed` REVIEW).
 Queue: 13 pending, 0 in_progress. Cap (batch_402) not reached.
+
+## batch_398 — 2026-09-24T14:16-07:00 (3 tables: 3 written / 0 blocked / 0 failed → done 3 / blocked 0 / failed 0, yield 100%)
+Tables: spain_2025_sanitation_aicomfort, spain_2025_sanitation_aiconcern, spain_2025_sanitation_airegulation. Three agents, one per table, no kills. Circuit breaker: 0% failed. First round of the spain_2025_sanitation_* family (13 tables). All three come from one source: CIS Estudio 3531 "Barómetro sanitario 2025 (tercera oleada)", Nov 2025, N=2427 (MD3531.zip → 3531.sav / 3531_num.csv; cues3531.pdf). The agents downloaded it independently and got byte-identical zips. Rights: the existing CIS `allow` row applies (widened to all CIS years); agents re-read the reuse page today and it is unchanged. No register rows written.
+- Numbering: batch_397 was the highest below 300, so this is batch_398. It is not in either hole.
+- `spain_2025_sanitation_aicomfort`: done. P22_1-4 × 10 = 40 rows, data_labels. Only the endpoints are labelled (1 "Totalmente incómodo/a", 10 "Totalmente cómodo/a"), so option_text for 2-9 is blank. P22_4 uses the questionnaire's full "…con IA (inteligencia artificial)" wording because the .sav label is truncated.
+- `spain_2025_sanitation_aiconcern`: done. P23/P24 × 5 = 10 rows, data_labels. P24 is shipped as asked, as the elliptical follow-up "¿Y por parte de instituciones públicas?". The referent is in `instrument` and `public_note`, following the ageism_problems precedent. resp 3 is the volunteered "(NO LEER) Regular" code, and the marker is stripped.
+- `spain_2025_sanitation_airegulation`: done. P25_1-3 × 5 = 15 rows, data_labels. resp 3 is the volunteered neutral code (n 9/4/9), and the "(NO LEER)" marker is stripped. The P25_3 lower-case "inteligencia artificial" follows the .sav and the marginals.
+- All three have translation_source=machine_translation (CIS publishes in Spanish only), so each owes an issues-page entry once live.
+- Step 5b orchestrator re-check (3531_num.csv vs live irw_table_sets per_item):
+  - P22 n 2400/2384/2392/2396 (98/99 dropped, resp 1-10).
+  - P23/P24 670/549/17/720/430 and 397/479/18/839/659 (n 2386/2392).
+  - P25 906/928/9/364/129, 1369/795/4/175/62, 1174/854/9/261/89 (n 2336/2405/2387).
+  - Every per-item n matches live. All as reported.
+- Gates:
+  - normalize: 0 of 3 files changed.
+  - audit: 3 PASS, no anomalies.
+  - verify_batch: MISSING(exempt)=3 (data_labels).
+  - lint: clean (3 NOT_NEEDED rows in both files).
+  - irw-validate: ok ×3.
+  - check_provenance: exit 0 (only the standing 4-table `mixed` REVIEW).
+Queue: 10 pending, 0 in_progress. Cap (batch_402) not reached.
