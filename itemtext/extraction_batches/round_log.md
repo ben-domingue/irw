@@ -25109,3 +25109,13 @@ Tables: spain_2026_love_desire, spain_2026_love_gestures, spain_2026_love_import
 - The dictionary defect still stands for the whole love_* family: the biblio Reference says "Percepción de la prostitución" (see batch_375). It needs a human edit to the dictionary sheet.
 - Gates: normalize 0 of 3; audit 3 PASS, no anomalies; verify_batch MISSING(exempt)=3; lint clean (3 NOT_NEEDED rows, in both verification_merged.csv and the tracker); irw-validate ok ×3; check_provenance exit 0.
 Queue: 1 pending (spain_2026_love_usage), 0 in_progress. Cap (batch_379) not reached.
+
+## batch_378 — 2026-09-24T10:25 (1 table: 1 written / 0 blocked / 0 failed, yield 100%)
+Table: spain_2026_love_usage (CIS Estudio 3508 'Percepción social del amor', read-only from the source cache at .cache/spain_2026_love_apps/). One agent, since only one row was pending. No kills.
+- Numbering: batch_377 was the highest existing, so this round is batch_378.
+- `data_labels` / `study_materials` / `machine_translation`, with CIS register row 117 applied. P.15, P.15a and P.15b are three standalone yes/no questions (one trivial section). 6 rows, 1 = Sí, 2 = No. There is no code 3. The .do drops p15 8/9 (3+1), p15a 0/9 (398+2) and p15b 0 (3,658). The items form a filtered sequence: P15A is asked only if P15 = 1 (4,609 asked), and P15B only if P15A = 1 (1,349 asked). The public_note says so. Rebuild: 10,959 rows / 5,003 ids, identical to live. Anti-swap check: relabelling p15a and p15b against each other gives 582 resp mismatches.
+- Step 5b: I re-tabulated 3508_num.csv. p15 = 4609/394/3/1, p15a = 398/1349/3258/2, p15b = 3658/1058/291, and both filters hold with 0 exceptions. After the drops, rows and ids come to 10,959 / 5,003. Everything matches the agent.
+- Audit WARN: row-count anomaly on p15b (1,349 rows against a median of 4,607). This is the P15A filter, a property of the data and not an itemtext defect. It is explained in notes.csv.
+- The dictionary defect still stands for the whole love_* family: the biblio Reference says "Percepción de la prostitución" (see batch_375). It needs a human edit to the dictionary sheet.
+- Gates: normalize 0 of 1; audit 1 WARN (explained above); verify_batch MISSING(exempt)=1; lint clean (1 NOT_NEEDED row, in both verification_merged.csv and the tracker); irw-validate ok; check_provenance exit 0.
+Queue: 0 pending, 0 in_progress. **The queue is exhausted**, and the next firing will stop at Step 0. Cap (batch_379) not reached.
