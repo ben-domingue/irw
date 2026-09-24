@@ -24759,3 +24759,29 @@ irw-validate ok, check_provenance exit 0 (only its standing `mixed` review list,
   **Corrects the batch_344 handoff note:** Study2.xlsx is 84 columns, not 86, and the supplement's Study 2 blocks are factor loadings,
   not accuracies. Aside for a data issue: the live response table carries `group` without a cov_ prefix.
 Queue: 0 pending, 0 in_progress — **queue exhausted**; the next firing will self-cancel at Step 0. Cap (batch_348) not reached.
+
+## 2026-09-23 — triage of #2381 slice 2 (batch_330–345): 40 uploaded, 9 ruled blocked, 1 held
+
+Rounds: 50 queued; 40 written and uploaded, 1 held (name length), 9 blocked by Ben's NC-ND VoR ruling (see the
+ruling entry above). Triage ran per pair of batches while the chain ran, in detached checkouts (gates: normalize 0
+files changed throughout; audit PASS except the explained `chile_2023_social-welfare-survey_yy` WARN (yy3 is a peso
+amount); verify_batch PASS or MISSING(exempt); lint clean). Claude uploaded each group under the 2026-09-07
+delegation after the four-check pre-flight, then verified rows, COUNT(DISTINCT item) and no duplicate rows in the
+draft: 7 (331–333) + 6 (334–335) + 6 (336–337) + 6 (338–339) + 5 (340–341) + 10 (342–345) = 40/40. Stamped
+`uploaded=2026-09-23` in 15 provenance files and 40 mapping rows (literal and quoted `NA` placeholders replaced), and
+removed the 40 CSVs. Draft now 987 tables. Issues-page entries: oneoff/itemtext-rights-bank/issues_entries_331-333,
+334-335, 336-337, 338-339, 340-341 and 342-345 .yaml (36 entries), to apply after release.
+
+**HELD:** `jian-wen-low-sepsis-and-trauma-resuscitation-2024` (batch_340) — text passes, but the live table name is
+49 chars (cap 40) with hyphens; needs a response-table rename (Ben's call). Listed in holds_for_ben.md.
+
+**Data leads (response tables / dictionary, not item text):**
+- `alqerem_2024_diabetic_health_literacy`: 5 live codes vs the paper's 4-point scale; N items reproduce only as {1},{4,5},{2},{3}.
+- `dalichaouche_2026_covid_*`: unanswered items scored 0; A1's 0/1 contradict the questionnaire key.
+- `chile_2023_social-welfare-survey_vv`/`_yy`: NA-resp rows from missing codes (live predates the .do fix #2326); vv1_d dropped.
+- `ehealth_rioux_2025_*`: 4 Random_IDs on two submissions each; uncleaned file keeps 49 attention-check failures.
+- `he_2019_flipped_classroom_*`: cov_group map inverted; fix to {0: lecture_based, 1: flipped_classroom}.
+- `kern_2021_*`: table names/Descriptions wrong (connectedness = Course design, engagement = Educator style, learning = Life skills).
+- `islam_2022_phq9`: PHQ9 has no 'Several days' and 20.8% 'Nearly every day' in the deposit (likely coding).
+- `huang_2023_medseq`: data 1-5 where the source says 1-6.
+- `ai_fear_dong_2026_*`: item = occupation_trait copies each answer across 6-8 codes (480,000 rows, 60,000-80,000 real answers).
