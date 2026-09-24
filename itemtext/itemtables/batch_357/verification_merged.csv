@@ -1,0 +1,4 @@
+"table","batch","mapping_basis","uploaded","route","status","evidence"
+"spain_2024_politics_associations","batch_357","data_labels","","none","NOT_NEEDED","mapping_basis=data_labels: .do lowercases CIS column names (asociaciones_1..asociaciones_11); 3490.sav variable labels tie each code to its P.11 text directly"
+"spain_2024_politics_beliefs","batch_357","data_labels","","none","NOT_NEEDED","mapping_basis=data_labels: .do lowercases CIS column names (valores1_1..valores1_5); 3490.sav variable labels tie each code to its P.3 text directly"
+"spain_2024_politics_difficulty","batch_357","data_labels","","none","NOT_NEEDED","mapping_basis=data_labels: .do lowercases CIS column names (proble, finmes); 3490.sav variable labels tie each code to its P.5/C.15 text directly"
