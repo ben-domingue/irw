@@ -39,6 +39,22 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   already-retired DOIs will say `license_unknown*` where the record says
   CC BY. Cheap: the same 34-row re-check loop, pointed at the ledger.
 
+## From the 2026-09-24 PMC sweep (batch 5)
+
+- [ ] **8 tables (95,438 responses) need uploading**: `irw_output/depue_2023_cfq`,
+  `_gds15`, `_pwi`, `_subjcog`, `_hads_a`, `_cerq`, `depue_2021_lsns6`, `_brs`.
+  No item text this batch (`itemtext_output/` is empty). Dictionary and tag rows
+  are staged in `dictionary_auto.csv` / `tags/tags_auto.csv`.
+
+- [ ] **Decision if wanted: CENSOPAS-COPSOQ (`10.1186/s12889-022-13328-0`)** held on
+  trust per the Chen 2023 ruling -- 67 exact-duplicate rows plus a 137-row
+  near-duplicate network in rows 600-1000 of a 1,707 x 69 file (BATCH_LOG
+  2026-09-24). A script that drops the exact copies (1,640 ids) exists but was
+  not committed; say the word if this one should ship trimmed.
+
+- [ ] **41 ranked terms remain in `pmc_term_backlog.csv`** (29 projected new DOIs).
+  One last small batch, or retire the backlog.
+
 ## From the 2026-09-23 PMC sweep (batch 4)
 
 - [x] **4 tables (42,116 responses) uploaded** (ben-domingue, confirmed 2026-09-24). Original:: `irw_output/`
