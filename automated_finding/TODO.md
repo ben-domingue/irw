@@ -31,7 +31,7 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   No item text this batch (`itemtext_output/` is empty). Dictionary and tag rows are
   staged in `dictionary_auto.csv` / `tags/tags_auto.csv`.
 
-- [ ] **`rogowska_2023_maia2__items.csv` needs uploading** (`red_up itemtext_output`;
+- [x] **`rogowska_2023_maia2__items.csv` uploaded** (ben-domingue, confirmed 2026-09-24; `uploaded=2026-09-24` stamped). Original: (`red_up itemtext_output`;
   the response table is already live). Shipped partial: anchors withheld on items
   5-12 and 15. Stamp `uploaded=` in `itemtext_provenance.csv` and
   `itemtext/mapping_verification.csv` only after ben confirms.
