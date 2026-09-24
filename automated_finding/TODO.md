@@ -49,8 +49,9 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 - [ ] **Decision if wanted: CENSOPAS-COPSOQ (`10.1186/s12889-022-13328-0`)** held on
   trust per the Chen 2023 ruling -- 67 exact-duplicate rows plus a 137-row
   near-duplicate network in rows 600-1000 of a 1,707 x 69 file (BATCH_LOG
-  2026-09-24). A script that drops the exact copies (1,640 ids) exists but was
-  not committed; say the word if this one should ship trimmed.
+  2026-09-24). A script that drops the exact copies (1,640 ids) is parked,
+  unmerged, on branch `ben-domingue/held-copsoq`; say the word if this one
+  should ship trimmed.
 
 - [x] **`pmc_term_backlog.csv` exhausted** (2026-09-24): the last 41 terms ran,
   20 candidates, 2 leads, nothing shipped. See BATCH_LOG 2026-09-24 final sweep.
