@@ -24,6 +24,35 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   already-retired DOIs will say `license_unknown*` where the record says
   CC BY. Cheap: the same 34-row re-check loop, pointed at the ledger.
 
+## From the 2026-09-23 PMC sweep (batch 3)
+
+- [ ] **8 tables (32,469 responses) + 8 item text tables need uploading.**
+  `irw_output/`: `sison_2022_hiv_testing_stigma`, `sison_2022_provider_mistrust`,
+  `zhang_2024_smoking_rationalisation`, `zhang_2024_ftcd`, `che_mood_2024_pvhs`,
+  `abdulkader_mohamed_2022_exer_knowledge`, `_exer_attitude`, `_exergame_exp`;
+  the same 8 as `itemtext_output/*__items.csv`. Response tables first. Dictionary
+  and tag rows are staged in `dictionary_auto.csv` / `tags/tags_auto.csv`. Stamp
+  `uploaded=` in `itemtext_provenance.csv` and `itemtext/mapping_verification.csv`
+  only after ben confirms. Also in `irw_output/`: the three `ge_2021_*` tables
+  from #2384 (57,061 responses) -- upload them with this batch unless they
+  already went up; they have no item text (see BATCH_LOG 2026-09-23).
+
+- [ ] **Issues-page entries owed for the 4 language-note tables** once live
+  (`public_note` is set in `itemtext_provenance.csv`): `zhang_2024_smoking_rationalisation`,
+  `zhang_2024_ftcd` (English substitute, Chinese administration), and
+  `sison_2022_hiv_testing_stigma`, `sison_2022_provider_mistrust` (English/Tagalog
+  offered, English only published) -- for Sison, check first whether the form was
+  side-by-side bilingual ("Yes/ Oo"), in which case blank the public_note instead.
+
+- [ ] **ben-domingue call: `10.1016/j.heliyon.2023.e15742` (Chen 2023, work
+  design).** Rejected because the final 50 of 804 rows duplicate earlier
+  respondents (5 with altered demographics) and the paper counts them. Rows
+  0-753 are clean and ready if you want the prefix shipped. See BATCH_LOG
+  2026-09-23.
+
+- [ ] **141 scouted terms remain ranked and unrun** in `pmc_term_backlog.csv`
+  (`run_2026_09_23` marks batch 3's 50). A fourth batch starts from that file.
+
 ## From the 2026-09-22 PMC sweep (batch 2)
 
 - [x] **7 tables + 3 item text tables uploaded** (ben-domingue, confirmed
@@ -108,9 +137,8 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   it is discovery-only, emits no `flag` column, and its candidates reach Step
   2b via `irw_batch_updated --retriage`.
 
-- [ ] **191 scouted terms remain ranked and unrun** in `pmc_term_backlog.csv`
-  (`run_2026_09_22` marks this batch's 50). ~941 new DOIs projected pre-dedup.
-  A third batch starts from that file -- no new scout needed.
+- [x] **191 scouted terms remain ranked and unrun** -- batch 3 swept the next
+  50 on 2026-09-23; superseded by the 141-term item in the batch 3 section.
 
 - [x] **241 scouted terms ranked and unrun** -- batch 2 swept the top 50 on
   2026-09-22; superseded by the 191-term item above. The scout's 500-hit
