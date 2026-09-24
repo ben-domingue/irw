@@ -24537,3 +24537,24 @@ Breaker: 0% failed. mapping_verification.csv +3 (practices VERIFIED; the two ehe
     The agent also called the PHQ9 mean "~2.6, high". The re-check puts it at 2.5, inside the 2.3–2.6 range of all
     ten items, so it is not an outlier and that note was dropped.
 Queue: 31 pending, 0 in_progress. Cap (batch_348) not reached.
+
+## batch_335 — 2026-09-23 20:35–20:43 PDT (#2381 slice 02)
+3 tables claimed (three agents) · **3 written / 0 blocked / 0 failed** · yield 3/3. All six Step 4 gates were clean:
+audit 3 PASS with no WARNs, verify_batch PASS=3, lint clean, irw-validate ok, normalize_nulls changed nothing.
+check_provenance repeated the two existing `mixed` REVIEW items (ye_2025_q25_scale, kumlander_2018_scs), neither from this batch.
+All three come from one source: Germann, Godefroidt & Mendez 2026, EJPR (CC BY 4.0), doi:10.1017/S1475676526101017.
+The data deposit is doi:10.7910/DVN/ALYGQS (CC0). The items are WhoGetsMyVoteUK 2017 VAA statements, taken from the
+supplement's scale tables, with response labels from the .dta value labels (`policyitems` / `policyitems_rev`).
+**Mixed per-item direction** on all three tables: the reversed items are stored 1 = Completely agree … 5 = Completely
+disagree. This is legitimate per-item direction, not `resp_ambiguous`, and irw-validate passes it.
+- **done** `germann_2026_environment` (10 rows, paper_order, VERIFIED). The mapping is confirmed by response-frequency
+  matching against all 60 candidate columns, plus polarity. **Overrides the source:** SI Table S2.22 does not star
+  env1 (fracking) as reversed, but the .dta labels and the authors' code say it is.
+  - The orchestrator re-checked this on live data: env1 vs cov_lr −0.46, env2 vs cov_lr −0.42, env1–env2 +0.37.
+    Stored env1 therefore runs in the pro-environment direction, so the reversal is confirmed.
+- **done** `germann_2026_immigration` (15 rows, paper_explicit, VERIFIED). All 9 per-item Ns in SI Fig S2.20
+  reproduce exactly. imm1 and imm3 are stored reversed.
+- **done** `germann_2026_redistribution` (20 rows, paper_explicit, VERIFIED). The per-item Mokken Hi values from SI
+  Table S2.18 (0.48/0.34/0.41/0.44, N = 73186) reproduce exactly. redistr2 and redistr3 are stored reversed.
+- Sibling `germann_2026_state_intervention` is still pending, and this round's cached sources will serve it.
+Queue: 28 pending, 0 in_progress. Cap (batch_348) not reached.
