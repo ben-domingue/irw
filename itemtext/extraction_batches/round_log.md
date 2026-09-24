@@ -25139,3 +25139,21 @@ live name 44 chars > 40 (jian-wen shape). Both in oneoff/itemtext-rights-bank/ho
 **Lead:** nguyen_2026_autonomy_* items split into two negatively correlated blocks ({pressure, motivation, family}
 vs {support, voice, choice, ownership}) — one block may be stored reversed (unproven); deposit composites C and O
 don't match their items (IRW drops composites).
+
+## 2026-09-24 — triage of #2381 slice 4 (batch_362–378): 39 uploaded to irw_text, 10 held
+
+Rounds: 49 queued (80e5182b, by next_slice.sh after slice 3's chain ended on an empty queue); 49 written, 0 blocked.
+Audit PASS except two explained WARNs (spain_2016_pain_wellbeing p1_2 and spain_2026_love_usage p15b: filtered items,
+disclosed). Uploaded to irw_text after a dry run (39 NEW, none in any shard); one table (spain_2016_pain_support) failed
+on an intermittent Redivis API error (empty error body), was confirmed ABSENT from the draft, and was re-uploaded
+alone. Verified 39/39 (rows, COUNT(DISTINCT item), no duplicate rows); draft diff = exactly these 39. Ben released it
+2026-09-24. Stamped `uploaded=2026-09-24` in 15 provenance files and 39 mapping rows; removed the 39 CSVs.
+Issues-page entries: oneoff/itemtext-rights-bank/issues_entries_362-378.yaml (39).
+
+**HELD:** all 10 `okeke2025_*` (batch_362–365) — item text pinned 200/200, but the response data has near-zero
+inter-item correlations across all 32 deposit items (mean |r| 0.06, n=200); possibly simulated. Corpus-trust question
+for Ben before any text ships. CSVs kept.
+
+**Lead:** data/spain_2013_services.do recodes only 8/9, so CIS 0 'No procede' (declared MISSING in ES2986) survives as
+resp 0 in 7 tables (complaints, importance, inpersonsat, internet, internetout, othercontact, purpose). Item text ships
+'No procede' option rows with a public_note warning; drop them after a .do fix + response re-upload.
