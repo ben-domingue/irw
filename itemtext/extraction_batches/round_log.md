@@ -24878,3 +24878,13 @@ Written / blocked / failed: **3 / 0 / 0** (yield 100%). Circuit breaker: 0% fail
 - Step 5b re-check by the orchestrator: **confirmed.** `.do` line 156 does `replace resp = 4 if resp == 7`; lines 325–326 drop p16/p17 codes {2,8,9}. Live per-item n (irw_table_sets): europe 7244/7147 = 7643 − (254+118+27) / 7643 − (238+225+33) exactly; authenticity p8_1 n=7584 = 1865+2393+1959+1367 exactly.
 - Five `spain_2023_identity_*` siblings (identification, patriotism, pride, state, territorial) remain pending; same CIS 3409 microdata and conventions apply.
 Queue: 20 pending, 0 in_progress. Cap (batch_362) not reached.
+
+## batch_355 — 2026-09-24T07:00-07:00 (3 tables, 3 agents)
+Written / blocked / failed: **3 / 0 / 0** (yield 100%). Circuit breaker: 0% failed. All `data_labels`, `study_materials` / `machine_translation` (CIS Estudio 3409, Spanish-only; English in `_translated` is IRW's, disclosed in public_note). Gates: normalize_nulls 0 of 3 changed; audit_batch 3 PASS, no anomalies; verify_batch MISSING(exempt) x3; lint clean (3 NOT_NEEDED rows in both verification_merged.csv and the tracker); irw-validate ok x3; check_provenance exit 0 (only the standing 4-table `mixed` REVIEW note, not this batch).
+- `spain_2023_identity_identification` (P.5, p5_1–p5_9, 36 rows): resp {1,2,4,5} — CIS unread midpoint code 3 '(NO LEER) Ni poco ni bastante' dropped by the .do with 8/9, so no option row at 3. Source's 'si Ud, se identifica' typo kept as printed.
+- `spain_2023_identity_patriotism` (P.9, p9_1–p9_3, 6 rows): resp {1,3} — unread midpoint code 2 dropped by the .do with 9.
+- `spain_2023_identity_pride` (P.11, P.12, 8 rows): resp 1–4 unchanged; CATI region fill in P.12 replaced with CIS's placeholder `(gentilicio de la C. A.)`; no shared carrier, instructions blank.
+- Step 5b re-check by the orchestrator: **confirmed.** `.do` lines 47–55 set p5_* codes {3,8,9} missing, 172–174 set p9_* {2,9} missing, 210–211 set p11/p12 {8,9} missing. Live per-item n (irw_table_sets): p9 7447/7324/7469 = agents' kept-code cell sums 5174+2273 / 2868+4456 / 4598+2871; pride 7559/7500 = 3243+2870+989+457 / 3278+2849+944+429; identification resp set {1,2,4,5}, 4 levels on every item.
+- Orchestrator note: the first append to mapping_verification.csv went through Python text mode and rewrote the file's CRLF line endings as LF (a whole-file diff); caught before commit, restored, and re-appended in binary with CRLF (+3 lines only).
+- Two `spain_2023_identity_*` siblings (state, territorial) remain pending; same CIS 3409 microdata and conventions apply.
+Queue: 17 pending, 0 in_progress. Cap (batch_362) not reached.

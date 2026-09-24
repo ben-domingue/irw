@@ -1469,3 +1469,6 @@
 "spain_2023_identity_authenticity","batch_354","data_labels","","none","NOT_NEEDED","mapping_basis=data_labels: .do lowercases CIS column names (p8_1..p8_5); 3409.sav variable labels tie each code to its P.8 text directly"
 "spain_2023_identity_centralism","batch_354","data_labels","","none","NOT_NEEDED","mapping_basis=data_labels: 3409.sav labels ESCALACENTRALISMO_1..6 with party names; .do uses lowercased column names as item codes"
 "spain_2023_identity_europe","batch_354","data_labels","","none","NOT_NEEDED","mapping_basis=data_labels: 3409.sav variable labels tie P16/P17 to their question text; .do uses lowercased column names as item codes"
+"spain_2023_identity_identification","batch_355","data_labels","","none","NOT_NEEDED","mapping_basis=data_labels: .do lowercases CIS column names (P5 items); 3409.sav variable labels tie each code to its P.5 text directly"
+"spain_2023_identity_patriotism","batch_355","data_labels","","none","NOT_NEEDED","mapping_basis=data_labels: .do lowercases CIS column names (p9_1..p9_3); 3409.sav variable labels tie each code to its P.9 statement directly"
+"spain_2023_identity_pride","batch_355","data_labels","","none","NOT_NEEDED","mapping_basis=data_labels: 3409.sav variable labels tie P11/P12 to their question text; .do uses lowercased column names as item codes"
