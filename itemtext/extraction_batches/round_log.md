@@ -25287,7 +25287,7 @@ Gates: normalize_nulls 0 of 3 changed; audit_batch 3 PASS, no anomalies; verify_
 - `spain_2026_disinformation_humorperception` — **blocked on naming, CSV retained** (retry test NO). Clean extraction: P.26–P.28 x Sí/No, data_labels, live = .sav 6/6 cells. Blocked under the batch_340/352/381 precedent (batch_309's `done`-under-irw#2365 split still needs a human). Unblock: rename the live table ≤40 chars and the CSV with it. Row added to pending_index_notes.csv. Agent note for re-extractors: `pdftotext -layout` of cues3563.pdf bleeds a facing column's options beside P.26; use `-raw`.
 - Step 5b re-check by the orchestrator on live data: all agent-reported counts confirmed cell for cell (humorclimate 6887 rows, p29 421/912/1302/528/308, p30 520/658/157/1182/899; humorlimits 6768 rows, p13 1368/1954, p24 1315/1616/515; humorperception 10277 rows, p26 3192/247, p27 2566/851, p28 2999/422). The .do line `replace p24 = . if inlist(p24, 3, 8, 9)` confirms the p24 gap.
 - Dictionary defect persists on these siblings too: Reference cites Estudio 3565 (consumer confidence); source is Estudio 3563. Not filed (same as batch_390).
-Queue: 4 pending, 0 in_progress. Cap (batch_402) not reached.
+Queue: 19 pending, 0 in_progress. Cap (batch_402) not reached.
 
 ## batch_392 — 2026-09-24T13:26-13:33-07:00 (3 tables, 3 agents)
 Written / blocked / failed: **3 / 0 / 0** → done 3 / blocked 0 / failed 0 (yield 3/3). Circuit breaker: 0% failed.
@@ -25319,3 +25319,15 @@ Tables: coh_goodman_2023_racial_comp, goldberg_2018_spa_beliefs_about_intelligen
 - Gates: normalize 0 of 3; audit 3 PASS, no anomalies; verify_batch PASS=1, MISSING(exempt)=2 (data_labels); lint clean (2 NOT_NEEDED rows in both files); irw-validate 2 ok + 1 ERROR name_length; check_provenance exit 0 (only the standing `mixed` REVIEW list).
 - pending_index_notes row written for beliefs_about_intelligence.
 Queue: 22 pending, 0 in_progress. Cap (batch_402) not reached.
+
+## batch_395 — 2026-09-24T13:50-14:00-07:00 (3 tables, 3 agents)
+Written / blocked / failed: **3 / 0 / 0** → done 3 / blocked 0 / failed 0 (yield 3/3). Circuit breaker: 0% failed. No kills.
+Tables: goldberg_2018_spa_cultural_familiarity, goldberg_2018_spa_ipip, goldberg_2018_spa_medical_history (next three of #2381 slice 06). All reused the SPA.por / SPA-1.sav / SPA.pdf cache from batch_394.
+- Numbering: batch_394 was the highest, so this is batch_395 (the Step 1 "below 300" rule still resolves to an existing batch_305; same human edit owed as noted at batch_379/393).
+- Gates: normalize_nulls 0 of 3 changed; audit_batch 3 PASS, no anomalies; verify_batch MISSING(exempt)=3 (all data_labels); lint clean (3 NOT_NEEDED rows in both files); irw-validate 3 ok; check_provenance exit 0 (only the standing `mixed` review list).
+- `goldberg_2018_spa_cultural_familiarity` — done. 105 items (FAMJAZ/COU/CLS/RAP/DES/RCK/STR 1-15) x 5 = 525 rows, data_labels. Seven printed domain headings as sections (SPA.pdf pp.7-8); fictitious names kept as printed (by design). Only 1/3/5 are labelled in print and .por; 2 and 4 ship blank. FAMJAZ5 shipped with the printed double quotes rather than the .por's single quotes. Name is 38 chars (under the 40 limit).
+- `goldberg_2018_spa_ipip` — done. PQ1-79 x 5 = 395 rows, data_labels, SPA.pdf pp.11-13 "Perceptions of Personal Qualities". Printed spacing restored where the .por labels lost a space at a line wrap (PQ7/8/15/28/49); apostrophes normalized to straight. Step 3b: no mismatch; the form never says "IPIP", so instrument uses the section heading.
+- `goldberg_2018_spa_medical_history` — done. MEDHIS1-28 x 4 = 112 rows, data_labels, SPA.pdf p.14; live item x resp counts = .por 112/112 cells.
+- Step 5b orchestrator re-check against SPA.por: item_text equals the .por variable label (alphanumerics, case-folded) for 105/105, 79/79 and 28/28 items; PQ value labels 1..5 very inaccurate..very accurate; FAMJAZ1 labels only 1/3/5; MEDHIS1 1-4 = 634/11/33/48. All as reported.
+- Instrument naming: batch_395 uses "Eugene-Springfield Community Sample, Skills, Possessions, & Abilities (SPA): <section>", which matches batch_394's beliefs_about_intelligence but NOT its changeability ("Skills, Possessions, & Abilities: …"). Harmonise changeability at triage if wanted.
+Queue: 19 pending, 0 in_progress. Cap (batch_402) not reached.
