@@ -36,7 +36,7 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   5-12 and 15. Stamp `uploaded=` in `itemtext_provenance.csv` and
   `itemtext/mapping_verification.csv` only after ben confirms.
 
-- [ ] **Issues-page entry owed for `rogowska_2023_maia2`** once live: the
+- [x] **Issues-page entry for `rogowska_2023_maia2` in datapages/irw#241** (2026-09-24). Original: once live: the
   `public_note` in `itemtext_provenance.csv` (9 reverse-keyed items carry no
   option labels because their stored direction is unconfirmed).
 

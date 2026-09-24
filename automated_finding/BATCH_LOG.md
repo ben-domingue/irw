@@ -15818,3 +15818,4 @@ unlabelled items -- an issues-page entry is owed.
 ben-domingue confirmed the `rogowska_2023_maia2` item text upload; `uploaded=2026-09-24`
 stamped in `itemtext_provenance.csv` and `itemtext/mapping_verification.csv`. Only the
 issues-page entry remains open.
+Issues-page entry opened as datapages/irw#241.
