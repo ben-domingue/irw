@@ -1,5 +1,12 @@
 *** This Do File creates tables from the Replication Data for: CLIMEJ — Organizational Climate Scale for Junior Enterprises: A Validation Study published by RAC-Revista de Administração Contemporânea study ***
 
+* NOTE (amorim_2025_climej_florescimentonotrabalho): the paper says the eight
+* flourishing-at-work items were answered on a 1-5 scale ("respostas variando
+* de 1 (discordo totalmente) a 5 (concordo totalmente)"). That sentence is wrong.
+* The data run 1-7, the deposit's Dicionario sheet records "Intervalar, 1 a 7,
+* Concordancia", and the EFLOT literature uses a 7-point scale. resp is correct
+* as published; read it as 1-7. (#2313 item 13)
+
 * clear
 clear
 
