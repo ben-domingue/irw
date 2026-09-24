@@ -1600,9 +1600,9 @@ teicher_2015_mace_peer_verbal,done,batch_328,2026-09-23T18:26:38-07:00
 teicher_2015_mace_verbal,done,batch_328,2026-09-23T18:26:38-07:00
 yao_2020_gad,done,batch_328,2026-09-23T18:26:38-07:00
 zhu_2026_llm_meteorology_performance,done,batch_329,2026-09-23T18:40:07-07:00
-ai_fear_dong_2026_ai,pending,,
-ai_fear_dong_2026_other_fear,pending,,
-ai_fear_dong_2026_own_fear,pending,,
+ai_fear_dong_2026_ai,blocked,batch_330,2026-09-23T19:39:10-07:00
+ai_fear_dong_2026_other_fear,done,batch_330,2026-09-23T19:39:10-07:00
+ai_fear_dong_2026_own_fear,done,batch_330,2026-09-23T19:39:10-07:00
 ai_fear_dong_2026_requirement,pending,,
 alqerem_2024_diabetic_health_literacy,pending,,
 anunciacao_2025_emotional_management,pending,,

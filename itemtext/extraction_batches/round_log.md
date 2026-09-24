@@ -24386,3 +24386,30 @@ oneoff/itemtext-rights-bank/issues_entries_328-329.yaml, to apply after release.
 
 **Slice 1 closed:** 43 tables, 42 written / 1 blocked. 39 in the draft; held: dass21_depression_anxiety_stress,
 hermans_2015_dm1_rods, sun_2025_morality_study3_moralratings; blocked: sun_2025_morality_study3_respectfulness.
+
+## 2026-09-23 — batch_330 (irw#2381 slice 02, round 1): 3 tables, 2 written / 1 blocked / 0 failed
+
+Three agents, one per table, all from one deposit (Dong et al., American Psychologist, doi 10.1037/amp0001454;
+OSF mb5nz). Yield 2/3. Gates: normalize 0 changed, audit 2 PASS, verify_batch 1 PASS + 1 MISSING(exempt,
+data_labels), lint clean, irw-validate ok 2/2, check_provenance exit 0. No kills.
+
+- **done** `ai_fear_dong_2026_own_fear` (4848 rows; data_labels, VERIFIED: per-occupation M/SD reproduce SI
+  Table S2 to 0.004) and `ai_fear_dong_2026_other_fear` (4848 rows; data_labels, NOT_NEEDED; M/SD match SI Table S9).
+- **blocked** `ai_fear_dong_2026_ai` — RIGHTS, retry test NO. The stem is study-authored on an unlicensed OSF node,
+  but the article's VoR is **CC BY-NC-ND 4.0** (orchestrator re-checked the Crossref record: by-nc-nd/4.0, vor,
+  2024-12-12). The re-audit recorded "silence (own items)" and missed this. A gate-passing draft is banked at
+  .cache/ai_fear_dong_2026_ai/candidate__items.csv.
+  **The same rights question applies to the two shipped siblings** — same deposit, same authors. Their agents
+  shipped on the OSF deposit plus a HAL copy (hal-04840907) that one agent read as CC BY 4.0. The call is Ben's:
+  if the NC-ND VoR governs, hold all three. If the HAL CC BY copy or the unlicensed OSF deposit governs, ship all
+  three. Also relevant to `ai_fear_dong_2026_requirement`/`_incentive` later in the queue.
+- **Response-table defect (all three, orchestrator-confirmed):** data/ai_fear_dong_2026.py builds
+  item=occupation_trait for every measure. own_fear and other_fear are really 6 per-occupation items, each copied
+  across 8 trait codes: own_fear 60,000/60,000 id×occupation cells single-valued (re-checked), and other_fear
+  60,000/60,000 (agent's figure). `ai` is 8 per-trait items copied across 6 occupations: 80,000/80,000 id×trait
+  cells single-valued (re-checked). Each table is 480,000 rows but holds 60,000 or 80,000 real answers.
+  Only `requirement` genuinely varies by occupation×trait. The tables should be collapsed first, and the
+  item text rebuilt on the new codes; the wording carries over. Same shape as the sun_2025 HOLD.
+- Leads: the codebook labels trait `fair` as "competent" and omits "competent" (Table S4 settles the order).
+  Administered in 20 countries; only the English materials are deposited, so `language` lists the inferred
+  subtitle languages.
