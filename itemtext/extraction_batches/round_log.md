@@ -24231,3 +24231,33 @@ and all three agents re-derived allow from CIS's reuse-conditions page. I did no
 
 Gates: normalize 0 changes. audit 3 PASS. verify_batch 3 exempt. lint clean (3 rows). irw-validate ok ×3.
 check_provenance exit 0 (its 2 `mixed` REVIEW items are pre-existing). Cap (batch_330) not reached.
+
+## batch_326 — 2026-09-23T18:04 claim, closed 18:10 — 3 tables: 3 written, 0 blocked, 0 failed (yield 100%)
+
+Three agents, no kills. Two spain_2026_confidence siblings (Estudio 3565, same MD3565 package as batch_325) plus one PLOS ONE table.
+
+- `spain_2026_confidence_prospect` (p9, p9_1, p12, p14, p14_1; better/same/worse). data_labels, study_materials,
+  machine_translation. .do re-run reproduces the live table (14352 rows, 0/0).
+- `spain_2026_confidence_retrospect` (p3, p7, p7_1, p8, p8_1). Same basis. Re-run reproduces the live table (14302 rows, 0/0).
+  **Both tables:** option 2 "Igual" is a volunteered answer printed as "(NO LEER) Igual" in the questionnaire. Unlike the
+  CIS tables whose .do dropped the NO LEER midpoint, this .do keeps it, so it is a live resp level. The two agents
+  disagreed: retrospect shipped plain "Igual"/"The same"; prospect shipped the literal "(NO LEER) Igual" /
+  "(DO NOT READ) The same". **Orchestrator harmonized prospect to plain "Igual"/"The same"**, which matches the retrospect
+  sibling and the prior CIS rule of not shipping interviewer directions (no earlier `__items.csv` carries "NO LEER").
+  Both public_notes say the midpoint was never offered. The prospect notes/provenance record the edit. If you would
+  rather keep the direction in option_text, revert it in both tables, not just one.
+- `stoyel_2021_social_modeling` (7 items, resp 1–5). Text is verbatim from the S1 xlsx headers (MBEH1..7, PLOS ONE
+  10.1371/journal.pone.0257577, CC BY 4.0). Codes are positional, so there is a verify script (VERIFIED). The positional
+  header diff is 21/21, the 5614 responses reproduce cell for cell, and the closest swap pair breaks 896 cells.
+  option_text is blank: no anchors are published for this block. The 2020 paper's "Scoring" sheet sits under a
+  "Social Media" heading and does not name this block, so it was not applied. Unlike the blocked `stoyel_2021_social_media`, there is no SATAQ derivation.
+
+Step 5b orchestrator re-check: I ran irw_fetch on both Spain tables, and the item × resp counts match the agents
+exactly: prospect p9 803/396/1566, p9_1 832/465/1527, p12 943/1162/872, p14 760/426/1690, p14_1 767/546/1597;
+retrospect p3 589/1402/1022, p7 553/886/1276, p7_1 682/900/1149, p8 515/584/1832, p8_1 541/733/1638.
+
+**For Ben (repeat):** the CIS allow row in instrument_rights_register.csv is still scoped to `spain_2025_*`. Both
+Spain agents re-derived allow from the reuse-conditions page. The register is unedited.
+
+Gates: normalize 0 changes. audit 3 PASS. verify_batch 1 PASS + 2 exempt. lint clean (3 rows). irw-validate ok ×3.
+check_provenance exit 0 (its 2 `mixed` REVIEW items are pre-existing). Cap (batch_330) not reached.
