@@ -38,14 +38,16 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   from #2384 (57,061 responses) -- upload them with this batch unless they
   already went up; they have no item text (see BATCH_LOG 2026-09-23).
 
-- [ ] **Issues-page entries owed for the 4 language-note tables** once live
+- [x] **Issues-page entries added in datapages/irw#239** (2026-09-23; Sison
+  kept: the paper says questions were in English AND Tagalog, Tagalog unpublished). Original: once live
   (`public_note` is set in `itemtext_provenance.csv`): `zhang_2024_smoking_rationalisation`,
   `zhang_2024_ftcd` (English substitute, Chinese administration), and
   `sison_2022_hiv_testing_stigma`, `sison_2022_provider_mistrust` (English/Tagalog
   offered, English only published) -- for Sison, check first whether the form was
   side-by-side bilingual ("Yes/ Oo"), in which case blank the public_note instead.
 
-- [ ] **ben-domingue call: `10.1016/j.heliyon.2023.e15742` (Chen 2023, work
+- [x] **Chen 2023 left out** (ben-domingue, 2026-09-23: "if there is a problem
+  let's leave it out"). Stays `rejected_content` in `pmc_leads_2026-09-23.csv`. Original: **`10.1016/j.heliyon.2023.e15742` (Chen 2023, work
   design).** Rejected because the final 50 of 804 rows duplicate earlier
   respondents (5 with altered demographics) and the paper counts them. Rows
   0-753 are clean and ready if you want the prefix shipped. See BATCH_LOG
