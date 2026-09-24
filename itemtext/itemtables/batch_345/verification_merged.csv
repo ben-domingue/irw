@@ -1,0 +1,2 @@
+table,batch,mapping_basis,uploaded,route,status,evidence
+spelling_assessment_study2,batch_345,data_labels,,none needed: item codes are the source column names,NOT_NEEDED,mapping_basis=data_labels: Study2.xlsx column headers are the target words themselves

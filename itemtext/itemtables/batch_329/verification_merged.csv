@@ -1,0 +1,2 @@
+table,batch,mapping_basis,uploaded,route,status,evidence
+zhu_2026_llm_meteorology_performance,batch_329,data_labels,,none,NOT_NEEDED,"data_labels: data/zhu_2026_llm_meteorology_performance.py renames by full S1 header -> code dict; 25/25 item x resp counts in S1 match live table (orchestrator re-check)"

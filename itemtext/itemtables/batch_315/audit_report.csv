@@ -1,0 +1,4 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"BPAQ_Christopher_2024_PCL5","PASS",20,20,TRUE,TRUE,FALSE,TRUE,0,0,""
+"cfq_ruiz_2025_dass","PASS",21,21,TRUE,TRUE,FALSE,TRUE,0,0,""
+"FomoNegativeAffect_cremer_2026_phq","PASS",9,9,TRUE,TRUE,FALSE,TRUE,0,0,""
