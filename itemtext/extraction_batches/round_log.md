@@ -25197,3 +25197,12 @@ Tables: goksel_2026_embarrassment_emb_perception, _liking, _moralityandwarmth (O
 - Gates: normalize 0 of 2; audit 2 PASS, no WARNs; verify_batch MISSING(exempt)=2 (both data_labels); lint clean (2 NOT_NEEDED rows); irw-validate 1 ok + 1 ERROR name_length; check_provenance exit 0.
 - pending_index_notes rows written for liking and moralityandwarmth.
 Queue: 34 pending, 0 in_progress. Cap (batch_402) not reached.
+
+## batch_382 — 2026-09-24T11:33 (3 tables: 2 written / 1 blocked / 0 failed, yield 67%)
+Tables: goksel_2026_embarrassment_puremorality, _purewarmth, _similarity (OSF jwdq6, same codebook as batch_380/381). Three agents, no kills. Circuit breaker: 0% failed.
+- `puremorality`: done. 8 traits x 9 levels, data_labels (codebook Study 3 sheet: courageous/fair/principled/responsible/just/honest/trustworthy/loyal). Live n/means equal Study3 Cleaned Data.xls (602 each). Qualtrics print order differs from the code order, so the mapping rests on the codebook labels. Piped `${e://Field/name}` is rendered as [name] (noted).
+- `purewarmth`: done. 8 traits x 9 levels, data_labels (codebook Study 3: warm/sociable/happy/agreeable/enthusiastic/easy-going/funny/playful). Live item x resp counts equal the cleaned deposit cell for cell. purewarmth_4 has no resp 3, but its option row is kept.
+- `similarity`: blocked (retry test NO). Same Study S1 trap as batch_381's `liking`: the codebook gives only "item 1..3", there is no .qsf or question-text header, and print order is not column order in this survey. Orchestrator Step 5b re-check on live data: r 0.89/0.90/0.92, means all 5.2, n=300. The items are near-synonyms, so there is no statistical route. Unblock: the .qsf, a raw export with the question-text header, or author confirmation. A pending_index_notes row is written. `affectivetrust` (still queued) has the same print-order trap.
+- The agents' `provenance_` sidecars wrote NA for blank fields (R write.csv); the orchestrator blanked them at merge.
+- Gates: normalize 0 of 2; audit 2 PASS, no WARNs; verify_batch MISSING(exempt)=2 (data_labels); lint clean (2 NOT_NEEDED rows); irw-validate ok on 2; check_provenance exit 0.
+Queue: 31 pending, 0 in_progress. Cap (batch_402) not reached.
