@@ -7962,3 +7962,44 @@ date,query,output_file,notes
 2026-09-24,Body Appreciation Scale,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
 2026-09-24,Buss-Perry Aggression Questionnaire,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
 2026-09-24,Cognitive Failures Questionnaire,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
+2026-09-24,Oxford Happiness Questionnaire,runs/pmc_backlog_final_2026-09-24_triage.csv,PMC backlog final sweep; last 41 ranked-unrun terms of pmc_term_backlog.csv; 20 candidates over 9 journals
+2026-09-24,Prisoner's Dilemma Game,runs/pmc_backlog_final_2026-09-24_triage.csv,PMC backlog final sweep; last 41 ranked-unrun terms of pmc_term_backlog.csv; 20 candidates over 9 journals
+2026-09-24,Toronto Alexithymia Scale,runs/pmc_backlog_final_2026-09-24_triage.csv,PMC backlog final sweep; last 41 ranked-unrun terms of pmc_term_backlog.csv; 20 candidates over 9 journals
+2026-09-24,brand loyalty scale,runs/pmc_backlog_final_2026-09-24_triage.csv,PMC backlog final sweep; last 41 ranked-unrun terms of pmc_term_backlog.csv; 20 candidates over 9 journals
+2026-09-24,forgiveness scale,runs/pmc_backlog_final_2026-09-24_triage.csv,PMC backlog final sweep; last 41 ranked-unrun terms of pmc_term_backlog.csv; 20 candidates over 9 journals
+2026-09-24,geometry test,runs/pmc_backlog_final_2026-09-24_triage.csv,PMC backlog final sweep; last 41 ranked-unrun terms of pmc_term_backlog.csv; 20 candidates over 9 journals
+2026-09-24,political efficacy scale,runs/pmc_backlog_final_2026-09-24_triage.csv,PMC backlog final sweep; last 41 ranked-unrun terms of pmc_term_backlog.csv; 20 candidates over 9 journals
+2026-09-24,pro-environmental behavior scale,runs/pmc_backlog_final_2026-09-24_triage.csv,PMC backlog final sweep; last 41 ranked-unrun terms of pmc_term_backlog.csv; 20 candidates over 9 journals
+2026-09-24,Child Behavior Checklist,runs/pmc_backlog_final_2026-09-24_triage.csv,PMC backlog final sweep; last 41 ranked-unrun terms of pmc_term_backlog.csv; 20 candidates over 9 journals
+2026-09-24,Moral Foundations Questionnaire,runs/pmc_backlog_final_2026-09-24_triage.csv,PMC backlog final sweep; last 41 ranked-unrun terms of pmc_term_backlog.csv; 20 candidates over 9 journals
+2026-09-24,Navon task,runs/pmc_backlog_final_2026-09-24_triage.csv,PMC backlog final sweep; last 41 ranked-unrun terms of pmc_term_backlog.csv; 20 candidates over 9 journals
+2026-09-24,Need to Belong Scale,runs/pmc_backlog_final_2026-09-24_triage.csv,PMC backlog final sweep; last 41 ranked-unrun terms of pmc_term_backlog.csv; 20 candidates over 9 journals
+2026-09-24,Posner cueing task,runs/pmc_backlog_final_2026-09-24_triage.csv,PMC backlog final sweep; last 41 ranked-unrun terms of pmc_term_backlog.csv; 20 candidates over 9 journals
+2026-09-24,Schutte Self-Report Emotional Intelligence Test,runs/pmc_backlog_final_2026-09-24_triage.csv,PMC backlog final sweep; last 41 ranked-unrun terms of pmc_term_backlog.csv; 20 candidates over 9 journals
+2026-09-24,athlete burnout questionnaire,runs/pmc_backlog_final_2026-09-24_triage.csv,PMC backlog final sweep; last 41 ranked-unrun terms of pmc_term_backlog.csv; 20 candidates over 9 journals
+2026-09-24,career adaptability scale,runs/pmc_backlog_final_2026-09-24_triage.csv,PMC backlog final sweep; last 41 ranked-unrun terms of pmc_term_backlog.csv; 20 candidates over 9 journals
+2026-09-24,chemistry concept inventory,runs/pmc_backlog_final_2026-09-24_triage.csv,PMC backlog final sweep; last 41 ranked-unrun terms of pmc_term_backlog.csv; 20 candidates over 9 journals
+2026-09-24,listening test toefl,runs/pmc_backlog_final_2026-09-24_triage.csv,PMC backlog final sweep; last 41 ranked-unrun terms of pmc_term_backlog.csv; 20 candidates over 9 journals
+2026-09-24,phonological awareness test,runs/pmc_backlog_final_2026-09-24_triage.csv,PMC backlog final sweep; last 41 ranked-unrun terms of pmc_term_backlog.csv; 20 candidates over 9 journals
+2026-09-24,physics concept inventory,runs/pmc_backlog_final_2026-09-24_triage.csv,PMC backlog final sweep; last 41 ranked-unrun terms of pmc_term_backlog.csv; 20 candidates over 9 journals
+2026-09-24,self-regulated learning questionnaire,runs/pmc_backlog_final_2026-09-24_triage.csv,PMC backlog final sweep; last 41 ranked-unrun terms of pmc_term_backlog.csv; 20 candidates over 9 journals
+2026-09-24,Hewitt Multidimensional Perfectionism Scale,runs/pmc_backlog_final_2026-09-24_triage.csv,PMC backlog final sweep; last 41 ranked-unrun terms of pmc_term_backlog.csv; 20 candidates over 9 journals
+2026-09-24,Katastrophisieren von Schmerz,runs/pmc_backlog_final_2026-09-24_triage.csv,PMC backlog final sweep; last 41 ranked-unrun terms of pmc_term_backlog.csv; 20 candidates over 9 journals
+2026-09-24,Machiavellianism Scale,runs/pmc_backlog_final_2026-09-24_triage.csv,PMC backlog final sweep; last 41 ranked-unrun terms of pmc_term_backlog.csv; 20 candidates over 9 journals
+2026-09-24,Multigroup Ethnic Identity Measure,runs/pmc_backlog_final_2026-09-24_triage.csv,PMC backlog final sweep; last 41 ranked-unrun terms of pmc_term_backlog.csv; 20 candidates over 9 journals
+2026-09-24,Padua Inventory,runs/pmc_backlog_final_2026-09-24_triage.csv,PMC backlog final sweep; last 41 ranked-unrun terms of pmc_term_backlog.csv; 20 candidates over 9 journals
+2026-09-24,Raven's Progressieve Matrijzen,runs/pmc_backlog_final_2026-09-24_triage.csv,PMC backlog final sweep; last 41 ranked-unrun terms of pmc_term_backlog.csv; 20 candidates over 9 journals
+2026-09-24,Raven-Matrizen-Test,runs/pmc_backlog_final_2026-09-24_triage.csv,PMC backlog final sweep; last 41 ranked-unrun terms of pmc_term_backlog.csv; 20 candidates over 9 journals
+2026-09-24,Rotter Locus of Control Scale,runs/pmc_backlog_final_2026-09-24_triage.csv,PMC backlog final sweep; last 41 ranked-unrun terms of pmc_term_backlog.csv; 20 candidates over 9 journals
+2026-09-24,Schweregrad der Insomnie,runs/pmc_backlog_final_2026-09-24_triage.csv,PMC backlog final sweep; last 41 ranked-unrun terms of pmc_term_backlog.csv; 20 candidates over 9 journals
+2026-09-24,Test d'association implicite,runs/pmc_backlog_final_2026-09-24_triage.csv,PMC backlog final sweep; last 41 ranked-unrun terms of pmc_term_backlog.csv; 20 candidates over 9 journals
+2026-09-24,Vertrauen in die Regierung,runs/pmc_backlog_final_2026-09-24_triage.csv,PMC backlog final sweep; last 41 ranked-unrun terms of pmc_term_backlog.csv; 20 candidates over 9 journals
+2026-09-24,Whiteley Index,runs/pmc_backlog_final_2026-09-24_triage.csv,PMC backlog final sweep; last 41 ranked-unrun terms of pmc_term_backlog.csv; 20 candidates over 9 journals
+2026-09-24,cognitieve test,runs/pmc_backlog_final_2026-09-24_triage.csv,PMC backlog final sweep; last 41 ranked-unrun terms of pmc_term_backlog.csv; 20 candidates over 9 journals
+2026-09-24,entrepreneurial intention questionnaire,runs/pmc_backlog_final_2026-09-24_triage.csv,PMC backlog final sweep; last 41 ranked-unrun terms of pmc_term_backlog.csv; 20 candidates over 9 journals
+2026-09-24,kognitiver Test,runs/pmc_backlog_final_2026-09-24_triage.csv,PMC backlog final sweep; last 41 ranked-unrun terms of pmc_term_backlog.csv; 20 candidates over 9 journals
+2026-09-24,narcissism scale,runs/pmc_backlog_final_2026-09-24_triage.csv,PMC backlog final sweep; last 41 ranked-unrun terms of pmc_term_backlog.csv; 20 candidates over 9 journals
+2026-09-24,nomophobia questionnaire,runs/pmc_backlog_final_2026-09-24_triage.csv,PMC backlog final sweep; last 41 ranked-unrun terms of pmc_term_backlog.csv; 20 candidates over 9 journals
+2026-09-24,servant leadership scale,runs/pmc_backlog_final_2026-09-24_triage.csv,PMC backlog final sweep; last 41 ranked-unrun terms of pmc_term_backlog.csv; 20 candidates over 9 journals
+2026-09-24,test cognitif,runs/pmc_backlog_final_2026-09-24_triage.csv,PMC backlog final sweep; last 41 ranked-unrun terms of pmc_term_backlog.csv; 20 candidates over 9 journals
+2026-09-24,workplace incivility scale,runs/pmc_backlog_final_2026-09-24_triage.csv,PMC backlog final sweep; last 41 ranked-unrun terms of pmc_term_backlog.csv; 20 candidates over 9 journals

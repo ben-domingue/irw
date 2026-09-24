@@ -15974,3 +15974,28 @@ passes), 8 not-shipped `itemtext_provenance.csv` records. No
 ben-domingue confirmed the 8 `depue_*` response tables are uploaded. No item text
 to stamp; the 8 not-shipped provenance records stay unstamped by design.
 Dictionary and tag rows ride in on #2402 (merge is the accept).
+
+## 2026-09-24 — PMC backlog final sweep: `pmc_term_backlog.csv` exhausted
+
+Ran `irw_discover_pmc.py` over the **last 41 unrun terms** in
+`pmc_term_backlog.csv` (29 projected new DOIs; "Oxford Happiness Questionnaire"
+.. "workplace incivility scale", including the German/Dutch/French variants).
+Marked in a new `run_2026_09_24b` column; **every one of the 291 ranked terms has
+now been run** -- the backlog is closed. Terms appended to `search_terms_log.csv`.
+No query failed. Output files named by date (`runs/pmc_backlog_final_2026-09-24_*`)
+rather than `pmc_batch6_*`, which would collide with August's batch 6.
+
+**20 candidates**: `no_usable_file` 15, `license_restricted` 2,
+`external_unresolved` 1, `not_item_response` 1, `human_assistance` 1. Step 2b
+chained: the one row came back `worth_retrying`; no `human_review` rows, so no
+archive file.
+
+**2 leads, both terminal -> `leads/pmc_leads_2026-09-24b.csv`; nothing shipped.**
+`10.7717/peerj.15830` is an endodontic lab study (per-canal-model measurements;
+the "text-coded Likert" columns are file-system names). `10.1038/s41598-022-26081-6`
+points at Deep Blue `10.7302/90mc-9h22`, an 18-participant viral-challenge cohort
+(NCPT summaries plus RNAseq) -- below N.
+
+Tables shipped across the six backlog sweeps (2026-09-20 .. 09-24): 18, then
+batches 2-4 at 7, 8 and 4, 8 in batch 5 (one panel), and 0 from the tail. Further PMC work needs new terms (`pmc_term_scout.py` over an unscouted
+pool), not more of this list.
