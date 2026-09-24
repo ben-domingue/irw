@@ -25061,3 +25061,15 @@ Tables: spain_2023_science_engagement, spain_2023_science_functions, spain_2023_
 - Gates: normalize 0 of 3; audit 3 PASS, no anomalies; verify_batch MISSING(exempt)=3; lint clean; irw-validate ok ×3; check_provenance exit 0 (the new tables appear only in the unenforced held-table disclosure list).
 - Housekeeping: the Python claim rewrite first wrote LF endings and converted the whole CRLF queue file. It was restored to CRLF before dispatch, so the diff is only the three rows.
 Queue: 13 pending, 0 in_progress. Cap (batch_379) not reached.
+
+## batch_374 — 2026-09-24T09:40 (3 tables: 3 written / 0 blocked / 0 failed, yield 100%)
+Tables: spain_2023_science_interest, spain_2023_science_science, spain_2023_science_situations (CIS Estudio 3406, source cache .cache/spain_2023_science_benefits/, used read-only). Three agents, one per table, no kills.
+- Numbering: batch_373 was the highest existing, so this round is batch_374.
+- All three tables are `data_labels` / `study_materials` / `machine_translation` with CIS register row 117 applied, and all three rebuild live exactly from 3406_num.csv.
+- `spain_2023_science_interest`: P.1 + P.2_1..P.2_7, 40 rows, 1 = Muy interesado/a … 5 = Nada. Two sections: p1 carries the whole P.1 question, and the p2_* items share the P.2 stem in section_prompt. The P.1 question text leaves out "algo", but its answer list includes Algo interesado/a = 3. This is transcribed as printed and disclosed. Rebuild: 23,087 rows / 2,921 ids.
+- `spain_2023_science_science`: P3ES_1..P3ES_6, 30 rows. Only the endpoints are labelled (1 = No la asocia nada, 5 = La asocia mucho), so 2–4 are blank. Higher = stronger association, the reverse of most siblings. It uses the same six words as P4ES (`spain_2023_science_technology`, still pending); only the instructions distinguish the two. Rebuild: 17,303 / 2,923.
+- `spain_2023_science_situations`: P8ES_1..P8ES_4, 20 rows, endpoints only (1 = Nada útil, 5 = Muy útil). The .do drops code 7 "No procede" (141 on p8es_4 for no family; 11 on p8es_1), and this is disclosed. option_text uses the grid's singular headings, not the stem's plural. Rebuild: 11,453 / 2,918.
+- Step 5b: the orchestrator re-tabulated 3406_num.csv (N=2924) for P1, P2_*, P3ES_* and P8ES_* at codes 7/8/9. All 54 agent-reported counts matched.
+- Gates: normalize 0 of 3; audit 3 PASS, no anomalies; verify_batch MISSING(exempt)=3; lint clean (3 NOT_NEEDED rows in both verification_merged.csv and the tracker); irw-validate ok ×3; check_provenance exit 0.
+- One agent hit a transient Redivis HTTP/2 error on irw_fetch. Its retry read the local irw cache parquet instead, so there was no second export.
+Queue: 10 pending, 0 in_progress. Cap (batch_379) not reached.
