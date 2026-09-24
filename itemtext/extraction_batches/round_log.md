@@ -24372,3 +24372,17 @@ Ben widened the CIS register row from spain_2025_* to every CIS survey year (6b3
 row-count verified. Re-checked from the draft: rows, COUNT(DISTINCT item) and no duplicate rows, 14/14. Stamped
 `uploaded=2026-09-23` (provenance 14, mapping 14) and removed the CSVs. Draft now holds 943 tables. The 14
 machine_translation issues-page entries in oneoff/itemtext-rights-bank/issues_entries_321-327.yaml apply after release.
+
+## 2026-09-23 — triage of batch_328–329 (irw#2381 slice 1, last rounds): 4 uploaded
+
+Gates re-run in a detached checkout of 75c0c70d: normalize 0 files, audit 4 PASS, verify_batch 3 PASS + 1
+MISSING(exempt), lint clean. Uploaded to the irw_text_2 draft: teicher_2015_mace_peer_verbal and
+teicher_2015_mace_verbal (register MACE=ship; reconstructed mapping VERIFIED against Tables 5/6 % Yes),
+yao_2020_gad (PHQ/GAD=ship; official English for a Chinese administration, mapping PARTIAL), and
+zhu_2026_llm_meteorology_performance (study's English headers, Chinese administration; human raters, not a
+benchmark). Ben uploaded; verified rows, distinct items and no duplicates 4/4; stamped `uploaded=2026-09-23`;
+CSVs removed. Draft now 947 tables. Two issues-page entries (yao, zhu) in
+oneoff/itemtext-rights-bank/issues_entries_328-329.yaml, to apply after release.
+
+**Slice 1 closed:** 43 tables, 42 written / 1 blocked. 39 in the draft; held: dass21_depression_anxiety_stress,
+hermans_2015_dm1_rods, sun_2025_morality_study3_moralratings; blocked: sun_2025_morality_study3_respectfulness.
