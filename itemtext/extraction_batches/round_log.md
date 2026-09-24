@@ -24514,3 +24514,26 @@ text_source=translated_substitute, translation_source=study_supplied (the author
   - Knowledge C4: the workbook recodes a single "Fièvre/Toux et/ou Fatigue" category (273, all scored 1), which is broader
     than the published key "Fever and cough". The key is shipped verbatim with a public_note.
 Queue: 34 pending, 0 in_progress. Cap (batch_348) not reached.
+
+## batch_334 — 2026-09-23T20:27 → 20:40 — 3 written / 0 blocked / 0 failed (#2381 slice 02)
+Three agents, one per table. Yield 3/3. No kills. Gates: normalize 0 changed, audit PASS=3 (no WARNs),
+verify_batch PASS=1 + MISSING(exempt)=2 (data_labels), lint clean (3 rows), irw-validate ok 3/3, check_provenance exit 0.
+Breaker: 0% failed. mapping_verification.csv +3 (practices VERIFIED; the two ehealth tables NOT_NEEDED, in both files).
+- **done** `dalichaouche_2026_covid_practices` (18 rows, P1–P6 × 0/1/2). This completes the figshare 31851586 KAP set.
+  English stems come from the study's docx, and the options are the administered French from the xlsx
+  (translated_substitute / study_supplied). The verify script reproduces the live counts and a label↔score crosstab
+  with no exceptions. It also re-computes the **unanswered-scored-0 defect the batch_333 entry left unchecked:
+  P1–P6 = 10/18/16/4/4/3 (55/1800)**. That confirms the same fix belongs in data/dalichaouche_2026_covid_kap.py.
+- **done** `ehealth_rioux_2025_gad` (32 rows) and `ehealth_rioux_2025_phq` (40 rows). The text comes from the
+  ParentPref_OriginalData.sav variable/value labels (OSF j7d2q) and the codes are the source column names. PHQ/GAD
+  rights are already `ship` in the register. GAD8 and PHQ10 are the forms' own functional-difficulty questions, which
+  resolves the index-workbook "8 items"/"10 items" notes.
+  - Dictionary Description says 0–3, but the live tables are coded 1–4 (the raw .sav coding). Labels are shipped against 1–4.
+  - **Duplicate ids, confirmed by the orchestrator on live data:** ids 4233, 5063, 7262 and 9728 each have two
+    conflicting submissions. GAD: 2,503 rows / 313 ids, 32 id×item pairs doubled (e.g. 7262 GAD1 = 1 and 3). PHQ:
+    the same 4 ids (PHQ2 316 rows / 312 ids). Fix in data/ehealth_rioux_2025.py. This is a candidate for the
+    dup_id_item work (#1842); no issue filed.
+  - PHQ is built from the uncleaned file: 49/316 fail the study's attention checks (agent's figure, not re-checked).
+    The agent also called the PHQ9 mean "~2.6, high". The re-check puts it at 2.5, inside the 2.3–2.6 range of all
+    ten items, so it is not an outlier and that note was dropped.
+Queue: 31 pending, 0 in_progress. Cap (batch_348) not reached.
