@@ -231,7 +231,15 @@ def verify_draft(redivis, log_path: pathlib.Path) -> int:
                 if after.get(col) != want:
                     issues.append(f"{col}: {after.get(col)}, wanted {want}")
             elif after.get(col) != typ:
-                issues.append(f"{col}: {typ} -> {after.get(col)}")
+                if (typ, after.get(col)) == ("float", "integer"):
+                    # Lossless: a float column of whole numbers is written without a
+                    # decimal point, and Redivis infers integer only if EVERY value is
+                    # whole. Seen on cud_stone2024.date (Unix timestamps), values
+                    # identical on count, sum, min and max.
+                    print(f"note: {r['shard']}.{r['table']}.{col} float -> integer "
+                          "(all values whole; lossless)")
+                else:
+                    issues.append(f"{col}: {typ} -> {after.get(col)}")
         extra = set(after) - set(before)
         if extra:
             issues.append(f"new columns {sorted(extra)}")
