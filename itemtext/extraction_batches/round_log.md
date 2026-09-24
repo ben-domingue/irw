@@ -25405,3 +25405,30 @@ Tables: spain_2025_sanitation_coordination, spain_2025_sanitation_diagnostics, s
   - irw-validate: ok ×3.
   - check_provenance: exit 0 (only the standing 4-table `mixed` REVIEW).
 Queue: 7 pending, 0 in_progress. Cap (batch_402) not reached.
+
+## batch_400 — 2026-09-24T14:36 (closed 14:43)
+Tables: spain_2025_sanitation_hospital, spain_2025_sanitation_mental, spain_2025_sanitation_primary. Three agents, one per table, no kills. **3 written / 0 blocked / 0 failed**, yield 100%. Circuit breaker: 0% failed. Third round of the spain_2025_sanitation_* family. Same source as batch_398/399: CIS Estudio 3531 "Barómetro sanitario 2025 (tercera oleada)", Nov 2025, N=2427. Each agent copied the batch_399 cache into its own .cache dir. Rights: the existing CIS `allow` row applies. All three re-read the reuse page (HTTP 200, both key phrases present). No register rows written.
+- Numbering: batch_399 was the highest below 300, so this is batch_400 (not in either hole).
+- `spain_2025_sanitation_hospital`: done. P9B_1-2 (Sí/No), P9C_1-5 (1-10, only 1 and 10 labelled, 2-9 blank), P9D (1-5). 59 rows, data_labels.
+  - The block was asked only of those admitted to a public hospital in the last 12 months (248 ids).
+  - The P9C rows were read in rotating order.
+  - No respondent chose 2 on P9C_1 or P9C_4, so those items have 9 levels. The option row still ships because the option was offered.
+  - P9B_2 follows the questionnaire wording, not the .sav label.
+- `spain_2025_sanitation_mental`: done. P8D_1-4 (Sí/No), P8E/P8F/P8G (1-5). 23 rows, data_labels, every point labelled.
+  - P8D was asked only of the 155 seen by a psychiatrist, psychologist or other specialist. P8E-G were asked of 233-239.
+- `spain_2025_sanitation_primary`: done. P5D_1-4, P5E_1-5 (1-10, endpoints only), P5F, P5G, P5H. 70 rows, data_labels.
+  - P5D_3 was asked only of in-person visits (n 1585). P5H was asked only if P5G=1 (n 1026).
+- All three have translation_source=machine_translation, so each owes an issues-page entry once live.
+- Step 5b orchestrator re-check: I applied the .do drop codes to 3531_num.csv and compared with live irw_table_sets per_item.
+  - All 27 per-item n's match (hospital 243/242/247/248/242/242/248/248; mental 155/155/152/155/239/235/233; primary 1922/1948/1585/1954/1969/1893/1958/1955/1969/1971/1967/1026).
+  - The level counts match too, including the 9-level P9C_1/P9C_4. All as reported.
+- Gates:
+  - normalize: 0 of 3 files changed.
+  - audit: 1 PASS, 2 WARN. Both WARNs are explained in notes.csv and both are properties of the response data, not itemtext defects.
+    - mental: the row-count anomaly on P8E-G is the P8D specialist filter.
+    - primary: the row-count anomaly on P5H is the P5G=1 filter. The 57.1% blank option_text is the unlabelled P5E points 2-9.
+  - verify_batch: MISSING(exempt)=3 (data_labels).
+  - lint: clean (3 NOT_NEEDED rows in both files).
+  - irw-validate: ok ×3.
+  - check_provenance: exit 0 (only the standing 4-table `mixed` REVIEW).
+Queue: 4 pending (spain_2025_sanitation_regional/services/specialist/system), 0 in_progress. Cap (batch_402) not reached.

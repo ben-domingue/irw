@@ -1,0 +1,4 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"spain_2025_sanitation_hospital","PASS",8,8,TRUE,TRUE,FALSE,TRUE,0,67.8,"67.8% of rows have blank option_text"
+"spain_2025_sanitation_mental","WARN",7,7,TRUE,TRUE,FALSE,TRUE,0,0,"row-count anomaly (possible item-code conflation or missingness skew), median=155: P8E, P8F, P8G"
+"spain_2025_sanitation_primary","WARN",12,12,TRUE,TRUE,FALSE,TRUE,0,57.1,"row-count anomaly (possible item-code conflation or missingness skew), median=1954.5: P5H | 57.1% of rows have blank option_text"
