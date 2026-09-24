@@ -25380,3 +25380,28 @@ Tables: spain_2025_sanitation_aicomfort, spain_2025_sanitation_aiconcern, spain_
   - irw-validate: ok ×3.
   - check_provenance: exit 0 (only the standing 4-table `mixed` REVIEW).
 Queue: 10 pending, 0 in_progress. Cap (batch_402) not reached.
+
+## batch_399 — 2026-09-24T14:27-07:00 (3 tables: 3 written / 0 blocked / 0 failed → done 3 / blocked 0 / failed 0, yield 100%)
+Tables: spain_2025_sanitation_coordination, spain_2025_sanitation_diagnostics, spain_2025_sanitation_digital. Three agents, one per table, no kills. Circuit breaker: 0% failed. Second round of the spain_2025_sanitation_* family. All three reused the batch_398 CIS Estudio 3531 cache (MD3531.zip → 3531.sav / 3531_num.csv, cues3531.pdf), each copying it into its own .cache dir. Rights: the existing CIS `allow` row applies. Agents re-read the reuse page today and it is unchanged. No register rows written.
+- Numbering: batch_398 was the highest, so this is batch_399 (not in either hole).
+- `spain_2025_sanitation_coordination`: done, with caveats. P11/P13, 8 rows, data_labels.
+  - P13 resp 3 ("No le han recetado medicamentos en la sanidad pública", n 55) is a volunteered not-applicable code that the .do keeps, so P13 is nominal, not ordinal. This is a property of the response data, disclosed in public_note.
+  - The agent flagged the dictionary Description ("Perceived coordination and listing waits") as mismatched: the waiting-list question P12 sits in `_system` by design (data/spain_2025_sanitation.do:36). The fix is to reword the dictionary; the data is fine.
+- `spain_2025_sanitation_diagnostics`: done. P10_1-4 (TAC/Escáner, Ecografía, Resonancia, Colonoscopia) × Sí/No = 8 rows, data_labels. `instructions` carries the printed interviewer direction (pregnancy ultrasounds and screening count as No), following the batch_390 precedent.
+- `spain_2025_sanitation_digital`: done. P14/P15/P17/P20, 9 rows, data_labels.
+  - Every (NO LEER) volunteered code is dropped to missing by the .do (largest: P15 code 4, n 86). public_note says so.
+  - P17 resp 2 follows the questionnaire wording. The .sav label adds a comma.
+- All three have translation_source=machine_translation, so each owes an issues-page entry once live.
+- Step 5b orchestrator re-check (3531_num.csv vs live irw_table_sets per_item):
+  - P11 194/932/772/271/176 = 2345; P13 92/2277/55 = 2424.
+  - P10_1-4 Sí 347/490/330/129, n 2418/2417/2415/2420.
+  - P14 969/1433 = 2402; P15 1005/1320 = 2325; P17 550/1132/698 = 2380; P20 1535/874 = 2409.
+  - Every per-item n matches live. All as reported.
+- Gates:
+  - normalize: 0 of 3 files changed.
+  - audit: 3 PASS, no anomalies.
+  - verify_batch: MISSING(exempt)=3 (data_labels).
+  - lint: clean (3 NOT_NEEDED rows in both files).
+  - irw-validate: ok ×3.
+  - check_provenance: exit 0 (only the standing 4-table `mixed` REVIEW).
+Queue: 7 pending, 0 in_progress. Cap (batch_402) not reached.
