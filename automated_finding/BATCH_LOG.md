@@ -15968,3 +15968,9 @@ Staged: 8 `dictionary_auto.csv` rows (`stage_dict_row.py`), 8 `tags/tags_auto.cs
 rows (Internet-based, Survey/questionnaire, Likert, nld; `test_tags_union.R`
 passes), 8 not-shipped `itemtext_provenance.csv` records. No
 `mapping_verification.csv` rows (no item text shipped).
+
+### 2026-09-24 — batch 5 uploaded
+
+ben-domingue confirmed the 8 `depue_*` response tables are uploaded. No item text
+to stamp; the 8 not-shipped provenance records stay unstamped by design.
+Dictionary and tag rows ride in on #2402 (merge is the accept).

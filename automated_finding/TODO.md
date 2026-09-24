@@ -41,7 +41,7 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
 ## From the 2026-09-24 PMC sweep (batch 5)
 
-- [ ] **8 tables (95,438 responses) need uploading**: `irw_output/depue_2023_cfq`,
+- [x] **8 tables (95,438 responses) uploaded** (ben-domingue, confirmed 2026-09-24). Original: `irw_output/depue_2023_cfq`,
   `_gds15`, `_pwi`, `_subjcog`, `_hads_a`, `_cerq`, `depue_2021_lsns6`, `_brs`.
   No item text this batch (`itemtext_output/` is empty). Dictionary and tag rows
   are staged in `dictionary_auto.csv` / `tags/tags_auto.csv`.
