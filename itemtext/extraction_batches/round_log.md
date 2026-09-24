@@ -25344,3 +25344,18 @@ Tables: goldberg_2018_spa_skill_proficiency, goldberg_2018_spa_skills, goldberg_
   - PSKILL: 700 complete respondents, 528 exact permutations.
   - SPEO1/SPEY1 labels end ">= age 18"/"< age 18"; counts 32/360/308 vs 145/430/115.
 Queue: 16 pending, 0 in_progress. Cap (batch_402) not reached.
+
+## batch_397 — 2026-09-24T14:06-07:00 (3 tables: 2 written / 1 blocked / 0 failed → done 2 / blocked 1 / failed 0, yield 67%)
+Tables: goldberg_2018_spa_spey, goldberg_2018_spa_talents, matosaslopez_2022_bars_teaching. Three agents, one per table, no kills. Circuit breaker: 0% failed. The goldberg pair reused the batch_394 SPA.por / SPA-1.sav / SPA.pdf cache; this closes out the goldberg_2018_spa_* family (beliefs_about_intelligence still blocked on name length).
+- Numbering: batch_396 was the highest, so this is batch_397 (same "below 300" wording issue noted at batch_396).
+- `goldberg_2018_spa_spey` — done, clean. SPEY1-12 x 3 = 36 rows, data_labels: the "BEFORE AGE 18" column block of SPA.pdf p.7, mirroring batch_396's SPEO (same instrument/instructions, section_prompt distinguishes the blocks). SPEY3 ships the printed parenthetical that the .por label drops. SPEY8 has no resp=3 respondents in source or live; the printed option still ships.
+- `goldberg_2018_spa_talents` — done, with a minor caveat. ABILITY1-9 x 9 = 81 rows, data_labels, SPA.pdf p.6 "Your Abilities: Comparing Yourself to Others". resp is 0-8 and unshifted; option_text = printed headers "0 - 10%" .. "80 - 90%". The form has no 90-100% bin, so resp 8 is in effect the top bin (form design, not a defect; no public_note).
+- `matosaslopez_2022_bars_teaching` — **blocked** (retry test NO). **Response-table defect:** the live table pools two DIFFERENT BARS instruments under BARS_1..10. The blended deposit (Zenodo 15160903, 1,436 ids) uses LMS-centred anchors from Behav Sci 2022 App. A (CC BY 4.0). The face-to-face deposit (Zenodo 15151307, 888 ids) uses anchors from JUTLP 2019 App. B (CC BY-ND 4.0). data/matosaslopez_2022_bars_teaching.py collapsed them because the ten Spanish dimension labels match, but the anchors differ, so the same-instrument collapse rule does not apply. Fix: split the table by teaching mode. The blended half would then be extractable; the face-to-face half needs a rights ruling. pending_index_notes row written. Not filed as an issue.
+- Step 5b orchestrator re-check:
+  - Per-item means from both xlsx: blended 2.52-3.27 vs face-to-face 3.79-4.29 on every item (BARS_8 2.52 vs 4.05, BARS_10 2.60 vs 3.95), as the agent reported.
+  - A cached Behav Sci appendix image shows LMS-specific anchors (online office hours, monthly video lecture, resources in the LMS).
+  - JUTLP text carries the face-to-face BARS_1 anchor as quoted.
+  - SPA.por: SPEY1 145/430/115, SPEY6 632/41/3, SPEY8 643/29/0, labels end "< age 18"; ABILITY value labels 0='0-10%'..8='80-90%'; 0 of 719 complete ABILITY rows all-distinct.
+  - All as reported.
+- Gates: normalize 0 of 2; audit 2 PASS, no anomalies; verify_batch MISSING(exempt)=2 (data_labels); lint clean (2 NOT_NEEDED rows in both files); irw-validate ok x2; check_provenance exit 0 (only the standing 4-table `mixed` REVIEW).
+Queue: 13 pending, 0 in_progress. Cap (batch_402) not reached.
