@@ -15683,3 +15683,11 @@ UWES is additionally register-blocked (irw#1955); ERI's within-subscale order is
 unrecoverable. Banked: C1-C10's per-item means/SDs match Table 2's
 job-satisfaction aspect rows in printed order (C1/C7 tie at 4.2 +/- 1.3), so the
 C-codes can be tied to aspect names -- labels, not stems.
+
+### 2026-09-23 — batch 3 uploaded
+
+ben-domingue confirmed the upload (after #2389 merged). `itemtext_provenance.csv`
+and `itemtext/mapping_verification.csv` are stamped `uploaded=2026-09-23` for all
+8 item text tables. The three `ge_2021_*` not-shipped provenance records stay
+unstamped by design. Still open: the 4 language-note issues-page entries and the
+Chen 2023 prefix decision (TODO.md).
