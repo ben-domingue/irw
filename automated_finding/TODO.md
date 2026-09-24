@@ -26,7 +26,8 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
 ## From the 2026-09-23 PMC sweep (batch 3)
 
-- [ ] **8 tables (32,469 responses) + 8 item text tables need uploading.**
+- [x] **8 tables (32,469 responses) + 8 item text tables uploaded** (ben-domingue,
+  confirmed 2026-09-23; `uploaded=2026-09-23` stamped). Original:
   `irw_output/`: `sison_2022_hiv_testing_stigma`, `sison_2022_provider_mistrust`,
   `zhang_2024_smoking_rationalisation`, `zhang_2024_ftcd`, `che_mood_2024_pvhs`,
   `abdulkader_mohamed_2022_exer_knowledge`, `_exer_attitude`, `_exergame_exp`;
