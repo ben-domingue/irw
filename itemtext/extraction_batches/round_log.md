@@ -24198,3 +24198,36 @@ scoped to `spain_2025_*`. All three agents re-derived allow from CIS's reuse-con
 
 Gates: normalize 0 changes. audit 3 PASS. verify_batch 3 exempt. lint clean (3 rows). irw-validate ok ×3.
 check_provenance exit 0. Its 2 `mixed` REVIEW items were already there before this batch. Cap (batch_330) not reached.
+
+## batch_325 — 2026-09-23 ~17:56–18:08 PDT, 3 tables, 3 agents
+
+**Written 3 / blocked 0 / failed 0 — yield 3/3.** Breaker not tripped. 10 pending remain.
+
+These are the first three spain_2026_confidence_* tables, from CIS Estudio 3565, *Índice de Confianza del Consumidor, mayo 2026*
+(N=3028). All three are data_labels (item = lowercased CIS variable name, set by `data/spain_2026_confidence.do`).
+The Spanish text is from cues3565.pdf and the English in `_translated` is IRW machine translation, so each table owes an
+issues-page line once it ships. Each agent re-ran the .do's logic on 3565_num.csv and reproduced the live table row for row.
+None of these questions has a "(NO LEER)" middle code, so only N.S./N.C. (8/9) are dropped.
+
+- `spain_2026_confidence_acquisition` (P.1 grid, p1_1–p1_4, Sí/No). resp 1 merges two CIS codes: "Sí, él/ella ha
+  adquirido" and "Sí, lo ha adquirido otra persona de su hogar". Its option_text carries both labels joined with "; ",
+  and public_note discloses the merge. Goods are tied to codes by CIS's codebook codigo3565.pdf.
+  **Dictionary defect:** Reference says "Estudio sobre la situación internacional, Estudio 3564", but the dictionary's
+  own URL and the data are Estudio 3565 (ICC mayo 2026). The Reference needs correcting, and the sibling rows probably do too.
+- `spain_2026_confidence_expectations` (p6, p10, p11; 3 options each). p10's item_text keeps the printed interviewer
+  gloss that defines "bienes duraderos" ("Coches, muebles, electrodomésticos… Nunca viviendas"), because it defines
+  what the item refers to. Stripping it would be consistent with the sibling rule of dropping interviewer directions;
+  that is a triage call. The guest short URL `/documents/d/guest/md3565` is HTTP 410; MD3565.zip is linked from the study page.
+- `spain_2026_confidence_macro` (p15 inflation, p16 interest rates, p17 housing prices; 3 options each). The p15 stem quotes
+  that wave's figure ("del 3,2%"), and it is kept verbatim.
+
+Step 5b orchestrator re-check: I recounted 3565_num.csv. Every count the agents reported matches: p1_1 204/134,
+p1_4 707/233 with 21 marking both, p6 308/2325/297 (+62/36), p10 474/1689/812 (+37/16), p11 580/1301/1116 (+19/12),
+p15 2025/768/141 (+74/20), p16 1755/840/163 (+251/19), p17 2237/594/145 (+46/6). ESTUDIO=3565 on all 3028 rows. I also
+confirmed the dictionary row's Reference text reads Estudio 3564.
+
+**For Ben (repeat):** the CIS allow row in instrument_rights_register.csv is still scoped in words to `spain_2025_*`,
+and all three agents re-derived allow from CIS's reuse-conditions page. I did not edit the register.
+
+Gates: normalize 0 changes. audit 3 PASS. verify_batch 3 exempt. lint clean (3 rows). irw-validate ok ×3.
+check_provenance exit 0 (its 2 `mixed` REVIEW items are pre-existing). Cap (batch_330) not reached.

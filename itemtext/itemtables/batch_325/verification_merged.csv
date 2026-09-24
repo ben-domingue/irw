@@ -1,0 +1,4 @@
+"table","batch","mapping_basis","uploaded","route","status","evidence"
+"spain_2026_confidence_acquisition","batch_325","data_labels","","data_labels","NOT_NEEDED","mapping_basis=data_labels: source file ties each code to its text"
+"spain_2026_confidence_expectations","batch_325","data_labels","","data_labels","NOT_NEEDED","mapping_basis=data_labels: source file ties each code to its text"
+"spain_2026_confidence_macro","batch_325","data_labels","","data_labels","NOT_NEEDED","mapping_basis=data_labels: source file ties each code to its text"
