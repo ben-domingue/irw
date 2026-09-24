@@ -1,0 +1,4 @@
+"table","batch","mapping_basis","uploaded","route","status","evidence"
+"spain_2026_elections_gavira","batch_360","data_labels","","none","NOT_NEEDED","mapping_basis=data_labels: .do lowercases CIS column names (mgavira_1..mgavira_6); ES3566 syntax / 3566.sav variable labels tie each code to its P.5c3 text directly"
+"spain_2026_elections_leaderscampaign","batch_360","data_labels","","none","NOT_NEEDED","mapping_basis=data_labels: .do lowercases CIS column names (campa_lideres_1..campa_lideres_5); ES3566 syntax / 3566.sav variable labels tie each code to its P.5c text directly"
+"spain_2026_elections_maillo","batch_360","data_labels","","none","NOT_NEEDED","mapping_basis=data_labels: .do lowercases CIS column names (amaillo_1..amaillo_6); ES3566 syntax / 3566.sav variable labels tie each code to its P.5c5 text directly"
