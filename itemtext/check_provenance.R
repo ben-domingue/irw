@@ -127,7 +127,7 @@ for (f in files) {
 
     ## A withdrawn table ships no item text at all, so it has nothing to disclose.
     ## The signal is the public_note's opening sentence, which every withdrawal
-    ## written by tools/withdraw_wording_rights.py shares; there is no `withdrawn`
+    ## written by tools/withdrawals/withdraw_wording_rights.py shares; there is no `withdrawn`
     ## column to read, and the `uploaded` stamp deliberately stays put as history.
     if ("public_note" %in% names(x)) {
         pn <- ifelse(is.na(x$public_note), "", trimws(x$public_note))

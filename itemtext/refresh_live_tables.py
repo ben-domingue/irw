@@ -4,6 +4,9 @@
     python3 itemtext/refresh_live_tables.py            # rewrite live_tables.csv
     python3 itemtext/refresh_live_tables.py --check    # exit 1 if it is out of date
 
+Both modes also report where `extraction_batches/queue_state.csv` disagrees
+with what is live (irw#2230). That report never changes the exit status.
+
 Why this exists (irw#1828). `provenance.csv` carries an `uploaded` column that
 is a hand-maintained mirror of a fact Redivis already holds. Whether a table is
 live is not an opinion; it is one API call. Every stale row is someone having
@@ -24,6 +27,18 @@ real virtue -- it gates an upload wrap-up on a machine with no token. A
 committed snapshot keeps that property and moves the staleness somewhere a diff
 can see. The trade is that it is only as fresh as its last refresh, so the file
 stamps its own date and the checker reports how old it is.
+
+WHY IT ALSO WATCHES THE QUEUE (irw#2230). A round takes `status=="pending"` to
+mean no item text exists for a table, and that is not what it means -- it means
+nobody has claimed the row. `preussmattsson_2022_ownership` was re-extracted on
+the wrong item axis because of it, over the top of a correct published table,
+and a sweep then found six more `pending` rows and one `blocked` row that were
+already published. Six of those seven were inside a single claim. A round
+runner that has to remember to cross-check is the same class of thing that
+produced the defect, so the check lives here, where the live side is already in
+hand and gets refreshed daily. It is REPORT-ONLY by design: it prints and
+returns nothing, because the fix is always a judgement about one table and
+never something a script should make.
 
 Records the draft separately from the published version, because they answer
 different questions. A table sitting in `next` is not something a reader can
@@ -139,6 +154,69 @@ def fetch() -> tuple[list[tuple[str, str, str]], list[str]]:
     return rows, unreadable
 
 
+QUEUE = HERE / "extraction_batches" / "queue_state.csv"
+
+
+def read_queue(path: Path = QUEUE) -> dict[str, str]:
+    """{table: status} from the extraction queue. Missing file -> {}."""
+    if not path.exists():
+        return {}
+    with path.open(newline="", encoding="utf-8") as fh:
+        return {r["table"]: r["status"] for r in csv.DictReader(fh)
+                if r.get("table")}
+
+
+def queue_divergence(live: dict[str, str],
+                     queue: dict[str, str] | None = None) -> list[tuple[str, str]]:
+    """Tables the queue calls unfinished that are in fact published (irw#2230).
+
+    Returns [(table, queue status)]. Only this direction is reported, and the
+    asymmetry is deliberate:
+
+    * PUBLISHED but the queue says anything other than `done` -- reported. The
+      queue is making a claim about the corpus that the corpus contradicts, and
+      acting on it re-extracts a table that already has item text.
+    * PUBLISHED with no queue row at all -- counted, not listed. The queue is an
+      extraction worklist seeded from a candidate set, not a register of every
+      table, so this is structural rather than a defect; it stands at several
+      hundred and printing it every run would bury the line above.
+    * `done` but not live -- NOT reported. That is the ordinary state of every
+      batch between merging and upload, so it would fire on healthy work.
+    """
+    queue = read_queue() if queue is None else queue
+    published = {t for t, st in live.items() if st == "published"}
+    return sorted((t, queue[t]) for t in published
+                  if t in queue and queue[t] != "done")
+
+
+def report_divergence(live: dict[str, str]) -> None:
+    """Print the queue/live divergence. Never raises, never changes exit status."""
+    try:
+        queue = read_queue()
+    except Exception as exc:  # noqa: BLE001
+        # A watcher that can break the thing it watches is worse than no
+        # watcher: the snapshot refresh is the job here, and this is a comment
+        # on it.
+        print(f"NOTE: could not read {QUEUE.name} for the divergence check ({exc})")
+        return
+    if not queue:
+        return
+    drift = queue_divergence(live, queue)
+    published = {t for t, st in live.items() if st == "published"}
+    unlisted = len(published - set(queue))
+    if drift:
+        print(f"\nQUEUE DIVERGENCE: {len(drift)} table(s) are published but "
+              f"queue_state.csv does not say `done` (irw#2230) --")
+        for t, st in drift:
+            print(f"  {t}: queue says {st}, but item text is published")
+        print("  Item text already exists for these. Correct the queue row "
+              "rather than extracting them.")
+    if unlisted:
+        print(f"\nNOTE: {unlisted} published table(s) have no queue_state row at "
+              f"all. The queue is a worklist, not a register, so this is "
+              f"expected; it is counted here only so a jump is visible.")
+
+
 def render(rows: list[tuple[str, str, str]], asof: str,
            unreadable: list[str] | None = None,
            carried_from: str | None = None) -> str:
@@ -200,16 +278,19 @@ def main() -> int:
                  for t in drift if have.get(t, "absent") != want.get(t, "absent")]
         if not drift:
             print(f"live_tables.csv is current ({len(want)} tables, taken {asof})")
+            report_divergence(want)
             return 0
         for t, was, now in drift:
             print(f"  {t}: snapshot says {was}, Redivis says {now}")
         print(f"\n{len(drift)} table(s) drifted -- rerun without --check")
+        report_divergence(want)
         return 1
     OUT.write_text(render(rows, dt.date.today().isoformat(),
                           unreadable, prior_asof))
     n_pub = sum(1 for _, _, st in rows if st == "published")
     print(f"wrote {OUT.relative_to(SRC)}: {n_pub} published, "
           f"{len(rows) - n_pub} in draft")
+    report_divergence({t: st for t, _, st in rows})
     return 0
 
 

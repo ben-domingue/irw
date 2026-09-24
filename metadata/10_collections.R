@@ -136,7 +136,13 @@ main <- function() {
     tags$meta_table <- unname(key[tolower(tags$table)])
 
     dangling <- sum(is.na(tags$meta_table))
-    n_tagged <- length(unique(stats::na.omit(tags$meta_table)))
+    ##What a `cname` rule actually searches: tables whose tags row has a
+    ##construct name, not every tagged table. #1704 filled the other tag columns
+    ##for ~1,450 tables and Construct Name for almost none of them, so "tagged"
+    ##reached ~98% while this stayed near half (irw#1719, 17.3).
+    has_cname <- !is.na(tags$meta_table) & !is.na(tags$construct_name) &
+                 nzchar(trimws(tags$construct_name))
+    n_searched <- length(unique(tags$meta_table[has_cname]))
 
     ##Warn (do not fail) when metadata.csv is missing configured warehouses --
     ##"metadata-complete" is complete over irw_metadata(), not over the live
@@ -212,9 +218,11 @@ main <- function() {
             ". Check the curated file for repeats.")
 
     ##Denominator belongs in the definition -- `coverage` alone is an opaque
-    ##token, and "63 tables" means nothing without "of the 2,251 tagged".
-    tagged_note <- sprintf(" (searched the %s tagged tables of %s; coverage incomplete)",
-                           format(n_tagged, big.mark = ","), format(nrow(meta), big.mark = ","))
+    ##token, and "63 tables" means nothing without "of the 2,467 searched".
+    ##irw_site/collections.qmd parses the two numbers out of this string, so
+    ##keep the "(searched the N of M tables" shape if you reword it.
+    tagged_note <- sprintf(" (searched the %s of %s tables that have a construct name; coverage incomplete)",
+                           format(n_searched, big.mark = ","), format(nrow(meta), big.mark = ","))
     reg$definition <- ifelse(reg$coverage == "tagged-subset-only",
                              paste0(reg$definition, tagged_note), reg$definition)
 
@@ -231,6 +239,7 @@ main <- function() {
         sprintf("tables reached         : %d of %d", length(unique(mem$table)), nrow(meta)),
         sprintf("in >1 collection       : %d", sum(per_table[as.integer(names(per_table)) > 1])),
         sprintf("tags rows w/o a table  : %d", dangling),
+        sprintf("cname rules searched   : %d of %d", n_searched, nrow(meta)),
         "", "by coverage:",
         paste0("  ", names(table(reg$coverage)), ": ", as.integer(table(reg$coverage))),
         "", "counts by collection:",

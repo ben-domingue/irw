@@ -493,7 +493,7 @@ which is the one-release gap this deliberately accepts. Historical note follows.
 
 **Was outstanding when this was written: the two live tables are still published.** The takedown was
 scripted and dry-run — 745 draft tables in `irw_text`, both targets present, `dasilva_2019_hexaco24__items`
-asserted to survive — but Redivis was down, so Ben held it. `tools/withdraw_hexaco.py` runs it with
+asserted to survive — but Redivis was down, so Ben held it. `tools/withdrawals/withdraw_hexaco.py` runs it with
 `APPLY=1`. Until it runs, `metadata/itemtext_metadata.csv` still carries both rows, correctly: they
 describe what is live, and removing them early would make the tracked baseline lie. **Version state, rechecked 2026-09-06:** `irw_text` is now at **v19.0** — two release cuts happened
 after this was staged, and both tables are still live in it (732 tables). No draft is open, so
@@ -549,7 +549,7 @@ presence recorded which agent happened to look, not which instrument was restric
 the strongest argument against ever rebuilding it.
 
 **Scope applied 2026-09-06.** All thirteen deleted from the `irw_text` draft by
-`tools/withdraw_wording_rights.py` (745 → 732 draft tables, keep-set asserted intact), so they
+`tools/withdrawals/withdraw_wording_rights.py` (745 → 732 draft tables, keep-set asserted intact), so they
 leave at the next release; until then the wording is still in v18.0 and the deletion is
 recoverable. Each keeps its `uploaded` date and its `verify_<table>.R`, carries the withdrawal in
 `provenance.csv` `public_note`, is `blocked` in `queue_state.csv`, and has a
