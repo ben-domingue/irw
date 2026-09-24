@@ -24199,7 +24199,7 @@ scoped to `spain_2025_*`. All three agents re-derived allow from CIS's reuse-con
 Gates: normalize 0 changes. audit 3 PASS. verify_batch 3 exempt. lint clean (3 rows). irw-validate ok ×3.
 check_provenance exit 0. Its 2 `mixed` REVIEW items were already there before this batch. Cap (batch_330) not reached.
 
-## batch_325 — 2026-09-23 ~17:56–18:08 PDT, 3 tables, 3 agents
+## batch_325 — 2026-09-23 ~17:56–18:02 PDT, 3 tables, 3 agents
 
 **Written 3 / blocked 0 / failed 0 — yield 3/3.** Breaker not tripped. 10 pending remain.
 
