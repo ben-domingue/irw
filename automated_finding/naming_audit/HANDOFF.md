@@ -124,7 +124,7 @@ just names — a run that invented surnames may have invented other metadata.
 
 ## Deliverables
 
-1. `automated_finding/naming_audit_suspects.csv` — one row per suspect:
+1. `automated_finding/naming_audit/naming_audit_suspects.csv` — one row per suspect:
    `table, name_surname, name_year, resolved_first_author, resolved_all_authors,
    resolved_year, doi, registrant, verdict, batch_date`
    where `verdict` is one of `name_absent_from_authors` / `non_first_author` /

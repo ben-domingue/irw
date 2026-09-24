@@ -30,7 +30,7 @@ from pathlib import Path
 import pandas as pd
 import requests
 
-HERE = Path(__file__).resolve().parent
+HERE = Path(__file__).resolve().parent.parent
 OUT_DIR = HERE / "itemtext_output"
 RESP_DIR = HERE / "irw_output"
 XML = "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10977085/fullTextXML"

@@ -69,6 +69,11 @@ readable: before it, every scheduled cloud run committed another
 | `runs/` | `candidates*.csv`, `irw_triage*.csv`, `irw_retriage*.csv`, `triage_test*.csv`, the dated `*_monthly_*` outputs | Disposable once the batch is written up in `BATCH_LOG.md`. Gitignored. |
 | top level | `search_terms_log.csv`, `plos_seen_dois.csv`, `pmc_seen_dois.csv`, `repo_triage_seen_keys.csv`, `license_blocked_candidates.csv`, `plos_deferred_candidates.csv`, `itemtext_provenance.csv`, `cov_vocabulary.json`, `biblio_*.csv`, `BATCH_LOG.md`, `TODO.md` | Standing records — never delete, never move into `runs/`. Tracked. |
 | `human_review/` | `human_review_<mode>_batch<N>.csv` | Permanent archive of genuinely-ambiguous rows. Tracked. |
+| `leads/` | `<mode>_leads_<date>.csv`, `lead_worklist_*.csv` — the tracked, per-lead verdicts (`status` column) from a batch that ranked more leads than it ran | Standing records. Tracked. |
+| `itemtext_verification/` | `verify_<table>.R` (Step 5b mapping checks) and `make_itemtext_<table>.py` (scripts that built a table's item text) | Cited by path from `itemtext_provenance.csv`. Tracked. |
+| `naming_audit/` | the #1686 table-name audit: tool, `FINDINGS.md`, `decision.md`, `HANDOFF.md`, `naming_audit_suspects.csv` | Closed study, kept as evidence. Tracked. |
+| `journal_scout/` | the yield study used to decide which journals go on `irw_discover_pmc.py`'s list | Tracked. |
+| `archive/` | single-use scripts and fix files that have already done their job | Kept for provenance, not rerun. Tracked. |
 | `irw_output/` | downloaded/converted data | Regenerable, gitignored. |
 | `itemtext_output/` | `<table>__items.csv` generated alongside the batch's response tables (Step 3.5) | Regenerable, gitignored. **Only `*__items.csv`** — an uploader walks this directory recursively; `red_up` excludes anything else when the target is `irw_text`, but keep it clean. |
 

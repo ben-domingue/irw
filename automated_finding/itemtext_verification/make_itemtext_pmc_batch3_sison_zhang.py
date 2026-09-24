@@ -29,7 +29,7 @@ import pandas as pd
 import pyreadstat
 import requests
 
-HERE = Path(__file__).resolve().parent
+HERE = Path(__file__).resolve().parent.parent
 OUT_DIR = HERE / "itemtext_output"
 RESP_DIR = HERE / "irw_output"
 UA = {"User-Agent": "IRW-Finder/1.0 (ben.domingue@gmail.com)"}

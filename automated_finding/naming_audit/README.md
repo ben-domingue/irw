@@ -12,8 +12,8 @@ effectively permanent.
 
 Built for the 2026-08-27 sweep behind
 [issue #1686](https://github.com/ben-domingue/irw/issues/1686). Findings and the
-decision that came out of it are in `../naming_audit_README.md` and
-`../naming_audit_suspects.csv`.
+decision that came out of it are in `FINDINGS.md` and
+`naming_audit_suspects.csv`.
 
 ## Use
 
@@ -45,7 +45,7 @@ Dataverse, OSF, Zenodo and Dryad — and compares the surname against the **full
 author list, flagging only names absent from it entirely. That is what found
 every real error.
 
-Verdicts are documented in `../naming_audit_README.md`.
+Verdicts are documented in `FINDINGS.md`.
 
 ## Two things you must not "simplify"
 
