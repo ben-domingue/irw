@@ -24711,3 +24711,20 @@ mapping_verification.csv.
   Entertainment_11). The wording source is the accepted manuscript (hsu-hh.de), not the closed APA version.
 - Sibling manolika_2021_dirty_dozen is not in the queue (not claimed; nothing done).
 Queue: 7 pending, 0 in_progress. Cap (batch_348) not reached.
+
+### batch_343 — 2026-09-23T21:49 — 3 tables: 3 written / 0 blocked / 0 failed (yield 3/3)
+Three agents, no kills. All Step 4 gates clean: audit 3 PASS, verify_batch 1 PASS + 2 exempt (data_labels), lint clean,
+irw-validate ok x3, check_provenance exit clean (its standing 38-table issues-page backlog predates this round).
+- matranga_2019_hpv_knowledge — done, paper_explicit, PARTIAL. 16 items typed from the paper's Figure 1 (an image, PeerJ CC BY).
+  Table 3 per-item M/SD by group reproduces 63/64 cells within 0.011; q9/q13 tie on means and separate on SD. Paper defects
+  (not data): Table 3 group headers swapped vs Table 1 ages; Q7 group-2 SD printed 1.15 vs 1.46 observed. **Response code 6**
+  (not a printed option) left blank, with a public_note. **Orchestrator re-check:** the agent reported 108 code-6 responses, but
+  both live data and the S1 xlsx give **110** (per-item counts as reported: q8 18, q15 16, q13 15, q10/q16 13, q9 0). Corrected in
+  notes, provenance, verification_merged and mapping_verification.csv. language=Italian is an inference (Palermo sample).
+- mental_health_wang_2024_gad / _phq — done, data_labels (xlsx carries text-headed duplicate columns equal to the code columns
+  958/958). Sibling pair, no collision. Both carry inferred option anchors: resp is 1-4, not the canonical 0-3, with no value
+  labels, so canonical anchors were shifted +1. **Orchestrator re-check:** both tables are floor-heavy (GAD resp 1/2/3/4 =
+  3387/2556/528/235; PHQ 4557/2872/778/415) and PHQ9.9 has the lowest item mean (1.3), which supports the ascending direction.
+  language=Chinese inferred from the sample; English shipped as translated_substitute/mixed, and part of it is canonical PHQ/GAD
+  English rather than the study's own, as the public_notes say.
+Queue: 4 pending, 0 in_progress. Cap (batch_348) not reached.
