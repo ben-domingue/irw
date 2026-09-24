@@ -24312,3 +24312,25 @@ irw-validate ok ×3. check_provenance exit 0 (only the pre-existing `mixed` REVI
 gets 3 rows appended raw (CRLF). An R round-trip re-encoded 6 unrelated older rows, so it was reverted rather than committed.
 
 Cap (batch_330) not reached. 1 pending row remains (zhu_2026_llm_meteorology_performance).
+
+## batch_329 — 2026-09-23T18:36 (1 table: 1 written, 0 blocked, 0 failed; yield 100%)
+
+Only one pending row was left, so this round claimed one table and dispatched one agent.
+
+- zhu_2026_llm_meteorology_performance (5 items × resp 1–5, data_labels, translated_substitute / study_supplied, language=Chinese).
+  This is NOT an LLM benchmark. The respondents are 348 NUIST meteorology graduate students rating LLM tools on five aspects,
+  question 10 of Zhu & Li 2026 (PLOS ONE, doi:10.1371/journal.pone.0347933, CC BY 4.0). The item text is the S1 CSV headers after
+  the shared prompt. The prompt goes in `instructions` with "10. " stripped. option_text is blank because no scale point is labelled.
+  The language is an inference, disclosed in public_note: the paper says it used Tencent Questionnaire and a Chinese university
+  sample, and the headers show translation artifacts ("big language model" ×3 / "Big Language Model", a `{fillblank-b2d1}`
+  placeholder). S1 has no Chinese text, so the study's own English ships in the base fields.
+
+Orchestrator Step 5b: confirmed the ITEM_COLS by-name mapping in data/zhu_2026_llm_meteorology_performance.py. irw_fetch
+(n=348) matches the S1 counts in all 25 item×resp cells, e.g. ease_of_use 6/25/116/112/89. Also confirmed the Tencent wording in
+the article and the header artifacts. Gates: normalize 0 changes. audit 1 PASS. verify_batch MISSING(exempt, data_labels). lint
+clean (1 NOT_NEEDED row). irw-validate ok. check_provenance exit 0 (only the pre-existing `mixed` REVIEW items). One NOT_NEEDED row
+was appended raw to mapping_verification.csv.
+
+Cap (batch_330) not reached, but the QUEUE IS NOW EXHAUSTED: 0 pending (1241 done, 287 blocked, 13 failed, 60 excluded). The next
+firing will self-cancel on the queue-exhausted condition. The 13 `failed` rows are the remaining retry candidates, and moving them
+back to pending is a human call.
