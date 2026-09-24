@@ -24869,3 +24869,12 @@ Written / blocked / failed: **3 / 0 / 0** (yield 100%). Circuit breaker: 0% fail
 - Step 5b re-check by the orchestrator on data.xlsx. **All confirmed:** the V composite equals mean(V1–V3) exactly; the C composite has r=0.26 with its item mean and O has r=−0.96, both reconfirmed; O2–AM3 r=−0.38; mean(V) correlates −0.57/−0.58/−0.56 with AP/AM/F. C, O and V all fall in the {S,V,C,O} block, and their stated direction is content-plausible, so the possible stored reversal still rests on AM alone. Unproven, noted, not acted on.
 - The `nguyen_2026_autonomy_*` family is now closed out, except `school_autonomy_support`, which is still blocked on name_length (batch_352).
 Queue: 23 pending, 0 in_progress. Cap (batch_362) not reached.
+
+## batch_354 — 2026-09-24T06:52-07:00 (3 tables, 3 agents)
+Written / blocked / failed: **3 / 0 / 0** (yield 100%). Circuit breaker: 0% failed. All `data_labels`, `study_materials` / `machine_translation` (CIS Estudio 3409, Spanish-only; English in `_translated` is IRW's, disclosed in public_note). Gates: normalize_nulls 0 of 3 changed; audit_batch 3 PASS, no anomalies; verify_batch MISSING(exempt) x3; lint clean (3 NOT_NEEDED rows, written to both verification_merged.csv and the tracker); irw-validate ok x3; check_provenance exit 0 (the three are held/not uploaded, so no issues-page line owed yet).
+- `spain_2023_identity_authenticity` (p8_1–p8_5, 20 rows): CATI region fills `@1..@20` replaced with CIS's own placeholder `(gentilicio de la C. A.)`; CIS code 7 "Ninguna" stored as resp 4.
+- `spain_2023_identity_centralism` (escalacentralismo_1–6 = PSOE/PP/VOX/Cs/Podemos/Sumar, 60 rows): only anchors 1 and 10 labelled, 2–9 blank.
+- `spain_2023_identity_europe` (p16, p17, 4 rows): resp set {1,3} — CIS volunteered midpoint code 2 dropped by the .do along with 8/9.
+- Step 5b re-check by the orchestrator: **confirmed.** `.do` line 156 does `replace resp = 4 if resp == 7`; lines 325–326 drop p16/p17 codes {2,8,9}. Live per-item n (irw_table_sets): europe 7244/7147 = 7643 − (254+118+27) / 7643 − (238+225+33) exactly; authenticity p8_1 n=7584 = 1865+2393+1959+1367 exactly.
+- Five `spain_2023_identity_*` siblings (identification, patriotism, pride, state, territorial) remain pending; same CIS 3409 microdata and conventions apply.
+Queue: 20 pending, 0 in_progress. Cap (batch_362) not reached.
