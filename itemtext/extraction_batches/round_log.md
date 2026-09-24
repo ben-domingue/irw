@@ -25456,3 +25456,28 @@ Queue: 1 pending (spain_2025_sanitation_system), 0 in_progress. Cap (batch_402) 
 - Gates: normalize 0 changes; audit_batch PASS; verify_batch MISSING(exempt); lint clean; irw-validate ok. check_provenance shows only the standing backlog of issues-page entries owed.
 - Step 5b (orchestrator re-check): I tabulated 3531_num.csv myself: P1 8/9 = 6/7, P2 98/99 = 12/9, P12 8/9 = 182/8. After the drops that leaves 2414 + 2406 + 2237 = 7057, which matches the live irw_table_sets n_rows of 7057. Items are {P1,P2,P12} and resp is 1..10.
 - Queue: 0 pending, 0 in_progress. All 30 spain_2025_* tables are done. **Cap reached (batch_402).** No further rounds.
+
+## 2026-09-24 — #2381 slices 5–6 (batch_379–402): 59 uploaded to irw_text, 11 not shipped
+
+Slice 5 (43 queued, 0264ae02) and slice 6 (25, 4133766c, queued by next_slice.sh); cap raised to batch_402 (678ee4c8).
+The chain's 1-in-5 stop tripped twice on non-rights blocks; Ben ruled that only RIGHTS blocks and failures feed it
+(oneoff/itemtext-rights-bank/rights_blocks.py). No rights blocks in either slice. Written: slice 5 36/41 processed
+(2 excluded as wrong-now), slice 6 23/25. All 59 uploaded to irw_text in three groups (379-385, 386-393, 394-402)
+after dry runs (all NEW, none in any shard); verified rows, COUNT(DISTINCT item), no duplicate rows; draft diff = exactly
+these 59. Ben released 2026-09-24 (irw_text 881 tables). Stamped `uploaded=2026-09-24` in 25 provenance files and 59
+mapping rows; removed the 59 CSVs. Issues entries: issues_entries_379-385 (12), 386-393 (21), 394-402 (15).
+
+**Wrong-now, withdrawn (Ben: withdraw first, rebuild later; PR #2410):** DMCT_Addis_2020_MCT (#2408, resp is the answer
+key) and PBS_Surrain_2019_PoB (#2409, two studies' codes mean different questions; 319 duplicated respondents) from the
+item_response_warehouse draft; matosaslopez_2022_bars_teaching (#2412, two BARS instruments under one code set) from
+the _4 draft.
+
+**Held on table-name length (>40 chars), CSVs kept:** goksel_2026_embarrassment_moralityandwarmth (381),
+spain_2026_disinformation_humorperception (391), goldberg_2018_spa_beliefs_about_intelligence (394) — with
+nguyen_2026_autonomy_school_autonomy_support (352) and jian-wen-… (340), five await one ruling (waive or rename).
+
+**No wording published (determinate):** goksel_2026_embarrassment_liking (381), _similarity (382),
+musifeast17_vanderwalle_2025 (384).
+
+**Leads:** the nine spain_2026_disinformation_* dictionary References cite CIS Estudio 3565, source is 3563;
+coh_goodman_2023's response table carries school name/location/age/country of origin (09-19 personal-data lead).
