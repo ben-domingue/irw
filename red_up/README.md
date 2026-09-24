@@ -29,7 +29,9 @@ anything else. The old scripts `chdir`'d into their own directory first, so
 `python3 upload.py .` never meant your shell's directory.
 
 **Picks a default dataset.** Any `*__items.csv` present ⇒ the newest item-text
-shard; otherwise the newest core shard. The menu shows every dataset in
+shard, unless `ITEMTEXT_DEFAULT` in `targets.py` pins one (currently
+`irw_text`, because `irw_text_2` is at 987 of 1000 tables); otherwise the newest
+core shard. A table that already exists is still updated where it lives. The menu shows every dataset in
 `metadata/redivis_config.R` — Enter takes the default.
 
 Both response data and item text are **shard lists**, because Redivis caps a

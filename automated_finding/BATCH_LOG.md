@@ -15870,3 +15870,107 @@ ben-domingue confirmed the `rogowska_2023_maia2` item text upload; `uploaded=202
 stamped in `itemtext_provenance.csv` and `itemtext/mapping_verification.csv`. Only the
 issues-page entry remains open.
 Issues-page entry opened as datapages/irw#241.
+
+## 2026-09-24 — PMC batch 5 (recycled ranked terms, fifth sweep off `pmc_term_backlog.csv`)
+
+First batch run against the post-#2396 layout. Nothing in the discovery path
+hardcodes a moved file (every `--out` still routes through `in_runs_dir()`), so
+the run needed no code changes; the batch's tracked leads went to
+`leads/pmc_leads_2026-09-24.csv` rather than the top level. One stale pointer
+noted, not changed: `rank_leads.py`'s usage line writes `--leads
+runs/leads_<x>.csv`, which is the disposable ranking -- the tracked verdict file
+is the `leads/` one.
+
+Ran `irw_discover_pmc.py` over the **next 50 unrun terms** by projected new DOIs
+(175 of the 204 projected across the 91 unrun; "thermometer scale" .. "Cognitive
+Failures Questionnaire"). Marked in a new `run_2026_09_24` column; **41 ranked
+terms remain unrun** (29 projected new DOIs -- one more batch at most). Terms
+appended to `search_terms_log.csv`. No query failed.
+
+**80 candidates** over 9 journals:
+
+| flag | n |
+|---|---|
+| `no_usable_file` | 50 |
+| `license_restricted` | 13 |
+| `human_assistance` | 10 |
+| `download_failed` | 5 |
+| `external_unresolved` | 2 |
+
+Step 2b chained automatically: `aggregate_continuous` 5, `human_review` 3,
+`recoverable_format` 1, `worth_retrying` 1; `[human_review] archived 3 row(s)` to
+`human_review/human_review_pmc_2026-09-24.csv`.
+
+**17 rows -> `leads/pmc_leads_2026-09-24.csv`, all terminal**, worked by four
+parallel agents: 1 study shipped (two DOIs), 6 blocked on licence, 6 rejected on
+content, 1 skipped on PII, 1 below N. Four rows (butterfly pheromones, vascular
+cells, fossil rodents, and `bs16071107` already blocked in batch 4) were closed
+from the title/ledger alone.
+
+**8 tables, 95,438 responses, from one panel** -- De Pue et al., Flemish adults
+65+ surveyed online in Dutch at three COVID-19 waves:
+
+| table | rows | ids | items | resp | waves |
+|---|---|---|---|---|---|
+| `depue_2023_cfq` | 33,077 | 636 | 25 | 0-4 | 1-3 |
+| `depue_2023_gds15` | 20,729 | 640 | 15 | 0-1 | 1-3 |
+| `depue_2023_pwi` | 16,174 | 640 | 16 | 0-10 | 1-3 |
+| `depue_2023_subjcog` | 8,663 | 640 | 8 | 1-10 (mixed by design) | 1-3 |
+| `depue_2021_lsns6` | 3,812 | 636 | 6 | 0-5 | T1 |
+| `depue_2021_brs` | 3,798 | 633 | 6 | 1-5 | T1 |
+| `depue_2023_hads_a` | 2,597 | 371 | 7 | 0-3 | T3 |
+| `depue_2023_cerq` | 6,588 | 366 | 18 | 1-5 | T3 |
+
+Script `data/depue_2023_covid_older_adults.py`. The 2021 paper
+(`10.1038/s41598-021-84127-7`, OSF re7sm, T1 N=640) and the 2023 paper
+(`10.1038/s41598-023-36718-9`, OSF vfwus, T1-T3 N=371) are one sample: every 2023
+T1 row matches exactly one 2021 row on 81 T1 columns (runner-up <=66/81,
+asserted), so the 2021 participant number is `id` throughout and the two ship as
+one table set rather than duplicates. Both nodes public, licence UUID
+563c1cf88c5e4a3877f9e96a = CC BY 4.0. The vfwus file is `;`-delimited with comma
+decimals, which is what broke triage. PWI deposited x10, shipped on 0-10.
+Gender disagreed for 3 people; the 2023 file's value (consistent across its
+waves) is used. Nationality dropped: the file codes all 640 Belgian where the
+paper's Supp. Table 1 reports 8 non-Belgians. Totals reproduce as item sums;
+no imputation; `run_qc` no fail; `irw-validate` upload profile passes all 8.
+Duplicate-pattern check (see COPSOQ below): 4/1,377 CFQ person-waves and 4/366
+CERQ -- the long scales are clean; higher rates on GDS/LSNS/BRS/HADS are what
+short floor-heavy scales produce.
+
+Item text: not shipped for any of the 8 -- bare codes, no variable or value
+labels at either level; administered in Dutch and the Dutch wording is in
+neither deposit. Text lives in the published Dutch instruments (CFQ Merckelbach
+1996, GDS-15 Bleeker 1985, PWI-A Van Beuningen & de Jonge 2011, BRS Soer 2019,
+HADS Spinhoven 1997, CERQ-short Garnefski & Kraaij 2006, LSNS-6 Lubben 2006);
+the ad hoc subjcog items have only English paraphrases in the node's
+ReadThisFirst.txt.
+
+**Held on trust: CENSOPAS-COPSOQ (`10.1186/s12889-022-13328-0`, figshare
+14138660, CC BY 4.0, 1,707 x 69 items).** A script was written, but the file
+has 67 rows that exactly copy an earlier row on all 72 columns (16 clusters, up
+to 16 copies) and 137 rows in a near-duplicate network -- pairs differing in <=5
+of 72 cells, against a median nearest-neighbour distance of 27 -- nearly all in
+rows 600-1000. Per the Chen 2023 ruling (a duplicated-row file is a trust
+problem, not a trimming job) it is left out; the script is not committed.
+
+Licence-blocked, three rows added to `license_blocked_candidates.csv`: Nockur &
+Pfattheicher 2020 (HEXACO-60 item level, N~1,100, public OSF fjk24 with no
+licence; stems in the .sav labels), Doucerain 2026 (`10.3390/bs16060921`, 92
+Likert items, private OSF yux3t), Wunderlich 2023 alarm fatigue (data on
+request). Also blocked, not logged: Fukui 2022 PBI (institutions refused
+sharing), Wright 2021 CU traits (WCHADS controlled access). Skipped on PII:
+Chilean ENETS precarious-work file (full dates of birth). Rejected on content:
+Austrian lockdown (Zenodo 4271534, totals only), Werrmann 2023 (aggregate
+scores, N=96), epilepsy surgery (IQ/DQ composites). Below N: May Craig 2026
+again (78 children).
+
+Staged: 8 `dictionary_auto.csv` rows (`stage_dict_row.py`), 8 `tags/tags_auto.csv`
+rows (Internet-based, Survey/questionnaire, Likert, nld; `test_tags_union.R`
+passes), 8 not-shipped `itemtext_provenance.csv` records. No
+`mapping_verification.csv` rows (no item text shipped).
+
+### 2026-09-24 — batch 5 uploaded
+
+ben-domingue confirmed the 8 `depue_*` response tables are uploaded. No item text
+to stamp; the 8 not-shipped provenance records stay unstamped by design.
+Dictionary and tag rows ride in on #2402 (merge is the accept).

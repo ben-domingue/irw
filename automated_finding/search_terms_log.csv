@@ -7912,3 +7912,53 @@ date,query,output_file,notes
 2026-09-23,smartphone addiction scale,runs/pmc_batch4_triage.csv,"PMC batch 4; recycled from pmc_term_backlog.csv ranked-unrun; 86+7 candidates over 9 journals; JOPD query 503-failed, re-run with --ignore-seen-dois (0 candidates)"
 2026-09-23,task-switching,runs/pmc_batch4_triage.csv,PMC batch 4; recycled from pmc_term_backlog.csv ranked-unrun; 86+7 candidates over 9 journals
 2026-09-23,teacher self-efficacy scale,runs/pmc_batch4_triage.csv,PMC batch 4; recycled from pmc_term_backlog.csv ranked-unrun; 86+7 candidates over 9 journals
+2026-09-24,thermometer scale,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
+2026-09-24,transformational leadership questionnaire,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
+2026-09-24,Balloon Analogue Risk Task,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
+2026-09-24,Barratt Impulsiveness Scale,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
+2026-09-24,Eating Attitudes Test,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
+2026-09-24,Empathy Quotient,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
+2026-09-24,Fear of Negative Evaluation Scale,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
+2026-09-24,HEXACO Personality Inventory,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
+2026-09-24,Iowa Gambling Task,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
+2026-09-24,Multidimensional Anxiety Scale for Children,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
+2026-09-24,Right-Wing Authoritarianism Scale,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
+2026-09-24,Sport Anxiety Scale,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
+2026-09-24,Toronto Empathy Questionnaire,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
+2026-09-24,aggression scale,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
+2026-09-24,authoritarianism scale,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
+2026-09-24,computational thinking test,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
+2026-09-24,customer satisfaction questionnaire,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
+2026-09-24,empathy scale,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
+2026-09-24,implicit association test data,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
+2026-09-24,job insecurity scale,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
+2026-09-24,mathematics test,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
+2026-09-24,organizational commitment questionnaire,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
+2026-09-24,preschool assessment,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
+2026-09-24,psychopathy scale,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
+2026-09-24,regulatory focus questionnaire,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
+2026-09-24,trust in government scale,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
+2026-09-24,Adverse Childhood Experiences Questionnaire,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
+2026-09-24,Columbia Suicide Severity Rating Scale,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
+2026-09-24,Conflict Tactics Scale,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
+2026-09-24,De Jong Gierveld Loneliness Scale,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
+2026-09-24,Interpersonal Support Evaluation List,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
+2026-09-24,Need for Closure Scale,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
+2026-09-24,Parental Bonding Instrument,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
+2026-09-24,Penn State Worry Questionnaire,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
+2026-09-24,Physical Activity Enjoyment Scale,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
+2026-09-24,Problem Gambling Severity Index,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
+2026-09-24,Short Dark Triad,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
+2026-09-24,System Justification Scale,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
+2026-09-24,UPPS Impulsive Behavior Scale,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
+2026-09-24,biology concept inventory,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
+2026-09-24,conners rating scale,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
+2026-09-24,creativity scale,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
+2026-09-24,genetics concept assessment,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
+2026-09-24,global-local task,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
+2026-09-24,metacognitive awareness inventory,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
+2026-09-24,spelling assessment,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
+2026-09-24,symptom checklist,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
+2026-09-24,Body Appreciation Scale,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
+2026-09-24,Buss-Perry Aggression Questionnaire,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
+2026-09-24,Cognitive Failures Questionnaire,runs/pmc_batch5_triage.csv,PMC batch 5; recycled from pmc_term_backlog.csv ranked-unrun; 80 candidates over 9 journals
