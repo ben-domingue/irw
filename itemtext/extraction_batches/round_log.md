@@ -24745,3 +24745,17 @@ irw-validate ok x3, check_provenance exit 0 (only its standing `mixed` review li
   data:** anatomic 584/673 = 86.8% and annihilate 305/672 = 45.4%, against the supplement's 45.80 and 86.73. Confirmed.
   The paper reports N=682; the live table has 673 ids. Sibling spelling_assessment_study2 was not claimed; the agent left notes for it.
 Queue: 1 pending, 0 in_progress. Cap (batch_348) not reached.
+
+### batch_345 — 2026-09-23T22:02 — 1 table: 1 written / 0 blocked / 0 failed (yield 1/1)
+One agent, the only pending row left. No kills. Step 4 gates all clean: audit PASS, verify_batch exempt (data_labels), lint clean,
+irw-validate ok, check_provenance exit 0 (only its standing `mixed` review list, no batch_345 tables).
+- spelling_assessment_study2 — done, data_labels / study_materials, 72 items x {0,1} (Incorrect/Correct), 144 rows. Same shape
+  as sibling study1. The instructions are the paper's Study 1 procedure sentence, carried over because Study 2 says it reused the
+  same words (disclosed). Live per-item n and sums match Study2.xlsx exactly (N=786: 372 Stetson, 414 MTurk). Direction was
+  confirmed independently: Best20AvgScore identity, r=0.99 with AvgScore, r=0.96 with Study 1 item accuracy.
+  **Deposit defect (not IRW):** Study2.xlsx holds only 72 of the 109 administered words. 37 are missing, including buoyancy, which
+  the authors' own Lexical Expertise Code.R selects, so their Study 2 code cannot run on the deposit. **Orchestrator re-check:**
+  AvgScore*109 is an integer for 97% of respondents vs 0.5% for *72, and buoyancy/anatomic are absent from the headers. Confirmed.
+  **Corrects the batch_344 handoff note:** Study2.xlsx is 84 columns, not 86, and the supplement's Study 2 blocks are factor loadings,
+  not accuracies. Aside for a data issue: the live response table carries `group` without a cov_ prefix.
+Queue: 0 pending, 0 in_progress — **queue exhausted**; the next firing will self-cancel at Step 0. Cap (batch_348) not reached.
