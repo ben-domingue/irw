@@ -25331,3 +25331,16 @@ Tables: goldberg_2018_spa_cultural_familiarity, goldberg_2018_spa_ipip, goldberg
 - Step 5b orchestrator re-check against SPA.por: item_text equals the .por variable label (alphanumerics, case-folded) for 105/105, 79/79 and 28/28 items; PQ value labels 1..5 very inaccurate..very accurate; FAMJAZ1 labels only 1/3/5; MEDHIS1 1-4 = 634/11/33/48. All as reported.
 - Instrument naming: batch_395 uses "Eugene-Springfield Community Sample, Skills, Possessions, & Abilities (SPA): <section>", which matches batch_394's beliefs_about_intelligence but NOT its changeability ("Skills, Possessions, & Abilities: …"). Harmonise changeability at triage if wanted.
 Queue: 19 pending, 0 in_progress. Cap (batch_402) not reached.
+
+## batch_396 — 2026-09-24T13:59 (3 written / 0 blocked / 0 failed)
+Tables: goldberg_2018_spa_skill_proficiency, goldberg_2018_spa_skills, goldberg_2018_spa_speo (next three of #2381 slice 06; all reused the batch_394 SPA.por / SPA-1.sav / SPA.pdf cache). Three agents, one per table, no kills. Yield 3/3. Circuit breaker: 0% failed. All gates clean: audit 3 PASS, lint no problems, verify_batch 3 MISSING(exempt) (all data_labels), irw-validate ok x3, check_provenance exit clean (only the standing 4-table `mixed` REVIEW).
+- Numbering: "highest below 300 + 1" read literally gives 300 -> 305, which already exists; used 396 (consecutive from 305, matching batch_395). The Step 1 wording should say "highest outside 200-205/300-304".
+- `goldberg_2018_spa_skill_proficiency` — done with caveat. PSKILL1-9 x 9 = 81 rows, data_labels (SPA.pdf p.10 "Profiling Your Skills"; printed wording used because the .por labels are cut off at about 64 characters). **The items are within-person RANKS (1=best, 9=worst), not the "skill-proficiency ratings" the dictionary Description says.** Disclosed in public_note; the dictionary Description is owed a fix. option_text is blank: the form prints bare bubbles, and the best/worst anchors are in the instructions.
+- `goldberg_2018_spa_skills` — done. YSKILL1-18, 97 rows, data_labels (SPA.pdf p.9 "Your Skills"). **Source override on the option axis:** the .por gives all 18 items one generic label set (1 no .. 6 excellent). That set is correct only for YSKILL1, so the shipped options are each item's own printed 4/5/6-point options, with resp = left-to-right position.
+- `goldberg_2018_spa_speo` — done, clean. SPEO1-12 x 3 = 36 rows, data_labels: the "AGE 18 or OLDER" column block of SPA.pdf p.7 "Some Personal Experiences" (SPEY = the "Before Age 18" block, still queued; section_prompt distinguishes them). The dictionary Description ("the speo block") is uninformative.
+- Step 5b orchestrator re-check against SPA.por. Every claim came out as reported:
+  - YSKILL per-item max: 6,4,6,5,6,5,5,5,5,5,6,5,6,6,6,6,5,5. This equals the printed option counts on the p.9 render, 18/18.
+  - YSKILL: 4 negative inter-item correlations, min -0.019.
+  - PSKILL: 700 complete respondents, 528 exact permutations.
+  - SPEO1/SPEY1 labels end ">= age 18"/"< age 18"; counts 32/360/308 vs 145/430/115.
+Queue: 16 pending, 0 in_progress. Cap (batch_402) not reached.
