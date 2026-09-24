@@ -24669,3 +24669,22 @@ on `jian-wen-low-sepsis-and-trauma-resuscitation-2024`** (live name 49 chars, hy
   paper (orchestrator grep confirmed). The table name/Description are wrong; the pending siblings kern_2021_engagement
   (E1–E9 = "Educator style") and kern_2021_learning (L1–L12 = "Life skills") likely are too. Dictionary fix owed; not filed.
 Queue: 13 pending, 0 in_progress. Cap (batch_348) not reached.
+
+## batch_341 — 2026-09-23T21:27 (3 tables, 3 agents)
+Written 3 / blocked 0 / failed 0 → done 3 (yield 3/3). Circuit breaker: 0% failed.
+Gates: normalize_nulls 1 of 3 changed (khattak); audit_batch PASS x3 (no WARNs); verify_batch PASS x3; lint clean;
+irw-validate ok x3; check_provenance exit 0 (only the standing `mixed` review list: ye_2025_q25_scale, kumlander_2018_scs).
+- kern_2021_engagement — done. paper_explicit, study_materials (Gan et al. 2022 Supp. Table_2.DOCX, CC BY). VERIFIED: code
+  labels + per-respondent identity with figshare workbook (350/350; max cross-column agreement 0.886); E total r +0.196 with
+  SHS (paper latent .210). **Step 3b mismatch:** E1–E9 are the paper's "Educator style" scale; orchestrator grep: "engagement"
+  occurs in the paper only in the literature review/references. Endpoint anchors only (2–3 blank).
+- kern_2021_learning — done. paper_explicit, study_materials, same source. VERIFIED: 350/350 identity, max cross-column
+  0.869 (L3/L4); L11/L12 T3 means match paper Table 1 exactly (so IRW = the T3 administration). **Step 3b:** L1–L12 are the
+  paper's "Life skills" (orchestrator confirmed in the supplement). L5 "l am" (lower-case L) typo corrected to "I am", disclosed.
+- khattak_2026_confidence — done. paper_order, study_materials (PeerJ questionnaire supplement, Section Four items 5–8).
+  VERIFIED on paper Table 3 per-item counts; orchestrator re-checked the .sav: 164/236, 114/286, 264/136, 166/234, labels
+  1=very confident / 2=not confident. Anchor conflict noted: the questionnaire prints a single "Yes (1)/No (2)" header over the
+  section; paper Methods, Table 3 and .sav labels all say Very/Not confident, which is what shipped.
+- **Dictionary fix owed, now for all three kern_2021 tables** (connectedness→Course design, engagement→Educator style,
+  learning→Life skills): table names/Descriptions and data/kern_2021_positive_edu.py header comment. Not filed.
+Queue: 10 pending, 0 in_progress. Cap (batch_348) not reached.
