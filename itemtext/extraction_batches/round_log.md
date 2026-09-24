@@ -24455,3 +24455,35 @@ The re-audit recorded these as "silence (own items)" and never read the VoR lice
 208 tables left in #2381 slices 2–6 (35 DOIs; 21 are DataCite/data DOIs with no Crossref record) found no other
 NC/ND licence, so the gap is confined to these two deposits. The fix belongs in the triage brief for #2382: check
 the article VoR licence (Crossref `license`) before writing "silence (own items)".
+
+## 2026-09-23 — batch_332 (irw#2381 slice 02, round 3): 3 tables, 3 written / 0 blocked / 0 failed
+
+Three agents, one per table, 20:05–20:15. Yield 3/3. No kills. Gates: normalize 0 changed, audit 2 PASS / 1 WARN
+(explained in notes), verify_batch PASS=3, lint clean, irw-validate ok 3/3 (name_charset WARN only — the hyphen is
+in the live table names, as for the batch_204 siblings), check_provenance exit 0. Breaker: 0% failed.
+mapping_verification.csv +3 (a, vv VERIFIED; yy NOT_NEEDED), same rows in verification_merged.csv.
+
+- **done** `chile_2023_social-welfare-survey_a` (75 rows), `_vv` (10 rows), `_yy` (162 rows). All data_labels (codes are
+  the EBS 2023 variable names, melted by name in data/chile_2023_social-welfare-survey.do). Each verify script reproduces
+  the codebook's published per-value frequencies exactly against the live table (a 75/75, vv 10/10, yy 18/18 categorical).
+  text_source=study_materials, translation_source=machine_translation -> **three issues-page lines owed at upload.**
+- **Wording departs from batch_204.** All three agents took the wording from the full questionnaire
+  (Cuestionario_EBS_2023_241001.pdf, observatorio.ministeriodesarrollosocial.gob.cl), not the Stata-truncated codebook
+  labels the rr/ss/u siblings shipped (e.g. a12 "relaciones pers. con fam.", yy4 truncated, vv2/vv3 drop "Durante los
+  últimos 12 meses,"). The batch_204 siblings could be upgraded the same way; not done here.
+- **Sheet1 STOP overridden, Ben to confirm.** table_context.R printed STOP on all three: Sheet1 links a hand-built
+  per-table sheet (for `a`: 13LiF4JdaPRhK9mCBDdmx8Uwxjwp2xbvNO7eoFheFcQY). Agents proceeded because #2381 queued the
+  tables, the sheets were never uploaded (not in live_tables.csv), they fail the gate as-is (resp="null" rows,
+  truncated labels), and the batch_204 siblings shipped under the same STOP. If the STOP should hold, drop the CSVs.
+- **Licence:** bidat.gob.cl's per-dataset "Licencia" field is empty; bidat's terms-of-use page puts its open data under
+  CC BY 4.0 (quoted with sha256 in `a`'s provenance). vv/yy carry the batch_204 wording without re-fetching it.
+- **Response-table defects (orchestrator re-checked with irw_fetch):**
+  - `_yy` item yy3 is an open monetary amount (CLP/month): 144 distinct values, 60,000–14,000,000, in a table of 2–5
+    point items. Item text attached with blank option_text (batch_204 u*_a precedent) and a public_note.
+  - Live NA-resp rows: yy 7,264 of 67,404 (yy1 71, yy2 13, yy3 437, yy4 40, yy5 6, yy5_a 6,697), vv 20 of 56,170. They
+    equal the codebook's missing/skip counts. The .do has dropped them since #2326, but the live tables predate that,
+    so they need a re-export and re-upload.
+  - The do-file's vv keep list (line 389) omits the codebook's fourth grid sub-item `vv1_d` (neighbour/traffic noise,
+    3,870/7,360 per the codebook).
+  - Dictionary Descriptions ("Chile CASEN …") name the wrong survey. This is EBS 2023, which only samples from CASEN 2022.
+Queue: 37 pending, 0 in_progress. Cap (batch_348) not reached.
