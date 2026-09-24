@@ -86,6 +86,14 @@ jobs:
           if grep -q '^WARNING:' refresh.txt; then
             echo "::warning::$(grep '^WARNING:' refresh.txt | head -1)"
           fi
+          # The queue/live divergence (irw#2230) fails nothing by design, but a
+          # report nobody reads is the same as no report -- the defect it exists
+          # to catch went unnoticed for six tables across one whole claim. Surface
+          # it as an annotation so it is visible without opening the log.
+          if grep -q '^QUEUE DIVERGENCE:' refresh.txt; then
+            echo "::warning::$(grep '^QUEUE DIVERGENCE:' refresh.txt | head -1)"
+            grep -A100 '^QUEUE DIVERGENCE:' refresh.txt | grep '^  ' | head -20
+          fi
           rm -f refresh.txt
           # The header carries the snapshot date, so compare the table rows only;
           # a date-only change is not worth a PR.

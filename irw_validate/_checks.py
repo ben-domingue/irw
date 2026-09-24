@@ -84,14 +84,15 @@ _COMPOSITE_TOKENS = {
     "total", "totals", "composite", "subscale", "subscales", "overall",
     "average", "averages", "avg", "mean", "sum", "index", "score", "scores",
 }
-# Whole-label pre/post markers (optionally with a short subscale suffix, e.g.
-# "pre-A", "post_F"). Matched only against the ENTIRE label: a genuine raw
-# item at a pre-wave is usually "pre_anxiety_3", which must not trip this.
+# Whole-label pre/post markers, optionally followed by one separator and a
+# short suffix (e.g. "pre-A", "post_F"). Unseparated words/IDs such as
+# "poster" and "Pre63", and longer labels such as "pre_anxiety_3", do not
+# match. These naming patterns alone are not evidence of computed scores.
 _PREPOST_LABEL = re.compile(
-    r"^(pre|post|baseline|follow[-_ ]?up)[-_ ]?[a-z0-9]{0,2}$", re.I)
+    r"^(pre|post|baseline|follow[-_ ]?up)(?:[-_ ][a-z0-9]{1,2})?$", re.I)
 
 def _looks_composite(label) -> bool:
-    """Does this item label name a computed score rather than a question?"""
+    """Does this label match score-word or pre/post naming patterns?"""
     s = str(label).strip()
     if not s:
         return False
@@ -637,23 +638,19 @@ def run_qc(df: pd.DataFrame, coercion_method: str = "",
 
     checks.extend(_response_scale_checks(df, resp_num, permitted_values, item_constructs))
 
-    # Composite columns masquerading as items. A summary table melts into a
-    # perfectly well-formed id/item/resp frame and passes every structural
-    # check above -- the only tell is what the items are NAMED.
+    # Report naming-pattern evidence, not an inference about how responses
+    # were computed. Raw all-match severity stays unchanged here (#2369).
     if "item" in df.columns:
         labels = [i for i in df["item"].unique() if str(i).strip()]
         comp = [i for i in labels if _looks_composite(i)]
-        if labels and len(comp) == len(labels):
-            checks.append(Check("composite_items*", "fail",
-                                f"every item label names a computed score "
-                                f"({[str(c) for c in comp[:4]]}) — this looks "
-                                "like a summary/aggregate table, not raw "
-                                "item-level responses"))
-        elif comp:
-            checks.append(Check("composite_items*", "warn",
-                                f"{len(comp)}/{len(labels)} item labels name "
-                                f"computed scores ({[str(c) for c in comp[:4]]}) "
-                                "— drop them, or confirm they are real items"))
+        if comp:
+            status = "fail" if len(comp) == len(labels) else "warn"
+            checks.append(Check("composite_items*", status,
+                                f"{len(comp)}/{len(labels)} item labels match "
+                                "score-word or pre/post naming patterns "
+                                f"(examples: {[str(c) for c in comp[:4]]}). "
+                                "Label names alone do not establish whether "
+                                "the responses are computed scores."))
 
     # IRW's own density signal — very sparse data is worth a look
     meta = irw_metadata(df)

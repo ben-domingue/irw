@@ -7,7 +7,7 @@ Written for #1779, which enumerated 81 tables whose `cov_age` holds a sentinel,
 a birth year or a date offset but could not say *how much* of each table was
 affected -- and that is the number the repair decision turns on. A table where
 one respondent typed 999 and a table whose whole column is a date of birth are
-the same row in `tags/age_range_audit.csv` and need opposite fixes.
+the same row in `tags/age_range/age_range_audit.csv` and need opposite fixes.
 
 **Queries, never irw_fetch.** Same reason as `live_dup`: the export allowance is
 200GB/30 days against a 181.8GB corpus, and every measure here is an aggregate

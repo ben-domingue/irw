@@ -200,14 +200,18 @@ getrows<-function(l) {
         irw_dict <- u$dict
         write_dict_provenance(u$provenance, l$file.prov)
     }
-    ## The refresh log sits beside the CSV it explains: biblio.csv ->
-    ## biblio_refresh_log.csv. Derived rather than configured so all four
-    ## sources get one without four more list entries.
-    file.refresh <- if (is.null(l$file.refresh)) sub("\\.csv$", "_refresh_log.csv", file.out) else l$file.refresh
+    ## The refresh log is named after the CSV it explains and kept in logs/:
+    ## biblio.csv -> logs/biblio_refresh_log.csv. Derived rather than configured
+    ## so all four sources get one without four more list entries.
+    log_path <- function(suffix) {
+        dir.create("logs", showWarnings = FALSE)
+        file.path("logs", sub("\\.csv$", suffix, basename(file.out)))
+    }
+    file.refresh <- if (is.null(l$file.refresh)) log_path("_refresh_log.csv") else l$file.refresh
     ## Which licences this run derived, and on what basis. Same reasoning as the
     ## refresh log above: 78 derived cells is a list a person can read, where the
     ## same change in biblio.csv is a 78-row diff among thousands (#2040).
-    file.license <- if (is.null(l$file.license)) sub("\\.csv$", "_license_log.csv", file.out) else l$file.license
+    file.license <- if (is.null(l$file.license)) log_path("_license_log.csv") else l$file.license
     ## Read the current biblio file
     user <- redivis$user(user)
     dataset <- user$dataset(dataset)
@@ -324,7 +328,7 @@ getrows<-function(l) {
     ## write a biblio where any still does. See bibtex_doi_check.R.
     stale <- refetch_stale_bibtex(biblio, fetch_bibtex_from_doi, name)
     biblio <- stale$biblio
-    readr::write_csv(stale$log, sub("\\.csv$", "_bibtex_refetch_log.csv", file.out))
+    readr::write_csv(stale$log, log_path("_bibtex_refetch_log.csv"))
     assert_bibtex_doi_consistent(biblio, name)
 
     biblio<-biblio[,

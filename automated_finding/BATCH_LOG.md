@@ -15698,3 +15698,124 @@ Tagalog (local language)" and the codebook codes consent "Yes/Oo", so the
 Tagalog respondents saw is real and unpublished. Chen 2023
 (`10.1016/j.heliyon.2023.e15742`) left out per ben-domingue -- a duplicated-row
 file is a trust problem, not a trimming job. PMC batch 3 is closed.
+
+
+## 2026-09-23 — PMC batch 4 (recycled ranked terms, fourth sweep off `pmc_term_backlog.csv`)
+
+Ran `irw_discover_pmc.py` over the **next 50 unrun terms** from
+`pmc_term_backlog.csv` by projected new DOIs (297 of the 501 projected across the
+141 unrun; "Social Provisions Scale" .. "teacher self-efficacy scale"). Marked in a
+new `run_2026_09_23b` column; **91 ranked terms remain unrun**. Terms appended to
+`search_terms_log.csv`.
+
+**86 candidates triaged** over 9 journals -- well under batch 3's 189, as the
+backlog's projected yield falls off down the ranking. Two Europe PMC queries
+503-failed after all retries (`Implicit Association Test`×J Intell,
+`smartphone addiction scale`×JOPD); both re-run with `--ignore-seen-dois` and
+completed (7 / 0 candidates, `runs/pmc_batch4_rerun_*.csv`), noted on those terms'
+log rows.
+
+| flag | n |
+|---|---|
+| `no_usable_file` | 42 |
+| `license_restricted` | 23 |
+| `human_assistance` | 9 (+1 rerun) |
+| `below_min_n` | 4 |
+| `download_failed` | 4 |
+| `not_item_response` | 3 |
+| `external_unresolved` | 1 |
+
+Step 2b chained automatically: `recoverable_format` 4, `human_review` 2,
+`not_item_response` 1, `aggregate_continuous` 1 (+1 rerun), `worth_retrying` 1;
+`[human_review] archived 2 row(s)` to `human_review/human_review_pmc_2026-09-23.csv`.
+
+**15 leads, all terminal** -> `pmc_leads_2026-09-23b.csv` (tracked): 2 shipped,
+6 rejected on content, 4 blocked on licence, 2 below N=100, 1 skipped on PII.
+Worked by four parallel agents; all four `download_failed` rows and both
+`human_review` rows were hand-checked. The below_min_n triage rows (N=20-45) were
+not leads.
+
+**4 tables, 42,116 responses:**
+
+| table | rows | ids | items | resp | item text |
+|---|---|---|---|---|---|
+| `rogowska_2023_maia2` | 11,949 | 323 | 37 | 0-5 | not shipped (see below) |
+| `kabir_2023_snaq` | 11,312 | 1,259 | 9 | 1-5 | not shipped (positional codes) |
+| `kabir_2023_bms10` | 12,575 | 1,259 | 10 | 1-7 | not shipped (positional codes) |
+| `kabir_2023_sidas` | 6,280 | 1,256 | 5 | 0-10 | not shipped (positional codes) |
+
+Scripts: `data/rogowska_2023_maia2.py` (Sci Rep SI xlsx, CC BY; all 37 MAIA-2
+items -- the paper's 24-item Brief MAIA-2 is a subset of the same columns, so no
+second table; two fractional imputed cells dropped because the file's own subscale
+means imply different integers), `data/kabir_2023_nurse_bullying.py` (Sci Rep SI
+csv, CC BY; no id column -> row index shared across the three tables; three exact
+47-column double entries dropped, 1264 -> 1261; SIDAS item 2 shipped raw, the
+file's `10 - x` copy dropped). Every table passes `irw-validate` (upload profile);
+the one WARN is `imputed_values*` on `kabir_2023_sidas` -- a working sample
+answers 0 on frequency/distress/impact and 10 on controllability, integer values
+throughout, no imputation described.
+
+Item text, none shipped:
+- `rogowska_2023_maia2`: no labels at either level (plain xlsx); the Polish
+  wording is in the same workbook's "MAIA-2 (Polish)" sheet, 1-37, anchors
+  0 Nigdy .. 5 Zawsze -- one hop, paper_order. Held back because item-level group
+  contrasts suggest the reverse-keyed items 5-12 and 15 are stored already
+  reversed, so their anchors may be inverted; needs a `verify_` script first.
+- `kabir_2023_*`: plain CSV, no labels; paper and SI print no wording. Text is in
+  the published S-NAQ (Notelaers 2019), BMS-10 (Malach-Pines 2005), SIDAS (van
+  Spijker 2014).
+
+**Rejected on trust: `10.1016/j.heliyon.2023.e16765` (Al Mamun 2023, green
+skincare, N=778).** Four of ten construct blocks carry fill-down runs (e.g. CIC
+rows 33-64 all 5,5,4,5,5) and disagree with the deposit's own construct means on
+44-71 rows each; the ID column is non-unique. The other six blocks are clean, but
+per the Chen 2023 ruling a corrupted file is not a trimming job.
+
+Also rejected: J Intell divergent-thinking rater study (data are the Forthmann &
+Myszkowski 2024 special-issue set, already in IRW as `Forthmann-2024-*`), WeChat
+/CHARLS (aggregate SI; CHARLS registration-gated), amphipod arenas (continuous
+tracking measures), leopard depredation and PM2.5 country panel (no respondents).
+Skipped on PII: T1D cost-of-illness (a `Name` column of adolescent patients' first
+names; scores-only anyway). Below N: Gründahl 2023 EMA (96 ids), May Craig 2026
+(78 children, private OSF too).
+
+Licence-blocked: Chambon 2023 plastic medical devices (`10.1038/s41598-023-45172-6`,
+public OSF 5etma, no licence; ~1,598 x 70 Likert items with Dutch labels -- the
+strongest block of the batch; row added to `license_blocked_candidates.csv`),
+Toniolo 2025 (private OSF), Sangalang 2022 WaSH (data on request, portal
+unreachable), and `bs16071107` again (already blocked in batch 3; download_failed
+rows are not ledgered as seen, so it resurfaced).
+
+Staged: 4 `dictionary_auto.csv` rows (`stage_dict_row.py`), 4 `tags/tags_auto.csv`
+rows (`test_tags_union.R` passes), 4 not-shipped `itemtext_provenance.csv` records.
+No `mapping_verification.csv` rows (no item text shipped).
+
+### 2026-09-24 — batch 4 uploaded
+
+ben-domingue confirmed the 4 response tables are uploaded. No item text to stamp;
+the 4 not-shipped provenance records stay unstamped by design.
+
+### 2026-09-24 — `rogowska_2023_maia2` item text, shipped partial
+
+ben-domingue chose the partial route. `itemtext_output/rogowska_2023_maia2__items.csv`
+(222 rows, 37 items x resp 0-5): Polish stems, instructions and endpoint anchors
+from the deposit's own "MAIA-2 (Polish)" sheet; English `_translated` from Mehling
+et al. 2018's S1 Questionnaire (CC BY; the MAIA-2 is free, no permission needed).
+Anchors withheld on the reverse-keyed items 5-12 and 15, whose stored direction is
+unresolved: ND-vs-attention-regulation r=-0.27 says as-answered, men-higher-on-NW
+and item 7's mean of 1.65 say reversed, and the paper's subscale means equal the
+stored values either way.
+
+Mapping PARTIAL (`verify_rogowska_2023_maia2.R`): refitting the paper's eight-factor
+ML CFA reproduces all 37 published loading pairs on their own codes (max deviation
+0.009), and Table 1's Brief hash marks match the deposit's Brief sheet stems exactly.
+Not separable: MAIA2_19 vs _20 (identical published pair). Gates: `validate_items.R`
+PASS, `audit_batch.R` one WARN (the 9 withheld-anchor items, by design),
+`irw-validate` clean, `lint_verification.R` and `check_provenance.R` raise nothing on
+it. Provenance: `paper_explicit` + `study_materials`, with a `public_note` on the 9
+unlabelled items -- an issues-page entry is owed.
+
+ben-domingue confirmed the `rogowska_2023_maia2` item text upload; `uploaded=2026-09-24`
+stamped in `itemtext_provenance.csv` and `itemtext/mapping_verification.csv`. Only the
+issues-page entry remains open.
+Issues-page entry opened as datapages/irw#241.

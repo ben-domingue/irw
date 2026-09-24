@@ -47,11 +47,18 @@ CSVs go up with `upload_meta.py`, which is a thin wrapper around it.
 - **`collections/`** — Curated groupings of tables (`registry.csv` + `curated/`), read by `metadata/10_collections.R`.
 - **`training/`** — Workshop and training materials.
 - **`processing_notes/`** — Data processing guidelines and licensing docs.
+- **`red_up/`** — The single Redivis uploader. **`irw_validate/`** — The format validator used to gate a table before upload.
+- **`tools/withdrawals/`** — One already-run script per table withdrawal, cited by path in provenance records.
 - **`automated_finding/`** — Automated pipeline that discovers, triages, and
   standardizes candidate datasets from public repositories (Dataverse,
   Figshare, OSF, Zenodo, Dryad). See its
   `.claude/skills/irw-automated-finding/SKILL.md` for orchestration and
   `README.md` for the script/column reference.
+
+Inside `automated_finding/`, `itemtext/`, `metadata/` and `tags/`, the top level holds
+live scripts and standing records. Finished work goes into `archive/`, `logs/` or a
+topic folder: see ARCHITECTURE.md §7 and each directory's README. `git grep` a
+file's path before moving it.
 
 ## IRW Data Format (The "Commandments")
 
