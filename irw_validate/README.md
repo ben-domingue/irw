@@ -191,9 +191,15 @@ CSV/TSV/TXT validation makes a second pass reading only `resp` with pandas'
 default NA-token conversion disabled. Other columns keep their existing
 parsing behavior, and clean numeric response columns still infer numeric types.
 Item-text tables use their separate schema and retain their existing reader.
-The `core` and `triage` profiles retain their earlier parsing and numeric
-threshold; callers using `run_qc` should use `validate_file(..., profile="upload")`
-on the written file when they need this publication check.
+The `core` and `triage` profiles retain their earlier parsing and 99% numeric
+threshold, now measured over **non-missing responses** (#2314 item 2). Raw
+`run_qc()` callers use that same denominator. Missing responses are reported
+by `resp_na`; with no present responses, `resp_numeric` records that there is
+nothing to check, while `resp_na` still fails. Literal text supplied in an
+in-memory frame remains present and is tested for numeric parsing. The reader's
+NA-token handling is unchanged. Callers using `run_qc` should use
+`validate_file(..., profile="upload")` on the written file when they need the
+strict publication check.
 
 For an in-memory frame, genuine nulls remain missing and literal text is
 checked, but a token already erased by an upstream reader cannot be recovered.
@@ -218,7 +224,7 @@ are reprinted under `OVERRIDDEN` rather than suppressed, and appended to
 Without `--override-check` the reason waives every error; with it, only the named
 checks, so unrelated failures keep blocking.
 
-## The 50 callers
+## Existing conversion callers
 
 `data/*.py` scripts do `from irw_triage_updated import run_qc` and read
 `.name` / `.status` / `.detail`. That interface and the existing positional
@@ -227,10 +233,17 @@ re-exported by triage; profiles are layered on top by `core.py`. The optional
 documentation inputs above refine response-scale results without requiring
 existing callers to provide them.
 
+The denominator correction intentionally changes raw/core/triage findings and
+failure counts: numeric responses with missing values no longer fail
+`resp_numeric` solely for missingness. In `triage_dataset()`, such a candidate
+can move from `human_assistance` to `good` if no other routing condition blocks
+it; the `resp_na` warning remains. Scripts gating on raw `fail` statuses see
+the same correction. All-missing responses still fail, and upload/legacy
+validation and CSV parsing are unchanged.
+
 `tests/test_validate.py` pins the exact `(name, status)` emission order for eight
-fixtures, captured before the move with one reviewed correction: text-only
-responses still fail numeric checks but no longer produce a spurious numeric
-range finding. Response-scale regression tests in
+fixtures, with explicit corrections for text-only response ranges (#1697) and
+the all-missing numeric check (#2314). Response-scale regression tests in
 `irw_validate/tests/` additionally cover the shared checks and public API profile
 behavior, and run in the existing unittest CI suite.
 

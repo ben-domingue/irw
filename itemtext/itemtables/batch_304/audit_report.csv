@@ -4,6 +4,5 @@
 "IJLS_Eersel_2024_ICECAP","PASS",5,5,TRUE,TRUE,FALSE,TRUE,0,0,""
 "IJLS_Eersel_2024_IUS","PASS",12,12,TRUE,TRUE,FALSE,TRUE,0,0,""
 "IJLS_Eersel_2024_Optimism","PASS",6,6,TRUE,TRUE,FALSE,TRUE,0,0,""
-"MotAcademica_Ribeiro_2019","PASS",29,29,TRUE,TRUE,FALSE,TRUE,0,42.9,"42.9% of rows have blank option_text"
 "PEMAIW_Qiu_2020_PANAS","PASS",20,20,TRUE,TRUE,FALSE,TRUE,0,0,""
 "QADT_Kleka_2023","WARN",12,12,TRUE,TRUE,FALSE,TRUE,100,0,"100% of rows have blank item_text"

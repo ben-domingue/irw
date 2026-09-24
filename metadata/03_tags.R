@@ -423,7 +423,7 @@ dbs <- list(
     core = list(name = "core",
                 url = 'https://docs.google.com/spreadsheets/d/1V3ef0sa7HKtJJd2cgqRAkEdfbpGWDD1JIyQa6HwVK7g/edit?gid=126134123#gid=126134123',
                 file.auto = "../tags/tags_auto.csv",
-                file.derived = "../tags/age_range_derived.csv",
+                file.derived = "../tags/age_range/age_range_derived.csv",
                 file.live = "metadata.csv",
                 file.out = "tags.csv"),
     ##`nom` has no file.auto on purpose. tags/nominal_tags_staging.csv looks like

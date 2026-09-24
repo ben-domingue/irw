@@ -6,7 +6,8 @@ read `.name` / `.status` / `.detail` off the result, and `run_qc` had no test
 coverage at all before this file. GOLDEN pins the exact emission order and
 status of every check for eight fixtures. The original move preserved behavior;
 PR #1697 explicitly corrects a spurious range finding on text-only responses,
-while retaining their numeric failures.
+while retaining their numeric failures. #2314 excludes missing responses from
+the numeric denominator; all-missing responses still fail the missingness check.
 """
 from __future__ import annotations
 
@@ -43,14 +44,15 @@ FIXTURES = {
     "unprefixed_cov": lambda: F(id=[1, 2], item=["a", "b"], resp=[1, 2], age=[30, 40]),
 }
 
-#: Captured before the 2026-09-02 move, with one reviewed PR #1697 change:
+#: Captured before the 2026-09-02 move, with reviewed corrections:
 #: all-text responses retain numeric failures, not a spurious numeric-range finding.
+#: #2314 excludes missing responses from resp_numeric; all-null still fails resp_na.
 GOLDEN = {
     "clean": [("required_columns", "pass"), ("resp_numeric", "pass"),
               ("dup_id_item", "pass")],
     "missing_col": [("required_columns", "fail")],
     "all_na_resp": [("required_columns", "pass"), ("resp_na", "fail"),
-                    ("resp_numeric", "fail"), ("dup_id_item", "pass"),
+                    ("resp_numeric", "pass"), ("dup_id_item", "pass"),
                     ("resp_variation*", "fail"), ("density*", "warn")],
     "dup_id_item": [("required_columns", "pass"), ("resp_numeric", "pass"),
                     ("dup_id_item", "fail")],
@@ -204,9 +206,24 @@ class ItemText(unittest.TestCase):
                          [f.check for f in report.errors])
 
     def test_a_doubled_item_text_table_is_caught(self):
-        # the #1816 defect: an upload appended beside the previous version
+        # the #1816 defect: an upload appended beside the previous version.
+        # Named `dup_row` since #2232 -- the rows are identical, which is a
+        # sharper statement than "a key repeats" and is what the reader needs.
         report = validate_frame(self._items(n_rep=2), label="t_2024_scale__items.csv")
-        self.assertIn("dup_item_resp", [f.check for f in report.errors])
+        self.assertIn("dup_row", [f.check for f in report.errors])
+
+    def test_a_repeated_key_that_is_not_a_repeated_row_still_says_so(self):
+        # The `dup_item_resp` branch has to survive the #2232 move: two rows
+        # can share (item, resp) and option_text without being identical, and
+        # that is a different fault from a doubled upload.
+        df = self._items()
+        twin = df.iloc[[0]].copy()
+        twin["item_text"] = "question 0, reworded"
+        report = validate_frame(pd.concat([df, twin], ignore_index=True),
+                                label="t_2024_scale__items.csv")
+        checks = [f.check for f in report.errors]
+        self.assertIn("dup_item_resp", checks)
+        self.assertNotIn("dup_row", checks)
 
     def test_two_scale_directions_in_one_table_are_named_as_such(self):
         # afps_vangsness_2019: resp=1 carries both "Strongly agree" and
@@ -221,6 +238,65 @@ class ItemText(unittest.TestCase):
         checks = [f.check for f in report.errors]
         self.assertIn("resp_ambiguous", checks)
         self.assertNotIn("dup_item_resp", checks)
+
+    def _unkeyed(self, raw=True, words=("gaadee", "kauaa", "kainchee")):
+        """gilbert_meta_70's shape: printed options, no scoring key.
+
+        Three different words a child was asked to name, one row each, `resp`
+        blank throughout because the deposit publishes no key. With `raw`
+        false the rows carry no address at all, which is the defect.
+        """
+        rows = {k: [] for k in ("table", "item", "item_text", "resp",
+                                "raw_resp", "option_text")}
+        for w in words:
+            rows["table"].append("g_2024_naming")
+            rows["item"].append("std12")
+            rows["item_text"].append("name the picture")
+            rows["resp"].append(None)
+            rows["raw_resp"].append(w if raw else None)
+            rows["option_text"].append(w)
+        return pd.DataFrame(rows)
+
+    def test_option_rows_keyed_by_raw_resp_are_addressable(self):
+        # #2232: the rule (#1945/#2185) is that an option row carries `resp`
+        # OR `raw_resp`. Keying on `resp` alone made every such row a
+        # duplicate of its siblings and then reported their option text as
+        # identical, when it was the only thing telling them apart.
+        report = validate_frame(self._unkeyed(), label="g_2024_naming__items.csv")
+        checks = [f.check for f in report.errors]
+        self.assertNotIn("dup_item_resp", checks)
+        self.assertNotIn("resp_ambiguous", checks)
+
+    def test_rows_with_neither_resp_nor_raw_resp_still_fail(self):
+        # The case the fix must NOT lose: no address at all means nothing can
+        # join these rows to a response, so they stay a finding. Dropping
+        # unkeyed rows from the comparison would silently pass them.
+        report = validate_frame(self._unkeyed(raw=False),
+                                label="g_2024_naming__items.csv")
+        self.assertFalse(report.ok, report.findings)
+        self.assertTrue([f for f in report.errors
+                         if f.check in ("dup_item_resp", "resp_ambiguous")],
+                        [f.check for f in report.errors])
+
+    def test_a_doubled_raw_resp_table_is_still_caught(self):
+        # Addressability is not a way out of the doubled-upload check: repeat
+        # the same three rows and the raw_resp key collides exactly as resp
+        # would.
+        df = pd.concat([self._unkeyed(), self._unkeyed()], ignore_index=True)
+        report = validate_frame(df, label="g_2024_naming__items.csv")
+        self.assertIn("dup_row", [f.check for f in report.errors])
+
+    def test_the_finding_names_the_addressable_key(self):
+        # A key collision that is not a whole-row repeat, so the
+        # dup_item_resp message is the one under test.
+        df = self._unkeyed()
+        twin = df.iloc[[0]].copy()
+        twin["item_text"] = "name the picture (repeat)"
+        report = validate_frame(pd.concat([df, twin], ignore_index=True),
+                                label="g_2024_naming__items.csv")
+        msg = [f.message for f in report.errors if f.check == "dup_item_resp"][0]
+        self.assertIn("raw_resp", msg)
+        self.assertNotIn("item+resp rows", msg)
 
     def test_missing_item_text_columns_block(self):
         df = pd.DataFrame({"id": [1], "item": ["a"], "resp": [1]})
@@ -309,6 +385,64 @@ class RepeatedMeasures(unittest.TestCase):
         # the 50 callers see what they always saw
         report = validate_frame(self._rated(), profile="triage")
         self.assertIn("dup_id_item", [f.check for f in report.findings])
+
+
+class ResponseTimes(unittest.TestCase):
+    """`rt` is the seconds ONE item response took (standard.qmd). Each check
+    below tests that sentence from a different side. The shapes come from
+    openesm_0018_bailon, an ESM table whose `rt` is the latency from beep to
+    response -- one value per beep, copied onto both items, 0 where nobody
+    answered -- which the old median>60000 units check passed in silence."""
+
+    def _esm(self, rt_per_wave):
+        rows = []
+        for pid in range(1, 41):
+            for wave, rt in enumerate(rt_per_wave, start=1):
+                for item in ("arousal", "valence"):
+                    rows.append({"id": pid, "item": item, "resp": 3,
+                                 "wave": wave, "rt": rt})
+        return pd.DataFrame(rows)
+
+    def test_an_occasion_level_rt_is_named_as_such(self):
+        report = validate_frame(self._esm([12, 300, 45]), label="esm_2024.csv")
+        finding = next(f for f in report.findings if f.check == "rt_item_level*")
+        self.assertIn("100% of 120 person-occasions", finding.message)
+
+    def test_a_genuinely_item_level_rt_is_not_flagged(self):
+        df = self._esm([12, 300, 45])
+        df["rt"] = [3, 9] * (len(df) // 2)
+        names = [f.check for f in validate_frame(df, label="esm_2024.csv").findings]
+        self.assertNotIn("rt_item_level*", names)
+
+    def test_zero_response_times_are_flagged_as_a_sentinel(self):
+        df = self._esm([0, 300, 45])
+        finding = next(f for f in validate_frame(df, label="esm_2024.csv").findings
+                       if f.check == "rt_zero*")
+        self.assertIn("33%", finding.message)
+
+    def test_a_stray_zero_is_not_worth_a_warning(self):
+        df = self._esm([12, 300, 45])
+        df.loc[0, "rt"] = 0
+        names = [f.check for f in validate_frame(df, label="esm_2024.csv").findings]
+        self.assertNotIn("rt_zero*", names)
+
+    def test_millisecond_units_are_caught_well_below_the_old_threshold(self):
+        # 1.4 s and 2.6 s recorded as ms: the old check needed a median of
+        # 60000 before it said anything.
+        df = self._esm([1400, 2600])
+        finding = next(f for f in validate_frame(df, label="esm_2024.csv").findings
+                       if f.check == "rt_units*")
+        self.assertIn("milliseconds", finding.message)
+
+    def test_plausible_seconds_say_nothing_about_units(self):
+        names = [f.check for f in
+                 validate_frame(self._esm([4, 11, 30]), label="esm_2024.csv").findings]
+        self.assertNotIn("rt_units*", names)
+
+    def test_none_of_the_rt_checks_block_an_upload(self):
+        report = validate_frame(self._esm([0, 1400, 2600]), label="esm_2024.csv")
+        self.assertEqual([], [f.check for f in report.errors
+                              if f.check.startswith("rt_")])
 
 
 class TableNames(unittest.TestCase):

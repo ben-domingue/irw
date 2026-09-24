@@ -84,14 +84,15 @@ _COMPOSITE_TOKENS = {
     "total", "totals", "composite", "subscale", "subscales", "overall",
     "average", "averages", "avg", "mean", "sum", "index", "score", "scores",
 }
-# Whole-label pre/post markers (optionally with a short subscale suffix, e.g.
-# "pre-A", "post_F"). Matched only against the ENTIRE label: a genuine raw
-# item at a pre-wave is usually "pre_anxiety_3", which must not trip this.
+# Whole-label pre/post markers, optionally followed by one separator and a
+# short suffix (e.g. "pre-A", "post_F"). Unseparated words/IDs such as
+# "poster" and "Pre63", and longer labels such as "pre_anxiety_3", do not
+# match. These naming patterns alone are not evidence of computed scores.
 _PREPOST_LABEL = re.compile(
-    r"^(pre|post|baseline|follow[-_ ]?up)[-_ ]?[a-z0-9]{0,2}$", re.I)
+    r"^(pre|post|baseline|follow[-_ ]?up)(?:[-_ ][a-z0-9]{1,2})?$", re.I)
 
 def _looks_composite(label) -> bool:
-    """Does this item label name a computed score rather than a question?"""
+    """Does this label match score-word or pre/post naming patterns?"""
     s = str(label).strip()
     if not s:
         return False
@@ -380,12 +381,23 @@ def run_qc(df: pd.DataFrame, coercion_method: str = "",
                                 f"{col} has {n_na} missing value(s). "
                                 f"{na_note}"))
 
-    # resp must be numeric (ERROR)
+    # Judge numeric parsing only among present responses. Missingness belongs
+    # to resp_na above, not to the nonnumeric count (#2314 item 2). Preserve
+    # the raw/triage 99% threshold; upload/legacy separately require every
+    # present value to parse in core.py.
     resp_num = pd.to_numeric(df["resp"], errors="coerce")
-    if resp_num.notna().mean() < 0.99:
+    present = df["resp"].notna()
+    n_present = int(present.sum())
+    n_numeric = int(resp_num[present].notna().sum())
+    if not n_present:
+        checks.append(Check("resp_numeric", "pass",
+                            "No non-missing resp values to check; "
+                            "missingness is reported by resp_na"))
+    elif n_numeric / n_present < 0.99:
         checks.append(Check("resp_numeric", "fail",
                             f"resp is not numeric (only "
-                            f"{resp_num.notna().mean():.0%} parse as numbers)"))
+                            f"{n_numeric}/{n_present} non-missing responses "
+                            f"parse as numbers, {n_numeric / n_present:.0%})"))
     else:
         checks.append(Check("resp_numeric", "pass", "resp is numeric"))
 
@@ -529,21 +541,66 @@ def run_qc(df: pd.DataFrame, coercion_method: str = "",
                                 f"date max={d.max():.0f} — looks too small for "
                                 "Unix seconds; verify units"))
 
-    # P1 #6: rt column validation.
+    # P1 #6: rt column validation. The standard reads `rt` as the seconds one
+    # item response took, so the checks here test that sentence from three
+    # sides: the units, the values, and whether the column is item-level at
+    # all. The old units threshold (median > 60000) only caught a table whose
+    # median item took over 16 hours of seconds; a source recording
+    # milliseconds usually lands far below that and passed silently.
     if "rt" in df.columns:
         rt = pd.to_numeric(df["rt"], errors="coerce")
         if rt.isna().mean() > 0.1:
             checks.append(Check("rt_numeric*", "warn",
                                 "rt column is not numeric"))
         elif rt.notna().any():
-            if rt.median() > 60000:
+            med = float(rt.median())
+            if med > 1000:
                 checks.append(Check("rt_units*", "warn",
-                                    f"rt median={rt.median():.0f} — likely "
-                                    "milliseconds, not seconds (IRW requires "
-                                    "seconds)"))
+                                    f"rt median={med:.0f} — read as seconds "
+                                    f"that is {med / 60:.0f} minutes for a "
+                                    "single item response. If the source "
+                                    "recorded milliseconds, divide by 1000; "
+                                    "IRW requires seconds. If the time really "
+                                    "is that long, say so in the processing "
+                                    "notes."))
             if (rt < 0).any():
                 checks.append(Check("rt_negative*", "warn",
                                     "rt has negative values"))
+            zero_share = float((rt == 0).mean())
+            if zero_share > 0.01:
+                checks.append(Check("rt_zero*", "warn",
+                                    f"{zero_share:.0%} of rt values are "
+                                    "exactly 0. No response takes no time, so "
+                                    "these are a sentinel (missing, timed out, "
+                                    "carried over) rather than a measurement — "
+                                    "verify against the source and blank them "
+                                    "if they are not times."))
+            # An `rt` that never varies across the items answered at one
+            # occasion is not the time that item took: it is the duration of
+            # the whole beep/survey/block, copied onto every row. Only occasion
+            # keys other than rt can define "one sitting" (`occasion_columns`
+            # excludes rt for the same reason).
+            keys = [c for c in occasion_columns(df) if c in df.columns]
+            if keys and "id" in df.columns and "item" in df.columns:
+                sub = df.loc[rt.notna(), ["id", "item"] + keys].copy()
+                sub["__rt"] = rt[rt.notna()]
+                grp = sub.groupby(["id"] + keys, observed=True)
+                n_items = grp["item"].nunique()
+                multi = n_items[n_items > 1].index
+                if len(multi) >= 20:
+                    constant = grp["__rt"].nunique().loc[multi].eq(1)
+                    share = float(constant.mean())
+                    if share > 0.9:
+                        checks.append(Check("rt_item_level*", "warn",
+                                            f"rt is identical across the items "
+                                            f"answered at the same occasion in "
+                                            f"{share:.0%} of {len(multi)} "
+                                            f"person-occasions (keyed by "
+                                            f"{keys}). That is an occasion-level "
+                                            "duration or latency, not the "
+                                            "per-item response time `rt` means "
+                                            "in the standard — rename it to a "
+                                            "`cov_` column or document it."))
 
     # treat column should be 0/1 if present
     if "treat" in df.columns:
@@ -581,23 +638,19 @@ def run_qc(df: pd.DataFrame, coercion_method: str = "",
 
     checks.extend(_response_scale_checks(df, resp_num, permitted_values, item_constructs))
 
-    # Composite columns masquerading as items. A summary table melts into a
-    # perfectly well-formed id/item/resp frame and passes every structural
-    # check above -- the only tell is what the items are NAMED.
+    # Report naming-pattern evidence, not an inference about how responses
+    # were computed. Raw all-match severity stays unchanged here (#2369).
     if "item" in df.columns:
         labels = [i for i in df["item"].unique() if str(i).strip()]
         comp = [i for i in labels if _looks_composite(i)]
-        if labels and len(comp) == len(labels):
-            checks.append(Check("composite_items*", "fail",
-                                f"every item label names a computed score "
-                                f"({[str(c) for c in comp[:4]]}) — this looks "
-                                "like a summary/aggregate table, not raw "
-                                "item-level responses"))
-        elif comp:
-            checks.append(Check("composite_items*", "warn",
-                                f"{len(comp)}/{len(labels)} item labels name "
-                                f"computed scores ({[str(c) for c in comp[:4]]}) "
-                                "— drop them, or confirm they are real items"))
+        if comp:
+            status = "fail" if len(comp) == len(labels) else "warn"
+            checks.append(Check("composite_items*", status,
+                                f"{len(comp)}/{len(labels)} item labels match "
+                                "score-word or pre/post naming patterns "
+                                f"(examples: {[str(c) for c in comp[:4]]}). "
+                                "Label names alone do not establish whether "
+                                "the responses are computed scores."))
 
     # IRW's own density signal — very sparse data is worth a look
     meta = irw_metadata(df)

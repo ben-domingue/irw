@@ -18,7 +18,7 @@ non-blank -- rather than trusted from Path B's self-report, so the two arms are
 held to one definition. Where Path B's self-reported status disagrees with the
 recomputed one, that is printed rather than silently resolved.
 
-`age_range` is scored against `tags/age_range_derived.csv`, never the sheet:
+`age_range` is scored against `tags/age_range/age_range_derived.csv`, never the sheet:
 ~90% of the sheet's `Mixed` labels are contradicted by the table's own
 `cov_age` (#1760), so the sheet is not gold for that column.
 

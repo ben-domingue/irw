@@ -15,15 +15,16 @@
 # Route 3: the reverse-marked items are stored already reversed, so resp 1
 #   always means the developmental task is attained. All twelve item-total
 #   correlations are positive, which is impossible on raw A=1/B=0 coding.
-rda <- ".cache/batch_304/zr_cleaned.rda"
-rmd <- ".cache/batch_304/qadt_analysis.Rmd"
-for (p in c(rda, rmd)) if (!file.exists(p)) stop("missing cached deposit file: ", p)
+source(".claude/skills/irw-auto-itemtext/scripts/verify_cache.R")
 
+rda <- cached_source(".cache/batch_304/zr_cleaned.rda",
+       "https://osf.io/download/732nm/")
+rmd <- cached_source(".cache/batch_304/qadt_analysis.Rmd",
+       "https://osf.io/download/dja9s/")
 d <- as.data.frame(irw::irw_fetch("QADT_Kleka_2023"))
 if (!nrow(d)) stop("irw_fetch returned no rows -- nothing was checked")
 d$item <- as.character(d$item)
-items <- read.csv("itemtables/batch_304/QADT_Kleka_2023__items.csv",
-                  stringsAsFactors = FALSE, na.strings = "NA", encoding = "UTF-8")
+items <- shipped_items("QADT_Kleka_2023", "itemtables/batch_304/QADT_Kleka_2023__items.csv")
 e <- new.env(); load(rda, envir = e); zr <- as.data.frame(get("zr", envir = e))
 cols <- sprintf("ZR_%d", 1:12)
 rl <- readLines(rmd, warn = FALSE, encoding = "UTF-8")

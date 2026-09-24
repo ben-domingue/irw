@@ -39,12 +39,151 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   already-retired DOIs will say `license_unknown*` where the record says
   CC BY. Cheap: the same 34-row re-check loop, pointed at the ledger.
 
-- [ ] **241 scouted terms remain ranked and unrun**, now in the tracked
-  `pmc_term_backlog.csv` (291 rows, `run_2026_09_20` marks the 50 already
-  swept). 1,553 new DOIs projected pre-dedup, 58% of the measured pool. A
-  second batch starts from that file -- no new scout needed. Fix the scout's
-  500-hit cross-journal cap first if its counts are to be used as a volume
-  estimate rather than a ranking (see BATCH_LOG.md 2026-09-20).
+## From the 2026-09-23 PMC sweep (batch 4)
+
+- [x] **4 tables (42,116 responses) uploaded** (ben-domingue, confirmed 2026-09-24). Original:: `irw_output/`
+  `rogowska_2023_maia2`, `kabir_2023_snaq`, `kabir_2023_bms10`, `kabir_2023_sidas`.
+  No item text this batch (`itemtext_output/` is empty). Dictionary and tag rows are
+  staged in `dictionary_auto.csv` / `tags/tags_auto.csv`.
+
+- [x] **`rogowska_2023_maia2__items.csv` uploaded** (ben-domingue, confirmed 2026-09-24; `uploaded=2026-09-24` stamped). Original: (`red_up itemtext_output`;
+  the response table is already live). Shipped partial: anchors withheld on items
+  5-12 and 15. Stamp `uploaded=` in `itemtext_provenance.csv` and
+  `itemtext/mapping_verification.csv` only after ben confirms.
+
+- [x] **Issues-page entry for `rogowska_2023_maia2` in datapages/irw#241** (2026-09-24). Original: once live: the
+  `public_note` in `itemtext_provenance.csv` (9 reverse-keyed items carry no
+  option labels because their stored direction is unconfirmed).
+
+- [ ] **Decision if wanted: Al Mamun 2023 green skincare (`10.1016/j.heliyon.2023.e16765`)**
+  rejected for fill-down corruption in 4 of 10 blocks; the other 6 (ECT/ECP/ECD/ECE
+  1-5, SCPI/WPPP 1-7, N=778) check out against the deposit's composites. Left out
+  per the Chen 2023 ruling unless ben-domingue says otherwise.
+
+## From the 2026-09-23 PMC sweep (batch 3)
+
+- [x] **8 tables (32,469 responses) + 8 item text tables uploaded** (ben-domingue,
+  confirmed 2026-09-23; `uploaded=2026-09-23` stamped). Original:
+  `irw_output/`: `sison_2022_hiv_testing_stigma`, `sison_2022_provider_mistrust`,
+  `zhang_2024_smoking_rationalisation`, `zhang_2024_ftcd`, `che_mood_2024_pvhs`,
+  `abdulkader_mohamed_2022_exer_knowledge`, `_exer_attitude`, `_exergame_exp`;
+  the same 8 as `itemtext_output/*__items.csv`. Response tables first. Dictionary
+  and tag rows are staged in `dictionary_auto.csv` / `tags/tags_auto.csv`. Stamp
+  `uploaded=` in `itemtext_provenance.csv` and `itemtext/mapping_verification.csv`
+  only after ben confirms. Also in `irw_output/`: the three `ge_2021_*` tables
+  from #2384 (57,061 responses) -- upload them with this batch unless they
+  already went up; they have no item text (see BATCH_LOG 2026-09-23).
+
+- [x] **Issues-page entries added in datapages/irw#239** (2026-09-23; Sison
+  kept: the paper says questions were in English AND Tagalog, Tagalog unpublished). Original: once live
+  (`public_note` is set in `itemtext_provenance.csv`): `zhang_2024_smoking_rationalisation`,
+  `zhang_2024_ftcd` (English substitute, Chinese administration), and
+  `sison_2022_hiv_testing_stigma`, `sison_2022_provider_mistrust` (English/Tagalog
+  offered, English only published) -- for Sison, check first whether the form was
+  side-by-side bilingual ("Yes/ Oo"), in which case blank the public_note instead.
+
+- [x] **Chen 2023 left out** (ben-domingue, 2026-09-23: "if there is a problem
+  let's leave it out"). Stays `rejected_content` in `pmc_leads_2026-09-23.csv`. Original: **`10.1016/j.heliyon.2023.e15742` (Chen 2023, work
+  design).** Rejected because the final 50 of 804 rows duplicate earlier
+  respondents (5 with altered demographics) and the paper counts them. Rows
+  0-753 are clean and ready if you want the prefix shipped. See BATCH_LOG
+  2026-09-23.
+
+- [ ] **91 scouted terms remain ranked and unrun** in `pmc_term_backlog.csv`
+  (`run_2026_09_23b` marks batch 4's 50; projected yield is down to 5 new DOIs
+  per term or fewer). A fifth batch starts from that file.
+
+## From the 2026-09-22 PMC sweep (batch 2)
+
+- [x] **7 tables + 3 item text tables uploaded** (ben-domingue, confirmed
+  2026-09-22): 27,195 responses. The three shipped item text tables are stamped
+  `uploaded=2026-09-22` in both `itemtext_provenance.csv` and
+  `itemtext/mapping_verification.csv`; the four not-shipped provenance records
+  stay unstamped. Dictionary and tag rows reach the sheet via
+  `metadata/02_biblio.R` and `03_tags.R` on the next pipeline run. Original: Beyond the Pilch four below: `bate_2019_srq` (8,300),
+  `kaigaishi_2024_primate_cognition` (6,356), `maes_2020_ospaq` (1,537) --
+  27,195 responses in total across the batch. All 7 dictionary rows and 7 tag
+  rows are staged. Item text ships for three of the Pilch tables only.
+
+- [x] **The Pilch four** (peerj.11263, Pilch 2021) -- uploaded with the batch:
+  `pilch_2021_fcv19s_validation` (2,275), `pilch_2021_ipip20_validation` (6,220),
+  `pilch_2021_preventive_behavior` (1,532), `pilch_2021_preventive_vas` (975) --
+  11,002 responses. Item text ships for all but `fcv19s_validation`. Response
+  tables first (`red_up irw_output`), then `red_up itemtext_output`. Dictionary
+  and tag rows are already staged; stamp `uploaded=` in
+  `itemtext_provenance.csv` and `itemtext/mapping_verification.csv` only after
+  ben confirms.
+
+- [x] **FCV-19S rights call -- cleared, item text shipped** (2026-09-23).
+  The hold was wrong on the standing rule: a missing register row is silence,
+  and silence does not block. Better than silence, Ahorsu et al. 2020 print
+  all seven items in the Appendix of their own CC BY 4.0 article
+  (PMC7100496), so the rights holders published it openly. Register row
+  `FCV-19S` added (verdict `ship`); it also covers, after the fact, the five
+  FCV-19S item text tables that were already live (`fcv19s_hossain_2022_fear`,
+  `fcv19s_hossain_2022__fear`, `kfcovid_fear_li2020`,
+  `odachi_2022_fear_covid19`, `pilch_2021_fear_covid19`) -- the old note here
+  saying the sibling was "in the same position" was wrong, it was published.
+  `pilch_2021_fcv19s_validation__items` (35 rows) is in the `irw_text_2`
+  draft, COUNT(*) 35 / 7 items / 5 resp verified; release is Ben's. Mapping
+  VERIFIED against Table 1 (28/28 values, `verify_pilch_2021_fcv19s_validation.R`).
+
+- [ ] **Lead, not worked: the live `pilch_2021_fear_covid19` item text may not
+  be the administered wording.** It carries the paper's Table 1 Polish; the
+  deposit's Materials sheet -- the questionnaire for both samples, and the
+  source the new table ships -- differs on items 5-7, and it also prints all
+  five Polish anchors, which that table's public note says "are not
+  published". Same sample 1 respondents. Logged, not swept
+  (retroactive audits paused); fixing it is a replace in `irw_text_2` plus a
+  rewrite of its issues-page entry.
+
+- [x] **Issues-page entry for `pilch_2021_fcv19s_validation`** (items 5-7
+  differ from Table 1) -- added in datapages/irw#227.
+
+- [x] **All 14 leads worked, batch closed** (2026-09-22): 4 shipped, 4
+  blocked on licence, 5 rejected on content, 1 skipped on PII. Every row of
+  `pmc_leads_2026-09-22.csv` carries a terminal status and a reason. Superseded
+  as a task; kept for the counts. Original text follows.
+
+- [ ] **`dup_id_item` disagrees with the upload gate on `trial_*` keys.**
+  `run_qc`'s check decides fail-vs-note from `("wave", "timepoint", "date")`
+  alone (`irw_validate/_checks.py` ~line 404), so it hard-fails a table keyed by
+  `trial_number` -- which `datastandard.md` says is exactly what distinguishes
+  repeated responses, and which the same module's own `occasion_columns()`
+  already counts for the rescue path. The upload profile passes such a table;
+  `compat.run_qc` fails it. Reproducible on a 4-column synthetic frame. Wants
+  its own change with tests rather than a drive-by patch.
+
+- [x] **9 actionable leads unworked**, all in the tracked
+  `pmc_leads_2026-09-22.csv`. Ranked by instrument shape, not response count.
+  Largest by shape: `10.7717/peerj.6672` (4,485x21),
+  `10.1038/s41598-024-77912-7` (3,024x31), `10.7717/peerj.15826` (328x30).
+  `10.7717/peerj.11263` is done -- shipped 2026-09-22. Most `recoverable_format` rows are
+  `resp_scale_mixed` -- re-read by block prefix, one file per scale.
+
+- [x] **The `unknown` licences are correct, not a defect** (checked
+  2026-09-22). They arrive via Data Availability links, so the *deposit's*
+  licence governs, not the article's: `osf.io/s4kwv` and `osf.io/zkwna` are
+  public with no licence set, `osf.io/zjnsb` 404s without a token. All three
+  are now in `license_blocked_candidates.csv`. Do not "fix" this by falling
+  back to the article licence -- that is the laundering the source-licence
+  rule forbids.
+
+- [x] **Manual connectors now chain Step 2b** (fixed 2026-09-22). Both
+  `irw_discover_pmc.py` and `irw_discover_plos.py` call
+  `chain_step2b(args.out, run=True)` at end of `main()`, the same call the
+  `_monthly` wrappers make; `chain_step2b`'s docstring records why the manual
+  path was missed. `irw_discover_monthly.py` deliberately does not chain it --
+  it is discovery-only, emits no `flag` column, and its candidates reach Step
+  2b via `irw_batch_updated --retriage`.
+
+- [x] **191 scouted terms remain ranked and unrun** -- batch 3 swept the next
+  50 on 2026-09-23; superseded by the 141-term item in the batch 3 section.
+
+- [x] **241 scouted terms ranked and unrun** -- batch 2 swept the top 50 on
+  2026-09-22; superseded by the 191-term item above. The scout's 500-hit
+  cross-journal cap is still unfixed, so treat its counts as a ranking only,
+  never a volume estimate (see BATCH_LOG.md 2026-09-20).
 
 ## From the 2026-09-20 lead-working pass
 

@@ -6,7 +6,9 @@
 # metadata.csv is stale or missing):
 #
 #   - totals: n_tables, n_responses, n_participants, n_items -- direct
-#     sums across all tables.
+#     sums across all tables -- plus n_tables_itemtext, the live tables
+#     with a row in itemtext_metadata.csv (same case-insensitive count as
+#     11_status.R's itemtext coverage, so the hero and status page agree).
 #   - category_breakdown: tables bucketed by their own aggregate
 #     n_categories (2/3/4/5/6/7+, excluding <2 and >=12), with n_items and
 #     n_responses summed within each bucket.
@@ -44,6 +46,15 @@ totals <- list(
   # treatment).
   n_items        = round(sum(meta$n_items, na.rm = TRUE))
 )
+
+# Case-insensitive on purpose, as in 11_status.R: a case-sensitive join
+# silently drops tables whose names differ only by case. NA (JSON null) if
+# itemtext_metadata.csv is missing; the site hides the line in that case.
+key <- function(x) tolower(trimws(as.character(x)))
+itemtext <- tryCatch(read.csv("itemtext_metadata.csv", stringsAsFactors = FALSE),
+                     error = function(e) NULL)
+totals$n_tables_itemtext <- if (is.null(itemtext)) NA_integer_ else
+  sum(key(meta$table) %in% key(itemtext$table))
 
 MIN_CATEGORIES <- 2   # single-category (no-variance) tables excluded
 MAX_CATEGORIES <- 11  # inclusive; >=12 categories excluded, per paper Sec. 2.2

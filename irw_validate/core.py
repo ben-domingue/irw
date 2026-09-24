@@ -57,6 +57,28 @@ def is_item_text(label: str) -> bool:
     return _table_name(label).endswith(ITEMS_SUFFIX)
 
 
+def _addressable_key(df):
+    """The (item, address) key an option row is joined on, per #1945/#2185.
+
+    Returns the key frame and a short name for the address column, so a finding
+    can say which column actually collided. `resp` is the address where it is
+    populated; `raw_resp` is the fallback the schema provides for sources that
+    print options with no scoring key. Returns (None, "resp") when there is no
+    `item` column to key on at all.
+    """
+    if "item" not in df.columns:
+        return None, "resp"
+    if "resp" not in df.columns:
+        if "raw_resp" in df.columns:
+            return df[["item", "raw_resp"]].copy(), "raw_resp"
+        return df[["item"]].copy(), "resp"
+    if "raw_resp" not in df.columns:
+        return df[["item", "resp"]].copy(), "resp"
+    key = df[["item"]].copy()
+    key["addr"] = df["resp"].where(df["resp"].notna(), df["raw_resp"])
+    return key, "resp-or-raw_resp"
+
+
 def _validate_item_text(df, label: str, profile: str) -> Report:
     """The item text schema: check what applies, and say nothing about the rest."""
     report = Report(label=label, profile=profile, kind="item_text")
@@ -69,9 +91,28 @@ def _validate_item_text(df, label: str, profile: str) -> Report:
             f"missing required columns for item text: {', '.join(missing)}",
             table=table, group="core"))
         return report
-    keys = [c for c in ("item", "resp") if c in df.columns]
+    # THE KEY IS THE ADDRESSABLE ONE, NOT `resp` (#2232).
+    #
+    # The settled rule (#1945/#2185) is that an option row must be addressable:
+    # it carries `resp`, or -- where the source prints bare options with no
+    # scoring key -- `raw_resp`. Keying on `resp` alone broke that in two
+    # directions at once, because two pandas calls disagree about what a null
+    # key means. `duplicated()` treats NaN as equal to NaN, so with `resp`
+    # blank every option row of an item collided; `groupby` DROPS NaN keys by
+    # default, so the frame that would have told the two faults apart came back
+    # empty and the run fell through to a message asserting the option text was
+    # identical when it was the only thing distinguishing the rows. On
+    # gilbert_meta_70 those rows read "gaadee", "kauaa", "kainchee" -- three
+    # different words a child was asked to name.
+    #
+    # So both calls key on `resp` where it is populated and `raw_resp` where it
+    # is not. A row with NEITHER populated has no address at all, still
+    # collides, and is still reported -- that is the defect this check exists
+    # for, and it is the case the previous fix attempt lost by dropping unkeyed
+    # rows instead of falling back.
     report.checks_run.append("dup_item_resp")
-    dup = int(df.duplicated(subset=keys).sum()) if keys else 0
+    key_cols, addr_desc = _addressable_key(df)
+    dup = int(key_cols.duplicated().sum()) if key_cols is not None else 0
 
     # A scored table is a different object. Where `correct_response` is
     # populated, `resp` is a scoring key (0 wrong / 1 right) rather than a point
@@ -88,15 +129,29 @@ def _validate_item_text(df, label: str, profile: str) -> Report:
         # matches nothing and reads an empty column as fully populated.
         filled = col.notna() & ~col.astype(str).str.strip().isin(("", "NA", "nan", "None"))
         scored = bool(filled.mean() > 0.5)
-    if scored:
-        exact = int(df.duplicated().sum())
-        if exact:
-            report.findings.append(Finding(
-                "dup_row", "error",
-                f"{exact} fully identical row(s) in a scored table. `resp` here is a "
-                f"scoring key, so one value carrying several option labels is "
-                f"expected -- but an exact repeat is still a duplicate.",
-                table=table, group="core"))
+    # AN EXACT WHOLE-ROW REPEAT IS A DOUBLED UPLOAD WHATEVER THE SHAPE (#2232),
+    # so it is checked before the scored/unscored split rather than inside the
+    # scored branch. It was only ever reached for scored tables, which meant an
+    # unscored table's doubled upload was reported as `dup_item_resp` -- true,
+    # but the vaguer of the two: `dup_item_resp` says a key repeats, `dup_row`
+    # says the file contains the same row twice, which names the fault.
+    #
+    # NOTHING NEWLY FAILS. An exact whole-row duplicate is a strict subset of a
+    # duplicate (item, addressable key) carrying identical option_text, so any
+    # table this now catches was already failing on `dup_item_resp`. What
+    # changes is which finding it gets, and that only for unscored tables.
+    report.checks_run.append("dup_row")
+    exact = int(df.duplicated().sum())
+    if exact:
+        report.findings.append(Finding(
+            "dup_row", "error",
+            f"{exact} fully identical row(s) -- an item text table carries one row "
+            f"per response option, so a repeat is a doubled upload (#1810). On a "
+            f"scored table `resp` is a key and one value carrying several option "
+            f"labels is expected, but an exact repeat is a duplicate either way.",
+            table=table, group="core"))
+    elif scored:
+        pass                          # handled above; resp is a key here
     elif dup:
         # Two different faults produce this, and the distinction matters to
         # whoever has to fix it, so name which one this is. If the repeated rows
@@ -106,23 +161,30 @@ def _validate_item_text(df, label: str, profile: str) -> Report:
         # both "Strongly agree" and "Strongly disagree", which is two opposite
         # scale directions written into one table and is worse than a duplicate.
         conflicting = 0
-        if "option_text" in df.columns:
-            per_key = df.groupby(keys)["option_text"].nunique(dropna=False)
+        if "option_text" in df.columns and key_cols is not None:
+            # dropna=False on the GROUPBY as well. The parameter of the same
+            # name on nunique() governs the values; this one governs the keys,
+            # and without it a row with no addressable key vanishes from the
+            # comparison rather than being judged by it.
+            per_key = df.groupby([key_cols[c] for c in key_cols.columns],
+                                 dropna=False)["option_text"].nunique(dropna=False)
             conflicting = int((per_key > 1).sum())
         if conflicting:
             report.findings.append(Finding(
                 "resp_ambiguous", "error",
                 f"{conflicting} response value(s) carry more than one option label -- "
-                f"the same `resp` is documented as meaning two different things, so "
+                f"the same item+{addr_desc} is documented as meaning two different things, so "
                 f"nothing joining item text to responses can resolve it. Usually two "
                 f"opposite scale directions merged into one table.",
                 table=table, group="core"))
         else:
             report.findings.append(Finding(
                 "dup_item_resp", "error",
-                f"{dup} duplicate item+resp rows with identical option text -- an item "
-                f"text table carries one row per response option, so a repeat is a "
-                f"doubled upload (#1810)",
+                f"{dup} duplicate item+{addr_desc} rows with identical option text -- "
+                f"an item text table carries one row per response option, so a repeat "
+                f"is a doubled upload (#1810). Rows carrying neither `resp` nor "
+                f"`raw_resp` have no addressable key and count here: nothing can join "
+                f"them to a response (#2232)",
                 table=table, group="core"))
     for finding in extra.check_name(table):
         report.checks_run.append(finding.check)
@@ -196,15 +258,10 @@ def validate_frame(df, *, label: str = "", profile: str = "upload",
                                    if f.check != "dup_id_item"]
                 report.checks_run.append(f"dup_id_item:resolved_by_{resolved_by}")
 
-    # `resp_numeric` as inherited from run_qc measures how many values parse as
-    # numbers over ALL rows, so a float column with missing values fails it --
-    # NaN does not parse. That conflates "not a number" with "not present", and
-    # `resp_na` already reports the second. In the legacy sweep it flagged
-    # 16_personalityfactors, whose resp is float64 and 99% non-null.
-    #
-    # Triage keeps the inherited behaviour (50 callers depend on it); the gate
-    # profiles re-judge it over non-null values only. Every present value must
-    # parse: the inherited 99% tolerance hid rare literal "NA" responses (#2029).
+    # run_qc now excludes nulls from its numeric denominator (#2314 item 2),
+    # but retains the raw/core/triage 99% threshold. The gate profiles still
+    # re-judge strictly: EVERY present value must parse. The inherited 99%
+    # tolerance hid rare literal "NA" responses (#2029).
     if profile in ("upload", "legacy") and "resp" in df.columns:
         import pandas as pd
         present = df["resp"].dropna()

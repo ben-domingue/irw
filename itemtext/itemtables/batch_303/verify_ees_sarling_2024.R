@@ -12,16 +12,17 @@
 # Route 3: the two subscales separate in the live data the way an EES should --
 #   within-subscale correlations exceed between-subscale ones for every item --
 #   which is what would break if VE and IU labels were swapped.
-pdf <- ".cache/batch_303/ees_supp.pdf"
-if (!file.exists(pdf)) stop("missing cached deposit file: ", pdf)
+source(".claude/skills/irw-auto-itemtext/scripts/verify_cache.R")
+
+pdf <- cached_source(".cache/batch_303/ees_supp.pdf",
+       "https://osf.io/download/g5mvt/")
 if (!requireNamespace("pdftools", quietly = TRUE))
     cat("NOTE: pdftools not installed; falling back to the cached extraction\n")
 
 d <- as.data.frame(irw::irw_fetch("ees_sarling_2024"))
 if (!nrow(d)) stop("irw_fetch returned no rows -- nothing was checked")
 d$item <- as.character(d$item)
-items <- read.csv("itemtables/batch_303/ees_sarling_2024__items.csv",
-                  stringsAsFactors = FALSE, na.strings = "NA", encoding = "UTF-8")
+items <- shipped_items("ees_sarling_2024", "itemtables/batch_303/ees_sarling_2024__items.csv")
 
 cat("=== Route 1: the supplement's label set ===\n")
 lab <- c(paste0("VE", 1:15), paste0("IU", 1:15))

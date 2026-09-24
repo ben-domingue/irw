@@ -1,0 +1,4 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"moon_2023_korean_proficiency","PASS",4,4,TRUE,TRUE,FALSE,TRUE,0,0,""
+"moon_2023_pregnancy_stress","PASS",11,11,TRUE,TRUE,FALSE,TRUE,0,50,"50% of rows have blank option_text"
+"moon_2023_selfesteem","PASS",11,11,TRUE,TRUE,FALSE,TRUE,0,50,"50% of rows have blank option_text"
