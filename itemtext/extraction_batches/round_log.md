@@ -24599,3 +24599,30 @@ per-item means equal the live means for every item.
 - **done** `goldberg_2018_sdv_influ` (160 rows = 32 × 5, data_labels). SDV.pdf p.8, "Who deserves more influence, power, and
   respect?" The DDI value-label frequencies equal the live item × resp counts in 160/160 cells.
 Queue: 22 pending, 0 in_progress. Cap (batch_348) not reached.
+
+## batch_338 — 2026-09-23 21:01–21:07 PDT (#2381 slice 02)
+3 tables claimed (three agents) · **3 written / 0 blocked / 0 failed** · yield 3/3. All six Step 4 gates were clean:
+audit 3 PASS with no WARNs, verify_batch 2 PASS + 1 MISSING(exempt) (data_labels), lint clean (1 NOT_NEEDED row, written to
+both verification_merged.csv and mapping_verification.csv), irw-validate ok, and normalize_nulls changed nothing.
+check_provenance exited 0 and repeated only the existing items (38 IRW-generated tables with no issues-page entry, none from
+this batch, plus the two `mixed` REVIEW items).
+- **done** `goldberg_2018_sdv_ipip_temperament` (595 rows = 119 × 5, data_labels). ESCS "(24) Survey of Dispositions and
+  Views", doi:10.7910/DVN/LHHONE (CC0), SDV.pdf pp.1–5 "PERSONALITY TENDENCIES". The DDI labels, SDV_items.txt and the form
+  agree 119/119 in order, and the DDI means equal the live means 119/119. The printed form overrides the DDI label on 4 items:
+  d95 is a real wording difference (the form omits "on something else"; the agent checked the page image), and d26/d72/d99
+  are typos or quote style. Nobody used resp = 1 on d6; its option row is kept. The IPIP register row was already `ship`.
+- **done** `he_2019_flipped_classroom_attitudes` (60 rows = 12 × 5, paper_explicit, VERIFIED) and
+  **done** `he_2019_flipped_classroom_satisfaction` (40 rows = 8 × 5, paper_explicit, VERIFIED). He et al. 2019 PLOS ONE
+  doi:10.1371/journal.pone.0214624 (CC BY 4.0), Tables 6 and 7. The S7/S8 .xls files have bare numeric headers, so the tie
+  is the paper's own item numbering. It was verified on per-arm means and SEs: every item matches exactly one published row.
+  `translated_substitute`/`study_supplied`. The language=Chinese is inferred from the setting (Nanjing Medical University)
+  and is not stated in the paper. No Chinese wording is published anywhere. Only the scale endpoints are labelled, so options
+  2–4 are blank.
+  **RESPONSE-DATA DEFECT (both tables): `cov_group` is inverted.** `data/he_2019_flipped_classroom.py` maps
+  {0: flipped_classroom, 1: lecture_based}, but group 1 is the FC arm (paper: FC n=81, LBL n=56). Both agents found this
+  independently, and the orchestrator re-checked it on live data. Live `lecture_based` has 81 ids and carries the paper's FC
+  means: satisfaction_1 4.36, attitude_10 4.42. Live `flipped_classroom` has 56 ids and carries the LBL means: attitude_10
+  3.09, satisfaction_3 2.88. The fix is `{0: lecture_based, 1: flipped_classroom}` plus a re-upload of both response tables.
+  No issue was filed; that is left for a human. Both public_notes disclose the swap. There is also a minor point: the paper's
+  means average in the "9" not-applicable code, which IRW correctly drops, so a few live means differ from the printed ones.
+Queue: 19 pending, 0 in_progress. Cap (batch_348) not reached.
