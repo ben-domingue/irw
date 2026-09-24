@@ -129,15 +129,29 @@ def _validate_item_text(df, label: str, profile: str) -> Report:
         # matches nothing and reads an empty column as fully populated.
         filled = col.notna() & ~col.astype(str).str.strip().isin(("", "NA", "nan", "None"))
         scored = bool(filled.mean() > 0.5)
-    if scored:
-        exact = int(df.duplicated().sum())
-        if exact:
-            report.findings.append(Finding(
-                "dup_row", "error",
-                f"{exact} fully identical row(s) in a scored table. `resp` here is a "
-                f"scoring key, so one value carrying several option labels is "
-                f"expected -- but an exact repeat is still a duplicate.",
-                table=table, group="core"))
+    # AN EXACT WHOLE-ROW REPEAT IS A DOUBLED UPLOAD WHATEVER THE SHAPE (#2232),
+    # so it is checked before the scored/unscored split rather than inside the
+    # scored branch. It was only ever reached for scored tables, which meant an
+    # unscored table's doubled upload was reported as `dup_item_resp` -- true,
+    # but the vaguer of the two: `dup_item_resp` says a key repeats, `dup_row`
+    # says the file contains the same row twice, which names the fault.
+    #
+    # NOTHING NEWLY FAILS. An exact whole-row duplicate is a strict subset of a
+    # duplicate (item, addressable key) carrying identical option_text, so any
+    # table this now catches was already failing on `dup_item_resp`. What
+    # changes is which finding it gets, and that only for unscored tables.
+    report.checks_run.append("dup_row")
+    exact = int(df.duplicated().sum())
+    if exact:
+        report.findings.append(Finding(
+            "dup_row", "error",
+            f"{exact} fully identical row(s) -- an item text table carries one row "
+            f"per response option, so a repeat is a doubled upload (#1810). On a "
+            f"scored table `resp` is a key and one value carrying several option "
+            f"labels is expected, but an exact repeat is a duplicate either way.",
+            table=table, group="core"))
+    elif scored:
+        pass                          # handled above; resp is a key here
     elif dup:
         # Two different faults produce this, and the distinction matters to
         # whoever has to fix it, so name which one this is. If the repeated rows
