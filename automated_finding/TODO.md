@@ -52,8 +52,8 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   2026-09-24). A script that drops the exact copies (1,640 ids) exists but was
   not committed; say the word if this one should ship trimmed.
 
-- [ ] **41 ranked terms remain in `pmc_term_backlog.csv`** (29 projected new DOIs).
-  One last small batch, or retire the backlog.
+- [x] **`pmc_term_backlog.csv` exhausted** (2026-09-24): the last 41 terms ran,
+  20 candidates, 2 leads, nothing shipped. See BATCH_LOG 2026-09-24 final sweep.
 
 ## From the 2026-09-23 PMC sweep (batch 4)
 
