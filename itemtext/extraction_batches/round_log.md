@@ -24804,3 +24804,18 @@ removed the 40 CSVs. Draft now 987 tables. Issues-page entries: oneoff/itemtext-
   - The extraction agent reports that the appendix's student battery does not line up one-to-one with ss_gender_1..7, which is why the student table stayed on the readme.
 - For the three remaining `alan_2018_teacher_*` tables (growth_mindset, modern_teaching, warmth): per the agents, the Essex appendix prints their full wording, and the readme gives per-item anchor directions. Check direction per battery; teacher and student batteries run opposite ways.
 - Unrelated, surfaced incidentally: in `ts_6` (not shipped by any table), 80/143 teachers say girls are better at maths.
+
+### batch_347 — 2026-09-24T06:05 — 3 tables: 3 written / 0 blocked / 0 failed (yield 3/3)
+
+- Claimed `alan_2018_teacher_growth_mindset`, `alan_2018_teacher_modern_teaching` and `alan_2018_teacher_warmth`. These are the last three tables from Alan, Ertac & Mumcu 2018 (Dataverse doi:10.7910/DVN/FGBZCK, CC0), and the family is now complete. Each agent was told which siblings it must not touch.
+- All three are `data_labels` (item codes are the `gstyping.dta` column names; dta labels and `readme.pdf` agree 5/5, 6/6 and 4/4). The wording comes from the Essex accepted-manuscript appendix. Provenance: `translated_substitute`/`study_supplied`, language=Turkish (no Turkish wording published). No verify scripts are owed (verify_batch: MISSING(exempt)=3). NOT_NEEDED rows are in both verification_merged.csv and mapping_verification.csv.
+- Gates: normalize 0 changes; audit 3 PASS, no anomalies; lint clean; irw-validate ok x3; check_provenance exit 0 (only its standing `mixed` review list, no batch_347 tables).
+- Anchor direction differs by item, per the readme. Each public_note says so:
+  - growth_mindset: ts_gms_1/3/4 are stored reversed (1=strongly agree).
+  - modern_teaching: ts_modern_3/4/6 are stored reversed.
+  - warmth: ts_warmth_1–3 run 1=strongly agree. For ts_warmth_4, the readme words the item distanced-first with 1=strongly agree. The shipped appendix wording is warm-first, so its anchors are flipped to 1=strongly disagree. 1_measures.do sums each battery with no recode.
+- Step 5b re-checks, done by the orchestrator against the deposit dta (teacher level, N=145). **All confirmed.**
+  - The readme text for ts_warmth_4 (the "respect / quiet classroom … more important than warm" wording, 1=strongly agree) matches what the agent reported.
+  - All inter-item correlations are positive: warmth 0.19–0.51 (ts_warmth_4 at +0.19/+0.51/+0.42 with items 1/2/3); modern 0.11–0.42; gms 0.15–0.51. So the per-item keying is internally consistent.
+  - Distributions: ts_warmth_4 = 27/4/2/112 and ts_modern_6 = 45/0/2/97 at resp 1–4, both near-dichotomous. These are properties of the deposit data, not itemtext defects. Both are noted in notes/provenance, and ts_modern_6's public_note mentions it.
+- Rights for all three rest on silence. The items are study-authored and the deposit is CC0, but no terms cover the wording. Paper footnote 10 says some teaching-style items were adapted from OECD TALIS 2013 without saying which; the warmth items were not checked against TALIS.
