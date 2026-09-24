@@ -1689,9 +1689,9 @@ spain_2024_politics_difficulty,done,batch_357,2026-09-24T07:15:06
 spain_2024_politics_inperson,done,batch_358,2026-09-24T07:22:47-07:00
 spain_2024_politics_online,done,batch_358,2026-09-24T07:22:47-07:00
 spain_2024_politics_political,done,batch_358,2026-09-24T07:22:47-07:00
-spain_2024_politics_values,pending,,
-spain_2026_elections_campaign,pending,,
-spain_2026_elections_garcia,pending,,
+spain_2024_politics_values,done,batch_359,2026-09-24T07:35:00-07:00
+spain_2026_elections_campaign,done,batch_359,2026-09-24T07:35:00-07:00
+spain_2026_elections_garcia,done,batch_359,2026-09-24T07:35:00-07:00
 spain_2026_elections_gavira,pending,,
 spain_2026_elections_leaderscampaign,pending,,
 spain_2026_elections_maillo,pending,,
