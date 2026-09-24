@@ -24786,3 +24786,21 @@ removed the 40 CSVs. Draft now 987 tables. Issues-page entries: oneoff/itemtext-
 - `islam_2022_phq9`: PHQ9 has no 'Several days' and 20.8% 'Nearly every day' in the deposit (likely coding).
 - `huang_2023_medseq`: data 1-5 where the source says 1-6.
 - `ai_fear_dong_2026_*`: item = occupation_trait copies each answer across 6-8 codes (480,000 rows, 60,000-80,000 real answers).
+
+### batch_346 — 2026-09-24T05:47 — 3 tables: 3 written / 0 blocked / 0 failed (yield 3/3)
+
+- Claimed `alan_2018_student_gender_attitudes`, `alan_2018_teacher_extrinsic_motivation` and `alan_2018_teacher_gender_attitudes`. All three come from Alan, Ertac & Mumcu 2018 (REStat; Dataverse doi:10.7910/DVN/FGBZCK, CC0). Each agent was told which siblings it must not touch.
+- All three are `data_labels`: the item codes are the deposit `gstyping.dta` column names, and the dta variable labels and `readme.pdf` tie each code to its statement. No verify scripts are owed (verify_batch: MISSING(exempt)=3). The NOT_NEEDED rows are in both verification_merged.csv and mapping_verification.csv.
+- All three are `translated_substitute`/`study_supplied`, language=Turkish. The Turkish wording is not in the deposit or the paper. The REStat PDF on direct.mit.edu is bot-walled; the Essex accepted manuscript (repository.essex.ac.uk/23823) has the appendix.
+- Gates: normalize 0 changes; audit 3 PASS, no anomalies; lint clean; irw-validate ok x3; check_provenance exit 0, and none of this batch's tables are flagged.
+- Step 5b re-checks, done by the orchestrator against the deposit dta. **All confirmed.**
+  - The dta labels match all 20 shipped items by content.
+  - Student direction (1=strongly agree): girls vs boys mean 2.80 vs 2.46 on ss_gender_1 ("Girls cannot play football") and 3.18 vs 2.48 on ss_gender_2 ("Boys are better at maths"), grouped by `male`.
+  - teacher_gender: the appendix orders items 5–9 differently from ts_gender_5..9. The labels settle the mapping; mapping by appendix order would have permuted five items.
+- Consistency across the family (for triage, not a defect):
+  - The student table ships the readme's short wording and labels the endpoints only (2/3 blank). The two teacher tables ship the fuller Essex-appendix wording with all four anchors.
+  - The two teacher tables word the anchors differently: `ts_ext` uses the main text's "I strongly agree…" and `ts_gender` uses the appendix's "completely agree…".
+  - Per the readme, `ts_ext_4` is stored reversed (1=strongly agree), so its option_text runs the other way from ts_ext_1–3. Only weak data support: r=+0.08 to +0.21 with the other three at the student-row level, +0.12 to +0.17 at the teacher level.
+  - The extraction agent reports that the appendix's student battery does not line up one-to-one with ss_gender_1..7, which is why the student table stayed on the readme.
+- For the three remaining `alan_2018_teacher_*` tables (growth_mindset, modern_teaching, warmth): per the agents, the Essex appendix prints their full wording, and the readme gives per-item anchor directions. Check direction per battery; teacher and student batteries run opposite ways.
+- Unrelated, surfaced incidentally: in `ts_6` (not shipped by any table), 80/143 teachers say girls are better at maths.
