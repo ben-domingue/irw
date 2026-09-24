@@ -24084,3 +24084,23 @@ translation of the deposited Spanish).
 (name, dictionary Description and build-script comment all wrong); `FomoNegativeAffect_cremer_2026_phq`
 dictionary Description says "past two weeks", administered past month; `lee_2020_vr_usability` Usability7
 M12 = 10 vs the paper's stats; `goldberg_2018_ipip` n1-n24 duplicate `goldberg_2018_bri_feel` responses.
+
+## batch_321 — 2026-09-23 17:24–17:32 PDT (3 agents, 3 tables)
+
+**Written 3 / blocked 0 / failed 0 — yield 3/3.** Breaker not tripped. 22 pending remain.
+
+- `sabers_vesper2023` (75 rows, data_labels, NOT_NEEDED): wording is the English .sav variable labels.
+  **Overrides the .sav value labels** on negaf1_r/negaf2_r/negaf3_r/leg3_r, which are reverse-scored
+  in the live table, so option_text runs 1 = Agree … 5 = Do not agree. Orchestrator re-check confirms
+  this. Live negaf1_r counts are 153/299/382/220/307, the raw negaf1 counts (307/220/382/299/153)
+  reversed. Administered in EN/DE/FR, but only the English wording ships. Export artifact "strikers^" -> "strikers’".
+- `sem_cnes` (16 rows, paper_explicit, VERIFIED): wording from CRAN sem CNES.Rd, corroborated by
+  ICPSR 2593 labels. Live resp counts match the .rda in 16/16 cells. The survey was fielded in EN/FR and
+  only the English ships. option_text is rendered from factor levels because no printed questionnaire
+  was found. Both are disclosed in public_note.
+- `silvia_2024_funny` (40 rows, paper_explicit, VERIFIED): HEISS item pool docx (OSF p23sq, CC BY).
+  Table 2 M/SD/GRM-a all reproduce within 0.005. 1 of 576 within-subscale orderings fits.
+
+Gates: normalize 0 changes. audit 3 PASS. verify_batch 2 PASS + 1 exempt. lint clean. irw-validate
+ok ×3. check_provenance exit 0; its 2 `mixed` REVIEW items are pre-existing, not from this batch. Cap
+(batch_330) not reached.
