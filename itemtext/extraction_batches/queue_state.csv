@@ -1593,9 +1593,9 @@ spain_2026_confidence_macro,done,batch_325,2026-09-23T18:02:06-07:00
 spain_2026_confidence_prospect,done,batch_326,2026-09-23T18:10:20
 spain_2026_confidence_retrospect,done,batch_326,2026-09-23T18:10:20
 stoyel_2021_social_modeling,done,batch_326,2026-09-23T18:10:20
-sun_2025_morality_study3_moralratings,pending,,
-sun_2025_morality_study3_respectfulness,pending,,
-talaifar_2025_study2_thermometer,pending,,
+sun_2025_morality_study3_moralratings,done,batch_327,2026-09-23T18:23:05-07:00
+sun_2025_morality_study3_respectfulness,blocked,batch_327,2026-09-23T18:23:05-07:00
+talaifar_2025_study2_thermometer,done,batch_327,2026-09-23T18:23:05-07:00
 teicher_2015_mace_peer_verbal,pending,,
 teicher_2015_mace_verbal,pending,,
 yao_2020_gad,pending,,

@@ -24261,3 +24261,30 @@ Spain agents re-derived allow from the reuse-conditions page. The register is un
 
 Gates: normalize 0 changes. audit 3 PASS. verify_batch 1 PASS + 2 exempt. lint clean (3 rows). irw-validate ok ×3.
 check_provenance exit 0 (its 2 `mixed` REVIEW items are pre-existing). Cap (batch_330) not reached.
+
+## batch_327 — 2026-09-23T18:13 claim, closed 18:25 — 3 tables: 2 written, 1 blocked, 0 failed (yield 67%)
+
+Three agents, no kills. Two sun_2025_morality_study3 siblings (OSF 9ndt2 / wvq64) plus one talaifar_2025 table.
+
+- `sun_2025_morality_study3_moralratings` (32 items, resp 1–9). paper_explicit, study_materials; verify script PASS
+  (each item's live (id,resp) reproduced 100% by its claimed column and by no other). Audit WARN, explained in notes.
+  Caveat: the stem and 1/5/9 anchors come from the codebook's nominator block. The supplement confirms informants rated the
+  same adjectives minus eight, but it doesn't reprint the informant stem.
+  **Two data defects, confirmed by the orchestrator against study3-maindat.csv:** (1) `itkindness`/`itintegrity` are
+  composites (analyses.R 218–219), not items. They are non-integer in 144/156 source rows each and shipped with blank text in
+  section _2. They are candidates for removal from the response table. (2) Every `it.*` value is a per-target mean across
+  informants, which `data/sun_2025_morality.do` rounds (e.g. it.cruel is non-integer in 54/151 rows). A resp here is not one
+  person's answer, and this affects every sun_2025_morality_study3_it* table. Worth an issue.
+- `sun_2025_morality_study3_respectfulness` — **blocked, instrument rights.** Five BFAS items (IPIP, ship) plus one BFI-2
+  item `itbfi27` ("Is respectful, treats others with respect."). The register has BFI-2=block. Retry test NO. **For Ben:**
+  may a NEW table ship with the BFI-2 item omitted or blanked? A gate-passing blank-itbfi27 candidate is banked in
+  .cache/sun_2025_morality_study3_respectfulness/. Row added to pending_index_notes.csv.
+- `talaifar_2025_study2_thermometer` (2 items, resp 0–100). data_labels, from the Qualtrics header labels. Live data
+  reproduces 156/156 per item (cross-match 23/156). Only the Cold/Neutral/Warm anchors are labelled. Caveat shipped
+  verbatim with a public_note: the prompt says "Democrats and Republicans" but the items rate conservatives/liberals.
+  **Dictionary defect, confirmed via Crossref:** DOI 10.1037/pspp0000549 is "Methods reflect values…" (JPSP 128). The
+  correct one is 10.1037/pspp0000545 ("Lifestyle polarization on a college campus…", JPSP 129:152–180).
+
+Gates: normalize fixed 1 file (talaifar). audit 1 PASS + 1 WARN. verify_batch 1 PASS + 1 exempt. lint clean (2 rows).
+irw-validate ok ×2. check_provenance exit 0 (its 2 `mixed` REVIEW items are pre-existing). Circuit breaker 0% failed.
+Cap (batch_330) not reached. 4 pending rows remain.
