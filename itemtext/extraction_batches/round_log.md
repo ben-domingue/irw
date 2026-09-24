@@ -25432,3 +25432,15 @@ Tables: spain_2025_sanitation_hospital, spain_2025_sanitation_mental, spain_2025
   - irw-validate: ok ×3.
   - check_provenance: exit 0 (only the standing 4-table `mixed` REVIEW).
 Queue: 4 pending (spain_2025_sanitation_regional/services/specialist/system), 0 in_progress. Cap (batch_402) not reached.
+
+## batch_401 — 2026-09-24T14:44 (closed ~14:55)
+Tables: spain_2025_sanitation_regional, spain_2025_sanitation_services, spain_2025_sanitation_specialist. Three agents, one per table, no kills. **3 written / 0 blocked / 0 failed**, yield 100%. Circuit breaker: 0% failed. Fourth round of the spain_2025_sanitation_* family (CIS Estudio 3531, N=2427). Each agent copied the batch_400 cache into its own .cache dir. Rights: the existing CIS `allow` row applies. All three re-read the reuse page (HTTP 200, both key phrases present). No register rows written. All three are data_labels, so there are NOT_NEEDED rows in verification_merged.csv and mapping_verification.csv. Gates: audit 3 PASS with no anomalies; verify 3 MISSING(exempt); lint clean; irw-validate ok x3; check_provenance exit 0.
+- Numbering: the highest existing directory was batch_400, so this is batch_401. It is not in either hole.
+- `spain_2025_sanitation_regional`: done. P19_1-4 (Mejor/Igual/Peor). 12 rows. The single block's lead-in is in `instructions`.
+  - N.S. is heavy and dropped by the .do: 469/421/452/628, so n is 1935/1979/1942/1770.
+- `spain_2025_sanitation_services`: done. P4ES_1-6 (1-10, endpoints only). 60 rows.
+  - P4ES_4 (061/112 emergency lines) loses 500 N.S. + 35 N.C., so n is 1892.
+- `spain_2025_sanitation_specialist`: done. P7C_1-3 (Sí/No), P7D_1-3 (1-10, endpoints only), P7E (1-5 plus 6). 42 rows.
+  - P7E keeps the volunteered code 6 "Depende, en unas consultas mejor, en otras peor". The .do keeps it (it drops only 0/8/9). It ships as an option row with (NO LEER) stripped, and public_note flags it as non-ordinal.
+- Step 5b (orchestrator re-check): live irw_table_sets per-item n matches every agent claim. In 3531_num.csv, P7E code 6 = 8, P4ES_4 98/99 = 500/35, and P19_4 8 = 628.
+Queue: 1 pending (spain_2025_sanitation_system), 0 in_progress. Cap (batch_402) not reached. The next round would be batch_402 itself, which will be the capped final round.
