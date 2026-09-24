@@ -1767,9 +1767,9 @@ musifeast17_vanderwalle_2025,blocked,batch_384,2026-09-24T11:54:30-07:00
 peters_2025_att_exp_eval,done,batch_385,2026-09-24T12:19:21-07:00
 peters_2025_att_instr_strength,done,batch_385,2026-09-24T12:19:21-07:00
 peters_2025_ciberlite,done,batch_385,2026-09-24T12:19:21-07:00
-peters_2025_gen_risk_eval,pending,,
-peters_2025_hw_frequency,pending,,
-peters_2025_hw_intensity,pending,,
+peters_2025_gen_risk_eval,done,batch_386,2026-09-24T12:31:25-07:00
+peters_2025_hw_frequency,done,batch_386,2026-09-24T12:31:25-07:00
+peters_2025_hw_intensity,done,batch_386,2026-09-24T12:31:25-07:00
 peters_2025_nrm_desc_behavior,pending,,
 peters_2025_nrm_desc_ident,pending,,
 peters_2025_nrm_inj_motivation,pending,,
