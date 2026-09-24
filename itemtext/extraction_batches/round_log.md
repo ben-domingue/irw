@@ -24645,3 +24645,27 @@ has run consecutively 305..338, so this round is batch_339. The Step 1 text shou
   public_note discloses it; the data lean toward official (GAD5-PHQ8 r 0.444 vs GAD4 0.396) but the CI includes 0. NO_ROUTE on
   an inferred basis -> candidate to hold back at upload.
 Queue: 16 pending, 0 in_progress. Cap (batch_348) not reached.
+
+## batch_340 — 2026-09-23T21:18 (3 tables, 3 agents)
+Written 3 / blocked 1 (CSV retained) / failed 0 → done 2 / blocked 1 / failed 0 (yield 2/3 shippable). Circuit breaker: 0% failed.
+Gates: normalize_nulls 1 of 3 changed (jian-wen, blanks→NA); audit_batch PASS x3 (no WARNs); verify_batch PASS x3; lint
+clean; check_provenance exit 0 (no entries for these tables); **irw-validate: 1 ERROR `name_length` + 1 WARN `name_charset`
+on `jian-wen-low-sepsis-and-trauma-resuscitation-2024`** (live name 49 chars, hyphens), the other two ok.
+- islam_2022_phq9 — done. paper_order, translated_substitute (Bangla administered, none published), official PHQ English
+  (register: PHQ family = ship). PARTIAL: live total M 6.29/SD 6.47 = published, r(GAD-7) .659; PHQ1/PHQ2 mutual top
+  correlate (.62); PHQ9 highest floor. Does not order PHQ3–8 or split PHQ1/PHQ2. **Response-data oddity, orchestrator
+  re-checked on live data: PHQ9 0/1/2/3 = 316/0/23/89 (n=428)** — nobody chose "Several days", 20.8% "Nearly every day" on
+  self-harm; every other item uses all four levels. Live = deposit, so it is source-side (possibly 1 miscoded as 3,
+  unproven). Disclosed in public_note; no issue filed.
+- jian-wen-low-sepsis-and-trauma-resuscitation-2024 — **blocked on naming, CSV retained** (retry test NO). Extraction is
+  clean: 62 rater-checklist items, paper_explicit/study_materials, CC0 Dataverse supplement; PARTIAL via Table 3 subscale
+  totals by arm (12 groups, means within 0.042). Paper's trauma/VPS SD 6.0 does not reproduce — orchestrator re-check: 5.69
+  (n=19, M 36.2), paper-side. Blocked under the batch_132/batch_219 precedent; note batch_309 instead marked its
+  name_length tables `done` against irw#2365 — the two precedents disagree and a human should pick one. Unblock: rename the
+  live table ≤40 chars lowercase and rename the CSV. Row added to pending_index_notes.csv.
+- kern_2021_connectedness — done. paper_explicit, study_materials (Gan et al. 2022 Supp. Table 2, CC BY). VERIFIED:
+  supplement code labels + per-respondent identity with the figshare workbook (350/350; max cross-column agreement 0.883).
+  **Step 3b instrument mismatch:** C1–C9 are the paper's "Course design" scale; "connectedness" appears nowhere in the
+  paper (orchestrator grep confirmed). The table name/Description are wrong; the pending siblings kern_2021_engagement
+  (E1–E9 = "Educator style") and kern_2021_learning (L1–L12 = "Life skills") likely are too. Dictionary fix owed; not filed.
+Queue: 13 pending, 0 in_progress. Cap (batch_348) not reached.
