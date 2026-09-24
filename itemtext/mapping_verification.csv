@@ -1472,3 +1472,6 @@
 "spain_2023_identity_identification","batch_355","data_labels","","none","NOT_NEEDED","mapping_basis=data_labels: .do lowercases CIS column names (P5 items); 3409.sav variable labels tie each code to its P.5 text directly"
 "spain_2023_identity_patriotism","batch_355","data_labels","","none","NOT_NEEDED","mapping_basis=data_labels: .do lowercases CIS column names (p9_1..p9_3); 3409.sav variable labels tie each code to its P.9 statement directly"
 "spain_2023_identity_pride","batch_355","data_labels","","none","NOT_NEEDED","mapping_basis=data_labels: 3409.sav variable labels tie P11/P12 to their question text; .do uses lowercased column names as item codes"
+"spain_2023_identity_state","batch_356","data_labels","","none","NOT_NEEDED","mapping_basis=data_labels: .do lowercases CIS column names (p13, p14); 3409.sav variable/value labels tie each code to its P.13/P.14 text directly"
+"spain_2023_identity_territorial","batch_356","data_labels","","none","NOT_NEEDED","mapping_basis=data_labels: .do lowercases CIS column names (p7_1..p7_5); 3409.sav variable labels tie each code to its P.7 row directly"
+"spain_2024_politics_actions","batch_356","data_labels","","none","NOT_NEEDED","mapping_basis=data_labels: .do lowercases CIS column names (acti_1..acti_13); 3490.sav variable labels tie each code to its P.16 row directly"

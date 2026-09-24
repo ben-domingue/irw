@@ -1,0 +1,4 @@
+"table","batch","mapping_basis","uploaded","route","status","evidence"
+"spain_2023_identity_state","batch_356","data_labels","","none","NOT_NEEDED","mapping_basis=data_labels: .do lowercases CIS column names (p13, p14); 3409.sav variable/value labels tie each code to its P.13/P.14 text directly"
+"spain_2023_identity_territorial","batch_356","data_labels","","none","NOT_NEEDED","mapping_basis=data_labels: .do lowercases CIS column names (p7_1..p7_5); 3409.sav variable labels tie each code to its P.7 row directly"
+"spain_2024_politics_actions","batch_356","data_labels","","none","NOT_NEEDED","mapping_basis=data_labels: .do lowercases CIS column names (acti_1..acti_13); 3490.sav variable labels tie each code to its P.16 row directly"

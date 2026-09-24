@@ -24888,3 +24888,13 @@ Written / blocked / failed: **3 / 0 / 0** (yield 100%). Circuit breaker: 0% fail
 - Orchestrator note: the first append to mapping_verification.csv went through Python text mode and rewrote the file's CRLF line endings as LF (a whole-file diff); caught before commit, restored, and re-appended in binary with CRLF (+3 lines only).
 - Two `spain_2023_identity_*` siblings (state, territorial) remain pending; same CIS 3409 microdata and conventions apply.
 Queue: 17 pending, 0 in_progress. Cap (batch_362) not reached.
+
+## batch_356 — 2026-09-24T07:07:52-07:00 (3 tables, 3 agents)
+Written / blocked / failed: **3 / 0 / 0** (yield 100%). All three `data_labels` + `study_materials` + `machine_translation`, CIS rights register row applied (irw#2381).
+- Numbering: highest existing was batch_355, so this round is batch_356. The "below 300" rule, read literally, gives 305, which already exists; the intended successor is the next number in sequence.
+- `spain_2023_identity_state` (P.13, P.14; 10 rows): two separate questions, blank instructions (pride/europe convention); 8/9 dropped. Rebuilt from 3409_num.csv: 14,965 rows, 0/0 set differences; n p13 7412 / p14 7553 = irw_table_sets.
+- `spain_2023_identity_territorial` (P.7 grid, p7_1..p7_5, 0–10; 55 rows): option_text only at 0/10. **Deliberate deviation from the batch_354/355 fill convention**: P7_2 carries a 19-token CATI fill `(@1…@19)` (region NAME), not the 20-token demonym fill, so it is omitted, as in CIS's own P7_2 label, rather than replaced with `(gentilicio de la C. A.)`. Rebuild 38,074 rows 0/0 diff; n 7640/7636/7631/7596/7571.
+- `spain_2024_politics_actions` (CIS Estudio 3490, P.16 [ACTI], acti_1..acti_13; 52 rows): first table from this study. MD3490 is served at https://www.cis.es/documents/d/cis/MD3490; the 3409 URL pattern 404s. Rebuild 33,064 rows 0/0 diff. ACTI_12 ships the questionnaire's "internet" rather than the label's "Internet".
+- Step 5b orchestrator re-check: **confirmed** both territorial claims. The ES3409 label is `/P7_2 'Con la Comunidad autónoma donde vive'`, with no fill; the questionnaire prints `(@1…@19)` after that row, while P8/P10 use `@1…@20`. codigo3409.pdf's header reads "Escala de identificación (1-10)" directly above the value label "0.- 0 Nada identificado/a", so the codebook defect is real; it does not affect the table.
+- Gates: normalize 0 changes; audit 3 PASS, no WARNs; verify_batch MISSING(exempt)=3; lint clean; irw-validate ok x3; check_provenance exit 0 (new tables listed as HELD, not yet owed an issues-page line).
+Queue: 14 pending, 0 in_progress. Cap (batch_362) not reached.
