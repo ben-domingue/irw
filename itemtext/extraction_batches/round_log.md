@@ -25288,3 +25288,13 @@ Gates: normalize_nulls 0 of 3 changed; audit_batch 3 PASS, no anomalies; verify_
 - Step 5b re-check by the orchestrator on live data: all agent-reported counts confirmed cell for cell (humorclimate 6887 rows, p29 421/912/1302/528/308, p30 520/658/157/1182/899; humorlimits 6768 rows, p13 1368/1954, p24 1315/1616/515; humorperception 10277 rows, p26 3192/247, p27 2566/851, p28 2999/422). The .do line `replace p24 = . if inlist(p24, 3, 8, 9)` confirms the p24 gap.
 - Dictionary defect persists on these siblings too: Reference cites Estudio 3565 (consumer confidence); source is Estudio 3563. Not filed (same as batch_390).
 Queue: 4 pending, 0 in_progress. Cap (batch_402) not reached.
+
+## batch_392 — 2026-09-24T13:26-13:33-07:00 (3 tables, 3 agents)
+Written / blocked / failed: **3 / 0 / 0** → done 3 / blocked 0 / failed 0 (yield 3/3). Circuit breaker: 0% failed.
+Gates: normalize_nulls 0 of 3 changed; audit_batch 3 PASS, no anomalies; verify_batch MISSING(exempt)=3 (all data_labels); lint clean (3 NOT_NEEDED rows in both files); irw-validate 3 ok; check_provenance exit 0 (only the standing `mixed` review list, none from this batch).
+- `spain_2026_disinformation_memes` — done. P.14 (frequency of receiving memes) + P.15_1..6 battery (shared stem as section_prompt, six group labels as item_text), data_labels, CIS Estudio 3563. p14 keeps CIS code 7 for "Nunca o rara vez los recibo" (resp 1,2,3,4,7); P.15 filtered on P14 1-4. Disclosed in public_note.
+- `spain_2026_disinformation_offense` — done. P.23_1..4 grid (Política/Religión/Género/Inmigrantes x Mucho..Nada), stem in instructions per batch_390 hostility layout, data_labels; rebuild equals live exactly (13776 rows, 0 diffs).
+- `spain_2026_disinformation_personalhumor` — done. P.16/17/18/20/21/25, data_labels; rebuild equals live exactly (20845 rows, 0 diffs). CIS code 7 endpoints kept on p17/p20/p25; p21 resp 3 is the volunteered "(NO LEER) Ni de acuerdo ni en desacuerdo", which unlike humorlimits' code 3 the .do KEEPS (.do line 260 drops only 8/9). Disclosed in public_note.
+- Step 5b re-check by the orchestrator against 3563.sav: P14 1/2/3/4/7 = 1056/793/545/163/899 (8=17, 9=20); P15_1 system-missing 936 = 899+17+20, confirming the P14 filter; P21 1-5 = 1481/1814/25/106/43; P17 7=76; P25 7=570; P23_1 1-5 = 352/542/304/1009/1235 — all as the agents reported.
+- Dictionary defect persists (Reference cites Estudio 3565; source is 3563). Not filed (same as batch_390/391).
+Queue: 1 pending, 0 in_progress. Cap (batch_402) not reached.
