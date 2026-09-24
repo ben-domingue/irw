@@ -1,0 +1,3 @@
+"table","batch","mapping_basis","uploaded","route","status","evidence"
+"spain_2026_elections_montero","batch_361","data_labels","","none","NOT_NEEDED","mapping_basis=data_labels: .do lowercases CIS column names (mjmontero_1..mjmontero_6); ES3566 syntax / 3566.sav variable labels tie each code to its P.5c2 text directly"
+"spain_2026_elections_moreno","batch_361","data_labels","","none","NOT_NEEDED","mapping_basis=data_labels: .do lowercases CIS column names (jmmoreno_1..jmmoreno_6); ES3566 syntax / 3566.sav variable labels tie each code to its P.5c1 text directly"
