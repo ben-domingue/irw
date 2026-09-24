@@ -24413,3 +24413,31 @@ data_labels), lint clean, irw-validate ok 2/2, check_provenance exit 0. No kills
 - Leads: the codebook labels trait `fair` as "competent" and omits "competent" (Table S4 settles the order).
   Administered in 20 countries; only the English materials are deposited, so `language` lists the inferred
   subtitle languages.
+
+## 2026-09-23 — batch_331 (irw#2381 slice 02, round 2): 3 tables, 1 written / 2 blocked / 0 failed
+
+Three agents, one per table. Yield 1/3. No kills. Gates: normalize 0 changed, audit 1 PASS, verify_batch 1 PASS,
+lint 0 ERROR / 2 WARN (explained in notes), irw-validate ok 1/1, check_provenance exit 0. Breaker: 0% failed.
+
+- **done** `alqerem_2024_diabetic_health_literacy` (35 rows; data_labels from .sav variable labels; VERIFIED via
+  paper Table 2/3 counts, re-run by orchestrator). **option_text blank on purpose — response-data defect:** the live
+  1–5 codes are not the paper's 1–4 scale. N items reproduce Table 2 exactly only as live {1},{4,5},{2},{3}
+  (N1 live 44/198/65/36/57 → paper 44/93/198/65); C items fit no collapse (C2 live 63/153/124/13/47 vs paper
+  63/155/133/49). resp is non-monotone in literacy for N items. Worth a data-side issue. Paper's 8th item not in deposit.
+- **blocked** `ai_fear_dong_2026_requirement` — RIGHTS, retry test NO; same question as `_ai` (batch_330).
+  The NC-ND VoR prints all of this table's wording. Gate-passing candidate and a PASSing verify script banked in
+  .cache/. It is the only sibling whose 48 codes are real items (3,104/60,000 id×occupation cells single-valued).
+  Codebook `fair`/"competent" typo settled by SI Table S4 + the wide file. **Correction to batch_330:** the HAL id
+  hal-04840907 does not resolve; the cached AAM is hal-05482455 (the `_other_fear` provenance cites the wrong id).
+- **blocked** `anunciacao_2025_emotional_management` — RIGHTS, retry test NO; same shape (study-authored items,
+  unlicensed OSF 9dps4, VoR doi 10.1002/pits.23591 CC BY-NC-ND 4.0). The response data came under "Permission via
+  Email", so an author email could also clear it. Candidate (data_labels, from itens.xlsx with PT + authors' English)
+  banked in .cache/. **The four queued siblings (_relationships, _responsibility, _self-awareness, _social-awareness)
+  will hit the same block** — one ruling from Ben on the NC-ND-VoR-vs-unlicensed-deposit question clears ai_fear ×4
+  and anunciacao ×5.
+- **Data defect (orchestrator-confirmed against base_t1.xlsx):** c_autoger_7 paper-form rows (tipo_form=fisico) are
+  scaled ×1.25 (1.25/2.5/3.75/5/6.25 = 46/94/216/413/353). data/anunciacao_2025_emotional.do:223 drops the 709
+  fractional values and keeps 413 true 4s as resp=5. Fix: divide fisico c_autoger_7 by 1.25 before the floor filter.
+- **PII in the public source deposit (orchestrator-confirmed):** OSF 9dps4 (public=True) base_t1.xlsx carries
+  nome, e_mail, telefone, data_de_nascimento; the agent also reports the same for the 2026 RData. The IRW table has
+  none of it. Local cached copies deleted. Needs Ben's attention (tell the authors?).

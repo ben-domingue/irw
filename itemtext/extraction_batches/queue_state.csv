@@ -1603,9 +1603,9 @@ zhu_2026_llm_meteorology_performance,done,batch_329,2026-09-23T18:40:07-07:00
 ai_fear_dong_2026_ai,blocked,batch_330,2026-09-23T19:39:10-07:00
 ai_fear_dong_2026_other_fear,done,batch_330,2026-09-23T19:39:10-07:00
 ai_fear_dong_2026_own_fear,done,batch_330,2026-09-23T19:39:10-07:00
-ai_fear_dong_2026_requirement,pending,,
-alqerem_2024_diabetic_health_literacy,pending,,
-anunciacao_2025_emotional_management,pending,,
+ai_fear_dong_2026_requirement,blocked,batch_331,2026-09-23T19:41:31-07:00
+alqerem_2024_diabetic_health_literacy,done,batch_331,2026-09-23T19:41:31-07:00
+anunciacao_2025_emotional_management,blocked,batch_331,2026-09-23T19:41:31-07:00
 anunciacao_2025_emotional_relationships,pending,,
 anunciacao_2025_emotional_responsibility,pending,,
 anunciacao_2025_emotional_self-awareness,pending,,
