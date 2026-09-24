@@ -22,7 +22,7 @@ import csv
 import json
 import sys
 
-DERIVED = "/home/ben/Dropbox/projects/irw/src/tags/age_range_derived.csv"
+DERIVED = "/home/ben/Dropbox/projects/irw/src/tags/age_range/age_range_derived.csv"
 SAMPLE = "/home/ben/Dropbox/projects/irw/src/tags/scoring/sample_untagged_2026-09-01.json"
 COLS = ["age_range", "child_age", "sample", "construct_type",
         "measurement_tool", "item_format", "primary_languages", "construct_name"]

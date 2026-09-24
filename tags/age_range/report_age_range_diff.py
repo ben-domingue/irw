@@ -12,7 +12,7 @@ import os
 import pandas as pd
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-SRC = os.path.dirname(HERE)
+SRC = os.path.dirname(os.path.dirname(HERE))
 
 tags = pd.read_csv(os.path.join(SRC, "metadata", "tags.csv"))
 der = pd.read_csv(os.path.join(HERE, "age_range_derived.csv"))

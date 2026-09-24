@@ -59,7 +59,15 @@ Worked examples for both live on the site's
 | `collections/` | Curated groupings of tables |
 | `irw-dataset-builder/` | Streamlit app for interactively building an IRW-formatted dataset (`streamlit run irw-dataset-builder/main.py`) |
 | `manuscript_src/` | Reproducible analysis code for the IRW paper |
+| `red_up/` | The one Redivis uploader (`red_up`); every upload writes a draft for a human to publish |
+| `irw_validate/` | The format validator (`irw-validate`), the gate a finished table passes before upload |
+| `tools/withdrawals/` | One script per table withdrawal from a Redivis draft, kept as the record of what was removed |
 | `misc/`, `training/`, `processing_notes/` | Utility functions, workshop materials, and processing guidance |
+
+Inside each directory, live scripts and standing records sit at the top level and
+finished work goes into `archive/`, `logs/` or a topic folder. See
+[ARCHITECTURE.md §7](ARCHITECTURE.md#7-where-things-go-inside-a-directory) and
+each directory's own README.
 
 Run order for the metadata pipeline is defined by
 `.claude/skills/irw-site-update/scripts/run_pipeline.sh`, which is authoritative

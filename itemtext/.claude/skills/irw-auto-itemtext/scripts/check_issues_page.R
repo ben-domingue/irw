@@ -313,7 +313,7 @@ if (!is.null(snap)) {
                   snap)
   # A withdrawal is the expected reason a stamped table is not live, and it is
   # already recorded -- in one of two places, because the two withdrawal rounds
-  # wrote it differently. tools/withdraw_wording_rights.py rewrites the
+  # wrote it differently. tools/withdrawals/withdraw_wording_rights.py rewrites the
   # public_note to open "IRW does not offer item text for", which is the signal
   # check_provenance.R reads (#2034); the PROMIS round instead wrote WITHDRAWN
   # at the head of the private note and left public_note empty. Both are read

@@ -65,7 +65,7 @@ def main():
     auto = {r["table"].lower()
             for r in csv.DictReader((REPO / "tags/tags_auto.csv").open())}
     derived = {r["table"].lower(): r
-               for r in csv.DictReader((REPO / "tags/age_range_derived.csv").open())}
+               for r in csv.DictReader((REPO / "tags/age_range/age_range_derived.csv").open())}
 
     untagged, gold = defaultdict(list), defaultdict(list)
     for table, shard in sorted(meta.items()):

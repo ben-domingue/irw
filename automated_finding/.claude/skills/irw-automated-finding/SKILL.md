@@ -126,11 +126,11 @@ the environment, not to skip the check.
    permanently invisible. That is the identical shape to the #2203 defect,
    where only 260 of 3,167 ledger DOIs could be re-mined because the rest's
    verdicts died with their `runs/` CSVs. So write the leads to a tracked
-   top-level `<mode>_leads_<date>.csv` carrying a `status` column
+   `leads/<mode>_leads_<date>.csv` carrying a `status` column
    (`unworked`/`shipped`/`blocked_licence`/`skipped_pii`/`rejected_content`)
    and a note, and if the batch ranked more terms than it ran, write the
    ranking to a tracked backlog CSV with a column marking which were run.
-   `pmc_leads_2026-09-20.csv` and `pmc_term_backlog.csv` are the worked
+   `leads/pmc_leads_2026-09-20.csv` and `pmc_term_backlog.csv` are the worked
    examples. Rule of
    thumb: if deleting it after the batch write-up would lose information,
    it does not belong in `runs/`.
@@ -546,7 +546,8 @@ it: 30 tables shipped with no row in `itemtext/mapping_verification.csv`, the pe
   model section 3): `data_labels` describes where the words came from, **not** how the code
   was assigned, so a positional or script-generated code still deserves a sentence.
 - **anything else** — do Step 5b properly and write `itemtables/`-style
-  `verify_<table>.R` beside the batch's output, from
+  `verify_<table>.R` in `automated_finding/itemtext_verification/` (with any
+  `make_itemtext_<table>.py` that built the item text), from
   `itemtext/.claude/skills/irw-auto-itemtext/references/verify_template.R`. It must fetch its
   own data, print the numbers it compares, verify the MAPPING rather than the plumbing, and end
   with exactly `VERDICT: PASS` or `VERDICT: FAIL`. Then run `lint_verification.R` over the

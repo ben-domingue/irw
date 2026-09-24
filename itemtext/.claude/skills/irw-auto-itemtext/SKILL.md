@@ -1418,7 +1418,7 @@ can gate the wrap-up. The categories:
   not listed; what is listed is the remainder, which means an upload did not survive, a
   rename, or a withdrawal nobody wrote down. A withdrawal counts as recorded if the
   `public_note` opens "IRW does not offer item text for" (what
-  `tools/withdraw_wording_rights.py` writes) or the `note` opens `WITHDRAWN` (what the
+  `tools/withdrawals/withdraw_wording_rights.py` writes) or the `note` opens `WITHDRAWN` (what the
   PROMIS round wrote).
 
 STAMP OWED and GONE do not affect the exit status: they are bookkeeping, not an

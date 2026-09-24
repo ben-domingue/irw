@@ -25,7 +25,11 @@ externally, as before.
 Manual run order, if not using the skill:
 
 1. 01_metadata.R: makes metadata.csv [numbers computed from raw core tables such as # of unique `id`s]
-2. 02_biblio.R: makes biblio.csv, comps_biblio.csv, nominal_biblio.csv, simsyn_biblio.csv [bibliographic information for citing -- one pass per source]
+2. 02_biblio.R: makes biblio.csv, comps_biblio.csv, nominal_biblio.csv, simsyn_biblio.csv [bibliographic information for citing -- one pass per source.
+   Also writes three review logs per source into logs/: <x>_refresh_log.csv
+   (cells the dictionary corrected), <x>_license_log.csv (derived licences and
+   their basis) and <x>_bibtex_refetch_log.csv (citations refetched because they
+   named the wrong DOI). They are committed; see ../.gitignore for why]
 3. 03_tags.R: makes tags.csv and nominal_tags.csv [pulls together hand-annotated tags,
    one Google Sheet per source. comp/sim deliberately have no tags --
    see ../ARCHITECTURE.md. Tag vocabulary and decision rules live in
@@ -55,6 +59,9 @@ Manual run order, if not using the skill:
    only; being superseded by the skill's audit_tables.R, which generalizes
    this to all four sources (core/comps/nominal/simsyn) and writes a
    standalone report rather than printing to console]
+
+logs/: the per-run biblio review logs described under step 2.
+pipeline_logs/: write-ups of individual pipeline runs.
 
 hotfixes/: one-off patch/diagnostic scripts, out of scope for the normal
 update process -- see hotfixes/README.md.

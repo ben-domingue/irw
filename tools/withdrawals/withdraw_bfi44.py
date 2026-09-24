@@ -12,7 +12,7 @@ ceba43d286792a9211a64a2f89e2e65ae944436bc45e7990168c5541435cf28d) and
 20240111225603 (sha256 c7cbfffb8098498e59b2ce58144d67355c15829238213265de48ee67e50d3230);
 the batch_186 orchestrator re-confirmed both sentences in both copies. The page has
 since been rewritten for the BFI-2 and says nothing releasing the BFI-44. Same
-structure as the BFI-2 block (tools/withdraw_bfi2.py).
+structure as the BFI-2 block (tools/withdrawals/withdraw_bfi2.py).
 
 WHY THESE SHIPPED. conner_2017_bfi (batch_021) and CV_OASIS_ODSIS_PPE_Novak_2020_BFI
 (batch_024) shipped 2026-09-04, before the irw#1945 reserve-a-right rulings existed.

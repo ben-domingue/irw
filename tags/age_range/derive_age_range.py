@@ -13,7 +13,7 @@ Outputs, all under tags/:
   age_range_audit.csv     every table considered, with its numbers and verdict
   age_range_quarantine.csv tables held back for a human look, with the reason
 
-Usage:  python tags/derive_age_range.py [--limit N] [--batch 25]
+Usage:  python tags/age_range/derive_age_range.py [--limit N] [--batch 25]
 """
 import argparse
 import csv
@@ -25,7 +25,7 @@ import time
 import pandas as pd
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-SRC = os.path.dirname(HERE)
+SRC = os.path.dirname(os.path.dirname(HERE))
 METADATA = os.path.join(SRC, "metadata", "metadata.csv")
 
 MIN_RESPONDENTS = 30      # non-missing ages required before we trust the column
