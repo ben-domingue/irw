@@ -24487,3 +24487,30 @@ mapping_verification.csv +3 (a, vv VERIFIED; yy NOT_NEEDED), same rows in verifi
     3,870/7,360 per the codebook).
   - Dictionary Descriptions ("Chile CASEN …") name the wrong survey. This is EBS 2023, which only samples from CASEN 2022.
 Queue: 37 pending, 0 in_progress. Cap (batch_348) not reached.
+
+## batch_333 — 2026-09-23T20:18 → 20:25 — 3 written / 0 blocked / 0 failed (#2381 slice 02)
+Three agents, one per table, 20:18–20:24. Yield 3/3. No kills. Gates: normalize 0 changed, audit PASS=3 (no WARNs),
+verify_batch PASS=3, lint clean (3 rows), irw-validate ok 3/3, check_provenance exit 0. Breaker: 0% failed.
+mapping_verification.csv +3 (all VERIFIED; the two data_labels tables carry real verification rows rather than
+NOT_NEEDED, because their code→text tie runs through a neighbouring column or position). All three are
+text_source=translated_substitute, translation_source=study_supplied (the authors' own English), so no issues-page line is owed.
+
+- **done** `cognitive_children_2026` (90 rows, 18 items × 1–5, anchors at 1/5 only). figshare 32519529 xlsx headers,
+  positional but reproduced cell-for-cell (1800/1800). The deposit description says 20 items (5/5/5/5); the file has 18
+  (5/5/4/4), matching the live table. **Lead, NOT orchestrator-verified (would need an export):** per
+  automated_finding/BATCH_LOG.md this deposit republishes figshare 32114668, already in the IRW as `yandun2026_*`, so
+  the table may duplicate those rows under P001–P050 ids. Worth checking under #1856.
+- **done** `dalichaouche_2026_covid_attitudes` (15 rows) and `_knowledge` (12 rows), figshare 31851586. Both come from one
+  xlsx and questionnaire docx. English stems are the authors' own supplement; the French stems survive only as
+  de-spaced headers. **Orchestrator re-checked the xlsx (Step 5b) and the numbers match the agents' exactly:**
+  - Unanswered items are scored 0 in the source and ship as resp 0. Attitudes A1–A5: 15/19/27/15/21 (97/1500), and
+    every blank-label row has score 0. Knowledge C2–C6: 8/7/5/4/6 (C1 0). The agent says practices P1–P6 have the same
+    defect (10/18/16/4/4/3; not re-checked). Fix in data/dalichaouche_2026_covid_kap.py: set resp NA where the paired
+    label column is empty.
+  - A1's coding contradicts the questionnaire key. Score 0 = 72 "Pas du tout inquiet" (keyed Neutral=1) + 46 "Oui, je
+    panique" + 15 blank. Score 1 = 19 "Oui, je panique" only. So A1 resp 0/1 ship with blank option_text.
+  - A4: 2 "Oui" answers scored 0 (keyed 2). The resp 1 label "Pas du tout inquiet" looks odd for a hope item, but it is
+    the questionnaire's own Neutral option for A4, so it is right.
+  - Knowledge C4: the workbook recodes a single "Fièvre/Toux et/ou Fatigue" category (273, all scored 1), which is broader
+    than the published key "Fever and cough". The key is shipped verbatim with a public_note.
+Queue: 34 pending, 0 in_progress. Cap (batch_348) not reached.
