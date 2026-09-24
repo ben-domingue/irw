@@ -1764,9 +1764,9 @@ goldberg_2018_eps_ipip,done,batch_383,2026-09-24T11:51:17-07:00
 goldberg_2018_eps_life_events,done,batch_384,2026-09-24T11:54:30-07:00
 goldberg_2018_eps_s11,done,batch_384,2026-09-24T11:54:30-07:00
 musifeast17_vanderwalle_2025,blocked,batch_384,2026-09-24T11:54:30-07:00
-peters_2025_att_exp_eval,pending,,
-peters_2025_att_instr_strength,pending,,
-peters_2025_ciberlite,pending,,
+peters_2025_att_exp_eval,in_progress,batch_385,2026-09-24T12:07:01-07:00
+peters_2025_att_instr_strength,in_progress,batch_385,2026-09-24T12:07:01-07:00
+peters_2025_ciberlite,in_progress,batch_385,2026-09-24T12:07:01-07:00
 peters_2025_gen_risk_eval,pending,,
 peters_2025_hw_frequency,pending,,
 peters_2025_hw_intensity,pending,,
