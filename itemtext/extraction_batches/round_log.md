@@ -24334,3 +24334,31 @@ was appended raw to mapping_verification.csv.
 Cap (batch_330) not reached, but the QUEUE IS NOW EXHAUSTED: 0 pending (1241 done, 287 blocked, 13 failed, 60 excluded). The next
 firing will self-cancel on the queue-exhausted condition. The 13 `failed` rows are the remaining retry candidates, and moving them
 back to pending is a human call.
+
+## 2026-09-23 — triage of batch_321–327 (irw#2381 slice 1): 5 uploaded, 14 wait on the CIS scope, 1 held
+
+Gates re-run in a detached checkout (ebf454de / 3e5f6220): normalize_nulls 0 files, audit_batch all PASS except
+`sun_2025_morality_study3_moralratings` WARN, verify_batch PASS or MISSING(exempt), lint clean.
+
+**Uploaded to the irw_text_2 draft (5):** sabers_vesper2023, sem_cnes, silvia_2024_funny,
+stoyel_2021_social_modeling, talaifar_2025_study2_thermometer. Staged in oneoff/itemtext-rights-bank/staged_321-327/
+(dry run 5 NEW); Ben uploaded; numRows match 5/5; stamped `uploaded=2026-09-23` (batch_321/326/327 provenance,
+5 mapping rows; sabers' literal `NA` placeholder replaced); CSVs byte-matched and removed.
+
+**WAITING — CIS register scope (14):** the spain_2016_cooperation_*, spain_2024_values_* and
+spain_2026_confidence_* tables in batch_322–326. The CIS `allow` row is ratified for spain_2025_* only ("SCOPE is
+... the spain_2025_* table-name family"); the agents re-derived the same institution-wide grant for 2016/2024/2026,
+but widening the row is Ben's call. Staged apart in staged_321-326_cis_pending_ratification/, gates passed, not
+stamped. The #2381 rights bank counted all 80 CIS tables as needing no call; they need this one ratification.
+
+**HELD (1):** `sun_2025_morality_study3_moralratings` — the text passes, but the response table is defective:
+every `it.*` resp is a rounded per-target mean across informants (not one person's answer; affects every
+sun_2025_morality_study3_it* table), and `itkindness`/`itintegrity` are composites shipped with blank text. Fix the
+data first. **Blocked by its round:** `sun_2025_morality_study3_respectfulness` (one BFI-2 item; a blank-item variant
+is banked in .cache/ for Ben's decision).
+
+**Issues page:** 18 entries in oneoff/itemtext-rights-bank/issues_entries_321-327.yaml (14 machine_translation
+entries are obligatory, and apply only once the CIS tables are uploaded); stoyel dropped (anchors never published).
+
+**Leads:** talaifar_2025 dictionary DOI is wrong (pspp0000549 → pspp0000545); spain_2026_confidence_acquisition
+dictionary Reference names Estudio 3564, the data are 3565.
