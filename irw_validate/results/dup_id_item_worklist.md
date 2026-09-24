@@ -13,6 +13,15 @@ need none.
 > 16 still open** -- and each of the 16 is blocked on a source file or a
 > decision, not on effort. The block table below is history plus the
 > corrections recorded against it, not a work order.
+>
+> **Ruled 2026-09-24 (Ben), on the six tables no source can fix:**
+> `non_parametric_mixture_modeling_exp1_Cleaned` and `realpic_souza2021` are
+> **WITHDRAWN** (`tools/withdrawals/withdraw_1856_unrecoverable.py`); the four
+> `PROMISPME_Forrest_2021_*_Proxy` are **ACCEPTED AS-IS**, with the defect stated
+> in `data/PROMISPME_Forrest_2021.R`'s header. `pact_project` and
+> `number_pattern_game` are live and verified in v414. That leaves **three**
+> open, all needing the source: `Veterans_Affairs_SSVF_Survey_2016-17`,
+> `stress_deboeck2012`, `selfcompassionscale_shortform_fuochi_2025`.
 
 **Status, 2026-09-03.** Blocks A, B, C, D, E and G are **done, uploaded and
 verified against the released versions** -- 47 tables, every `excess_pair` 0 (or
@@ -341,7 +350,7 @@ record the second, rather than blocking on it.
 | `PTCI_Chinese_Zhan_2024` | 17,394 | 21,183 |
 | `Aspirations_Sonmez_2022` | 2,320 | 4,960 |
 | `5personalityfactors` | 264 | 996 |
-| `PROMISPME_Forrest_2021_*_Proxy` (4) | 101 | 114 |
+| `PROMISPME_Forrest_2021_*_Proxy` (4) | 101 | 114 — **ACCEPTED AS-IS, ruled 2026-09-24**; raw source gone, noted in the script header |
 | `PEPABAS2C_Kubicka_2024` | 27 | 21 |
 | ~~`FEDSP_Trzcinska_2023_PRD`~~ | — | **done** — resolved with block G; the caregiver collision explains all five, nothing to chase |
 
@@ -446,6 +455,12 @@ Both from public sources: the paper's GitHub CSV and the `rtdists` CRAN package.
 `rr98_accuracy` also forced a fix to the gate: `irw_validate` tried each
 occasion column singly and no single one resolves a trials-within-blocks
 design. It now falls back to testing every occasion column present together.
+
+> **Ruled 2026-09-24: `realpic_souza2021` and
+> `non_parametric_mixture_modeling_exp1_Cleaned` are WITHDRAWN**, not repaired.
+> Neither can be rebuilt: `realpic` is not person-by-item data, and
+> `non_parametric`'s ids are unrecoverable with no source recorded (44,957 rows
+> over 57 distinct id+item pairs in v414). The notes below are kept for the record.
 
 Plus `realpic_souza2021`: 28 excess rows, all conflicting, nothing explains
 them. Needs the source. Small enough to fold in here. *Note while you are

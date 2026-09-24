@@ -1,5 +1,16 @@
 # Paper:https://link.springer.com/article/10.1007/s11136-017-1629-y
 # Data: https://osf.io/f7rp3/
+#
+# KNOWN DEFECT, ACCEPTED AS-IS (irw#1856, ruled 2026-09-24): four proxy tables
+# carry a small number of repeated (id, item) pairs, some of which disagree on resp:
+#   PROMISPME_Forrest_2021_LS_Proxy        56 excess rows of 54,040
+#   PROMISPME_Forrest_2021_MP_Proxy        55 of 51,040
+#   PROMISPME_Forrest_2021_Physical_Proxy  79 of 121,418
+#   PROMISPME_Forrest_2021_Strength_Proxy  25 of 22,975
+# (irw_validate.live_dup, v414). They cannot be resolved: the OSF node now holds a
+# single 714 KB .sav that cannot be the source of these tables, so there is nothing
+# to check the conflicting pairs against. Every other row is one response per
+# person-item. If your analysis needs unique (id, item), drop the repeated pairs.
 
 library(haven)
 library(dplyr)
