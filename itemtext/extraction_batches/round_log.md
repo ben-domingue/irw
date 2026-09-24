@@ -24137,3 +24137,33 @@ I did not edit the register.
 Gates: normalize 0 changes. audit 3 PASS. verify_batch 1 PASS + 2 exempt. lint clean (3 rows).
 irw-validate ok ×3. check_provenance exit 0, and its 2 `mixed` REVIEW items are pre-existing. Cap
 (batch_330) not reached.
+
+## batch_323 — 2026-09-23 ~17:42–17:52 PDT, 3 tables, 3 agents
+
+**Written 3 / blocked 0 / failed 0 — yield 3/3.** Breaker not tripped. 16 pending remain.
+
+All three are data_labels (item = lowercased CIS variable name, read by the .do), Spanish administered
+text from the CIS questionnaire (`pdftotext -layout`), IRW machine translation in `_translated`. The
+issues-page lines are owed once they ship; check_provenance lists all three as held.
+
+- `spain_2016_cooperation_interest` (CIS 3130, the last of the batch_322 siblings; P.1 + P.2 grid rows
+  p201–p208, 9 items × 4 options): two questions with different anchors (Mucha/… vs Mucho/…), so it
+  ships as two sections. Dropped 8/9 codes are 10–24 per item (≤1%).
+- `spain_2024_values_difficulty` (CIS 3473 *Felicidad y valores sociales*, June 2024, N=2843; P.10/P.11):
+  the .do drops the unprompted middle "(NO LEER) Ni fácil ni difícil", so the live scale is 1,2,4,5 with
+  no option row for 3 — 141 (5.0%) and 107 (3.8%) respondents. public_note discloses it.
+- `spain_2024_values_institutions` (CIS 3473 P.6, p6_1–p6_4): same dropped-middle pattern (12/29/34/19).
+  P6_2 questionnaire wording ("los niños/as y de los jóvenes") differs from the syntax label; the
+  questionnaire wording shipped. The rotation instruction to the interviewer is omitted from `instructions`.
+  CIS 3473's microdata is at `/documents/d/guest/md3473`; the `MD3473.zip` URL pattern 404s.
+
+Step 5b orchestrator re-check: I recounted DA3130 columns 28–36 and 3473_num.csv P6_1–P6_4/P10/P11.
+Every count the agents reported matches (e.g. p1 341/1091/790/221; p6_4 273/730/1185/586; p10
+145/1524/856/137; dropped-3 counts as above).
+
+**For Ben (repeat of batch_322):** the CIS allow row in instrument_rights_register.csv is scoped in
+words to `spain_2025_*`; all three agents re-derived the same verdict from CIS's reuse-conditions page
+for 2016 and 2024 studies. Widening the row is your call; I did not edit the register.
+
+Gates: normalize 0 changes. audit 3 PASS. verify_batch 3 exempt. lint clean (3 rows). irw-validate ok ×3.
+check_provenance exit 0 (its 2 `mixed` REVIEW items are pre-existing). Cap (batch_330) not reached.
