@@ -25298,3 +25298,12 @@ Gates: normalize_nulls 0 of 3 changed; audit_batch 3 PASS, no anomalies; verify_
 - Step 5b re-check by the orchestrator against 3563.sav: P14 1/2/3/4/7 = 1056/793/545/163/899 (8=17, 9=20); P15_1 system-missing 936 = 899+17+20, confirming the P14 filter; P21 1-5 = 1481/1814/25/106/43; P17 7=76; P25 7=570; P23_1 1-5 = 352/542/304/1009/1235 — all as the agents reported.
 - Dictionary defect persists (Reference cites Estudio 3565; source is 3563). Not filed (same as batch_390/391).
 Queue: 1 pending, 0 in_progress. Cap (batch_402) not reached.
+
+## batch_393 — 2026-09-24T13:33-13:40-07:00 (1 table, 1 agent — last pending row)
+Written / blocked / failed: **1 / 0 / 0** → done 1 / blocked 0 / failed 0 (yield 1/1). Circuit breaker: 0% failed.
+Numbering: highest existing was batch_392, so 393. The Step 1 "compute over directories below 300" clause is obsolete now that the series is past 305 (read literally it yields batch_305, which exists); the consecutive intent was followed.
+Gates: normalize_nulls 0 of 1 changed; audit_batch 1 PASS, no anomalies; verify_batch MISSING(exempt)=1 (data_labels); lint clean (NOT_NEEDED row in both files); irw-validate ok; check_provenance exit 0 (only the standing `mixed` review list).
+- `spain_2026_disinformation_regulation` — done. P.3–P.6 x 1 Sí / 2 No, data_labels (CIS Estudio 3563 .sav; codes = lowercased variable names), Spanish + IRW machine translation. The .do drops the volunteered "(NO LEER)" code 3 on p3 (Depende, n=16) and p6 (voluntary compliance only, n=3) along with 8/9, so all four items ship binary; disclosed in public_note. Rebuild from 3563_num.csv equals live exactly (13712 rows, 3492 ids, 0 diffs).
+- Step 5b re-check by the orchestrator against 3563.sav: P3 1/2/3/8/9 = 2950/484/16/28/15; P4 1/2/8/9 = 2893/526/55/19; P5 = 2884/535/50/24; P6 1/2/3/8/9 = 3031/409/3/26/24; the kept 1/2 cells sum to 13712 = live. .do lines `replace p3/p6 = . if inlist(.., 3, 8, 9)` confirm the code-3 drop. All as the agent reported.
+- Dictionary defect persists (Reference cites Estudio 3565; source is 3563) — now on all 10 spain_2026_disinformation_* rows. Not filed (same as batch_390–392).
+Queue: **0 pending (exhausted)**, 0 in_progress. Cap (batch_402) not reached. The next wrapper firing will stop on an empty queue.
