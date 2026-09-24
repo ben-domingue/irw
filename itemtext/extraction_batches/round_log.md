@@ -25287,7 +25287,7 @@ Gates: normalize_nulls 0 of 3 changed; audit_batch 3 PASS, no anomalies; verify_
 - `spain_2026_disinformation_humorperception` — **blocked on naming, CSV retained** (retry test NO). Clean extraction: P.26–P.28 x Sí/No, data_labels, live = .sav 6/6 cells. Blocked under the batch_340/352/381 precedent (batch_309's `done`-under-irw#2365 split still needs a human). Unblock: rename the live table ≤40 chars and the CSV with it. Row added to pending_index_notes.csv. Agent note for re-extractors: `pdftotext -layout` of cues3563.pdf bleeds a facing column's options beside P.26; use `-raw`.
 - Step 5b re-check by the orchestrator on live data: all agent-reported counts confirmed cell for cell (humorclimate 6887 rows, p29 421/912/1302/528/308, p30 520/658/157/1182/899; humorlimits 6768 rows, p13 1368/1954, p24 1315/1616/515; humorperception 10277 rows, p26 3192/247, p27 2566/851, p28 2999/422). The .do line `replace p24 = . if inlist(p24, 3, 8, 9)` confirms the p24 gap.
 - Dictionary defect persists on these siblings too: Reference cites Estudio 3565 (consumer confidence); source is Estudio 3563. Not filed (same as batch_390).
-Queue: 19 pending, 0 in_progress. Cap (batch_402) not reached.
+Queue: 4 pending, 0 in_progress. Cap (batch_402) not reached.
 
 ## batch_392 — 2026-09-24T13:26-13:33-07:00 (3 tables, 3 agents)
 Written / blocked / failed: **3 / 0 / 0** → done 3 / blocked 0 / failed 0 (yield 3/3). Circuit breaker: 0% failed.
