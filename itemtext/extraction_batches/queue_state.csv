@@ -1779,9 +1779,9 @@ peters_2025_si_current,done,batch_388,2026-09-24T12:48:22-07:00
 peters_2025_si_intention,done,batch_389,2026-09-24T13:00:16-07:00
 peters_2025_si_trigger,done,batch_389,2026-09-24T13:00:16-07:00
 peters_2025_work_precautions,done,batch_389,2026-09-24T13:00:16-07:00
-silva_2022_crsy,pending,,
-spain_2026_disinformation_concern,pending,,
-spain_2026_disinformation_hostility,pending,,
+silva_2022_crsy,in_progress,batch_390,2026-09-24T13:10:30-07:00
+spain_2026_disinformation_concern,in_progress,batch_390,2026-09-24T13:10:30-07:00
+spain_2026_disinformation_hostility,in_progress,batch_390,2026-09-24T13:10:30-07:00
 spain_2026_disinformation_humorclimate,pending,,
 spain_2026_disinformation_humorlimits,pending,,
 spain_2026_disinformation_humorperception,pending,,
