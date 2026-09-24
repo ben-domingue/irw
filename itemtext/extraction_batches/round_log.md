@@ -24362,3 +24362,13 @@ entries are obligatory, and apply only once the CIS tables are uploaded); stoyel
 
 **Leads:** talaifar_2025 dictionary DOI is wrong (pspp0000549 → pspp0000545); spain_2026_confidence_acquisition
 dictionary Reference names Estudio 3564, the data are 3565.
+
+## 2026-09-23 — CIS scope widened; the 14 spain_* tables from batch_322–326 uploaded
+
+Ben widened the CIS register row from spain_2025_* to every CIS survey year (6b3dde3d). The 14 staged tables
+(spain_2016_cooperation_* ×4, spain_2024_values_* ×5, spain_2026_confidence_* ×5) were uploaded by Claude under the
+2026-09-07 delegation, after the four-check pre-flight: exact file set, byte-identical to the batch copies, no
+`uploaded` date already present, and none already in irw_text/irw_text_2 current or next. red_up reported 14/14
+row-count verified. Re-checked from the draft: rows, COUNT(DISTINCT item) and no duplicate rows, 14/14. Stamped
+`uploaded=2026-09-23` (provenance 14, mapping 14) and removed the CSVs. Draft now holds 943 tables. The 14
+machine_translation issues-page entries in oneoff/itemtext-rights-bank/issues_entries_321-327.yaml apply after release.
