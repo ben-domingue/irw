@@ -172,12 +172,31 @@ def repair(redivis, idx, shards, name: str, out_dir: pathlib.Path) -> dict:
 def verify_draft(redivis, log_path: pathlib.Path) -> int:
     recs = [json.loads(ln) for ln in log_path.open()]
     recs = [r for r in recs if r.get("ok")]
-    bad = 0
+    bad = unchanged = 0
+    # A failed replace in red_up deletes the table before the upload fails, so a
+    # release would delete it from the corpus. Any current table absent from the
+    # draft is fatal, whether or not this run touched it.
+    for shard in sorted({r["shard"] for r in recs}):
+        cur = {t.name for t in redivis.organization("datapages").dataset(
+            shard, version="current").list_tables()}
+        nxt = {t.name for t in redivis.organization("datapages").dataset(
+            shard, version="next").list_tables()}
+        if cur - nxt:
+            bad += 1
+            print(f"MISSING from the {shard} draft: {sorted(cur - nxt)}")
     for r in recs:
         t = redivis.organization("datapages").dataset(
             r["shard"], version="next").table(r["table"])
+        if not t.exists():
+            continue                          # reported above
         after = _types(t)
         before = r["types_before"]
+        if after == before:
+            # red_up refused it (e.g. unexplained id+item repeats): the draft still
+            # holds the published table, untouched. Not a failure; not repaired.
+            unchanged += 1
+            print(f"{r['shard']}.{r['table']}: NOT UPLOADED (draft unchanged)")
+            continue
         issues = []
         for col, typ in before.items():
             if col in r["probes"]:
@@ -192,7 +211,8 @@ def verify_draft(redivis, log_path: pathlib.Path) -> int:
             issues.append(f"new columns {sorted(extra)}")
         bad += bool(issues)
         print(f"{r['shard']}.{r['table']}: {'OK' if not issues else '; '.join(issues)}")
-    print(f"{len(recs) - bad}/{len(recs)} draft tables keep every column type")
+    print(f"{len(recs) - bad - unchanged}/{len(recs)} repaired in the draft with every "
+          f"column type kept; {unchanged} not uploaded; {bad} problems")
     return 1 if bad else 0
 
 
