@@ -25444,3 +25444,15 @@ Tables: spain_2025_sanitation_regional, spain_2025_sanitation_services, spain_20
   - P7E keeps the volunteered code 6 "Depende, en unas consultas mejor, en otras peor". The .do keeps it (it drops only 0/8/9). It ships as an option row with (NO LEER) stripped, and public_note flags it as non-ordinal.
 - Step 5b (orchestrator re-check): live irw_table_sets per-item n matches every agent claim. In 3531_num.csv, P7E code 6 = 8, P4ES_4 98/99 = 500/35, and P19_4 8 = 628.
 Queue: 1 pending (spain_2025_sanitation_system), 0 in_progress. Cap (batch_402) not reached. The next round would be batch_402 itself, which will be the capped final round.
+
+## batch_402 — 2026-09-24T14:53 (1 table, final round: queue exhausted + cap reached)
+- 1 written / 0 blocked / 0 failed; yield 1/1. One agent: only 1 pending row remained.
+- spain_2025_sanitation_system (CIS Estudio 3531, Table 1: system). data_labels, so no verification or verify files. Items P1 (4 options), P2 (1-10, points 2-9 left blank), P12 (3 options); 17 rows. text_source=study_materials, translation_source=machine_translation. An issues-page entry is owed once live.
+  - Caveats (in notes and public_note):
+    - P12 is coded 1 improved / 2 worsened / 3 same, so the middle answer has the top code and the item is unordered as stored. The data were not recoded.
+    - P12 loses 182 N.S. + 8 N.C. to the .do filter.
+    - The dictionary description names only P1/P2, but the .do also puts P12 (waiting lists) in this table.
+  - One respondent answered N.S. on all three items, so the table has 2426 ids.
+- Gates: normalize 0 changes; audit_batch PASS; verify_batch MISSING(exempt); lint clean; irw-validate ok. check_provenance shows only the standing backlog of issues-page entries owed.
+- Step 5b (orchestrator re-check): I tabulated 3531_num.csv myself: P1 8/9 = 6/7, P2 98/99 = 12/9, P12 8/9 = 182/8. After the drops that leaves 2414 + 2406 + 2237 = 7057, which matches the live irw_table_sets n_rows of 7057. Items are {P1,P2,P12} and resp is 1..10.
+- Queue: 0 pending, 0 in_progress. All 30 spain_2025_* tables are done. **Cap reached (batch_402).** No further rounds.

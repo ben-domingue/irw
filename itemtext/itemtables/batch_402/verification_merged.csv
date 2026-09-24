@@ -1,0 +1,2 @@
+table,batch,mapping_basis,uploaded,route,status,evidence
+spain_2025_sanitation_system,batch_402,data_labels,,none,NOT_NEEDED,"mapping_basis=data_labels: item codes P1, P2, P12 are CIS Estudio 3531 (3531.sav) column names, unrenamed by data/spain_2025_sanitation.do (Table 1: system); .sav labels match cues3531.pdf; 3531_num.csv P1 8:6 9:7, P2 98:12 99:9, P12 8:182 9:8 -> n 2414/2406/2237 after .do drops, sum 7057 = live n_rows 7057; live items {P1,P12,P2}, resp 1..10 (orchestrator re-checked)"
