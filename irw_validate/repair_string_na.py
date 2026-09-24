@@ -93,8 +93,26 @@ def _fetch(redivis, sql: str):
             time.sleep(2 * (attempt + 1))
 
 
+def _retry(fn, what: str):
+    """Redivis sometimes answers with an error and an empty body (throttling or a
+    5xx); SDK 0.20.14 then dies in raise_api_error with AttributeError instead of
+    reporting it. Both are transient: back off and try again."""
+    for attempt in range(6):
+        try:
+            return fn()
+        except AttributeError as exc:
+            if "'get'" not in str(exc) or attempt == 5:
+                raise
+        except Exception as exc:
+            if attempt == 5 or not any(k in str(exc) for k in ("429", "500", "502", "503", "internal")):
+                raise
+        time.sleep(5 * 2 ** attempt)
+    raise RuntimeError(f"unreachable: {what}")
+
+
 def _types(table) -> dict[str, str]:
-    return {v.name: v.properties.get("type") for v in table.list_variables()}
+    return _retry(lambda: {v.name: v.properties.get("type") for v in table.list_variables()},
+                  "list_variables")
 
 
 def _close(a, b) -> bool:
@@ -177,17 +195,17 @@ def verify_draft(redivis, log_path: pathlib.Path) -> int:
     # release would delete it from the corpus. Any current table absent from the
     # draft is fatal, whether or not this run touched it.
     for shard in sorted({r["shard"] for r in recs}):
-        cur = {t.name for t in redivis.organization("datapages").dataset(
-            shard, version="current").list_tables()}
-        nxt = {t.name for t in redivis.organization("datapages").dataset(
-            shard, version="next").list_tables()}
+        cur = _retry(lambda: {t.name for t in redivis.organization("datapages").dataset(
+            shard, version="current").list_tables()}, "list_tables")
+        nxt = _retry(lambda: {t.name for t in redivis.organization("datapages").dataset(
+            shard, version="next").list_tables()}, "list_tables")
         if cur - nxt:
             bad += 1
             print(f"MISSING from the {shard} draft: {sorted(cur - nxt)}")
     for r in recs:
         t = redivis.organization("datapages").dataset(
             r["shard"], version="next").table(r["table"])
-        if not t.exists():
+        if not _retry(t.exists, "exists"):
             continue                          # reported above
         after = _types(t)
         before = r["types_before"]
