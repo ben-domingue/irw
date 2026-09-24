@@ -192,16 +192,24 @@ def verify_draft(redivis, log_path: pathlib.Path) -> int:
     recs = [r for r in recs if r.get("ok")]
     bad = unchanged = 0
     # A failed replace in red_up deletes the table before the upload fails, so a
-    # release would delete it from the corpus. Any current table absent from the
-    # draft is fatal, whether or not this run touched it.
+    # release would delete it from the corpus: one of OUR tables absent from the
+    # draft is fatal. Other absences are someone else's draft change -- a
+    # withdrawal from another session shares the draft (irw#2408/#2409 on
+    # 2026-09-24) -- so they are listed, not fatal.
+    ours = {(r["shard"], r["table"]) for r in recs}
     for shard in sorted({r["shard"] for r in recs}):
         cur = _retry(lambda: {t.name for t in redivis.organization("datapages").dataset(
             shard, version="current").list_tables()}, "list_tables")
         nxt = _retry(lambda: {t.name for t in redivis.organization("datapages").dataset(
             shard, version="next").list_tables()}, "list_tables")
-        if cur - nxt:
+        gone = cur - nxt
+        mine = sorted(t for t in gone if (shard, t) in ours)
+        other = sorted(gone - set(mine))
+        if mine:
             bad += 1
-            print(f"MISSING from the {shard} draft: {sorted(cur - nxt)}")
+            print(f"MISSING from the {shard} draft (this run's tables): {mine}")
+        if other:
+            print(f"note: absent from the {shard} draft, not this run's tables: {other}")
     for r in recs:
         t = redivis.organization("datapages").dataset(
             r["shard"], version="next").table(r["table"])
