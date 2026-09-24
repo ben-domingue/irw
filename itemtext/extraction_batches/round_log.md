@@ -25017,3 +25017,14 @@ Written / blocked / failed: **3 / 0 / 0** (yield 100%). Circuit breaker: 0% fail
 - Tooling: the 0-row-cache irw_fetch bug from batch_368 did not recur. One orchestrator irw_table_sets call hit a transient Redivis "Can't retrieve empty body" error; it succeeded on retry.
 - Gates: normalize 0 of 3 changed; audit 3 PASS, no anomalies/WARNs; verify_batch MISSING(exempt)=3; lint clean (3 NOT_NEEDED rows in both verification_merged.csv and the tracker); irw-validate ok ×3; check_provenance exit 0 (only the standing 4-table `mixed` review list).
 Queue: 25 pending, 0 in_progress. Cap (batch_379) not reached.
+
+## batch_370 — 2026-09-24T09:08 (-07:00), 3 tables
+
+Written / blocked / failed: **3 / 0 / 0** (yield 100%). Circuit breaker: 0% failed. Three agents, no kills (16G available at launch). Numbering: highest existing batch_369, so batch_370. Cap is batch_379; not reached.
+- All three are more CIS Estudio 3137 siblings (after batch_368/369). Each is `data_labels` / `study_materials` / `machine_translation`, with the CIS allow row (irw#2381) applied, and each rebuilds exactly from DA3137 via data/spain_2016_pain.do.
+  - `spain_2016_pain_fitness` (P.29/P.34, p29/p34, 10 rows): 4,914 rows / 2,464 ids reproduce exactly. The .do drops only N.S./N.C. (10 on p29; 2+2 on p34). There is no routing. Both scales run 1 = best.
+  - `spain_2016_pain_frequency` (P.8/P.15, p8/p15, 8 rows): 4,576 rows / 2,314 ids reproduce exactly. Code 0 N.P. (150) is pure P.7 routing. The .do drops N.S. 7/22 and N.C. 0/23. 1 = 'Muy frecuentemente', so higher resp = less frequent. p15's 'este dolor' is the P.10 most-relevant pain; the wording is kept literally.
+  - `spain_2016_pain_health` (P.3/P.4/P.5, p3–p5, 15 rows): 7,280 rows / 2,464 ids reproduce exactly. **The .do drops 110 on p4** (106 N.S. + 4 N.C., 4.5%), 2 N.S. on p5 and none on p3; this is disclosed in public_note. P.3's midpoint 'Normal' is translated literally.
+- Step 5b: the orchestrator re-tabulated DA3137 columns 102–104, 128, 165, 250 and 260 directly. Every agent-reported code count matched, including the dropped N.S./N.C. counts that went into public notes.
+- Gates: normalize 0 of 3 changed; audit 3 PASS, no anomalies/WARNs; verify_batch MISSING(exempt)=3; lint clean (3 NOT_NEEDED rows in both verification_merged.csv and the tracker); irw-validate ok ×3; check_provenance exit 0 (the new tables appear only in the unenforced held-table disclosure list alongside their siblings, plus the standing 4-table `mixed` review list).
+Queue: 22 pending, 0 in_progress. Cap (batch_379) not reached.

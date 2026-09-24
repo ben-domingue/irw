@@ -1,0 +1,4 @@
+"table","batch","mapping_basis","uploaded","route","status","evidence"
+"spain_2016_pain_fitness","batch_370","data_labels","","none","NOT_NEEDED","mapping_basis=data_labels: .do infix reads CIS Estudio 3137 DA3137 (p29, p34) with the ES3137 DATA LIST variable names, lowercased; ES3137 variable labels tie each code to its questionnaire text directly"
+"spain_2016_pain_frequency","batch_370","data_labels","","none","NOT_NEEDED","mapping_basis=data_labels: .do infix reads CIS Estudio 3137 DA3137 (p8, p15) with the ES3137 DATA LIST variable names, lowercased; ES3137 variable labels tie each code to its questionnaire text directly"
+"spain_2016_pain_health","batch_370","data_labels","","none","NOT_NEEDED","mapping_basis=data_labels: .do infix reads CIS Estudio 3137 DA3137 (p3, p4, p5) with the ES3137 DATA LIST variable names, lowercased; ES3137 variable labels tie each code to its questionnaire text directly"
