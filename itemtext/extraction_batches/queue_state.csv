@@ -1659,9 +1659,9 @@ alan_2018_teacher_warmth,done,batch_347,2026-09-24T05:56:02-07:00
 goldberg_2018_prs_ipip,done,batch_348,2026-09-24T06:02:43-07:00
 goldberg_2018_prs_movie_preferences,done,batch_348,2026-09-24T06:02:43-07:00
 goldberg_2018_prs_music_preferences,done,batch_348,2026-09-24T06:02:43-07:00
-goldberg_2018_prs_reading_preferences,pending,,
-goldberg_2018_prs_tv_preferences,pending,,
-hexaco_ashton_2014_a,pending,,
+goldberg_2018_prs_reading_preferences,done,batch_349,2026-09-24T06:13:02-07:00
+goldberg_2018_prs_tv_preferences,done,batch_349,2026-09-24T06:13:02-07:00
+hexaco_ashton_2014_a,done,batch_349,2026-09-24T06:13:02-07:00
 hexaco_ashton_2014_c,pending,,
 hexaco_ashton_2014_e,pending,,
 hexaco_ashton_2014_h,pending,,
