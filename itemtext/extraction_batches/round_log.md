@@ -24626,3 +24626,22 @@ this batch, plus the two `mixed` REVIEW items).
   No issue was filed; that is left for a human. Both public_notes disclose the swap. There is also a minor point: the paper's
   means average in the "9" not-applicable code, which IRW correctly drops, so a few live means differ from the printed ones.
 Queue: 19 pending, 0 in_progress. Cap (batch_348) not reached.
+
+## batch_339 — 2026-09-23T21:08 (3 tables, 3 agents)
+Written 3 / blocked 0 / failed 0 (yield 3/3). All gates clean: audit_batch PASS x3 (no WARNs), verify_batch PASS x3,
+lint clean, irw-validate ok x3, check_provenance exit 0 (no new entries for these tables).
+Numbering: the Step 1 rule as written ("highest below 300, +1, hole -> 305") would name batch_305, which exists; the series
+has run consecutively 305..338, so this round is batch_339. The Step 1 text should say "highest overall + 1, skipping holes".
+- huang_2023_medseq: paper_explicit, study_materials (Dataverse supplement, CC0). Verification PARTIAL: 7 of 8 published
+  domain alphas reproduce to 3dp; ±1 shifts match 0/8. Source contradicts data: supplement says 1-6 Likert, data are 1-5 on
+  all 22 items (orchestrator re-checked: 37,818 responses, zero 6s, 1,719 ids), so option_text left blank for all levels
+  (public_note discloses). "Being cared for" (items 20-22) alpha: paper 0.749, data 0.661 (re-checked 0.66); items 1-19
+  are accounted for exactly, so treated as a paper-side discrepancy, not a mapping error.
+- islam_2022_bsmas: paper_order, translated_substitute (administered Bengali; no Bengali wording published), English from
+  Ozimek 2025 (CC BY). PARTIAL: per-item M/SD/skew/kurtosis place each code on its own Table 1 row; direction via r=0.224 vs
+  published 0.225. Text-to-code order not established.
+- islam_2022_gad7: paper_order, translated_substitute, official Pfizer English. NO_ROUTE. Paper's Methods lists items 4/5
+  in reverse of the official form; judged boilerplate (same sequence in 16 unrelated papers), official order shipped, a
+  public_note discloses it; the data lean toward official (GAD5-PHQ8 r 0.444 vs GAD4 0.396) but the CI includes 0. NO_ROUTE on
+  an inferred basis -> candidate to hold back at upload.
+Queue: 16 pending, 0 in_progress. Cap (batch_348) not reached.
