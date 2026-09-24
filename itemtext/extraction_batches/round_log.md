@@ -25097,3 +25097,15 @@ Tables: spain_2026_love_association, spain_2026_love_attitudes, spain_2026_love_
 - The dictionary defect still stands for the whole love_* family: the biblio Reference says "Percepción de la prostitución" (see batch_375). It needs a human edit to the dictionary sheet.
 - Gates: normalize 0 of 3; audit 3 PASS, no anomalies; verify_batch MISSING(exempt)=3; lint clean (3 NOT_NEEDED rows, in both verification_merged.csv and the tracker); irw-validate ok ×3; check_provenance exit 0.
 Queue: 4 pending (love_desire/gestures/importance/usage), 0 in_progress. Cap (batch_379) not reached.
+
+## batch_377 — 2026-09-24T10:25 (3 tables: 3 written / 0 blocked / 0 failed, yield 100%)
+Tables: spain_2026_love_desire, spain_2026_love_gestures, spain_2026_love_importance (CIS Estudio 3508 'Percepción social del amor', read-only from the source cache at .cache/spain_2026_love_apps/). Three agents, one per table, no kills.
+- Numbering: batch_376 was the highest existing, so this round is batch_377.
+- All three are `data_labels` / `study_materials` / `machine_translation`, with CIS register row 117 applied. Each one rebuilds exactly to the live table from 3508_num.csv.
+- `spain_2026_love_desire`: P.19 and P.22a, two separate questions with no shared lead-in (one trivial section). 8 rows, resp {1,2,4,5} = Mucho/Bastante/Poco/Nada. The .do drops code 3 "(NO LEER) Regular" (13+18) and 8/9 (9+21). The items are filtered to different respondents: P.19 only if P17 ≠ 1 (1,278 asked), P.22a only if P22 ≠ 1 (1,381 asked), so only 1,508 ids appear. The public_note says so. Rebuild: 2,598 rows / 1,508 ids.
+- `spain_2026_love_gestures`: P.7–P.9, three separate yes/no questions (one trivial section). 6 rows, 1 = Sí, 2 = No. Only 8/9 are dropped (53); there is no code 3. Rebuild: 14,968 / 5,006.
+- `spain_2026_love_importance`: P.1 [P1_1..10], 40 rows, resp {1,2,3,4} = Muy/Bastante/Poco/Nada importante. This battery breaks the sibling convention: its 3 is the read-out "Poco importante", not a volunteered "Regular", and the .do keeps it. Only 8/9 are dropped (289). Rebuild: 49,781 / 5,007. Anti-swap check: building from P3_* gives 30,765 resp mismatches.
+- Step 5b: I re-tabulated 3508_num.csv. p19 = 3729 N.P./204/334/13/359/359/6/3, p22a = 3626/233/387/18/380/342/10/11, p17 ≠ 1 = 1,278, and the post-drop rows and ids (2,598/1,508; 14,968/5,006; 49,781/5,007) all match the agents.
+- The dictionary defect still stands for the whole love_* family: the biblio Reference says "Percepción de la prostitución" (see batch_375). It needs a human edit to the dictionary sheet.
+- Gates: normalize 0 of 3; audit 3 PASS, no anomalies; verify_batch MISSING(exempt)=3; lint clean (3 NOT_NEEDED rows, in both verification_merged.csv and the tracker); irw-validate ok ×3; check_provenance exit 0.
+Queue: 1 pending (spain_2026_love_usage), 0 in_progress. Cap (batch_379) not reached.
