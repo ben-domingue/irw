@@ -24580,3 +24580,22 @@ normalize_nulls changed nothing. check_provenance exited 0 and repeated only the
   resp = 4 is the form's "?" option ("Uncertain, Neutral, or Don't know word"), which is a mixed category, and the public_note
   discloses it. No one used resp = 7 on Meddleso, but that option row is kept.
 Queue: 25 pending, 0 in_progress. Cap (batch_348) not reached.
+
+## batch_337 — 2026-09-23 20:54–20:59 PDT (#2381 slice 02)
+3 tables claimed (three agents) · **3 written / 0 blocked / 0 failed** · yield 3/3. All six Step 4 gates were clean:
+audit 3 PASS with no WARNs, verify_batch 3 MISSING(exempt) (all data_labels), lint clean (3 NOT_NEEDED rows, written to both
+verification_merged.csv and mapping_verification.csv), and irw-validate ok. normalize_nulls rewrote force's blanks to NA with
+no content change. check_provenance exited 0 and repeated only the two existing `mixed` REVIEW items. All three tables come from
+ESCS "(24) Survey of Dispositions and Views", doi:10.7910/DVN/LHHONE (CC0). Each reused batch_336's cached SDV.pdf/.tab/DDI
+read-only. `data/goldberg_2018_escs.py` melts the file without renaming, so the codes are the .tab column names. The DDI
+per-item means equal the live means for every item.
+- **done** `goldberg_2018_sdv_desirability` (900 rows = 100 × 9, data_labels). SDV.pdf pp.15–16, "How desirable are these
+  attributes?" The form labels only the odd points (1 Very Undesirable, 3, 5 Neutral, 7, 9 Very Desirable). The orchestrator
+  re-checked this against the pdftotext of the scale header. Points 2/4/6/8 are unlabelled bubbles, and their option_text is blank.
+- **done** `goldberg_2018_sdv_force` (220 rows = 44 × 5, data_labels). SDV.pdf p.6, "What forces determine what happens in life?"
+  The response scale is Never … Always. The printed form overrides the DDI label on 2 items: force6 "The influence of other
+  people", and force37 with a typographic apostrophe. Nobody used resp = 4 on force17 (Witchcraft); its option row is kept. The
+  orchestrator re-checked this on live data: the counts are 548/115/29/0/4 (698 ids).
+- **done** `goldberg_2018_sdv_influ` (160 rows = 32 × 5, data_labels). SDV.pdf p.8, "Who deserves more influence, power, and
+  respect?" The DDI value-label frequencies equal the live item × resp counts in 160/160 cells.
+Queue: 22 pending, 0 in_progress. Cap (batch_348) not reached.
