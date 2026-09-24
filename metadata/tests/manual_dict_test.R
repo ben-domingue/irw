@@ -255,7 +255,7 @@ if (MODE == "tier-b") {
     check(nrow(again$log) == 0L, "a second refresh changes nothing (idempotent)")
 
     cat("\n  The log is at ", rlog, " for this run; in production it is\n",
-        "  biblio_refresh_log.csv, beside the CSV it explains.\n", sep = "")
+        "  logs/biblio_refresh_log.csv.\n", sep = "")
     if (nrow(log)) {
         cat("\n  first 10 changes:\n")
         show <- head(log, 10)

@@ -46,29 +46,29 @@ metadata/**/*.txt
 ##tables is a list a person can read, where the same change in biblio.csv is a
 ##223-row diff. It is not per-run noise: the Redivis biblio table is the
 ##baseline every week, so this file only moves when the sheet does.
-!metadata/biblio_refresh_log.csv
-!metadata/comps_biblio_refresh_log.csv
-!metadata/nominal_biblio_refresh_log.csv
-!metadata/simsyn_biblio_refresh_log.csv
+!metadata/logs/biblio_refresh_log.csv
+!metadata/logs/comps_biblio_refresh_log.csv
+!metadata/logs/nominal_biblio_refresh_log.csv
+!metadata/logs/simsyn_biblio_refresh_log.csv
 ##Which citations the run refetched because they named a DOI their row does not
 ##claim (#2301). Committed for the reason above, one step further along: the
 ##repair itself is invisible in biblio.csv once the Redivis baseline catches up,
 ##so this file is where "58 rows were citing someone else's paper and are not
 ##any more" is written down. Like the refresh log, it moves only when something
 ##actually drifted -- an ordinary week writes an empty file.
-!metadata/biblio_bibtex_refetch_log.csv
-!metadata/comps_biblio_bibtex_refetch_log.csv
-!metadata/nominal_biblio_bibtex_refetch_log.csv
-!metadata/simsyn_biblio_bibtex_refetch_log.csv
+!metadata/logs/biblio_bibtex_refetch_log.csv
+!metadata/logs/comps_biblio_bibtex_refetch_log.csv
+!metadata/logs/nominal_biblio_bibtex_refetch_log.csv
+!metadata/logs/simsyn_biblio_bibtex_refetch_log.csv
 ##Which `Derived_License` cells were derived from `Original License`, and on
 ##what basis (#2040). Committed for the same reason as the refresh log: the
 ##review question is "does every one of these read correctly?", which is a short
 ##list, not a diff. `basis` separates the mechanical carry-forwards from the one
 ##case that assumes a licence version the source did not state.
-!metadata/biblio_license_log.csv
-!metadata/comps_biblio_license_log.csv
-!metadata/nominal_biblio_license_log.csv
-!metadata/simsyn_biblio_license_log.csv
+!metadata/logs/biblio_license_log.csv
+!metadata/logs/comps_biblio_license_log.csv
+!metadata/logs/nominal_biblio_license_log.csv
+!metadata/logs/simsyn_biblio_license_log.csv
 .env
 .Rproj.user
 .DS_Store
