@@ -24104,3 +24104,36 @@ M12 = 10 vs the paper's stats; `goldberg_2018_ipip` n1-n24 duplicate `goldberg_2
 Gates: normalize 0 changes. audit 3 PASS. verify_batch 2 PASS + 1 exempt. lint clean. irw-validate
 ok ×3. check_provenance exit 0; its 2 `mixed` REVIEW items are pre-existing, not from this batch. Cap
 (batch_330) not reached.
+
+## batch_322 — 2026-09-23 17:33–17:40 PDT (3 agents, 3 tables)
+
+**Written 3 / blocked 0 / failed 0 — yield 3/3.** Breaker not tripped. 19 pending remain.
+
+All three tables come from one source: CIS Estudio 3130, *Actitudes hacia la cooperación
+internacional (II)*, Feb 2016, N=2453, via MD3130.zip (ES3130 syntax labels + DA3130 + cues3130.pdf).
+All are data_labels, with Spanish administered and IRW machine translation in `_translated`. The
+issues-page lines are owed once they ship, and check_provenance lists all three as held.
+The sibling `spain_2016_cooperation_interest` is still pending.
+
+- `spain_2016_cooperation_awareness` (p10/p12/p17, item-specific anchors, NOT_NEEDED): raw DA3130
+  reproduces the live cells. Trap: plain `pdftotext` interleaves the two-column questionnaire page and
+  puts P.12's options under P.10, so read it with `-layout`.
+- `spain_2016_cooperation_duty` (p5/p13, Sí/No): the agent wrote a verify script although the table
+  is exempt, and it returns VERIFIED (PASS). p5's volunteered code 3 "No estoy seguro/a" (207/2453,
+  8.4%) is dropped by the .do, which public_note discloses.
+- `spain_2016_cooperation_funding` (p2001/p2002 = P.20 grid, Comunidad Autónoma / Ayuntamiento):
+  **the dropped 8 "N.S." is the modal answer**, 1477/2453 (60.2%) and 1581/2453 (64.5%), so the
+  live n of 974/862 covers only the respondents who claimed to know. public_note discloses it.
+
+Step 5b orchestrator re-check: I recounted DA3130 columns 41/47/49/50/57/70/71 and every count the
+agents reported matches (p5 1942/245/207/52/7; p13 1657/359/419/18; p2001 771/203/1477/2; p2002
+532/330/1581/10; p10/p12/p17 as reported).
+
+**For Ben:** the `CIS` row in instrument_rights_register.csv (allow, 2026-09-22) is scoped in words to
+`spain_2025_*`. The funding agent applied it to this 2016 CIS study, and the other two re-derived the
+same verdict from the reuse-conditions page. Widening that row's scope to all CIS studies is your call.
+I did not edit the register.
+
+Gates: normalize 0 changes. audit 3 PASS. verify_batch 1 PASS + 2 exempt. lint clean (3 rows).
+irw-validate ok ×3. check_provenance exit 0, and its 2 `mixed` REVIEW items are pre-existing. Cap
+(batch_330) not reached.
