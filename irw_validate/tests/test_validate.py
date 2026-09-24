@@ -206,9 +206,24 @@ class ItemText(unittest.TestCase):
                          [f.check for f in report.errors])
 
     def test_a_doubled_item_text_table_is_caught(self):
-        # the #1816 defect: an upload appended beside the previous version
+        # the #1816 defect: an upload appended beside the previous version.
+        # Named `dup_row` since #2232 -- the rows are identical, which is a
+        # sharper statement than "a key repeats" and is what the reader needs.
         report = validate_frame(self._items(n_rep=2), label="t_2024_scale__items.csv")
-        self.assertIn("dup_item_resp", [f.check for f in report.errors])
+        self.assertIn("dup_row", [f.check for f in report.errors])
+
+    def test_a_repeated_key_that_is_not_a_repeated_row_still_says_so(self):
+        # The `dup_item_resp` branch has to survive the #2232 move: two rows
+        # can share (item, resp) and option_text without being identical, and
+        # that is a different fault from a doubled upload.
+        df = self._items()
+        twin = df.iloc[[0]].copy()
+        twin["item_text"] = "question 0, reworded"
+        report = validate_frame(pd.concat([df, twin], ignore_index=True),
+                                label="t_2024_scale__items.csv")
+        checks = [f.check for f in report.errors]
+        self.assertIn("dup_item_resp", checks)
+        self.assertNotIn("dup_row", checks)
 
     def test_two_scale_directions_in_one_table_are_named_as_such(self):
         # afps_vangsness_2019: resp=1 carries both "Strongly agree" and
@@ -269,11 +284,16 @@ class ItemText(unittest.TestCase):
         # would.
         df = pd.concat([self._unkeyed(), self._unkeyed()], ignore_index=True)
         report = validate_frame(df, label="g_2024_naming__items.csv")
-        self.assertIn("dup_item_resp", [f.check for f in report.errors])
+        self.assertIn("dup_row", [f.check for f in report.errors])
 
     def test_the_finding_names_the_addressable_key(self):
-        df = pd.concat([self._unkeyed(), self._unkeyed()], ignore_index=True)
-        report = validate_frame(df, label="g_2024_naming__items.csv")
+        # A key collision that is not a whole-row repeat, so the
+        # dup_item_resp message is the one under test.
+        df = self._unkeyed()
+        twin = df.iloc[[0]].copy()
+        twin["item_text"] = "name the picture (repeat)"
+        report = validate_frame(pd.concat([df, twin], ignore_index=True),
+                                label="g_2024_naming__items.csv")
         msg = [f.message for f in report.errors if f.check == "dup_item_resp"][0]
         self.assertIn("raw_resp", msg)
         self.assertNotIn("item+resp rows", msg)
