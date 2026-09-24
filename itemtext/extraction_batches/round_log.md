@@ -24558,3 +24558,25 @@ disagree. This is legitimate per-item direction, not `resp_ambiguous`, and irw-v
   Table S2.18 (0.48/0.34/0.41/0.44, N = 73186) reproduce exactly. redistr2 and redistr3 are stored reversed.
 - Sibling `germann_2026_state_intervention` is still pending, and this round's cached sources will serve it.
 Queue: 28 pending, 0 in_progress. Cap (batch_348) not reached.
+
+## batch_336 — 2026-09-23 20:44–20:53 PDT (#2381 slice 02)
+3 tables claimed (three agents) · **3 written / 0 blocked / 0 failed** · yield 3/3. All six Step 4 gates were clean:
+audit 3 PASS with no WARNs, verify_batch PASS=1 plus 2 MISSING(exempt) for data_labels, lint clean (3 rows), irw-validate ok,
+normalize_nulls changed nothing. check_provenance exited 0 and repeated only the two existing `mixed` REVIEW items.
+- **done** `germann_2026_state_intervention` (10 rows, paper_order, **PARTIAL**). Reused batch_335's cached sources (EJPR CC BY 4.0;
+  DVN/ALYGQS CC0). Per-level frequency matching ties statint1 to `q12` and statint2 to `q18`, uniquely among 60 candidates.
+  The published SI Table S2.20 H 0.53 / α 0.65 / N 73931 reproduces exactly. Both items are stored raw (1 = Completely disagree … 5),
+  and both correlate negatively with cov_lr (−0.49/−0.45). **Not established:** which of q12/q18 is railways and which is NHS. That
+  rests on the order of the authors' script `c("q12","q18")` matching the order of S2.20. The orchestrator re-checked this:
+  f_13400003.txt line 24 does read `data2017[,c("q12","q18")]`, and the lb2017.dta columns carry no variable labels to settle it.
+  A swap would pass every check.
+- **done** `goldberg_2018_pas_adjectives` (1,512 rows = 216 × 7, data_labels). ESCS "(15) Personal Attribute Survey",
+  doi:10.7910/DVN/QYKXUE, CC0. The DDI labels, PAS_items.txt and PAS.pdf pp.2–4 agree 216/216. The DDI means equal the live means
+  216/216. The comment in `data/goldberg_2018_escs.py` says 213 items are on the 1–7 scale, but the live table and the form both
+  have 216, so the comment is stale.
+- **done** `goldberg_2018_sdv_adjectives` (525 rows = 75 × 7, data_labels). ESCS "(24) Survey of Dispositions and Views",
+  doi:10.7910/DVN/LHHONE, CC0. **Overrides the SPSS label:** `Overcons` ships as "Overconscientious". The orchestrator re-checked
+  this: pdftotext of SDV.pdf p.7 prints "Overconscientious", while the DDI and SDV_items.txt both read "Overconsciencious".
+  resp = 4 is the form's "?" option ("Uncertain, Neutral, or Don't know word"), which is a mixed category, and the public_note
+  discloses it. No one used resp = 7 on Meddleso, but that option row is kept.
+Queue: 25 pending, 0 in_progress. Cap (batch_348) not reached.
