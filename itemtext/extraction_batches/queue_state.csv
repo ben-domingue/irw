@@ -1770,9 +1770,9 @@ peters_2025_ciberlite,done,batch_385,2026-09-24T12:19:21-07:00
 peters_2025_gen_risk_eval,done,batch_386,2026-09-24T12:31:25-07:00
 peters_2025_hw_frequency,done,batch_386,2026-09-24T12:31:25-07:00
 peters_2025_hw_intensity,done,batch_386,2026-09-24T12:31:25-07:00
-peters_2025_nrm_desc_behavior,pending,,
-peters_2025_nrm_desc_ident,pending,,
-peters_2025_nrm_inj_motivation,pending,,
+peters_2025_nrm_desc_behavior,in_progress,batch_387,2026-09-24T12:37:09-07:00
+peters_2025_nrm_desc_ident,in_progress,batch_387,2026-09-24T12:37:09-07:00
+peters_2025_nrm_inj_motivation,in_progress,batch_387,2026-09-24T12:37:09-07:00
 peters_2025_pbc_skill_import,pending,,
 peters_2025_pbc_skill_prob,pending,,
 peters_2025_si_current,pending,,
