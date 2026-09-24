@@ -24167,3 +24167,34 @@ for 2016 and 2024 studies. Widening the row is your call; I did not edit the reg
 
 Gates: normalize 0 changes. audit 3 PASS. verify_batch 3 exempt. lint clean (3 rows). irw-validate ok ×3.
 check_provenance exit 0 (its 2 `mixed` REVIEW items are pre-existing). Cap (batch_330) not reached.
+
+## batch_324 — 2026-09-23 ~17:49–17:58 PDT, 3 tables, 3 agents
+
+**Written 3 / blocked 0 / failed 0 — yield 3/3.** Breaker not tripped. 13 pending remain.
+
+These are the last three spain_2024_values_* siblings (CIS 3473 *Felicidad y valores sociales*), all using
+the same conventions as batch_323. All are data_labels (item = lowercased CIS variable name, set by the .do), with
+Spanish administered text from cues3473.pdf and IRW machine translation in `_translated`. Each one will need an
+issues-page line once it ships, and check_provenance lists all three as held.
+
+- `spain_2024_values_meaning` (P.5 + P.7_1–4, 5 items; two sections: P.5 standalone, P.7 stem as
+  section_prompt). Dropped middle code 3 (volunteered, not read aloud): 34/20/13/8/18 respondents. P7_2
+  questionnaire says "de los demás" and the syntax label says "de los/as demás". The questionnaire wording shipped.
+- `spain_2024_values_political` (ESCIDEOL 1–10 "Izda."/"Dcha.", PROBVOTO 0–10; only the endpoints are labelled and
+  the middle options are left blank). This bookmark does not drop code 3. PROBVOTO code 96 "No procede" is exactly the 205
+  respondents with P0=3 (non-nationals, filtered out by "P.13 si P.0=1 o 2"). The .do correctly drops them, but its
+  comment at line 213 says 96 is "not documented in the codebook". ES3473 labels it `96 'No procede'`, so
+  the comment is wrong and the data are not. The questionnaire anchors are shipped, not the SPSS value-label wording.
+- `spain_2024_values_values` (P.8_1–3, 3 items). Dropped code 3: 13/9/16. The instructions keep "utilizando la misma
+  escala" verbatim; that scale is P.7's. P8_1 "Planeta" (questionnaire) vs "planeta" (label). The questionnaire wording shipped.
+
+Step 5b orchestrator re-check: I recounted 3473_num.csv P5, P7_1–4, P8_1–3, ESCIDEOL and PROBVOTO. Every count the
+agents reported matches, e.g. p5 943/1419/34/382/51, p8_3 1278/1123/16/306/74, escideol 1..10
+257/165/321/242/716/228/261/252/63/165, probvoto 10 = 1841. The crosstab P0 × (PROBVOTO==96) gives 2503/135/205, with
+all 205 at P0=3. I also confirmed that ES3473 contains `96 'No procede'`.
+
+**For Ben (repeat of batch_322/323):** the CIS allow row in instrument_rights_register.csv is still
+scoped to `spain_2025_*`. All three agents re-derived allow from CIS's reuse-conditions page. I did not edit the register.
+
+Gates: normalize 0 changes. audit 3 PASS. verify_batch 3 exempt. lint clean (3 rows). irw-validate ok ×3.
+check_provenance exit 0. Its 2 `mixed` REVIEW items were already there before this batch. Cap (batch_330) not reached.
