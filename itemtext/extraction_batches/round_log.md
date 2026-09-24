@@ -24728,3 +24728,20 @@ irw-validate ok x3, check_provenance exit clean (its standing 38-table issues-pa
   language=Chinese inferred from the sample; English shipped as translated_substitute/mixed, and part of it is canonical PHQ/GAD
   English rather than the study's own, as the public_notes say.
 Queue: 4 pending, 0 in_progress. Cap (batch_348) not reached.
+
+### batch_344 — 2026-09-23T22:08 — 3 tables: 3 written / 0 blocked / 0 failed (yield 3/3)
+Three agents, no kills. All Step 4 gates clean: audit 3 PASS, verify_batch 2 PASS + 1 exempt (data_labels), lint clean,
+irw-validate ok x3, check_provenance exit 0 (only its standing `mixed` review list, no batch_344 tables).
+- nguyen_2026_sdt_academic_motivation / _perceived_performance — done, paper_explicit, VERIFIED. A sibling pair from Mendeley
+  10.17632/n45sjtxmzy (CC BY 4.0), with no linked article. QUESTIONNAIRE.docx prints each item next to its code (ACM1-7, ACP1-5),
+  and those codes are the xlsx headers. Verified by exact text-to-code match plus live-to-deposit ties: the ACM per-level
+  counts match on the diagonal only, and ACP cells match 100% of 13,815 cells, with the nearest off-diagonal at 0.758.
+  Only the endpoints are labelled, so options 2-4 are blank. **language=Vietnamese is an inference** (Vietnamese students,
+  Google Forms, Vietnamese demographic headers). The deposit holds only English, so it ships as translated_substitute/
+  study_supplied with a public_note. If a reviewer decides the form was given in English, change it to study_materials and drop language.
+- spelling_assessment_study1 — done, data_labels (the Study1.xlsx headers are the target words). 109 words, 0/1 = Incorrect/Correct.
+  The instructions are the paper's own description of the procedure, not the on-screen wording (disclosed). **Source defect (not IRW):**
+  the Eskenazi et al. 2023 supplement swaps the accuracy values for annihilate and anatomic. **Orchestrator re-check on live
+  data:** anatomic 584/673 = 86.8% and annihilate 305/672 = 45.4%, against the supplement's 45.80 and 86.73. Confirmed.
+  The paper reports N=682; the live table has 673 ids. Sibling spelling_assessment_study2 was not claimed; the agent left notes for it.
+Queue: 1 pending, 0 in_progress. Cap (batch_348) not reached.
