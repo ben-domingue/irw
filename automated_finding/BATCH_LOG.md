@@ -15272,6 +15272,57 @@ the source `.sav` and only integer anchors. A mean-imputed column has no
 missing left (that is the point of imputing) and contains a fractional
 constant. Neither holds, so these are real modal-response concentrations.
 
+## 2026-09-21 — Repos weekly run: 0 good by triage, 2 human_assistance surfaced unclassified
+
+Scheduled weekly repos run (`irw_discover_monthly.py --mode weekly`, all 14
+`HIGH_YIELD_TERMS`), run as an automated scheduled routine bounded to
+surfacing only — no Step 2b retriage, no hand-verification, no license/fit
+judgment calls beyond what the scripts computed. Bookkeeping pushed straight
+to main as `c332bf6` (14 `search_terms_log.csv` rows) and `24827de` (36
+`repo_triage_seen_keys.csv` keys).
+
+**OSF had transient outages on 2 of 14 terms** — `depression` (502 Bad
+Gateway fetching page 2) and `growth mindset` (30s read timeout). Dataverse
+and DataCite searched normally throughout, and OSF searched normally on the
+other 12 terms. Both `search_terms_log.csv` rows are marked
+`not_searched=osf`, so per the connector's own design these two terms'
+watermarks did not advance and the next weekly/monthly repos run re-covers
+them automatically; no action needed unless OSF is still failing on them
+next time.
+
+62 raw candidates found; 37 new after `repo_triage_seen_keys.csv` dedup (the
+rest already triaged via the monthly full sweep or a prior weekly run).
+Triage: 0 `good`, 2 `human_assistance`, 30 `no_usable_file`, 4
+`license_restricted`, 1 `download_failed` (Dryad DOI
+`10.5061/dryad.hx3ffbgvs`, "Gaming motivation among college students" — 401
+Unauthorized on the file download; left out of `repo_triage_seen_keys.csv` so
+a later run retries it once reachable).
+
+The 2 `human_assistance` rows were deliberately **not** sub-classified via
+Step 2b (`irw_retriage_ha.py`) — out of scope for this routine, which only
+surfaces triaged candidates for a human to work through later via the normal
+pipeline:
+
+- **DVN/QQ369L** — "Voter Participation, Motivation, and Perceptions in
+  Vietnam's 2026 National Assembly Election" (cc0). No column met the id
+  heuristic; row position was used as a fallback person id — needs a human to
+  confirm the file really is one row per respondent before it's trusted.
+- **DVN/OHBD3D** — "Data for 'Old Friends or New Connections? Social
+  Interaction and Daily Well-Being'" (cc0, N=305, 241 items, 70,491
+  responses). `resp` has >50 unique values after the wide-to-long melt —
+  likely continuous/aggregate data rather than ordinal item responses; QC
+  also flagged `resp_ordinal*`/`resp_direction*`/`imputed_values*`/
+  `multi_scale*`/`resp_scale_mixed`.
+
+**Per-run candidate/triage CSVs were not committed to the review branch** —
+both `monthly_candidates_weekly_2026-09-21.csv` and
+`monthly_triage_weekly_2026-09-21.csv` are covered by `.gitignore:57-58`
+(the fix from #2075 that closed the force-add loophole this routine's own
+template still describes). This write-up is the durable record instead; both
+DOIs above are re-resolvable if either needs another look. The raw CSVs
+remain on disk only in this session's `runs/` (gitignored, disposable) and
+will not survive the container.
+
 ## 2026-09-22 — PMC batch 2 (recycled ranked terms, second sweep off `pmc_term_backlog.csv`)
 
 Ran `irw_discover_pmc.py` over the **top 50 unrun terms** from
