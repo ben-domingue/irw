@@ -18,6 +18,7 @@ from red_up import cli
 from red_up import plan as planning
 from red_up.checks import (check_all, check_schema, history_dirs, scan,
                           validate_for_target)
+from red_up import targets as targets_mod
 from red_up.discover import discover, table_name
 from red_up.targets import (
     ConfigError,
@@ -25,6 +26,7 @@ from red_up.targets import (
     Target,
     eligible,
     guess_target,
+    itemtext_target,
     load_registry,
     newest_shard,
     newest_text_shard,
@@ -145,9 +147,36 @@ class TwoTextShards(unittest.TestCase):
     def test_new_item_text_defaults_to_the_newest_shard(self):
         # Writing to the older shard would be invisible: clients resolve
         # newest-first, so a copy in irw_text_2 would shadow it.
-        self.assertEqual(newest_text_shard(self.targets).name, "irw_text_2")
-        self.assertEqual(
-            guess_target([Path("x__items.csv")], self.targets).name, "irw_text_2")
+        with mock.patch.object(targets_mod, "ITEMTEXT_DEFAULT", None):
+            self.assertEqual(newest_text_shard(self.targets).name, "irw_text_2")
+            self.assertEqual(
+                guess_target([Path("x__items.csv")], self.targets).name,
+                "irw_text_2")
+
+    def test_a_pinned_default_overrides_the_newest_shard(self):
+        # irw_text_2 near the 1000-table cap: new tables are created in irw_text.
+        with mock.patch.object(targets_mod, "ITEMTEXT_DEFAULT", "irw_text"):
+            self.assertEqual(
+                guess_target([Path("x__items.csv")], self.targets).name,
+                "irw_text")
+
+    def test_a_pin_to_an_unregistered_shard_falls_back_to_the_newest(self):
+        with mock.patch.object(targets_mod, "ITEMTEXT_DEFAULT", "irw_text_9"):
+            self.assertEqual(
+                guess_target([Path("x__items.csv")], self.targets).name,
+                "irw_text_2")
+
+    def test_a_pinned_default_still_updates_a_table_where_it_lives(self):
+        # The shadowing guard: a table already in irw_text_2 is ELSEWHERE from
+        # the pinned irw_text, and its home is irw_text_2, not the pin.
+        with tempfile.TemporaryDirectory() as tmp:
+            path = write(Path(tmp), "x__items.csv", ITEMS)
+            reports = check_all([(path, table_name(path))])
+        with mock.patch.object(targets_mod, "ITEMTEXT_DEFAULT", "irw_text"):
+            target = guess_target([path], self.targets)
+        items = planning.build(reports, target, {"x__items": ["irw_text_2"]})
+        self.assertEqual(items[0].status, planning.ELSEWHERE)
+        self.assertEqual(items[0].found_in[-1], "irw_text_2")
 
     def test_response_data_is_unaffected_by_text_shards(self):
         self.assertEqual(newest_shard(self.targets).name, "w2")
@@ -255,7 +284,7 @@ class TargetGuessing(unittest.TestCase):
         files = [Path("provenance.csv"), Path("notes.csv"), Path("audit.csv"),
                  Path("x__items.csv")]
         self.assertEqual(guess_target(files, self.targets).name,
-                         newest_text_shard(self.targets).name)
+                         itemtext_target(self.targets).name)
 
     def test_plain_csvs_go_to_the_newest_shard(self):
         self.assertEqual(guess_target([Path("a.csv")], self.targets).name,

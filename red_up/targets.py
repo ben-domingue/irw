@@ -179,13 +179,32 @@ def newest_text_shard(targets: list[Target]) -> Target | None:
     return shards[-1] if shards else None
 
 
-def itemtext_target(targets: list[Target]) -> Target | None:
-    """The item-text destination: the newest shard.
+#: Where new item text goes by default, overriding "newest shard" while it is
+#: set. Pinned 2026-09-24 because `irw_text_2` held 987 of Redivis' 1000-table
+#: cap and `irw_text` 694. Set back to None once `irw_text_3` exists and is
+#: registered in IRW_TEXT_DATASETS.
+#:
+#: This does not reintroduce shadowing. A *new* table has no copy anywhere for
+#: an older shard to be hidden behind, and a table that already lives in a newer
+#: shard is caught by `planning.build` as ELSEWHERE and, by default, updated
+#: where it lives (`_home_for` in cli.py). The pin changes only where tables
+#: that exist nowhere yet are created. Do not reorder IRW_TEXT_DATASETS
+#: instead: clients read that order to resolve newest-first.
+ITEMTEXT_DEFAULT: str | None = "irw_text"
 
-    Uploading into an *older* text shard would be the shadowing bug in reverse
-    -- clients resolve newest-first, so a table written to shard 1 while shard 2
-    holds a copy stays invisible.
+
+def itemtext_target(targets: list[Target]) -> Target | None:
+    """The item-text destination: the pinned shard, else the newest.
+
+    Uploading an *existing* table into an older text shard would be the
+    shadowing bug in reverse -- clients resolve newest-first, so a table written
+    to shard 1 while shard 2 holds a copy stays invisible. That case never
+    reaches here as a create: see ITEMTEXT_DEFAULT.
     """
+    if ITEMTEXT_DEFAULT is not None:
+        for shard in text_shards(targets):
+            if shard.name == ITEMTEXT_DEFAULT:
+                return shard
     return newest_text_shard(targets)
 
 
