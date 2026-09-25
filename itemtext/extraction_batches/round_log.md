@@ -25528,3 +25528,30 @@ Gates:
 - **Metadata:** the SABFI2 family's mixed-case names keep drawing `name_charset` WARNs, which is known and not new.
 
 Cap check: the Step 0 cap is batch_430, so it has not been reached.
+
+## batch_405 — 2026-09-24T21:01:59-07:00
+
+3 tables, 3 agents. **3 written+done / 0 blocked / 0 failed** (0% failed, so the breaker is not tripped). Yield: 3 of 3.
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `goksel_2026_embarrassment_wcm` | **done** | 60 (12×5) | `data_labels` | NOT_NEEDED |
+| `ren_2024_loneliness` | **done** | 9 (3×3) | `data_labels` | NOT_NEEDED |
+| `act_kay_2025` | **done** | 28 (4×7) | `paper_explicit` | VERIFIED, verify PASS |
+
+Gates:
+- normalize_nulls: 0 of 3 files changed.
+- audit_batch: 3 PASS with no anomalies, so there are no WARNs to explain.
+- verify_batch: PASS=1, MISSING(exempt)=2 (the data_labels tables).
+- lint_verification: clean. 3 rows; the NOT_NEEDED rows are in both files.
+- irw-validate (upload profile): all 3 ok, nothing to report. goksel wcm is 29 chars, so unlike its batch_404 sibling it clears name_length.
+- check_provenance: exit 0. It reported only the standing REVIEW lists.
+
+- **goksel wcm**: pools Studies 2/4/6. The OSF jwdq6 codebook labels WCM_1..12 identically on all three sheets. Shipped the Study 2 instructions with `[name]`; the per-study referent difference is disclosed in public_note. Study 4's print typo "trstworthy" was normalised to "trustworthy", which is how the codebook and the other two prints spell it. Points 2 and 4 are unlabeled and left blank.
+  - Orchestrator re-check: live has 1500 ids, equal to the agent's 399+299+802.
+- **ren loneliness**: a 3-item UCLA short form. Codes follow the .sav labels (left out / isolated / lack companionship), NOT the Hughes 2004 order. The survey was in Chinese but no Chinese wording was published, so this is a `translated_substitute`. The middle anchor "Some of the time" was supplied from Hughes 2004 and disclosed as `translation_source=mixed`.
+  - Orchestrator re-check CONFIRMED from irw_fetch: per-item counts L1 1169/257/161, L2 1260/227/100, L3 1356/156/75. The summed score over 1587 complete respondents gives M 3.8, SD 1.6, against Table 2's 3.83/1.56.
+- **act_kay_2025**: the study's own Qualtrics printouts on OSF uzrgk tag each statement with its export column (4/4 at T1 and T2), so every item is pinned. verify prints PASS, and a swapped copy FAILs. The T1 printout's `acts_` tag prefix is a display typo for `act_`, recorded in provenance.
+  - Lead for the pending siblings (`cf`/`cmq`/`nfc`/`onecm_kay_2025`): the same printouts carry their wording and tags. Likert blocks are stored as −3..3 plus 4, but the `cf` items get no shift.
+
+Cap check: the Step 0 cap is batch_430, so it has not been reached.
