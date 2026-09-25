@@ -1,0 +1,4 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"abdullah_2024_blqol","WARN",5,5,TRUE,TRUE,FALSE,TRUE,0,71.4,"row-count anomaly (possible item-code conflation or missingness skew), median=323: QOL4_R | 71.4% of rows have blank option_text"
+"goldberg_2018_eps_cesd","PASS",24,24,TRUE,TRUE,FALSE,TRUE,0,0,""
+"goldberg_2018_hpq_h","PASS",39,39,TRUE,TRUE,FALSE,TRUE,0,0,""

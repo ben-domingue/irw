@@ -1,0 +1,4 @@
+"table","batch","mapping_basis","uploaded","route","status","evidence"
+"spain_2023_science_technology","batch_375","data_labels","","none","NOT_NEEDED","mapping_basis=data_labels: .do imports CIS Estudio 3406 3406_num.csv and lowercases the CIS column names (p4es_1..p4es_6); ES3406 variable labels tie each code to its questionnaire text directly"
+"spain_2023_science_utility","batch_375","data_labels","","none","NOT_NEEDED","mapping_basis=data_labels: .do imports CIS Estudio 3406 3406_num.csv and lowercases the CIS column names (p7es_1..p7es_4); ES3406 variable labels tie each code to its questionnaire text directly"
+"spain_2026_love_apps","batch_375","data_labels","","none","NOT_NEEDED","mapping_basis=data_labels: .do imports CIS Estudio 3508 3508_num.csv and lowercases the CIS column names (p16_1..p16_7); ES3508 variable labels tie each code to its questionnaire text directly"

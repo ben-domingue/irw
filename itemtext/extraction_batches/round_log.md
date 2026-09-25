@@ -24786,3 +24786,1304 @@ removed the 40 CSVs. Draft now 987 tables. Issues-page entries: oneoff/itemtext-
 - `islam_2022_phq9`: PHQ9 has no 'Several days' and 20.8% 'Nearly every day' in the deposit (likely coding).
 - `huang_2023_medseq`: data 1-5 where the source says 1-6.
 - `ai_fear_dong_2026_*`: item = occupation_trait copies each answer across 6-8 codes (480,000 rows, 60,000-80,000 real answers).
+
+### batch_346 — 2026-09-24T05:47 — 3 tables: 3 written / 0 blocked / 0 failed (yield 3/3)
+
+- Claimed `alan_2018_student_gender_attitudes`, `alan_2018_teacher_extrinsic_motivation` and `alan_2018_teacher_gender_attitudes`. All three come from Alan, Ertac & Mumcu 2018 (REStat; Dataverse doi:10.7910/DVN/FGBZCK, CC0). Each agent was told which siblings it must not touch.
+- All three are `data_labels`: the item codes are the deposit `gstyping.dta` column names, and the dta variable labels and `readme.pdf` tie each code to its statement. No verify scripts are owed (verify_batch: MISSING(exempt)=3). The NOT_NEEDED rows are in both verification_merged.csv and mapping_verification.csv.
+- All three are `translated_substitute`/`study_supplied`, language=Turkish. The Turkish wording is not in the deposit or the paper. The REStat PDF on direct.mit.edu is bot-walled; the Essex accepted manuscript (repository.essex.ac.uk/23823) has the appendix.
+- Gates: normalize 0 changes; audit 3 PASS, no anomalies; lint clean; irw-validate ok x3; check_provenance exit 0, and none of this batch's tables are flagged.
+- Step 5b re-checks, done by the orchestrator against the deposit dta. **All confirmed.**
+  - The dta labels match all 20 shipped items by content.
+  - Student direction (1=strongly agree): girls vs boys mean 2.80 vs 2.46 on ss_gender_1 ("Girls cannot play football") and 3.18 vs 2.48 on ss_gender_2 ("Boys are better at maths"), grouped by `male`.
+  - teacher_gender: the appendix orders items 5–9 differently from ts_gender_5..9. The labels settle the mapping; mapping by appendix order would have permuted five items.
+- Consistency across the family (for triage, not a defect):
+  - The student table ships the readme's short wording and labels the endpoints only (2/3 blank). The two teacher tables ship the fuller Essex-appendix wording with all four anchors.
+  - The two teacher tables word the anchors differently: `ts_ext` uses the main text's "I strongly agree…" and `ts_gender` uses the appendix's "completely agree…".
+  - Per the readme, `ts_ext_4` is stored reversed (1=strongly agree), so its option_text runs the other way from ts_ext_1–3. Only weak data support: r=+0.08 to +0.21 with the other three at the student-row level, +0.12 to +0.17 at the teacher level.
+  - The extraction agent reports that the appendix's student battery does not line up one-to-one with ss_gender_1..7, which is why the student table stayed on the readme.
+- For the three remaining `alan_2018_teacher_*` tables (growth_mindset, modern_teaching, warmth): per the agents, the Essex appendix prints their full wording, and the readme gives per-item anchor directions. Check direction per battery; teacher and student batteries run opposite ways.
+- Unrelated, surfaced incidentally: in `ts_6` (not shipped by any table), 80/143 teachers say girls are better at maths.
+
+### batch_347 — 2026-09-24T06:05 — 3 tables: 3 written / 0 blocked / 0 failed (yield 3/3)
+
+- Claimed `alan_2018_teacher_growth_mindset`, `alan_2018_teacher_modern_teaching` and `alan_2018_teacher_warmth`. These are the last three tables from Alan, Ertac & Mumcu 2018 (Dataverse doi:10.7910/DVN/FGBZCK, CC0), and the family is now complete. Each agent was told which siblings it must not touch.
+- All three are `data_labels` (item codes are the `gstyping.dta` column names; dta labels and `readme.pdf` agree 5/5, 6/6 and 4/4). The wording comes from the Essex accepted-manuscript appendix. Provenance: `translated_substitute`/`study_supplied`, language=Turkish (no Turkish wording published). No verify scripts are owed (verify_batch: MISSING(exempt)=3). NOT_NEEDED rows are in both verification_merged.csv and mapping_verification.csv.
+- Gates: normalize 0 changes; audit 3 PASS, no anomalies; lint clean; irw-validate ok x3; check_provenance exit 0 (only its standing `mixed` review list, no batch_347 tables).
+- Anchor direction differs by item, per the readme. Each public_note says so:
+  - growth_mindset: ts_gms_1/3/4 are stored reversed (1=strongly agree).
+  - modern_teaching: ts_modern_3/4/6 are stored reversed.
+  - warmth: ts_warmth_1–3 run 1=strongly agree. For ts_warmth_4, the readme words the item distanced-first with 1=strongly agree. The shipped appendix wording is warm-first, so its anchors are flipped to 1=strongly disagree. 1_measures.do sums each battery with no recode.
+- Step 5b re-checks, done by the orchestrator against the deposit dta (teacher level, N=145). **All confirmed.**
+  - The readme text for ts_warmth_4 (the "respect / quiet classroom … more important than warm" wording, 1=strongly agree) matches what the agent reported.
+  - All inter-item correlations are positive: warmth 0.19–0.51 (ts_warmth_4 at +0.19/+0.51/+0.42 with items 1/2/3); modern 0.11–0.42; gms 0.15–0.51. So the per-item keying is internally consistent.
+  - Distributions: ts_warmth_4 = 27/4/2/112 and ts_modern_6 = 45/0/2/97 at resp 1–4, both near-dichotomous. These are properties of the deposit data, not itemtext defects. Both are noted in notes/provenance, and ts_modern_6's public_note mentions it.
+- Rights for all three rest on silence. The items are study-authored and the deposit is CC0, but no terms cover the wording. Paper footnote 10 says some teaching-style items were adapted from OECD TALIS 2013 without saying which; the warmth items were not checked against TALIS.
+
+### batch_348 — 2026-09-24T06:02 — 3 tables: 3 written / 0 blocked / 0 failed (yield 3/3)
+
+- Claimed `goldberg_2018_prs_ipip`, `goldberg_2018_prs_movie_preferences` and `goldberg_2018_prs_music_preferences`. All three come from ESCS "(26) Personal Reactions Survey (PRS)", doi:10.7910/DVN/XJ6MXH (CC0). Each agent was told which PRS siblings it must not touch. `data/goldberg_2018_escs.py` melts PRS.tab without renaming anything, so the item codes are the .tab column names and all three tables are `data_labels`/`study_materials`, from PRS.pdf, the DDI and PRS_items.txt.
+  - **prs_ipip** (400 rows = 80 × 5): PRS.pdf pp.14–16, "Perceptions of Personal Qualities". The DDI labels match the form 80/80 in order, and the DDI valid-N equals the live per-item n 80/80. **One source override:** `ppq8` ships the form's "speeded-up", where the DDI label reads "speeded up". The orchestrator re-checked this: the pdftotext of PRS.pdf prints "speeded-up". All 80 statements are also in the ESCS 2,539-item IPIP bank (goldberg_2018_ipip, batch_318). The IPIP register row is `ship`.
+  - **prs_movie_preferences** (126 rows = 18 × 7): PRS.pdf p.9, MOVIES block. The DDI means equal the live means 18/18. The genre list is the study's own.
+  - **prs_music_preferences** (154 rows = 22 × 7): PRS.pdf p.8, MUSIC block. The DDI means equal the live means 22/22, and the DDI category frequencies equal the live counts in 154/154 cells. The agent checked that the genre list is the study's own 22 genres, not STOMP (14 genres). option_text follows the printed scale box, not the DDI value labels, which are lowercase, abbreviated and misspelled ("moderatly").
+- Gates: normalize 0 changes; audit 3 PASS, no anomalies; verify_batch MISSING(exempt)=3; lint clean (3 NOT_NEEDED rows, in both verification_merged.csv and mapping_verification.csv); irw-validate ok x3; check_provenance exit 0 (no batch_348 tables flagged, only the standing lists).
+- Step 5b re-checks, done by the orchestrator on live data. **All confirmed.** Nobody used resp=2 on movies4 (Comedy): the counts at 1–7 are 2/0/14/23/114/300/279, mean 6.1. ppq49 and ppq80 have a live range of 2–5 (735 ids). These are properties of the response data, not defects. The option rows are kept because the options were printed.
+- Rights for the two leisure tables rest on silence. The deposit is CC0 and the genre lists are study-authored, but there is no register row for them.
+- Remaining PRS tables in the queue: `goldberg_2018_prs_reading_preferences` and `goldberg_2018_prs_tv_preferences` (PRS.pdf pp.8–9 lay out the same Leisure Preferences grid). The per-agent caches are in `.cache/goldberg_2018_prs_*/`.
+- Harness note: this round's agents were dispatched in the background by mistake, so the orchestrator waited for their files with a foreground loop. All three finished normally.
+Queue: 38 pending, 0 in_progress. Cap (batch_362) not reached.
+
+## batch_349 — 2026-09-24T06:13-07:00 (3 tables, 3 agents)
+Written / blocked / failed: **3 / 0 / 0** (yield 100%). All `data_labels`, `study_materials`; all gates clean (audit_batch 3 PASS, verify_batch 3 MISSING(exempt), lint no problems, irw-validate ok x3, check_provenance exit 0).
+- `goldberg_2018_prs_reading_preferences` (35 items x 7 = 245 rows) and `goldberg_2018_prs_tv_preferences` (34 x 7 = 238): same PRS.tab DDI / PRS_items.txt / PRS.pdf pp.8-9 triangulation as batch_348's movie/music siblings; DDI means reproduce live per-item means 35/35 and 34/34 (max diff <3e-15). This closes out the goldberg_2018_prs_* family.
+- `hexaco_ashton_2014_a` (40 x 7 = 280): **Step 3b — the table's name says HEXACO but the items are the IPIP-HEXACO equivalent scales** (Ashton, Lee & Goldberg 2007), not the HEXACO-PI-R. The register's HEXACO-PI-R `block` row therefore does not apply; the IPIP `ship` verdict does. Orchestrator re-check (Step 5b) confirmed: openpsychometrics' raw-data index lists the deposit as "Answers to the IPIP HEXACO equivalent scales", and codebook stems (e.g. AForg1 "I love my enemies", AFlex3 "When interacting with a group of people, am often bothered...") are on ipip.ori.org/newhexaco_pi_key.htm. Caveats in notes.csv: (1) the codebook prints anchor 5 as "slightly disagree", which duplicates anchor 3 (confirmed on codebook.txt line 1); shipped as "slightly agree" with a public_note, since the original form page is gone (404, Wayback offline); (2) AFlex3 ships the codebook's ungrammatical "I when interacting..." verbatim; (3) instructions blank.
+- Siblings `hexaco_ashton_2014_c/_e/_h/_o/_x` are next in the queue and should ship the same way (same source, same IPIP verdict, same anchor-5 correction).
+Queue: 35 pending, 0 in_progress. Cap (batch_362) not reached.
+
+## batch_350 — 2026-09-24T06:22-06:30-07:00 (3 tables, 3 agents)
+Written / blocked / failed: **3 / 0 / 0** (yield 100%). All `data_labels`, `study_materials`, 280 rows each (40 items x 7). All gates clean: normalize 0 changes; audit_batch 3 PASS, no anomalies; verify_batch 3 MISSING(exempt); lint no problems (3 NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv); irw-validate ok x3; check_provenance exit 0 (only the standing `mixed` review list, no batch_350 tables).
+- `hexaco_ashton_2014_c`, `_e`, `_h`: same source and verdict as batch_349's `_a`. The source is openpsychometrics HEXACO.zip codebook.txt, and the items are the **IPIP-HEXACO** equivalent scales, not the HEXACO-PI-R (Step 3b), so the IPIP `ship` verdict applies. All 40/40 stems per table match ipip.ori.org/newhexaco_pi_key.htm. Item-vs-facet correlations have the IPIP-key sign 40/40 in each table, so the stored data are raw, not reverse-scored. The script's case-insensitive `starts_with()` does not leak other columns: `country` and `elapse` are handled before the pivot, and each live set is exactly its 40 codes.
+- Anchor 5 ships corrected to "slightly agree", with the same public_note as `_a`.
+- Step 5b re-checks, done by the orchestrator. **All confirmed.** codebook.txt line 1 prints 5 = "slightly disagree". HMode1 is "I don't think that i'm better than other people." (codebook line 42), and the IPIP key reads "I'm". COrga5 is "I want everything to be just right." (line 120), and the IPIP key quotes "just right." Both ship verbatim as the codebook prints them, with notes.
+- Remaining siblings `hexaco_ashton_2014_o` and `_x` should ship the same way.
+Queue: 32 pending, 0 in_progress. Cap (batch_362) not reached.
+
+## batch_351 — 2026-09-24T06:28-06:45-07:00 (3 tables, 3 agents)
+Written / blocked / failed: **3 / 0 / 0** (yield 100%). All gates clean: normalize 0 changes; audit_batch 3 PASS, no anomalies; verify_batch MISSING(exempt)=2, PASS=1; lint no problems (2 NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv); irw-validate ok x3; check_provenance exit 0 (no batch_351 tables flagged, only the standing lists).
+- `hexaco_ashton_2014_o` and `_x` (40 x 7 = 280 rows each; `data_labels`, `study_materials`): same HEXACO.zip codebook.txt (sha256 3b27002e…) and the same IPIP-HEXACO verdict (Step 3b) as `_a/_c/_e/_h`. Stems match ipip.ori.org/newhexaco_pi_key.htm 40/40 (o: 38 exact + OAesA4/OUnco7 missing the key's quotation marks; x: 39 exact + XExpr4 lowercase "i'm"), and item-vs-facet correlation signs match the IPIP key 40/40 in both, so the data are raw. The x facet set includes Expressiveness, which the PI-R does not have. Anchor 5 is corrected to "slightly agree" with the sibling public_note. **This closes out the hexaco_ashton_2014_* family.**
+- `nguyen_2026_autonomy_academic_motivation` (3 x 5 = 15 rows; `paper_explicit`, `translated_substitute`/`study_supplied`, VERIFIED, verify PASS): Mendeley 10.17632/whsbpyxy6w (CC BY 4.0), with no linked article. This is a different deposit from batch_344's nguyen_2026_sdt_* (n45sjtxmzy). The source is the depositor's English Questionnaire.docx, which prints AM1–AM3 against their text. Live cells equal the xlsx columns 100% on the diagonal, and at most 0.565 off it. Vietnamese administration is inferred (Hanoi grades 6–9, Vietnamese xlsx headers) and disclosed in a public_note. Anchors 2–4 are unlabelled and left blank.
+  - **Possible reversed coding in the response data, unproven, and noted rather than acted on.** The AM means are low (2.08/2.48/2.47). The construct composites fall into two negatively correlated blocks, and the AM mean rises across the undocumented HocLuc codes 1→4 (2.22→2.70). **Step 5b re-check by the orchestrator on data.xlsx:** the means, the AM correlations with AP/V/C (+0.48/−0.58/−0.54) and the HocLuc trend reproduce. **The agent's AM–ownership correlation was wrong:** it is −0.53, not +0.55, so the blocks are {AP,AM,F} vs {S,V,C,O}, not {AP,AM,F,O} vs {S,V,C}. I corrected notes.csv, provenance.csv and the cache's SIBLINGS_NOTE.txt. The six pending `nguyen_2026_autonomy_*` siblings share the deposit and face the same direction question. Candidate for a data-side GitHub issue if a human agrees the pattern is a reversal.
+Queue: 29 pending, 0 in_progress. Cap (batch_362) not reached.
+
+## batch_352 — 2026-09-24T06:36-06:50-07:00 (3 tables, 3 agents)
+Written / blocked / failed: **3 / 1 (CSV retained) / 0** → done 2 / blocked 1 / failed 0 (yield 2/3 shippable). Circuit breaker: 0% failed.
+Gates: normalize_nulls 0 of 3 changed; audit_batch 3 PASS, no anomalies; verify_batch PASS x3; lint clean (3 rows); check_provenance exit 0 (no batch_352 tables flagged, only the standing lists); **irw-validate: 2 ok + 1 ERROR `name_length` on `nguyen_2026_autonomy_school_autonomy_support`** (live name 44 chars).
+- `nguyen_2026_autonomy_academic_pressure` (AP1–3) and `nguyen_2026_autonomy_family_factors` (F1–3) — done. 15 rows each (3 x 5), `paper_explicit`, `translated_substitute`/`study_supplied`, same Mendeley whsbpyxy6w Questionnaire.docx and conventions as batch_351's academic_motivation (only anchors 1/5 labelled, Vietnamese inferred, public_note disclosed). VERIFIED: code labels 3/3 verbatim + live cells = xlsx column 100% on the diagonal (max off-diagonal 0.461 AP, 0.543 F).
+- `nguyen_2026_autonomy_school_autonomy_support` (S1–3) — **blocked on naming, CSV retained** (retry test NO). Extraction is clean and VERIFIED (100% diagonal, max off 0.586). Blocked under the batch_132/219/340 precedent; batch_309 marked such tables `done` under irw#2365 instead, so the precedent split still needs a human to pick one. Unblock: rename the live table to ≤40 chars (e.g. `nguyen_2026_autonomy_school_support`) and the CSV with it. Row added to pending_index_notes.csv.
+- Step 5b re-check by the orchestrator on data.xlsx. **Confirmed:** item-level construct correlations split {AP,AM,F} vs {S,V,C,O} (cross-block r −0.28 to −0.58). New agent finding also confirmed: the deposit's **composite** columns AP/AM/F/S/V equal their item means exactly, but composite **C** has r=0.255 with mean(C1–C4) and composite **O** has r=−0.96 with mean(O1–O4). That explains batch_351's sign mix-up on AM–O. The IRW script drops the composites, so the response tables are unaffected. The possible stored reversal of a block is still unproven. For AP, F and S the stated direction is content-plausible (stress/parental pressure run against voice/choice), so the anomaly rests on AM alone. Written into SIBLINGS_NOTE.txt for the choice/ownership/voice rounds.
+Queue: 26 pending, 0 in_progress. Cap (batch_362) not reached.
+
+## batch_353 — 2026-09-24T06:44-06:55-07:00 (3 tables, 3 agents)
+Written / blocked / failed: **3 / 0 / 0** (yield 100%). Circuit breaker: 0% failed. All `paper_explicit`, `translated_substitute`/`study_supplied`, VERIFIED (explicit code labels in the Questionnaire.docx and a cell-level source tie). Gates: normalize_nulls 0 of 3 changed; audit_batch 3 PASS, no anomalies; verify_batch PASS x3; lint clean (3 rows); irw-validate ok x3; check_provenance exit 0 (no batch_353 tables flagged, only the standing lists).
+- `nguyen_2026_autonomy_student_choice` (C1–C4, 20 rows), `_student_ownership` (O1–O4, 20 rows), `_student_voice` (V1–V3, 15 rows). Same Mendeley whsbpyxy6w deposit and conventions as batch_351/352: only anchors 1 and 5 are labelled, Vietnamese administration is inferred, public_note disclosed. Each live item equals its own xlsx column in 100% of cells. Agreement with any other column in the block is at most 0.49 (C), 0.553 (O) and 0.43 (V).
+- Step 5b re-check by the orchestrator on data.xlsx. **All confirmed:** the V composite equals mean(V1–V3) exactly; the C composite has r=0.26 with its item mean and O has r=−0.96, both reconfirmed; O2–AM3 r=−0.38; mean(V) correlates −0.57/−0.58/−0.56 with AP/AM/F. C, O and V all fall in the {S,V,C,O} block, and their stated direction is content-plausible, so the possible stored reversal still rests on AM alone. Unproven, noted, not acted on.
+- The `nguyen_2026_autonomy_*` family is now closed out, except `school_autonomy_support`, which is still blocked on name_length (batch_352).
+Queue: 23 pending, 0 in_progress. Cap (batch_362) not reached.
+
+## batch_354 — 2026-09-24T06:52-07:00 (3 tables, 3 agents)
+Written / blocked / failed: **3 / 0 / 0** (yield 100%). Circuit breaker: 0% failed. All `data_labels`, `study_materials` / `machine_translation` (CIS Estudio 3409, Spanish-only; English in `_translated` is IRW's, disclosed in public_note). Gates: normalize_nulls 0 of 3 changed; audit_batch 3 PASS, no anomalies; verify_batch MISSING(exempt) x3; lint clean (3 NOT_NEEDED rows, written to both verification_merged.csv and the tracker); irw-validate ok x3; check_provenance exit 0 (the three are held/not uploaded, so no issues-page line owed yet).
+- `spain_2023_identity_authenticity` (p8_1–p8_5, 20 rows): CATI region fills `@1..@20` replaced with CIS's own placeholder `(gentilicio de la C. A.)`; CIS code 7 "Ninguna" stored as resp 4.
+- `spain_2023_identity_centralism` (escalacentralismo_1–6 = PSOE/PP/VOX/Cs/Podemos/Sumar, 60 rows): only anchors 1 and 10 labelled, 2–9 blank.
+- `spain_2023_identity_europe` (p16, p17, 4 rows): resp set {1,3} — CIS volunteered midpoint code 2 dropped by the .do along with 8/9.
+- Step 5b re-check by the orchestrator: **confirmed.** `.do` line 156 does `replace resp = 4 if resp == 7`; lines 325–326 drop p16/p17 codes {2,8,9}. Live per-item n (irw_table_sets): europe 7244/7147 = 7643 − (254+118+27) / 7643 − (238+225+33) exactly; authenticity p8_1 n=7584 = 1865+2393+1959+1367 exactly.
+- Five `spain_2023_identity_*` siblings (identification, patriotism, pride, state, territorial) remain pending; same CIS 3409 microdata and conventions apply.
+Queue: 20 pending, 0 in_progress. Cap (batch_362) not reached.
+
+## batch_355 — 2026-09-24T07:00-07:00 (3 tables, 3 agents)
+Written / blocked / failed: **3 / 0 / 0** (yield 100%). Circuit breaker: 0% failed. All `data_labels`, `study_materials` / `machine_translation` (CIS Estudio 3409, Spanish-only; English in `_translated` is IRW's, disclosed in public_note). Gates: normalize_nulls 0 of 3 changed; audit_batch 3 PASS, no anomalies; verify_batch MISSING(exempt) x3; lint clean (3 NOT_NEEDED rows in both verification_merged.csv and the tracker); irw-validate ok x3; check_provenance exit 0 (only the standing 4-table `mixed` REVIEW note, not this batch).
+- `spain_2023_identity_identification` (P.5, p5_1–p5_9, 36 rows): resp {1,2,4,5} — CIS unread midpoint code 3 '(NO LEER) Ni poco ni bastante' dropped by the .do with 8/9, so no option row at 3. Source's 'si Ud, se identifica' typo kept as printed.
+- `spain_2023_identity_patriotism` (P.9, p9_1–p9_3, 6 rows): resp {1,3} — unread midpoint code 2 dropped by the .do with 9.
+- `spain_2023_identity_pride` (P.11, P.12, 8 rows): resp 1–4 unchanged; CATI region fill in P.12 replaced with CIS's placeholder `(gentilicio de la C. A.)`; no shared carrier, instructions blank.
+- Step 5b re-check by the orchestrator: **confirmed.** `.do` lines 47–55 set p5_* codes {3,8,9} missing, 172–174 set p9_* {2,9} missing, 210–211 set p11/p12 {8,9} missing. Live per-item n (irw_table_sets): p9 7447/7324/7469 = agents' kept-code cell sums 5174+2273 / 2868+4456 / 4598+2871; pride 7559/7500 = 3243+2870+989+457 / 3278+2849+944+429; identification resp set {1,2,4,5}, 4 levels on every item.
+- Orchestrator note: the first append to mapping_verification.csv went through Python text mode and rewrote the file's CRLF line endings as LF (a whole-file diff); caught before commit, restored, and re-appended in binary with CRLF (+3 lines only).
+- Two `spain_2023_identity_*` siblings (state, territorial) remain pending; same CIS 3409 microdata and conventions apply.
+Queue: 17 pending, 0 in_progress. Cap (batch_362) not reached.
+
+## batch_356 — 2026-09-24T07:07:52-07:00 (3 tables, 3 agents)
+Written / blocked / failed: **3 / 0 / 0** (yield 100%). All three `data_labels` + `study_materials` + `machine_translation`, CIS rights register row applied (irw#2381).
+- Numbering: highest existing was batch_355, so this round is batch_356. The "below 300" rule, read literally, gives 305, which already exists; the intended successor is the next number in sequence.
+- `spain_2023_identity_state` (P.13, P.14; 10 rows): two separate questions, blank instructions (pride/europe convention); 8/9 dropped. Rebuilt from 3409_num.csv: 14,965 rows, 0/0 set differences; n p13 7412 / p14 7553 = irw_table_sets.
+- `spain_2023_identity_territorial` (P.7 grid, p7_1..p7_5, 0–10; 55 rows): option_text only at 0/10. **Deliberate deviation from the batch_354/355 fill convention**: P7_2 carries a 19-token CATI fill `(@1…@19)` (region NAME), not the 20-token demonym fill, so it is omitted, as in CIS's own P7_2 label, rather than replaced with `(gentilicio de la C. A.)`. Rebuild 38,074 rows 0/0 diff; n 7640/7636/7631/7596/7571.
+- `spain_2024_politics_actions` (CIS Estudio 3490, P.16 [ACTI], acti_1..acti_13; 52 rows): first table from this study. MD3490 is served at https://www.cis.es/documents/d/cis/MD3490; the 3409 URL pattern 404s. Rebuild 33,064 rows 0/0 diff. ACTI_12 ships the questionnaire's "internet" rather than the label's "Internet".
+- Step 5b orchestrator re-check: **confirmed** both territorial claims. The ES3409 label is `/P7_2 'Con la Comunidad autónoma donde vive'`, with no fill; the questionnaire prints `(@1…@19)` after that row, while P8/P10 use `@1…@20`. codigo3409.pdf's header reads "Escala de identificación (1-10)" directly above the value label "0.- 0 Nada identificado/a", so the codebook defect is real; it does not affect the table.
+- Gates: normalize 0 changes; audit 3 PASS, no WARNs; verify_batch MISSING(exempt)=3; lint clean; irw-validate ok x3; check_provenance exit 0 (new tables listed as HELD, not yet owed an issues-page line).
+Queue: 14 pending, 0 in_progress. Cap (batch_362) not reached.
+
+## batch_357 — 2026-09-24T07:15-07:00 (3 tables, 3 agents)
+Written / blocked / failed: **3 / 0 / 0** (yield 100%). Circuit breaker: 0% failed. All three are `data_labels`, `study_materials` / `machine_translation` (CIS Estudio 3490, MD3490.zip md5 a1ff0b84…, same as batch_356), with the CIS rights register row applied (irw#2381). Gates: normalize 0 of 3 changed; audit 3 PASS, no anomalies; verify_batch MISSING(exempt)=3; lint clean (3 NOT_NEEDED rows in both verification_merged.csv and the tracker); irw-validate ok x3; check_provenance exit 0.
+- `spain_2024_politics_associations` (P.11 [ASOCIACIONES], asociaciones_1..11; 44 rows): resp 1–4 unchanged, only 8/9 dropped. Rebuild 28,059 rows, 0/0 diff.
+- `spain_2024_politics_beliefs` (P.3 [VALORES1], valores1_1..5; 20 rows): resp {1,2,4,5}. The .do drops the unread midpoint code 3 along with 8/9, so there is no option row at 3. Rebuild 12,650 rows, 0/0 diff.
+- `spain_2024_politics_difficulty` (P.5 [PROBLE] + C.15 [FINMES]; 8 rows): resp {1,2,4,5}, with the unread midpoint 3 dropped. Two separate questions, so instructions are blank (pride/state convention). C.15's misprint 'díficil' is kept as printed (notes.csv).
+- Step 5b orchestrator re-check: **confirmed.** `.do` lines 52–56 drop valores1_* {3,8,9}, 214–224 drop asociaciones_* {8,9}, and 311–312 drop proble/finmes {3,8,9}. Each agent's kept-code cell sums equal the per-item n from irw_table_sets: valores1_1 231+1286+851+117=2485 (=2562−77), valores1_3 2537; proble 76+1459+829+85=2449 (=2562−113), finmes 2425 (=2562−137); asociaciones_1 2558, _5 2542, _10 2548.
+- Orchestrator note: the first claim write went through csv.writer, which rewrote queue_state.csv's line endings (a 3,398-line diff). It was caught before dispatch, restored with `git checkout`, and re-claimed in binary (3 lines changed).
+- Remaining spain_2024_politics_* siblings (inperson, online, political, values) are pending; they use the same MD3490 conventions.
+Queue: 11 pending, 0 in_progress. Cap (batch_362) not reached.
+
+## batch_358 — 2026-09-24T07:22:47-07:00 (3 tables, 3 agents)
+Written / blocked / failed: **3 / 0 / 0** (yield 100%). Circuit breaker: 0% failed. All three are `data_labels`, `study_materials` / `machine_translation` (CIS Estudio 3490, MD3490.zip md5 a1ff0b84…, same as batch_356/357), with the CIS rights register row applied (irw#2381). Gates: normalize 0 of 3 changed; audit 3 PASS, no anomalies; verify_batch MISSING(exempt)=3; lint clean (3 NOT_NEEDED rows in both verification_merged.csv and the tracker, appended in binary with CRLF); irw-validate ok x3; check_provenance exit 0.
+- `spain_2024_politics_inperson` (P.8 [PRESEN], presen_1..3; 12 rows): resp 1–4, only 8/9 dropped (.do 134–136). Rebuild 7,659 rows, 0/0 diff. The printed grid heading misspells code 3 ('Probablemene no'), so the value label 'Probablemente no' is shipped.
+- `spain_2024_politics_online` (P.9 [ONLINE], online_1..3; 12 rows): resp 1–4. The .do drops code 7 'N.P.' (no devices or internet access) along with 8/9 (lines 174–176), which is disclosed in public_note. Rebuild 7,537 rows, 0/0 diff. Same heading misspelling as P.8.
+- `spain_2024_politics_political` (C.1 ESCIDEOL 1–10, C.2 PROBVOTO 0–10; 21 rows): only the end points carry option_text, and they follow the questionnaire's printed list ('Izda.'/'Dcha.', 'No iría a votar seguro'/'Iría a votar seguro'), not the longer .sav labels. Instructions are blank (two separate questions). The .do drops escideol 98/99 and probvoto 97/98/99 (lines 351–352). Rebuild 4,895 rows, 0/0 diff.
+- Step 5b orchestrator re-check: **confirmed.** .do lines 134–136, 174–176 and 351–352 read as reported. In 3490_num.csv, ONLINE code 7 = 44/42/39. PROBVOTO 97 = 98 = NACIONALIDAD 3, all 98 rows in both, which backs the public_note's filter claim. cues3490.pdf prints '1 Izda.' and '0 No iría a votar seguro' under [ESCIDEOL]/[PROBVOTO], and the filter reads 'Si NACIONALIDAD=3 ir a C7'.
+- The only remaining spain_2024_politics_* sibling is `values`. After it, the queue moves to spain_2026_elections_* (7 tables).
+Queue: 8 pending, 0 in_progress. Cap (batch_362) not reached.
+
+## batch_359 — 2026-09-24T07:35:00-07:00 (3 tables, 3 agents)
+Written / blocked / failed: **3 / 0 / 0** (yield 100%). Circuit breaker: 0% failed. All three are `data_labels`, `study_materials` / `machine_translation`, with the CIS rights register row applied (irw#2381). Gates: normalize 0 of 3 changed; audit 3 PASS, no anomalies; verify_batch MISSING(exempt)=3; lint clean (3 NOT_NEEDED rows in both verification_merged.csv and the tracker); irw-validate ok x3; check_provenance exit 0.
+- `spain_2024_politics_values` (CIS 3490 P.6 [VALORES2], valores2_1..4; 16 rows): resp {1,2,4,5}, with the unread midpoint 3 dropped along with 8/9 (as in beliefs). Rebuild 10,124 rows, 0/0 diff. Items were rotated; the printed order is shipped. This was the last spain_2024_politics_* table.
+- `spain_2026_elections_campaign` (CIS 3566 P.2 + P.3 grid, p2/p3_1..4; 21 rows): the first table from Estudio 3566. MD3566 is at https://www.cis.es/documents/20117/14152474/MD3566.zip (md5 71931bfc117bf11667679e8655b2fc0c). `/documents/d/cis/MD3566` returns 410 and the 3565 folder returns 404. Unlike most CIS midpoints, the .do KEEPS p2 code 3 '(NO LEER) Regular' (78 of 4032); it ships as 'Regular' and public_note discloses it. Layout follows batch_323/324 (standalone question plus grid). Rebuild 20,025 rows, 0/0 diff.
+- `spain_2026_elections_garcia` (CIS 3566 P.5c4 [JIGARCIA], jigarcia_1..6, 1–10; 60 rows): option_text only at the end points ('Poco'/'Mucho', from the value labels; the printed headings carry stray periods). The .do drops code 0 'N.P.', the routing code for respondents who said NO CONOCE (97) about García at P.5c, and public_note discloses it. Rebuild 21,982 rows, 0/0 diff. For the remaining leader siblings (moreno/montero/gavira/maillo = P.5c1/2/3/5), the agent says each uses the same grid and 0 = N.P. tied to its own CAMPA_LIDERES_k, but the stems differ slightly, so each should be copied from its own stem.
+- Step 5b orchestrator re-check: **confirmed.** In 3566_num.csv (4032 rows), CAMPA_LIDERES_4==97 corresponds exactly to all six JIGARCIA==0 (233 rows; the other 3799 have none), and P2 counts are 1:1503 2:1376 3:78 4:789 5:275 8:1 9:10. .do lines 46–50 drop only p2 {8,9} and p3_k {9}.
+Queue: 5 pending, 0 in_progress. Cap (batch_362) not reached.
+
+## batch_360 — 2026-09-24T07:42:36-07:00 (3 tables, 3 agents)
+Written / blocked / failed: **3 / 0 / 0** (yield 100%). Circuit breaker: 0% failed. All three are `data_labels`, `study_materials` / `machine_translation` (CIS Estudio 3566, MD3566.zip md5 71931bfc…, same as batch_359), with the CIS rights register row applied (irw#2381). Gates: normalize 0 of 3 changed; audit 3 PASS, no anomalies; verify_batch MISSING(exempt)=3; lint clean (3 NOT_NEEDED rows in both verification_merged.csv and the tracker); irw-validate ok x3; check_provenance exit 0.
+- `spain_2026_elections_gavira` (P.5c3 [MGAVIRA], mgavira_1..6, 1–10; 60 rows): end-point labels only ('Poco'/'Mucho'), following garcia. The stem is copied from P.5c3 itself. The .do (lines 175–180) drops 0 'N.P.' (206 per item), 98 and 99; public_note discloses the 0. Rebuild 21,969 rows, 0/0 diff.
+- `spain_2026_elections_leaderscampaign` (P.5c [CAMPA_LIDERES], campa_lideres_1..5 = Moreno/Montero/Gavira/García/Maíllo, 1–10; 50 rows): end-point labels 'Muy mal'/'Muy bien'. item_text is the grid row label (name + party). The .do (lines 79–83) drops 97 'No conoce' (a printed grid column), 98 and 99; public_note discloses them with counts. Rebuild 19,062 rows, 0/0 diff.
+- `spain_2026_elections_maillo` (P.5c5 [AMAILLO], amaillo_1..6, 1–10; 60 rows): the stem is Maíllo's own, which has no "el" before 1, unlike García's. The .do (lines 239–244) drops 0 'N.P.' (199 per item), 98 and 99; public_note discloses the 0. Rebuild 22,335 rows, 0/0 diff.
+- Step 5b orchestrator re-check: **confirmed.** In 3566_num.csv (4032 rows), CAMPA_LIDERES_3==97 ↔ MGAVIRA_n==0 is 206/206 on all six items, with 0 off-diagonal. CAMPA_LIDERES_5==97 ↔ AMAILLO_n==0 is 199/199 on all six, also with 0 off-diagonal. The CAMPA_LIDERES_k 97/98/99 counts match the leaderscampaign agent's table exactly (k=1 20/60/17 … k=5 199/66/21). .do lines 79–83, 175–180 and 239–244 read as reported.
+- Remaining: spain_2026_elections_montero and _moreno (P.5c2/P.5c1), same conventions.
+Queue: 2 pending, 0 in_progress. Cap (batch_362) not reached.
+
+## batch_361 — 2026-09-24T07:51:09-07:00 (2 tables, 2 agents)
+Written / blocked / failed: **2 / 0 / 0** (yield 100%). Circuit breaker: 0% failed. Only 2 pending rows remained, so this round took 2. Numbering: the Step 1 rule's "highest below 300, else batch_305" no longer resolves (batch_305–360 all exist from this series), so it continued consecutively at batch_361, following the batch_358–360 series. Both tables are `data_labels`, `study_materials` / `machine_translation` (CIS Estudio 3566, MD3566.zip md5 71931bfc…, same file as batch_359/360), with the CIS rights register row (line 117, allow) applied. The reuse page was re-fetched with HTTP 200. Gates: normalize 0 of 2 changed. audit 2 PASS, no anomalies. verify_batch MISSING(exempt)=2. lint clean (2 NOT_NEEDED rows in both verification_merged.csv and the tracker). irw-validate ok x2. check_provenance exit 0.
+- `spain_2026_elections_montero` (P.5c2 [MJMONTERO], mjmontero_1..6, 1–10; 60 rows): end-point labels only ('Poco'/'Mucho'). The stem is copied from P.5c2 itself and has "el 1", like garcia. The .do (lines 143–148) drops 0 'N.P.' (25 per item), 98 and 99. public_note discloses the 0. Rebuild 23,807 rows / 3,989 ids, 0/0 diff.
+- `spain_2026_elections_moreno` (P.5c1 [JMMORENO], jmmoreno_1..6, 1–10; 60 rows): same conventions, stem with "el 1". The .do (lines 111–116) drops 0 'N.P.' (20 per item), 98 and 99. public_note discloses the 0. Rebuild 23,814 rows / 3,996 ids, 0/0 diff.
+- Step 5b orchestrator re-check: **confirmed.** In 3566_num.csv (4032 rows), MJMONTERO_k==0 ↔ CAMPA_LIDERES_2==97 is 25/25 on all six items, with 0 off-diagonal. JMMORENO_k==0 ↔ CAMPA_LIDERES_1==97 is 20/20 on all six, also with 0 off-diagonal. The 98/99 counts match both agents' reports exactly (montero 98: 23/19/22/15/29/32, 99: 15/14/15/16/16/19; moreno 98: 37/19/26/17/24/50, 99: 15/11/12/11/13/23). The item means match too (montero 4.2/3.9/5.0/4.1/3.8/4.0; moreno 6.3/6.5/6.3/5.7/5.6/6.3). .do line ranges read as reported.
+- The spain_2026_elections CIS 3566 series is now complete (7 tables across batch_359–361).
+Queue: **0 pending, 0 in_progress — queue exhausted.** The next firing will stop at Step 0. Cap (batch_362) not reached.
+
+## batch_362 — 2026-09-24T07:58-07:00 (3 tables, irw#2381 slice 04)
+Written / blocked / failed: **3 / 0 / 0** (yield 100%). Circuit breaker: 0% failed. Three agents, no kills. Tables: `okeke2025_adaptability` (B7-B9), `okeke2025_ai_usefulness_post` (B19-B21), `okeke2025_ai_usefulness_pre` (A9-A11), all `study_materials` from figshare 10.6084/m9.figshare.28768874 (CC BY 4.0 per api.figshare.com; instrument docx sha256 93ec960f…). The survey was in English, so there is no translation. Rights: silence (the wording is the study's own; the Ivanov & Dolgui / Podsakoff heading citations are conceptual only). No register row was written.
+- Gates: normalize 0 of 3 changed; audit 3 PASS, no anomalies; verify_batch 3 PASS; lint clean; irw-validate 3 ok; check_provenance shows only the 4 pre-existing `mixed` REVIEW lines, none from this batch.
+- **mapping_basis harmonised by the orchestrator.** Two agents wrote `paper_explicit` and one wrote `reconstructed` for the same situation. The docx and the xlsx headers share codes A1-A11/B1-B21, but the live codes are renamed (`adp_1`, `aiu_pre_1`, …) and there is no okeke2025 processing script in the repo. Under SKILL.md §6c, `paper_explicit` needs the paper's codes to match the LIVE codes, so all three are now `reconstructed`, in provenance, the batch verification file and the tracker. All three are VERIFIED by exact person-level cell agreement: live id k ↔ Participant ID Pk, 200/200 ids join, each item matches its claimed column 200/200, and the best rival column reaches 44–74/200. **Later okeke2025 rounds (7 tables still pending) should use `reconstructed` too.**
+- Step 5b orchestrator re-check: **confirmed** the `ai_usefulness_pre` caveats. (1) The A9-A11 wording is about "existing/current decision-support tools", not generative AI, despite the "Perceived Usefulness of AI Tools (Baseline)" heading; it was transcribed as printed. (2) The low inter-item correlation is **deposit-wide**, not confined to A9-A11: all 32 items, 496 pairs, r −0.214..0.189, mean |r| 0.059 (A9-A11 −0.052/0.137/0.011; B19-B21 −0.004/0.082/0.001). No okeke2025 scale has internal structure, which suggests the response data may be simulated. This is a response-data property, not an itemtext defect, and it is recorded in notes.csv for all three tables. It may deserve a corpus-trust look at the whole okeke2025 family.
+Queue: 46 pending, 0 in_progress. Cap (batch_379) not reached.
+
+## batch_363 — 2026-09-24T08:07 (-07:00), 3 tables
+
+Written / blocked / failed: **3 / 0 / 0** (yield 100%). Circuit breaker: 0% failed. Three agents, no kills. Tables: `okeke2025_cognitive_agility_pre` (A1-A5, "Perceived Cognitive Agility (adapted from Podsakoff et al., 2012)"), `okeke2025_cognitive_agility_post` (B13-B15, "Post-Use Cognitive Agility"), `okeke2025_decision_accuracy` (B1-B3, "Decision Accuracy (Ivanov & Dolgui, 2021)"; post-only, no Section A counterpart). Same figshare deposit 10.6084/m9.figshare.28768874 (CC BY 4.0, file hashes identical to batch_362), all `reconstructed` / `study_materials` per the batch_362 ruling, English, rights on silence, no register row.
+- All three VERIFIED by exact person-level cell agreement (live id k ↔ P%03d, 200/200 ids; each item 200/200 with its claimed column, best rival 63–71/200). verify_*.R all PASS; audit PASS ×3 with no anomalies; lint clean; irw-validate ok ×3; check_provenance only the standing 4-table `mixed` review list (not this batch).
+- Step 5b orchestrator re-check: **confirmed** the near-zero inter-item correlations from the live tables (cognitive_agility_pre −0.14..0.12, _post −0.11/0.069/0.097, decision_accuracy 0.004/0.038/0.054). Response-data property, recorded in notes.csv; strengthens the batch_362 suggestion of a corpus-trust look at the okeke2025 family. `_post` agent also noted a live `treat` column (0/1, 100 each) absent from the xlsx — unchecked.
+
+## batch_364 — 2026-09-24T08:14 (-07:00), 3 tables
+
+Written / blocked / failed: **3 / 0 / 0** (yield 100%). Circuit breaker: 0% failed. Three agents, no kills. Tables: `okeke2025_decision_confidence_pre` (A6-A8, "Decision-Making Confidence:"), `okeke2025_decision_confidence_post` (B16-B18, "Decision-Making Confidence (Post-use):"), `okeke2025_response_time` (B4-B6, "Response Time (Ivanov & Dolgui, 2021)" — three Likert statements about decision speed, NOT timing data; the workbook's `Computation` sheet has a continuous `Response_Time` score that is not the live table and correlates -0.11 with the B4-B6 mean). Same figshare deposit 10.6084/m9.figshare.28768874 (CC BY 4.0), same file sha256s as batch_363.
+- All three `reconstructed`, VERIFIED by exact person-level cell agreement (live id k ↔ P%03d, 200/200 ids; each item 200/200 with its claimed column, best rival ≤74/200; pre vs post blocks cross-agree only 46–59/200). verify_*.R PASS ×3; audit PASS ×3 no anomalies; lint clean (2 INFO); irw-validate ok ×3; check_provenance only the standing 4-table `mixed` review list.
+- Step 5b orchestrator re-check: **confirmed** near-zero inter-item correlations from the live tables (dc_pre −0.055/−0.036/0.170, dc_post −0.030/0.032/0.074, rt −0.040/−0.016/0.022). Recorded in notes.csv as a response-data property. Third round in a row to see this across the okeke2025 family; live `treat` column (0/1, 100 each) still unchecked — corpus-trust look recommended.
+- Numbering: highest existing was batch_363 (past the 300–304 hole), so this round is batch_364. Cap is batch_379; not reached. 40 pending remain.
+
+## batch_365 — 2026-09-24T08:21 (-07:00), 3 tables
+
+Written / blocked / failed: **3 / 0 / 0** (yield 100%). Circuit breaker: 0% failed. Three agents, no kills. Numbering: highest existing batch_364, so batch_365. Cap is batch_379; not reached.
+- `okeke2025_risk_mitigation` (rm_1..3 = B10-B12 "Effectiveness in Mitigating Supply Chain Risks:", post-only; 15 rows): same figshare deposit 10.6084/m9.figshare.28768874 (CC BY 4.0, docx/xlsx hashes as batch_362-364), `reconstructed` / `study_materials`, English, rights on silence. VERIFIED by person-level cell agreement (200/200 ids; each item 200/200 with its column, best rival 64-71/200); verify_*.R PASS. Inter-item r −0.072/0.075/0.006 — the same deposit-wide near-zero structure, recorded in notes as a response-data property. Fourth round in a row; live `treat` column still unchecked. **okeke2025 family is now complete in this queue**; the corpus-trust look recommended in batch_362–364 stands.
+- `spain_2013_services_functioning` (p1, p2, p301..p309; 36 rows) and `spain_2013_services_complaints` (p27, p27c, p27d; 12 rows): CIS Estudio 2986 "Calidad de los servicios públicos (VIII)", April 2013, MD2986.zip (md5 fe24e8a7…), both `data_labels` / `study_materials` / `machine_translation`, CIS rights register row (line 117, allow) applied, reuse page re-fetched HTTP 200. The .do's infix names and columns match the ES2986 DATA LIST for all 174 variables, so codes are CIS names lowercased. Rebuilds from DA2986 via the .do logic reproduce the live tables exactly (27,324 and 7,452 rows, 0/0 diff). functioning pools three scales (p1 1-4, p2 1-5, p3xx 1-3); '(NO LEER)' midpoints kept by the .do and shipped with the marker stripped, disclosed.
+- **DATA DEFECT (complaints), orchestrator-confirmed:** `data/spain_2013_services.do` Bookmark 10 drops only 8/9, so CIS code 0 'No procede' (declared MISSING in ES2986) is stored as a response: p27c 1982/2484 rows, p27d 2259/2484. Step 5b re-check on the live table: p27c==0 exactly when p27 ∈ {2, NA} (1978+4; 0 of 502 p27==1), p27d==0 exactly when p27c≠1 (0 of 225 p27c==1). Shipped with option row resp 0 = 'No procede' and a public_note warning. Suggested fix: add 0 to the inlist() for p27c/p27d. ES2986 declares 0 missing for 43 variables — **the 8 remaining spain_2013_services siblings (next rounds) should check for the same defect**, and it may merit a GitHub issue. Both spain tables also keep NA-resp rows for 8/9 (2,344 and 31) rather than dropping them.
+- Gates: normalize 0 of 3 changed; audit 3 PASS, no anomalies; verify_batch PASS=1, MISSING(exempt)=2; lint clean (2 NOT_NEEDED rows in both verification_merged.csv and the tracker); irw-validate ok ×3; check_provenance exit 0 (only the standing 4-table `mixed` review list).
+Queue: 37 pending, 0 in_progress. Cap (batch_379) not reached.
+
+## batch_366 — 2026-09-24T08:36 (-07:00), 3 tables
+
+Written / blocked / failed: **3 / 0 / 0** (yield 100%). Circuit breaker: 0% failed. Three agents, no kills (16G available at launch). Numbering: highest existing batch_365, so batch_366. Cap is batch_379; not reached.
+- All three from CIS Estudio 2986 (MD2986.zip, same md5 as batch_365), `data_labels` / `study_materials` / `machine_translation`, CIS rights register row (allow) applied. Each agent rebuilt its table from DA2986 via the .do logic and reproduced the live table exactly.
+  - `spain_2013_services_importance` (p5 0–10 importance, anchors only at 1/10 — points 2–9 left blank; p6a Sí/No; 13 rows; 4,968 live rows).
+  - `spain_2013_services_inpersonsat` (p12, p13, p1401..p1409, p15; 61 rows; 29,808 live rows). Pools 1–5, 1–4 and 1–3 scales, so resp 3 means different things across items — disclosed. '(NO LEER)' markers stripped.
+  - `spain_2013_services_internet` (p19, p2101..p2110; 23 rows; 27,324 live rows). P.21 stem as section_prompt.
+- **resp-0 'No procede' defect (flagged by batch_365) confirmed in all three, orchestrator re-checked on the live tables:** importance p6a 1,525/2,484 zeros (= P6≠1); inpersonsat 7,092 zeros, per-id zero count exactly 0 (1,893 ids) or 12 (591 ids = no in-person visit); internet p19 863 zeros, and every p2101–p2110 has 1,350 zeros with p2101==0 exactly when p19≠1 (2,484/2,484). Each ships an option row resp 0 = 'No procede' with a public_note warning.
+- **internet is worse than the others:** the .do does not recode P21xx at all, so on p2101–p2110 0 = not asked, 1 = mentioned, and the genuine 'not mentioned' answer is stored as NA (9,812 rows). Suggested .do fix (Bookmark 8): p19 0→missing; p21xx missing→0 where p19==1, 0→missing where p19≠1. Agent's "every P19=1 respondent mentions at least one purpose" holds over P2101–P2117 in DA2986; within the 10 IRW items, 23 of 1,134 p19==1 respondents are NA on all ten (recorded in notes). With 5 of 10 spain_2013_services tables now showing the defect, **a GitHub issue against data/spain_2013_services.do is warranted** (not filed by this round); 5 siblings remain in the queue.
+- Gates: normalize 0 of 3 changed; audit 3 PASS, no anomalies/WARNs; verify_batch MISSING(exempt)=3; lint clean (3 NOT_NEEDED rows in both verification_merged.csv and the tracker); irw-validate ok ×3; check_provenance exit 0 (only the standing 4-table `mixed` review list).
+Queue: 34 pending, 0 in_progress. Cap (batch_379) not reached.
+
+## batch_367 — 2026-09-24T08:39 (-07:00), 3 tables
+
+Written / blocked / failed: **3 / 0 / 0** (yield 100%). Circuit breaker: 0% failed. Three agents, no kills (16G available at launch). Numbering: the Step 1 text ("below 300 only; 300–304 → batch_305") is stale now that 305–366 exist and continue the series; highest existing batch_366, so batch_367. Cap is batch_379; not reached.
+- All three from CIS Estudio 2986 (MD2986.zip, md5 fe24e8a7…, copied from batch_366's cache), `data_labels` / `study_materials` / `machine_translation`, CIS rights register row (allow) applied. Each agent rebuilt its table from DA2986 via the .do logic and reproduced the live table exactly (0/0 key differences).
+  - `spain_2013_services_internetout` (p22, p22b, p23, p2401..p2406; 46 rows; 22,356 live rows). Mixed 1–5 (p23) and 1–4 scales, disclosed.
+  - `spain_2013_services_offices` (p701..p709, 0–10-style 1–10 importance grid, anchors only at 1/10, 2–9 blank; 90 rows). **No resp-0 defect here**: P.7 unfiltered, 0 zeros in DA2986 and live. 666 NA-resp rows retained (98/99).
+  - `spain_2013_services_othercontact` (p16, p16a, p17, p17a, p18, p18a, p18b; 26 rows; 17,388 live rows). P.17b asked but not in the .do's table.
+- **resp-0 'No procede' defect confirmed in internetout and othercontact, orchestrator re-checked on the live tables:** internetout 12,237 zeros, per-id zero count exactly 0 (1,047), 1 (87 = P22=4 routing) or 9 (1,350 = P19≠1); othercontact p16a/p17a zero iff filter ≠1 (2,219 / 1,576; 0 of 265 / 908 filter=1), p18a/p18b 1,622 each = P18=1 (1,621) + NA (1). No unrecoded multiple-response items in either (the internet-table NA problem does not recur). Both ship resp 0 = 'No procede' option rows with a public_note. Suggested .do fix: add 0 to the inlist() in Bookmarks 7 and 9. Tally now **7 of 13 spain_2013_services tables** carry the defect; the GitHub issue against data/spain_2013_services.do recommended in batch_366 is still unfiled. 2 siblings remain (purpose, services).
+- Gates: normalize 0 of 3 changed; audit 3 PASS, no anomalies/WARNs; verify_batch MISSING(exempt)=3; lint clean (3 NOT_NEEDED rows in both verification_merged.csv and the tracker); irw-validate ok ×3; check_provenance exit 0 (only the standing 4-table `mixed` review list).
+Queue: 31 pending, 0 in_progress. Cap (batch_379) not reached.
+
+## batch_368 — 2026-09-24T08:48 (-07:00), 3 tables
+
+Written / blocked / failed: **3 / 0 / 0** (yield 100%). Circuit breaker: 0% failed. Three agents, no kills (16G available at launch). Numbering: highest existing batch_367, so batch_368 (the Step 1 "300–304 → batch_305" text is stale, as batch_367 noted). Cap is batch_379; not reached.
+- `spain_2013_services_purpose` and `spain_2013_services_services`: the last two CIS Estudio 2986 siblings (MD2986.zip md5 fe24e8a7…, copied from the othercontact cache and re-hashed). Both are `data_labels` / `study_materials` / `machine_translation`, with the CIS rights register row (allow, line 117) applied. Both rebuild from DA2986 via the .do and match live exactly (0/0 key differences). **All 13 spain_2013_services tables are now extracted.**
+  - `purpose` (P.11, p1101..p1111, 22 rows): **resp-0 defect present, in the worse multiple-response form that `internet` P.21 had.** Orchestrator re-checked on the live table (27,324 rows): resp 0 = 591 on every item, and per-id zero count is exactly 0 (1,893) or 11 (591), so 0 means "not asked" (P.9/P.9a filter). "Asked, not mentioned" is stored as **NA** (1,422–1,888 per item), with no option row, because the .do never recodes the blank. 68 asked ids are NA on all 11 items (their answers fall in post-coded P1114–P1117, which are not in the table). The shipped option rows are 0 = 'No procede' and 1 = 'Sí', and a public_note covers both problems. Suggested .do fix, Bookmark 5: NA→0 for the 1,893 who were asked, 0→NA for the 591 who were not. Tally now **8 of 13** tables carry the defect. The GitHub issue against data/spain_2013_services.do is still unfiled.
+  - `services` (P.4, p401..p410, 40 rows, 4-point satisfaction): no resp-0 defect (asked of everyone, 0 zeros in raw and live) and no multiple-response problem. 3,745 NA-resp rows (DK/NA 8/9) retained. The full ES2986 value labels were used over the shortened questionnaire headings, as inpersonsat did.
+- `spain_2016_pain_beliefs`: CIS Estudio 3137 "Percepciones sociales del dolor" P.25 (p25_1..p25_8, 32 rows), `data_labels` / `study_materials` / `machine_translation`, with the CIS allow row applied. DA3137 cols 224–231 reproduce the live item×resp table in all 32 cells. N.S./N.C. are dropped to missing by the .do (don't-know is 16.0% on p25_4); the public_note says so. option_text uses the printed questionnaire headers.
+- **Tooling:** the agent's first `irw_fetch` of spain_2016_pain_beliefs cached a **0-row parquet** (~/.cache/irw/v1/tables/spain_2016_pain_beliefs/bf68ac19….parquet, 1,782 bytes) while irw_table_sets reported 18,582 rows. An IRW_CACHE=0 retry got the full table. The orchestrator confirmed the file had 0×5 rows and deleted it before the audit. This is worth an Rpkg issue: irw_fetch should not cache an empty result.
+- Gates: normalize 0 of 3 changed; audit 3 PASS, no anomalies/WARNs; verify_batch MISSING(exempt)=3; lint clean (3 NOT_NEEDED rows in both verification_merged.csv and the tracker); irw-validate ok ×3; check_provenance exit 0 (only the standing 4-table `mixed` review list).
+Queue: 28 pending, 0 in_progress. Cap (batch_379) not reached.
+
+## batch_369 — 2026-09-24T09:05 (-07:00), 3 tables
+
+Written / blocked / failed: **3 / 0 / 0** (yield 100%). Circuit breaker: 0% failed. Three agents, no kills (16G available at launch). Numbering: highest existing batch_368, so batch_369. Cap is batch_379; not reached.
+- All three are CIS Estudio 3137 siblings of `spain_2016_pain_beliefs` (batch_368). Each is `data_labels` / `study_materials` / `machine_translation`, with the CIS allow row applied, and each rebuilds exactly from DA3137 via data/spain_2016_pain.do.
+  - `spain_2016_pain_coping` (P.21, p21_1..p21_3, 12 rows): DA3137 cols 194–196 reproduce all 12 live item×resp cells. **The .do drops code 7 'N.P. (No busca a otras personas)'** (120 / 78 / 56). That is a substantive answer, not a nonresponse (most clearly on p21_1). It is disclosed in the notes and public_note.
+  - `spain_2016_pain_difficulty` (P.16/P.17, p16/p17, 8 rows): **the .do drops the volunteered midpoint 3 '(NO LEER) Algo'** (337/2,314 = 14.6% on p16, 317/2,314 = 13.7% on p17) without renumbering, so live resp is {1,2,4,5}. The orchestrator re-checked this with irw_table_sets (resp 1 2 4 5, 3,927 rows) and against .do lines 272–273. No option row is shipped for 3. Direction: 1 = Mucho (most difficulty).
+  - `spain_2016_pain_effectiveness` (P.18a/P.19a, 10 rows): all 5 levels are used. The .do drops the volunteered code 6 'Unos sí … otros no' (17 / 6) plus N.S./N.C. The code-0 skip pattern matches the questionnaire filters exactly. The wording keeps 'estos medicamentos'/'esos métodos', which refer back to P.18/P.19; those items are not in the table.
+- **For a human:** coping (code 7) and difficulty (code 3) both lose substantive answers in data/spain_2016_pain.do. This is a response-data processing question, not an itemtext defect. It may warrant an issue or a .do revision (the difficulty midpoint especially).
+- Tooling: the 0-row-cache irw_fetch bug from batch_368 did not recur. One orchestrator irw_table_sets call hit a transient Redivis "Can't retrieve empty body" error; it succeeded on retry.
+- Gates: normalize 0 of 3 changed; audit 3 PASS, no anomalies/WARNs; verify_batch MISSING(exempt)=3; lint clean (3 NOT_NEEDED rows in both verification_merged.csv and the tracker); irw-validate ok ×3; check_provenance exit 0 (only the standing 4-table `mixed` review list).
+Queue: 25 pending, 0 in_progress. Cap (batch_379) not reached.
+
+## batch_370 — 2026-09-24T09:08 (-07:00), 3 tables
+
+Written / blocked / failed: **3 / 0 / 0** (yield 100%). Circuit breaker: 0% failed. Three agents, no kills (16G available at launch). Numbering: highest existing batch_369, so batch_370. Cap is batch_379; not reached.
+- All three are more CIS Estudio 3137 siblings (after batch_368/369). Each is `data_labels` / `study_materials` / `machine_translation`, with the CIS allow row (irw#2381) applied, and each rebuilds exactly from DA3137 via data/spain_2016_pain.do.
+  - `spain_2016_pain_fitness` (P.29/P.34, p29/p34, 10 rows): 4,914 rows / 2,464 ids reproduce exactly. The .do drops only N.S./N.C. (10 on p29; 2+2 on p34). There is no routing. Both scales run 1 = best.
+  - `spain_2016_pain_frequency` (P.8/P.15, p8/p15, 8 rows): 4,576 rows / 2,314 ids reproduce exactly. Code 0 N.P. (150) is pure P.7 routing. The .do drops N.S. 7/22 and N.C. 0/23. 1 = 'Muy frecuentemente', so higher resp = less frequent. p15's 'este dolor' is the P.10 most-relevant pain; the wording is kept literally.
+  - `spain_2016_pain_health` (P.3/P.4/P.5, p3–p5, 15 rows): 7,280 rows / 2,464 ids reproduce exactly. **The .do drops 110 on p4** (106 N.S. + 4 N.C., 4.5%), 2 N.S. on p5 and none on p3; this is disclosed in public_note. P.3's midpoint 'Normal' is translated literally.
+- Step 5b: the orchestrator re-tabulated DA3137 columns 102–104, 128, 165, 250 and 260 directly. Every agent-reported code count matched, including the dropped N.S./N.C. counts that went into public notes.
+- Gates: normalize 0 of 3 changed; audit 3 PASS, no anomalies/WARNs; verify_batch MISSING(exempt)=3; lint clean (3 NOT_NEEDED rows in both verification_merged.csv and the tracker); irw-validate ok ×3; check_provenance exit 0 (the new tables appear only in the unenforced held-table disclosure list alongside their siblings, plus the standing 4-table `mixed` review list).
+Queue: 22 pending, 0 in_progress. Cap (batch_379) not reached.
+
+## batch_371 — 2026-09-24T09:15 (-07:00), 3 tables
+
+Written / blocked / failed: **3 / 0 / 0** (yield 100%). Circuit breaker: 0% failed. Three agents, no kills (16G available at launch). Numbering: highest existing batch_370, so batch_371. Cap is batch_379; not reached.
+- `spain_2016_pain_support` (P.20, p20_1..p20_3, 12 rows) and `spain_2016_pain_wellbeing` (P.1 grid p1_1..p1_6 + P.2, 77 rows, 0–10 with endpoints only labelled) are the **last two CIS Estudio 3137 siblings — all 9 spain_2016_pain tables are now extracted.** Both are `data_labels` / `study_materials` / `machine_translation`, with the CIS allow row (line 117, irw#2381) applied, and both rebuild exactly from DA3137 via data/spain_2016_pain.do (6,609 rows / 2,220 ids; 15,806 rows / 2,464 ids; 0 mismatches).
+  - support: **the .do drops code 7 'N.P. (No contó a nadie/ No tiene familiares)'** (70/63/67; 58 ids on all three), a substantive answer, like coping's code 7 in batch_369. Disclosed in notes and public_note. Code 0 (150 per item) is exactly the P8=0 routing.
+  - wellbeing: code 97 'No procede' dropped on p1_2 (work, 927) and p1_6 (partner, 417) — design-driven applicability, disclosed. The interviewer card instruction and the endpoint labels' leading numerals were stripped (batch_358/366/367 precedent).
+- `spain_2023_science_activities`: the **first CIS Estudio 3406 table** (P.5, p5_1..p5_6, 30 rows, 1 = Muy interesante … 5 = Nada interesante). `data_labels` / `study_materials` / `machine_translation`. The rebuild from 3406_num.csv reproduces live exactly (17,452 rows / 2,922 ids). The agent confirmed CIS is the sole originator (no FECYT/convenio mention in the questionnaire, ficha técnica or study page), so CIS row 117 applies; the reuse page was re-fetched today and still carries the 'fines comerciales y no comerciales' clause. **Source files for the 11 remaining spain_2023_science siblings are cached in .cache/spain_2023_science_activities/** (md3406.zip md5 7cdc0705…, ES3406, cues3406.pdf, 3406_num.csv).
+- Step 5b: the orchestrator re-tabulated DA3137 cols 90–91, 98–101 and 191–193 and 3406_num.csv P5_1..P5_6 directly. Every agent-reported code count matched (97/98/99 on p1_2, p1_6 and p2; 0/7/8/9 on p20_*; 8/9 on p5_*).
+- Gates: normalize 0 of 3 changed; audit 2 PASS + 1 WARN (wellbeing: p1_2 row-count anomaly = 927 'No procede', and 81.8% blank option_text = unlabelled 1–9 scale points; both explained in notes.csv as response-data or source properties, not itemtext defects); verify_batch MISSING(exempt)=3; lint clean (3 NOT_NEEDED rows in both verification_merged.csv and the tracker); irw-validate ok ×3; check_provenance exit 0 (the new tables appear only in the unenforced held-table disclosure list, plus the standing 4-table `mixed` review list).
+Queue: 19 pending, 0 in_progress. Cap (batch_379) not reached.
+
+## batch_372 — 2026-09-24T09:23 (3 tables: 3 written / 0 blocked / 0 failed, yield 100%)
+- Three agents, all CIS Estudio 3406 'Percepción de la ciencia y la tecnología' (2023), all `data_labels` / `study_materials` / `machine_translation`, all built from the batch_371 activities cache (read-only; each agent copied into its own `.cache/<table>/`). Rights: existing CIS register row 117; reuse page re-fetched, still 'fines comerciales y no comerciales'.
+- `spain_2023_science_benefits`: P.10, p10_1..p10_4, 20 rows, 1 = Muy de acuerdo … 5 = Nada de acuerdo (higher = less agreement). Rebuild from 3406_num.csv reproduces live exactly (11,388 rows / 2,918 ids). 8 N.S./9 N.C. dropped by the .do (308 of 11,696).
+- `spain_2023_science_dangers`: P.11, p11_1..p11_4, 20 rows. **Row labels are word-for-word identical to P.10's**; only the P.11 stem (in `instructions`) distinguishes the table from benefits. The .do's Bookmark 10, the live codes and the exact rebuild (11,359 rows / 2,906 ids) rule out a swap. English wording aligned with the benefits sibling.
+- `spain_2023_science_cuts`: P.14–P.16, 6 rows (1 A favor / 2 En contra). Item text is the questionnaire wording, not the variable labels: **ES3406's P16 variable label is wrong** ('empresas privadas recorten el gasto público'), whereas the questionnaire asks about cutting the companies' own spending ('recortar gasto de las empresas privadas'). Shipped text follows the questionnaire. Rebuild exact (8,511 rows / 2,900 ids).
+- The cuts agent reported "unexplained" copies of activities source files in batch_372/. On inspection there were none; the directory held only the round's own files. Probably it listed the cache directory by mistake. Nothing to clean up.
+- Step 5b: the orchestrator re-tabulated 3406_num.csv P10_*, P11_*, P14–P16 directly, and every agent-reported 8/9 count matched. It also confirmed the P16 label/questionnaire discrepancy in ES3406.utf8.txt line 188 vs cues3406 P.16.
+- Gates: normalize 0 of 3; audit 3 PASS, no anomalies; verify_batch MISSING(exempt)=3; lint clean (3 NOT_NEEDED rows in both verification_merged.csv and the tracker); irw-validate ok ×3; check_provenance exit 0 (new tables appear only in the unenforced held-table disclosure list).
+Queue: 16 pending, 0 in_progress. Cap (batch_379) not reached.
+
+## batch_373 — 2026-09-24T09:31 (3 tables: 3 written / 0 blocked / 0 failed, yield 100%)
+Tables: spain_2023_science_engagement, spain_2023_science_functions, spain_2023_science_future (CIS Estudio 3406, cached at .cache/spain_2023_science_benefits/). Three agents, one per table, no kills.
+- Numbering: highest below 300 is 299, which would give 305 under the 300–304 hole rule. 305–372 already exist, so this round took the next consecutive number, batch_373.
+- All three use `data_labels`/`study_materials` with `machine_translation`, because CIS publishes the questionnaire in Spanish only. Step 5b is exempt, so NOT_NEEDED rows went into both verification_merged.csv and the tracker.
+- `spain_2023_science_engagement`: P.6_1–P.6_4, 20 rows, resp 1 = "Muy a menudo" … 5 = "Nunca". The questionnaire's stray "¿" is kept as printed and disclosed.
+- `spain_2023_science_functions`: P.9_1–P.9_5, 25 rows, resp 1 = "Mucho" … 5 = "Nada".
+- `spain_2023_science_future`: P.12–P.13, 8 rows, with resp {1, 2, 4, 5}. Code 3 is "(NO LEER) Regular", which the .do sets to missing without renumbering, so there is no option row for 3. This is a property of the response data, not an itemtext defect.
+- Step 5b: the orchestrator re-tabulated 3406_num.csv (N=2924) for P6_1–P6_4, P9_1, P9_5, P12 and P13. Every count the agents reported matched, including the 8/9 codes and P12/P13 code 3 (28 and 60). cues3406.txt line 247 confirms that [P12] code 3 is "(NO LEER) Regular".
+- Gates: normalize 0 of 3; audit 3 PASS, no anomalies; verify_batch MISSING(exempt)=3; lint clean; irw-validate ok ×3; check_provenance exit 0 (the new tables appear only in the unenforced held-table disclosure list).
+- Housekeeping: the Python claim rewrite first wrote LF endings and converted the whole CRLF queue file. It was restored to CRLF before dispatch, so the diff is only the three rows.
+Queue: 13 pending, 0 in_progress. Cap (batch_379) not reached.
+
+## batch_374 — 2026-09-24T09:40 (3 tables: 3 written / 0 blocked / 0 failed, yield 100%)
+Tables: spain_2023_science_interest, spain_2023_science_science, spain_2023_science_situations (CIS Estudio 3406, source cache .cache/spain_2023_science_benefits/, used read-only). Three agents, one per table, no kills.
+- Numbering: batch_373 was the highest existing, so this round is batch_374.
+- All three tables are `data_labels` / `study_materials` / `machine_translation` with CIS register row 117 applied, and all three rebuild live exactly from 3406_num.csv.
+- `spain_2023_science_interest`: P.1 + P.2_1..P.2_7, 40 rows, 1 = Muy interesado/a … 5 = Nada. Two sections: p1 carries the whole P.1 question, and the p2_* items share the P.2 stem in section_prompt. The P.1 question text leaves out "algo", but its answer list includes Algo interesado/a = 3. This is transcribed as printed and disclosed. Rebuild: 23,087 rows / 2,921 ids.
+- `spain_2023_science_science`: P3ES_1..P3ES_6, 30 rows. Only the endpoints are labelled (1 = No la asocia nada, 5 = La asocia mucho), so 2–4 are blank. Higher = stronger association, the reverse of most siblings. It uses the same six words as P4ES (`spain_2023_science_technology`, still pending); only the instructions distinguish the two. Rebuild: 17,303 / 2,923.
+- `spain_2023_science_situations`: P8ES_1..P8ES_4, 20 rows, endpoints only (1 = Nada útil, 5 = Muy útil). The .do drops code 7 "No procede" (141 on p8es_4 for no family; 11 on p8es_1), and this is disclosed. option_text uses the grid's singular headings, not the stem's plural. Rebuild: 11,453 / 2,918.
+- Step 5b: the orchestrator re-tabulated 3406_num.csv (N=2924) for P1, P2_*, P3ES_* and P8ES_* at codes 7/8/9. All 54 agent-reported counts matched.
+- Gates: normalize 0 of 3; audit 3 PASS, no anomalies; verify_batch MISSING(exempt)=3; lint clean (3 NOT_NEEDED rows in both verification_merged.csv and the tracker); irw-validate ok ×3; check_provenance exit 0.
+- One agent hit a transient Redivis HTTP/2 error on irw_fetch. Its retry read the local irw cache parquet instead, so there was no second export.
+Queue: 10 pending, 0 in_progress. Cap (batch_379) not reached.
+
+## batch_375 — 2026-09-24T10:05 (3 tables: 3 written / 0 blocked / 0 failed, yield 100%)
+Tables: spain_2023_science_technology, spain_2023_science_utility (CIS Estudio 3406, source cache .cache/spain_2023_science_benefits/, read-only), spain_2026_love_apps (CIS Estudio 3508 'Percepción social del amor', new source, cached at .cache/spain_2026_love_apps/ for the seven love_* siblings). Three agents, one per table, no kills.
+- Numbering: batch_374 was the highest existing, so this round is batch_375.
+- All three are `data_labels` / `study_materials` / `machine_translation` with CIS register row 117 applied. Each rebuilds live exactly from the CIS *_num.csv.
+- `spain_2023_science_technology`: P.4 [P4ES], 30 rows, only the endpoints are labelled (1 = No la asocia nada, 5 = La asocia mucho), so 2–4 are blank. item_text is identical to the P.3 science sibling; the stem distinguishes them, and it is worded differently from P.3's, not just a noun swap. The swap test: building from the P3ES columns gives 7,837 resp mismatches against live. Rebuild: 17,332 rows / 2,919 ids.
+- `spain_2023_science_utility`: P.7 [P7ES], 20 rows, endpoints only (1 = Nada útiles, 5 = Muy útiles). P.7's grid prints the plural, so there is no singular/plural conflict like P.8's. Rebuild: 11,669 / 2,923.
+- `spain_2026_love_apps`: P.16_1..7, 28 rows, resp {1,2,4,5} = Muy/Bastante/Poco/Nada de acuerdo. The .do drops code 3 "(NO LEER) Regular" without renumbering, and also drops 8/9. The item was asked only of the 4,609 of 5,007 respondents who had heard of dating apps. Rebuild: 30,757 / 4,579. The short CIS URL /documents/d/guest/md3508 returns HTTP 410; the working URL is /documents/20117/13782736/MD3508.zip.
+- **Dictionary defect, for the love_* family:** biblio.csv's Reference for spain_2026_love_* reads "Percepción de la prostitución, Estudio 3508". Estudio 3508 is "Percepción social del amor" (questionnaire header, technical sheet, and the row's own data URL /percepcion-social-del-amor). It looks like a copy from spain_2026_prostitution. The orchestrator confirmed the wrong string on biblio.csv lines 18496/18503/18510. It is not fixed here, because the dictionary sheet is the source and needs a human edit.
+- Step 5b: the orchestrator re-tabulated 3406_num.csv for P4ES_* and P7ES_*, and every per-item count matched the agents' live counts, as did the 8/9 totals (212 and 27). It also re-tabulated 3508_num.csv for P16_*: code 3 = 7/12/11/19/8/19/21 (97), 8/9 = 1,409, and 398 not asked (code 0). All match the agent.
+- Gates: normalize 0 of 3; audit 3 PASS, no anomalies; verify_batch MISSING(exempt)=3; lint clean (3 NOT_NEEDED rows in both verification_merged.csv and the tracker); irw-validate ok ×3; check_provenance exit 0 (the new tables appear only in the unenforced held-table disclosure list).
+Queue: 7 pending (all spain_2026_love_*), 0 in_progress. Cap (batch_379) not reached.
+
+## batch_376 — 2026-09-24T10:15 (3 tables: 3 written / 0 blocked / 0 failed, yield 100%)
+Tables: spain_2026_love_association, spain_2026_love_attitudes, spain_2026_love_conceptions (CIS Estudio 3508 'Percepción social del amor', read-only from the source cache at .cache/spain_2026_love_apps/). Three agents, one per table, no kills.
+- Numbering: batch_375 was the highest existing, so this round is batch_376.
+- All three are `data_labels` / `study_materials` / `machine_translation`, with CIS register row 117 applied. Each one rebuilds exactly to the live table from 3508_num.csv.
+- `spain_2026_love_association`: P.3 [P3_1..9], 36 rows, resp {1,2,4,5} = Mucho/Bastante/Poco/Nada. The .do drops code 3 "(NO LEER) Regular" (143) and 8/9 (250). Rebuild: 44,670 rows / 5,006 ids. Anti-swap check: building from the P1_* columns gives 22,376 resp mismatches.
+- `spain_2026_love_attitudes`: P.4 [P4_1..8], 32 rows, resp {1,2,4,5} = Muy/Bastante/Poco/Nada de acuerdo. It drops code 3 (143) and 8/9 (376). Rebuild: 39,537 / 5,007. "media naranja" is rendered "better half".
+- `spain_2026_love_conceptions`: P.10–P.13, four separate yes/no questions with no shared lead-in, so there is one trivial section with blank instructions and prompt. 8 rows, 1 = Sí, 2 = No. It drops 8/9 (232). Rebuild: 19,796 / 5,005.
+- Step 5b: I re-tabulated 3508_num.csv (N=5007, `;`-separated, BOM) for P3_*, P4_*, P10–P13. Every per-item count reported by the agents matched, and so did the code-3 counts (P3 16/23/6/33/9/30/4/9/13; P4 21/27/22/19/9/10/15/20), the 8/9 totals (250/376/232) and the post-drop rows and ids (44,670/5,006; 39,537/5,007; 19,796/5,005).
+- The dictionary defect still stands for the whole love_* family: the biblio Reference says "Percepción de la prostitución" (see batch_375). It needs a human edit to the dictionary sheet.
+- Gates: normalize 0 of 3; audit 3 PASS, no anomalies; verify_batch MISSING(exempt)=3; lint clean (3 NOT_NEEDED rows, in both verification_merged.csv and the tracker); irw-validate ok ×3; check_provenance exit 0.
+Queue: 4 pending (love_desire/gestures/importance/usage), 0 in_progress. Cap (batch_379) not reached.
+
+## batch_377 — 2026-09-24T10:25 (3 tables: 3 written / 0 blocked / 0 failed, yield 100%)
+Tables: spain_2026_love_desire, spain_2026_love_gestures, spain_2026_love_importance (CIS Estudio 3508 'Percepción social del amor', read-only from the source cache at .cache/spain_2026_love_apps/). Three agents, one per table, no kills.
+- Numbering: batch_376 was the highest existing, so this round is batch_377.
+- All three are `data_labels` / `study_materials` / `machine_translation`, with CIS register row 117 applied. Each one rebuilds exactly to the live table from 3508_num.csv.
+- `spain_2026_love_desire`: P.19 and P.22a, two separate questions with no shared lead-in (one trivial section). 8 rows, resp {1,2,4,5} = Mucho/Bastante/Poco/Nada. The .do drops code 3 "(NO LEER) Regular" (13+18) and 8/9 (9+21). The items are filtered to different respondents: P.19 only if P17 ≠ 1 (1,278 asked), P.22a only if P22 ≠ 1 (1,381 asked), so only 1,508 ids appear. The public_note says so. Rebuild: 2,598 rows / 1,508 ids.
+- `spain_2026_love_gestures`: P.7–P.9, three separate yes/no questions (one trivial section). 6 rows, 1 = Sí, 2 = No. Only 8/9 are dropped (53); there is no code 3. Rebuild: 14,968 / 5,006.
+- `spain_2026_love_importance`: P.1 [P1_1..10], 40 rows, resp {1,2,3,4} = Muy/Bastante/Poco/Nada importante. This battery breaks the sibling convention: its 3 is the read-out "Poco importante", not a volunteered "Regular", and the .do keeps it. Only 8/9 are dropped (289). Rebuild: 49,781 / 5,007. Anti-swap check: building from P3_* gives 30,765 resp mismatches.
+- Step 5b: I re-tabulated 3508_num.csv. p19 = 3729 N.P./204/334/13/359/359/6/3, p22a = 3626/233/387/18/380/342/10/11, p17 ≠ 1 = 1,278, and the post-drop rows and ids (2,598/1,508; 14,968/5,006; 49,781/5,007) all match the agents.
+- The dictionary defect still stands for the whole love_* family: the biblio Reference says "Percepción de la prostitución" (see batch_375). It needs a human edit to the dictionary sheet.
+- Gates: normalize 0 of 3; audit 3 PASS, no anomalies; verify_batch MISSING(exempt)=3; lint clean (3 NOT_NEEDED rows, in both verification_merged.csv and the tracker); irw-validate ok ×3; check_provenance exit 0.
+Queue: 1 pending (spain_2026_love_usage), 0 in_progress. Cap (batch_379) not reached.
+
+## batch_378 — 2026-09-24T10:25 (1 table: 1 written / 0 blocked / 0 failed, yield 100%)
+Table: spain_2026_love_usage (CIS Estudio 3508 'Percepción social del amor', read-only from the source cache at .cache/spain_2026_love_apps/). One agent, since only one row was pending. No kills.
+- Numbering: batch_377 was the highest existing, so this round is batch_378.
+- `data_labels` / `study_materials` / `machine_translation`, with CIS register row 117 applied. P.15, P.15a and P.15b are three standalone yes/no questions (one trivial section). 6 rows, 1 = Sí, 2 = No. There is no code 3. The .do drops p15 8/9 (3+1), p15a 0/9 (398+2) and p15b 0 (3,658). The items form a filtered sequence: P15A is asked only if P15 = 1 (4,609 asked), and P15B only if P15A = 1 (1,349 asked). The public_note says so. Rebuild: 10,959 rows / 5,003 ids, identical to live. Anti-swap check: relabelling p15a and p15b against each other gives 582 resp mismatches.
+- Step 5b: I re-tabulated 3508_num.csv. p15 = 4609/394/3/1, p15a = 398/1349/3258/2, p15b = 3658/1058/291, and both filters hold with 0 exceptions. After the drops, rows and ids come to 10,959 / 5,003. Everything matches the agent.
+- Audit WARN: row-count anomaly on p15b (1,349 rows against a median of 4,607). This is the P15A filter, a property of the data and not an itemtext defect. It is explained in notes.csv.
+- The dictionary defect still stands for the whole love_* family: the biblio Reference says "Percepción de la prostitución" (see batch_375). It needs a human edit to the dictionary sheet.
+- Gates: normalize 0 of 1; audit 1 WARN (explained above); verify_batch MISSING(exempt)=1; lint clean (1 NOT_NEEDED row, in both verification_merged.csv and the tracker); irw-validate ok; check_provenance exit 0.
+Queue: 0 pending, 0 in_progress. **The queue is exhausted**, and the next firing will stop at Step 0. Cap (batch_379) not reached.
+
+## 2026-09-24 — triage of #2381 slice 3 (batch_346–361): 45 uploaded to irw_text, 2 held
+
+Rounds: 47 queued (cc69e87e); 46 written, 1 blocked (name length). Every round's audit PASS. Two chain attempts died at
+the pre-round fetch on intermittent GitHub SSH `publickey` failures (nothing claimed); the chain now forces HTTPS via
+GIT_CONFIG_* env. First upload to **irw_text** (irw_text_2 is full, #2403), with `--dataset irw_text` after a dry run
+showing 45 NEW and none present in any shard. Claude uploaded under the 2026-09-07 delegation after the four-check
+pre-flight, then verified rows, COUNT(DISTINCT item) and no duplicate rows in the draft: 45/45; draft diff dropped
+nothing. Ben released it 2026-09-24 (the same release carried the 44 ENEM 2013–2025 tables from #2226). Stamped
+`uploaded=2026-09-24` in 16 provenance files and 45 mapping rows (byte-wise, each edit re-parsed); removed the 45 CSVs.
+Issues-page entries: oneoff/itemtext-rights-bank/issues_entries_346-361.yaml (40 entries; the 5 goldberg_2018_prs
+tables have no public caveat).
+
+**HELD:** `alan_2018_teacher_warmth` (batch_347) — paper says some teaching-style items were adapted from OECD TALIS
+2013 without saying which; no OECD/TALIS register row. `nguyen_2026_autonomy_school_autonomy_support` (batch_352) —
+live name 44 chars > 40 (jian-wen shape). Both in oneoff/itemtext-rights-bank/holds_for_ben.md; CSVs kept.
+
+**Lead:** nguyen_2026_autonomy_* items split into two negatively correlated blocks ({pressure, motivation, family}
+vs {support, voice, choice, ownership}) — one block may be stored reversed (unproven); deposit composites C and O
+don't match their items (IRW drops composites).
+
+## 2026-09-24 — triage of #2381 slice 4 (batch_362–378): 39 uploaded to irw_text, 10 held
+
+Rounds: 49 queued (80e5182b, by next_slice.sh after slice 3's chain ended on an empty queue); 49 written, 0 blocked.
+Audit PASS except two explained WARNs (spain_2016_pain_wellbeing p1_2 and spain_2026_love_usage p15b: filtered items,
+disclosed). Uploaded to irw_text after a dry run (39 NEW, none in any shard); one table (spain_2016_pain_support) failed
+on an intermittent Redivis API error (empty error body), was confirmed ABSENT from the draft, and was re-uploaded
+alone. Verified 39/39 (rows, COUNT(DISTINCT item), no duplicate rows); draft diff = exactly these 39. Ben released it
+2026-09-24. Stamped `uploaded=2026-09-24` in 15 provenance files and 39 mapping rows; removed the 39 CSVs.
+Issues-page entries: oneoff/itemtext-rights-bank/issues_entries_362-378.yaml (39).
+
+**HELD:** all 10 `okeke2025_*` (batch_362–365) — item text pinned 200/200, but the response data has near-zero
+inter-item correlations across all 32 deposit items (mean |r| 0.06, n=200); possibly simulated. Corpus-trust question
+for Ben before any text ships. CSVs kept.
+
+**Lead:** data/spain_2013_services.do recodes only 8/9, so CIS 0 'No procede' (declared MISSING in ES2986) survives as
+resp 0 in 7 tables (complaints, importance, inpersonsat, internet, internetout, othercontact, purpose). Item text ships
+'No procede' option rows with a public_note warning; drop them after a .do fix + response re-upload.
+
+## batch_379 — 2026-09-24T10:59 (3 tables: 1 written / 2 blocked / 0 failed, yield 33%)
+Tables: DMCT_Addis_2020_MCT, PBS_Surrain_2019_PoB, arzamoncunill_2023_epq_admin. These are the first three of #2381 slice 05 (rights-cleared re-audit tables). Three agents, one per table, no kills.
+- Numbering: batch_378 was the highest existing, so this round is batch_379. Rounds since 305 number consecutively, so the Step 1 "below 300 only" rule no longer applies as written. Taken literally it now resolves to batch_305, which already exists. That sentence in the prompt needs a human edit.
+- `arzamoncunill_2023_epq_admin` WRITTEN: 21 items, 141 rows. Sibling of epq_clinical (batch_007).
+  - Provenance: paper_explicit / study_materials / translation_source=mixed.
+  - Text: administered Spanish from S3 for the 14 retained items. E30 and E47 carry the authors' English. The other 12 English renderings are IRW's own, so an issues-page line is owed at upload.
+  - E5, E6, E38, E45 and E46 carry only S5's English descriptor. They were dropped in the factor analysis, and no wording for them was published in any language.
+  - E37 and E39 have item_text left blank on purpose. S5's descriptors contradict the paper's elimination narrative on those two items, and the agent reproduced the elimination steps on live data (0.48/0.61 against the paper's 0.479/0.611).
+  - Verification PARTIAL. A 5-component PCA of the 14 retained items reproduces Table 3: max deviation 0.035, and each item's nearest row is its own. The pairs E5/E6 and E45/E46 are pinned only as pairs.
+- `DMCT_Addis_2020_MCT` BLOCKED (data defect, retry test NO): live resp is the answer key, not accuracy.
+  - Orchestrator re-check: 0 of 44 items vary across 92 ids (24 constant at 1, 20 at 2). rt is stored as character.
+  - The real 0/1 accuracy is the long MC_acc column in OSF vf27z, which data/DMCT_Addis_2020.r ignores.
+  - The mapping and stimulus key are ready once resp is rebuilt (.cache/DMCT_Addis_2020_MCT/stimulus_key_staged.csv).
+  - The table name is still wrong: the source is Suggate 2024, not "Addis 2020" (first raised in batch_027).
+- `PBS_Surrain_2019_PoB` BLOCKED (data defect, retry test NO): the processing script stacks two OSF files that number the PoB items differently, so PoB4 and PoB6–PoB10 mean different questions in Study 1 and Study 2.
+  - Orchestrator re-check from live means, which line up by content rather than by code: S2 PoB4 4.04 ≈ S1 PoB6 3.9 (S1 PoB4 is 4.69); S2 PoB5 3.6 ≈ S1 PoB7 3.5; S2 PoB10 5.0 ≈ S1 PoB13 4.9.
+  - The agent also finds that all 319 Study 2 respondents are Study 1 respondents again (exact match on age plus 16 items). Identical POB+ means across the two groups fit that.
+  - Fix: rebuild from the Study 1 file only. It then becomes a data_labels extraction from the OSF codebook.
+- Step 5b: the agent reported that the paper's Table 4 has its billing and marketing rows swapped. Orchestrator confirmed: live alpha is billing (E42–44) 0.830 and marketing (E28–30) 0.740, against the paper's 0.742 / 0.842. This is a paper error, not an IRW one.
+- All three agents' table_context.R calls ran irw_fetch, and all three tables were small or already cached.
+- Gates: normalize 0 of 1; audit 1 WARN (blank item_text 13/141 = E37/E39; blank option_text 99/141 = unlabeled resp 2–6; explained in notes.csv); verify_batch PASS=1; lint clean; irw-validate ok; check_provenance exit 0.
+- Two response-table fixes are owed (DMCT resp/rt, PBS stacking); pending_index_notes rows written for both. No GitHub issue filed from this headless round.
+Queue: 40 pending, 0 in_progress. Cap (batch_402) not reached.
+
+## batch_380 — 2026-09-24T11:12 (3 tables: 3 written / 0 blocked / 0 failed, yield 100%)
+- baquerotomas_2026_gad7, baquerotomas_2026_phq9 (Dataverse doi:10.7910/DVN/MXYEMC, CC0): the one .sav has value labels but no variable labels, and there is no paper or codebook. Answer labels come from the .sav as written. Item stems and instructions are Pfizer's official **Spanish-for-the-USA** forms. The deposit's labels match that form 4/4 (GAD) and 8/8 (PHQ, counting the difficulty question); the Spain-Spanish form matches only 2/4. That the study administered this wording is inferred from the match; nothing the study published says so. Disclosed in public_note. English is the official English form (official_instrument_english). mapping_basis=paper_order, verification PARTIAL on both. GAD: item 5 pinned by its twin PHQ9_8 (r=0.51 vs ≤0.46), item 7 pinned weakly; order of 1-4 and 6 not established. PHQ: item 9 is the floor item (mean 0.29), the top-3 means are {3,4,5}, PHQ9_1 correlates most with PHQ9_2; order within {3,4,5} and {6,7,8} not established. Rights: register's PHQ/GAD "ship" verdict.
+- goksel_2026_embarrassment_appeasement: data_labels from the OSF codebook (Study 5 sheet), confirmed by the Qualtrics printout. Scale points 2-6 are unlabeled, so their option_text is blank. Live means 4.37/5.49/4.22 match the deposit's cleaned data. The same codebook covers the other goksel_2026_* tables still in the queue.
+- Step 5b: no agent overrode a source or reported a data defect. Orchestrator re-ran both verify scripts through verify_batch and both returned PASS.
+- Gates: normalize 0 of 3; audit 3 PASS, no WARNs; verify_batch PASS=2, MISSING(exempt)=1 (data_labels); lint clean; irw-validate ok on all 3; check_provenance exit 0.
+Queue: 37 pending, 0 in_progress. Cap (batch_402) not reached.
+
+## batch_381 — 2026-09-24T11:22 (3 tables: 2 written / 2 blocked (1 CSV retained) / 0 failed → done 1 / blocked 2 / failed 0, yield 33%)
+Tables: goksel_2026_embarrassment_emb_perception, _liking, _moralityandwarmth (OSF jwdq6, same codebook as batch_380's appeasement). Three agents, no kills. Circuit breaker: 0% failed.
+- `emb_perception` — done. 6 items x 7 levels, data_labels (codebook Study 5 sheet: _1 embarrassed, _2 ashamed, _3 self-conscious; required_ = "ought to feel", actual_ = "actually feels"). Live n/means equal Study5 Cleaned Data.xls (600 each). Caveat in notes: the Qualtrics print order differs from the codebook numbering (and differs between the two blocks), so the mapping rests on the codebook labels.
+- `moralityandwarmth` — **blocked on naming, CSV retained** (retry test NO). Clean extraction: 8 trait items x 9 levels, data_labels (codebook Study 3 sheet), live n/means = Study3 Cleaned Data.xls (602 each); print order again differs from code order. irw-validate ERROR `name_length` (43 chars). Blocked under the batch_132/219/340/352 precedent; the split with batch_309 (done under irw#2365) still needs a human. Unblock: rename the live table ≤40 chars and the CSV with it.
+- `liking` — blocked (retry test NO). Study S1; the codebook labels liking_1..4 only as "item 1..4", the raw export has no question-text row, and print order is not column order in this survey. Orchestrator Step 5b re-check on the raw export: confirmed. The affective-trust reverse item ("I would avoid revealing any personal information…") is printed 4th, but the negatively correlating column is `affective trust_5` (r −0.35..−0.43; _4 is +0.61..+0.76). The liking items intercorrelate 0.79–0.85, so there is no statistical route. Needs the .qsf, a raw export with the question-text header, or author confirmation. **Relevant to any future goksel `affectivetrust` extraction: do not map by print order.**
+- Gates: normalize 0 of 2; audit 2 PASS, no WARNs; verify_batch MISSING(exempt)=2 (both data_labels); lint clean (2 NOT_NEEDED rows); irw-validate 1 ok + 1 ERROR name_length; check_provenance exit 0.
+- pending_index_notes rows written for liking and moralityandwarmth.
+Queue: 34 pending, 0 in_progress. Cap (batch_402) not reached.
+
+## batch_382 — 2026-09-24T11:33 (3 tables: 2 written / 1 blocked / 0 failed, yield 67%)
+Tables: goksel_2026_embarrassment_puremorality, _purewarmth, _similarity (OSF jwdq6, same codebook as batch_380/381). Three agents, no kills. Circuit breaker: 0% failed.
+- `puremorality`: done. 8 traits x 9 levels, data_labels (codebook Study 3 sheet: courageous/fair/principled/responsible/just/honest/trustworthy/loyal). Live n/means equal Study3 Cleaned Data.xls (602 each). Qualtrics print order differs from the code order, so the mapping rests on the codebook labels. Piped `${e://Field/name}` is rendered as [name] (noted).
+- `purewarmth`: done. 8 traits x 9 levels, data_labels (codebook Study 3: warm/sociable/happy/agreeable/enthusiastic/easy-going/funny/playful). Live item x resp counts equal the cleaned deposit cell for cell. purewarmth_4 has no resp 3, but its option row is kept.
+- `similarity`: blocked (retry test NO). Same Study S1 trap as batch_381's `liking`: the codebook gives only "item 1..3", there is no .qsf or question-text header, and print order is not column order in this survey. Orchestrator Step 5b re-check on live data: r 0.89/0.90/0.92, means all 5.2, n=300. The items are near-synonyms, so there is no statistical route. Unblock: the .qsf, a raw export with the question-text header, or author confirmation. A pending_index_notes row is written. `affectivetrust` (still queued) has the same print-order trap.
+- The agents' `provenance_` sidecars wrote NA for blank fields (R write.csv); the orchestrator blanked them at merge.
+- Gates: normalize 0 of 2; audit 2 PASS, no WARNs; verify_batch MISSING(exempt)=2 (data_labels); lint clean (2 NOT_NEEDED rows); irw-validate ok on 2; check_provenance exit 0.
+Queue: 31 pending, 0 in_progress. Cap (batch_402) not reached.
+
+## batch_383 — 2026-09-24T11:42 (3 tables: 3 written / 0 blocked / 0 failed, yield 100%)
+Tables: goksel_2026_embarrassment_socialnorm, goldberg_2018_eps_adjectives, goldberg_2018_eps_ipip. Three agents, no kills. Circuit breaker: 0% failed.
+- `goksel_2026_embarrassment_socialnorm`: done. Study S2, 2 items x 7 levels, data_labels. The codebook's Study S2 sheet gives the full wording for each item, so this table does not have the Study S1 "item 1..N" problem. Live n/means (299; 4.90/4.69) equal StudyS2 Cleaned Data.xls. Points 2-6 are unlabeled and their option_text is blank. `${e://Field/he%2Fshe}` is rendered as [he/she].
+- `goldberg_2018_eps_ipip`: done. 256 items x 5, data_labels. The source is EPS.sav (Dataverse doi:10.7910/DVN/GCV3ZZ, ?format=original), which has a variable label on every q column. Its order agrees with EPS_items.txt and the printed EPS.pdf for 256/256 items. Per-item n and means from the .sav equal the live table 256/256. One source override: q164 ships the printed form's "Experience altered states of consciousness." where the .sav label reads "Experienced ...". **Orchestrator confirmed this on the p.6 render and in the pdftotext output.** q99, q128 and q192 have no resp=1 in the live data; their option rows are kept. IPIP rights: register "ship" row.
+- `goldberg_2018_eps_adjectives`: done. 242 items (1,679 rows), data_labels from the EPS.sav variable labels (237/237 adjective labels match their codes). Adjective 1-7 option text comes from the printed scale, with the side headings combined per point. Direction is confirmed by means (vandal/crook 1.3, able 6.3). **Response-table composition defect:** data/goldberg_2018_escs.py pools every single-column variable into "adjectives". That swept in 5 non-adjective items on other scales: expo911/famex911 (no/yes), rhealth/rhltyr (1-5, rhltyr and rpain adapted from SF-36 v1) and rpain (1-6). They ship with their own text and options (sections _2/_3), and a public_note discloses them. **Orchestrator Step 5b:** the .sav counts are confirmed (expo911 717/1, famex911 650/61, rhealth 202/281/160/67/15, rhltyr 44/118/455/102/6, rpain 47/232/181/197/55/13). The live item set, via table_sets.R, confirms expo911 and famex911 are in the table (242 distinct items). Owed: split these 5 items out of the adjectives table. No GitHub issue filed from this headless round.
+- Gates: normalize 2 of 3 (NA convention); audit 3 PASS, no WARNs; verify_batch MISSING(exempt)=3 (all data_labels); lint clean (3 NOT_NEEDED rows); irw-validate ok on 3; check_provenance exit 0.
+Queue: 28 pending, 0 in_progress. Cap (batch_402) not reached.
+
+## batch_384 — 2026-09-24T11:54 (3 tables: 2 written / 1 blocked / 0 failed, yield 67%)
+Tables: goldberg_2018_eps_life_events, goldberg_2018_eps_s11 (EPS deposit, same .sav/PDF as batch_383), musifeast17_vanderwalle_2025. Three agents, no kills. Circuit breaker: 0% failed.
+- `goldberg_2018_eps_life_events`: done. 18 items x 6 (108 rows), data_labels (EPS.sav variable + value labels, same order as the list printed on EPS.pdf p.11). Item text uses the printed wording. It is longer than the .sav label on 3 items: event8, event9 and event18. Live item x resp counts equal the .sav for 18/18 items. Some levels were never used (event9 has no 4-6); their option rows are kept.
+- `goldberg_2018_eps_s11`: done. 12 items x 5 (60 rows), data_labels (EPS.sav labels, same order as p.16 "9/11 ATTACK"). Item text is the printed wording, because the s11_12 label is cut off at 124 chars and two labels have line-join artifacts. The printed instructions break off mid-sentence and ship as printed (noted). Live counts equal the .sav in 60/60 cells.
+- `musifeast17_vanderwalle_2025`: blocked (retry test NO). Only 3 of 25 items have published wording. In the Springer/PMC/VoR copies, Appendix A's Q2-Q7 page is replaced by an Appendix B word-cloud image, and Crossref lists no correction. The 17 genre_exposure items are never reproduced (not in the paper, the supplement or OSF 5ebz2). One lead is unchecked: the Durham AAM, which is behind Cloudflare. **Response-data defect, confirmed by the orchestrator via irw_fetch:** genre_exposure.* is asked once per person but repeated on every clip row. Per person-item cells hold 17 rows in 11,866/11,917 cells, 34 in 17, 16 in 17 and 1 in 17, and 10 cells hold conflicting values. No GitHub issue was filed from this headless round. A pending_index_notes row is written.
+- Gates: normalize 0 of 2; audit 2 PASS, no WARNs; verify_batch MISSING(exempt)=2 (data_labels); lint clean (2 NOT_NEEDED rows); irw-validate ok on 2; check_provenance: no failures (only the standing `mixed` REVIEW list).
+Queue: 25 pending, 0 in_progress. Cap (batch_402) not reached.
+
+## batch_385 — 2026-09-24T12:20 (3 tables: 3 written / 0 blocked / 0 failed, yield 100%)
+Tables: peters_2025_att_exp_eval, peters_2025_att_instr_strength, peters_2025_ciberlite. All three come from the Your COVID-19 Risk DMQs sheet (`en` worksheet, sha256 117c49c7…, byte-identical to the batch_133 copy) under the existing `allow` rights-register row. Three agents, no kills. Circuit breaker: 0% failed.
+- `att_exp_eval`: done. 15 items, 103 rows (14 items on 1-7, plus `weird` on 1-5). mapping_basis paper_explicit: the sheet's `id` column holds the raw column name. VERIFIED: anchors, stems and scale widths match on 15/15, and polarity means agree on 15/15. All items share the stem "I prefer feeling ..."; each item's content is its anchor pair in option_text. **Data finding, confirmed by the orchestrator:** the sheet defines 16 AttExEv items, but `embarr` is missing from the live table (15 items; sibling att_exp_strength has 16, including embarr). In all 6 cached raw exports (sid 100103 rids 1-1479 and the five sid 100110 files), `AttExEvEmbarr` has 0 non-missing values and `AttExEvGood` has 17/48/0/33/53/42. The other ~44 raw files were not checked. Probably never collected in this block; not an itemtext defect.
+- `att_instr_strength`: done. 57 items, 355 rows (22 unipolar 1-5, 35 bipolar 1-7). The sheet has 58 rows; the build script's elimination list drops AttInExOthCrazy. VERIFIED: codes 57/57, text 57/57, widths 57/57, a two-hypothesis flip-twin test on 7 pairs, and anchor direction on 13 items with an obvious protective answer. **Correction the agent raised about an older table:** check D in batch_133's `verify_peters_2025_att_instr_eval.R` claims the flip-twin prediction would invert under reversed coding. It would not: mean(flip) = (max+1) − mean(base) holds either way. The check shows the twins are consistent with each other; it does not pin which end is 1. That table's conclusion likely stands, but its evidence string overstates what the check shows. Not edited here; for a human.
+- `ciberlite`: done. 8 items, 46 rows (5 items on 1-5, 3 on 1-7). VERIFIED by re-running the processing script's rename on the sid 100110 raw exports: 1257/1257 cells equal live, 0 disagree. **pbccap1 and pbccap2 have the same English stem, confirmed by the orchestrator.** Only their anchors differ (no confidence at all/a lot of confidence vs not confident at all/very confident). The Dutch wording does distinguish them. Shipped as the source has it and disclosed in public_note.
+- **Language column:** all three follow the 2026-09-11 multi-language ruling. The column lists 21/22/21 languages, ordered by response count, with English base text. att_exp_eval originally shipped without the column; the orchestrator sent it back to add one to match its siblings. **Follow-up:** the earlier peters_2025 tables from batch_133/134 predate the ruling and have no `language` column. The family is inconsistent until they are backfilled.
+- `{{distRec}}` is kept verbatim (the country-specific distance), per the pbc_cond_presence precedent. Midpoints are blank rather than padded.
+- Gates: normalize 1 of 3 (ciberlite NA/"" mix); audit 3 PASS, no WARNs; verify_batch PASS=3; lint 0 ERROR / 0 WARN / 1 INFO (att_exp_eval's hedged evidence; VERIFIED stands on the code-label tie); irw-validate ok on 3; check_provenance: no failures (only the standing `mixed` REVIEW list).
+Queue: 22 pending, 0 in_progress. Cap (batch_402) not reached.
+
+## batch_386 — 2026-09-24T12:40 (3 tables: 3 written / 0 blocked / 0 failed, yield 100%)
+Tables: peters_2025_gen_risk_eval, peters_2025_hw_frequency, peters_2025_hw_intensity. Three agents, no kills. Circuit breaker: 0% failed. The existing YCR `allow` rights-register row was applied to all three.
+- `gen_risk_eval`: done. 2 items x 5 (10 rows), paper_explicit (DMQs sheet `en` ids GenEvHospital/GenEvSymptoms, byte-identical to the batch_133/385 fetches). VERIFIED: the code-label tie, plus raw->live per-level counts in 2 export files (sid 100103, and sid 100105 rids 1-2450). A swap of the two items would fail that check, and so would the amended `GenEvHospital2` column. Endpoints are labelled; resp 2-4 are blank. **The sheet defines a third item, GenEvDie, which is missing from the live table.** In the 3 raw files the agent checked, it has 0 non-empty cells. This is the same pattern as att_exp_eval's `embarr` in batch_385. The amended `GenEv*2` wording is a separate set of raw columns that the processing script drops. **Orchestrator Step 5b:** confirmed 2,130 rows over 2,110 ids, hospital n=1072 mean 1.42 (82.2% at 1), symptoms n=1058 mean 1.41 (71.0% at 1).
+- `hw_frequency`: done. 7 items x {0,1} (14 rows), paper_explicit. **Step 3b: this is not a DMQ table.** It is built by data/peters_2025_covid19_risk_precautions.py from the REQs sheet (key 1qMf-7khtWhHv8oBUa-yhsAvq8TCG5Nrc0t79OaqRLT0), question hwFrequency, which is check-all-that-apply. The stem ships in `instructions`. option_text is blank for both checkbox states, and public_note explains 1 = ticked. VERIFIED: the label match against the sheet and the deployed English survey (sid 100110), plus a raw re-run of the decoding (65,198/65,198 cells). The source typo "somone" is kept. **Orchestrator Step 5b:** confirmed 498,162 rows = 7 x 71,166 ids. Of the 2,849 respondents who ticked `never`, 816 also ticked a situation, so `never` was not enforced as exclusive. 1,389 respondents ticked nothing. resp 0 conflates "not ticked" with "skipped the question".
+- `hw_intensity`: done. 4 items x {0,1} (8 rows), paper_explicit. Same REQs sheet, question hwIntensity, same structure as hw_frequency. The two agents converged on this independently. The code-label tie is corroborated by the Dutch deployed .lss, and the marker item `none` is pinned by the data. **Orchestrator Step 5b:** confirmed 280,264 rows = 4 x 70,066 ids. Proportion checked: durtn 0.691, soap 0.901, thrgh 0.461, none 0.012. Of the 866 who checked `none`, 48 also checked another option; 540 checked nothing. The agent also reports that the project's own `hwIntnsDiligence` equation tests `hwFreqSum==3`. That is a scoring bug in the upstream build script and does not touch item responses. It was not re-checked here.
+- **Language column:** all three follow the 2026-09-11 ruling (gen_risk_eval 15 languages, hw_* 22). Portuguese (Brazil) and Turkish are ordered differently in the two hw tables. The difference is real: their per-table counts differ.
+- Gates: normalize 0 of 3; audit 3 PASS, no WARNs; verify_batch PASS=3; irw-validate ok on 3; check_provenance exit 0 (only the standing `mixed` REVIEW list). lint: 0 ERROR / 1 WARN / 1 INFO. The WARN is on hw_intensity, "VERIFIED but evidence hedges". VERIFIED stands under the 2026-09-08 item-axis rule, because (A) is a full code-label tie from the sheet's ls_answer_code. The lint regex misses it only because the evidence says "Label match" rather than "code-label match". gen_risk_eval's INFO is the same case, but its wording did match.
+Queue: 19 pending, 0 in_progress. Cap (batch_402) not reached.
+
+## batch_387 — 2026-09-24T12:50 (3 tables: 3 written / 0 blocked / 0 failed, yield 100%)
+Tables: peters_2025_nrm_desc_behavior, peters_2025_nrm_desc_ident, peters_2025_nrm_inj_motivation. All three were built by data/peters_2025_covid19_risk_dcts.py from the DMQs sheet (`en` worksheet, sha256 117c49c7…, byte-identical to the batch_133–386 copies). The existing YCR `allow` rights-register row applies. Three agents, no kills. Circuit breaker: 0% failed.
+- `nrm_desc_behavior`: done. 8 items x 1-5 (40 rows), paper_explicit. Only the endpoints are labelled (1 very improbable, 5 very probable); resp 2-4 are blank. VERIFIED: the codes re-derive from the sheet 8/8, and re-running the rename on the raw sid 100110 exports gives 1,277/1,277 cells equal to live, 0 disagreeing.
+- `nrm_desc_ident`: done. 8 items x 1-7 (56 rows), paper_explicit. The anchors are "as little as possible"/"as much as possible"; resp 2-6 are blank. The survey displayed -3..+3, stored as 1..7. VERIFIED: the codes re-derive 8/8. Raw-to-live item x resp counts match 8/8 in sid 100103 and 8/8 in 100105, and no two items share a count vector (0 of 28 pairs). The source has a harmless typo, group_id `NrmDeeLikeYou`. The agent set the language order by hand to break ties alphabetically, and its scratch build.R still produces the old order.
+- `nrm_inj_motivation`: done. 10 items x 1-5 (50 rows), paper_explicit. The anchors are "not at all"/"very much"; resp 2-4 are blank. VERIFIED: the codes re-derive 10/10 (Neighbourhood is shortened to Neighbrhd). In sids 100102/100103/100105, 519/519 raw cells equal live, and no other NrmInMc column matches more than 4 cells.
+- **Orchestrator Step 5b:** the live counts match the agents' reports. desc_behavior has 9,559 rows over 8,761 ids (8,015 answered one item), desc_ident 9,710/8,894 (8,139), and inj_motivation 12,021/10,785 (9,670). Each respondent was asked about a sample of referents, so the tables are sparse by design, not duplicated. Item means fit the anchor directions: desc_ident likeyou 6.1, the highest; inj_motivation doctor 4.3 and government 4.2, friends 2.7. None of the agents overrode a source or reported a data defect.
+- **Language column:** all three follow the 2026-09-11 ruling (20/20/22 languages, English base text only).
+- Gates: normalize 0 of 3; audit 3 PASS, no WARNs; verify_batch PASS=3; lint 0 ERROR / 0 WARN / 2 INFO (VERIFIED stands under the item-axis rule); irw-validate ok on 3; check_provenance: no failures (only the standing `mixed` REVIEW list). One cleanup: nrm_desc_ident's verification sidecar had `uploaded=NA`, which was blanked before the merge.
+Queue: 16 pending, 0 in_progress. Cap (batch_402) not reached.
+
+## batch_388 — 2026-09-24T13:05 (3 tables: 3 written / 0 blocked / 0 failed, yield 100%)
+Tables: peters_2025_pbc_skill_import, peters_2025_pbc_skill_prob, peters_2025_si_current. Numbering: the highest batch below 300 is 299, and 299+1 falls in the 300–304 hole. The series has run consecutively from 305 through 387, so this round is 388. The existing YCR `allow` rights-register row applies to all three. Three agents, no kills. Circuit breaker: 0% failed.
+- `pbc_skill_import`: done. 14 items x 1-5 (70 rows), paper_explicit, built from the DMQs sheet (`en`, sha256 117c49c7…) `PbcSkIm*` rows. Only the anchors are labelled ("not at all important"/"extremely important"); resp 2-4 are blank. VERIFIED: 14/14 codes re-derive (Decline is shortened to Decl). Across 4 raw files, 1,599/1,599 raw->live cells are equal. The best wrong column matches at most 0.60, so no swap would pass. The source typo in the `remem` stem (missing "so") is shipped as printed and disclosed in public_note.
+- `pbc_skill_prob`: done. 14 items x 1-5 (70 rows), paper_explicit, `PbcSkPr*` rows. VERIFIED: 14/14 codes re-derive. Across 3 raw files, 670/670 cells are equal, and the next-best column matches at most 2 cells. **Naming defect:** the source labels this block "Perceived subskill presence" and the items ask "are you able to…?". So "Pr" means presence, and the name and Description ("skill-probability") are wrong. A note_only row was added to pending_index_notes.csv. The source typo "decline physical content" (for contact) is shipped verbatim and disclosed.
+- `si_current`: done. 6 checkbox items x {0,1} (12 rows). It comes from the REQs sheet `siCurrent` and is built by data/peters_2025_covid19_risk_precautions.py, not the dcts script, so the precedent is hw_frequency. option_text is blank for both codes because checkboxes carry no printed label, and a 0 covers both "unticked" and "skipped". VERIFIED: 6/6 labels match the sheet and the deployed English .lss; in sid 100110, 58,872/58,872 raw->live cells are equal; `home` correlates negatively with all 5 leaving-the-house items. The agent flagged a likely inversion in the survey's `goOutReasons` feedback formula. It affects feedback text only, not the stored data, and was not re-checked here.
+- **Orchestrator Step 5b** (re-checked on live data): si_current has 447,504 rows over 74,584 ids; 884 respondents ticked nothing, and 28,429 of the 32,930 who ticked `home` also ticked a leave-house reason. pbc_skill_prob has 16,951 rows over 14,473 ids, and 12,337 of those ids answered a single item. Its floor (resp=1) is declgreeting 357/1281, declhug 284/1253 and dechugs 40/1363, all as the agent reported. The "Perceived subskill presence" label was confirmed in the agent's cached DMQs sheet.
+- Gates: normalize 0 of 3; audit 3 PASS with no WARNs; verify_batch PASS=3; lint 0 ERROR / 0 WARN / 2 INFO (VERIFIED stands under the item-axis rule); irw-validate ok on 3; check_provenance has no failures (only the standing `mixed` REVIEW list).
+Queue: 13 pending, 0 in_progress. Cap (batch_402) not reached.
+
+## batch_389 — 2026-09-24T13:20 (3 tables: 3 written / 0 blocked / 0 failed, yield 100%)
+Tables: peters_2025_si_intention, peters_2025_si_trigger, peters_2025_work_precautions. Numbering: 388+1, consecutive within the 305+ series. All three come from data/peters_2025_covid19_risk_precautions.py (LimeSurvey checkbox questions, sid 100110) and follow the si_current convention from batch_388. They use REQs sheet `en` (sha256 e3932f8c…, byte-identical to earlier fetches), leave option_text blank for 0/1, put the stem in `instructions`, list 22 languages, ship English base text only, and apply the existing YCR `allow` rights row. Three agents, no kills. Circuit breaker: 0% failed.
+- `si_intention`: done. 5 items x {0,1} (10 rows). VERIFIED: 5/5 code-label match. 48,520/48,520 raw->live cells match. There are 0 cases of "intention X ticked while current X not ticked" across 73,949 ids, so the array_filter pins every item. **Data property, disclosed in public_note:** each option was shown only to people who ticked the matching si_current option, but the script gates on `*Est`. So resp 0 also covers people never shown the option: 47,414 (famly), 18,636 (food), 53,812 (frnds), 35,386 (shops) and 22,910 (sport). p(ticked | shown) runs 0.48–0.88 against live means of 0.24–0.42. Upstream: in the v1.10 Arabic deployment the siIntention stem reads as siTrigger's "none" option. The shipped English text is unaffected.
+- `si_trigger`: done. 4 items (symse, symot, govmt, none) x {0,1} (8 rows). VERIFIED: 4/4 label match and 38,816/38,816 cells. `none` correlates negatively with each trigger (−0.22 to −0.37). `none` is not exclusive: 645 of the 3,385 who ticked it also ticked a trigger. 3,696 ticked nothing. The free-text "other" (`spec`) is correctly excluded.
+- `work_precautions`: done. 4 items (ptnts, chldr, publc, home) x {0,1} (8 rows). VERIFIED: 4/4 label match and 39,480/39,480 cells; `home` vs `publc` r = −0.746. `home` is not exclusive: 1,430 of the 46,468 who ticked it also ticked a "Yes, with …" option. 1,375 ticked nothing. Minor: the Description calls this a "precautions" checklist, but the question is "Currently, do you work within a short distance of others?". The table name is loose, but it names the right question, so this is not a Step 3b mismatch.
+- **Orchestrator Step 5b** (re-checked on live data, all as reported): the si_intention join over 73,949 ids gives 0 int1&cur0 for all 5 items, and the never-shown counts and p(tick|shown) match exactly. Trigger: none 3,385, none+trigger 645, nothing 3,696. Work: n 75,012, home 46,468, home+yes 1,430, nothing 1,375.
+- Gates: normalize 0 of 3; audit 3 PASS, no WARNs; verify_batch PASS=3; lint no problems; irw-validate ok on 3; check_provenance: no failures (only the standing `mixed` REVIEW list).
+Queue: 10 pending, 0 in_progress. Cap (batch_402) not reached.
+
+## batch_390 — 2026-09-24T13:10 (claim) / 13:2x (close)
+3 tables claimed, 3 agents. **3 written / 0 blocked / 0 failed** (yield 3/3). No kills; 14G available at dispatch.
+- `silva_2022_crsy`: done. 16 items x resp 1-5 (80 rows), data_labels (crsy_NN read from the leading question number in each .sav variable LABEL, since the column names were renumbered after 4 items were dropped). .sav counts = live in 80/80 cells, n=3563. text_source=translated_substitute / study_supplied: administered language inferred as Portuguese (Portuguese schools, `_eng` file suffix) but never stated; no Portuguese wording published. If it was actually administered in English, drop `language` and set text_source=study_materials. option_text blank (value labels are bare 1-5, the paper prints no anchors).
+- `spain_2026_disinformation_concern`: done. 10 items (P.1, P.7/DESINFOR battery, P.12 battery) x 1-4 Mucho..Nada, data_labels, CIS Estudio 3563, Spanish + IRW machine translation. .sav counts = live 40/40 cells. Orchestrator added the machine-translation `public_note` (agent left it blank; sibling had one).
+- `spain_2026_disinformation_hostility`: done. 4 items (P.10) x 1-4, data_labels; rebuilding the .do on 3563_num.csv reproduces live exactly (13,726 rows, 0 differences). p10_4 ships the questionnaire's "diferente" where the .sav label reads "diferentes".
+- **Dictionary defect, confirmed by orchestrator (Step 5b):** all 9 `spain_2026_disinformation_*` rows in metadata/biblio.csv cite "Índice de Confianza del Consumidor. Mes de mayo 2026, Estudio 3565". data/spain_2026_disinformation.do imports `3563_num.csv`, and the item content is Estudio 3563 "Desinformación y humor". The dictionary Reference needs to be corrected upstream; not filed.
+- Gates: normalize 0 of 3; audit 3 PASS, no WARNs; verify_batch MISSING(exempt)=3 (all data_labels); lint no problems (3 NOT_NEEDED rows in both files); irw-validate ok on 3; check_provenance exit 0 (issues-page check reported-not-enforced, since the site checkout is on `validate-pin-1-2-0`; both spain tables are listed as held/not yet uploaded).
+Queue: 7 pending, 0 in_progress. Cap (batch_402) not reached.
+
+## batch_391 — 2026-09-24T13:19-13:30-07:00 (3 tables, 3 agents)
+Written / blocked / failed: **3 / 1 (CSV retained) / 0** → done 2 / blocked 1 / failed 0 (yield 2/3 shippable). Circuit breaker: 0% failed.
+Gates: normalize_nulls 0 of 3 changed; audit_batch 3 PASS, no anomalies; verify_batch MISSING(exempt)=3 (all data_labels); lint clean (3 NOT_NEEDED rows in both files); check_provenance exit 0; **irw-validate: 2 ok + 1 ERROR `name_length` on `spain_2026_disinformation_humorperception`** (live name 41 chars).
+- `spain_2026_disinformation_humorclimate` — done. P.29/P.30 x 1-5, data_labels (CIS Estudio 3563 .sav), Spanish + IRW machine translation. P30 option 3 is "(NO LEER) Igual"; shipped as "Igual", disclosed in public_note (157 of 3,416 valid p30 responses).
+- `spain_2026_disinformation_humorlimits` — done. P.13 (Sí/No) and P.24 (1,2,4), data_labels. The .do sets the unprompted code 3 ("Depende"/"No estoy seguro/a") to missing along with 8/9, so p24 is non-contiguous; accurate CIS coding, disclosed in public_note.
+- `spain_2026_disinformation_humorperception` — **blocked on naming, CSV retained** (retry test NO). Clean extraction: P.26–P.28 x Sí/No, data_labels, live = .sav 6/6 cells. Blocked under the batch_340/352/381 precedent (batch_309's `done`-under-irw#2365 split still needs a human). Unblock: rename the live table ≤40 chars and the CSV with it. Row added to pending_index_notes.csv. Agent note for re-extractors: `pdftotext -layout` of cues3563.pdf bleeds a facing column's options beside P.26; use `-raw`.
+- Step 5b re-check by the orchestrator on live data: all agent-reported counts confirmed cell for cell (humorclimate 6887 rows, p29 421/912/1302/528/308, p30 520/658/157/1182/899; humorlimits 6768 rows, p13 1368/1954, p24 1315/1616/515; humorperception 10277 rows, p26 3192/247, p27 2566/851, p28 2999/422). The .do line `replace p24 = . if inlist(p24, 3, 8, 9)` confirms the p24 gap.
+- Dictionary defect persists on these siblings too: Reference cites Estudio 3565 (consumer confidence); source is Estudio 3563. Not filed (same as batch_390).
+Queue: 4 pending, 0 in_progress. Cap (batch_402) not reached.
+
+## batch_392 — 2026-09-24T13:26-13:33-07:00 (3 tables, 3 agents)
+Written / blocked / failed: **3 / 0 / 0** → done 3 / blocked 0 / failed 0 (yield 3/3). Circuit breaker: 0% failed.
+Gates: normalize_nulls 0 of 3 changed; audit_batch 3 PASS, no anomalies; verify_batch MISSING(exempt)=3 (all data_labels); lint clean (3 NOT_NEEDED rows in both files); irw-validate 3 ok; check_provenance exit 0 (only the standing `mixed` review list, none from this batch).
+- `spain_2026_disinformation_memes` — done. P.14 (frequency of receiving memes) + P.15_1..6 battery (shared stem as section_prompt, six group labels as item_text), data_labels, CIS Estudio 3563. p14 keeps CIS code 7 for "Nunca o rara vez los recibo" (resp 1,2,3,4,7); P.15 filtered on P14 1-4. Disclosed in public_note.
+- `spain_2026_disinformation_offense` — done. P.23_1..4 grid (Política/Religión/Género/Inmigrantes x Mucho..Nada), stem in instructions per batch_390 hostility layout, data_labels; rebuild equals live exactly (13776 rows, 0 diffs).
+- `spain_2026_disinformation_personalhumor` — done. P.16/17/18/20/21/25, data_labels; rebuild equals live exactly (20845 rows, 0 diffs). CIS code 7 endpoints kept on p17/p20/p25; p21 resp 3 is the volunteered "(NO LEER) Ni de acuerdo ni en desacuerdo", which unlike humorlimits' code 3 the .do KEEPS (.do line 260 drops only 8/9). Disclosed in public_note.
+- Step 5b re-check by the orchestrator against 3563.sav: P14 1/2/3/4/7 = 1056/793/545/163/899 (8=17, 9=20); P15_1 system-missing 936 = 899+17+20, confirming the P14 filter; P21 1-5 = 1481/1814/25/106/43; P17 7=76; P25 7=570; P23_1 1-5 = 352/542/304/1009/1235 — all as the agents reported.
+- Dictionary defect persists (Reference cites Estudio 3565; source is 3563). Not filed (same as batch_390/391).
+Queue: 1 pending, 0 in_progress. Cap (batch_402) not reached.
+
+## batch_393 — 2026-09-24T13:33-13:40-07:00 (1 table, 1 agent — last pending row)
+Written / blocked / failed: **1 / 0 / 0** → done 1 / blocked 0 / failed 0 (yield 1/1). Circuit breaker: 0% failed.
+Numbering: highest existing was batch_392, so 393. The Step 1 "compute over directories below 300" clause is obsolete now that the series is past 305 (read literally it yields batch_305, which exists); the consecutive intent was followed.
+Gates: normalize_nulls 0 of 1 changed; audit_batch 1 PASS, no anomalies; verify_batch MISSING(exempt)=1 (data_labels); lint clean (NOT_NEEDED row in both files); irw-validate ok; check_provenance exit 0 (only the standing `mixed` review list).
+- `spain_2026_disinformation_regulation` — done. P.3–P.6 x 1 Sí / 2 No, data_labels (CIS Estudio 3563 .sav; codes = lowercased variable names), Spanish + IRW machine translation. The .do drops the volunteered "(NO LEER)" code 3 on p3 (Depende, n=16) and p6 (voluntary compliance only, n=3) along with 8/9, so all four items ship binary; disclosed in public_note. Rebuild from 3563_num.csv equals live exactly (13712 rows, 3492 ids, 0 diffs).
+- Step 5b re-check by the orchestrator against 3563.sav: P3 1/2/3/8/9 = 2950/484/16/28/15; P4 1/2/8/9 = 2893/526/55/19; P5 = 2884/535/50/24; P6 1/2/3/8/9 = 3031/409/3/26/24; the kept 1/2 cells sum to 13712 = live. .do lines `replace p3/p6 = . if inlist(.., 3, 8, 9)` confirm the code-3 drop. All as the agent reported.
+- Dictionary defect persists (Reference cites Estudio 3565; source is 3563) — now on all 10 spain_2026_disinformation_* rows. Not filed (same as batch_390–392).
+Queue: **0 pending (exhausted)**, 0 in_progress. Cap (batch_402) not reached. The next wrapper firing will stop on an empty queue.
+
+## batch_394 — 2026-09-24T13:40 (3 tables: 3 written / 1 blocked (CSV retained) / 0 failed → done 2 / blocked 1 / failed 0, yield 67%)
+Tables: coh_goodman_2023_racial_comp, goldberg_2018_spa_beliefs_about_intelligence, goldberg_2018_spa_changeability (first three of #2381 slice 06). Three agents, one per table, no kills. Circuit breaker: 0% failed.
+- Numbering: batch_393 was the highest, so this is batch_394 (the Step 1 "below 300" rule still resolves to an existing batch_305; same human edit owed as noted at batch_379).
+- `goldberg_2018_spa_changeability` — done. 27 items x 5 (135 rows), data_labels: SPA.tab original = SPSS .por (Dataverse doi:10.7910/DVN/IOA6EE, datafile 3153967, CC0), labels = SPA-1.sav = SPA.pdf pp.14-15, 27/27 in order. Option text is the printed two-line scale joined with ", " (e.g. "No Problem at All, Extremely Easy"); .por value labels run the same direction. Live item x resp counts = .por 135/135 cells.
+- `goldberg_2018_spa_beliefs_about_intelligence` — **blocked on naming, CSV retained** (retry test NO). Clean extraction: 6 yes/no items (VINTELL1-6), data_labels from the .por, matching SPA.pdf p.10 6/6; live counts = .por 12/12. irw-validate ERROR `name_length` (44 chars > 40). Same precedent as batch_381's moralityandwarmth; unblock by renaming the live table (e.g. goldberg_2018_spa_intelligence_beliefs, 38).
+- Orchestrator re-check of both goldberg tables against SPA.por: VINTELL labels/counts (VINTELL3 687/43, VINTELL6 598/129) and CHGTRT labels/counts (CHGTRT1 21/132/250/237/86) as reported; value labels 1..5 = extremely easy..extremely difficult. Minor inconsistency: the two siblings compose `instrument` differently ("Skills, Possessions, & Abilities: …" vs "Eugene-Springfield Community Sample, Skills, Possessions, & Abilities (SPA): …"); left as is. The remaining 8 goldberg_2018_spa_* tables can reuse .cache/goldberg_2018_spa_beliefs_about_intelligence/ (SPA.por, SPA-1.sav, SPA.pdf).
+- `coh_goodman_2023_racial_comp` — done with caveat. 10 items (74 rows), paper_order / study_materials. Item wording = captions of Figures S1-S10 in Goodman et al. 2024 JMIR PHS Multimedia Appendix 1 (PMC11342016, via Europe PMC supplementary zip); options from the paper's Methods (all Black ... all White, not applicable); respondents saw pictures A-F. openICPSR codebook behind Cloudflare, so mapping is by order. Verification PARTIAL (verify PASS): within-pair identity (rc3/rc4, rc5/rc6, rc7/rc9, rc8/rc10) rests on order only. resp 8 (school items only) is unlabeled and ships blank.
+- Step 5b orchestrator re-check via irw_fetch: resp 8 only on rc3-rc6 (28/28/52/59); resp 7 highest on rc1 (171) then rc2 (119); every item's mean for cov_race_cat 1 exceeds cat 2 (e.g. rc10 5.0 vs 1.8, rc7 3.8 vs 2.6). All as the agent reported. Reading the openICPSR codebook would upgrade to data_labels and could label resp 8.
+- Gates: normalize 0 of 3; audit 3 PASS, no anomalies; verify_batch PASS=1, MISSING(exempt)=2 (data_labels); lint clean (2 NOT_NEEDED rows in both files); irw-validate 2 ok + 1 ERROR name_length; check_provenance exit 0 (only the standing `mixed` REVIEW list).
+- pending_index_notes row written for beliefs_about_intelligence.
+Queue: 22 pending, 0 in_progress. Cap (batch_402) not reached.
+
+## batch_395 — 2026-09-24T13:50-14:00-07:00 (3 tables, 3 agents)
+Written / blocked / failed: **3 / 0 / 0** → done 3 / blocked 0 / failed 0 (yield 3/3). Circuit breaker: 0% failed. No kills.
+Tables: goldberg_2018_spa_cultural_familiarity, goldberg_2018_spa_ipip, goldberg_2018_spa_medical_history (next three of #2381 slice 06). All reused the SPA.por / SPA-1.sav / SPA.pdf cache from batch_394.
+- Numbering: batch_394 was the highest, so this is batch_395 (the Step 1 "below 300" rule still resolves to an existing batch_305; same human edit owed as noted at batch_379/393).
+- Gates: normalize_nulls 0 of 3 changed; audit_batch 3 PASS, no anomalies; verify_batch MISSING(exempt)=3 (all data_labels); lint clean (3 NOT_NEEDED rows in both files); irw-validate 3 ok; check_provenance exit 0 (only the standing `mixed` review list).
+- `goldberg_2018_spa_cultural_familiarity` — done. 105 items (FAMJAZ/COU/CLS/RAP/DES/RCK/STR 1-15) x 5 = 525 rows, data_labels. Seven printed domain headings as sections (SPA.pdf pp.7-8); fictitious names kept as printed (by design). Only 1/3/5 are labelled in print and .por; 2 and 4 ship blank. FAMJAZ5 shipped with the printed double quotes rather than the .por's single quotes. Name is 38 chars (under the 40 limit).
+- `goldberg_2018_spa_ipip` — done. PQ1-79 x 5 = 395 rows, data_labels, SPA.pdf pp.11-13 "Perceptions of Personal Qualities". Printed spacing restored where the .por labels lost a space at a line wrap (PQ7/8/15/28/49); apostrophes normalized to straight. Step 3b: no mismatch; the form never says "IPIP", so instrument uses the section heading.
+- `goldberg_2018_spa_medical_history` — done. MEDHIS1-28 x 4 = 112 rows, data_labels, SPA.pdf p.14; live item x resp counts = .por 112/112 cells.
+- Step 5b orchestrator re-check against SPA.por: item_text equals the .por variable label (alphanumerics, case-folded) for 105/105, 79/79 and 28/28 items; PQ value labels 1..5 very inaccurate..very accurate; FAMJAZ1 labels only 1/3/5; MEDHIS1 1-4 = 634/11/33/48. All as reported.
+- Instrument naming: batch_395 uses "Eugene-Springfield Community Sample, Skills, Possessions, & Abilities (SPA): <section>", which matches batch_394's beliefs_about_intelligence but NOT its changeability ("Skills, Possessions, & Abilities: …"). Harmonise changeability at triage if wanted.
+Queue: 19 pending, 0 in_progress. Cap (batch_402) not reached.
+
+## batch_396 — 2026-09-24T13:59 (3 written / 0 blocked / 0 failed)
+Tables: goldberg_2018_spa_skill_proficiency, goldberg_2018_spa_skills, goldberg_2018_spa_speo (next three of #2381 slice 06; all reused the batch_394 SPA.por / SPA-1.sav / SPA.pdf cache). Three agents, one per table, no kills. Yield 3/3. Circuit breaker: 0% failed. All gates clean: audit 3 PASS, lint no problems, verify_batch 3 MISSING(exempt) (all data_labels), irw-validate ok x3, check_provenance exit clean (only the standing 4-table `mixed` REVIEW).
+- Numbering: "highest below 300 + 1" read literally gives 300 -> 305, which already exists; used 396 (consecutive from 305, matching batch_395). The Step 1 wording should say "highest outside 200-205/300-304".
+- `goldberg_2018_spa_skill_proficiency` — done with caveat. PSKILL1-9 x 9 = 81 rows, data_labels (SPA.pdf p.10 "Profiling Your Skills"; printed wording used because the .por labels are cut off at about 64 characters). **The items are within-person RANKS (1=best, 9=worst), not the "skill-proficiency ratings" the dictionary Description says.** Disclosed in public_note; the dictionary Description is owed a fix. option_text is blank: the form prints bare bubbles, and the best/worst anchors are in the instructions.
+- `goldberg_2018_spa_skills` — done. YSKILL1-18, 97 rows, data_labels (SPA.pdf p.9 "Your Skills"). **Source override on the option axis:** the .por gives all 18 items one generic label set (1 no .. 6 excellent). That set is correct only for YSKILL1, so the shipped options are each item's own printed 4/5/6-point options, with resp = left-to-right position.
+- `goldberg_2018_spa_speo` — done, clean. SPEO1-12 x 3 = 36 rows, data_labels: the "AGE 18 or OLDER" column block of SPA.pdf p.7 "Some Personal Experiences" (SPEY = the "Before Age 18" block, still queued; section_prompt distinguishes them). The dictionary Description ("the speo block") is uninformative.
+- Step 5b orchestrator re-check against SPA.por. Every claim came out as reported:
+  - YSKILL per-item max: 6,4,6,5,6,5,5,5,5,5,6,5,6,6,6,6,5,5. This equals the printed option counts on the p.9 render, 18/18.
+  - YSKILL: 4 negative inter-item correlations, min -0.019.
+  - PSKILL: 700 complete respondents, 528 exact permutations.
+  - SPEO1/SPEY1 labels end ">= age 18"/"< age 18"; counts 32/360/308 vs 145/430/115.
+Queue: 16 pending, 0 in_progress. Cap (batch_402) not reached.
+
+## batch_397 — 2026-09-24T14:06-07:00 (3 tables: 2 written / 1 blocked / 0 failed → done 2 / blocked 1 / failed 0, yield 67%)
+Tables: goldberg_2018_spa_spey, goldberg_2018_spa_talents, matosaslopez_2022_bars_teaching. Three agents, one per table, no kills. Circuit breaker: 0% failed. The goldberg pair reused the batch_394 SPA.por / SPA-1.sav / SPA.pdf cache; this closes out the goldberg_2018_spa_* family (beliefs_about_intelligence still blocked on name length).
+- Numbering: batch_396 was the highest, so this is batch_397 (same "below 300" wording issue noted at batch_396).
+- `goldberg_2018_spa_spey` — done, clean. SPEY1-12 x 3 = 36 rows, data_labels: the "BEFORE AGE 18" column block of SPA.pdf p.7, mirroring batch_396's SPEO (same instrument/instructions, section_prompt distinguishes the blocks). SPEY3 ships the printed parenthetical that the .por label drops. SPEY8 has no resp=3 respondents in source or live; the printed option still ships.
+- `goldberg_2018_spa_talents` — done, with a minor caveat. ABILITY1-9 x 9 = 81 rows, data_labels, SPA.pdf p.6 "Your Abilities: Comparing Yourself to Others". resp is 0-8 and unshifted; option_text = printed headers "0 - 10%" .. "80 - 90%". The form has no 90-100% bin, so resp 8 is in effect the top bin (form design, not a defect; no public_note).
+- `matosaslopez_2022_bars_teaching` — **blocked** (retry test NO). **Response-table defect:** the live table pools two DIFFERENT BARS instruments under BARS_1..10. The blended deposit (Zenodo 15160903, 1,436 ids) uses LMS-centred anchors from Behav Sci 2022 App. A (CC BY 4.0). The face-to-face deposit (Zenodo 15151307, 888 ids) uses anchors from JUTLP 2019 App. B (CC BY-ND 4.0). data/matosaslopez_2022_bars_teaching.py collapsed them because the ten Spanish dimension labels match, but the anchors differ, so the same-instrument collapse rule does not apply. Fix: split the table by teaching mode. The blended half would then be extractable; the face-to-face half needs a rights ruling. pending_index_notes row written. Not filed as an issue.
+- Step 5b orchestrator re-check:
+  - Per-item means from both xlsx: blended 2.52-3.27 vs face-to-face 3.79-4.29 on every item (BARS_8 2.52 vs 4.05, BARS_10 2.60 vs 3.95), as the agent reported.
+  - A cached Behav Sci appendix image shows LMS-specific anchors (online office hours, monthly video lecture, resources in the LMS).
+  - JUTLP text carries the face-to-face BARS_1 anchor as quoted.
+  - SPA.por: SPEY1 145/430/115, SPEY6 632/41/3, SPEY8 643/29/0, labels end "< age 18"; ABILITY value labels 0='0-10%'..8='80-90%'; 0 of 719 complete ABILITY rows all-distinct.
+  - All as reported.
+- Gates: normalize 0 of 2; audit 2 PASS, no anomalies; verify_batch MISSING(exempt)=2 (data_labels); lint clean (2 NOT_NEEDED rows in both files); irw-validate ok x2; check_provenance exit 0 (only the standing 4-table `mixed` REVIEW).
+Queue: 13 pending, 0 in_progress. Cap (batch_402) not reached.
+
+## batch_398 — 2026-09-24T14:16-07:00 (3 tables: 3 written / 0 blocked / 0 failed → done 3 / blocked 0 / failed 0, yield 100%)
+Tables: spain_2025_sanitation_aicomfort, spain_2025_sanitation_aiconcern, spain_2025_sanitation_airegulation. Three agents, one per table, no kills. Circuit breaker: 0% failed. First round of the spain_2025_sanitation_* family (13 tables). All three come from one source: CIS Estudio 3531 "Barómetro sanitario 2025 (tercera oleada)", Nov 2025, N=2427 (MD3531.zip → 3531.sav / 3531_num.csv; cues3531.pdf). The agents downloaded it independently and got byte-identical zips. Rights: the existing CIS `allow` row applies (widened to all CIS years); agents re-read the reuse page today and it is unchanged. No register rows written.
+- Numbering: batch_397 was the highest below 300, so this is batch_398. It is not in either hole.
+- `spain_2025_sanitation_aicomfort`: done. P22_1-4 × 10 = 40 rows, data_labels. Only the endpoints are labelled (1 "Totalmente incómodo/a", 10 "Totalmente cómodo/a"), so option_text for 2-9 is blank. P22_4 uses the questionnaire's full "…con IA (inteligencia artificial)" wording because the .sav label is truncated.
+- `spain_2025_sanitation_aiconcern`: done. P23/P24 × 5 = 10 rows, data_labels. P24 is shipped as asked, as the elliptical follow-up "¿Y por parte de instituciones públicas?". The referent is in `instrument` and `public_note`, following the ageism_problems precedent. resp 3 is the volunteered "(NO LEER) Regular" code, and the marker is stripped.
+- `spain_2025_sanitation_airegulation`: done. P25_1-3 × 5 = 15 rows, data_labels. resp 3 is the volunteered neutral code (n 9/4/9), and the "(NO LEER)" marker is stripped. The P25_3 lower-case "inteligencia artificial" follows the .sav and the marginals.
+- All three have translation_source=machine_translation (CIS publishes in Spanish only), so each owes an issues-page entry once live.
+- Step 5b orchestrator re-check (3531_num.csv vs live irw_table_sets per_item):
+  - P22 n 2400/2384/2392/2396 (98/99 dropped, resp 1-10).
+  - P23/P24 670/549/17/720/430 and 397/479/18/839/659 (n 2386/2392).
+  - P25 906/928/9/364/129, 1369/795/4/175/62, 1174/854/9/261/89 (n 2336/2405/2387).
+  - Every per-item n matches live. All as reported.
+- Gates:
+  - normalize: 0 of 3 files changed.
+  - audit: 3 PASS, no anomalies.
+  - verify_batch: MISSING(exempt)=3 (data_labels).
+  - lint: clean (3 NOT_NEEDED rows in both files).
+  - irw-validate: ok ×3.
+  - check_provenance: exit 0 (only the standing 4-table `mixed` REVIEW).
+Queue: 10 pending, 0 in_progress. Cap (batch_402) not reached.
+
+## batch_399 — 2026-09-24T14:27-07:00 (3 tables: 3 written / 0 blocked / 0 failed → done 3 / blocked 0 / failed 0, yield 100%)
+Tables: spain_2025_sanitation_coordination, spain_2025_sanitation_diagnostics, spain_2025_sanitation_digital. Three agents, one per table, no kills. Circuit breaker: 0% failed. Second round of the spain_2025_sanitation_* family. All three reused the batch_398 CIS Estudio 3531 cache (MD3531.zip → 3531.sav / 3531_num.csv, cues3531.pdf), each copying it into its own .cache dir. Rights: the existing CIS `allow` row applies. Agents re-read the reuse page today and it is unchanged. No register rows written.
+- Numbering: batch_398 was the highest, so this is batch_399 (not in either hole).
+- `spain_2025_sanitation_coordination`: done, with caveats. P11/P13, 8 rows, data_labels.
+  - P13 resp 3 ("No le han recetado medicamentos en la sanidad pública", n 55) is a volunteered not-applicable code that the .do keeps, so P13 is nominal, not ordinal. This is a property of the response data, disclosed in public_note.
+  - The agent flagged the dictionary Description ("Perceived coordination and listing waits") as mismatched: the waiting-list question P12 sits in `_system` by design (data/spain_2025_sanitation.do:36). The fix is to reword the dictionary; the data is fine.
+- `spain_2025_sanitation_diagnostics`: done. P10_1-4 (TAC/Escáner, Ecografía, Resonancia, Colonoscopia) × Sí/No = 8 rows, data_labels. `instructions` carries the printed interviewer direction (pregnancy ultrasounds and screening count as No), following the batch_390 precedent.
+- `spain_2025_sanitation_digital`: done. P14/P15/P17/P20, 9 rows, data_labels.
+  - Every (NO LEER) volunteered code is dropped to missing by the .do (largest: P15 code 4, n 86). public_note says so.
+  - P17 resp 2 follows the questionnaire wording. The .sav label adds a comma.
+- All three have translation_source=machine_translation, so each owes an issues-page entry once live.
+- Step 5b orchestrator re-check (3531_num.csv vs live irw_table_sets per_item):
+  - P11 194/932/772/271/176 = 2345; P13 92/2277/55 = 2424.
+  - P10_1-4 Sí 347/490/330/129, n 2418/2417/2415/2420.
+  - P14 969/1433 = 2402; P15 1005/1320 = 2325; P17 550/1132/698 = 2380; P20 1535/874 = 2409.
+  - Every per-item n matches live. All as reported.
+- Gates:
+  - normalize: 0 of 3 files changed.
+  - audit: 3 PASS, no anomalies.
+  - verify_batch: MISSING(exempt)=3 (data_labels).
+  - lint: clean (3 NOT_NEEDED rows in both files).
+  - irw-validate: ok ×3.
+  - check_provenance: exit 0 (only the standing 4-table `mixed` REVIEW).
+Queue: 7 pending, 0 in_progress. Cap (batch_402) not reached.
+
+## batch_400 — 2026-09-24T14:36 (closed 14:43)
+Tables: spain_2025_sanitation_hospital, spain_2025_sanitation_mental, spain_2025_sanitation_primary. Three agents, one per table, no kills. **3 written / 0 blocked / 0 failed**, yield 100%. Circuit breaker: 0% failed. Third round of the spain_2025_sanitation_* family. Same source as batch_398/399: CIS Estudio 3531 "Barómetro sanitario 2025 (tercera oleada)", Nov 2025, N=2427. Each agent copied the batch_399 cache into its own .cache dir. Rights: the existing CIS `allow` row applies. All three re-read the reuse page (HTTP 200, both key phrases present). No register rows written.
+- Numbering: batch_399 was the highest below 300, so this is batch_400 (not in either hole).
+- `spain_2025_sanitation_hospital`: done. P9B_1-2 (Sí/No), P9C_1-5 (1-10, only 1 and 10 labelled, 2-9 blank), P9D (1-5). 59 rows, data_labels.
+  - The block was asked only of those admitted to a public hospital in the last 12 months (248 ids).
+  - The P9C rows were read in rotating order.
+  - No respondent chose 2 on P9C_1 or P9C_4, so those items have 9 levels. The option row still ships because the option was offered.
+  - P9B_2 follows the questionnaire wording, not the .sav label.
+- `spain_2025_sanitation_mental`: done. P8D_1-4 (Sí/No), P8E/P8F/P8G (1-5). 23 rows, data_labels, every point labelled.
+  - P8D was asked only of the 155 seen by a psychiatrist, psychologist or other specialist. P8E-G were asked of 233-239.
+- `spain_2025_sanitation_primary`: done. P5D_1-4, P5E_1-5 (1-10, endpoints only), P5F, P5G, P5H. 70 rows, data_labels.
+  - P5D_3 was asked only of in-person visits (n 1585). P5H was asked only if P5G=1 (n 1026).
+- All three have translation_source=machine_translation, so each owes an issues-page entry once live.
+- Step 5b orchestrator re-check: I applied the .do drop codes to 3531_num.csv and compared with live irw_table_sets per_item.
+  - All 27 per-item n's match (hospital 243/242/247/248/242/242/248/248; mental 155/155/152/155/239/235/233; primary 1922/1948/1585/1954/1969/1893/1958/1955/1969/1971/1967/1026).
+  - The level counts match too, including the 9-level P9C_1/P9C_4. All as reported.
+- Gates:
+  - normalize: 0 of 3 files changed.
+  - audit: 1 PASS, 2 WARN. Both WARNs are explained in notes.csv and both are properties of the response data, not itemtext defects.
+    - mental: the row-count anomaly on P8E-G is the P8D specialist filter.
+    - primary: the row-count anomaly on P5H is the P5G=1 filter. The 57.1% blank option_text is the unlabelled P5E points 2-9.
+  - verify_batch: MISSING(exempt)=3 (data_labels).
+  - lint: clean (3 NOT_NEEDED rows in both files).
+  - irw-validate: ok ×3.
+  - check_provenance: exit 0 (only the standing 4-table `mixed` REVIEW).
+Queue: 4 pending (spain_2025_sanitation_regional/services/specialist/system), 0 in_progress. Cap (batch_402) not reached.
+
+## batch_401 — 2026-09-24T14:44 (closed ~14:55)
+Tables: spain_2025_sanitation_regional, spain_2025_sanitation_services, spain_2025_sanitation_specialist. Three agents, one per table, no kills. **3 written / 0 blocked / 0 failed**, yield 100%. Circuit breaker: 0% failed. Fourth round of the spain_2025_sanitation_* family (CIS Estudio 3531, N=2427). Each agent copied the batch_400 cache into its own .cache dir. Rights: the existing CIS `allow` row applies. All three re-read the reuse page (HTTP 200, both key phrases present). No register rows written. All three are data_labels, so there are NOT_NEEDED rows in verification_merged.csv and mapping_verification.csv. Gates: audit 3 PASS with no anomalies; verify 3 MISSING(exempt); lint clean; irw-validate ok x3; check_provenance exit 0.
+- Numbering: the highest existing directory was batch_400, so this is batch_401. It is not in either hole.
+- `spain_2025_sanitation_regional`: done. P19_1-4 (Mejor/Igual/Peor). 12 rows. The single block's lead-in is in `instructions`.
+  - N.S. is heavy and dropped by the .do: 469/421/452/628, so n is 1935/1979/1942/1770.
+- `spain_2025_sanitation_services`: done. P4ES_1-6 (1-10, endpoints only). 60 rows.
+  - P4ES_4 (061/112 emergency lines) loses 500 N.S. + 35 N.C., so n is 1892.
+- `spain_2025_sanitation_specialist`: done. P7C_1-3 (Sí/No), P7D_1-3 (1-10, endpoints only), P7E (1-5 plus 6). 42 rows.
+  - P7E keeps the volunteered code 6 "Depende, en unas consultas mejor, en otras peor". The .do keeps it (it drops only 0/8/9). It ships as an option row with (NO LEER) stripped, and public_note flags it as non-ordinal.
+- Step 5b (orchestrator re-check): live irw_table_sets per-item n matches every agent claim. In 3531_num.csv, P7E code 6 = 8, P4ES_4 98/99 = 500/35, and P19_4 8 = 628.
+Queue: 1 pending (spain_2025_sanitation_system), 0 in_progress. Cap (batch_402) not reached. The next round would be batch_402 itself, which will be the capped final round.
+
+## batch_402 — 2026-09-24T14:53 (1 table, final round: queue exhausted + cap reached)
+- 1 written / 0 blocked / 0 failed; yield 1/1. One agent: only 1 pending row remained.
+- spain_2025_sanitation_system (CIS Estudio 3531, Table 1: system). data_labels, so no verification or verify files. Items P1 (4 options), P2 (1-10, points 2-9 left blank), P12 (3 options); 17 rows. text_source=study_materials, translation_source=machine_translation. An issues-page entry is owed once live.
+  - Caveats (in notes and public_note):
+    - P12 is coded 1 improved / 2 worsened / 3 same, so the middle answer has the top code and the item is unordered as stored. The data were not recoded.
+    - P12 loses 182 N.S. + 8 N.C. to the .do filter.
+    - The dictionary description names only P1/P2, but the .do also puts P12 (waiting lists) in this table.
+  - One respondent answered N.S. on all three items, so the table has 2426 ids.
+- Gates: normalize 0 changes; audit_batch PASS; verify_batch MISSING(exempt); lint clean; irw-validate ok. check_provenance shows only the standing backlog of issues-page entries owed.
+- Step 5b (orchestrator re-check): I tabulated 3531_num.csv myself: P1 8/9 = 6/7, P2 98/99 = 12/9, P12 8/9 = 182/8. After the drops that leaves 2414 + 2406 + 2237 = 7057, which matches the live irw_table_sets n_rows of 7057. Items are {P1,P2,P12} and resp is 1..10.
+- Queue: 0 pending, 0 in_progress. All 30 spain_2025_* tables are done. **Cap reached (batch_402).** No further rounds.
+
+## 2026-09-24 — #2381 slices 5–6 (batch_379–402): 59 uploaded to irw_text, 11 not shipped
+
+Slice 5 (43 queued, 0264ae02) and slice 6 (25, 4133766c, queued by next_slice.sh); cap raised to batch_402 (678ee4c8).
+The chain's 1-in-5 stop tripped twice on non-rights blocks; Ben ruled that only RIGHTS blocks and failures feed it
+(oneoff/itemtext-rights-bank/rights_blocks.py). No rights blocks in either slice. Written: slice 5 36/41 processed
+(2 excluded as wrong-now), slice 6 23/25. All 59 uploaded to irw_text in three groups (379-385, 386-393, 394-402)
+after dry runs (all NEW, none in any shard); verified rows, COUNT(DISTINCT item), no duplicate rows; draft diff = exactly
+these 59. Ben released 2026-09-24 (irw_text 881 tables). Stamped `uploaded=2026-09-24` in 25 provenance files and 59
+mapping rows; removed the 59 CSVs. Issues entries: issues_entries_379-385 (12), 386-393 (21), 394-402 (15).
+
+**Wrong-now, withdrawn (Ben: withdraw first, rebuild later; PR #2410):** DMCT_Addis_2020_MCT (#2408, resp is the answer
+key) and PBS_Surrain_2019_PoB (#2409, two studies' codes mean different questions; 319 duplicated respondents) from the
+item_response_warehouse draft; matosaslopez_2022_bars_teaching (#2412, two BARS instruments under one code set) from
+the _4 draft.
+
+**Held on table-name length (>40 chars), CSVs kept:** goksel_2026_embarrassment_moralityandwarmth (381),
+spain_2026_disinformation_humorperception (391), goldberg_2018_spa_beliefs_about_intelligence (394) — with
+nguyen_2026_autonomy_school_autonomy_support (352) and jian-wen-… (340), five await one ruling (waive or rename).
+
+**No wording published (determinate):** goksel_2026_embarrassment_liking (381), _similarity (382),
+musifeast17_vanderwalle_2025 (384).
+
+**Leads:** the nine spain_2026_disinformation_* dictionary References cite CIS Estudio 3565, source is 3563;
+coh_goodman_2023's response table carries school name/location/age/country of origin (09-19 personal-data lead).
+
+## batch_403 — 2026-09-24T20:30 → 20:41 PDT — 3 tables, 3 written / 0 blocked / 0 failed (yield 3/3)
+
+Three agents, no kills. Numbering: highest existing was batch_402, which is outside both holes, so this round is 403. Queue after round: 76 pending.
+Gates: normalize_nulls changed 1 of 3 files (mft: NA/quoting only). audit_batch: 3 PASS, no anomalies, so no WARNs to explain under Step 5c. verify_batch: PASS=2, MISSING(exempt)=1 (BPAQ is data_labels). lint: 3 rows, no problems. check_provenance: exit 0, nothing for batch_403. irw-validate: jovanovic and mft ok. BPAQ_Christopher_2024_SCSS WARNs name_charset because the live table name is capitalised; the item text is not at fault, as with its PCL5 sibling in batch_315.
+- BPAQ_Christopher_2024_SCSS: 60 rows (12×5), data_labels. Source is the OSF bskn9 Data Dictionary_RMH.xlsx, the same deposit as the PCL5 sibling (batch_315); text_source=study_materials. Dictionary typo "understandin g" corrected. Anchors 1="Almost never" and 5="Almost always", plus the instructions, come from Neff's official SCS-SF form; points 2–4 are left blank. Rights: existing register row (irw#2381 R03). **Orchestrator re-check:** the deposit has 170 respondents, 169 complete. Reversing q1/4/8/9/11/12 gives M 39.99, SD 7.40, matching paper Table 1 (39.99/7.40). Each reversed item equals 6 minus raw, matching the deposit's own r columns, so the live items are raw, not reverse-scored.
+- mft_validationandreplication: 180 rows (36×5), paper_order, canonical_instrument (Atari et al. MFQ-2 appendix, osf br4zf, CC BY 4.0; register row MFQ-2). PARTIAL: verify script 10/10 wording-derived correlation predictions hold (Loyal country block min r .71 vs cross .49; Equal money block .83 vs .66; top pairs Pur2–Pur6 .80, Auth1–Auth2 .82, Care1–Care2 .75, Prop1–Prop5 .67). Order within semantic clusters is not established. **Caveat, public_note set:** the originators' Dec-2022 English .docx words item 27 (MFQ_Prop5) differently from the appendix. The appendix wording shipped. The study paper (Zakharin & Bates 2023, PAID) was Cloudflare-walled, so which version was administered is unconfirmed.
+- jovanovic_2026_conscientiousness_yips: 40 rows (10×4), paper_order, translated_substitute (official_instrument_english: Renshaw YIEPS items 1–10, osf ets7c; register row YIEPS). The study administered it in Serbian, and no Serbian wording is published, so the _translated columns are empty. Verification is **NO_ROUTE for item identity**. Its verify PASS covers response direction only (item mean r=+.633 with SPANE-NA, n=452) and the absence of reverse keying (item-total .27–.65). public_note discloses both the stand-in and the assumed order. **Orchestrator re-check:** the deposit has 8 fractional (imputed) YIPS values across items 2 (1), 4 (3), 6 (1), 7 (2) and 8 (1), among 452 respondents. The processing script drops them, so this is not a mismatch with the live table. The Serbian validation paper (Jovanović & Renshaw 2023, JPA, doi 10.1080/00223891.2023.2166518, paywalled) is the lead for wording and order.
+Cap check: the Step 0 cap is batch_430, so it is not reached.
+
+## batch_404 — 2026-09-24 (claimed 20:43 PDT) — 3 tables, 3 agents
+
+**2 written+done / 1 blocked / 0 failed** (0% failed, so the breaker is not tripped). Yield: 2 of 3 tables promoted; 3 of 3 CSVs written.
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `SABFI2_Gallardo_Pujol_2018_Constru` | **done** | 117 (13×9) | `paper_order` | PARTIAL, verify PASS |
+| `SABFI2_Gallardo_Pujol_2018_Trust` | **done** | 25 (5×5) | `paper_order` | PARTIAL, verify PASS |
+| `goksel_2026_embarrassment_warmth_competence` | **blocked on naming, CSV retained** | 40 (8×5) | `data_labels` | NOT_NEEDED |
+
+Gates:
+- normalize_nulls: 0 of 3 files changed.
+- audit_batch: 3 PASS with no anomalies, so there are no WARNs to explain.
+- verify_batch: PASS=2, MISSING(exempt)=1 (the data_labels table).
+- lint_verification: clean. 3 rows; the NOT_NEEDED row is in both files.
+- check_provenance: exit 0. It reported only the standing `mixed` REVIEW list.
+- irw-validate:
+  - 1 ERROR, `name_length` on goksel (43 chars).
+  - 2 WARNs, `name_charset` on the SABFI2 tables. The live names are mixed-case, as with every SABFI2 sibling.
+
+- **SABFI2 Constru**: the 13-item ISP self-construal set from Vignoles et al. (2016), in three blocks (1–4, 5–9, 10–13).
+  - Source is one hop off the deposit, like batch_166 Micro/Tight: `Spanish ISP.pdf` pp. 24–27 is image-only and was read by eye, so it is worth a human spot-check.
+  - The English in `_translated` is the ISP master. It diverges from the administered Spanish on Constru1 ("inadecuado para la situación" vs "may sometimes cause conflict") and on Constru11. This is disclosed in public_note.
+  - Verification: all 21 published subscale M/SD/α values reproduce, and all 22 within-block signs match. The order within {1,4}, {2,3}, {5,8}, {6,7,9}, {10,11} and {12,13} is not pinned.
+  - Rights: the register row SC-Vignoles (`ship_with_note`, irw#2381 R26) was applied.
+  - Paper-level oddity, not an IRW defect: the authors' Self-Expression score is keyed harmony-high, contrary to the postprint's text. **Orchestrator Step 5b re-check CONFIRMED it** from irw_fetch: harmony-high keying gives M 4.10 / SD 1.50, which matches the published 4.09/1.50; independence-high keying gives 5.90.
+- **SABFI2 Trust**: the 5-item General Trust Scale from Yamagishi et al. (2015), as run by the ISP.
+  - Spanish comes from `Spanish ISP.pdf` pp. 29–30, read by eye, so it needs a spot-check. The ISP translation file confirms the same items in the same order.
+  - Rights: the register row GTS-Yamagishi (`ship_with_note`, R29) was applied.
+  - Verification is PARTIAL: Trust1↔Trust2 is unpinned, and Trust5 is placed by elimination.
+- **goksel warmth_competence**: a clean data_labels extraction from the OSF jwdq6 codebook, Study 1 sheet.
+  - Orchestrator re-check: live n=600, and the 8 means match the deposit.
+  - **Blocked solely on `name_length`** (43 chars > 40), following the latest precedent: batch_381's `moralityandwarmth` from the same deposit. Retry test NO.
+  - To unblock: rename the live table to ≤40 chars and rename the CSV to match, or waive the cap. The done-vs-blocked precedent split (irw#2365) is still open for a human. A pending_index_notes row was added.
+- **Metadata:** the SABFI2 family's mixed-case names keep drawing `name_charset` WARNs, which is known and not new.
+
+Cap check: the Step 0 cap is batch_430, so it has not been reached.
+
+## batch_405 — 2026-09-24T21:01:59-07:00
+
+3 tables, 3 agents. **3 written+done / 0 blocked / 0 failed** (0% failed, so the breaker is not tripped). Yield: 3 of 3.
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `goksel_2026_embarrassment_wcm` | **done** | 60 (12×5) | `data_labels` | NOT_NEEDED |
+| `ren_2024_loneliness` | **done** | 9 (3×3) | `data_labels` | NOT_NEEDED |
+| `act_kay_2025` | **done** | 28 (4×7) | `paper_explicit` | VERIFIED, verify PASS |
+
+Gates:
+- normalize_nulls: 0 of 3 files changed.
+- audit_batch: 3 PASS with no anomalies, so there are no WARNs to explain.
+- verify_batch: PASS=1, MISSING(exempt)=2 (the data_labels tables).
+- lint_verification: clean. 3 rows; the NOT_NEEDED rows are in both files.
+- irw-validate (upload profile): all 3 ok, nothing to report. goksel wcm is 29 chars, so unlike its batch_404 sibling it clears name_length.
+- check_provenance: exit 0. It reported only the standing REVIEW lists.
+
+- **goksel wcm**: pools Studies 2/4/6. The OSF jwdq6 codebook labels WCM_1..12 identically on all three sheets. Shipped the Study 2 instructions with `[name]`; the per-study referent difference is disclosed in public_note. Study 4's print typo "trstworthy" was normalised to "trustworthy", which is how the codebook and the other two prints spell it. Points 2 and 4 are unlabeled and left blank.
+  - Orchestrator re-check: live has 1500 ids, equal to the agent's 399+299+802.
+- **ren loneliness**: a 3-item UCLA short form. Codes follow the .sav labels (left out / isolated / lack companionship), NOT the Hughes 2004 order. The survey was in Chinese but no Chinese wording was published, so this is a `translated_substitute`. The middle anchor "Some of the time" was supplied from Hughes 2004 and disclosed as `translation_source=mixed`.
+  - Orchestrator re-check CONFIRMED from irw_fetch: per-item counts L1 1169/257/161, L2 1260/227/100, L3 1356/156/75. The summed score over 1587 complete respondents gives M 3.8, SD 1.6, against Table 2's 3.83/1.56.
+- **act_kay_2025**: the study's own Qualtrics printouts on OSF uzrgk tag each statement with its export column (4/4 at T1 and T2), so every item is pinned. verify prints PASS, and a swapped copy FAILs. The T1 printout's `acts_` tag prefix is a display typo for `act_`, recorded in provenance.
+  - Lead for the pending siblings (`cf`/`cmq`/`nfc`/`onecm_kay_2025`): the same printouts carry their wording and tags. Likert blocks are stored as −3..3 plus 4, but the `cf` items get no shift.
+
+Cap check: the Step 0 cap is batch_430, so it has not been reached.
+
+## batch_406 — 2026-09-24T21:11:11-07:00
+
+3 tables, 3 agents, all from the Kay & Slovic 2025 OSF uzrgk deposit. **3 written+done / 0 blocked / 0 failed** (0% failed, so the breaker is not tripped). Yield: 3 of 3.
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `cf_kay_2025` | **done** | 77 (11×7) | `paper_order` | PARTIAL, verify PASS |
+| `cmq_kay_2025` | **done** | 35 (5×7) | `paper_explicit` | VERIFIED, verify PASS |
+| `gcb5_2025` | **done** | 35 (5×7) | `paper_explicit` | VERIFIED, verify PASS |
+
+Gates:
+- normalize_nulls: 0 of 3 files changed.
+- audit_batch: 3 PASS with no anomalies, so there are no WARNs to explain.
+- verify_batch: PASS=3.
+- lint_verification: clean, 3 rows. No data_labels tables, so no NOT_NEEDED rows were owed.
+- irw-validate (upload profile): all 3 ok.
+- check_provenance: exit 0. It reported only the standing REVIEW lists.
+
+- **cmq / gcb5**: the same route as act_kay_2025. The Qualtrics printouts (au83k T1, q9m27 T2) tag every statement with its export column: 5/5 in each wave for both tables. A swapped control FAILs. Rights were applied from the register rows CMQ (R12) and GCBS (R11). The GCBS row's owed check is done: the GCB-5 wording matches Brotherton 2013 items 6/8/10/12/14 verbatim.
+- **gcb5 data defect (response side, not itemtext)**: the live `gcb5_2025` stores resp as **-3..3**, but the committed `data/kay_2025.R` ends df_gcb5 with `mutate(resp = resp + 4)`, which gives 1..7, the same as the live siblings. **Orchestrator Step 5b re-check CONFIRMED it** from irw_fetch: live resp counts are -3:924 … 3:339, and the W1 means are -0.543/-0.248/-0.067/-0.480/-0.567, i.e. the raw deposit values. The item text follows the live table. Either the live table or the script needs reconciling; the table name is also off-pattern (no `kay_`). This is noted in notes.csv, and no issue has been filed yet.
+- **cf_kay_2025**: the coin-toss sequences carry empty export tags in the printout, so code↔sequence rests on printed order (`paper_order`).
+  - Route 4 (streakiness) pins the set {1,2,3,10}, which is exactly the sequences with a run of ≥5; the chance of that is 1/210. It also pins code 3 as the only run of 6.
+  - **Orchestrator re-check CONFIRMED** the means from live: 3.92 (code 3, run 6), 3.65/3.08/3.05 (codes 2/1/10, run 5), then 2.52–2.90 for the run 2–3 codes.
+  - It does not order codes 4–9, or 1 vs 10, so verification is PARTIAL.
+  - Endpoints only (1 Completely Random, 7 Completely Determined); points 2–6 are left blank.
+  - A .qsf would settle the order, but none is on the node.
+- Remaining Kay siblings still pending: `nfc_kay_2025` and `onecm_kay_2025`. The same printouts are the lead.
+
+Cap check: the Step 0 cap is batch_430, so it has not been reached.
+
+## batch_407 — 2026-09-24T21:18:46-07:00
+
+3 tables, 3 agents. **3 written+done / 0 blocked / 0 failed** (0% failed, so the breaker is not tripped). Yield: 3 of 3. This closes out the Kay & Slovic 2025 (OSF uzrgk) siblings.
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `nfc_kay_2025` | **done** | 49 (7×7) | `paper_explicit` | VERIFIED, verify PASS |
+| `onecm_kay_2025` | **done** | 7 (1×7) | `paper_explicit` | VERIFIED, verify PASS |
+| `znidarsic_2021_coworker_support` | **done** | 45 (9×5) | `data_labels` (positional codes) | VERIFIED, verify PASS |
+
+Gates:
+- normalize_nulls: 0 of 3 files changed.
+- audit_batch: 3 PASS with no anomalies, so there are no WARNs to explain.
+- verify_batch: PASS=3.
+- lint_verification: clean, 3 rows. All three carry a verification row (znidarsic is data_labels but codes are positional, so it was verified rather than exempted), so no NOT_NEEDED rows were owed.
+- irw-validate (upload profile): all 3 ok.
+- check_provenance: exit 0. It reported only the standing REVIEW lists.
+
+- **nfc_kay_2025** is the **Need for Chaos** scale (Petersen, Osmundsen & Arceneaux 2023), not Need for Cognition. The dictionary, `data/kay_2025.R` and the printout agree. The T1 printout (au83k) tags all 7 statements; T2 has no nfc tags, which fits a single administration. Unlike gcb5_2025, the live table has the +4 shift: deposit+4 reproduces live exactly (n=492 per item, means 1.40–2.76). Rights: register row Need for Chaos (irw#2381 R12, ship).
+- **onecm_kay_2025**: One-Item Conspiracy Measure (Lantian et al. 2016). The printouts tag it in both waves with identical wording. Deposit+4 matches live per-level counts in both waves (W1 29/57/60/66/134/91/55, n=492; W2 n=389), and the reversed reading fails. Lantian's preamble was not administered and is not shipped (noted). The table is only one item, so under the no-single-item-scales rule the *data* table is off-pattern. That is not an itemtext defect, and the item text describes the live table as it stands.
+- **znidarsic_2021_coworker_support**: the text is the PLOS S1 Data xlsx column headers. Codes are assigned by position (`df.iloc[:,18:27]`), so the table was verified anyway. Each live item's 5-cell count vector matches exactly one of the 18 support columns: the expected co-worker column, 45/45 cells. That separates CS05 and CS07 despite equal means, and it excludes the identically worded leader block. `translated_substitute`/`study_supplied`. The Slovenian administration is inferred, not stated (public_note).
+  - **Orchestrator re-check CONFIRMED** the anchor conflict from the paper text: Methods says "1 (never) to 5 (very often)", and Results says "1 meant never and 5 meant always". The table ships "very often".
+  - The deposit has 247 rows, against 343 in the paper.
+  - Sibling tables leader_support / org_practices / wf_balance can reuse the same xlsx route.
+
+Cap check: the Step 0 cap is batch_430, so it has not been reached.
+
+## batch_408 — 2026-09-24T21:27:07-07:00
+
+3 tables, 3 agents. **3 written+done / 0 blocked / 0 failed** (0% failed, so the breaker is not tripped). Yield: 3 of 3. This closes out the Znidarsic & Bernik 2021 (PLOS ONE e0245078) siblings; every table was built the same way as batch_407's coworker_support.
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `znidarsic_2021_leader_support` | **done** | 45 (9×5) | `data_labels` (positional codes) | VERIFIED, verify PASS |
+| `znidarsic_2021_org_practices` | **done** | 125 (25×5) | `data_labels` (positional codes) | VERIFIED, verify PASS |
+| `znidarsic_2021_wf_balance` | **done** | 20 (4×5) | `data_labels` (positional codes) | VERIFIED, verify PASS |
+
+Gates:
+- normalize_nulls: 0 of 3 files changed.
+- audit_batch: 3 PASS with no anomalies, so there are no WARNs to explain.
+- verify_batch: PASS=3.
+- lint_verification: clean, 3 rows. All three were verified because their codes are positional, so no NOT_NEEDED rows were owed.
+- irw-validate (upload profile): all 3 ok.
+- check_provenance: exit 0. It reported only the standing REVIEW lists.
+
+Notes:
+- All three are `translated_substitute`/`study_supplied`. The Slovenian administration is inferred, not stated. Rights come from the register row CLASS-closed-silent-adaptation (irw#2381 R16), which names all three tables. The register has no separate row for the Brough et al. scale or the Family-Friendly Company catalogue; its catalogue page carries no rights terms beyond a footer.
+- Mapping: each live item's 5-cell count vector matches exactly one deposit column, and it is always the column at the script's position (leader 45/45 cells, practices 125/125, wfb 20/20). The leader items are told apart from the co-worker columns even where the two blocks use identical wording.
+- Anchors were taken per block from Methods 2.1. Each block conflicts with the Results paraphrase, and each conflict is disclosed:
+  - leader: never / very often (Results says always).
+  - practices: completely disagree / strongly agree (Results says strongly disagree / very agree).
+  - wfb: completely disagree / completely agree.
+- **wf_balance WFB2 overrides the source.** The item is negatively worded but stored reverse-scored, so it ships as 1=completely agree, 5=completely disagree. The paper never states that it was recoded. **Orchestrator re-check CONFIRMED** this from the raw xlsx: WFB2 correlates +0.72, +0.73 and +0.77 with the other three items, and alpha is 0.923 as stored against -0.016 when WFB2 is flipped.
+- Data: the deposit has 247 rows against 343 in the paper (as in batch_407). The script drops sentinels: 41 in LS06, 55 in OP04 and 22 in OP12, which leaves each of those items at n=246.
+
+Cap check: the Step 0 cap is batch_430, so it has not been reached.
+
+## batch_409 — 2026-09-24T21:29:32-07:00
+
+3 tables, 3 agents. **3 written+done / 0 blocked / 0 failed** (0% failed, so the breaker is not tripped). Yield: 3 of 3. All three are the last siblings of already-shipped sources, so each agent was pointed at its siblings' batch conventions.
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `li_2021_org_cultural_diversity` | **done** | 63 (9×7) | `paper_order` | PARTIAL, verify PASS |
+| `butt_2022_performance_impact` | **done** | 63 (9×7) | `data_labels` | NOT_NEEDED |
+| `hoorani_2022_epreas` | **done** | 25 (5×5) | `data_labels` | VERIFIED, verify PASS |
+
+Gates: normalize_nulls fixed 1 file (li_2021); audit_batch 3 PASS, no WARNs; verify_batch 2 PASS + 1 exempt; lint clean; irw-validate ok x3; check_provenance exit 0 (none of this batch is flagged).
+
+Notable:
+- `li_2021_org_cultural_diversity` is `paper_order`, not the siblings' `paper_explicit`: the S1 Appendix prints two unnumbered-prefix sub-blocks (management 1-4, responsiveness 1-5), so OCD1-4/OCD5-9 is by listing order. Route 1 (refitting the paper's 5-item CFA) reproduces the Table 2 loadings to 4 dp and is uniquely best of 15,120 column assignments, but it ties columns to codes, not to wording. The 4|5 sub-block boundary is not established: OCD5 loads with the management items (0.729). option_text blank (seven unlabelled boxes).
+- `hoorani_2022_epreas` — **response-data defect, confirmed by the orchestrator**: wave 2 is an exact copy of wave 1 (535/535 identical id×item pairs for every item; 5,350 rows = 2,675 real answers ×2). The agent says the caregiver section was asked in round two only; that part was not re-checked. It's disclosed in the notes and public_note. No GitHub issue filed — a candidate for a data-side issue, and the other `hoorani_2022_*` tables should be checked for the same carry-forward. The respondent is the caregiver, which the instrument field says.
+- `butt_2022_performance_impact`: PI5 was dropped by the authors (PI5_del), so it isn't in the table; all 63 item×level cells match the .sav.
+
+Cap check: the Step 0 cap is batch_430, so it has not been reached.
+
+## batch_410 — 2026-09-24T21:48:48-07:00
+
+3 tables claimed, 3 agents. **3 written / 0 blocked / 0 failed**, so the yield is 3/3. All three come from one source: Liu & Wang 2023, PLOS ONE e0295133, S1 File questionnaire annexure.
+
+| table | status | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `liu_2023_attitude` | **done** | 15 (3×5) | `paper_order` | PARTIAL, verify PASS |
+| `liu_2023_brand_trust` | **done** | 20 (4×5) | `paper_order` | PARTIAL, verify PASS |
+| `liu_2023_purchase_behavior` | **done** | 15 (3×5) | `paper_order` | PARTIAL, verify PASS |
+
+Gates:
+- normalize_nulls fixed 2 files: brand_trust and purchase_behavior had used a different blank-field convention.
+- audit_batch: 3 PASS, no WARNs.
+- verify_batch: 3 PASS.
+- lint: clean.
+- irw-validate: ok ×3.
+- check_provenance: exit 0, and none of this batch's tables are flagged.
+
+Notable:
+- All three tables have the same settings:
+  - `text_source=translated_substitute` and `translation_source=study_supplied`: the survey was administered in Chinese, but the supplements contain only the authors' English.
+  - Only the endpoints 1 and 5 are labelled.
+  - The rights ruling is R16 (irw#2381), `CLASS-closed-silent-adaptation`.
+  - Within each block, item order follows the listing order. Block membership is confirmed by the published alpha/CR/AVE and the Table 5 paths, which match to within 0.0005.
+- **Source defect, confirmed by the orchestrator:** the per-item loading column in Table 2 of the paper is shifted by one block for ATT/SN/PBC. The row printed as ATT is really SN's loadings, the one printed as SN is PBC's, and the one printed as PBC is ATT's. A plain 3-factor CFA gives SN 0.743/0.754/0.807 against 0.742/0.755/0.807 printed as ATT, and PBC 0.784/0.834/0.818 against 0.785/0.838/0.813 printed as SN. The xlsx labels are correct, because Table 5 breaks if the columns are relabelled. This matters for anyone verifying `liu_2023_subjective_norm` (still pending) or `liu_2023_perceived_control` against those loadings.
+- The orchestrator's merge found a malformed provenance row: the attitude agent's own sed edit had left bare quotes in the note, producing 20 fields and crashing verify_batch. The agent rewrote the row with csv.writer, and it is now 8 fields.
+
+Cap check: the Step 0 cap is batch_430, so it has not been reached.
+
+## batch_411 — 2026-09-24T22:05-07:00
+
+3 tables claimed, 3 agents. **3 written / 0 blocked / 0 failed**, so the yield is 3/3.
+
+| table | status | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `liu_2023_subjective_norm` | **done** | 15 (3×5) | `paper_order` | PARTIAL, verify PASS |
+| `zhang_2024_expertise` | **done** | 15 (3×5) | `paper_order` | PARTIAL, verify PASS |
+| `jiang_2024_ptsexp` | **done** | 35 (5×7) | `data_labels` | NOT_NEEDED |
+
+Gates:
+- normalize_nulls fixed 1 file (jiang).
+- audit_batch: 3 PASS, no WARNs.
+- verify_batch: 2 PASS, plus 1 exempt (data_labels).
+- lint: clean.
+- irw-validate: ok ×3.
+- check_provenance: exit 0. `jiang_2024_ptsexp` is listed as HELD IRW-generated content (`machine_translation`), so it owes an issues-page line when it ships.
+
+Notable:
+- `liu_2023_subjective_norm` is the last of the Liu & Wang 2023 set from batch_410, with the same R16 ruling. It confirms the Table 2 loading misprint recorded in batch_410: the published "ATT" row matches live SN at 0.741/0.756/0.806. **Threshold caveat:** the agent relaxed the verify script's runner-up rule after seeing a FAIL (the PI row sits 0.0043 away, inside the sibling's 0.005 tolerance). The SN-vs-PI separation actually rests on all 8 Table 5 paths reproducing within 0.0005, so the PASS stands, but the threshold was chosen post hoc.
+- `zhang_2024_expertise`: the source typo "profession-al" was normalised to "professional" and disclosed in provenance.
+- **Response-data defect, re-checked by the orchestrator. The agent's framing was corrected.** In the jiang_2024 source .sav, `index` (renamed to `id`) has 707 distinct values over 1792 rows. The agent said different respondents share ids. In fact, rows sharing an index are **identical on all 126 response columns** and differ only in Gender/Age. Live `jiang_2024_ptsexp` has 8960 rows and 707 ids, with every id×item cell present 2–3 times (1645 ×2, 1890 ×3) and 0 of 3535 cells disagreeing. That is the dup_id_item pattern (#1842), not an id collision. The paper reports N=1792. This probably affects every `jiang_2024_*` table built by `data/jiang_2024_student_thriving.py`. It needs a data-side decision (not filed as an issue). The item text is unaffected.
+
+Cap check: the Step 0 cap is batch_430, so it has not been reached.
+
+## batch_412 — 2026-09-24T22:06-07:00
+
+3 tables claimed, 3 agents. **3 written / 0 blocked / 0 failed**, so the yield is 3/3.
+
+| table | status | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `jiang_2024_ptsinv` | **done** | 56 (8×7) | `data_labels` | NOT_NEEDED |
+| `jiang_2024_ptspr` | **done** | 35 (5×7) | `data_labels` | NOT_NEEDED |
+| `wu_2024_video_addiction` | **done** | 70 (14×5) | `reconstructed` | PARTIAL, verify PASS |
+
+Gates:
+- normalize_nulls: 0 of 3 files changed.
+- audit_batch: 3 PASS, no WARNs.
+- verify_batch: 1 PASS, plus 2 exempt (data_labels).
+- lint: clean.
+- irw-validate: ok ×3.
+- check_provenance: exit 0. `jiang_2024_ptspr` is listed as HELD IRW-generated content (`machine_translation`). `jiang_2024_ptsinv` and `wu_2024_video_addiction` are `mixed`. Both of those include project-written English, so all three owe an issues-page line when they ship.
+
+Notable:
+- Both jiang tables take their text from the variable labels and value labels in the PLOS ONE S1 Data `.sav`, as in batch_411. The rights register's `ship_with_note` verdict (irw#2381, 2026-09-23) was applied as recorded.
+- `wu_2024_video_addiction`: the text is from Qin et al. 2019 Table 1, the scale's development paper, because Wu publishes no Chinese wording. The appendix order does not reproduce the published alphas: it misses by up to 0.069, while the Table 1 blocks reproduce all four subscale alphas and the total (0.904) to 3dp. The shipped diagnostic-item placement is the only one of 240 within-block alternatives that gives the published 132/560 addicts. Order within the D1/D3, D2/D4/D5, D6/D8 and D9/D10/D11 blocks is not established, hence PARTIAL. The availability audit had marked this table UNAVAILABLE. That was wrong, because Qin prints all 14 items.
+- **Response-data defect, re-checked by the orchestrator. Confirmed, and it extends the batch_411 finding.** Live `jiang_2024_ptsinv` has 14336 rows and 707 ids, with id×item copies at 2632 ×2 and 3024 ×3 and 0 disagreeing cells. Live `jiang_2024_ptspr` has 8960 rows and 707 ids, with 1645 ×2 and 1890 ×3 and 0 disagreeing. That is the same dup_id_item pattern (#1842) as `jiang_2024_ptsexp`. It still needs a data-side decision and has not been filed. The item text is unaffected.
+
+Cap check: the Step 0 cap is batch_430, so it has not been reached.
+
+## batch_413 — 2026-09-24T22:20-07:00
+
+3 tables claimed, 3 agents. **3 written / 0 blocked / 0 failed**, so the yield is 3/3. There were no kills and no rate limits.
+
+| table | status | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `xiao_2024_hierarchical_plateau` | **done** | 20 (4×5) | `paper_order` | NO_ROUTE (item identity); verify PASS on direction |
+| `xiao_2024_taking_charge` | **done** | 20 (4×5) | `paper_order` | NO_ROUTE (item identity); verify PASS on direction |
+| `li_2025_socmedia_enjoyment` | **done** | 20 (4×5) | `data_labels` | NOT_NEEDED |
+
+Gates:
+- normalize_nulls: fixed 1 of 3 files (`xiao_2024_hierarchical_plateau`, 21 lines).
+- audit_batch: 3 PASS, no WARNs.
+- verify_batch: 2 PASS, plus 1 exempt (data_labels).
+- lint: clean.
+- irw-validate: ok ×3.
+- check_provenance: exit 0. The irw_site checkout is on branch `validate-pin-1-2-0`, so the disclosure check was reported but not enforced.
+
+Notable:
+- **The two xiao_2024 tables** come from PLOS ONE 10.1371/journal.pone.0315916.
+  - The Chinese text is from the administered questionnaire (S1 File, s002) and the English is the study's own (S2 File, s003), so `translation_source=study_supplied`.
+  - The xlsx deposit is unlabelled and the paper has no per-item statistics, so HPn/TCn = questionnaire item n rests on numbering.
+  - The verify scripts pin three things: the live per-item counts match the deposit, the response direction matches the paper (scale means 2.432/3.759 against 2.375/3.790; r(TC,HP) −0.550 against −0.525), and no item is reverse-keyed.
+  - Rights: register class ruling R16 (irw#2381).
+- **Source override, re-checked by the orchestrator. Confirmed.** For `xiao_2024_taking_charge`, the article's Measures section says "1 (strongly disagree) to 5 (strongly agree)". Both administered questionnaires print frequency anchors instead: s002 line 131 has 1=非常不频繁..5=非常频繁, and s003 line 178 has "Very Infrequently … Very frequently". The questionnaire anchors shipped, with a public_note.
+- `xiao_2024_hierarchical_plateau`: the study's English renders the anchors 非常不符合..非常符合 as Strongly disagree..Strongly agree. That was shipped as printed and disclosed.
+- **Stale processing-script header, confirmed.** `data/xiao_2024_taking_charge.py` lines 31–33 say the stems are "not in this deposit or in the article". They are printed in the paper's S1/S2 supplements. This is a comment-only fix and has not been made.
+- `li_2025_socmedia_enjoyment` uses the same S2 `.sav` as its five siblings (batches 074–076).
+  - The agent recomputed alpha as 0.900, against the published 0.900.
+  - The shipped English follows the S1 File's "sports tourism" rather than the article body's "sports travel". The orchestrator checked both strings in the cached sources.
+  - `translation_source=mixed`: "Disagree/Neutral/Agree" are IRW's renderings, as in the siblings, so the table owes an issues-page line when it ships. The siblings already have lines there.
+  - Rights: register R14 `ship_with_note`.
+
+Cap check: the Step 0 cap is batch_430, so it has not been reached.
+
+## batch_414 — 2026-09-24 22:18 PDT — 3 tables, 3 written / 0 blocked / 0 failed (yield 100%)
+
+Three agents, no kills. Every gate came back clean: normalize_nulls found nothing to change, and audit_batch gave 3 PASS with no WARNs, so Step 5c had nothing to explain. verify_batch gave 2 PASS plus 1 exempt (data_labels), lint_verification found no problems, irw-validate was ok on all 3, and check_provenance exited 0.
+
+- `ni_2025_knowledge_transfer` (20 rows) and `ni_2025_relationship_network` (40 rows): these are the siblings of the batch_118 ni_2025_* tables, from Ni & Wang 2025 PLOS ONE e0326490 (CC BY 4.0) §3.2. Both are `paper_order` / `translated_substitute` / `study_supplied` and ship Chinese-administered, English-only.
+  - The mapping check is PARTIAL on both and follows the siblings. For each scale, only one permutation of the codes reproduces the Table 3 (image) loadings within rounding:
+    - KT: max deviation 0.0003; next best 0.0120.
+    - RN: 1 of 40,320 permutations fits within 0.0005; next best 0.0020.
+  - Alpha and scale mean also reproduce (KT 0.949 / 3.2409; RN 0.949 / 3.9328). The orchestrator re-ran both verify scripts and both gave PASS.
+  - What stays unestablished: which prose-list position corresponds to which Table 3 row.
+  - option_text is blank because the paper prints no Likert anchors.
+  - Rights: RN falls under register CLASS-closed-silent-adaptation (irw#2381 R16). KT has no register row; its agent reported silence, not a grant, and wrote no row. **A human should confirm the class ruling covers KT as well.**
+- `lindstrom2021_team_identification` (21 rows): `data_labels` from the figshare .sav (CC BY 4.0), Swedish base with the deposit codebook's English, same layout as the batch_078 siblings.
+  - Deposit item × resp counts match live in 21/21 cells, and the scale mean of 6.13 matches the paper.
+  - The label's source typo "en viktigt del" ships as written.
+  - Rights: CLASS-closed-silent-adaptation names this table explicitly.
+- **Flag for a human (not acted on):** the lindstrom agent noticed that the shipped sibling `lindstrom2021_honesty_humility` (batch_078, HEXACO-PI short form) went out on the open-deposit-licence argument. SKILL's irw#1945 ruling (2026-09-05) blocks HEXACO wording even from open deposits. That ruling names the HEXACO-PI-R, so it may or may not reach the short form. It needs a rights decision.
+
+Cap check: the Step 0 cap is batch_430, so it has not been reached.
+
+## batch_415 — 2026-09-24 22:26 PDT — 3 tables, 3 written / 0 blocked / 0 failed (yield 100%)
+
+Three agents, no kills. normalize_nulls changed nothing. audit_batch gave 3 PASS with no WARNs, so Step 5c had nothing to explain. lint_verification found no problems, irw-validate was ok on all 3, and check_provenance exited 0. verify_batch's final result was 2 PASS plus 1 exempt (data_labels).
+
+- **The verify script was fixed by the orchestrator (no mapping change).** On the first verify_batch pass, `verify_test_taking_much_2025_cm.R` gave NO VERDICT. It read the EF columns from OSF (`osf.io/download/p25gr`, tte_data.csv), and OSF answered 429 twice. That was a rate limit, not a failed claim. The script now reads both CM and EF from live IRW, as the ef script already did, and the header says so. It reproduces the agent's matrices exactly and gives PASS.
+- `lindstrom2021_violent_intentions` (49 rows): `data_labels` from the figshare .sav (CC BY 4.0), with Swedish as the base text and the deposit codebook's English, same layout as the batch_078 and batch_414 siblings.
+  - Deposit item × resp counts match live in 49/49 cells.
+  - The reverse-keyed VI4R/VI5R/VI7R are stored unreversed. Reversed, the scale mean is 3.00, against the paper's 3.02.
+  - The authors' English for VI6 says "or" where the Swedish says "och". It ships verbatim, with a note.
+  - Rights: CLASS-closed-silent-adaptation names this table.
+- `test_taking_much_2025_cm` (909 rows, a 0–100 VAS with only the endpoints labelled) and `test_taking_much_2025_ef` (40 rows, 1–4 with points 2 and 3 unlabelled). Both come from Much et al. 2025 JOPD 10.5334/jopd.124, using the OSF 9j6hm (CC BY 4.0) supplement `efcm_ItemOverview.pdf`. Both are `paper_explicit` / `study_materials`, and both mapping checks are PARTIAL.
+  - Each CM item is the strict row and column maximum against its parallel EF item at both waves: diagonals .54/.58/.65 and .61/.64/.69.
+  - EF04 vs EF05 rests on codebook order alone.
+- **Source override, re-checked by the orchestrator. Confirmed.** EF05 ("I could have tried harder...") is reverse-worded, but it is stored already reversed.
+  - As stored, it correlates positively with EF01–03: +.31/+.28/+.22 at wave 1 and +.34/+.27/+.25 at wave 2.
+  - Alpha as stored is .620/.724, matching the published omega of .65/.74. Re-reversed, alpha drops to .250/.417.
+  - EF05 therefore ships with its anchors reversed (1 = strongly agree), with a public_note.
+  - The agent also reports that the deposit's own EF scale scores apply 5−EF05 again, reversing it twice (1244/1244). That was not independently re-checked. It is a possible source-data issue worth telling the authors about, not an IRW defect.
+- **Stale record.** The index workbook's `tables_excluded` tab says "couldn't find item text" for all five test_taking_much_2025 tables (_ao/_cm/_ct/_ef/_mr). The _cm/_ef text is in `efcm_ItemOverview.pdf`. The paper's "cannot be republished" line concerns Kuhl's Action Control Scale, which is the _ao table.
+- **Rights, for a human to review:** the TTMI (Knekta & Eklöf 2015) has no rights-register row. Both agents found no stated terms, which is silence, not a grant. They shipped on the wording from the study's CC BY deposit and wrote no register row.
+
+Cap check: the Step 0 cap is batch_430, so it has not been reached.
+
+## batch_416 — 2026-09-24 22:37 PDT — 3 tables, 3 written / 0 blocked / 0 failed (yield 100%)
+
+Three agents, no kills. normalize_nulls changed nothing. audit_batch gave 3 PASS with no anomalies. verify_batch gave 3 PASS, lint_verification found no problems, and check_provenance exited 0 (only the standing `mixed` REVIEW list, none from this batch). irw-validate was ok on both yao tables. It gave one WARN on SBD_Smith_2020: `name_charset`, because the live table name has capitals. That comes from the corpus name, not from the itemtext; see notes.csv.
+
+- `SBD_Smith_2020` (242 rows = 22 items × resp 0–10). `paper_order` / `study_materials`, from the authors' OSF form "BPSES - Original battery.docx" (osf.io/c4v7g).
+  - Step 3b: the live table is the 22-item original battery, not the published 17-item BPSES.
+  - Only 0/5/10 are labelled; the other points are blank.
+  - PARTIAL: refitting the authors' CFA to live data reproduces all 34 published Table 2 loadings within .009, which pins 18/22 items. The order within the dropped group MBDS18/19/21/22 is not established.
+  - **Response-data defect, re-checked by the orchestrator. Confirmed.** `data/SBD_Smith_2020.r` reads the header-less `bpses_pre_for_factor.dat` with `header = TRUE`. The file has 303 rows × 22 columns, and row 1 is data. The live table has 302 ids (6644 rows, 302 per item), against 303 in the paper. The fix is `header = FALSE` plus a re-upload. It is not acted on here; a public_note discloses 302 of 303.
+  - Rights: the authors' own scale on OSF with no licence set, which is silence. No register row was written.
+- `yao_2020_ius` (135 rows = 27 × 1–5) and `yao_2020_pswq` (80 rows = 16 × 1–5). Both are siblings of batch_328's yao_2020_gad, from the same Mendeley deposit (CC BY 4.0, no labels, 0 CJK characters) and the same closed-access J Pers Assess paper. Both are `paper_order` / `translated_substitute` with language=Chinese.
+  - IUS: English from Buhr & Dugas 2002 via PhenX PX650701 (`official_instrument_english`). The register's IUS row (`ship_with_note`) was applied. PARTIAL: ius24 is pinned via BDI16 sleep, .306 vs .207. The two-factor grouping beats 10,000 random splits (p = .0004). Order within factors is not established, and the reverse sleep check and the IUS-12 split did not hold (disclosed).
+  - PSWQ: English via CamCOPS pswq.xml (`third_party_english`, contractions spelled out and not checked against Meyer 1990). Register row R07 (`ship_with_note`) was applied. PARTIAL: the deposit's own `PSWQ<n>new` = 6 − pswq<n> for n = {1,3,8,10,11} (1402/1402), and the item-rest correlation is negative for exactly those five. Order within each keying class is not established. Live stores the reverse items unreversed, which the public_note discloses.
+
+Cap check: the Step 0 cap is batch_430, so it has not been reached.
+
+## batch_417 — 2026-09-24 22:56 PDT — 3 tables, 3 written / 0 blocked / 0 failed (yield 100%)
+
+Three agents, no kills. normalize_nulls reformatted WMD_bartczuk_2023 (quoting only) and left the other two as they were. audit_batch gave 3 PASS with no anomalies. verify_batch gave 3 PASS, lint_verification found no problems, and check_provenance exited 0 (only the standing REVIEW lists, none from this batch). irw-validate was ok on both khoa tables. It gave one WARN on WMD_bartczuk_2023: `name_charset`, because the live table name has capitals, a corpus property (see notes.csv).
+
+- `khoa_2023_assurance` (15 rows = 3 × 1–5) and `khoa_2023_teaching_materials` (20 rows = 4 × 1–5), both from Khoa & Huynh 2023, Data in Brief 49:109454 (PMC10415701, CC BY), plus Mendeley tpgsnk4928 `Questionnaire.pdf` (CC BY 4.0). Both are `paper_explicit` / `study_materials`, English, and both are VERIFIED against the paper's Table 4 per-item M/SD/skew/kurtosis, with every item nearest its own row. For example, TEM1 and TEM2 are separated by SD (1.060 vs 1.052), and ASS2 and ASS3 by SD, skew and kurtosis.
+  - **Table names are wrong, re-checked by the orchestrator. Confirmed.** The paper defines ASS as *Academic Staff Satisfaction* and TEM as *Teaching Motivation*, not "assurance" or "teaching materials". The misnaming comes from `data/khoa_2023_knowledge_management.py` (the docstring and the BLOCKS suffixes). The instrument fields use the source names and a public_note discloses it. The dictionary entry and table names are candidates for a rename.
+  - The ASS2 raw data has two out-of-range 6s, which the processing script drops (its docstring says so). That is why live n=674 vs 676, and why the paper's 3.97/1.100 reproduces only with the 6s left in.
+  - The administered language is not stated (Vietnamese academics, English-only questionnaire). Shipped as English with no language column.
+  - Rights: the assurance agent applied register row CLASS-closed-silent-adaptation (irw#2381). The adapted items are from Lee 2000 / Wilkesmann & Lauer 2020 / Tang 2016, and no restriction was found.
+- `WMD_bartczuk_2023` (120 rows = 24 × 1–5). Polish form from OSF rxb5y `Supplementary1.pdf`; English items from the deposit's `Items_properties.xlsx` (CC BY 4.0). `paper_explicit` / `study_materials`, `translation_source=mixed`: the instructions and anchor English are IRW machine translation, disclosed in the public_note, so **an issues-page line is owed at upload**. VERIFIED: the xlsx per-item mean/var/skew/kurt matches live data (max diffs .007/.012/.017/.042), every item is nearest its own row, and the minimum nearest-other/own ratio is 4.6. Kept verbatim: the instructions say "28 zdań" over 24 items, and item 21 has a grammar slip. Rights: register R38 (`ship_with_note`, irw#2381).
+
+Cap check: the Step 0 cap is batch_430, so it has not been reached.
+
+## batch_418 — 2026-09-24T22:58-07:00 — 3 tables: 3 written / 0 blocked / 0 failed (yield 100%)
+
+All gates were clean: normalize_nulls (fixed gan's nulls), audit_batch 3/3 PASS with no WARNs, verify_batch 1 PASS + 2 exempt, lint 0 problems, irw-validate ok ×3, check_provenance exit 0. There were no kills, and no limits were hit.
+
+- `gan_2024_depression`: 18 items / 74 rows. HDRS-17: codes 抑1–抑17 plus 抑162, where 抑16/抑162 = item 16a/16b. `paper_order`, `translated_substitute` / `official_instrument_english` (UFL public-domain sheet, same as kokoszka_2022_hamd). The administered version was the 1988 Chinese one, and no Chinese text is reachable. The public_note is written, and HAMD rights are `ship` per the register. Verification PARTIAL: the 5 factor totals and TOTAL reproduce the paper's Table 2 (e.g. sleep 2.374/1.493 vs 2.37/1.493; total 7.173/3.367 vs 7.17/3.367), and 0 of 130 cross-factor swaps still match. Order within a factor is not established.
+- `chen2022b_psychabuse`: 14 items / 70 rows. `data_labels`: the English column headers are the item text, typos kept. `translated_substitute` / `study_supplied`, language Chinese. **Anchor override:** the paper prints 0 = very conformity … 4 = very inconformity, but the stored 1–5 codes run higher = more abuse. So resp1 = "very inconformity", resp5 = "very conformity", and 2–4 are blank. Orchestrator re-check confirmed the Table 1 means (F 1.70/0.526 n=201, M 1.82/0.625 n=216), prevalence 107/417 = 25.66% for stored mean >2, and min inter-item r 0.032. It **corrected** the agent's "every item floors at 1" to "11 of 14 modal at 1" ('regarded worthless' is modal at 3, 131/417) in notes and provenance. The conclusion stands.
+- `ehealth_rioux_2025_mssps`: 12 items / 84 rows. `data_labels` from the .sav variable/value labels (OSF j7d2q). English, `study_materials`, MSPSS rights `ship`; live counts match the .sav 84/84. The agent notes that the register's claim of "item order differs from original" is contradicted: the labels follow Zimet order. **Data defect re-confirmed** (same as batch_334's gad/phq): 3,792 rows / 312 ids, and ids 4233, 5063, 7262 and 9728 each have 24 rows (two conflicting submissions). The fix belongs in data/ehealth_rioux_2025.py. Sibling `_rse` is still pending.
+
+Queue: 31 pending. Cap check: the Step 0 cap is batch_430, so it has not been reached.
+
+## batch_419 — 2026-09-25T05:13-07:00 — 3 tables: 2 written / 1 blocked / 0 failed (yield 67%)
+
+All gates were clean. normalize_nulls changed 0 files; audit_batch was 2/2 PASS with no WARNs; verify_batch reported 2 exempt, as both written tables are data_labels; lint found 0 problems; irw-validate was ok for both; check_provenance exited 0. There were no kills and no limits hit, and the circuit breaker was not tripped (0% failed). NOT_NEEDED rows went into both verification_merged.csv and mapping_verification.csv.
+
+- `ehealth_rioux_2025_rse`: 11 items / 22 rows. `data_labels` from the .sav variable and value labels (OSF j7d2q); the Q57 stem was moved to `instructions`. resp=1 option_text is the .sav label; resp=0 is blank, as it is an unlabelled checkbox fill. Live counts match the .sav in 22/22 cells. **Step 3b:** "RSE" is the study's Recent Stressful Experiences checklist, NOT Rosenberg. The register's RSES code regex matches RSE1..RSE10 anyway, so it was deliberately not applied, and that regex is worth tightening. **Data defects** (orchestrator re-check: 2,860 rows / 257 ids; ids 4233/5063/9728 have 22 rows each): the "None of the above" box has no deposit column, so the 90/350 respondents who ticked nothing are absent. The 4 RSE_noanswer=1 respondents are coded 0 rather than missing. The duplicate ids are the same ones as the mssps/gad/phq siblings. The fix belongs in data/ehealth_rioux_2025.py.
+- `jeilani_2024_social_outcomes`: 4 items / 20 rows. `data_labels` from the .sav labels (figshare 26820745 v4, CC0). Each .sav SO column equals its same-named .xlsx column in 663/663 rows. **Step 3b mismatch:** the table name and dictionary say "Social outcomes scale", but SO1–SO4 are the MSPSS Significant Other subscale (canonical items 10, 5, 1, 2), on a 5-point scale. The public_note discloses this, and the dictionary Description should be corrected. MSPSS rights are `ship` (irw#2381).
+- `jeilani_2024_social_support_family`: **blocked**, retry test NO. Only SSF1 is labelled in any file (v1 .sav SSF1 = v4 .sav PWB1). **Data defect, orchestrator-confirmed from the .xlsx and the live table:** live SSF2 (80/126/129/230/98) is a friends item. It correlates 0.62/0.63/0.69 with SS1/SSF2_002/SS4 and 0.29–0.34 with SSF1/SSF3/SSF4. Meanwhile data/jeilani_2024_academic_stress.py's `_0\d{2}` rule drops SSF2_001, a genuine family item (r 0.58–0.68 with SSF1/3/4), and SSF2_002, a friends item. So the family table holds one friends item and is missing one of its own. A GitHub issue is warranted; the fix would also bear on the blocked `jeilani_2024_social_support` (SS1/SS4). A row was added to pending_index_notes.csv.
+
+Queue: 28 pending. Cap check: the Step 0 cap is batch_430, so it has not been reached.
+
+## batch_420 — 2026-09-25T05:15-07:00 — 3 tables: 3 written / 0 blocked / 0 failed (yield 100%)
+
+All gates were clean. normalize_nulls changed 0 files. audit_batch gave 2 PASS and 1 WARN; the WARN is explained below and is a data property. verify_batch gave 1 PASS and 2 exempt (the two data_labels tables). lint found 0 problems, irw-validate was ok for all 3, and check_provenance exited 0. There were no kills and no limits hit, and the circuit breaker was not tripped (0% failed). NOT_NEEDED rows went into both verification_merged.csv and mapping_verification.csv. Numbering: the "highest below 300" rule in Step 1 is stale now that 305–419 exist, so a literal reading would name batch_305, which already exists. This round took the consecutive successor 420, which is what the rule intends and keeps the batch_430 cap live.
+
+- `abdullah_2024_blqol`: 5 items / 35 rows. `paper_explicit`: the .sav has no labels, and the Malay items plus their English come from Mahd-Ab.lah et al. 2021 IJERPH Table 2. Only the end anchors are published, so resp 2–6 are blank. Verification is **VERIFIED** and verify_*.R PASSes. The live values are stored reversed (live = 8 − raw), and 8 − live reproduces the 2021 Table 5 means for QOL1–3. A refit of the one-factor CFA matches Figure 2 as shipped (max dev .018); with QOL4/QOL5 swapped the max dev is .53. **Data defect, orchestrator-confirmed from the .sav:** QOL4_R has 133/323 respondents coded 0, which data/abdullah_2024_bloating.py's (1,7) filter drops. Live n is 190, and the audit WARN is this. The fix belongs in the processing script. Separately, 2021 Table 5 prints the item 4 and 5 means against swapped rows (they follow the .sav's physical column order, QOL5_R before QOL4_R), but the loadings and content agree with the names.
+- `goldberg_2018_eps_cesd`: 24 items / 120 rows. `data_labels` from the ESCS .sav (Dataverse GCV3ZZ, CC0), and the anchors come from the printed EPS.pdf form. The CES-D rights verdict `ship_with_note` was applied. **Register error to fix:** the CES-D register row says "4 items beyond the 20". Per the agent, this revised form has 18 of Radloff's 20 items plus 6 others (rcesd3/5/6/12/15/23), so the row's match_item_text phrase ("just as good as other people") does not occur in this table. The orchestrator confirmed only the item count (24).
+- `goldberg_2018_hpq_h`: 39 items / 195 rows. `data_labels` from the ESCS .sav (Dataverse SVGXVF, CC0). For h5, h18 and h22 the agent shipped the scanned HPQ.pdf form's wording rather than the truncated or garbled .sav labels. That wording comes from a scan, so a human spot-check is worthwhile. The resp direction was confirmed because the deposit's HPQ_scales.sps reproduces the stored riskavd/hltpract scores for all 706 respondents. HBC-Vickers rights verdict `ship_with_note` (irw#2381 R44) was applied.
+
+Queue: 25 pending. Cap check: the Step 0 cap is batch_430, so it has not been reached.
+
+## batch_421 — 2026-09-25T05:26-07:00 — 3 tables: 3 written / 0 blocked / 0 failed (yield 100%)
+
+All gates were clean except one lint WARN, explained below. normalize_nulls changed 0 files. audit_batch gave 3 PASS with no anomalies. verify_batch gave 2 PASS and 1 exempt (data_labels). lint found 0 ERROR and 1 WARN. irw-validate was ok for all 3, and check_provenance exited 0. There were no kills and no limits hit, and the breaker was not tripped (0% failed). NOT_NEEDED rows went into both verification_merged.csv and mapping_verification.csv. Numbering: consecutive successor 421, the same as batch_420 (the "below 300" rule in Step 1 is stale).
+
+- `thomeczek2025_les`: 20 items / 400 rows. `paper_explicit`: the English codebook prints each question under its exact column name (20/20). `translated_substitute` / `study_supplied`: the experts were German, but this deposit ships only the English codebook. The agent deliberately did not use the German codebook from the sibling deposit (doi:10.7910/DVN/NSPGMQ), because its `assimilation` poles run the opposite way to the Hamburg data. A future German pass must check scale direction item by item. Only the end anchors are published, so resp 2–19 are blank. Verification is VERIFIED and verify_*.R PASSes: AfD−Greens has the expected sign on 20/20 items, and FDP−Linke on the 4 economic items. The lint WARN ("evidence hedges") was kept as VERIFIED: identity comes from the explicit code-label headings, and the hedge is about the German wording. Minor source issues: `missiles` is in the CSV header with 0 responses, and the codebook lists Freie Wähler where the data carry Volt.
+- `goldberg_2018_prs_bas_bis`: 20 items / 80 rows. `data_labels` from the ESCS DDI labels (Dataverse XJ6MXH, CC0), which agree with PRS_items.txt and the printed PRS.pdf form. The form's punctuation was preferred over DDI labels corrupted with U+FFFD. The shipped text is Goldberg's administered wording, not canonical Carver & White. Rights verdict `ship` (irw#2381 R02) was applied. The dictionary Description's "735 × 20 = 14640" is misleading arithmetic: the difference is 60 skipped responses, and the per-item n matches the DDI.
+- `smoking_perseverance_mcneish_2025`: 3 items (i44/i45/i47) / 15 rows. `paper_explicit`: the OSF supplement (CC BY 4.0) names each prompt by its code. Verification is VERIFIED and verify_*.R PASSes: the Primer Table 1 intercepts 3.25/3.27/3.38 against observed 3.247/3.270/3.376, and the claimed order has the lowest error of all 6 permutations. **Source override, orchestrator-confirmed:** McNeish's materials say only "5-point Likert", so the end anchors "not at all (1)" and "extremely (5)" come from Mazza et al. 2022 (PMC9131140). I confirmed that sentence verbatim in the Europe PMC full text. resp 2–4 are blank. MSRS rights verdict `ship` was applied.
+
+Queue: 22 pending. Cap check: the Step 0 cap is batch_430, so it has not been reached.
+
+## batch_422 — 2026-09-25T05:36-07:00 — 3 tables: 2 written / 1 blocked / 0 failed (yield 67%)
+
+All gates were clean. normalize_nulls changed 0 files; audit_batch was 2/2 PASS with no anomalies; verify_batch 2/2 PASS; lint 0 ERROR / 0 WARN / 1 INFO (buses: hedge vs item-axis tie, VERIFIED stands); irw-validate ok for both; check_provenance exited 0 (both written tables are `machine_translation` and owe an issues-page line at upload). No kills, no limits, breaker not tripped (0% failed). Both written tables are paper_explicit, so no NOT_NEEDED rows were needed; all 3 verification rows (incl. the blocked cablecars PARTIAL row, per precedent) went into mapping_verification.csv. Numbering: consecutive successor 422 (the "below 300" rule is stale, as in 420/421). INEGI ENCIG rights row (`ship`, credit "Fuente: INEGI, ENCIG 2023") applied to both written tables.
+
+**Systemic data defect in `data/mexico_2023_quality.do` — affects the whole remaining queue (all 19 pending rows are mexico_2023_quality_*).** The .do appends ENCIG 2021 under 2023 (`append using mexico_2023_quality_2021.dta, force`, line 105; `gen id = _n`, line 126) with no wave column. Orchestrator-confirmed against the live tables: ids ≤ 38,966 are 2023, above are 2021. Two consequences: (1) INEGI renumbered section V between waves (2023 inserted 5.7 IMSS-Bienestar and 5.11 Cablebús), so p5_7..p5_11 mean different services in the two waves; (2) 2021 columns with unpadded names (e.g. P11_1_1..9 vs 2023 P11_1_01..09) are silently dropped by `force`. **Recommend fixing the .do (wave column; rename/route 2021 columns) and filing an issue before further rounds on this queue** — the remaining section-V tables (e.g. transportationstations p5_10 = BRT 2023 / metro 2021) will hit the same wall.
+
+- `mexico_2023_quality_buses`: 9 items / 22 rows. `paper_explicit` (INEGI microdata column names = cuestionario 5.9 options 1–8 + 5.9a), Spanish administered wording from encig23_cuestionario.pdf, English `machine_translation`. VERIFIED, verify_*.R PASS: all 22 item×resp cells match INEGI 2023+2021 microdata counts; each live item matches only its namesake column. resp 0=Sí/1=No per the .do's recode. **Caveat — hold upload for a human call:** orchestrator re-check shows 5,122 ids / ~18% of each item's responses are 2021 rows, where 5.9 asked about articulated BRT, not urban buses. The eight characteristic items are worded identically in both waves; only the service in the stem and p5_9a differ. Shipped (text attaches to 82%) with the defect in notes/public_note; if you want parity with cablecars, don't upload until the .do is fixed.
+- `mexico_2023_quality_confidence`: 25 items / 125 rows. `paper_explicit` (cuestionario 11.1 rows 01–25 = p11_1_01..25), 2023 Spanish wording, English `machine_translation`. VERIFIED, verify_*.R PASS: 125/125 cells match microdata, 25/25 distinct count vectors; marker p11_1_07 (co-workers) 'No aplica' share 0.344 vs max 0.027 elsewhere. **Data defects, orchestrator-confirmed:** items 01–09 have no 2021 responses (p11_1_01 n=35,297 all 2023; p11_1_10 2021/2023 = 33,992/33,677) because 2021's P11_1_1..9 are unpadded and dropped by `force`. resp=5 is "No aplica", kept as a scale point by the .do (only 9 set missing). 2021 wording differs slightly on items 11/17/22/23/25; 2023 wording shipped and disclosed.
+- `mexico_2023_quality_cablecars`: **blocked**, retry test NO. 2023 q5.11 = Cablebús/Mexicable; 2021 q5.11 = toll highways. Orchestrator re-check: p5_11_1..5/p5_11a hold 13,823–14,024 2021 rows vs 667–673 2023 rows each; 93.3% of all rows are 2021 toll-highway answers (p5_11_1 2023 622/49, 2021 8970/4996). Item text cannot attach to one meaning. Row added to pending_index_notes.csv. Cached questionnaires + microdata for both years are in `.cache/mexico_2023_quality_cablecars/` for reuse by later rounds.
+
+Queue: 19 pending. Cap check: the Step 0 cap is batch_430, so it has not been reached.
+
+## 2026-09-25 — #2381 slice 7 (batch_403–422) triaged; 62 item-text tables released to irw_text
+
+Slice 7 (79 = the rights-bank ship calls): 60 processed before the pause, 58 written. Uploaded to irw_text and released
+by Ben (irw_text 943): 54 slice-7 tables + the 7 name-length holds (Ben waived the 40-char cap for item text 09-25;
+queue rows flipped blocked -> done) + mexico_2023_quality_confidence. act_kay_2025 is the irw_text_3 seed: stamped,
+not uploaded. Stamped uploaded=2026-09-24 (403-418 + act_kay) / 2026-09-25 (rest); CSVs removed. The irw_text budget
+guard (oneoff/itemtext-rights-bank/irw_text_budget.py, limit 990) stopped the chain at 989 overnight; Ben then kept
+ITEMTEXT_DEFAULT = irw_text and released the held pool's reservation (held_not_reserved.txt).
+
+**Wrong-now found and withdrawn:** mexico_2023_quality_cablecars / _buses (#2415: ENCIG 2021 appended under 2023 by
+name across renumbered questions) — then the whole family rebuilt, harmonised (PR #2417, data/mexico_2023_quality.py
+replaces the .do; 2023 rows and ids unchanged; cov_year added) and released in item_response_warehouse_2. The 19
+slice-7 mexico tables paused on this resume now.
+
+**Blocked (no wording):** jeilani_2024_social_support_family (419). **Buses** item text (batch_422) kept for re-check
+against the rebuilt table. **Leads:** gcb5_2025 script vs live resp shift; SBD_Smith_2020 header=TRUE drops respondent 1;
+abdullah_2024_blqol drops 133 zero codes; jeilani_2024_social_outcomes is the MSPSS SO subscale (dictionary name wrong).
+
+**2026-09-25:** mexico_2023_quality_buses and _cablecars re-queued (pending) after #2415's rebuild went live: buses'
+batch_422 text carried a public_note describing the fixed 2021 BRT pooling (CSV removed, notes/provenance kept as
+history); cablecars' data-defect block no longer applies (the table is 2023-only now).
+
+**batch_423 — 2026-09-25 ~08:10 PDT.** 3 tables (3 agents): **3 written / 0 blocked / 0 failed**, yield 3/3.
+All gates clean: audit 3 PASS (no WARNs), verify_batch 3 PASS, lint clean, irw-validate ok x3,
+check_provenance exit 0. All three: paper_explicit, text_source=study_materials, machine_translation
+(Spanish administered wording + our English; each owes an issues-page line at upload), INEGI credit +
+no-endorsement in public_note per the rights register. The #2415 rebuild (now data/mexico_2023_quality.py;
+the .do is gone) is confirmed fixed on both re-queued tables:
+- mexico_2023_quality_buses (22 rows): VERIFIED by per-cov_year count matching; 2021 items now match ENCIG 2021
+  q5.8 (P5_8_K/P5_8A, the same bus question under old numbering), 0/9 match the old wrong 2021 P5_9 (BRT) source.
+  The batch_422 pooling public_note is replaced by a wording-difference caveat (2021 respondents read "Durante 2021").
+- mexico_2023_quality_cablecars (21 rows): orchestrator re-ran verify: cov_year=2023 only, ids 1..38966, all 9 live
+  count vectors equal their namesake raw 2023 column (e.g. p5_11_4 551/120). p5_11a option 5 "Insatisfecho(a)"
+  unused by all 673 respondents, so no row for it (gate accepts observed values only).
+- mexico_2023_quality_corruption (10 rows, section VIII 8.1/8.2/8.3.1-3): Step 3b ok, section VIII not renumbered
+  between waves; 30/30 cells match raw 2021+2023 counts.
+mapping_verification.csv: the two batch_422 rows for buses/cablecars were superseded by batch_423 rows (one row per table).
+
+**batch_424 — 2026-09-25 ~08:15 PDT.** 3 tables (3 agents): **3 written / 0 blocked / 0 failed**, yield 3/3.
+All gates clean: normalize 0 changed, audit 3 PASS (no WARNs), verify_batch 3 PASS, lint clean, irw-validate ok x3,
+check_provenance exit 0. All three: paper_explicit, text_source=study_materials, machine_translation (issues-page
+line owed at upload), INEGI credit + no-endorsement public_note per the rights register (irw#2381 R01), VERIFIED by
+per-cov_year count matching against INEGI 2023 + 2021 microdata; Step 3b found no renumbering in any of them.
+- mexico_2023_quality_electricgovernment (12 rows, section X q10.1 options 1-6): 24/24 cells. p10_1_2 (online form)
+  Si share 0.377 in 2021 vs 0.273 in 2023 -- reproduced from raw, not a build error.
+- mexico_2023_quality_generalcorruption (5 rows, section IX q9.1 + q9.7; no overlap with _corruption's section VIII):
+  **response-data lead** -- the build does not set 9.7's code 3 "No aplica" missing, so p9_7 scores it as a level
+  above No. Orchestrator re-checked with irw_fetch: p9_7 resp 0/1/3/NA = 669/17441/59816/970 (resp 3: 2021 28,724,
+  2023 31,092). Item text ships resp 3 = "No aplica" honestly; whether data/mexico_2023_quality.py should drop it is
+  Ben's call, and other ENCIG items with a No-aplica code may share it (not checked).
+- mexico_2023_quality_health (28 rows, q5.4 IMSS options 01-11 + 5.4a): **Sheet1 STOP overridden, Ben to confirm**
+  -- same as batch_332: a hand-built sheet (1hlCpjbCJai2ZMfWuXn7WVX7q-ECPc14cupRxIgF3a74) was never uploaded and fails
+  the gate (resp 1/2/null vs live 0/1, option numbers in item_text). If the STOP should hold, drop the CSV.
+Queue: 15 pending. Cap check: the Step 0 cap is batch_430, so it has not been reached.
+
+**batch_425 — 2026-09-25 ~08:25 PDT.** 3 tables (3 agents): **3 written / 0 blocked / 0 failed**, yield 3/3.
+All gates clean: normalize 0 changed, audit 3 PASS (no WARNs), verify_batch 3 PASS, lint clean, irw-validate ok x3,
+check_provenance exit 0. All three: paper_explicit, text_source=study_materials, machine_translation (issues-page
+line owed at upload), INEGI credit + no-endorsement public_note per the rights register (irw#2381 R01), VERIFIED by
+per-cov_year count matching against INEGI 2023 + 2021 microdata, each live vector matching only its namesake column
+among all section-V columns. No table_context STOPs. No response-data defects found.
+- mexico_2023_quality_healthservice (28 rows, q5.6 State/INSABI health service options 01-11 + 5.6a): 5.6 not
+  renumbered between waves; 2021 P5_6_1..9 -> P5_6_01..09 via RENAME_2021 confirmed by counts.
+- mexico_2023_quality_highways (16 rows, 2023 q5.13/5.13a toll highways): 2021 asked it as 5.11/5.11a and the rebuild
+  renames P5_11_* onto p5_13_*; 2021 p5_13_1 = 8970/4996, which is exactly the P5_11_1 2021 count the batch_422/423
+  orchestrator re-check found wrongly pooled into cablecars before #2415 -- independent confirmation the rebuild moved
+  those answers to the right table. 2021 is ~44% of each item; wording differences disclosed in public_note.
+- mexico_2023_quality_homelightning (12 rows, 2023 q5.8/5.8a home electricity service; 2021 5.7/5.7a, renamed):
+  negative control holds (2021's own P5_8_* = buses matches 0/3 live items). **Dictionary lead, orchestrator-confirmed
+  in metadata/ tags + biblio:** description reads "Home Lightning Service Quality" -- misspells Lighting and the table is
+  home electricity supply ("servicio de luz"), not lighting; distinct from mexico_2023_quality_lightning (street
+  lighting, p4_3_*). Suggest "Home Electricity Service Quality"; table name itself left alone.
+Queue: 12 pending. Cap check: the Step 0 cap is batch_430, so it has not been reached.
+
+**batch_426 — 2026-09-25 ~08:30 PDT.** 3 tables (3 agents): **3 written / 0 blocked / 0 failed**, yield 3/3.
+All gates clean: normalize 0 changed, audit 3 PASS (no WARNs), verify_batch 3 PASS, lint clean, irw-validate ok x3,
+check_provenance exit 0. All three: paper_explicit, text_source=study_materials, machine_translation (issues-page
+line owed at upload), INEGI credit + no-endorsement public_note per the rights register (irw#2381 R01), VERIFIED by
+per-cov_year count matching against INEGI 2023 + 2021 microdata, each live vector matching only its namesake column.
+**All three overrode a table_context.R Sheet1 STOP, Ben to confirm** -- same shape as batch_332/batch_424 _health:
+each links a hand-built sheet that was never uploaded (none of the three is in live_tables.csv, orchestrator-checked)
+and fails the gate as it stands (resp 1/2/null vs live 0/1, option numbers in item_text). If the STOPs should hold,
+drop the CSVs. Sheets: low 1oYRN7BPVDyqknh8O3p7zaH_zujarOpGP_45lc7u6owg, parks
+1n5Xxz6mcXTDvwyG09LcZmu5VjuFiUdy9OS8BZ1qwDXA, police 1c_LPkgmJ3NghTqcaPyYefh7oLEe-yvY_QWZ337_XPZ0.
+- mexico_2023_quality_low (24 rows, section V q5.1 service-use screener, 12 services x Si/No): **Step 3b / dictionary
+  lead, orchestrator-confirmed:** "low" comes from the section title "Evaluación de servicios públicos bajo demanda"
+  (= on-demand), mistranslated as "Low Demand Services" (biblio) / "Low Demand Service Quality Evaluation" (tags).
+  The table is the 5.1 usage screener, not a quality rating. Instrument matches the data; the name/description
+  mislead. Suggest Description "Use of on-demand public services (ENCIG 5.1 screener)". Orchestrator re-check:
+  INEGI 2023 P5_1_01 1/2 = 10417/28549, matching the agent's live counts. Extra verification: each item's Si set equals
+  exactly its follow-up block's answerers (22/22 item-waves). Items 09-11 state-conditional (2023 blank 22724/32475/
+  31609 of 38966); 2021 P5_1_10 -> p5_1_12 blank for 1399 in INEGI's own file -- source property, not a build error.
+- mexico_2023_quality_parks (14 rows, section IV q4.4/4.4a parks and gardens): section IV not renumbered between waves;
+  40/40 cells match (e.g. 2023 p4_4_1 29074/7895, 2021 28406/9180).
+- mexico_2023_quality_police (10 rows, q4.6/4.6a city police): not renumbered; 2023 p4_6_1 14712/23799, 2021 12830/26594.
+No response-data defects found.
+Queue: 9 pending. Cap check: the Step 0 cap is batch_430, so it has not been reached.
+
+**batch_427 — 2026-09-25 ~08:40 PDT.** 3 tables (3 agents): **3 written / 0 blocked / 0 failed**, yield 3/3.
+All gates clean: normalize 0 changed, audit 3 PASS (no WARNs), verify_batch 3 PASS, lint clean, irw-validate ok x3,
+check_provenance exit 0. All three: paper_explicit, text_source=study_materials, machine_translation (issues-page
+line owed at upload), INEGI credit + no-endorsement public_note per the rights register (irw#2381 R01), VERIFIED by
+per-cov_year count matching against INEGI 2023 + 2021 microdata, each live vector matching only its namesake column.
+**All three overrode a table_context.R Sheet1 STOP, Ben to confirm** -- same shape as batch_424/426: hand-built sheet
+never uploaded (not in live_tables.csv), fails the gate as-is (resp 1/2/null vs live 0/1, option numbers in item_text).
+If the STOPs should hold, drop the CSVs. Sheets: roads 1kEsHoKH3HecX8VPdKUS2QLDIR6n0mmaE0PmzHH9h4Y0, schooling
+1H2oQ0Gf7bXcDrioNsMCd5SHTZlKdiTpUsHZTlaZFU8k, streets 1EJhzePip0kViSt3rk0eo1_PqVtKYddYNChxgMMgJQec.
+- **Step 3b / dictionary lead, orchestrator-confirmed: `_roads` and `_streets` are swapped.** data/mexico_2023_quality.py
+  gives `_roads` p4_7_* = ENCIG q4.7 "las calles y avenidas de esta ciudad" (city streets and avenues) and `_streets`
+  p4_8_* = q4.8 "las carreteras y caminos sin cuota de (ESTADO)" (toll-free state highways/roads) -- checked in the
+  2023 questionnaire text (pdftotext lines 598-601). Descriptions "Roads/Streets Service Quality" (biblio, tags) are
+  therefore reversed. Item text was extracted against the live codes (correct content per table) and the mismatch is
+  disclosed in public_note; renaming the tables or swapping the Descriptions is Ben's call. `_highways` (q5.13, toll)
+  is a third, separate question.
+- mexico_2023_quality_roads (14 rows, q4.7/4.7a): not renumbered in 2021. Orchestrator re-check: INEGI 2023 P4_7_1
+  1/2 = 6625/32161, matching the agent.
+- mexico_2023_quality_schooling (24 rows, q5.2 items 1-9 + 5.2a): 5.2 not renumbered (section V renumbering starts at
+  5.7). Orchestrator re-check: INEGI 2023 P5_2_1 1/2 = 5096/5249. Routing: 5.2 answerers = P5_1_01 Si set exactly
+  (10,417 in 2023, 10,769 in 2021).
+- mexico_2023_quality_streets (14 rows, q4.8/4.8a): not renumbered. Orchestrator re-check: INEGI 2023 P4_8_1 1/2 =
+  14026/19725.
+No response-data defects found.
+Queue: 6 pending. Cap check: the Step 0 cap is batch_430, so it has not been reached.
+
+**batch_428 — 2026-09-25 ~08:55 PDT.** 3 tables (3 agents): **3 written / 0 blocked / 0 failed**, yield 3/3.
+Gates: normalize 0 of 3 changed; audit 3 PASS (no WARNs); lint clean; check_provenance exit 0 (standing `mixed`
+REVIEW list only). verify_batch's first run returned NO VERDICT for trains. The script printed VERDICT: PASS when run
+directly, and a full verify_batch rerun gave PASS=3. Transient, and not a gate failure. irw-validate: trains and trash
+ok. transportationstations had 1 ERROR, `name_length` (42 chars > 40). It is marked done under Ben's 2026-09-25
+waiver of the 40-char cap for item text; the --override rerun has that as its only finding. All three: paper_explicit,
+study_materials, machine_translation (issues-page line owed at upload), INEGI credit + no-endorsement public_note per
+irw#2381 R01, VERIFIED by per-cov_year count matching against INEGI 2023 + 2021 microdata, each live vector matching
+only its mapped column.
+- mexico_2023_quality_trains (16 rows, 2023 q5.12/5.12a metro/light rail): section V renumbered, 2021 = 5.10.
+  Orchestrator re-check: data/mexico_2023_quality.py RENAME_2021 lines 65-70 map p5_10_* -> p5_12_*; verify output
+  2023 P5_12_1 0/1 = 1438/2759, 2021 P5_10_1 = 1472/2208; answerers = P5_1_11 Si set 4299/4299 (2021 P5_1_9 3805/3805).
+  No Sheet1 STOP (not in Sheet1).
+- mexico_2023_quality_transportationstations (22 rows, 2023 q5.10/5.10a articulated BRT with stations and exclusive
+  lane): 2021 = 5.9. Orchestrator re-check: RENAME_2021 lines 127-132 map p5_9_* -> p5_10_*; 2023 P5_10_1 = 5633/261.
+  Items 1-8 are word-identical to the buses (5.9) block, and only the stem tells them apart. Dictionary: the Description
+  "Transportation Stations" is only loosely accurate, because the question is about BRT/Metrobús service. That is an
+  optional rewording, not a defect. No Sheet1 STOP.
+- mexico_2023_quality_trash (12 rows, q4.5/4.5a city garbage collection): section IV not renumbered. **Sheet1 STOP
+  overridden, Ben to confirm**, the same shape as batch_424-427: a hand-built sheet
+  1hanXfy4ARolVawCmu4rLInA9IlOOISFK8XxsFc4AVJk that was never uploaded and fails the gate as-is (resp 1/2/null,
+  option numbers in item_text). If the STOP should hold, drop the CSV. 2023 P4_5_1 = 32524/5925.
+No response-data defects found.
+Queue: 3 pending. Cap check: the Step 0 cap is batch_430, so it has not been reached.
+
+**batch_429 — 2026-09-25 ~09:10 PDT.** 3 tables (3 agents): **3 written / 0 blocked / 0 failed**, yield 3/3.
+Gates: normalize 0 of 3 changed; audit 3 PASS (no WARNs); verify_batch PASS=3; lint clean; irw-validate 3 ok;
+check_provenance exit 0 (standing `mixed` REVIEW list only). All three: paper_explicit, study_materials,
+machine_translation (issues-page line owed at upload), INEGI credit + no-endorsement public_note per irw#2381 R01,
+VERIFIED by per-wave count matching against INEGI microdata, each live vector matching only its mapped column, plus
+5.1-screener routing. Orchestrator re-check (INEGI 2023 microdata, independent of the agents' scripts): P5_3_1
+1/2 = 2122/566, P5_5_01 = 1596/1256, P5_7_01 = 301/127, P5_7A 1-6 = 75/180/84/44/24/20; 5.3/5.5/5.7 answerers =
+exactly the P5_1_02/04/06 Si sets (2730/2862/430). All match the agents.
+- mexico_2023_quality_university (22 rows, q5.3/5.3a public universities): not renumbered in 2021. **Sheet1 STOP
+  overridden, Ben to confirm**, same shape as batch_424-428: hand-built sheet 11oOE0mriKvT5F1lr7H4wDRaDOCqkV8EtelKMsdAdQGY,
+  never uploaded, fails the gate as-is (resp 1/2/null, option numbers in item_text). If the STOP should hold, drop the
+  CSV. Items 1-8 are word-identical to 5.2 (schooling) items 2-9; counts and routing separate them.
+- mexico_2023_quality_wellbeing (28 rows, q5.5/5.5a): **dictionary problem — question 5.5 is ISSSTE health service**,
+  not a "Bienestar" provider (orchestrator confirmed in the 2023 questionnaire text: "5.5 Durante 2023, ¿el servicio
+  de salud en el ISSSTE de esta ciudad..."; IMSS-Bienestar is 5.7 = `_wellbeingservice`, INSABI is 5.6 =
+  `_healthservice`). Description "Well-Being Service Quality" and the table name misdescribe it; suggested Description
+  "ISSSTE Health Service Quality"; renaming is Ben's call. Item text follows the data, and public_note flags the mismatch.
+  Not renumbered (RENAME_2021 only zero-pads P5_5_1..9). No Sheet1 STOP.
+- mexico_2023_quality_wellbeingservice (28 rows, q5.7/5.7a IMSS-Bienestar): 2023-only, as intended — live table has
+  only cov_year 2023; no p5_7_* in ASKED_2021 (2021's 5.7 was home electricity, routed to p5_8_*). Description
+  "Well-Being Service Satisfaction" is loose, but not wrong. No Sheet1 STOP.
+No response-data defects found.
+Queue: 0 pending. Cap check: the Step 0 cap is batch_430, so it has not been reached; the queue is now exhausted, so
+the next firing will stand down on the queue-exhausted condition.
+
+## 2026-09-25 — #2381 slice 7 complete: the mexico_2023_quality family (batch_423–429), 21 released to irw_text
+
+After #2415's harmonised rebuild went live, the 19 paused family tables plus re-queued buses/cablecars ran clean
+(21/21 written; every round verified its table per wave against the rebuilt data). Uploaded, verified and released by Ben
+(irw_text 964). mexico_2023_quality_health: Ben ruled nobody is hand-building these (nj_todo / Sheet1 STOP not live
+work), so the round's CSV shipped. Stamped uploaded=2026-09-25; CSVs removed. Slice 7 total: 79 processed, 78 written,
+1 blocked (jeilani_2024_social_support_family, no wording). Queue empty. Leads: streets = q4.8 toll-free roads;
+wellbeing = q5.5 ISSSTE (dictionary Descriptions wrong).
+
+**2026-09-25 rights confirmations (Ben, via the rights one-pager):** ASSIS (shan_2020_g/_hs/_ph), CAST-18
+(hyatt_…_s3_cast), DAQ+BPAQ (hyatt_…_s3_daq), SSIS (hyatt_…_s3_ssis) stay HELD under the existing PsycTESTS / unpublished
+rulings. MLQ (liu_2025_mlq) and UWES (hua_2023_efl_study_engagement) are BLOCKED on their register block rows (a
+translation / domain adaptation is a derivative): queue rows done -> blocked. CSVs kept in their batch folders.

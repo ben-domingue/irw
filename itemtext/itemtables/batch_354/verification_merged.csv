@@ -1,0 +1,4 @@
+"table","batch","mapping_basis","uploaded","route","status","evidence"
+"spain_2023_identity_authenticity","batch_354","data_labels","","none","NOT_NEEDED","mapping_basis=data_labels: .do lowercases CIS column names (p8_1..p8_5); 3409.sav variable labels tie each code to its P.8 text directly"
+"spain_2023_identity_centralism","batch_354","data_labels","","none","NOT_NEEDED","mapping_basis=data_labels: 3409.sav labels ESCALACENTRALISMO_1..6 with party names; .do uses lowercased column names as item codes"
+"spain_2023_identity_europe","batch_354","data_labels","","none","NOT_NEEDED","mapping_basis=data_labels: 3409.sav variable labels tie P16/P17 to their question text; .do uses lowercased column names as item codes"

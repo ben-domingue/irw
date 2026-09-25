@@ -1,0 +1,2 @@
+"table","batch","mapping_basis","uploaded","route","status","evidence"
+"spain_2026_love_usage","batch_378","data_labels","","none","NOT_NEEDED","mapping_basis=data_labels: .do imports CIS Estudio 3508 3508_num.csv and lowercases the CIS column names (p15, p15a, p15b); ES3508 variable labels tie each code to its questionnaire text directly"
