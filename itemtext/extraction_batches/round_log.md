@@ -25555,3 +25555,33 @@ Gates:
   - Lead for the pending siblings (`cf`/`cmq`/`nfc`/`onecm_kay_2025`): the same printouts carry their wording and tags. Likert blocks are stored as −3..3 plus 4, but the `cf` items get no shift.
 
 Cap check: the Step 0 cap is batch_430, so it has not been reached.
+
+## batch_406 — 2026-09-24T21:11:11-07:00
+
+3 tables, 3 agents, all from the Kay & Slovic 2025 OSF uzrgk deposit. **3 written+done / 0 blocked / 0 failed** (0% failed, so the breaker is not tripped). Yield: 3 of 3.
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `cf_kay_2025` | **done** | 77 (11×7) | `paper_order` | PARTIAL, verify PASS |
+| `cmq_kay_2025` | **done** | 35 (5×7) | `paper_explicit` | VERIFIED, verify PASS |
+| `gcb5_2025` | **done** | 35 (5×7) | `paper_explicit` | VERIFIED, verify PASS |
+
+Gates:
+- normalize_nulls: 0 of 3 files changed.
+- audit_batch: 3 PASS with no anomalies, so there are no WARNs to explain.
+- verify_batch: PASS=3.
+- lint_verification: clean, 3 rows. No data_labels tables, so no NOT_NEEDED rows were owed.
+- irw-validate (upload profile): all 3 ok.
+- check_provenance: exit 0. It reported only the standing REVIEW lists.
+
+- **cmq / gcb5**: the same route as act_kay_2025. The Qualtrics printouts (au83k T1, q9m27 T2) tag every statement with its export column: 5/5 in each wave for both tables. A swapped control FAILs. Rights were applied from the register rows CMQ (R12) and GCBS (R11). The GCBS row's owed check is done: the GCB-5 wording matches Brotherton 2013 items 6/8/10/12/14 verbatim.
+- **gcb5 data defect (response side, not itemtext)**: the live `gcb5_2025` stores resp as **-3..3**, but the committed `data/kay_2025.R` ends df_gcb5 with `mutate(resp = resp + 4)`, which gives 1..7, the same as the live siblings. **Orchestrator Step 5b re-check CONFIRMED it** from irw_fetch: live resp counts are -3:924 … 3:339, and the W1 means are -0.543/-0.248/-0.067/-0.480/-0.567, i.e. the raw deposit values. The item text follows the live table. Either the live table or the script needs reconciling; the table name is also off-pattern (no `kay_`). This is noted in notes.csv, and no issue has been filed yet.
+- **cf_kay_2025**: the coin-toss sequences carry empty export tags in the printout, so code↔sequence rests on printed order (`paper_order`).
+  - Route 4 (streakiness) pins the set {1,2,3,10}, which is exactly the sequences with a run of ≥5; the chance of that is 1/210. It also pins code 3 as the only run of 6.
+  - **Orchestrator re-check CONFIRMED** the means from live: 3.92 (code 3, run 6), 3.65/3.08/3.05 (codes 2/1/10, run 5), then 2.52–2.90 for the run 2–3 codes.
+  - It does not order codes 4–9, or 1 vs 10, so verification is PARTIAL.
+  - Endpoints only (1 Completely Random, 7 Completely Determined); points 2–6 are left blank.
+  - A .qsf would settle the order, but none is on the node.
+- Remaining Kay siblings still pending: `nfc_kay_2025` and `onecm_kay_2025`. The same printouts are the lead.
+
+Cap check: the Step 0 cap is batch_430, so it has not been reached.
