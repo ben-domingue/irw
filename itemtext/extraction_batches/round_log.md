@@ -26206,3 +26206,23 @@ Written 3 / blocked 0 / failed 0 (yield 100%). All gates clean: audit 3 PASS, ve
   header ("N=810 across four sites"): paper says "810 women from Columbus, Ohio" and country==1 for 810/810 rows.
   So English administration; the 8 other mironshatz_2015_* tables likely need the same correction to that comment.
 Queue: 39 pending. Cap check: the Step 0 cap is batch_450, not reached.
+
+## batch_435 — 2026-09-25T15:38 (3 tables, 3 agents)
+Written 3 / blocked 0 / failed 0 (yield 100%). All gates clean: audit 3 PASS, verify 3 exempt (all data_labels),
+lint no problems, irw-validate ok x3, check_provenance exit 0 (only the standing `mixed` review list).
+- pietraszkiewicz_2017_leader_eval (44 rows): data_labels, codes are S1 xls headers O_<Aspect>1/2 minus prefix/wave;
+  live n/means reproduce the xls (wave1 Empathy 244/8.60 ... Motivation 244/7.92). Wording from the paper's Methods
+  (self-evaluation form; team members rated "the same four aspects"). Anchors 0/10 only, 1-9 blank. Administration
+  language unstated (Catalan university) -> language blank, disclosed in public_note.
+- coroiu_2018_phq9 (36 rows): data_labels (.sav variable labels, 9/9 canonical order; PHQ9_1 n=2445 mean 0.435).
+  Administered in German, German wording unpublished -> canonical English PHQ-9, translated_substitute /
+  official_instrument_english. PHQ register row = ship.
+- coroiu_2018_scs (130 rows): data_labels (.sav labels 26/26, subscale tags match Neff's key; 25/26 verbatim vs
+  paper Table 5). English item text is the study's own (translated_substitute / study_supplied); options are the
+  administered German anchors (sehr selten..sehr oft) with English in _translated. Agent overrode the Table 4
+  footnote ("reverse coded"): Step 5b re-check CONFIRMED the stored data are raw -- SJ mean vs PHQ-9 sum r=+0.35,
+  SK r=-0.077 (paper .35/-.08); judgment item means 2.1-2.6. RIGHTS ESCALATION for Ben: no 26-item SCS row in
+  instrument_rights_register.csv (SCS-SF row doesn't cover it); Neff's info sheet grants use "for any purpose
+  whatsoever" + translation. Ship-shaped, same basis as shipped moe2025_scs/kumlander_2018_scs; needs a human-added
+  ship row before upload.
+Queue: 36 pending. Cap check: the Step 0 cap is batch_450, not reached.
