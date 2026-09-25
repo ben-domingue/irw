@@ -1,0 +1,4 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"khoa_2023_assurance","PASS",3,3,TRUE,TRUE,FALSE,TRUE,0,0,""
+"khoa_2023_teaching_materials","PASS",4,4,TRUE,TRUE,FALSE,TRUE,0,0,""
+"WMD_bartczuk_2023","PASS",24,24,TRUE,TRUE,FALSE,TRUE,0,0,""
