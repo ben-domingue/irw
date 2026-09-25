@@ -26333,3 +26333,23 @@ check_provenance exit 0 (gao_2022_emotional_resilience now on the machine_transl
   (e.g. ExpRobots 2.407/1.118 vs 2.41/1.12); ExpHands by elimination + self-describing code.
   Side observation: data/ajaykumar_2023_robot_curricula.py puts an email address in its User-Agent header.
 Queue: 21 pending. Cap check: the Step 0 cap is batch_450, not reached.
+
+## batch_441 — 2026-09-25T16:33 (3 tables, 3 agents)
+Written 2 / blocked 1 / failed 0 (yield 67%). Circuit breaker: 0% failed, not tripped.
+Gates: normalize fixed 1 file (wijesinghe, NA->blank, 40 lines), audit 2 PASS (no WARNs), verify_batch 1 PASS + 1
+MISSING(exempt, data_labels), lint no problems, irw-validate ok x2, check_provenance exit 0 (nothing from this batch).
+- abukhalaf_2025_housing_risk (65 rows): data_labels from PLOS S1 xlsx headers (script matches codes by header text);
+  NOT_NEEDED row in both verification files. option_text blank (administered anchors unpublished; paper only shows the
+  0-1 % coding example). Agent cross-checked 65/65 per-item response-count cells vs source xlsx. Known data note: ~90
+  between-point imputed-looking values per the processing script are dropped there (documented). Side observation:
+  data/abukhalaf_2025_housing_risk.py puts an email address in its User-Agent header (same as ajaykumar in batch_440).
+- wijesinghe_2025_sustained_agile_usage (40 rows): paper_explicit, S2 Questionnaire items print SAU01..SAU08 = data
+  column codes. VERIFIED: live first-PC loadings vs Table 2 outer loadings max |diff| .012, Spearman 1.000; alpha
+  .887 vs .890. Endpoints-only anchors.
+- nam_2024_selfeff: BLOCKED, retry NO -- rights escalation, not a verdict. Stanford/SMRC Self-Efficacy for Diabetes:
+  instrument PDF "free to use without permission" vs SMRC site Terms "may not: Copy, reproduce, modify, use, republish
+  ... unless indicated that is it allowed" and eval-tools page "to use in your own research". Orchestrator re-fetched
+  and confirmed all three quotes. Needs Ben's SMRC ruling; may also reach the CES-D register row and
+  liu_2017_communication. Candidate (80 rows, gate-passing) + verify script (PASS, would be PARTIAL) saved in
+  .cache/nam_2024_selfeff/. pending_index_notes row added.
+Queue: 18 pending. Cap check: the Step 0 cap is batch_450, not reached.
