@@ -25937,3 +25937,20 @@ the .do is gone) is confirmed fixed on both re-queued tables:
 - mexico_2023_quality_corruption (10 rows, section VIII 8.1/8.2/8.3.1-3): Step 3b ok, section VIII not renumbered
   between waves; 30/30 cells match raw 2021+2023 counts.
 mapping_verification.csv: the two batch_422 rows for buses/cablecars were superseded by batch_423 rows (one row per table).
+
+**batch_424 — 2026-09-25 ~08:15 PDT.** 3 tables (3 agents): **3 written / 0 blocked / 0 failed**, yield 3/3.
+All gates clean: normalize 0 changed, audit 3 PASS (no WARNs), verify_batch 3 PASS, lint clean, irw-validate ok x3,
+check_provenance exit 0. All three: paper_explicit, text_source=study_materials, machine_translation (issues-page
+line owed at upload), INEGI credit + no-endorsement public_note per the rights register (irw#2381 R01), VERIFIED by
+per-cov_year count matching against INEGI 2023 + 2021 microdata; Step 3b found no renumbering in any of them.
+- mexico_2023_quality_electricgovernment (12 rows, section X q10.1 options 1-6): 24/24 cells. p10_1_2 (online form)
+  Si share 0.377 in 2021 vs 0.273 in 2023 -- reproduced from raw, not a build error.
+- mexico_2023_quality_generalcorruption (5 rows, section IX q9.1 + q9.7; no overlap with _corruption's section VIII):
+  **response-data lead** -- the build does not set 9.7's code 3 "No aplica" missing, so p9_7 scores it as a level
+  above No. Orchestrator re-checked with irw_fetch: p9_7 resp 0/1/3/NA = 669/17441/59816/970 (resp 3: 2021 28,724,
+  2023 31,092). Item text ships resp 3 = "No aplica" honestly; whether data/mexico_2023_quality.py should drop it is
+  Ben's call, and other ENCIG items with a No-aplica code may share it (not checked).
+- mexico_2023_quality_health (28 rows, q5.4 IMSS options 01-11 + 5.4a): **Sheet1 STOP overridden, Ben to confirm**
+  -- same as batch_332: a hand-built sheet (1hlCpjbCJai2ZMfWuXn7WVX7q-ECPc14cupRxIgF3a74) was never uploaded and fails
+  the gate (resp 1/2/null vs live 0/1, option numbers in item_text). If the STOP should hold, drop the CSV.
+Queue: 15 pending. Cap check: the Step 0 cap is batch_430, so it has not been reached.
