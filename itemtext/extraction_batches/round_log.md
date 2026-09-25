@@ -25642,3 +25642,22 @@ Notes:
 - Data: the deposit has 247 rows against 343 in the paper (as in batch_407). The script drops sentinels: 41 in LS06, 55 in OP04 and 22 in OP12, which leaves each of those items at n=246.
 
 Cap check: the Step 0 cap is batch_430, so it has not been reached.
+
+## batch_409 — 2026-09-24T21:29:32-07:00
+
+3 tables, 3 agents. **3 written+done / 0 blocked / 0 failed** (0% failed, so the breaker is not tripped). Yield: 3 of 3. All three are the last siblings of already-shipped sources, so each agent was pointed at its siblings' batch conventions.
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `li_2021_org_cultural_diversity` | **done** | 63 (9×7) | `paper_order` | PARTIAL, verify PASS |
+| `butt_2022_performance_impact` | **done** | 63 (9×7) | `data_labels` | NOT_NEEDED |
+| `hoorani_2022_epreas` | **done** | 25 (5×5) | `data_labels` | VERIFIED, verify PASS |
+
+Gates: normalize_nulls fixed 1 file (li_2021); audit_batch 3 PASS, no WARNs; verify_batch 2 PASS + 1 exempt; lint clean; irw-validate ok x3; check_provenance exit 0 (none of this batch is flagged).
+
+Notable:
+- `li_2021_org_cultural_diversity` is `paper_order`, not the siblings' `paper_explicit`: the S1 Appendix prints two unnumbered-prefix sub-blocks (management 1-4, responsiveness 1-5), so OCD1-4/OCD5-9 is by listing order. Route 1 (refitting the paper's 5-item CFA) reproduces the Table 2 loadings to 4 dp and is uniquely best of 15,120 column assignments, but it ties columns to codes, not to wording. The 4|5 sub-block boundary is not established: OCD5 loads with the management items (0.729). option_text blank (seven unlabelled boxes).
+- `hoorani_2022_epreas` — **response-data defect, confirmed by the orchestrator**: wave 2 is an exact copy of wave 1 (535/535 identical id×item pairs for every item; 5,350 rows = 2,675 real answers ×2). The agent says the caregiver section was asked in round two only; that part was not re-checked. It's disclosed in the notes and public_note. No GitHub issue filed — a candidate for a data-side issue, and the other `hoorani_2022_*` tables should be checked for the same carry-forward. The respondent is the caregiver, which the instrument field says.
+- `butt_2022_performance_impact`: PI5 was dropped by the authors (PI5_del), so it isn't in the table; all 63 item×level cells match the .sav.
+
+Cap check: the Step 0 cap is batch_430, so it has not been reached.
