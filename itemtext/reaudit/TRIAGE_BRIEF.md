@@ -149,3 +149,44 @@ Do NOT edit files in the repo, run git, or touch Redivis. When done, report in u
 counts by verdict, count of old-audit disagreements, how many rights calls the upstream check
 changed, and anything surprising (table defects, personal data in a source deposit -- list them,
 do not act).
+
+## [new, 2026-09-25, waves 5-8] Rulings since wave 4 -- apply them, don't re-litigate
+
+Ruled by Ben on 2026-09-25 (irw#2382, `needs_human_sample_2382.md`), or set on the licensing rules page. Each ruling
+below changes what you write.
+
+**Coverage and what counts as item text**
+- **Partial coverage:** OBTAINABLE needs wording for **more than half** of the table's items; the rest are left blank.
+  Say the count in `evidence` (e.g. "23 of 25 worded"). Exactly half, or less, is NOT_PUBLISHED.
+- **Short titles or descriptors** ("Grandiose", "round to thousand place", a one-word key) are not item text:
+  NOT_PUBLISHED.
+- **Respondent-produced targets scored against a rubric** (a kanji to write, a sentence to transcribe) are answer keys,
+  not item text: NOT_ITEM_TEXT, unless the prompt shown to the respondent is itself published.
+- **Rating-dimension tables** (stimulus on `id`, items = rating scales): NEEDS_HUMAN, with `evidence` starting
+  `DESIGN:stimulus-on-id`. The stimulus has to be integrated into the item text, and there's no format for that yet.
+- **Inferred instrument** (never named; inferred from composites or item count): OBTAINABLE is allowed, but `evidence`
+  must start `INFERRED:` and say what the inference rests on, so it can be verified and an issue filed.
+
+**Rights**
+- **Third-party permission lines block** (rules 10 and 12): a summary site, a study's "authorized for use by the
+  original authors", or a reprint's "reprinted with permission ... contact the author" -> RIGHTS_BLOCK.
+- **Originator withholds the wording** ("not distributed", "cannot be republished due to copyright") -> RIGHTS_BLOCK.
+- **Commercially sold test, publisher states no terms** -> NEEDS_HUMAN, `evidence` starting `HOLD:commercial`.
+- **DSM diagnostic criteria text** -> RIGHTS_BLOCK (APA: written permission required for any use).
+- **CC BY-SA wording is not a block** (rule 18). Write OBTAINABLE, with `rights` starting `CC BY-SA:` and naming the
+  source. The table will need a licence notice. **CC BY-NC-SA still blocks.**
+- **PsycTESTS hold (2026-09-23).** Before any `silence` ship on a named instrument, query Crossref:
+  `https://api.crossref.org/works?query.bibliographic=<instrument name>&filter=prefix:10.1037,type:dataset&rows=5`
+  (pause 3 s between calls). If a `10.1037/t…` record matches the instrument, the verdict is NEEDS_HUMAN with
+  `evidence` starting `PSYCTESTS:<doi>`. An express grant or a CC BY first publication outranks the hold. A record for
+  a later translation only does not hold the original. Record the lookup in `rights` either way.
+- Register rows ruled since wave 4 include HADS, DAS/MHS (incl. DAS-4), BDI-II/Pearson, BSI-18, NEO-FFI/PAR, UCLA-L
+  (ship), RES (ship), MSPSS (ship), AUDIT and SRQ (ship_with_note), STOP-Bang, GCBS (ship), MFQ-2 (ship). Read the
+  register first.
+- **PISA:** skip. If a table is PISA, write NOT_PUBLISHED with `evidence` "PISA skipped by ruling 2026-09-25".
+
+**Fetching**
+- Zenodo still returns 403 to this machine. The WebFetch tool reaches it:
+  `https://zenodo.org/api/records/<id>` lists the files, and `https://zenodo.org/api/records/<id>/files/<key>/content`
+  saves the binary (.sav/.dta/.xlsx/.docx) to a local file you can read. Use `ZENODO_RATELIMIT:` only if that fails too.
+- `.rar` archives: see your task for an extractor.
