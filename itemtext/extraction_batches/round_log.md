@@ -26188,3 +26188,21 @@ FomoNegativeAffect_cremer_2026_panas, shared with _phq -- not an itemtext defect
   needs permission" clause. Shipped on silence, no register row; block instead if that clause is read as reaching the
   revised instrument. Sibling stolz_2015_death_attitudes still pending.
 Queue: 42 pending. Cap check: the Step 0 cap is batch_450, not reached.
+
+## batch_434 — 2026-09-25T15:29 (3 tables, 3 agents)
+Written 3 / blocked 0 / failed 0 (yield 100%). All gates clean: audit 3 PASS, verify 1 PASS + 2 exempt
+(data_labels), lint no problems, irw-validate ok x3, check_provenance nothing new beyond the standing report.
+- kohlmann_2016_phq9 (36 rows): paper_order, VERIFIED. Paper's per-symptom "at least several days" %s are all
+  distinct and each live rate lands within 0.10 of exactly its own symptom (e.g. phq9_9 14.14 vs 14.1); total
+  5.51 (4.63) vs 5.5 (4.6). phq9_6 needs 0.10 tolerance (21.847 printed as 21.9; paper CI centred on 21.85).
+  German form unpublished -> canonical German PHQ-9 (Pfizer) + official English; PHQ register row = ship.
+- stolz_2015_death_attitudes (24 rows): data_labels, same S1 .sav as the batch_433 sibling (sha256 matches);
+  24/24 cells reproduce. English item text is MACHINE-translated (no English in paper/S1/S2 for this battery;
+  option labels are S2's own) -> translation_source=mixed, owes an issues-page line at upload. Note: the six
+  items are not one scale (c14x1/2 afterlife/meaning r -0.13..+0.25 with the four euthanasia items).
+- mironshatz_2015_happiness_beliefs (28 rows): data_labels, S1 xlsx header rows. state1/state6 wording is
+  truncated at 80 chars in the deposit; shipped as-is, disclosed in public_note. No option labels anywhere ->
+  option_text blank. Step 5b re-check CONFIRMED the agent's override of data/mironshatz_2015_life_satisfaction.py's
+  header ("N=810 across four sites"): paper says "810 women from Columbus, Ohio" and country==1 for 810/810 rows.
+  So English administration; the 8 other mironshatz_2015_* tables likely need the same correction to that comment.
+Queue: 39 pending. Cap check: the Step 0 cap is batch_450, not reached.
