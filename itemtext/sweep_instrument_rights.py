@@ -9,7 +9,7 @@ later, one at a time.
 Reads `itemtext/instrument_rights_register.csv` and reports candidate matches on
 BOTH surfaces a restricted instrument can reach the corpus through:
 
-  item_text  -- the item-text shards (irw_text, irw_text_2). A withdrawal removes
+  item_text  -- every item-text shard in IRW_TEXT_DATASETS. A withdrawal removes
                 these, so this is the surface every withdrawal so far has fixed.
   item code  -- the RESPONSE tables. A processing script that uses source column
                 headers as item codes carries the instrument into data that no
@@ -56,7 +56,19 @@ import argparse, csv, os, re, sys
 from pathlib import Path
 
 REG = Path(__file__).resolve().parent / "instrument_rights_register.csv"
-TEXT_SHARDS = ("irw_text", "irw_text_2")
+
+
+def text_shard_names():
+    """Every item-text shard, read from metadata/redivis_config.R.
+
+    Not a hardcoded tuple: one naming irw_text and irw_text_2 would silently stop
+    sweeping the moment irw_text_3 took tables.
+    """
+    src = str(Path(__file__).resolve().parents[1])
+    if src not in sys.path:
+        sys.path.insert(0, src)
+    from red_up.targets import load_registry, text_shards
+    return tuple(t.name for t in text_shards(load_registry()[1]))
 
 
 def load_register():
@@ -103,7 +115,7 @@ def main():
             "LOWER(CAST(item_text AS STRING)) LIKE '%%%s%%'"
             % p.lower().replace("\\", "\\\\").replace("'", "\\'")
             for _, p in pats)
-        for shard in TEXT_SHARDS:
+        for shard in text_shard_names():
             ds = redivis.user("datapages").dataset(shard, version=args.version)
             # qualifiedReference carries the version; a bare name would not.
             tables = {t.name: t.properties["qualifiedReference"] for t in ds.list_tables()}
