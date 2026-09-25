@@ -25775,3 +25775,23 @@ Notable:
   - Rights: register R14 `ship_with_note`.
 
 Cap check: the Step 0 cap is batch_430, so it has not been reached.
+
+## batch_414 — 2026-09-24 22:18 PDT — 3 tables, 3 written / 0 blocked / 0 failed (yield 100%)
+
+Three agents, no kills. Every gate came back clean: normalize_nulls found nothing to change, and audit_batch gave 3 PASS with no WARNs, so Step 5c had nothing to explain. verify_batch gave 2 PASS plus 1 exempt (data_labels), lint_verification found no problems, irw-validate was ok on all 3, and check_provenance exited 0.
+
+- `ni_2025_knowledge_transfer` (20 rows) and `ni_2025_relationship_network` (40 rows): these are the siblings of the batch_118 ni_2025_* tables, from Ni & Wang 2025 PLOS ONE e0326490 (CC BY 4.0) §3.2. Both are `paper_order` / `translated_substitute` / `study_supplied` and ship Chinese-administered, English-only.
+  - The mapping check is PARTIAL on both and follows the siblings. For each scale, only one permutation of the codes reproduces the Table 3 (image) loadings within rounding:
+    - KT: max deviation 0.0003; next best 0.0120.
+    - RN: 1 of 40,320 permutations fits within 0.0005; next best 0.0020.
+  - Alpha and scale mean also reproduce (KT 0.949 / 3.2409; RN 0.949 / 3.9328). The orchestrator re-ran both verify scripts and both gave PASS.
+  - What stays unestablished: which prose-list position corresponds to which Table 3 row.
+  - option_text is blank because the paper prints no Likert anchors.
+  - Rights: RN falls under register CLASS-closed-silent-adaptation (irw#2381 R16). KT has no register row; its agent reported silence, not a grant, and wrote no row. **A human should confirm the class ruling covers KT as well.**
+- `lindstrom2021_team_identification` (21 rows): `data_labels` from the figshare .sav (CC BY 4.0), Swedish base with the deposit codebook's English, same layout as the batch_078 siblings.
+  - Deposit item × resp counts match live in 21/21 cells, and the scale mean of 6.13 matches the paper.
+  - The label's source typo "en viktigt del" ships as written.
+  - Rights: CLASS-closed-silent-adaptation names this table explicitly.
+- **Flag for a human (not acted on):** the lindstrom agent noticed that the shipped sibling `lindstrom2021_honesty_humility` (batch_078, HEXACO-PI short form) went out on the open-deposit-licence argument. SKILL's irw#1945 ruling (2026-09-05) blocks HEXACO wording even from open deposits. That ruling names the HEXACO-PI-R, so it may or may not reach the short form. It needs a rights decision.
+
+Cap check: the Step 0 cap is batch_430, so it has not been reached.
