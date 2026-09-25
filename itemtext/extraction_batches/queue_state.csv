@@ -1871,8 +1871,8 @@ goldberg_2018_hpq_h,done,batch_420,2026-09-25T05:15:15-07:00
 thomeczek2025_les,done,batch_421,2026-09-25T05:26:22-07:00
 goldberg_2018_prs_bas_bis,done,batch_421,2026-09-25T05:26:22-07:00
 smoking_perseverance_mcneish_2025,done,batch_421,2026-09-25T05:26:22-07:00
-mexico_2023_quality_buses,done,batch_422,2026-09-25T06:00:00-07:00
-mexico_2023_quality_cablecars,blocked,batch_422,2026-09-25T06:00:00-07:00
+mexico_2023_quality_buses,pending,,
+mexico_2023_quality_cablecars,pending,,
 mexico_2023_quality_confidence,done,batch_422,2026-09-25T06:00:00-07:00
 mexico_2023_quality_corruption,pending,,
 mexico_2023_quality_electricgovernment,pending,,

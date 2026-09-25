@@ -25917,3 +25917,7 @@ slice-7 mexico tables paused on this resume now.
 **Blocked (no wording):** jeilani_2024_social_support_family (419). **Buses** item text (batch_422) kept for re-check
 against the rebuilt table. **Leads:** gcb5_2025 script vs live resp shift; SBD_Smith_2020 header=TRUE drops respondent 1;
 abdullah_2024_blqol drops 133 zero codes; jeilani_2024_social_outcomes is the MSPSS SO subscale (dictionary name wrong).
+
+**2026-09-25:** mexico_2023_quality_buses and _cablecars re-queued (pending) after #2415's rebuild went live: buses'
+batch_422 text carried a public_note describing the fixed 2021 BRT pooling (CSV removed, notes/provenance kept as
+history); cablecars' data-defect block no longer applies (the table is 2023-only now).
