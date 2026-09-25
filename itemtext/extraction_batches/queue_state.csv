@@ -813,7 +813,7 @@ PEMAIW_Qiu_2020_DASS,done,batch_131,2026-09-10T00:47:09
 PEMAIW_Qiu_2020_FFMQ,done,batch_131,2026-09-10T00:47:09
 penningroth_2019_pm_concerns,done,batch_132,2026-09-10T00:50:51
 penningroth_2019_pm_goals,done,batch_132,2026-09-10T00:50:51
-personality_handwriting__financial_behavior,blocked,batch_132,2026-09-10T00:50:51
+personality_handwriting__financial_behavior,done,batch_132,2026-09-10T00:50:51
 personality_handwriting__graphology,done,batch_132,2026-09-10T00:50:51
 peters_2025_att_exp_strength,done,batch_133,2026-09-10T01:29:09
 peters_2025_att_instr_eval,done,batch_133,2026-09-10T01:29:09
@@ -1635,7 +1635,7 @@ huang_2023_medseq,done,batch_339,2026-09-23T21:16:14-07:00
 islam_2022_bsmas,done,batch_339,2026-09-23T21:16:14-07:00
 islam_2022_gad7,done,batch_339,2026-09-23T21:16:14-07:00
 islam_2022_phq9,done,batch_340,2026-09-23T21:18:15-07:00
-jian-wen-low-sepsis-and-trauma-resuscitation-2024,blocked,batch_340,2026-09-23T21:18:15-07:00
+jian-wen-low-sepsis-and-trauma-resuscitation-2024,done,batch_340,2026-09-23T21:18:15-07:00
 kern_2021_connectedness,done,batch_340,2026-09-23T21:18:15-07:00
 kern_2021_engagement,done,batch_341,2026-09-23T21:33:57-07:00
 kern_2021_learning,done,batch_341,2026-09-23T21:33:57-07:00
@@ -1670,7 +1670,7 @@ hexaco_ashton_2014_x,done,batch_351,2026-09-24T06:28:29-07:00
 nguyen_2026_autonomy_academic_motivation,done,batch_351,2026-09-24T06:28:29-07:00
 nguyen_2026_autonomy_academic_pressure,done,batch_352,2026-09-24T06:36:53-07:00
 nguyen_2026_autonomy_family_factors,done,batch_352,2026-09-24T06:36:53-07:00
-nguyen_2026_autonomy_school_autonomy_support,blocked,batch_352,2026-09-24T06:36:53-07:00
+nguyen_2026_autonomy_school_autonomy_support,done,batch_352,2026-09-24T06:36:53-07:00
 nguyen_2026_autonomy_student_choice,done,batch_353,2026-09-24T06:44:58-07:00
 nguyen_2026_autonomy_student_ownership,done,batch_353,2026-09-24T06:44:58-07:00
 nguyen_2026_autonomy_student_voice,done,batch_353,2026-09-24T06:44:58-07:00
@@ -1754,7 +1754,7 @@ baquerotomas_2026_phq9,done,batch_380,2026-09-24T11:21:10-07:00
 goksel_2026_embarrassment_appeasement,done,batch_380,2026-09-24T11:21:10-07:00
 goksel_2026_embarrassment_emb_perception,done,batch_381,2026-09-24T11:22:03-07:00
 goksel_2026_embarrassment_liking,blocked,batch_381,2026-09-24T11:22:03-07:00
-goksel_2026_embarrassment_moralityandwarmth,blocked,batch_381,2026-09-24T11:22:03-07:00
+goksel_2026_embarrassment_moralityandwarmth,done,batch_381,2026-09-24T11:22:03-07:00
 goksel_2026_embarrassment_puremorality,done,batch_382,2026-09-24T11:33:47-07:00
 goksel_2026_embarrassment_purewarmth,done,batch_382,2026-09-24T11:33:47-07:00
 goksel_2026_embarrassment_similarity,blocked,batch_382,2026-09-24T11:33:47-07:00
@@ -1784,13 +1784,13 @@ spain_2026_disinformation_concern,done,batch_390,2026-09-24T13:10:30-07:00
 spain_2026_disinformation_hostility,done,batch_390,2026-09-24T13:10:30-07:00
 spain_2026_disinformation_humorclimate,done,batch_391,2026-09-24T13:19:17-07:00
 spain_2026_disinformation_humorlimits,done,batch_391,2026-09-24T13:19:17-07:00
-spain_2026_disinformation_humorperception,blocked,batch_391,2026-09-24T13:19:17-07:00
+spain_2026_disinformation_humorperception,done,batch_391,2026-09-24T13:19:17-07:00
 spain_2026_disinformation_memes,done,batch_392,2026-09-24T13:31:32-07:00
 spain_2026_disinformation_offense,done,batch_392,2026-09-24T13:31:32-07:00
 spain_2026_disinformation_personalhumor,done,batch_392,2026-09-24T13:31:32-07:00
 spain_2026_disinformation_regulation,done,batch_393,2026-09-24T13:33:52-07:00
 coh_goodman_2023_racial_comp,done,batch_394,2026-09-24T13:40:01-07:00
-goldberg_2018_spa_beliefs_about_intelligence,blocked,batch_394,2026-09-24T13:40:01-07:00
+goldberg_2018_spa_beliefs_about_intelligence,done,batch_394,2026-09-24T13:40:01-07:00
 goldberg_2018_spa_changeability,done,batch_394,2026-09-24T13:40:01-07:00
 goldberg_2018_spa_cultural_familiarity,done,batch_395,2026-09-24T13:50:41-07:00
 goldberg_2018_spa_ipip,done,batch_395,2026-09-24T13:50:41-07:00
@@ -1819,7 +1819,7 @@ mft_validationandreplication,done,batch_403,2026-09-24T20:30:44-07:00
 jovanovic_2026_conscientiousness_yips,done,batch_403,2026-09-24T20:30:44-07:00
 SABFI2_Gallardo_Pujol_2018_Constru,done,batch_404,2026-09-24T20:53:03-07:00
 SABFI2_Gallardo_Pujol_2018_Trust,done,batch_404,2026-09-24T20:53:03-07:00
-goksel_2026_embarrassment_warmth_competence,blocked,batch_404,2026-09-24T20:53:03-07:00
+goksel_2026_embarrassment_warmth_competence,done,batch_404,2026-09-24T20:53:03-07:00
 goksel_2026_embarrassment_wcm,done,batch_405,2026-09-24T21:01:59-07:00
 ren_2024_loneliness,done,batch_405,2026-09-24T21:01:59-07:00
 act_kay_2025,done,batch_405,2026-09-24T21:01:59-07:00

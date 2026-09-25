@@ -25899,3 +25899,21 @@ All gates were clean. normalize_nulls changed 0 files; audit_batch was 2/2 PASS 
 - `mexico_2023_quality_cablecars`: **blocked**, retry test NO. 2023 q5.11 = Cablebús/Mexicable; 2021 q5.11 = toll highways. Orchestrator re-check: p5_11_1..5/p5_11a hold 13,823–14,024 2021 rows vs 667–673 2023 rows each; 93.3% of all rows are 2021 toll-highway answers (p5_11_1 2023 622/49, 2021 8970/4996). Item text cannot attach to one meaning. Row added to pending_index_notes.csv. Cached questionnaires + microdata for both years are in `.cache/mexico_2023_quality_cablecars/` for reuse by later rounds.
 
 Queue: 19 pending. Cap check: the Step 0 cap is batch_430, so it has not been reached.
+
+## 2026-09-25 — #2381 slice 7 (batch_403–422) triaged; 62 item-text tables released to irw_text
+
+Slice 7 (79 = the rights-bank ship calls): 60 processed before the pause, 58 written. Uploaded to irw_text and released
+by Ben (irw_text 943): 54 slice-7 tables + the 7 name-length holds (Ben waived the 40-char cap for item text 09-25;
+queue rows flipped blocked -> done) + mexico_2023_quality_confidence. act_kay_2025 is the irw_text_3 seed: stamped,
+not uploaded. Stamped uploaded=2026-09-24 (403-418 + act_kay) / 2026-09-25 (rest); CSVs removed. The irw_text budget
+guard (oneoff/itemtext-rights-bank/irw_text_budget.py, limit 990) stopped the chain at 989 overnight; Ben then kept
+ITEMTEXT_DEFAULT = irw_text and released the held pool's reservation (held_not_reserved.txt).
+
+**Wrong-now found and withdrawn:** mexico_2023_quality_cablecars / _buses (#2415: ENCIG 2021 appended under 2023 by
+name across renumbered questions) — then the whole family rebuilt, harmonised (PR #2417, data/mexico_2023_quality.py
+replaces the .do; 2023 rows and ids unchanged; cov_year added) and released in item_response_warehouse_2. The 19
+slice-7 mexico tables paused on this resume now.
+
+**Blocked (no wording):** jeilani_2024_social_support_family (419). **Buses** item text (batch_422) kept for re-check
+against the rebuilt table. **Leads:** gcb5_2025 script vs live resp shift; SBD_Smith_2020 header=TRUE drops respondent 1;
+abdullah_2024_blqol drops 133 zero codes; jeilani_2024_social_outcomes is the MSPSS SO subscale (dictionary name wrong).
