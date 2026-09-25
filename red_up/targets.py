@@ -191,7 +191,8 @@ def newest_text_shard(targets: list[Target]) -> Target | None:
 #: where it lives (`_home_for` in cli.py). The pin changes only where tables
 #: that exist nowhere yet are created. Do not reorder IRW_TEXT_DATASETS
 #: instead: clients read that order to resolve newest-first.
-ITEMTEXT_DEFAULT: str | None = "irw_text"
+#: 2026-09-25: Ben switched new item text to irw_text_3 (irw_text at 965 of ~990).
+ITEMTEXT_DEFAULT: str | None = None
 
 
 def itemtext_target(targets: list[Target]) -> Target | None:
