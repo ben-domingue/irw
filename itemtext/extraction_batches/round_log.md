@@ -25818,3 +25818,19 @@ Three agents, no kills. normalize_nulls changed nothing. audit_batch gave 3 PASS
 - **Rights, for a human to review:** the TTMI (Knekta & Eklöf 2015) has no rights-register row. Both agents found no stated terms, which is silence, not a grant. They shipped on the wording from the study's CC BY deposit and wrote no register row.
 
 Cap check: the Step 0 cap is batch_430, so it has not been reached.
+
+## batch_416 — 2026-09-24 22:37 PDT — 3 tables, 3 written / 0 blocked / 0 failed (yield 100%)
+
+Three agents, no kills. normalize_nulls changed nothing. audit_batch gave 3 PASS with no anomalies. verify_batch gave 3 PASS, lint_verification found no problems, and check_provenance exited 0 (only the standing `mixed` REVIEW list, none from this batch). irw-validate was ok on both yao tables. It gave one WARN on SBD_Smith_2020: `name_charset`, because the live table name has capitals. That comes from the corpus name, not from the itemtext; see notes.csv.
+
+- `SBD_Smith_2020` (242 rows = 22 items × resp 0–10). `paper_order` / `study_materials`, from the authors' OSF form "BPSES - Original battery.docx" (osf.io/c4v7g).
+  - Step 3b: the live table is the 22-item original battery, not the published 17-item BPSES.
+  - Only 0/5/10 are labelled; the other points are blank.
+  - PARTIAL: refitting the authors' CFA to live data reproduces all 34 published Table 2 loadings within .009, which pins 18/22 items. The order within the dropped group MBDS18/19/21/22 is not established.
+  - **Response-data defect, re-checked by the orchestrator. Confirmed.** `data/SBD_Smith_2020.r` reads the header-less `bpses_pre_for_factor.dat` with `header = TRUE`. The file has 303 rows × 22 columns, and row 1 is data. The live table has 302 ids (6644 rows, 302 per item), against 303 in the paper. The fix is `header = FALSE` plus a re-upload. It is not acted on here; a public_note discloses 302 of 303.
+  - Rights: the authors' own scale on OSF with no licence set, which is silence. No register row was written.
+- `yao_2020_ius` (135 rows = 27 × 1–5) and `yao_2020_pswq` (80 rows = 16 × 1–5). Both are siblings of batch_328's yao_2020_gad, from the same Mendeley deposit (CC BY 4.0, no labels, 0 CJK characters) and the same closed-access J Pers Assess paper. Both are `paper_order` / `translated_substitute` with language=Chinese.
+  - IUS: English from Buhr & Dugas 2002 via PhenX PX650701 (`official_instrument_english`). The register's IUS row (`ship_with_note`) was applied. PARTIAL: ius24 is pinned via BDI16 sleep, .306 vs .207. The two-factor grouping beats 10,000 random splits (p = .0004). Order within factors is not established, and the reverse sleep check and the IUS-12 split did not hold (disclosed).
+  - PSWQ: English via CamCOPS pswq.xml (`third_party_english`, contractions spelled out and not checked against Meyer 1990). Register row R07 (`ship_with_note`) was applied. PARTIAL: the deposit's own `PSWQ<n>new` = 6 − pswq<n> for n = {1,3,8,10,11} (1402/1402), and the item-rest correlation is negative for exactly those five. Order within each keying class is not established. Live stores the reverse items unreversed, which the public_note discloses.
+
+Cap check: the Step 0 cap is batch_430, so it has not been reached.
