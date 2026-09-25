@@ -26048,3 +26048,28 @@ only its mapped column.
   option numbers in item_text). If the STOP should hold, drop the CSV. 2023 P4_5_1 = 32524/5925.
 No response-data defects found.
 Queue: 3 pending. Cap check: the Step 0 cap is batch_430, so it has not been reached.
+
+**batch_429 — 2026-09-25 ~09:10 PDT.** 3 tables (3 agents): **3 written / 0 blocked / 0 failed**, yield 3/3.
+Gates: normalize 0 of 3 changed; audit 3 PASS (no WARNs); verify_batch PASS=3; lint clean; irw-validate 3 ok;
+check_provenance exit 0 (standing `mixed` REVIEW list only). All three: paper_explicit, study_materials,
+machine_translation (issues-page line owed at upload), INEGI credit + no-endorsement public_note per irw#2381 R01,
+VERIFIED by per-wave count matching against INEGI microdata, each live vector matching only its mapped column, plus
+5.1-screener routing. Orchestrator re-check (INEGI 2023 microdata, independent of the agents' scripts): P5_3_1
+1/2 = 2122/566, P5_5_01 = 1596/1256, P5_7_01 = 301/127, P5_7A 1-6 = 75/180/84/44/24/20; 5.3/5.5/5.7 answerers =
+exactly the P5_1_02/04/06 Si sets (2730/2862/430). All match the agents.
+- mexico_2023_quality_university (22 rows, q5.3/5.3a public universities): not renumbered in 2021. **Sheet1 STOP
+  overridden, Ben to confirm**, same shape as batch_424-428: hand-built sheet 11oOE0mriKvT5F1lr7H4wDRaDOCqkV8EtelKMsdAdQGY,
+  never uploaded, fails the gate as-is (resp 1/2/null, option numbers in item_text). If the STOP should hold, drop the
+  CSV. Items 1-8 are word-identical to 5.2 (schooling) items 2-9; counts and routing separate them.
+- mexico_2023_quality_wellbeing (28 rows, q5.5/5.5a): **dictionary problem — question 5.5 is ISSSTE health service**,
+  not a "Bienestar" provider (orchestrator confirmed in the 2023 questionnaire text: "5.5 Durante 2023, ¿el servicio
+  de salud en el ISSSTE de esta ciudad..."; IMSS-Bienestar is 5.7 = `_wellbeingservice`, INSABI is 5.6 =
+  `_healthservice`). Description "Well-Being Service Quality" and the table name misdescribe it; suggested Description
+  "ISSSTE Health Service Quality"; renaming is Ben's call. Item text follows the data, and public_note flags the mismatch.
+  Not renumbered (RENAME_2021 only zero-pads P5_5_1..9). No Sheet1 STOP.
+- mexico_2023_quality_wellbeingservice (28 rows, q5.7/5.7a IMSS-Bienestar): 2023-only, as intended — live table has
+  only cov_year 2023; no p5_7_* in ASKED_2021 (2021's 5.7 was home electricity, routed to p5_8_*). Description
+  "Well-Being Service Satisfaction" is loose, but not wrong. No Sheet1 STOP.
+No response-data defects found.
+Queue: 0 pending. Cap check: the Step 0 cap is batch_430, so it has not been reached; the queue is now exhausted, so
+the next firing will stand down on the queue-exhausted condition.
