@@ -26353,3 +26353,16 @@ MISSING(exempt, data_labels), lint no problems, irw-validate ok x2, check_proven
   liu_2017_communication. Candidate (80 rows, gate-passing) + verify script (PASS, would be PARTIAL) saved in
   .cache/nam_2024_selfeff/. pending_index_notes row added.
 Queue: 18 pending. Cap check: the Step 0 cap is batch_450, not reached.
+
+## batch_442 — 2026-09-25 16:43 PDT (3 tables, 3 agents)
+Written 3 / blocked 0 / failed 0 (yield 3/3). All gates clean: audit PASS x3, verify_batch PASS x3, lint 0 ERROR/0 WARN
+(2 INFO item-axis notes), irw-validate ok x3, check_provenance exit 0 (only the standing `mixed` REVIEW list).
+- zhang_2025_green_supply_intent (35 rows, paper_explicit, VERIFIED): S2 appendix code labels GSCII1-5; live == S1 column
+  for 292/292 ids; CFA reproduces Table 2 loadings to 3 dp. English only published for a Chinese survey ->
+  translated_substitute/study_supplied. Only resp 1 and 7 labelled.
+- zhao_2025_leisure_involvement (60 rows, paper_explicit, VERIFIED): Table 1 codes LI1-12 read from image (spot-check
+  worthwhile); live == S1 for 199/199. Language Chinese inferred (Changsha in-person), translated_substitute. No option labels.
+- smirnov_2025_enrollment_motives (22 rows, data_labels + voluntary VERIFIED row): Fig 1 wording read from image; all 11
+  selection rates reproduce Fig 1 percentages to rounding. Russian survey, English-only published -> translated_substitute.
+  Step 5b re-check confirmed: motive_deferment male 168/581 = 28.92% (Fig 1: 29%), female 3/686.
+Queue: 15 pending. Cap check: the Step 0 cap is batch_450, not reached.
