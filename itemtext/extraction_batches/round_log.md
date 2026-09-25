@@ -26145,3 +26145,27 @@ finding); check_provenance exit 0 (standing `mixed` REVIEW list only).
   recorded anywhere), English columns carry the publisher English (official_instrument_english). Severity bands of the
   live total reproduce the paper's 20170/3576/332/157/57. su_2024_phq9 untouched (next round).
 Queue: 48 pending. Cap check: the Step 0 cap is batch_450, not reached.
+
+**batch_432 — 2026-09-25 ~15:25 PDT.** 3 tables (3 agents): **3 written / 0 blocked / 0 failed**, yield 3/3.
+Circuit breaker: 0% failed, not tripped. Gates: normalize 0 of 3 changed; audit 3 PASS (no WARNs); verify_batch PASS=1,
+MISSING(exempt)=2 (data_labels); lint 3 rows, no problems; irw-validate 3 ok; check_provenance exit 0 (standing `mixed`
+REVIEW list only).
+- su_2024_phq9 (36 rows, 9 x 0-3): data_labels, same chain as the batch_431 GAD-7 sibling (survey headers t2..t10 ->
+  question1..9 by the study's rename script -> PHQ_N). Independently checked: the study Chinese is again NOT the
+  phqscreeners official Chinese (all 9 stems differ), so instructions/option_text blank and publisher English in
+  _translated (official_instrument_english). Zenodo per-level counts equal live in 36/36 cells; live severity bands
+  16886/6090/957/262/97 match the paper.
+- karlsson_2023_climate_risk (595 rows, 6 items, 0-100 slider, endpoint labels only): data_labels (.sav column minus
+  Pre_/Post_ prefix). **Wording taken from the administered Qualtrics form, not the .sav labels.** Orchestrator re-check
+  confirmed: .sav Post_Risk_DV_2 label reads "presens" while Pre reads "present", and the renamed MPost_Risk_DV_4 also
+  points at SPSS-side editing; the form's two blocks are identical. .sav per-item means reproduce live per wave.
+- rfq8_wozniakprus_2022 (56 rows, 8 x 1-7): paper_order, translated_substitute (Polish admin, Horvath 2023 English,
+  third_party_english), PARTIAL, verify PASS; RFQ2 vs RFQ6 not distinguishable (item-totals 0.5583 vs 0.5575).
+  **Source override: .sav labels RFQ8 1=strongly agree/7=strongly disagree; overridden.** Orchestrator re-check
+  confirmed: deposit RFQu8 matches ascending scoring max(0,x-4) on 538/538 rows vs descending 89/538; the 2021
+  sibling's IRW script already documents the same backwards label. Live RFQ8 counts 30/78/77/89/113/93/58 = deposit.
+  **Likely duplicate table:** data/rfq8_wozniakprus_2022.R and data/rfq_wozniakprus_2021.py both read the same
+  Wozniak-Prus et al. RFQ-8 study deposit (Dataverse BMCC4C; .tab vs .sav) -- 538 respondents, RFQ1..8. Needs a
+  dedup decision (human). Agent also notes batch_157's claim that Zaal 2023 Table 2 is a verbatim cross-check is
+  wrong (Zaal prints a simplified adaptation; only numbering corroborates) -- batch_157 files not edited.
+Queue: 45 pending. Cap check: the Step 0 cap is batch_450, not reached.
