@@ -25997,3 +25997,29 @@ drop the CSVs. Sheets: low 1oYRN7BPVDyqknh8O3p7zaH_zujarOpGP_45lc7u6owg, parks
 - mexico_2023_quality_police (10 rows, q4.6/4.6a city police): not renumbered; 2023 p4_6_1 14712/23799, 2021 12830/26594.
 No response-data defects found.
 Queue: 9 pending. Cap check: the Step 0 cap is batch_430, so it has not been reached.
+
+**batch_427 — 2026-09-25 ~08:40 PDT.** 3 tables (3 agents): **3 written / 0 blocked / 0 failed**, yield 3/3.
+All gates clean: normalize 0 changed, audit 3 PASS (no WARNs), verify_batch 3 PASS, lint clean, irw-validate ok x3,
+check_provenance exit 0. All three: paper_explicit, text_source=study_materials, machine_translation (issues-page
+line owed at upload), INEGI credit + no-endorsement public_note per the rights register (irw#2381 R01), VERIFIED by
+per-cov_year count matching against INEGI 2023 + 2021 microdata, each live vector matching only its namesake column.
+**All three overrode a table_context.R Sheet1 STOP, Ben to confirm** -- same shape as batch_424/426: hand-built sheet
+never uploaded (not in live_tables.csv), fails the gate as-is (resp 1/2/null vs live 0/1, option numbers in item_text).
+If the STOPs should hold, drop the CSVs. Sheets: roads 1kEsHoKH3HecX8VPdKUS2QLDIR6n0mmaE0PmzHH9h4Y0, schooling
+1H2oQ0Gf7bXcDrioNsMCd5SHTZlKdiTpUsHZTlaZFU8k, streets 1EJhzePip0kViSt3rk0eo1_PqVtKYddYNChxgMMgJQec.
+- **Step 3b / dictionary lead, orchestrator-confirmed: `_roads` and `_streets` are swapped.** data/mexico_2023_quality.py
+  gives `_roads` p4_7_* = ENCIG q4.7 "las calles y avenidas de esta ciudad" (city streets and avenues) and `_streets`
+  p4_8_* = q4.8 "las carreteras y caminos sin cuota de (ESTADO)" (toll-free state highways/roads) -- checked in the
+  2023 questionnaire text (pdftotext lines 598-601). Descriptions "Roads/Streets Service Quality" (biblio, tags) are
+  therefore reversed. Item text was extracted against the live codes (correct content per table) and the mismatch is
+  disclosed in public_note; renaming the tables or swapping the Descriptions is Ben's call. `_highways` (q5.13, toll)
+  is a third, separate question.
+- mexico_2023_quality_roads (14 rows, q4.7/4.7a): not renumbered in 2021. Orchestrator re-check: INEGI 2023 P4_7_1
+  1/2 = 6625/32161, matching the agent.
+- mexico_2023_quality_schooling (24 rows, q5.2 items 1-9 + 5.2a): 5.2 not renumbered (section V renumbering starts at
+  5.7). Orchestrator re-check: INEGI 2023 P5_2_1 1/2 = 5096/5249. Routing: 5.2 answerers = P5_1_01 Si set exactly
+  (10,417 in 2023, 10,769 in 2021).
+- mexico_2023_quality_streets (14 rows, q4.8/4.8a): not renumbered. Orchestrator re-check: INEGI 2023 P4_8_1 1/2 =
+  14026/19725.
+No response-data defects found.
+Queue: 6 pending. Cap check: the Step 0 cap is batch_430, so it has not been reached.
