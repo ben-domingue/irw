@@ -26169,3 +26169,22 @@ REVIEW list only).
   dedup decision (human). Agent also notes batch_157's claim that Zaal 2023 Table 2 is a verbatim cross-check is
   wrong (Zaal prints a simplified adaptation; only numbering corroborates) -- batch_157 files not edited.
 Queue: 45 pending. Cap check: the Step 0 cap is batch_450, not reached.
+
+## batch_433 -- 2026-09-25T15:19-07:00 (3 tables, 3 agents)
+Numbering: highest existing was batch_432 (series already continued past the 300-304 hole), so 433.
+Written 3 / blocked 0 / failed 0 -- yield 100%. All gates clean: audit 3 PASS; verify_batch 1 PASS + 2 exempt
+(data_labels); lint 3 rows no problems; irw-validate ok (one WARN name_charset on the capitalised live table name
+FomoNegativeAffect_cremer_2026_panas, shared with _phq -- not an itemtext defect); check_provenance exit 0.
+- FomoNegativeAffect_cremer_2026_panas (100 rows): paper_order + canonical_instrument; verification PARTIAL
+  (PA/NA block 20/20; deposit fear/distress sums pinned to unique item subsets). **Paper's "fear"(6)/"distress"(4)
+  subscale labels are content-reversed vs canonical PANAS numbering** -- orchestrator re-computed from live:
+  panas{2,4,6,8,11,13} = 13.53/4.97, panas{7,15,18,20} = 9.68/3.68, matching Table 1. Agent also reports the IRW
+  dictionary Description says 10 NA items; live table has 20 (confirmed) -- dictionary row not re-read here.
+- maes_2020_ospaq (138 rows, % time 0-100, option_text blank): data_labels, translated_substitute/study_supplied
+  (Dutch administration; English headers). Paper prints walking mean 29.90 (18.64); live and raw give 28.90 (18.64)
+  -- confirmed, a paper typo. Dictionary row exists only in automated_finding/dictionary_auto.csv.
+- stolz_2015_authoritarianism (32 rows): data_labels, German .sav labels + S2 English. **Rights question for Ben**:
+  items from Oesterreich (2005); GESIS ZIS 109/125 (other Oesterreich forms) carry a non-commercial + "other form
+  needs permission" clause. Shipped on silence, no register row; block instead if that clause is read as reaching the
+  revised instrument. Sibling stolz_2015_death_attitudes still pending.
+Queue: 42 pending. Cap check: the Step 0 cap is batch_450, not reached.
