@@ -26226,3 +26226,28 @@ lint no problems, irw-validate ok x3, check_provenance exit 0 (only the standing
   whatsoever" + translation. Ship-shaped, same basis as shipped moe2025_scs/kumlander_2018_scs; needs a human-added
   ship row before upload.
 Queue: 36 pending. Cap check: the Step 0 cap is batch_450, not reached.
+
+## batch_436 — 2026-09-25T15:46 (3 tables, 3 agents)
+Written 3 / blocked 0 / failed 0 (yield 100%). All gates clean: normalize 0 changes, audit 3 PASS (no WARNs),
+verify 2 PASS + 1 exempt (data_labels), lint no problems, irw-validate ok x3, check_provenance exit 0 (only the
+standing `mixed` review list; nothing new from this batch).
+- baumgaertner_2018_vaccine_trust (30 rows): data_labels, PLOS s005 Stata column labels (Q66_1..3 low-risk,
+  Q74_1..3 outbreak scenario), options from the same file's value labels. No full questionnaire published, so the
+  item text is the study's short variable labels and the scenario stems are the paper's quoted fragments;
+  instructions blank. Disclosed in public_note. The paper's "I don't know" option is absent from the data (no row).
+- herrera_2018_se_d_items (56 rows): paper_order, S2 Appendix questionnaire (Batson 1997 empathy/distress
+  adjectives); column interleave SE1,SE2,D1,D2,D3,SE3,D4,SE4 matches questionnaire order position by position.
+  Verify PARTIAL: block means/SD/alpha reproduce Study 2 Table 4 (E 5.095/1.216/.883 vs 5.09/1.22/.88;
+  D 4.147/1.432/.852 vs 4.15/1.43/.85); within-block adjective order rests on column order. Dictionary says "not
+  matched to a named instrument" -- it is (correction recorded in notes.csv). Endpoints only (1 Not at All,
+  7 Extremely). The IRI sibling's rights block (batch_045) does not apply to these adjectives.
+  DATA DEFECT, Step 5b re-check CONFIRMED: cov_condition has 17 singleton codes (405,407-413,505,507,509-515)
+  beside 1-4 (111/106/102/103 ids), from the PID regex at data/herrera_2018_vr_empathy.py:70; condition-1 means
+  E 4.79 / D 3.80 reproduce, which the agent maps to the paper's Information arm, not the arm the script comment
+  names. Candidate data-fix issue for every Study 2 table from that script -- not filed by this round.
+- lunacortes_2019_interperson_conn (28 rows): paper_order, Table 1 (image-only on PLOS) bullets, following the
+  batch_089/090 siblings. translated_substitute / study_supplied (administered in Spanish; no Spanish wording
+  published). Verify PARTIAL: alpha 0.9371 vs 0.937; ic_1 pinned as the weakest-loading item (0.843 vs
+  0.893-0.909; paper 0.62 vs 0.86-0.90); ic_2..ic_4 rest on bullet order. Text read from an image -> worth a
+  character spot-check at triage; "holydays" kept as printed.
+Queue: 33 pending. Cap check: the Step 0 cap is batch_450, not reached.
