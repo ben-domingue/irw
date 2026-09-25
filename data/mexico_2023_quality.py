@@ -10,7 +10,9 @@ as cov_year. ENCIG waves are independent cross-sections (different people), so t
 
 The 2023 rows are identical to the tables the .do produced (verified cell for cell against the live Redivis tables),
 as are the ids of every row. Tables asked only in 2023 (wellbeingservice = IMSS-Bienestar, cablecars) carry 2023 rows
-only. Transforms per table are the .do's: yes/no items recoded 1->0, 2->1; codes 9, 98, 99 set to missing.
+only. Transforms per table are the .do's: yes/no items recoded 1->0, 2->1; codes 9, 98, 99 set to missing. Whole-number
+columns are written as integers (the .do wrote cov_education as text, '06' in 2023 but '6' in 2021, so one level
+read as two categories); missing values are blank cells.
 
 Inputs (INEGI open data, CSV release) in the working directory:
   encig{2023,2021}_02_residentes_sec_2.csv, encig{2023,2021}_01_sec1_A_3_4_5_8_9_10.csv, encig{2023,2021}_01_sec_11.csv
@@ -437,7 +439,14 @@ def build(df, block):
     long["resp"] = pd.to_numeric(long["resp"].replace("", np.nan), errors="coerce")
     long.loc[long["resp"].isin(block["missing"]), "resp"] = np.nan
     long = long.sort_values(["id", "item"], kind="stable")
-    long[["id", "item", "resp"] + covs].to_csv(block["table"] + ".csv", index=False, na_rep="")
+    out = long[["id", "item", "resp"] + covs].copy()
+    for c in ["resp"] + covs:
+        # whole-number columns are written as integers (pandas would write 1.0 once a column has a missing value);
+        # missing is a blank cell, never the text "NA" (irw#2029)
+        v = pd.to_numeric(out[c], errors="coerce")
+        if v.notna().any() and (v.dropna() % 1 == 0).all():
+            out[c] = v.astype("Int64")
+    out.to_csv(block["table"] + ".csv", index=False, na_rep="")
     return len(long)
 
 
