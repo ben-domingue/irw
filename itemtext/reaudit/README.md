@@ -72,3 +72,17 @@ sources confirmed 9 and contradicted none; the tenth (a Mendeley deposit) could 
   Outcome: 7 OBTAINABLE, 19 NEEDS_HUMAN (12 of them PsycTESTS holds), 3 RIGHTS_BLOCK, 4 NOT_PUBLISHED, 4 UNREACHABLE.
   Zenodo still 403s this machine, but WebFetch on `https://zenodo.org/api/records/<id>/files/<key>/content` saves the
   binary, so `ZENODO_RATELIMIT` rows are recoverable that way.
+- **Rebuild (2026-09-25, irw#2382 step 3).** `candidates.csv` is rebuilt from the live corpus. The table list is read
+  from the six core shards on Redivis via `red_up` (4,515 tables; `list_tables()` matched each shard's `tableCount`).
+  Live item text comes from a fresh `live_tables.csv` (1,954 across `irw_text`, `_2`, `_3`), and queue rows from
+  `queue_state.csv`. That leaves 2,192 candidates in 727 deposits:
+  - 1,916 kept from the 09-19 list;
+  - 276 new, with stratum `new_since_0919`;
+  - 522 old rows dropped: 442 are now live, 490 are queued, 48 are gone from the core shards (the groups overlap).
+
+  Deposit keys use the 09-19 rule. Ten new families added after the 2026-09-21 metadata run had no biblio row yet;
+  their refs come from their processing script's header (`Reference_x` says so). 41 old `table:` fallback keys were
+  re-keyed from the current biblio. For example, the robison_2026_retesting family was 25 one-table "deposits" and is
+  now one.
+  `triage_scope.csv`: 7 wave 5-7 tables that are no longer candidates were dropped. The new tables are wave 8. A deposit
+  that spans waves sits in its earliest unclassified wave. **Unclassified now: 1,117 tables in 321 deposits** (waves 5-8).
