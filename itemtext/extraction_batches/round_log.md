@@ -25661,3 +25661,32 @@ Notable:
 - `butt_2022_performance_impact`: PI5 was dropped by the authors (PI5_del), so it isn't in the table; all 63 item×level cells match the .sav.
 
 Cap check: the Step 0 cap is batch_430, so it has not been reached.
+
+## batch_410 — 2026-09-24T21:48:48-07:00
+
+3 tables claimed, 3 agents. **3 written / 0 blocked / 0 failed**, so the yield is 3/3. All three come from one source: Liu & Wang 2023, PLOS ONE e0295133, S1 File questionnaire annexure.
+
+| table | status | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `liu_2023_attitude` | **done** | 15 (3×5) | `paper_order` | PARTIAL, verify PASS |
+| `liu_2023_brand_trust` | **done** | 20 (4×5) | `paper_order` | PARTIAL, verify PASS |
+| `liu_2023_purchase_behavior` | **done** | 15 (3×5) | `paper_order` | PARTIAL, verify PASS |
+
+Gates:
+- normalize_nulls fixed 2 files: brand_trust and purchase_behavior had used a different blank-field convention.
+- audit_batch: 3 PASS, no WARNs.
+- verify_batch: 3 PASS.
+- lint: clean.
+- irw-validate: ok ×3.
+- check_provenance: exit 0, and none of this batch's tables are flagged.
+
+Notable:
+- All three tables have the same settings:
+  - `text_source=translated_substitute` and `translation_source=study_supplied`: the survey was administered in Chinese, but the supplements contain only the authors' English.
+  - Only the endpoints 1 and 5 are labelled.
+  - The rights ruling is R16 (irw#2381), `CLASS-closed-silent-adaptation`.
+  - Within each block, item order follows the listing order. Block membership is confirmed by the published alpha/CR/AVE and the Table 5 paths, which match to within 0.0005.
+- **Source defect, confirmed by the orchestrator:** the per-item loading column in Table 2 of the paper is shifted by one block for ATT/SN/PBC. The row printed as ATT is really SN's loadings, the one printed as SN is PBC's, and the one printed as PBC is ATT's. A plain 3-factor CFA gives SN 0.743/0.754/0.807 against 0.742/0.755/0.807 printed as ATT, and PBC 0.784/0.834/0.818 against 0.785/0.838/0.813 printed as SN. The xlsx labels are correct, because Table 5 breaks if the columns are relabelled. This matters for anyone verifying `liu_2023_subjective_norm` (still pending) or `liu_2023_perceived_control` against those loadings.
+- The orchestrator's merge found a malformed provenance row: the attitude agent's own sed edit had left bare quotes in the note, producing 20 fields and crashing verify_batch. The agent rewrote the row with csv.writer, and it is now 8 fields.
+
+Cap check: the Step 0 cap is batch_430, so it has not been reached.
