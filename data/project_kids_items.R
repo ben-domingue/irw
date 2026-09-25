@@ -6,7 +6,8 @@ library(readr)
 ITEM_URL <- "https://ldbase.org/system/files/datasets/2021-05/PK_ItemLevelData.csv"
 # Total Scores data (DOI 10.33009/ldbase.1620844399.85a0, ODC-By): carries
 # `treatment` (RCT arm) and `project` (which of the 9 RCTs), linkable to the
-# item-level file on PK_ID. See issue #416.
+# item-level file on PK_ID. See issue #416. It also records which WJ-III form
+# (A or B) each child took at each wave.
 FULL_URL <- "https://ldbase.org/system/files/datasets/2021-08/PK_FullData.csv"
 
 ldbase_csv <- function(file, url) {
@@ -22,11 +23,18 @@ df_full <- ldbase_csv('PK_FullData.csv',      FULL_URL)
 # participants coded 2 (a third arm, in projects 3 and 5) and the 1 with no
 # value are left blank rather than folded into either group; cov_project
 # keeps the 9 RCTs distinguishable.
+#
+# Letter-Word ID has two parallel forms, A and B, with different words at the
+# same positions, and the item-level file records only the position. The form
+# is PK_WJLW_FORM_w1..w3 (0 = A, 1 = B), per wave: most children alternate
+# A/B/A or B/A/B, but some kept the same form (31 children from wave 1 to 2,
+# 39 from wave 2 to 3). Project 3 recorded no form at wave 3.
 df_full <- df_full |>
-  select(PK_ID, treatment, project) |>
+  select(PK_ID, treatment, project, starts_with("PK_WJLW_FORM_w")) |>
   mutate(treat = if_else(treatment %in% c(0, 1), treatment, NA_real_),
          cov_project = project) |>
-  select(PK_ID, treat, cov_project)
+  rename_with(\(x) sub("PK_WJLW_FORM_", "lw_form_", x)) |>
+  select(PK_ID, treat, cov_project, starts_with("lw_form_"))
 df_raw <- df_raw |> left_join(df_full, by = "PK_ID")
 
 names(df_raw) <- tolower(names(df_raw))
@@ -49,7 +57,8 @@ for (i in 1:ncol(df_raw)) {
 }
 
 
-drop_vars <- setdiff(drop_vars, c("treat", "cov_project"))
+drop_vars <- setdiff(drop_vars, c("treat", "cov_project",
+                                  paste0("lw_form_w", 1:3)))
 
 df_raw <- df_raw |>
   # drop unneeded variables
@@ -64,7 +73,12 @@ df_raw <- df_raw |>
 
 # person-level columns carried onto every response row at the end
 person_cols <- df_raw |> select(id, treat, cov_project)
-df_raw <- df_raw |> select(-treat, -cov_project)
+# Letter-Word ID form per child per wave, joined on (id, wave) below
+lw_form <- df_raw |>
+  select(id, starts_with("lw_form_w")) |>
+  pivot_longer(-id, names_to = "wave_temp", names_prefix = "lw_form_w",
+               values_to = "lw_form")
+df_raw <- df_raw |> select(-treat, -cov_project, -starts_with("lw_form_"))
 
 # transform tosrec assessment variables
 tosrec <- df_raw |>
@@ -200,8 +214,17 @@ df_wj_lw_grade <- df %>%
   select(id, item, resp, wave_temp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
+# The form goes in the item name (wj_lw_A_13s, wj_lw_B_13s): the same position
+# on the two forms is a different word. Responses with no recorded form (project
+# 3, wave 3) are kept under wj_lw_formunknown_<n>s rather than guessed.
 df_wj_lw_wave <- df %>%
   filter(grepl("wj_lw",df$check), grepl("w",wave))%>%
+  left_join(lw_form, by = c("id", "wave_temp")) %>%
+  mutate(item = paste0("wj_lw_",
+                       case_when(lw_form == 0 ~ "A_",
+                                 lw_form == 1 ~ "B_",
+                                 TRUE ~ "formunknown_"),
+                       sub("^wj_lw_", "", item))) %>%
   select(id, item, resp, wave_temp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
