@@ -25585,3 +25585,30 @@ Gates:
 - Remaining Kay siblings still pending: `nfc_kay_2025` and `onecm_kay_2025`. The same printouts are the lead.
 
 Cap check: the Step 0 cap is batch_430, so it has not been reached.
+
+## batch_407 — 2026-09-24T21:18:46-07:00
+
+3 tables, 3 agents. **3 written+done / 0 blocked / 0 failed** (0% failed, so the breaker is not tripped). Yield: 3 of 3. This closes out the Kay & Slovic 2025 (OSF uzrgk) siblings.
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `nfc_kay_2025` | **done** | 49 (7×7) | `paper_explicit` | VERIFIED, verify PASS |
+| `onecm_kay_2025` | **done** | 7 (1×7) | `paper_explicit` | VERIFIED, verify PASS |
+| `znidarsic_2021_coworker_support` | **done** | 45 (9×5) | `data_labels` (positional codes) | VERIFIED, verify PASS |
+
+Gates:
+- normalize_nulls: 0 of 3 files changed.
+- audit_batch: 3 PASS with no anomalies, so there are no WARNs to explain.
+- verify_batch: PASS=3.
+- lint_verification: clean, 3 rows. All three carry a verification row (znidarsic is data_labels but codes are positional, so it was verified rather than exempted), so no NOT_NEEDED rows were owed.
+- irw-validate (upload profile): all 3 ok.
+- check_provenance: exit 0. It reported only the standing REVIEW lists.
+
+- **nfc_kay_2025** is the **Need for Chaos** scale (Petersen, Osmundsen & Arceneaux 2023), not Need for Cognition. The dictionary, `data/kay_2025.R` and the printout agree. The T1 printout (au83k) tags all 7 statements; T2 has no nfc tags, which fits a single administration. Unlike gcb5_2025, the live table has the +4 shift: deposit+4 reproduces live exactly (n=492 per item, means 1.40–2.76). Rights: register row Need for Chaos (irw#2381 R12, ship).
+- **onecm_kay_2025**: One-Item Conspiracy Measure (Lantian et al. 2016). The printouts tag it in both waves with identical wording. Deposit+4 matches live per-level counts in both waves (W1 29/57/60/66/134/91/55, n=492; W2 n=389), and the reversed reading fails. Lantian's preamble was not administered and is not shipped (noted). The table is only one item, so under the no-single-item-scales rule the *data* table is off-pattern. That is not an itemtext defect, and the item text describes the live table as it stands.
+- **znidarsic_2021_coworker_support**: the text is the PLOS S1 Data xlsx column headers. Codes are assigned by position (`df.iloc[:,18:27]`), so the table was verified anyway. Each live item's 5-cell count vector matches exactly one of the 18 support columns: the expected co-worker column, 45/45 cells. That separates CS05 and CS07 despite equal means, and it excludes the identically worded leader block. `translated_substitute`/`study_supplied`. The Slovenian administration is inferred, not stated (public_note).
+  - **Orchestrator re-check CONFIRMED** the anchor conflict from the paper text: Methods says "1 (never) to 5 (very often)", and Results says "1 meant never and 5 meant always". The table ships "very often".
+  - The deposit has 247 rows, against 343 in the paper.
+  - Sibling tables leader_support / org_practices / wf_balance can reuse the same xlsx route.
+
+Cap check: the Step 0 cap is batch_430, so it has not been reached.
