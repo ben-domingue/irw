@@ -26087,3 +26087,36 @@ wellbeing = q5.5 ISSSTE (dictionary Descriptions wrong).
 (hyatt_…_s3_cast), DAQ+BPAQ (hyatt_…_s3_daq), SSIS (hyatt_…_s3_ssis) stay HELD under the existing PsycTESTS / unpublished
 rulings. MLQ (liu_2025_mlq) and UWES (hua_2023_efl_study_engagement) are BLOCKED on their register block rows (a
 translation / domain adaptation is a derivative): queue rows done -> blocked. CSVs kept in their batch folders.
+
+**batch_430 — 2026-09-25 ~15:05 PDT.** 3 tables (3 agents): **2 written / 1 blocked / 0 failed**, yield 2/3. First
+round of #2381 slice 08 (rights-cleared re-audit tables). Circuit breaker: 0% failed, not tripped.
+Gates: normalize 0 of 2 changed; audit 2 PASS (no WARNs); verify_batch PASS=2; lint 0 ERROR, 1 WARN (scs "VERIFIED but
+evidence hedges", kept VERIFIED, reason in notes.csv); irw-validate pks ok, scs 1 ERROR `name_length` (41 chars),
+waived under Ben's 2026-09-25 item-text waiver (--override rerun: only finding); check_provenance exit 0 (standing
+`mixed` REVIEW list only).
+- selfcompassionscale_shortform_fuochi_2025 (60 rows, 12 x 5): **lead corrected**. #2382 proposed the English
+  canonical fallback, but the paper's Table 2 (Padua repository copy, CC BY 4.0) prints all 12 Italian items, so the
+  administered Italian ships (study_materials; translation_source official_instrument_english = Neff's SCS-SF PDF).
+  reconstructed, VERIFIED: a person-level join of the live table to the deposit's per-sample files (sc1..sc12), 1,694
+  people, gives agree 1.000 on the claimed column and <=0.488 on any other; the reverse-scored set {1,4,8,9,11,12}
+  confirms that sc numbering is SCS-SF numbering. **Rights caveat, Ben to confirm:** the register's SCS-SF "ship" row
+  says it covers the English form; the agent read Neff's translation clause as a condition on making a new
+  translation, not on sharing an existing one (precedent: moe2025_scs, batch_108). Data: bare per-sample ids (1,816
+  ids / 2,068 respondents), already known (irw#1856); 186 NA resp. Orchestrator re-check: 24,816 rows, 1,816 ids,
+  186 NA, all confirmed.
+- pks_probability (48 rows, 24 x 0/1): **Sheet1 STOP overridden, Ben to confirm**. The hand-built sheet
+  1UEV3EG-6s4f-NombT3OVGaldTmWrG_ZBpahntgyFBJc was never uploaded and has no pks item text live; same shape as
+  batch_424-429. paper_explicit (pks manual Rd), translated_substitute/study_supplied (German administration is
+  inferred). VERIFIED: re-scoring the raw pNNN answers against each problem's printed key reproduces its bNNN column,
+  agree 1.000 on 24/24 with max cross-match 0.965; the live table equals the package's scored columns on all 10,188
+  cells. b110 has two wordings (lab ids 1-26: 0.30, key 0.28); both ship in the manual's combined sentence, with a
+  public_note. Orchestrator re-check: b110 lab mean 0.538 (14/26) vs online 0.592; 1,908 NA = 159 non-completers x 12
+  part-2 items. Confirmed.
+- west_2021_retaliatory_aggression_cast: **blocked, rights** (retry test NO). CAST-18 Direct-Physical items 7-11,
+  word-identical to the held hyatt_2023_aggression_s3_cast (CAST HOLD 2026-09-23, re-confirmed 2026-09-25). The #2382
+  OBTAINABLE lead rested on the same "silence" evidence the hold already overruled. **Slice 08 likely contains more
+  tables whose leads predate the 2026-09-25 rights rulings; check the remaining 51 against them.** Response-data
+  defects (orchestrator confirmed): one resp=8 on a 1-7 scale (id 10, cast_7p, study4); ids not study-prefixed, giving
+  268 ids for 4,689 rows and 3,349 duplicated id-item rows. data/west_2021_retaliatory_aggression.py probably affects
+  every west_2021_* sibling; worth an issue under #1856.
+Queue: 51 pending. Cap check: the Step 0 cap is batch_450, not reached.
