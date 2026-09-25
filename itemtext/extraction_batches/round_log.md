@@ -25795,3 +25795,26 @@ Three agents, no kills. Every gate came back clean: normalize_nulls found nothin
 - **Flag for a human (not acted on):** the lindstrom agent noticed that the shipped sibling `lindstrom2021_honesty_humility` (batch_078, HEXACO-PI short form) went out on the open-deposit-licence argument. SKILL's irw#1945 ruling (2026-09-05) blocks HEXACO wording even from open deposits. That ruling names the HEXACO-PI-R, so it may or may not reach the short form. It needs a rights decision.
 
 Cap check: the Step 0 cap is batch_430, so it has not been reached.
+
+## batch_415 — 2026-09-24 22:26 PDT — 3 tables, 3 written / 0 blocked / 0 failed (yield 100%)
+
+Three agents, no kills. normalize_nulls changed nothing. audit_batch gave 3 PASS with no WARNs, so Step 5c had nothing to explain. lint_verification found no problems, irw-validate was ok on all 3, and check_provenance exited 0. verify_batch's final result was 2 PASS plus 1 exempt (data_labels).
+
+- **The verify script was fixed by the orchestrator (no mapping change).** On the first verify_batch pass, `verify_test_taking_much_2025_cm.R` gave NO VERDICT. It read the EF columns from OSF (`osf.io/download/p25gr`, tte_data.csv), and OSF answered 429 twice. That was a rate limit, not a failed claim. The script now reads both CM and EF from live IRW, as the ef script already did, and the header says so. It reproduces the agent's matrices exactly and gives PASS.
+- `lindstrom2021_violent_intentions` (49 rows): `data_labels` from the figshare .sav (CC BY 4.0), with Swedish as the base text and the deposit codebook's English, same layout as the batch_078 and batch_414 siblings.
+  - Deposit item × resp counts match live in 49/49 cells.
+  - The reverse-keyed VI4R/VI5R/VI7R are stored unreversed. Reversed, the scale mean is 3.00, against the paper's 3.02.
+  - The authors' English for VI6 says "or" where the Swedish says "och". It ships verbatim, with a note.
+  - Rights: CLASS-closed-silent-adaptation names this table.
+- `test_taking_much_2025_cm` (909 rows, a 0–100 VAS with only the endpoints labelled) and `test_taking_much_2025_ef` (40 rows, 1–4 with points 2 and 3 unlabelled). Both come from Much et al. 2025 JOPD 10.5334/jopd.124, using the OSF 9j6hm (CC BY 4.0) supplement `efcm_ItemOverview.pdf`. Both are `paper_explicit` / `study_materials`, and both mapping checks are PARTIAL.
+  - Each CM item is the strict row and column maximum against its parallel EF item at both waves: diagonals .54/.58/.65 and .61/.64/.69.
+  - EF04 vs EF05 rests on codebook order alone.
+- **Source override, re-checked by the orchestrator. Confirmed.** EF05 ("I could have tried harder...") is reverse-worded, but it is stored already reversed.
+  - As stored, it correlates positively with EF01–03: +.31/+.28/+.22 at wave 1 and +.34/+.27/+.25 at wave 2.
+  - Alpha as stored is .620/.724, matching the published omega of .65/.74. Re-reversed, alpha drops to .250/.417.
+  - EF05 therefore ships with its anchors reversed (1 = strongly agree), with a public_note.
+  - The agent also reports that the deposit's own EF scale scores apply 5−EF05 again, reversing it twice (1244/1244). That was not independently re-checked. It is a possible source-data issue worth telling the authors about, not an IRW defect.
+- **Stale record.** The index workbook's `tables_excluded` tab says "couldn't find item text" for all five test_taking_much_2025 tables (_ao/_cm/_ct/_ef/_mr). The _cm/_ef text is in `efcm_ItemOverview.pdf`. The paper's "cannot be republished" line concerns Kuhl's Action Control Scale, which is the _ao table.
+- **Rights, for a human to review:** the TTMI (Knekta & Eklöf 2015) has no rights-register row. Both agents found no stated terms, which is silence, not a grant. They shipped on the wording from the study's CC BY deposit and wrote no register row.
+
+Cap check: the Step 0 cap is batch_430, so it has not been reached.
