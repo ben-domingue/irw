@@ -1,6 +1,13 @@
 library(tidyverse)
 df <-read.csv("FINAL Data - FY 2016-2017_Excluding PII.xlsx - FINAL Data - FY 2016-2017.csv")
 names(df) <- tolower(names(df))
+## 2026-09-25 (#1856): ResponseID is not a respondent key. The file stacks two
+## survey exports, each numbered from 1, so ResponseIDs 1-2766 each belong to
+## two different veterans (no pair shares a StartDate and Region), and the
+## published table merged them: 5,809 ids for 8,575 responses. Neither
+## ResponseID nor ResponseSet separates them cleanly, and this is a
+## cross-sectional survey, so each row is one respondent: number the rows.
+df$responseid <- seq_len(nrow(df))
 df <- df[,-c(2:29)]
 df <- df |>
   select(-negative,
@@ -24,4 +31,5 @@ df <- df |>
 df <- df %>%
   filter(resp != 6)
 save(df, file="Veterans Affairs SSVF Survey 2016-17.Rdata")
-write.csv(df, file="Veterans Affairs SSVF Survey 2016-17.csv",row.names= FALSE)
+df <- rename(df, id = responseid)
+write.csv(df, file="Veterans Affairs SSVF Survey 2016-17.csv", row.names = FALSE, na = "")
