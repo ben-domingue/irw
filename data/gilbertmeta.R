@@ -60,6 +60,19 @@ irw_clean <- function(data, num){
       mutate(cov_age = ifelse(cov_age == 0, NA_real_, cov_age / 12))
   }
 
+  # Datasets 112 (Forces) and 113 (DNA), from OSF osf.io/detfc: the source
+  # workbook's pretest cells for Item_1, Item_7 and Item_8 are self-referencing
+  # formulas (`=MIN(O143:O143)` in O143), which Excel caches as 0. Those zeros are
+  # not responses -- 752 and 753 of them -- so they go to NA (irw#2313 item 3,
+  # ruled 2026-09-25). A 1 at pretest is a typed value and stays. The published
+  # tables were repaired by tools/repairs/null_gilbert_meta_112_113_pretest.py;
+  # this keeps a re-run from putting the zeros back.
+  if(num %in% c(112, 113)){
+    out <- out |>
+      mutate(resp = ifelse(time == 0 & item %in% c("item_1", "item_7", "item_8") &
+                             resp == 0, NA, resp))
+  }
+
   # get the output file
   out <- out |> 
     remove_all_labels() |> 
