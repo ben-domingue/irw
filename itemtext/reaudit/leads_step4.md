@@ -47,3 +47,43 @@ sweep. Personal data: IRW does not ship these columns, but the public source dep
 - Altgassen: s01_knowledge's answer options are dictionary definitions (Duden, Oxford, DWDS), which is a third-party
   rights question. (A lone adjective under a rating stem is item text, as with PANAS, and is not treated as a
   question.)
+
+## Wave 6
+
+**Acted on (Ben's standing wrong-now rule)**
+- MEFSIRODGAS_Nileksela_2023_freq held the severity responses (identical to _severity). Withdrawn in the draft;
+  #2432, #208 reopened.
+- paampsmartsud_saba_2023 ffmq/pss/ders/pacs: the "baseline" wave was built from the POST columns, so both waves are
+  identical. Withdrawn in the draft; #2433, #358 reopened. Item text for ders/ffmq/pacs is left live.
+
+**Table defects (not acted on)**
+- parc_balaji_2017 and cfc_balaji_2019 were built from the same Dataverse file (same UNF).
+- gerber_2022_self_esteem and gerber_2022_selfesteem are duplicates (two scripts built the same block).
+- spain_2024_ideology's reference names the wrong CIS study (3480 is "Ideologia y polarizacion").
+- puro_2025_prompta_writing: the script reads the EXPERIMENTAL block as "a different rubric", so only the 46 control
+  students ship.
+- eldor_2022 political_resilience item 49 and violent_extremism item 5 are attention checks stored as items.
+- zeng_2025_megaproject_ecm has 15 items where the paper describes 8.
+- LOC_fadplus_goto2021 is the locus-of-control block, not FAD-Plus.
+- mbft_anunciacao_2024 keeps cov_profession and cov_institution.
+- C19PRC wordsum: the IRW build-script comments spell out all 10 GSS Wordsum words and keys, which GSS keeps
+  confidential.
+- emotion_pcmrs: the source (FBL-R norms) is released only under a Hogrefe usage contract. That is a question about the
+  response data itself.
+- Register: RAND's pages now carry a non-commercial permissions block, so the RAND-36 ship row may need a re-look. The
+  MBI (Mind Garden) has no register row yet.
+
+**Personal data in source deposits**
+- Dopmeijer PLOS S1 .sav: full dates of birth for 3,141 students.
+- OSF wkzan (Anunciacao IFP): 272,845 test-takers with date of birth, employer, institution and city.
+- Niileksela raw xlsx: free-text mental-health diagnoses.
+- tasaygar PLOS S1: an initials column next to age and sex.
+
+**Questions for Ben**
+- darkfactorfrench: the French wording exists only in a CC BY-NC OSF deposit. Should 5 tables ship the English
+  canonical original under the fallback rule instead?
+- gao SCSQ: the block rests on Psychology Roots' site-wide boilerplate. Was the third-party-permission ruling meant to
+  cover site-wide text?
+- issueirt_votes_shin_2024: are Voteview roll-call descriptions item text?
+- ajaykumar_2023_experience: are codebook paraphrases ("level of experience with robots") item text?
+- goldberg PDA-360: a single adjective per item is item text (PANAS shape) and was not treated as a question.
