@@ -26023,3 +26023,28 @@ If the STOPs should hold, drop the CSVs. Sheets: roads 1kEsHoKH3HecX8VPdKUS2QLDI
   14026/19725.
 No response-data defects found.
 Queue: 6 pending. Cap check: the Step 0 cap is batch_430, so it has not been reached.
+
+**batch_428 — 2026-09-25 ~08:55 PDT.** 3 tables (3 agents): **3 written / 0 blocked / 0 failed**, yield 3/3.
+Gates: normalize 0 of 3 changed; audit 3 PASS (no WARNs); lint clean; check_provenance exit 0 (standing `mixed`
+REVIEW list only). verify_batch's first run returned NO VERDICT for trains. The script printed VERDICT: PASS when run
+directly, and a full verify_batch rerun gave PASS=3. Transient, and not a gate failure. irw-validate: trains and trash
+ok. transportationstations had 1 ERROR, `name_length` (42 chars > 40). It is marked done under Ben's 2026-09-25
+waiver of the 40-char cap for item text; the --override rerun has that as its only finding. All three: paper_explicit,
+study_materials, machine_translation (issues-page line owed at upload), INEGI credit + no-endorsement public_note per
+irw#2381 R01, VERIFIED by per-cov_year count matching against INEGI 2023 + 2021 microdata, each live vector matching
+only its mapped column.
+- mexico_2023_quality_trains (16 rows, 2023 q5.12/5.12a metro/light rail): section V renumbered, 2021 = 5.10.
+  Orchestrator re-check: data/mexico_2023_quality.py RENAME_2021 lines 65-70 map p5_10_* -> p5_12_*; verify output
+  2023 P5_12_1 0/1 = 1438/2759, 2021 P5_10_1 = 1472/2208; answerers = P5_1_11 Si set 4299/4299 (2021 P5_1_9 3805/3805).
+  No Sheet1 STOP (not in Sheet1).
+- mexico_2023_quality_transportationstations (22 rows, 2023 q5.10/5.10a articulated BRT with stations and exclusive
+  lane): 2021 = 5.9. Orchestrator re-check: RENAME_2021 lines 127-132 map p5_9_* -> p5_10_*; 2023 P5_10_1 = 5633/261.
+  Items 1-8 are word-identical to the buses (5.9) block, and only the stem tells them apart. Dictionary: the Description
+  "Transportation Stations" is only loosely accurate, because the question is about BRT/Metrobús service. That is an
+  optional rewording, not a defect. No Sheet1 STOP.
+- mexico_2023_quality_trash (12 rows, q4.5/4.5a city garbage collection): section IV not renumbered. **Sheet1 STOP
+  overridden, Ben to confirm**, the same shape as batch_424-427: a hand-built sheet
+  1hanXfy4ARolVawCmu4rLInA9IlOOISFK8XxsFc4AVJk that was never uploaded and fails the gate as-is (resp 1/2/null,
+  option numbers in item_text). If the STOP should hold, drop the CSV. 2023 P4_5_1 = 32524/5925.
+No response-data defects found.
+Queue: 3 pending. Cap check: the Step 0 cap is batch_430, so it has not been reached.
