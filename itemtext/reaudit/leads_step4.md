@@ -135,3 +135,34 @@ All three are withdrawn in drafts (item_response_warehouse, _3). The alsuhibani 
   RIGHTS_BLOCK) or CC BY-NC-SA (reyna's Spanish PANAS): does the English original ship?
 - haehner CCB2I: first published in a CC0 preprint, but the JPSP version is CC BY-NC-ND. Which governs?
 - ART / author-recognition lists (GART, Wimmer): are they item text?
+
+## Wave 8
+
+**Table defects (not acted on)**
+- arbinaga_2025_sport_anxiety is misnamed: its 45 items are the SA-45 symptom checklist.
+- arbinaga_2025_perfectionism: the paper says Frost MPS, but the deposit's labels are coping-in-sport. Identity conflict.
+- lev_ari_2021_des has 14 unlabelled items where the paper used the 28-item DES-II.
+- spain_2014_volunteering_activity: P10A asks whether the association is "especificamente juvenil", not about "active
+  participation". The name and description are wrong.
+- argentina_2013_* biblio says ENSSyR 2023; the survey is 2013.
+- spain_2015_immigration_proximity: P27a/b reverse P26a/b (check at extraction).
+- wallace_2026: about 10 tables carry one code with study-specific referents (MCM Consulting / XYZ Organization /
+  professor), so item text needs per-study variants. The S2a label vs script disagree on which organisation.
+- adamczyk_2022_workbat has 20 columns vs 15 statements.
+- enders_2022_conflict: conflict_1/2 are unexplained, and there is a second PSS-4 block in the raw export.
+- data/robison_2026_retesting.py has no source header.
+- data/nguyen_2026_factcheck.py puts a personal email in its User-Agent.
+- OSF amiot (56sbh) and adamczyk (7hv32) now return 401 without view-only links.
+- zhou_2016_anxiety's withdrawal is still in the irw_text draft (release owed).
+
+**Personal data in source deposits**
+- Enders OSF 6a7et (CC0 raw export): ZIP code, birth year, gender and state per respondent.
+- fan_2026 PeerJ deposit: caregiver and patient birth year-month with diagnosis and record id.
+
+**Questions for Ben**
+- spain_2014_citizenship (13): CIS fielded the ISSP 2014 module. Does the CIS grant cover the ISSP wording (GESIS
+  terms unread)?
+- spain_2011_immigrant (10): Immigrant Citizens Survey (King Baudouin / MPG), "for your own use ... excerpts". Is that
+  a restriction?
+- IFEval prompts (Apache-2.0): the import was scoped scores-only.
+- aziz_2020_bmq: the register row says `escalate`.
