@@ -26274,3 +26274,24 @@ by orchestrator; re-lint clean), irw-validate ok x3, check_provenance exit 0 (st
   S1). cov_region in data/ritzel_2020_farmer_burden.py is a respondent ID (801 distinct over 801 ids). Candidate
   data-fix issue; not filed by this round.
 Queue: 30 pending. Cap check: the Step 0 cap is batch_450, not reached.
+
+## batch_438 — 2026-09-25T16:06 (3 tables, 3 agents)
+Written 3 / blocked 0 / failed 0 (yield 100%). Gates: normalize 1 file fixed (nordhoff blank fields), audit 3 PASS
+(no WARNs), verify 2 PASS + 1 exempt (data_labels), lint clean, irw-validate ok x3, check_provenance exit 0
+(standing review lists only).
+- bled_2021_imagery_phenomenology (9 rows): data_labels (S1 Data headers, self-describing codes), French verbatim
+  from S1 Appendix s002.docx, English from paper Methods s.3; translation_source=mixed because instructions_translated
+  is agent-written, so an issues-page line is owed on upload. Verify PARTIAL: published % autistic/control reproduced only at resp=3
+  of each own item (detail 66.67/43.75, duration 35.90/20.00, manipulation 56.41/46.25). Order of levels 1/2 rests
+  on header labels. SOURCE OVERRIDE: the S1 header labels pheno_detail as 1=detailed..3=blurry, but the data reproduce
+  the paper's "detailed" % only at resp=3; resp=1 gives 7.69/13.75. Anchors shipped as 1=blurry, 3=detailed.
+  Step 5b re-check CONFIRMED from s001.csv crosstabs (detail resp 1/2/3: control 13.75/42.50/43.75, autism
+  7.69/25.64/66.67). Consistent with the other two items, where 3 is also the stronger-imagery pole. Source-file
+  label error, not an IRW script defect; the live data equal S1 cell for cell.
+- bled_2021_imagery_use (21 rows): data_labels, French verbatim (S1 Appendix items 5-11) + paper's own English,
+  study_supplied. Verify VERIFIED: 21/21 per-item 0/1/2 counts match source, all 7 vectors distinct. instructions
+  left blank (preamble has no published English; not machine-translated).
+- nordhoff_2021_motive (20 rows): data_labels from the PLOS S1 workbook, like batch_119/120 siblings (Q45-Q48 wording).
+  NOT_NEEDED tracker row. Item-mean order matches Table 2. Deposit holds 198 of the 612 analysed respondents
+  (response-data fact, not itemtext).
+Queue: 27 pending. Cap check: the Step 0 cap is batch_450, not reached.
