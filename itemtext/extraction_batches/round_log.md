@@ -25740,3 +25740,38 @@ Notable:
 - **Response-data defect, re-checked by the orchestrator. Confirmed, and it extends the batch_411 finding.** Live `jiang_2024_ptsinv` has 14336 rows and 707 ids, with id×item copies at 2632 ×2 and 3024 ×3 and 0 disagreeing cells. Live `jiang_2024_ptspr` has 8960 rows and 707 ids, with 1645 ×2 and 1890 ×3 and 0 disagreeing. That is the same dup_id_item pattern (#1842) as `jiang_2024_ptsexp`. It still needs a data-side decision and has not been filed. The item text is unaffected.
 
 Cap check: the Step 0 cap is batch_430, so it has not been reached.
+
+## batch_413 — 2026-09-24T22:20-07:00
+
+3 tables claimed, 3 agents. **3 written / 0 blocked / 0 failed**, so the yield is 3/3. There were no kills and no rate limits.
+
+| table | status | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `xiao_2024_hierarchical_plateau` | **done** | 20 (4×5) | `paper_order` | NO_ROUTE (item identity); verify PASS on direction |
+| `xiao_2024_taking_charge` | **done** | 20 (4×5) | `paper_order` | NO_ROUTE (item identity); verify PASS on direction |
+| `li_2025_socmedia_enjoyment` | **done** | 20 (4×5) | `data_labels` | NOT_NEEDED |
+
+Gates:
+- normalize_nulls: fixed 1 of 3 files (`xiao_2024_hierarchical_plateau`, 21 lines).
+- audit_batch: 3 PASS, no WARNs.
+- verify_batch: 2 PASS, plus 1 exempt (data_labels).
+- lint: clean.
+- irw-validate: ok ×3.
+- check_provenance: exit 0. The irw_site checkout is on branch `validate-pin-1-2-0`, so the disclosure check was reported but not enforced.
+
+Notable:
+- **The two xiao_2024 tables** come from PLOS ONE 10.1371/journal.pone.0315916.
+  - The Chinese text is from the administered questionnaire (S1 File, s002) and the English is the study's own (S2 File, s003), so `translation_source=study_supplied`.
+  - The xlsx deposit is unlabelled and the paper has no per-item statistics, so HPn/TCn = questionnaire item n rests on numbering.
+  - The verify scripts pin three things: the live per-item counts match the deposit, the response direction matches the paper (scale means 2.432/3.759 against 2.375/3.790; r(TC,HP) −0.550 against −0.525), and no item is reverse-keyed.
+  - Rights: register class ruling R16 (irw#2381).
+- **Source override, re-checked by the orchestrator. Confirmed.** For `xiao_2024_taking_charge`, the article's Measures section says "1 (strongly disagree) to 5 (strongly agree)". Both administered questionnaires print frequency anchors instead: s002 line 131 has 1=非常不频繁..5=非常频繁, and s003 line 178 has "Very Infrequently … Very frequently". The questionnaire anchors shipped, with a public_note.
+- `xiao_2024_hierarchical_plateau`: the study's English renders the anchors 非常不符合..非常符合 as Strongly disagree..Strongly agree. That was shipped as printed and disclosed.
+- **Stale processing-script header, confirmed.** `data/xiao_2024_taking_charge.py` lines 31–33 say the stems are "not in this deposit or in the article". They are printed in the paper's S1/S2 supplements. This is a comment-only fix and has not been made.
+- `li_2025_socmedia_enjoyment` uses the same S2 `.sav` as its five siblings (batches 074–076).
+  - The agent recomputed alpha as 0.900, against the published 0.900.
+  - The shipped English follows the S1 File's "sports tourism" rather than the article body's "sports travel". The orchestrator checked both strings in the cached sources.
+  - `translation_source=mixed`: "Disagree/Neutral/Agree" are IRW's renderings, as in the siblings, so the table owes an issues-page line when it ships. The siblings already have lines there.
+  - Rights: register R14 `ship_with_note`.
+
+Cap check: the Step 0 cap is batch_430, so it has not been reached.
