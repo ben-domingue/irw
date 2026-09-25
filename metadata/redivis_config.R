@@ -42,7 +42,8 @@ IRW_CORE_DATASETS <- c(
 ## checklist to follow when adding one.
 IRW_TEXT_DATASETS <- c(
   "irw_text",
-  "irw_text_2"
+  "irw_text_2",
+  "irw_text_3"
 )
 
 ## Auxiliary (non-core) datasets, by the `source` name the irw package uses.

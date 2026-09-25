@@ -181,8 +181,9 @@ def newest_text_shard(targets: list[Target]) -> Target | None:
 
 #: Where new item text goes by default, overriding "newest shard" while it is
 #: set. Pinned 2026-09-24 because `irw_text_2` held 987 of Redivis' 1000-table
-#: cap and `irw_text` 694. Set back to None once `irw_text_3` exists and is
-#: registered in IRW_TEXT_DATASETS.
+#: cap and `irw_text` 694. `irw_text_3` was registered the same day (seed table
+#: only), and Ben ruled to keep filling `irw_text` first: set this to None when
+#: `irw_text` reaches ~990 tables, and new item text goes to `irw_text_3`.
 #:
 #: This does not reintroduce shadowing. A *new* table has no copy anywhere for
 #: an older shard to be hidden behind, and a table that already lives in a newer
