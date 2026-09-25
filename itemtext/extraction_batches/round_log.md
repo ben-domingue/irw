@@ -25921,3 +25921,19 @@ abdullah_2024_blqol drops 133 zero codes; jeilani_2024_social_outcomes is the MS
 **2026-09-25:** mexico_2023_quality_buses and _cablecars re-queued (pending) after #2415's rebuild went live: buses'
 batch_422 text carried a public_note describing the fixed 2021 BRT pooling (CSV removed, notes/provenance kept as
 history); cablecars' data-defect block no longer applies (the table is 2023-only now).
+
+**batch_423 — 2026-09-25 ~08:10 PDT.** 3 tables (3 agents): **3 written / 0 blocked / 0 failed**, yield 3/3.
+All gates clean: audit 3 PASS (no WARNs), verify_batch 3 PASS, lint clean, irw-validate ok x3,
+check_provenance exit 0. All three: paper_explicit, text_source=study_materials, machine_translation
+(Spanish administered wording + our English; each owes an issues-page line at upload), INEGI credit +
+no-endorsement in public_note per the rights register. The #2415 rebuild (now data/mexico_2023_quality.py;
+the .do is gone) is confirmed fixed on both re-queued tables:
+- mexico_2023_quality_buses (22 rows): VERIFIED by per-cov_year count matching; 2021 items now match ENCIG 2021
+  q5.8 (P5_8_K/P5_8A, the same bus question under old numbering), 0/9 match the old wrong 2021 P5_9 (BRT) source.
+  The batch_422 pooling public_note is replaced by a wording-difference caveat (2021 respondents read "Durante 2021").
+- mexico_2023_quality_cablecars (21 rows): orchestrator re-ran verify: cov_year=2023 only, ids 1..38966, all 9 live
+  count vectors equal their namesake raw 2023 column (e.g. p5_11_4 551/120). p5_11a option 5 "Insatisfecho(a)"
+  unused by all 673 respondents, so no row for it (gate accepts observed values only).
+- mexico_2023_quality_corruption (10 rows, section VIII 8.1/8.2/8.3.1-3): Step 3b ok, section VIII not renumbered
+  between waves; 30/30 cells match raw 2021+2023 counts.
+mapping_verification.csv: the two batch_422 rows for buses/cablecars were superseded by batch_423 rows (one row per table).
