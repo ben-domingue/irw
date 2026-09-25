@@ -26295,3 +26295,21 @@ Written 3 / blocked 0 / failed 0 (yield 100%). Gates: normalize 1 file fixed (no
   NOT_NEEDED tracker row. Item-mean order matches Table 2. Deposit holds 198 of the 612 analysed respondents
   (response-data fact, not itemtext).
 Queue: 27 pending. Cap check: the Step 0 cap is batch_450, not reached.
+
+## batch_439 — 2026-09-25T16:14 (3 tables, 3 agents)
+Written 3 / blocked 0 / failed 0 (yield 100%). All gates clean: audit 3 PASS, verify_batch 1 PASS + 2 exempt (data_labels),
+lint no problems, irw-validate ok x3, check_provenance exit 0 (only the standing 10-table `mixed` REVIEW list, none from this batch).
+Numbering: highest existing was batch_438 -> batch_439 (the literal "below 300" wording of Step 1 would give 305, which exists;
+the consecutive series since 305 is what the rule intends).
+- tomioka_2022_srh_sufficiency (16 rows): data_labels (S1 workbook B3-B6 + its `variable` sheet), administered Japanese from S2 +
+  study English (S1 File). NOT_NEEDED tracker row. Live item x resp counts re-checked by orchestrator = agent's table (e.g. B3 52/413/326/74).
+  Caveats in notes: "I don't know" (option 5) has no rows (excluded by paper); Japanese B6 has 4 options vs English 5; codebook "15-29" typo.
+- dopmeijer_2022_performance_pressure (60 rows): data_labels from S1 .sav variable/value labels; translated_substitute/study_supplied
+  (administered Dutch, only the authors' English published). NOT_NEEDED tracker row. Orchestrator re-check: item A counts
+  36/161/781/1420/743, mean 3.851 on 1-5 = 2.851 on 0-4, matching the paper's M=2.85 (paper says 1-5 scoring; its own mean fits 0-4).
+  Source typo "loves ones" kept.
+- de_vries_2022_eudaimonic_wellb (40 rows): paper_order; wording from Bartels et al. 2019 (PLOS ONE, CC BY) Appendix since the
+  de Vries .sav is unlabeled; translated_substitute/official_instrument_english, Dutch administration inferred. Verification PARTIAL
+  (verify script PASS): subscale blocks + composite reproduction + marker item inter04 (mean 3.12 vs 4.07-4.13, re-checked);
+  order within each dimension not established.
+Queue: 24 pending. Cap check: the Step 0 cap is batch_450, not reached.
