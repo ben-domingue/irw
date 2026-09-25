@@ -87,3 +87,51 @@ sweep. Personal data: IRW does not ship these columns, but the public source dep
 - issueirt_votes_shin_2024: are Voteview roll-call descriptions item text?
 - ajaykumar_2023_experience: are codebook paraphrases ("level of experience with robots") item text?
 - goldberg PDA-360: a single adjective per item is item text (PANAS shape) and was not treated as a question.
+
+## Wave 7
+
+**Acted on (standing wrong-now rule; each checked against the live table first)**
+- ds14_mokken: Si3. is a reversed copy of Si1., and the real Si3 is lost. #2434.
+- alsuhibani_2022_gcbs: GCBS_07-15 are shifted by one item for Study 2. #2435.
+- fcupanas_cffsdas_reyna_2018: Study 4's PANAS11-20 are in a different order under the same codes. #2436, #308
+  reopened.
+
+All three are withdrawn in drafts (item_response_warehouse, _3). The alsuhibani item text is left live.
+
+**Checked and NOT a wrong-now case**
+- matosaslopez_2024_teacher_assessment: its two forms are recorded in `cov_questionnaire_type`, and the per-item means
+  match. Separate lead: responses are near-uniform on 1-5 and the mean inter-item r is about 0.01, which may mean the
+  data are simulated (the okeke pattern). **For Ben.**
+
+**Table defects (not acted on)**
+- ds14 aside, the other *_mokken tables were not checked.
+- alsuhibani_2022_gcbs_extra_s2 pairs a Diana item with canonical GCBS item 15; retire it at the rebuild.
+- eammi_grahe_2018: the live mindful/stress tables still carry computed biascheck columns, and range filters drop every
+  stress "5" and every physsx "3".
+- rfq8_wozniakprus_2022 reads the same Dataverse file as rfq_wozniakprus_2021 (probable duplicate).
+- GART_Grolig_2020 holds study 2 only.
+- chen_2022_cesd: CESD02 ("feel like dying or hurting myself") is not a CES-D item.
+- nature_relatedness merges three instruments.
+- political_psychology items are column-order ids.
+- gahps_korner_2021: the ids may collide across studies.
+- bialowolski_2024_financial_literacy has three gendered wordings per item, and FL codes skip 18.
+- pks_probability p110 is worded differently for lab and online respondents.
+- chakraborty2026_IRI has 21 items vs two 7-item subscales.
+- vermeiren_2022_bfi pools 150 differently named columns from three studies.
+- villarrealzegarra2026_trif has 85 items vs the preprint's 53.
+- dong_2024_engagement EE5_A differs from EE5 in 69% of rows.
+- anunciacao GMI keeps option numbers on a matrix test.
+- yuebo_2024_pck reads as TPK items.
+
+**Personal data in source deposits**
+- Doherty BICDIS.sav (Irish consultant doctors): specialty, mental-health diagnosis, antidepressant use, disciplinary
+  actions and lawsuits.
+- Celik TEZ_412VERI.xlsx: a name-initials plus phone-digits code.
+- OSF fecgz: 100 Prolific IDs in free text.
+
+**Questions for Ben**
+- avci_2024 entrepreneurial motivation (12 tables): are stemless reason phrases ("Kariyer yapmak") item text?
+- The canonical-English fallback when the translation is published NC-ND (zhou_2025 exercise self-efficacy, now
+  RIGHTS_BLOCK) or CC BY-NC-SA (reyna's Spanish PANAS): does the English original ship?
+- haehner CCB2I: first published in a CC0 preprint, but the JPSP version is CC BY-NC-ND. Which governs?
+- ART / author-recognition lists (GART, Wimmer): are they item text?
