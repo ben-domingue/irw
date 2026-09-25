@@ -18,8 +18,14 @@ Inputs (INEGI open data, CSV release) in the working directory:
   encig{2023,2021}_02_residentes_sec_2.csv, encig{2023,2021}_01_sec1_A_3_4_5_8_9_10.csv, encig{2023,2021}_01_sec_11.csv
 Output: one CSV per table in BLOCKS, in the working directory.
 """
+import os
+import sys
+
 import numpy as np
 import pandas as pd
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))   # repo root, for irw_validate
+from irw_validate.compat import run_qc  # noqa: E402
 
 # 2021 name -> 2023 name for every 2021 variable that asks a 2023 table item under a different name (irw#2415)
 RENAME_2021 = {'apa_1_1': 'a1_1',
@@ -446,6 +452,8 @@ def build(df, block):
         v = pd.to_numeric(out[c], errors="coerce")
         if v.notna().any() and (v.dropna() % 1 == 0).all():
             out[c] = v.astype("Int64")
+    bad = [c for c in run_qc(out) if c.status == "fail"]
+    assert not bad, (block["table"], [(c.name, c.detail) for c in bad])
     out.to_csv(block["table"] + ".csv", index=False, na_rep="")
     return len(long)
 
