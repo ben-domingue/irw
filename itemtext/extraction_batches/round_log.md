@@ -26120,3 +26120,28 @@ waived under Ben's 2026-09-25 item-text waiver (--override rerun: only finding);
   268 ids for 4,689 rows and 3,349 duplicated id-item rows. data/west_2021_retaliatory_aggression.py probably affects
   every west_2021_* sibling; worth an issue under #1856.
 Queue: 51 pending. Cap check: the Step 0 cap is batch_450, not reached.
+
+**batch_431 — 2026-09-25 ~15:10 PDT.** 3 tables (3 agents): **3 written / 0 blocked / 0 failed**, yield 3/3.
+#2381 slice 08, second round. Circuit breaker: 0% failed, not tripped. Gates: normalize 0 of 3 changed; audit 3 PASS
+(no WARNs); verify_batch PASS=1, MISSING(exempt)=2 (data_labels); lint 3 rows, no problems; irw-validate heekerens and
+su ok, west 1 ERROR `name_length` (43 chars), waived under Ben's 2026-09-25 item-text waiver (--override rerun: only
+finding); check_provenance exit 0 (standing `mixed` REVIEW list only).
+- west_2021_retaliatory_aggression_study4_deq (28 rows, 4 x 1-7): **lead order corrected.** data_labels from the Study 4
+  .sav (osf.io/download/egb75): deq_1a Anger, deq_5a Rage, deq_8a Pissed off, deq_12a Mad. The #2382 lead's docx order
+  (Anger, Mad, Rage, Pissed off) would have mis-mapped 3 of 4. Instructions are the .sav's Qualtrics prompt (docx
+  wording differs; in notes). Rights: DEQ published by its originators as S1 Appendix of a CC BY 4.0 PLOS ONE article
+  (Harmon-Jones et al. 2016), no reserved right; no register row exists or was written (Ben may want one). Unlike the
+  CAST sibling, this single-study table has no id duplication (210 ids, 838 rows). Orchestrator re-check: .sav labels
+  and per-level counts (deq_1a 87/18/19/21/28/20/15, deq_8a 70/30/19/25/17/24/25) confirmed.
+- heekerens2025_phq (32 rows, 8 x 1-4): **Sheet1 STOP overridden, Ben to confirm** (hand-built sheet never uploaded,
+  same shape as batch_424-430). German PHQ-D (phqscreeners German-for-Germany form) + official English; wording
+  inferred from the deposit's "German version of the PHQ-8", not study materials. paper_order, PARTIAL, verify PASS:
+  each live PHQ_n equals only deposit phq_n on 1-4 counts; PHQ-2 pair mutual strongest (r=0.529); item 8 lowest mean
+  (2.45, 18.2% floor). Order among 3-7 and 1 vs 2 rests on standard PHQ numbering (public_note says so). resp = 0-3 + 1,
+  direction from r=+0.46 with DSS total. Resolves the index sheet's "resp clash" note.
+- su_2024_gad7 (28 rows, 7 x 0-3): data_labels (study's rename script maps Chinese-worded headers to question1..7;
+  IRW script -> GAD_N). **Lead partly wrong**: the Chinese wording is a different translation from the official
+  phqscreeners Chinese, so the official Chinese option labels were not used; instructions and option_text blank (none
+  recorded anywhere), English columns carry the publisher English (official_instrument_english). Severity bands of the
+  live total reproduce the paper's 20170/3576/332/157/57. su_2024_phq9 untouched (next round).
+Queue: 48 pending. Cap check: the Step 0 cap is batch_450, not reached.
