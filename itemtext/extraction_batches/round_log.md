@@ -26082,3 +26082,8 @@ After #2415's harmonised rebuild went live, the 19 paused family tables plus re-
 work), so the round's CSV shipped. Stamped uploaded=2026-09-25; CSVs removed. Slice 7 total: 79 processed, 78 written,
 1 blocked (jeilani_2024_social_support_family, no wording). Queue empty. Leads: streets = q4.8 toll-free roads;
 wellbeing = q5.5 ISSSTE (dictionary Descriptions wrong).
+
+**2026-09-25 rights confirmations (Ben, via the rights one-pager):** ASSIS (shan_2020_g/_hs/_ph), CAST-18
+(hyatt_…_s3_cast), DAQ+BPAQ (hyatt_…_s3_daq), SSIS (hyatt_…_s3_ssis) stay HELD under the existing PsycTESTS / unpublished
+rulings. MLQ (liu_2025_mlq) and UWES (hua_2023_efl_study_engagement) are BLOCKED on their register block rows (a
+translation / domain adaptation is a derivative): queue rows done -> blocked. CSVs kept in their batch folders.
