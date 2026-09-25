@@ -30,12 +30,13 @@ anything else. The old scripts `chdir`'d into their own directory first, so
 
 **Picks a default dataset.** Any `*__items.csv` present ⇒ the newest item-text
 shard, unless `ITEMTEXT_DEFAULT` in `targets.py` pins one (currently
-`irw_text`, because `irw_text_2` is at 987 of 1000 tables); otherwise the newest
+`irw_text`, because `irw_text_2` is at 987 of 1000 tables and `irw_text` is
+filled before `irw_text_3`); otherwise the newest
 core shard. A table that already exists is still updated where it lives. The menu shows every dataset in
 `metadata/redivis_config.R` — Enter takes the default.
 
 Both response data and item text are **shard lists**, because Redivis caps a
-dataset at 1000 tables (`ARCHITECTURE.md` §2). A second item-text shard is a
+dataset at 1000 tables (`ARCHITECTURE.md` §2). Another item-text shard is a
 one-line edit to `IRW_TEXT_DATASETS`; nothing in this package changes.
 
 **Refuses a history tree.** A directory holding a `provenance.csv` is a record

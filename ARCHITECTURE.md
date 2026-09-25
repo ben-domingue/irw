@@ -53,7 +53,7 @@ first match — meaning a name present in more than one shard resolves to its mo
 recent copy.
 
 **Item text shards the same way**, for the same reason: `irw_text`, `irw_text_2`,
-… in `IRW_TEXT_DATASETS`, searched newest-first, first match wins. A table stays
+`irw_text_3`, … in `IRW_TEXT_DATASETS`, searched newest-first, first match wins. A table stays
 reachable from whichever shard already holds it, so tables are never moved
 between shards — moving one *creates* the shadowing problem rather than solving
 it. `Rpkg/inst/developer/warehouses.md` carries the checklist for adding a shard
