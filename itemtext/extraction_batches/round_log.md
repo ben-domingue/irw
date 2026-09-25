@@ -26073,3 +26073,12 @@ exactly the P5_1_02/04/06 Si sets (2730/2862/430). All match the agents.
 No response-data defects found.
 Queue: 0 pending. Cap check: the Step 0 cap is batch_430, so it has not been reached; the queue is now exhausted, so
 the next firing will stand down on the queue-exhausted condition.
+
+## 2026-09-25 — #2381 slice 7 complete: the mexico_2023_quality family (batch_423–429), 21 released to irw_text
+
+After #2415's harmonised rebuild went live, the 19 paused family tables plus re-queued buses/cablecars ran clean
+(21/21 written; every round verified its table per wave against the rebuilt data). Uploaded, verified and released by Ben
+(irw_text 964). mexico_2023_quality_health: Ben ruled nobody is hand-building these (nj_todo / Sheet1 STOP not live
+work), so the round's CSV shipped. Stamped uploaded=2026-09-25; CSVs removed. Slice 7 total: 79 processed, 78 written,
+1 blocked (jeilani_2024_social_support_family, no wording). Queue empty. Leads: streets = q4.8 toll-free roads;
+wellbeing = q5.5 ISSSTE (dictionary Descriptions wrong).
