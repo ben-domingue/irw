@@ -25715,3 +25715,28 @@ Notable:
 - **Response-data defect, re-checked by the orchestrator. The agent's framing was corrected.** In the jiang_2024 source .sav, `index` (renamed to `id`) has 707 distinct values over 1792 rows. The agent said different respondents share ids. In fact, rows sharing an index are **identical on all 126 response columns** and differ only in Gender/Age. Live `jiang_2024_ptsexp` has 8960 rows and 707 ids, with every id×item cell present 2–3 times (1645 ×2, 1890 ×3) and 0 of 3535 cells disagreeing. That is the dup_id_item pattern (#1842), not an id collision. The paper reports N=1792. This probably affects every `jiang_2024_*` table built by `data/jiang_2024_student_thriving.py`. It needs a data-side decision (not filed as an issue). The item text is unaffected.
 
 Cap check: the Step 0 cap is batch_430, so it has not been reached.
+
+## batch_412 — 2026-09-24T22:06-07:00
+
+3 tables claimed, 3 agents. **3 written / 0 blocked / 0 failed**, so the yield is 3/3.
+
+| table | status | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `jiang_2024_ptsinv` | **done** | 56 (8×7) | `data_labels` | NOT_NEEDED |
+| `jiang_2024_ptspr` | **done** | 35 (5×7) | `data_labels` | NOT_NEEDED |
+| `wu_2024_video_addiction` | **done** | 70 (14×5) | `reconstructed` | PARTIAL, verify PASS |
+
+Gates:
+- normalize_nulls: 0 of 3 files changed.
+- audit_batch: 3 PASS, no WARNs.
+- verify_batch: 1 PASS, plus 2 exempt (data_labels).
+- lint: clean.
+- irw-validate: ok ×3.
+- check_provenance: exit 0. `jiang_2024_ptspr` is listed as HELD IRW-generated content (`machine_translation`). `jiang_2024_ptsinv` and `wu_2024_video_addiction` are `mixed`. Both of those include project-written English, so all three owe an issues-page line when they ship.
+
+Notable:
+- Both jiang tables take their text from the variable labels and value labels in the PLOS ONE S1 Data `.sav`, as in batch_411. The rights register's `ship_with_note` verdict (irw#2381, 2026-09-23) was applied as recorded.
+- `wu_2024_video_addiction`: the text is from Qin et al. 2019 Table 1, the scale's development paper, because Wu publishes no Chinese wording. The appendix order does not reproduce the published alphas: it misses by up to 0.069, while the Table 1 blocks reproduce all four subscale alphas and the total (0.904) to 3dp. The shipped diagnostic-item placement is the only one of 240 within-block alternatives that gives the published 132/560 addicts. Order within the D1/D3, D2/D4/D5, D6/D8 and D9/D10/D11 blocks is not established, hence PARTIAL. The availability audit had marked this table UNAVAILABLE. That was wrong, because Qin prints all 14 items.
+- **Response-data defect, re-checked by the orchestrator. Confirmed, and it extends the batch_411 finding.** Live `jiang_2024_ptsinv` has 14336 rows and 707 ids, with id×item copies at 2632 ×2 and 3024 ×3 and 0 disagreeing cells. Live `jiang_2024_ptspr` has 8960 rows and 707 ids, with 1645 ×2 and 1890 ×3 and 0 disagreeing. That is the same dup_id_item pattern (#1842) as `jiang_2024_ptsexp`. It still needs a data-side decision and has not been filed. The item text is unaffected.
+
+Cap check: the Step 0 cap is batch_430, so it has not been reached.
