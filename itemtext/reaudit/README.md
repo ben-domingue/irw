@@ -67,3 +67,8 @@ sources confirmed 9 and contradicted none; the tenth (a Mendeley deposit) could 
   into this machine's search and OpenAlex quotas partway through: 12 of its NOT_PUBLISHED rows skipped a
   check, against 1-3 in each earlier wave. Its spot-check found 2 false negatives, which trips the stop
   rule, so the brief was tightened before wave 5.
+- **Redo pass (2026-09-25, irw#2382 step 1).** All 37 `retry` rows were re-triaged with the same brief and replaced in place;
+  `retry` is now empty and `redo_note` records the old verdict, the retry reason and whether the skipped check could run.
+  Outcome: 7 OBTAINABLE, 19 NEEDS_HUMAN (12 of them PsycTESTS holds), 3 RIGHTS_BLOCK, 4 NOT_PUBLISHED, 4 UNREACHABLE.
+  Zenodo still 403s this machine, but WebFetch on `https://zenodo.org/api/records/<id>/files/<key>/content` saves the
+  binary, so `ZENODO_RATELIMIT` rows are recoverable that way.
