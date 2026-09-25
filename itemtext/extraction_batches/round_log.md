@@ -26251,3 +26251,26 @@ standing `mixed` review list; nothing new from this batch).
   0.893-0.909; paper 0.62 vs 0.86-0.90); ic_2..ic_4 rest on bullet order. Text read from an image -> worth a
   character spot-check at triage; "holydays" kept as printed.
 Queue: 33 pending. Cap check: the Step 0 cap is batch_450, not reached.
+
+## batch_437 — 2026-09-25T15:54 (3 tables, 3 agents)
+Written 3 / blocked 0 / failed 0 (yield 100%). Gates: normalize 1 file fixed (lee NA normalisation), audit 3 PASS
+(no WARNs), verify 2 PASS + 1 exempt (data_labels), lint 1 WARN -> resolved (ritzel VERIFIED downgraded to PARTIAL
+by orchestrator; re-lint clean), irw-validate ok x3, check_provenance exit 0 (standing review lists only).
+- lunacortes_2019_self_congruity (28 rows): paper_order from Table 1 image bullets, translated_substitute /
+  study_supplied like its batch_089/090/436 siblings. Verify PARTIAL: alpha 0.7245 vs 0.724; items 3/4 strongest,
+  1/2 weakest, matching published loadings .73/.72/.95/.95. Order within each pair rests on bullet order. Item 4's
+  "how I like be seen" kept as printed. Text read from an image, so spot-check characters at triage.
+- lee_2020_alcohol_use (16 rows): data_labels from the PLOS S1 .sav (AUDIT-C variant, past-year wording).
+  Live item x resp counts equal .sav counts in 15/15 cells. AUDIT register row ship_with_note applied (WHO credit
+  in public_note). Drinking_habit_2 resp is the 6-category index, not AUDIT-C points (disclosed).
+- ritzel_2020_farmer_burden (88 rows): paper_explicit (Table 2 codes), German administered wording from
+  Agroscope Science 92 Anhang 1 (off-deposit), translation_source=mixed -> owes an issues-page line on upload.
+  Verify PARTIAL (was VERIFIED): 12/12 Table 2 mean/SD pairs match and are distinct; category % match the
+  report within 0.5pp. y2's German-question identity (Q1.6 vs Q1.5) is inferred. KEYING OVERRIDE: y6/y7/y8 are
+  worded positively in German but stored negated. German anchors are reversed on that basis. Step 5b re-check
+  CONFIRMED the correlations (y9 +.18/+.26/+.30; x2 -.21/-.37/-.33; x3 -.16/-.28/-.30). Evidence is correlation
+  signs, not a codebook, so a human should look at it at triage.
+  DATA DEFECTS, re-check CONFIRMED: y8 has zero resp=3 (38/110/0/191/137/97/72, n=645 vs ~790 others; already in
+  S1). cov_region in data/ritzel_2020_farmer_burden.py is a respondent ID (801 distinct over 801 ids). Candidate
+  data-fix issue; not filed by this round.
+Queue: 30 pending. Cap check: the Step 0 cap is batch_450, not reached.

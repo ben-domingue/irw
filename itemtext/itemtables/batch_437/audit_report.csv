@@ -1,0 +1,4 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"lee_2020_alcohol_use","PASS",3,3,TRUE,TRUE,FALSE,TRUE,0,0,""
+"lunacortes_2019_self_congruity","PASS",4,4,TRUE,TRUE,FALSE,TRUE,0,71.4,"71.4% of rows have blank option_text"
+"ritzel_2020_farmer_burden","PASS",13,13,TRUE,TRUE,FALSE,TRUE,0,56.8,"56.8% of rows have blank option_text"
