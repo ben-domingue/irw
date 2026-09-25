@@ -7,7 +7,7 @@ ITEM_URL <- "https://ldbase.org/system/files/datasets/2021-05/PK_ItemLevelData.c
 # Total Scores data (DOI 10.33009/ldbase.1620844399.85a0, ODC-By): carries
 # `treatment` (RCT arm) and `project` (which of the 9 RCTs), linkable to the
 # item-level file on PK_ID. See issue #416. It also records which WJ-III form
-# (A or B) each child took at each wave.
+# (A or B) each child took of each subtest at each wave.
 FULL_URL <- "https://ldbase.org/system/files/datasets/2021-08/PK_FullData.csv"
 
 ldbase_csv <- function(file, url) {
@@ -24,17 +24,19 @@ df_full <- ldbase_csv('PK_FullData.csv',      FULL_URL)
 # value are left blank rather than folded into either group; cov_project
 # keeps the 9 RCTs distinguishable.
 #
-# Letter-Word ID has two parallel forms, A and B, with different words at the
-# same positions, and the item-level file records only the position. The form
-# is PK_WJLW_FORM_w1..w3 (0 = A, 1 = B), per wave: most children alternate
-# A/B/A or B/A/B, but some kept the same form (31 children from wave 1 to 2,
-# 39 from wave 2 to 3). Project 3 recorded no form at wave 3.
+# Each WJ-III subtest has two parallel forms, A and B, with different content
+# at the same positions, and the item-level file records only the position.
+# The form is PK_WJ<subtest>_FORM_w1..w3 (0 = A, 1 = B), per wave: most
+# children alternate A/B/A or B/A/B, but some keep a form across waves (for
+# Letter-Word ID, 31 children from wave 1 to 2 and 39 from wave 2 to 3).
+# Project 3 recorded no Letter-Word ID form at wave 3. The _G1/_G2 form
+# variables for the grade tables are not used.
 df_full <- df_full |>
-  select(PK_ID, treatment, project, starts_with("PK_WJLW_FORM_w")) |>
+  select(PK_ID, treatment, project, matches("^PK_WJ.+_FORM_w\\d$")) |>
   mutate(treat = if_else(treatment %in% c(0, 1), treatment, NA_real_),
          cov_project = project) |>
-  rename_with(\(x) sub("PK_WJLW_FORM_", "lw_form_", x)) |>
-  select(PK_ID, treat, cov_project, starts_with("lw_form_"))
+  rename_with(\(x) sub("^PK_WJ(.+)_FORM_w", "wjform_\\1_w", x)) |>
+  select(PK_ID, treat, cov_project, starts_with("wjform_"))
 df_raw <- df_raw |> left_join(df_full, by = "PK_ID")
 
 names(df_raw) <- tolower(names(df_raw))
@@ -58,7 +60,7 @@ for (i in 1:ncol(df_raw)) {
 
 
 drop_vars <- setdiff(drop_vars, c("treat", "cov_project",
-                                  paste0("lw_form_w", 1:3)))
+                                  grep("^wjform_", names(df_raw), value = TRUE)))
 
 df_raw <- df_raw |>
   # drop unneeded variables
@@ -73,12 +75,12 @@ df_raw <- df_raw |>
 
 # person-level columns carried onto every response row at the end
 person_cols <- df_raw |> select(id, treat, cov_project)
-# Letter-Word ID form per child per wave, joined on (id, wave) below
-lw_form <- df_raw |>
-  select(id, starts_with("lw_form_w")) |>
-  pivot_longer(-id, names_to = "wave_temp", names_prefix = "lw_form_w",
-               values_to = "lw_form")
-df_raw <- df_raw |> select(-treat, -cov_project, -starts_with("lw_form_"))
+# WJ-III form per child per subtest per wave, joined on (id, wave) below
+wj_form <- df_raw |>
+  select(id, starts_with("wjform_")) |>
+  pivot_longer(-id, names_to = c("subtest", "wave_temp"),
+               names_pattern = "wjform_(.+)_w(\\d)", values_to = "form")
+df_raw <- df_raw |> select(-treat, -cov_project, -starts_with("wjform_"))
 
 # transform tosrec assessment variables
 tosrec <- df_raw |>
@@ -193,6 +195,23 @@ df <- df |> left_join(person_cols, by = "id")
 
 df$check <- str_sub(df$item, 1, 5)
 
+# Put the WJ-III form in the item name, after the subtest prefix (wj_lw_A_13s,
+# wj_aka_B_10s, wj_mf_A_1_1): the same position on the two forms is a
+# different item. Responses with no recorded form are kept under
+# <prefix>_formunknown_<rest> rather than guessed. Forms are recorded per
+# wave, so this applies to the wave tables only.
+add_wj_form <- function(d, subtest) {
+  stopifnot(all(grepl("^w", d$wave)))
+  f <- wj_form[wj_form$subtest == subtest, c("id", "wave_temp", "form")]
+  d %>%
+    left_join(f, by = c("id", "wave_temp")) %>%
+    mutate(item = paste0(sub("^(wj_[a-z]+)_.*", "\\1", item), "_",
+                         case_when(form == 0 ~ "A",
+                                   form == 1 ~ "B",
+                                   TRUE ~ "formunknown"), "_",
+                         sub("^wj_[a-z]+_", "", item)))
+}
+
 df_ctopp <- df %>%
   filter(grepl("ctopp",df$check)) %>%
   select(id, item, resp, wave_temp, treat, cov_project) %>%
@@ -200,6 +219,7 @@ df_ctopp <- df %>%
 
 df_wj_mf <- df %>%
   filter(grepl("wj_mf",df$check)) %>%
+  add_wj_form("mf") %>%
   select(id, item, resp, wave_temp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
@@ -214,17 +234,9 @@ df_wj_lw_grade <- df %>%
   select(id, item, resp, wave_temp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
-# The form goes in the item name (wj_lw_A_13s, wj_lw_B_13s): the same position
-# on the two forms is a different word. Responses with no recorded form (project
-# 3, wave 3) are kept under wj_lw_formunknown_<n>s rather than guessed.
 df_wj_lw_wave <- df %>%
   filter(grepl("wj_lw",df$check), grepl("w",wave))%>%
-  left_join(lw_form, by = c("id", "wave_temp")) %>%
-  mutate(item = paste0("wj_lw_",
-                       case_when(lw_form == 0 ~ "A_",
-                                 lw_form == 1 ~ "B_",
-                                 TRUE ~ "formunknown_"),
-                       sub("^wj_lw_", "", item))) %>%
+  add_wj_form("lw") %>%
   select(id, item, resp, wave_temp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
@@ -235,6 +247,7 @@ df_wj_pc_grade <- df %>%
 
 df_wj_pc_wave <- df %>%
   filter(grepl("wj_pc",df$check), grepl("w",wave))%>%
+  add_wj_form("pc") %>%
   select(id, item, resp, wave_temp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
@@ -245,6 +258,7 @@ df_wj_pv_grade <- df %>%
 
 df_wj_pv_wave <- df %>%
   filter(grepl("wj_pv",df$check), grepl("w",wave))%>%
+  add_wj_form("pv") %>%
   select(id, item, resp, wave_temp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
@@ -255,9 +269,14 @@ df_wj_ak_grade <- df %>%
 
 df_wj_ak_wave <- df %>%
   filter(grepl("wj_ak",df$check), grepl("w",wave))%>%
+  add_wj_form("ak") %>%
   select(id, item, resp, wave_temp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
+# Sound Awareness is left pooled: PK_WJSA_FORM_w* splits children about evenly,
+# but A and B answer every position alike (summed chi-square 177 on 133 df
+# across wave-by-position cells, against 209 on 41 for Writing Fluency and
+# 6,418 on 102 for Picture Vocabulary), so the two forms share their items.
 df_wj_sa <- df %>%
   filter(grepl("wj_sa",df$check)) %>%
   select(id, item, resp, wave_temp, treat, cov_project) %>%
@@ -270,21 +289,25 @@ df_wj_wa_grade <- df %>%
 
 df_wj_wa_wave <- df %>%
   filter(grepl("wj_wa",df$check), grepl("w",wave))%>%
+  add_wj_form("wa") %>%
   select(id, item, resp, wave_temp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
 df_wj_wf <- df %>%
   filter(grepl("wj_wf",df$check)) %>%
+  add_wj_form("wf") %>%
   select(id, item, resp, wave_temp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
 df_wj_ap <- df %>%
   filter(grepl("wj_ap",df$check)) %>%
+  add_wj_form("ap") %>%
   select(id, item, resp, wave_temp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
 df_wj_qc <- df %>%
   filter(grepl("wj_qc",df$check)) %>%
+  add_wj_form("qc") %>%
   select(id, item, resp, wave_temp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
@@ -305,6 +328,7 @@ df_wj_spell_grade <- df %>%
 
 df_wj_spell_wave <- df %>%
   filter(grepl("wj_sp",df$check), grepl("w",wave))%>%
+  add_wj_form("spell") %>%
   select(id, item, resp, wave_temp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
