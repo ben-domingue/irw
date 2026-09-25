@@ -25690,3 +25690,28 @@ Notable:
 - The orchestrator's merge found a malformed provenance row: the attitude agent's own sed edit had left bare quotes in the note, producing 20 fields and crashing verify_batch. The agent rewrote the row with csv.writer, and it is now 8 fields.
 
 Cap check: the Step 0 cap is batch_430, so it has not been reached.
+
+## batch_411 — 2026-09-24T22:05-07:00
+
+3 tables claimed, 3 agents. **3 written / 0 blocked / 0 failed**, so the yield is 3/3.
+
+| table | status | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `liu_2023_subjective_norm` | **done** | 15 (3×5) | `paper_order` | PARTIAL, verify PASS |
+| `zhang_2024_expertise` | **done** | 15 (3×5) | `paper_order` | PARTIAL, verify PASS |
+| `jiang_2024_ptsexp` | **done** | 35 (5×7) | `data_labels` | NOT_NEEDED |
+
+Gates:
+- normalize_nulls fixed 1 file (jiang).
+- audit_batch: 3 PASS, no WARNs.
+- verify_batch: 2 PASS, plus 1 exempt (data_labels).
+- lint: clean.
+- irw-validate: ok ×3.
+- check_provenance: exit 0. `jiang_2024_ptsexp` is listed as HELD IRW-generated content (`machine_translation`), so it owes an issues-page line when it ships.
+
+Notable:
+- `liu_2023_subjective_norm` is the last of the Liu & Wang 2023 set from batch_410, with the same R16 ruling. It confirms the Table 2 loading misprint recorded in batch_410: the published "ATT" row matches live SN at 0.741/0.756/0.806. **Threshold caveat:** the agent relaxed the verify script's runner-up rule after seeing a FAIL (the PI row sits 0.0043 away, inside the sibling's 0.005 tolerance). The SN-vs-PI separation actually rests on all 8 Table 5 paths reproducing within 0.0005, so the PASS stands, but the threshold was chosen post hoc.
+- `zhang_2024_expertise`: the source typo "profession-al" was normalised to "professional" and disclosed in provenance.
+- **Response-data defect, re-checked by the orchestrator. The agent's framing was corrected.** In the jiang_2024 source .sav, `index` (renamed to `id`) has 707 distinct values over 1792 rows. The agent said different respondents share ids. In fact, rows sharing an index are **identical on all 126 response columns** and differ only in Gender/Age. Live `jiang_2024_ptsexp` has 8960 rows and 707 ids, with every id×item cell present 2–3 times (1645 ×2, 1890 ×3) and 0 of 3535 cells disagreeing. That is the dup_id_item pattern (#1842), not an id collision. The paper reports N=1792. This probably affects every `jiang_2024_*` table built by `data/jiang_2024_student_thriving.py`. It needs a data-side decision (not filed as an issue). The item text is unaffected.
+
+Cap check: the Step 0 cap is batch_430, so it has not been reached.
