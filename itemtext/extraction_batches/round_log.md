@@ -26313,3 +26313,23 @@ the consecutive series since 305 is what the rule intends).
   (verify script PASS): subscale blocks + composite reproduction + marker item inter04 (mean 3.12 vs 4.07-4.13, re-checked);
   order within each dimension not established.
 Queue: 24 pending. Cap check: the Step 0 cap is batch_450, not reached.
+
+## batch_440 — 2026-09-25T16:23 (3 tables, 3 agents)
+Written 3 / blocked 0 / failed 0 (yield 100%). All three came from the #2381 slice-08 re-audit queue (OBTAINABLE verdicts).
+All gates clean: normalize 0 changes, audit 3 PASS (no WARNs), verify_batch 3 PASS, lint no problems, irw-validate ok x3,
+check_provenance exit 0 (gao_2022_emotional_resilience now on the machine_translation "no issues-page entry" list -- owed once live).
+- gao_2022_emotional_resilience (66 rows): data_labels (S1 xlsx 问卷四 header cells, cols 66-76), administered Chinese +
+  machine_translation English. Agent still verified the positional script mapping: VERIFIED, live ERQ_k = raw col 65+k for
+  1087/1087 respondents (nearest wrong column 0.651). option_text blank: paper says 0-6 never..always (7 pts), data has 6 levels.
+  Response-data note (orchestrator re-checked): negative items 2/5/7/10/11 correlate .48-.67 with each other but -.10 to .21
+  with positive items (pos-pos .44-.74) -- stored-raw vs reversed undetermined; not an itemtext defect.
+- buzgova_2023_qol (65 rows): paper_order; OPQOL-brief English from Bowling's form (express free-use grant, credit in
+  public_note); translated_substitute/official_instrument_english, Czech administration (no Czech wording found). VERIFIED via
+  PMC9219227 Table 2 per-item mean/SD/item-total r (all 78 swaps fit worse; tightest 3<->7) + health-pair marker r=.705.
+  Paper-vs-data defect in notes: PLOS Methods say higher = better QoL, but data are raw 1=Strongly agree (item means 1.6-2.1);
+  orchestrator re-check: QoL total vs LSITA total r=0.59 (n=988), matching paper's 0.592.
+- ajaykumar_2023_experience (25 rows): paper_explicit, S2 File codebook descriptions (no administered wording published --
+  disclosed in note + public_note); endpoints only labelled. VERIFIED: live means match published M/SD for 4 items to 2dp
+  (e.g. ExpRobots 2.407/1.118 vs 2.41/1.12); ExpHands by elimination + self-describing code.
+  Side observation: data/ajaykumar_2023_robot_curricula.py puts an email address in its User-Agent header.
+Queue: 21 pending. Cap check: the Step 0 cap is batch_450, not reached.
