@@ -25973,3 +25973,27 @@ among all section-V columns. No table_context STOPs. No response-data defects fo
   home electricity supply ("servicio de luz"), not lighting; distinct from mexico_2023_quality_lightning (street
   lighting, p4_3_*). Suggest "Home Electricity Service Quality"; table name itself left alone.
 Queue: 12 pending. Cap check: the Step 0 cap is batch_430, so it has not been reached.
+
+**batch_426 — 2026-09-25 ~08:30 PDT.** 3 tables (3 agents): **3 written / 0 blocked / 0 failed**, yield 3/3.
+All gates clean: normalize 0 changed, audit 3 PASS (no WARNs), verify_batch 3 PASS, lint clean, irw-validate ok x3,
+check_provenance exit 0. All three: paper_explicit, text_source=study_materials, machine_translation (issues-page
+line owed at upload), INEGI credit + no-endorsement public_note per the rights register (irw#2381 R01), VERIFIED by
+per-cov_year count matching against INEGI 2023 + 2021 microdata, each live vector matching only its namesake column.
+**All three overrode a table_context.R Sheet1 STOP, Ben to confirm** -- same shape as batch_332/batch_424 _health:
+each links a hand-built sheet that was never uploaded (none of the three is in live_tables.csv, orchestrator-checked)
+and fails the gate as it stands (resp 1/2/null vs live 0/1, option numbers in item_text). If the STOPs should hold,
+drop the CSVs. Sheets: low 1oYRN7BPVDyqknh8O3p7zaH_zujarOpGP_45lc7u6owg, parks
+1n5Xxz6mcXTDvwyG09LcZmu5VjuFiUdy9OS8BZ1qwDXA, police 1c_LPkgmJ3NghTqcaPyYefh7oLEe-yvY_QWZ337_XPZ0.
+- mexico_2023_quality_low (24 rows, section V q5.1 service-use screener, 12 services x Si/No): **Step 3b / dictionary
+  lead, orchestrator-confirmed:** "low" comes from the section title "Evaluación de servicios públicos bajo demanda"
+  (= on-demand), mistranslated as "Low Demand Services" (biblio) / "Low Demand Service Quality Evaluation" (tags).
+  The table is the 5.1 usage screener, not a quality rating. Instrument matches the data; the name/description
+  mislead. Suggest Description "Use of on-demand public services (ENCIG 5.1 screener)". Orchestrator re-check:
+  INEGI 2023 P5_1_01 1/2 = 10417/28549, matching the agent's live counts. Extra verification: each item's Si set equals
+  exactly its follow-up block's answerers (22/22 item-waves). Items 09-11 state-conditional (2023 blank 22724/32475/
+  31609 of 38966); 2021 P5_1_10 -> p5_1_12 blank for 1399 in INEGI's own file -- source property, not a build error.
+- mexico_2023_quality_parks (14 rows, section IV q4.4/4.4a parks and gardens): section IV not renumbered between waves;
+  40/40 cells match (e.g. 2023 p4_4_1 29074/7895, 2021 28406/9180).
+- mexico_2023_quality_police (10 rows, q4.6/4.6a city police): not renumbered; 2023 p4_6_1 14712/23799, 2021 12830/26594.
+No response-data defects found.
+Queue: 9 pending. Cap check: the Step 0 cap is batch_430, so it has not been reached.
