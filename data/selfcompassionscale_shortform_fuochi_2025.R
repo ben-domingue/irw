@@ -1,3 +1,10 @@
+# KNOWN DEFECT, ACCEPTED AS-IS (irw#1856, ruled 2026-09-25): the published table
+# carries 3,024 excess rows over repeated (id, item) pairs (irw_validate.live_dup).
+# Prefixing id with the sample (cov_sample) already separates the six samples; the
+# repeats that remain sit inside a single sample and disagree on resp, so the
+# source cannot say which copy is right. Every other row is one response per
+# person-item. If your analysis needs unique (id, item), drop the repeated pairs.
+
 library(tidyverse)
 library(haven)
 
