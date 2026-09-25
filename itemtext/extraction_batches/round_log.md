@@ -25490,3 +25490,41 @@ Gates: normalize_nulls changed 1 of 3 files (mft: NA/quoting only). audit_batch:
 - mft_validationandreplication: 180 rows (36×5), paper_order, canonical_instrument (Atari et al. MFQ-2 appendix, osf br4zf, CC BY 4.0; register row MFQ-2). PARTIAL: verify script 10/10 wording-derived correlation predictions hold (Loyal country block min r .71 vs cross .49; Equal money block .83 vs .66; top pairs Pur2–Pur6 .80, Auth1–Auth2 .82, Care1–Care2 .75, Prop1–Prop5 .67). Order within semantic clusters is not established. **Caveat, public_note set:** the originators' Dec-2022 English .docx words item 27 (MFQ_Prop5) differently from the appendix. The appendix wording shipped. The study paper (Zakharin & Bates 2023, PAID) was Cloudflare-walled, so which version was administered is unconfirmed.
 - jovanovic_2026_conscientiousness_yips: 40 rows (10×4), paper_order, translated_substitute (official_instrument_english: Renshaw YIEPS items 1–10, osf ets7c; register row YIEPS). The study administered it in Serbian, and no Serbian wording is published, so the _translated columns are empty. Verification is **NO_ROUTE for item identity**. Its verify PASS covers response direction only (item mean r=+.633 with SPANE-NA, n=452) and the absence of reverse keying (item-total .27–.65). public_note discloses both the stand-in and the assumed order. **Orchestrator re-check:** the deposit has 8 fractional (imputed) YIPS values across items 2 (1), 4 (3), 6 (1), 7 (2) and 8 (1), among 452 respondents. The processing script drops them, so this is not a mismatch with the live table. The Serbian validation paper (Jovanović & Renshaw 2023, JPA, doi 10.1080/00223891.2023.2166518, paywalled) is the lead for wording and order.
 Cap check: the Step 0 cap is batch_430, so it is not reached.
+
+## batch_404 — 2026-09-24 (claimed 20:43 PDT) — 3 tables, 3 agents
+
+**2 written+done / 1 blocked / 0 failed** (0% failed, so the breaker is not tripped). Yield: 2 of 3 tables promoted; 3 of 3 CSVs written.
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `SABFI2_Gallardo_Pujol_2018_Constru` | **done** | 117 (13×9) | `paper_order` | PARTIAL, verify PASS |
+| `SABFI2_Gallardo_Pujol_2018_Trust` | **done** | 25 (5×5) | `paper_order` | PARTIAL, verify PASS |
+| `goksel_2026_embarrassment_warmth_competence` | **blocked on naming, CSV retained** | 40 (8×5) | `data_labels` | NOT_NEEDED |
+
+Gates:
+- normalize_nulls: 0 of 3 files changed.
+- audit_batch: 3 PASS with no anomalies, so there are no WARNs to explain.
+- verify_batch: PASS=2, MISSING(exempt)=1 (the data_labels table).
+- lint_verification: clean. 3 rows; the NOT_NEEDED row is in both files.
+- check_provenance: exit 0. It reported only the standing `mixed` REVIEW list.
+- irw-validate:
+  - 1 ERROR, `name_length` on goksel (43 chars).
+  - 2 WARNs, `name_charset` on the SABFI2 tables. The live names are mixed-case, as with every SABFI2 sibling.
+
+- **SABFI2 Constru**: the 13-item ISP self-construal set from Vignoles et al. (2016), in three blocks (1–4, 5–9, 10–13).
+  - Source is one hop off the deposit, like batch_166 Micro/Tight: `Spanish ISP.pdf` pp. 24–27 is image-only and was read by eye, so it is worth a human spot-check.
+  - The English in `_translated` is the ISP master. It diverges from the administered Spanish on Constru1 ("inadecuado para la situación" vs "may sometimes cause conflict") and on Constru11. This is disclosed in public_note.
+  - Verification: all 21 published subscale M/SD/α values reproduce, and all 22 within-block signs match. The order within {1,4}, {2,3}, {5,8}, {6,7,9}, {10,11} and {12,13} is not pinned.
+  - Rights: the register row SC-Vignoles (`ship_with_note`, irw#2381 R26) was applied.
+  - Paper-level oddity, not an IRW defect: the authors' Self-Expression score is keyed harmony-high, contrary to the postprint's text. **Orchestrator Step 5b re-check CONFIRMED it** from irw_fetch: harmony-high keying gives M 4.10 / SD 1.50, which matches the published 4.09/1.50; independence-high keying gives 5.90.
+- **SABFI2 Trust**: the 5-item General Trust Scale from Yamagishi et al. (2015), as run by the ISP.
+  - Spanish comes from `Spanish ISP.pdf` pp. 29–30, read by eye, so it needs a spot-check. The ISP translation file confirms the same items in the same order.
+  - Rights: the register row GTS-Yamagishi (`ship_with_note`, R29) was applied.
+  - Verification is PARTIAL: Trust1↔Trust2 is unpinned, and Trust5 is placed by elimination.
+- **goksel warmth_competence**: a clean data_labels extraction from the OSF jwdq6 codebook, Study 1 sheet.
+  - Orchestrator re-check: live n=600, and the 8 means match the deposit.
+  - **Blocked solely on `name_length`** (43 chars > 40), following the latest precedent: batch_381's `moralityandwarmth` from the same deposit. Retry test NO.
+  - To unblock: rename the live table to ≤40 chars and rename the CSV to match, or waive the cap. The done-vs-blocked precedent split (irw#2365) is still open for a human. A pending_index_notes row was added.
+- **Metadata:** the SABFI2 family's mixed-case names keep drawing `name_charset` WARNs, which is known and not new.
+
+Cap check: the Step 0 cap is batch_430, so it has not been reached.
