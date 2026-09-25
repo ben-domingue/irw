@@ -1,3 +1,10 @@
+# KNOWN DEFECT, ACCEPTED AS-IS (irw#1856, ruled 2026-09-25): stress_deboeck2012
+# has an `occasion` column, but 792 excess rows remain after it (4,862 repeated
+# (id, item) rows in all): 36 of its 185 people hold two or more complete response
+# sets in the source, fsdatT/stressT from the JSS v048c01 supplement. The source
+# does not say which set is which. If your analysis needs unique
+# (id, item, occasion), drop the repeated sets.
+
 ##bd note: verbagg data duplicative, commented out
 
 # https://www.jstatsoft.org/article/view/v048c01

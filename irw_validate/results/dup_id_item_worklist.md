@@ -19,9 +19,15 @@ need none.
 > **WITHDRAWN** (`tools/withdrawals/withdraw_1856_unrecoverable.py`); the four
 > `PROMISPME_Forrest_2021_*_Proxy` are **ACCEPTED AS-IS**, with the defect stated
 > in `data/PROMISPME_Forrest_2021.R`'s header. `pact_project` and
-> `number_pattern_game` are live and verified in v414. That leaves **three**
-> open, all needing the source: `Veterans_Affairs_SSVF_Survey_2016-17`,
-> `stress_deboeck2012`, `selfcompassionscale_shortform_fuochi_2025`.
+> `number_pattern_game` are live and verified in v414.
+>
+> **2026-09-25 -- the last three, and the list is closed.**
+> `Veterans_Affairs_SSVF_Survey_2016-17` is **FIXED** (#2419): an id collision
+> (two stacked exports each numbered from 1), not waves; `id` is now the source
+> row number. `stress_deboeck2012` and `selfcompassionscale_shortform_fuochi_2025`
+> are **ACCEPTED AS-IS** (Ben), with the defect stated in their scripts' headers
+> (`data/IRTrees.R`, `data/selfcompassionscale_shortform_fuochi_2025.R`). Nothing
+> in #1842's 73 or #1779's 81 is left open.
 
 **Status, 2026-09-03.** Blocks A, B, C, D, E and G are **done, uploaded and
 verified against the released versions** -- 47 tables, every `excess_pair` 0 (or
