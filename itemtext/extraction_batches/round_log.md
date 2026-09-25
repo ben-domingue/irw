@@ -25612,3 +25612,33 @@ Gates:
   - Sibling tables leader_support / org_practices / wf_balance can reuse the same xlsx route.
 
 Cap check: the Step 0 cap is batch_430, so it has not been reached.
+
+## batch_408 — 2026-09-24T21:27:07-07:00
+
+3 tables, 3 agents. **3 written+done / 0 blocked / 0 failed** (0% failed, so the breaker is not tripped). Yield: 3 of 3. This closes out the Znidarsic & Bernik 2021 (PLOS ONE e0245078) siblings; every table was built the same way as batch_407's coworker_support.
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `znidarsic_2021_leader_support` | **done** | 45 (9×5) | `data_labels` (positional codes) | VERIFIED, verify PASS |
+| `znidarsic_2021_org_practices` | **done** | 125 (25×5) | `data_labels` (positional codes) | VERIFIED, verify PASS |
+| `znidarsic_2021_wf_balance` | **done** | 20 (4×5) | `data_labels` (positional codes) | VERIFIED, verify PASS |
+
+Gates:
+- normalize_nulls: 0 of 3 files changed.
+- audit_batch: 3 PASS with no anomalies, so there are no WARNs to explain.
+- verify_batch: PASS=3.
+- lint_verification: clean, 3 rows. All three were verified because their codes are positional, so no NOT_NEEDED rows were owed.
+- irw-validate (upload profile): all 3 ok.
+- check_provenance: exit 0. It reported only the standing REVIEW lists.
+
+Notes:
+- All three are `translated_substitute`/`study_supplied`. The Slovenian administration is inferred, not stated. Rights come from the register row CLASS-closed-silent-adaptation (irw#2381 R16), which names all three tables. The register has no separate row for the Brough et al. scale or the Family-Friendly Company catalogue; its catalogue page carries no rights terms beyond a footer.
+- Mapping: each live item's 5-cell count vector matches exactly one deposit column, and it is always the column at the script's position (leader 45/45 cells, practices 125/125, wfb 20/20). The leader items are told apart from the co-worker columns even where the two blocks use identical wording.
+- Anchors were taken per block from Methods 2.1. Each block conflicts with the Results paraphrase, and each conflict is disclosed:
+  - leader: never / very often (Results says always).
+  - practices: completely disagree / strongly agree (Results says strongly disagree / very agree).
+  - wfb: completely disagree / completely agree.
+- **wf_balance WFB2 overrides the source.** The item is negatively worded but stored reverse-scored, so it ships as 1=completely agree, 5=completely disagree. The paper never states that it was recoded. **Orchestrator re-check CONFIRMED** this from the raw xlsx: WFB2 correlates +0.72, +0.73 and +0.77 with the other three items, and alpha is 0.923 as stored against -0.016 when WFB2 is flipped.
+- Data: the deposit has 247 rows against 343 in the paper (as in batch_407). The script drops sentinels: 41 in LS06, 55 in OP04 and 22 in OP12, which leaves each of those items at n=246.
+
+Cap check: the Step 0 cap is batch_430, so it has not been reached.
