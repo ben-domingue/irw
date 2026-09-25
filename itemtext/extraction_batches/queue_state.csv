@@ -1878,9 +1878,9 @@ mexico_2023_quality_corruption,done,batch_423,2026-09-25T07:58:05-07:00
 mexico_2023_quality_electricgovernment,done,batch_424,2026-09-25T08:00:32-07:00
 mexico_2023_quality_generalcorruption,done,batch_424,2026-09-25T08:00:32-07:00
 mexico_2023_quality_health,done,batch_424,2026-09-25T08:00:32-07:00
-mexico_2023_quality_healthservice,pending,,
-mexico_2023_quality_highways,pending,,
-mexico_2023_quality_homelightning,pending,,
+mexico_2023_quality_healthservice,done,batch_425,2026-09-25T08:10:21-07:00
+mexico_2023_quality_highways,done,batch_425,2026-09-25T08:10:21-07:00
+mexico_2023_quality_homelightning,done,batch_425,2026-09-25T08:10:21-07:00
 mexico_2023_quality_low,pending,,
 mexico_2023_quality_parks,pending,,
 mexico_2023_quality_police,pending,,

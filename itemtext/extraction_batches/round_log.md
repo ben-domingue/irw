@@ -25954,3 +25954,22 @@ per-cov_year count matching against INEGI 2023 + 2021 microdata; Step 3b found n
   -- same as batch_332: a hand-built sheet (1hlCpjbCJai2ZMfWuXn7WVX7q-ECPc14cupRxIgF3a74) was never uploaded and fails
   the gate (resp 1/2/null vs live 0/1, option numbers in item_text). If the STOP should hold, drop the CSV.
 Queue: 15 pending. Cap check: the Step 0 cap is batch_430, so it has not been reached.
+
+**batch_425 — 2026-09-25 ~08:25 PDT.** 3 tables (3 agents): **3 written / 0 blocked / 0 failed**, yield 3/3.
+All gates clean: normalize 0 changed, audit 3 PASS (no WARNs), verify_batch 3 PASS, lint clean, irw-validate ok x3,
+check_provenance exit 0. All three: paper_explicit, text_source=study_materials, machine_translation (issues-page
+line owed at upload), INEGI credit + no-endorsement public_note per the rights register (irw#2381 R01), VERIFIED by
+per-cov_year count matching against INEGI 2023 + 2021 microdata, each live vector matching only its namesake column
+among all section-V columns. No table_context STOPs. No response-data defects found.
+- mexico_2023_quality_healthservice (28 rows, q5.6 State/INSABI health service options 01-11 + 5.6a): 5.6 not
+  renumbered between waves; 2021 P5_6_1..9 -> P5_6_01..09 via RENAME_2021 confirmed by counts.
+- mexico_2023_quality_highways (16 rows, 2023 q5.13/5.13a toll highways): 2021 asked it as 5.11/5.11a and the rebuild
+  renames P5_11_* onto p5_13_*; 2021 p5_13_1 = 8970/4996, which is exactly the P5_11_1 2021 count the batch_422/423
+  orchestrator re-check found wrongly pooled into cablecars before #2415 -- independent confirmation the rebuild moved
+  those answers to the right table. 2021 is ~44% of each item; wording differences disclosed in public_note.
+- mexico_2023_quality_homelightning (12 rows, 2023 q5.8/5.8a home electricity service; 2021 5.7/5.7a, renamed):
+  negative control holds (2021's own P5_8_* = buses matches 0/3 live items). **Dictionary lead, orchestrator-confirmed
+  in metadata/ tags + biblio:** description reads "Home Lightning Service Quality" -- misspells Lighting and the table is
+  home electricity supply ("servicio de luz"), not lighting; distinct from mexico_2023_quality_lightning (street
+  lighting, p4_3_*). Suggest "Home Electricity Service Quality"; table name itself left alone.
+Queue: 12 pending. Cap check: the Step 0 cap is batch_430, so it has not been reached.
