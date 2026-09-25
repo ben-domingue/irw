@@ -94,3 +94,22 @@ The pool is every NEEDS_HUMAN row: 206 in `triage_results.csv` (waves 1-4 plus t
   - li_2026 has 223 rows where the deposit's table reports N=323;
   - Hakim Study 2's public .sav carries `Nama`/`Email` columns (IRW drops them).
 - The register's MEQ30 `block` row is a name-match trap for the Morningness-Eveningness Questionnaire (MEQ).
+
+## Rulings (Ben, 2026-09-25)
+
+Where the rules page ("IRW item-text licensing rules", 12 rules) already answers a question, that answer is used. Ben:
+"rely on that for the moment to the extent we can". Questions still open go to counsel.
+
+| Q | Ruling | What it does to the verdicts |
+|---|---|---|
+| 1 ShareAlike | **open, being researched**; may go to counsel. Rule 8 (restrictions travel downstream via `Derived_License`) is the candidate route. | chile_2024_safety (42) stays NEEDS_HUMAN |
+| 2 rating prompts | The stimulus (word, emoji) probably has to be part of the item text too. That is a format change, not a rights call. | stays NEEDS_HUMAN, tagged `design:stimulus-on-id`; not queued |
+| 3 per-item targets | A target the respondent produces, scored against a rubric (kanji to write, sentence to transcribe), is the answer key, not item text. It may belong in the nominal branch. | NOT_ITEM_TEXT, unless the prompt itself is published |
+| 4 partial coverage | Ship if **more than half** of the items are worded, with the rest blank. | 13/26 = exactly half: no; 23/25: yes; cbq 50/64: yes if rights clear |
+| 5 short titles | **No.** | NOT_PUBLISHED |
+| 6 PISA | **Skip.** Be careful with PISA. | `excluded` (reason: PISA skipped by ruling) |
+| 7 inferred instrument | **Yes, but verify** (e.g. p-values match what the canonical items predict) and file an issue for each one. | OBTAINABLE after the check passes, plus an issue |
+| 8 third-party permission lines | Ben wants examples. Rules page **rule 10** (secondhand evidence of a refusal blocks) and **rule 12** (when in doubt, don't host) cover it for now. | RIGHTS_BLOCK |
+| 9 commercial, no terms | **Hold.** | NEEDS_HUMAN, tagged `hold:commercial` |
+| 10 deliberate withholding | **Block.** | RIGHTS_BLOCK |
+| 11 DSM criteria | Investigate. Rules **1 and 4** cover it now: APA reserves reproduction, and a CC BY reprint doesn't launder it. | RIGHTS_BLOCK unless research says otherwise |
