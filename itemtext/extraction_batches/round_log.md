@@ -26426,3 +26426,21 @@ name_charset WARN on FPAS_Silva_2022 (live table name is capitalised, not an ite
   Nine reverse-coded items carry per-item reversed option labels per the dictionary; data concur (fpas_14/15 90% at 5).
   Caveat: the paper's printed Portuguese differs slightly from the dictionary wording; the dictionary was shipped.
 Queue: 6 pending. Cap check: the Step 0 cap is batch_450, not reached.
+
+## batch_446 — 2026-09-25T17:24:52-07:00 (3 tables, 3 agents)
+Written 3 / blocked 0 / failed 0 (yield 3/3). Gates: normalize_nulls fixed trusz (721 lines), audit_batch 3 PASS no
+anomalies, verify_batch trusz PASS + 2 exempt data_labels, lint_verification clean, irw-validate 0 ERROR (1 WARN
+name_charset on COACH_Chen_2022_treatmentStigma = live table's uppercase name, not an itemtext defect),
+check_provenance exit 0.
+- COACH_Chen_2022_treatmentStigma (6 rows, data_labels, NOT_NEEDED): Dataverse CC0 codebook labels; translated_substitute
+  (study_supplied English; administered in Chinese, no Chinese wording in deposit). Yes/No coding flips between items as the
+  codebook prints it (1 = stigmatising answer on all three). **DATA DEFECT (Step 5b confirmed):** baseline wave item 3 is
+  constant (2365/2365 = 1), baseline r(item1,item2)=0.086 vs +0.57 at month 12 — baseline wave looks corrupted.
+- trusz_2025_nfi (360 rows, paper_explicit, verify PASS / VERIFIED): CC0 deposit, English appendix as translated_substitute
+  (Polish only as truncated .sav column names). i_k matches recode of its own @k column 100% for 72/72 vs max 0.729 elsewhere.
+  Undocumented paper-respondent recode 1,2,3,4,5 -> 1,2,4,5,3 supported by data. **DATA DEFECT (Step 5b confirmed):**
+  6 half-point answers in efa.sav truncated by `astype(int)` at data/trusz_2025_nfi.py:61. Item 54 is reverse-worded, stored
+  unreversed.
+- goldberg_2018_pda525 (3,675 rows = 525 x 7, data_labels, NOT_NEEDED): CC0 .sav variable labels, match 525PDA_words.txt
+  525/525 and the printed form; all 3,622 item x resp cells match live. No explicit rights statement beyond CC0 deposit.
+Queue: 3 pending. Cap check: the Step 0 cap is batch_450, not reached.
