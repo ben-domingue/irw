@@ -27137,3 +27137,28 @@ clean (NOT_NEEDED rows in verification_merged.csv AND mapping_verification.csv);
 exit 0 (standing `mixed` review list unchanged).
 CIS 3522 files cached under .cache/spain_2025_inequality_{inequality,leaders}/ -- reusable for _personal/_recognition/_trajectory.
 Queue: 14 pending, 0 in_progress. Cap is batch_490, not reached.
+
+## batch_478 -- 2026-09-25T22:16:23-07:00 (closed ~22:25)
+3 tables claimed, 3 agents (one per table). Written 3 / blocked 0 / failed 0; yield 3/3. Circuit breaker not tripped.
+Batch numbering: highest existing is 477, so this is 478 (the "below 300" clause in Step 1 predates the series passing
+305; read literally it would give 300 -> 305, a collision -- rounds since have numbered consecutively, as this one does).
+queue_state.csv rewritten via temp file + os.replace with CRLF preserved.
+All three data_labels (item codes = lower-cased CIS 3522 column names), text_source=study_materials,
+translation_source=machine_translation (issues-page entries owed once live); existing CIS rights register row applied.
+- spain_2025_inequality_personal (P.4 / P.10 / P.11, items p4 p10 p11 x 1-5): WRITTEN. .sav = live 15/15 cells
+  (p4 1946/1620/31/323/70). Caveat: resp 3 on p4 and p10 is the "(NO LEER) Regular" volunteered-only option (31 and 108
+  uses); marker stripped from option_text per CIS precedent, public_note says so.
+- spain_2025_inequality_recognition (P.20 [LIDERESCONOCE], 4 items x 0/1): WRITTEN. .do drops 9 and recodes 7 (No conoce)
+  -> 0; option_text follows the recode. 97.8-99.7% know each leader (near-ceiling). No conoce + N.C. per item equals the
+  _leaders table's system-missing counts (14/70/90/69), confirming P.20 filters P.20a.
+  Step 5b orchestrator check: .do lines 129-137 CONFIRMED; live 0/1 = 11/3990, 67/3934, 87/3914, 66/3935.
+- spain_2025_inequality_trajectory (P.5 / P.6 / P.12, items p5 p6 p12 x 1-3): WRITTEN. .do recodes CIS (1=3)(2=1)(3=2), so
+  IRW 1 = less/decrease, 2 = same, 3 = more/increase -- NOT the CIS code order; option_text follows IRW resp. P5/P6 middle
+  option is (NO LEER). P6 don't-know 433/4004 (10.8%) dropped by the .do.
+  Step 5b orchestrator check: .do lines 213-219 CONFIRMED; live p5 1367/463/2060, p6 1065/218/2264, p12 336/1585/1955;
+  shipped option_text 1=Menos/Tenderán más bien a disminuir, 3=Más/...aumentar, consistent with the recode.
+Gates: normalize_nulls 0/3 changed; audit_batch PASS 3/3, no anomalies (no WARNs to explain); verify_batch
+MISSING(exempt)=3; lint_verification clean (NOT_NEEDED rows in verification_merged.csv AND mapping_verification.csv);
+irw-validate ok 3/3; check_provenance exit 0 (standing `mixed` review list unchanged).
+CIS 3522 now complete across batches 477-478 (inequality, leaders, personal, recognition, trajectory).
+Queue: 11 pending, 0 in_progress. Cap is batch_490, not reached.
