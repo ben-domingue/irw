@@ -26507,3 +26507,36 @@ triage rows (agn and gmc rest on silence, den on Uscinski et al. 2020 CC BY); no
   "proved to be false" scores. Confirmed.
 Step 5b: no claim overrides a source or reports a response-data defect; the gmc reversal is a property of the deposit, confirmed above.
 Queue: 46 pending. Cap check: the Step 0 cap is batch_470, not reached.
+
+## batch_450 — 2026-09-25T18:04-07:00 — 3 tables, 3 written / 0 blocked / 0 failed (yield 3/3)
+Three agents, no kills. All three are Büyüköksüz, Tekin, Arıkan, İlkay & Erözkan (2025) BMC Psychology 13:716 (CC BY 4.0), a Turkish
+SCS-SF adaptation, with a Mendeley deposit (.rar of .sav files + Mplus syntax) that has no item text. All gates clean: normalize_nulls
+0 changes; audit_batch 3 PASS, no anomalies (no Step 5c WARNs); verify_batch 3 PASS; lint_verification no problems; irw-validate ok on
+all 3; check_provenance exit 0 (only the standing 10-table `mixed` REVIEW list, none from this batch). All paper_explicit, PARTIAL:
+the routes pin keying polarity (every item correlates more with its own class) and, loosely, facet pairs, but not the order within a
+facet pair (e.g. i02/i06, i04/i08). The code-to-number tie comes from the paper's Table 2 numbering plus the deposit's Mplus facet key.
+Rights: the register's SCS-SF row is `ship` and was applied. Neff's PDF also carries a translation clause ("using the analytic approach"
+of Neff et al. 2019), which this study did not follow. The agents read it as a condition on making a translation, not a bar on
+redistributing one (same reading as batch_430 fuochi); flagged in notes for Ben to confirm. No register row written.
+**Orchestrator harmonisation:** only 6 of 12 items (1-5, 11) are published in Turkish (paper Table 2). The two Turkish-only siblings
+came back in different forms: cfaclinic left item_text blank on items 6-10 and 12 with English in _translated, while cfanonclinic used
+a per-row fallback. The standard (itemtext_standard.md l.36-65) does not name the partial case, but blank item_text on verbal items
+contradicts "base fields hold wording" and hides those rows from the backfill query (`language != '' AND item_text_translated == ''`).
+So cfaclinic was reworked to the per-row form: Turkish + the paper's English where published, and Neff's English in the base fields
+with _translated empty elsewhere, including instructions and anchors; text_source=translated_substitute, translation_source=mixed
+(every part published, nothing IRW-generated, so no issues-page entry is owed). Gates re-run after the rework. **This is a new
+convention for partial administered-language recovery; Ben may want to ratify it in the standard.**
+- scs_2025_cfaclinic (60 = 12 x 5): n=246, i01..i12, language=Turkish, per-row fallback as above.
+- scs_2025_cfanonclinic (60 = 12 x 5): n=545, same form.
+- scs_2025_cfausatr (60 = 12 x 5): n=670 (545 TR = exactly the non-clinical file + 125 US), SCS01..SCS12, language "English; Turkish",
+  English base fields only, canonical_instrument (szameitat_2015 multi-language precedent).
+**Response-data finding (all three):** the negatively worded items 1, 4, 8, 9, 11 and 12 are stored already reverse-scored. Neither the
+paper nor data/scs_2025.R says so. Anchors on those items therefore run 1 = "Almost always" .. 5 = "Almost never", disclosed in
+public_note. Orchestrator re-checked (Step 5b) on the live tables: the mean correlation between negative and positive items is
++0.160 / +0.150 / +0.170 (clinic / nonclinic / usatr), where raw SCS data would be negative; the minimum inter-item r is -0.028 / -0.033 /
++0.001. Direction: the clinical sample is lower than the non-clinical one on every positive item (e.g. i07 2.66 vs 3.58, i06 2.51 vs 3.30)
+AND on the stored negative items (i09 2.23 vs 2.76, i11 2.85 vs 3.09, i12 3.01 vs 3.26). High = more self-compassion throughout, so the
+negative items are the reversed ones. Confirmed. Worth a note on the data side (the IRW tables themselves are internally consistent).
+Batch numbering: highest existing is 449, so this is 450; the 300-304 hole rule in the prompt no longer bites (the series has run
+consecutively from 305).
+Queue: 43 pending. Cap check: the Step 0 cap is batch_470, not reached.

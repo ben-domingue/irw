@@ -2363,9 +2363,9 @@ phq9_xiong_2025,done,batch_448,2026-09-25T17:58:00-07:00
 agn_kay_2025,done,batch_449,2026-09-25T17:55:24-07:00
 den_kay_2025,done,batch_449,2026-09-25T17:55:24-07:00
 gmc_kay_2025,done,batch_449,2026-09-25T17:55:24-07:00
-scs_2025_cfaclinic,pending,,
-scs_2025_cfanonclinic,pending,,
-scs_2025_cfausatr,pending,,
+scs_2025_cfaclinic,done,batch_450,2026-09-25T18:04:36-07:00
+scs_2025_cfanonclinic,done,batch_450,2026-09-25T18:04:36-07:00
+scs_2025_cfausatr,done,batch_450,2026-09-25T18:04:36-07:00
 alsuhibani_2022_gcbs_extra_s2,pending,,
 alsuhibani_2022_paranoia_s3,pending,,
 roy_2024_phq9,pending,,
