@@ -26689,3 +26689,26 @@ check_provenance exit 0 (standing `mixed` REVIEW list only, none of this batch).
   Guo & Li's English/Chinese diverge on item 17 (encouragement vs help); both shipped as printed. Same dictionary defect
   as batch_456 (university vs junior-high sample).
 Queue: 22 pending, 0 in_progress. Cap check: Step 0 cap is batch_470, not reached.
+
+**batch_458 — 2026-09-25 ~19:33-19:45 PDT.** 3 tables (3 agents): **2 written / 1 blocked / 0 failed**, yield 2/3.
+Circuit breaker 0% failed. Gates: normalize 0 of 2 changed; audit 2 PASS (no WARNs); verify_batch MISSING(exempt)=2
+(both data_labels); lint clean (2 rows, NOT_NEEDED written to both files); irw-validate 2 ok; check_provenance exit 0
+(standing `mixed` REVIEW list only, none of this batch).
+- abramson_2026_israel_attachment (15 rows, Q4grid_1-3 x 1-5) and abramson_2026_israel_policy (20 rows, Q3grid_1-4 x 1-5):
+  data_labels / study_materials, Dataverse CC0 .sav variable + value labels (both waves). instructions blank: the deposit has
+  no questionnaire and the paper is not open access. **Orchestrator re-check:** Q3grid_4's .sav label really does differ
+  between waves (2022 "Israel's actions in the conflict ..." vs 2024 "In general, Israel's actions in the
+  Israeli-Palestinian conflict ..."). Both are shipped in item_text with [2022 wave]/[2024 wave] tags added by IRW, plus a
+  public_note. Triage should check that this convention is acceptable. Cosmetic: the two siblings name `instrument`
+  differently ("Attachment to Israel (...)" vs "Agreement Statements, Israeli policies (...)"), so harmonise at triage if
+  wanted. abramson_2026_mobilization is still pending.
+- goldberg_2018_ppq_via_strengths: **BLOCKED, rights escalation for Ben (retry test NO).** The 342 v items are IPIP-VIA,
+  which revises Peterson's preliminary VIA-IS. IPIP says the items are public domain; the VIA Institute's terms say the
+  materials are for non-commercial use and cannot be modified without permission. **Orchestrator re-check:** fetched both
+  pages; ipip.ori.org/newVIAKey.htm "based on a preliminary version of the VIA-IS" and viacharacter.org ToS "may not
+  modify the VIA Survey Materials without first obtaining written permission" both confirmed verbatim. **This touches a
+  LIVE table:** the same wordings ship as v1..v342 of goldberg_2018_ipip (batch_318, uploaded 2026-09-23), whose
+  provenance did not consult VIA's pages. A block ruling means withdrawing those rows; a ship ruling means adding an
+  IPIP-VIA register row and promoting .cache/goldberg_2018_ppq_via_strengths/candidate__items.csv (1,710 rows, passes
+  validate --table-sets). Row added to pending_index_notes.csv.
+Queue: 19 pending, 0 in_progress. Cap check: Step 0 cap is batch_470, not reached.
