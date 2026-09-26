@@ -26615,3 +26615,27 @@ Written 3 / blocked 0 / failed 0 — yield 100%. All gates clean: audit PASS=3 (
 - perfectionismlit_2021_engagement: paper_order, EQ1–3 = "I found the lesson useful/interesting/informative", NACE evaluation report (Hill, Fenwick & Lightfoot 2021) Table 1; 3x5=15 rows. VERIFIED on published agree% 75.4/72.3/80.0 — orchestrator re-check: live 75.4/72.3/80.0, disagree 0/6.2/6.2 (report 6.1 for the two; rounding of 4/65=6.15). availability_audit_full.csv's UNAVAILABLE for this table is wrong (it looked only at figshare).
 - perfectionismlit_2021_prepost: paper_order, Q1–5 from the same report's Table 1, 5x5=25 rows. VERIFIED against Table 2 n/M/SD at both waves — orchestrator re-check reproduces all 20 means/SDs to rounding. Dictionary defect confirmed: biblio.csv Description says "2 waves (pre=0, post=1)", live wave is 1 (339 rows) / 2 (340 rows). Dictionary-text fix only.
 Queue: 31 pending. Cap check: Step 0 cap is batch_470, not reached.
+
+**batch_455 — 2026-09-25 ~19:20 PDT.** 3 tables (3 agents): **3 written / 0 blocked / 0 failed**, yield 3/3.
+Gates: normalize 0 of 3 changed; audit 3 PASS (no WARNs); verify_batch PASS=1, MISSING(exempt)=2 (data_labels);
+lint 0 ERROR / 0 WARN / 1 INFO (gcbs item-axis hedge, VERIFIED stands per 2026-09-08 rule); check_provenance exit 0
+(standing `mixed` REVIEW list only). irw-validate: both gcbs tables ok; eammi allocation 1 ERROR `name_length`
+(45 chars > 40), marked done under Ben's 2026-09-25 item-text waiver (--override rerun: only finding).
+- gcbs_brotherton_2013 (90 rows, 15 x resp 0-5): paper_explicit, study_materials (openpsychometrics form wording;
+  codebook ties Qk to Brotherton 2013 Table A1). VERIFIED: form label tie 15/15, raw data.csv resp counts identical
+  15/15, facet correlations 13/15. Rights: GCBS `ship` in register (irw#2381 R11). Caveats: anchors are the form's
+  (1/3/5 labelled, 2/4 blank); Q7 drops "world" vs Table A1; the form was fetched in 2026 and no 2016 archive copy
+  was available. **Data defect:** resp=0 (undocumented, likely = unanswered) is kept by data/gcbs_brotherton_2013.R.
+  Orchestrator re-check: 108 cells, Q1..Q15 = 2/13/8/6/10/5/7/10/10/0/9/11/13/3/1, as reported. Shipped with blank option_text.
+- gcbs_brotherton_2013_tipi (80 rows, 10 x resp 0-7): data_labels (codebook.txt pairs, column names unchanged),
+  study_materials; rebuild from data.csv reproduces 24950/24950 cells. Gosling TIPI free-use statement.
+  Same resp=0 defect. Orchestrator re-check: 149 cells, TIPI1..10 = 14/15/15/17/13/14/14/16/15/16, as reported.
+  A recode of 0 -> NA in data/gcbs_brotherton_2013.R would fix both (and probably _vcl). If that recode lands, the
+  resp-0 rows must be dropped.
+- eammi_grahe_2018_marriage_identity_allocation (222 rows, 4 items, open % entry, option_text blank): data_labels
+  (EAMMi2-Data1.2.xlsx label sheet + codebook agree), OSF qtqpb CC0. **Sheet1 STOP overridden, Ben to confirm**:
+  this is the same case as batch_424-428. A hand-built sheet (1O3i4saK0yF8zYmijsB4sAmKP4jCz0y4g9ez6pwYbxfs) was never
+  uploaded and matches this CSV's wording. Data property (in public_note): only 91% of respondents' allocations sum
+  to 100. Orchestrator re-check: 3178 ids, 91% = 100, range 0-400, 23 sum to 0, 13 have only 3 of 4 items (the
+  script's 0-100 filter); per-item n 3172/3175/3176/3176, as reported.
+Queue: 28 pending. Cap check: Step 0 cap is batch_470, not reached.
