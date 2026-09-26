@@ -26817,3 +26817,20 @@ owed once live). Orchestrator Step 5b: re-fetched all three live tables; item x 
   confirmed. P23_2 .sav label abbreviated ("Es un trabajo como otro cualquiera"); questionnaire wording shipped. 58814 rows,
   10013 ids (6 of 10019 respondents answered no item substantively) -- confirmed live.
 Queue: 4 pending, 0 in_progress. Cap check: the Step 0 cap is batch_470, not reached.
+
+## batch_464 -- 2026-09-25T20:22:30 (3 tables, 3 agents)
+Written 3 / blocked 0 / failed 0 (yield 100%). Numbering: the Step 1 formula taken literally ("highest below 300, +1") now
+gives 300 -> 305, which already exists; used highest-overall-outside-the-holes + 1 = 464, the series every round since 305 has
+followed. The Step 1 wording should be updated to say so. No in_progress rows, no breaker flag at Step 0.
+Gates: normalize 0/3 changed; audit 2 PASS / 1 WARN; verify_batch PASS=3; lint clean; irw-validate ok x3; check_provenance rc 0
+(all three listed as machine_translation owing an issues-page line once live -- expected, INDEC publishes Spanish only).
+- argentina_2012_tobacco_harm (18 rows = 9 x 2, paper_explicit, VERIFIED): INDEC EMTA 2012 Diseno de registro pp.58-60; codebook
+  Si/No counts match live in 18/18 cells, all pairs distinct. resp reversed by the .do (2 = Si). Audit WARN on h02d/h02g row counts
+  = "No sabe" dropped as missing (57.1%/51.9%) -- response-data property, not itemtext; explained in notes.csv.
+- argentina_2013_reproductive_awareness (20 rows = 10 x 2, paper_explicit, VERIFIED): ENSSyR 2013 user-base documentation; 40/40
+  item x sex x resp cells match codebook counts, 0/40 under flipped direction.
+- argentina_2013_reproductive_transmission (8 rows = 4 x 2, paper_explicit, VERIFIED): same source; 16/16 cells match. One
+  irw_fetch export (~36k rows) used.
+Step 5b re-check: biblio.csv row for both argentina_2013_reproductive_* titles the source "...Reproductiva 2023" (key indec_2023)
+-- CONFIRMED in metadata/biblio.csv:919; the survey and data are 2013. Dictionary/biblio fix owed (not itemtext).
+Queue: 1 pending (argentina_2012_tobacco_policy), 0 in_progress. Cap check: the Step 0 cap is batch_470, not reached.
