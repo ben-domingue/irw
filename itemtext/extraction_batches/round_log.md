@@ -27594,3 +27594,16 @@ Gates: normalize_nulls 0/3 changed; audit_batch PASS 3/3 (no WARNs); verify_batc
 lint_verification 3 rows, no problems (NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv);
 irw-validate ok 3/3; check_provenance exit 0, no failures (standing `mixed` review list unchanged).
 Queue: 37 pending, 0 in_progress. Cap is batch_520, not reached.
+
+## batch_504 — 2026-09-26T02:00 (claimed 01:54:29-07:00), 3 agents (#2381 slice 12, CIS 3119)
+Numbering: highest existing batch 503 (excluding the 200-205 / 300-304 holes), so 504.
+Tables 3: spain_2015_immigration_contact, spain_2015_immigration_criteria, spain_2015_immigration_distance (CIS Estudio 3119, Actitudes hacia la inmigración VIII, Nov-Dec 2015, N=2470; MD3119.zip copied per agent from .cache/spain_2015_immigration_acceptability/, sha256 4beb4767… checked; covered by the CIS register row).
+Written 3 / blocked 0 / failed 0 — yield 100%. All data_labels. text_source=study_materials, translation_source=machine_translation, language=Spanish (issues-page lines owed once live).
+- contact (P.26-P.26c, how many immigrants among neighbours/friends/co-workers/relatives, Muchos..Ninguno, 16 rows). Each item has its own question; p26a-c shipped as the literal elliptical follow-ups ("¿Y entre todos sus amigos y amigas?"), disclosed in public_note. .do drops 7 (No procede)/8/9; p26b loses 1036 to No procede. 2468 ids. Step 3b: P.26 (immigrants), not the parallel P.27 Roma block (_proximity).
+- criteria (P.5, 8 admission criteria, 0-10 importance, 88 rows). Only 0/10 labelled; 1-9 blank. 98/99 dropped 2.9-4.9% per item; 2428 ids.
+- distance (P.24, 8 relationships x Acepta/ría / Trataría de evitarla / Rechazaría, 24 rows). .do also drops volunteered 4 "(NO LEER) Depende" (90-254 per item), disclosed. 2448 ids. Step 3b: P.24, not _proximity (P.27) or _roma (P.25).
+Step 5b orchestrator re-check: read DA3119 directly (2470 records) at cols 121-124 / 42-57 / 105-112. Every per-item code count and ids/rows 2468/8749, 2428/18956, 2448/18149 match the agents.
+Gates: normalize_nulls 0/3 changed; audit_batch first run ERROR on contact ("could not read live data: missing value where TRUE/FALSE needed", a transient query fault); an unchanged re-run gave PASS 2 / WARN 1 (contact p26b row-count anomaly = the No procede filter, a data property, explained in notes.csv); verify_batch MISSING(exempt)=3 (data_labels);
+lint_verification 3 rows, no problems (NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv);
+irw-validate ok 3/3; check_provenance exit 0, no failures (standing `mixed` review list unchanged).
+Queue: 34 pending, 0 in_progress. Cap is batch_520, not reached.
