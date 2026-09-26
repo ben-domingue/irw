@@ -26781,3 +26781,20 @@ the evident intent (consecutive numbering, holes 200-205 and 300-304 already beh
   with both men and women were never shown D3-D7, so d6/d7 (and any sibling table built from D3-D7 -- check spain_2025_sex_frequency
   and _identity when they run) omit that group. Property of the CIS fieldwork, not an itemtext defect.
 Queue: 10 pending, 0 in_progress. Cap check: the Step 0 cap is batch_470, not reached.
+
+## batch_462 — 2026-09-25T20:07-20:13-07:00 — 3 tables, 3 written / 0 blocked / 0 failed (yield 3/3)
+Three agents, no kills. Gates: normalize_nulls 0 changes; audit_batch 2 PASS + 1 WARN (explained below, Step 5c); verify_batch
+3 MISSING(exempt) (all data_labels); lint_verification no problems; irw-validate ok on all 3; check_provenance exit 0 (only the
+standing `mixed` REVIEW list, none from this batch). Numbering: highest existing was batch_461, so batch_462 (same reading of the
+stale "below 300" wording as batch_461). All three are CIS tables with English machine_translation -- issues-page lines owed once live.
+- spain_2025_sex_frequency (24 rows = 6 x 4, data_labels, NOT_NEEDED): CIS 3515 B2 grid, Spanish verbatim, = .sav labels 6/6;
+  frequencies match live 24/24. b2_3..b2_6 filtered to R2>=3 (86 N.P. dropped). The D3-D7 filter defect (nota F) does not touch B2.
+- spain_2025_sex_identity (11 rows over 4 items, data_labels, NOT_NEEDED): A7/A9/A10/A13 stems verbatim; value labels 11/11;
+  frequencies match live 11/11. Mixed scales in one table (a7/a9/a13 yes/no, a10 1-5 satisfaction) -- irw-validate did not flag it.
+  audit WARN (a9 row-count anomaly) is a response-data property: A9 asked only of the gender-non-normative filter group, 110 rows.
+  Orchestrator re-checked against live metadata: 26253 rows / 9009 ids = 8986 + 110 + 8878 + 8279. Dictionary Description omits a13
+  (acceptance of a relationship with a trans person), which is in the live table -- a metadata wording gap, not an itemtext one.
+- spain_2025_fears_leaders (40 rows = 4 x 10, data_labels, NOT_NEEDED): CIS Estudio 3534 P.18a leader ratings; item_text = leader
+  names = .sav labels 4/4; frequencies match live 40/40. Only 1 "Muy mal" and 10 "Muy bien" are labelled; 2-9 left blank. Sibling
+  spain_2025_fears_prospect (still pending) has fully labelled P10/P11 in the same 3534.sav, cached in .cache/spain_2025_fears_leaders/.
+Queue: 7 pending, 0 in_progress. Cap check: the Step 0 cap is batch_470, not reached.
