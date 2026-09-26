@@ -27542,3 +27542,16 @@ Gates: normalize_nulls 0/3 changed; audit_batch PASS 3/3 (no WARNs); verify_batc
 lint_verification 3 rows, no problems (NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv);
 irw-validate ok 3/3; check_provenance exit 0, no failures (standing `mixed` review list unchanged).
 Queue: 49 pending, 0 in_progress. Cap is batch_520, not reached.
+
+## batch_500 — 2026-09-26T01:40 (claimed 01:24:43-07:00), 3 agents (#2381 slice 12, ESRU-EMOVI 2023)
+Numbering: highest existing batch 499 (excluding the 200-205 / 300-304 holes), so 500.
+Tables 3: mexico_2023_mobility_assets, mexico_2023_mobility_community, mexico_2023_mobility_finances (CEEY ESRU-EMOVI 2023; same questionnaire / entrevistado_2023.dta / Diccionario as batch_499, cached per agent under .cache/<table>/).
+Written 3 / blocked 0 / failed 0 — yield 100%. All data_labels (EMOVI variable names lowercased by data/mexico_2023_mobility.do). text_source=study_materials, translation_source=machine_translation, language=Spanish (issues-page lines owed once live). Rights: silence (CEEY's own items), no register row written — batch_499's suggested standing ESRU-EMOVI register row is still Ben's call.
+- assets (P32 a-o, household goods owned at age 14; 30 rows, 1 = Sí, 2 = No). .do drops code 8 (spontaneous NS), 146-875 per item, 8376 total; 31 all-NS respondents absent from live (17812 ids). SOURCE DEFECT: .dta variable labels p32a-n carry the P31 stem ('A los 14 años, ¿tenían?') instead of P32's ('…¿alguna persona de su hogar era dueña/propietaria de…?'); only p32o, the questionnaire and the Diccionario have P32's. Item wording unaffected; the questionnaire stem is shipped. 'chivos' (P32d) vs 'chivas' (P96) transcribed as printed.
+- community (P98 a-i, public services in the neighbourhood; 18 rows). .do drops code 8: 48/59/99/753/79/154/39/90/1275 (d = daycare 4.2%, i = older-adult day centres 7.1%); 2 all-NS respondents -> 17841 ids.
+- finances (P97 a-n, respondent/spouse financial goods; 28 rows). No sentinels. Stem is about the respondent or spouse/partner, not the household, despite the block heading 'del hogar' — disclosed.
+Step 5b orchestrator re-check: read entrevistado_2023.dta directly (17843 records). p32a..o code-8 235/192/255/146/875/834/739/744/558/504/583/623/632/674/782 (sum 8376), 31 rows all-8; p98a..i code-8 as above, 2 rows all-8; p97 only 1/2, no missing. p32a label confirmed to carry the P31 stem, p32o the P32 stem. All match the agents.
+Gates: normalize_nulls 0/3 changed; audit_batch PASS 3/3 (no WARNs); verify_batch MISSING(exempt)=3 (data_labels);
+lint_verification 3 rows, no problems (NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv);
+irw-validate ok 3/3; check_provenance exit 0, no failures (standing `mixed` review list unchanged).
+Queue: 46 pending, 0 in_progress. Cap is batch_520, not reached.
