@@ -27116,3 +27116,24 @@ Gates: normalize_nulls 0/3 changed; audit_batch PASS 3/3, no anomalies; verify_b
 lint_verification clean (NOT_NEEDED rows written to verification_merged.csv AND mapping_verification.csv);
 irw-validate ok 3/3; check_provenance exit 0.
 Queue: 17 pending, 0 in_progress. Cap is batch_490, not reached.
+
+## batch_477 -- 2026-09-25T22:09:11-07:00 (closed ~22:20)
+3 tables claimed, 3 agents (one per table). Written 3 / blocked 0 / failed 0; yield 3/3. Circuit breaker not tripped.
+Batch numbering: highest existing is 476, so this is 477. queue_state.csv rewritten via temp file + os.replace with CRLF preserved.
+All three data_labels, text_source=study_materials, translation_source=machine_translation (issues-page entries owed once
+live); existing CIS rights register row applied, no new row.
+- spain_2012_entrepreneurship_values (CIS 2938 P.8, 10 items p801-p810 x 0-10): WRITTEN. Endpoint-only labels (0 "Muy poco
+  importante", 10 "Muy importante"); resp 1-9 option_text blank. Higher = more important (opposite direction to the 1-4
+  sibling grids). Agent rebuilt live table from DA2938 exactly and matched published mean/SD/N on all 10 items.
+  Step 5b orchestrator check: live means/N CONFIRMED (p801 8.6/N 1430, p806 3.2/N 1423).
+- spain_2025_inequality_inequality (CIS 3522 P.9 [P9DESIGU], 7 items x 1-10): WRITTEN. Endpoint-only labels; item_text
+  from questionnaire rows (.sav labels differ only by "/as" markers and doubled spaces). .sav frequencies = live 70/70 cells.
+- spain_2025_inequality_leaders (CIS 3522 P.20a, VALORALIDERES_1-4 x 1-10): WRITTEN. Instructions identical to batch_462
+  spain_2025_fears_leaders P.18a, English reused. Rated only by respondents who knew the leader, so n differs per item.
+  Step 5b orchestrator check: CONFIRMED 15509 rows / 3942 ids, n 3932/3869/3845/3863, valoralideres_1 counts
+  1517/207/221/266/374/361/397/296/90/203.
+Gates: normalize_nulls 0/3 changed; audit_batch PASS 3/3, no anomalies; verify_batch MISSING(exempt)=3; lint_verification
+clean (NOT_NEEDED rows in verification_merged.csv AND mapping_verification.csv); irw-validate ok 3/3; check_provenance
+exit 0 (standing `mixed` review list unchanged).
+CIS 3522 files cached under .cache/spain_2025_inequality_{inequality,leaders}/ -- reusable for _personal/_recognition/_trajectory.
+Queue: 14 pending, 0 in_progress. Cap is batch_490, not reached.
