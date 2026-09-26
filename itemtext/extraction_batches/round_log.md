@@ -27209,3 +27209,27 @@ MISSING(exempt)=3; lint_verification clean (NOT_NEEDED rows in verification_merg
 irw-validate ok 3/3; check_provenance exit 0 (standing `mixed` review list unchanged).
 CIS 3564 now complete across batches 479-480 (confidence, eu, influence, media, threat, un).
 Queue: 5 pending, 0 in_progress. Cap is batch_490, not reached.
+
+## batch_481 -- 2026-09-25T22:38:46-07:00 (closed ~22:48)
+3 tables claimed, 3 agents (one per table). Written 3 / blocked 0 / failed 0; yield 3/3. Circuit breaker not tripped.
+Numbering: highest existing (below 300) is 480, so 481. queue_state.csv rewritten via temp file + os.replace (LF, as found).
+Source: INDEC ENCaViAM 2012 (Encuesta Nacional sobre Calidad de Vida de Adultos Mayores), user-base documentation
+doc_utilizacion_ENCaViAM 2012.pdf (Diccionario de variables) + raw ENCaViAM2012_Base_usuario.txt; processed by
+data/argentina_2012_aging.do. All three paper_explicit (codes = user-file column names lower-cased), text_source=study_materials,
+translation_source=machine_translation (issues-page lines owed once live). INDEC CC BY-SA attribution-only, per batch_464; no
+register row. The questionnaire the documentation says is appended is NOT in the PDF, so instructions/section_prompt blank on all three.
+- argentina_2012_aging_ageism (RE01-RE05, Si/No): WRITTEN, 10 rows. Per-item direction follows the .do: re01/02/04/05 reversed
+  (resp 2 = Si), re03 as coded (resp 1 = Si); irw-validate raises no resp_ambiguous since labels are per-item. VERIFIED via INDEC
+  Principales resultados Cuadro 32 (weighted %, all 15 values reproduced from raw) + raw-vs-live counts. RE06 not in table.
+- argentina_2012_aging_change (AU02 health, AU04 memory vs last year, 3 levels): WRITTEN, 6 rows; resp 3 = "...ha mejorado?"
+  after the .do's 4 - x. Codebook ellipses shipped as printed. VERIFIED by count matching (swap/flip 0/2).
+- argentina_2012_aging_dependence (DEP01_01-08 basic ADL help, No/Si): WRITTEN, 16 rows; resp 2 = Si. dep01_06/07 tie on pooled
+  counts (4496/158 each); agent separated them by sex split (46/112 vs 54/104) and id-sum checksum -- VERIFIED.
+Step 5b orchestrator check: recomputed from the raw INDEC file with the .do's recodes vs live server-side GROUP BY, 15/15 items
+MATCH -- CONFIRMED. ageism 22170 rows / 4637 ids (re01 2783/1648, re03 3331/1163); change 9308 / 4654 (au02 1110/3070/474,
+au04 719/3768/167); dependence 37232 / 4654 (dep01_08 4166/488).
+Gates: normalize_nulls 0/3 changed; audit_batch PASS 3/3, no anomalies (no WARNs to explain); verify_batch PASS=3;
+lint_verification 0 ERROR / 3 WARN -- each "VERIFIED but evidence hedges": the hedge is the missing interviewer framing, not the
+code->text mapping, which every route distinguishes item-by-item, so VERIFIED stands. irw-validate ok 3/3; check_provenance exit 0
+(standing `mixed` review list unchanged). Agent aside: biblio.csv bibtex keys differ across argentina_2012_aging siblings -- not itemtext.
+Queue: 2 pending (argentina_2012_aging_health, _instrumental), 0 in_progress. Cap is batch_490, not reached.
