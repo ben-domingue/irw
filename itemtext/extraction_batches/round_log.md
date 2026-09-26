@@ -27569,7 +27569,7 @@ lint_verification 3 rows, no problems (NOT_NEEDED rows in both verification_merg
 irw-validate ok 3/3; check_provenance exit 0, no failures (standing `mixed` review list unchanged).
 Queue: 43 pending, 0 in_progress. Cap is batch_520, not reached.
 
-## batch_502 — 2026-09-26T01:50 (claimed 01:39:37-07:00), 3 agents (#2381 slice 12, ESRU-EMOVI 2023)
+## batch_502 — 2026-09-26T01:44 (claimed 01:39:37-07:00), 3 agents (#2381 slice 12, ESRU-EMOVI 2023)
 Numbering: highest existing batch 501 (excluding the 200-205 / 300-304 holes), so 502.
 Tables 3: mexico_2023_mobility_rooms, mexico_2023_mobility_services, mexico_2023_mobility_spaces (CEEY ESRU-EMOVI 2023; same questionnaire / entrevistado_2023.dta / Diccionario as batches 496-501, zips copied per agent from .cache/mexico_2023_mobility_neighborhood/, hashes checked).
 Written 3 / blocked 0 / failed 0 — yield 100%. All data_labels (EMOVI variable names lowercased by data/mexico_2023_mobility.do). text_source=study_materials, translation_source=machine_translation, language=Spanish (issues-page lines owed once live).
