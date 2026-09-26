@@ -27028,3 +27028,37 @@ Written 3 / blocked 0 / failed 0. Yield 3/3. Breaker not tripped (0% failed).
 - Agents dispatched in the foreground in one message; all returned before Step 3.
 - Next: skarzauskiene_2026_social_trust and _trust_science are the last two tables on this deposit.
 Queue: 26 pending, 0 in_progress. Cap is batch_490, not reached.
+
+## batch_474 — 2026-09-25 21:43–21:5x PDT (3 tables, 3 agents)
+Written 3 / blocked 0 / failed 0. Yield 3/3. Breaker not tripped (0% failed).
+- Numbering: highest existing is 473 (consecutive 305..473), so 474. Note: Step 1's literal rule ("highest + 1 over
+  directories below 300, and if that lands in 300-304 use 305") now yields 305, which exists; the series is simply
+  continuing consecutively above 305, as batch_473 also did. The prompt's wording should be updated to say so.
+- skarzauskiene_2026_social_trust (5 items m70-m74 x 1-5): WRITTEN. INFODEMIJA Zenodo 21134839 (CC BY 4.0), data_labels,
+  translated_substitute / study_supplied, Lithuanian. Dictionary rows for this group print no "Do you strongly disagree..."
+  framing, so instructions blank; item_text in the dictionary's sentence case. M71/M72 negatively keyed, stored raw.
+  Option 4 "I agree more quickly" kept literal, as in batch_472/473.
+- skarzauskiene_2026_trust_science (8 items m40-m42, m75-m79 x 1-5): WRITTEN. Same deposit and conventions. Shared closing
+  sentence "Do you strongly disagree, tend to disagree, neither, tend to agree, or strongly agree?" ships once as
+  instructions. Table mixes media-science-reporting items (m40-42) with trust-in-scientists items (m75-79) -- that is the
+  dictionary group 'Trust in Science & Institutions' as the processing script split it; instrument field names both.
+  m78/m79 negatively worded, stored unreversed (agent: r=+0.75 with each other, -0.16..-0.37 with the rest).
+  Both INFODEMIJA tables finish that deposit (all skarzauskiene_2026_* now done).
+- spain_2012_entrepreneurship_barriers (4 items p1701-p1704 x 1-4): WRITTEN. CIS Estudio 2938 (youth attitudes to
+  entrepreneurship, 2012). data_labels (CIS variable names; SPSS syntax ES2938 variable + value labels), study_materials,
+  Spanish base text, machine_translation English -> an issues-page entry is owed once uploaded (check_provenance lists it
+  as HELD). Licence: existing CIS "allow" row in instrument_rights_register.csv (irw#2381), reuse page re-fetched. Caveats
+  in notes: resp 1 = Muy de acuerdo (higher = more disagreement); lead-in says "totalmente de acuerdo" while grid/value
+  labels say "Muy de acuerdo" (both shipped as printed); questionnaire PDF is image-only but wording matches SPSS labels
+  exactly; N.S./N.C. (8/9) dropped by the script; p1704 is about fear of failure but sits in the same P.17 grid.
+  CIS package cached at itemtext/.cache/spain_2012_entrepreneurship_barriers/ for the 7 spain_2012_* siblings (P.14-P.17
+  on questionnaire page 3, P.18-P.27a on page 4).
+- Orchestrator re-check (Step 5b): INFODEMIJA dictionary sha256 4c2a8c49... / data f4c5499e... re-hashed; 13/13 stems found
+  in 'Related Question' for their own Variable ID and in the claimed group; deposit counts m70 81/240/284/339/43 and m40
+  total 891 agree with the agents. CIS: item_text equals ES2938 VARIABLE LABELS for p1701-p1704; value labels 1-4 match;
+  raw DA2938 cols 118-121 give p1701 798/558/40/3, p1702 389/610/250/50, p1703 254/505/448/84, p1704 274/465/489/118 --
+  identical to the agent's live counts.
+- Gates: normalize_nulls 0/3 changed; audit_batch 3 PASS / 0 WARN; verify_batch MISSING(exempt)=3; lint_verification clean
+  (NOT_NEEDED rows in both files); irw-validate ok x3; check_provenance exit 0 (standing `mixed` review list unchanged).
+- Agents dispatched in the foreground in one message; all returned before Step 3.
+Queue: 23 pending, 0 in_progress. Cap is batch_490, not reached.
