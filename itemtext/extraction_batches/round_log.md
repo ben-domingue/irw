@@ -27377,3 +27377,25 @@ Gates: normalize_nulls 0/3 changed; audit_batch PASS 3/3 (no WARNs); verify_batc
 lint_verification 3 rows, no problems (NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv);
 irw-validate ok 3/3; check_provenance no failures (standing `mixed` review list unchanged).
 Queue: 29 pending (spain_2013_defense_* next), 0 in_progress. Cap is batch_510, not reached.
+
+## batch_489 -- 2026-09-25T23:44:58 (-07:00), 3 tables, 3 agents (#2381, CIS 2998 la defensa nacional y las fuerzas armadas 2013)
+Numbering: highest existing batch 488, so 489.
+Written 3 / blocked 0 / failed 0; yield 3/3 (100%). Tables one to three of the eleven spain_2013_defense_* tables.
+- spain_2013_defense_attractions (P3601-P3607, importance of seven attractions of military life, 1 Muy importante .. 5 Nada importante, only endpoints labelled so resp 2-4 blank; 35 rows)
+- spain_2013_defense_capability (P18 armed forces' preparedness / P20 soldiers' qualification, each its own 4-point Muy..Nada scale; 8 rows)
+- spain_2013_defense_children (P43-P46, encourage or discourage a daughter/son becoming a professional soldier / career officer, 1 Le animaria / 2 Se lo desaconsejaria; 8 rows)
+All three: data_labels (CIS ES2998 variable names lower-cased by the .do), study_materials + machine_translation (issues-page
+entries owed once live). Source MD2998.zip from cis.es (folder 1555046; md5 2758ef8d..., identical across all three agents' fetches).
+Each agent rebuilt its table from DA2998 per the .do and reproduced live exactly (3179 / 4159 / 6229 rows). Rights: existing CIS "allow" register row.
+Orchestrator Step 5b checks, all CONFIRMED against the files:
+- attractions p3607 ships the questionnaire's "La camaraderia y espiritu de equipo" over the ES2998 label "...y el espiritu de equipo" (ES2998 line 124 vs Cues2998).
+- capability P.20 stem reads "muy, bastante, poco o muy poco capacitados" while the printed option 4 and the ES2998 value label (line 343) read
+  "Nada capacitados"; both shipped as printed.
+- age filters from DA2998: P36 non-0 for exactly the 464 respondents aged 16-28 (2015 aged 29+ coded 0); P43-46 the reverse (464 aged <=28 all 0).
+Caveats (notes + public_note): attractions asked only of 16-28 year-olds and its "esa misma escala de 1 a 5" refers back to P.35 (not in
+this table); children asked only of 29+, hypothetical for respondents without children, .do drops code 3 "(No leer) Ni uno ni lo otro";
+capability has ~16% don't-know/no-answer dropped per item.
+Gates: normalize_nulls 0/3 changed; audit_batch PASS 3/3 (no WARNs); verify_batch MISSING(exempt)=3 (data_labels);
+lint_verification 3 rows, no problems (NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv);
+irw-validate ok 3/3; check_provenance exit 0 (standing `mixed` review list unchanged).
+Queue: 26 pending (8 more spain_2013_defense_* siblings next), 0 in_progress. Cap is batch_510, not reached.
