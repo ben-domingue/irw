@@ -26834,3 +26834,15 @@ Gates: normalize 0/3 changed; audit 2 PASS / 1 WARN; verify_batch PASS=3; lint c
 Step 5b re-check: biblio.csv row for both argentina_2013_reproductive_* titles the source "...Reproductiva 2023" (key indec_2023)
 -- CONFIRMED in metadata/biblio.csv:919; the survey and data are 2013. Dictionary/biblio fix owed (not itemtext).
 Queue: 1 pending (argentina_2012_tobacco_policy), 0 in_progress. Cap check: the Step 0 cap is batch_470, not reached.
+
+## batch_465 -- 2026-09-25T20:32:04 (1 table, 1 agent)
+Written 1 / blocked 0 / failed 0 -- yield 1/1. Only 1 pending row remained, so one agent.
+Gates: normalize 0/1 changed; audit 1 PASS; verify_batch PASS=1; lint 0 ERROR / 0 WARN / 1 INFO (VERIFIED stands, item-axis rule);
+irw-validate ok; check_provenance: table listed as machine_translation owing an issues-page line once live -- expected.
+- argentina_2012_tobacco_policy (8 rows = 4 x 2, paper_explicit, VERIFIED): INDEC EMTA 2012 Diseno de registro pp.61-62 (batch_464's
+  "pp.60-61" pointer was one page off; same PDF sha256). Codebook En contra/A favor vs live resp1/resp2 match in 8/8 cells
+  (har04a 142/6390, har04b 224/6110, h05 894/5139, h06 542/5582), pairs mutually distinct, 0/4 match flipped. resp reversed by
+  the .do (2 = A favor); No sabe/Se niega dropped as missing, per-item n 6033-6532. Server-side GROUP BY only, no export.
+Step 5b re-check: orchestrator's verify_batch.R run reproduced all 8 counts from live data independently of the agent -- CONFIRMED.
+Queue: 0 pending, 0 in_progress -- QUEUE EXHAUSTED (308 blocked, 13 failed, 427 excluded remain). Cap check: the Step 0 cap is
+batch_470, not reached; the next firing will stand down on the empty-queue condition.
