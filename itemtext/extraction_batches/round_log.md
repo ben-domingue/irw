@@ -27478,3 +27478,15 @@ Gates: normalize_nulls 0/3 changed; audit_batch PASS 2 / WARN 1 (explained above
 lint_verification 3 rows, no problems (NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv);
 irw-validate ok 3/3; check_provenance exit 0, no failures (standing `mixed` review list unchanged).
 Queue: 11 pending, 0 in_progress. Cap is batch_510, not reached.
+
+## batch_495 — 2026-09-26T00:47 (claimed 00:38:22-07:00), 3 agents
+Numbering: highest existing batch 494 (excluding the 200-205 / 300-304 holes), so 495.
+Tables 3: spain_2017_politics_services, spain_2017_politics_spending, spain_2017_politics_wellbeing (CIS Estudio 3184).
+Written 3 / blocked 0 / failed 0 — yield 100%. All data_labels (CIS variable names as item codes; rebuilds from DA3184 reproduce live exactly: services 20079 rows/2452 ids, spending 31961/2371, wellbeing 12222/2458). text_source=study_materials, translation_source=machine_translation (issues-page lines owed once live). CIS rights register row applied, none written.
+- services (P601-P609; 36 rows): drops 8/9, 2061 cells. Orchestrator-confirmed from DA3184 cols 54-62: p603 402+7, p609 331+3, p606 299+9, p602 25+2. option_text uses ES3184 value labels ('Muy satisfactoriamente' ..) where the grid heads print bare adverbs (same as agreement, batch_492). 1 = best.
+- spending (P801-P815; 45 rows, resp 1..3): drops 8/9. Orchestrator-confirmed cols 64-78: p806 106+4 (min), p813 598+11 (max), 89 records with no retained item. Items read in rotated order (start stored in P816, not in IRW). 3 = Muy pocos (under-funded).
+- wellbeing (P101-P104, P2; 55 rows, resp 0..10): two sections (P.1 grid; P.2 standalone). Endpoint-only labels, resp 1-9 option_text blank. Drops 98/99, orchestrator-confirmed cols 29-38: p101 4/10, p102 0/5, p103 14/10, p104 12/5, p2 8/10.
+Gates: normalize_nulls 0/3 changed; audit_batch PASS 3/3 (no WARNs); verify_batch MISSING(exempt)=3 (data_labels);
+lint_verification 3 rows, no problems (NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv);
+irw-validate ok 3/3; check_provenance exit 0, no failures (standing `mixed` review list unchanged).
+Queue: 8 pending, 0 in_progress. Cap is batch_510, not reached.
