@@ -27305,3 +27305,26 @@ Gates: normalize_nulls 0/3 changed; audit_batch PASS 3/3, no anomalies (no WARNs
 lint_verification 3 rows, no problems (NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv);
 irw-validate ok 3/3; check_provenance reports no failures (standing `mixed` review list unchanged).
 Queue: 38 pending, 0 in_progress. Cap is batch_510, not reached.
+
+## batch_486 -- 2026-09-25T23:21 (-07:00), 3 tables, 3 agents (#2381 slice 11, CIS 3016 debate sobre el estado de la nacion 2014)
+Numbering: highest existing batch 485, so 486.
+Written 3 / blocked 0 / failed 0; yield 3/3 (100%). First three of the nine spain_2014_debate_* tables.
+- spain_2014_debate_agreement (P13A_1..17, agreement with what each leader said, 1 "Con la mayoria.." .. 4 "Con nada o casi nada.."; 68 rows)
+- spain_2014_debate_debate (P8/P11/P12, evaluation of the 2014 debate, each with its own 4-point scale; 12 rows)
+- spain_2014_debate_general (P2/P3, interest of these debates / treat issues that worry Spaniards; 8 rows)
+All three: data_labels (item codes = CIS Es3016 variable names, lower-cased by the .do), study_materials + machine_translation
+(issues-page entries owed once live). Source MD3016.zip from cis.es (Es3016/Da3016/Cues3016.pdf). Each agent rebuilt its
+table from Da3016 per the .do and reproduced live exactly (7023 / 3189 / 3116 rows). Rights: existing CIS "allow" register row (line 117).
+Two label choices where the sources disagree, both CONFIRMED by the orchestrator at Step 5b against the files:
+agreement p13a_9 ships the questionnaire's "Xabier Mikel Errekondo" (Cues3016 prints the full name in all three places)
+over the Es3016 variable label "Mikel Errekondo"; general p2 code 3 ships the value label "Poco interesantes" (Es3016 line
+157) over the questionnaire option list's singular "Poco interesante" (the stem read aloud says "poco interesantes").
+Caveats (notes + public_note): P.13a asked only about leaders whose speech the respondent recalled; debate items filtered
+on P1=1 AND followed/heard of the debate (the .do comment says only P1=1 -- comment is loose, logic unaffected); P12
+wording is day-dependent ("[MIERCOLES esta siendo, JUEVES ha sido]"), shipped as printed.
+Gates: normalize_nulls 0/3 changed; audit_batch PASS 2 / WARN 1; verify_batch MISSING(exempt)=3 (data_labels);
+lint_verification 3 rows, no problems (NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv);
+irw-validate ok 3/3; check_provenance exit 0 (standing `mixed` review list unchanged).
+WARN explained (notes.csv): agreement row-count anomaly on p13a_1-5,7 vs median 231 -- structural, those are the major-party
+leaders more respondents recalled; orchestrator recount from Da3016 1035/1008/721/728/359/../762 matches. Not an itemtext defect.
+Queue: 35 pending (6 more spain_2014_debate_* siblings next), 0 in_progress. Cap is batch_510, not reached.
