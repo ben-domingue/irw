@@ -27634,7 +27634,7 @@ lint_verification 3 rows, no problems (NOT_NEEDED rows in both verification_merg
 irw-validate ok 3/3; check_provenance exit 0, no failures (standing `mixed` review list unchanged).
 Queue: 28 pending, 0 in_progress. Cap is batch_520, not reached.
 
-## batch_507 — 2026-09-26T02:3x (claimed 02:19:25-07:00), 3 agents (#2381 slice 13, CIS 3119 + CIS 3495)
+## batch_507 — 2026-09-26T02:25 (claimed 02:19:25-07:00), 3 agents (#2381 slice 13, CIS 3119 + CIS 3495)
 Numbering: highest existing batch 506 (excluding the 200-205 / 300-304 holes), so 507.
 Tables 3: spain_2015_immigration_rights, spain_2015_immigration_roma (CIS Estudio 3119; MD3119.zip copied per agent from .cache/spain_2015_immigration_acceptability/, sha256 4beb4767… re-checked), spain_2025_ai_aspects (CIS Estudio 3495 'Inteligencia artificial', Feb 2025, CATI; MD3495.zip newly downloaded to .cache/spain_2025_ai_aspects/ -- later spain_2025_ai_* rounds can copy it from there). All under the CIS register row (allow, all CIS survey years).
 Written 3 / blocked 0 / failed 0 — yield 100%. All data_labels, text_source=study_materials, translation_source=machine_translation, language=Spanish (issues-page lines owed once live).
