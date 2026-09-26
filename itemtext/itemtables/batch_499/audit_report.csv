@@ -1,0 +1,4 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"mexico_2023_mobility_anxiety","PASS",2,2,TRUE,TRUE,FALSE,TRUE,0,0,""
+"mexico_2023_mobility_appliances","PASS",15,15,TRUE,TRUE,FALSE,TRUE,0,0,""
+"mexico_2023_mobility_articles","PASS",18,18,TRUE,TRUE,FALSE,TRUE,0,0,""
