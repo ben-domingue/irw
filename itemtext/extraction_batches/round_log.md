@@ -27328,3 +27328,29 @@ irw-validate ok 3/3; check_provenance exit 0 (standing `mixed` review list uncha
 WARN explained (notes.csv): agreement row-count anomaly on p13a_1-5,7 vs median 231 -- structural, those are the major-party
 leaders more respondents recalled; orchestrator recount from Da3016 1035/1008/721/728/359/../762 matches. Not an itemtext defect.
 Queue: 35 pending (6 more spain_2014_debate_* siblings next), 0 in_progress. Cap is batch_510, not reached.
+
+## batch_487 -- 2026-09-25T23:29 (-07:00), 3 tables, 3 agents (#2381 slice 12, CIS 3016 debate sobre el estado de la nacion 2014)
+Numbering: highest existing batch 486, so 487.
+Written 3 / blocked 0 / failed 0; yield 3/3 (100%). Tables four to six of the nine spain_2014_debate_* tables.
+- spain_2014_debate_government (P14A-D, message conveyed by President Rajoy, 1 Mucho .. 4 Nada; 16 rows)
+- spain_2014_debate_leaders (P13_1..17, rating of each leader's interventions, 1 Muy bien/2 Bastante bien/4 Bastante mal/5 Muy mal; 68 rows)
+- spain_2014_debate_media (P5A-E, frequency of following political news by medium / discussing politics; 25 rows)
+All three: data_labels (CIS Es3016 variable names lower-cased by the .do), study_materials + machine_translation (issues-page
+entries owed once live). MD3016.zip re-fetched, hashes identical to batch_486. Each agent rebuilt its table from Da3016 per the
+.do and reproduced live exactly (4208 / 6023 / 7983 rows). Rights: existing CIS "allow" register row.
+Two label choices where the sources disagree, both CONFIRMED by the orchestrator at Step 5b against the files:
+leaders p13_9 ships the questionnaire's "Xabier Mikel Errekondo" (Cues3016 lines 220/256/324) over the Es3016 label
+"Mikel Errekondo" -- same choice as batch_486 agreement; media p5e ships the questionnaire's "amigos y/o familiares" over the
+Es3016 label "amigos/as y/o familiares" (Es3016 line 29).
+Caveats (notes + public_note): leaders has no resp 3 -- the .do drops "Regular" (not read out) plus 7/8/9 (orchestrator
+confirmed .do lines 190-206); government asked only of those who recalled Rajoy's speech (P13_1 in 1-5,8,9; 1075 records,
+0 violations); dictionary description of government ("Confidence conveyed by the Government") is loose, the question is
+about the message conveyed by Rajoy -- same question, not a 3b mismatch.
+Minor: government's CSV carries an all-NA section_prompt_translated column the siblings omit; both forms are valid per the
+standard and every gate passed.
+Gates: normalize_nulls 0/3 changed; audit_batch PASS 2 / WARN 1; verify_batch MISSING(exempt)=3 (data_labels);
+lint_verification 3 rows, no problems (NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv);
+irw-validate ok 3/3; check_provenance no failures (standing `mixed` review list unchanged).
+WARN explained (notes.csv): leaders row-count anomaly on p13_1-4,7 vs median 211 -- structural, the .do drops code 7
+("no conoce"), so n tracks how widely each leader was known (p13_1 907 down to p13_14 141). Not an itemtext defect.
+Queue: 32 pending (3 more spain_2014_debate_* siblings next), 0 in_progress. Cap is batch_510, not reached.
