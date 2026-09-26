@@ -26464,3 +26464,28 @@ not an itemtext defect); check_provenance exit 0.
   re-checked: data/spain_2025_tourism.do:81 drops resp 3 ("(NO LEER) Regular"), live resp set is {1,2,4,5}, so no option row for 3
   is correct. Shipped questionnaire's "se genera" on item 5 where the .sav label says "se generan"; disclosed.
 Queue: 0 pending -- queue exhausted after this round. Cap check: the Step 0 cap is batch_450, not reached.
+
+## batch_448 — 2026-09-25T17:46-07:00 — 3 tables, 3 written / 0 blocked / 0 failed (yield 3/3)
+Three agents, no kills. First round on the #2381 slice 09 re-queue (52 pending at claim, 49 after). All gates clean:
+normalize_nulls 0 changes; audit_batch 3 PASS, no anomalies (so no Step 5c WARNs to explain); verify_batch 3 PASS; lint_verification
+no problems; irw-validate ok on all 3; check_provenance exit 0 (only the standing `mixed` REVIEW list, none from this batch).
+All three come from one deposit -- Xiong, Zhan, Zou, Xu & Geng (2025) PAID 246:113343 (closed access, ScienceDirect 403, paper NOT
+read), OSF wg568, four Chinese samples pooled with no sample covariate (5927 adolescent / 1466 college / 701 community / 1412 male
+prisoner, n=9506). No .sav carries variable or value labels on the item columns, and no Chinese wording is reachable, so all three
+are paper_order + translated_substitute / official_instrument_english, language=Chinese. Not the Jakarta xiong_2025_dass21 study.
+- lec5_xiong_2025 (34 rows = 17 x 0/1, PARTIAL route 8): NCPTSD LEC-5 standard English, 17/17 verbatim. resp is the study's own
+  exposure indicator (LEC_T = row sum in 100% of college/community/prisoner rows); the six-category -> 0/1 collapse rule is not in
+  the deposit, so option_text and instructions blank (orovou_2021_lec5 shape), disclosed in public_note. Prisoner/adult ratio peaks
+  on lec11 captivity 17.65, lec16 harm caused 13.09, lec7 weapon assault 7.55; lec1 natural disaster 0.99. Agent discloses it wrote
+  the predictions after seeing prevalences. Does not order {lec2,lec4,lec5}, lec12 vs lec13, or lec17.
+- pcl5_xiong_2025 (100 rows = 20 x 5, PARTIAL routes 3+7): deposit's stored DSM-5 cluster scores equal row sums of pcl1-5 / 6-7 /
+  8-14 / 15-20 in 9506/9506 rows each; any single-item move drops to <=8653. Marker pcl16 (risk taking) lowest mean 0.14. Pins
+  every item's cluster, not order within cluster. Ships the four empty `_translated` columns as NA (siblings omit them; both forms
+  allowed by itemtext_standard.md l.40-45).
+- phq9_xiong_2025 (36 rows = 9 x 4, PARTIAL): phq9 marker (mean 0.170, 87.5% zero); phq3 x pcl20 (both sleep) r=.595 is the top
+  cell of the PHQ x PCL matrix (next .423); PHQ_T = row sum and PHQ_YN = (sum>=10) with 0 disagreements. Does not separate phq4/5,
+  phq2/6/7/8, or pin phq1.
+Step 5b: no claim overrides a source or reports a response-data defect. Side note only: data/ders16_xiong_2025.R reads
+Adolescent_data.csv while OSF now holds Adolescent_data.sav (parses only as latin1, lec3-17 empty under it); live per-item means equal
+the pooled .sav means exactly for PCL and PHQ, so the live tables are unaffected.
+Queue: 49 pending. Cap check: the Step 0 cap is batch_470, not reached.
