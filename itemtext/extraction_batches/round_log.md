@@ -27645,7 +27645,7 @@ Step 5b orchestrator re-check: roma override CONFIRMED -- pdftotext -raw cues311
 Gates: normalize_nulls 0/3 changed; audit_batch PASS 3; verify_batch MISSING(exempt) 3 (data_labels); lint_verification 3 rows, no problems (NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv); irw-validate ok 3/3; check_provenance exit 0, no failures (standing `mixed` review list unchanged).
 Queue: 25 pending, 0 in_progress. Cap is batch_520, not reached.
 
-## batch_508 — 2026-09-26T02:4x (claimed 02:27:33-07:00), 3 agents (#2381 slice 14, CIS 3495)
+## batch_508 — 2026-09-26T02:32 (claimed 02:27:33-07:00), 3 agents (#2381 slice 14, CIS 3495)
 Numbering: highest existing batch 507 (excluding the 200-205 / 300-304 holes), so 508.
 Tables 3: spain_2025_ai_association, spain_2025_ai_awareness, spain_2025_ai_comfort (CIS Estudio 3495 'Inteligencia artificial'; source files copied per agent from .cache/spain_2025_ai_aspects/, sha256s re-checked against batch_507 provenance). All under the CIS register row (allow).
 Written 3 / blocked 0 / failed 0 — yield 100%. All data_labels, text_source=study_materials, translation_source=machine_translation, language=Spanish (issues-page lines owed once live).
