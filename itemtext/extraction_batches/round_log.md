@@ -26737,3 +26737,26 @@ check_provenance exit 0 (standing `mixed` REVIEW list only, none of this batch).
   mapping is weak, both tables are candidates to hold back from upload at triage. No rights register row exists
   for Eyi (2010) or Mobley (1978), and no restriction was found (silence).
 Queue: 16 pending, 0 in_progress. Cap check: Step 0 cap is batch_470, not reached.
+
+**batch_460 — 2026-09-25 ~19:51-20:02 PDT.** 3 tables (3 agents): **3 written / 0 blocked / 0 failed**, yield 3/3.
+Circuit breaker 0% failed. Gates: normalize 0 of 3 changed; audit 3 PASS (no WARNs); verify_batch PASS=1,
+MISSING(exempt)=2 (data_labels); lint clean (3 rows, NOT_NEEDED written to both files); irw-validate 3 ok;
+check_provenance exit 0 (standing `mixed` REVIEW list only, none of this batch).
+- nguyen_2026_gad7 (28 rows) and nguyen_2026_mspss (84 rows): data_labels / translated_substitute / study_supplied,
+  language=Vietnamese (INFERRED: Hanoi hospital sample, Vietnamese variable names; the deposit states no language
+  and holds no Vietnamese text). Source is the sole file of CC0 Dataverse doi:10.7910/DVN/X2C2PL
+  (gycosurganx_data_censored.xlsx, vars + codes sheets). Instructions blank for both (GAD-7 paper, jog.70501, 403;
+  MSPSS has no linked article). Text is the study's own English: gad_1 keeps the deposit's comma, and the MSPSS
+  anchors read Extremely/Strongly/Moderately rather than Zimet's usual wording. Rights: register ship verdicts for
+  PHQ/GAD and MSPSS (irw#2381) applied.
+  **Orchestrator re-check:** the live gad7 table, summed per id (394 ids, 7 items each), gives 131 (33.2%) at >=5 and
+  26.0/4.6/3.0% in the mild/moderate/severe bands. That reproduces the agent's direction check against the abstract.
+- friedman_2018_risks_discrimination (36 rows, 6 items x 1-6): paper_explicit / study_materials, Codebook.pdf
+  pp.2-3 of Dataverse doi:10.7910/DVN/ZSJA25. VERIFIED: the per-item response counts in the source .dta match the
+  live table cell for cell, and the six count vectors are mutually distinct. The e*/h* polarity blocks also
+  intercorrelate as the wording predicts. Caveats: the instrument name is descriptive (the study calls it the "Grid
+  index"; the Kahan cultural-cognition attribution is inferred from wording only), instructions are blank, and the
+  rights basis is silence (no register row; the deposit has no licence). Sibling friedman_2018_risks_government is
+  still pending: its codebook pp.2-4 support the same route, and the files are cached in
+  .cache/friedman_2018_risks_discrimination/.
+Queue: 13 pending, 0 in_progress. Cap check: Step 0 cap is batch_470, not reached.
