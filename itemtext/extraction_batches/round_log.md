@@ -27233,3 +27233,20 @@ lint_verification 0 ERROR / 3 WARN -- each "VERIFIED but evidence hedges": the h
 code->text mapping, which every route distinguishes item-by-item, so VERIFIED stands. irw-validate ok 3/3; check_provenance exit 0
 (standing `mixed` review list unchanged). Agent aside: biblio.csv bibtex keys differ across argentina_2012_aging siblings -- not itemtext.
 Queue: 2 pending (argentina_2012_aging_health, _instrumental), 0 in_progress. Cap is batch_490, not reached.
+
+## batch_482 -- 2026-09-25T22:50 (-07:00), 2 tables, 2 agents (queue's last 2 pending rows)
+Numbering: highest existing batch was 481 (the 300-304 hole is long behind the series), so 482.
+Written 2 / blocked 0 / failed 0; yield 2/2 (100%).
+- argentina_2012_aging_health (au01 self-rated health, au03 self-rated memory; 10 rows): paper_explicit, study_materials +
+  machine_translation, INDEC ENCaViAM 2012 dictionary p.32. VERIFIED: weighted % reproduce Cuadros 10/11 of INDEC's results
+  report 15/15 each (0/15 crossed); raw counts by sex match live 15/15, swap 0/15, flip 3/15 (middle code only). .do stores 6-x
+  (confirmed by orchestrator at data/argentina_2012_aging.do:62-63); option_text follows live coding.
+- argentina_2012_aging_instrumental (DEP03_01..07 IADL-type items; 14 rows): same source pp.38-39. VERIFIED: Yes/No by sex 28/28,
+  pooled Yes counts all distinct (563/688/389/306/736/427/644), id-sum checksum 7/7, off-diagonal 0/42, flipped 0/7. .do stores
+  3-x (confirmed, .do:194-200), so resp 2 = Si.
+Gates: normalize_nulls 0/2 changed; audit_batch PASS 2/2, no anomalies; verify_batch PASS=2; lint_verification 0 ERROR / 1 WARN
+(health: "VERIFIED but evidence hedges" -- hedge is the unprinted interviewer preamble, not the mapping; VERIFIED stands, noted in
+notes.csv) / 1 INFO. irw-validate ok 2/2; check_provenance exit 0 (standing `mixed` review list unchanged).
+Both ship IRW machine translation -> issues-page entries owed once live. Questionnaire itself is not in the 61-pp PDF, so
+instructions/section_prompt blank on both. No data defects.
+Queue: 0 pending, 0 in_progress -- QUEUE EXHAUSTED; the next firing will stop at Step 0. Cap (batch_490) not reached.
