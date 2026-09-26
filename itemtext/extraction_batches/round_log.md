@@ -27722,7 +27722,7 @@ Step 5b orchestrator re-check: CONFIRMED from DA2968. Col 143 raw counts are 163
 Gates: normalize_nulls 0/3 changed. audit_batch PASS 3/3 (no WARNs). verify_batch PASS 1 and MISSING(exempt) 2 (data_labels). lint_verification 3 rows, no problems (NOT_NEEDED rows in both files). irw-validate ok 3/3. check_provenance exit 0 (standing `mixed` review list unchanged). All three are machine_translation, so each owes an issues-page line once live.
 Queue: 4 pending (spain_2012_gender_prevalence, punishment, situation, vulnerability), 0 in_progress. Cap is batch_520, not reached.
 
-## batch_515 — 2026-09-26T03:33 (claimed 03:21:25-07:00), 3 agents
+## batch_515 — 2026-09-26T03:26 (claimed 03:21:25-07:00), 3 agents
 Numbering: highest existing batch 514 (excluding the 200-205 / 300-304 holes), so 515.
 Tables: 3 claimed — written 3 / blocked 0 / failed 0 (yield 100%). All from CIS Estudio 2968 (MD2968.zip copied per agent from the batch_514 cache, sha256 6d4bd9a3…cdd11 re-verified). All data_labels, text_source=study_materials, translation_source=machine_translation (issues-page lines owed once live). CIS rights register row (line 117, allow) applied, none written.
 - prevalence (P.6, p601-p604, Muy..Nada extendidos; 16 rows). DATA LIST 62-65 = questionnaire markers (62)-(65) = ES2968 label order, no P27-style swap. Rebuild 9815 rows / 2555 ids exact. Questionnaire grid misprints the NC code as 8 (ES2968 says 9); irrelevant since the .do drops both, disclosed in notes.
