@@ -27620,3 +27620,16 @@ Gates: normalize_nulls 0/3 changed; audit_batch PASS 3/3 (no WARNs); verify_batc
 lint_verification 3 rows, no problems (NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv);
 irw-validate ok 3/3; check_provenance exit 0, no failures (standing `mixed` review list unchanged).
 Queue: 31 pending, 0 in_progress. Cap is batch_520, not reached.
+
+## batch_506 — 2026-09-26T02:17 (claimed 02:09:54-07:00), 3 agents (#2381 slice 12, CIS 3119)
+Numbering: highest existing batch 505 (excluding the 200-205 / 300-304 holes), so 506.
+Tables 3: spain_2015_immigration_labour, spain_2015_immigration_proximity, spain_2015_immigration_punishment (CIS Estudio 3119, Actitudes hacia la inmigración VIII, Nov-Dec 2015, N=2470; MD3119.zip copied per agent from .cache/spain_2015_immigration_acceptability/, sha256 4beb4767… checked; covered by the CIS register row, line 117).
+Written 3 / blocked 0 / failed 0 — yield 100%. text_source=study_materials, translation_source=machine_translation, language=Spanish (issues-page lines owed once live).
+- labour (P.21, p2101-p2105, card H Muy de acuerdo..Muy en desacuerdo, 20 rows, data_labels). Mixed item direction (p2101/p2102 pro-immigrant, p2103-p2105 anti), stored raw; disclosed in public_note. 8/9 dropped 83/4, 231/17, 115/16, 91/19, 272/40; 2452 ids. Step 3b: P.21, not P.14/P.15 (same card; 5 items, cols 95-99).
+- proximity (P.27-P.27c, Roma among neighbours/friends/co-workers/relatives, Muchos..Ninguno, 16 rows). **SOURCE OVERRIDE: CIS's ES3119 syntax (and 3119.sav) label P27A 'Compañeros/as' and P27B 'Amigos', swapped relative to the questionnaire (P.27a amigos col 126, P.27b compañeros col 127) and to the parallel P.26 block.** Shipped the questionnaire order, mapping_basis=paper_explicit, verification VERIFIED (verify_*.R PASS: missing-set overlap with p26b 0.917 vs <=0.023; cross-block pairing best of 24). public_note warns not to label from the syntax file. Unchecked: whether any other table/user took the swapped P27 labels from ES3119.
+- punishment (P.32/P.33, 2 items, En todos los casos..En ningún caso, 8 rows, data_labels). Each item_text is the full question; instructions blank. .do also drops volunteered 5 "(NO LEER) Depende" (251/232) besides 8/9 (107/8, 118/13); 2167 ids. Two-item table extracted as it exists in the warehouse.
+Step 5b orchestrator re-check: read DA3119 directly. Proximity override CONFIRMED: col 127 has 976 code-7 No procede, 961 of them also No procede on P.26b co-workers (col 123, 1036); col 126 has 8 (7 overlapping) -> col 127 is co-workers, questionnaire right, syntax labels wrong. Labour cols 95-99 and punishment cols 137-138 per-item counts and ids/rows 2452/11462, 2167/4211 match the agents.
+Gates: normalize_nulls 0/3 changed; audit_batch PASS 2 / WARN 1 (proximity p27b row-count anomaly = the No procede filter, a data property, explained in notes.csv); verify_batch PASS 1 / MISSING(exempt) 2 (data_labels);
+lint_verification 3 rows, no problems (NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv);
+irw-validate ok 3/3; check_provenance exit 0, no failures (standing `mixed` review list unchanged).
+Queue: 28 pending, 0 in_progress. Cap is batch_520, not reached.
