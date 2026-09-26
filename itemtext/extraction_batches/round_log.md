@@ -27399,3 +27399,23 @@ Gates: normalize_nulls 0/3 changed; audit_batch PASS 3/3 (no WARNs); verify_batc
 lint_verification 3 rows, no problems (NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv);
 irw-validate ok 3/3; check_provenance exit 0 (standing `mixed` review list unchanged).
 Queue: 26 pending (8 more spain_2013_defense_* siblings next), 0 in_progress. Cap is batch_510, not reached.
+
+## batch_490 -- 2026-09-25T23:53:47 (-07:00), 3 tables, 3 agents (#2381, CIS 2998 la defensa nacional y las fuerzas armadas 2013)
+Numbering: highest existing batch 489, so 490.
+Written 3 / blocked 0 / failed 0; yield 3/3 (100%). Tables four to six of the eleven spain_2013_defense_* tables.
+- spain_2013_defense_conditions (P3501-P3508, P.35 importance of eight service conditions, 1 Muy importante .. 5 Nada importante, only endpoints labelled so resp 2-4 blank; 40 rows)
+- spain_2013_defense_emotion (P4-P6, feeling on seeing the flag / hearing the anthem / seeing a military ceremony, 4 options; 12 rows)
+- spain_2013_defense_missions (P3001-P3006, P.30 how much missions abroad contribute to six goals, Mucho..Nada; 24 rows)
+All three: data_labels (CIS ES2998 variable names lower-cased by the .do), study_materials + machine_translation (issues-page
+entries owed once live). Same MD2998.zip as batch_489 (agents re-hashed the cached copy). Each agent rebuilt its table from DA2998
+per the .do and reproduced live exactly (3559 / 7311 / 12822 rows). Rights: existing CIS "allow" register row.
+Orchestrator Step 5b checks, both CONFIRMED against the files:
+- conditions p3507/p3508: ES2998 labels (lines 116-117) abbreviate to "Admón."; questionnaire (Cues2998 lines 445-451) prints "Administración"; questionnaire wording shipped.
+- missions p3006: Cues2998 prints "bie-/nestrar" (typo, lines 354-355); ES2998 label line 100 reads "bienestar"; "bienestar" shipped, disclosed in note + public_note.
+Caveats (notes + public_note): conditions asked only of 16-28 year-olds (464 records, 0 violations); emotion's .do drops volunteered
+code 5 "(No leer) Depende del acto o la ceremonia" (31 on P4, 36 on P5), and P.5 is an elliptical follow-on to P.4 shipped verbatim;
+missions has no age filter; the dictionary says "peace missions" where the questionnaire says "misiones en el exterior" (questionnaire shipped).
+Gates: normalize_nulls 0/3 changed; audit_batch PASS 3/3 (no WARNs); verify_batch MISSING(exempt)=3 (data_labels);
+lint_verification 3 rows, no problems (NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv);
+irw-validate ok 3/3; check_provenance no failures (standing `mixed` review list unchanged).
+Queue: 23 pending (5 more spain_2013_defense_* siblings next), 0 in_progress. Cap is batch_510, not reached.
