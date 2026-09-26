@@ -27701,3 +27701,14 @@ Gates: normalize_nulls 0/3 changed; audit_batch PASS 3/3 (no WARNs); verify_batc
 lint_verification 3 rows, no problems (NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv);
 irw-validate ok 3/3; check_provenance exit 0, no failures (standing `mixed` review list unchanged).
 Queue: 10 pending (spain_2012_gender_* siblings), 0 in_progress. Cap is batch_520, not reached.
+
+## batch_513 — 2026-09-26T03:10 (claimed 03:04:31-07:00), 3 agents
+Numbering: highest existing batch 512 (excluding the 200-205 / 300-304 holes), so 513.
+Tables 3: spain_2012_gender_campaigns, spain_2012_gender_causes, spain_2012_gender_complaints (CIS Estudio 2968; MD2968.zip copied per agent from the batch_512 cache, sha256 6d4bd9a3…cdd11 re-verified by each).
+Written 3 / blocked 0 / failed 0 — yield 100%. All data_labels (lowercased CIS variable names read by infix), text_source=study_materials, translation_source=machine_translation (issues-page lines owed once live). CIS rights register row applied, none written.
+- campaigns (P.20, P.21; Sí/No, resp {1,2}; 4 rows). No shared stem: each question is its own item_text, instructions blank; p21 refers back to p20 ('estas campañas'), noted in public_note. ES2968 labels are CIS summaries, not administered wording. Drops 8/9: p20 184/9, p21 263/10. Rebuild 4694 rows / 2458 ids exact.
+- causes (P.12, p1201-p1211; Sí/No; 22 rows). item_text follows the printed questionnaire, not ES2968 labels (differs from beliefs' choice, but beliefs' differences were typos only): p1202 'El abuso del alcohol' (label 'de'), p1211 'hijos/as...)' (label 'hijos/as,...)'); p1207 printed typo 'ee las relaciones' corrected to 'de'. All disclosed. Stem shipped as printed (no opening '¿'). Rebuild 26998 rows / 2572 ids exact.
+- complaints (P.26, p2601-p2603, Muy..Nada de acuerdo, resp 1-4 full; 12 rows). Drops 8/9: 243/3, 328/5, 163/7. Rebuild 6991 rows / 2503 ids exact. (Round brief misnamed it Bookmark 12; it is Bookmark 11.)
+Step 5b orchestrator re-check: CONFIRMED from DA2968 — cols 117/118 (p20/p21) 1/2/8/9 = 2044/343/184/9 and 1982/325/263/10; cols 140-142 (p2601-3) match the agent's live and drop counts exactly; cols 84-94 (p1201-p1211) 8/9 counts match the agent's table all 11; cues2968 text layer lines 194/202/210 show 'El abuso del alcohol', 'ee las relaciones', 'hijos/as...)', ES2968 /P1202 'El abuso de alcohol'.
+Gates: normalize_nulls 0/3 changed; audit_batch PASS 3/3 (no WARNs); verify_batch MISSING(exempt)=3 (data_labels); lint_verification 3 rows, no problems (NOT_NEEDED rows in both files); irw-validate ok 3/3; check_provenance exit 0 (standing `mixed` review list unchanged).
+Queue: 7 pending (spain_2012_gender_coordination, couple, custody, prevalence, punishment, situation, vulnerability), 0 in_progress. Cap is batch_520, not reached.
