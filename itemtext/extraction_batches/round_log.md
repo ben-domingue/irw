@@ -27419,3 +27419,20 @@ Gates: normalize_nulls 0/3 changed; audit_batch PASS 3/3 (no WARNs); verify_batc
 lint_verification 3 rows, no problems (NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv);
 irw-validate ok 3/3; check_provenance no failures (standing `mixed` review list unchanged).
 Queue: 23 pending (5 more spain_2013_defense_* siblings next), 0 in_progress. Cap is batch_510, not reached.
+
+## batch_491 -- 2026-09-26T00:00:33 (-07:00), 3 tables, 3 agents (#2381, CIS 2998 la defensa nacional y las fuerzas armadas 2013)
+Numbering: highest existing batch 490 (excluding the 200-205 / 300-304 holes), so 491.
+Written 3 / blocked 0 / failed 0; yield 3/3 (100%). Tables seven to nine of the eleven spain_2013_defense_* tables.
+- spain_2013_defense_prestige (P13-P14, prestige of the armed forces in a country / in Spain, Mucho..Nada; 8 rows)
+- spain_2013_defense_professions (P101-P110, P.1 rating of ten professions 0-10, only endpoints 0 'Muy mal' / 10 'Muy bien' labelled so resp 1-9 blank; 110 rows)
+- spain_2013_defense_resources (P21-P23, assessment of personnel / material / budget resources, Excesivo/Adecuado/Insuficiente, plural on p22; 9 rows)
+All three: data_labels (CIS ES2998 variable names lower-cased by the .do), study_materials + machine_translation (issues-page
+entries owed once live). Same MD2998.zip (sha256 re-verified by each agent). Each agent rebuilt its table from DA2998 per the .do and
+reproduced live exactly (4624 / 24254 / 5182 rows). Rights: existing CIS "allow" register row.
+Orchestrator Step 5b check, CONFIRMED against the files: professions p102 ES2998 label (line 29) 'Profesor/a/maestro/a' vs
+Cues2998 line 31 'Profesor/a//Maestro/a'; questionnaire wording shipped literally, doubled slash included (CIS precedent).
+Caveats (notes): resources has ~30% don't-know per item dropped (p21 739, p22 766, p23 729 code 8); professions drops 98/99 (24-105 per item).
+Gates: normalize_nulls 0/3 changed; audit_batch PASS 3/3 (no WARNs); verify_batch MISSING(exempt)=3 (data_labels);
+lint_verification 3 rows, no problems (NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv);
+irw-validate ok 3/3; check_provenance no failures (standing `mixed` review list unchanged).
+Queue: 20 pending (2 more spain_2013_defense_* siblings next, then spain_2017_politics_*), 0 in_progress. Cap is batch_510, not reached.
