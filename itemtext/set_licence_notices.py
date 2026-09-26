@@ -96,7 +96,13 @@ def main() -> int:
         if args.apply and shard not in drafts:
             drafts[shard] = open_draft(owner, shard)
         import redivis
-        ds = drafts.get(shard) or redivis.organization(owner).dataset(shard)
+        ds = drafts.get(shard)
+        if ds is None:  # dry run: read the open draft if there is one (new tables live only there)
+            try:
+                ds = redivis.organization(owner).dataset(shard, version="next")
+                ds.list_tables(max_results=1)
+            except Exception:
+                ds = redivis.organization(owner).dataset(shard)
         by_name = {t.name.lower(): t for t in ds.list_tables()}
         table = by_name.get(f"{r['table']}__items".lower())
         if table is None:

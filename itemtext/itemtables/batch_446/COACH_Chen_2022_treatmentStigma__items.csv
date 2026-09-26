@@ -1,7 +1,0 @@
-"table","section_id","item","instrument","language","instructions","section_prompt","item_text","correct_response","option_text","resp"
-"COACH_Chen_2022_treatmentStigma","COACH_Chen_2022_treatmentStigma_1","ra_treatment_stigma_1","Treatment Stigma","Chinese",NA,NA,"If I were taking a prescribed medication for depression, I would feel ashamed",NA,"No",0
-"COACH_Chen_2022_treatmentStigma","COACH_Chen_2022_treatmentStigma_1","ra_treatment_stigma_1","Treatment Stigma","Chinese",NA,NA,"If I were taking a prescribed medication for depression, I would feel ashamed",NA,"Yes",1
-"COACH_Chen_2022_treatmentStigma","COACH_Chen_2022_treatmentStigma_1","ra_treatment_stigma_2","Treatment Stigma","Chinese",NA,NA,"I would feel comfortable telling my friends or family",NA,"Yes",0
-"COACH_Chen_2022_treatmentStigma","COACH_Chen_2022_treatmentStigma_1","ra_treatment_stigma_2","Treatment Stigma","Chinese",NA,NA,"I would feel comfortable telling my friends or family",NA,"No",1
-"COACH_Chen_2022_treatmentStigma","COACH_Chen_2022_treatmentStigma_1","ra_treatment_stigma_3","Treatment Stigma","Chinese",NA,NA,"I would feel okay if people in my community knew",NA,"Yes",0
-"COACH_Chen_2022_treatmentStigma","COACH_Chen_2022_treatmentStigma_1","ra_treatment_stigma_3","Treatment Stigma","Chinese",NA,NA,"I would feel okay if people in my community knew",NA,"No",1
