@@ -27770,3 +27770,66 @@ All three come from Kramer et al. 2025 (Personality Change Intervention Study). 
 - Gates: normalize_nulls 0/3 changed. audit_batch 2 PASS / 1 WARN (sa, explained). verify_batch 3 PASS. lint_verification clean (3 rows). irw-validate ok ×3. check_provenance exit 0 (only the standing `mixed` REVIEW list, none from this batch). mapping_verification.csv +3 rows. No data_labels tables, so no NOT_NEEDED rows are owed.
 - personalitychange_kramer_2025_si (sibling) is still pending for the next round.
 Queue: 49 pending, 0 in_progress. Cap is batch_539, not reached.
+
+## batch_519 — INCOMPLETE (detected by run_round.sh, 2026-09-26T03:56:33-07:00)
+
+```text
+ROUND DID NOT COMPLETE -- batch_519
+
+Agent exit status : 1
+
+Claimed tables    : 3, from in_progress rows in queue_state.csv
+Batch directory   : /home/ben/irw-queue-runner/itemtext/itemtables/batch_519
+Batch-level files : (no audit_report.csv) (no notes.csv) (no provenance.csv) (no verification_merged.csv) 
+Items CSVs        : 0
+
+TABLE                                          STATE              items prov  notes verif vfy.R  queue
+---------------------------------------------- ------------------ ----- ----- ----- ----- ------ -----
+personalitychange_kramer_2025_si               NOTHING            no    no    no    no    no     in_progress
+adamczyk_2022_cesd                             NOTHING            no    no    no    no    no     in_progress
+depue_2023_gds15                               NOTHING            no    no    no    no    no     in_progress
+
+COMPLETE            items CSV + provenance. The table finished.
+PARTIAL             items CSV with no provenance (an ORPHAN -- quarantine it, do
+                    not promote it), or traces with no items CSV.
+NO-CSV (documented) no items CSV but provenance is written. This is what a table
+                    the agent BLOCKED looks like: Step 2 tells a blocking agent
+                    to write no CSV but to write provenance anyway, so this is an
+                    agent that RAN TO COMPLETION AND REACHED A VERDICT. Read its
+                    notes row for the retry test. blocked vs failed is not split
+                    here -- that distinction lives in the notes prose and is a
+                    human call.
+NOTHING             no artifact at all. The agent never got to this table.
+
+items/prov are the only columns the states are derived from. notes, verif, vfy.R
+and queue are CONTEXT ONLY -- see the comment in run_round.sh for why each is
+excluded. `queue` is the orchestrator's own classification; where it disagrees
+with the files, the FILES are the evidence.
+
+RECONCILE BY HAND. Nothing below has been run.
+
+  cd /home/ben/irw-queue-runner/itemtext
+  ls -l itemtables/batch_519
+  awk -F, 'NR>1 && $2=="in_progress"' extraction_batches/queue_state.csv
+  Rscript .claude/skills/irw-auto-itemtext/scripts/normalize_nulls.R    itemtables/batch_519
+  Rscript .claude/skills/irw-auto-itemtext/scripts/audit_batch.R        itemtables/batch_519
+  Rscript .claude/skills/irw-auto-itemtext/scripts/verify_batch.R       itemtables/batch_519
+  Rscript .claude/skills/irw-auto-itemtext/scripts/lint_verification.R  itemtables/batch_519
+  git -C /home/ben/irw-queue-runner status --porcelain
+
+Then decide each table by hand per itemtext/BATCH_PROCESS.md and edit
+queue_state.csv yourself. Resetting in_progress rows to pending is a HUMAN
+decision: a dead round often finished work a blind reset would discard. Orphaned
+__items.csv with no provenance are QUARANTINED, NOT PROMOTED.
+
+This stanza left round_log.md dirty on purpose. The runner refuses a dirty
+worktree, so the queue stays stopped until you commit or discard it -- which is
+the point. Do not commit it as a way of clearing the stop.
+
+Nothing was repaired, reset, committed, promoted or deleted.
+```
+
+**Reconciled by hand 2026-09-26 (Claude, Ben asked to stop and assess):** batch_519 died at launch, because the round
+agent hit the account's monthly spend limit. All 3 claimed tables were state NOTHING (no artifact of any kind), so
+personalitychange_kramer_2025_si, adamczyk_2022_cesd and depue_2023_gds15 were reset to `pending`, and the empty
+batch_519 directory was removed. No work was discarded.
