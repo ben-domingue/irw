@@ -26798,3 +26798,22 @@ stale "below 300" wording as batch_461). All three are CIS tables with English m
   names = .sav labels 4/4; frequencies match live 40/40. Only 1 "Muy mal" and 10 "Muy bien" are labelled; 2-9 left blank. Sibling
   spain_2025_fears_prospect (still pending) has fully labelled P10/P11 in the same 3534.sav, cached in .cache/spain_2025_fears_leaders/.
 Queue: 7 pending, 0 in_progress. Cap check: the Step 0 cap is batch_470, not reached.
+
+## batch_463 — 2026-09-25T20:14-20:20-07:00 — 3 tables, 3 written / 0 blocked / 0 failed (yield 3/3)
+Three agents, no kills. Gates: normalize_nulls 0 changes; audit_batch 3 PASS, no anomalies (no WARNs to explain); verify_batch
+3 MISSING(exempt) (all data_labels); lint_verification no problems; irw-validate ok on all 3; check_provenance exit 0 (the three new
+tables join the standing machine_translation "issues-page line owed" list; `mixed` REVIEW list unchanged). Numbering: highest
+existing was batch_462, so batch_463. All three are CIS tables, Spanish verbatim + English machine_translation (issues-page lines
+owed once live). Orchestrator Step 5b: re-fetched all three live tables; item x resp counts, row and id totals below reproduce exactly.
+- spain_2025_fears_prospect (10 rows = 2 x 5, data_labels, NOT_NEEDED): CIS Estudio 3534 P.10/P.11 stems verbatim, from the
+  batch_462 cache (not re-fetched); value labels 10/10; live p10 525/817/315/302/71, p11 99/649/122/850/237 (3987 rows, 2048 ids).
+  resp 3 is the unread (NO LEER) volunteered midpoint on both items; marker stripped per CIS precedent, disclosed in public_note.
+- spain_2026_prostitution_pornography (20 rows = 5 x 4, data_labels, NOT_NEEDED): CIS Estudio 3525 P1 grid; .sav labels 5/5,
+  value labels 20/20, frequencies match live 20/20 (49318 rows, 10019 ids). Live resp is {1,2,4,5}: the .do drops resp 3
+  ((NO LEER) Ni de acuerdo ni en desacuerdo) along with 8/9 -- orchestrator confirmed; disclosed in public_note. Agent reports the
+  dictionary Description omits p1_5 (pornography conveys that raping a woman can be exciting), which IS in the .do (line 55) and the
+  live table -- a metadata wording gap, not itemtext (not re-checked against the dictionary sheet itself).
+- spain_2026_prostitution_prostitution (24 rows = 6 x 4, data_labels, NOT_NEEDED): CIS 3525 P23 grid; same resp {1,2,4,5} gap,
+  confirmed. P23_2 .sav label abbreviated ("Es un trabajo como otro cualquiera"); questionnaire wording shipped. 58814 rows,
+  10013 ids (6 of 10019 respondents answered no item substantively) -- confirmed live.
+Queue: 4 pending, 0 in_progress. Cap check: the Step 0 cap is batch_470, not reached.
