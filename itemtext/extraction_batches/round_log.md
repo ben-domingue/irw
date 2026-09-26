@@ -27581,3 +27581,16 @@ Gates: normalize_nulls 0/3 changed; audit_batch PASS 3/3 (no WARNs); verify_batc
 lint_verification 3 rows, no problems (NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv);
 irw-validate ok 3/3; check_provenance exit 0, no failures (standing `mixed` review list unchanged).
 Queue: 40 pending, 0 in_progress. Cap is batch_520, not reached.
+
+## batch_503 — 2026-09-26T01:52 (claimed 01:47:03-07:00), 3 agents (#2381 slice 12, ESRU-EMOVI 2023 + CIS 3119)
+Numbering: highest existing batch 502 (excluding the 200-205 / 300-304 holes), so 503.
+Tables 3: mexico_2023_mobility_utilities (CEEY ESRU-EMOVI 2023, last of the mexico_2023_mobility_* run; zips copied from .cache/mexico_2023_mobility_neighborhood/, hashes checked), spain_2015_immigration_acceptability, spain_2015_immigration_assistance (CIS Estudio 3119, Actitudes hacia la inmigración VIII, Nov-Dec 2015, N=2470; MD3119.zip sha256 4beb4767…; covered by the CIS register row).
+Written 3 / blocked 0 / failed 0 — yield 100%. All data_labels. text_source=study_materials, translation_source=machine_translation, language=Spanish (issues-page lines owed once live).
+- utilities (P26 a-e, dwelling services at age 14, 10 rows Sí/No). Step 3b: P26 (age 14), not P95 (current, shipped as _services). .do drops code 8: 28/11/13/54/70 (176); no all-8 record -> 17843 ids. p26e .dta label "personal remunerado del hogar" is shortened; questionnaire/Diccionario wording shipped.
+- acceptability (P.22, 4 items x Muy/Bastante/Poco/Nada aceptable, 16 rows). 8/9 dropped 5.1-9.5% per item; 16 records answered none -> 2454 ids.
+- assistance (P.1, state protection for 4 groups x Mucha/Bastante/Poca/Ninguna, 16 rows). 8/9 dropped 5.9-12.6% per item; 46 records answered none -> 2424 ids. Dictionary's "protection or assistance" paraphrases "protección por parte del Estado".
+Step 5b orchestrator re-check: read entrevistado_2023.dta (17843 records) and DA3119 (2470 records, both agents' copies identical). p26a-e 1/2/8 counts, 0 NA, 0 all-8; p101-p104 and p2201-p2204 1/2/3/4/8/9 counts; ids/rows 2424/9036 and 2454/9180. All match the agents.
+Gates: normalize_nulls 0/3 changed; audit_batch PASS 3/3 (no WARNs); verify_batch MISSING(exempt)=3 (data_labels);
+lint_verification 3 rows, no problems (NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv);
+irw-validate ok 3/3; check_provenance exit 0, no failures (standing `mixed` review list unchanged).
+Queue: 37 pending, 0 in_progress. Cap is batch_520, not reached.
