@@ -1,6 +1,7 @@
-# item-text tables in the Redivis shards as of 2026-09-25
+# item-text tables in the Redivis shards as of 2026-09-26
 # status=published: a reader can fetch it. status=draft: uploaded, not released yet.
 # generated -- do not hand-edit; rerun itemtext/refresh_live_tables.py (irw#1828)
+# draft not listable by this token (needs data.edit) for irw_text_2, irw_text_3; its draft rows carried forward from the snapshot taken 2026-09-25
 table,shard,status
 16_personalityfactors,irw_text,published
 360emergencymed_azami_2024,irw_text,published
@@ -364,6 +365,7 @@ doustmohammadian_2017_fnlit,irw_text,published
 dpt_noncog__emotional_intelligence,irw_text,published
 dpt_noncog__intolerance_of_uncertainty,irw_text,published
 dss_mouta_2021,irw_text_2,published
+duckmayr_2023_immigration,irw_text,published
 dudasova_2021_cpc12,irw_text,published
 dudasova_2021_cpc12_study3,irw_text,published
 dudasova_2021_gratitude,irw_text,published
