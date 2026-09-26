@@ -26889,3 +26889,18 @@ side check; mapping settled by exact counts.
 Housekeeping: the claim rewrite through csv.writer dropped queue_state.csv's CRLF endings (whole-file diff); restored CRLF
 before anything else. Numbering: the 300-304 hole rule's "below 300" literal would yield batch_305 (exists); used highest+1=467.
 Queue: 44 pending, 0 in_progress. Cap is batch_490, not reached.
+
+## batch_468 — 2026-09-25 20:55–21:00 PDT (3 tables, 3 agents)
+Written 0 / blocked 3 / failed 0. Yield 0/3. Breaker not tripped (0% failed).
+- nguyen_2026_factcheck_{info_self_efficacy, intention, systematic_proc}: all BLOCKED on rights, retry test NO, confirming
+  batch_467's prediction for the digital_literacy sibling. Wording exists only as SPSS labels in DR-NTU Dataverse
+  doi:10.21979/N9/P5WUGI (CC BY-NC 4.0; orchestrator re-checked the Dataverse API: "CC BY-NC 4.0", RELEASED). VoR
+  Elsevier-closed, SSRN preprint unlicensed; originators (Kurbanoglu 2006 ILSES, Shin 2021) are closed AND worded
+  differently from the GenAI adaptations. Gated data_labels candidates banked under .cache/<table>/ (11/5/12 items x 1-7;
+  validate --table-sets PASS; .sav item x level counts match live 77/77, 35/35, 84/84). pending_index_notes rows added.
+- Step 4: no __items.csv, so normalize_nulls/audit_batch halt "no files" and lint has no verification_merged.csv (nothing
+  to check); verify_batch MISSING(exempt)=3; check_provenance exit 0. No verification rows owed.
+- Heads-up: nguyen_2026_factcheck_user_heuristics (next pending) sits on the same deposit and will block identically;
+  one ruling on NC item wording would unblock all five (plus parental_text_intervention, hannachi_2025_eco_anxiety_cope).
+- Side finding: data/nguyen_2026_factcheck.py sends ben's email in its User-Agent; agents did not reuse it. Not fixed here.
+Queue: 41 pending, 0 in_progress. Cap is batch_490, not reached.

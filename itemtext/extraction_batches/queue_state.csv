@@ -2415,9 +2415,9 @@ liem_2024_green_competitive_adv,done,batch_466,2026-09-25T20:45:08-07:00
 liem_2024_perceived_benefit_cp,done,batch_467,2026-09-25T20:53:04-07:00
 liem_2024_perceived_benefit_ema,done,batch_467,2026-09-25T20:53:04-07:00
 nguyen_2026_factcheck_digital_literacy,blocked,batch_467,2026-09-25T20:53:04-07:00
-nguyen_2026_factcheck_info_self_efficacy,pending,,
-nguyen_2026_factcheck_intention,pending,,
-nguyen_2026_factcheck_systematic_proc,pending,,
+nguyen_2026_factcheck_info_self_efficacy,blocked,batch_468,2026-09-25T20:59:37-07:00
+nguyen_2026_factcheck_intention,blocked,batch_468,2026-09-25T20:59:37-07:00
+nguyen_2026_factcheck_systematic_proc,blocked,batch_468,2026-09-25T20:59:37-07:00
 nguyen_2026_factcheck_user_heuristics,pending,,
 eldor_2022_anomie,pending,,
 eldor_2022_collective_anger,pending,,
