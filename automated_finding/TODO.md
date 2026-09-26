@@ -3189,8 +3189,8 @@ do not treat the CSV's `proposed_name` column as a work list.
 
 ## From the 2026-09-25 PMC scout-2 sweep
 
-- [ ] **29 tables (202,976 responses) need uploading**: `irw_output/` (copied to
-  the main checkout's `automated_finding/irw_output/`). No item text this batch.
+- [x] **29 tables (202,976 responses) uploaded** (ben-domingue, confirmed 2026-09-26).
+  No item text this batch.
   Dictionary and tag rows are staged in `dictionary_auto.csv` / `tags/tags_auto.csv`.
 - [ ] **Decision: Csibra 2025 dog ADHD scale** (1,872 dogs, 38 items) is held on
   trust for two exact-duplicate adjacent-ID pairs, with no wider network. Script

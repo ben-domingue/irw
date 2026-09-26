@@ -16116,3 +16116,9 @@ empathy (2,864), Veskrnova sleep (4,508), and others.
 
 Staged: 29 `dictionary_auto.csv` rows (`stage_dict_row.py`) and 29
 `tags/tags_auto.csv` rows (`test_tags_union.R` passes).
+
+### 2026-09-26 — scout-2 batch uploaded
+
+ben-domingue confirmed that all 29 response tables are uploaded. There is no item
+text to stamp, and the 29 not-shipped provenance records stay unstamped by design.
+The dictionary and tag rows come in with #2446, whose merge is the accept.
