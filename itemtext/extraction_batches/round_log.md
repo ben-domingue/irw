@@ -26976,3 +26976,30 @@ Written 2 / blocked 1 / failed 0. Yield 2/3. Breaker not tripped (0% failed).
   (NOT_NEEDED rows in both files); irw-validate ok x2; check_provenance exit 0 (standing `mixed` review list unchanged).
 - The eldor_2022_* family is now finished (10 tables across batches 469-471).
 Queue: 32 pending, 0 in_progress. Cap is batch_490, not reached.
+
+## batch_472 — 2026-09-25 21:27–21:4x PDT (3 tables, 3 agents)
+Written 3 / blocked 0 / failed 0. Yield 3/3. Breaker not tripped (0% failed).
+- Numbering: highest existing is 471 (consecutive 305..471), so 472.
+- New family: skarzauskiene_2026_* INFODEMIJA survey (Zenodo 21134839, doi:10.5281/zenodo.21134839, CC BY 4.0; no paper
+  yet -- manuscript listed as forthcoming). All three data_labels (pattern 1: data/skarzauskiene_2026_infodemija.py melts the
+  deposit CSV columns m* unrenamed; dictionary Variable IDs M* match case-insensitively). text_source translated_substitute /
+  study_supplied, language Lithuanian (face-to-face interviews; the deposit publishes only the depositors' English dictionary,
+  no Lithuanian wording anywhere in its four files).
+- skarzauskiene_2026_attitudes_science (11 items m7-m15,m18,m19 x 1-5): WRITTEN. Shared "(Do you strongly disagree, ...)" suffix
+  split from every stem into instructions; stems kept in source upper case. m16/m17 belong to the Climate Change Engagement group.
+- skarzauskiene_2026_fake_news_agree (6 items m45-m50 x 1-5): WRITTEN. Source lead-in truncated at "NEITHER AGREE" kept as printed.
+- skarzauskiene_2026_fake_news_frequency (4 items m51-m54 x 1-5): WRITTEN. m51 "I easily recognize fake news." sits oddly under a
+  "how often would you do this" prompt; transcribed as printed.
+- Option 4 on the agreement scale is the deposit's literal "I agree more quickly" (calque of "tend to agree"); shipped verbatim.
+  Code 9 (N/A) is dropped by the processing script, so it has no option row.
+- Orchestrator re-check (Step 5b): dictionary sha256 4c2a8c49... and data CSV sha256 f4c5499e... re-hashed from cache; 21/21
+  shipped stems found in the dictionary's 'Related Question' for their own Variable ID; deposit counts re-computed for m7
+  (49/224/297/295/75), m19, m45 (7/51/157/464/277), m50, m54 (802/47/72/10/1) -- agree with the agents' figures.
+- Gates: normalize_nulls 1/3 changed (fake_news_agree quoted "NA"); audit_batch 3 PASS / 0 WARN; verify_batch MISSING(exempt)=3;
+  lint_verification clean (NOT_NEEDED rows in both files); irw-validate ok x3; check_provenance exit 0 (standing `mixed` review
+  list unchanged, no skarzauskiene rows flagged).
+- Orchestrator note: agents were dispatched with run_in_background and awaited with a foreground file-presence loop; the round
+  did not end its turn while waiting.
+- Next: remaining skarzauskiene_2026_* (information_sources, science_behaviors, science_engagement, social_trust, trust_science)
+  sit on the same deposit.
+Queue: 29 pending, 0 in_progress. Cap is batch_490, not reached.
