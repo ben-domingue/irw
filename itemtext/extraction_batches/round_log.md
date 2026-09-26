@@ -27731,3 +27731,10 @@ Tables: 3 claimed — written 3 / blocked 0 / failed 0 (yield 100%). All from CI
 Step 5b orchestrator re-check: CONFIRMED — DA2968 col 62 (p601) 1/2/3/4/8/9 = 53/352/1583/461/119/12, col 79 (p1101) 32/78/2453/11/6, col 36 (p208) 96/1056/1198/214/16, all as reported; cues2968 P.6 grid prints '8 8' under NS NC on all four rows; cues2968 marker (36) row reads 'responsabi-/lidad política', ES2968 /P208 reads '... en la vida política'.
 Gates: normalize_nulls 0/3 changed; audit_batch PASS 3/3 (no WARNs); verify_batch MISSING(exempt)=3 (data_labels); lint_verification 3 rows, no problems (NOT_NEEDED rows in both files); irw-validate ok 3/3; check_provenance exit 0 (standing `mixed` review list unchanged).
 Queue: 1 pending (spain_2012_gender_vulnerability), 0 in_progress. Cap is batch_520, not reached.
+
+## batch_516 — 2026-09-26T03:32-07:00 (claimed 03:28:56-07:00), 1 agent
+1 table (the only pending row left). Written 1 / blocked 0 / failed 0; yield 1/1.
+- vulnerability (P.10, p1001-p1005, Sí/No; 10 rows). DA2968 cols 74-78 = ES2968 DATA LIST = questionnaire markers (74)-(78); no swap. Rebuild 11487 rows / 2517 ids exact. p1001 item_text follows the printed questionnaire ('Las mujeres mayores de 65 años'), not the truncated ES2968 label ('... de 65'), disclosed; 'discapa-cidad' hyphenation joined.
+Step 5b orchestrator re-check: CONFIRMED — DA2968 1/2/8/9 col 74 1149/1184/240/7, col 75 1081/1211/280/8, col 76 1454/890/228/8, col 77 1645/655/270/10, col 78 1355/863/348/14, all as reported; ES2968 /P1001 label and cues2968 P.10 row read as stated.
+Gates: normalize_nulls 0/1 changed; audit_batch PASS 1/1 (no WARNs); verify_batch MISSING(exempt)=1 (data_labels); lint_verification 1 row, no problems (NOT_NEEDED row in both files); irw-validate ok 1/1; check_provenance exit 0 (standing `mixed` review list unchanged).
+Queue: 0 pending, 0 in_progress — QUEUE EXHAUSTED; the spain_2012_gender_* series is complete. The next firing will stop at Step 0. Cap is batch_520, not reached.
