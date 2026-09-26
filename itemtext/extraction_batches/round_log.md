@@ -27286,3 +27286,22 @@ Gates: normalize_nulls 0/3 changed; audit_batch PASS 3/3, no anomalies (no WARNs
 lint_verification 3 rows, no problems (NOT_NEEDED rows written to both verification_merged.csv and mapping_verification.csv);
 irw-validate ok 3/3; check_provenance reports no failures (standing `mixed` review list unchanged).
 Queue: 41 pending (3 more spain_2018_housing_* siblings next: ownership, problems, rentals), 0 in_progress. Cap is batch_510, not reached.
+
+## batch_485 -- 2026-09-25T23:13 (-07:00), 3 tables, 3 agents (#2381 slice 11, CIS 3212 housing)
+Numbering: highest existing batch 484, so 485.
+Written 3 / blocked 0 / failed 0; yield 3/3 (100%). Completes the nine spain_2018_housing_* tables (batches 483-485).
+- spain_2018_housing_ownership (P21_1..4, additional homes held by household, Si=1/No=2; 8 rows)
+- spain_2018_housing_problems (P4_1..7, importance of local housing problems, Muy..Nada importante 1-4; 28 rows)
+- spain_2018_housing_rentals (P22/P23/P24, local rental market; 14 rows; P22/P23 1-5, P24 1-4, each with its own scale)
+All three: data_labels (item codes = CIS ES3212 variable names; labels match cues3212 questionnaire 4/4, 7/7; rentals'
+ES3212 variable labels are short topic labels, so item text is the questionnaire wording, tied to code by variable name and
+confirmed by value labels 14/14), study_materials + machine_translation (issues-page entries owed once live). Each agent
+rebuilt its table from DA3212 per the .do and reproduced live exactly. Rights: existing CIS "allow" register row.
+Caveat: no midpoint recode here (unlike measures/opinions) -- only 8 N.S./9 N.C. dropped, but that is heavy on some items:
+problems P4_1/P4_2 (prices) 499/591 of 2468, rentals P22/P23/P24 599/653/329. Disclosed in public_note. Not a defect.
+Step 5b orchestrator check: irw_table_sets confirms live n_rows 9834 / 15551 / 5823, item and resp sets as reported; rentals
+per-item counts + dropped 8/9 sum to 2468 for each of P22/P23/P24.
+Gates: normalize_nulls 0/3 changed; audit_batch PASS 3/3, no anomalies (no WARNs); verify_batch MISSING(exempt)=3 (data_labels);
+lint_verification 3 rows, no problems (NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv);
+irw-validate ok 3/3; check_provenance reports no failures (standing `mixed` review list unchanged).
+Queue: 38 pending, 0 in_progress. Cap is batch_510, not reached.
