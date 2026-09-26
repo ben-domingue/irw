@@ -27738,3 +27738,22 @@ Queue: 1 pending (spain_2012_gender_vulnerability), 0 in_progress. Cap is batch_
 Step 5b orchestrator re-check: CONFIRMED — DA2968 1/2/8/9 col 74 1149/1184/240/7, col 75 1081/1211/280/8, col 76 1454/890/228/8, col 77 1645/655/270/10, col 78 1355/863/348/14, all as reported; ES2968 /P1001 label and cues2968 P.10 row read as stated.
 Gates: normalize_nulls 0/1 changed; audit_batch PASS 1/1 (no WARNs); verify_batch MISSING(exempt)=1 (data_labels); lint_verification 1 row, no problems (NOT_NEEDED row in both files); irw-validate ok 1/1; check_provenance exit 0 (standing `mixed` review list unchanged).
 Queue: 0 pending, 0 in_progress — QUEUE EXHAUSTED; the spain_2012_gender_* series is complete. The next firing will stop at Step 0. Cap is batch_520, not reached.
+
+## batch_517 — 2026-09-26T03:35–03:5x-07:00 (claimed 03:35:46-07:00), 3 agents
+Numbering: highest existing batch 516, so 517 (no hole applies). First round on #2381 slice 13.
+Tables: 3 claimed. Written 0 / blocked 3 / failed 0; yield 0/3. Breaker not tripped (0% failed). No kills.
+All three are study-authored items from Goyal, De Gregori, Savani & Liu 2025 (JPSP doi:10.1037/pspa0000464, OSF qehna). All three were BLOCKED on rights with retry test NO. The re-audit marked them OBTAINABLE on "silence (own items)" without reading biblio's Derived_License, the same gap as the 2026-09-23 ai_fear/anunciacao ruling.
+- **Rights basis, orchestrator-confirmed:** metadata/biblio.csv gives all 7 goyal tables Original_License 'Permission via Email' and Derived_License 'CC BY-NC 4.0'. Of the 465 email-permission rows, 7 carry CC BY-NC 4.0 and 1 carries CC BY-NC-ND; the NC term is the authors'. The OSF API shows qehna public=True with node_license None, and the Crossref license for the VoR is null.
+- **_mr and _stance:** the agents blocked these on their own, citing the NC rule.
+- **_moral:** the agent SHIPPED it on silence (38 items, 293 rows, paper_order, Step 5b PARTIAL, verify PASS) and escalated the rights question. **The orchestrator overrode it to blocked** so the three siblings are treated alike. The source IRW copied from, the .sav labels on qehna, comes to IRW only under the NC-derived permission. The __items.csv, verification row and verify script were moved to .cache/moral_absolutism_goyal_2025_moral/parked/ and not committed, following the 2026-09-24 practice of not committing NC wording. Parked candidates: _mr .cache/.../parked/ (90 rows, gated), _stance .cache/.../candidate__items.csv (31 rows, gated).
+- **One ruling settles this.** These three join the open NC-item-wording question with nguyen_2026_factcheck_* ×5, parental_text_intervention and hannachi_2025_eco_anxiety_cope. A single ruling from Ben (does the NC term cover wording, or response data only?) settles all ten. pending_index_notes rows added ×3.
+- **Response-data defects** (orchestrator re-checked against live irw_fetch):
+  - _stance: Study 8 support and neither are both mapped to 4. Live stance_2..7 resp=2 counts are 522/450/330/654/882/1002 and resp=4 counts are 1044/1116/1236/912/684/564.
+  - _stance: stance_1 is political ideology, not a stance item. It is constant at 48 rows, all resp=4.
+  - _stance: the table has 5802 ids for about 967 respondents.
+  - _mr: each of the 405 Study 6 respondents appears under 6 pseudo-ids of the form `<id>_Issue<x>_trialN`, giving 2430 ids and 2430 rows per item.
+  - _moral (agent-reported, not re-checked): Study 4 `_timed`/`_ctrl` suffixes are the wrong condition on 12 of 18 codes, and the Study 5 and Study 7 rows are duplicated ×11 and ×6.
+  - **The response-side licence question also applies here.** datastandard.md bars NC intake, yet the goyal response tables are live under CC BY-NC 4.0.
+  - No GitHub issue filed.
+- Gates: no __items.csv, so normalize_nulls and audit_batch halt with "no files". lint has no verification rows. verify_batch MISSING for all 3 (blocked, none owed). irw-validate not run (no files). check_provenance exit 0.
+Queue: 52 pending, 0 in_progress. Cap is batch_539, not reached.
