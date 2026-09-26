@@ -26587,3 +26587,23 @@ new errors (the standing `mixed` review list is unchanged).
   159/191; items 3 and 7 zero resp=5 as the paper states). Top anchor ships as "Almost Always" (export/form) though the
   paper's prose says "Always".
 Queue: 37 pending. Cap check: Step 0 cap is batch_470, not reached.
+
+## batch_453 — 2026-09-25T18:41 (3 tables; 3 written / 0 blocked / 0 failed; yield 3/3)
+Numbering: highest existing was batch_452 (both holes 200-205 / 300-304 long passed), so 453. Agents were
+dispatched in background mode by mistake; the orchestrator waited in a foreground poll loop on the provenance
+sidecars + transcript idleness, so no step was skipped. All gates: normalize (celik fixed nulls), audit 3 PASS
+no anomalies, verify_batch PASS=3, lint 0 ERROR / 1 WARN, irw-validate ok x3, check_provenance exit 0.
+- onah_2021_covid_info_sources: data_labels (Mendeley 10.17632/cf3s3v8wb3, CC BY; .sav labels + questionnaire PDF
+  Cluster 1), 10 items Agree=1/Disagree=0; VERIFIED resp axis by per-item agree/disagree counts 20/20 cells. PDF
+  wording shipped over .sav label for social_media (label drops "whatsapp"). Caveat: the deposit's linked Google Form
+  has been edited since collection, so its stem was not used.
+- onah_2021_covid_knowledge: data_labels, 25 items, stem + lettered options folded into item_text, option_text
+  correct/incorrect; no published answer key so correct_response blank (public_note). VERIFIED: 6 items (11,12,15,
+  21,22,23) code 2='correct' raw; live resp==1 matches the .sav 'correct' count 25/25 (n=7890). Lint WARN
+  ("evidence hedges") is about the answer key, not the mapping -- explained in notes.csv, kept VERIFIED.
+- celik_2026_academic_motivation: data_labels (Google Forms xlsx headers, Turkish AMS Ünal-Karagüven 2012), 28x7,
+  language=Turkish, translation_source=mixed (Vallerand AMS-C 28 English). VERIFIED: script re-run 11536/11536 cells;
+  4 lowest-mean items = the amotivation items 5/12/19/26. Anchors only at 1/4/7 from the published form; the deposit
+  has bare integers. FOR TRIAGE: the "Because ..." fragment of instructions_translated is project-rendered --
+  decide whether it owes an issues-page line. Sibling celik_2026_tipi still pending.
+Queue: 34 pending. Cap check: Step 0 cap is batch_470, not reached.
