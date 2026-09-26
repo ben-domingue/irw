@@ -27185,3 +27185,27 @@ MISSING(exempt)=3; lint_verification clean (NOT_NEEDED rows in verification_merg
 irw-validate ok 3/3; check_provenance exit 0 (standing `mixed` review list unchanged).
 CIS 3564 files cached under .cache/spain_2026_international_{confidence,eu,influence}/ -- reusable for _media/_threat/_un.
 Queue: 8 pending, 0 in_progress. Cap is batch_490, not reached.
+
+## batch_480 -- 2026-09-25T22:31:36-07:00 (closed ~22:40)
+3 tables claimed, 3 agents (one per table). Written 3 / blocked 0 / failed 0; yield 3/3. Circuit breaker not tripped.
+Batch numbering: highest existing is 479, so this is 480 (consecutive, per batch_478's note on the "below 300" clause).
+queue_state.csv rewritten via temp file + os.replace with CRLF preserved.
+Source: CIS Estudio 3564 (same MD3564.zip as batch_479, md5 f1f58729a36cada83aa57fb54f153776 re-checked; Cues3564.pdf /
+es3564mar.pdf sha256 match batch_479). All three data_labels, text_source=study_materials,
+translation_source=machine_translation (issues-page entries owed once live); existing CIS rights register row applied.
+No recodes: the .do only sets 8/9 (N.S./N.C.) to missing. "(LEER OPCIONES)" and [code] tags stripped per CIS precedent.
+- spain_2026_international_media (P.7, P.9, P.10 x 1-4): WRITTEN. P7/P9 Mucho..Nada; P10 "Los simplifican mucho"..Nada.
+  Caveat: P10's "estos conflictos" refers back to earlier questions naming the conflicts; shipped literally.
+  Step 5b orchestrator check: CONFIRMED 17536 rows / 5999 ids, p7 2715/2279/720/264, p9 854/2541/2020/470,
+  p10 1410/2449/1324/490.
+- spain_2026_international_threat (P.16, P.18 x 1-4 Mucho..Nada; higher = less affected/worried): WRITTEN.
+  Caveat: P.16 "estos conflictos" points back to P.15 (not in table); disclosed in public_note.
+  Step 5b orchestrator check: CONFIRMED 11950 rows / 5998 ids, p16 1124/2395/1984/460, p18 1435/2335/1788/429.
+- spain_2026_international_un (P.14 [ONU], onu_1-6 x 1-5 Muy en desacuerdo..Muy de acuerdo): WRITTEN. Stem's stray
+  "afirmaciones:." shipped as printed. Weighted .sav reproduces published marginals (direction confirmed by agent).
+  Step 5b orchestrator check: CONFIRMED 35327 rows / 5999 ids, onu_1 118/295/257/2604/2696, onu_5 157/1065/942/1885/1675.
+Gates: normalize_nulls 0/3 changed; audit_batch PASS 3/3, no anomalies (no WARNs to explain); verify_batch
+MISSING(exempt)=3; lint_verification clean (NOT_NEEDED rows in verification_merged.csv AND mapping_verification.csv);
+irw-validate ok 3/3; check_provenance exit 0 (standing `mixed` review list unchanged).
+CIS 3564 now complete across batches 479-480 (confidence, eu, influence, media, threat, un).
+Queue: 5 pending, 0 in_progress. Cap is batch_490, not reached.

@@ -1,0 +1,4 @@
+"table","batch","mapping_basis","uploaded","route","status","evidence"
+"spain_2026_international_media","batch_480","data_labels","","none","NOT_NEEDED","mapping_basis=data_labels: item codes are the CIS 3564.sav variable names (P7, P9, P10, lower-cased); .sav frequencies match live item x resp 12/12 cells; exempt from Step 5b"
+"spain_2026_international_threat","batch_480","data_labels","","none","NOT_NEEDED","mapping_basis=data_labels: item codes are the CIS 3564.sav variable names (P16, P18, lower-cased); .sav frequencies match live item x resp 8/8 cells; exempt from Step 5b"
+"spain_2026_international_un","batch_480","data_labels","","none","NOT_NEEDED","mapping_basis=data_labels: item codes are the CIS 3564.sav variable names (ONU_1-6, lower-cased); .sav frequencies match live item x resp 30/30 cells; exempt from Step 5b"
