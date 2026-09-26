@@ -26489,3 +26489,21 @@ Step 5b: no claim overrides a source or reports a response-data defect. Side not
 Adolescent_data.csv while OSF now holds Adolescent_data.sav (parses only as latin1, lec3-17 empty under it); live per-item means equal
 the pooled .sav means exactly for PCL and PHQ, so the live tables are unaffected.
 Queue: 49 pending. Cap check: the Step 0 cap is batch_470, not reached.
+
+## batch_449 — 2026-09-25T17:55-07:00 — 3 tables, 3 written / 0 blocked / 0 failed (yield 3/3)
+Three agents, no kills. Second round on the #2381 slice 09 re-queue. All gates clean: normalize_nulls 0 changes; audit_batch 3 PASS,
+no anomalies (no Step 5c WARNs); verify_batch 3 PASS; lint_verification no problems; irw-validate ok on all 3; check_provenance exit 0
+(only the standing 10-table `mixed` REVIEW list, none from this batch). All three are Kay & Slovic (2025) Assessment, OSF uzrgk, the
+same deposit and method as act/cmq/cf/gcb5/nfc/onecm_kay_2025 (batches 405-407): Qualtrics printouts print each statement followed by
+its export tag, so all three are paper_explicit + study_materials, VERIFIED by tag match (swap controls FAIL as they should). Unlike
+gcb5_2025, all three live tables are deposit raw + 4 (1..7), as data/kay_2025.R says. Rights: no register rows; applied the #2381
+triage rows (agn and gmc rest on silence, den on Uscinski et al. 2020 CC BY); no register row written.
+- agn_kay_2025 (56 rows = 8 x 7): Agnew anomie, T1 only. Deposit +4 reproduces live n=492 and means/floor/ceiling exactly. No _r columns.
+- den_kay_2025 (28 rows = 4 x 7): Denialism, T1 only. Deposit +4 matches live in all 28 item x resp cells.
+- gmc_kay_2025 (35 rows = 5 x 7, waves 1+2): General Measure of Conspiracism. gmc_xxx_03_r / 04_r are stored ALREADY REVERSED, so their
+  option_text runs Strongly agree (1) .. Strongly disagree (7); disclosed in public_note. Orchestrator re-checked (Step 5b): authors'
+  Rmd (osf 5a3gc) l.369 `mutate_at(vars(matches("_r$")), ~.x * -1)` precedes the deidentified export at l.429, and in the deposit
+  both _r items correlate +.47..+.67 with the three forward items (_r x _r .55), impossible for raw "I feel they are untrue" /
+  "proved to be false" scores. Confirmed.
+Step 5b: no claim overrides a source or reports a response-data defect; the gmc reversal is a property of the deposit, confirmed above.
+Queue: 46 pending. Cap check: the Step 0 cap is batch_470, not reached.
