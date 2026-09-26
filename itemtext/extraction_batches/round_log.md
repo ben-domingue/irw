@@ -26760,3 +26760,24 @@ check_provenance exit 0 (standing `mixed` REVIEW list only, none of this batch).
   still pending: its codebook pp.2-4 support the same route, and the files are cached in
   .cache/friedman_2018_risks_discrimination/.
 Queue: 13 pending, 0 in_progress. Cap check: Step 0 cap is batch_470, not reached.
+
+## batch_461 — 2026-09-25T19:59-20:05-07:00 — 3 tables, 3 written / 0 blocked / 0 failed (yield 3/3)
+Three agents, no kills. All gates clean: normalize_nulls 0 changes; audit_batch 3 PASS, no anomalies (no Step 5c WARNs);
+verify_batch 1 PASS + 2 exempt (data_labels); lint_verification no problems; irw-validate ok on all 3; check_provenance exit 0
+(only the standing `mixed` REVIEW list, none from this batch). Numbering: highest existing was batch_460, so batch_461. Step 1's
+"compute highest+1 over directories below 300 only" wording is stale now that the series runs 305..460 consecutively; followed
+the evident intent (consecutive numbering, holes 200-205 and 300-304 already behind us).
+- friedman_2018_risks_government (36 rows = 6 x 6, paper_explicit, VERIFIED): Dataverse doi:10.7910/DVN/ZSJA25 Codebook.pdf pp.2-4
+  verbatim, same route as sibling friedman_2018_risks_discrimination (batch_460). Source-column label counts equal live counts in
+  all 36 cells and the six count vectors are mutually distinct (orchestrator re-ran verify script: PASS); polarity classes
+  within +0.32..+0.61, between -0.18..-0.30. Instrument name descriptive ("Group index" per the do-file; Kahan attribution
+  inferred from wording); instructions blank; rights basis is silence (no licence on the deposit), same as batch_460.
+- spain_2025_sex_attitudes (25 rows = 5 x 5, data_labels, NOT_NEEDED): CIS Estudio 3515 questionnaire A5 grid, Spanish verbatim,
+  equal to .sav variable labels 5/5; English machine_translation (issues-page line owed once live). .sav frequencies match live in
+  all 25 cells. resp 3 ships without its "(NO LEER)" marker, following sibling CIS tables.
+- spain_2025_sex_condom (10 rows = 2 x 5, data_labels, NOT_NEEDED): CIS 3515 D6/D7 Spanish verbatim; English machine_translation
+  (issues-page line owed). Frequencies match live in all 10 cells. The .do drops codes 0/7/9. **Source-data caveat, orchestrator
+  confirmed (Step 5b):** es3515mar.pdf methodology note F says a D3 filter-programming error meant women with sexual experience
+  with both men and women were never shown D3-D7, so d6/d7 (and any sibling table built from D3-D7 -- check spain_2025_sex_frequency
+  and _identity when they run) omit that group. Property of the CIS fieldwork, not an itemtext defect.
+Queue: 10 pending, 0 in_progress. Cap check: the Step 0 cap is batch_470, not reached.
