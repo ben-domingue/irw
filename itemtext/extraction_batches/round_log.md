@@ -27503,3 +27503,17 @@ Gates: normalize_nulls 0/3 changed; audit_batch PASS 3/3 (no WARNs); verify_batc
 lint_verification 3 rows, no problems (NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv);
 irw-validate ok 3/3; check_provenance exit 0, no failures (standing `mixed` review list unchanged).
 Queue: 5 pending, 0 in_progress. Cap is batch_510, not reached.
+
+## batch_497 — 2026-09-26T01:10 (claimed 00:57:36-07:00), 3 agents
+Numbering: highest existing batch 496 (excluding the 200-205 / 300-304 holes), so 497.
+Tables 3: spain_2025_europe_effects, spain_2025_europe_impact, spain_2025_europe_policy (CIS Estudio 3523; sources read from the batch_496 MD3523.zip cache, sha256s match).
+Written 3 / blocked 0 / failed 0 — yield 100%. All data_labels (CIS variable names lowercased by the .do; rebuilds from 3523_num.csv reproduce live exactly: effects 16276 rows/2427 ids, impact 9575/2427, policy 11882/2426). text_source=study_materials, translation_source=machine_translation (issues-page lines owed once live). CIS rights register row applied (irw#2381), none written.
+- effects (P8_1-P8_7; 21 rows, resp 1..3, 1 = beneficiosa, 3 = perjudicial): volunteered '(NO LEER)' midpoint 2 kept, marker stripped; rotation direction omitted, disclosed. SOURCE TYPO CORRECTED: cues3523.pdf prints 'defavorecidas' in P8_5 (orchestrator-confirmed, pdftotext line 378); shipped 'desfavorecidas' per CIS's own variable label, disclosed.
+- impact (P4-P7; 14 rows): mixed formats in one table — p4/p7 resp 1..4 (Mucho..Nada), p5/p6 resp 1..3 (positivo / ni / negativo, '(NO LEER)' stripped). Low = more impact/positive on all four. irw-validate did not flag it.
+- policy (P12_1-P12_5; 10 rows, 1 = A favor, 2 = En contra): rotation direction omitted, disclosed. SOURCE TYPO KEPT: 'económicamenta' in P12_5 as printed (orchestrator-confirmed, line 442), English uses the intended word, disclosed in public_note. 2426 ids because one respondent is 8/9 on all five (confirmed).
+  Inconsistency for triage: two agents in one round made opposite typo calls (effects corrected, policy kept literal). Both are allowed by SKILL.md §4 ("correcting an obvious source typo is defensible; not saying so is not") and both are disclosed; pick one if uniformity matters.
+Step 5b orchestrator re-check: raw 8/9 counts recounted from 3523_num.csv match all three agents (p8_1..7 145/28, 106/14, 53/21, 41/20, 77/22, 87/22, 61/16; p4 14/3, p5 35/9, p6 30/11, p7 18/13; p12_1..5 40/10, 48/22, 28/25, 27/12, 25/16), and irw_table_sets per-item n equals 2427 minus those for all 16 items.
+Gates: normalize_nulls 0/3 changed; audit_batch PASS 3/3 (no WARNs); verify_batch MISSING(exempt)=3 (data_labels);
+lint_verification 3 rows, no problems (NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv);
+irw-validate ok 3/3; check_provenance exit 0, no failures (standing `mixed` review list unchanged).
+Queue: 2 pending, 0 in_progress. Cap is batch_510, not reached.
