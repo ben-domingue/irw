@@ -26712,3 +26712,28 @@ Circuit breaker 0% failed. Gates: normalize 0 of 2 changed; audit 2 PASS (no WAR
   IPIP-VIA register row and promoting .cache/goldberg_2018_ppq_via_strengths/candidate__items.csv (1,710 rows, passes
   validate --table-sets). Row added to pending_index_notes.csv.
 Queue: 19 pending, 0 in_progress. Cap check: Step 0 cap is batch_470, not reached.
+
+**batch_459 — 2026-09-25 ~19:42-19:52 PDT.** 3 tables (3 agents): **3 written / 0 blocked / 0 failed**, yield 3/3.
+Circuit breaker 0% failed. Gates: normalize 0 of 3 changed; audit 3 PASS (no WARNs); verify_batch PASS=2,
+MISSING(exempt)=1 (data_labels); lint clean (3 rows, NOT_NEEDED written to both files); irw-validate 3 ok;
+check_provenance exit 0 (standing `mixed` REVIEW list only, none of this batch).
+- abramson_2026_mobilization (44 rows, Q6grid_1-4 x 1-11): data_labels / study_materials, same CC0 Dataverse .sav
+  files as batch_458's siblings (hashes match). item_text keeps the full variable label ("In the event of another
+  escalation between Israel and Hamas in Gaza, likelihood of you -- <action>"), because here the prefix is the
+  question, not a vendor grid title. Options are the wave-1 labels, all 11 points labelled, on a two-sided scale:
+  "In support of Israel - 5" .. "Will not engage in such action at all 0" .. "Critical of Israel - 5".
+  **Orchestrator re-check:** the wave-1 .sav really reads "Isreal" and wave 2 reads "Israel"; the agent shipped the
+  corrected spelling. Triage should decide whether a correction that small is acceptable against literal
+  transcription. The wave-2 labels mark only the endpoints and repeat bare numbers, but they mean the same points.
+- arabaci_2025_skill_diversity (20 rows) and arabaci_2025_turnover_intention (15 rows): paper_order /
+  translated_substitute / study_supplied, language=Turkish. Source is Dataverse doi:10.7910/DVN/QBUOHG (Appendix A
+  .docx, English only) and RBGN doi:10.7819/rbgn.v27i03.4318 (CC BY 4.0). No Turkish wording is published anywhere in
+  the deposit. Only the endpoints 1/5 are labelled (from the xlsx legend row), so 2-4 are blank. Step 5b:
+  skill_diversity is NO_ROUTE. The scale-mean SD 0.93217 matches Table 4, but that check does not depend on item order.
+  turnover_intention is PARTIAL: item 1 is the odd one out (r23=.850 vs .710/.714), and in the sibling
+  arabaci_2025_burnout, Burnout4 is the weakest item (item-rest .355), which fits the paper's "Item 4" exclusion
+  and shows the deposit follows appendix order. Which of items 2 and 3 is which remains unestablished.
+  **Orchestrator re-check:** reran both verify scripts; the numbers reproduce and both PASS. Because the item
+  mapping is weak, both tables are candidates to hold back from upload at triage. No rights register row exists
+  for Eyi (2010) or Mobley (1978), and no restriction was found (silence).
+Queue: 16 pending, 0 in_progress. Cap check: Step 0 cap is batch_470, not reached.
