@@ -27656,7 +27656,7 @@ Step 5b orchestrator re-check: CONFIRMED from 3495_num.csv -- code 0 on P13_1 an
 Gates: normalize_nulls 0/3 changed; audit_batch PASS 3 (no WARNs); verify_batch MISSING(exempt) 3 (data_labels); lint_verification 3 rows, no problems (NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv); irw-validate ok 3/3; check_provenance exit 0 (standing `mixed` review list unchanged).
 Queue: 22 pending, 0 in_progress. Cap is batch_520, not reached.
 
-## batch_509 — 2026-09-26T02:41 (claimed 02:35:00-07:00), 3 agents (#2381 slice 15, CIS 3495)
+## batch_509 — 2026-09-26T02:39 (claimed 02:35:00-07:00), 3 agents (#2381 slice 15, CIS 3495)
 Numbering: highest existing batch 508 (excluding the 200-205 / 300-304 holes), so 509.
 Tables 3: spain_2025_ai_concern, spain_2025_ai_datause, spain_2025_ai_eventsagree (CIS Estudio 3495 'Inteligencia artificial'; source files copied per agent from .cache/spain_2025_ai_aspects/, MD3495.zip sha256 ed7e1215… re-checked). All under the CIS register row (allow).
 Written 3 / blocked 0 / failed 0 — yield 100%. All data_labels, text_source=study_materials, translation_source=machine_translation, language=Spanish (issues-page lines owed once live).
