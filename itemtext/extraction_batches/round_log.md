@@ -26540,3 +26540,28 @@ negative items are the reversed ones. Confirmed. Worth a note on the data side (
 Batch numbering: highest existing is 449, so this is 450; the 300-304 hole rule in the prompt no longer bites (the series has run
 consecutively from 305).
 Queue: 43 pending. Cap check: the Step 0 cap is batch_470, not reached.
+
+## batch_451 — 2026-09-25 18:19–18:40 PDT (3 tables, 3 agents)
+**3 written / 0 blocked / 0 failed; yield 3/3.** All gates clean: audit_batch 3 PASS, no WARNs; verify_batch PASS=1 (roy) + 2 MISSING(exempt,
+data_labels); lint_verification no problems; irw-validate ok x3; check_provenance exit 0 (only the standing `mixed` review list, none from
+this batch). normalize_nulls fixed 10 lines in gcbs_extra_s2. NOT_NEEDED rows for the two data_labels tables written to both
+verification_merged.csv and mapping_verification.csv.
+- alsuhibani_2022_gcbs_extra_s2 (10 = 2 x 5): data_labels from PLOS s003.sav (Study 2). **HOLD FROM UPLOAD.** Step 3b mismatch: only GCBS16 is
+  a Diana "extra"; GCBS17 is canonical GCBS item 15. The agent found the sibling alsuhibani_2022_gcbs maps Study 2 positionally (items 7-15
+  shifted by one). Orchestrator re-checked on s003/s004.sav and it is CONFIRMED (label-matching maps s004 items 7-15 onto s003 positions
+  8-15 and 17; GCBS7 mean 1.756 vs 2.829), but it is **already known**: irw#2435, opened today, withdrew alsuhibani_2022_gcbs
+  (9371d6e4), and its rebuild plan replaces this table with a Study-2-only Diana table (GCBS7 + GCBS16). The items CSV is correct for
+  the table as it is live now, but its codes will change after the rebuild. The public_note was reworded to cite #2435 instead of
+  describing the withdrawn sibling's layout.
+- alsuhibani_2022_paranoia_s3 (40 = 8 x 5): data_labels from s004.sav, the authors' own 8-item Revised Paranoia Scale. Caveat: the .sav
+  labels are Strongly disagree..Strongly agree, but the paper says the response format was "identical" to the GCBS (Definitely not
+  true..Definitely true). File followed, disclosed in public_note. Orchestrator confirmed s004 GCBS01 also carries agree/disagree labels,
+  while s003 (Study 2) GCBS carries "Definitely not true..", so the anchor conflict is Study-3-specific. Carry this into the #2435 rebuild,
+  because the live GCBS itemtext ships the paper's anchors.
+- roy_2024_phq9 (36 = 9 x 4): paper_order, official PHQ English (translated_substitute / official_instrument_english), language=Bengali
+  inferred from the cited Bengali adaptation (the paper does not state the language; disclosed). Verification PARTIAL: phq9 marker pinned
+  (mean 0.485, 73.8% zero) and direction confirmed via deposit total/bands (1019/1019); order among phq1-8 not established. Orchestrator
+  Step 5b: the agent's claim that phq3/4/5 are all modal at resp=3 was WRONG. Only phq4 is (364 vs 338 at 0); phq3 and phq5 are modal at 0.
+  Note corrected. The unusual structure is real: phq1/phq2 are near-uncorrelated with phq3-8, and resp=3 is heavy on phq3-8.
+Batch numbering: highest existing is 450, so this is 451 (the 200-205 and 300-304 holes are long past). Queue: 40 pending. Cap check:
+the Step 0 cap is batch_470, not reached.
