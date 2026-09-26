@@ -26366,3 +26366,22 @@ Written 3 / blocked 0 / failed 0 (yield 3/3). All gates clean: audit PASS x3, ve
   selection rates reproduce Fig 1 percentages to rounding. Russian survey, English-only published -> translated_substitute.
   Step 5b re-check confirmed: motive_deferment male 168/581 = 28.92% (Fig 1: 29%), female 3/686.
 Queue: 15 pending. Cap check: the Step 0 cap is batch_450, not reached.
+
+## batch_443 — 2026-09-25 16:52 PDT (3 tables, 3 agents)
+Written 3 / blocked 0 / failed 0 (yield 3/3). All gates clean: normalize_nulls fixed doherty (blank->NA), audit PASS x3,
+verify_batch PASS x1 + MISSING(exempt) x2 (data_labels), lint 0 problems, irw-validate ok x3, check_provenance exit 0
+(only the standing `mixed` REVIEW list).
+- zeng_2025_megaproject_ecm (75 rows, data_labels, NOT_NEEDED): S1 xlsx headers carry Chinese+English wording 15/15.
+  Live table has 15 items vs the paper's 8-item SECM: item_4_8..4_15 = SECM1-8 (S2's 4.1-4.8; alpha 0.971 vs 0.970);
+  item_4_1..4_7 are pollution types in neither paper nor S2. Their satisfaction anchors are inferred (same grid in S1;
+  r=+0.64..0.75 with SECM) and they ship with no section prompt -- disclosed in public_note. Worth a triage look.
+- ozkurt_2026_continuance_intention (paper_explicit, PARTIAL, verify PASS): wording from S6 Table 6. OVERRIDE: INT2/INT3
+  ("thinking about quitting", "intend to quit") are stored already reverse-scored, so their anchors ship reversed with a
+  public_note. Step 5b re-check (live data via verify script): r(INT2,INT1)=0.34, r(INT3,INT1)=0.34, r(INT2,INT3)=0.80,
+  means 4.9/5.2 vs INT1 6.3 -- confirmed. Step 3b: the paper's Measures section cites the Spormetre 2025 scale (5-point,
+  CC BY-NC-ND, different items); the data match S6's dissertation 7-point form instead. Rights judged shippable (no S6 item
+  is in Spormetre) but no register row was written -- HUMAN LOOK on rights.
+- doherty_2023_dass21 (84 rows, data_labels, NOT_NEEDED): BICDIS.sav labels; DASS register row = ship. Subscale sums
+  reproduce the deposit's own subscale columns 414/414, 420/420, 414/414. Cosmetic typo fixes + a truncated resp=2 label
+  completed; the non-canonical resp=1 anchor and DASS4/DASS9 wording were kept as the deposit states them (public_note).
+Queue: 12 pending. Cap check: the Step 0 cap is batch_450, not reached.
