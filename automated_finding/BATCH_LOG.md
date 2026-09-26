@@ -16044,3 +16044,75 @@ Licence loss is 34%, the same as the earlier sweeps. Step 2b over the 181 gave:
 worth_retrying + aggregate_continuous), sorted by shape first: 77 fall in
 100 <= N <= 50,000 and 8 <= items <= 700. 23 carry `license=unknown`, and each
 needs its licence verified before any work.
+
+## 2026-09-25b — Working the scout-2 leads: 29 tables, 202,976 responses
+
+Six parallel agents worked the **77 `in_range` leads** of
+`leads/pmc_leads_2026-09-25.csv`. Every one reached a terminal verdict: 12
+shipped, 42 rejected on content (including 5 on trust), 18 blocked on licence,
+and 5 skipped on PII. The 51 `out_of_range` rows stay `unworked`.
+
+| table(s) | script | ids | items | resp |
+|---|---|---|---|---|
+| `assanangkornchai_2022_cannabis_benefits` / `_harms` | `data/assanangkornchai_2022_cannabis.py` | 484 / 482 | 20 / 12 | 0-1 |
+| `durand_2020_dosq` / `_asrs` | `data/durand_2020_organization.py` | 774 | 38 / 18 | 1-6 / 1-5 |
+| `durand_2022_phq9` / `_stai6` | `data/durand_2022_phq9_stai6.py` | 407 | 9 / 6 | 0-3 / 1-4 |
+| `fredborg_2018_tms` / `_maas` / `_asmr_triggers` | `data/fredborg_2018_asmr_mindfulness.py` | 563 / 563 / 284 | 13 / 15 / 14 | 0-4 / 1-6 / 0-6 |
+| `ge_2025_cwms` / `_eesc` / `_mcqcr` / `_coping` | `data/ge_2025_worry.py` | 338 | 7 / 8 / 12 / 15 | 1-5 |
+| `guo_2025_tes` / `_ase` / `_ar` / `_le` | `data/guo_2025_teacher_support.py` | 414 | 15 / 22 / 5 / 5 | 1-5 |
+| `jie_2024_psqi` | `data/jie_2024_psqi.py` | 384 | 14 | 0-3 |
+| `kanamori_2026_ais` | `data/kanamori_2026_ais.py` | 4,707 | 8 | 0-3 |
+| `polner_2018_olife` / `_ais` / `_ghq12` / `_cra` / `_rei` | `data/polner_2018_schizotypy_creativity.py` | 182 (CRA 179) | 43 / 8 / 12 / 50 / 40 | mixed |
+| `rafii_2024_lead_knowledge` | `data/rafii_2024_lead_knowledge.py` | 155 | 24 | 0-1 |
+| `szymanska_2017_parenting_difficulty` / `_child_representation` / `_parent_stress_coping` | `data/szymanska_2017_parenting.py` | 316 / 316 / 257 | 8 / 8 / 15 | 0-10 |
+| `todor_2020_ikdc` | `data/todor_2020_ikdc.py` | 109 (retest 55, `wave`) | 18 | mixed |
+
+All 29 pass `irw-validate --profile upload`, re-run centrally. None has a
+duplicate (id, item[, wave]) key. The warnings are response concentration on
+binary or skewed items and observed-range nesting from unused top categories;
+none is a documented-format conflict.
+
+Per-table notes:
+- **Durand:** `durand_2022_*` is the same 407 people as Study 1 of
+  `durand_2020_*` (a 1:1 match on age plus all 56 items). Only the new PHQ-9 and
+  STAI-6 ship, with ids linked.
+- **Fredborg:** the Qualtrics ResponseID is replaced by the row index. Out-of-format
+  codes are dropped: MAAS 0 and ASMR checklist 7 ("Unknown").
+- **Kanamori:** 1,343 "99 = no answer" cells are dropped. The file has 85
+  exact-duplicate rows, but they are low-scoring profiles scattered through an
+  8-item, binary-covariate file, which reads as chance rather than a copied
+  network.
+- **Szymanska:** `0` means skipped in the parent demographics, so it is set to
+  missing there. The items use 0-10 smoothly.
+
+Item text: not shipped for any table. Cheap later for fredborg (Data Legend
+sheet), ge (.sav labels), guo (header row), jie (.sav labels + s001.docx) and
+todor (s001.docx). Not cheap for the rest, which have bare codes and
+unpublished translations. There are 29 not-shipped records in
+`itemtext_provenance.csv`.
+
+**Held, awaiting ben-domingue (scripts in the gitignored `runs/held/`, not committed):**
+- **Csibra 2025 dog ADHD rating scale** (`10.1038/s41598-025-09988-8`,
+  figshare, CC BY): 1,872 dogs, 17 + 21 items (0-3). Two adjacent-ID pairs are
+  exact copies on all 59 columns. There is no near-duplicate network: the median
+  nearest-neighbour distance is 6. This is a trust hold under the Chen 2023
+  ruling.
+- **Atalay 2024 Turkish PozQoL** (`10.7717/peerj.17873`): 130 people living with
+  HIV, test and retest. The file carries the HIV clinic's register number. That
+  is a medical-record-like identifier, not the platform ID that the 2026-09-20
+  ruling covers, so it is treated as `skipped_pii`.
+
+PII skips: peerj.11758 (mobile numbers + DOB), s41598-025-89224-5 (DOB),
+peerj.19444 (free-text clinical narratives; otherwise a strong N=772 file with
+seven instruments), peerj.4994 (age as exact days/365 plus free-text injury
+history), and PozQoL above.
+
+**Licence:** 18 blocked, nearly all the same shape. A CC BY article's data sits
+on an OSF node that is private (reachable only through a `view_only` link) or
+public with no licence. The 11 strong ones went to
+`license_blocked_candidates.csv`: Jenkins risk perception (1,005 x ~1,150),
+Chiu & Chan injury prevention (2,059 x 99), Heinemeier vaccine hesitancy, Nila
+empathy (2,864), Veskrnova sleep (4,508), and others.
+
+Staged: 29 `dictionary_auto.csv` rows (`stage_dict_row.py`) and 29
+`tags/tags_auto.csv` rows (`test_tags_union.R` passes).

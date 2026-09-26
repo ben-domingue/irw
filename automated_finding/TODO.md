@@ -3189,7 +3189,18 @@ do not treat the CSV's `proposed_name` column as a work list.
 
 ## From the 2026-09-25 PMC scout-2 sweep
 
-- [ ] **128 leads in `leads/pmc_leads_2026-09-25.csv`, all `unworked`**. Start
-  with the 77 `in_range` rows; verify the 23 `license=unknown` rows first.
+- [ ] **29 tables (202,976 responses) need uploading**: `irw_output/` (copied to
+  the main checkout's `automated_finding/irw_output/`). No item text this batch.
+  Dictionary and tag rows are staged in `dictionary_auto.csv` / `tags/tags_auto.csv`.
+- [ ] **Decision: Csibra 2025 dog ADHD scale** (1,872 dogs, 38 items) is held on
+  trust for two exact-duplicate adjacent-ID pairs, with no wider network. Script
+  in `runs/held/`. Ship with the copies dropped?
+- [ ] **Decision: Atalay 2024 Turkish PozQoL** (N=130, HIV clinic) is skipped for a
+  clinic register-number column. Is it covered by the platform-ID ruling (replace
+  with the row index) or not? Script in `runs/held/`.
+- [ ] **51 `out_of_range` leads unworked** in `leads/pmc_leads_2026-09-25.csv`
+  (all 77 `in_range` rows are terminal).
+- [ ] **Cheap item text for 13 tables**: fredborg (Data Legend sheet), ge (.sav
+  labels), guo (xlsx header), jie (.sav labels), todor (s001.docx).
 - [ ] **458 scouted terms unrun** in `pmc_term_backlog_2026-09-25.csv` (1,782
   projected new DOIs). The next sweep starts from that file.
