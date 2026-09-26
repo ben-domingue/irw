@@ -3186,3 +3186,10 @@ do not treat the CSV's `proposed_name` column as a work list.
   posture with a repository the project depends on long-term. The UA
   already declares itemresponsewarehouse@stanford.edu -- keep asking
   through the front door.
+
+## From the 2026-09-25 PMC scout-2 sweep
+
+- [ ] **128 leads in `leads/pmc_leads_2026-09-25.csv`, all `unworked`**. Start
+  with the 77 `in_range` rows; verify the 23 `license=unknown` rows first.
+- [ ] **458 scouted terms unrun** in `pmc_term_backlog_2026-09-25.csv` (1,782
+  projected new DOIs). The next sweep starts from that file.

@@ -15999,3 +15999,48 @@ points at Deep Blue `10.7302/90mc-9h22`, an 18-participant viral-challenge cohor
 Tables shipped across the six backlog sweeps (2026-09-20 .. 09-24): 18, then
 batches 2-4 at 7, 8 and 4, 8 in batch 5 (one panel), and 0 from the tail. Further PMC work needs new terms (`pmc_term_scout.py` over an unscouted
 pool), not more of this list.
+
+## 2026-09-25 — PMC scout-2 sweep: a fresh term pool, 2,196 candidates, 128 leads
+
+`pmc_term_backlog.csv` closed on 2026-09-24, so this batch starts a new pool.
+**1,234 terms** = every ASCII query in `search_terms_log.csv` never run against a
+`pmc*` output and not in `pmc_term_backlog.csv`. No instrument-keyword filter this
+time. Non-English variants were left in and scored out by the scout on their own:
+726 of the 1,234 returned zero new DOIs. `pmc_term_scout.py` projected **3,660 new
+DOIs** over the 508 non-zero terms, and the top 50 carry 1,878 of them. The
+ranking, with a `run_2026_09_25` column, is tracked in
+`pmc_term_backlog_2026-09-25.csv`. **458 scored terms remain unrun**
+(1,782 projected).
+
+The head of the ranking is broad constructs, not instrument names ("autism
+spectrum" 152, "early childhood" 83, "health promotion" 77, "sleep quality" 70).
+Expect a lower hit rate per candidate than the 2026-09-20 instrument-name pool.
+The early PeerJ rows were exercise-physiology and microbiome studies.
+
+**The run** (`irw_discover_pmc.py`, top 50 terms x 11 journals, ~5h, then
+`irw_retriage_ha.py`): **2,196 candidates**
+
+| flag | n |
+|---|---|
+| `no_usable_file` | 1,126 |
+| `license_restricted` | 742 |
+| `human_assistance` | 181 |
+| `not_item_response` | 55 |
+| `below_min_n` | 44 |
+| `download_failed` | 20 |
+| `external_unresolved` | 11 |
+| `good` | 6 |
+| `pii_suspected` | 6 |
+| `already_in_irw` | 2 |
+| `file_too_large` | 2 |
+| `error` | 1 |
+
+Licence loss is 34%, the same as the earlier sweeps. Step 2b over the 181 gave:
+`human_review` 52 (archived to `human_review/human_review_pmc_2026-09-25.csv`),
+`recoverable_format` 44, `aggregate_continuous` 42, `worth_retrying` 36,
+`not_item_response` 7.
+
+**128 leads -> `leads/pmc_leads_2026-09-25.csv`** (good + recoverable_format +
+worth_retrying + aggregate_continuous), sorted by shape first: 77 fall in
+100 <= N <= 50,000 and 8 <= items <= 700. 23 carry `license=unknown`, and each
+needs its licence verified before any work.
