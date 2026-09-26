@@ -27517,3 +27517,15 @@ Gates: normalize_nulls 0/3 changed; audit_batch PASS 3/3 (no WARNs); verify_batc
 lint_verification 3 rows, no problems (NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv);
 irw-validate ok 3/3; check_provenance exit 0, no failures (standing `mixed` review list unchanged).
 Queue: 2 pending, 0 in_progress. Cap is batch_510, not reached.
+
+## batch_498 — 2026-09-26T01:20 (claimed 01:06:46-07:00), 2 agents
+Numbering: highest existing batch 497 (excluding the 200-205 / 300-304 holes), so 498. Only 2 pending rows remained, so 2 tables / 2 agents.
+Tables 2: spain_2025_europe_spending, spain_2025_europe_trust (CIS Estudio 3523; sources from the batch_496 MD3523.zip cache, sha256 1f72cfb1…).
+Written 2 / blocked 0 / failed 0 — yield 100%. Both data_labels (CIS variable names lowercased by the .do; rebuilds from 3523_num.csv reproduce live exactly: spending 35846 rows/2426 ids, trust 11162/2388). text_source=study_materials, translation_source=machine_translation (issues-page lines owed once live). CIS rights register row applied (irw#2381), none written.
+- spending (P16_1-P16_15; 45 rows, resp 1 = Demasiados, 2 = Los justos, 3 = Demasiado pocos, all read aloud): drops 8/9; 1 respondent missing on all fifteen. Rotation direction omitted, disclosed. The agent also reproduced all 75 cells of CIS's PESO-weighted P.16 marginals from the raw file. No source typo.
+- trust (P10_1-P10_5; 50 rows, resp 1..10, only endpoints labelled — 1 = Ninguna confianza, 10 = Total confianza; 2-9 blank, not padded): the .do drops 0/98/99, where 0 = N.P. is the P.9 "heard of it" filter, so missingness is not random (14.8% not-asked on p10_4, European Council). 39 respondents have no valid answer. The "(SOLO APARECEN LOS/AS QUE CONOCE)" interviewer instruction is omitted, disclosed. No source typo.
+Step 5b orchestrator re-check: 8/9 counts for p16_1..15 recounted from 3523_num.csv match the agent exactly (13/4 … 35/6; 1 all-missing respondent), as do 0/98/99 counts for p10_1..5 (185/37/3, 148/29/4, 69/24/2, 358/38/4, 49/15/8; 39 all-missing). P10_k=0 iff P9_k!=1 confirmed with 0 exceptions on all five. table_sets per-item n equals 2427 minus the drops for all 20 items (p16: 2410…2386; p10: 2202/2246/2332/2027/2355).
+Gates: normalize_nulls 0/2 changed; audit_batch PASS 2/2 (no WARNs); verify_batch MISSING(exempt)=2 (data_labels);
+lint_verification 2 rows, no problems (NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv);
+irw-validate ok 2/2; check_provenance exit 0, no failures (standing `mixed` review list unchanged).
+Queue: 0 pending, 0 in_progress — QUEUE EXHAUSTED; the next firing will stand down on Step 0. Cap is batch_510, not reached.
