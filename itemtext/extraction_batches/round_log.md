@@ -27267,3 +27267,22 @@ Gates: normalize_nulls 0/3 changed; audit_batch PASS 3/3, no anomalies (no WARNs
 lint_verification 3 rows, no problems (NOT_NEEDED rows written to both verification_merged.csv and mapping_verification.csv);
 irw-validate ok 3/3; check_provenance exit 0 (standing `mixed` review list unchanged).
 Queue: 44 pending (6 more spain_2018_housing_* siblings next), 0 in_progress. Cap is batch_510, not reached.
+
+## batch_484 -- 2026-09-25T23:05 (-07:00), 3 tables, 3 agents (#2381 slice 11, CIS 3212 housing)
+Numbering: highest existing batch 483, so 484.
+Written 3 / blocked 0 / failed 0; yield 3/3 (100%).
+- spain_2018_housing_measures (P27_1..6, favour/against housing measures; 24 rows; resp {1,2,4,5})
+- spain_2018_housing_neighborhood (P3_1..10, neighbourhood conditions/equipment, Si=1/No=2; 20 rows)
+- spain_2018_housing_opinions (P25_1..5, renting vs buying agreement; 20 rows; resp {1,2,4,5})
+All three: data_labels (item codes = CIS ES3212 variable names; labels match cues3212 questionnaire 6/6, 10/10, 5/5),
+study_materials + machine_translation (CIS publishes Spanish only -> issues-page entries owed once live). Each agent rebuilt
+its table from DA3212 per the .do and reproduced live exactly (12799 / 24466 / 9872 rows). Rights: existing CIS "allow"
+register row (line 117) covers it.
+Caveat (measures, opinions): the .do recodes code 3 -- the volunteered "(NO LEER)" neutral midpoint -- to missing along with
+8/9, so resp has a gap at 3 and no option row for 3; recorded in notes + public_note. Step 5b orchestrator check: CONFIRMED
+at data/spain_2018_housing.do (`replace var = . if inlist(var, 3, 8, 9)`, with comments at lines 303/341). Not an itemtext
+defect; a property of the processing script's choice.
+Gates: normalize_nulls 0/3 changed; audit_batch PASS 3/3, no anomalies (no WARNs); verify_batch MISSING(exempt)=3 (data_labels);
+lint_verification 3 rows, no problems (NOT_NEEDED rows written to both verification_merged.csv and mapping_verification.csv);
+irw-validate ok 3/3; check_provenance reports no failures (standing `mixed` review list unchanged).
+Queue: 41 pending (3 more spain_2018_housing_* siblings next: ownership, problems, rentals), 0 in_progress. Cap is batch_510, not reached.
