@@ -27555,3 +27555,16 @@ Gates: normalize_nulls 0/3 changed; audit_batch PASS 3/3 (no WARNs); verify_batc
 lint_verification 3 rows, no problems (NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv);
 irw-validate ok 3/3; check_provenance exit 0, no failures (standing `mixed` review list unchanged).
 Queue: 46 pending, 0 in_progress. Cap is batch_520, not reached.
+
+## batch_501 — 2026-09-26T01:40 (claimed 01:32:12-07:00), 3 agents (#2381 slice 12, ESRU-EMOVI 2023)
+Numbering: highest existing batch 500 (excluding the 200-205 / 300-304 holes), so 501.
+Tables 3: mexico_2023_mobility_mood, mexico_2023_mobility_necessities, mexico_2023_mobility_neighborhood (CEEY ESRU-EMOVI 2023; same questionnaire / entrevistado_2023.dta / Diccionario as batches 496-500, copied per agent under .cache/<table>/, hashes checked).
+Written 3 / blocked 0 / failed 0 — yield 100%. All data_labels (EMOVI variable names lowercased by data/mexico_2023_mobility.do). text_source=study_materials, translation_source=machine_translation, language=Spanish (issues-page lines owed once live).
+- mood (P107 a-g, 28 rows, codes 1-4, no sentinels). A 7-item CES-D-derived short form: rights via the existing CES-D (Radloff 1977) register row, ship_with_note; no new register row. SOURCE DISCREPANCY: show card TARJETA P107-108 prints option 4 as "(6-7 días)", questionnaire and .dta value labels "(5-7 días)"; 5-7 shipped (same call as the anxiety table). p107g ("disfrutó de la vida") is positively worded and stored as recorded (mean 3.3 vs 1.4 for p107a) — disclosed in public_note.
+- necessities (P105 a-o, 30 rows, "Sí, es necesario"/"No es necesario"). .do drops code 8 (NS/NR), 641 total; p105l-o asked only in households with a member aged 0-17 (9914 system-missing); 2 records with no valid answer -> 17841 ids. Rights: silence (CEEY's own items).
+- neighborhood (P33 a-i, childhood neighbourhood services at age 14, 18 rows). .do drops code 8, 2767 total (d daycare 763, i older-adult centres 1144); 4 all-8 records -> 17839 ids. .dta labels carry the correct P33 stem (no batch_500-style borrowed stem). Rights: silence.
+Step 5b orchestrator re-check: read entrevistado_2023.dta directly (17843 records). p107a-g only 1-4, 0 missing, counts match the agent's table exactly; p105 code-8 24/45/46/21/109/16/173/42/22/34/32/7/31/28/11, l-o NA 9914, 2 rows all missing/8; p33 code-8 125/56/139/763/75/187/76/202/1144, 4 rows all-8. Show-card "(6-7 días)" vs questionnaire "(5-7 días)" confirmed by pdftotext. All match the agents.
+Gates: normalize_nulls 0/3 changed; audit_batch PASS 2 / WARN 1 (necessities row-count anomaly on p105l-o = the children-in-household filter, a data property, explained in notes.csv); verify_batch MISSING(exempt)=3 (data_labels);
+lint_verification 3 rows, no problems (NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv);
+irw-validate ok 3/3; check_provenance exit 0, no failures (standing `mixed` review list unchanged).
+Queue: 43 pending, 0 in_progress. Cap is batch_520, not reached.
