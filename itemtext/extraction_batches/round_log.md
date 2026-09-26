@@ -27354,3 +27354,26 @@ irw-validate ok 3/3; check_provenance no failures (standing `mixed` review list 
 WARN explained (notes.csv): leaders row-count anomaly on p13_1-4,7 vs median 211 -- structural, the .do drops code 7
 ("no conoce"), so n tracks how widely each leader was known (p13_1 907 down to p13_14 141). Not an itemtext defect.
 Queue: 32 pending (3 more spain_2014_debate_* siblings next), 0 in_progress. Cap is batch_510, not reached.
+
+## batch_488 -- 2026-09-25T23:37 (-07:00), 3 tables, 3 agents (#2381 slice 13, CIS 3016 debate sobre el estado de la nacion 2014)
+Numbering: highest existing batch 487, so 488.
+Written 3 / blocked 0 / failed 0; yield 3/3 (100%). Tables seven to nine of the nine spain_2014_debate_* tables -- the CIS 3016 set is now complete.
+- spain_2014_debate_opposition (P15A-D, whether Rubalcaba conveyed that the PSOE has each quality, 1 Mucho .. 4 Nada; 16 rows)
+- spain_2014_debate_rajoy (P16A-H, qualities Rajoy showed in the debate, 1 Si / 2 No; 16 rows)
+- spain_2014_debate_rubalcaba (P17A-H, same eight qualities for Rubalcaba, 1 Si / 2 No; 16 rows)
+All three: data_labels (CIS Es3016 variable names lower-cased by the .do), study_materials + machine_translation (issues-page
+entries owed once live). MD3016.zip re-fetched, hashes identical to batch_486/487. Each agent rebuilt its table from Da3016 per the
+.do and reproduced live exactly (4147 / 8253 / 8127 rows). Rights: existing CIS "allow" register row.
+Orchestrator Step 5b checks, all CONFIRMED against the files:
+- opposition: the Cues3016 P.15 stem asks whether Rubalcaba conveyed that "el PSOE..." has each quality, so the items are about the
+  party. The dictionary/.do description ("capacity shown by the opposition leader") is loose -- same block, not a 3b mismatch.
+- rajoy p16b/p16f and rubalcaba p17b/p17f ship the questionnaire's "los españoles"/"los ciudadanos" over the Es3016 labels
+  "los/as españoles/as"/"los/as ciudadanos/as" (Es3016 lines 93/97/101/105), same choice as batch_487 media p5e.
+- rajoy and rubalcaba item_text and item_text_translated are identical row for row (the P.16 and P.17 grids have the same wording).
+Caveats (notes + public_note): all three were asked only of respondents who recalled the relevant speech (P13_1 or P13_2 in 1-5,8,9;
+1074-1075 records, 0 violations), so missing cells mean not asked; 8/9 dropped by the .do. Rubalcaba's P.17 stem ("Y, a su juicio,
+Alfredo Pérez Rubalcaba, demostró...") is elliptical, following on from P.16, and ships verbatim.
+Gates: normalize_nulls 0/3 changed; audit_batch PASS 3/3 (no WARNs); verify_batch MISSING(exempt)=3 (data_labels);
+lint_verification 3 rows, no problems (NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv);
+irw-validate ok 3/3; check_provenance no failures (standing `mixed` review list unchanged).
+Queue: 29 pending (spain_2013_defense_* next), 0 in_progress. Cap is batch_510, not reached.
