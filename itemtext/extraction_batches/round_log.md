@@ -27465,3 +27465,16 @@ Gates: normalize_nulls 0/3 changed; audit_batch PASS 3/3 (no WARNs); verify_batc
 lint_verification 3 rows, no problems (NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv);
 irw-validate ok 3/3; check_provenance exit 0, no failures (standing `mixed` review list unchanged).
 Queue: 14 pending, 0 in_progress. Cap is batch_510, not reached.
+
+## batch_494 — 2026-09-26T00:35 (claimed 00:24:49-07:00), 3 agents
+Numbering: highest existing batch 493 (excluding the 200-205 / 300-304 holes), so 494.
+Tables 3: spain_2017_politics_conscience, spain_2017_politics_discussion, spain_2017_politics_fraud (CIS Estudio 3184).
+Written 3 / blocked 0 / failed 0 — yield 100%. All data_labels (CIS variable names as item codes; rebuilds from DA3184 reproduce live exactly: conscience 4753 rows/2449 ids, discussion 6354/2456, fraud 8626/2448). text_source=study_materials, translation_source=machine_translation (issues-page lines owed once live). CIS rights register row applied, none written.
+- conscience (P16, P17; 8 rows): p16 drops 8/9, p17 drops 9 only (P17 has no code 8). Orchestrator-confirmed from DA3184 col 89 8/9 = 109/21 and col 90 9 = 37. P.17 stem is elliptical as printed and ships literally.
+- discussion (P2601-P2603; 12 rows): the .do drops code 7 '(NO LEER) No procede'. Orchestrator-confirmed from DA3184 col 109: 1005 of 2460 records, so p2603 has 1449 respondents. This is the audit WARN (row-count anomaly on p2603), explained in notes as applicability-driven missingness, not a defect.
+- fraud (P18, P19, P20, P24; 16 rows): drops 8/9. Orchestrator-confirmed from DA3184 col 92 = 355+9 (14.8%) and col 93 = 553+12 (23.0%).
+Minor finding: batch_493's burden provenance cites the .do infix for P10-P13 as "line 13"; it is line 15 (columns correct). Not edited.
+Gates: normalize_nulls 0/3 changed; audit_batch PASS 2 / WARN 1 (explained above); verify_batch MISSING(exempt)=3 (data_labels);
+lint_verification 3 rows, no problems (NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv);
+irw-validate ok 3/3; check_provenance exit 0, no failures (standing `mixed` review list unchanged).
+Queue: 11 pending, 0 in_progress. Cap is batch_510, not reached.
