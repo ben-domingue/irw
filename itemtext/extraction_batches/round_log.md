@@ -27003,3 +27003,28 @@ Written 3 / blocked 0 / failed 0. Yield 3/3. Breaker not tripped (0% failed).
 - Next: remaining skarzauskiene_2026_* (information_sources, science_behaviors, science_engagement, social_trust, trust_science)
   sit on the same deposit.
 Queue: 29 pending, 0 in_progress. Cap is batch_490, not reached.
+
+## batch_473 — 2026-09-25 21:36–21:4x PDT (3 tables, 3 agents)
+Written 3 / blocked 0 / failed 0. Yield 3/3. Breaker not tripped (0% failed).
+- Numbering: highest existing is 472 (consecutive 305..472), so 473.
+- Same family as batch_472: skarzauskiene_2026_* INFODEMIJA survey (Zenodo 21134839, CC BY 4.0). All three data_labels
+  (pattern 1, CSV columns m* melted unrenamed; dictionary Variable IDs M* match case-insensitively), translated_substitute /
+  study_supplied, language Lithuanian (only the depositors' English is published), code 9 (N/A) dropped by the script.
+- skarzauskiene_2026_information_sources (10 items m30-m39 x 1-5): WRITTEN. The shared "HOW OFTEN DID YOU LEARN ABOUT SCIENCE
+  AND RESEARCH THROUGH ..." opening is kept inside each item_text (grammatically part of each sentence); instructions blank.
+- skarzauskiene_2026_science_behaviors (4 items m22-m25 x 1-5): WRITTEN. Each item a complete "HOW OFTEN DO YOU ...?" question.
+- skarzauskiene_2026_science_engagement (4 items m26-m29 x 1-5): WRITTEN. Shared "WHY DO YOU WANT TO LEARN MORE ABOUT SCIENCE
+  NEWS?" in instructions. Options 1-2 ("It doesn't matter at all", "Rather it doesn't matter") literal as printed.
+  Table-scope note: the table name suggests "engagement with and interest in science" but the live items are only the four
+  motivation items of the dictionary group 'Science Engagement & Interest'. The agent said the group's other variables all use
+  different scales; the orchestrator re-check found M20 ("HOW IMPORTANT IS IT TO YOU TO BE INFORMED...") uses the SAME
+  importance scale as M26-M29 but is not in the table. That is a processing-script grouping choice, not an itemtext defect.
+- Orchestrator re-check (Step 5b): dictionary sha256 4c2a8c49... and data CSV sha256 f4c5499e... re-hashed from cache; 18/18
+  shipped stems found in 'Related Question' for their own Variable ID; deposit counts re-computed for m30 (159/367/187/224/40),
+  m22 (468/337/118/65/6), m26 (379/174/187/137/39) -- agree with the agents' figures; option sets match the dictionary.
+- Gates: normalize_nulls 1/3 changed (information_sources); audit_batch 3 PASS / 0 WARN; verify_batch MISSING(exempt)=3;
+  lint_verification clean (NOT_NEEDED rows in both files); irw-validate ok x3; check_provenance exit 0 (standing `mixed`
+  review list unchanged).
+- Agents dispatched in the foreground in one message; all returned before Step 3.
+- Next: skarzauskiene_2026_social_trust and _trust_science are the last two tables on this deposit.
+Queue: 26 pending, 0 in_progress. Cap is batch_490, not reached.
