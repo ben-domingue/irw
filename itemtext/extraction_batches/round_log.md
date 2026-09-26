@@ -27162,3 +27162,26 @@ MISSING(exempt)=3; lint_verification clean (NOT_NEEDED rows in verification_merg
 irw-validate ok 3/3; check_provenance exit 0 (standing `mixed` review list unchanged).
 CIS 3522 now complete across batches 477-478 (inequality, leaders, personal, recognition, trajectory).
 Queue: 11 pending, 0 in_progress. Cap is batch_490, not reached.
+
+## batch_479 -- 2026-09-25T22:23:25-07:00 (closed ~22:33)
+3 tables claimed, 3 agents (one per table). Written 3 / blocked 0 / failed 0; yield 3/3. Circuit breaker not tripped.
+Batch numbering: highest existing is 478, so this is 479 (consecutive, as batch_478's entry explains re the "below 300" clause).
+queue_state.csv rewritten via temp file + os.replace with CRLF preserved.
+Source: CIS Estudio 3564 "Estudio sobre la situacion internacional" (fieldwork 22-30 April 2026, N=6001), MD3564.zip
+(md5 f1f58729a36cada83aa57fb54f153776). All three data_labels (item codes = lower-cased CIS column names via
+data/spain_2026_international.do), text_source=study_materials, translation_source=machine_translation (issues-page
+entries owed once live); existing CIS rights register row applied. No recodes: the .do only sets N.S./N.C. to missing.
+- spain_2026_international_confidence (P.11 [OOIICONFIANZA], 10 orgs x 1-10): WRITTEN. Endpoint-only labels
+  (1 "Ninguna confianza", 10 "Maxima confianza"), 2-9 blank. .sav = live 100/100 cells. Dropped N.S./N.C. high for
+  CPI 489, OCDE 455, OMC 398 of 6001. Step 5b orchestrator check: CONFIRMED 58075 rows / 5998 ids,
+  ooiiconfianza_9 546/180/257/306/632/684/1031/1177/702/464.
+- spain_2026_international_eu (P.13 [UE], ue_1-5 x 1-5 Muy en desacuerdo..Muy de acuerdo): WRITTEN, clean (no note).
+  .sav = live 25/25 cells. Step 5b orchestrator check: CONFIRMED 29818 rows / 6000 ids, ue_1 120/373/353/3126/2003.
+- spain_2026_international_influence (P.12 [OOIIINFLUENCIA], 10 orgs x 1-10): WRITTEN. Endpoint-only labels
+  (1 "Ninguna influencia", 10 "Maxima influencia"). .sav = live 100/100 cells; 58108 rows / 5989 ids. Marginals PDF has
+  stem typos ("indique", "inluencia"); questionnaire wording ships.
+Gates: normalize_nulls 0/3 changed; audit_batch PASS 3/3, no anomalies (no WARNs to explain); verify_batch
+MISSING(exempt)=3; lint_verification clean (NOT_NEEDED rows in verification_merged.csv AND mapping_verification.csv);
+irw-validate ok 3/3; check_provenance exit 0 (standing `mixed` review list unchanged).
+CIS 3564 files cached under .cache/spain_2026_international_{confidence,eu,influence}/ -- reusable for _media/_threat/_un.
+Queue: 8 pending, 0 in_progress. Cap is batch_490, not reached.
