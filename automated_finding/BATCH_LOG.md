@@ -16122,3 +16122,21 @@ Staged: 29 `dictionary_auto.csv` rows (`stage_dict_row.py`) and 29
 ben-domingue confirmed that all 29 response tables are uploaded. There is no item
 text to stamp, and the 29 not-shipped provenance records stay unstamped by design.
 The dictionary and tag rows come in with #2446, whose merge is the accept.
+
+### 2026-09-26 — scout-2 held pair released (3 tables)
+
+ben-domingue ruled on both holds from 2026-09-25b:
+- **Csibra 2025 DAFRS.** "Drop duplicate rows." The script now drops the later ID
+  of each exact-copy pair (1166, 1539), leaving 1,870 dogs. It asserts exactly
+  those two are dropped. Tables: `csibra_2025_dafrs_symptoms` (31,790 rows, 17
+  items, 0-3) and `csibra_2025_dafrs_function` (39,270 rows, 21 items, 0-3).
+- **Atalay 2024 PozQoL.** ben-domingue asked to hash the clinic register number.
+  It is not hashed: the register numbers run 21-682, so a hash can be reversed
+  by trying all 662 values. The script already replaces it with the row index,
+  which is the platform-ID treatment from 2026-09-20; this ruling extends that
+  treatment to a clinic register number. `atalay_2024_pozqol`: 3,380 rows, 130
+  ids, 13 items (1-5), `wave` 1 = test and 2 = retest.
+
+All three pass `irw-validate --profile upload`. Staged: 3 dictionary rows, 3 tag
+rows, and 3 not-shipped provenance records. Item text is cheap for all three
+(DAFRS Appendix A; PozQoL s003.pdf) and is deferred.
