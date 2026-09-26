@@ -27456,3 +27456,12 @@ Gates: normalize_nulls 0/3 changed; audit_batch PASS 3/3 (no WARNs); verify_batc
 lint_verification 3 rows, no problems (NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv);
 irw-validate ok 3/3; check_provenance exit 0, no failures (standing `mixed` review list unchanged).
 Queue: 17 pending (spain_2017_politics_* siblings next), 0 in_progress. Cap is batch_510, not reached.
+
+## batch_493 — 2026-09-26T00:16 (claimed 00:15:55-07:00), 3 agents
+Tables 3: spain_2017_politics_attitudes, spain_2017_politics_burden, spain_2017_politics_citizenship (CIS Estudio 3184).
+Written 3 / blocked 0 / failed 0 — yield 100%. All data_labels (CIS variable names as item codes; rebuilds from DA3184 reproduce live exactly: attitudes 6028 rows/2408 ids, burden 8703/2451, citizenship 14589/2453). text_source=study_materials, translation_source=machine_translation (issues-page lines owed once live). CIS rights register row applied, none written.
+Caveats (notes): attitudes — .do drops volunteered midpoint 3 plus 8/9 (orchestrator-confirmed from DA3184 cols 104-106: code 3 = 292/334/387); burden — p13 drops code 4 '(NO LEER) No sabe, no puede comparar' + 9 (confirmed col 86: 729 + 21 of 2460, so p13 N=1710 vs ~2330 for p10-p12), p11-p13 ship 3 levels; citizenship — endpoint-only labels 0/10, resp 1-9 blank, some low levels unused (ceiling items).
+Gates: normalize_nulls 0/3 changed; audit_batch PASS 3/3 (no WARNs); verify_batch MISSING(exempt)=3 (data_labels);
+lint_verification 3 rows, no problems (NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv);
+irw-validate ok 3/3; check_provenance exit 0, no failures (standing `mixed` review list unchanged).
+Queue: 14 pending, 0 in_progress. Cap is batch_510, not reached.
