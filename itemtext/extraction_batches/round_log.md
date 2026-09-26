@@ -26904,3 +26904,25 @@ Written 0 / blocked 3 / failed 0. Yield 0/3. Breaker not tripped (0% failed).
   one ruling on NC item wording would unblock all five (plus parental_text_intervention, hannachi_2025_eco_anxiety_cope).
 - Side finding: data/nguyen_2026_factcheck.py sends ben's email in its User-Agent; agents did not reuse it. Not fixed here.
 Queue: 41 pending, 0 in_progress. Cap is batch_490, not reached.
+
+## batch_469 — 2026-09-25 21:01–21:1x PDT (3 tables, 3 agents)
+Written 2 / blocked 1 / failed 0. Yield 2/3. Breaker not tripped (0% failed).
+- eldor_2022_anomie (7 items x 1-7) and eldor_2022_collective_anger (3 items x 1-7): WRITTEN, data_labels. Codes are the
+  source column names (data/eldor_2022_radicalization_resilience.py; source misspelling `colelctive_anger_*` kept), each
+  labelled in the `variables` sheet of figshare 21531195 file 38165901 (CC BY 4.0; paper PMC9685524 CC BY). Orchestrator
+  re-read that sheet: labels equal shipped item_text 10/10. text_source=translated_substitute / study_supplied, language
+  Norwegian -- administered in Norwegian (forward-back translated; UserLanguage=NO), no Norwegian wording anywhere in the
+  deposit or supplements, so the English labels ship in the base fields with public_note. Only anchors 1/4/7 are named
+  (paper's Method); 2,3,5,6 option_text left blank. Anomie side checks: composite = item mean 308/309 rows, alpha 0.859 vs
+  paper 0.85. Collective anger: 21/21 item x level counts deposit = live (305 ids).
+- nguyen_2026_factcheck_user_heuristics: BLOCKED on rights, retry test NO -- fifth nguyen_2026_factcheck_* table on the
+  CC BY-NC 4.0 DR-NTU deposit (licence re-confirmed via Dataverse API). Candidate banked in .cache/ (84 rows, gated, 84/84
+  counts match live). New: G_7 and G_12 labels truncated at SPSS's 255-char cap. pending_index_notes row added. All five
+  nguyen tables now await the single NC-item-wording ruling.
+- Gates: normalize_nulls fixed 1 file (anomie, null forms); audit_batch 2 PASS / 0 WARN; verify_batch MISSING(exempt)=2;
+  lint_verification clean (NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv); irw-validate ok
+  x2; check_provenance exit 0.
+- Sibling heads-up for next rounds: the remaining six eldor_2022_* tables sit on the same XLSX with full English labels ->
+  expect data_labels + the same Norwegian fallback. political_resilience_49 is an attention check; _42RC (Norwegian label)
+  is excluded from the table; violent_intentions ships the unreversed originals (_4r/_5r/_7r excluded).
+Queue: 38 pending, 0 in_progress. Cap is batch_490, not reached.
