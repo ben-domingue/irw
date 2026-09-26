@@ -26639,3 +26639,32 @@ lint 0 ERROR / 0 WARN / 1 INFO (gcbs item-axis hedge, VERIFIED stands per 2026-0
   to 100. Orchestrator re-check: 3178 ids, 91% = 100, range 0-400, 23 sum to 0, 13 have only 3 of 4 items (the
   script's 0-100 filter); per-item n 3172/3175/3176/3176, as reported.
 Queue: 28 pending. Cap check: Step 0 cap is batch_470, not reached.
+
+**batch_456 — 2026-09-25 ~19:12-19:35 PDT.** 3 tables (3 agents): **3 written / 0 blocked / 0 failed**, yield 3/3.
+Gates: normalize 1 of 3 changed (ER re-quoted after the orchestrator edit below); audit 2 PASS / 1 WARN (physsx, explained
+in notes.csv: response-data defect, not itemtext); verify_batch PASS=2, MISSING(exempt)=1 (data_labels); lint clean;
+irw-validate 3 ok; check_provenance exit 0 (standing enem / `mixed` REVIEW lists only, none of this batch).
+- eammi_grahe_2018_physsx (26 rows, 13 PHQ-15-derived somatic items x resp 1-2): data_labels (codebook, label sheet and
+  .sav agree 13/13), OSF qtqpb CC0; PHQ register row `ship`. resp 1 = "not bothered at all", resp 2 blank (middle point
+  unlabelled in the deposit). **Sheet1 STOP overridden, Ben to confirm** (same shape as batch_455); the hand-built sheet
+  1h8DMQx_Nio5v0eHbMMb1Hzmt7hD6lyXF63orxgcMHdc labels resp 2 "bothered a lot" and should NOT be uploaded.
+  **Data defect, needs a fix in data/eammi_grahe_2018.py:** valid_ranges['physsx'] = (0, 2) (line 130) against a 1-3
+  codebook scale, so every resp=3 ("bothered a lot") was dropped: 6,464 of 41,310 raw responses (15.6%); physSx_12 loses
+  1,552 of 3,177. Orchestrator re-check (irw_fetch): 34,846 rows, 3,173 ids, resp {1: 22,325, 2: 12,521}, physSx_1/7/12
+  resp=1 = 1711/2953/405, as reported. Fix: range (1, 3), then add a resp=3 row per item to this CSV. public_note filed.
+- hao_2025_emotional_regulation (20 rows, ER1-ER4 x 1-5) and hao_2025_metacognitive_regulation (35 rows, MR1-MR7 x 1-5):
+  paper_order / canonical_instrument / official_instrument_english. Study (Hao & Sun, Research Square rs-7750527/v1, CC BY;
+  figshare 30397234 CC BY, bare headers) prints no items; wording is Guo & Li 2022 FLLRS (Front Psychol 13:1046340,
+  PMC9753691, CC BY) Appendix 1, Chinese in item_text + authors' English in _translated. Retained-item counts 4/7/8 match
+  ER/MR/SR exactly. Both agents independently picked the same source file (same sha256). **Verification PARTIAL** for
+  both (cross-sample item-mean rank vs Guo & Li Table 1: ER rho 1.00, MR rho 0.937, 12/5040 orderings as good); verify
+  scripts PASS. Orchestrator re-check of live means: ER 3.606/3.278/3.757/3.837, MR 3.526/3.242/3.312/3.611/3.549/3.398/
+  3.398, n=650, integers 1-5 only, as reported.
+  - **Anchor convention, Ben to decide before hao_2025_social_regulation:** the ER agent shipped English endpoints
+    (1 Strongly disagree / 5 Strongly agree, argued to hold under a native 5-point form or a 7->5 rescale); the MR agent
+    left all option_text blank because the paper reports a 7-point scale "standardized to a 5-point scale" yet stores
+    integers only. Orchestrator blanked ER's endpoints to match MR (the conservative side) and rewrote ER's note/public_note.
+  - **Dictionary defects:** "emotional_regulation" misreads ER = ego resilience (Guo & Li); Description says "Chinese
+    university students N=650", preprint says junior high students aged 12-15 (113/188/212/137). The availability audit's
+    403 for rs-7750527 is stale (versioned /v1 URLs now return 200).
+Queue: 25 pending, 0 in_progress. Cap check: Step 0 cap is batch_470, not reached.
