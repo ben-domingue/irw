@@ -26385,3 +26385,24 @@ verify_batch PASS x1 + MISSING(exempt) x2 (data_labels), lint 0 problems, irw-va
   reproduce the deposit's own subscale columns 414/414, 420/420, 414/414. Cosmetic typo fixes + a truncated resp=2 label
   completed; the non-canonical resp=1 anchor and DASS4/DASS9 wording were kept as the deposit states them (public_note).
 Queue: 12 pending. Cap check: the Step 0 cap is batch_450, not reached.
+
+## batch_444 -- 2026-09-25 17:03-17:11 PDT (3 agents)
+3 tables: 3 written / 0 blocked / 0 failed (yield 3/3). Gates: normalize 0 changed; audit 3 PASS, no WARNs;
+verify_batch PASS=2, MISSING(exempt)=1; lint clean; irw-validate 3 ok; check_provenance exit 0.
+- saha_2026_cesd (80 rows, data_labels, VERIFIED): the study's question-form CES-D rewording, verbatim from the Google-Form
+  headers 'Q-n ...'. OVERRIDE: Q4/Q8/Q12/Q16 are stored already reverse-scored, so their anchors ship reversed (public_note).
+  Step 5b re-check: Q4 resp counts 262/200/221/209 as claimed; item-rest r for Q4/8/12/16 = +.15/+.21/-.09/+.33
+  (non-negative, so stored reversed; weak on its own, but the agent's 892/892 raw-row alignment is decisive).
+  Q11 (restless sleep) has item-rest r -0.12, a property of the response data, not the itemtext.
+  **HUMAN DECISION:** the Mendeley deposit 10.17632/c5gpdtj8jv has been REMOVED "as per author's request" (HTTP 451,
+  DOI 404). The text was built from the 2026-08-27 cached xlsx (sha256s in provenance). The licence was CC BY 4.0 at fetch,
+  but the live RESPONSE table rests on the same withdrawn deposit. Decide whether both stay before uploading.
+- shorttripm_silvia_2025 (60 rows, data_labels, NOT_NEEDED + verify PASS): OSF xkp86 QSF export tags = live codes 15/15.
+  OVERRIDE of the QSF recode: the four *r items are stored reverse-scored, so their anchors ship 1=True..4=False (public_note).
+  Step 5b re-check: item-rest r for the *r items is +.29/+.29/+.20/+.12 (all positive), so confirmed. Preprint Table 1 M/SD
+  reproduce 15/15. Rights: PhenX "freely available; permission not required"; no register row was written.
+- turpochaparro_2026_self_esteem (40 rows, data_labels, NOT_NEEDED): Spanish variable labels from the Zenodo .sav;
+  item_text_translated = machine_translation, so it OWES an issues-page line once uploaded (check_provenance lists it as held).
+  The .sav has no value labels and there is no paper, so option_text is blank; the instrument is unnamed (all-positive, not
+  the Atienza RSES).
+Queue: 9 pending. Cap check: the Step 0 cap is batch_450, not reached.
