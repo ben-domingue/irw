@@ -86,3 +86,15 @@ sources confirmed 9 and contradicted none; the tenth (a Mendeley deposit) could 
   now one.
   `triage_scope.csv`: 7 wave 5-7 tables that are no longer candidates were dropped. The new tables are wave 8. A deposit
   that spans waves sits in its earliest unclassified wave. **Unclassified now: 1,117 tables in 321 deposits** (waves 5-8).
+- **Classification (2026-09-25, irw#2382 step 4).** Waves 5-8 cover 1,110 tables in 319 deposits; PISA and NEEDS_HUMAN
+  re-runs were held back. Each wave used the brief plus its 09-25 addendum, and about 11 verdicts per wave were
+  spot-checked: 11/11, 11/12, 10/11 and 11/12. Each miss was corrected in place, and none tripped the stop rule.
+  Leads (table defects, personal data, questions) are in `leads_step4.md`. Seven tables found serving wrong data were
+  withdrawn under Ben's standing rule (#2432-#2436).
+- **Routing (2026-09-25, step 5).**
+  - OBTAINABLE: 498 tables become queue slices 08-18 in `oneoff/itemtext-rights-bank/` (`slices_2382.csv`; 16 CC BY-SA
+    rows need licence notices after upload). They are not yet queued.
+  - 4 INFERRED tables are held for verification (`inferred_hold_2382.csv`).
+  - NOT_PUBLISHED and NOT_ITEM_TEXT: 410 `excluded` rows in `queue_state.csv`.
+  - RIGHTS_BLOCK with a quoted clause: `register_rows_draft_2382.csv`, 130 instrument rows covering 213 tables, for Ben
+    to ratify.

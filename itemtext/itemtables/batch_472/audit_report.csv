@@ -1,0 +1,4 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"skarzauskiene_2026_attitudes_science","PASS",11,11,TRUE,TRUE,FALSE,TRUE,0,0,""
+"skarzauskiene_2026_fake_news_agree","PASS",6,6,TRUE,TRUE,FALSE,TRUE,0,0,""
+"skarzauskiene_2026_fake_news_frequency","PASS",4,4,TRUE,TRUE,FALSE,TRUE,0,0,""

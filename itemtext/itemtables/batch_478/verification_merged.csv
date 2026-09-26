@@ -1,0 +1,4 @@
+"table","batch","mapping_basis","uploaded","route","status","evidence"
+"spain_2025_inequality_personal","batch_478","data_labels","","none","NOT_NEEDED","mapping_basis=data_labels: item codes are the CIS 3522.sav variable names (P4, P10, P11, lower-cased); .sav frequencies match live item x resp 15/15 cells; exempt from Step 5b"
+"spain_2025_inequality_recognition","batch_478","data_labels","","none","NOT_NEEDED","mapping_basis=data_labels: item codes are the CIS 3522.sav variable names (LIDERESCONOCE_1-4, lower-cased); .sav frequencies (after .do recode 7->0) match live item x resp 8/8 cells; exempt from Step 5b"
+"spain_2025_inequality_trajectory","batch_478","data_labels","","none","NOT_NEEDED","mapping_basis=data_labels: item codes are the CIS 3522.sav variable names (P5, P6, P12, lower-cased); .sav frequencies (after .do recode 1->3,2->1,3->2) match live item x resp 9/9 cells; exempt from Step 5b"
