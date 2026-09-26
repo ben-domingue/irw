@@ -26444,3 +26444,23 @@ check_provenance exit 0.
 - goldberg_2018_pda525 (3,675 rows = 525 x 7, data_labels, NOT_NEEDED): CC0 .sav variable labels, match 525PDA_words.txt
   525/525 and the printed form; all 3,622 item x resp cells match live. No explicit rights statement beyond CC0 deposit.
 Queue: 3 pending. Cap check: the Step 0 cap is batch_450, not reached.
+
+## batch_447 — 2026-09-25T17:34-07:00 — 3 tables, 3 written / 0 blocked / 0 failed (yield 3/3)
+Three agents, no kills. All gates clean: normalize_nulls 0 changes; audit_batch 3 PASS; verify_batch 2 PASS + 1 exempt (data_labels);
+lint_verification no problems; irw-validate ok except name_charset WARN on CSE_Bayazit_2022 (the live table name is capitalised,
+not an itemtext defect); check_provenance exit 0.
+- CSE_Bayazit_2022 (75 rows = 15 x 5, paper_explicit, PARTIAL): Turkish items + authors' English from Bayazit 2022 PLOS ONE Table 1;
+  per-item M/SD within 0.062 of Table 1, optimal assignment 15/15, EFA 13/14 on published factor (Item12 splits). Near-tied sets
+  1/2/3, 4/11/12, 8/9 rest on the paper's numbering. Turkish anchor wording unpublished: only English endpoints on 1 and 5, 2-4 blank.
+  Item11 is live though the paper dropped it from the final 14-item scale (the deposit has all 15; not a defect).
+- pinheiro_2023_srq (40 rows = 20 x yes/no, paper_order, PARTIAL): WHO English SRQ-20 as translated_substitute /
+  official_instrument_english (administered in Brazilian Portuguese; no source carries the Portuguese). Total M=6.46 SD=4.67 N=235
+  reproduces paper Table 2 exactly (flipped = 13.54); mutual-nearest pairs 18/20, 7/19, 8/12; low-mood block 9/11/13/15 coherent.
+  LEAD FOR A HUMAN: sibling pinheiro_2023_trwcas (blocked batch_141 on a periodicos.ufjf.br 401) -- that host answered 200 today and
+  the paper that the sibling's notes say would settle its mapping is cached at .cache/pinheiro_2023_srq/g30456.bin. Its retry condition
+  looks met; NOT flipped back to pending (human decision).
+- spain_2025_tourism_importance (20 rows = 5 x 4, data_labels, NOT_NEEDED): CIS 3521 questionnaire P.5 Spanish verbatim, English is
+  machine_translation (issues-page line owed once live). .sav frequencies match live in all 20 item x resp cells. Orchestrator
+  re-checked: data/spain_2025_tourism.do:81 drops resp 3 ("(NO LEER) Regular"), live resp set is {1,2,4,5}, so no option row for 3
+  is correct. Shipped questionnaire's "se genera" on item 5 where the .sav label says "se generan"; disclosed.
+Queue: 0 pending -- queue exhausted after this round. Cap check: the Step 0 cap is batch_450, not reached.
