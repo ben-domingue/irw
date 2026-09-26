@@ -27095,3 +27095,24 @@ Batch numbering: highest existing is 474, so this is 475 (holes 200-205 and 300-
   batch_437, 25 columns) -- a quoting defect in an existing evidence string. Rows for this round were appended raw.
 - Agents dispatched in the foreground in one message; all returned before Step 3.
 Queue: 20 pending, 0 in_progress. Cap is batch_490, not reached.
+
+## batch_476 -- 2026-09-25T22:01:00-07:00 (closed ~22:12)
+3 tables claimed, 3 agents (one per table). Written 3 / blocked 0 / failed 0; yield 3/3. Circuit breaker not tripped.
+Batch numbering: highest existing is 475, so this is 476.
+All three: CIS Estudio 2938 (2012), data_labels (item codes = CIS variable names via data/spain_2012_entrepreneurship.do;
+ES2938 VARIABLE LABELS = item_text exactly), text_source=study_materials, translation_source=machine_translation
+(issues-page entries owed once live; check_provenance lists them, exit 0). Each agent rebuilt the live table exactly
+from DA2938 and matched the published marginals. CIS rights register row applied, no new row.
+- spain_2012_entrepreneurship_image (6 items p1801-p1806, resp {1,3}): WRITTEN. Binary by design: code 2 "Ni positiva
+  ni negativa" is (NO LEER) and the .do sets it to missing -- 1390 of 8622 cells (16.1%; per item 278/310/212/92/227/271),
+  disclosed in public_note. Step 5b orchestrator check: code-2 counts CONFIRMED from DA2938 cols 122-127; the agent's
+  N.S./N.C. total of 204 was WRONG -- it is 206 (36/64/42/14/34/16; 8622-1390-206 = 7026 = live rows); corrected in
+  provenance.csv note.
+- spain_2012_entrepreneurship_motives (7 items p14a01-p14a07 x 1-4): WRITTEN. Filtered question, asked of 140/1437
+  who have/had/started a business; 139 ids live (one all-N.S./N.C.). Marginals match all 28 cells.
+- spain_2012_entrepreneurship_unemployment (7 items p701-p707 x 1-4): WRITTEN. P.7 lead-in in instructions; underlining
+  not representable; option_text from full value labels (grid headers abbreviated).
+Gates: normalize_nulls 0/3 changed; audit_batch PASS 3/3, no anomalies; verify_batch MISSING(exempt)=3 (all data_labels);
+lint_verification clean (NOT_NEEDED rows written to verification_merged.csv AND mapping_verification.csv);
+irw-validate ok 3/3; check_provenance exit 0.
+Queue: 17 pending, 0 in_progress. Cap is batch_490, not reached.

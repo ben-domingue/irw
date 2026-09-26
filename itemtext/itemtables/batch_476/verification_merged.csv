@@ -1,0 +1,4 @@
+"table","batch","mapping_basis","uploaded","route","status","evidence"
+"spain_2012_entrepreneurship_image","batch_476","data_labels","","none","NOT_NEEDED","mapping_basis=data_labels: item codes are the CIS variable names and ES2938 VARIABLE LABELS equal item_text; exempt from Step 5b"
+"spain_2012_entrepreneurship_motives","batch_476","data_labels","","none","NOT_NEEDED","mapping_basis=data_labels: item codes are the CIS variable names and ES2938 VARIABLE LABELS equal item_text; exempt from Step 5b"
+"spain_2012_entrepreneurship_unemployment","batch_476","data_labels","","none","NOT_NEEDED","mapping_basis=data_labels: item codes are the CIS variable names and ES2938 VARIABLE LABELS equal item_text; exempt from Step 5b"
