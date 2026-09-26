@@ -26926,3 +26926,26 @@ Written 2 / blocked 1 / failed 0. Yield 2/3. Breaker not tripped (0% failed).
   expect data_labels + the same Norwegian fallback. political_resilience_49 is an attention check; _42RC (Norwegian label)
   is excluded from the table; violent_intentions ships the unreversed originals (_4r/_5r/_7r excluded).
 Queue: 38 pending, 0 in_progress. Cap is batch_490, not reached.
+
+## batch_470 — 2026-09-25 21:09–21:2x PDT (3 tables, 3 agents)
+Written 3 / blocked 0 / failed 0. Yield 3/3. Breaker not tripped (0% failed).
+- All three data_labels from the deposit's `variables` sheet (figshare 21531195 file 38165901, sha256 e154bda7..., same file
+  as batch_469; CC BY 4.0, paper PMC9685524 CC BY). text_source=translated_substitute / study_supplied, language Norwegian;
+  only anchors 1/4/7 named (paper's Method), 2,3,5,6 option_text blank.
+- eldor_2022_political_resilience (49 items x 1-7): WRITTEN. Deviation from batch_469's pattern, accepted: item 42 ships its
+  administered Norwegian in item_text (English in _translated), recovered from the excluded `42RC` recode's label; the other
+  48 ship English. Orchestrator re-check: 42RC = 8 - item 42 on 321/321 deposit rows, label "Jeg føler at de ansatte på
+  skolen behandler meg urettferdig. RC" vs item 42 "I feel that the school employees treat me unfairly". Item 49 = attention
+  check (233/313 chose 1 = paper's retained n 233); correct_response left blank. Source typos kept (11,17,22,31,36,47).
+- eldor_2022_realistic_threat (3 items x 1-7): WRITTEN. Label for _3 reads "unsafe of other ethnic groups" (re-checked in
+  the sheet); paper's Measures quotes "unsafe due to". Deposit label shipped, discrepancy in public_note. alpha 0.95 = paper.
+- eldor_2022_relative_deprivation (6 items x 1-7): WRITTEN with _5 item_text BLANK. Deposit labels _4 and _5 are
+  byte-identical ("I think my ethnic group is disadvantaged because others oppress them."); originating Obaidi et al. (2019)
+  item 5 differs. Orchestrator re-check: identical strings; r(4,5)=0.925, 81.6% exact agreement (n=299 deposit) -- data
+  cannot tell duplicate from near-synonym, so no text asserted. Filling it needs the Norwegian questionnaire/Qualtrics export
+  or author confirmation. Audit WARN (16.7% blank item_text, 57.1% blank option_text) explained in notes.csv: expected.
+- Gates: normalize_nulls 0/3 changed; audit_batch 2 PASS / 1 WARN; verify_batch MISSING(exempt)=3; lint_verification clean
+  (NOT_NEEDED rows in both files); irw-validate ok x3; check_provenance exit 0 (standing `mixed` review list unchanged).
+- Next: remaining eldor_2022_* (school_resilience, symbolic_threat, violent_intentions) sit on the same XLSX. violent_intentions
+  ships the unreversed originals (_4r/_5r/_7r excluded); the 42RC trick above suggests *r labels may carry Norwegian too.
+Queue: 35 pending, 0 in_progress. Cap is batch_490, not reached.
