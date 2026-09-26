@@ -26406,3 +26406,23 @@ verify_batch PASS=2, MISSING(exempt)=1; lint clean; irw-validate 3 ok; check_pro
   The .sav has no value labels and there is no paper, so option_text is blank; the instrument is unnamed (all-positive, not
   the Atienza RSES).
 Queue: 9 pending. Cap check: the Step 0 cap is batch_450, not reached.
+
+## batch_445 — 2026-09-25T17:12-07:00 (3 agents)
+3 claimed / 3 written / 0 blocked / 0 failed. Yield 3/3. No kills, no access failures.
+Gates: normalize_nulls fixed 54 lines in ajlan (blank-null normalisation); audit_batch 3/3 PASS, no anomalies;
+verify_batch PASS=1, MISSING(exempt)=2 (data_labels); lint 0 ERROR / 0 WARN / 1 INFO; irw-validate clean except
+name_charset WARN on FPAS_Silva_2022 (live table name is capitalised, not an itemtext defect); check_provenance exit 0.
+- liu_2023_adherence_factors (20 rows, data_labels, NOT_NEEDED): .sav variable/value labels; Chinese administered text,
+  English from the authors' s003 Table S1. Paper's per-level counts reproduce live 20/20 cells. `instructions_translated`
+  includes a factor-definition paragraph translated by IRW (flagged inline + public_note) -> owes an issues-page line once
+  uploaded (translation_source=mixed).
+- ajlan_2025_stemcell_knowledge (102 rows, data_labels, verify PASS / VERIFIED route 9): PeerJ CC BY, S2 questionnaire +
+  S4 .sav labels + S3 answer key. Diagonal 101/101 on all 30 items vs best off-diagonal 50-87/101.
+  **DATA DEFECT (Step 5b confirmed):** q23_1 and q23_3 are stored 1..3 (resp 0 = 0 respondents; counts 33/45/23 and 42/52/7)
+  while the other 11 knowledge items are 0..2; the authors' recode is off by +1 on those two. Shipped as stored,
+  correct_response=3 for them. Whether to subtract 1 in the response table is a human call.
+- FPAS_Silva_2022 (data_labels, NOT_NEEDED): Harvard Dataverse REDCap dictionary (CC0), Brazilian Portuguese as administered,
+  English from the CC BY MethodsX Table 1 (original Burns 2005 wording, not a back-translation; departs on items 3/7/14).
+  Nine reverse-coded items carry per-item reversed option labels per the dictionary; data concur (fpas_14/15 90% at 5).
+  Caveat: the paper's printed Portuguese differs slightly from the dictionary wording; the dictionary was shipped.
+Queue: 6 pending. Cap check: the Step 0 cap is batch_450, not reached.
