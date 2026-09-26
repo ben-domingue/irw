@@ -27644,3 +27644,14 @@ Written 3 / blocked 0 / failed 0 — yield 100%. All data_labels, text_source=st
 Step 5b orchestrator re-check: roma override CONFIRMED -- pdftotext -raw cues3119.pdf shows the column-(113) row as 'Vivir en el mismo barrio en el que viven muchas personas gitanas', and ES3119 /P2501 omits 'muchas'. Other claims are label/rebuild matches with no override; not re-derived.
 Gates: normalize_nulls 0/3 changed; audit_batch PASS 3; verify_batch MISSING(exempt) 3 (data_labels); lint_verification 3 rows, no problems (NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv); irw-validate ok 3/3; check_provenance exit 0, no failures (standing `mixed` review list unchanged).
 Queue: 25 pending, 0 in_progress. Cap is batch_520, not reached.
+
+## batch_508 — 2026-09-26T02:4x (claimed 02:27:33-07:00), 3 agents (#2381 slice 14, CIS 3495)
+Numbering: highest existing batch 507 (excluding the 200-205 / 300-304 holes), so 508.
+Tables 3: spain_2025_ai_association, spain_2025_ai_awareness, spain_2025_ai_comfort (CIS Estudio 3495 'Inteligencia artificial'; source files copied per agent from .cache/spain_2025_ai_aspects/, sha256s re-checked against batch_507 provenance). All under the CIS register row (allow).
+Written 3 / blocked 0 / failed 0 — yield 100%. All data_labels, text_source=study_materials, translation_source=machine_translation, language=Spanish (issues-page lines owed once live).
+- association (P.3, p3_1-p3_12, 1-10 scale, 120 rows). Labels match questionnaire 12/12 in order (A = B). Only endpoints labelled ('1 En ninguna medida'/'10 En gran medida', leading digit stripped); 2-9 blank. Stem asks about technological advances in general, not AI -- stated in public_note. Sentinels 98/99; 4003 ids; rebuild 47830 rows exact.
+- awareness (P.10 + P.18_1_1-4, Sí/No, 10 rows). Two sections (P.10 full question as item_text; P.18 stem as section_prompt), instructions blank, per spain_2018_housing_building. P18 labels match 4/4. p10 near-constant (3877/124). Rebuild 19467 rows / 4004 ids exact.
+- comfort (P.13_1-3 + P.19, 1-10, 40 rows). Two sections (P.13 comfort, P.19 self-rated AI knowledge); endpoints only labelled, 2-9 blank. P13 labels match 3/3. Sentinels 0/98/99; rebuild 15481 rows / 3880 ids exact.
+Step 5b orchestrator re-check: CONFIRMED from 3495_num.csv -- code 0 on P13_1 and P18_1_1 is exactly the 124 P10=2 records (0 elsewhere; P10=8/9 1+2 records were asked); 98/99 counts P3_1 9, P13_1 22, P19 3. ES3495 /P3_1.. and /P13_1-3 labels re-read, match agents' reports.
+Gates: normalize_nulls 0/3 changed; audit_batch PASS 3 (no WARNs); verify_batch MISSING(exempt) 3 (data_labels); lint_verification 3 rows, no problems (NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv); irw-validate ok 3/3; check_provenance exit 0 (standing `mixed` review list unchanged).
+Queue: 22 pending, 0 in_progress. Cap is batch_520, not reached.
