@@ -26868,3 +26868,24 @@ data independently of the agents -- CONFIRMED.
 Housekeeping: itemtext/mapping_verification.csv had no trailing newline, so the first appended row fused onto
 argentina_2012_tobacco_policy's line; split back apart and re-parsed (7 fields every row; readr's row-1702 complaint predates this).
 Queue: 47 pending, 0 in_progress. Cap is batch_490, not reached.
+
+## batch_467 — 2026-09-25T20:47-21:0x-07:00 — 3 tables, 2 written / 1 blocked / 0 failed (yield 2/3)
+Tables: liem_2024_perceived_benefit_cp (45 rows, 9 items), liem_2024_perceived_benefit_ema (20 rows, 4 items) -- both from
+Liem & Hien 2024 PLOS ONE e0306616 (CC BY), the same route as batch_078/batch_466: paper_explicit (Table 2 prints code beside
+wording), translated_substitute/study_supplied, language=Vietnamese inferred, endpoints-only option labels (2-4 blank).
+Table 2 is an image; both wordings were transcribed by eye -- worth a human spot-check. Both VERIFIED by route 9 (S1 Data
+per-item response counts equal live counts cell for cell; 0 off-diagonal matches; min cross-item distance 10 / 28).
+nguyen_2026_factcheck_digital_literacy BLOCKED on rights (retry test NO): administered wording exists only as .sav labels in
+DR-NTU Dataverse doi:10.21979/N9/P5WUGI, licence CC BY-NC 4.0 -- re-checked by the orchestrator against the Dataverse API.
+Gate-passed 70-row data_labels candidate parked in .cache/nguyen_2026_factcheck_digital_literacy/. Same open NC-wording
+question as parental_text_intervention / hannachi_2025_eco_anxiety_cope; the five sibling nguyen_2026_factcheck_* tables
+share the deposit and will block identically -- a single ruling from Ben would settle all six. Row added to pending_index_notes.csv.
+Gates: normalize_nulls 0 changes; audit_batch first run ERROR on _ema ("could not read live data:" with an empty message,
+transient), re-run 2 PASS / 0 WARN; verify_batch PASS=2; lint_verification clean; irw-validate ok x2; check_provenance exit 0.
+Step 5b re-check: _ema agent reports the paper's Table 2 CR/AVE for PB_EMA (0.875/0.604) inconsistent with its own loadings
+-- CONFIRMED by hand: loadings .876/.859/.797/.890 give AVE 0.733, CR 0.916 (the text also says moderators have CR>0.9,
+AVE>0.7). Source typo only; wording and mapping unaffected. _cp agent: published PB_CP7 loading 0.770 vs 0.670 live-PC1, a
+side check; mapping settled by exact counts.
+Housekeeping: the claim rewrite through csv.writer dropped queue_state.csv's CRLF endings (whole-file diff); restored CRLF
+before anything else. Numbering: the 300-304 hole rule's "below 300" literal would yield batch_305 (exists); used highest+1=467.
+Queue: 44 pending, 0 in_progress. Cap is batch_490, not reached.
