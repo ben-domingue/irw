@@ -27490,3 +27490,16 @@ Gates: normalize_nulls 0/3 changed; audit_batch PASS 3/3 (no WARNs); verify_batc
 lint_verification 3 rows, no problems (NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv);
 irw-validate ok 3/3; check_provenance exit 0, no failures (standing `mixed` review list unchanged).
 Queue: 8 pending, 0 in_progress. Cap is batch_510, not reached.
+
+## batch_496 — 2026-09-26T00:58 (claimed 00:46:42-07:00), 3 agents
+Numbering: highest existing batch 495 (excluding the 200-205 / 300-304 holes), so 496.
+Tables 3: spain_2025_europe_agreement, spain_2025_europe_attention, spain_2025_europe_awareness (CIS Estudio 3523, June 2025 CATI; MD3523.zip sha256 1f72cfb1…, cached under .cache/spain_2025_europe_*/).
+Written 3 / blocked 0 / failed 0 — yield 100%. All data_labels (CIS variable names lowercased by the .do's `rename *, lower`; rebuilds from 3523_num.csv reproduce live exactly: agreement 7183 rows/2427 ids, attention 4831/2426, awareness 12114/2427). text_source=study_materials, translation_source=machine_translation (issues-page lines owed once live). CIS rights register row applied (irw#2381), none written.
+- agreement (P13-P15; 15 rows, resp 1..5, 1 = Muy de acuerdo): volunteered '(NO LEER)' midpoint 3 kept by the .do and shipped with the marker stripped; drops 8/9. Three separate tax questions, not one scale (r -0.05 to 0.25). P.15's interviewer instruction omitted, disclosed.
+- attention (P1, P2; 8 rows, resp 1..4, 1 = most interested/informed): drops 8/9. P.2's '(ENTREVISTADOR/A: LEER)' omitted, disclosed.
+- awareness (P9_1-P9_5; 10 rows, resp 1 = has heard of it, 2 = has not): .do drops 9 only, correctly — P9 defines no code 8 and none occurs. Public note flags that CIS's published marginals are PESO-weighted while IRW is unweighted (p9_1 not-heard 7.5% vs 14.1% published).
+Step 5b orchestrator re-check: raw sentinel counts recounted from 3523_num.csv match all three agents (p1 2/8, p2 5/8; p13 8/17, p14 28/18, p15 14/13; p9_x 9 = 2/2/0/17/0), and irw_table_sets per-item n equals 2427 minus those for all 10 items (2417/2414; 2402/2381/2400; 2425/2425/2427/2410/2427).
+Gates: normalize_nulls 0/3 changed; audit_batch PASS 3/3 (no WARNs); verify_batch MISSING(exempt)=3 (data_labels);
+lint_verification 3 rows, no problems (NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv);
+irw-validate ok 3/3; check_provenance exit 0, no failures (standing `mixed` review list unchanged).
+Queue: 5 pending, 0 in_progress. Cap is batch_510, not reached.
