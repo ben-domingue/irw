@@ -26565,3 +26565,25 @@ verification_merged.csv and mapping_verification.csv.
   Note corrected. The unusual structure is real: phq1/phq2 are near-uncorrelated with phq3-8, and resp=3 is heavy on phq3-8.
 Batch numbering: highest existing is 450, so this is 451 (the 200-205 and 300-304 holes are long past). Queue: 40 pending. Cap check:
 the Step 0 cap is batch_470, not reached.
+
+## batch_452 — 2026-09-25 18:29–18:45 PDT — 3 tables, 3 written / 0 blocked / 0 failed (yield 3/3)
+
+Tables: roy_2024_sas_sv, SPQVS_Barnby_2017_OEQ, SPQVS_Barnby_2017_SENPQ. Three agents, no kills.
+Gates: normalize_nulls 0/3 changed; audit_batch 3 PASS, no anomalies; verify_batch roy + SENPQ PASS, OEQ exempt
+(data_labels); lint_verification clean (3 rows); irw-validate roy ok, both SPQVS tables WARN name_charset only --
+the live table names are capitalised and the itemtext must match them, so not an itemtext defect; check_provenance no
+new errors (the standing `mixed` review list is unchanged).
+- roy_2024_sas_sv: SAS-SV (Kwon 2013 Appendix S1 English, CC BY), paper_order, PARTIAL (live==deposit 60/60, block
+  structure 1-3 vs 4-7 7/7 with sas3 thin .314/.304; order within blocks and sas8-10 positions unpinned). Shipped as
+  language=Bengali / translated_substitute to match sibling roy_2024_phq9, but the paper states no administration
+  language and cites no Bengali SAS-SV -- JUDGMENT CALL FOR TRIAGE; the note spells out the canonical_instrument
+  alternative. Data finding re-checked by the orchestrator and CONFIRMED: deposit sas_cat does not follow the Methods'
+  cut-offs (31/33, 40); stated cut-offs agree on 580/1019 rows; deposit bands are 10-21 / 22-33 / 32-60, and Table 1's
+  82.04% "Addicted" uses them. Source property, not an itemtext defect.
+- SPQVS_Barnby_2017_OEQ: data_labels (cleaned .sav variable labels), resp key from raw word strings 191/191. Paper
+  calls it OEQ7 but data carry 6 items; orchestrator re-checked TOTOEQ7 == sum of the 6 on 191/191 (mean 9.90, SD
+  2.84 = paper Table 2), public_note written. NOT_NEEDED tracker row added in both files.
+- SPQVS_Barnby_2017_SENPQ: data_labels + VERIFIED against the raw Opinio export (3056/3056 cells; best off-diagonal
+  159/191; items 3 and 7 zero resp=5 as the paper states). Top anchor ships as "Almost Always" (export/form) though the
+  paper's prose says "Always".
+Queue: 37 pending. Cap check: Step 0 cap is batch_470, not reached.
