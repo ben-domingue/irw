@@ -27436,3 +27436,23 @@ Gates: normalize_nulls 0/3 changed; audit_batch PASS 3/3 (no WARNs); verify_batc
 lint_verification 3 rows, no problems (NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv);
 irw-validate ok 3/3; check_provenance no failures (standing `mixed` review list unchanged).
 Queue: 20 pending (2 more spain_2013_defense_* siblings next, then spain_2017_politics_*), 0 in_progress. Cap is batch_510, not reached.
+
+## batch_492 -- 2026-09-26T00:07:35 (-07:00), 3 tables, 3 agents (#2381, CIS 2998 defensa 2013 + CIS 3184 política fiscal 2017)
+Numbering: highest existing batch 491 (excluding the 200-205 / 300-304 holes), so 492.
+Written 3 / blocked 0 / failed 0; yield 3/3 (100%). Last two of the eleven spain_2013_defense_* tables, and the first spain_2017_politics_* table.
+- spain_2013_defense_sacrifice (P7a01-P7a07, would you sacrifice/risk your life for..., Sí/No; 14 rows)
+- spain_2013_defense_threats (P901-P912, importance of twelve security risks 0-10, only endpoints 0 'Nada importante' / 10 'Muy importante' labelled so resp 1-9 blank; 132 rows)
+- spain_2017_politics_agreement (P2301-P2304, tax-fraud attitude statements, Más bien de acuerdo / Más bien en desacuerdo; 8 rows) -- CIS Estudio 3184 'Opinión pública y política fiscal (XXXIV)', July 2017, MD3184.zip newly downloaded and hashed.
+All three: data_labels (CIS variable names lower-cased by the .do), study_materials + machine_translation (issues-page
+entries owed once live). Each agent rebuilt its table from the DA file per the .do and reproduced live exactly (7727 / 25973 / 9061 rows).
+Rights: existing CIS "allow" register row.
+Orchestrator Step 5b checks, all CONFIRMED against the files:
+- sacrifice: ES2998 value label 1 'Si' (ES2998.utf8 line 255) vs questionnaire header 'Sí' (cues.txt line 94); questionnaire wording shipped.
+  Routing claim re-counted from DA2998: P7 (col 54) code 1 = 1169 records; P7a code 0 on all seven items = 1310 records. P.7a asked only of P.7 'yes'; disclosed in public_note.
+- threats p907: ES2998 label 'biológicas' (line 58) vs questionnaire 'Biológicas' (cues_raw.txt line 129); questionnaire wording shipped.
+- agreement: grid headers abbreviated 'de ac.' / 'en desac.' (cues.txt 268); option_text uses the full ES3184 value labels (es.txt 413-419), which are also the stem's own wording (cues.txt 265-266). Disclosed.
+Caveats (notes): sacrifice drops code 0 (not asked) and 8/9; threats drops 98/99 (126-508 per item); agreement drops 8/9 (4-15% per item).
+Gates: normalize_nulls 0/3 changed; audit_batch PASS 3/3 (no WARNs); verify_batch MISSING(exempt)=3 (data_labels);
+lint_verification 3 rows, no problems (NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv);
+irw-validate ok 3/3; check_provenance exit 0, no failures (standing `mixed` review list unchanged).
+Queue: 17 pending (spain_2017_politics_* siblings next), 0 in_progress. Cap is batch_510, not reached.
