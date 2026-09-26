@@ -27655,3 +27655,14 @@ Written 3 / blocked 0 / failed 0 — yield 100%. All data_labels, text_source=st
 Step 5b orchestrator re-check: CONFIRMED from 3495_num.csv -- code 0 on P13_1 and P18_1_1 is exactly the 124 P10=2 records (0 elsewhere; P10=8/9 1+2 records were asked); 98/99 counts P3_1 9, P13_1 22, P19 3. ES3495 /P3_1.. and /P13_1-3 labels re-read, match agents' reports.
 Gates: normalize_nulls 0/3 changed; audit_batch PASS 3 (no WARNs); verify_batch MISSING(exempt) 3 (data_labels); lint_verification 3 rows, no problems (NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv); irw-validate ok 3/3; check_provenance exit 0 (standing `mixed` review list unchanged).
 Queue: 22 pending, 0 in_progress. Cap is batch_520, not reached.
+
+## batch_509 — 2026-09-26T02:41 (claimed 02:35:00-07:00), 3 agents (#2381 slice 15, CIS 3495)
+Numbering: highest existing batch 508 (excluding the 200-205 / 300-304 holes), so 509.
+Tables 3: spain_2025_ai_concern, spain_2025_ai_datause, spain_2025_ai_eventsagree (CIS Estudio 3495 'Inteligencia artificial'; source files copied per agent from .cache/spain_2025_ai_aspects/, MD3495.zip sha256 ed7e1215… re-checked). All under the CIS register row (allow).
+Written 3 / blocked 0 / failed 0 — yield 100%. All data_labels, text_source=study_materials, translation_source=machine_translation, language=Spanish (issues-page lines owed once live).
+- concern (P.5/P.6, 2 items, Muy preocupado/a / Bastante / Poco / Nada preocupado/a, 8 rows). Option text from the questionnaire's printed rows (value labels spell out 'Bastante preocupado/a'); P.6 is a follow-on ('¿Y por …?') shipped as worded. .do drops 3 '(NO LEER) Regular' and 6 'No usa Internet' besides 8/9, so resp {1,2,4,5}. About personal-data privacy, not AI. Rebuild 7952 rows / 3994 ids exact.
+- datause (P.8, p8_1-p8_4, Muy de acuerdo..Muy en desacuerdo, 16 rows). Labels match questionnaire 4/4 in order. .do drops volunteered midpoint 3 with 8/9 -> resp {1,2,4,5}. Rebuild 15714 rows / 4002 ids exact.
+- eventsagree (P.18a, p18_2_1-p18_2_4, 16 rows). Labels match 4/4; P.18 'heard of' stem left to sibling awareness. .do drops 0 (not asked: not heard of event) and midpoint 3 with 8/9. Rebuild 7908 rows / 3340 ids exact.
+Step 5b orchestrator re-check: CONFIRMED from 3495_num.csv -- dropped counts match agents exactly (P5 code3 17/code6 13, P6 8/3; P8_1-4 code3 12/33/11/7; P18_2_1-4 code0 1933/2048/2399/1191, code3 11/29/26/67), and data/spain_2025_ai.do lines 86, 208-211, 559-560 carry those inlist() drops.
+Gates: normalize_nulls 0/3 changed; audit_batch PASS 3 (no WARNs); verify_batch MISSING(exempt) 3 (data_labels); lint_verification 3 rows, no problems (NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv); irw-validate ok 3/3; check_provenance exit 0 (standing `mixed` review list unchanged).
+Queue: 19 pending, 0 in_progress. Cap is batch_520, not reached.
