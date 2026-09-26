@@ -26846,3 +26846,25 @@ irw-validate ok; check_provenance: table listed as machine_translation owing an 
 Step 5b re-check: orchestrator's verify_batch.R run reproduced all 8 counts from live data independently of the agent -- CONFIRMED.
 Queue: 0 pending, 0 in_progress -- QUEUE EXHAUSTED (308 blocked, 13 failed, 427 excluded remain). Cap check: the Step 0 cap is
 batch_470, not reached; the next firing will stand down on the empty-queue condition.
+
+## batch_466 — 2026-09-25T20:39-20:45-07:00 — 3 tables, 3 written / 0 blocked / 0 failed (yield 3/3)
+First round on #2381 slice 10 (50 rights-cleared re-audit tables, queued in 57def377). Numbering: highest existing was batch_465,
+so batch_466 (the 200-205 / 300-304 holes are long behind the series; the literal "below 300" wording in Step 1 is stale).
+Tables: liem_2024_cleaner_production (25 rows), liem_2024_customer_pressure (20), liem_2024_green_competitive_adv (20) -- all
+from Liem & Hien 2024 PLOS ONE e0306616 (CC BY), same paper and same route as liem_2024_attitude_env (batch_078).
+- All three: mapping_basis=paper_explicit (Table 2 prints each item beside the S1 Data column code the processing script keeps as
+  the item code), text_source=translated_substitute / study_supplied / language=Vietnamese (inferred: 234 Vietnamese CEOs, paper
+  never names the language; no Vietnamese wording published), endpoints only (1 strongly disagree / 5 strongly agree), 2-4 blank.
+- Wording is only in the Table 2 IMAGE (.t002), transcribed by eye -- worth a human spot-check on all three.
+- Verification: route 9 + explicit code labels, VERIFIED x3. Per-item resp 1-5 counts, S1 vs live, exact on the diagonal and
+  nowhere off it (smallest off-diagonal L1: CP 4, CuP 20, GCA 16). Loadings-vs-PC1 corroboration Spearman 0.90 / 1.00.
+- Rights: silence throughout (origins Severo 2015 Elsevier, Chu 2017 CC BY 4.0, Lin & Chen 2017 Springer; no reserving clause).
+- Minor inconsistency for triage: customer_pressure straightened a curly apostrophe (as attitude_env did); green_competitive_adv
+  kept "company’s" curly as printed. Neither is wrong; pick one if it matters.
+Gates: normalize_nulls 0/3 changed; audit_batch PASS x3; verify_batch PASS x3; lint_verification clean; irw-validate ok x3;
+check_provenance exit 0, no batch_466 table named.
+Step 5b re-check: nothing overrode a source or reported a data defect; verify_batch.R reproduced all per-item counts from live
+data independently of the agents -- CONFIRMED.
+Housekeeping: itemtext/mapping_verification.csv had no trailing newline, so the first appended row fused onto
+argentina_2012_tobacco_policy's line; split back apart and re-parsed (7 fields every row; readr's row-1702 complaint predates this).
+Queue: 47 pending, 0 in_progress. Cap is batch_490, not reached.
