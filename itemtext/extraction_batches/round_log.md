@@ -27568,3 +27568,16 @@ Gates: normalize_nulls 0/3 changed; audit_batch PASS 2 / WARN 1 (necessities row
 lint_verification 3 rows, no problems (NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv);
 irw-validate ok 3/3; check_provenance exit 0, no failures (standing `mixed` review list unchanged).
 Queue: 43 pending, 0 in_progress. Cap is batch_520, not reached.
+
+## batch_502 — 2026-09-26T01:50 (claimed 01:39:37-07:00), 3 agents (#2381 slice 12, ESRU-EMOVI 2023)
+Numbering: highest existing batch 501 (excluding the 200-205 / 300-304 holes), so 502.
+Tables 3: mexico_2023_mobility_rooms, mexico_2023_mobility_services, mexico_2023_mobility_spaces (CEEY ESRU-EMOVI 2023; same questionnaire / entrevistado_2023.dta / Diccionario as batches 496-501, zips copied per agent from .cache/mexico_2023_mobility_neighborhood/, hashes checked).
+Written 3 / blocked 0 / failed 0 — yield 100%. All data_labels (EMOVI variable names lowercased by data/mexico_2023_mobility.do). text_source=study_materials, translation_source=machine_translation, language=Spanish (issues-page lines owed once live).
+- rooms (P29 a-g, dwelling spaces at age 14, 14 rows Sí/No). .do drops code 8 (NS): 27/37/24/69/49/49/15 (270); 1 all-8 record -> 17842 ids. .dta labels carry a shortened but correct P29 stem (no batch_500-style borrowed stem).
+- services (P95 a-e, current dwelling services, 10 rows Sí/No). No sentinels (1/2 only). p95e .dta label shortened ("servicio doméstico"); full questionnaire text (= Diccionario 5/5) shipped. Step 3b: P95 (current), not P26 (age-14, table _utilities).
+- spaces (P94 a-g, current dwelling spaces, 14 rows Sí/No). No sentinels. Same seven rows as P29 in the present tense; stem confirmed P94.
+Step 5b orchestrator re-check: read entrevistado_2023.dta directly (17843 records). p29a-g code-8 27/37/24/69/49/49/15, 0 NA, 1 row all-8; p94a-g and p95a-e only 1/2, 0 NA; label stems P29 age-14 / P94 "¿Esta vivienda cuenta con...?" / P95 "¿En esta vivienda tienen...?" as the agents said. All match the agents.
+Gates: normalize_nulls 0/3 changed; audit_batch PASS 3/3 (no WARNs); verify_batch MISSING(exempt)=3 (data_labels);
+lint_verification 3 rows, no problems (NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv);
+irw-validate ok 3/3; check_provenance exit 0, no failures (standing `mixed` review list unchanged).
+Queue: 40 pending, 0 in_progress. Cap is batch_520, not reached.
