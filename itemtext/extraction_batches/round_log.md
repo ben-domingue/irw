@@ -26949,3 +26949,30 @@ Written 3 / blocked 0 / failed 0. Yield 3/3. Breaker not tripped (0% failed).
 - Next: remaining eldor_2022_* (school_resilience, symbolic_threat, violent_intentions) sit on the same XLSX. violent_intentions
   ships the unreversed originals (_4r/_5r/_7r excluded); the 42RC trick above suggests *r labels may carry Norwegian too.
 Queue: 35 pending, 0 in_progress. Cap is batch_490, not reached.
+
+## batch_471 — 2026-09-25 21:18–21:3x PDT (3 tables, 3 agents)
+Written 2 / blocked 1 / failed 0. Yield 2/3. Breaker not tripped (0% failed).
+- Numbering: highest existing is 470 (series consecutive 305..470), so 471. Step 1's "compute over directories below 300"
+  wording would literally yield 300 -> 305, which already exists; the intent (skip 300-304 only) was applied.
+- All three from the same deposit as batches 469/470 (figshare 21531195 file 38165901, sha256 e154bda7..., CC BY 4.0; paper
+  PMC9685524 CC BY). data_labels, translated_substitute / study_supplied, language Norwegian; anchors 1/4/7 only.
+- eldor_2022_symbolic_threat (3 items x 1-7): WRITTEN. 21/21 item x level counts deposit = live; alpha 0.921 vs paper 0.91.
+  Paper's example item ("My ethnic culture is threatened by other groups in Norway") matches no deposit label (closest _1
+  "My ethnic group's culture is being threatened because of other ethnic groups in Norway.") -- orchestrator re-checked the
+  paper text and the shipped labels; label shipped, discrepancy in public_note (same pattern as realistic_threat_3).
+- eldor_2022_violent_intentions (7 items x 1-7): WRITTEN. _4r/_5r/_7r carry NO variable labels (so no Norwegian recovered,
+  unlike political_resilience_42RC); each = 8 - x on every row. Live holds unreversed originals; 49/49 counts = deposit;
+  alpha 0.900 vs paper 0.90. Double spaces and mixed apostrophes kept as printed. Rights flag for triage: origin Obaidi et al.
+  (2024, J Personality) article is CC BY-NC-ND -- article licence, not a stated term on the scale, so not treated as a block.
+- eldor_2022_school_resilience (5 items): BLOCKED on rights (retry test NO). Items are Hanson & Voight (2014, ERIC ED546900)
+  Figure 1 "Safety and connectedness", "Adapted with permission from California School Climate, Health, and Learning Survey
+  ... by WestEd, 2010". Orchestrator re-check: the five labels appear verbatim at hv2014.txt 676-680 under that source line,
+  and calschls.org/survey-administration/downloads/ (re-fetched 2026-09-25) says "The CalSCHLS surveys are copyright
+  protected. Reproduction without permission is prohibited." Clean candidate banked at
+  .cache/eldor_2022_school_resilience/HELD_*.csv (validate PASS, 35/35 counts = live). FOR TRIAGE: no CalSCHLS/CHKS register
+  row exists -- suggest adding a `block` row; the agent also raises that the connectedness items may derive from Add Health
+  (Resnick et al. 1997), which Ben could rule governs instead. pending_index_notes row added.
+- Gates: normalize_nulls 0/2 changed; audit_batch 2 PASS / 0 WARN; verify_batch MISSING(exempt)=2; lint_verification clean
+  (NOT_NEEDED rows in both files); irw-validate ok x2; check_provenance exit 0 (standing `mixed` review list unchanged).
+- The eldor_2022_* family is now finished (10 tables across batches 469-471).
+Queue: 32 pending, 0 in_progress. Cap is batch_490, not reached.
