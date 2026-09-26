@@ -27062,3 +27062,36 @@ Written 3 / blocked 0 / failed 0. Yield 3/3. Breaker not tripped (0% failed).
   (NOT_NEEDED rows in both files); irw-validate ok x3; check_provenance exit 0 (standing `mixed` review list unchanged).
 - Agents dispatched in the foreground in one message; all returned before Step 3.
 Queue: 23 pending, 0 in_progress. Cap is batch_490, not reached.
+
+## batch_475 -- 2026-09-25T21:52:56-07:00 (closed 21:58)
+3 tables claimed, 3 agents (one per table). Written 3 / blocked 0 / failed 0; yield 3/3. Circuit breaker not tripped.
+Batch numbering: highest existing is 474, so this is 475 (holes 200-205 and 300-304 long behind us).
+- spain_2012_entrepreneurship_economy (2 items p4, p5 x 1-3): WRITTEN. CIS Estudio 2938. mapping_basis=paper_explicit
+  (ES2938 carries value labels but NO variable labels for P4/P5; codes are the CIS names, questionnaire prints P.4/P.5
+  at column markers (38)/(39)). Step 5b VERIFIED via marginals: live p4 42/506/854, p5 240/523/554 = PREGUNTA 4/5 cell
+  for cell, swap fails every cell; verify_ script PASS. Stems read from the image questionnaire and found verbatim in
+  the marginals text layer. resp 1 = Mejor .. 3 = Peor (higher = worse). Underlining of "hace un año"/"dentro de un
+  año" not representable, words unchanged. instructions/section_prompt blank (each item is a full question).
+- spain_2012_entrepreneurship_education (4 items p2101-p2104 x 1-4): WRITTEN. data_labels (ES2938 variable labels =
+  item_text 4/4). P.21 lead-in in instructions. Items carry CIS's printed tense alternatives with slashes
+  ("Te ayuda/ayudó", "Hace/hizo que te intereses/interesases"), shipped literally. resp 1 = Muy de acuerdo.
+- spain_2012_entrepreneurship_friends (5 items p1201-p1205 x 1-3): WRITTEN. data_labels; 4/5 labels exact, p1203
+  ships the questionnaire/marginals "Región/país de origen" rather than the SPSS label "Región, país de origen".
+  Lead-in mentions "sexo" but CIS printed and recorded no sex row -- shipped literally, noted publicly. resp
+  1 = Más de la mitad .. 3 = Menos de la mitad (higher = fewer same-group friends). Don't-know high on p1204 (270/1437)
+  and p1205 (184) -- dropped to missing by the .do.
+- All three: Spanish base text, machine_translation English in _translated -> issues-page entries owed once uploaded
+  (check_provenance lists them as HELD). Rights: existing CIS "allow" register row (irw#2381); no new register row.
+- Orchestrator re-check (Step 5b): raw DA2938 counts for all 11 items reproduce Es2938pdf.pdf marginals in printed
+  order -- p4 cols 38/39 exactly (42/506/854/35; 240/523/554/119/1); p1201-p1205 cols 79-83 percentages 75.3/17.7/5.4,
+  59.6/26.2/12.4, 74.9/12.2/10.7, 36.8/29.6/13.8, 50.2/20.5/15.7 row for row; p2101-p2104 cols 131-134 9.8/36.6/37.4/13.6,
+  9.0/38.6/36.4/13.2, 6.8/23.8/49.5/17.0, 6.5/23.6/47.2/19.7 column for column. ES2938 labels for p2101-p2104 match
+  shipped text. Confirms the code->text link for the two data_labels tables and the economy verification.
+- Gates: normalize_nulls 0/3 changed; audit_batch 3 PASS / 0 WARN; verify_batch PASS=1, MISSING(exempt)=2;
+  lint_verification clean (NOT_NEEDED rows in both files); irw-validate ok x3; check_provenance exit 0 (standing
+  `mixed` review list unchanged).
+- Housekeeping, pre-existing and NOT fixed: mapping_verification.csv parses cleanly with Python csv but R read.csv
+  warns "EOF within quoted string" (1795 rows at HEAD) and readr flags row ~1702 (lunacortes_2019_self_congruity,
+  batch_437, 25 columns) -- a quoting defect in an existing evidence string. Rows for this round were appended raw.
+- Agents dispatched in the foreground in one message; all returned before Step 3.
+Queue: 20 pending, 0 in_progress. Cap is batch_490, not reached.
