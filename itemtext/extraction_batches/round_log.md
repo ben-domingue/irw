@@ -27250,3 +27250,20 @@ notes.csv) / 1 INFO. irw-validate ok 2/2; check_provenance exit 0 (standing `mix
 Both ship IRW machine translation -> issues-page entries owed once live. Questionnaire itself is not in the 61-pp PDF, so
 instructions/section_prompt blank on both. No data defects.
 Queue: 0 pending, 0 in_progress -- QUEUE EXHAUSTED; the next firing will stop at Step 0. Cap (batch_490) not reached.
+
+## batch_483 -- 2026-09-25T22:57 (-07:00), 3 tables, 3 agents (#2381 slice 11, CIS 3212 housing)
+Numbering: highest existing batch 482, so 483.
+Written 3 / blocked 0 / failed 0; yield 3/3 (100%).
+- spain_2018_housing_amenities (P6_1..6, dwelling has kitchen/AC/landline/internet/garage/storage, Si=1/No=2; 12 rows)
+- spain_2018_housing_building (P12 + P13_1..7 satisfaction with building, Muy..Nada satisfecho/a 1-4; 32 rows). P13_4 keeps the
+  questionnaire's unaccented "frio" (SPSS label reads "frío") -- literal transcription, noted.
+- spain_2018_housing_dwelling (P9_1..6 satisfaction with dwelling aspects, 1-4; 24 rows)
+All three: data_labels (item codes = CIS ES3212 variable names; labels match cues3212 questionnaire 6/6, 8/8, 6/6),
+study_materials + machine_translation (CIS publishes Spanish only -> issues-page entries owed once live). Each agent rebuilt its
+table from DA3212 per the .do and reproduced live exactly. Rights: existing CIS "allow" register row (line 117) covers it.
+Step 5b orchestrator check: irw_table_sets row counts 14799 / 19307 / 14771 equal 2468 x n_items minus the agents' reported
+dropped 8/9 counts (9 / 437 / 37) -- CONFIRMED; .do has no reversal (only 8/9 -> missing, lines 53/90/127), so resp is raw CIS code.
+Gates: normalize_nulls 0/3 changed; audit_batch PASS 3/3, no anomalies (no WARNs); verify_batch MISSING(exempt)=3 (data_labels);
+lint_verification 3 rows, no problems (NOT_NEEDED rows written to both verification_merged.csv and mapping_verification.csv);
+irw-validate ok 3/3; check_provenance exit 0 (standing `mixed` review list unchanged).
+Queue: 44 pending (6 more spain_2018_housing_* siblings next), 0 in_progress. Cap is batch_510, not reached.

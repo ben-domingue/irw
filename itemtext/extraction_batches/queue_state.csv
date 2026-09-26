@@ -2459,9 +2459,9 @@ argentina_2012_aging_change,done,batch_481,2026-09-25T22:47:46-07:00
 argentina_2012_aging_dependence,done,batch_481,2026-09-25T22:47:46-07:00
 argentina_2012_aging_health,done,batch_482,2026-09-25T22:50:22-07:00
 argentina_2012_aging_instrumental,done,batch_482,2026-09-25T22:50:22-07:00
-spain_2018_housing_amenities,pending,,
-spain_2018_housing_building,pending,,
-spain_2018_housing_dwelling,pending,,
+spain_2018_housing_amenities,done,batch_483,2026-09-25T22:57:24-07:00
+spain_2018_housing_building,done,batch_483,2026-09-25T22:57:24-07:00
+spain_2018_housing_dwelling,done,batch_483,2026-09-25T22:57:24-07:00
 spain_2018_housing_measures,pending,,
 spain_2018_housing_neighborhood,pending,,
 spain_2018_housing_opinions,pending,,
