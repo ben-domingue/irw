@@ -26668,3 +26668,24 @@ irw-validate 3 ok; check_provenance exit 0 (standing enem / `mixed` REVIEW lists
     university students N=650", preprint says junior high students aged 12-15 (113/188/212/137). The availability audit's
     403 for rs-7750527 is stale (versioned /v1 URLs now return 200).
 Queue: 25 pending, 0 in_progress. Cap check: Step 0 cap is batch_470, not reached.
+
+**batch_457 — 2026-09-25 ~19:25-19:35 PDT.** 3 tables (3 agents): **3 written / 0 blocked / 0 failed**, yield 3/3.
+Numbering: highest existing was batch_456, so 457 (continuing consecutively as rounds 306-456 did; Step 1's literal
+"below 300" wording still needs the amendment flagged at batch_454). Gates: normalize 0 of 3 changed; audit 3 PASS;
+verify_batch PASS=2, MISSING(exempt)=1 (ppq_music, data_labels); lint clean (3 rows); irw-validate 3 ok;
+check_provenance exit 0 (standing `mixed` REVIEW list only, none of this batch).
+- goldberg_2018_ppq_dream (31 rows; dream1 7 options, dream5 4, others 5): data_labels (PPQ .sav variable labels = printed
+  PPQ_FINAL.pdf p.7 "Your Dreams" 6/6), Dataverse BTNABX CC0. .sav has no value labels, so option<->resp rests on printed
+  order; agent still wrote a PARTIAL verification row + verify script for the option axis (dream5's 2x2 grid read
+  column-major, supported by strictly rising dream2/3/6 means over dream5=1..4). verify PASS.
+- goldberg_2018_ppq_music (20 rows, music1-5 x 1-4): data_labels, same deposit; NOT_NEEDED tracker row added in both
+  files. Options by printed order (.sav unlabelled; 20/20 cell counts match live). Scope note: music6-9 and muinst1-8 from
+  the same form section are in no live table (processing script MIN_BLOCK / constant columns) -- not a defect.
+- hao_2025_social_regulation (40 rows, SR1-SR8 x 1-5): paper_order / canonical_instrument / official_instrument_english,
+  Guo & Li 2022 FLLRS items 17-24 (item 16 dropped in their EFA). option_text blank, **following the batch_456 blank-anchor
+  convention -- still Ben's decision for the whole hao_2025 family.** Verification PARTIAL (top inter-item pair SR1-SR2
+  r=.635 = the parallel-worded help-seeking pair; max-SD marker SR7 = Guo item 23; highest mean SR4 = Guo item 20; overall
+  mean-rank rho only .419, SR5/6/8 unseparated); verify script PASS, which is the orchestrator's re-check of those numbers.
+  Guo & Li's English/Chinese diverge on item 17 (encouragement vs help); both shipped as printed. Same dictionary defect
+  as batch_456 (university vs junior-high sample).
+Queue: 22 pending, 0 in_progress. Cap check: Step 0 cap is batch_470, not reached.
