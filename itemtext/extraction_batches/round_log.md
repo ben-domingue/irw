@@ -27607,3 +27607,16 @@ Gates: normalize_nulls 0/3 changed; audit_batch first run ERROR on contact ("cou
 lint_verification 3 rows, no problems (NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv);
 irw-validate ok 3/3; check_provenance exit 0, no failures (standing `mixed` review list unchanged).
 Queue: 34 pending, 0 in_progress. Cap is batch_520, not reached.
+
+## batch_505 — 2026-09-26T02:07 (claimed 02:02:26-07:00), 3 agents (#2381 slice 12, CIS 3119)
+Numbering: highest existing batch 504 (excluding the 200-205 / 300-304 holes), so 505.
+Tables 3: spain_2015_immigration_diversity, spain_2015_immigration_education, spain_2015_immigration_health (CIS Estudio 3119, Actitudes hacia la inmigración VIII, Nov-Dec 2015, N=2470; MD3119.zip copied per agent from .cache/spain_2015_immigration_acceptability/, sha256 4beb4767… checked; covered by the CIS register row, line 117).
+Written 3 / blocked 0 / failed 0 — yield 100%. All data_labels. text_source=study_materials, translation_source=machine_translation, language=Spanish (issues-page lines owed once live).
+- diversity (P.9, 4 items p901-p904 Países/Culturas/Religiones/Color de piel, 0-10, 44 rows). Only 0 "Muy negativo" / 10 "Muy positivo" labelled; 1-9 blank. item_text is the grid completion of the stem, full stem in instructions (public_note says so). 98/99 dropped 144/12, 142/7, 180/27, 187/32; 2352 ids.
+- education (P.15, p1501-p1504, Muy de acuerdo..Muy en desacuerdo, 16 rows). p1501 ships the SPSS label "en las escuelas" over the questionnaire typo "en la escuelas" (noted). 8/9 dropped 294/22, 289/17, 133/19, 446/9; 2426 ids. Step 3b: P.15, not the parallel P.14 (_health) with the same card H.
+- health (P.14, p1401-p1404, same card H, 16 rows). 8/9 dropped 135/1, 293/2, 89/12, 374/1; 2453 ids. Step 3b: P.14, not P.15/P.21 (same labels; codes/columns decide).
+Step 5b orchestrator re-check: read DA3119 directly (2470 records, all three agents' copies md5-identical) at cols 61-68 / 84-87 / 80-83. Every per-item code count and ids/rows 2352/9149, 2426/8651, 2453/8973 match the agents; item texts checked not swapped between health (sanitaria) and education (escuelas/colegio).
+Gates: normalize_nulls 0/3 changed; audit_batch PASS 3/3 (no WARNs); verify_batch MISSING(exempt)=3 (data_labels);
+lint_verification 3 rows, no problems (NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv);
+irw-validate ok 3/3; check_provenance exit 0, no failures (standing `mixed` review list unchanged).
+Queue: 31 pending, 0 in_progress. Cap is batch_520, not reached.
