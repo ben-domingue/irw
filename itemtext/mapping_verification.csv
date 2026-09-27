@@ -1973,3 +1973,4 @@ spain_2014_family_chores,batch_558,data_labels,,exempt: data_labels,NOT_NEEDED,m
 spain_2014_family_conflicts,batch_559,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 spain_2014_family_families,batch_560,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 spain_2014_family_housework,batch_561,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
+spain_2014_family_importance,batch_562,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text

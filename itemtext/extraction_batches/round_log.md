@@ -28191,3 +28191,11 @@ batch_519 directory was removed. No work was discarded.
 - Orchestrator re-check: table_sets 3031 rows, items p40a01-04, resp {1,2,3}, per-item n 1003/588/413/1027 = agent's per-level sums; ES3032 P40A value labels (4 = 'No procede, no hace esas tareas') and questionnaire crop p40a_head.png ("SÓLO A QUIENES TIENEN TRABAJO REMUNERADO (1 en P.40)" / "¿Podría decirme si tiene dificultad ... para compaginar su trabajo con...?") confirm the description claim.
 - Written 1 / blocked 0 / failed 0; yield 100%. Gates: normalize 0 changed, audit WARN (explained), verify_batch MISSING(exempt), lint clean, irw-validate ok, check_provenance exit 0.
 - Numbering: highest existing (560)+1 = 561. Cap batch_571 not reached. 6 pending remain.
+
+## batch_562 — 2026-09-27 ~14:04-14:10 PDT (1 table, 1 agent)
+- spain_2014_family_importance: WRITTEN, 36 rows (9 items p101-p109 x 4 options), one section, full P.1 question in instructions. data_labels / study_materials / machine_translation (CIS Estudio 3032, Spanish-only; issues-page line owed at upload). ES3032 labels match questionnaire page 1 (300-dpi render) 9/9; .do Bookmark 1, cols 29-37.
+- Caveats (notes.csv): scale 1 = Muy importante ... 4 = Nada importante (lower = more important, in public_note); .do drops 8 N.S. (2/1/9/3/3/0/1/99/14) and 9 N.C. (11/4/21/13/14/3/7/22/12); questionnaire underline on "si representan para Ud. en su vida" not representable.
+- Agent rebuild from DA3032 reproduces live 21937/21937 rows, 2464 ids, 0 resp/cov_age mismatches. Step 5b exempt (data_labels); NOT_NEEDED row in verification_merged.csv and mapping_verification.csv. Dictionary Description matches P.1.
+- Orchestrator re-check: table_sets per-item n 2451/2459/2434/2448/2447/2461/2456/2343/2438 (sum 21937), resp 1-4 on every item; each equals 2464 minus the agent's code-8 and code-9 counts. No source overrides, no data defects claimed.
+- Written 1 / blocked 0 / failed 0; yield 100%. Gates: normalize 0 changed, audit PASS, verify_batch MISSING(exempt), lint clean, irw-validate ok, check_provenance exit 0.
+- Numbering: highest existing (561)+1 = 562. Cap batch_571 not reached. 5 pending remain.
