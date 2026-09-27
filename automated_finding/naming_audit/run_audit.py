@@ -8,6 +8,15 @@
 Writes audit_<tag>.csv (one row per table, every verdict including `ok`).
 Feed that to finalize.py to produce the reviewed suspects file.
 
+WHICH rows to audit comes from the dictionary's intake columns (`Contributor`,
+`Date`), which only the entry surfaces carry: the sheet, plus
+`dictionary_auto.csv`, whose rows need not ever be pasted into the sheet. WHAT each
+row says -- its DOI and Reference -- comes from the published export,
+`metadata/*biblio*.csv`, wherever the table has reached it (#2067). The export
+carries corrections the sheet never receives, and an audit of the names users
+see should read the citations users see. `values_from` in the output says
+which record supplied each row.
+
 Cost: ~1 HTTP GET per distinct DOI, throttled. A cold full sweep is ~1,900
 requests / 4-6 min; with a warm doi_cache/ only new rows hit the network.
 """
@@ -17,6 +26,7 @@ sys.path.insert(0, os.path.join(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 from naming_check import *
 from doi_hygiene import classify
+from published_dictionary import load_auto_rows, load_published
 
 def verdict_row(tbl, doi_raw, ref, date):
     """Verdict one dictionary row. Pure apart from fetch()'s cached HTTP."""
@@ -94,20 +104,42 @@ def main():
     args = ap.parse_args()
 
     d = load_dictionary(args.dict)
+    # dictionary_auto.csv rows need not be on the sheet; a sheet row wins where
+    # both name a table, as it does in the export (dict_union.R).
+    auto = pd.DataFrame(list(load_auto_rows().values()), dtype=str)
+    if len(auto):
+        seen = set(d['table'].fillna('').str.lower())
+        auto = auto[~auto['table'].fillna('').str.lower().isin(seen)]
+        d = pd.concat([d, auto[[c for c in auto.columns if c in d.columns]]],
+                      ignore_index=True)
     a = d[d['Contributor'].fillna('') == args.contributor].copy()
     if args.date:
         a = a[a['Date'] == args.date].copy()
-    print(f'dictionary rows: {len(d)}; contributor={args.contributor!r}: {len(a)}', file=sys.stderr)
+    print(f'dictionary rows: {len(d)} (incl. {len(auto)} from dictionary_auto.csv); '
+          f'contributor={args.contributor!r}: {len(a)}', file=sys.stderr)
 
-    rows = []
+    published = load_published()
+    rows, sources = [], {}
     for i, (_, r) in enumerate(a.iterrows()):
-        rows.append(verdict_row(r['table'], r['DOI (for paper)'],
-                                r['Reference'] if isinstance(r['Reference'], str) else '',
-                                r['Date']))
+        rec = published.get(str(r['table']).strip().lower())
+        if rec is not None:
+            # A data DOI moved to its own column by the export is still the
+            # row's only DOI; classify() below reports it as unverifiable.
+            doi_raw, ref, src = rec['doi'] or rec['data_doi'], rec['reference'], rec['file']
+        else:
+            doi_raw = r['DOI (for paper)']
+            ref = r['Reference'] if isinstance(r['Reference'], str) else ''
+            src = 'dictionary entry (not yet exported)'
+        row = verdict_row(r['table'], doi_raw, ref, r['Date'])
+        row['values_from'] = src
+        sources[src] = sources.get(src, 0) + 1
+        rows.append(row)
         if (i + 1) % 100 == 0:
             print(f'{i+1}/{len(a)}', file=sys.stderr, flush=True)
 
     df = pd.DataFrame(rows)
+    print('values from: ' + ', '.join(f'{k} {v}' for k, v in sorted(sources.items())),
+          file=sys.stderr)
     tag = (args.date or 'all').replace('/', '-')
     out = args.out or os.path.join(SC, f'audit_{tag}.csv')
     df.to_csv(out, index=False)

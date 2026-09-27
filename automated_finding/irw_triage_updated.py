@@ -780,6 +780,157 @@ def triage_dataset(df_raw: pd.DataFrame) -> Triage:
     return Triage(flag, reasons, coerce, checks, meta)
 
 
+#: The human_assistance reasons a misread file produces. A banner row, a
+#: two-row survey-tool header or a headerless .tsv all turn a clean item matrix
+#: into a frame whose melt has >50 distinct "responses" (header text, row
+#: numbers) or whose id column is a guess, and a ';' file read with ',' is one
+#: column that no mapping can use (#2221).
+_PARSE_SUSPECT = ("resp has >50 unique values", "Column mapping was a low-confidence guess",
+                  "Automatic IRW formatting failed")
+#: Marker the retriage (irw_retriage_ha.py) keys on. Changing it breaks that rule.
+REREAD_MARKER = "Re-read with"
+
+
+def _alternative_reads(content: bytes, filename: str):
+    """(description, frame) for the obvious other ways to read a tabular file.
+
+    Delimiter sniffing first (a ';' or tab file read with ','), then header
+    rows: one down (a banner line), two rows flattened (SurveyMonkey /
+    Qualtrics exports), and none (a headerless export). Readers that fail are
+    skipped -- this only proposes, it never raises.
+    """
+    import csv as _csv
+    name = (filename or "").lower()
+    excel = name.endswith((".xlsx", ".xls"))
+    if not excel and name.endswith((".sav", ".dta", ".sas7bdat", ".rdata", ".rda", ".rds")):
+        return
+    sep = None
+    if not excel:
+        head = content[:65536].decode("utf-8", errors="replace")
+        try:
+            sep = _csv.Sniffer().sniff(head, delimiters=",;\t|").delimiter
+        except _csv.Error:
+            sep = None
+
+    def read(header, sep_=None):
+        src = io.BytesIO(content)
+        if excel:
+            return pd.read_excel(src, header=header)
+        try:
+            return pd.read_csv(src, sep=sep_ or ",", header=header)
+        except UnicodeDecodeError:
+            return pd.read_csv(io.BytesIO(content), sep=sep_ or ",", header=header,
+                               encoding="latin-1")
+
+    default_sep = "\t" if name.endswith((".tsv", ".tab")) else ","
+    tries = []
+    if sep and sep != default_sep:
+        tries.append((f"sep={sep!r}", 0, sep))
+    use = sep or default_sep
+    shown = "" if use == default_sep else f", sep={use!r}"
+    tries += [(f"header=1{shown}", 1, use), (f"header=[0,1]{shown}", [0, 1], use),
+              (f"header=None{shown}", None, use)]
+    for how, header, sep_ in tries:
+        try:
+            df = read(header, None if excel else sep_)
+        except Exception:
+            continue
+        if isinstance(df.columns, pd.MultiIndex):
+            df.columns = ["_".join(str(p) for p in col
+                                   if not str(p).startswith("Unnamed:")).strip("_")
+                          or f"col{i}" for i, col in enumerate(df.columns)]
+        if header is None:
+            df.columns = [f"V{i + 1}" for i in range(df.shape[1])]
+        if df.shape[1] >= 3 and len(df) >= 10:
+            yield how, _stringify_columns(df)
+
+
+def _small_int_block(df: pd.DataFrame) -> list:
+    """The largest set of columns sharing one small integer domain (#2221).
+
+    The test that sorted all 25 files of the 2026-09-16 PMC batch by hand: an
+    item matrix is a run of numeric columns whose values are integers with
+    2-12 distinct levels and the same min/max. A composite score has many
+    values and no shared domain; a misread header has no numeric block at all.
+    Necessary, not sufficient -- blocks of binary covariates share a domain
+    too -- so the caller names the columns for a person to judge.
+    """
+    groups: dict = {}
+    for c in df.columns:
+        v = pd.to_numeric(df[c], errors="coerce")
+        present = v.dropna()
+        if len(present) < 0.5 * len(df) or present.empty:
+            continue
+        if not (present == present.round()).all():
+            continue
+        if not 2 <= present.nunique() <= 12:
+            continue
+        groups.setdefault((present.min(), present.max()), []).append(c)
+    best = max(groups.values(), key=len, default=[])
+    return best if len(best) >= 3 else []
+
+
+def reread_hint(content: bytes, filename: str, t: Triage) -> str | None:
+    """If `t` looks like a parse failure, try the obvious re-reads (#2221).
+
+    Returns a reason string -- starting REREAD_MARKER -- when one of them
+    triages as `good`, else None. It never changes `t`'s flag: a small-integer
+    block that parses cleanly is necessary, not sufficient, since blocks of
+    binary covariates (comorbidity flags, yes/no SES indicators) have the same
+    shape. It moves the candidate out of `aggregate_continuous` in the
+    retriage, into `recoverable_format`, where someone reads it.
+
+    On the 2026-09-16 PMC batch the retriage called 5 of 8 aggregate files
+    `aggregate_continuous` that were a banner row, a two-row SurveyMonkey
+    header or a headerless .tsv: ~111,000 responses, now #2219.
+    """
+    if t.flag != "human_assistance" or not content:
+        return None
+    if not any(any(r.startswith(p) or p in r for p in _PARSE_SUSPECT) for r in t.reasons):
+        return None
+    def reads():
+        try:
+            yield "no change to the reader", load_table(content, filename=filename)
+        except Exception:
+            pass
+        yield from _alternative_reads(content, filename)
+
+    for how, df in reads():
+        # Whole frame first (a delimiter or header fix may be all it needed),
+        # then only the shared small-integer block: covariates such as height
+        # or a 6-minute-walk distance melted in beside the items are what put
+        # >50 distinct values into `resp` (peerj.8949).
+        block = _small_int_block(df)
+        ids = [c for c in df.columns if str(c).strip().lower() in ("id", "subject", "participant")]
+        frames = [("", df)]
+        if block and len(block) < df.shape[1]:
+            sub = df[ids[:1] + block].copy()
+            if not ids:
+                sub.insert(0, "id", range(1, len(sub) + 1))
+            frames.append((f", keeping only the {len(block)} columns that share one "
+                           f"small integer domain", sub))
+        for scope, frame in frames:
+            try:
+                alt = triage_dataset(frame)
+            except Exception:
+                continue
+            if alt.flag != "good":
+                continue
+            m = alt.metadata or {}
+            resp = alt.coercion.df["resp"] if alt.coercion.df is not None else None
+            span = (f", resp {resp.min():g}-{resp.max():g}"
+                    if resp is not None and len(resp) else "")
+            names = ", ".join(repr(str(c))[:30] for c in (block or [])[:4])
+            return (f"{REREAD_MARKER} {how}{scope}, the file triages as good "
+                    f"({m.get('n_items', '?')} items x {m.get('n_participants', '?')} "
+                    f"respondents{span}) -- likely a parse or column-selection "
+                    f"failure, not aggregate data."
+                    + (f" Item columns start {names}." if names else "")
+                    + " Confirm them by name: a small-integer block can also be "
+                      "binary covariates.")
+    return None
+
+
 def print_report(t: Triage, title: str = "dataset"):
     print(f"\n{'='*64}\n{title}\nFLAG: {t.flag.upper()}\n{'='*64}")
     for r in t.reasons:

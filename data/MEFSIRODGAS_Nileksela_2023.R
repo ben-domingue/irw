@@ -144,7 +144,9 @@ severity_df <- long_df |>
   filter(group == "Severity") |>
   select(-group)
 
+# #2432: _freq previously wrote severity_df (and _severity.Rdata saved freq_df);
+# each output now writes its own group, with empty (not literal "NA") missing cells.
 save(freq_df, file="MEFSIRODGAS_Nileksela_2023_freq.Rdata")
-save(freq_df, file="MEFSIRODGAS_Nileksela_2023_severity.Rdata")
-write.csv(severity_df, "MEFSIRODGAS_Nileksela_2023_freq.csv", row.names=FALSE)
-write.csv(severity_df, "MEFSIRODGAS_Nileksela_2023_severity.csv", row.names=FALSE)
+save(severity_df, file="MEFSIRODGAS_Nileksela_2023_severity.Rdata")
+write.csv(freq_df, "MEFSIRODGAS_Nileksela_2023_freq.csv", row.names=FALSE, na="")
+write.csv(severity_df, "MEFSIRODGAS_Nileksela_2023_severity.csv", row.names=FALSE, na="")

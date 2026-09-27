@@ -51,7 +51,7 @@ from urllib.parse import urlparse
 import requests
 import pandas as pd
 
-from irw_triage_updated import load_table, triage_dataset, irw_metadata, preflight_deps
+from irw_triage_updated import load_table, reread_hint, triage_dataset, irw_metadata, preflight_deps
 from irw_discover_updated import (SourceBlocked, in_runs_dir, resolve_in_path,
                                   canonical_doi)
 
@@ -787,6 +787,10 @@ def process_one(row: dict) -> dict:
         t = triage_dataset(df)
         meta = t.metadata or {}
         reasons = list(t.reasons)
+        # First, so the 400-char cap on `reasons` cannot cut it (#2221).
+        hint = reread_hint(content, fname, t)
+        if hint:
+            reasons.insert(0, hint)
         if unknown:
             reasons.append(f"license_unknown* — license '{license_norm}' not recognised as open; verify before submission")
         return {**base, "flag": t.flag,

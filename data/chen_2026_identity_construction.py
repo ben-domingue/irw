@@ -42,17 +42,6 @@ COVS = {}
 DROP = []
 DROP_REASON = ''
 SCALE = {'pr': (1, 6), 'ai': (1, 6), 'il': (1, 6), 'in': (1, 7), 'ch': (1, 7), 'ie': (1, 7), 'rf': (1, 7), 'ee': (1, 7), 'ir': (1, 7), 'bi': (1, 7)}              # table suffix -> (min, max), or None to infer
-QC_WAIVERS = {
-    # `resp_scale_mixed` reads an item's observed MINIMUM as scale information.
-    # Inside a block every item shares the same maximum; the check fires only
-    # because a 3-item block of ~1,176 cells sometimes has one item that drew a
-    # single bottom-category response and two that drew none. That is floor
-    # non-use, not a second response scale -- and it is a different question
-    # from the 6-vs-7 split above, which is settled on the maximum and on three
-    # blocks having zero 7s across 1,176 cells each.
-    "resp_scale_mixed": "floor non-use within a block; all items in the block "
-                        "share the same maximum",
-}
 
 
 def fetch() -> pd.DataFrame:
@@ -119,9 +108,6 @@ def build() -> None:
 
         checks = run_qc(long)
         fails = [c for c in checks if c.status == "fail"]
-        for c in [c for c in fails if c.name in QC_WAIVERS]:
-            print(f"    WAIVED [{suffix}] {c.name}: {QC_WAIVERS[c.name]}")
-        fails = [c for c in fails if c.name not in QC_WAIVERS]
         assert not fails, f"{suffix} QC failed: {[(c.name, c.detail) for c in fails]}"
         for c in checks:
             if c.status == "warn":

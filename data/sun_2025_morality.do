@@ -1,5 +1,23 @@
 *** This Do File creates tables from the Are Moral People Happier? study ***
 
+* NOTE (#2423, 2026-09-27): the it.* columns of study1-maindat.csv and
+* study3-maindat.csv are NOT item responses. Each file has one row per target,
+* and it.* is the MEAN of that target's informants (study 1 carries
+* numinformants, 1-4), which the `replace resp = round(resp)` steps below then
+* round. About 31% of study-1 informant cells and 36% of study-3 adjective cells were
+* non-integer before rounding; study 3's itkindness/itintegrity are composites.
+* So every table built from it.* in studies 1 and 3 is withdrawn: study 3's 17
+* on 2026-09-25 (tools/withdrawals/withdraw_wrongnow_2026_09_25.py), study 1's
+* eight (morality, compassion, respectfulness, honesty, loyalty, fairnessMCQ,
+* fairnessHEXACO, dependability) on 2026-09-27
+* (tools/withdrawals/withdraw_sun_2025_study1_informant.py). The deposit
+* (OSF 5e9y3) has no informant-level file to rebuild them from: study1-suppdat
+* and study3-itemdat are password-encrypted. Those blocks are left below as
+* the record of what was built; do not re-upload their output.
+* Unaffected and still live: study 1's self-report tables (ts.PERMA.*, all
+* integer) and every study-2 table (study2-maindat.csv has one it.mtK_j column
+* per rater j, all integer, so the rater is folded into the item code).
+
 ************************************************************************************
 ************************************************************************************
 ************************************* Study 1 **************************************

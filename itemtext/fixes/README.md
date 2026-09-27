@@ -15,7 +15,7 @@ were deliberately withdrawn.
 |---|---|
 | `gilbert_meta_78__items.csv` | **Never uploaded — licensing.** Reproduces PPVT-4 target words (#1607). Commercial instrument. |
 | `gilbert_meta_80__items.csv` | **Never uploaded — licensing.** Reproduces WJ-III Picture Vocabulary target words (#1606). |
-| `dumas_organisciak_2022__items.csv` | Was uploaded, then the table was removed from IRW. Absent from `irw_text` as of v11.0. #1598 remains open. |
+| `dumas_organisciak_2022__items.csv` | **Live** in `irw_text` as `dumas_Organisciak_2022__items` (50 rows, 10 items; verified 2026-09-27). Re-shipped 2026-08-28 in a594c41f with the 0-4 vs 1-5 scale note (#1598); `mapping_verification.csv` records it under this directory. A byte-identical copy that commit left at the `itemtables/` root was removed in #2053, so this is the one copy. |
 | `*_spotcheck.csv`, `audit_report.csv`, `itemtext_name_mismatches.csv` | Evidence, not item text tables. |
 | `diffs_vs_published/` | Per-table audit diffs against what was live at correction time. |
 | `*_NOTE.md`, `itemtext_issues_*.md`, `*.patch` | Notes and drafts for the issues page. |

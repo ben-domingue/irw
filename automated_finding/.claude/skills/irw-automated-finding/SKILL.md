@@ -404,6 +404,16 @@ response table spells it, and the two sets must match. Same for `resp`. Never
 invent either one. A perfectly transcribed instrument whose `item` values
 don't line up cannot be linked to a single response and is worthless.
 
+**Keep the source header as `item` when the source has one.** Renaming columns
+to a positional code (`{c: f"sas_{i}" for i, c in enumerate(cols)}`,
+`f"{prefix}{i+1}"`) throws away a name that was right there and gains nothing:
+the order is then the only thing tying code to wording, and a one-position slip
+is invisible to every set-comparing gate. If a header is unusable as a code
+(a full stem with punctuation, a duplicate), derive the code from it
+reversibly and say how in the script header. `itemtext/check_label_claims.py`
+screens every mapping row whose script assigns codes by position, and asks its
+evidence to say how item k was tied to the k-th column (#2049).
+
 ### Do it only when the text is already in hand
 
 Attempt extraction only from what Step 3 already gave you. Do **not** let item

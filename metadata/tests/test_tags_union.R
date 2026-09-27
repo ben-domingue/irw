@@ -104,6 +104,71 @@ precedence <- function() {
 }
 precedence()
 
+cat("\ncolumn-level precedence (#1863)\n")
+column_precedence <- function() {
+    ##The fixture's sheet rows leave `child age` NA; the auto row fills it.
+    auto <- write_auto(tempfile(fileext = ".csv"), c("shared_tbl"))
+    auto_cells <<- list()
+    res  <- run_union(c("shared_tbl"), auto)
+    r <- res[res$table == "shared_tbl", ]
+    check(nrow(r) == 1, "a shared table is still one row")
+    check(r$`child age (for child-focused studies)` == "Early (<6y)",
+          "a cell the human left blank takes the auto value")
+    check(r$`construct name` == "Human construct for shared_tbl" &&
+          r$`age range` == "Adult (18+y)" && r$sample == "Educational" &&
+          r$`primary language(s)` == "eng",
+          "every cell the human filled is unchanged")
+    check(identical(auto_cells[["shared_tbl"]], "child age (for child-focused studies)"),
+          "only the filled cell is recorded as the tagger's")
+
+    ##The literal string "NA" is how the Sheet stores many empty cells.
+    sheet <- fake_sheet(c("shared_tbl"))
+    sheet$`Primary Language(s)`[2] <- "NA"
+    sheet$`Construct type`[2] <- ""
+    tag <- select_tag_cols(sheet[-1, ], "t")
+    a <- read_auto_tags(auto, "t")
+    m <- merge_auto_tags(tag, a)
+    check(m$tag$`primary language(s)` == "spa",
+          "a literal \"NA\" in the sheet is treated as blank and filled")
+    check(m$tag$`construct type` == "Developmental",
+          "an empty-string sheet cell is filled")
+    check(nrow(m$auto) == 0 && m$n_shared == 1,
+          "a shared table's auto row is not appended as a second row")
+
+    ##A blank auto value never blanks or overwrites anything.
+    a2 <- a
+    a2$`primary language(s)` <- NA
+    m2 <- merge_auto_tags(tag, a2)
+    check(identical(m2$tag$`primary language(s)`, "NA"),
+          "a blank auto value leaves the sheet cell as it was")
+    check(!("primary language(s)" %in% m2$filled[["shared_tbl"]]),
+          "and is not recorded as filled")
+
+    ##Matching is case-insensitive, like every other join on `table`.
+    a3 <- a; a3$table <- "SHARED_TBL"
+    m3 <- merge_auto_tags(tag, a3)
+    check(nrow(m3$auto) == 0 && m3$tag$`primary language(s)` == "spa",
+          "an auto row differing only by case merges into the sheet row")
+}
+column_precedence()
+
+cat("\nprovenance sidecar (#1863)\n")
+provenance_cells <- function() {
+    auto <- write_auto(tempfile(fileext = ".csv"), c("shared_tbl", "auto_only_tbl"))
+    auto_cells <<- list(); auto_tables <<- character(); derived_tables <<- character()
+    out <- tempfile(fileext = ".csv")
+    assign("gsheet2tbl", function(url) fake_sheet(c("shared_tbl")), envir = globalenv())
+    on.exit(rm("gsheet2tbl", envir = globalenv()), add = TRUE)
+    get_tags(list(name = "test", url = "stub://sheet", file.auto = auto, file.out = out))
+    side <- readr::read_csv(sub("\\.csv$", "_provenance.csv", out),
+                            col_types = readr::cols(.default = readr::col_character()))
+    check(side$columns[side$table == "shared_tbl"] == "child age (for child-focused studies)",
+          "a sheet table's sidecar row names only the cell auto filled")
+    check(grepl("construct name", side$columns[side$table == "auto_only_tbl"], fixed = TRUE),
+          "an auto-only table's sidecar row still names all its columns")
+}
+provenance_cells()
+
 cat("\nschema\n")
 schema <- function() {
     auto      <- write_auto(tempfile(fileext = ".csv"), c("auto_only_tbl"))

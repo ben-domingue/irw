@@ -747,14 +747,87 @@ DESCRIPTION_OVERRIDES <- list(
         corrected  = paste("Fragebogen körperdysmorpher Symptome (FKS; Buhlmann et al., 2009),",
                            "a German self-report screener for body dysmorphic disorder",
                            "(17 of 18 items; FKS_2 absent from the deposit); German clinical",
-                           "sample BN/BDD/IAD N≈210; 1-5"),
+                           "sample BN/BDD/IAD N=217; 1-5"),
         ##The deposit's SPSS syntax (Data - Codes.pdf, osf.io/58xb9) heads the
         ##block "*recoding Questionnaire of bodydysmorphic symptoms (FKS)*" and
         ##scores mean_specific_BDD / mean_assoc_BDD from it; the item wording is
         ##appearance preoccupation, mirror checking and reassurance seeking. The
         ##"0-5" came from three corrupt 0 cells on one participant, removed by
-        ##the same fix, which also takes N from 211 to 210.
+        ##the same fix, which also takes N from 211 to 210. #2380 then restored
+        ##seven participants a false duplicate-vpcode dedupe had dropped: N=217,
+        ##which is the N the deposit's own mean_FKS reports.
         why = "the deposit's syntax names the block bodydysmorphic symptoms (FKS) and scores BDD subscales from it"
+    ),
+    list(
+        table      = "opladen2025_edeq",
+        issue      = "#2380",
+        superseded = "Eating Disorder Examination Questionnaire (EDE-Q; 28 items); German clinical sample BN/BDD/IAD N≈211; 0-6 (items 13-18 are frequency counts 0-28+)",
+        corrected  = paste("Eating Disorder Examination Questionnaire (EDE-Q; 28 items); German",
+                           "clinical sample BN/BDD/IAD N=217; 1-7 as deposited (the deposit's",
+                           "syntax recodes to the usual 0-6); items 13-18 are frequency counts 0-112"),
+        ##The table ships the deposit's raw 1-7 on the 22 attitude items (every
+        ##one has observed min 1, max 7); only the deposit's SPSS syntax recodes
+        ##them to 0-6. The data is left as deposited and the Description says so.
+        ##N: seven participants restored from a false duplicate-vpcode dedupe,
+        ##and SGNXX's corrupt row (two garbage 0 counts) removed.
+        why = "every attitude item is observed 1-7; 0-6 is the syntax's recode, not the table"
+    ),
+    list(
+        table      = "opladen2025_wi",
+        issue      = "#2380",
+        superseded = "Body image scale WI (14 items, binary 1-2); German clinical sample BN/BDD/IAD N≈210",
+        corrected  = paste("Whiteley Index (WI; 14 items, binary 1-2), a health-anxiety",
+                           "(hypochondriasis) screener; German clinical sample BN/BDD/IAD N=217"),
+        ##The deposit's SPSS syntax scores the WI's three subscales (bodily
+        ##preoccupation, disease phobia, disease conviction); nothing in it is a
+        ##body-image scale.
+        why = "the deposit's syntax scores the Whiteley Index subscales from WI_1..WI_14"
+    ),
+    list(
+        table      = "opladen2025_fkg",
+        issue      = "#2380",
+        superseded = "Body feelings questionnaire FKG (20 items); German clinical sample BN/BDD/IAD N≈210; 1-4",
+        corrected  = paste("Health/illness-cognition items FKG (20 items, 1-4), probably the",
+                           "Fragebogen zu Körper und Gesundheit (Hiller et al., 1997) -- the deposit",
+                           "never names it; German clinical sample BN/BDD/IAD N=217"),
+        ##The deposit neither names nor scores FKG. The wording (dysfunctional
+        ##health cognitions) points to Hiller et al.'s FKG, so the name is hedged
+        ##as an inference rather than asserted.
+        why = "item wording is health cognitions, not body feelings; the deposit never names the scale"
+    ),
+    list(
+        table      = "jeilani_2024_social_outcomes",
+        issue      = "#2426",
+        superseded = "Social outcomes scale (SO, 4 items, 1-5); Somali university students N=663",
+        corrected  = paste("Perceived social support from a significant other: the MSPSS",
+                           "Significant Other subscale (SO1-SO4 = MSPSS items 10, 5, 1, 2; 4 items,",
+                           "1-5); Somali university students N=663"),
+        ##The deposit's .sav labels all four SO items as MSPSS "special person"
+        ##items, and the paper's social-support factor loads on SO1-SO4. The
+        ##table name is kept because its item text is published under it.
+        why = "the four .sav labels are the MSPSS Significant Other items"
+    ),
+    list(
+        table      = "jeilani_2024_social_support",
+        issue      = "#2426",
+        superseded = "Social support scale (SS, 2 items, 1-5); Somali university students N=663",
+        corrected  = paste("Perceived social support from friends: the MSPSS Friends subscale",
+                           "(4 items, 1-5; the deposit exports two of them under SSF-prefixed codes,",
+                           "SSF2 and SSF2_002); Somali university students N=663"),
+        ##SS1, SS4, SSF2 and SSF2_002 are adjacent in the .xlsx and correlate
+        ##0.56-0.69 with each other against 0.28-0.58 with the family and
+        ##significant-other quartets. No item carries wording in the deposit.
+        why = "the four friends-quartet columns, by file position and correlation"
+    ),
+    list(
+        table      = "jeilani_2024_social_support_family",
+        issue      = "#2426",
+        superseded = "Social support from family scale (SSF, 4 items, 1-5); Somali university students N=663",
+        corrected  = paste("Perceived social support from family: the MSPSS Family subscale",
+                           "(SSF1, SSF2_001, SSF3, SSF4; 4 items, 1-5); Somali university students N=663"),
+        ##SSF2 was a friends item and moved to jeilani_2024_social_support;
+        ##SSF2_001, dropped before as an "aggregate", is the fourth family item.
+        why = "family quartet by file position and correlation; SSF1's .sav label is MSPSS item 4"
     )
 )
 

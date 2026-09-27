@@ -14,10 +14,14 @@ OUT_DIR = REPO_ROOT / "automated_finding" / "irw_output"
 # Wang et al. (2026), "Exploring EFL primary school teachers' behavioral
 # intention towards digital game-based learning". S2 Appendix. CC BY 4.0.
 # N=500. Standard Technology-Acceptance-Model (TAM) battery, 5 constructs,
-# 1-5 Likert: Perceived Usefulness (PU, 3i), Teaching Presence (TP, 8i),
+# 1-5 Likert: Perceived Usefulness (PU, 3i), Technology Perception (TP, 8i),
 # Technology Anxiety (TA, 3i), Attitude (ATT, 3i), Behavioral Intention
 # (BI, 5i) -- construct names inferred from the column-prefix codes and
 # the paper's own TAM framing, not confirmed against item text.
+# #2198: that inference was wrong for TP. The S1 Appendix heads the block
+# "Technology Perception (TP)", and "teaching presence" appears nowhere in the
+# article or appendix, so the TP table ships as wang_2026_technology_perception
+# (it was wang_2026_teaching_presence until 2026-09; same rows).
 URL = ("https://journals.plos.org/plosone/article/file"
        "?type=supplementary&id=10.1371/journal.pone.0346229.s002")
 UA = {"User-Agent": "IRW-Finder/1.0 (ben.domingue@gmail.com)"}
@@ -26,7 +30,7 @@ COV_MAP = {"Gender": "cov_gender", "Age": "cov_age", "Pedagogical tenure": "cov_
 
 SCALES = {
     "wang_2026_perceived_usefulness": ["PU1", "PU2", "PU3"],
-    "wang_2026_teaching_presence": [f"TP{i}" for i in range(1, 9)],
+    "wang_2026_technology_perception": [f"TP{i}" for i in range(1, 9)],
     "wang_2026_technology_anxiety": ["TA1", "TA2", "TA3"],
     "wang_2026_attitude": ["ATT1", "ATT2", "ATT3"],
     "wang_2026_behavioral_intention": [f"BI{i}" for i in range(1, 6)],
