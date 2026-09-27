@@ -34,6 +34,11 @@ PREFIX_TO_NAME = {
 
 # Exclude columns that are subscale aggregates (contain underscore suffix like _001, _002)
 AGGREGATE_PATTERN = re.compile(r'_0\d{2}$')
+# #2095: SEF6_001 and SEF9_001 are not aggregates -- they are two further
+# administered self-efficacy items (n=663, all five levels 1-5) exported under
+# duplicated names. Keep them. (SSF2_001/SSF2_002 are the same pattern but the
+# social-support tables are out of scope here and left as they were.)
+KEEP_SUFFIXED = {"SEF6_001", "SEF9_001"}
 
 
 def get_prefix(col):
@@ -65,7 +70,7 @@ def convert():
     for col in df.columns:
         if col in ["id"] + cov_out:
             continue
-        if AGGREGATE_PATTERN.search(str(col)):
+        if AGGREGATE_PATTERN.search(str(col)) and col not in KEEP_SUFFIXED:
             continue
         pfx = get_prefix(col)
         if pfx and pfx in PREFIX_TO_NAME:
