@@ -18,26 +18,20 @@ study1_df <- study1_df |>
   rename(age=p_age)
 study1_df <- pivot_longer(study1_df, cols=-c(id, age), names_to="item", values_to="resp")
 
-# ------ Process Dataset 2 ------
-study2_df <- read_dta("./PoB_TPS_2022_OSF_keyvars.dta")
-colnames(study2_df) <- gsub("\\s*\\(.*\\)", "", colnames(study2_df)) # Remove column labels
-study2_df <- lapply(study2_df, function(x) { attr(x, "label") <- NULL; x })
-study2_df <- as.data.frame(study2_df)
-
-study2_df <- study2_df |>
-  select(-yearsed, -spansurv, -female, -bornUS, -region, -zipcode,
-         -homeusage, -langback, -perclote_2016, -logplote_2016, -mturk, 
-         -meanPOBp_6item, -age_cat, -tellstories, -talkchild, -sing, -read,
-         -MUNE_reads_dich, -RQ2_sample, -meanPOB10) |>
-  rename(id=ResponseID, age=p_age)
-study2_df <- pivot_longer(study2_df, cols=-c(id, age), names_to="item", values_to="resp")
-
-# ------ Process Merged Datasets
-study1_df$id <- as.character(study1_df$id)
-df <- bind_rows(
-  study1_df %>% mutate(group = "Study 1"),
-  study2_df %>% mutate(group = "Study 2")
-)
+# ------ Dataset 2 is NOT included (irw#2409) ------
+# PoB_TPS_2022_OSF_keyvars.dta (n=319) was pooled here as group "Study 2" until
+# the 2026-09-27 rebuild. It is not a second sample: aligned by item content,
+# every one of its 319 rows matches exactly one Study 1 respondent on age, the
+# ten PoB items and the six shared POBplus items, so those people appeared twice
+# under unlinked ids. It also numbers the final 10-item PoB form 1..10, while
+# Study 1 keeps the dropped reverse items (PoB3R/5R/11R) in its numbering, so
+# PoB3-PoB10 meant different questions in the two groups (Study 2 PoB3..PoB10 =
+# Study 1 PoB4, 6, 7, 8, 9, 10, 12, 13). The table is Study 1 only, and `group`
+# (now constant) is dropped.
+# PoB3R, PoB5R, PoB11R, POBplus_5R and POBplus_7R are stored reverse-scored, as
+# deposited.
+df <- study1_df
+df$id <- as.character(df$id)
 
 save(df, file="PBS_Surrain_2019_PoB.Rdata")
-write.csv(df, "PBS_Surrain_2019_PoB.csv", row.names=FALSE)
+write.csv(df, "PBS_Surrain_2019_PoB.csv", row.names=FALSE, na="")  # empty, not literal NA (#2029)

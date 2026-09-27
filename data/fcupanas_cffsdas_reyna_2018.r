@@ -7,6 +7,14 @@ library(openxlsx)
 library(readr)
 library(readxl)
 
+# #2436: (1) Studies 2-3 name items `panas#`, Studies 1 and 4 `PANAS#`; all are
+# now `PANAS#`, one family of 20. (2) Study 4 (athletes) printed the list in a
+# different order (11 = Temeroso, 12-20 = Irritable ... Activo; see
+# PANAS_Argentina_Questionnaires.pdf), so its columns are remapped to the
+# canonical numbering of Studies 1-3 (11 -> 20, k -> k-1 for k = 12-20).
+# (3) Study 3 used a 1-7 scale; the 1-5 filter set its 1,138 responses of 6-7
+# to NA. It now goes to its own table, fcupanas_cffsdas_reyna_2018_7pt, with
+# its full range. Study 4's 9s (missing code) are still set to NA.
 remove_na <- function(df) {
   df <- df[!(rowSums(is.na(df[, -which(names(df) %in% c("id"))])) == (ncol(df) - 1)), ]
   return(df)
@@ -34,6 +42,11 @@ study4_df <- read_xls("PANAS_Database_Study4.xls")
 study4_df <- study4_df |>
   rename(id = ID) |>
   mutate(id = paste0("Athletes_", id))
+names(study2_df) <- sub("^panas", "PANAS", names(study2_df))
+names(study3_df) <- sub("^panas", "PANAS", names(study3_df))
+study4_map <- c(PANAS11 = "PANAS20", setNames(paste0("PANAS", 11:19), paste0("PANAS", 12:20)))
+hit <- names(study4_df) %in% names(study4_map)
+names(study4_df)[hit] <- study4_map[names(study4_df)[hit]]
 
 PANAS1_df <- study1_df %>%
   select(starts_with("PANAS"), id, Sex, Age, -ends_with("m"))
@@ -41,7 +54,7 @@ PANAS1_df  <- remove_na(PANAS1_df)
 PANAS1_df <- pivot_longer(PANAS1_df, cols=-c(id, Sex, Age), names_to="item", values_to="resp")
 PANAS1_df <- PANAS1_df |>
   rename(cov_sex = Sex, cov_age = Age)
-PANAS1_df$group <- "University_Students1"
+PANAS1_df$cov_group <- "University_Students1"
 
 PANAS2_df <- study2_df %>%
   select(starts_with("PANAS"), id, sexo, edad, carrera, -ends_with("m"))
@@ -49,7 +62,7 @@ PANAS2_df  <- remove_na(PANAS2_df)
 PANAS2_df <- pivot_longer(PANAS2_df, cols=-c(id, sexo, edad, carrera), names_to="item", values_to="resp")
 PANAS2_df <- PANAS2_df |>
   rename(cov_sex = sexo, cov_age = edad, cov_career = carrera)
-PANAS2_df$group <- "University_Students2"
+PANAS2_df$cov_group <- "University_Students2"
 
 PANAS3_df <- study3_df %>%
   select(starts_with("PANAS"), id, sexo, edad,  neducativo, -ends_with("m"))
@@ -57,7 +70,7 @@ PANAS3_df  <- remove_na(PANAS3_df)
 PANAS3_df <- pivot_longer(PANAS3_df, cols=-c(id, sexo, edad, neducativo), names_to="item", values_to="resp")
 PANAS3_df <- PANAS3_df |>
   rename(cov_sex = sexo, cov_age = edad, cov_educational = neducativo)
-PANAS3_df$group <- "General Adult"
+PANAS3_df$cov_group <- "General Adult"
 
 PANAS4_df <- study4_df %>%
   select(starts_with("PANAS"), id, Sexo, Edad, -ends_with("m"))
@@ -65,10 +78,15 @@ PANAS4_df  <- remove_na(PANAS4_df)
 PANAS4_df <- pivot_longer(PANAS4_df, cols=-c(id,Sexo, Edad), names_to="item", values_to="resp")
 PANAS4_df <- PANAS4_df |>
   rename(cov_sex = Sexo, cov_age = Edad)
-PANAS4_df$group <- "Athletes"
+PANAS4_df$cov_group <- "Athletes"
 
-Panas_df <- bind_rows(PANAS1_df, PANAS2_df, PANAS3_df, PANAS4_df)
+Panas_df <- bind_rows(PANAS1_df, PANAS2_df, PANAS4_df)
 Panas_df$resp <- ifelse(Panas_df$resp %in% c(1, 2, 3, 4, 5), Panas_df$resp, NA)
 
 save(Panas_df, file="fcupanas_cffsdas_reyna_2018.Rdata")
-write.csv(Panas_df, "fcupanas_cffsdas_reyna_2018.csv", row.names=FALSE)
+write.csv(Panas_df, "fcupanas_cffsdas_reyna_2018.csv", row.names=FALSE, na="")
+
+Panas7_df <- PANAS3_df
+Panas7_df$resp <- ifelse(Panas7_df$resp %in% 1:7, Panas7_df$resp, NA)
+save(Panas7_df, file="fcupanas_cffsdas_reyna_2018_7pt.Rdata")
+write.csv(Panas7_df, "fcupanas_cffsdas_reyna_2018_7pt.csv", row.names=FALSE, na="")

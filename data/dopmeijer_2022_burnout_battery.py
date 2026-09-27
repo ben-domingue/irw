@@ -13,6 +13,18 @@
 # scoring points ("1 point for loneliness" / "no points"), not raw
 # responses -- excluded, along with all *_total/_stand/_recode/Norm*/
 # high_*/BurnoutYES columns (aggregates and derived classifications).
+#
+# NOTE (dopmeijer_2022_loneliness): resp runs in the OPPOSITE direction to the
+# source's numbering, by design. The SPSS file (S1 File) and the paper code
+# the De Jong Gierveld items 1 = 'Yes! Totally agree!' ... 5 = 'No! Totally
+# disagree!'; MAP_LON below maps the label strings least->most, as the other
+# three maps do, so in IRW resp 1 = 'No! Totally disagree!' through
+# resp 5 = 'Yes! Totally agree!'. All 11 items' response distributions are the
+# source's exactly reversed (e.g. Loneliness_A: source [1334, 1102, 516, 142,
+# 47], IRW [47, 142, 516, 1102, 1334]). Anyone joining resp back to the
+# deposit or reading its codebook must reverse it (6 - resp). This note used to
+# live only in the table's item-text public note, withdrawn 2026-09 on the
+# instrument's ND terms (irw#2120).
 
 from __future__ import annotations
 
