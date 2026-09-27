@@ -27880,3 +27880,13 @@ batch_519 directory was removed. No work was discarded.
 - Audit WARN explained in notes.csv: row-count anomaly is wave design (Cognitive_functioning T1 only, CognFunct_pre T2 only, CognFunct_now T2/T3); 37.5% blank option_text = unlabelled 1-9 points.
 - Gates: validate PASS (--table-sets); normalize 0 changed; audit WARN (explained); verify_batch PASS; lint clean; irw-validate ok; check_provenance: no new issues (ye_2025_q25_scale `mixed` review note pre-existing).
 - Batch number 523 = highest+1 (the 300-304 hole rule only redirects a landing inside 300-304). Cap batch_571 not reached. depue_2023 siblings now all done.
+
+## batch_524 — 2026-09-27T08:02-07:00 — 1 table (climatechange_geiger_2025), 1 agent
+- Result: written 1 / blocked 0 / failed 0 (yield 100%). Circuit breaker not near.
+- climatechange_geiger_2025: 14 items, 863 rows; mapping_basis paper_explicit, text_source study_materials (Canada .qsf English from osf.io/6hny4 surveys.zip, CC BY 4.0). Codebook + preparation_S1.Rmd rename() give the code->raw-column crosswalk.
+- Verification: VERIFIED. verify_climatechange_geiger_2025.R PASS. Re-ran the authors' 11-file merge (8,151 rows = codebook); live id->raw row anchored by age/sex 3653/3653; each item matches its hypothesised raw column 100%, best other column <=0.564; item_text == QSF text 14/14.
+- Source override: codebook Table 1 says own.ccb is 1-5; data and script (own.ccb - 1) say 0-4. Shipped 0-4. Orchestrator re-check via table_sets.R: own.ccb 0-4, 5 levels, n=3653; efficacy n=3406 (247 NA = authors' 99 "don't know" + IRW script's 999 "don't believe").
+- Caveats (notes.csv, public_note): administered in 12 languages across 11 countries; English (Canada) wording shipped with [citizens]/[country] placeholders for piped fields; translations are in the same OSF zip but schema holds one text per item.
+- Audit WARN explained in notes.csv: 98% blank option_text = 0-100 sliders plus endpoint-only 1-7 scales.
+- Gates: normalize 1 file (NA convention); audit WARN (explained); verify_batch PASS; lint clean; irw-validate ok; check_provenance: no new issues (ye_2025_q25_scale `mixed` review note pre-existing).
+- Batch number 524 = highest+1. Cap batch_571 not reached. 43 pending remain.
