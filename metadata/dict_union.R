@@ -794,6 +794,40 @@ DESCRIPTION_OVERRIDES <- list(
         ##health cognitions) points to Hiller et al.'s FKG, so the name is hedged
         ##as an inference rather than asserted.
         why = "item wording is health cognitions, not body feelings; the deposit never names the scale"
+    ),
+    list(
+        table      = "jeilani_2024_social_outcomes",
+        issue      = "#2426",
+        superseded = "Social outcomes scale (SO, 4 items, 1-5); Somali university students N=663",
+        corrected  = paste("Perceived social support from a significant other: the MSPSS",
+                           "Significant Other subscale (SO1-SO4 = MSPSS items 10, 5, 1, 2; 4 items,",
+                           "1-5); Somali university students N=663"),
+        ##The deposit's .sav labels all four SO items as MSPSS "special person"
+        ##items, and the paper's social-support factor loads on SO1-SO4. The
+        ##table name is kept because its item text is published under it.
+        why = "the four .sav labels are the MSPSS Significant Other items"
+    ),
+    list(
+        table      = "jeilani_2024_social_support",
+        issue      = "#2426",
+        superseded = "Social support scale (SS, 2 items, 1-5); Somali university students N=663",
+        corrected  = paste("Perceived social support from friends: the MSPSS Friends subscale",
+                           "(4 items, 1-5; the deposit exports two of them under SSF-prefixed codes,",
+                           "SSF2 and SSF2_002); Somali university students N=663"),
+        ##SS1, SS4, SSF2 and SSF2_002 are adjacent in the .xlsx and correlate
+        ##0.56-0.69 with each other against 0.28-0.58 with the family and
+        ##significant-other quartets. No item carries wording in the deposit.
+        why = "the four friends-quartet columns, by file position and correlation"
+    ),
+    list(
+        table      = "jeilani_2024_social_support_family",
+        issue      = "#2426",
+        superseded = "Social support from family scale (SSF, 4 items, 1-5); Somali university students N=663",
+        corrected  = paste("Perceived social support from family: the MSPSS Family subscale",
+                           "(SSF1, SSF2_001, SSF3, SSF4; 4 items, 1-5); Somali university students N=663"),
+        ##SSF2 was a friends item and moved to jeilani_2024_social_support;
+        ##SSF2_001, dropped before as an "aggregate", is the fourth family item.
+        why = "family quartet by file position and correlation; SSF1's .sav label is MSPSS item 4"
     )
 )
 
