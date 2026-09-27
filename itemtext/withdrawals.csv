@@ -1,0 +1,118 @@
+table,dataset,kind,withdrawn,reason,family,refs,rows,released,script,note
+sv-maia2_randelovic_2021_hexaco100__items,irw_text,whole,2026-09-05,rights,HEXACO,#1891 #1945,,,tools/withdrawals/withdraw_hexaco.py,HEXACO-PI-R wording
+sv-maia2_randelovic_2021_hexaco60__items,irw_text,whole,2026-09-05,rights,HEXACO,#1891 #1945,,,tools/withdrawals/withdraw_hexaco.py,HEXACO-PI-R wording
+algner2022_uwes__items,irw_text*,whole,2026-09-06,rights,UWES,#1945 #1955,,,tools/withdrawals/withdraw_wording_rights.py,wording_rights retirement
+alsuhibani_2022_ecrs_s3__items,irw_text*,whole,2026-09-06,rights,ECR,#1945 #1955,,,tools/withdrawals/withdraw_wording_rights.py,wording_rights retirement
+bakker_2020_pss10__items,irw_text*,whole,2026-09-06,rights,PSS,#1945 #1955,,,tools/withdrawals/withdraw_wording_rights.py,wording_rights retirement
+beck_2021_pss10__items,irw_text*,whole,2026-09-06,rights,PSS,#1945 #1955,,,tools/withdrawals/withdraw_wording_rights.py,wording_rights retirement
+close_relationships__items,irw_text*,whole,2026-09-06,rights,ECR,#1945 #1955,,,tools/withdrawals/withdraw_wording_rights.py,wording_rights retirement
+conner_2017_flourishing__items,irw_text*,whole,2026-09-06,rights,DIENER-NC,#1945 #1955,,,tools/withdrawals/withdraw_wording_rights.py,wording_rights retirement
+conspiracy_asd__asd_aq10__items,irw_text*,whole,2026-09-06,rights,AQ,#1945 #1955,,,tools/withdrawals/withdraw_wording_rights.py,wording_rights retirement
+dominguez_2018_jcs__items,irw_text*,whole,2026-09-06,rights,UWES,#1945 #1955,,,tools/withdrawals/withdraw_wording_rights.py,wording_rights retirement
+dpt_noncog__interpersonal_reactivity__items,irw_text*,whole,2026-09-06,rights,IRI,#1945 #1955,,,tools/withdrawals/withdraw_wording_rights.py,wording_rights retirement
+duboz_2021_pss10__items,irw_text*,whole,2026-09-06,rights,PSS,#1945 #1955,,,tools/withdrawals/withdraw_wording_rights.py,wording_rights retirement
+esiason_2024_aaqii__items,irw_text*,whole,2026-09-06,rights,AAQ,#1945 #1955,,,tools/withdrawals/withdraw_wording_rights.py,wording_rights retirement
+EWAS_Sanford_2024_Flourish__items,irw_text*,whole,2026-09-06,rights,DIENER-NC,#1945 #1955,,,tools/withdrawals/withdraw_wording_rights.py,wording_rights retirement
+extremera_2016_shs__items,irw_text*,whole,2026-09-06,rights,SHS,#1945 #1955,,,tools/withdrawals/withdraw_wording_rights.py,wording_rights retirement
+eammi_grahe_2018_stress__items,irw_text*,whole,2026-09-08,rights,PSS,,,,,"PSS round 1, before withdraw_pss_sweep.py; recorded in its ROUND1/ALREADY"
+ecps_sahm_2024_stress__items,irw_text*,partial,2026-09-08,rights,PSS,,,,,"PSS items dropped, 18 COVID-stressor items kept; recorded in withdraw_pss_sweep.py ALREADY"
+gilbert_meta_59__items,irw_text*,whole,2026-09-08,rights,PSS,,,,,"PSS round 1, before withdraw_pss_sweep.py; recorded in its ROUND1/ALREADY"
+kfcovid_pss_li2020__items,irw_text*,whole,2026-09-08,rights,PSS,,,,,"PSS round 1, before withdraw_pss_sweep.py; recorded in its ROUND1/ALREADY"
+lhsbrasil_couto_2023_pss__items,irw_text*,whole,2026-09-08,rights,PSS,,,,,"PSS round 1, before withdraw_pss_sweep.py; recorded in its ROUND1/ALREADY"
+mhscdc_fried_2020_ps__items,irw_text*,whole,2026-09-08,rights,PSS,,,,,"PSS round 1, before withdraw_pss_sweep.py; recorded in its ROUND1/ALREADY"
+oxfordcovid_xue_2024_pss__items,irw_text*,whole,2026-09-08,rights,PSS,,,,,"PSS round 1, before withdraw_pss_sweep.py; recorded in its ROUND1/ALREADY"
+paampsmartsud_saba_2023_pss__items,irw_text*,whole,2026-09-08,rights,PSS,,,,,"PSS round 1, before withdraw_pss_sweep.py; recorded in its ROUND1/ALREADY"
+rmet_higgins_2022_aq__items,irw_text*,whole,2026-09-08,rights,AQ,#1954 #1955,,,tools/withdrawals/withdraw_aq28.py,AQ-28 wording
+cucchi_2018_pts__items,irw_text*,whole,2026-09-08,rights,IRI,#1955 #2228 #2268,,,tools/withdrawals/withdraw_cucchi_iri.py,IRI wording
+cognitive_load_klimova_2023_mlq__items,irw_text*,whole,2026-09-08,rights,MLQ,#1945,,,tools/withdrawals/withdraw_mlq_djg.py,
+dopmeijer_2022_loneliness__items,irw_text*,whole,2026-09-08,rights,DJG,#1945,,,tools/withdrawals/withdraw_mlq_djg.py,
+singh_2025_identity_pss__items,irw_text*,whole,2026-09-08,rights,PSS,,,,tools/withdrawals/withdraw_pss_sweep.py,"canonical PSS wording, round 2 (found by sweep_instrument_rights.py)"
+aspirations_sonmez_2022__items,irw_text*,whole,2026-09-09,rights,SDT/CSDT,,,,tools/withdrawals/withdraw_csdt.py,"CSDT Limited Use License, full scope (Ben 2026-09-09)"
+baka2023_bpnsf__items,irw_text*,whole,2026-09-09,rights,SDT/CSDT,,,,tools/withdrawals/withdraw_csdt.py,"CSDT Limited Use License, full scope (Ben 2026-09-09)"
+fivpei_perrig_2023_imi__items,irw_text*,whole,2026-09-09,rights,SDT/CSDT,,,,tools/withdrawals/withdraw_csdt.py,"CSDT Limited Use License, full scope (Ben 2026-09-09)"
+alsecypiamh_wu_2022_swls__items,irw_text,whole,2026-09-09,rights,SWLS,,,,tools/withdrawals/withdraw_swls.py,SWLS wording (Ben 2026-09-09: be conservative)
+altahla_2024_swls__items,irw_text,whole,2026-09-09,rights,SWLS,,,,tools/withdrawals/withdraw_swls.py,SWLS wording (Ben 2026-09-09: be conservative)
+campos_2023_swls__items,irw_text,whole,2026-09-09,rights,SWLS,,,,tools/withdrawals/withdraw_swls.py,SWLS wording (Ben 2026-09-09: be conservative)
+duboz_2021_swls__items,irw_text,whole,2026-09-09,rights,SWLS,,,,tools/withdrawals/withdraw_swls.py,SWLS wording (Ben 2026-09-09: be conservative)
+dudasova_2021_swls__items,irw_text,whole,2026-09-09,rights,SWLS,,,,tools/withdrawals/withdraw_swls.py,SWLS wording (Ben 2026-09-09: be conservative)
+extremera_2016_swls__items,irw_text,whole,2026-09-09,rights,SWLS,,,,tools/withdrawals/withdraw_swls.py,SWLS wording (Ben 2026-09-09: be conservative)
+kern_2021_life_satisfaction__items,irw_text_2,whole,2026-09-09,rights,SWLS,,,,tools/withdrawals/withdraw_swls.py,SWLS wording (Ben 2026-09-09: be conservative)
+lee_2024_swls__items,irw_text_2,whole,2026-09-09,rights,SWLS,,,,tools/withdrawals/withdraw_swls.py,SWLS wording (Ben 2026-09-09: be conservative)
+liu_2018_swls__items,irw_text_2,whole,2026-09-09,rights,SWLS,,,,tools/withdrawals/withdraw_swls.py,SWLS wording (Ben 2026-09-09: be conservative)
+medvedev_2018_sl__items,irw_text_2,whole,2026-09-09,rights,SWLS,,,,tools/withdrawals/withdraw_swls.py,SWLS wording (Ben 2026-09-09: be conservative)
+cormier_2024_personality__items,irw_text,whole,2026-09-10,rights,BFI-2,#1954,,,tools/withdrawals/withdraw_bfi2.py,BFI-2 wording
+sun_2025_morality_study1_compassion__items,irw_text,whole,2026-09-10,rights,BFI-2,#1954,,,tools/withdrawals/withdraw_bfi2.py,BFI-2 wording
+sun_2025_morality_study1_dependability__items,irw_text,whole,2026-09-10,rights,BFI-2,#1954,,,tools/withdrawals/withdraw_bfi2.py,BFI-2 wording
+sun_2025_morality_study1_respectfulness__items,irw_text,whole,2026-09-10,rights,BFI-2,#1954,,,tools/withdrawals/withdraw_bfi2.py,BFI-2 wording
+sun_2025_morality_study3_benevolence__items,irw_text,partial,2026-09-10,rights,BFI-2,#1954,,,tools/withdrawals/withdraw_bfi2.py,BFI-2 wording
+sun_2025_morality_study3_compassion__items,irw_text,whole,2026-09-10,rights,BFI-2,#1954,,,tools/withdrawals/withdraw_bfi2.py,BFI-2 wording
+sun_2025_morality_study3_dependability__items,irw_text,partial,2026-09-10,rights,BFI-2,#1954,,,tools/withdrawals/withdraw_bfi2.py,BFI-2 wording
+sun_2025_morality_study3_extraversion__items,irw_text,whole,2026-09-10,rights,BFI-2,#1954,,,tools/withdrawals/withdraw_bfi2.py,BFI-2 wording
+sun_2025_morality_study3_neuroticism__items,irw_text,whole,2026-09-10,rights,BFI-2,#1954,,,tools/withdrawals/withdraw_bfi2.py,BFI-2 wording
+sun_2025_morality_study3_openness__items,irw_text,whole,2026-09-10,rights,BFI-2,#1954,,,tools/withdrawals/withdraw_bfi2.py,BFI-2 wording
+addy_2021_sdq_ghana__items,irw_text*,whole,2026-09-10,rights,SDQ,,,,tools/withdrawals/withdraw_sdq.py,SDQ wording
+ALSECYPIAMH_WU_2022_SDQ__items,irw_text*,whole,2026-09-10,rights,SDQ,,,,tools/withdrawals/withdraw_sdq.py,SDQ wording
+conner_2017_bfi__items,irw_text*,whole,2026-09-11,rights,BFI-44,#1945 #1954,,,tools/withdrawals/withdraw_bfi44.py,BFI-44 wording
+CV_OASIS_ODSIS_PPE_Novak_2020_BFI__items,irw_text*,whole,2026-09-11,rights,BFI-44,#1945 #1954,,,tools/withdrawals/withdraw_bfi44.py,BFI-44 wording
+ibrahim_2015_bfi__items,irw_text*,whole,2026-09-11,rights,BFI-44,#1945 #1954,,,tools/withdrawals/withdraw_bfi44.py,BFI-44 wording
+zhou_2025_peer_relationship,item_response_warehouse_5,whole,2026-09-16,misnamed,,#2149,,,tools/withdrawals/withdraw_zhou_2025_peer_relationship_w5.py,renamed zhou_2025_peer_relationship_inventory; the _3 table keeps the name
+dvivdtws_ppmial_marcatto_2023_ocs,item_response_warehouse,whole,2026-09-19,duplicate,,#1967 #2268 #2287,,,tools/withdrawals/retire_marcatto_ocs.py,third copy of dvivdtws_ppmial_marcatto_2023_dtw
+2024_online_addiction_bsmas,item_response_warehouse_2,whole,2026-09-19,duplicate,,#2245,,,tools/withdrawals/withdraw_online_addiction.py,"duplicates ma2026_* in item_response_warehouse_3; carried cov_birthdate, no licence"
+2024_online_addiction_igds,item_response_warehouse_2,whole,2026-09-19,duplicate,,#2245,,,tools/withdrawals/withdraw_online_addiction.py,"duplicates ma2026_* in item_response_warehouse_3; carried cov_birthdate, no licence"
+2024_online_addiction_sabas,item_response_warehouse_2,whole,2026-09-19,duplicate,,#2245,,,tools/withdrawals/withdraw_online_addiction.py,"duplicates ma2026_* in item_response_warehouse_3; carried cov_birthdate, no licence"
+ipq_doglioni_2021,item_response_warehouse_2,whole,2026-09-19,personal_data,,#2255,,,tools/withdrawals/withdraw_personal_data_2026_09_19.py,publishes personal data
+parenting_anunciacao_2025_affect,item_response_warehouse_2,whole,2026-09-19,personal_data,,#2255,,,tools/withdrawals/withdraw_personal_data_2026_09_19.py,publishes personal data
+parenting_anunciacao_2025_goals,item_response_warehouse_2,whole,2026-09-19,personal_data,,#2255,,,tools/withdrawals/withdraw_personal_data_2026_09_19.py,publishes personal data
+parenting_anunciacao_2025_material_rewards,item_response_warehouse_2,whole,2026-09-19,personal_data,,#2255,,,tools/withdrawals/withdraw_personal_data_2026_09_19.py,publishes personal data
+parenting_anunciacao_2025_materialism,item_response_warehouse_2,whole,2026-09-19,personal_data,,#2255,,,tools/withdrawals/withdraw_personal_data_2026_09_19.py,publishes personal data
+parenting_anunciacao_2025_rejection,item_response_warehouse_2,whole,2026-09-19,personal_data,,#2255,,,tools/withdrawals/withdraw_personal_data_2026_09_19.py,publishes personal data
+parenting_anunciacao_2025_values,item_response_warehouse_2,whole,2026-09-19,personal_data,,#2255,,,tools/withdrawals/withdraw_personal_data_2026_09_19.py,publishes personal data
+PSR-P_Scale_Intimacy_Hakim_2018_Study2_PSI,item_response_warehouse,whole,2026-09-19,personal_data,,#2255,,,tools/withdrawals/withdraw_personal_data_2026_09_19.py,publishes personal data
+PSR-P_Scale_Intimacy_Hakim_2018_Study2_PSR,item_response_warehouse,whole,2026-09-19,personal_data,,#2255,,,tools/withdrawals/withdraw_personal_data_2026_09_19.py,publishes personal data
+ptcichina_zhan_2024__items,irw_text*,whole,2026-09-19,rights,PTCI,#2228,,,tools/withdrawals/withdraw_ptci.py,PTCI wording
+joreskog_moustaki_2001,item_response_warehouse*,whole,2026-09-23,unlicensed,,#2255 #2266,,,tools/withdrawals/withdraw_joreskog_moustaki_2001.py,hand-typed from a paywalled article; no licence (Ben 2026-09-23)
+MotAcademica_Ribeiro_2019,item_response_warehouse,whole,2026-09-23,duplicate,,#2313,,,tools/withdrawals/withdraw_motacademica_duplicate.py,duplicate table and its item text
+MotAcademica_Ribeiro_2019__items,irw_text_2,whole,2026-09-23,duplicate,,#2313,,,tools/withdrawals/withdraw_motacademica_duplicate.py,duplicate table and its item text
+zhou_2016_anxiety__items,irw_text,whole,2026-09-23,rights,Zung-SAS,,,,tools/withdrawals/withdraw_zung_sas.py,Zung SAS wording
+non_parametric_mixture_modeling_exp1_Cleaned,item_response_warehouse,whole,2026-09-24,wrong_data,,#1842 #1856,44957,,tools/withdrawals/withdraw_1856_unrecoverable.py,duplicate-row defect that cannot be repaired from source
+realpic_souza2021,item_response_warehouse,whole,2026-09-24,wrong_data,,#1842 #1856,4172,,tools/withdrawals/withdraw_1856_unrecoverable.py,duplicate-row defect that cannot be repaired from source
+matosaslopez_2022_bars_teaching,item_response_warehouse_4,whole,2026-09-24,wrong_data,,#2381 #2412,,,tools/withdrawals/withdraw_matosaslopez_2022_bars.py,two BARS instruments pooled under one code set; rebuilt split by mode
+DMCT_Addis_2020_MCT,item_response_warehouse,whole,2026-09-24,wrong_data,,#2381 #2408 #2409,,,tools/withdrawals/withdraw_wrongnow_2026_09_24.py,"resp is the task's answer key, not participant accuracy"
+PBS_Surrain_2019_PoB,item_response_warehouse,whole,2026-09-24,wrong_data,,#2381 #2408 #2409,,,tools/withdrawals/withdraw_wrongnow_2026_09_24.py,pools two studies whose PoB codes denote different questions
+mexico_2023_quality_buses,item_response_warehouse_2,whole,2026-09-25,wrong_data,,#2313 #2381 #2415,,,tools/withdrawals/withdraw_mexico_2023_quality_2415.py,ENCIG 2021 appended under 2023 codes that INEGI renumbered
+mexico_2023_quality_cablecars,item_response_warehouse_2,whole,2026-09-25,wrong_data,,#2313 #2381 #2415,,,tools/withdrawals/withdraw_mexico_2023_quality_2415.py,ENCIG 2021 appended under 2023 codes that INEGI renumbered
+dass21_depression_anxiety_stress,item_response_warehouse_2,whole,2026-09-25,duplicate,,#2381,,,tools/withdrawals/withdraw_wrongnow_2026_09_25.py,duplicate of falih_2026_dass21 (_3); carried covariates falih lacks
+okeke2025_adaptability,item_response_warehouse_2,whole,2026-09-25,wrong_data,,#2381,,,tools/withdrawals/withdraw_wrongnow_2026_09_25.py,near-zero inter-item correlations; reads as simulated responses
+okeke2025_ai_usefulness_post,item_response_warehouse_2,whole,2026-09-25,wrong_data,,#2381,,,tools/withdrawals/withdraw_wrongnow_2026_09_25.py,near-zero inter-item correlations; reads as simulated responses
+okeke2025_ai_usefulness_pre,item_response_warehouse_2,whole,2026-09-25,wrong_data,,#2381,,,tools/withdrawals/withdraw_wrongnow_2026_09_25.py,near-zero inter-item correlations; reads as simulated responses
+okeke2025_cognitive_agility_post,item_response_warehouse_2,whole,2026-09-25,wrong_data,,#2381,,,tools/withdrawals/withdraw_wrongnow_2026_09_25.py,near-zero inter-item correlations; reads as simulated responses
+okeke2025_cognitive_agility_pre,item_response_warehouse_2,whole,2026-09-25,wrong_data,,#2381,,,tools/withdrawals/withdraw_wrongnow_2026_09_25.py,near-zero inter-item correlations; reads as simulated responses
+okeke2025_decision_accuracy,item_response_warehouse_2,whole,2026-09-25,wrong_data,,#2381,,,tools/withdrawals/withdraw_wrongnow_2026_09_25.py,near-zero inter-item correlations; reads as simulated responses
+okeke2025_decision_confidence_post,item_response_warehouse_2,whole,2026-09-25,wrong_data,,#2381,,,tools/withdrawals/withdraw_wrongnow_2026_09_25.py,near-zero inter-item correlations; reads as simulated responses
+okeke2025_decision_confidence_pre,item_response_warehouse_2,whole,2026-09-25,wrong_data,,#2381,,,tools/withdrawals/withdraw_wrongnow_2026_09_25.py,near-zero inter-item correlations; reads as simulated responses
+okeke2025_response_time,item_response_warehouse_2,whole,2026-09-25,wrong_data,,#2381,,,tools/withdrawals/withdraw_wrongnow_2026_09_25.py,near-zero inter-item correlations; reads as simulated responses
+okeke2025_risk_mitigation,item_response_warehouse_2,whole,2026-09-25,wrong_data,,#2381,,,tools/withdrawals/withdraw_wrongnow_2026_09_25.py,near-zero inter-item correlations; reads as simulated responses
+qiang_2025_surface_acting,item_response_warehouse_3,whole,2026-09-25,misnamed,,#2381,,,tools/withdrawals/withdraw_wrongnow_2026_09_25.py,table name and description misname the instrument
+ren2019_scpv,item_response_warehouse_2,whole,2026-09-25,duplicate,,#2381,,,tools/withdrawals/withdraw_wrongnow_2026_09_25.py,duplicate pair; description names a different instrument
+ren_2019_scpv,item_response_warehouse_2,whole,2026-09-25,duplicate,,#2381,,,tools/withdrawals/withdraw_wrongnow_2026_09_25.py,duplicate pair; description names a different instrument
+sun_2025_morality_study3_benevolence,item_response_warehouse_2,whole,2026-09-25,wrong_data,,#2381,,,tools/withdrawals/withdraw_wrongnow_2026_09_25.py,"it.* values are per-target means across informants, rounded"
+sun_2025_morality_study3_benevolence__items,irw_text,whole,2026-09-25,wrong_data,,#2381,,,tools/withdrawals/withdraw_wrongnow_2026_09_25.py,item text for a withdrawn table
+sun_2025_morality_study3_compassion,item_response_warehouse_2,whole,2026-09-25,wrong_data,,#2381,,,tools/withdrawals/withdraw_wrongnow_2026_09_25.py,"it.* values are per-target means across informants, rounded"
+sun_2025_morality_study3_costofmorality,item_response_warehouse_2,whole,2026-09-25,wrong_data,,#2381,,,tools/withdrawals/withdraw_wrongnow_2026_09_25.py,"it.* values are per-target means across informants, rounded"
+sun_2025_morality_study3_dependability,item_response_warehouse_2,whole,2026-09-25,wrong_data,,#2381,,,tools/withdrawals/withdraw_wrongnow_2026_09_25.py,"it.* values are per-target means across informants, rounded"
+sun_2025_morality_study3_dependability__items,irw_text,whole,2026-09-25,wrong_data,,#2381,,,tools/withdrawals/withdraw_wrongnow_2026_09_25.py,item text for a withdrawn table
+sun_2025_morality_study3_extraversion,item_response_warehouse_2,whole,2026-09-25,wrong_data,,#2381,,,tools/withdrawals/withdraw_wrongnow_2026_09_25.py,"it.* values are per-target means across informants, rounded"
+sun_2025_morality_study3_fairnessHEXACO,item_response_warehouse_2,whole,2026-09-25,wrong_data,,#2381,,,tools/withdrawals/withdraw_wrongnow_2026_09_25.py,"it.* values are per-target means across informants, rounded"
+sun_2025_morality_study3_fairnessMCQ,item_response_warehouse_2,whole,2026-09-25,wrong_data,,#2381,,,tools/withdrawals/withdraw_wrongnow_2026_09_25.py,"it.* values are per-target means across informants, rounded"
+sun_2025_morality_study3_generalmorality,item_response_warehouse_2,whole,2026-09-25,wrong_data,,#2381,,,tools/withdrawals/withdraw_wrongnow_2026_09_25.py,"it.* values are per-target means across informants, rounded"
+sun_2025_morality_study3_honesty,item_response_warehouse_2,whole,2026-09-25,wrong_data,,#2381,,,tools/withdrawals/withdraw_wrongnow_2026_09_25.py,"it.* values are per-target means across informants, rounded"
+sun_2025_morality_study3_honesty__items,irw_text,whole,2026-09-25,wrong_data,,#2381,,,tools/withdrawals/withdraw_wrongnow_2026_09_25.py,item text for a withdrawn table
+sun_2025_morality_study3_loyalty,item_response_warehouse_2,whole,2026-09-25,wrong_data,,#2381,,,tools/withdrawals/withdraw_wrongnow_2026_09_25.py,"it.* values are per-target means across informants, rounded"
+sun_2025_morality_study3_loyalty__items,irw_text,whole,2026-09-25,wrong_data,,#2381,,,tools/withdrawals/withdraw_wrongnow_2026_09_25.py,item text for a withdrawn table
+sun_2025_morality_study3_meaning,item_response_warehouse_2,whole,2026-09-25,wrong_data,,#2381,,,tools/withdrawals/withdraw_wrongnow_2026_09_25.py,"it.* values are per-target means across informants, rounded"
+sun_2025_morality_study3_moralratings,item_response_warehouse_2,whole,2026-09-25,wrong_data,,#2381,,,tools/withdrawals/withdraw_wrongnow_2026_09_25.py,"it.* values are per-target means across informants, rounded"
+sun_2025_morality_study3_nemotion,item_response_warehouse_2,whole,2026-09-25,wrong_data,,#2381,,,tools/withdrawals/withdraw_wrongnow_2026_09_25.py,"it.* values are per-target means across informants, rounded"
+sun_2025_morality_study3_neuroticism,item_response_warehouse_2,whole,2026-09-25,wrong_data,,#2381,,,tools/withdrawals/withdraw_wrongnow_2026_09_25.py,"it.* values are per-target means across informants, rounded"
+sun_2025_morality_study3_openness,item_response_warehouse_2,whole,2026-09-25,wrong_data,,#2381,,,tools/withdrawals/withdraw_wrongnow_2026_09_25.py,"it.* values are per-target means across informants, rounded"
+sun_2025_morality_study3_pemotion,item_response_warehouse_2,whole,2026-09-25,wrong_data,,#2381,,,tools/withdrawals/withdraw_wrongnow_2026_09_25.py,"it.* values are per-target means across informants, rounded"
+sun_2025_morality_study3_respectfulness,item_response_warehouse_2,whole,2026-09-25,wrong_data,,#2381,,,tools/withdrawals/withdraw_wrongnow_2026_09_25.py,"it.* values are per-target means across informants, rounded"
