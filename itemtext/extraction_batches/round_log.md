@@ -27833,3 +27833,11 @@ Nothing was repaired, reset, committed, promoted or deleted.
 agent hit the account's monthly spend limit. All 3 claimed tables were state NOTHING (no artifact of any kind), so
 personalitychange_kramer_2025_si, adamczyk_2022_cesd and depue_2023_gds15 were reset to `pending`, and the empty
 batch_519 directory was removed. No work was discarded.
+
+## batch_519 — 2026-09-27T07:20-07:00 (1 table, 1 agent)
+
+- **Numbering:** "highest+1 below 300" would give batch_305, which already exists. The series has run consecutively to 518, and batch_519 was the number of the round that died on 2026-09-26 (it was reconciled and its directory removed), so this round took **batch_519**. The Step 1 hole rule no longer describes the live series and needs a human edit.
+- **Written 1 / blocked 0 / failed 0**, yield 100%. Circuit breaker not tripped.
+- `personalitychange_kramer_2025_si`: 40 items, 199 rows. mapping_basis=paper_explicit, based on the OSF zevcs codebook, where the SB codes equal the deposit column names. text_source=study_materials. Gates: validate PASS; audit WARN (explained in notes.csv as a design/data property: some items were Study-1-only or T3-only, and unlabelled midpoints ship blank); verify_batch PASS; lint clean; irw-validate ok; check_provenance exit 0.
+- Verification: PARTIAL. All 40 column fingerprints (n/sum/sumsq) reproduce the authors' .rda. Facet pairing sb07_k~sb12_k holds only on average: mean diagonal r is 0.179 vs 0.094 off-diagonal in S1 and 0.213 vs 0.133 in S2, but the diagonal is the row maximum in only 4/15 and 7/15 rows. The orchestrator re-ran the verify script, and the numbers above are from that run.
+- **Needs a human look (rights):** the sb07/sb12 texts are 15 single adjectives that name the BFI-2 facets, and the rights register blocks the BFI-2. They shipped on the same judgment as the sibling `_sa` (batch_518): the block covers the BFI-2 item sentences, and none of those appears here. If the BFI-2 block is meant to cover facet names, then both `_sa` and `_si` need pulling.
