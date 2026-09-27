@@ -11,6 +11,11 @@
 # and geacaballero_2019_pes_nwi_short). A couple of Likert categories have
 # raw typos ("alsolutely disagree", "absolutely disagree.") normalized to
 # their intended category before mapping.
+#
+# #2097: the Likert block used to be a hard-coded list of 30 names that
+# omitted item 18 (`education`). It is now derived from the data, as the
+# yes/no block already was: every non-X column whose answers all fall in
+# LIKERT_MAP. The source carries 31 such items.
 
 import io
 import tempfile
@@ -27,17 +32,6 @@ SUPPL_URL = "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC6660900/supplem
 MEMBER = "peerj-07-7369-s002.sav"
 UA = {"User-Agent": "IRW-Finder/1.0 (ben.domingue@gmail.com)"}
 
-LIKERT_ITEMS = [
-    "intmanagement", "oportdecisions", "oportdevelopment", "managlistens",
-    "directorvisible", "careeropportunit", "gestconsprob", "oportcomisions",
-    "levelpowerheadnurse", "nursingdiagn", "progquality", "mentoringnews",
-    "nursingmodel", "asignationpatients", "nursingphilosophy",
-    "plancuidadosescrito", "qualitymanagers", "nursingcompetence",
-    "goodcoordinator", "supportcoordinator", "mistakeopport",
-    "comprehensicoord", "workpraised", "enoughworkers", "enoughnurses",
-    "enoughsupportserv", "timedebatcasses", "worktimephysicians",
-    "relationsnursphysic", "propercollaboration",
-]
 LIKERT_MAP = {
     "absolutely disagree": 1, "alsolutely disagree": 1, "absolutely disagree.": 1,
     "slightly disagree": 2,
@@ -59,14 +53,20 @@ def convert():
     df = df.rename(columns={"ID": "id"})
     assert df["id"].nunique() == len(df)
     x_items = [c for c in df.columns if c.startswith("X")]
+    likert_items = [
+        c for c in df.columns
+        if c != "id" and not c.startswith("X")
+        and df[c].dropna().astype(str).str.strip().str.lower().isin(LIKERT_MAP).all()
+    ]
+    assert len(likert_items) == 31, likert_items
 
-    for c in LIKERT_ITEMS:
+    for c in likert_items:
         df[c] = df[c].astype(str).str.strip().str.lower().map(LIKERT_MAP)
     for c in x_items:
         df[c] = df[c].astype(str).str.strip().str.upper().map(YESNO_MAP)
 
     for out_name, item_cols in [
-        ("geacaballero_2019_pes_nwi", LIKERT_ITEMS),
+        ("geacaballero_2019_pes_nwi", likert_items),
         ("geacaballero_2019_pes_nwi_short", x_items),
     ]:
         long = df.melt(id_vars=["id"], value_vars=item_cols,
