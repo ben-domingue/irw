@@ -7,6 +7,19 @@
 # raw item-level Likert responses (1-5) from 234 CEOs/managers of Vietnamese
 # manufacturing enterprises across seven distinct measurement scales.
 # Each scale is written as its own IRW file per the "one file per scale" rule.
+#
+# NOTE (liem_2024_attitude_env): the seven even-numbered items ATE2, ATE4,
+# ATE6, ATE8, ATE10, ATE12 and ATE14 are STORED REVERSE-SCORED in the deposit
+# (S1 Data), so for them resp runs in the pro-ecological direction, not as
+# agreement with the printed statement. The scale is Dunlap et al.'s (2000)
+# revised NEP, whose even items are anti-ecological (e.g. ATE12 "Humans were
+# designed to dominate the remainder of nature"), yet every item behaves alike:
+# all 105 inter-item correlations are +0.35 to +0.86, item-rest correlations
+# are all >= +0.67 (alpha 0.949, as the paper's Table 2 reports, with positive
+# loadings for all 15), and the pattern holds after removing careless
+# responders. The paper never says "reverse". So resp = 5 on ATE12 means strong
+# DISagreement with human dominance. This script does no recoding; values are
+# as deposited and are not changed here (irw#2118).
 
 import os
 import pandas as pd
