@@ -27871,3 +27871,12 @@ batch_519 directory was removed. No work was discarded.
 - Audit WARN explained in notes.csv: _pre items asked only at the first wave (row-count anomaly is design), and 81.8% blank option_text = unlabelled 1–9 points.
 - Gates: validate PASS (--table-sets); normalize 0 changed; audit WARN (explained); verify_batch PASS; lint clean; irw-validate ok; check_provenance: no new issues (ye_2025_q25_scale `mixed` review note pre-existing).
 - Sibling depue_2023_subjcog remains pending, next in queue.
+
+## batch_523 — 2026-09-27T07:55-07:00 (1 table, 1 agent)
+
+- Written 1 / blocked 0 / failed 0 (yield 1/1). depue_2023_subjcog: 8 items, 48 rows, paper_explicit, translated_substitute (translation_source=study_supplied, language=Dutch — the Dutch wording of these ad hoc questions is unpublished; the ReadThisFirst.txt codebook English ships, disclosed in public_note).
+- Verification: VERIFIED. verify_depue_2023_subjcog.R PASS. 2021 Table 2 (N=640) M/SD/dec-same-inc counts exact for all 6 T1 items; Recalling vs Forgetfulness (tied in 2021) separated by 2023 Table 3 T1/T2/T3 %s, 15/15 within 0.49 points, runner-up ≥4.4; direction pinned (T3 resp 4-5 share 2.7-4.0% vs published 15-26%); CognFunct_pre vs _now by Pre 7.75 vs T2 7.49. Orchestrator re-check on the 2023 file: M2_CognFunct_pre 7.75 (1.00) vs published 7.75 (0.99).
+- Caveats (notes.csv, public_note): one code spans two reference periods (T1 "during the COVID-19 period" vs T2/T3 "in the past month"); 0="very bad" not shipped as a row because no respondent chose 0.
+- Audit WARN explained in notes.csv: row-count anomaly is wave design (Cognitive_functioning T1 only, CognFunct_pre T2 only, CognFunct_now T2/T3); 37.5% blank option_text = unlabelled 1-9 points.
+- Gates: validate PASS (--table-sets); normalize 0 changed; audit WARN (explained); verify_batch PASS; lint clean; irw-validate ok; check_provenance: no new issues (ye_2025_q25_scale `mixed` review note pre-existing).
+- Batch number 523 = highest+1 (the 300-304 hole rule only redirects a landing inside 300-304). Cap batch_571 not reached. depue_2023 siblings now all done.
