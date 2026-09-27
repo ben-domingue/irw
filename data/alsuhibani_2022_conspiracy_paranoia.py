@@ -13,13 +13,14 @@
 #     Studies 1, 2, and 3.
 #   - Self-Esteem Rating Scale (SERS, 20 items) -- explicitly used in
 #     "Studies 2 and 3" (not administered in Study 1).
-#   - Generic Conspiracist Beliefs Scale (GCBS) -- Study 3 explicitly used
-#     "the 15-item version ... employed in Study 2 ... the two additional
-#     items from Study 2 ... were not included", i.e. Study 2's GCBS1-15
-#     and Study 3's GCBS01-15 are the same 15 items in the same order.
-#     Study 2's 2 extra items (GCBS16-17, a separate "contradictory
-#     conspiracy theories" probe not in Study 3) are kept as their own
-#     small Study-2-only file rather than discarded.
+#   - Generic Conspiracist Beliefs Scale (GCBS) -- Study 3 used the 15-item
+#     GCBS without the two additional items Study 2 carried. #2435: the two
+#     studies do NOT share column positions. Study 2's variable labels put a
+#     Princess Diana item at GCBS7 and another at GCBS16, canonical items 7-14
+#     at GCBS8-15 and canonical item 15 at GCBS17. So Study 2 is mapped by
+#     item, not position: GCBS1-6 -> 01-06, GCBS8-15 -> 07-14, GCBS17 -> 15.
+#     The two Diana items (GCBS7, GCBS16 -- the "contradictory conspiracy
+#     theories" probe, not in Study 3) are the Study-2-only extra file.
 # PADS differs in both item count (10 vs 8) and scale range (0-4 vs 1-5)
 # between Study 1 and Study 2 -- no confirmed item correspondence in the
 # text, so these stay as separate per-study files. Consp (Study 1), the
@@ -128,7 +129,7 @@ def convert():
                 "alsuhibani_2022_consp_s1", valid_range=(1, 11))
     write_scale(s2, 2, [f"PADS{i}" for i in range(1, 9)],
                 "alsuhibani_2022_pads_s2", valid_range=(1, 5))
-    write_scale(s2, 2, [f"GCBS{i}" for i in range(16, 18)],
+    write_scale(s2, 2, ["GCBS7", "GCBS16"],  # the two Diana items (#2435)
                 "alsuhibani_2022_gcbs_extra_s2", valid_range=(1, 5))
     write_scale(s3, 3, [f"PARNOIA{i}" for i in range(1, 9)],
                 "alsuhibani_2022_paranoia_s3", valid_range=(1, 5))
@@ -151,7 +152,9 @@ def convert():
         "alsuhibani_2022_sers")
 
     write_merged_scale(
-        [(s2, 2, {f"GCBS{i}": f"GCBS_{i:02d}" for i in range(1, 16)}),
+        [(s2, 2, {**{f"GCBS{i}": f"GCBS_{i:02d}" for i in range(1, 7)},
+                  **{f"GCBS{i}": f"GCBS_{i - 1:02d}" for i in range(8, 16)},
+                  "GCBS17": "GCBS_15"}),  # by item, not position (#2435)
          (s3, 3, {f"GCBS{i:02d}": f"GCBS_{i:02d}" for i in range(1, 16)})],
         "alsuhibani_2022_gcbs")
 

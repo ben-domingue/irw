@@ -77,9 +77,10 @@ save(df,file="cavalini_mokken.Rdata")
 ## DS14, 34
 load("DS14.rda")
 x<-data.frame(DS14)
-##recoding two as per instructions
-x[,3]<-abs(5-x[,3])
-x[,5]<-abs(5-x[,3])
+## #2434: an earlier "recoding two as per instructions" step recoded Si1 as
+## 5-x (off by one) and then overwrote Si3 with |5-(5-Si1)|, i.e. a copy of
+## Si1, losing the real Si3. Removed: Si1 and Si3 ship raw on 0-4 like every
+## other item; reverse-keying belongs in metadata, not in resp.
 id<-1:nrow(x)
 L<-list()
 for (i in 3:ncol(x)) L[[i]]<-data.frame(id=id,item=names(x)[i],age=x$Age,resp=x[,i])
