@@ -28149,3 +28149,11 @@ batch_519 directory was removed. No work was discarded.
 - Orchestrator re-check: table_sets.R resp set {1,2,4,5}, per-item n 2126/2118/2109/2018/1975/1941/1870 (sum 14157 = agent rebuild); P504/P505 printed wording confirmed from the agent's 300-dpi render of cues3032 p.2 (options 1-5 and 9, no 8). No source overrides of item mapping, no data defects.
 - Written 1 / blocked 0 / failed 0; yield 100%. Gates: normalize 0 changed, audit PASS, verify_batch MISSING(exempt), lint clean, irw-validate ok, check_provenance exit 0.
 - Numbering: highest existing (555)+1 = 556. Cap batch_571 not reached. 11 pending remain.
+
+## batch_557 — 2026-09-27T13:28:44-07:00 (1 table, 1 agent)
+- spain_2014_family_change: WRITTEN. 7 items x 2 levels (14 rows). CIS Estudio 3032, Pregunta 28 (P2801..P2807, cols 236-242), data/spain_2014_family.do Bookmark 13 "change"; same MD3032.zip as siblings (hashes match). mapping_basis=data_labels, text_source=study_materials, translation_source=machine_translation (Spanish-only source; issues-page line owed at upload). Rights: existing CIS row (allow, irw#2381).
+- Caveats (notes.csv): .do recodes the unread midpoint 3 "(NO LEER) Permanece igual" plus 8/9 to missing, so resp is {1 Aumenta, 2 Disminuye} by design; ES3032 label for P2803 reads "los/as abuelos/as" vs printed "los abuelos" -- questionnaire wording shipped, as in batch_556; the new-technology framing is only in `instructions`.
+- Agent rebuild from DA3032 reproduces live 9998/9998 rows, 2096 ids, 0 resp/cov mismatches. Step 5b exempt (data_labels); NOT_NEEDED row in verification_merged.csv and mapping_verification.csv.
+- Orchestrator re-check: table_sets.R resp set {1,2}, per-item n 1845/1176/1146/1599/1303/1408/1521 (sum 9998), identical to the agent's. No source overrides, no data defects claimed.
+- Written 1 / blocked 0 / failed 0; yield 100%. Gates: normalize 0 changed, audit PASS, verify_batch MISSING(exempt), lint clean, irw-validate ok, check_provenance exit 0.
+- Numbering: highest existing (556)+1 = 557 (Step 1's "below 300" rule is stale -- the series is already past 305; followed prior rounds' practice). Cap batch_571 not reached. 10 pending remain.
