@@ -298,6 +298,7 @@ def main(argv: list[str] | None = None) -> int:
                 item.status, item.dataset = planning.EXCLUDED, None
                 item.note = f"not one of {target.name}'s {len(META_TABLES)} tables"
     planning.cross_source_conflicts(items, target, targets, index)
+    planning.within_source_duplicates(items, target, targets, index)
     resolve_elsewhere(items, target, targets, args.yes)
     show(items, target, owner, found.skipped)
 
