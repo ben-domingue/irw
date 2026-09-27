@@ -88,7 +88,7 @@ from irw_batch_updated import (
     check_license, TABULAR_EXT, polite_get, FileTooLarge,
     extract_external_link, triage_external_link,
 )
-from irw_triage_updated import load_table, triage_dataset, preflight_deps
+from irw_triage_updated import load_table, reread_hint, triage_dataset, preflight_deps
 
 EUROPEPMC_SEARCH = "https://www.ebi.ac.uk/europepmc/webservices/rest/search"
 # includeInlineImage=false is load-bearing, not an optimisation. Without it
@@ -400,7 +400,8 @@ def process_one(hit: Hit) -> dict:
 
     fname = tabular[0]
     try:
-        df = load_table(zf.read(fname), filename=fname)
+        content = zf.read(fname)
+        df = load_table(content, filename=fname)
     except Exception as e:
         return {**base, "flag": "download_failed", "reasons": str(e)[:200],
                 "n_responses": "", "n_participants": "", "n_items": "",
@@ -410,6 +411,10 @@ def process_one(hit: Hit) -> dict:
         t = triage_dataset(df)
         meta = t.metadata or {}
         reasons = list(t.reasons)
+        # First, so the 400-char cap on `reasons` cannot cut it (#2221).
+        hint = reread_hint(content, fname, t)
+        if hint:
+            reasons.insert(0, hint)
         if unknown:
             reasons.append("license_unknown* — could not confirm an open license; verify before submission")
         return {**base, "flag": t.flag, "reasons": " | ".join(reasons)[:400],
