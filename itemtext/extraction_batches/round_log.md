@@ -27961,3 +27961,11 @@ batch_519 directory was removed. No work was discarded.
 - Gates: normalize 0; audit PASS; verify_batch PASS; lint clean; irw-validate ok; check_provenance exit 0. Its only flag is ye_2025_q25_scale (mixed, pre-existing, review only).
 - Siblings yoshimura_2026_isu_scale (Komaki items 9-14) and yoshimura_2026_psych_safety are next in the queue.
 - Batch number 532 = highest+1. Cap batch_571 not reached. 35 pending remain.
+
+## batch_533 — 2026-09-27T09:3x-07:00 (1 table, 1 agent)
+- Written 1 / blocked 0 / failed 0. Yield 1/1.
+- yoshimura_2026_isu_scale: 30 rows (6 items x 5). paper_order: same source as the ES sibling (batch_532). Deposit PLOS ONE 10.1371/journal.pone.0346791 has no item text. Wording is Komaki (1994) Appendix items 9-14 (instrumental support), numbered to match isu1m9-14. Komaki item 9 is the Japanese of the paper's one English example. text_source=canonical_instrument, translation_source=mixed: item 9 English is the study's own and items 10-14 were machine-translated by IRW, so an issues-page line is owed once live. Japanese transcribed from a 300-dpi page render because the OCR layer is garbled, so a human spot-check is advised. option_text is the codebook's English anchors; instructions are blank.
+- Verification PARTIAL. Parcels {9,10}, {11,12} and {13,14} (S1 File) reproduce S1 Table B means/SDs (3.235/1.046, 3.166/1.046, 2.993/1.036 vs 3.23/1.05, 3.17/1.05, 2.99/1.04) and inter-parcel r .769/.602/.714 vs .77/.60/.71. Only 1 of the 90 pair assignments reproduces them. By content, {9,10,11} (info/advice) and {12,13,14} (hands-on) are the top two triplets of 20. Order within each pair is not established. verify_batch re-ran the script: PASS.
+- Rights: no register row; J-STAGE has a bare 1994 article copyright notice. Not a block. Step 3b: no mismatch. Suggest dictionary Description "supervisor instrumental support (Komaki 1994), 6 items, 1-5".
+- Gates: normalize 0; audit PASS; verify_batch PASS; lint clean; irw-validate ok; check_provenance exit 0 (only flag is the pre-existing ye_2025_q25_scale).
+- Batch number 533 = highest+1. Cap batch_571 not reached. 34 pending remain; yoshimura_2026_psych_safety is next.
