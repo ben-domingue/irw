@@ -90,6 +90,9 @@ final_long <- final %>%
 item_num <- as.integer(sub("r", "", final_long$item))
 gmat <- as.matrix(final_long[paste0("g", 1:46)])
 final_long$rt <- gmat[cbind(seq_len(nrow(final_long)), item_num)]
+# #2352: t*_g* are response times in msec (OSF SM_1_Variables_description.pdf);
+# the standard codes rt in seconds.
+final_long$rt <- final_long$rt / 1000
 
 
 final_long <- final_long %>%
@@ -99,4 +102,4 @@ final_long <- final_long %>%
     item, resp, rt
   )
 
-write.csv(final_long, "quopl2_forster_2021_quop.csv", row.names = FALSE)
+write.csv(final_long, "quopl2_forster_2021_quop.csv", row.names = FALSE, na = "")
