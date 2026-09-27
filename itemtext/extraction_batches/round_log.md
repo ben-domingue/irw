@@ -27996,3 +27996,11 @@ batch_519 directory was removed. No work was discarded.
 - Step 4 gates: no __items.csv, so normalize/audit exit "No *__items.csv files found" (expected); verify/lint/irw-validate/check_provenance have nothing of this batch's to check. No verification rows (nothing shipped).
 - Orchestrator note: `attr(x, "label")` in R partially matches `labels` and falsely reports variable labels on haven columns; use `exact = TRUE`.
 - Batch number 536 = highest+1. Cap batch_571 not reached. 31 pending remain.
+
+## batch_537 — 2026-09-27T09:54-07:00 — 1 table (one agent)
+- Written 1 / blocked 0 / failed 0 (yield 100%). nguyen_2026_misfit_academic_performance WRITTEN: 3 items (PE1-PE3) x 5 resp, source Mendeley 10.17632/j8tkztz636 V3 (CC BY 4.0), Appendix_Questionnaire_Revised.docx; mapping_basis=paper_explicit; verification PARTIAL (per-item resp frequencies match deposit .xlsx columns cell for cell, 0 cross-matches; code->wording rests on the printed labels).
+- Caveat, orchestrator re-checked: all three questionnaire docx copies print PE1-PE4 under Academic Performance; every data file has PE1-PE3 only. PE4 omitted; drop-and-renumber can't be excluded. Disclosed in public_note.
+- Judgement call for triage: language=Vietnamese / text_source=translated_substitute / translation_source=study_supplied is INFERRED from a Vietnamese undergraduate sample; the deposit states no administration language and holds only English. Revisit if we'd rather not assert it.
+- Only endpoint anchors published (Totally disagree/Totally agree); resp 2-4 option_text blank. Agent reports ~29.7% straight-lining across the 15 items (data property, not changed).
+- Gates: normalize 0 changes; audit PASS; verify_batch PASS; lint clean; irw-validate ok; check_provenance exit 0.
+- Batch number 537 = highest+1. Cap batch_571 not reached. 30 pending remain; the next four are this table's nguyen_2026_misfit_* siblings (same questionnaire, 3 printed = 3 data items each).
