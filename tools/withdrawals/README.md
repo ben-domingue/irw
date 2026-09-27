@@ -5,7 +5,7 @@ so they disappear at the next release. Most delete item-text tables from
 `irw_text` after a rights ruling (see `itemtext/instrument_rights_register.csv`).
 The rest pull response tables for personal data, duplication or misnaming.
 `withdraw_personal_data_2026_09_19.py`, `withdraw_online_addiction.py`,
-`withdraw_joreskog_moustaki_2001.py`, `withdraw_zhou_2025_peer_relationship_w5.py`
+`withdraw_joreskog_moustaki_2001.py`, `withdraw_zhou_2025_peer_relationship_w5.py`, `withdraw_sun_2025_study1_informant.py`
 and `retire_marcatto_ocs.py` fall in that group.
 
 Each has already been run. They stay here because provenance records, the
