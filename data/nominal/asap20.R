@@ -19,5 +19,5 @@ essays<-gsub("¨","\"",essays)
 essays<-gsub("\"","'",essays)
 df$text<-essays
 
-write.table(df,file="asap20train.csv",row.names=FALSE,sep="|")
+write.table(df,file="asap20train_nom.csv",row.names=FALSE,sep="|")
 

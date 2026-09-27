@@ -92,7 +92,7 @@ def _build_nominal(df: pd.DataFrame, outname: str) -> None:
 def main() -> None:
     df = _load()
     _build_bin(df, "blum_2018_imak_bin.csv")
-    _build_nominal(df, "blum_2018_imak_nominal.csv")
+    _build_nominal(df, "blum_2018_imak_nom.csv")
 
 
 if __name__ == "__main__":

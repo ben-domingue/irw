@@ -19,7 +19,7 @@ option letter itself, an unordered category.
 
 Table written (to output_noncore/)
 ----------------------------------
-mthimkhulu_2023_pirls_reading_mc   4 items, responses "A".."D"
+mthimkhulu_2023_pirls_reading_nom   4 items, responses "A".."D"
 
 Coding notes
 ------------
@@ -86,7 +86,7 @@ def main():
     assert long.groupby("item")["text"].nunique().min() > 1
 
     os.makedirs(OUTDIR, exist_ok=True)
-    path = os.path.join(OUTDIR, "mthimkhulu_2023_pirls_reading_mc.csv")
+    path = os.path.join(OUTDIR, "mthimkhulu_2023_pirls_reading_nom.csv")
     long.to_csv(path, index=False)
     n_id, n_it = long["id"].nunique(), long["item"].nunique()
     print(f"{path}: {n_id} ids x {n_it} items = {len(long)} responses, "

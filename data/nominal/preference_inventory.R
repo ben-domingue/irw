@@ -22,4 +22,4 @@ df <- df |>
 table(df$resp)
 
 # save df to Rdata file
-save(df, file="preference_inventory.Rdata")
+save(df, file="preference_inventory_nom.Rdata")
