@@ -28252,3 +28252,12 @@ batch_519 directory was removed. No work was discarded.
 - Audit WARN (blank item_text 14.3%, blank option_text 60%) is explained in notes.csv. It is expected (COVCONS_1 plus unlabeled resp 1-3) and is not a data defect.
 - Written 1 / blocked 0 / failed 0; yield 100%. Gates: normalize 0 changed, audit WARN (explained), verify_batch PASS, lint clean, irw-validate ok, check_provenance exit 0 (pre-existing ye_2025_q25_scale `mixed` review note, not this batch).
 - Numbering: highest (568)+1 = 569. Cap batch_617 not reached. 45 pending remain.
+
+## batch_570 — 2026-09-27T16:20 → 16:31 (1 table, 1 agent)
+- `enders_2022_covid_vax_misinfo` WRITTEN with caveats, 25 rows (COVVAXINFO_1..5 x resp 1-5). mapping_basis=reconstructed, text_source=study_materials (Enders et al. 2022 PLOS ONE e0276082, CC BY, main-text Table 1). No rights-register row applies.
+- Unlike COVCONS (batch_569), Analyses.do gives this block no mnemonic names (covvaxinfo_1..5 only), so the mapping rests on the data alone. Live %agree for _1..5 is 11.198/17.828/11.392/15.002/12.567 against Table 1's 18/15/12/11/11 ("(Item N)" again means popularity rank). Of the 120 assignments, the minimum summed deviation (1.332, next best 2.547) fixes _2 = can give you COVID, _4 = pharma scam and _5 = alter your DNA.
+- **COVVAXINFO_1 and _3 ship with blank item_text.** They are the infertility and "shed" items, and both print at 11%, so the source cannot tell them apart. A .qsf from the authors would settle it. **Source discrepancy:** Table 1 prints 12% for DNA, but _5 is 12.567 (rounds to 13). No assignment reproduces all five printed values, and DNA=_5 is a best fit that is disclosed in public_note. The scale's alpha/M/SD of .93/2.16/1.06 is reproduced (0.9306/2.1596/1.0591). Verification is PARTIAL.
+- Orchestrator re-check (Step 5b): the Table 1 wording and percentages in article.xml match the agent's report, and so does the deposit raw.csv (n 2054/2053/2054/2053/2053, same five percentages to 3 dp). verify_batch PASS.
+- Audit WARN (blank item_text 40%, blank option_text 60%) is explained in notes.csv. It is expected (the _1/_3 pair plus unlabeled resp 1-3) and is not a data defect.
+- Written 1 / blocked 0 / failed 0; yield 100%. Gates: normalize 0 changed, audit WARN (explained), verify_batch PASS, lint clean, irw-validate ok, check_provenance exit 0 (pre-existing `mixed` review note, not this batch).
+- Numbering: highest (569)+1 = 570. Cap batch_617 not reached. 44 pending remain.
