@@ -237,7 +237,8 @@ def validate_frame(df, *, label: str = "", profile: str = "upload",
             or check.name.endswith("_na") or check.name in ("resp_numeric", "dup_id_item") \
             else "heuristic"
         report.findings.append(
-            Finding(check.name, severity, check.detail, table=table, group=group))
+            Finding(check.name, severity, check.detail, table=table, group=group,
+                    details=tuple(check.details)))
 
     # `dup_id_item` asks whether a `wave`/`timepoint`/`date` column explains a
     # repeated id+item. That list came from validate_irw.R and is stale: it
@@ -404,8 +405,12 @@ def validate_paths(paths, *, profile: str = "upload") -> list:
     return [validate_file(p, profile=profile) for p in paths]
 
 
-def format_report(report: Report, *, show_passes: bool = False) -> str:
-    """One block per table, errors first. Kept plain so CI logs stay readable."""
+def format_report(report: Report, *, show_passes: bool = False,
+                  verbose: bool = False) -> str:
+    """One block per table, errors first. Kept plain so CI logs stay readable.
+
+    `verbose` lists every affected case under a finding whose message only
+    samples them (which items, which values), instead of the first few."""
     lines = [f"{report.label} [{report.profile}]"]
     # Two verdicts, because they answer different questions: is this a valid
     # IRW table (the standard), and would IRW accept it (the profile's gate,
@@ -423,6 +428,8 @@ def format_report(report: Report, *, show_passes: bool = False) -> str:
     for f in sorted(report.findings, key=lambda f: order.get(f.severity, 3)):
         where = f"[{f.clause}]" if f.clause else ""
         lines.append(f"  {f.severity.upper():5s} {f.check:22s} {where:4s} {f.message}")
+        if verbose:
+            lines.extend(f"        - {d}" for d in f.details)
     for f in report.overridden:
         lines.append(f"  OVERRIDDEN {f.check:17s} {f.message}")
     if show_passes and report.checks_run:

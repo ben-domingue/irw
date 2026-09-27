@@ -27,6 +27,7 @@ from irw_validate import (CORE_CHECKS, exit_code, validate_file,  # noqa: E402
                           validate_frame)
 from irw_validate._checks import run_qc  # noqa: E402
 from irw_validate.cli import expand_paths, main  # noqa: E402
+from irw_validate.core import format_report  # noqa: E402
 
 
 def F(**cols):
@@ -595,6 +596,49 @@ class Cli(unittest.TestCase):
         self.assertEqual(
             main([path, "--override-check", "resp_numeric", "--override", reason]),
             1, "resp_variation* should still block")
+
+
+class VerboseDetails(unittest.TestCase):
+    """#2298: name the dominant value, and let --verbose list every item."""
+
+    def _frame(self):
+        rows = []
+        for i in range(1, 101):
+            rows.append((i, "PHQ15_1", 0 if i <= 62 else 1 + i % 3))   # 0 dominant
+            rows.append((i, "PHQ15_2", 2 if i <= 70 else 1 + 2 * (i % 2)))  # interior 2
+            rows.append((i, "PHQ15_3", i % 4))                         # spread
+        return pd.DataFrame(rows, columns=["id", "item", "resp"])
+
+    def test_message_names_the_dominant_value(self):
+        report = validate_frame(self._frame(), label="x_2024_phq", profile="triage")
+        f = next(f for f in report.findings if f.check == "imputed_values*")
+        self.assertIn("2 of 3 item(s)", f.message)
+        self.assertIn("'PHQ15_2', resp 2 at 70%", f.message)
+        self.assertEqual(f.details, ("'PHQ15_2': resp 2 at 70%",
+                                     "'PHQ15_1': resp 0 at 62%"))
+
+    def test_verbose_lists_every_item_and_default_does_not(self):
+        report = validate_frame(self._frame(), label="x_2024_phq", profile="triage")
+        quiet = format_report(report)
+        loud = format_report(report, verbose=True)
+        self.assertNotIn("- 'PHQ15_1': resp 0 at 62%", quiet)
+        self.assertIn("- 'PHQ15_1': resp 0 at 62%", loud)
+        self.assertIn("- 'PHQ15_2': resp 2 at 70%", loud)
+
+    def test_json_carries_details(self):
+        report = validate_frame(self._frame(), label="x_2024_phq", profile="triage")
+        d = next(f for f in report.to_dict()["findings"]
+                 if f["check"] == "imputed_values*")
+        self.assertEqual(len(d["details"]), 2)
+
+    def test_cli_accepts_verbose(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            os.environ["IRW_VALIDATE_LEDGER"] = os.path.join(tmp, "ledger.csv")
+            self.addCleanup(os.environ.pop, "IRW_VALIDATE_LEDGER", None)
+            path = os.path.join(tmp, "x_2024_phq.csv")
+            self._frame().to_csv(path, index=False)
+            self.assertEqual(main([path, "--verbose"]), 0)
+            self.assertEqual(main([path, "-v"]), 0)
 
 
 class CliDirectories(unittest.TestCase):

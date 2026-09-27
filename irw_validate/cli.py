@@ -6,6 +6,7 @@
     irw-validate out/x.csv --profile core        # the validate_irw.R subset
     irw-validate out/x.csv --strict              # warnings block too
     irw-validate out/x.csv --json                # machine-readable, for CI
+    irw-validate out/x.csv --verbose             # every affected item, not the first few
     irw-validate out/x.csv --override-check resp_scale_mixed \\
         --override "two response formats, one construct; author confirmed 2026-09-02"
 
@@ -123,6 +124,10 @@ def main(argv: list | None = None) -> int:
     ap.add_argument("--strict", action="store_true",
                     help="warnings block too")
     ap.add_argument("--json", action="store_true", help="machine-readable output")
+    ap.add_argument("-v", "--verbose", action="store_true",
+                    help="list every affected item under a warning that "
+                         "otherwise names only the first few (--json always "
+                         "carries them, as `details`)")
     ap.add_argument("--override", metavar="REASON",
                     help=f"waive blocking findings, giving a reason of at least "
                          f"{MIN_REASON} characters")
@@ -183,7 +188,7 @@ def main(argv: list | None = None) -> int:
         print(json.dumps([r.to_dict() for r in reports], indent=2))
     else:
         for report in reports:
-            print(format_report(report))
+            print(format_report(report, verbose=args.verbose))
 
     code = exit_code(reports, strict=args.strict)
     if code and not args.json:
