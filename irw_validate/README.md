@@ -2,12 +2,19 @@
 
 ```
 irw-validate out/*.csv                       # exit 1 if anything blocks
+irw-validate out/                            # every table directly in out/
+irw-validate -r .                            # ...and in every subdirectory
 irw-validate out/x.csv --profile core        # the validate_irw.R subset
 irw-validate out/x.csv --strict              # warnings block too
 irw-validate out/x.csv --json                # for CI
 ```
 
 Exit codes: `0` ok · `1` something blocks · `2` bad input. Same contract as `red_up`.
+
+A directory argument picks up `.csv`, `.tsv`, `.rdata`, `.rda` and `.rds` files and
+skips everything else silently, including hidden files and `__MACOSX/`. `.txt` is
+read when you name the file but not picked up from a directory, because there it
+is usually a README. A directory with no tables in it exits `2`.
 
 ## Installing
 
