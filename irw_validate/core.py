@@ -4,7 +4,7 @@ from __future__ import annotations
 import os
 from pathlib import Path
 
-from . import extra
+from . import extra, rights
 from ._checks import (irw_metadata, occasion_columns,
                       resolve_occasion, run_qc)
 from .model import STANDARD_VERSION, Finding, Report, severity_for
@@ -189,9 +189,25 @@ def _validate_item_text(df, label: str, profile: str) -> Report:
     for finding in extra.check_name(table):
         report.checks_run.append(finding.check)
         report.findings.append(finding)
+    if profile == "upload":
+        _check_rights(report, rights.check_item_text, df, table)
     report.stats = {"n_rows": len(df),
                     "n_items": int(df["item"].nunique()) if "item" in df else 0}
     return report
+
+
+def _check_rights(report: Report, check, df, table: str) -> None:
+    """The rights-register hold (#2154), on the `upload` profile only: it is a
+    question about a table about to ship, not about one already published
+    (`legacy`) or a triage candidate. Warn-only, and silent when clean -- a
+    miss is not a clearance, so no finding ever says "rights checked". A
+    missing register is recorded in checks_run rather than passed quietly."""
+    register = rights.load_register()
+    if register is None:
+        report.checks_run.append("rights_register:unavailable")
+        return
+    report.checks_run.append("rights_register")
+    report.findings.extend(check(df, table, register))
 
 
 def validate_frame(df, *, label: str = "", profile: str = "upload",
@@ -285,6 +301,9 @@ def validate_frame(df, *, label: str = "", profile: str = "upload",
                         + extra.check_item_variants(df, table)):
             report.checks_run.append(finding.check)
             report.findings.append(finding)
+
+    if profile == "upload":
+        _check_rights(report, rights.check_item_codes, df, table)
 
     if {"id", "item", "resp"}.issubset(df.columns):
         try:
