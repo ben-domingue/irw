@@ -27860,3 +27860,14 @@ batch_519 directory was removed. No work was discarded.
 - Verification: PARTIAL. verify_depue_2023_gds15.R re-run by verify_batch: PASS. Every published total/alpha reproduced exactly (2021 N=640 3.00 (3.01); 2023 T1/T2/T3 2.60/2.59/2.77; drop-outs 3.56). GDS10 pinned as the top correlate of all three memory measures (margins .14/.09/.08). All item-rest r positive. Not established: the order among items 1, 3–8 and 11–15.
 - Gates: validate PASS (--table-sets); normalize 0 changed; audit PASS; verify_batch PASS; lint clean; irw-validate ok; check_provenance: no unreviewed machine_translation table (ye_2025_q25_scale `mixed` review note pre-existing, not this batch).
 - Siblings depue_2023_pwi and depue_2023_subjcog remain pending, next in queue.
+
+## batch_522 — 2026-09-27T07:46-07:00 (1 table, 1 agent)
+
+- Numbering: highest existing batch is 521 (series already past the 300–304 hole), so 522. Cap batch_571 not reached.
+- **Written 1 / blocked 0 / failed 0**, yield 100%. Circuit breaker not tripped.
+- `depue_2023_pwi`: 16 items (PWI1–8 + PWI1_pre–8_pre) × 11 points (0–10) = 176 rows. mapping_basis=paper_explicit (2021 supplement: "PWI-A1 to PWI-A8 … respectively, general life satisfaction, standard of living, health, achieving in life, relationships, safety, community connectedness and future security"). text_source=translated_substitute, language=Dutch (Dutch PWI-A wording unpublished anywhere in the deposits/papers), translation_source=official_instrument_english (International Wellbeing Group 2013 manual). Rights: no register row for PWI; manual and ACQOL page state no restriction beyond citation (ACQOL live page bot-walled, read via 2021 Wayback copy, sha256 in provenance). No register row written.
+- PWIk and PWIk_pre share a stem; the study's reference-period framing is unpublished, stated in public_note. Points 1–9 unlabelled, option_text blank.
+- Verification: VERIFIED. verify_depue_2023_pwi.R re-run by verify_batch: PASS. 2023 Table 3 (n=371): all 32 means + 32 SDs reproduced within 0.005; runner-up item 3.39–9.70 points off, so every item (incl. _pre vs current) is distinguished. 2021 Table 2 (N=640) change scores reproduced for all 8 domains; residuals PWI1 mean −9.62 vs −9.63 (rounding) and PWI5 212 vs 213 decreases (deposit has 639 non-missing PWI5 pairs — one row blank on both). Orchestrator saw the same numbers in the verify_batch re-run; not a defect worth an issue.
+- Audit WARN explained in notes.csv: _pre items asked only at the first wave (row-count anomaly is design), and 81.8% blank option_text = unlabelled 1–9 points.
+- Gates: validate PASS (--table-sets); normalize 0 changed; audit WARN (explained); verify_batch PASS; lint clean; irw-validate ok; check_provenance: no new issues (ye_2025_q25_scale `mixed` review note pre-existing).
+- Sibling depue_2023_subjcog remains pending, next in queue.
