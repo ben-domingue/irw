@@ -28199,3 +28199,10 @@ batch_519 directory was removed. No work was discarded.
 - Orchestrator re-check: table_sets per-item n 2451/2459/2434/2448/2447/2461/2456/2343/2438 (sum 21937), resp 1-4 on every item; each equals 2464 minus the agent's code-8 and code-9 counts. No source overrides, no data defects claimed.
 - Written 1 / blocked 0 / failed 0; yield 100%. Gates: normalize 0 changed, audit PASS, verify_batch MISSING(exempt), lint clean, irw-validate ok, check_provenance exit 0.
 - Numbering: highest existing (561)+1 = 562. Cap batch_571 not reached. 5 pending remain.
+
+## batch_563 — 2026-09-27T14:11:01-07:00 — 1 table (spain_2014_family_marriage), one agent
+- spain_2014_family_marriage: WRITTEN, 36 rows (9 items p901-p909 x resp 1-4), mapping_basis=data_labels (ES3032 variable names at DATA LIST cols 97-105 = questionnaire column codes (97)-(105)), text_source=study_materials, translation_source=machine_translation (issues-page line owed at upload). CIS rights row (irw#2381) applied.
+- Source override: p907 item_text follows the questionnaire ('Tener hijos/as o pensar tenerlos') instead of the ES3032 label ('...tenerlos/las'); 8/9 other labels identical. Orchestrator confirmed against ES3032 line 113 and the page-3 render of P.9; mapping unaffected (same code/column 103).
+- Agent rebuild from DA3032 reproduces live 20788/20788 rows, 2431 ids, 0 resp/cov_age mismatches. Orchestrator re-check: table_sets per-item n 2351/2345/2268/2098/2343/2350/2379/2287/2367, resp 1-4 on every item; each equals 2464 minus the agent's code-8 (107/111/185/353/96/91/75/168/89) and code-9 (6/8/11/13/25/23/10/9/8) counts. No response-data defect; dictionary Description matches P.9.
+- Written 1 / blocked 0 / failed 0; yield 100%. Gates: normalize 0 changed, audit PASS, verify_batch MISSING(exempt), lint clean, irw-validate ok, check_provenance exit 0. NOT_NEEDED row in verification_merged.csv and mapping_verification.csv.
+- Numbering: highest existing (562)+1 = 563. Cap batch_571 not reached. 4 pending remain.
