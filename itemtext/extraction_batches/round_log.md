@@ -28157,3 +28157,11 @@ batch_519 directory was removed. No work was discarded.
 - Orchestrator re-check: table_sets.R resp set {1,2}, per-item n 1845/1176/1146/1599/1303/1408/1521 (sum 9998), identical to the agent's. No source overrides, no data defects claimed.
 - Written 1 / blocked 0 / failed 0; yield 100%. Gates: normalize 0 changed, audit PASS, verify_batch MISSING(exempt), lint clean, irw-validate ok, check_provenance exit 0.
 - Numbering: highest existing (556)+1 = 557 (Step 1's "below 300" rule is stale -- the series is already past 305; followed prior rounds' practice). Cap batch_571 not reached. 10 pending remain.
+
+## batch_558 — 2026-09-27T13:40:04-07:00 — 1 table (spain_2014_family_chores)
+- Written: spain_2014_family_chores (6 items p8d01-p8d06, 30 rows, resp {1..5} Siempre la mujer .. Siempre el hombre). CIS Estudio 3032 P.8d, .do Bookmark 4; mapping_basis=data_labels, text_source=study_materials, translation_source=machine_translation (issues-page line owed at upload). ES3032 labels match printed questionnaire p.3 and TARJETA F 6/6.
+- Caveats (notes.csv): .do recodes code 6 'Lo hace una tercera persona' plus 0/7/8/9 to missing, so resp stops at 5; P.8d filtered to respondents cohabiting with a partner (877 records coded 0), carried in public_note.
+- Agent rebuild from DA3032 reproduces live 9243/9243 rows, 1584 ids, 0 resp/cov mismatches. Step 5b exempt (data_labels); NOT_NEEDED row in verification_merged.csv and mapping_verification.csv.
+- Orchestrator re-check: irw_table_sets n_rows 9243, items p8d01-p8d06, resp {1,2,3,4,5} -- identical to the agent's. No source overrides, no data defects claimed.
+- Written 1 / blocked 0 / failed 0; yield 100%. Gates: normalize 0 changed, audit PASS, verify_batch MISSING(exempt), lint clean, irw-validate ok, check_provenance exit 0.
+- Numbering: highest existing (557)+1 = 558, following prior rounds' practice (Step 1's "below 300" rule is stale). Cap batch_571 not reached. 9 pending remain.

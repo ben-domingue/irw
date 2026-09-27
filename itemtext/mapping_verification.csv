@@ -1969,3 +1969,4 @@ morano_2019_self_efficacy,batch_551,paper_explicit,2026-09-27,published scale me
 "spain_2014_family_adoption","batch_555","data_labels","","none","NOT_NEEDED","mapping_basis=data_labels: item codes are the CIS 3032 variable names P1701-P1702 (lower-cased by the .do; DA3032 cols 144-145 per ES3032 and questionnaire column codes); ES3032 variable labels match cues3032 P.17 grid 2/2 character for character, value labels 1-5 shared (3/8/9 recoded missing); rebuild from DA3032 reproduces live 4321/4321 rows, 2350 ids, 0 resp mismatches; exempt from Step 5b"
 spain_2014_family_care,batch_556,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 spain_2014_family_change,batch_557,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
+spain_2014_family_chores,batch_558,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
