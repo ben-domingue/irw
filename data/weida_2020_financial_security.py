@@ -12,6 +12,19 @@
 # leftover from the CFPB Financial Well-Being item bank but is far too
 # incomplete (4 non-consecutive items out of that bank's much larger set)
 # to be usable as a coherent instrument -- not included.
+#
+# NOTE (irw#2197): the ten items are the CES-D-10, mapped to canonical
+# positions during item-text extraction (batch_220). secf_4m ("I felt that
+# everything I did was an effort") is detached from the scale in this sample:
+# item-rest r = 0.07 (the other nine 0.27-0.73), r = -0.18 and -0.08 with the
+# two positive-affect items, and the highest mean of the ten (1.68). Its
+# position rests on canonical CES-D-10 order plus endorsement rank, not on any
+# correlational signal, so it is the weakest of the ten assignments: either the
+# item performs poorly here or the deposit's column order departs from the
+# canonical order at this position, and the data do not say which. Separately,
+# secf_5m ("hopeful about the future") and secf_8m ("happy") are stored
+# already reverse-scored in the deposit; the plain row sum reproduces the
+# authors' dpsscore exactly. Data are as deposited; nothing is recoded here.
 
 from __future__ import annotations
 
