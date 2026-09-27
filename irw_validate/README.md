@@ -208,6 +208,21 @@ name checks. This change does not repair historical tables, resolve the meaning
 of their missingness, or alter published response counts. Review source coding
 before changing rows; the finding deliberately does not prescribe deletion.
 
+## The rights register (#2154)
+
+On the `upload` profile, a table is matched against
+`itemtext/instrument_rights_register.csv` before it ships: `match_item_text`
+against an `__items` table's `item_text`, and `match_item_code` against a
+response table's `item` codes. Rows ruled `block`, `hold` or `escalate` produce
+a `rights_register` **warning** that quotes the register row and asks for a
+hold; `ship_with_note` rows produce one asking that the note exists.
+
+It never errors and a clean result says nothing. A hit is a lead (the sweep's
+three searches each produced a false positive), and a miss is not a clearance
+(complete PSS reproductions scored 1 of 4 on substrings). Installed without a
+checkout there is no register, and `checks_run` records
+`rights_register:unavailable`. `IRW_RIGHTS_REGISTER` points at a copy.
+
 ## The override
 
 ```
