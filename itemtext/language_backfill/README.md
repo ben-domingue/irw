@@ -255,16 +255,24 @@ identical to `round2/published/`, `language` non-empty on every row, all four
 `_translated` columns present, no doubling. `round2/staging/` was cleared by
 ben-domingue on upload, as `itemtables/clean/` is; the files remain in git.
 
-**Still owed:** provenance rows correcting `text_source` to `translated_substitute`.
-The count in the earlier draft of this section was nine; measured against the batch
-`provenance.csv` files it is **eleven** of the 16 uploaded — five `canonical_instrument`
-(`ALSECYPIAMH_WU_2022_PHQ`, `abdullah_2024_bsq_sev24`, `bukurov_2022_sf36`,
-`buzgova_2023_gai`, `buzgova_2023_lsita`) and six `study_materials`
-(`almuqbil_2022_epds`, `altahla_2024_swls`, `altahla_2024_whoqol`,
-`avilesgonzalez2019_ces`, `brederecke_2020_phq4`, `chen_2022_sasc`), plus
-`ALSECYPIAMH_WU_2022_SDQ` if it ships. The remaining five already say
-`translated_substitute`. Quote the measurement, not the nine.
-Also owed: `abdullah_2024_bsq_sev24` has no issues-page entry.
+**Provenance corrected 2026-09-27 (#1807 round 2).** The eleven rows that still said
+`canonical_instrument` (`ALSECYPIAMH_WU_2022_PHQ` in batch_012, the row that holds;
+`abdullah_2024_bsq_sev24`, `bukurov_2022_sf36`, `buzgova_2023_gai`, `buzgova_2023_lsita`)
+or `study_materials` (`almuqbil_2022_epds`, `altahla_2024_swls`, `altahla_2024_whoqol`,
+`avilesgonzalez2019_ces`, `brederecke_2020_phq4`, `chen_2022_sasc`) now say
+`translated_substitute`, each with a `translation_source`: five `official_instrument_english`
+(PHQ, abdullah, bukurov, buzgova_gai), six `study_supplied` (almuqbil, both altahla,
+avilesgonzalez, chen), and two `mixed` (buzgova_lsita: canonical item text + the paper's
+anchors; brederecke_phq4: the .sav's labels + the canonical PHQ-4 stem). Files that lacked
+the column gained it (blank on every other row). No text changed and nothing was
+re-uploaded. `check_provenance.R` output is identical before and after.
+
+By then four of the 17 shipped no item text at all, all for rights reasons:
+`beck_2021_pss10` (PSS, 2026-09-06), `altahla_2024_whoqol` (WHOQOL, 2026-09-04),
+`altahla_2024_swls` (SWLS, 2026-09-09) and `ALSECYPIAMH_WU_2022_SDQ` (SDQ, 2026-09-10).
+The other 13 are live, and on 2026-09-27 their row counts matched `round2/published/`, with
+`language` on every row and no duplicates. All 13 have an issues-page entry
+(`abdullah_2024_bsq_sev24`'s was added after this section was written).
 
 Note that these rows do not live here — each of the 17 is an already-published table,
 so its provenance row sits in the `itemtables/batch_NNN/provenance.csv` of the batch
@@ -272,6 +280,12 @@ that first extracted it (004 and 012 both carry an `ALSECYPIAMH_WU_2022_PHQ` row
 duplicate is worth resolving while editing). There is no `round2/provenance.csv`.
 
 ### The SDQ hold
+
+**Outcome.** The rebuilt 15-row file was uploaded on 2026-09-02 (`1c9ef884`), so the
+`SDQ_Pro` gate failure was resolved. The table was then withdrawn on 2026-09-10 by
+`tools/withdrawals/withdraw_sdq.py` (SDQ wording rights, `withdrawals.csv`), so
+`ALSECYPIAMH_WU_2022_SDQ` ships no item text and no `SDQ_Pro` ruling is needed. The rest of
+this section is the 2026-09-02 record.
 
 `ALSECYPIAMH_WU_2022_SDQ__items` was **removed from `irw_text` entirely** rather than
 re-uploaded, and `irw_text` is now at v15.0 with 578 tables (v14.0 had 579). So the
@@ -303,15 +317,14 @@ the nearest integer (reproduces exactly for all 7,841 respondents)". It is a col
 study's deposit that the IRW processing script correctly does not ship, so it has no place
 in an item text table — see the join-key rule in `.claude/skills/irw-auto-itemtext/SKILL.md`.
 
-Two of the 17 turn on one unanswered question: **`altahla_2024` — Arabic or
-Chinese?** #1777 calls it an Arabic administration while all three `altahla_2024_*`
-provenance rows describe Chinese adults completing a Chinese-language version. The
-staged files take the provenance's side — both say `Chinese` — so #1777's claim is
-the outlier, and the likeliest explanation is that it was confused with
-`almuqbil_2022_epds`, which is genuinely Arabic and sits three rows away in the same
-batch. **Uploaded 2026-09-02 saying `Chinese`**, i.e. on the provenance's side; the
-deposit confirmation was never made, so this remains an unconfirmed disagreement that
-is now published.
+**`altahla_2024`: Chinese, confirmed 2026-09-27 from the paper.** #1777 called it an
+Arabic administration. The paper (Altahla et al. 2024, PeerJ 12:e18709, PMC11670754)
+surveyed Chinese adults at Tongji Hospital, Wuhan, and names "the Chinese version of the
+WHOQOL-BREF", introduced in mainland China in 1998 (Hao 2000). The `Chinese` that shipped on
+2026-09-02 was right, and #1777 had most likely confused the study with `almuqbil_2022_epds`.
+The point is now moot for item text: both `altahla_2024_swls` and `altahla_2024_whoqol` were
+withdrawn on rights grounds (SWLS and WHOQOL). The confirmation is recorded on both
+provenance rows.
 
 Three tables that belong to this set could not be pulled, because they are not
 published item text at all: `algner2022_oss` and `APFCompact_Ptacek_2024_DASS-21`
