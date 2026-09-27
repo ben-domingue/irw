@@ -28222,3 +28222,8 @@ batch_519 directory was removed. No work was discarded.
 - Agent note: table_context.R ignored --table-sets and did an irw_fetch of this small table (9188 rows) -- negligible export, but the flag is not honoured by that script.
 - Written 1 / blocked 0 / failed 0; yield 100%. Gates: normalize 0 changed, audit PASS, verify_batch MISSING(exempt), lint clean, irw-validate ok, check_provenance exit 0. NOT_NEEDED row in verification_merged.csv and mapping_verification.csv.
 - Numbering: highest existing (564)+1 = 565. Cap batch_571 not reached. 2 pending remain.
+
+## batch_566 — 2026-09-27T14:33-07:00 — 1 table (1 agent)
+- spain_2014_family_reproduction: WRITTEN. CIS Estudio 3032 P.18 (Bookmark 9 of data/spain_2014_family.do; not Bookmark 8 adoption), 5 items p1801-p1805, mapping_basis=data_labels (ES3032 labels == scanned questionnaire rows 5/5), resp {1,2}; volunteered 'Depende' (3), 8, 9 recoded to missing by the .do (1372/506/61 dropped), 2386 of 2464 ids live. Agent rebuilt live table from DA3032 exactly (10381 rows, 0 mismatches). machine_translation -- issues-page line owed at upload.
+- Written 1 / blocked 0 / failed 0; yield 100%. Gates: normalize 0 changed, audit PASS, verify_batch MISSING(exempt), lint clean, irw-validate ok, check_provenance exit 0. NOT_NEEDED row in verification_merged.csv and mapping_verification.csv.
+- Numbering: highest existing (565)+1 = 566. Cap batch_571 not reached. 1 pending remains.
