@@ -34,6 +34,13 @@ import requests
 # the YDCY block -- the exact cross-item data-entry-error signature
 # datastandard.md describes -- so YDCY's valid range is tightened to 1-5
 # and those zeros are filtered out rather than kept as a genuine anchor.
+#
+# #2117 (2026-09-27): that zero-filter was wrong and is reversed. The YDCY
+# block is PARS-3, not Godin: YDCY2 * YDCY3 * YDCY4 == YDCY for 879/879,
+# with duration (YDCY3) scored level-1 so it runs 0-4. YDCY3 == 0 ("under
+# 10 minutes") is the scale's genuine floor, and the 58 respondents holding
+# it are exactly the 58 whose stored composite is 0. YDCY's range is now
+# 0-5, so the zeros are kept. YDCY1 stays excluded (constant).
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 OUT_DIR = REPO_ROOT / "automated_finding" / "irw_output"
@@ -49,7 +56,7 @@ SCALES = {
     "YDJC": ("perceived_competence", 4, (1, 5)),
     "YDLQ": ("ydlq", 10, (1, 5)),
     "NLGZ": ("nlgz", 4, (1, 5)),
-    "YDCY": ("ydcy", 4, (1, 5)),  # YDCY1 excluded (constant column, see note above)
+    "YDCY": ("ydcy", 4, (0, 5)),  # YDCY1 excluded (constant column); YDCY3 is 0-4 (#2117)
     "JJQX": ("jjqx", 10, (1, 5)),
     "XLJK": ("xljk", 12, (0, 1)),
 }
