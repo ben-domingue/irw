@@ -27850,3 +27850,13 @@ batch_519 directory was removed. No work was discarded.
 - **Overrides canonical scoring:** items 4/8/12/16 are stored ALREADY reverse-scored, so their anchors ship descending (0 = "most or all of the time"). Orchestrator re-ran verify_adamczyk_2022_cesd.R and confirmed: the .sav's own `Depression` column equals the mean of the 20 stored items for 209/209 respondents (9/209 with the four re-reversed); all 20 item-rest r positive (+0.27..+0.81; items 4/8/12/16 = .73/.52/.61/.69). Same handling as conner_2017_cesd; public_note says so.
 - Verification: PARTIAL. Polarity class plus the 8/12/16 residual block (mutual top-2 partners, 0.18/0.18/0.21; next best <= 0.06). Not established: order among the 16 negative items, CESD4's position.
 - Gates: validate PASS (--table-sets); normalize 0 changed; audit PASS; verify_batch PASS; lint clean; irw-validate ok; check_provenance clean for this table.
+
+## batch_521 — 2026-09-27T07:45-07:00 (1 table, 1 agent)
+
+- Numbering: highest existing batch is 520 (series already past the 300–304 hole), so 521. Cap batch_571 not reached.
+- **Written 1 / blocked 0 / failed 0**, yield 100%. Circuit breaker not tripped.
+- `depue_2023_gds15`: 15 items, 30 rows. mapping_basis=reconstructed (OSF vfwus/re7sm CSVs have bare GDS1..GDS15 headers, no labels; the processing script melts by column name). text_source=translated_substitute, language=Dutch (Bleeker et al. 1985 translation, Dutch wording unpublished), translation_source=official_instrument_english (Yesavage Stanford short-form page). The GDS rights register verdict `ship` (2026-09-23) was applied, and the Stanford page hash is unchanged.
+- resp is key-scored (1 = depressive answer), so option_text runs NO=1 for items 1/5/7/11/13 and YES=1 for the rest. Orchestrator checked the shipped CSV against the canonical GDS-15 key: all 15 match. public_note says so.
+- Verification: PARTIAL. verify_depue_2023_gds15.R re-run by verify_batch: PASS. Every published total/alpha reproduced exactly (2021 N=640 3.00 (3.01); 2023 T1/T2/T3 2.60/2.59/2.77; drop-outs 3.56). GDS10 pinned as the top correlate of all three memory measures (margins .14/.09/.08). All item-rest r positive. Not established: the order among items 1, 3–8 and 11–15.
+- Gates: validate PASS (--table-sets); normalize 0 changed; audit PASS; verify_batch PASS; lint clean; irw-validate ok; check_provenance: no unreviewed machine_translation table (ye_2025_q25_scale `mixed` review note pre-existing, not this batch).
+- Siblings depue_2023_pwi and depue_2023_subjcog remain pending, next in queue.
