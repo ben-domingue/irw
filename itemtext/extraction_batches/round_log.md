@@ -28181,3 +28181,13 @@ batch_519 directory was removed. No work was discarded.
 - Orchestrator re-check: table_sets resp {1,2,4,5}, items p1201-p1210, per-item n sums to 21652; ES3032 labels at lines 132/134 confirmed as the agent quoted; questionnaire page image (p12_bot.png) confirms "solos" and "un hi-jo/a". Override confirmed.
 - Written 1 / blocked 0 / failed 0; yield 100%. Gates: normalize 0 changed, audit PASS, verify_batch MISSING(exempt), lint clean, irw-validate ok, check_provenance exit 0.
 - Numbering: highest existing (559)+1 = 560. Cap batch_571 not reached. 7 pending remain.
+
+## batch_561 — 2026-09-27 ~13:57-14:01 PDT (1 table, 1 agent)
+- spain_2014_family_housework: WRITTEN, 12 rows (4 items p40a01-p40a04 x 3 options), one section, P.40a stem in instructions. data_labels / study_materials / machine_translation (CIS Estudio 3032, Spanish-only; issues-page line owed at upload). ES3032 labels match the questionnaire scan 4/4.
+- **Dictionary description mismatch (Step 3b, not an instrument mismatch):** the dictionary Description and the .do's Bookmark 14 comment say "how often the respondent does" the tasks; P.40a actually asks employed respondents (1 en P.40) how often they have DIFFICULTY combining paid work with each task. Logged note_only in pending_index_notes.csv with a suggested Description; dictionary + .do comment edit owed by a human.
+- Caveats (notes.csv): filtered to P40=1 (1066 asked, 15 all-missing -> 1051 live ids); .do drops 4 "No procede" (53/466/639/29) and 9 N.C. (10/12/14/10), live resp {1,2,3}.
+- Audit WARN (row-count anomaly on p40a03, 413 vs median 795.5): response-data property, not an itemtext defect -- dependant care is "No procede" for 639 workers. Explained in notes.csv.
+- Agent rebuild from DA3032 reproduces live 3031/3031 rows, 1051 ids, 0 resp/age mismatches. Step 5b exempt (data_labels); NOT_NEEDED row in verification_merged.csv and mapping_verification.csv.
+- Orchestrator re-check: table_sets 3031 rows, items p40a01-04, resp {1,2,3}, per-item n 1003/588/413/1027 = agent's per-level sums; ES3032 P40A value labels (4 = 'No procede, no hace esas tareas') and questionnaire crop p40a_head.png ("SÓLO A QUIENES TIENEN TRABAJO REMUNERADO (1 en P.40)" / "¿Podría decirme si tiene dificultad ... para compaginar su trabajo con...?") confirm the description claim.
+- Written 1 / blocked 0 / failed 0; yield 100%. Gates: normalize 0 changed, audit WARN (explained), verify_batch MISSING(exempt), lint clean, irw-validate ok, check_provenance exit 0.
+- Numbering: highest existing (560)+1 = 561. Cap batch_571 not reached. 6 pending remain.
