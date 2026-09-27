@@ -27988,3 +27988,11 @@ batch_519 directory was removed. No work was discarded.
 - Gates: normalize 0; audit PASS; verify_batch PASS; lint clean; irw-validate ok; check_provenance's only flag is the pre-existing ye_2025_q25_scale (review only).
 - Orchestrator note: a first attempt to append the tracker row via R read.csv/write.csv mangled mapping_verification.csv (EOF-within-quoted-string on read); reverted with git checkout and the row was appended raw. Queue file CRLF preserved.
 - Batch number 535 = highest+1. Cap batch_571 not reached. 32 pending remain.
+
+## batch_536 — 2026-09-27T09:49 (1 table, 1 agent)
+- Tables: pham_2026_thbt. Written 0 / blocked 1 / failed 0. Yield 0/1. Failed share 0% — breaker not tripped.
+- pham_2026_thbt BLOCKED (retry test NO): Mendeley htwjk32j59 (CC BY 4.0) ships one .sav with no variable labels (orchestrator re-checked: 0 of 79 columns carry a `label` attribute via exact match; THBT1-7 have Vietnamese agreement value labels only). No linked paper found. Deposit description names the 7-item SPAUSCIS (Hjetland 2022), but order is unverifiable and the response format was changed to agreement anchors; option-only barred by irw#1770. Row added to pending_index_notes.csv.
+- Heads-up for the next rounds: pham_2026_bsgt/_bsyn/_bsth/_ktslh/_ktsth/_ktscx come from the same unlabelled .sav and will very likely block identically unless a paper turns up — worth a human deciding whether to mark them blocked in bulk rather than spend a round each.
+- Step 4 gates: no __items.csv, so normalize/audit exit "No *__items.csv files found" (expected); verify/lint/irw-validate/check_provenance have nothing of this batch's to check. No verification rows (nothing shipped).
+- Orchestrator note: `attr(x, "label")` in R partially matches `labels` and falsely reports variable labels on haven columns; use `exact = TRUE`.
+- Batch number 536 = highest+1. Cap batch_571 not reached. 31 pending remain.
