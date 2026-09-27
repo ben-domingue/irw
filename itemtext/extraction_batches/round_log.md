@@ -28004,3 +28004,10 @@ batch_519 directory was removed. No work was discarded.
 - Only endpoint anchors published (Totally disagree/Totally agree); resp 2-4 option_text blank. Agent reports ~29.7% straight-lining across the 15 items (data property, not changed).
 - Gates: normalize 0 changes; audit PASS; verify_batch PASS; lint clean; irw-validate ok; check_provenance exit 0.
 - Batch number 537 = highest+1. Cap batch_571 not reached. 30 pending remain; the next four are this table's nguyen_2026_misfit_* siblings (same questionnaire, 3 printed = 3 data items each).
+
+## batch_538 — 2026-09-27 ~10:08 PDT
+- 1 table (one agent): nguyen_2026_misfit_learning_misfit. Written 1 / blocked 0 / failed 0 (yield 100%).
+- Source: Mendeley 10.17632/j8tkztz636 V3 (CC BY 4.0) questionnaire docx, same as batch_537 sibling. Printed MF1-MF3 = data MF1-MF3 (no dropped item, unlike PE). mapping_basis=paper_explicit; translated_substitute/study_supplied (Vietnamese administration inferred, deposit English-only). Endpoint-only anchors; resp 2-4 option_text blank.
+- Verification VERIFIED: code labels + per-item resp-frequency match live vs deposit xlsx, cell for cell (MF1 171/335/724/411/182, MF2 179/371/689/396/188, MF3 182/348/677/431/185), 0 cross-matches. Re-confirmed independently by verify_batch.R PASS.
+- Gates: normalize 0 changes; audit PASS; verify_batch PASS; lint clean; irw-validate ok; check_provenance exit 0.
+- Numbering: the prompt's literal "below 300 -> 305" rule would collide with existing batch_305; used highest existing (537)+1 = 538, as prior rounds have. Prompt's Step 1 text is stale on this point. Cap batch_571 not reached. 29 pending remain (next: nguyen_2026_misfit_learning_motivation/_learning_satisfaction/_technostress).
