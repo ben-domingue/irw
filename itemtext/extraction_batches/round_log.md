@@ -28077,3 +28077,11 @@ batch_519 directory was removed. No work was discarded.
 - Standing flag (from batch_545): all three chen_2022_* response tables come from a CC BY-NC deposit, which datastandard.md bars at intake.
 - Gates: normalize_nulls 0 changed; audit_batch PASS (no WARNs); verify_batch MISSING(exempt); lint clean; irw-validate ok; check_provenance exit 0. NOT_NEEDED row written to both verification_merged.csv and mapping_verification.csv.
 - Numbering: highest existing (545)+1 = 546. Cap batch_571 not reached. 21 pending remain (next: kotsou_2016_panas).
+
+## batch_547 -- 2026-09-27T11:20:00-07:00 -- 1 table, 1 agent
+- **Written 1 / blocked 0 / failed 0 (yield 1/1).** kotsou_2016_panas -> 100 rows (20 items x 5), mapping_basis=reconstructed, text_source=translated_substitute (language=French), translation_source=official_instrument_english. Circuit breaker not tripped.
+- Source: figshare 10.6084/m9.figshare.3122734 (CC BY 4.0), SCSdata.xls with bare PANAS1..20 headers, no labels; paper Kotsou & Leys 2016 PLOS ONE (CC BY). No French PANAS wording published anywhere (paper's citation for the French version is garbled -- ref 27 is Blais' French SWLS), so canonical Watson et al. 1988 English assigned by position. Rights register PANAS row = ship, applied. Instructions blank (not published; medvedev_2018_pan precedent).
+- Verification PARTIAL (verify_kotsou_2016_panas.R PASS): 20/20 codes correlate more with their canonical valence block; canonical PA/NA split reproduces paper Table 1 (PA M 3.372/3.37, SD .656/.65, alpha .835/.84; NA M 2.463/2.46, alpha .893/.89); PANAS8 Hostile least endorsed (1.81), fixing anchor direction. Within-valence order not pinned.
+- **Orchestrator re-check (Step 5b): CONFIRMED** the paper's Table 1 row reads NA 1554 / 2.46 / **.69** / .89 (paper.xml), against a computed SD of .833 on live data while mean and alpha match -- noted as a likely reporting error in the paper, not an itemtext or data defect.
+- Gates: normalize_nulls 0 changed; audit_batch PASS (no WARNs); verify_batch PASS; lint clean; irw-validate ok; check_provenance exit 0 (ye_2025_q25_scale "mixed" review line predates this batch).
+- Numbering: highest existing (546)+1 = 547. Cap batch_571 not reached. 20 pending remain (next: kotsou_2016_scs, same deposit).
