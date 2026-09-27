@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-# rollcall_house_<congress> / rollcall_senate_<congress> -- US congressional
-# roll-call votes, one table per chamber per Congress, built from the chambers'
-# own XML records (irw#2445).
+# rollcall_house / rollcall_senate -- US congressional roll-call votes, one
+# table per chamber spanning every Congress built (default 110th-118th,
+# 2007-2024), from the chambers' own XML records (irw#2445).
 #
 # Sources (US government records; see "Rights" below):
 #   House: Office of the Clerk, https://clerk.house.gov/evs/<year>/roll<NNN>.xml
@@ -36,7 +36,11 @@
 #         Senate XML carries lis_member_id, mapped to bioguide through the
 #         crosswalk (every Senate member in 110-118 maps; the script stops if
 #         one does not). The same person keeps the same id across Congresses
-#         and chambers.
+#         and chambers, so a member who served several Congresses answers
+#         several blocks of items: each chamber is deliberately one long panel,
+#         not one table per Congress (two tables against the 1000-table cap,
+#         and dynamic ideal-point models need the linkage). Subset a Congress
+#         by item prefix, e.g. items starting "118_".
 #   item  <congress>_<session>_<rollnumber>, roll number zero-padded to 4
 #         (House) or 5 (Senate) digits as in the source file names, e.g.
 #         118_1_0042. Sessions follow the XML, not the calendar: a vote taken
@@ -51,16 +55,17 @@
 #         do not reverse-key.
 #   date  Unix time of the vote (House action-date + action-time, Senate
 #         vote_date; both Eastern time).
-#   cov_party   party letter as the XML records it for that vote (D, R, I, ID;
-#               a member who switches party mid-Congress carries both).
+#   cov_party   party letter as the XML records it for that vote (D, R, I;
+#               Senate also ID). A member who switched party carries both, on
+#               different rows (6 House and 3 Senate members in 110-118).
 #   cov_state   two-letter state or territory code.
 #
 # Votes dropped whole (logged at run time): House quorum calls (vote-type
 # QUORUM, everyone answers "Present") and House elections of the Speaker
 # (votes are candidate names, not yea/nay). Any other vote whose casts fall
 # outside the mapping above is dropped and reported, not guessed. Delegates and
-# Resident Commissioners only appear on Committee of the Whole votes, where
-# they may vote; they are kept.
+# the Resident Commissioner never appear in the Clerk files for 110-118, so
+# every House id is a voting Representative.
 #
 # Every remaining vote is kept, including lopsided and unanimous ones (a
 # unanimous vote has no information for an IRT model but is part of the
@@ -310,37 +315,39 @@ def main():
     chambers = ["house", "senate"] if a.chamber == "both" else [a.chamber]
     lis2bio = load_crosswalk(session) if "senate" in chambers else None
     cols = ["id", "item", "resp", "date", "cov_party", "cov_state"]
-    for congress in parse_range(a.congress):
-        for ch in chambers:
+    for ch in chambers:
+        rows, ndrop = [], 0
+        for congress in parse_range(a.congress):
             if ch == "house" and congress < 102:
                 print(f"skip house {congress}: Clerk XML starts in 1990", file=sys.stderr)
                 continue
             dropped = []
             print(f"{ch} {congress}", file=sys.stderr)
             if ch == "house":
-                rows = house_votes(congress, a.cache, session, dropped)
+                got = house_votes(congress, a.cache, session, dropped)
             else:
-                rows = senate_votes(congress, a.cache, session, dropped, lis2bio)
-            df = pd.DataFrame(rows, columns=cols)
-            if df["id"].isna().any() or (df["id"] == "").any():
-                raise RuntimeError(f"{ch} {congress}: rows without a member id")
-            dup = df.duplicated(["id", "item"]).sum()
-            if dup:
-                raise RuntimeError(f"{ch} {congress}: {dup} duplicate id-item rows")
-            df = df.sort_values(["item", "id"]).reset_index(drop=True)
-            if df["id"].nunique() < 100:
-                raise RuntimeError(f"{ch} {congress}: below the 100-id floor")
-            bad = [c for c in run_qc(df) if c.status == "fail"]
-            if bad:
-                raise RuntimeError(f"{ch} {congress}: {[(c.name, c.detail) for c in bad]}")
-            name = f"rollcall_{ch}_{congress}"
-            df.to_csv(os.path.join(a.out, f"{name}.csv"), index=False)
+                got = senate_votes(congress, a.cache, session, dropped, lis2bio)
             for item, why in dropped:
                 print(f"  dropped {item}: {why}", file=sys.stderr)
-            print(f"  {name}: {len(df):,} rows, {df['id'].nunique()} ids, "
-                  f"{df['item'].nunique()} items, {len(dropped)} votes dropped",
+            print(f"  {ch} {congress}: {len(got):,} rows, "
+                  f"{len({r[1] for r in got})} items, {len(dropped)} votes dropped",
                   file=sys.stderr)
-
+            rows.extend(got)
+            ndrop += len(dropped)
+        df = pd.DataFrame(rows, columns=cols)
+        if df["id"].isna().any() or (df["id"] == "").any():
+            raise RuntimeError(f"{ch}: rows without a member id")
+        dup = df.duplicated(["id", "item"]).sum()
+        if dup:
+            raise RuntimeError(f"{ch}: {dup} duplicate id-item rows")
+        df = df.sort_values(["item", "id"]).reset_index(drop=True)
+        bad = [c for c in run_qc(df) if c.status == "fail"]
+        if bad:
+            raise RuntimeError(f"{ch}: {[(c.name, c.detail) for c in bad]}")
+        name = f"rollcall_{ch}"
+        df.to_csv(os.path.join(a.out, f"{name}.csv"), index=False)
+        print(f"  {name}: {len(df):,} rows, {df['id'].nunique()} ids, "
+              f"{df['item'].nunique()} items, {ndrop} votes dropped", file=sys.stderr)
 
 if __name__ == "__main__":
     main()
