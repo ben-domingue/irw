@@ -28018,3 +28018,11 @@ batch_519 directory was removed. No work was discarded.
 - Verification VERIFIED: code labels + per-item resp-frequency match live vs deposit xlsx cell for cell (MO1 237/336/699/362/189, MO2 201/338/675/404/205, MO3 216/347/680/379/201), 0 cross-matches. Reproduced by verify_batch.R PASS.
 - Gates: normalize 0 changes; audit PASS; verify_batch PASS; lint clean; irw-validate ok; check_provenance exit 0.
 - Numbering: highest existing (538)+1 = 539, as prior rounds (the prompt's "below 300" rule would collide with existing batch_305). Cap batch_571 not reached. 28 pending remain (next: nguyen_2026_misfit_learning_satisfaction, _technostress).
+
+## batch_540 — 2026-09-27T10:19:03-07:00
+- 1 table (one agent): nguyen_2026_misfit_learning_satisfaction. Written 1 / blocked 0 / failed 0 (yield 100%).
+- Source: Mendeley 10.17632/j8tkztz636 V3 (CC BY 4.0) Appendix_Questionnaire_Revised.docx, the same file as batch_537-539; the adaptation citation (Rode et al. 2005; Yu et al. 2010) comes from 10.17632/hd2z967zjh APPENDIX.docx. Printed SAT1-SAT3 = data SAT1-SAT3, so no item was dropped. mapping_basis=paper_explicit; translated_substitute/study_supplied (Vietnamese administration inferred, deposit English-only, as for the siblings). Only the endpoints are labelled, so option_text is blank for resp 2-4.
+- Verification VERIFIED: per-item resp frequencies match live vs the deposit xlsx cell for cell (SAT1 203/314/714/394/198, SAT2 190/336/694/390/213, SAT3 186/342/707/380/208). verify_batch.R PASS.
+- Step 5b: the agent's claim that all three items are worded as DISSATISFACTION (high resp = more dissatisfied, despite the table name) was re-checked against the extracted docx text and confirmed. It ships as a public_note. The batch_539 sibling set no such note, so drop it if you want the siblings consistent.
+- Gates: normalize 0 changes; audit PASS; verify_batch PASS; lint clean; irw-validate ok; check_provenance exit 0.
+- Numbering: highest existing (539)+1 = 540, the same interpretation as prior rounds. Cap batch_571 not reached. 27 pending remain (next: nguyen_2026_misfit_technostress).
