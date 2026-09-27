@@ -27978,3 +27978,13 @@ batch_519 directory was removed. No work was discarded.
 - Gates: normalize 0; audit PASS; verify_batch PASS; lint clean; irw-validate ok; check_provenance's only flag is the pre-existing ye_2025_q25_scale (review only).
 - The queue file is CRLF. The claim rewrite briefly converted it to LF; this was caught in the diff and restored before commit.
 - Batch number 534 = highest+1. Cap batch_571 not reached. 33 pending remain.
+
+## batch_535 — 2026-09-27T09:43-07:00 — 1 table, 1 agent
+
+- Written 1 / blocked 0 / failed 0 (yield 1/1): `li_2026_sas_sv` — 60 rows (SA1..SA10 × resp 1..6), Li & Mao 2026 PLOS ONE e0349016, CC BY 4.0. mapping_basis=paper_explicit (Table 2 prints code, wording and Mean(SD)); text_source=translated_substitute, translation_source=study_supplied (administered in Chinese; paper prints English only, figshare xlsx carries no item text), language=Chinese, `_translated` empty — same call as sibling `li_2026_imi_teq` (batch_076).
+- Verification VERIFIED (routes 1 + 3): all 10 live item means/SDs reproduce Table 2 at 2dp (e.g. SA1 3.2161/1.1129 vs 3.22/1.11), 10/10 uniquely nearest their own row, SA5/SA10 mean tie (3.59) broken by SD 1.08 vs 1.14; scale total 34.89 (7.38) live = published. verify_li_2026_sas_sv.R: VERDICT: PASS.
+- Caveat: only endpoint anchors published (1 strongly disagree, 6 strongly agree); options 2–5 left blank, not padded with Kwon's anchors. No instructions published.
+- Rights: no SAS-SV register row (the Zung-SAS row is a name clash); Kwon 2013 originator CC BY, no restriction clause — same call as roy_2024_sas_sv. Not a block. Step 3b: no mismatch.
+- Gates: normalize 0; audit PASS; verify_batch PASS; lint clean; irw-validate ok; check_provenance's only flag is the pre-existing ye_2025_q25_scale (review only).
+- Orchestrator note: a first attempt to append the tracker row via R read.csv/write.csv mangled mapping_verification.csv (EOF-within-quoted-string on read); reverted with git checkout and the row was appended raw. Queue file CRLF preserved.
+- Batch number 535 = highest+1. Cap batch_571 not reached. 32 pending remain.
