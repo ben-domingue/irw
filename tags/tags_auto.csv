@@ -2006,3 +2006,5 @@ estrella_2023_hakim5,claude-auto,,,,,,"Clinical, Internet-based (Mturkers, etc)"
 williams_2022_dvmsq,claude-auto,,,,,,"Internet-based (Mturkers, etc)",,Survey/questionnaire,Likert Scale/selected response,eng,Prolific adults (Williams et al. 2022).,tagged,
 vinasvelazquez_2022_vsabhc,claude-auto,,,,,,Educational,,Survey/questionnaire,Likert Scale/selected response,spa,"Mexican university students (Viñas-Velázquez et al. 2022), Spanish VSABH-C with two-month retest.",tagged,
 silvia_2021_bicb,claude-auto,,,,,,Educational,,Survey/questionnaire,Likert Scale/selected response,eng,"Mostly U.S. university students (UNCG, University of Mississippi) pooled from seven studies (Silvia et al. 2021).",tagged,
+robie_2022_hexaco60,claude-auto,,,,,,Educational,,Survey/questionnaire,Likert Scale/selected response,eng,"Canadian university business students, experiment on response-option order (Robie et al. 2022).",tagged,
+robie_2022_cab,claude-auto,,,,,,Educational,,Survey/questionnaire,Likert Scale/selected response,eng,Canadian university business students (Robie et al. 2022).,tagged,
