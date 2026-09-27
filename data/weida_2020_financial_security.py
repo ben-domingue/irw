@@ -41,8 +41,19 @@ SI_URL = ("https://journals.plos.org/plosone/article/file"
           "?type=supplementary&id=10.1371/journal.pone.0233359.s001")
 UA = {"User-Agent": "IRW-Finder/1.0 (ben.domingue@gmail.com)"}
 
+# #2198: the ten secf_*m items are the CES-D-10, not a financial-security
+# scale: rowSums(secf_1m..secf_10m) equals the study's own dpsscore for all 371
+# respondents, and the items read "I felt depressed", "I felt lonely", "My sleep
+# was restless". So the table ships as weida_2020_cesd10 (it was
+# weida_2020_financial_security until 2026-09; same rows). The script keeps its
+# old filename, which the other notes cite.
 COV_RENAME = {"GENDER": "cov_gender", "age": "cov_age", "race": "cov_race"}
 ITEM_COLS = [f"secf_{i}m" for i in range(1, 11)]
+OUT_NAME = "weida_2020_cesd10"
+# Two respondents' age is -83 in the deposit; the live table has had those
+# nulled since 2026-09-03 (irw_validate/repair_cov_age.py, #1779), so the
+# script now does the same.
+AGE_RANGE = (0, 120)
 
 
 def fetch_data() -> pd.DataFrame:
@@ -63,10 +74,16 @@ def convert():
     long = long.dropna(subset=["resp"]).reset_index(drop=True)
     long["resp"] = long["resp"].astype(int)
     long = long[["id", "item", "resp"] + cov_cols]
+    lo, hi = AGE_RANGE
+    long.loc[~long["cov_age"].between(lo, hi), "cov_age"] = float("nan")
+    # The SAS file stores every number as a float; write the integer-valued
+    # columns as integers ("103", not "103.0"), as the live table has them.
+    for c in ["id", "cov_gender", "cov_race"]:
+        long[c] = long[c].astype("Int64")
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
-    long.to_csv(OUT_DIR / "weida_2020_financial_security.csv", index=False)
-    print(f"weida_2020_financial_security.csv: ids={long['id'].nunique()} "
+    long.to_csv(OUT_DIR / f"{OUT_NAME}.csv", index=False)
+    print(f"{OUT_NAME}.csv: ids={long['id'].nunique()} "
           f"items={long['item'].nunique()} resp={long['resp'].min()}-{long['resp'].max()}")
 
 
