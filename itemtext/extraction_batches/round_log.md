@@ -28214,3 +28214,11 @@ batch_519 directory was removed. No work was discarded.
 - Agent rebuild from DA3032 reproduces live 13232/13232 rows, 2446 ids, 0 resp/cov_age mismatches. Orchestrator re-check: table_sets per-item n 2264/2178/2214/2212/2207/2157, resp {1,2,4,5} on every item; each n + agent's code-3/8/9 drops = 2464 exactly. No response-data defect; dictionary Description matches P.10.
 - Written 1 / blocked 0 / failed 0; yield 100%. Gates: normalize 0 changed, audit PASS, verify_batch MISSING(exempt), lint clean, irw-validate ok, check_provenance exit 0. NOT_NEEDED row in verification_merged.csv and mapping_verification.csv.
 - Numbering: highest existing (563)+1 = 564 (the "below 300" rule's hole handling is moot now that 305+ exist). Cap batch_571 not reached. 3 pending remain.
+
+## batch_565 — 2026-09-27T14:25:41-07:00 — 1 table (spain_2014_family_obstacles), one agent
+- spain_2014_family_obstacles: WRITTEN, 16 rows (4 items p2501-p2504 x resp {1,2,4,5}), one section. data_labels (ES3032 cols 229-232; .do Bookmark 12 sets item = variable name) / study_materials / machine_translation (CIS Estudio 3032 P.25, Spanish-only; issues-page line owed at upload). CIS rights row (irw#2381) applied.
+- No source override: ES3032 labels match the questionnaire's P.25 rows (page 7, 300-dpi render) 4/4; no show card for P.25. resp gap at 3 by design: the .do drops the unread midpoint 3 (59/132/104/202), 8 N.S. (30/43/31/37) and 9 N.C. (5/6/9/10); 49 respondents all-missing -> 2415 live ids of 2464.
+- Agent rebuild from DA3032 reproduces live 9188/9188 rows, 2415 ids, 0 resp/cov_sex/cov_age mismatches. Orchestrator re-check: table_sets per-item n 2370/2283/2320/2215, resp {1,2,4,5} on every item; each n + agent's code-3/8/9 drops = 2464 exactly, and the agent's item x resp cells sum to those n. No response-data defect; dictionary Description matches P.25.
+- Agent note: table_context.R ignored --table-sets and did an irw_fetch of this small table (9188 rows) -- negligible export, but the flag is not honoured by that script.
+- Written 1 / blocked 0 / failed 0; yield 100%. Gates: normalize 0 changed, audit PASS, verify_batch MISSING(exempt), lint clean, irw-validate ok, check_provenance exit 0. NOT_NEEDED row in verification_merged.csv and mapping_verification.csv.
+- Numbering: highest existing (564)+1 = 565. Cap batch_571 not reached. 2 pending remain.
