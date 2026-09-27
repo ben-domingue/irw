@@ -17,8 +17,8 @@ OUT_DIR = REPO_ROOT / "automated_finding" / "irw_output"
 # Column-prefix blocks RE (red tape, 10i) and NE (4i, unlabeled) shipped
 # under their source codes. The remaining columns carry full item text
 # (numbered 17-42 in the original questionnaire) and split cleanly by
-# content into 5 more scales: job performance (17-21), value suppression/
-# surface acting (22-24), job dissatisfaction (25-29), coping (30-32),
+# content into 5 more scales: job performance (17-21), value suppression
+# (22-24), job dissatisfaction (25-29), coping (30-32),
 # workplace friendship (33-37, all five items), abusive supervision
 # (38-41). Item 42 (daily overtime) is a single item, not shipped. The ambiguous duplicate
 # CO-1..CO-4 / CO-1.1..CO block (8 columns, unclear whether a distinct
@@ -36,6 +36,16 @@ JOB_PERF = {
     "20、I never neglect the things I am supposed to do.": "jp4",
     "21、I always fulfill my job responsibilities well.": "jp5",
 }
+# Items 22-24 are NOT the paper's surface-acting scale (#2425). The paper
+# measures surface acting with Brotheridge & Lee's (2002) items (sample:
+# "Pretend to have emotions that I don't really have"); none of that wording is
+# in the deposit, and these three items are about suppressing one's own values
+# -- a near-verbatim parallel of Hewlin's Facades of Conformity, which the paper
+# never cites. Alpha over them is 0.690 against the paper's 0.882 for surface
+# acting. Until 2026-09 they shipped as qiang_2025_surface_acting (withdrawn
+# 2026-09-25); they now ship as qiang_2025_value_suppression, named for what the
+# items say rather than for an instrument the deposit does not name. The item
+# codes sa1-sa3 are kept so the existing item text keys onto them unchanged.
 SURFACE_ACTING = {
     "22、I suppress my own values when they differ from those of the organization.": "sa1",
     "23、My behavior reflects the organization’s values, even if they are inconsistent with my personal beliefs.": "sa2",
@@ -112,7 +122,7 @@ def convert():
     _ship(df, cov_cols, RE_ITEMS, None, "qiang_2025_red_tape")
     _ship(df, cov_cols, NE_ITEMS, None, "qiang_2025_ne_scale")
     _ship(df, cov_cols, list(JOB_PERF.keys()), JOB_PERF, "qiang_2025_job_performance")
-    _ship(df, cov_cols, list(SURFACE_ACTING.keys()), SURFACE_ACTING, "qiang_2025_surface_acting")
+    _ship(df, cov_cols, list(SURFACE_ACTING.keys()), SURFACE_ACTING, "qiang_2025_value_suppression")
     _ship(df, cov_cols, list(DISSATISFACTION.keys()), DISSATISFACTION, "qiang_2025_job_dissatisfaction")
     _ship(df, cov_cols, list(COPING.keys()), COPING, "qiang_2025_coping")
     _ship(df, cov_cols, list(FRIENDSHIP.keys()), FRIENDSHIP, "qiang_2025_workplace_friendship")

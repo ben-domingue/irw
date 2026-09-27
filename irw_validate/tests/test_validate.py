@@ -26,7 +26,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 from irw_validate import (CORE_CHECKS, exit_code, validate_file,  # noqa: E402
                           validate_frame)
 from irw_validate._checks import run_qc  # noqa: E402
-from irw_validate.cli import main  # noqa: E402
+from irw_validate.cli import expand_paths, main  # noqa: E402
 from irw_validate.core import format_report  # noqa: E402
 
 
@@ -639,6 +639,74 @@ class VerboseDetails(unittest.TestCase):
             self._frame().to_csv(path, index=False)
             self.assertEqual(main([path, "--verbose"]), 0)
             self.assertEqual(main([path, "-v"]), 0)
+
+
+class CliDirectories(unittest.TestCase):
+    """`irw-validate dir/` and `-r` (#2297): the folder case is the one an
+    outside contributor meets first."""
+
+    GOOD = [(i, f"q{j}", (i + j) % 5 + 1) for i in range(1, 40) for j in range(1, 5)]
+    BAD = [(1, "a", "x"), (2, "b", "y"), (3, "c", "z")]
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        os.environ["IRW_VALIDATE_LEDGER"] = os.path.join(self.tmp.name, "ledger.csv")
+        self.addCleanup(os.environ.pop, "IRW_VALIDATE_LEDGER", None)
+        self.root = Path(self.tmp.name) / "submission"
+        self.root.mkdir()
+
+    def _write(self, rel, rows):
+        path = self.root / rel
+        path.parent.mkdir(parents=True, exist_ok=True)
+        with path.open("w", newline="") as fh:
+            w = csv.writer(fh)
+            w.writerow(("id", "item", "resp"))
+            w.writerows(rows)
+        return path
+
+    def test_directory_validates_the_tables_directly_inside(self):
+        self._write("ok_2024_scale.csv", self.GOOD)
+        self._write("sub/bad_2024_scale.csv", self.BAD)
+        (self.root / "README.txt").write_text("not a table\n")
+        (self.root / "codebook.pdf").write_bytes(b"%PDF-1.4")
+        # the subdirectory's blocking table is out of reach without -r
+        self.assertEqual(main([str(self.root)]), 0)
+        self.assertEqual(main(["-r", str(self.root)]), 1)
+        self.assertEqual(main(["--recursive", str(self.root)]), 1)
+
+    def test_recursive_skips_archive_debris(self):
+        self._write("a/ok_2024_scale.csv", self.GOOD)
+        junk = self.root / "__MACOSX" / "a" / "._ok_2024_scale.csv"
+        junk.parent.mkdir(parents=True)
+        junk.write_bytes(b"\x00\x05\x16\x07 resource fork")
+        (self.root / "a" / "._ok_2024_scale.csv").write_bytes(b"\x00\x05")
+        self.assertEqual(main(["-r", str(self.root)]), 0)
+
+    def test_expand_paths_finds_nested_tables_only(self):
+        self._write("top_2024_scale.csv", self.GOOD)
+        self._write("x/y/deep_2024_scale.csv", self.GOOD)
+        (self.root / "notes.md").write_text("#")
+        flat, _ = expand_paths([str(self.root)])
+        deep, _ = expand_paths([str(self.root)], recursive=True)
+        self.assertEqual([Path(f).name for f in flat], ["top_2024_scale.csv"])
+        self.assertEqual(sorted(Path(f).name for f in deep),
+                         ["deep_2024_scale.csv", "top_2024_scale.csv"])
+
+    def test_a_named_file_is_not_filtered_by_extension(self):
+        path = self._write("table.txt", self.GOOD)
+        self.assertEqual(expand_paths([str(path)])[0], [str(path)])
+
+    def test_directory_with_no_tables_is_bad_input(self):
+        (self.root / "README.md").write_text("#")
+        self.assertEqual(main([str(self.root)]), 2)
+
+    def test_a_blocking_file_anywhere_fails_the_run(self):
+        self._write("ok_2024_scale.csv", self.GOOD)
+        bad = self._write("bad_2024_scale.csv", self.BAD)
+        self.assertEqual(main([str(self.root)]), 1)
+        bad.unlink()
+        self.assertEqual(main([str(self.root)]), 0)
 
 
 class RewordedMessages(unittest.TestCase):

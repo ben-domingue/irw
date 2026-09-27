@@ -32,7 +32,7 @@ documented in `.claude/skills/irw-auto-itemtext/SKILL.md`, the batching layer in
 
 - `join.R <table>`: joins a response table to its item text
 - `check_provenance.R`: validates every `provenance.csv` against `provenance_vocab.csv`
-- `check_label_claims.py`: screens `data_labels` mapping claims (#1745)
+- `check_label_claims.py`: screens `data_labels` mapping claims (#1745), and warns on any other row whose script assigns codes by position while its evidence is silent on the ordering (#2049)
 - `clear_uploaded_itemtables.py`: removes uploaded `__items.csv` files and keeps their sidecars (#1956)
 - `refresh_live_tables.py`: snapshots the live tables into `live_tables.csv`
 - `sibling_consistency_sweep.py`: flags availability verdicts that a sibling table contradicts (#1751)
