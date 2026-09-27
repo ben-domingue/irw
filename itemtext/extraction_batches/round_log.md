@@ -27951,3 +27951,13 @@ batch_519 directory was removed. No work was discarded.
 - The processing script assigns Q codes by position, so a verification row was written despite data_labels: VERIFIED, 38/38 live items match exactly their own raw column; Perceived Risk items correlate -0.53..-0.57 with the willingness mean (the others +0.64..+0.76). Verify script PASS.
 - Step 3b: no mismatch. Gates: normalize 0; audit PASS; verify_batch PASS; lint clean; irw-validate ok; check_provenance exit 0, nothing new.
 - Batch number 531 = highest+1. Cap batch_571 not reached. 36 pending remain.
+
+## batch_532 — 2026-09-27T09:2x-07:00 (1 table, 1 agent)
+- Written 1 / blocked 0 / failed 0. Yield 1/1.
+- yoshimura_2026_es_scale: 40 rows (8 items x 5). paper_order: the deposit (PLOS ONE 10.1371/journal.pone.0346791) has no item text, and its codebook says only "Emotional support item 1..8". Wording is from Komaki (1994) Jpn J Health Psychol 7(2):2-10 Appendix (J-STAGE, doi:10.11560/jahp.7.2_2). That appendix numbers ES items 1-8 and instrumental items 9-14, the same numbering as the deposit's es1m1-8 / isu1m9-14. Komaki item 1 is the Japanese of the paper's English example. text_source=canonical_instrument (the study's administered Japanese was never released). translation_source=mixed: item 1 English is the study's own, items 2-8 were machine-translated by IRW, so an issues-page line is owed once the table is live. The Japanese was transcribed from the PDF page image because the OCR layer is garbled, so a human spot-check is advised. option_text is the codebook's English anchors; option_text_translated is blank.
+- Verification PARTIAL. Parcels {1,2,5}, {3,6,7} and {4,8} (S1 File) reproduce the S1 Table B means and SDs exactly (2.99/0.99, 3.22/0.97, 3.07/0.98), and the inter-parcel correlations are .771/.782/.834 against the published .77/.78/.83. {6,7,8} (Komaki's evaluation items) is the top triplet of 56 (0.689 vs 0.661). The order within {1..5} and within {6,7,8} is not established. Orchestrator re-ran the verify script via verify_batch and got the same numbers, PASS.
+- Rights: no register row; J-STAGE shows a bare article copyright notice with no reservation located on the scale. Not a block.
+- Step 3b: no mismatch. Suggest dictionary Description "supervisor emotional support (Komaki 1994), 8 items, 1-5".
+- Gates: normalize 0; audit PASS; verify_batch PASS; lint clean; irw-validate ok; check_provenance exit 0. Its only flag is ye_2025_q25_scale (mixed, pre-existing, review only).
+- Siblings yoshimura_2026_isu_scale (Komaki items 9-14) and yoshimura_2026_psych_safety are next in the queue.
+- Batch number 532 = highest+1. Cap batch_571 not reached. 35 pending remain.
