@@ -27944,3 +27944,10 @@ batch_519 directory was removed. No work was discarded.
 - RESPONSE-DATA DEFECT (orchestrator re-checked and confirmed): in the live table, wave 1 of all 11 reverse-keyed items (maas_*r_t1) is a copy of wave 0, 2024/2024 rows identical. The cause is data/rvobgvmaas_lsf_lehing_2024.r line 37 (maas_t2r_df) using ends_with("t1") where it should use ends_with("t2"), so the study's T2 answers to those items never reached IRW. The fix is that one call plus a re-upload; the itemtext would then need 11 maas_<N>r_t2 codes added. This defect explains the audit WARN (row-count anomaly) and is disclosed in public_note.
 - Step 3b: no mismatch. Gates: normalize 0; audit WARN (explained); verify_batch PASS; lint clean; irw-validate ok; check_provenance no new issues.
 - Batch number 530 = highest+1. Cap batch_571 not reached. 37 pending remain.
+
+## batch_531 — 2026-09-27T09:12 (1 table, 1 agent)
+- Written 1 / blocked 0 / failed 0. Yield 1/1.
+- wu_2025_drone_delivery: 190 rows (38 items x 5). data_labels (header row of the study's CC BY 4.0 figshare xlsx, pone.0333422.s001), identical 38/38 to the paper's S1 Table. text_source=translated_substitute, translation_source=study_supplied: administered language inferred as Chinese (Kunming/Yunnan, Questionnaire Star); no Chinese wording in any deposit file. Only endpoints labelled, resp 2-4 blank. Q30-Q34 (Service Performance) are bare attribute phrases with no published stem.
+- The processing script assigns Q codes by position, so a verification row was written despite data_labels: VERIFIED, 38/38 live items match exactly their own raw column; Perceived Risk items correlate -0.53..-0.57 with the willingness mean (the others +0.64..+0.76). Verify script PASS.
+- Step 3b: no mismatch. Gates: normalize 0; audit PASS; verify_batch PASS; lint clean; irw-validate ok; check_provenance exit 0, nothing new.
+- Batch number 531 = highest+1. Cap batch_571 not reached. 36 pending remain.
