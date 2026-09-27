@@ -12,13 +12,10 @@ student engagement (SE), academic achievement (AA).
 CONSENT and SQ are screening constants (single value for every respondent)
 and are dropped.
 
-QC exemption: `resp_scale_mixed` fires on 8 of the 30 items because nobody
-ever chose the bottom category on them (observed 2-5 rather than 1-5). Every
-item maxes at 5, the deposit describes a single five-point instrument, and
-SP4 -- the item that breaks the tie inside its own block -- has exactly one
-respondent at 1. That is floor non-use on a left-skewed scale, not two
-response scales, so the check is waived by name below rather than splitting
-a real subscale.
+On 8 of the 30 items nobody ever chose the bottom category (observed 2-5
+rather than 1-5). Every item maxes at 5 and the deposit describes a single
+five-point instrument, so that is floor non-use on a left-skewed scale, not
+two response scales; the subscales are kept whole.
 """
 from __future__ import annotations
 
@@ -45,10 +42,6 @@ COVS = {'GENDER': 'cov_gender', 'AGE': 'cov_age_band', 'YEAR': 'cov_year_of_stud
 DROP = ['CONSENT', 'SQ']          # composites / constants, with reasons in DROP_REASON
 DROP_REASON = 'screening constant, single value for every respondent'
 SCALE = (1, 5)
-QC_WAIVERS = {
-    "resp_scale_mixed": "uniform five-point instrument; 8/30 items simply "
-                        "never drew the bottom category (floor non-use)",
-}
 DROP_NON_INTEGER = False
 
 
@@ -119,10 +112,6 @@ def build() -> None:
 
         checks = run_qc(long)
         fails = [c for c in checks if c.status == "fail"]
-        waived = [c for c in fails if c.name in QC_WAIVERS]
-        for c in waived:
-            print(f"    WAIVED [{suffix}] {c.name}: {QC_WAIVERS[c.name]}")
-        fails = [c for c in fails if c.name not in QC_WAIVERS]
         assert not fails, f"{suffix} QC failed: {[(c.name, c.detail) for c in fails]}"
         for c in checks:
             if c.status == "warn":
