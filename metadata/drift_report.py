@@ -326,28 +326,52 @@ def check_hero(root: Path) -> Check:
                   f"`{SITE_REPO}`."])
 
 
+def last_site_deploy() -> tuple[str, dt.datetime]:
+    """(sha, time) of the newest SUCCESSFUL github-pages deployment.
+
+    The site deploys as a Pages artifact, not to a `gh-pages` branch (datapages/irw
+    #1719, 17.1): the branch was deleted, and probing it returned HTTP 422 on
+    every run from then on (#2085). This is the same test the site's own
+    `quarto_publish.yaml` `decide` job uses -- the newest deployment whose latest
+    status is `success`, whose sha is the `main` commit it was built from -- so
+    the report and the rebuild cannot disagree about whether the site is current.
+    A failed or in-flight deployment is not a publish.
+    """
+    listing = gh_api(f"repos/{SITE_REPO}/deployments?environment=github-pages&per_page=20",
+                     '.[] | "\\(.id) \\(.sha)"')
+    for line in listing.splitlines():
+        dep_id, sha = line.split()
+        status = gh_api(f"repos/{SITE_REPO}/deployments/{dep_id}/statuses?per_page=1",
+                        '.[0] | "\\(.state) \\(.created_at)"')
+        state, _, when = status.partition(" ")
+        if state == "success":
+            return sha, parse_iso(when)
+    raise RuntimeError("no successful github-pages deployment among the last 20")
+
+
 def check_site_render(now: dt.datetime) -> Check:
     """How long since the site was actually built?"""
     try:
-        built = parse_iso(gh_api(f"repos/{SITE_REPO}/commits/gh-pages",
-                                 ".commit.committer.date"))
+        deployed_sha, built = last_site_deploy()
+        main_sha = gh_api(f"repos/{SITE_REPO}/commits/main", ".sha")
         main_at = parse_iso(gh_api(f"repos/{SITE_REPO}/commits/main",
                                    ".commit.committer.date"))
     except Exception as exc:
         return Check("site", "Site render", ERROR, f"could not read {SITE_REPO} ({exc})")
 
     age = days_since(built, now)
-    if main_at > built:
+    if main_sha != deployed_sha:
         # Grade on how long the site has been out of date, not on how long ago
         # it was built. A site rebuilt an hour ago that main has since moved past
         # is not a problem; one that main moved past a week ago is.
         behind = days_since(built, now)
         return Check("site", "Site render", classify(behind),
                      f"built {age:.1f}d ago; `main` has moved since",
-                     [f"gh-pages built {built:%Y-%m-%d %H:%M} UTC",
-                      f"`main` last commit {main_at:%Y-%m-%d %H:%M} UTC",
-                      "The daily conditional rebuild should pick this up; "
-                      "`gh workflow run quarto_publish.yaml` to do it now."], age)
+                     [f"last deployed {built:%Y-%m-%d %H:%M} UTC from `{deployed_sha[:8]}`",
+                      f"`main` is `{main_sha[:8]}`, last commit {main_at:%Y-%m-%d %H:%M} UTC",
+                      "The 3-hourly conditional rebuild should pick this up; "
+                      "`gh workflow run quarto_publish.yaml -R datapages/irw` to do it now."],
+                     age)
     return Check("site", "Site render", OK,
                  f"built {age:.1f}d ago, current with `main`", days=age)
 
