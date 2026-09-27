@@ -10,6 +10,15 @@ def convert_to_irw(input_file):
     if 'Unnamed: 0' in df.columns:
         df.drop(columns=['Unnamed: 0'], inplace=True)
 
+    # irw#2489: high-school name (raw and cleaned), country of origin and country of
+    # schooling are not shipped. In this single-clinic patient sample, school +
+    # location + age singled out 237 of the 292 respondents who gave a school, and
+    # every filled country value was unique. The coarse quest_65a (born in US) and
+    # quest_70 (high school in STL) stay. Dropped explicitly: anything left out of
+    # rename_map would otherwise be melted as an item below.
+    df.drop(columns=['quest_65b', 'quest_69', 'quest_70a', 'quest_70a_clean'],
+            inplace=True, errors='ignore')
+
     # 2. cov cols based on codebook
     rename_map = {
         'age': 'cov_age',
@@ -21,12 +30,8 @@ def convert_to_irw(input_file):
         'realm_cat': 'cov_realm_cat',
         'quest_61': 'cov_gender',
         'quest_65a': 'cov_born_in_us',
-        'quest_65b': 'cov_country_of_origin',
         'quest_68': 'cov_education_level',
-        'quest_69': 'cov_country_of_schooling',
         'quest_70': 'cov_hs_in_stl',
-        'quest_70a': 'cov_hs_name',
-        'quest_70a_clean': 'cov_hs_name_clean',
         'quest_72': 'cov_employment',
         'quest_74': 'cov_income'
     }

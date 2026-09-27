@@ -21,14 +21,18 @@ study2_df[] <- lapply(study2_df, function(col) { # Remove column labels for each
   return(col)
 })
 # irw#2255, 2026-09-19: the Study 2 tables were withdrawn because `id` was the source's
-# `Nama` column -- the respondent's name. Names are replaced by sequential integers, assigned
-# in order of first appearance so each respondent still links across the PSR/PPSR/PSI tables
-# and across their rated figures. The name itself is dropped before anything is written.
+# `Nama` column -- the respondent's name. Names are replaced by sequential integers and the
+# name itself is dropped before anything is written.
+# irw#2282, 2026-09-27: one id per source ROW, not per distinct `Nama`. `Nama` is mostly a
+# single initial (212 rows, 199 distinct values), and the rows that share one differ in age,
+# sex and cohort (`Usia`, `JK`, `Angkatan`), so keying on it merged 21 different people into
+# 8 ids (the C5 duplicate id+item rows). Each row is one respondent rating one figure; the
+# same id still links that respondent across the PSR/PPSR/PSI tables, which split one row.
 # (Study 3 below is unaffected: its id comes from the deposit's own `ID` column.)
 study2_df <- study2_df |>
   select(-Usia, -JK, -Universitas, -Angkatan, -Email, -PSRP, -PPSR, -PSIP) |>
   rename(figure=Tokoh) |>
-  mutate(id = as.integer(factor(Nama, levels = unique(Nama)))) |>
+  mutate(id = row_number()) |>
   select(-Nama)
 
 study2_psr_df <- study2_df |>
@@ -43,11 +47,11 @@ study2_ppsr_df <- pivot_longer(study2_ppsr_df, cols=-c(id, figure), names_to="it
 study2_psi_df <- pivot_longer(study2_psi_df, cols=-c(id, figure), names_to="item", values_to="resp")
 
 save(study2_psr_df, file="PSR-P_Scale_Intimacy_Hakim_2018_Study2_PSR.Rdata")
-write.csv(study2_psr_df, "PSR-P_Scale_Intimacy_Hakim_2018_Study2_PSR.csv", row.names=FALSE)
+write.csv(study2_psr_df, "PSR-P_Scale_Intimacy_Hakim_2018_Study2_PSR.csv", row.names=FALSE, na="")
 save(study2_psi_df, file="PSR-P_Scale_Intimacy_Hakim_2018_Study2_PSI.Rdata")
-write.csv(study2_psi_df, "PSR-P_Scale_Intimacy_Hakim_2018_Study2_PSI.csv", row.names=FALSE)
+write.csv(study2_psi_df, "PSR-P_Scale_Intimacy_Hakim_2018_Study2_PSI.csv", row.names=FALSE, na="")
 save(study2_ppsr_df, file="PSR-P_Scale_Intimacy_Hakim_2018_Study2_PPSR.Rdata")
-write.csv(study2_ppsr_df, "PSR-P_Scale_Intimacy_Hakim_2018_Study2_PPSR.csv", row.names=FALSE)
+write.csv(study2_ppsr_df, "PSR-P_Scale_Intimacy_Hakim_2018_Study2_PPSR.csv", row.names=FALSE, na="")
 
 # ------ Process Study 3 Dataset ------
 study3_df[] <- lapply(study3_df, function(col){
