@@ -28011,3 +28011,10 @@ batch_519 directory was removed. No work was discarded.
 - Verification VERIFIED: code labels + per-item resp-frequency match live vs deposit xlsx, cell for cell (MF1 171/335/724/411/182, MF2 179/371/689/396/188, MF3 182/348/677/431/185), 0 cross-matches. Re-confirmed independently by verify_batch.R PASS.
 - Gates: normalize 0 changes; audit PASS; verify_batch PASS; lint clean; irw-validate ok; check_provenance exit 0.
 - Numbering: the prompt's literal "below 300 -> 305" rule would collide with existing batch_305; used highest existing (537)+1 = 538, as prior rounds have. Prompt's Step 1 text is stale on this point. Cap batch_571 not reached. 29 pending remain (next: nguyen_2026_misfit_learning_motivation/_learning_satisfaction/_technostress).
+
+## batch_539 — 2026-09-27T10:1x (one agent)
+- 1 table (one agent): nguyen_2026_misfit_learning_motivation. Written 1 / blocked 0 / failed 0 (yield 100%).
+- Source: Mendeley 10.17632/j8tkztz636 V3 (CC BY 4.0) questionnaire docx, same as batch_537/538 siblings; instrument name/adaptation citation (Fernet et al. 2008; Panisoara et al. 2020) from 10.17632/hd2z967zjh APPENDIX.docx. Printed MO1-MO3 = data MO1-MO3 (no dropped item). mapping_basis=paper_explicit; translated_substitute/study_supplied (Vietnamese administration inferred, deposit English-only). Endpoint-only anchors; resp 2-4 option_text blank.
+- Verification VERIFIED: code labels + per-item resp-frequency match live vs deposit xlsx cell for cell (MO1 237/336/699/362/189, MO2 201/338/675/404/205, MO3 216/347/680/379/201), 0 cross-matches. Reproduced by verify_batch.R PASS.
+- Gates: normalize 0 changes; audit PASS; verify_batch PASS; lint clean; irw-validate ok; check_provenance exit 0.
+- Numbering: highest existing (538)+1 = 539, as prior rounds (the prompt's "below 300" rule would collide with existing batch_305). Cap batch_571 not reached. 28 pending remain (next: nguyen_2026_misfit_learning_satisfaction, _technostress).
