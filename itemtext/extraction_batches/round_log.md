@@ -28107,3 +28107,10 @@ batch_519 directory was removed. No work was discarded.
 - Step 5b re-check (orchestrator): all 190 inter-item correlations are positive (min .085; mean neg x pos .29), which confirms uniform reverse-scored storage and so the flipped anchors. Varimax on Exp1 (n=264): items 1/5/11 load .62/.66/|.52|, 27.0/8.2/6.8% — confirms the note that Table 1's blank loadings for those items are a defect in the paper's table, not in the response data.
 - Written 1 / blocked 0 / failed 0; yield 100%. Gates: normalize 0 changed, audit PASS, verify_batch PASS, lint clean, irw-validate ok, check_provenance exit 0 (ye_2025_q25_scale `mixed` review line predates this batch).
 - Numbering: highest existing (549)+1 = 550. Cap batch_571 not reached. 17 pending remain.
+
+## batch_551 — 2026-09-27T11:43:33-07:00 (1 table, 1 agent)
+- morano_2019_self_efficacy: WRITTEN. 4-item pictorial physical self-efficacy scale (Morano et al. 2019, PeerJ 7:e7402, CC BY 4.0; adapted from Colella et al. 2008). mapping_basis=paper_explicit (deposit columns Self-efficacy1..4 = S1 rows 1-4), text_source=study_materials, translation_source=study_supplied. Base fields hold S1's Italian (administered), _translated holds the authors' English. No item stems, so item_text is blank and the four graded statements per item are in option_text.
+- Step 5b PARTIAL: Table 1 scale means by gender x age reproduce (F6 3.430/3.431, F7 3.460/3.458, M6 3.555/3.557, M7 3.560/3.562; cell n match exactly, 14,035 total). This confirms 1=low to 4=high and raw storage, but does not tell the items apart because no per-item stats are published. The orchestrator re-ran verify_morano_2019_self_efficacy.R through verify_batch and got PASS. No source overrides or data-defect claims to re-check.
+- Audit WARN: 100% blank item_text. Expected for this instrument's shape and explained in notes.csv. Not a defect.
+- Written 1 / blocked 0 / failed 0; yield 100%. Gates: normalize 0 changed, audit WARN (explained), verify_batch PASS, lint clean, irw-validate ok, check_provenance exit 0.
+- Numbering: highest existing (550)+1 = 551. Cap batch_571 not reached. 16 pending remain.
