@@ -27936,3 +27936,11 @@ batch_519 directory was removed. No work was discarded.
 - Step 5b orchestrator re-check: CONI3 (printed negatively worded) correlates +0.29..+0.65 with all items outside CONI4-7 in live data — confirmed; disclosed in public_note as a data/wording mismatch.
 - Step 3b: no mismatch. Gates: normalize 0; audit WARN; verify_batch PASS; lint clean; irw-validate ok; check_provenance no new issues.
 - Batch number 529 = highest+1. Cap batch_571 not reached. 38 pending remain.
+
+## batch_530 — 2026-09-27 ~09:15 PDT (1 agent)
+- 1 table: rvobgvmaas_lsf_lehing_2024 (MAAS, German MABS version). Written 1 / blocked 0 / failed 0. Yield 1/1.
+- paper_explicit, study_materials (German, verbatim from the study's S1 File); _translated = Condon's own English MAAS (official_instrument_english, CC BY 3.0 AU, Flinders hdl 2328/35292). 27 codes x 5 options = 135 rows; the r-suffixed columns match Condon's reverse key 11/11.
+- Verification PARTIAL: all 19 T1 items reproduce Table 2 M/SD/skew/kurtosis to 2 dp, and each item is nearest its own row. The 8 _t2 codes are tied only by the number in the column name (cross-wave r picks the same-number item 6/8). Verify script PASS.
+- RESPONSE-DATA DEFECT (orchestrator re-checked and confirmed): in the live table, wave 1 of all 11 reverse-keyed items (maas_*r_t1) is a copy of wave 0, 2024/2024 rows identical. The cause is data/rvobgvmaas_lsf_lehing_2024.r line 37 (maas_t2r_df) using ends_with("t1") where it should use ends_with("t2"), so the study's T2 answers to those items never reached IRW. The fix is that one call plus a re-upload; the itemtext would then need 11 maas_<N>r_t2 codes added. This defect explains the audit WARN (row-count anomaly) and is disclosed in public_note.
+- Step 3b: no mismatch. Gates: normalize 0; audit WARN (explained); verify_batch PASS; lint clean; irw-validate ok; check_provenance no new issues.
+- Batch number 530 = highest+1. Cap batch_571 not reached. 37 pending remain.
