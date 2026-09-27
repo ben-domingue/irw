@@ -70,7 +70,7 @@ USAGE
     python3 metadata/drift_report.py --json          # machine-readable
     python3 metadata/drift_report.py --post          # edit the tracking issue
     python3 metadata/drift_report.py --check         # exit 1 if anything stale
-    python3 metadata/drift_report.py --no-redivis    # skip the draft check
+    python3 metadata/drift_report.py --no-redivis    # skip the Redivis checks
 """
 
 from __future__ import annotations
@@ -226,6 +226,98 @@ def check_drafts(root: Path, now: dt.datetime, enabled: bool) -> Check:
                  f"{n} dataset(s) with unreleased changes, oldest "
                  f"{worst:.1f}d" if worst is not None else f"{n} dataset(s) with unreleased changes",
                  rows, worst)
+
+
+def name_collisions(index: dict[str, list[str]], shards: list[str]
+                    ) -> dict[str, list[str]]:
+    """Lowercased name -> ["shard.Name", ...] for every name held more than once.
+
+    Case-insensitive, because the clients resolve a bare name without regard to
+    case, and newest-shard-first -- so two copies are one table silently
+    shadowing another, whatever their spelling (#2151)."""
+    order = {s: i for i, s in enumerate(shards)}
+    seen: dict[str, list[str]] = {}
+    for name, datasets in index.items():
+        for d in datasets:
+            seen.setdefault(name.lower(), []).append(f"{d}.{name}")
+    return {k: sorted(v, key=lambda x: order[x.split(".", 1)[0]])
+            for k, v in seen.items() if len(v) > 1}
+
+
+def metadata_elsewhere(root: Path, index: dict[str, list[str]],
+                       shards: list[str]) -> list[tuple[str, str, str]]:
+    """(table, metadata's dataset, where a client resolves it) where they differ.
+
+    The same silent failure when a name is NOT duplicated: a table moved between
+    shards, and its metadata row still describes the old home."""
+    newest: dict[str, str] = {}
+    order = {s: i for i, s in enumerate(shards)}
+    for name, datasets in index.items():
+        best = max(datasets, key=lambda d: order[d])
+        k = name.lower()
+        if k not in newest or order[best] > order[newest[k]]:
+            newest[k] = best
+    out = []
+    with (root / "metadata" / "metadata.csv").open(newline="") as fh:
+        for row in csv.DictReader(fh):
+            got = newest.get((row.get("table") or "").lower())
+            said = (row.get("dataset") or "").strip()
+            if got and said and said != got:
+                out.append((row["table"], said, got))
+    return out
+
+
+def check_name_collisions(root: Path, enabled: bool) -> Check:
+    """Is any table name published in two core shards? (#2151)
+
+    A duplicate name always resolves to ONE copy, deterministically and with no
+    error, while the metadata row may describe the other: `zhou_2025_peer_relationship`
+    was in `_3` (238,272 rows) and `_5` (10,280), and describe_table and
+    fetch_table disagreed by 23x without either saying a choice had been made.
+    Found by a contributor, not by anything mechanical (#2149).
+
+    red_up refuses a new cross-source clash at upload time (#2457) and routes a
+    same-name core upload to where the table already lives, but a gate cannot
+    see what is already published. This can. Six list_tables() calls, metadata
+    only, no export quota. Red rather than yellow when it fires: this is not
+    lag, it is a client serving one table's statistics over another's rows.
+    """
+    title = "Duplicate table names"
+    if not enabled:
+        return Check("names", title, ERROR, "skipped (--no-redivis)")
+    try:
+        sys.path.insert(0, str(root))
+        from red_up.auth import authenticate
+        from red_up.plan import index_tables
+        from red_up.targets import load_registry
+
+        owner, targets = load_registry()
+        shards = [t.name for t in targets if t.kind == "core"]
+        authenticate()
+        index = index_tables(owner, shards)
+    except Exception as exc:
+        return Check("names", title, ERROR,
+                     f"could not list the core shards ({str(exc).splitlines()[0][:80]})")
+
+    dups = name_collisions(index, shards)
+    moved = metadata_elsewhere(root, index, shards)
+    rows = [f"`{k}` — in {', '.join(f'`{v}`' for v in vs)}; clients read "
+            f"`{vs[-1]}`" for k, vs in sorted(dups.items())]
+    rows += [f"`{t}` — metadata.csv says `{said}`, clients resolve `{got}`"
+             for t, said, got in moved]
+    if not rows:
+        return Check("names", title, OK,
+                     f"{len(index):,} names across {len(shards)} core shards, "
+                     f"none duplicated; metadata agrees with resolution", days=0.0)
+    parts = []
+    if dups:
+        parts.append(f"**{len(dups)}** name(s) in more than one core shard")
+    if moved:
+        parts.append(f"**{len(moved)}** metadata row(s) point at a shard clients "
+                     f"do not resolve to")
+    rows.append("Fix: decide which copy is right, withdraw or rename the other "
+                "(`tools/withdrawals/`), then let Monday's metadata run rewrite the row.")
+    return Check("names", title, STALE, "; ".join(parts), rows)
 
 
 def check_warehouse_behind_repo(root: Path, now: dt.datetime) -> Check:
@@ -568,7 +660,8 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--check", action="store_true",
                     help="exit 1 if anything is stale (for a human; the workflow does not use it)")
     ap.add_argument("--no-redivis", action="store_true",
-                    help="skip the draft check, which is the only one needing credentials")
+                    help="skip the two checks that need credentials (drafts, "
+                         "duplicate names)")
     args = ap.parse_args(argv)
 
     root = Path(args.root) if args.root else Path(__file__).resolve().parent.parent
@@ -577,6 +670,7 @@ def main(argv: list[str] | None = None) -> int:
     checks = [
         check_warehouse_behind_repo(root, now),
         check_drafts(root, now, enabled=not args.no_redivis),
+        check_name_collisions(root, enabled=not args.no_redivis),
         check_site_render(now),
         check_hero(root),
         check_status_json(root),
