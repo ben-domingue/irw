@@ -2,7 +2,7 @@ import csv
 import openpyxl
 
 SRC = "../automated_finding/downloads/cos101/Responses_COS101_dataset.xlsx"
-OUT = "../automated_finding/output_noncore/cos101_2026_openended.csv"
+OUT = "../automated_finding/output_noncore/cos101_2026_nom.csv"
 
 wb = openpyxl.load_workbook(SRC, read_only=True)
 ws = wb[wb.sheetnames[0]]

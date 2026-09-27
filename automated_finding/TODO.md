@@ -3186,3 +3186,18 @@ do not treat the CSV's `proposed_name` column as a work list.
   posture with a repository the project depends on long-term. The UA
   already declares itemresponsewarehouse@stanford.edu -- keep asking
   through the front door.
+
+## From the 2026-09-25 PMC scout-2 sweep
+
+- [x] **29 tables (202,976 responses) uploaded** (ben-domingue, confirmed 2026-09-26).
+  No item text this batch.
+  Dictionary and tag rows are staged in `dictionary_auto.csv` / `tags/tags_auto.csv`.
+- [ ] **3 tables need uploading** (`irw_output/`): `csibra_2025_dafrs_symptoms`,
+  `csibra_2025_dafrs_function`, `atalay_2024_pozqol` (the held pair, released
+  2026-09-26). No item text.
+- [ ] **51 `out_of_range` leads unworked** in `leads/pmc_leads_2026-09-25.csv`
+  (all 77 `in_range` rows are terminal).
+- [ ] **Cheap item text for 16 tables**: csibra (Appendix A), atalay (s003.pdf), fredborg (Data Legend sheet), ge (.sav
+  labels), guo (xlsx header), jie (.sav labels), todor (s001.docx).
+- [ ] **458 scouted terms unrun** in `pmc_term_backlog_2026-09-25.csv` (1,782
+  projected new DOIs). The next sweep starts from that file.

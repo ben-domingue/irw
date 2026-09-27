@@ -19,7 +19,7 @@ multi-category and are handled here.
 
 Table written (to output_noncore/)
 ----------------------------------
-goldberg_2018_spa_computer_use   2 items, responses "A".."L"
+goldberg_2018_spa_computer_use_nom   2 items, responses "A".."L"
 
 What these are
 --------------
@@ -113,7 +113,7 @@ def main():
         assert not long.duplicated(["id", "item"]).any()
         assert long.groupby("item")["text"].nunique().min() > 1, f"{suffix}: constant item"
 
-        path = os.path.join(OUTDIR, f"goldberg_2018_{suffix}.csv")
+        path = os.path.join(OUTDIR, f"goldberg_2018_{suffix}_nom.csv")
         long.to_csv(path, index=False)
         n_id, n_it = long["id"].nunique(), long["item"].nunique()
         print(f"{path}: {n_id} ids x {n_it} items = {len(long)} responses, "

@@ -8003,3 +8003,53 @@ date,query,output_file,notes
 2026-09-24,servant leadership scale,runs/pmc_backlog_final_2026-09-24_triage.csv,PMC backlog final sweep; last 41 ranked-unrun terms of pmc_term_backlog.csv; 20 candidates over 9 journals
 2026-09-24,test cognitif,runs/pmc_backlog_final_2026-09-24_triage.csv,PMC backlog final sweep; last 41 ranked-unrun terms of pmc_term_backlog.csv; 20 candidates over 9 journals
 2026-09-24,workplace incivility scale,runs/pmc_backlog_final_2026-09-24_triage.csv,PMC backlog final sweep; last 41 ranked-unrun terms of pmc_term_backlog.csv; 20 candidates over 9 journals
+2026-09-25,autism spectrum,runs/pmc_scout2_2026-09-25_triage.csv,PMC scout-2 sweep; top 50 of 1234 newly scouted repo-logged terms; 2196 candidates over 11 journals
+2026-09-25,early childhood,runs/pmc_scout2_2026-09-25_triage.csv,PMC scout-2 sweep; top 50 of 1234 newly scouted repo-logged terms; 2196 candidates over 11 journals
+2026-09-25,health promotion,runs/pmc_scout2_2026-09-25_triage.csv,PMC scout-2 sweep; top 50 of 1234 newly scouted repo-logged terms; 2196 candidates over 11 journals
+2026-09-25,sleep quality,runs/pmc_scout2_2026-09-25_triage.csv,PMC scout-2 sweep; top 50 of 1234 newly scouted repo-logged terms; 2196 candidates over 11 journals
+2026-09-25,physical fitness,runs/pmc_scout2_2026-09-25_triage.csv,PMC scout-2 sweep; top 50 of 1234 newly scouted repo-logged terms; 2196 candidates over 11 journals
+2026-09-25,food insecurity,runs/pmc_scout2_2026-09-25_triage.csv,PMC scout-2 sweep; top 50 of 1234 newly scouted repo-logged terms; 2196 candidates over 11 journals
+2026-09-25,substance use,runs/pmc_scout2_2026-09-25_triage.csv,PMC scout-2 sweep; top 50 of 1234 newly scouted repo-logged terms; 2196 candidates over 11 journals
+2026-09-25,social support,runs/pmc_scout2_2026-09-25_triage.csv,PMC scout-2 sweep; top 50 of 1234 newly scouted repo-logged terms; 2196 candidates over 11 journals
+2026-09-25,intimate partner violence,runs/pmc_scout2_2026-09-25_triage.csv,PMC scout-2 sweep; top 50 of 1234 newly scouted repo-logged terms; 2196 candidates over 11 journals
+2026-09-25,emotion regulation,runs/pmc_scout2_2026-09-25_triage.csv,PMC scout-2 sweep; top 50 of 1234 newly scouted repo-logged terms; 2196 candidates over 11 journals
+2026-09-25,self-efficacy,runs/pmc_scout2_2026-09-25_triage.csv,PMC scout-2 sweep; top 50 of 1234 newly scouted repo-logged terms; 2196 candidates over 11 journals
+2026-09-25,working memory,runs/pmc_scout2_2026-09-25_triage.csv,PMC scout-2 sweep; top 50 of 1234 newly scouted repo-logged terms; 2196 candidates over 11 journals
+2026-09-25,vaccine hesitancy,runs/pmc_scout2_2026-09-25_triage.csv,PMC scout-2 sweep; top 50 of 1234 newly scouted repo-logged terms; 2196 candidates over 11 journals
+2026-09-25,alcohol use,runs/pmc_scout2_2026-09-25_triage.csv,PMC scout-2 sweep; top 50 of 1234 newly scouted repo-logged terms; 2196 candidates over 11 journals
+2026-09-25,pain,runs/pmc_scout2_2026-09-25_triage.csv,PMC scout-2 sweep; top 50 of 1234 newly scouted repo-logged terms; 2196 candidates over 11 journals
+2026-09-25,risk perception,runs/pmc_scout2_2026-09-25_triage.csv,PMC scout-2 sweep; top 50 of 1234 newly scouted repo-logged terms; 2196 candidates over 11 journals
+2026-09-25,sedentary behavior,runs/pmc_scout2_2026-09-25_triage.csv,PMC scout-2 sweep; top 50 of 1234 newly scouted repo-logged terms; 2196 candidates over 11 journals
+2026-09-25,health-related quality of life,runs/pmc_scout2_2026-09-25_triage.csv,PMC scout-2 sweep; top 50 of 1234 newly scouted repo-logged terms; 2196 candidates over 11 journals
+2026-09-25,bipolar disorder,runs/pmc_scout2_2026-09-25_triage.csv,PMC scout-2 sweep; top 50 of 1234 newly scouted repo-logged terms; 2196 candidates over 11 journals
+2026-09-25,chronic pain,runs/pmc_scout2_2026-09-25_triage.csv,PMC scout-2 sweep; top 50 of 1234 newly scouted repo-logged terms; 2196 candidates over 11 journals
+2026-09-25,stress,runs/pmc_scout2_2026-09-25_triage.csv,PMC scout-2 sweep; top 50 of 1234 newly scouted repo-logged terms; 2196 candidates over 11 journals
+2026-09-25,ADHD,runs/pmc_scout2_2026-09-25_triage.csv,PMC scout-2 sweep; top 50 of 1234 newly scouted repo-logged terms; 2196 candidates over 11 journals
+2026-09-25,cross-cultural,runs/pmc_scout2_2026-09-25_triage.csv,PMC scout-2 sweep; top 50 of 1234 newly scouted repo-logged terms; 2196 candidates over 11 journals
+2026-09-25,suicidal ideation,runs/pmc_scout2_2026-09-25_triage.csv,PMC scout-2 sweep; top 50 of 1234 newly scouted repo-logged terms; 2196 candidates over 11 journals
+2026-09-25,screen time,runs/pmc_scout2_2026-09-25_triage.csv,PMC scout-2 sweep; top 50 of 1234 newly scouted repo-logged terms; 2196 candidates over 11 journals
+2026-09-25,inhibition,runs/pmc_scout2_2026-09-25_triage.csv,PMC scout-2 sweep; top 50 of 1234 newly scouted repo-logged terms; 2196 candidates over 11 journals
+2026-09-25,life satisfaction,runs/pmc_scout2_2026-09-25_triage.csv,PMC scout-2 sweep; top 50 of 1234 newly scouted repo-logged terms; 2196 candidates over 11 journals
+2026-09-25,dyslexia,runs/pmc_scout2_2026-09-25_triage.csv,PMC scout-2 sweep; top 50 of 1234 newly scouted repo-logged terms; 2196 candidates over 11 journals
+2026-09-25,coping strategies,runs/pmc_scout2_2026-09-25_triage.csv,PMC scout-2 sweep; top 50 of 1234 newly scouted repo-logged terms; 2196 candidates over 11 journals
+2026-09-25,physical education,runs/pmc_scout2_2026-09-25_triage.csv,PMC scout-2 sweep; top 50 of 1234 newly scouted repo-logged terms; 2196 candidates over 11 journals
+2026-09-25,help-seeking,runs/pmc_scout2_2026-09-25_triage.csv,PMC scout-2 sweep; top 50 of 1234 newly scouted repo-logged terms; 2196 candidates over 11 journals
+2026-09-25,parenting,runs/pmc_scout2_2026-09-25_triage.csv,PMC scout-2 sweep; top 50 of 1234 newly scouted repo-logged terms; 2196 candidates over 11 journals
+2026-09-25,cannabis use,runs/pmc_scout2_2026-09-25_triage.csv,PMC scout-2 sweep; top 50 of 1234 newly scouted repo-logged terms; 2196 candidates over 11 journals
+2026-09-25,post-traumatic stress,runs/pmc_scout2_2026-09-25_triage.csv,PMC scout-2 sweep; top 50 of 1234 newly scouted repo-logged terms; 2196 candidates over 11 journals
+2026-09-25,empathy,runs/pmc_scout2_2026-09-25_triage.csv,PMC scout-2 sweep; top 50 of 1234 newly scouted repo-logged terms; 2196 candidates over 11 journals
+2026-09-25,loneliness,runs/pmc_scout2_2026-09-25_triage.csv,PMC scout-2 sweep; top 50 of 1234 newly scouted repo-logged terms; 2196 candidates over 11 journals
+2026-09-25,posttraumatic stress,runs/pmc_scout2_2026-09-25_triage.csv,PMC scout-2 sweep; top 50 of 1234 newly scouted repo-logged terms; 2196 candidates over 11 journals
+2026-09-25,medication adherence,runs/pmc_scout2_2026-09-25_triage.csv,PMC scout-2 sweep; top 50 of 1234 newly scouted repo-logged terms; 2196 candidates over 11 journals
+2026-09-25,resilience,runs/pmc_scout2_2026-09-25_triage.csv,PMC scout-2 sweep; top 50 of 1234 newly scouted repo-logged terms; 2196 candidates over 11 journals
+2026-09-25,fatigue,runs/pmc_scout2_2026-09-25_triage.csv,PMC scout-2 sweep; top 50 of 1234 newly scouted repo-logged terms; 2196 candidates over 11 journals
+2026-09-25,flourishing,runs/pmc_scout2_2026-09-25_triage.csv,PMC scout-2 sweep; top 50 of 1234 newly scouted repo-logged terms; 2196 candidates over 11 journals
+2026-09-25,drug use,runs/pmc_scout2_2026-09-25_triage.csv,PMC scout-2 sweep; top 50 of 1234 newly scouted repo-logged terms; 2196 candidates over 11 journals
+2026-09-25,obsessive-compulsive,runs/pmc_scout2_2026-09-25_triage.csv,PMC scout-2 sweep; top 50 of 1234 newly scouted repo-logged terms; 2196 candidates over 11 journals
+2026-09-25,insomnia,runs/pmc_scout2_2026-09-25_triage.csv,PMC scout-2 sweep; top 50 of 1234 newly scouted repo-logged terms; 2196 candidates over 11 journals
+2026-09-25,mindfulness,runs/pmc_scout2_2026-09-25_triage.csv,PMC scout-2 sweep; top 50 of 1234 newly scouted repo-logged terms; 2196 candidates over 11 journals
+2026-09-25,cultural adaptation,runs/pmc_scout2_2026-09-25_triage.csv,PMC scout-2 sweep; top 50 of 1234 newly scouted repo-logged terms; 2196 candidates over 11 journals
+2026-09-25,public goods game,runs/pmc_scout2_2026-09-25_triage.csv,PMC scout-2 sweep; top 50 of 1234 newly scouted repo-logged terms; 2196 candidates over 11 journals
+2026-09-25,stigma,runs/pmc_scout2_2026-09-25_triage.csv,PMC scout-2 sweep; top 50 of 1234 newly scouted repo-logged terms; 2196 candidates over 11 journals
+2026-09-25,perceived stress,runs/pmc_scout2_2026-09-25_triage.csv,PMC scout-2 sweep; top 50 of 1234 newly scouted repo-logged terms; 2196 candidates over 11 journals
+2026-09-25,trust,runs/pmc_scout2_2026-09-25_triage.csv,PMC scout-2 sweep; top 50 of 1234 newly scouted repo-logged terms; 2196 candidates over 11 journals
