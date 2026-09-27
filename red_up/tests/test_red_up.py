@@ -530,6 +530,39 @@ class Planning(unittest.TestCase):
             self.assertEqual(items["older"].status, planning.ELSEWHERE)
             self.assertEqual(items["older"].report.errors, [])
 
+    def _within(self, tmp, names, index):
+        reports = self._reports(tmp, names)
+        items = planning.build(reports, self.shard, index)
+        planning.cross_source_conflicts(items, self.shard, self.targets, index)
+        planning.within_source_duplicates(items, self.shard, self.targets, index)
+        return {i.table: i for i in items}
+
+    def test_a_name_already_in_two_core_shards_warns(self):
+        """#2151: zhou_2025_peer_relationship was in _3 and _5 at once."""
+        with tempfile.TemporaryDirectory() as tmp:
+            items = self._within(tmp, ["zhou_2025_peer"], {
+                "zhou_2025_peer": ["item_response_warehouse_3",
+                                   "item_response_warehouse_5"]})
+            item = items["zhou_2025_peer"]
+            self.assertTrue(any(w.startswith("duplicate_name:")
+                                for w in item.report.warnings))
+            self.assertEqual(item.report.errors, [], "a warning, never a refusal")
+
+    def test_a_new_case_variant_in_core_warns(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            items = self._within(tmp, ["foo_2020"],
+                                 {"Foo_2020": ["item_response_warehouse_2"]})
+            self.assertTrue(any("only by case" in w
+                                for w in items["foo_2020"].report.warnings))
+
+    def test_a_single_home_is_not_a_duplicate(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            items = self._within(tmp, ["older"],
+                                 {"older": ["item_response_warehouse_3"],
+                                  "older__items": [self.text_shard.name]})
+            self.assertFalse(any(w.startswith("duplicate_name:")
+                                 for w in items["older"].report.warnings))
+
     def test_item_text_sharing_a_response_name_is_not_a_clash(self):
         with tempfile.TemporaryDirectory() as tmp:
             items = self._cross_source(

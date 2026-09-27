@@ -70,6 +70,54 @@ auto_tables <- character()
 ##credit those columns to the tagger.
 derived_tables <- character()
 
+##Cells the auto file filled on a table the Sheet already has a row for
+##(#1863): lowercased table -> the columns filled. The sidecar credits the
+##tagger with exactly these on such a table, and nothing the human typed.
+auto_cells <- list()
+
+##A tag cell with nothing in it. The Sheet stores an empty cell as the literal
+##string "NA" as often as as a true NA, and both mean "not filled in" (#1863).
+blank_tag <- function(x) {
+    x <- trimws(as.character(x))
+    is.na(x) | x == "" | x == "NA"
+}
+
+##Column-level human-wins merge (#1863). #1723's rule is that a human value
+##wins the cell it occupies; it was implemented at ROW level, so a table with
+##any Sheet row lost its whole auto row, and a column the human left blank
+##could never be filled by any tagging run -- 76 `primary language(s)`, 28
+##`construct type`, 21 `measurement tool` and 19 `item format` cells were
+##unreachable on 2026-09-03, and the ceiling grew with the Sheet.
+##
+##So, for a table the Sheet has:
+##  - a non-blank Sheet cell is never changed;
+##  - a blank one (NA, "", or the literal "NA") takes the auto value, when the
+##    auto value is itself non-blank.
+##Auto rows for tables the Sheet lacks are returned whole, as before.
+##
+##Returns list(tag = sheet rows with blanks filled, auto = the rows to append,
+##filled = named list table -> columns filled, n_shared = tables in both).
+merge_auto_tags <- function(tag, auto) {
+    cols <- setdiff(names(tag), "table")
+    key <- tolower(trimws(as.character(tag$table)))
+    akey <- tolower(trimws(as.character(auto$table)))
+    shared <- akey %in% key
+    filled <- list()
+    for (i in which(shared)) {
+        rows <- which(key == akey[i])
+        for (cl in cols) {
+            val <- auto[[cl]][i]
+            if (blank_tag(val)) next
+            hole <- rows[blank_tag(tag[[cl]][rows])]
+            if (!length(hole)) next
+            tag[[cl]][hole] <- val
+            filled[[akey[i]]] <- union(filled[[akey[i]]], cl)
+        }
+    }
+    list(tag = tag, auto = auto[!shared, , drop = FALSE], filled = filled,
+         n_shared = length(unique(akey[shared])))
+}
+
 ##Shared column selection and key normalisation, applied identically to sheet
 ##rows and auto rows. Everything downstream assumes it has run.
 select_tag_cols <- function(tag, label) {
@@ -144,10 +192,11 @@ AGE_NOT_PERSON <- "Not applicable (non-person)"
 ##shipped table, which is what #1760 decided the column describes. Every other
 ##column, and every table without usable ages, keeps human precedence untouched.
 ##
-##Why it has to exist at all: 03_tags.R drops an auto row for any table a human
-##has tagged, and the Sheet is not writable from code (#1708 / 6.1). Without
-##this, Rule A would tag the ~1,120 untagged tables and change none of the ~472
-##`Mixed` rows that prompted the issue.
+##Why it has to exist at all: 03_tags.R lets an auto value into a Sheet-held
+##table only where the human left the cell blank (#1863), and the Sheet is not
+##writable from code (#1708 / 6.1). Without this, Rule A would tag the ~1,120
+##untagged tables and change none of the ~472 `Mixed` rows that prompted the
+##issue, since those cells are filled.
 ##
 ##The Sheet is never modified. The human value stays where it was typed, and
 ##reverting this is deleting the file.derived entry and re-running.
@@ -256,14 +305,14 @@ get_tags <- function(db) {
     print(paste0(db$name, ": ", nrow(tag), " rows -> ", db$file.out,
                  " (", sum(n == 0), " named but untagged)"))
 
-    ##Union the automated tags. Human rows win on conflict, keyed on `table`.
-    ##Dropping superseded auto rows here is also the retirement path: once a
-    ##human tags a table, its auto row stops being published whether or not
-    ##anyone remembers to delete it from the file.
+    ##Union the automated tags, keyed on `table`. Human values win cell by
+    ##cell (#1863): a table the Sheet has keeps every cell the human filled and
+    ##takes the auto value only where the human left it blank. Superseding is
+    ##therefore also cell by cell -- once a human fills a cell, the auto value
+    ##for it stops being published whether or not anyone deletes it from the
+    ##file.
     auto <- read_auto_tags(db$file.auto, db$name)
     if (!is.null(auto)) {
-        superseded <- auto$table %in% tag$table
-        auto <- auto[!superseded, ]
         ##Drop sentinel rows: the tagger stages `table`/`Rater`/`Notes` only,
         ##with every tag field blank, when a source is paywalled or has no
         ##working link (SKILL.md Steps 2/5). That row is a local marker meaning
@@ -286,6 +335,11 @@ get_tags <- function(db) {
             auto <- auto[!empty, , drop = FALSE]
         }
         stopifnot(identical(names(auto), names(tag)))
+        merged <- merge_auto_tags(tag, auto)
+        tag <- merged$tag
+        auto <- merged$auto
+        auto_cells <<- c(auto_cells, merged$filled)
+        n_cells <- sum(lengths(merged$filled))
         ##Which tables the auto file contributed, so the published tags stay
         ##sweepable. KEEP_COLS drops the `Rater` column on the way in, so once a
         ##tagger value lands in tags.csv it is indistinguishable from a human's
@@ -300,7 +354,9 @@ get_tags <- function(db) {
         auto_tables <<- c(auto_tables, as.character(auto$table))
         tag <- rbind(tag, auto)
         print(paste0(db$name, ": +", nrow(auto), " auto rows from ", db$file.auto,
-                     " (", sum(superseded), " superseded by the sheet)"))
+                     "; ", merged$n_shared, " table(s) also on the sheet, where ",
+                     "auto filled ", n_cells, " blank cell(s) in ",
+                     length(merged$filled), " table(s)"))
     }
 
     ##Derived age tags win over both the Sheet and the auto file, for their two
@@ -351,16 +407,18 @@ get_tags <- function(db) {
 }
 
 ##Which columns of a published row came from the tagger rather than a human.
-##A table the tagger wrote but the sheet later superseded contributes nothing:
-##by then the value is the human's.
+##A table the tagger wrote whole contributes every filled column; a table the
+##sheet also has contributes only the blank cells the tagger filled
+##(`auto_cells`, #1863) -- the human's cells are the human's.
 write_tag_provenance <- function(tag, db) {
     ##Derive the name from the output file rather than hardcoding it: `core` and
     ##`nom` both write into the same directory, and a fixed name meant the second
     ##source silently overwrote the first's sidecar with an empty file.
     out <- sub("\\.csv$", "_provenance.csv", db$file.out)
     cols <- setdiff(names(tag), "table")
-    keep <- tolower(trimws(as.character(tag$table))) %in%
-            tolower(trimws(unique(auto_tables)))
+    key <- tolower(trimws(as.character(tag$table)))
+    keep <- key %in% tolower(trimws(unique(auto_tables))) |
+            key %in% names(auto_cells)
     rows <- tag[keep, , drop = FALSE]
     if (!nrow(rows)) {
         readr::write_csv(data.frame(table = character(), columns = character(),
@@ -372,7 +430,10 @@ write_tag_provenance <- function(tag, db) {
     DERIVED_OWNED <- c("age range", "child age (for child-focused studies)")
     per <- vapply(seq_len(nrow(rows)), function(i) {
         set <- cols[vapply(cols, function(cl) filled(rows[[cl]][i]), logical(1))]
-        if (tolower(trimws(rows$table[i])) %in% derived_tables)
+        k <- tolower(trimws(rows$table[i]))
+        if (!is.null(auto_cells[[k]]))
+            set <- intersect(set, auto_cells[[k]])
+        if (k %in% derived_tables)
             set <- setdiff(set, DERIVED_OWNED)
         paste(set, collapse = "; ")
     }, character(1))

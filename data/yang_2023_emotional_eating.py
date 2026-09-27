@@ -5,9 +5,23 @@
 #
 # Chain-mediation study of emotional eating (Chinese sample, N=494).
 # Raw file's column names are the actual item text (already in English),
-# but item blocks are grouped under cryptic "@10."/"@11."/etc. labels with
-# the first item of each block missing that prefix (its column name is
-# just the raw item text). Block sizes were matched to the paper's stated
+# but item blocks are grouped under cryptic "@10."/"@11."/etc. labels, with
+# one unprefixed column prepended to three blocks below.
+# #2218: this is a wjx-style export, where the first sub-item column of a
+# matrix question carries the question STEM as its header, not the sub-item's
+# own label, so the prepended column means different things per block (no
+# response data is affected; the shipped item text resolves and discloses each):
+#   EESR_1  a real 23rd EES-R item whose emotion word the deposit does not
+#           preserve (its header is the stem).
+#   CESD_1  a genuine CES-D item (appetite) = canonical CES-D item 2, so CESD_2
+#           is canonical item 1 (its header is the block instruction).
+#           CESD_<n> is canonical item <n> only for n >= 3.
+#   DERS_1  header is the block instruction, not the study's wording
+#           (canonical DERS item 1).
+#   UPPSP_1 no prepended column, but its header is instruction + a label
+#           truncated to "I" (the one SUPPS-P perseverance item headers 2-20
+#           do not cover).
+# Block sizes were matched to the paper's stated
 # instrument lengths (all confirmed via WebFetch of the Measures section):
 #   @10 block (22 cols) + 1 unprefixed intro item = 23  -> EES-R (23 items, Cronbach's a=.935)
 #   @11 block (19 cols) + 1 unprefixed intro item = 20  -> CES-D (20 items, a=.884)

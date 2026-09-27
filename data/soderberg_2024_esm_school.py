@@ -36,9 +36,7 @@ Coding notes
   tables use the same 1-5 anchors, which is a format, not an instrument.
 * `Le_enjoy_all` is observed only at 1-4 across 4,107 responses. The SPSS value
   label set declares all five anchors for it exactly as for its five block
-  mates, so this is one left-skewed 1-5 scale, not a separate 1-4 one --
-  `run_qc`'s `resp_scale_mixed` reads an observed maximum as a scale, so the
-  check is waived for this table by named exemption (printed at write time).
+  mates, so this is one left-skewed 1-5 scale, not a separate 1-4 one.
 * Dropped as items, each being the only item of its construct (IRW does not
   ship single-item scales): `SchoolEnj` and `SchoolAbs` -- carried instead as
   person-level covariates on the start-up tables -- plus the ESM items
@@ -120,12 +118,6 @@ DROPPED = {
     "PeerRel_all": "single-item construct, own stem",
     "SchooldaySatisfaction": "single item on a 1-10 format",
     "Morning_breakfast": "yes/no behaviour item, different format from block",
-}
-# resp_scale_mixed exemptions: table -> reason
-QC_WAIVERS = {
-    "soderberg_2024_esm_lecture":
-        "Le_enjoy_all is observed only at 1-4; its SPSS value-label set "
-        "declares the same five anchors as the rest of the block.",
 }
 
 
@@ -215,11 +207,6 @@ def main():
             assert long["item"].nunique() >= 2, name
             checks = run_qc(long)
             bad = [c for c in checks if c.status == "fail"]
-            if name in QC_WAIVERS:
-                waived = [c for c in bad if c.name == "resp_scale_mixed"]
-                if waived:
-                    print(f"  [qc waiver] {name}: {QC_WAIVERS[name]}")
-                bad = [c for c in bad if c.name != "resp_scale_mixed"]
             assert not bad, (name, [(c.name, c.detail) for c in bad])
 
             path = os.path.join(OUTDIR, f"{name}.csv")

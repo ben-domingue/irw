@@ -55,6 +55,15 @@ def convert():
     # 3 different items, out of ~13900 valid responses) are data-entry errors.
     long = long[long["resp"] <= 6].reset_index(drop=True)
 
+    # #2099: the reverse-keyed items ASQ_20/21/33 (headers "ASQ-20-R- DC",
+    # "ASQ-21-R DC", "ASQ-33-R C") are stored raw for Spain (cov_country 1) but
+    # already reverse-scored for Italy (2) and Japan (3): their correlation with
+    # the non-reversed items of their own subscale is negative in Spain and
+    # positive in Italy/Japan. Un-reverse Italy/Japan (7 - x on the 1-6 scale)
+    # so all three subsamples are raw.
+    flip = long["item"].isin(["ASQ_20", "ASQ_21", "ASQ_33"]) & long["cov_country"].isin([2, 3])
+    long.loc[flip, "resp"] = 7 - long.loc[flip, "resp"]
+
     long["resp"] = long["resp"].astype(int)
     out_cols = ["id", "item", "resp"] + cov_cols
     long = long[out_cols].sort_values(["id", "item"]).reset_index(drop=True)

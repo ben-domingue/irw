@@ -57,7 +57,7 @@ from irw_batch_updated import (
     # from there, and neither connector should import the other.
     extract_external_link, triage_external_link,
 )
-from irw_triage_updated import load_table, triage_dataset, preflight_deps
+from irw_triage_updated import load_table, reread_hint, triage_dataset, preflight_deps
 
 UA = {"User-Agent": "irw-discovery-scout/1.0 (research; contact itemresponsewarehouse@stanford.edu)"}
 PLOS_SEARCH_API = "https://api.plos.org/search"
@@ -269,6 +269,10 @@ def process_one(hit: Hit) -> dict:
         t = triage_dataset(df)
         meta = t.metadata or {}
         reasons = list(t.reasons)
+        # First, so the 400-char cap on `reasons` cannot cut it (#2221).
+        hint = reread_hint(content, fname, t)
+        if hint:
+            reasons.insert(0, hint)
         reasons.append(f"SI caption: {caption}")
         if unknown:
             reasons.append(f"license_unknown* — could not confirm CC-BY on page; verify before submission")

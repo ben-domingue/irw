@@ -118,7 +118,7 @@ mlb_through2023,NA,NA,NA,https://github.com/sportstensor/MLB/tree/main/data_and_
   howpublished = {\url{https://github.com/sportstensor/MLB/tree/main/data_and_models}},
   note = {Accessed: 2023-10-01}
 }"
-nba_2012-2018,NA,NA,NA,https://www.kaggle.com/datasets/pablote/nba-enhanced-stats,CC BY-SA 4.0,CC BY-SA 4.0,NA,NBA games from 2012-2018,"@misc{nba_enhanced_stats,
+nba_2012-2018,NA,NA,"Rossotti, P. (2018). NBA enhanced box score and standings (2012–2018) (Version 27) [Data set]. Kaggle. https://www.kaggle.com/datasets/pablote/nba-enhanced-stats",https://www.kaggle.com/datasets/pablote/nba-enhanced-stats,CC BY-SA 4.0,CC BY-SA 4.0,NA,NBA games from 2012-2018,"@misc{nba_enhanced_stats,
   title = {NBA Enhanced Stats},
   howpublished = {\url{https://www.kaggle.com/datasets/pablote/nba-enhanced-stats}},
   note = {Accessed: 2023-10-01}
