@@ -27928,3 +27928,11 @@ batch_519 directory was removed. No work was discarded.
 - Step 3b: no mismatch (ECS item pool, authors' own scale; not in the rights register).
 - Gates: normalize 1 file (blank→NA quoting); audit PASS; verify_batch MISSING(exempt) for data_labels; lint clean; irw-validate ok; check_provenance: no new issues (ye_2025_q25_scale `mixed` review note pre-existing).
 - Batch number 528 = highest+1. Cap batch_571 not reached. 39 pending remain.
+
+## batch_529 — 2026-09-27 ~09:05 PDT (1 agent)
+- 1 table: biswas_2024_digital_center_quality. Written 1 / blocked 0 / failed 0. Yield 1/1.
+- paper_explicit, translated_substitute (study_supplied; administered in Bangla, authors' English from Table 2). 22/26 items have text; CONI4-7 published nowhere → blank item_text, option rows only (audit WARN 15.4% blank, explained in notes).
+- Verification PARTIAL (explicit codes + Table 4 alphas reproduce, max dev .009; within-block order and PAR1-3=CITP1-3 not established); verify script PASS.
+- Step 5b orchestrator re-check: CONI3 (printed negatively worded) correlates +0.29..+0.65 with all items outside CONI4-7 in live data — confirmed; disclosed in public_note as a data/wording mismatch.
+- Step 3b: no mismatch. Gates: normalize 0; audit WARN; verify_batch PASS; lint clean; irw-validate ok; check_provenance no new issues.
+- Batch number 529 = highest+1. Cap batch_571 not reached. 38 pending remain.
