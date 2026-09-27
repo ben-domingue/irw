@@ -28173,3 +28173,11 @@ batch_519 directory was removed. No work was discarded.
 - Orchestrator re-check: irw_table_sets n_rows 5719, items p21d01-p21d12, resp {1,2,3} -- identical to the agent's. No source overrides, no data defects claimed.
 - Written 1 / blocked 0 / failed 0; yield 100%. Gates: normalize 0 changed, audit PASS, verify_batch MISSING(exempt), lint clean, irw-validate ok, check_provenance exit 0.
 - Numbering: highest existing (558)+1 = 559, following prior rounds' practice (Step 1's "below 300" rule is stale). Cap batch_571 not reached. 8 pending remain.
+
+## batch_560 — 2026-09-27 ~13:50-14:00 PDT (1 table, 1 agent)
+- spain_2014_family_families: WRITTEN, 40 rows (10 items p1201-p1210 x 4 options), one section, P.12 stem in instructions. data_labels / study_materials / machine_translation (CIS Estudio 3032, Spanish-only; issues-page line owed at upload).
+- Caveats (notes.csv): .do recodes the unprompted midpoint 3 "(NO LEER) Ni de acuerdo ni en desacuerdo" (2120), 8 N.S. (733) and 9 N.C. (135) to missing, so live resp is {1,2,4,5}; no filter (all asked), 11 all-missing respondents absent (2464 -> 2453 ids). p1208/p1210 ship the printed questionnaire wording ("solos", "un hijo/a") over the ES3032 labels ("solo/a", "un/a hijo/a") -- gender endings only, no mapping effect.
+- Agent rebuild from DA3032 reproduces live 21652/21652 rows, 2453 ids, 0 resp/age mismatches. Step 5b exempt (data_labels); NOT_NEEDED row in verification_merged.csv and mapping_verification.csv.
+- Orchestrator re-check: table_sets resp {1,2,4,5}, items p1201-p1210, per-item n sums to 21652; ES3032 labels at lines 132/134 confirmed as the agent quoted; questionnaire page image (p12_bot.png) confirms "solos" and "un hi-jo/a". Override confirmed.
+- Written 1 / blocked 0 / failed 0; yield 100%. Gates: normalize 0 changed, audit PASS, verify_batch MISSING(exempt), lint clean, irw-validate ok, check_provenance exit 0.
+- Numbering: highest existing (559)+1 = 560. Cap batch_571 not reached. 7 pending remain.
