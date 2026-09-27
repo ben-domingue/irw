@@ -7,6 +7,13 @@ Uses metadata and reason-text patterns (no re-download required) to sub-classify
 the 376 human_assistance rows into actionable buckets, reducing the manual review
 burden and surfacing datasets that are genuinely worth a second look.
 
+Reason text alone cannot tell a parse failure from aggregate data -- a banner
+row, a two-row survey header, a headerless .tsv or covariates melted in beside
+the items all read as ">50 unique values" (#2221; 5 of 8 `aggregate_continuous`
+rows on the 2026-09-16 PMC batch). So the connectors look again while the file
+is in hand (`irw_triage_updated.reread_hint`) and leave a "Re-read with ..."
+reason, which Rule 0 below routes to `recoverable_format`.
+
 Refined flags
 -------------
 not_item_response   -- clear evidence the file is not person×item response data
@@ -130,6 +137,20 @@ def classify(row: pd.Series) -> tuple[str, str]:
 
     cols = _cols_from_reasons(reasons)
     cols_lower = [c.lower() for c in cols]
+
+    # ── RULE 0: triage already re-read the file, and it parsed cleanly ───────
+    # reread_hint() (irw_triage_updated, #2221) tries the obvious other reads
+    # -- a sniffed delimiter, header=1, a two-row header, no header -- while
+    # the file is still in hand, and says so here when one of them triages as
+    # good. That is a parse failure, not aggregate data and not "no instrument":
+    # on the 2026-09-16 PMC batch 5 of the 8 `aggregate_continuous` rows were
+    # a banner row, a two-row SurveyMonkey header or a headerless .tsv.
+    # recoverable_format rather than a pass: a clean small-integer block can
+    # also be binary covariates, so someone still reads the column names.
+    hint = next((p.strip() for p in reasons.split(" | ")
+                 if p.strip().startswith("Re-read with")), None)
+    if hint:
+        return ("recoverable_format", hint)
 
     # ── RULE 1: HTML markup in column names ─────────────────────────────────
     # Scraped HTML tables from papers; cells have <b>, <i>, <p> etc.
