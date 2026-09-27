@@ -494,6 +494,50 @@ class Planning(unittest.TestCase):
             resolve_elsewhere(items, self.shard, self.targets, assume=True)
             self.assertEqual(items[0].dataset, "item_response_warehouse_3")
 
+    def _cross_source(self, tmp, names, target, index):
+        reports = self._reports(tmp, names)
+        items = planning.build(reports, target, index)
+        planning.cross_source_conflicts(items, target, self.targets, index)
+        return {i.table: i for i in items}
+
+    def test_a_name_used_by_another_source_is_refused(self):
+        """#2454: 59 of 66 nominal tables shared a name with a core table."""
+        nom = next(t for t in self.targets if t.source == "nom")
+        with tempfile.TemporaryDirectory() as tmp:
+            items = self._cross_source(
+                tmp, ["enem_2013_1mil_ch", "fresh_nom"], nom,
+                {"enem_2013_1mil_ch": ["item_response_warehouse_4"]})
+            clash = items["enem_2013_1mil_ch"]
+            self.assertEqual(clash.status, planning.SKIP)
+            self.assertIsNone(clash.dataset)
+            self.assertTrue(any(e.startswith("name_collision:")
+                                for e in clash.report.errors))
+            self.assertEqual(items["fresh_nom"].status, planning.NEW)
+
+    def test_a_cross_source_clash_ignores_case(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            items = self._cross_source(
+                tmp, ["Preference_Inventory_nom"], self.shard,
+                {"preference_inventory_nom": ["irw_nominal"]})
+            self.assertEqual(items["Preference_Inventory_nom"].status,
+                             planning.SKIP)
+
+    def test_a_name_in_another_core_shard_is_not_a_cross_source_clash(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            items = self._cross_source(
+                tmp, ["older"], self.shard,
+                {"older": ["item_response_warehouse_3"]})
+            self.assertEqual(items["older"].status, planning.ELSEWHERE)
+            self.assertEqual(items["older"].report.errors, [])
+
+    def test_item_text_sharing_a_response_name_is_not_a_clash(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            items = self._cross_source(
+                tmp, ["fresh"], self.shard,
+                {"fresh__items": [self.text_shard.name],
+                 "fresh": [self.text_shard.name]})
+            self.assertEqual(items["fresh"].report.errors, [])
+
     def test_a_published_over_length_name_is_grandfathered(self):
         """datastandard.md's 40-char cap, and the exception ruled 2026-09-03.
 

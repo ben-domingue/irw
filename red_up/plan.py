@@ -149,3 +149,47 @@ def build(reports: list[FileReport], target: Target,
         items.append(Item(report=report, status=status, dataset=dataset,
                           found_in=found))
     return items
+
+
+def _family(target: Target) -> str:
+    """Core shards are one source; every aux dataset is its own."""
+    return "core" if target.kind == "core" else (target.source or target.name)
+
+
+def cross_source_conflicts(items: list[Item], target: Target,
+                           targets: list[Target],
+                           index: dict[str, list[str]]) -> None:
+    """Refuse a response table whose name another IRW source already uses.
+
+    Table names must be unique across sources, ignoring case (#2454): the site
+    builds one flat /tables/<name>/ page per table, and a bare-name lookup --
+    item text, the dictionary joins -- cannot tell `enem_2013_1mil_ch` in the
+    warehouse from `enem_2013_1mil_ch` in irw_nominal. 59 of the 66 nominal
+    tables had exactly that clash before they were renamed to *_nom.
+
+    Item text is exempt in both directions: an `__items` table carries its
+    response table's name by design. Within one source a clash is the ordinary
+    UPDATE/ELSEWHERE case and is left to `build`.
+    """
+    if target.is_itemtext or target.is_meta:
+        return
+    family = {t.name: _family(t) for t in targets}
+    mine = _family(target)
+    lowered: dict[str, list[str]] = {}
+    for name, datasets in index.items():
+        for dataset in datasets:
+            if family.get(dataset, mine) in (mine, "text"):
+                continue
+            lowered.setdefault(name.lower(), []).append(f"{dataset}.{name}")
+    for item in items:
+        if item.status == EXCLUDED:
+            continue
+        clash = lowered.get(item.table.lower())
+        if not clash:
+            continue
+        error = (f"name_collision: {', '.join(sorted(clash))} already uses this "
+                 f"name in another source; table names must be unique across "
+                 f"IRW sources, ignoring case (#2454) -- rename this table")
+        item.report.errors.append(error)
+        item.status, item.dataset = SKIP, None
+        item.note = error
