@@ -27919,3 +27919,12 @@ batch_519 directory was removed. No work was discarded.
 - Step 3b: no mismatch. Rights: IPIP public domain (existing register `ship` row); paper CC BY 4.0.
 - Gates: normalize 0 changed; audit PASS; verify_batch PASS; lint clean; irw-validate ok; check_provenance: no new issues (ye_2025_q25_scale `mixed` review note pre-existing).
 - Batch number 527 = highest+1. Cap batch_571 not reached. 40 pending remain.
+
+## batch_528 — 2026-09-27T08:47 (1 table, 1 agent)
+- Written 1 / blocked 0 / failed 0 — yield 100%. Circuit breaker not tripped.
+- miedema_2023_ecs40: written, 40 items / 80 rows, data_labels (S1 .dta ecoscale_N columns melted under their own names; Stata variable labels = item text). PLOS ONE 10.1371/journal.pone.0287963, CC BY 4.0. Language Bengali; text_source=translated_substitute / study_supplied (the Bangla item wording is truncated away in every 80-char bilingual label); option_text carries the administered Bangla হ্যাঁ/না with Yes/No in option_text_translated.
+- Caveat (notes + public_note): 17/40 stems ship truncated at Stata's 80-char cap (full wording only in the closed-access ECS-36 paper, Yount et al. 2021 JIV); 19 completed from the paper's Table 1 image; 4 labels already complete.
+- Step 5b re-check (orchestrator): the agent's notes said "20" were completed from Table 1, but its own list named 19. A recount against s001.dta gives 19 extended + 4 complete + 17 verbatim-truncated = 40. The count is corrected in notes/provenance. I viewed the Table 1 image directly: its 20 ECS-20 rows are those 19 plus ecoscale_17 (already complete), and the completions match the image. Prevalence cross-check from the agent (ecoscale_45 1.94% vs paper 2%, ecoscale_11 25.70% vs 26%, ecoscale_51 2.69% vs 2.69%, ecoscale_20 12.58% vs 12.59%) supports the label mapping.
+- Step 3b: no mismatch (ECS item pool, authors' own scale; not in the rights register).
+- Gates: normalize 1 file (blank→NA quoting); audit PASS; verify_batch MISSING(exempt) for data_labels; lint clean; irw-validate ok; check_provenance: no new issues (ye_2025_q25_scale `mixed` review note pre-existing).
+- Batch number 528 = highest+1. Cap batch_571 not reached. 39 pending remain.
