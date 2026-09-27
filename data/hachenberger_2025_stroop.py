@@ -117,7 +117,7 @@ def main() -> None:
     for rds, tag in [("MainStudy_Stroop.rds", "main"), ("PilotStudy_Stroop.rds", "pilot")]:
         base = _trial_base(rds, "stroop")
         _emit_bin(base, f"hachenberger_2025_stroop_{tag}_bin.csv", task="stroop")
-        _emit_nominal(base, f"hachenberger_2025_stroop_{tag}_nominal.csv")
+        _emit_nominal(base, f"hachenberger_2025_stroop_{tag}_nom.csv")
 
     for rds, tag in [("MainStudy_GoNoGo.rds", "main"), ("PilotStudy_GoNoGo.rds", "pilot")]:
         base = _trial_base(rds, "gonogo")

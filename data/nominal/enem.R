@@ -16,9 +16,9 @@
 # reproducible path from the published tables.
 
 for (y in 2013:2025) for (a in c("lc", "ch", "cn", "mt")) {
-  nm <- sprintf("enem_%d_1mil_%s", y, a)
+  nm <- sprintf("enem_%d_1mil_%s", y, a)  # core input; nom output is nm_nom (#2454)
   df <- irw::irw_fetch(nm)
   df$text <- df$resp_raw
   df$resp_raw <- NULL
-  write.table(df, nm, quote = FALSE, row.names = FALSE, sep = "|")
+  write.table(df, paste0(nm, "_nom"), quote = FALSE, row.names = FALSE, sep = "|")
 }

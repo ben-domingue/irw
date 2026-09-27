@@ -20,5 +20,5 @@ df$source_text<-gsub("\n"," ",df$source_text)
 df$item<-gsub("\"","'",df$item)
 df$item<-gsub("\n"," ",df$item)
 
-write.table(df,file="persuade_learningagency.csv",row.names=FALSE,sep="|")
+write.table(df,file="persuade_learningagency_nom.csv",row.names=FALSE,sep="|")
 
