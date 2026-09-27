@@ -27909,3 +27909,13 @@ batch_519 directory was removed. No work was discarded.
 - Rights: no register row; no restrictive terms found for Swaidan's scale; shipped wording is the study's own adaptation from a CC BY deposit. No escalation.
 - Gates: normalize 0 changed; audit PASS; verify_batch PASS; lint clean; irw-validate ok; check_provenance: no new issues (ye_2025_q25_scale `mixed` review note pre-existing).
 - Batch number 526 = highest+1. Cap batch_571 not reached. 41 pending remain.
+
+## batch_527 — 2026-09-27 (1 table, 1 agent)
+
+- Tables: sumner_2022_ipip_neo. Written 1 / blocked 0 / failed 0. Yield 1/1.
+- sumner_2022_ipip_neo: 48 items x 5 options (IPIP-NEO-120 N and E items, Johnson 2014). mapping_basis=reconstructed (deposit column names carry no wording; study item 2m-1 = IPIP-NEO-120 item 5(m-1)+1, 2m = 5(m-1)+2, matching the odd-N/even-E code alternation); text_source=canonical_instrument (ipip.ori.org, cross-checked word-for-word against Johannisson 2016 PeerJ deposit). Options from the paper's lower-case anchors.
+- Verification PARTIAL: study's own facet scores reproduce 11/12 facets and the N total 928/928; polarity 48/48; 43 of 1128 same-facet same-key pairs not distinguished.
+- Step 5b re-check (orchestrator, directly on s002 deposit): confirmed two scoring slips in the study's DERIVED columns (not in the IRW table): N2 Anger = Item2(E)+15+27+(6-39) 928/928 vs correct Item3 195/928; Extraversion total = sum of E facets + (6 - 2*item30) 928/928, i.e. item 30 reversed in the total but scored positively in E3. Recorded in notes.csv.
+- Step 3b: no mismatch. Rights: IPIP public domain (existing register `ship` row); paper CC BY 4.0.
+- Gates: normalize 0 changed; audit PASS; verify_batch PASS; lint clean; irw-validate ok; check_provenance: no new issues (ye_2025_q25_scale `mixed` review note pre-existing).
+- Batch number 527 = highest+1. Cap batch_571 not reached. 40 pending remain.
