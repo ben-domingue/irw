@@ -6,4 +6,5 @@ mirt_ggum,10000,3,1000,10,10,1000,1,irw_simsyn
 mirt_mixed,12000,3,2000,6,6,2000,1,irw_simsyn
 mirt_nonlin,12000,2,2000,6,6,2000,1,irw_simsyn
 mudfoldsim,10000,2,1000,10,10,1000,1,irw_simsyn
+nbashots_sim,136368,2,400,5,340.92,27273.6,68.184,irw_simsyn
 tirt_sim_trt,7000,4,500,14,14,500,1,irw_simsyn
