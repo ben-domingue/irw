@@ -280,6 +280,10 @@ def main(argv: list[str] | None = None) -> int:
     # parallel list_tables call on a response-data run. What must NOT follow from
     # a cross-family match is a cross-family *upload* -- see `_home_for`.
     scan = [t.name for t in targets if t.kind == "core" or t.is_itemtext]
+    if not (target.is_itemtext or target.is_meta):
+        # Response data also looks at every other source, because a name
+        # must be unique across all of them (#2454).
+        scan += [t.name for t in targets if t.name not in scan]
     if target.name not in scan:
         scan.append(target.name)
     print(f"checking {len(scan)} datasets for existing tables ...")
@@ -293,6 +297,7 @@ def main(argv: list[str] | None = None) -> int:
             if item.table not in META_TABLES:
                 item.status, item.dataset = planning.EXCLUDED, None
                 item.note = f"not one of {target.name}'s {len(META_TABLES)} tables"
+    planning.cross_source_conflicts(items, target, targets, index)
     resolve_elsewhere(items, target, targets, args.yes)
     show(items, target, owner, found.skipped)
 
