@@ -31,16 +31,20 @@ def convert_to_irw(input_file=None, output_dir='eammi_grahe_2018'):
     bad_ids = dups_df[dups_df['Action'].str.contains('delete', case=False, na=False)]['ResponseId'].tolist()
     df = df[~df['ResponseId'].isin(bad_ids)].copy()
 
+    # #2353: 'Duration (in seconds)' is Qualtrics' whole-survey duration, one
+    # value per respondent copied onto every item, not a per-item response
+    # time. The deposit's only finer timings are per-page (Q*_Page Submit),
+    # also not per-item. So it ships as a covariate, not as rt.
     core_map = {
         'ResponseId': 'id',
-        'Duration (in seconds)': 'rt',
+        'Duration (in seconds)': 'cov_survey_duration',
         'RecordedDate': 'date'
     }
     df.rename(columns=core_map, inplace=True)
     
     df['date'] = pd.to_datetime(df['date'], errors='coerce')
     df['date'] = df['date'].apply(lambda x: int(x.timestamp()) if pd.notnull(x) else pd.NA)
-    df['rt'] = pd.to_numeric(df['rt'], errors='coerce')
+    df['cov_survey_duration'] = pd.to_numeric(df['cov_survey_duration'], errors='coerce')
 
     covariate_map = {
         'age': 'cov_age', 'sex': 'cov_gender', 'Gender': 'cov_gender', 
@@ -68,7 +72,7 @@ def convert_to_irw(input_file=None, output_dir='eammi_grahe_2018'):
                           r'|biascheck|bias_dummy|bias-dummy)', str(c), re.IGNORECASE)
     ]
     df = df[cols_to_keep]
-    id_vars = ['id', 'rt', 'date'] + [c for c in df.columns if str(c).startswith('cov_')]
+    id_vars = ['id', 'date'] + [c for c in df.columns if str(c).startswith('cov_')]
     item_cols = [c for c in df.columns if c not in id_vars]
 
     df_long = df.melt(
@@ -137,7 +141,7 @@ def convert_to_irw(input_file=None, output_dir='eammi_grahe_2018'):
     
     print(f"Found {len(valid_constructs)} valid constructs based on the codebook.")
     os.makedirs(output_dir, exist_ok=True)
-    base_cols = ['id', 'item', 'resp', 'rt', 'date']
+    base_cols = ['id', 'item', 'resp', 'date']
     final_cols = base_cols + [c for c in id_vars if str(c).startswith('cov_')]
 
     for construct in valid_constructs:
