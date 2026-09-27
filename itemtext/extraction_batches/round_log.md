@@ -28043,3 +28043,11 @@ batch_519 directory was removed. No work was discarded.
 - Gates: normalize 0 changes; audit PASS; verify_batch PASS; lint clean; irw-validate 1 WARN (name_charset: the live table name is capitalised, not an itemtext defect; explained in notes.csv); check_provenance exit 0. Its ye_2025_q25_scale "mixed" review line predates this batch.
 - table_context.R did one full irw_fetch of this small table.
 - Numbering: highest existing (541)+1 = 542. Cap batch_571 not reached. 25 pending remain (next: nature_relatedness).
+
+## batch_543 -- 2026-09-27T10:41:01-07:00 -- 1 table, 1 agent
+- Written 1 / blocked 0 / failed 0 (yield 1/1): nature_relatedness (32 items, 132 rows).
+- **Step 3b mismatch, but it is a mixed table, not a wrong source.** Only items 1-6 are the NR-6 (1-5). Items 7-16 are the TIPI (1-7) and items 17-32 are a 16-word vocabulary check-list (0/1), all from the same openpsychometrics session. data/nature_relatedness.R numbers the three blocks consecutively with row_number(). All three are extracted, each in its own section_id and named in `instrument`, and a public_note discloses the split. The dictionary Description ("connection to nature") covers only 6/32 items and should be corrected. This is the same pattern as protestant_workethic (batch_145).
+- Source: the deposit codebook.txt (openpsychometrics.org/_rawdata/NR6-data-14Nov2018.zip). The NR-6 wording matches Nisbet & Zelenski 2013 (Front Psychol, CC BY 3.0) word for word, 6/6. The TIPI is free for any use. mapping_basis=reconstructed; study_materials. The NR-6 anchors are endpoint-only, so resp 2-4 are blank.
+- Verification VERIFIED: re-running the processing script over the raw deposit reproduces the live per-item n (32/32), mean (max |diff| 0) and range (32/32). All 32 (n, mean) signatures are distinct. verify_batch.R PASS. Step 5b: the three-instrument claim is confirmed by verify_batch's independent live ranges (1-5 / 1-7 / 0-1).
+- Gates: normalize 0 changes; audit PASS; verify_batch PASS; lint clean; irw-validate ok; check_provenance exit 0 (the ye_2025_q25_scale "mixed" review line predates this batch).
+- Numbering: highest existing (542)+1 = 543. Cap batch_571 not reached. 24 pending remain (next: Fh_Okcsr_Roos_2022_study1_Feeling_Heard).
