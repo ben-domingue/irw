@@ -222,7 +222,18 @@ are reprinted under `OVERRIDDEN` rather than suppressed, and appended to
 `processing_notes/validator_overrides.csv`.
 
 Without `--override-check` the reason waives every error; with it, only the named
-checks, so unrelated failures keep blocking.
+errors, so unrelated failures keep blocking. Warnings are never waived and
+continue to block under `--strict`.
+
+In particular, `composite_items*` is now a warning even when every item label
+matches (#2369): label names alone cannot establish computed scores. An
+otherwise valid all-match table passes default triage validation, but exits 1
+with `--profile triage --strict`, including when
+`--override-check 'composite_items*' --override <reason>` is supplied. Before
+the demotion, that scoped override could waive the triage error and exit 0
+under strict mode. The errors-only override contract is unchanged: the warning
+is retained and no waiver is recorded for it. Upload/legacy already treated
+this check as a warning; core omits it.
 
 ## Existing conversion callers
 

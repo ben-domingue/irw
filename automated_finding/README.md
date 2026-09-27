@@ -354,11 +354,19 @@ Response-scale findings and documentation-input warnings are described in the
 and examples. Labels alone do not establish that responses are computed
 scores, and the finding does not instruct contributors to drop rows.
 Intentional score derivation can be explained in the processing-script
-header; this adds no review step at upload. The existing raw routing remains:
-all labels matching is a `fail` -> human_assistance; a subset is a `warn`.
-Default upload/legacy profiles keep either case at warning severity; strict
-mode still blocks warnings. Reconsidering all-match severity is separate
-(#2369).
+header; this adds no review step at upload. Both all-label and subset matches
+are raw warnings (#2369). An otherwise eligible all-match candidate can route
+to `good`; other failures and routing conditions still require assistance.
+A candidate held only for low coercion confidence remains `human_assistance`,
+but retriage can now classify it as `worth_retrying` rather than `human_review`
+because this check no longer adds a QC failure. The independent discovery
+content gate is unchanged.
+
+Upload/legacy still report warnings; core still omits this check. Strict mode
+continues to block warnings. The CLI's errors-only override cannot waive this
+warning, so an all-match triage case previously accepted with `--strict`,
+`--override-check 'composite_items*'` and `--override <reason>` now exits 1. See the
+[override contract](../irw_validate/README.md#the-override).
 
 Score-word matching is token-wise: `*_total`, `*_score` and `subscale_*`
 match, as can sentence labels containing "mean" or "sum"; `meaning_1` and
@@ -368,8 +376,8 @@ case-insensitively: `pre`, `post`, `baseline`, and `followup`/`follow-up`/
 and one or two letters/digits. This keeps `pre-A`, `post_F`, `pre_1` and
 `post-12`, but excludes `poster`, `preen`, `preto`, `Pre63`, `PRE1`, empty
 suffixes such as `pre-`, and longer labels such as `pre_anxiety_3`.
-Narrowing the matches can remove a finding or turn an all-match failure into
-a subset warning; the severity policy itself is unchanged (#2314).
+The matcher narrowed in #2314; #2369 changes only all-match severity, retaining
+those matching rules, counts and messages.
 
 | Warning | Meaning |
 |---|---|

@@ -638,14 +638,13 @@ def run_qc(df: pd.DataFrame, coercion_method: str = "",
 
     checks.extend(_response_scale_checks(df, resp_num, permitted_values, item_constructs))
 
-    # Report naming-pattern evidence, not an inference about how responses
-    # were computed. Raw all-match severity stays unchanged here (#2369).
+    # Naming-pattern matches do not establish how responses were computed,
+    # even when every label matches; both cases are warnings (#2369).
     if "item" in df.columns:
         labels = [i for i in df["item"].unique() if str(i).strip()]
         comp = [i for i in labels if _looks_composite(i)]
         if comp:
-            status = "fail" if len(comp) == len(labels) else "warn"
-            checks.append(Check("composite_items*", status,
+            checks.append(Check("composite_items*", "warn",
                                 f"{len(comp)}/{len(labels)} item labels match "
                                 "score-word or pre/post naming patterns "
                                 f"(examples: {[str(c) for c in comp[:4]]}). "
