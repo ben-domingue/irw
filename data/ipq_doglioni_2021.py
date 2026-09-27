@@ -15,6 +15,8 @@ def convert_ipq_excel(file_path, output_name):
     # reduced to whole years of age at STUDY_DATE and the exact date is never emitted. The
     # source's `Dossier` (the hospital file number) is no longer used as `id` either: it
     # identifies the patient's record. Ids are sequential in source-row order instead.
+    # (irw#2282, 2026-09-27: in the public deposit `Dossier` is already 1..517 in row order, so
+    # the ids are unchanged from the withdrawn table; only `cov_dob` -> `cov_age` changes.)
     STUDY_DATE = pd.Timestamp('2021-01-01')  # the study year; the deposit gives no survey date
 
     cov_map = {
