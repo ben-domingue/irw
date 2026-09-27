@@ -27890,3 +27890,12 @@ batch_519 directory was removed. No work was discarded.
 - Audit WARN explained in notes.csv: 98% blank option_text = 0-100 sliders plus endpoint-only 1-7 scales.
 - Gates: normalize 1 file (NA convention); audit WARN (explained); verify_batch PASS; lint clean; irw-validate ok; check_provenance: no new issues (ye_2025_q25_scale `mixed` review note pre-existing).
 - Batch number 524 = highest+1. Cap batch_571 not reached. 43 pending remain.
+
+## batch_525 — 2026-09-27T08:13-07:00 — 1 table (graves_2021_brief_cope), 1 agent
+- Result: written 1 / blocked 0 / failed 0 (yield 100%). Circuit breaker not near.
+- graves_2021_brief_cope: 28 items, 112 rows; mapping_basis paper_order (Carver's canonical 1-28 numbering; S1 codes BC1..BC28, no labels), text_source canonical_instrument (Carver's Brief COPE page, sha256 b7eefe45..., byte-identical to the batch_292 fetch). Standard 28-item English version, no Step 3b mismatch.
+- Verification: PARTIAL (route 3, subscale totals). verify_graves_2021_brief_cope.R PASS, re-run by orchestrator: each of the authors' 14 stored subscale scores in S1 is reproduced by exactly one of 378 BC pairs, Carver's key 14/14 (977-985 complete rows each); live per-item means/n equal S1 for 28/28 (max |diff| 0). Within-pair order not established.
+- Caveats (notes.csv, public_note): study's administered form unpublished (paper's anchor paraphrase agrees in direction); instructions blank (Carver's are presurgery-specific); Carver's stray period in item 3 kept as printed.
+- RIGHTS ESCALATION for Ben: instrument_rights_register.csv has no Brief COPE row (the BISBAS row explicitly rules nothing for Carver's other scales). Carver's page: "You are welcome to use all scales of the Brief COPE ... Feel free as well to adapt the language" -- no reserved right. Same reading shipped menaldi_2023_brief_cope and koirala_2024_brief_cope. Round did not write a ship row (2026-09-10 rule).
+- Gates: validate PASS (--table-sets); normalize 0 changed; audit PASS; verify_batch PASS; lint clean; irw-validate ok; check_provenance: no new issues (ye_2025_q25_scale `mixed` review note pre-existing).
+- Batch number 525 = highest+1. Cap batch_571 not reached. 42 pending remain.
