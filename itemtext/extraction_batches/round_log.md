@@ -28093,3 +28093,11 @@ batch_519 directory was removed. No work was discarded.
 - **Data/dictionary flag for Ben:** anyone scoring kotsou_2016_scs with the standard SCS key gets meaningless subscales. This is worth a note on the response table whatever happens to its item text. The paper's Table 3 Mindfulness mean (13.81) doesn't reproduce (computed 12.21; SD and alpha match). Two S3 cells involving item 13 don't reproduce either.
 - Gates: no __items.csv, so normalize/audit/verify/lint/irw-validate had nothing to check. check_provenance exit 0 (the "mixed" review line predates this batch). pending_index_notes.csv row added. No verification row (blocked table).
 - Numbering: highest existing (547)+1 = 548. Cap batch_571 not reached. 19 pending remain (next: ding_2025_iu).
+
+## batch_549 — 2026-09-27T11:26 (1 table, 1 agent)
+
+- **ding_2025_iu: written (done)**, 12 items / 60 rows, mapping_basis=paper_explicit, text_source=translated_substitute (language=Chinese, translation_source=mixed). Verification VERIFIED: live Spearman OCDxIU correlations reproduce all 216 cells of PeerJ Table S1 (max |diff| 0.0005); each IU column's RMSE to its own column 0.0003 vs >=0.0159 to any other. verify_ding_2025_iu.R PASS.
+- Caveats (in notes.csv + public_note): IU9's wording is not printed by the study; inferred by elimination as the one IUS-12 item missing from Table 1 ("When it's time to act, uncertainty paralyses me", via PhenX). Assumes the C-IUS-12 keeps Carleton's 12 items (not checked against Zhang 2017). resp 2-4 option_text blank (paper labels endpoints only).
+- Step 5b re-check (orchestrator): live N=1551 with 22 respondents cov_age<18, confirmed; the paper's Methods say N=1529 after excluding under-18s, but Table 1/S1 reproduce on all 1551. IU9's highest correlation is IU10 (rho 0.72, then IU6 0.69), consistent with the paper's IU9/IU10 redundancy remark.
+- Written 1 / blocked 0 / failed 0; yield 100%. Gates: normalize 0 changed, audit PASS, verify_batch PASS, lint clean, irw-validate ok, check_provenance exit 0 (ye_2025_q25_scale `mixed` review line predates this batch).
+- Numbering: highest existing (548)+1 = 549. Cap batch_571 not reached. 18 pending remain.
