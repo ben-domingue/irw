@@ -28165,3 +28165,11 @@ batch_519 directory was removed. No work was discarded.
 - Orchestrator re-check: irw_table_sets n_rows 9243, items p8d01-p8d06, resp {1,2,3,4,5} -- identical to the agent's. No source overrides, no data defects claimed.
 - Written 1 / blocked 0 / failed 0; yield 100%. Gates: normalize 0 changed, audit PASS, verify_batch MISSING(exempt), lint clean, irw-validate ok, check_provenance exit 0.
 - Numbering: highest existing (557)+1 = 558, following prior rounds' practice (Step 1's "below 300" rule is stale). Cap batch_571 not reached. 9 pending remain.
+
+## batch_559 -- 2026-09-27T13:43 (1 table, 1 agent)
+- spain_2014_family_conflicts: WRITTEN. CIS Estudio 3032 P.21d (12 items p21d01-p21d12, resp {1,2,3}: grave / leve / no es un problema), data_labels from ES3032 VARIABLE/VALUE LABELS, checked 12/12 against cues3032.pdf page 6; .do Bookmark 10. text_source=study_materials, translation_source=machine_translation (issues-page line owed at upload). Source cache reused from batch_558, hashes re-checked.
+- Caveats (notes.csv): .do recodes 0 (not asked, 1976/item) and 9 N.C. (10-16/item) to missing; filter = respondents living with a child aged 12-25 (488 asked, 10 all-N.C. -> 478 live ids), carried in public_note.
+- Agent rebuild from DA3032 reproduces live 5719/5719 rows, 478 ids, 0 resp/cov_age mismatches. Step 5b exempt (data_labels); NOT_NEEDED row in verification_merged.csv and mapping_verification.csv.
+- Orchestrator re-check: irw_table_sets n_rows 5719, items p21d01-p21d12, resp {1,2,3} -- identical to the agent's. No source overrides, no data defects claimed.
+- Written 1 / blocked 0 / failed 0; yield 100%. Gates: normalize 0 changed, audit PASS, verify_batch MISSING(exempt), lint clean, irw-validate ok, check_provenance exit 0.
+- Numbering: highest existing (558)+1 = 559, following prior rounds' practice (Step 1's "below 300" rule is stale). Cap batch_571 not reached. 8 pending remain.
