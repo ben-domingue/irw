@@ -27899,3 +27899,13 @@ batch_519 directory was removed. No work was discarded.
 - RIGHTS ESCALATION for Ben: instrument_rights_register.csv has no Brief COPE row (the BISBAS row explicitly rules nothing for Carver's other scales). Carver's page: "You are welcome to use all scales of the Brief COPE ... Feel free as well to adapt the language" -- no reserved right. Same reading shipped menaldi_2023_brief_cope and koirala_2024_brief_cope. Round did not write a ship row (2026-09-10 rule).
 - Gates: validate PASS (--table-sets); normalize 0 changed; audit PASS; verify_batch PASS; lint clean; irw-validate ok; check_provenance: no new issues (ye_2025_q25_scale `mixed` review note pre-existing).
 - Batch number 525 = highest+1. Cap batch_571 not reached. 42 pending remain.
+
+## batch_526 — 2026-09-27T08:20-07:00 — 1 table (luo_2021_acculturation_index), 1 agent
+- Result: written 1 / blocked 0 / failed 0 (yield 100%). Circuit breaker not near.
+- luo_2021_acculturation_index: 50 rows (10 items x 5 pts), mapping_basis data_labels (SPSS column names in PLOS ONE S3 File .sav, doi:10.1371/journal.pone.0260616, CC BY 4.0), text_source study_materials. Codes are positional, so verified anyway: VERIFIED, 50/50 response-count cells match .sav positions 50-59, all ten vectors distinct, authors' subscale sums reproduce 229/229; verify script PASS.
+- Step 5b orchestrator re-check: re-read the .sav — column names and per-item counts at 50-59 confirmed exactly as the agent reported (e.g. item_09 12/25/40/49/103).
+- Caveats (in provenance note/public_note): word spacing restored; items 1 and 10 truncated at SPSS 64-char limit (item 1 completed from the paper's quote, item 10 "coun" -> "country"); item_06 ships the paper's "I should remain attached..." over the .sav's "I should attached..." (source override, disclosed); points 2-4 unlabeled, blank.
+- Step 3b: dictionary Description calls it the "10-item Acculturation Index"; the paper says it is adapted from Swaidan et al. (2006) "Adopt and Keep" scale, not Ward & Kennedy. Dictionary Description likely wants correcting (notes.csv).
+- Rights: no register row; no restrictive terms found for Swaidan's scale; shipped wording is the study's own adaptation from a CC BY deposit. No escalation.
+- Gates: normalize 0 changed; audit PASS; verify_batch PASS; lint clean; irw-validate ok; check_provenance: no new issues (ye_2025_q25_scale `mixed` review note pre-existing).
+- Batch number 526 = highest+1. Cap batch_571 not reached. 41 pending remain.
