@@ -7,6 +7,7 @@ irw-validate -r .                            # ...and in every subdirectory
 irw-validate out/x.csv --profile core        # the validate_irw.R subset
 irw-validate out/x.csv --strict              # warnings block too
 irw-validate out/x.csv --json                # for CI
+irw-validate out/x.csv --verbose             # every affected item, not the first few
 ```
 
 Exit codes: `0` ok · `1` something blocks · `2` bad input. Same contract as `red_up`.
