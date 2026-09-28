@@ -34,7 +34,7 @@ maas_t2_df  <- remove_na(maas_t2_df)
 maas_t2_df <- pivot_longer(maas_t2_df, cols=-c(id, cov_age, cov_child_number), names_to="item", values_to="resp")
 
 maas_t2r_df <- data_df %>%
-  select(id, cov_age, cov_child_number, starts_with("maas") & ends_with("t1")& !contains("sum")&contains("r"))
+  select(id, cov_age, cov_child_number, starts_with("maas") & ends_with("t2")& !contains("sum")&contains("r"))
 maas_t2r_df  <- remove_na(maas_t2r_df)
 maas_t2r_df <- pivot_longer(maas_t2r_df, cols=-c(id, cov_age, cov_child_number), names_to="item", values_to="resp")
 
