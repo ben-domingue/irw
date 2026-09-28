@@ -76,7 +76,7 @@ MotAcademica_Ribeiro_2019__items,irw_text_2,whole,2026-09-23,duplicate,,#2313,,,
 zhou_2016_anxiety__items,irw_text,whole,2026-09-23,rights,Zung-SAS,,,,tools/withdrawals/withdraw_zung_sas.py,Zung SAS wording
 non_parametric_mixture_modeling_exp1_Cleaned,item_response_warehouse,whole,2026-09-24,wrong_data,,#1842 #1856,44957,,tools/withdrawals/withdraw_1856_unrecoverable.py,duplicate-row defect that cannot be repaired from source
 realpic_souza2021,item_response_warehouse,whole,2026-09-24,wrong_data,,#1842 #1856,4172,,tools/withdrawals/withdraw_1856_unrecoverable.py,duplicate-row defect that cannot be repaired from source
-matosaslopez_2022_bars_teaching,item_response_warehouse_4,whole,2026-09-24,wrong_data,,#2381 #2412,,,tools/withdrawals/withdraw_matosaslopez_2022_bars.py,two BARS instruments pooled under one code set; rebuilt split by mode
+matosaslopez_2022_bars_teaching,item_response_warehouse_4,whole,2026-09-24,wrong_data,,#2381 #2412,,v8.0,tools/withdrawals/withdraw_matosaslopez_2022_bars.py,two BARS instruments pooled under one code set; rebuilt split by mode
 DMCT_Addis_2020_MCT,item_response_warehouse,whole,2026-09-24,wrong_data,,#2381 #2408 #2409,,,tools/withdrawals/withdraw_wrongnow_2026_09_24.py,"resp is the task's answer key, not participant accuracy"
 PBS_Surrain_2019_PoB,item_response_warehouse,whole,2026-09-24,wrong_data,,#2381 #2408 #2409,,,tools/withdrawals/withdraw_wrongnow_2026_09_24.py,pools two studies whose PoB codes denote different questions
 mexico_2023_quality_buses,item_response_warehouse_2,whole,2026-09-25,wrong_data,,#2313 #2381 #2415,,,tools/withdrawals/withdraw_mexico_2023_quality_2415.py,ENCIG 2021 appended under 2023 codes that INEGI renumbered
