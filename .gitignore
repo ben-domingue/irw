@@ -33,6 +33,8 @@ metadata/**/*.txt
 !metadata/table_changes.csv
 # Table -> processing-script map for get_processing_notes (#2494); stage 13.
 !metadata/table_scripts.csv
+# Aggregator registry (openESM, ...) keyed by the dictionary's `Source via` (#2421).
+!metadata/aggregators.csv
 
 ##The dictionary union's audit trail (#1732). Tracked, unlike 03_tags.R's
 ##tags_provenance.csv, which this file excludes and the weekly runner therefore
