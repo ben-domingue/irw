@@ -2041,3 +2041,4 @@ ecuador_2011_safety_operatives,batch_620,data_labels,,exempt: data_labels,NOT_NE
 ecuador_2011_safety_places,batch_621,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 ecuador_2011_safety_safety,batch_622,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 ecuador_2011_safety_surroundings,batch_623,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
+ecuador_2011_safety_trend,batch_624,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
