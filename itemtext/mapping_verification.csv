@@ -2038,3 +2038,4 @@ ecuador_2011_safety_crime,batch_617,data_labels,,exempt: data_labels,NOT_NEEDED,
 ecuador_2011_safety_homesec,batch_618,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 ecuador_2011_safety_impact,batch_619,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 ecuador_2011_safety_operatives,batch_620,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
+ecuador_2011_safety_places,batch_621,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
