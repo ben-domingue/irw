@@ -2047,3 +2047,4 @@ ecuador_2011_safety_victimtype,batch_626,data_labels,,exempt: data_labels,NOT_NE
 guatemala_2024_homes_avenues,batch_627,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 guatemala_2024_homes_country,batch_628,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 guatemala_2024_homes_drainage,batch_629,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
+guatemala_2024_homes_emergencies,batch_630,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
