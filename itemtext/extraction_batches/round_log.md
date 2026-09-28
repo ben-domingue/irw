@@ -29009,3 +29009,12 @@ PASS; weida stays PARTIAL), lint, irw-validate and check_provenance. It is uploa
 - Step 5b: orchestrator re-counted the raw conjunto_de_datos_ensu_cb_0624.csv (24,114 rows) and CONFIRMED: BP2_1 1/2/9 = 9587/14519/8; BP2_2_18 0/1 = 8251/1336 (8251 = 9587-1336); BP2_2_16 0/1 = 8866/721; BP2_4_09 0/1 = 3848/4403; BP2_3_1 has 20 code-9.
 - Written 1 / blocked 0 / failed 0; yield 100%. Gates: normalize 0 changed, audit WARN (explained), verify_batch MISSING(exempt), lint clean, irw-validate ok, check_provenance only pre-existing reports (ye_2025_q25_scale `mixed` review). NOT_NEEDED row in both verification_merged.csv and mapping_verification.csv.
 - Numbering: highest numeric batch (675)+1 = 676. Cap batch_709 not reached; 29 pending remain.
+
+## batch_677 — 2026-09-28T16:40-07:00 — 1 table (mexico_2024_q2safety_govperformance), #2381
+- Written 1 / blocked 0 / failed 0; yield 100%. mapping_basis=data_labels (INEGI Q2 dictionary labels on BP3_* columns kept by data/mexico_2025_safety.do), text_source=study_materials (ENSU 2024 Q2 questionnaire §III pp.4-5), translation_source=machine_translation (3.1-3.2a English reused from batch_673).
+- Q2 vs Q1 sibling (batch_673): 4 extra items bp3_3-bp3_6 (bribery block) with read-aloud CP3 as section_prompt; option 12 printed 'fraudes, etcétera.)' in Q2 — shipped as printed.
+- Caveats in notes.csv: 0/1 option_text on bp3_1_* is INEGI catalogue labels; audit WARN on bp3_4/bp3_6 row counts = skip routing (response-data property, not an itemtext defect): bp3_4 asked only of the 7942 bp3_3=Sí, bp3_6 only of the 3182 bp3_5=Sí, code 9 dropped by the .do. Owes an issues-page line once uploaded (machine_translation).
+- Dictionary defects (not filed): Reference says "ENSU 2023" (data is 2024 Q2, suffix 0624), same as siblings; Description says "local and federal government" but no item asks about the federal government.
+- Step 5b: orchestrator re-counted raw conjunto_de_datos_ensu_cb_0624.csv (24,114 rows) and CONFIRMED: bp3_2 blank/1/2/3/4/9 = 538/948/6493/10077/5948/110; bp3_3 1/2/9 = 7942/16158/14; bp3_4 nonblank = 7942, all with bp3_3=1; bp3_5 1/2/9 = 3182/20927/5; bp3_6 1/2/9 = 1451/1728/3.
+- Gates: normalize 0 changed, audit WARN (explained), verify_batch MISSING(exempt), lint clean, irw-validate ok, check_provenance only pre-existing reports (ye_2025_q25_scale `mixed` review). NOT_NEEDED row in both verification_merged.csv and mapping_verification.csv.
+- Numbering: highest numeric batch (676)+1 = 677. Cap batch_709 not reached; 28 pending remain.
