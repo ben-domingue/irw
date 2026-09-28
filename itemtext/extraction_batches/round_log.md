@@ -28614,3 +28614,11 @@ PASS; weida stays PARTIAL), lint, irw-validate and check_provenance. It is uploa
 - Issues-page entries: datapages PR, to merge after the release.
 - The old names never had published item text, so nothing was withdrawn. Their batch_218/220 CSVs are removed, and
   both old names are in fixes/issues_page_dropped.csv as "renamed".
+
+## batch_618 — 2026-09-28T06:26:49-07:00 (claimed) → 06:33, 1 table, 1 agent (#2381/#2382 slice 15, INEC ENVIPI 2011)
+- ecuador_2011_safety_homesec: WRITTEN, 22 rows (11 items I51001-I51011 x resp 1 Si / 0 No). Source: INEC Formulario_ENVIPI_2011.pdf p.6, q.5.10 ("Para protegerse de la delincuencia ... ¿qué tipo de seguridad implementó en su vivienda?" as instructions). Options are from the form, not the terse .sav labels, which have a typo ("Aumetar seguridad auto") and a truncation ("cajas s"). I51011 is the "Otro" write-in catch-all, and public_note says so. data_labels / study_materials / machine_translation (issues-page line owed at upload). CC BY 4.0 (INEC, same page as batch_615-617). Source files reused read-only from the batch_615/616 cache.
+- Step 3b: no mismatch. Dictionary "Household security measures adopted" = .do Table 7 = q.5.10.
+- Orchestrator re-check (Step 5b): haven over the .sav reproduces all 11 labels and the Si/No counts the agent matched against its live server-side GROUP BY (22/22 cells; the 11 Si counts are mutually distinct).
+- Audit WARN (row-count anomaly on I51007) explained in notes.csv. It is a data property, not an itemtext defect: 53,425 "No aplica" (households presumably without a car) are dropped by the .do, leaving n=64,223.
+- Written 1 / blocked 0 / failed 0; yield 100%. Gates: normalize 0 changed, audit WARN (explained), verify_batch MISSING(exempt), lint clean, irw-validate ok. check_provenance exits 1 for the same pre-existing reason as batch_615-617: 41 uploaded tables have no issues-page entry and need a human. This table is HELD and owes nothing yet. The NOT_NEEDED row is in both verification_merged.csv and mapping_verification.csv.
+- Numbering: highest (617)+1 = 618. Cap batch_646 not reached. 25 pending remain (8 ecuador_2011_safety_* siblings plus guatemala_2024_homes_*).
