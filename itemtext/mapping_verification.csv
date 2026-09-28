@@ -2057,3 +2057,4 @@ guatemala_2024_homes_publiceducation,batch_636,data_labels,,exempt: data_labels,
 guatemala_2024_homes_publichealth,batch_637,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 guatemala_2024_homes_roads,batch_638,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 guatemala_2024_homes_safety,batch_639,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
+guatemala_2024_homes_transparency,batch_640,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
