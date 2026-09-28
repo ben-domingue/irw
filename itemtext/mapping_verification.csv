@@ -2005,3 +2005,4 @@ spain_2024_ideology_parties,batch_586,data_labels,,exempt: data_labels,NOT_NEEDE
 spain_2024_ideology_rights,batch_587,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 spain_2024_ideology_society,batch_588,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 spain_2024_ideology_sympathy,batch_589,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
+spain_2024_ideology_territorial,batch_590,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
