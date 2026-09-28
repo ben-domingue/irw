@@ -2091,3 +2091,4 @@ wallace_2026_s2c_selfcert,batch_670,data_labels,2026-09-28,exempt: data_labels,N
 wallace_2026_s2c_uncertmind,batch_671,data_labels,2026-09-28,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 mexico_2024_q1safety_conflicts,batch_672,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 mexico_2024_q1safety_govperformance,batch_673,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
+mexico_2024_q1safety_govtrust,batch_674,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
