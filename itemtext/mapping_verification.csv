@@ -2014,3 +2014,4 @@ argentina_2017_victimization_fear,batch_595,data_labels,,exempt: data_labels,NOT
 argentina_2017_victimization_performance,batch_596,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 argentina_2017_victimization_precaution,batch_597,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 argentina_2017_victimization_trend,batch_598,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
+paraguay_2021_mobility_mobility,batch_599,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
