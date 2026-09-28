@@ -193,3 +193,51 @@ def cross_source_conflicts(items: list[Item], target: Target,
         item.report.errors.append(error)
         item.status, item.dataset = SKIP, None
         item.note = error
+
+
+def within_source_duplicates(items: list[Item], target: Target,
+                             targets: list[Target],
+                             index: dict[str, list[str]]) -> None:
+    """Warn when an upload touches a name that is, or would become, ambiguous
+    inside its own source (#2151).
+
+    Clients resolve a bare name newest-shard-first and case-insensitively, so
+    two copies inside one source mean one silently shadows the other. Two cases
+    reach an upload:
+
+    - the name is ALREADY in more than one shard of the source -- this upload
+      updates one copy and leaves the other (zhou_2025_peer_relationship,
+      #2149, was in `_3` and `_5`);
+    - a NEW table differs only by case from one already in the source, so it
+      would become a second copy under the case-insensitive lookup.
+
+    A warning, not a refusal: `cross_source_conflicts` already refuses the
+    cross-source clash (#2457), the within-source case-only question is left
+    to the table-name case ruling, and refusing the first case would block the
+    very repair that resolves it. `--strict` makes it blocking. The published
+    state is reported daily by metadata/drift_report.py.
+    """
+    if target.is_itemtext or target.is_meta:
+        return
+    family = {t.name: _family(t) for t in targets}
+    mine = _family(target)
+    by_lower: dict[str, list[str]] = {}
+    for name, datasets in index.items():
+        for dataset in datasets:
+            if family.get(dataset, mine) == mine:
+                by_lower.setdefault(name.lower(), []).append(f"{dataset}.{name}")
+    for item in items:
+        if item.status in (EXCLUDED, SKIP):
+            continue
+        held = sorted(by_lower.get(item.table.lower(), []))
+        exact = [h for h in held if h.split(".", 1)[1] == item.table]
+        if len(held) > 1:
+            item.report.warnings.append(
+                f"duplicate_name: {', '.join(held)} -- this name is already "
+                f"published more than once in this source, and clients read only "
+                f"the newest copy; this upload changes one of them (#2151)")
+        elif held and not exact:
+            item.report.warnings.append(
+                f"duplicate_name: {held[0]} differs from this name only by case; "
+                f"clients match names case-insensitively, so this would be a second "
+                f"copy that shadows or is shadowed by it (#2151)")

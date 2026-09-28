@@ -2,12 +2,20 @@
 
 ```
 irw-validate out/*.csv                       # exit 1 if anything blocks
+irw-validate out/                            # every table directly in out/
+irw-validate -r .                            # ...and in every subdirectory
 irw-validate out/x.csv --profile core        # the validate_irw.R subset
 irw-validate out/x.csv --strict              # warnings block too
 irw-validate out/x.csv --json                # for CI
+irw-validate out/x.csv --verbose             # every affected item, not the first few
 ```
 
 Exit codes: `0` ok · `1` something blocks · `2` bad input. Same contract as `red_up`.
+
+A directory argument picks up `.csv`, `.tsv`, `.rdata`, `.rda` and `.rds` files and
+skips everything else silently, including hidden files and `__MACOSX/`. `.txt` is
+read when you name the file but not picked up from a directory, because there it
+is usually a README. A directory with no tables in it exits `2`.
 
 ## Installing
 
@@ -207,6 +215,21 @@ The existing 512 MiB file-size cap still applies; files over it receive only
 name checks. This change does not repair historical tables, resolve the meaning
 of their missingness, or alter published response counts. Review source coding
 before changing rows; the finding deliberately does not prescribe deletion.
+
+## The rights register (#2154)
+
+On the `upload` profile, a table is matched against
+`itemtext/instrument_rights_register.csv` before it ships: `match_item_text`
+against an `__items` table's `item_text`, and `match_item_code` against a
+response table's `item` codes. Rows ruled `block`, `hold` or `escalate` produce
+a `rights_register` **warning** that quotes the register row and asks for a
+hold; `ship_with_note` rows produce one asking that the note exists.
+
+It never errors and a clean result says nothing. A hit is a lead (the sweep's
+three searches each produced a false positive), and a miss is not a clearance
+(complete PSS reproductions scored 1 of 4 on substrings). Installed without a
+checkout there is no register, and `checks_run` records
+`rights_register:unavailable`. `IRW_RIGHTS_REGISTER` points at a copy.
 
 ## The override
 

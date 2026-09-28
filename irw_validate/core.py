@@ -4,7 +4,7 @@ from __future__ import annotations
 import os
 from pathlib import Path
 
-from . import extra
+from . import extra, rights
 from ._checks import (irw_metadata, occasion_columns,
                       resolve_occasion, run_qc)
 from .model import STANDARD_VERSION, Finding, Report, severity_for
@@ -189,9 +189,25 @@ def _validate_item_text(df, label: str, profile: str) -> Report:
     for finding in extra.check_name(table):
         report.checks_run.append(finding.check)
         report.findings.append(finding)
+    if profile == "upload":
+        _check_rights(report, rights.check_item_text, df, table)
     report.stats = {"n_rows": len(df),
                     "n_items": int(df["item"].nunique()) if "item" in df else 0}
     return report
+
+
+def _check_rights(report: Report, check, df, table: str) -> None:
+    """The rights-register hold (#2154), on the `upload` profile only: it is a
+    question about a table about to ship, not about one already published
+    (`legacy`) or a triage candidate. Warn-only, and silent when clean -- a
+    miss is not a clearance, so no finding ever says "rights checked". A
+    missing register is recorded in checks_run rather than passed quietly."""
+    register = rights.load_register()
+    if register is None:
+        report.checks_run.append("rights_register:unavailable")
+        return
+    report.checks_run.append("rights_register")
+    report.findings.extend(check(df, table, register))
 
 
 def validate_frame(df, *, label: str = "", profile: str = "upload",
@@ -221,7 +237,8 @@ def validate_frame(df, *, label: str = "", profile: str = "upload",
             or check.name.endswith("_na") or check.name in ("resp_numeric", "dup_id_item") \
             else "heuristic"
         report.findings.append(
-            Finding(check.name, severity, check.detail, table=table, group=group))
+            Finding(check.name, severity, check.detail, table=table, group=group,
+                    details=tuple(check.details)))
 
     # `dup_id_item` asks whether a `wave`/`timepoint`/`date` column explains a
     # repeated id+item. That list came from validate_irw.R and is stale: it
@@ -285,6 +302,9 @@ def validate_frame(df, *, label: str = "", profile: str = "upload",
                         + extra.check_item_variants(df, table)):
             report.checks_run.append(finding.check)
             report.findings.append(finding)
+
+    if profile == "upload":
+        _check_rights(report, rights.check_item_codes, df, table)
 
     if {"id", "item", "resp"}.issubset(df.columns):
         try:
@@ -385,8 +405,12 @@ def validate_paths(paths, *, profile: str = "upload") -> list:
     return [validate_file(p, profile=profile) for p in paths]
 
 
-def format_report(report: Report, *, show_passes: bool = False) -> str:
-    """One block per table, errors first. Kept plain so CI logs stay readable."""
+def format_report(report: Report, *, show_passes: bool = False,
+                  verbose: bool = False) -> str:
+    """One block per table, errors first. Kept plain so CI logs stay readable.
+
+    `verbose` lists every affected case under a finding whose message only
+    samples them (which items, which values), instead of the first few."""
     lines = [f"{report.label} [{report.profile}]"]
     # Two verdicts, because they answer different questions: is this a valid
     # IRW table (the standard), and would IRW accept it (the profile's gate,
@@ -404,6 +428,8 @@ def format_report(report: Report, *, show_passes: bool = False) -> str:
     for f in sorted(report.findings, key=lambda f: order.get(f.severity, 3)):
         where = f"[{f.clause}]" if f.clause else ""
         lines.append(f"  {f.severity.upper():5s} {f.check:22s} {where:4s} {f.message}")
+        if verbose:
+            lines.extend(f"        - {d}" for d in f.details)
     for f in report.overridden:
         lines.append(f"  OVERRIDDEN {f.check:17s} {f.message}")
     if show_passes and report.checks_run:

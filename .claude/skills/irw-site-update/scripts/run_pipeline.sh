@@ -66,6 +66,14 @@
 # live fetch comes back short, so a truncated Redivis read cannot erase the
 # history that makes "persisted" meaningful. Leave it on.
 #
+# 13_script_index.py (issue #2494, added 2026-09-27) runs after 12 and before
+# 09. It writes table_scripts.csv, the table -> data/ script map that the irw
+# MCP server's get_processing_notes reads when no script is named after the
+# table (battery scripts, and tables renamed after their script was written).
+# It reads the catalogue CSVs and straggler_watch.tsv off disk, so it must
+# follow 01, 05, 06, 07 and 12, and it needs no credentials. It is the one
+# Python stage: the run loop dispatches on the file extension.
+#
 # 08_itemtext.R (readability-stats metadata for item text) joined the
 # default order 2026-08-02. Split of responsibility, confirmed with Ben:
 # this skill produces metadata FOR item text that's already been procured;
@@ -81,7 +89,7 @@
 # variant, see above) are out of scope per Ben (2026-07-27) -- ignored.
 #
 # Usage:
-#   scripts/run_pipeline.sh                 # full default sequence (01 02 03 05 06 07 08 10 11 12 09)
+#   scripts/run_pipeline.sh                 # full default sequence (01 02 03 05 06 07 08 10 11 12 13 09)
 #   scripts/run_pipeline.sh 01 03           # only metadata.csv + tags.csv
 #   scripts/run_pipeline.sh 08              # just the itemtext metadata stage
 #   scripts/run_pipeline.sh 10              # just the collections tables
@@ -128,6 +136,7 @@ declare -A STAGE_SCRIPT=( [01]=01_metadata.R [02]=02_biblio.R [03]=03_tags.R
                           [05]=05_comps.R [06]=06_nominal.R [07]=07_simsyn.R
                           [08]=08_itemtext.R [10]=10_collections.R
                           [11]=11_status.R [12]=12_stragglers.R
+                          [13]=13_script_index.py
                           [09]=09_hero_status.R )
 
 # Stages whose non-zero exit is a FINDING, not a failure. 12 exits 1 when a
@@ -149,9 +158,10 @@ declare -A STAGE_OUTPUTS=(
   [10]="collections.csv collection_members.csv"
   [11]=""   # writes status.json + status_history.tsv -- reported separately below
   [12]=""   # writes straggler_watch.tsv -- reported separately below
+  [13]="table_scripts.csv"
   [09]=""   # writes JSON, not a keyed CSV -- reported separately below
 )
-DEFAULT_ORDER=(01 02 03 05 06 07 08 10 11 12 09)
+DEFAULT_ORDER=(01 02 03 05 06 07 08 10 11 12 13 09)
 
 # Join key for the diff, per output file. Everything is keyed on `table` except
 # the two collections outputs (issue #1633): the registry is one row per
@@ -207,14 +217,16 @@ for stage in "${stages[@]}"; do
     continue
   fi
   echo ""
-  echo "== Stage $stage: Rscript $script =="
+  runner=Rscript
+  [[ "$script" == *.py ]] && runner=python3
+  echo "== Stage $stage: $runner $script =="
   if [[ -n "${ADVISORY_STAGE[$stage]:-}" ]]; then
     # Markers, not just an exit code: the workflow lifts what is between them
     # into the pull request body, so the named tables travel with the review
     # rather than being buried in a 40kB log tail.
     echo "--- ADVISORY $stage BEGIN ---"
     set +e
-    Rscript "$script"
+    "$runner" "$script"
     stage_rc=$?
     set -e
     echo "--- ADVISORY $stage END ---"
@@ -223,7 +235,7 @@ for stage in "${stages[@]}"; do
       ADVISORY_HIT+=("$stage")
     fi
   else
-    Rscript "$script"
+    "$runner" "$script"
   fi
 
   # Diff THIS stage's outputs immediately, not batched at the end -- if a

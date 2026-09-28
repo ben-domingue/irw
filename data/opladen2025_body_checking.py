@@ -17,9 +17,11 @@ TITLE = ("The Body in Focus: A Transdiagnostic Comparison of Body Checking "
          "Anxiety Disorder")
 UA    = {"User-Agent": "irw-batch/1.0 (research)"}
 
-# German clinical questionnaires answered once per participant (n≈216):
-#   EDEQ  — Eating Disorder Examination Questionnaire (28 items; stored 1-7,
-#           which the deposit's syntax recodes to 0-6; items 13-18 are counts)
+# German clinical questionnaires answered once per participant (224 rows in
+# the deposit's xlsx, 217 with trait questionnaires):
+#   EDEQ  — Eating Disorder Examination Questionnaire (28 items; stored 1-7 as
+#           deposited, which the deposit's syntax recodes to 0-6 -- IRW keeps
+#           the deposited 1-7; items 13-18 are frequency counts, 0-112)
 #   WI    — Whiteley Index (14 items, 1-2); the syntax scores its three
 #           subscales: bodily preoccupation, disease phobia, disease conviction
 #   FKG   — 20 health/illness-cognition items on 1-4, never named or scored in
@@ -45,6 +47,13 @@ SCALES = {
 # system-missing, and its mean_FKS (N=217, mean 1.0248, SD .90281) reproduces
 # exactly only when those cells are missing. (#2334)
 VALID_RANGE = {"fks": (1, 5)}
+
+# SGNXX's corrupt row also ships EDEQ_13/EDEQ_14 as 0, which is a valid count
+# on those items, so no range check can catch it (#2380). Instead a
+# participant's whole block for a scale is dropped when any of its cells holds
+# the xlsx's denormal garbage ("...E-320"); the row carries no real answers.
+# In this deposit that is SGNXX only, in every scale.
+GARBAGE = r"E-3\d\d$"
 
 COV_MAP = {
     "vpcode (anonymized)": "id",
@@ -79,8 +88,15 @@ def convert():
     raw = fetch_data()
     raw = raw.rename(columns=COV_MAP)
 
-    # Drop duplicate rows (~8 out of 224; keep first occurrence per vpcode)
-    raw = raw.drop_duplicates(subset=["id"]).reset_index(drop=True)
+    # The anonymised vpcode is not unique: 8 codes occur twice, and no pair is
+    # the same person (ages, samples and most answers differ). Earlier versions
+    # kept the first of each pair, silently dropping 8 participants (#2380).
+    # A colliding code gets a suffix by its order in the file (AMSXX_1,
+    # AMSXX_2); every other id is the vpcode unchanged.
+    dup = raw["id"].duplicated(keep=False)
+    raw.loc[dup, "id"] = (raw.loc[dup, "id"] + "_"
+                          + (raw[dup].groupby("id").cumcount() + 1).astype(str))
+    assert raw["id"].is_unique
 
     cov_cols = ["cov_condition", "cov_sample", "cov_sex", "cov_age"]
 
@@ -93,7 +109,11 @@ def convert():
             print(f"  WARNING: no columns for scale {scale}")
             continue
 
-        long = raw[["id"] + cov_cols + present].melt(
+        garbage = raw[present].astype(str).apply(
+            lambda col: col.str.contains(GARBAGE)).any(axis=1)
+        if garbage.any():
+            print(f"  {scale}: dropping corrupt rows {sorted(raw.loc[garbage, 'id'])}")
+        long = raw.loc[~garbage, ["id"] + cov_cols + present].melt(
             id_vars=["id"] + cov_cols,
             value_vars=present,
             var_name="item",
@@ -119,7 +139,7 @@ def convert():
             "n_responses":    len(long),
             "resp_range":     f"{int(long['resp'].min())}-{int(long['resp'].max())}",
             "license":        "cc0",
-            "notes":          (f"German clinical sample (BN/BDD/IAD); N≈216; "
+            "notes":          (f"German clinical sample (BN/BDD/IAD); N≈217; "
                                f"cov_sample: 1=BN 2=BDD 3=IAD; "
                                f"FKS_2 absent from data; WI items are binary (1-2); "
                                f"EDEQ items 13-18 are frequency counts (0-28+) not "

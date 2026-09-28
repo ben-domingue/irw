@@ -26,6 +26,17 @@ def process_parenting_data_final(file_path):
     
     df.rename(columns=demo_map, inplace=True)
 
+    # irw#2282, 2026-09-27: the one material-rewards item is stored as text labels in the
+    # deposit. Code it 1-5 exactly as the depositors do (`material_rewards_num` and
+    # `3_buy_things_child` in their own osf.io/3xvys family_df_article2.csv), so resp is numeric.
+    mr_col = 'Você compra coisas para seu filho(a) só porque ele(a) quer?'
+    mr_codes = {'Quase nunca': 1, 'Raramente': 2, 'Às vezes': 3,
+                'Frequentemente': 4, 'Muito frequentemente': 5}
+    if mr_col in df.columns:
+        unmapped = set(df[mr_col].dropna()) - set(mr_codes)
+        assert not unmapped, f"unexpected labels in {mr_col}: {unmapped}"
+        df[mr_col] = df[mr_col].map(mr_codes)
+
     if 'date' in df.columns:
         df['date'] = pd.to_datetime(df['date'], errors='coerce')
         df['date'] = df['date'].apply(lambda x: x.timestamp() if pd.notnull(x) else None)

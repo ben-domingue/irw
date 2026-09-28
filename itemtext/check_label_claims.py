@@ -24,8 +24,22 @@ A row whose script cannot be found is NOT screened, so it is reported as
 UNRESOLVED and fails the run. Silently passing a row nobody looked at is the
 failure this script exists to stop.
 
-Usage:  python3 itemtext/check_label_claims.py [mapping_verification.csv]
-Exit 1 if any claim is flagged or unresolved.
+Every other row is screened too (#2049). Assigning codes by position is a
+property of the SCRIPT, not of the basis someone later claimed in the ledger:
+on 2026-09-07, 24 rows had a positional script and not one of them was in the
+NOT_NEEDED/data_labels population, so the screen above covered none of them.
+For those rows a positional script is legitimate -- a numeric per-item route
+can establish the order -- but only if the evidence says so. A row whose
+evidence never speaks to the ordering is reported as a WARN, not a failure:
+the keyword test is crude, and a miss means "read the evidence", not "wrong".
+
+So the two outcomes stay separate:
+  FLAG  positional script AND the data_labels exemption claimed   -> exit 1
+  WARN  positional script, no exemption, evidence silent on order -> exit 0
+
+Usage:  python3 itemtext/check_label_claims.py [mapping_verification.csv] [-v]
+Exit 1 if any claim is flagged or unresolved. `-v` also lists the positional
+rows whose evidence does address the ordering, and the unscreened ones.
 """
 from __future__ import annotations
 
@@ -90,6 +104,33 @@ DERIVED = [
     # sheet changes -- dou2025_area slices [27:39] across `Unnamed` gap columns.
     (re.compile(r"\.columns\[\s*\d+\s*:\s*\d+\s*\]"), "positional column slice"),
 ]
+
+
+# What evidence that addresses a positional script's ordering tends to say.
+# Deliberately broad: a WARN that fires on evidence which does explain the
+# order costs a reader a minute, a keyword list tight enough to miss real
+# explanations would train people to ignore it. Written against the 24 rows
+# measured on #2049 -- `short_dark_triad` ("item k must be the k-th column"),
+# `riasec` ("columns in file order"), `depression_anxiety_stress` and
+# `face_memory_test` (re-deriving the code), and the route-9 cell-count
+# matches, which distinguish items on their own. Matched against `route` and
+# `evidence` together.
+ORDER_EVIDENCE = re.compile(
+    # Not bare "order": "in order to" is in half the evidence column.
+    r"\bordered\b|\bordering\b|\b(?:column|file|item|header|source|same|wave) order\b"
+    r"|\bposition(?:al|ally)?\b|\bk-?th\b|\bsequen"
+    r"|\brow_number\b|\benumerate\b|\bcolumn[- ]order|\bfile order"
+    r"|\bre-?deriv|\bre-?ran\b|\bre-?run\b|\bcell[- ]count|\broute[- _]?9\b"
+    r"|\bitem \d+\s*(?:\.\.|-|to)\s*\d+|\bi\.e\. irw item"
+    # A per-item statistic that separates every item from every other item
+    # establishes the order by itself, whatever the script did.
+    r"|\bdistinguish|\bcell for cell\b|\bmutually distinct|\ball \d+ [^.;]{0,40}distinct",
+    re.I)
+
+
+def _positional(text: str) -> str | None:
+    """The first Tier-1 pattern the script trips, or None."""
+    return next((w for p, w in POSITIONAL if p.search(text)), None)
 
 
 def _sources() -> list[tuple[Path, str]]:
@@ -169,13 +210,19 @@ def scripts_for(table: str, sources: list[tuple[Path, str]]) -> tuple[list[Path]
 
 
 def main(argv: list[str]) -> int:
-    path = Path(argv[1]) if len(argv) > 1 else Path(__file__).parent / "mapping_verification.csv"
+    verbose = "-v" in argv or "--verbose" in argv
+    args = [a for a in argv[1:] if a not in ("-v", "--verbose")]
+    path = Path(args[0]) if args else Path(__file__).parent / "mapping_verification.csv"
     rows = list(csv.DictReader(path.open()))
-    claims = [r for r in rows
-              if r["status"].strip() == "NOT_NEEDED"
-              and r["mapping_basis"].strip() == "data_labels"]
+
+    def exempt(r):
+        return (r["status"].strip() == "NOT_NEEDED"
+                and r["mapping_basis"].strip() == "data_labels")
+    claims = [r for r in rows if exempt(r)]
+    others = [r for r in rows if not exempt(r)]
 
     sources = _sources()
+    texts = dict(sources)
     flagged, derived, unresolved = [], [], []
     for r in claims:
         srcs, how = scripts_for(r["table"], sources)
@@ -183,7 +230,7 @@ def main(argv: list[str]) -> int:
             unresolved.append((r["table"], how))
             continue
         for s in srcs:
-            text = dict(sources)[s]
+            text = texts[s]
             hit = next(((w, flagged) for p, w in POSITIONAL if p.search(text)), None)
             if hit is None:
                 hit = next(((w, derived) for p, w in DERIVED if p.search(text)), None)
@@ -191,6 +238,21 @@ def main(argv: list[str]) -> int:
                 why, bucket = hit
                 bucket.append((r["table"], s.relative_to(ROOT), why, how))
                 break
+
+    # The wider screen (#2049): same script test, every other row.
+    silent, spoken, unscreened = [], [], []
+    for r in others:
+        srcs, how = scripts_for(r["table"], sources)
+        if not srcs:
+            unscreened.append(r["table"])
+            continue
+        hit = next(((s, w) for s in srcs if (w := _positional(texts[s]))), None)
+        if hit is None:
+            continue
+        s, why = hit
+        entry = (r["table"], r["status"].strip(), s.relative_to(ROOT), why, how)
+        said = f"{r.get('route') or ''} {r.get('evidence') or ''}"
+        (spoken if ORDER_EVIDENCE.search(said) else silent).append(entry)
 
     print(f"check_label_claims: {len(claims)} NOT_NEEDED/data_labels rows in {path.name}")
     for table, src, why, how in flagged:
@@ -211,6 +273,24 @@ def main(argv: list[str]) -> int:
         print("  no positional item assignment found among the claimed rows")
     if unresolved:
         print(f"  {len(unresolved)} row(s) unresolved -- an unscreened row is not a pass")
+
+    print(f"\ncheck_label_claims: {len(others)} other rows screened for a "
+          f"positional script (#2049)")
+    for table, status, src, why, how in silent:
+        via = "" if how == "literal" else f", matched by {how}"
+        print(f"  [WARN] {table} ({status}): {src}{via} assigns `item` "
+              f"positionally ({why}), and the evidence never mentions the "
+              f"ordering. Make it say how item k was tied to the k-th source "
+              f"column, or name the per-item route that establishes it.")
+    print(f"  {len(silent) + len(spoken)} row(s) with a positional script: "
+          f"{len(spoken)} evidence addresses the ordering, {len(silent)} WARN")
+    if verbose:
+        for table, status, src, why, _ in spoken:
+            print(f"  [ok] {table} ({status}): {src} ({why}); evidence addresses order")
+        for table in unscreened:
+            print(f"  [unscreened] {table}: no processing script resolved")
+    print(f"  {len(unscreened)} row(s) had no resolvable script and were not "
+          f"screened (not a failure here; -v lists them)")
     return 1 if flagged or unresolved else 0
 
 

@@ -1522,14 +1522,14 @@ shu_2025_translation_add,done,batch_201,2026-09-05T13:16:43-07:00
 singh_2025_identity_pba,done,batch_201,2026-09-05T13:16:43-07:00
 socialstereotype_hughes_2025_judgement,done,batch_201,2026-09-05T13:16:43-07:00
 sun_2025_morality_study1_fairnessHEXACO,excluded,,
-sun_2025_morality_study1_fairnessMCQ,done,batch_201,2026-09-05T13:16:43-07:00
+sun_2025_morality_study1_fairnessMCQ,excluded,batch_201,2026-09-27T17:00:00-07:00
 sun_2025_morality_study2_colleaguerespect,blocked,batch_201,2026-09-05T13:16:43-07:00
 sun_2025_morality_study2_colleaguetrust,blocked,batch_201,2026-09-05T13:16:43-07:00
 wang_onlineriskexp_2025_interpersonalsecurity,blocked,batch_201,2026-09-05T13:16:43-07:00
 wang_onlineriskexp_2025_negativeatt,blocked,batch_201,2026-09-05T13:16:43-07:00
 kumlander_2018_scs,done,batch_305,2026-09-22T04:20:52-07:00
 dwyer_2019_clinton_activist,done,batch_305,2026-09-22T04:20:52-07:00
-dvivdtws_ppmial_marcatto_2023_ocb,blocked,batch_305,2026-09-22T04:20:52-07:00
+dvivdtws_ppmial_marcatto_2023_ocb,excluded,batch_305,2026-09-27T17:00:00-07:00
 trivia_fastrich_2017,done,batch_306,2026-09-22T04:38:31
 milavic_2019_psisysf,done,batch_306,2026-09-22T04:38:31
 risticdedic_2025_dhq_currentstate,done,batch_306,2026-09-22T04:38:31
@@ -1893,3 +1893,5 @@ mexico_2023_quality_trash,done,batch_428,2026-09-25T08:42:39-07:00
 mexico_2023_quality_university,done,batch_429,2026-09-25T09:05:59-07:00
 mexico_2023_quality_wellbeing,done,batch_429,2026-09-25T09:05:59-07:00
 mexico_2023_quality_wellbeingservice,done,batch_429,2026-09-25T09:05:59-07:00
+wang_2026_technology_perception,done,batch_rename_2198,2026-09-27T17:11:32-07:00
+weida_2020_cesd10,done,batch_rename_2198,2026-09-27T17:11:32-07:00

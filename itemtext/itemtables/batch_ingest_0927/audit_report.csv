@@ -1,0 +1,5 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"estrella_2023_hakim5","PASS",5,5,TRUE,TRUE,FALSE,TRUE,0,0,""
+"estrella_2023_psq18","PASS",18,18,TRUE,TRUE,FALSE,TRUE,0,0,""
+"robie_2022_cab","PASS",25,25,TRUE,TRUE,FALSE,TRUE,0,0,""
+"williams_2022_dvmsq","WARN",21,21,TRUE,TRUE,FALSE,TRUE,0,0,"row-count anomaly (possible item-code conflation or missingness skew), median=833: misophonia_screen"

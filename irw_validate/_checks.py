@@ -75,9 +75,21 @@ class Check:
     name: str
     status: str    # "pass" | "warn" | "fail"
     detail: str
+    #: Every affected case, one line each, when `detail` summarises or samples
+    #: them. Printed under `irw-validate --verbose` (#2298); empty otherwise.
+    details: tuple = ()
 
 
 IRW_REQUIRED = ["id", "item", "resp"]
+
+
+def _fmt_value(v) -> str:
+    """A resp value as a person would write it: 0 rather than 0.0."""
+    try:
+        f = float(v)
+        return f"{f:g}" if f == f else "NA"
+    except (TypeError, ValueError):
+        return repr(v)
 ITEM_LEVEL_PREFIXES = ("itemcov_", "qmatrix", "item_family", "rater")
 
 _COMPOSITE_TOKENS = {
@@ -305,12 +317,15 @@ def _response_scale_checks(df, resp_num, permitted_values, item_constructs):
     # An isolated wider column can contain the modal interval (e.g. HPQ's
     # missing-response count). Keep that targeted diagnostic before nesting;
     # rarity alone still cannot establish that the column is invalid.
+    listed = ()
     if len(off) / len(ranges) < 0.15:
         name = "item_scale_outlier"
         examples = ", ".join(f"{item!r} ({row['min']:g}-{row['max']:g})"
                              for item, row in off.head(4).iterrows())
         reason = (f"{len(off)} item(s) differ from the modal observed range "
                   f"{modal[0]:g}-{modal[1]:g}: {examples}")
+        listed = tuple(f"{item!r}: {row['min']:g}-{row['max']:g}"
+                       for item, row in off.iterrows())
     elif nested:
         name = "resp_scale_nested_support"
         reason = "Item observed min/max ranges are nested"
@@ -319,11 +334,15 @@ def _response_scale_checks(df, resp_num, permitted_values, item_constructs):
         reason = "Items have non-nested observed response ranges"
     summary = ", ".join(f"{lo:g}-{hi:g} ({profiles[(lo, hi)]} items)"
                         for lo, hi in sorted(profiles)[:4])
+    if not listed:
+        listed = tuple(f"{lo:g}-{hi:g}: {profiles[(lo, hi)]} item(s)"
+                       for lo, hi in sorted(profiles))
     checks.append(Check(name, "warn",
         f"{reason}: {summary}. Observed ranges do not establish permitted values "
         "or separate constructs. Category non-use, item weights and mixed item "
         "formats can be legitimate. Review source documentation; do not split "
-        "a single construct solely because its item ranges differ."))
+        "a single construct solely because its item ranges differ.",
+        details=listed))
     return checks
 
 
@@ -512,22 +531,30 @@ def run_qc(df: pd.DataFrame, coercion_method: str = "",
     # the message read as though it were the only concentrated item. Count them
     # all and say so.
     if resp_num.notna().any():
+        #
+        # Name the value, too (#2298): a dominant 0 on a symptom checklist is
+        # the data being what it is, while a dominant interior value is the
+        # pattern worth checking against the source.
         concentrated = []
         for item_name, grp in df.groupby("item")["resp"]:
             vc = grp.value_counts(normalize=True)
             if not vc.empty and vc.iloc[0] > 0.60:
-                concentrated.append((item_name, float(vc.iloc[0])))
+                concentrated.append((item_name, vc.index[0], float(vc.iloc[0])))
         if concentrated:
-            worst_item, worst_share = max(concentrated, key=lambda t: t[1])
+            concentrated.sort(key=lambda t: (-t[2], str(t[0])))
+            worst_item, worst_value, worst_share = concentrated[0]
             n_items = df["item"].nunique()
             checks.append(Check(
                 "imputed_values*", "warn",
                 f"{len(concentrated)} of {n_items} item(s) have a single resp "
                 f"value covering over 60% of their responses (highest: "
-                f"'{worst_item}' at {worst_share:.0%}). This reports response "
+                f"'{worst_item}', resp {_fmt_value(worst_value)} at "
+                f"{worst_share:.0%}). This reports response "
                 "concentration only and does not establish a cause: binary and "
                 "ordered-category items reach these shares legitimately. Check "
-                "the source if you need to know whether values were imputed."))
+                "the source if you need to know whether values were imputed.",
+                details=tuple(f"'{item}': resp {_fmt_value(value)} at {share:.0%}"
+                              for item, value, share in concentrated)))
 
     # P1 #5: date column validation.
     if "date" in df.columns:
@@ -634,7 +661,9 @@ def run_qc(df: pd.DataFrame, coercion_method: str = "",
                                 f"Item names have {len(dominant)} repeated prefixes "
                                 f"({list(dominant.index)[:4]}). Verify whether they "
                                 "denote constructs, item formats or design blocks "
-                                "before considering separate tables."))
+                                "before considering separate tables.",
+                                details=tuple(f"{p!r}: {n} item(s)"
+                                              for p, n in dominant.items())))
 
     checks.extend(_response_scale_checks(df, resp_num, permitted_values, item_constructs))
 
@@ -650,7 +679,8 @@ def run_qc(df: pd.DataFrame, coercion_method: str = "",
                                 "score-word or pre/post naming patterns "
                                 f"(examples: {[str(c) for c in comp[:4]]}). "
                                 "Label names alone do not establish whether "
-                                "the responses are computed scores."))
+                                "the responses are computed scores.",
+                                details=tuple(str(c) for c in comp)))
 
     # IRW's own density signal — very sparse data is worth a look
     meta = irw_metadata(df)

@@ -68,6 +68,8 @@ class Finding:
     message: str
     table: str = ""
     group: str = "core"    # "core" | "heuristic" | "name" | "covariate"
+    #: Every affected case, when `message` samples or summarises them (#2298).
+    details: tuple = ()
 
     @property
     def clause(self) -> str:

@@ -23,11 +23,9 @@ Coding notes
 * Four tables for four named constructs; the shared 1-7 format does not make
   them one instrument.
 * `treat` is the randomly assigned mode (1 = interactive, 0 = rule-based).
-* The autonomy block trips `run_qc`'s `resp_scale_mixed` check because only
-  one of its four items was ever answered 7 (by 4 of 222 respondents). That is
-  an unused top category on a left-skewed 1-7 scale, not a second scale, so
-  the check is waived explicitly and loudly rather than by splitting a
-  four-item subscale in two.
+* In the autonomy block only one of the four items was ever answered 7 (by 4
+  of 222 respondents). That is an unused top category on a left-skewed 1-7
+  scale, not a second scale, so the four-item subscale is kept whole.
 * Two `(reverse-coded)` columns are derived copies of `Q4-5` and `Q4-6`
   (verified `8 - x`) and are not shipped; `Decision-mode perception` is a
   single-item manipulation check; the four `X1`/`Y1`/`M1`/`M2` and
@@ -60,17 +58,6 @@ COV_NAMES = {"Gender": "cov_gender", "Age": "cov_age_band",
              "Education": "cov_education",
              "Professional rank": "cov_professional_rank"}
 TREAT = "Human-machine decision-making mode (1 = interactive, 0 = rule-based)"
-# run_qc's resp_scale_mixed reads each item's observed maximum as its scale.
-# In the autonomy block only Q5-4 reaches 7, and only 4 of 222 respondents
-# chose it; the other three items top out at 6 with 5, 23 and 7 responses
-# there. That is one left-skewed 1-7 scale with an unused top category on
-# three items, not a 1-6 scale mixed with a 1-7 one -- every other block in
-# this questionnaire is 1-7, and the items are one published subscale.
-ALLOWED_FAILS = {
-    ("perceived_autonomy", "resp_scale_mixed"):
-        "three of four items never reach 7; unused top category, not a "
-        "second scale",
-}
 
 
 def main():
@@ -126,13 +113,8 @@ def main():
         assert not long.duplicated(["id", "item"]).any()
         assert long.groupby("item")["resp"].nunique().min() > 1
         checks = run_qc(long)
-        bad = [c for c in checks if c.status == "fail"
-               and (suffix, c.name) not in ALLOWED_FAILS]
+        bad = [c for c in checks if c.status == "fail"]
         assert not bad, (suffix, [(c.name, c.detail) for c in bad])
-        for c in checks:
-            if c.status == "fail":
-                print(f"  [waived] {suffix}: {c.name} -- "
-                      f"{ALLOWED_FAILS[(suffix, c.name)]}")
 
         name = f"cao_2026_cdss_{suffix}"
         path = os.path.join(OUTDIR, f"{name}.csv")

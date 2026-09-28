@@ -26087,3 +26087,17 @@ wellbeing = q5.5 ISSSTE (dictionary Descriptions wrong).
 (hyatt_…_s3_cast), DAQ+BPAQ (hyatt_…_s3_daq), SSIS (hyatt_…_s3_ssis) stay HELD under the existing PsycTESTS / unpublished
 rulings. MLQ (liu_2025_mlq) and UWES (hua_2023_efl_study_engagement) are BLOCKED on their register block rows (a
 translation / domain adaptation is a derivative): queue rows done -> blocked. CSVs kept in their batch folders.
+
+## 2026-09-27 — #2198: held item text shipped under the renamed tables (batch_rename_2198)
+
+`wang_2026_teaching_presence` → `wang_2026_technology_perception` and `weida_2020_financial_security` →
+`weida_2020_cesd10` went live in item_response_warehouse_3 v10.0 (PR #2466). Their item text was extracted and gated
+in batch_218/batch_220 and held until the rename. It is copied here with only `table` and the trivial `section_id`
+renamed, and re-gated against the new live tables. All gates pass: validate --table-sets, audit, verify_batch (both
+PASS; weida stays PARTIAL), lint, irw-validate and check_provenance. It is uploaded to the irw_text_3 draft
+(2/2 row-count verified), release owed.
+
+- CES-D: applied the register's `ship_with_note` row (R06), with the clause quoted in provenance.
+- Issues-page entries: datapages PR, to merge after the release.
+- The old names never had published item text, so nothing was withdrawn. Their batch_218/220 CSVs are removed, and
+  both old names are in fixes/issues_page_dropped.csv as "renamed".
