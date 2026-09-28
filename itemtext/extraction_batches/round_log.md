@@ -28601,3 +28601,16 @@ batch_519 directory was removed. No work was discarded.
 - Orchestrator re-check (Step 5b): haven over the .sav reproduces all 9 labels, the value labels (1=Si, 2=No, recoded to 0 by the .do) and the agent's live server-side GROUP BY counts (18/18 cells, with 9 distinct vectors).
 - Written 1 / blocked 0 / failed 0; yield 100%. Gates: normalize 0 changed, audit PASS (no anomalies), verify_batch MISSING(exempt), lint clean, irw-validate ok. check_provenance exits 1 for the same pre-existing reason as batch_615/616: 41 uploaded tables need issues-page entries from a human. This table is HELD and owes nothing yet. The NOT_NEEDED row is in both verification_merged.csv and mapping_verification.csv.
 - Numbering: highest (616)+1 = 617. Cap batch_646 not reached. 26 pending remain (9 ecuador_2011_safety_* siblings plus guatemala_2024_homes_*).
+## 2026-09-27 — #2198: held item text shipped under the renamed tables (batch_rename_2198)
+
+`wang_2026_teaching_presence` → `wang_2026_technology_perception` and `weida_2020_financial_security` →
+`weida_2020_cesd10` went live in item_response_warehouse_3 v10.0 (PR #2466). Their item text was extracted and gated
+in batch_218/batch_220 and held until the rename. It is copied here with only `table` and the trivial `section_id`
+renamed, and re-gated against the new live tables. All gates pass: validate --table-sets, audit, verify_batch (both
+PASS; weida stays PARTIAL), lint, irw-validate and check_provenance. It is uploaded to the irw_text_3 draft
+(2/2 row-count verified), release owed.
+
+- CES-D: applied the register's `ship_with_note` row (R06), with the clause quoted in provenance.
+- Issues-page entries: datapages PR, to merge after the release.
+- The old names never had published item text, so nothing was withdrawn. Their batch_218/220 CSVs are removed, and
+  both old names are in fixes/issues_page_dropped.csv as "renamed".

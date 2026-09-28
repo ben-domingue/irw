@@ -120,6 +120,123 @@ live_rows <- tags[key(tags$table) %in% live, , drop = FALSE]
 ##name that says what it is.
 DESCRIPTION_COLS <- c("construct name")
 
+##Every column belongs to one class, and each class is held to its own success
+##criterion (#1837, ruled 2026-09-02; the classes are laid out in
+##tags/decisions/1837_construct_type.md and on the site's tags_quality page).
+##One number for all eight columns is what made item 2 read as never-finishable:
+##
+##  derived       computed from the table's own data; should approach 100% of
+##                the tables eligible for a value, so a shortfall is a bug.
+##                Reported as coverage.
+##  tagger        reliably inferable from a source read; coverage is a
+##                throughput question, but a coverage figure without the
+##                accuracy behind it is misleading. Reported as coverage AND
+##                accuracy.
+##  definitional  what limits these is the definition, not the tagger: writing
+##                `sample`'s rules moved its frame facet 26.9% -> 45.5% -> 54.5%
+##                with no tagger change. Reported as DEFINITIONAL STATE -- does
+##                each value have a written rule -- with coverage as a footnote.
+##  description   free text, not a tag; a fill rate (see above).
+TAG_CLASS <- c(
+    "age range"                             = "derived",
+    "child age (for child-focused studies)" = "derived",
+    "primary language(s)"                   = "tagger",
+    "item format"                           = "tagger",
+    "measurement tool"                      = "tagger",
+    "sample"                                = "definitional",
+    "construct type"                        = "definitional",
+    "construct name"                        = "description"
+)
+CLASS_CRITERION <- list(
+    derived      = "coverage of eligible tables; should approach 100%, a shortfall is a bug",
+    tagger       = "coverage and accuracy together; coverage is throughput, accuracy says what it is worth",
+    definitional = "share of values with a written decision rule; coverage is a footnote",
+    description  = "fill rate of a free-text field; not a coverage target"
+)
+
+##Paths are resolved from this script's directory, so `--dir` (where the CSVs
+##are) and where the registries live stay independent.
+script_dir <- local({
+    f <- grep("^--file=", commandArgs(FALSE), value = TRUE)
+    if (length(f)) dirname(normalizePath(sub("^--file=", "", f[1]))) else getwd()
+})
+src_dir <- dirname(script_dir)
+
+##Class 2's accuracy is a measurement, not something this script can compute:
+##it comes from a blind scoring run against the hand-tagged set. The file names
+##its source so a figure can always be traced to the run that produced it.
+ACCURACY_FILE <- file.path(src_dir, "tags", "scoring", "accuracy_current.csv")
+accuracy <- if (file.exists(ACCURACY_FILE))
+    read_csv(ACCURACY_FILE, show_col_types = FALSE,
+             col_types = cols(.default = col_character())) else NULL
+
+##Class 3's state: one row per controlled value, with the verbatim phrase in
+##vocab.md that defines it (blank = no written rule yet). The phrase is checked
+##against vocab.md on every run, so deleting or rewording a rule turns its value
+##back to "undefined" here rather than leaving a stale claim. A value in
+##TAG_VOCAB with no row at all also counts as undefined -- adding a value
+##without a definition cannot pass silently.
+DEFS_FILE  <- file.path(src_dir, "tags", "decisions", "value_definitions.csv")
+VOCAB_FILE <- file.path(src_dir, "tags", ".claude", "skills", "irw-auto-tag",
+                        "references", "vocab.md")
+defs <- if (file.exists(DEFS_FILE))
+    read_csv(DEFS_FILE, show_col_types = FALSE,
+             col_types = cols(.default = col_character())) else NULL
+vocab_text <- if (file.exists(VOCAB_FILE))
+    gsub("\\s+", " ", paste(readLines(VOCAB_FILE, warn = FALSE), collapse = " ")) else NULL
+##TAG_VOCAB (the enforced value lists) lives in tag_normalize.R; sourcing it
+##only defines functions and constants.
+tag_vocab <- tryCatch({
+    e <- new.env()
+    sys.source(file.path(script_dir, "tag_normalize.R"), envir = e)
+    e$TAG_VOCAB
+}, error = function(err) NULL)
+
+definitional_state <- function(cl) {
+    values <- setdiff(tag_vocab[[cl]], "NA")
+    if (is.null(values) || is.null(defs) || is.null(vocab_text)) {
+        warning("definitional state for `", cl, "` unavailable: missing ",
+                paste(c(if (is.null(tag_vocab)) "TAG_VOCAB",
+                        if (is.null(defs)) DEFS_FILE,
+                        if (is.null(vocab_text)) VOCAB_FILE), collapse = ", "),
+                call. = FALSE)
+        return(NULL)
+    }
+    d <- defs[defs$column == cl, , drop = FALSE]
+    anchor <- setNames(d$anchor, d$value)
+    found <- vapply(values, function(v) {
+        a <- anchor[v]
+        !is.na(a) && nzchar(trimws(a)) &&
+            grepl(gsub("\\s+", " ", trimws(a)), vocab_text, fixed = TRUE)
+    }, logical(1))
+    stale <- values[!found & values %in% d$value[!is.na(d$anchor) & nzchar(d$anchor)]]
+    if (length(stale)) {
+        warning("`", cl, "`: the rule text for ", paste(stale, collapse = ", "),
+                " is no longer in vocab.md; counted as undefined", call. = FALSE)
+    }
+    list(values           = length(values),
+         values_with_rule = sum(found),
+         pct_with_rule    = round(100 * mean(found), 1),
+         without_rule     = I(sort(values[!found])),
+         rules            = "tags/.claude/skills/irw-auto-tag/references/vocab.md",
+         registry         = "tags/decisions/value_definitions.csv")
+}
+
+accuracy_of <- function(cl) {
+    if (is.null(accuracy)) return(NULL)
+    a <- accuracy[accuracy$column == cl, , drop = FALSE]
+    if (!nrow(a)) return(NULL)
+    num <- function(x) if (is.na(x) || !nzchar(x)) NULL else as.numeric(x)
+    Filter(Negate(is.null), list(
+        exact_pct     = num(a$exact_pct[1]),
+        precision_pct = num(a$precision_pct[1]),
+        recall_pct    = num(a$recall_pct[1]),
+        n_answered    = num(a$n_answered[1]),
+        n_gold        = num(a$n_gold[1]),
+        measured      = a$measured[1],
+        source        = a$source[1]))
+}
+
 ELIGIBLE_WHEN <- list(`child age (for child-focused studies)` =
                       function(d) trimws(as.character(d[["age range"]])) %in%
                                   c("Child (<18y)", "Mixed"))
@@ -129,20 +246,41 @@ by_column <- lapply(intersect(TAG_COLUMNS, names(live_rows)), function(cl) {
     rows <- if (is.null(gate)) live_rows else live_rows[gate(live_rows), , drop = FALSE]
     denom <- if (is.null(gate)) n else length(unique(key(rows$table)))
     k <- length(unique(key(rows$table[filled(rows[[cl]])])))
-    out <- list(n = k, pct = if (denom > 0) round(100 * k / denom, 1) else 0)
-    if (cl %in% DESCRIPTION_COLS) {
-        out$kind <- "description"
-        out$note <- paste("free text, not a controlled vocabulary -- a fill rate,",
-                          "not a coverage target (#1837)")
-    }
+    cov <- list(n = k, pct = if (denom > 0) round(100 * k / denom, 1) else 0)
     if (!is.null(gate)) {
-        out$denominator <- denom
-        out$of <- "tables whose `age range` is Child (<18y) or Mixed"
-        out$pct_of_all_tables <- pct(k)
+        cov$denominator <- denom
+        cov$of <- "tables whose `age range` is Child (<18y) or Mixed"
+        cov$pct_of_all_tables <- pct(k)
+    }
+    cls <- unname(TAG_CLASS[cl])
+    if (is.na(cls)) stop("tag column `", cl, "` has no class in TAG_CLASS (#1837)")
+    out <- list(class = cls)
+    if (cls == "definitional") {
+        ##The headline is the definitional state; coverage moves to a footnote
+        ##so it cannot be quoted as though it were the measure (#1837).
+        out$definitional <- definitional_state(cl)
+        out$coverage_footnote <- cov
+    } else {
+        out <- c(out, cov)
+        if (cls == "tagger") {
+            acc <- accuracy_of(cl)
+            out$accuracy <- if (is.null(acc)) "not measured" else acc
+        }
+        if (cl %in% DESCRIPTION_COLS) {
+            out$note <- paste("free text, not a controlled vocabulary -- a fill rate,",
+                              "not a coverage target (#1837)")
+        }
     }
     out
 })
 names(by_column) <- intersect(TAG_COLUMNS, names(live_rows))
+
+##The filled count for a column whatever its class -- class 3 keeps it in the
+##footnote. The history row is a count per column and stays one.
+col_n <- function(cl) {
+    x <- by_column[[cl]]
+    if (is.null(x)) NA_integer_ else if (!is.null(x$n)) x$n else x$coverage_footnote$n
+}
 
 status <- list(
     generated   = format(Sys.time(), "%Y-%m-%dT%H:%M:%S%z"),
@@ -153,6 +291,11 @@ status <- list(
         ##Quote the column, not the row, whenever the claim is about tagging.
         tags     = list(n = n_tags, pct = pct(n_tags)),
         tags_by_column = by_column,
+        ##How to read each column's entry: its class, and what it is held to.
+        tag_classes = Map(function(cls, crit) list(
+                              criterion = crit,
+                              columns   = I(names(TAG_CLASS)[TAG_CLASS == cls])),
+                          names(CLASS_CRITERION), CLASS_CRITERION),
         itemtext = list(n = n_text, pct = pct(n_text))
     ),
     tags_by_shard = by_shard,
@@ -174,14 +317,14 @@ row <- data.frame(
     ##the #1760 derivation moved it from 55.3% to ~74% without anyone tagging
     ##a construct or a sample -- so it cannot be read as progress on the tag
     ##gap (#1704). These are what a batch is read against.
-    age_range       = by_column[["age range"]]$n,
-    child_age       = by_column[["child age (for child-focused studies)"]]$n,
-    sample          = by_column[["sample"]]$n,
-    construct_type  = by_column[["construct type"]]$n,
-    measurement_tool = by_column[["measurement tool"]]$n,
-    item_format     = by_column[["item format"]]$n,
-    primary_languages = by_column[["primary language(s)"]]$n,
-    construct_name  = by_column[["construct name"]]$n,
+    age_range       = col_n("age range"),
+    child_age       = col_n("child age (for child-focused studies)"),
+    sample          = col_n("sample"),
+    construct_type  = col_n("construct type"),
+    measurement_tool = col_n("measurement tool"),
+    item_format     = col_n("item format"),
+    primary_languages = col_n("primary language(s)"),
+    construct_name  = col_n("construct name"),
     itemtext        = n_text,
     itemtext_pct    = pct(n_text),
     orphan_tag_rows = status$orphan_tag_rows

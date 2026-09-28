@@ -1,0 +1,4 @@
+column,exact_pct,n_answered,n_gold,precision_pct,recall_pct,measured,source
+primary language(s),90.9,33,36,100.0,91.7,2026-09-01,tags/scoring/results_2026-09-01.txt
+item format,90.9,22,38,,,2026-09-01,tags/scoring/results_2026-09-01.txt
+measurement tool,86.8,38,38,,,2026-09-01,tags/scoring/results_2026-09-01.txt
