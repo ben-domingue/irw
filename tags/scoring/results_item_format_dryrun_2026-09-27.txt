@@ -1,0 +1,68 @@
+item format derivation -- DRY RUN, 2026-09-27 (irw#1837 b). Nothing written.
+live tables 4542; with resp aggregates 4530; query failures 12
+rule: non-integer resp or >11 distinct -> Slider/continuous; else integer -> Likert Scale/selected response; no numeric resp -> abstain
+
+derivation commits on 4530 tables, abstains on 0
+  by derived class: Likert Scale/selected response 4443, Slider/continuous 87
+
+WOULD FILL (no item format anywhere today): 240
+  Likert Scale/selected response      235
+  Slider/continuous                     5
+
+AGAINST HAND TAGS (Sheet): 2455 tables, agree 2072 (84.4%), disagree 383
+  majority-class baseline (always 'Likert Scale/selected response'): 84.3%
+  per existing class       n   derived=Likert  derived=Slider   agree
+  Likert Scale/selected  2069            2053              16    99.2%
+  Mixed                   259             245              14     0.0%
+  Slider/continuous        75              56              19    25.3%
+  Constructed Response     52              47               5     0.0%
+
+AGAINST TAGGER (tags_auto.csv): 1835 tables, agree 1801 (98.1%), disagree 34
+  majority-class baseline (always 'Likert Scale/selected response'): 98.1%
+  per existing class       n   derived=Likert  derived=Slider   agree
+  Likert Scale/selected  1801            1791              10    99.4%
+  Constructed Response     14               9               5     0.0%
+  Slider/continuous        11               1              10    90.9%
+  Mixed                     9               6               3     0.0%
+
+SAMPLE -- 12 disagreements of 417 (seed 1837):
+  abukhalaf_2025_housing_risk                    auto  tag='Likert Scale/selected response'   derived='Slider/continuous' (8430 non-integer values)
+  chile_2024_safety_hackingcharacterization      sheet tag='Mixed'                            derived='Likert Scale/selected response' (4 distinct integer values)
+  environment_ltm                                sheet tag='Constructed Response'             derived='Likert Scale/selected response' (3 distinct integer values)
+  gilbert_meta_21                                sheet tag='Mixed'                            derived='Likert Scale/selected response' (2 distinct integer values)
+  gilbert_meta_70                                auto  tag='Constructed Response'             derived='Likert Scale/selected response' (2 distinct integer values)
+  pisa2003_problem_solving                       sheet tag='Mixed'                            derived='Likert Scale/selected response' (3 distinct integer values)
+  project_kids_wj_pc_wave                        sheet tag='Mixed'                            derived='Likert Scale/selected response' (2 distinct integer values)
+  spain_2013_services_functioning                sheet tag='Mixed'                            derived='Likert Scale/selected response' (5 distinct integer values)
+  spain_2013_services_purpose                    sheet tag='Mixed'                            derived='Likert Scale/selected response' (2 distinct integer values)
+  spain_2025_europe_trust                        sheet tag='Mixed'                            derived='Likert Scale/selected response' (10 distinct integer values)
+  uti_newlands_2023_fsdsr                        sheet tag='Mixed'                            derived='Likert Scale/selected response' (5 distinct integer values)
+  uti_newlands_2023_gad                          sheet tag='Mixed'                            derived='Likert Scale/selected response' (4 distinct integer values)
+
+SAMPLE -- 12 would-fill tables of 240:
+  avci_2024_sureklgel_gir_yonel                  derived='Likert Scale/selected response' (7 distinct integer values)
+  enkavi_2019_taskswitch                         derived='Likert Scale/selected response' (2 distinct integer values)
+  goldberg_2018_hpq_h                            derived='Likert Scale/selected response' (5 distinct integer values)
+  hao_2025_metacognitive_regulation              derived='Likert Scale/selected response' (5 distinct integer values)
+  kolcu_2025_mmas                                derived='Likert Scale/selected response' (4 distinct integer values)
+  mhscdc_fried_2020_se                           derived='Likert Scale/selected response' (4 distinct integer values)
+  redline_2026_prosbq                            derived='Likert Scale/selected response' (6 distinct integer values)
+  sun_2024_task_tech_fit                         derived='Likert Scale/selected response' (7 distinct integer values)
+  tims_2017_career_competencies                  derived='Likert Scale/selected response' (5 distinct integer values)
+  xu2024_self_efficacy                           derived='Likert Scale/selected response' (5 distinct integer values)
+  zhou_2016_coping_style                         derived='Likert Scale/selected response' (5 distinct integer values)
+  zhou_2025_peer_relationship_inventory          derived='Likert Scale/selected response' (5 distinct integer values)
+
+query failures:
+  dvivdtws_ppmial_marcatto_2023_ocb: NotFoundError: Not found: datapages.item_response_warehouse.dvivdtws_ppmial_marcatto_2023_ocb
+  dvivdtws_ppmial_marcatto_2023_snaq: NotFoundError: Not found: datapages.item_response_warehouse.dvivdtws_ppmial_marcatto_2023_snaq
+  sun_2025_morality_study1_compassion: NotFoundError: Not found: datapages.item_response_warehouse_2.sun_2025_morality_study1_compassion
+  sun_2025_morality_study1_dependability: NotFoundError: Not found: datapages.item_response_warehouse_2.sun_2025_morality_study1_dependability
+  sun_2025_morality_study1_fairnessHEXACO: NotFoundError: Not found: datapages.item_response_warehouse_2.sun_2025_morality_study1_fairnesshexaco
+  sun_2025_morality_study1_fairnessMCQ: NotFoundError: Not found: datapages.item_response_warehouse_2.sun_2025_morality_study1_fairnessmcq
+  sun_2025_morality_study1_honesty: NotFoundError: Not found: datapages.item_response_warehouse_2.sun_2025_morality_study1_honesty
+  sun_2025_morality_study1_loyalty: NotFoundError: Not found: datapages.item_response_warehouse_2.sun_2025_morality_study1_loyalty
+  sun_2025_morality_study1_morality: NotFoundError: Not found: datapages.item_response_warehouse_2.sun_2025_morality_study1_morality
+  sun_2025_morality_study1_respectfulness: NotFoundError: Not found: datapages.item_response_warehouse_2.sun_2025_morality_study1_respectfulness
+  wang_2026_teaching_presence: NotFoundError: Not found: datapages.item_response_warehouse_3.wang_2026_teaching_presence
+  weida_2020_financial_security: NotFoundError: Not found: datapages.item_response_warehouse_3.weida_2020_financial_security
