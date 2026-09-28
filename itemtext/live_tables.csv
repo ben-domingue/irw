@@ -1,6 +1,7 @@
 # item-text tables in the Redivis shards as of 2026-09-28
 # status=published: a reader can fetch it. status=draft: uploaded, not released yet.
 # generated -- do not hand-edit; rerun itemtext/refresh_live_tables.py (irw#1828)
+# draft not listable by this token (needs data.edit) for irw_text_2; its draft rows carried forward from the snapshot taken 2026-09-27
 table,shard,status
 16_personalityfactors,irw_text,published
 360emergencymed_azami_2024,irw_text,published
@@ -458,18 +459,18 @@ ecps_sahm_2024_stress,irw_text,published
 ecps_sahm_2024_support,irw_text,published
 ecps_sahm_2024_trust,irw_text,published
 ecps_sahm_2024_vaccine,irw_text,published
-ecuador_2011_safety_avoidance,irw_text_3,draft
-ecuador_2011_safety_confidence,irw_text_3,draft
-ecuador_2011_safety_crime,irw_text_3,draft
-ecuador_2011_safety_homesec,irw_text_3,draft
-ecuador_2011_safety_impact,irw_text_3,draft
-ecuador_2011_safety_operatives,irw_text_3,draft
-ecuador_2011_safety_places,irw_text_3,draft
-ecuador_2011_safety_safety,irw_text_3,draft
-ecuador_2011_safety_surroundings,irw_text_3,draft
-ecuador_2011_safety_trend,irw_text_3,draft
-ecuador_2011_safety_victim,irw_text_3,draft
-ecuador_2011_safety_victimtype,irw_text_3,draft
+ecuador_2011_safety_avoidance,irw_text_3,published
+ecuador_2011_safety_confidence,irw_text_3,published
+ecuador_2011_safety_crime,irw_text_3,published
+ecuador_2011_safety_homesec,irw_text_3,published
+ecuador_2011_safety_impact,irw_text_3,published
+ecuador_2011_safety_operatives,irw_text_3,published
+ecuador_2011_safety_places,irw_text_3,published
+ecuador_2011_safety_safety,irw_text_3,published
+ecuador_2011_safety_surroundings,irw_text_3,published
+ecuador_2011_safety_trend,irw_text_3,published
+ecuador_2011_safety_victim,irw_text_3,published
+ecuador_2011_safety_victimtype,irw_text_3,published
 eeedprm_bulut_2021,irw_text,published
 ees_sarling_2024,irw_text_2,published
 ehealth_rioux_2025_gad,irw_text_2,published
@@ -819,20 +820,23 @@ gps_vangsness_2019,irw_text,published
 gpt4mcq_young_2025,irw_text_2,published
 grandahl_2017_hpv_beliefs,irw_text_2,published
 graves_2021_brief_cope,irw_text_3,published
-guatemala_2024_homes_avenues,irw_text_3,draft
-guatemala_2024_homes_country,irw_text_3,draft
-guatemala_2024_homes_drainage,irw_text_3,draft
-guatemala_2024_homes_emergencies,irw_text_3,draft
-guatemala_2024_homes_energy,irw_text_3,draft
-guatemala_2024_homes_lighting,irw_text_3,draft
-guatemala_2024_homes_nutrition,irw_text_3,draft
-guatemala_2024_homes_parks,irw_text_3,draft
-guatemala_2024_homes_publicclinic,irw_text_3,draft
-guatemala_2024_homes_publiceducation,irw_text_3,draft
-guatemala_2024_homes_publichealth,irw_text_3,draft
-guatemala_2024_homes_roads,irw_text_3,draft
-guatemala_2024_homes_safety,irw_text_3,draft
-guatemala_2024_homes_transparency,irw_text_3,draft
+guatemala_2024_homes_avenues,irw_text_3,published
+guatemala_2024_homes_country,irw_text_3,published
+guatemala_2024_homes_drainage,irw_text_3,published
+guatemala_2024_homes_emergencies,irw_text_3,published
+guatemala_2024_homes_energy,irw_text_3,published
+guatemala_2024_homes_lighting,irw_text_3,published
+guatemala_2024_homes_nutrition,irw_text_3,published
+guatemala_2024_homes_parks,irw_text_3,published
+guatemala_2024_homes_publicclinic,irw_text_3,published
+guatemala_2024_homes_publiceducation,irw_text_3,published
+guatemala_2024_homes_publichealth,irw_text_3,published
+guatemala_2024_homes_roads,irw_text_3,published
+guatemala_2024_homes_safety,irw_text_3,published
+guatemala_2024_homes_transparency,irw_text_3,published
+guatemala_2024_homes_transport,irw_text_3,published
+guatemala_2024_homes_trash,irw_text_3,published
+guatemala_2024_homes_water,irw_text_3,published
 gumus_2025_dietarian_identity,irw_text_2,published
 habibi_2021_meim,irw_text_2,published
 han_2015_peer_assisted_learning,irw_text_2,published
