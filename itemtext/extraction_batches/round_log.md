@@ -28420,3 +28420,10 @@ batch_519 directory was removed. No work was discarded.
 - Written 1 / blocked 0 / failed 0; yield 100%. Gates: normalize changed 0 files, audit 1 WARN (explained), verify_batch MISSING(exempt), lint clean, irw-validate ok, check_provenance exit 0 (only the pre-existing ye_2025_q25_scale `mixed` note).
 - Source files for the sibling argentina_2017_victimization_* tables are cached under .cache/argentina_2017_victimization_confidence/.
 - Numbering: highest (591)+1 = 592. Cap batch_617 not reached. 22 pending remain.
+
+## batch_593 — 2026-09-27T23:32-07:00 (1 table, 1 agent)
+- argentina_2017_victimization_disorder: WRITTEN. INDEC ENV 2017 .sav IPS03a-i, mapping_basis=data_labels, text_source=study_materials, translation_source=machine_translation; 9 items x Sí/No = 18 rows. Stem = PS chapter question 3 of the questionnaire, identical in the documentation PDF pp.17-18. Reused the source cache from batch_592.
+- resp reversal (Step 5b re-check, orchestrator): the .do Bookmark 2 sets 99 to missing and computes resp = 3 - x. Raw .sav: 1=Sí, 2=No (ips03a 13415/14681, ips03h 2411/23409, Ns/Nc 1207/3483). The shipped file maps resp 2 = Sí and 1 = No, so it is consistent. Live table_sets: 9 items, resp {1,2}, 244924 rows.
+- Source ellipsis styles are shipped as printed (three dots vs …). The .sav label for ips03b uses three dots while the questionnaire uses …, and the questionnaire form ships. This is in notes.csv.
+- Written 1 / blocked 0 / failed 0; yield 100%. Gates: normalize changed 0 files, audit PASS, verify_batch MISSING(exempt), lint clean, irw-validate ok, check_provenance clean apart from the pre-existing ye_2025_q25_scale `mixed` review note. Issues-page entry owed once live (machine_translation).
+- Numbering: highest (592)+1 = 593. Cap batch_617 not reached. 21 pending remain.
