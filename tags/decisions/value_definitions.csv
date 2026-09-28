@@ -1,0 +1,20 @@
+column,value,anchor,decision
+sample,Program-based,`Program-based` (through the specific intervention or cohort the study is about),1760
+sample,General/non-specific,`General/non-specific` — **the catch-all**,1760
+sample,Internet-based,`Internet-based` (an online panel or crowdwork platform),1760
+sample,Educational,"`Educational` (through a school, university or course)",1760
+sample,Clinical,"`Clinical` (through a health-care setting, or by diagnosis or treatment status)",1760
+sample,Targeted/specific,`Targeted/specific` — the frame is restricted by something the study **imposed on top of its setting**,1760/1796
+sample,Representative,"`Representative` — the source claims probability sampling, or claims the sample represents a defined population",1760
+sample,Workplace,"Respondents were reached through their employer, their occupation, or a professional body",1704
+sample,AI/model,`AI/model` — each `id` is an AI system,2206
+sample,Animal,`Animal` — each `id` is a non-human animal,2206
+sample,Non-person unit,"`Non-person unit` — each `id` is a stimulus, text, image, object, specimen or organisation",2206
+construct type,Behavioral,`Behavioral` is what someone DID,1837
+construct type,Personality,`Personality` is what they are LIKE,1837
+construct type,Other,"`Other` means outside all seven values, not undecided between two",1837
+construct type,Physical health/functioning,"`Physical health/functioning` covers bodily symptoms, functional capacity and disability",1837
+construct type,Affective/mental health,,
+construct type,Cognitive/educational,,
+construct type,Opinion/attitude,,
+construct type,Developmental,,
