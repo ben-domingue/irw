@@ -68,6 +68,7 @@ COLUMNS = [
     "DOI (for paper)", "DOI (for data)", "Original License",
     "Custom License (source)", "Public Reshare?", "Derived License",
     "Custom License (derived)", "Notes", "Contributor", "Date",
+    "Source via",
 ]
 
 CONTRIBUTOR = "automated"
@@ -86,6 +87,7 @@ KEY_MAP = {
     "custom_license_derived": "Custom License (derived)",
     "notes": "Notes",
     "date": "Date",
+    "source_via": "Source via",
 }
 
 def clean(value):
@@ -109,7 +111,20 @@ def clean(value):
 
 def main():
     force = "--force" in sys.argv
+
+    # Check for --source-via flag if passed via CLI args
+    cli_source_via = None
+    for i, arg in enumerate(sys.argv):
+        if arg == "--source-via" and i + 1 < len(sys.argv):
+            cli_source_via = sys.argv[i + 1]
+        elif arg.startswith("--source-via="):
+            cli_source_via = arg.split("=", 1)[1]
+
     payload = json.load(sys.stdin)
+
+    # CLI flag overrides or defaults payload if provided
+    if cli_source_via is not None:
+        payload["source_via"] = cli_source_via
 
     row = {c: "" for c in COLUMNS}
     for key, value in payload.items():

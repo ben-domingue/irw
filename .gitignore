@@ -134,3 +134,4 @@ data/*_raw/
 # the directory is what stops that recurring; the batch directories under
 # itemtext/itemtables/batch_* remain the tracked record of what was extracted.
 itemtext/itemtables/clean/
+!metadata/aggregators.csv

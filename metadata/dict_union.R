@@ -27,7 +27,7 @@ DICT_AUTO_COLS <- c(
     "table", "table.lower", "Description", "URL (for data)", "Reference",
     "DOI (for paper)", "DOI (for data)", "Original License",
     "Custom License (source)", "Public Reshare?", "Derived License",
-    "Custom License (derived)", "Notes", "Contributor", "Date"
+    "Custom License (derived)", "Notes", "Contributor", "Date", "Source via"
 )
 
 ##Columns that exist HERE and not in the sheet.
@@ -40,7 +40,7 @@ DICT_AUTO_COLS <- c(
 ##column plus a 979-cell paste, or this. Ben chose this on 2026-09-06 --
 ##the automated file carries the new column, `union_dict()` creates it in the
 ##merged frame, and nobody edits the sheet.
-DICT_AUTO_ONLY_COLS <- c("DOI (for data)")
+DICT_AUTO_ONLY_COLS <- c("DOI (for data)", "Source via")
 
 ##Every row in an automated file must be machine-written, for the same reason
 ##03_tags.R forces Rater: a human row placed here would be outranked by the
@@ -466,6 +466,23 @@ apply_data_doi <- function(biblio, dict, label = "core") {
             " row(s) carry a data DOI; cleared `DOI__for_paper_` on ",
             sum(clear), " row(s) that were citing the deposit as the paper")
     biblio
+}
+
+apply_source_via <- function(biblio, dict, label = "core") {
+  if (!("Source via" %in% names(dict))) {
+    biblio$`Source via` <- NA_character_
+    return(biblio)
+  }
+  src <- data.frame(.key = dict_key(dict$table),
+                    source_via = as.character(dict[["Source via"]]),
+                    stringsAsFactors = FALSE)
+  src <- src[!duplicated(src$.key), ]
+  i <- match(dict_key(biblio$table), src$.key)    biblio$`Source via` <- ifelse(is.na(i) | dict_blank(src$source_via[i]),
+                                NA_character_, src$source_via[i])    n_set <- sum(!is.na(biblio$`Source via`))
+  if (n_set > 0) {
+    message(label, ": ", n_set, " row(s) carry 'Source via'")
+  }
+  biblio
 }
 
 ##Attach the custom licence terms to every biblio row.

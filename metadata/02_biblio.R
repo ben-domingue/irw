@@ -242,10 +242,14 @@ getrows<-function(l) {
     if (!("DOI (for data)" %in% names(new_data_rows))) {
         new_data_rows[["DOI (for data)"]] <- NA_character_
     }
-    new_data_rows <- new_data_rows |>
-    select(table, Reference, `DOI (for paper)`, `DOI (for data)`, Description, `URL (for data)`, Derived_License) |>
-    rename(DOI__for_paper_=`DOI (for paper)`, DOI__for_data_=`DOI (for data)`,
-           Reference_x=Reference, URL__for_data_=`URL (for data)`)
+    if (!("Source via" %in% names(new_data_rows))) {
+    new_data_rows[["Source via"]] <- NA_character_
+  }
+
+  new_data_rows <- new_data_rows |>
+  select(table, Reference, `DOI (for paper)`, `DOI (for data)`, Description, `URL (for data)`, Derived_License, `Source via`) |>
+  rename(DOI__for_paper_=`DOI (for paper)`, DOI__for_data_=`DOI (for data)`,
+         Reference_x=Reference, URL__for_data_=`URL (for data)`)
     ## Cite the paper where there is one, the deposit otherwise. Without the
     ## fallback every row #1690 splits would lose the BibTeX it has today and
     ## drop through to generate_bibtex(), which is a regression dressed as a fix
@@ -312,6 +316,7 @@ getrows<-function(l) {
     biblio <- derived_lic$biblio
     ## Same carry-through, for the paper/deposit DOI split (#1690).
     biblio <- apply_data_doi(biblio, irw_dict, name)
+    biblio <- apply_source_via(biblio, irw_dict, name)
     ## Correct the Descriptions that name an instrument the table does not
     ## contain (#1898, #1925, #1929, #1951, #1972). MUST run after the refresh
     ## above, which re-asserts the sheet's value on every row -- an override
