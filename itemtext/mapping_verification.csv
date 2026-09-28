@@ -1992,3 +1992,4 @@ enders_2022_covid_vax_misinfo,batch_570,reconstructed,,"1+3: per-item % agree vs
 spain_2012_reality_conversation,batch_574,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 spain_2012_reality_media,batch_575,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 spain_2012_reality_outlets,batch_576,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
+spain_2012_reality_participation,batch_577,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
