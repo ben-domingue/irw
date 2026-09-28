@@ -54,10 +54,11 @@ fake_auto <- function(...) {
 }
 auto_row <- function(table, description = "", derived = "", doi = "",
                      doi_data = "", custom_derived = "", custom_source = "",
-                     contributor = DICT_AUTO_CONTRIBUTOR, reshare = "Public") {
+                     contributor = DICT_AUTO_CONTRIBUTOR, reshare = "Public",
+                     source_via = "") {
     c(table, tolower(table), description, "", "", doi, doi_data, "",
       custom_source, reshare, derived, custom_derived, "", contributor,
-      "9/6/2026")
+      "9/6/2026", source_via)
 }
 
 ##------------------------------------------------------------------- tests ---
@@ -400,6 +401,33 @@ local({
           "a sheet with no `DOI (for data)` yields the column, all blank")
     check(out$DOI__for_paper_[1] == "10.1/x",
           "and clears nothing")
+})
+
+cat("apply_source_via -- the carry-through to biblio.csv (#2421)\n")
+
+local({
+    ##`Source via` lives only in the automated file, like `DOI (for data)`; a
+    ##backfill onto a table the sheet already holds must still reach biblio.
+    d <- fake_sheet(sheet_row("A_2020"), sheet_row("b_2021"))
+    a <- fake_auto(auto_row("a_2020", source_via = "openESM"))
+    res <- union_dict(d, a)
+    check(res$dict$`Source via`[match("A_2020", res$dict$table)] == "openESM",
+          "the union carries `Source via` onto a sheet row")
+    b <- data.frame(table = c("a_2020", "b_2021", "c_2022"),
+                    stringsAsFactors = FALSE)
+    out <- suppressMessages(apply_source_via(b, res$dict))
+    check(identical(out$Source_via, c("openESM", NA, NA)),
+          "biblio gains `Source_via`, NA where the dictionary has none")
+    check(!"Source via" %in% names(out),
+          "and no column whose name has a space")
+})
+
+local({
+    d <- fake_sheet(sheet_row("a_2020"))
+    b <- data.frame(table = "a_2020", stringsAsFactors = FALSE)
+    out <- suppressMessages(apply_source_via(b, d))
+    check("Source_via" %in% names(out) && is.na(out$Source_via[1]),
+          "a sheet with no `Source via` yields the column, all blank")
 })
 
 cat("apply_custom_license_terms\n")

@@ -32,7 +32,8 @@ BIBLIO_COLS = ["table", "DOI__for_paper_", "DOI__for_data_", "Reference_x",
 AUTO_COLS = ["table", "table.lower", "Description", "URL (for data)", "Reference",
              "DOI (for paper)", "DOI (for data)", "Original License",
              "Custom License (source)", "Public Reshare?", "Derived License",
-             "Custom License (derived)", "Notes", "Contributor", "Date"]
+             "Custom License (derived)", "Notes", "Contributor", "Date",
+             "Source via"]
 
 
 def _write(path, cols, rows):

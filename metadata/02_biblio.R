@@ -312,6 +312,7 @@ getrows<-function(l) {
     biblio <- derived_lic$biblio
     ## Same carry-through, for the paper/deposit DOI split (#1690).
     biblio <- apply_data_doi(biblio, irw_dict, name)
+    biblio <- apply_source_via(biblio, irw_dict, name)
     ## Correct the Descriptions that name an instrument the table does not
     ## contain (#1898, #1925, #1929, #1951, #1972). MUST run after the refresh
     ## above, which re-asserts the sheet's value on every row -- an override
