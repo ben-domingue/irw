@@ -1,11 +1,11 @@
-# IRW table-name consistency audit -- 2026-09-21
+# IRW table-name consistency audit -- 2026-09-28
 
 Ground truth: `irw::irw_list_tables(source = c("core","comp","nom","sim"))`. 
 Dictionary sheets included (Public rows only).
 
 ## A. Incomplete coverage (missing >=2 sources, tag-only rows dropped -- matches metadata/04_tables.R's `zz`)
 
-Full list, aligned columns: `table_audit_report_incomplete.txt`. Same data as CSV: `table_audit_report_incomplete.csv` (127 rows). Nothing here is auto-fixed -- triage by hand.
+Full list, aligned columns: `table_audit_report_incomplete.txt`. Same data as CSV: `table_audit_report_incomplete.csv` (266 rows). Nothing here is auto-fixed -- triage by hand.
 
 | table | category | redivis | dictionary_sheet | biblio_csv | metadata_csv | tags_csv |
 |---|---|---|---|---|---|---|
@@ -26,6 +26,7 @@ Full list, aligned columns: `table_audit_report_incomplete.txt`. Same data as CS
 | liang2026_extrinsic_motivation | core |  |  | 1 |  |  |
 | liang2026_intrinsic_motivation | core |  |  | 1 |  |  |
 | lindstrom2021_conscientiousness | core |  |  | 1 |  |  |
+| robison_2026_retesting_mmi | core |  |  | 1 |  |  |
 | thirdpartypunishmentunfairsharing_mcauliffe_2025_canada | core |  |  | 1 |  |  |
 | thirdpartypunishmentunfairsharing_mcauliffe_2025_india | core |  |  | 1 |  |  |
 | thirdpartypunishmentunfairsharing_mcauliffe_2025_peru | core |  |  | 1 |  |  |
@@ -34,12 +35,11 @@ Full list, aligned columns: `table_audit_report_incomplete.txt`. Same data as CS
 | thirdpartypunishmentunfairsharing_mcauliffe_2025_vanuatu | core |  |  | 1 |  |  |
 | wvs_panasiuk_science | core |  |  | 1 |  |  |
 | wvs_panasiuk_security | core |  |  | 1 |  |  |
-| hachenberger_2025_stroop_main_nominal | nom |  |  | 1 |  |  |
-| hachenberger_2025_stroop_pilot_nominal | nom |  |  | 1 |  |  |
-| cricket | comp |  | 1 | 1 |  |  |
-| debate | comp |  | 1 | 1 |  |  |
-| epl_matches_2021-2022 | comp |  | 1 | 1 |  |  |
-_...and 97 more, see the .txt or .csv._
+| asap20train | nom |  |  | 1 |  |  |
+| blum_2018_imak_nominal | nom |  |  | 1 |  |  |
+| borges_brazil_residency_2024_cbt | nom |  |  | 1 |  |  |
+| borges_brazil_residency_2024_pbt | nom |  |  | 1 |  |  |
+_...and 236 more, see the .txt or .csv._
 
 ## B. Urgent -- live in Redivis, not in any local CSV yet
 
