@@ -468,21 +468,28 @@ apply_data_doi <- function(biblio, dict, label = "core") {
     biblio
 }
 
+##Carry the dictionary's `Source via` (the aggregator a table was found through,
+##a key into metadata/aggregators.csv) onto every biblio row, as `Source_via`:
+##biblio's column names are Redivis-safe, like `DOI__for_data_` above (#2421).
+##Joined across ALL rows, like apply_data_doi, so a backfill on an
+##already-published table reaches it.
 apply_source_via <- function(biblio, dict, label = "core") {
-  if (!("Source via" %in% names(dict))) {
-    biblio$`Source via` <- NA_character_
-    return(biblio)
-  }
-  src <- data.frame(.key = dict_key(dict$table),
-                    source_via = as.character(dict[["Source via"]]),
-                    stringsAsFactors = FALSE)
-  src <- src[!duplicated(src$.key), ]
-  i <- match(dict_key(biblio$table), src$.key)    biblio$`Source via` <- ifelse(is.na(i) | dict_blank(src$source_via[i]),
-                                NA_character_, src$source_via[i])    n_set <- sum(!is.na(biblio$`Source via`))
-  if (n_set > 0) {
-    message(label, ": ", n_set, " row(s) carry 'Source via'")
-  }
-  biblio
+    if (!"Source via" %in% names(dict)) {
+        biblio$Source_via <- NA_character_
+        return(biblio)
+    }
+    src <- data.frame(.key       = dict_key(dict$table),
+                      source_via = as.character(dict[["Source via"]]),
+                      stringsAsFactors = FALSE)
+    src <- src[!duplicated(src$.key), ]
+    i <- match(dict_key(biblio$table), src$.key)
+
+    biblio$Source_via <- ifelse(is.na(i) | dict_blank(src$source_via[i]),
+                                NA_character_, src$source_via[i])
+
+    message(label, ": ", sum(!is.na(biblio$Source_via)),
+            " row(s) carry a Source via")
+    biblio
 }
 
 ##Attach the custom licence terms to every biblio row.
