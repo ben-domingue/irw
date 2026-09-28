@@ -3,6 +3,20 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## From the 2026-09-28 repos weekly batch
+
+- [ ] **DVN/GJOBOS** (Replication Data for: The Impact of Female Teachers on
+  Female Students' Lifetime Well-Being, cc0, N=30,108, 16 items) —
+  `human_assistance`, unclassified by this routine. Column mapping was a
+  low-confidence guess; QC also flagged `resp_ordinal*`/`resp_direction*`/
+  `imputed_values*`/`resp_scale_mixed`. Needs a human to confirm the column
+  mapping before it's trusted.
+- [ ] **figshare 10.6084/m9.figshare.33980614** (Activities of Daily Living
+  Inventory (ADLI), French older adults) — `download_failed` (proxy/connection
+  error reaching `ndownloader.figshare.com`). Retryable; left out of
+  `repo_triage_seen_keys.csv` so a later run picks it up automatically. No
+  action needed unless it keeps failing.
+
 ## From the 2026-09-21 repos weekly batch
 
 - [ ] **DVN/QQ369L** (Vietnam 2026 National Assembly Election voter survey,

@@ -16140,3 +16140,52 @@ ben-domingue ruled on both holds from 2026-09-25b:
 All three pass `irw-validate --profile upload`. Staged: 3 dictionary rows, 3 tag
 rows, and 3 not-shipped provenance records. Item text is cheap for all three
 (DAFRS Appendix A; PozQoL s003.pdf) and is deferred.
+
+## 2026-09-28 — Repos weekly run: 0 good by triage, 1 human_assistance surfaced unclassified
+
+Scheduled weekly repos run (`irw_discover_monthly.py --mode weekly`, all 15
+`HIGH_YIELD_TERMS`), run as an automated scheduled routine bounded to
+surfacing only — no Step 2b retriage, no hand-verification, no license/fit
+judgment calls beyond what the scripts computed. Bookkeeping pushed straight
+to main as `5347382` (14 `search_terms_log.csv` rows, 33
+`repo_triage_seen_keys.csv` keys).
+
+**OSF timed out on 8 of 14 terms searched** (`self-efficacy`, `depression`,
+`anxiety`, `burnout`, `perceived stress`, `well-being`, `life satisfaction`,
+`loneliness` — all 30s read timeouts against `api.osf.io`). Dataverse and
+DataCite searched normally throughout, and OSF searched normally on the other
+6 terms (`self-esteem`, `academic motivation`, `work engagement`,
+`psychological resilience`, `procrastination`, `growth mindset`). Those 8
+terms' watermarks did not advance, so the next weekly/monthly repos run
+re-covers them automatically; worth checking if OSF is still failing on this
+many terms next time, since 8/14 is wider than the usual one-or-two-term
+transient.
+
+74 raw candidates found; 35 new after `repo_triage_seen_keys.csv` dedup (the
+rest already triaged via the monthly full sweep or a prior weekly run).
+Triage: 0 `good`, 1 `human_assistance`, 32 `no_usable_file`, 2
+`download_failed` (both the same DOI, `10.6084/m9.figshare.33980614`,
+"Activities of Daily Living Inventory (ADLI)" — a proxy/connection error
+reaching `ndownloader.figshare.com`, not a dead link; left out of
+`repo_triage_seen_keys.csv` so a later run retries it once reachable).
+
+The 1 `human_assistance` row was deliberately **not** sub-classified via
+Step 2b (`irw_retriage_ha.py`) — out of scope for this routine, which only
+surfaces triaged candidates for a human to work through later via the normal
+pipeline:
+
+- **DVN/GJOBOS** — "Replication Data for: The Impact of Female Teachers on
+  Female Students' Lifetime Well-Being" (cc0, 30,108 participants, 16 items,
+  467,592 responses, `college_4yr.tab`). Column mapping was a low-confidence
+  guess; QC also flagged `resp_ordinal*`/`resp_direction*`/
+  `imputed_values*`/`resp_scale_mixed` — needs a human to confirm the column
+  mapping before it's trusted.
+
+**Per-run candidate/triage CSVs were not committed to the review branch** —
+both `monthly_candidates_weekly_2026-09-28.csv` and
+`monthly_triage_weekly_2026-09-28.csv` are covered by `.gitignore:57-58`
+(the fix from #2075 that closed the force-add loophole this routine's own
+template still describes). This write-up is the durable record instead; the
+DOI above and the figshare DOI are re-resolvable if either needs another
+look. The raw CSVs remain on disk only in this session's `runs/` (gitignored,
+disposable) and will not survive the container.
