@@ -1,6 +1,7 @@
-# item-text tables in the Redivis shards as of 2026-09-27
+# item-text tables in the Redivis shards as of 2026-09-28
 # status=published: a reader can fetch it. status=draft: uploaded, not released yet.
 # generated -- do not hand-edit; rerun itemtext/refresh_live_tables.py (irw#1828)
+# draft not listable by this token (needs data.edit) for irw_text_2; its draft rows carried forward from the snapshot taken 2026-09-27
 table,shard,status
 16_personalityfactors,irw_text,published
 360emergencymed_azami_2024,irw_text,published
@@ -187,6 +188,13 @@ argentina_2012_tobacco_harm,irw_text_3,published
 argentina_2012_tobacco_policy,irw_text_3,published
 argentina_2013_reproductive_awareness,irw_text_3,published
 argentina_2013_reproductive_transmission,irw_text_3,published
+argentina_2017_victimization_confidence,irw_text_3,published
+argentina_2017_victimization_disorder,irw_text_3,published
+argentina_2017_victimization_fairness,irw_text_3,published
+argentina_2017_victimization_fear,irw_text_3,published
+argentina_2017_victimization_performance,irw_text_3,published
+argentina_2017_victimization_precaution,irw_text_3,published
+argentina_2017_victimization_trend,irw_text_3,published
 arnulf_2022_general_knowledge,irw_text,published
 arora2025_blueq_pedagogical,irw_text,published
 arora2025_blueq_synchronous,irw_text,published
@@ -451,6 +459,18 @@ ecps_sahm_2024_stress,irw_text,published
 ecps_sahm_2024_support,irw_text,published
 ecps_sahm_2024_trust,irw_text,published
 ecps_sahm_2024_vaccine,irw_text,published
+ecuador_2011_safety_avoidance,irw_text_3,published
+ecuador_2011_safety_confidence,irw_text_3,published
+ecuador_2011_safety_crime,irw_text_3,published
+ecuador_2011_safety_homesec,irw_text_3,published
+ecuador_2011_safety_impact,irw_text_3,published
+ecuador_2011_safety_operatives,irw_text_3,published
+ecuador_2011_safety_places,irw_text_3,published
+ecuador_2011_safety_safety,irw_text_3,published
+ecuador_2011_safety_surroundings,irw_text_3,published
+ecuador_2011_safety_trend,irw_text_3,published
+ecuador_2011_safety_victim,irw_text_3,published
+ecuador_2011_safety_victimtype,irw_text_3,published
 eeedprm_bulut_2021,irw_text,published
 ees_sarling_2024,irw_text_2,published
 ehealth_rioux_2025_gad,irw_text_2,published
@@ -469,6 +489,12 @@ ellis_2016_calc_instrqual,irw_text,published
 emidy2024_fevs,irw_text,published
 emobank_buechel_2017,irw_text,published
 emsc_kuan-chin_2023,irw_text,published
+enders_2022_conspiracy_thinking,irw_text_3,published
+enders_2022_covid_conspiracy,irw_text_3,published
+enders_2022_covid_vax_misinfo,irw_text_3,published
+enders_2022_science_literacy,irw_text_3,published
+enders_2022_vaccine_hesitancy,irw_text_3,published
+enders_2022_victimhood,irw_text_3,published
 enem_2013_1mil_ch,irw_text,published
 enem_2013_1mil_cn,irw_text,published
 enem_2013_1mil_lc,irw_text,published
@@ -794,6 +820,23 @@ gps_vangsness_2019,irw_text,published
 gpt4mcq_young_2025,irw_text_2,published
 grandahl_2017_hpv_beliefs,irw_text_2,published
 graves_2021_brief_cope,irw_text_3,published
+guatemala_2024_homes_avenues,irw_text_3,published
+guatemala_2024_homes_country,irw_text_3,published
+guatemala_2024_homes_drainage,irw_text_3,published
+guatemala_2024_homes_emergencies,irw_text_3,published
+guatemala_2024_homes_energy,irw_text_3,published
+guatemala_2024_homes_lighting,irw_text_3,published
+guatemala_2024_homes_nutrition,irw_text_3,published
+guatemala_2024_homes_parks,irw_text_3,published
+guatemala_2024_homes_publicclinic,irw_text_3,published
+guatemala_2024_homes_publiceducation,irw_text_3,published
+guatemala_2024_homes_publichealth,irw_text_3,published
+guatemala_2024_homes_roads,irw_text_3,published
+guatemala_2024_homes_safety,irw_text_3,published
+guatemala_2024_homes_transparency,irw_text_3,published
+guatemala_2024_homes_transport,irw_text_3,published
+guatemala_2024_homes_trash,irw_text_3,published
+guatemala_2024_homes_water,irw_text_3,published
 gumus_2025_dietarian_identity,irw_text_2,published
 habibi_2021_meim,irw_text_2,published
 han_2015_peer_assisted_learning,irw_text_2,published
@@ -1384,6 +1427,16 @@ pang_2023_perceived_risk,irw_text_2,published
 pang_2023_perceived_usefulness,irw_text_2,published
 pang_2023_social_norms,irw_text_2,published
 papp_silva-martins2023,irw_text_2,published
+paraguay_2021_mobility_mobility,irw_text_3,published
+paraguay_2021_women_childhood,irw_text_3,published
+paraguay_2021_women_control,irw_text_3,published
+paraguay_2021_women_family,irw_text_3,published
+paraguay_2021_women_justification,irw_text_3,published
+paraguay_2021_women_laws,irw_text_3,published
+paraguay_2021_women_partner,irw_text_3,published
+paraguay_2021_women_permission,irw_text_3,published
+paraguay_2021_women_public,irw_text_3,published
+paraguay_2021_women_roles,irw_text_3,published
 park_2024_ageism,irw_text_2,published
 pass20_klosowska_2025_dass_online,irw_text_2,published
 pass_vangsness_2019,irw_text,published
@@ -1731,6 +1784,15 @@ spain_2012_gender_prevalence,irw_text_3,published
 spain_2012_gender_punishment,irw_text_3,published
 spain_2012_gender_situation,irw_text_3,published
 spain_2012_gender_vulnerability,irw_text_3,published
+spain_2012_reality_conversation,irw_text_3,published
+spain_2012_reality_media,irw_text_3,published
+spain_2012_reality_outlets,irw_text_3,published
+spain_2012_reality_participation,irw_text_3,published
+spain_2012_reality_personality,irw_text_3,published
+spain_2012_reality_press,irw_text_3,published
+spain_2012_reality_radio,irw_text_3,published
+spain_2012_reality_situation,irw_text_3,published
+spain_2012_reality_television,irw_text_3,published
 spain_2013_defense_attractions,irw_text_3,published
 spain_2013_defense_capability,irw_text_3,published
 spain_2013_defense_children,irw_text_3,published
@@ -1775,6 +1837,12 @@ spain_2014_family_matrimony,irw_text_3,published
 spain_2014_family_obstacles,irw_text_3,published
 spain_2014_family_reproduction,irw_text_3,published
 spain_2014_family_satisfaction,irw_text_3,published
+spain_2014_volunteering_activity,irw_text_3,published
+spain_2014_volunteering_membership,irw_text_3,published
+spain_2014_volunteering_motives,irw_text_3,published
+spain_2014_volunteering_profile,irw_text_3,published
+spain_2014_volunteering_satisfaction,irw_text_3,published
+spain_2014_volunteering_solidarity,irw_text_3,published
 spain_2015_immigration_acceptability,irw_text_3,published
 spain_2015_immigration_assistance,irw_text_3,published
 spain_2015_immigration_contact,irw_text_3,published
@@ -1840,6 +1908,15 @@ spain_2023_science_science,irw_text,published
 spain_2023_science_situations,irw_text,published
 spain_2023_science_technology,irw_text,published
 spain_2023_science_utility,irw_text,published
+spain_2024_ideology_discomfort,irw_text_3,published
+spain_2024_ideology_identity,irw_text_3,published
+spain_2024_ideology_leaders,irw_text_3,published
+spain_2024_ideology_parties,irw_text_3,published
+spain_2024_ideology_rights,irw_text_3,published
+spain_2024_ideology_society,irw_text_3,published
+spain_2024_ideology_sympathy,irw_text_3,published
+spain_2024_ideology_territorial,irw_text_3,published
+spain_2024_ideology_welfare,irw_text_3,published
 spain_2024_politics_actions,irw_text,published
 spain_2024_politics_associations,irw_text,published
 spain_2024_politics_beliefs,irw_text,published
@@ -2126,7 +2203,7 @@ wang_2025_green_space_wellbeing,irw_text_2,published
 wang_2026_attitude,irw_text_2,published
 wang_2026_behavioral_intention,irw_text_2,published
 wang_2026_perceived_usefulness,irw_text_2,published
-wang_2026_technology_perception,irw_text_3,draft
+wang_2026_technology_perception,irw_text_3,published
 wang_2026_veteran_expectations,irw_text_2,published
 wang_onlineriskexp_2025,irw_text,published
 wang_onlineriskexp_2025_anxiety,irw_text,published
@@ -2137,7 +2214,7 @@ weatherspoon_2015_pediatricians_effectiveness,irw_text_2,published
 weatherspoon_2015_pediatricians_freq,irw_text_2,published
 weber2026_name_knowledge,irw_text,published
 weeldenburg_2022_targetmtpq,irw_text_2,published
-weida_2020_cesd10,irw_text_3,draft
+weida_2020_cesd10,irw_text_3,published
 wen_2022_pyd,irw_text_2,published
 wesselmann_2018_distress,irw_text_2,published
 wesselmann_2018_drri,irw_text_2,published
