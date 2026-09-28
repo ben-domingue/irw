@@ -2000,3 +2000,4 @@ spain_2012_reality_situation,batch_581,data_labels,,exempt: data_labels,NOT_NEED
 spain_2012_reality_television,batch_582,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 spain_2024_ideology_discomfort,batch_583,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 spain_2024_ideology_identity,batch_584,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
+spain_2024_ideology_leaders,batch_585,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
