@@ -2071,3 +2071,4 @@ wallace_2026_fit,batch_650,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_b
 wallace_2026_interest,batch_651,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 wallace_2026_interest_org,batch_652,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 wallace_2026_iqbelief,batch_653,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
+wallace_2026_learn,batch_654,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
