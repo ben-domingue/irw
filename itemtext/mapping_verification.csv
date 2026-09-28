@@ -2048,3 +2048,4 @@ guatemala_2024_homes_avenues,batch_627,data_labels,,exempt: data_labels,NOT_NEED
 guatemala_2024_homes_country,batch_628,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 guatemala_2024_homes_drainage,batch_629,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 guatemala_2024_homes_emergencies,batch_630,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
+guatemala_2024_homes_energy,batch_631,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
