@@ -1,0 +1,98 @@
+[
+ {
+  "table": "bailon_2020_covidaffect",
+  "shard": "item_response_warehouse_6"
+ },
+ {
+  "table": "fcupanas_cffsdas_reyna_2018_7pt",
+  "shard": "item_response_warehouse"
+ },
+ {
+  "table": "li_2025_icf_rs17",
+  "shard": "item_response_warehouse_6"
+ },
+ {
+  "table": "shen_2026_cdrisc",
+  "shard": "item_response_warehouse_6"
+ },
+ {
+  "table": "shen_2026_self_control",
+  "shard": "item_response_warehouse_6"
+ },
+ {
+  "table": "shen_2026_smartphone_addiction",
+  "shard": "item_response_warehouse_6"
+ },
+ {
+  "table": "shen_2026_social_adaptability",
+  "shard": "item_response_warehouse_6"
+ },
+ {
+  "table": "tims_2017_autonomy",
+  "shard": "item_response_warehouse_6"
+ },
+ {
+  "table": "tims_2017_career_competencies",
+  "shard": "item_response_warehouse_6"
+ },
+ {
+  "table": "tims_2017_cse",
+  "shard": "item_response_warehouse_6"
+ },
+ {
+  "table": "tims_2017_hindering_demands",
+  "shard": "item_response_warehouse_6"
+ },
+ {
+  "table": "tims_2017_job_crafting",
+  "shard": "item_response_warehouse_6"
+ },
+ {
+  "table": "tims_2017_supervisor_support",
+  "shard": "item_response_warehouse_6"
+ },
+ {
+  "table": "tims_2017_uwes",
+  "shard": "item_response_warehouse_6"
+ },
+ {
+  "table": "wang_2026_technology_perception",
+  "shard": "item_response_warehouse_3"
+ },
+ {
+  "table": "zhou_2025_exercise_self_efficacy",
+  "shard": "item_response_warehouse_5"
+ },
+ {
+  "table": "zhou_2025_pa_intention",
+  "shard": "item_response_warehouse_5"
+ },
+ {
+  "table": "zhou_2025_peer_relationship_inventory",
+  "shard": "item_response_warehouse_5"
+ },
+ {
+  "table": "zhou_2025_social_support",
+  "shard": "item_response_warehouse_5"
+ },
+ {
+  "table": "znidarsic_2021_coworker_support",
+  "shard": "item_response_warehouse_6"
+ },
+ {
+  "table": "znidarsic_2021_leader_support",
+  "shard": "item_response_warehouse_6"
+ },
+ {
+  "table": "znidarsic_2021_org_practices",
+  "shard": "item_response_warehouse_6"
+ },
+ {
+  "table": "znidarsic_2021_uwes",
+  "shard": "item_response_warehouse_6"
+ },
+ {
+  "table": "znidarsic_2021_wf_balance",
+  "shard": "item_response_warehouse_6"
+ }
+]
