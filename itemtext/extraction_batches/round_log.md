@@ -28411,3 +28411,12 @@ batch_519 directory was removed. No work was discarded.
 - Orchestrator Step 5b: ES3480.utf8:63-68 labels P3_1..6 with the same six statements in the shipped order. 3480_num.csv shows volunteered code 3 at 33-62 per item, plus 8/9, and the .do drops these, so resp {1,2,4,5} is a property of the data (the public_note says so).
 - Written 1 / blocked 0 / failed 0; yield 100%. Gates: normalize changed 0 files, audit PASS (no WARNs), verify_batch MISSING(exempt), lint clean, irw-validate ok, check_provenance exit 0 (only the pre-existing ye_2025_q25_scale `mixed` review note).
 - Numbering: highest (590)+1 = 591. Cap batch_617 not reached. 23 pending remain.
+
+## batch_592 — 2026-09-27T23:22 (1 table, 1 agent)
+- argentina_2017_victimization_confidence: written, 6 items (ids02a-ids02f), 24 rows. INDEC ENV 2017, DS question 2 (confidence in police, security and justice institutions). mapping_basis=data_labels (the .sav column names are the item codes; 6/6 variable labels equal item_text). text_source=study_materials. translation_source=machine_translation (INDEC publishes in Spanish only), so an issues-page entry is owed once the table is live. Rights: INDEC Política de difusión, CC, attribution only. The hash matches batch_464.
+- Orchestrator Step 5b: the resp-reversal claim in public_note was confirmed against data/argentina_2017_victimization.do lines 291-305 (99 set to missing, then resp = 5 - x). The agent reports that raw .sav counts match live in 24/24 item x resp cells.
+- Source inconsistency shipped literally: the stem offers "algo confiables" but INDEC labels code 2 "Confiable" everywhere. public_note says so.
+- Audit WARN (row-count anomaly on ids02a, 27159 vs median 17544) is explained in notes.csv. It reflects the DS Q1->Q2 skip filter in the response data, not an itemtext defect.
+- Written 1 / blocked 0 / failed 0; yield 100%. Gates: normalize changed 0 files, audit 1 WARN (explained), verify_batch MISSING(exempt), lint clean, irw-validate ok, check_provenance exit 0 (only the pre-existing ye_2025_q25_scale `mixed` note).
+- Source files for the sibling argentina_2017_victimization_* tables are cached under .cache/argentina_2017_victimization_confidence/.
+- Numbering: highest (591)+1 = 592. Cap batch_617 not reached. 22 pending remain.
