@@ -2010,3 +2010,4 @@ spain_2024_ideology_welfare,batch_591,data_labels,,exempt: data_labels,NOT_NEEDE
 argentina_2017_victimization_confidence,batch_592,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 argentina_2017_victimization_disorder,batch_593,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 argentina_2017_victimization_fairness,batch_594,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
+argentina_2017_victimization_fear,batch_595,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
