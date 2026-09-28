@@ -2022,3 +2022,4 @@ paraguay_2021_women_justification,batch_603,data_labels,,exempt: data_labels,NOT
 paraguay_2021_women_laws,batch_604,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 paraguay_2021_women_partner,batch_605,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 paraguay_2021_women_permission,batch_606,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
+paraguay_2021_women_public,batch_607,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
