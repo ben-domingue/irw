@@ -2083,3 +2083,4 @@ wallace_2026_s2_profcert,batch_662,data_labels,,exempt: data_labels,NOT_NEEDED,m
 wallace_2026_s2_verbalmath,batch_663,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 wallace_2026_s2_warmcomp,batch_664,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 wallace_2026_s2c_covidcert,batch_665,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
+wallace_2026_s2c_desirecert,batch_666,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
