@@ -1997,3 +1997,4 @@ spain_2012_reality_personality,batch_578,data_labels,,exempt: data_labels,NOT_NE
 spain_2012_reality_press,batch_579,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 spain_2012_reality_radio,batch_580,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 spain_2012_reality_situation,batch_581,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
+spain_2012_reality_television,batch_582,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
