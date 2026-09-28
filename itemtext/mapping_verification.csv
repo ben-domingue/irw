@@ -2030,3 +2030,4 @@ spain_2014_volunteering_motives,batch_611,data_labels,2026-09-28,exempt: data_la
 spain_2014_volunteering_profile,batch_612,data_labels,2026-09-28,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 spain_2014_volunteering_satisfaction,batch_613,data_labels,2026-09-28,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 spain_2014_volunteering_solidarity,batch_614,data_labels,2026-09-28,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
+ecuador_2011_safety_avoidance,batch_615,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
