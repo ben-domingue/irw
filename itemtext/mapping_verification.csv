@@ -2062,3 +2062,4 @@ guatemala_2024_homes_transport,batch_641,data_labels,,exempt: data_labels,NOT_NE
 guatemala_2024_homes_trash,batch_642,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 guatemala_2024_homes_water,batch_643,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 wallace_2026_apply,batch_644,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
+wallace_2026_belong,batch_645,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
