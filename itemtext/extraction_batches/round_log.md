@@ -28977,3 +28977,11 @@ PASS; weida stays PARTIAL), lint, irw-validate and check_provenance. It is uploa
 - Step 5b: orchestrator re-counted from the cached raw INEGI CSV and CONFIRMED the routing claim: BP2_1 1/2/9 = 8659/15340/23; BP2_2_18 0/1 = 7450/1209 (7450 = 8659-1209); BP2_4_09 0/1 = 3652/3798.
 - Written 1 / blocked 0 / failed 0; yield 100%. Gates: normalize fixed 1 file (NA normalisation), audit WARN (row-count anomaly on bp2_1 = skip routing, explained in notes.csv), verify_batch MISSING(exempt), lint clean, irw-validate ok. check_provenance exit 1 on the pre-existing 70 live tables without issues-page entries plus the ye_2025_q25_scale `mixed` review; nothing new from this batch. NOT_NEEDED row in both verification_merged.csv and mapping_verification.csv.
 - Numbering: highest existing numeric batch (671)+1 = 672 (the "below 300" rule is stale, per batch_671's note). Cap batch_709 not reached; 33 pending remain.
+
+## batch_673 -- 2026-09-28 16:1x (1 table, 1 agent)
+- mexico_2024_q1safety_govperformance: done. 40 rows, 19/19 items (bp3_1_01..16, bp3_1_99 checklist 0/1; bp3_2 1-4; bp3_2a 1/2). data_labels (INEGI diccionario), study_materials + machine_translation, Spanish administered wording from ensu2024_trim1_cuest_principal.pdf Sec. III p.4. INEGI rights row applied (irw#2381 R01).
+- Caveats in notes.csv: 3.1 options 02/05/06/14 and part of 13 transcribed from page renders (PDF text layer drops them) -- spot-check; checklist option_text is INEGI catalogue labels; Tarjeta C not in zip.
+- Dictionary defects (not filed): Reference says ENSU 2023 (data is 2024 Q1, suffix 0324); Description overstates scope ("local and federal") -- 3.2/3.2a ask about city government only.
+- Step 5b: orchestrator re-counted from cached raw INEGI CSV and CONFIRMED: BP3_2 1/2/3/4/9/blank = 1024/7002/9981/5408/170/437; BP3_2A 1/2/9 = 8316/14896/810; BP3_1_01 0/1 = 9214/14808.
+- Written 1 / blocked 0 / failed 0; yield 100%. Gates: normalize 0 changes, audit PASS (no WARNs), verify_batch MISSING(exempt), lint clean, irw-validate ok, check_provenance only the pre-existing ye_2025_q25_scale `mixed` review. NOT_NEEDED row added to batch file and tracker.
+- Numbering: highest numeric batch (672)+1 = 673. Cap batch_709 not reached; 32 pending remain.
