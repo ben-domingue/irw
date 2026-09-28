@@ -28849,3 +28849,12 @@ PASS; weida stays PARTIAL), lint, irw-validate and check_provenance. It is uploa
 - Single-item live table (existing IRW table, not created here) — worth a look against the no-single-item-scales rule, separately from item text.
 - Written 1 / blocked 0 / failed 0; yield 100%. Gates: normalize 0 changed, audit PASS (no anomalies), verify_batch MISSING(exempt), lint clean, irw-validate ok. check_provenance same pre-existing report (ye_2025_q25_scale mixed; review, not failure). NOT_NEEDED row in both verification_merged.csv and mapping_verification.csv. table_context/live check did one small whole-table export.
 - Numbering: highest existing batch (651)+1 = 652. Cap batch_675 not reached. 19 pending remain.
+
+### batch_653 — 2026-09-28T13:51-07:00 (1 table, 1 agent)
+- wallace_2026_iqbelief: WRITTEN, 3 items x 7 resp = 21 rows, data_labels/study_materials, from the cached OSF dqw9f .sav/.sps files (sha256s match the batch_647 records). IQbelief1T2 -> IQbelief2 rename rests on the column's own label plus the authors' .sps (`compute IQT1=(IQbelief1T1+IQbelief1T2)/2`).
+- CAVEAT (in notes/public_note): resp 2-6 option_text carries the Study 2/S1c labels with a study prefix, because the other five studies label only the endpoints. Apostrophe glyph set to each item's majority form. The 'Please rate the extent...' lead-in is stripped and instructions are blank.
+- Rights: Dweck ITIS items. A bare "© Carol Dweck" on a third-party copy reserves nothing and there is no register row, so shipped as silence = permission.
+- Step 5b orchestrator re-check CONFIRMED: the s1a/s2b .sav labels match the rename claim. The live item x wave x cov_study table shows IQbelief3 only at wave 1 in studies 1/4/7, and IQbelief1/2 at waves 1 and 2 in studies 5/6 (214/340 each).
+- Audit WARN (row-count anomaly on IQbelief3) comes from the response data's design, not an itemtext defect. Explained in notes.csv.
+- Written 1 / blocked 0 / failed 0; yield 100%. Gates: normalize 0 changed, audit WARN (explained), verify_batch MISSING(exempt), lint clean, irw-validate ok. check_provenance shows the same pre-existing report (ye_2025_q25_scale mixed; review, not a failure). NOT_NEEDED row is in both verification_merged.csv and mapping_verification.csv.
+- Numbering: highest existing batch (652)+1 = 653. Cap batch_675 not reached. 18 pending remain.
