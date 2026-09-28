@@ -1,0 +1,98 @@
+[
+ {
+  "table": "adamczyk_2022_cesd",
+  "shard": "item_response_warehouse_6"
+ },
+ {
+  "table": "adamczyk_2022_fbss",
+  "shard": "item_response_warehouse_6"
+ },
+ {
+  "table": "adamczyk_2022_mhc_sf",
+  "shard": "item_response_warehouse_6"
+ },
+ {
+  "table": "adamczyk_2022_qri",
+  "shard": "item_response_warehouse_6"
+ },
+ {
+  "table": "adamczyk_2022_ras",
+  "shard": "item_response_warehouse_6"
+ },
+ {
+  "table": "adamczyk_2022_resta",
+  "shard": "item_response_warehouse_6"
+ },
+ {
+  "table": "adamczyk_2022_selsa",
+  "shard": "item_response_warehouse_6"
+ },
+ {
+  "table": "adamczyk_2022_upps",
+  "shard": "item_response_warehouse_6"
+ },
+ {
+  "table": "adamczyk_2022_workbat",
+  "shard": "item_response_warehouse_6"
+ },
+ {
+  "table": "basinska_2023_bat23",
+  "shard": "item_response_warehouse_6"
+ },
+ {
+  "table": "basinska_2023_bits_s1",
+  "shard": "item_response_warehouse_6"
+ },
+ {
+  "table": "basinska_2023_bits_s2",
+  "shard": "item_response_warehouse_6"
+ },
+ {
+  "table": "basinska_2023_work_overload",
+  "shard": "item_response_warehouse_6"
+ },
+ {
+  "table": "kazarovytska_2026_ingroup_event_attrib",
+  "shard": "item_response_warehouse_6"
+ },
+ {
+  "table": "qiang_2025_value_suppression",
+  "shard": "item_response_warehouse_3"
+ },
+ {
+  "table": "su_2024_gad7",
+  "shard": "item_response_warehouse_5"
+ },
+ {
+  "table": "su_2024_isi",
+  "shard": "item_response_warehouse_5"
+ },
+ {
+  "table": "su_2024_phq9",
+  "shard": "item_response_warehouse_5"
+ },
+ {
+  "table": "su_2024_pss14",
+  "shard": "item_response_warehouse_5"
+ },
+ {
+  "table": "wang_2024_self_efficacy_sources",
+  "shard": "item_response_warehouse_5"
+ },
+ {
+  "table": "wang_2024_speaking_self_efficacy",
+  "shard": "item_response_warehouse_5"
+ },
+ {
+  "table": "xue_2025_academic_procrastination",
+  "shard": "item_response_warehouse_5"
+ },
+ {
+  "table": "xue_2025_academic_stress",
+  "shard": "item_response_warehouse_5"
+ },
+ {
+  "table": "xue_2025_coping_style",
+  "shard": "item_response_warehouse_5"
+ }
+]
