@@ -28284,3 +28284,9 @@ batch_519 directory was removed. No work was discarded.
 - VICTIM_5 (constant attention check) is already dropped by the processing script; not a defect.
 - Written 1 / blocked 0 / failed 0; yield 100%. Gates: normalize 0 changed, audit PASS (no WARNs), verify_batch PASS, lint clean, irw-validate ok, check_provenance exit 0 (pre-existing ye_2025_q25_scale `mixed` review note, not this batch).
 - Numbering: highest (572)+1 = 573. Cap batch_617 not reached. 41 pending remain.
+
+## batch_574 — 2026-09-27T21:11 (1 table, 1 agent)
+- spain_2012_reality_conversation: written, 2 items (p34, p35), 8 rows. CIS Estudio 2973 "Conocimiento sobre la realidad sociopolítica y económica" (Dec 2012). This is a different study from the 2968 gender siblings; microdata md2973 was downloaded fresh into .cache/. mapping_basis data_labels (code = CIS variable name; DATA LIST cols 134/135 = questionnaire column markers (134)/(135) = variable labels). text_source study_materials, translation_source machine_translation (Spanish base + English _translated; issues-page line owed once live).
+- Questionnaire PDFs are image-only scans, so the wording was transcribed from a 200-dpi page image. Orchestrator Step 5b: re-read crop_p34_35_A.png; both stems and all four option labels match the shipped text character for character. "(MOSTRAR TARJETA Q)" dropped, as in the siblings; 8 "No recuerda"/9 N.C. are missing per the .do. Versions A and B print P.34/35 identically (FT: versions differ only in P.9/12/15/21/24/26/29), so pooling them is correct. Agent's rebuild from DA2973 reproduced the live table (5781/5781 rows, 2955 ids, 0 mismatches).
+- Written 1 / blocked 0 / failed 0; yield 100%. Gates: normalize 0 changed, audit PASS (no WARNs), verify_batch MISSING(exempt) (data_labels), lint clean, irw-validate ok, check_provenance exit 0 (pre-existing ye_2025_q25_scale `mixed` note only).
+- Numbering: highest (573)+1 = 574. Cap batch_617 not reached. 40 pending remain.
