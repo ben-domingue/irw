@@ -28261,3 +28261,11 @@ batch_519 directory was removed. No work was discarded.
 - Audit WARN (blank item_text 40%, blank option_text 60%) is explained in notes.csv. It is expected (the _1/_3 pair plus unlabeled resp 1-3) and is not a data defect.
 - Written 1 / blocked 0 / failed 0; yield 100%. Gates: normalize 0 changed, audit WARN (explained), verify_batch PASS, lint clean, irw-validate ok, check_provenance exit 0 (pre-existing `mixed` review note, not this batch).
 - Numbering: highest (569)+1 = 570. Cap batch_617 not reached. 44 pending remain.
+
+## batch_571 — 2026-09-27T20:44 → 20:53 (1 table, 1 agent)
+- `enders_2022_science_literacy` WRITTEN with caveats: 22 rows (SCILIT_1..11 x resp 0/1). mapping_basis=paper_order, text_source=study_materials. Source is the S1 Appendix of Enders et al. 2022 PLOS ONE e0276082 (CC BY), "Science literacy." (from Okamoto et al. 2001, NISTEP Report 72). correct_response carries the appendix's (True)/(False) key. No rights-register row applies.
+- The live table holds the raw true/false CHOICE, not correctness: Analyses.do lines 275-316 score it item by item, e.g. `correct2 = 1 if scilit_2 == 0`. So the appendix's "(1=correct; 0=incorrect)" was dropped from instructions. option_text is 1=True / 0=False. The source prints no labels, so the words come from the stem; the direction comes from the do-file key.
+- Verification PARTIAL. Direction: read as 1=True, %correct runs 47.5-88.8; flipped it would run 11.2-52.5. Key class: the appendix True set {1,3,4,6,9,10} is the unique best of the 462 possible 6-of-11 sets (7.730 vs 7.604). Item-rest r is all positive (.046-.241). NOT established: the order within each key class, e.g. SCILIT_6 vs _10 (P(1) .652 vs .654).
+- Orchestrator re-check (Step 5b): the do-file keying at lines 275-316 matches the appendix T/F key code by code. The raw.csv counts of 1s (1641/551/1798/1822/813/1335/1075/865/1205/1343/236) match the agent's report. verify_batch PASS.
+- Written 1 / blocked 0 / failed 0; yield 100%. Gates: normalize 0 changed, audit PASS, verify_batch PASS, lint clean, irw-validate ok, check_provenance exit 0 (pre-existing ye_2025_q25_scale `mixed` review note, not this batch).
+- Numbering: highest (570)+1 = 571. Cap batch_617 not reached. 43 pending remain.
