@@ -2143,3 +2143,5 @@ c19prc_uk_mcbride_2021_homespace,batch_714,data_labels,,exempt: data_labels,NOT_
 c19prc_uk_mcbride_2021_hopefulness,batch_714,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 c19prc_uk_mcbride_2021_humanitarianism,batch_715,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 c19prc_uk_mcbride_2021_hygiene,batch_715,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
+c19prc_uk_mcbride_2021_icd_anxiety,batch_716,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
+c19prc_uk_mcbride_2021_icd_depression,batch_716,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
