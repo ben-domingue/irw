@@ -2158,3 +2158,5 @@ c19prc_uk_mcbride_2021_phq15,batch_722,data_labels,,exempt: data_labels,NOT_NEED
 c19prc_uk_mcbride_2021_phq9,batch_722,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 c19prc_uk_mcbride_2021_polarization_brexit,batch_723,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 c19prc_uk_mcbride_2021_polarization_covid,batch_723,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
+c19prc_uk_mcbride_2021_protect,batch_724,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
+c19prc_uk_mcbride_2021_protective_behaviours,batch_724,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
