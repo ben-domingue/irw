@@ -2,7 +2,13 @@ library(dplyr)
 library(tidyr)
 library(stringr)
 
-df <- read.csv("tte_data.csv")
+# X_MR* hold the selected elements as a 20-character string of 0s and 1s
+# (codebook: "Character vector"). Read as numbers they became floats such as
+# 1.11110001e+19, losing leading zeros and digits (irw#2513), so read them as
+# text.
+hdr <- names(read.csv("tte_data.csv", nrows = 1))
+df <- read.csv("tte_data.csv",
+               colClasses = setNames(ifelse(grepl("^X_MR", hdr), "character", NA), hdr))
 
 colnames(df)
 
@@ -43,7 +49,7 @@ df_ct_raw <- df %>%
   select(c(id, group, cov_age, cov_gender, cov_education, cov_language, cov_country, cov_device), starts_with("X_CT")) %>%
   pivot_longer(X_CT01_01:X_CT09_03,
                names_to = "item",
-               values_to = "raw_resp") %>%
+               values_to = "resp_raw") %>%
   mutate(wave = case_when(
     str_ends(item, "_01") ~ 1,
     str_ends(item, "_02") ~ 2,
@@ -95,8 +101,9 @@ df_mr_raw <- df %>%
   select(c(id, group, cov_age, cov_gender, cov_education, cov_language, cov_country, cov_device), starts_with("X_MR"), -starts_with("X_MRp")) %>%
   pivot_longer(X_MR01_01:X_MR20_02,
                names_to = "item",
-               values_to = "raw_resp") %>%
-  mutate(wave = case_when(
+               values_to = "resp_raw") %>%
+  mutate(resp_raw = na_if(trimws(resp_raw), ""),  # 4 blank cells = no response
+         wave = case_when(
     str_ends(item, "_01") ~ 1,
     str_ends(item, "_02") ~ 2,
     TRUE ~ NA_integer_
