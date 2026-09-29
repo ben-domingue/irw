@@ -2163,3 +2163,5 @@ c19prc_uk_mcbride_2021_protective_behaviours,batch_724,data_labels,,exempt: data
 c19prc_uk_mcbride_2021_quarantine_support,batch_725,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 c19prc_uk_mcbride_2021_riskbehaviour_c19,batch_725,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 c19prc_uk_mcbride_2021_riskreduction_beliefs,batch_726,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
+c19prc_uk_mcbride_2021_secondwave_restrictions,batch_727,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
+c19prc_uk_mcbride_2021_selfharm_suicidality,batch_727,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
