@@ -2152,3 +2152,5 @@ c19prc_uk_mcbride_2021_mabs,batch_719,data_labels,,route 9-style source-vs-live 
 c19prc_uk_mcbride_2021_loneliness,batch_719,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 c19prc_uk_mcbride_2021_nationalism,batch_720,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 c19prc_uk_mcbride_2021_nationalpride,batch_720,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
+c19prc_uk_mcbride_2021_neighbourcomfort,batch_721,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
+c19prc_uk_mcbride_2021_partyidentity,batch_721,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
