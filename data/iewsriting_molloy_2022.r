@@ -8,7 +8,18 @@ df <- read.csv("student_data.csv")
 df <- df |>
   rename(id=Student_ID, cov_participating_course_grade=Participating_Course_Grade, cov_sat_total=FINAL_SAT_total, cov_cum_GPA=StudySemester_cumGPA)
 df <- df |> 
-  filter(across(starts_with("Q"), ~ !is.na(.)))
+  filter(if_all(starts_with("Q"), ~ !is.na(.)))  # across() in filter() errors in dplyr >= 1.1
+
+# FINAL_SAT_total carries 1036.86 for 161 of the 735 students in the ETS file
+# (128 of the 565 kept here). No SAT/ACT-concorded total is fractional, and
+# 1036.86 is the mean of the other 574 scores (1036.864) to two decimals: a
+# missing score filled with the mean. The ETS codebook
+# (docs/student_data_columns.csv) does not document it. Recode to NA so the
+# covariate holds only reported scores. irw#2513.
+SAT_MEAN_FILL <- 1036.86
+df <- df |>
+  mutate(cov_sat_total = ifelse(abs(cov_sat_total - SAT_MEAN_FILL) < 0.005,
+                                NA, cov_sat_total))
 
 # ---------- Map Q3 strings to values ----------
 Q3_df <- df |>
