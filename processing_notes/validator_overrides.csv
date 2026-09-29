@@ -1,1 +1,5 @@
 date,tool,table,checks,reason,user
+2026-09-25,irw-validate,itemtables/batch_428/mexico_2023_quality_transportationstations__items.csv,name_length,"Ben waived the 40-char name cap for item text 2026-09-25 (round_log, #2381 slice 7)",ben
+2026-09-25,irw-validate,itemtables/batch_430/selfcompassionscale_shortform_fuochi_2025__items.csv,name_length,"Ben 2026-09-25 waiver of the 40-char cap for item text (live table name, not renamable here)",ben
+2026-09-25,irw-validate,itemtables/batch_431/west_2021_retaliatory_aggression_study4_deq__items.csv,name_length,"Ben 2026-09-25 waiver of the 40-char name cap for item text: name is the existing live IRW table name",ben
+2026-09-25,irw-validate,itemtables/batch_455/eammi_grahe_2018_marriage_identity_allocation__items.csv,name_length,"Ben's 2026-09-25 waiver of the 40-char name cap for item text (live table name, cannot shorten)",ben
