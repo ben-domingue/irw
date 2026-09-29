@@ -50,8 +50,16 @@ Coding notes
   in a single achievement table. The discarded information -- which distractor
   a learner picked -- is preserved separately in the nominal companion table.
 * `6` ("Not reached") and `9` ("Omitted or invalid") are the instrument's
-  missing codes and are set to NA. Neither actually occurs in this file, but
-  the script filters them so a future version cannot slip them in as scores.
+  missing codes and are dropped as non-responses (standard C4). They are
+  common, not absent: 3,107 omitted and 4,032 not-reached cells across the 15
+  items among the 1,894 learners who got this passage. They look absent
+  only because the .sav declares both as SPSS user-missing values, which
+  `pyreadstat.read_sav` turns into NaN unless called with
+  `user_missing=True`, so the `MISSING` filter below never fires. The
+  distinction between omitted and not reached is therefore lost in both this
+  table and the nominal companion. PIRLS scores omitted as incorrect and
+  not-reached as not administered for item calibration; whether IRW should
+  keep them is open (#2513).
 * Covariates: learner sex, test language, booklet, and the school and class
   ids, which make the nesting available.
 """
