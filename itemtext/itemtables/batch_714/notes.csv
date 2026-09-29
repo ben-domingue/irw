@@ -1,0 +1,2 @@
+table,note
+c19prc_uk_mcbride_2021_homespace,"Pass with data caveat: Home3/Home4 (child items) have 420/1051 and 427/1026 responses at the midpoint 4, vs 83-125 on the other items; 302 and 304 of those midpoints come from respondents with 0 children in W2_Children_household, i.e. non-parents answered neutral instead of skipping. Also: measures information 2.2.3.2 says a not-applicable option was included, but the W2 questionnaire grid and .sav show only 7 agreement points plus skip (-99). public_note drafted; drop per issues-page bar if judged a data rather than text issue."
