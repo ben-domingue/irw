@@ -4,8 +4,8 @@ The same deposit (same 1,244 people) is also ingested as much_tte_2025_*, which 
 2026-09-28 (decision D3 in oneoff/2513-course-data-problems/README.md). Its cov_ac and cov_disruptions were
 ported to much_tte_2025_* in PR #2535. Ben approved the retirement 2026-09-28.
 
-Removes five response tables from item_response_warehouse and two item-text tables from irw_text.
-KEEP: the five much_tte_2025_* tables, and their item text (irw_text_2).
+Removes five response tables from item_response_warehouse_2 and two item-text tables (shard found by listing).
+KEEP: the five much_tte_2025_* tables (item_response_warehouse) and their item text.
 
 Dry run by default. Set APPLY=1 to delete.
 """
@@ -17,18 +17,12 @@ os.environ["REDIVIS_API_TOKEN"] = irw_secrets.load_write_token("withdraw_much_du
 import redivis
 
 OWNER = "datapages"                    # metadata/redivis_config.R
-PLAN = {
-    "item_response_warehouse": (
-        {f"test_taking_much_2025_{s}" for s in ("ao", "cm", "ct", "ef", "mr")},
-        {f"much_tte_2025_{s}" for s in ("actionorientation", "concentrationtask", "currentmotivation",
-                                        "effort", "matrixreasoning")},
-    ),
-    "irw_text": (
-        {"test_taking_much_2025_cm__items", "test_taking_much_2025_ef__items"},
-        set(),
-    ),
-}
-TEXT_KEEP = ("irw_text_2", {"much_tte_2025_currentmotivation__items", "much_tte_2025_effort__items"})
+RESP = ("item_response_warehouse_2", {f"test_taking_much_2025_{s}" for s in ("ao", "cm", "ct", "ef", "mr")})
+TEXT_TARGETS = {"test_taking_much_2025_cm__items", "test_taking_much_2025_ef__items"}
+TEXT_SHARDS = ("irw_text", "irw_text_2", "irw_text_3")
+KEEP = ("item_response_warehouse", {f"much_tte_2025_{s}" for s in ("actionorientation", "concentrationtask",
+                                    "currentmotivation", "effort", "matrixreasoning")})
+TEXT_KEEP = {"much_tte_2025_currentmotivation__items", "much_tte_2025_effort__items"}
 
 apply = os.environ.get("APPLY") == "1"
 
@@ -37,22 +31,35 @@ def names(ds_name, version):
     return {t.name for t in redivis.organization(OWNER).dataset(ds_name, version=version).list_tables(max_results=2000)}
 
 
-for ds_name, (targets, keep) in PLAN.items():
-    current = names(ds_name, "current")
-    if targets - current:
-        sys.exit(f"ABORT: not in {ds_name} current: {sorted(targets - current)}")
-    if keep - current:
-        sys.exit(f"ABORT: keep set missing from {ds_name} current: {sorted(keep - current)}")
-if TEXT_KEEP[1] - names(TEXT_KEEP[0], "current"):
-    sys.exit(f"ABORT: much_tte item text missing from {TEXT_KEEP[0]}: {sorted(TEXT_KEEP[1] - names(TEXT_KEEP[0], 'current'))}")
+def text_home():
+    """Each target item-text table's shard, found by listing (the name does not say which)."""
+    home, keep_seen = {}, set()
+    for shard in TEXT_SHARDS:
+        cur = names(shard, "current")
+        for t in TEXT_TARGETS & cur:
+            home.setdefault(shard, set()).add(t)
+        keep_seen |= TEXT_KEEP & cur
+    found = set().union(*home.values()) if home else set()
+    if found != TEXT_TARGETS:
+        sys.exit(f"ABORT: item text not found: {sorted(TEXT_TARGETS - found)}")
+    if keep_seen != TEXT_KEEP:
+        sys.exit(f"ABORT: much_tte item text missing: {sorted(TEXT_KEEP - keep_seen)}")
+    return home
+
+
+if RESP[1] - names(RESP[0], "current"):
+    sys.exit(f"ABORT: not in {RESP[0]} current: {sorted(RESP[1] - names(RESP[0], 'current'))}")
+if KEEP[1] - names(KEEP[0], "current"):
+    sys.exit(f"ABORT: keep set missing from {KEEP[0]}: {sorted(KEEP[1] - names(KEEP[0], 'current'))}")
+PLAN = {RESP[0]: RESP[1], **text_home()}
 
 if not apply:
-    for ds_name, (targets, _) in PLAN.items():
+    for ds_name, targets in PLAN.items():
         print(f"DRY RUN {ds_name}: would delete {sorted(targets)}")
     print("Nothing deleted. Re-run with APPLY=1.")
     sys.exit(0)
 
-for ds_name, (targets, keep) in PLAN.items():
+for ds_name, targets in PLAN.items():
     ds = redivis.organization(OWNER).dataset(ds_name)
     ds.create_next_version(if_not_exists=True)
     draft = redivis.organization(OWNER).dataset(ds_name, version="next")
@@ -64,5 +71,5 @@ for ds_name, (targets, keep) in PLAN.items():
         print("deleted:", ds_name, name)
     after = names(ds_name, "next")
     assert before - after == targets, f"MISMATCH in {ds_name}: removed={sorted(before - after)}"
-    assert keep <= after, f"went missing from {ds_name}: {sorted(keep - after)}"
-print("OK: removed exactly the targets; much_tte_2025_* and their item text intact. Drafts must be RELEASED.")
+assert KEEP[1] <= names(KEEP[0], "current"), "much_tte_2025_* went missing"
+print("OK: removed exactly the targets; much_tte_2025_* intact. Drafts must be RELEASED.")
