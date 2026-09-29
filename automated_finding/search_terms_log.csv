@@ -8117,3 +8117,4 @@ date,query,output_file,notes
 2026-09-28,cross-cultural adaptation,runs/pmc_scout2_2026-09-28_triage.csv,"PMC scout-2 sweep; terms 51-100 of pmc_term_backlog_2026-09-25.csv; 435 candidates over 11 journals; NOT searched (Europe PMC 503 / run killed): screports psychometrika"
 2026-09-28,intercultural,runs/pmc_scout2_2026-09-28_triage.csv,"PMC scout-2 sweep; terms 51-100 of pmc_term_backlog_2026-09-25.csv; 435 candidates over 11 journals; NOT searched (Europe PMC 503 / run killed): screports psychometrika"
 2026-09-28,social comparison,runs/pmc_scout2_2026-09-28_triage.csv,"PMC scout-2 sweep; terms 51-100 of pmc_term_backlog_2026-09-25.csv; 435 candidates over 11 journals; NOT searched (Europe PMC 503 / run killed): screports psychometrika"
+2026-09-29,[weekly] 15 terms x journals=plosone,runs/plos_monthly_candidates_weekly_2026-09-29.csv,plos monthly-script automated run; mode=weekly; 55 candidates triaged; 15/15 terms visited (13 hit per-term cap 4)
