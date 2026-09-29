@@ -9,8 +9,16 @@ def convert_to_irw():
         'raw_data/Study2_data.csv': 'study2'
     }
     
+    ID_SOURCE = {
+        'study1_morf': 'row',
+        'study1_koeberl': 'Study_ID',
+        'study1_jauk': 'row',
+        'study2': 'row',
+    }
+
     covs_to_include = {
         # Study 2
+        'dispcode',
         'einverst_bedingungen', 'study_pref', 'biosex', 'gender', 'gender_else', 
         'age', 'lang_level', 'country_orig', 'country_curr', 'edu', 'job', 
         'job_else', 'fam', 'fam_pos', 'ment_dis',
@@ -35,10 +43,14 @@ def convert_to_irw():
     for f, prefix in files.items():
         df = pd.read_csv(f, sep=';', low_memory=False)
         
-        if 'Study_ID' in df.columns:
+        # id is chosen per file, not by a fallback chain. Only Koeberl has a
+        # person identifier (Study_ID). Morf, Jauk and Study 2 have none: each
+        # source row is one respondent, so the row number is the id. Study 2
+        # used to fall through to `dispcode`, which is EFS Survey's completion
+        # status (22/31/32), so all 18 study2 tables had 3 "participants"
+        # (irw#2531). dispcode is kept as cov_dispcode.
+        if ID_SOURCE[prefix] == 'Study_ID':
             df = df.rename(columns={'Study_ID': 'id'})
-        elif 'dispcode' in df.columns:
-            df = df.rename(columns={'dispcode': 'id'})
         else:
             df.insert(0, 'id', df.index + 1)
             
@@ -52,7 +64,10 @@ def convert_to_irw():
             if c and c not in ['c', 'p', 'v', 'kontroll', 'study', 'dispcode', 'id', 'sample', 'age', 'sex', 'valid', 'filter']:
                     if 'mean' in col.lower() or 'sum' in col.lower() or 'break' in col.lower():
                         continue
-                    if re.search(r'\d+', col) or 'PNI_Example' in col:
+                    # PNI_Example is the PNI's demonstration item, not one of its
+                    # 28 items; the authors' Study 2 script leaves it out, and 1,076
+                    # of 1,586 respondents did not answer it (irw#2531).
+                    if re.search(r'\d+', col):
                         if c not in construct_cols:
                             construct_cols[c] = []
                         construct_cols[c].append(col)
@@ -77,6 +92,11 @@ def convert_to_irw():
                 # are off the 0/1 scale and are dropped as entry errors.
                 df_melt = df_melt[df_melt['resp'].isin([0, 1])]
             else:
+                # Study 2 was run in EFS Survey: -77 = item not shown and 0 = shown
+                # but not answered; every scale's options are coded from 1 (AUDIT
+                # 9-10 as 1/3/5). The authors' script sets 0 to NA
+                # (2024-05-15_RSkript_HSNS_Val.R, line 83), so 0 is dropped here
+                # too (checked for all 18 study2 tables, irw#2531).
                 df_melt = df_melt[df_melt['resp'] > 0]
             df_melt['resp'] = df_melt['resp'].astype(int)
             
