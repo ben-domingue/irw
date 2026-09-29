@@ -166,3 +166,46 @@ All three are withdrawn in drafts (item_response_warehouse, _3). The alsuhibani 
   a restriction?
 - IFEval prompts (Apache-2.0): the import was scoped scores-only.
 - aziz_2020_bmq: the register row says `escalate`.
+
+## Wave 9 (2026-09-29)
+
+77 tables added since the 09-25 rebuild, in 30 deposits, triaged with the same brief: 9 OBTAINABLE, 41 RIGHTS_BLOCK
+(24 Neuro-QoL), 21 NEEDS_HUMAN, 4 UNREACHABLE, 1 NOT_PUBLISHED, 1 NOT_ITEM_TEXT. Spot-check 11/11 confirmed (two
+evidence/rights texts corrected in place: the blended BARS origin is the CC BY NAER 2019 paper, not the CC BY-ND
+in-person article; guo_2025_ar maps to ARS-30 items 13, 4, 17, 30, 9). OBTAINABLE -> slice 19.
+
+**Rights questions for Ben**
+- fcupanas_cffsdas_reyna_2018_7pt: Moriondo 2012 Spanish PANAS carries three licences (OSF docx CC BY-SA 4.0; CONICET
+  repository CC BY-NC-SA 2.5; journal page now CC BY 4.0). Which governs? English PANAS (register ship) is a fallback.
+- csibra_2025_dafrs_*: DAFRS first published CC BY (2024) but partly built from Dog ARS (Vas 2007, itself from the
+  Guilford ADHD RS-IV) and human functioning scales (one Pearson SSIS-RS). Do dog-adapted items inherit them?
+- qiang_2025_value_suppression: 3 items near-verbatim Hewlin (2009) Facades of Conformity (PsycTESTS t08584-000), but
+  the paper never names it. Hewlin's items (hold) or the authors' paraphrase?
+- korner_2022_gpsps_*: German GPSPS first published CC BY (Körner 2022) translating Anderson et al. 2012 (closed,
+  PsycTESTS t24445-000). Held under the PsycTESTS rule; does the CC BY translation outrank it?
+- silvia_2021_bicb: Batey's BICB posted by Silvia on OSF under CC BY 4.0, otherwise unpublished; PsycTESTS t33328. Does
+  Silvia's CC BY outrank the hold?
+- polner_2018_ais: held on a PsycTESTS record (t16796-000) that may be the Greek version only, not confirmed.
+- New PsycTESTS holds (wording found): ge_2025 x4 (CWMS, EESC, MCQ-CR), fredborg_2018_tms, guo_2025_tes, polner_2018_olife,
+  polner_2018_rei, durand_2020_asrs, vinasvelazquez_2022_vsabhc.
+- Draft register block rows (register_rows_draft_2382.csv): Neuro-QoL (24; same HealthMeasures terms as PROMIS), IKDC,
+  CLKT Malay, SD4, in-person teaching BARS, PozQoL, AIS.
+
+**Hygiene**
+- The PROMIS register row cites a HealthMeasures Terms of Use PDF path that now 404s (site rebuilt 2026-09-14). Current copy:
+  https://healthmeasures.net/wp-content/uploads/2026/06/Terms-of-Use_HM_approved_1-12-17-Updated-Copyright-Notices.pdf
+- The Estrella OSF deposit (CC BY 4.0) redistributes the PROMIS-29 and PROMIS self-efficacy form PDFs.
+- guo_2025_le is the UWES under another name ("Learning Engagement Scale"); a name-based register sweep would miss it.
+
+**Extraction notes (slice 19)**
+- korner_2022_gpsps_s3_clinical: item order differs from Study 1 (S3 PS01_03 = S1 item 4; PS01_07 = S1 item 3). Map by label.
+- assanangkornchai_2022_cannabis_*: codebook labels differ from questionnaire wording (V503); map by questionnaire number.
+- matosaslopez_2022_bars_teaching_blended: wording is 5 behavioural anchors per category, only as images (Behav Sci 2022
+  Appendix A); needs transcription and option-level anchor text.
+- ha_2026_aspire_affect: 5 of 7 adjectives; insec and attr blank.
+
+**Unreachable, worth a retry**: szymanska_2017 x3 (author's own Polish scales; originating papers cert error / paywall),
+durand_2020_dosq (Preprints.org 403).
+
+**Personal data**: none served. Neuro-QoL deposit codebook has telephone area code (cqs1_1); data/neuroqol_1b.py drops it.
+VSABH-C .sav has free-text birthplace/city columns (source deposit only; not in IRW).
