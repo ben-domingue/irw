@@ -19,7 +19,7 @@ option letter itself, an unordered category.
 
 Table written (to output_noncore/)
 ----------------------------------
-mthimkhulu_2023_pirls_reading_nom   4 items, responses "A".."D"
+mthimkhulu_2023_pirls_reading_nom   4 items, text "A".."D" or "omitted", resp 0/1
 
 Coding notes
 ------------
@@ -27,13 +27,16 @@ Coding notes
   included; the constructed-response items are already scores and belong in
   the core table alone.
 * The option letter is taken from the item's own value labels, with the
-  correctness asterisk stripped -- so "C*" becomes "C". The key is not encoded
-  in this table; it is recoverable from the core table, or from the labels.
-* `6` ("Not reached") and `9` ("Omitted or invalid") are missing codes and are
-  dropped rather than treated as categories. They are frequent in the source
-  (see the core script's notes), but the .sav declares them SPSS user-missing,
-  so `pyreadstat.read_sav` already returns them as NaN and the `MISSING`
-  filter is a no-op. Reading with `user_missing=True` would recover them.
+  correctness asterisk stripped -- so "C*" becomes "C". `resp` carries the
+  core table's score alongside it (1 = the starred option, 0 = any other
+  option or omitted), as the nominal tranche requires (datastandard.md, "The
+  raw response and the nominal tranche").
+* `9` ("Omitted or invalid") becomes the category `"omitted"`: the learner saw
+  the item and chose no option, which is a response in its own right under the
+  datastandard's "omitted vs not reached" exception (irw#2513, 2026-09-28);
+  the core table scores the same cells 0 with `resp_raw = "9"`. `6` ("Not
+  reached") is dropped: the item was never administered. The .sav declares
+  both as SPSS user-missing, so it is read with `user_missing=True`.
 * The same learner `id` keys the core table, so the two join.
 """
 
@@ -48,7 +51,8 @@ import requests
 FILES_API = "https://api.figshare.com/v2/articles/24784086/files"
 UA = {"User-Agent": "Mozilla/5.0 (IRW-research)"}
 OUTDIR = os.path.join("..", "automated_finding", "output_noncore")
-MISSING = {6.0, 9.0}
+NOT_REACHED = 6.0
+OMITTED = 9.0
 
 
 def load():
@@ -60,7 +64,7 @@ def load():
     path = os.path.join(tempfile.gettempdir(), "pirls2023.sav")
     with open(path, "wb") as fh:
         fh.write(raw.content)
-    return pyreadstat.read_sav(path)
+    return pyreadstat.read_sav(path, user_missing=True)
 
 
 def main():
@@ -76,14 +80,19 @@ def main():
         if len(opts) < 2:
             continue          # constructed-response item; scores, not options
         items.append(c)
-        col = d[c].where(~d[c].isin(MISSING))
-        sub = pd.DataFrame({"id": d["id"], "item": c, "text": col.map(opts)})
+        col = d[c].where(d[c] != NOT_REACHED)
+        text = col.map(opts).where(col != OMITTED, "omitted")
+        key = [k for k, v in vl.items() if str(v).strip().endswith("*")]
+        assert len(key) == 1, (c, vl)
+        # resp is the core table's score: 1 = keyed option, 0 = other or omitted
+        resp = (col == key[0]).astype(int)
+        sub = pd.DataFrame({"id": d["id"], "item": c, "resp": resp, "text": text})
         rows.append(sub.dropna(subset=["text"]))
 
     assert items, "no multiple-choice items found"
     long = pd.concat(rows, ignore_index=True)
     long["id"] = long["id"].astype(int)
-    long = long[["id", "item", "text"]]
+    long = long[["id", "item", "resp", "text"]]
 
     assert not long.duplicated(["id", "item"]).any()
     assert long.groupby("item")["text"].nunique().min() > 1

@@ -192,6 +192,8 @@ long = long[(long["resp"] >= 1) & (long["resp"] <= valid_max)]
 
 **A sentinel can hide inside the valid range, and `dropna()` will not catch it.** Check the codebook (variable-description file, OSF wiki, or paper) for every response scale before trusting raw codes as `resp`. A source column can be pure `int64` with zero `NaN`s and still be wrong: a category like "don't know" / "not applicable" / "refused" is a non-response, not a step on the ordinal scale, even though it's stored as an in-range integer — e.g. a 3-item financial-literacy quiz coded `0=incorrect, 1=correct, 2=don't know`; `2` is not "more correct" than `1`. Identify these values from the codebook and filter out those specific item-responses (don't recode them to 0 and don't drop the person entirely) before the file is considered ordinal and upload-ready.
 
+**Exception: omitted vs. not reached in achievement tests (IEA and similar).** When the source documents *separate* codes for an item the respondent saw and skipped ("omitted") and an item they never reached (e.g. TIMSS/PIRLS 9/99 omitted, 6/96 not reached), keep the distinction: score **omitted as `resp = 0`** and keep the source's code in `resp_raw`; **drop not-reached rows** (the item was never administered to that person). This is how the IEA scores items for calibration. Apply it only where the source documents both codes; a generic missing code, or a source that pools the two, follows the default above (filter it out). Decided in irw#2513 (2026-09-28); see C4 in the site standard.
+
 **Parse text-coded responses.** Some datasets store responses as strings like `"3 - Sometimes"` or `"Strongly agree (5)"`. Extract the leading integer:
 ```python
 long["resp"] = long["resp"].str.extract(r"(\d+)").astype(float)

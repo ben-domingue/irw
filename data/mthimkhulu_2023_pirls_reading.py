@@ -14,7 +14,7 @@ relevance filter's instrument list precisely for this.
 
 Table written
 -------------
-mthimkhulu_2023_pirls_reading   15 items, resp 0-3
+mthimkhulu_2023_pirls_reading   15 items, resp 0-3, resp_raw = source code
 
 A companion nominal table (the raw multiple-choice option chosen) is built by
 `data/mthimkhulu_2023_pirls_reading_nominal.py`.
@@ -49,17 +49,17 @@ Coding notes
   Scoring is what makes them commensurate with the constructed-response items
   in a single achievement table. The discarded information -- which distractor
   a learner picked -- is preserved separately in the nominal companion table.
-* `6` ("Not reached") and `9` ("Omitted or invalid") are the instrument's
-  missing codes and are dropped as non-responses (standard C4). They are
-  common, not absent: 3,107 omitted and 4,032 not-reached cells across the 15
-  items among the 1,894 learners who got this passage. They look absent
-  only because the .sav declares both as SPSS user-missing values, which
-  `pyreadstat.read_sav` turns into NaN unless called with
-  `user_missing=True`, so the `MISSING` filter below never fires. The
-  distinction between omitted and not reached is therefore lost in both this
-  table and the nominal companion. PIRLS scores omitted as incorrect and
-  not-reached as not administered for item calibration; whether IRW should
-  keep them is open (#2513).
+* `6` ("Not reached") and `9` ("Omitted or invalid") are kept apart, following
+  PIRLS's own calibration scoring and the datastandard's "omitted vs not
+  reached" exception (irw#2513, 2026-09-28): an **omitted** item is scored
+  `resp = 0` with `resp_raw = "9"`; a **not-reached** item was never
+  administered and its row is dropped. The .sav declares both as SPSS
+  user-missing, so the file is read with `user_missing=True` (without it
+  pyreadstat returns NaN and both codes vanish). They are common: 3,107
+  omitted and 4,032 not-reached cells across the 15 items among the 1,894
+  learners who got this passage. `resp_raw` carries the source code for every
+  row (option 1-4 for multiple choice, the stored score for constructed
+  response).
 * Covariates: learner sex, test language, booklet, and the school and class
   ids, which make the nesting available.
 """
@@ -76,7 +76,8 @@ import requests
 FILES_API = "https://api.figshare.com/v2/articles/24784086/files"
 UA = {"User-Agent": "Mozilla/5.0 (IRW-research)"}
 OUTDIR = "irw_output"
-MISSING = {6.0, 9.0}
+NOT_REACHED = 6.0
+OMITTED = 9.0
 
 COVS = {"ITSEX": "cov_sex", "ITLANG_SA": "cov_test_language",
         "IDBOOK": "cov_booklet", "IDSCHOOL": "cov_school", "IDCLASS": "cov_class"}
@@ -91,7 +92,7 @@ def load():
     path = os.path.join(tempfile.gettempdir(), "pirls2023.sav")
     with open(path, "wb") as fh:
         fh.write(raw.content)
-    return pyreadstat.read_sav(path)
+    return pyreadstat.read_sav(path, user_missing=True)
 
 
 def mc_key(value_labels):
@@ -109,22 +110,26 @@ def main():
     cov_cols = [c for c in COVS.values() if c in d.columns]
     assert d["id"].is_unique
 
-    scored = d[["id"] + cov_cols].copy()
+    raw = d[["id"] + cov_cols + items].melt(
+        id_vars=["id"] + cov_cols, value_vars=items,
+        var_name="item", value_name="code")
+    raw = raw.dropna(subset=["code"])              # booklet did not carry the item
+    raw = raw[raw["code"] != NOT_REACHED].copy()   # never administered: no response
     n_mc = 0
+    raw["resp"] = raw["code"]
     for c in items:
-        col = d[c].where(~d[c].isin(MISSING))
         key = mc_key(meta.variable_value_labels.get(c, {}))
         if key is not None:
-            col = (col == key).astype(float).where(col.notna())
+            m = raw["item"] == c
+            raw.loc[m, "resp"] = (raw.loc[m, "code"] == key).astype(float)
             n_mc += 1
-        scored[c] = col
+    raw.loc[raw["code"] == OMITTED, "resp"] = 0    # omitted: scored incorrect
+    raw["resp_raw"] = raw["code"].astype(int).astype(str)
 
-    long = scored.melt(id_vars=["id"] + cov_cols, value_vars=items,
-                       var_name="item", value_name="resp")
-    long = long.dropna(subset=["resp"])
+    long = raw
     long["resp"] = long["resp"].astype(int)
     long["id"] = long["id"].astype(int)
-    long = long[["id", "item", "resp"] + cov_cols]
+    long = long[["id", "item", "resp", "resp_raw"] + cov_cols]
 
     assert long["resp"].between(0, 3).all()
     assert long.groupby("item")["resp"].nunique().min() > 1
