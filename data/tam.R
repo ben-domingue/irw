@@ -47,7 +47,12 @@ library(dplyr)
 
 timss_tam <- read_csv("timss_tam.csv")
 
-# Set missing values
+# Set missing values. TIMSS codes omitted as 9 (MC) / 99 (CR) and not reached
+# as 6 (MC) / 96 (CR); the TAM data keeps them apart (1,768 omitted and 84
+# not-reached cells in these 11 items, plus 44 NA). Both are set to NA here
+# (agreed in #1046), so the distinction is not carried into timss_tam. TIMSS
+# itself scores omitted as incorrect and not-reached as not administered for
+# item calibration; whether IRW should follow that is open (#2513).
 timss_tam$resp[timss_tam$resp %in% c(6, 9, 96, 99)] <- NA
 
 # Recode CR items
