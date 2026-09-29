@@ -20,6 +20,9 @@ import irw_secrets
 os.environ["REDIVIS_API_TOKEN"] = irw_secrets.load_write_token("withdraw_wrongnow_2026_09_29")
 import redivis
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from ledger import record
+
 OWNER   = "datapages"                  # metadata/redivis_config.R
 DATASET = "item_response_warehouse_4"
 TARGETS = {"c19prc_uk_mcbride_2021_socialdistance", "c19prc_uk_mcbride_2021_lockdown_contact_behaviours"}
@@ -68,5 +71,7 @@ after = names(DATASET, "next")
 removed = before - after
 assert removed == TARGETS, f"MISMATCH: removed={sorted(removed)}"
 assert KEEP <= after, f"went missing: {sorted(KEEP - after)}"
+record(TARGETS, dataset=DATASET, reason="wrong_data", refs="#2382 #2542",
+       note="W5/W6 items pooled by number; codes mix different questions across waves", script=__file__)
 print(f"OK: removed exactly {sorted(TARGETS)} from {DATASET}; {len(KEEP)} c19prc siblings intact. "
       "Draft must be RELEASED to take effect.")
