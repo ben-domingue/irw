@@ -88,6 +88,14 @@ COVS = {
     "COVVAX": "cov_covid_vaccinated",
 }
 
+# Science literacy is a true/false knowledge quiz. The raw SCILIT_i records
+# the answer marked (1 = "true", 0 = "false"), not whether it was right.
+# Analyses.do lines 274-316 score it: correct_i = SCILIT_i for items
+# 1, 3, 4, 6, 9, 10 (true statements) and 1 - SCILIT_i for items 2, 5, 7,
+# 8, 11 (false statements). resp is scored the same way, so 1 = correct on
+# every item (irw#2513); before, a false statement's "true" counted as 1.
+SCILIT_FALSE = {f"SCILIT_{i}" for i in (2, 5, 7, 8, 11)}
+
 # Constant across all respondents -- embedded attention checks, not responses.
 DEGENERATE = ["COVCONS_8", "MISC_9", "VICTIM_5"]
 
@@ -122,6 +130,9 @@ def main():
                        var_name="item", value_name="resp")
         long["resp"] = pd.to_numeric(long["resp"], errors="coerce")
         long = long.dropna(subset=["resp"])
+        if table == "enders_2022_science_literacy":
+            flip = long["item"].isin(SCILIT_FALSE)
+            long.loc[flip, "resp"] = 1 - long.loc[flip, "resp"]
 
         bad = long.loc[~long["resp"].isin(permitted), "resp"].unique()
         assert len(bad) == 0, f"{table}: off-scale resp values: {bad}"
