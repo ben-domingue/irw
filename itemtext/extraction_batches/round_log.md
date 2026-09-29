@@ -29462,3 +29462,4 @@ PASS; weida stays PARTIAL), lint, irw-validate and check_provenance. It is uploa
 - Step 5b: orchestrator re-fetched the live table: RDS-II weighted % yes V503 79.6, V516 73.8, V501 83.6, V502 65.9, V504 99.1, V513 51.9; paper.xml Table 3 "Treatment of spasticity in multiple sclerosis 73.8 (67.5, 80.1)"; s003.xlsx Code sheet "V503 1 Yes 2 No Treatment of spasticity in multiple sclerosis". Override confirmed.
 - FOR BEN: data/assanangkornchai_2022_cannabis.py header says the Thai wording is not deposited; s001.pdf is the Thai questionnaire. The sibling cannabis_harms (V521-V532, next in queue) can reuse the same sources and weighting check.
 - Numbering: highest numeric batch (730)+1 = 731. Cap batch_759 not reached. Queue: 7 pending.
+- Orchestrator note: the done-status rewrite dropped queue_state.csv's CRLF line endings (same slip as batch_729) and was pushed in 59c265fb; restored in the follow-up commit. Rewrite that file with the line ending it already has.
