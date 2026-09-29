@@ -189,6 +189,14 @@ Two cautions the tool exists to enforce:
   page renders the file, and nothing else will tell a user the table changed.
   First-time tables, `__items` tables and rights withdrawals are not recorded
   there (#2168).
+- **A caveat about the source gets a line in `metadata/data_notes.csv`.** When
+  a table is faithful to its source but a user needs to know something the
+  table cannot express (a questionable source key, mean-filled covariates, what
+  `wave` means, pooled forms), append a row (`table, note, issue, date`; one
+  row per table, exact names, LF line endings). It shows as a plain Notes
+  section on the table's landing page, with no banner or `noindex`, and
+  `get_processing_notes` returns it. IRW defects go to `known_issues.tsv` in
+  irw_site and released fixes to `table_changes.csv`, never here (#2529).
 
 The check counts *time since the last release*, not the age of a table or of the
 draft — both of those reset whenever the draft is touched, so both would read as

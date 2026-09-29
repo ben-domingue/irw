@@ -74,5 +74,22 @@ class ScriptIndexTest(unittest.TestCase):
             self.assertEqual(si.catalogued_tables(md), {"liem_2024_attitude_env", "weida_2020_cesd10"})
 
 
+    def test_manual_rows_keep_only_tracked_scripts(self):
+        import tempfile
+
+        with tempfile.TemporaryDirectory() as tmp:
+            f = Path(tmp) / "table_scripts_manual.csv"
+            f.write_text(
+                "table,scripts\n"
+                "himmelstein-number_series-2025,data/data_number_series.py\n"
+                "gone_table,data/renamed_away.py\n",
+                encoding="utf-8")
+            manual = si.read_manual(f, ["data/data_number_series.py"])
+        # A hyphenated, run-time-built name the token scan can never see (#2529).
+        self.assertEqual(manual, {"himmelstein-number_series-2025": ["data/data_number_series.py"]})
+
+    def test_missing_manual_file_is_empty(self):
+        self.assertEqual(si.read_manual(Path("/nonexistent/x.csv"), []), {})
+
 if __name__ == "__main__":
     unittest.main()
