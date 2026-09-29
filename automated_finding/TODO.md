@@ -5,7 +5,7 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
 ## From the 2026-09-29 JPSP 131(4) batch (Lu 2026 + Zhang 2026)
 
-- [ ] **25 tables + 6 item text tables need uploading**: `irw_output/lu_2026_*`
+- [x] **25 tables + 6 item text tables uploaded** (ben-domingue, confirmed 2026-09-29). Original:: `irw_output/lu_2026_*`
   (8) and `irw_output/zhang_2026_{mcq,moral,bfi2,courage,tcs,hexaco,wisdom,ipip,
   virtue,episode}*` (17), then `itemtext_output/zhang_2026_ipip_*`,
   `_virtue_states`, `_episode_affect` (6). Dictionary/tag rows are already staged.
