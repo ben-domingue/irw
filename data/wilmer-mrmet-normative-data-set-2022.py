@@ -28,6 +28,64 @@ def process_date_column(df, date_col='Date'):
     
     return df, first_date
 
+# ARC's terms cover the RMET/MRMET test materials, including the four option words
+# shown with each photo, so the tables must not reshare them (irw#2513, D13, 2026-09-28).
+# resp_raw holds a per-item option code instead of the chosen word: "1" = the keyed
+# answer (the word the source's accuracy column scores 1; normally also named in the
+# header row just above the column names), "2"-"4" = the three
+# distractors in alphabetical order of their English word. The codes are derived here
+# from the source file at build time; do not write the word->code map anywhere public.
+OPTION_WORD = re.compile(r'^[a-z\-]+$')
+
+
+def code_options(irw_df, input_file, header_row, close_call=0.10):
+    top = pd.read_excel(input_file, header=None, nrows=header_row + 1)
+    keys = {}
+    for i, name in enumerate(top.iloc[header_row]):
+        m = re.fullmatch(r'response_(\d+)', str(name))
+        if m:
+            keys[int(m.group(1))] = str(top.iloc[header_row - 1, i]).strip()
+    words = irw_df['resp_raw'].astype('string').str.strip()
+    counts, options = {}, {}
+    for k in keys:
+        w = words[irw_df['item'] == f'item_{k}'].dropna()
+        counts[k] = w[w.map(lambda x: bool(OPTION_WORD.match(x)) and x != 'none')].value_counts()
+        options[k] = list(counts[k].index[:4])
+    codes = pd.Series(pd.NA, index=irw_df.index, dtype='string')
+    for k, key in keys.items():
+        vc, opts = counts[k], options[k]
+        # "1" is the word the source scores as correct. MRMET item_16's header row names
+        # a different word than its accuracy column scores; resp follows accuracy.
+        item_rows = irw_df['item'] == f'item_{k}'
+        scored = set(words[item_rows & (irw_df['resp'] == 1)].dropna())
+        if len(scored) != 1:
+            raise ValueError(f'item_{k}: {len(scored)} words are scored correct, expected 1')
+        if key != next(iter(scored)):
+            print(f'item_{k}: header-row key differs from the scored answer; using the scored one')
+            key = next(iter(scored))
+        # The options are the item's four most frequent English words. MRMET also has a
+        # few stray words (1-6 rows each), "none", and garbled HTML from translated
+        # versions; all of those become NA. RMET has exactly four words per item.
+        if len(opts) != 4 or key not in opts:
+            raise ValueError(f'item_{k}: the key is not among the four most frequent words')
+        if len(vc) > 4 and vc.iloc[4] >= close_call * vc.iloc[3]:
+            # A close 5th word could be a real option. Accept it only as carry-over:
+            # every extra word is an option of the neighbouring item (MRMET item_2).
+            nearby = set(options.get(k - 1, [])) | set(options.get(k + 1, []))
+            if not set(vc.index[4:]) <= nearby:
+                raise ValueError(f'item_{k}: 5th word is close to the 4th '
+                                 f'({vc.iloc[4]} vs {vc.iloc[3]}); decide before building')
+        code = {key: '1'}
+        code.update({w: str(j + 2) for j, w in enumerate(sorted(set(opts) - {key}))})
+        rows = irw_df['item'] == f'item_{k}'
+        codes[rows] = words[rows].map(code)
+    # A keyed answer is exactly a correct response.
+    coded = codes.notna()
+    assert ((codes[coded] == '1') == (irw_df.loc[coded, 'resp'] == 1)).all()
+    irw_df['resp_raw'] = codes
+    return irw_df
+
+
 def convert_mrmet_file(input_file, output_file, dataset_name):
     
     df = pd.read_excel(input_file, header=3)
@@ -106,7 +164,7 @@ def convert_mrmet_file(input_file, output_file, dataset_name):
                 
                 resp_col = f'response_{item_num}'
                 if resp_col in df.columns and pd.notna(row[resp_col]):
-                    row_data['raw_resp'] = row[resp_col]
+                    row_data['resp_raw'] = row[resp_col]
                 
                 long_data.append(row_data)
     
@@ -116,11 +174,13 @@ def convert_mrmet_file(input_file, output_file, dataset_name):
     
     irw_df = irw_df.sort_values(['id', 'item']).reset_index(drop=True)
     
+    irw_df = code_options(irw_df, input_file, header_row=3)
+    
     irw_df['cov_dataset'] = dataset_name
     
     col_order = ['id', 'item', 'resp']
-    if 'raw_resp' in irw_df.columns:
-        col_order.append('raw_resp')
+    if 'resp_raw' in irw_df.columns:
+        col_order.append('resp_raw')
     if 'rt' in irw_df.columns:
         col_order.append('rt')
     if 'date' in irw_df.columns:
