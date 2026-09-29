@@ -29301,3 +29301,12 @@ PASS; weida stays PARTIAL), lint, irw-validate and check_provenance. It is uploa
 - Gates: normalize 0 changed; audit PASS (contacttracingapp) + WARN (drinkcontext row-count anomaly on the 4 W2 items vs median 1448 -- W2 vs W3 sample sizes, response-data property, explained in notes.csv); verify_batch MISSING(exempt)=2; lint clean (2 NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv); irw-validate ok x2 (resp_ambiguous not raised: the W2/W3 scale split is per-item); check_provenance: only pre-existing ye_2025_q25_scale `mixed` review.
 - Step 5b: nothing overrode a source or reported a data defect; orchestrator eyeballed both CSVs.
 - Numbering: highest numeric batch (710)+1 = 711. Cap batch_759 not reached. Queue: 38 pending.
+
+## batch_712 — 2026-09-28T22:05 (2 tables, 2 agents; #2382 slice 18)
+- Written 2 / blocked 0 / failed 0. Yield 100%.
+- c19prc_uk_mcbride_2021_eu_identity: WRITTEN, 30 rows, 6 items (EU_identity_1-6), resp 1-5 (Strongly disagree..Strongly agree); validate_items --table-sets PASS. data_labels (W6 .sav labels, W6_ prefix stripped) / study_materials (W6 Recontacts p.145, Top-ups p.137, Supplementary Measures 2.2.7.2), English. Study-authored items. Agent cross-check .sav vs live 30/30 cells; live W6 only, 12348 rows / 2058 ids.
+- c19prc_uk_mcbride_2021_gad7: WRITTEN, 28 rows, 7 items (GAD_1-7), resp 0-3 (Not at all..Nearly every day); validate_items --table-sets PASS. data_labels (.sav labels identical W1-W6; W4-W6 GAD1->GAD_1 number-preserving rename) / study_materials (Q111 stem, all waves). Rights register PHQ/GAD = ship. Agent cross-check 168/168 cells; live 97265 rows / 5364 ids. Caveat in notes.csv: OSF measures-information docx says "past 7 days", 1-4 scale -- contradicts every questionnaire and the .sav; orchestrator confirmed the docx wording (documentation discrepancy only).
+- New shared cache: W5 and W6 OSF zips (osf ducgs, qv47z) now at .cache/c19prc_uk_mcbride_2021_shared/w5/, w6/ (+ w6_osf.zip) -- all six waves are now cached across .cache/c19prc_uk_mcbride_2021_{shared,comfort,cmq}/.
+- Gates: normalize 0 changed; audit PASS x2, no anomalies; verify_batch MISSING(exempt)=2; lint clean (2 NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv); irw-validate ok x2; check_provenance exit 0 (pre-existing `mixed` REVIEW line, not this batch).
+- Step 5b: the one claim (GAD docx discrepancy) re-checked against the docx text and confirmed.
+- Numbering: highest numeric batch (711)+1 = 712. Cap batch_759 not reached. Queue: 36 pending.
