@@ -2137,3 +2137,5 @@ c19prc_uk_mcbride_2021_contacttracingapp,batch_711,data_labels,,exempt: data_lab
 c19prc_uk_mcbride_2021_drinkcontext,batch_711,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 c19prc_uk_mcbride_2021_eu_identity,batch_712,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 c19prc_uk_mcbride_2021_gad7,batch_712,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
+c19prc_uk_mcbride_2021_govsatisfaction,batch_713,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
+c19prc_uk_mcbride_2021_handle_c19,batch_713,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text

@@ -29310,3 +29310,12 @@ PASS; weida stays PARTIAL), lint, irw-validate and check_provenance. It is uploa
 - Gates: normalize 0 changed; audit PASS x2, no anomalies; verify_batch MISSING(exempt)=2; lint clean (2 NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv); irw-validate ok x2; check_provenance exit 0 (pre-existing `mixed` REVIEW line, not this batch).
 - Step 5b: the one claim (GAD docx discrepancy) re-checked against the docx text and confirmed.
 - Numbering: highest numeric batch (711)+1 = 712. Cap batch_759 not reached. Queue: 36 pending.
+
+## batch_713 — 2026-09-28T22:13:17-07:00 (2 tables, 2 agents; #2382 slice 18)
+- Written 2 / blocked 0 / failed 0. Yield 100%.
+- c19prc_uk_mcbride_2021_govsatisfaction: WRITTEN, 55 rows, 11 items (HealthCare_Sat..Policing_Sat), resp 1-5 (Very dissatisfied..Very satisfied); validate_items --table-sets PASS. data_labels (W3 .sav labels, W3_ prefix stripped) / study_materials (W3 Phase 1 questionnaire Q367 p.19-20; measures information 2.2.7.2). Phase 1 recontacts only (853 missing per item = Phase 2 N). Agent cross-check .sav vs live 55/55 cells; live W3 only, 12826 rows / 1166 ids.
+- c19prc_uk_mcbride_2021_handle_c19: WRITTEN, 48 rows, 12 items (Handle_C19_1-12), resp 1-4 (Poor..Very well); validate_items --table-sets PASS. data_labels (W6 .sav labels, W6_ prefix stripped) / study_materials (W6 Recontacts p.138, Top-ups p.130, Supplementary Measures 2.2.5.1). Agent cross-check 48/48 cells; live W6 only, 24696 rows / 2058 ids. Supplementary docx titles the block "Confidence in response to COVID-19" -- naming difference only, no caveat.
+- Both study-authored items, deposit CC BY 4.0, English. Used existing .cache W3/W6 materials; no new downloads of note.
+- Gates: normalize 0 changed; audit PASS x2, no anomalies; verify_batch MISSING(exempt)=2; lint clean (2 NOT_NEEDED rows in both verification_merged.csv and mapping_verification.csv); irw-validate ok x2; check_provenance exit 0 (pre-existing `mixed` REVIEW line, not this batch).
+- Step 5b: no claims overriding a source or reporting a data defect; nothing to re-check.
+- Numbering: highest numeric batch (712)+1 = 713. Cap batch_759 not reached. Queue: 34 pending.
