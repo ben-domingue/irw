@@ -2119,3 +2119,4 @@ mexico_2025_q3safety_conflicts,batch_697,data_labels,,exempt: data_labels,NOT_NE
 mexico_2025_q3safety_govperformance,batch_698,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 mexico_2025_q3safety_govtrust,batch_699,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 mexico_2025_q3safety_perception,batch_700,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
+mexico_2025_q3safety_violence,batch_701,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
