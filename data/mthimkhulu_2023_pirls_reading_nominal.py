@@ -30,7 +30,10 @@ Coding notes
   correctness asterisk stripped -- so "C*" becomes "C". The key is not encoded
   in this table; it is recoverable from the core table, or from the labels.
 * `6` ("Not reached") and `9` ("Omitted or invalid") are missing codes and are
-  dropped rather than treated as categories.
+  dropped rather than treated as categories. They are frequent in the source
+  (see the core script's notes), but the .sav declares them SPSS user-missing,
+  so `pyreadstat.read_sav` already returns them as NaN and the `MISSING`
+  filter is a no-op. Reading with `user_missing=True` would recover them.
 * The same learner `id` keys the core table, so the two join.
 """
 

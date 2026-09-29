@@ -40,7 +40,11 @@ id<-1:nrow(x)
 L<-list()
 for (i in 1:ncol(x)) L[[i]]<-data.frame(id=id,item=colnames(x)[i],resp=x[,i],country=z$country,wt=z$studwgt)
 df<-data.frame(do.call("rbind",L))
-df$resp<-ifelse(df$resp==9,NA,df$resp) #not reached responses coded as NA
+# Code 9 is "missing by intention and not reached" together: sirt's own docs
+# (?data.pirlsmissing) say the source merged omitted and not-reached responses
+# into one code, so the two cannot be told apart here (11,003 cells). They are
+# dropped as non-responses (standard C4). See #2513.
+df$resp<-ifelse(df$resp==9,NA,df$resp)
 save(df,file="pirlsmissing_sirt.Rdata")
 
 
