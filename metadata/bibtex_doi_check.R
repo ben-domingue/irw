@@ -96,9 +96,16 @@ bibtex_is_data_doi <- function(x) {
     Reduce(`|`, lapply(BIBTEX_DATA_DOI_PREFIXES, function(p) startsWith(x, p)))
 }
 
-##"ok" / "deposit" / "mismatch" / "unknown", one per row. unknown means the comparison
-##cannot be made -- no BibTeX, no DOI in it, or no DOI in either column -- and
+##"ok" / "deposit" / "mismatch" / "undoi" / "unknown", one per row. unknown means
+##the comparison cannot be made -- no BibTeX, or no DOI in either column -- and
 ##is never an error.
+##
+##undoi (#2513): the row claims a paper DOI but its cached BibTeX names no DOI at
+##all. That is the Claude-generated fallback written when a first doi.org fetch
+##failed (a trailing newline in the DOI cell was enough for kay_2025_antonyms,
+##which came back as "Ay, C.S."), and like everything else in biblio it was then
+##cached forever. It is refetched but never a gate failure: a generated citation
+##is incomplete, not a citation of someone else's paper.
 bibtex_doi_status <- function(bib, paper, data) {
     n <- length(bib)
     paper <- rep(paper, length.out = n)
@@ -107,7 +114,10 @@ bibtex_doi_status <- function(bib, paper, data) {
     for (i in seq_len(n)) {
         cited <- bibtex_cited_doi(bib[i])
         claimed <- unique(c(bibtex_doi_tokens(paper[i]), bibtex_doi_tokens(data[i])))
-        if (is.na(cited) || cited == "" || !length(claimed)) {
+        if (!is.na(bib[i]) && (is.na(cited) || cited == "") &&
+            length(bibtex_doi_tokens(paper[i]))) {
+            out[i] <- "undoi"
+        } else if (is.na(cited) || cited == "" || !length(claimed)) {
             out[i] <- "unknown"
         } else if (cited %in% claimed ||
                    bibtex_doi_base(cited) %in% bibtex_doi_base(claimed)) {
@@ -139,7 +149,13 @@ bibtex_preferred_doi <- function(paper, data) {
     NA_character_
 }
 
-##Refetch the citations that cite the wrong paper, and report what moved.
+##Refetch the citations that cite the wrong paper, and those that cite no DOI
+##although the row has a paper DOI ("undoi", #2513), and report what moved.
+##
+##The two differ on failure. An undoi row keeps its cached citation when the
+##fetch fails or returns something that is not BibTeX: the generated entry names
+##the right paper, only incompletely, so blanking it would lose more than it
+##fixes. It is retried on the next run.
 ##
 ##A failed fetch blanks the row rather than keeping the cached value: a missing
 ##citation is a gap the next run fills, a citation for someone else's paper is a
@@ -159,13 +175,14 @@ refetch_stale_bibtex <- function(biblio, fetch, label = "core") {
         message(label, ": ", sum(status == "deposit"), " row(s) cite their source ",
                 "deposit rather than the paper the row names; left as they are")
     }
-    idx <- which(status == "mismatch")
+    idx <- which(status %in% c("mismatch", "undoi"))
     if (!length(idx)) {
         message(label, ": every cached BibTeX cites a DOI its row claims")
         return(list(biblio = biblio, log = stale_bibtex_log()))
     }
-    message(label, ": ", length(idx), " cached BibTeX entr(ies) cite a DOI the row ",
-            "does not claim; refetching")
+    message(label, ": ", sum(status == "mismatch"), " cached BibTeX entr(ies) cite a DOI ",
+            "the row does not claim, ", sum(status == "undoi"), " cite no DOI although ",
+            "the row has a paper DOI; refetching")
     rows <- vector("list", length(idx))
     for (j in seq_along(idx)) {
         i <- idx[j]
@@ -173,6 +190,14 @@ refetch_stale_bibtex <- function(biblio, fetch, label = "core") {
         want <- bibtex_preferred_doi(biblio$DOI__for_paper_[i], data_col[i])
         new <- tryCatch(fetch(biblio$table[i], want), error = function(e) NA_character_)
         if (length(new) != 1L) new <- NA_character_
+        if (status[i] == "undoi" && (is.na(new) || !grepl("^[[:space:]]*@", new))) {
+            warning(sprintf("%s: could not refetch BibTeX for %s (%s); cached entry kept",
+                            label, biblio$table[i], want))
+            rows[[j]] <- data.frame(table = biblio$table[i], claimed = want,
+                                    cited_was = was, cited_now = was, outcome = "kept",
+                                    stringsAsFactors = FALSE)
+            next
+        }
         biblio$BibTex[i] <- new
         got <- bibtex_cited_doi(new)
         if (is.na(new)) {
@@ -187,7 +212,7 @@ refetch_stale_bibtex <- function(biblio, fetch, label = "core") {
     log <- do.call(rbind, rows)
     log <- log[order(log$table), , drop = FALSE]
     message("  refetched ", sum(log$outcome == "refetched"), ", blanked ",
-            sum(log$outcome == "blanked"))
+            sum(log$outcome == "blanked"), ", kept ", sum(log$outcome == "kept"))
     list(biblio = biblio, log = log)
 }
 
