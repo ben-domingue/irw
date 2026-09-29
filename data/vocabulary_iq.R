@@ -42,6 +42,11 @@ df <- df |>
   # replace invalid responses with NA
   mutate_all(~ replace(., . == -1, NA)) |>
   mutate(across(starts_with('s'), ~if_else(. == 0, NA, .))) |>
+  # On the vocabulary questions the codebook separates -1 ("subject selected
+  # 'don't know'", handled above) from 0 ("subject did not respond to question
+  # at all"). Neither is an answer: the source's own score_wrong excludes 0 on
+  # every row, so an unanswered question is missing, not wrong (issue #2513).
+  mutate(across(starts_with('q'), ~if_else(. == 0, NA, .))) |>
   # pivot df long by item
   pivot_longer(cols = -id,
                names_to = 'item',
