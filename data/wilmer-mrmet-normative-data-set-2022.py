@@ -28,6 +28,40 @@ def process_date_column(df, date_col='Date'):
     
     return df, first_date
 
+# ARC's terms cover the RMET/MRMET test materials, including the four option words
+# shown with each photo, so the tables must not reshare them (irw#2513, D13, 2026-09-28).
+# resp_raw holds a per-item option code instead of the chosen word: "1" = the keyed
+# answer (source header row just above the column names), "2"-"4" = the three
+# distractors in alphabetical order of their English word. The codes are derived here
+# from the source file at build time; do not write the word->code map anywhere public.
+OPTION_WORD = re.compile(r'^[a-z\-]+$')
+
+
+def code_options(irw_df, input_file, header_row):
+    top = pd.read_excel(input_file, header=None, nrows=header_row + 1)
+    keys = {}
+    for i, name in enumerate(top.iloc[header_row]):
+        m = re.fullmatch(r'response_(\d+)', str(name))
+        if m:
+            keys[f'item_{m.group(1)}'] = str(top.iloc[header_row - 1, i]).strip()
+    words = irw_df['resp_raw'].astype('string').str.strip()
+    codes = pd.Series(pd.NA, index=irw_df.index, dtype='string')
+    for item, key in keys.items():
+        rows = irw_df['item'] == item
+        seen = set(w for w in words[rows].dropna() if OPTION_WORD.match(w) and w != 'none')
+        if len(seen) != 4 or key not in seen:
+            raise ValueError(f'{item}: expected 4 option words including the key, '
+                             f'found {len(seen)}; decide how to code it before building')
+        code = {key: '1'}
+        code.update({w: str(j + 2) for j, w in enumerate(sorted(seen - {key}))})
+        codes[rows] = words[rows].map(code)
+    # A keyed answer is exactly a correct response.
+    coded = codes.notna()
+    assert ((codes[coded] == '1') == (irw_df.loc[coded, 'resp'] == 1)).all()
+    irw_df['resp_raw'] = codes
+    return irw_df
+
+
 def convert_mrmet_file(input_file, output_file, dataset_name):
     
     df = pd.read_excel(input_file, header=3)
@@ -106,7 +140,7 @@ def convert_mrmet_file(input_file, output_file, dataset_name):
                 
                 resp_col = f'response_{item_num}'
                 if resp_col in df.columns and pd.notna(row[resp_col]):
-                    row_data['raw_resp'] = row[resp_col]
+                    row_data['resp_raw'] = row[resp_col]
                 
                 long_data.append(row_data)
     
@@ -116,11 +150,13 @@ def convert_mrmet_file(input_file, output_file, dataset_name):
     
     irw_df = irw_df.sort_values(['id', 'item']).reset_index(drop=True)
     
+    irw_df = code_options(irw_df, input_file, header_row=3)
+    
     irw_df['cov_dataset'] = dataset_name
     
     col_order = ['id', 'item', 'resp']
-    if 'raw_resp' in irw_df.columns:
-        col_order.append('raw_resp')
+    if 'resp_raw' in irw_df.columns:
+        col_order.append('resp_raw')
     if 'rt' in irw_df.columns:
         col_order.append('rt')
     if 'date' in irw_df.columns:
