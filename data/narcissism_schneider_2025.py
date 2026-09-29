@@ -69,7 +69,15 @@ def convert_to_irw():
             df_melt = df_melt.rename(columns=rename_map)
             df_melt['resp'] = pd.to_numeric(df_melt['resp'], errors='coerce')
             df_melt = df_melt.dropna(subset=['resp'])
-            df_melt = df_melt[df_melt['resp'] > 0]
+            if prefix == 'study1_jauk' and construct == 'npi':
+                # NPI1_rec-NPI40_rec are keyed forced-choice items scored 0/1
+                # (NPI_sum equals their row sum on every row), so 0 is a real
+                # response; -99 is missing. `resp > 0` kept only the 1s and
+                # dropped 24,893 zeros (irw#2513). The two 2s (both NPI8_rec)
+                # are off the 0/1 scale and are dropped as entry errors.
+                df_melt = df_melt[df_melt['resp'].isin([0, 1])]
+            else:
+                df_melt = df_melt[df_melt['resp'] > 0]
             df_melt['resp'] = df_melt['resp'].astype(int)
             
             if 'cov_datetime' in df_melt.columns:
