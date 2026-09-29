@@ -23,6 +23,10 @@ df_gcbs <- df %>%
                    values_to = "rt"),
     by = c("id", "rt_col")
   ) %>%
+  # E1-E15 are in milliseconds (their sum /1000 matches testelapse, which the
+  # codebook gives in seconds, within 5 s for 91% of rows); the standard wants
+  # seconds (irw#2513).
+  mutate(rt = rt / 1000) %>%
   rename(cov_education = education, cov_urban = urban, cov_gender = gender,
          cov_engnat = engnat, cov_age = age, cov_hand = hand, cov_religion = religion,
          cov_orientation = orientation, cov_race = race, cov_voted = voted,
