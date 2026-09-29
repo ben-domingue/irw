@@ -270,8 +270,9 @@ stops rather than routing across families.
 
 `irw_site` also reads one file directly off disk rather than from Redivis:
 `data/hero_stats.json`, written into that repository by `metadata/09_hero_status.R`.
-Two more it reads from this repository's `main` over HTTPS at render time:
-`metadata/version_manifest.tsv` and `metadata/table_changes.csv`.
+Three more it reads from this repository's `main` over HTTPS at render time:
+`metadata/version_manifest.tsv`, `metadata/table_changes.csv` and
+`metadata/data_notes.csv`.
 
 ## 5. Which document wins
 
@@ -286,6 +287,7 @@ When two documents disagree, this is the order of precedence:
 | Redivis version hashes | Each client package's own config — this repo deliberately carries none |
 | Which Redivis version of every dataset was live at a given time | [`metadata/version_manifest.tsv`](metadata/version_manifest.tsv) — written by `red_up.manifest` from Redivis' own version history, refreshed daily by the `version-manifest` GitHub Action (13:30 UTC), which opens and merges its own PR when the file changes and files an issue when it cannot. The R and Python packages read the committed copy over HTTPS, so the file in `main` *is* the published record. An IRW version number is a citation: rows are appended, never renumbered, and the writer refuses rather than change one |
 | Which published tables were corrected, renamed or retired, and when | [`metadata/table_changes.csv`](metadata/table_changes.csv) — one row per table per released correction, appended by hand once the release is live (checklist in [`red_up/README.md`](red_up/README.md)); rendered by `irw_site`'s `corrections.qmd`, which also states the corrections policy (#2168). Response tables only: item-text caveats live on `itemtext_issues.qmd` and rights withdrawals stay internal |
+| Caveats about a table's *source* that are not IRW defects (a doubtful source key, what a column means, pooled forms) | [`metadata/data_notes.csv`](metadata/data_notes.csv): hand-appended, rendered as a plain Notes section on landing pages (no banner, no `noindex`) and returned by the MCP's `get_processing_notes` (#2529). IRW defects awaiting a fix are `irw_site`'s `landing/known_issues.tsv`; released fixes are `table_changes.csv` |
 | Tag vocabulary for `sample` and `construct type` | `TAG_VOCAB` in [`metadata/tag_normalize.R`](metadata/tag_normalize.R) — enforced; the pipeline halts on an unknown value |
 | Which sources have tags | `.irw_tag_sources` in `Rpkg/R/redivis-config.R` |
 | Metadata pipeline run order | `DEFAULT_ORDER` in `.claude/skills/irw-site-update/scripts/run_pipeline.sh` — the order actually executed |
