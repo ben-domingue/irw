@@ -1,0 +1,3 @@
+table,batch,mapping_basis,uploaded,route,status,evidence
+c19prc_uk_mcbride_2021_activity,batch_709,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
+c19prc_uk_mcbride_2021_childimpact,batch_709,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
