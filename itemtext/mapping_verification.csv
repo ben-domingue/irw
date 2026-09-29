@@ -2147,3 +2147,4 @@ c19prc_uk_mcbride_2021_icd_anxiety,batch_716,data_labels,,exempt: data_labels,NO
 c19prc_uk_mcbride_2021_icd_depression,batch_716,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 c19prc_uk_mcbride_2021_infosource,batch_717,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 c19prc_uk_mcbride_2021_ius12,batch_717,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
+c19prc_uk_mcbride_2021_lockdownbehaviour,batch_718,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
