@@ -3,6 +3,18 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## From the 2026-09-29 JPSP 131(4) batch (Lu 2026 + Zhang 2026)
+
+- [x] **25 tables + 6 item text tables uploaded** (ben-domingue, confirmed 2026-09-29). Original:: `irw_output/lu_2026_*`
+  (8) and `irw_output/zhang_2026_{mcq,moral,bfi2,courage,tcs,hexaco,wisdom,ipip,
+  virtue,episode}*` (17), then `itemtext_output/zhang_2026_ipip_*`,
+  `_virtue_states`, `_episode_affect` (6). Dictionary/tag rows are already staged.
+- [ ] **Item text rights rulings, if wanted**: the wording for 19 tables is in
+  the deposits, but the instruments are not in `instrument_rights_register.csv`
+  (Spielberger Trait-Anger, FSS-II, Mood Survey, Adult Hope Scale, Weinstein
+  1980 events, MCQ, Moral Attentiveness, courage/TCS/wisdom items). STAI,
+  BFI-2 and HEXACO are already `block`.
+
 ## From the 2026-09-21 repos weekly batch
 
 - [ ] **DVN/QQ369L** (Vietnam 2026 National Assembly Election voter survey,
