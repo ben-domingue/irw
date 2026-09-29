@@ -1,0 +1,8 @@
+table,scripts
+himmelstein-admc_raw-2025,data/data_admc_raw.py
+himmelstein-berlin_numeracy-2025,data/data_berlin_numeracy.py
+himmelstein-cognitive_reflection-2025,data/data_cognitive_reflection.py
+himmelstein-impossible_question-2025,data/data_impossible_question.py
+himmelstein-number_series-2025,data/data_number_series.py
+himmelstein-shipley_abstraction-2025,data/data_shipley_abstraction.py
+himmelstein-shipley_vocabulary-2025,data/data_shipley_vocabulary.py

@@ -31,8 +31,12 @@ metadata/**/*.txt
 !metadata/bibtex_overrides.csv
 # Public per-table change record (#2168), hand-appended; irw_site renders it.
 !metadata/table_changes.csv
+# Source caveats shown on landing pages and by the MCP (#2529), hand-appended.
+!metadata/data_notes.csv
 # Table -> processing-script map for get_processing_notes (#2494); stage 13.
 !metadata/table_scripts.csv
+# Hand-kept rows stage 13 merges in, for names built at run time (#2529).
+!metadata/table_scripts_manual.csv
 # Aggregator registry (openESM, ...) keyed by the dictionary's `Source via` (#2421).
 !metadata/aggregators.csv
 
