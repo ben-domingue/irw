@@ -16295,3 +16295,120 @@ Also fixed: the 17 tag rows staged earlier today had CRLF endings in an
 otherwise-LF `tags/tags_auto.csv`, and they are now LF. Staged in this pass: 13
 dictionary rows (`stage_dict_row.py`) and 13 tag rows. That brings all 30 tables
 to one dictionary row and one tag row each.
+
+## 2026-09-29 — JPSP 131(4): two named datasets, 25 tables, 301,113 responses
+
+A targeted pass, not a discovery run: two open datasets from *Journal of
+Personality and Social Psychology* 131(4), named by ben-domingue. No search
+terms were run, so nothing was appended to `search_terms_log.csv`. Both OSF
+nodes are public and carry CC BY 4.0 (`api.osf.io/v2/nodes/<id>?embed=license`).
+The dictionary, `metadata.csv`, `biblio.csv` and `data/` had no DOI, OSF id or
+author match for either dataset. There were no table-name collisions with the
+four live `zhang_2026_*` tables (Mendeley `62rjwfhm6j`, a different paper).
+
+**Lu, Efendic & Feldman (2026), 10.1037/pspp0000586, OSF `t5kz9`**, is
+`data/lu_2026_risk_emotion.py`. The source is `RRR-Lerner-Keltner-2001-WITH-order.sav`
+(826 x 296, MTurk, June 2022). Eight tables:
+
+| table | N | items | resp |
+|---|---|---|---|
+| lu_2026_anger (Spielberger Trait-Anger) | 781 | 10 | 1-4 |
+| lu_2026_fss (Fear Survey Schedule-II) | 781 | 14 | 1-7 |
+| lu_2026_stai (STAI trait) | 781 | 20 | 1-4 |
+| lu_2026_happiness (Underwood & Froming Mood Survey) | 781 | 16 | 1-6 |
+| lu_2026_hope (Adult Hope Scale, scored items) | 781 | 8 | 1-8 |
+| lu_2026_optimism (Weinstein 1980 comparative risk) | 781 | 23 | -4..4 |
+| lu_2026_certainty (event certainty appraisal) | 389 | 23 | 1-6 |
+| lu_2026_control (event controllability appraisal) | 392 | 23 | 1-6 |
+
+- **Exclusions are not applied.** The analysis `.Rmd` filter (Duration > 0,
+  consent, both outline checks, native US English speaker, age >= 18,
+  funnel_pay >= 0) is carried as `cov_analysis_sample`. It drops 1 of the 781
+  rows with data (age = 3). The 45 rows of the 826 that stopped before the
+  first block carry no responses at all.
+- **Attention checks.** Each trait block embeds one check item (anger_11,
+  fear_FSS_II_17, fear_STAI__21, happiness_18, hope_13). These are not items;
+  the pass count is `cov_attn_checks_passed` (0-5).
+- **Fillers.** Hope Scale fillers 3/5/7/11 are dropped, matching the
+  authors' scoring. The Asian-disease gain/loss pair is not a scale and is
+  skipped. All 96 `*_DO_*` display-order columns are dropped.
+- **Split halves.** Every respondent answered either certainty or control,
+  never both (asserted), so these are two tables. The optimism, certainty and
+  control tables all rate the same 23 events, which is why they keep the
+  source prefixes as distinct item codes.
+- **Identifiers.** MTurk assignmentId/hitId are dropped, so `id` is the row
+  index. The Recipient name/email, PROLIFIC_PID and location fields are blank
+  in every row. There are no IP or GPS columns.
+- **Validator warning.** `irw-validate`'s rights_register flags
+  `happiness_*` as matching the SHS code pattern. This is a false positive:
+  the table is the 16-item Mood Survey, and the codes are not wording.
+
+**Zhang, Jacobson, Hardin & Sun (2026), 10.1037/pspp0000608, OSF `ztxcd`**, is
+`data/zhang_2026_virtue_tradeoffs.py`. The source is S1
+`Moral_dilemma_S1_cleaned.csv` (12,385 episode rows, 377 Prolific adults, a Day
+Reconstruction Method diary). Seventeen tables, and the trait tables all have N=377:
+
+| table | items | resp |
+|---|---|---|
+| zhang_2026_mcq_morality / _mcq_loyalty | 4 / 4 | 1-5 |
+| zhang_2026_moral_attentiveness | 12 | 1-7 |
+| zhang_2026_bfi2_neuroticism / _compassion / _respect / _responsibility | 3 / 4 / 4 / 4 | 1-5 |
+| zhang_2026_courage | 5 | 1-4 |
+| zhang_2026_tcs_honesty | 6 | 1-5 |
+| zhang_2026_hexaco_modesty | 4 | 1-5 |
+| zhang_2026_wisdom | 4 | 1-6 |
+| zhang_2026_ipip_fairness / _forgiveness / _gratitude / _patience | 4 each | 1-5 |
+| zhang_2026_virtue_states (148,541 responses, wave = episode) | 12 | 1-7 |
+| zhang_2026_episode_affect (37,148 responses, wave = episode) | 3 | 1-7 |
+
+- **Grouping is one file per construct.** The paper scores each block as a
+  separate trait virtue. The IPIP items span four IPIP scales, and the BFI-2
+  facets span three domains, so neither instrument is a single construct.
+- **Trait items and ranges.** Trait items are identical on every episode row
+  (asserted), so they are deduplicated to one row per person before melting.
+  The codebook's 1-7 for HH_Modesty and Wise is wrong. The Baseline `.qsf`
+  shows 1-5 and 1-6, and the observed values agree.
+- **Unreversing.** The deposit stores reverse-keyed items only as
+  `R.<name> = 6 - x` (`8 - x` for Attentiveness2), per cleaning `.Rmd` lines
+  771-789 and 888-889. They are inverted back to raw and shipped under the
+  unprefixed name. A sanity check confirms the direction: "Feel no gratitude to
+  others" is 1 for 79% of respondents.
+- **Episode data went in.** All 12 virtue ratings are asked on every episode,
+  whether or not the virtue was marked relevant. (ID, day, Episode) is unique.
+  `wave` follows diary day, then the diary's own E-number, because start
+  clock times run backwards in about 2% of within-day pairs. Episodes per
+  person: min 2, median 36, max 48. The op_* and conflict* checklists are not
+  carried.
+- **S2 was not merged.** `Current_*` rates 10 of S1's 12 virtues for one
+  conflict episode picked for the respondent. That is not the same
+  administration.
+- **No exclusions beyond the authors'.** The file is the authors' cleaned S1,
+  so no further exclusion is applied. It has no text or identifier columns.
+
+All 25 tables pass `run_qc`, per-item permitted-value assertions, and
+`irw-validate`'s upload profile, with no errors. The only warnings are
+`imputed_values*` response-concentration notes on a few 1-5 items and the SHS
+false positive. A per-item scan found no isolated values.
+
+Item text:
+- **Shipped for 6 tables:** `zhang_2026_ipip_{fairness,forgiveness,gratitude,patience}`
+  (Baseline `.qsf` IPIP1/IPIP2 stems, tied to codes through the codebook `Item`
+  column, 4/4 each) and `zhang_2026_virtue_states` / `_episode_affect` (DRM
+  `.qsf` episode-10 questions; anchors only at 1/4/7 or 1/7). Built by
+  `itemtext_verification/make_itemtext_zhang_2026.py`. The gates passed:
+  `normalize_nulls.R`, `validate_items.R --resp-csv` (6/6), `audit_batch.R`
+  (`runs/itemtext_audit_report_2026-09-29.csv`), `irw-validate` and
+  `check_provenance.R`. Six `NOT_NEEDED` rows are in `mapping_verification.csv`.
+  None of these tables needs an issues-page entry.
+- **Not shipped for 19 tables, held on rights, not availability.** The wording
+  is in each deposit (Lu: `CODEBOOK.csv` plus the `.sav` labels, both levels
+  present; Zhang: the codebook plus the Baseline `.qsf`). STAI, BFI-2 and
+  HEXACO are `block` in the rights register. Spielberger Trait-Anger, FSS-II,
+  the Mood Survey, the Adult Hope Scale, the Weinstein events, MCQ, Moral
+  Attentiveness, the courage and TCS items, and the wisdom items are not in
+  the register. There are 25 rows in `itemtext_provenance.csv`, with
+  `uploaded` blank.
+
+There were no PII skips. The only platform IDs were MTurk ids, and they were
+dropped. Staged: 25 rows in `dictionary_auto.csv` and 25 in `tags/tags_auto.csv`.
+`stage_tag_row.py` still writes CRLF, so the 25 new rows were converted to LF.
