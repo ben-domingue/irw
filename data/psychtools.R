@@ -49,7 +49,11 @@ id<-1:nrow(x)
 L<-list()
 for (i in 1:ncol(x)) L[[i]]<-data.frame(id=id,item=colnames(x)[i],resp=x[,i])
 df<-data.frame(do.call("rbind",L))
-df$resp<-df$resp-1
+## psychTools codes 1 = yes, 2 = no (the lie items show it: 80% give the
+## honest "1" to "Once in a while do you lose your temper and get angry?").
+## resp-1 made 0 = yes, 1 = no, the reverse of the item text's options
+## (resp 0 = "No"). Score 1 = yes, 0 = no (irw#2513).
+df$resp<-2-df$resp
 save(df,file="psychtools_epi.Rdata")
 
 ## 6-GERAS, 33
