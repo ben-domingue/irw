@@ -2141,3 +2141,5 @@ c19prc_uk_mcbride_2021_govsatisfaction,batch_713,data_labels,,exempt: data_label
 c19prc_uk_mcbride_2021_handle_c19,batch_713,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 c19prc_uk_mcbride_2021_homespace,batch_714,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 c19prc_uk_mcbride_2021_hopefulness,batch_714,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
+c19prc_uk_mcbride_2021_humanitarianism,batch_715,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
+c19prc_uk_mcbride_2021_hygiene,batch_715,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
