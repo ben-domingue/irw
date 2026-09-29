@@ -16412,3 +16412,32 @@ Item text:
 There were no PII skips. The only platform IDs were MTurk ids, and they were
 dropped. Staged: 25 rows in `dictionary_auto.csv` and 25 in `tags/tags_auto.csv`.
 `stage_tag_row.py` still writes CRLF, so the 25 new rows were converted to LF.
+
+## 2026-09-29 — repos weekly, manual fire (+ OSF 5xx fix)
+
+Fired by hand (ben asked for "an automated search"). The cloud discovery
+routines are not addressable from a session (see ARCHITECTURE.md, "Claude
+cloud routines"), so `irw_discover_monthly.py --mode weekly` was run locally:
+osf + dataverse + datacite, the 14 weekly terms, `--retriage` on triage.
+
+- **Discovery:** 68 candidates; 64 already in `repo_triage_seen_keys.csv`, so
+  4 triaged: 2 `no_usable_file` (Göttingen DVN/VXFZXZ, ScienceDB 013yj), 2
+  `error`, both the same figshare deposit.
+- **`10.6084/m9.figshare.33980614` (ADLI, French adaptation, CC BY 4.0) — not a
+  dataset.** The xlsx is a blank, protected scoring template: 49 rows, empty
+  `Code` column, every item cell 0. The triage `error` ("arg must be a list,
+  tuple, 1-d array, or Series") comes from its duplicate-ish headers. Added
+  to the seen ledger by hand so it stops being retried as a transient error.
+- **OSF was silently missing the broad terms, and it was a bug, not an
+  outage.** OSF missed 7/14 terms in this run. "depression" had already lost
+  OSF on 09-21 and 09-28. Reproduced: `from_osf("depression")` fails on a 502
+  at `page=4` of the tag query after ~80s; narrow terms never reach page 4.
+  `from_osf` had no retry, so one 502 discarded the whole term. Fix: retry
+  5xx and timeouts up to 3 times with 5/10/15s backoff
+  (`irw_discover_updated.py`). After the fix, depression and anxiety return
+  250 hits each.
+- **Re-cover:** the 7 missed terms were re-run with `--terms`, and all 3
+  sources completed all 7. There were 37 candidates, and every OSF hit was
+  already in the ledger. Nothing new beyond ADLI.
+- **Result:** 0 `good`, 0 `human_assistance`, nothing to process.
+  Step 2b ran (chained `--retriage`) with an empty bucket.
