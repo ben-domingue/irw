@@ -1,0 +1,3 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"c19prc_uk_mcbride_2021_nationalism","PASS",2,2,TRUE,TRUE,FALSE,TRUE,0,0,""
+"c19prc_uk_mcbride_2021_nationalpride","PASS",3,3,TRUE,TRUE,FALSE,TRUE,0,0,""
