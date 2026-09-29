@@ -1,3 +1,7 @@
+# SUPERSEDED: this is a second ingestion of OSF 9j6hm (same 1,244 people as
+# data/much_tte_2025.R). Decided 2026-09-28 (irw#2513): much_tte_2025_* is canonical;
+# the test_taking_much_2025_* tables are to be retired with table_changes successor rows.
+# Do not rerun or extend this script.
 import pandas as pd
 
 def convert_to_irw(file_path):
