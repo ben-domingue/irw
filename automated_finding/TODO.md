@@ -3199,5 +3199,32 @@ do not treat the CSV's `proposed_name` column as a work list.
   (all 77 `in_range` rows are terminal).
 - [ ] **Cheap item text for 16 tables**: csibra (Appendix A), atalay (s003.pdf), fredborg (Data Legend sheet), ge (.sav
   labels), guo (xlsx header), jie (.sav labels), todor (s001.docx).
-- [ ] **458 scouted terms unrun** in `pmc_term_backlog_2026-09-25.csv` (1,782
-  projected new DOIs). The next sweep starts from that file.
+- [x] ~~458 scouted terms unrun~~ -- 50 more ran 2026-09-28; the open count
+  is carried in the 2026-09-28 section below.
+
+## From the 2026-09-28 PMC scout-2 sweep (terms 51-100)
+
+- [x] **30 tables (353,632 responses) in `irw_output/` uploaded 2026-09-28**, and
+  the 1 item text table (`dorsch_2025_ai_tam__items.csv`) uploaded the same day.
+  Tables: `modzelewska_2021_*` (4), `iwanicka_2017_*` (4), `tao_2026_mpai`,
+  `turcsan_2020_dog_dpq`, `pajnkihar_2017_cnpi`, `martindelcampo_2020_*` (5),
+  `herreromontes_2022_audit`, `putro_2024_*` (4), `wang_2023_*` (3),
+  `li_2025_*` (4), `dorsch_2025_ai_*` (2). Dictionary and tag rows are staged;
+  `itemtext_provenance.csv` rows are unstamped. Response tables first.
+- [ ] **98 (term, journal) pairs never searched** (Europe PMC 503s + the run
+  killed in psychometrika): 64 failed queries across 36 terms, plus
+  psychometrika for terms 17-50. Listed per term in
+  `pmc_term_backlog_2026-09-25.csv` (`run_2026_09_28=partial`,
+  `unrun_journals_2026_09_28`). Re-run those terms with `--journals <list>`,
+  not the whole set.
+- [ ] **408 scouted terms still unrun** in `pmc_term_backlog_2026-09-25.csv`.
+- [ ] **Decision: Alharbi 2024 nursing simulation (peerj.18150) held on trust.**
+  86 of 201 rows sit in exact-copy groups on 92 items (47 later copies).
+  The script is in the gitignored `runs/held/`; say whether to ship it
+  deduplicated (about 154 ids) or drop it.
+- [ ] **Decision: AUDIT item text for `herreromontes_2022_audit`.** The deposit
+  codebook has it, but the rights register says `ship_with_note`.
+- [ ] **Item text deferred, not cheap-gate:** `pajnkihar_2017_cnpi`
+  (Slovenian stems in the `.sav`, no English), `martindelcampo_2020_*` and
+  `modzelewska_2021_*` (English labels on Spanish/Polish administrations =
+  `translated_substitute`), `dorsch_2025_ai_vignettes` (wording differs by arm).
