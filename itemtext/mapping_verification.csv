@@ -2154,3 +2154,5 @@ c19prc_uk_mcbride_2021_nationalism,batch_720,data_labels,,exempt: data_labels,NO
 c19prc_uk_mcbride_2021_nationalpride,batch_720,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 c19prc_uk_mcbride_2021_neighbourcomfort,batch_721,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
 c19prc_uk_mcbride_2021_partyidentity,batch_721,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
+c19prc_uk_mcbride_2021_phq15,batch_722,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
+c19prc_uk_mcbride_2021_phq9,batch_722,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
