@@ -577,3 +577,4 @@ ren2019_ypic,,2026-09-30,"Retired: an exact duplicate of ren_2019_ypic, built fr
 ren2019_cpti,,2026-09-30,"Retired: an exact duplicate of ren_2019_cpti, built from the same deposit by a second script.",#2425,,ren_2019_cpti
 ren2019_sdq,,2026-09-30,"Retired: an exact duplicate of ren_2019_sdq, built from the same deposit by a second script.",#2425,,ren_2019_sdq
 ren_2019_scpv,,2026-09-30,"Restored as the single copy of the SCPV block, now correctly identified as the Social Competence Scale, Parent Version (CPPRG 1995). It was withdrawn on 2026-09-25 along with its duplicate ren2019_scpv because both named the wrong instrument.",#2425,ren2019_scpv,
+weatherspoon_2015_family_physicians_effectiveness,,2026-09-30,Removed three respondents (28 rows) whose answers include 3 to 5 on a Yes/No item; the table now holds only 1 and 2.,#2196,,
