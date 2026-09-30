@@ -29,3 +29,4 @@ rses,ehealth_rioux_2025_rses,REJECT,,,construct name is Resilience (4 items); th
 rses,sd3ypl_klimczak_2019_ses,ACCEPT,name,,construct name: RSES (10 items) in Polish
 sd3,sd3ypl_klimczak_2019_sd3,ACCEPT,name,partial: 26/27 items,SD3 in Polish; 26/27 clears the 80% partial-table rule
 sd3,west_2021_retaliatory_aggression_study3_sd3_psychopathy,ACCEPT,name,subscale: psychopathy (9/27),table name: the SD3 psychopathy subscale (9 items)
+erq,yang_2026_erq,REJECT,,,"Chinese 14-item ERQ adaptation (Wang, Lu & Li 2007; 7 reappraisal + 7 suppression): a different form, so out (Ben, 2026-09-30). Source: the paper's methods, doi 10.1371/journal.pone.0350928"

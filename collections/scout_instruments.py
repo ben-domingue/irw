@@ -87,6 +87,8 @@ def load_tables():
     tags, itm, md = rd("tags.csv"), rd("itemtext_metadata.csv"), rd("metadata.csv")
     for d in (tags, itm, md):
         d["k"] = d.table.str.lower()
+    # itemtext_metadata.csv can carry two rows for one table (e.g. PEMAIW_Qiu_2020_DASS): one row per table here
+    tags, itm, md = (d.drop_duplicates("k") for d in (tags, itm, md))
     tabs = pd.DataFrame({"k": sorted(set(md.k) | set(tags.k) | set(itm.k))})
     name_of = {**dict(zip(tags.k, tags.table)), **dict(zip(itm.k, itm.table)), **dict(zip(md.k, md.table))}
     tabs["table"] = tabs.k.map(name_of)

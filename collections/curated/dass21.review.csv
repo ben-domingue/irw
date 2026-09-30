@@ -1,7 +1,6 @@
 table,construct_name,instrument,language,text_source,n_items,n_participants,k,n_mapped,n_near,verdict,basis,note
 APFCompact_Ptacek_2024_DASS-21,,Depression Anxiety Stress Scales - 21 Items (DASS-21),,canonical_instrument,,,21,21,0,MATCH,supplied,
 PEMAIW_Qiu_2020_DASS,"Psychological Well-being (including measures of Affect, Life Satisfaction, Wisdom, and Meaning in Life)","Depression Anxiety Stress Scales - 21 Items (DASS-21; Lovibond & Lovibond, 1995)",eng,canonical_instrument,21,952,21,21,1,MATCH,supplied,
-PEMAIW_Qiu_2020_DASS,"Psychological Well-being (including measures of Affect, Life Satisfaction, Wisdom, and Meaning in Life)",Depression Anxiety Stress Scales - 21 Items (DASS-21),eng,canonical_instrument,21,952,21,21,1,MATCH,supplied,
 SV-MAIA2_Randelovic_2021_DASS,Depression Anxiety Stress Scales-21 (DASS-21),Depression Anxiety Stress Scales-21 (DASS-21),srp,none_recorded,21,205,21,21,21,MATCH,supplied,
 dass21_medical_graduates_bangladesh,DASS-21,Depression Anxiety Stress Scales - 21 (DASS-21),ben,study_materials,21,209,21,21,0,MATCH,wording,
 depression_anxiety_stress,Depression Anxiety Stress Scales.,"Depression Anxiety Stress Scales (DASS-42), Ten Item Personality Inventory (TIPI), and a 16-word vocabulary checklist",NA,study_materials,68,39775,21,21,0,MATCH,wording,

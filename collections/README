@@ -84,6 +84,48 @@ the membership they describe.
    easy mistake. `\bmath` catches "mathematics anxiety".
 5. Upload with the site-update skill's upload_meta.py.
 
+---------------------------------------------------------------- exact-instrument collections
+
+phq9, gad7, rses, cesd, dass21, panas, tipi, pcl5, gse, erq, mspss and sd3 (#1712, added
+2026-09-30) answer "which tables administered THIS instrument?". They are `curated`, and they sit
+beside the looser cname: collections (depression, self_esteem, affect_panas ...) rather than
+replacing them.
+
+What counts (Ben, 2026-09-30):
+  - the full scale, or at least 80% of its items;
+  - one whole subscale (a DASS depression-only table, a PANAS positive-affect-only table);
+  - NOT a short form (PHQ-2, PHQ-8, GAD-2, CES-D-10, ...), a lengthened adaptation (the
+    Chinese 14-item ERQ), or a reworded version (BrummerHoffman's "Augmented" PHQ-9/GAD-7).
+
+`basis` starts with how identity was decided, and may carry a note after "; ":
+  wording    the study's own item text (provenance text_source = study_materials) matches the
+             instrument's wording. Identity is observed.
+  supplied   IRW's item-text pipeline identified the instrument and supplied its canonical
+             wording (canonical_instrument, translated_substitute, or no provenance row), so a
+             wording match only confirms IRW's own call. Identity is asserted.
+  name       no usable English item text; only the metadata names the instrument.
+  e.g. "supplied; subscale: anxiety (7/21)", "name; partial: 18/20 items".
+The note travels inside `basis` because read_curated() publishes only table and basis. For the
+strictly verified set, filter on basis starting with "wording". It is small: 27 of 188
+tables at launch.
+
+How membership was built, and how to redo it:
+  1. python3 collections/scout_instruments.py [slug ...]
+       Candidates are tables whose construct name / item-text instrument field names the
+       instrument, or a whole table-name token does. Each is judged on its item text against
+       the instrument's key: the k most common normalised wordings among the candidates
+       (printed to curated/<slug>.key.txt; CHECK IT. With under ~3 texts the key is garbage:
+       PSS's came out as a nursing-stressor scale). Writes curated/<slug>.review.csv.
+  2. python3 collections/presort_instruments.py
+       Applies the rules above -> curated/instruments_presort.csv (ACCEPT / REJECT / DECIDE,
+       with a reason on every row). Rows the rules leave open get a hand call, with its
+       reason, in curated/instruments_overrides.csv.
+  3. A human reviews the presort; the ACCEPT rows become curated/<slug>.csv (table, basis,
+     note). A table absent from metadata.csv can't be a member (10_collections.R stops).
+Not yet done (the second batch): SWLS, PSS-10, BFI-44, BFI-10, UCLA Loneliness, FCV-19S,
+LOT-R, ISI and Brief COPE have review sheets, but too few tables carry item text for the
+derived key to be right. They need a hand-written key, or name-only review.
+
 ---------------------------------------------------------------- two invariants
 
 1. MEMBERSHIP IS CONFIRMED-ONLY. There is no candidate/status column. Scouting
