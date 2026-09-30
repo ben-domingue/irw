@@ -199,6 +199,8 @@ in-person article; guo_2025_ar maps to ARS-30 items 13, 4, 17, 30, 9). OBTAINABL
   the instrument's, so held), silvia_2021_bicb (Silvia is not the originator, rule 4 -> held), csibra_2025_dafrs
   (items adapted from ADHD RS-IV / Pearson SSIS inherit their blocks, rule 6; the authors' own items ship under their
   CC BY if the item-level mapping is clear, else the family blocks, rules 11/12).
+- The 7 draft block rows (Neuro-QoL, IKDC, CLKT Malay, SD4, in-person BARS, PozQoL, AIS) RATIFIED by Ben and moved
+  into the register. CLKT and AIS are marked INFERRED (rule 12). SD4's OpenMind License = CC BY-NC 3.0-compatible.
 
 **Hygiene**
 - The PROMIS register row cites a HealthMeasures Terms of Use PDF path that now 404s (site rebuilt 2026-09-14). Current copy:
