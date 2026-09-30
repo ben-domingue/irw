@@ -191,6 +191,15 @@ in-person article; guo_2025_ar maps to ARS-30 items 13, 4, 17, 30, 9). OBTAINABL
 - Draft register block rows (register_rows_draft_2382.csv): Neuro-QoL (24; same HealthMeasures terms as PROMIS), IKDC,
   CLKT Malay, SD4, in-person teaching BARS, PozQoL, AIS.
 
+**Ruled 2026-09-30 (Ben + the rules page)**
+- fcupanas_cffsdas_reyna_2018_7pt: ship the ENGLISH PANAS adjectives, not the Spanish (register row PANAS-ES-MORIONDO,
+  block on the Spanish; note names the Moriondo 2012 version respondents answered).
+- Settled by the rules page, not asked: qiang_2025 (near-verbatim Hewlin = derivative, rules 4/6 -> PsycTESTS hold),
+  korner_2022_gpsps (a translation inherits the original's verdict, rule 6; rule 14's "CC BY first publication" means
+  the instrument's, so held), silvia_2021_bicb (Silvia is not the originator, rule 4 -> held), csibra_2025_dafrs
+  (items adapted from ADHD RS-IV / Pearson SSIS inherit their blocks, rule 6; the authors' own items ship under their
+  CC BY if the item-level mapping is clear, else the family blocks, rules 11/12).
+
 **Hygiene**
 - The PROMIS register row cites a HealthMeasures Terms of Use PDF path that now 404s (site rebuilt 2026-09-14). Current copy:
   https://healthmeasures.net/wp-content/uploads/2026/06/Terms-of-Use_HM_approved_1-12-17-Updated-Copyright-Notices.pdf
