@@ -11,7 +11,8 @@ or a whole table-name token does. It is then judged on its item text:
             the candidates (the modal wording, not one reference table's: RSES item 7 is
             "I'm" in most deposits and "I am" in some). Printed for a human to check.
   n_mapped  how many of the k key items the table carries: exact normalised match, or a
-            near match (token Jaccard >= 0.8) counted separately as n_near.
+            near match (token Jaccard >= 0.8, or the key wording whole inside a longer item,
+            e.g. behind "In the past week") counted separately as n_near.
 
 basis (what a promoted member's `basis` will say):
   wording   >= 80% of items map and the text came from the study's own materials
@@ -68,6 +69,12 @@ def norm(s):
     s = re.sub(r"[.']", "", s)
     s = re.sub(r"[^\w\s]", " ", s)
     return re.sub(r"\s+", " ", s).strip()
+
+
+def close(w, x):
+    """A near match: token Jaccard >= 0.8, or the key wording whole inside a longer item
+    ("in the past week i felt down hearted and blue")."""
+    return jaccard(w, x) >= 0.8 or (len(w.split()) >= 3 and f" {w} " in f" {x} ")
 
 
 def jaccard(a, b):
@@ -134,7 +141,7 @@ def scout(inst, tabs, avail):
             continue
         words = set(tx.values())
         exact = sum(w in words for w in key)
-        near = sum(w not in words and any(jaccard(w, x) >= 0.8 for x in words) for w in key)
+        near = sum(w not in words and any(close(w, x) for x in words) for w in key)
         n = exact + near
         if n >= 0.8 * k:
             verdict, basis = "MATCH", ("wording" if r.text_source == "study_materials" else "supplied")

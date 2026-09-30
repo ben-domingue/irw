@@ -1,0 +1,31 @@
+slug,table,suggestion,basis,member_note,reason
+cesd,RD_PPCSEDSOF_Afable_2023,REJECT,,,11 items with 6 of the 20 matching: a CES-D short form (the 11-item Iowa form)
+cesd,chen_2022_cesd,REJECT,,,construct name says CESD-10: a short form
+cesd,goldberg_2018_eps_cesd,REJECT,,,instrument field says the Revised CES-D (24 items): a different instrument
+cesd,robison_2026_retesting_cesd,ACCEPT,name,partial: 18/20 items,construct name says CES-D (18 items); 18/20 clears the 80% partial-table rule
+cesd,weida_2020_cesd10,REJECT,,,instrument field says CES-D-10: a short form
+dass21,SV-MAIA2_Randelovic_2021_DASS,ACCEPT,name,,DASS-21 in Serbian (21 items); only the few English-cognate items can match
+dass21,dass_Thiyagarajan2022,ACCEPT,name,,DASS-21 (21 items) in Malay and English; the Malay items can't match the English key
+erq,ecps_sahm_2024_identity,REJECT,,,COVIDiSTRESS group-identification items; the ERQ hit came from the deposit's paper title
+erq,garciabatista_2021_erq,ACCEPT,name,,ERQ (10 items) in Spanish; only English-cognate items match
+gad7,anjum_2022_gad7,ACCEPT,supplied,,GAD-7 (7 items) in Bengali; 5/7 match the English key through translation variants
+gad7,gad_BrummerHoffman_2021,REJECT,,,"""Augmented GAD-7"": a question-framing experiment that rewords the items (the invariance study excluded it as a wording manipulation)"
+gse,lorenz_2016_efficacy1,ACCEPT,name,,instrument field: the German original (SWE) of the GSE (10 items)
+gse,ye_2025_q25_scale,ACCEPT,name,,instrument field: GSE-10 Chinese adaptation
+gse,zautra_2015_caug,ACCEPT,name,,instrument field: GSE Spanish version (10 items)
+mspss,jeilani_2024_social_outcomes,ACCEPT,supplied,subscale: significant other (4/12),instrument field: the MSPSS significant-other subscale (4 items)
+panas,alcoholhealthwarninglabel_brennan_2022_emotional_arousal_followup,REJECT,,,emotional-arousal ratings to warning labels; shares 2 affect words with PANAS
+panas,fcupanas_cffsdas_reyna_2018,ACCEPT,name,,construct name: PANAS (20 items) in Spanish
+panas,pierro_2018_negaffect_s3,ACCEPT,name,subscale: negative affect (10/20),construct name: PANAS negative affect (10 items)
+panas,pierro_2018_posaffect_s3,ACCEPT,name,subscale: positive affect (10/20),construct name: PANAS positive affect (10 items)
+panas,qi_2025_panas,ACCEPT,name,partial: 18/20 items,PANAS Chinese revision (Qiu et al. 2008); 18/20 clears the 80% partial-table rule
+panas,tang_2024_panas_negative,REJECT,,,7 of the 10 negative-affect items: below 80% of the subscale
+panas,tang_2024_panas_positive,REJECT,,,5 of the 10 positive-affect items: below 80% of the subscale
+phq9,heekerens2025_phq,REJECT,,,instrument field says PHQ-8: a short form
+phq9,narcissism_schneider_2025_study2_phq,REJECT,,,15 items: probably the PHQ-15 (somatic symptoms); a different instrument
+phq9,phq_BrummerHoffman_2021,REJECT,,,"""Augmented PHQ-9"": a question-framing experiment that rewords the items (the invariance study excluded it as a wording manipulation)"
+rses,chen2022b_selfesteem,ACCEPT,name,,instrument field: RSES Chinese version (Ji and Yu 1999)
+rses,ehealth_rioux_2025_rses,REJECT,,,construct name is Resilience (4 items); the table name's rses isn't Rosenberg
+rses,sd3ypl_klimczak_2019_ses,ACCEPT,name,,construct name: RSES (10 items) in Polish
+sd3,sd3ypl_klimczak_2019_sd3,ACCEPT,name,partial: 26/27 items,SD3 in Polish; 26/27 clears the 80% partial-table rule
+sd3,west_2021_retaliatory_aggression_study3_sd3_psychopathy,ACCEPT,name,subscale: psychopathy (9/27),table name: the SD3 psychopathy subscale (9 items)
