@@ -107,7 +107,7 @@ What counts (Ben, 2026-09-30):
   e.g. "supplied; subscale: anxiety (7/21)", "name; partial: 18/20 items".
 The note travels inside `basis` because read_curated() publishes only table and basis. For the
 strictly verified set, filter on basis starting with "wording". It is small: 29 of the
-188 first-batch memberships, and 2 of the 82 in the second batch.
+188 first-batch memberships, and 1 of the 82 in the second batch.
 
 How membership was built, and how to redo it:
   1. python3 collections/scout_instruments.py [slug ...]
@@ -122,6 +122,9 @@ How membership was built, and how to redo it:
        reason, in curated/instruments_overrides.csv.
   3. A human reviews the presort; the ACCEPT rows become curated/<slug>.csv (table, basis,
      note). A table absent from metadata.csv can't be a member (10_collections.R stops).
+     That cuts both ways: WITHDRAWING a table that a curated file names makes the next pipeline
+     run stop at this stage. When a table is withdrawn, remove it from every curated/*.csv
+     (grep -l <table> collections/curated/*.csv) in the same PR. saha_2026_cesd was the first case.
 The second batch (swls, pss10, bfi44, bfi10, ucla_ls, fcv19s, lotr, isi, brief_cope; added
 2026-09-30) had too little item text for a derived key: their <slug>.key.txt files are NOT the
 instruments (pss10's is a nursing-stressor scale, bfi10's is German), so ignore them. Those nine
