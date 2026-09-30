@@ -46,14 +46,78 @@
 #   compose the Brief Resilience Scale"; the BRS has six. Either way these
 #   are 3 of them.
 #
+#   Added 2026-09-30, second pass (every wave unless noted; 1-7 unless noted):
+#   degirolamo_2022_risk_perception  pag5_1_1 likelihood of catching COVID-19
+#                          (1 very unlikely .. 7 very likely), pag5_2_1
+#                          vulnerability (1 completely VULNERABLE .. 7
+#                          completely invulnerable -- the opposite pole order),
+#                          pag5_3_1 severity (1 not at all severe .. 7 very
+#                          severe). The paper's "COVID-19 Perceived Risk".
+#   degirolamo_2022_health_literacy  pag4_1_1..9, how easy is it to find /
+#                          understand / judge / follow COVID-19 information
+#                          and recommendations: 1 very difficult .. 7 very easy.
+#   degirolamo_2022_protective_behaviour  pag7_1_1..8, pag7_2_9, how often in
+#                          the past 7 days (hand washing, masks, distancing,
+#                          staying home from work/school, ...): 1 never .. 7
+#                          very often. pag7_2_9 (stayed home from work or
+#                          school) has 8 = "not applicable": those rows are
+#                          dropped, not responses.
+#   degirolamo_2022_covid_perception  pag8_1_1..7, "I feel COVID-19 is ...",
+#                          bipolar 1-7 with item-specific poles (1 .. 7):
+#                          _1 close to me .. far from me; _2 spreading slowly
+#                          .. fast; _3 something I think about all the time ..
+#                          never; _4 frightening .. not; _5 exaggerated by the
+#                          media .. not; _6 makes me feel helpless .. something
+#                          I can handle; _7 stressful .. not. Poles are not
+#                          aligned (_2 runs the other way from the rest).
+#   degirolamo_2022_trust_sources  pag9_1_1..11, trust in COVID-19 information
+#                          from TV, newspapers, health workers, social media,
+#                          radio, Ministry of Health, ISS, celebrities, WHO,
+#                          helplines, national website: 1 no trust .. 7 very
+#                          high.
+#   degirolamo_2022_info_use  pag10_1_1..11, how often the same 11 sources are
+#                          used for COVID-19 information: 1 never .. 7 very
+#                          often.
+#   degirolamo_2022_trust_institutions  pag12_1_1..7, pag12_2_8..9, trust that
+#                          the GP, hospitals, Ministry of Health, ISS, schools,
+#                          public transport, police, employer (_8), parish (_9)
+#                          can handle COVID-19: 1 no trust .. 7 very high.
+#                          _8 and _9 have 8 = "not applicable": dropped.
+#   degirolamo_2022_cmq    pag14_1_1..5, the five Conspiracy Mentality
+#                          Questionnaire statements (Bruder et al. 2013):
+#                          1 completely false .. 7 completely true.
+#   degirolamo_2022_k6     WAVE 4 ONLY. pag20_2_1..6, the Kessler K6 (past 30
+#                          days: nervous, hopeless, restless, so depressed
+#                          nothing could cheer you up, everything an effort,
+#                          worthless), 1 "sempre" (always) .. 5 "mai" (never):
+#                          REVERSED against standard K6 scoring (0 none of the
+#                          time .. 4 all of the time); high resp = LOW distress.
+#   degirolamo_2022_tipi   WAVE 4 ONLY. pag20_4_1..10, Ten-Item Personality
+#                          Inventory (Italian), 1 completely disagree .. 7
+#                          completely agree. Unreversed: TIPI keys items 2, 4,
+#                          6, 8, 10 negatively.
+#   degirolamo_2022_optimism_selfworth  WAVE 4 ONLY. pag20_3_1..8, an unnamed
+#                          8-statement block (faith in the future, satisfied
+#                          with life, someone to count on, look to the future
+#                          with hope, satisfied with myself, the future seems
+#                          dark [negative], proud, confidence in myself): 1
+#                          strongly disagree .. 5 strongly agree. Neither the
+#                          paper nor the codebook names a source instrument.
+#   Not built: self-efficacy (2 items); policy and vaccine attitudes (items
+#   change from wave to wave, one statement per policy); pag19 behaviour
+#   changes (yes / no / not applicable, a checklist of unrelated behaviours);
+#   the testing and contact-tracing reason checklists (pag16, yes/no, asked
+#   only after a yes/no gate).
+#
 # Item text: not shipped. WHO-5 is `block` in
 #   itemtext/instrument_rights_register.csv (WHO, CC BY-NC-SA 3.0 IGO, item
 #   text withdrawn 2026-09-08); the source item codes are kept, so the
-#   register's ^who5 item-code pattern does not fire. BRS is not in the
-#   register.
+#   register's ^who5 item-code pattern does not fire. The other instruments
+#   are not cleared in the register either.
 #
-# No missing responses on either block in any wave (checked below). All
-#   10,013 respondents are kept.
+# Missing data: none in any block except the "not applicable" codes above
+#   (checked below). Every respondent of the waves a table covers is kept:
+#   10,013 for the four-wave tables, 2,500 for the wave-4 ones.
 # Covariates, identical coding in all four dictionaries:
 #   cov_weight          peso, the survey's post-stratification weight
 #   cov_age             pag2_2, years (18-70)
@@ -87,11 +151,37 @@ UA = {"User-Agent": "IRW-Finder/1.0 (ben.domingue@gmail.com)"}
 URL = "https://zenodo.org/records/5040719/files/Valide_DATA_{w}W.csv?download=1"
 N_ROWS = {1: 2504, 2: 2502, 3: 2507, 4: 2500}
 
+ALL = (1, 2, 3, 4)
+# table: (items, permitted resp, waves, "not applicable" code dropped per item)
 TABLES = {
     "degirolamo_2022_who5": ([f"pag20_1_{i}" for i in range(1, 6)],
-                             range(1, 7)),
+                             range(1, 7), ALL, {}),
     "degirolamo_2022_brs": ([f"pag15_1_{i}" for i in range(1, 4)],
-                            range(1, 8)),
+                            range(1, 8), ALL, {}),
+    "degirolamo_2022_risk_perception": (["pag5_1_1", "pag5_2_1", "pag5_3_1"],
+                                        range(1, 8), ALL, {}),
+    "degirolamo_2022_health_literacy": ([f"pag4_1_{i}" for i in range(1, 10)],
+                                        range(1, 8), ALL, {}),
+    "degirolamo_2022_protective_behaviour": (
+        [f"pag7_1_{i}" for i in range(1, 9)] + ["pag7_2_9"],
+        range(1, 8), ALL, {"pag7_2_9": "8"}),
+    "degirolamo_2022_covid_perception": ([f"pag8_1_{i}" for i in range(1, 8)],
+                                         range(1, 8), ALL, {}),
+    "degirolamo_2022_trust_sources": ([f"pag9_1_{i}" for i in range(1, 12)],
+                                      range(1, 8), ALL, {}),
+    "degirolamo_2022_info_use": ([f"pag10_1_{i}" for i in range(1, 12)],
+                                 range(1, 8), ALL, {}),
+    "degirolamo_2022_trust_institutions": (
+        [f"pag12_1_{i}" for i in range(1, 8)] + ["pag12_2_8", "pag12_2_9"],
+        range(1, 8), ALL, {"pag12_2_8": "8", "pag12_2_9": "8"}),
+    "degirolamo_2022_cmq": ([f"pag14_1_{i}" for i in range(1, 6)],
+                            range(1, 8), ALL, {}),
+    "degirolamo_2022_k6": ([f"pag20_2_{i}" for i in range(1, 7)],
+                           range(1, 6), (4,), {}),
+    "degirolamo_2022_tipi": ([f"pag20_4_{i}" for i in range(1, 11)],
+                             range(1, 8), (4,), {}),
+    "degirolamo_2022_optimism_selfworth": (
+        [f"pag20_3_{i}" for i in range(1, 9)], range(1, 6), (4,), {}),
 }
 
 COVS = {"peso": "cov_weight", "pag2_2": "cov_age", "pag2_3": "cov_sex",
@@ -146,10 +236,18 @@ def convert():
     spans = d.groupby("cov_survey_wave")["date"].agg(["min", "max"])
     assert (spans["min"].shift(-1).dropna() > spans["max"].iloc[:-1]).all()
 
-    for table, (items, allowed) in TABLES.items():
-        assert d[items].notna().all().all(), table
-        long = d.melt(id_vars=["id", "date"] + cov_cols, value_vars=items,
-                      var_name="item", value_name="resp")
+    for table, (items, allowed, waves, na_codes) in TABLES.items():
+        sub = d[d["cov_survey_wave"].isin(waves)]
+        n_ids = sum(N_ROWS[w] for w in waves)
+        assert len(sub) == n_ids
+        assert sub[items].notna().all().all(), table
+        long = sub.melt(id_vars=["id", "date"] + cov_cols, value_vars=items,
+                        var_name="item", value_name="resp")
+        n_na = 0
+        for it, code in na_codes.items():
+            hit = (long["item"] == it) & (long["resp"] == code)
+            n_na += int(hit.sum())
+            long = long[~hit]
         long["resp"] = long["resp"].astype(int)
         for it, g in long.groupby("item"):
             bad = set(g["resp"]) - set(allowed)
@@ -157,7 +255,8 @@ def convert():
         long = long[["id", "item", "resp", "date"] + cov_cols]
         long = long.sort_values(["cov_survey_wave", "id", "item"]) \
             .reset_index(drop=True)
-        assert len(long) == 10013 * len(items)
+        assert len(long) == n_ids * len(items) - n_na
+        assert long["id"].nunique() == n_ids
         assert not long.duplicated(["id", "item"]).any()
         pv = {i: set(allowed) for i in items}
         checks = run_qc(long, permitted_values=pv)
