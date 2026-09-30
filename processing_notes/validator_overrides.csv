@@ -15,3 +15,6 @@ date,tool,table,checks,reason,user
 2026-09-29,irw-validate,petley_2025_flanker_study1_manwoman,dup_id_item,"Ben 2026-09-29 (#2401): repeated id+item rows are by design (expanded from correct/total counts)",ben
 2026-09-29,irw-validate,petley_2025_flanker_study2_auditory,dup_id_item,"Ben 2026-09-29 (#2401): repeated id+item rows are by design (expanded from correct/total counts)",ben
 2026-09-29,irw-validate,petley_2025_flanker_study2_visual,dup_id_item,"Ben 2026-09-29 (#2401): repeated id+item rows are by design (expanded from correct/total counts)",ben
+2026-09-30,irw-validate,chile_2023_children-adolescents-survey_cp_c,name_length,"Ben 2026-09-29 (#2401): leave already-published tables with long names as they are; the 40-char cap applies at intake",ben
+2026-09-30,irw-validate,selm_2019_climate_knowledge,dup_id_item,"#2401 removed the exact duplicate record; the 6 remaining rows are different respondents sharing a survey number (conflicting), which Ben ruled stay with #1856",claude
+2026-09-30,irw-validate,vollbracht_et_al_2026_ambulatory_assessment,name_length,"Ben 2026-09-29 (#2401): leave already-published tables with long names as they are; the 40-char cap applies at intake",ben

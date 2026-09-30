@@ -283,11 +283,17 @@ use "chile_social-welfare-survey.csv", clear
 * compress the dataset to optimize memory usage
 compress
 
+* yy3 ("¿De cuánto sería un ingreso para cubrir todas las necesidades por un
+* mes?") is a peso amount (60,000-14,000,000), not an item response: carry it
+* as a person-level covariate instead (#2401)
+rename yy3 cov_income_clp
+label values cov_income_clp
+
 * keep only id, date, covariates, and "yy" variables
-keep id date cov_* yy1 yy2 yy3 yy4 yy5 yy5_a
+keep id date cov_* yy1 yy2 yy4 yy5 yy5_a
 
 * create long-format data from wide data
-local question_cols yy1 yy2 yy3 yy4 yy5 yy5_a
+local question_cols yy1 yy2 yy4 yy5 yy5_a
 tempfile long_yy
 save `long_yy', emptyok replace
 
@@ -304,7 +310,7 @@ foreach var of local question_cols {
 
 use `long_yy', clear
 
-drop yy1 yy2 yy3 yy4 yy5 yy5_a
+drop yy1 yy2 yy4 yy5 yy5_a
 
 drop if missing(item) | item == ""
 
@@ -518,6 +524,11 @@ drop if missing(item) | item == ""
 * follow-ups the respondent was never shown. Those are not responses, so they
 * are not rows. Retained values are untouched.
 drop if missing(resp)
+
+* h3_d and h3_e carry a not-applicable option as code 3 ("No hay niños, niñas o
+* adolescentes en el hogar"; "No usa transporte público"), not a third step on
+* their Sí=1/No=2 scale. Those are not responses, so they are not rows (#2401).
+drop if inlist(item, "h3_d", "h3_e") & resp == 3
 
 * encode any needed variables
 gen resp2 = resp

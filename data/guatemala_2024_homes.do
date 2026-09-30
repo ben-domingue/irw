@@ -32,6 +32,9 @@ rename *, lower
 rename p02a03 cov_age
 rename p02a02 cov_sex
 rename p02a08 cov_lang
+
+* #2401: cov_lang 98 is a missing-value code
+replace cov_lang = . if cov_lang == 98
 rename p02a11a cov_educ
 rename total_pers cov_hhsize
 
@@ -287,7 +290,14 @@ rename resp2 resp
 * set code 98 to missing in resp
 replace resp = . if resp == 98
 
+* #2401: on the Si(1)/No(2)/NS(3) grid items, 3 = "NS" (no sabe) is a non-response
+* (BOLETA-ENCASBA-2024); drop those rows
+drop if resp == 3 & regexm(item, "^[a-z]+_p0[45]a[0-9][0-9][ac][0-9]+$")
+
 * reorder variables
+* #2401: resp must be non-missing; drop rows left blank after the recodes
+drop if missing(resp)
+
 order id item resp cov*, first
 
 * sort
@@ -336,6 +346,13 @@ rename resp2 resp
 
 replace resp = . if resp == 98
 
+* #2401: on the Si(1)/No(2)/NS(3) grid items, 3 = "NS" (no sabe) is a non-response
+* (BOLETA-ENCASBA-2024); drop those rows
+drop if resp == 3 & regexm(item, "^[a-z]+_p0[45]a[0-9][0-9][ac][0-9]+$")
+
+* #2401: resp must be non-missing; drop rows left blank after the recodes
+drop if missing(resp)
+
 order id item resp cov*, first
 sort id item
 
@@ -377,6 +394,13 @@ drop resp
 rename resp2 resp
 
 replace resp = . if resp == 98
+
+* #2401: on the Si(1)/No(2)/NS(3) grid items, 3 = "NS" (no sabe) is a non-response
+* (BOLETA-ENCASBA-2024); drop those rows
+drop if resp == 3 & regexm(item, "^[a-z]+_p0[45]a[0-9][0-9][ac][0-9]+$")
+
+* #2401: resp must be non-missing; drop rows left blank after the recodes
+drop if missing(resp)
 
 order id item resp cov*, first
 sort id item
@@ -420,6 +444,13 @@ rename resp2 resp
 
 replace resp = . if resp == 98
 
+* #2401: on the Si(1)/No(2)/NS(3) grid items, 3 = "NS" (no sabe) is a non-response
+* (BOLETA-ENCASBA-2024); drop those rows
+drop if resp == 3 & regexm(item, "^[a-z]+_p0[45]a[0-9][0-9][ac][0-9]+$")
+
+* #2401: resp must be non-missing; drop rows left blank after the recodes
+drop if missing(resp)
+
 order id item resp cov*, first
 sort id item
 
@@ -461,6 +492,13 @@ drop resp
 rename resp2 resp
 
 replace resp = . if resp == 98
+
+* #2401: on the Si(1)/No(2)/NS(3) grid items, 3 = "NS" (no sabe) is a non-response
+* (BOLETA-ENCASBA-2024); drop those rows
+drop if resp == 3 & regexm(item, "^[a-z]+_p0[45]a[0-9][0-9][ac][0-9]+$")
+
+* #2401: resp must be non-missing; drop rows left blank after the recodes
+drop if missing(resp)
 
 order id item resp cov*, first
 sort id item
@@ -504,6 +542,13 @@ rename resp2 resp
 
 replace resp = . if resp == 98
 
+* #2401: on the Si(1)/No(2)/NS(3) grid items, 3 = "NS" (no sabe) is a non-response
+* (BOLETA-ENCASBA-2024); drop those rows
+drop if resp == 3 & regexm(item, "^[a-z]+_p0[45]a[0-9][0-9][ac][0-9]+$")
+
+* #2401: resp must be non-missing; drop rows left blank after the recodes
+drop if missing(resp)
+
 order id item resp cov*, first
 sort id item
 
@@ -545,6 +590,13 @@ drop resp
 rename resp2 resp
 
 replace resp = . if resp == 98
+
+* #2401: on the Si(1)/No(2)/NS(3) grid items, 3 = "NS" (no sabe) is a non-response
+* (BOLETA-ENCASBA-2024); drop those rows
+drop if resp == 3 & regexm(item, "^[a-z]+_p0[45]a[0-9][0-9][ac][0-9]+$")
+
+* #2401: resp must be non-missing; drop rows left blank after the recodes
+drop if missing(resp)
 
 order id item resp cov*, first
 sort id item
@@ -588,6 +640,13 @@ rename resp2 resp
 
 replace resp = . if resp == 98
 
+* #2401: on the Si(1)/No(2)/NS(3) grid items, 3 = "NS" (no sabe) is a non-response
+* (BOLETA-ENCASBA-2024); drop those rows
+drop if resp == 3 & regexm(item, "^[a-z]+_p0[45]a[0-9][0-9][ac][0-9]+$")
+
+* #2401: resp must be non-missing; drop rows left blank after the recodes
+drop if missing(resp)
+
 order id item resp cov*, first
 sort id item
 
@@ -629,6 +688,13 @@ drop resp
 rename resp2 resp
 
 replace resp = . if resp == 98
+
+* #2401: on the Si(1)/No(2)/NS(3) grid items, 3 = "NS" (no sabe) is a non-response
+* (BOLETA-ENCASBA-2024); drop those rows
+drop if resp == 3 & regexm(item, "^[a-z]+_p0[45]a[0-9][0-9][ac][0-9]+$")
+
+* #2401: resp must be non-missing; drop rows left blank after the recodes
+drop if missing(resp)
 
 order id item resp cov*, first
 sort id item
@@ -672,6 +738,13 @@ rename resp2 resp
 
 replace resp = . if resp == 98
 
+* #2401: on the Si(1)/No(2)/NS(3) grid items, 3 = "NS" (no sabe) is a non-response
+* (BOLETA-ENCASBA-2024); drop those rows
+drop if resp == 3 & regexm(item, "^[a-z]+_p0[45]a[0-9][0-9][ac][0-9]+$")
+
+* #2401: resp must be non-missing; drop rows left blank after the recodes
+drop if missing(resp)
+
 order id item resp cov*, first
 sort id item
 
@@ -713,6 +786,13 @@ drop resp
 rename resp2 resp
 
 replace resp = . if resp == 98
+
+* #2401: on the Si(1)/No(2)/NS(3) grid items, 3 = "NS" (no sabe) is a non-response
+* (BOLETA-ENCASBA-2024); drop those rows
+drop if resp == 3 & regexm(item, "^[a-z]+_p0[45]a[0-9][0-9][ac][0-9]+$")
+
+* #2401: resp must be non-missing; drop rows left blank after the recodes
+drop if missing(resp)
 
 order id item resp cov*, first
 sort id item
@@ -756,6 +836,13 @@ rename resp2 resp
 
 replace resp = . if resp == 98
 
+* #2401: on the Si(1)/No(2)/NS(3) grid items, 3 = "NS" (no sabe) is a non-response
+* (BOLETA-ENCASBA-2024); drop those rows
+drop if resp == 3 & regexm(item, "^[a-z]+_p0[45]a[0-9][0-9][ac][0-9]+$")
+
+* #2401: resp must be non-missing; drop rows left blank after the recodes
+drop if missing(resp)
+
 order id item resp cov*, first
 sort id item
 
@@ -797,6 +884,13 @@ drop resp
 rename resp2 resp
 
 replace resp = . if resp == 98
+
+* #2401: on the Si(1)/No(2)/NS(3) grid items, 3 = "NS" (no sabe) is a non-response
+* (BOLETA-ENCASBA-2024); drop those rows
+drop if resp == 3 & regexm(item, "^[a-z]+_p0[45]a[0-9][0-9][ac][0-9]+$")
+
+* #2401: resp must be non-missing; drop rows left blank after the recodes
+drop if missing(resp)
 
 order id item resp cov*, first
 sort id item
@@ -840,6 +934,13 @@ rename resp2 resp
 
 replace resp = . if resp == 98
 
+* #2401: on the Si(1)/No(2)/NS(3) grid items, 3 = "NS" (no sabe) is a non-response
+* (BOLETA-ENCASBA-2024); drop those rows
+drop if resp == 3 & regexm(item, "^[a-z]+_p0[45]a[0-9][0-9][ac][0-9]+$")
+
+* #2401: resp must be non-missing; drop rows left blank after the recodes
+drop if missing(resp)
+
 order id item resp cov*, first
 sort id item
 
@@ -881,6 +982,13 @@ drop resp
 rename resp2 resp
 
 replace resp = . if resp == 98
+
+* #2401: on the Si(1)/No(2)/NS(3) grid items, 3 = "NS" (no sabe) is a non-response
+* (BOLETA-ENCASBA-2024); drop those rows
+drop if resp == 3 & regexm(item, "^[a-z]+_p0[45]a[0-9][0-9][ac][0-9]+$")
+
+* #2401: resp must be non-missing; drop rows left blank after the recodes
+drop if missing(resp)
 
 order id item resp cov*, first
 sort id item
@@ -926,6 +1034,9 @@ replace resp = . if resp == 98
 replace resp = . if resp == 97
 replace resp = . if resp == 99
 
+* #2401: resp must be non-missing; drop rows left blank after the recodes
+drop if missing(resp)
+
 order id item resp cov*, first
 sort id item
 
@@ -969,6 +1080,9 @@ rename resp2 resp
 replace resp = . if resp == 98
 replace resp = . if resp == 97
 replace resp = . if resp == 99
+
+* #2401: resp must be non-missing; drop rows left blank after the recodes
+drop if missing(resp)
 
 order id item resp cov*, first
 sort id item
