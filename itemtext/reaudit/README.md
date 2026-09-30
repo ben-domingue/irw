@@ -96,5 +96,6 @@ sources confirmed 9 and contradicted none; the tenth (a Mendeley deposit) could 
     rows need licence notices after upload). They are not yet queued.
   - 4 INFERRED tables are held for verification (`inferred_hold_2382.csv`).
   - NOT_PUBLISHED and NOT_ITEM_TEXT: 410 `excluded` rows in `queue_state.csv`.
-  - RIGHTS_BLOCK with a quoted clause: `register_rows_draft_2382.csv`, 130 instrument rows covering 213 tables, for Ben
-    to ratify.
+  - RIGHTS_BLOCK with a quoted clause: 130 instrument rows covering 213 tables, drafted in `register_rows_draft_2382.csv`,
+    RATIFIED by Ben 2026-09-30 and moved into `itemtext/instrument_rights_register.csv` (the draft file is removed).
+    None of the 213 had item text in any irw_text shard. DERS-ES, Short O-LIFE and EOAQ-EST are marked INFERRED.
