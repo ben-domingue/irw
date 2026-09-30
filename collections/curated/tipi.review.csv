@@ -1,0 +1,10 @@
+table,construct_name,instrument,language,text_source,n_items,n_participants,k,n_mapped,n_near,verdict,basis,note
+artistic_preferences,Artistic Preferences Scales 1.2,"Artistic Preferences Scales 1.2 (APS), with the Ten Item Personality Inventory (TIPI) and a vocabulary check list (VCL)",eng,study_materials,56,18575,10,10,0,MATCH,wording,
+depression_anxiety_stress,Depression Anxiety Stress Scales.,"Depression Anxiety Stress Scales (DASS-42), Ten Item Personality Inventory (TIPI), and a 16-word vocabulary checklist",NA,study_materials,68,39775,10,10,0,MATCH,wording,
+gcbs_brotherton_2013_tipi,Ten Item Personality Inventory,"Ten Item Personality Inventory (TIPI; Gosling, Rentfrow & Swann, 2003)",eng,none_recorded,10,2495,10,10,0,MATCH,supplied,
+machivallianism_test_tipi,Ten Item Personality Inventory,Ten Item Personality Inventory (TIPI),eng,study_materials,10,73264,10,10,0,MATCH,wording,
+nature_relatedness,Nature Relatedness Scale,"Nature Relatedness Scale, 6-item short form (NR-6; Nisbet & Zelenski, 2013), administered with the Ten Item Personality Inventory (Gosling, Rentfrow & Swann, 2003) and a 16-word vocabulary check-list",eng,none_recorded,32,1522,10,10,0,MATCH,supplied,
+protestant_workethic,Protestant Work Ethic Scale,"Protestant Work Ethic Scale (Mirels & Garrett, 1971), administered with the Ten Item Personality Inventory (Gosling, Rentfrow & Swann, 2003) and a 16-word vocabulary check-list",eng,study_materials,45,1350,10,10,0,MATCH,wording,
+riasec,Holland Code (RIASEC) Test,"Holland Code (RIASEC) Test (IIP RIASEC Markers), administered with the Ten Item Personality Inventory and a 16-word vocabulary check-list",eng,study_materials,74,145828,10,10,0,MATCH,wording,
+rightwing_authoritariansim,Right Wing Authoritarianism,"Right-wing Authoritarianism Scale (RWAS), with the Ten Item Personality Inventory (TIPI) and a vocabulary check list (VCL)",eng,study_materials,48,9881,10,10,0,MATCH,wording,
+celik_2026_tipi,NA,"On-Maddeli Kişilik Ölçeği (OMKÖ) -- Turkish adaptation (Atak, 2013) of the Ten-Item Personality Inventory (TIPI; Gosling, Rentfrow & Swann, 2003)",tur,none_recorded,10,412,10,0,0,NAME_ONLY,name,item text not in English

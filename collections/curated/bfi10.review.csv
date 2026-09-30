@@ -1,0 +1,7 @@
+table,construct_name,instrument,language,text_source,n_items,n_participants,k,n_mapped,n_near,verdict,basis,note
+c19prc_uk_mcbride_2021_bfi10,Personality (Big Five),,eng,none_recorded,10,4949,10,0,0,NAME_ONLY,name,no item text
+doherty_2023_bfi10,NA,,eng,none_recorded,10,427,10,0,0,NAME_ONLY,name,no item text
+heekerens2025_bfi_extraversion,Big Five Inventory – Extraversion (German BFI-10),"Measures the degree to which adults are sociable, assertive, and energetic, using the 2-item Extraversion subscale from the German BFI-10",ger,none_recorded,2,88,10,2,0,PARTIAL,,first item: gehe aus mir heraus bin gesellig
+heekerens2025_bfi_neuroticism,Big Five Inventory – Neuroticism (German BFI-10),"Assesses openness to experience, imagination, and curiosity using the 2-item Openness subscale of the German BFI-10",ger,none_recorded,2,88,10,2,0,PARTIAL,,first item: bin entspannt lasse mich durch stress nicht aus der ruhe bringen
+heekerens2025_bfi_openness,Big Five Inventory – Openness (German BFI-10),"Assesses openness to experience, imagination, and curiosity using the 2-item Openness subscale of the German BFI-10",ger,none_recorded,2,88,10,2,0,PARTIAL,,first item: habe eine aktive vorstellungskraft bin phantasievoll
+jutte_2024_personality,NA,"Single-item Big Five personality measure (after Rammstedt et al., 2013, BFI-10)",ger,translated_substitute,5,825,10,4,0,PARTIAL,,first item: i am entrusting and belief in the good in man
