@@ -106,8 +106,8 @@ What counts (Ben, 2026-09-30):
   name       no usable English item text; only the metadata names the instrument.
   e.g. "supplied; subscale: anxiety (7/21)", "name; partial: 18/20 items".
 The note travels inside `basis` because read_curated() publishes only table and basis. For the
-strictly verified set, filter on basis starting with "wording". It is small: 27 of 188
-tables at launch.
+strictly verified set, filter on basis starting with "wording". It is small: 29 of the
+188 memberships at launch.
 
 How membership was built, and how to redo it:
   1. python3 collections/scout_instruments.py [slug ...]
