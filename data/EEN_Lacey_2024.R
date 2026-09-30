@@ -25,7 +25,15 @@ parent_df <- parent_df |>
 
 parent_df[] <- lapply(parent_df, function(x) as.numeric(as.character(x))) # Remove attributes
 parent_df[parent_df == -98] <- NA
+# #2401: codes from the .dta value labels.
+# mh_treatable is labelled 0 No / 1 Yes / 2 Maybe, so Maybe sat above Yes; reorder to
+# 0 No / 1 Maybe / 2 Yes.
+parent_df$mh_treatable <- c(0, 2, 1)[match(parent_df$mh_treatable, c(0, 1, 2))]
+# covid_jobloss is 0 No / 1 Yes / 2 Not employed; "Not employed" is not an answer to
+# "lost job in the Covid-19 crisis", so it becomes missing.
+parent_df$covid_jobloss[parent_df$covid_jobloss == 2] <- NA
 parent_df <- pivot_longer(parent_df, cols=-c(id, treat), names_to="item", values_to="resp")
+parent_df <- parent_df[!is.na(parent_df$resp), ]  # resp must be non-missing
 
 save(parent_df, file="EEN_Lacey_2024_Parent.Rdata")
 write.csv(parent_df, "EEN_Lacey_2024_Parent.csv", row.names=FALSE)

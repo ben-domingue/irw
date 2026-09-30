@@ -95,7 +95,12 @@ def convert() -> dict[str, pd.DataFrame]:
                 "id": d["PARTICIPANT_ID"],
                 "item": irw_item,
                 "resp": pd.to_numeric(d[resp_col], errors="coerce"),
-                "rt": pd.to_numeric(d[rt_col], errors="coerce"),
+                # *_RT is in milliseconds: integers with a median of ~2,160 per
+                # single-item screen, and a beep's 15 RTs sum to a median of
+                # 24,342 -- 6.8 hours if read as seconds, against beeps 1.5-3.5 h
+                # apart. The codebook and paper give no unit. IRW wants seconds
+                # (irw#2401).
+                "rt": pd.to_numeric(d[rt_col], errors="coerce") / 1000,
                 "date": date_sec,
                 "trial_occasion": pd.to_numeric(d["occ_running"], errors="coerce"),
                 "cov_group": pd.to_numeric(d["cond"], errors="coerce"),

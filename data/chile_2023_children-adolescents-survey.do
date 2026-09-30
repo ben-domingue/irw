@@ -103,6 +103,12 @@ replace cp9_2 = round(cp9_2, 0.1)
 replace cp9_3 = round(cp9_3, 0.1)
 replace cp9_4 = round(cp9_4, 0.1)
 
+* cp9_* are HH:MM durations (00:00-08:00) with "88:88" = No sabe, which the
+* conversion above turns into 88 + 88/60 = 89.5 hours: set it to missing (#2401)
+foreach var in cp9_1 cp9_2 cp9_3 cp9_4 {
+    replace `var' = . if `var' >= 88
+}
+
 * adjust to the preferred format
 format cp7_1 %9.1f
 format cp7_2 %9.1f
@@ -177,6 +183,11 @@ local base_items a c
 foreach prefix of local base_items {
     preserve
         keep if strpos(item, "`prefix'") == 1
+        * a missing resp is not a response, so it is not a row (#2401: cp_c only;
+        * cp_a is unchanged here)
+        if "`prefix'" == "c" {
+            drop if missing(resp)
+        }
         export delimited using "chile_2023_children-adolescents-survey_cp_`prefix'.csv", replace
     restore
 }

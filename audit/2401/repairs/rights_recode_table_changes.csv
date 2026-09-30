@@ -1,0 +1,2 @@
+table,irw_version,date,change,issue,replaces,replaced_by
+jablonska_2020_swls,,2026-09-30,"Item codes were the SWLS items' own wording (e.g. ""52. I am satisfied with my life.""), which IRW cannot redistribute; recoded to `swls_1`-`swls_5` in the scale's published order. 4,870 rows before and after; no response changed.",#2401,,

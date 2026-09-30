@@ -100,3 +100,8 @@ These supersede the per-table workflow above. The audit fixes **classes**, not t
 - **amatus siblings:** included under the same ruling.
 - **`ali_2021_iesr`:** withdraw its item text entirely (Ben, 2026-09-29). Its base `item_text` is the English IES-R, a `block` row. The response table stays.
 - **`_translated` rights flags:** where the flagged wording is confirmed as a `block` instrument's, it is removed under Decision 7 with no new ruling. If a table's base `item_text` also carries it, that comes back to Ben.
+- **A block covers translations (Ben, 2026-09-29).** A `block` row covers the instrument in every language, not only English, in `item_text` as well as `*_translated`. Applied here:
+  - withdraw `sun_2025_morality_study2_meaning`'s item text (the MLQ-Presence subscale, in Chinese);
+  - `jablonska_2020_swls` (Polish SWLS) and `queiros_2018_qcae` (Portuguese QCAE_1–6, which are the IRI) lose the blocked items in their base text as well;
+  - `gomez_2022_qcae` and `powell_2018_qcae` lose QCAE_1–6 (English IRI) from `item_text`, and the rest of the QCAE stays.
+- **`jablonska_2020_swls` response table (Ben, 2026-09-30):** its item codes are the SWLS's own English wording (e.g. "52. I am satisfied with my life."), which counts as shipped wording under the rights rules. The codes are recoded to neutral `swls_1`–`swls_5`, following the SWLS's published item order. No response changes.
