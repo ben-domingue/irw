@@ -1,0 +1,12 @@
+table,flag,severity,n_items,n_rows,n_ids,detail
+guatemala_2024_homes_energy,resp_binary_plus,warn,4,251,,e_p04a08a2+3(93); e_p04a08a3+3(61); e_p04a08a1+3(28); e_p04a08a4+3(69)
+guatemala_2024_homes_energy,cov_sentinel,warn,,,14,cov_lang: 98 (p05..p95 8..25)
+mclaughlin_samuel_2025_auditory_session_2,resp_mixed_scale,warn,2,,,"median item max 4; wide: familiarity_mc_accent, familiarity_mc_language"
+mclaughlin_samuel_2025_auditory_session_2,dup_id_item,error,,8360,,excess_occ=8360 exact=0 conflicts=5797 occ_cols=trial_index
+robison_2026_retesting_flanker,id_placeholder,error,,104,,id '0' holds 104 rows (median 70)
+robison_2026_retesting_flanker,dup_id_item,error,,59,,"excess_occ=59 exact=0 conflicts=16 occ_cols=wave,trial_number"
+meloni_2015_deq_oe_parent,resp_binary_plus,warn,6,9,,DEQ_OE_MD_SRel+2(2); DEQ_OE_MD_Env+2(1); DEQ_OE_ND_Est+2(1); DEQ_OE_SD_SRel+2(2); DEQ_OE_ND_Bio+2(2); DEQ_OE_MD_Bio+2(1)
+pauli_2021_ppos_d6,cov_range,error,,,,cov_birth_year spans -99..2001
+amatus_cipora_2024_fsmas_se,cov_all_null,warn,,,,cov_age is NULL on every row
+amatus_cipora_2024_fsmas_se,cov_all_null,warn,,,,cov_math_load is NULL on every row
+sned_bendall_2024,rt_constant,error,,,801,rt constant within 801/801 multi-row ids

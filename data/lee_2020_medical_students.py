@@ -30,11 +30,16 @@ Notes on the source coding
 * MBI: `MBI_EE`/`MBI_DP`/`MBI_PA` in the file equal the plain sum of the raw
   items in each subscale, confirming `MBI_1`..`MBI_22` are untransformed
   responses on the 0-6 "Never".."Every day" frequency scale.
-* JPSE: `JPSE_sum_total` likewise equals the plain sum of the stored items.
-  A valid JSPE total requires items 11-20 to be reverse-scored first, so the
-  stored per-item values for those items are already reversed (higher = more
-  empathic). They are exported as stored -- consistently coded within each
-  item -- and not transformed further here.
+* JPSE: items 11-20 are NOT reverse-scored in the file. They are the
+  negatively worded JSPE stems (e.g. JPSE_12 "Attentiveness to my patients'
+  personal experiences is irrelevant to treatment effectiveness"), and on the
+  stored values items 1-10 average about 5.6 and items 11-20 about 2.8, with
+  within-block inter-item r about .5 and between-block r about -.25. So resp is
+  raw agreement (1-7) on every item; reverse 11-20 before scoring or fitting a
+  unidimensional model. `JPSE_sum_total` equals the plain sum of the stored
+  items (663 of 664 complete rows), so the source's own total is computed
+  without that reversal. Items are exported as stored and not transformed
+  here (#2401).
 * DUSOCS: category 4 is "There is no such person", a not-applicable sentinel
   rather than a fourth ordinal step, so it is set to NA. The exported scale is
   1 (None) - 3 (A lot).

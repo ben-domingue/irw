@@ -68,6 +68,21 @@ class Rights(unittest.TestCase):
         self.assertIn("not a verdict", f.message)
         self.assertTrue(report.ok, "a rights hit must never block the gate")
 
+    def test_translated_column_hit_warns(self):
+        """2026-09-29 (irw#2401): a block row covers *_translated. beck_2021_iesr's
+        German item_text matched nothing; its English twin matched every stem."""
+        df = self.items(["Wie oft hatten Sie das Gefuehl ...", "Etwas anderes"])
+        df["language"] = "German"
+        df["item_text_translated"] = ["How often have you felt that you were unable "
+                                      "to control the important things in your life?",
+                                      "NA"]
+        report = validate_frame(df, label="x_2026_scale__items", profile="upload")
+        (f,) = self.rights_findings(report)
+        self.assertEqual(f.severity, "warn")
+        self.assertIn("item_text_translated", f.message)
+        self.assertIn("'q0'", f.message)
+        self.assertTrue(report.ok)
+
     def test_clean_table_says_nothing(self):
         report = validate_frame(self.items(["How tall are you?"]),
                                 label="x_2026_scale__items", profile="upload")

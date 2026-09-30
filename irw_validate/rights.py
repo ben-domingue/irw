@@ -8,7 +8,8 @@ the write path, on the two surfaces a restricted instrument reaches the corpus
 through:
 
   item text  -- `match_item_text`, case-insensitive substrings of canonical
-                stems, against `item_text` in an `__items` table;
+                stems, against `item_text` and the `*_translated` columns in an
+                `__items` table (the latter since 2026-09-29, irw#2401);
   item codes -- `match_item_code`, a regex, against `item` in a RESPONSE table.
                 A script that uses source headers as codes carries the
                 instrument into data no item-text withdrawal reaches
@@ -102,25 +103,37 @@ def _message(row, surface: str, hits: list) -> str:
             f"wording that differs from the canonical stems can still be covered.")
 
 
+#: Text columns the item-text surface reads. `*_translated` joined 2026-09-29
+#: (Ben, irw#2401): a block row covers them too. beck_2021_iesr shipped the German
+#: IES-R in item_text, which matches no stem, and Weiss & Marmar's English IES-R
+#: in item_text_translated, which matches them all.
+TEXT_COLUMNS = ("item_text", "item_text_translated", "option_text_translated",
+                "instructions_translated", "section_prompt_translated")
+
+
 def check_item_text(df, table: str, register=None) -> list:
-    """Findings for an item-text frame: one per register row it touches."""
-    if "item_text" not in df.columns:
-        return []
-    texts = df["item_text"].dropna().astype(str)
-    if texts.empty:
-        return []
-    low = texts.str.lower()
-    items = df.loc[texts.index, "item"].astype(str) if "item" in df.columns else texts
+    """Findings for an item-text frame: one per register row and text column it
+    touches, so a hit that only the English carries says so."""
     out = []
-    for row in register:
-        if not row["stems"]:
+    for col in TEXT_COLUMNS:
+        if col not in df.columns:
             continue
-        hit = low.apply(lambda t: any(s in t for s in row["stems"]))
-        if hit.any():
-            names = sorted(set(items[hit]))
-            out.append(Finding("rights_register", "warn",
-                               _message(row, "item(s)' text", names),
-                               table=table, group="rights"))
+        texts = df[col].dropna().astype(str)
+        texts = texts[~texts.str.strip().isin(["", "NA"])]
+        if texts.empty:
+            continue
+        low = texts.str.lower()
+        items = df.loc[texts.index, "item"].astype(str) if "item" in df.columns else texts
+        surface = "item(s)' text" if col == "item_text" else f"item(s)' {col}"
+        for row in register:
+            if not row["stems"]:
+                continue
+            hit = low.apply(lambda t: any(s in t for s in row["stems"]))
+            if hit.any():
+                names = sorted(set(items[hit]))
+                out.append(Finding("rights_register", "warn",
+                                   _message(row, surface, names),
+                                   table=table, group="rights"))
     return out
 
 
