@@ -105,3 +105,10 @@ These supersede the per-table workflow above. The audit fixes **classes**, not t
   - `jablonska_2020_swls` (Polish SWLS) and `queiros_2018_qcae` (Portuguese QCAE_1–6, which are the IRI) lose the blocked items in their base text as well;
   - `gomez_2022_qcae` and `powell_2018_qcae` lose QCAE_1–6 (English IRI) from `item_text`, and the rest of the QCAE stays.
 - **`jablonska_2020_swls` response table (Ben, 2026-09-30):** its item codes are the SWLS's own English wording (e.g. "52. I am satisfied with my life."), which counts as shipped wording under the rights rules. The codes are recoded to neutral `swls_1`–`swls_5`, following the SWLS's published item order. No response changes.
+
+## Decisions, round 3 (Ben, 2026-09-30)
+
+- **`alsecypiamh_wu_2022_empathy`:** withdraw its item text. It is the whole English IRI Empathic Concern subscale (items 2, 4, 9, 14, 18, 20, 22), and the IRI is a `block` row. The response table stays.
+- **`foundationalassist_worden_2026`:** withdraw it. Ben confirmed the source's dataset card (huggingface.co/datasets/ASSISTments/FoundationalASSIST) declares CC BY-NC 4.0, which is not an open license under IRW's rules.
+- **`jablonska_2020_hads`:** check its 14 item codes against the published HADS. If they are the licensed wording, recode them to `hads_1`–`hads_14` (no response changes); if they are a paraphrase, leave them.
+- Open the website PR (the tuason issues-page fix, the amatus entry, the 11 known-issue rows) and the `2401-audit-3` PR.

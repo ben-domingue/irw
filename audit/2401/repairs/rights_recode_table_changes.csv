@@ -1,2 +1,3 @@
 table,irw_version,date,change,issue,replaces,replaced_by
 jablonska_2020_swls,,2026-09-30,"Item codes were the SWLS items' own wording (e.g. ""52. I am satisfied with my life.""), which IRW cannot redistribute; recoded to `swls_1`-`swls_5` in the scale's published order. 4,870 rows before and after; no response changed.",#2401,,
+jablonska_2020_hads,,2026-09-30,"Item codes were the HADS items' own wording in English (source column headers, e.g. ""48. ...panic""), which IRW cannot redistribute; recoded to `hads_1`-`hads_14` in the scale's published order (source columns 36-49 already follow it). 13,636 rows before and after; per-item count and sum match live; no response changed.",#2401,,
