@@ -109,22 +109,42 @@ if not apply:
     print("Nothing deleted. Re-run with APPLY=1.")
     sys.exit(0)
 
+# Tables another withdrawal has already deleted from the same draft. The ledger records
+# them with `released` blank until the draft is released. Without this, the first run
+# on 2026-09-30 aborted on irw_text after withdraw_iesr_translated.py and
+# withdraw_translated_rights.py had (correctly) removed ali_2021_iesr__items and
+# sun_2025_morality_study2_meaning__items from that draft.
+import csv
+from pathlib import Path
+_ledger = Path(__file__).resolve().parents[2] / "itemtext" / "withdrawals.csv"
+PENDING = {}
+with open(_ledger, newline="", encoding="utf-8") as fh:
+    for row in csv.DictReader(fh):
+        if not row["released"].strip():
+            PENDING.setdefault(row["dataset"], set()).add(row["table"])
+
 # ---- apply ------------------------------------------------------------------------------
+# Re-runnable: a target already gone from the draft is skipped, so a run that stopped
+# partway can be picked up without touching what it already did.
 for dataset, targets in TARGETS.items():
     keep = current[dataset] - targets
     draft = open_draft(dataset)
     before = {t.name for t in draft.list_tables(max_results=5000)}
-    if targets - before:
-        sys.exit(f"ABORT: not in the {dataset} draft: {sorted(targets - before)}")
-    if keep - before:
-        sys.exit(f"ABORT: {dataset} draft is missing published tables: {sorted(keep - before)[:5]}")
-    for name in sorted(targets):
+    gone = targets - before
+    todo = targets & before
+    if gone:
+        print(f"{dataset}: {len(gone)} target(s) already removed from the draft; skipping them")
+    missing = keep - before - PENDING.get(dataset, set())
+    if missing:
+        sys.exit(f"ABORT: {dataset} draft is missing published tables: {sorted(missing)[:5]}")
+    for name in sorted(todo):
         draft.table(name).delete()
         print(f"deleted from {dataset} draft: {name}")
     after = names(dataset, "next")
-    assert before - after == targets, f"{dataset} MISMATCH: removed={sorted(before - after)}"
-    assert keep <= after, f"{dataset} went missing: {sorted(keep - after)}"
-    print(f"OK {dataset}: exactly {len(targets)} removed; {len(after)} left in the draft.")
+    assert before - after == todo, f"{dataset} MISMATCH: removed={sorted(before - after)}"
+    assert not (targets & after), f"{dataset}: targets still present: {sorted(targets & after)}"
+    assert keep - PENDING.get(dataset, set()) <= after, f"{dataset} went missing: {sorted(keep - after)}"
+    print(f"OK {dataset}: {len(todo)} removed now, {len(gone)} earlier; {len(after)} left in the draft.")
 
 print("Done. Each draft must be RELEASED to take effect. Ledger rows already exist; "
       "do not call ledger.record().")

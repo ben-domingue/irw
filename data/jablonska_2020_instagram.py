@@ -64,7 +64,13 @@ def convert():
     _ship(df, "jablonska_2020_upward_comparison", _cols(df, 14, 19))
     _ship(df, "jablonska_2020_downward_comparison", _cols(df, 20, 25))
     _ship(df, "jablonska_2020_rses", _cols(df, 26, 35))
-    _ship(df, "jablonska_2020_hads", _cols(df, 36, 49))
+    # Columns 36-49 are the HADS (Zigmond & Snaith 1983; the paper changes only the
+    # response format, to 7 points). Their headers are the items' own English
+    # wording, and the HADS is rights-blocked (register row; irw#2401, Ben
+    # 2026-09-30), so they are coded hads_1..hads_14. The source columns already
+    # follow the published item order.
+    _ship(df, "jablonska_2020_hads", _cols(df, 36, 49),
+          codes=[f"hads_{i}" for i in range(1, 15)])
     # The source's column headers are the items' own wording ("52. I am satisfied
     # with my life."). The SWLS is rights-blocked (register row; irw#2401, Ben
     # 2026-09-30), so the headers cannot ship as item codes: columns 50-54 are SWLS
