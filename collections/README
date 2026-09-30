@@ -107,7 +107,7 @@ What counts (Ben, 2026-09-30):
   e.g. "supplied; subscale: anxiety (7/21)", "name; partial: 18/20 items".
 The note travels inside `basis` because read_curated() publishes only table and basis. For the
 strictly verified set, filter on basis starting with "wording". It is small: 29 of the
-188 first-batch memberships, and 2 of the 82 in the second batch.
+188 first-batch memberships, and 1 of the 82 in the second batch.
 
 How membership was built, and how to redo it:
   1. python3 collections/scout_instruments.py [slug ...]
