@@ -17,21 +17,32 @@ TITLE = ("Data_Sheet_1_Relationship Between Medical Students' Empathy and "
          "Subjective Well-Being")
 UA    = {"User-Agent": "irw-batch/1.0 (research)"}
 
-# Six scales, letter-prefixed item columns. Scale identities inferred from
-# the aggregate subscale names in the trailing columns:
-#   B(21i) → empathy (JSE-like; 认知移情+情感移情 aggregate)
-#   C(25i) → resilience (CD-RISC-25; 坚韧性+力量性+乐观性 aggregate)
-#   D(16i) → academic burnout (情绪低落+行为不当+成就感低 aggregate)
-#   E(5i)  → life satisfaction (SWLS; 生活满意度 aggregate)
-#   F(14i) → career expectation (职业声望+自我发展+福利收入 aggregate)
-#   G(20i) → affect (PANAS-like; 积极情感+消极情感 aggregate)
+# Six letter-prefixed item blocks. The original script named them from the
+# aggregate column names and got four wrong (irw#2198). The identities below come
+# from reconstructing the deposit's own aggregate columns as exact item subsets,
+# checked against the paper's item counts and the administered questionnaire
+# (Data_Sheet_2.PDF):
+#   B(21i) -> Occupation Expectation       WITHDRAWN, see below (was wu2021_empathy)
+#   C(25i) -> resilience (CD-RISC-25)      wu2021_resilience
+#   D(16i) -> Basic Empathy Scale          wu2021_basic_empathy (was wu2021_burnout)
+#   E(5i)  -> life satisfaction (SWLS)     wu2021_swls
+#   F(14i) -> affect, 6 positive + 8 negative, scored 1-7; not PANAS (10+10) or
+#             SPANE (6+6)                  wu2021_affect (was wu2021_career_expectation)
+#   G(20i) -> Learning Burnout (Lian 2005) WITHDRAWN, see below (was wu2021_panas)
+#
+# B and G are withdrawn (Ben, 2026-09-30; irw#2195): their scale means correlate
+# -0.99 over 462 complete cases, which disattenuates to -1.11 -- impossible for two
+# separate measurements -- and the deposited file is row-sorted on exactly those two
+# blocks. What produced this is unknown, so neither is shipped.
+#
+# The old names are not reused, so nobody who pulled a table under an old name
+# silently gets a different scale. The script was wu2021_empathy.py; it is now
+# wu2021.py so that get_processing_notes' prefix match finds every table it writes.
 SCALES = {
-    "empathy":            [f"B{i}"  for i in range(1, 22)],
-    "resilience":         [f"C{i}"  for i in range(1, 26)],
-    "burnout":            [f"D{i}"  for i in range(1, 17)],
-    "swls":               [f"E{i}"  for i in range(1, 6)],
-    "career_expectation": [f"F{i}"  for i in range(1, 15)],
-    "panas":              [f"G{i}"  for i in range(1, 21)],
+    "resilience":    [f"C{i}"  for i in range(1, 26)],
+    "basic_empathy": [f"D{i}"  for i in range(1, 17)],
+    "swls":          [f"E{i}"  for i in range(1, 6)],
+    "affect":        [f"F{i}"  for i in range(1, 15)],
 }
 
 # Aggregate/subscale columns to drop (not item responses)
@@ -112,7 +123,7 @@ def convert():
             "license":        "cc-by",
             "notes":          (f"Chinese medical students N≈588; "
                                f"id=row index (学号 missing for some rows); "
-                               f"scale names inferred from aggregate columns; "
+                               f"scale identities per irw#2198; "
                                f"resp direction unverified"),
             "status":         "cleaned",
         }
