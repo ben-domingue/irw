@@ -32,7 +32,8 @@ is the reverse index -- one row per withdrawn table, whatever the reason.
   is `released`: the version at which the withdrawal left `current`, since a
   draft deletion is invisible until Ben publishes.
 - `reason` is one of `rights`, `wrong_data`, `duplicate`, `personal_data`,
-  `misnamed`, `unlicensed`. A `rights` row names the register `family`.
+  `misnamed`, `unlicensed`, `source_withdrawn` (the author took the source
+  deposit down). A `rights` row names the register `family`.
 - `dataset` ending in `*` means the script found the shard at run time and
   did not record which one.
 - `itemtext/tests/test_withdrawals.py` fails a pull request that adds a script
