@@ -8,12 +8,17 @@
 # - Likert -> ordinal numeric item; resp = 1-5, text = NA.
 #
 # All text is in Russian. 
-# `item_text` = the question stem (Russian)
+# Issue #1479. Published as voropaeva_2026_health_media_nom (irw_nominal only:
+# most items are single-select, where resp is an arbitrary code and the choice
+# itself is the data). The Russian question stems are not carried here; item
+# text belongs in the item-text tables, not the response table.
 # ---------------------------------------------------------------------------
 
-setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 rm(list = ls())
-library(tidyverse)
+library(readr)
+library(dplyr)
+library(stringr)
+library(tibble)
 
 raw <- read_csv(
   "Survey data on cognitive and emotional responses to visual anthropomorphism in health media.csv",
@@ -116,12 +121,10 @@ items <- bind_rows(
 )
 
 # --- assemble in IRW column order -------------------------------------------
-# item_text = the question stem (Russian), matched from the source headers.
 final <- items %>%
   left_join(cov, by = "id") %>%
-  mutate(item_text = unname(q_text[str_extract(item, "^q\\d{2}")])) %>%
-  select(id, item, resp, text, item_text,
+  select(id, item, resp, text,
          date, cov_age, cov_gender, cov_med_edu, item_family) %>%
   arrange(id, item)
 
-write_csv(final, "anthropomorphism_health_Voropaeva_2026.csv")
+write_csv(final, "voropaeva_2026_health_media_nom.csv", na = "")
