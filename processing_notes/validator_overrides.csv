@@ -3,3 +3,15 @@ date,tool,table,checks,reason,user
 2026-09-25,irw-validate,itemtables/batch_430/selfcompassionscale_shortform_fuochi_2025__items.csv,name_length,"Ben 2026-09-25 waiver of the 40-char cap for item text (live table name, not renamable here)",ben
 2026-09-25,irw-validate,itemtables/batch_431/west_2021_retaliatory_aggression_study4_deq__items.csv,name_length,"Ben 2026-09-25 waiver of the 40-char name cap for item text: name is the existing live IRW table name",ben
 2026-09-25,irw-validate,itemtables/batch_455/eammi_grahe_2018_marriage_identity_allocation__items.csv,name_length,"Ben's 2026-09-25 waiver of the 40-char name cap for item text (live table name, cannot shorten)",ben
+2026-09-29,irw-validate,mclaughlin_samuel_2025_auditory_session_2,name_length,"Ben 2026-09-29 (#2401): leave already-published tables with long names as they are; the 40-char cap applies at intake",ben
+2026-09-29,irw-validate,lexical_difficulty_altgassen_2025_s01_knowledge,name_length,"Ben 2026-09-29 (#2401): leave already-published tables with long names as they are; the 40-char cap applies at intake",ben
+2026-09-29,irw-validate,lexical_difficulty_altgassen_2025_s01_personality,name_length,"Ben 2026-09-29 (#2401): leave already-published tables with long names as they are; the 40-char cap applies at intake",ben
+2026-09-29,irw-validate,narcissism_schneider_2025_study1_jauk_emotionality,name_length,"Ben 2026-09-29 (#2401): leave already-published tables with long names as they are; the 40-char cap applies at intake",ben
+2026-09-29,irw-validate,narcissism_schneider_2025_study1_jauk_extraversion,name_length,"Ben 2026-09-29 (#2401): leave already-published tables with long names as they are; the 40-char cap applies at intake",ben
+2026-09-29,irw-validate,narcissism_schneider_2025_study1_jauk_honestyhumility,name_length,"Ben 2026-09-29 (#2401): leave already-published tables with long names as they are; the 40-char cap applies at intake",ben
+2026-09-29,irw-validate,narcissism_schneider_2025_study1_jauk_hsns,name_length,"Ben 2026-09-29 (#2401): leave already-published tables with long names as they are; the 40-char cap applies at intake",ben
+2026-09-29,irw-validate,petley_2025_flanker_study1_childwoman,dup_id_item,"Ben 2026-09-29 (#2401): repeated id+item rows are by design (expanded from correct/total counts)",ben
+2026-09-29,irw-validate,petley_2025_flanker_study1_girlman,dup_id_item,"Ben 2026-09-29 (#2401): repeated id+item rows are by design (expanded from correct/total counts)",ben
+2026-09-29,irw-validate,petley_2025_flanker_study1_manwoman,dup_id_item,"Ben 2026-09-29 (#2401): repeated id+item rows are by design (expanded from correct/total counts)",ben
+2026-09-29,irw-validate,petley_2025_flanker_study2_auditory,dup_id_item,"Ben 2026-09-29 (#2401): repeated id+item rows are by design (expanded from correct/total counts)",ben
+2026-09-29,irw-validate,petley_2025_flanker_study2_visual,dup_id_item,"Ben 2026-09-29 (#2401): repeated id+item rows are by design (expanded from correct/total counts)",ben

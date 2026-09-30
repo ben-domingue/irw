@@ -49,7 +49,10 @@ def convert_to_irw(input_file, output_prefix):
     arith_clean_map = {c: c.replace('_acc', '') for c in arith_items}
     df.rename(columns=arith_clean_map, inplace=True)
 
-    cols_to_drop = ['cov_age_range', 'cov_id_sample']
+    # age_range (a band: "< 20 years", "20-29 years", ... "over 50 years") is
+    # kept as cov_age_range: it is the only age the source gives for the 258
+    # teachers, whose numeric `age` is empty (#2401).
+    cols_to_drop = ['cov_id_sample']
     score_cols = [c for c in df.columns if (c.startswith('cov_score_') or c.startswith('cov_sum_'))]
     
     df.drop(columns=cols_to_drop + score_cols, inplace=True, errors='ignore')
@@ -87,6 +90,11 @@ def convert_to_irw(input_file, output_prefix):
         
         cols = ['id', 'item', 'resp'] + sorted(final_cov_cols)
         df_subset = df_subset[cols]
+        # A covariate the source leaves empty for everyone in this table
+        # (e.g. cov_age and cov_math_load in the teacher-only fsmas_se) is
+        # dropped rather than shipped all-null (#2401).
+        all_null = [c for c in final_cov_cols if df_subset[c].isna().all()]
+        df_subset = df_subset.drop(columns=all_null)
         df_subset.sort_values(by=['id', 'item'], inplace=True)
 
         filename = f"{output_prefix}_{construct.lower()}.csv"

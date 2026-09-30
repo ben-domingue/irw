@@ -383,30 +383,23 @@ def _convert_transcription_long(
         df["trial_index"] = df[tcol]
         trial_cols.append("trial_index")
 
-    itemcov_cols: list[str] = ["itemcov_response_type"]
-    extra_itemcov: list[str] = []
+    # The source gives, per trial, the number of keywords transcribed
+    # correctly ("Correct") and incorrectly ("Incorrect"); they always sum to
+    # the trial's 4 keywords, so "Incorrect" is the complement of "Correct".
+    # Only "Correct" is kept as resp (0-4). Until #2401 both were written,
+    # doubling every trial with the scale reversed in the same resp column.
+    itemcov_cols: list[str] = []
     if talker_col is not None and talker_col.lower() in df.columns:
         icol = talker_col.lower()
         df["itemcov_talker"] = df[icol]
         itemcov_cols.append("itemcov_talker")
-        extra_itemcov = ["itemcov_talker"]
 
-    base_cols = ["id", "item"] + trial_cols + extra_itemcov
-    correct_df = df[base_cols + ["correct"]].copy()
-    correct_df = correct_df.rename(columns={"correct": "resp"})
-    correct_df["resp"] = pd.to_numeric(correct_df["resp"], errors="coerce")
-    correct_df["itemcov_response_type"] = "correct"
-    correct_df = correct_df.dropna(subset=["resp"])
-    correct_df = correct_df[["id", "item", "resp"] + trial_cols + itemcov_cols]
-
-    incorrect_df = df[base_cols + ["incorrect"]].copy()
-    incorrect_df = incorrect_df.rename(columns={"incorrect": "resp"})
-    incorrect_df["resp"] = pd.to_numeric(incorrect_df["resp"], errors="coerce")
-    incorrect_df["itemcov_response_type"] = "incorrect"
-    incorrect_df = incorrect_df.dropna(subset=["resp"])
-    incorrect_df = incorrect_df[["id", "item", "resp"] + trial_cols + itemcov_cols]
-
-    out = pd.concat([correct_df, incorrect_df], ignore_index=True)
+    base_cols = ["id", "item"] + trial_cols + itemcov_cols
+    out = df[base_cols + ["correct"]].copy()
+    out = out.rename(columns={"correct": "resp"})
+    out["resp"] = pd.to_numeric(out["resp"], errors="coerce")
+    out = out.dropna(subset=["resp"])
+    out = out[["id", "item", "resp"] + trial_cols + itemcov_cols]
     out = _irw_columns(out)
 
     out_name = f"{task_label.lower()}_irw.csv"
@@ -442,9 +435,14 @@ def convert_lettuce_entertain_to_irw():
         out_files.append(out_noise)
 
     cov_df = _load_covariates()
-    mandarin_df = _mandarin_items_long()
-    sb_df = _sb_item_long()
-    extra_item_dfs = [d for d in (mandarin_df, sb_df) if d is not None and not d.empty]
+    # The Mandarin familiarity ratings (0-100) and the session-2 Sandwich
+    # Builder total (0-10) are not transcription trials: different constructs
+    # on different scales. They were appended to the session-2 table as items
+    # until #2401 and are now left out (_mandarin_items_long / _sb_item_long
+    # are kept but no longer called).
+    # HHIE.csv is keyed on *session-1* Gorilla ids, so the merge below never
+    # matches a session-2 id and cov_hhie_score is dropped as all-empty.
+    extra_item_dfs: list[pd.DataFrame] = []
     merged_accent: pd.DataFrame | None = None
     merged_noise: pd.DataFrame | None = None
     if cov_df is not None and not cov_df.empty:

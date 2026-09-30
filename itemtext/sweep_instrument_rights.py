@@ -11,6 +11,13 @@ BOTH surfaces a restricted instrument can reach the corpus through:
 
   item_text  -- every item-text shard in IRW_TEXT_DATASETS. A withdrawal removes
                 these, so this is the surface every withdrawal so far has fixed.
+  *_translated -- the same shards' item_text_translated, option_text_translated,
+                instructions_translated and section_prompt_translated, where a table
+                carries them. Ben ruled 2026-09-29 (irw#2401) that a block row covers
+                these too: beck_2021_iesr shipped German IES-R in item_text, which no
+                stem matches, and Weiss & Marmar's English IES-R in
+                item_text_translated. Hits are labelled by column, and a hit on a
+                table whose item_text did not match the same instrument is marked NEW.
   item code  -- the RESPONSE tables. A processing script that uses source column
                 headers as item codes carries the instrument into data that no
                 item-text withdrawal reaches: luu_2024_stai6 ships the six STAI-6
@@ -51,6 +58,7 @@ Read-only. Reports; never deletes.
 
 Usage:
     python3 itemtext/sweep_instrument_rights.py [--version current|next] [--codes-only]
+                                                [--csv hits.csv]
 """
 import argparse, csv, os, re, sys
 from pathlib import Path
@@ -80,12 +88,91 @@ def load_register():
     return rows
 
 
+TRANSLATED = ("item_text_translated", "option_text_translated",
+              "instructions_translated", "section_prompt_translated")
+
+
+def translated_columns(tlist):
+    """table name -> the *_translated columns it carries. One list_variables call
+    per table, four threads (Redivis 429s above that)."""
+    from concurrent.futures import ThreadPoolExecutor
+    import time
+
+    def cols(t):
+        for attempt in range(5):
+            try:
+                return t.name, {v.name for v in t.list_variables()} & set(TRANSLATED)
+            except Exception:
+                time.sleep(2 ** attempt)
+        return t.name, None           # unknown: reported, never assumed empty
+    with ThreadPoolExecutor(max_workers=4) as pool:
+        out = dict(pool.map(cols, tlist))
+    unknown = sorted(n for n, c in out.items() if c is None)
+    if unknown:
+        print(f"  WARNING: could not list variables for {len(unknown)} table(s); their "
+              f"*_translated columns are NOT swept: {unknown[:5]}")
+    return {n: (c or set()) for n, c in out.items()}
+
+
+def scan(redivis, tables, names, col, pats):
+    """Chunked LIKE scan of one text column. Returns ({(tbl, family, instrument):
+    {item}}, [skipped])."""
+    like = " OR ".join(
+        # BigQuery uses backslash escapes; a doubled '' parses as two adjacent
+        # string literals and is a syntax error, not an escaped quote.
+        "LOWER(txt) LIKE '%%%s%%'"
+        % p.lower().replace("\\", "\\\\").replace("'", "\\'")
+        for _, _, p in pats)
+    # The filter is applied ONCE, outside the union. Repeating it per table (the
+    # pre-2026-09-29 shape) passed Redivis's 1,000,000-character query cap once
+    # the register reached ~80 blocking rows, and every chunk fell back to one
+    # query per table.
+    one = lambda n: (f"SELECT '{n}' AS tbl, CAST(item AS STRING) AS item, "
+                     f"CAST({col} AS STRING) AS txt FROM `{tables[n]}`")
+    sel = lambda ns: (f"SELECT tbl, item, txt FROM ("
+                      + "\nUNION ALL\n".join(one(n) for n in ns) + f") WHERE {like}")
+    CHUNK = 150
+    found, skipped = {}, []
+    for i in range(0, len(names), CHUNK):
+        part = names[i:i + CHUNK]
+        try:
+            df = redivis.query(sel(part)).to_pandas_dataframe()
+        except Exception as exc:
+            # One malformed table (no such column, or an odd type) must not
+            # silently drop the other 149 in its chunk -- a sweep that skips
+            # tables without saying so is the failure mode this exists to fix.
+            print(f"  [{col}] chunk {i}-{i+CHUNK} failed ({str(exc)[:80]}); "
+                  f"retrying table by table")
+            frames = []
+            for n in part:
+                try:
+                    frames.append(redivis.query(sel([n])).to_pandas_dataframe())
+                except Exception as e2:
+                    skipped.append((n, col, str(e2)[:60]))
+            import pandas as pd
+            df = pd.concat(frames) if frames else pd.DataFrame(columns=["tbl", "item", "txt"])
+        for row in df.itertuples(index=False):
+            txt = (row.txt or "").lower()
+            for inst, fam, p in pats:
+                if p.lower() in txt:
+                    found.setdefault((row.tbl, fam, inst), set()).add(row.item)
+                    break
+        print(f"  [{col}] scanned {min(i+CHUNK, len(names))}/{len(names)}")
+    # Rank by how much of the instrument is present. A single-item match on a
+    # short generic stem ("I feel calm") is usually incidental -- zhou_2016_anxiety
+    # is the Zung SAS and matched the STAI on exactly that. A multi-item match is
+    # rarely an accident. Both are printed: a weak lead is still a lead, and the
+    # sweep must not decide for the reader.
+    return found, skipped
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--version", default="next", choices=("current", "next"),
                     help="which shard version to sweep; 'next' is the draft that "
                          "reflects staged withdrawals, 'current' is what is published")
     ap.add_argument("--codes-only", action="store_true")
+    ap.add_argument("--csv", help="also write every text-surface hit to this CSV")
     args = ap.parse_args()
 
     reg = load_register()
@@ -104,75 +191,62 @@ def main():
     import redivis
 
     if not args.codes_only:
-        print(f"\n=== item_text surface ({args.version}) ===")
+        print(f"\n=== item_text + *_translated surface ({args.version}) ===")
         # One query per CHUNK of tables testing every pattern at once, not one per
         # instrument: Redivis caps the tables referenced by a single query, and a
         # per-instrument sweep would also re-scan the corpus 18 times.
-        pats = [(r["instrument"], p) for r in blocking for p in r["_text_pat"]]
-        like = " OR ".join(
-            # BigQuery uses backslash escapes; a doubled '' parses as two adjacent
-            # string literals and is a syntax error, not an escaped quote.
-            "LOWER(CAST(item_text AS STRING)) LIKE '%%%s%%'"
-            % p.lower().replace("\\", "\\\\").replace("'", "\\'")
-            for _, p in pats)
+        pats = [(r["instrument"], r["family"], p) for r in blocking for p in r["_text_pat"]]
+        hits = []          # (shard, table, family, instrument, column, items)
         for shard in text_shard_names():
             ds = redivis.user("datapages").dataset(shard, version=args.version)
             # qualifiedReference carries the version; a bare name would not.
-            tables = {t.name: t.properties["qualifiedReference"] for t in ds.list_tables()}
+            tlist = ds.list_tables()
+            tables = {t.name: t.properties["qualifiedReference"] for t in tlist}
             print(f"{shard} ({args.version}): {len(tables)} tables")
-            names = sorted(tables)
-            CHUNK = 150
-            found = {}
+            # Ben ruled 2026-09-29 (irw#2401) that a block row covers the
+            # *_translated columns too, so they are a surface of their own: the
+            # 2026-09-01 language backfill put publisher English (Weiss & Marmar's
+            # IES-R, for one) beside administered wording that the item_text half
+            # never matches. Which tables carry which columns is read per table,
+            # because a UNION over a column a table lacks fails the whole chunk.
+            tcols = translated_columns(tlist)
+            n_tr = sum(1 for c in tcols.values() if c)
+            print(f"  {n_tr} table(s) carry *_translated columns")
+            surfaces = [("item_text", sorted(tables))]
+            for col in TRANSLATED:
+                surfaces.append((col, sorted(n for n, c in tcols.items() if col in c)))
             skipped = []
-            for i in range(0, len(names), CHUNK):
-                part = names[i:i + CHUNK]
-                sql = "\nUNION ALL\n".join(
-                    f"(SELECT '{n}' AS tbl, CAST(item AS STRING) AS item, "
-                    f"CAST(item_text AS STRING) AS item_text "
-                    f"FROM `{tables[n]}` WHERE {like})"
-                    for n in part)
-                try:
-                    df = redivis.query(sql).to_pandas_dataframe()
-                except Exception as exc:
-                    # One malformed table (no item_text, or an odd type) must not
-                    # silently drop the other 149 in its chunk -- a sweep that skips
-                    # tables without saying so is the failure mode this exists to fix.
-                    print(f"  chunk {i}-{i+CHUNK} failed ({str(exc)[:80]}); "
-                          f"retrying table by table")
-                    frames = []
-                    for n in part:
-                        try:
-                            frames.append(redivis.query(
-                                f"SELECT '{n}' AS tbl, CAST(item AS STRING) AS item, "
-                                f"CAST(item_text AS STRING) AS item_text "
-                                f"FROM `{tables[n]}` WHERE {like}").to_pandas_dataframe())
-                        except Exception as e2:
-                            skipped.append((n, str(e2)[:60]))
-                    import pandas as pd
-                    df = pd.concat(frames) if frames else pd.DataFrame(
-                        columns=["tbl", "item", "item_text"])
-                for row in df.itertuples(index=False):
-                    txt = (row.item_text or "").lower()
-                    for inst, p in pats:
-                        if p.lower() in txt:
-                            found.setdefault((row.tbl, inst), set()).add(row.item)
-                            break
-                print(f"  ...scanned {min(i+CHUNK, len(names))}/{len(names)}")
-            # Rank by how much of the instrument is present. A single-item match on a
-            # short generic stem ("I feel calm") is usually incidental -- zhou_2016_anxiety
-            # is the Zung SAS and matched the STAI on exactly that. A multi-item match is
-            # rarely an accident. Both are printed: a weak lead is still a lead, and the
-            # sweep must not decide for the reader. But an output that buries one real hit
-            # in fifteen incidental ones trains people to ignore it.
-            for (tbl, inst), items in sorted(found.items(), key=lambda kv: -len(kv[1])):
-                strength = "STRONG" if len(items) >= 3 else "weak  "
-                print(f"  {strength} {shard}/{tbl}: {len(items)} item(s) match {inst}"
-                      f" -- LEAD, read the items")
-            if not found:
-                print(f"  no item_text hits in {shard} ({args.version})")
+            found_any = False
+            for col, names in surfaces:
+                found, sk = scan(redivis, tables, names, col, pats)
+                skipped += sk
+                for (tbl, fam, inst), items in sorted(found.items(), key=lambda kv: -len(kv[1])):
+                    found_any = True
+                    hits.append((shard, tbl, fam, inst, col, sorted(items)))
+                    strength = "STRONG" if len(items) >= 3 else "weak  "
+                    print(f"  {strength} {shard}/{tbl} [{col}]: {len(items)} item(s) match {inst}"
+                          f" -- LEAD, read the items")
+            if not found_any:
+                print(f"  no hits in {shard} ({args.version})")
             if skipped:
-                print(f"  NOT SWEPT ({len(skipped)} tables could not be queried): "
+                print(f"  NOT SWEPT ({len(skipped)} table/column scans could not be queried): "
                       f"{skipped[:5]}{' ...' if len(skipped) > 5 else ''}")
+        # A translated-column hit on a table whose item_text did NOT match the same
+        # instrument is what the item_text-only sweep could never see.
+        base = {(s, t, i) for s, t, _, i, c, _ in hits if c == "item_text"}
+        for h in hits:
+            if h[4] != "item_text":
+                print(f"  {'NEW' if (h[0], h[1], h[3]) not in base else 'also'}: "
+                      f"{h[0]}/{h[1]} [{h[4]}] {h[2]}")
+        if args.csv:
+            with open(args.csv, "w", newline="") as fh:
+                w = csv.writer(fh)
+                w.writerow(["shard", "table", "family", "instrument", "column",
+                            "n_items", "items", "new_via_translated"])
+                for s, t, fam, inst, col, items in hits:
+                    w.writerow([s, t, fam, inst, col, len(items), ";".join(items),
+                                col != "item_text" and (s, t, inst) not in base])
+            print(f"wrote {len(hits)} hit(s) to {args.csv}")
 
     print("\n=== item code surface (response tables) ===")
     print("  Not yet wired to the response shards. The two known cases are")
