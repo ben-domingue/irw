@@ -58,16 +58,22 @@ ds = redivis.organization(OWNER).dataset(DATASET)
 ds.create_next_version(if_not_exists=True)
 draft = redivis.organization(OWNER).dataset(DATASET, version="next")
 before = {t.name for t in draft.list_tables(max_results=2000)}
-if TARGETS - before:
-    sys.exit(f"ABORT: not in the {DATASET} draft: {sorted(TARGETS - before)}")
+# Resumable: the 2026-09-30 run reported all seven deleted but _pp and _stance stayed in the draft, so a rerun
+# deletes whatever targets remain rather than aborting. Anything else missing from the draft is still an abort.
+todo = TARGETS & before
+if not todo:
+    sys.exit(f"Nothing to do: no {PREFIX}* target left in the {DATASET} draft.")
+if (current - before) - TARGETS:
+    sys.exit(f"ABORT: draft is missing non-target tables: {sorted((current - before) - TARGETS)}")
 
-for name in sorted(TARGETS):
+for name in sorted(todo):
     draft.table(name).delete()
     print("deleted:", name)
 
 after = names("next")
 removed = before - after
-assert removed == TARGETS, f"MISMATCH: removed={sorted(removed)}"
+assert removed == todo, f"MISMATCH: removed={sorted(removed)}, expected {sorted(todo)}"
+assert not (TARGETS & after), f"still in draft: {sorted(TARGETS & after)}"
 with LEDGER.open(newline="") as fh:
     logged = {r["table"] for r in csv.DictReader(fh) if r["script"].endswith(os.path.basename(__file__))}
 if TARGETS - logged:
