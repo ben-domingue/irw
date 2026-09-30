@@ -382,10 +382,33 @@ class RepeatedMeasures(unittest.TestCase):
         self.assertIn("dup_id_item",
                       [f.check for f in validate_frame(df, profile="upload").errors])
 
-    def test_triage_is_unchanged(self):
-        # the 50 callers see what they always saw
+    def test_triage_still_reports_the_repeat(self):
+        # triage keeps the finding, now as a note rather than a failure (#2224)
         report = validate_frame(self._rated(), profile="triage")
         self.assertIn("dup_id_item", [f.check for f in report.findings])
+
+    def test_run_qc_accepts_an_explaining_occasion_column(self):
+        # #2224: the 142 data/ scripts assert no run_qc failure, so a trial or
+        # rater design must not fail here when the gate would accept it
+        for col in ("trial", "trialnum", "session", "rater", "trial_number"):
+            with self.subTest(col=col):
+                dup = [c for c in run_qc(self._rated(col)) if c.name == "dup_id_item"]
+                self.assertEqual([c.status for c in dup], ["warn"])
+
+    def test_run_qc_still_fails_a_repeat_nothing_explains(self):
+        df = self._rated("trial")
+        df["trial"] = 1                       # present, but explains nothing
+        dup = [c for c in run_qc(df) if c.name == "dup_id_item"]
+        self.assertEqual([c.status for c in dup], ["fail"])
+        dup = [c for c in run_qc(self._rated("group")) if c.name == "dup_id_item"]
+        self.assertEqual([c.status for c in dup], ["fail"])
+
+    def test_run_qc_keeps_the_presence_only_pass_for_wave(self):
+        # nothing that passed before fails now
+        df = self._rated("wave")
+        df["wave"] = 1
+        dup = [c for c in run_qc(df) if c.name == "dup_id_item"]
+        self.assertEqual([c.status for c in dup], ["warn"])
 
 
 class ResponseTimes(unittest.TestCase):
