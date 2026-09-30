@@ -24,3 +24,26 @@ A `table_changes` row is added only once a release is live (red_up/README.md). T
 | 2026-09-30 | `rights_recode/jablonska_2020_hads.csv` | jablonska_2020_hads (item codes recoded to hads_1..hads_14) | item_response_warehouse_3 draft |
 | 2026-09-30 | `retire_foundationalassist.py` (APPLY=1) | foundationalassist_worden_2026 deleted; OK, 976 left | item_response_warehouse_4 draft |
 | 2026-09-30 | `withdraw_iri_empathy.py` (APPLY=1) | alsecypiamh_wu_2022_empathy__items deleted; OK | irw_text draft |
+
+## Released (Ben, 2026-09-30)
+
+All drafts were published. The version manifest was refreshed by hand-triggering its workflow (#2575), and the audit's rows were recorded against these releases:
+
+| shard | tag | first IRW version |
+|---|---|---|
+| irw_text | v29.0 | 475 |
+| item_response_warehouse_4 | v11.0 | 476 |
+| item_response_warehouse_3 | v11.0 | 477 |
+| item_response_warehouse_6 | v5.0 | 478 |
+| item_response_warehouse_2 | v29.0 | 479 |
+| item_response_warehouse | v66.0 | 480 |
+| irw_text_2 | v11.0 | 481 |
+
+- `metadata/table_changes.csv`: 164 rows added, one per changed or retired response table, all dated 2026-09-30.
+- `itemtext/withdrawals.csv`: `released` stamped on 37 #2401 rows. The two superseded first-pass rows (the `_translated`-only versions for jablonska_2020_swls__items and queiros_2018_qcae__items) are left blank, because they never ran as written.
+
+**Staged after the release, not yet uploaded:** `~/irw-stage/2401-audit/held_released/`, 6 tables. They are the ones held for a pending draft:
+- five narcissism_schneider_2025_study1_jauk_* tables (item_response_warehouse_2): `cov_alter` -99 set to NA;
+- gcbs_brotherton_2013 (item_response_warehouse): `cov_familysize` 98 set to NA.
+
+They were re-measured and repaired against the new release, and are verified. Their table_changes rows follow their own release.
