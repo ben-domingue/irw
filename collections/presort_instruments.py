@@ -31,7 +31,9 @@ import pandas as pd
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import scout_instruments as sc
 
-SLUGS = ["phq9", "gad7", "rses", "cesd", "dass21", "panas", "tipi", "pcl5", "gse", "erq", "mspss", "sd3"]
+SLUGS = ["phq9", "gad7", "rses", "cesd", "dass21", "panas", "tipi", "pcl5", "gse", "erq", "mspss", "sd3",
+         # second batch (2026-09-30): too little item text for a derived key, so decided mostly on metadata
+         "swls", "pss10", "bfi44", "bfi10", "ucla_ls", "fcv19s", "lotr", "isi", "brief_cope"]
 
 # subscale -> stems; a key wording belongs to the subscale whose stem it contains
 # (PANAS items are single words, so those match exactly)

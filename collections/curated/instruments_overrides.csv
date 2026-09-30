@@ -30,3 +30,52 @@ rses,sd3ypl_klimczak_2019_ses,ACCEPT,name,,construct name: RSES (10 items) in Po
 sd3,sd3ypl_klimczak_2019_sd3,ACCEPT,name,partial: 26/27 items,SD3 in Polish; 26/27 clears the 80% partial-table rule
 sd3,west_2021_retaliatory_aggression_study3_sd3_psychopathy,ACCEPT,name,subscale: psychopathy (9/27),table name: the SD3 psychopathy subscale (9 items)
 erq,yang_2026_erq,REJECT,,,"Chinese 14-item ERQ adaptation (Wang, Lu & Li 2007; 7 reappraisal + 7 suppression): a different form, so out (Ben, 2026-09-30). Source: the paper's methods, doi 10.1371/journal.pone.0350928"
+bfi10,jutte_2024_personality,REJECT,,,single-item Big Five measure adapted from the BFI-10 (5 items): not the BFI-10
+bfi10,heekerens2025_bfi_extraversion,ACCEPT,name,subscale: extraversion (2/10),the German BFI-10's 2-item extraversion subscale (every BFI-10 subscale is 2 items)
+bfi10,heekerens2025_bfi_neuroticism,ACCEPT,name,subscale: neuroticism (2/10),the German BFI-10's 2-item neuroticism subscale (its instrument field wrongly says openness: a metadata lead)
+bfi10,heekerens2025_bfi_openness,ACCEPT,name,subscale: openness (2/10),the German BFI-10's 2-item openness subscale
+bfi44,CV_OASIS_ODSIS_PPE_Novak_2020_BFI,ACCEPT,name,subscale: neuroticism (8/44),instrument field: BFI-44 neuroticism subscale (8 items)
+bfi44,teq_novak_2021_bfin,ACCEPT,name,subscale: neuroticism (8/44),construct name: BFI neuroticism subscale (BFI-N; 8 items)
+bfi44,amatus_cipora_2024_bfi_n,ACCEPT,supplied,subscale: neuroticism (8/44),all 8 items are the BFI-44 neuroticism items
+bfi44,RvKDCS_Romiacg_Miroshnik_2020_BFI,REJECT,,,60 items: the BFI-2 (a different instrument)
+bfi44,SABFI2_Gallardo_Pujol_2018_BFI,REJECT,,,60 items: the BFI-2 (a different instrument)
+bfi44,bfi_goldberg_1992_agreeableness,REJECT,,,IPIP Big-Five Factor Markers (Goldberg 1992): a different instrument
+bfi44,bfi_goldberg_1992_conscientiousness,REJECT,,,IPIP Big-Five Factor Markers (Goldberg 1992): a different instrument
+bfi44,goldberg_2018_spa_bfi_forced_choice,REJECT,,,80-item forced-choice format: not the BFI-44
+bfi44,heekerens2025_bfi_extraversion,REJECT,,,BFI-10 subscale (listed under bfi10)
+bfi44,heekerens2025_bfi_neuroticism,REJECT,,,BFI-10 subscale (listed under bfi10)
+bfi44,heekerens2025_bfi_openness,REJECT,,,BFI-10 subscale (listed under bfi10)
+bfi44,jovanovic_2026_conscientiousness_bfi,REJECT,,,21 items: fits neither the BFI-44 (9-item conscientiousness) nor the full scale
+bfi44,kushnir2017_bfi,ACCEPT,name,,instrument field: BFI-44 (44 items); the derived key is too thin to check wording
+bfi44,morgan_2026_music_personality_bfi,REJECT,,,30 items: probably the BFI-2-S; not the BFI-44
+bfi44,narcissism_schneider_2025_study2_bfi,REJECT,,,15 items: a short form (BFI-2-XS or BFI-S)
+bfi44,oxfordcovid_xue_2024_bfi,REJECT,,,15 items: a short form (BFI-S)
+bfi44,personalitychange_kramer_2025_bfi,REJECT,,,construct name: BFI-2 (current and ideal personality): a different instrument
+bfi44,psychtools_bfi,REJECT,,,SAPA IPIP items (25): not the BFI-44
+bfi44,vermeiren_2022_bfi,REJECT,,,150 items: doesn't fit the BFI-44; reconsider if the deposit shows it's the BFI-44 across waves
+brief_cope,HEARD_Roch_2022_COPE,REJECT,,,24-item refugee coping scale; no Brief COPE items match
+brief_cope,IJLS_Eersel_2024_DenialAcceptance,ACCEPT,name,subscales: denial and acceptance (4/28),instrument field: the Brief COPE denial and acceptance subscales (2 items each); two whole subscales
+fcv19s,fcv19s_hossain_2022__fear,REJECT,,,not in metadata.csv or biblio.csv; looks like a stray duplicate of fcv19s_hossain_2022_fear
+fcv19s,fcv19s_hossain_2022_depression,REJECT,,,the WHO-5 from the same deposit
+fcv19s,odachi_2022_fear_covid19,ACCEPT,name,,instrument field: FCV-19S Japanese version (7 items)
+fcv19s,pilch_2021_fear_covid19,ACCEPT,name,,instrument field: FCV-19S Polish version (7 items)
+isi,han_2026_isi,ACCEPT,name,,instrument field: ISI (7 items) in Chinese
+isi,hellstrom_2019_isi,ACCEPT,name,,instrument field: ISI (7 items) in Swedish
+lotr,IJLS_Eersel_2024_Optimism,ACCEPT,name,scored items: 6/10 (fillers not deposited),the LOT-R's 6 scored items; the other 4 are unscored fillers
+lotr,SABFI2_Gallardo_Pujol_2018_LOT,ACCEPT,name,scored items: 6/10 (fillers not deposited),the LOT-R's 6 scored items; the other 4 are unscored fillers
+lotr,conner_2017_lot,ACCEPT,name,scored items: 6/10 (fillers not deposited),the LOT-R's 6 scored items; the other 4 are unscored fillers
+lotr,liu_2018_lot_r,ACCEPT,name,,instrument field: LOT-R (10 items) in Chinese
+lotr,lorenz_2016_optimism2,ACCEPT,name,,instrument field: LOT-R German version (10 items)
+pss10,alkouri_2025_icu_stressors,REJECT,,,Sheu et al.'s Perceived Stress Scale for nursing students (29 items): a different instrument
+pss10,figalova_2021_pss,REJECT,,,14 items: the PSS-14 (a different form)
+pss10,gilbert_meta_59,ACCEPT,name,,instrument field names the PSS; 10 items
+pss10,johansson-swedish-pss-rasch-analysis-2024,REJECT,,,14 items: the PSS-14 (a different form)
+pss10,kfcovid_pss_Li2020,REJECT,,,4 items: the PSS-4 (a short form)
+pss10,mhscdc_fried_2020_ps,ACCEPT,name,,instrument field: 10-item Perceived Stress Scale
+pss10,oxfordcovid_xue_2024_pss,REJECT,,,4 items: the PSS-4 (a short form)
+pss10,paampsmartsud_saba_2023_pss,REJECT,,,not in metadata.csv (a metadata gap); item count unknown. Reconsider once it has a metadata row
+ucla_ls,amiot_2022_ucla_loneliness,ACCEPT,name,,instrument field: UCLA Loneliness Scale Version 3 (20 items); the derived key is too thin to check wording
+ucla_ls,gan_2015_ucla_loneliness,REJECT,,,ULS-8: a short form
+ucla_ls,mhscdc_fried_2020_loneliness,REJECT,,,8-item revised UCLA scale: a short form
+ucla_ls,ren_2024_loneliness,REJECT,,,3-item loneliness scale: a short form
+ucla_ls,ucla_BrummerHoffman_2021,REJECT,,,3-item UCLA scale: a short form

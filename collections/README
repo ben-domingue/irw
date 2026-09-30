@@ -86,8 +86,8 @@ the membership they describe.
 
 ---------------------------------------------------------------- exact-instrument collections
 
-phq9, gad7, rses, cesd, dass21, panas, tipi, pcl5, gse, erq, mspss and sd3 (#1712, added
-2026-09-30) answer "which tables administered THIS instrument?". They are `curated`, and they sit
+phq9, gad7, rses, cesd, dass21, panas, tipi, pcl5, gse, erq, mspss and sd3, then swls,
+pss10, bfi44, bfi10, ucla_ls, fcv19s, lotr, isi and brief_cope (#1712, added 2026-09-30) answer "which tables administered THIS instrument?". They are `curated`, and they sit
 beside the looser cname: collections (depression, self_esteem, affect_panas ...) rather than
 replacing them.
 
@@ -107,7 +107,7 @@ What counts (Ben, 2026-09-30):
   e.g. "supplied; subscale: anxiety (7/21)", "name; partial: 18/20 items".
 The note travels inside `basis` because read_curated() publishes only table and basis. For the
 strictly verified set, filter on basis starting with "wording". It is small: 29 of the
-188 memberships at launch.
+188 first-batch memberships, and 2 of the 82 in the second batch.
 
 How membership was built, and how to redo it:
   1. python3 collections/scout_instruments.py [slug ...]
@@ -122,9 +122,19 @@ How membership was built, and how to redo it:
        reason, in curated/instruments_overrides.csv.
   3. A human reviews the presort; the ACCEPT rows become curated/<slug>.csv (table, basis,
      note). A table absent from metadata.csv can't be a member (10_collections.R stops).
-Not yet done (the second batch): SWLS, PSS-10, BFI-44, BFI-10, UCLA Loneliness, FCV-19S,
-LOT-R, ISI and Brief COPE have review sheets, but too few tables carry item text for the
-derived key to be right. They need a hand-written key, or name-only review.
+The second batch (swls, pss10, bfi44, bfi10, ucla_ls, fcv19s, lotr, isi, brief_cope; added
+2026-09-30) had too little item text for a derived key: their <slug>.key.txt files are NOT the
+instruments (pss10's is a nursing-stressor scale, bfi10's is German), so ignore them. Those nine
+were decided on metadata instead: item count, table name and instrument / construct-name fields,
+with a hand call and its reason in instruments_overrides.csv wherever the rules didn't settle a
+row. Most members are therefore `name`. SWLS has no item text in IRW at all (withheld on rights
+grounds), so all 22 of its members are `name`. Don't "fix" this by writing full canonical wordings
+into a key file: that would publish, in this repo, item text IRW deliberately doesn't release.
+Two calls in this batch stretch the rules and are recorded as such:
+  - lotr: a table with the LOT-R's 6 scored items counts ("scored items: 6/10"), because the
+    other 4 items are unscored fillers, not part of the scale.
+  - ucla_ls: the 1980 revision and Version 3 (1996) are both 20 items but word them differently.
+    Both count; the definition says so.
 
 ---------------------------------------------------------------- two invariants
 
