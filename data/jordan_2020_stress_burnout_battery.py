@@ -14,6 +14,16 @@
 # with no way to tell if this reflects real survey-wording drift across
 # the study's repeated administrations or a coding issue -- excluded
 # rather than guessed. No person-ID column exists; row index used.
+#
+# 169 of the 539 respondents have the NEXT block's anchor labels on the last
+# items of each block: PSS labels on Q12_8-10, agree/disagree labels on
+# Q13_8-10, "true" labels on Q14_4-6 (irw#2098). That reads as a column
+# shift in the export for those rows, and there is no way to recover which
+# answer belongs to which item. The Q13/Q14 tails dropped them already
+# (their labels are not in those blocks' maps), but on Q12_8-10 the label
+# "Sometimes" belongs to both sets, so 54/41/87 of them were kept and pooled
+# with everyone else's. They are now dropped from all three tails
+# (Ben, 2026-09-30); the same 169 are flagged by Q13 and by Q14.
 
 from __future__ import annotations
 
@@ -54,6 +64,25 @@ def fetch_data() -> pd.DataFrame:
     return df
 
 
+TAILS = {"Q12": ([f"Q12_{i}" for i in (8, 9, 10)], MAP_FREQ5),
+         "Q13": ([f"Q13_{i}" for i in (8, 9, 10)], MAP_PSS),
+         "Q14": ([f"Q14_{i}" for i in (4, 5, 6)], MAP_AGREE5)}
+
+
+def drop_shifted_tails(df: pd.DataFrame) -> pd.DataFrame:
+    """Blank the tail items of respondents whose Q13/Q14 tails carry another block's labels."""
+    shifted = pd.Series(False, index=df.index)
+    for block in ("Q13", "Q14"):
+        cols, value_map = TAILS[block]
+        x = df[cols].astype("object")
+        shifted |= (x.notna() & ~x.isin(list(value_map))).any(axis=1)
+    assert shifted.sum() == 169, shifted.sum()
+    df = df.copy()
+    for cols, _ in TAILS.values():
+        df.loc[shifted, cols] = None
+    return df
+
+
 def melt_scale(df: pd.DataFrame, item_cols: list[str], value_map: dict, out_name: str):
     long = df.melt(id_vars=["id"], value_vars=item_cols, var_name="item", value_name="resp")
     long["resp"] = long["resp"].map(value_map)
@@ -68,7 +97,7 @@ def melt_scale(df: pd.DataFrame, item_cols: list[str], value_map: dict, out_name
 
 
 def convert():
-    df = fetch_data()
+    df = drop_shifted_tails(fetch_data())
     for out_name, (item_cols, value_map) in SCALES.items():
         melt_scale(df, item_cols, value_map, out_name)
 
