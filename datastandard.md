@@ -36,6 +36,8 @@ unlicensed dataset the route is written permission from the owner, recorded as
 
 **Check the sample size.** The floor is 100 unique `id` values, flat — a table with fewer respondents is skipped outright, with no judgment call in between. Count unique `id`s before writing a script, not after.
 
+The one exception is **non-human (animal) data**, which the floor does not apply to (#2220). Animal studies are small by nature, often a few subjects with many trials each, so for them the floor would measure the wrong thing. Judge them by the complexity step below instead, and check that `resp` means what a modeller will assume: in a spontaneous-alternation maze, for example, it records which arm was chosen, not whether that was correct. Tag the `sample` as Animal.
+
 **Assess complexity.** A dataset that clears the floor but is small, opaquely labeled, and in a non-standard format may not be worth the time. Large, well-structured datasets are higher priority.
 
 ---
