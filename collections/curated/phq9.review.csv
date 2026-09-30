@@ -1,0 +1,39 @@
+table,construct_name,instrument,language,text_source,n_items,n_participants,k,n_mapped,n_near,verdict,basis,note
+COACH_Chen_2022_PHQ9,The Chinese Older Adult Collaborations in Health (COACH) Study,Patient Health Questionnaire-9,chi,none_recorded,9,2363,9,9,0,MATCH,supplied,
+FomoNegativeAffect_cremer_2026_phq,PHQ-9,Patient Health Questionnaire-9 (PHQ-9),eng,canonical_instrument,9,461,9,9,0,MATCH,supplied,
+ali_2021_phq9,NA,"Patient Health Questionnaire-9 (PHQ-9; Kroenke, Spitzer & Williams, 2001)",eng,canonical_instrument,9,170,9,9,0,MATCH,supplied,
+assessment_time_fournier_2025_phq,Assessment Time - Depression,The Patient Health Questionnaire (PHQ-9),eng,none_recorded,9,398,9,9,0,MATCH,supplied,
+bitew_2020_phq9,Patient Health Questionnaire-9 (PHQ-9),Patient Health Questionnaire-9 (PHQ-9),amh,translated_substitute,9,669,9,9,0,MATCH,supplied,
+c19prc_uk_mcbride_2021_phq9,Depression,,eng,none_recorded,9,5364,9,9,1,MATCH,supplied,
+coroiu_2018_phq9,NA,Patient Health Questionnaire-9 (PHQ-9),ger,none_recorded,9,2447,9,9,0,MATCH,supplied,
+durand_2022_phq9,NA,,eng,none_recorded,9,407,9,9,0,MATCH,supplied,
+ehealth_rioux_2025_phq,Depression,Patient Health Questionnaire (PHQ-9),eng,study_materials,10,312,9,9,0,MATCH,wording,
+gilbert_meta_34,PHQ-9 Depression Scale,Depression in an RCT,eng,none_recorded,9,1000,9,9,0,MATCH,supplied,
+gilbert_meta_57,Maternal Depression and Child Development in Rural Pakistan,Depression (PHQ-9) in an RCT,urd,none_recorded,9,1154,9,9,0,MATCH,supplied,
+girma_2021_phq9,NA,"Patient Health Questionnaire-9 (PHQ-9; Kroenke, Spitzer & Williams, 2001)","amh, orm",translated_substitute,9,546,9,9,0,MATCH,supplied,
+gizaw_2023_phq9,NA,Patient Health Questionnaire-9 (PHQ-9),amh,translated_substitute,9,577,9,9,0,MATCH,supplied,
+islam_2022_phq9,NA,"Patient Health Questionnaire-9 (PHQ-9), Bangla version",ben,translated_substitute,9,428,9,9,0,MATCH,supplied,
+kim_2023_phq9,NA,Patient Health Questionnaire-9 (PHQ-9),kor,translated_substitute,9,202,9,9,0,MATCH,supplied,
+lu_2017_phq9,NA,Patient Health Questionnaire-9 (PHQ-9),chi,translated_substitute,9,1296,9,9,0,MATCH,supplied,
+mental_health_wang_2024_phq,Impact of COVID-19 - Anxiety,Patient Health Questionnaire-9 (PHQ-9),chi,translated_substitute,9,958,9,9,2,MATCH,supplied,
+oxfordcovid_xue_2024_phq,Patient Health Questionnaire (PHQ-9),Patient Health Questionnaire (PHQ-9),eng,none_recorded,9,1582,9,9,0,MATCH,supplied,
+phq9_xiong_2025,Patient health questionnaire (PHQ-9),Patient Health Questionnaire-9 (PHQ-9),chi,none_recorded,9,9506,9,9,0,MATCH,supplied,
+phq_insomnia_wang2025,The Patient Health Questionnaire (PHQ-9),The Patient Health Questionnaire (PHQ-9),chi,none_recorded,9,572095,9,9,0,MATCH,supplied,
+rahman_2022_phq9,NA,Patient Health Questionnaire-9 (PHQ-9),ben,study_materials,9,677,9,8,0,MATCH,wording,
+ren_2024_phq9,NA,Patient Health Questionnaire-9 (PHQ-9),chi,translated_substitute,9,1587,9,9,0,MATCH,supplied,
+roy_2024_phq9,NA,Patient Health Questionnaire-9 (PHQ-9),ben,none_recorded,9,1019,9,9,0,MATCH,supplied,
+smpi_lorenzoluaces_2020_phq9,Sydney Melancholia Prototype Index psychometrics - Depression severity,Patient Health Questionnaire-9 (PHQ-9),eng,canonical_instrument,9,487,9,9,0,MATCH,supplied,
+suicide_reinbergs_2025_phq,Patient Health Questionnaire–9 (PHQ-9),"The PHQ-9  assesses participants’ depression symptoms (e.g., fatigue, appetite, feeling like a failure, feeling hopeless, and other symptoms of depression) in the past two weeks.",eng,none_recorded,9,1258,9,9,0,MATCH,supplied,
+tran_2023_phq9,NA,Patient Health Questionnaire-9 (PHQ-9),vie,translated_substitute,9,400,9,9,0,MATCH,supplied,
+uti_newlands_2023_phq,Depression,Patient Health Questionnaire-9 (PHQ-9),eng,canonical_instrument,9,240,9,9,0,MATCH,supplied,
+baquerotomas_2026_phq9,NA,"Patient Health Questionnaire-9 (PHQ-9), Spanish version",spa,canonical_instrument,9,566,9,0,0,NAME_ONLY,name,item text not in English
+han_2026_phq9,NA,Patient Health Questionnaire-9 (PHQ-9),chi,study_materials,9,2086,9,0,0,NAME_ONLY,name,item text not in English
+heekerens2025_phq,Patient Health Questionnaire – 8-item (German PHQ-8),"Gesundheitsfragebogen für Patienten (PHQ-D), 8-item depression module (PHQ-8), German version",ger,none_recorded,8,88,9,0,0,NAME_ONLY,name,item text not in English
+narcissism_schneider_2025_study2_phq,Depression,,ger,none_recorded,15,3,9,0,0,NAME_ONLY,name,no item text
+pranckeviciene_2022_phq9,NA,"Patient Health Questionnaire-9 (PHQ-9), Lithuanian version",lit,study_materials,9,1358,9,0,0,NAME_ONLY,name,item text not in English
+qi_2024_phq9,NA,"Patient Health Questionnaire-9 (PHQ-9), Chinese version",chi,none_recorded,9,293,9,1,0,NAME_ONLY,name,item text not in English
+shu_2024_phq9,NA,Patient Health Questionnaire-9 (PHQ-9),chi,translated_substitute,9,1190,9,0,0,NAME_ONLY,name,item text not in English
+kohlmann_2016_phq9,,"Gesundheitsfragebogen für Patienten (PHQ-D), 9-item depression module (PHQ-9), German version",,none_recorded,9,1337,9,0,0,NO_MATCH,,first item: schlechte meinung von sich selbst gefühl ein versager zu sein oder die familie e
+phq_BrummerHoffman_2021,"Depression and anxiety question framing: The impact of asking about symptom's frequency, context, duration, ability and botherement - Patient Health Questionnaire–9",Augmented PHQ-9,"eng, por",study_materials,45,1828,9,0,0,NO_MATCH,,first item: teve lentidão para se movimentar ou falar a ponto das outras pessoas perceberem 
+su_2024_phq9,,"Patient Health Questionnaire-9 (PHQ-9), Chinese version",,none_recorded,9,24292,9,0,0,NO_MATCH,,first item: 觉得自己很糟或觉得自己很失败 或让自己家人失望
+ALSECYPIAMH_WU_2022_PHQ,Mental Health in Chinese Adolescents,Patient Health Questionnaire-2 (PHQ-2),eng,translated_substitute,2,7842,9,2,0,PARTIAL,,first item: feeling down depressed or hopeless

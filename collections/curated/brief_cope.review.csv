@@ -1,0 +1,7 @@
+table,construct_name,instrument,language,text_source,n_items,n_participants,k,n_mapped,n_near,verdict,basis,note
+graves_2021_brief_cope,NA,"Brief COPE (Carver, 1997)",eng,none_recorded,28,988,28,28,0,MATCH,supplied,
+koirala_2024_brief_cope,NA,"Brief COPE (Carver, 1997)",NA,study_materials,28,317,28,28,5,MATCH,wording,
+IJLS_Eersel_2024_DenialAcceptance,Pre-Job Loss Grief Reactions,Brief COPE -- denial and acceptance subscales (Dutch version),dut,translated_substitute,4,199,28,0,0,NAME_ONLY,name,item text not in English
+hannachi_2025_eco_anxiety_cope,Coping Strategies,,fre,study_materials,28,534,28,0,0,NAME_ONLY,name,no item text
+menaldi_2023_brief_cope,NA,Brief COPE (Indonesian administration),ind,study_materials,28,388,28,0,0,NAME_ONLY,name,item text not in English
+HEARD_Roch_2022_COPE,Coping scale asked of refugees,Coping scale asked of refugees,eng,none_recorded,24,600,28,4,4,PARTIAL,,first item: getting help and advice from other people
