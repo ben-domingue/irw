@@ -18,3 +18,9 @@ date,tool,table,checks,reason,user
 2026-09-30,irw-validate,chile_2023_children-adolescents-survey_cp_c,name_length,"Ben 2026-09-29 (#2401): leave already-published tables with long names as they are; the 40-char cap applies at intake",ben
 2026-09-30,irw-validate,selm_2019_climate_knowledge,dup_id_item,"#2401 removed the exact duplicate record; the 6 remaining rows are different respondents sharing a survey number (conflicting), which Ben ruled stay with #1856",claude
 2026-09-30,irw-validate,vollbracht_et_al_2026_ambulatory_assessment,name_length,"Ben 2026-09-29 (#2401): leave already-published tables with long names as they are; the 40-char cap applies at intake",ben
+2026-09-28,irw-validate,itemtables/batch_723/c19prc_uk_mcbride_2021_polarization_brexit__items.csv,name_length,name_length: live table name; Ben's 2026-09-25 item-text waiver of the 40-char cap,ben
+2026-09-28,irw-validate,itemtables/batch_723/c19prc_uk_mcbride_2021_polarization_covid__items.csv,name_length,name_length: live table name; Ben's 2026-09-25 item-text waiver of the 40-char cap,ben
+2026-09-28,irw-validate,itemtables/batch_725/c19prc_uk_mcbride_2021_quarantine_support__items.csv,name_length,live table name; Ben's 2026-09-25 item-text waiver,ben
+2026-09-28,irw-validate,itemtables/batch_726/c19prc_uk_mcbride_2021_riskreduction_beliefs__items.csv,name_length,live table name; Ben's 2026-09-25 item-text name_length waiver,ben
+2026-09-29,irw-validate,itemtables/batch_727/c19prc_uk_mcbride_2021_secondwave_restrictions__items.csv,name_length,"name_length: live table name, item-text waiver 2026-09-25",ben
+2026-09-29,irw-validate,itemtables/batch_727/c19prc_uk_mcbride_2021_selfharm_suicidality__items.csv,name_length,"name_length: live table name, item-text waiver 2026-09-25",ben
