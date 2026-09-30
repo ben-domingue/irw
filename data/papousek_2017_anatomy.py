@@ -40,10 +40,15 @@ closer to identifying), practice_filter and the JSON systems/locations columns.
 The nominal companion is the same table with resp_raw renamed to `text`
 (datastandard.md, "The raw response and the nominal tranche").
 """
+import sys
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
+
+REPO_ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(REPO_ROOT))
+from irw_validate._checks import run_qc  # noqa: E402
 
 SRC = Path.home() / ".cache" / "irw_anatom" / "answers.csv"
 
@@ -68,6 +73,10 @@ assert df["resp_raw"].ne("<NA>").all()
 assert df["date"].between(1447632000, 1483488000).all()
 assert df.groupby("item")["itemcov_term"].nunique().max() == 1
 df = df.sort_values(["id", "date"], kind="stable")
+
+checks = run_qc(df, permitted_values={i: {0, 1} for i in df["item"].unique()})
+fails = [(c.name, c.detail) for c in checks if c.status == "fail"]
+assert not fails, fails
 
 df.to_csv("papousek_2017_anatomy.csv", index=False)
 df.rename(columns={"resp_raw": "text"}).to_csv("papousek_2017_anatomy_nom.csv", index=False)
