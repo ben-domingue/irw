@@ -126,11 +126,11 @@ class Report:
         table: no error on a check the standard's clauses define.
 
         None for item text, which Standard 1.0 does not cover, and under the
-        `core` and `triage` profiles. Those keep the inherited readings of C4
-        (99% of non-missing values numeric) and C5 (only wave/timepoint/date
-        explain a repeat) for their callers, and the standard is the gate's
-        reading: a rater design would be called nonconforming there and
-        conforming here.
+        `core` and `triage` profiles. Those keep the inherited reading of C4
+        (99% of non-missing values numeric) for their callers, and the standard
+        is the gate's reading. For C5 they report a repeat that an occasion
+        column explains as a warning rather than a failure (#2224), so a rater
+        or trial design no longer fails there.
         """
         if self.kind != "responses" or self.profile not in ("upload", "legacy"):
             return None
