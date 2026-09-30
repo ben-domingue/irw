@@ -99,7 +99,7 @@ CES-D,cesd,huang_2016_cesd,ACCEPT,,supplied,,20/20 items match,eng,canonical_ins
 CES-D,cesd,promis1wave1_cesd,ACCEPT,,wording,,19/20 items match,eng,study_materials,20,20,CESD Scale,"PROMIS Wave 1 field test: CES-D (legacy items, Emotional Distress - Depression)"
 CES-D,cesd,quinn_2023_roommate_cesd,ACCEPT,,wording,,20/20 items match,eng,study_materials,20,20,NA,Center for Epidemiologic Studies Depression Scale (CES-D)
 CES-D,cesd,robison_2026_retesting_cesd,ACCEPT,,name,partial: 18/20 items,hand call: construct name says CES-D (18 items); 18/20 clears the 80% partial-table rule,eng,none_recorded,18,20,CES-D depressive symptoms (18 items),
-CES-D,cesd,saha_2026_cesd,ACCEPT,,name,,table name names it and it has 20 items,"eng, ben",none_recorded,20,20,NA,"Center for Epidemiologic Studies Depression Scale (CES-D), 20-item question-form administration"
+CES-D,cesd,saha_2026_cesd,REJECT,,,,"hand call: withdrawn 2026-09-30 (#2565, the author removed the deposit); was accepted before the withdrawal reached metadata.csv","eng, ben",none_recorded,20,20,NA,"Center for Epidemiologic Studies Depression Scale (CES-D), 20-item question-form administration"
 CES-D,cesd,santos_2018_cesd,ACCEPT,,name,,table name names it and it has 20 items,"eng, spa",unknown,20,20,NA,
 CES-D,cesd,yang_2018_cesd,ACCEPT,,supplied,,20/20 items match,chi,translated_substitute,20,20,NA,Center for Epidemiologic Studies Depression Scale (CES-D)
 CES-D,cesd,yang_2023_emotional_eating_cesd,ACCEPT,,name,,table name names it and it has 20 items,chi,translated_substitute,20,20,NA,Center for Epidemiologic Studies Depression Scale (CES-D)
