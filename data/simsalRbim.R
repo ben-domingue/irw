@@ -7,11 +7,12 @@ library(stringr)
 files <- c(
   "Human_LargeValence_2018.txt",
   "Human_LargeValence_2017.txt",
-  "Human_LowValence_2017.txt",
-  "Mice_LowValence.txt",
-  "Mice_LargeValence.txt",
-  "Monkey_LargeValence.txt"
+  "Human_LowValence_2017.txt"
 )
+# The Mice_LowValence, Mice_LargeValence and Monkey_LargeValence files are not
+# processed: their quantity is the amount an animal consumed (a physical
+# measure, not an item response), with 6-11 animals each. Withdrawn 2026-10-01
+# (irw#1700).
 
 for (f in files) {
   data <- read.table(f, header = TRUE)
