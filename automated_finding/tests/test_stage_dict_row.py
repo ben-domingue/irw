@@ -151,5 +151,47 @@ class DataDoiRoutingTest(StageDictRowTest):
         self.assertIn("more than one DOI", r.stderr + r.stdout)
 
 
+    ##--source (#2628): one automated file per dictionary sheet.
+    def test_source_flag_stages_a_row(self):
+        env = dict(os.environ, IRW_DICT_AUTO_PATH=self.path)
+        r = subprocess.run([sys.executable, str(SCRIPT), "--source", "nom"],
+                           input=self.ok_payload(), text=True,
+                           capture_output=True, env=env)
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.assertEqual(self.rows()[0]["table"], "a_2026")
+
+    def test_unknown_source_is_refused(self):
+        env = dict(os.environ, IRW_DICT_AUTO_PATH=self.path)
+        r = subprocess.run([sys.executable, str(SCRIPT), "--source=nominal"],
+                           input=self.ok_payload(), text=True,
+                           capture_output=True, env=env)
+        self.assertNotEqual(r.returncode, 0)
+        self.assertIn("unknown --source", r.stderr + r.stdout)
+        self.assertFalse(os.path.exists(self.path))
+
+    def test_source_picks_the_matching_file(self):
+        sys.path.insert(0, str(SCRIPT.parent))
+        import stage_dict_row
+        old = os.environ.pop("IRW_DICT_AUTO_PATH", None)
+        try:
+            for src, name in [("core", "dictionary_auto.csv"),
+                              ("comps", "dictionary_auto_comps.csv"),
+                              ("nom", "dictionary_auto_nom.csv"),
+                              ("sim", "dictionary_auto_sim.csv")]:
+                with self.subTest(source=src):
+                    self.assertEqual(stage_dict_row.staging_path(src),
+                                     SCRIPT.parent / name)
+        finally:
+            if old is not None:
+                os.environ["IRW_DICT_AUTO_PATH"] = old
+
+    def test_committed_source_files_have_the_stager_header(self):
+        sys.path.insert(0, str(SCRIPT.parent))
+        import stage_dict_row
+        for name in stage_dict_row.SOURCE_FILES.values():
+            with self.subTest(file=name):
+                with open(SCRIPT.parent / name, newline="", encoding="utf-8") as f:
+                    self.assertEqual(next(csv.reader(f)), stage_dict_row.COLUMNS)
+
 if __name__ == "__main__":
     unittest.main()

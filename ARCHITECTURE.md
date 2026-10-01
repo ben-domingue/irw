@@ -152,7 +152,12 @@ export — but they differ in *granularity*, and that difference is deliberate:
   left blank (#1732). Column-wise from the start because a sparse-but-present
   dictionary row is the common case, where for tags it is the exception.
   `metadata/biblio_provenance.csv` records which cells came from the automated
-  file, and unlike the tags sidecar it is committed.
+  file, and unlike the tags sidecar it is committed. The comps, nominal and
+  simsyn dictionaries work the same way, each with its own file
+  (`dictionary_auto_comps.csv`, `_nom.csv`, `_sim.csv`; `stage_dict_row.py
+  --source comps|nom|sim`), so no dictionary sheet needs rows pasted (#2628).
+  Their sheets spell three columns differently from core; `normalize_dict_layout()`
+  maps them onto core's names in the export only.
 
 > **One column exists only in the automated file: `DOI (for data)`.** The sheet
 > does not have it and is not going to. 979 rows put a *deposit* DOI (Dataverse,

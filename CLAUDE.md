@@ -21,7 +21,7 @@ order is *not* run order. Do not invent a sequence — run the wrapper, which is
 authoritative because it is the thing that actually executes:
 
 ```bash
-.claude/skills/irw-site-update/scripts/run_pipeline.sh        # default: 01 02 03 05 06 07 08 09
+.claude/skills/irw-site-update/scripts/run_pipeline.sh        # default: 01 05 06 07 02 03 08 10 11 12 13 09
 .claude/skills/irw-site-update/scripts/run_pipeline.sh 01 03  # just metadata.csv + tags.csv
 ```
 

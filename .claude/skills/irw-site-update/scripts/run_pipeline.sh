@@ -16,6 +16,14 @@
 # 2026-08-02 after both were fixed/verified -- see TODO.md for the full
 # history if either regresses.
 #
+# 05/06/07 run BEFORE 02 since 2026-10-01 (#2628). 02 unions each source's
+# automated dictionary file, and drops rows for tables absent from that
+# source's *_metadata.csv -- the liveness oracle. For core that is metadata.csv,
+# which 01 has just written; for comps/nominal/simsyn it is what 05/06/07 write.
+# Run after 02, those oracles were a run stale, so a newly released table's
+# dictionary row would wait an extra pipeline cycle. 05/06/07 read only Redivis,
+# and nothing in them reads 02's output, so moving them up costs nothing.
+#
 # 10_collections.R (issue #1633) runs BETWEEN 08 and 09 -- numeric order is
 # deliberately not run order here, as it already isn't for 04. It must follow
 # 01 and 03 (it reads metadata.csv and tags.csv off disk) and precede 09, which
@@ -161,7 +169,7 @@ declare -A STAGE_OUTPUTS=(
   [13]="table_scripts.csv"
   [09]=""   # writes JSON, not a keyed CSV -- reported separately below
 )
-DEFAULT_ORDER=(01 02 03 05 06 07 08 10 11 12 13 09)
+DEFAULT_ORDER=(01 05 06 07 02 03 08 10 11 12 13 09)
 
 # Join key for the diff, per output file. Everything is keyed on `table` except
 # the two collections outputs (issue #1633): the registry is one row per
