@@ -227,6 +227,12 @@ getrows<-function(l) {
     biblio <- seed_from_local(biblio, file.out)
     ## Correct known upstream citation defects even when a cached value exists.
     biblio <- apply_bibtex_overrides(biblio, bibtex_overrides)
+    ## A no-DOI row whose Reference was corrected in the dictionary drops its
+    ## cached BibTeX here, so it regenerates below from the new text (#2580).
+    ## Must precede refresh_biblio_from_dict(), which would hide the change.
+    ref_stale <- drop_stale_reference_bibtex(biblio, irw_dict, name)
+    biblio <- ref_stale$biblio
+    readr::write_csv(ref_stale$log, log_path("_bibtex_reference_log.csv"))
     ##
     irw_notpub <- irw_dict[irw_dict$`Public Reshare?`!="Public",]
     ## Find rows in dictionary whose Filename is not in biblio
