@@ -10,7 +10,7 @@
 ## a core of hundreds of players with many repeated pairings, which is what pairwise models (and
 ## tests of transitivity) need. Later years are far larger and far sparser per pair.
 ##
-## Tables (Event tag "Rated <X> game"):
+## Tables (Event tag "Rated <X> game", or "Rated <X> tournament <url>" for arena games):
 ##   lichess_2013_bullet      Bullet
 ##   lichess_2013_blitz       Blitz
 ##   lichess_2013_classical   Classical (in 2013 Lichess called every game over ~8 minutes
@@ -23,10 +23,13 @@
 ## - score_a/score_b from Result: 1-0 -> 1/0, 1/2-1/2 -> 0.5/0.5, 0-1 -> 0/1; winner follows.
 ##   Result "*" (unfinished) is dropped and counted. Games ending by time forfeit, abandonment
 ##   or rules infraction are kept as Lichess scored them; `termination` says how each ended.
+##   Self-play games (White and Black the same account, a few per month in 2013) are dropped
+##   and counted.
 ## - date: UNIX seconds, UTC, from UTCDate + UTCTime (game start).
 ## - Covariates: white_elo, black_elo (each player's Lichess rating before the game; Glicko-2 on
 ##   the Elo 400-point scale, so a 400-point gap is odds of 10:1), time_control (base+increment
-##   in seconds, e.g. "180+0"), termination, game_id (the Lichess game id; the game is at
+##   in seconds, e.g. "180+0"), termination, tournament (the arena tournament id for games
+##   played in a Lichess tournament, https://lichess.org/tournament/<id>; blank otherwise), game_id (the Lichess game id; the game is at
 ##   https://lichess.org/<game_id>). Ratings are kept because a player's strength moves within
 ##   the year and the rating is the record of that. Rating diffs and moves are dropped.
 
@@ -66,11 +69,16 @@ parse_month <- function(f) {
                termination = tag("Termination"), stringsAsFactors = FALSE)
 }
 
-g <- do.call(rbind, lapply(files, function(f) { cat(f, "\n"); parse_month(f) }))
+g <- do.call(rbind, lapply(files, function(f) {
+    rds <- file.path(cache, sub("\\.pgn\\.zst$", ".tags.rds", f))  # parsed tags, so reruns are quick
+    if (file.exists(rds)) return(readRDS(rds))
+    cat(f, "\n"); x <- parse_month(f); saveRDS(x, rds); x }))
 stopifnot(nrow(g) == sum(counts$n[counts$file %in% files]), !anyNA(g$white), !anyNA(g$black),
           !anyNA(g$result), !anyNA(g$event), !anyNA(g$site))
 
-tc <- sub("^Rated (\\w+) game$", "\\1", g$event)
+tc <- sub("^Rated (\\w+) (game|tournament).*$", "\\1", g$event)
+tournament <- ifelse(grepl("^Rated \\w+ tournament ", g$event), sub("^.*/tournament/", "", g$event), "")
+stopifnot(all(tournament == "" | grepl("^[A-Za-z0-9]+$", tournament)))
 stopifnot(all(tc %in% c("Bullet", "Blitz", "Classical", "Correspondence")))
 stopifnot(all(g$result %in% c("1-0", "0-1", "1/2-1/2", "*")))
 unfinished <- g$result == "*"
@@ -87,17 +95,17 @@ all_games <- data.frame(agent_a = g$white, agent_b = g$black, date = date, homef
                         winner = c("1-0" = "agent_a", "0-1" = "agent_b", "1/2-1/2" = "draw", "*" = NA)[g$result],
                         white_elo = elo(g$white_elo), black_elo = elo(g$black_elo),
                         time_control = g$time_control, termination = g$termination,
-                        game_id = game_id, stringsAsFactors = FALSE, row.names = NULL)
-stopifnot(all(all_games$agent_a != all_games$agent_b))
+                        tournament = tournament, game_id = game_id, stringsAsFactors = FALSE, row.names = NULL)
+self_play <- all_games$agent_a == all_games$agent_b  # a few per month on 2013 Lichess
 
 for (k in c("Bullet", "Blitz", "Classical")) {
-    d <- all_games[tc == k & !unfinished, ]
+    d <- all_games[tc == k & !unfinished & !self_play, ]
     d <- d[order(d$date, d$game_id), ]
     stopifnot(!anyNA(d$winner), !anyNA(d$date))
     n <- paste0("lichess_2013_", tolower(k))
     write.csv(d, file = file.path(outdir, paste0(n, ".csv")), row.names = FALSE, na = "")
     cat(n, nrow(d), "games,", length(unique(c(d$agent_a, d$agent_b))), "players,",
         sum(d$winner == "draw"), "draws,", sum(is.na(d$white_elo) | is.na(d$black_elo)), "missing a rating,",
-        sum(unfinished & tc == k), "unfinished (*) dropped\n")
+        sum(unfinished & tc == k), "unfinished (*) dropped,", sum(self_play & tc == k), "self-play dropped\n")
 }
 cat("Correspondence not built:", sum(tc == "Correspondence"), "games\n")
