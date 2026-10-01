@@ -1,3 +1,6 @@
+# RETIRED 2026-10-01: the `lichess` table this built (one day, 2017-01-31) was removed from
+# irw_competitions by tools/withdrawals/retire_lichess_oneday.py, superseded by
+# data/competitions/lichess_2013.R (irw#2634). Kept as the record of how it was built.
 #from: https://github.com/ayaan-gupta/IRW-data-scripts/blob/main/harvest/lichess.py
 
 # harvest/lichess_local.py
