@@ -16,7 +16,7 @@ intl_assessment,International assessments,instrument,"Large-scale international 
 affect_panas,PANAS affect,instrument,The Positive and Negative Affect Schedule.,cname:panas|positive and negative af,bd,2026-08-29
 self_esteem,Self-esteem,instrument,Rosenberg and other self-esteem scales.,cname:rosenberg|self.?esteem|\brses\b,bd,2026-08-29
 mindfulness,Mindfulness,instrument,Mindfulness inventories including FFMQ and MAAS.,cname:mindful|\bffmq\b|\bmaas\b,bd,2026-08-29
-math,Mathematics,construct,Mathematics attainment and closely related constructs.,cname:\bmath|arithmetic|algebra|fraction,bd,2026-08-29
+math,Mathematics,construct,"Mathematics attainment: tests of mathematical knowledge or skill. Attitudes, anxiety, self-efficacy, self-concept, beliefs and stereotypes about mathematics are not members (#1700).",cname:^(?!.*(anxi|attitude|self.?efficacy|self.?concept|emotion|motivat|interest|enjoy|belief|confiden|value|stereotype)).*(\bmath|arithmetic|algebra|fraction),bd,2026-08-29
 anxiety,Anxiety,construct,Anxiety scales including GAD-7 and STAI.,cname:anxiet|\bgad.?7\b|\bstai\b,bd,2026-08-29
 depression,Depression,construct,"Depression scales including PHQ, CES-D, BDI and DASS.",cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b,bd,2026-08-29
 reading_vocab,Reading & vocabulary,construct,"Reading, vocabulary, lexical and spelling measures.",cname:read(ing)?\b|vocab|lexical|spelling,bd,2026-08-29
