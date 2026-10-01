@@ -95,7 +95,7 @@ def check_schema(report: FileReport, target: Target) -> None:
         report.warnings.append(f"missing required column(s): {', '.join(missing)}")
 
 
-def run_validator(path: Path) -> tuple[list[str], list[str]]:
+def run_validator(path: Path, context: dict | None = None) -> tuple[list[str], list[str]]:
     """The full IRW format validator (#1703 sub-item 1.3). -> (errors, warnings)
 
     Everything above this streams with the csv module because some of these
@@ -115,7 +115,7 @@ def run_validator(path: Path) -> tuple[list[str], list[str]]:
                  f"--no-validate to upload without a format check"], [])
 
     try:
-        report = validate_file(path, profile="upload")
+        report = validate_file(path, profile="upload", context=context)
     except Exception as exc:                      # unreadable, odd encoding, ...
         return ([f"validator could not read this file: {exc}"], [])
 
@@ -124,7 +124,7 @@ def run_validator(path: Path) -> tuple[list[str], list[str]]:
 
 
 def validate_for_target(report: FileReport, target: Target,
-                        enabled: bool = True) -> None:
+                        enabled: bool = True, context: dict | None = None) -> None:
     """Run the full IRW format validator, where the target expects that format.
 
     This has to happen HERE, next to check_schema, and not in check_all --
@@ -138,12 +138,15 @@ def validate_for_target(report: FileReport, target: Target,
     One rule, one place: a target with no required columns is a target whose
     tables have no common schema, so there is nothing for a format validator to
     say about them. That is the same condition check_schema returns early on.
+
+    `context` is passed through to the validator; the CLI supplies
+    `permitted_values` from the table's item text (#2152, see permitted.py).
     """
     if not enabled or not required_columns(target):
         return
     if report.errors:
         return                # a file that is not a table yet is not worth validating
-    errors, warnings = run_validator(report.path)
+    errors, warnings = run_validator(report.path, context)
     report.errors.extend(errors)
     report.warnings.extend(warnings)
 
