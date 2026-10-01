@@ -92,8 +92,26 @@ def convert_to_irw(input_file):
         
         if (df_long['resp'] % 1 == 0).all():
             df_long['resp'] = df_long['resp'].astype(int)
-        
-        final_cols = ['id', 'item', 'resp', 'wave'] + [c for c in cov_cols if c in df_long.columns]
+
+        # WPAI items 2-4 are self-reported HOURS (missed for health, missed for
+        # other reasons, actually worked, past 7 days). Time is not an item
+        # response, so they ship as covariates on that person-wave's rows
+        # instead (irw#1700, 2026-10-01).
+        extra_covs = []
+        if construct == 'wpai':
+            hours = {'wpai_2': 'cov_wpai_hours_missed_health',
+                     'wpai_3': 'cov_wpai_hours_missed_other',
+                     'wpai_4': 'cov_wpai_hours_worked'}
+            wide = (df_long[df_long['item'].isin(list(hours))]
+                    .pivot(index=['id', 'wave'], columns='item', values='resp')
+                    .rename(columns=hours).reset_index())
+            df_long = df_long[~df_long['item'].isin(list(hours))].merge(wide, on=['id', 'wave'], how='left')
+            extra_covs = [c for c in hours.values() if c in df_long.columns]
+            for c in extra_covs:  # pivot/merge turn whole hours into floats
+                if (df_long[c].dropna() % 1 == 0).all():
+                    df_long[c] = df_long[c].astype('Int64')
+
+        final_cols = ['id', 'item', 'resp', 'wave'] + [c for c in cov_cols if c in df_long.columns] + extra_covs
         df_final = df_long[final_cols]
 
         output_filename = f"uti_newlands_2023_{construct}.csv"
