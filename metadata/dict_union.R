@@ -268,6 +268,41 @@ ensure_dict_auto_cols <- function(dict) {
     dict
 }
 
+##Bring a comps/nominal/simsyn sheet export onto core's column names, so the
+##one DICT_AUTO_COLS contract serves all four sources (#2628).
+##
+##Those three sheets were copied from core long ago and drifted: `table lower`
+##(space), `Derived_License` (underscore), and ONE `Custom License` column where
+##core has two. Renaming here, in the export only, is what lets resolve_dict_cols()
+##match them by name; the sheets themselves are untouched.
+##
+##The single `Custom License` column becomes `Custom License (source)` -- it sits
+##where core's source-terms column does, after `Original License` -- and a blank
+##`Custom License (derived)` is appended, never inserted (see
+##ensure_dict_auto_cols()). All three sheets had that column blank when this was
+##written (2026-10-01), so no published Custom_License_Terms moved.
+##
+##A no-op on core, whose names already match.
+normalize_dict_layout <- function(dict, label = "dictionary") {
+    nm <- names(dict)
+    if (!"table.lower" %in% nm && "table lower" %in% nm) {
+        names(dict)[nm == "table lower"] <- "table.lower"
+    }
+    nm <- names(dict)
+    if (!"Derived License" %in% nm && "Derived_License" %in% nm) {
+        names(dict)[nm == "Derived_License"] <- "Derived License"
+    }
+    nm <- names(dict)
+    cust <- which(dict_base_names(nm) == "Custom License")
+    if (length(cust) == 1L && !any(c("Custom License (source)",
+                                    "Custom License (derived)") %in% nm)) {
+        names(dict)[cust] <- "Custom License (source)"
+        dict[["Custom License (derived)"]] <- NA_character_
+        message(label, ": normalized the sheet layout onto core's column names")
+    }
+    dict
+}
+
 ##Normalise a DOI for COMPARISON only. Mirrors normalize() in
 ##automated_finding/doi_hygiene.py, which is the definition; the two are pinned
 ##together by a parity test in tests/test_dict_union.R rather than by this file

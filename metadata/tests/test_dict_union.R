@@ -935,6 +935,69 @@ local({
     }
 })
 
+cat("normalize_dict_layout -- comps/nom/sim sheets (#2628)\n")
+
+##The three non-core sheets as gsheet2tbl returns them (header checked
+##2026-10-01): `table lower`, one `Custom License`, `Derived_License`.
+NONCORE_NAMES <- c("table", "table lower", "Description", "URL (for data)",
+                   "Reference", "DOI (for paper)", "Original License",
+                   "Custom License", "Public Reshare?", "Derived_License",
+                   "Notes", "Contributor", "Date")
+noncore_sheet <- function(...) {
+    d <- as.data.frame(do.call(rbind, list(...)), stringsAsFactors = FALSE)
+    names(d) <- NONCORE_NAMES
+    d
+}
+noncore_row <- function(table, description = "", derived = "") {
+    c(table, tolower(table), description, "", "", "", "", "",
+      "Public", derived, "", "MM", "1/1/2026")
+}
+
+local({
+    core <- fake_sheet(sheet_row("a_2020", "core"))
+    check(identical(suppressMessages(normalize_dict_layout(core, "core")), core),
+          "core's layout is untouched")
+
+    d <- suppressMessages(normalize_dict_layout(
+        noncore_sheet(noncore_row("nom_a", "human desc", "CC BY 4.0")), "nom"))
+    check(all(c("table.lower", "Derived License", "Custom License (source)",
+                "Custom License (derived)") %in% names(d)),
+          "non-core names are mapped onto core's")
+    check(!any(c("table lower", "Derived_License", "Custom License") %in% names(d)),
+          "the old spellings are gone, not duplicated")
+    check(identical(names(d)[ncol(d)], "Custom License (derived)"),
+          "the added column is appended, not inserted")
+    check(identical(unname(resolve_dict_cols(ensure_dict_auto_cols(d), "nom")[["Derived License"]]),
+                    "Derived License"),
+          "resolve_dict_cols accepts a normalized non-core sheet")
+    check(identical(suppressMessages(normalize_dict_layout(d, "nom")), d),
+          "normalizing twice is a no-op")
+})
+
+local({
+    d <- suppressMessages(normalize_dict_layout(
+        noncore_sheet(noncore_row("nom_a", "human desc", ""),
+                      noncore_row("nom_b", "", "CC BY 4.0")), "nom"))
+    a <- fake_auto(auto_row("nom_a", "auto desc", "CC0"),
+                   auto_row("nom_b", "auto desc b", "CC0"),
+                   auto_row("nom_new", "brand new", "CC BY 4.0"))
+    u <- suppressMessages(union_dict(d, a, "nom"))$dict
+    r <- function(t) u[u$table == t, ]
+    check(identical(r("nom_a")$Description, "human desc") &&
+          identical(r("nom_a")$`Derived License`, "CC0"),
+          "non-core: the human cell wins, a blank one is filled")
+    check(identical(r("nom_b")$`Derived License`, "CC BY 4.0") &&
+          identical(r("nom_b")$Description, "auto desc b"),
+          "non-core: the human licence wins, the blank description is filled")
+    check(nrow(r("nom_new")) == 1L && identical(r("nom_new")$Description, "brand new"),
+          "non-core: a table the sheet lacks is added from the automated row")
+    b <- data.frame(table = c("nom_a", "nom_new"), Custom_License_Terms = NA,
+                    stringsAsFactors = FALSE)
+    b <- suppressMessages(apply_custom_license_terms(b, u, "nom"))
+    check(all(is.na(b$Custom_License_Terms)),
+          "non-core: blank custom terms stay blank")
+})
+
 ##------------------------------------------------------------------ result ---
 cat("\n")
 if (failures > 0L) { cat(failures, "FAILURE(S)\n"); quit(status = 1L) }
