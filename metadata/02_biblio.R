@@ -332,11 +332,13 @@ getrows<-function(l) {
     readr::write_csv(stale$log, log_path("_bibtex_refetch_log.csv"))
     assert_bibtex_doi_consistent(biblio, name)
 
+    ## `Source_via` goes last, so a reader of the first ten columns is unmoved.
+    ## apply_source_via() above fills it; without it here it never left R (#2421).
     biblio<-biblio[,
                    c("table","DOI__for_paper_", "DOI__for_data_", "Reference_x",
                      "URL__for_data_",
                      "Original_License", "Derived_License", "Custom_License_Terms",
-                     "Description", "BibTex")]
+                     "Description", "BibTex", "Source_via")]
     readr::write_csv(biblio, file.out)
 }
 
