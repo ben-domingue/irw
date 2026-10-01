@@ -1,5 +1,4 @@
 table,verdict,n_categories,n_unique,range_resp,pct_noninteger,resp_class,item_format,construct_name
-lsbq_maleki_2025_persian_comprehension,"ASK (#1700, 2026-10-01) - 0-10 proficiency sliders, but one item reaches 75 (out of scale)",59,59,74.2,0.275181723779855,unbounded,Slider/continuous,Persian Comperehension
 yu2025,"ASK (#1700, 2026-10-01) - size estimation/reproduction: a perceptual magnitude response, unbounded, not a rating scale",572,572,199.9,0.379619443425824,unclear,Mixed,Perceptual response variability in size estimation and reproduction
 wine_luckett2021,"ASK (#1700, 2026-10-01) - mixed: 1 of 3 items is a 0-100 rating, 2 are 1-9",100,100,100,0,unclear,Mixed,Discrimination of Complex Odor Mixtures: A Study Using Wine Aroma Models
 ehealth_rioux_2025_triplep,"ASK (#1700, 2026-10-01) - mixed: 2 of 14 items are 0-100 sliders, 12 are 1-7",93,93,100,0,unclear,Slider/continuous,Positive Parenting Program
