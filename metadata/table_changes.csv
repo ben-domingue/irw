@@ -592,3 +592,4 @@ simsalRbim_Human_LargeValence_2017,,2026-10-01,"Retired: pooled with the other t
 simsalRbim_Human_LargeValence_2018,,2026-10-01,"Retired: pooled with the other two human studies into simsalrbim_human, where cov_sample names the study; rows unchanged.",#1700,,simsalrbim_human
 simsalRbim_Human_LowValence_2017,,2026-10-01,"Retired: pooled with the other two human studies into simsalrbim_human, where cov_sample names the study; rows unchanged.",#1700,,simsalrbim_human
 simsalrbim_human,,2026-10-01,"New: the three human simsalRbim preference studies in one table (4,662 rows, 111 people), with cov_sample naming the study.",#1700,simsalRbim_Human_LargeValence_2017; simsalRbim_Human_LargeValence_2018; simsalRbim_Human_LowValence_2017,
+chile_2023_social-welfare-survey_u,,2026-10-01,"Removed 14 time-use items (u1_a to u11_a, u15_a to u17_a), which record minutes per day rather than responses. The other 24 items are unchanged.",#1700,,
