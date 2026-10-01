@@ -24,3 +24,14 @@ date,tool,table,checks,reason,user
 2026-09-28,irw-validate,itemtables/batch_726/c19prc_uk_mcbride_2021_riskreduction_beliefs__items.csv,name_length,live table name; Ben's 2026-09-25 item-text name_length waiver,ben
 2026-09-29,irw-validate,itemtables/batch_727/c19prc_uk_mcbride_2021_secondwave_restrictions__items.csv,name_length,"name_length: live table name, item-text waiver 2026-09-25",ben
 2026-09-29,irw-validate,itemtables/batch_727/c19prc_uk_mcbride_2021_selfharm_suicidality__items.csv,name_length,"name_length: live table name, item-text waiver 2026-09-25",ben
+2026-09-30,irw-validate,jiang_2026_openeval_anthropic_redteam,sample_floor,"Ben 2026-09-30: AI-respondent tables (OpenEval, irw#2166) take a 50-model floor instead of 100; 92 models",ben
+2026-09-30,irw-validate,jiang_2026_openeval_bbq,sample_floor,"Ben 2026-09-30: AI-respondent tables (OpenEval, irw#2166) take a 50-model floor instead of 100; 50 models",ben
+2026-09-30,irw-validate,jiang_2026_openeval_bbq_helm,sample_floor,"Ben 2026-09-30: AI-respondent tables (OpenEval, irw#2166) take a 50-model floor instead of 100; 57 models",ben
+2026-09-30,irw-validate,jiang_2026_openeval_culturalbench,sample_floor,"Ben 2026-09-30: AI-respondent tables (OpenEval, irw#2166) take a 50-model floor instead of 100; 62 models",ben
+2026-09-30,irw-validate,jiang_2026_openeval_emobench,sample_floor,"Ben 2026-09-30: AI-respondent tables (OpenEval, irw#2166) take a 50-model floor instead of 100; 60 models",ben
+2026-09-30,irw-validate,jiang_2026_openeval_harmbench_helm,sample_floor,"Ben 2026-09-30: AI-respondent tables (OpenEval, irw#2166) take a 50-model floor instead of 100; 93 models",ben
+2026-09-30,irw-validate,jiang_2026_openeval_hi_tom,sample_floor,"Ben 2026-09-30: AI-respondent tables (OpenEval, irw#2166) take a 50-model floor instead of 100; 53 models",ben
+2026-09-30,irw-validate,jiang_2026_openeval_opentom,sample_floor,"Ben 2026-09-30: AI-respondent tables (OpenEval, irw#2166) take a 50-model floor instead of 100; 67 models",ben
+2026-09-30,irw-validate,jiang_2026_openeval_simplesafetytests,sample_floor,"Ben 2026-09-30: AI-respondent tables (OpenEval, irw#2166) take a 50-model floor instead of 100; 93 models",ben
+2026-09-30,irw-validate,jiang_2026_openeval_wildbench,sample_floor,"Ben 2026-09-30: AI-respondent tables (OpenEval, irw#2166) take a 50-model floor instead of 100; 77 models",ben
+2026-09-30,irw-validate,jiang_2026_openeval_xstest,sample_floor,"Ben 2026-09-30: AI-respondent tables (OpenEval, irw#2166) take a 50-model floor instead of 100; 94 models",ben
