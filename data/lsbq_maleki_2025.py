@@ -127,6 +127,10 @@ def convert_to_irw(file_path):
             
             if construct_name in ['dominant_language_home_community', 'non_persian_use', 'switching']:
                 df_long.loc[(df_long['resp'] < 1) | (df_long['resp'] > 5), 'resp'] = pd.NA
+            # 0-10 proficiency sliders. One speaking rating of 75 (probably a typed
+            # 7.5) is out of range and is excluded, not recoded (#1700, 2026-10-01).
+            if construct_name == 'persian_comprehension':
+                df_long.loc[(df_long['resp'] < 0) | (df_long['resp'] > 10), 'resp'] = pd.NA
                 
             df_long.dropna(subset=['resp'], inplace=True)
 
