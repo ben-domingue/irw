@@ -35,3 +35,4 @@ date,tool,table,checks,reason,user
 2026-09-30,irw-validate,jiang_2026_openeval_simplesafetytests,sample_floor,"Ben 2026-09-30: AI-respondent tables (OpenEval, irw#2166) take a 50-model floor instead of 100; 93 models",ben
 2026-09-30,irw-validate,jiang_2026_openeval_wildbench,sample_floor,"Ben 2026-09-30: AI-respondent tables (OpenEval, irw#2166) take a 50-model floor instead of 100; 77 models",ben
 2026-09-30,irw-validate,jiang_2026_openeval_xstest,sample_floor,"Ben 2026-09-30: AI-respondent tables (OpenEval, irw#2166) take a 50-model floor instead of 100; 94 models",ben
+2026-10-01,irw-validate,martineztomas_2026_pseudowords,resp_scale_constructs,"Ben 2026-10-01 (irw#1443): rating-norms table keeps its three dimensions in one table (valence/arousal 1-9, wordlikeness 1-7), as KalimahNorms/emoji_scheffler do",ben
