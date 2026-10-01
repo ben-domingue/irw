@@ -1,2 +1,1 @@
 table,verdict,n_categories,n_unique,range_resp,pct_noninteger,resp_class,item_format,construct_name
-gilbert_meta_95,"ASK (#1700, 2026-10-01) - 0-10 with decimals (possibly a VAS in cm) but only 12-34 distinct values per item",63,63,10,0.0942028985507246,bounded,Likert Scale/selected response,Key Features Questions (KFQ)
