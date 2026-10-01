@@ -68,6 +68,11 @@ import numpy as np
 import pandas as pd
 import pyreadstat
 
+REPO_ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(REPO_ROOT))
+import irw_validate  # noqa: E402
+from irw_validate._checks import run_qc  # noqa: E402
+
 SRC = Path(sys.argv[1]) if len(sys.argv) > 1 else Path(".")
 
 
@@ -166,5 +171,11 @@ if __name__ == "__main__":
     for name, f in [("banerjee_2025_arithmetic_school", school), ("banerjee_2025_arithmetic_market", market)]:
         t = f()
         assert not t.duplicated(["id", "item"]).any()
+        pv = {i: {0, 1} for i in t["item"].unique()}  # every item scored correct/incorrect
+        fails = [(c.name, c.detail) for c in run_qc(t, permitted_values=pv) if c.status == "fail"]
+        assert not fails, fails
         t.to_csv(out / f"{name}.csv", index=False, na_rep="")
+        rep = irw_validate.validate_file(str(out / f"{name}.csv"), profile="upload",
+                                         context={"permitted_values": pv})
+        assert rep.conforms and not rep.errors, [(f.check, f.message) for f in rep.errors]
         print(name, len(t), "rows", t["id"].nunique(), "ids", t["item"].nunique(), "items")
