@@ -53,7 +53,8 @@ Manual run order, if not using the skill:
    09, which must stay last; numeric order already differs from run order here,
    cf. 04.]
 
-9. 09_hero_status.R: makes irw_site's data/hero_stats.json [run LAST -- reads metadata.csv written by step 1]
+9. (retired 2026-10-01, #1940) 09_hero_status.R used to write irw_site's data/hero_stats.json;
+   the site now builds it at render time from published irw_meta (landing/hero_stats.R there).
 
 4. 04_tables.R: qc/nothing to upload [checks table names across core sources
    only; being superseded by the skill's audit_tables.R, which generalizes

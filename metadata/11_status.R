@@ -25,7 +25,7 @@
 # that extension.
 #
 # Reads the local CSVs that 01/03/08 already produce. No Redivis calls, same
-# contract as 09_hero_status.R -- run the pipeline first or these numbers
+# contract as the retired 09_hero_status.R -- run the pipeline first or these numbers
 # describe whatever is on disk.
 #
 # Usage (from metadata/, like the rest of the numbered scripts):

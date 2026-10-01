@@ -15,17 +15,18 @@ out which of the thirteen known metadata CSVs are present and hands them to
 the row-count check all live there. See `red_up/README.md`.
 Everything here works from the repo root; the numbered scripts themselves
 expect to run with `metadata/` as the working directory (matching their
-existing convention, e.g. `09_hero_status.R`'s docstring).
+existing convention, e.g. `01_metadata.R`).
 
 Confirmed with Ben (2026-07-27) — see `references/pipeline.md` for the full
 script-by-script writeup this was built from:
 
 - Core pipeline order: `01_metadata.R` → `02_biblio.R` → `03_tags.R` →
   `05_comps.R` → `06_nominal.R` → `07_simsyn.R` → `08_itemtext.R` →
-  `10_collections.R` → `09_hero_status.R` (must run **last**, it reads
-  `metadata.csv` written by 01). `05`/`06` were fixed and `08` was added to the
+  `10_collections.R` → `11_status.R` → `12_stragglers.R` → `13_script_index.py`.
+  Stage `09_hero_status.R` was retired 2026-10-01 (#1940): the site computes
+  the hero from published irw_meta at render time. `05`/`06` were fixed and `08` was added to the
   default order 2026-08-02 — see `TODO.md` for history if any of the three
-  regress. **Numeric order is not run order**: `10` runs before `09`, and `04`
+  regress. **Numeric order is not run order**, and `04`
   is excluded entirely.
 - **Collections (issue #1633, added 2026-08-29):** `10_collections.R` builds
   `collections.csv` + `collection_members.csv` from the version-controlled
@@ -106,8 +107,9 @@ What it does, per stage:
    writes a `<name>.diff.csv` next to the real output — open that to review
    changed cells side-by-side before pasting anything into Redivis.
 
-`09_hero_status.R` writes JSON, not a keyed CSV, so it's reported separately
-(just read the file / the script's own stdout).
+`hero_stats.json` is no longer produced here: since 2026-10-01 (#1940) the site
+writes it at render time from published irw_meta (`landing/hero_stats.R` in
+datapages/irw).
 
 **Always summarize the diff output back to Ben** — counts of added/updated
 rows per file, table names for anything added or removed, and every
