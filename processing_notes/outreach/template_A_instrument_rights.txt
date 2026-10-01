@@ -44,6 +44,11 @@ To be clear about the scope of what I am asking:
 - I would attribute the instrument to you on the record for every dataset that
   uses it, in a form you are welcome to specify.
 
+I would publish the wording under CC BY 4.0
+[https://creativecommons.org/licenses/by/4.0/], so that others could reuse it
+with attribution. If you would prefer more restrictive terms -- for example,
+non-commercial use only -- I would publish it under those instead.
+
 If it would help, I am glad to add a note recording any conditions you would
 like attached -- for example that the wording is pinned to one version, that
 derivative translations are not licensed, or specific citation language. If you
