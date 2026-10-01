@@ -10,6 +10,11 @@
 ##   openfootball_sudamericana_2012_2025 Copa Sudamericana, south-america/copa-libertadores/*_copas.txt
 ##   openfootball_concacafcl_2010_2025 CONCACAF Champions League / Champions Cup,
 ##                                world/north-america/champions-league/*_concacafcl.txt
+##   openfootball_ligamx_2010_2025 Liga MX, world/north-america/mexico/*_mx1.txt
+##   openfootball_brasileirao_2018_2026 Brazil Série A, south-america/brazil/*_br1.txt
+##   openfootball_argentina_2018_2025 Argentina Primera, south-america/argentina/*_ar1.txt
+##   openfootball_austria_2010_2027 Austrian Bundesliga, austria/<season>/1-bundesliga.txt
+##   (the last four added 2026-10-01, #2691; written to the same `out` directory)
 ## The first two are written to the working directory; the three added 2026-09-30 to
 ## ~/.cache/irw-comps/nflverse-openfootball-out. Their specific choices are with their code
 ## below; the general choices here apply to all five. Two-legged ties: each leg is a row.
@@ -304,4 +309,101 @@ summarise("openfootball_concacafcl_2010_2025", finish(concacaf))
 ## header; 2017-18 has 240 of 380 matches.
 dropped$competition <- sub("^[0-9-]+_(.*)\\.txt$", "\\1", dropped$file)
 cat("Dropped (no score / awarded) per competition:\n")
+print(aggregate(cbind(unplayed, awarded) ~ competition, dropped, sum))
+
+## ---- Added 2026-10-01 (#2691): domestic leagues joined to the cup tables above ----
+## Liga MX (joined to MLS through CONCACAF CL), Brazil Série A and Argentina Primera
+## (joined through Libertadores / Sudamericana), and the Austrian Bundesliga (the
+## longest European run not covered by EUfootball or footBayes). Same parser and
+## conventions; written to `out`. Ben approved the three on #2691.
+## Licence: CC0 1.0 Universal (LICENSE.md in openfootball/world, south-america and
+## austria, each beginning "CC0 1.0 Universal", checked 2026-10-01).
+if (!dir.exists(file.path(cache, "austria")))
+    system2("git", c("clone", "-q", "--depth", "1",
+                     "https://github.com/openfootball/austria.git", file.path(cache, "austria")))
+no_neutral <- function(s, y) rep(FALSE, length(s))
+## the summary above added a `competition` column to the drop log; reset it so the
+## leagues below can append to it
+dropped <- dropped[c("file", "unplayed", "awarded")]
+
+## Liga MX (world/north-america/mexico/*_mx1.txt), 2010-11 to 2024-25: Apertura and
+## Clausura, each with its playoffs (all two-legged at the clubs' grounds, so no neutral
+## stages). Club names are consistent across the files; Jaguares Chiapas / Chiapas FC
+## and Club San Luis / Atlético San Luis are different clubs and stay apart. Two matches
+## awarded by forfeit are dropped.
+mx <- build("world/north-america/mexico/*_mx1.txt", no_neutral,
+            function(f) sub("_mx1.txt", "", basename(f)))
+summarise("openfootball_ligamx_2010_2025", finish(mx))
+
+## Brazil Série A (south-america/brazil/*_br1.txt), 2018 to 2026 (in progress: the
+## 103 unplayed 2026 fixtures are dropped). Single round-robin, no neutral stages. From
+## 2023 the files switch to long official names ("SC Internacional", "CR Flamengo");
+## `br_names` maps them back to the 2018-22 spelling.
+br_names <- c(
+    "AC Goianiense" = "Atlético Goianiense", "América Mineiro" = "América MG",
+    "Botafogo FR" = "Botafogo RJ", "CA Mineiro" = "Atlético Mineiro",
+    "CA Paranaense" = "Athletico Paranaense", "Ceará SC" = "Ceará CE",
+    "Chapecoense AF" = "Chapecoense", "Coritiba FBC" = "Coritiba PR",
+    "CR Flamengo" = "Flamengo RJ", "CR Vasco da Gama" = "Vasco da Gama RJ",
+    "Cruzeiro EC" = "Cruzeiro", "Cuiabá EC" = "Cuiabá MT", "EC Bahia" = "Bahia BA",
+    "EC Juventude" = "Juventude RS", "EC Vitória" = "Vitória BA",
+    "Fluminense FC" = "Fluminense RJ", "Fortaleza EC" = "Fortaleza CE",
+    "Goiás EC" = "Goiás GO", "Grêmio FBPA" = "Grêmio Porto Alegre",
+    "RB Bragantino" = "Red Bull Bragantino", "SC Corinthians Paulista" = "Corinthians SP",
+    "SC Internacional" = "Internacional", "SC Recife" = "Sport Recife PE",
+    "SE Palmeiras" = "Palmeiras")
+br <- build("south-america/brazil/*_br1.txt", no_neutral,
+            function(f) sub("_br1.txt", "", basename(f)), br_names)
+summarise("openfootball_brasileirao_2018_2026", finish(br))
+
+## Argentina Primera División (south-america/argentina/*_ar1.txt), 2018-19 to 2025.
+## Club names are consistent. The 2020 season was the Copa Diego Maradona: groups, then
+## a Fase Campeón and a Fase Complementación, each ending in a one-off final, plus a
+## Copa Sudamericana play-off (Vélez v Banfield, 2021-03-31). All three one-off matches
+## were played at the Estadio del Bicentenario, San Juan, so they are neutral.
+ar <- build("south-america/argentina/*_ar1.txt",
+            function(s, y) grepl("Final$", s) & y == 2020,
+            function(f) sub("_ar1.txt", "", basename(f)))
+stopifnot(sum(ar$homefield == "") == 3)
+summarise("openfootball_argentina_2018_2025", finish(ar))
+
+## Austrian Bundesliga (austria/<season>/1-bundesliga.txt), 2010-11 to 2026-27 (in
+## progress; unplayed fixtures dropped). Most seasons use an older layout:
+## "Rapid Wien  4-0 (2-0)  FC Wacker Innsbruck", dates at the line start, and
+## goal-scorer lines. `austria_v` rewrites those to the "A v B score" layout the parser
+## reads and drops the scorer lines (they contain a minute mark, '). From 2018-19 the
+## season splits into a championship and a relegation round plus a Europa League
+## play-off, all at club grounds. Forfeits ("[awarded]") are dropped. From 2025-26 the
+## header line reads "# Dates", which the parser does not match; `austria_v` respells it.
+austria_v <- function(f) {
+    L <- readLines(f, encoding = "UTF-8", warn = FALSE)
+    L <- L[!grepl("'", L)]
+    ## 2025-26 on spell the header "# Dates"
+    L <- sub("^# Dates\\s+", "# Date       ", L)
+    date0 <- "^(Mon|Tue|Wed|Thu|Fri|Sat|Sun) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) [0-9]+( [0-9]{4})?\\s*$"
+    L <- ifelse(grepl(date0, L), paste0("  ", L), L)
+    old <- "^\\s+([0-9]{1,2}:[0-9]{2}\\s+)?(.+?)\\s+([0-9]+-[0-9]+(?: a\\.e\\.t\\.)?(?: \\([^)]*\\))?)\\s{2,}(.+?)\\s*(\\[awarded\\])?\\s*$"
+    hit <- grepl(old, L, perl = TRUE) & !grepl(" v ", L)
+    L[hit] <- sub(old, "    \\1\\2 v \\4 \\3 \\5", L[hit], perl = TRUE)
+    ## named <season>_at1.txt so the drop log reads like the other competitions
+    tmp <- file.path(tempdir(), paste0(basename(dirname(f)), "_at1.txt"))
+    writeLines(L, tmp, useBytes = TRUE); tmp
+}
+at_files <- sort(Sys.glob(file.path(cache, "austria/20*/1-bundesliga.txt")))
+at <- do.call(rbind, lapply(at_files, function(f) {
+    x <- parse_file(austria_v(f), no_neutral); x$season <- basename(dirname(f)); x
+}))
+at$stage <- tidy_stage(at$stage)
+## Sponsor names and respellings that would split one club into two agents; in each
+## pair only one spelling appears in any season. Mapped to the most-used spelling.
+## (SC Magna Wiener Neustadt, 2010-11, is the club the files call 1. Wiener
+## Neustädter SC from 2011-12 once the sponsor name was dropped.)
+at_names <- c("LASK" = "LASK Linz", "FC Blau Weiß Linz" = "Blau-Weiß Linz",
+              "FC Salzburg" = "RB Salzburg", "FC Trenkwalder Admira" = "FC Admira Wacker",
+              "KSV Superfund" = "Kapfenberger SV 1919",
+              "SC Magna Wiener Neustadt" = "1. Wiener Neustädter SC")
+at <- rename(at, at_names)
+summarise("openfootball_austria_2010_2027", finish(at))
+dropped$competition <- sub("^[0-9-]+_(.*)\\.txt$", "\\1", dropped$file)
+cat("Dropped (no score / awarded), all competitions:\n")
 print(aggregate(cbind(unplayed, awarded) ~ competition, dropped, sum))
