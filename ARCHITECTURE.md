@@ -273,9 +273,10 @@ rather than replacing it — and verifies each table with a `count(*)` afterward
 When a name is already in use somewhere that could not legally hold the file, it
 stops rather than routing across families.
 
-`irw_site` also reads one file directly off disk rather than from Redivis:
-`data/hero_stats.json`, written into that repository by `metadata/09_hero_status.R`.
-Three more it reads from this repository's `main` over HTTPS at render time:
+`irw_site` builds its homepage hero numbers (`data/hero_stats.json`, untracked)
+at render time from published irw_meta, in the pre-render step
+`landing/hero_stats.R` (#1940; this used to be `metadata/09_hero_status.R`,
+committed by hand). Three files it reads from this repository's `main` over HTTPS at render time:
 `metadata/version_manifest.tsv`, `metadata/table_changes.csv` and
 `metadata/data_notes.csv`.
 

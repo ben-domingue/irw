@@ -27,8 +27,8 @@ authoritative because it is the thing that actually executes:
 
 It snapshots each stage's CSVs before and after so `diff_csv.py` can report what
 changed. `04_tables.R` (QC) is deliberately excluded — superseded by
-`audit_tables.R`; `10_collections.R` runs between 08 and 09; `09_hero_status.R`
-must run last. Nothing here uploads to Redivis: uploading is a separate,
+`audit_tables.R`; `10_collections.R` runs after 08; the old `09_hero_status.R` is retired
+(the site builds the hero from published irw_meta, #1940). Nothing here uploads to Redivis: uploading is a separate,
 manual step, and it only ever writes a draft version for a human to publish.
 One tool does every upload — `red_up` (see `red_up/README.md`); the metadata
 CSVs go up with `upload_meta.py`, which is a thin wrapper around it.
