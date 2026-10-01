@@ -179,7 +179,7 @@ def main():
                     # Same guard as irw_discover_plos.py's main(). Without it
                     # an infra failure (e.g. a missing xlrd) retired the DOI.
                     if row["flag"] not in INCONCLUSIVE_FLAGS:
-                        newly_attempted.append(hit.doi)
+                        newly_attempted.append((hit.doi, row["flag"]))
                     writer.writerow(row)
                     outf.flush()
                     n_done += 1

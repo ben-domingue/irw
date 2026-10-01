@@ -330,6 +330,15 @@ routing a transport failure to a sticky flag silently discards datasets. (It
 did — see BATCH_LOG.md 2026-08-17, where a WAF block was being recorded as
 `no_usable_file`.)
 
+**Sticky, but reversible (#2222).** All three seen ledgers
+(`repo_triage_seen_keys.csv`, `plos_seen_dois.csv`, `pmc_seen_dois.csv`) record
+the run's `flag` next to the key, so an exclusion resting on a heuristic verdict
+such as `no_usable_file` can be undone. When a resolver improves, or a reviewer
+spots a wrong reject, remove the affected rows and the next run re-triages them:
+`python seen_ledger.py drop pmc_seen_dois.csv --flag no_usable_file [--before YYYY-MM-DD] --apply`
+(dry run without `--apply`). Rows from before 2026-09-30 have a blank flag
+unless a run CSV still recorded the verdict.
+
 `external_unresolved` is **sticky on purpose** (Ben, 2026-09-16). It sits on
 the line between the two: the deposit was never opened, but the reason is that
 no resolver exists for that host, which is a fact about our coverage rather

@@ -870,16 +870,10 @@ def load_seen_keys(path: str = SEEN_KEYS_PATH) -> set:
 
 
 def append_seen_keys(keys, path: str = SEEN_KEYS_PATH) -> None:
-    import datetime as _dt
-    if not keys:
-        return
-    file_exists = os.path.exists(path)
-    today = _dt.datetime.now(_dt.timezone.utc).strftime("%Y-%m-%d")
-    with open(path, "a", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=["key", "date"])
-        if not file_exists:
-            writer.writeheader()
-        writer.writerows({"key": k, "date": today} for k in keys)
+    """`keys`: each a key or a (key, flag) pair. The flag makes the exclusion
+    reversible -- see seen_ledger.py (irw#2222)."""
+    from seen_ledger import append_seen
+    append_seen(path, "key", keys)
 
 
 def load_done(path: str) -> dict:
@@ -1003,7 +997,7 @@ def run_batch(candidates_csv: str, out_csv: str, limit: int | None,
         append_checkpoint(checkpoint, k, res)
         results.append(res)
         if res.get("flag") not in TRANSIENT_FLAGS:
-            newly_seen.append(k)
+            newly_seen.append((k, res.get("flag")))
         else:
             n_retryable += 1
         print(f"        -> {res['flag']}", flush=True)
