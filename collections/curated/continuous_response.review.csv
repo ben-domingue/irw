@@ -1,10 +1,4 @@
 table,verdict,n_categories,n_unique,range_resp,pct_noninteger,resp_class,item_format,construct_name
 yu2025,"ASK (#1700, 2026-10-01) - size estimation/reproduction: a perceptual magnitude response, unbounded, not a rating scale",572,572,199.9,0.379619443425824,unclear,Mixed,Perceptual response variability in size estimation and reproduction
-wine_luckett2021,"ASK (#1700, 2026-10-01) - mixed: 1 of 3 items is a 0-100 rating, 2 are 1-9",100,100,100,0,unclear,Mixed,Discrimination of Complex Odor Mixtures: A Study Using Wine Aroma Models
-ehealth_rioux_2025_triplep,"ASK (#1700, 2026-10-01) - mixed: 2 of 14 items are 0-100 sliders, 12 are 1-7",93,93,100,0,unclear,Slider/continuous,Positive Parenting Program
-ehealth_rioux_2025_beam,"ASK (#1700, 2026-10-01) - mixed: 2 of 14 items are 0-100 sliders, 12 are 1-7",93,93,100,0,unclear,Slider/continuous,Building Emotional Awareness and Mental Health
-ehealth_rioux_2025_abiliti,"ASK (#1700, 2026-10-01) - mixed: 2 of 14 items are 0-100 sliders, 12 are 1-7",91,91,100,0,unclear,Slider/continuous,Questions on AbilitiCBT
-deception_professors,"ASK (#1700, 2026-10-01) - mixed: 4 of 21 items are 0-100 estimates, the rest binary/short Likert",83,83,100,0,unclear,Mixed,The Importance of Being Honest
-deception_game,"ASK (#1700, 2026-10-01) - mixed: 4 of 24 items are 0-100 estimates, the rest binary",79,79,100,0,unclear,Likert Scale/selected response,Feelings of Deception After Economic Game Participation
 eammi_grahe_2018_marriage_identity_allocation,"ASK (#1700, 2026-10-01) - 0-100 allocations that sum to 100 per person (compositional, not independent ratings)",69,69,100,0,bounded,Likert Scale/selected response,Marital Central Identity
 gilbert_meta_95,"ASK (#1700, 2026-10-01) - 0-10 with decimals (possibly a VAS in cm) but only 12-34 distinct values per item",63,63,10,0.0942028985507246,bounded,Likert Scale/selected response,Key Features Questions (KFQ)
