@@ -94,7 +94,10 @@ def _from_redivis(owner: str, dataset: str, table: str) -> list[dict]:
     import redivis
     t = redivis.organization(owner).dataset(dataset).table(table).get()
     ref = t.properties["qualifiedReference"]
-    query = redivis.query(f"select item, resp, option_text from `{ref}`")
+    # `select *`, not named columns: older item-text tables carry `raw_resp`
+    # and no `resp` (gilbert_meta_11__items), and naming a missing column
+    # fails the query. Such a table simply yields no span.
+    query = redivis.query(f"select * from `{ref}`")
     return query.to_arrow_table(progress=False).to_pylist()
 
 

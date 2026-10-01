@@ -28,6 +28,10 @@ class AnchorSpans(unittest.TestCase):
                                   ("E1", "7", "Always")))
         self.assertEqual(list(spans["E1"]), [1, 2, 3, 4, 5, 6, 7])
 
+    def test_older_format_without_resp_has_no_span(self):
+        self.assertEqual(anchor_spans([{"item": "a", "raw_resp": "1", "option_text": "x"},
+                                       {"item": "a", "raw_resp": "5", "option_text": "y"}]), {})
+
     def test_one_label_is_not_a_span(self):
         self.assertEqual(anchor_spans(rows(("q", "1", "Yes"), ("q", "2", ""))), {})
 
