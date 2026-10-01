@@ -221,3 +221,50 @@ assert_bibtex_doi_consistent <- function(biblio, label = "core") {
     message(label, ": BibTeX/DOI agreement verified on ", nrow(biblio), " row(s)")
     invisible(TRUE)
 }
+
+##No-DOI rows: a corrected Reference invalidates the cached BibTeX (#2580).
+##
+##The DOI check above cannot see these rows: their BibTeX was generated once by
+##Claude from the Reference text, carries no DOI, and seed_from_local() reuses it
+##forever. refresh_biblio_from_dict() then moves Reference_x to the corrected
+##text on every run, so the row ends up with a right Reference beside a BibTeX
+##that still cites the old one (43 rows in #2574, nine in #1543).
+##
+##So: before the refresh, compare each no-DOI row's cached Reference_x with the
+##dictionary's Reference, and DROP the rows that differ. They then fall into
+##new_data_rows like any table biblio lacks and are regenerated from the new
+##Reference. Dropping, not blanking: new_data_rows also picks up a row whose
+##BibTex is NA and bind_rows() would append it beside the old one. Only rows whose
+##Reference really changed are touched, so the no-churn property of the cache
+##holds. Whitespace differences (the sheet often ends a cell with a newline) do
+##not count as a change.
+##
+##It must run BEFORE refresh_biblio_from_dict(): afterwards the two References
+##agree and the stale BibTeX is invisible. Because both run in the same pass,
+##any later correction is caught on the run that would otherwise mask it.
+norm_ref <- function(x) gsub("\\s+", " ", trimws(as.character(x)))
+
+drop_stale_reference_bibtex <- function(biblio, irw_dict, name = "") {
+    empty_log <- data.frame(table = character(0), cached_reference = character(0),
+                            dictionary_reference = character(0))
+    if (!all(c("table", "Reference") %in% names(irw_dict)) ||
+        !all(c("table", "Reference_x") %in% names(biblio)) || nrow(biblio) == 0) {
+        return(list(biblio = biblio, log = empty_log))
+    }
+    blank_col <- function(df, col) if (col %in% names(df)) dict_blank(df[[col]]) else rep(TRUE, nrow(df))
+    no_doi <- blank_col(irw_dict, "DOI (for paper)") & blank_col(irw_dict, "DOI (for data)")
+    d <- irw_dict[no_doi & !dict_blank(irw_dict$Reference), , drop = FALSE]
+    d <- d[!duplicated(tolower(d$table)), , drop = FALSE]
+    hit <- match(tolower(biblio$table), tolower(d$table))
+    stale <- !is.na(hit) & !dict_blank(biblio$Reference_x) &
+             norm_ref(biblio$Reference_x) != norm_ref(d$Reference[hit])
+    stale[is.na(stale)] <- FALSE
+    log <- data.frame(table = biblio$table[stale],
+                      cached_reference = norm_ref(biblio$Reference_x[stale]),
+                      dictionary_reference = norm_ref(d$Reference[hit[stale]]))
+    if (any(stale)) {
+        message(sprintf("  %s: %d no-DOI row(s) have a corrected Reference; their cached BibTeX is dropped for regeneration (#2580)",
+                        name, sum(stale)))
+    }
+    list(biblio = biblio[!stale, , drop = FALSE], log = log)
+}
