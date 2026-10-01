@@ -25,7 +25,9 @@
 ##   or rules infraction are kept as Lichess scored them; `termination` says how each ended.
 ##   Self-play games (White and Black the same account, a few per month in 2013) are dropped
 ##   and counted.
-## - date: UNIX seconds, UTC, from UTCDate + UTCTime (game start).
+## - date: UNIX seconds, UTC, from UTCDate + UTCTime (game start). Lichess files games by
+##   month, so the January file opens with games started on the evening of 2012-12-31 (UTC);
+##   they are kept, as Lichess filed them.
 ## - Covariates: white_elo, black_elo (each player's Lichess rating before the game; Glicko-2 on
 ##   the Elo 400-point scale, so a 400-point gap is odds of 10:1), time_control (base+increment
 ##   in seconds, e.g. "180+0"), termination, tournament (the arena tournament id for games
