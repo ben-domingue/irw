@@ -1,7 +1,6 @@
-# item-text tables in the Redivis shards as of 2026-09-30
+# item-text tables in the Redivis shards as of 2026-10-01
 # status=published: a reader can fetch it. status=draft: uploaded, not released yet.
 # generated -- do not hand-edit; rerun itemtext/refresh_live_tables.py (irw#1828)
-# draft not listable by this token (needs data.edit) for irw_text_2; its draft rows carried forward from the snapshot taken 2026-09-29
 table,shard,status
 16_personalityfactors,irw_text,published
 360emergencymed_azami_2024,irw_text,published
@@ -1797,6 +1796,7 @@ simsalRbim_Human_LargeValence_2017,irw_text_2,published
 simsalRbim_Human_LargeValence_2018,irw_text_2,published
 simsalRbim_Human_LowValence_2017,irw_text_2,published
 simsalRbim_Mice_LowValence,irw_text_2,published
+simsalrbim_human,irw_text_3,draft
 sinche_2017_skill_development,irw_text_2,published
 sinche_2017_skill_importance,irw_text_2,published
 singh_2025_identity_cse,irw_text,published
@@ -2345,6 +2345,7 @@ wolters2026_panas_na,irw_text_2,published
 wolters2026_panas_pa,irw_text_2,published
 wolters2026_wi,irw_text_2,published
 wooly_hartman2022,irw_text_2,published
+wu2021_basic_empathy,irw_text_3,draft
 wu2026_liking,irw_text_2,published
 wu2026_novel,irw_text_2,published
 wu2026_typical,irw_text_2,published
@@ -2367,13 +2368,13 @@ yandun2026_logical_thinking,irw_text_2,published
 yandun2026_memory,irw_text_2,published
 yang2026_efl_learner_perspective,irw_text_2,published
 yang_2018_cesd,irw_text_2,published
-yang_2023_consumption_intent,irw_text_2,published
+yang_2023_consumption_intent,irw_text_3,draft
 yang_2023_emotional_eating_cesd,irw_text_2,published
 yang_2023_emotional_eating_ders,irw_text_2,published
 yang_2023_emotional_eating_eesr,irw_text_2,published
 yang_2023_emotional_eating_uppsp,irw_text_2,published
 yang_2023_green_brand_image,irw_text_2,published
-yang_2023_perceived_value,irw_text_2,published
+yang_2023_perceived_value,irw_text_3,draft
 yang_2025_aiccs,irw_text_2,published
 yang_2025_intercultural_contact,irw_text_2,published
 yang_2026_igd_benefits,irw_text_2,published
