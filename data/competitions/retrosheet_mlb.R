@@ -90,6 +90,8 @@ stopifnot(!anyNA(df$agent_a), !anyNA(df$agent_b), !anyNA(df$date), !anyNA(df$sco
           !anyDuplicated(df[, c("date", "agent_a", "agent_b", "game_num")]))
 
 n <- "retrosheet_mlb_1871_2025"
+## pre-1902 dates are below the integer range, so stop write.csv printing them as e.g. -3.078e+09
+options(scipen = 100)
 write.csv(df, file = paste0(n, ".csv"), row.names = FALSE, na = "")
 cat(n, nrow(df), "games,", length(unique(c(df$agent_a, df$agent_b))), "agents,",
     sum(df$winner == "draw"), "draws,", sum(df$forfeit != ""), "forfeits\n")
