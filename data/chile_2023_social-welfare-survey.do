@@ -233,10 +233,12 @@ use "chile_social-welfare-survey.csv", clear
 compress
 
 * keep only id, date, covariates, and "u" variables
-keep id date cov_* u1 u1_a u2 u2_a u3 u3_a u4 u4_a u5 u5_a u6 u6_a u7 u7_a u8 u8_a u9 u9_a u10 u10_a u11 u11_a u12 u13 u14 u15 u15_a u16 u16_a u17 u17_a u18_a u18_b u18_c u19 u20 u21 u22
+* u1_a-u11_a and u15_a-u17_a are minutes per day spent on each activity (0-1440):
+* measured quantities, not responses, so they are not items (irw#1700, 2026-10-01).
+keep id date cov_* u1 u2 u3 u4 u5 u6 u7 u8 u9 u10 u11 u12 u13 u14 u15 u16 u17 u18_a u18_b u18_c u19 u20 u21 u22
 
 * create long-format data from wide data
-local question_cols u1 u1_a u2 u2_a u3 u3_a u4 u4_a u5 u5_a u6 u6_a u7 u7_a u8 u8_a u9 u9_a u10 u10_a u11 u11_a u12 u13 u14 u15 u15_a u16 u16_a u17 u17_a u18_a u18_b u18_c u19 u20 u21 u22
+local question_cols u1 u2 u3 u4 u5 u6 u7 u8 u9 u10 u11 u12 u13 u14 u15 u16 u17 u18_a u18_b u18_c u19 u20 u21 u22
 tempfile long_u
 save `long_u', emptyok replace
 
@@ -253,7 +255,7 @@ foreach var of local question_cols {
 
 use `long_u', clear
 
-drop u1 u1_a u2 u2_a u3 u3_a u4 u4_a u5 u5_a u6 u6_a u7 u7_a u8 u8_a u9 u9_a u10 u10_a u11 u11_a u12 u13 u14 u15 u15_a u16 u16_a u17 u17_a u18_a u18_b u18_c u19 u20 u21 u22
+drop u1 u2 u3 u4 u5 u6 u7 u8 u9 u10 u11 u12 u13 u14 u15 u16 u17 u18_a u18_b u18_c u19 u20 u21 u22
 
 drop if missing(item) | item == ""
 
