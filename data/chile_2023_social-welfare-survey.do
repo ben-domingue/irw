@@ -341,10 +341,12 @@ use "chile_social-welfare-survey.csv", clear
 compress
 
 * keep only id, date, covariates, and "ss" variables
-keep id date cov_* ss1 ss2_a ss2_b ss2_c ss3 ss4 ss5 ss6 ss7_a ss7_b ss7_c ss7_d ss8
+* ss8 is a count (0-30), a measured quantity rather than a response, so it is
+* not an item (irw#1700, 2026-10-01).
+keep id date cov_* ss1 ss2_a ss2_b ss2_c ss3 ss4 ss5 ss6 ss7_a ss7_b ss7_c ss7_d
 
 * create long-format data from wide data
-local question_cols ss1 ss2_a ss2_b ss2_c ss3 ss4 ss5 ss6 ss7_a ss7_b ss7_c ss7_d ss8
+local question_cols ss1 ss2_a ss2_b ss2_c ss3 ss4 ss5 ss6 ss7_a ss7_b ss7_c ss7_d
 tempfile long_ss
 save `long_ss', emptyok replace
 
@@ -361,7 +363,7 @@ foreach var of local question_cols {
 
 use `long_ss', clear
 
-drop ss1 ss2_a ss2_b ss2_c ss3 ss4 ss5 ss6 ss7_a ss7_b ss7_c ss7_d ss8
+drop ss1 ss2_a ss2_b ss2_c ss3 ss4 ss5 ss6 ss7_a ss7_b ss7_c ss7_d
 
 drop if missing(item) | item == ""
 
@@ -550,10 +552,12 @@ use "chile_social-welfare-survey.csv", clear
 compress
 
 * keep only id, date, covariates, and "rr" variables
-keep id date cov_* rr1 rr2_a rr2_b rr2_c rr2_d rr2_e rr3 rr4_a rr4_b rr4_c rr4_d rr5_a rr5_b rr5_c rr5_d rr5_e rr5_f rr5_g rr5_h rr6_a rr6_b rr6_c rr6_d rr6_e rr6_f rr6_g rr6_h rr6_i rr6_j rr6_k rr6_l rr6_m rr6_n
+* rr1 is a count (0-130), a measured quantity rather than a response, so it is
+* not an item (irw#1700, 2026-10-01).
+keep id date cov_* rr2_a rr2_b rr2_c rr2_d rr2_e rr3 rr4_a rr4_b rr4_c rr4_d rr5_a rr5_b rr5_c rr5_d rr5_e rr5_f rr5_g rr5_h rr6_a rr6_b rr6_c rr6_d rr6_e rr6_f rr6_g rr6_h rr6_i rr6_j rr6_k rr6_l rr6_m rr6_n
 
 * create long-format data from wide data
-local question_cols rr1 rr2_a rr2_b rr2_c rr2_d rr2_e rr3 rr4_a rr4_b rr4_c rr4_d rr5_a rr5_b rr5_c rr5_d rr5_e rr5_f rr5_g rr5_h rr6_a rr6_b rr6_c rr6_d rr6_e rr6_f rr6_g rr6_h rr6_i rr6_j rr6_k rr6_l rr6_m rr6_n
+local question_cols rr2_a rr2_b rr2_c rr2_d rr2_e rr3 rr4_a rr4_b rr4_c rr4_d rr5_a rr5_b rr5_c rr5_d rr5_e rr5_f rr5_g rr5_h rr6_a rr6_b rr6_c rr6_d rr6_e rr6_f rr6_g rr6_h rr6_i rr6_j rr6_k rr6_l rr6_m rr6_n
 tempfile long_rr
 save `long_rr', emptyok replace
 
@@ -570,7 +574,7 @@ foreach var of local question_cols {
 
 use `long_rr', clear
 
-drop rr1 rr2_a rr2_b rr2_c rr2_d rr2_e rr3 rr4_a rr4_b rr4_c rr4_d rr5_a rr5_b rr5_c rr5_d rr5_e rr5_f rr5_g rr5_h rr6_a rr6_b rr6_c rr6_d rr6_e rr6_f rr6_g rr6_h rr6_i rr6_j rr6_k rr6_l rr6_m rr6_n
+drop rr2_a rr2_b rr2_c rr2_d rr2_e rr3 rr4_a rr4_b rr4_c rr4_d rr5_a rr5_b rr5_c rr5_d rr5_e rr5_f rr5_g rr5_h rr6_a rr6_b rr6_c rr6_d rr6_e rr6_f rr6_g rr6_h rr6_i rr6_j rr6_k rr6_l rr6_m rr6_n
 
 drop if missing(item) | item == ""
 
