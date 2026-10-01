@@ -585,3 +585,10 @@ nhl_post1917,,2026-10-01,"Retired: superseded by fivethirtyeight_nhl_1917_2023, 
 lsbq_maleki_2025_persian_comprehension,,2026-10-01,Removed one out-of-range response (75 on the 0-10 item 16.1.S). 963 to 962 rows; nothing else changed.,#1700,,
 chile_2023_children-adolescents-survey_cp_c,,2026-10-01,"Removed 8 time-use items (cp7_1 to cp7_4, cp9_1 to cp9_4), which record hours rather than responses. The other 34 items are unchanged.",#1700,,
 uti_newlands_2023_wpai,,2026-10-01,"WPAI items 2-4 (self-reported hours) moved from items to the covariates cov_wpai_hours_missed_health, cov_wpai_hours_missed_other and cov_wpai_hours_worked. 1,556 to 908 rows; responses to wpai_1, wpai_5 and wpai_6 are unchanged.",#1700,,
+simsalRbim_Mice_LargeValence,,2026-10-01,"Withdrawn: the response is the amount each animal consumed in a paired preference test, a physical measure rather than an item response (11 mice).",#1700,,
+simsalRbim_Mice_LowValence,,2026-10-01,"Withdrawn: the response is the amount each animal consumed in a paired preference test, a physical measure rather than an item response (11 mice).",#1700,,
+simsalRbim_Monkey_LargeValence,,2026-10-01,"Withdrawn: the response is the amount each animal consumed in a paired preference test, a physical measure rather than an item response (6 monkeys).",#1700,,
+simsalRbim_Human_LargeValence_2017,,2026-10-01,"Retired: pooled with the other two human studies into simsalrbim_human, where cov_sample names the study; rows unchanged.",#1700,,simsalrbim_human
+simsalRbim_Human_LargeValence_2018,,2026-10-01,"Retired: pooled with the other two human studies into simsalrbim_human, where cov_sample names the study; rows unchanged.",#1700,,simsalrbim_human
+simsalRbim_Human_LowValence_2017,,2026-10-01,"Retired: pooled with the other two human studies into simsalrbim_human, where cov_sample names the study; rows unchanged.",#1700,,simsalrbim_human
+simsalrbim_human,,2026-10-01,"New: the three human simsalRbim preference studies in one table (4,662 rows, 111 people), with cov_sample naming the study.",#1700,simsalRbim_Human_LargeValence_2017; simsalRbim_Human_LargeValence_2018; simsalRbim_Human_LowValence_2017,
