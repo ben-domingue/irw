@@ -7,18 +7,11 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
 - [ ] **22 tables need uploading** from the worktree, not the main checkout:
   `/home/ben/irw-wt/hr-recheck-batch1/automated_finding/irw_output/` (all 22
-  files in it). Dictionary and tag rows are staged on the same branch. Do not
-  upload `itemtext_output/alqerem_2024_mhls__items.csv` yet (next item).
-- [ ] **MHLS item text bookkeeping (Ben).** `alqerem_2024_mhls__items.csv` is
-  built and passes `validate_items.R` and `audit_batch.R`, but its
-  `itemtext_provenance.csv` row and `itemtext/mapping_verification.csv`
-  NOT_NEEDED row were not written: auto mode blocked the edit as a shared
-  resource. Values to add, if you want it shipped: mapping_basis=data_labels,
-  text_source=study_materials, source_ref="Zenodo 10781205 mental health
-  litracy.sav: Arabic column variable labels + Q1-Q35 English variable/value
-  labels"; note: resp coded from the administered Arabic answer text because
-  the file's Q8/Q9 numeric codes are miscoded; Q1-Q2 English labels truncated
-  in the .sav, so `_translated` is blank for them.
+  files in it). Dictionary and tag rows are already on main.
+- [ ] **MHLS item text ready to upload** once `alqerem_2024_mhls` is live:
+  `/home/ben/irw-wt/hr-recheck-batch1/automated_finding/itemtext_output/alqerem_2024_mhls__items.csv`
+  (`red_up` sends it to `irw_text`). Provenance and NOT_NEEDED mapping rows
+  are in; `irw-validate` and `check_provenance.R` pass.
 - [ ] **Name the anonymous GAS deposit (Ben).** `usc_2026_{gasa,phq9,wellbeing,relsat}`
   is named after the collecting institution (Univ. of Santiago de Compostela)
   because Zenodo 19811259 lists no authors. Keep, or rename before upload.
