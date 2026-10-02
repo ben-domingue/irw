@@ -27,6 +27,12 @@ codebook named `S1_File.pdf` gets no link; that is the honest answer.
                  dataverse_ddi   Dataverse's public DDI export for a tabular
                                  file (variable names + labels), which works
                                  even when the file itself is guestbook-gated
+                 recorded_at_ingest
+                                 the codebook file whoever built the table
+                                 named, via stage_dict_row.py `codebook_url`
+                                 (automated_finding/codebook_at_ingest.csv,
+                                 #2770). The strongest evidence: a person read
+                                 it to write the build script
 
 Hosts with an API that lists a deposit's files: OSF, Dataverse (Harvard and
 dataverse.nl), figshare (incl. the frontiersin/plos portals), Zenodo, Mendeley
@@ -50,12 +56,19 @@ Deposit file listings are cached in metadata/logs/codebook_listings.json
 item names, read from Redivis, plus the cov_* and traced source columns in
 column_docs.csv) are cached beside it the same way.
 
-Not a pipeline stage: a full crawl is ~700 deposits, OSF has to be paced
-(~2.5s per call, osf-api sweeps 429 when fanned out), and codebook files do
-not change once deposited. Run by hand, niced:
+Two ways to run it. A FULL sweep (~700 deposits; OSF has to be paced at
+~2.5s per call) is by hand, niced. `--new-only` is stage 15 of the weekly
+pipeline (#2770): it keeps every committed row for tables already in
+codebook_links_checked.csv and sweeps only tables that are not, so it needs no
+local cache and takes minutes. Codebook files do not change once deposited.
 
     nice -n 19 python3 metadata/find_codebook_links.py [--hosts osf,zenodo] [--limit N]
     python3 metadata/find_codebook_links.py --offline     ##re-match the cache only
+    python3 metadata/find_codebook_links.py --new-only    ##weekly: new tables only
+
+The README check needs each table's item names from Redivis (the `redivis`
+Python package and a token). Without them a README is left `name_readme` with
+evidence "not checked", never passed on a guess.
 """
 from __future__ import annotations
 
@@ -82,6 +95,10 @@ CACHE = HERE / "logs" / "codebook_listings.json"
 README_CACHE = HERE / "logs" / "codebook_readme_text.json"
 NAMES_CACHE = HERE / "logs" / "codebook_table_names.json"
 COLUMN_DOCS = HERE / "column_docs.csv"
+INGEST_CODEBOOKS = HERE.parent / "automated_finding" / "codebook_at_ingest.csv"
+LINK_FIELDS = ["table", "url", "file_name", "host", "how_found",
+               "n_same_kind_in_deposit", "deposit_url", "evidence", "checked_at"]
+CHECKED_FIELDS = ["table", "data_url", "host", "deposit", "outcome", "checked_at"]
 TABLE_SCRIPTS = HERE / "table_scripts.csv"
 README_MIN_NAMES = 3
 README_MAX_WORD_ITEMS = 100
@@ -543,12 +560,35 @@ def check_readmes(links: List[dict], offline: bool) -> None:
         x.setdefault("evidence", "")
 
 
+def ingest_links(live: set) -> List[dict]:
+    """recorded_at_ingest rows from codebook_at_ingest.csv, for live tables.
+
+    "none" (the builder looked and the source ships no codebook) yields no
+    row: there is nothing to link, and the sweep still runs for that table.
+    """
+    out = []
+    for r in read_csv(INGEST_CODEBOOKS):
+        url = (r.get("codebook_url") or "").strip()
+        table = (r.get("table") or "").strip()
+        if table not in live or not url.lower().startswith("http"):
+            continue
+        p = urllib.parse.urlparse(url)
+        out.append({"table": table, "url": url,
+                    "file_name": urllib.parse.unquote(p.path.rstrip("/").rsplit("/", 1)[-1]) or url,
+                    "host": p.netloc.lower().removeprefix("www."), "how_found": "recorded_at_ingest",
+                    "n_same_kind_in_deposit": 1, "deposit_url": "", "evidence": "",
+                    "checked_at": (r.get("recorded_at") or "").strip()})
+    return out
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--hosts", default="", help="comma list to crawl (default: all crawlable)")
     ap.add_argument("--limit", type=int, default=0, help="crawl at most N new deposits")
     ap.add_argument("--offline", action="store_true", help="no network; re-match cached listings")
     ap.add_argument("--recheck", action="store_true", help="re-list deposits already in the cache")
+    ap.add_argument("--new-only", action="store_true",
+                    help="keep committed rows; sweep only tables not yet in the checked file")
     ap.add_argument("--no-readme-check", action="store_true",
                     help="skip reading README texts (README hits stay name_readme)")
     args = ap.parse_args()
@@ -562,6 +602,20 @@ def main() -> int:
         ##in the matching *metadata.csv exist to be linked
         live = {r["table"] for r in read_csv(HERE / b.replace("biblio", "metadata"))}
         tables += [(r["table"], r.get("URL__for_data_") or "") for r in read_csv(HERE / b) if r["table"] in live]
+    live_tables = {t for t, _ in tables}
+
+    ##--new-only: what is already committed stands; only unseen tables are swept
+    kept_links: List[dict] = []
+    kept_checked: List[dict] = []
+    if args.new_only:
+        prev_checked = [r for r in read_csv(CHECKED_OUT) if r["table"] in live_tables]
+        done = {r["table"] for r in prev_checked if r["outcome"] != "not_yet_checked"}
+        kept_checked = [r for r in prev_checked if r["table"] in done]
+        kept_links = [r for r in read_csv(LINKS_OUT)
+                      if r["table"] in done and r["how_found"] != "recorded_at_ingest"]
+        tables = [(t, u) for t, u in tables if t not in done]
+        print(f"--new-only: {len(done)} tables already checked, {len(tables)} to sweep",
+              file=sys.stderr)
 
     routed: Dict[str, List[Tuple[str, str, str]]] = {}
     for t, cell in tables:
@@ -642,9 +696,24 @@ def main() -> int:
     if not args.no_readme_check:
         check_readmes(links, args.offline)
 
-    write_csv(LINKS_OUT, links, ["table", "url", "file_name", "host", "how_found",
-                                 "n_same_kind_in_deposit", "deposit_url", "evidence", "checked_at"])
-    write_csv(CHECKED_OUT, checked, ["table", "data_url", "host", "deposit", "outcome", "checked_at"])
+    for x in links:
+        x.setdefault("evidence", "")
+    links = ingest_links(live_tables) + kept_links + links
+    ##one row per (table, url): a deposit reached by two routes (a multi-URL
+    ##cell, a child component) lists the same file twice. Keep the strongest.
+    rank = {"recorded_at_ingest": 0, "name_codebook": 1, "readme_names_columns": 2,
+            "name_readme": 3, "dataverse_ddi": 4}
+    best: Dict[Tuple[str, str], dict] = {}
+    for x in links:
+        k = (x["table"], x["url"])
+        if k not in best or rank.get(x["how_found"], 9) < rank.get(best[k]["how_found"], 9):
+            best[k] = x
+    links = list(best.values())
+    checked = kept_checked + checked
+    links.sort(key=lambda x: (x["table"].lower(), x["how_found"], x["url"]))
+    checked.sort(key=lambda x: (x["table"].lower(), x["data_url"]))
+    write_csv(LINKS_OUT, links, LINK_FIELDS)
+    write_csv(CHECKED_OUT, checked, CHECKED_FIELDS)
     print(f"{len(links)} links for {len({x['table'] for x in links})} tables -> {LINKS_OUT.name}", file=sys.stderr)
     return 0
 

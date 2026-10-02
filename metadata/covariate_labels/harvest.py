@@ -56,10 +56,19 @@ def candidate_scripts(data_dir: Path) -> list[str]:
 
 
 def ensure_checkout(checkout: Path, commit: str) -> str:
+    subprocess.run(["git", "-C", str(REPO), "fetch", "-q", "origin"], check=True)
+    ##Resolved in THIS repo, so `--commit HEAD` means the branch you are on --
+    ##the only place a new script exists before its PR merges (#2770).
+    want = subprocess.run(["git", "-C", str(REPO), "rev-parse", commit + "^{commit}"],
+                          check=True, capture_output=True, text=True).stdout.strip()
     if not checkout.exists():
-        subprocess.run(["git", "-C", str(REPO), "fetch", "-q", "origin"], check=True)
         subprocess.run(["git", "-C", str(REPO), "worktree", "add", "--detach",
-                        str(checkout), commit], check=True)
+                        str(checkout), want], check=True)
+    else:
+        ##An existing checkout from an earlier run would otherwise be reused at
+        ##whatever commit it was made from, and re-run stale scripts silently.
+        subprocess.run(["git", "-C", str(checkout), "checkout", "-q", "--detach", want],
+                       check=True)
     return subprocess.run(["git", "-C", str(checkout), "rev-parse", "HEAD"],
                           check=True, capture_output=True, text=True).stdout.strip()
 

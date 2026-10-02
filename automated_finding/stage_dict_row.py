@@ -34,6 +34,14 @@ Usage: pass one row as JSON on stdin, e.g.:
 
 For a comps, nominal or simsyn table add `--source comps|nom|sim`; each
 dictionary has its own automated file (#2628). Default is core.
+
+`codebook_url` (#2770): the source's own codebook FILE -- whoever builds a
+table has just read it to write the script. Give its URL, or "none" when the
+source ships no codebook; never a guess, and never the deposit's landing page
+(that is already `url`). It is not a dictionary column: it is written to
+codebook_at_ingest.csv beside this file, which metadata/find_codebook_links.py
+reads as its strongest evidence (`how_found = recorded_at_ingest`). Restaging
+a table replaces its codebook row.
 """
 import csv
 import json
@@ -59,6 +67,30 @@ SOURCE_FILES = {
     "nom": "dictionary_auto_nom.csv",
     "sim": "dictionary_auto_sim.csv",
 }
+
+
+##The source's own codebook file, recorded when the table is built (#2770). One
+##row per table; restaging replaces it. Not part of the dictionary union.
+CODEBOOK_PATH = Path(os.environ.get("IRW_CODEBOOK_INGEST_PATH")
+                     or Path(__file__).resolve().parent / "codebook_at_ingest.csv")
+CODEBOOK_COLUMNS = ["table", "source", "codebook_url", "recorded_at"]
+
+
+def record_codebook(table, source, url):
+    """Upsert `table`'s codebook row. `url` is already validated."""
+    from datetime import date
+    rows = []
+    if CODEBOOK_PATH.exists():
+        with open(CODEBOOK_PATH, newline="", encoding="utf-8") as f:
+            rows = [r for r in csv.DictReader(f)
+                    if (r.get("table") or "").strip().lower() != table.lower()]
+    rows.append({"table": table, "source": source, "codebook_url": url,
+                 "recorded_at": date.today().isoformat()})
+    rows.sort(key=lambda r: r["table"].lower())
+    with open(CODEBOOK_PATH, "w", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=CODEBOOK_COLUMNS, lineterminator="\n")
+        w.writeheader()
+        w.writerows(rows)
 
 
 def staging_path(source):
@@ -155,11 +187,18 @@ def main():
     if cli_source_via is not None:
         payload["source_via"] = cli_source_via
 
+    ##Not a dictionary column (#2770): validated here, written after the row.
+    codebook = clean(payload.pop("codebook_url", None))
+    if codebook and codebook.lower() != "none" and not re.match(r"^https?://\S+$", codebook):
+        sys.exit(f"'codebook_url' must be the codebook file's URL or \"none\": {codebook!r}")
+    if codebook.lower() == "none":
+        codebook = "none"
+
     row = {c: "" for c in COLUMNS}
     for key, value in payload.items():
         col = KEY_MAP.get(key)
         if col is None:
-            sys.exit(f"unknown field: {key} (known: {', '.join(sorted(KEY_MAP))})")
+            sys.exit(f"unknown field: {key} (known: {', '.join(sorted(KEY_MAP) + ['codebook_url'])})")
         row[col] = clean(value)
 
     if not row["table"]:
@@ -260,6 +299,9 @@ def main():
         writer.writerow(row)
 
     print(f"staged {row['table']} -> {path}")
+    if codebook:
+        record_codebook(row["table"], source, codebook)
+        print(f"recorded codebook for {row['table']} -> {CODEBOOK_PATH}")
 
 
 if __name__ == "__main__":
