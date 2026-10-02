@@ -141,6 +141,7 @@ argentina_2017_victimization_fear,"Encuesta Nacional de Victimización 2017 (ENV
 argentina_2017_victimization_performance,"Encuesta Nacional de Victimización 2017 (ENV 2017) - Desempeño del sistema de seguridad pública (DS), preguntas 4 y 12: control del delito y trato de la policía",16,81,8.5,5.76875
 argentina_2017_victimization_precaution,"Encuesta Nacional de Victimización 2017 (ENV 2017) - Medidas de seguridad (MS), pregunta 10: actividades que dejó de hacer por razones de seguridad",6.84615384615385,43.9230769230769,2,5.64179775280899
 argentina_2017_victimization_trend,"Encuesta Nacional de Victimización 2017 (ENV 2017) - Percepción de seguridad ciudadana (PS), pregunta 4: evolución de la delincuencia por zona",4.75,22.5,11,-0.0743421052631561
+armour_2017_pcl5,PTSD Checklist for DSM-5 (PCL-5),12.1,82.7,10.4,11.1686694214876
 arnulf_2022_general_knowledge,General Knowledge Test (short form),7.25,38.6666666666667,8,3.51336206896552
 arora2025_blueq_pedagogical,Blended Learning Usability Evaluation-Questionnaire (BLUE-Q),16.8,105.4,8.5,9.50352941176471
 arora2025_blueq_synchronous,Blended Learning Usability Evaluation-Questionnaire (BLUE-Q),10.5,71,10.2,5.96564935064935
@@ -150,6 +151,8 @@ arzamoncunill_2023_epq_admin,"Expectations of Physiotherapists Questionnaire (EP
 arzamoncunill_2023_epq_clinical,"Expectations of Physiotherapists Questionnaire (EPQ), clinical care area",3.64900662251656,28.8741721854305,6.22516556291391,12.9188164012963
 aslec_insomnia_wang2025,The Adolescent Self-rating Life Events Checklist (ASLEC),6.16666666666667,42.625,5,9.5035
 aspirations_sonmez_2022,Turkish version of the Aspiration Index,7.68571428571429,39.4571428571429,2.85714285714286,4.33977057886352
+assanangkornchai_2022_cannabis_benefits,"Perception of benefits of medical cannabis (study-authored checklist, Assanangkornchai et al. 2022 questionnaire Part 4, items 1-20)",3.9,29.3,4.5,12.5378417721519
+assanangkornchai_2022_cannabis_harms,"Perception of harms of medical cannabis (study-authored checklist, Assanangkornchai et al. 2022 questionnaire Part 4, items 21-32)",3.75,30.8333333333333,4.5,13.0523936170213
 assessment_time_fournier_2025_bscs,Brief Self-Control Scale,7.92307692307692,43.3846153846154,8.2,4.06547169811321
 assessment_time_fournier_2025_gad,Generalised Anxiety Disorder scale (GAD-7),6.42857142857143,38,15.25,6.84603174603175
 assessment_time_fournier_2025_phq,The Patient Health Questionnaire (PHQ-9),11.7777777777778,68.7777777777778,15.25,7.13456603773585
@@ -192,6 +195,7 @@ bfi_goldberg_1992_conscientiousness,"IPIP Big-Five Factor Markers (50-item set; 
 bfi_goldberg_1992_extraversion,"IPIP Big-Five Factor Markers (50-item set; Goldberg, 1992), Factor I: Extraversion (Surgency)",6.1,30.6,4.8,3.42506557377049
 bfi_goldberg_1992_neuroticism,"IPIP Big-Five Factor Markers (50-item set; Goldberg, 1992), Factor IV: Emotional Stability, coded N1-N10 as Neuroticism in the source codebook",4.7,22.9,4.8,2.81321276595745
 bfi_goldberg_1992_openness_to_experience,"IPIP Big-Five Factor Markers (50-item set; Goldberg, 1992), Factor V: Intellect or Imagination, coded O1-O10 as Openness to Experience in the source codebook",5.5,30,4.8,6.93681818181818
+bialowolski_2024_financial_literacy,"Financial literacy test questions (feminized, masculinized and gender-neutral versions)",114.777777777778,616.5,19.5,4.17369661331129
 biswas_2024_digital_center_quality,"Pourasava Digital Center (PDC) service quality, citizen satisfaction, citizen participation and continuous use intention questionnaire (Biswas, Rahman & Al Masud 2024)",7.11538461538461,40.3461538461538,8.4,6.37438296787353
 bitew_2020_lte,"List of Threatening Experiences (LTE), 12-item version as administered in Amharic",2.25,15.9166666666667,2.5,29.507037037037
 bitew_2020_osss3,Oslo Social Support Scale (OSSS-3),15.3571428571429,76.5,6.5,5.49230897009967
@@ -233,6 +237,45 @@ buzgova_2023_lsita,"Life Satisfaction Index for the Third Age - Short Form (LSIT
 buzgova_2023_qol,"Older People's Quality of Life questionnaire, brief version (OPQOL-brief; Bowling et al. 2013)",1,2,14,-3.4
 buzgova_2023_rses,Rosenberg Self-Esteem Scale (RSES),10.2,46.4,11,3.0801568627451
 buzgova_2023_soc,"Sense of Coherence Scale, 13-item short form (SOC-13; Antonovsky's Orientation to Life Questionnaire)",14.0769230769231,75.3846153846154,6.56043956043956,5.49428571428572
+c19prc_uk_mcbride_2021_activity,"C19PRC-UK Wave 2 lockdown activities (daily activity frequency, 12 items)",7.33333333333333,40.0833333333333,9,4.97
+c19prc_uk_mcbride_2021_childimpact,C19PRC-UK Wave 2: Perceived impact of the pandemic on children,11,61.6,14,4.612
+c19prc_uk_mcbride_2021_cmq,"Conspiracy Mentality Questionnaire (CMQ; Bruder, Haffke, Neave, Nouripanah & Imhoff, 2013)",12.4,77.6,6.09090909090909,251.711929824561
+c19prc_uk_mcbride_2021_comfort,C19PRC-UK Wave 3 comfort resuming activities post-lockdown (9 items),5.44444444444444,34.3333333333333,20,5.82392156862745
+c19prc_uk_mcbride_2021_contacttracingapp,C19PRC-UK Wave 3 contact-tracing app intentions (4 items),7.75,43.5,8.8,3.36083333333333
+c19prc_uk_mcbride_2021_drinkcontext,C19PRC-UK drinking context in the past week (Waves 2 and 3),6.15384615384615,46.1538461538462,6.03846153846154,4.5491958041958
+c19prc_uk_mcbride_2021_eu_identity,C19PRC-UK Wave 6 identity with Leave/Remain (Brexit) groups (6 items),11.6666666666667,64.8333333333333,14,7.97147887323944
+c19prc_uk_mcbride_2021_gad7,Generalized Anxiety Disorder Scale (GAD-7),6.42857142857143,37.7142857142857,15.25,6.84603174603175
+c19prc_uk_mcbride_2021_govsatisfaction,C19PRC-UK Wave 3 satisfaction with UK Government COVID-19 measures (11 domains),2.18181818181818,15.3636363636364,17.2,12.0081818181818
+c19prc_uk_mcbride_2021_handle_c19,Perceived handling of COVID-19 by institutions,3.66666666666667,25.75,5.25,10.2445454545455
+c19prc_uk_mcbride_2021_homespace,Private space in the home,14.3333333333333,74.1666666666667,14.4285714285714,6.46511627906977
+c19prc_uk_mcbride_2021_hopefulness,Brief-H-Positive Scale (Brief-H-Pos; hopefulness),17,81,11.6,5.26941176470588
+c19prc_uk_mcbride_2021_humanitarianism,Humanitarianism (4 items adapted from the American National Election Studies (ANES) Panel Study 2008-2009),12.75,74.5,14,9.51191176470588
+c19prc_uk_mcbride_2021_hygiene,"COM-B (Capability, Opportunity, Motivation - Behaviour) questions: maintaining hygienic practices",9.52380952380952,43.6190476190476,14,3.93489694385217
+c19prc_uk_mcbride_2021_icd_anxiety,ICD-11 generalised anxiety symptom items (modified from Goldberg et al. Anx-5 screening scale),5.125,36.125,9.2,8.85753048780488
+c19prc_uk_mcbride_2021_icd_depression,ICD-11 depression symptom items (modified from the Dep-5 screening scale of Goldberg et al.),6.55555555555556,40.5555555555556,9.2,6.16666666666667
+c19prc_uk_mcbride_2021_infosource,COVID-19 information sources (amount obtained),1.88888888888889,14.1111111111111,8,13.6054901960784
+c19prc_uk_mcbride_2021_ius12,"Intolerance of Uncertainty Scale, 12-item short form (IUS-12)",9,49.9166666666667,18.6,5.72925925925926
+c19prc_uk_mcbride_2021_lockdownbehaviour,Health behaviour engagement: social distancing and maintaining hygiene practices (C19PRC-UK weekly lockdown behaviours),12.3125,70.25,11.6,6.7621288071066
+c19prc_uk_mcbride_2021_loneliness,UCLA 3-item Loneliness Scale,8,41.3333333333333,10.6666666666667,4.24666666666667
+c19prc_uk_mcbride_2021_mabs,"Monotheist and Atheist Beliefs Scale (MABS), short form",9.77777777777778,54.2222222222222,14,6.45969696969697
+c19prc_uk_mcbride_2021_nationalism,"Nationalism (2 items adapted from Davidov, 2011)",14,83,17.6,7.57
+c19prc_uk_mcbride_2021_nationalpride,National Pride (3 items),10.6666666666667,56.3333333333333,14,5.90125
+c19prc_uk_mcbride_2021_neighbourcomfort,Neighbour comfort (UK Community Life Survey items),17.5,86.5,18,6.74357142857143
+c19prc_uk_mcbride_2021_partyidentity,Political party identification strength (2 items adapted from the British Election Study 2015),12,67,17.6,7.28166666666667
+c19prc_uk_mcbride_2021_phq15,"Patient Health Questionnaire-15 (PHQ-15), APA DSM-5 Level 2 Somatic Symptom adaptation (14 items; menstrual item not administered)",3.71428571428571,23.3571428571429,16.6666666666667,5.60087912087912
+c19prc_uk_mcbride_2021_phq9,Patient Health Questionnaire-9 (PHQ-9),11.6666666666667,67.8888888888889,15.25,7.21534951456311
+c19prc_uk_mcbride_2021_polarization_brexit,Affective polarization: Brexit (C19PRC-UK wave 6 study items),3.25,21.75,9.85714285714286,37.1461538461539
+c19prc_uk_mcbride_2021_polarization_covid,Affective polarization: Brexit and COVID-19 pandemic (COVID-19 items; C19PRC-UK study-authored),3.25,21.25,9.85714285714286,37.1461538461539
+c19prc_uk_mcbride_2021_protect,"Protective behaviour change (avoidance) (C19PRC-UK Wave 1, study-authored item set)",5.90909090909091,39.3636363636364,26.75,7.21788461538462
+c19prc_uk_mcbride_2021_protective_behaviours,"C19PRC-UK Hygiene practices (COVID-19 protective behaviours, waves 5-6)",13.3846153846154,78.2307692307692,11.3333333333333,7.05873563218391
+c19prc_uk_mcbride_2021_quarantine_support,C19PRC-UK Wave 3 support for quarantine-free entry to the UK by country of origin (10 countries),1.2,7.3,14,12.4113333333333
+c19prc_uk_mcbride_2021_riskbehaviour_c19,C19PRC-UK COVID-19 risk-reduction behaviours (Waves 1-3),7.75,46.4375,10.3333333333333,5.98895161290323
+c19prc_uk_mcbride_2021_riskreduction_beliefs,C19PRC-UK beliefs about COVID-19 risk reduction (Waves 1-2),11.4,71.6,14.8,7.51696774193548
+c19prc_uk_mcbride_2021_secondwave_restrictions,C19PRC-UK Wave 3 support for COVID-19 restrictions in the event of a second wave (8 items),4.375,29.625,10.6,6.44671052631579
+c19prc_uk_mcbride_2021_selfharm_suicidality,Self-harm and suicidality items (C19PRC-UK Wave 3; adapted from the 2014 Adult Psychiatric Morbidity Survey),26.375,142.5,2.5,9.37611320754717
+c19prc_uk_mcbride_2021_trustinstitutions,Trust in institutions (C19PRC-UK),3.66666666666667,25.75,15.4,10.2445454545455
+c19prc_uk_mcbride_2021_trustsource,Trust in COVID-19 information sources (C19PRC-UK),1.88888888888889,14.1111111111111,7.75,13.6054901960784
+c19prc_uk_mcbride_2021_vaccineattitudes,General vaccine attitudes (C19PRC-UK Wave 2),11.4,76.1,17.6,10.7998596491228
 cacciatore_2021_crisis_care_satisfaction,"Defining and Understanding Social Support in Grief survey (Cacciatore et al., 2021): crisis care satisfaction items",2.11111111111111,16.5555555555556,20.8,9.46666666666667
 cacciatore_2021_isel,"Interpersonal Support Evaluation List, 12-item version (ISEL-12), adapted to a bereavement context",18,89.9166666666667,14.5,7.0145737327189
 cacciatore_2021_ongoing_satisfaction,Satisfaction with ongoing social support after traumatic grief (study-designed survey item set),1.88888888888889,14.6666666666667,20.8,6.97017543859649
@@ -367,6 +410,7 @@ de_vries_2022_bat_secondary,"Burnout Assessment Tool (BAT), secondary symptoms s
 de_vries_2022_eudaimonic_wellb,Eudaimonic Workplace Well-being Scale (EWWS),1,2,14,-3.4
 debacker_2018_decisionjustification,Decision justifications,10.25,65.25,2,8.55384146341463
 decamp_2022_online_discussion,"Online Teaching Practices Instrument (DeCamp et al., 2022): discussion facilitation contributions",12.0833333333333,87.1666666666667,6.2,13.5362931034483
+deception_professors,Perceptions of Deception in Social Science Research (faculty survey),17.6910828025478,109.742038216561,7.93630573248408,11.1093190694593
 deilkas_2019_patient_safety_climate,"Safety Attitudes Questionnaire - Ambulatory Version (SAQ-AV), Norwegian version for GP practices",1,2,13.8,-3.4
 dejesus_2017_lequesne,Lequesne Functional Index (Índice Funcional de Lequesne),6.52380952380952,35.2619047619048,22.3571428571429,3.44844629822732
 dejesus_2017_sf36,"SF-36 (Medical Outcomes Study 36-Item Short-Form Health Survey), Brazilian Portuguese version",10.0857142857143,60.9571428571429,16.9571428571429,6.76212545528126
@@ -388,6 +432,7 @@ donati_2021_cfq7,"Cognitive Fusion Questionnaire-7 (CFQ-7), Italian version",12,
 dong_2025_teacher_leadership,Survey Questionnaire on the Current Situation of Leadership among Primary and Secondary School Teachers in Xinjiang Uygur Autonomous Region,13.6875,94.9375,19.8,12.4070454545455
 dopmeijer_2022_loneliness,De Jong Gierveld Loneliness Scale (11-item),1,2,11.4,-3.4
 dopmeijer_2022_performance_pressure,"Performance pressure items (study-developed; Study Environment, Health and Study Success survey), 12 items",1,2,26.6,-3.4
+dorsch_2025_ai_tam,Technology acceptance exit questionnaire (Dorsch & Deroy 2025),12.375,76.25,10.2,10.713948019802
 dou2025_ans,"Aesthetic Needs Scale (ANS), Chinese version (Świątek et al., 2024)",10.8888888888889,61.6666666666667,2,8.04238095238095
 dou2025_area,"Aesthetic Responsiveness Assessment (AReA), Chinese revised 12-item version (Peng & Chen, 2023)",12.75,70.1666666666667,7.4,8.27792483660131
 double_marking_steele_2022,Exploring the Value of Double Marking in Dissertation Assessments,1,9.09259259259259,92.3333333333333,59.5262962962963
@@ -404,6 +449,7 @@ dudasova_2021_swls,Satisfaction With Life Scale (SWLS),1,2,14.4285714285714,-3.4
 dulger2024_wordcompletion,Scenario Completion Task and Memory Recognition Task (word-fragment completion component),1,8.23333333333333,19,54.4166666666667
 dumas_Organisciak_2022,NA,1,4.7,7.4,20.43
 dumas_organisciak_2022,NA,1,4.7,7.4,20.43
+durand_2022_phq9,Patient Health Questionnaire-9 (PHQ-9),12,69.2222222222222,15.25,7.13456603773585
 dussel_2022_pcl17,"PTSD Checklist (PCL), 17-item DSM-IV version",1,2,10.4,-3.4
 dvivdtws_ppmial_marcatto_2023_dtw,"Dark Tetrad at Work (DTW) scale, Italian version",8.40909090909091,42.9090909090909,2,4.20954545454546
 dwyer_2019_clinton_activist,Activist Identity and Commitment Scale,9.125,44.375,16.1666666666667,6.23450342465754
@@ -625,6 +671,7 @@ FPAS_Silva_2022,"Florida Patient Acceptance Survey, Brazilian Portuguese version
 frac20,Data from fraction subtraction problems.,4.1,11.05,NA,-1.879
 fraijo_2022_mslq,"Cuestionario de Motivación y Estrategias de Aprendizaje (CEMEA; Motivated Strategies for Learning Questionnaire, MSLQ), 81 items",1,2,6.57142857142857,-3.4
 franco_2024_unfolding,"Unfolding (Coombs) item set on the intrinsic value of receiving attention from others, generated with the GPTbinarytree function of the coombs R package and administered as a ranking task (Franco & Carvalho 2023, 'A Tutorial on Unidimensional Unfolding', PsyArXiv doi:10.31234/osf.io/5hnkz); deposit osf.io/pqjhv",9,61.3333333333333,10.5,11.52
+fredborg_2018_asmr_triggers,"ASMR Checklist (Fredborg, Clark & Smith), stimulus intensity ratings",4,27.7857142857143,9.14285714285714,6.77743842364532
 fredrickson_2015_mhcsf,"Mental Health Continuum-Short Form (MHC-SF), adult version",8.71428571428571,48.7142857142857,14.1666666666667,288.557213114754
 friedman_2018_risks_discrimination,Cultural worldview items: grid (hierarchy-egalitarianism) index,14.8333333333333,84.8333333333333,16.1666666666667,9.15455056179776
 friedman_2018_risks_government,Cultural worldview items: group (individualism-communitarianism) index,14.5,87.3333333333333,16.1666666666667,8.23971264367816
@@ -844,6 +891,9 @@ guatemala_2024_homes_transport,"Encuesta para la Evaluación de la Calidad de lo
 guatemala_2024_homes_trash,"Encuesta para la Evaluación de la Calidad de los Servicios Públicos Básicos 2024 (ENCASBA), INE Guatemala -- Capítulo IV, Sección A: servicio de recolección de basura (P04A05)",18.2727272727273,102.863636363636,3.72727272727273,9.08959746720941
 guatemala_2024_homes_water,"Encuesta para la Evaluación de la Calidad de los Servicios Públicos Básicos 2024 (ENCASBA), INE Guatemala -- Capítulo IV, Sección A: servicio de agua potable (P04A01)",18.12,101.28,3.52,8.3562701986755
 gumus_2025_dietarian_identity,"Dietarian Identity Questionnaire (DIQ), Turkish version (Beslenme Kimliği Anketi – Türkçe, BKA-T)",14.3333333333333,79.4242424242424,16.4285714285714,9.37975067126966
+guo_2025_ar,Academic Resilience Scale (5 items adapted from Cassidy's ARS-30),1,2,7.4,-3.4
+guo_2025_ase,Academic Self-Efficacy Scale (Liang Yusong 2000 Chinese adaptation of Pintrich & De Groot 1990),1,2,7.4,-3.4
+ha_2026_aspire_affect,ASPIRE twice-weekly daily diary affect ratings (items based on the PANAS and prior daily diary studies),1,5.71428571428571,3.53061224489796,11.0607142857143
 habibi_2021_meim,"Multigroup Ethnic Identity Measure (MEIM), 12-item Persian version",14.25,73.9166666666667,7,6.3908918128655
 han_2015_peer_assisted_learning,"Anatomy Dissection Course Questionnaire, Section B (self-assessment of upper-limb dissection learning objectives)",12.1666666666667,73.8333333333333,10,8.69362244897959
 han_2026_gad7,"Generalized Anxiety Disorder-7 (GAD-7) as administered in the Jiangsu elderly survey: GAD01-GAD06 are GAD-7 items, GAD07 is a study-specific loss-of-interest item scored in the GAD-7 total",10.6296296296296,70.6296296296296,13.0740740740741,11.6210607820364
@@ -1074,6 +1124,9 @@ lee_2024_panas,"Positive and Negative Affect Schedule (PANAS), Korean version (P
 lee_2025_nursing_exam,"2023 Women's Health Nursing final examination, 4th-year first semester, Korean baccalaureate nursing programme",39.32,276.72,8,11.3010143755615
 leon_guereno_2020_breq,"Cuestionario de Regulación de la Conducta en el Ejercicio (BREQ-3), Spanish 23-item version (González-Cutre, Sicilia y Fernández, 2010)",8.39130434782609,45.7391304347826,8,6.81817213842059
 lessR_Mach4,Mach IV (Machiavellianism scale),13.15,69.55,12.5,6.18412737642586
+lestari_2026_cognitive_flexibility,"Teacher Executive Regulation Scale (TERS), Sub Tes 1: Cognitive Flexibility (CF) -- situational judgment test (Lestari, Jatnika, Agustiani et al., 2026)",33.020618556701,213.989690721649,105.278350515464,11.3098964581235
+lestari_2026_inhibitory_control,"Teacher Executive Regulation Scale (TERS), Sub Tes 2: Inhibitory Control (IC) -- situational judgment test (Lestari, Jatnika, Agustiani et al., 2026)",28.725,175,107.99375,10.8593180215005
+lestari_2026_working_memory,"Teacher Executive Regulation Scale (TERS), Sub Tes 3: Working Memory (WM) -- situational judgment test (Lestari, Jatnika, Agustiani et al., 2026)",41.9375,264.75,117.171875,12.6604269449715
 lhsbrasil_couto_2023_lhs,"Learned Helplessness Scale. The LHS can be used to measure states of learned helplessness and consists of 20 items, answered on a four-point scale (1 = Strongly disagree; 4 = Strongly agree).",13.85,67.6,11,5.8331582733813
 lhsbrasil_couto_2023_pss,"Perceived Stress Scale (PSS-10). The PSS measures the perception of individual stress in a global form, independent of stressor agents",12.9,62.4,9.6,194.146868686869
 lhsbrasil_couto_2023_ses,Rosenberg’s Self-Esteem Scale (SES). The SES is a unidimensional measurement that assesses global self-esteem through 10 items responded on a four-point scale,10.3,45.4,11,2.9765145631068
@@ -1188,6 +1241,7 @@ mascherini_2021_meddiet,"Med Diet Score (MedDietScore), as administered in the A
 matarboumosleh_2017_gad2,Generalized Anxiety Disorder-2 (GAD-2),7,38.5,15.25,5.68285714285715
 matarboumosleh_2017_phq2,Patient Health Questionnaire-2 (PHQ-2),6,39.5,15.25,6.41666666666667
 matarboumosleh_2017_spai26,Smartphone Addiction Inventory (SPAI),14.1923076923077,81.3846153846154,15.5,8.25174174174174
+matosaslopez_2022_bars_teaching_blended,"Behavioral Anchored Rating Scales (BARS) questionnaire for assessing teaching effectiveness in blended learning (Matosas-López & Cuevas-Molano, 2022)",2.3,21.8,267.54,22.7126666666667
 matranga_2019_hpv_knowledge,"VaccinaTion & Hpv Knowledge (THinK) questionnaire (Matranga et al. 2019, PeerJ 7:e6254, Figure 1)",9.75,56.875,4.16666666666667,7.50096153846154
 mboya_2020_gds15,"Geriatric Depression Scale, 15-item short form (GDS-15)",8.86666666666667,43.4666666666667,2.5,102.745757575758
 mede_2025_clim_emotions,"Emotions about climate change (TISP core questionnaire, block CLIM_EMO)",1,8.22222222222222,5.8,14.9555555555556
@@ -1267,6 +1321,40 @@ mexico_2023_quality_university,"Encuesta Nacional de Calidad e Impacto Gubername
 mexico_2023_quality_water,Potable Water Service Quality,11.0357142857143,64.3928571428571,10.6428571428571,7.04402565880721
 mexico_2023_quality_wellbeing,"Encuesta Nacional de Calidad e Impacto Gubernamental (ENCIG) 2023 y 2021, Cuestionario general, Sección V (preguntas 5.5 y 5.5a, en ambas ediciones)",10.0714285714286,65.2142857142857,5.21428571428571,9.17615501519757
 mexico_2023_quality_wellbeingservice,"Encuesta Nacional de Calidad e Impacto Gubernamental (ENCIG) 2023, Cuestionario general, Sección V (preguntas 5.7 y 5.7a)",10.2857142857143,71.4285714285714,5.21428571428571,10.0645714285714
+mexico_2024_q1safety_conflicts,"Encuesta Nacional de Seguridad Pública Urbana (ENSU) 2024, primer trimestre (INEGI), Cuestionario principal, Sección II. Conflictos y conductas antisociales",6.91891891891892,46.7837837837838,18.5405405405405,7.7086117936118
+mexico_2024_q1safety_govperformance,"Encuesta Nacional de Seguridad Pública Urbana (ENSU) 2024, primer trimestre (INEGI), Cuestionario principal, Sección III. Desempeño gubernamental",7.5,51.8,17.525,8.88966666666667
+mexico_2024_q1safety_govtrust,"Encuesta Nacional de Seguridad Pública Urbana (ENSU) 2024, primer trimestre (INEGI), Cuestionario principal, Sección IV. Confianza en la administración pública",10,69.3333333333333,3.18181818181818,12.4928571428571
+mexico_2024_q1safety_perception,"Encuesta Nacional de Seguridad Pública Urbana (ENSU) 2024, primer trimestre (INEGI), Cuestionario principal, Sección I. Percepción sobre seguridad pública",4.09722222222222,26.2777777777778,11.4722222222222,7.13606557377049
+mexico_2024_q2safety_conflicts,"Encuesta Nacional de Seguridad Pública Urbana (ENSU) 2024, segundo trimestre (INEGI), Cuestionario principal, Sección II. Conflictos y conductas antisociales",6.91891891891892,46.7837837837838,18.5405405405405,7.7086117936118
+mexico_2024_q2safety_govperformance,"Encuesta Nacional de Seguridad Pública Urbana (ENSU) 2024, segundo trimestre (INEGI), Cuestionario principal, Sección III. Desempeño gubernamental",12,76.9583333333333,14.9375,9.52147491349481
+mexico_2024_q2safety_harassment,"Encuesta Nacional de Seguridad Pública Urbana (ENSU) 2024, segundo trimestre (INEGI), Cuestionario principal, Sección IV. Acoso",22.8888888888889,144.111111111111,2,13.2133656957929
+mexico_2024_q2safety_perception,"Encuesta Nacional de Seguridad Pública Urbana (ENSU) 2024, segundo trimestre (INEGI), Cuestionario principal, Sección I. Percepción sobre seguridad pública",4.796875,29.609375,8.9375,6.57575642417662
+mexico_2024_q3safety_conflicts,"Encuesta Nacional de Seguridad Pública Urbana (ENSU) 2024, tercer trimestre (INEGI), Cuestionario principal, Sección II. Conflictos y conductas antisociales",6.91891891891892,46.7837837837838,18.5405405405405,7.7086117936118
+mexico_2024_q3safety_govperformance,"Encuesta Nacional de Seguridad Pública Urbana (ENSU) 2024, tercer trimestre (INEGI), Cuestionario principal, Sección III. Desempeño gubernamental",7.5,51.8,17.525,8.88966666666667
+mexico_2024_q3safety_govtrust,"Encuesta Nacional de Seguridad Pública Urbana (ENSU) 2024, tercer trimestre (INEGI), Cuestionario principal, Sección V. Confianza en la administración pública",7.33333333333333,50.3333333333333,17.5,11.2
+mexico_2024_q3safety_perception,"Encuesta Nacional de Seguridad Pública Urbana (ENSU) 2024, tercer trimestre (INEGI), Cuestionario principal, Sección I. Percepción sobre seguridad pública",4.11111111111111,26.3611111111111,11.4722222222222,7.15178334071777
+mexico_2024_q3safety_violence,"Encuesta Nacional de Seguridad Pública Urbana (ENSU) 2024, tercer trimestre (INEGI), Cuestionario principal, Sección IV. Relaciones familiares",20.1666666666667,114.333333333333,2,8.17086776859504
+mexico_2024_q4safety_conflicts,"Encuesta Nacional de Seguridad Pública Urbana (ENSU) 2024, cuarto trimestre (INEGI), Cuestionario principal, Sección II. Conflictos y conductas antisociales",6.91891891891892,46.7837837837838,18.5405405405405,7.7086117936118
+mexico_2024_q4safety_govperformance,"Encuesta Nacional de Seguridad Pública Urbana (ENSU) 2024, cuarto trimestre (INEGI), Cuestionario principal, Sección III. Desempeño gubernamental",12,76.9583333333333,14.9375,9.52147491349481
+mexico_2024_q4safety_harassment,"Encuesta Nacional de Seguridad Pública Urbana (ENSU) 2024, cuarto trimestre (INEGI), Cuestionario principal, Sección IV. Acoso",22.8888888888889,144.111111111111,2,13.2133656957929
+mexico_2024_q4safety_perception,"Encuesta Nacional de Seguridad Pública Urbana (ENSU) 2024, cuarto trimestre (INEGI), Cuestionario principal, Sección I. Percepción sobre seguridad pública",5.37878787878788,33.0151515151515,8.72727272727273,6.52682847082495
+mexico_2025_q1safety_conflicts,"Encuesta Nacional de Seguridad Pública Urbana (ENSU) 2025, primer trimestre (INEGI), Cuestionario principal, Sección II. Conflictos y conductas antisociales",6.91891891891892,46.7837837837838,18.5405405405405,7.7086117936118
+mexico_2025_q1safety_govperformance,"Encuesta Nacional de Seguridad Pública Urbana (ENSU) 2025, primer trimestre (INEGI), Cuestionario principal, Sección III. Desempeño gubernamental",7.5,51.8,17.525,8.88966666666667
+mexico_2025_q1safety_govtrust,"Encuesta Nacional de Seguridad Pública Urbana (ENSU) 2025, primer trimestre (INEGI), Cuestionario principal, Sección IV. Confianza en los niveles de gobierno",7.33333333333333,50.3333333333333,17.5,11.2
+mexico_2025_q1safety_perception,"Encuesta Nacional de Seguridad Pública Urbana (ENSU) 2025, primer trimestre (INEGI), Cuestionario principal, Sección I. Percepción sobre seguridad pública",4.11111111111111,26.3611111111111,11.4722222222222,7.15178334071777
+mexico_2025_q2safety_conflicts,"Encuesta Nacional de Seguridad Pública Urbana (ENSU) 2025, segundo trimestre (INEGI), Cuestionario principal, Sección II. Conflictos y conductas antisociales",6.91891891891892,46.7837837837838,18.5405405405405,7.7086117936118
+mexico_2025_q2safety_govperformance,"Encuesta Nacional de Seguridad Pública Urbana (ENSU) 2025, segundo trimestre (INEGI), Cuestionario principal, Sección III. Desempeño gubernamental",12,76.9583333333333,14.9375,9.52147491349481
+mexico_2025_q2safety_harassment,"Encuesta Nacional de Seguridad Pública Urbana (ENSU) 2025, segundo trimestre (INEGI), Cuestionario principal, Sección IV. Acoso",22.6666666666667,143,2,13.2058823529412
+mexico_2025_q2safety_perception,"Encuesta Nacional de Seguridad Pública Urbana (ENSU) 2025, segundo trimestre (INEGI), Cuestionario principal, Sección I. Percepción sobre seguridad pública",5.65151515151515,34.7424242424242,8.72727272727273,6.58998420145538
+mexico_2025_q3safety_conflicts,"Encuesta Nacional de Seguridad Pública Urbana (ENSU) 2025, tercer trimestre (INEGI), Cuestionario principal, Sección II. Conflictos y conductas antisociales",7.02702702702703,46.8918918918919,18.5405405405405,7.7086117936118
+mexico_2025_q3safety_govperformance,"Encuesta Nacional de Seguridad Pública Urbana (ENSU) 2025, tercer trimestre (INEGI), Cuestionario principal, Sección III. Desempeño gubernamental",7.5,51.8,17.525,8.88966666666667
+mexico_2025_q3safety_govtrust,"Encuesta Nacional de Seguridad Pública Urbana (ENSU) 2025, tercer trimestre (INEGI), Cuestionario principal, Sección V. Confianza en los niveles de gobierno",7.33333333333333,50.3333333333333,17.5,11.2
+mexico_2025_q3safety_perception,"Encuesta Nacional de Seguridad Pública Urbana (ENSU) 2025, tercer trimestre (INEGI), Cuestionario principal, Sección I. Percepción sobre seguridad pública",4.36111111111111,27.9444444444444,11.4722222222222,7.12391041035815
+mexico_2025_q3safety_violence,"Encuesta Nacional de Seguridad Pública Urbana (ENSU) 2025, tercer trimestre (INEGI), Cuestionario principal, Sección IV. Relaciones familiares",20.1666666666667,114.333333333333,2,8.17086776859504
+mexico_2025_q4safety_conflicts,"Encuesta Nacional de Seguridad Pública Urbana (ENSU) 2025, cuarto trimestre (INEGI), Cuestionario principal, Sección II. Conflictos y conductas antisociales",6.97297297297297,46.8378378378378,18.5405405405405,7.7086117936118
+mexico_2025_q4safety_govperformance,"Encuesta Nacional de Seguridad Pública Urbana (ENSU) 2025, cuarto trimestre (INEGI), Cuestionario principal, Sección III. Desempeño gubernamental",12,76.9583333333333,14.9375,9.52147491349481
+mexico_2025_q4safety_harassment,"Encuesta Nacional de Seguridad Pública Urbana (ENSU) 2025, cuarto trimestre (INEGI), Cuestionario principal, Sección IV. Acoso",22.6666666666667,143,2,13.2058823529412
+mexico_2025_q4safety_perception,"Encuesta Nacional de Seguridad Pública Urbana (ENSU) 2025, cuarto trimestre (INEGI), Cuestionario principal, Sección I. Percepción sobre seguridad pública",5.65151515151515,34.7575757575758,8.72727272727273,6.62161959019533
 mft_validationandreplication,Moral Foundations Questionnaire-2 (MFQ-2),13.0555555555556,72.8611111111111,24.4,7.32333333333333
 mgkt,Multifactor General Knowledge Test (Form A v0.8),7.46325878594249,43.1693290734824,2,4.19557633613464
 MGSISGCLQ_Hollyhead_2018,"Gynaecologic Cancer Lymphedema Questionnaire (GCLQ; Carter et al. 2010), administered to male respondents",10.6333333333333,58.6666666666667,5.33333333333333,6.27
@@ -1484,6 +1572,7 @@ PEMAIW_Qiu_2020_FFMQ,Five Facet Mindfulness Questionnaire (FFMQ),13.128205128205
 PEMAIW_Qiu_2020_PANAS,"Positive and Negative Affect Schedule, 20-item short form (PANAS-SF; Watson, Clark & Tellegen, 1988). Adjectives, item numbering and the five anchors are taken from the study's own administered questionnaire, 'materials_PANAS20.pdf' in the Materials component of OSF osf.io/ph6ks (CC BY 4.0), and corroborated item for item by the Qualtrics question text carried in row 1 of the deposit's own data exports (data_anonymizedInternalRecruit.csv / data_anonymizedWebRecruit.csv). Qiu & Minda (2023), 'Psychedelic Experience and Mindfulness are Associated with Improved Wellbeing'.",1,7.4,13,13.71
 penningroth_2019_pm_concerns,Goal/concern relatedness form for real-life prospective memory tasks (concern categories),1.8,15.2666666666667,67.5,33.33875
 penningroth_2019_pm_goals,Survey on Real-Life Activities: goal-relatedness form for self-listed real-life prospective memory tasks,1.8,15.2666666666667,36.5,33.33875
+perceived_injustice_mourin,Mourin Perceived Injustice Scale (19-item first draft; the 10 retained items form the published final scale),5.31578947368421,27.3684210526316,8.42105263157895,4.43505675954592
 perfectionismlit_2021_engagement,"Perfectionism Literacy Lesson Evaluation: post-lesson evaluation questions (useful, interesting, informative)",5,28.3333333333333,14,6.02666666666667
 perfectionismlit_2021_prepost,Perfectionism Literacy Lesson Evaluation: pre-/post-lesson questions,10.8,59.2,14,6.97755555555555
 personality_handwriting__financial_behavior,"Personality and Financial Behaviour Questionnaire (Thomas, Parul University), Part 1 - Neuroticism block",8.83333333333333,48.4166666666667,14,5.83851851851852
@@ -1756,6 +1845,7 @@ silva_2018_phcs,"Perceived Health Competence Scale (PHCS), unified Portuguese-la
 silva_2022_crsy,Community Resilience Scale for Youth (CRS-Y),11.8125,74.375,2,10.3797611256545
 silva_2023_ecohis,"Early Childhood Oral Health Impact Scale (ECOHIS; Pahel, Rozier & Slade, 2007), Brazilian Portuguese version (Tesch, Oliveira & Leão, 2008)",1,2,2,-3.4
 silvia_2024_funny,Humor Efficacy and Identity Short Scales (HEISS),8.5,40.75,7.4,5.07794117647059
+simsalrbim_human,Preference Test - Wide valence range (seven OASIS images),1,NaN,NaN,NA
 simsalRbim_Human_LargeValence_2017,Preference Test - Wide valence range (seven OASIS images),1,2,2,-3.4
 simsalRbim_Human_LargeValence_2018,"Pairwise picture preference test (Pfefferle et al. 2025, Behavior Research Methods), high-valence image set from the OASIS database (Kurdi et al. 2017)",7.42857142857143,49.1428571428571,2,48.7154901960784
 simsalRbim_Human_LowValence_2017,Preference Test: Narrow valence range (paired choices between seven OASIS pictures),1,2,2,-3.4
@@ -2251,6 +2341,34 @@ Veterans_Affairs_SSVF_Survey_2016-17,"SSVF (Supportive Services for Veteran Fami
 veterans_affairs_ssvf_survey_2018-20,VA Satisfaction survey related to supportive services for low-income veterans (2-18-2020),14.7398843930636,99.0404624277457,7.73988439306358,10.0755882352941
 vocabulary_iq,"Vocabulary IQ Test (VIQT), with its optional supplemental survey",5.51666666666667,36.3,6.5,15.4752145015106
 VSOCFP_Sebo_2024,"Sense of Coherence scale, French version, refined 8-item form (SOC-8)",14.625,78.5,7.89285714285714,5.50908045977012
+wallace_2026_apply,"Application intentions toward the target organization (Wallace, Murphy, Hernandez-Colmenares & Fujita, 2026; study-authored items, Studies S1c and S2c)",52.5,287.5,4.14285714285714,13.5275
+wallace_2026_belong,"Anticipated sense of belonging (Wallace, Murphy, Hernandez-Colmenares & Fujita, 2026; study-authored items, Studies 2, S1c and S2c)",34.2,183.4,4.14285714285714,8.18470588235294
+wallace_2026_cengage,"Anticipated engagement with the target professor or organization (Wallace, Murphy, Hernandez-Colmenares & Fujita, 2026; Studies 2, S1c and S2c)",69,346.25,5.85714285714286,11.8479130434783
+wallace_2026_certain,"Mindset certainty (Wallace, Murphy, Hernandez-Colmenares & Fujita, 2026; Studies 2, S1a, S1b, S1c, S2a, S2b and S2c)",29,161,18.0285714285714,9.38219827586207
+wallace_2026_climate,"Perceived organizational climate (Wallace, Murphy, Hernandez-Colmenares & Fujita, 2026; Studies S2a, S2b and S2c)",8.25,54.25,5.85714285714286,9.43962121212121
+wallace_2026_concern,"Evaluative concern in the target organization (Wallace, Murphy, Hernandez-Colmenares & Fujita, 2026; study-authored items, Studies S1c and S2c)",42.2,238,4.14285714285714,11.3372195892575
+wallace_2026_fit,"Anticipated fit with the target professor or organization (Wallace, Murphy, Hernandez-Colmenares & Fujita, 2026; study-authored items, Studies 2, S1c and S2c)",44,243.666666666667,5.85714285714286,8.45575757575758
+wallace_2026_interest,"Interest in the target professor's class or organization (Wallace, Murphy, Hernandez-Colmenares & Fujita, 2026; study-authored items, Studies 2 and S1c)",38,193.333333333333,4.14285714285714,7.96736842105263
+wallace_2026_interest_org,"Interest in joining the target organization (Wallace, Murphy, Hernandez-Colmenares & Fujita, 2026; study-authored single item, Studies S1a, S1b, S2a, S2b and S2c)",37,193,5.85714285714286,9.16554054054054
+wallace_2026_iqbelief,"Implicit theories of intelligence, entity-theory items (Dweck) as administered in Wallace, Murphy, Hernandez-Colmenares & Fujita (2026), Studies 2, S1a, S1b, S1c, S2a, S2b and S2c",13.6666666666667,78.6666666666667,41.5714285714286,6.43268292682927
+wallace_2026_learn,"Interest in learning more about the target organization (Wallace, Murphy, Hernandez-Colmenares & Fujita, 2026; study-authored items, Studies S1c and S2c)",46.3333333333333,268.333333333333,4.14285714285714,12.8852877697842
+wallace_2026_mcm_check,"Perceived organizational/professor mindset manipulation check (Wallace, Murphy, Hernandez-Colmenares & Fujita, 2026; study-authored items adapting implicit-theory-of-intelligence statements to an organization or professor, Study 2 and Studies S1a-S2c)",38.4166666666667,231.583333333333,5.85714285714286,12.187352494577
+wallace_2026_mcm_culture,"Perceptions of organizational culture and anticipated fit, trust and commitment (Wallace, Murphy, Hernandez-Colmenares & Fujita, 2026; study-authored items about MCM Consulting, Studies S1a and S1b)",17.2,90,5.85714285714286,8.13195348837209
+wallace_2026_rec,"Willingness to recommend the target organization (Wallace, Murphy, Hernandez-Colmenares & Fujita, 2026; study-authored items, Studies S1c and S2c)",60.5,330,4.14285714285714,14.1513016528926
+wallace_2026_reflection,"Mindset strength: elaboration, knowledge, values and importance (Wallace, Murphy, Hernandez-Colmenares & Fujita, 2026; study-authored items, Studies S1a and S2b)",14.25,73,4.14285714285714,5.90785087719298
+wallace_2026_s2_engage,"Anticipated engagement in the professor's course (Wallace, Murphy, Hernandez-Colmenares & Fujita, 2026; study-authored items, Study 2)",6.5,36,5.85714285714286,2.37576923076923
+wallace_2026_s2_like,"Liking of the professor (Wallace, Murphy, Hernandez-Colmenares & Fujita, 2026; study-authored items, Study 2)",5.5,33.5,5.85714285714286,5.86409090909091
+wallace_2026_s2_perf,"Expected performance in the professor's class (Wallace, Murphy, Hernandez-Colmenares & Fujita, 2026; study-authored items, Study 2)",12.6666666666667,57,5.85714285714286,3.32368421052632
+wallace_2026_s2_profcert,"Certainty about the professor's mindset (Wallace, Murphy, Hernandez-Colmenares & Fujita, 2026; study-authored items, Study 2)",16,102,4.14285714285714,10.5625
+wallace_2026_s2_verbalmath,"Verbal and math self-ratings (Wallace, Murphy, Hernandez-Colmenares & Fujita, 2026; study-authored items, Study 2)",9,38.5,5.85714285714286,1.68666666666667
+wallace_2026_s2_warmcomp,"Perceived professor warmth and competence (Wallace, Murphy, Hernandez-Colmenares & Fujita, 2026; study-authored items, Study 2)",4,27,5.85714285714286,5.44
+wallace_2026_s2c_covidcert,"COVID-19 uncertainty items (Wallace, Murphy, Hernandez-Colmenares & Fujita, 2026; Study S2c)",11.3333333333333,63,14.4285714285714,6.44162162162162
+wallace_2026_s2c_desirecert,"Desire for certainty items (Wallace, Murphy, Hernandez-Colmenares & Fujita, 2026; Study S2c)",13.5,72.5,14.4285714285714,5.40833333333333
+wallace_2026_s2c_intoluncert,"Intolerance of uncertainty items (Wallace, Murphy, Hernandez-Colmenares & Fujita, 2026; Study S2c): five items of the Intolerance of Uncertainty Scale (Freeston et al., 1994; English version Buhr & Dugas, 2002)",8.2,49,24.6,7.17873170731708
+wallace_2026_s2c_mc,"Attitude-certainty reflection items, MC1-MC4 (Wallace, Murphy, Hernandez-Colmenares & Fujita, 2026; Study S2c)",11.75,63.75,14.4285714285714,8.32441489361702
+wallace_2026_s2c_metacog,"Metacognition items (Wallace, Murphy, Hernandez-Colmenares & Fujita, 2026; Study S2c): thinking about the organization's influence on one's own intelligence beliefs",29,186,4.14285714285714,16.471724137931
+wallace_2026_s2c_selfcert,"Self-certainty items (Wallace, Murphy, Hernandez-Colmenares & Fujita, 2026; Study S2c): certainty and confidence about oneself",10.5,58.5,4.14285714285714,5.92404761904762
+wallace_2026_s2c_uncertmind,"Uncertainty mindset items (Wallace, Murphy, Hernandez-Colmenares & Fujita, 2026; Study S2c): beliefs that certainty and uncertainty are fixed",15.6666666666667,88.6666666666667,14.4285714285714,8.59659574468085
 wang2022_dass_anxiety,"Depression Anxiety Stress Scales - 21 Items (DASS-21), Anxiety subscale; Chinese version (Wang K et al., 2016)",1,2,11.25,-3.4
 wang2022_dass_depression,"Depression Anxiety Stress Scales - 21 Items (DASS-21), Depression subscale; Chinese version (Wang K et al., 2016)",1,2,11.25,-3.4
 wang2022_dass_stress,"Depression Anxiety Stress Scales - 21 Items (DASS-21), Stress subscale; Chinese version (Wang K et al., 2016)",1,2,11.25,-3.4
@@ -2308,6 +2426,7 @@ wolters2026_panas_na,"Positive and Negative Affect Schedule (PANAS), negative af
 wolters2026_panas_pa,"Positive and Negative Affect Schedule (PANAS), positive affect subscale; German version of Krohne, Egloff, Kohlmann & Tausch (1996)",1,2,13,-3.4
 wolters2026_wi,"Whiteley Index, 14-item version (WI-14)",1,2,2.5,-3.4
 wooly_hartman2022,"Age Verification Instrument (AVI), Hartman, Moss, Rabinowitz, Bahn, Rosenzweig, Robinson & Litman (2023)",3.47368421052632,17.9473684210526,8,1.3886346300534
+wu2021_basic_empathy,Basic Empathy Scale (16-item Chinese version),10.0625,52.8125,4.2,5.41139363354037
 wu2026_liking,Aesthetic preference (aesthetic pleasure) single-item measure adopted from the Aesthetic Pleasure in Design (APiD) scale; ratings of 10 ceramic vase stimuli,1,2,5.85714285714286,-3.4
 wu2026_novel,"Single-item novelty rating of ceramic vase stimuli (Blijlevens et al., 2017)",1,2,5.85714285714286,-3.4
 wu2026_typical,Typicality single-item measure adopted from Blijlevens et al.'s Aesthetic Pleasure in Design (APiD) study; ratings of 10 ceramic vase stimuli,1,2,5.85714285714286,-3.4
@@ -2383,6 +2502,12 @@ zhang_2025_environ_awareness,"Executives' Environmental Awareness (EA) scale, 5 
 zhang_2025_green_supply_intent,"Green Supply Chain Integration Intention (GSCII) scale, 5 items (Zhang et al. 2025, adapted from Jum'a et al. 2022 and Singh and Joshi 2024)",13.4,97.2,6.14285714285714,13.0598805970149
 zhang_2025_normative_pressure,"Normative Pressure (NP) scale, 4 items (Zhang et al. 2025, adapted from Dai et al. 2021, Geng and Dai 2024 and Wang et al. 2018)",12.75,104.5,6.14285714285714,19.460931372549
 zhang_2025_self_efficacy,"Executives' Self-Efficacy (SE) scale, 5 items (Zhang et al. 2025, adapted from Chen et al. 2014 and Zhang et al. 2023)",14.8,107,6.14285714285714,15.6955135135135
+zhang_2026_episode_affect,"Episode-level happiness, social connection and meaning (Day Reconstruction Method diary)",8.33333333333333,52,4.14285714285714,8.9
+zhang_2026_ipip_fairness,IPIP Fairness scale (International Personality Item Pool),5.75,37.25,18.4,6.66119565217391
+zhang_2026_ipip_forgiveness,IPIP Forgiveness scale (International Personality Item Pool),6.25,35.5,18.4,3.8395
+zhang_2026_ipip_gratitude,IPIP Gratitude scale (International Personality Item Pool),7.25,37.75,18.4,3.10646551724138
+zhang_2026_ipip_patience,IPIP Patience scale (International Personality Item Pool),6,31.25,18.4,5.43333333333333
+zhang_2026_virtue_states,Episode-level virtue state ratings (Day Reconstruction Method diary),7,41.75,9.03571428571429,6.3852380952381
 zhao_2024_erq,Emotion Regulation Questionnaire (ERQ),1,2,6.57142857142857,-3.4
 zhao_2025_digital_literacy,Digital literacy indicator system (Zhao et al. 2025; China Family Panel Studies 2016/2018 internet-use items),7.23076923076923,45.8205128205128,4.23076923076923,29.2528085106383
 zhao_2025_leisure_involvement,"Leisure Involvement (LI) scale, 12 items: attraction, centrality, identity expression (Zhao et al. 2025, based on McIntyre & Pigram 1992)",10.8333333333333,52.9166666666667,2,4.33807692307692
