@@ -9,7 +9,11 @@ through:
 
   item text  -- `match_item_text`, case-insensitive substrings of canonical
                 stems, against `item_text` and the `*_translated` columns in an
-                `__items` table (the latter since 2026-09-29, irw#2401);
+                `__items` table (the latter since 2026-09-29, irw#2401). A stem
+                written `^stem$` is ANCHORED: it matches only an item that is the
+                stem and nothing else, give or take surrounding whitespace and
+                trailing punctuation (irw#2544: the STAI-6 stem "I am worried"
+                flagged a study-written sentence that merely begins with it);
   item codes -- `match_item_code`, a regex, against `item` in a RESPONSE table.
                 A script that uses source headers as codes carries the
                 instrument into data no item-text withdrawal reaches
@@ -51,6 +55,30 @@ HOLD = {"block", "hold", "escalate"}
 NOTE = {"ship_with_note"}
 
 _cache: dict = {}
+
+#: What an anchored stem tolerates after the item: whitespace and end punctuation.
+_TRAIL = re.compile(r"[\s.!?,;:\u2026]+$")
+
+
+def stem_hit(stem: str, text: str) -> bool:
+    """Does one register stem match one item text? Both are compared lower-cased.
+
+    A plain stem is a substring test. A stem written `^stem$` (irw#2544) matches
+    only when the whole item, stripped of surrounding whitespace and trailing
+    punctuation, is the stem: short, common stems such as the STAI-6's "I am
+    worried" otherwise flag any sentence that starts with them."""
+    stem, text = stem.strip().lower(), text.lower()
+    if len(stem) > 2 and stem.startswith("^") and stem.endswith("$"):
+        return _TRAIL.sub("", text.strip()) == stem[1:-1].strip()
+    return stem in text
+
+
+def stem_core(stem: str) -> str:
+    """The literal text of a stem, anchors removed (for a LIKE pre-filter)."""
+    stem = stem.strip()
+    if len(stem) > 2 and stem.startswith("^") and stem.endswith("$"):
+        return stem[1:-1].strip()
+    return stem
 
 
 def register_path() -> Path:
@@ -128,7 +156,7 @@ def check_item_text(df, table: str, register=None) -> list:
         for row in register:
             if not row["stems"]:
                 continue
-            hit = low.apply(lambda t: any(s in t for s in row["stems"]))
+            hit = low.apply(lambda t: any(stem_hit(s, t) for s in row["stems"]))
             if hit.any():
                 names = sorted(set(items[hit]))
                 out.append(Finding("rights_register", "warn",

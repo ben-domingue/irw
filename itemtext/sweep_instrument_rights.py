@@ -65,6 +65,13 @@ from pathlib import Path
 
 REG = Path(__file__).resolve().parent / "instrument_rights_register.csv"
 
+# One stem matcher for the sweep and the write-path check, so a `^stem$` anchor
+# (irw#2544) means the same thing in both.
+_SRC = str(Path(__file__).resolve().parents[1])
+if _SRC not in sys.path:
+    sys.path.insert(0, _SRC)
+from irw_validate.rights import stem_core, stem_hit  # noqa: E402
+
 
 def text_shard_names():
     """Every item-text shard, read from metadata/redivis_config.R.
@@ -121,7 +128,7 @@ def scan(redivis, tables, names, col, pats):
         # BigQuery uses backslash escapes; a doubled '' parses as two adjacent
         # string literals and is a syntax error, not an escaped quote.
         "LOWER(txt) LIKE '%%%s%%'"
-        % p.lower().replace("\\", "\\\\").replace("'", "\\'")
+        % stem_core(p).lower().replace("\\", "\\\\").replace("'", "\\'")
         for _, _, p in pats)
     # The filter is applied ONCE, outside the union. Repeating it per table (the
     # pre-2026-09-29 shape) passed Redivis's 1,000,000-character query cap once
@@ -154,7 +161,7 @@ def scan(redivis, tables, names, col, pats):
         for row in df.itertuples(index=False):
             txt = (row.txt or "").lower()
             for inst, fam, p in pats:
-                if p.lower() in txt:
+                if stem_hit(p, txt):     # LIKE is a superset for `^stem$`
                     found.setdefault((row.tbl, fam, inst), set()).add(row.item)
                     break
         print(f"  [{col}] scanned {min(i+CHUNK, len(names))}/{len(names)}")

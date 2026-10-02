@@ -130,6 +130,34 @@ class Rights(unittest.TestCase):
         self.assertIn("rights_register:unavailable", report.checks_run)
         self.assertEqual(self.rights_findings(report), [])
 
+    def test_anchored_stem_matches_only_a_whole_item(self):
+        """irw#2544: the STAI-6 stem 'I am worried' flagged a study-written
+        sentence (c19prc_uk_mcbride_2021_childimpact). `^stem$` is whole-item."""
+        hit = rights.stem_hit
+        for text in ("I am worried", "  I am worried. ", "I AM WORRIED!", "I am worried\u2026"):
+            with self.subTest(text=text):
+                self.assertTrue(hit("^I am worried$", text))
+        for text in ("I am worried that I am not able to provide good home schooling",
+                     "Sometimes I am worried", "I am worried something might go wrong."):
+            with self.subTest(text=text):
+                self.assertFalse(hit("^I am worried$", text))
+        self.assertTrue(hit("i am worried", "Sometimes I am worried"),
+                        "an unanchored stem is still a substring")
+        self.assertEqual(rights.stem_core(" ^I am tense$ "), "I am tense")
+
+    def test_anchored_stem_through_the_validator(self):
+        with self.reg.open("a", newline="") as fh:
+            csv.DictWriter(fh, FIELDS).writerow(
+                {"instrument": "STAI-6", "family": "STAI", "verdict": "block",
+                 "match_item_text": "^I am tense$|^I am worried$"})
+        df = self.items(["I am worried that I am not able to provide good home schooling",
+                         "I am tense."])
+        (f,) = self.rights_findings(validate_frame(df, label="x_2026_scale__items",
+                                                   profile="upload"))
+        self.assertIn("STAI", f.message)
+        self.assertIn("1 item(s)' text", f.message)
+        self.assertIn("'q1'", f.message)
+
     def test_the_real_register_loads(self):
         os.environ.pop(rights.REGISTER_ENV)
         reg = rights.load_register()
