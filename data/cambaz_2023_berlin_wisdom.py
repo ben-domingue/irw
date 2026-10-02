@@ -5,7 +5,8 @@
 #   measurement of wisdom in Turkish sample: Relations with
 #   self-transcendence and cognitive flexibility." Journal of Human Behavior
 #   in the Social Environment, 34(3), 361-372. (Found by Crossref title
-#   search; the deposit has no related identifiers. Paywalled -- not read.)
+#   search; the deposit has no related identifiers. Paywalled; read from a
+#   PDF Ben supplied, 2026-10-02.)
 #   Dataset: Cambaz, H. Z. (2023). Zenodo.
 #   https://doi.org/10.5281/zenodo.7534902
 # Data: data.sav (148 rows x 33 columns; Turkish young adults 18-32).
@@ -24,12 +25,15 @@
 # instruments (ASTI "transcendence", SD-WISE "sandiego", the Cognitive
 # Flexibility Inventory and its two subscales, and five SD-WISE subscales)
 # are present only as scale totals, so they cannot ship.
-# The response range is NOT documented in anything readable here (the paper
-# is paywalled and the deposit has no codebook), so no permitted-value set
-# is asserted; values are checked to be whole numbers. Whether each rating
-# is one rater's or a consensus is likewise undocumented; "percent20"
-# (30 rows) appears to be a second rater's TOTAL on a 20% subsample, with no
-# per-criterion second ratings, so the shipped ratings carry no rater column.
+# Response range, per the paper's Method: each criterion was rated on a
+# 7-point scale (1 = not similar .. 7 = very similar to an ideal wise answer),
+# so totals run 7-35. Asserted as the permitted set {1..7} for every item.
+# Rater: the paper says the second author rated all responses and the first
+# author one-fifth of them (ICC .57). The per-criterion ratings here cover all
+# 148 people, so they are the second author's; "percent20" (30 rows) is the
+# first author's TOTAL on that one-fifth subsample, with no per-criterion
+# second ratings, so it is dropped and the table carries no rater column. The
+# paper's N is 151 minus 3 misreadings of the task = 148, matching the file.
 #
 # Table (item codes are the source column names):
 #   cambaz_2023_berlin_wisdom   factual, procedural, lifespanc, valurelativ,
@@ -69,6 +73,7 @@ URL = "https://zenodo.org/api/records/7534902/files/data.sav/content"
 
 TABLE = "cambaz_2023_berlin_wisdom"
 ITEMS = ["factual", "procedural", "lifespanc", "valurelativ", "uncertainty"]
+PERMITTED = set(range(1, 8))
 DROPPED = {"transcendence", "sandiego", "sr_flex", "cf_alternatives",
            "cf_control", "sd_emotinalregulation", "sd_socialcounseling",
            "sd_determination", "sd_insight", "sd_prosocial", "tolerance",
@@ -117,6 +122,10 @@ def convert():
     long = long.dropna(subset=["resp"]).reset_index(drop=True)
     assert (long["resp"] % 1 == 0).all()
     long["resp"] = long["resp"].astype(int)
+    for it, g in long.groupby("item"):
+        bad = set(g["resp"]) - PERMITTED
+        assert not bad, (it, bad)
+    pv = {i: PERMITTED for i in ITEMS}
     long = long[["id", "item", "resp"] + cov_cols]
     for c in cov_cols:
         long[c] = long[c].astype("Int64")
@@ -124,12 +133,13 @@ def convert():
     assert not long.duplicated(["id", "item"]).any()
     assert long["id"].nunique() >= 100
     assert long["item"].nunique() == len(ITEMS)
-    checks = run_qc(long)
+    checks = run_qc(long, permitted_values=pv)
     fails = [(c.name, c.detail) for c in checks if c.status == "fail"]
     assert not fails, fails
     out = OUT_DIR / f"{TABLE}.csv"
     long.to_csv(out, index=False)
-    rep = irw_validate.validate_file(str(out), profile="upload")
+    rep = irw_validate.validate_file(str(out), profile="upload",
+                                     context={"permitted_values": pv})
     assert rep.conforms and not rep.errors, \
         [(f.check, f.message) for f in rep.errors]
     for f in rep.findings:

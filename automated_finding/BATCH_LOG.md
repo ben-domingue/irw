@@ -16900,3 +16900,23 @@ Item text:
 
 No uploads, no discovery. `search_terms_log.csv`, `repo_triage_seen_keys.csv`
 and `human_review/` were not touched.
+
+## 2026-10-02h — re-check batch 3: item text stamped; two papers read
+
+ben-domingue confirmed the 5 batch-3 item text tables are uploaded;
+`uploaded=2026-10-02` is stamped in `itemtext_provenance.csv` and
+`mapping_verification.csv`. The 64 response tables are not yet confirmed.
+
+Ben supplied two PDFs. Neither changed an output (both re-runs byte-identical):
+- **Cambaz & Unal 2023** (wisdom): each Berlin-paradigm criterion is rated
+  1-7 (totals 7-35), so `cambaz_2023_berlin_wisdom.py` now asserts {1..7} as
+  the documented set. The second author rated all 148 responses, so the
+  shipped ratings are that rater's; `percent20` is the first author's total on
+  a one-fifth subsample.
+- **Amerigo et al. 2024 IJDRR** (flood): confirms every 1-5 format. The paper
+  calls the sample "representative" but describes non-probabilistic sex/age
+  quota sampling, so per `vocab.md` (method beats label) the three
+  `talayero_2023_*` tags drop `Representative` for `Targeted/specific`
+  (Zamora residents). The paper prints English item wording only, so the
+  administered Spanish is unpublished; the English variable labels are a
+  translated_substitute lead.

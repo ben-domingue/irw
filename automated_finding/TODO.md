@@ -32,15 +32,10 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
     direction and standard MPI scoring (No/?/Yes) all agree. Hold?
   - `suyato_2023_democracy`: codebook codes -1..2, but the printed
     questionnaire has 5 options. Hold?
-  - `cambaz_2023_berlin_wisdom`: 5 rating items, no permitted set until the
-    paper is read.
   - `wisniewski_2021_nihss`: `rater` is the assessment slot (1-3), not a
     stable person (the file doesn't record who).
-- [ ] **Papers behind bot walls/paywalls, if Ben can supply them:** Cambaz &
-  Unal 2023 (10.1080/10911359.2023.2165589; wisdom 1-7 range); Amerigo et al.
-  2024 IJDRR (10.1016/j.ijdrr.2024.104448; Spanish flood wording, the
-  "representative" claim); the CBQ paper (10.26418/jppkn.v6i1.92523) is
-  bot-walled and not confirmed to use these data.
+- [ ] **The CBQ paper (10.26418/jppkn.v6i1.92523) is bot-walled** and not
+  confirmed to use these data; only worth a PDF if Ben wants it cited.
 - [ ] **Rights calls before cheap item text can ship:** CAS (Lee 2020; gopal
   item text is built and shipping — add a register row); MQOL-E / QOLLTI-F
   (sawatzky: full English stems in the variable labels); CERQ (domaradzka:
@@ -50,7 +45,9 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   English for `_translated` or language-only shipping); CBF-PI-15 S3.docx
   (15 of 40 cbfpi_b items, paper_explicit); CSTI 71-item pool in the paper's
   S4 File (paper_order); bekteshi ERI bilingual stems in the deposit docx
-  (positional); PL-NIHSS in the paper's S1 Table.
+  (positional); PL-NIHSS in the paper's S1 Table; talayero flood (3 tables):
+  English variable labels as a translated_substitute (the paper has no
+  Spanish either), same class as wu_2015_cias.
 - [ ] **Next step of the re-check, when wanted:** batch 4, the next 25 of the
   remaining shape-qualified `resp_scale_mixed` rows in pool (b) (about 164
   left after batch 3's 25 picks and 20 skips; skip list in

@@ -6,14 +6,17 @@
 #   measure attitudes toward flood risk management in riverside populations.
 #   International Journal of Disaster Risk Reduction, 106, 104448.
 #   (Not linked from the deposit's metadata; found by Crossref title search.
-#   The paper is CC BY-NC but sits behind a ScienceDirect bot wall, so it was
-#   not read.)
+#   The paper is CC BY-NC behind a ScienceDirect bot wall; read from a PDF
+#   Ben supplied, 2026-10-02. Study 3 of the paper is this deposit.)
 #   Deposit: Talayero, F., Garcia, J. A., & Amerigo, M. (2023). Dataset to
 #   analyze the psychometric and structural properties of a scale designed to
 #   measure attitudes to integrated flood risk management. Zenodo.
 # Data: Zenodo 7547098, DATASET_Zamora_Edited.sav (406 rows x 39 columns;
-#       a survey of residents of Zamora, Spain, described by the deposit as a
-#       representative sample).
+#       CAPI interviews of Zamora, Spain residents aged >18, January 2021.
+#       The paper calls it "a representative sample" but describes
+#       "non-probabilistic sampling on the bases of sex and age quotas" plus a
+#       flood-zone quota, so it is a quota sample, not a probability sample).
+#       The paper reports N=406, mean age 50.4, 54.2% women.
 # License: CC BY 4.0 (Zenodo API).
 #
 # Item text: not shipped. Both label levels checked: the .sav carries full
@@ -21,8 +24,11 @@
 #   elliptical continuations of P1_1's stem) and endpoint-only value labels
 #   (1 = Not at all likely / Strongly disagree, 5 = Very likely / Strongly
 #   agree). The survey was administered in Spain, so the English labels are a
-#   translation of the administered Spanish wording, which is in the paper
-#   (bot-walled) and not in the deposit.
+#   translation of the administered Spanish wording. The Spanish is in
+#   neither the deposit nor the paper: the paper prints only English (Table 2,
+#   the 15 attitude items, under their Study-2 numbers [6.]..[38.]). Lead:
+#   the English variable labels could ship as a translated_substitute
+#   (data_labels, as wu_2015_cias did).
 #
 # Tables (item codes are the source column names). Blocks follow the deposit
 # description's column map.
@@ -36,7 +42,12 @@
 #       protection in the city / neighbourhood, 1-5 agreement, endpoint value
 #       labels.
 #   The permitted set 1-5 is taken from the value labels (labelled endpoints 1
-#   and 5), not from the observed values.
+#   and 5), not from the observed values, and the paper confirms it: attitudes
+#   "a 5-point Likert-type scale, ranging from strongly disagree (1) to
+#   strongly agree (5)"; risk perception "a 5-point scale from none to a great
+#   deal"; adequacy "a 5-point Likert-type scale". The paper describes the
+#   adequacy measure as one item (neighbourhood); the deposit has two (city,
+#   neighbourhood), both labelled.
 #
 # Dropped:
 #   - P3_1-P3_6 (perceived efficiency of six general measures): every row is a
