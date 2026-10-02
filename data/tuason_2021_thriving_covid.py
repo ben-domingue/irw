@@ -4,7 +4,12 @@
 # Tuason, Guss & Boyd (2021), "Thriving during COVID-19: Predictors of
 # psychological well-being and ways of coping", PLOS ONE. CC BY 4.0. N=938.
 #   Enjoy_*:  author-created COVID-coping checklist ("what do you enjoy in
-#             your current situation"), 23 binary yes/no items
+#             your current situation"), 23 binary yes/no items. Respondents
+#             picked exactly 5; the picks are in the source's `Emjoy` string
+#             (e.g. "1,11,13,15,18"). The source's own Enjoy_NN dummies were
+#             filled only for the low and high well-being groups the paper
+#             compares, leaving the middle group all 0, so Enjoy_NN is built
+#             from `Emjoy` instead (#2401).
 #   Lonel_Emo_1-3 / Lonel_Social_1-3: De Jong Gierveld & Van Tilburg
 #             Loneliness Scale, emotional/social subscales, 3 items each,
 #             text response ("Yes"/"More or less"/"No")
@@ -62,6 +67,10 @@ def _ship(df, item_cols, out_name, recode=None):
 def convert():
     df = fetch()
     enjoy_cols = [c for c in df.columns if c.startswith("Enjoy_") and c != "Enjoy_Open"]
+    picks = df["Emjoy"].astype(str).str.split(",").apply(lambda xs: {x.strip() for x in xs})
+    for c in enjoy_cols:
+        code = str(int(c.split("_")[1]))
+        df[c] = picks.apply(lambda p, code=code: int(code in p))
     wb_cols = [f"WB{i}" for i in range(1, 9)]
     sa_cols = [f"S_Agency_{i}" for i in range(1, 7)]
 

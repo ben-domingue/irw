@@ -1,0 +1,30 @@
+table,construct_name,instrument,language,text_source,n_items,n_participants,k,n_mapped,n_near,verdict,basis,note
+CV_OASIS_ODSIS_PPE_Novak_2020_BFI,"The Big Five Inventory (BFI), Czech version","Big Five Inventory (BFI-44), Neuroticism subscale",cze,translated_substitute,8,2409,44,0,0,NAME_ONLY,name,no item text
+RvKDCS_Romiacg_Miroshnik_2020_BFI,Big Five Inventory - 2 (Russian Validation),,rus,unknown,60,1011,44,0,0,NAME_ONLY,name,no item text
+SABFI2_Gallardo_Pujol_2018_BFI,Big Five Inventory-2 (BFI-2),,spa,none_recorded,60,1419,44,0,0,NAME_ONLY,name,no item text
+celik_2026_bfi,NA,,tur,none_recorded,44,653,44,0,0,NAME_ONLY,name,no item text
+conner_2017_bfi,NA,Big Five Inventory (BFI-44),eng,canonical_instrument,44,171,44,0,0,NAME_ONLY,name,no item text
+goldberg_2018_spa_bfi_forced_choice,NA,,eng,none_recorded,80,729,44,0,0,NAME_ONLY,name,no item text
+heekerens2025_bfi_extraversion,Big Five Inventory – Extraversion (German BFI-10),"Measures the degree to which adults are sociable, assertive, and energetic, using the 2-item Extraversion subscale from the German BFI-10",ger,none_recorded,2,88,44,0,0,NAME_ONLY,name,item text not in English
+heekerens2025_bfi_neuroticism,Big Five Inventory – Neuroticism (German BFI-10),"Assesses openness to experience, imagination, and curiosity using the 2-item Openness subscale of the German BFI-10",ger,none_recorded,2,88,44,0,0,NAME_ONLY,name,item text not in English
+heekerens2025_bfi_openness,Big Five Inventory – Openness (German BFI-10),"Assesses openness to experience, imagination, and curiosity using the 2-item Openness subscale of the German BFI-10",ger,none_recorded,2,88,44,0,0,NAME_ONLY,name,item text not in English
+ibrahim_2015_bfi,NA,,"may, eng",canonical_instrument,44,200,44,0,0,NAME_ONLY,name,no item text
+jovanovic_2026_conscientiousness_bfi,Conscientiousness Subscale of Big Five Inventory,,srp,none_recorded,21,1376,44,0,0,NAME_ONLY,name,no item text
+morgan_2026_music_personality_bfi,Big Five Personality and Music Preferences,,eng,none_recorded,30,498,44,0,0,NAME_ONLY,name,no item text
+narcissism_schneider_2025_study2_bfi,Big Five Personality Traits,,ger,none_recorded,15,3,44,0,0,NAME_ONLY,name,no item text
+personalitychange_kramer_2025_bfi,Big Five Inventory-2: Current and Ideal Personality,,eng,none_recorded,120,2094,44,0,0,NAME_ONLY,name,no item text
+robison_2026_retesting_bfi,Big Five Inventory (44 items),,eng,none_recorded,44,241,44,0,0,NAME_ONLY,name,no item text
+talaifar_2025_study1_bfi,Big Five personality (BFI-44),,eng,none_recorded,44,1240,44,0,0,NAME_ONLY,name,no item text
+teq_novak_2021_bfin,Big Five Inventory-Neuroticism Subscale (BFI-N),,cze,unknown,8,165,44,0,0,NAME_ONLY,name,no item text
+vermeiren_2022_bfi,Big Five Inventory,,eng,none_recorded,150,236,44,0,0,NAME_ONLY,name,no item text
+west_2021_aggnet_bfi2_agg_neu,Big Five Inventory Agreeableness and Neuroticism,,eng,none_recorded,17,616,44,0,0,NAME_ONLY,name,no item text
+woodall_2020_bfi44,NA,,eng,none_recorded,44,271,44,0,0,NAME_ONLY,name,no item text
+bfi_goldberg_1992_extraversion,Big Five Inventory: Extraversion,"IPIP Big-Five Factor Markers (50-item set; Goldberg, 1992), Factor I: Extraversion (Surgency)",eng,study_materials,10,19719,44,1,0,NO_MATCH,,first item: i am the life of the party
+bfi_goldberg_1992_neuroticism,Big Five Inventory: Neuroticism,"IPIP Big-Five Factor Markers (50-item set; Goldberg, 1992), Factor IV: Emotional Stability, coded N1-N10 as Neuroticism in the source codebook",eng,study_materials,10,19719,44,0,0,NO_MATCH,,first item: i get stressed out easily
+bfi_goldberg_1992_openness_to_experience,Big Five Inventory: Openness to Experience,"IPIP Big-Five Factor Markers (50-item set; Goldberg, 1992), Factor V: Intellect or Imagination, coded O1-O10 as Openness to Experience in the source codebook",eng,study_materials,10,19719,44,0,0,NO_MATCH,,first item: i have a vivid imagination
+amatus_cipora_2024_bfi_n,Big Five Inventory - Neuroticism,"The AMATUS Dataset: Arithmetic Performance, Mathematics Anxiety and Attitudes in Primary School Teachers and University Students","ger, fre",none_recorded,8,1106,44,8,0,PARTIAL,,first item: i am emotionally balanced and not easily upset
+bfi_goldberg_1992_agreeableness,Big Five Inventory: Agreeableness,"IPIP Big-Five Factor Markers (50-item set; Goldberg, 1992), Factor II: Agreeableness",eng,study_materials,10,19719,44,10,0,PARTIAL,,first item: i make people feel at ease
+bfi_goldberg_1992_conscientiousness,Big Five Inventory: Conscientiousness,"IPIP Big-Five Factor Markers (50-item set; Goldberg, 1992), Factor III: Conscientiousness",eng,study_materials,10,19719,44,10,0,PARTIAL,,first item: i am exacting in my work
+kushnir2017_bfi,NA,Big Five Inventory (BFI-44),eng,study_materials,44,319,44,15,0,PARTIAL,,first item: is relaxed handles stress well
+oxfordcovid_xue_2024_bfi,Big Five Inventory,Big Five Inventory,eng,none_recorded,15,1826,44,15,0,PARTIAL,,first item: does things efficiently
+psychtools_bfi,ipip personality data from the SAPA project,ipip personality data from the SAPA project,eng,none_recorded,25,2800,44,2,2,PARTIAL,,first item: panic easily

@@ -27,11 +27,13 @@ class StageDictRowTest(unittest.TestCase):
         os.unlink(self.path)
 
     def tearDown(self):
-        if os.path.exists(self.path):
-            os.unlink(self.path)
+        for p in (self.path, self.path + ".codebook.csv"):
+            if os.path.exists(p):
+                os.unlink(p)
 
     def stage(self, payload):
-        env = dict(os.environ, IRW_DICT_AUTO_PATH=self.path)
+        env = dict(os.environ, IRW_DICT_AUTO_PATH=self.path,
+                   IRW_CODEBOOK_INGEST_PATH=self.path + ".codebook.csv")
         return subprocess.run([sys.executable, str(SCRIPT)], input=payload,
                               text=True, capture_output=True, env=env)
 
@@ -149,6 +151,84 @@ class DataDoiRoutingTest(StageDictRowTest):
             table="d_2023", doi="10.7910/DVN/PNGUT5; 10.7910/DVN/7A9YMV"))
         self.assertNotEqual(r.returncode, 0)
         self.assertIn("more than one DOI", r.stderr + r.stdout)
+
+
+    ##--source (#2628): one automated file per dictionary sheet.
+    def test_source_flag_stages_a_row(self):
+        env = dict(os.environ, IRW_DICT_AUTO_PATH=self.path)
+        r = subprocess.run([sys.executable, str(SCRIPT), "--source", "nom"],
+                           input=self.ok_payload(), text=True,
+                           capture_output=True, env=env)
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.assertEqual(self.rows()[0]["table"], "a_2026")
+
+    def test_unknown_source_is_refused(self):
+        env = dict(os.environ, IRW_DICT_AUTO_PATH=self.path)
+        r = subprocess.run([sys.executable, str(SCRIPT), "--source=nominal"],
+                           input=self.ok_payload(), text=True,
+                           capture_output=True, env=env)
+        self.assertNotEqual(r.returncode, 0)
+        self.assertIn("unknown --source", r.stderr + r.stdout)
+        self.assertFalse(os.path.exists(self.path))
+
+    def test_source_picks_the_matching_file(self):
+        sys.path.insert(0, str(SCRIPT.parent))
+        import stage_dict_row
+        old = os.environ.pop("IRW_DICT_AUTO_PATH", None)
+        try:
+            for src, name in [("core", "dictionary_auto.csv"),
+                              ("comps", "dictionary_auto_comps.csv"),
+                              ("nom", "dictionary_auto_nom.csv"),
+                              ("sim", "dictionary_auto_sim.csv")]:
+                with self.subTest(source=src):
+                    self.assertEqual(stage_dict_row.staging_path(src),
+                                     SCRIPT.parent / name)
+        finally:
+            if old is not None:
+                os.environ["IRW_DICT_AUTO_PATH"] = old
+
+    def test_committed_source_files_have_the_stager_header(self):
+        sys.path.insert(0, str(SCRIPT.parent))
+        import stage_dict_row
+        for name in stage_dict_row.SOURCE_FILES.values():
+            with self.subTest(file=name):
+                with open(SCRIPT.parent / name, newline="", encoding="utf-8") as f:
+                    self.assertEqual(next(csv.reader(f)), stage_dict_row.COLUMNS)
+
+class CodebookAtIngestTest(StageDictRowTest):
+    """codebook_url (#2770): recorded beside the dictionary, not in it."""
+
+    BASE = ('{"table": "%s", "description": "d", "public_reshare": "Public", '
+            '"derived_license": "CC BY 4.0", "codebook_url": "%s"}')
+
+    def codebook_rows(self):
+        with open(self.path + ".codebook.csv", newline="", encoding="utf-8") as f:
+            return list(csv.DictReader(f))
+
+    def test_url_is_recorded_and_not_a_dictionary_column(self):
+        r = self.stage(self.BASE % ("foo_2026", "https://osf.io/abcde/files/osfstorage/1"))
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.assertNotIn("codebook_url", self.rows()[0])
+        cb = self.codebook_rows()
+        self.assertEqual([(c["table"], c["source"], c["codebook_url"]) for c in cb],
+                         [("foo_2026", "core", "https://osf.io/abcde/files/osfstorage/1")])
+
+    def test_none_is_accepted_and_restaging_replaces(self):
+        self.assertEqual(self.stage(self.BASE % ("foo_2026", "None")).returncode, 0)
+        self.assertEqual([c["codebook_url"] for c in self.codebook_rows()], ["none"])
+        env = dict(os.environ, IRW_DICT_AUTO_PATH=self.path,
+                   IRW_CODEBOOK_INGEST_PATH=self.path + ".codebook.csv")
+        r = subprocess.run([sys.executable, str(SCRIPT), "--force"],
+                           input=self.BASE % ("foo_2026", "https://x.org/cb.pdf"),
+                           text=True, capture_output=True, env=env)
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.assertEqual([c["codebook_url"] for c in self.codebook_rows()], ["https://x.org/cb.pdf"])
+
+    def test_a_guess_that_is_not_a_url_is_refused_before_anything_is_written(self):
+        r = self.stage(self.BASE % ("foo_2026", "probably the PDF on OSF"))
+        self.assertNotEqual(r.returncode, 0)
+        self.assertIn("codebook_url", r.stderr)
+        self.assertFalse(os.path.exists(self.path))
 
 
 if __name__ == "__main__":

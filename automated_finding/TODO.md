@@ -3,6 +3,96 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## From the 2026-10-02 human_review re-check batch 3 (25 rows, 19 shipped)
+
+- [x] **64 tables + 5 item text tables uploaded** (ben-domingue, confirmed
+  2026-10-02): the batch-3 `irw_output/` set, then the 5 `__items.csv`
+  (gopal_2021_cas, garciabacete_2023_victimization, suyato_2023_cbq,
+  wu_2015_cias, wu_2015_bsrs5). `uploaded` stamped in `itemtext_provenance.csv`
+  and `mapping_verification.csv`.
+- [ ] **Issues-page lines for `wu_2015_cias` / `wu_2015_bsrs5`**: both carry
+  the `xue_2025` public_note ("wording only in English, although administered
+  in Chinese"), which forces a callout on `itemtext_issues.qmd` (irw_site repo).
+- [ ] **PII rulings, if Ben wants to override any of the five skips** (all
+  deposit-level; default is skip):
+  - GHQ-12 Odisha (`10.7910/dvn/vjeeie`): GHQ.xlsx is clean; the sibling
+    Mastersheet.xlsx has masked phone numbers, initials, villages + interview
+    dates, free-text disease entries.
+  - Genomic security/privacy questionnaire (`10.7910/dvn/g2uufv`): one
+    free-text "other" cell with a personal sexual-health/illness statement;
+    otherwise GSPQ 73 items x 1,808.
+  - DPES Italian (`10.5281/zenodo.4395625`): two home street addresses in a
+    free-text residence field; otherwise 532 people x 4 instruments.
+  - CRS-R (`10.1016/j.apmr.2024.12.009`) and PRO-CTCAE (`10.5281/zenodo.10435813`):
+    birthdates (explicit, or reconstructable from dates + fractional age).
+- [ ] **Open questions on batch-3 tables (none blocks upload):**
+  - `wu_2015_mpi_*`: stored codes 0<1<2 shipped against the file's own value
+    labels (0=?, 1=Yes, 2=No); the file's Nscore/SDSscore sums, the paper's
+    direction and standard MPI scoring (No/?/Yes) all agree. Hold?
+  - `suyato_2023_democracy`: codebook codes -1..2, but the printed
+    questionnaire has 5 options. Hold?
+  - `wisniewski_2021_nihss`: `rater` is the assessment slot (1-3), not a
+    stable person (the file doesn't record who).
+- [ ] **The CBQ paper (10.26418/jppkn.v6i1.92523) is bot-walled** and not
+  confirmed to use these data; only worth a PDF if Ben wants it cited.
+- [ ] **Rights calls before cheap item text can ship:** CAS (Lee 2020; gopal
+  item text is built and shipping — add a register row); MQOL-E / QOLLTI-F
+  (sawatzky: full English stems in the variable labels); CERQ (domaradzka:
+  English labels, Polish administered -> translated_substitute).
+- [ ] **Item text leads from batch 3 (not built):** mendezlopez_2023 full
+  Spanish stems + value labels (PHQ-9/GAD-7/RSES are rights `ship`; needs
+  English for `_translated` or language-only shipping); CBF-PI-15 S3.docx
+  (15 of 40 cbfpi_b items, paper_explicit); CSTI 71-item pool in the paper's
+  S4 File (paper_order); bekteshi ERI bilingual stems in the deposit docx
+  (positional); PL-NIHSS in the paper's S1 Table; talayero flood (3 tables):
+  English variable labels as a translated_substitute (the paper has no
+  Spanish either), same class as wu_2015_cias.
+- [ ] **Next step of the re-check, when wanted:** batch 4, the next 25 of the
+  remaining shape-qualified `resp_scale_mixed` rows in pool (b) (about 164
+  left after batch 3's 25 picks and 20 skips; skip list in
+  `leads/human_review_recheck_batch3_2026-10-02.csv`). At most two agents at
+  a time.
+
+## From the 2026-10-02 human_review re-check batch 2 (25 rows, 21 shipped)
+
+- [ ] **62 tables + 5 item text tables need uploading**, from the worktree
+  `/home/ben/irw-wt/hr-recheck-batch2/automated_finding/`: all of
+  `irw_output/` (62 tables), then `itemtext_output/` (5 `__items.csv`:
+  garciabacete_2023_loneliness, mendezhinojosa_2026_ebea,
+  turpochaparro_2026_{procrastination,workload,teacher_self_efficacy}).
+  Dictionary/tag rows are staged; `uploaded` is unstamped in
+  `itemtext_provenance.csv` and `mapping_verification.csv`.
+- [ ] **Open questions on batch-2 tables (none blocks upload):**
+  - `kalani_2026_uwes`: coding undocumented (UWES8 sits about a point below
+    the other eight; published UWES is 0-6). Shipped as stored, no permitted
+    set. Hold it?
+  - `delacruzvaldiviano_2024_djgls`: `cov_sex`/`cov_residence` are unlabelled
+    1/2 codes. Keep or drop?
+  - `garciabacete_2023_loneliness` / `sun_2018_greed`: `rights_register`
+    matches the codes to DJG / LBUS; both look like false positives
+    (Cassidy & Asher; positional G1-G7).
+  - `neivasantos_2026_*`: no paper, so what separates wave 1 from wave 2 is
+    undocumented.
+  - `summart_2025_whoqol_bref`: q14 and q25 are identical in every row, so
+    both were dropped.
+- [ ] **Papers behind bot walls, if Ben can supply them:** Sahin 2026 IJHCI
+  (10.1080/10447318.2026.2719186; sahin_2026_* have no permitted sets until
+  read), Stripp 2023 J Relig Health (10.1007/s10943-022-01533-5), Sandoz 2022
+  Psychol Trauma (10.1037/tra0001068). The greed paper was supplied and read.
+- [ ] **Item text leads from batch 2 (not built):** DGSC G1-G7 printed in
+  Liu 2019 Table 1 (paper_explicit, needs verify); bertani_2024_afccq English
+  variable labels (Italian administered; AFCCQ-IT in the paper's supplement);
+  sandoz_2021_cbts/pcl5/epds French stems in the deposit codebook;
+  tabordabarata_2024_hls_eu_q47/bsi and neivasantos_2026_bes/oeq full
+  Portuguese labels at both levels (no English source); delacruzvaldiviano
+  Spanish stems in the deposit's results docx.
+## From the 2026-10-02 human_review re-check batch 1 (9 pilot datasets)
+
+- [x] **22 tables + 1 item text table uploaded** (ben-domingue, confirmed
+  2026-10-02): the batch-1 `irw_output/` set, then
+  `alqerem_2024_mhls__items.csv` (to text_3). GAS naming (`usc_2026_*`) kept;
+  the MTS 1-5 range confirmed from the paper.
+
 ## From the 2026-09-29 JPSP 131(4) batch (Lu 2026 + Zhang 2026)
 
 - [x] **25 tables + 6 item text tables uploaded** (ben-domingue, confirmed 2026-09-29). Original:: `irw_output/lu_2026_*`
@@ -14,6 +104,20 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   (Spielberger Trait-Anger, FSS-II, Mood Survey, Adult Hope Scale, Weinstein
   1980 events, MCQ, Moral Attentiveness, courage/TCS/wisdom items). STAI,
   BFI-2 and HEXACO are already `block`.
+
+## From the 2026-09-28 repos weekly batch
+
+- [ ] **DVN/GJOBOS** (Replication Data for: The Impact of Female Teachers on
+  Female Students' Lifetime Well-Being, cc0, N=30,108, 16 items) —
+  `human_assistance`, unclassified by this routine. Column mapping was a
+  low-confidence guess; QC also flagged `resp_ordinal*`/`resp_direction*`/
+  `imputed_values*`/`resp_scale_mixed`. Needs a human to confirm the column
+  mapping before it's trusted.
+- [ ] **figshare 10.6084/m9.figshare.33980614** (Activities of Daily Living
+  Inventory (ADLI), French older adults) — `download_failed` (proxy/connection
+  error reaching `ndownloader.figshare.com`). Retryable; left out of
+  `repo_triage_seen_keys.csv` so a later run picks it up automatically. No
+  action needed unless it keeps failing.
 
 ## From the 2026-09-21 repos weekly batch
 
@@ -480,6 +584,20 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   ben-domingue in error.
 
 ## From the 2026-09-02 monthly repos sweep
+
+- [ ] **Score the 2026-10-02 repos monthly run against its prediction.** The
+  routine (`trig_01NT4fqYRrf7nRemLN3fAZm4`) fires 21:06 UTC 2026-10-02 with a
+  rewritten prompt and opens `automated/repos-monthly-2026-10-02`. Prediction,
+  written before it ran: **0 `good` from triage; 0-3 tables shipped once its
+  leads are worked by hand, best guess 1.** Basis: the 09-02 monthly triaged
+  150 of 1,998 with 0 `good`, and the four weekly runs (09-07 to 09-28) had 0
+  `good` each, with one deposit (`nguyen_2026_factcheck`) found by hand among
+  `no_usable_file` rows. A 12-term local start found 246 raw candidates, so
+  expect ~1,500-2,000, of which the 150-row triage cap sees a fraction.
+  Decision thresholds: >=5 tables -> it earns its cost, consider raising the
+  cap; 1-4 -> keep, but the yield is in hand-worked leads; 0 -> third straight
+  empty repo-mode result, evidence for thinning it in favour of PMC/PLOS-style
+  sweeps (the two late-September PMC scout sweeps shipped 59 tables).
 
 - [ ] **`automated/repos-monthly-2026-09-02` is waiting for review, and only
   150 of its 1,998 candidates were triaged -- none `good`.** The scheduled

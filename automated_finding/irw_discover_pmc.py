@@ -522,17 +522,10 @@ def load_seen_dois(path: str = SEEN_DOIS_PATH) -> set:
 
 
 def append_seen_dois(dois, path: str = SEEN_DOIS_PATH) -> None:
-    import os
-    from datetime import datetime, timezone
-    if not dois:
-        return
-    file_exists = os.path.exists(path)
-    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-    with open(path, "a", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=["doi", "date"], lineterminator="\n")
-        if not file_exists:
-            writer.writeheader()
-        writer.writerows({"doi": d, "date": today} for d in dois)
+    """`dois`: each a DOI or a (DOI, flag) pair. The flag makes the exclusion
+    reversible -- see seen_ledger.py (irw#2222)."""
+    from seen_ledger import append_seen
+    append_seen(path, "doi", dois)
 
 
 def main():
@@ -593,7 +586,7 @@ def main():
                     seen.add(hit.doi)
                     row, pool = process_one_isolated(hit, pool)
                     if row["flag"] not in INCONCLUSIVE_FLAGS:
-                        newly_seen.append(hit.doi)
+                        newly_seen.append((hit.doi, row["flag"]))
                     writer.writerow(row)
                     outf.flush()
                     n_done += 1

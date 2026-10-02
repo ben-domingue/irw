@@ -192,9 +192,14 @@ getrows<-function(l) {
     ## it here, in both the sheet export and the automated file, and report.
     irw_dict <- drop_unshaped_dict_rows(irw_dict, name, "dictionary")
     if (!is.null(l$file.auto)) {
+        ## comps/nom/sim sheets spell three columns differently from core (#2628).
+        irw_dict <- normalize_dict_layout(irw_dict, name)
         auto <- read_dict_auto(l$file.auto, name)
         auto <- drop_unshaped_dict_rows(auto, name, "automated dictionary")
+        ## The oracle floor is per source: a 9-table simsyn metadata.csv is
+        ## complete, where a 9-row core one would be a truncated read.
         auto <- drop_dead_dict_rows(auto, l$file.live, name,
+                                    min_oracle_rows = if (is.null(l$min.live)) 1000 else l$min.live,
                                     pending.file = l$file.pending)
         u <- union_dict(irw_dict, auto, name)
         irw_dict <- u$dict
@@ -222,12 +227,31 @@ getrows<-function(l) {
     biblio <- seed_from_local(biblio, file.out)
     ## Correct known upstream citation defects even when a cached value exists.
     biblio <- apply_bibtex_overrides(biblio, bibtex_overrides)
+    ## A no-DOI row whose Reference was corrected in the dictionary drops its
+    ## cached BibTeX here, so it regenerates below from the new text (#2580).
+    ## Must precede refresh_biblio_from_dict(), which would hide the change.
+    ref_stale <- drop_stale_reference_bibtex(biblio, irw_dict, name)
+    biblio <- ref_stale$biblio
+    readr::write_csv(ref_stale$log, log_path("_bibtex_reference_log.csv"))
     ##
     irw_notpub <- irw_dict[irw_dict$`Public Reshare?`!="Public",]
     ## Find rows in dictionary whose Filename is not in biblio
     new_data_rows <- irw_dict[is.na(match(tolower(irw_dict$table), tolower(biblio$table))) | is.na(biblio$BibTex[match(tolower(irw_dict$table), tolower(biblio$table))]), ]
     ##remove nonpublic elements before calling ChatGPT
     new_data_rows <- new_data_rows[!new_data_rows$table %in% irw_notpub$table,]
+    ## Opt-in per source; core waits on the #2401 audit pause. A dictionary row
+    ## for a table that is not live is held back here, before any BibTeX is
+    ## fetched for it: a retired table's row can stay in the dictionary for good
+    ## and costs nothing (#2767).
+    live <- if (isTRUE(l$drop.retired)) {
+        read_live_tables(l$file.live, name,
+                         min_oracle_rows = if (is.null(l$min.live)) 1000 else l$min.live)
+    } else NULL
+    if (isTRUE(l$drop.retired)) {
+        new_data_rows <- keep_live_rows(new_data_rows, live, name,
+                                        "dictionary row held, table not live",
+                                        log.file = log_path("_drop_log.csv"))
+    }
     ## the 4 dictionary sheets (core/comps/nom/sim) are independently
     ## maintained and have drifted: core's license column is "Derived License"
     ## (with a space), comps/nom/sim already use "Derived_License" (underscore)
@@ -266,6 +290,12 @@ getrows<-function(l) {
     ## so a non-name row that got in before this gate existed outlives the fix
     ## unless it is taken out here (#2079).
     biblio <- drop_unshaped_dict_rows(biblio, name, "biblio")
+    ## Biblio carries live tables only (#2767): the rows of renamed and retired
+    ## tables go, whatever the dictionary still lists. See read_live_tables().
+    if (isTRUE(l$drop.retired)) {
+        biblio <- keep_live_rows(biblio, live, name, "biblio row dropped, table not live",
+                                 log.file = log_path("_drop_log.csv"), append = TRUE)
+    }
     ## Refresh the dictionary-owned columns on EVERY row, not just the new
     ## ones (#2001). new_data_rows above is, by construction, the rows biblio
     ## does not have; without this a correction typed into the sheet for an
@@ -332,20 +362,26 @@ getrows<-function(l) {
     readr::write_csv(stale$log, log_path("_bibtex_refetch_log.csv"))
     assert_bibtex_doi_consistent(biblio, name)
 
+    ## `Source_via` goes last, so a reader of the first ten columns is unmoved.
+    ## apply_source_via() above fills it; without it here it never left R (#2421).
     biblio<-biblio[,
                    c("table","DOI__for_paper_", "DOI__for_data_", "Reference_x",
                      "URL__for_data_",
                      "Original_License", "Derived_License", "Custom_License_Terms",
-                     "Description", "BibTex")]
+                     "Description", "BibTex", "Source_via")]
     readr::write_csv(biblio, file.out)
 }
 
 
 dbs<-list(
-    ##`file.auto` is what makes a source part of #1732: only core has an
-    ##automated writer today. The other three are sheet-only, exactly as
-    ##03_tags.R leaves comp/sim tag-less, and adding a file here is the whole
-    ##opt-in.
+    ##`file.auto` is what makes a source part of #1732; all four have one
+    ##(#2628). stage_dict_row.py --source {core,comps,nom,sim} writes them, so no
+    ##dictionary row needs pasting into any sheet. `file.live` is the liveness
+    ##oracle; for comps/nom/sim it is written by 05/06/07, which run_pipeline.sh
+    ##runs BEFORE this script so it is current. `min.live` is that oracle's
+    ##plausibility floor (default 1000, which suits core only). `drop.retired`
+##keeps biblio to the tables in `file.live`, so a retired table's dictionary
+##row can stay and never publishes (#2767); not yet on core.
     core=list(name="core",
               irw_dict=gsheet2tbl('https://docs.google.com/spreadsheets/d/1nhPyvuAm3JO8c9oa1swPvQZghAvmnf4xlYgbvsFH99s/edit?gid=1337607315#gid=1337607315'),
               user=IRW_OWNER,
@@ -361,19 +397,37 @@ dbs<-list(
               user=IRW_OWNER,
               dataset="irw_meta",
               table="comps_biblio",
-              file.out="comps_biblio.csv"),
+              file.out="comps_biblio.csv",
+              file.auto="../automated_finding/dictionary_auto_comps.csv",
+              file.live="comps_metadata.csv",
+              file.prov="comps_biblio_provenance.csv",
+              file.pending="comps_biblio_pending.csv",
+              min.live=10,
+              drop.retired=TRUE),
     nom=list(name="nom",
               irw_dict=gsheet2tbl('https://docs.google.com/spreadsheets/d/12tM4vADKcUm5LGOGRwQ5_HKkdYa3mZUaKbFUqgs2U_w/edit?gid=1337607315#gid=1337607315'),
              user=IRW_OWNER,
              dataset="irw_meta",
              table="nominal_biblio",
-             file.out="nominal_biblio.csv"),
+             file.out="nominal_biblio.csv",
+             file.auto="../automated_finding/dictionary_auto_nom.csv",
+             file.live="nominal_metadata.csv",
+             file.prov="nominal_biblio_provenance.csv",
+             file.pending="nominal_biblio_pending.csv",
+             min.live=10,
+              drop.retired=TRUE),
     sim=list(name="sim",
               irw_dict=gsheet2tbl('https://docs.google.com/spreadsheets/d/1_2SR1_miAqUy0HWFQqo5vrBVrIN4V1FU6RfavBc7WdA/edit?gid=1337607315#gid=1337607315'),
              user=IRW_OWNER,
              dataset="irw_meta",
              table="simsyn_biblio",
-             file.out="simsyn_biblio.csv")
+             file.out="simsyn_biblio.csv",
+             file.auto="../automated_finding/dictionary_auto_sim.csv",
+             file.live="simsyn_metadata.csv",
+             file.prov="simsyn_biblio_provenance.csv",
+             file.pending="simsyn_biblio_pending.csv",
+             min.live=5,
+              drop.retired=TRUE)
 )
 
 for (i in 1:length(dbs)) {

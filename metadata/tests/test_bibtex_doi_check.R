@@ -64,8 +64,14 @@ stopifnot(identical(bibtex_doi_status(bib("https://doi.org/10.1037/PSPI0000513")
                                       "10.1590/1982-7849rac2025240272", NA), "ok"),
           identical(bibtex_doi_status(bib("10.6084/m9.figshare.28188872.v1"),
                                       "not yet published", NA), "unknown"),
+          ## a generated entry beside a paper DOI is refetchable (#2513) ...
           identical(bibtex_doi_status("@misc{x, title={generated}}",
-                                      "10.1037/pspi0000513", NA), "unknown"),
+                                      "10.1037/pspi0000513", NA), "undoi"),
+          ## ... but not beside a deposit DOI alone, or no DOI at all
+          identical(bibtex_doi_status("@misc{x, title={generated}}",
+                                      NA, "10.7910/DVN/A"), "unknown"),
+          identical(bibtex_doi_status("@misc{x, title={generated}}",
+                                      "not yet published", NA), "unknown"),
           identical(bibtex_doi_status(NA_character_, "10.1037/pspi0000513", NA),
                     "unknown"))
 
@@ -107,6 +113,32 @@ stopifnot(identical(calls, c("10.1037/pspi0000513", "10.1002/ab.22088")),
 again <- refetch_stale_bibtex(res$biblio, function(table, doi)
     stop("must not fetch"), "core")
 stopifnot(nrow(again$log) == 0L, identical(again$biblio, res$biblio))
+
+## --- undoi rows (#2513) -----------------------------------------------------
+## A generated citation beside a paper DOI is refetched; a failed or non-BibTeX
+## fetch keeps the cached entry rather than blanking it; the gate passes either way.
+gen <- "@misc{ay2025why, title={Why you shouldn't trust data}, author={Ay, C.S.}}"
+ud <- data.frame(
+    table = c("kay_2025_antonyms", "down", "html", "deposit_only"),
+    DOI__for_paper_ = c("10.3758/s13428-025-02852-7", "10.1000/down", "10.1000/html", NA),
+    DOI__for_data_  = c(NA, NA, NA, "10.7910/DVN/A"),
+    BibTex = c(gen, gen, gen, gen),
+    stringsAsFactors = FALSE)
+calls <- character(0)
+ud_fetch <- function(table, doi) {
+    calls <<- c(calls, doi)
+    if (identical(doi, "10.1000/down")) return(NA_character_)
+    if (identical(doi, "10.1000/html")) return("<html>not bibtex</html>")
+    bib(doi)
+}
+assert_bibtex_doi_consistent(ud, "core")
+r2 <- suppressWarnings(refetch_stale_bibtex(ud, ud_fetch, "core"))
+stopifnot(identical(calls, c("10.3758/s13428-025-02852-7", "10.1000/down", "10.1000/html")),
+          identical(r2$biblio$BibTex[1], bib("10.3758/s13428-025-02852-7")),
+          identical(r2$biblio$BibTex[2:4], ud$BibTex[2:4]),
+          identical(r2$log$outcome[match(c("down", "html", "kay_2025_antonyms"), r2$log$table)],
+                    c("kept", "kept", "refetched")))
+assert_bibtex_doi_consistent(r2$biblio, "core")
 
 ## --- the gate -------------------------------------------------------------
 stopifnot(inherits(tryCatch(assert_bibtex_doi_consistent(biblio, "core"),

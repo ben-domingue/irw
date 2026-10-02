@@ -76,6 +76,21 @@ jobs:
       # GitHub URL, so it has to keep parsing even though nothing here imports
       # it. irw_validate's parity test checks that its `# @check` markers still
       # match CORE_CHECKS; this checks it is still valid R.
+      - name: covariate_labels generator and table (#1775)
+        run: python metadata/tests/test_covariate_labels.py -v
+
+      # Stage 14 imports stage 13, so both run here (#2494, #2763).
+      - name: script index and column docs (stages 13, 14)
+        run: |
+          python metadata/tests/test_script_index.py -v
+          python metadata/tests/test_column_docs.py -v
+
+      # Codebook links (#2766, #2770) and the label-harvest advisory.
+      - name: codebook links and label-harvest check
+        run: |
+          python metadata/tests/test_find_codebook_links.py -v
+          python metadata/tests/test_check_label_harvest.py -v
+
       - name: validate_irw.R still parses
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq r-base-core r-cran-readr
@@ -195,3 +210,12 @@ jobs:
           for f in $added;    do args="$args --added $f";    done
           for f in $modified; do args="$args --modified $f"; done
           python -m irw_validate.contract --annotate $args
+
+      # Advisory, never fails (#2770): a new or changed script that reads
+      # .sav/.dta and writes cov_* but was never run through the covariate
+      # label harvest gets a warning naming the command to run.
+      - name: Covariate label harvest (advisory)
+        run: |
+          base="origin/${{ github.base_ref }}"
+          files=$(git diff --name-only --diff-filter=AM "$base"...HEAD -- 'data/*.py' 'data/*.R' || true)
+          if [ -n "$files" ]; then python metadata/check_label_harvest.py --annotate $files; fi

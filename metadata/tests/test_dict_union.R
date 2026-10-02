@@ -244,6 +244,54 @@ local({
           "a truncated oracle warns and drops nothing (cannot empty a batch)")
 })
 
+cat("live-only biblio (#2767)\n")
+
+local({
+    live.file <- tempfile(fileext = ".csv")
+    on.exit(unlink(live.file), add = TRUE)
+    readr::write_csv(data.frame(table = c(sprintf("t%04d", 1:20), "nom_a_nom", "Live_No_Dict")), live.file)
+    check(is.null(suppressWarnings(read_live_tables(live.file, "nom", min_oracle_rows = 100))),
+          "an oracle under the floor returns NULL (do not filter)")
+    check(is.null(suppressWarnings(read_live_tables(tempfile(), "nom"))),
+          "a missing oracle returns NULL")
+    live <- read_live_tables(live.file, "nom", min_oracle_rows = 10)
+    check("live_no_dict" %in% live, "names are compared case-insensitively")
+})
+
+local({
+    live.file <- tempfile(fileext = ".csv"); dlog <- tempfile(fileext = ".csv")
+    on.exit(unlink(c(live.file, dlog)), add = TRUE)
+    readr::write_csv(data.frame(table = c(sprintf("t%04d", 1:20), "nom_a_nom", "live_no_dict")), live.file)
+    live <- read_live_tables(live.file, "nom", min_oracle_rows = 10)
+    ##the dictionary still lists a retired table: its row is held, and that is all
+    dict_new <- data.frame(table = c("nom_a_nom.csv", "retired_nom"), Reference_x = "r",
+                           stringsAsFactors = FALSE)
+    held <- suppressMessages(keep_live_rows(dict_new, live, "nom", "held", log.file = dlog))
+    check(identical(held$table, "nom_a_nom.csv"),
+          "a dictionary row for a retired table is held back; a stray .csv does not hide a live one")
+    b <- data.frame(table = c("nom_a_nom", "nom_a", "LIVE_NO_DICT", "retired_nom"),
+                    Reference_x = "r", URL__for_data_ = "u", BibTex = "x",
+                    stringsAsFactors = FALSE)
+    kept <- suppressMessages(keep_live_rows(b, live, "nom", "dropped", log.file = dlog, append = TRUE))
+    check(identical(kept$table, c("nom_a_nom", "LIVE_NO_DICT")),
+          "biblio keeps live tables only: a pre-rename name and a retired table go")
+    check("LIVE_NO_DICT" %in% kept$table,
+          "a live table with no dictionary row keeps its biblio row (the su_2024_* case)")
+    lg <- readr::read_csv(dlog, show_col_types = FALSE)
+    check(nrow(lg) == 3L && identical(sort(unique(lg$why)), c("dropped", "held")),
+          "one log carries the held dictionary rows and the dropped biblio rows")
+})
+
+local({
+    dlog <- tempfile(fileext = ".csv")
+    on.exit(unlink(dlog), add = TRUE)
+    b <- data.frame(table = c("a", "gone"), BibTex = "x", stringsAsFactors = FALSE)
+    kept <- keep_live_rows(b, NULL, "nom", "dropped", log.file = dlog)
+    check(nrow(kept) == 2L, "with no trusted oracle nothing is dropped")
+    check(file.exists(dlog) && nrow(readr::read_csv(dlog, show_col_types = FALSE)) == 0L,
+          "and the log is still written, empty, rather than left stale")
+})
+
 cat("pending rows (held, not discarded)\n")
 
 local({
@@ -933,6 +981,69 @@ local({
         check(length(line) == 1L && identical(pat, DICT_NAME_RE),
               "stage_dict_row.py uses the same pattern as DICT_NAME_RE")
     }
+})
+
+cat("normalize_dict_layout -- comps/nom/sim sheets (#2628)\n")
+
+##The three non-core sheets as gsheet2tbl returns them (header checked
+##2026-10-01): `table lower`, one `Custom License`, `Derived_License`.
+NONCORE_NAMES <- c("table", "table lower", "Description", "URL (for data)",
+                   "Reference", "DOI (for paper)", "Original License",
+                   "Custom License", "Public Reshare?", "Derived_License",
+                   "Notes", "Contributor", "Date")
+noncore_sheet <- function(...) {
+    d <- as.data.frame(do.call(rbind, list(...)), stringsAsFactors = FALSE)
+    names(d) <- NONCORE_NAMES
+    d
+}
+noncore_row <- function(table, description = "", derived = "") {
+    c(table, tolower(table), description, "", "", "", "", "",
+      "Public", derived, "", "MM", "1/1/2026")
+}
+
+local({
+    core <- fake_sheet(sheet_row("a_2020", "core"))
+    check(identical(suppressMessages(normalize_dict_layout(core, "core")), core),
+          "core's layout is untouched")
+
+    d <- suppressMessages(normalize_dict_layout(
+        noncore_sheet(noncore_row("nom_a", "human desc", "CC BY 4.0")), "nom"))
+    check(all(c("table.lower", "Derived License", "Custom License (source)",
+                "Custom License (derived)") %in% names(d)),
+          "non-core names are mapped onto core's")
+    check(!any(c("table lower", "Derived_License", "Custom License") %in% names(d)),
+          "the old spellings are gone, not duplicated")
+    check(identical(names(d)[ncol(d)], "Custom License (derived)"),
+          "the added column is appended, not inserted")
+    check(identical(unname(resolve_dict_cols(ensure_dict_auto_cols(d), "nom")[["Derived License"]]),
+                    "Derived License"),
+          "resolve_dict_cols accepts a normalized non-core sheet")
+    check(identical(suppressMessages(normalize_dict_layout(d, "nom")), d),
+          "normalizing twice is a no-op")
+})
+
+local({
+    d <- suppressMessages(normalize_dict_layout(
+        noncore_sheet(noncore_row("nom_a", "human desc", ""),
+                      noncore_row("nom_b", "", "CC BY 4.0")), "nom"))
+    a <- fake_auto(auto_row("nom_a", "auto desc", "CC0"),
+                   auto_row("nom_b", "auto desc b", "CC0"),
+                   auto_row("nom_new", "brand new", "CC BY 4.0"))
+    u <- suppressMessages(union_dict(d, a, "nom"))$dict
+    r <- function(t) u[u$table == t, ]
+    check(identical(r("nom_a")$Description, "human desc") &&
+          identical(r("nom_a")$`Derived License`, "CC0"),
+          "non-core: the human cell wins, a blank one is filled")
+    check(identical(r("nom_b")$`Derived License`, "CC BY 4.0") &&
+          identical(r("nom_b")$Description, "auto desc b"),
+          "non-core: the human licence wins, the blank description is filled")
+    check(nrow(r("nom_new")) == 1L && identical(r("nom_new")$Description, "brand new"),
+          "non-core: a table the sheet lacks is added from the automated row")
+    b <- data.frame(table = c("nom_a", "nom_new"), Custom_License_Terms = NA,
+                    stringsAsFactors = FALSE)
+    b <- suppressMessages(apply_custom_license_terms(b, u, "nom"))
+    check(all(is.na(b$Custom_License_Terms)),
+          "non-core: blank custom terms stay blank")
 })
 
 ##------------------------------------------------------------------ result ---

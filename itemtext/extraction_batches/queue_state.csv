@@ -1464,7 +1464,7 @@ nomt_hooper_2024_study2,done,batch_300,2026-09-18T14:30:00-07:00
 pass20_klosowska_2025_dass_online,done,batch_300,2026-09-18T14:30:00-07:00
 pass20_klosowska_2025_pass_hospital,blocked,batch_300,2026-09-18T14:30:00-07:00
 polca_carcinoma,done,batch_300,2026-09-18T14:30:00-07:00
-preussmattsson_2022_ownership,done,batch_205,2026-09-16T18:20:00-07:00
+preussmattsson_2022_ownership,done,already_published,2026-09-30T16:58:00-07:00
 promis1wave1_anger,blocked,batch_022,2026-09-04T11:00:00-07:00
 promis1wave1_cesd,done,batch_022,2026-09-04T11:00:00-07:00
 promis1wave1_social,blocked,batch_022,2026-09-04T11:00:00-07:00
@@ -2691,6 +2691,10 @@ guatemala_2024_homes_trash,done,batch_642,2026-09-28T12:08:11-07:00
 guatemala_2024_homes_water,done,batch_643,2026-09-28T12:16:12-07:00
 wang_2026_technology_perception,done,batch_rename_2198,2026-09-27T17:11:32-07:00
 weida_2020_cesd10,done,batch_rename_2198,2026-09-27T17:11:32-07:00
+simsalrbim_human,done,batch_pool_simsalrbim,2026-10-01T07:46:29-07:00
+wu2021_basic_empathy,done,batch_rename_2198b,2026-10-01T06:00:00-07:00
+c19prc_uk_mcbride_2021_socialdistance,done,batch_rebuild_2542,2026-10-02T06:49:38-07:00
+c19prc_uk_mcbride_2021_lockdown_contact_behaviours,done,batch_rebuild_2542,2026-10-02T06:49:38-07:00
 wallace_2026_apply,done,batch_644,2026-09-28T12:46:02-07:00
 wallace_2026_belong,done,batch_645,2026-09-28T12:58:03-07:00
 wallace_2026_cengage,done,batch_646,2026-09-28T13:04:26-07:00
@@ -2777,7 +2781,6 @@ c19prc_uk_mcbride_2021_icd_anxiety,done,batch_716,2026-09-28T22:36:24-07:00
 c19prc_uk_mcbride_2021_icd_depression,done,batch_716,2026-09-28T22:36:24-07:00
 c19prc_uk_mcbride_2021_infosource,done,batch_717,2026-09-28T22:47:54-07:00
 c19prc_uk_mcbride_2021_ius12,done,batch_717,2026-09-28T22:47:54-07:00
-c19prc_uk_mcbride_2021_lockdown_contact_behaviours,blocked,batch_718,2026-09-28T22:50:29-07:00
 c19prc_uk_mcbride_2021_lockdownbehaviour,done,batch_718,2026-09-28T22:50:29-07:00
 c19prc_uk_mcbride_2021_loneliness,done,batch_719,2026-09-28T23:03:33
 c19prc_uk_mcbride_2021_mabs,done,batch_719,2026-09-28T23:03:33
@@ -2797,7 +2800,6 @@ c19prc_uk_mcbride_2021_riskreduction_beliefs,done,batch_726,2026-09-28T23:47:58-
 c19prc_uk_mcbride_2021_rq,blocked,batch_726,2026-09-28T23:47:58-07:00
 c19prc_uk_mcbride_2021_secondwave_restrictions,done,batch_727,2026-09-29T00:02:13-07:00
 c19prc_uk_mcbride_2021_selfharm_suicidality,done,batch_727,2026-09-29T00:02:13-07:00
-c19prc_uk_mcbride_2021_socialdistance,blocked,batch_728,2026-09-29T00:04:59-07:00
 c19prc_uk_mcbride_2021_trustinstitutions,done,batch_728,2026-09-29T00:04:59-07:00
 c19prc_uk_mcbride_2021_trustsource,done,batch_729,2026-09-29T00:14:48-07:00
 c19prc_uk_mcbride_2021_vaccineattitudes,done,batch_729,2026-09-29T00:14:48-07:00

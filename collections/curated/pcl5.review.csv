@@ -1,0 +1,6 @@
+table,construct_name,instrument,language,text_source,n_items,n_participants,k,n_mapped,n_near,verdict,basis,note
+BPAQ_Christopher_2024_PCL5,PTSD Checklist for DSM-5 amongst police officers,PTSD Checklist for DSM-5 (PCL-5),eng,study_materials,20,109,20,20,0,MATCH,wording,
+armour_2017_pcl5,NA,,eng,none_recorded,20,221,20,20,0,MATCH,supplied,
+orovou_2021_pcl5,NA,PTSD Checklist for DSM-5 (PCL-5),gre,translated_substitute,20,469,20,20,0,MATCH,supplied,
+pcl5_xiong_2025,Posttraumatic stress disorder checklist for DSM-5 (PCL-5),"PTSD Checklist for DSM-5 (PCL-5), Chinese version",chi,none_recorded,20,9506,20,20,0,MATCH,supplied,
+wesselmann_2018_pcl,PTSD Checklist for DSM-5 (PCL-5),PTSD Checklist for DSM-5 (PCL-5),eng,study_materials,20,128,20,20,2,MATCH,wording,

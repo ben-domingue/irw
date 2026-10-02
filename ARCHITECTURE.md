@@ -152,7 +152,12 @@ export — but they differ in *granularity*, and that difference is deliberate:
   left blank (#1732). Column-wise from the start because a sparse-but-present
   dictionary row is the common case, where for tags it is the exception.
   `metadata/biblio_provenance.csv` records which cells came from the automated
-  file, and unlike the tags sidecar it is committed.
+  file, and unlike the tags sidecar it is committed. The comps, nominal and
+  simsyn dictionaries work the same way, each with its own file
+  (`dictionary_auto_comps.csv`, `_nom.csv`, `_sim.csv`; `stage_dict_row.py
+  --source comps|nom|sim`), so no dictionary sheet needs rows pasted (#2628).
+  Their sheets spell three columns differently from core; `normalize_dict_layout()`
+  maps them onto core's names in the export only.
 
 > **One column exists only in the automated file: `DOI (for data)`.** The sheet
 > does not have it and is not going to. 979 rows put a *deposit* DOI (Dataverse,
@@ -268,9 +273,10 @@ rather than replacing it — and verifies each table with a `count(*)` afterward
 When a name is already in use somewhere that could not legally hold the file, it
 stops rather than routing across families.
 
-`irw_site` also reads one file directly off disk rather than from Redivis:
-`data/hero_stats.json`, written into that repository by `metadata/09_hero_status.R`.
-Three more it reads from this repository's `main` over HTTPS at render time:
+`irw_site` builds its homepage hero numbers (`data/hero_stats.json`, untracked)
+at render time from published irw_meta, in the pre-render step
+`landing/hero_stats.R` (#1940; this used to be `metadata/09_hero_status.R`,
+committed by hand). Three files it reads from this repository's `main` over HTTPS at render time:
 `metadata/version_manifest.tsv`, `metadata/table_changes.csv` and
 `metadata/data_notes.csv`.
 
@@ -358,6 +364,7 @@ check-ins.
 |---|---|---|
 | IRW morning status render | `trig_01JAY3UEYPP4EQLt93erbFE9` | `27 11 * * *` (04:27 PT) |
 | IRW daily search nudge | `trig_014YcLgR2Sa2D8P2yAkvQFTx` | `0 15 * * *` (08:00 PT) |
+| IRW Monthly Discovery — Repos (full sweep + triage) | `trig_01NT4fqYRrf7nRemLN3fAZm4` | `0 21 2 * *` (2nd of month, 21:00); prompt rewritten 2026-10-02 (runs/ never committed, --retriage, GitHub MCP not gh) |
 
 > **This table is not the whole account, and cannot be made so from here.** The
 > API's `list` returns the newest 20 with `has_more: true`, and passing its
@@ -383,6 +390,11 @@ be deleted from a session — https://claude.ai/code/routines.
   the repository; it never publishes.
 - **Merging the weekly pipeline PR.** The diff is the thing to read on Monday.
 - **Item-text extraction rounds**, and the discovery sweeps above.
+- **`covariate_labels.csv`** (#1775), irw_meta's codebook for coded covariates.
+  `metadata/covariate_labels/harvest.py` re-runs the `data/` scripts that read
+  SPSS/Stata files, which download from OSF, Zenodo and the like, and a few
+  read files that exist only on one machine; that does not belong in CI.
+  Re-run it, then `build.py`, when a script shipping coded covariates changes.
 
 ## 7. Where things go inside a directory
 

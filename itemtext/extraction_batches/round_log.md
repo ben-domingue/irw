@@ -28615,6 +28615,21 @@ PASS; weida stays PARTIAL), lint, irw-validate and check_provenance. It is uploa
 - The old names never had published item text, so nothing was withdrawn. Their batch_218/220 CSVs are removed, and
   both old names are in fixes/issues_page_dropped.csv as "renamed".
 
+## 2026-10-01 — post-release item text uploaded: #2198 renames, #2433 re-keys, #1700 simsalrbim pool
+
+Uploaded by Ben from `oneoff/upload_2026-10-01/` (red_up from origin/main); every table's draft row and distinct-item
+counts verified against its file with the write token. Release owed.
+
+- batch_rename_2198b → irw_text_3 (NEW): wu2021_basic_empathy (80 rows; batch_229's held wu2021_burnout text, renamed),
+  yang_2023_consumption_intent (15) and yang_2023_perceived_value (20) (crossed over per the #2198 swap, "misnamed"
+  notes cleared). Stamped uploaded=2026-10-01 in provenance.csv and mapping_verification.csv.
+- batch_rekey_2433 → UPDATE: paampsmartsud_saba_2023_ffmq (120) and _pacs (35) in irw_text, _ders (185) in irw_text_2;
+  `_POST` stripped from item codes. Notes-only batch: upload recorded in its notes.csv.
+- batch_pool_simsalrbim → irw_text_3 (NEW): simsalrbim_human (28). Notes-only batch: recorded in notes.csv. The four
+  simsalRbim_* __items it supersedes were deleted from the irw_text_2 draft by Ben (ledgered in withdrawals.csv).
+- Uploaded CSVs removed from the three batch folders, and batch_229/wu2021_burnout__items.csv (its text shipped as
+  wu2021_basic_empathy). live_tables.csv refreshed.
+
 ## batch_618 — 2026-09-28T06:26:49-07:00 (claimed) → 06:33, 1 table, 1 agent (#2381/#2382 slice 15, INEC ENVIPI 2011)
 - ecuador_2011_safety_homesec: WRITTEN, 22 rows (11 items I51001-I51011 x resp 1 Si / 0 No). Source: INEC Formulario_ENVIPI_2011.pdf p.6, q.5.10 ("Para protegerse de la delincuencia ... ¿qué tipo de seguridad implementó en su vivienda?" as instructions). Options are from the form, not the terse .sav labels, which have a typo ("Aumetar seguridad auto") and a truncation ("cajas s"). I51011 is the "Otro" write-in catch-all, and public_note says so. data_labels / study_materials / machine_translation (issues-page line owed at upload). CC BY 4.0 (INEC, same page as batch_615-617). Source files reused read-only from the batch_615/616 cache.
 - Step 3b: no mismatch. Dictionary "Household security measures adopted" = .do Table 7 = q.5.10.
