@@ -1,0 +1,3 @@
+table,batch,mapping_basis,uploaded,route,status,evidence
+c19prc_uk_mcbride_2021_socialdistance,batch_rebuild_2542,data_labels,2026-10-02,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text
+c19prc_uk_mcbride_2021_lockdown_contact_behaviours,batch_rebuild_2542,data_labels,2026-10-02,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text

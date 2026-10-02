@@ -328,7 +328,7 @@ class Checks(unittest.TestCase):
             self.assertTrue(any("resp" in w for w in report.warnings))
 
     def test_schema_depends_on_the_destination(self):
-        # irw_meta's thirteen tables each have their own schema, so requiring
+        # irw_meta's tables each have their own schema, so requiring
         # id/item/resp there would reject every one of them.
         _, targets = load_registry()
         by_source = {t.source: t for t in targets}

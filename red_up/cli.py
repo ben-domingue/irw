@@ -25,6 +25,7 @@ from .auth import authenticate
 from .checks import (HISTORY_MARKER, check_all, check_schema, history_dirs,
                      validate_for_target)
 from .discover import Discovery, discover, table_name
+from .permitted import ITEMS_SUFFIX, lookup as permitted_lookup
 from .push import open_draft, push_one
 from .targets import (ConfigError, Target, eligible, guess_target,
                       load_registry)
@@ -37,7 +38,7 @@ META_TABLES = {
     "metadata", "biblio", "tags", "nominal_tags", "comps_biblio",
     "nominal_biblio", "simsyn_biblio", "simsyn_metadata", "comps_metadata",
     "nominal_metadata", "itemtext_metadata", "collections",
-    "collection_members",
+    "collection_members", "covariate_labels",
 }
 
 
@@ -166,6 +167,30 @@ def show(items: list[planning.Item], target: Target, owner: str,
             print(f"    ... and {len(skipped) - 10} more")
 
 
+
+def _validate(reports, target: Target, targets, index, owner: str, enabled: bool) -> None:
+    """Run the format validator on every file, supplying permitted response
+    values from item text where the table has any (#2152)."""
+    use_items = enabled and not (target.is_itemtext or target.is_meta)
+    itemtext = {t.name for t in targets if t.is_itemtext}
+    checked = []
+    for report in reports:
+        context = None
+        if use_items and not report.errors and not report.table.endswith(ITEMS_SUFFIX):
+            pv, source = permitted_lookup(report.path, report.table, index,
+                                               itemtext, owner)
+            if pv is not None:
+                context = {"permitted_values": pv}
+                checked.append(f"{report.table} <- {source}")
+            elif source.startswith("could not read"):
+                report.warnings.append(f"permitted values not checked: {source}")
+        validate_for_target(report, target, enabled=enabled, context=context)
+    if checked:
+        print(f"response range checked against item-text anchors for "
+              f"{len(checked)} table(s):")
+        for line in checked:
+            print(f"  {line}")
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         prog="red_up",
@@ -266,7 +291,6 @@ def main(argv: list[str] | None = None) -> int:
 
     for report in reports:
         check_schema(report, target)
-        validate_for_target(report, target, enabled=not args.no_validate)
 
     authenticate()
 
@@ -288,6 +312,11 @@ def main(argv: list[str] | None = None) -> int:
         scan.append(target.name)
     print(f"checking {len(scan)} datasets for existing tables ...")
     index = planning.index_tables(owner, scan)
+
+    # The validator runs after the index so a response table can be checked
+    # against its item text's labelled anchors, from this upload or from the
+    # published __items table (#2152, see permitted.py).
+    _validate(reports, target, targets, index, owner, enabled=not args.no_validate)
 
     items = planning.build(reports, target, index)
     if target.is_meta:

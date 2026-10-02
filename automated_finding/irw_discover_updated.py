@@ -466,12 +466,25 @@ def from_osf(query: str, max_pages: int = 5, per: int = 50):
     url = "https://api.osf.io/v2/nodes/"
     params = {"filter[tags]": query, "page[size]": per}
     for _ in range(max_pages):
-        try:
-            r = requests.get(url, params=params, headers=UA, timeout=30)
-            r.raise_for_status()
-            body = r.json()
-        except Exception as e:
-            raise SourceUnavailable(f"[osf] {e}") from e
+        # OSF 502s intermittently on deep pages (page>=4) of broad tag queries.
+        # Without a retry that one page cost the whole term: "depression" lost
+        # osf on the 2026-09-21, -28 and -29 weekly runs, every time at page 4.
+        for attempt in range(4):
+            try:
+                r = requests.get(url, params=params, headers=UA, timeout=30)
+                if r.status_code >= 500 and attempt < 3:
+                    time.sleep(5 * (attempt + 1))
+                    continue
+                r.raise_for_status()
+                body = r.json()
+                break
+            except requests.Timeout:
+                if attempt < 3:
+                    time.sleep(5 * (attempt + 1))
+                    continue
+                raise SourceUnavailable("[osf] timeout after 4 attempts")
+            except Exception as e:
+                raise SourceUnavailable(f"[osf] {e}") from e
         for node in body.get("data", []):
             a = node.get("attributes", {})
             yield Hit("osf", a.get("title", ""),

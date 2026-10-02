@@ -46,7 +46,9 @@ def convert_to_irw(input_file, session_file, users_file, output_name):
     df['item'] = df['item'].astype(str)
     
     if 'rt' in df.columns:
-        df['rt'] = pd.to_numeric(df['rt'], errors='coerce')
+        # rt is in milliseconds (figshare 5924647's description: "rt
+        # (reaction time in milliseconds)"); IRW wants seconds (irw#2401).
+        df['rt'] = pd.to_numeric(df['rt'], errors='coerce') / 1000
         
     base_cols = ['id', 'item', 'resp', 'rt', 'date']
     cov_cols = [c for c in df.columns if c.startswith('cov_')]

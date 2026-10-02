@@ -63,7 +63,8 @@ def check_shape(df: pd.DataFrame, table: str = "") -> list:
                 "sample_floor", "warn",
                 f"{n} unique ids; IRW intake policy sets a flat floor of {MIN_IDS} "
                 "(not part of the data standard). Warn rather than block: the "
-                "floor governs what IRW accepts, not what is already published.",
+                "floor governs what IRW accepts, not what is already published. "
+                "Non-human (animal) data are exempt (#2220).",
                 table=table, group="core"))
     lead = [c for c in df.columns[:3]]
     if len(df.columns) >= 3 and lead != ["id", "item", "resp"]:

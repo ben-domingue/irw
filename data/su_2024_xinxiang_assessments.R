@@ -8,6 +8,10 @@
 # RT units: seconds, recorded to two decimal places (paper, Methods,
 # "Data generation process"). Preserve time1..N without a /1000 conversion.
 # PSS-14: retain the 1-5 item codes stored in the deposited pss.csv.
+# Items follow Cohen's standard PSS-14 order (authors' github njnklab/response-time-dataset,
+# metadata/PSS.csv). Items 4, 5, 6, 7, 9, 10, 13 are positively worded and are NOT reversed
+# in the deposit; the deposit's `score` sums all items without reversal. Kept raw on purpose
+# (irw#2513, 2026-09-28).
 # This restores reproducibility of existing IRW tables; no new data are added.
 
 library(tidyverse)

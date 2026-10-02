@@ -6,7 +6,7 @@
 # construct per the tool's three sections:
 #   I1-I22  -- Individual/intrinsic motivation factors
 #   Org1-Org36 -- Organizational/workplace factors
-#   SC1-SC15 (SC3 is "CS4" in the raw file, kept as-is) -- Social/co-worker
+#   SC1-SC15 (the 4th is named "CS4" in the raw file) -- Social/co-worker
 #      and interpersonal factors
 # Written as three separate scale files. Covariates: age, gender, marital
 # status (A1-A3).
@@ -81,9 +81,12 @@ def convert():
     org_cols = [f"Org{i}" for i in range(1, 37)]
     build(df, org_cols, "org_", "malik_2018_organizational_motivation.csv")
 
-    # SC3 is stored as "CS4" in the raw file (typo in source) -- keep the
-    # original mapping order (SC1, SC2, CS4, SC5, SC6, ...).
-    sc_cols = ["SC1", "SC2", "CS4"] + [f"SC{i}" for i in range(5, 16)]
+    # The raw file has all fifteen items; the 4th is named "CS4" (a typo
+    # for SC4). SC3 was once dropped on the belief that CS4 was SC3, which
+    # fixed codes social_1..social_14 as SC1, SC2, CS4, SC5..SC15. Those
+    # codes are kept, and SC3 is appended as social_15 (#2127).
+    sc_cols = (["SC1", "SC2", "CS4"] + [f"SC{i}" for i in range(5, 16)]
+               + ["SC3"])
     build(df, sc_cols, "social_", "malik_2018_social_motivation.csv")
 
 

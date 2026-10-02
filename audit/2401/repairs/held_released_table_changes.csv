@@ -1,0 +1,7 @@
+table,irw_version,date,change,issue,replaces,replaced_by
+gcbs_brotherton_2013,,,`cov_familysize` missing-value code 98 set to missing. No response changed.,#2401,,
+narcissism_schneider_2025_study1_jauk_emotionality,,,`cov_alter` missing-value code -99 set to missing. No response changed.,#2401,,
+narcissism_schneider_2025_study1_jauk_extraversion,,,`cov_alter` missing-value code -99 set to missing. No response changed.,#2401,,
+narcissism_schneider_2025_study1_jauk_honestyhumility,,,`cov_alter` missing-value code -99 set to missing. No response changed.,#2401,,
+narcissism_schneider_2025_study1_jauk_hsns,,,`cov_alter` missing-value code -99 set to missing. No response changed.,#2401,,
+narcissism_schneider_2025_study1_jauk_npi,,,`cov_alter` missing-value code -99 set to missing. No response changed.,#2401,,

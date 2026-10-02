@@ -8,13 +8,23 @@
 #   01 (metadata.csv) -> 02 (biblio.csv + comps/nominal/simsyn biblio, one
 #   script) -> 03 (tags.csv + nominal_tags.csv) -> 05 (comps_metadata.csv) -> 06
 #   (nominal_metadata.csv) -> 07 (simsyn_metadata.csv) -> 08
-#   (itemtext_metadata.csv) -> 09 (hero_stats.json, must run LAST since it
-#   reads metadata.csv written by 01)
+#   (itemtext_metadata.csv). Stage 09 (hero_stats.json) was retired 2026-10-01
+#   (#1940, B3): the site now computes the hero from PUBLISHED irw_meta at render
+#   time (datapages/irw landing/hero_stats.R). `--no-09` is still accepted, as a
+#   no-op, so existing callers keep working. Mentions of 09 below are historical.
 #
 # 05 and 06 were dropped from the default order 2026-07-28 (three confirmed
 # bugs in 05_comps.R, 06_nominal.R never verified standalone) and restored
 # 2026-08-02 after both were fixed/verified -- see TODO.md for the full
 # history if either regresses.
+#
+# 05/06/07 run BEFORE 02 since 2026-10-01 (#2628). 02 unions each source's
+# automated dictionary file, and drops rows for tables absent from that
+# source's *_metadata.csv -- the liveness oracle. For core that is metadata.csv,
+# which 01 has just written; for comps/nominal/simsyn it is what 05/06/07 write.
+# Run after 02, those oracles were a run stale, so a newly released table's
+# dictionary row would wait an extra pipeline cycle. 05/06/07 read only Redivis,
+# and nothing in them reads 02's output, so moving them up costs nothing.
 #
 # 10_collections.R (issue #1633) runs BETWEEN 08 and 09 -- numeric order is
 # deliberately not run order here, as it already isn't for 04. It must follow
@@ -74,6 +84,13 @@
 # follow 01, 05, 06, 07 and 12, and it needs no credentials. It is the one
 # Python stage: the run loop dispatches on the file extension.
 #
+# 14_column_docs.py (issue #2763, added 2026-10-02) runs last, after 13: it
+# reads table_scripts.csv to find each table's script. It writes
+# column_docs.csv, one row per (table, column): what the data standard says the
+# column is, and the source column the build script renamed it from. The table
+# pages render it as a Codebook section. Like 13 it reads files on disk only and
+# needs no credentials.
+#
 # 08_itemtext.R (readability-stats metadata for item text) joined the
 # default order 2026-08-02. Split of responsibility, confirmed with Ben:
 # this skill produces metadata FOR item text that's already been procured;
@@ -89,13 +106,13 @@
 # variant, see above) are out of scope per Ben (2026-07-27) -- ignored.
 #
 # Usage:
-#   scripts/run_pipeline.sh                 # full default sequence (01 02 03 05 06 07 08 10 11 12 13 09)
+#   scripts/run_pipeline.sh                 # full default sequence (01 05 06 07 02 03 08 10 11 12 13 14)
 #   scripts/run_pipeline.sh 01 03           # only metadata.csv + tags.csv
 #   scripts/run_pipeline.sh 08              # just the itemtext metadata stage
 #   scripts/run_pipeline.sh 10              # just the collections tables
 #   scripts/run_pipeline.sh 11              # just the corpus status numbers
 #   scripts/run_pipeline.sh 12              # just the straggler watch
-#   scripts/run_pipeline.sh --no-09         # everything except the hero JSON
+#   scripts/run_pipeline.sh --no-09         # accepted no-op since stage 09 was retired (#1940)
 #
 # Requires: Redivis credentials configured externally (per root CLAUDE.md;
 # see ~/.redivis_api_token handling below -- 2026-07-28: REDIVIS_API_TOKEN
@@ -136,8 +153,7 @@ declare -A STAGE_SCRIPT=( [01]=01_metadata.R [02]=02_biblio.R [03]=03_tags.R
                           [05]=05_comps.R [06]=06_nominal.R [07]=07_simsyn.R
                           [08]=08_itemtext.R [10]=10_collections.R
                           [11]=11_status.R [12]=12_stragglers.R
-                          [13]=13_script_index.py
-                          [09]=09_hero_status.R )
+                          [13]=13_script_index.py [14]=14_column_docs.py )
 
 # Stages whose non-zero exit is a FINDING, not a failure. 12 exits 1 when a
 # table has been stuck for several runs -- that is the report doing its job, and
@@ -159,9 +175,9 @@ declare -A STAGE_OUTPUTS=(
   [11]=""   # writes status.json + status_history.tsv -- reported separately below
   [12]=""   # writes straggler_watch.tsv -- reported separately below
   [13]="table_scripts.csv"
-  [09]=""   # writes JSON, not a keyed CSV -- reported separately below
+  [14]="column_docs.csv"
 )
-DEFAULT_ORDER=(01 02 03 05 06 07 08 10 11 12 13 09)
+DEFAULT_ORDER=(01 05 06 07 02 03 08 10 11 12 13 14)
 
 # Join key for the diff, per output file. Everything is keyed on `table` except
 # the two collections outputs (issue #1633): the registry is one row per
@@ -170,6 +186,7 @@ DEFAULT_ORDER=(01 02 03 05 06 07 08 10 11 12 13 09)
 declare -A DIFF_KEY=(
   [collections.csv]="collection"
   [collection_members.csv]="table,collection"
+  [column_docs.csv]="table,column"
 )
 
 stages=()
@@ -277,10 +294,6 @@ for stage in "${stages[@]}"; do
     echo "neither is a keyed CSV, so read them directly. The number to check is"
     echo "\`n_tables\`: it must equal the row count of the metadata.csv committed"
     echo "in the same change, which is the whole reason this stage runs here."
-  fi
-  if [[ "$stage" == "09" ]]; then
-    echo "hero_stats.json written -- not a keyed CSV, review the file directly"
-    echo "(default path: $REPO_ROOT/../irw_site/data/hero_stats.json, or check 09's stdout above)."
   fi
 done
 

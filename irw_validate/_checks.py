@@ -420,14 +420,20 @@ def run_qc(df: pd.DataFrame, coercion_method: str = "",
     else:
         checks.append(Check("resp_numeric", "pass", "resp is numeric"))
 
-    # duplicate id+item: ERROR if no longitudinal column, else NOTE
-    longitudinal = [c for c in ("wave", "timepoint", "date") if c in df.columns]
+    # duplicate id+item: ERROR unless an occasion column explains the repeats
+    # (or a wave/timepoint/date column is present), else NOTE.
+    #
+    # This used to fail on anything without wave/timepoint/date, so a trial-level
+    # design keyed by `trial`, `session` or `rater` failed here while the upload
+    # gate (core.py) accepted it: the 142 `data/` scripts that assert no run_qc
+    # failure could not build a table red_up would take, and martinez_2024 had to
+    # emit a `date` just to get through (#2224). Ben 2026-09-30: use the gate's
+    # tested rescue. A present occasion column must actually make id+item unique;
+    # a repeat nothing explains still fails. wave/timepoint/date keep their old
+    # presence-only pass to a NOTE, so nothing that passed before fails now.
+    legacy = [c for c in ("wave", "timepoint", "date") if c in df.columns]
     dups = df.duplicated(subset=["id", "item"]).sum()
-    if dups > 0 and not longitudinal:
-        checks.append(Check("dup_id_item", "fail",
-                            f"{dups} duplicate id+item rows with no "
-                            "wave/timepoint/date column"))
-    elif dups > 0:
+    if dups > 0:
         # The old wording said "likely ok" on the mere PRESENCE of a wave /
         # timepoint / date column, without testing whether it explains anything.
         # 14 of 15 sampled reassurances were wrong: the repeats survived every
@@ -437,14 +443,19 @@ def run_qc(df: pd.DataFrame, coercion_method: str = "",
         occ = occasion_columns(df)
         resolved_by, residual = resolve_occasion(df, occ)
         tested = ", ".join(occ) if occ else "none"
-        if resolved_by is not None:
-            detail = (f"{dups} duplicate id+item rows, made unique by "
-                      f"{resolved_by} (occasion columns tested: {tested})")
+        if resolved_by is None and not legacy:
+            checks.append(Check("dup_id_item", "fail",
+                                f"{dups} duplicate id+item rows that no occasion "
+                                f"column explains (tested: {tested})"))
+        elif resolved_by is not None:
+            checks.append(Check("dup_id_item", "warn",
+                                f"{dups} duplicate id+item rows, made unique by "
+                                f"{resolved_by} (occasion columns tested: {tested})"))
         else:
-            detail = (f"{dups} duplicate id+item rows; {residual} excess row(s) "
-                      f"remain after keying on every occasion column present, "
-                      f"individually and combined (tested: {tested})")
-        checks.append(Check("dup_id_item", "warn", detail))
+            checks.append(Check("dup_id_item", "warn",
+                                f"{dups} duplicate id+item rows; {residual} excess row(s) "
+                                f"remain after keying on every occasion column present, "
+                                f"individually and combined (tested: {tested})"))
     else:
         checks.append(Check("dup_id_item", "pass", "id+item rows unique"))
 
@@ -463,9 +474,12 @@ def run_qc(df: pd.DataFrame, coercion_method: str = "",
     # of its way to insist on that spelling over `raw_resp` -- but it was absent
     # here, so the validator warned about the one spelling it asks for. Seen on
     # `fitz_2024_numeracy`, whose free-text numeracy answers need it.
+    # `cluster_id`, `block_id` and `std_baseline*` are the standard's design
+    # columns (irw#2755): ~80 tables carry them, and the warning told every one
+    # to rename a randomisation unit to a covariate.
     known = {"id", "item", "resp", "resp_raw", "date", "treat",
-             "item_family"} | set(OCCASION)
-    known_prefix = ("cov_", "itemcov_", "qmatrix", "trial_")
+             "cluster_id", "block_id", "item_family"} | set(OCCASION)
+    known_prefix = ("cov_", "itemcov_", "qmatrix", "trial_", "std_baseline")
     unprefixed = [c for c in df.columns
                   if c not in known and not c.startswith(known_prefix)]
     if unprefixed:
@@ -667,14 +681,13 @@ def run_qc(df: pd.DataFrame, coercion_method: str = "",
 
     checks.extend(_response_scale_checks(df, resp_num, permitted_values, item_constructs))
 
-    # Report naming-pattern evidence, not an inference about how responses
-    # were computed. Raw all-match severity stays unchanged here (#2369).
+    # Naming-pattern matches do not establish how responses were computed,
+    # even when every label matches; both cases are warnings (#2369).
     if "item" in df.columns:
         labels = [i for i in df["item"].unique() if str(i).strip()]
         comp = [i for i in labels if _looks_composite(i)]
         if comp:
-            status = "fail" if len(comp) == len(labels) else "warn"
-            checks.append(Check("composite_items*", status,
+            checks.append(Check("composite_items*", "warn",
                                 f"{len(comp)}/{len(labels)} item labels match "
                                 "score-word or pre/post naming patterns "
                                 f"(examples: {[str(c) for c in comp[:4]]}). "

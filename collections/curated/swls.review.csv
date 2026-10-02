@@ -1,0 +1,23 @@
+table,construct_name,instrument,language,text_source,n_items,n_participants,k,n_mapped,n_near,verdict,basis,note
+ALSECYPIAMH_WU_2022_SWLS,Satisfaction with Life Scale,Satisfaction with Life Scale,"chi, eng",none_recorded,5,7842,5,0,0,NAME_ONLY,name,no item text
+APFCompact_Ptacek_2024_SWLS,"Satisfaction With Life Scale (SWLS, Czech)",,eng,none_recorded,5,299,5,0,0,NAME_ONLY,name,no item text
+PEMAIW_Qiu_2020_SWLS,Psychedelic Experience and Mindfulness are Associated with Improved Wellbeing - The Satisfaction with Life Scale,,eng,none_recorded,5,968,5,0,0,NAME_ONLY,name,no item text
+altahla_2024_swls,NA,Satisfaction with Life Scale (SWLS),chi,translated_substitute,5,189,5,0,0,NAME_ONLY,name,no item text
+amiot_2022_swls,,,,none_recorded,5,2421,5,0,0,NAME_ONLY,name,no item text
+campos_2023_swls,NA,Satisfaction with Life Scale (SWLS),"fin, por",translated_substitute,5,7593,5,0,0,NAME_ONLY,name,no item text
+duboz_2021_swls,NA,Satisfaction With Life Scale (SWLS),fre,translated_substitute,5,1493,5,0,0,NAME_ONLY,name,no item text
+dudasova_2021_swls,Satisfaction With Life Scale (SWLS),Satisfaction With Life Scale (SWLS),cze,translated_substitute,5,282,5,0,0,NAME_ONLY,name,no item text
+extremera_2016_swls,NA,Satisfaction With Life Scale (SWLS),spa,translated_substitute,5,1125,5,0,0,NAME_ONLY,name,no item text
+jablonska_2020_swls,Satisfaction With Life Scale (SWLS),Satisfaction With Life Scale (SWLS),pol,study_materials,5,974,5,0,0,NAME_ONLY,name,no item text
+lee_2024_swls,NA,,kor,translated_substitute,5,527,5,0,0,NAME_ONLY,name,no item text
+liu_2018_swls,NA,,chi,translated_substitute,5,208,5,0,0,NAME_ONLY,name,no item text
+mironshatz_2015_swls,,,,none_recorded,5,810,5,0,0,NAME_ONLY,name,no item text
+narcissism_schneider_2025_study2_swls,Life Satisfaction,,ger,none_recorded,5,3,5,0,0,NAME_ONLY,name,no item text
+park_2021_swls,NA,,kor,unknown,5,208,5,0,0,NAME_ONLY,name,no item text
+personalitychange_kramer_2025_swls,Satisfaction with Life Scale,,eng,none_recorded,5,2092,5,0,0,NAME_ONLY,name,no item text
+ptacek2023_swls,NA,,cze,unknown,5,299,5,0,0,NAME_ONLY,name,no item text
+qi_2025_swls,Satisfaction With Life Scale (SWLS),"Satisfaction with Life Scale (SWLS; Diener, Emmons, Larsen & Griffin 1985)",chi,translated_substitute,5,134,5,0,0,NAME_ONLY,name,no item text
+rahm_2017_swls,NA,,ger,unknown,5,498,5,0,0,NAME_ONLY,name,no item text
+rzeszutek_2020_swls,NA,,pol,unknown,5,497,5,0,0,NAME_ONLY,name,no item text
+tang_2024_swls,NA,,chi,none_recorded,5,1682,5,0,0,NAME_ONLY,name,no item text
+wu2021_swls,NA,,chi,unknown,5,586,5,0,0,NAME_ONLY,name,no item text

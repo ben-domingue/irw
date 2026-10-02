@@ -1,0 +1,8 @@
+table,construct_name,instrument,language,text_source,n_items,n_participants,k,n_mapped,n_near,verdict,basis,note
+ali_2021_isi,NA,"Insomnia Severity Index (ISI; Morin et al., 2011)",eng,canonical_instrument,7,168,7,7,0,MATCH,supplied,
+kim_2025_isi,NA,"Insomnia Severity Index (ISI), Korean version",kor,translated_substitute,7,286,7,6,0,MATCH,supplied,
+isi_insomnia_wang2025,The Insomnia Severity Index (ISI),The Insomnia Severity Index (ISI),chi,none_recorded,7,572095,7,0,0,NAME_ONLY,name,item text not in English
+nguyen_2026_isi,Insomnia symptoms and interference (Insomnia Severity Index),,vie,none_recorded,7,394,7,0,0,NAME_ONLY,name,no item text
+su_2024_isi,,,,none_recorded,7,24292,7,0,0,NAME_ONLY,name,no item text
+han_2026_isi,NA,Insomnia Severity Index (ISI-7),chi,study_materials,7,2086,7,2,0,PARTIAL,,first item: difficulty falling asleep
+hellstrom_2019_isi,NA,Insomnia Severity Index (ISI),swe,translated_substitute,7,631,7,2,0,PARTIAL,,first item: daily functioning

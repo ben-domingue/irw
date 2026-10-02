@@ -1,0 +1,30 @@
+table,construct_name,instrument,language,text_source,n_items,n_participants,k,n_mapped,n_near,verdict,basis,note
+ali_2021_gad7,NA,"GAD-7 (Generalized Anxiety Disorder 7-item scale; Spitzer et al., 2006)",eng,study_materials,7,168,7,7,0,MATCH,wording,
+amatus_cipora_2024_gad,Generalized Anxiety Disorder,"The AMATUS Dataset: Arithmetic Performance, Mathematics Anxiety and Attitudes in Primary School Teachers and University Students","ger, fre",none_recorded,7,1106,7,7,0,MATCH,supplied,
+assessment_time_fournier_2025_gad,Assessment Time - Anxiety,Generalised Anxiety Disorder scale (GAD-7),eng,none_recorded,7,398,7,7,0,MATCH,supplied,
+c19prc_uk_mcbride_2021_gad7,Anxiety,,eng,none_recorded,7,5364,7,7,0,MATCH,supplied,
+chen_2022_gad,Anxiety / generalized anxiety disorder (GAD-7),GAD-7 (Generalized Anxiety Disorder 7-item scale),chi,none_recorded,7,77211,7,7,0,MATCH,supplied,
+ehealth_rioux_2025_gad,Generalized Anxiety Disorder,Generalized Anxiety Disorder 7-item scale (GAD-7),eng,study_materials,8,313,7,7,0,MATCH,wording,
+fcv19s_hossain_2022_anxiety,GAD-7 to assess anxiety,Measured with GAD-7 to assess anxiety,eng,none_recorded,7,1317,7,6,0,MATCH,supplied,
+islam_2022_gad7,NA,"Generalized Anxiety Disorder 7-item scale (GAD-7), Bangla version",ben,translated_substitute,7,428,7,7,0,MATCH,supplied,
+kim_2023_gad7,NA,Generalized Anxiety Disorder 7-item scale (GAD-7),kor,translated_substitute,7,202,7,7,0,MATCH,supplied,
+lu_2017_gad7,NA,Generalized Anxiety Disorder 7-item scale (GAD-7),chi,translated_substitute,7,1296,7,7,0,MATCH,supplied,
+mental_health_wang_2024_gad,Impact of COVID-19 - Depression,"Generalized Anxiety Disorder 7-item scale (GAD-7; Spitzer, Kroenke, Williams & Lowe, 2006)",chi,translated_substitute,7,958,7,7,0,MATCH,supplied,
+nguyen_2026_gad7,Generalized anxiety symptoms (GAD-7),Generalized Anxiety Disorder-7 (GAD-7),vie,none_recorded,7,394,7,7,0,MATCH,supplied,
+oxfordcovid_xue_2024_gad,Generalised Anxiety Disorder scale (GAD-7),Generalised Anxiety Disorder scale (GAD-7),eng,none_recorded,7,1574,7,7,0,MATCH,supplied,
+rosetti2023_gad7,NA,Generalized Anxiety Disorder 7-item scale (GAD-7),spa,translated_substitute,7,468,7,7,0,MATCH,supplied,
+rosetti_2023_gad7,NA,GAD-7 (Generalized Anxiety Disorder 7-item scale),spa,translated_substitute,7,468,7,7,0,MATCH,supplied,
+smpi_lorenzoluaces_2020_gad7,Sydney Melancholia Prototype Index psychometrics - Anxiety,Generalized Anxiety Disorder 7-item scale (GAD-7),eng,canonical_instrument,7,487,7,7,0,MATCH,supplied,
+tran_2023_gad7,NA,"Generalized Anxiety Disorder 7-item scale (GAD-7), Vietnamese version",vie,translated_substitute,7,400,7,7,0,MATCH,supplied,
+uti_newlands_2023_gad,Anxiety,Generalized Anxiety Disorder 7 (GAD-7),eng,canonical_instrument,7,240,7,7,0,MATCH,supplied,
+yao_2020_gad,NA,Generalized Anxiety Disorder 7-item scale (GAD-7),chi,translated_substitute,7,1026,7,7,0,MATCH,supplied,
+yin_2022_gad7,NA,GAD-7 (Generalized Anxiety Disorder 7-item scale),eng,canonical_instrument,7,153,7,7,0,MATCH,supplied,
+baquerotomas_2026_gad7,NA,"Generalized Anxiety Disorder-7 (GAD-7), Spanish version",spa,canonical_instrument,7,566,7,0,0,NAME_ONLY,name,item text not in English
+cinar_tanriverdi_2023_gad7,NA,"Yaygın Anksiyete Bozukluğu-7 (YAB-7) [Generalized Anxiety Disorder-7 (GAD-7), Turkish adaptation]",tur,canonical_instrument,7,544,7,0,0,NAME_ONLY,name,item text not in English
+han_2026_gad7,NA,"Generalized Anxiety Disorder-7 (GAD-7) as administered in the Jiangsu elderly survey: GAD01-GAD06 are GAD-7 items, GAD07 is a study-specific loss-of-interest item scored in the GAD-7 total",chi,study_materials,7,2086,7,0,0,NAME_ONLY,name,item text not in English
+pranckeviciene_2022_gad7,NA,"Generalized Anxiety Disorder Questionnaire-7 (GAD-7), Lithuanian version",lit,study_materials,7,1358,7,0,0,NAME_ONLY,name,item text not in English
+shu_2024_gad7,NA,"Generalized Anxiety Disorder-7 (GAD-7), Chinese version",chi,translated_substitute,7,1190,7,0,0,NAME_ONLY,name,item text not in English
+gad_BrummerHoffman_2021,"Depression and anxiety question framing: The impact of asking about symptom's frequency, context, duration, ability and botherement - generalized anxiety disorder",Augmented GAD-7,"eng, por",study_materials,35,1828,7,0,0,NO_MATCH,,first item: se preocupou muito com diversas coisas
+su_2024_gad7,,"Generalized Anxiety Disorder 7-item scale (GAD-7), Chinese version",,none_recorded,7,24292,7,0,0,NO_MATCH,,first item: 不能够停止或控制担忧
+anjum_2022_gad7,NA,Generalized Anxiety Disorder 7-item scale (GAD-7),ben,study_materials,7,2313,7,5,1,PARTIAL,,first item: feeling afraid as if something awful might happen
+suicide_reinbergs_2025_gad,Generalized Anxiety Disorder–2 (GAD-2),The GAD-2 assesses anxiety symptoms over the past two weeks.,eng,none_recorded,2,1258,7,2,0,PARTIAL,,first item: not being able to stop or control worrying

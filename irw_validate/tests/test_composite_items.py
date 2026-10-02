@@ -1,8 +1,8 @@
 """Agreed #2314 item-5 contract: label matches are observations, not scores.
 
-The narrower matcher can change findings and triage routes. Existing severity
-policy remains: all-match raw fail, subset warn, upload/legacy warning-only.
-Changing all-match severity is the separate #2369 decision.
+The #2369 policy makes all-match and subset findings warnings. Strict mode
+still blocks warnings, and error-only overrides cannot waive them. Matching,
+messages and independent blocking conditions retain their existing contracts.
 """
 from __future__ import annotations
 
@@ -10,9 +10,12 @@ import contextlib
 import csv
 import io
 import json
+import os
+import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 import pandas as pd
 
@@ -85,11 +88,11 @@ class CompositeRawChecks(unittest.TestCase):
         self.assertNotIn("drop", message.lower())
 
     def test_all_subset_and_no_match_statuses_across_raw_compatibility_entrypoints(self):
-        cases = ((["pre-A", "post_F"], "fail"),
+        cases = ((["pre-A", "post_F"], "warn"),
                  (["PRE1", "pre-A"], "warn"),
                  (["PRE1", "poster"], None),
                  (["q1", "q2"], None),
-                 (["pre-A"], "fail"))
+                 (["pre-A"], "warn"))
         for check_function in (run_qc, compatible_run_qc):
             for labels, status in cases:
                 with self.subTest(entry=check_function.__module__, labels=labels):
@@ -142,11 +145,31 @@ class CompositeRawChecks(unittest.TestCase):
             validate_frame(data, profile=profile)
             pd.testing.assert_frame_equal(data, original)
 
+    def test_raw_failure_assertions_keep_independent_failures(self):
+        clean = frame(["pre-A", "post_F"])
+        duplicate = pd.concat([clean, clean.iloc[[0]]], ignore_index=True)
+        constant = clean.assign(resp=1)
+        for data, expected_failure in ((clean, None),
+                                       (duplicate, "dup_id_item"),
+                                       (constant, "resp_variation*")):
+            for check_function in (run_qc, compatible_run_qc):
+                with self.subTest(failure=expected_failure, entry=check_function.__module__):
+                    checks = check_function(data)
+                    self.assertEqual([c.status for c in composite(checks)], ["warn"])
+                    # The aggregate condition used by conversion scripts must
+                    # relax only the composite finding, not another failure.
+                    failures = [c.name for c in checks if c.status == "fail"]
+                    if expected_failure is None:
+                        self.assertEqual(failures, [])
+                    else:
+                        self.assertIn(expected_failure, failures)
+                    self.assertNotIn(CHECK, failures)
+
 
 class CompositeProfilesAndFiles(unittest.TestCase):
-    def test_all_match_keeps_existing_profile_severity_and_strict_behavior(self):
+    def test_all_match_warns_in_triage_and_gate_profiles_but_still_blocks_strict(self):
         for profile, severity, normal_code, strict_code in (
-                ("core", None, 0, 0), ("triage", "error", 1, 1),
+                ("core", None, 0, 0), ("triage", "warn", 0, 1),
                 ("upload", "warn", 0, 1), ("legacy", "warn", 0, 1)):
             with self.subTest(profile=profile):
                 report = validate_frame(frame(["pre-A", "post_F"]), profile=profile)
@@ -182,7 +205,7 @@ class CompositeProfilesAndFiles(unittest.TestCase):
                 for profile in ("core", "triage", "upload", "legacy"):
                     expected_severity = (
                         None if profile == "core" or kind == "none" else
-                        "error" if profile == "triage" and kind == "all" else "warn")
+                        "warn")
                     with self.subTest(kind=kind, profile=profile):
                         report = validate_file(path, profile=profile)
                         self.assertEqual([finding.severity for finding in report.findings
@@ -205,6 +228,78 @@ class CompositeProfilesAndFiles(unittest.TestCase):
                             self.assertEqual([finding["severity"] for finding in findings],
                                              [] if expected_severity is None else [expected_severity])
                             self.assertEqual(path.read_bytes(), original)
+
+    def test_scoped_override_cannot_waive_the_all_match_warning_in_strict_mode(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "naming_2026_scale.csv"
+            ledger = Path(directory) / "ledger.csv"
+            frame(["pre-A", "post_F"]).to_csv(path, index=False)
+            original = path.read_bytes()
+            reason = "Synthetic naming evidence only; no data provenance claim."
+            for strict in (False, True):
+                with self.subTest(strict=strict):
+                    arguments = [str(path), "--profile", "triage", "--json",
+                                 "--override-check", CHECK, "--override", reason]
+                    if strict:
+                        arguments.append("--strict")
+                    output = io.StringIO()
+                    with patch.dict(os.environ, {"IRW_VALIDATE_LEDGER": str(ledger)}), \
+                            contextlib.redirect_stdout(output), \
+                            contextlib.redirect_stderr(io.StringIO()):
+                        code = main(arguments)
+                    report, = json.loads(output.getvalue())
+                    self.assertEqual(code, int(strict))
+                    self.assertTrue(report["ok"])
+                    self.assertEqual([(f["check"], f["severity"])
+                                      for f in report["findings"]], [(CHECK, "warn")])
+                    self.assertEqual(report["overridden"], [])
+                    self.assertIsNone(report["override_reason"])
+                    self.assertFalse(ledger.exists(), "A warning must not create a waiver row")
+                    self.assertEqual(path.read_bytes(), original)
+
+    def test_scoped_override_preserves_other_errors_and_only_records_actual_error_waivers(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "naming_2026_scale.csv"
+            data = frame(["pre-A", "post_F"])
+            data["resp"] = data["resp"].astype(object)
+            data.loc[0:5, "resp"] = "invalid"
+            data.to_csv(path, index=False)
+            original = path.read_bytes()
+            reason = "Synthetic caller test: explicitly waive only this numeric error."
+            for target in (CHECK, "resp_numeric"):
+                for strict in (False, True):
+                    with self.subTest(target=target, strict=strict):
+                        ledger = Path(directory) / f"ledger_{int(target == CHECK)}_{int(strict)}.csv"
+                        arguments = [str(path), "--profile", "triage", "--json",
+                                     "--override-check", target, "--override", reason]
+                        if strict:
+                            arguments.append("--strict")
+                        output = io.StringIO()
+                        with patch.dict(os.environ, {"IRW_VALIDATE_LEDGER": str(ledger)}), \
+                                contextlib.redirect_stdout(output), \
+                                contextlib.redirect_stderr(io.StringIO()):
+                            code = main(arguments)
+                        report, = json.loads(output.getvalue())
+                        self.assertEqual(code, int(target == CHECK or strict))
+                        self.assertIn((CHECK, "warn"),
+                                      [(f["check"], f["severity"]) for f in report["findings"]])
+                        if target == CHECK:
+                            self.assertFalse(report["ok"])
+                            self.assertIn("resp_numeric", [f["check"] for f in report["findings"]
+                                                            if f["severity"] == "error"])
+                            self.assertEqual(report["overridden"], [])
+                            self.assertFalse(ledger.exists())
+                        else:
+                            self.assertTrue(report["ok"])
+                            self.assertEqual([(f["check"], f["severity"])
+                                              for f in report["overridden"]],
+                                             [("resp_numeric", "error")])
+                            with ledger.open(newline="") as handle:
+                                rows = list(csv.DictReader(handle))
+                            self.assertEqual(len(rows), 1)
+                            self.assertEqual(rows[0]["checks"], "resp_numeric")
+                            self.assertEqual(rows[0]["reason"], reason)
+                        self.assertEqual(path.read_bytes(), original)
 
     def test_csv_blank_item_parsing_retains_loader_behavior(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -236,11 +331,52 @@ class CompositeDiscoveryRoutes(unittest.TestCase):
         pd.testing.assert_frame_equal(data, original)
         return result
 
-    def test_retained_all_match_still_routes_to_human_assistance(self):
+    def test_all_match_routes_good_with_warning_when_no_other_condition_blocks(self):
         result = self.triage(["pre-A", "post_F"])
-        self.assertEqual(result.flag, "human_assistance", result.reasons)
-        self.assertEqual([finding.status for finding in composite(result.checks)], ["fail"])
+        self.assertEqual(result.flag, "good", result.reasons)
+        self.assertEqual([finding.status for finding in composite(result.checks)], ["warn"])
         self.assertTrue(any(CHECK in reason for reason in result.reasons))
+
+    def test_all_match_warning_does_not_hide_independent_numeric_failure(self):
+        result = self.triage(["pre-A", "post_F"], invalid=True)
+        self.assertEqual(result.flag, "human_assistance", result.reasons)
+        self.assertEqual([finding.status for finding in composite(result.checks)], ["warn"])
+        self.assertIn("resp_numeric", [c.name for c in result.checks if c.status == "fail"])
+        self.assertTrue(any("QC failed on: resp_numeric" in reason for reason in result.reasons))
+
+    def test_real_low_confidence_coercion_retriages_only_warning_cases_as_worth_retrying(self):
+        from automated_finding.irw_triage_updated import triage_dataset
+
+        pipeline = str(Path(__file__).resolve().parents[2] / "automated_finding")
+        with patch.object(sys, "path", [pipeline, *sys.path]):
+            from irw_retriage_ha import classify
+
+        for constant, expected in ((False, "worth_retrying"), (True, "human_review")):
+            with self.subTest(constant=constant):
+                # No identifier column and <50% unique responses: the real
+                # coercer must synthesize row ids and mark the mapping low.
+                data = pd.DataFrame({
+                    "pre-A": [1 if constant else person % 5 for person in range(100)],
+                    "post_F": [1 if constant else (person + 1) % 5 for person in range(100)],
+                })
+                original = data.copy(deep=True)
+                result = triage_dataset(data)
+                self.assertEqual(result.coercion.method, "wide-to-long")
+                self.assertEqual(result.coercion.confidence, "low")
+                self.assertEqual(result.metadata["n_participants"], 100)
+                self.assertEqual(result.flag, "human_assistance", result.reasons)
+                self.assertEqual([c.status for c in composite(result.checks)], ["warn"])
+                failures = [c.name for c in result.checks if c.status == "fail"]
+                if constant:
+                    self.assertIn("resp_variation*", failures)
+                else:
+                    self.assertEqual(failures, [])
+                row = pd.Series({"title": "Synthetic response matrix",
+                                 "reasons": " | ".join(result.reasons), **result.metadata})
+                saved_row = row.copy(deep=True)
+                self.assertEqual(classify(row)[0], expected)
+                pd.testing.assert_series_equal(row, saved_row)
+                pd.testing.assert_frame_equal(data, original)
 
     def test_numbered_label_with_retained_marker_routes_good_with_subset_warning(self):
         result = self.triage(["PRE1", "pre-A"])

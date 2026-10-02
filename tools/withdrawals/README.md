@@ -6,7 +6,7 @@ so they disappear at the next release. Most delete item-text tables from
 The rest pull response tables for personal data, duplication or misnaming.
 `withdraw_personal_data_2026_09_19.py`, `withdraw_online_addiction.py`,
 `withdraw_joreskog_moustaki_2001.py`, `withdraw_zhou_2025_peer_relationship_w5.py`, `withdraw_sun_2025_study1_informant.py`, `withdraw_renamed_2198.py`
-and `retire_marcatto_ocs.py` fall in that group.
+`retire_marcatto_ocs.py` and `retire_lichess_oneday.py` (a competitions table superseded by a better build) fall in that group.
 
 Each has already been run. They stay here because provenance records, the
 rights register and `itemtext/extraction_batches/round_log.md` cite them by
@@ -32,7 +32,9 @@ is the reverse index -- one row per withdrawn table, whatever the reason.
   is `released`: the version at which the withdrawal left `current`, since a
   draft deletion is invisible until Ben publishes.
 - `reason` is one of `rights`, `wrong_data`, `duplicate`, `personal_data`,
-  `misnamed`, `unlicensed`. A `rights` row names the register `family`.
+  `misnamed`, `unlicensed`, `source_withdrawn` (the author took the source
+  deposit down), `out_of_scope` (not item responses, e.g. a physical measure
+  such as amount consumed; #1700). A `rights` row names the register `family`.
 - `dataset` ending in `*` means the script found the shard at run time and
   did not record which one.
 - `itemtext/tests/test_withdrawals.py` fails a pull request that adds a script

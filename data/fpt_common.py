@@ -368,7 +368,11 @@ def post_process_and_save(df_task, output_dir):
         'cov_admc_id', 'cov_admc_response', 'cov_completed', 'cov_custom_timer_ended_trial', 'cov_form', 'cov_time_elapsed',
         'cov_response', 'cov_response_slider', 'cov_score', 'cov_correct', 'cov_crt_correct_mean', 'cov_crt', 'cov_rt', 'cov_correct_response'
     ]
-    if task_name != 'berlin_numeracy':
+    if task_name == 'number_series' and 'cov_ns_response' in df_task.columns:
+        # Keep the typed answer so users can rescore: FRI's key for NS_6 is 165,
+        # but the series implies 120 (irw#2513). resp keeps the source scoring.
+        df_task['resp_raw'] = df_task['cov_ns_response'].astype('string')
+    if task_name not in ('berlin_numeracy', 'number_series'):
         drop_cols.append('resp_raw')
     drop_cols = [c for c in drop_cols if c in df_task.columns]
     if drop_cols:

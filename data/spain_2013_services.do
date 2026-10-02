@@ -132,6 +132,12 @@ export delimited using "spain_2013_services_services.csv", replace
 use "spain_2013_services_master.dta", clear
 keep id cov_* p5 p6a
 
+* CIS code 0 = No procede (not asked), declared missing in ES2986 for these items.
+* Not applied to p5 or p701-p709: those are 0-10 scales, where 0 is an answer.
+foreach var of varlist p6a {
+    replace `var' = . if `var' == 0
+}
+
 replace p5 = . if inlist(p5, 98, 99)
 replace p6a = . if inlist(p6a, 8, 9)
 
@@ -191,9 +197,17 @@ export delimited using "spain_2013_services_offices.csv", replace
 
 **# Bookmark 5: purpose  (11 items)
 use "spain_2013_services_master.dta", clear
-keep id cov_* p1101 p1102 p1103 p1104 p1105 p1106 p1107 p1108 p1109 p1110 p1111
+keep id cov_* p1101 p1102 p1103 p1104 p1105 p1106 p1107 p1108 p1109 p1110 p1111 p1117
 
-* multiple-response items (1 = marcado); no NS/NC sentinel to recode
+* multiple-response items (MARCAR TODAS): 1 = marked, blank = asked but not marked,
+* 0 = No procede (not asked). Recode to marked 1 / not marked 0 among those asked;
+* missing if not asked or N.C. on the whole question (p1117 = 1)
+gen byte asked = p1101 != 0
+foreach var of varlist p1101 p1102 p1103 p1104 p1105 p1106 p1107 p1108 p1109 p1110 p1111 {
+    replace `var' = . if `var' == 0
+    replace `var' = 0 if missing(`var') & asked & p1117 != 1
+}
+drop asked p1117
 
 local question_cols p1101 p1102 p1103 p1104 p1105 p1106 p1107 p1108 p1109 p1110 p1111
 tempfile long_data
@@ -218,6 +232,11 @@ export delimited using "spain_2013_services_purpose.csv", replace
 **# Bookmark 6: inpersonsat  (12 items)
 use "spain_2013_services_master.dta", clear
 keep id cov_* p12 p13 p1401 p1402 p1403 p1404 p1405 p1406 p1407 p1408 p1409 p15
+
+* CIS code 0 = No procede (not asked), declared missing in ES2986 for these items
+foreach var of varlist p12 p13 p1401 p1402 p1403 p1404 p1405 p1406 p1407 p1408 p1409 p15 {
+    replace `var' = . if `var' == 0
+}
 
 replace p12 = . if inlist(p12, 8, 9)
 replace p13 = . if inlist(p13, 8, 9)
@@ -256,6 +275,11 @@ export delimited using "spain_2013_services_inpersonsat.csv", replace
 use "spain_2013_services_master.dta", clear
 keep id cov_* p16 p16a p17 p17a p18 p18a p18b
 
+* CIS code 0 = No procede (not asked), declared missing in ES2986 for these items
+foreach var of varlist p16a p17a p18a p18b {
+    replace `var' = . if `var' == 0
+}
+
 replace p16 = . if inlist(p16, 8, 9)
 replace p16a = . if inlist(p16a, 8, 9)
 replace p17 = . if inlist(p17, 8, 9)
@@ -286,9 +310,24 @@ export delimited using "spain_2013_services_othercontact.csv", replace
 
 **# Bookmark 8: internet  (11 items)
 use "spain_2013_services_master.dta", clear
-keep id cov_* p19 p2101 p2102 p2103 p2104 p2105 p2106 p2107 p2108 p2109 p2110
+keep id cov_* p19 p2101 p2102 p2103 p2104 p2105 p2106 p2107 p2108 p2109 p2110 p2116 p2117
+
+* CIS code 0 = No procede (not asked), declared missing in ES2986 for these items
+foreach var of varlist p19 {
+    replace `var' = . if `var' == 0
+}
 
 replace p19 = . if inlist(p19, 8, 9)
+
+* p2101-p2110 are multiple-response (MARCAR TODAS), asked if p19 = 1: 1 = marked,
+* blank = asked but not marked, 0 = No procede. Recode to marked 1 / not marked 0
+* among those asked; missing if not asked, No recuerda (p2116) or N.C. (p2117)
+gen byte asked = p2101 != 0
+foreach var of varlist p2101 p2102 p2103 p2104 p2105 p2106 p2107 p2108 p2109 p2110 {
+    replace `var' = . if `var' == 0
+    replace `var' = 0 if missing(`var') & asked & p2116 != 1 & p2117 != 1
+}
+drop asked p2116 p2117
 
 local question_cols p19 p2101 p2102 p2103 p2104 p2105 p2106 p2107 p2108 p2109 p2110
 tempfile long_data
@@ -313,6 +352,11 @@ export delimited using "spain_2013_services_internet.csv", replace
 **# Bookmark 9: internetout  (9 items)
 use "spain_2013_services_master.dta", clear
 keep id cov_* p22 p22b p23 p2401 p2402 p2403 p2404 p2405 p2406
+
+* CIS code 0 = No procede (not asked), declared missing in ES2986 for these items
+foreach var of varlist p22 p22b p23 p2401 p2402 p2403 p2404 p2405 p2406 {
+    replace `var' = . if `var' == 0
+}
 
 replace p22 = . if inlist(p22, 8, 9)
 replace p22b = . if inlist(p22b, 8, 9)
@@ -348,8 +392,15 @@ export delimited using "spain_2013_services_internetout.csv", replace
 use "spain_2013_services_master.dta", clear
 keep id cov_* p27 p27c p27d
 
+* CIS code 0 = No procede (not asked), declared missing in ES2986 for these items
+foreach var of varlist p27c p27d {
+    replace `var' = . if `var' == 0
+}
+
 replace p27 = . if inlist(p27, 9)
 replace p27c = . if inlist(p27c, 8, 9)
+* 3 = Todavia esta tramitandose (complaint still being processed): not an answer (#2401)
+replace p27c = . if p27c == 3
 replace p27d = . if inlist(p27d, 8, 9)
 
 local question_cols p27 p27c p27d

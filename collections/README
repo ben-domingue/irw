@@ -84,6 +84,61 @@ the membership they describe.
    easy mistake. `\bmath` catches "mathematics anxiety".
 5. Upload with the site-update skill's upload_meta.py.
 
+---------------------------------------------------------------- exact-instrument collections
+
+phq9, gad7, rses, cesd, dass21, panas, tipi, pcl5, gse, erq, mspss and sd3, then swls,
+pss10, bfi44, bfi10, ucla_ls, fcv19s, lotr, isi and brief_cope (#1712, added 2026-09-30) answer "which tables administered THIS instrument?". They are `curated`, and they sit
+beside the looser cname: collections (depression, self_esteem, affect_panas ...) rather than
+replacing them.
+
+What counts (Ben, 2026-09-30):
+  - the full scale, or at least 80% of its items;
+  - one whole subscale (a DASS depression-only table, a PANAS positive-affect-only table);
+  - NOT a short form (PHQ-2, PHQ-8, GAD-2, CES-D-10, ...), a lengthened adaptation (the
+    Chinese 14-item ERQ), or a reworded version (BrummerHoffman's "Augmented" PHQ-9/GAD-7).
+
+`basis` starts with how identity was decided, and may carry a note after "; ":
+  wording    the study's own item text (provenance text_source = study_materials) matches the
+             instrument's wording. Identity is observed.
+  supplied   IRW's item-text pipeline identified the instrument and supplied its canonical
+             wording (canonical_instrument, translated_substitute, or no provenance row), so a
+             wording match only confirms IRW's own call. Identity is asserted.
+  name       no usable English item text; only the metadata names the instrument.
+  e.g. "supplied; subscale: anxiety (7/21)", "name; partial: 18/20 items".
+The note travels inside `basis` because read_curated() publishes only table and basis. For the
+strictly verified set, filter on basis starting with "wording". It is small: 29 of the
+188 first-batch memberships, and 1 of the 82 in the second batch.
+
+How membership was built, and how to redo it:
+  1. python3 collections/scout_instruments.py [slug ...]
+       Candidates are tables whose construct name / item-text instrument field names the
+       instrument, or a whole table-name token does. Each is judged on its item text against
+       the instrument's key: the k most common normalised wordings among the candidates
+       (printed to curated/<slug>.key.txt; CHECK IT. With under ~3 texts the key is garbage:
+       PSS's came out as a nursing-stressor scale). Writes curated/<slug>.review.csv.
+  2. python3 collections/presort_instruments.py
+       Applies the rules above -> curated/instruments_presort.csv (ACCEPT / REJECT / DECIDE,
+       with a reason on every row). Rows the rules leave open get a hand call, with its
+       reason, in curated/instruments_overrides.csv.
+  3. A human reviews the presort; the ACCEPT rows become curated/<slug>.csv (table, basis,
+     note). A table absent from metadata.csv can't be a member (10_collections.R stops).
+     That cuts both ways: WITHDRAWING a table that a curated file names makes the next pipeline
+     run stop at this stage. When a table is withdrawn, remove it from every curated/*.csv
+     (grep -l <table> collections/curated/*.csv) in the same PR. saha_2026_cesd was the first case.
+The second batch (swls, pss10, bfi44, bfi10, ucla_ls, fcv19s, lotr, isi, brief_cope; added
+2026-09-30) had too little item text for a derived key: their <slug>.key.txt files are NOT the
+instruments (pss10's is a nursing-stressor scale, bfi10's is German), so ignore them. Those nine
+were decided on metadata instead: item count, table name and instrument / construct-name fields,
+with a hand call and its reason in instruments_overrides.csv wherever the rules didn't settle a
+row. Most members are therefore `name`. SWLS has no item text in IRW at all (withheld on rights
+grounds), so all 22 of its members are `name`. Don't "fix" this by writing full canonical wordings
+into a key file: that would publish, in this repo, item text IRW deliberately doesn't release.
+Two calls in this batch stretch the rules and are recorded as such:
+  - lotr: a table with the LOT-R's 6 scored items counts ("scored items: 6/10"), because the
+    other 4 items are unscored fillers, not part of the scale.
+  - ucla_ls: the 1980 revision and Version 3 (1996) are both 20 items but word them differently.
+    Both count; the definition says so.
+
 ---------------------------------------------------------------- two invariants
 
 1. MEMBERSHIP IS CONFIRMED-ONLY. There is no candidate/status column. Scouting

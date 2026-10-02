@@ -9,6 +9,14 @@
 # Very much" -- leading integer extracted. The STAI6 column (a computed
 # total) and many other unrelated single-item survey questions in the same
 # file are excluded.
+#
+# WITHDRAWN 2026-09-30 (irw#2123). The item codes were the STAI-6 stems verbatim, and
+# Mind Garden's terms bar the instrument from the open web (register row STAI = block).
+# A rebuild with neutral codes was considered and rejected: the data contradict the
+# column labels (upset and relaxed correlate .60 with each other and negatively with
+# the other four; calm correlates +.51 with tense), and the deposit's STAI6 total does
+# not reproduce under any of the 64 reverse-keying sets (best 29% of rows). Do not
+# re-upload without resolving which column is which item.
 
 from __future__ import annotations
 

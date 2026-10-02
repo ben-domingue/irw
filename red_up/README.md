@@ -156,6 +156,15 @@ Three things worth knowing:
   forever.
 - **Heuristics warn, they do not block** — see the profile table in
   `irw_validate/README.md` for why.
+- **A response table with item text is range-checked against its anchors**
+  (#2152). An item's permitted `resp` values are every integer from its lowest to
+  its highest labelled (`option_text`) response; a value outside that blocks
+  (`resp_outside_permitted`). The item text is a staged `<table>__items.csv` beside
+  the file (its own or a sibling directory, as the upload queue lays shards out),
+  else the published `__items` table. With neither, nothing changes. The run prints
+  which tables were checked and against what. If a rebuild deliberately changes a
+  scale, stage the matching item text beside it so the check reads the new anchors.
+  See `permitted.py`.
 
 ## Drafts, and the one-week window
 

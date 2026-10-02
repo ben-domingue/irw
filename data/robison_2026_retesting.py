@@ -308,6 +308,9 @@ def build_cognitive() -> None:
                 trial_extras=["response"])
 
     df = _read_two("tot", id_col="SubID")
+    # Mode=Training is a practice phase on 12 separate items (map 2) never used in
+    # the Experiment block; drop it like the other tasks' practice trials (irw#2513).
+    df = _drop_practice(df, "Mode", {"Experiment"})
     df["item"] = df["itemLabel"].astype(str)
     _emit_trial(df, "robison_2026_retesting_tot.csv",
                 item_col="item", resp_col="Grade",

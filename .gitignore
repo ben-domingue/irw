@@ -37,8 +37,15 @@ metadata/**/*.txt
 !metadata/table_scripts.csv
 # Hand-kept rows stage 13 merges in, for names built at run time (#2529).
 !metadata/table_scripts_manual.csv
+# Per-column codebook rows the table pages render (#2763); stage 14.
+!metadata/column_docs.csv
 # Aggregator registry (openESM, ...) keyed by the dictionary's `Source via` (#2421).
 !metadata/aggregators.csv
+# Covariate value labels (#1775): the irw_meta table and the generator's
+# hand-reviewed institution list and coverage record. Manual, not weekly.
+!metadata/covariate_labels.csv
+!metadata/covariate_labels/institutions.csv
+!metadata/covariate_labels/coverage.csv
 
 ##The dictionary union's audit trail (#1732). Tracked, unlike 03_tags.R's
 ##tags_provenance.csv, which this file excludes and the weekly runner therefore

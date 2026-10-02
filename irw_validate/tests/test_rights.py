@@ -68,6 +68,21 @@ class Rights(unittest.TestCase):
         self.assertIn("not a verdict", f.message)
         self.assertTrue(report.ok, "a rights hit must never block the gate")
 
+    def test_translated_column_hit_warns(self):
+        """2026-09-29 (irw#2401): a block row covers *_translated. beck_2021_iesr's
+        German item_text matched nothing; its English twin matched every stem."""
+        df = self.items(["Wie oft hatten Sie das Gefuehl ...", "Etwas anderes"])
+        df["language"] = "German"
+        df["item_text_translated"] = ["How often have you felt that you were unable "
+                                      "to control the important things in your life?",
+                                      "NA"]
+        report = validate_frame(df, label="x_2026_scale__items", profile="upload")
+        (f,) = self.rights_findings(report)
+        self.assertEqual(f.severity, "warn")
+        self.assertIn("item_text_translated", f.message)
+        self.assertIn("'q0'", f.message)
+        self.assertTrue(report.ok)
+
     def test_clean_table_says_nothing(self):
         report = validate_frame(self.items(["How tall are you?"]),
                                 label="x_2026_scale__items", profile="upload")
@@ -114,6 +129,34 @@ class Rights(unittest.TestCase):
                                 label="x_2026_scale", profile="upload")
         self.assertIn("rights_register:unavailable", report.checks_run)
         self.assertEqual(self.rights_findings(report), [])
+
+    def test_anchored_stem_matches_only_a_whole_item(self):
+        """irw#2544: the STAI-6 stem 'I am worried' flagged a study-written
+        sentence (c19prc_uk_mcbride_2021_childimpact). `^stem$` is whole-item."""
+        hit = rights.stem_hit
+        for text in ("I am worried", "  I am worried. ", "I AM WORRIED!", "I am worried\u2026"):
+            with self.subTest(text=text):
+                self.assertTrue(hit("^I am worried$", text))
+        for text in ("I am worried that I am not able to provide good home schooling",
+                     "Sometimes I am worried", "I am worried something might go wrong."):
+            with self.subTest(text=text):
+                self.assertFalse(hit("^I am worried$", text))
+        self.assertTrue(hit("i am worried", "Sometimes I am worried"),
+                        "an unanchored stem is still a substring")
+        self.assertEqual(rights.stem_core(" ^I am tense$ "), "I am tense")
+
+    def test_anchored_stem_through_the_validator(self):
+        with self.reg.open("a", newline="") as fh:
+            csv.DictWriter(fh, FIELDS).writerow(
+                {"instrument": "STAI-6", "family": "STAI", "verdict": "block",
+                 "match_item_text": "^I am tense$|^I am worried$"})
+        df = self.items(["I am worried that I am not able to provide good home schooling",
+                         "I am tense."])
+        (f,) = self.rights_findings(validate_frame(df, label="x_2026_scale__items",
+                                                   profile="upload"))
+        self.assertIn("STAI", f.message)
+        self.assertIn("1 item(s)' text", f.message)
+        self.assertIn("'q1'", f.message)
 
     def test_the_real_register_loads(self):
         os.environ.pop(rights.REGISTER_ENV)

@@ -11,6 +11,10 @@ import requests
 REPO_ROOT = Path(__file__).resolve().parent.parent
 OUT_DIR = REPO_ROOT / "automated_finding" / "irw_output"
 
+# WITHDRAWN 2026-09-29 (#2401): do not re-ingest. S1 Data is 707 respondents
+# stacked ~2.5x (1,792 rows) with conflicting Gender/Age across the copies.
+# See tools/withdrawals/retire_jiang_2024.py.
+#
 # Source: https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0312338
 # DOI: 10.1371/journal.pone.0312338
 # Jiang et al. (2024), "Psychological sense of community as mediator and
