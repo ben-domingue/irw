@@ -16797,3 +16797,11 @@ Further rulings from ben-domingue the same day:
 - The `rights_register` warnings on `garciabacete_2023_loneliness` (DJG) and
   `sun_2018_greed` (LBUS) are confirmed false positives: both are code-pattern
   matches only. The garciabacete item text ships.
+
+## 2026-10-02f — re-check batch 2 stamped uploaded
+
+ben-domingue confirmed that all 62 batch-2 response tables and the 5 item
+text tables (garciabacete_2023_loneliness, mendezhinojosa_2026_ebea,
+turpochaparro_2026_{procrastination,workload,teacher_self_efficacy}) are
+uploaded. `uploaded=2026-10-02` is stamped in `itemtext_provenance.csv` and
+`mapping_verification.csv`.

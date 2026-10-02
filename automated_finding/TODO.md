@@ -5,13 +5,9 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
 ## From the 2026-10-02 human_review re-check batch 2 (25 rows, 21 shipped)
 
-- [ ] **62 tables + 5 item text tables need uploading**, from the worktree
-  `/home/ben/irw-wt/hr-recheck-batch2/automated_finding/`: all of
-  `irw_output/` (62 tables), then `itemtext_output/` (5 `__items.csv`:
-  garciabacete_2023_loneliness, mendezhinojosa_2026_ebea,
-  turpochaparro_2026_{procrastination,workload,teacher_self_efficacy}).
-  Dictionary/tag rows are staged; `uploaded` is unstamped in
-  `itemtext_provenance.csv` and `mapping_verification.csv`.
+- [x] **62 tables + 5 item text tables uploaded** (ben-domingue, confirmed
+  2026-10-02): the batch-2 `irw_output/` set, then the 5 `__items.csv`.
+  Dictionary/tag rows are staged; item text stamped uploaded.
 - [ ] **Item text leads from batch 2 (not built):** DGSC G1-G7 printed in
   Liu 2019 Table 1 (paper_explicit, needs verify); PMAS items 1-10 in
   Sahin 2026 Table 2 (Turkish + back-translation); DA-SpNQ-20 Danish +
