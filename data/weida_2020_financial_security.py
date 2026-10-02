@@ -21,7 +21,11 @@
 # position rests on canonical CES-D-10 order plus endorsement rank, not on any
 # correlational signal, so it is the weakest of the ten assignments: either the
 # item performs poorly here or the deposit's column order departs from the
-# canonical order at this position, and the data do not say which. Separately,
+# canonical order at this position, and the data do not say which. The deposit
+# cannot settle it either (checked 2026-10-01): the S1 SAS file labels most of
+# its variables, but secf_1m..secf_10m and dpsscore carry no variable labels and
+# no value formats, and the article's other supplements (s002, s003) are review
+# responses, not a codebook. Separately,
 # secf_5m ("hopeful about the future") and secf_8m ("happy") are stored
 # already reverse-scored in the deposit; the plain row sum reproduces the
 # authors' dpsscore exactly. Data are as deposited; nothing is recoded here.
