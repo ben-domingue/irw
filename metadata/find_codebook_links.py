@@ -30,7 +30,8 @@ statistics offices, openICPSR, which returns 403 to scripts) is recorded in the
 checked file with its reason and not crawled.
 
 Outputs:
-  metadata/codebook_links.csv          table, url, file_name, host, how_found, checked_at
+  metadata/codebook_links.csv          table, url, file_name, host, how_found,
+                                       n_same_kind_in_deposit, deposit_url, checked_at
   metadata/codebook_links_checked.csv  one row per (table, deposit): what was tried, and
                                        the outcome (hit / no_match / out_of_scope:<why>
                                        / error:<what>). A re-run skips tables
@@ -382,8 +383,9 @@ def main() -> int:
         if n % 20 == 0:
             CACHE.parent.mkdir(exist_ok=True)
             CACHE.write_text(json.dumps(cache, indent=0, ensure_ascii=False))
-    CACHE.parent.mkdir(exist_ok=True)
-    CACHE.write_text(json.dumps(cache, indent=0, ensure_ascii=False))
+    if not args.offline:   ##an offline re-match must not race a crawl writing the cache
+        CACHE.parent.mkdir(exist_ok=True)
+        CACHE.write_text(json.dumps(cache, indent=0, ensure_ascii=False))
 
     links, checked = [], []
     for t, _ in tables:
@@ -410,11 +412,24 @@ def main() -> int:
                 if f.get("ddi"):
                     hits.append({"table": t, "url": f["ddi"], "file_name": f["name"], "host": h,
                                  "how_found": "dataverse_ddi", "checked_at": row["checked_at"]})
+            ##A deposit with many codebooks (one per scale, say) attaches all of
+            ##them to every table it built. Matching a table to one of them means
+            ##decoding abbreviations (FamBel = family_belonging), which is the
+            ##guessing this script refuses; record the count and the deposit's
+            ##landing page so a page can say "19 codebook files in the deposit".
+            for kind in ("name_codebook", "name_readme"):
+                same = [x for x in hits if x["how_found"] == kind]
+                for x in same:
+                    x["n_same_kind_in_deposit"] = len(same)
+            for x in hits:
+                x.setdefault("n_same_kind_in_deposit", "")
+                x["deposit_url"] = res.get("landing", "")
             links += hits
             kinds = sorted({x["how_found"] for x in hits})
             row["outcome"] = "hit:" + "+".join(kinds) if kinds else "no_match"
 
-    write_csv(LINKS_OUT, links, ["table", "url", "file_name", "host", "how_found", "checked_at"])
+    write_csv(LINKS_OUT, links, ["table", "url", "file_name", "host", "how_found",
+                                 "n_same_kind_in_deposit", "deposit_url", "checked_at"])
     write_csv(CHECKED_OUT, checked, ["table", "data_url", "host", "deposit", "outcome", "checked_at"])
     print(f"{len(links)} links for {len({x['table'] for x in links})} tables -> {LINKS_OUT.name}", file=sys.stderr)
     return 0
