@@ -58,7 +58,7 @@ Every IRW file is a CSV in long format with one row per person-item observation.
 | `treat` | no | Treatment group assignment in experimental studies. `1` = treatment, `0` = control. |
 | `cluster_id` | no | The group a focal unit is nested in — classroom, teacher, school. In a cluster-randomised design it is the unit of random assignment, so `treat` is constant within it. An identifier only: its values mean nothing beyond grouping. Never `cov_`-prefixed. |
 | `block_id` | no | The level above `cluster_id` — in a randomised design, the block or stratum within which assignment was made (`treat` varies within a block, and clusters nest in blocks). An identifier only. Never `cov_`-prefixed. |
-| `std_baseline` | no | A standardised pre-treatment score, usually the trial's baseline measure. Name the source measure in the script header. A second baseline takes a suffix: `std_baseline_math`. |
+| `std_baseline`, `std_baseline_*` | no | A standardised pre-treatment score, usually the trial's baseline measure. Name the source measure in the script header. A second baseline takes a suffix: `std_baseline_math`. |
 | `rt` | no | Response time. **Seconds only** — convert from milliseconds if needed. |
 | `date` | no | Calendar time in seconds — either seconds elapsed since data collection start (relative) or Unix time (absolute). Do not use other time units. |
 | `qmatrix1`…`qmatrixN` | no | Item classifications for cognitive diagnostic modeling (Q-matrix). One column per attribute. |
