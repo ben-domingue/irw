@@ -261,3 +261,4 @@ test_taking_much_2025_ef,item_response_warehouse_2,whole,2026-09-28,duplicate,,#
 test_taking_much_2025_mr,item_response_warehouse_2,whole,2026-09-28,duplicate,,#2513 #2541,,,tools/withdrawals/withdraw_much_duplicates_2026_09_28.py,duplicate ingest of OSF 9j6hm; canonical much_tte_2025_matrixreasoning
 test_taking_much_2025_cm__items,irw_text,whole,2026-09-28,duplicate,,#2513 #2541,,,tools/withdrawals/withdraw_much_duplicates_2026_09_28.py,item text of the retired duplicate; much_tte_2025_currentmotivation__items kept
 test_taking_much_2025_ef__items,irw_text,whole,2026-09-28,duplicate,,#2513 #2541,,,tools/withdrawals/withdraw_much_duplicates_2026_09_28.py,item text of the retired duplicate; much_tte_2025_effort__items kept
+rmet_higgins_2022_rmet__items,irw_text,whole,2026-09-28,rights,RMET,#2513 #641,148,,tools/withdrawals/withdraw_rmet_itemtext_2026_09_28.py,"RMET option words, instructions, image descriptions (ARC); response table stays"
