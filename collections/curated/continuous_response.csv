@@ -21,3 +21,5 @@ estcrm_selfeff,curated:review,"Kan (2009) continuous-format teaching self-effica
 estcrm_epia,curated:review,"Ferrando (2002) continuous-response EPI-A impulsivity, 5 items marked on a 1-111 line (#1700 review, 2026-10-01)"
 vollbracht_et_al_2026_ambulatory_assessment,curated:review,"ESM mood/attention sliders: 8 items -50..50 and 6 items 0..100 (stress item 1-5) (#1700 review, 2026-10-01)"
 lsbq_maleki_2025_persian_comprehension,curated:review,"Persian reading/speaking/writing proficiency, 3 items on 0-10 sliders with decimals (#1700 review, 2026-10-01)"
+yu2025,curated:review,"Size estimation and reproduction: unbounded perceptual magnitude judgements, 572 distinct values, 38% non-integer (#1700 review, 2026-10-01)"
+eammi_grahe_2018_marriage_identity_allocation,curated:review,"0-100 allocations across identity domains that sum to 100 per person (compositional: items are not independent) (#1700 review, 2026-10-01)"
