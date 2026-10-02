@@ -16926,3 +16926,132 @@ Ben supplied two PDFs. Neither changed an output (both re-runs byte-identical):
 ben-domingue confirmed the 64 batch-3 response tables are uploaded (the item
 text was confirmed and stamped in 2026-10-02h). The batch is closed apart from
 the open questions and leads in `TODO.md`.
+
+## 2026-10-02j — human_review re-check batch 4: 25 rows, 14 shipped, 69 tables, 471,773 responses
+
+The next 25 rows of the `resp_scale_mixed` bucket of pool (b), judged by hand.
+Worktree `/home/ben/irw-wt/hr-recheck-batch4` (branch
+`ben-domingue/hr-recheck-batch4`, off main after #2793 merged), so the outputs
+are in **that worktree's** `automated_finding/irw_output/` and
+`itemtext_output/`. Record: `leads/human_review_recheck_batch4_2026-10-02.csv`
+(25 picks + 18 selection skips).
+
+**Selection.** Batch 3's filters, minus every DOI in the pilot, batch-2 and
+batch-3 leads files: **164 rows** (zenodo_backlog 83, repo_tierB 52, zenodo
+18, repo 6, repo_nonlatin 5). Picks: repo_tierB 12, zenodo_backlog 7, zenodo
+4, repo 1, repo_nonlatin 1 — the repo and repo_nonlatin remainders are mostly
+census or policy files. Eighteen skips are in the leads file: eight
+census-scale or non-person files (Gauteng QoL, Canadian and British election
+merges, a labour panel, solar-auction, e-commerce and urban-vitality data, a
+redistribution panel), four same-file pairs (mass-shooting anxiety deposited
+twice, the creativity pair, the social-media-fatigue pair, the refugee
+wellbeing pair), and two more GREI files (batch 3 took its one
+representative). About 121 rows remain.
+
+**Re-triage.** `--ignore-seen-keys`, then `irw_retriage_ha.py --no-archive`:
+24 `recoverable_format`, 1 `aggregate_continuous` (the parent-modes deposit;
+its duration/score columns). `git status` was clean afterwards.
+
+**Hit rate: 14/25 shipped**, 69 tables, 471,773 responses. The other eleven:
+- **PII, four** (free-text narratives every time; Ben ruled no overrides for
+  batch 3's skips, and the same rule applies):
+  - Greek ACE/STAIC adolescents (zenodo 8289606): trauma narratives about
+    12-15-year-olds.
+  - SlaVaCo vaccine CAWI (dvn/zglgwp): side-effect and comment columns with
+    clinical narratives.
+  - German smartphone panel (zenodo 13832954): a self-disclosed health
+    condition in free text.
+  - Parent modes / self-compassion (zenodo 18571186): ACE narratives, SONA
+    IDs, session timestamps.
+- **Rejected, six:**
+  - Totals or means only: the figshare self-compassion deposit, teachers' job
+    insecurity, and EFL perfectionism.
+  - VCVGZ RCT: 83 patients (N<100).
+  - Mendeley gtz9bfpvvm: **the same 700 people as nr9388gbzf** (shipped as
+    `mellat_2022_*`). It is a 90-column subset; response vectors match
+    699-700/700.
+  - Appearance anxiety (zenodo 15874643): 26 rows copy another row's 85-item
+    vector under different demographics (padding).
+- **Licence, one:** HRQoL in health-science students (zenodo 7782495): the
+  Zenodo API says CC BY but the readme says CC BY-NC-ND. Logged in
+  `license_blocked_candidates.csv`.
+
+All 69 tables pass `run_qc` (no fail) and `irw-validate --profile upload`
+(69/69), with N>=100 and >=2 items. All 14 scripts were re-run from scratch
+after the forks finished and reproduced byte-identical output.
+
+| script | tables (items x N) | notes |
+|---|---|---|
+| `kreps_2023_ai_attitudes.py` | ai_attitudes 10 x 1,008 | PLOS One survey experiment; vignette arm -> treat |
+| `gonzalezros_2025_ei_teacher.py` | ostes 24, tmms24 24, eqi 51 x 201 (wave 1-2, treat) | J Intell 2026; EQ-i ships with no set (paper: 30 items 1-4) |
+| `olajubu_2024_srh_hlq.py` | srh_hlq 40 x 1,090 | SAGE Open Nursing 2026; HLQ41-44 column copies not shipped |
+| `kul_2026_math_resilience.py` | math_self_concept 4, math_self_efficacy 4, academic_buoyancy 4 x 443 | deposit codebook; 5 mean-fill cells -> NA |
+| `schroeter_2015_pain_attachment.py` | ffbhr 12, hads 14, ecrr 36, rq 4 x ~171 | PLOS One 2015; 99 -> NA |
+| `mellat_2022_wellbeing.py` | 15 tables x 700 | paper paywalled; no permitted sets (open question) |
+| `mairean_2024_health_death_anxiety.py` | css12 12, shai 18, panas 20, das 15, hscm 3 x 405 | PANAS/DAS twice -> wave 1-2, undocumented |
+| `alqerem_2025_asthma.py` | pedsql_asthma 28, gina_control 4, mars5 5, asthma_knowledge 7, anq 4 x 400 | PedsQL raw rebuilt from the 0-100 transform (asserted) |
+| `bauwens_2022_childcare.py` | 12 tables x ~338 | Front Psychol 2021; Qualtrics codes 1,4..9 -> 1-7 by label order |
+| `luttenberger_2021_bouldering.py` | madrs 10, phq9 9, gad7 7, gse 10, ferus 12, scl_social 9, fkb 10, rses 10 x 156 (waves, treat) | value-label ranges |
+| `cao_2024_burnout.py` | work_stress 24, mbi 22, mspss 12 x 326 | MBI 1-5 in file vs 1-7 in the (different-sample) paper; no set |
+| `ahmed_2025_ptsd_coping.py` | pcl5 20, coping 13 x 714 | no paper; value-label ranges |
+| `bacon_2025_self_silencing.py` | stss 31, phq9 9, cfni45 45 x 518 | no paper; sets from the published instruments |
+| `thiessen_2023_choking.py` | bfi10 10, scs 23, sas 21, csia 16 x 177 | Open Psychol J 2023; mean-filled copies dropped |
+
+New lessons:
+- **Check new deposits against each other, not only against `data/`.** Two
+  Mendeley deposits from one group held the same 700 people under different
+  titles; only a cross-fork comparison caught it.
+- **"Totals only" was the commonest reject** (4 of 6). The triage's
+  `resp_scale_mixed` fires on mixed-range composite columns just as readily as
+  on item blocks.
+- **Padding, not resubmission:** a row repeated under *different*
+  demographics is a fabricated copy, and it condemns the file. A row repeated
+  with identical demographics is a resubmission, which is dropped.
+
+Staged: 69 rows in `dictionary_auto.csv` (with `codebook_at_ingest.csv`) and
+69 in `tags/tags_auto.csv` (CRLF -> LF). Age Range came from `cov_age` where it
+was usable, and is blank for luttenberger, which has no age data. Quota samples
+labelled "representative" (Lucid) are not tagged Representative.
+
+Item text:
+- **Shipped (9 tables, all `data_labels` + `study_materials`):**
+  - `kreps_2023_ai_attitudes`: English, from the Qualtrics question-text
+    header row.
+  - `alqerem_2025_gina_control`: Arabic as administered, with the deposit's
+    English in `_translated`.
+  - `bauwens_2022_{autonomy,work_pressure,red_tape,empowering_leadership,
+    supervisory_support,lmx,technostress_inhibitors}`: Dutch stems and
+    7-point anchors from the .sav labels.
+
+  All passed normalize_nulls, `validate_items.R --resp-csv`, `audit_batch.R`,
+  `irw-validate` and `check_provenance.R`. Provenance and NOT_NEEDED mapping
+  rows are appended.
+- **Not shipped, with where the text is:**
+  - gonzalezros: Spanish stems in the variable labels; EQ-i is a block, and
+    TMMS-24/TSES are unregistered.
+  - olajubu: full English stems and value labels; waits on the HLQ rights
+    call.
+  - kul: both label levels empty; the wording is in the unpublished
+    manuscript.
+  - schroeter: no item labels; published German FFbH-R/HADS-D/ECR-RD/RQ.
+    HADS and ECR are blocks.
+  - mairean: labels empty or repeat the code; published Romanian adaptations.
+  - alqerem PedsQL/MARS-5: both levels complete, but licensed instruments.
+    Knowledge and ANQ ship scored correctness.
+  - mellat: no labels at either level; the instruments are named only in the
+    paywalled paper.
+  - bauwens technostress_creators/safety/quality: elliptical stems with the
+    lead-in missing. Engagement is UWES (a block); exhaustion is published
+    MBI/UBOS.
+  - luttenberger: short symptom tags; the SPHQ carries German PHQ-9 stems,
+    one mislabelled. SCL is a block.
+  - cao: no labels at either level.
+  - ahmed: English labels, but the administered language is undocumented.
+  - bacon: positional labels.
+  - thiessen: English stems and anchors; no register rows, and the SAS/CSIA
+    wording was altered.
+
+No uploads, no discovery. `search_terms_log.csv`, `repo_triage_seen_keys.csv`
+and `human_review/` were not touched. The TODO's batch-3 PII-ruling item is
+removed (Ben, 2026-10-02: no overrides), and its issues-page item now points
+at datapages/irw PR #305.
