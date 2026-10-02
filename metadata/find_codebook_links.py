@@ -27,6 +27,13 @@ codebook named `S1_File.pdf` gets no link; that is the honest answer.
                  dataverse_ddi   Dataverse's public DDI export for a tabular
                                  file (variable names + labels), which works
                                  even when the file itself is guestbook-gated
+                 typed_codebook  a document the repository itself types as a
+                                 codebook (LDbase lists "Codebook: <title>")
+                 package_doc     a CRAN package's help page for the dataset
+                                 the table's build script loads (load("x.rda"),
+                                 data(x), pkg::x): the package documentation IS
+                                 the codebook. Only that dataset, never the
+                                 whole manual
                  recorded_at_ingest
                                  the codebook file whoever built the table
                                  named, via stage_dict_row.py `codebook_url`
@@ -36,7 +43,9 @@ codebook named `S1_File.pdf` gets no link; that is the honest answer.
 
 Hosts with an API that lists a deposit's files: OSF, Dataverse (Harvard and
 dataverse.nl), figshare (incl. the frontiersin/plos portals), Zenodo, Mendeley
-Data. Only tables in the matching *metadata.csv are swept: the biblio files
+Data, GitHub, GitLab; LDbase (its server-rendered pages list typed documents);
+CRAN (the reference manual's topic index); openpsychometrics.org (the zip the
+table's reference or script names, listed inside -- #2787). Only tables in the matching *metadata.csv are swept: the biblio files
 keep rows for renamed and retired tables (#2767). doi.org links are routed by DOI prefix, and resolved by one HEAD request
 only when the prefix is unknown. Everything else (PLOS supplementary files,
 statistics offices, openICPSR, which returns 403 to scripts) is recorded in the
@@ -76,6 +85,7 @@ import argparse
 import csv
 import io
 import json
+import os
 import re
 import socket
 import sys
@@ -125,13 +135,15 @@ README = re.compile(r"read[\s_-]?me|l[eé]ame", re.I)
 ##.Rdata/.rds file is data, whatever it is called.
 CODE_EXT = re.compile(r"\.(r|py|do|sps|sas|jl|m|ipynb|rdata|rds)$", re.I)
 
-HOST_PACE = {"osf": 2.5, "dataverse": 0.5, "figshare": 0.5, "figshare_collection": 0.5, "zenodo": 0.7, "mendeley": 0.7, "doi": 0.5}
+HOST_PACE = {"osf": 2.5, "dataverse": 0.5, "figshare": 0.5, "figshare_collection": 0.5, "zenodo": 0.7,
+             "mendeley": 0.7, "doi": 0.5, "github": 1.0, "gitlab": 1.0, "ldbase": 1.5, "cran": 0.5,
+             "opsych": 1.0}
 _last_call: Dict[str, float] = {}
 
 
 def match(name: str) -> Optional[str]:
-    if CODE_EXT.search(name):
-        return None
+    if CODE_EXT.search(name) or re.search(r"templat|plantilla|modelo_de", name, re.I):
+        return None     ##a blank codebook TEMPLATE documents nothing (#2787)
     if CODEBOOK.search(name):
         return "name_codebook"
     if README.search(name):
@@ -172,6 +184,27 @@ def route(url: str) -> Tuple[str, str]:
     if net == "data.mendeley.com":
         m = re.match(r"/datasets/([a-z0-9]{10})", path)
         return ("mendeley", m.group(1)) if m else ("skip", "mendeley_unparsed")
+    if net == "github.com":
+        m = re.match(r"/([^/]+)/([^/]+?)(?:\.git)?(?:/(?:tree|blob)/([^/]+)(/.*)?)?/?$", path)
+        if not m:
+            return "skip", "github_unparsed"
+        owner, repo, ref, sub = m.groups()
+        if (owner.lower(), repo.lower()) == ("ben-domingue", "irw"):
+            return "skip", "irw_own_script"     ##our own simulation/build scripts
+        if sub and "/blob/" in path:
+            sub = sub.rsplit("/", 1)[0]         ##a file link: its folder
+        return "github", f"{owner}/{repo}@{ref or ''}:{(sub or '').strip('/')}"
+    if net == "gitlab.com":
+        m = re.match(r"/(.+?)(?:/-/.*)?/?$", path)
+        return ("gitlab", m.group(1)) if m else ("skip", "gitlab_unparsed")
+    if net == "ldbase.org":
+        m = re.match(r"/(datasets|projects|documents)/([0-9a-f-]{36})", path)
+        return ("ldbase", f"{m.group(1)}/{m.group(2)}") if m else ("skip", "ldbase_unparsed")
+    if net == "cran.r-project.org":
+        m = re.search(r"/packages?/([A-Za-z0-9.]+)", path) or re.search(r"package=([A-Za-z0-9.]+)", p.query)
+        return ("cran", m.group(1)) if m else ("skip", "cran_unparsed")
+    if net == "openpsychometrics.org":
+        return "opsych", ""                     ##the zip is per table; resolved in main()
     if net == "openicpsr.org":
         return "skip", "openicpsr_blocks_scripts"
     if net == "journals.plos.org":
@@ -230,6 +263,32 @@ def get(url: str, host: str, method: str = "GET", tries: int = 5):
                 time.sleep(10 * (attempt + 1))
                 continue
             return -1, str(e)
+    return -1, None
+
+
+def get_raw(url: str, host: str, tries: int = 3, accept: str = "*/*"):
+    """Like get(), for HTML and binary bodies: (status, bytes or None)."""
+    for attempt in range(tries):
+        wait = HOST_PACE.get(host, 1.0) - (time.time() - _last_call.get(host, 0))
+        if wait > 0:
+            time.sleep(wait)
+        _last_call[host] = time.time()
+        headers = {"User-Agent": UA, "Accept": accept}
+        if host == "github" and os.environ.get("GITHUB_TOKEN"):
+            headers["Authorization"] = "Bearer " + os.environ["GITHUB_TOKEN"]
+        try:
+            with urllib.request.urlopen(urllib.request.Request(url, headers=headers), timeout=120) as r:
+                return r.status, r.read(60_000_000)
+        except urllib.error.HTTPError as e:
+            if e.code in (429, 500, 502, 503, 504) and attempt < tries - 1:
+                time.sleep(15 * (attempt + 1))
+                continue
+            return e.code, None
+        except (urllib.error.URLError, TimeoutError):
+            if attempt < tries - 1:
+                time.sleep(10)
+                continue
+            return -1, None
     return -1, None
 
 
@@ -352,7 +411,116 @@ def resolve_doi(doi: str) -> Tuple[str, str]:
     return (h, k) if h != "doi" else ("skip", "doi_loop")
 
 
+def list_github(key: str) -> dict:
+    """key = owner/repo@ref:subpath; the repository tree, under subpath."""
+    repo, rest = key.split("@", 1)
+    ref, sub = rest.split(":", 1)
+    if not ref:
+        s, b = get_raw(f"https://api.github.com/repos/{repo}", "github", accept="application/vnd.github+json")
+        if s != 200:
+            return {"status": f"error:{s}"}
+        ref = json.loads(b)["default_branch"]
+    s, b = get_raw(f"https://api.github.com/repos/{repo}/git/trees/{urllib.parse.quote(ref)}?recursive=1",
+                   "github", accept="application/vnd.github+json")
+    if s != 200:
+        return {"status": f"error:{s}"}
+    out = []
+    for e in json.loads(b).get("tree") or []:
+        pth = e.get("path", "")
+        if e.get("type") != "blob" or (sub and not pth.startswith(sub + "/")):
+            continue
+        q = urllib.parse.quote(pth)
+        out.append({"name": pth.rsplit("/", 1)[-1], "path": pth,
+                    "url": f"https://github.com/{repo}/blob/{ref}/{q}",
+                    "raw": f"https://raw.githubusercontent.com/{repo}/{ref}/{q}"})
+    return {"status": "ok", "landing": f"https://github.com/{repo}", "files": out}
+
+
+def list_gitlab(key: str) -> dict:
+    pid = urllib.parse.quote(key, safe="")
+    s, b = get_raw(f"https://gitlab.com/api/v4/projects/{pid}", "gitlab", accept="application/json")
+    if s != 200:
+        return {"status": f"error:{s}"}
+    ref = json.loads(b).get("default_branch") or "main"
+    out, page = [], 1
+    while page:
+        s, b = get_raw(f"https://gitlab.com/api/v4/projects/{pid}/repository/tree?recursive=true"
+                       f"&per_page=100&page={page}", "gitlab", accept="application/json")
+        if s != 200:
+            return {"status": f"error:{s}"}
+        rows = json.loads(b)
+        for e in rows:
+            if e.get("type") == "blob":
+                q = urllib.parse.quote(e["path"])
+                out.append({"name": e["name"], "path": e["path"],
+                            "url": f"https://gitlab.com/{key}/-/blob/{ref}/{q}",
+                            "raw": f"https://gitlab.com/{key}/-/raw/{ref}/{q}"})
+        page = page + 1 if len(rows) == 100 else 0
+    return {"status": "ok", "landing": f"https://gitlab.com/{key}", "files": out}
+
+
+def list_ldbase(key: str) -> dict:
+    """LDbase has no open API, but its pages list documents by type.
+
+    A document titled "Codebook: X" is typed as a codebook BY THE REPOSITORY,
+    which is stronger evidence than a file name. A /documents/ link is itself a
+    document: its title is matched like a file name.
+    """
+    url = f"https://ldbase.org/{key}"
+    s, b = get_raw(url, "ldbase", accept="text/html")
+    if s != 200:
+        return {"status": f"error:{s}"}
+    h = b.decode("utf-8", "replace")
+    out, seen = [], set()
+    if key.startswith("documents/"):
+        t = re.search(r"<title>\s*(?:Metadata for Document:\s*)?(.*?)\s*(?:\|.*)?</title>", h, re.S)
+        out.append({"name": html_unescape(t.group(1)) if t else key, "url": url})
+    for a, txt in re.findall(r'<a[^>]+href="(/documents/[0-9a-f-]{36})"[^>]*>(.*?)</a>', h, re.S):
+        txt = html_unescape(re.sub(r"\s+", " ", re.sub(r"<[^>]+>", "", txt))).strip()
+        if a in seen:
+            continue
+        seen.add(a)
+        typed = txt.lower().startswith("codebook:")
+        out.append({"name": txt.split(":", 1)[1].strip() if typed else txt,
+                    "url": "https://ldbase.org" + a, "typed": typed})
+    return {"status": "ok", "landing": url, "files": out}
+
+
+def html_unescape(x: str) -> str:
+    import html
+    return html.unescape(x)
+
+
+def list_cran(pkg: str) -> dict:
+    """The package's help topics, from the official reference-manual index."""
+    url = f"https://search.r-project.org/CRAN/refmans/{pkg}/html/00Index.html"
+    s, b = get_raw(url, "cran", accept="text/html")
+    if s != 200:
+        return {"status": f"error:{s}"}
+    topics = sorted(set(re.findall(r'href="([^"/#]+)\.html"', b.decode("utf-8", "replace"))))
+    return {"status": "ok", "landing": f"https://cran.r-project.org/package={pkg}",
+            "files": [{"name": t, "url": f"https://search.r-project.org/CRAN/refmans/{pkg}/html/{t}.html",
+                       "topic": True} for t in topics if t != "00Index"]}
+
+
+def list_opsych(zipname: str) -> dict:
+    """The files inside one openpsychometrics.org zip (all < 10 MB, 10-02)."""
+    import zipfile
+    url = f"https://openpsychometrics.org/_rawdata/{zipname}"
+    s, b = get_raw(url, "opsych")
+    if s != 200 or not b:
+        return {"status": f"error:{s}"}
+    try:
+        names = [n for n in zipfile.ZipFile(io.BytesIO(b)).namelist() if not n.endswith("/")]
+    except zipfile.BadZipFile:
+        return {"status": "error:bad_zip"}
+    return {"status": "ok", "landing": url,
+            "files": [{"name": n.rsplit("/", 1)[-1], "inner": n, "url": url} for n in names]}
+
+
 LISTERS = {"zenodo": list_zenodo, "figshare": list_figshare, "figshare_collection": list_figshare_collection, "mendeley": list_mendeley,
+           "github": list_github, "gitlab": list_gitlab, "ldbase": list_ldbase, "cran": list_cran,
+           "opsych": list_opsych,
            "dataverse": list_dataverse, "osf": list_osf}
 
 
@@ -377,6 +545,8 @@ def download_url(link: dict) -> Optional[str]:
         return u + "?download=1"
     if h == "mendeley":
         return u
+    if h in ("github", "gitlab"):
+        return link.get("raw") or None
     return None
 
 
@@ -510,7 +680,7 @@ def read_csv(path: Path) -> List[dict]:
 
 def write_csv(path: Path, rows: List[dict], fields: List[str]) -> None:
     with path.open("w", encoding="utf-8", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=fields, lineterminator="\n")
+        w = csv.DictWriter(f, fieldnames=fields, lineterminator="\n", extrasaction="ignore")
         w.writeheader()
         w.writerows(rows)
 
@@ -560,6 +730,66 @@ def check_readmes(links: List[dict], offline: bool) -> None:
         x.setdefault("evidence", "")
 
 
+def table_context() -> Tuple[Dict[str, List[str]], Dict[str, str]]:
+    """table -> its build scripts (stage 13), and table -> its biblio citation text."""
+    scripts = {r["table"]: [x for x in re.split(r"[;|]\s*", r.get("scripts") or "") if x]
+               for r in read_csv(TABLE_SCRIPTS)}
+    cite: Dict[str, str] = {}
+    for b in BIBLIOS:
+        for r in read_csv(HERE / b):
+            cite.setdefault(r["table"], (r.get("Reference_x") or "") + " " + (r.get("BibTex") or ""))
+    return scripts, cite
+
+
+def script_text(paths: List[str]) -> str:
+    out = []
+    for p in paths:
+        try:
+            out.append((HERE.parent / p).read_text(encoding="utf-8", errors="replace"))
+        except OSError:
+            pass
+    return "\n".join(out)
+
+
+def opsych_zip(table: str, scripts: Dict[str, List[str]], cite: Dict[str, str]) -> Optional[str]:
+    """The openpsychometrics.org zip a table's citation or build script names.
+
+    Exactly one, or None: several candidates (or none) is not something to pick
+    between.
+    """
+    zips = set(re.findall(r"openpsychometrics\.org/_rawdata/([A-Za-z0-9_.-]+\.zip)",
+                          cite.get(table, "") + " " + script_text(scripts.get(table, []))))
+    return zips.pop() if len(zips) == 1 else None
+
+
+def cran_datasets(table: str, pkg: str, scripts: Dict[str, List[str]]) -> set:
+    """Names the table's build script loads or uses as data from the package.
+
+    Battery scripts build one table per section and end it with
+    save(df, file="<table>.Rdata") or write.csv(df, file="<table>.csv"), so the
+    section ending in THIS table's file is the one read; a script with no such
+    write is read whole. Candidates are only kept if they are help topics of
+    the package (checked by the caller), so `NAME$...` and `x <- NAME` are safe
+    to collect: a base function never appears in a package's topic index.
+    """
+    src = script_text(scripts.get(table, []))
+    if not src:
+        return set()
+    writes = list(re.finditer(r"""(?:save|write\.csv|write\.table|fwrite|write_csv)\([^)]*?file\s*=\s*["']([^"']+)["']""", src))
+    seg = src
+    for i, m in enumerate(writes):
+        stem = re.sub(r"\.(rdata|rda|csv|rds)$", "", m.group(1).rsplit("/", 1)[-1], flags=re.I)
+        if stem.lower() == table.lower():
+            seg = src[(writes[i - 1].end() if i else 0):m.start()]
+            break
+    names = set(re.findall(r"""load\(\s*["'](?:[^"']*/)?([A-Za-z0-9_.]+)\.(?:rda|rdata)["']""", seg, re.I))
+    names |= set(re.findall(r"""\bdata\(\s*["']?([A-Za-z][A-Za-z0-9_.]*)""", seg))
+    names |= set(re.findall(re.escape(pkg) + r"::([A-Za-z][A-Za-z0-9_.]*)", seg))
+    names |= set(re.findall(r"\b([A-Za-z][A-Za-z0-9_.]*)\$", seg))
+    names |= set(re.findall(r"<-\s*([A-Za-z][A-Za-z0-9_.]*)\s*(?:$|\n|\[)", seg))
+    return {n for n in names if n not in ("list", "package")}
+
+
 def ingest_links(live: set) -> List[dict]:
     """recorded_at_ingest rows from codebook_at_ingest.csv, for live tables.
 
@@ -603,13 +833,18 @@ def main() -> int:
         live = {r["table"] for r in read_csv(HERE / b.replace("biblio", "metadata"))}
         tables += [(r["table"], r.get("URL__for_data_") or "") for r in read_csv(HERE / b) if r["table"] in live]
     live_tables = {t for t, _ in tables}
+    scripts_of, cite_of = table_context()
 
     ##--new-only: what is already committed stands; only unseen tables are swept
     kept_links: List[dict] = []
     kept_checked: List[dict] = []
     if args.new_only:
         prev_checked = [r for r in read_csv(CHECKED_OUT) if r["table"] in live_tables]
-        done = {r["table"] for r in prev_checked if r["outcome"] != "not_yet_checked"}
+        ##a table whose host was out of scope and is now listable (#2787) is
+        ##swept again; everything else already checked stands
+        newly = {r["table"] for r in prev_checked
+                 if r["outcome"].startswith("out_of_scope") and route(r["data_url"])[0] != "skip"}
+        done = {r["table"] for r in prev_checked if r["outcome"] != "not_yet_checked"} - newly
         kept_checked = [r for r in prev_checked if r["table"] in done]
         kept_links = [r for r in read_csv(LINKS_OUT)
                       if r["table"] in done and r["how_found"] != "recorded_at_ingest"]
@@ -624,6 +859,9 @@ def main() -> int:
         routed[t] = []
         for u in urls:
             h, k = route(u)
+            if h == "opsych":
+                z = opsych_zip(t, scripts_of, cite_of)
+                h, k = ("opsych", z) if z else ("skip", "opsych_no_zip_named")
             if h == "doi":
                 ck = f"doi|{k}"
                 if ck not in cache and not args.offline and (not hosts or "doi" in hosts):
@@ -633,6 +871,16 @@ def main() -> int:
             routed[t].append((u, h, k))
 
     todo = sorted({(h, k) for rs in routed.values() for _, h, k in rs if h in LISTERS and (not hosts or h in hosts)})
+    ##An offline FULL run rebuilds both CSVs from the local listing cache alone.
+    ##A cache that is missing deposits (a fresh worktree, a deleted cache) would
+    ##silently drop every table it lacks -- it did, on 10-02, down to 299 of
+    ##1,028 tables before anything was committed. Refuse; --new-only is safe.
+    if args.offline and not args.new_only:
+        missing = [d for d in todo if f"{d[0]}|{d[1]}" not in cache]
+        if len(missing) > 0.05 * max(len(todo), 1):
+            sys.exit(f"--offline without --new-only would rebuild from a cache missing "
+                     f"{len(missing)} of {len(todo)} deposits and drop their rows. "
+                     f"Use --new-only --offline, or run online to fill the cache.")
     n = 0
     for h, k in todo:
         ck = f"{h}|{k}"
@@ -669,11 +917,20 @@ def main() -> int:
                 row["outcome"] = res["status"]
                 continue
             hits = []
+            wanted = cran_datasets(t, k, scripts_of) if h == "cran" else set()
             for f in res.get("files") or []:
-                how = match(f["name"])
+                if f.get("topic"):
+                    ##a CRAN help topic counts only for the dataset this table loads
+                    if f["name"] in wanted:
+                        hits.append({"table": t, "url": f["url"], "file_name": f"{k}::{f['name']}",
+                                     "host": h, "how_found": "package_doc", "checked_at": row["checked_at"]})
+                    continue
+                how = "typed_codebook" if f.get("typed") else match(f["name"])
                 if how:
-                    hits.append({"table": t, "url": f["url"], "file_name": f.get("path") or f["name"],
-                                 "host": h, "how_found": how, "checked_at": row["checked_at"]})
+                    name = (f"{f['name']} (inside {k})" if h == "opsych" else f.get("path") or f["name"])
+                    hits.append({"table": t, "url": f["url"], "file_name": name, "raw": f.get("raw", ""),
+                                 "host": h, "how_found": how, "checked_at": row["checked_at"],
+                                 "evidence": (f"in zip: {f['inner']}" if h == "opsych" else "")})
                 if f.get("ddi"):
                     hits.append({"table": t, "url": f["ddi"], "file_name": f["name"], "host": h,
                                  "how_found": "dataverse_ddi", "checked_at": row["checked_at"]})
@@ -682,7 +939,7 @@ def main() -> int:
             ##decoding abbreviations (FamBel = family_belonging), which is the
             ##guessing this script refuses; record the count and the deposit's
             ##landing page so a page can say "19 codebook files in the deposit".
-            for kind in ("name_codebook", "name_readme"):
+            for kind in ("name_codebook", "name_readme", "typed_codebook", "package_doc"):
                 same = [x for x in hits if x["how_found"] == kind]
                 for x in same:
                     x["n_same_kind_in_deposit"] = len(same)
@@ -701,7 +958,8 @@ def main() -> int:
     links = ingest_links(live_tables) + kept_links + links
     ##one row per (table, url): a deposit reached by two routes (a multi-URL
     ##cell, a child component) lists the same file twice. Keep the strongest.
-    rank = {"recorded_at_ingest": 0, "name_codebook": 1, "readme_names_columns": 2,
+    rank = {"recorded_at_ingest": 0, "typed_codebook": 1, "package_doc": 1, "name_codebook": 1,
+            "readme_names_columns": 2,
             "name_readme": 3, "dataverse_ddi": 4}
     best: Dict[Tuple[str, str], dict] = {}
     for x in links:

@@ -33,7 +33,8 @@ class NameMatchTest(unittest.TestCase):
         ##a data file named variables_* (caught in the 10-02 sweep), the code
         ##that writes a codebook, and R data files
         for n in ["variables_BG_excloutliers.csv", "codebook.R", "make_codebook.py",
-                  "variables_NA.Rdata", "codebook.rds", "data.csv", "S1_File.pdf"]:
+                  "variables_NA.Rdata", "codebook.rds", "data.csv", "S1_File.pdf",
+                  "CODEBOOK_TEMPLATE.docx"]:
             self.assertIsNone(fcl.match(n), n)
 
 
