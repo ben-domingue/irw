@@ -271,3 +271,16 @@ in item-text scope and are not triaged. Working files: oneoff/itemtext-triage-wa
 - degirolamo: English WHO codebook numbers pag7/pag12 differently from the Italian dictionary and pag5_2_1 anchors run
   the other way -- map by the Italian dictionary.
 - martindelcampo .sav: AQArguing factor label repeats AQAnger's item list.
+
+**Wave 10 extraction notes (slice 20, Ben's go 2026-10-02)**
+- degirolamo_2022_tipi / _cmq: map codes by the deposit's ITALIAN dictionary (the English WHO codebook numbers pag7/pag12
+  differently). CMQ items are Bruder 2013 (CC BY) reached via WHO COSMO: the English original is the text to cite; the
+  Italian rendering may be WHO's (all rights reserved), so do not ship it as `item_text` without the original.
+- martindelcampo_2020_cvcv: .sav labels (CVCV1-36) are the depositors' own English translation; originator Gurrola-Pena
+  2018 (CC BY) prints 24 items. Table has 34 items; record coverage. martindelcampo_2020_tipi: Gosling express grant.
+- meco_l1_comprehension: wave-1 wording in OSF h7b2z comp-questions sheet; ~391/708 codes worded (55%); wave-2-only codes
+  blank. Assumes sites sharing a code asked the same question; say so in the public note.
+- zhang_2026_tcs_honesty: T-TCS items 10-15 from PsyArXiv brg9w (CC BY 4.0). zhang_2026_wisdom: items 1/5/11/14 from
+  PsyArXiv p25c2 (CC0, 2016).
+- modzelewska_2021_*: study-authored; paper Table 3 + s004.docx; .sav labels give the code-to-item map.
+- herreromontes_2022_audit: AUDIT register ship_with_note; English stems in s002.docx.
