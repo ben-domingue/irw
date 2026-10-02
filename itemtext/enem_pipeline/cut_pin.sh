@@ -14,7 +14,7 @@ cd "$(dirname "$0")"
 if [ "${1:-}" = "--check" ]; then
   W=${2:-12_parse_booklet_pdf.py}
   B=${W%.py}
-  newest=$(ls -1 $B.v*.py 2>/dev/null | sort -V | tail -1)
+  newest=$(ls -1 pins/$(basename "$B").v*.py 2>/dev/null | sort -V | tail -1)
   [ -n "$newest" ] || { echo "no pin exists"; exit 1; }
   a=$(md5sum < "$W" | cut -d" " -f1); b=$(md5sum < "$newest" | cut -d" " -f1)
   if [ "$a" = "$b" ]; then
@@ -34,7 +34,12 @@ case "$V" in *.py|*/*) echo "ERROR: '$V' is a filename, not a version tag."
   echo "       usage: cut_pin.sh <version> [script.py]"; exit 2;; esac
 SRC=${2:-12_parse_booklet_pdf.py}
 [ -f "$SRC" ] || { echo "ERROR: no such script: $SRC"; exit 2; }
-DST=${SRC%.py}.$V.py
+# Pins live in pins/, which is what is committed. They used to be cut beside
+# the working scripts; every consumer still globbed the top level after they
+# were tidied in here, so from a clean checkout the pin lookup found nothing
+# and 31_assemble_batch.py wrote an EMPTY build record. One home, read by all.
+mkdir -p pins
+DST=pins/$(basename "${SRC%.py}").$V.py
 rm -f "$DST"
 cp "$SRC" "$DST"
 a=$(md5sum < "$SRC" | cut -d' ' -f1)

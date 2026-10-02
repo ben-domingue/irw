@@ -27,7 +27,11 @@ T = "/scratch/users/mazzafe/itemtext_years"
 
 def pin(stem):
     import glob, re
-    c = sorted(glob.glob(os.path.join(HERE, f"{stem}.v*.py")),
+    # pins/ is where cut_pin.sh writes and what is committed. This used to
+    # glob HERE, found nothing once the pins were tidied into pins/, and fell
+    # back to the live script -- so --pin was a no-op and nobody noticed,
+    # because every pin was byte-identical to its live script anyway.
+    c = sorted(glob.glob(os.path.join(HERE, "pins", f"{stem}.v*.py")),
                key=lambda p: int(re.search(r"\.v(\d+)\.py$", p).group(1)))
     if not c:
         return os.path.join(HERE, f"{stem}.py")

@@ -180,6 +180,8 @@ Response CSVs are the #1942-corrected build, not the pre-fix ones.
 - Any case where following a rule here would require inventing an item code,
   an option letter, or a `resp` value.
 - A recovery that does not satisfy **both** of R15's conditions.
+- Removing a rendering of a stimulus that already shipped, even in
+  favour of a demonstrably correct one (R13's replace case).
 
 ## R14. A table the accessibility edition dropped is recovered from the standard one
 
@@ -294,15 +296,73 @@ The audit in `54_relocate_descriptions.py` flags any stem whose last
 — a well-formed item describes its figure before asking about it. Three things
 trip it and only the first is a defect:
 
-- **misplaced** — belongs to another item; goes in `MOVES` with the evidence;
+- **misplaced** — belongs to another item; goes in `OPS` with the evidence;
 - **option set** — `Descrição das alternativas` describes the five options, so
   it correctly follows the question;
-- **own figure** — printed after the options but genuinely this item's.
+- **own figure** — printed after the options but genuinely this item's; goes
+  in `KEEP` with the evidence, *including* when the item is also an `OPS`
+  donor whose own block survives the move.
 
-Never strip a misplaced description without first looking for its owner. All
-three found so far had one, each already shipped and each carrying no
-description of its own, so the fix was a move. `--apply` refuses to run if the
-audit turns up a case in neither list.
+Never strip a misplaced description without first looking for its owner.
+`--apply` refuses to run if the audit turns up a case in neither list.
+
+### What the full 2013–2025 read added (2026-10-02, #2462)
+
+The first three cases were all the same easy shape: one block, at the end of
+the donor, going to an owner that had none. Scaling to 30 blocks broke every
+one of those assumptions, so each operation now states the four things that
+cannot be inferred.
+
+**Which block.** 10 of 27 donors carry two description blocks, one their own
+and one misplaced, and in 7 the misplaced block is *not* the last. Taking the
+last block would have corrupted both items in those cases — 2018 MT 111725's
+page-foot blocks are the frequency quadro of QUESTÃO 156 followed by 157's own
+cartesian-mesh figure. `cut_from` names the block verbatim.
+
+**Where it ends.** A description is not always the tail of the stem. 2022 CH
+44230 prints its own question *after* the block, so a cut that runs to the end
+of the stem carries the question off with the figure. `cut_to` names the text
+that follows; absent means the block genuinely runs to the end.
+
+**Where it lands.** The relocated block goes where the booklet printed it:
+after the stimulus, **before the sentence that asks the question**. Appending
+it to the end of the recipient — what this pass did until 2026-10-02 —
+reproduces in the recipient the exact shape this rule calls malformed, which
+is why `KEEP` used to carry the recipient 89518. It also breaks back-
+references: 2018 MT 15884's surviving description opens *"A mesma figura
+anterior"*, which points at nothing unless the moved block precedes it. Where
+the recipient is an LC item with an empty `TEXTO I`/`TEXTO II` slot, that slot
+is the insert point and decides itself.
+
+An anchor must span the **label** of an existing block, not just its body:
+anchoring on the body inserts the new block between a label and the text it
+introduces, leaving two `Descrição ...:` lines and an orphaned body.
+
+**Whether it lands at all.** Sometimes the recipient already has the content by
+another route, and then the block is removed from the donor without being
+re-homed (`op="drop"`). All three cases are 2018 quadros that R14 already
+recovered from the standard booklet, which is the edition the candidates in the
+response tables actually sat — so the standard rendering is the one to keep and
+the accessibility prose would merely state the same figures twice. The block
+still has to leave the wrong item. Note that `55_recover_tables.py` runs
+*after* this pass, so a drop is justified by the finished state of the year,
+not by the state mid-pipeline.
+
+### Replacing a corrupt rendering — NOT YET RULED
+
+2022 CH 97262 is the one case where the recipient already held the block's
+content but **wrongly**: its `TEXTO 2` is a scrambled dump of the infographic
+with the percentages in one order and the labels in another, so read in
+document order it pairs *Mulher sem cônjuge e com filho(s)* with 30,4 % where
+the printed figure is 56,9 %. The item asks which factors intensify
+discrimination, so the scramble inverts the answer. The relocated prose block
+carries the correct pairings and **replaces** the dump.
+
+This is the only operation in the pass that deletes shipped text, and deleting
+a shipped rendering in favour of a better one is not covered by R2, R13, R14 or
+R15. It is applied and flagged for an explicit ruling rather than treated as
+settled; see R11. If the ruling goes the other way the fix is to keep both
+renderings, which is a one-line change to that entry.
 
 ## R15. Text recovered from INEP's own booklet is not generated text
 

@@ -25,5 +25,5 @@ batch, so the build can be reproduced exactly:
 | 48_mark_scripts.py | 48_mark_scripts.v7.py | `b87714d40e5db5c174b331dd7851acf6` |
 | 49_option_conventions.py | 49_option_conventions.v2.py | `a7c7870a5774efa50e1ce52d3e1acb66` |
 | 53_stacked_fractions.py | 53_stacked_fractions.v1.py | `eecd7aa92e357e3e1d05c548ab64624c` |
-| 54_relocate_descriptions.py | 54_relocate_descriptions.v1.py | `5445a1f88bd48a2f315dfa1c29182f88` |
+| 54_relocate_descriptions.py | 54_relocate_descriptions.v2.py | `20e815208de24a947807eaee75f288fd` |
 | 55_recover_tables.py | 55_recover_tables.v1.py | `cf542ff149350b004527ec0c4cd13884` |
