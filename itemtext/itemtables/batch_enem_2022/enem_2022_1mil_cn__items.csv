@@ -8616,8 +8616,7 @@ extremidade superior da barra,
 há uma seta vertical para baixo 
 com	a	indicação	do	vetor	F .
 CM
-ρ
-F
+F⃗
 Mantendo-se	 a	 força	 vetor F paralela à muleta, 
 varia-se	 lentamente	 o	 ângulo	 entre	 a	 muleta	 e	 a	
 vertical, até o máximo ângulo imediatamente anterior 
@@ -8636,14 +8635,10 @@ indicando o vetor N, uma horizontal para a direita,
 indicando o vetor f e, e uma vertical para baixo, 
 indicando o vetor P.
 CM
-ρ
-F
-ρ
-P
-ρ
-f_e
-ρ
-N",0,NA,NA,NA,NA,"Portuguese","A"
+F⃗
+P⃗
+f⃗_e
+N⃗",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2022_1mil_cn","enem_2022_1mil_cn_1",85445,"ENEM 2022 - CN","11
 LARANJA
 2º DIA
@@ -8691,8 +8686,7 @@ extremidade superior da barra,
 há uma seta vertical para baixo 
 com	a	indicação	do	vetor	F .
 CM
-ρ
-F
+F⃗
 Mantendo-se	 a	 força	 vetor F paralela à muleta, 
 varia-se	 lentamente	 o	 ângulo	 entre	 a	 muleta	 e	 a	
 vertical, até o máximo ângulo imediatamente anterior 
@@ -8711,14 +8705,10 @@ N, e uma vertical para baixo indicando o vetor P.
 No	ponto	onde	a	barra	toca	o	chão,	há	uma	seta	
 horizontal para a esquerda, indicando o vetor f_e.
 CM
-ρ
-F
-ρ
-N
-ρ
-P
-ρ
-fe",0,NA,NA,NA,NA,"Portuguese","B"
+F⃗
+N⃗
+P⃗
+f⃗e",0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2022_1mil_cn","enem_2022_1mil_cn_1",85445,"ENEM 2022 - CN","11
 LARANJA
 2º DIA
@@ -8766,8 +8756,7 @@ extremidade superior da barra,
 há uma seta vertical para baixo 
 com	a	indicação	do	vetor	F .
 CM
-ρ
-F
+F⃗
 Mantendo-se	 a	 força	 vetor F paralela à muleta, 
 varia-se	 lentamente	 o	 ângulo	 entre	 a	 muleta	 e	 a	
 vertical, até o máximo ângulo imediatamente anterior 
@@ -8787,14 +8776,10 @@ indicando o vetor N, uma seta vertical para baixo,
 indicando vetor P, e uma horizontal para a direita, 
 indicando o vetor f_e.
 CM
-ρ
-F
-ρ
-P
-ρ
-fe
-ρ
-N",0,NA,NA,NA,NA,"Portuguese","C"
+F⃗
+P⃗
+f⃗e
+N⃗",0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2022_1mil_cn","enem_2022_1mil_cn_1",85445,"ENEM 2022 - CN","11
 LARANJA
 2º DIA
@@ -8842,8 +8827,7 @@ extremidade superior da barra,
 há uma seta vertical para baixo 
 com	a	indicação	do	vetor	F .
 CM
-ρ
-F
+F⃗
 Mantendo-se	 a	 força	 vetor F paralela à muleta, 
 varia-se	 lentamente	 o	 ângulo	 entre	 a	 muleta	 e	 a	
 vertical, até o máximo ângulo imediatamente anterior 
@@ -8863,14 +8847,10 @@ N, e uma vertical para baixo, indicando o vetor P.
 No	ponto	onde	a	barra	toca	o	chão,	há	uma	seta	
 horizontal para a esquerda, indicando o vetor f_e.
 CM
-ρ
-F
-ρ
-P
-ρ
-fe
-ρ
-N",0,NA,NA,NA,NA,"Portuguese","D"
+F⃗
+P⃗
+f⃗e
+N⃗",0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2022_1mil_cn","enem_2022_1mil_cn_1",85445,"ENEM 2022 - CN","11
 LARANJA
 2º DIA
@@ -8918,8 +8898,7 @@ extremidade superior da barra,
 há uma seta vertical para baixo 
 com	a	indicação	do	vetor	F .
 CM
-ρ
-F
+F⃗
 Mantendo-se	 a	 força	 vetor F paralela à muleta, 
 varia-se	 lentamente	 o	 ângulo	 entre	 a	 muleta	 e	 a	
 vertical, até o máximo ângulo imediatamente anterior 
@@ -8939,14 +8918,10 @@ ponto	onde	a	 barra	toca	o	 chão,	há	duas	setas:
 uma vertical para cima, indicando o vetor N, e uma 
 horizontal para a direita, indicando o vetor f_e.
 CM
-ρ
-F
-ρ
-P
-ρ
-fe
-ρ
-N",1,NA,NA,NA,NA,"Portuguese","E"
+F⃗
+P⃗
+f⃗e
+N⃗",1,NA,NA,NA,NA,"Portuguese","E"
 "enem_2022_1mil_cn","enem_2022_1mil_cn_1",41054,"ENEM 2022 - CN","11
 LARANJA
 2º DIA

@@ -190,6 +190,13 @@ def rebuild(y, outdir):
     # anchors are sentences in the finished stem.
     run([sys.executable, os.path.join(HERE, "55_recover_tables.py"),
          "--items-dir", outdir, "--year", y, "--apply"])
+    # Text the content stream emitted out of visual order. Runs after the
+    # option letter has been stripped (46) -- its guard compares the cell
+    # against the printed line character for character, so a cell still
+    # carrying its letter would simply fail to match and be reported.
+    run([sys.executable, os.path.join(HERE, "56_reading_order.py"),
+         "--items-dir", outdir, "--year", y, "--apply"]
+        + sum((["--pdf", p] for p in parses.values()), []))
     return outdir
 
 def main():

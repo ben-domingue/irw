@@ -19,11 +19,12 @@ batch, so the build can be reproduced exactly:
 | 23_decode_symbolmt.py | 23_decode_symbolmt.v2.py | `a88f54b15f7658a46b5c5548e364b088` |
 | 25_repair_2021.py | 25_repair_2021.v1.py | `2dc1f84f6a30b6f95907adc4e4fe17ce` |
 | 26_strip_page_furniture.py | 26_strip_page_furniture.v11.py | `91a2b32477ecb2f0db325fd1fa6293a7` |
-| 29_decode_2021_notation.py | 29_decode_2021_notation.v3.py | `d9c0fa833f287e1ce128cd363bd4dac1` |
-| 43_normalize_glyphs.py | 43_normalize_glyphs.v1.py | `90db23205f06ad41a9ccd0d4f119b7a8` |
+| 29_decode_2021_notation.py | 29_decode_2021_notation.v4.py | `e0f129e6b0a43838cbaf467115bb97a0` |
+| 43_normalize_glyphs.py | 43_normalize_glyphs.v2.py | `bc05d3678ac26e95e4864da004582fa6` |
 | 46_strip_option_letter.py | 46_strip_option_letter.v3.py | `86b69494098458373fb90d662417ddde` |
 | 48_mark_scripts.py | 48_mark_scripts.v8.py | `0d8e4edd1507be45fbb7db367694d2f2` |
 | 49_option_conventions.py | 49_option_conventions.v2.py | `a7c7870a5774efa50e1ce52d3e1acb66` |
 | 53_stacked_fractions.py | 53_stacked_fractions.v1.py | `eecd7aa92e357e3e1d05c548ab64624c` |
 | 54_relocate_descriptions.py | 54_relocate_descriptions.v2.py | `20e815208de24a947807eaee75f288fd` |
 | 55_recover_tables.py | 55_recover_tables.v1.py | `cf542ff149350b004527ec0c4cd13884` |
+| 56_reading_order.py | 56_reading_order.v1.py | `2b7bee366d7958c02091c4444eaba694` |
