@@ -14,9 +14,16 @@ codebook named `S1_File.pdf` gets no link; that is the honest answer.
   how_found      name_codebook   codebook / data dictionary / variable list /
                                  data key / DDI / the Spanish and Portuguese
                                  equivalents in the file name
-                 name_readme     README only. Kept apart because a README may or
-                                 may not describe the variables; whether the
-                                 site shows these is undecided (#2766)
+                 name_readme     a README whose text does NOT name the table's
+                                 columns (or could not be read): MCP only
+                 readme_names_columns
+                                 a README whose TEXT names at least
+                                 README_MIN_NAMES of the table's own column or
+                                 item names (`evidence` lists them). A sample of
+                                 25 README-only hits (10-02) split ~half
+                                 describing the variables, ~40% install steps,
+                                 folder layouts and code notes; the name alone
+                                 cannot tell them apart, the text can
                  dataverse_ddi   Dataverse's public DDI export for a tabular
                                  file (variable names + labels), which works
                                  even when the file itself is guestbook-gated
@@ -39,7 +46,9 @@ Outputs:
 
 Deposit file listings are cached in metadata/logs/codebook_listings.json
 (git-ignored), so the name patterns can be changed and re-applied with
---offline without touching any API.
+--offline without touching any API. README texts and each table's names (its
+item names, read from Redivis, plus the cov_* and traced source columns in
+column_docs.csv) are cached beside it the same way.
 
 Not a pipeline stage: a full crawl is ~700 deposits, OSF has to be paced
 (~2.5s per call, osf-api sweeps 429 when fanned out), and codebook files do
@@ -52,6 +61,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import io
 import json
 import re
 import socket
@@ -69,6 +79,16 @@ BIBLIOS = ["biblio.csv", "comps_biblio.csv", "nominal_biblio.csv", "simsyn_bibli
 LINKS_OUT = HERE / "codebook_links.csv"
 CHECKED_OUT = HERE / "codebook_links_checked.csv"
 CACHE = HERE / "logs" / "codebook_listings.json"
+README_CACHE = HERE / "logs" / "codebook_readme_text.json"
+NAMES_CACHE = HERE / "logs" / "codebook_table_names.json"
+COLUMN_DOCS = HERE / "column_docs.csv"
+TABLE_SCRIPTS = HERE / "table_scripts.csv"
+README_MIN_NAMES = 3
+README_MAX_WORD_ITEMS = 100
+##Names too generic to show that a text is about THIS table's columns.
+NAME_STOP = {"id", "item", "resp", "age", "sex", "gender", "group", "time", "date",
+             "wave", "score", "total", "type", "name", "data", "year", "country",
+             "condition", "trial", "rt", "school", "class", "grade", "study"}
 UA = "irw-codebook-links/1.0 (+https://itemresponsewarehouse.org; ben-domingue/irw#2766)"
 
 ##Python does not happy-eyeball, and figshare/OSF/doi.org publish dead AAAA
@@ -321,6 +341,149 @@ LISTERS = {"zenodo": list_zenodo, "figshare": list_figshare, "figshare_collectio
 
 ##--- main ------------------------------------------------------------------
 
+##--- README content check -------------------------------------------------
+
+def download_url(link: dict) -> Optional[str]:
+    """Where a link's raw bytes are, per host (the stored url is a landing page)."""
+    u, h = link["url"], link["host"]
+    if h == "osf":
+        m = re.match(r"https://osf\.io/([a-z0-9]+)/files/osfstorage/([0-9a-f]+)", u)
+        return (f"https://files.osf.io/v1/resources/{m.group(1)}/providers/osfstorage/{m.group(2)}"
+                if m else None)
+    if h == "dataverse":
+        m = re.match(r"https://([^/]+)/file\.xhtml\?fileId=(\d+)", u)
+        return f"https://{m.group(1)}/api/access/datafile/{m.group(2)}" if m else None
+    if h in ("figshare", "figshare_collection"):
+        m = re.search(r"[?&]file=(\d+)", u)
+        return f"https://ndownloader.figshare.com/files/{m.group(1)}" if m else None
+    if h == "zenodo":
+        return u + "?download=1"
+    if h == "mendeley":
+        return u
+    return None
+
+
+def extract_text(raw: bytes, name: str) -> str:
+    """Plain text from a README's bytes. Lossy is fine: only names are matched."""
+    import subprocess
+    import tempfile
+    ext = name.lower().rsplit(".", 1)[-1] if "." in name else ""
+    if ext == "pdf" or raw[:4] == b"%PDF":
+        with tempfile.NamedTemporaryFile(suffix=".pdf") as f:
+            f.write(raw); f.flush()
+            try:
+                return subprocess.run(["pdftotext", "-l", "30", f.name, "-"], capture_output=True,
+                                      timeout=60).stdout.decode("utf-8", "replace")
+            except (OSError, subprocess.SubprocessError):
+                return ""
+    if ext == "docx" or raw[:2] == b"PK":
+        import zipfile
+        try:
+            x = zipfile.ZipFile(io.BytesIO(raw)).read("word/document.xml").decode("utf-8", "replace")
+            return re.sub(r"<[^>]+>", " ", x.replace("</w:p>", "\n"))
+        except Exception:
+            return ""
+    text = raw.decode("utf-8", "replace")
+    if ext in ("rtf",) or text.startswith("{\\rtf"):
+        text = re.sub(r"\\[a-z]+-?\d* ?|[{}]", " ", text)
+    if ext in ("html", "htm"):
+        text = re.sub(r"<[^>]+>", " ", text)
+    ##.doc and anything else binary: keep the printable runs
+    return re.sub(r"[^\x09\x0a\x0d\x20-\x7e\u00a0-\uffff]+", " ", text)
+
+
+def readme_text(link: dict, cache: Dict[str, str], offline: bool) -> Optional[str]:
+    if link["url"] in cache:
+        return cache[link["url"]]
+    if offline:
+        return None
+    dl = download_url(link)
+    if not dl:
+        return None
+    host = link["host"]
+    for attempt in range(3):
+        wait = HOST_PACE.get(host, 1.0) - (time.time() - _last_call.get(host, 0))
+        if wait > 0:
+            time.sleep(wait)
+        _last_call[host] = time.time()
+        try:
+            req = urllib.request.Request(dl, headers={"User-Agent": UA})
+            with urllib.request.urlopen(req, timeout=60) as r:
+                raw = r.read(5_000_000)
+            break
+        except urllib.error.HTTPError as e:
+            if e.code in (429, 500, 502, 503, 504) and attempt < 2:
+                time.sleep(15 * (attempt + 1))
+                continue
+            cache[link["url"]] = ""     ##e.g. a guestbook-gated Dataverse file
+            return ""
+        except (urllib.error.URLError, TimeoutError):
+            if attempt < 2:
+                time.sleep(10)
+                continue
+            return None
+    cache[link["url"]] = extract_text(raw, link["file_name"])[:400_000]
+    return cache[link["url"]]
+
+
+def table_names(table: str, dataset: Optional[str], cache: Dict[str, List[str]],
+                docs: Dict[str, List[dict]], offline: bool,
+                scripts: Optional[List[str]] = None) -> Optional[List[str]]:
+    """The table's names: item names (Redivis), cov_* suffixes, traced source
+    columns, and the names quoted in its build scripts."""
+    key = table.lower()
+    if key not in cache:
+        if offline or not dataset:
+            return None
+        try:
+            import redivis
+            q = redivis.query(f"SELECT DISTINCT item FROM datapages.{dataset}.{table} LIMIT 2000")
+            items = [str(x) for x in q.to_pandas_dataframe(progress=False)["item"]]
+        except Exception as e:
+            print(f"  item names for {table}: {type(e).__name__}", file=sys.stderr)
+            return None
+        cache[key] = items
+    items = cache[key]
+    ##A table with many items is usually a stimulus set (words, pictures): its
+    ##items are not variables, and a word list matches any English README.
+    if len(items) > README_MAX_WORD_ITEMS:
+        items = [i for i in items if re.search(r"[0-9_]|[a-z][A-Z]", i)]
+    names = set(items) | script_literals(scripts or [])
+    for r in docs.get(key, []):
+        if r["column"].startswith("cov_"):
+            names.add(r["column"][4:])
+        if r.get("source_column"):
+            names.add(r["source_column"])
+    return sorted({n.strip() for n in names if n and len(n.strip()) >= 3 and n.strip().lower() not in NAME_STOP})
+
+
+def script_literals(paths: List[str]) -> set:
+    """Quoted names in a table's build scripts: the SOURCE columns it reads.
+
+    A README usually documents the source file, whose columns the script then
+    renames (`subid` -> id), so the IRW's own names would miss it. Only
+    identifier-shaped literals count; file names are dropped.
+    """
+    out = set()
+    for p in paths:
+        try:
+            src = (HERE.parent / p).read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            continue
+        for m in re.findall(r"""["']([A-Za-z][A-Za-z0-9_.]{2,40})["']""", src):
+            ##identifier-shaped only (BC_10, SubID, ptci3): a plain word from a
+            ##script -- "files", "university" -- shows nothing about a README
+            if (re.search(r"[0-9_]|[a-z][A-Z]", m)
+                    and not re.search(r"\.(csv|sav|dta|xlsx?|txt|rds|rdata|zip|r|py|json|data)$", m, re.I)):
+                out.add(m)
+    return out
+
+
+def names_in_text(names: List[str], text: str) -> List[str]:
+    low = text.lower()
+    return [n for n in names if re.search(r"(?<![a-z0-9_])" + re.escape(n.lower()) + r"(?![a-z0-9_])", low)]
+
+
 def read_csv(path: Path) -> List[dict]:
     if not path.exists():
         return []
@@ -335,12 +498,59 @@ def write_csv(path: Path, rows: List[dict], fields: List[str]) -> None:
         w.writerows(rows)
 
 
+def check_readmes(links: List[dict], offline: bool) -> None:
+    """Promote README rows whose text names the table's columns (in place)."""
+    texts = json.loads(README_CACHE.read_text()) if README_CACHE.exists() else {}
+    names_cache = json.loads(NAMES_CACHE.read_text()) if NAMES_CACHE.exists() else {}
+    scripts_of = {r["table"].lower(): [x for x in re.split(r"[;|]\s*", r.get("scripts") or "") if x]
+                  for r in read_csv(TABLE_SCRIPTS)}
+    docs: Dict[str, List[dict]] = {}
+    for r in read_csv(COLUMN_DOCS):
+        docs.setdefault(r["table"].lower(), []).append(r)
+    dataset_of = {}
+    for b in BIBLIOS:
+        for r in read_csv(HERE / b.replace("biblio", "metadata")):
+            if r.get("dataset"):
+                dataset_of[r["table"].lower()] = r["dataset"]
+    readmes = [x for x in links if x["how_found"] == "name_readme"]
+    for i, x in enumerate(readmes):
+        text = readme_text(x, texts, offline)
+        names = table_names(x["table"], dataset_of.get(x["table"].lower()), names_cache, docs, offline,
+                            scripts_of.get(x["table"].lower()))
+        if text is None or names is None:
+            x["evidence"] = "not checked"
+        elif not text.strip():
+            x["evidence"] = "unreadable"
+        else:
+            hit = names_in_text(names, text)
+            x["evidence"] = f"names {len(hit)}/{len(names)}" + (": " + ", ".join(hit[:8]) if hit else "")
+            if len(hit) >= README_MIN_NAMES:
+                x["how_found"] = "readme_names_columns"
+        if not offline and i % 25 == 24:
+            README_CACHE.write_text(json.dumps(texts, ensure_ascii=False))
+            NAMES_CACHE.write_text(json.dumps(names_cache, ensure_ascii=False))
+    if not offline:
+        README_CACHE.write_text(json.dumps(texts, ensure_ascii=False))
+        NAMES_CACHE.write_text(json.dumps(names_cache, ensure_ascii=False))
+    ##n_same_kind counts the README kinds again now that some were promoted
+    by_dep: Dict[Tuple[str, str], int] = {}
+    for x in links:
+        if x["how_found"] in ("name_readme", "readme_names_columns"):
+            by_dep[(x["table"], x["how_found"])] = by_dep.get((x["table"], x["how_found"]), 0) + 1
+    for x in links:
+        if x["how_found"] in ("name_readme", "readme_names_columns"):
+            x["n_same_kind_in_deposit"] = by_dep[(x["table"], x["how_found"])]
+        x.setdefault("evidence", "")
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--hosts", default="", help="comma list to crawl (default: all crawlable)")
     ap.add_argument("--limit", type=int, default=0, help="crawl at most N new deposits")
     ap.add_argument("--offline", action="store_true", help="no network; re-match cached listings")
     ap.add_argument("--recheck", action="store_true", help="re-list deposits already in the cache")
+    ap.add_argument("--no-readme-check", action="store_true",
+                    help="skip reading README texts (README hits stay name_readme)")
     args = ap.parse_args()
     hosts = set(filter(None, args.hosts.split(",")))
     today = date.today().isoformat()
@@ -429,8 +639,11 @@ def main() -> int:
             kinds = sorted({x["how_found"] for x in hits})
             row["outcome"] = "hit:" + "+".join(kinds) if kinds else "no_match"
 
+    if not args.no_readme_check:
+        check_readmes(links, args.offline)
+
     write_csv(LINKS_OUT, links, ["table", "url", "file_name", "host", "how_found",
-                                 "n_same_kind_in_deposit", "deposit_url", "checked_at"])
+                                 "n_same_kind_in_deposit", "deposit_url", "evidence", "checked_at"])
     write_csv(CHECKED_OUT, checked, ["table", "data_url", "host", "deposit", "outcome", "checked_at"])
     print(f"{len(links)} links for {len({x['table'] for x in links})} tables -> {LINKS_OUT.name}", file=sys.stderr)
     return 0

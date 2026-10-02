@@ -44,6 +44,8 @@ metadata/**/*.txt
 !metadata/codebook_links.csv
 !metadata/codebook_links_checked.csv
 metadata/logs/codebook_listings.json
+metadata/logs/codebook_readme_text.json
+metadata/logs/codebook_table_names.json
 # Aggregator registry (openESM, ...) keyed by the dictionary's `Source via` (#2421).
 !metadata/aggregators.csv
 # Covariate value labels (#1775): the irw_meta table and the generator's
