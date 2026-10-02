@@ -2653,6 +2653,117 @@ lozano_2018_participation,cov_followup,0,No
 lozano_2018_participation,cov_followup,1,Sí
 lozano_2018_self_care,cov_followup,0,No
 lozano_2018_self_care,cov_followup,1,Sí
+lu_2026_anger,cov_gender,1,Male
+lu_2026_anger,cov_gender,2,Female
+lu_2026_anger,cov_gender,3,Other
+lu_2026_anger,cov_gender,4,Rather not disclose
+lu_2026_anger,cov_married,1,Not married
+lu_2026_anger,cov_married,2,Married or engaged
+lu_2026_anger,cov_parent,1,Yes
+lu_2026_anger,cov_parent,2,No
+lu_2026_anger,cov_soc_class,1,Lower class
+lu_2026_anger,cov_soc_class,2,Working class
+lu_2026_anger,cov_soc_class,3,Lower Middle class
+lu_2026_anger,cov_soc_class,4,Middle class
+lu_2026_anger,cov_soc_class,5,Upper Middle class
+lu_2026_anger,cov_soc_class,6,Upper class
+lu_2026_certainty,cov_gender,1,Male
+lu_2026_certainty,cov_gender,2,Female
+lu_2026_certainty,cov_gender,3,Other
+lu_2026_certainty,cov_gender,4,Rather not disclose
+lu_2026_certainty,cov_married,1,Not married
+lu_2026_certainty,cov_married,2,Married or engaged
+lu_2026_certainty,cov_parent,1,Yes
+lu_2026_certainty,cov_parent,2,No
+lu_2026_certainty,cov_soc_class,1,Lower class
+lu_2026_certainty,cov_soc_class,2,Working class
+lu_2026_certainty,cov_soc_class,3,Lower Middle class
+lu_2026_certainty,cov_soc_class,4,Middle class
+lu_2026_certainty,cov_soc_class,5,Upper Middle class
+lu_2026_certainty,cov_soc_class,6,Upper class
+lu_2026_control,cov_gender,1,Male
+lu_2026_control,cov_gender,2,Female
+lu_2026_control,cov_gender,3,Other
+lu_2026_control,cov_gender,4,Rather not disclose
+lu_2026_control,cov_married,1,Not married
+lu_2026_control,cov_married,2,Married or engaged
+lu_2026_control,cov_parent,1,Yes
+lu_2026_control,cov_parent,2,No
+lu_2026_control,cov_soc_class,1,Lower class
+lu_2026_control,cov_soc_class,2,Working class
+lu_2026_control,cov_soc_class,3,Lower Middle class
+lu_2026_control,cov_soc_class,4,Middle class
+lu_2026_control,cov_soc_class,5,Upper Middle class
+lu_2026_fss,cov_gender,1,Male
+lu_2026_fss,cov_gender,2,Female
+lu_2026_fss,cov_gender,3,Other
+lu_2026_fss,cov_gender,4,Rather not disclose
+lu_2026_fss,cov_married,1,Not married
+lu_2026_fss,cov_married,2,Married or engaged
+lu_2026_fss,cov_parent,1,Yes
+lu_2026_fss,cov_parent,2,No
+lu_2026_fss,cov_soc_class,1,Lower class
+lu_2026_fss,cov_soc_class,2,Working class
+lu_2026_fss,cov_soc_class,3,Lower Middle class
+lu_2026_fss,cov_soc_class,4,Middle class
+lu_2026_fss,cov_soc_class,5,Upper Middle class
+lu_2026_fss,cov_soc_class,6,Upper class
+lu_2026_happiness,cov_gender,1,Male
+lu_2026_happiness,cov_gender,2,Female
+lu_2026_happiness,cov_gender,3,Other
+lu_2026_happiness,cov_gender,4,Rather not disclose
+lu_2026_happiness,cov_married,1,Not married
+lu_2026_happiness,cov_married,2,Married or engaged
+lu_2026_happiness,cov_parent,1,Yes
+lu_2026_happiness,cov_parent,2,No
+lu_2026_happiness,cov_soc_class,1,Lower class
+lu_2026_happiness,cov_soc_class,2,Working class
+lu_2026_happiness,cov_soc_class,3,Lower Middle class
+lu_2026_happiness,cov_soc_class,4,Middle class
+lu_2026_happiness,cov_soc_class,5,Upper Middle class
+lu_2026_happiness,cov_soc_class,6,Upper class
+lu_2026_hope,cov_gender,1,Male
+lu_2026_hope,cov_gender,2,Female
+lu_2026_hope,cov_gender,3,Other
+lu_2026_hope,cov_gender,4,Rather not disclose
+lu_2026_hope,cov_married,1,Not married
+lu_2026_hope,cov_married,2,Married or engaged
+lu_2026_hope,cov_parent,1,Yes
+lu_2026_hope,cov_parent,2,No
+lu_2026_hope,cov_soc_class,1,Lower class
+lu_2026_hope,cov_soc_class,2,Working class
+lu_2026_hope,cov_soc_class,3,Lower Middle class
+lu_2026_hope,cov_soc_class,4,Middle class
+lu_2026_hope,cov_soc_class,5,Upper Middle class
+lu_2026_hope,cov_soc_class,6,Upper class
+lu_2026_optimism,cov_gender,1,Male
+lu_2026_optimism,cov_gender,2,Female
+lu_2026_optimism,cov_gender,3,Other
+lu_2026_optimism,cov_gender,4,Rather not disclose
+lu_2026_optimism,cov_married,1,Not married
+lu_2026_optimism,cov_married,2,Married or engaged
+lu_2026_optimism,cov_parent,1,Yes
+lu_2026_optimism,cov_parent,2,No
+lu_2026_optimism,cov_soc_class,1,Lower class
+lu_2026_optimism,cov_soc_class,2,Working class
+lu_2026_optimism,cov_soc_class,3,Lower Middle class
+lu_2026_optimism,cov_soc_class,4,Middle class
+lu_2026_optimism,cov_soc_class,5,Upper Middle class
+lu_2026_optimism,cov_soc_class,6,Upper class
+lu_2026_stai,cov_gender,1,Male
+lu_2026_stai,cov_gender,2,Female
+lu_2026_stai,cov_gender,3,Other
+lu_2026_stai,cov_gender,4,Rather not disclose
+lu_2026_stai,cov_married,1,Not married
+lu_2026_stai,cov_married,2,Married or engaged
+lu_2026_stai,cov_parent,1,Yes
+lu_2026_stai,cov_parent,2,No
+lu_2026_stai,cov_soc_class,1,Lower class
+lu_2026_stai,cov_soc_class,2,Working class
+lu_2026_stai,cov_soc_class,3,Lower Middle class
+lu_2026_stai,cov_soc_class,4,Middle class
+lu_2026_stai,cov_soc_class,5,Upper Middle class
+lu_2026_stai,cov_soc_class,6,Upper class
 malik_2018_individual_motivation,cov_gender,1,Male
 malik_2018_individual_motivation,cov_gender,2,Female
 malik_2018_individual_motivation,cov_marital_status,1,Single
@@ -2689,6 +2800,16 @@ mancone_2024_ravlt_recall,cov_group,1,Video game session between RAVLT and recal
 mancone_2024_ravlt_recall,cov_group,2,Video game session carried out simultaneously with RAVLT
 mancone_2024_ravlt_recall,cov_group,3,Video game session before starting the RAVLT.
 mancone_2024_ravlt_recall,cov_group,4,RAVLT without any interference from video gaming
+martindelcampo_2020_aq,cov_sex,1,Male
+martindelcampo_2020_aq,cov_sex,2,Female
+martindelcampo_2020_avs,cov_sex,1,Male
+martindelcampo_2020_avs,cov_sex,2,Female
+martindelcampo_2020_cvcv,cov_sex,1,Male
+martindelcampo_2020_cvcv,cov_sex,2,Female
+martindelcampo_2020_ptsd,cov_sex,1,Male
+martindelcampo_2020_ptsd,cov_sex,2,Female
+martindelcampo_2020_tipi,cov_sex,1,Male
+martindelcampo_2020_tipi,cov_sex,2,Female
 mavromoustakos_2016_fasq,cov_flying_phobic_group,1,Non-flying phobic
 mavromoustakos_2016_fasq,cov_flying_phobic_group,2,Flying phobic
 mavromoustakos_2016_probability_scale,cov_flying_phobic_group,1,Non-flying phobic
@@ -2783,6 +2904,102 @@ mistry_2022_hardship,cov_survey_round,1,1st round
 mistry_2022_hardship,cov_survey_round,2,2nd round
 mistry_2022_hardship,cov_urban_rural,1,Urban
 mistry_2022_hardship,cov_urban_rural,2,Rural
+modzelewska_2021_emo_neg,cov_chronic_illness,1,yes
+modzelewska_2021_emo_neg,cov_chronic_illness,2,no
+modzelewska_2021_emo_neg,cov_education,2,elementary
+modzelewska_2021_emo_neg,cov_education,4,high school
+modzelewska_2021_emo_neg,cov_education,5,higher
+modzelewska_2021_emo_neg,cov_gender,1,women
+modzelewska_2021_emo_neg,cov_gender,2,men
+modzelewska_2021_emo_neg,cov_gender,3,other
+modzelewska_2021_emo_neg,cov_had_covid,1,yes
+modzelewska_2021_emo_neg,cov_had_covid,2,no
+modzelewska_2021_emo_neg,cov_income_eval,1,very good
+modzelewska_2021_emo_neg,cov_income_eval,2,good
+modzelewska_2021_emo_neg,cov_income_eval,3,moderate
+modzelewska_2021_emo_neg,cov_income_eval,4,bad
+modzelewska_2021_emo_neg,cov_income_eval,5,very bad
+modzelewska_2021_emo_neg,cov_income_stable,1,yes
+modzelewska_2021_emo_neg,cov_income_stable,2,no
+modzelewska_2021_emo_neg,cov_knows_covid_case,1,yes
+modzelewska_2021_emo_neg,cov_knows_covid_case,2,no
+modzelewska_2021_emo_neg,cov_place,1,country
+modzelewska_2021_emo_neg,cov_place,2,"city below 50,000 residents"
+modzelewska_2021_emo_neg,cov_place,3,city 50 - 500 thousand residents
+modzelewska_2021_emo_neg,cov_place,4,"city 500,000 - 1 million inhabitants"
+modzelewska_2021_emo_neg,cov_place,5,city pow. 1 million inhabitants
+modzelewska_2021_emo_pos,cov_chronic_illness,1,yes
+modzelewska_2021_emo_pos,cov_chronic_illness,2,no
+modzelewska_2021_emo_pos,cov_education,2,elementary
+modzelewska_2021_emo_pos,cov_education,4,high school
+modzelewska_2021_emo_pos,cov_education,5,higher
+modzelewska_2021_emo_pos,cov_gender,1,women
+modzelewska_2021_emo_pos,cov_gender,2,men
+modzelewska_2021_emo_pos,cov_gender,3,other
+modzelewska_2021_emo_pos,cov_had_covid,1,yes
+modzelewska_2021_emo_pos,cov_had_covid,2,no
+modzelewska_2021_emo_pos,cov_income_eval,1,very good
+modzelewska_2021_emo_pos,cov_income_eval,2,good
+modzelewska_2021_emo_pos,cov_income_eval,3,moderate
+modzelewska_2021_emo_pos,cov_income_eval,4,bad
+modzelewska_2021_emo_pos,cov_income_eval,5,very bad
+modzelewska_2021_emo_pos,cov_income_stable,1,yes
+modzelewska_2021_emo_pos,cov_income_stable,2,no
+modzelewska_2021_emo_pos,cov_knows_covid_case,1,yes
+modzelewska_2021_emo_pos,cov_knows_covid_case,2,no
+modzelewska_2021_emo_pos,cov_place,1,country
+modzelewska_2021_emo_pos,cov_place,2,"city below 50,000 residents"
+modzelewska_2021_emo_pos,cov_place,3,city 50 - 500 thousand residents
+modzelewska_2021_emo_pos,cov_place,4,"city 500,000 - 1 million inhabitants"
+modzelewska_2021_emo_pos,cov_place,5,city pow. 1 million inhabitants
+modzelewska_2021_hbeliefs,cov_chronic_illness,1,yes
+modzelewska_2021_hbeliefs,cov_chronic_illness,2,no
+modzelewska_2021_hbeliefs,cov_education,2,elementary
+modzelewska_2021_hbeliefs,cov_education,4,high school
+modzelewska_2021_hbeliefs,cov_education,5,higher
+modzelewska_2021_hbeliefs,cov_gender,1,women
+modzelewska_2021_hbeliefs,cov_gender,2,men
+modzelewska_2021_hbeliefs,cov_gender,3,other
+modzelewska_2021_hbeliefs,cov_had_covid,1,yes
+modzelewska_2021_hbeliefs,cov_had_covid,2,no
+modzelewska_2021_hbeliefs,cov_income_eval,1,very good
+modzelewska_2021_hbeliefs,cov_income_eval,2,good
+modzelewska_2021_hbeliefs,cov_income_eval,3,moderate
+modzelewska_2021_hbeliefs,cov_income_eval,4,bad
+modzelewska_2021_hbeliefs,cov_income_eval,5,very bad
+modzelewska_2021_hbeliefs,cov_income_stable,1,yes
+modzelewska_2021_hbeliefs,cov_income_stable,2,no
+modzelewska_2021_hbeliefs,cov_knows_covid_case,1,yes
+modzelewska_2021_hbeliefs,cov_knows_covid_case,2,no
+modzelewska_2021_hbeliefs,cov_place,1,country
+modzelewska_2021_hbeliefs,cov_place,2,"city below 50,000 residents"
+modzelewska_2021_hbeliefs,cov_place,3,city 50 - 500 thousand residents
+modzelewska_2021_hbeliefs,cov_place,4,"city 500,000 - 1 million inhabitants"
+modzelewska_2021_hbeliefs,cov_place,5,city pow. 1 million inhabitants
+modzelewska_2021_maia,cov_chronic_illness,1,yes
+modzelewska_2021_maia,cov_chronic_illness,2,no
+modzelewska_2021_maia,cov_education,2,elementary
+modzelewska_2021_maia,cov_education,4,high school
+modzelewska_2021_maia,cov_education,5,higher
+modzelewska_2021_maia,cov_gender,1,women
+modzelewska_2021_maia,cov_gender,2,men
+modzelewska_2021_maia,cov_gender,3,other
+modzelewska_2021_maia,cov_had_covid,1,yes
+modzelewska_2021_maia,cov_had_covid,2,no
+modzelewska_2021_maia,cov_income_eval,1,very good
+modzelewska_2021_maia,cov_income_eval,2,good
+modzelewska_2021_maia,cov_income_eval,3,moderate
+modzelewska_2021_maia,cov_income_eval,4,bad
+modzelewska_2021_maia,cov_income_eval,5,very bad
+modzelewska_2021_maia,cov_income_stable,1,yes
+modzelewska_2021_maia,cov_income_stable,2,no
+modzelewska_2021_maia,cov_knows_covid_case,1,yes
+modzelewska_2021_maia,cov_knows_covid_case,2,no
+modzelewska_2021_maia,cov_place,1,country
+modzelewska_2021_maia,cov_place,2,"city below 50,000 residents"
+modzelewska_2021_maia,cov_place,3,city 50 - 500 thousand residents
+modzelewska_2021_maia,cov_place,4,"city 500,000 - 1 million inhabitants"
+modzelewska_2021_maia,cov_place,5,city pow. 1 million inhabitants
 moon_2023_coping_emotion,cov_education,1,No academic background
 moon_2023_coping_emotion,cov_education,2,elementary school graduate
 moon_2023_coping_emotion,cov_education,3,a junior high school graduate
@@ -3111,6 +3328,11 @@ ozkurt_2026_sport_motivation,cov_sport_experience,3,7-9 yıl arası
 ozkurt_2026_sport_motivation,cov_sport_experience,4,10 ve üzeri yıl
 ozkurt_2026_sport_motivation,cov_wrestling_style,1,Grekoromen
 ozkurt_2026_sport_motivation,cov_wrestling_style,2,Serbest
+pajnkihar_2017_cnpi,cov_location,1,UCC1
+pajnkihar_2017_cnpi,cov_location,2,UCC2
+pajnkihar_2017_cnpi,cov_location,4,H1
+pajnkihar_2017_cnpi,cov_location,7,H2
+pajnkihar_2017_cnpi,cov_location,10,UCC1b
 peng_2024_grit,cov_gender,1,男
 peng_2024_grit,cov_gender,2,女
 peng_2024_language_boredom,cov_gender,1,男
@@ -4255,6 +4477,18 @@ szymanska_2017_parenting_difficulty,cov_residence,3,"Town, population 15,000"
 szymanska_2017_parenting_difficulty,cov_residence,4,"City, population 50,000-200,000"
 szymanska_2017_parenting_difficulty,cov_residence,5,"City, population 200,000-500,000"
 szymanska_2017_parenting_difficulty,cov_residence,6,"City, population $>$ 500,000"
+tao_2026_mpai,cov_ethnicity,1,汉族
+tao_2026_mpai,cov_ethnicity,2,少数民族
+tao_2026_mpai,cov_gender,1,男
+tao_2026_mpai,cov_gender,2,女
+tao_2026_mpai,cov_grade,1,大一
+tao_2026_mpai,cov_grade,2,大二
+tao_2026_mpai,cov_grade,3,大三
+tao_2026_mpai,cov_grade,4,大四
+tao_2026_mpai,cov_school_type,1,985
+tao_2026_mpai,cov_school_type,2,211
+tao_2026_mpai,cov_school_type,3,省属本科
+tao_2026_mpai,cov_school_type,4,民办院校
 tatala_2023_religious_experience,cov_church_access,1,lack of access
 tatala_2023_religious_experience,cov_church_access,2,difficult access
 tatala_2023_religious_experience,cov_church_access,3,free access
