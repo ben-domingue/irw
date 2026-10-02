@@ -16628,3 +16628,136 @@ asserted in `data/guzmanmuzante_2025_mts.py`; the output is unchanged. Lead,
 not built: the paper's Table 3 prints all 11 Spanish MTS items as
 administered (CC BY 4.0). That is a paper_order mapping to `MTS_k`, so it needs
 a `verify_<table>.R`.
+
+## 2026-10-02d — human_review re-check batch 2: 25 rows, 21 shipped, 62 tables, 528,477 responses
+
+The next 25 rows of the `resp_scale_mixed` bucket of pool (b), judged by hand.
+Worktree `/home/ben/irw-wt/hr-recheck-batch2` (branch
+`ben-domingue/hr-recheck-batch2`), so the outputs are in **that worktree's**
+`automated_finding/irw_output/` and `itemtext_output/`. Record:
+`leads/human_review_recheck_batch2_2026-10-02.csv`.
+
+**Selection.** Pool (b) is every `human_review/human_review_*.csv`, without
+`googlesheet_humaneye.csv`. The filters:
+- reasons contain `resp_scale_mixed`
+- licence is exactly cc0, cc-by or cc-by-sa
+- 100 <= N <= 50,000 and 8 <= items <= 700
+- DOI or repo-record id (Zenodo record number, Dataverse suffix, figshare id)
+  not in `../data/`, `dictionary_auto.csv` or `../metadata/biblio.csv`
+- de-duplicated on DOI, minus the 10 pilot DOIs
+
+That leaves 244 rows (brief: ~247). By source file: zenodo_backlog 124,
+repo_tierB 74, zenodo 23, repo 16, repo_nonlatin 7. The 25 picks are
+named-instrument validation deposits spread across all five. Ten rows were
+skipped and are listed in the leads file with the reason: three PISA
+school-questionnaire database files (school-level census), and seven SOCIOMET
+peer-nomination files (a near-identical T1-T4 GREI series; take at most one
+later). About 209 rows remain for batch 3.
+
+**Re-triage.** `irw_batch_updated.py runs/hr_recheck_b2_candidates_2026-10-02.csv
+--ignore-seen-keys`, then `irw_retriage_ha.py --no-archive`, as in batch 1.
+All 25 came back `human_assistance` -> `recoverable_format`, as expected.
+`git status` was clean afterwards, so neither `human_review/` nor
+`repo_triage_seen_keys.csv` was touched.
+
+**Hit rate: 21/25 shipped**, 62 tables, 528,477 responses. Of the other four,
+three were skipped for PII and one was rejected:
+- PII, all free-text clinical narratives:
+  - Indonesian OHPS (figshare 30581267): diagnosis histories.
+  - LEQ-CI (zenodo 4297018): implant surgery dates, a named hospital,
+    bereavement.
+  - Arabic CHAOS (zenodo 15708126): medications and case notes about minors,
+    beside named schools.
+- Rejected: DAS-21 alexithymia (Mendeley kgjmh2fwk9). The items have no
+  shared variance (mean inter-item r = .012, alpha = -.16), there is no paper,
+  and the description says the data "reflects realistic response
+  distributions". It looks synthetic.
+
+All 62 tables pass `run_qc` (no fail) and `irw-validate --profile upload`
+(62/62 conform). Every script downloads its own file and accounts for every
+column. Each asserts permitted values per item where a document gives them;
+where none does, the header says so.
+
+| script | tables (items x N) | notes |
+|---|---|---|
+| `khatun_2026_smartphone_addiction.py` | sas 10, paus 6, cmars 10 x 712 | PLOS One paper; age-group files = combined file (asserted); 102 CMARS zeros -> NA |
+| `bertani_2024_afccq.py` | afccq 23 x 1,213 | scored -2..+2 per the paper (labels say 1-5); `_rev` copies (= -x) dropped |
+| `sun_2018_greed.py` | greed 7 x 1,048 (4 samples, cov_study); entitlement, materialism, ssei, bzsg, self_esteem, gse, ipc, neuroticism, trust, bbw, bjw | Liu 2019 PAID read from a PDF Ben supplied; all 1-7 confirmed |
+| `tabordabarata_2024_asthma.py` | asthma_knowledge 21, hls_eu_q47 47, bsi 53 x ~149 | PLOS One 2025; BSI identified from its labelled stems |
+| `wormley_2017_cteq.py` | cteq 42 x 205 | JEEHP 2017; "rev" suffix unexplained |
+| `neivasantos_2026_empathy.py` | bes 19, oeq 8, comm_channels 5 x 105 (wave 1-2) | no paper; each wave < 100, union 105 |
+| `garciabacete_2023_loneliness.py` | loneliness 16 x 213 | GREI T2-post; hobby fillers dropped; ranges from the deposit codebook |
+| `turpochaparro_2026_procrastination.py` | procrastination 14, workload 6, teacher_self_efficacy 10 x 586 | no paper for this sample; scales documented by Lingan-Huaman 2023 |
+| `danielgonzalez_2020_cdrisc10.py` | cdrisc10 10, shs 4, pss 14 x 330 | the deposit's related id (-113) points to the wrong article; the paper is -114 |
+| `delacruzvaldiviano_2024_djgls.py` | djgls 11 x 1,248 | dichotomised 0/1 item scores per the deposit's scoring manual |
+| `mendezhinojosa_2026_ebea.py` | ebea 11 x 1,956 | RIDE 2024; 19 repeated submissions dropped |
+| `sinaii_2025_nih_heals.py` | nih_heals 35 x 363 (4 samples, cov_study) | PLOS Mental Health 2025; `_rev` items stored reversed |
+| `sahin_2026_pmas_ai.py` | pmas 10 x 681; social_desirability 13, life_satisfaction 5, ai_attitudes 12, mind_attribution 17, conspiracy 23 x ~195 | IJHCI paper bot-walled, so no permitted sets; test-retest file dropped (subset, N=52) |
+| `caselli_2023_bbs.py` | bbs 14 x 814 (wave 1-3), abc 16 x 264 | Front Neurol 2023; clinic codes -> person index |
+| `stripp_2021_spnq.py` | spnq 20, who5 5 x 325 | sampleA/B halves = full file (asserted) |
+| `tornoczky_2026_dass21.py` | dass21 21, who5 5, swls 5, panas 20 x 782 | ranges from the deposit codebook; WHO-5 given on a 4-point scale (0-3) |
+| `kalani_2026_bat.py` | bat 33, uwes 9, flourishing 8, boredom 8, workaholism 10 x 418 | UWES coding undocumented, so no permitted set |
+| `summart_2025_whoqol_bref.py` | whoqol_bref 24 x 3,563 | headerless xlsx pinned to the paper's Table 1; q14 = q25 in every row, both dropped |
+| `soylu_2025_mfs.py` | mfs 15 x 478 | 0-3 in half points per the paper; adult + adolescent sheets merged, duplicate rows dropped |
+| `sandoz_2021_birth_trauma.py` | cbts 24, pcl5 20 x 541; epds 10, hads_anxiety 7 x 539 | APA paper paywalled; ranges from instrument documentation |
+| `tsujimura_2022_loh.py` | ipss 8, bdi 21, shim 5, ams 17 x ~1,687 | opaque VAR columns identified by matching the deposit's totals; out-of-range cells -> NA |
+
+New lessons:
+- **Free-text clinical narrative was the PII that bit.** All three skips came
+  from a comment or diagnosis column that would never have been an item.
+  Grep every free-text column before anything else.
+- **Duplicate rows are common in these deposits.** There were repeated
+  submissions (EBEA, 19), exact copies (WHOQOL, MFS, PMAS) and an identical
+  column pair (WHOQOL q14/q25). Check rows and columns for exact duplicates
+  before melting.
+- **A deposit's related identifier can be wrong.** The CD-RISC deposit
+  points at -113, an unrelated article.
+- Ran 8 agents at once (3-4 deposits each). Ben has since asked for **at
+  most two at a time**.
+
+Staged: 62 rows in `dictionary_auto.csv` and 62 in `tags/tags_auto.csv` (the
+tag rows converted CRLF -> LF). Construct type, sample frame and language
+codes were checked against `vocab.md` and the existing rows (`per` for
+Persian, not `fas`).
+
+Item text:
+- **Shipped (5 tables, all `data_labels` + `study_materials`):**
+  - `garciabacete_2023_loneliness`: Spanish and English, from the deposit's
+    codebook PDFs, keyed by variable name.
+  - `mendezhinojosa_2026_ebea`: Spanish stems from the xlsx column headers,
+    options from the paper.
+  - `turpochaparro_2026_procrastination`, `_workload`,
+    `_teacher_self_efficacy`: Spanish stems from the .sav variable labels and
+    endpoint value labels.
+
+  All passed normalize_nulls, `validate_items.R --resp-csv`, `audit_batch.R`
+  and `irw-validate`. Provenance and NOT_NEEDED mapping rows are appended.
+- **Not shipped, with where the text is:**
+  - khatun SAS/PAUS/CMARS: English anchors only; no item labels.
+  - bertani AFCCQ: English variable labels, but administered in Italian; the
+    AFCCQ-IT is in the paper's supplement.
+  - sun (12 tables): positional labels. DGSC G1-G7 are printed in Liu 2019
+    Table 1 (paper_explicit). The others are in their published Chinese
+    versions.
+  - tabordabarata Q: in the paper's Table 1. HLS/BSI: full Portuguese at both
+    label levels, no English.
+  - wormley CTEQ: no labels; the paper's Table 1 has the retained items.
+  - neivasantos BES/OEQ/channels: full Portuguese labels, no English.
+  - danielgonzalez CD-RISC/SHS/PSS: labels are full, but all three are `block`
+    in the rights register.
+  - delacruzvaldiviano DJGLS: no labels; stems are in the deposit's results
+    docx (needs a verify).
+  - sinaii NIH-HEALS: anchors only; stems in Ameli 2018.
+  - sahin (6 tables): labels are construct names only; stems are in the paper.
+  - caselli BBS/ABC: no labels; published instruments.
+  - stripp SpNQ/WHO-5: no labels.
+  - tornoczky (4 tables): headers only.
+  - kalani (5 tables): positional labels.
+  - summart WHOQOL: headerless; Thai stems in the deposit's questionnaire PDF.
+  - soylu MFS: positional; published MFS.
+  - sandoz CBTS/PCL-5/EPDS: French stems in the deposit codebook. HADS is a
+    rights-register `block`.
+  - tsujimura (4 tables): no labels. BDI is a rights-register `block`.
+
+No uploads, no discovery. `search_terms_log.csv`, `repo_triage_seen_keys.csv`
+and `human_review/` were not touched.
