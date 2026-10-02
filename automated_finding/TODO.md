@@ -3,6 +3,53 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## From the 2026-10-02 human_review re-check batch 4 (25 rows, 14 shipped)
+
+- [ ] **69 tables + 9 item text tables need uploading**, from the worktree
+  `/home/ben/irw-wt/hr-recheck-batch4/automated_finding/`: all of
+  `irw_output/` (69 tables), then `itemtext_output/` (9 `__items.csv`:
+  kreps_2023_ai_attitudes, alqerem_2025_gina_control,
+  bauwens_2022_{autonomy,work_pressure,red_tape,empowering_leadership,
+  supervisory_support,lmx,technostress_inhibitors}). Dictionary/tag rows are
+  staged; `uploaded` is unstamped in `itemtext_provenance.csv` and
+  `mapping_verification.csv`.
+- [ ] **Licence call (Ben):** HRQoL/musculoskeletal pain in health-science
+  students (`10.5281/zenodo.7782495`): Zenodo API says CC BY 4.0, the deposit
+  readme says CC BY-NC-ND. Treated as blocked (in
+  `license_blocked_candidates.csv`); if the repository licence governs, CSI-25
+  + NMQ x 338 ship.
+- [ ] **Open questions on batch-4 tables (none blocks upload):**
+  - `mellat_2022_*` (15 tables): instruments named only in the paywalled
+    paper; identities from composite labels, no permitted sets, a few stray
+    codes kept as stored. Hold until the paper is read?
+  - `gonzalezros_2025_eqi`: paper says 30 items 1-4; file has 51 items 1-5.
+    Shipped with no permitted set.
+  - `mairean_2024_panas` / `_das`: two administrations shipped as wave 1-2;
+    what separates them is undocumented.
+  - `cao_2024_mbi`: file 1-5, the author's (different-sample) paper says 1-7.
+    No permitted set.
+  - `alqerem_2025_anq`: scored from raw answers by the key; the deposit's own
+    scored column disagrees in 30/1,600 cells.
+  - `olajubu_2024_srh_hlq`: 40 of 44 items (HLQ41-44 are column copies in the
+    deposit).
+- [ ] **Papers behind paywalls/bot walls, if Ben can supply them:** Mellat et
+  al. 2023 (10.1080/19349637.2022.2121239; names all 15 instruments); Macovei &
+  Mairean 2025 (10.1177/13591053251341191; PANAS/DAS administrations, HSCM
+  format); Al-Qerem et al. 2025 J Asthma (10.1080/02770903.2025.2519100);
+  Luttenberger et al. 2022 BJCP (10.1111/bjc.12347; FERUS items, timepoints).
+- [ ] **Item text leads from batch 4 (not built):** olajubu HLQ (full English
+  stems + value labels; waits on the HLQ rights call); thiessen BFI-10/SCS/SAS/
+  CSIA (English stems + anchors; no register rows); ahmed PCL-5/coping (English
+  labels, administered language undocumented); gonzalezros (Spanish stems; EQ-i
+  is a block, TMMS-24/TSES unregistered); alqerem PedsQL/MARS-5 (Arabic +
+  English at both levels, licensed instruments); luttenberger SPHQ (German
+  PHQ-9 stems, one mislabelled).
+- [ ] **Next step of the re-check, when wanted:** batch 5, the next 25 of the
+  remaining shape-qualified `resp_scale_mixed` rows in pool (b) (about 121
+  left after batch 4's 25 picks and 18 skips; skip list in
+  `leads/human_review_recheck_batch4_2026-10-02.csv`). At most two agents at
+  a time.
+
 ## From the 2026-10-02 human_review re-check batch 3 (25 rows, 19 shipped)
 
 - [x] **64 tables + 5 item text tables uploaded** (ben-domingue, confirmed
@@ -10,21 +57,8 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   (gopal_2021_cas, garciabacete_2023_victimization, suyato_2023_cbq,
   wu_2015_cias, wu_2015_bsrs5). `uploaded` stamped in `itemtext_provenance.csv`
   and `mapping_verification.csv`.
-- [ ] **Issues-page lines for `wu_2015_cias` / `wu_2015_bsrs5`**: both carry
-  the `xue_2025` public_note ("wording only in English, although administered
-  in Chinese"), which forces a callout on `itemtext_issues.qmd` (irw_site repo).
-- [ ] **PII rulings, if Ben wants to override any of the five skips** (all
-  deposit-level; default is skip):
-  - GHQ-12 Odisha (`10.7910/dvn/vjeeie`): GHQ.xlsx is clean; the sibling
-    Mastersheet.xlsx has masked phone numbers, initials, villages + interview
-    dates, free-text disease entries.
-  - Genomic security/privacy questionnaire (`10.7910/dvn/g2uufv`): one
-    free-text "other" cell with a personal sexual-health/illness statement;
-    otherwise GSPQ 73 items x 1,808.
-  - DPES Italian (`10.5281/zenodo.4395625`): two home street addresses in a
-    free-text residence field; otherwise 532 people x 4 instruments.
-  - CRS-R (`10.1016/j.apmr.2024.12.009`) and PRO-CTCAE (`10.5281/zenodo.10435813`):
-    birthdates (explicit, or reconstructable from dates + fractional age).
+- [ ] **Merge datapages/irw PR #305**: the issues-page callouts for
+  `wu_2015_cias` / `wu_2015_bsrs5` (added 2026-10-02).
 - [ ] **Open questions on batch-3 tables (none blocks upload):**
   - `wu_2015_mpi_*`: stored codes 0<1<2 shipped against the file's own value
     labels (0=?, 1=Yes, 2=No); the file's Nscore/SDSscore sums, the paper's
@@ -47,12 +81,6 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   (positional); PL-NIHSS in the paper's S1 Table; talayero flood (3 tables):
   English variable labels as a translated_substitute (the paper has no
   Spanish either), same class as wu_2015_cias.
-- [ ] **Next step of the re-check, when wanted:** batch 4, the next 25 of the
-  remaining shape-qualified `resp_scale_mixed` rows in pool (b) (about 164
-  left after batch 3's 25 picks and 20 skips; skip list in
-  `leads/human_review_recheck_batch3_2026-10-02.csv`). At most two agents at
-  a time.
-
 ## From the 2026-10-02 human_review re-check batch 2 (25 rows, 21 shipped)
 
 - [ ] **62 tables + 5 item text tables need uploading**, from the worktree
