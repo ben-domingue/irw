@@ -16794,3 +16794,6 @@ Further rulings from ben-domingue the same day:
 - `neivasantos_2026_*` waves stay as they are.
 - **Any table with PII is skipped.** The LEQ-CI skip stands; there is no
   "ship without the free-text column" exception.
+- The `rights_register` warnings on `garciabacete_2023_loneliness` (DJG) and
+  `sun_2018_greed` (LBUS) are confirmed false positives: both are code-pattern
+  matches only. The garciabacete item text ships.

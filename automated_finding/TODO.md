@@ -12,11 +12,6 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   turpochaparro_2026_{procrastination,workload,teacher_self_efficacy}).
   Dictionary/tag rows are staged; `uploaded` is unstamped in
   `itemtext_provenance.csv` and `mapping_verification.csv`.
-- [ ] **Confirm the two `rights_register` warnings are false positives:**
-  `garciabacete_2023_loneliness` (codes `Loneliness1..` hit DJG's code regex
-  `^lone|loneliness`; the instrument is Cassidy & Asher) and
-  `sun_2018_greed` (`G1..G7` hit LBUS's `^G[0-9]{1,2}$`; it is the DGS). The
-  garciabacete item text ships, so it rides on this call.
 - [ ] **Item text leads from batch 2 (not built):** DGSC G1-G7 printed in
   Liu 2019 Table 1 (paper_explicit, needs verify); PMAS items 1-10 in
   Sahin 2026 Table 2 (Turkish + back-translation); DA-SpNQ-20 Danish +
