@@ -239,6 +239,19 @@ getrows<-function(l) {
     new_data_rows <- irw_dict[is.na(match(tolower(irw_dict$table), tolower(biblio$table))) | is.na(biblio$BibTex[match(tolower(irw_dict$table), tolower(biblio$table))]), ]
     ##remove nonpublic elements before calling ChatGPT
     new_data_rows <- new_data_rows[!new_data_rows$table %in% irw_notpub$table,]
+    ## Opt-in per source; core waits on the #2401 audit pause. A dictionary row
+    ## for a table that is not live is held back here, before any BibTeX is
+    ## fetched for it: a retired table's row can stay in the dictionary for good
+    ## and costs nothing (#2767).
+    live <- if (isTRUE(l$drop.retired)) {
+        read_live_tables(l$file.live, name,
+                         min_oracle_rows = if (is.null(l$min.live)) 1000 else l$min.live)
+    } else NULL
+    if (isTRUE(l$drop.retired)) {
+        new_data_rows <- keep_live_rows(new_data_rows, live, name,
+                                        "dictionary row held, table not live",
+                                        log.file = log_path("_drop_log.csv"))
+    }
     ## the 4 dictionary sheets (core/comps/nom/sim) are independently
     ## maintained and have drifted: core's license column is "Derived License"
     ## (with a space), comps/nom/sim already use "Derived_License" (underscore)
@@ -277,12 +290,11 @@ getrows<-function(l) {
     ## so a non-name row that got in before this gate existed outlives the fix
     ## unless it is taken out here (#2079).
     biblio <- drop_unshaped_dict_rows(biblio, name, "biblio")
-    ## Renamed and retired tables otherwise keep their rows for good (#2767).
-    ## Opt-in per source; core waits on the #2401 audit pause.
+    ## Biblio carries live tables only (#2767): the rows of renamed and retired
+    ## tables go, whatever the dictionary still lists. See read_live_tables().
     if (isTRUE(l$drop.retired)) {
-        biblio <- drop_retired_biblio_rows(biblio, irw_dict, l$file.live, name,
-                                           min_oracle_rows = if (is.null(l$min.live)) 1000 else l$min.live,
-                                           log.file = log_path("_drop_log.csv"))
+        biblio <- keep_live_rows(biblio, live, name, "biblio row dropped, table not live",
+                                 log.file = log_path("_drop_log.csv"), append = TRUE)
     }
     ## Refresh the dictionary-owned columns on EVERY row, not just the new
     ## ones (#2001). new_data_rows above is, by construction, the rows biblio
@@ -368,8 +380,8 @@ dbs<-list(
     ##oracle; for comps/nom/sim it is written by 05/06/07, which run_pipeline.sh
     ##runs BEFORE this script so it is current. `min.live` is that oracle's
     ##plausibility floor (default 1000, which suits core only). `drop.retired`
-##drops biblio rows whose table is in neither the dictionary nor `file.live`
-##(#2767); not yet on core.
+##keeps biblio to the tables in `file.live`, so a retired table's dictionary
+##row can stay and never publishes (#2767); not yet on core.
     core=list(name="core",
               irw_dict=gsheet2tbl('https://docs.google.com/spreadsheets/d/1nhPyvuAm3JO8c9oa1swPvQZghAvmnf4xlYgbvsFH99s/edit?gid=1337607315#gid=1337607315'),
               user=IRW_OWNER,

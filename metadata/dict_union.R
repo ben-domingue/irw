@@ -239,59 +239,67 @@ drop_dead_dict_rows <- function(auto, live.file, label, min_oracle_rows = 1000,
     auto[keep, , drop = FALSE]
 }
 
-##Drop biblio rows for tables that no longer exist under that name (#2767).
+##Biblio carries LIVE tables only, for sources with `drop.retired` (#2767).
 ##
-##02_biblio.R reads biblio back from Redivis and only ever appends to it, so a
-##renamed or retired table keeps its row for good: after the #2453 rename, 70 of
+##02_biblio.R reads biblio back from Redivis and only ever appended to it, so a
+##renamed or retired table kept its row for good: after the #2453 rename, 70 of
 ##nominal_biblio's 136 rows named pre-rename tables, published beside their
 ##`_nom` replacements, where get_citation and every other client read them.
 ##
-##A row goes only when its table is in NEITHER the dictionary (sheet + automated
-##rows, unioned) NOR the liveness oracle. Both, because each alone is wrong:
-##  - not live alone would drop a table between its draft upload and the publish
-##    click, which has a dictionary row and is not in *metadata.csv yet (the
-##    window drop_dead_dict_rows() holds rows for);
-##  - not in the dictionary alone would repeat the su_2024_* trap, where live
-##    tables lost their provenance because only their dictionary row was missing
-##    (see irw-orphan-biblio-deletion-trap).
-##A table still listed in the dictionary is therefore kept even when it is not
-##live: retiring it is a dictionary edit, not something this decides.
+##Liveness is the source's `file.live` (*metadata.csv), which stages 05-07
+##rebuild from Redivis earlier in the same run. The dictionary does NOT decide:
+##a row for a retired table may stay in the Sheet or dictionary_auto_*.csv for
+##good and simply never reaches biblio, so retiring a table needs no dictionary
+##edit (Ben, 10-02). A table that is drafted but not yet released is not live
+##either; its biblio row arrives on the first run after the release, the same
+##week-long lag every new table already has.
 ##
-##Same plausibility floor as drop_dead_dict_rows(): a missing or truncated
-##oracle drops nothing. `log.file` is always written, empty when nothing went.
-##Non-core sources only for now; core waits on the #2401 audit pause.
-drop_retired_biblio_rows <- function(biblio, dict, live.file, label,
-                                     min_oracle_rows = 1000, log.file = NULL) {
-    write_log <- function(gone) {
-        if (is.null(log.file)) return(invisible(NULL))
-        dir.create(dirname(log.file), showWarnings = FALSE, recursive = TRUE)
-        readr::write_csv(gone, log.file)
-    }
-    none <- biblio[0, intersect(c("table", "Reference_x", "URL__for_data_"), names(biblio)), drop = FALSE]
+##This can never drop a live table, which is the su_2024_* failure (live tables
+##that lost their provenance; see irw-orphan-biblio-deletion-trap).
+##
+##Returns NULL -- "do not filter" -- when the oracle is missing or under the
+##source's plausibility floor, so a truncated listing can never empty biblio.
+read_live_tables <- function(live.file, label, min_oracle_rows = 1000) {
     if (is.null(live.file) || !file.exists(live.file)) {
-        warning(label, ": no liveness oracle (", live.file, "); dropping no ",
-                "biblio rows.", call. = FALSE)
-        write_log(none)
-        return(biblio)
+        warning(label, ": no liveness oracle (", live.file, "); biblio is not ",
+                "filtered to live tables this run.", call. = FALSE)
+        return(NULL)
     }
     live <- readr::read_csv(live.file, show_col_types = FALSE, progress = FALSE)
     if (!"table" %in% names(live) || nrow(live) < min_oracle_rows) {
         warning(label, ": ", live.file, " has ", nrow(live), " row(s); too few ",
-                "to trust as a liveness oracle. Dropping no biblio rows.",
+                "to trust as a liveness oracle. Biblio is not filtered this run.",
                 call. = FALSE)
-        write_log(none)
-        return(biblio)
+        return(NULL)
     }
-    known <- c(dict_key(live$table), dict_key(dict[["table"]]))
-    if ("table.lower" %in% names(dict)) known <- c(known, dict_key(dict[["table.lower"]]))
-    gone <- !dict_key(biblio$table) %in% known
+    dict_key(live$table)
+}
+
+##Keep the rows of `df` whose table is live; NULL `live` keeps everything.
+##`log.file`, when given, is always written (empty when nothing went), with a
+##`why` column so one log can carry both the dictionary rows held back and the
+##biblio rows dropped.
+keep_live_rows <- function(df, live, label, why, log.file = NULL, append = FALSE) {
+    ##02_biblio.R strips a stray ".csv" from names only after this runs
+    key <- sub("\\.csv$", "", dict_key(df$table))
+    gone <- if (is.null(live)) rep(FALSE, nrow(df)) else !key %in% live
     if (any(gone)) {
-        message(label, ": dropping ", sum(gone), " biblio row(s) for tables in ",
-                "neither the dictionary nor ", live.file, ": ",
-                paste(biblio$table[gone], collapse = ", "))
+        message(label, ": ", why, ": ", sum(gone), " row(s): ",
+                paste(df$table[gone], collapse = ", "))
     }
-    write_log(biblio[gone, names(none), drop = FALSE])
-    biblio[!gone, , drop = FALSE]
+    if (!is.null(log.file)) {
+        cols <- intersect(c("table", "Reference_x", "URL__for_data_"), names(df))
+        out <- data.frame(why = rep(why, sum(gone)), df[gone, cols, drop = FALSE],
+                          check.names = FALSE, stringsAsFactors = FALSE)
+        if (!"table" %in% names(out)) out$table <- character(0)
+        dir.create(dirname(log.file), showWarnings = FALSE, recursive = TRUE)
+        if (append && file.exists(log.file)) {
+            prev <- readr::read_csv(log.file, col_types = readr::cols(.default = "c"))
+            out <- dplyr::bind_rows(prev, dplyr::mutate(out, dplyr::across(dplyr::everything(), as.character)))
+        }
+        readr::write_csv(out, log.file)
+    }
+    df[!gone, , drop = FALSE]
 }
 
 ##Always written, even when empty: an empty file says "nothing is waiting",
