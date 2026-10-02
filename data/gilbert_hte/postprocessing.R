@@ -1,4 +1,5 @@
 ##full formatting done in: gilbert_share/06 IL-HTE Econ/analysis/
+##that cleaning code is now in this folder, one file per dataset: il_hte_00_setup.R, then il_hte_<N>.R (N = gilbert_meta_N) (#2765)
 
 ##goto 06 IL-HTE Econ/analysis/data/clean
 
