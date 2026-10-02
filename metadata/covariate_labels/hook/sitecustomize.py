@@ -126,18 +126,18 @@ except Exception:
     pass
 
 
-def _meta_only(path, reader):
+def _meta_only(path, reader, data=None):
     """Metadata through the unwrapped pyreadstat reader (no double logging).
-    File-like sources are copied to a temp file first."""
+    File-like sources are passed as `data`, the bytes captured before the
+    script's own reader consumed the buffer, and go through a temp file."""
     orig = _ORIG.get(reader)
     if orig is None:
         return None
     if isinstance(path, (str, os.PathLike)):
         return orig(str(path), metadataonly=True)[1]
+    if data is None:
+        raise ValueError("buffer source with no captured bytes")
     import tempfile
-    pos = path.tell()
-    data = path.read()
-    path.seek(pos)
     with tempfile.NamedTemporaryFile(suffix=".sav" if reader == "read_sav" else ".dta",
                                      delete=False) as fh:
         fh.write(data)
@@ -150,19 +150,50 @@ def _meta_only(path, reader):
 try:
     import pandas as _pd
 
+    class _Meta:
+        def __init__(self, labels, columns):
+            self.variable_value_labels = labels
+            self.column_names = columns
+
+    def _stata_meta_pandas(src):
+        """Value labels through pandas' own Stata reader, for files pyreadstat
+        cannot open (older .dta format versions)."""
+        import io
+        with _pd.io.stata.StataReader(io.BytesIO(src) if isinstance(src, bytes) else src) as rd:
+            sets = rd.value_labels()
+            rd._ensure_open() if hasattr(rd, "_ensure_open") else None
+            lbl = dict(zip(rd._varlist, rd._lbllist))
+        return _Meta({v: sets[n] for v, n in lbl.items() if n and n in sets}, list(lbl))
+
     def _pandas_wrap(orig, reader):
         def inner(path, *a, **k):
+            raw = None
+            if hasattr(path, "read") and hasattr(path, "tell"):
+                try:
+                    pos = path.tell()
+                    raw = path.read()
+                    path.seek(pos)
+                except Exception:
+                    raw = None
             df = orig(path, *a, **k)
             try:
                 if hasattr(df, "columns"):  # not an iterator/chunked reader
+                    try:
+                        meta = _meta_only(path, reader, raw)
+                    except Exception as e:
+                        if reader != "read_dta":
+                            raise
+                        _emit({"ev": "hook_note", "where": "pyreadstat", "err": repr(e)})
+                        meta = _stata_meta_pandas(raw if raw is not None else str(path))
                     _record("pandas." + reader, path if isinstance(path, (str, os.PathLike)) else "<buffer>",
-                            _meta_only(path, reader), df)
+                            meta, df)
             except Exception as e:
                 _emit({"ev": "hook_error", "where": "pandas." + reader, "err": repr(e)})
             return df
         return inner
 
-    _pd.read_spss = _pandas_wrap(_pd.read_spss, "read_sav")
+    # pandas.read_spss is not wrapped: it calls pyreadstat.read_sav, which is
+    # already wrapped above, and logging it twice would double the counts.
     _pd.read_stata = _pandas_wrap(_pd.read_stata, "read_dta")
 
     # --- table writes ------------------------------------------------------

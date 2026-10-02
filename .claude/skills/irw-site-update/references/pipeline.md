@@ -80,6 +80,10 @@ python3 metadata/tests/test_covariate_labels.py -v
 keeps per-script logs in `~/.cache/irw/covariate_labels/logs` and skips scripts
 that already have a log unless `--force`. Pass script stems to re-run just
 those.
+`metadata/covariate_labels/harvest_status.tsv` records the last run: each
+script's exit code and the commit it ran at. Scripts with a non-zero exit
+read files that are not on this machine (hard-coded paths, manual
+downloads), so their tables have no rows here yet.
 
 ## Out of scope for this skill (confirmed with Ben, 2026-07-27)
 

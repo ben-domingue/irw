@@ -55,8 +55,11 @@ MISSING_RX = re.compile(
     r"^(missing|no answer|n/?a|na|refused|don'?t know|sin respuesta|sysmis|not asked|-?9+)$", re.I)
 # Covariate names that usually hold one institution per code.
 INSTITUTION_NAME_RX = re.compile(
-    r"school|universit|college|institut|hospital|clinic|campus|centre|center|compan|employer|"
+    r"school|universit|college|institut|hospital|clinic|campus|centre|center|compan(y|ies)|employer|"
     r"organi[sz]ation|firm|facility|kindergarten|classroom|^cov_class$|^cov_site$|^cov_ward$", re.I)
+# ...unless the name says the codes are a kind, level or attribute, not one place each.
+NOT_INSTITUTION_RX = re.compile(
+    r"type|level|locat|size|absen|enjoy|going|educ|degree|grade|qualif|hospitali[sz]|companion|sector", re.I)
 # Words that, inside a label, suggest the label names one institution.
 INSTITUTION_LABEL_RX = re.compile(
     r"\b(universit\w*|universidad|college|hospital|klinik|clinic|CEIP|CPR|IES|"
@@ -116,6 +119,8 @@ def institution_decision(table, cov, rules):
 
 def institution_flag(cov, labels):
     """True when a pair looks like a list of named institutions."""
+    if NOT_INSTITUTION_RX.search(cov):
+        return False
     if INSTITUTION_NAME_RX.search(cov):
         return True
     hits = sum(1 for v in labels.values() if INSTITUTION_LABEL_RX.search(v))

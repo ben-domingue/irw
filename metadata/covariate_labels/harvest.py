@@ -44,6 +44,8 @@ REPO = HERE.parents[1]
 HOOK = HERE / "hook"
 DEFAULT_LOGS = Path.home() / ".cache" / "irw" / "covariate_labels" / "logs"
 DEFAULT_CHECKOUT = Path.home() / "irw-wt" / "covariate-labels-harvest"
+# Where data/ scripts write their tables (scratch inside the harvest checkout).
+OUTPUT_DIRS = ("automated_finding/irw_output", "automated_finding/output_noncore", "data/irw_output")
 READS_LABELLED = re.compile(r"pyreadstat|read_spss|read_stata")
 
 
@@ -93,6 +95,12 @@ def main(argv=None):
             print(f"[{i}/{len(names)}] {b}: no such script at {sha[:8]}", file=sys.stderr)
             continue
         log.unlink(missing_ok=True)
+        # Some scripts refuse to overwrite a table they already wrote; the
+        # checkout's output folder is scratch, so empty it before each run.
+        if a.checkout.resolve() != REPO.resolve():
+            for sub in OUTPUT_DIRS:
+                for f in (a.checkout / sub).glob("*.csv"):
+                    f.unlink()
         env = dict(os.environ, COVLAB_LOG=str(log), PYTHONPATH=str(HOOK),
                    MPLBACKEND="Agg", PYTHONUNBUFFERED="1")
         env.pop("REDIVIS_API_TOKEN", None)  # belt and braces: no write token in reach
