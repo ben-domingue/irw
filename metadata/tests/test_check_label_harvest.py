@@ -31,6 +31,13 @@ class CheckLabelHarvestTest(unittest.TestCase):
         self.assertFalse(clh.needs_harvest(self.script('x <- read.csv("a.csv")\ndf$cov_g <- 1\n'), set()))
         self.assertFalse(clh.needs_harvest(self.script('x <- haven::read_sav("a.sav")\n'), set()))
 
+    def test_listed_as_not_harvestable_is_not_flagged(self):
+        s = self.script('x <- haven::read_sav("a.sav")\ndf$cov_gender <- x$sex\n')
+        t = Path(tempfile.mkdtemp()) / "not_harvestable.tsv"
+        t.write_text("script\treason\ndata/sub/foo_2026.R\tchecked by hand\n")
+        clh.STATUS, clh.NOT_HARVESTABLE = Path("/nonexistent.tsv"), t
+        self.assertFalse(clh.needs_harvest(s, clh.harvested()))
+
     def test_never_fails(self):
         s = self.script('x <- haven::read_sav("a.sav")\ndf$cov_gender <- x$sex\n')
         clh.STATUS = Path("/nonexistent.tsv")

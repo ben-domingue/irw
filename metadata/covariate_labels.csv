@@ -2153,6 +2153,18 @@ gholami_2017_periodontal_knowledge,cov_gender,0,male
 gholami_2017_periodontal_knowledge,cov_gender,1,female
 gholami_2017_periodontal_knowledge,cov_marital,1,Married
 gholami_2017_periodontal_knowledge,cov_marital,2,Single
+gilbert_meta_56,cov_male,0,Male
+gilbert_meta_56,cov_male,1,Female
+gilbert_meta_62,cov_county,1,Busia
+gilbert_meta_62,cov_county,2,Trans Nzoia
+gilbert_meta_62,cov_female,1,Male
+gilbert_meta_62,cov_female,2,Female
+gilbert_meta_62,cov_income_50,0,"<5,000 KES or N/A/Don't Know/Refuse"
+gilbert_meta_62,cov_income_50,1,">=5,000 KSH ($50 USD)"
+gilbert_meta_64,cov_health,1,very poor
+gilbert_meta_64,cov_health,2,poor
+gilbert_meta_64,cov_health,3,fair
+gilbert_meta_64,cov_health,4,good
 gobbens_2018_adl,cov_education,1,None
 gobbens_2018_adl,cov_education,2,Primary
 gobbens_2018_adl,cov_education,3,Secondary
