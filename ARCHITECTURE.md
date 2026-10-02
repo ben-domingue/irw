@@ -389,6 +389,11 @@ be deleted from a session — https://claude.ai/code/routines.
   the repository; it never publishes.
 - **Merging the weekly pipeline PR.** The diff is the thing to read on Monday.
 - **Item-text extraction rounds**, and the discovery sweeps above.
+- **`covariate_labels.csv`** (#1775), irw_meta's codebook for coded covariates.
+  `metadata/covariate_labels/harvest.py` re-runs the `data/` scripts that read
+  SPSS/Stata files, which download from OSF, Zenodo and the like, and a few
+  read files that exist only on one machine; that does not belong in CI.
+  Re-run it, then `build.py`, when a script shipping coded covariates changes.
 
 ## 7. Where things go inside a directory
 

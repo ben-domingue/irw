@@ -220,7 +220,8 @@ What it does: for each known local CSV present (`metadata.csv` → table
 `comps_metadata`/`nominal_metadata`/`simsyn_metadata`, `nominal_tags.csv` →
 `nominal_tags`, `itemtext_metadata.csv`
 → `itemtext_metadata`, `collections.csv` → `collections`,
-`collection_members.csv` → `collection_members`), it fully replaces that
+`collection_members.csv` → `collection_members`, and the hand-regenerated
+`covariate_labels.csv` → `covariate_labels`, see `references/pipeline.md`), it fully replaces that
 table's data on
 `redivis.user("datapages").dataset("irw_meta", version="next")` — a **draft**
 version. `hero_stats.json` is deliberately not in this list; it isn't a
