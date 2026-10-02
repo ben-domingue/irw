@@ -1031,7 +1031,31 @@ per invocation, JSON on stdin:
     echo '{"table": "foo_2026", "description": "...", "doi": "10.xxxx/yyy",
            "url": "https://...", "reference": "...",
            "original_license": "CC BY 4.0", "derived_license": "CC BY 4.0",
-           "public_reshare": "Public"}' | python3 stage_dict_row.py
+           "public_reshare": "Public",
+           "codebook_url": "https://osf.io/abcde/files/osfstorage/..."}' | python3 stage_dict_row.py
+
+**Always give `codebook_url`** (#2770): the URL of the source's own codebook
+FILE you read to write the script (codebook, data dictionary, variable list,
+or a README that documents the columns), or `"none"` when the source ships
+none. Never the deposit's landing page (that is `url`), and never a guess. It
+is written to `automated_finding/codebook_at_ingest.csv`, not the dictionary,
+and the table page links it from its Codebook section
+(`how_found = recorded_at_ingest`, the strongest evidence there is). Without
+it the weekly sweep (pipeline stage 15) can only find a codebook by its file
+name.
+
+**Coded covariates: run the label harvest before opening the data PR.** If the
+new script reads an SPSS or Stata file (`.sav`, `.dta`) and ships `cov_*`
+columns, their value labels (1 = hombre, 2 = mujer) reach the table page only
+through `metadata/covariate_labels/`:
+
+    python3 metadata/covariate_labels/harvest.py --commit HEAD <script stem>
+    python3 metadata/covariate_labels/build.py
+
+`--commit HEAD` matters: the default re-runs scripts from origin/main, where
+the new script is not yet. Commit the `covariate_labels.csv` change in the same
+PR. Nothing else re-runs it: it is a manual stage because it re-runs build
+scripts (#1775).
 
 **Comps, nominal and simsyn tables too** (#2628): add `--source comps`,
 `--source nom` or `--source sim`, which writes `dictionary_auto_comps.csv`,
