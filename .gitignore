@@ -84,6 +84,12 @@ metadata/**/*.txt
 !metadata/logs/comps_biblio_license_log.csv
 !metadata/logs/nominal_biblio_license_log.csv
 !metadata/logs/simsyn_biblio_license_log.csv
+##Biblio rows dropped because their table is in neither the dictionary nor
+##the source's metadata.csv (#2767). Committed so the weekly pipeline PR shows
+##every drop for review before it publishes.
+!metadata/logs/comps_biblio_drop_log.csv
+!metadata/logs/nominal_biblio_drop_log.csv
+!metadata/logs/simsyn_biblio_drop_log.csv
 .env
 .Rproj.user
 .DS_Store
