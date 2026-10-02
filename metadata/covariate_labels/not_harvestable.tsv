@@ -1,0 +1,62 @@
+script	reason
+data/AVI-S.R	source file local or downloaded; not checked
+data/Aspirations_Sonmez_2022.R	source file local or downloaded; not checked
+data/PTCI_Chinese_Zhan_2024.R	source file local or downloaded; not checked
+data/ders16_xiong_2025.R	source file local or downloaded; not checked
+data/gahps_korner_2021.R	source file local or downloaded; not checked
+data/gilbert_108.R	gilbert source file not in gilbert_share raw folder; not checked
+data/gilbert_109through111.R	gilbert source file not in gilbert_share raw folder; not checked
+data/gilbert_94.R	gilbert source file not in gilbert_share raw folder; not checked
+data/gilbert_97through99.R	gilbert source file not in gilbert_share raw folder; not checked
+data/gilbert_hte/il_hte_02.R	checked by hand 2026-10-02: no labels beyond No/Yes on shipped codes, or codes recoded before shipping
+data/gilbert_hte/il_hte_04.R	checked by hand 2026-10-02: no labels beyond No/Yes on shipped codes, or codes recoded before shipping
+data/gilbert_hte/il_hte_05.R	checked by hand 2026-10-02: no labels beyond No/Yes on shipped codes, or codes recoded before shipping
+data/gilbert_hte/il_hte_06.R	checked by hand 2026-10-02: no labels beyond No/Yes on shipped codes, or codes recoded before shipping
+data/gilbert_hte/il_hte_07_08.R	checked by hand 2026-10-02: no labels beyond No/Yes on shipped codes, or codes recoded before shipping
+data/gilbert_hte/il_hte_09.R	checked by hand 2026-10-02: no labels beyond No/Yes on shipped codes, or codes recoded before shipping
+data/gilbert_hte/il_hte_10_11_12.R	checked by hand 2026-10-02: no labels beyond No/Yes on shipped codes, or codes recoded before shipping
+data/gilbert_hte/il_hte_13_14_15.R	checked by hand 2026-10-02: no labels beyond No/Yes on shipped codes, or codes recoded before shipping
+data/gilbert_hte/il_hte_16.R	checked by hand 2026-10-02: no labels beyond No/Yes on shipped codes, or codes recoded before shipping
+data/gilbert_hte/il_hte_17_18_19.R	checked by hand 2026-10-02: no labels beyond No/Yes on shipped codes, or codes recoded before shipping
+data/gilbert_hte/il_hte_22.R	checked by hand 2026-10-02: no labels beyond No/Yes on shipped codes, or codes recoded before shipping
+data/gilbert_hte/il_hte_27_28.R	checked by hand 2026-10-02: no labels beyond No/Yes on shipped codes, or codes recoded before shipping
+data/gilbert_hte/il_hte_29_30.R	checked by hand 2026-10-02: no labels beyond No/Yes on shipped codes, or codes recoded before shipping
+data/gilbert_hte/il_hte_31.R	checked by hand 2026-10-02: no labels beyond No/Yes on shipped codes, or codes recoded before shipping
+data/gilbert_hte/il_hte_33.R	checked by hand 2026-10-02: no labels beyond No/Yes on shipped codes, or codes recoded before shipping
+data/gilbert_hte/il_hte_34.R	checked by hand 2026-10-02: no labels beyond No/Yes on shipped codes, or codes recoded before shipping
+data/gilbert_hte/il_hte_35_36.R	checked by hand 2026-10-02: no labels beyond No/Yes on shipped codes, or codes recoded before shipping
+data/gilbert_hte/il_hte_37_38.R	checked by hand 2026-10-02: no labels beyond No/Yes on shipped codes, or codes recoded before shipping
+data/gilbert_hte/il_hte_39_40.R	checked by hand 2026-10-02: no labels beyond No/Yes on shipped codes, or codes recoded before shipping
+data/gilbert_hte/il_hte_41.R	checked by hand 2026-10-02: no labels beyond No/Yes on shipped codes, or codes recoded before shipping
+data/gilbert_hte/il_hte_42_43.R	checked by hand 2026-10-02: no labels beyond No/Yes on shipped codes, or codes recoded before shipping
+data/gilbert_hte/il_hte_44.R	checked by hand 2026-10-02: no labels beyond No/Yes on shipped codes, or codes recoded before shipping
+data/gilbert_hte/il_hte_48.R	checked by hand 2026-10-02: no labels beyond No/Yes on shipped codes, or codes recoded before shipping
+data/gilbert_hte/il_hte_50_51.R	checked by hand 2026-10-02: no labels beyond No/Yes on shipped codes, or codes recoded before shipping
+data/gilbert_hte/il_hte_52.R	checked by hand 2026-10-02: no labels beyond No/Yes on shipped codes, or codes recoded before shipping
+data/gilbert_hte/il_hte_55.R	checked by hand 2026-10-02: no labels beyond No/Yes on shipped codes, or codes recoded before shipping
+data/gilbert_hte/il_hte_56.R	checked by hand 2026-10-02: useful labels added to manual.csv
+data/gilbert_hte/il_hte_57_58_59.R	checked by hand 2026-10-02: no labels beyond No/Yes on shipped codes, or codes recoded before shipping
+data/gilbert_hte/il_hte_62.R	checked by hand 2026-10-02: useful labels added to manual.csv
+data/gilbert_hte/il_hte_63.R	checked by hand 2026-10-02: no labels beyond No/Yes on shipped codes, or codes recoded before shipping
+data/gilbert_hte/il_hte_64.R	checked by hand 2026-10-02: useful labels added to manual.csv
+data/gilbert_hte/il_hte_68_69.R	checked by hand 2026-10-02: no labels beyond No/Yes on shipped codes, or codes recoded before shipping
+data/gilbert_hte/il_hte_70_71_72_73.R	checked by hand 2026-10-02: no labels beyond No/Yes on shipped codes, or codes recoded before shipping
+data/gilbert_hte/il_hte_75.R	checked by hand 2026-10-02: no labels beyond No/Yes on shipped codes, or codes recoded before shipping
+data/gilbert_meta_102through104.R	gilbert source file not in gilbert_share raw folder; not checked
+data/gilbert_meta_105through107.R	gilbert source file not in gilbert_share raw folder; not checked
+data/gilbert_meta_83through85.R	gilbert source file not in gilbert_share raw folder; not checked
+data/gilbert_meta_88through89.R	gilbert source file not in gilbert_share raw folder; not checked
+data/gilbert_meta_99.R	gilbert source file not in gilbert_share raw folder; not checked
+data/hpwt_bayona_2025.R	source file local or downloaded; not checked
+data/identity_fusion_gomez_2025.R	source file local or downloaded; not checked
+data/mental_health_covid19/src/src/src/src/process_chen_2022_mental_health.R	source file local or downloaded; not checked
+data/nas_rogoza_2024.R	source file local or downloaded; not checked
+data/pechorro_impulsivity_2021.R	source file local or downloaded; not checked
+data/perceived_injustice_mourin.R	source file local or downloaded; not checked
+data/pilkonis_2016_promis_wave2_depression.R	source file local or downloaded; not checked
+data/ptcichina_zhan_2024.R	source file local or downloaded; not checked
+data/quopl2_forster_2021.R	source file local or downloaded; not checked
+data/scs_2025.R	source file local or downloaded; not checked
+data/sd3ypl_klimczak_2019.R	source file local or downloaded; not checked
+data/ssd12_habib_2025.R	source file local or downloaded; not checked
+data/wvs_panasiuk_2025.R	source file local or downloaded; not checked

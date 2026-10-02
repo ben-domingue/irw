@@ -1,0 +1,13 @@
+table,covariate,code,label,script,source_file,source_column
+gilbert_meta_56,cov_male,0,Male,data/gilbert_hte/il_hte_56.R,rf_clean_student_data_endline.dta,gender_bl
+gilbert_meta_56,cov_male,1,Female,data/gilbert_hte/il_hte_56.R,rf_clean_student_data_endline.dta,gender_bl
+gilbert_meta_62,cov_county,1,Busia,data/gilbert_hte/il_hte_62.R,GISHE_data_clean.dta,county
+gilbert_meta_62,cov_county,2,Trans Nzoia,data/gilbert_hte/il_hte_62.R,GISHE_data_clean.dta,county
+gilbert_meta_62,cov_female,1,Male,data/gilbert_hte/il_hte_62.R,GISHE_data_clean.dta,gender
+gilbert_meta_62,cov_female,2,Female,data/gilbert_hte/il_hte_62.R,GISHE_data_clean.dta,gender
+gilbert_meta_62,cov_income_50,0,"<5,000 KES or N/A/Don't Know/Refuse",data/gilbert_hte/il_hte_62.R,GISHE_data_clean.dta,mos_income_bin
+gilbert_meta_62,cov_income_50,1,">=5,000 KSH ($50 USD)",data/gilbert_hte/il_hte_62.R,GISHE_data_clean.dta,mos_income_bin
+gilbert_meta_64,cov_health,1,very poor,data/gilbert_hte/il_hte_64.R,AS_data_imputed.dta,childhealth
+gilbert_meta_64,cov_health,2,poor,data/gilbert_hte/il_hte_64.R,AS_data_imputed.dta,childhealth
+gilbert_meta_64,cov_health,3,fair,data/gilbert_hte/il_hte_64.R,AS_data_imputed.dta,childhealth
+gilbert_meta_64,cov_health,4,good,data/gilbert_hte/il_hte_64.R,AS_data_imputed.dta,childhealth

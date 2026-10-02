@@ -162,6 +162,22 @@ class BuildTest(unittest.TestCase):
         self.assertEqual(rows, [])
 
 
+class ManualPairsTest(unittest.TestCase):
+    M = dict(script="data/x.R", source_file="a.dta", source_column="sex")
+
+    def test_manual_pairs_added_for_live_tables_only(self):
+        rows, rec = [], []
+        cb.add_manual(rows, rec, [dict(self.M, table="t1", covariate="cov_sex", code="2.0", label=" Female "),
+                                  dict(self.M, table="t9", covariate="cov_sex", code="1", label="Male")], {"t1"})
+        self.assertEqual(rows, [dict(table="t1", covariate="cov_sex", code="2", label="Female")])
+        self.assertEqual(rec[0]["status"], "included")
+
+    def test_harvested_pair_wins(self):
+        rows = [dict(table="t1", covariate="cov_sex", code="1", label="hombre")]
+        cb.add_manual(rows, [], [dict(self.M, table="t1", covariate="cov_sex", code="1", label="Male")], {"t1"})
+        self.assertEqual([r["label"] for r in rows], ["hombre"])
+
+
 class CommittedTableTest(unittest.TestCase):
     """The CSV the repo ships, against the rules build.py promises."""
 
