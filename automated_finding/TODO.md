@@ -3,15 +3,50 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## From the 2026-10-02 human_review re-check batch 2 (25 rows, 21 shipped)
+
+- [ ] **62 tables + 5 item text tables need uploading**, from the worktree
+  `/home/ben/irw-wt/hr-recheck-batch2/automated_finding/`: all of
+  `irw_output/` (62 tables), then `itemtext_output/` (5 `__items.csv`:
+  garciabacete_2023_loneliness, mendezhinojosa_2026_ebea,
+  turpochaparro_2026_{procrastination,workload,teacher_self_efficacy}).
+  Dictionary/tag rows are staged; `uploaded` is unstamped in
+  `itemtext_provenance.csv` and `mapping_verification.csv`.
+- [ ] **Open questions on batch-2 tables (none blocks upload):**
+  - `kalani_2026_uwes`: coding undocumented (UWES8 sits about a point below
+    the other eight; published UWES is 0-6). Shipped as stored, no permitted
+    set. Hold it?
+  - `delacruzvaldiviano_2024_djgls`: `cov_sex`/`cov_residence` are unlabelled
+    1/2 codes. Keep or drop?
+  - `garciabacete_2023_loneliness` / `sun_2018_greed`: `rights_register`
+    matches the codes to DJG / LBUS; both look like false positives
+    (Cassidy & Asher; positional G1-G7).
+  - `neivasantos_2026_*`: no paper, so what separates wave 1 from wave 2 is
+    undocumented.
+  - `summart_2025_whoqol_bref`: q14 and q25 are identical in every row, so
+    both were dropped.
+- [ ] **Papers behind bot walls, if Ben can supply them:** Sahin 2026 IJHCI
+  (10.1080/10447318.2026.2719186; sahin_2026_* have no permitted sets until
+  read), Stripp 2023 J Relig Health (10.1007/s10943-022-01533-5), Sandoz 2022
+  Psychol Trauma (10.1037/tra0001068). The greed paper was supplied and read.
+- [ ] **Item text leads from batch 2 (not built):** DGSC G1-G7 printed in
+  Liu 2019 Table 1 (paper_explicit, needs verify); bertani_2024_afccq English
+  variable labels (Italian administered; AFCCQ-IT in the paper's supplement);
+  sandoz_2021_cbts/pcl5/epds French stems in the deposit codebook;
+  tabordabarata_2024_hls_eu_q47/bsi and neivasantos_2026_bes/oeq full
+  Portuguese labels at both levels (no English source); delacruzvaldiviano
+  Spanish stems in the deposit's results docx.
+- [ ] **Next step of the re-check, when wanted:** batch 3, the next 25 of the
+  remaining shape-qualified `resp_scale_mixed` rows in pool (b) (about 209
+  left after batch 2's 25 picks and 10 skips; skip list in `leads/human_review_recheck_batch2_2026-10-02.csv`).
+  Run at most two agents at a time.
+
 ## From the 2026-10-02 human_review re-check batch 1 (9 pilot datasets)
 
 - [x] **22 tables + 1 item text table uploaded** (ben-domingue, confirmed
   2026-10-02): the batch-1 `irw_output/` set, then
   `alqerem_2024_mhls__items.csv` (to text_3). GAS naming (`usc_2026_*`) kept;
   the MTS 1-5 range confirmed from the paper.
-- [ ] **Next step of the re-check, when wanted:** the next ~25 of the 256
-  shape-qualified `resp_scale_mixed` rows in pool (b); scaling order in
-  BATCH_LOG 2026-10-02.
 
 ## From the 2026-09-29 JPSP 131(4) batch (Lu 2026 + Zhang 2026)
 
