@@ -474,9 +474,12 @@ def run_qc(df: pd.DataFrame, coercion_method: str = "",
     # of its way to insist on that spelling over `raw_resp` -- but it was absent
     # here, so the validator warned about the one spelling it asks for. Seen on
     # `fitz_2024_numeracy`, whose free-text numeracy answers need it.
+    # `cluster_id`, `block_id` and `std_baseline*` are the standard's design
+    # columns (irw#2755): ~80 tables carry them, and the warning told every one
+    # to rename a randomisation unit to a covariate.
     known = {"id", "item", "resp", "resp_raw", "date", "treat",
-             "item_family"} | set(OCCASION)
-    known_prefix = ("cov_", "itemcov_", "qmatrix", "trial_")
+             "cluster_id", "block_id", "item_family"} | set(OCCASION)
+    known_prefix = ("cov_", "itemcov_", "qmatrix", "trial_", "std_baseline")
     unprefixed = [c for c in df.columns
                   if c not in known and not c.startswith(known_prefix)]
     if unprefixed:

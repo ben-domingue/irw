@@ -119,6 +119,15 @@ class Profiles(unittest.TestCase):
         dup = [f for f in report.findings if f.check == "dup_id_item"]
         self.assertEqual([f.severity for f in dup], ["error"])
 
+    def test_design_columns_are_not_unprefixed_covariates(self):
+        df = pd.DataFrame(dict(id=[1, 1, 2, 2], item=["a", "b", "a", "b"],
+                               resp=[0, 1, 1, 0], treat=[1, 1, 0, 0],
+                               cluster_id=[7, 7, 8, 8], block_id=[1, 1, 1, 1],
+                               std_baseline=[0.2, 0.2, -0.4, -0.4],
+                               std_baseline_math=[0.1, 0.1, 0.3, 0.3]))
+        report = validate_frame(df, profile="upload")
+        self.assertNotIn("cov_prefix", [f.check for f in report.findings])
+
     def test_legacy_profile_forgives_the_cov_prefix_rule(self):
         report = validate_frame(FIXTURES["unprefixed_cov"](), profile="legacy")
         self.assertNotIn("cov_prefix", [f.check for f in report.findings])
