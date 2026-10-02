@@ -11,20 +11,15 @@
 #       administration.
 # License: CC0 1.0 (Dataverse dataset metadata).
 #
-# Documentation caveat: the paper's full text could not be read (Springer
-#   serves a JavaScript bot challenge; not yet in PMC). Its abstract confirms
-#   the instruments: a Spanish back-translated MTS and a general self-efficacy
-#   (GSE) measure, here EAG_1-10 (Escala de Autoeficacia General). The
-#   permitted response sets below are therefore NOT taken from this paper:
-#     - EAG: the Spanish GSE is a 10-item, 4-point scale (1 incorrecto ..
-#       4 cierto; Baessler & Schwarzer 1996, Sanjuan et al. 2000), and its
-#       documented 1-4 set is passed to run_qc.
-#     - MTS: the original MTS (Madrigal et al. 2013) is 11 items on a 7-point
-#       scale, but this file holds 1-5 only, so the Chilean version evidently
-#       used a different format. No document available to us states it, so no
-#       permitted set is passed for MTS; values are only checked to be whole
-#       numbers in 1-5. Confirm 1-5 against the paper's Methods when it can
-#       be read.
+# Documentation: the paper's Methods (read from the PDF, 2026-10-02; Springer
+#   serves scripts a bot challenge, and it is not yet in PMC):
+#     - MTS: "11 items on a 5-point Likert scale (1 = strongly disagree,
+#       5 = strongly agree)". This is a 5-point Spanish adaptation; the original
+#       Madrigal et al. (2013) MTS is 7-point.
+#     - EAG: the General Self-Efficacy Scale (Baessler & Schwarzer, Spanish),
+#       "10-item instrument using a 4-point Likert scale (1 = does not describe
+#       me at all, 4 = completely describes me)".
+#   Both documented sets are passed to run_qc.
 #   The .sav carries an SPSS document note describing a 2017 multiple
 #   imputation run on an earlier file ("Base de Datos Validacion FMU.sav",
 #   5 imputations, linear regression). No Imputation_ column is present, all
@@ -33,9 +28,10 @@
 #   regression-imputed values; the note appears to be inherited metadata.
 #
 # Item text: not shipped. Both label levels checked: MTS_1-11 and EAG_1-10
-#   have no variable labels and no value labels. The Spanish MTS wording would
-#   be in the paper (unreadable here); the Spanish GSE is a published
-#   canonical instrument.
+#   have no variable labels and no value labels. The paper's Table 3 prints
+#   all 11 Spanish MTS items as administered, numbered 1-11 (CC BY 4.0) --
+#   a paper_order mapping to MTS_k, so it needs a verify_<table>.R before it
+#   can ship. The Spanish GSE is a published canonical instrument.
 #
 # Tables (item codes are the source column names):
 #   guzmanmuzante_2025_mts   11 items, 1-5  Mental Toughness Scale (Spanish).
@@ -82,7 +78,7 @@ MTS = [f"MTS_{i}" for i in range(1, 12)]
 EAG = [f"EAG_{i}" for i in range(1, 11)]
 # (items, documented permitted set or None, range sanity bound)
 TABLES = {
-    "guzmanmuzante_2025_mts": (MTS, None, range(1, 6)),
+    "guzmanmuzante_2025_mts": (MTS, range(1, 6), range(1, 6)),
     "guzmanmuzante_2025_gse": (EAG, range(1, 5), range(1, 5)),
 }
 
