@@ -5,9 +5,10 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
 ## From the 2026-10-02 human_review re-check batch 4 (25 rows, 14 shipped)
 
-- [ ] **69 response tables uploading** (ben-domingue, 2026-10-02) from
-  `/home/ben/irw-wt/hr-recheck-batch4/automated_finding/irw_output/`; tick
-  once confirmed. The 9 item text tables are uploaded and stamped (#2797).
+- [x] **69 tables + 9 item text tables uploaded** (ben-domingue, confirmed
+  2026-10-02). `alqerem_2025_gina_control` failed once in `red_up`
+  (AttributeError inside the upload call, no partial table left) and went up
+  on a single-file re-run, row count verified.
 - [ ] **Licence call (Ben):** HRQoL/musculoskeletal pain in health-science
   students (`10.5281/zenodo.7782495`): Zenodo API says CC BY 4.0, the deposit
   readme says CC BY-NC-ND. Treated as blocked (in
