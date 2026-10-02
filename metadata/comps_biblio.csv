@@ -1,4 +1,14 @@
-table,DOI__for_paper_,DOI__for_data_,Reference_x,URL__for_data_,Original_License,Derived_License,Custom_License_Terms,Description,BibTex
+table,DOI__for_paper_,DOI__for_data_,Reference_x,URL__for_data_,Original_License,Derived_License,Custom_License_Terms,Description,BibTex,Source_via
+amboseli_baboons_g1,10.1098/rspb.2015.1512,10.5061/dryad.d0g0d,"Franz, M., McLean, E., Tung, J., Altmann, J., & Alberts, S. C. (2015). Self-organizing dominance hierarchies in a wild primate population. Proceedings of the Royal Society B, 282(1814), 20151512.",https://zenodo.org/records/4968348,CC0 1.0,CC0 1.0,NA,"Adult male baboon dominance interactions (winner/loser), Amboseli Baboon Research Project, social group 1 of 5. One row per interaction; no calendar date (day count only)."," @article{Franz_2015, title={Self-organizing dominance hierarchies in a wild primate population}, volume={282}, ISSN={1471-2954}, url={http://dx.doi.org/10.1098/rspb.2015.1512}, DOI={10.1098/rspb.2015.1512}, number={1814}, journal={Proceedings of the Royal Society B: Biological Sciences}, publisher={The Royal Society}, author={Franz, Mathias and McLean, Emily and Tung, Jenny and Altmann, Jeanne and Alberts, Susan C.}, year={2015}, month=Sept, pages={20151512} }
+",NA
+amboseli_baboons_g2,10.1098/rspb.2015.1512,10.5061/dryad.d0g0d,"Franz, M., McLean, E., Tung, J., Altmann, J., & Alberts, S. C. (2015). Self-organizing dominance hierarchies in a wild primate population. Proceedings of the Royal Society B, 282(1814), 20151512.",https://zenodo.org/records/4968348,CC0 1.0,CC0 1.0,NA,"Adult male baboon dominance interactions (winner/loser), Amboseli Baboon Research Project, social group 2 of 5. One row per interaction; no calendar date (day count only)."," @article{Franz_2015, title={Self-organizing dominance hierarchies in a wild primate population}, volume={282}, ISSN={1471-2954}, url={http://dx.doi.org/10.1098/rspb.2015.1512}, DOI={10.1098/rspb.2015.1512}, number={1814}, journal={Proceedings of the Royal Society B: Biological Sciences}, publisher={The Royal Society}, author={Franz, Mathias and McLean, Emily and Tung, Jenny and Altmann, Jeanne and Alberts, Susan C.}, year={2015}, month=Sept, pages={20151512} }
+",NA
+amboseli_baboons_g3,10.1098/rspb.2015.1512,10.5061/dryad.d0g0d,"Franz, M., McLean, E., Tung, J., Altmann, J., & Alberts, S. C. (2015). Self-organizing dominance hierarchies in a wild primate population. Proceedings of the Royal Society B, 282(1814), 20151512.",https://zenodo.org/records/4968348,CC0 1.0,CC0 1.0,NA,"Adult male baboon dominance interactions (winner/loser), Amboseli Baboon Research Project, social group 3 of 5. One row per interaction; no calendar date (day count only)."," @article{Franz_2015, title={Self-organizing dominance hierarchies in a wild primate population}, volume={282}, ISSN={1471-2954}, url={http://dx.doi.org/10.1098/rspb.2015.1512}, DOI={10.1098/rspb.2015.1512}, number={1814}, journal={Proceedings of the Royal Society B: Biological Sciences}, publisher={The Royal Society}, author={Franz, Mathias and McLean, Emily and Tung, Jenny and Altmann, Jeanne and Alberts, Susan C.}, year={2015}, month=Sept, pages={20151512} }
+",NA
+amboseli_baboons_g4,10.1098/rspb.2015.1512,10.5061/dryad.d0g0d,"Franz, M., McLean, E., Tung, J., Altmann, J., & Alberts, S. C. (2015). Self-organizing dominance hierarchies in a wild primate population. Proceedings of the Royal Society B, 282(1814), 20151512.",https://zenodo.org/records/4968348,CC0 1.0,CC0 1.0,NA,"Adult male baboon dominance interactions (winner/loser), Amboseli Baboon Research Project, social group 4 of 5. One row per interaction; no calendar date (day count only)."," @article{Franz_2015, title={Self-organizing dominance hierarchies in a wild primate population}, volume={282}, ISSN={1471-2954}, url={http://dx.doi.org/10.1098/rspb.2015.1512}, DOI={10.1098/rspb.2015.1512}, number={1814}, journal={Proceedings of the Royal Society B: Biological Sciences}, publisher={The Royal Society}, author={Franz, Mathias and McLean, Emily and Tung, Jenny and Altmann, Jeanne and Alberts, Susan C.}, year={2015}, month=Sept, pages={20151512} }
+",NA
+amboseli_baboons_g5,10.1098/rspb.2015.1512,10.5061/dryad.d0g0d,"Franz, M., McLean, E., Tung, J., Altmann, J., & Alberts, S. C. (2015). Self-organizing dominance hierarchies in a wild primate population. Proceedings of the Royal Society B, 282(1814), 20151512.",https://zenodo.org/records/4968348,CC0 1.0,CC0 1.0,NA,"Adult male baboon dominance interactions (winner/loser), Amboseli Baboon Research Project, social group 5 of 5. One row per interaction; no calendar date (day count only)."," @article{Franz_2015, title={Self-organizing dominance hierarchies in a wild primate population}, volume={282}, ISSN={1471-2954}, url={http://dx.doi.org/10.1098/rspb.2015.1512}, DOI={10.1098/rspb.2015.1512}, number={1814}, journal={Proceedings of the Royal Society B: Biological Sciences}, publisher={The Royal Society}, author={Franz, Mathias and McLean, Emily and Tung, Jenny and Altmann, Jeanne and Alberts, Susan C.}, year={2015}, month=Sept, pages={20151512} }
+",NA
 bradleyterry2_cems,NA,NA,"Turner, H., & Firth, D. (2012). Bradley-Terry models in R: the BradleyTerry2 package. Journal of statistical software, 48, 1-21.",https://cran.r-project.org/web/packages/BradleyTerry2/index.html,GPL-3.0,GPL-3.0,NA,Rater preferences for management schools,"@article{Turner2012BradleyTerry,
   author = {Turner, Heather and Firth, David},
   title = {Bradley-Terry models in R: the BradleyTerry2 package},
@@ -7,12 +17,30 @@ bradleyterry2_cems,NA,NA,"Turner, H., & Firth, D. (2012). Bradley-Terry models i
   volume = {48},
   pages = {1--21},
   url = {https://cran.r-project.org/web/packages/BradleyTerry2/index.html}
-}"
+}",NA
+bramley_vitello_2019_gcse,10.1080/0969594X.2017.1418734,10.6084/m9.figshare.25867039.v1,"Bramley, T., & Vitello, S. (2019). The effect of adaptivity on the reliability coefficient in adaptive comparative judgement. Assessment in Education: Principles, Policy & Practice, 26(1), 43-58.",https://doi.org/10.6084/m9.figshare.25867039.v1,CC BY 4.0,CC BY 4.0,NA,"Comparative judgement of 150 GCSE English scripts by 34 judges across three studies (adaptive, round-robin, random). One row per comparison; rater = judge."," @article{Bramley_2018, title={The effect of adaptivity on the reliability coefficient in adaptive comparative judgement}, volume={26}, ISSN={1465-329X}, url={http://dx.doi.org/10.1080/0969594X.2017.1418734}, DOI={10.1080/0969594x.2017.1418734}, number={1}, journal={Assessment in Education: Principles, Policy &amp; Practice}, publisher={Informa UK Limited}, author={Bramley, Tom and Vitello, Sylvia}, year={2018}, month=Jan, pages={43–58} }
+",NA
+carlson_2017_human_rights,10.1017/S0003055417000302,NA,"Carlson, D., & Montgomery, J. M. (2017). A pairwise comparison framework for fast, flexible, and reliable human coding of political texts. American Political Science Review, 111(4), 835-843. Data: Carlson, David; Montgomery, Jacob, Harvard Dataverse, https://doi.org/10.7910/DVN/0ZRGEE",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/0ZRGEE,CC0 1.0,CC0 1.0,NA,MTurk pairwise comparisons of State Department human rights report passages: which shows more significant levels of torture," @article{CARLSON_2017, title={A Pairwise Comparison Framework for Fast, Flexible, and Reliable Human Coding of Political Texts}, volume={111}, ISSN={1537-5943}, url={http://dx.doi.org/10.1017/S0003055417000302}, DOI={10.1017/s0003055417000302}, number={4}, journal={American Political Science Review}, publisher={Cambridge University Press (CUP)}, author={CARLSON, DAVID and MONTGOMERY, JACOB M.}, year={2017}, month=Sept, pages={835–843} }
+",NA
+carlson_2017_immigration,10.1017/S0003055417000302,NA,"Carlson, D., & Montgomery, J. M. (2017). A pairwise comparison framework for fast, flexible, and reliable human coding of political texts. American Political Science Review, 111(4), 835-843. Data: Carlson, David; Montgomery, Jacob, Harvard Dataverse, https://doi.org/10.7910/DVN/0ZRGEE",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/0ZRGEE,CC0 1.0,CC0 1.0,NA,"MTurk pairwise comparisons of 336 open-ended survey statements: which expresses more fear, anxiety or worry about the impact of immigration"," @article{CARLSON_2017, title={A Pairwise Comparison Framework for Fast, Flexible, and Reliable Human Coding of Political Texts}, volume={111}, ISSN={1537-5943}, url={http://dx.doi.org/10.1017/S0003055417000302}, DOI={10.1017/s0003055417000302}, number={4}, journal={American Political Science Review}, publisher={Cambridge University Press (CUP)}, author={CARLSON, DAVID and MONTGOMERY, JACOB M.}, year={2017}, month=Sept, pages={835–843} }
+",NA
+carlson_2017_movie50,10.1017/S0003055417000302,NA,"Carlson, D., & Montgomery, J. M. (2017). A pairwise comparison framework for fast, flexible, and reliable human coding of political texts. American Political Science Review, 111(4), 835-843. Data: Carlson, David; Montgomery, Jacob, Harvard Dataverse, https://doi.org/10.7910/DVN/0ZRGEE",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/0ZRGEE,CC0 1.0,CC0 1.0,NA,MTurk pairwise comparisons of 50 movie-review snippets: which text comes from the more positive review (experiment 2)," @article{CARLSON_2017, title={A Pairwise Comparison Framework for Fast, Flexible, and Reliable Human Coding of Political Texts}, volume={111}, ISSN={1537-5943}, url={http://dx.doi.org/10.1017/S0003055417000302}, DOI={10.1017/s0003055417000302}, number={4}, journal={American Political Science Review}, publisher={Cambridge University Press (CUP)}, author={CARLSON, DAVID and MONTGOMERY, JACOB M.}, year={2017}, month=Sept, pages={835–843} }
+",NA
+carlson_2017_movie_reviews,10.1017/S0003055417000302,NA,"Carlson, D., & Montgomery, J. M. (2017). A pairwise comparison framework for fast, flexible, and reliable human coding of political texts. American Political Science Review, 111(4), 835-843. Data: Carlson, David; Montgomery, Jacob, Harvard Dataverse, https://doi.org/10.7910/DVN/0ZRGEE",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/0ZRGEE,CC0 1.0,CC0 1.0,NA,MTurk pairwise comparisons of 497 movie-review snippets: which text comes from the more positive review," @article{CARLSON_2017, title={A Pairwise Comparison Framework for Fast, Flexible, and Reliable Human Coding of Political Texts}, volume={111}, ISSN={1537-5943}, url={http://dx.doi.org/10.1017/S0003055417000302}, DOI={10.1017/s0003055417000302}, number={4}, journal={American Political Science Review}, publisher={Cambridge University Press (CUP)}, author={CARLSON, DAVID and MONTGOMERY, JACOB M.}, year={2017}, month=Sept, pages={835–843} }
+",NA
+carlson_2017_treebank,10.1017/S0003055417000302,NA,"Carlson, D., & Montgomery, J. M. (2017). A pairwise comparison framework for fast, flexible, and reliable human coding of political texts. American Political Science Review, 111(4), 835-843. Data: Carlson, David; Montgomery, Jacob, Harvard Dataverse, https://doi.org/10.7910/DVN/0ZRGEE",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/0ZRGEE,CC0 1.0,CC0 1.0,NA,"MTurk pairwise comparisons of Stanford Sentiment Treebank snippets for positivity; experiment 1 untrained, experiment 2 certified coders"," @article{CARLSON_2017, title={A Pairwise Comparison Framework for Fast, Flexible, and Reliable Human Coding of Political Texts}, volume={111}, ISSN={1537-5943}, url={http://dx.doi.org/10.1017/S0003055417000302}, DOI={10.1017/s0003055417000302}, number={4}, journal={American Political Science Review}, publisher={Cambridge University Press (CUP)}, author={CARLSON, DAVID and MONTGOMERY, JACOB M.}, year={2017}, month=Sept, pages={835–843} }
+",NA
+carlson_2017_wiscads,10.1017/S0003055417000302,NA,"Carlson, D., & Montgomery, J. M. (2017). A pairwise comparison framework for fast, flexible, and reliable human coding of political texts. American Political Science Review, 111(4), 835-843. Data: Carlson, David; Montgomery, Jacob, Harvard Dataverse, https://doi.org/10.7910/DVN/0ZRGEE",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/0ZRGEE,CC0 1.0,CC0 1.0,NA,MTurk pairwise comparisons of 935 2008 U.S. Senate campaign ads: which is more negative towards the candidate(s) mentioned," @article{CARLSON_2017, title={A Pairwise Comparison Framework for Fast, Flexible, and Reliable Human Coding of Political Texts}, volume={111}, ISSN={1537-5943}, url={http://dx.doi.org/10.1017/S0003055417000302}, DOI={10.1017/s0003055417000302}, number={4}, journal={American Political Science Review}, publisher={Cambridge University Press (CUP)}, author={CARLSON, DAVID and MONTGOMERY, JACOB M.}, year={2017}, month=Sept, pages={835–843} }
+",NA
+clark_2018_strength_study2,10.1371/journal.pone.0190393,10.17633/rd.brunel.4902977.v1,"Clark, A. P., Howard, K. L., Woods, A. T., Penton-Voak, I. S., & Neumann, C. (2018). Why rate when you could compare? Using the 'EloChoice' package to assess pairwise comparisons of perceived physical strength. PLOS ONE, 13(1), e0190393.",https://doi.org/10.17633/rd.brunel.4902977.v1,CC BY 4.0,CC BY 4.0,NA,"Clark et al. (2018) Study 2: raters chose which of two photos of men looked physically stronger. 7,835 decisions on 82 photos by 96 raters; agent_a = photo chosen. Study 1 is already in IRW as elochoice_physical."," @article{Clark_2018, title={Why rate when you could compare? Using the “EloChoice” package to assess pairwise comparisons of perceived physical strength}, volume={13}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0190393}, DOI={10.1371/journal.pone.0190393}, number={1}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Clark, Andrew P. and Howard, Kate L. and Woods, Andy T. and Penton-Voak, Ian S. and Neumann, Christof}, editor={Puebla, Iratxe}, year={2018}, month=Jan, pages={e0190393} }
+",NA
+coertjens_2021_selfreflections,10.1080/10401334.2021.1877709,10.5281/zenodo.3746671,"Coertjens, L., Lesterhuis, M., De Winter, B., Goossens, M., De Maeyer, S., & Michels, N. (2021). Improving self-reflection assessment practices: comparative judgment as an alternative to rubrics. Teaching and Learning in Medicine, 33(5), 525-535.",https://zenodo.org/records/3746671,CC BY 4.0,CC BY 4.0,NA,Comparative judgement of 22 medical students' written self-reflections by 8 assessors on the D-PAC platform. One row per comparison; rater = assessor.," @article{Coertjens_2021, title={Improving Self-Reflection Assessment Practices: Comparative Judgment as an Alternative to Rubrics}, volume={33}, ISSN={1532-8015}, url={http://dx.doi.org/10.1080/10401334.2021.1877709}, DOI={10.1080/10401334.2021.1877709}, number={5}, journal={Teaching and Learning in Medicine}, publisher={Informa UK Limited}, author={Coertjens, Liesje and Lesterhuis, Marije and De Winter, Benedicte Y. and Goossens, Maarten and De Maeyer, Sven and Michels, Nele R. M.}, year={2021}, month=Feb, pages={525–535} }
+",NA
 collegefb_2021and2022,NA,NA,NA,https://www.kaggle.com/datasets/thedevastator/analyzing-college-football-2022-wins-losses-rank?resource=download&select=games2020.csv,CC0 1.0,CC0 1.0,NA,College football results from 2021-2022.,"@misc{analyzing_college_football_2022,
   title = {Analyzing College Football 2022 Wins Losses Rank},
   url = {https://www.kaggle.com/datasets/thedevastator/analyzing-college-football-2022-wins-losses-rank?resource=download&select=games2020.csv},
   note = {Accessed: 2023-10-01}
-}"
+}",NA
 costa_gine_2023_wpt_matches,10.5281/zenodo.7860242,NA,"Costa, Gerard; Giné, Joan (2023). World Padel Tour historical match data [Data set]. Zenodo. https://doi.org/10.5281/zenodo.7860242",https://zenodo.org/records/7860242,CC BY 4.0,CC BY 4.0,NA,"Head-to-head World Padel Tour doubles match results, 2018-2023 (obtained via web scraping for a UOC university course project)","@misc{https://doi.org/10.5281/zenodo.7860242,
   doi = {10.5281/ZENODO.7860242},
   url = {https://zenodo.org/record/7860242},
@@ -24,119 +52,473 @@ costa_gine_2023_wpt_matches,10.5281/zenodo.7860242,NA,"Costa, Gerard; Giné, Joa
   year = {2023},
   copyright = {Creative Commons Attribution 4.0 International}
 }
-"
-cricket,NA,NA,NA,https://cricsheet.org/,NA,NA,NA,data would need to be extracted then reformated,"@misc{cricsheet,
-  title = {CricSheet: Cricket Data Analysis},
-  howpublished = {\url{https://cricsheet.org/}},
-  note = {Accessed: 2023-10-01}
-}"
-debate,NA,NA,NA,https://www.tabroom.com/index/index.mhtml,NA,NA,NA,bot could extract csv for multiple tournaments,"@misc{tabroom,
-  title = {Tabroom},
-  howpublished = {\url{https://www.tabroom.com/index/index.mhtml}},
-  note = {Accessed: 2023-10-01}
-}"
+",NA
+cricsheet_domestic_men_2008_2026,NA,NA,"Cricsheet (Stephen Rushe), https://cricsheet.org",https://cricsheet.org/downloads/,ODC-By,ODC-By,NA,"Men's domestic and franchise cricket matches from 28 competitions (IPL, BBL, PSL, CPL, T20 Blast, County Championship, One-Day Cup, Sheffield Shield, Plunket Shield, Super Smash, The Hundred, SA20, etc.), 2008-2026, one row per match, from Cricsheet ball-by-ball data.","@misc{cricsheet,
+  author = {Rushe, Stephen},
+  title = {Cricsheet},
+  url = {https://cricsheet.org},
+  year = {2024}
+}",NA
+cricsheet_domestic_women_2015_2026,NA,NA,"Cricsheet (Stephen Rushe), https://cricsheet.org",https://cricsheet.org/downloads/,ODC-By,ODC-By,NA,"Women's domestic and franchise cricket matches from 14 competitions (Women's Big Bash League, The Hundred, WPL, Rachael Heyhoe Flint Trophy, Charlotte Edwards Cup, Super Smash, etc.), 2015-2026, one row per match, from Cricsheet ball-by-ball data.","@misc{Cricsheet2024,
+  author = {Rushe, Stephen},
+  title = {Cricsheet},
+  url = {https://cricsheet.org},
+  note = {Cricket data and statistics}
+}",NA
+cricsheet_intl_men_2001_2026,NA,NA,"Cricsheet (Stephen Rushe), https://cricsheet.org",https://cricsheet.org/downloads/,ODC-By,ODC-By,NA,"Men's international cricket matches (Test, ODI, T20I, plus other international one-day, multi-day and T20 matches between national teams), 2001-2026, one row per match, from Cricsheet ball-by-ball data.","@misc{Cricsheet,
+  author = {Rushe, Stephen},
+  title = {Cricsheet},
+  url = {https://cricsheet.org},
+  year = {2024}
+}",NA
+cricsheet_intl_women_2003_2026,NA,NA,"Cricsheet (Stephen Rushe), https://cricsheet.org",https://cricsheet.org/downloads/,ODC-By,ODC-By,NA,"Women's international cricket matches (Test, ODI, T20I, plus other international one-day and T20 matches between national teams), 2003-2026, one row per match, from Cricsheet ball-by-ball data.","@misc{Cricsheet2024,
+  author = {Rushe, Stephen},
+  title = {Cricsheet},
+  url = {https://cricsheet.org},
+  note = {Accessed from https://cricsheet.org/downloads/}
+}",NA
+elephant_seals_anonuevo_2009_2010,10.1098/rsos.150228,10.5061/dryad.6g06h,"Casey, C., Charrier, I., Mathevon, N., & Reichmuth, C. (2015). Rival assessment among northern elephant seals: evidence of associative learning during male-male contests. Royal Society Open Science, 2(8), 150228.",https://zenodo.org/records/4963387,CC0 1.0,CC0 1.0,NA,"Northern elephant seal male-male dominance interactions observed in the field, Año Nuevo, 2009-10 breeding season. One row per interaction; winner/loser by retreat of the loser. rater = observer initials."," @article{Casey_2015, title={Rival assessment among northern elephant seals: evidence of associative learning during male–male contests}, volume={2}, ISSN={2054-5703}, url={http://dx.doi.org/10.1098/rsos.150228}, DOI={10.1098/rsos.150228}, number={8}, journal={Royal Society Open Science}, publisher={The Royal Society}, author={Casey, Caroline and Charrier, Isabelle and Mathevon, Nicolas and Reichmuth, Colleen}, year={2015}, month=Aug, pages={150228} }
+",NA
+elephant_seals_anonuevo_2010_2011,10.1098/rsos.150228,10.5061/dryad.6g06h,"Casey, C., Charrier, I., Mathevon, N., & Reichmuth, C. (2015). Rival assessment among northern elephant seals: evidence of associative learning during male-male contests. Royal Society Open Science, 2(8), 150228.",https://zenodo.org/records/4963387,CC0 1.0,CC0 1.0,NA,"Northern elephant seal male-male dominance interactions observed in the field, Año Nuevo, 2010-11 breeding season. One row per interaction; winner/loser by retreat of the loser. rater = observer initials."," @article{Casey_2015, title={Rival assessment among northern elephant seals: evidence of associative learning during male–male contests}, volume={2}, ISSN={2054-5703}, url={http://dx.doi.org/10.1098/rsos.150228}, DOI={10.1098/rsos.150228}, number={8}, journal={Royal Society Open Science}, publisher={The Royal Society}, author={Casey, Caroline and Charrier, Isabelle and Mathevon, Nicolas and Reichmuth, Colleen}, year={2015}, month=Aug, pages={150228} }
+",NA
+elephant_seals_anonuevo_2011_2012,10.1098/rsos.150228,10.5061/dryad.6g06h,"Casey, C., Charrier, I., Mathevon, N., & Reichmuth, C. (2015). Rival assessment among northern elephant seals: evidence of associative learning during male-male contests. Royal Society Open Science, 2(8), 150228.",https://zenodo.org/records/4963387,CC0 1.0,CC0 1.0,NA,"Northern elephant seal male-male dominance interactions observed in the field, Año Nuevo, 2011-12 breeding season. One row per interaction; winner/loser by retreat of the loser. rater = observer initials."," @article{Casey_2015, title={Rival assessment among northern elephant seals: evidence of associative learning during male–male contests}, volume={2}, ISSN={2054-5703}, url={http://dx.doi.org/10.1098/rsos.150228}, DOI={10.1098/rsos.150228}, number={8}, journal={Royal Society Open Science}, publisher={The Royal Society}, author={Casey, Caroline and Charrier, Isabelle and Mathevon, Nicolas and Reichmuth, Colleen}, year={2015}, month=Aug, pages={150228} }
+",NA
+elephant_seals_anonuevo_2012_2013,10.1098/rsos.150228,10.5061/dryad.6g06h,"Casey, C., Charrier, I., Mathevon, N., & Reichmuth, C. (2015). Rival assessment among northern elephant seals: evidence of associative learning during male-male contests. Royal Society Open Science, 2(8), 150228.",https://zenodo.org/records/4963387,CC0 1.0,CC0 1.0,NA,"Northern elephant seal male-male dominance interactions observed in the field, Año Nuevo, 2012-13 breeding season. One row per interaction; winner/loser by retreat of the loser. rater = observer initials."," @article{Casey_2015, title={Rival assessment among northern elephant seals: evidence of associative learning during male–male contests}, volume={2}, ISSN={2054-5703}, url={http://dx.doi.org/10.1098/rsos.150228}, DOI={10.1098/rsos.150228}, number={8}, journal={Royal Society Open Science}, publisher={The Royal Society}, author={Casey, Caroline and Charrier, Isabelle and Mathevon, Nicolas and Reichmuth, Colleen}, year={2015}, month=Aug, pages={150228} }
+",NA
+elephant_seals_piedrasblancas_2012,10.1098/rsos.150228,10.5061/dryad.6g06h,"Casey, C., Charrier, I., Mathevon, N., & Reichmuth, C. (2015). Rival assessment among northern elephant seals: evidence of associative learning during male-male contests. Royal Society Open Science, 2(8), 150228.",https://zenodo.org/records/4963387,CC0 1.0,CC0 1.0,NA,"Northern elephant seal male-male dominance interactions observed in the field, Piedras Blancas, 2012 (Jan-Feb). One row per interaction; winner/loser by retreat of the loser."," @article{Casey_2015, title={Rival assessment among northern elephant seals: evidence of associative learning during male–male contests}, volume={2}, ISSN={2054-5703}, url={http://dx.doi.org/10.1098/rsos.150228}, DOI={10.1098/rsos.150228}, number={8}, journal={Royal Society Open Science}, publisher={The Royal Society}, author={Casey, Caroline and Charrier, Isabelle and Mathevon, Nicolas and Reichmuth, Colleen}, year={2015}, month=Aug, pages={150228} }
+",NA
 elochoice_physical,https://doi.org/10.32614/CRAN.package.EloChoice,NA,NA,https://cran.r-project.org/web/packages/EloChoice/refman/EloChoice.html#physical,GPL-3.0,GPL-3.0,NA,Rater preference for physical appearance," @misc{2015, title={EloChoice: Preference Rating for Visual Stimuli Based on Elo Ratings}, url={http://dx.doi.org/10.32614/CRAN.package.EloChoice}, DOI={10.32614/cran.package.elochoice}, journal={CRAN: Contributed Packages}, publisher={The R Foundation}, year={2015}, month=oct }
-"
-epl_matches_2021-2022,NA,NA,NA,https://www.kaggle.com/datasets/shubhamgadekar/english-premier-league20202022-dataset,CC0 1.0,CC0 1.0,NA,EPL matches from 2021-2022,"@misc{english_premier_league_2020_2022,
-  title = {English Premier League 2020-2022 Dataset},
-  url = {https://www.kaggle.com/datasets/shubhamgadekar/english-premier-league20202022-dataset},
-  note = {Accessed: 2023-10-01}
-}"
+",NA
 eufootball_2010-2020,10.32614/CRAN.package.EUfootball,NA,NA,https://cran.r-project.org/web/packages/EUfootball/index.html,GPL-3.0,GPL-3.0,NA,Football games from 7 EU leagues (2010-2020)," @misc{van_der_Wurp_2022, title={EUfootball: Football Match Data of European Leagues}, url={http://dx.doi.org/10.32614/CRAN.package.EUfootball}, DOI={10.32614/cran.package.eufootball}, journal={CRAN: Contributed Packages}, publisher={The R Foundation}, author={van der Wurp, Hendrik}, year={2022}, month=may }
-"
+",NA
+feederwatch_species_displacements,10.1093/beheco/arx108,10.5061/dryad.49vj1,"Miller, E. T., Bonter, D. N., Eldermire, C., Freeman, B. G., Greig, E. I., Harmon, L. J., Lisle, C., & Hochachka, W. M. (2017). Fighting over food unites the birds of North America in a continental dominance hierarchy. Behavioral Ecology, 28(6), 1454-1463.",https://zenodo.org/records/4997232,CC0 1.0,CC0 1.0,NA,Interspecific displacements at North American bird feeders reported by Project FeederWatch participants; the agents are 136 bird species. One row per displacement; no date.," @article{Miller_2017, title={Fighting over food unites the birds of North America in a continental dominance hierarchy}, volume={28}, ISSN={1465-7279}, url={http://dx.doi.org/10.1093/beheco/arx108}, DOI={10.1093/beheco/arx108}, number={6}, journal={Behavioral Ecology}, publisher={Oxford University Press (OUP)}, author={Miller, Eliot T and Bonter, David N and Eldermire, Charles and Freeman, Benjamin G and Greig, Emma I and Harmon, Luke J and Lisle, Curtis and Hochachka, Wesley M}, editor={Stephens, David}, year={2017}, month=Aug, pages={1454–1463} }
+",NA
+fivethirtyeight_nba_1946_2023,NA,NA,FiveThirtyEight. NBA Elo game file (nba_elo.csv) [Data set]. Internet Archive capture of 2025-03-06.,https://github.com/fivethirtyeight/data/tree/master/nba-forecasts,CC BY 4.0,CC BY 4.0,NA,"NBA (and BAA) games 1946-47 to 2022-23 incl. playoffs (73,363 games, 102 teams); agent_a = home, homefield blank for 207 neutral-site games incl. the 2020 bubble","@dataset{fivethirtyeight_nba_elo_2025,
+  author = {FiveThirtyEight},
+  title = {NBA Elo game file (nba_elo.csv)},
+  year = {2025},
+  url = {https://github.com/fivethirtyeight/data/tree/master/nba-forecasts},
+  note = {Internet Archive capture of 2025-03-06}
+}",NA
+fivethirtyeight_nfl_1920_2023,NA,NA,FiveThirtyEight. NFL Elo game file (nfl_elo.csv) [Data set]. Internet Archive capture of 2025-03-06.,https://github.com/fivethirtyeight/data/tree/master/nfl-elo,CC BY 4.0,CC BY 4.0,NA,"NFL games 1920 to 2022 seasons incl. playoffs (17,379 games, 123 teams); agent_a = home, homefield blank for 102 neutral-site games; 319 ties","@dataset{fivethirtyeight2025nflelo,
+  author = {FiveThirtyEight},
+  title = {NFL Elo Game File},
+  year = {2025},
+  note = {nfl_elo.csv, Internet Archive capture of 2025-03-06},
+  url = {https://github.com/fivethirtyeight/data/tree/master/nfl-elo}
+}",NA
+fivethirtyeight_nhl_1917_2023,NA,NA,FiveThirtyEight. NHL Elo game file (nhl_elo.csv) [Data set]. Internet Archive capture of 2025-03-06.,https://github.com/fivethirtyeight/data/tree/master/nhl-forecasts,CC BY 4.0,CC BY 4.0,NA,"NHL games 1917-18 to 2022-23 incl. playoffs (66,118 games, 40 teams); agent_a = home, homefield blank for 291 neutral-site games; shootout goal counted in score; pre-2005 ties kept as draws","@dataset{fivethirtyeight_nhl_elo_2025,
+  author = {FiveThirtyEight},
+  title = {NHL Elo game file (nhl_elo.csv)},
+  year = {2025},
+  url = {https://github.com/fivethirtyeight/data/tree/master/nhl-forecasts},
+  note = {Internet Archive capture of 2025-03-06}
+}",NA
+fivethirtyeight_soccer_2016_2023,NA,NA,FiveThirtyEight. Club soccer predictions match file (spi_matches.csv) [Data set]. Internet Archive capture of 2025-03-06.,https://github.com/fivethirtyeight/data/tree/master/soccer-spi,CC BY 4.0,CC BY 4.0,NA,"Club soccer matches 2016-07 to 2023-12 across 40 leagues and cups incl. NWSL and FA WSL (66,909 matches, 888 clubs); agent_a = home; xG where available","@dataset{fivethirtyeight2025,
+  title={Club soccer predictions match file (spi_matches.csv)},
+  author={FiveThirtyEight},
+  year={2025},
+  howpublished={Internet Archive},
+  url={https://github.com/fivethirtyeight/data/tree/master/soccer-spi},
+  note={Captured 2025-03-06}
+}",NA
 footbayes_england,10.32614/CRAN.package.footBayes,NA,NA,https://cran.r-project.org/web/packages/footBayes/index.html,GPL-2.0,GPL-2.0,NA,Top 4 England tiers from 1888/89 season to 2021/22 season.," @misc{Egidi_2022, title={footBayes: Fitting Bayesian and MLE Football Models}, url={http://dx.doi.org/10.32614/CRAN.package.footBayes}, DOI={10.32614/cran.package.footbayes}, journal={CRAN: Contributed Packages}, publisher={The R Foundation}, author={Egidi, Leonardo and Macrì Demartino, Roberto and Palaskas., Vasilis}, year={2022}, month=feb }
-"
+",NA
 footbayes_italy,10.32614/CRAN.package.footBayes,NA,NA,https://cran.r-project.org/web/packages/footBayes/index.html,GPL-2.0,GPL-2.0,NA,Top tier in Italy from 1934/35 season to 2021/22 season.," @misc{Egidi_2022, title={footBayes: Fitting Bayesian and MLE Football Models}, url={http://dx.doi.org/10.32614/CRAN.package.footBayes}, DOI={10.32614/cran.package.footbayes}, journal={CRAN: Contributed Packages}, publisher={The R Foundation}, author={Egidi, Leonardo and Macrì Demartino, Roberto and Palaskas., Vasilis}, year={2022}, month=feb }
-"
+",NA
 friedman2019_risk_appropriate,10.1111/ajps.12400,NA,"Friedman, Jeffrey, 2018, ""Replication Data for: Priorities for Preventive Action: Explaining Americans' Divergent Reactions to 100 Public Risks"", https://doi.org/10.7910/DVN/ZSJA25, Harvard Dataverse, V1, UNF:6:OJ7nZP2bzoQZoyzx8JvOFg== [fileUNF]
 
 
 
 Friedman, J. A. (2019). Priorities for preventive action: Explaining Americans’ divergent reactions to 100 public risks. American Journal of Political Science, 63(1), 181-196.",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ZSJA25,Permission via Email,CC BY 4.0,NA,Appropriateness of government responding to risk," @article{Friedman_2018, title={Priorities for Preventive Action: Explaining Americans’ Divergent Reactions to 100 Public Risks}, volume={63}, ISSN={1540-5907}, url={http://dx.doi.org/10.1111/ajps.12400}, DOI={10.1111/ajps.12400}, number={1}, journal={American Journal of Political Science}, publisher={Wiley}, author={Friedman, Jeffrey A.}, year={2018}, month=oct, pages={181–196} }
-"
+",NA
 friedman2019_risk_disaster,10.1111/ajps.12400,NA,"Friedman, Jeffrey, 2018, ""Replication Data for: Priorities for Preventive Action: Explaining Americans' Divergent Reactions to 100 Public Risks"", https://doi.org/10.7910/DVN/ZSJA25, Harvard Dataverse, V1, UNF:6:OJ7nZP2bzoQZoyzx8JvOFg== [fileUNF]
 
 
 
 Friedman, J. A. (2019). Priorities for preventive action: Explaining Americans’ divergent reactions to 100 public risks. American Journal of Political Science, 63(1), 181-196.",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ZSJA25,Permission via Email,CC BY 4.0,NA,Risk of disaster," @article{Friedman_2018, title={Priorities for Preventive Action: Explaining Americans’ Divergent Reactions to 100 Public Risks}, volume={63}, ISSN={1540-5907}, url={http://dx.doi.org/10.1111/ajps.12400}, DOI={10.1111/ajps.12400}, number={1}, journal={American Journal of Political Science}, publisher={Wiley}, author={Friedman, Jeffrey A.}, year={2018}, month=oct, pages={181–196} }
-"
+",NA
 friedman2019_risk_fairness,10.1111/ajps.12400,NA,"Friedman, Jeffrey, 2018, ""Replication Data for: Priorities for Preventive Action: Explaining Americans' Divergent Reactions to 100 Public Risks"", https://doi.org/10.7910/DVN/ZSJA25, Harvard Dataverse, V1, UNF:6:OJ7nZP2bzoQZoyzx8JvOFg== [fileUNF]
 
 
 
 Friedman, J. A. (2019). Priorities for preventive action: Explaining Americans’ divergent reactions to 100 public risks. American Journal of Political Science, 63(1), 181-196.",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ZSJA25,Permission via Email,CC BY 4.0,NA,Fairness of risk," @article{Friedman_2018, title={Priorities for Preventive Action: Explaining Americans’ Divergent Reactions to 100 Public Risks}, volume={63}, ISSN={1540-5907}, url={http://dx.doi.org/10.1111/ajps.12400}, DOI={10.1111/ajps.12400}, number={1}, journal={American Journal of Political Science}, publisher={Wiley}, author={Friedman, Jeffrey A.}, year={2018}, month=oct, pages={181–196} }
-"
+",NA
 friedman2019_risk_harm,10.1111/ajps.12400,NA,"Friedman, Jeffrey, 2018, ""Replication Data for: Priorities for Preventive Action: Explaining Americans' Divergent Reactions to 100 Public Risks"", https://doi.org/10.7910/DVN/ZSJA25, Harvard Dataverse, V1, UNF:6:OJ7nZP2bzoQZoyzx8JvOFg== [fileUNF]
 
 
 
 Friedman, J. A. (2019). Priorities for preventive action: Explaining Americans’ divergent reactions to 100 public risks. American Journal of Political Science, 63(1), 181-196.",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ZSJA25,Permission via Email,CC BY 4.0,NA,Harm associated with risk," @article{Friedman_2018, title={Priorities for Preventive Action: Explaining Americans’ Divergent Reactions to 100 Public Risks}, volume={63}, ISSN={1540-5907}, url={http://dx.doi.org/10.1111/ajps.12400}, DOI={10.1111/ajps.12400}, number={1}, journal={American Journal of Political Science}, publisher={Wiley}, author={Friedman, Jeffrey A.}, year={2018}, month=oct, pages={181–196} }
-"
+",NA
 friedman2019_risk_incidence,10.1111/ajps.12400,NA,"Friedman, Jeffrey, 2018, ""Replication Data for: Priorities for Preventive Action: Explaining Americans' Divergent Reactions to 100 Public Risks"", https://doi.org/10.7910/DVN/ZSJA25, Harvard Dataverse, V1, UNF:6:OJ7nZP2bzoQZoyzx8JvOFg== [fileUNF]
 
 
 
 Friedman, J. A. (2019). Priorities for preventive action: Explaining Americans’ divergent reactions to 100 public risks. American Journal of Political Science, 63(1), 181-196.",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ZSJA25,Permission via Email,CC BY 4.0,NA,Incidence of risk," @article{Friedman_2018, title={Priorities for Preventive Action: Explaining Americans’ Divergent Reactions to 100 Public Risks}, volume={63}, ISSN={1540-5907}, url={http://dx.doi.org/10.1111/ajps.12400}, DOI={10.1111/ajps.12400}, number={1}, journal={American Journal of Political Science}, publisher={Wiley}, author={Friedman, Jeffrey A.}, year={2018}, month=oct, pages={181–196} }
-"
+",NA
 friedman2019_risk_longterm,10.1111/ajps.12400,NA,"Friedman, Jeffrey, 2018, ""Replication Data for: Priorities for Preventive Action: Explaining Americans' Divergent Reactions to 100 Public Risks"", https://doi.org/10.7910/DVN/ZSJA25, Harvard Dataverse, V1, UNF:6:OJ7nZP2bzoQZoyzx8JvOFg== [fileUNF]
 
 
 
 Friedman, J. A. (2019). Priorities for preventive action: Explaining Americans’ divergent reactions to 100 public risks. American Journal of Political Science, 63(1), 181-196.",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ZSJA25,Permission via Email,CC BY 4.0,NA,Longterm growth in risk," @article{Friedman_2018, title={Priorities for Preventive Action: Explaining Americans’ Divergent Reactions to 100 Public Risks}, volume={63}, ISSN={1540-5907}, url={http://dx.doi.org/10.1111/ajps.12400}, DOI={10.1111/ajps.12400}, number={1}, journal={American Journal of Political Science}, publisher={Wiley}, author={Friedman, Jeffrey A.}, year={2018}, month=oct, pages={181–196} }
-"
+",NA
 friedman2019_risk_priority,10.1111/ajps.12400,NA,"Friedman, Jeffrey, 2018, ""Replication Data for: Priorities for Preventive Action: Explaining Americans' Divergent Reactions to 100 Public Risks"", https://doi.org/10.7910/DVN/ZSJA25, Harvard Dataverse, V1, UNF:6:OJ7nZP2bzoQZoyzx8JvOFg== [fileUNF]
 
 
 
 Friedman, J. A. (2019). Priorities for preventive action: Explaining Americans’ divergent reactions to 100 public risks. American Journal of Political Science, 63(1), 181-196.",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ZSJA25,Permission via Email,CC BY 4.0,NA,Priority for government response," @article{Friedman_2018, title={Priorities for Preventive Action: Explaining Americans’ Divergent Reactions to 100 Public Risks}, volume={63}, ISSN={1540-5907}, url={http://dx.doi.org/10.1111/ajps.12400}, DOI={10.1111/ajps.12400}, number={1}, journal={American Journal of Political Science}, publisher={Wiley}, author={Friedman, Jeffrey A.}, year={2018}, month=oct, pages={181–196} }
-"
+",NA
 friedman2019_risk_worry,10.1111/ajps.12400,NA,"Friedman, Jeffrey, 2018, ""Replication Data for: Priorities for Preventive Action: Explaining Americans' Divergent Reactions to 100 Public Risks"", https://doi.org/10.7910/DVN/ZSJA25, Harvard Dataverse, V1, UNF:6:OJ7nZP2bzoQZoyzx8JvOFg== [fileUNF]
 
 
 
 Friedman, J. A. (2019). Priorities for preventive action: Explaining Americans’ divergent reactions to 100 public risks. American Journal of Political Science, 63(1), 181-196.",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ZSJA25,Permission via Email,CC BY 4.0,NA,Worry about risk," @article{Friedman_2018, title={Priorities for Preventive Action: Explaining Americans’ Divergent Reactions to 100 Public Risks}, volume={63}, ISSN={1540-5907}, url={http://dx.doi.org/10.1111/ajps.12400}, DOI={10.1111/ajps.12400}, number={1}, journal={American Journal of Political Science}, publisher={Wiley}, author={Friedman, Jeffrey A.}, year={2018}, month=oct, pages={181–196} }
-"
+",NA
+gombe_chimpanzees_females_1969_2013,10.1038/srep35404,10.5061/dryad.r4g74,"Foerster, S., Franz, M., Murray, C. M., Gilby, I. C., Feldblum, J. T., Walker, K. K., & Pusey, A. E. (2016). Chimpanzee females queue but males compete for social status. Scientific Reports, 6, 35404.",https://zenodo.org/records/4945588,CC0 1.0,CC0 1.0,NA,"Gombe chimpanzee female dominance interactions (winner/loser), 1969-2013. One row per interaction, dated."," @article{Foerster_2016, title={Chimpanzee females queue but males compete for social status}, volume={6}, ISSN={2045-2322}, url={http://dx.doi.org/10.1038/srep35404}, DOI={10.1038/srep35404}, number={1}, journal={Scientific Reports}, publisher={Springer Science and Business Media LLC}, author={Foerster, Steffen and Franz, Mathias and Murray, Carson M. and Gilby, Ian C. and Feldblum, Joseph T. and Walker, Kara K. and Pusey, Anne E.}, year={2016}, month=Oct }
+",NA
+gombe_chimpanzees_males_1978_2011,10.1038/srep35404,10.5061/dryad.r4g74,"Foerster, S., Franz, M., Murray, C. M., Gilby, I. C., Feldblum, J. T., Walker, K. K., & Pusey, A. E. (2016). Chimpanzee females queue but males compete for social status. Scientific Reports, 6, 35404.",https://zenodo.org/records/4945588,CC0 1.0,CC0 1.0,NA,"Gombe chimpanzee male dominance interactions (winner/loser), 1978-2011. One row per interaction, dated."," @article{Foerster_2016, title={Chimpanzee females queue but males compete for social status}, volume={6}, ISSN={2045-2322}, url={http://dx.doi.org/10.1038/srep35404}, DOI={10.1038/srep35404}, number={1}, journal={Scientific Reports}, publisher={Springer Science and Business Media LLC}, author={Foerster, Steffen and Franz, Mathias and Murray, Carson M. and Gilby, Ian C. and Feldblum, Joseph T. and Walker, Kara K. and Pusey, Anne E.}, year={2016}, month=Oct }
+",NA
 guinaudeau2024_largechambers,10.1017/psrm.2024.68,NA,"Guinaudeau, Benjamin; Breunig, Christian, 2024, ""Replication Data for: Measuring Legislators’ Ideological Position in Large Chambers using Pairwise-Comparisons"", https://doi.org/10.7910/DVN/0ULECU, Harvard Dataverse, V1",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/0ULECU,CC0 1.0,CC0 1.0,NA,Ideological comparisons of German MPs," @article{Breunig_2025, title={Measuring legislators’ ideological position in large chambers using pairwise-comparisons}, ISSN={2049-8489}, url={http://dx.doi.org/10.1017/psrm.2024.68}, DOI={10.1017/psrm.2024.68}, journal={Political Science Research and Methods}, publisher={Cambridge University Press (CUP)}, author={Breunig, Christian and Guinaudeau, Benjamin}, year={2025}, month=jan, pages={1–18} }
-"
-league_of_legends,NA,NA,NA,https://developer.riotgames.com/,NA,NA,NA,didn't make an account but should have data,"@misc{riotgames_api,
-  title = {Riot Games API},
-  howpublished = {\url{https://developer.riotgames.com/}},
-  note = {Accessed: 2023-10-01}
-}"
-lichess,NA,NA,NA,https://database.lichess.org/,CC0 1.0,CC0 1.0,NA,Chess outcomes,"@misc{lichess_database,
-  title = {Lichess Database},
-  howpublished = {\url{https://database.lichess.org/}},
-  note = {Accessed: 2023-10-01}
-}"
-MLB_Baseball,NA,NA,NA,https://www.retrosheet.org/game.htm#Notice,NA,NA,NA,"major league baseball games, winner could be extracted maybe?","@misc{retrosheet_game_data,
-  title = {Retrosheet Game Data},
-  howpublished = {\url{https://www.retrosheet.org/game.htm#Notice}},
-  note = {Accessed: 2023-10-17}
-}"
+",NA
+happyzebra_hyenas,10.3389/fevo.2022.934659,10.5061/dryad.w6m905qsw,"McCormick, S. K., Laubach, Z. M., Strauss, E. D., Montgomery, T. M., & Holekamp, K. E. (2022). Evaluating drivers of female dominance in the spotted hyena. Frontiers in Ecology and Evolution, 10, 934659.",https://zenodo.org/records/7402457,CC0 1.0,CC0 1.0,NA,"Spotted hyena aggressive interactions, Happy Zebra clan, Masai Mara (Mara Hyena Project): 8,521 acts among 121 hyenas of all ages and both sexes. agent_a = aggressor = winner (acts the recipient ignored or counterattacked dropped, the talek_hyenas rule); context, intensity, recipient response and both parties' sex, status and age class kept."," @article{McCormick_2022, title={Evaluating drivers of female dominance in the spotted hyena}, volume={10}, ISSN={2296-701X}, url={http://dx.doi.org/10.3389/fevo.2022.934659}, DOI={10.3389/fevo.2022.934659}, journal={Frontiers in Ecology and Evolution}, publisher={Frontiers Media SA}, author={McCormick, S. Kevin and Laubach, Zachary M. and Strauss, Eli D. and Montgomery, Tracy M. and Holekamp, Kay E.}, year={2022}, month=Dec }
+",NA
+intlfootball_men_1872-2026,NA,NA,"Jürisoo, M. International football results from 1872 to 2026 [Data set]. Kaggle / GitHub (martj42/international_results).",https://github.com/martj42/international_results,CC0 1.0,CC0 1.0,NA,"Men's international football results, 1872-2026 (Mart Jürisoo / martj42)","@dataset{jursoo2026,
+  author = {J{""u}risoo, Mart},
+  title = {International football results from 1872 to 2026},
+  year = {2026},
+  publisher = {Kaggle and GitHub},
+  url = {https://github.com/martj42/international_results},
+  note = {martj42/international_results}
+}",NA
+intlfootball_women_1956-2026,NA,NA,"Jürisoo, M. Women's international football results [Data set]. Kaggle / GitHub (martj42/womens-international-results).",https://github.com/martj42/womens-international-results,CC0 1.0,CC0 1.0,NA,"Women's international football results, 1956-2026 (Mart Jürisoo / martj42)","@dataset{Jürisoo2024,
+  author = {Jürisoo, M.},
+  title = {Women's international football results},
+  year = {2024},
+  url = {https://github.com/martj42/womens-international-results},
+  note = {Available on Kaggle and GitHub (martj42/womens-international-results)}
+}",NA
+jones_2020_cme_complexity,10.1029/2020SW002556,10.6084/m9.figshare.7808693.v1,"Jones, S. R., Scott, C. J., Barnard, L. A., Highfield, R., Lintott, C. J., & Baeten, E. (2020). The visual complexity of coronal mass ejections follows the solar cycle. Space Weather, 18(10), e2020SW002556.",https://doi.org/10.6084/m9.figshare.7808693.v1,CC BY 4.0,CC BY 4.0,NA,"Protect our Planet from Solar Storms (Zooniverse): citizen scientists chose which of two coronal mass ejection images looked more complicated. 409,889 decisions on 1,111 images by 5,898 raters in two sessions (original 2018; brightness-equalised 2019-20); agent_a = image chosen."," @article{Jones_2020, title={The Visual Complexity of Coronal Mass Ejections Follows the Solar Cycle}, volume={18}, ISSN={1542-7390}, url={http://dx.doi.org/10.1029/2020SW002556}, DOI={10.1029/2020sw002556}, number={10}, journal={Space Weather}, publisher={American Geophysical Union (AGU)}, author={Jones, S. R. and Scott, C. J. and Barnard, L. A. and Highfield, R. and Lintott, C. J. and Baeten, E.}, year={2020}, month=Oct }
+",NA
+lichess_2013_blitz,NA,NA,"Lichess (2026). lichess.org open database: standard rated games, 2013. https://database.lichess.org/",https://database.lichess.org/,CC0 1.0,CC0 1.0,NA,"Lichess rated standard-chess games, January-December 2013, Blitz time control; one row per game, White vs Black, with both players' pre-game ratings.","@misc{lichess2026,
+  author = {Lichess},
+  title = {lichess.org open database: standard rated games},
+  year = {2013},
+  url = {https://database.lichess.org/},
+  note = {Accessed 2026}
+}",NA
+lichess_2013_bullet,NA,NA,"Lichess (2026). lichess.org open database: standard rated games, 2013. https://database.lichess.org/",https://database.lichess.org/,CC0 1.0,CC0 1.0,NA,"Lichess rated standard-chess games, January-December 2013, Bullet time control; one row per game, White vs Black, with both players' pre-game ratings.","@misc{lichess2026,
+  title={lichess.org open database: standard rated games},
+  author={Lichess},
+  year={2013},
+  url={https://database.lichess.org/}
+}",NA
+lichess_2013_classical,NA,NA,"Lichess (2026). lichess.org open database: standard rated games, 2013. https://database.lichess.org/",https://database.lichess.org/,CC0 1.0,CC0 1.0,NA,"Lichess rated standard-chess games, January-December 2013, Classical (every game over about 8 minutes; Lichess had no Rapid category in 2013) time control; one row per game, White vs Black, with both players' pre-game ratings.","@misc{lichess2026,
+  author = {Lichess},
+  title = {lichess.org open database: standard rated games},
+  year = {2013},
+  url = {https://database.lichess.org/}
+}",NA
+makri_2026_mathtext_relevance,NA,10.17028/rd.lboro.31135015.v1,"Makri, D., & Jones, I. (2026). Investigating Questions Driven Reading of Mathematics Data Sets. Loughborough University. Dataset.",https://doi.org/10.17028/rd.lboro.31135015.v1,CC BY-NC 4.0,CC BY-NC 4.0,NA,"Comparative judgement of the relevance of mathematics text sections (parity and periodicity of real functions) to a question: 1,948 decisions by 78 undergraduate judges over 126 section codes, in six sessions with one question each (3 conceptual, 3 procedural). agent_a = section chosen as more relevant; rater = judge; session, question, question_type.","@misc{https://doi.org/10.17028/rd.lboro.31135015.v1,
+  doi = {10.17028/RD.LBORO.31135015.V1},
+  url = {https://repository.lboro.ac.uk/articles/dataset/Investigating_Questions_Driven_Reading_of_Mathematics_Data_Sets/31135015/1},
+  author = {Makri, Depy and Jones, Ian},
+  keywords = {Mathematics and numeracy curriculum and pedagogy},
+  title = {Investigating Questions Driven Reading of Mathematics Data Sets},
+  publisher = {Loughborough University},
+  year = {2026},
+  copyright = {Creative Commons Attribution Non Commercial 4.0 International}
+}
+",NA
+metakaggle_connect_4_2023_2024,NA,NA,"Kaggle (2026). Meta Kaggle [Data set], version 2332. https://www.kaggle.com/datasets/kaggle/meta-kaggle",https://www.kaggle.com/datasets/kaggle/meta-kaggle,Apache 2.0,Apache 2.0,NA,"Connect 4 bots, small Kaggle community simulation competition, 2023-24","@dataset{kaggle2026,
+  author = {Kaggle},
+  title = {Meta Kaggle},
+  year = {2026},
+  version = {2332},
+  url = {https://www.kaggle.com/datasets/kaggle/meta-kaggle}
+}",NA
+metakaggle_connectx_2020_2026,NA,NA,"Kaggle (2026). Meta Kaggle [Data set], version 2332. https://www.kaggle.com/datasets/kaggle/meta-kaggle",https://www.kaggle.com/datasets/kaggle/meta-kaggle,Apache 2.0,Apache 2.0,NA,"ConnectX (Connect Four) bots, Kaggle Getting Started simulation competition, 2020-2026","@dataset{kaggle2026,
+  author = {Kaggle},
+  title = {Meta Kaggle},
+  year = {2026},
+  version = {2332},
+  url = {https://www.kaggle.com/datasets/kaggle/meta-kaggle}
+}",NA
+metakaggle_fide_chess_2024_2025,NA,NA,"Kaggle (2026). Meta Kaggle [Data set], version 2332. https://www.kaggle.com/datasets/kaggle/meta-kaggle",https://www.kaggle.com/datasets/kaggle/meta-kaggle,Apache 2.0,Apache 2.0,NA,"FIDE & Google Efficient Chess AI Challenge bots (5 MiB RAM, 10s games), Kaggle 2024-25","@dataset{kaggle2026,
+  author = {Kaggle},
+  title = {Meta Kaggle},
+  year = {2026},
+  version = {2332},
+  url = {https://www.kaggle.com/datasets/kaggle/meta-kaggle}
+}",NA
+metakaggle_google_football_2020_2020,NA,NA,"Kaggle (2026). Meta Kaggle [Data set], version 2332. https://www.kaggle.com/datasets/kaggle/meta-kaggle",https://www.kaggle.com/datasets/kaggle/meta-kaggle,Apache 2.0,Apache 2.0,NA,"Google Research Football (11v11, one bot per side) Kaggle simulation competition, 2020","@dataset{kaggle2026,
+  author = {Kaggle},
+  title = {Meta Kaggle},
+  year = {2026},
+  version = {2332},
+  url = {https://www.kaggle.com/datasets/kaggle/meta-kaggle}
+}",NA
+metakaggle_halite_iv_playground_2020_2021,NA,NA,"Kaggle (2026). Meta Kaggle [Data set], version 2332. https://www.kaggle.com/datasets/kaggle/meta-kaggle",https://www.kaggle.com/datasets/kaggle/meta-kaggle,Apache 2.0,Apache 2.0,NA,"Halite IV Playground Edition, 1v1 resource-collection bots, Kaggle 2020-21","@dataset{kaggle2026,
+  author = {Kaggle},
+  title = {Meta Kaggle},
+  year = {2026},
+  version = {2332},
+  url = {https://www.kaggle.com/datasets/kaggle/meta-kaggle}
+}",NA
+metakaggle_kore_2022_2022,NA,NA,"Kaggle (2026). Meta Kaggle [Data set], version 2332. https://www.kaggle.com/datasets/kaggle/meta-kaggle",https://www.kaggle.com/datasets/kaggle/meta-kaggle,Apache 2.0,Apache 2.0,NA,"Kore 2022 1v1 fleet-strategy bots, Kaggle simulation competition, 2022","@dataset{kaggle2026,
+  author = {Kaggle},
+  year = {2026},
+  title = {Meta Kaggle},
+  version = {2332},
+  url = {https://www.kaggle.com/datasets/kaggle/meta-kaggle}
+}",NA
+metakaggle_kore_beta_2022_2022,NA,NA,"Kaggle (2026). Meta Kaggle [Data set], version 2332. https://www.kaggle.com/datasets/kaggle/meta-kaggle",https://www.kaggle.com/datasets/kaggle/meta-kaggle,Apache 2.0,Apache 2.0,NA,"Kore 2022 beta, 1v1 episodes only, Kaggle simulation competition, 2022","@dataset{kaggle2026,
+  author = {Kaggle},
+  title = {Meta Kaggle},
+  year = {2026},
+  version = {2332},
+  url = {https://www.kaggle.com/datasets/kaggle/meta-kaggle}
+}",NA
+metakaggle_lux_ai_s1_2021_2021,NA,NA,"Kaggle (2026). Meta Kaggle [Data set], version 2332. https://www.kaggle.com/datasets/kaggle/meta-kaggle",https://www.kaggle.com/datasets/kaggle/meta-kaggle,Apache 2.0,Apache 2.0,NA,"Lux AI Season 1 1v1 strategy-game bots, Kaggle simulation competition, 2021","@dataset{kaggle2026,
+  author = {Kaggle},
+  title = {Meta Kaggle},
+  year = {2026},
+  version = {2332},
+  url = {https://www.kaggle.com/datasets/kaggle/meta-kaggle}
+}",NA
+metakaggle_lux_ai_s2_2023_2023,NA,NA,"Kaggle (2026). Meta Kaggle [Data set], version 2332. https://www.kaggle.com/datasets/kaggle/meta-kaggle",https://www.kaggle.com/datasets/kaggle/meta-kaggle,Apache 2.0,Apache 2.0,NA,"Lux AI Season 2 1v1 strategy-game bots, Kaggle simulation competition, 2023","@dataset{kaggle2026,
+  title={Meta Kaggle},
+  author={Kaggle},
+  year={2026},
+  version={2332},
+  url={https://www.kaggle.com/datasets/kaggle/meta-kaggle}
+}",NA
+metakaggle_lux_ai_s2_beta_2022_2022,NA,NA,"Kaggle (2026). Meta Kaggle [Data set], version 2332. https://www.kaggle.com/datasets/kaggle/meta-kaggle",https://www.kaggle.com/datasets/kaggle/meta-kaggle,Apache 2.0,Apache 2.0,NA,"Lux AI Season 2 beta 1v1 bots, Kaggle simulation competition, 2022","@dataset{kaggle2026,
+  author = {Kaggle},
+  year = {2026},
+  title = {Meta Kaggle},
+  version = {2332},
+  url = {https://www.kaggle.com/datasets/kaggle/meta-kaggle}
+}",NA
+metakaggle_lux_ai_s2_neurips_stage1_2023_2023,NA,NA,"Kaggle (2026). Meta Kaggle [Data set], version 2332. https://www.kaggle.com/datasets/kaggle/meta-kaggle",https://www.kaggle.com/datasets/kaggle/meta-kaggle,Apache 2.0,Apache 2.0,NA,"Lux AI Season 2 NeurIPS 2023 stage 1 bots, Kaggle simulation competition","@dataset{kaggle_meta_kaggle_2026,
+  author = {Kaggle},
+  title = {Meta Kaggle},
+  year = {2026},
+  version = {2332},
+  url = {https://www.kaggle.com/datasets/kaggle/meta-kaggle}
+}",NA
+metakaggle_lux_ai_s2_neurips_stage2_2023_2023,NA,NA,"Kaggle (2026). Meta Kaggle [Data set], version 2332. https://www.kaggle.com/datasets/kaggle/meta-kaggle",https://www.kaggle.com/datasets/kaggle/meta-kaggle,Apache 2.0,Apache 2.0,NA,"Lux AI Season 2 NeurIPS 2023 stage 2 bots, Kaggle simulation competition","@dataset{kaggle2026,
+  title={Meta Kaggle},
+  author={Kaggle},
+  year={2026},
+  version={2332},
+  url={https://www.kaggle.com/datasets/kaggle/meta-kaggle}
+}",NA
+metakaggle_lux_ai_s3_2024_2025,NA,NA,"Kaggle (2026). Meta Kaggle [Data set], version 2332. https://www.kaggle.com/datasets/kaggle/meta-kaggle",https://www.kaggle.com/datasets/kaggle/meta-kaggle,Apache 2.0,Apache 2.0,NA,"Lux AI Season 3 1v1 bots (best-of-5 matches), Kaggle simulation competition, 2024-25","@dataset{kaggle2026,
+  title={Meta Kaggle},
+  author={Kaggle},
+  year={2026},
+  version={2332},
+  url={https://www.kaggle.com/datasets/kaggle/meta-kaggle}
+}",NA
+metakaggle_maze_crawler_2026_2026,NA,NA,"Kaggle (2026). Meta Kaggle [Data set], version 2332. https://www.kaggle.com/datasets/kaggle/meta-kaggle",https://www.kaggle.com/datasets/kaggle/meta-kaggle,Apache 2.0,Apache 2.0,NA,"Maze Crawler 1v1 bots, Kaggle simulation competition, 2026","@dataset{kaggle2026,
+  title={Meta Kaggle},
+  author={Kaggle},
+  year={2026},
+  version={2332},
+  url={https://www.kaggle.com/datasets/kaggle/meta-kaggle}
+}",NA
+metakaggle_orbit_wars_2026_2026,NA,NA,"Kaggle (2026). Meta Kaggle [Data set], version 2332. https://www.kaggle.com/datasets/kaggle/meta-kaggle",https://www.kaggle.com/datasets/kaggle/meta-kaggle,Apache 2.0,Apache 2.0,NA,"Orbit Wars 1v1 space-strategy bots, Kaggle simulation competition, 2026","@dataset{kaggle2026,
+  author = {Kaggle},
+  title = {Meta Kaggle},
+  year = {2026},
+  version = {2332},
+  url = {https://www.kaggle.com/datasets/kaggle/meta-kaggle}
+}",NA
+metakaggle_pokemon_tcg_2026_2026,NA,NA,"Kaggle (2026). Meta Kaggle [Data set], version 2332. https://www.kaggle.com/datasets/kaggle/meta-kaggle",https://www.kaggle.com/datasets/kaggle/meta-kaggle,Apache 2.0,Apache 2.0,NA,"Pokemon Trading Card Game AI battle bots, Kaggle simulation competition, 2026","@dataset{kaggle_2026,
+  title={Meta Kaggle},
+  author={Kaggle},
+  year={2026},
+  version={2332},
+  url={https://www.kaggle.com/datasets/kaggle/meta-kaggle}
+}",NA
+metakaggle_rock_paper_scissors_2020_2021,NA,NA,"Kaggle (2026). Meta Kaggle [Data set], version 2332. https://www.kaggle.com/datasets/kaggle/meta-kaggle",https://www.kaggle.com/datasets/kaggle/meta-kaggle,Apache 2.0,Apache 2.0,NA,"Rock Paper Scissors bots (1000-round matches), Kaggle simulation competition, 2020-21","@dataset{kaggle2026,
+  author = {Kaggle},
+  title = {Meta Kaggle},
+  year = {2026},
+  version = {2332},
+  url = {https://www.kaggle.com/datasets/kaggle/meta-kaggle}
+}",NA
+metakaggle_santa_2020_2021,NA,NA,"Kaggle (2026). Meta Kaggle [Data set], version 2332. https://www.kaggle.com/datasets/kaggle/meta-kaggle",https://www.kaggle.com/datasets/kaggle/meta-kaggle,Apache 2.0,Apache 2.0,NA,"Santa 2020 two-player multi-armed bandit bots, Kaggle simulation competition, 2020-21","@dataset{kaggle2026,
+  author = {Kaggle},
+  title = {Meta Kaggle},
+  year = {2026},
+  version = {2332},
+  url = {https://www.kaggle.com/datasets/kaggle/meta-kaggle}
+}",NA
 mlb_through2023,NA,NA,NA,https://github.com/sportstensor/MLB/tree/main/data_and_models,MIT,MIT,NA,MLB from 1870s through 2023,"@misc{MLBData2023,
   title = {MLB Data and Models},
   howpublished = {\url{https://github.com/sportstensor/MLB/tree/main/data_and_models}},
   note = {Accessed: 2023-10-01}
-}"
-nba_2012-2018,NA,NA,"Rossotti, P. (2018). NBA enhanced box score and standings (2012–2018) (Version 27) [Data set]. Kaggle. https://www.kaggle.com/datasets/pablote/nba-enhanced-stats",https://www.kaggle.com/datasets/pablote/nba-enhanced-stats,CC BY-SA 4.0,CC BY-SA 4.0,NA,NBA games from 2012-2018,"@misc{nba_enhanced_stats,
-  title = {NBA Enhanced Stats},
-  howpublished = {\url{https://www.kaggle.com/datasets/pablote/nba-enhanced-stats}},
-  note = {Accessed: 2023-10-01}
-}"
-nfl_2010-2019,NA,NA,NA,https://www.kaggle.com/datasets/davidsasser/nfl-game-stats-20102019,CC0 1.0,CC0 1.0,NA,NFL games from 2010-2019,"@misc{nfl_game_stats_2010_2019,
-  title = {NFL Game Stats 2010-2019},
-  url = {https://www.kaggle.com/datasets/davidsasser/nfl-game-stats-20102019},
-  note = {Accessed: 2023-10-01},
-  author = {David Sasser},
-  year = {2019}
-}"
-NHL_hockey,NA,NA,NA,https://gitlab.com/dword4/nhlapi,NA,NA,NA,national hockey league,"@misc{nhlapi,
-  title = {NHL API},
-  howpublished = {\url{https://gitlab.com/dword4/nhlapi}},
-  note = {Accessed: 2023-10-15}
-}"
-nhl_post1917,10.32614/CRAN.package.NHLData,NA,NA,https://cran.r-project.org/web/packages/NHLData/index.html,CC0 1.0,CC0 1.0,NA,NHL games following 1917," @misc{2017, title={NHLData: Scores for Every Season Since the Founding of the NHL in 1917}, url={http://dx.doi.org/10.32614/CRAN.package.NHLData}, DOI={10.32614/cran.package.nhldata}, journal={CRAN: Contributed Packages}, publisher={The R Foundation}, year={2017}, month=mar }
-"
+}",NA
+mountain_chickadees_2019_2020,10.1098/rspb.2021.1784,10.5061/dryad.kh189326b,"Heinen, V., Benedict, L., Pitera, A., Sonnenberg, B., Bridge, E., & Pravosudov, V. (2021). Social dominance has limited effects on spatial cognition in a wild food-caching bird. Proceedings of the Royal Society B, 288(1963), 20211784.",https://zenodo.org/records/5576298,CC0 1.0,CC0 1.0,NA,"Wild mountain chickadee displacements at RFID feeders across 39 communities at high and low elevation, two winters (2019-20, 2020-21). One row per displacement, timestamped."," @article{Heinen_2021, title={Social dominance has limited effects on spatial cognition in a wild food-caching bird}, volume={288}, ISSN={1471-2954}, url={http://dx.doi.org/10.1098/rspb.2021.1784}, DOI={10.1098/rspb.2021.1784}, number={1963}, journal={Proceedings of the Royal Society B: Biological Sciences}, publisher={The Royal Society}, author={Heinen, Virginia K. and Benedict, Lauren M. and Pitera, Angela M. and Sonnenberg, Benjamin R. and Bridge, Eli S. and Pravosudov, Vladimir V.}, year={2021}, month=Nov }
+",NA
+nflverse_nfl_1999_2025,NA,NA,nflverse (2026). nflverse-data: schedules/games.csv. https://github.com/nflverse/nflverse-data,https://github.com/nflverse/nflverse-data/releases/download/schedules/games.csv,CC BY 4.0,CC BY 4.0,NA,"NFL regular-season and playoff games, 1999-2025 seasons (home team as agent_a), from nflverse schedules.","@misc{nflverse2026,
+  author = {nflverse},
+  year = {2026},
+  title = {nflverse-data: schedules/games.csv},
+  url = {https://github.com/nflverse/nflverse-data},
+  howpublished = {\url{https://github.com/nflverse/nflverse-data}}
+}",NA
+openfootball_argentina_2018_2025,NA,NA,openfootball (2026). Football.TXT match data. https://github.com/openfootball,https://github.com/openfootball/south-america/tree/master/argentina,CC0 1.0,CC0 1.0,NA,"Argentina Primera División matches, 2018-19 to 2025 Apertura (2,435 matches, 34 clubs); agent_a = home side, winner from the score, shootouts in shootout_winner.","@misc{openfootball2026,
+  author = {openFootball},
+  year = {2026},
+  title = {Football.TXT match data},
+  url = {https://github.com/openfootball},
+  howpublished = {GitHub repository}
+}",NA
+openfootball_austria_2010_2027,NA,NA,openfootball (2026). Football.TXT match data. https://github.com/openfootball,https://github.com/openfootball/austria,CC0 1.0,CC0 1.0,NA,"Austrian Bundesliga matches, 2010-11 to 2026-27 (in progress; 3,039 matches, 21 clubs), including championship/relegation rounds and the Europa League play-off; agent_a = home side.","@misc{openfootball2026,
+  author = {{openFootball}},
+  title = {Football.TXT match data},
+  year = {2026},
+  url = {https://github.com/openfootball},
+  note = {Austria dataset: https://github.com/openfootball/austria}
+}",NA
+openfootball_brasileirao_2018_2026,NA,NA,openfootball (2026). Football.TXT match data. https://github.com/openfootball,https://github.com/openfootball/south-america/tree/master/brazil,CC0 1.0,CC0 1.0,NA,"Brazil Série A matches, 2018 to 2026 (2026 in progress; 3,317 matches, 32 clubs); agent_a = home side, winner from the score.","@misc{openfootball2026,
+  author = {openfootball},
+  title = {Football.TXT match data},
+  year = {2026},
+  url = {https://github.com/openfootball},
+  howpublished = {\url{https://github.com/openfootball/south-america/tree/master/brazil}}
+}",NA
+openfootball_concacafcl_2010_2025,NA,NA,openfootball (2026). world: CONCACAF Champions League. https://github.com/openfootball/world,https://github.com/openfootball/world/tree/master/north-america/champions-league,CC0 1.0,CC0 1.0,NA,"CONCACAF Champions League / Champions Cup matches, 2010-11 to 2025 (each leg a row) from openfootball Football.TXT files.","@misc{openfootball2026,
+  author = {openfootball},
+  year = {2026},
+  title = {world: {CONCACAF} {Champions} {League}},
+  url = {https://github.com/openfootball/world},
+  urldate = {2026}
+}",NA
+openfootball_libertadores_2012_2026,NA,NA,openfootball (2026). south-america: Copa Libertadores. https://github.com/openfootball/south-america,https://github.com/openfootball/south-america/tree/master/copa-libertadores,CC0 1.0,CC0 1.0,NA,"Copa Libertadores matches 2012-2026 (qualifying rounds, group stage, knockouts; each leg a row) from openfootball Football.TXT files.","@misc{openfootball2026,
+  author = {{OpenFootball}},
+  title = {South-America: Copa Libertadores},
+  year = {2026},
+  url = {https://github.com/openfootball/south-america},
+  urldate = {2026}
+}",NA
+openfootball_ligamx_2010_2025,NA,NA,openfootball (2026). Football.TXT match data. https://github.com/openfootball,https://github.com/openfootball/world/tree/master/north-america/mexico,CC0 1.0,CC0 1.0,NA,"Liga MX (Mexico) matches, 2010-11 to 2024-25, Apertura and Clausura with playoffs (4,985 matches, 28 clubs); agent_a = home side, winner from the 90/120-minute score.","@misc{openfootball2026,
+  author = {openfootball},
+  title = {Football.TXT match data},
+  year = {2026},
+  url = {https://github.com/openfootball},
+  urldate = {2026}
+}",NA
+openfootball_mls_2005_2025,NA,NA,"openfootball. Football.TXT match data, world/north-america/major-league-soccer [Data set]. GitHub.",https://github.com/openfootball/world,CC0 1.0,CC0 1.0,NA,"Major League Soccer matches 2005-2025 (7,063 matches, 34 teams; 2025 season through May 4 only)https://github.com/openfootball/worldopenfootball. Football.TXT match data, world/north-america/major-league-soccer [Data set]. GitHub.","@dataset{openfootball2024,
+  author = {OpenFootball},
+  title = {Football.TXT Match Data, World/North-America/Major-League-Soccer},
+  year = {2024},
+  publisher = {GitHub},
+  url = {https://github.com/openfootball/world}
+}",NA
+openfootball_sudamericana_2012_2025,NA,NA,openfootball (2026). south-america: Copa Sudamericana. https://github.com/openfootball/south-america,https://github.com/openfootball/south-america/tree/master/copa-libertadores,CC0 1.0,CC0 1.0,NA,Copa Sudamericana matches 2012-2025 (each leg a row) from openfootball Football.TXT files.,"@misc{openfootball2026,
+  author = {openfootball},
+  year = {2026},
+  title = {south-america: Copa Sudamericana},
+  url = {https://github.com/openfootball/south-america},
+  note = {Accessed via https://github.com/openfootball/south-america/tree/master/copa-libertadores}
+}",NA
+openfootball_uefacl_2011_2026,NA,NA,"openfootball. Football.TXT match data, champions-league [Data set]. GitHub.",https://github.com/openfootball/champions-league,CC0 1.0,CC0 1.0,NA,"UEFA Champions League matches 2011-12 to 2025-26, group/league stage onward (1,997 matches, 108 clubs)","@dataset{openfootball2024,
+  author = {openFootball},
+  title = {Football.TXT match data, champions-league},
+  year = {2024},
+  url = {https://github.com/openfootball/champions-league},
+  note = {Data set}
+}",NA
+pklmart_pickleball_2021_2025,NA,NA,pklmart (2025). pklmart's Competitive Pickleball Extracts (version 6). Kaggle. https://www.kaggle.com/datasets/cakesofspan/pklmarts-competitive-pickleball-extracts,https://www.kaggle.com/datasets/cakesofspan/pklmarts-competitive-pickleball-extracts,CC BY-NC-SA 4.0,CC BY-NC-SA 4.0,NA,"pklmart doubles pickleball game results, 2021-2025: 928 games between 789 two-player teams, skill levels 2.5 to Pro, entered by players through the pklmart data-entry tool. One row per game; agent_a = winning team; scores, match, skill level and scoring format kept.","@dataset{pklmart2025,
+  author = {pklmart},
+  title = {pklmart's Competitive Pickleball Extracts},
+  version = {6},
+  year = {2025},
+  publisher = {Kaggle},
+  url = {https://www.kaggle.com/datasets/cakesofspan/pklmarts-competitive-pickleball-extracts}
+}",NA
+placepulse2_beautiful,10.1371/journal.pone.0068400,10.6084/m9.figshare.11859993.v1,"Salesses, P., & Hidalgo, C. A. (2020). Place Pulse [Data set]. figshare. https://doi.org/10.6084/m9.figshare.11859993.v1; Salesses, P., Schechtner, K., & Hidalgo, C. A. (2013). The collaborative image of the city: mapping the inequality of urban perception. PLoS ONE, 8(7), e68400.",https://doi.org/10.6084/m9.figshare.11859993.v1,CC BY 4.0,CC BY 4.0,NA,"Place Pulse 2.0: crowdsourced pairwise votes on which of two Google Street View images (56 cities) looks more beautiful, 2013-2019. One row per vote; draws = 'equal'; rater = voter.","@dataset{Salesses2020,
+  author = {Salesses, Paul and Hidalgo, C\'esar A.},
+  year = {2020},
+  title = {Place Pulse},
+  publisher = {figshare},
+  doi = {10.6084/m9.figshare.11859993.v1},
+  url = {https://doi.org/10.6084/m9.figshare.11859993.v1}
+}",NA
+placepulse2_boring,10.1371/journal.pone.0068400,10.6084/m9.figshare.11859993.v1,"Salesses, P., & Hidalgo, C. A. (2020). Place Pulse [Data set]. figshare. https://doi.org/10.6084/m9.figshare.11859993.v1; Salesses, P., Schechtner, K., & Hidalgo, C. A. (2013). The collaborative image of the city: mapping the inequality of urban perception. PLoS ONE, 8(7), e68400.",https://doi.org/10.6084/m9.figshare.11859993.v1,CC BY 4.0,CC BY 4.0,NA,"Place Pulse 2.0: crowdsourced pairwise votes on which of two Google Street View images (56 cities) looks more boring, 2013-2019. One row per vote; draws = 'equal'; rater = voter.","@dataset{Salesses2020,
+  author = {Salesses, Paulo and Hidalgo, Cesar A.},
+  title = {Place Pulse},
+  year = {2020},
+  publisher = {figshare},
+  doi = {10.6084/m9.figshare.11859993.v1},
+  url = {https://doi.org/10.6084/m9.figshare.11859993.v1}
+}",NA
+placepulse2_depressing,10.1371/journal.pone.0068400,10.6084/m9.figshare.11859993.v1,"Salesses, P., & Hidalgo, C. A. (2020). Place Pulse [Data set]. figshare. https://doi.org/10.6084/m9.figshare.11859993.v1; Salesses, P., Schechtner, K., & Hidalgo, C. A. (2013). The collaborative image of the city: mapping the inequality of urban perception. PLoS ONE, 8(7), e68400.",https://doi.org/10.6084/m9.figshare.11859993.v1,CC BY 4.0,CC BY 4.0,NA,"Place Pulse 2.0: crowdsourced pairwise votes on which of two Google Street View images (56 cities) looks more depressing, 2013-2019. One row per vote; draws = 'equal'; rater = voter.","@dataset{Salesses2020,
+  author = {Salesses, Paulo and Hidalgo, César A.},
+  title = {Place Pulse},
+  year = {2020},
+  publisher = {figshare},
+  doi = {10.6084/m9.figshare.11859993.v1},
+  url = {https://doi.org/10.6084/m9.figshare.11859993.v1}
+}",NA
+placepulse2_livelier,10.1371/journal.pone.0068400,10.6084/m9.figshare.11859993.v1,"Salesses, P., & Hidalgo, C. A. (2020). Place Pulse [Data set]. figshare. https://doi.org/10.6084/m9.figshare.11859993.v1; Salesses, P., Schechtner, K., & Hidalgo, C. A. (2013). The collaborative image of the city: mapping the inequality of urban perception. PLoS ONE, 8(7), e68400.",https://doi.org/10.6084/m9.figshare.11859993.v1,CC BY 4.0,CC BY 4.0,NA,"Place Pulse 2.0: crowdsourced pairwise votes on which of two Google Street View images (56 cities) looks livelier, 2013-2019. One row per vote; draws = 'equal'; rater = voter.","@dataset{salesses_place_pulse_2020,
+  author = {Salesses, Paulo and Hidalgo, César A.},
+  title = {Place Pulse},
+  year = {2020},
+  publisher = {figshare},
+  doi = {10.6084/m9.figshare.11859993.v1},
+  url = {https://doi.org/10.6084/m9.figshare.11859993.v1}
+}",NA
+placepulse2_safer,10.1371/journal.pone.0068400,10.6084/m9.figshare.11859993.v1,"Salesses, P., & Hidalgo, C. A. (2020). Place Pulse [Data set]. figshare. https://doi.org/10.6084/m9.figshare.11859993.v1; Salesses, P., Schechtner, K., & Hidalgo, C. A. (2013). The collaborative image of the city: mapping the inequality of urban perception. PLoS ONE, 8(7), e68400.",https://doi.org/10.6084/m9.figshare.11859993.v1,CC BY 4.0,CC BY 4.0,NA,"Place Pulse 2.0: crowdsourced pairwise votes on which of two Google Street View images (56 cities) looks safer, 2013-2019. One row per vote; draws = 'equal'; rater = voter.","@dataset{Salesses2020,
+  author = {Salesses, Paulo and Hidalgo, César A.},
+  title = {Place Pulse},
+  year = {2020},
+  publisher = {figshare},
+  doi = {10.6084/m9.figshare.11859993.v1},
+  url = {https://doi.org/10.6084/m9.figshare.11859993.v1}
+}",NA
+placepulse2_wealthier,10.1371/journal.pone.0068400,10.6084/m9.figshare.11859993.v1,"Salesses, P., & Hidalgo, C. A. (2020). Place Pulse [Data set]. figshare. https://doi.org/10.6084/m9.figshare.11859993.v1; Salesses, P., Schechtner, K., & Hidalgo, C. A. (2013). The collaborative image of the city: mapping the inequality of urban perception. PLoS ONE, 8(7), e68400.",https://doi.org/10.6084/m9.figshare.11859993.v1,CC BY 4.0,CC BY 4.0,NA,"Place Pulse 2.0: crowdsourced pairwise votes on which of two Google Street View images (56 cities) looks wealthier, 2013-2019. One row per vote; draws = 'equal'; rater = voter.","@dataset{salesses_2020,
+  author = {Salesses, Paulo and Hidalgo, César A.},
+  year = {2020},
+  title = {Place Pulse},
+  publisher = {figshare},
+  doi = {10.6084/m9.figshare.11859993.v1},
+  url = {https://doi.org/10.6084/m9.figshare.11859993.v1}
+}",NA
+quizbowl_acf_regionals_2018,NA,NA,"quizbowl/open-data contributors. Open quizbowl data, 2018 ACF Regionals detailed stats. https://github.com/quizbowl/open-data (commit 5d86399bda90b6d7af514b6d035419016816f378).",https://github.com/quizbowl/open-data,ODbL 1.0,ODbL 1.0,NA,"Quizbowl game results at the 2018 ACF Regionals (12 sites, 143 teams), rebuilt from buzz-level detailed stats. One row per game with final scores.","@misc{quizbowl2018,
+  author = {quizbowl and open-data contributors},
+  title = {Open quizbowl data, 2018 {ACF} Regionals detailed stats},
+  year = {2018},
+  url = {https://github.com/quizbowl/open-data},
+  note = {commit 5d86399bda90b6d7af514b6d035419016816f378}
+}",NA
+ramos_2021_proof_explanation,10.1007/s10516-021-09545-8,10.17028/rd.lboro.12458486.v1,"Mejía Ramos, J. P., Evans, T., Rittberg, C., & Inglis, M. (2021). Mathematicians' assessments of the explanatory value of proofs. Axiomathes, 31(5), 575-599.",https://doi.org/10.17028/rd.lboro.12458486.v1,CC BY-NC 4.0,CC BY-NC 4.0,NA,"Mathematicians' comparative judgements of which of two proofs is more explanatory: 9 proofs, 38 judges, 760 decisions in two groups (Auckland, Rutgers); agent_a = proof chosen."," @article{Mej_a_Ramos_2021, title={Mathematicians’ Assessments of the Explanatory Value of Proofs}, volume={31}, ISSN={1572-8390}, url={http://dx.doi.org/10.1007/s10516-021-09545-8}, DOI={10.1007/s10516-021-09545-8}, number={5}, journal={Axiomathes}, publisher={Springer Science and Business Media LLC}, author={Mejía Ramos, Juan Pablo and Evans, Tanya and Rittberg, Colin and Inglis, Matthew}, year={2021}, month=Mar, pages={575–599} }
+",NA
+retrosheet_mlb_1871_2025,NA,NA,"Retrosheet. Game logs, 1871-2025 (gl1871_2025.zip, downloaded 2026-10-01). https://www.retrosheet.org",https://www.retrosheet.org/gamelogs/index.html,Custom,Custom,The information used here was obtained free of charge from and is copyrighted by Retrosheet. Interested parties may contact Retrosheet at www.retrosheet.org.,"Retrosheet MLB game logs, 1871-2025: every major-league regular-season game (NA, NL, AA, UA, PL, AL, FL) plus wildcard, division, LCS and World Series games. One row per game; agent_a = home team, with scores, park, attendance, doubleheader number, forfeit and protest codes.","@misc{Retrosheet2026,
+  author = {Retrosheet},
+  title = {Game logs, 1871-2025},
+  year = {2026},
+  howpublished = {\url{https://www.retrosheet.org}},
+  note = {Downloaded 2026-10-01}
+}",NA
+rugby_union_tier1_1871_2026,NA,NA,"Wikipedia contributors. History of rugby union matches between [nation] and [nation], 45 pages. English Wikipedia (revisions current on 2026-10-01).",https://en.wikipedia.org/wiki/Template:History_of_Tier_1_nations,CC BY-SA 4.0,CC BY-SA 4.0,NA,"Men's international rugby union test matches between the ten tier-one nations (Argentina, Australia, England, France, Ireland, Italy, New Zealand, Scotland, South Africa, Wales), 1871-2026, parsed from the 45 Wikipedia head-to-head pages. One row per test with scores, venue and competition; agent_a = home side, homefield blank at neutral venues.","@misc{Wikipedia_rugby_history,
+  author = {{Wikipedia contributors}},
+  title = {History of rugby union matches between nations},
+  howpublished = {\url{https://en.wikipedia.org/wiki/Template:History_of_Tier_1_nations}},
+  note = {English Wikipedia (revisions current on 2026-10-01)},
+  pages = {45}
+}",NA
+sangwin_2021_proof_rigour_insight,10.35542/osf.io/egks4,10.5281/zenodo.4893915,"Sangwin, C., & Kinnear, G. (2021). Investigating insight and rigour as separate constructs in mathematical proof. EdArXiv.",https://doi.org/10.5281/zenodo.4893915,MIT,MIT,NA,"Undergraduates' comparative judgements of 15 proofs of the same theorem on one criterion per session (rigour, insight, simplicity, understanding, marks; 7 sessions in two studies): 3,969 decisions by 227 judges; agent_a = proof chosen."," @article{Sangwin_2021, title={Investigating insight and rigour as separate constructs in mathematical proof}, url={http://dx.doi.org/10.35542/osf.io/egks4}, DOI={10.35542/osf.io/egks4}, publisher={Center for Open Science}, author={Sangwin, Chris and Kinnear, George}, year={2021}, month=June }
+",NA
+serena_n_hyenas,10.3389/fevo.2022.934659,10.5061/dryad.w6m905qsw,"McCormick, S. K., Laubach, Z. M., Strauss, E. D., Montgomery, T. M., & Holekamp, K. E. (2022). Evaluating drivers of female dominance in the spotted hyena. Frontiers in Ecology and Evolution, 10, 934659.",https://zenodo.org/records/7402457,CC0 1.0,CC0 1.0,NA,"Spotted hyena aggressive interactions, Serena North (serena.n) clan, Masai Mara (Mara Hyena Project): 11,030 acts among 215 hyenas of all ages and both sexes. agent_a = aggressor = winner (acts the recipient ignored or counterattacked dropped, the talek_hyenas rule); context, intensity, recipient response and both parties' sex, status and age class kept."," @article{McCormick_2022, title={Evaluating drivers of female dominance in the spotted hyena}, volume={10}, ISSN={2296-701X}, url={http://dx.doi.org/10.3389/fevo.2022.934659}, DOI={10.3389/fevo.2022.934659}, journal={Frontiers in Ecology and Evolution}, publisher={Frontiers Media SA}, author={McCormick, S. Kevin and Laubach, Zachary M. and Strauss, Eli D. and Montgomery, Tracy M. and Holekamp, Kay E.}, year={2022}, month=Dec }
+",NA
+serena_s_hyenas,10.3389/fevo.2022.934659,10.5061/dryad.w6m905qsw,"McCormick, S. K., Laubach, Z. M., Strauss, E. D., Montgomery, T. M., & Holekamp, K. E. (2022). Evaluating drivers of female dominance in the spotted hyena. Frontiers in Ecology and Evolution, 10, 934659.",https://zenodo.org/records/7402457,CC0 1.0,CC0 1.0,NA,"Spotted hyena aggressive interactions, Serena South (serena.s) clan, Masai Mara (Mara Hyena Project): 9,382 acts among 179 hyenas of all ages and both sexes. agent_a = aggressor = winner (acts the recipient ignored or counterattacked dropped, the talek_hyenas rule); context, intensity, recipient response and both parties' sex, status and age class kept."," @article{McCormick_2022, title={Evaluating drivers of female dominance in the spotted hyena}, volume={10}, ISSN={2296-701X}, url={http://dx.doi.org/10.3389/fevo.2022.934659}, DOI={10.3389/fevo.2022.934659}, journal={Frontiers in Ecology and Evolution}, publisher={Frontiers Media SA}, author={McCormick, S. Kevin and Laubach, Zachary M. and Strauss, Eli D. and Montgomery, Tracy M. and Holekamp, Kay E.}, year={2022}, month=Dec }
+",NA
+sscait_ladder_2021_2024,10.1109/TG.2018.2883499,NA,"Čertický, M., Churchill, D., Kim, K.-J., Čertický, M., & Kelly, R. (2018). StarCraft AI competitions, bots, and tournament manager software. IEEE Transactions on Games, 11(3), 227-237.",https://sscaitournament.com/api/games.php,CC BY-NC 4.0,CC BY-NC 4.0,NA,"SSCAIT (Student StarCraft AI Tournament & Ladder) bot ladder: 115,183 one-on-one StarCraft: Brood War games among 110 bots, 2021-03 to 2024-01. One row per game; every game has a winner (crash = loss; time-limit games decided on score, flagged timelimit)."," @article{Certicky_2019, title={StarCraft AI Competitions, Bots, and Tournament Manager Software}, volume={11}, ISSN={2475-1510}, url={http://dx.doi.org/10.1109/TG.2018.2883499}, DOI={10.1109/tg.2018.2883499}, number={3}, journal={IEEE Transactions on Games}, publisher={Institute of Electrical and Electronics Engineers (IEEE)}, author={Certicky, Michal and Churchill, David and Kim, Kyung-Joong and Certicky, Martin and Kelly, Richard}, year={2019}, month=Sept, pages={227–237} }
+",NA
 t20_hyper,NA,NA,"Hankin, R. K. (2017). Partial rank data with the hyper2 package: likelihood functions for generalized Bradley-Terry models. https://digitalcommons.unl.edu/r-journal/672/",https://cran.r-project.org/web/packages/hyper2/index.html,GPL-3.0,GPL-3.0,NA,"Cricket dataset, T20 Indian Premier League 2008-2017","@misc{hankin2017partial,
   author = {Hankin, Robin K. S.},
   title = {Partial rank data with the hyper2 package: likelihood functions for generalized Bradley-Terry models},
@@ -144,7 +526,51 @@ t20_hyper,NA,NA,"Hankin, R. K. (2017). Partial rank data with the hyper2 package
   howpublished = {\url{https://digitalcommons.unl.edu/r-journal/672/}},
   note = {Accessed: 2023-10-01},
   url = {https://cran.r-project.org/web/packages/hyper2/index.html}
-}"
+}",NA
+talek_hyenas_females_1988_2015,10.1111/1365-2656.12951,10.5061/dryad.5p9m3q2,"Strauss, E. D., & Holekamp, K. E. (2019). Inferring longitudinal hierarchies: framework and methods for studying the dynamics of dominance. Journal of Animal Ecology, 88(4), 521-536.",https://zenodo.org/records/5009497,CC0 1.0,CC0 1.0,NA,"Spotted hyena adult-female dominance interactions, Talek clan, Masai Mara (Mara Hyena Project), 1988-2015. One row per interaction; year only."," @article{Strauss_2019, title={Inferring longitudinal hierarchies: Framework and methods for studying the dynamics of dominance}, volume={88}, ISSN={1365-2656}, url={http://dx.doi.org/10.1111/1365-2656.12951}, DOI={10.1111/1365-2656.12951}, number={4}, journal={Journal of Animal Ecology}, publisher={Wiley}, author={Strauss, Eli D. and Holekamp, Kay E.}, editor={Jackson, Andrew}, year={2019}, month=Feb, pages={521–536} }
+",NA
+talek_hyenas_males_1988_2014,10.1111/1365-2656.12951,10.5061/dryad.5p9m3q2,"Strauss, E. D., & Holekamp, K. E. (2019). Inferring longitudinal hierarchies: framework and methods for studying the dynamics of dominance. Journal of Animal Ecology, 88(4), 521-536.",https://zenodo.org/records/5009497,CC0 1.0,CC0 1.0,NA,"Spotted hyena adult-male dominance interactions, Talek clan, Masai Mara (Mara Hyena Project), 1988-2014. One row per interaction; year only."," @article{Strauss_2019, title={Inferring longitudinal hierarchies: Framework and methods for studying the dynamics of dominance}, volume={88}, ISSN={1365-2656}, url={http://dx.doi.org/10.1111/1365-2656.12951}, DOI={10.1111/1365-2656.12951}, number={4}, journal={Journal of Animal Ecology}, publisher={Wiley}, author={Strauss, Eli D. and Holekamp, Kay E.}, editor={Jackson, Andrew}, year={2019}, month=Feb, pages={521–536} }
+",NA
+tcec_engines_2010_2026,NA,NA,"Top Chess Engine Championship (TCEC). TCEC games archive (tcecgames), release S29-final, 2026. https://github.com/TCEC-Chess/tcecgames",https://github.com/TCEC-Chess/tcecgames/releases/tag/S29-final,CC BY-SA 3.0,CC BY-SA 3.0,NA,"Top Chess Engine Championship (TCEC) engine-vs-engine games, all competition stages of standard chess, Seasons 00-29 (2010-2026); one row per game, White vs Black.","@dataset{TCEC2026,
+  title={TCEC games archive (tcecgames)},
+  author={{Top Chess Engine Championship}},
+  year={2026},
+  version={S29-final},
+  url={https://github.com/TCEC-Chess/tcecgames},
+  howpublished={\url{https://github.com/TCEC-Chess/tcecgames/releases/tag/S29-final}}
+}",NA
+tonkean_macaques_2016_2024,NA,10.5281/zenodo.15090088,"Ballesta, S., & Guerillon, A. (2025). MALT Macaque hierarchy of dominance and economic decisions (Version 1.0.0) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.15090088",https://zenodo.org/records/15090088,CC BY 4.0,CC BY 4.0,NA,"Tonkean macaque conflicts at automated testing machines (MALT), 38 animals, 2016-10 to 2024-08. One row per conflict, timestamped; recorded automatically.","@misc{https://doi.org/10.5281/zenodo.15090088,
+  doi = {10.5281/ZENODO.15090088},
+  url = {https://zenodo.org/doi/10.5281/zenodo.15090088},
+  author = {Ballesta, Sébastien and Guerillon, Ayrton},
+  title = {MALT Macaque hierarchy of dominance and economic decisions},
+  publisher = {Zenodo},
+  year = {2025},
+  copyright = {Creative Commons Attribution 4.0 International}
+}
+",NA
+ufc_1993_2026,NA,NA,"neelagiriaditya. UFC DATASETS 1994-2026 [Data set], scraped from ufcstats.com. Kaggle.",https://www.kaggle.com/datasets/neelagiriaditya/ufc-datasets-1994-2025,CC0 1.0,CC0 1.0,NA,"UFC fights 1993-2026 (11,323 fights, 4,115 fighters); agent_a = red corner; draws kept, no-contests dropped","@dataset{neelagiriaditya2026,
+  author = {neelagiriaditya},
+  title = {UFC Datasets 1994-2026},
+  note = {Scraped from ufcstats.com},
+  publisher = {Kaggle},
+  url = {https://www.kaggle.com/datasets/neelagiriaditya/ufc-datasets-1994-2025},
+  year = {2026}
+}",NA
+ukpconvarg1_convincingness_2016,10.18653/v1/P16-1150,NA,"Habernal, I., & Gurevych, I. (2016). Which argument is more convincing? Analyzing and predicting convincingness of Web arguments using bidirectional LSTM. Proceedings of the 54th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), 1589-1599.",https://github.com/UKPLab/acl2016-convincing-arguments,CC BY 4.0,CC BY 4.0,NA,"UKPConvArg1: MTurk workers' pairwise judgements of which of two web arguments is more convincing, 16,927 pairs of 1,052 arguments in 32 debates. One row per vote; 'equal' = draw; rater = worker."," @inproceedings{Habernal_2016, title={Which argument is more convincing? Analyzing and predicting convincingness of Web arguments using bidirectional LSTM}, url={http://dx.doi.org/10.18653/v1/P16-1150}, DOI={10.18653/v1/p16-1150}, booktitle={Proceedings of the 54th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)}, publisher={Association for Computational Linguistics}, author={Habernal, Ivan and Gurevych, Iryna}, year={2016}, pages={1589–1599} }
+",NA
+university_challenge_1994_2026,NA,NA,Wikipedia contributors. University Challenge series pages 1994-95 to 2026-27. English Wikipedia (revisions of 2026-10-01).,https://en.wikipedia.org/wiki/University_Challenge,CC BY-SA 4.0,CC BY-SA 4.0,NA,"University Challenge (BBC) main-series match results, 1994-95 to 2026-27 (in progress), parsed from the Wikipedia series pages. One row per match with scores, series and stage.","@misc{WikipediaContributors2026,
+  author = {{Wikipedia contributors}},
+  title = {University Challenge series pages 1994-95 to 2026-27},
+  howpublished = {English Wikipedia},
+  year = {2026},
+  month = {10},
+  day = {1},
+  url = {https://en.wikipedia.org/wiki/University_Challenge},
+  note = {[Online; accessed 2026-10-01]}
+}",NA
+vervets_2015_2017,10.1093/beheco/araa095,10.5061/dryad.612jm641s,"Vilette, C., Bonnell, T., Henzi, P., & Barrett, L. (2020). Comparing dominance hierarchy methods using a data-splitting approach with real-world data. Behavioral Ecology, 31(6), 1379-1390.",https://zenodo.org/records/4725846,CC BY 4.0,CC BY 4.0,NA,"Wild vervet monkey dyadic aggressive interactions, 66 animals, 2015-2017. One row per interaction with native draws and undecided outcomes."," @article{Vilette_2020, title={Comparing dominance hierarchy methods using a data-splitting approach with real-world data}, volume={31}, ISSN={1465-7279}, url={http://dx.doi.org/10.1093/beheco/araa095}, DOI={10.1093/beheco/araa095}, number={6}, journal={Behavioral Ecology}, publisher={Oxford University Press (OUP)}, author={Vilette, Chloé and Bonnell, Tyler and Henzi, Peter and Barrett, Louise}, editor={Quinn, John}, year={2020}, month=Oct, pages={1379–1390} }
+",NA
 zucco2019_portfoliosalience,NA,NA,"Zucco, Cesar; Batista, Mariana; Power, Timothy, 2019, ""Replication Data for: Measuring portfolio salience using the Bradley-Terry model: An illustration with data from Brazil"", https://doi.org/10.7910/DVN/HJZSIM, Harvard Dataverse, V1, UNF:6:6qSTa2eXmoheavSmyYC9Wg== [fileUNF]",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/HJZSIM,CC0 1.0,CC0 1.0,NA,Pairwise comparisons between cabinet positions in Brazil,"@dataset{zucco2019replication,
   author = {Zucco, Cesar and Batista, Mariana and Power, Timothy},
   title = {Replication Data for: Measuring portfolio salience using the Bradley-Terry model: An illustration with data from Brazil},
@@ -154,4 +580,4 @@ zucco2019_portfoliosalience,NA,NA,"Zucco, Cesar; Batista, Mariana; Power, Timoth
   version = {V1},
   url = {https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/HJZSIM},
   note = {UNF:6:6qSTa2eXmoheavSmyYC9Wg== [fileUNF]}
-}"
+}",NA
