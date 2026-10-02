@@ -495,6 +495,20 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
 ## From the 2026-09-02 monthly repos sweep
 
+- [ ] **Score the 2026-10-02 repos monthly run against its prediction.** The
+  routine (`trig_01NT4fqYRrf7nRemLN3fAZm4`) fires 21:06 UTC 2026-10-02 with a
+  rewritten prompt and opens `automated/repos-monthly-2026-10-02`. Prediction,
+  written before it ran: **0 `good` from triage; 0-3 tables shipped once its
+  leads are worked by hand, best guess 1.** Basis: the 09-02 monthly triaged
+  150 of 1,998 with 0 `good`, and the four weekly runs (09-07 to 09-28) had 0
+  `good` each, with one deposit (`nguyen_2026_factcheck`) found by hand among
+  `no_usable_file` rows. A 12-term local start found 246 raw candidates, so
+  expect ~1,500-2,000, of which the 150-row triage cap sees a fraction.
+  Decision thresholds: >=5 tables -> it earns its cost, consider raising the
+  cap; 1-4 -> keep, but the yield is in hand-worked leads; 0 -> third straight
+  empty repo-mode result, evidence for thinning it in favour of PMC/PLOS-style
+  sweeps (the two late-September PMC scout sweeps shipped 59 tables).
+
 - [ ] **`automated/repos-monthly-2026-09-02` is waiting for review, and only
   150 of its 1,998 candidates were triaged -- none `good`.** The scheduled
   run hit a container restart, 88 of 125 terms came back with a false "0

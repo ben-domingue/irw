@@ -364,6 +364,7 @@ check-ins.
 |---|---|---|
 | IRW morning status render | `trig_01JAY3UEYPP4EQLt93erbFE9` | `27 11 * * *` (04:27 PT) |
 | IRW daily search nudge | `trig_014YcLgR2Sa2D8P2yAkvQFTx` | `0 15 * * *` (08:00 PT) |
+| IRW Monthly Discovery — Repos (full sweep + triage) | `trig_01NT4fqYRrf7nRemLN3fAZm4` | `0 21 2 * *` (2nd of month, 21:00); prompt rewritten 2026-10-02 (runs/ never committed, --retriage, GitHub MCP not gh) |
 
 > **This table is not the whole account, and cannot be made so from here.** The
 > API's `list` returns the newest 20 with `has_more: true`, and passing its
