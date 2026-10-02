@@ -244,6 +244,54 @@ local({
           "a truncated oracle warns and drops nothing (cannot empty a batch)")
 })
 
+cat("drop_retired_biblio_rows (#2767)\n")
+
+local({
+    live <- tempfile(fileext = ".csv"); dlog <- tempfile(fileext = ".csv")
+    on.exit(unlink(c(live, dlog)), add = TRUE)
+    readr::write_csv(data.frame(table = c(sprintf("t%04d", 1:20), "nom_a_nom")), live)
+    dict <- data.frame(table = c("nom_a_nom", "Draft_2026_nom"), stringsAsFactors = FALSE)
+    b <- data.frame(table = c("nom_a_nom", "nom_a", "draft_2026_nom", "t0001"),
+                    Reference_x = "r", URL__for_data_ = "u", BibTex = "x",
+                    stringsAsFactors = FALSE)
+    kept <- suppressMessages(drop_retired_biblio_rows(b, dict, live, "nom",
+                                                      min_oracle_rows = 10, log.file = dlog))
+    check(identical(kept$table, c("nom_a_nom", "draft_2026_nom", "t0001")),
+          "only the row in neither the dictionary nor the oracle goes (a pre-rename name)")
+    check("draft_2026_nom" %in% kept$table,
+          "a drafted table (dictionary row, not live yet) keeps its row, case-insensitively")
+    gone <- readr::read_csv(dlog, show_col_types = FALSE)
+    check(nrow(gone) == 1L && gone$table[1] == "nom_a",
+          "the dropped row is written to the drop log")
+})
+
+local({
+    ##not in the dictionary but live: the su_2024_* case, kept
+    live <- tempfile(fileext = ".csv")
+    on.exit(unlink(live), add = TRUE)
+    readr::write_csv(data.frame(table = sprintf("t%04d", 1:20)), live)
+    b <- data.frame(table = "t0005", BibTex = "x", stringsAsFactors = FALSE)
+    kept <- drop_retired_biblio_rows(b, data.frame(table = character(0)), live, "nom",
+                                     min_oracle_rows = 10)
+    check(nrow(kept) == 1L, "a live table with no dictionary row keeps its biblio row")
+})
+
+local({
+    live <- tempfile(fileext = ".csv"); dlog <- tempfile(fileext = ".csv")
+    on.exit(unlink(c(live, dlog)), add = TRUE)
+    readr::write_csv(data.frame(table = "a"), live)            ##implausibly small
+    b <- data.frame(table = c("a", "gone"), BibTex = "x", stringsAsFactors = FALSE)
+    kept <- suppressWarnings(drop_retired_biblio_rows(b, data.frame(table = "a"), live,
+                                                      "nom", min_oracle_rows = 10,
+                                                      log.file = dlog))
+    check(nrow(kept) == 2L, "a truncated oracle warns and drops nothing")
+    check(file.exists(dlog) && nrow(readr::read_csv(dlog, show_col_types = FALSE)) == 0L,
+          "and still writes an empty drop log rather than leaving a stale one")
+    kept <- suppressWarnings(drop_retired_biblio_rows(b, data.frame(table = "a"),
+                                                      tempfile(), "nom"))
+    check(nrow(kept) == 2L, "a missing oracle drops nothing")
+})
+
 cat("pending rows (held, not discarded)\n")
 
 local({

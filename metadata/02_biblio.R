@@ -277,6 +277,13 @@ getrows<-function(l) {
     ## so a non-name row that got in before this gate existed outlives the fix
     ## unless it is taken out here (#2079).
     biblio <- drop_unshaped_dict_rows(biblio, name, "biblio")
+    ## Renamed and retired tables otherwise keep their rows for good (#2767).
+    ## Opt-in per source; core waits on the #2401 audit pause.
+    if (isTRUE(l$drop.retired)) {
+        biblio <- drop_retired_biblio_rows(biblio, irw_dict, l$file.live, name,
+                                           min_oracle_rows = if (is.null(l$min.live)) 1000 else l$min.live,
+                                           log.file = log_path("_drop_log.csv"))
+    }
     ## Refresh the dictionary-owned columns on EVERY row, not just the new
     ## ones (#2001). new_data_rows above is, by construction, the rows biblio
     ## does not have; without this a correction typed into the sheet for an
@@ -360,7 +367,9 @@ dbs<-list(
     ##dictionary row needs pasting into any sheet. `file.live` is the liveness
     ##oracle; for comps/nom/sim it is written by 05/06/07, which run_pipeline.sh
     ##runs BEFORE this script so it is current. `min.live` is that oracle's
-    ##plausibility floor (default 1000, which suits core only).
+    ##plausibility floor (default 1000, which suits core only). `drop.retired`
+##drops biblio rows whose table is in neither the dictionary nor `file.live`
+##(#2767); not yet on core.
     core=list(name="core",
               irw_dict=gsheet2tbl('https://docs.google.com/spreadsheets/d/1nhPyvuAm3JO8c9oa1swPvQZghAvmnf4xlYgbvsFH99s/edit?gid=1337607315#gid=1337607315'),
               user=IRW_OWNER,
@@ -381,7 +390,8 @@ dbs<-list(
               file.live="comps_metadata.csv",
               file.prov="comps_biblio_provenance.csv",
               file.pending="comps_biblio_pending.csv",
-              min.live=10),
+              min.live=10,
+              drop.retired=TRUE),
     nom=list(name="nom",
               irw_dict=gsheet2tbl('https://docs.google.com/spreadsheets/d/12tM4vADKcUm5LGOGRwQ5_HKkdYa3mZUaKbFUqgs2U_w/edit?gid=1337607315#gid=1337607315'),
              user=IRW_OWNER,
@@ -392,7 +402,8 @@ dbs<-list(
              file.live="nominal_metadata.csv",
              file.prov="nominal_biblio_provenance.csv",
              file.pending="nominal_biblio_pending.csv",
-             min.live=10),
+             min.live=10,
+              drop.retired=TRUE),
     sim=list(name="sim",
               irw_dict=gsheet2tbl('https://docs.google.com/spreadsheets/d/1_2SR1_miAqUy0HWFQqo5vrBVrIN4V1FU6RfavBc7WdA/edit?gid=1337607315#gid=1337607315'),
              user=IRW_OWNER,
@@ -403,7 +414,8 @@ dbs<-list(
              file.live="simsyn_metadata.csv",
              file.prov="simsyn_biblio_provenance.csv",
              file.pending="simsyn_biblio_pending.csv",
-             min.live=5)
+             min.live=5,
+              drop.retired=TRUE)
 )
 
 for (i in 1:length(dbs)) {

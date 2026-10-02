@@ -239,6 +239,61 @@ drop_dead_dict_rows <- function(auto, live.file, label, min_oracle_rows = 1000,
     auto[keep, , drop = FALSE]
 }
 
+##Drop biblio rows for tables that no longer exist under that name (#2767).
+##
+##02_biblio.R reads biblio back from Redivis and only ever appends to it, so a
+##renamed or retired table keeps its row for good: after the #2453 rename, 70 of
+##nominal_biblio's 136 rows named pre-rename tables, published beside their
+##`_nom` replacements, where get_citation and every other client read them.
+##
+##A row goes only when its table is in NEITHER the dictionary (sheet + automated
+##rows, unioned) NOR the liveness oracle. Both, because each alone is wrong:
+##  - not live alone would drop a table between its draft upload and the publish
+##    click, which has a dictionary row and is not in *metadata.csv yet (the
+##    window drop_dead_dict_rows() holds rows for);
+##  - not in the dictionary alone would repeat the su_2024_* trap, where live
+##    tables lost their provenance because only their dictionary row was missing
+##    (see irw-orphan-biblio-deletion-trap).
+##A table still listed in the dictionary is therefore kept even when it is not
+##live: retiring it is a dictionary edit, not something this decides.
+##
+##Same plausibility floor as drop_dead_dict_rows(): a missing or truncated
+##oracle drops nothing. `log.file` is always written, empty when nothing went.
+##Non-core sources only for now; core waits on the #2401 audit pause.
+drop_retired_biblio_rows <- function(biblio, dict, live.file, label,
+                                     min_oracle_rows = 1000, log.file = NULL) {
+    write_log <- function(gone) {
+        if (is.null(log.file)) return(invisible(NULL))
+        dir.create(dirname(log.file), showWarnings = FALSE, recursive = TRUE)
+        readr::write_csv(gone, log.file)
+    }
+    none <- biblio[0, intersect(c("table", "Reference_x", "URL__for_data_"), names(biblio)), drop = FALSE]
+    if (is.null(live.file) || !file.exists(live.file)) {
+        warning(label, ": no liveness oracle (", live.file, "); dropping no ",
+                "biblio rows.", call. = FALSE)
+        write_log(none)
+        return(biblio)
+    }
+    live <- readr::read_csv(live.file, show_col_types = FALSE, progress = FALSE)
+    if (!"table" %in% names(live) || nrow(live) < min_oracle_rows) {
+        warning(label, ": ", live.file, " has ", nrow(live), " row(s); too few ",
+                "to trust as a liveness oracle. Dropping no biblio rows.",
+                call. = FALSE)
+        write_log(none)
+        return(biblio)
+    }
+    known <- c(dict_key(live$table), dict_key(dict[["table"]]))
+    if ("table.lower" %in% names(dict)) known <- c(known, dict_key(dict[["table.lower"]]))
+    gone <- !dict_key(biblio$table) %in% known
+    if (any(gone)) {
+        message(label, ": dropping ", sum(gone), " biblio row(s) for tables in ",
+                "neither the dictionary nor ", live.file, ": ",
+                paste(biblio$table[gone], collapse = ", "))
+    }
+    write_log(biblio[gone, names(none), drop = FALSE])
+    biblio[!gone, , drop = FALSE]
+}
+
 ##Always written, even when empty: an empty file says "nothing is waiting",
 ##which is a different and more useful statement than a missing file.
 write_dict_pending <- function(pending, pending.file) {
