@@ -220,3 +220,54 @@ durand_2020_dosq (Preprints.org 403).
 
 **Personal data**: none served. Neuro-QoL deposit codebook has telephone area code (cqs1_1); data/neuroqol_1b.py drops it.
 VSABH-C .sav has free-text birthplace/city columns (source deposit only; not in IRW).
+
+## Wave 10 (2026-10-02)
+
+108 core tables live since wave 9 with no item text, no queue row and no triage row (Redivis listing 10-02, all shard
+counts matched `tableCount`), in 33 deposits; 4 pre-marked NOT_ITEM_TEXT (nflverse x2, wyscout_shots, cifar10h), 104 by
+five agents. Verdicts: 11 OBTAINABLE, 54 NEEDS_HUMAN, 27 RIGHTS_BLOCK, 11 NOT_ITEM_TEXT, 2 NOT_PUBLISHED, 3 UNREACHABLE.
+Spot-check 10/11 confirmed; the miss (putro_2024 x4 NOT_PUBLISHED: mmc1.docx Appendix E/F does print the wording) is
+corrected to NEEDS_HUMAN with retry=spotcheck_wrong (PsycTESTS check for TAM owed). The 84 irw_nominal tables were never
+in item-text scope and are not triaged. Working files: oneoff/itemtext-triage-wave10/.
+
+**Live item text that may be exposed (rights, not data)**
+- sun_2025_morality_study1_meaning: live __items are PERMA-Profiler Meaning M1-M3 ("To what extent do you lead a
+  purposeful and meaningful life?" ...). The ratified PERMA R1-R3 block row (Kern: "research or non-commercial purposes ...
+  For commercial uses ... contact") has the same shape. The MLQ register note ("study1/2 _meaning are PERMA") is wrong for
+  study 2, which is MLQ Presence (tsmlq1-5) and is blocked by the MLQ row.
+- mgkt__items (live, 313 rows): MGKT page has no licence line, only "This test is provided for educational use only. It
+  should not be used as psychological advice ..." (a participation disclaimer; sha 880e4633). FSIQ pages carry CC BY-NC-SA
+  4.0, MGKT is not on the site's CC list. Reads as silence.
+
+**Rights questions for Ben**
+- AI-benchmark prompts (15 jiang_2026_openeval_* POLICY:ai-prompts; originals MIT/Apache/CC BY): ship at all? 4 blocked on
+  their own terms (gpqa no-plaintext, sorry_bench no-distribution, opentom + health_orsc_bench NC).
+- WHO COSMO (7 degirolamo_2022 tables): WHO IRIS PDF "All rights reserved ... welcomes requests for permission" (sha
+  f212aa1d); PsychArchives' CC BY-SA label is not WHO's. Blocked; confirm. Validated scales inside COSMO (CMQ, Bruder 2013
+  CC BY) ship on the originator.
+- MAIA (modzelewska_2021_maia): "no permission or fee needed" + "if you modify/translate, please let us know / send a copy";
+  first published CC BY (PLOS ONE 2012). Courtesy request attached to a grant -> block by the brief; confirm.
+- MCQ (zhang_2026_mcq_*): Furr's page asks only for a citation; author manuscript deposited CC BY-NC-ND (Zenodo 12730157);
+  PsycTESTS t93356-000.
+- banerjee_2025_arithmetic_*: deposit CC0, problems first printed in a CC BY-NC-ND Nature article; does bare arithmetic
+  ("94 - 48") carry that licence?
+- wu2021_affect: items attributed to Diener; eddiener.com's NC clause names SWLS, FS, SPANE only.
+- tao_2026_mpai: 8 items adapted from Young's internet-addiction questionnaire (IAT register block; 8-item DQ unchecked).
+- martindelcampo_2020_ptsd: Spanish original (Pineda 2002) paywalled; ship the deposit's English rendering?
+- degirolamo_2022_optimism_selfworth: unnamed 8-item Italian block, origin not found; ship as own items on silence?
+- papousek_2017_anatomy: term names located on images (DESIGN:image-term); geography__items shipped place names.
+- PsycTESTS holds with wording in hand (19 tables), e.g. turcsan DPQ (CC BY S3 table), sirota CRT (OSF CC BY) -- note
+  dasilva_2019_crt was OBTAINABLE earlier, so the CRT calls are inconsistent.
+
+**Defects / leads (not acted on)**
+- data/putro_2024_it_adoption.py header says mmc1.docx holds no wording; wrong.
+- turcsan_2020_dog_dpq biblio paper DOI is the Sci Rep 2020 article; the DPQ is documented in Turcsan 2018 PLoS ONE
+  (10.1371/journal.pone.0195448).
+- fullscaleiq_* biblio cites Hampshire 2012 though the data are the Open Psychometrics FSIQ test.
+- data/openpsychometrics_options.py puts a personal email in its User-Agent.
+- OpenEval bench table points anthropic_redteam's dataset_url at allenai/WildBench (real source Anthropic/hh-rlhf);
+  WildBench prompts are real WildChat conversations (personal content possible).
+- li_2025 RPI item 8 in MDPI Table S1 looks miscopied (check vs Steinberg & Monahan 2007 before extraction).
+- degirolamo: English WHO codebook numbers pag7/pag12 differently from the Italian dictionary and pag5_2_1 anchors run
+  the other way -- map by the Italian dictionary.
+- martindelcampo .sav: AQArguing factor label repeats AQAnger's item list.
