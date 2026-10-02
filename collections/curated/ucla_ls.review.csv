@@ -1,0 +1,9 @@
+table,construct_name,instrument,language,text_source,n_items,n_participants,k,n_mapped,n_near,verdict,basis,note
+jutte_2024_loneliness,NA,Three items from the revised UCLA Loneliness Scale,ger,translated_substitute,3,825,20,0,0,NAME_ONLY,name,item text not in English
+tatala_2023_ucla_loneliness,,,,none_recorded,20,200,20,0,0,NAME_ONLY,name,no item text
+uti_newlands_2023_uclals,Loneliness,,eng,none_recorded,20,240,20,0,0,NAME_ONLY,name,no item text
+ucla_BrummerHoffman_2021,"Depression and anxiety question framing: The impact of asking about symptom's frequency, context, duration, ability and botherement - UCLA loneliness scale",Three-Item UCLA Loneliness Scale,"eng, por",study_materials,3,1828,20,0,0,NO_MATCH,,first item: abandonado
+amiot_2022_ucla_loneliness,,"UCLA Loneliness Scale (Version 3), Russell (1996)",,none_recorded,20,2421,20,15,0,PARTIAL,,first item: how often do you feel that there are people you can turn to
+gan_2015_ucla_loneliness,NA,"UCLA Loneliness Scale, 8-item short form (ULS-8; Hays & DiMatteo, 1987)",chi,translated_substitute,8,71,20,5,0,PARTIAL,,first item: i lack companionship
+mhscdc_fried_2020_loneliness,8-item revised UCLA loneliness scale,8-item revised UCLA loneliness scale,eng,none_recorded,5,80,20,5,0,PARTIAL,,first item: i feel isolated from others
+ren_2024_loneliness,NA,"Three-Item Loneliness Scale (Hughes et al., 2004; short form of the UCLA Loneliness Scale)",chi,translated_substitute,3,1587,20,2,0,PARTIAL,,first item: i feel left out

@@ -1,0 +1,28 @@
+table,construct_name,instrument,language,text_source,n_items,n_participants,k,n_mapped,n_near,verdict,basis,note
+CV_OASIS_ODSIS_PPE_Novak_2020_RSES,"Rosenberg's Self-Esteem Scale, Czech Version",Rosenberg Self-Esteem Scale (RSES),cze,translated_substitute,10,2373,10,10,0,MATCH,supplied,
+EEEDPRM_Bulut_2021,Rosenberg Self-Esteem Scale,Rosenberg Self-Esteem Scale,eng,none_recorded,10,961,10,10,0,MATCH,supplied,
+NARQing,Narcissistic Admiration and Rivalry Questionnaire (NARQ),Data from the Narcissistic Admiration and Rivalry Questionnaire (NARQ) along with Rosenberg self-esteem (RSE) and Multigroup Ethnic Identity Measure (MEIM).,eng,none_recorded,40,1248,10,10,0,MATCH,supplied,
+Rosenberg_fadplus_goto2021,Measure of Belief in Free Will and Determinism,Rosenberg Self-Esteem Scale,jpn,none_recorded,10,802,10,9,1,MATCH,supplied,
+bakker_2020_rses,NA,"Rosenberg Self-Esteem Scale (RSES), Amharic version",amh,study_materials,10,403,10,10,0,MATCH,wording,
+bang_2023_self_esteem,Rosenberg Self-Esteem Scale (Korean version),"Korean version of the Rosenberg Self-Esteem Scale (RSES; Jon, 1974)",kor,translated_substitute,10,37,10,10,1,MATCH,supplied,
+buzgova_2023_rses,Rosenberg Self-Esteem Scale (RSES),Rosenberg Self-Esteem Scale (RSES),cze,translated_substitute,10,1121,10,10,0,MATCH,supplied,
+chen2022_ses,NA,"Rosenberg Self-Esteem Scale (SES), Chinese adaptation (Ji and Yu, 1999)",chi,translated_substitute,10,303,10,10,0,MATCH,supplied,
+lhsbrasil_couto_2023_ses,Rosenberg’s Self-Esteem Scale (SES),Rosenberg’s Self-Esteem Scale (SES). The SES is a unidimensional measurement that assesses global self-esteem through 10 items responded on a four-point scale,por,none_recorded,10,464,10,10,3,MATCH,supplied,
+milson_2026_self_esteem,NA,Rosenberg Self-Esteem Scale (RSES),eng,canonical_instrument,10,904,10,10,0,MATCH,supplied,
+muslih_2024_rses,NA,"Rosenberg Self-Esteem Scale (RSES), Indonesian version",ind,translated_substitute,10,260,10,10,0,MATCH,supplied,
+oxfordcovid_xue_2024_rse,Rosenberg Self-Esteem Scale (RSE),Rosenberg Self-Esteem Scale (RSE),eng,none_recorded,10,1534,10,10,0,MATCH,supplied,
+personalitychange_kramer_2025_rses,Rosenberg Self-Esteem Scale,Rosenberg Self-Esteem Scale (RSES),eng,none_recorded,10,2092,10,10,0,MATCH,supplied,
+qi_2025_self_esteem,Rosenberg Self-Esteem Scale (RSES),Rosenberg Self-Esteem Scale (RSES),chi,translated_substitute,10,134,10,10,0,MATCH,supplied,
+roelen_2020_rses,NA,"Rosenberg Self-Esteem Scale (RSES), Haitian Creole version",hat,translated_substitute,10,1381,10,10,2,MATCH,supplied,
+rosenberg_selfesteem,Rosenberg Self Esteem Scale,Rosenberg Self-Esteem Scale,eng,study_materials,10,47974,10,10,1,MATCH,wording,
+song_2023_rses,NA,Rosenberg Self-Esteem Scale (RSES),chi,translated_substitute,10,1238,10,10,0,MATCH,supplied,
+teq_novak_2021_selfesteem,Rosenberg Self-Esteem Scale (RSES),Rosenberg Self-Esteem Scale (RSES),cze,translated_substitute,10,196,10,10,0,MATCH,supplied,
+wang_2016_study1_se,Rosenberg Self-Esteem Scale (RSES),Rosenberg Self-Esteem Scale (RSES),chi,translated_substitute,10,104,10,10,0,MATCH,supplied,
+wang_2016_study3_se,Rosenberg Self-Esteem Scale (RSES),Rosenberg Self-Esteem Scale (RSES),chi,translated_substitute,10,210,10,10,0,MATCH,supplied,
+chen2022b_selfesteem,NA,"Rosenberg Self-Esteem Scale (SES), Chinese version (Ji and Yu, 1999)",chi,translated_substitute,10,417,10,0,0,NAME_ONLY,name,item text not in English
+contreras_valdez_2022_rses,NA,,spa,unknown,10,973,10,0,0,NAME_ONLY,name,no item text
+ehealth_rioux_2025_rses,Resilience,,eng,none_recorded,4,307,10,0,0,NAME_ONLY,name,no item text
+jablonska_2020_rses,Rosenberg Self-Esteem Scale (RSES),Rosenberg Self-Esteem Scale,pol,study_materials,10,974,10,0,0,NAME_ONLY,name,item text not in English
+narcissism_schneider_2025_study2_rses,Global Self-Esteem,,ger,none_recorded,10,3,10,0,0,NAME_ONLY,name,no item text
+sd3ypl_klimczak_2019_ses,Rosenberg's Self-Esteem Scale (RSES),,pol,none_recorded,10,325,10,0,0,NAME_ONLY,name,no item text
+ehealth_rioux_2025_rse,Recent Stressful Experiences,Recent Stressful Experiences,eng,study_materials,11,257,10,0,0,NO_MATCH,,first item: anything else bad happened to you or someone close to you that upset you a lot

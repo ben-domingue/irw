@@ -233,10 +233,12 @@ use "chile_social-welfare-survey.csv", clear
 compress
 
 * keep only id, date, covariates, and "u" variables
-keep id date cov_* u1 u1_a u2 u2_a u3 u3_a u4 u4_a u5 u5_a u6 u6_a u7 u7_a u8 u8_a u9 u9_a u10 u10_a u11 u11_a u12 u13 u14 u15 u15_a u16 u16_a u17 u17_a u18_a u18_b u18_c u19 u20 u21 u22
+* u1_a-u11_a and u15_a-u17_a are minutes per day spent on each activity (0-1440):
+* measured quantities, not responses, so they are not items (irw#1700, 2026-10-01).
+keep id date cov_* u1 u2 u3 u4 u5 u6 u7 u8 u9 u10 u11 u12 u13 u14 u15 u16 u17 u18_a u18_b u18_c u19 u20 u21 u22
 
 * create long-format data from wide data
-local question_cols u1 u1_a u2 u2_a u3 u3_a u4 u4_a u5 u5_a u6 u6_a u7 u7_a u8 u8_a u9 u9_a u10 u10_a u11 u11_a u12 u13 u14 u15 u15_a u16 u16_a u17 u17_a u18_a u18_b u18_c u19 u20 u21 u22
+local question_cols u1 u2 u3 u4 u5 u6 u7 u8 u9 u10 u11 u12 u13 u14 u15 u16 u17 u18_a u18_b u18_c u19 u20 u21 u22
 tempfile long_u
 save `long_u', emptyok replace
 
@@ -253,7 +255,7 @@ foreach var of local question_cols {
 
 use `long_u', clear
 
-drop u1 u1_a u2 u2_a u3 u3_a u4 u4_a u5 u5_a u6 u6_a u7 u7_a u8 u8_a u9 u9_a u10 u10_a u11 u11_a u12 u13 u14 u15 u15_a u16 u16_a u17 u17_a u18_a u18_b u18_c u19 u20 u21 u22
+drop u1 u2 u3 u4 u5 u6 u7 u8 u9 u10 u11 u12 u13 u14 u15 u16 u17 u18_a u18_b u18_c u19 u20 u21 u22
 
 drop if missing(item) | item == ""
 
@@ -283,11 +285,17 @@ use "chile_social-welfare-survey.csv", clear
 * compress the dataset to optimize memory usage
 compress
 
+* yy3 ("¿De cuánto sería un ingreso para cubrir todas las necesidades por un
+* mes?") is a peso amount (60,000-14,000,000), not an item response: carry it
+* as a person-level covariate instead (#2401)
+rename yy3 cov_income_clp
+label values cov_income_clp
+
 * keep only id, date, covariates, and "yy" variables
-keep id date cov_* yy1 yy2 yy3 yy4 yy5 yy5_a
+keep id date cov_* yy1 yy2 yy4 yy5 yy5_a
 
 * create long-format data from wide data
-local question_cols yy1 yy2 yy3 yy4 yy5 yy5_a
+local question_cols yy1 yy2 yy4 yy5 yy5_a
 tempfile long_yy
 save `long_yy', emptyok replace
 
@@ -304,7 +312,7 @@ foreach var of local question_cols {
 
 use `long_yy', clear
 
-drop yy1 yy2 yy3 yy4 yy5 yy5_a
+drop yy1 yy2 yy4 yy5 yy5_a
 
 drop if missing(item) | item == ""
 
@@ -518,6 +526,11 @@ drop if missing(item) | item == ""
 * follow-ups the respondent was never shown. Those are not responses, so they
 * are not rows. Retained values are untouched.
 drop if missing(resp)
+
+* h3_d and h3_e carry a not-applicable option as code 3 ("No hay niños, niñas o
+* adolescentes en el hogar"; "No usa transporte público"), not a third step on
+* their Sí=1/No=2 scale. Those are not responses, so they are not rows (#2401).
+drop if inlist(item, "h3_d", "h3_e") & resp == 3
 
 * encode any needed variables
 gen resp2 = resp

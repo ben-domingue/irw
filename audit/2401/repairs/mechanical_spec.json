@@ -1,0 +1,4546 @@
+{
+ "amiot_2022_mlq_presence": {
+  "ref": "datapages.item_response_warehouse_6:fpe6:v4_0.amiot_2022_mlq_presence:gg4r",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_age_band",
+   "cov_gender",
+   "cov_pet_owner",
+   "cov_education",
+   "cov_income_band",
+   "cov_survey_language"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_education": [
+    98.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel"
+  ]
+ },
+ "amiot_2022_pss14": {
+  "ref": "datapages.item_response_warehouse_6:fpe6:v4_0.amiot_2022_pss14:mefn",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_age_band",
+   "cov_gender",
+   "cov_pet_owner",
+   "cov_education",
+   "cov_income_band",
+   "cov_survey_language"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_education": [
+    98.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel"
+  ]
+ },
+ "amiot_2022_swls": {
+  "ref": "datapages.item_response_warehouse_6:fpe6:v4_0.amiot_2022_swls:zeyb",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_age_band",
+   "cov_gender",
+   "cov_pet_owner",
+   "cov_education",
+   "cov_income_band",
+   "cov_survey_language"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_education": [
+    98.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel"
+  ]
+ },
+ "amiot_2022_vitality": {
+  "ref": "datapages.item_response_warehouse_6:fpe6:v4_0.amiot_2022_vitality:87nf",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_age_band",
+   "cov_gender",
+   "cov_pet_owner",
+   "cov_education",
+   "cov_income_band",
+   "cov_survey_language"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_education": [
+    98.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel"
+  ]
+ },
+ "amiot_2022_ucla_loneliness": {
+  "ref": "datapages.item_response_warehouse_6:fpe6:v4_0.amiot_2022_ucla_loneliness:sbye",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_age_band",
+   "cov_gender",
+   "cov_pet_owner",
+   "cov_education",
+   "cov_income_band",
+   "cov_survey_language"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_education": [
+    98.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel"
+  ]
+ },
+ "an_2020_efl_self_regulated": {
+  "ref": "datapages.item_response_warehouse_3:5xaj:v10_0.an_2020_efl_self_regulated:732s",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "rt"
+  ],
+  "drop": [],
+  "null_values": {},
+  "null_range": {},
+  "rename": {
+   "rt": "cov_completion_time_s"
+  },
+  "drop_resp_values": [],
+  "flags": [
+   "rt_constant"
+  ]
+ },
+ "antes_2020_pdm": {
+  "ref": "datapages.item_response_warehouse_4:980f:v10_0.antes_2020_pdm:gs1e",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "wave",
+   "cov_sample",
+   "cov_is_female"
+  ],
+  "drop": [
+   "cov_is_female"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null"
+  ]
+ },
+ "baudin_2024_static99r": {
+  "ref": "datapages.item_response_warehouse_3:5xaj:v10_0.baudin_2024_static99r:941r",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_age_at_release",
+   "cov_psychotic_disorder",
+   "cov_intellectual_disability",
+   "cov_substance_use_disorder",
+   "cov_nordic_background",
+   "cov_secondary_school_diploma",
+   "cov_steady_partner"
+  ],
+  "drop": [],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_range"
+  ]
+ },
+ "bitew_2020_osss3": {
+  "ref": "datapages.item_response_warehouse_3:5xaj:v10_0.bitew_2020_osss3:tm66",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_gender",
+   "cov_age",
+   "cov_residence"
+  ],
+  "drop": [
+   "cov_gender",
+   "cov_residence"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null",
+   "cov_all_null"
+  ]
+ },
+ "bitew_2020_phq9": {
+  "ref": "datapages.item_response_warehouse_3:5xaj:v10_0.bitew_2020_phq9:0m9a",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_gender",
+   "cov_age",
+   "cov_residence"
+  ],
+  "drop": [
+   "cov_gender",
+   "cov_residence"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null",
+   "cov_all_null"
+  ]
+ },
+ "bitew_2020_lte": {
+  "ref": "datapages.item_response_warehouse_3:5xaj:v10_0.bitew_2020_lte:4v35",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_gender",
+   "cov_age",
+   "cov_residence"
+  ],
+  "drop": [
+   "cov_gender",
+   "cov_residence"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null",
+   "cov_all_null"
+  ]
+ },
+ "bitew_2020_anxiety": {
+  "ref": "datapages.item_response_warehouse_3:5xaj:v10_0.bitew_2020_anxiety:cagq",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_gender",
+   "cov_age",
+   "cov_residence"
+  ],
+  "drop": [
+   "cov_gender",
+   "cov_residence"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null",
+   "cov_all_null"
+  ]
+ },
+ "bitew_2020_self_efficacy": {
+  "ref": "datapages.item_response_warehouse_3:5xaj:v10_0.bitew_2020_self_efficacy:m6d5",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_gender",
+   "cov_age",
+   "cov_residence"
+  ],
+  "drop": [
+   "cov_gender",
+   "cov_residence"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null",
+   "cov_all_null"
+  ]
+ },
+ "colombia_2023_politics_anticorruption": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.colombia_2023_politics_anticorruption:axmr",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_hhsize",
+   "cov_sex",
+   "cov_age",
+   "cov_ethnic",
+   "cov_parentesco",
+   "cov_literate",
+   "cov_educ",
+   "cov_activity"
+  ],
+  "drop": [
+   "cov_hhsize"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null"
+  ]
+ },
+ "colombia_2023_politics_attitudes": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.colombia_2023_politics_attitudes:sgg5",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_hhsize",
+   "cov_sex",
+   "cov_age",
+   "cov_ethnic",
+   "cov_parentesco",
+   "cov_literate",
+   "cov_educ",
+   "cov_activity"
+  ],
+  "drop": [
+   "cov_hhsize"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null"
+  ]
+ },
+ "colombia_2023_politics_bribery": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.colombia_2023_politics_bribery:44s3",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_hhsize",
+   "cov_sex",
+   "cov_age",
+   "cov_ethnic",
+   "cov_parentesco",
+   "cov_literate",
+   "cov_educ",
+   "cov_activity"
+  ],
+  "drop": [
+   "cov_hhsize"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null"
+  ]
+ },
+ "colombia_2023_politics_confidence": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.colombia_2023_politics_confidence:5sw9",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_hhsize",
+   "cov_sex",
+   "cov_age",
+   "cov_ethnic",
+   "cov_parentesco",
+   "cov_literate",
+   "cov_educ",
+   "cov_activity"
+  ],
+  "drop": [
+   "cov_hhsize"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null"
+  ]
+ },
+ "colombia_2023_politics_belonging": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.colombia_2023_politics_belonging:k649",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_hhsize",
+   "cov_sex",
+   "cov_age",
+   "cov_ethnic",
+   "cov_parentesco",
+   "cov_literate",
+   "cov_educ",
+   "cov_activity"
+  ],
+  "drop": [
+   "cov_hhsize"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null"
+  ]
+ },
+ "colombia_2023_politics_channels": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.colombia_2023_politics_channels:aen3",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_hhsize",
+   "cov_sex",
+   "cov_age",
+   "cov_ethnic",
+   "cov_parentesco",
+   "cov_literate",
+   "cov_educ",
+   "cov_activity"
+  ],
+  "drop": [
+   "cov_hhsize"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null"
+  ]
+ },
+ "colombia_2023_politics_guarantees": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.colombia_2023_politics_guarantees:ds1h",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_hhsize",
+   "cov_sex",
+   "cov_age",
+   "cov_ethnic",
+   "cov_parentesco",
+   "cov_literate",
+   "cov_educ",
+   "cov_activity"
+  ],
+  "drop": [
+   "cov_hhsize"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null"
+  ]
+ },
+ "colombia_2023_politics_difficulties": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.colombia_2023_politics_difficulties:ezpj",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_hhsize",
+   "cov_sex",
+   "cov_age",
+   "cov_ethnic",
+   "cov_parentesco",
+   "cov_literate",
+   "cov_educ",
+   "cov_activity"
+  ],
+  "drop": [
+   "cov_hhsize"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null"
+  ]
+ },
+ "colombia_2023_politics_discrimination": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.colombia_2023_politics_discrimination:ckc5",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_hhsize",
+   "cov_sex",
+   "cov_age",
+   "cov_ethnic",
+   "cov_parentesco",
+   "cov_literate",
+   "cov_educ",
+   "cov_activity"
+  ],
+  "drop": [
+   "cov_hhsize"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null"
+  ]
+ },
+ "colombia_2023_politics_candidates": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.colombia_2023_politics_candidates:k4ca",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_hhsize",
+   "cov_sex",
+   "cov_age",
+   "cov_ethnic",
+   "cov_parentesco",
+   "cov_literate",
+   "cov_educ",
+   "cov_activity"
+  ],
+  "drop": [
+   "cov_hhsize"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null"
+  ]
+ },
+ "colombia_2023_politics_hurdles": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.colombia_2023_politics_hurdles:2rxv",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_hhsize",
+   "cov_sex",
+   "cov_age",
+   "cov_ethnic",
+   "cov_parentesco",
+   "cov_literate",
+   "cov_educ",
+   "cov_activity"
+  ],
+  "drop": [
+   "cov_hhsize"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null"
+  ]
+ },
+ "colombia_2023_politics_importance": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.colombia_2023_politics_importance:4nyf",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_hhsize",
+   "cov_sex",
+   "cov_age",
+   "cov_ethnic",
+   "cov_parentesco",
+   "cov_literate",
+   "cov_educ",
+   "cov_activity"
+  ],
+  "drop": [
+   "cov_hhsize"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null"
+  ]
+ },
+ "colombia_2023_politics_meaning": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.colombia_2023_politics_meaning:9ahr",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_hhsize",
+   "cov_sex",
+   "cov_age",
+   "cov_ethnic",
+   "cov_parentesco",
+   "cov_literate",
+   "cov_educ",
+   "cov_activity"
+  ],
+  "drop": [
+   "cov_hhsize"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null"
+  ]
+ },
+ "colombia_2023_politics_media": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.colombia_2023_politics_media:p6kq",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_hhsize",
+   "cov_sex",
+   "cov_age",
+   "cov_ethnic",
+   "cov_parentesco",
+   "cov_literate",
+   "cov_educ",
+   "cov_activity"
+  ],
+  "drop": [
+   "cov_hhsize"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null"
+  ]
+ },
+ "colombia_2023_politics_mechanisms": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.colombia_2023_politics_mechanisms:1aka",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_hhsize",
+   "cov_sex",
+   "cov_age",
+   "cov_ethnic",
+   "cov_parentesco",
+   "cov_literate",
+   "cov_educ",
+   "cov_activity"
+  ],
+  "drop": [
+   "cov_hhsize"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null"
+  ]
+ },
+ "colombia_2023_politics_corruption": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.colombia_2023_politics_corruption:0ymw",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_hhsize",
+   "cov_sex",
+   "cov_age",
+   "cov_ethnic",
+   "cov_parentesco",
+   "cov_literate",
+   "cov_educ",
+   "cov_activity"
+  ],
+  "drop": [
+   "cov_hhsize"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null"
+  ]
+ },
+ "colombia_2023_politics_neighbors": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.colombia_2023_politics_neighbors:e5k0",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_hhsize",
+   "cov_sex",
+   "cov_age",
+   "cov_ethnic",
+   "cov_parentesco",
+   "cov_literate",
+   "cov_educ",
+   "cov_activity"
+  ],
+  "drop": [
+   "cov_hhsize"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null"
+  ]
+ },
+ "colombia_2023_politics_prevention": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.colombia_2023_politics_prevention:f4yd",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_hhsize",
+   "cov_sex",
+   "cov_age",
+   "cov_ethnic",
+   "cov_parentesco",
+   "cov_literate",
+   "cov_educ",
+   "cov_activity"
+  ],
+  "drop": [
+   "cov_hhsize"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null"
+  ]
+ },
+ "colombia_2023_politics_organizations": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.colombia_2023_politics_organizations:kghv",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_hhsize",
+   "cov_sex",
+   "cov_age",
+   "cov_ethnic",
+   "cov_parentesco",
+   "cov_literate",
+   "cov_educ",
+   "cov_activity"
+  ],
+  "drop": [
+   "cov_hhsize"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null"
+  ]
+ },
+ "colombia_2023_politics_procedures": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.colombia_2023_politics_procedures:3hwx",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_hhsize",
+   "cov_sex",
+   "cov_age",
+   "cov_ethnic",
+   "cov_parentesco",
+   "cov_literate",
+   "cov_educ",
+   "cov_activity"
+  ],
+  "drop": [
+   "cov_hhsize"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null"
+  ]
+ },
+ "colombia_2023_politics_problems": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.colombia_2023_politics_problems:554p",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_hhsize",
+   "cov_sex",
+   "cov_age",
+   "cov_ethnic",
+   "cov_parentesco",
+   "cov_literate",
+   "cov_educ",
+   "cov_activity"
+  ],
+  "drop": [
+   "cov_hhsize"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null"
+  ]
+ },
+ "colombia_2023_politics_protection": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.colombia_2023_politics_protection:p8ar",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_hhsize",
+   "cov_sex",
+   "cov_age",
+   "cov_ethnic",
+   "cov_parentesco",
+   "cov_literate",
+   "cov_educ",
+   "cov_activity"
+  ],
+  "drop": [
+   "cov_hhsize"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null"
+  ]
+ },
+ "colombia_2023_politics_party": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.colombia_2023_politics_party:awh1",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_hhsize",
+   "cov_sex",
+   "cov_age",
+   "cov_ethnic",
+   "cov_parentesco",
+   "cov_literate",
+   "cov_educ",
+   "cov_activity"
+  ],
+  "drop": [
+   "cov_hhsize"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null"
+  ]
+ },
+ "colombia_2023_politics_registration": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.colombia_2023_politics_registration:1yyy",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_hhsize",
+   "cov_sex",
+   "cov_age",
+   "cov_ethnic",
+   "cov_parentesco",
+   "cov_literate",
+   "cov_educ",
+   "cov_activity"
+  ],
+  "drop": [
+   "cov_hhsize"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null"
+  ]
+ },
+ "colombia_2023_politics_reasons": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.colombia_2023_politics_reasons:qwtm",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_hhsize",
+   "cov_sex",
+   "cov_age",
+   "cov_ethnic",
+   "cov_parentesco",
+   "cov_literate",
+   "cov_educ",
+   "cov_activity"
+  ],
+  "drop": [
+   "cov_hhsize"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null"
+  ]
+ },
+ "colombia_2023_politics_rights": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.colombia_2023_politics_rights:tkt6",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_hhsize",
+   "cov_sex",
+   "cov_age",
+   "cov_ethnic",
+   "cov_parentesco",
+   "cov_literate",
+   "cov_educ",
+   "cov_activity"
+  ],
+  "drop": [
+   "cov_hhsize"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null"
+  ]
+ },
+ "colombia_2023_politics_risks": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.colombia_2023_politics_risks:hdrm",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_hhsize",
+   "cov_sex",
+   "cov_age",
+   "cov_ethnic",
+   "cov_parentesco",
+   "cov_literate",
+   "cov_educ",
+   "cov_activity"
+  ],
+  "drop": [
+   "cov_hhsize"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null"
+  ]
+ },
+ "colombia_2023_politics_spaces": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.colombia_2023_politics_spaces:wffp",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_hhsize",
+   "cov_sex",
+   "cov_age",
+   "cov_ethnic",
+   "cov_parentesco",
+   "cov_literate",
+   "cov_educ",
+   "cov_activity"
+  ],
+  "drop": [
+   "cov_hhsize"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null"
+  ]
+ },
+ "colombia_2023_politics_requisites": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.colombia_2023_politics_requisites:07fm",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_hhsize",
+   "cov_sex",
+   "cov_age",
+   "cov_ethnic",
+   "cov_parentesco",
+   "cov_literate",
+   "cov_educ",
+   "cov_activity"
+  ],
+  "drop": [
+   "cov_hhsize"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null"
+  ]
+ },
+ "colombia_2023_politics_transparency": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.colombia_2023_politics_transparency:8xcm",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_hhsize",
+   "cov_sex",
+   "cov_age",
+   "cov_ethnic",
+   "cov_parentesco",
+   "cov_literate",
+   "cov_educ",
+   "cov_activity"
+  ],
+  "drop": [
+   "cov_hhsize"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null"
+  ]
+ },
+ "colombia_2023_politics_trust": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.colombia_2023_politics_trust:7639",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_hhsize",
+   "cov_sex",
+   "cov_age",
+   "cov_ethnic",
+   "cov_parentesco",
+   "cov_literate",
+   "cov_educ",
+   "cov_activity"
+  ],
+  "drop": [
+   "cov_hhsize"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null"
+  ]
+ },
+ "colombia_2023_politics_wellbeing": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.colombia_2023_politics_wellbeing:ky7k",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_hhsize",
+   "cov_sex",
+   "cov_age",
+   "cov_ethnic",
+   "cov_parentesco",
+   "cov_literate",
+   "cov_educ",
+   "cov_activity"
+  ],
+  "drop": [
+   "cov_hhsize"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null"
+  ]
+ },
+ "colombia_2023_politics_voting": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.colombia_2023_politics_voting:hvgf",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_hhsize",
+   "cov_sex",
+   "cov_age",
+   "cov_ethnic",
+   "cov_parentesco",
+   "cov_literate",
+   "cov_educ",
+   "cov_activity"
+  ],
+  "drop": [
+   "cov_hhsize"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null"
+  ]
+ },
+ "development_delay_anunciacao_asqse": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.development_delay_anunciacao_asqse:6x87",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "date",
+   "cov_quest",
+   "cov_language",
+   "cov_dob",
+   "cov_cdob",
+   "cov_age_m",
+   "cov_initials",
+   "cov_state",
+   "cov_zipcode",
+   "cov_gender",
+   "cov_ethnicity",
+   "cov_weight",
+   "cov_premature",
+   "cov_mom_edu",
+   "cov_mom_age",
+   "cov_author",
+   "cov_income",
+   "cov_disability",
+   "cov_disability_txt",
+   "cov_disability_code",
+   "cov_services",
+   "cov_services_txt",
+   "cov_services_code",
+   "cov_at_risk",
+   "cov_referral",
+   "cov_teen_mom",
+   "cov_project",
+   "cov_asqse_version",
+   "cov_eating_other",
+   "cov_over_and_over",
+   "cov_fearful",
+   "cov_behavior_concern",
+   "cov_habit_concern",
+   "cov_worries",
+   "cov_enjoy",
+   "cov_asqse_total",
+   "cov_asqse_monitor_cutoff",
+   "cov_asqse_cutoff",
+   "cov_has_validity",
+   "cov_se_eligibility",
+   "cov_program",
+   "cov_method",
+   "cov_contact"
+  ],
+  "drop": [
+   "cov_disability_code",
+   "cov_services_code",
+   "cov_at_risk",
+   "cov_has_validity",
+   "cov_program",
+   "cov_method"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null",
+   "cov_all_null",
+   "cov_all_null",
+   "cov_all_null",
+   "cov_all_null",
+   "cov_all_null"
+  ]
+ },
+ "development_delay_anunciacao_concerns": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.development_delay_anunciacao_concerns:a9cy",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "date",
+   "cov_quest",
+   "cov_language",
+   "cov_dob",
+   "cov_cdob",
+   "cov_age_m",
+   "cov_initials",
+   "cov_state",
+   "cov_zipcode",
+   "cov_gender",
+   "cov_ethnicity",
+   "cov_weight",
+   "cov_premature",
+   "cov_mom_edu",
+   "cov_mom_age",
+   "cov_author",
+   "cov_income",
+   "cov_disability",
+   "cov_disability_txt",
+   "cov_disability_code",
+   "cov_services",
+   "cov_services_txt",
+   "cov_services_code",
+   "cov_at_risk",
+   "cov_referral",
+   "cov_teen_mom",
+   "cov_project",
+   "cov_asqse_version",
+   "cov_eating_other",
+   "cov_over_and_over",
+   "cov_fearful",
+   "cov_behavior_concern",
+   "cov_habit_concern",
+   "cov_worries",
+   "cov_enjoy",
+   "cov_asqse_total",
+   "cov_asqse_monitor_cutoff",
+   "cov_asqse_cutoff",
+   "cov_has_validity",
+   "cov_se_eligibility",
+   "cov_program",
+   "cov_method",
+   "cov_contact"
+  ],
+  "drop": [
+   "cov_disability_code",
+   "cov_services_code",
+   "cov_at_risk",
+   "cov_has_validity",
+   "cov_program",
+   "cov_method"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null",
+   "cov_all_null",
+   "cov_all_null",
+   "cov_all_null",
+   "cov_all_null",
+   "cov_all_null"
+  ]
+ },
+ "dscore_barrera_weber_2019": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.dscore_barrera_weber_2019:q4hs",
+  "cols": [
+   "id",
+   "cov_country",
+   "cov_cohort",
+   "cov_gender",
+   "cov_gagebrth",
+   "agedays",
+   "item",
+   "resp",
+   "itemcov_difficulty"
+  ],
+  "drop": [
+   "cov_gagebrth"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null"
+  ]
+ },
+ "dscore_macarthur_weber_2019": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.dscore_macarthur_weber_2019:d7cp",
+  "cols": [
+   "id",
+   "cov_country",
+   "cov_cohort",
+   "cov_gender",
+   "cov_gagebrth",
+   "agedays",
+   "item",
+   "resp",
+   "itemcov_difficulty"
+  ],
+  "drop": [
+   "cov_gagebrth"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null"
+  ]
+ },
+ "dscore_pegboard_weber_2019": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.dscore_pegboard_weber_2019:wzrz",
+  "cols": [
+   "id",
+   "cov_country",
+   "cov_cohort",
+   "cov_gender",
+   "cov_gagebrth",
+   "agedays",
+   "item",
+   "resp",
+   "itemcov_difficulty"
+  ],
+  "drop": [
+   "cov_gagebrth"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null"
+  ]
+ },
+ "dscore_sbi_weber_2019": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.dscore_sbi_weber_2019:bqk9",
+  "cols": [
+   "id",
+   "cov_country",
+   "cov_cohort",
+   "cov_gender",
+   "cov_gagebrth",
+   "agedays",
+   "item",
+   "resp",
+   "itemcov_difficulty"
+  ],
+  "drop": [
+   "cov_gagebrth"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null"
+  ]
+ },
+ "ehealth_rioux_2025_gad": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.ehealth_rioux_2025_gad:0f81",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "rt",
+   "date",
+   "cov_eligibility_eng",
+   "cov_eligibility_child",
+   "cov_eligibility_country",
+   "cov_state",
+   "cov_age",
+   "cov_educ",
+   "cov_educ_open",
+   "cov_marital",
+   "cov_daily_1",
+   "cov_daily_2",
+   "cov_daily_3",
+   "cov_daily_4",
+   "cov_daily_5",
+   "cov_daily_6",
+   "cov_daily_7",
+   "cov_daily_8",
+   "cov_daily_9",
+   "cov_daily_noanswer",
+   "cov_n_child",
+   "cov_s_mh",
+   "cov_s_par",
+   "cov_s_mh_par",
+   "cov_s_mh_med",
+   "cov_s_mh_individual",
+   "cov_s__mh_group",
+   "cov_s_mh_ehealth",
+   "cov_s_par_individual",
+   "cov_s_par_group",
+   "cov_s_par_ehealth",
+   "cov_f_wkcoach",
+   "cov_f_indcoach",
+   "cov_f_grcoach",
+   "cov_f_video",
+   "cov_f_reading",
+   "cov_f_activities",
+   "cov_f_track",
+   "cov_f_monitor",
+   "cov_f_connect",
+   "cov_f_length",
+   "cov_connect",
+   "cov_forum_gender",
+   "cov_forum_rel_1",
+   "cov_forum_rel_2",
+   "cov_forum_rel_3",
+   "cov_forum_rel_4",
+   "cov_vid_gender",
+   "cov_vid_rel_1",
+   "cov_vid_rel_2",
+   "cov_vid_rel_3",
+   "cov_vid_rel_4",
+   "cov_attention1",
+   "cov_p_choice",
+   "cov_attention2",
+   "cov_med",
+   "cov_med_1",
+   "cov_med_2",
+   "cov_med_3",
+   "cov_med_4",
+   "cov_med_5",
+   "cov_med_open",
+   "cov_s_ind",
+   "cov_s_ind_times",
+   "cov_s_ind_min",
+   "cov_s_ind_sat",
+   "cov_s_group",
+   "cov_s_group_times",
+   "cov_s_group_min",
+   "cov_s_group_sat",
+   "cov_s_instant",
+   "cov_s_instant_times",
+   "cov_s_instant_min",
+   "cov_s_instant_sat",
+   "cov_s_crisis",
+   "cov_s_crisis_times",
+   "cov_s_crisis_min",
+   "cov_s_crisis_sat",
+   "cov_s_info",
+   "cov_s_info_times",
+   "cov_s_info_min",
+   "cov_s_info_sat",
+   "cov_s_faith",
+   "cov_s_faith_times",
+   "cov_s_faith_min",
+   "cov_s_faith_sat",
+   "cov_s_ehealth",
+   "cov_s_ehealth_times",
+   "cov_s_ehealth_min",
+   "cov_s_ehealth_sat",
+   "cov_s_other",
+   "cov_s_other_text",
+   "cov_s_other_times",
+   "cov_s_other_min",
+   "cov_s_other_sat",
+   "cov_person"
+  ],
+  "drop": [
+   "cov_educ_open",
+   "cov_daily_9",
+   "cov_daily_noanswer"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {
+   "rt": "cov_completion_time_s"
+  },
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null",
+   "cov_all_null",
+   "cov_all_null",
+   "rt_constant"
+  ]
+ },
+ "ehealth_rioux_2025_mssps": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.ehealth_rioux_2025_mssps:1p26",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "rt",
+   "date",
+   "cov_eligibility_eng",
+   "cov_eligibility_child",
+   "cov_eligibility_country",
+   "cov_state",
+   "cov_age",
+   "cov_educ",
+   "cov_educ_open",
+   "cov_marital",
+   "cov_daily_1",
+   "cov_daily_2",
+   "cov_daily_3",
+   "cov_daily_4",
+   "cov_daily_5",
+   "cov_daily_6",
+   "cov_daily_7",
+   "cov_daily_8",
+   "cov_daily_9",
+   "cov_daily_noanswer",
+   "cov_n_child",
+   "cov_s_mh",
+   "cov_s_par",
+   "cov_s_mh_par",
+   "cov_s_mh_med",
+   "cov_s_mh_individual",
+   "cov_s__mh_group",
+   "cov_s_mh_ehealth",
+   "cov_s_par_individual",
+   "cov_s_par_group",
+   "cov_s_par_ehealth",
+   "cov_f_wkcoach",
+   "cov_f_indcoach",
+   "cov_f_grcoach",
+   "cov_f_video",
+   "cov_f_reading",
+   "cov_f_activities",
+   "cov_f_track",
+   "cov_f_monitor",
+   "cov_f_connect",
+   "cov_f_length",
+   "cov_connect",
+   "cov_forum_gender",
+   "cov_forum_rel_1",
+   "cov_forum_rel_2",
+   "cov_forum_rel_3",
+   "cov_forum_rel_4",
+   "cov_vid_gender",
+   "cov_vid_rel_1",
+   "cov_vid_rel_2",
+   "cov_vid_rel_3",
+   "cov_vid_rel_4",
+   "cov_attention1",
+   "cov_p_choice",
+   "cov_attention2",
+   "cov_med",
+   "cov_med_1",
+   "cov_med_2",
+   "cov_med_3",
+   "cov_med_4",
+   "cov_med_5",
+   "cov_med_open",
+   "cov_s_ind",
+   "cov_s_ind_times",
+   "cov_s_ind_min",
+   "cov_s_ind_sat",
+   "cov_s_group",
+   "cov_s_group_times",
+   "cov_s_group_min",
+   "cov_s_group_sat",
+   "cov_s_instant",
+   "cov_s_instant_times",
+   "cov_s_instant_min",
+   "cov_s_instant_sat",
+   "cov_s_crisis",
+   "cov_s_crisis_times",
+   "cov_s_crisis_min",
+   "cov_s_crisis_sat",
+   "cov_s_info",
+   "cov_s_info_times",
+   "cov_s_info_min",
+   "cov_s_info_sat",
+   "cov_s_faith",
+   "cov_s_faith_times",
+   "cov_s_faith_min",
+   "cov_s_faith_sat",
+   "cov_s_ehealth",
+   "cov_s_ehealth_times",
+   "cov_s_ehealth_min",
+   "cov_s_ehealth_sat",
+   "cov_s_other",
+   "cov_s_other_text",
+   "cov_s_other_times",
+   "cov_s_other_min",
+   "cov_s_other_sat",
+   "cov_person"
+  ],
+  "drop": [
+   "cov_educ_open",
+   "cov_daily_9",
+   "cov_daily_noanswer"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {
+   "rt": "cov_completion_time_s"
+  },
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null",
+   "cov_all_null",
+   "cov_all_null",
+   "rt_constant"
+  ]
+ },
+ "ehealth_rioux_2025_abiliti": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.ehealth_rioux_2025_abiliti:kqqq",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "rt",
+   "date",
+   "cov_eligibility_eng",
+   "cov_eligibility_child",
+   "cov_eligibility_country",
+   "cov_state",
+   "cov_age",
+   "cov_educ",
+   "cov_educ_open",
+   "cov_marital",
+   "cov_daily_1",
+   "cov_daily_2",
+   "cov_daily_3",
+   "cov_daily_4",
+   "cov_daily_5",
+   "cov_daily_6",
+   "cov_daily_7",
+   "cov_daily_8",
+   "cov_daily_9",
+   "cov_daily_noanswer",
+   "cov_n_child",
+   "cov_s_mh",
+   "cov_s_par",
+   "cov_s_mh_par",
+   "cov_s_mh_med",
+   "cov_s_mh_individual",
+   "cov_s__mh_group",
+   "cov_s_mh_ehealth",
+   "cov_s_par_individual",
+   "cov_s_par_group",
+   "cov_s_par_ehealth",
+   "cov_f_wkcoach",
+   "cov_f_indcoach",
+   "cov_f_grcoach",
+   "cov_f_video",
+   "cov_f_reading",
+   "cov_f_activities",
+   "cov_f_track",
+   "cov_f_monitor",
+   "cov_f_connect",
+   "cov_f_length",
+   "cov_connect",
+   "cov_forum_gender",
+   "cov_forum_rel_1",
+   "cov_forum_rel_2",
+   "cov_forum_rel_3",
+   "cov_forum_rel_4",
+   "cov_vid_gender",
+   "cov_vid_rel_1",
+   "cov_vid_rel_2",
+   "cov_vid_rel_3",
+   "cov_vid_rel_4",
+   "cov_attention1",
+   "cov_p_choice",
+   "cov_attention2",
+   "cov_med",
+   "cov_med_1",
+   "cov_med_2",
+   "cov_med_3",
+   "cov_med_4",
+   "cov_med_5",
+   "cov_med_open",
+   "cov_s_ind",
+   "cov_s_ind_times",
+   "cov_s_ind_min",
+   "cov_s_ind_sat",
+   "cov_s_group",
+   "cov_s_group_times",
+   "cov_s_group_min",
+   "cov_s_group_sat",
+   "cov_s_instant",
+   "cov_s_instant_times",
+   "cov_s_instant_min",
+   "cov_s_instant_sat",
+   "cov_s_crisis",
+   "cov_s_crisis_times",
+   "cov_s_crisis_min",
+   "cov_s_crisis_sat",
+   "cov_s_info",
+   "cov_s_info_times",
+   "cov_s_info_min",
+   "cov_s_info_sat",
+   "cov_s_faith",
+   "cov_s_faith_times",
+   "cov_s_faith_min",
+   "cov_s_faith_sat",
+   "cov_s_ehealth",
+   "cov_s_ehealth_times",
+   "cov_s_ehealth_min",
+   "cov_s_ehealth_sat",
+   "cov_s_other",
+   "cov_s_other_text",
+   "cov_s_other_times",
+   "cov_s_other_min",
+   "cov_s_other_sat",
+   "cov_person"
+  ],
+  "drop": [
+   "cov_educ_open",
+   "cov_daily_9",
+   "cov_daily_noanswer"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {
+   "rt": "cov_completion_time_s"
+  },
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null",
+   "cov_all_null",
+   "cov_all_null",
+   "rt_constant"
+  ]
+ },
+ "ehealth_rioux_2025_beam": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.ehealth_rioux_2025_beam:5h5n",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "rt",
+   "date",
+   "cov_eligibility_eng",
+   "cov_eligibility_child",
+   "cov_eligibility_country",
+   "cov_state",
+   "cov_age",
+   "cov_educ",
+   "cov_educ_open",
+   "cov_marital",
+   "cov_daily_1",
+   "cov_daily_2",
+   "cov_daily_3",
+   "cov_daily_4",
+   "cov_daily_5",
+   "cov_daily_6",
+   "cov_daily_7",
+   "cov_daily_8",
+   "cov_daily_9",
+   "cov_daily_noanswer",
+   "cov_n_child",
+   "cov_s_mh",
+   "cov_s_par",
+   "cov_s_mh_par",
+   "cov_s_mh_med",
+   "cov_s_mh_individual",
+   "cov_s__mh_group",
+   "cov_s_mh_ehealth",
+   "cov_s_par_individual",
+   "cov_s_par_group",
+   "cov_s_par_ehealth",
+   "cov_f_wkcoach",
+   "cov_f_indcoach",
+   "cov_f_grcoach",
+   "cov_f_video",
+   "cov_f_reading",
+   "cov_f_activities",
+   "cov_f_track",
+   "cov_f_monitor",
+   "cov_f_connect",
+   "cov_f_length",
+   "cov_connect",
+   "cov_forum_gender",
+   "cov_forum_rel_1",
+   "cov_forum_rel_2",
+   "cov_forum_rel_3",
+   "cov_forum_rel_4",
+   "cov_vid_gender",
+   "cov_vid_rel_1",
+   "cov_vid_rel_2",
+   "cov_vid_rel_3",
+   "cov_vid_rel_4",
+   "cov_attention1",
+   "cov_p_choice",
+   "cov_attention2",
+   "cov_med",
+   "cov_med_1",
+   "cov_med_2",
+   "cov_med_3",
+   "cov_med_4",
+   "cov_med_5",
+   "cov_med_open",
+   "cov_s_ind",
+   "cov_s_ind_times",
+   "cov_s_ind_min",
+   "cov_s_ind_sat",
+   "cov_s_group",
+   "cov_s_group_times",
+   "cov_s_group_min",
+   "cov_s_group_sat",
+   "cov_s_instant",
+   "cov_s_instant_times",
+   "cov_s_instant_min",
+   "cov_s_instant_sat",
+   "cov_s_crisis",
+   "cov_s_crisis_times",
+   "cov_s_crisis_min",
+   "cov_s_crisis_sat",
+   "cov_s_info",
+   "cov_s_info_times",
+   "cov_s_info_min",
+   "cov_s_info_sat",
+   "cov_s_faith",
+   "cov_s_faith_times",
+   "cov_s_faith_min",
+   "cov_s_faith_sat",
+   "cov_s_ehealth",
+   "cov_s_ehealth_times",
+   "cov_s_ehealth_min",
+   "cov_s_ehealth_sat",
+   "cov_s_other",
+   "cov_s_other_text",
+   "cov_s_other_times",
+   "cov_s_other_min",
+   "cov_s_other_sat",
+   "cov_person"
+  ],
+  "drop": [
+   "cov_educ_open",
+   "cov_daily_9",
+   "cov_daily_noanswer"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {
+   "rt": "cov_completion_time_s"
+  },
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null",
+   "cov_all_null",
+   "cov_all_null",
+   "rt_constant"
+  ]
+ },
+ "ehealth_rioux_2025_phq": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.ehealth_rioux_2025_phq:jbcz",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "rt",
+   "date",
+   "cov_eligibility_eng",
+   "cov_eligibility_child",
+   "cov_eligibility_country",
+   "cov_state",
+   "cov_age",
+   "cov_educ",
+   "cov_educ_open",
+   "cov_marital",
+   "cov_daily_1",
+   "cov_daily_2",
+   "cov_daily_3",
+   "cov_daily_4",
+   "cov_daily_5",
+   "cov_daily_6",
+   "cov_daily_7",
+   "cov_daily_8",
+   "cov_daily_9",
+   "cov_daily_noanswer",
+   "cov_n_child",
+   "cov_s_mh",
+   "cov_s_par",
+   "cov_s_mh_par",
+   "cov_s_mh_med",
+   "cov_s_mh_individual",
+   "cov_s__mh_group",
+   "cov_s_mh_ehealth",
+   "cov_s_par_individual",
+   "cov_s_par_group",
+   "cov_s_par_ehealth",
+   "cov_f_wkcoach",
+   "cov_f_indcoach",
+   "cov_f_grcoach",
+   "cov_f_video",
+   "cov_f_reading",
+   "cov_f_activities",
+   "cov_f_track",
+   "cov_f_monitor",
+   "cov_f_connect",
+   "cov_f_length",
+   "cov_connect",
+   "cov_forum_gender",
+   "cov_forum_rel_1",
+   "cov_forum_rel_2",
+   "cov_forum_rel_3",
+   "cov_forum_rel_4",
+   "cov_vid_gender",
+   "cov_vid_rel_1",
+   "cov_vid_rel_2",
+   "cov_vid_rel_3",
+   "cov_vid_rel_4",
+   "cov_attention1",
+   "cov_p_choice",
+   "cov_attention2",
+   "cov_med",
+   "cov_med_1",
+   "cov_med_2",
+   "cov_med_3",
+   "cov_med_4",
+   "cov_med_5",
+   "cov_med_open",
+   "cov_s_ind",
+   "cov_s_ind_times",
+   "cov_s_ind_min",
+   "cov_s_ind_sat",
+   "cov_s_group",
+   "cov_s_group_times",
+   "cov_s_group_min",
+   "cov_s_group_sat",
+   "cov_s_instant",
+   "cov_s_instant_times",
+   "cov_s_instant_min",
+   "cov_s_instant_sat",
+   "cov_s_crisis",
+   "cov_s_crisis_times",
+   "cov_s_crisis_min",
+   "cov_s_crisis_sat",
+   "cov_s_info",
+   "cov_s_info_times",
+   "cov_s_info_min",
+   "cov_s_info_sat",
+   "cov_s_faith",
+   "cov_s_faith_times",
+   "cov_s_faith_min",
+   "cov_s_faith_sat",
+   "cov_s_ehealth",
+   "cov_s_ehealth_times",
+   "cov_s_ehealth_min",
+   "cov_s_ehealth_sat",
+   "cov_s_other",
+   "cov_s_other_text",
+   "cov_s_other_times",
+   "cov_s_other_min",
+   "cov_s_other_sat",
+   "cov_person"
+  ],
+  "drop": [
+   "cov_educ_open",
+   "cov_daily_9",
+   "cov_daily_noanswer"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {
+   "rt": "cov_completion_time_s"
+  },
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null",
+   "cov_all_null",
+   "cov_all_null",
+   "rt_constant"
+  ]
+ },
+ "ehealth_rioux_2025_rse": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.ehealth_rioux_2025_rse:52x6",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "rt",
+   "date",
+   "cov_eligibility_eng",
+   "cov_eligibility_child",
+   "cov_eligibility_country",
+   "cov_state",
+   "cov_age",
+   "cov_educ",
+   "cov_educ_open",
+   "cov_marital",
+   "cov_daily_1",
+   "cov_daily_2",
+   "cov_daily_3",
+   "cov_daily_4",
+   "cov_daily_5",
+   "cov_daily_6",
+   "cov_daily_7",
+   "cov_daily_8",
+   "cov_daily_9",
+   "cov_daily_noanswer",
+   "cov_n_child",
+   "cov_s_mh",
+   "cov_s_par",
+   "cov_s_mh_par",
+   "cov_s_mh_med",
+   "cov_s_mh_individual",
+   "cov_s__mh_group",
+   "cov_s_mh_ehealth",
+   "cov_s_par_individual",
+   "cov_s_par_group",
+   "cov_s_par_ehealth",
+   "cov_f_wkcoach",
+   "cov_f_indcoach",
+   "cov_f_grcoach",
+   "cov_f_video",
+   "cov_f_reading",
+   "cov_f_activities",
+   "cov_f_track",
+   "cov_f_monitor",
+   "cov_f_connect",
+   "cov_f_length",
+   "cov_connect",
+   "cov_forum_gender",
+   "cov_forum_rel_1",
+   "cov_forum_rel_2",
+   "cov_forum_rel_3",
+   "cov_forum_rel_4",
+   "cov_vid_gender",
+   "cov_vid_rel_1",
+   "cov_vid_rel_2",
+   "cov_vid_rel_3",
+   "cov_vid_rel_4",
+   "cov_attention1",
+   "cov_p_choice",
+   "cov_attention2",
+   "cov_med",
+   "cov_med_1",
+   "cov_med_2",
+   "cov_med_3",
+   "cov_med_4",
+   "cov_med_5",
+   "cov_med_open",
+   "cov_s_ind",
+   "cov_s_ind_times",
+   "cov_s_ind_min",
+   "cov_s_ind_sat",
+   "cov_s_group",
+   "cov_s_group_times",
+   "cov_s_group_min",
+   "cov_s_group_sat",
+   "cov_s_instant",
+   "cov_s_instant_times",
+   "cov_s_instant_min",
+   "cov_s_instant_sat",
+   "cov_s_crisis",
+   "cov_s_crisis_times",
+   "cov_s_crisis_min",
+   "cov_s_crisis_sat",
+   "cov_s_info",
+   "cov_s_info_times",
+   "cov_s_info_min",
+   "cov_s_info_sat",
+   "cov_s_faith",
+   "cov_s_faith_times",
+   "cov_s_faith_min",
+   "cov_s_faith_sat",
+   "cov_s_ehealth",
+   "cov_s_ehealth_times",
+   "cov_s_ehealth_min",
+   "cov_s_ehealth_sat",
+   "cov_s_other",
+   "cov_s_other_text",
+   "cov_s_other_times",
+   "cov_s_other_min",
+   "cov_s_other_sat",
+   "cov_person"
+  ],
+  "drop": [
+   "cov_educ_open",
+   "cov_daily_9",
+   "cov_daily_noanswer"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {
+   "rt": "cov_completion_time_s"
+  },
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null",
+   "cov_all_null",
+   "cov_all_null",
+   "rt_constant"
+  ]
+ },
+ "ehealth_rioux_2025_pci": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.ehealth_rioux_2025_pci:6axg",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "rt",
+   "date",
+   "cov_eligibility_eng",
+   "cov_eligibility_child",
+   "cov_eligibility_country",
+   "cov_state",
+   "cov_age",
+   "cov_educ",
+   "cov_educ_open",
+   "cov_marital",
+   "cov_daily_1",
+   "cov_daily_2",
+   "cov_daily_3",
+   "cov_daily_4",
+   "cov_daily_5",
+   "cov_daily_6",
+   "cov_daily_7",
+   "cov_daily_8",
+   "cov_daily_9",
+   "cov_daily_noanswer",
+   "cov_n_child",
+   "cov_s_mh",
+   "cov_s_par",
+   "cov_s_mh_par",
+   "cov_s_mh_med",
+   "cov_s_mh_individual",
+   "cov_s__mh_group",
+   "cov_s_mh_ehealth",
+   "cov_s_par_individual",
+   "cov_s_par_group",
+   "cov_s_par_ehealth",
+   "cov_f_wkcoach",
+   "cov_f_indcoach",
+   "cov_f_grcoach",
+   "cov_f_video",
+   "cov_f_reading",
+   "cov_f_activities",
+   "cov_f_track",
+   "cov_f_monitor",
+   "cov_f_connect",
+   "cov_f_length",
+   "cov_connect",
+   "cov_forum_gender",
+   "cov_forum_rel_1",
+   "cov_forum_rel_2",
+   "cov_forum_rel_3",
+   "cov_forum_rel_4",
+   "cov_vid_gender",
+   "cov_vid_rel_1",
+   "cov_vid_rel_2",
+   "cov_vid_rel_3",
+   "cov_vid_rel_4",
+   "cov_attention1",
+   "cov_p_choice",
+   "cov_attention2",
+   "cov_med",
+   "cov_med_1",
+   "cov_med_2",
+   "cov_med_3",
+   "cov_med_4",
+   "cov_med_5",
+   "cov_med_open",
+   "cov_s_ind",
+   "cov_s_ind_times",
+   "cov_s_ind_min",
+   "cov_s_ind_sat",
+   "cov_s_group",
+   "cov_s_group_times",
+   "cov_s_group_min",
+   "cov_s_group_sat",
+   "cov_s_instant",
+   "cov_s_instant_times",
+   "cov_s_instant_min",
+   "cov_s_instant_sat",
+   "cov_s_crisis",
+   "cov_s_crisis_times",
+   "cov_s_crisis_min",
+   "cov_s_crisis_sat",
+   "cov_s_info",
+   "cov_s_info_times",
+   "cov_s_info_min",
+   "cov_s_info_sat",
+   "cov_s_faith",
+   "cov_s_faith_times",
+   "cov_s_faith_min",
+   "cov_s_faith_sat",
+   "cov_s_ehealth",
+   "cov_s_ehealth_times",
+   "cov_s_ehealth_min",
+   "cov_s_ehealth_sat",
+   "cov_s_other",
+   "cov_s_other_text",
+   "cov_s_other_times",
+   "cov_s_other_min",
+   "cov_s_other_sat",
+   "cov_person"
+  ],
+  "drop": [
+   "cov_educ_open",
+   "cov_daily_9",
+   "cov_daily_noanswer"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {
+   "rt": "cov_completion_time_s"
+  },
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null",
+   "cov_all_null",
+   "cov_all_null",
+   "rt_constant"
+  ]
+ },
+ "ehealth_rioux_2025_rses": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.ehealth_rioux_2025_rses:a5f1",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "rt",
+   "date",
+   "cov_eligibility_eng",
+   "cov_eligibility_child",
+   "cov_eligibility_country",
+   "cov_state",
+   "cov_age",
+   "cov_educ",
+   "cov_educ_open",
+   "cov_marital",
+   "cov_daily_1",
+   "cov_daily_2",
+   "cov_daily_3",
+   "cov_daily_4",
+   "cov_daily_5",
+   "cov_daily_6",
+   "cov_daily_7",
+   "cov_daily_8",
+   "cov_daily_9",
+   "cov_daily_noanswer",
+   "cov_n_child",
+   "cov_s_mh",
+   "cov_s_par",
+   "cov_s_mh_par",
+   "cov_s_mh_med",
+   "cov_s_mh_individual",
+   "cov_s__mh_group",
+   "cov_s_mh_ehealth",
+   "cov_s_par_individual",
+   "cov_s_par_group",
+   "cov_s_par_ehealth",
+   "cov_f_wkcoach",
+   "cov_f_indcoach",
+   "cov_f_grcoach",
+   "cov_f_video",
+   "cov_f_reading",
+   "cov_f_activities",
+   "cov_f_track",
+   "cov_f_monitor",
+   "cov_f_connect",
+   "cov_f_length",
+   "cov_connect",
+   "cov_forum_gender",
+   "cov_forum_rel_1",
+   "cov_forum_rel_2",
+   "cov_forum_rel_3",
+   "cov_forum_rel_4",
+   "cov_vid_gender",
+   "cov_vid_rel_1",
+   "cov_vid_rel_2",
+   "cov_vid_rel_3",
+   "cov_vid_rel_4",
+   "cov_attention1",
+   "cov_p_choice",
+   "cov_attention2",
+   "cov_med",
+   "cov_med_1",
+   "cov_med_2",
+   "cov_med_3",
+   "cov_med_4",
+   "cov_med_5",
+   "cov_med_open",
+   "cov_s_ind",
+   "cov_s_ind_times",
+   "cov_s_ind_min",
+   "cov_s_ind_sat",
+   "cov_s_group",
+   "cov_s_group_times",
+   "cov_s_group_min",
+   "cov_s_group_sat",
+   "cov_s_instant",
+   "cov_s_instant_times",
+   "cov_s_instant_min",
+   "cov_s_instant_sat",
+   "cov_s_crisis",
+   "cov_s_crisis_times",
+   "cov_s_crisis_min",
+   "cov_s_crisis_sat",
+   "cov_s_info",
+   "cov_s_info_times",
+   "cov_s_info_min",
+   "cov_s_info_sat",
+   "cov_s_faith",
+   "cov_s_faith_times",
+   "cov_s_faith_min",
+   "cov_s_faith_sat",
+   "cov_s_ehealth",
+   "cov_s_ehealth_times",
+   "cov_s_ehealth_min",
+   "cov_s_ehealth_sat",
+   "cov_s_other",
+   "cov_s_other_text",
+   "cov_s_other_times",
+   "cov_s_other_min",
+   "cov_s_other_sat",
+   "cov_person"
+  ],
+  "drop": [
+   "cov_educ_open",
+   "cov_daily_9",
+   "cov_daily_noanswer"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {
+   "rt": "cov_completion_time_s"
+  },
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null",
+   "cov_all_null",
+   "cov_all_null",
+   "rt_constant"
+  ]
+ },
+ "ehealth_rioux_2025_triplep": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.ehealth_rioux_2025_triplep:q341",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "rt",
+   "date",
+   "cov_eligibility_eng",
+   "cov_eligibility_child",
+   "cov_eligibility_country",
+   "cov_state",
+   "cov_age",
+   "cov_educ",
+   "cov_educ_open",
+   "cov_marital",
+   "cov_daily_1",
+   "cov_daily_2",
+   "cov_daily_3",
+   "cov_daily_4",
+   "cov_daily_5",
+   "cov_daily_6",
+   "cov_daily_7",
+   "cov_daily_8",
+   "cov_daily_9",
+   "cov_daily_noanswer",
+   "cov_n_child",
+   "cov_s_mh",
+   "cov_s_par",
+   "cov_s_mh_par",
+   "cov_s_mh_med",
+   "cov_s_mh_individual",
+   "cov_s__mh_group",
+   "cov_s_mh_ehealth",
+   "cov_s_par_individual",
+   "cov_s_par_group",
+   "cov_s_par_ehealth",
+   "cov_f_wkcoach",
+   "cov_f_indcoach",
+   "cov_f_grcoach",
+   "cov_f_video",
+   "cov_f_reading",
+   "cov_f_activities",
+   "cov_f_track",
+   "cov_f_monitor",
+   "cov_f_connect",
+   "cov_f_length",
+   "cov_connect",
+   "cov_forum_gender",
+   "cov_forum_rel_1",
+   "cov_forum_rel_2",
+   "cov_forum_rel_3",
+   "cov_forum_rel_4",
+   "cov_vid_gender",
+   "cov_vid_rel_1",
+   "cov_vid_rel_2",
+   "cov_vid_rel_3",
+   "cov_vid_rel_4",
+   "cov_attention1",
+   "cov_p_choice",
+   "cov_attention2",
+   "cov_med",
+   "cov_med_1",
+   "cov_med_2",
+   "cov_med_3",
+   "cov_med_4",
+   "cov_med_5",
+   "cov_med_open",
+   "cov_s_ind",
+   "cov_s_ind_times",
+   "cov_s_ind_min",
+   "cov_s_ind_sat",
+   "cov_s_group",
+   "cov_s_group_times",
+   "cov_s_group_min",
+   "cov_s_group_sat",
+   "cov_s_instant",
+   "cov_s_instant_times",
+   "cov_s_instant_min",
+   "cov_s_instant_sat",
+   "cov_s_crisis",
+   "cov_s_crisis_times",
+   "cov_s_crisis_min",
+   "cov_s_crisis_sat",
+   "cov_s_info",
+   "cov_s_info_times",
+   "cov_s_info_min",
+   "cov_s_info_sat",
+   "cov_s_faith",
+   "cov_s_faith_times",
+   "cov_s_faith_min",
+   "cov_s_faith_sat",
+   "cov_s_ehealth",
+   "cov_s_ehealth_times",
+   "cov_s_ehealth_min",
+   "cov_s_ehealth_sat",
+   "cov_s_other",
+   "cov_s_other_text",
+   "cov_s_other_times",
+   "cov_s_other_min",
+   "cov_s_other_sat",
+   "cov_person"
+  ],
+  "drop": [
+   "cov_educ_open",
+   "cov_daily_9",
+   "cov_daily_noanswer"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {
+   "rt": "cov_completion_time_s"
+  },
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null",
+   "cov_all_null",
+   "cov_all_null",
+   "rt_constant"
+  ]
+ },
+ "_held_pending_draft": [
+  "gcbs_brotherton_2013",
+  "narcissism_schneider_2025_study1_jauk_npi"
+ ],
+ "gcbs_brotherton_2013_vcl": {
+  "ref": "datapages.item_response_warehouse:as2e:v65_0.gcbs_brotherton_2013_vcl:q1ef",
+  "cols": [
+   "id",
+   "cov_education",
+   "cov_urban",
+   "cov_gender",
+   "cov_engnat",
+   "cov_age",
+   "cov_hand",
+   "cov_religion",
+   "cov_orientation",
+   "cov_race",
+   "cov_voted",
+   "cov_married",
+   "cov_familysize",
+   "cov_major",
+   "item",
+   "resp"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_familysize": [
+    98.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel"
+  ]
+ },
+ "gcbs_brotherton_2013_tipi": {
+  "ref": "datapages.item_response_warehouse:as2e:v65_0.gcbs_brotherton_2013_tipi:0je9",
+  "cols": [
+   "id",
+   "cov_education",
+   "cov_urban",
+   "cov_gender",
+   "cov_engnat",
+   "cov_age",
+   "cov_hand",
+   "cov_religion",
+   "cov_orientation",
+   "cov_race",
+   "cov_voted",
+   "cov_married",
+   "cov_familysize",
+   "cov_major",
+   "item",
+   "resp"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_familysize": [
+    98.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel"
+  ]
+ },
+ "ghanbari_2016_helma_access": {
+  "ref": "datapages.item_response_warehouse_3:5xaj:v10_0.ghanbari_2016_helma_access:d16c",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_region",
+   "cov_age",
+   "cov_class",
+   "cov_field",
+   "cov_sex",
+   "cov_mother_education",
+   "cov_mother_job",
+   "cov_father_education",
+   "cov_father_job",
+   "cov_tv_schoolday",
+   "cov_tv_holiday",
+   "cov_internet_schoolday",
+   "cov_internet_holiday",
+   "cov_magazine_use",
+   "cov_radio_use",
+   "cov_interest_in_health",
+   "cov_health_status",
+   "cov_first_health_info_source"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_tv_holiday": [
+    99.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel"
+  ]
+ },
+ "ghanbari_2016_helma_comm": {
+  "ref": "datapages.item_response_warehouse_3:5xaj:v10_0.ghanbari_2016_helma_comm:6qab",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_region",
+   "cov_age",
+   "cov_class",
+   "cov_field",
+   "cov_sex",
+   "cov_mother_education",
+   "cov_mother_job",
+   "cov_father_education",
+   "cov_father_job",
+   "cov_tv_schoolday",
+   "cov_tv_holiday",
+   "cov_internet_schoolday",
+   "cov_internet_holiday",
+   "cov_magazine_use",
+   "cov_radio_use",
+   "cov_interest_in_health",
+   "cov_health_status",
+   "cov_first_health_info_source"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_tv_holiday": [
+    99.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel"
+  ]
+ },
+ "ghanbari_2016_helma_appraise": {
+  "ref": "datapages.item_response_warehouse_3:5xaj:v10_0.ghanbari_2016_helma_appraise:etfj",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_region",
+   "cov_age",
+   "cov_class",
+   "cov_field",
+   "cov_sex",
+   "cov_mother_education",
+   "cov_mother_job",
+   "cov_father_education",
+   "cov_father_job",
+   "cov_tv_schoolday",
+   "cov_tv_holiday",
+   "cov_internet_schoolday",
+   "cov_internet_holiday",
+   "cov_magazine_use",
+   "cov_radio_use",
+   "cov_interest_in_health",
+   "cov_health_status",
+   "cov_first_health_info_source"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_tv_holiday": [
+    99.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel"
+  ]
+ },
+ "ghanbari_2016_helma_numeracy": {
+  "ref": "datapages.item_response_warehouse_3:5xaj:v10_0.ghanbari_2016_helma_numeracy:zj55",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_region",
+   "cov_age",
+   "cov_class",
+   "cov_field",
+   "cov_sex",
+   "cov_mother_education",
+   "cov_mother_job",
+   "cov_father_education",
+   "cov_father_job",
+   "cov_tv_schoolday",
+   "cov_tv_holiday",
+   "cov_internet_schoolday",
+   "cov_internet_holiday",
+   "cov_magazine_use",
+   "cov_radio_use",
+   "cov_interest_in_health",
+   "cov_health_status",
+   "cov_first_health_info_source"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_tv_holiday": [
+    99.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel"
+  ]
+ },
+ "ghanbari_2016_helma_reading": {
+  "ref": "datapages.item_response_warehouse_3:5xaj:v10_0.ghanbari_2016_helma_reading:1p8t",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_region",
+   "cov_age",
+   "cov_class",
+   "cov_field",
+   "cov_sex",
+   "cov_mother_education",
+   "cov_mother_job",
+   "cov_father_education",
+   "cov_father_job",
+   "cov_tv_schoolday",
+   "cov_tv_holiday",
+   "cov_internet_schoolday",
+   "cov_internet_holiday",
+   "cov_magazine_use",
+   "cov_radio_use",
+   "cov_interest_in_health",
+   "cov_health_status",
+   "cov_first_health_info_source"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_tv_holiday": [
+    99.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel"
+  ]
+ },
+ "ghanbari_2016_helma_understand": {
+  "ref": "datapages.item_response_warehouse_3:5xaj:v10_0.ghanbari_2016_helma_understand:phde",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_region",
+   "cov_age",
+   "cov_class",
+   "cov_field",
+   "cov_sex",
+   "cov_mother_education",
+   "cov_mother_job",
+   "cov_father_education",
+   "cov_father_job",
+   "cov_tv_schoolday",
+   "cov_tv_holiday",
+   "cov_internet_schoolday",
+   "cov_internet_holiday",
+   "cov_magazine_use",
+   "cov_radio_use",
+   "cov_interest_in_health",
+   "cov_health_status",
+   "cov_first_health_info_source"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_tv_holiday": [
+    99.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel"
+  ]
+ },
+ "ghanbari_2016_helma_use": {
+  "ref": "datapages.item_response_warehouse_3:5xaj:v10_0.ghanbari_2016_helma_use:d6a7",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_region",
+   "cov_age",
+   "cov_class",
+   "cov_field",
+   "cov_sex",
+   "cov_mother_education",
+   "cov_mother_job",
+   "cov_father_education",
+   "cov_father_job",
+   "cov_tv_schoolday",
+   "cov_tv_holiday",
+   "cov_internet_schoolday",
+   "cov_internet_holiday",
+   "cov_magazine_use",
+   "cov_radio_use",
+   "cov_interest_in_health",
+   "cov_health_status",
+   "cov_first_health_info_source"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_tv_holiday": [
+    99.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel"
+  ]
+ },
+ "guatemala_2024_homes_avenues": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.guatemala_2024_homes_avenues:5xy2",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_hhsize",
+   "cov_sex",
+   "cov_age",
+   "cov_lang",
+   "cov_educ"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_lang": [
+    98.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel"
+  ]
+ },
+ "guatemala_2024_homes_country": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.guatemala_2024_homes_country:dh1h",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_hhsize",
+   "cov_sex",
+   "cov_age",
+   "cov_lang",
+   "cov_educ"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_lang": [
+    98.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel"
+  ]
+ },
+ "guatemala_2024_homes_emergencies": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.guatemala_2024_homes_emergencies:xwfz",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_hhsize",
+   "cov_sex",
+   "cov_age",
+   "cov_lang",
+   "cov_educ"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_lang": [
+    98.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel"
+  ]
+ },
+ "guatemala_2024_homes_drainage": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.guatemala_2024_homes_drainage:880p",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_hhsize",
+   "cov_sex",
+   "cov_age",
+   "cov_lang",
+   "cov_educ"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_lang": [
+    98.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel"
+  ]
+ },
+ "guatemala_2024_homes_energy": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.guatemala_2024_homes_energy:p77t",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_hhsize",
+   "cov_sex",
+   "cov_age",
+   "cov_lang",
+   "cov_educ"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_lang": [
+    98.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel"
+  ]
+ },
+ "guatemala_2024_homes_lighting": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.guatemala_2024_homes_lighting:7ryr",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_hhsize",
+   "cov_sex",
+   "cov_age",
+   "cov_lang",
+   "cov_educ"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_lang": [
+    98.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel"
+  ]
+ },
+ "guatemala_2024_homes_nutrition": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.guatemala_2024_homes_nutrition:b54c",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_hhsize",
+   "cov_sex",
+   "cov_age",
+   "cov_lang",
+   "cov_educ"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_lang": [
+    98.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel"
+  ]
+ },
+ "guatemala_2024_homes_parks": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.guatemala_2024_homes_parks:vz83",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_hhsize",
+   "cov_sex",
+   "cov_age",
+   "cov_lang",
+   "cov_educ"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_lang": [
+    98.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel"
+  ]
+ },
+ "guatemala_2024_homes_publiceducation": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.guatemala_2024_homes_publiceducation:s5fv",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_hhsize",
+   "cov_sex",
+   "cov_age",
+   "cov_lang",
+   "cov_educ"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_lang": [
+    98.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel"
+  ]
+ },
+ "guatemala_2024_homes_publichealth": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.guatemala_2024_homes_publichealth:ayh2",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_hhsize",
+   "cov_sex",
+   "cov_age",
+   "cov_lang",
+   "cov_educ"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_lang": [
+    98.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel"
+  ]
+ },
+ "guatemala_2024_homes_publicclinic": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.guatemala_2024_homes_publicclinic:k132",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_hhsize",
+   "cov_sex",
+   "cov_age",
+   "cov_lang",
+   "cov_educ"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_lang": [
+    98.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel"
+  ]
+ },
+ "guatemala_2024_homes_roads": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.guatemala_2024_homes_roads:cmk6",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_hhsize",
+   "cov_sex",
+   "cov_age",
+   "cov_lang",
+   "cov_educ"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_lang": [
+    98.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel"
+  ]
+ },
+ "guatemala_2024_homes_transparency": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.guatemala_2024_homes_transparency:4y6b",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_hhsize",
+   "cov_sex",
+   "cov_age",
+   "cov_lang",
+   "cov_educ"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_lang": [
+    98.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel"
+  ]
+ },
+ "guatemala_2024_homes_trash": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.guatemala_2024_homes_trash:6c1n",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_hhsize",
+   "cov_sex",
+   "cov_age",
+   "cov_lang",
+   "cov_educ"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_lang": [
+    98.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel"
+  ]
+ },
+ "guatemala_2024_homes_transport": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.guatemala_2024_homes_transport:cprc",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_hhsize",
+   "cov_sex",
+   "cov_age",
+   "cov_lang",
+   "cov_educ"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_lang": [
+    98.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel"
+  ]
+ },
+ "guatemala_2024_homes_safety": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.guatemala_2024_homes_safety:b4fv",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_hhsize",
+   "cov_sex",
+   "cov_age",
+   "cov_lang",
+   "cov_educ"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_lang": [
+    98.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel"
+  ]
+ },
+ "guatemala_2024_homes_water": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.guatemala_2024_homes_water:449a",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_hhsize",
+   "cov_sex",
+   "cov_age",
+   "cov_lang",
+   "cov_educ"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_lang": [
+    98.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel"
+  ]
+ },
+ "haehner_2026_personality_subsaharan_b2i": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.haehner_2026_personality_subsaharan_b2i:hwp0",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "wave",
+   "cov_age",
+   "cov_country",
+   "cov_education",
+   "cov_english_w3",
+   "cov_finance",
+   "cov_gender",
+   "cov_look_employ",
+   "cov_overall_response_control_w1"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_education": [
+    99.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel"
+  ]
+ },
+ "haehner_2026_personality_subsaharan_ecq": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.haehner_2026_personality_subsaharan_ecq:kpxt",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "wave",
+   "cov_age",
+   "cov_country",
+   "cov_education",
+   "cov_english_w3",
+   "cov_finance",
+   "cov_gender",
+   "cov_look_employ",
+   "cov_overall_response_control_w1"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_education": [
+    99.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel"
+  ]
+ },
+ "lexical_difficulty_altgassen_2025_s02_ws": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.lexical_difficulty_altgassen_2025_s02_ws:5q52",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_demgroup",
+   "cov_sd_sex",
+   "cov_sd_age",
+   "cov_sd_bildung",
+   "cov_sd_bildung_anders",
+   "cov_sd_ses4",
+   "cov_sd_deutsch"
+  ],
+  "drop": [
+   "cov_sd_bildung_anders"
+  ],
+  "null_values": {
+   "cov_sd_ses4": [
+    -9.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null",
+   "cov_sentinel"
+  ]
+ },
+ "lexical_difficulty_altgassen_2025_s02_gc": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.lexical_difficulty_altgassen_2025_s02_gc:dhnw",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_demgroup",
+   "cov_sd_sex",
+   "cov_sd_age",
+   "cov_sd_bildung",
+   "cov_sd_bildung_anders",
+   "cov_sd_ses4",
+   "cov_sd_deutsch"
+  ],
+  "drop": [
+   "cov_sd_bildung_anders"
+  ],
+  "null_values": {
+   "cov_sd_ses4": [
+    -9.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null",
+   "cov_sentinel"
+  ]
+ },
+ "lexical_difficulty_altgassen_2025_s01_knowledge": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.lexical_difficulty_altgassen_2025_s01_knowledge:h336",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_attention_1",
+   "cov_attention_2",
+   "cov_dem_sex",
+   "cov_dem_age",
+   "cov_dem_edu",
+   "cov_dem_pedu",
+   "cov_dem_peduo",
+   "cov_dem_lang",
+   "cov_dem_job",
+   "cov_dem_inc",
+   "cov_dem_hous",
+   "cov_dem_incpers",
+   "cov_dem_book",
+   "cov_time_sum",
+   "cov_dem_age_kat",
+   "cov_dem_edu_kat"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_dem_pedu": [
+    -9.0
+   ],
+   "cov_dem_job": [
+    -9.0
+   ],
+   "cov_dem_book": [
+    -9.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel",
+   "cov_sentinel",
+   "cov_sentinel"
+  ]
+ },
+ "lexical_difficulty_altgassen_2025_s01_personality": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.lexical_difficulty_altgassen_2025_s01_personality:p0bz",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_attention_1",
+   "cov_attention_2",
+   "cov_dem_sex",
+   "cov_dem_age",
+   "cov_dem_edu",
+   "cov_dem_pedu",
+   "cov_dem_peduo",
+   "cov_dem_lang",
+   "cov_dem_job",
+   "cov_dem_inc",
+   "cov_dem_hous",
+   "cov_dem_incpers",
+   "cov_dem_book",
+   "cov_time_sum",
+   "cov_dem_age_kat",
+   "cov_dem_edu_kat"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_dem_pedu": [
+    -9.0
+   ],
+   "cov_dem_job": [
+    -9.0
+   ],
+   "cov_dem_book": [
+    -9.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel",
+   "cov_sentinel",
+   "cov_sentinel"
+  ]
+ },
+ "li_2026_coach_leadership": {
+  "ref": "datapages.item_response_warehouse_4:980f:v10_0.li_2026_coach_leadership:47px",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_sex",
+   "cov_age",
+   "cov_years_playing"
+  ],
+  "drop": [
+   "cov_age",
+   "cov_years_playing"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null",
+   "cov_all_null"
+  ]
+ },
+ "li_2026_team_cohesion": {
+  "ref": "datapages.item_response_warehouse_4:980f:v10_0.li_2026_team_cohesion:bq1m",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_sex",
+   "cov_age",
+   "cov_years_playing"
+  ],
+  "drop": [
+   "cov_age",
+   "cov_years_playing"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null",
+   "cov_all_null"
+  ]
+ },
+ "li_2026_sport_commitment": {
+  "ref": "datapages.item_response_warehouse_4:980f:v10_0.li_2026_sport_commitment:kbpj",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_sex",
+   "cov_age",
+   "cov_years_playing"
+  ],
+  "drop": [
+   "cov_age",
+   "cov_years_playing"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null",
+   "cov_all_null"
+  ]
+ },
+ "machivallianism_test_main": {
+  "ref": "datapages.item_response_warehouse:as2e:v65_0.machivallianism_test_main:bnq6",
+  "cols": [
+   "id",
+   "cov_country",
+   "cov_education",
+   "cov_urban",
+   "cov_gender",
+   "cov_engnat",
+   "cov_age",
+   "cov_hand",
+   "cov_religion",
+   "cov_orientation",
+   "cov_race",
+   "cov_voted",
+   "cov_married",
+   "cov_familysize",
+   "cov_major",
+   "item",
+   "resp",
+   "rt"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_familysize": [
+    999.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel"
+  ]
+ },
+ "machivallianism_test_tipi": {
+  "ref": "datapages.item_response_warehouse:as2e:v65_0.machivallianism_test_tipi:tfk4",
+  "cols": [
+   "id",
+   "cov_country",
+   "cov_education",
+   "cov_urban",
+   "cov_gender",
+   "cov_engnat",
+   "cov_age",
+   "cov_hand",
+   "cov_religion",
+   "cov_orientation",
+   "cov_race",
+   "cov_voted",
+   "cov_married",
+   "cov_familysize",
+   "cov_major",
+   "item",
+   "resp"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_familysize": [
+    999.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel"
+  ]
+ },
+ "machivallianism_test_vcl": {
+  "ref": "datapages.item_response_warehouse:as2e:v65_0.machivallianism_test_vcl:jj3f",
+  "cols": [
+   "id",
+   "cov_country",
+   "cov_education",
+   "cov_urban",
+   "cov_gender",
+   "cov_engnat",
+   "cov_age",
+   "cov_hand",
+   "cov_religion",
+   "cov_orientation",
+   "cov_race",
+   "cov_voted",
+   "cov_married",
+   "cov_familysize",
+   "cov_major",
+   "item",
+   "resp"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_familysize": [
+    999.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel"
+  ]
+ },
+ "mental_health_wang_2024_phq": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.mental_health_wang_2024_phq:qfqa",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "rt",
+   "date",
+   "cov_location_en",
+   "cov_gender",
+   "cov_proactive_covid_info_seek",
+   "cov_info_news",
+   "cov_info_medical_web_sites",
+   "cov_info_social_media",
+   "cov_info_health_provider",
+   "cov_info_notice_from_school",
+   "cov_info_other_channels",
+   "cov_rumor_believed",
+   "cov_covid_confirmed",
+   "cov_anxiety_compared_w_pre_covid",
+   "cov_lock_down",
+   "cov_quarantine_point",
+   "cov_delivery_service_interruption",
+   "cov_flight_train_delay_cancellation",
+   "cov_separation_from_loved_ones",
+   "cov_financial_hardship",
+   "cov_medical_service_interruption",
+   "cov_school_work_interruption",
+   "cov_other_interruption",
+   "cov_symptom_induced_anxiety",
+   "cov_ways_to_ease_anxiety",
+   "cov_ease_anxiety_sports",
+   "cov_ease_anxiety_music",
+   "cov_ease_anxiety_weeping",
+   "cov_ease_anxiety_meditation",
+   "cov_ease_anxiety_school_counseling",
+   "cov_ease_anxiety_other",
+   "cov_ease_anxiety_ways_effectivenss",
+   "cov_school_service_expected_personal_counseling",
+   "cov_school_service_expected_mental_health_course",
+   "cov_school_service_expected_group_salon",
+   "cov_school_service_expected_simulation",
+   "cov_school_service_expected_other"
+  ],
+  "drop": [],
+  "null_values": {},
+  "null_range": {},
+  "rename": {
+   "rt": "cov_completion_time_s"
+  },
+  "drop_resp_values": [],
+  "flags": [
+   "rt_constant"
+  ]
+ },
+ "mental_health_wang_2024_gad": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.mental_health_wang_2024_gad:wset",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "rt",
+   "date",
+   "cov_location_en",
+   "cov_gender",
+   "cov_proactive_covid_info_seek",
+   "cov_info_news",
+   "cov_info_medical_web_sites",
+   "cov_info_social_media",
+   "cov_info_health_provider",
+   "cov_info_notice_from_school",
+   "cov_info_other_channels",
+   "cov_rumor_believed",
+   "cov_covid_confirmed",
+   "cov_anxiety_compared_w_pre_covid",
+   "cov_lock_down",
+   "cov_quarantine_point",
+   "cov_delivery_service_interruption",
+   "cov_flight_train_delay_cancellation",
+   "cov_separation_from_loved_ones",
+   "cov_financial_hardship",
+   "cov_medical_service_interruption",
+   "cov_school_work_interruption",
+   "cov_other_interruption",
+   "cov_symptom_induced_anxiety",
+   "cov_ways_to_ease_anxiety",
+   "cov_ease_anxiety_sports",
+   "cov_ease_anxiety_music",
+   "cov_ease_anxiety_weeping",
+   "cov_ease_anxiety_meditation",
+   "cov_ease_anxiety_school_counseling",
+   "cov_ease_anxiety_other",
+   "cov_ease_anxiety_ways_effectivenss",
+   "cov_school_service_expected_personal_counseling",
+   "cov_school_service_expected_mental_health_course",
+   "cov_school_service_expected_group_salon",
+   "cov_school_service_expected_simulation",
+   "cov_school_service_expected_other"
+  ],
+  "drop": [],
+  "null_values": {},
+  "null_range": {},
+  "rename": {
+   "rt": "cov_completion_time_s"
+  },
+  "drop_resp_values": [],
+  "flags": [
+   "rt_constant"
+  ]
+ },
+ "moral_absolutism_goyal_2025_dt": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.moral_absolutism_goyal_2025_dt:dyj0",
+  "cols": [
+   "id",
+   "study",
+   "item",
+   "resp",
+   "cov_age",
+   "cov_gender",
+   "cov_socialclass",
+   "rt",
+   "date"
+  ],
+  "drop": [],
+  "null_values": {},
+  "null_range": {},
+  "rename": {
+   "rt": "cov_completion_time_s"
+  },
+  "drop_resp_values": [],
+  "flags": [
+   "rt_constant"
+  ]
+ },
+ "moral_absolutism_goyal_2025_mr": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.moral_absolutism_goyal_2025_mr:bfc9",
+  "cols": [
+   "id",
+   "study",
+   "item",
+   "resp",
+   "cov_age",
+   "cov_gender",
+   "cov_socialclass",
+   "rt",
+   "date"
+  ],
+  "drop": [],
+  "null_values": {},
+  "null_range": {},
+  "rename": {
+   "rt": "cov_completion_time_s"
+  },
+  "drop_resp_values": [],
+  "flags": [
+   "rt_constant"
+  ]
+ },
+ "moral_absolutism_goyal_2025_mfq": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.moral_absolutism_goyal_2025_mfq:945v",
+  "cols": [
+   "id",
+   "study",
+   "item",
+   "resp",
+   "cov_age",
+   "cov_gender",
+   "cov_socialclass",
+   "rt",
+   "date"
+  ],
+  "drop": [],
+  "null_values": {},
+  "null_range": {},
+  "rename": {
+   "rt": "cov_completion_time_s"
+  },
+  "drop_resp_values": [],
+  "flags": [
+   "rt_constant"
+  ]
+ },
+ "moral_absolutism_goyal_2025_pp": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.moral_absolutism_goyal_2025_pp:g3ck",
+  "cols": [
+   "id",
+   "study",
+   "item",
+   "resp",
+   "cov_age",
+   "cov_gender",
+   "cov_socialclass",
+   "rt",
+   "date"
+  ],
+  "drop": [],
+  "null_values": {},
+  "null_range": {},
+  "rename": {
+   "rt": "cov_completion_time_s"
+  },
+  "drop_resp_values": [],
+  "flags": [
+   "rt_constant"
+  ]
+ },
+ "moral_absolutism_goyal_2025_nfc": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.moral_absolutism_goyal_2025_nfc:d0hd",
+  "cols": [
+   "id",
+   "study",
+   "item",
+   "resp",
+   "cov_age",
+   "cov_gender",
+   "cov_socialclass",
+   "rt",
+   "date"
+  ],
+  "drop": [],
+  "null_values": {},
+  "null_range": {},
+  "rename": {
+   "rt": "cov_completion_time_s"
+  },
+  "drop_resp_values": [],
+  "flags": [
+   "rt_constant"
+  ]
+ },
+ "moral_absolutism_goyal_2025_moral": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.moral_absolutism_goyal_2025_moral:ppxg",
+  "cols": [
+   "id",
+   "study",
+   "item",
+   "resp",
+   "cov_age",
+   "cov_gender",
+   "cov_socialclass",
+   "rt",
+   "date"
+  ],
+  "drop": [],
+  "null_values": {},
+  "null_range": {},
+  "rename": {
+   "rt": "cov_completion_time_s"
+  },
+  "drop_resp_values": [],
+  "flags": [
+   "rt_constant"
+  ]
+ },
+ "moral_absolutism_goyal_2025_stance": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.moral_absolutism_goyal_2025_stance:njv6",
+  "cols": [
+   "id",
+   "study",
+   "item",
+   "resp",
+   "cov_age",
+   "cov_gender",
+   "cov_socialclass",
+   "rt",
+   "date"
+  ],
+  "drop": [],
+  "null_values": {},
+  "null_range": {},
+  "rename": {
+   "rt": "cov_completion_time_s"
+  },
+  "drop_resp_values": [],
+  "flags": [
+   "rt_constant"
+  ]
+ },
+ "narcissism_schneider_2025_study1_jauk_emotionality": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.narcissism_schneider_2025_study1_jauk_emotionality:k7pg",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_valid",
+   "cov_studie",
+   "cov_geschlecht",
+   "cov_alter"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_alter": [
+    -99.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel"
+  ]
+ },
+ "narcissism_schneider_2025_study1_jauk_extraversion": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.narcissism_schneider_2025_study1_jauk_extraversion:farw",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_valid",
+   "cov_studie",
+   "cov_geschlecht",
+   "cov_alter"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_alter": [
+    -99.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel"
+  ]
+ },
+ "narcissism_schneider_2025_study1_jauk_honestyhumility": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.narcissism_schneider_2025_study1_jauk_honestyhumility:3279",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_valid",
+   "cov_studie",
+   "cov_geschlecht",
+   "cov_alter"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_alter": [
+    -99.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel"
+  ]
+ },
+ "narcissism_schneider_2025_study1_jauk_hsns": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.narcissism_schneider_2025_study1_jauk_hsns:m88h",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_valid",
+   "cov_studie",
+   "cov_geschlecht",
+   "cov_alter"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_alter": [
+    -99.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel"
+  ]
+ },
+ "pauli_2021_ppos_d6": {
+  "ref": "datapages.item_response_warehouse_4:980f:v10_0.pauli_2021_ppos_d6:xbcp",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_gender",
+   "cov_degree_program",
+   "cov_birth_year"
+  ],
+  "drop": [],
+  "null_values": {},
+  "null_range": {
+   "cov_birth_year": [
+    1900,
+    2026
+   ]
+  },
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_range"
+  ]
+ },
+ "pauli_2021_coercion_attitudes": {
+  "ref": "datapages.item_response_warehouse_4:980f:v10_0.pauli_2021_coercion_attitudes:1xch",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_gender",
+   "cov_degree_program",
+   "cov_birth_year"
+  ],
+  "drop": [],
+  "null_values": {},
+  "null_range": {
+   "cov_birth_year": [
+    1900,
+    2026
+   ]
+  },
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_range"
+  ]
+ },
+ "piterova-slovak-science-related-populism": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.piterova_slovak_science_related_populism:02zz",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_time",
+   "cov_gndr",
+   "cov_age",
+   "cov_agecat",
+   "cov_reg",
+   "cov_size",
+   "cov_edu",
+   "cov_subinc",
+   "cov_vote",
+   "cov_vote_13",
+   "cov_ident",
+   "cov_vote_last",
+   "cov_vote_last_14",
+   "cov_ident_last",
+   "cov_carelesslong",
+   "cov_carelessmahal",
+   "cov_careless",
+   "cov_tech",
+   "cov_intpol",
+   "cov_intsc",
+   "cov_trustpol",
+   "cov_trustpp",
+   "cov_trustgov",
+   "cov_relig"
+  ],
+  "drop": [],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [
+   98.0
+  ],
+  "flags": [
+   "resp_sentinel"
+  ]
+ },
+ "ren2019_sdq": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.ren2019_sdq:jwgz",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_gender",
+   "cov_age",
+   "cov_education",
+   "cov_income"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_income": [
+    99.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel"
+  ]
+ },
+ "ren2019_cpti": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.ren2019_cpti:p58s",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_gender",
+   "cov_age",
+   "cov_education",
+   "cov_income"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_income": [
+    99.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel"
+  ]
+ },
+ "ren2019_ypic": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.ren2019_ypic:033e",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_gender",
+   "cov_age",
+   "cov_education",
+   "cov_income"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_income": [
+    99.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel"
+  ]
+ },
+ "ren_2019_cpti": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.ren_2019_cpti:dpyx",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_gender",
+   "cov_age",
+   "cov_education",
+   "cov_income"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_income": [
+    99.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel"
+  ]
+ },
+ "ren_2019_sdq": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.ren_2019_sdq:baws",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_gender",
+   "cov_age",
+   "cov_education",
+   "cov_income"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_income": [
+    99.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel"
+  ]
+ },
+ "ren_2019_ypic": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v27_0.ren_2019_ypic:4x5a",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_gender",
+   "cov_age",
+   "cov_education",
+   "cov_income"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_income": [
+    99.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel"
+  ]
+ },
+ "roy_2024_sas_sv": {
+  "ref": "datapages.item_response_warehouse_6:fpe6:v4_0.roy_2024_sas_sv:zpjb",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_age",
+   "cov_bmi",
+   "cov_fgid",
+   "cov_gender",
+   "cov_income",
+   "cov_living_with",
+   "cov_marital_status",
+   "cov_physical_activity",
+   "cov_religion",
+   "cov_smoking"
+  ],
+  "drop": [
+   "cov_fgid",
+   "cov_gender",
+   "cov_income",
+   "cov_living_with",
+   "cov_physical_activity",
+   "cov_religion",
+   "cov_smoking"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null",
+   "cov_all_null",
+   "cov_all_null",
+   "cov_all_null",
+   "cov_all_null",
+   "cov_all_null",
+   "cov_all_null"
+  ]
+ },
+ "roy_2024_phq9": {
+  "ref": "datapages.item_response_warehouse_6:fpe6:v4_0.roy_2024_phq9:20py",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_age",
+   "cov_bmi",
+   "cov_fgid",
+   "cov_gender",
+   "cov_income",
+   "cov_living_with",
+   "cov_marital_status",
+   "cov_physical_activity",
+   "cov_religion",
+   "cov_smoking"
+  ],
+  "drop": [
+   "cov_fgid",
+   "cov_gender",
+   "cov_income",
+   "cov_living_with",
+   "cov_physical_activity",
+   "cov_religion",
+   "cov_smoking"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null",
+   "cov_all_null",
+   "cov_all_null",
+   "cov_all_null",
+   "cov_all_null",
+   "cov_all_null",
+   "cov_all_null"
+  ]
+ },
+ "saha_2026_cesd": {
+  "ref": "datapages.item_response_warehouse_5:3ykx:v7_0.saha_2026_cesd:pw3k",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_gender",
+   "cov_age_z",
+   "cov_academic_year",
+   "cov_field",
+   "cov_psychological_factor"
+  ],
+  "drop": [],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_range"
+  ]
+ },
+ "selm_2019_climate_knowledge": {
+  "ref": "datapages.item_response_warehouse_4:980f:v10_0.selm_2019_climate_knowledge:8qfj",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_gender",
+   "cov_age",
+   "cov_race",
+   "cov_education"
+  ],
+  "drop": [
+   "cov_gender"
+  ],
+  "null_values": {},
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_all_null"
+  ]
+ },
+ "sned_bendall_2024": {
+  "ref": "datapages.item_response_warehouse:as2e:v65_0.sned_bendall_2024:9686",
+  "cols": [
+   "id",
+   "rt",
+   "cov_age",
+   "cov_gender",
+   "cov_ethnicity",
+   "cov_countryofbirth",
+   "cov_countryofresidence",
+   "cov_nationality",
+   "cov_education",
+   "item",
+   "resp"
+  ],
+  "drop": [],
+  "null_values": {},
+  "null_range": {},
+  "rename": {
+   "rt": "cov_completion_time_s"
+  },
+  "drop_resp_values": [],
+  "flags": [
+   "rt_constant"
+  ]
+ },
+ "tomioka_2022_srh_future_needs": {
+  "ref": "datapages.item_response_warehouse_4:980f:v10_0.tomioka_2022_srh_future_needs:zdv1",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_institution",
+   "cov_facility_certification",
+   "cov_prefecture",
+   "cov_n_beds",
+   "cov_department",
+   "cov_department_detail",
+   "cov_ward_type",
+   "cov_manager",
+   "cov_manager_role",
+   "cov_certified_nurse",
+   "cov_certification_type",
+   "cov_years_nursing",
+   "cov_years_oncology_nursing",
+   "cov_academic_society"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_ward_type": [
+    99.0
+   ],
+   "cov_manager": [
+    99.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel",
+   "cov_sentinel"
+  ]
+ },
+ "tomioka_2022_srh_importance": {
+  "ref": "datapages.item_response_warehouse_4:980f:v10_0.tomioka_2022_srh_importance:15ng",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_institution",
+   "cov_facility_certification",
+   "cov_prefecture",
+   "cov_n_beds",
+   "cov_department",
+   "cov_department_detail",
+   "cov_ward_type",
+   "cov_manager",
+   "cov_manager_role",
+   "cov_certified_nurse",
+   "cov_certification_type",
+   "cov_years_nursing",
+   "cov_years_oncology_nursing",
+   "cov_academic_society"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_ward_type": [
+    99.0
+   ],
+   "cov_manager": [
+    99.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel",
+   "cov_sentinel"
+  ]
+ },
+ "tomioka_2022_srh_sufficiency": {
+  "ref": "datapages.item_response_warehouse_4:980f:v10_0.tomioka_2022_srh_sufficiency:bn3e",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_institution",
+   "cov_facility_certification",
+   "cov_prefecture",
+   "cov_n_beds",
+   "cov_department",
+   "cov_department_detail",
+   "cov_ward_type",
+   "cov_manager",
+   "cov_manager_role",
+   "cov_certified_nurse",
+   "cov_certification_type",
+   "cov_years_nursing",
+   "cov_years_oncology_nursing",
+   "cov_academic_society"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_ward_type": [
+    99.0
+   ],
+   "cov_manager": [
+    99.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel",
+   "cov_sentinel"
+  ]
+ },
+ "tomioka_2022_srh_support_types": {
+  "ref": "datapages.item_response_warehouse_4:980f:v10_0.tomioka_2022_srh_support_types:2k14",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_institution",
+   "cov_facility_certification",
+   "cov_prefecture",
+   "cov_n_beds",
+   "cov_department",
+   "cov_department_detail",
+   "cov_ward_type",
+   "cov_manager",
+   "cov_manager_role",
+   "cov_certified_nurse",
+   "cov_certification_type",
+   "cov_years_nursing",
+   "cov_years_oncology_nursing",
+   "cov_academic_society"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_ward_type": [
+    99.0
+   ],
+   "cov_manager": [
+    99.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel",
+   "cov_sentinel"
+  ]
+ },
+ "_excluded_rebuild": [
+  "amatus_cipora_2024_fsmas_se"
+ ]
+}

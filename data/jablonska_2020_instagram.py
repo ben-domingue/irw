@@ -43,8 +43,10 @@ def _cols(df, start, end):
     return [c for c in items if start <= int(c.split(".")[0]) <= end]
 
 
-def _ship(df, out_name, item_cols):
+def _ship(df, out_name, item_cols, codes=None):
     long = df.melt(id_vars=["id"], value_vars=item_cols, var_name="item", value_name="resp_text")
+    if codes:
+        long["item"] = long["item"].map(dict(zip(item_cols, codes)))
     long["resp"] = long["resp_text"].map(LIKERT_MAP)
     long = long.dropna(subset=["resp"]).reset_index(drop=True)
     long = long[["id", "item", "resp"]]
@@ -62,8 +64,19 @@ def convert():
     _ship(df, "jablonska_2020_upward_comparison", _cols(df, 14, 19))
     _ship(df, "jablonska_2020_downward_comparison", _cols(df, 20, 25))
     _ship(df, "jablonska_2020_rses", _cols(df, 26, 35))
-    _ship(df, "jablonska_2020_hads", _cols(df, 36, 49))
-    _ship(df, "jablonska_2020_swls", _cols(df, 50, 54))
+    # Columns 36-49 are the HADS (Zigmond & Snaith 1983; the paper changes only the
+    # response format, to 7 points). Their headers are the items' own English
+    # wording, and the HADS is rights-blocked (register row; irw#2401, Ben
+    # 2026-09-30), so they are coded hads_1..hads_14. The source columns already
+    # follow the published item order.
+    _ship(df, "jablonska_2020_hads", _cols(df, 36, 49),
+          codes=[f"hads_{i}" for i in range(1, 15)])
+    # The source's column headers are the items' own wording ("52. I am satisfied
+    # with my life."). The SWLS is rights-blocked (register row; irw#2401, Ben
+    # 2026-09-30), so the headers cannot ship as item codes: columns 50-54 are SWLS
+    # items 1-5 in the published order, coded swls_1..swls_5.
+    _ship(df, "jablonska_2020_swls", _cols(df, 50, 54),
+          codes=[f"swls_{i}" for i in range(1, 6)])
 
 
 if __name__ == "__main__":

@@ -1,0 +1,20 @@
+table,construct_name,instrument,language,text_source,n_items,n_participants,k,n_mapped,n_near,verdict,basis,note
+adamczyk_2022_cesd,,"Center for Epidemiologic Studies Depression Scale (CES-D; Radloff, 1977), Polish adaptation (Kaniasty, 2003)",,none_recorded,20,209,20,20,0,MATCH,supplied,
+conner_2017_cesd,NA,Center for Epidemiologic Studies Depression Scale (CES-D),eng,study_materials,20,171,20,19,3,MATCH,wording,
+dwyer_2019_clinton_cesd,NA,Center for Epidemiologic Studies Depression Scale (CES-D),eng,study_materials,20,167,20,19,1,MATCH,wording,
+gan_2015_cesd,NA,Center for Epidemiologic Studies Depression Scale (CES-D),chi,translated_substitute,20,71,20,20,0,MATCH,supplied,
+huang_2016_cesd,NA,Center for Epidemiologic Studies Depression Scale (CES-D),eng,canonical_instrument,20,113,20,20,1,MATCH,supplied,
+promis1wave1_cesd,CESD Scale,"PROMIS Wave 1 field test: CES-D (legacy items, Emotional Distress - Depression)",eng,study_materials,20,778,20,19,0,MATCH,wording,
+quinn_2023_roommate_cesd,NA,Center for Epidemiologic Studies Depression Scale (CES-D),eng,study_materials,20,490,20,20,0,MATCH,wording,
+yang_2018_cesd,NA,Center for Epidemiologic Studies Depression Scale (CES-D),chi,translated_substitute,20,358,20,20,1,MATCH,supplied,
+alexandrowicz_2018_cesd,NA,,ger,none_recorded,20,514,20,0,0,NAME_ONLY,name,no item text
+chen_2022_cesd,Depression (CESD-10),,chi,none_recorded,10,77211,20,0,0,NAME_ONLY,name,no item text
+jeon_2019_cesd10,NA,Korean version of the 10-item short-form Center for Epidemiological Studies Depression (CESD-10) scale,kor,translated_substitute,10,464,20,0,0,NAME_ONLY,name,item text not in English
+mexico_2023_mobility_mood,Depressive symptoms,"ESRU Encuesta de Movilidad Social en México 2023 (ESRU-EMOVI 2023), Cuestionario básico, P107 Estado de ánimo (depressive-symptom items drawn from the CES-D)",spa,none_recorded,7,17843,20,0,0,NAME_ONLY,name,item text not in English
+robison_2026_retesting_cesd,CES-D depressive symptoms (18 items),,eng,none_recorded,18,241,20,0,0,NAME_ONLY,name,no item text
+saha_2026_cesd,NA,"Center for Epidemiologic Studies Depression Scale (CES-D), 20-item question-form administration","eng, ben",none_recorded,20,892,20,0,0,NAME_ONLY,name,no item text
+santos_2018_cesd,NA,,"eng, spa",unknown,20,304,20,0,0,NAME_ONLY,name,no item text
+yang_2023_emotional_eating_cesd,NA,Center for Epidemiologic Studies Depression Scale (CES-D),chi,translated_substitute,20,494,20,1,0,NAME_ONLY,name,item text not in English
+RD_PPCSEDSOF_Afable_2023,Center for Epidemiological Studies-Depression (CES-D) Scale in Older Filipinos,Center for Epidemiological Studies - Depression (CES-D) Scale in older Filipinos.,eng,none_recorded,11,5209,20,10,1,PARTIAL,,first item: i felt sad
+goldberg_2018_eps_cesd,NA,"Revised CES-Depression Scale (24 items; Experimental Personality Survey, Eugene-Springfield Community Sample)",eng,study_materials,24,726,20,8,8,PARTIAL,,first item: felt sad
+weida_2020_cesd10,,"Center for Epidemiologic Studies Depression Scale, 10-item version (CES-D-10)",,canonical_instrument,10,371,20,10,0,PARTIAL,,first item: i could not get going

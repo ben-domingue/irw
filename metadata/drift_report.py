@@ -81,8 +81,6 @@ import datetime as dt
 import json
 import subprocess
 import sys
-import urllib.error
-import urllib.request
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -90,7 +88,6 @@ REPO = "ben-domingue/irw"
 #: The Quarto site. Note the repository is `datapages/irw`, not `datapages/irw_site`
 #: -- the directory is called irw_site locally and the repository is not.
 SITE_REPO = "datapages/irw"
-SITE_HERO_URL = "https://raw.githubusercontent.com/datapages/irw/main/data/hero_stats.json"
 
 #: The label that identifies the one tracking issue. Anything carrying it is
 #: assumed to be ours to overwrite, so it must not be a label a human would put
@@ -320,20 +317,16 @@ def check_name_collisions(root: Path, enabled: bool) -> Check:
     return Check("names", title, STALE, "; ".join(parts), rows)
 
 
-def check_warehouse_behind_repo(root: Path, now: dt.datetime) -> Check:
-    """Has `metadata/` moved in the repo since irw_meta was last released?
+def last_irw_meta_release(root: Path) -> tuple[str | None, dt.datetime]:
+    """(tag, released_at) of the newest released irw_meta, from version_manifest.tsv.
 
-    This is the gap that motivated #1940. The repo is the source and irw_meta is
-    what every live-querying page reads, so the interval between them is exactly
-    how long users have been seeing numbers we have already superseded.
-
-    Both sides come from files this repository commits -- version_manifest.tsv is
-    refreshed daily by its own workflow -- so this check needs no credentials.
+    The manifest is refreshed daily by its own workflow, so this needs no
+    credentials. Raises with a readable message if there is no usable row.
     """
     manifest = root / "metadata" / "version_manifest.tsv"
+    released: dt.datetime | None = None
+    tag = None
     try:
-        released: dt.datetime | None = None
-        tag = None
         with manifest.open() as fh:
             for row in csv.DictReader(fh, delimiter="\t"):
                 if row.get("dataset") != "irw_meta":
@@ -344,12 +337,27 @@ def check_warehouse_behind_repo(root: Path, now: dt.datetime) -> Check:
                 d = parse_iso(when)
                 if released is None or d > released:
                     released, tag = d, row.get("redivis_tag")
-        if released is None:
-            return Check("warehouse", "Warehouse vs repo", ERROR,
-                         "no released irw_meta row in version_manifest.tsv")
     except Exception as exc:
-        return Check("warehouse", "Warehouse vs repo", ERROR,
-                     f"could not read version_manifest.tsv ({exc})")
+        raise RuntimeError(f"could not read version_manifest.tsv ({exc})") from exc
+    if released is None:
+        raise RuntimeError("no released irw_meta row in version_manifest.tsv")
+    return tag, released
+
+
+def check_warehouse_behind_repo(root: Path, now: dt.datetime) -> Check:
+    """Has `metadata/` moved in the repo since irw_meta was last released?
+
+    This is the gap that motivated #1940. The repo is the source and irw_meta is
+    what every live-querying page reads, so the interval between them is exactly
+    how long users have been seeing numbers we have already superseded.
+
+    Both sides come from files this repository commits -- version_manifest.tsv is
+    refreshed daily by its own workflow -- so this check needs no credentials.
+    """
+    try:
+        tag, released = last_irw_meta_release(root)
+    except Exception as exc:
+        return Check("warehouse", "Warehouse vs repo", ERROR, str(exc))
 
     # When `metadata/` last changed on main. Try git first, so a local run works
     # against the checkout in front of you -- then fall back to the API, because
@@ -388,34 +396,34 @@ def check_warehouse_behind_repo(root: Path, now: dt.datetime) -> Check:
                  days_since(released, now))
 
 
-def check_hero(root: Path) -> Check:
-    """Does the homepage banner agree with metadata.csv?
+def check_hero(root: Path, now: dt.datetime) -> Check:
+    """Was the site rendered after the newest irw_meta release?
 
-    The hero is the one number the site reads off disk rather than from Redivis
-    (`components/_hero_playful.qmd`), so it drifts independently of everything
-    else and is the most visible figure in the project.
+    Since #1940 (B3) the homepage banner counts the PUBLISHED warehouse: the
+    site's pre-render step (`landing/hero_stats.R` in datapages/irw) reads
+    irw_meta at render time, like every other page. So the banner can no longer
+    disagree with the rest of the site; what can lag is the render itself. The
+    rebuild deliberately does not watch the warehouse (a render racing a publish
+    was the 2026-08-24 failure), so a release after the last deploy is reported
+    here rather than rendered automatically.
     """
-    local = metadata_rows(root)
-    if local is None:
-        return Check("hero", "Homepage banner", ERROR, "could not count metadata.csv")
     try:
-        with urllib.request.urlopen(SITE_HERO_URL, timeout=30) as fh:
-            hero = json.load(fh)
-    except (urllib.error.URLError, ValueError, TimeoutError) as exc:
-        return Check("hero", "Homepage banner", ERROR, f"could not fetch hero_stats.json ({exc})")
+        tag, released = last_irw_meta_release(root)
+    except Exception as exc:
+        return Check("hero", "Homepage banner", ERROR, str(exc))
+    try:
+        _, built = last_site_deploy()
+    except Exception as exc:
+        return Check("hero", "Homepage banner", ERROR, f"could not read {SITE_REPO} ({exc})")
 
-    n = hero.get("totals", {}).get("n_tables")
-    when = hero.get("generated_at")
-    if n is None:
-        return Check("hero", "Homepage banner", ERROR, "hero_stats.json has no totals.n_tables")
-    if n == local:
-        return Check("hero", "Homepage banner", OK, f"agrees with metadata.csv ({n:,} tables)",
-                     days=0.0)
-    return Check("hero", "Homepage banner", AGING,
-                 f"says **{n:,}** tables; `metadata.csv` has **{local:,}**",
-                 [f"hero_stats.json generated {when}",
-                  "Fix: run `metadata/09_hero_status.R` and commit the result to "
-                  f"`{SITE_REPO}`."])
+    if built >= released:
+        return Check("hero", "Homepage banner", OK,
+                     f"site rendered after irw_meta {tag}", days=0.0)
+    return Check("hero", "Homepage banner", classify(days_since(released, now)),
+                 f"site rendered **before** irw_meta {tag}; the banner and pages show the previous release",
+                 [f"irw_meta {tag} released {released:%Y-%m-%d %H:%M} UTC",
+                  f"site last deployed {built:%Y-%m-%d %H:%M} UTC",
+                  "Fix: `gh workflow run quarto_publish.yaml -R datapages/irw`."])
 
 
 def last_site_deploy() -> tuple[str, dt.datetime]:
@@ -672,7 +680,7 @@ def main(argv: list[str] | None = None) -> int:
         check_drafts(root, now, enabled=not args.no_redivis),
         check_name_collisions(root, enabled=not args.no_redivis),
         check_site_render(now),
-        check_hero(root),
+        check_hero(root, now),
         check_status_json(root),
     ]
 

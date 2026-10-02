@@ -62,7 +62,7 @@ VOCAB_PATH = HERE / "cov_vocabulary.json"
 # Reserved IRW column names -- see datastandard.md. Never covariate candidates.
 RESERVED = frozenset({
     "id", "item", "resp", "wave", "treat", "rt", "date", "rater",
-    "item_family", "qmatrix",
+    "item_family", "qmatrix", "cluster_id", "block_id", "std_baseline",
 })
 
 # Terms that appear as `cov_<term>` in scripts but are Python/R *variable*
@@ -252,7 +252,7 @@ class Vocabulary:
         if not raw or _ITEM_NAME_RE.match(raw):
             return None
         full = normalize(raw)
-        if full in RESERVED or full.startswith(("cov_", "itemcov_", "qmatrix")):
+        if full in RESERVED or full.startswith(("cov_", "itemcov_", "qmatrix", "std_baseline")):
             return None
         if full in self.lookup:
             return self.lookup[full]

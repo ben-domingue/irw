@@ -1,0 +1,156 @@
+{
+ "narcissism_schneider_2025_study1_jauk_honestyhumility": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v29_0.narcissism_schneider_2025_study1_jauk_honestyhumility:3279",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_valid",
+   "cov_studie",
+   "cov_geschlecht",
+   "cov_alter"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_alter": [
+    -99.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel"
+  ]
+ },
+ "narcissism_schneider_2025_study1_jauk_emotionality": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v29_0.narcissism_schneider_2025_study1_jauk_emotionality:k7pg",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_valid",
+   "cov_studie",
+   "cov_geschlecht",
+   "cov_alter"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_alter": [
+    -99.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel"
+  ]
+ },
+ "narcissism_schneider_2025_study1_jauk_extraversion": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v29_0.narcissism_schneider_2025_study1_jauk_extraversion:farw",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_valid",
+   "cov_studie",
+   "cov_geschlecht",
+   "cov_alter"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_alter": [
+    -99.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel"
+  ]
+ },
+ "narcissism_schneider_2025_study1_jauk_hsns": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v29_0.narcissism_schneider_2025_study1_jauk_hsns:m88h",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_valid",
+   "cov_studie",
+   "cov_geschlecht",
+   "cov_alter"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_alter": [
+    -99.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel"
+  ]
+ },
+ "narcissism_schneider_2025_study1_jauk_npi": {
+  "ref": "datapages.item_response_warehouse_2:epbx:v29_0.narcissism_schneider_2025_study1_jauk_npi:kkc1",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "cov_valid",
+   "cov_studie",
+   "cov_geschlecht",
+   "cov_alter"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_alter": [
+    -99.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel"
+  ]
+ },
+ "gcbs_brotherton_2013": {
+  "ref": "datapages.item_response_warehouse:as2e:v66_0.gcbs_brotherton_2013:tw5t",
+  "cols": [
+   "id",
+   "item",
+   "resp",
+   "rt",
+   "cov_education",
+   "cov_urban",
+   "cov_gender",
+   "cov_engnat",
+   "cov_age",
+   "cov_hand",
+   "cov_religion",
+   "cov_orientation",
+   "cov_race",
+   "cov_voted",
+   "cov_married",
+   "cov_familysize",
+   "cov_major"
+  ],
+  "drop": [],
+  "null_values": {
+   "cov_familysize": [
+    98.0
+   ]
+  },
+  "null_range": {},
+  "rename": {},
+  "drop_resp_values": [],
+  "flags": [
+   "cov_sentinel"
+  ]
+ }
+}

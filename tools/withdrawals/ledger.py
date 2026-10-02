@@ -30,8 +30,11 @@ LEDGER = ROOT / "itemtext" / "withdrawals.csv"
 COLUMNS = ["table", "dataset", "kind", "withdrawn", "reason", "family", "refs",
            "rows", "released", "script", "note"]
 #: Why a table left. `rights` rows name the register `family` they rest on.
+#: `source_withdrawn`: the author took the source deposit down (#2565).
+#: `out_of_scope`: not item responses, e.g. a table whose only "response" is a
+#: physical measure such as amount consumed (#1700).
 REASONS = {"rights", "wrong_data", "duplicate", "personal_data", "misnamed",
-           "unlicensed"}
+           "unlicensed", "source_withdrawn", "out_of_scope"}
 KINDS = {"whole", "partial"}
 
 

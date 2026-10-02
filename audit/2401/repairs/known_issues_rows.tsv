@@ -1,0 +1,32 @@
+# Draft rows for datapages/irw landing/known_issues.tsv (#2401, Decisions round 2, C3).
+# Format: two tab-separated columns, `table` and `issue` (number, no '#'); '#' lines
+# are comments, which read_landing_list() skips. Paste the non-comment rows below the
+# live file's `table	issue` header; this draft has no header of its own.
+# The banner the emitter prints is generic ("Known data issue ... see irw#N"); it
+# cannot show the per-table text. The comment above each row is the user-facing
+# wording, for the #2401 issue thread or a future `note` column.
+# Counts: audit/2401/detectors/corpus_flags_v2.csv (live, 2026-09-29).
+# petley_2025_flanker_* is NOT here: kept, with a data note (metadata/data_notes.csv).
+#
+# emobank_buechel_2017: Each sentence (`id`) was rated by about five annotators, but the source does not say which annotator gave which rating. So 255,231 of the 318,519 rows repeat a sentence and dimension (`item`), and 192,950 of those are identical to another row because two annotators gave the same rating. `id` is the sentence, not a person. Do not deduplicate.
+emobank_buechel_2017	2401
+# VCISM_Polish_Trzcinska_2023: The source's child code (`id`) is reused. 9 codes each belong to 2 or 3 different children in the same wave, so 198 of the 2,070 rows repeat an id, item and wave (81 of them identical copies), and those ids mix responses from different children.
+VCISM_Polish_Trzcinska_2023	2401
+# robison_2026_retesting_ifr: 8 of the 34,437 rows are exact copies of another row. They may come from restarted sessions, which have not yet been checked against the source.
+robison_2026_retesting_ifr	2401
+# robison_2026_retesting_paper_folding: 6 participants repeat trial numbers within one session, which looks like a restarted session. 108 of the 8,980 rows repeat an id, item, wave and trial number: 47 are identical copies and 44 carry a different response.
+robison_2026_retesting_paper_folding	2401
+# cud_stone2024: 5 patient ids each have two different records on the same date. 60 of the 71,108 rows repeat an id, item and date: 38 carry a different response and 22 are identical. The source does not show which record is right.
+cud_stone2024	2401
+# nas_rogoza_2024_study5_nas: One participant id holds two different records at one time point. 8 of the 38,040 rows repeat an id, item and wave (5 identical, 3 conflicting).
+nas_rogoza_2024_study5_nas	2401
+# nas_rogoza_2024_study5_ngs: One participant id holds two different records at one time point. 8 of the 38,040 rows repeat an id, item and wave (2 identical, 4 conflicting).
+nas_rogoza_2024_study5_ngs	2401
+# nas_rogoza_2024_study5_nvs: One participant id holds two different records at one time point. 8 of the 38,040 rows repeat an id, item and wave (7 identical, 1 conflicting).
+nas_rogoza_2024_study5_nvs	2401
+# debacker_2018_decisionjustification: One participant id carries two different records for each match. 8 of the 2,672 rows repeat an id, item and wave (2 identical, 6 conflicting).
+debacker_2018_decisionjustification	2401
+# debacker_2018_justice_appraisal: One participant id carries two different records for each match. 24 of the 8,016 rows repeat an id, item and wave (4 identical, 20 conflicting).
+debacker_2018_justice_appraisal	2401
+# megart_tonkovic_2021: Some stimuli were shown to the same person more than once on the same day, but the table has no trial or presentation index to tell the showings apart. 1,149 of the 176,964 rows repeat an id, item and date (3 of them identical copies).
+megart_tonkovic_2021	2401

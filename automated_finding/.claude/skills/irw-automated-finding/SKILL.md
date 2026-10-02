@@ -1033,6 +1033,12 @@ per invocation, JSON on stdin:
            "original_license": "CC BY 4.0", "derived_license": "CC BY 4.0",
            "public_reshare": "Public"}' | python3 stage_dict_row.py
 
+**Comps, nominal and simsyn tables too** (#2628): add `--source comps`,
+`--source nom` or `--source sim`, which writes `dictionary_auto_comps.csv`,
+`_nom.csv` or `_sim.csv`. Same fields, same refusals. Never hand Ben rows to
+paste into the competitions, nominal or simsyn sheet; a row staged here reaches
+that source's biblio on the first pipeline run after the table is released.
+
 The merge is **column-wise**: a human cell in the sheet wins the cell it
 occupies, and an automated cell fills a cell the human left blank. So staging a
 row for a table the humans have already described is not an error and not a

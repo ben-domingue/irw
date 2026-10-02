@@ -1,0 +1,29 @@
+table,construct_name,instrument,language,text_source,n_items,n_participants,k,n_mapped,n_near,verdict,basis,note
+alkouri_2025_icu_stressors,NA,"Perceived Stress Scale (PSS) -- ICU/clinical placement stressor subscale (Sheu et al., 1997)",eng,study_materials,29,127,10,10,0,MATCH,wording,
+BPAQ_Christopher_2024_PSS10,Perceived stress scale amongst police officers,,eng,none_recorded,10,109,10,0,0,NAME_ONLY,name,no item text
+PPPSSAPIS_Figlova_2021_PSS10,Perceived Stress Scale (PSS-10),,cze,none_recorded,10,153,10,0,0,NAME_ONLY,name,no item text
+bakker_2020_pss10,NA,Perceived Stress Scale (PSS-10),amh,study_materials,10,402,10,0,0,NAME_ONLY,name,no item text
+beck_2021_pss10,NA,Perceived Stress Scale (PSS-10),ger,translated_substitute,10,214,10,0,0,NAME_ONLY,name,no item text
+cormier_2024_pss4,NA,Perceived Stress Scale-4 (PSS-4),eng,study_materials,4,898,10,0,0,NAME_ONLY,name,no item text
+duboz_2021_pss10,NA,,"fre, ful",translated_substitute,10,1493,10,0,0,NAME_ONLY,name,no item text
+ecps_sahm_2024_stress,German Version of the Emotion Regulation Questionnaire-Short Form - Stress Related Subscale,COVIDiSTRESS Global Survey Round II: Perceived Stress Scale,ger,study_materials,28,15736,10,0,0,NAME_ONLY,name,item text not in English
+figalova_2021_pss,NA,,cze,none_recorded,14,1725,10,0,0,NAME_ONLY,name,no item text
+gao_2022_pss10,NA,,chi,none_recorded,10,1087,10,0,0,NAME_ONLY,name,no item text
+gilbert_meta_59,Perceived Stress in Mothers (PSS) in a Randomized Controlled Trial,Stress (PSS) in an RCT,urd,none_recorded,10,1154,10,0,0,NAME_ONLY,name,no item text
+gillman_2023_pss,NA,,eng,canonical_instrument,10,404,10,0,0,NAME_ONLY,name,no item text
+graves_2021_pss10,NA,,eng,none_recorded,10,1051,10,0,0,NAME_ONLY,name,no item text
+hui_2024_pss10,NA,,chi,unknown,10,303,10,0,0,NAME_ONLY,name,no item text
+johansson-swedish-pss-rasch-analysis-2024,Swedish Translation of the Perceived Stress Scale,,swe,none_recorded,14,797,10,0,0,NAME_ONLY,name,no item text
+jordan_2020_pss10,NA,,eng,unknown,10,539,10,0,0,NAME_ONLY,name,no item text
+kfcovid_pss_Li2020,Short Form Perceived Stress Scale (PSS-4),Perceived stress scale,eng,none_recorded,4,110,10,0,0,NAME_ONLY,name,no item text
+kim_2023_pss10,NA,,kor,unknown,10,202,10,0,0,NAME_ONLY,name,no item text
+koirala_2024_pss10,NA,,eng,unknown,10,317,10,0,0,NAME_ONLY,name,no item text
+lhsbrasil_couto_2023_pss,Perceived Stress Scale (PSS-10),"Perceived Stress Scale (PSS-10). The PSS measures the perception of individual stress in a global form, independent of stressor agents",por,none_recorded,10,464,10,0,0,NAME_ONLY,name,no item text
+lu_2017_pss10,NA,,chi,unknown,10,1296,10,0,0,NAME_ONLY,name,no item text
+mhscdc_fried_2020_ps,10-item Perceived Stress Scale,10-item Perceived Stress Scale,eng,none_recorded,10,80,10,0,0,NAME_ONLY,name,no item text
+oxfordcovid_xue_2024_pss,Perceived Stress Scale (PSS),Perceived Stress Scale (PSS),eng,none_recorded,4,1600,10,0,0,NAME_ONLY,name,no item text
+paampsmartsud_saba_2023_pss,,Perceived Stress Scale,,none_recorded,,,10,0,0,NAME_ONLY,name,no item text
+park_2021_pss10,NA,,kor,unknown,10,208,10,0,0,NAME_ONLY,name,no item text
+qi_2024_pss10,NA,,chi,none_recorded,10,293,10,0,0,NAME_ONLY,name,no item text
+singh_2025_identity_pss,Stress,"Measures the frequency of stress, feelings of control, and ability to manage personal difficulties over the past month",eng,none_recorded,10,1470,10,0,0,NAME_ONLY,name,no item text
+teshome_2021_pss10,NA,,amh,unknown,10,798,10,0,0,NAME_ONLY,name,no item text
