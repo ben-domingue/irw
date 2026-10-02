@@ -364,6 +364,69 @@ R15. It is applied and flagged for an explicit ruling rather than treated as
 settled; see R11. If the ruling goes the other way the fix is to keep both
 renderings, which is a one-line change to that entry.
 
+## R16. A glyph the booklet DRAWS is recovered from the drawing
+
+Ruled 2026-10-02 (#2462): *"let's apply the same rule as for fractions — we are
+not really generating, we are only looking and recovering in a feasible
+manner."*
+
+A radical, an equilibrium arrow, a capital delta and a minus sign are not
+always characters. In these booklets they are sometimes **vector artwork**, so
+the text layer has a hole where they are printed and extraction yields
+
+    Utilize 1,7 como aproximação para 3.             (2013 MT 16538)
+    Cl_2 (g) + 2 H_2O (l)  HClO (aq) + H_3O^+ (aq)   (2013 CN 29002)
+
+No character is wrong and none is missing, so — as with R12 and R13 — no
+content gate can see it, while the mathematics and the chemistry are gone.
+
+R12 already settles the principle for the fraction bar: *"the only reliable
+signal is the bar itself, which is a drawing, not text"*, and a fraction
+restored from it is recovery. R16 states the same for a glyph. Reading
+`page.get_drawings()` and writing the character INEP drew adds nothing the page
+does not already say, so it owes no `(gerada por IA)` marking and no
+`description_source=partly_generated` — the same reasoning as R15, one step
+further out.
+
+**It is `⇌`, not `→`.** The review that surfaced these called them "reaction
+arrow lost". Writing `→` would ship a one-way reaction where INEP printed an
+equilibrium, inverting the chemistry of three items. The geometry decides it:
+an equilibrium arrow is **two antiparallel harpoons** — one shaft
+left-to-right with its head at the right end, a second right-to-left with its
+head at the left. Two parallel arrows would mean something else, so the
+opposite-heads test is load-bearing, not decoration.
+
+`57_drawn_glyphs.py` implements it, and the shape matters as much as the rule:
+
+- **Geometry audits; an explicit table applies.** The audit is what makes the
+  pass useful on a new year, and it refuses to run when a page carries a drawn
+  glyph the table does not account for — R13's contract.
+- **A drawing is a glyph only inside an intra-line text gap.** Over the 30
+  booklets the pipeline reads, that takes the radical signature from 15 hits to
+  3 and the one-drawing equilibrium from 6 to 5.
+- **The gap alone is not enough.** A hook is a radical only with its
+  **vinculum** — the separate zero-height line over the radicand; requiring it
+  drops a diagram element between two "Eletricidade" labels. A harpoon is an
+  equilibrium only with its **antiparallel partner**; requiring it drops a
+  figure element between "SOLO" and a question header. A sweep that stops at
+  the gap reports no false positives only because it has not looked.
+- **Zero-height paths are real.** The vinculum has `rect.height == 0.0`, so the
+  usual `height > 0.5` filter silently discards it.
+- **Anchoring the geometry automatically to a shipped cell does not work**, and
+  the table exists because of it. The spans adjoining a gap are often a
+  fragment (`O (l) `, `+`) that recurs across items — attempting it offered to
+  write a radical into two unrelated 2013 MT items and an arrow into two
+  unrelated 2015 CN ones. Widening to the whole line needs pymupdf's line
+  grouping, which splits a line *at* the gap; grouping by baseline instead
+  scatters every sub- and superscript onto its own row, so the line reads
+  `Cl (g) + 2 HO (l)` and cannot match a shipped `Cl_2 (g) + 2 H_2O (l)`.
+
+Where a glyph is a **sub-path of a larger drawing** the audit cannot isolate it
+and the table carries it alone, with the measurement: 2015 CN 25964's two
+deltas are sub-paths of one stroked drawing and its two minus signs of another,
+and they sit inside a figure rather than a text gap. That item's own prose
+already reads `ΔH 1` and `ΔH_2`, so the restored labels agree with it.
+
 ## R15. Text recovered from INEP's own booklet is not generated text
 
 Ruled 2026-09-21 (#2226), on the four 2018 items R14 recovered.

@@ -197,6 +197,12 @@ def rebuild(y, outdir):
     run([sys.executable, os.path.join(HERE, "56_reading_order.py"),
          "--items-dir", outdir, "--year", y, "--apply"]
         + sum((["--pdf", p] for p in parses.values()), []))
+    # Glyphs the booklet DRAWS rather than setting as text (R16). Runs last
+    # because its anchors are the finished stem, and its audit refuses when a
+    # page carries a drawn glyph the table does not account for.
+    run([sys.executable, os.path.join(HERE, "57_drawn_glyphs.py"),
+         "--items-dir", outdir, "--year", y, "--apply"]
+        + sum((["--pdf", p] for p in parses.values()), []))
     return outdir
 
 def main():

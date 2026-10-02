@@ -46,7 +46,7 @@ física em altitudes elevadas. Nessas condições, ocorrerá
 uma diminuição na concentração de hemoglobina 
 oxigenada (HbO 2) em equilíbrio no sangue, conforme a 
 relação:
-Hb (aq) + O_2 (aq)  HbO_2 (aq)
+Hb (aq) + O_2 (aq) ⇌ HbO_2 (aq)
 Mal da montanha. Disponível em: www.feng.pucrs.br. Acesso em: 11 fev. 2015 (adaptado).
 A alteração da concentração de hemoglobina oxigenada 
 no sangue ocorre por causa do(a)","D","elevação da pressão arterial.",0,NA,NA,NA,NA,"Portuguese","A"
@@ -97,7 +97,7 @@ física em altitudes elevadas. Nessas condições, ocorrerá
 uma diminuição na concentração de hemoglobina 
 oxigenada (HbO 2) em equilíbrio no sangue, conforme a 
 relação:
-Hb (aq) + O_2 (aq)  HbO_2 (aq)
+Hb (aq) + O_2 (aq) ⇌ HbO_2 (aq)
 Mal da montanha. Disponível em: www.feng.pucrs.br. Acesso em: 11 fev. 2015 (adaptado).
 A alteração da concentração de hemoglobina oxigenada 
 no sangue ocorre por causa do(a)","D","aumento da temperatura corporal.",0,NA,NA,NA,NA,"Portuguese","B"
@@ -148,7 +148,7 @@ física em altitudes elevadas. Nessas condições, ocorrerá
 uma diminuição na concentração de hemoglobina 
 oxigenada (HbO 2) em equilíbrio no sangue, conforme a 
 relação:
-Hb (aq) + O_2 (aq)  HbO_2 (aq)
+Hb (aq) + O_2 (aq) ⇌ HbO_2 (aq)
 Mal da montanha. Disponível em: www.feng.pucrs.br. Acesso em: 11 fev. 2015 (adaptado).
 A alteração da concentração de hemoglobina oxigenada 
 no sangue ocorre por causa do(a)","D","redução da temperatura do ambiente.",0,NA,NA,NA,NA,"Portuguese","C"
@@ -199,7 +199,7 @@ física em altitudes elevadas. Nessas condições, ocorrerá
 uma diminuição na concentração de hemoglobina 
 oxigenada (HbO 2) em equilíbrio no sangue, conforme a 
 relação:
-Hb (aq) + O_2 (aq)  HbO_2 (aq)
+Hb (aq) + O_2 (aq) ⇌ HbO_2 (aq)
 Mal da montanha. Disponível em: www.feng.pucrs.br. Acesso em: 11 fev. 2015 (adaptado).
 A alteração da concentração de hemoglobina oxigenada 
 no sangue ocorre por causa do(a)","D","queda da pressão parcial de oxigênio.",1,NA,NA,NA,NA,"Portuguese","D"
@@ -250,7 +250,7 @@ física em altitudes elevadas. Nessas condições, ocorrerá
 uma diminuição na concentração de hemoglobina 
 oxigenada (HbO 2) em equilíbrio no sangue, conforme a 
 relação:
-Hb (aq) + O_2 (aq)  HbO_2 (aq)
+Hb (aq) + O_2 (aq) ⇌ HbO_2 (aq)
 Mal da montanha. Disponível em: www.feng.pucrs.br. Acesso em: 11 fev. 2015 (adaptado).
 A alteração da concentração de hemoglobina oxigenada 
 no sangue ocorre por causa do(a)","D","diminuição da quantidade de hemácias.",0,NA,NA,NA,NA,"Portuguese","E"
@@ -6783,14 +6783,14 @@ cálcio pode ser adicionado ao efluente, em
 quantidades apropriadas, pois produz bicarbonato, 
 que neutraliza a água. As equações envolvidas no 
 processo são apresentadas:
-(I) CaCO_3 (s) + CO_2 (g) + H_2O (l)  Ca2+ (aq) + 2 HCO_3
+(I) CaCO_3 (s) + CO_2 (g) + H_2O (l) ⇌ Ca2+ (aq) + 2 HCO_3
 − (aq)
 (II) HCO_3
-− (aq)  H+ (aq) + CO_3
+− (aq) ⇌ H+ (aq) + CO_3
 2− (aq)       K 1 = 3,0×10−11
-(III) CaCO_3 (s)  Ca2+ (aq) + CO_3
+(III) CaCO_3 (s) ⇌ Ca2+ (aq) + CO_3
 2− (aq)       K 2 = 6,0×10−9
-(IV) CO_2 (g) + H_2O (l)  H+ (aq) + HCO_3
+(IV) CO_2 (g) + H_2O (l) ⇌ H+ (aq) + HCO_3
 − (aq)       K_3 = 2,5×10^−7
 Com base nos valores das constantes de equilíbrio das 
 reações II, III e IV a 25 °C, qual é o valor numérico da 
@@ -6842,14 +6842,14 @@ cálcio pode ser adicionado ao efluente, em
 quantidades apropriadas, pois produz bicarbonato, 
 que neutraliza a água. As equações envolvidas no 
 processo são apresentadas:
-(I) CaCO_3 (s) + CO_2 (g) + H_2O (l)  Ca2+ (aq) + 2 HCO_3
+(I) CaCO_3 (s) + CO_2 (g) + H_2O (l) ⇌ Ca2+ (aq) + 2 HCO_3
 − (aq)
 (II) HCO_3
-− (aq)  H+ (aq) + CO_3
+− (aq) ⇌ H+ (aq) + CO_3
 2− (aq)       K 1 = 3,0×10−11
-(III) CaCO_3 (s)  Ca2+ (aq) + CO_3
+(III) CaCO_3 (s) ⇌ Ca2+ (aq) + CO_3
 2− (aq)       K 2 = 6,0×10−9
-(IV) CO_2 (g) + H_2O (l)  H+ (aq) + HCO_3
+(IV) CO_2 (g) + H_2O (l) ⇌ H+ (aq) + HCO_3
 − (aq)       K_3 = 2,5×10^−7
 Com base nos valores das constantes de equilíbrio das 
 reações II, III e IV a 25 °C, qual é o valor numérico da 
@@ -6901,14 +6901,14 @@ cálcio pode ser adicionado ao efluente, em
 quantidades apropriadas, pois produz bicarbonato, 
 que neutraliza a água. As equações envolvidas no 
 processo são apresentadas:
-(I) CaCO_3 (s) + CO_2 (g) + H_2O (l)  Ca2+ (aq) + 2 HCO_3
+(I) CaCO_3 (s) + CO_2 (g) + H_2O (l) ⇌ Ca2+ (aq) + 2 HCO_3
 − (aq)
 (II) HCO_3
-− (aq)  H+ (aq) + CO_3
+− (aq) ⇌ H+ (aq) + CO_3
 2− (aq)       K 1 = 3,0×10−11
-(III) CaCO_3 (s)  Ca2+ (aq) + CO_3
+(III) CaCO_3 (s) ⇌ Ca2+ (aq) + CO_3
 2− (aq)       K 2 = 6,0×10−9
-(IV) CO_2 (g) + H_2O (l)  H+ (aq) + HCO_3
+(IV) CO_2 (g) + H_2O (l) ⇌ H+ (aq) + HCO_3
 − (aq)       K_3 = 2,5×10^−7
 Com base nos valores das constantes de equilíbrio das 
 reações II, III e IV a 25 °C, qual é o valor numérico da 
@@ -6960,14 +6960,14 @@ cálcio pode ser adicionado ao efluente, em
 quantidades apropriadas, pois produz bicarbonato, 
 que neutraliza a água. As equações envolvidas no 
 processo são apresentadas:
-(I) CaCO_3 (s) + CO_2 (g) + H_2O (l)  Ca2+ (aq) + 2 HCO_3
+(I) CaCO_3 (s) + CO_2 (g) + H_2O (l) ⇌ Ca2+ (aq) + 2 HCO_3
 − (aq)
 (II) HCO_3
-− (aq)  H+ (aq) + CO_3
+− (aq) ⇌ H+ (aq) + CO_3
 2− (aq)       K 1 = 3,0×10−11
-(III) CaCO_3 (s)  Ca2+ (aq) + CO_3
+(III) CaCO_3 (s) ⇌ Ca2+ (aq) + CO_3
 2− (aq)       K 2 = 6,0×10−9
-(IV) CO_2 (g) + H_2O (l)  H+ (aq) + HCO_3
+(IV) CO_2 (g) + H_2O (l) ⇌ H+ (aq) + HCO_3
 − (aq)       K_3 = 2,5×10^−7
 Com base nos valores das constantes de equilíbrio das 
 reações II, III e IV a 25 °C, qual é o valor numérico da 
@@ -7019,14 +7019,14 @@ cálcio pode ser adicionado ao efluente, em
 quantidades apropriadas, pois produz bicarbonato, 
 que neutraliza a água. As equações envolvidas no 
 processo são apresentadas:
-(I) CaCO_3 (s) + CO_2 (g) + H_2O (l)  Ca2+ (aq) + 2 HCO_3
+(I) CaCO_3 (s) + CO_2 (g) + H_2O (l) ⇌ Ca2+ (aq) + 2 HCO_3
 − (aq)
 (II) HCO_3
-− (aq)  H+ (aq) + CO_3
+− (aq) ⇌ H+ (aq) + CO_3
 2− (aq)       K 1 = 3,0×10−11
-(III) CaCO_3 (s)  Ca2+ (aq) + CO_3
+(III) CaCO_3 (s) ⇌ Ca2+ (aq) + CO_3
 2− (aq)       K 2 = 6,0×10−9
-(IV) CO_2 (g) + H_2O (l)  H+ (aq) + HCO_3
+(IV) CO_2 (g) + H_2O (l) ⇌ H+ (aq) + HCO_3
 − (aq)       K_3 = 2,5×10^−7
 Com base nos valores das constantes de equilíbrio das 
 reações II, III e IV a 25 °C, qual é o valor numérico da 
@@ -10195,8 +10195,8 @@ CO  (g)
 CO  (g)
 H O (g)
 H O ( )ℓ
-H  =   18,8 kJ/g
-H  =   2,4 kJ/g
+ΔH  =   −18,8 kJ/g
+ΔH  =   −2,4 kJ/g
 2
 2
 2
@@ -10261,8 +10261,8 @@ CO  (g)
 CO  (g)
 H O (g)
 H O ( )ℓ
-H  =   18,8 kJ/g
-H  =   2,4 kJ/g
+ΔH  =   −18,8 kJ/g
+ΔH  =   −2,4 kJ/g
 2
 2
 2
@@ -10327,8 +10327,8 @@ CO  (g)
 CO  (g)
 H O (g)
 H O ( )ℓ
-H  =   18,8 kJ/g
-H  =   2,4 kJ/g
+ΔH  =   −18,8 kJ/g
+ΔH  =   −2,4 kJ/g
 2
 2
 2
@@ -10393,8 +10393,8 @@ CO  (g)
 CO  (g)
 H O (g)
 H O ( )ℓ
-H  =   18,8 kJ/g
-H  =   2,4 kJ/g
+ΔH  =   −18,8 kJ/g
+ΔH  =   −2,4 kJ/g
 2
 2
 2
@@ -10459,8 +10459,8 @@ CO  (g)
 CO  (g)
 H O (g)
 H O ( )ℓ
-H  =   18,8 kJ/g
-H  =   2,4 kJ/g
+ΔH  =   −18,8 kJ/g
+ΔH  =   −2,4 kJ/g
 2
 2
 2

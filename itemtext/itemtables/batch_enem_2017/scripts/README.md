@@ -28,3 +28,4 @@ batch, so the build can be reproduced exactly:
 | 54_relocate_descriptions.py | 54_relocate_descriptions.v2.py | `20e815208de24a947807eaee75f288fd` |
 | 55_recover_tables.py | 55_recover_tables.v1.py | `cf542ff149350b004527ec0c4cd13884` |
 | 56_reading_order.py | 56_reading_order.v1.py | `2b7bee366d7958c02091c4444eaba694` |
+| 57_drawn_glyphs.py | 57_drawn_glyphs.v1.py | `9879b9c689311247083ea46c9b32e1d1` |
