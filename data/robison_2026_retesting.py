@@ -94,6 +94,20 @@ def _read_two(task: str, id_col: str = "subject") -> pd.DataFrame:
     return pd.concat(parts, ignore_index=True)
 
 
+# Practice trials (irw#2513). The deposit keeps every task's practice and
+# instruction-review trials beside the scored ones; the paper's reliabilities
+# and trial counts use the scored trials only (e.g. Stroop: 43.1 and 49.0
+# scored trials per person per session, as in Robison et al., 2026). Keep only
+# the scored phase, as data/alcoholstroop_jones2024.R and
+# data/enkavi_2019_conflict_tasks.py do.
+#   flanker/stroop/simon: `session` is Practice / Review / Trials (plus one
+#     stray TrialCountdown or Finished marker row) -> keep Trials.
+#   antisaccade: `block` is slow_practice / fast_practice / antisaccade.
+#   letter, orientation: `block` is practice / real.  color: practice / 0.
+def _drop_practice(df: pd.DataFrame, col: str, keep: set[str]) -> pd.DataFrame:
+    return df[df[col].astype(str).isin(keep)].copy()
+
+
 _COVARIATES: pd.DataFrame | None = None
 
 
@@ -198,6 +212,7 @@ def build_selfreport() -> None:
 def build_cognitive() -> None:
     for task in ("flanker", "stroop", "simon"):
         df = _read_two(task, id_col="subID")
+        df = _drop_practice(df, "session", {"Trials"})
         df["stimulus"] = df["stimulus"].astype(str)
         df["itemcov_conflict"] = df["stimulusConflict"].map({0: "congruent", 1: "incongruent"}).fillna("unknown")
         _emit_trial(df, f"robison_2026_retesting_{task}.csv",
@@ -207,6 +222,7 @@ def build_cognitive() -> None:
                     rename_extras={"itemcov_conflict": "itemcov_conflict"})
 
     df = _read_two("antisaccade")
+    df = _drop_practice(df, "block", {"antisaccade"})
     df["target_side"] = df["target_side"].astype(str).str.lower()
     _emit_trial(df, "robison_2026_retesting_antisaccade.csv",
                 item_col="target_side", resp_col="acc", rt_col="rt",
@@ -229,16 +245,19 @@ def build_cognitive() -> None:
     # choicert dropped per Ben: 2-choice speeded task, accuracy at ceiling, the measure is RT.
 
     df = _read_two("letter")
+    df = _drop_practice(df, "block", {"real"})
     _emit_trial(df, "robison_2026_retesting_letter.csv",
                 item_col="trialtype", resp_col="acc", rt_col="rt",
                 trial_col="trial", trial_extras=["block", "setsize"])
 
     df = _read_two("color")
+    df = _drop_practice(df, "block", {"0"})
     _emit_trial(df, "robison_2026_retesting_color.csv",
                 item_col="trialtype", resp_col="acc", rt_col="rt",
                 trial_col="trial", trial_extras=["block"])
 
     df = _read_two("orientation")
+    df = _drop_practice(df, "block", {"real"})
     _emit_trial(df, "robison_2026_retesting_orientation.csv",
                 item_col="trial_type", resp_col="acc", rt_col="rt",
                 trial_col="trial", trial_extras=["block"])
@@ -289,6 +308,9 @@ def build_cognitive() -> None:
                 trial_extras=["response"])
 
     df = _read_two("tot", id_col="SubID")
+    # Mode=Training is a practice phase on 12 separate items (map 2) never used in
+    # the Experiment block; drop it like the other tasks' practice trials (irw#2513).
+    df = _drop_practice(df, "Mode", {"Experiment"})
     df["item"] = df["itemLabel"].astype(str)
     _emit_trial(df, "robison_2026_retesting_tot.csv",
                 item_col="item", resp_col="Grade",

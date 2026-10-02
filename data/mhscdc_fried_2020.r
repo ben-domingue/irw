@@ -19,6 +19,16 @@ ema_df <- ema_df |>
   mutate(wave = dense_rank(date) - 1) |>  # Assign sequential wave numbers per user
   ungroup()
 ema_df$date<-as.numeric(strptime(ema_df$date,format="%Y-%m-%d %H:%M:%S"))
+# The live table was built with TZ=Europe/London; run under that zone to reproduce
+# its `date` values (strptime above reads the CET wall-clock time in the local zone).
+
+# #2401: drop rows with no response. Beeps the participant never answered
+# ("Expired", no Response time) were kept as 18 rows of resp = NA each; some
+# (id, beep) records repeat up to 30 times, which is where the 1,116 rows
+# identical in every column came from. Items skipped within an answered beep
+# are dropped too. `wave` is assigned above, before this filter, so no kept
+# row's wave or date changes.
+ema_df <- ema_df |> filter(!is.na(resp))
 
 save(ema_df, file="mhscdc_fried_2020_ema.Rdata")
 write.csv(ema_df, "mhscdc_fried_2020_ema.csv", row.names=FALSE)

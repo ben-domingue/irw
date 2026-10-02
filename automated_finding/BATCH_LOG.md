@@ -16141,6 +16141,307 @@ All three pass `irw-validate --profile upload`. Staged: 3 dictionary rows, 3 tag
 rows, and 3 not-shipped provenance records. Item text is cheap for all three
 (DAFRS Appendix A; PozQoL s003.pdf) and is deferred.
 
+## 2026-09-28 — PMC scout-2 sweep, second 50 terms: 435 candidates, 32 leads, 30 tables
+
+**Terms:** the next 50 unrun terms of `pmc_term_backlog_2026-09-25.csv` (ranks
+51-100: "alcohol use disorder" ... "social comparison"), run with
+`irw_discover_pmc.py --resume` against all 11 journals. The backlog now has
+`run_2026_09_28` (`yes`/`partial`) and `unrun_journals_2026_09_28` columns.
+**408 scored terms remain unrun.**
+
+**The run was not clean.** Europe PMC returned 503/502 from about 15:30 to
+18:00, and the process was killed partway through the last journal
+(psychometrika, at "technology acceptance"). It printed no summary and ran
+neither its seen-ledger append nor its Step 2b. What was done afterwards:
+- **77 `QUERY FAILED` lines** in `runs/pmc_scout2_2026-09-28.log`: **64 are
+  search (term, journal) pairs** and 13 are per-PMCID licence lookups (they
+  became the 4 `license_lookup_failed` rows). Failed pairs by journal:
+  screports 23, behavsci 8, bmcmrm 7, jofintelligence 6, peerj 5, jopd 5,
+  heliyon 5, psychometrika 3, bmcpubhealth 2. Add the **34 psychometrika
+  pairs never reached** (terms 17-50) and **98 (term, journal) pairs were not
+  searched**, touching 47 of the 50 terms. Each term's `search_terms_log.csv`
+  note and its backlog row name the journals it still owes. They were not
+  re-looped here.
+- One relaunch (same terms, `--resume`, 18:15) hit 503s again on its third
+  query and was stopped with nothing added; Europe PMC flapped between 200
+  and 503 for the rest of the evening.
+- The 410 non-inconclusive DOIs of the triage CSV were appended to
+  `pmc_seen_dois.csv` by hand (plus 9 from the morning's `--limit 10` test),
+  which is what the killed run's `finally` block would have done.
+- **Step 2b run by hand**: `irw_retriage_ha.py`, `[human_review] archived 11
+  row(s) -> human_review/human_review_pmc_2026-09-28.csv` (12 rows in all),
+  and `refined_flag` merged back onto the full triage CSV.
+
+| flag | n |
+|---|---|
+| `no_usable_file` | 236 |
+| `license_restricted` | 117 |
+| `human_assistance` | 47 |
+| `not_item_response` | 8 |
+| `below_min_n` | 8 |
+| `download_failed` | 7 |
+| `error` | 4 |
+| `license_lookup_failed` | 4 |
+| `external_unresolved` | 2 |
+| `already_in_irw` | 1 |
+| `good` | 1 |
+
+`refined_flag` over the 47: `recoverable_format` 19, `human_review` 12,
+`worth_retrying` 8, `not_item_response` 4, `aggregate_continuous` 4. The 15
+inconclusive rows (`download_failed`/`error`/`license_lookup_failed`) are not
+ledgered and will resurface on a later run; 3 of the `download_failed` are
+private OSF nodes (401).
+
+**32 leads -> `leads/pmc_leads_2026-09-28.csv`** (good + recoverable_format +
+worth_retrying + aggregate_continuous; 26 in shape range). Every lead is
+terminal: **11 shipped, 12 rejected on content, 9 blocked on licence.**
+
+| table(s) | script | ids | items | resp |
+|---|---|---|---|---|
+| `modzelewska_2021_emo_neg` / `_emo_pos` / `_hbeliefs` / `_maia` | `data/modzelewska_2021_interoception.py` | 299 | 10 / 10 / 10 / 32 | 1-7 / 1-7 / 1-5 / 0-5 |
+| `iwanicka_2017_dsq40` / `_ciss` / `_scl90` / `_szpti` | `data/iwanicka_2017_alcohol_dependence.py` | 120 (CISS 119) | 40 / 48 / 90 / 15 | 1-9 / 1-5 / 0-4 / 1-5 |
+| `tao_2026_mpai` | `data/tao_2026_mpai.py` | 9,485 | 17 | 1-5 |
+| `turcsan_2020_dog_dpq` | `data/turcsan_2020_dog_dpq.py` | 206 dogs | 45 | 1-5 |
+| `pajnkihar_2017_cnpi` | `data/pajnkihar_2017_cnpi.py` | 586 | 70 | 1-5 |
+| `martindelcampo_2020_cvcv` / `_aq` / `_ptsd` / `_avs` / `_tipi` | `data/martindelcampo_2020_juarez_violence.py` | 298 | 34 / 29 / 24 / 14 / 10 | 1-5 / 1-5 / 1-4 / 1-4 / 1-7 |
+| `herreromontes_2022_audit` | `data/herreromontes_2022_audit.py` | 142 | 10 | 0-4 |
+| `putro_2024_creativity` / `_eo` / `_tam_etax` / `_tam_emarket` | `data/putro_2024_it_adoption.py` | 265 | 8 / 8 / 21 / 21 | 1-7 |
+| `wang_2023_cse` / `_school_adapt` / `_scsq` | `data/wang_2023_school_adaptation.py` | 500 | 10 / 27 / 20 | 1-5 / 1-5 / 0-3 |
+| `li_2025_rpi` / `_pprds` / `_sdcaf` / `_risky_driving` | `data/li_2025_peer_driving.py` | 269 | 10 / 20 / 18 / 6 | 1-4 / 1-5 |
+| `dorsch_2025_ai_vignettes` / `_ai_tam` | `data/dorsch_2025_automotive_ai.py` | 620 / 617 | 12 / 8 | 1-5 |
+
+**30 tables, 353,632 responses.** The first seven scripts were written earlier
+in the day, before the run was killed; the last four were written in this pass.
+All 30 pass `run_qc()` with no fail and `irw-validate --profile upload`
+(re-run centrally over `irw_output/`); `irw_lint_covariates.py` is clean on
+the new ones. Warnings are response concentration and the expected
+`multi_scale*` note on the TAM blocks and PPRDS/SDCaF subscale prefixes.
+
+Per-table notes:
+- **Putro:** Mendeley `kcvpw2pxh6` v1, CC BY 4.0 (the article's DAS link; the
+  `good` row). The two TAM sections (DJP Online e-tax, e-marketplace) ship
+  separately; continuance items were asked of users and intention items of
+  non-users, carried as `cov_etax_user` / `cov_emarket_user`.
+- **Wang:** item sums reproduce the file's CSE, Positive and Negative totals
+  on every row. Five rows share a two-valued, near-straight-line 57-item
+  pattern with another row, read as chance.
+- **Li:** each block's mean equals its composite column on every row
+  (asserted). The one-letter PPRDS/SDCaF codes get an instrument prefix
+  (`pprds_a1`, `sdcaf_d1`) because bare `c1`..`g5` matched other instruments
+  in irw-validate's rights register.
+- **Dorsch:** OSF `6un4h`, CC BY 4.0. Between-subjects label manipulation, so
+  T-/R- vignette columns share one item code and the arm is `treat`
+  (1 = "trustworthy AI"). All 661 consenting respondents are kept; the
+  paper's exclusions (478 analysed) are carried as `cov_language_check_pass`
+  and `cov_induction_check_pass` rather than applied. The Qualtrics
+  ResponseId is dropped for the row index. The pilot file uses a different
+  item set and is not used.
+
+Item text:
+- `dorsch_2025_ai_tam`: **shipped**, from the Qualtrics question-text header
+  row and the cell labels (`data_labels` + `study_materials`). All gates PASS:
+  `normalize_nulls.R`, `validate_items.R --resp-csv`, `audit_batch.R`
+  (report `runs/itemtext_audit_report_2026-09-28.csv`), `irw-validate`, and
+  `check_provenance.R`. There is a `NOT_NEEDED` row in `mapping_verification.csv`.
+  No issues-page entry.
+- `dorsch_2025_ai_vignettes`: not shipped. The stems are in the same header row,
+  but each vignette's wording differs by arm.
+- `pajnkihar_2017_cnpi`: not shipped. The Slovenian stems and anchors are in the
+  `.sav` labels, but there is no English for `_translated`.
+- `herreromontes_2022_audit`: not shipped. The English codebook is in the deposit
+  (`s002.docx`), but AUDIT is `ship_with_note` in the rights register and needs
+  a ruling.
+- `martindelcampo_*`, `modzelewska_2021_hbeliefs`/`_emo_*`: not shipped. The
+  English variable labels exist, but the administration was Spanish/Polish,
+  so shipping would be `translated_substitute`. Deferred.
+- The rest (`iwanicka`, `tao`, `turcsan`, `putro`, `wang`, `li`): not shipped.
+  They have bare codes only, and the wording is in the cited instruments.
+  Putro's Appendix A (`mmc1.docx`) was checked and has none; Li's RPI
+  wording is in MDPI Supplementary Table S1.
+- 30 rows in `itemtext_provenance.csv` (29 not-shipped + 1 shipped), `uploaded` blank.
+
+**Rejected on content (12):** peerj.19554 (Zayed 2025, Self-Compassion
+Scale, 162 adults with disabilities). This is a **trust** rejection: 59 of 162 rows
+exactly copy another row on all 40 columns, in 36 pairs, 9 triples and one group
+of 6, with varied answer patterns. Also rejected: peerj.18150 (Alharbi; see
+held below), peerj.14794 (ERI/PSQI composites + SNPs), peerj.7547 (clinical
+variables + AUDIT total), peerj.7868 (suicide-attempt characteristics + risk
+score), peerj.5403 (totals + SNPs), s41598-024-84518-6 (SPSS normality output,
+N=27), jintelligence12100095 (**already in IRW** as
+`Forthmann-2024-cleverness_ratings` / `_creative_quality`, the same OSF
+`a9qnc`), and four trial-level or simulated files (s41598-025-14340-1,
+-026-58046-4, -026-42911-3, -025-03981-x).
+
+**Blocked on licence (9):** all of them are OSF nodes with no licence, either
+public or private (`view_only`): vcf36 (Farago 2023 Hungarian fake news, 990),
+8q4b9 (Boals 2025 PTG/discrimination, 323), gvh8t (Umemura 2026 attachment),
+skwt3 (ambivalence, private), ynh5k (private), 4dq9m (Lazarevic 2023 ESM),
+fp6qb, q5ap8, et6ub. The five strongest went to `license_blocked_candidates.csv`.
+There were no PII skips this batch.
+
+**runs/held/:**
+- `csibra_2025_dog_adhd.py` and `atalay_2024_pozqol.{py,csv}` are stale copies
+  of the 2026-09-25 holds. Both were released on 2026-09-26 and the live scripts
+  are in `data/`, so there is nothing to do here.
+- `alharbi_2024_nursing_simulation.py` (peerj.18150, 201 Saudi nursing students,
+  SETM 13 / CTD 27 / SDLR 52, with the Google-Form headers as cheap item text) is
+  **held on trust**. 64 rows repeat another row on all 92 items. Excluding 19
+  straight-lines, 86 rows sit in exact-copy groups with varied patterns and
+  distinct timestamps: this is the CENSOPAS-COPSOQ shape. Dropping the 47 later
+  copies would leave about 154. It awaits ben-domingue, and the reason is now in
+  the script's header.
+
+Also fixed: the 17 tag rows staged earlier today had CRLF endings in an
+otherwise-LF `tags/tags_auto.csv`, and they are now LF. Staged in this pass: 13
+dictionary rows (`stage_dict_row.py`) and 13 tag rows. That brings all 30 tables
+to one dictionary row and one tag row each.
+
+## 2026-09-29 — JPSP 131(4): two named datasets, 25 tables, 301,113 responses
+
+A targeted pass, not a discovery run: two open datasets from *Journal of
+Personality and Social Psychology* 131(4), named by ben-domingue. No search
+terms were run, so nothing was appended to `search_terms_log.csv`. Both OSF
+nodes are public and carry CC BY 4.0 (`api.osf.io/v2/nodes/<id>?embed=license`).
+The dictionary, `metadata.csv`, `biblio.csv` and `data/` had no DOI, OSF id or
+author match for either dataset. There were no table-name collisions with the
+four live `zhang_2026_*` tables (Mendeley `62rjwfhm6j`, a different paper).
+
+**Lu, Efendic & Feldman (2026), 10.1037/pspp0000586, OSF `t5kz9`**, is
+`data/lu_2026_risk_emotion.py`. The source is `RRR-Lerner-Keltner-2001-WITH-order.sav`
+(826 x 296, MTurk, June 2022). Eight tables:
+
+| table | N | items | resp |
+|---|---|---|---|
+| lu_2026_anger (Spielberger Trait-Anger) | 781 | 10 | 1-4 |
+| lu_2026_fss (Fear Survey Schedule-II) | 781 | 14 | 1-7 |
+| lu_2026_stai (STAI trait) | 781 | 20 | 1-4 |
+| lu_2026_happiness (Underwood & Froming Mood Survey) | 781 | 16 | 1-6 |
+| lu_2026_hope (Adult Hope Scale, scored items) | 781 | 8 | 1-8 |
+| lu_2026_optimism (Weinstein 1980 comparative risk) | 781 | 23 | -4..4 |
+| lu_2026_certainty (event certainty appraisal) | 389 | 23 | 1-6 |
+| lu_2026_control (event controllability appraisal) | 392 | 23 | 1-6 |
+
+- **Exclusions are not applied.** The analysis `.Rmd` filter (Duration > 0,
+  consent, both outline checks, native US English speaker, age >= 18,
+  funnel_pay >= 0) is carried as `cov_analysis_sample`. It drops 1 of the 781
+  rows with data (age = 3). The 45 rows of the 826 that stopped before the
+  first block carry no responses at all.
+- **Attention checks.** Each trait block embeds one check item (anger_11,
+  fear_FSS_II_17, fear_STAI__21, happiness_18, hope_13). These are not items;
+  the pass count is `cov_attn_checks_passed` (0-5).
+- **Fillers.** Hope Scale fillers 3/5/7/11 are dropped, matching the
+  authors' scoring. The Asian-disease gain/loss pair is not a scale and is
+  skipped. All 96 `*_DO_*` display-order columns are dropped.
+- **Split halves.** Every respondent answered either certainty or control,
+  never both (asserted), so these are two tables. The optimism, certainty and
+  control tables all rate the same 23 events, which is why they keep the
+  source prefixes as distinct item codes.
+- **Identifiers.** MTurk assignmentId/hitId are dropped, so `id` is the row
+  index. The Recipient name/email, PROLIFIC_PID and location fields are blank
+  in every row. There are no IP or GPS columns.
+- **Validator warning.** `irw-validate`'s rights_register flags
+  `happiness_*` as matching the SHS code pattern. This is a false positive:
+  the table is the 16-item Mood Survey, and the codes are not wording.
+
+**Zhang, Jacobson, Hardin & Sun (2026), 10.1037/pspp0000608, OSF `ztxcd`**, is
+`data/zhang_2026_virtue_tradeoffs.py`. The source is S1
+`Moral_dilemma_S1_cleaned.csv` (12,385 episode rows, 377 Prolific adults, a Day
+Reconstruction Method diary). Seventeen tables, and the trait tables all have N=377:
+
+| table | items | resp |
+|---|---|---|
+| zhang_2026_mcq_morality / _mcq_loyalty | 4 / 4 | 1-5 |
+| zhang_2026_moral_attentiveness | 12 | 1-7 |
+| zhang_2026_bfi2_neuroticism / _compassion / _respect / _responsibility | 3 / 4 / 4 / 4 | 1-5 |
+| zhang_2026_courage | 5 | 1-4 |
+| zhang_2026_tcs_honesty | 6 | 1-5 |
+| zhang_2026_hexaco_modesty | 4 | 1-5 |
+| zhang_2026_wisdom | 4 | 1-6 |
+| zhang_2026_ipip_fairness / _forgiveness / _gratitude / _patience | 4 each | 1-5 |
+| zhang_2026_virtue_states (148,541 responses, wave = episode) | 12 | 1-7 |
+| zhang_2026_episode_affect (37,148 responses, wave = episode) | 3 | 1-7 |
+
+- **Grouping is one file per construct.** The paper scores each block as a
+  separate trait virtue. The IPIP items span four IPIP scales, and the BFI-2
+  facets span three domains, so neither instrument is a single construct.
+- **Trait items and ranges.** Trait items are identical on every episode row
+  (asserted), so they are deduplicated to one row per person before melting.
+  The codebook's 1-7 for HH_Modesty and Wise is wrong. The Baseline `.qsf`
+  shows 1-5 and 1-6, and the observed values agree.
+- **Unreversing.** The deposit stores reverse-keyed items only as
+  `R.<name> = 6 - x` (`8 - x` for Attentiveness2), per cleaning `.Rmd` lines
+  771-789 and 888-889. They are inverted back to raw and shipped under the
+  unprefixed name. A sanity check confirms the direction: "Feel no gratitude to
+  others" is 1 for 79% of respondents.
+- **Episode data went in.** All 12 virtue ratings are asked on every episode,
+  whether or not the virtue was marked relevant. (ID, day, Episode) is unique.
+  `wave` follows diary day, then the diary's own E-number, because start
+  clock times run backwards in about 2% of within-day pairs. Episodes per
+  person: min 2, median 36, max 48. The op_* and conflict* checklists are not
+  carried.
+- **S2 was not merged.** `Current_*` rates 10 of S1's 12 virtues for one
+  conflict episode picked for the respondent. That is not the same
+  administration.
+- **No exclusions beyond the authors'.** The file is the authors' cleaned S1,
+  so no further exclusion is applied. It has no text or identifier columns.
+
+All 25 tables pass `run_qc`, per-item permitted-value assertions, and
+`irw-validate`'s upload profile, with no errors. The only warnings are
+`imputed_values*` response-concentration notes on a few 1-5 items and the SHS
+false positive. A per-item scan found no isolated values.
+
+Item text:
+- **Shipped for 6 tables:** `zhang_2026_ipip_{fairness,forgiveness,gratitude,patience}`
+  (Baseline `.qsf` IPIP1/IPIP2 stems, tied to codes through the codebook `Item`
+  column, 4/4 each) and `zhang_2026_virtue_states` / `_episode_affect` (DRM
+  `.qsf` episode-10 questions; anchors only at 1/4/7 or 1/7). Built by
+  `itemtext_verification/make_itemtext_zhang_2026.py`. The gates passed:
+  `normalize_nulls.R`, `validate_items.R --resp-csv` (6/6), `audit_batch.R`
+  (`runs/itemtext_audit_report_2026-09-29.csv`), `irw-validate` and
+  `check_provenance.R`. Six `NOT_NEEDED` rows are in `mapping_verification.csv`.
+  None of these tables needs an issues-page entry.
+- **Not shipped for 19 tables, held on rights, not availability.** The wording
+  is in each deposit (Lu: `CODEBOOK.csv` plus the `.sav` labels, both levels
+  present; Zhang: the codebook plus the Baseline `.qsf`). STAI, BFI-2 and
+  HEXACO are `block` in the rights register. Spielberger Trait-Anger, FSS-II,
+  the Mood Survey, the Adult Hope Scale, the Weinstein events, MCQ, Moral
+  Attentiveness, the courage and TCS items, and the wisdom items are not in
+  the register. There are 25 rows in `itemtext_provenance.csv`, with
+  `uploaded` blank.
+
+There were no PII skips. The only platform IDs were MTurk ids, and they were
+dropped. Staged: 25 rows in `dictionary_auto.csv` and 25 in `tags/tags_auto.csv`.
+`stage_tag_row.py` still writes CRLF, so the 25 new rows were converted to LF.
+
+## 2026-09-29 — repos weekly, manual fire (+ OSF 5xx fix)
+
+Fired by hand (ben asked for "an automated search"). The cloud discovery
+routines are not addressable from a session (see ARCHITECTURE.md, "Claude
+cloud routines"), so `irw_discover_monthly.py --mode weekly` was run locally:
+osf + dataverse + datacite, the 14 weekly terms, `--retriage` on triage.
+
+- **Discovery:** 68 candidates; 64 already in `repo_triage_seen_keys.csv`, so
+  4 triaged: 2 `no_usable_file` (Göttingen DVN/VXFZXZ, ScienceDB 013yj), 2
+  `error`, both the same figshare deposit.
+- **`10.6084/m9.figshare.33980614` (ADLI, French adaptation, CC BY 4.0) — not a
+  dataset.** The xlsx is a blank, protected scoring template: 49 rows, empty
+  `Code` column, every item cell 0. The triage `error` ("arg must be a list,
+  tuple, 1-d array, or Series") comes from its duplicate-ish headers. Added
+  to the seen ledger by hand so it stops being retried as a transient error.
+- **OSF was silently missing the broad terms, and it was a bug, not an
+  outage.** OSF missed 7/14 terms in this run. "depression" had already lost
+  OSF on 09-21 and 09-28. Reproduced: `from_osf("depression")` fails on a 502
+  at `page=4` of the tag query after ~80s; narrow terms never reach page 4.
+  `from_osf` had no retry, so one 502 discarded the whole term. Fix: retry
+  5xx and timeouts up to 3 times with 5/10/15s backoff
+  (`irw_discover_updated.py`). After the fix, depression and anxiety return
+  250 hits each.
+- **Re-cover:** the 7 missed terms were re-run with `--terms`, and all 3
+  sources completed all 7. There were 37 candidates, and every OSF hit was
+  already in the ledger. Nothing new beyond ADLI.
+- **Result:** 0 `good`, 0 `human_assistance`, nothing to process.
+  Step 2b ran (chained `--retriage`) with an empty bucket.
+
 ## 2026-09-28 — Repos weekly run: 0 good by triage, 1 human_assistance surfaced unclassified
 
 Scheduled weekly repos run (`irw_discover_monthly.py --mode weekly`, all 15

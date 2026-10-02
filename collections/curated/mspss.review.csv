@@ -1,0 +1,7 @@
+table,construct_name,instrument,language,text_source,n_items,n_participants,k,n_mapped,n_near,verdict,basis,note
+chen2022b_socsupport,NA,Multidimensional Scale of Perceived Social Support (MSPSS),chi,translated_substitute,12,417,12,12,0,MATCH,supplied,
+ehealth_rioux_2025_mssps,Multidimensional Scale of Perceived Social Support,Multidimensional Scale of Perceived Social Support (MSPSS),eng,study_materials,12,312,12,12,0,MATCH,wording,
+laksmita_2020_mspss,NA,"Multidimensional Scale of Perceived Social Support (MSPSS), Indonesian version",ind,translated_substitute,12,299,12,12,2,MATCH,supplied,
+nguyen_2026_mspss,Perceived social support (MSPSS),Multidimensional Scale of Perceived Social Support (MSPSS),vie,none_recorded,12,394,12,11,1,MATCH,supplied,
+qi_2024_mspss,NA,"Perceived Social Support Scale (PSSS / MSPSS), Chinese version",chi,none_recorded,12,293,12,0,0,NAME_ONLY,name,item text not in English
+jeilani_2024_social_outcomes,Social outcomes scale (SO),"Multidimensional Scale of Perceived Social Support (MSPSS), Significant Other subscale (Zimet, Dahlem, Zimet & Farley, 1988)",NA,study_materials,4,663,12,4,1,PARTIAL,,first item: there is a special person in my life that cares about my feelings

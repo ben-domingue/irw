@@ -100,6 +100,14 @@ dict_urls <- c(
   sim  = "https://docs.google.com/spreadsheets/d/1_2SR1_miAqUy0HWFQqo5vrBVrIN4V1FU6RfavBc7WdA/edit?gid=1337607315#gid=1337607315"
 )
 
+## Each sheet's automated rows (#1732, #2628). They reach biblio without ever
+## being in the sheet, so a sheet-only read reports every staged table as
+## missing from the dictionary. Relative to --dir, which is metadata/.
+dict_auto_csvs <- c(core = "../automated_finding/dictionary_auto.csv",
+                    comp = "../automated_finding/dictionary_auto_comps.csv",
+                    nom  = "../automated_finding/dictionary_auto_nom.csv",
+                    sim  = "../automated_finding/dictionary_auto_sim.csv")
+
 lc <- function(x) tolower(trimws(as.character(x)))
 
 get_live <- function(src) {
@@ -119,7 +127,17 @@ get_dict <- function(src) {
   })
   if (is.null(tab) || !"table" %in% names(tab)) return(NULL)
   if ("Public Reshare?" %in% names(tab)) tab <- tab[tab$`Public Reshare?` == "Public", ]
-  lc(tab$table)
+  out <- lc(tab$table)
+  auto_path <- file.path(dir_path, dict_auto_csvs[[src]])
+  if (file.exists(auto_path)) {
+    auto <- suppressMessages(readr::read_csv(auto_path, show_col_types = FALSE,
+                                             col_types = readr::cols(.default = "c")))
+    if (nrow(auto) && "table" %in% names(auto)) {
+      auto <- auto[!is.na(auto$`Public Reshare?`) & auto$`Public Reshare?` == "Public", ]
+      out <- unique(c(out, lc(auto$table)))
+    }
+  }
+  out
 }
 
 read_table_col <- function(path) {
@@ -239,7 +257,7 @@ md <- c(
   paste0("# IRW table-name consistency audit -- ", Sys.Date()),
   "",
   "Ground truth: `irw::irw_list_tables(source = c(\"core\",\"comp\",\"nom\",\"sim\"))`. ",
-  if (skip_dict) "Dictionary sheets skipped (--skip-dict)." else "Dictionary sheets included (Public rows only).",
+  if (skip_dict) "Dictionary sheets skipped (--skip-dict)." else "Dictionary sheets plus automated_finding/dictionary_auto*.csv included (Public rows only).",
   "",
   "## A. Incomplete coverage (missing >=2 sources, tag-only rows dropped -- matches metadata/04_tables.R's `zz`)",
   "",

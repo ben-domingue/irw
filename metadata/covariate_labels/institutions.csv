@@ -1,0 +1,6 @@
+table_pattern,covariate,decision,note
+estevez_2021_*,cov_school,withhold,"13 named Galician primary schools; ruled withheld on #1775 2026-10-01"
+jie_2024_psqi,cov_university,withhold,"named Malaysian universities; ruled withheld on #1775 2026-10-01"
+biswas_2024_digital_center_quality,cov_digital_center,publish,"labels are the codes PDC-1..PDC-5, not centre names; reviewed 2026-10-01"
+feng_2024_*,cov_locality,publish,"school locality types (rural/township/county-city), not named schools; reviewed 2026-10-01"
+okamura_2018_*,cov_institution,publish,"facility types (nursing home, medical institution, other), not named institutions; reviewed 2026-10-01"

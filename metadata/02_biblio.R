@@ -192,9 +192,14 @@ getrows<-function(l) {
     ## it here, in both the sheet export and the automated file, and report.
     irw_dict <- drop_unshaped_dict_rows(irw_dict, name, "dictionary")
     if (!is.null(l$file.auto)) {
+        ## comps/nom/sim sheets spell three columns differently from core (#2628).
+        irw_dict <- normalize_dict_layout(irw_dict, name)
         auto <- read_dict_auto(l$file.auto, name)
         auto <- drop_unshaped_dict_rows(auto, name, "automated dictionary")
+        ## The oracle floor is per source: a 9-table simsyn metadata.csv is
+        ## complete, where a 9-row core one would be a truncated read.
         auto <- drop_dead_dict_rows(auto, l$file.live, name,
+                                    min_oracle_rows = if (is.null(l$min.live)) 1000 else l$min.live,
                                     pending.file = l$file.pending)
         u <- union_dict(irw_dict, auto, name)
         irw_dict <- u$dict
@@ -222,6 +227,12 @@ getrows<-function(l) {
     biblio <- seed_from_local(biblio, file.out)
     ## Correct known upstream citation defects even when a cached value exists.
     biblio <- apply_bibtex_overrides(biblio, bibtex_overrides)
+    ## A no-DOI row whose Reference was corrected in the dictionary drops its
+    ## cached BibTeX here, so it regenerates below from the new text (#2580).
+    ## Must precede refresh_biblio_from_dict(), which would hide the change.
+    ref_stale <- drop_stale_reference_bibtex(biblio, irw_dict, name)
+    biblio <- ref_stale$biblio
+    readr::write_csv(ref_stale$log, log_path("_bibtex_reference_log.csv"))
     ##
     irw_notpub <- irw_dict[irw_dict$`Public Reshare?`!="Public",]
     ## Find rows in dictionary whose Filename is not in biblio
@@ -332,20 +343,24 @@ getrows<-function(l) {
     readr::write_csv(stale$log, log_path("_bibtex_refetch_log.csv"))
     assert_bibtex_doi_consistent(biblio, name)
 
+    ## `Source_via` goes last, so a reader of the first ten columns is unmoved.
+    ## apply_source_via() above fills it; without it here it never left R (#2421).
     biblio<-biblio[,
                    c("table","DOI__for_paper_", "DOI__for_data_", "Reference_x",
                      "URL__for_data_",
                      "Original_License", "Derived_License", "Custom_License_Terms",
-                     "Description", "BibTex")]
+                     "Description", "BibTex", "Source_via")]
     readr::write_csv(biblio, file.out)
 }
 
 
 dbs<-list(
-    ##`file.auto` is what makes a source part of #1732: only core has an
-    ##automated writer today. The other three are sheet-only, exactly as
-    ##03_tags.R leaves comp/sim tag-less, and adding a file here is the whole
-    ##opt-in.
+    ##`file.auto` is what makes a source part of #1732; all four have one
+    ##(#2628). stage_dict_row.py --source {core,comps,nom,sim} writes them, so no
+    ##dictionary row needs pasting into any sheet. `file.live` is the liveness
+    ##oracle; for comps/nom/sim it is written by 05/06/07, which run_pipeline.sh
+    ##runs BEFORE this script so it is current. `min.live` is that oracle's
+    ##plausibility floor (default 1000, which suits core only).
     core=list(name="core",
               irw_dict=gsheet2tbl('https://docs.google.com/spreadsheets/d/1nhPyvuAm3JO8c9oa1swPvQZghAvmnf4xlYgbvsFH99s/edit?gid=1337607315#gid=1337607315'),
               user=IRW_OWNER,
@@ -361,19 +376,34 @@ dbs<-list(
               user=IRW_OWNER,
               dataset="irw_meta",
               table="comps_biblio",
-              file.out="comps_biblio.csv"),
+              file.out="comps_biblio.csv",
+              file.auto="../automated_finding/dictionary_auto_comps.csv",
+              file.live="comps_metadata.csv",
+              file.prov="comps_biblio_provenance.csv",
+              file.pending="comps_biblio_pending.csv",
+              min.live=10),
     nom=list(name="nom",
               irw_dict=gsheet2tbl('https://docs.google.com/spreadsheets/d/12tM4vADKcUm5LGOGRwQ5_HKkdYa3mZUaKbFUqgs2U_w/edit?gid=1337607315#gid=1337607315'),
              user=IRW_OWNER,
              dataset="irw_meta",
              table="nominal_biblio",
-             file.out="nominal_biblio.csv"),
+             file.out="nominal_biblio.csv",
+             file.auto="../automated_finding/dictionary_auto_nom.csv",
+             file.live="nominal_metadata.csv",
+             file.prov="nominal_biblio_provenance.csv",
+             file.pending="nominal_biblio_pending.csv",
+             min.live=10),
     sim=list(name="sim",
               irw_dict=gsheet2tbl('https://docs.google.com/spreadsheets/d/1_2SR1_miAqUy0HWFQqo5vrBVrIN4V1FU6RfavBc7WdA/edit?gid=1337607315#gid=1337607315'),
              user=IRW_OWNER,
              dataset="irw_meta",
              table="simsyn_biblio",
-             file.out="simsyn_biblio.csv")
+             file.out="simsyn_biblio.csv",
+             file.auto="../automated_finding/dictionary_auto_sim.csv",
+             file.live="simsyn_metadata.csv",
+             file.prov="simsyn_biblio_provenance.csv",
+             file.pending="simsyn_biblio_pending.csv",
+             min.live=5)
 )
 
 for (i in 1:length(dbs)) {

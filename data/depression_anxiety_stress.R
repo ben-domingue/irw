@@ -6,6 +6,19 @@ df <- read_delim('data.csv')
 # convert column names to lowercase
 names(df) <- tolower(names(df))
 
+# Item order was randomised per person. Q<n>I is the position (1-42) at which
+# that person saw DASS item Q<n> (codebook: "that question's position in the
+# survey"); every row is a permutation of 1-42. Kept as `position`, as in the
+# ENEM tables (irw#2513). TIPI and VCL items (43-68 in the output) have no
+# recorded position, so theirs is NA.
+positions <- df |>
+  mutate(id = row_number()) |>
+  select(id, matches('^q[0-9]+i$')) |>
+  pivot_longer(cols = -id,
+               names_to = 'item',
+               values_to = 'position') |>
+  mutate(item = str_replace(item, 'i$', 'a'))
+
 df <- df |>
   select(-education,
          -urban,
@@ -49,6 +62,8 @@ df <- df |>
                names_to = 'item',
                values_to = 'resp') |>
   left_join(times, 
+            by = c('id', 'item')) |>
+  left_join(positions,
             by = c('id', 'item'))
 
 
@@ -62,7 +77,7 @@ df <- df |>
   left_join(items, 
             by=c("item" = "unique(df$item)")) |>
   # drop character item variable
-  select(id, item_id, resp, rt) |>
+  select(id, item_id, resp, rt, position) |>
   # use item_id column as the item column
   rename(item = item_id)
 

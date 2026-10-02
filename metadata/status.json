@@ -1,86 +1,154 @@
 {
-  "generated": "2026-09-21T18:38:30+0000",
+  "generated": "2026-09-28T20:32:23+0000",
   "source": "metadata/11_status.R -- local pipeline CSVs, no Redivis calls",
-  "n_tables": 4495,
+  "n_tables": 4596,
   "coverage": {
     "tags": {
-      "n": 4393,
-      "pct": 97.7
+      "n": 4496,
+      "pct": 97.8
     },
     "tags_by_column": {
       "age range": {
-        "n": 3238,
-        "pct": 72
+        "class": "derived",
+        "n": 3248,
+        "pct": 70.7
       },
       "child age (for child-focused studies)": {
-        "n": 720,
-        "pct": 66.7,
-        "denominator": 1079,
+        "class": "derived",
+        "n": 718,
+        "pct": 67.9,
+        "denominator": 1058,
         "of": "tables whose `age range` is Child (<18y) or Mixed",
-        "pct_of_all_tables": 16
+        "pct_of_all_tables": 15.6
       },
       "sample": {
-        "n": 3978,
-        "pct": 88.5
+        "class": "definitional",
+        "definitional": {
+          "values": 11,
+          "values_with_rule": 11,
+          "pct_with_rule": 100,
+          "without_rule": [],
+          "rules": "tags/.claude/skills/irw-auto-tag/references/vocab.md",
+          "registry": "tags/decisions/value_definitions.csv"
+        },
+        "coverage_footnote": {
+          "n": 4078,
+          "pct": 88.7
+        }
       },
       "construct type": {
-        "n": 2456,
-        "pct": 54.6
+        "class": "definitional",
+        "definitional": {
+          "values": 8,
+          "values_with_rule": 4,
+          "pct_with_rule": 50,
+          "without_rule": ["Affective/mental health", "Cognitive/educational", "Developmental", "Opinion/attitude"],
+          "rules": "tags/.claude/skills/irw-auto-tag/references/vocab.md",
+          "registry": "tags/decisions/value_definitions.csv"
+        },
+        "coverage_footnote": {
+          "n": 2466,
+          "pct": 53.7
+        }
       },
       "measurement tool": {
-        "n": 4355,
-        "pct": 96.9
+        "class": "tagger",
+        "n": 4459,
+        "pct": 97,
+        "accuracy": {
+          "exact_pct": 86.8,
+          "n_answered": 38,
+          "n_gold": 38,
+          "measured": "2026-09-01",
+          "source": "tags/scoring/results_2026-09-01.txt"
+        }
       },
       "item format": {
-        "n": 4247,
-        "pct": 94.5
+        "class": "tagger",
+        "n": 4351,
+        "pct": 94.7,
+        "accuracy": {
+          "exact_pct": 90.9,
+          "n_answered": 22,
+          "n_gold": 38,
+          "measured": "2026-09-01",
+          "source": "tags/scoring/results_2026-09-01.txt"
+        }
       },
       "primary language(s)": {
-        "n": 4158,
-        "pct": 92.5
+        "class": "tagger",
+        "n": 4287,
+        "pct": 93.3,
+        "accuracy": {
+          "exact_pct": 90.9,
+          "precision_pct": 100,
+          "recall_pct": 91.7,
+          "n_answered": 33,
+          "n_gold": 36,
+          "measured": "2026-09-01",
+          "source": "tags/scoring/results_2026-09-01.txt"
+        }
       },
       "construct name": {
-        "n": 2467,
-        "pct": 54.9,
-        "kind": "description",
+        "class": "description",
+        "n": 2477,
+        "pct": 53.9,
         "note": "free text, not a controlled vocabulary -- a fill rate, not a coverage target (#1837)"
       }
     },
+    "tag_classes": {
+      "derived": {
+        "criterion": "coverage of eligible tables; should approach 100%, a shortfall is a bug",
+        "columns": ["age range", "child age (for child-focused studies)"]
+      },
+      "tagger": {
+        "criterion": "coverage and accuracy together; coverage is throughput, accuracy says what it is worth",
+        "columns": ["primary language(s)", "item format", "measurement tool"]
+      },
+      "definitional": {
+        "criterion": "share of values with a written decision rule; coverage is a footnote",
+        "columns": ["sample", "construct type"]
+      },
+      "description": {
+        "criterion": "fill rate of a free-text field; not a coverage target",
+        "columns": ["construct name"]
+      }
+    },
     "itemtext": {
-      "n": 1589,
-      "pct": 35.4
+      "n": 2366,
+      "pct": 51.5
     }
   },
   "tags_by_shard": {
     "item_response_warehouse": {
-      "n_tables": 990,
-      "tagged": 984,
-      "pct": 99.4
+      "n_tables": 983,
+      "tagged": 976,
+      "pct": 99.3
     },
     "item_response_warehouse_2": {
-      "n_tables": 954,
-      "tagged": 951,
+      "n_tables": 923,
+      "tagged": 920,
       "pct": 99.7
     },
     "item_response_warehouse_3": {
       "n_tables": 984,
-      "tagged": 982,
-      "pct": 99.8
+      "tagged": 979,
+      "pct": 99.5
     },
     "item_response_warehouse_4": {
-      "n_tables": 981,
-      "tagged": 981,
+      "n_tables": 980,
+      "tagged": 980,
       "pct": 100
     },
     "item_response_warehouse_5": {
-      "n_tables": 305,
-      "tagged": 280,
+      "n_tables": 304,
+      "tagged": 279,
       "pct": 91.8
     },
     "item_response_warehouse_6": {
-      "n_tables": 281,
-      "tagged": 215,
-      "pct": 76.5
+      "n_tables": 422,
+      "tagged": 362,
+      "pct": 85.8
     }
   },
   "orphan_tag_rows": 0

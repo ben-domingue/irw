@@ -1,1 +1,38 @@
 date,tool,table,checks,reason,user
+2026-09-25,irw-validate,itemtables/batch_428/mexico_2023_quality_transportationstations__items.csv,name_length,"Ben waived the 40-char name cap for item text 2026-09-25 (round_log, #2381 slice 7)",ben
+2026-09-25,irw-validate,itemtables/batch_430/selfcompassionscale_shortform_fuochi_2025__items.csv,name_length,"Ben 2026-09-25 waiver of the 40-char cap for item text (live table name, not renamable here)",ben
+2026-09-25,irw-validate,itemtables/batch_431/west_2021_retaliatory_aggression_study4_deq__items.csv,name_length,"Ben 2026-09-25 waiver of the 40-char name cap for item text: name is the existing live IRW table name",ben
+2026-09-25,irw-validate,itemtables/batch_455/eammi_grahe_2018_marriage_identity_allocation__items.csv,name_length,"Ben's 2026-09-25 waiver of the 40-char name cap for item text (live table name, cannot shorten)",ben
+2026-09-29,irw-validate,mclaughlin_samuel_2025_auditory_session_2,name_length,"Ben 2026-09-29 (#2401): leave already-published tables with long names as they are; the 40-char cap applies at intake",ben
+2026-09-29,irw-validate,lexical_difficulty_altgassen_2025_s01_knowledge,name_length,"Ben 2026-09-29 (#2401): leave already-published tables with long names as they are; the 40-char cap applies at intake",ben
+2026-09-29,irw-validate,lexical_difficulty_altgassen_2025_s01_personality,name_length,"Ben 2026-09-29 (#2401): leave already-published tables with long names as they are; the 40-char cap applies at intake",ben
+2026-09-29,irw-validate,narcissism_schneider_2025_study1_jauk_emotionality,name_length,"Ben 2026-09-29 (#2401): leave already-published tables with long names as they are; the 40-char cap applies at intake",ben
+2026-09-29,irw-validate,narcissism_schneider_2025_study1_jauk_extraversion,name_length,"Ben 2026-09-29 (#2401): leave already-published tables with long names as they are; the 40-char cap applies at intake",ben
+2026-09-29,irw-validate,narcissism_schneider_2025_study1_jauk_honestyhumility,name_length,"Ben 2026-09-29 (#2401): leave already-published tables with long names as they are; the 40-char cap applies at intake",ben
+2026-09-29,irw-validate,narcissism_schneider_2025_study1_jauk_hsns,name_length,"Ben 2026-09-29 (#2401): leave already-published tables with long names as they are; the 40-char cap applies at intake",ben
+2026-09-29,irw-validate,petley_2025_flanker_study1_childwoman,dup_id_item,"Ben 2026-09-29 (#2401): repeated id+item rows are by design (expanded from correct/total counts)",ben
+2026-09-29,irw-validate,petley_2025_flanker_study1_girlman,dup_id_item,"Ben 2026-09-29 (#2401): repeated id+item rows are by design (expanded from correct/total counts)",ben
+2026-09-29,irw-validate,petley_2025_flanker_study1_manwoman,dup_id_item,"Ben 2026-09-29 (#2401): repeated id+item rows are by design (expanded from correct/total counts)",ben
+2026-09-29,irw-validate,petley_2025_flanker_study2_auditory,dup_id_item,"Ben 2026-09-29 (#2401): repeated id+item rows are by design (expanded from correct/total counts)",ben
+2026-09-29,irw-validate,petley_2025_flanker_study2_visual,dup_id_item,"Ben 2026-09-29 (#2401): repeated id+item rows are by design (expanded from correct/total counts)",ben
+2026-09-30,irw-validate,chile_2023_children-adolescents-survey_cp_c,name_length,"Ben 2026-09-29 (#2401): leave already-published tables with long names as they are; the 40-char cap applies at intake",ben
+2026-09-30,irw-validate,selm_2019_climate_knowledge,dup_id_item,"#2401 removed the exact duplicate record; the 6 remaining rows are different respondents sharing a survey number (conflicting), which Ben ruled stay with #1856",claude
+2026-09-30,irw-validate,vollbracht_et_al_2026_ambulatory_assessment,name_length,"Ben 2026-09-29 (#2401): leave already-published tables with long names as they are; the 40-char cap applies at intake",ben
+2026-09-28,irw-validate,itemtables/batch_723/c19prc_uk_mcbride_2021_polarization_brexit__items.csv,name_length,name_length: live table name; Ben's 2026-09-25 item-text waiver of the 40-char cap,ben
+2026-09-28,irw-validate,itemtables/batch_723/c19prc_uk_mcbride_2021_polarization_covid__items.csv,name_length,name_length: live table name; Ben's 2026-09-25 item-text waiver of the 40-char cap,ben
+2026-09-28,irw-validate,itemtables/batch_725/c19prc_uk_mcbride_2021_quarantine_support__items.csv,name_length,live table name; Ben's 2026-09-25 item-text waiver,ben
+2026-09-28,irw-validate,itemtables/batch_726/c19prc_uk_mcbride_2021_riskreduction_beliefs__items.csv,name_length,live table name; Ben's 2026-09-25 item-text name_length waiver,ben
+2026-09-29,irw-validate,itemtables/batch_727/c19prc_uk_mcbride_2021_secondwave_restrictions__items.csv,name_length,"name_length: live table name, item-text waiver 2026-09-25",ben
+2026-09-29,irw-validate,itemtables/batch_727/c19prc_uk_mcbride_2021_selfharm_suicidality__items.csv,name_length,"name_length: live table name, item-text waiver 2026-09-25",ben
+2026-09-30,irw-validate,jiang_2026_openeval_anthropic_redteam,sample_floor,"Ben 2026-09-30: AI-respondent tables (OpenEval, irw#2166) take a 50-model floor instead of 100; 92 models",ben
+2026-09-30,irw-validate,jiang_2026_openeval_bbq,sample_floor,"Ben 2026-09-30: AI-respondent tables (OpenEval, irw#2166) take a 50-model floor instead of 100; 50 models",ben
+2026-09-30,irw-validate,jiang_2026_openeval_bbq_helm,sample_floor,"Ben 2026-09-30: AI-respondent tables (OpenEval, irw#2166) take a 50-model floor instead of 100; 57 models",ben
+2026-09-30,irw-validate,jiang_2026_openeval_culturalbench,sample_floor,"Ben 2026-09-30: AI-respondent tables (OpenEval, irw#2166) take a 50-model floor instead of 100; 62 models",ben
+2026-09-30,irw-validate,jiang_2026_openeval_emobench,sample_floor,"Ben 2026-09-30: AI-respondent tables (OpenEval, irw#2166) take a 50-model floor instead of 100; 60 models",ben
+2026-09-30,irw-validate,jiang_2026_openeval_harmbench_helm,sample_floor,"Ben 2026-09-30: AI-respondent tables (OpenEval, irw#2166) take a 50-model floor instead of 100; 93 models",ben
+2026-09-30,irw-validate,jiang_2026_openeval_hi_tom,sample_floor,"Ben 2026-09-30: AI-respondent tables (OpenEval, irw#2166) take a 50-model floor instead of 100; 53 models",ben
+2026-09-30,irw-validate,jiang_2026_openeval_opentom,sample_floor,"Ben 2026-09-30: AI-respondent tables (OpenEval, irw#2166) take a 50-model floor instead of 100; 67 models",ben
+2026-09-30,irw-validate,jiang_2026_openeval_simplesafetytests,sample_floor,"Ben 2026-09-30: AI-respondent tables (OpenEval, irw#2166) take a 50-model floor instead of 100; 93 models",ben
+2026-09-30,irw-validate,jiang_2026_openeval_wildbench,sample_floor,"Ben 2026-09-30: AI-respondent tables (OpenEval, irw#2166) take a 50-model floor instead of 100; 77 models",ben
+2026-09-30,irw-validate,jiang_2026_openeval_xstest,sample_floor,"Ben 2026-09-30: AI-respondent tables (OpenEval, irw#2166) take a 50-model floor instead of 100; 94 models",ben
+2026-10-01,irw-validate,martineztomas_2026_pseudowords,resp_scale_constructs,"Ben 2026-10-01 (irw#1443): rating-norms table keeps its three dimensions in one table (valence/arousal 1-9, wordlikeness 1-7), as KalimahNorms/emoji_scheffler do",ben

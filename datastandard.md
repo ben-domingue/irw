@@ -36,6 +36,8 @@ unlicensed dataset the route is written permission from the owner, recorded as
 
 **Check the sample size.** The floor is 100 unique `id` values, flat — a table with fewer respondents is skipped outright, with no judgment call in between. Count unique `id`s before writing a script, not after.
 
+The one exception is **non-human (animal) data**, which the floor does not apply to (#2220). Animal studies are small by nature, often a few subjects with many trials each, so for them the floor would measure the wrong thing. Judge them by the complexity step below instead, and check that `resp` means what a modeller will assume: in a spontaneous-alternation maze, for example, it records which arm was chosen, not whether that was correct. Tag the `sample` as Animal.
+
 **Assess complexity.** A dataset that clears the floor but is small, opaquely labeled, and in a non-standard format may not be worth the time. Large, well-structured datasets are higher priority.
 
 ---
@@ -54,6 +56,9 @@ Every IRW file is a CSV in long format with one row per person-item observation.
 | `itemcov_*` | no | Covariates invariant to measurement probes (item-level attributes). Always prefix with `itemcov_`. |
 | `wave` | no | Longitudinal wave indicator. Larger values indicate later collection. Use when the same focal unit appears at multiple time points. |
 | `treat` | no | Treatment group assignment in experimental studies. `1` = treatment, `0` = control. |
+| `cluster_id` | no | The group a focal unit is nested in — classroom, teacher, school. In a cluster-randomised design it is the unit of random assignment, so `treat` is constant within it. An identifier only: its values mean nothing beyond grouping. Never `cov_`-prefixed. |
+| `block_id` | no | The level above `cluster_id` — in a randomised design, the block or stratum within which assignment was made (`treat` varies within a block, and clusters nest in blocks). An identifier only. Never `cov_`-prefixed. |
+| `std_baseline`, `std_baseline_*` | no | A standardised pre-treatment score, usually the trial's baseline measure. Name the source measure in the script header. A second baseline takes a suffix: `std_baseline_math`. |
 | `rt` | no | Response time. **Seconds only** — convert from milliseconds if needed. |
 | `date` | no | Calendar time in seconds — either seconds elapsed since data collection start (relative) or Unix time (absolute). Do not use other time units. |
 | `qmatrix1`…`qmatrixN` | no | Item classifications for cognitive diagnostic modeling (Q-matrix). One column per attribute. |
@@ -61,7 +66,7 @@ Every IRW file is a CSV in long format with one row per person-item observation.
 | `item_family` | no | Groups items that may violate local independence — testlets, clones, or clusters of similar items. |
 | `trial_*` | no | Trial-level details in repeated-trial designs: the trial index (`trial_number`), block, list, and so on. `item` still identifies the probe — it is always authoritative, never a placeholder with the probe moved into `trial_` columns. A `trial_` index is what tells repeated responses by one `id` to one `item` apart. |
 
-Column order in the output file: `id`, `item`, `resp`, `resp_raw` if present, then optional response-level columns (`wave`, `treat`, `rt`, `date`), then `cov_*` and `itemcov_*` columns, then `qmatrix*`, `rater`, and `item_family` if present.
+Column order in the output file: `id`, `item`, `resp`, `resp_raw` if present, then optional response-level columns (`wave`, `treat`, `rt`, `date`), then design columns (`cluster_id`, `block_id`, `std_baseline*`), then `cov_*` and `itemcov_*` columns, then `qmatrix*`, `rater`, and `item_family` if present.
 
 **Common mistake:** When melting with `id_vars=["id"] + cov_cols`, pandas places covariates immediately after `id` in the output — before `item` and `resp`. Always reorder explicitly after melting:
 ```python
@@ -192,6 +197,8 @@ long = long[(long["resp"] >= 1) & (long["resp"] <= valid_max)]
 
 **A sentinel can hide inside the valid range, and `dropna()` will not catch it.** Check the codebook (variable-description file, OSF wiki, or paper) for every response scale before trusting raw codes as `resp`. A source column can be pure `int64` with zero `NaN`s and still be wrong: a category like "don't know" / "not applicable" / "refused" is a non-response, not a step on the ordinal scale, even though it's stored as an in-range integer — e.g. a 3-item financial-literacy quiz coded `0=incorrect, 1=correct, 2=don't know`; `2` is not "more correct" than `1`. Identify these values from the codebook and filter out those specific item-responses (don't recode them to 0 and don't drop the person entirely) before the file is considered ordinal and upload-ready.
 
+**Exception: omitted vs. not reached in achievement tests (IEA and similar).** When the source documents *separate* codes for an item the respondent saw and skipped ("omitted") and an item they never reached (e.g. TIMSS/PIRLS 9/99 omitted, 6/96 not reached), keep the distinction: score **omitted as `resp = 0`** and keep the source's code in `resp_raw`; **drop not-reached rows** (the item was never administered to that person). This is how the IEA scores items for calibration. Apply it only where the source documents both codes; a generic missing code, or a source that pools the two, follows the default above (filter it out). Decided in irw#2513 (2026-09-28); see C4 in the site standard.
+
 **Parse text-coded responses.** Some datasets store responses as strings like `"3 - Sometimes"` or `"Strongly agree (5)"`. Extract the leading integer:
 ```python
 long["resp"] = long["resp"].str.extract(r"(\d+)").astype(float)
@@ -301,6 +308,8 @@ Include a `treat` column with values `1` (treatment) and `0` (control). This app
 df["treat"] = (df["original_group_col"] == treatment_value).astype(int)
 df = df.drop(columns=["original_group_col"])
 ```
+
+When the design nests people in groups, carry the grouping as `cluster_id` (the group people sit in; the unit randomised in a cluster-randomised trial) and `block_id` (the stratum or block clusters were randomised within), and a standardised pre-treatment score as `std_baseline`. These are design columns, not covariates — don't prefix them with `cov_`. Say in the script header what each one is in this study (e.g. `cluster_id` = teacher, `block_id` = school), because that is the only place a user can find it.
 
 ### Missing person ID — use row index
 ```python

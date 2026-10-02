@@ -441,7 +441,37 @@ def _host_resolver(url: str):
     return None
 
 
+# Deposits routinely ship a codebook in a tabular format beside the data, and
+# the repo APIs list files alphabetically or by upload order, so callers that
+# take files[0] triaged the codebook. Zenodo 5040719 (PMC 10.1038/
+# s41598-022-22994-4, 2026-09-30 weekly run) lists Wave1-4_DICTIONARY.xls
+# ahead of Valide_DATA_1W-4W.csv; the dictionary was melted, read as 223 x 2
+# "continuous" values, and flagged human_assistance instead of a real lead.
+_DOC_NAME = re.compile(
+    r"dictionar|code[ _-]?book|readme|variable[ _-]?(list|desc|info)"
+    r"|metadata|data[ _-]?desc",
+    re.IGNORECASE)
+# Deliberately narrow: "questionnaire", "key", "labels" also appear in the
+# names of real response files (questionnaire_data.csv), and a false match
+# only demotes a file, but it demotes the one that mattered.
+
+
+def _looks_like_documentation(name: str) -> bool:
+    return bool(_DOC_NAME.search(name or ""))
+
+
 def resolve_data_files(row: dict) -> tuple:
+    """As _resolve_data_files_any_order, with files whose names mark them as
+    documentation (codebooks, dictionaries, READMEs) moved behind the data
+    files. Stable: order within each group is the repo's own. Documentation
+    files stay in the list -- a deposit whose only tabular file is its
+    codebook should still be triaged, not reported as having none."""
+    files, lic, oversized = _resolve_data_files_any_order(row)
+    files = sorted(files, key=lambda f: _looks_like_documentation(f[1]))
+    return files, lic, oversized
+
+
+def _resolve_data_files_any_order(row: dict) -> tuple:
     """Dispatch to the right repository resolver. Returns
     ([(file_url, name, size_bytes)], license_str, [(name, size_bytes)]) -- the
     file entries carry the size the repo API reported (0 when it reports
@@ -840,16 +870,10 @@ def load_seen_keys(path: str = SEEN_KEYS_PATH) -> set:
 
 
 def append_seen_keys(keys, path: str = SEEN_KEYS_PATH) -> None:
-    import datetime as _dt
-    if not keys:
-        return
-    file_exists = os.path.exists(path)
-    today = _dt.datetime.now(_dt.timezone.utc).strftime("%Y-%m-%d")
-    with open(path, "a", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=["key", "date"])
-        if not file_exists:
-            writer.writeheader()
-        writer.writerows({"key": k, "date": today} for k in keys)
+    """`keys`: each a key or a (key, flag) pair. The flag makes the exclusion
+    reversible -- see seen_ledger.py (irw#2222)."""
+    from seen_ledger import append_seen
+    append_seen(path, "key", keys)
 
 
 def load_done(path: str) -> dict:
@@ -973,7 +997,7 @@ def run_batch(candidates_csv: str, out_csv: str, limit: int | None,
         append_checkpoint(checkpoint, k, res)
         results.append(res)
         if res.get("flag") not in TRANSIENT_FLAGS:
-            newly_seen.append(k)
+            newly_seen.append((k, res.get("flag")))
         else:
             n_retryable += 1
         print(f"        -> {res['flag']}", flush=True)

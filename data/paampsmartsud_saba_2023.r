@@ -6,7 +6,6 @@ library(tidyr)
 library(openxlsx)
 library(readr)
 library(readxl)
-library(sas7bdat)
 library(stringr)
 
 rm(list =ls()) 
@@ -15,7 +14,8 @@ remove_na <- function(df) {
   return(df)
 }
 
-data_df <- read_csv("ampspsychometriceval.csv")
+# OSF 9jgxs, data/"amps psychometric eval.csv"
+data_df <- read_csv("https://osf.io/download/jeqwd/")
 
 data_df <- data_df |>
   rename(id=STUDY_ID)
@@ -26,89 +26,29 @@ data_df <- data_df |>
          cov_DRUGDAYS_PAST8MONTH = DRUGDAYS_PAST8MONTH)
 
 
-PACS_POST_df <- data_df  |>
-  select(starts_with("PACS")&ends_with("POST"),-("PACS_MEAN_POST"),id,cov_NUMBER_MH_DIAGNOSES,cov_AUD_SUD_DIAGNOSES,cov_ALCDAYS_PAST8MONTH,cov_DRUGDAYS_PAST8MONTH)
-PACS_POST_df <- remove_na(PACS_POST_df)
-PACS_POST_df  <- pivot_longer(PACS_POST_df, 
-                              cols=-c(id, cov_NUMBER_MH_DIAGNOSES,cov_AUD_SUD_DIAGNOSES,cov_ALCDAYS_PAST8MONTH,cov_DRUGDAYS_PAST8MONTH), 
-                              names_to="item", values_to="resp")
-
-FFMQ_POST_df <- data_df  |>
-  select(starts_with("FFMQ")&ends_with("POST"),-("FFMQ_SUM_POST"),id,cov_NUMBER_MH_DIAGNOSES,cov_AUD_SUD_DIAGNOSES,cov_ALCDAYS_PAST8MONTH,cov_DRUGDAYS_PAST8MONTH)
-FFMQ_POST_df <- remove_na(FFMQ_POST_df)
-FFMQ_POST_df  <- pivot_longer(FFMQ_POST_df, 
-                              cols=-c(id, cov_NUMBER_MH_DIAGNOSES,cov_AUD_SUD_DIAGNOSES,cov_ALCDAYS_PAST8MONTH,cov_DRUGDAYS_PAST8MONTH), 
-                              names_to="item", values_to="resp")
-
-PSS_POST_df <- data_df  |>
-  select(starts_with("PSS")&ends_with("POST"),-("PSS_SUM_POST"),id,cov_NUMBER_MH_DIAGNOSES,cov_AUD_SUD_DIAGNOSES,cov_ALCDAYS_PAST8MONTH,cov_DRUGDAYS_PAST8MONTH)
-PSS_POST_df <- remove_na(PSS_POST_df)
-PSS_POST_df  <- pivot_longer(PSS_POST_df, 
-                             cols=-c(id, cov_NUMBER_MH_DIAGNOSES,cov_AUD_SUD_DIAGNOSES,cov_ALCDAYS_PAST8MONTH,cov_DRUGDAYS_PAST8MONTH), 
-                             names_to="item", values_to="resp")
-
-DERS_POST_df <- data_df  |>
-  select(starts_with("DERS")&ends_with("POST"),-("DERS_SUM_POST"),id,cov_NUMBER_MH_DIAGNOSES,cov_AUD_SUD_DIAGNOSES,cov_ALCDAYS_PAST8MONTH,cov_DRUGDAYS_PAST8MONTH)
-DERS_POST_df <- remove_na(DERS_POST_df)
-DERS_POST_df  <- pivot_longer(DERS_POST_df, 
-                              cols=-c(id, cov_NUMBER_MH_DIAGNOSES,cov_AUD_SUD_DIAGNOSES,cov_ALCDAYS_PAST8MONTH,cov_DRUGDAYS_PAST8MONTH), 
-                              names_to="item", values_to="resp")
-
-PACS_BASELINE_df <- data_df  |>
-  select(starts_with("PACS")&ends_with("POST"),-("PACS_MEAN_POST"),id,cov_NUMBER_MH_DIAGNOSES,cov_AUD_SUD_DIAGNOSES,cov_ALCDAYS_PAST8MONTH,cov_DRUGDAYS_PAST8MONTH)
-PACS_BASELINE_df <- remove_na(PACS_BASELINE_df)
-PACS_BASELINE_df  <- pivot_longer(PACS_BASELINE_df, 
-                                  cols=-c(id, cov_NUMBER_MH_DIAGNOSES,cov_AUD_SUD_DIAGNOSES,cov_ALCDAYS_PAST8MONTH,cov_DRUGDAYS_PAST8MONTH), 
-                                  names_to="item", values_to="resp")
-
-FFMQ_BASELINE_df <- data_df  |>
-  select(starts_with("FFMQ")&ends_with("POST"),-("FFMQ_SUM_POST"),id,cov_NUMBER_MH_DIAGNOSES,cov_AUD_SUD_DIAGNOSES,cov_ALCDAYS_PAST8MONTH,cov_DRUGDAYS_PAST8MONTH)
-FFMQ_BASELINE_df <- remove_na(FFMQ_BASELINE_df)
-FFMQ_BASELINE_df  <- pivot_longer(FFMQ_BASELINE_df, 
-                                  cols=-c(id, cov_NUMBER_MH_DIAGNOSES,cov_AUD_SUD_DIAGNOSES,cov_ALCDAYS_PAST8MONTH,cov_DRUGDAYS_PAST8MONTH), 
-                                  names_to="item", values_to="resp")
-
-PSS_BASELINE_df <- data_df  |>
-  select(starts_with("PSS")&ends_with("POST"),-("PSS_SUM_POST"),id,cov_NUMBER_MH_DIAGNOSES,cov_AUD_SUD_DIAGNOSES,cov_ALCDAYS_PAST8MONTH,cov_DRUGDAYS_PAST8MONTH)
-PSS_BASELINE_df <- remove_na(PSS_BASELINE_df)
-PSS_BASELINE_df  <- pivot_longer(PSS_BASELINE_df, 
-                                 cols=-c(id, cov_NUMBER_MH_DIAGNOSES,cov_AUD_SUD_DIAGNOSES,cov_ALCDAYS_PAST8MONTH,cov_DRUGDAYS_PAST8MONTH), 
-                                 names_to="item", values_to="resp")
-
-DERS_BASELINE_df <- data_df  |>
-  select(starts_with("DERS")&ends_with("POST"),-("DERS_SUM_POST"),id,cov_NUMBER_MH_DIAGNOSES,cov_AUD_SUD_DIAGNOSES,cov_ALCDAYS_PAST8MONTH,cov_DRUGDAYS_PAST8MONTH)
-DERS_BASELINE_df <- remove_na(DERS_BASELINE_df)
-DERS_BASELINE_df  <- pivot_longer(DERS_BASELINE_df, 
-                                  cols=-c(id, cov_NUMBER_MH_DIAGNOSES,cov_AUD_SUD_DIAGNOSES,cov_ALCDAYS_PAST8MONTH,cov_DRUGDAYS_PAST8MONTH), 
-                                  names_to="item", values_to="resp")
-
-PACS_POST_df$wave <- 0
-PACS_BASELINE_df $wave <- 1
-PACS_df <-rbind(PACS_POST_df,PACS_BASELINE_df)
-
-save(PACS_df, file="paampsmartsud_saba_2023_PACS.Rdata")
-write.csv(PACS_df, "paampsmartsud_saba_2023_PACS.csv", row.names=FALSE)
-
-FFMQ_POST_df $wave <- 0
-FFMQ_BASELINE_df $wave <- 1
-FFMQ_df <-rbind(FFMQ_POST_df,FFMQ_BASELINE_df)
-
-save(FFMQ_df, file="paampsmartsud_saba_2023_FFMQ.Rdata")
-write.csv(FFMQ_df, "paampsmartsud_saba_2023_FFMQ.csv", row.names=FALSE)
-
-PSS_POST_df $wave <- 0
-PSS_BASELINE_df $wave <- 1
-PSS_df <-rbind(PSS_POST_df,PSS_BASELINE_df)
-
-save(PSS_df, file="paampsmartsud_saba_2023_PSS.Rdata")
-write.csv(PSS_df, "paampsmartsud_saba_2023_PSS.csv", row.names=FALSE)
-
-DERS_POST_df $wave <- 0
-DERS_BASELINE_df $wave <- 1
-DERS_df <-rbind(DERS_POST_df,DERS_BASELINE_df)
-
-save(DERS_df, file="paampsmartsud_saba_2023_DERS.Rdata")
-write.csv(DERS_df, "paampsmartsud_saba_2023_DERS.csv", row.names=FALSE)
+# PACS, FFMQ, PSS and DERS were measured at baseline and post-treatment, as
+# <SCALE>_<k>_BASELINE and <SCALE>_<k>_POST. Until 2026-09-30 both "waves" were
+# built from the _POST columns, so every respondent appeared twice with the same
+# answers (irw#2433; the tables were withdrawn 2026-09-25). Now each wave reads its
+# own columns, and the wave suffix is stripped from the item code (DERS_11, not
+# DERS_11_POST), as for AMPS below: one code per question, wave 0 = baseline,
+# wave 1 = post (Ben, 2026-09-30).
+cov_cols <- c("cov_NUMBER_MH_DIAGNOSES", "cov_AUD_SUD_DIAGNOSES",
+              "cov_ALCDAYS_PAST8MONTH", "cov_DRUGDAYS_PAST8MONTH")
+build_wave <- function(scale, suffix, wave) {
+  items <- grep(paste0("^", scale, "_[0-9]+_", suffix, "$"), names(data_df), value = TRUE)
+  df <- remove_na(data_df[, c(items, "id", cov_cols)])
+  df <- pivot_longer(df, cols = all_of(items), names_to = "item", values_to = "resp")
+  df$item <- sub(paste0("_", suffix, "$"), "", df$item)
+  df$wave <- wave
+  df
+}
+for (scale in c("PACS", "FFMQ", "PSS", "DERS")) {
+  out <- rbind(build_wave(scale, "BASELINE", 0), build_wave(scale, "POST", 1))
+  out <- out[!is.na(out$resp), c("id", "item", "resp", "wave", cov_cols)]
+  write.csv(out, paste0("paampsmartsud_saba_2023_", tolower(scale), ".csv"),
+            row.names = FALSE, na = "")
+}
 
 AMPS_df <- data_df |>
   select(

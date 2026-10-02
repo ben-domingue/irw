@@ -1,0 +1,98 @@
+[
+ {
+  "table": "amiot_2022_mlq_presence",
+  "shard": "item_response_warehouse_6"
+ },
+ {
+  "table": "amiot_2022_pss14",
+  "shard": "item_response_warehouse_6"
+ },
+ {
+  "table": "amiot_2022_swls",
+  "shard": "item_response_warehouse_6"
+ },
+ {
+  "table": "amiot_2022_ucla_loneliness",
+  "shard": "item_response_warehouse_6"
+ },
+ {
+  "table": "amiot_2022_vitality",
+  "shard": "item_response_warehouse_6"
+ },
+ {
+  "table": "karlsson_2023_climate_risk",
+  "shard": "item_response_warehouse_6"
+ },
+ {
+  "table": "lindstrom2021_collective_narcissism",
+  "shard": "item_response_warehouse_2"
+ },
+ {
+  "table": "nguyen_2026_factcheck_digital_literacy",
+  "shard": "item_response_warehouse"
+ },
+ {
+  "table": "nguyen_2026_factcheck_genai_use",
+  "shard": "item_response_warehouse"
+ },
+ {
+  "table": "nguyen_2026_factcheck_info_self_efficacy",
+  "shard": "item_response_warehouse"
+ },
+ {
+  "table": "nguyen_2026_factcheck_intention",
+  "shard": "item_response_warehouse"
+ },
+ {
+  "table": "nguyen_2026_factcheck_systematic_proc",
+  "shard": "item_response_warehouse"
+ },
+ {
+  "table": "nguyen_2026_factcheck_user_heuristics",
+  "shard": "item_response_warehouse"
+ },
+ {
+  "table": "shao_2025_authentic_leadership",
+  "shard": "item_response_warehouse_5"
+ },
+ {
+  "table": "shao_2025_school_climate",
+  "shard": "item_response_warehouse_5"
+ },
+ {
+  "table": "shao_2025_teacher_efficacy",
+  "shard": "item_response_warehouse_5"
+ },
+ {
+  "table": "shao_2025_work_engagement",
+  "shard": "item_response_warehouse_5"
+ },
+ {
+  "table": "teo_2021_burnout",
+  "shard": "item_response_warehouse_5"
+ },
+ {
+  "table": "teo_2021_worklife",
+  "shard": "item_response_warehouse_5"
+ },
+ {
+  "table": "weida_2020_cesd10",
+  "shard": "item_response_warehouse_3"
+ },
+ {
+  "table": "zhou_2016_anxiety",
+  "shard": "item_response_warehouse_5"
+ },
+ {
+  "table": "zhou_2016_burnout",
+  "shard": "item_response_warehouse_5"
+ },
+ {
+  "table": "zhou_2016_coping_style",
+  "shard": "item_response_warehouse_5"
+ },
+ {
+  "table": "zhou_2016_personality",
+  "shard": "item_response_warehouse_5"
+ }
+]

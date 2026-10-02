@@ -25,8 +25,10 @@ URL = ("https://journals.plos.org/plosone/article/file"
        "?type=supplementary&id=10.1371/journal.pone.0210149.s001")
 UA = {"User-Agent": "IRW-Finder/1.0 (ben.domingue@gmail.com)"}
 
+# Q46_gender is dropped (#2401, cov_all_null): the source codes it as the text
+# M/F, which the to_numeric() below turned into NaN on every row, so the live
+# column was empty. Mapping M/F to a code would be a new covariate, not a repair.
 COV_COLS = {
-    "Q46_gender": "cov_gender",
     "Q47_age": "cov_age",
     "Q48_race": "cov_race",
     "Q49_education": "cov_education",
@@ -42,6 +44,12 @@ def convert():
         tmp.write(r.content)
         tmp.flush()
         df = pd.read_excel(tmp.name)
+
+    # #2401: survey# 155 is in the file twice, identical in every column (the
+    # same record entered twice); keep one copy. survey# 53 and 133 also repeat
+    # but the two rows differ (different respondents under one number); they
+    # stay as they are, for #1856.
+    df = df.drop_duplicates().reset_index(drop=True)
 
     df = df.rename(columns={"survey#": "id", **COV_COLS})
     for c in ITEM_COLS + list(COV_COLS.values()):

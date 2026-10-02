@@ -152,7 +152,12 @@ export — but they differ in *granularity*, and that difference is deliberate:
   left blank (#1732). Column-wise from the start because a sparse-but-present
   dictionary row is the common case, where for tags it is the exception.
   `metadata/biblio_provenance.csv` records which cells came from the automated
-  file, and unlike the tags sidecar it is committed.
+  file, and unlike the tags sidecar it is committed. The comps, nominal and
+  simsyn dictionaries work the same way, each with its own file
+  (`dictionary_auto_comps.csv`, `_nom.csv`, `_sim.csv`; `stage_dict_row.py
+  --source comps|nom|sim`), so no dictionary sheet needs rows pasted (#2628).
+  Their sheets spell three columns differently from core; `normalize_dict_layout()`
+  maps them onto core's names in the export only.
 
 > **One column exists only in the automated file: `DOI (for data)`.** The sheet
 > does not have it and is not going to. 979 rows put a *deposit* DOI (Dataverse,
@@ -268,10 +273,12 @@ rather than replacing it — and verifies each table with a `count(*)` afterward
 When a name is already in use somewhere that could not legally hold the file, it
 stops rather than routing across families.
 
-`irw_site` also reads one file directly off disk rather than from Redivis:
-`data/hero_stats.json`, written into that repository by `metadata/09_hero_status.R`.
-Two more it reads from this repository's `main` over HTTPS at render time:
-`metadata/version_manifest.tsv` and `metadata/table_changes.csv`.
+`irw_site` builds its homepage hero numbers (`data/hero_stats.json`, untracked)
+at render time from published irw_meta, in the pre-render step
+`landing/hero_stats.R` (#1940; this used to be `metadata/09_hero_status.R`,
+committed by hand). Three files it reads from this repository's `main` over HTTPS at render time:
+`metadata/version_manifest.tsv`, `metadata/table_changes.csv` and
+`metadata/data_notes.csv`.
 
 ## 5. Which document wins
 
@@ -286,6 +293,7 @@ When two documents disagree, this is the order of precedence:
 | Redivis version hashes | Each client package's own config — this repo deliberately carries none |
 | Which Redivis version of every dataset was live at a given time | [`metadata/version_manifest.tsv`](metadata/version_manifest.tsv) — written by `red_up.manifest` from Redivis' own version history, refreshed daily by the `version-manifest` GitHub Action (13:30 UTC), which opens and merges its own PR when the file changes and files an issue when it cannot. The R and Python packages read the committed copy over HTTPS, so the file in `main` *is* the published record. An IRW version number is a citation: rows are appended, never renumbered, and the writer refuses rather than change one |
 | Which published tables were corrected, renamed or retired, and when | [`metadata/table_changes.csv`](metadata/table_changes.csv) — one row per table per released correction, appended by hand once the release is live (checklist in [`red_up/README.md`](red_up/README.md)); rendered by `irw_site`'s `corrections.qmd`, which also states the corrections policy (#2168). Response tables only: item-text caveats live on `itemtext_issues.qmd` and rights withdrawals stay internal |
+| Caveats about a table's *source* that are not IRW defects (a doubtful source key, what a column means, pooled forms) | [`metadata/data_notes.csv`](metadata/data_notes.csv): hand-appended, rendered as a plain Notes section on landing pages (no banner, no `noindex`) and returned by the MCP's `get_processing_notes` (#2529). IRW defects awaiting a fix are `irw_site`'s `landing/known_issues.tsv`; released fixes are `table_changes.csv` |
 | Tag vocabulary for `sample` and `construct type` | `TAG_VOCAB` in [`metadata/tag_normalize.R`](metadata/tag_normalize.R) — enforced; the pipeline halts on an unknown value |
 | Which sources have tags | `.irw_tag_sources` in `Rpkg/R/redivis-config.R` |
 | Metadata pipeline run order | `DEFAULT_ORDER` in `.claude/skills/irw-site-update/scripts/run_pipeline.sh` — the order actually executed |
@@ -381,6 +389,11 @@ be deleted from a session — https://claude.ai/code/routines.
   the repository; it never publishes.
 - **Merging the weekly pipeline PR.** The diff is the thing to read on Monday.
 - **Item-text extraction rounds**, and the discovery sweeps above.
+- **`covariate_labels.csv`** (#1775), irw_meta's codebook for coded covariates.
+  `metadata/covariate_labels/harvest.py` re-runs the `data/` scripts that read
+  SPSS/Stata files, which download from OSF, Zenodo and the like, and a few
+  read files that exist only on one machine; that does not belong in CI.
+  Re-run it, then `build.py`, when a script shipping coded covariates changes.
 
 ## 7. Where things go inside a directory
 

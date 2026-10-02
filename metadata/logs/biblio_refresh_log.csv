@@ -1,7 +1,95 @@
 table,column,kind,was,now
+armour_2017_pcl5,Original_License,fill,NA,CC BY 4.0
+bailon_2020_covidaffect,Original_License,fill,NA,CC BY 4.0
+blotner_2023_sd4_germany,Original_License,fill,NA,CC BY 4.0
+blotner_2023_sd4_usa,Original_License,fill,NA,CC BY 4.0
+briganti_2019_csws,Original_License,fill,NA,CC BY 4.0
 cdm_timss07,Description,conflict,Subsample of TIMSS 2007 grade 4 mathematics items from Austria (booklets 4 and 5) with Q matrix,Subsample of TIMSS items from Australia with Q matrix
 COACH_Chen_2022_CSQ,Description,conflict,"Consultation Satisfaction Questionnaire short form (CSQ-9), items 1-8, 5-point agree-disagree",Client Satisfaction Questionnaire 8-item
 conner_2017_vitality,Description,conflict,"SF-36 Vitality (energy/fatigue) subscale, 4 items scored 0-100 in steps of 20 (6 ordinal levels), baseline/follow-up, N=171. The 'worn out' and 'tired' items are stored already reverse-scored.","Subjective Vitality Scale (4 items, 0-100 continuous), baseline/follow-up, N=171."
 cordova2019_clinical_edu_environment,Description,conflict,"Perception of clinical educational environment by physiotherapy interns (PHEEM, 40 items, Chile)","Perception of clinical educational environment by physiotherapy interns (DREEM-based, Chile)"
+estrella_2023_hakim5,Original_License,fill,NA,CC BY 4.0
+estrella_2023_promis_se,Original_License,fill,NA,CC BY 4.0
+estrella_2023_promis29,Original_License,fill,NA,CC BY 4.0
+estrella_2023_psq18,Original_License,fill,NA,CC BY 4.0
 evpromisi_stone_2021_cdiag,Description,conflict,"Study's own 12-item chronic-diagnosis checklist (3 response levels). Not a PROMIS instrument, despite the evpromisi_ prefix.",PROMIS fatigue
+ha_2026_aspire_affect,Original_License,fill,NA,CC BY 4.0
+imos_1984,Reference_x,fill,NA,"International Mathematical Olympiad (1984). Individual results, IMO 1984. https://www.imo-official.org/results/individual/year/1984/ . Problem scores (0-7) as compiled by Bai Li (2018), International Mathematical Olympiad (IMO) Scores [Data set], Kaggle, https://www.kaggle.com/datasets/luckyt/imo-scores (CC0), scraped from imo-official.org."
+imos_1985,Reference_x,fill,NA,"International Mathematical Olympiad (1985). Individual results, IMO 1985. https://www.imo-official.org/results/individual/year/1985/ . Problem scores (0-7) as compiled by Bai Li (2018), International Mathematical Olympiad (IMO) Scores [Data set], Kaggle, https://www.kaggle.com/datasets/luckyt/imo-scores (CC0), scraped from imo-official.org."
+imos_1986,Reference_x,fill,NA,"International Mathematical Olympiad (1986). Individual results, IMO 1986. https://www.imo-official.org/results/individual/year/1986/ . Problem scores (0-7) as compiled by Bai Li (2018), International Mathematical Olympiad (IMO) Scores [Data set], Kaggle, https://www.kaggle.com/datasets/luckyt/imo-scores (CC0), scraped from imo-official.org."
+imos_1987,Reference_x,fill,NA,"International Mathematical Olympiad (1987). Individual results, IMO 1987. https://www.imo-official.org/results/individual/year/1987/ . Problem scores (0-7) as compiled by Bai Li (2018), International Mathematical Olympiad (IMO) Scores [Data set], Kaggle, https://www.kaggle.com/datasets/luckyt/imo-scores (CC0), scraped from imo-official.org."
+imos_1988,Reference_x,fill,NA,"International Mathematical Olympiad (1988). Individual results, IMO 1988. https://www.imo-official.org/results/individual/year/1988/ . Problem scores (0-7) as compiled by Bai Li (2018), International Mathematical Olympiad (IMO) Scores [Data set], Kaggle, https://www.kaggle.com/datasets/luckyt/imo-scores (CC0), scraped from imo-official.org."
+imos_1989,Reference_x,fill,NA,"International Mathematical Olympiad (1989). Individual results, IMO 1989. https://www.imo-official.org/results/individual/year/1989/ . Problem scores (0-7) as compiled by Bai Li (2018), International Mathematical Olympiad (IMO) Scores [Data set], Kaggle, https://www.kaggle.com/datasets/luckyt/imo-scores (CC0), scraped from imo-official.org."
+imos_1990,Reference_x,fill,NA,"International Mathematical Olympiad (1990). Individual results, IMO 1990. https://www.imo-official.org/results/individual/year/1990/ . Problem scores (0-7) as compiled by Bai Li (2018), International Mathematical Olympiad (IMO) Scores [Data set], Kaggle, https://www.kaggle.com/datasets/luckyt/imo-scores (CC0), scraped from imo-official.org."
+imos_1991,Reference_x,fill,NA,"International Mathematical Olympiad (1991). Individual results, IMO 1991. https://www.imo-official.org/results/individual/year/1991/ . Problem scores (0-7) as compiled by Bai Li (2018), International Mathematical Olympiad (IMO) Scores [Data set], Kaggle, https://www.kaggle.com/datasets/luckyt/imo-scores (CC0), scraped from imo-official.org."
+imos_1992,Reference_x,fill,NA,"International Mathematical Olympiad (1992). Individual results, IMO 1992. https://www.imo-official.org/results/individual/year/1992/ . Problem scores (0-7) as compiled by Bai Li (2018), International Mathematical Olympiad (IMO) Scores [Data set], Kaggle, https://www.kaggle.com/datasets/luckyt/imo-scores (CC0), scraped from imo-official.org."
+imos_1993,Reference_x,fill,NA,"International Mathematical Olympiad (1993). Individual results, IMO 1993. https://www.imo-official.org/results/individual/year/1993/ . Problem scores (0-7) as compiled by Bai Li (2018), International Mathematical Olympiad (IMO) Scores [Data set], Kaggle, https://www.kaggle.com/datasets/luckyt/imo-scores (CC0), scraped from imo-official.org."
+imos_1994,Reference_x,fill,NA,"International Mathematical Olympiad (1994). Individual results, IMO 1994. https://www.imo-official.org/results/individual/year/1994/ . Problem scores (0-7) as compiled by Bai Li (2018), International Mathematical Olympiad (IMO) Scores [Data set], Kaggle, https://www.kaggle.com/datasets/luckyt/imo-scores (CC0), scraped from imo-official.org."
+imos_1995,Reference_x,fill,NA,"International Mathematical Olympiad (1995). Individual results, IMO 1995. https://www.imo-official.org/results/individual/year/1995/ . Problem scores (0-7) as compiled by Bai Li (2018), International Mathematical Olympiad (IMO) Scores [Data set], Kaggle, https://www.kaggle.com/datasets/luckyt/imo-scores (CC0), scraped from imo-official.org."
+imos_1996,Reference_x,fill,NA,"International Mathematical Olympiad (1996). Individual results, IMO 1996. https://www.imo-official.org/results/individual/year/1996/ . Problem scores (0-7) as compiled by Bai Li (2018), International Mathematical Olympiad (IMO) Scores [Data set], Kaggle, https://www.kaggle.com/datasets/luckyt/imo-scores (CC0), scraped from imo-official.org."
+imos_1997,Reference_x,fill,NA,"International Mathematical Olympiad (1997). Individual results, IMO 1997. https://www.imo-official.org/results/individual/year/1997/ . Problem scores (0-7) as compiled by Bai Li (2018), International Mathematical Olympiad (IMO) Scores [Data set], Kaggle, https://www.kaggle.com/datasets/luckyt/imo-scores (CC0), scraped from imo-official.org."
+imos_1998,Reference_x,fill,NA,"International Mathematical Olympiad (1998). Individual results, IMO 1998. https://www.imo-official.org/results/individual/year/1998/ . Problem scores (0-7) as compiled by Bai Li (2018), International Mathematical Olympiad (IMO) Scores [Data set], Kaggle, https://www.kaggle.com/datasets/luckyt/imo-scores (CC0), scraped from imo-official.org."
+imos_1999,Reference_x,fill,NA,"International Mathematical Olympiad (1999). Individual results, IMO 1999. https://www.imo-official.org/results/individual/year/1999/ . Problem scores (0-7) as compiled by Bai Li (2018), International Mathematical Olympiad (IMO) Scores [Data set], Kaggle, https://www.kaggle.com/datasets/luckyt/imo-scores (CC0), scraped from imo-official.org."
+imos_2000,Reference_x,fill,NA,"International Mathematical Olympiad (2000). Individual results, IMO 2000. https://www.imo-official.org/results/individual/year/2000/ . Problem scores (0-7) as compiled by Bai Li (2018), International Mathematical Olympiad (IMO) Scores [Data set], Kaggle, https://www.kaggle.com/datasets/luckyt/imo-scores (CC0), scraped from imo-official.org."
+imos_2001,Reference_x,fill,NA,"International Mathematical Olympiad (2001). Individual results, IMO 2001. https://www.imo-official.org/results/individual/year/2001/ . Problem scores (0-7) as compiled by Bai Li (2018), International Mathematical Olympiad (IMO) Scores [Data set], Kaggle, https://www.kaggle.com/datasets/luckyt/imo-scores (CC0), scraped from imo-official.org."
+imos_2002,Reference_x,fill,NA,"International Mathematical Olympiad (2002). Individual results, IMO 2002. https://www.imo-official.org/results/individual/year/2002/ . Problem scores (0-7) as compiled by Bai Li (2018), International Mathematical Olympiad (IMO) Scores [Data set], Kaggle, https://www.kaggle.com/datasets/luckyt/imo-scores (CC0), scraped from imo-official.org."
+imos_2003,Reference_x,fill,NA,"International Mathematical Olympiad (2003). Individual results, IMO 2003. https://www.imo-official.org/results/individual/year/2003/ . Problem scores (0-7) as compiled by Bai Li (2018), International Mathematical Olympiad (IMO) Scores [Data set], Kaggle, https://www.kaggle.com/datasets/luckyt/imo-scores (CC0), scraped from imo-official.org."
+imos_2004,Reference_x,fill,NA,"International Mathematical Olympiad (2004). Individual results, IMO 2004. https://www.imo-official.org/results/individual/year/2004/ . Problem scores (0-7) as compiled by Bai Li (2018), International Mathematical Olympiad (IMO) Scores [Data set], Kaggle, https://www.kaggle.com/datasets/luckyt/imo-scores (CC0), scraped from imo-official.org."
+imos_2005,Reference_x,fill,NA,"International Mathematical Olympiad (2005). Individual results, IMO 2005. https://www.imo-official.org/results/individual/year/2005/ . Problem scores (0-7) as compiled by Bai Li (2018), International Mathematical Olympiad (IMO) Scores [Data set], Kaggle, https://www.kaggle.com/datasets/luckyt/imo-scores (CC0), scraped from imo-official.org."
+imos_2006,Reference_x,fill,NA,"International Mathematical Olympiad (2006). Individual results, IMO 2006. https://www.imo-official.org/results/individual/year/2006/ . Problem scores (0-7) as compiled by Bai Li (2018), International Mathematical Olympiad (IMO) Scores [Data set], Kaggle, https://www.kaggle.com/datasets/luckyt/imo-scores (CC0), scraped from imo-official.org."
+imos_2007,Reference_x,fill,NA,"International Mathematical Olympiad (2007). Individual results, IMO 2007. https://www.imo-official.org/results/individual/year/2007/ . Problem scores (0-7) as compiled by Bai Li (2018), International Mathematical Olympiad (IMO) Scores [Data set], Kaggle, https://www.kaggle.com/datasets/luckyt/imo-scores (CC0), scraped from imo-official.org."
+imos_2008,Reference_x,fill,NA,"International Mathematical Olympiad (2008). Individual results, IMO 2008. https://www.imo-official.org/results/individual/year/2008/ . Problem scores (0-7) as compiled by Bai Li (2018), International Mathematical Olympiad (IMO) Scores [Data set], Kaggle, https://www.kaggle.com/datasets/luckyt/imo-scores (CC0), scraped from imo-official.org."
+imos_2009,Reference_x,fill,NA,"International Mathematical Olympiad (2009). Individual results, IMO 2009. https://www.imo-official.org/results/individual/year/2009/ . Problem scores (0-7) as compiled by Bai Li (2018), International Mathematical Olympiad (IMO) Scores [Data set], Kaggle, https://www.kaggle.com/datasets/luckyt/imo-scores (CC0), scraped from imo-official.org."
+imos_2010,Reference_x,fill,NA,"International Mathematical Olympiad (2010). Individual results, IMO 2010. https://www.imo-official.org/results/individual/year/2010/ . Problem scores (0-7) as compiled by Bai Li (2018), International Mathematical Olympiad (IMO) Scores [Data set], Kaggle, https://www.kaggle.com/datasets/luckyt/imo-scores (CC0), scraped from imo-official.org."
+imos_2011,Reference_x,fill,NA,"International Mathematical Olympiad (2011). Individual results, IMO 2011. https://www.imo-official.org/results/individual/year/2011/ . Problem scores (0-7) as compiled by Bai Li (2018), International Mathematical Olympiad (IMO) Scores [Data set], Kaggle, https://www.kaggle.com/datasets/luckyt/imo-scores (CC0), scraped from imo-official.org."
+imos_2012,Reference_x,fill,NA,"International Mathematical Olympiad (2012). Individual results, IMO 2012. https://www.imo-official.org/results/individual/year/2012/ . Problem scores (0-7) as compiled by Bai Li (2018), International Mathematical Olympiad (IMO) Scores [Data set], Kaggle, https://www.kaggle.com/datasets/luckyt/imo-scores (CC0), scraped from imo-official.org."
+imos_2013,Reference_x,fill,NA,"International Mathematical Olympiad (2013). Individual results, IMO 2013. https://www.imo-official.org/results/individual/year/2013/ . Problem scores (0-7) as compiled by Bai Li (2018), International Mathematical Olympiad (IMO) Scores [Data set], Kaggle, https://www.kaggle.com/datasets/luckyt/imo-scores (CC0), scraped from imo-official.org."
+imos_2014,Reference_x,fill,NA,"International Mathematical Olympiad (2014). Individual results, IMO 2014. https://www.imo-official.org/results/individual/year/2014/ . Problem scores (0-7) as compiled by Bai Li (2018), International Mathematical Olympiad (IMO) Scores [Data set], Kaggle, https://www.kaggle.com/datasets/luckyt/imo-scores (CC0), scraped from imo-official.org."
+imos_2015,Reference_x,fill,NA,"International Mathematical Olympiad (2015). Individual results, IMO 2015. https://www.imo-official.org/results/individual/year/2015/ . Problem scores (0-7) as compiled by Bai Li (2018), International Mathematical Olympiad (IMO) Scores [Data set], Kaggle, https://www.kaggle.com/datasets/luckyt/imo-scores (CC0), scraped from imo-official.org."
+imos_2016,Reference_x,fill,NA,"International Mathematical Olympiad (2016). Individual results, IMO 2016. https://www.imo-official.org/results/individual/year/2016/ . Problem scores (0-7) as compiled by Bai Li (2018), International Mathematical Olympiad (IMO) Scores [Data set], Kaggle, https://www.kaggle.com/datasets/luckyt/imo-scores (CC0), scraped from imo-official.org."
+imos_2017,Reference_x,fill,NA,"International Mathematical Olympiad (2017). Individual results, IMO 2017. https://www.imo-official.org/results/individual/year/2017/ . Problem scores (0-7) as compiled by Bai Li (2018), International Mathematical Olympiad (IMO) Scores [Data set], Kaggle, https://www.kaggle.com/datasets/luckyt/imo-scores (CC0), scraped from imo-official.org."
+korner_2022_gpsps_s1,Original_License,fill,NA,CC BY 4.0
+korner_2022_gpsps_s2_partner,Original_License,fill,NA,CC BY 4.0
+korner_2022_gpsps_s3_clinical,Original_License,fill,NA,CC BY 4.0
+korner_2022_gpsps_s4,Original_License,fill,NA,CC BY 4.0
+korner_2022_gpsps_s5,Original_License,fill,NA,CC BY 4.0
 li_2024_bdyz,Description,conflict,"4-item Expressive Suppression subscale of the ERQ (Gross & John, 2003; 1-7 Likert; deposit ships the items labelled 1/2/6/9), same sample as li_2024_fa","4-item body-image scale subset (items 1/2/6/9 only, 1-7 Likert), same sample as li_2024_fa"
+matosaslopez_2022_bars_teaching_blended,Original_License,fill,NA,CC BY 4.0
+matosaslopez_2022_bars_teaching_inperson,Original_License,fill,NA,CC BY 4.0
+neuroqol1b_anxiety_eng,Original_License,fill,NA,CC0 1.0
+neuroqol1b_anxiety_spa,Original_License,fill,NA,CC0 1.0
+neuroqol1b_cognition_eng,Original_License,fill,NA,CC0 1.0
+neuroqol1b_cognition_spa,Original_License,fill,NA,CC0 1.0
+neuroqol1b_depression_eng,Original_License,fill,NA,CC0 1.0
+neuroqol1b_depression_spa,Original_License,fill,NA,CC0 1.0
+neuroqol1b_lower_extremity_eng,Original_License,fill,NA,CC0 1.0
+neuroqol1b_lower_extremity_spa,Original_License,fill,NA,CC0 1.0
+neuroqol1b_ped_emotional_eng,Original_License,fill,NA,CC0 1.0
+neuroqol1b_ped_emotional_spa,Original_License,fill,NA,CC0 1.0
+neuroqol1b_ped_lower_extremity_eng,Original_License,fill,NA,CC0 1.0
+neuroqol1b_ped_lower_extremity_spa,Original_License,fill,NA,CC0 1.0
+neuroqol1b_ped_social_eng,Original_License,fill,NA,CC0 1.0
+neuroqol1b_ped_social_spa,Original_License,fill,NA,CC0 1.0
+neuroqol1b_ped_upper_extremity_eng,Original_License,fill,NA,CC0 1.0
+neuroqol1b_ped_upper_extremity_spa,Original_License,fill,NA,CC0 1.0
+neuroqol1b_positive_affect_eng,Original_License,fill,NA,CC0 1.0
+neuroqol1b_positive_affect_spa,Original_License,fill,NA,CC0 1.0
+neuroqol1b_social_roles_eng,Original_License,fill,NA,CC0 1.0
+neuroqol1b_social_roles_spa,Original_License,fill,NA,CC0 1.0
+neuroqol1b_social_satisfaction_eng,Original_License,fill,NA,CC0 1.0
+neuroqol1b_social_satisfaction_spa,Original_License,fill,NA,CC0 1.0
+neuroqol1b_upper_extremity_eng,Original_License,fill,NA,CC0 1.0
+neuroqol1b_upper_extremity_spa,Original_License,fill,NA,CC0 1.0
+opladen2025_fks,Description,conflict,"Fragebogen körperdysmorpher Symptome (FKS; Buhlmann et al., 2009), a German self-report screener for body dysmorphic disorder (17 of 18 items; FKS_2 absent from the deposit); German clinical sample BN/BDD/IAD N≈210; 1-5",Body schema questionnaire FKS (17 items); German clinical sample BN/BDD/IAD N≈211; 0-5
+parenting_anunciacao_2025_affect,Original_License,fill,NA,CC BY 4.0
+parenting_anunciacao_2025_goals,Original_License,fill,NA,CC BY 4.0
+parenting_anunciacao_2025_material_rewards,Original_License,fill,NA,CC BY 4.0
+parenting_anunciacao_2025_materialism,Original_License,fill,NA,CC BY 4.0
+parenting_anunciacao_2025_rejection,Original_License,fill,NA,CC BY 4.0
+parenting_anunciacao_2025_values,Original_License,fill,NA,CC BY 4.0
+robie_2022_cab,Original_License,fill,NA,CC BY 4.0
+robie_2022_hexaco60,Original_License,fill,NA,CC BY 4.0
+silvia_2021_bicb,Original_License,fill,NA,CC BY 4.0
+vinasvelazquez_2022_vsabhc,Original_License,fill,NA,CC BY 4.0
+williams_2022_dvmsq,Original_License,fill,NA,CC BY 4.0
+zorowitz_2023_marsib,Original_License,fill,NA,MIT

@@ -10,7 +10,8 @@ as cov_year. ENCIG waves are independent cross-sections (different people), so t
 
 The 2023 rows are identical to the tables the .do produced (verified cell for cell against the live Redivis tables),
 as are the ids of every row. Tables asked only in 2023 (wellbeingservice = IMSS-Bienestar, cablecars) carry 2023 rows
-only. Transforms per table are the .do's: yes/no items recoded 1->0, 2->1; codes 9, 98, 99 set to missing. Whole-number
+only. Transforms per table are the .do's: yes/no items recoded 1->0, 2->1; codes 9, 98, 99 set to missing. "No aplica"
+(9.7 code 3, 11.1 code 5) is also set to missing (irw#1328); the .do kept it as a scale point. Whole-number
 columns are written as integers (the .do wrote cov_education as text, '06' in 2023 but '6' in 2021, so one level
 read as two categories); missing values are blank cells.
 
@@ -359,7 +360,7 @@ BLOCKS = [{'table': 'mexico_2023_quality_administration',
   'destring': ['p9_1', 'p9_7'],
   'destring_all': True,
   'yesno': ['p9_1', 'p9_7'],
-  'missing': [9, 98, 99]},
+  'missing': [3, 9, 98, 99]},   # 3 = 9.7 "No aplica" (irw#1328); p9_1 has no code 3
  {'table': 'mexico_2023_quality_electricgovernment',
   'items': ['p10_1_1', 'p10_1_2', 'p10_1_3', 'p10_1_4', 'p10_1_5', 'p10_1_6'],
   'destring': ['p10_1_1', 'p10_1_2', 'p10_1_3', 'p10_1_4', 'p10_1_5', 'p10_1_6'],
@@ -374,7 +375,7 @@ BLOCKS = [{'table': 'mexico_2023_quality_administration',
   'destring': [],
   'destring_all': True,
   'yesno': [],
-  'missing': [9, 98, 99]}]
+  'missing': [5, 9, 98, 99]}]   # 5 = 11.1 "No aplica" (irw#1328)
 
 
 def read(name):

@@ -21,14 +21,14 @@ order is *not* run order. Do not invent a sequence — run the wrapper, which is
 authoritative because it is the thing that actually executes:
 
 ```bash
-.claude/skills/irw-site-update/scripts/run_pipeline.sh        # default: 01 02 03 05 06 07 08 09
+.claude/skills/irw-site-update/scripts/run_pipeline.sh        # default: 01 05 06 07 02 03 08 10 11 12 13 09
 .claude/skills/irw-site-update/scripts/run_pipeline.sh 01 03  # just metadata.csv + tags.csv
 ```
 
 It snapshots each stage's CSVs before and after so `diff_csv.py` can report what
 changed. `04_tables.R` (QC) is deliberately excluded — superseded by
-`audit_tables.R`; `10_collections.R` runs between 08 and 09; `09_hero_status.R`
-must run last. Nothing here uploads to Redivis: uploading is a separate,
+`audit_tables.R`; `10_collections.R` runs after 08; the old `09_hero_status.R` is retired
+(the site builds the hero from published irw_meta, #1940). Nothing here uploads to Redivis: uploading is a separate,
 manual step, and it only ever writes a draft version for a human to publish.
 One tool does every upload — `red_up` (see `red_up/README.md`); the metadata
 CSVs go up with `upload_meta.py`, which is a thin wrapper around it.

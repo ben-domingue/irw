@@ -17,7 +17,13 @@ scripts is written with all of them, `|`-separated, and the MCP reports it as
 ambiguous rather than guessing.
 
 What it cannot see: names assembled at run time (`paste0(prefix, i)`,
-`f"{stem}_{k}"`). Those tables keep whatever the prefix match gives them.
+`f"{stem}_{k}"`). Those tables keep whatever the prefix match gives them,
+unless metadata/table_scripts_manual.csv (same `table,scripts` columns,
+hand-maintained) maps them. A manual row replaces the computed one for its
+table; a script it names that is not tracked under data/ is dropped with a
+warning, so a renamed script cannot leave a dead path in the index. The first
+rows are the himmelstein-<task>-2025 tables, whose names fpt_common.py builds
+from each data_<task>.py's TASK_NAME (#2529).
 
 Table names come from the four catalogue CSVs plus straggler_watch.tsv (tables
 live on Redivis that have no metadata.csv row yet -- a freshly renamed table is
@@ -119,6 +125,26 @@ def build_index(tables: Iterable[str], scripts: Dict[str, str]) -> Dict[str, Lis
     return {t: sorted(p) for t, p in sorted(hits.items())}
 
 
+def read_manual(path: Path, listed: Iterable[str]) -> Dict[str, List[str]]:
+    """Hand-maintained table -> scripts rows, keeping only tracked scripts."""
+    if not path.exists():
+        return {}
+    known = set(listed)
+    manual: Dict[str, List[str]] = {}
+    with path.open(encoding="utf-8-sig", newline="") as fh:
+        for row in csv.DictReader(fh):
+            table = (row.get("table") or "").strip()
+            paths = [p.strip() for p in (row.get("scripts") or "").split("|") if p.strip()]
+            missing = [p for p in paths if p not in known]
+            for p in missing:
+                print(f"WARNING: {path.name}: {table} names {p}, not a tracked "
+                      f"data/ script; dropped.", file=sys.stderr)
+            kept = [p for p in paths if p in known]
+            if table and kept:
+                manual[table] = sorted(set(manual.get(table, [])) | set(kept))
+    return manual
+
+
 def write_index(index: Dict[str, List[str]], out: Path) -> None:
     with out.open("w", encoding="utf-8", newline="") as fh:
         writer = csv.writer(fh, lineterminator="\n")
@@ -141,11 +167,15 @@ def main(argv: List[str] | None = None) -> int:
         for p in paths
     }
     index = build_index(tables, texts)
+    manual = read_manual(args.repo / "metadata" / "table_scripts_manual.csv", paths)
+    index.update(manual)
+    index = dict(sorted(index.items()))
     write_index(index, args.out)
     multi = sum(1 for p in index.values() if len(p) > 1)
     print(
         f"table_scripts.csv: {len(index)} tables mapped to a script that names "
-        f"them ({multi} named by more than one), from {len(tables)} catalogued "
+        f"them ({multi} named by more than one; {len(manual)} by hand), from "
+        f"{len(tables)} catalogued "
         f"tables and {len(paths)} scripts."
     )
     return 0

@@ -330,6 +330,15 @@ routing a transport failure to a sticky flag silently discards datasets. (It
 did — see BATCH_LOG.md 2026-08-17, where a WAF block was being recorded as
 `no_usable_file`.)
 
+**Sticky, but reversible (#2222).** All three seen ledgers
+(`repo_triage_seen_keys.csv`, `plos_seen_dois.csv`, `pmc_seen_dois.csv`) record
+the run's `flag` next to the key, so an exclusion resting on a heuristic verdict
+such as `no_usable_file` can be undone. When a resolver improves, or a reviewer
+spots a wrong reject, remove the affected rows and the next run re-triages them:
+`python seen_ledger.py drop pmc_seen_dois.csv --flag no_usable_file [--before YYYY-MM-DD] --apply`
+(dry run without `--apply`). Rows from before 2026-09-30 have a blank flag
+unless a run CSV still recorded the verdict.
+
 `external_unresolved` is **sticky on purpose** (Ben, 2026-09-16). It sits on
 the line between the two: the deposit was never opened, but the reason is that
 no resolver exists for that host, which is a fact about our coverage rather
@@ -354,11 +363,19 @@ Response-scale findings and documentation-input warnings are described in the
 and examples. Labels alone do not establish that responses are computed
 scores, and the finding does not instruct contributors to drop rows.
 Intentional score derivation can be explained in the processing-script
-header; this adds no review step at upload. The existing raw routing remains:
-all labels matching is a `fail` -> human_assistance; a subset is a `warn`.
-Default upload/legacy profiles keep either case at warning severity; strict
-mode still blocks warnings. Reconsidering all-match severity is separate
-(#2369).
+header; this adds no review step at upload. Both all-label and subset matches
+are raw warnings (#2369). An otherwise eligible all-match candidate can route
+to `good`; other failures and routing conditions still require assistance.
+A candidate held only for low coercion confidence remains `human_assistance`,
+but retriage can now classify it as `worth_retrying` rather than `human_review`
+because this check no longer adds a QC failure. The independent discovery
+content gate is unchanged.
+
+Upload/legacy still report warnings; core still omits this check. Strict mode
+continues to block warnings. The CLI's errors-only override cannot waive this
+warning, so an all-match triage case previously accepted with `--strict`,
+`--override-check 'composite_items*'` and `--override <reason>` now exits 1. See the
+[override contract](../irw_validate/README.md#the-override).
 
 Score-word matching is token-wise: `*_total`, `*_score` and `subscale_*`
 match, as can sentence labels containing "mean" or "sum"; `meaning_1` and
@@ -368,8 +385,8 @@ case-insensitively: `pre`, `post`, `baseline`, and `followup`/`follow-up`/
 and one or two letters/digits. This keeps `pre-A`, `post_F`, `pre_1` and
 `post-12`, but excludes `poster`, `preen`, `preto`, `Pre63`, `PRE1`, empty
 suffixes such as `pre-`, and longer labels such as `pre_anxiety_3`.
-Narrowing the matches can remove a finding or turn an all-match failure into
-a subset warning; the severity policy itself is unchanged (#2314).
+The matcher narrowed in #2314; #2369 changes only all-match severity, retaining
+those matching rules, counts and messages.
 
 | Warning | Meaning |
 |---|---|

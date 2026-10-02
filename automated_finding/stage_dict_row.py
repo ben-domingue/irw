@@ -31,6 +31,9 @@ already described is not an error, the union will simply let their cells win.
 Usage: pass one row as JSON on stdin, e.g.:
     echo '{"table": "foo_2024", "description": "...", "derived_license": "CC BY 4.0"}' \\
         | python stage_dict_row.py
+
+For a comps, nominal or simsyn table add `--source comps|nom|sim`; each
+dictionary has its own automated file (#2628). Default is core.
 """
 import csv
 import json
@@ -46,6 +49,26 @@ from doi_hygiene import classify, normalize
 ##instead of the tracked one. Production never sets it.
 STAGING_PATH = Path(os.environ.get("IRW_DICT_AUTO_PATH")
                     or Path(__file__).resolve().parent / "dictionary_auto.csv")
+
+##One automated file per dictionary sheet, matching the `dbs` list in
+##metadata/02_biblio.R (#2628). Same header, same refusals; only the file
+##differs. `core` stays the default so existing callers are unchanged.
+SOURCE_FILES = {
+    "core": "dictionary_auto.csv",
+    "comps": "dictionary_auto_comps.csv",
+    "nom": "dictionary_auto_nom.csv",
+    "sim": "dictionary_auto_sim.csv",
+}
+
+
+def staging_path(source):
+    """The file a row for `source` is staged to. IRW_DICT_AUTO_PATH wins, so the
+    tests can point any source at a scratch file."""
+    if source not in SOURCE_FILES:
+        sys.exit(f"unknown --source {source!r} (known: {', '.join(SOURCE_FILES)})")
+    if os.environ.get("IRW_DICT_AUTO_PATH"):
+        return Path(os.environ["IRW_DICT_AUTO_PATH"])
+    return Path(__file__).resolve().parent / SOURCE_FILES[source]
 
 ##Must stay identical to DICT_AUTO_COLS in metadata/dict_union.R, which refuses
 ##to merge a file whose header does not match exactly.
@@ -114,11 +137,17 @@ def main():
 
     # Check for --source-via flag if passed via CLI args
     cli_source_via = None
+    source = "core"
     for i, arg in enumerate(sys.argv):
         if arg == "--source-via" and i + 1 < len(sys.argv):
             cli_source_via = sys.argv[i + 1]
         elif arg.startswith("--source-via="):
             cli_source_via = arg.split("=", 1)[1]
+        elif arg == "--source" and i + 1 < len(sys.argv):
+            source = sys.argv[i + 1]
+        elif arg.startswith("--source="):
+            source = arg.split("=", 1)[1]
+    path = staging_path(source)
 
     payload = json.load(sys.stdin)
 
@@ -203,9 +232,9 @@ def main():
         sys.exit("a Public row needs a 'derived_license' (e.g. \"CC BY 4.0\")")
 
     existing = set()
-    file_exists = STAGING_PATH.exists()
+    file_exists = path.exists()
     if file_exists:
-        with open(STAGING_PATH, newline="", encoding="utf-8") as f:
+        with open(path, newline="", encoding="utf-8") as f:
             reader = csv.DictReader(f)
             ##Appending a wider row under a narrower header writes every value
             ##after the new columns under the wrong name, and nothing complains.
@@ -213,7 +242,7 @@ def main():
             ##migrated deliberately.
             if reader.fieldnames != COLUMNS:
                 sys.exit(
-                    f"{STAGING_PATH} has a {len(reader.fieldnames or [])}-column "
+                    f"{path} has a {len(reader.fieldnames or [])}-column "
                     f"header and this script writes {len(COLUMNS)}. Migrate the "
                     f"file first -- appending would silently shift every value.\n"
                     f"  found:    {reader.fieldnames}\n  expected: {COLUMNS}")
@@ -221,16 +250,16 @@ def main():
                 existing.add((r.get("table") or "").strip().lower())
 
     if row["table.lower"] in existing and not force:
-        sys.exit(f"{row['table']} is already in {STAGING_PATH} "
+        sys.exit(f"{row['table']} is already in {path} "
                  f"-- use --force to add a duplicate row")
 
-    with open(STAGING_PATH, "a", newline="", encoding="utf-8") as f:
+    with open(path, "a", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=COLUMNS, lineterminator="\n")
         if not file_exists:
             writer.writeheader()
         writer.writerow(row)
 
-    print(f"staged {row['table']} -> {STAGING_PATH}")
+    print(f"staged {row['table']} -> {path}")
 
 
 if __name__ == "__main__":

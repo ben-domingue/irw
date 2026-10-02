@@ -12,8 +12,14 @@
 #   - Green agricultural brand image: A1-A3, B1-B3, C1,C2,C4, D1-D3 (12 items,
 #     matches paper's "4 dimensions with 12 indicators total"; note C3 is
 #     absent from the raw file -- dropped item, not our omission)
-#   - Customer perceived value: E1-E3 (3 items)
-#   - Consumption intention: F1-F4 (4 items)
+#   - Consumption intention: E1-E3 (3 items)
+#   - Customer perceived value: F1-F4 (4 items)
+#
+# The E/F assignment was originally the other way round, which put each scale
+# under the other's name (irw#2198). The paper's Tables 1 and 3 assign F1-F4 to
+# perceived value and E1-E3 to consumption intention, and block alphas
+# recomputed from the S1 File reproduce the published ones: F = .849 (perceived
+# value), E = .934 (consumption intention). Swapped 2026-09-30.
 
 import os
 import io
@@ -36,8 +42,8 @@ COV_RENAME = {
 
 SCALES = {
     "yang_2023_green_brand_image": ["A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2", "C4", "D1", "D2", "D3"],
-    "yang_2023_perceived_value": ["E1", "E2", "E3"],
-    "yang_2023_consumption_intent": ["F1", "F2", "F3", "F4"],
+    "yang_2023_consumption_intent": ["E1", "E2", "E3"],
+    "yang_2023_perceived_value": ["F1", "F2", "F3", "F4"],
 }
 
 

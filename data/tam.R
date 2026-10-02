@@ -47,8 +47,16 @@ library(dplyr)
 
 timss_tam <- read_csv("timss_tam.csv")
 
-# Set missing values
-timss_tam$resp[timss_tam$resp %in% c(6, 9, 96, 99)] <- NA
+# Omitted vs not reached (irw#2513, 2026-09-28; datastandard "omitted vs not
+# reached"). TIMSS codes omitted as 9 (MC) / 99 (CR) and not reached as 6 (MC) /
+# 96 (CR); the TAM data keeps them apart (1,768 omitted and 84 not-reached cells
+# in these 11 items, plus 44 NA). Following IEA calibration scoring, an omitted
+# item is scored 0 with its source code kept in resp_raw, and a not-reached item
+# was never administered, so its row is dropped. This replaces #1046's rule
+# (both set to NA). resp_raw carries the source code for every row.
+timss_tam$resp_raw <- as.character(timss_tam$resp)
+timss_tam <- timss_tam[!(timss_tam$resp %in% c(6, 96)), ]
+timss_tam$resp[timss_tam$resp %in% c(9, 99)] <- 0
 
 # Recode CR items
 timss_tam$resp[timss_tam$resp %in% c(20, 21)] <- 2    # fully correct
@@ -71,4 +79,5 @@ timss_tam <- timss_tam %>%
     resp
   ))
 
-write_csv(timss_tam, "timss_tam.csv")
+timss_tam <- timss_tam %>% select(id, item, resp, resp_raw, everything())
+write_csv(timss_tam, "timss_tam.csv", na = "")  # not the string "NA" (#2029)

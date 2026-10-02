@@ -155,8 +155,8 @@ audit's incomplete list until then.
 
 ## Reminder: the site is a separate repo
 
-Stage 09 writes `hero_stats.json` into the `irw_site` checkout, which is
-`github.com/datapages/irw`. Rendering the site does nothing unless that file is
-**committed and pushed to main** first -- on 2026-08-24 the workflow ran
-successfully against a version of the file from 2026-08-10 and republished the
-old numbers.
+Stage 09 is retired (2026-10-01, #1940). The site builds `hero_stats.json`
+itself at render time from published irw_meta, so there is nothing to commit
+into `github.com/datapages/irw` after a run. The hero updates on the first site
+render after irw_meta is published; the drift report flags a render that
+predates the newest release.

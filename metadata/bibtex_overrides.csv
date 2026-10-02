@@ -8,3 +8,27 @@ doi,BibTex,source_url,reason
   doi = {10.7910/DVN/X2C2PL},
   url = {https://doi.org/10.7910/DVN/X2C2PL}
 }",https://dataverse.harvard.edu/api/datasets/:persistentId/?persistentId=doi:10.7910/DVN/X2C2PL,"#1754: DOI content negotiation returns author 'ich Nguyen, Bich'; the deposit's citation metadata authorName is 'Van Bich Nguyen'. Preserve the full source name literally because the resolver's family/given-name parsing is defective. Dataset title, publisher, year and released version verified against the native Dataverse record on 2026-09-06."
+10.3758/s13428-025-02852-7,"@article{Kay_2025,
+  title = {Why you shouldn’t trust data collected on MTurk},
+  author = {Kay, Cameron S.},
+  journal = {Behavior Research Methods},
+  volume = {57},
+  number = {12},
+  pages = {340},
+  year = {2025},
+  publisher = {Springer Science and Business Media LLC},
+  doi = {10.3758/s13428-025-02852-7},
+  url = {https://doi.org/10.3758/s13428-025-02852-7}
+}",https://api.crossref.org/works/10.3758/s13428-025-02852-7,"irw#2513 (kay_2025_antonyms): the cached citation was never fetched from this DOI -- the dictionary cell carried two trailing newlines, the fetch fell through to generate_bibtex(), and the model parsed the sheet's truncated reference 'ay, C.S.' into author={Ay, C.S.}. The #2301 check cannot heal it because an LLM citation carries no DOI field. Author, title, journal, volume, number and year verified against Crossref (single author Kay, Cameron S.; article number 340) on 2026-09-28."
+10.1007/978-3-642-83943-6_17,"@incollection{van_Maanen_1989,
+  title = {The Linear Logistic Test Model and heterogeneity of cognitive strategies},
+  author = {van Maanen, Leo and Been, Pieter and Sijtsma, Klaas},
+  editor = {Roskam, Edward E.},
+  booktitle = {Mathematical Psychology in Progress},
+  series = {Recent Research in Psychology},
+  pages = {267--287},
+  year = {1989},
+  publisher = {Springer Berlin Heidelberg},
+  doi = {10.1007/978-3-642-83943-6_17},
+  url = {https://doi.org/10.1007/978-3-642-83943-6_17}
+}",https://api.crossref.org/works/10.1007/978-3-642-83943-6_17,"irw#2513 (balance_mokken): dormant until the dictionary row gains this DOI. The cached citation, generated without a DOI, gives the chapter title as 'Problem solving strategies and the linear logistic test model'; Crossref's title is 'The Linear Logistic Test Model and heterogeneity of cognitive strategies' (van Maanen, Been & Sijtsma, pp. 267-287, in Roskam (Ed.), Mathematical Psychology in Progress, Springer 1989). A DOI-less cached citation is never refetched by the #2301 check, so without this row adding the DOI would leave the wrong title in place. Verified against Crossref 2026-09-28."

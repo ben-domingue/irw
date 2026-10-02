@@ -103,6 +103,12 @@ replace cp9_2 = round(cp9_2, 0.1)
 replace cp9_3 = round(cp9_3, 0.1)
 replace cp9_4 = round(cp9_4, 0.1)
 
+* cp9_* are HH:MM durations (00:00-08:00) with "88:88" = No sabe, which the
+* conversion above turns into 88 + 88/60 = 89.5 hours: set it to missing (#2401)
+foreach var in cp9_1 cp9_2 cp9_3 cp9_4 {
+    replace `var' = . if `var' >= 88
+}
+
 * adjust to the preferred format
 format cp7_1 %9.1f
 format cp7_2 %9.1f
@@ -138,7 +144,9 @@ gen id = _n
 order id cov*, first
 
 * create long-format data from wide data
-local question_cols	ac1_1	ac1_2	ac1_3	ac1_4	ac1_5	ac1_6	ac1_7	ac1_8	ac2_1	ac2_2	ac2_3	ac2_4	ac2_5	ac3	ac5_1	ac5_10	ac5_2	ac5_3	ac5_4	ac5_5	ac5_6	ac5_7	ac5_77	ac5_8	ac5_9	ac6_1	ac6_2	ac6_3	ac6_4	ac6_77 cp2_1	cp2_10	cp2_2	cp2_3	cp2_4	cp2_5	cp2_6	cp2_7	cp2_77	cp2_8	cp2_9	cp3	cp4	cp5_1	cp5_2	cp5_3	cp5_4	cp5_5	cp5_6	cp5_7	cp6_1	cp6_2	cp6_3	cp6_4	cp6_5	cp6_6	cp6_7	cp6_8	cp7_1	cp7_2	cp7_3	cp7_4	cp8_1	cp8_2	cp8_3	cp8_4	cp8_5	cp8_6	cp9_1	cp9_2	cp9_3	cp9_4
+* cp7_* and cp9_* are hh:mm durations (hours per day), measured quantities
+* rather than responses, so they are not items (irw#1700, 2026-10-01).
+local question_cols	ac1_1	ac1_2	ac1_3	ac1_4	ac1_5	ac1_6	ac1_7	ac1_8	ac2_1	ac2_2	ac2_3	ac2_4	ac2_5	ac3	ac5_1	ac5_10	ac5_2	ac5_3	ac5_4	ac5_5	ac5_6	ac5_7	ac5_77	ac5_8	ac5_9	ac6_1	ac6_2	ac6_3	ac6_4	ac6_77 cp2_1	cp2_10	cp2_2	cp2_3	cp2_4	cp2_5	cp2_6	cp2_7	cp2_77	cp2_8	cp2_9	cp3	cp4	cp5_1	cp5_2	cp5_3	cp5_4	cp5_5	cp5_6	cp5_7	cp6_1	cp6_2	cp6_3	cp6_4	cp6_5	cp6_6	cp6_7	cp6_8	cp8_1	cp8_2	cp8_3	cp8_4	cp8_5	cp8_6
 
 tempfile longdata
 save `longdata', emptyok replace
@@ -160,7 +168,7 @@ foreach var of local question_cols {
 
 use `longdata', clear
 
-drop ac1_1	ac1_2	ac1_3	ac1_4	ac1_5	ac1_6	ac1_7	ac1_8	ac2_1	ac2_2	ac2_3	ac2_4	ac2_5	ac3	ac5_1	ac5_10	ac5_2	ac5_3	ac5_4	ac5_5	ac5_6	ac5_7	ac5_77	ac5_8	ac5_9	ac6_1	ac6_2	ac6_3	ac6_4	ac6_77 cp2_1	cp2_10	cp2_2	cp2_3	cp2_4	cp2_5	cp2_6	cp2_7	cp2_77	cp2_8	cp2_9	cp3	cp4	cp5_1	cp5_2	cp5_3	cp5_4	cp5_5	cp5_6	cp5_7	cp6_1	cp6_2	cp6_3	cp6_4	cp6_5	cp6_6	cp6_7	cp6_8	cp7_1	cp7_2	cp7_3	cp7_4	cp8_1	cp8_2	cp8_3	cp8_4	cp8_5	cp8_6	cp9_1	cp9_2	cp9_3	cp9_4
+drop ac1_1	ac1_2	ac1_3	ac1_4	ac1_5	ac1_6	ac1_7	ac1_8	ac2_1	ac2_2	ac2_3	ac2_4	ac2_5	ac3	ac5_1	ac5_10	ac5_2	ac5_3	ac5_4	ac5_5	ac5_6	ac5_7	ac5_77	ac5_8	ac5_9	ac6_1	ac6_2	ac6_3	ac6_4	ac6_77 cp2_1	cp2_10	cp2_2	cp2_3	cp2_4	cp2_5	cp2_6	cp2_7	cp2_77	cp2_8	cp2_9	cp3	cp4	cp5_1	cp5_2	cp5_3	cp5_4	cp5_5	cp5_6	cp5_7	cp6_1	cp6_2	cp6_3	cp6_4	cp6_5	cp6_6	cp6_7	cp6_8	cp8_1	cp8_2	cp8_3	cp8_4	cp8_5	cp8_6
 
 drop if missing(item) | item == ""
 
@@ -177,6 +185,11 @@ local base_items a c
 foreach prefix of local base_items {
     preserve
         keep if strpos(item, "`prefix'") == 1
+        * a missing resp is not a response, so it is not a row (#2401: cp_c only;
+        * cp_a is unchanged here)
+        if "`prefix'" == "c" {
+            drop if missing(resp)
+        }
         export delimited using "chile_2023_children-adolescents-survey_cp_`prefix'.csv", replace
     restore
 }

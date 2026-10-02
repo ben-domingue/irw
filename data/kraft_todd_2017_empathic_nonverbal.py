@@ -7,7 +7,7 @@
 # empathy manipulation) and bundles 4 distinct scales: Competence (5 items),
 # Warmth (4 items), CARE Measure (10 items), and PANAS (20 items, positive +
 # negative subscales administered together -- kept as one file per prior
-# IRW convention, see data/wu2021_empathy.py). One output file per scale.
+# IRW convention, see data/wu2021.py). One output file per scale.
 #
 # The experiment crosses two independent binary manipulations (white coat
 # worn: condcoat; empathic nonverbal behavior: condemp) -- IRW's `treat`

@@ -215,9 +215,9 @@ def itemtext_target(targets: list[Target]) -> Target | None:
 #: Response data (the shards, plus nominal and simsyn) is `datastandard.md`'s
 #: schema. Item text is the shape `itemtext/join.R` writes. Two destinations
 #: are deliberately unchecked: `irw_competitions` holds pairwise/arena data
-#: whose columns vary by sport and source, and `irw_meta` holds thirteen
-#: pipeline outputs that each have their own schema -- membership in that fixed
-#: list is the gate there, not a column set.
+#: whose columns vary by sport and source, and `irw_meta` holds a fixed list
+#: of metadata tables (cli.META_TABLES), each with its own schema -- membership
+#: in that list is the gate there, not a column set.
 REQUIRED_COLUMNS: dict[str, tuple[str, ...]] = {
     "response": ("id", "item", "resp"),
     "text": ("table", "item", "item_text"),

@@ -156,6 +156,15 @@ Three things worth knowing:
   forever.
 - **Heuristics warn, they do not block** — see the profile table in
   `irw_validate/README.md` for why.
+- **A response table with item text is range-checked against its anchors**
+  (#2152). An item's permitted `resp` values are every integer from its lowest to
+  its highest labelled (`option_text`) response; a value outside that blocks
+  (`resp_outside_permitted`). The item text is a staged `<table>__items.csv` beside
+  the file (its own or a sibling directory, as the upload queue lays shards out),
+  else the published `__items` table. With neither, nothing changes. The run prints
+  which tables were checked and against what. If a rebuild deliberately changes a
+  scale, stage the matching item text beside it so the check reads the new anchors.
+  See `permitted.py`.
 
 ## Drafts, and the one-week window
 
@@ -189,6 +198,14 @@ Two cautions the tool exists to enforce:
   page renders the file, and nothing else will tell a user the table changed.
   First-time tables, `__items` tables and rights withdrawals are not recorded
   there (#2168).
+- **A caveat about the source gets a line in `metadata/data_notes.csv`.** When
+  a table is faithful to its source but a user needs to know something the
+  table cannot express (a questionable source key, mean-filled covariates, what
+  `wave` means, pooled forms), append a row (`table, note, issue, date`; one
+  row per table, exact names, LF line endings). It shows as a plain Notes
+  section on the table's landing page, with no banner or `noindex`, and
+  `get_processing_notes` returns it. IRW defects go to `known_issues.tsv` in
+  irw_site and released fixes to `table_changes.csv`, never here (#2529).
 
 The check counts *time since the last release*, not the age of a table or of the
 draft — both of those reset whenever the draft is touched, so both would read as

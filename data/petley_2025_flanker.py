@@ -31,6 +31,13 @@ def _melt(df: pd.DataFrame, conds: list[str]) -> pd.DataFrame:
 
 
 def _expand(long: pd.DataFrame, keep: list[str]) -> pd.DataFrame:
+    """Expand per-condition counts (ncorr of ntrials) into one 0/1 row per trial.
+
+    The source reports counts only, so trial order is not observed: the rows
+    within a person and condition are exchangeable, and repeated id+item rows
+    are by design (validator waiver, #2401). No trial or wave index is
+    invented here; study 2's `wave` is the real test/retest session.
+    """
     long = long.reset_index(drop=True)
     correct = long.loc[long.index.repeat(long["ncorr"]), keep].copy()
     correct["resp"] = 1
@@ -38,10 +45,7 @@ def _expand(long: pd.DataFrame, keep: list[str]) -> pd.DataFrame:
     incorrect = long.loc[long.index.repeat(nincorrect), keep].copy()
     incorrect["resp"] = 0
     out = pd.concat([correct, incorrect], ignore_index=True)
-    out = out.sort_values(["id", "item"], kind="stable").reset_index(drop=True)
-    if "wave" not in out.columns:
-        out["wave"] = out.groupby(["id", "item"]).cumcount() + 1
-    return out
+    return out.sort_values(["id", "item"], kind="stable").reset_index(drop=True)
 
 
 def _study1(file_a: str, file_b: str, label_a: str, label_b: str,

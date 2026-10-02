@@ -18,7 +18,10 @@ data <- data %>%
 data <- data %>%
   transmute(
     id = name,
-    rt = RT,
+    # RT is in milliseconds: magpie records it as a JavaScript Date.now()
+    # difference, and each submission's summed RT is 31-99% of its
+    # endTime - startTime span, which is itself in ms (irw#2401). IRW wants seconds.
+    rt = RT / 1000,
     item = trial_name,
     rater = submission_id,
     resp
