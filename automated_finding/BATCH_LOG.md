@@ -16920,3 +16920,9 @@ Ben supplied two PDFs. Neither changed an output (both re-runs byte-identical):
   (Zamora residents). The paper prints English item wording only, so the
   administered Spanish is unpublished; the English variable labels are a
   translated_substitute lead.
+
+## 2026-10-02i — re-check batch 3 stamped uploaded
+
+ben-domingue confirmed the 64 batch-3 response tables are uploaded (the item
+text was confirmed and stamped in 2026-10-02h). The batch is closed apart from
+the open questions and leads in `TODO.md`.

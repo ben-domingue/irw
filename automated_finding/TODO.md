@@ -5,12 +5,11 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
 ## From the 2026-10-02 human_review re-check batch 3 (25 rows, 19 shipped)
 
-- [ ] **64 tables + 5 item text tables need uploading**, from the worktree
-  `/home/ben/irw-wt/hr-recheck-batch3/automated_finding/`: all of
-  `irw_output/` (64 tables), then `itemtext_output/` (5 `__items.csv`:
-  gopal_2021_cas, garciabacete_2023_victimization, suyato_2023_cbq,
-  wu_2015_cias, wu_2015_bsrs5). Dictionary/tag rows are staged; `uploaded` is
-  unstamped in `itemtext_provenance.csv` and `mapping_verification.csv`.
+- [x] **64 tables + 5 item text tables uploaded** (ben-domingue, confirmed
+  2026-10-02): the batch-3 `irw_output/` set, then the 5 `__items.csv`
+  (gopal_2021_cas, garciabacete_2023_victimization, suyato_2023_cbq,
+  wu_2015_cias, wu_2015_bsrs5). `uploaded` stamped in `itemtext_provenance.csv`
+  and `mapping_verification.csv`.
 - [ ] **Issues-page lines for `wu_2015_cias` / `wu_2015_bsrs5`**: both carry
   the `xue_2025` public_note ("wording only in English, although administered
   in Chinese"), which forces a callout on `itemtext_issues.qmd` (irw_site repo).
