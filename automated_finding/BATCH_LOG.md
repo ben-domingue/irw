@@ -16565,3 +16565,50 @@ counted once.
 No `data/` scripts, uploads, dictionary or tag rows, and no edits to any
 `human_review/*.csv`. Discovery was not run. `search_terms_log.csv` and
 `runs/monthly_*2026-10-02*` were not touched.
+
+## 2026-10-02b — human_review re-check batch 1: the 9 pilot leads, 22 tables, 1,048,088 responses
+
+Worked the nine shippable rows of `leads/human_review_recheck_pilot_2026-10-02.csv`
+(previous entry). The scripts were written in a worktree
+(`/home/ben/irw-wt/hr-recheck-batch1`, branch `ben-domingue/hr-recheck-batch1`),
+so the 22 output CSVs are in **that worktree's** `automated_finding/irw_output/`,
+not the main checkout's. Each script downloads its own file and asserts its
+shape, balances its columns, and passes `run_qc` and `irw-validate`'s upload
+profile with no errors.
+
+| script | tables (items x N) | notes |
+|---|---|---|
+| `fazekas_2019_psci.py` | psci 65 x 103 | 6-point per the paper (PMC9418284) |
+| `donnan_2024_chlq.py` | chlq 32 x 1,035 | KC/UHR 0/1, KR/SAU 1-5 per the deposit codebook; KR7_RE/KR8_RE copies dropped |
+| `guzmanmuzante_2025_mts.py` | mts 11 x 200, gse 10 x 200 | EAG = Spanish General Self-Efficacy; MTS range undocumented (paper behind a bot wall), so no permitted set |
+| `alqerem_2024_mhls.py` | mhls 35 x 982 | Q9 recovered: its codes are a miscoded alphabetical recode of the Arabic answers (Q8 also swapped), so resp is rebuilt from the administered text |
+| `usc_2026_gaming_wellbeing.py` | gasa 7, phq9 9, wellbeing 6, relsat 5 x 34,076 | anonymous deposit; named after the collecting institution, pending Ben |
+| `figueroaquinones_2026_nmq.py` | nmq 9, phq4 4, jss4 4 x 1,215 | PHQ-2/GAD-2 identity asserted from the file's own sums |
+| `bateman_2026_prse.py` | prse 10, depression 7 x 314 | **the pilot was wrong**: "Study 1" is the same 314 people as Study 2, reordered and relabelled (asserted), so only Study 2 ships |
+| `gokalp_2026_self_control.py` | bscs 13 x 350, responsibility 7, patience 6 x 349 | ranges from the Frontiers paper; BSCS stored after the authors' reverse-coding; 29 mean-imputed BSCS cells and 2 all-zero (skipped) blocks set to NA |
+| `kayir_2026_ai_teacher.py` | aistaq 8, innovativeness 5, tampst 7, tipi 10, ai_use 8 x 392 | instruments named in the Dataverse description; Likert ranges undocumented (no paper), so only ai_use (value-labelled) gets a permitted set; alt* reverse copies dropped |
+
+The only validator warnings are `imputed_values*` response-concentration notes
+(symptom items piling up on 0, and ceiling items), plus one
+`resp_scale_nested_support` on aistaq. No PII was found. Where a study code
+existed it was replaced with the row index.
+
+Staged: 22 rows in `dictionary_auto.csv` and 22 in `tags/tags_auto.csv`. The
+tag rows were converted from CRLF to LF. Tables are named after the deposit
+creator and deposit year (e.g. `donnan_2024`), while the paper's first author
+is in the reference.
+
+Item text:
+- **Built, not yet shippable:** `alqerem_2024_mhls__items.csv` (160 rows,
+  Arabic, `_translated` from the English labels). It passed `normalize_nulls`,
+  `validate_items.R --resp-csv` and `audit_batch.R`. Its
+  `itemtext_provenance.csv` and `mapping_verification.csv` rows were blocked by
+  auto mode (shared resource), so it waits on Ben (see TODO).
+- **Not shipped, with where the text is:** CHLQ (stems in the deposit's
+  codebook docx; cheap next time); PSCI (paper prints only the final 44 items
+  under new codes); MTS/GSE, NMQ, JSS, PHQ-4, PHQ-9, GASA (no labels at either
+  level, or positional); GAS wellbeing/relsat (Spanish stems in the variable
+  labels, no value labels); P-RSE/DEP (no labels, no paper); BSCS/
+  responsibility/patience (Turkish anchors only, in sor/sab value labels;
+  stems in the published scales); Kayir (only the ai_use block is
+  value-labelled; stems in the published instruments).
