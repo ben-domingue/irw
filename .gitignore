@@ -63,6 +63,13 @@ metadata/logs/codebook_table_names.json
 ##Rows held back because their table is not published yet (#1732). Committed for
 ##the same reason: it is the only place "waiting on a publish" is written down.
 !metadata/biblio_pending.csv
+##01_metadata.R's rolling-refresh rotation: which existing tables had their
+##stats re-fetched, and when. Committed because the weekly run is on Actions,
+##where an ignored file starts empty every time -- the rotation then fell back
+##to its alphabetical tiebreak and re-checked the same first 200 tables every
+##week from 09-04 to 10-02. One row per table, sorted by name, so the weekly
+##diff is the 200 timestamps that moved.
+!metadata/metadata_refresh_log.csv
 ##Which published biblio cells the dictionary corrected on this run (#2001).
 ##Committed because it is the first run's review surface -- 336 cells across 223
 ##tables is a list a person can read, where the same change in biblio.csv is a
