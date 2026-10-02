@@ -84,6 +84,13 @@
 # follow 01, 05, 06, 07 and 12, and it needs no credentials. It is the one
 # Python stage: the run loop dispatches on the file extension.
 #
+# 14_column_docs.py (issue #2763, added 2026-10-02) runs last, after 13: it
+# reads table_scripts.csv to find each table's script. It writes
+# column_docs.csv, one row per (table, column): what the data standard says the
+# column is, and the source column the build script renamed it from. The table
+# pages render it as a Codebook section. Like 13 it reads files on disk only and
+# needs no credentials.
+#
 # 08_itemtext.R (readability-stats metadata for item text) joined the
 # default order 2026-08-02. Split of responsibility, confirmed with Ben:
 # this skill produces metadata FOR item text that's already been procured;
@@ -99,7 +106,7 @@
 # variant, see above) are out of scope per Ben (2026-07-27) -- ignored.
 #
 # Usage:
-#   scripts/run_pipeline.sh                 # full default sequence (01 05 06 07 02 03 08 10 11 12 13)
+#   scripts/run_pipeline.sh                 # full default sequence (01 05 06 07 02 03 08 10 11 12 13 14)
 #   scripts/run_pipeline.sh 01 03           # only metadata.csv + tags.csv
 #   scripts/run_pipeline.sh 08              # just the itemtext metadata stage
 #   scripts/run_pipeline.sh 10              # just the collections tables
@@ -146,7 +153,7 @@ declare -A STAGE_SCRIPT=( [01]=01_metadata.R [02]=02_biblio.R [03]=03_tags.R
                           [05]=05_comps.R [06]=06_nominal.R [07]=07_simsyn.R
                           [08]=08_itemtext.R [10]=10_collections.R
                           [11]=11_status.R [12]=12_stragglers.R
-                          [13]=13_script_index.py )
+                          [13]=13_script_index.py [14]=14_column_docs.py )
 
 # Stages whose non-zero exit is a FINDING, not a failure. 12 exits 1 when a
 # table has been stuck for several runs -- that is the report doing its job, and
@@ -168,8 +175,9 @@ declare -A STAGE_OUTPUTS=(
   [11]=""   # writes status.json + status_history.tsv -- reported separately below
   [12]=""   # writes straggler_watch.tsv -- reported separately below
   [13]="table_scripts.csv"
+  [14]="column_docs.csv"
 )
-DEFAULT_ORDER=(01 05 06 07 02 03 08 10 11 12 13)
+DEFAULT_ORDER=(01 05 06 07 02 03 08 10 11 12 13 14)
 
 # Join key for the diff, per output file. Everything is keyed on `table` except
 # the two collections outputs (issue #1633): the registry is one row per
@@ -178,6 +186,7 @@ DEFAULT_ORDER=(01 05 06 07 02 03 08 10 11 12 13)
 declare -A DIFF_KEY=(
   [collections.csv]="collection"
   [collection_members.csv]="table,collection"
+  [column_docs.csv]="table,column"
 )
 
 stages=()
