@@ -79,6 +79,12 @@ jobs:
       - name: covariate_labels generator and table (#1775)
         run: python metadata/tests/test_covariate_labels.py -v
 
+      # Stage 14 imports stage 13, so both run here (#2494, #2763).
+      - name: script index and column docs (stages 13, 14)
+        run: |
+          python metadata/tests/test_script_index.py -v
+          python metadata/tests/test_column_docs.py -v
+
       - name: validate_irw.R still parses
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq r-base-core r-cran-readr
