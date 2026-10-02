@@ -5,14 +5,9 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
 ## From the 2026-10-02 human_review re-check batch 4 (25 rows, 14 shipped)
 
-- [ ] **69 tables + 9 item text tables need uploading**, from the worktree
-  `/home/ben/irw-wt/hr-recheck-batch4/automated_finding/`: all of
-  `irw_output/` (69 tables), then `itemtext_output/` (9 `__items.csv`:
-  kreps_2023_ai_attitudes, alqerem_2025_gina_control,
-  bauwens_2022_{autonomy,work_pressure,red_tape,empowering_leadership,
-  supervisory_support,lmx,technostress_inhibitors}). Dictionary/tag rows are
-  staged; `uploaded` is unstamped in `itemtext_provenance.csv` and
-  `mapping_verification.csv`.
+- [ ] **69 response tables uploading** (ben-domingue, 2026-10-02) from
+  `/home/ben/irw-wt/hr-recheck-batch4/automated_finding/irw_output/`; tick
+  once confirmed. The 9 item text tables are uploaded and stamped (#2797).
 - [ ] **Licence call (Ben):** HRQoL/musculoskeletal pain in health-science
   students (`10.5281/zenodo.7782495`): Zenodo API says CC BY 4.0, the deposit
   readme says CC BY-NC-ND. Treated as blocked (in
@@ -57,8 +52,6 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   (gopal_2021_cas, garciabacete_2023_victimization, suyato_2023_cbq,
   wu_2015_cias, wu_2015_bsrs5). `uploaded` stamped in `itemtext_provenance.csv`
   and `mapping_verification.csv`.
-- [ ] **Merge datapages/irw PR #305**: the issues-page callouts for
-  `wu_2015_cias` / `wu_2015_bsrs5` (added 2026-10-02).
 - [ ] **Open questions on batch-3 tables (none blocks upload):**
   - `wu_2015_mpi_*`: stored codes 0<1<2 shipped against the file's own value
     labels (0=?, 1=Yes, 2=No); the file's Nscore/SDSscore sums, the paper's

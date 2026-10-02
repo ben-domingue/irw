@@ -17055,3 +17055,11 @@ No uploads, no discovery. `search_terms_log.csv`, `repo_triage_seen_keys.csv`
 and `human_review/` were not touched. The TODO's batch-3 PII-ruling item is
 removed (Ben, 2026-10-02: no overrides), and its issues-page item now points
 at datapages/irw PR #305.
+
+## 2026-10-02k — re-check batch 4: item text stamped
+
+ben-domingue confirmed the 9 batch-4 item text tables are uploaded;
+`uploaded=2026-10-02` is stamped in `itemtext_provenance.csv` and
+`mapping_verification.csv`. The 69 response tables were uploading at the
+close of the session and are not yet confirmed (TODO). datapages/irw PR #305
+(the `wu_2015_cias` / `wu_2015_bsrs5` issues-page callouts) is merged.
