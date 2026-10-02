@@ -262,7 +262,12 @@ _EXTEND = {
                             6: {f"Loneliness{i}": f"Loneliness_{i}" for i in range(1, 4)}}),
     "hopefulness":([5, 6], {5: {f"Hopefulness{i}": f"Hopefulness_{i}" for i in range(1, 3)},
                             6: {f"Hopefulness{i}": f"Hopefulness_{i}" for i in range(1, 3)}}),
-    "socialdistance": ([5], {5: {f"SocialDistance{i}": f"SocialDistance_{i}" for i in range(1, 19)}}),
+    # socialdistance W5: keyed by WORDING, not position (irw#2542). W5 moved W2's item 18
+    # ("people would disapprove") up to position 8, so W5 9-15 = W1/W2 8-14 and
+    # W5 16-18 = W2 15-17. Codes for W5's 4/15-17 are set in _W5_SD_CODES below.
+    "socialdistance": ([5], {5: {**{f"SocialDistance{i}": f"SocialDistance_{i}" for i in range(1, 8)},
+                                 "SocialDistance18": "SocialDistance_8",
+                                 **{f"SocialDistance{i}": f"SocialDistance_{i + 1}" for i in range(8, 18)}}}),
     "neighbourcomfort": ([5], {5: {f"Neighbour_Comfort{i}": f"Neighbour_Comfort_{i}" for i in range(1, 3)}}),
     "brs":        ([6], {6: {f"Resilience{i}": f"Resilience_{i}" for i in range(1, 7)}}),
     "nationalism":([6], {6: {f"Nationalism{i}": f"Nationalism_{i}" for i in range(1, 3)}}),
@@ -279,6 +284,21 @@ for _t in TABLES:
     _t["waves"] = sorted(set(_t["waves"]) | set(_add))
     if _ren:
         _t.setdefault("rename", {}).update(_ren)
+# socialdistance W5 item codes that differ from the bare stem (irw#2542):
+#  - W5 16-18 repeat W2's 15-17 wording, which W1 worded differently, so they join the
+#    W2-wording codes SocialDistance15_W2..17_W2 (the suffix names the wording version).
+#  - W5 item 4 adds "and facilities" to W1/W2 "I had the necessary time to do it": its own code.
+for _t in TABLES:
+    if _t["key"] == "socialdistance":
+        _t["item_code"] = {5: {"SocialDistance4": "SocialDistance4_W5",
+                               "SocialDistance15": "SocialDistance15_W2",
+                               "SocialDistance16": "SocialDistance16_W2",
+                               "SocialDistance17": "SocialDistance17_W2"}}
+        _t["check_labels"] = True
+        _t["scale"] += (". Pooled across waves by item WORDING (irw#2542): W5 reordered the block, so W5 item 8 ="
+                        " SocialDistance18, W5 9-15 = SocialDistance8-14, W5 16-18 = SocialDistance15_W2-17_W2"
+                        " (the _W2 suffix marks the W2 wording, also asked at W5); W5 item 4 (adds 'and facilities')"
+                        " is SocialDistance4_W5.")
 # W5 trust uses the same anchor direction as W1/W2/W4 -> also needs reversing
 for _t in TABLES:
     if _t["key"] == "trustinstitutions":
@@ -291,7 +311,14 @@ TABLES += [
          scale="1=Never, 2=Occasionally, 3=Whenever possible. NOTE: shares the variable name 'Hygiene' with the W1/W2 COM-B determinants block but is a DIFFERENT instrument (behaviour frequency, not determinants) - kept as a separate table."),
     dict(key="lockdown_contact_behaviours", instrument="Weekly social-contact and protective behaviours (W5/W6 version)",
          stems=[f"Risk_Behaviours_{i}" for i in range(1, 10)], waves=[5, 6],
-         scale="1=Not at all .. 5=Every day. NOTE: renumbered relative to the W2/W3/W4 Risk_Behaviour block (different item order and content) - kept as a separate table."),
+         # Codes follow W5's numbering and are keyed by BEHAVIOUR (irw#2542): W6 dropped W5's
+         # items 5 (indoors when meeting others) and 6 (stayed 2 m away) and renumbered the rest.
+         rename={6: {"Risk_Behaviours_5": None, "Risk_Behaviours_6": None,
+                     "Risk_Behaviours_7": "Risk_Behaviours_5",
+                     "Risk_Behaviours_8": "Risk_Behaviours_6",
+                     "Risk_Behaviours_9": "Risk_Behaviours_7"}},
+         check_labels=True,
+         scale="1=Not at all .. 5=Every day. NOTE: renumbered relative to the W2/W3/W4 Risk_Behaviour block (different item order and content) - kept as a separate table. Codes use W5's numbering keyed by behaviour (irw#2542): W6 items 5-7 = Risk_Behaviours_7-9; Risk_Behaviours_5 and _6 were asked at W5 only."),
     dict(key="icd_depression", instrument="ICD-11 depression symptom items",
          stems=[f"Dep_ICD_{i}" for i in range(1, 10)], waves=[6],
          scale="0=Never .. 4=Every day"),
