@@ -11403,7 +11403,7 @@ Considere P a quantidade anual de produtos fabricados
 no ano t de funcionamento da indústria.
 Se a estimativa for alcançada, qual é a expressão que 
 determina o número de unidades produzidas P em função 
-de t, para t ≥1?","E","P(t) = 0,5 · t −^1 + 8 000",0,NA,NA,NA,NA,"Portuguese","A"
+de t, para t ≥1?","E","P(t) = 0,5 · t^−1 + 8 000",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2015_1mil_mt","enem_2015_1mil_mt_1",27281,"ENEM 2015 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -11538,7 +11538,7 @@ Considere P a quantidade anual de produtos fabricados
 no ano t de funcionamento da indústria.
 Se a estimativa for alcançada, qual é a expressão que 
 determina o número de unidades produzidas P em função 
-de t, para t ≥1?","E","P(t) = 50 · t −^1 + 8 000",0,NA,NA,NA,NA,"Portuguese","B"
+de t, para t ≥1?","E","P(t) = 50 · t^−1 + 8 000",0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2015_1mil_mt","enem_2015_1mil_mt_1",27281,"ENEM 2015 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -11673,7 +11673,7 @@ Considere P a quantidade anual de produtos fabricados
 no ano t de funcionamento da indústria.
 Se a estimativa for alcançada, qual é a expressão que 
 determina o número de unidades produzidas P em função 
-de t, para t ≥1?","E","P(t) = 4 000 · t −^1 + 8 000",0,NA,NA,NA,NA,"Portuguese","C"
+de t, para t ≥1?","E","P(t) = 4 000 · t^−1 + 8 000",0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2015_1mil_mt","enem_2015_1mil_mt_1",27281,"ENEM 2015 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -11808,7 +11808,7 @@ Considere P a quantidade anual de produtos fabricados
 no ano t de funcionamento da indústria.
 Se a estimativa for alcançada, qual é a expressão que 
 determina o número de unidades produzidas P em função 
-de t, para t ≥1?","E","P(t) = 8 000 · (0,5) t − 1",0,NA,NA,NA,NA,"Portuguese","D"
+de t, para t ≥1?","E","P(t) = 8 000 · (0,5)^(t−1)",0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2015_1mil_mt","enem_2015_1mil_mt_1",27281,"ENEM 2015 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -11943,7 +11943,7 @@ Considere P a quantidade anual de produtos fabricados
 no ano t de funcionamento da indústria.
 Se a estimativa for alcançada, qual é a expressão que 
 determina o número de unidades produzidas P em função 
-de t, para t ≥1?","E","P(t) = 8 000 · (1,5) t − 1",1,NA,NA,NA,NA,"Portuguese","E"
+de t, para t ≥1?","E","P(t) = 8 000 · (1,5)^(t−1)",1,NA,NA,NA,NA,"Portuguese","E"
 "enem_2015_1mil_mt","enem_2015_1mil_mt_1",40487,"ENEM 2015 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS

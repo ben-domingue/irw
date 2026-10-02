@@ -3675,7 +3675,7 @@ processo de produção de etanol utilizando milho como
 matéria-prima.
 Levedura
 Milho
-CO 2
+CO_2
 Etanol
 ÁguaHidrólise Ferm ent ação
 A etapa de hidrólise na produção de etanol a partir do 
@@ -3724,7 +3724,7 @@ processo de produção de etanol utilizando milho como
 matéria-prima.
 Levedura
 Milho
-CO 2
+CO_2
 Etanol
 ÁguaHidrólise Ferm ent ação
 A etapa de hidrólise na produção de etanol a partir do 
@@ -3773,7 +3773,7 @@ processo de produção de etanol utilizando milho como
 matéria-prima.
 Levedura
 Milho
-CO 2
+CO_2
 Etanol
 ÁguaHidrólise Ferm ent ação
 A etapa de hidrólise na produção de etanol a partir do 
@@ -3822,7 +3822,7 @@ processo de produção de etanol utilizando milho como
 matéria-prima.
 Levedura
 Milho
-CO 2
+CO_2
 Etanol
 ÁguaHidrólise Ferm ent ação
 A etapa de hidrólise na produção de etanol a partir do 
@@ -3872,7 +3872,7 @@ processo de produção de etanol utilizando milho como
 matéria-prima.
 Levedura
 Milho
-CO 2
+CO_2
 Etanol
 ÁguaHidrólise Ferm ent ação
 A etapa de hidrólise na produção de etanol a partir do 
@@ -8901,8 +8901,8 @@ Em sistemas bioeletroquímicos, os potenciais
 padrão ( E°’) apresentam valores característicos.
 Para as biocélulas de acetato, considere as seguintes 
 semirreações de redução e seus respectivos potenciais:
-2 CO_2 + 7 H^+ + 8 e^− →CH_3COO− + 2 H2O E°’ = −0,3 V
-O2 + 4 H^+ + 4 e^− → 2 H2O E°’ = 0,8 V
+2 CO2 + 7 H^+ + 8 e^− →CH_3COO− + 2 H2O E°’ = −0,3 V
+O_2 + 4 H^+ + 4 e^− → 2 H2O E°’ = 0,8 V
 SCOTT, K.; YU, E. H. Microbial electrochemical and fuel cells: fundamentals and 
 applications. Woodhead Publishing Series in Energy, n. 88, 2016 (adaptado).
 Nessas condições, qual é o número mínimo de biocélulas 
@@ -8964,8 +8964,8 @@ Em sistemas bioeletroquímicos, os potenciais
 padrão ( E°’) apresentam valores característicos.
 Para as biocélulas de acetato, considere as seguintes 
 semirreações de redução e seus respectivos potenciais:
-2 CO_2 + 7 H^+ + 8 e^− →CH_3COO− + 2 H2O E°’ = −0,3 V
-O2 + 4 H^+ + 4 e^− → 2 H2O E°’ = 0,8 V
+2 CO2 + 7 H^+ + 8 e^− →CH_3COO− + 2 H2O E°’ = −0,3 V
+O_2 + 4 H^+ + 4 e^− → 2 H2O E°’ = 0,8 V
 SCOTT, K.; YU, E. H. Microbial electrochemical and fuel cells: fundamentals and 
 applications. Woodhead Publishing Series in Energy, n. 88, 2016 (adaptado).
 Nessas condições, qual é o número mínimo de biocélulas 
@@ -9027,8 +9027,8 @@ Em sistemas bioeletroquímicos, os potenciais
 padrão ( E°’) apresentam valores característicos.
 Para as biocélulas de acetato, considere as seguintes 
 semirreações de redução e seus respectivos potenciais:
-2 CO_2 + 7 H^+ + 8 e^− →CH_3COO− + 2 H2O E°’ = −0,3 V
-O2 + 4 H^+ + 4 e^− → 2 H2O E°’ = 0,8 V
+2 CO2 + 7 H^+ + 8 e^− →CH_3COO− + 2 H2O E°’ = −0,3 V
+O_2 + 4 H^+ + 4 e^− → 2 H2O E°’ = 0,8 V
 SCOTT, K.; YU, E. H. Microbial electrochemical and fuel cells: fundamentals and 
 applications. Woodhead Publishing Series in Energy, n. 88, 2016 (adaptado).
 Nessas condições, qual é o número mínimo de biocélulas 
@@ -9090,8 +9090,8 @@ Em sistemas bioeletroquímicos, os potenciais
 padrão ( E°’) apresentam valores característicos.
 Para as biocélulas de acetato, considere as seguintes 
 semirreações de redução e seus respectivos potenciais:
-2 CO_2 + 7 H^+ + 8 e^− →CH_3COO− + 2 H2O E°’ = −0,3 V
-O2 + 4 H^+ + 4 e^− → 2 H2O E°’ = 0,8 V
+2 CO2 + 7 H^+ + 8 e^− →CH_3COO− + 2 H2O E°’ = −0,3 V
+O_2 + 4 H^+ + 4 e^− → 2 H2O E°’ = 0,8 V
 SCOTT, K.; YU, E. H. Microbial electrochemical and fuel cells: fundamentals and 
 applications. Woodhead Publishing Series in Energy, n. 88, 2016 (adaptado).
 Nessas condições, qual é o número mínimo de biocélulas 
@@ -9153,8 +9153,8 @@ Em sistemas bioeletroquímicos, os potenciais
 padrão ( E°’) apresentam valores característicos.
 Para as biocélulas de acetato, considere as seguintes 
 semirreações de redução e seus respectivos potenciais:
-2 CO_2 + 7 H^+ + 8 e^− →CH_3COO− + 2 H2O E°’ = −0,3 V
-O2 + 4 H^+ + 4 e^− → 2 H2O E°’ = 0,8 V
+2 CO2 + 7 H^+ + 8 e^− →CH_3COO− + 2 H2O E°’ = −0,3 V
+O_2 + 4 H^+ + 4 e^− → 2 H2O E°’ = 0,8 V
 SCOTT, K.; YU, E. H. Microbial electrochemical and fuel cells: fundamentals and 
 applications. Woodhead Publishing Series in Energy, n. 88, 2016 (adaptado).
 Nessas condições, qual é o número mínimo de biocélulas 

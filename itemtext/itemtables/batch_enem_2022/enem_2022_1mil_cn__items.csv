@@ -3903,7 +3903,7 @@ Ensaio 6: Temperatura 35 e Resultado 3,1.
 Ensaio Temperatura (°C)
 Resultado
 Decomposição de H_2O_2 
-10 12−⎛
+10^12−⎛
 ⎝
 ⎜
 ⎞
@@ -3963,7 +3963,7 @@ Ensaio 6: Temperatura 35 e Resultado 3,1.
 Ensaio Temperatura (°C)
 Resultado
 Decomposição de H_2O_2 
-10 12−⎛
+10^12−⎛
 ⎝
 ⎜
 ⎞
@@ -4023,7 +4023,7 @@ Ensaio 6: Temperatura 35 e Resultado 3,1.
 Ensaio Temperatura (°C)
 Resultado
 Decomposição de H_2O_2 
-10 12−⎛
+10^12−⎛
 ⎝
 ⎜
 ⎞
@@ -4083,7 +4083,7 @@ Ensaio 6: Temperatura 35 e Resultado 3,1.
 Ensaio Temperatura (°C)
 Resultado
 Decomposição de H_2O_2 
-10 12−⎛
+10^12−⎛
 ⎝
 ⎜
 ⎞
@@ -4143,7 +4143,7 @@ Ensaio 6: Temperatura 35 e Resultado 3,1.
 Ensaio Temperatura (°C)
 Resultado
 Decomposição de H_2O_2 
-10 12−⎛
+10^12−⎛
 ⎝
 ⎜
 ⎞
@@ -6315,7 +6315,7 @@ Tempo: 5; massa residual 7,8.
 Tempo: 6; massa residual 7,2.
 Tempo: 8; massa residual 6,0.
 Tempo: 14; massa residual 3,6.
-Tempo (dia) Massa residual de 131I (μg)
+Tempo (dia) Massa residual de ^131I (μg)
 0 12,0
 2 10,1
 4 8,5
@@ -6373,7 +6373,7 @@ Tempo: 5; massa residual 7,8.
 Tempo: 6; massa residual 7,2.
 Tempo: 8; massa residual 6,0.
 Tempo: 14; massa residual 3,6.
-Tempo (dia) Massa residual de 131I (μg)
+Tempo (dia) Massa residual de ^131I (μg)
 0 12,0
 2 10,1
 4 8,5
@@ -6431,7 +6431,7 @@ Tempo: 5; massa residual 7,8.
 Tempo: 6; massa residual 7,2.
 Tempo: 8; massa residual 6,0.
 Tempo: 14; massa residual 3,6.
-Tempo (dia) Massa residual de 131I (μg)
+Tempo (dia) Massa residual de ^131I (μg)
 0 12,0
 2 10,1
 4 8,5
@@ -6489,7 +6489,7 @@ Tempo: 5; massa residual 7,8.
 Tempo: 6; massa residual 7,2.
 Tempo: 8; massa residual 6,0.
 Tempo: 14; massa residual 3,6.
-Tempo (dia) Massa residual de 131I (μg)
+Tempo (dia) Massa residual de ^131I (μg)
 0 12,0
 2 10,1
 4 8,5
@@ -6547,7 +6547,7 @@ Tempo: 5; massa residual 7,8.
 Tempo: 6; massa residual 7,2.
 Tempo: 8; massa residual 6,0.
 Tempo: 14; massa residual 3,6.
-Tempo (dia) Massa residual de 131I (μg)
+Tempo (dia) Massa residual de ^131I (μg)
 0 12,0
 2 10,1
 4 8,5

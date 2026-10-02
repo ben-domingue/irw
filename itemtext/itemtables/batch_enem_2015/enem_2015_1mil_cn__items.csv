@@ -1889,7 +1889,7 @@ onda. A parte refratada do feixe 3  incide na interface
 O observador indicado enxergará aquela região do filme 
 com coloração equivalente à do comprimento de onda 
 que sofre interferência completamente construtiva entre 
-os raios 2  e 5 , mas essa condição só é possível para 
+os raios_2  e_5 , mas essa condição só é possível para 
 uma espessura mínima da película. Considere que o 
 caminho percorrido em 3  e 4  corresponde ao dobro da 
 espessura E da película de óleo.
@@ -1960,7 +1960,7 @@ onda. A parte refratada do feixe 3  incide na interface
 O observador indicado enxergará aquela região do filme 
 com coloração equivalente à do comprimento de onda 
 que sofre interferência completamente construtiva entre 
-os raios 2  e 5 , mas essa condição só é possível para 
+os raios_2  e_5 , mas essa condição só é possível para 
 uma espessura mínima da película. Considere que o 
 caminho percorrido em 3  e 4  corresponde ao dobro da 
 espessura E da película de óleo.
@@ -2031,7 +2031,7 @@ onda. A parte refratada do feixe 3  incide na interface
 O observador indicado enxergará aquela região do filme 
 com coloração equivalente à do comprimento de onda 
 que sofre interferência completamente construtiva entre 
-os raios 2  e 5 , mas essa condição só é possível para 
+os raios_2  e_5 , mas essa condição só é possível para 
 uma espessura mínima da película. Considere que o 
 caminho percorrido em 3  e 4  corresponde ao dobro da 
 espessura E da película de óleo.
@@ -2102,7 +2102,7 @@ onda. A parte refratada do feixe 3  incide na interface
 O observador indicado enxergará aquela região do filme 
 com coloração equivalente à do comprimento de onda 
 que sofre interferência completamente construtiva entre 
-os raios 2  e 5 , mas essa condição só é possível para 
+os raios_2  e_5 , mas essa condição só é possível para 
 uma espessura mínima da película. Considere que o 
 caminho percorrido em 3  e 4  corresponde ao dobro da 
 espessura E da película de óleo.
@@ -2171,7 +2171,7 @@ onda. A parte refratada do feixe 3  incide na interface
 O observador indicado enxergará aquela região do filme 
 com coloração equivalente à do comprimento de onda 
 que sofre interferência completamente construtiva entre 
-os raios 2  e 5 , mas essa condição só é possível para 
+os raios_2  e_5 , mas essa condição só é possível para 
 uma espessura mínima da película. Considere que o 
 caminho percorrido em 3  e 4  corresponde ao dobro da 
 espessura E da película de óleo.
@@ -7335,7 +7335,7 @@ reduz neutros e neutrinos, e abana-se com o leque da
 reação em cadeia
 ANDRADE, C. D. Poesia completa e prosa. Rio de Janeiro: Aguilar, 1973 (fragmento).
 Nesse fragmento de poema, o autor refere-se à bomba 
-atômica de urânio. Essa reação é dita “em cadeia” porque na","C","fissão do 235U ocorre liberação de grande quantidade 
+atômica de urânio. Essa reação é dita “em cadeia” porque na","C","fissão do ^235U ocorre liberação de grande quantidade 
 de calor, que dá continuidade à reação.",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2015_1mil_cn","enem_2015_1mil_cn_1",54393,"ENEM 2015 - CN","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE CIÊNCIAS HUMANAS E SUAS TECNOLOGIAS
@@ -7381,9 +7381,9 @@ reduz neutros e neutrinos, e abana-se com o leque da
 reação em cadeia
 ANDRADE, C. D. Poesia completa e prosa. Rio de Janeiro: Aguilar, 1973 (fragmento).
 Nesse fragmento de poema, o autor refere-se à bomba 
-atômica de urânio. Essa reação é dita “em cadeia” porque na","C","fissão de 235U ocorre liberação de energia, que vai 
-desintegrando o isótopo 238U, enriquecendo-o em 
-mais 235U.",0,NA,NA,NA,NA,"Portuguese","B"
+atômica de urânio. Essa reação é dita “em cadeia” porque na","C","fissão de ^235U ocorre liberação de energia, que vai 
+desintegrando o isótopo ^238U, enriquecendo-o em 
+mais ^235U.",0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2015_1mil_cn","enem_2015_1mil_cn_1",54393,"ENEM 2015 - CN","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE CIÊNCIAS HUMANAS E SUAS TECNOLOGIAS
 PROVA DE CIÊNCIAS DA NATUREZA E SUAS TECNOLOGIAS
@@ -7428,7 +7428,7 @@ reduz neutros e neutrinos, e abana-se com o leque da
 reação em cadeia
 ANDRADE, C. D. Poesia completa e prosa. Rio de Janeiro: Aguilar, 1973 (fragmento).
 Nesse fragmento de poema, o autor refere-se à bomba 
-atômica de urânio. Essa reação é dita “em cadeia” porque na","C","fissão do 235U ocorre uma liberação de nêutrons, que 
+atômica de urânio. Essa reação é dita “em cadeia” porque na","C","fissão do ^235U ocorre uma liberação de nêutrons, que 
 bombardearão outros núcleos.",1,NA,NA,NA,NA,"Portuguese","C"
 "enem_2015_1mil_cn","enem_2015_1mil_cn_1",54393,"ENEM 2015 - CN","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE CIÊNCIAS HUMANAS E SUAS TECNOLOGIAS
@@ -7474,7 +7474,7 @@ reduz neutros e neutrinos, e abana-se com o leque da
 reação em cadeia
 ANDRADE, C. D. Poesia completa e prosa. Rio de Janeiro: Aguilar, 1973 (fragmento).
 Nesse fragmento de poema, o autor refere-se à bomba 
-atômica de urânio. Essa reação é dita “em cadeia” porque na","C","fusão do 235U com 238U ocorre formação de neutrino, 
+atômica de urânio. Essa reação é dita “em cadeia” porque na","C","fusão do ^235U com ^238U ocorre formação de neutrino, 
 que bombardeará outros núcleos radioativos.",0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2015_1mil_cn","enem_2015_1mil_cn_1",54393,"ENEM 2015 - CN","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE CIÊNCIAS HUMANAS E SUAS TECNOLOGIAS
@@ -7520,7 +7520,7 @@ reduz neutros e neutrinos, e abana-se com o leque da
 reação em cadeia
 ANDRADE, C. D. Poesia completa e prosa. Rio de Janeiro: Aguilar, 1973 (fragmento).
 Nesse fragmento de poema, o autor refere-se à bomba 
-atômica de urânio. Essa reação é dita “em cadeia” porque na","C","fusão do 235U com 238U ocorre formação de 
+atômica de urânio. Essa reação é dita “em cadeia” porque na","C","fusão do ^235U com ^238U ocorre formação de 
 outros elementos radioativos mais pesados, que 
 desencadeiam novos processos de fusão.",0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2015_1mil_cn","enem_2015_1mil_cn_1",28572,"ENEM 2015 - CN","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
