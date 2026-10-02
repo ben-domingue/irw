@@ -16788,3 +16788,9 @@ confirm what shipped, so no table changed shape:
 
 `delacruzvaldiviano_2024_djgls`: Ben says keep the unlabelled 1/2
 `cov_sex`/`cov_residence` codes as they are.
+Further rulings from ben-domingue the same day:
+- `kalani_2026_uwes` ships as stored, with no permitted set.
+- `summart_2025_whoqol_bref` drops both identical columns (q14, q25).
+- `neivasantos_2026_*` waves stay as they are.
+- **Any table with PII is skipped.** The LEQ-CI skip stands; there is no
+  "ship without the free-text column" exception.
