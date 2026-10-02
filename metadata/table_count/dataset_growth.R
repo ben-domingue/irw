@@ -1,15 +1,23 @@
-## Pull timestamped table counts across every version of the 6 core IRW
-## datasets on Redivis, for plotting growth over time.
+## Pull timestamped table counts across every version of the IRW datasets on
+## Redivis -- the core warehouses, the competitions/nominal/simsyn shards, and
+## the item-text shards -- for plotting growth over time.
 ## Output: metadata/table_count/dataset_growth.csv
 
 library(redivis)
 Sys.setenv(REDIVIS_API_TOKEN = trimws(readLines("~/.redivis_api_token", n = 1)))
+source("../redivis_config.R")
 
-datasets <- c("item_response_warehouse", "item_response_warehouse_2", "item_response_warehouse_3", "item_response_warehouse_4", "item_response_warehouse_5", "item_response_warehouse_6")
+datasets <- rbind(
+  data.frame(dataset = IRW_CORE_DATASETS, group = "core"),
+  data.frame(dataset = IRW_AUX_DATASETS[c("comp", "nom", "sim")],
+             group   = c("comps", "nominal", "simsyn")),
+  data.frame(dataset = IRW_TEXT_DATASETS, group = "itemtext")
+)
 
 rows <- list()
-for (name in datasets) {
-  ds <- redivis$organization("datapages")$dataset(name, version = "latest")
+for (i in seq_len(nrow(datasets))) {
+  name <- datasets$dataset[i]
+  ds <- redivis$organization(IRW_OWNER)$dataset(name, version = "latest")
   versions <- ds$list_versions()
   for (v in versions) {
     p <- v$properties
@@ -22,6 +30,7 @@ for (name in datasets) {
     ## when each version was actually created and is used here instead.
     rows[[length(rows) + 1]] <- data.frame(
       dataset      = name,
+      group        = datasets$group[i],
       tag          = p$tag,
       is_released  = isTRUE(p$isReleased),
       created_at   = as.POSIXct(p$createdAt / 1000, origin = "1970-01-01", tz = "UTC"),
