@@ -5,19 +5,13 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
 ## From the 2026-10-02 human_review re-check batch 1 (9 pilot datasets)
 
-- [ ] **22 tables need uploading** from the worktree, not the main checkout:
-  `/home/ben/irw-wt/hr-recheck-batch1/automated_finding/irw_output/` (all 22
-  files in it). Dictionary and tag rows are already on main.
-- [ ] **MHLS item text ready to upload** once `alqerem_2024_mhls` is live:
-  `/home/ben/irw-wt/hr-recheck-batch1/automated_finding/itemtext_output/alqerem_2024_mhls__items.csv`
-  (`red_up` sends it to `irw_text`). Provenance and NOT_NEEDED mapping rows
-  are in; `irw-validate` and `check_provenance.R` pass.
-- [ ] **Name the anonymous GAS deposit (Ben).** `usc_2026_{gasa,phq9,wellbeing,relsat}`
-  is named after the collecting institution (Univ. of Santiago de Compostela)
-  because Zenodo 19811259 lists no authors. Keep, or rename before upload.
-- [ ] **Confirm the MTS response range when the paper is readable.**
-  `guzmanmuzante_2025_mts` ships observed 1-5 with no permitted set; the
-  original MTS is 7-point, and the BMC Psychology paper was behind a bot wall.
+- [x] **22 tables + 1 item text table uploaded** (ben-domingue, confirmed
+  2026-10-02): the batch-1 `irw_output/` set, then
+  `alqerem_2024_mhls__items.csv` (to text_3). GAS naming (`usc_2026_*`) kept;
+  the MTS 1-5 range confirmed from the paper.
+- [ ] **Next step of the re-check, when wanted:** the next ~25 of the 256
+  shape-qualified `resp_scale_mixed` rows in pool (b); scaling order in
+  BATCH_LOG 2026-10-02.
 
 ## From the 2026-09-29 JPSP 131(4) batch (Lu 2026 + Zhang 2026)
 

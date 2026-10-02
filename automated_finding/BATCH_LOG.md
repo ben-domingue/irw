@@ -16612,3 +16612,19 @@ Item text:
   responsibility/patience (Turkish anchors only, in sor/sab value labels;
   stems in the published scales); Kayir (only the ai_use block is
   value-labelled; stems in the published instruments).
+
+## 2026-10-02c — re-check batch 1 stamped uploaded
+
+ben-domingue confirmed that all 22 batch-1 tables and
+`alqerem_2024_mhls__items.csv` (to text_3) are uploaded. `uploaded=2026-10-02`
+is stamped in `itemtext_provenance.csv` and `mapping_verification.csv`.
+`usc_2026_*` is kept as the name for the anonymous GAS deposit.
+
+The MTS paper (BMC Psychology, 10.1186/s40359-026-05372-x) was read from a PDF
+Ben supplied. It documents the MTS as 11 items on a 5-point Likert scale and
+the GSE as 10 items on a 4-point scale. So the shipped
+`guzmanmuzante_2025_mts` 1-5 is confirmed, and both documented sets are now
+asserted in `data/guzmanmuzante_2025_mts.py`; the output is unchanged. Lead,
+not built: the paper's Table 3 prints all 11 Spanish MTS items as
+administered (CC BY 4.0). That is a paper_order mapping to `MTS_k`, so it needs
+a `verify_<table>.R`.
