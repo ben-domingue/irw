@@ -78,14 +78,15 @@ socket.getaddrinfo = lambda *a, **k: [r for r in _gai(*a, **k) if r[0] == socket
 
 CODEBOOK = re.compile(
     r"code[\s_-]?book|data[\s_-]?dictionar|dictionar(y|ies)\b|_dictionary|"
-    r"^variables?[\s_.-]|variable[\s_-]?(list|label|description|key|guide)s?|data[\s_-]?key|\bddi\b|"
+    r"^variables?\.(xlsx?|csv|txt|pdf|docx?|md|rtf)$|variable[\s_-]?(list|label|description|key|guide)s?|data[\s_-]?key|\bddi\b|"
     r"libro[\s_-]?de[\s_-]?c[oó]digos|diccionario|livro[\s_-]?de[\s_-]?c[oó]digos|"
     r"dicion[aá]rio|codificaci[oó]n|code[\s_-]?sheet|coding[\s_-]?(scheme|manual|key)",
     re.I,
 )
 README = re.compile(r"read[\s_-]?me|l[eé]ame", re.I)
-##A file named `codebook.R` is the code that writes one, not the codebook.
-CODE_EXT = re.compile(r"\.(r|py|do|sps|sas|jl|m|ipynb)$", re.I)
+##A file named `codebook.R` is the code that writes one, not the codebook; an
+##.Rdata/.rds file is data, whatever it is called.
+CODE_EXT = re.compile(r"\.(r|py|do|sps|sas|jl|m|ipynb|rdata|rds)$", re.I)
 
 HOST_PACE = {"osf": 2.5, "dataverse": 0.5, "figshare": 0.5, "figshare_collection": 0.5, "zenodo": 0.7, "mendeley": 0.7, "doi": 0.5}
 _last_call: Dict[str, float] = {}
