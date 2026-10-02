@@ -16761,3 +16761,168 @@ Item text:
 
 No uploads, no discovery. `search_terms_log.csv`, `repo_triage_seen_keys.csv`
 and `human_review/` were not touched.
+
+## 2026-10-02g — human_review re-check batch 3: 25 rows, 19 shipped, 64 tables, 1,313,685 responses
+
+The next 25 rows of the `resp_scale_mixed` bucket of pool (b), judged by hand.
+Worktree `/home/ben/irw-wt/hr-recheck-batch3` (branch
+`ben-domingue/hr-recheck-batch3`), so the outputs are in **that worktree's**
+`automated_finding/irw_output/` and `itemtext_output/`. Record:
+`leads/human_review_recheck_batch3_2026-10-02.csv` (25 picks + 20 selection
+skips).
+
+**Selection.** Same filters as batch 2 (`resp_scale_mixed`; licence exactly
+cc0/cc-by/cc-by-sa; 100 <= N <= 50,000; 8 <= items <= 700; DOI and repo-record
+id not in `../data/`, `dictionary_auto.csv` or `../metadata/biblio.csv`;
+de-duplicated on DOI), minus every DOI in the pilot and batch-2 leads files.
+That leaves **209 rows**, as the brief expected: zenodo_backlog 105,
+repo_tierB 67, zenodo 22, repo 9, repo_nonlatin 6. The 25 picks are
+named-instrument validation/psychometric deposits: repo_tierB 9,
+zenodo_backlog 8, zenodo 4, repo 3, repo_nonlatin 1. Twenty rows were skipped
+at selection and are in the leads file with the reason: Eurobarometer, ESS,
+ISSP and a PIRLS-style database file (census-scale); eight ENCOVID-19 monthly
+household waves; the three "Socio-political attitudes in <country> (2023)"
+files; the three overlapping death-anxiety/quality-of-life-in-cancer deposits;
+the circadian-typology pair. About 164 rows remain.
+
+**Re-triage.** `irw_batch_updated.py runs/hr_b3_candidates_2026-10-02.csv
+--ignore-seen-keys`, then `irw_retriage_ha.py --no-archive`. Not quite the
+expected all-`recoverable_format`: 22 came back `human_assistance` ->
+`recoverable_format`, **2 now triage `good` outright** (Mendeley CAS and
+GHQ-12 Odisha; `resp_scale_mixed` is a warning now), and PRO-CTCAE came back
+`aggregate_continuous` (>50 unique values; moot, it was skipped for PII).
+`git status` was clean afterwards, so neither `human_review/` nor
+`repo_triage_seen_keys.csv` was touched.
+
+**Hit rate: 19/25 shipped**, 64 tables, 1,313,685 responses. The other six:
+- **PII, five** (all deposit-level, blanket rule; Ben may override any — see
+  TODO):
+  - GHQ-12 Odisha (dvn/vjeeie): the GHQ file is clean, but the sibling
+    Mastersheet.xlsx has masked phone numbers, initials, villages with
+    interview dates, and free-text disease entries.
+  - Genomic security/privacy questionnaire (dvn/g2uufv): one free-text
+    "other" cell holds a personal sexual-health/illness statement.
+  - CRS-R (apmr.2024.12.009): exact assessment and lesion dates plus a
+    fractional age reconstruct each birthdate.
+  - PRO-CTCAE (zenodo 10435813): birthdates, initials, towns.
+  - DPES Italian (zenodo 4395625): two home street addresses in a free-text
+    residence field.
+- **Rejected, one:** postpartum PTSD/breastfeeding (zenodo 17391566): every
+  instrument is a total only.
+
+All 64 tables pass `run_qc` (no fail) and `irw-validate --profile upload`
+(64/64 conform), have N>=100 and >=2 items. Every script downloads its own
+file, accounts for every column, and asserts permitted values per item where a
+document gives them; where none does, the header says so. All 19 scripts were
+re-run from scratch after the forks finished and reproduced byte-identical
+output.
+
+| script | tables (items x N) | notes |
+|---|---|---|
+| `faruk_2026_rpsc.py` | rpsc 23 x 298 | 1-4 from value labels + deposit questionnaire; no paper |
+| `wu_2015_internet_addiction.py` | cias 26, bsrs5 6, mpi_neuroticism 13, mpi_lie 4 x 1,092 | PLOS One 2015; 8 duplicate rows; MPI codes shipped against the file's own labels (sums + direction + standard MPI scoring agree) |
+| `garciabacete_2023_victimization.py` | victimization 8 x 215 | the one GREI representative; Met-D codebook |
+| `sawatzky_2025_qpss.py` | mqol_e 23 x 331, qollti_f 18 x 111 (wave 1-7) | PLOS One 2025 RCT; 0-10 |
+| `suyato_2023_cbq.py` | cbq 20, democracy 19 x 340 | deposit codebook; democracy -1..2 vs 5 printed options (open question) |
+| `bekteshi_2024_eri.py` | eri_effort 6, eri_reward 11, eri_overcommitment 6 x 216 | Medicni perspektivi 2025; 3 duplicate rows |
+| `li_2024_mas.py` | mas 52 x 592 | Frontiers .s002 + sibling .s001 stacked = the paper's 592 |
+| `zhang_2019_cbfpi.py` | cbfpi_b 40 x 10,984 (2 samples, cov_study); mini_ipip 20, bfi10 10, bis_brief 8, phq9 9, gad7 7 x ~256 | PLOS One 2019; 10 repeated submissions; 999 -> NA |
+| `gopal_2021_cas.py` | cas 5 x 1,350 | the deposit CSV, not the xlsx, reproduces the Data in Brief tables |
+| `alvarezgarcia_2024_env_health.py` | sans2 5 x 307, chehk 26 x 275 (0/1), chehs 12 x 265 | Nursing Reports 2025 |
+| `domaradzka_2018_cerq_adq.py` | cerq 36 + ADQ 36/64/48/41 x 1,632 | Frontiers 2018; 286 paper-excluded kept as `cov_paper_excluded` |
+| `mutuyimana_2026_csti.py` | 10 tables x 1,208 (71-item pre-CSTI pool, CAHTQ, ITQ, ...) | PLOS One 2026; totals asserted |
+| `mairean_2023_childhood_trauma.py` | ctq 25, mpfi 30, scs_sf 12, pwb_ptcq 18, life_events 10 x 261 | no paper; value-label sets |
+| `sanchezgarcia_2025_academic_dishonesty.py` | vassip_bfi2s 30 x 174; sd4 28, moral_disengagement 8, academic_dishonesty 14 x 164 | PLOS One 2026; `_inv` copies dropped |
+| `cambaz_2023_berlin_wisdom.py` | berlin_wisdom 5 x 148 | paper paywalled, no permitted set |
+| `talayero_2023_flood.py` | flood_risk_perception 6, flood_mitigation_attitudes 15, flood_management_adequacy 2 x 406 | IJDRR paper bot-walled; ranking/allocation items dropped |
+| `wisniewski_2021_nihss.py` | nihss 15 x 225 x 3 raters | PLOS One 2021; `rater` = assessment slot |
+| `gerbig_2023_loneliness_ace.py` | ucla 20, ctq 28, who5 5 x 256 | BMJ Open 2025; colliding source IDs -> row index |
+| `mendezlopez_2023_ict_mental_health.py` | phq9, gad7, multicage_ict, gses12, cdrisc10, bfi10, soc13, rses x 391 | PRBM 2023 |
+
+New lessons:
+- **PII hides in sibling files and in dates.** Two of five skips were not free
+  text in the response file: GHQ's PII was in a second workbook of the same
+  deposit, and CRS-R's was arithmetic (assessment date x fractional age =
+  birthdate). Grep every file in a deposit, and treat exact dates beside a
+  fractional age as a birthdate.
+- **The `.xlsx` and `.csv` of one deposit can disagree.** The Mendeley CAS
+  workbook differs from its CSV on 500+ cells per item; only the CSV
+  reproduces the paper. When a deposit ships two formats, check both against
+  the paper.
+- **Re-triage is starting to recover rows on its own** (2 of 25 now `good`).
+- Four forks, two at a time, worked as intended. Writing item text from a
+  re-run script undoes `normalize_nulls`; re-run the gates after any re-run.
+
+Staged: 64 rows in `dictionary_auto.csv` (with `codebook_at_ingest.csv` rows,
+the new #2770 file) and 64 in `tags/tags_auto.csv` (CRLF -> LF). Age Range
+was derived from `cov_age` wherever usable (faruk -> Mixed; mairean's single
+17-year-old is under the 2% floor -> Adult); suyato is left blank (students, no
+age data). Language codes follow existing rows (`rum`, `alb`, `ben`, `amh, orm`,
+`eng, kin, swa`).
+
+Item text:
+- **Shipped (5 tables, all `data_labels`):**
+  - `gopal_2021_cas`: English, the deposit's Code sheet (study_materials).
+  - `garciabacete_2023_victimization`: Spanish + English, the Met-D codebook
+    PDFs (study_materials).
+  - `suyato_2023_cbq`: English, the deposit codebook xlsx (study_materials).
+  - `wu_2015_cias`, `wu_2015_bsrs5`: the .sav's English variable + value
+    labels; administered in Chinese, so `translated_substitute` with the
+    `xue_2025` public_note.
+
+  All passed normalize_nulls, `validate_items.R --resp-csv`, `audit_batch.R`,
+  `irw-validate` and `check_provenance.R`. Provenance and NOT_NEEDED mapping
+  rows are appended.
+- **Not shipped, with where the text is:**
+  - faruk RPSC: positional labels; deposit RPSC_English.pdf prints 17 of 23.
+  - wu MPI (2): English stems in variable labels, but value labels contradict
+    the codes.
+  - sawatzky MQOL-E / QOLLTI-F: full English stems in variable labels, no
+    value labels; held for a rights call.
+  - suyato democracy: codebook coding conflicts with the printed options.
+  - bekteshi ERI (3): bilingual stems in the deposit's docx, positional.
+  - li MAS: no labels; Schraw & Dennison 1994 (English), Chinese unpublished.
+  - zhang (6): no labels; S3.docx has 15 CBF-PI-15 items (paper_explicit).
+  - alvarezgarcia (3): no labels; published SANS_2 / ChEHK-Q / ChEHS-Q.
+  - domaradzka CERQ: English stems + anchors in labels, Polish administered
+    (rights call); ADQ (4): anchors only, stems in Fajkowska 2018.
+  - mutuyimana (10): codebook row only; CSTI pool in the paper's S4 File.
+  - mairean (5): block-name labels, Romanian anchors only.
+  - sanchezgarcia (4): block-name labels, no value labels; BFI-2 is a block.
+  - cambaz wisdom: no labels.
+  - talayero flood (3): English variable labels + endpoint value labels, but
+    Spanish administered and the Spanish is only in the bot-walled paper.
+  - wisniewski NIHSS: no labels; PL-NIHSS in the paper's S1 Table.
+  - gerbig (3): truncated English fragments; Afan Oromo/Amharic unpublished;
+    WHO-5 is a block.
+  - mendezlopez (8): full Spanish stems + value labels at both levels (SOC-13
+    excepted); not built for lack of English — the cheapest lead in the batch.
+
+No uploads, no discovery. `search_terms_log.csv`, `repo_triage_seen_keys.csv`
+and `human_review/` were not touched.
+
+## 2026-10-02h — re-check batch 3: item text stamped; two papers read
+
+ben-domingue confirmed the 5 batch-3 item text tables are uploaded;
+`uploaded=2026-10-02` is stamped in `itemtext_provenance.csv` and
+`mapping_verification.csv`. The 64 response tables are not yet confirmed.
+
+Ben supplied two PDFs. Neither changed an output (both re-runs byte-identical):
+- **Cambaz & Unal 2023** (wisdom): each Berlin-paradigm criterion is rated
+  1-7 (totals 7-35), so `cambaz_2023_berlin_wisdom.py` now asserts {1..7} as
+  the documented set. The second author rated all 148 responses, so the
+  shipped ratings are that rater's; `percent20` is the first author's total on
+  a one-fifth subsample.
+- **Amerigo et al. 2024 IJDRR** (flood): confirms every 1-5 format. The paper
+  calls the sample "representative" but describes non-probabilistic sex/age
+  quota sampling, so per `vocab.md` (method beats label) the three
+  `talayero_2023_*` tags drop `Representative` for `Targeted/specific`
+  (Zamora residents). The paper prints English item wording only, so the
+  administered Spanish is unpublished; the English variable labels are a
+  translated_substitute lead.
+
+## 2026-10-02i — re-check batch 3 stamped uploaded
+
+ben-domingue confirmed the 64 batch-3 response tables are uploaded (the item
+text was confirmed and stamped in 2026-10-02h). The batch is closed apart from
+the open questions and leads in `TODO.md`.

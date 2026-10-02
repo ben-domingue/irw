@@ -3,6 +3,56 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## From the 2026-10-02 human_review re-check batch 3 (25 rows, 19 shipped)
+
+- [x] **64 tables + 5 item text tables uploaded** (ben-domingue, confirmed
+  2026-10-02): the batch-3 `irw_output/` set, then the 5 `__items.csv`
+  (gopal_2021_cas, garciabacete_2023_victimization, suyato_2023_cbq,
+  wu_2015_cias, wu_2015_bsrs5). `uploaded` stamped in `itemtext_provenance.csv`
+  and `mapping_verification.csv`.
+- [ ] **Issues-page lines for `wu_2015_cias` / `wu_2015_bsrs5`**: both carry
+  the `xue_2025` public_note ("wording only in English, although administered
+  in Chinese"), which forces a callout on `itemtext_issues.qmd` (irw_site repo).
+- [ ] **PII rulings, if Ben wants to override any of the five skips** (all
+  deposit-level; default is skip):
+  - GHQ-12 Odisha (`10.7910/dvn/vjeeie`): GHQ.xlsx is clean; the sibling
+    Mastersheet.xlsx has masked phone numbers, initials, villages + interview
+    dates, free-text disease entries.
+  - Genomic security/privacy questionnaire (`10.7910/dvn/g2uufv`): one
+    free-text "other" cell with a personal sexual-health/illness statement;
+    otherwise GSPQ 73 items x 1,808.
+  - DPES Italian (`10.5281/zenodo.4395625`): two home street addresses in a
+    free-text residence field; otherwise 532 people x 4 instruments.
+  - CRS-R (`10.1016/j.apmr.2024.12.009`) and PRO-CTCAE (`10.5281/zenodo.10435813`):
+    birthdates (explicit, or reconstructable from dates + fractional age).
+- [ ] **Open questions on batch-3 tables (none blocks upload):**
+  - `wu_2015_mpi_*`: stored codes 0<1<2 shipped against the file's own value
+    labels (0=?, 1=Yes, 2=No); the file's Nscore/SDSscore sums, the paper's
+    direction and standard MPI scoring (No/?/Yes) all agree. Hold?
+  - `suyato_2023_democracy`: codebook codes -1..2, but the printed
+    questionnaire has 5 options. Hold?
+  - `wisniewski_2021_nihss`: `rater` is the assessment slot (1-3), not a
+    stable person (the file doesn't record who).
+- [ ] **The CBQ paper (10.26418/jppkn.v6i1.92523) is bot-walled** and not
+  confirmed to use these data; only worth a PDF if Ben wants it cited.
+- [ ] **Rights calls before cheap item text can ship:** CAS (Lee 2020; gopal
+  item text is built and shipping — add a register row); MQOL-E / QOLLTI-F
+  (sawatzky: full English stems in the variable labels); CERQ (domaradzka:
+  English labels, Polish administered -> translated_substitute).
+- [ ] **Item text leads from batch 3 (not built):** mendezlopez_2023 full
+  Spanish stems + value labels (PHQ-9/GAD-7/RSES are rights `ship`; needs
+  English for `_translated` or language-only shipping); CBF-PI-15 S3.docx
+  (15 of 40 cbfpi_b items, paper_explicit); CSTI 71-item pool in the paper's
+  S4 File (paper_order); bekteshi ERI bilingual stems in the deposit docx
+  (positional); PL-NIHSS in the paper's S1 Table; talayero flood (3 tables):
+  English variable labels as a translated_substitute (the paper has no
+  Spanish either), same class as wu_2015_cias.
+- [ ] **Next step of the re-check, when wanted:** batch 4, the next 25 of the
+  remaining shape-qualified `resp_scale_mixed` rows in pool (b) (about 164
+  left after batch 3's 25 picks and 20 skips; skip list in
+  `leads/human_review_recheck_batch3_2026-10-02.csv`). At most two agents at
+  a time.
+
 ## From the 2026-10-02 human_review re-check batch 2 (25 rows, 21 shipped)
 
 - [ ] **62 tables + 5 item text tables need uploading**, from the worktree
@@ -36,11 +86,6 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   tabordabarata_2024_hls_eu_q47/bsi and neivasantos_2026_bes/oeq full
   Portuguese labels at both levels (no English source); delacruzvaldiviano
   Spanish stems in the deposit's results docx.
-- [ ] **Next step of the re-check, when wanted:** batch 3, the next 25 of the
-  remaining shape-qualified `resp_scale_mixed` rows in pool (b) (about 209
-  left after batch 2's 25 picks and 10 skips; skip list in `leads/human_review_recheck_batch2_2026-10-02.csv`).
-  Run at most two agents at a time.
-
 ## From the 2026-10-02 human_review re-check batch 1 (9 pilot datasets)
 
 - [x] **22 tables + 1 item text table uploaded** (ben-domingue, confirmed
