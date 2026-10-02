@@ -4,9 +4,10 @@
 #   Stripp, T. A., Büssing, A., Wehberg, S., Andersen, H. S., et al. (2023).
 #   "Measuring Spiritual Needs in a Secular Society: Validation and
 #   Clinimetric Properties of the Danish 20-Item Spiritual Needs
-#   Questionnaire." Journal of Religion and Health. (Springer; paywalled and
-#   bot-walled, not read -- the abstract confirms N = 325 split at random
-#   into halves A and B for EFA/CFA.)
+#   Questionnaire." Journal of Religion and Health, 61, 3542-3565. (Springer
+#   bot-walls automated fetches; read 2026-10-02 from a PDF Ben supplied.)
+#   N = 325, recruited through social media and a medical-school learning
+#   platform (June 2021), split at random into halves A and B for EFA/CFA.
 #   Deposit: Stripp, T. A. (2021). "Dataset used for validation of the Danish
 #   20-item Spiritual Needs Questionnaire." Zenodo.
 # Data: Zenodo 5524334, Dataset_full_anonymized_SpNQ+WHO5.xls (325 rows x 25
@@ -17,20 +18,21 @@
 # License: CC BY 4.0 (Zenodo record metadata).
 #
 # Item text: not shipped. The .xls has no label levels at all (plain
-#   headers n2..n27, w5_1..w5_5; no value labels). The Danish SpNQ wording
-#   was promised for a later Zenodo deposit; the item numbering follows the
-#   SpNQ (spiritualneeds.net, Büssing et al. 2010). WHO-5 wording is the
-#   published Danish WHO-5.
+#   headers n2..n27, w5_1..w5_5; no value labels). Lead: the paper's
+#   Appendix 1 prints the DA-SpNQ-20 in Danish with English in italics,
+#   item by item under the same codes N2..N27, with the four anchors
+#   (Nej/No, Lille/Small, Stort/Large, Meget stort/Very large = 0-3). That
+#   is a paper_explicit mapping keyed by item number, so it needs a
+#   verify_<table>.R. WHO-5 wording is the published Danish WHO-5.
 #
 # Tables (item codes are the source column names):
 #   stripp_2021_spnq  20 items (n2 .. n27, the SpNQ's own item numbers), 0-3.
-#                     Response set from the instrument's source paper
-#                     (Büssing, Balzat & Heusser 2010, Eur J Med Res,
-#                     PMC3351996): "4-point scale ... (0 - not at all;
-#                     1 - somewhat; 2 - very; 3 - extremely)".
-#   stripp_2021_who5   5 items, 0-5. The WHO-5 Well-Being Index is a 6-point
-#                     scale, 0 = at no time .. 5 = all of the time (Topp et
-#                     al. 2015, Psychother Psychosom 84:167-176).
+#                     Response set from the paper: "4-point scale from no
+#                     need to a very strong need (0-no, 1-yes, 2-strong,
+#                     3-very strong)"; Appendix 1 anchors 0 Nej .. 3 Meget
+#                     stort. Every item was forced-response.
+#   stripp_2021_who5   5 items, 0-5. Paper: "6-point scale from 0-never to
+#                     5-all the time" (Topp et al. 2015).
 #
 # Cleaning: none needed -- no missing cells, all values whole and inside the
 #   documented sets.

@@ -16,8 +16,6 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   - `kalani_2026_uwes`: coding undocumented (UWES8 sits about a point below
     the other eight; published UWES is 0-6). Shipped as stored, no permitted
     set. Hold it?
-  - `delacruzvaldiviano_2024_djgls`: `cov_sex`/`cov_residence` are unlabelled
-    1/2 codes. Keep or drop?
   - `garciabacete_2023_loneliness` / `sun_2018_greed`: `rights_register`
     matches the codes to DJG / LBUS; both look like false positives
     (Cassidy & Asher; positional G1-G7).
@@ -25,12 +23,10 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
     undocumented.
   - `summart_2025_whoqol_bref`: q14 and q25 are identical in every row, so
     both were dropped.
-- [ ] **Papers behind bot walls, if Ben can supply them:** Sahin 2026 IJHCI
-  (10.1080/10447318.2026.2719186; sahin_2026_* have no permitted sets until
-  read), Stripp 2023 J Relig Health (10.1007/s10943-022-01533-5), Sandoz 2022
-  Psychol Trauma (10.1037/tra0001068). The greed paper was supplied and read.
 - [ ] **Item text leads from batch 2 (not built):** DGSC G1-G7 printed in
-  Liu 2019 Table 1 (paper_explicit, needs verify); bertani_2024_afccq English
+  Liu 2019 Table 1 (paper_explicit, needs verify); PMAS items 1-10 in
+  Sahin 2026 Table 2 (Turkish + back-translation); DA-SpNQ-20 Danish +
+  English in Stripp 2022 Appendix 1, keyed N2..N27 like the data; bertani_2024_afccq English
   variable labels (Italian administered; AFCCQ-IT in the paper's supplement);
   sandoz_2021_cbts/pcl5/epds French stems in the deposit codebook;
   tabordabarata_2024_hls_eu_q47/bsi and neivasantos_2026_bes/oeq full

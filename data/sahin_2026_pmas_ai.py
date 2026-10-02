@@ -4,8 +4,8 @@
 #   Sahin, M., Gultekin, M. H., Erdogdu, F., & Cesur, S. (2026).
 #   "Psychometric Evaluation of the Turkish Version of the Perceived Moral
 #   Agency Scale for Artificial Intelligence." International Journal of
-#   Human-Computer Interaction. (Paper not read: tandfonline serves a bot
-#   wall; Unpaywall lists only this Zenodo deposit as its OA copy.)
+#   Human-Computer Interaction. (tandfonline bot-walls automated fetches;
+#   read 2026-10-02 from a PDF Ben supplied.)
 #   Deposit: Sahin, M., Gultekin, M. H., Erdogdu, F., & sevim (2026). Zenodo.
 # Data: Zenodo 21236702 -- Study1.sav (203 rows x 98 columns), study2.sav
 #       (480 x 14), test_retest_data.sav (52 x 28). Turkish adults.
@@ -16,38 +16,52 @@
 #   construct ("morality", "dependency", "social desirability",
 #   "satisfaction", "negative_attitude", "positive_attitude",
 #   "mindattribution", "conspiracy"); no value labels on any item (only on
-#   gender/education/income). Item stems are in the paper (bot-walled) and
-#   the published instruments (PMAS: Banks 2019, Computers in Human Behavior).
+#   gender/education/income). Lead: the paper's Table 2 prints all ten PMAS
+#   items, Turkish as administered with an English back-translation, as
+#   Items 1-10 (= m1-m6, d1-d4); a paper_explicit mapping, so it needs a
+#   verify_<table>.R. The other scales' stems are in their published
+#   Turkish adaptations.
 #
-# Tables. Scale identities come from the variable labels and the deposit
-# title only; the paper could not be read, so NO permitted-value set is
-# asserted for any table (values are checked to be whole numbers only), and
-# the observed ranges below are observations, not documentation.
+# Tables. Scale identities and response formats are from the paper
+# (sections 5.1.2, 6), and the script asserts each documented set per item:
 #   sahin_2026_pmas                10 items  Perceived Moral Agency Scale for
 #                                  AI, Turkish: m1-m6 morality, d1-d4
 #                                  dependency. Study 1 and Study 2 merged
 #                                  (cov_study). Study 1's morality1-6 ->
 #                                  m1-m6 and dependency7-10 -> d1-d4 (same
 #                                  order; Study 2's own names kept as codes).
-#                                  Observed 1-7. morality_altboyut and
+#                                  1-7 (strongly disagree .. strongly agree;
+#                                  Banks 2019). morality_altboyut and
 #                                  dependency_altboyut equal the Study 1
 #                                  block sums (asserted).
-#   sahin_2026_social_desirability 13 items (begenirlik1-13), observed 1/2
-#                                  (13 binary items, consistent with a
-#                                  Marlowe-Crowne short form; unverified).
-#   sahin_2026_life_satisfaction    5 items (doyum1-5), observed 1-5.
+#   sahin_2026_social_desirability 13 items (begenirlik1-13): Marlowe-Crowne
+#                                  Social Desirability Scale short form
+#                                  (Reynolds 1982; Turkish, Akin Arikan et
+#                                  al. 2021), true-false. Stored as 1/2;
+#                                  which code is "true" is undocumented.
+#   sahin_2026_life_satisfaction    5 items (doyum1-5): Satisfaction With
+#                                  Life Scale (Diener et al. 1985; Turkish,
+#                                  Dagli & Baysal 2016), administered 1-5
+#                                  (not the original 7-point).
 #   sahin_2026_ai_attitudes        12 items: olumsuz1-7 (negative attitude)
 #                                  and olumlu1-5 (positive attitude) toward
-#                                  AI, observed 1-5; no reverse-coded copies.
+#                                  AI (Durndell & Haag 2002; Turkish, Cakan &
+#                                  Akin 2024), 1-5; no reverse-coded copies.
 #   sahin_2026_mind_attribution    17 items (isitme .. secimyapma: hearing,
 #                                  planning, reasoning, thinking, aggression,
 #                                  hostility, seeing, pleasure, fear,
 #                                  happiness, anger, imagining, wanting,
-#                                  needing, desiring, intending, choosing),
-#                                  observed 1-7. Codes are the source names
+#                                  needing, desiring, intending, choosing):
+#                                  Loughnan et al. (2010) mind attribution,
+#                                  Turkish (Yucel et al. 2024), with bodily
+#                                  items dropped and aggression/hostility
+#                                  added by the authors; 1-7 (definitely does
+#                                  not experience .. definitely experiences). Codes are the source names
 #                                  transliterated to ASCII (akilyurutme,
 #                                  saldirganlik, gorme, ofke), reversibly.
-#   sahin_2026_conspiracy          23 items (komplo1-23), observed 1-5; the
+#   sahin_2026_conspiracy          23 items (komplo1-23): Generic
+#                                  Conspiracist Beliefs Scale (Brotherton et
+#                                  al. 2013; Turkish, Tam 2023), 1-5; the
 #                                  file's four subscale scores (hidden
 #                                  powers, widespread, extraterrestrial,
 #                                  government abuses) are 6/4/6/7 items.
@@ -58,7 +72,8 @@
 #   - Each of Study1.sav and study2.sav contains one pair of adjacent rows
 #     identical on every column (Study 1 rows 35/36 over all 98 columns;
 #     Study 2 rows 110/111). Treated as double entries: the second copy is
-#     dropped (Study 1 -> 202 people, Study 2 -> 479).
+#     dropped (Study 1 -> 202 people, Study 2 -> 479). The paper analyses
+#     203 and 480, so it counted both copies.
 #   - Study 1 and Study 2 share no (age + PMAS vector), so they are separate
 #     samples.
 #   - No fractional, sentinel or out-of-range cells; blocks that a Study 1
@@ -66,10 +81,12 @@
 #     melt.
 #
 # Dropped:
-#   - test_retest_data.sav: 50 of its 52 time-1 (age + PMAS) vectors occur in
-#     study2.sav, so it is a re-administered subset of Study 2, not a new
-#     sample; it carries no id to link a second wave, and it is N=52 alone.
-#   - antropomorfizm: a single undocumented 0-4 item.
+#   - test_retest_data.sav: the paper's 10-day retest of 52 Study 2
+#     participants. 50 of its 52 time-1 (age + PMAS) vectors occur in
+#     study2.sav; it carries no id to link the second wave, so it is not
+#     shipped as wave 2.
+#   - antropomorfizm: a single item ("To what extent is artificial
+#     intelligence human-like?"); single-item tables are not shipped.
 #   - Composites: morality_altboyut, dependency_altboyut, begenirlik_toplam,
 #     tutum_toplam, olumlututum_toplam, olumsuztutum_toplam, doyum_toplam,
 #     gg_komplo, yk_komplo, ddv_komplo, hs_komplo, komplo_toplam,
@@ -135,6 +152,15 @@ S1_COVS = {"yas_age": "cov_age", "cinsiyet_gender": "cov_gender",
            "egitim_educatıon": "cov_education", "gelir_ıncome": "cov_income"}
 S2_COVS = {"age": "cov_age", "gender": "cov_gender", "edu": "cov_education",
            "ıncome": "cov_income"}
+LIKERT7, LIKERT5 = set(range(1, 8)), set(range(1, 6))
+DOCUMENTED = {  # paper sections 5.1.2.2-5.1.2.8
+    "sahin_2026_pmas": LIKERT7,
+    "sahin_2026_social_desirability": {1, 2},
+    "sahin_2026_life_satisfaction": LIKERT5,
+    "sahin_2026_ai_attitudes": LIKERT5,
+    "sahin_2026_mind_attribution": LIKERT7,
+    "sahin_2026_conspiracy": LIKERT5,
+}
 COV_COLS = ["cov_study", "cov_age", "cov_gender", "cov_education",
             "cov_income"]
 
@@ -172,12 +198,18 @@ def emit(table, d, items):
     assert not long.duplicated(["id", "item"]).any()
     assert long["id"].nunique() >= 100
     assert long["item"].nunique() == len(items) > 1
-    checks = run_qc(long)
+    allowed = DOCUMENTED[table]
+    for it, g in long.groupby("item"):
+        bad = set(g["resp"]) - allowed
+        assert not bad, (table, it, bad)
+    pv = {i: allowed for i in items}
+    checks = run_qc(long, permitted_values=pv)
     fails = [(c.name, c.detail) for c in checks if c.status == "fail"]
     assert not fails, fails
     out = OUT_DIR / f"{table}.csv"
     long.to_csv(out, index=False)
-    rep = irw_validate.validate_file(str(out), profile="upload")
+    rep = irw_validate.validate_file(str(out), profile="upload",
+                                     context={"permitted_values": pv})
     assert rep.conforms and not rep.errors, \
         [(f.check, f.message) for f in rep.errors]
     for f in rep.findings:

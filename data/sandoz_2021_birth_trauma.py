@@ -5,7 +5,8 @@
 #   Horsch, A. (2022). "Measurement and conceptualization of maternal PTSD
 #   following childbirth: Psychometric properties of the City Birth Trauma
 #   Scale - French Version (City BiTS-F)." Psychological Trauma: Theory,
-#   Research, Practice, and Policy 14(4), 696-704. (APA, paywalled; not read.)
+#   Research, Practice, and Policy 14(4), 696-704. (APA, paywalled; read
+#   2026-10-02 from a PDF Ben supplied.)
 # Data: Zenodo 4441996, Dataset_CBTS-F_mother_validation.xlsx (541 rows x 80
 #       columns; French-speaking mothers who gave birth 1-12 months earlier,
 #       online survey June-Sept 2020). The deposit's .csv is the same data
@@ -25,31 +26,33 @@
 # Tables (item codes are the source column names):
 #   sandoz_2021_cbts           24 items  City Birth Trauma Scale, French
 #                              (CBTS_M_1..CBTS_M_12, CBTS_13..CBTS_24).
-#                              Items 1-2 are the yes/no stressor questions
-#                              (coded 0/1; which code is "yes" is not
-#                              documented), items 3-24 the symptom
-#                              frequencies 0 (not at all) .. 3 (5 or more
-#                              times). Source for the format: the City BiTS
-#                              description in Vossoughi et al. 2023,
-#                              Front. Psychiatry (PMC10318432), citing Ayers
-#                              et al. 2018.
+#                              Items 1-2 are the criterion-A stressor
+#                              questions (paper: yes = 0, no = 1), items
+#                              3-24 the symptom frequencies over the past
+#                              week, 0 not at all, 1 once, 2 2-4 times,
+#                              3 5 or more times (paper, Measures).
 #   sandoz_2021_pcl5           20 items  PTSD Checklist for DSM-5, worded
 #                              about the birth, 0 (not at all) .. 4
-#                              (extremely) (same source).
+#                              (extremely) (paper).
 #   sandoz_2021_epds           10 items  Edinburgh Postnatal Depression
-#                              Scale, 0-3 (same source). Stored as scored:
+#                              Scale, 4-point Likert, 0-3 (paper). Stored
+#                              as scored:
 #                              every inter-item correlation is positive, so
 #                              the reverse-keyed items are already reflected.
 #   sandoz_2021_hads_anxiety    7 items  HADS anxiety subscale (HADS_1, 3, 5,
-#                              7, 9, 11, 13), 0-3 (Zigmond & Snaith 1983).
+#                              7, 9, 11, 13), 4-point, total 0-21 (paper;
+#                              Zigmond & Snaith 1983).
 #                              Also stored as scored (HADS_7 correlates
 #                              positively with the rest).
 #
 # Dropped:
 #   - CBTS_onset, CBTS_duration (timing categories 1-3 plus a 333 code,
 #     n = 123, for "no symptoms"), CBTS_distress, CBTS_daily_life,
-#     CBTS_substance (City BiTS items 25-29: DSM qualifiers coded 0-2 with no
-#     documented meaning, and the codes are not ordered with symptom load).
+#     CBTS_substance (City BiTS items 25-29: the DSM criterion F-H
+#     qualifiers. The paper codes onset 0 before birth / 1 within 6 months /
+#     2 after 6 months, duration by month bands, and distress, interference
+#     and physical cause as 0 yes, 1 no, 2 sometimes, so the codes are not
+#     an ordered symptom scale; the deposit's own codes differ again).
 #   - Type_parents, Birth_1mth_M_inclusion, Birth_12mth_M_inclusion
 #     (inclusion screeners, constant 1).
 #   - Marital_status_Autre (free text "other" marital status, two rows;

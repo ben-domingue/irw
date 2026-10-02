@@ -16761,3 +16761,30 @@ Item text:
 
 No uploads, no discovery. `search_terms_log.csv`, `repo_triage_seen_keys.csv`
 and `human_review/` were not touched.
+
+## 2026-10-02e — batch 2 follow-up: three papers read, one question answered
+
+ben-domingue supplied PDFs of the three bot-walled papers. All three
+confirm what shipped, so no table changed shape:
+- **Sahin 2026 (IJHCI).** Every scale identity and format is now asserted
+  per item in `data/sahin_2026_pmas_ai.py`:
+  - PMAS 1-7, attitudes 1-5, mind attribution 1-7, conspiracy 1-5.
+  - Marlowe-Crowne short form, true/false, stored 1/2.
+  - SWLS, administered 1-5.
+
+  The paper counts the two duplicated rows the script drops (203 and 480 vs
+  202 and 479). The retest file is its 10-day retest of 52 Study 2 people;
+  with no linking id it stays out. Dictionary descriptions now name the
+  instruments.
+- **Stripp 2022 (J Relig Health).** SpNQ is 0-3 (0 no .. 3 very strong) and
+  WHO-5 is 0-5, both as asserted. The sample came through social media and a
+  medical-school platform, so the tag sample is now `Educational,
+  Internet-based`. Item-text lead: Appendix 1 prints the DA-SpNQ-20 in Danish
+  and English under the data's own N-codes.
+- **Sandoz 2022 (Psychol Trauma).** City BiTS stressor items are coded
+  yes = 0, no = 1, which settles the header's open question; symptom items
+  are 0-3. PCL-5 is 0-4, EPDS and HADS-A are 4-point. Items 25-29 are
+  confirmed unordered DSM qualifiers, so they stay dropped.
+
+`delacruzvaldiviano_2024_djgls`: Ben says keep the unlabelled 1/2
+`cov_sex`/`cov_residence` codes as they are.
