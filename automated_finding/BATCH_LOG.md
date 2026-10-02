@@ -16490,3 +16490,78 @@ template still describes). This write-up is the durable record instead; the
 DOI above and the figshare DOI are re-resolvable if either needs another
 look. The raw CSVs remain on disk only in this session's `runs/` (gitignored,
 disposable) and will not survive the container.
+
+## 2026-10-02 — human_review re-check pilot: 10 `resp_scale_mixed` rows, 9 shippable
+
+The question was whether today's pipeline recovers datasets that older rules
+parked in `human_review/`. This was a 10-row pilot, run before any scaling.
+Record: `leads/human_review_recheck_pilot_2026-10-02.csv` (status `unworked`
+for the 9 shippable, `rejected_content` for 1).
+
+**Selection.** Pool (b) is the 1,073 rows in `human_review/human_review_*.csv`.
+Rows were filtered to reasons containing `resp_scale_mixed`, a cc0/cc-by
+licence and recorded N>=100. DOIs already in `../data/`, `dictionary_auto.csv`
+or `metadata/biblio.csv` were removed, and repeated DOIs were de-duplicated.
+That leaves 437 rows, 256 of them in the 8-700 item / 100-50,000 N shape
+window. Ten validation-study deposits were then picked by hand: 7 Zenodo,
+2 Harvard Dataverse, 1 Scholars Portal.
+
+**Re-triage.** `irw_batch_updated.py runs/hr_recheck_pilot_candidates_2026-10-02.csv
+--ignore-seen-keys` was run without `--retriage`, and then
+`irw_retriage_ha.py --no-archive` by hand. This deviates from the plain
+`--retriage` chain on purpose: `--retriage` would have appended `human_review`
+rows to `human_review/`, which this pilot must not touch.
+`--ignore-seen-keys` was needed because all ten keys are already in the
+ledger, and it also leaves `repo_triage_seen_keys.csv` unwritten.
+`oversized_candidates.csv` was not touched.
+
+**Result: the pipeline does not recover these rows on its own.**
+`resp_scale_mixed` no longer fails anywhere; where it still appears, it is a
+warning. Even so, all 10 rows came back `human_assistance`, because "Column
+mapping was a low-confidence guess" in every case. Step 2b moved all 10 to
+`recoverable_format`. Its re-read was usually a *wrong* block. On GAS it
+picked the binary `*_RECOD`/ICD derived columns. On the Turkish teacher file
+it picked an 8-item usage block out of five scales. On NMQ it kept 9 of 17.
+The yield comes from opening each file by hand.
+
+**Hand verdicts: 9/10 shippable**, about 21 tables and about 676k responses.
+GAS (N=34,076) is about 545k of that. All licences were re-confirmed from the
+repository API. No PII was found; two files carry study codes or ids, to be
+replaced with the row index.
+
+| DOI | N | tables | blocker / fix |
+|---|---|---|---|
+| zenodo.2643228 (PSCI) | 103 | 1 x 65 | none; old fail was observed 1-6 vs 2-6 |
+| sp3/wm4bdu (CHLQ) | 1,035 | 1 x 32 | drop KR7_RE/KR8_RE copies; `#MISSING!` -> NA |
+| dvn/zgeddt (MTS Chile) | 200 | 2 (11, 10) | none |
+| zenodo.10781205 (MHLS Jordan) | 982 | 1 x 34 | **Q9 labelled 1-4 holds 373 sixes** -> drop Q9; English labels = cheap item text |
+| zenodo.19811259 (GASA/PHQ-9, Spain) | 34,076 | 2 (7, 9) | ignore derived binaries |
+| dvn/krwi6e (Turkish AI teacher) | 392 | 5 (8,5,7,10,8) | drop alt* reverse copies |
+| zenodo.19137231 (RSE / P-RSE, Jamaica) | 314 + 314 | 3 (10,10,7) | -99 -> NA; two samples, different instruments, so no merge |
+| zenodo.20431627 (NMQ Peru) | 1,215 | 3 (9,4,4) | totals dropped |
+| zenodo.19292962 (self-control, Turkey) | 351 | 3 (7,6,13) | 0 outside 1-4 labels -> NA; one mean-imputed fractional cell per self* item -> drop |
+| zenodo.12590363 (WAI) | 490 | — | **reject**: scale totals only, no item data |
+
+**Bucket sizes for scaling**, after the licence, already-shipped and
+DOI-de-duplication filters. Buckets are priority-ordered and each row is
+counted once.
+
+- Pool (b) `resp_scale_mixed`: 437 rows, all with N>=100; 256 shape-qualified.
+- Pool (b) item-columns ("formatting failed" / "could not identify item
+  columns"): 382 rows, **none** with a recorded N. Full triage is needed
+  before the N floor can even be applied.
+- Pool (b) `dup_id_item`: 186 rows. Only 9 have a recorded N>=100 (4
+  shape-qualified), and the median recorded N is 12. That N is the unique count
+  of whatever column triage took as `id`, so for this bucket it is
+  untrustworthy rather than small.
+- Pool (a) `googlesheet_humaneye.csv`: realigned by content, because the
+  export stacks several batch schemas, so no single column offset works. The
+  rule anchors on the four cells where n_responses ≈ N x items x density.
+  After filters: 2,303 rows. Of the no-N rows, 1,471 are item-columns and 523
+  are `dup_id_item`. Only 42 are column-shifted rows with N>=100; the
+  2026-08-25 strict cut already took the clean N>=100 rows. These counts are
+  approximate: some rows parse with no flag or licence.
+
+No `data/` scripts, uploads, dictionary or tag rows, and no edits to any
+`human_review/*.csv`. Discovery was not run. `search_terms_log.csv` and
+`runs/monthly_*2026-10-02*` were not touched.
