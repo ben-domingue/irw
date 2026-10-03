@@ -184,3 +184,12 @@ class JournalSupplementTest(unittest.TestCase):
     def test_names_count_once_whatever_their_case(self):
         self.assertEqual(fcl.names_in_text(["Education", "education", "Place"], "education and place"),
                          ["Education", "Place"])
+
+    def test_full_run_exclusions(self):
+        self.assertIsNone(fcl.caption_kind("S5 File", "Dutch guidelines for questionnaire research. (PDF)"))
+        self.assertIsNone(fcl.caption_kind("S6 Table", "List of controls and instruments used. (DOCX)"))
+        ##the dataset, whatever its labels
+        self.assertEqual(fcl.caption_kind("S2 File", "Dataset. Anonymized SPSS dataset with English "
+                                          "variable labels. (SAV)"), "data_or_results")
+        self.assertEqual(fcl.caption_kind("S1 File", "Empirical dataset and the corresponding codebook. (XLSX)"),
+                         "name_codebook")

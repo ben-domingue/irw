@@ -569,6 +569,7 @@ CAPTION_RESULTS = re.compile(r"correlat|coefficient|loading|descriptive|statisti
                              r"\balpha\b|frequenc|percentage|\bscores\b|analys[ie]s|matrix|\bfactors?\b", re.I)
 ##A qualitative coding scheme for interviews is called a codebook too, and
 ##documents no column (pilot: "Interview codebook").
+CAPTION_EXPLICIT = re.compile(r"code[\s_-]?book|dictionar|variable[\s_-]?(description|definition)s?", re.I)
 CAPTION_QUALITATIVE = re.compile(r"interview|qualitative|thematic|open[- ]ended|focus group", re.I)
 SHEET_CODEBOOK = re.compile(r"^\s*(variables?|legend|descriptions?|data description|variable description|"
                             r"key|codes|coding)\s*$", re.I)
@@ -600,11 +601,15 @@ def sheet_names(raw: bytes, ext: str) -> Optional[List[str]]:
 def caption_kind(label: str, caption: str) -> Optional[str]:
     """What the authors' own label + caption says the file is."""
     lc = f"{label} {caption}"
-    if CAPTION_CODEBOOK.search(lc):
-        return None if CAPTION_QUALITATIVE.search(lc) else "name_codebook"
+    if CAPTION_CODEBOOK.search(lc) and not CAPTION_QUALITATIVE.search(lc):
+        ##"Dataset ... with English variable labels" is the data file
+        if not (CAPTION_IS_DATA.search(lc) and not CAPTION_EXPLICIT.search(lc)):
+            return "name_codebook"
     if CAPTION_IS_DATA.search(lc) or CAPTION_RESULTS.search(lc):
         return "data_or_results"
-    if CAPTION_QUESTIONNAIRE.search(lc):
+    ##"Dutch guidelines for questionnaire research", "List of controls and
+    ##instruments used" (full run, 10-02)
+    if CAPTION_QUESTIONNAIRE.search(lc) and not re.search(r"guideline|\bcontrols\b", lc, re.I):
         return "questionnaire"
     return None
 
@@ -627,7 +632,7 @@ def wants_bytes(f: dict) -> bool:
     return ext in WORKBOOK_EXT or ext in TEXT_DOC_EXT
 
 
-def get_capped(url: str, host: str, cap: int = SUPP_CAP) -> Tuple[int, Optional[bytes]]:
+def get_capped(url: str, host: str, cap: int = SUPP_CAP, timeout: int = 180) -> Tuple[int, Optional[bytes]]:
     """get_raw with a size cap: (status, bytes), bytes None if over the cap."""
     for attempt in range(3):
         wait = HOST_PACE.get(host, 1.0) - (time.time() - _last_call.get(host, 0))
@@ -635,7 +640,7 @@ def get_capped(url: str, host: str, cap: int = SUPP_CAP) -> Tuple[int, Optional[
             time.sleep(wait)
         _last_call[host] = time.time()
         try:
-            with urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": UA}), timeout=180) as r:
+            with urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": UA}), timeout=timeout) as r:
                 b = r.read(cap + 1)
                 return r.status, (b if len(b) <= cap else None)
         except urllib.error.HTTPError as e:
@@ -730,7 +735,8 @@ def list_epmc(pmcid: str) -> dict:
                     "url": f"https://pmc.ncbi.nlm.nih.gov/articles/instance/{pmcid[3:]}/bin/{urllib.parse.quote(name)}"})
     if any(wants_bytes(f) for f in out):
         import zipfile
-        s2, raw = get_capped(f"{rest}/supplementaryFiles", "epmc", cap=4 * SUPP_CAP)
+        s2, raw = get_capped(f"{rest}/supplementaryFiles", "epmc", cap=4 * SUPP_CAP,
+                              timeout=600)   ##it builds the zip first: 230 s seen 10-02
         zf = None
         if s2 == 200 and raw:
             try:
@@ -1000,6 +1006,13 @@ def check_readmes(links: List[dict], offline: bool) -> None:
                     for n in (r["column"][4:], r.get("source_column") or "")}
             items_hit = [n for n in hit if n.lower() not in covs] \
                 if x["how_found"] == "doc_candidate" else ["n/a"]
+            ##plain words (economic, health, afraid) turn up in any text on the
+            ##topic: with fewer than README_MIN_NAMES specific names (a code,
+            ##a phrase), a document must name at least half the table's names
+            if x["how_found"] == "doc_candidate":
+                specific = [n for n in hit if re.search(r"[0-9_ ]|[a-z][A-Z]", n)]
+                if len(specific) < README_MIN_NAMES and len(hit) < max(README_MIN_NAMES, len(names) / 2):
+                    items_hit = []
             if len(hit) >= README_MIN_NAMES and items_hit:
                 x["how_found"] = ("doc_names_columns" if x["how_found"] == "doc_candidate"
                                   else "readme_names_columns")
