@@ -20,7 +20,7 @@ batch, so the build can be reproduced exactly:
 | 25_repair_2021.py | 25_repair_2021.v1.py | `2dc1f84f6a30b6f95907adc4e4fe17ce` |
 | 26_strip_page_furniture.py | 26_strip_page_furniture.v11.py | `91a2b32477ecb2f0db325fd1fa6293a7` |
 | 29_decode_2021_notation.py | 29_decode_2021_notation.v4.py | `e0f129e6b0a43838cbaf467115bb97a0` |
-| 43_normalize_glyphs.py | 43_normalize_glyphs.v2.py | `bc05d3678ac26e95e4864da004582fa6` |
+| 43_normalize_glyphs.py | 43_normalize_glyphs.v3.py | `cb9d74bb8fde3f3ee0f238420cba2e7f` |
 | 46_strip_option_letter.py | 46_strip_option_letter.v3.py | `86b69494098458373fb90d662417ddde` |
 | 48_mark_scripts.py | 48_mark_scripts.v8.py | `0d8e4edd1507be45fbb7db367694d2f2` |
 | 49_option_conventions.py | 49_option_conventions.v2.py | `a7c7870a5774efa50e1ce52d3e1acb66` |
