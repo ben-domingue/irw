@@ -58,7 +58,6 @@ Worked examples for both live on the site's
 | `itemtext/` | Extraction and upload of instrument, section, item, and response-option text |
 | `tags/` | Human and automated tagging of tables |
 | `collections/` | Curated groupings of tables |
-| `irw-dataset-builder/` | Streamlit app for interactively building an IRW-formatted dataset (`streamlit run irw-dataset-builder/main.py`); dormant since 2025-02 |
 | `manuscript_src/` | Reproducible analysis code for the IRW paper |
 | `red_up/` | The one Redivis uploader (`red_up`); every upload writes a draft for a human to publish |
 | `irw_validate/` | The format validator ([`irw-validate` on PyPI](https://pypi.org/project/irw-validate/)), the gate a finished table passes before upload |

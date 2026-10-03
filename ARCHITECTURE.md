@@ -348,18 +348,15 @@ When two documents disagree, this is the order of precedence:
 
 Two entries deserve their reasoning stated, because both are counter-intuitive:
 
-**The run order points at a shell script, not at prose.** Three files describe
-the pipeline order and they do not agree. `run_pipeline.sh` is the one that runs,
-so it wins by construction — which is the point of rule 2 below.
+**The run order points at a shell script, not at prose.** Four files used to
+restate the pipeline order, and by 2026-10 every copy was wrong. They now point
+at `DEFAULT_ORDER` instead. `run_pipeline.sh` is the one that runs, so it wins by
+construction — which is the point of rule 2 below.
 
 **The version manifest is a record, not a plan.** It says what *was* released,
 never what is about to be. `red_up` only ever writes an unreleased draft and
 publishing is a human action, so nothing an upload does appears in the manifest
 until the version is actually released and the next daily run sees it.
-
-**`datastandard.md` beats `CLAUDE.md` on output format.** `CLAUDE.md` says
-scripts write both `.csv` and `.RData`; `datastandard.md` overrides this to
-CSV-only for the `automated_finding` pipeline, and says so explicitly.
 
 ## 6. What runs on a schedule
 
@@ -478,7 +475,6 @@ directory's README (where there is one) goes further:
 | `redivis_shim.py` | A patch that makes whole-table reads work under redivis 0.20.11 with urllib3 2.x. Its docstring says when to remove it |
 | `.claude/skills/` | `irw-site-update` (the metadata pipeline) and `irw-vignette` live here. `irw-auto-itemtext`, `irw-automated-finding` and `irw-auto-tag` are **symlinks** into `itemtext/`, `automated_finding/` and `tags/`, so edit them there |
 | `processing_notes/` | Processing and licensing guidance, `validator_overrides.csv` (read by the MCP), outreach letters and per-table metadata-repair notes |
-| `irw-dataset-builder/` | A Streamlit app for building an IRW-format file interactively. Dormant: unchanged since 2025-02, and it predates `irw_validate`, whose checks it does not run |
 | `manuscript_src/`, `training/`, `misc/` | Frozen analysis code for the 2025 BRM paper, workshop materials, and small R utilities |
 
 ## Two rules
