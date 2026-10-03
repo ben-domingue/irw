@@ -119,6 +119,7 @@ itemtext/audit_staging/
 # transient control flag for the itemtext batch loop (its presence is the state)
 itemtext/extraction_batches/circuit_breaker.flag
 __pycache__/
+*.py[cod]
 
 # red_up packaging artefacts (pip install -e .)
 *.egg-info/
@@ -146,19 +147,6 @@ metadata/pipeline_logs/version_manifest_*.log
 # weekly pipeline's markdown logs ARE tracked, because there is one a week.
 itemtext/extraction_batches/cron_logs/
 
-##Per-agent fetch caches for concurrent tagging runs (#1704, P5).
-tags/.caches/
-
-tags/.caches/
-
-tags/.caches/
-
-tags/.caches/
-
-tags/.caches/
-
-tags/.caches/
-
 # Raw source downloads fetched by data/ scripts; never committed.
 data/*_raw/
 
@@ -169,3 +157,10 @@ data/*_raw/
 # the directory is what stops that recurring; the batch directories under
 # itemtext/itemtables/batch_* remain the tracked record of what was extracted.
 itemtext/itemtables/clean/
+
+# Local tool state that no one should commit.
+.venv/
+venv/
+.pytest_cache/
+.ipynb_checkpoints/
+*.Rcheck/
