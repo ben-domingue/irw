@@ -17063,3 +17063,16 @@ ben-domingue confirmed the 9 batch-4 item text tables are uploaded;
 `mapping_verification.csv`. The 69 response tables were uploading at the
 close of the session and are not yet confirmed (TODO). datapages/irw PR #305
 (the `wu_2015_cias` / `wu_2015_bsrs5` issues-page callouts) is merged.
+
+## 2026-10-02l — re-check batch 4 stamped uploaded
+
+ben-domingue confirmed all 69 batch-4 response tables are in the
+`item_response_warehouse_6` draft (item text was stamped in 2026-10-02k).
+One table, `alqerem_2025_gina_control`, failed on the first run with
+`AttributeError: 'NoneType' object has no attribute 'get'`, raised inside the
+upload call. `push_one` deleted the half-made table, so the draft held no empty
+copy. The other 68 were checked against their CSV row counts, and a dry run of
+the failed file validated cleanly. A single-file re-run then uploaded it with a
+verified row count. The cause was not pinned down without a traceback; a
+transient API response while red_up polled the upload status is the likeliest
+explanation. If it recurs, capture the traceback.
