@@ -519,7 +519,7 @@ gholami_2017_periodontal_knowledge,cov_education,data/gholami_2017_periodontal_k
 gholami_2017_periodontal_knowledge,cov_employment,data/gholami_2017_periodontal_knowledge.py,Employment,included,,5,5,
 gholami_2017_periodontal_knowledge,cov_gender,data/gholami_2017_periodontal_knowledge.py,Gender,included,,2,2,
 gholami_2017_periodontal_knowledge,cov_marital,data/gholami_2017_periodontal_knowledge.py,NewMARITAL,included,,2,2,
-gilbert_meta_56,cov_male,data/gilbert_hte/il_hte_56.R,gender_bl,included,entered by hand from rf_clean_student_data_endline.dta (manual.csv),2,2,
+gilbert_meta_56,cov_female,data/gilbert_hte/il_hte_56.R,gender_bl,included,entered by hand from rf_clean_student_data_endline.dta (manual.csv),2,2,
 gilbert_meta_62,cov_county,data/gilbert_hte/il_hte_62.R,county,included,entered by hand from GISHE_data_clean.dta (manual.csv),2,2,
 gilbert_meta_62,cov_female,data/gilbert_hte/il_hte_62.R,gender,included,entered by hand from GISHE_data_clean.dta (manual.csv),2,2,
 gilbert_meta_62,cov_income_50,data/gilbert_hte/il_hte_62.R,mos_income_bin,included,entered by hand from GISHE_data_clean.dta (manual.csv),2,2,
