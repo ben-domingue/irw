@@ -570,7 +570,7 @@ CAPTION_RESULTS = re.compile(r"correlat|coefficient|loading|descriptive|statisti
 ##A qualitative coding scheme for interviews is called a codebook too, and
 ##documents no column (pilot: "Interview codebook").
 CAPTION_EXPLICIT = re.compile(r"code[\s_-]?book|dictionar|variable[\s_-]?(description|definition)s?", re.I)
-CAPTION_QUALITATIVE = re.compile(r"interview|qualitative|thematic|open[- ]ended|focus group", re.I)
+CAPTION_QUALITATIVE = re.compile(r"interview|qualitative|thematic|open[- ]ended|focus group|translation", re.I)
 SHEET_CODEBOOK = re.compile(r"^\s*(variables?|legend|descriptions?|data description|variable description|"
                             r"key|codes|coding)\s*$", re.I)
 WORKBOOK_EXT = {"xlsx", "xlsm", "xls"}
@@ -1313,6 +1313,16 @@ def main() -> int:
         if k not in best or rank.get(x["how_found"], 9) < rank.get(best[k]["how_found"], 9):
             best[k] = x
     links = list(best.values())
+    ##journal outcomes from the FINAL links: a doc_candidate judged against
+    ##the table's names is kept or dropped only after the content check
+    final_kinds: Dict[Tuple[str, str], set] = {}
+    for x in links:
+        if x["host"] in ("plos", "epmc"):
+            final_kinds.setdefault((x["table"], x["host"]), set()).add(x["how_found"])
+    for row in checked:
+        if row["host"] in ("plos", "epmc") and (row["outcome"].startswith("hit:") or row["outcome"] == "no_match"):
+            kinds = sorted(final_kinds.get((row["table"], row["host"]), ()))
+            row["outcome"] = "hit:" + "+".join(kinds) if kinds else "no_match"
     checked = kept_checked + checked
     links.sort(key=lambda x: (x["table"].lower(), x["how_found"], x["url"]))
     checked.sort(key=lambda x: (x["table"].lower(), x["data_url"]))

@@ -193,3 +193,4 @@ class JournalSupplementTest(unittest.TestCase):
                                           "variable labels. (SAV)"), "data_or_results")
         self.assertEqual(fcl.caption_kind("S1 File", "Empirical dataset and the corresponding codebook. (XLSX)"),
                          "name_codebook")
+        self.assertIsNone(fcl.caption_kind("S10 File", "Translation Codebook"))
