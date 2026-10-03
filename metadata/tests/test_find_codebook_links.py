@@ -45,7 +45,7 @@ class RouteTest(unittest.TestCase):
         self.assertEqual(fcl.route("https://doi.org/10.7910/DVN/ZNGS1K"),
                          ("dataverse", "dataverse.harvard.edu|doi:10.7910/DVN/ZNGS1K"))
         self.assertEqual(fcl.route("https://doi.org/10.1371/journal.pone.0278165.s004"),
-                         ("skip", "plos_supplementary"))
+                         ("plos", "10.1371/journal.pone.0278165"))
 
     def test_a_dataverse_file_pid_routes_to_its_dataset(self):
         h, k = fcl.route("https://dataverse.harvard.edu/file.xhtml?persistentId="
@@ -100,3 +100,87 @@ class IngestLinksTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class JournalSupplementTest(unittest.TestCase):
+    """#2792: PLOS / Europe PMC supplementary files, judged by caption, sheet
+    names and (text documents only) content, never by guessing."""
+
+    def test_routes(self):
+        self.assertEqual(fcl.route("https://journals.plos.org/plosone/article/file?type=supplementary"
+                                   "&id=10.1371/journal.pone.0310665.s001"),
+                         ("plos", "10.1371/journal.pone.0310665"))
+        self.assertEqual(fcl.route("https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0201007"),
+                         ("plos", "10.1371/journal.pone.0201007"))
+        self.assertEqual(fcl.route("https://europepmc.org/article/PMC/PMC9472413"), ("epmc", "PMC9472413"))
+        self.assertEqual(fcl.route("https://europepmc.org/article/MED/123")[0], "skip")
+
+    def test_captions(self):
+        self.assertEqual(fcl.caption_kind("S2 File", "Codebook for the survey. (PDF)"), "name_codebook")
+        self.assertEqual(fcl.caption_kind("S1 Table", "Description of the variables. (DOCX)"), "name_codebook")
+        self.assertEqual(fcl.caption_kind("S1 Questionnaire", "(DOCX)"), "questionnaire")
+        self.assertEqual(fcl.caption_kind("S2 File", "Research instruments. (DOCX)"), "questionnaire")
+        ##pilot false positives, 10-02
+        self.assertEqual(fcl.caption_kind("S2 Table", "Pearson's correlation coefficients (r) between PHQ-9 "
+                                          "items and with other questionnaires. (DOCX)"), "data_or_results")
+        self.assertEqual(fcl.caption_kind("S3 Data", "Data processing output. (DOCX)"), "data_or_results")
+        self.assertEqual(fcl.caption_kind("S1 File", "Questionnaire responses. (XLSX)"), "data_or_results")
+        self.assertIsNone(fcl.caption_kind("S1 File", "(PDF)"))
+
+    def test_jats_supplements(self):
+        xml = ('<supplementary-material id="a" mimetype="application/pdf" xlink:href="info:doi/x.s001">'
+               '<label>S1 File</label><caption><p>Codebook. (PDF)</p></caption></supplementary-material>'
+               '<supplementary-material id="b"><media xlink:href="f.xlsx" mimetype="application" '
+               'mime-subtype="vnd.openxmlformats-officedocument.spreadsheetml.sheet"><caption><p>'
+               '<bold>Additional file 1.</bold></p></caption></media></supplementary-material>'
+               '<supplementary-material id="c"><media xlink:href="f.xlsx"/></supplementary-material>')
+        s = fcl.jats_supplements(xml)
+        self.assertEqual([x["href"] for x in s], ["info:doi/x.s001", "f.xlsx"])   ##deduplicated
+        self.assertEqual(s[0]["label"], "S1 File")
+        self.assertEqual(fcl._ext_of(s[0]), "pdf")
+        self.assertEqual(fcl._ext_of(s[1]), "xlsx")
+
+    def _res(self, files):
+        return {"status": "ok", "landing": "L", "files": files}
+
+    def test_sheet_names_and_data_files(self):
+        fcl._TEXTS = {"u/doc": "text", "u/own": "text"}
+        res = self._res([
+            {"name": "S1_Data.xlsx", "url": "u/x", "label": "S1 Data", "caption": "(XLSX)",
+             "sheets": ["Data", "Codebook"]},
+            {"name": "S2_Data.xlsx", "url": "u/y", "label": "S2 Data", "caption": "(XLSX)",
+             "sheets": ["Sheet1", "Variables"]},
+            {"name": "S3_File.xlsx", "url": "u/z", "label": "S3 File", "caption": "(XLSX)",
+             "sheets": ["Sheet1"]},
+            {"name": "S1_File.docx", "url": "u/doc", "label": "S1 File", "caption": "(DOCX)", "supp_id": "s004"},
+            {"name": "S2_File.pdf", "url": "u/own", "label": "S2 File", "caption": "(PDF)", "supp_id": "s005"},
+        ])
+        hits = fcl.supp_hits("t", "plos", res, {"s005"}, "2026-10-02")
+        got = [(x["how_found"], x["file_name"]) for x in hits]
+        self.assertIn(("name_codebook", "Codebook (sheet in S1_Data.xlsx)"), got)
+        self.assertIn(("name_codebook", "Variables (sheet in S2_Data.xlsx)"), got)
+        self.assertIn(("doc_candidate", "S1_File.docx"), got)
+        self.assertNotIn(("doc_candidate", "S2_File.pdf"), got)      ##the table's own data file
+        self.assertEqual(len(got), 3)
+        fcl._TEXTS = None
+
+    def test_caption_naming_a_sibling_table_belongs_to_it(self):
+        sib = {"jeon_2019_cbi", "jeon_2019_cesd10"}
+        self.assertEqual(fcl.caption_owners("Questionnaire of Korean version of Copenhagen Burnout "
+                                            "Inventory(CBI-K). (GIF)", sib), {"jeon_2019_cbi"})
+        sib = {"horiuchi_2024_rsmsm", "horiuchi_2024_attachment"}
+        self.assertEqual(fcl.caption_owners("The rating scale (RS-MSM) Questionnaire items. (DOCX)", sib),
+                         {"horiuchi_2024_rsmsm"})
+        ##an acronym that names no table of the article: the file is everyone's
+        self.assertEqual(fcl.caption_owners("The Dietarian Identity Questionnaire (DIQ). (PDF)",
+                                            {"gumus_2025_dietarian_identity"}), set())
+
+    def test_qualitative_codebooks_and_factor_tables_do_not_count(self):
+        self.assertIsNone(fcl.caption_kind("S1 Table", "Interview codebook. (PDF)"))
+        self.assertEqual(fcl.caption_kind("S4 Table", "Rotated factor matrix for scale items. (DOCX)"),
+                         "data_or_results")
+        self.assertEqual(fcl.caption_kind("S1 File", "Survey questions. (PDF)"), "questionnaire")
+
+    def test_names_count_once_whatever_their_case(self):
+        self.assertEqual(fcl.names_in_text(["Education", "education", "Place"], "education and place"),
+                         ["Education", "Place"])
