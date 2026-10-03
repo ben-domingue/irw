@@ -111,9 +111,12 @@ class FileTooLarge(Exception):
 # License checking
 # ---------------------------------------------------------------------------
 
-_BLOCKED_LICENSES = {"cc-by-nc", "cc-by-nd", "cc-by-nc-nd", "cc-by-nc-sa",
-                     "all-rights-reserved", "arr"}
-_OPEN_LICENSES    = {"cc0", "cc-pddc", "cc-by", "cc-by-sa", "public-domain"}
+# Ruled 2026-10-01 (datastandard.md "Before you start"): non-commercial
+# licences are hostable, with the NC carried into Derived_License, and so is
+# GPL. ND forbids the reshaping IRW does, so anything with ND stays blocked.
+_BLOCKED_LICENSES = {"cc-by-nd", "cc-by-nc-nd", "all-rights-reserved", "arr"}
+_OPEN_LICENSES    = {"cc0", "cc-pddc", "cc-by", "cc-by-sa", "public-domain",
+                     "cc-by-nc", "cc-by-nc-sa", "gpl", "gpl-2", "gpl-3"}
 
 def _norm_license(raw: str) -> str:
     s = raw.lower().strip()
