@@ -1,0 +1,3 @@
+"table","batch","mapping_basis","uploaded","route","status","evidence"
+"modzelewska_2021_emo_pos","batch_739","data_labels","","exempt: data_labels","NOT_NEEDED","mapping_basis=data_labels: item code is the source .sav column name Emo_pos_aut1-5/Emo_pos_ref1-5, each with its own English variable label in s001.sav"
+"modzelewska_2021_hbeliefs","batch_739","data_labels","","exempt: data_labels","NOT_NEEDED","mapping_basis=data_labels: item code is the source .sav column name Beliefs1, Beliefs12..Beliefs110, each with its own English statement as variable label in s001.sav"
