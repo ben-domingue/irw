@@ -14,23 +14,31 @@ either silently.*
 
 ## Before you start
 
-**Verify the license first.** The license must be explicitly open — CC0, CC BY, or CC BY-SA — as stated on the source page. A missing license, an unresolvable UUID, a "contact author" notice, or any NC/ND restriction means **stop**: do not write a processing script. Only proceed once you have confirmed a named open license.
+**Verify the license first**, as stated on the source page. Ruled 2026-10-01
+(superseding the 2026-09-04 "NC: ask first" rule):
 
-*Exception, ruled 2026-09-04: an **NC** dataset that is genuinely exceptional may
-still be worth taking, but that is ben-domingue's call and never yours. Do not
-process one on your own judgment, and do not skip one silently either — say what
-it is and what it is worth, and ask. Where he approves, the restriction
-propagates rather than disappears: `Derived_License` records the NC licence, so
-anyone contemplating commercial reuse can identify and exclude the table. The
-default remains no.*
+- **CC0, CC BY, CC BY-SA**: proceed.
+- **Non-commercial (CC BY-NC, BY-NC-SA, "non-commercial use")**: proceed. The
+  restriction propagates rather than disappears: `Derived_License` records the
+  NC licence, so anyone contemplating commercial reuse can identify and exclude
+  the table.
+- **GPL** (common for data shipped in R packages): proceed; `Derived_License`
+  carries the GPL through.
+- **No license at all**, an unresolvable UUID, or a "contact author" notice:
+  **stop**, and email the owner for written permission (template in
+  `processing_notes/Licensing.txt`). Process only once permission arrives; it is
+  recorded as `Permission via Email`. Without it, link to the data rather than
+  reshare it.
+- **ND (no derivatives)**: **stop**. Reshaping a source into IRW's long format is
+  a modification, which ND forbids. This is a hard stop with no judgment call,
+  unless ben-domingue has ruled on that specific source.
+- **Scraped or relabelled third-party data** (results scraped from a sports
+  site or an API, broadcast video, a Kaggle re-upload of someone else's data):
+  **do not host**, even under a permissive licence. The re-uploader's licence
+  does not clear data they did not own; the originator's terms govern.
 
-*This exception does not extend to **ND**, nor to a dataset with no license at
-all. The project's licensing guidance is explicit that for both of those,
-modification itself is not permitted — and reshaping a source into IRW's long
-format is a modification. Those stay a hard stop with no judgment call. For an
-unlicensed dataset the route is written permission from the owner, recorded as
-`Permission via Email`; without it, link to the data rather than reshare it.*
-
+Anything that fits none of these goes to ben-domingue. Do not process it on your
+own judgment, and do not skip it silently either: say what it is and ask.
 
 **Check for duplicates.** Search the IRW dictionary before processing to make sure the dataset is not already in the warehouse.
 
@@ -221,12 +229,12 @@ long = long[out_cols]
 long.to_csv(path, index=False)
 ```
 
-**CSV only — do not also write a `.RData` file.** This overrides the general
-`data/` convention (`CLAUDE.md`'s "both `.csv` and `.RData`") specifically
-for the `automated_finding` pipeline: Redivis upload only ever consumes the
-`.csv`, so a parallel `pyreadr.write_rdata(...)` call is dead weight in
-every script that has one — skip it entirely rather than wrapping it in a
-try/except.
+**CSV only — do not also write a `.RData` file.** This applies to every
+script in `data/` (ruled 2026-10-03; it used to apply only to the
+`automated_finding` pipeline): Redivis upload only ever consumes the `.csv`,
+so a parallel `save()` or `pyreadr.write_rdata(...)` call is dead weight —
+skip it entirely rather than wrapping it in a try/except. Existing scripts
+that also write `.RData` need not be edited.
 
 Print a summary line for each file:
 ```python

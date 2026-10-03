@@ -1,39 +1,35 @@
 # What to work on
 
-Set 2026-09-02 by ben-domingue. Advisory: he overrules it, and a direct request
+Set 2026-09-02 by ben-domingue; counts and stale tools removed 2026-10-03, the
+ranking itself unchanged. Advisory: he overrules it, and a direct request
 always wins. This file exists so a session can place a new piece of work without
 asking, not to override judgment.
 
-**The problem it solves.** There are ~390 open issues, 207 of them labelled
-`data queue`, and 17 roadmap items. A list that long does not tell anyone what
-matters, and re-deriving a priority order every morning is itself the cost. So
-this ranks *kinds* of work rather than listing issues, and the list below will
-still be right when every issue number in it is closed.
+**The problem it solves.** There are hundreds of open issues, many of them
+labelled `data queue`, plus the roadmap items. A list that long does not tell
+anyone what matters, and re-deriving a priority order every morning is itself
+the cost. So this ranks *kinds* of work rather than listing issues, and the list
+below will still be right when every issue number in it is closed. Counts are
+deliberately not written here: they were wrong within a month.
 
-**Where the issue list is.** Ranking without a way to *find* the ranked work is
-half a tool, so as of 2026-09-06 the categories below exist as labels:
-`p1-trust`, `p2-gate`, `p3-reach`, `p4-volume`, `p5-later`, one per open issue
-across all three code repos. Two queries do most of the work:
+**Where the issue list is.** Finding the work:
 
-- **`label:wrong-now`** — the narrow class from `ARCHITECTURE.md` §4: the
+- **`label:wrong-now`**: the narrow class from `ARCHITECTURE.md` §4, where the
   released data would give a *wrong* answer, not merely an incomplete one. This
-  is the one worth opening daily.
-- **milestone `Queue: one-offs`** — self-contained fixes, one session or less
-  each, no decision needed, no dependency on anything else. Pull from the top.
+  is the one worth opening daily, even when it is empty.
+- **`agent-can-do` / `human-needed`**: whether an issue needs a person's
+  decision or access before anyone can act on it.
+- **`p1-trust` … `p5-later`**: the categories below, as labels. They were applied
+  in one pass on 2026-09-06 (`metadata/build_issue_triage.py` holds the
+  assignment, `metadata/apply_issue_labels.py` applies it), and issues opened
+  since mostly carry none, so an unlabelled issue is not a low-priority one.
+- **Project 4 ("IRW Year 3")** filtered to `Status: Todo`, for *what to start
+  next*: its `Depends on` column carries the ordering. The ordering deliberately
+  lives there rather than in a document, because a work order written as prose
+  is stale the week after it is written (`ARCHITECTURE.md`'s rule 2).
 
-For *what to start next* rather than what exists, read **Project 4** filtered to
-`Status: Todo`: its `Depends on` column carries the ordering, and the structural
-issues with no roadmap number (#2001, #1955, #1342, #1942, #1856) are on it
-alongside the seventeen items. The ordering deliberately lives there rather than
-in a document — a work order written as prose is stale the week after it is
-written, which is `ARCHITECTURE.md`'s rule 2.
-
-`metadata/build_issue_triage.py` holds the assignment and
-`metadata/apply_issue_labels.py` applies it, so the next pass edits a list instead
-of re-reading 400 issues. Both are idempotent; the CSV between them is a derived
-artifact and is not committed.
-`data queue` issues are deliberately unlabelled — acquisition is not-now as a
-*class*, and 207 identical labels would say nothing.
+`data queue` issues are deliberately not given a p-label: acquisition is
+not-now as a *class*.
 
 ## The order
 
@@ -79,16 +75,13 @@ and is not defensible now, which makes it the strongest argument for raising it.
 
 **4. Volume — coverage of tags and item text.**
 
-Item text is at ~14% of tables and tags at ~55% per column — quote
-`metadata/status.json` **per column**, never the row-coverage headline, which is
-carried by derived `age range` rows and reads ~75%. This is where effort actually
-goes — 484 file-touches in `itemtext/` in the week to 2026-09-02, against 100 in
-`tags/` and 56 in `metadata/` — so the point of ranking it fourth is not to stop
-it but to stop it crowding out 1–3 by default.
+For current coverage, quote `metadata/status.json` **per column**, never the
+row-coverage headline, which derived `age range` rows inflate. This is where
+effort actually goes, so the point of ranking it fourth is not to stop it but to
+stop it crowding out 1–3 by default.
 
 **Volume means the untagged and the unextracted** (ruled 2026-09-03): tagging
-tables that have no tags (1,427 reachable) and extracting item text for tables
-that have none (1,164 queued). It does *not* mean improving tags or item text
+tables that have no tags and extracting item text for tables that have none. It does *not* mean improving tags or item text
 that already exist. Corrections are worth making insofar as they fall out of
 building a good automated tagger or extractor; a standing workstream of small
 fixes to published rows is the thing that has been crowding out the goal.
@@ -98,10 +91,11 @@ A wrong table still beats a missing tag.
 
 **5. Not now.** Say so rather than quietly deferring:
 
-- The blue-sky roadmap items (8–15). Three were picked as worth eventual
-  investment — 8 (a derived-parameter layer), 11 (an MCP server), 9 (tasks and a
-  leaderboard) — and none is this year's work until 1–7 are further along.
-- New vignettes, per item 16's stop-doing list.
+- The blue-sky roadmap items (8–15), apart from what Ben has since pulled
+  forward. The IRW MCP server (item 11) now exists and is maintained, and
+  vignettes are written when he asks for one. Neither is a standing
+  workstream: build on them when asked, don't start new blue-sky work
+  unprompted.
 - Any acquisition *sprint*. **Correction, 2026-09-03**: this bullet used to say
   "intake has already stopped on its own". That is true of the GitHub `data
   queue` issues — the newest is 2026-08-11 — but **not** of the automated
