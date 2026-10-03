@@ -26,8 +26,8 @@ make settled first, then one PR along the lines of "ENEM adjustments".
 | `misplaced` + `owner_missing_description` | 46 | done — `e2c67379`, 30 blocks relocated |
 | script half of `flattened`, + Ben's watermark lead | ~20 | done — `d6b822ed` |
 | `symbol` | 19 | done — `a801f199` + the drawn-glyph commit |
-| `number` | 23 | **open.** Geometry CANNOT separate these; needs an explicit per-item patch table. See §7. |
-| rest of `flattened` (fractions, factorials) | ~50 | open — `53_stacked_fractions.py` work |
+| `number` | 23 | done — `e7b8bfcc` |
+| rest of `flattened` (fractions, factorials) | ~50 | done — `d81a205e`, new pass `58_verified_patches.py` + R17/R18 |
 | `figure_labels`, `essay_material`, `moved_word` | 15 | open |
 | cosmetic / noise / incomplete | ~380 | open |
 
@@ -39,14 +39,15 @@ glyph off `get_drawings()` is recovery rather than generation.
 ## 2. Current verification state
 
 ```
-validate_items     20/20 OK + 16/16 OK on the years #2462 touched (Slurm)
-audit_batch        item_set_match and resp_set_match TRUE everywhere, 0 ERROR
-lint_verification  36 rows, no problems
+validate_items     24/24 OK on the six years d81a205e touched (Slurm 1772590)
+audit_batch        6/6 OK; item_set_match and resp_set_match TRUE, 0 ERROR
+lint_verification  44 rows, no problems
 check_provenance   exit 0
 UNFIXED gate       0 failures
 54 audit           0 unclassified
 content            Ben's S1 and S2 both 0; regress48 0 on all five checks
-character set      no code point added or removed by #2462 except U+20D7
+character set      #2462 added exactly two code points corpus-wide: U+20D7
+                   (combining vector arrow) and U+007E (R18's ~~ delimiter)
 ```
 
 **A REBUILD WRITES A YEAR'S TABLES BEFORE ITS POST-PASSES RUN.** If a rebuild
@@ -60,6 +61,27 @@ grep -c "rebuilt ->" <rebuild log>      # must equal the number of years
 
 before trusting a build, and start long rebuilds with `nohup setsid` so a
 session disconnect cannot kill them.
+
+**PINS: passes run the LIVE file.** `pin()` only feeds the build record, so
+the invariant is that the pin is byte-identical to live AT BUILD TIME. Check
+every pass, not just the one you edited:
+
+```bash
+# every pass at once: newest pin vs its live script
+for L in [0-9]*.py; do
+  B=${L%.py}
+  N=$(ls -1 pins/$B.v*.py 2>/dev/null | sort -V | tail -1)
+  [ -n "$N" ] || continue
+  [ "$(md5sum <"$L" | cut -d' ' -f1)" = "$(md5sum <"$N" | cut -d' ' -f1)" ] \
+    || echo "DRIFT: $L != $N"
+done
+
+./cut_pin.sh --check <script>.py    # or one at a time
+```
+
+`cut_pin.sh <version> <script>` — the version must look like `vN`. Passing a
+bare stem used to be accepted as a version tag and cut a pin from the DEFAULT
+script under that stem's name; the guard now whitelists `vN`.
 
 Re-run the cheap ones any time:
 

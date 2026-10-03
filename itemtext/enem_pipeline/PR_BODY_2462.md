@@ -17,7 +17,10 @@ so everything here is content, not schema.
 |---|---|---|
 | `misplaced` + `owner_missing_description` | 46 | `e2c67379` |
 | script-marking half of `flattened`, plus the `instructions` watermark | ~20 | `d6b822ed` |
-| `symbol` | 19 | `a801f199` + the drawn-glyph commit |
+| `symbol` | 19 | `a801f199` + `a7329f01` (drawn glyphs, R16) |
+| `tabs` | 159 | `b64af73e` |
+| `number` | 23 | `e7b8bfcc` |
+| rest of `flattened` (fractions, factorials) + R17 + R18 | ~58 | `d81a205e` |
 
 ### Figure descriptions on the wrong item (R13)
 
@@ -67,6 +70,38 @@ harpoons, and all three stems corroborate it (`pK_a`, the three equilibrium
 constants, *"em equilíbrio no sangue"*). Writing `→` would have shipped a
 one-way reaction where INEP printed an equilibrium, inverting the chemistry of
 three items.
+
+### A keyed answer was wrong in the shipped text
+
+**2016 MT 39762 option E** shipped as `...4!/2! . 2!`, which reads as
+6 489 600. The printed bar spans the whole denominator, giving 1 622 400 —
+and E is the key. 2016 MT 39762 D and 2015 MT 60361 B had the same defect.
+The cause is mechanical: `49_option_conventions.py` joins two printed lines
+with `/` and never parenthesises a side that is a product. Hence **R17** — a
+fraction side that is not a single token is parenthesised, `9!/(7! × 2!)`.
+
+**R18** restores typographic emphasis as `~~run~~`. 2013 LC 43715 asks about
+*"a escolha das formas verbais em destaque"*; without the marking the item
+points at an invisible highlight. The delimiter is `~~` because `~` and
+`` ` `` are the only characters absent from all 48 tables, while `*` already
+occurs 125 times. The runs come from font evidence (Arial-BoldMT on the five
+verbs and the title, Arial-ItalicMT on *dossiê*), not from reading the prose.
+
+Both rules are applied by a new pass, `58_verified_patches.py`, which runs
+**last** — every `old` string in it is copied from the *shipped* cell, so
+anchoring it to an earlier pass would be anchoring to text that does not exist
+yet. Matching is scoped to (year, area, item, column, option letter) and
+requires exactly one occurrence, so a stale anchor reports instead of silently
+missing.
+
+### A third wrong-kind script, found while verifying
+
+Not in the review: **2021 CN 117627** shipped water as `H^2O`. Span geometry
+settles it — on that line the base sits at y0 182.61 and the `2` at 189.00,
+*below* the baseline, while the charge marks `+` and `−` on the same line sit
+at 183.10, *above* it. The AFC cathode is ½O₂ + H₂O + 2e⁻ → 2OH⁻. A
+corpus-wide scan for a script marked between two letters of one token returns
+that cell and no other, so it was patched rather than made a rule.
 
 ### Ben's `instructions` lead
 
@@ -124,10 +159,19 @@ and `resp_set_match` TRUE throughout and `audit_report.csv` unchanged.
 `lint_verification` clean, `check_provenance` exit 0, the R13 audit 0
 unclassified, `provenance.csv` byte-identical in every batch.
 
-Corpus-wide, the character inventory gained exactly **one** code point across
-all of this work — U+20D7, the combining arrow for 2022 CN 85445's vector
-labels — and lost none. `π`, `√`, `⇌` and `ℓ` all already occurred in the
-corpus, so only the combining mark is new.
+Corpus-wide, the character inventory gained exactly **two** code points across
+all of this work and lost none: U+20D7, the combining arrow for 2022 CN
+85445's vector labels, and U+007E, R18's `~~` emphasis delimiter. `π`, `√`,
+`⇌` and `ℓ` all already occurred in the corpus.
+
+Two traps worth recording for whoever diffs these tables next. An item
+occupies ~5 rows — one per option — and `item_text` is duplicated across them,
+so merging old against new on `item` produces a cross product: it reported
+44,308 changed items where the truth was 25. Diff **positionally**, after
+asserting that row count, column set and item order are unchanged. And the
+`_` count moves in both directions, because a stacked fraction's **bar**
+extracts as a literal `__`: flattening three of them at 2021 CN 117627 removes
+six underscores while the water fix adds one.
 
 ## Also fixed along the way
 
