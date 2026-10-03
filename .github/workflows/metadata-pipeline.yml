@@ -107,10 +107,7 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
           set -o pipefail
-          # --no-09 because 09_hero_status.R writes hero_stats.json into the
-          # irw_site sibling repository, which is not checked out here. Hero
-          # stats belong with a site render, not with metadata review.
-          .claude/skills/irw-site-update/scripts/run_pipeline.sh --no-09 2>&1 \
+          .claude/skills/irw-site-update/scripts/run_pipeline.sh 2>&1 \
             | tee pipeline.log
           echo "rc=$?" >> "$GITHUB_OUTPUT"
 
@@ -199,7 +196,6 @@ jobs:
             echo
             echo "This commits metadata to the repository, not to the warehouse. To push"
             echo "to Redivis afterwards: \`git pull\`, then run \`upload_meta.py\` by hand."
-            echo "Stage 09 (hero_stats.json) is not run here; it writes into \`irw_site\`."
             echo "The full run log is attached to the workflow run as \`pipeline-log\`."
             echo
             echo "<details><summary>Run log (tail)</summary>"

@@ -161,6 +161,15 @@ df = df.rename(columns=cov_rename)
 
 Keep covariate columns aside; they will be carried through `melt` as `id_vars`.
 
+When a covariate ships as the source's numeric codes, their meaning (1 = hombre)
+reaches the table page's Codebook through `metadata/covariate_labels/`, which
+re-runs scripts that read SPSS or Stata files to harvest the source's value
+labels. A script that reads such a file and writes `cov_*` columns should be
+harvested before its PR merges; the `contract` CI job warns when it has not been
+(`metadata/check_label_harvest.py`). Renaming a source column straight into a
+standard name (`cluster_id = teacher_name`) is what lets the Codebook say where
+a column came from; a column built indirectly shows no source. See `ARCHITECTURE.md` §4, "The table-page Codebook".
+
 ### 4. Identify item columns
 
 Item columns are the ones that contain actual responses to questionnaire items. Exclude:

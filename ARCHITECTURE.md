@@ -24,8 +24,10 @@ confusing thing about this project's layout, so it is stated first:
 
 `src` is on a personal account, the site on `datapages`, and the two client
 packages on the `itemresponsewarehouse` org. There is no technical reason for
-this; it is history. Neither package is on CRAN or PyPI — both install from
-GitHub.
+this; it is history. The Python package installs from PyPI (`pip install irw`);
+the R package installs from GitHub until its CRAN submission (Rpkg#147) is
+accepted. This repository publishes one package of its own, `irw-validate`, to
+PyPI from a tag (section 6).
 
 Package versions are deliberately not written here: they moved four times in a
 week and both numbers in this table were wrong within days of being typed. Read
@@ -106,7 +108,7 @@ metadata that is not derivable from the data itself:
 
 | Sheet | What it holds |
 |---|---|
-| Data Dictionary — core | Descriptions, origins, licenses, references. Read by `metadata/02_biblio.R` and eight other call sites |
+| Data Dictionary — core | Descriptions, origins, licenses, references. Read by `metadata/02_biblio.R` and many other call sites (`git grep` its sheet id) |
 | Data Dictionary — competitions, nominal, simsyn | The same, one per non-core source |
 | IRW Tags | The eight hand-annotated tag columns. Read by `metadata/03_tags.R` |
 | Nominal tags | The same, for the `nominal` source |
@@ -199,7 +201,7 @@ data/<script>.R                      one script per dataset, self-contained
 red_up  ------------------------->   a core Redivis shard
       |
       v
-metadata/01..10_*.R                  reads the shards + the Sheets,
+metadata/NN_*.R / NN_*.py            reads the shards + the Sheets + data/,
       |                              writes CSVs into metadata/
       v
 red_up  ------------------------->   irw_meta, as a DRAFT version
@@ -276,9 +278,49 @@ stops rather than routing across families.
 `irw_site` builds its homepage hero numbers (`data/hero_stats.json`, untracked)
 at render time from published irw_meta, in the pre-render step
 `landing/hero_stats.R` (#1940; this used to be `metadata/09_hero_status.R`,
-committed by hand). Three files it reads from this repository's `main` over HTTPS at render time:
-`metadata/version_manifest.tsv`, `metadata/table_changes.csv` and
-`metadata/data_notes.csv`.
+committed by hand).
+
+**Some files in this repository's `main` are published the moment they merge.**
+The site, both client packages and the MCP server read them over HTTPS from
+`raw.githubusercontent.com/ben-domingue/irw/main/`, with no Redivis release in
+between, so a merge to `main` is the release for these:
+
+| File | Read by |
+|---|---|
+| `metadata/version_manifest.tsv` | site, Rpkg, Python-pkg |
+| `metadata/aggregators.csv` | site, Rpkg |
+| `metadata/table_changes.csv` | site (`corrections.qmd`) |
+| `metadata/data_notes.csv` | site, MCP `get_processing_notes` |
+| `metadata/column_docs.csv`, `metadata/covariate_labels.csv`, `metadata/codebook_links.csv` | site (table-page Codebook); the first and last also MCP `describe_columns`. The Python package and MCP read value labels from irw_meta's `covariate_labels`, so that one reaches them only after a release |
+| `metadata/table_scripts.csv`, `data/` scripts, `processing_notes/` | MCP `get_processing_notes` |
+| `itemtext/withdrawals.csv` | site (tombstone pages for withdrawn tables) |
+| `datastandard.md` | site (the Codebook's column definitions, joined at render time) |
+
+The list comes from grepping the three consumer repos for that URL; grep again
+rather than trust it.
+
+### The table-page Codebook
+
+Each table page has a **Codebook** section saying what the table's columns
+mean, and the MCP's `describe_columns` answers the same question (#2755,
+#2763, #2766, #2770). Its three files are built separately and read from `main`
+(table above). Each owner's header documents its columns; this only says which
+file holds which fact.
+
+| File | What it answers | Built by | When |
+|---|---|---|---|
+| `metadata/column_docs.csv` | Per (table, column): does `datastandard.md` define it, and which source column did the build script rename into it. The definition text is not copied: the page joins it from `datastandard.md` at render time | `metadata/14_column_docs.py` (stage 14) from `metadata.csv`'s `variables`, `table_scripts.csv` (stage 13) and the `data/` scripts. Core tables only: the other catalogues carry no column list | every pipeline run |
+| `metadata/covariate_labels.csv` | What each code of a coded `cov_*` column means, using the source's own value labels verbatim (1 = hombre). Also an irw_meta table | `metadata/covariate_labels/harvest.py` re-runs `data/` scripts that read SPSS/Stata files, then `build.py` turns the logs into the CSV. Scripts the harvest cannot re-run are entered by hand in `manual.csv` (with `not_harvestable.tsv` recording them as checked); `institutions.csv` decides which code lists are withheld | **by hand** (section 6): it downloads sources, so it cannot run in CI |
+| `metadata/codebook_links.csv` (+ `codebook_links_checked.csv`, what was swept) | A link to the source deposit's own codebook file, never a guess: `how_found` records the evidence | `metadata/find_codebook_links.py`. Stage 15 runs it `--new-only` on new tables; the wider crawls (#2787, #2792) are hand runs. `automated_finding/stage_dict_row.py --codebook-url` records a codebook a person found at ingest in `automated_finding/codebook_at_ingest.csv`, which it trusts first | weekly for new tables; by hand for crawls |
+
+Two guards keep these honest. `metadata/check_label_harvest.py` runs in the
+`contract` job and warns, without failing, when a PR's script reads a labelled
+file and writes `cov_*` columns but has never been harvested. The page itself
+says the Codebook is a best reconstruction, not the source's codebook. Which
+link kinds the page shows, and in what order, is decided in `irw_site`'s
+`landing/emit_landing_pages.R` (`source_codebook_html`). Kinds it does not
+show, such as Dataverse DDI exports and READMEs that do not name the columns,
+stay in the CSV for the MCP.
 
 ## 5. Which document wins
 
@@ -299,7 +341,7 @@ When two documents disagree, this is the order of precedence:
 | Metadata pipeline run order | `DEFAULT_ORDER` in `.claude/skills/irw-site-update/scripts/run_pipeline.sh` — the order actually executed |
 | Automated-finding procedure | `automated_finding/.claude/skills/irw-automated-finding/SKILL.md` over `automated_finding/README.md`; `automated_finding/BATCH_LOG.md`'s latest notes override both on workflow specifics |
 | Item text schema, and the administered-language rules | [`itemtext/.claude/skills/irw-auto-itemtext/references/itemtext_standard.md`](itemtext/.claude/skills/irw-auto-itemtext/references/itemtext_standard.md), which mirrors the public page at `itemresponsewarehouse.org/itemtext.html`. It beats the automated-finding SKILL.md, which runs item text extraction at its Step 3.5 but does not own the schema |
-| Provenance vocabularies for item text (`translation_source`) | [`itemtext/provenance_vocab.csv`](itemtext/provenance_vocab.csv) — enforced by `itemtext/check_provenance.R`, the way `TAG_VOCAB` is enforced for tags. SKILL.md and `language_backfill/README.md` say when to reach for each value, never what the values are |
+| Provenance vocabularies for item text (`translation_source`) | [`itemtext/provenance_vocab.csv`](itemtext/provenance_vocab.csv) — enforced by `itemtext/check_provenance.R`, the way `TAG_VOCAB` is enforced for tags. SKILL.md and `itemtext/language_backfill/README.md` say when to reach for each value, never what the values are |
 | Item text *extraction judgment* (what goes in `instructions` vs `section_prompt`, when to leave a field blank) | Step 4 of `itemtext/.claude/skills/irw-auto-itemtext/SKILL.md` |
 | Dataset descriptions and licenses | The per-source dictionary Sheet, by convention — no document claims this in writing |
 | What kind of work to do next, and what not to | [`PRIORITIES.md`](PRIORITIES.md) — advisory, and ben-domingue overrules it. `CLAUDE.md`'s "Processing Priorities" answers the narrower question of which *dataset* to pick |
@@ -321,7 +363,7 @@ CSV-only for the `automated_finding` pipeline, and says so explicitly.
 
 ## 6. What runs on a schedule
 
-Inventoried and settled in #1940 (2026-09-08). Everything on a clock runs on one
+Inventoried and settled in #1940 (2026-09-08); workflow table re-read from `.github/workflows/` 2026-10-03. Everything on a clock runs on one
 of two runners — **GitHub Actions** and **Claude cloud routines**. Nothing runs
 from a crontab: `crontab -l` was empty and no systemd timer referenced the
 project when this was written (checked on the maintainer's machine, which is the
@@ -334,13 +376,16 @@ of this section — that is a third way things happen, but it is not a runner.
 
 | Workflow | When (UTC) | What it does | Merges? |
 |---|---|---|---|
-| `metadata-pipeline.yml` | Mon 13:00 | the 13 metadata CSVs; stages 01 02 03 05 06 07 08 10 11 12 | opens a PR, **never** auto-merges — the review is the product |
+| `metadata-pipeline.yml` | Mon 13:00 | the metadata CSVs: every stage in `DEFAULT_ORDER` (section 5) | opens a PR, **never** auto-merges — the review is the product |
 | `version-manifest.yml` | daily 13:30 | records newly *released* Redivis versions | opens a PR and **squash-merges it**, because it only records what already happened |
+| `itemtext-issues.yml` | daily 13:45 | refreshes `itemtext/live_tables.csv`; fails when a live table's triage note never reached the public item-text issues page (#2236) | opens and **squash-merges** its own snapshot PR, like the manifest |
 | `drift-report.yml` | daily 14:00 | reports what downstream is behind | writes no code; rewrites issue #2085 in place |
-| `tests.yml` | on PR | the test suite, plus `check_config_parity.py` | — |
+| `tests.yml` | every PR, and every push to `main` | the test suites, config parity, the R smoke tests, and the `contract` job (validator gate plus the advisory label-harvest check) | — |
+| `release-irw-validate.yml` | on a pushed `irw-validate-v*` tag | publishes `irw_validate/` to PyPI as `irw-validate` (Trusted Publishing; procedure in the file's header) | — |
+| `To Do.yml`, `In Progress.yml`, `Under Review.yml` | on issue and comment events | move issue cards on the `ben-domingue` user project board (`PROJECTS_TEST` secret) | — |
 
-The daily times are deliberately staggered: the drift report reads the manifest
-the 13:30 job refreshed.
+The daily times are staggered so that the drift report reads the manifest the
+13:30 job refreshed.
 
 ### GitHub Actions, `datapages/irw` (the Quarto site)
 
@@ -356,9 +401,10 @@ the old numbers into every page (2026-08-24).
 
 ### Claude cloud routines
 
-Read from the routines API on 2026-09-08. Of the 20 most recently created
-routines, **exactly two are enabled**; the other 18 are fired one-shot PR
-check-ins.
+Read from the routines API on 2026-09-08, when, of the 20 most recently created
+routines, exactly two were enabled and the other 18 were fired one-shot PR
+check-ins. The third row was added later. Whether each is enabled *today* is not
+recorded here, because it is toggled from the routines page; read it there.
 
 | Routine | id | When (UTC) |
 |---|---|---|
@@ -406,13 +452,34 @@ only kept for the record goes into a subfolder:
 |---|---|
 | `archive/` | Finished workstreams, one-time reports, spent one-off scripts. Nothing that runs reads them |
 | `logs/`, `pipeline_logs/`, `runs/` | Output a run writes for review (`runs/` is gitignored and can be thrown away) |
-| topic folders (`leads/`, `naming_audit/`, `itemtext_verification/`, `tags/age_range/`, `tools/withdrawals/`) | Everything for one job or one kind of record together, with a README naming whatever reads it by path |
+| topic folders (`automated_finding/leads/`, `automated_finding/naming_audit/`, `automated_finding/itemtext_verification/`, `tags/age_range/`, `tools/withdrawals/`) | Everything for one job or one kind of record together, with a README naming whatever reads it by path |
 
 The directory's own README has the full layout. Before moving a file, `git grep`
 its path. Scripts, skills, workflows and provenance records cite files by
 path, and some readers skip a missing file without saying so (`03_tags.R`'s
-`file.derived`). History docs such as `BATCH_LOG.md` and `round_log.md` keep the
+`file.derived`). History docs such as `automated_finding/BATCH_LOG.md` and
+`itemtext/extraction_batches/round_log.md` keep the
 path the file had when they were written.
+
+## 8. The rest of the tree
+
+Sections 2–7 cover the pipeline. The other top-level entries, briefly; each
+directory's README (where there is one) goes further:
+
+| Path | What it is |
+|---|---|
+| `data/` | One script per dataset (R, Python, Stata). Subfolders group scripts by Redivis source or by family: `competitions/`, `nominal/`, `simsyn/` for the auxiliary datasets; `trials/` for trial-level sports tables; `gilbert_hte/` for the IL-HTE `gilbert_meta_*` series; `pisa/` for PISA; `tests/` for the CI checks on the ENEM scoring helpers. Older top-level scripts predate the naming rule in `datastandard.md` and keep their names, because `metadata/table_scripts.csv` and the MCP find scripts by path |
+| `audit/2401/` | The #2401 retroactive corpus audit: `RULES.md` (the audit's frozen rules), detectors, pilot and sample dossiers, triage and repair builders. A workstream folder, not a pipeline stage |
+| `tools/withdrawals/`, `tools/repairs/` | One already-run script per withdrawal or one-off repair, kept because provenance records cite them by path. `tools/withdrawals/ledger.py` is the live part: withdrawal scripts call it to append to `itemtext/withdrawals.csv` |
+| `collections/` | `registry.csv` and `curated/` are the data `10_collections.R` reads (#1633); `scout_instruments.py` and `presort_instruments.py` propose curated members for human review |
+| `irw_validate/` | The validator (section 5). A separate PyPI distribution with its own `pyproject.toml`, released by tag (section 6). `misc/validate_irw.R` is its R twin for contributors without Python; a CI test keeps the two in step through `# @check` markers |
+| `red_up/`, root `pyproject.toml` | The uploader (section 4). The root `pyproject.toml` packages only `red_up`, so `pip install -e .` gives the `red_up` command |
+| `irw_secrets.py` | The one place a write-scoped Redivis token is resolved. Anything that writes to Redivis imports it rather than reading the environment itself |
+| `redivis_shim.py` | A patch that makes whole-table reads work under redivis 0.20.11 with urllib3 2.x. Its docstring says when to remove it |
+| `.claude/skills/` | `irw-site-update` (the metadata pipeline) and `irw-vignette` live here. `irw-auto-itemtext`, `irw-automated-finding` and `irw-auto-tag` are **symlinks** into `itemtext/`, `automated_finding/` and `tags/`, so edit them there |
+| `processing_notes/` | Processing and licensing guidance, `validator_overrides.csv` (read by the MCP), outreach letters and per-table metadata-repair notes |
+| `irw-dataset-builder/` | A Streamlit app for building an IRW-format file interactively. Dormant: unchanged since 2025-02, and it predates `irw_validate`, whose checks it does not run |
+| `manuscript_src/`, `training/`, `misc/` | Frozen analysis code for the 2025 BRM paper, workshop materials, and small R utilities |
 
 ## Two rules
 
