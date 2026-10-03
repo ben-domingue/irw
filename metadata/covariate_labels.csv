@@ -2153,8 +2153,8 @@ gholami_2017_periodontal_knowledge,cov_gender,0,male
 gholami_2017_periodontal_knowledge,cov_gender,1,female
 gholami_2017_periodontal_knowledge,cov_marital,1,Married
 gholami_2017_periodontal_knowledge,cov_marital,2,Single
-gilbert_meta_56,cov_male,0,Male
-gilbert_meta_56,cov_male,1,Female
+gilbert_meta_56,cov_female,0,Male
+gilbert_meta_56,cov_female,1,Female
 gilbert_meta_62,cov_county,1,Busia
 gilbert_meta_62,cov_county,2,Trans Nzoia
 gilbert_meta_62,cov_female,1,Male
