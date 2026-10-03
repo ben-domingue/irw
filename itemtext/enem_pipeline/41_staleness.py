@@ -23,7 +23,8 @@ DEPS = [
     # EVERY pass that writes an out_rb item table belongs here, or a stale
     # build caused by editing it goes unnoticed -- which is the one thing this
     # file exists to prevent. 23, 29, 55, 56 and 57 were missing: the first
-    # three predate this list, and 56/57 were added by #2462. Cross-check
+    # three predate this list, and 56/57/58/59 were added by #2462.
+    # 58 was itself left out when it landed -- exactly the miss described here. Cross-check
     # against the run() calls in 42_rebuild.py rebuild() when adding a pass.
     (f"{T}/*/out_rb/*__items.csv", ["13_join.py", "14_fill_gaps.py",
                                     "23_decode_symbolmt.py",
@@ -37,7 +38,9 @@ DEPS = [
                                     "54_relocate_descriptions.py",
                                     "55_recover_tables.py",
                                     "56_reading_order.py",
-                                    "57_drawn_glyphs.py"]),
+                                    "57_drawn_glyphs.py",
+                                    "58_verified_patches.py",
+                                    "59_strip_essay_section.py"]),
 ]
 
 REPO = os.path.expanduser("~/irw/itemtext/itemtables")

@@ -21,6 +21,7 @@ so everything here is content, not schema.
 | `tabs` | 159 | `b64af73e` |
 | `number` | 23 | `e7b8bfcc` |
 | rest of `flattened` (fractions, factorials) + R17 + R18 | ~58 | `d81a205e` |
+| `essay_material` + `moved_word` + `figure_labels` (R19, R5) | 15 | this batch |
 
 ### Figure descriptions on the wrong item (R13)
 
@@ -102,6 +103,70 @@ settles it — on that line the base sits at y0 182.61 and the `2` at 189.00,
 at 183.10, *above* it. The AFC cathode is ½O₂ + H₂O + 2e⁻ → 2OH⁻. A
 corpus-wide scan for a script marked between two letters of one token returns
 that cell and no other, so it was patched rather than made a rule.
+
+### The Redação section that four items swallowed (R19)
+
+In the day-1 booklet the essay section is printed straight after the final
+Linguagens question, with no question number and no `QUESTÃO` header to stop
+at. The parser closes an item when it meets the *next* question header — so for
+the **last** question of the area there is nothing to close against, and the
+whole essay apparatus landed inside that one item. Those four items were
+shipping with **65–79 % of their text belonging to a different task**, and any
+model reading the cell read two unrelated prompts as one.
+
+Four items, and a scan of every `item_text` in every year confirms there are no
+others: 2017 LC 60715, 2019 LC 76167, 2021 LC 120165, 2022 LC 86703. The
+`instructions` column is deliberately left alone — the booklet *cover*
+legitimately says the day-1 caderno contains the essay proposal.
+
+`59_strip_essay_section.py` anchors on what to **keep**, not what to cut,
+because the essay material has no reliable opening marker and 2017's own
+stimulus already carries `TEXTO I`/`TEXTO II` labels, so cutting on `TEXTO`
+would split the item in half. Every keep-anchor was confirmed by checking that
+the item's **keyed option completes the question grammatically**.
+
+Since the pass deletes text it fails closed twice — the removed span must carry
+an essay signal *and* match a per-item character count measured when the entry
+was written. The second check is the one that matters, and testing is what
+established that: an anchor aimed deliberately **earlier** still leaves the
+essay material inside the removed span, so the signal test alone passes it and
+real item text is deleted. With the length check that case is refused even
+under `--apply`.
+
+### Options that were never text (R5)
+
+**2016 MT 39198** shipped its five options as `B\nC`, `A B`, `C A BC`, `A BC`,
+`A B\nC` — permutations of three bare letters, with the keyed option
+indistinguishable from the rest. **2020 CN 62745** shipped the same four
+circuit labels reordered five times. In both the options *are* diagrams, and
+what the extractor found was label residue scraped from inside the artwork in
+content-stream order.
+
+Both are now NA, with **no generated descriptions**. This is R5 enforcement
+rather than a new rule: R5 already says that when the printed options are bare
+figures the `option_text` is NA, and that an `option_text` is never generated.
+Fifty items across the twelve years already ship that way, so this follows the
+corpus convention instead of adding an exception — and it needs no AI text and
+no provenance change.
+
+### A word that moved between two items
+
+2015 MT 29167 and 29359 are one defect seen from both ends. The participle
+*substituídas* was cut from 29167's stem, leaving `duas antenas que serão  por
+uma nova` with a double space — and the missing token is physically present in
+a **different item**, 29359's option E, which is that item's **keyed** option.
+The word is not reconstructed from guesswork: the gap's grammar requires a
+participle, the item's own next sentence says *"as antenas que serão
+substituídas"*, and the stray copy is sitting in the other item. Both ends are
+fixed together.
+
+2016 MT 24747 is the same shape in algebra. Option A is a stacked fraction
+whose numerator and option letter were swept into the stem, so the item ended
+`...fonte sonora, é / A / 500 . 81` while option A held only `. D^2`. Read off
+the page, the printed option is 500·81 over A·D². **R17 is load-bearing here**:
+written flat as `500 . 81/A . D^2` it reads 500·(81/A)·D², which moves D² into
+the numerator and inverts the physics, since cost is inversely proportional to
+the square of the distance.
 
 ### Ben's `instructions` lead
 

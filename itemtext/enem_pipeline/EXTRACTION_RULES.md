@@ -86,6 +86,16 @@ Ruled by the user 2026-09-15, following 2023:
   would be joined to responses as if it were printed. `correct_response` and
   `resp_raw` keep the options addressable.
 - Never generate an `option_text`.
+- **Label residue counts as "no text".** When the options are diagrams, what
+  the extractor finds is not option text but whatever letters and numbers are
+  printed *inside* the artwork, scraped in content-stream order. That is worse
+  than NA, because it looks like text and is not: 2016 MT 39198 shipped its
+  five options as `B\nC`, `A B`, `C A BC`, `A BC`, `A B\nC` — permutations of
+  three bare letters, the keyed one indistinguishable from the rest — and
+  2020 CN 62745 shipped the same four circuit labels reordered five times.
+  Both are now NA (#2462, ruled 2026-10-03). Fifty items across the twelve
+  years already shipped this way, so NA is the convention here, not an
+  exception to it.
 - Text recovered from INEP's own standard booklet is not generated text
   and is not marked. R15 has the two conditions; anything outside them is
   generated text and belongs to this rule.
@@ -520,3 +530,48 @@ R15 is not a route around R5. It is the narrower statement that text INEP
 wrote never entered R5's scope in the first place; anything that falls outside
 these two conditions is generated text and carries R5's markings, if it is
 ruled shippable at all.
+
+## R19. The Redação section absorbed by the last LC item is removed
+
+In the day-1 booklet the essay section is printed straight after the final
+Linguagens question. It carries no question number and no `QUESTÃO` header, and
+the parser closes an item only when it meets the *next* question header — so
+for the **last** question of the area there is nothing to close against, and
+the whole essay apparatus lands inside that one item's `item_text`: the
+motivating texts, the infographic label residue, `PROPOSTA DE REDAÇÃO`, and
+sometimes a stray page number.
+
+It is removed. The essay prompt is a different task from the item that happens
+to precede it; leaving it in place means that item ships with 65–79 % of its
+text belonging to something else, and any model reading the cell is reading two
+unrelated prompts as one.
+
+Four items are affected and no others — 2017 LC 60715, 2019 LC 76167,
+2021 LC 120165, 2022 LC 86703. A scan of every `item_text` in every year for
+`PROPOSTA DE REDA`, `motivador`, `dissertativo-argumentativo` and
+`proposta de intervenção` returns exactly these four.
+
+Two things this rule does **not** license:
+
+- **`instructions` is not touched.** The booklet *cover* legitimately says the
+  day-1 caderno contains the essay proposal, so that column mentions the
+  Redação on purpose in every LC table.
+- **No cut without a keep-anchor.** The essay material has no reliable opening
+  marker: in 2021 and 2022 it starts with `Descrição da imagem:` (the
+  accessibility edition describing an essay TEXTO), in 2017 with
+  `Descrição do gráfico:`, and 2017's *own* stimulus already carries
+  `TEXTO I`/`TEXTO II` labels, so anchoring on `TEXTO` would cut the item in
+  half. What is stable is the end of the item's own question, so
+  `59_strip_essay_section.py` names the text to KEEP THROUGH and drops
+  everything after it. Each anchor was confirmed by checking that the item's
+  **keyed option completes the question grammatically**.
+
+Because this pass deletes text it fails closed: the removed span must contain
+one of the essay signals above, or the cut is refused and reported.
+
+This is narrower than the 2022 CH 97262 case recorded above as NOT YET RULED.
+There, the deleted text was a (scrambled) rendering of the item's *own*
+figure, so removing it loses item content. Here the deleted text was never part
+of the item at all, and it remains in the booklet for anyone who wants the
+essay prompts — which, if IRW ever does, belong in their own records rather
+than appended to an unrelated Linguagens question.

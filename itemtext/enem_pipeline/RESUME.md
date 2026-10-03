@@ -28,13 +28,29 @@ make settled first, then one PR along the lines of "ENEM adjustments".
 | `symbol` | 19 | done — `a801f199` + the drawn-glyph commit |
 | `number` | 23 | done — `e7b8bfcc` |
 | rest of `flattened` (fractions, factorials) | ~50 | done — `d81a205e`, new pass `58_verified_patches.py` + R17/R18 |
-| `figure_labels`, `essay_material`, `moved_word` | 15 | open |
-| cosmetic / noise / incomplete | ~380 | open |
+| `figure_labels`, `essay_material`, `moved_word` | 15 | done — new pass `59_strip_essay_section.py` + R19, and R5 applied to figure options |
+| `stimulus_missing` | 46 | drafted + verified, **NOT applied** — see §3 |
+| cosmetic / noise | 174 | open; none of these change an item's meaning |
 
-Three new passes and one new rule came out of it: `56_reading_order.py`
+**Every `changes meaning` finding in the review is now committed** — 176 of 176.
+What is left is 114 `cosmetic`, 54 `noise` and 6 `structure`, plus the 46
+`stimulus_missing` items, which are `incomplete` rather than wrong.
+
+Five new passes and four new rules came out of it: `56_reading_order.py`
 (spans emitted out of visual order), `57_drawn_glyphs.py` (glyphs the booklet
-draws rather than sets as text) and **R16**, which is the ruling that reading a
-glyph off `get_drawings()` is recovery rather than generation.
+draws rather than sets as text), `58_verified_patches.py` (hand-verified
+per-item corrections, runs last), `59_strip_essay_section.py` (the Redacao
+section four items absorbed), and rules **R16** (a glyph read off
+`get_drawings()` is recovery, not generation), **R17** (parenthesise a fraction
+side that is not a single token), **R18** (lost emphasis restored as `~~run~~`)
+and **R19** (the absorbed Redacao section is removed).
+
+A lesson from R19 worth carrying: a pass that DELETES text needs an exact
+invariant, not a plausible one. Its first guard required the removed span to
+contain an essay signal, which sounds sufficient and is not — aiming the
+anchor EARLIER leaves the essay material inside the removed span, so the
+signal still matches and real item text goes. The guard that works is the
+per-item removed-character count.
 
 ## 2. Current verification state
 
@@ -100,6 +116,46 @@ a flat symlink farm over the **#1942-CORRECTED** CSVs in
 `/scratch/users/mazzafe/enem_output/regular` is **pre-#1942 and wrong**.
 
 ## 3. What is waiting on someone
+
+### `stimulus_missing` (46) — verified, deliberately not applied
+
+45 actionable drafts (the 46th, 2013 LC 43715, needed only the R18 emphasis
+marking, which shipped in `d81a205e`). **None of this text is in the repo.**
+Everything lives in `~/enem/itemtext_run/stimuli_2462/` — rescued there because
+it was built in a session scratchpad under `/tmp`:
+
+- `briefs/corrected.json` — the current best text, pass-1 corrections merged
+- `briefs/verdict0-5.json` — pass 1, complete: **ACCEPT 4 / ACCEPT_WITH_EDIT 41**
+- `briefs/p2_batch*.json`, `p2_verdict*.json` — the blind pass-2 inputs and results
+- `hires/`, `pages/` — rendered stimuli; regenerating these costs real time
+
+**Why two passes.** The drafts had a ~95 % defect rate, dominated by confident
+spatial and count detail rather than invented objects: inverted map legend
+classes (2015 CH 83810), a symbol distribution inverted badly enough to destroy
+the item (2013 CH 25217), bows absent from the painting (2013 LC 51091,
+imported from TEXTO I instead of read off the image), a newspaper not in the
+strip (2013 LC 9614), and a dropped curved arrow that is the one graphic
+element its item depends on (2015 CH 37753). One draft quoted the author's own
+printed words INSIDE its `(gerada por IA)` block while its notes claimed it had
+not. Pass 1 corrected all 45; pass 2 re-checks those corrections, because they
+are themselves model output.
+
+**Method that works.** 2x full-page renders (~1250 px) are TOO COARSE. Extract
+the embedded raster and inspect at 6-16x — that is what settled the
+MARIN-vs-NARINE caption in 2016 CH 38717 (5 glyphs, initial M identical to
+MINA's). The booklet prints MARIN; the Cia. das Letras edition is usually cited
+as Narine. That block is an UNMARKED verbatim transcription, so the booklet
+should win, but it is a house-style call for Mateus.
+
+**Cost.** This is the expensive work — image verification ran ~1.5M tokens
+across two passes, where every other class in #2462 was cheap text and
+geometry. Budget for it deliberately.
+
+**Open calls.** (1) MARIN vs Narine above. (2) 2013 CH 25217 and 2013 LC 51365
+each have two images but a single insertion anchor, so the second description
+lands before the first image's credit; splitting each into two insertions reads
+better. Applying this batch also flips 2013/2015/2016 to `partly_generated`
+and owes public issues-page entries.
 
 | what | who |
 |---|---|

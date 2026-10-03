@@ -29,4 +29,5 @@ batch, so the build can be reproduced exactly:
 | 55_recover_tables.py | 55_recover_tables.v1.py | `cf542ff149350b004527ec0c4cd13884` |
 | 56_reading_order.py | 56_reading_order.v1.py | `2b7bee366d7958c02091c4444eaba694` |
 | 57_drawn_glyphs.py | 57_drawn_glyphs.v1.py | `9879b9c689311247083ea46c9b32e1d1` |
-| 58_verified_patches.py | 58_verified_patches.v2.py | `b78f90ddd78b4b8a1dfd29d41e4bd15a` |
+| 58_verified_patches.py | 58_verified_patches.v3.py | `b92423109e16043f74d87c9879f00d63` |
+| 59_strip_essay_section.py | 59_strip_essay_section.v2.py | `8783d4254587569974e0c12ea8563e21` |

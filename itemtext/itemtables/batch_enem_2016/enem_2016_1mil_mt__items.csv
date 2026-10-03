@@ -4650,9 +4650,7 @@ sonora, e o custo é diretamente proporcional ao volume
 do material do revestimento.
 Uma expressão que fornece o custo para revestir 
 uma parede de área A (em metro quadrado), situada 
-a D metros da fonte sonora, é
-A
-500 . 81","B",". D^2",0,NA,NA,NA,NA,"Portuguese","A"
+a D metros da fonte sonora, é","B","500 . 81/(A . D^2)",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2016_1mil_mt","enem_2016_1mil_mt_1",24747,"ENEM 2016 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -4709,9 +4707,7 @@ sonora, e o custo é diretamente proporcional ao volume
 do material do revestimento.
 Uma expressão que fornece o custo para revestir 
 uma parede de área A (em metro quadrado), situada 
-a D metros da fonte sonora, é
-A
-500 . 81","B","500 . A/D^2",1,NA,NA,NA,NA,"Portuguese","B"
+a D metros da fonte sonora, é","B","500 . A/D^2",1,NA,NA,NA,NA,"Portuguese","B"
 "enem_2016_1mil_mt","enem_2016_1mil_mt_1",24747,"ENEM 2016 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -4768,9 +4764,7 @@ sonora, e o custo é diretamente proporcional ao volume
 do material do revestimento.
 Uma expressão que fornece o custo para revestir 
 uma parede de área A (em metro quadrado), situada 
-a D metros da fonte sonora, é
-A
-500 . 81","B","500 . D^2/A",0,NA,NA,NA,NA,"Portuguese","C"
+a D metros da fonte sonora, é","B","500 . D^2/A",0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2016_1mil_mt","enem_2016_1mil_mt_1",24747,"ENEM 2016 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -4827,9 +4821,7 @@ sonora, e o custo é diretamente proporcional ao volume
 do material do revestimento.
 Uma expressão que fornece o custo para revestir 
 uma parede de área A (em metro quadrado), situada 
-a D metros da fonte sonora, é
-A
-500 . 81","B","500 . A . D^2/81",0,NA,NA,NA,NA,"Portuguese","D"
+a D metros da fonte sonora, é","B","500 . A . D^2/81",0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2016_1mil_mt","enem_2016_1mil_mt_1",24747,"ENEM 2016 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -4886,9 +4878,7 @@ sonora, e o custo é diretamente proporcional ao volume
 do material do revestimento.
 Uma expressão que fornece o custo para revestir 
 uma parede de área A (em metro quadrado), situada 
-a D metros da fonte sonora, é
-A
-500 . 81","B","500 . 3 . D^2/A",0,NA,NA,NA,NA,"Portuguese","E"
+a D metros da fonte sonora, é","B","500 . 3 . D^2/A",0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2016_1mil_mt","enem_2016_1mil_mt_1",96774,"ENEM 2016 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -13803,8 +13793,7 @@ meridiano que passa por B e C. Considere que o plano D
 é paralelo à linha do equador na figura.
 A projeção ortogonal, no plano D, do caminho traçado no 
 globo pode ser representada por
-A","E","B
-C",0,NA,NA,NA,NA,"Portuguese","A"
+A","E",NA,0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2016_1mil_mt","enem_2016_1mil_mt_1",39198,"ENEM 2016 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -13862,7 +13851,7 @@ meridiano que passa por B e C. Considere que o plano D
 é paralelo à linha do equador na figura.
 A projeção ortogonal, no plano D, do caminho traçado no 
 globo pode ser representada por
-A","E","A B",0,NA,NA,NA,NA,"Portuguese","B"
+A","E",NA,0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2016_1mil_mt","enem_2016_1mil_mt_1",39198,"ENEM 2016 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -13920,7 +13909,7 @@ meridiano que passa por B e C. Considere que o plano D
 é paralelo à linha do equador na figura.
 A projeção ortogonal, no plano D, do caminho traçado no 
 globo pode ser representada por
-A","E","C A BC",0,NA,NA,NA,NA,"Portuguese","C"
+A","E",NA,0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2016_1mil_mt","enem_2016_1mil_mt_1",39198,"ENEM 2016 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -13978,7 +13967,7 @@ meridiano que passa por B e C. Considere que o plano D
 é paralelo à linha do equador na figura.
 A projeção ortogonal, no plano D, do caminho traçado no 
 globo pode ser representada por
-A","E","A BC",0,NA,NA,NA,NA,"Portuguese","D"
+A","E",NA,0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2016_1mil_mt","enem_2016_1mil_mt_1",39198,"ENEM 2016 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -14036,8 +14025,7 @@ meridiano que passa por B e C. Considere que o plano D
 é paralelo à linha do equador na figura.
 A projeção ortogonal, no plano D, do caminho traçado no 
 globo pode ser representada por
-A","E","A B
-C",1,NA,NA,NA,NA,"Portuguese","E"
+A","E",NA,1,NA,NA,NA,NA,"Portuguese","E"
 "enem_2016_1mil_mt","enem_2016_1mil_mt_1",88786,"ENEM 2016 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS

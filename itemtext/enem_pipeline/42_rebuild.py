@@ -208,6 +208,11 @@ def rebuild(y, outdir):
     # looks once every other pass has run.
     run([sys.executable, os.path.join(HERE, "58_verified_patches.py"),
          "--items-dir", outdir, "--year", y, "--apply"])
+    # Removes the Redacao section the last LC item absorbed (R19). After 58 so
+    # its keep-anchors see finished text, and because 58 may edit the very
+    # question closer this pass anchors on.
+    run([sys.executable, os.path.join(HERE, "59_strip_essay_section.py"),
+         "--items-dir", outdir, "--year", y, "--apply"])
     return outdir
 
 def main():
