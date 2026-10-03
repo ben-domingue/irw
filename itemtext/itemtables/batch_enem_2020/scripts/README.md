@@ -20,11 +20,11 @@ batch, so the build can be reproduced exactly:
 | 25_repair_2021.py | 25_repair_2021.v1.py | `2dc1f84f6a30b6f95907adc4e4fe17ce` |
 | 26_strip_page_furniture.py | 26_strip_page_furniture.v11.py | `91a2b32477ecb2f0db325fd1fa6293a7` |
 | 29_decode_2021_notation.py | 29_decode_2021_notation.v4.py | `e0f129e6b0a43838cbaf467115bb97a0` |
-| 43_normalize_glyphs.py | 43_normalize_glyphs.v3.py | `cb9d74bb8fde3f3ee0f238420cba2e7f` |
+| 43_normalize_glyphs.py | 43_normalize_glyphs.v4.py | `621ac099a9c6acaf17085fb2300ffe39` |
 | 46_strip_option_letter.py | 46_strip_option_letter.v3.py | `86b69494098458373fb90d662417ddde` |
 | 48_mark_scripts.py | 48_mark_scripts.v8.py | `0d8e4edd1507be45fbb7db367694d2f2` |
 | 49_option_conventions.py | 49_option_conventions.v2.py | `a7c7870a5774efa50e1ce52d3e1acb66` |
-| 53_stacked_fractions.py | 53_stacked_fractions.v1.py | `eecd7aa92e357e3e1d05c548ab64624c` |
+| 53_stacked_fractions.py | 53_stacked_fractions.v2.py | `732a49e3f8fb45e2b60262c6b29b62ec` |
 | 54_relocate_descriptions.py | 54_relocate_descriptions.v2.py | `20e815208de24a947807eaee75f288fd` |
 | 55_recover_tables.py | 55_recover_tables.v1.py | `cf542ff149350b004527ec0c4cd13884` |
 | 56_reading_order.py | 56_reading_order.v1.py | `2b7bee366d7958c02091c4444eaba694` |
