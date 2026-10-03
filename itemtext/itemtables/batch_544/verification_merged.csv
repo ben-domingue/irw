@@ -1,0 +1,2 @@
+table,batch,mapping_basis,uploaded,route,status,evidence
+Fh_Okcsr_Roos_2022_study1_Feeling_Heard,batch_544,data_labels,,none,NOT_NEEDED,mapping_basis=data_labels: data/Fh_Okcsr_Roos_2022_study2_Feeling_CSV.R selects the Study 1 .sav columns under their own names; each column's SPSS variable label is its item text

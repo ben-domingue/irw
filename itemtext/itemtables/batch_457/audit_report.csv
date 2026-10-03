@@ -1,0 +1,4 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"goldberg_2018_ppq_dream","PASS",6,6,TRUE,TRUE,FALSE,TRUE,0,0,""
+"goldberg_2018_ppq_music","PASS",5,5,TRUE,TRUE,FALSE,TRUE,0,0,""
+"hao_2025_social_regulation","PASS",8,8,TRUE,TRUE,FALSE,TRUE,0,100,"100% of rows have blank option_text"

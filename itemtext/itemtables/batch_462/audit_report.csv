@@ -1,0 +1,4 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"spain_2025_fears_leaders","PASS",4,4,TRUE,TRUE,FALSE,TRUE,0,80,"80% of rows have blank option_text"
+"spain_2025_sex_frequency","PASS",6,6,TRUE,TRUE,FALSE,TRUE,0,0,""
+"spain_2025_sex_identity","WARN",4,4,TRUE,TRUE,FALSE,TRUE,0,0,"row-count anomaly (possible item-code conflation or missingness skew), median=8578.5: a9"

@@ -1,0 +1,2 @@
+table,batch,mapping_basis,uploaded,route,status,evidence
+chen_2022_gad,batch_546,data_labels,,none,NOT_NEEDED,mapping_basis=data_labels: data/mental_health_covid19/src/src/src/src/process_chen_2022_mental_health.R selects the .sav columns GAD01-GAD07 by name with no rename; each column's SPSS variable label names its GAD-7 item (7/7 in canonical order; orchestrator re-read labels 2026-09-27)

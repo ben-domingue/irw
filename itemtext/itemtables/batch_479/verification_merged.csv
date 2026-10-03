@@ -1,0 +1,4 @@
+"table","batch","mapping_basis","uploaded","route","status","evidence"
+"spain_2026_international_confidence","batch_479","data_labels","","none","NOT_NEEDED","mapping_basis=data_labels: item codes are the CIS 3564.sav variable names (OOIICONFIANZA_1-10, lower-cased); .sav frequencies match live item x resp 100/100 cells; exempt from Step 5b"
+"spain_2026_international_eu","batch_479","data_labels","","none","NOT_NEEDED","mapping_basis=data_labels: item codes are the CIS 3564.sav variable names (UE_1-5, lower-cased); .sav frequencies match live item x resp 25/25 cells; exempt from Step 5b"
+"spain_2026_international_influence","batch_479","data_labels","","none","NOT_NEEDED","mapping_basis=data_labels: item codes are the CIS 3564.sav variable names (OOIIINFLUENCIA_1-10, lower-cased); .sav frequencies match live item x resp 100/100 cells; exempt from Step 5b"

@@ -1,0 +1,2 @@
+table,batch,mapping_basis,uploaded,route,status,evidence
+miedema_2023_ecs40,batch_528,data_labels,,none,NOT_NEEDED,"mapping_basis=data_labels: data/miedema_2023_ecs40.py melts S1 .dta ecoscale_N columns under their own names; each column's Stata variable label is its item text"

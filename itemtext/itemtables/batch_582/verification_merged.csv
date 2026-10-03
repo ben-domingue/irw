@@ -1,0 +1,2 @@
+table,batch,mapping_basis,uploaded,route,status,evidence
+spain_2012_reality_television,batch_582,data_labels,,exempt: data_labels,NOT_NEEDED,mapping_basis=data_labels; source file ties code to text

@@ -1,0 +1,2 @@
+"table","note"
+"argentina_2012_tobacco_policy","Clean pass with caveats: (1) resp reversed relative to source coding (source 1 A favor/2 En contra; IRW resp 2 = A favor, 1 = En contra), verified against codebook frequencies in all 8 cells. (2) No sabe (7) and Se niega (9) dropped as missing by the .do, so per-item n varies 6033-6532. (3) English translations are IRW machine translations (issues-page disclosure owed on upload). (4) Text source is INDEC's codebook, not a fielded questionnaire; interviewer framing not recovered."

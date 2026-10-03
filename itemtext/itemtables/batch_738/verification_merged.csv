@@ -1,0 +1,3 @@
+"table","batch","mapping_basis","uploaded","route","status","evidence"
+"degirolamo_2022_tipi","batch_738","data_labels","","exempt: data_labels","NOT_NEEDED","mapping_basis=data_labels: item code is the source column name pag20_4_1..10, each with its own Italian variable label (adjective pair) in the Wave 4 deposit dictionary"
+"modzelewska_2021_emo_neg","batch_738","data_labels","","exempt: data_labels","NOT_NEEDED","mapping_basis=data_labels: item code is the source .sav column name Emo_neg_aut1-5/Emo_neg_ref1-5, each with its own English variable label in s001.sav"

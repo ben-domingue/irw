@@ -1,0 +1,3 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"c19prc_uk_mcbride_2021_contacttracingapp","PASS",4,4,TRUE,TRUE,FALSE,TRUE,0,0,""
+"c19prc_uk_mcbride_2021_drinkcontext","WARN",9,9,TRUE,TRUE,FALSE,TRUE,0,0,"row-count anomaly (possible item-code conflation or missingness skew), median=1448: Context_Drink1_W2, Context_Drink2_W2, Context_Drink3_W2, Context_Drink4_W2"
