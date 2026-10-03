@@ -203,6 +203,11 @@ def rebuild(y, outdir):
     run([sys.executable, os.path.join(HERE, "57_drawn_glyphs.py"),
          "--items-dir", outdir, "--year", y, "--apply"]
         + sum((["--pdf", p] for p in parses.values()), []))
+    # Hand-verified per-item corrections. Runs LAST on purpose: every anchor in
+    # its table was copied from the SHIPPED cell, i.e. from the text as it
+    # looks once every other pass has run.
+    run([sys.executable, os.path.join(HERE, "58_verified_patches.py"),
+         "--items-dir", outdir, "--year", y, "--apply"])
     return outdir
 
 def main():

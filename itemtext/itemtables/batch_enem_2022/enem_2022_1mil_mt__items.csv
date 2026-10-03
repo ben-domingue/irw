@@ -5348,10 +5348,7 @@ ambos, pelo menos um dos quartos receba sol na parte
 da manhã.
 De quantas maneiras diferentes essa pessoa poderá 
 escolher 2 desses apartamentos para compra nas 
-condições desejadas?","B","9 6
-62×−
-!
-!()",0,NA,NA,NA,NA,"Portuguese","A"
+condições desejadas?","B","9 × 6!/(6 − 2)!",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2022_1mil_mt","enem_2022_1mil_mt_1",47309,"ENEM 2022 - MT","11
 LARANJA
 2º DIA
@@ -5404,10 +5401,7 @@ ambos, pelo menos um dos quartos receba sol na parte
 da manhã.
 De quantas maneiras diferentes essa pessoa poderá 
 escolher 2 desses apartamentos para compra nas 
-condições desejadas?","B","9 6
-62 2×−×
-!
-!!()",1,NA,NA,NA,NA,"Portuguese","B"
+condições desejadas?","B","9 × 6!/((6 − 2)! × 2!)",1,NA,NA,NA,NA,"Portuguese","B"
 "enem_2022_1mil_mt","enem_2022_1mil_mt_1",47309,"ENEM 2022 - MT","11
 LARANJA
 2º DIA
@@ -5460,10 +5454,7 @@ ambos, pelo menos um dos quartos receba sol na parte
 da manhã.
 De quantas maneiras diferentes essa pessoa poderá 
 escolher 2 desses apartamentos para compra nas 
-condições desejadas?","B","9 4
-42 2×−×
-!
-!!()",0,NA,NA,NA,NA,"Portuguese","C"
+condições desejadas?","B","9 × 4!/((4 − 2)! × 2!)",0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2022_1mil_mt","enem_2022_1mil_mt_1",47309,"ENEM 2022 - MT","11
 LARANJA
 2º DIA
@@ -5516,10 +5507,7 @@ ambos, pelo menos um dos quartos receba sol na parte
 da manhã.
 De quantas maneiras diferentes essa pessoa poderá 
 escolher 2 desses apartamentos para compra nas 
-condições desejadas?","B","9 2
-22 2×−×
-!
-!!()",0,NA,NA,NA,NA,"Portuguese","D"
+condições desejadas?","B","9 × 2!/((2 − 2)! × 2!)",0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2022_1mil_mt","enem_2022_1mil_mt_1",47309,"ENEM 2022 - MT","11
 LARANJA
 2º DIA
@@ -5572,15 +5560,7 @@ ambos, pelo menos um dos quartos receba sol na parte
 da manhã.
 De quantas maneiras diferentes essa pessoa poderá 
 escolher 2 desses apartamentos para compra nas 
-condições desejadas?","B","9 8
-82 2 1× −×−!
-!!()
-⎛
-⎝
-⎜⎜
-⎞
-⎠
-⎟⎟",0,NA,NA,NA,NA,"Portuguese","E"
+condições desejadas?","B","9 × (8!/((8 − 2)! × 2!) − 1)",0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2022_1mil_mt","enem_2022_1mil_mt_1",53461,"ENEM 2022 - MT","11
 LARANJA
 2º DIA
@@ -10078,10 +10058,7 @@ Figura 2
 29 50 19 45
 33 23 38
 A probabilidade de Pedro ganhar o jogo em uma das duas 
-próximas rodadas é","E","1
-46
-1
-45+",0,NA,NA,NA,NA,"Portuguese","A"
+próximas rodadas é","E","1/46 + 1/45",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2022_1mil_mt","enem_2022_1mil_mt_1",89637,"ENEM 2022 - MT","11
 LARANJA
 2º DIA
@@ -10149,10 +10126,7 @@ Figura 2
 29 50 19 45
 33 23 38
 A probabilidade de Pedro ganhar o jogo em uma das duas 
-próximas rodadas é","E","1
-46
-2
-46 45+×",0,NA,NA,NA,NA,"Portuguese","B"
+próximas rodadas é","E","1/46 + 2/(46 × 45)",0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2022_1mil_mt","enem_2022_1mil_mt_1",89637,"ENEM 2022 - MT","11
 LARANJA
 2º DIA
@@ -10220,10 +10194,7 @@ Figura 2
 29 50 19 45
 33 23 38
 A probabilidade de Pedro ganhar o jogo em uma das duas 
-próximas rodadas é","E","1
-46
-8
-46 45+×",0,NA,NA,NA,NA,"Portuguese","C"
+próximas rodadas é","E","1/46 + 8/(46 × 45)",0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2022_1mil_mt","enem_2022_1mil_mt_1",89637,"ENEM 2022 - MT","11
 LARANJA
 2º DIA
@@ -10291,10 +10262,7 @@ Figura 2
 29 50 19 45
 33 23 38
 A probabilidade de Pedro ganhar o jogo em uma das duas 
-próximas rodadas é","E","1
-46
-43
-46 45+×",0,NA,NA,NA,NA,"Portuguese","D"
+próximas rodadas é","E","1/46 + 43/(46 × 45)",0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2022_1mil_mt","enem_2022_1mil_mt_1",89637,"ENEM 2022 - MT","11
 LARANJA
 2º DIA
@@ -10362,10 +10330,7 @@ Figura 2
 29 50 19 45
 33 23 38
 A probabilidade de Pedro ganhar o jogo em uma das duas 
-próximas rodadas é","E","1
-46
-49
-46 45+×",1,NA,NA,NA,NA,"Portuguese","E"
+próximas rodadas é","E","1/46 + 49/(46 × 45)",1,NA,NA,NA,NA,"Portuguese","E"
 "enem_2022_1mil_mt","enem_2022_1mil_mt_1",95509,"ENEM 2022 - MT","11
 LARANJA
 2º DIA

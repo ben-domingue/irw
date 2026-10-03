@@ -1430,17 +1430,12 @@ combustível
 Temperatura 
 operacional (°C) Eletrólito Semirreações nos eletrodos
 AFC 90 - 100 Hidróxido de potássio aquoso
-H2 + 2 OH [notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]2 H 2O + 2 e [notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]1  __
-2  O2 + H^2O + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]2 OH[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]MSFC 600 - 1 000 Carbonatos de lítio, sódio 
+H2 + 2 OH [notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]2 H 2O + 2 e [notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]1/2 O2 + H_2O + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]2 OH[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]MSFC 600 - 1 000 Carbonatos de lítio, sódio 
 e/ou potássio fundidos
 H2 + CO_3
-2[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]H2O + CO2 +2  e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]1  __
-2 
- O2 + CO_2 + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]CO3
+2[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]H2O + CO2 +2  e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]1/2 O2 + CO_2 + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]CO3
 2[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]PEM 60 - 100 Ácido 
-poliperfl uorossulfônico sólido H2 [notação não extraível da fonte original (gerada por IA): seta de reação química]2  H+ + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]1  __
-2 
- O2 + 2 H^+ + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]H2O
+poliperfl uorossulfônico sólido H2 [notação não extraível da fonte original (gerada por IA): seta de reação química]2  H+ + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]1/2 O2 + 2 H^+ + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]H2O
 PAFC 175 - 200 Ácido fosfórico líquido
 SOFC 600 - 1 000 Óxido de zircônio(IV) sólido
 Testes operacionais com esses tipos de células têm indicado que as melhores alternativas para veículos são as 
@@ -1484,17 +1479,12 @@ combustível
 Temperatura 
 operacional (°C) Eletrólito Semirreações nos eletrodos
 AFC 90 - 100 Hidróxido de potássio aquoso
-H2 + 2 OH [notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]2 H 2O + 2 e [notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]1  __
-2  O2 + H^2O + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]2 OH[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]MSFC 600 - 1 000 Carbonatos de lítio, sódio 
+H2 + 2 OH [notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]2 H 2O + 2 e [notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]1/2 O2 + H_2O + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]2 OH[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]MSFC 600 - 1 000 Carbonatos de lítio, sódio 
 e/ou potássio fundidos
 H2 + CO_3
-2[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]H2O + CO2 +2  e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]1  __
-2 
- O2 + CO_2 + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]CO3
+2[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]H2O + CO2 +2  e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]1/2 O2 + CO_2 + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]CO3
 2[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]PEM 60 - 100 Ácido 
-poliperfl uorossulfônico sólido H2 [notação não extraível da fonte original (gerada por IA): seta de reação química]2  H+ + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]1  __
-2 
- O2 + 2 H^+ + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]H2O
+poliperfl uorossulfônico sólido H2 [notação não extraível da fonte original (gerada por IA): seta de reação química]2  H+ + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]1/2 O2 + 2 H^+ + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]H2O
 PAFC 175 - 200 Ácido fosfórico líquido
 SOFC 600 - 1 000 Óxido de zircônio(IV) sólido
 Testes operacionais com esses tipos de células têm indicado que as melhores alternativas para veículos são as 
@@ -1538,17 +1528,12 @@ combustível
 Temperatura 
 operacional (°C) Eletrólito Semirreações nos eletrodos
 AFC 90 - 100 Hidróxido de potássio aquoso
-H2 + 2 OH [notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]2 H 2O + 2 e [notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]1  __
-2  O2 + H^2O + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]2 OH[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]MSFC 600 - 1 000 Carbonatos de lítio, sódio 
+H2 + 2 OH [notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]2 H 2O + 2 e [notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]1/2 O2 + H_2O + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]2 OH[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]MSFC 600 - 1 000 Carbonatos de lítio, sódio 
 e/ou potássio fundidos
 H2 + CO_3
-2[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]H2O + CO2 +2  e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]1  __
-2 
- O2 + CO_2 + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]CO3
+2[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]H2O + CO2 +2  e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]1/2 O2 + CO_2 + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]CO3
 2[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]PEM 60 - 100 Ácido 
-poliperfl uorossulfônico sólido H2 [notação não extraível da fonte original (gerada por IA): seta de reação química]2  H+ + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]1  __
-2 
- O2 + 2 H^+ + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]H2O
+poliperfl uorossulfônico sólido H2 [notação não extraível da fonte original (gerada por IA): seta de reação química]2  H+ + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]1/2 O2 + 2 H^+ + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]H2O
 PAFC 175 - 200 Ácido fosfórico líquido
 SOFC 600 - 1 000 Óxido de zircônio(IV) sólido
 Testes operacionais com esses tipos de células têm indicado que as melhores alternativas para veículos são as 
@@ -1592,17 +1577,12 @@ combustível
 Temperatura 
 operacional (°C) Eletrólito Semirreações nos eletrodos
 AFC 90 - 100 Hidróxido de potássio aquoso
-H2 + 2 OH [notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]2 H 2O + 2 e [notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]1  __
-2  O2 + H^2O + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]2 OH[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]MSFC 600 - 1 000 Carbonatos de lítio, sódio 
+H2 + 2 OH [notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]2 H 2O + 2 e [notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]1/2 O2 + H_2O + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]2 OH[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]MSFC 600 - 1 000 Carbonatos de lítio, sódio 
 e/ou potássio fundidos
 H2 + CO_3
-2[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]H2O + CO2 +2  e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]1  __
-2 
- O2 + CO_2 + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]CO3
+2[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]H2O + CO2 +2  e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]1/2 O2 + CO_2 + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]CO3
 2[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]PEM 60 - 100 Ácido 
-poliperfl uorossulfônico sólido H2 [notação não extraível da fonte original (gerada por IA): seta de reação química]2  H+ + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]1  __
-2 
- O2 + 2 H^+ + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]H2O
+poliperfl uorossulfônico sólido H2 [notação não extraível da fonte original (gerada por IA): seta de reação química]2  H+ + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]1/2 O2 + 2 H^+ + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]H2O
 PAFC 175 - 200 Ácido fosfórico líquido
 SOFC 600 - 1 000 Óxido de zircônio(IV) sólido
 Testes operacionais com esses tipos de células têm indicado que as melhores alternativas para veículos são as 
@@ -1646,17 +1626,12 @@ combustível
 Temperatura 
 operacional (°C) Eletrólito Semirreações nos eletrodos
 AFC 90 - 100 Hidróxido de potássio aquoso
-H2 + 2 OH [notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]2 H 2O + 2 e [notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]1  __
-2  O2 + H^2O + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]2 OH[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]MSFC 600 - 1 000 Carbonatos de lítio, sódio 
+H2 + 2 OH [notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]2 H 2O + 2 e [notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]1/2 O2 + H_2O + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]2 OH[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]MSFC 600 - 1 000 Carbonatos de lítio, sódio 
 e/ou potássio fundidos
 H2 + CO_3
-2[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]H2O + CO2 +2  e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]1  __
-2 
- O2 + CO_2 + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]CO3
+2[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]H2O + CO2 +2  e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]1/2 O2 + CO_2 + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]CO3
 2[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]PEM 60 - 100 Ácido 
-poliperfl uorossulfônico sólido H2 [notação não extraível da fonte original (gerada por IA): seta de reação química]2  H+ + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]1  __
-2 
- O2 + 2 H^+ + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]H2O
+poliperfl uorossulfônico sólido H2 [notação não extraível da fonte original (gerada por IA): seta de reação química]2  H+ + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente]1/2 O2 + 2 H^+ + 2 e[notação não extraível da fonte original (gerada por IA): sinal negativo de carga ou de expoente; seta de reação química]H2O
 PAFC 175 - 200 Ácido fosfórico líquido
 SOFC 600 - 1 000 Óxido de zircônio(IV) sólido
 Testes operacionais com esses tipos de células têm indicado que as melhores alternativas para veículos são as 

@@ -427,6 +427,66 @@ deltas are sub-paths of one stroked drawing and its two minus signs of another,
 and they sit inside a figure rather than a text gap. That item's own prose
 already reads `ΔH 1` and `ΔH_2`, so the restored labels agree with it.
 
+## R17. A fraction side that is not a single token is parenthesised
+
+Ruled 2026-10-03 (#2462).
+
+`49_option_conventions.py` joins two printed lines with `/` and never
+parenthesised the result, so a bar drawn over a *product* shipped as though it
+covered only the first factor. That is not a presentation nicety — it changes
+the value:
+
+| cell | ships as | the page prints | shipped value | printed value |
+|---|---|---|---|---|
+| 2015 MT 60361 B | `9!/7! × 2!` | `9!/(7! × 2!)` | 144 | **36** |
+| 2016 MT 39762 D | `…4!/2! . 2!` | `…4!/(2! . 2!)` | — | — |
+| **2016 MT 39762 E** | `…4!/2! . 2!` | `…4!/(2! . 2!)` | 6 489 600 | **1 622 400** |
+
+39762 E is the **keyed** option. Measured, not inferred: 39762's bar is 27.60pt
+wide and spans the whole denominator, against 13.89pt for option C's genuine
+`4!/2!`; 60361 B's single bar at x 55.05–90.48 covers `7! × 2!` entire, while
+option D's `× 4!` sits *outside* its bar.
+
+So: **a fraction side that is not a single token is parenthesised** —
+`9!/(7! × 2!)`, `A/(A + B)`, `(62! 4!)/(10! 56!)`. A fractional exponent keeps
+the form 2015 MT 27281 already ships, `^(1/3)`.
+
+There was no prior precedent for `/(` in the corpus — the only occurrence was
+the unit `kJ/(kg °C)` in 2016 CN 24399 — so this is a new convention rather
+than an observed one. It is adopted because the alternative is text that reads
+as a different number from the one printed.
+
+## R18. Typographic emphasis lost in extraction is restored as `~~run~~`
+
+Ruled 2026-10-03 (#2462).
+
+Extraction keeps characters and discards their typeface, so an item whose
+question turns on *which* words are emphasised becomes unanswerable. 2013 LC
+43715 is the case: the booklet sets five verbs in `Arial-BoldMT` and the stem
+asks about *"a escolha das formas verbais **em destaque**"*, pointing at a
+highlight that is no longer there.
+
+**Marker: `~~run~~`.** Plain ASCII, searchable and reversible — the properties
+`48_mark_scripts.py`'s `^` and `_` were chosen for. The delimiter is forced by
+what is already in the corpus: `~` and `` ` `` occur **zero** times across all
+48 tables, while `*` occurs 125 times (footnote marks, and chemistry such as
+`TiO2|S*`) and `**` 20 times.
+
+**Mark every emphasised run in the cell, not only the ones the question needs.**
+A mechanical rule is reproducible; "mark what the item depends on" is a
+judgement that the next person will make differently.
+
+**Scope is narrower than it looks.** Nine items have stems mentioning
+*destaque*/*destacado*, but in eight of them the emphasis is ordinary
+typographic convention — italicised work titles, foreign words, `TEXTO I`
+labels — carrying nothing the question turns on, and those stems use the word
+in its plain sense. Checking the fonts, not the wording, is what separates
+them: only 43715 has emphasis the question depends on.
+
+**Locating the runs needs no guesswork.** Extraction leaves a DOUBLE SPACE at
+each font boundary (`carregamos  `, `dossiê  `), so the artifact marks where
+the emphasis was.
+
 ## R15. Text recovered from INEP's own booklet is not generated text
 
 Ruled 2026-09-21 (#2226), on the four 2018 items R14 recovered.

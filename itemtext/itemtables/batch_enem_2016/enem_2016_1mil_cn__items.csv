@@ -1075,9 +1075,7 @@ consequência, produtos podem chegar ao consumidor
 mais baratos. Um dos parâmetros que mede a eficiência 
 de uma reação química é o seu rendimento molar (R, em %), 
 definido como
-R = 
-nproduto
-× 100nreagente limitante
+R = nproduto/(nreagente limitante) × 100
 em que n corresponde ao número de mols. O metanol 
 pode ser obtido pela reação entre brometo de metila e 
 hidróxido de sódio, conforme a equação química:
@@ -1133,9 +1131,7 @@ consequência, produtos podem chegar ao consumidor
 mais baratos. Um dos parâmetros que mede a eficiência 
 de uma reação química é o seu rendimento molar (R, em %), 
 definido como
-R = 
-nproduto
-× 100nreagente limitante
+R = nproduto/(nreagente limitante) × 100
 em que n corresponde ao número de mols. O metanol 
 pode ser obtido pela reação entre brometo de metila e 
 hidróxido de sódio, conforme a equação química:
@@ -1191,9 +1187,7 @@ consequência, produtos podem chegar ao consumidor
 mais baratos. Um dos parâmetros que mede a eficiência 
 de uma reação química é o seu rendimento molar (R, em %), 
 definido como
-R = 
-nproduto
-× 100nreagente limitante
+R = nproduto/(nreagente limitante) × 100
 em que n corresponde ao número de mols. O metanol 
 pode ser obtido pela reação entre brometo de metila e 
 hidróxido de sódio, conforme a equação química:
@@ -1249,9 +1243,7 @@ consequência, produtos podem chegar ao consumidor
 mais baratos. Um dos parâmetros que mede a eficiência 
 de uma reação química é o seu rendimento molar (R, em %), 
 definido como
-R = 
-nproduto
-× 100nreagente limitante
+R = nproduto/(nreagente limitante) × 100
 em que n corresponde ao número de mols. O metanol 
 pode ser obtido pela reação entre brometo de metila e 
 hidróxido de sódio, conforme a equação química:
@@ -1307,9 +1299,7 @@ consequência, produtos podem chegar ao consumidor
 mais baratos. Um dos parâmetros que mede a eficiência 
 de uma reação química é o seu rendimento molar (R, em %), 
 definido como
-R = 
-nproduto
-× 100nreagente limitante
+R = nproduto/(nreagente limitante) × 100
 em que n corresponde ao número de mols. O metanol 
 pode ser obtido pela reação entre brometo de metila e 
 hidróxido de sódio, conforme a equação química:
@@ -8556,10 +8546,7 @@ C
 Na sequência, conectou o ohmímetro nos terminais 
 A e B do desenho e, em seguida, conectou-o nos terminais 
 B e C, anotando as leituras RAB e RBC, respectivamente. 
-Ao estabelecer a razão 
-R AB
-R BC
-, qual resultado o estudante
+Ao estabelecer a razão R_AB/R_BC, qual resultado o estudante
 obteve?","B","1",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2016_1mil_cn","enem_2016_1mil_cn_1",86572,"ENEM 2016 - CN","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE CIÊNCIAS HUMANAS E SUAS TECNOLOGIAS
@@ -8627,10 +8614,7 @@ C
 Na sequência, conectou o ohmímetro nos terminais 
 A e B do desenho e, em seguida, conectou-o nos terminais 
 B e C, anotando as leituras RAB e RBC, respectivamente. 
-Ao estabelecer a razão 
-R AB
-R BC
-, qual resultado o estudante
+Ao estabelecer a razão R_AB/R_BC, qual resultado o estudante
 obteve?","B","4/7",1,NA,NA,NA,NA,"Portuguese","B"
 "enem_2016_1mil_cn","enem_2016_1mil_cn_1",86572,"ENEM 2016 - CN","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE CIÊNCIAS HUMANAS E SUAS TECNOLOGIAS
@@ -8698,10 +8682,7 @@ C
 Na sequência, conectou o ohmímetro nos terminais 
 A e B do desenho e, em seguida, conectou-o nos terminais 
 B e C, anotando as leituras RAB e RBC, respectivamente. 
-Ao estabelecer a razão 
-R AB
-R BC
-, qual resultado o estudante
+Ao estabelecer a razão R_AB/R_BC, qual resultado o estudante
 obteve?","B","10/27",0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2016_1mil_cn","enem_2016_1mil_cn_1",86572,"ENEM 2016 - CN","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE CIÊNCIAS HUMANAS E SUAS TECNOLOGIAS
@@ -8769,10 +8750,7 @@ C
 Na sequência, conectou o ohmímetro nos terminais 
 A e B do desenho e, em seguida, conectou-o nos terminais 
 B e C, anotando as leituras RAB e RBC, respectivamente. 
-Ao estabelecer a razão 
-R AB
-R BC
-, qual resultado o estudante
+Ao estabelecer a razão R_AB/R_BC, qual resultado o estudante
 obteve?","B","14/81",0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2016_1mil_cn","enem_2016_1mil_cn_1",86572,"ENEM 2016 - CN","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE CIÊNCIAS HUMANAS E SUAS TECNOLOGIAS
@@ -8840,10 +8818,7 @@ C
 Na sequência, conectou o ohmímetro nos terminais 
 A e B do desenho e, em seguida, conectou-o nos terminais 
 B e C, anotando as leituras RAB e RBC, respectivamente. 
-Ao estabelecer a razão 
-R AB
-R BC
-, qual resultado o estudante
+Ao estabelecer a razão R_AB/R_BC, qual resultado o estudante
 obteve?","B","4/81",0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2016_1mil_cn","enem_2016_1mil_cn_1",86725,"ENEM 2016 - CN","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE CIÊNCIAS HUMANAS E SUAS TECNOLOGIAS
@@ -9205,12 +9180,8 @@ temperaturas, conforme a equação química:
 3 C_2H_2 (g) → C_6H_6 (l)
 A energia envolvida nesse processo pode ser calculada indiretamente pela variação de entalpia das reações de 
 combustão das substâncias participantes, nas mesmas condições experimentais:
-I. C 2H2 (g) + 5
-2
- O2 (g) → 2 CO2 (g) + H2O (l) ΔHc° = −310 kcal/mol
-II. C 6H6 (l) + 15
-2
- O2 (g) → 6 CO2 (g) + 3 H2O (l) ΔHc° = −780 kcal/mol
+I. C 2H2 (g) + 5/2 O2 (g) → 2 CO2 (g) + H2O (l) ΔHc° = −310 kcal/mol
+II. C 6H6 (l) + 15/2 O2 (g) → 6 CO2 (g) + 3 H2O (l) ΔHc° = −780 kcal/mol
 A variação de entalpia do processo de trimerização, em kcal, para a formação de um mol de benzeno é mais próxima de","B","−1 090.",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2016_1mil_cn","enem_2016_1mil_cn_1",87728,"ENEM 2016 - CN","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE CIÊNCIAS HUMANAS E SUAS TECNOLOGIAS
@@ -9257,12 +9228,8 @@ temperaturas, conforme a equação química:
 3 C_2H_2 (g) → C_6H_6 (l)
 A energia envolvida nesse processo pode ser calculada indiretamente pela variação de entalpia das reações de 
 combustão das substâncias participantes, nas mesmas condições experimentais:
-I. C 2H2 (g) + 5
-2
- O2 (g) → 2 CO2 (g) + H2O (l) ΔHc° = −310 kcal/mol
-II. C 6H6 (l) + 15
-2
- O2 (g) → 6 CO2 (g) + 3 H2O (l) ΔHc° = −780 kcal/mol
+I. C 2H2 (g) + 5/2 O2 (g) → 2 CO2 (g) + H2O (l) ΔHc° = −310 kcal/mol
+II. C 6H6 (l) + 15/2 O2 (g) → 6 CO2 (g) + 3 H2O (l) ΔHc° = −780 kcal/mol
 A variação de entalpia do processo de trimerização, em kcal, para a formação de um mol de benzeno é mais próxima de","B","−150.",1,NA,NA,NA,NA,"Portuguese","B"
 "enem_2016_1mil_cn","enem_2016_1mil_cn_1",87728,"ENEM 2016 - CN","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE CIÊNCIAS HUMANAS E SUAS TECNOLOGIAS
@@ -9309,12 +9276,8 @@ temperaturas, conforme a equação química:
 3 C_2H_2 (g) → C_6H_6 (l)
 A energia envolvida nesse processo pode ser calculada indiretamente pela variação de entalpia das reações de 
 combustão das substâncias participantes, nas mesmas condições experimentais:
-I. C 2H2 (g) + 5
-2
- O2 (g) → 2 CO2 (g) + H2O (l) ΔHc° = −310 kcal/mol
-II. C 6H6 (l) + 15
-2
- O2 (g) → 6 CO2 (g) + 3 H2O (l) ΔHc° = −780 kcal/mol
+I. C 2H2 (g) + 5/2 O2 (g) → 2 CO2 (g) + H2O (l) ΔHc° = −310 kcal/mol
+II. C 6H6 (l) + 15/2 O2 (g) → 6 CO2 (g) + 3 H2O (l) ΔHc° = −780 kcal/mol
 A variação de entalpia do processo de trimerização, em kcal, para a formação de um mol de benzeno é mais próxima de","B","−50.",0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2016_1mil_cn","enem_2016_1mil_cn_1",87728,"ENEM 2016 - CN","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE CIÊNCIAS HUMANAS E SUAS TECNOLOGIAS
@@ -9361,12 +9324,8 @@ temperaturas, conforme a equação química:
 3 C_2H_2 (g) → C_6H_6 (l)
 A energia envolvida nesse processo pode ser calculada indiretamente pela variação de entalpia das reações de 
 combustão das substâncias participantes, nas mesmas condições experimentais:
-I. C 2H2 (g) + 5
-2
- O2 (g) → 2 CO2 (g) + H2O (l) ΔHc° = −310 kcal/mol
-II. C 6H6 (l) + 15
-2
- O2 (g) → 6 CO2 (g) + 3 H2O (l) ΔHc° = −780 kcal/mol
+I. C 2H2 (g) + 5/2 O2 (g) → 2 CO2 (g) + H2O (l) ΔHc° = −310 kcal/mol
+II. C 6H6 (l) + 15/2 O2 (g) → 6 CO2 (g) + 3 H2O (l) ΔHc° = −780 kcal/mol
 A variação de entalpia do processo de trimerização, em kcal, para a formação de um mol de benzeno é mais próxima de","B","+157.",0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2016_1mil_cn","enem_2016_1mil_cn_1",87728,"ENEM 2016 - CN","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE CIÊNCIAS HUMANAS E SUAS TECNOLOGIAS
@@ -9413,12 +9372,8 @@ temperaturas, conforme a equação química:
 3 C_2H_2 (g) → C_6H_6 (l)
 A energia envolvida nesse processo pode ser calculada indiretamente pela variação de entalpia das reações de 
 combustão das substâncias participantes, nas mesmas condições experimentais:
-I. C 2H2 (g) + 5
-2
- O2 (g) → 2 CO2 (g) + H2O (l) ΔHc° = −310 kcal/mol
-II. C 6H6 (l) + 15
-2
- O2 (g) → 6 CO2 (g) + 3 H2O (l) ΔHc° = −780 kcal/mol
+I. C 2H2 (g) + 5/2 O2 (g) → 2 CO2 (g) + H2O (l) ΔHc° = −310 kcal/mol
+II. C 6H6 (l) + 15/2 O2 (g) → 6 CO2 (g) + 3 H2O (l) ΔHc° = −780 kcal/mol
 A variação de entalpia do processo de trimerização, em kcal, para a formação de um mol de benzeno é mais próxima de","B","+470.",0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2016_1mil_cn","enem_2016_1mil_cn_1",95618,"ENEM 2016 - CN","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE CIÊNCIAS HUMANAS E SUAS TECNOLOGIAS

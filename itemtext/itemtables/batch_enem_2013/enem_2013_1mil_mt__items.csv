@@ -2145,7 +2145,7 @@ Uma forma de avaliar uma alteração no sistema de
 senhas é a verificação do coeficiente de melhora, que é 
 a razão do novo número de possibilidades de senhas em 
 relação ao antigo.
-O coeficiente de melhora da alteração recomendada é","A","62! 4!/10! 56!",0,NA,NA,NA,NA,"Portuguese","C"
+O coeficiente de melhora da alteração recomendada é","A","(62! 4!)/(10! 56!)",0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2013_1mil_mt","enem_2013_1mil_mt_1",31416,"ENEM 2013 - MT","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -13737,9 +13737,7 @@ massa M”.
 HUGHES-HALLETT, D. et al. Cálculo e aplicações. São Paulo: Edgard Blücher, 1999 (adaptado).
 Isso é equivalente a dizer que, para uma constante 
 k > 0, a área S pode ser escrita em função de M por 
-meio da expressão:","D","S = k • M
-1
-3",0,NA,NA,NA,NA,"Portuguese","B"
+meio da expressão:","D","S = k • M^(1/3)",0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2013_1mil_mt","enem_2013_1mil_mt_1",9711,"ENEM 2013 - MT","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -13891,11 +13889,7 @@ massa M”.
 HUGHES-HALLETT, D. et al. Cálculo e aplicações. São Paulo: Edgard Blücher, 1999 (adaptado).
 Isso é equivalente a dizer que, para uma constante 
 k > 0, a área S pode ser escrita em função de M por 
-meio da expressão:","D","S = k
-1
-• M
-1
-3 3",0,NA,NA,NA,NA,"Portuguese","C"
+meio da expressão:","D","S = k^(1/3) • M^(1/3)",0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2013_1mil_mt","enem_2013_1mil_mt_1",9711,"ENEM 2013 - MT","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -14047,11 +14041,7 @@ massa M”.
 HUGHES-HALLETT, D. et al. Cálculo e aplicações. São Paulo: Edgard Blücher, 1999 (adaptado).
 Isso é equivalente a dizer que, para uma constante 
 k > 0, a área S pode ser escrita em função de M por 
-meio da expressão:","D","S = k
-1
-• M
-2
-3 3",1,NA,NA,NA,NA,"Portuguese","D"
+meio da expressão:","D","S = k^(1/3) • M^(2/3)",1,NA,NA,NA,NA,"Portuguese","D"
 "enem_2013_1mil_mt","enem_2013_1mil_mt_1",9711,"ENEM 2013 - MT","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -14203,9 +14193,7 @@ massa M”.
 HUGHES-HALLETT, D. et al. Cálculo e aplicações. São Paulo: Edgard Blücher, 1999 (adaptado).
 Isso é equivalente a dizer que, para uma constante 
 k > 0, a área S pode ser escrita em função de M por 
-meio da expressão:","D","S = k
-1
-• M",0,NA,NA,NA,NA,"Portuguese","E"
+meio da expressão:","D","S = k^(1/3) • M^2",0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2013_1mil_mt","enem_2013_1mil_mt_1",31535,"ENEM 2013 - MT","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -14350,9 +14338,7 @@ Questões de 91 a 135
 Questões de 91 a 95 (opção inglês)",NA,"A Lei da Gravitação Universal, de Isaac Newton, 
 estabelece a intensidade da força de atração entre duas 
 massas. Ela é representada pela expressão:
-F = G  
-m1m_2
-d^2
+F = G  m1m_2/d^2
 onde m_1 e m 2 correspondem às massas dos corpos, d à 
 distância entre eles, G à constante universal da gravitação 
 e F à força que um corpo exerce sobre o outro.
@@ -14541,9 +14527,7 @@ Questões de 91 a 135
 Questões de 91 a 95 (opção inglês)",NA,"A Lei da Gravitação Universal, de Isaac Newton, 
 estabelece a intensidade da força de atração entre duas 
 massas. Ela é representada pela expressão:
-F = G  
-m1m_2
-d^2
+F = G  m1m_2/d^2
 onde m_1 e m 2 correspondem às massas dos corpos, d à 
 distância entre eles, G à constante universal da gravitação 
 e F à força que um corpo exerce sobre o outro.
@@ -14732,9 +14716,7 @@ Questões de 91 a 135
 Questões de 91 a 95 (opção inglês)",NA,"A Lei da Gravitação Universal, de Isaac Newton, 
 estabelece a intensidade da força de atração entre duas 
 massas. Ela é representada pela expressão:
-F = G  
-m1m_2
-d^2
+F = G  m1m_2/d^2
 onde m_1 e m 2 correspondem às massas dos corpos, d à 
 distância entre eles, G à constante universal da gravitação 
 e F à força que um corpo exerce sobre o outro.
@@ -14923,9 +14905,7 @@ Questões de 91 a 135
 Questões de 91 a 95 (opção inglês)",NA,"A Lei da Gravitação Universal, de Isaac Newton, 
 estabelece a intensidade da força de atração entre duas 
 massas. Ela é representada pela expressão:
-F = G  
-m1m_2
-d^2
+F = G  m1m_2/d^2
 onde m_1 e m 2 correspondem às massas dos corpos, d à 
 distância entre eles, G à constante universal da gravitação 
 e F à força que um corpo exerce sobre o outro.
@@ -15114,9 +15094,7 @@ Questões de 91 a 135
 Questões de 91 a 95 (opção inglês)",NA,"A Lei da Gravitação Universal, de Isaac Newton, 
 estabelece a intensidade da força de atração entre duas 
 massas. Ela é representada pela expressão:
-F = G  
-m1m_2
-d^2
+F = G  m1m_2/d^2
 onde m_1 e m 2 correspondem às massas dos corpos, d à 
 distância entre eles, G à constante universal da gravitação 
 e F à força que um corpo exerce sobre o outro.
@@ -16077,8 +16055,7 @@ maiores, a fábrica triplicou a medida dos lados de suas
 placas e conseguiu reuni-las em uma nova caixa, de tal 
 forma que a área coberta S não fosse alterada.
 A quantidade X, de placas do novo modelo, em cada nova 
-caixa será igual a:","A","N
-9",1,NA,NA,NA,NA,"Portuguese","A"
+caixa será igual a:","A","N/9",1,NA,NA,NA,NA,"Portuguese","A"
 "enem_2013_1mil_mt","enem_2013_1mil_mt_1",41250,"ENEM 2013 - MT","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -16230,8 +16207,7 @@ maiores, a fábrica triplicou a medida dos lados de suas
 placas e conseguiu reuni-las em uma nova caixa, de tal 
 forma que a área coberta S não fosse alterada.
 A quantidade X, de placas do novo modelo, em cada nova 
-caixa será igual a:","A","N
-6",0,NA,NA,NA,NA,"Portuguese","B"
+caixa será igual a:","A","N/6",0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2013_1mil_mt","enem_2013_1mil_mt_1",41250,"ENEM 2013 - MT","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -16383,8 +16359,7 @@ maiores, a fábrica triplicou a medida dos lados de suas
 placas e conseguiu reuni-las em uma nova caixa, de tal 
 forma que a área coberta S não fosse alterada.
 A quantidade X, de placas do novo modelo, em cada nova 
-caixa será igual a:","A","N
-3",0,NA,NA,NA,NA,"Portuguese","C"
+caixa será igual a:","A","N/3",0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2013_1mil_mt","enem_2013_1mil_mt_1",41250,"ENEM 2013 - MT","LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -28488,9 +28463,7 @@ Questões de 91 a 135
 Questões de 91 a 95 (opção inglês)",NA,"A temperatura T de um forno (em graus centígrados) 
 é reduzida por um sistema a partir do instante de seu 
 desligamento (t = 0) e varia de acordo com a expressão 
-T(t) = − t^2
-4
- + 400, com t  em minutos. Por motivos 
+T(t) = − t^2/4 + 400, com t  em minutos. Por motivos 
 de segurança, a trava do forno só é liberada para 
 abertura quando o forno atinge a temperatura de 39  ºC.
 Qual o tempo mínimo de espera, em minutos, após se 
@@ -28639,9 +28612,7 @@ Questões de 91 a 135
 Questões de 91 a 95 (opção inglês)",NA,"A temperatura T de um forno (em graus centígrados) 
 é reduzida por um sistema a partir do instante de seu 
 desligamento (t = 0) e varia de acordo com a expressão 
-T(t) = − t^2
-4
- + 400, com t  em minutos. Por motivos 
+T(t) = − t^2/4 + 400, com t  em minutos. Por motivos 
 de segurança, a trava do forno só é liberada para 
 abertura quando o forno atinge a temperatura de 39  ºC.
 Qual o tempo mínimo de espera, em minutos, após se 
@@ -28790,9 +28761,7 @@ Questões de 91 a 135
 Questões de 91 a 95 (opção inglês)",NA,"A temperatura T de um forno (em graus centígrados) 
 é reduzida por um sistema a partir do instante de seu 
 desligamento (t = 0) e varia de acordo com a expressão 
-T(t) = − t^2
-4
- + 400, com t  em minutos. Por motivos 
+T(t) = − t^2/4 + 400, com t  em minutos. Por motivos 
 de segurança, a trava do forno só é liberada para 
 abertura quando o forno atinge a temperatura de 39  ºC.
 Qual o tempo mínimo de espera, em minutos, após se 
@@ -28941,9 +28910,7 @@ Questões de 91 a 135
 Questões de 91 a 95 (opção inglês)",NA,"A temperatura T de um forno (em graus centígrados) 
 é reduzida por um sistema a partir do instante de seu 
 desligamento (t = 0) e varia de acordo com a expressão 
-T(t) = − t^2
-4
- + 400, com t  em minutos. Por motivos 
+T(t) = − t^2/4 + 400, com t  em minutos. Por motivos 
 de segurança, a trava do forno só é liberada para 
 abertura quando o forno atinge a temperatura de 39  ºC.
 Qual o tempo mínimo de espera, em minutos, após se 
@@ -29092,9 +29059,7 @@ Questões de 91 a 135
 Questões de 91 a 95 (opção inglês)",NA,"A temperatura T de um forno (em graus centígrados) 
 é reduzida por um sistema a partir do instante de seu 
 desligamento (t = 0) e varia de acordo com a expressão 
-T(t) = − t^2
-4
- + 400, com t  em minutos. Por motivos 
+T(t) = − t^2/4 + 400, com t  em minutos. Por motivos 
 de segurança, a trava do forno só é liberada para 
 abertura quando o forno atinge a temperatura de 39  ºC.
 Qual o tempo mínimo de espera, em minutos, após se 
