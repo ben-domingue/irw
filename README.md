@@ -25,8 +25,9 @@ disagree.
 
 ## Getting the data
 
-The easiest access is through the client packages. Both authenticate against
-Redivis in the browser on first use.
+The easiest access is through the client packages. The R package reads every
+table without a Redivis login; the Python package asks you to log in to Redivis
+in the browser on first use.
 
 **R:**
 ```r
@@ -51,23 +52,24 @@ Worked examples for both live on the site's
 
 | Directory | Contents |
 |---|---|
-| `data/` | Per-dataset processing scripts (R, Python, Stata) — one per dataset, self-contained, no shared dependencies |
-| `metadata/` | Numbered R scripts that regenerate the metadata, biblio, tags, item text and collections CSVs uploaded to Redivis |
+| `data/` | Per-dataset processing scripts (R, Python, Stata) — one per dataset, self-contained, no shared dependencies. Subfolders group the non-core sources and a few families ([ARCHITECTURE.md §8](ARCHITECTURE.md#8-the-rest-of-the-tree)) |
+| `metadata/` | Numbered R and Python stages that regenerate the metadata, biblio, tags, item text, collections and table-page Codebook CSVs |
 | `automated_finding/` | Pipeline that discovers, triages, and standardizes candidate datasets from public repositories |
 | `itemtext/` | Extraction and upload of instrument, section, item, and response-option text |
 | `tags/` | Human and automated tagging of tables |
 | `collections/` | Curated groupings of tables |
-| `irw-dataset-builder/` | Streamlit app for interactively building an IRW-formatted dataset (`streamlit run irw-dataset-builder/main.py`) |
+| `irw-dataset-builder/` | Streamlit app for interactively building an IRW-formatted dataset (`streamlit run irw-dataset-builder/main.py`); dormant since 2025-02 |
 | `manuscript_src/` | Reproducible analysis code for the IRW paper |
 | `red_up/` | The one Redivis uploader (`red_up`); every upload writes a draft for a human to publish |
-| `irw_validate/` | The format validator (`irw-validate`), the gate a finished table passes before upload |
-| `tools/withdrawals/` | One script per table withdrawal from a Redivis draft, kept as the record of what was removed |
-| `misc/`, `training/`, `processing_notes/` | Utility functions, workshop materials, and processing guidance |
+| `irw_validate/` | The format validator ([`irw-validate` on PyPI](https://pypi.org/project/irw-validate/)), the gate a finished table passes before upload |
+| `tools/` | One already-run script per table withdrawal (`withdrawals/`) or one-off repair (`repairs/`), kept as the record of what changed |
+| `audit/` | Corpus audit workstreams (`2401/`: the retroactive audit's rules, detectors and dossiers) |
+| `misc/`, `training/`, `processing_notes/` | Small R utilities and `validate_irw.R` (the validator's R twin), workshop materials, and processing guidance |
 
 Inside each directory, live scripts and standing records sit at the top level and
 finished work goes into `archive/`, `logs/` or a topic folder. See
-[ARCHITECTURE.md §7](ARCHITECTURE.md#7-where-things-go-inside-a-directory) and
-each directory's own README.
+[ARCHITECTURE.md §7](ARCHITECTURE.md#7-where-things-go-inside-a-directory) and,
+where there is one, the directory's own README.
 
 Run order for the metadata pipeline is defined by
 `.claude/skills/irw-site-update/scripts/run_pipeline.sh`, which is authoritative
@@ -80,7 +82,7 @@ Redivis automatically; every publish is a human action.
 schema, column order, and file naming — read it before writing a processing
 script. The published version is at
 [itemresponsewarehouse.org/standard.html](https://itemresponsewarehouse.org/standard.html).
-The essentials:
+Some essentials (an incomplete list; the standard has the rest):
 
 - **Long format only**: one row per person-item observation, saved as CSV.
 - **Required columns**: `id` (focal unit), `item` (item identifier), `resp`
@@ -102,9 +104,8 @@ sentinel and missing codes, merged samples, opaque item labels — and it overri
 
 Before writing any code, check the dataset against the inclusion criteria in
 [`datastandard.md`](datastandard.md#before-you-start): an explicitly open license
-(CC0, CC BY, or CC BY-SA, confirmed on the source page — a missing license or an
-unresolvable UUID means stop), no existing copy in the dictionary, and at least
-100 unique respondents. `processing_notes/DataProcessingInstructions.md` explains
+confirmed on the source page (a missing license or an unresolvable UUID means
+stop), no existing copy in the dictionary, and at least 100 unique respondents. `processing_notes/DataProcessingInstructions.md` explains
 how to prioritize among the datasets that pass.
 
 Then:

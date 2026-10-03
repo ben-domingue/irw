@@ -614,10 +614,9 @@ Used to bulk-download and heuristically standardize every queued dataset to
 dataset in `data/` (see Step 2 above). The file is kept in this directory for
 reference only.
 
-It **does not import on `main`** — it wants a `QUEUE_SHEET_URL` that
-`irw_discover_updated.py` no longer defines (see `TODO.md`) — so it cannot be
-run even by accident, and `irw_output/queue/` and `cleaned_index.csv` no
-longer exist.
+It imports (it now defines its own `QUEUE_SHEET_URL`, pointing at the
+retired sheet) but its `main()` refuses to run, so it cannot be run even by
+accident, and `irw_output/queue/` and `cleaned_index.csv` no longer exist.
 
 It is also **not this pipeline's conversion step and must not be treated as a
 baseline for one.** Nothing here converts a dataset to IRW format

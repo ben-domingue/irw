@@ -16,8 +16,16 @@ the scripts win.
 | 07 | `07_simsyn.R` | `simsyn_metadata.csv` | Near-identical to 01, for `irw_simsyn`. Same dead commented-out biblio block. |
 | 02 | `02_biblio.R` | `biblio.csv`, `comps_biblio.csv`, `nominal_biblio.csv`, `simsyn_biblio.csv` | One script, four passes (loops over a `dbs` list) — one per source (core/comps/nom/sim), each with its **own** Google Sheet dictionary URL. For each: reads that source's dictionary sheet, finds rows not yet in the corresponding Redivis biblio table (or missing `BibTex`), fetches BibTeX from `doi.org` when a DOI exists, else falls back to a Claude call (`anthropic_chat()`, `claude-haiku-4-5`, `ANTHROPIC_API_KEY`) to synthesize one from Reference/URL text. Strips non-`Public Reshare?` rows *before* ever calling the API. **Swapped from OpenAI/GPT-4o to Claude on 2026-07-27** at Ben's request — plain `httr` POST to `https://api.anthropic.com/v1/messages` (no R SDK exists for Anthropic), `x-api-key`/`anthropic-version: 2023-06-01` headers, single-turn, no thinking/tools. Since #2628 every source unions its own automated file (`automated_finding/dictionary_auto{,_comps,_nom,_sim}.csv`), with 05/06/07's `*_metadata.csv` as the liveness oracle -- hence 05/06/07 run before 02. |
 | 03 | `03_tags.R` | `tags.csv`, `nominal_tags.csv` | Loops a per-source `dbs` list, same shape as 02 — one hand-annotated Google Sheet per source. `core` = the "IRW Tags" sheet; `nom` = "IRW Tags Nominal" (`1v3toO6O…`, gid `126134123`), added for issue #1689. `comp`/`sim` deliberately have no tags — see `Rpkg/inst/developer/tags.md`. Selects columns `c(1,6:12,3)` by **position**, which omits col 4 "Context Text" (verbatim paper excerpts) — the only thing keeping raw source text out of the public CSVs. Also asserts the row-1 instruction row is present (sentinel `should match what is on redivis`) rather than dropping row 1 blind. |
-| 10 | `10_collections.R` | `collections.csv`, `collection_members.csv` | Issue #1633, added 2026-08-29. Labelled groupings of tables (rct, big_five, depression, q_matrix, ...). Reads the version-controlled registry at `src/collections/registry.csv` and executes each row's `rule` against `metadata.csv`/`tags.csv`; unions in hand-curated members from `src/collections/curated/<slug>.csv`. **Needs no credentials and no Redivis access** -- the only stage reviewable end to end offline. Writes long format (one row per table-collection pair) so that adding a collection is a DATA change: one line in `registry.csv`, no code change here or in the R/Python packages or the site. `coverage`, `n_tables` and `basis` are derived, never authored. Runs BETWEEN 08 and 09 -- numeric order is deliberately not run order. Membership is confirmed-only; unpromoted scouting candidates sit in `curated/*.review.csv`, which the pipeline never reads. |
+| 10 | `10_collections.R` | `collections.csv`, `collection_members.csv` | Issue #1633, added 2026-08-29. Labelled groupings of tables (rct, big_five, depression, q_matrix, ...). Reads the version-controlled registry at `src/collections/registry.csv` and executes each row's `rule` against `metadata.csv`/`tags.csv`; unions in hand-curated members from `src/collections/curated/<slug>.csv`. **Needs no credentials and no Redivis access** -- the only stage reviewable end to end offline. Writes long format (one row per table-collection pair) so that adding a collection is a DATA change: one line in `registry.csv`, no code change here or in the R/Python packages or the site. `coverage`, `n_tables` and `basis` are derived, never authored. Runs after 08 -- numeric order is deliberately not run order. Membership is confirmed-only; unpromoted scouting candidates sit in `curated/*.review.csv`, which the pipeline never reads. |
+| 11 | `11_status.R` | `status.json`, `status_history.tsv` | Corpus-state numbers (table counts, tag and item-text coverage) published from one place (#1765). Committed; not a Redivis table. |
+| 12 | `12_stragglers.R` | `straggler_watch.tsv` | Names live tables that stay missing from `metadata.csv` across runs (#1765). Calls Redivis. **Advisory**: its non-zero exit is reported, never fatal. |
+| 13 | `13_script_index.py` | `table_scripts.csv` | Table → `data/` script map for tables whose script is named for something else; read by the MCP's `get_processing_notes` (#2494). Files on disk only. |
+| 14 | `14_column_docs.py` | `column_docs.csv` | Per (table, column): standard definition or the source column it was renamed from. Feeds the table-page Codebook and MCP `describe_columns` (#2763). Files on disk only. |
+| 15 | `15_codebook_links.py` | `codebook_links.csv`, `codebook_links_checked.csv` | Links to each source deposit's own codebook, new tables only (`find_codebook_links.py --new-only`; #2766, #2770). Calls public file-listing APIs. |
 | 09 | ~~`09_hero_status.R`~~ | — | **Retired 2026-10-01 (#1940).** The site builds `data/hero_stats.json` at render time from published irw_meta (`landing/hero_stats.R` in datapages/irw). |
+
+Stages 11–15 were added after the 2026-07-27 write-up below. How the three Codebook
+files fit together is in `ARCHITECTURE.md` §4 ("The table-page Codebook").
 
 ## Manual irw_meta table: `covariate_labels.csv` (#1775)
 
@@ -95,29 +103,22 @@ downloads), so their tables have no rows here yet.
   use 04 for qc but let's get into those details downstream once structure
   is established" — i.e. this skill's audit workflow is meant to supersede
   it, but the exact relationship (replace vs. keep both) is still open.
-- **`08_itemtext.R`** — itemtext readability metadata (word/char counts,
-  Flesch-Kincaid), incremental-only. Belongs to the separate `itemtext/`
-  pipeline area (see `itemtext/.claude/skills/irw-auto-itemtext/`), not this
-  skill.
-- **`metadata/hotfixes/`** — five one-off patch/diagnostic scripts, all
-  marked `?` (unknown run-status) in `hotfixes/README.md`. Ben: ignore for
-  now.
+- **`08_itemtext.R`** — *(superseded: joined `DEFAULT_ORDER` 2026-08-02, so
+  it IS run by this skill now.)* Only its full-recompute variant,
+  `hotfixes/08_itemtext_recompute.R`, stays out of scope.
+- **`metadata/hotfixes/`** — one-off patch/diagnostic scripts, listed in
+  `hotfixes/README.md`. Ben: ignore for now.
 
 ## Ground truth for table names
 
 The `irw` R package (source at `../../Rpkg` relative to this repo, i.e.
 `irw/Rpkg`, installed and current — confirmed `source=` param live in the
 installed copy 2026-07-27) exports `irw_list_tables(source = "core")`, with
-`source` one of `"core"`/`"sim"`/`"comp"`/`"nom"`. Internally
-(`Rpkg/R/redivis-datasets.R`) it maps to:
-
-- `core` → `item_response_warehouse:as2e`, `item_response_warehouse_2:epbx`,
-  `item_response_warehouse_3:5xaj`, `item_response_warehouse_4:980f`,
-  `item_response_warehouse_5:3ykx`, `item_response_warehouse_6:fpe6` (all
-  under `datapages`)
-- `sim` → `datapages/irw_simsyn:0btg`
-- `comp` → `datapages/irw_competitions:cmd7`
-- `nom` → `datapages/irw_nominal:614n`
+`source` one of `"core"`/`"sim"`/`"comp"`/`"nom"`. Which Redivis datasets each
+source maps to is in `Rpkg/R/redivis-config.R` (names plus version hashes) and,
+for names only, `metadata/redivis_config.R` here. The 2026-07-27 copy of that
+list with reference ids is gone on purpose: the ids rotate, and a stale copy
+here was a trap.
 
 This is the same accessor the `tags` and `itemtext` skills already depend on
 (`irw::irw_list_tables()`/`irw::irw_list_itemtext_tables()`), so
