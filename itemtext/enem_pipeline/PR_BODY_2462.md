@@ -1,15 +1,11 @@
 # ENEM adjustments: the 2013–2025 item-text review (#2462) and the 2024/2025 `id` fix (#2812)
 
-> **DRAFT — the PR is not open yet.** Mateus is settling every change he intends
-> to make first, then opening one PR. Keep this file current as classes land;
-> the commit messages carry the full reasoning and this is the summary over
-> them.
-
 Santiago read all twelve years of ENEM item text and sent
-`enem_text_check_2013_2025.csv`: **557 findings over 371 items, 121 of them
-meaning-changing**. Structurally the tables were already sound — live matched
-the repo cell by cell and the item sets matched the response tables exactly —
-so everything here is content, not schema.
+`enem_text_check_2013_2025.csv`: **557 findings over 370 items**, of which
+**176 findings across 121 items change what an item means**. Structurally the
+tables were already sound — live matched the repo cell by cell and the item
+sets matched the response tables exactly — so everything here is content, not
+schema.
 
 ## What is fixed
 
@@ -317,9 +313,9 @@ defects that no gate in this repo could see.
 `id` is fixed in the build scripts here, but the sixteen published tables still
 carry the old value until they are replaced. Regenerated tables, `.Rdata` only
 (each file loads a single `df`), matching the format used for the 2013–2025
-reprocess:
+reprocess. @ben-domingue, this is where you come in:
 
-**[enem_2024_2025_1mil_idfix_rdata.zip — 789 MB](PASTE_DRIVE_LINK_HERE)**
+**[enem_2024_2025_1mil_idfix_rdata.zip — 789 MB](https://drive.google.com/file/d/1jT9x65ncgXmKOOYjsMlQ8CeysOR-EQBc/view?usp=sharing)**
 
 Eight `regular` (`id | item | resp | resp_raw | position | booklet`) and eight
 `nominal` (`… | text | …`), plus a README restating the evidence. Everything
