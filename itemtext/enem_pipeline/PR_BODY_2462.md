@@ -1,4 +1,4 @@
-# ENEM item text: adjustments from the 2013–2025 review (#2462)
+# ENEM adjustments: the 2013–2025 item-text review (#2462) and the 2024/2025 `id` fix (#2812)
 
 > **DRAFT — the PR is not open yet.** Mateus is settling every change he intends
 > to make first, then opening one PR. Keep this file current as classes land;
@@ -21,7 +21,22 @@ so everything here is content, not schema.
 | `tabs` | 159 | `b64af73e` |
 | `number` | 23 | `e7b8bfcc` |
 | rest of `flattened` (fractions, factorials) + R17 + R18 | ~58 | `d81a205e` |
-| `essay_material` + `moved_word` + `figure_labels` (R19, R5) | 15 | this batch |
+| `essay_material` + `moved_word` + `figure_labels` (R19, R5) | 15 | `5b0fe400` |
+| `stimulus_missing` — 45 figure descriptions (R5) | 46 | `bd435100` |
+
+**Every `changes meaning` finding in the review is fixed — 176 of 176.** What
+is left of the 557 is 114 `cosmetic`, 54 `noise` and 6 `structure`: page
+numbers, ligatures, spacing inside words, option-letter residue. None of them
+alters what an item means, and they are listed as known-open rather than
+quietly dropped.
+
+The `stimulus_missing` batch is the only change here that **adds generated
+text**, and the only one that changes provenance: 2013 CH/LC, 2015 CH/LC and
+2016 CH/LC move from `source_published` to `partly_generated`.
+`itemtext/fixes/itemtext_issues_enem_2462.md` drafts issues-page entries for
+**all eleven** ENEM tables that carry that status — the 2021 trio has owed one
+since the 2026-09-11 ruling in #2226 and 2023 CN/MT since #1848, and neither
+was ever written, so the backlog is discharged rather than grown.
 
 ### Figure descriptions on the wrong item (R13)
 
@@ -177,6 +192,63 @@ it — and it is **all four** 2021 tables. The column was never skipped; the
 existing rule was written for 2022, where the watermark extracts as legible
 repeated `ENEM 2022` tokens, while 2021's extracts character-interleaved so the
 literal string never occurs.
+
+## Also in this PR: #2812, the 2024/2025 `id`
+
+Ben raised this separately while sourcing codebooks for #2787. From 2024 INEP
+ships `PARTICIPANTES_<year>.csv` and `RESULTADOS_<year>.csv` instead of one
+`MICRODADOS` file, and the year scripts joined them with `bind_cols()` on a
+row-count check. There is no key — PARTICIPANTES is keyed `NU_INSCRICAO`,
+RESULTADOS `NU_SEQUENCIAL`.
+
+**He is right, and it turns out to be measurable rather than only inferable.**
+One detail in the issue is off, and it is the detail that makes the test
+possible: the two files *do* share columns — the test-location ones
+(`CO_MUNICIPIO_PROVA`, `NO_MUNICIPIO_PROVA`, `CO_UF_PROVA`, `SG_UF_PROVA`) plus
+`NU_ANO`. If row *i* of each file were the same candidate, their test
+municipality would have to agree.
+
+| | agreement | expected at random |
+|---|---|---|
+| 2024, all 4 332 944 rows | **0.51 %** | 0.54 % |
+| 2025, first 200 000 rows | **0.56 %** | — |
+
+Indistinguishable from chance, so each candidate's answers were carrying a
+stranger's registration number. The mechanism is visible in the keys:
+PARTICIPANTES is ordered by `NU_INSCRICAO` (`…233, …234, …235`) while
+`NU_SEQUENCIAL` is a scrambled permutation of 1…N. The 2024 Leia-Me's LGPD
+rationale fits — the split is deliberate and the files are not meant to be
+linked.
+
+Fixed with the issue's option 1: `id` comes from RESULTADOS' own
+`NU_SEQUENCIAL` and PARTICIPANTES is no longer read. Nothing in the build ever
+used a column from it (`TX_GABARITO` comes from `ITENS_PROVA`). Applied to all
+thirteen year scripts, whose loader block is byte-identical, so a future
+split-file year cannot reintroduce it; 2013–2023 keep taking the MICRODADOS
+branch unchanged.
+
+**It is a relabel, not a different sample.** `sample()` under `set.seed(5150)`
+draws the same *positions* and the row order still comes from RESULTADOS, so
+the same candidates are kept. Confirmed by rebuilding both years and comparing
+against the pre-fix tables row for row.
+
+Two things this PR does **not** finish:
+
+- the sixteen live `enem_2024/2025_1mil_*` tables need regenerating and
+  re-uploading before `id` means what it says;
+- `metadata/column_docs.csv` still records `id <- NU_INSCRICAO` for those eight
+  tables. That row was **already wrong before this fix**:
+  `14_column_docs.py` reports the first rename it finds in a script, and for
+  2024/2025 that is the MICRODADOS branch, which never runs for those years.
+  Making the scan report every candidate was tried and reverted — because the
+  loader block is shared it marks all thirteen ENEM years ambiguous, including
+  the eleven where `NU_INSCRICAO` is correct, and churns ~800 rows in unrelated
+  tables. A branch-aware fix belongs in #2763.
+
+**One more thing worth flagging:** `NU_SEQUENCIAL` is a within-year surrogate.
+2024 and 2025 both begin `206403, 3604651, 1461268`, so INEP appears to reuse
+the shuffle — the same number is a different person in each year, and it must
+not be used to follow anyone across years.
 
 ## For Ben — one ruling needed
 
