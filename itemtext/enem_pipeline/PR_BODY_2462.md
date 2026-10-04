@@ -250,21 +250,46 @@ Two things this PR does **not** finish:
 the shuffle — the same number is a different person in each year, and it must
 not be used to follow anyone across years.
 
-## For Ben — one ruling needed
+## Judgement calls, decided rather than escalated
 
-**2022 CH 97262** is the only edit here that **deletes** shipped text. Its
-`TEXTO 2` held a scrambled dump of its infographic: percentages in one order,
-labels in another, so read in document order it pairs single mothers with
+Three things were carried as open questions while the work was in flight. All
+three are now settled, so nothing here is waiting on a reviewer.
+
+**R20 — a rendering that inverts its own item is replaced, not kept alongside.**
+2022 CH 97262 is the only edit in this PR that **deletes** shipped text. Its
+`TEXTO 2` held a scrambled dump of its infographic — percentages in one order,
+labels in another — so read in document order it pairs single mothers with
 30,4 % where the printed figure is 56,9 %, and black or brown single mothers
 with 21,0 % instead of 64,4 %. The item asks which factors *intensify*
-discrimination, so the scramble inverted the answer. The relocated prose block
-carries the correct pairings and replaces the dump.
+discrimination, so the scramble inverts the answer.
 
-No existing rule covers removing a shipped rendering in favour of a correct
-one, so `EXTRACTION_RULES.md` records it as **NOT YET RULED** with a matching
-R11 escalation bullet. It is applied and flagged rather than treated as
-settled. If the ruling goes the other way, keeping both renderings is a
-one-line change.
+The reasoning that settles it: these are not two views of one content, one of
+them is false. Keeping both would not hedge the risk — it would ship a correct
+rendering and an item-inverting one in the same cell and leave the reader to
+guess which governs. The rule is scoped narrowly so it cannot become a licence
+to tidy: only where a rendering is demonstrably **wrong about its own figure**,
+shown by comparison against that figure; the replacement must be INEP's own
+words, never generated; and the disagreeing numbers are recorded per operation
+so the claim is checkable. R11's escalation bullet is narrowed to match —
+anything short of demonstrably-wrong still escalates.
+
+**Two images now get two insertion points.** 2013 CH 25217 and 2013 LC 51365
+each carry two figures, and both descriptions were going in at one anchor,
+which put the second description before the *first* image's credit line. Each
+is now split, so a description sits with the figure it describes. The text is
+unchanged and still twice-verified; only its position moved.
+
+**R21 — transcribe the marks that are there; never add one that is not.**
+2013 CH 44785 reproduces a 1934 caption whose acute and grave are printed as
+displaced apostrophes (`Havera' … a' poderosa influencia`). The transcription
+renders those as `Haverá` and `à` but leaves `influencia` unaccented, which
+review flagged as inconsistent. It isn't: the first two marks *are* on the
+page and merely mis-positioned, so transcribing them where the language puts
+them is recovery, on the same basis as R12 and R16. `influencia` has no mark to
+transcribe — that is pre-1943 orthography, and adding a circumflex would emend
+INEP's source and silently modernise a period artefact the exam reproduces on
+purpose. One rule applied twice: transcription normalises *where* a diacritic
+sits, never *whether* it exists.
 
 ## Three corrections to the review itself
 
@@ -287,28 +312,49 @@ defects that no gate in this repo could see.
    text matches neither current table, so that finding read a pre-recovery
    snapshot.
 
+## The 2024/2025 response tables
+
+`id` is fixed in the build scripts here, but the sixteen published tables still
+carry the old value until they are replaced. Regenerated tables, `.Rdata` only
+(each file loads a single `df`), matching the format used for the 2013–2025
+reprocess:
+
+**[enem_2024_2025_1mil_idfix_rdata.zip — 789 MB](PASTE_DRIVE_LINK_HERE)**
+
+Eight `regular` (`id | item | resp | resp_raw | position | booklet`) and eight
+`nominal` (`… | text | …`), plus a README restating the evidence. Everything
+except `id` is unchanged, verified byte-identical against the pre-fix tables.
+
 ## Gates (R10, all of them)
 
-`validate_items` and `audit_batch` on Slurm against the **#1942-corrected**
-response CSVs: OK on every table of every year touched, with `item_set_match`
-and `resp_set_match` TRUE throughout and `audit_report.csv` unchanged.
-`regress48` 0 on all five checks including Ben's S1 and S2.
-`lint_verification` clean, `check_provenance` exit 0, the R13 audit 0
-unclassified, `provenance.csv` byte-identical in every batch.
+Every commit was gated before it landed, against the **#1942-corrected**
+response CSVs on Slurm. Across the four batches in this PR:
 
-Corpus-wide, the character inventory gained exactly **two** code points across
-all of this work and lost none: U+20D7, the combining arrow for 2022 CN
-85445's vector labels, and U+007E, R18's `~~` emphasis delimiter. `π`, `√`,
-`⇌` and `ℓ` all already occurred in the corpus.
+| batch | validate_items | audit_batch | errors |
+|---|---|---|---|
+| 58 verified patches (`d81a205e`) | 24/24 | 6/6 | 0 |
+| 15 meaning-changing (`5b0fe400`) | 28/28 | 7/7 | 0 |
+| 45 stimulus descriptions (`bd435100`) | 16/16 | 4/4 | 0 |
+| three rulings (`a1a383a3`) | 4/4 | 1/1 | 0 |
 
-Two traps worth recording for whoever diffs these tables next. An item
-occupies ~5 rows — one per option — and `item_text` is duplicated across them,
-so merging old against new on `item` produces a cross product: it reported
-44,308 changed items where the truth was 25. Diff **positionally**, after
-asserting that row count, column set and item order are unchanged. And the
-`_` count moves in both directions, because a stacked fraction's **bar**
-extracts as a literal `__`: flattening three of them at 2021 CN 117627 removes
-six underscores while the water fix adds one.
+`item_set_match` and `resp_set_match` TRUE throughout. `regress48` 0 on all
+five checks including Ben's S1 and S2, `lint_verification` 44 rows with no
+problems, `41_staleness` clean and reporting that the committed tables match a
+fresh pipeline build exactly, the R13 audit 0 unclassified.
+
+Corpus-wide the character inventory gained exactly **two** code points across
+all of #2462 and lost none: U+20D7, the combining arrow for 2022 CN 85445's
+vector labels, and U+007E, R18's `~~` emphasis delimiter. `π`, `√`, `⇌` and `ℓ`
+all already occurred.
+
+Two traps worth recording for whoever diffs these tables next. An item occupies
+~5 rows — one per option — and `item_text` is duplicated across them, so
+merging old against new on `item` produces a cross product: it reported 44,308
+changed items where the truth was 25. Diff **positionally**, after asserting
+that row count, column set and item order are unchanged. And the `_` count
+moves in both directions, because a stacked fraction's **bar** extracts as a
+literal `__`: flattening three at 2021 CN 117627 removes six underscores while
+the water fix adds one.
 
 ## Also fixed along the way
 
