@@ -50,6 +50,16 @@ codebook named `S1_File.pdf` gets no link; that is the honest answer.
                                  (automated_finding/codebook_at_ingest.csv,
                                  #2770). The strongest evidence: a person read
                                  it to write the build script
+                 recorded_by_review
+                                 a codebook found by hand (or by an agent) for
+                                 a source no crawler can list -- statistics
+                                 offices (#2787 step 3) -- recorded with its
+                                 evidence in metadata/codebook_by_review.csv.
+                                 Ranked with recorded_at_ingest. That file's
+                                 questionnaire rows become `questionnaire`, and
+                                 are shown BESIDE its codebook rows: a CIS
+                                 codigo lists the columns, its questionnaire
+                                 holds the response codes
 
 Hosts with an API that lists a deposit's files: OSF, Dataverse (Harvard and
 dataverse.nl), figshare (incl. the frontiersin/plos portals), Zenodo, Mendeley
@@ -60,7 +70,8 @@ Europe PMC articles (the JATS supplementary-material list; workbooks and
 text documents are downloaded, size-capped, and opened -- #2792). Only tables in the matching *metadata.csv are swept: the biblio files
 keep rows for renamed and retired tables (#2767). doi.org links are routed by DOI prefix, and resolved by one HEAD request
 only when the prefix is unknown. Everything else (statistics offices, openICPSR, which returns 403 to scripts) is recorded in the
-checked file with its reason and not crawled.
+checked file with its reason and not crawled; a statistics office's codebook is found by review
+instead and recorded in codebook_by_review.csv (#2787 step 3).
 
 Outputs:
   metadata/codebook_links.csv          table, url, file_name, host, how_found,
@@ -117,6 +128,8 @@ README_CACHE = HERE / "logs" / "codebook_readme_text.json"
 NAMES_CACHE = HERE / "logs" / "codebook_table_names.json"
 COLUMN_DOCS = HERE / "column_docs.csv"
 INGEST_CODEBOOKS = HERE.parent / "automated_finding" / "codebook_at_ingest.csv"
+REVIEW_CODEBOOKS = HERE / "codebook_by_review.csv"
+REVIEW_FIELDS = ["table", "url", "file_name", "doc_type", "series", "wave", "evidence", "reviewed_at"]
 LINK_FIELDS = ["table", "url", "file_name", "host", "how_found",
                "n_same_kind_in_deposit", "deposit_url", "evidence", "checked_at"]
 CHECKED_FIELDS = ["table", "data_url", "host", "deposit", "outcome", "checked_at"]
@@ -1125,6 +1138,34 @@ def ingest_links(live: set) -> List[dict]:
     return out
 
 
+def review_links(live: set) -> List[dict]:
+    """Rows from codebook_by_review.csv, for live tables (#2787 step 3).
+
+    Found by a person or an agent who opened the document, never by a crawler
+    guessing: doc_type codebook -> recorded_by_review, questionnaire ->
+    questionnaire. A row without a url or with another doc_type is an error in
+    the side file, so it stops the run rather than vanishing.
+    """
+    out = []
+    for r in read_csv(REVIEW_CODEBOOKS):
+        table, url, kind = (r.get(k, "").strip() for k in ("table", "url", "doc_type"))
+        if not url.lower().startswith("http") or kind not in ("codebook", "questionnaire"):
+            sys.exit(f"{REVIEW_CODEBOOKS.name}: bad row for {table!r} (url {url!r}, doc_type {kind!r})")
+        if table not in live:
+            continue
+        p = urllib.parse.urlparse(url)
+        out.append({"table": table, "url": url,
+                    "file_name": r.get("file_name", "").strip()
+                    or urllib.parse.unquote(p.path.rstrip("/").rsplit("/", 1)[-1]) or url,
+                    "host": p.netloc.lower().removeprefix("www."),
+                    "how_found": "recorded_by_review" if kind == "codebook" else "questionnaire",
+                    "deposit_url": "", "evidence": r.get("evidence", "").strip(),
+                    "checked_at": r.get("reviewed_at", "").strip()})
+    for x in out:
+        x["n_same_kind_in_deposit"] = sum(1 for y in out if (y["table"], y["how_found"]) == (x["table"], x["how_found"]))
+    return out
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--hosts", default="", help="comma list to crawl (default: all crawlable)")
@@ -1167,8 +1208,12 @@ def main() -> int:
         newly |= {r["table"] for r in prev_checked if r["host"] in rematch}
         done = {r["table"] for r in prev_checked if r["outcome"] != "not_yet_checked"} - newly
         kept_checked = [r for r in prev_checked if r["table"] in done]
+        ##ingest and review rows are re-read from their side files below, so
+        ##an edited or deleted side-file row does not linger
+        reviewed = {(r["table"], r["url"]) for r in read_csv(REVIEW_CODEBOOKS)}
         kept_links = [r for r in read_csv(LINKS_OUT)
-                      if r["table"] in done and r["how_found"] != "recorded_at_ingest"]
+                      if r["table"] in done and r["how_found"] not in ("recorded_at_ingest", "recorded_by_review")
+                      and (r["table"], r["url"]) not in reviewed]
         tables = [(t, u) for t, u in tables if t not in done]
         print(f"--new-only: {len(done)} tables already checked, {len(tables)} to sweep",
               file=sys.stderr)
@@ -1301,10 +1346,11 @@ def main() -> int:
 
     for x in links:
         x.setdefault("evidence", "")
-    links = ingest_links(live_tables) + kept_links + links
+    review = review_links(live_tables)
+    links = ingest_links(live_tables) + review + kept_links + links
     ##one row per (table, url): a deposit reached by two routes (a multi-URL
     ##cell, a child component) lists the same file twice. Keep the strongest.
-    rank = {"recorded_at_ingest": 0, "typed_codebook": 1, "package_doc": 1, "name_codebook": 1,
+    rank = {"recorded_at_ingest": 0, "recorded_by_review": 0, "typed_codebook": 1, "package_doc": 1, "name_codebook": 1,
             "readme_names_columns": 2, "doc_names_columns": 2,
             "name_readme": 3, "questionnaire": 3, "doc_candidate": 8, "dataverse_ddi": 4}
     best: Dict[Tuple[str, str], dict] = {}
@@ -1324,6 +1370,14 @@ def main() -> int:
             kinds = sorted(final_kinds.get((row["table"], row["host"]), ()))
             row["outcome"] = "hit:" + "+".join(kinds) if kinds else "no_match"
     checked = kept_checked + checked
+    ##a table no crawler can list, documented by review: say so in the
+    ##checked file rather than leaving it out_of_scope
+    review_kinds: Dict[str, set] = {}
+    for x in review:
+        review_kinds.setdefault(x["table"], set()).add(x["how_found"])
+    for row in checked:
+        if row["table"] in review_kinds and row["outcome"].startswith("out_of_scope"):
+            row["outcome"] = "hit:" + "+".join(sorted(review_kinds[row["table"]]))
     links.sort(key=lambda x: (x["table"].lower(), x["how_found"], x["url"]))
     checked.sort(key=lambda x: (x["table"].lower(), x["data_url"]))
     write_csv(LINKS_OUT, links, LINK_FIELDS)

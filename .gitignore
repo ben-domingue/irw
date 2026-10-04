@@ -43,6 +43,7 @@ metadata/**/*.txt
 # (#2766); find_codebook_links.py, run by hand. Its listing cache stays local.
 !metadata/codebook_links.csv
 !metadata/codebook_links_checked.csv
+!metadata/codebook_by_review.csv
 metadata/logs/codebook_listings.json
 metadata/logs/codebook_readme_text.json
 metadata/logs/codebook_table_names.json
