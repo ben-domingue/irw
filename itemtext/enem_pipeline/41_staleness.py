@@ -40,7 +40,8 @@ DEPS = [
                                     "56_reading_order.py",
                                     "57_drawn_glyphs.py",
                                     "58_verified_patches.py",
-                                    "59_strip_essay_section.py"]),
+                                    "59_strip_essay_section.py",
+                                    "60_stimulus_descriptions.py"]),
 ]
 
 REPO = os.path.expanduser("~/irw/itemtext/itemtables")

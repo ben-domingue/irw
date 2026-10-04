@@ -231,6 +231,10 @@ def rebuild(y, outdir):
     # question closer this pass anchors on.
     run([sys.executable, os.path.join(HERE, "59_strip_essay_section.py"),
          "--items-dir", outdir, "--year", y, "--apply"], quiet=False)
+    # Missing stimulus descriptions (R5). Runs after 59 so its anchors see the
+    # finished stem -- 59 can delete the very text an anchor would match.
+    run([sys.executable, os.path.join(HERE, "60_stimulus_descriptions.py"),
+         "--items-dir", outdir, "--year", y, "--apply"], quiet=False)
     return outdir
 
 def main():

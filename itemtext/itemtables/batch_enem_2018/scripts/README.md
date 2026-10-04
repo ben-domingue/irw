@@ -31,3 +31,4 @@ batch, so the build can be reproduced exactly:
 | 57_drawn_glyphs.py | 57_drawn_glyphs.v1.py | `9879b9c689311247083ea46c9b32e1d1` |
 | 58_verified_patches.py | 58_verified_patches.v3.py | `b92423109e16043f74d87c9879f00d63` |
 | 59_strip_essay_section.py | 59_strip_essay_section.v2.py | `8783d4254587569974e0c12ea8563e21` |
+| 60_stimulus_descriptions.py | 60_stimulus_descriptions.v1.py | `34e710da128236269fe8e3bd47c4849d` |
