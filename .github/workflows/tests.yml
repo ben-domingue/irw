@@ -85,9 +85,19 @@ jobs:
           python metadata/tests/test_script_index.py -v
           python metadata/tests/test_column_docs.py -v
 
+      # Codebook links (#2766, #2770) and the label-harvest advisory.
+      - name: codebook links and label-harvest check
+        run: |
+          python metadata/tests/test_find_codebook_links.py -v
+          python metadata/tests/test_check_label_harvest.py -v
+
+      # Drift-report name normalisation. Offline.
+      - name: drift report names
+        run: python metadata/tests/test_drift_names.py -v
+
       - name: validate_irw.R still parses
         run: |
-          sudo apt-get update -qq && sudo apt-get install -y -qq r-base-core r-cran-readr
+          sudo apt-get update -qq && sudo apt-get install -y -qq r-base-core r-cran-readr r-cran-httr r-cran-stringr
           Rscript misc/tests/smoke_validate_irw.R
 
       - name: Curated BibTeX corrections
@@ -109,15 +119,27 @@ jobs:
       # network -- so the merge rule is checked on every PR rather than only
       # when someone remembers to run it. Its load-bearing assertion is that a
       # human's non-empty cell is never overwritten.
-      #
-      # metadata/tests/test_tags_union.R is NOT here, and should be: it holds
-      # the only assertion that verbatim paper excerpts cannot reach a public
-      # CSV. It sources 03_tags.R, which needs the `gsheet` package, and there
-      # is no apt package for it -- adding it means installing from CRAN in CI.
-      # Tracked as part of #1863.
       - name: dictionary union
         working-directory: metadata
         run: Rscript tests/test_dict_union.R
+
+      # Offline tests that existed but never ran here (found 2026-10-03).
+      # test_tags_union.R holds the only assertion that verbatim paper excerpts
+      # cannot reach a public CSV (#1863). It sources 03_tags.R, which loads
+      # `gsheet`; there is no apt package for it, so it comes from CRAN. Its
+      # imports (httr, stringr) are installed from apt above. Nothing here
+      # fetches a sheet.
+      - name: install gsheet
+        run: sudo Rscript -e 'install.packages("gsheet", repos = "https://cloud.r-project.org")' -e 'library(gsheet)'
+      - name: tags union
+        working-directory: metadata
+        run: Rscript tests/test_tags_union.R
+      - name: stragglers, dictionary DOIs, BibTeX reference refresh
+        working-directory: metadata
+        run: |
+          Rscript tests/test_stragglers.R
+          Rscript tests/test_dictionary_dois.R
+          Rscript tests/test_bibtex_reference_refresh.R
 
       # Redivis config parity (#1733). The dataset list is declared once per
       # language -- here, in Rpkg, and in Python-pkg -- and nothing compared
@@ -204,3 +226,12 @@ jobs:
           for f in $added;    do args="$args --added $f";    done
           for f in $modified; do args="$args --modified $f"; done
           python -m irw_validate.contract --annotate $args
+
+      # Advisory, never fails (#2770): a new or changed script that reads
+      # .sav/.dta and writes cov_* but was never run through the covariate
+      # label harvest gets a warning naming the command to run.
+      - name: Covariate label harvest (advisory)
+        run: |
+          base="origin/${{ github.base_ref }}"
+          files=$(git diff --name-only --diff-filter=AM "$base"...HEAD -- 'data/*.py' 'data/*.R' || true)
+          if [ -n "$files" ]; then python metadata/check_label_harvest.py --annotate $files; fi

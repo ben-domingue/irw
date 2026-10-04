@@ -91,6 +91,13 @@
 # pages render it as a Codebook section. Like 13 it reads files on disk only and
 # needs no credentials.
 #
+# 15_codebook_links.py (issue #2770, added 2026-10-02) runs after 14: it reads
+# column_docs.csv and table_scripts.csv for the README check. It sweeps only
+# tables not yet in codebook_links_checked.csv (find_codebook_links.py
+# --new-only), so a week's new tables cost minutes. It calls public file-listing
+# APIs and, for item names, Redivis; per-deposit failures are recorded in the
+# checked CSV, not raised.
+#
 # 08_itemtext.R (readability-stats metadata for item text) joined the
 # default order 2026-08-02. Split of responsibility, confirmed with Ben:
 # this skill produces metadata FOR item text that's already been procured;
@@ -106,7 +113,7 @@
 # variant, see above) are out of scope per Ben (2026-07-27) -- ignored.
 #
 # Usage:
-#   scripts/run_pipeline.sh                 # full default sequence (01 05 06 07 02 03 08 10 11 12 13 14)
+#   scripts/run_pipeline.sh                 # full default sequence (01 05 06 07 02 03 08 10 11 12 13 14 15)
 #   scripts/run_pipeline.sh 01 03           # only metadata.csv + tags.csv
 #   scripts/run_pipeline.sh 08              # just the itemtext metadata stage
 #   scripts/run_pipeline.sh 10              # just the collections tables
@@ -153,7 +160,8 @@ declare -A STAGE_SCRIPT=( [01]=01_metadata.R [02]=02_biblio.R [03]=03_tags.R
                           [05]=05_comps.R [06]=06_nominal.R [07]=07_simsyn.R
                           [08]=08_itemtext.R [10]=10_collections.R
                           [11]=11_status.R [12]=12_stragglers.R
-                          [13]=13_script_index.py [14]=14_column_docs.py )
+                          [13]=13_script_index.py [14]=14_column_docs.py
+                          [15]=15_codebook_links.py )
 
 # Stages whose non-zero exit is a FINDING, not a failure. 12 exits 1 when a
 # table has been stuck for several runs -- that is the report doing its job, and
@@ -176,8 +184,9 @@ declare -A STAGE_OUTPUTS=(
   [12]=""   # writes straggler_watch.tsv -- reported separately below
   [13]="table_scripts.csv"
   [14]="column_docs.csv"
+  [15]="codebook_links.csv codebook_links_checked.csv"
 )
-DEFAULT_ORDER=(01 05 06 07 02 03 08 10 11 12 13 14)
+DEFAULT_ORDER=(01 05 06 07 02 03 08 10 11 12 13 14 15)
 
 # Join key for the diff, per output file. Everything is keyed on `table` except
 # the two collections outputs (issue #1633): the registry is one row per
@@ -187,6 +196,8 @@ declare -A DIFF_KEY=(
   [collections.csv]="collection"
   [collection_members.csv]="table,collection"
   [column_docs.csv]="table,column"
+  [codebook_links.csv]="table,url"
+  [codebook_links_checked.csv]="table,data_url"
 )
 
 stages=()

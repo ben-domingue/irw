@@ -144,15 +144,24 @@ class LicenseNameTest(unittest.TestCase):
     def test_spelled_out_names(self):
         for raw, norm, blocked in [
             ("CC-By Attribution 4.0 International", "cc-by", False),
-            ("CC-By Attribution-NonCommercial 4.0 International", "cc-by-nc", True),
-            ("CC-BY Attribution-NonCommercial-ShareAlike 4.0 International", "cc-by-nc-sa", True),
+            ("CC-By Attribution-NonCommercial 4.0 International", "cc-by-nc", False),
+            ("CC-BY Attribution-NonCommercial-ShareAlike 4.0 International", "cc-by-nc-sa", False),
             ("CC-By Attribution-NonCommercial-NoDerivatives 4.0 International", "cc-by-nc-nd", True),
             ("CC-By Attribution-ShareAlike 4.0 International", "cc-by-sa", False),
             ("CC0 1.0 Universal", "cc0", False),
-            ("Creative Commons Attribution Non Commercial 4.0 International", "cc-by-nc", True),
+            ("Creative Commons Attribution Non Commercial 4.0 International", "cc-by-nc", False),
         ]:
             got_norm, got_blocked, _ = irw_batch_updated.check_license(raw)
             self.assertEqual((got_norm, got_blocked), (norm, blocked), raw)
+
+    def test_licence_rule_2026_10_01(self):
+        # NC and GPL are hostable (not blocked, and not "unknown" either, which
+        # would send them to a human); anything with ND is still blocked.
+        for raw in ["CC BY-NC 4.0", "cc-by-nc-sa-4.0", "GPL-3", "GPL-3.0"]:
+            _, blocked, unknown = irw_batch_updated.check_license(raw)
+            self.assertEqual((blocked, unknown), (False, False), raw)
+        for raw in ["CC BY-ND 4.0", "CC BY-NC-ND 4.0"]:
+            self.assertTrue(irw_batch_updated.check_license(raw)[1], raw)
 
     def test_existing_forms_unchanged(self):
         for raw, norm in [("cc-by-4.0", "cc-by"), ("CC0", "cc0"),
@@ -173,7 +182,9 @@ class LicenseNameTest(unittest.TestCase):
                                return_value=_Resp(payload)) as g:
             name = irw_batch_updated._osf_license("nodes", "abcde", {})
         self.assertEqual(g.call_args.kwargs["params"]["embed"], "license")
-        self.assertTrue(irw_batch_updated.check_license(name)[1])
+        # The name is recognised (the opaque id would read as unknown).
+        self.assertEqual(irw_batch_updated.check_license(name)[0], "cc-by-nc")
+        self.assertFalse(irw_batch_updated.check_license(name)[2])
 
     def test_osf_license_falls_back_to_id(self):
         payload = {"data": {"relationships": {"license": {"data": {"id": "xyz"}}}}}

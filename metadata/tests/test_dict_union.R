@@ -244,6 +244,54 @@ local({
           "a truncated oracle warns and drops nothing (cannot empty a batch)")
 })
 
+cat("live-only biblio (#2767)\n")
+
+local({
+    live.file <- tempfile(fileext = ".csv")
+    on.exit(unlink(live.file), add = TRUE)
+    readr::write_csv(data.frame(table = c(sprintf("t%04d", 1:20), "nom_a_nom", "Live_No_Dict")), live.file)
+    check(is.null(suppressWarnings(read_live_tables(live.file, "nom", min_oracle_rows = 100))),
+          "an oracle under the floor returns NULL (do not filter)")
+    check(is.null(suppressWarnings(read_live_tables(tempfile(), "nom"))),
+          "a missing oracle returns NULL")
+    live <- read_live_tables(live.file, "nom", min_oracle_rows = 10)
+    check("live_no_dict" %in% live, "names are compared case-insensitively")
+})
+
+local({
+    live.file <- tempfile(fileext = ".csv"); dlog <- tempfile(fileext = ".csv")
+    on.exit(unlink(c(live.file, dlog)), add = TRUE)
+    readr::write_csv(data.frame(table = c(sprintf("t%04d", 1:20), "nom_a_nom", "live_no_dict")), live.file)
+    live <- read_live_tables(live.file, "nom", min_oracle_rows = 10)
+    ##the dictionary still lists a retired table: its row is held, and that is all
+    dict_new <- data.frame(table = c("nom_a_nom.csv", "retired_nom"), Reference_x = "r",
+                           stringsAsFactors = FALSE)
+    held <- suppressMessages(keep_live_rows(dict_new, live, "nom", "held", log.file = dlog))
+    check(identical(held$table, "nom_a_nom.csv"),
+          "a dictionary row for a retired table is held back; a stray .csv does not hide a live one")
+    b <- data.frame(table = c("nom_a_nom", "nom_a", "LIVE_NO_DICT", "retired_nom"),
+                    Reference_x = "r", URL__for_data_ = "u", BibTex = "x",
+                    stringsAsFactors = FALSE)
+    kept <- suppressMessages(keep_live_rows(b, live, "nom", "dropped", log.file = dlog, append = TRUE))
+    check(identical(kept$table, c("nom_a_nom", "LIVE_NO_DICT")),
+          "biblio keeps live tables only: a pre-rename name and a retired table go")
+    check("LIVE_NO_DICT" %in% kept$table,
+          "a live table with no dictionary row keeps its biblio row (the su_2024_* case)")
+    lg <- readr::read_csv(dlog, show_col_types = FALSE)
+    check(nrow(lg) == 3L && identical(sort(unique(lg$why)), c("dropped", "held")),
+          "one log carries the held dictionary rows and the dropped biblio rows")
+})
+
+local({
+    dlog <- tempfile(fileext = ".csv")
+    on.exit(unlink(dlog), add = TRUE)
+    b <- data.frame(table = c("a", "gone"), BibTex = "x", stringsAsFactors = FALSE)
+    kept <- keep_live_rows(b, NULL, "nom", "dropped", log.file = dlog)
+    check(nrow(kept) == 2L, "with no trusted oracle nothing is dropped")
+    check(file.exists(dlog) && nrow(readr::read_csv(dlog, show_col_types = FALSE)) == 0L,
+          "and the log is still written, empty, rather than left stale")
+})
+
 cat("pending rows (held, not discarded)\n")
 
 local({

@@ -315,7 +315,7 @@ a processing script, check the dataset's DOI against the
 | `already_in_irw` | The Data Availability link points at a deposit that is already in the IRW dictionary, under a different paper. Candidate exclusion matches the *paper* DOI and cannot see this: one deposit routinely serves two papers | Skip — the data is already in the corpus. If the new paper documents the instrument better than the shipped table does, that is a metadata fix, not a new table |
 | `external_unresolved` | PLOS only: no tabular SI file, and the Data Availability link is on a host with no resolver (ICPSR, institutional repositories, GitHub, ...). Links on figshare/OSF/Zenodo/Dryad/Mendeley/any Dataverse are triaged through `irw_batch_updated`'s resolvers instead | Open the link by hand if the study looks like item data; sticky, so it will not resurface |
 | `file_too_large` | Tabular file exceeds its ceiling — `MAX_FILE_BYTES` (200MB), or 25MB for `.rdata`/`.rda`/`.rds` via `FORMAT_MAX_BYTES` — not downloaded. Also logged to `oversized_candidates.csv` | Revisit manually later if the dataset looks valuable |
-| `license_restricted` | License (NC, ND, All Rights Reserved) blocks redistribution | Skip |
+| `license_restricted` | License (ND, All Rights Reserved) blocks redistribution. NC is not restricted since 2026-10-01 (`datastandard.md`) | Skip |
 | `download_failed` | Couldn't reach the data (network/HTTP error, unparseable listing, or a source-wide block) | **Retryable** — see the note below |
 | `error` | Unexpected pipeline error | **Retryable** — check `reasons` |
 
@@ -614,10 +614,9 @@ Used to bulk-download and heuristically standardize every queued dataset to
 dataset in `data/` (see Step 2 above). The file is kept in this directory for
 reference only.
 
-It **does not import on `main`** — it wants a `QUEUE_SHEET_URL` that
-`irw_discover_updated.py` no longer defines (see `TODO.md`) — so it cannot be
-run even by accident, and `irw_output/queue/` and `cleaned_index.csv` no
-longer exist.
+It imports (it now defines its own `QUEUE_SHEET_URL`, pointing at the
+retired sheet) but its `main()` refuses to run, so it cannot be run even by
+accident, and `irw_output/queue/` and `cleaned_index.csv` no longer exist.
 
 It is also **not this pipeline's conversion step and must not be treated as a
 baseline for one.** Nothing here converts a dataset to IRW format

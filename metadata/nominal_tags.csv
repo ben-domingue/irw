@@ -3,6 +3,8 @@ asap20train_nom,NA,NA,NA,NA,NA,NA,NA,NA
 blum_2018_imak_nom,NA,NA,NA,NA,NA,NA,NA,NA
 borges_brazil_residency_2024_cbt_nom,NA,NA,NA,NA,NA,NA,NA,NA
 borges_brazil_residency_2024_pbt_nom,NA,NA,NA,NA,NA,NA,NA,NA
+choi_2020_ednet_listening_nom,NA,NA,"Educational, Internet-based",Cognitive/educational,Test,Likert Scale/selected response,eng,"TOEIC Listening (EdNet KT1, parts 1-4)"
+choi_2020_ednet_reading_nom,NA,NA,"Educational, Internet-based",Cognitive/educational,Test,Likert Scale/selected response,eng,"TOEIC Reading (EdNet KT1, parts 5-7)"
 cos101_2026_nom,NA,NA,NA,NA,NA,NA,NA,NA
 enem_2013_1mil_ch_nom,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Human Sciences Proficiency Assessment (2013)
 enem_2013_1mil_cn_nom,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Natural Sciences Proficiency Assessment (2013)
@@ -56,12 +58,17 @@ enem_2025_1mil_ch_nom,Child (<18y),Adolescent (12-18y),Representative,Cognitive/
 enem_2025_1mil_cn_nom,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Natural Sciences Proficiency Assessment (2025)
 enem_2025_1mil_lc_nom,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Language Proficiency Assessment (2025)
 enem_2025_1mil_mt_nom,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Mathematics Proficiency Assessment (2025)
+fitz_2024_numeracy_nom,Adult (18+),NA,Internet-based,Cognitive/educational,Test,Mixed,eng,Objective numeracy
 goldberg_2018_spa_computer_use_nom,NA,NA,NA,NA,NA,NA,NA,NA
 himmelstein-berlin_numeracy-2025_nom,NA,NA,NA,NA,NA,NA,NA,NA
 mthimkhulu_2023_pirls_reading_nom,NA,NA,NA,NA,NA,NA,NA,NA
 much_tte_2025_concentrationtask_nom,NA,NA,NA,NA,NA,NA,NA,NA
 much_tte_2025_matrixreasoning_nom,NA,NA,NA,NA,NA,NA,NA,NA
+papousek_2017_anatomy_nom,NA,NA,"Educational, Internet-based",Cognitive/educational,Test,Likert Scale/selected response,"cze, eng, lat",Anatomy terminology (recognition and recall of anatomical structures)
 persuade_learningagency_nom,NA,NA,NA,NA,NA,NA,NA,NA
 preference_inventory_nom,Adult (18+),NA,"Educational, Targeted/specific","Opinion/attitude, Personality",Survey/questionnaire,Likert Scale/selected response,eng,The Wagner Preference Inventory
+vocabulary_iq_nom,Mixed,NA,Internet-based,Personality,Test,Mixed,eng,Vocabulary IQ Test
+voropaeva_2026_health_media_nom,Adult (18+),NA,"General/non-specific, Internet-based","Affective/mental health, Opinion/attitude",Survey/questionnaire,Mixed,rus,Cognitive/emotional responses to visual anthropomorphism in health media
 wilmer-mrmet-normative-data-set-2022_nom,NA,NA,NA,NA,NA,NA,NA,NA
 wilmer-rmet-normative-data-set-2022_nom,NA,NA,NA,NA,NA,NA,NA,NA
+zorowitz_2023_marsib_nom,Adult (18+),NA,Internet-based,Cognitive/educational,Test,Likert Scale/selected response,eng,Matrix Reasoning Item Bank (MaRs-IB)

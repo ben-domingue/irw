@@ -32,6 +32,11 @@ Rules (all ruled on #1775, 2026-10-01):
   reviewed in ``institutions.csv`` is withheld too, and reported, until
   someone adds a ``publish`` or ``withhold`` line for it.
 * **Live tables only**: tables not in metadata/metadata.csv are skipped.
+* **Hand-entered pairs** (#2789) come from ``manual.csv``, for scripts the
+  harvest cannot re-run (R). Each row is one shipped code, its source label
+  verbatim, and the source file and column it came from; whoever adds it has
+  checked rules (a)-(c) by hand. A pair the harvest also produced keeps the
+  harvested rows.
 
     python3 metadata/covariate_labels/build.py               # logs from ~/.cache/irw/covariate_labels/logs
     python3 metadata/covariate_labels/build.py --logs DIR
@@ -101,6 +106,32 @@ def meaningful(labels):
 def read_live(path):
     with open(path, encoding="utf-8-sig", newline="") as f:
         return {r["table"] for r in csv.DictReader(f)}
+
+
+def read_manual(path):
+    if not path.exists():
+        return []
+    with open(path, encoding="utf-8", newline="") as f:
+        return list(csv.DictReader(f))
+
+
+def add_manual(rows, record, manual, live):
+    """Append the hand-entered pairs from manual.csv to build()'s output."""
+    have = {(r["table"], r["covariate"]) for r in rows}
+    pairs = {}
+    for m in manual:
+        pairs.setdefault((m["table"], m["covariate"]), []).append(m)
+    for (table, cov), ms in sorted(pairs.items()):
+        if table not in live or (table, cov) in have:
+            continue
+        for m in ms:
+            rows.append(dict(table=table, covariate=cov, code=norm(m["code"]), label=m["label"].strip()))
+        m = ms[0]
+        record.append(dict(table=table, covariate=cov, script=m["script"], source_column=m["source_column"],
+                           status="included", reason=f"entered by hand from {m['source_file']} (manual.csv)",
+                           n_codes=len(ms), n_labelled=len(ms), unlabelled_codes=""))
+    rows.sort(key=lambda r: (r["table"], r["covariate"], code_key(r["code"])))
+    record.sort(key=lambda r: (r["table"], r["covariate"]))
 
 
 def read_institutions(path):
@@ -332,6 +363,7 @@ def main(argv=None):
     live = read_live(REPO / "metadata" / "metadata.csv")
     rules = read_institutions(HERE / "institutions.csv")
     rows, record, flagged = build(a.logs, live, rules, REPO / "data")
+    add_manual(rows, record, read_manual(HERE / "manual.csv"), live)
     write_csv(a.out, rows, COLUMNS)
     write_csv(a.coverage, record, ["table", "covariate", "script", "source_column", "status",
                                    "reason", "n_codes", "n_labelled", "unlabelled_codes"])

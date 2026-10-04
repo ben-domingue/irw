@@ -39,6 +39,14 @@ metadata/**/*.txt
 !metadata/table_scripts_manual.csv
 # Per-column codebook rows the table pages render (#2763); stage 14.
 !metadata/column_docs.csv
+# Source codebook files found by name in each deposit, and what was checked
+# (#2766); find_codebook_links.py, run by hand. Its listing cache stays local.
+!metadata/codebook_links.csv
+!metadata/codebook_links_checked.csv
+!metadata/codebook_by_review.csv
+metadata/logs/codebook_listings.json
+metadata/logs/codebook_readme_text.json
+metadata/logs/codebook_table_names.json
 # Aggregator registry (openESM, ...) keyed by the dictionary's `Source via` (#2421).
 !metadata/aggregators.csv
 # Covariate value labels (#1775): the irw_meta table and the generator's
@@ -56,6 +64,13 @@ metadata/**/*.txt
 ##Rows held back because their table is not published yet (#1732). Committed for
 ##the same reason: it is the only place "waiting on a publish" is written down.
 !metadata/biblio_pending.csv
+##01_metadata.R's rolling-refresh rotation: which existing tables had their
+##stats re-fetched, and when. Committed because the weekly run is on Actions,
+##where an ignored file starts empty every time -- the rotation then fell back
+##to its alphabetical tiebreak and re-checked the same first 200 tables every
+##week from 09-04 to 10-02. One row per table, sorted by name, so the weekly
+##diff is the 200 timestamps that moved.
+!metadata/metadata_refresh_log.csv
 ##Which published biblio cells the dictionary corrected on this run (#2001).
 ##Committed because it is the first run's review surface -- 336 cells across 223
 ##tables is a list a person can read, where the same change in biblio.csv is a
@@ -84,6 +99,12 @@ metadata/**/*.txt
 !metadata/logs/comps_biblio_license_log.csv
 !metadata/logs/nominal_biblio_license_log.csv
 !metadata/logs/simsyn_biblio_license_log.csv
+##Biblio rows dropped because their table is in neither the dictionary nor
+##the source's metadata.csv (#2767). Committed so the weekly pipeline PR shows
+##every drop for review before it publishes.
+!metadata/logs/comps_biblio_drop_log.csv
+!metadata/logs/nominal_biblio_drop_log.csv
+!metadata/logs/simsyn_biblio_drop_log.csv
 .env
 .Rproj.user
 .DS_Store
@@ -99,6 +120,7 @@ itemtext/audit_staging/
 # transient control flag for the itemtext batch loop (its presence is the state)
 itemtext/extraction_batches/circuit_breaker.flag
 __pycache__/
+*.py[cod]
 
 # red_up packaging artefacts (pip install -e .)
 *.egg-info/
@@ -126,19 +148,6 @@ metadata/pipeline_logs/version_manifest_*.log
 # weekly pipeline's markdown logs ARE tracked, because there is one a week.
 itemtext/extraction_batches/cron_logs/
 
-##Per-agent fetch caches for concurrent tagging runs (#1704, P5).
-tags/.caches/
-
-tags/.caches/
-
-tags/.caches/
-
-tags/.caches/
-
-tags/.caches/
-
-tags/.caches/
-
 # Raw source downloads fetched by data/ scripts; never committed.
 data/*_raw/
 
@@ -149,3 +158,10 @@ data/*_raw/
 # the directory is what stops that recurring; the batch directories under
 # itemtext/itemtables/batch_* remain the tracked record of what was extracted.
 itemtext/itemtables/clean/
+
+# Local tool state that no one should commit.
+.venv/
+venv/
+.pytest_cache/
+.ipynb_checkpoints/
+*.Rcheck/

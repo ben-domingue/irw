@@ -1,6 +1,6 @@
 ---
 name: irw-site-update
-description: Use this skill when asked to regenerate or refresh the IRW dictionary, metadata, tags, or biblio CSVs that feed the Redivis "irw_meta:bdxt" dataset (metadata.csv, biblio.csv, tags.csv, comps_metadata.csv, nominal_metadata.csv, simsyn_metadata.csv, comps/nominal/simsyn biblio.csv, itemtext_metadata.csv, collections.csv, collection_members.csv, hero_stats.json), to audit/reconcile table names across the metadata/tags/biblio tables and the live Redivis IRW datasets, or to actually upload those regenerated CSVs into the Redivis irw_meta tables. Also applies to phrases like "run the metadata pipeline", "update Redivis metadata", "check for table name mismatches", "add item_response_warehouse_5 to metadata", "which tables are missing from the dictionary/tags/biblio", or "upload biblio/tags/metadata to Redivis".
+description: Use this skill when asked to regenerate or refresh the IRW dictionary, metadata, tags, or biblio CSVs that feed the Redivis "irw_meta:bdxt" dataset (metadata.csv, biblio.csv, tags.csv, comps_metadata.csv, nominal_metadata.csv, simsyn_metadata.csv, comps/nominal/simsyn biblio.csv, itemtext_metadata.csv, collections.csv, collection_members.csv, covariate_labels.csv, plus the GitHub-read status.json, table_scripts.csv, column_docs.csv and codebook_links.csv), to audit/reconcile table names across the metadata/tags/biblio tables and the live Redivis IRW datasets, or to actually upload those regenerated CSVs into the Redivis irw_meta tables. Also applies to phrases like "run the metadata pipeline", "update Redivis metadata", "check for table name mismatches", "add item_response_warehouse_5 to metadata", "which tables are missing from the dictionary/tags/biblio", or "upload biblio/tags/metadata to Redivis".
 ---
 
 # IRW Site/Metadata Update
@@ -10,7 +10,7 @@ Workflows 1 and 2 **call the actual numbered R scripts in `metadata/`** — this
 skill never reimplements their logic, only orchestrates them and reports what
 changed. Workflow 3 is this skill's own script (`upload_meta.py`), now a thin wrapper
 around `red_up` — the single uploader every IRW dataset goes through. It works
-out which of the thirteen known metadata CSVs are present and hands them to
+out which of the known metadata CSVs (`FILE_TABLE_MAP`) are present and hands them to
 `red_up --dataset irw_meta`; the replace, the preserved table descriptions and
 the row-count check all live there. See `red_up/README.md`.
 Everything here works from the repo root; the numbered scripts themselves
@@ -20,10 +20,9 @@ existing convention, e.g. `01_metadata.R`).
 Confirmed with Ben (2026-07-27) — see `references/pipeline.md` for the full
 script-by-script writeup this was built from:
 
-- Core pipeline order: `01_metadata.R` → `02_biblio.R` → `03_tags.R` →
-  `05_comps.R` → `06_nominal.R` → `07_simsyn.R` → `08_itemtext.R` →
-  `10_collections.R` → `11_status.R` → `12_stragglers.R` → `13_script_index.py`.
-  Stage `09_hero_status.R` was retired 2026-10-01 (#1940): the site computes
+- Core pipeline order: `DEFAULT_ORDER` in `scripts/run_pipeline.sh` (not
+  restated here; it has changed several times, most recently when 02 moved
+  after 05/06/07 for #2628 and stages 14–15 were added for the Codebook). Stage `09_hero_status.R` was retired 2026-10-01 (#1940): the site computes
   the hero from published irw_meta at render time. `05`/`06` were fixed and `08` was added to the
   default order 2026-08-02 — see `TODO.md` for history if any of the three
   regress. **Numeric order is not run order**, and `04`
@@ -91,9 +90,8 @@ source Google Sheets or newly live in Redivis (e.g. a new
 `item_response_warehouse_6` table, or an edited dictionary-sheet row).
 
 ```bash
-scripts/run_pipeline.sh                 # full default sequence: 01 02 03 05 06 07 08 09
+scripts/run_pipeline.sh                 # full default sequence (DEFAULT_ORDER)
 scripts/run_pipeline.sh 01 03           # only metadata.csv + tags.csv
-scripts/run_pipeline.sh --no-09         # everything except the hero JSON
 scripts/run_pipeline.sh 08              # just the itemtext metadata stage
 scripts/run_pipeline.sh 10              # just the collections tables (no credentials needed)
 ```

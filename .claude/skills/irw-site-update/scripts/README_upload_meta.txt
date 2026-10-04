@@ -40,11 +40,10 @@ How to run (from metadata/):
   python3 ../.claude/skills/irw-site-update/scripts/upload_meta.py --yes
       # skip the confirmation prompt
 
-Known file -> table mapping (13): metadata, biblio, tags, nominal_tags,
-comps_biblio, nominal_biblio, simsyn_biblio, simsyn_metadata, comps_metadata,
-nominal_metadata, itemtext_metadata, collections, collection_members.
-hero_stats.json is NOT here -- it's not a Redivis table, it goes to the
-separate irw_site repo.
+Known file -> table mapping: FILE_TABLE_MAP in upload_meta.py (not restated
+here, so it cannot drift). The stage 13-15 outputs (table_scripts.csv,
+column_docs.csv, codebook_links.csv) are not Redivis tables: the site and the
+MCP read them from GitHub main.
 
 Full details: the script's own docstring, SKILL.md's "Workflow 3", and
 src/red_up/README.md.

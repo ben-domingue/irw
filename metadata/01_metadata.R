@@ -359,7 +359,9 @@ if (refresh.per.run>0) {
   if (length(refreshed.rows)>0) {
     newlog<-do.call("rbind",refreshed.rows)
     allog<-rbind(read_refresh_log(),newlog)
-    write.csv(allog[!duplicated(allog$table,fromLast=TRUE),],refresh.log.file,row.names=FALSE)
+    allog<-allog[!duplicated(allog$table,fromLast=TRUE),]
+    ##sorted by table so the committed log diffs as changed timestamps, not moved rows
+    write.csv(allog[order(allog$table),],refresh.log.file,row.names=FALSE)
   }
 }
 
