@@ -190,8 +190,10 @@ Response CSVs are the #1942-corrected build, not the pre-fix ones.
 - Any case where following a rule here would require inventing an item code,
   an option letter, or a `resp` value.
 - A recovery that does not satisfy **both** of R15's conditions.
-- Removing a rendering of a stimulus that already shipped, even in
-  favour of a demonstrably correct one (R13's replace case).
+- Removing a rendering of a stimulus that already shipped, **except** the one
+  case R20 now settles: a rendering that is demonstrably wrong about its own
+  figure, replaced by INEP's own correct words. Anything short of
+  demonstrably-wrong still escalates.
 
 ## R14. A table the accessibility edition dropped is recovered from the standard one
 
@@ -358,7 +360,7 @@ still has to leave the wrong item. Note that `55_recover_tables.py` runs
 *after* this pass, so a drop is justified by the finished state of the year,
 not by the state mid-pipeline.
 
-### Replacing a corrupt rendering — NOT YET RULED
+## R20. A rendering that inverts the item is replaced, not kept alongside
 
 2022 CH 97262 is the one case where the recipient already held the block's
 content but **wrongly**: its `TEXTO 2` is a scrambled dump of the infographic
@@ -368,11 +370,64 @@ the printed figure is 56,9 %. The item asks which factors intensify
 discrimination, so the scramble inverts the answer. The relocated prose block
 carries the correct pairings and **replaces** the dump.
 
-This is the only operation in the pass that deletes shipped text, and deleting
-a shipped rendering in favour of a better one is not covered by R2, R13, R14 or
-R15. It is applied and flagged for an explicit ruling rather than treated as
-settled; see R11. If the ruling goes the other way the fix is to keep both
-renderings, which is a one-line change to that entry.
+This is the only operation in the pass that deletes shipped text, and it was
+carried for a while as NOT YET RULED because deleting a shipped rendering in
+favour of a better one is not covered by R2, R13, R14 or R15.
+
+**Ruled 2026-10-04 (#2462): replace it.** The reasoning that settles it is that
+the two renderings are not two views of the same content — one of them is
+false. Read in document order the dump asserts pairings the printed figure
+contradicts, and the item asks which factors *intensify* discrimination, so a
+reader who trusts the text reaches the opposite answer from a reader who sees
+the figure. Keeping both would not hedge the risk; it would ship a correct
+rendering and an item-inverting one in the same cell and leave the reader to
+guess which governs. There is no reading of R2 under which text that inverts
+its own item is faithful to the source.
+
+The narrow form of the rule, so it does not become a licence to tidy:
+
+- it applies only where a rendering is **demonstrably wrong about its own
+  figure**, shown by comparing it against the figure, not where it is merely
+  clumsy, partial or ugly;
+- the replacement must be INEP's own words — here the relocated prose block —
+  never generated text, which keeps this clear of R5;
+- the deletion is recorded per operation in `54_relocate_descriptions.py` with
+  the specific numbers that disagree, so the claim is checkable rather than
+  asserted.
+
+R19 is the adjacent case and the contrast is worth keeping: there the deleted
+text was never part of the item at all, so no judgement about correctness was
+needed. Here it was part of the item and had to be judged false.
+
+## R21. Transcribe the marks that are there; never add one that is not
+
+Ruled 2026-10-04 (#2462). Old typography sometimes sets a diacritic beside its
+vowel rather than above it. 2013 CH 44785 reproduces a 1934 cartoon caption in
+which the acute and the grave are printed as small displaced apostrophes:
+`Havera' ainda quem resista a' poderosa influencia`.
+
+Those marks are **on the page**. Transcribing them in the modern position —
+`Haverá`, `à` — records what the typesetter marked, in the same spirit as R12
+and R16: reading the page's intent off its geometry is recovery, not
+generation. A reader-aloud, and a tokeniser, both need the accent where the
+language puts it.
+
+`influencia` in the same line keeps no accent, because there is **no mark
+there to transcribe**. Pre-1943 orthography simply spelled it that way. Adding
+a circumflex would be emending INEP's source — and the 1934 original's — which
+is generation, and would also silently modernise a word the exam reproduces as
+a period artefact.
+
+So the two halves of that line are not inconsistent, which is how it first
+looked in review; they follow one rule applied twice:
+
+- a diacritic that is **present but displaced** is transcribed in its proper
+  position;
+- a diacritic that is **absent** stays absent, however odd it looks to a
+  modern reader.
+
+The same principle settles the general case: transcription normalises *where* a
+mark sits, never *whether* it exists.
 
 ## R16. A glyph the booklet DRAWS is recovered from the drawing
 
@@ -569,7 +624,7 @@ Two things this rule does **not** license:
 Because this pass deletes text it fails closed: the removed span must contain
 one of the essay signals above, or the cut is refused and reported.
 
-This is narrower than the 2022 CH 97262 case recorded above as NOT YET RULED.
+This is narrower than R20's 2022 CH 97262 case.
 There, the deleted text was a (scrambled) rendering of the item's *own*
 figure, so removing it loses item content. Here the deleted text was never part
 of the item at all, and it remains in the booklet for anyone who wants the

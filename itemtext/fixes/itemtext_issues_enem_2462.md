@@ -70,20 +70,25 @@ INEP's own files, not unresolved questions.
     Two items carry a generated figure description, marked inline `(gerada por IA)`: a geometric dot-pattern sequence and a distance-against-time graph. In both the figure is the item's data, so the numbers and the shape a reader sees are a reading of INEP's diagram rather than text INEP published.
 ```
 
-## What still needs a human decision
+## Two points decided rather than escalated
 
-Two points are deliberately left as they are, and a reviewer may want to rule
-differently:
+Both were flagged in review as open questions and have been settled (2026-10-04),
+so the entries above reflect the decisions rather than leaving them hanging:
 
-1. **2013 CH 25217 and 2013 LC 51365 each have two images but one insertion
-   point.** Both descriptions are self-labelled (`Descrição da primeira
-   imagem`, `Descrição do Mapa 2`) and both are correct, but the second one
-   lands before the first image's credit line, which reads oddly. Splitting
-   each into two insertions would be tidier and is a small change.
-2. **2013 CH 44785's caption is 1930s typography in which accents are printed
-   as displaced apostrophes** — `Havera' ainda quem resista a' poderosa
-   influencia`. The transcription normalises those two to `Haverá` and `à`
-   while leaving `influencia` unaccented as printed, which is internally
-   inconsistent: it follows the typesetter's evident intent on the apostrophes
-   and the page's literal glyphs on the missing circumflex. Either rule is
-   defensible; the mixture is what should be settled.
+1. **Two images, two insertion points.** 2013 CH 25217 and 2013 LC 51365 each
+   carry two figures, and both descriptions were being inserted at one anchor —
+   which put the second description before the *first* image's credit line,
+   where it read as though it described that image. Each is now split into two
+   insertions so a description sits with the figure it describes. The text is
+   unchanged and still twice-verified; only its position moved.
+
+2. **Old typography that sets accents beside the vowel.** 2013 CH 44785
+   reproduces a 1934 caption printing the acute and grave as displaced
+   apostrophes (`Havera' ... a' poderosa influencia`). The transcription renders
+   those as `Haverá` and `à` but leaves `influencia` unaccented, which review
+   read as inconsistent. It is not: the first two marks are **on the page** and
+   are merely mis-positioned, while `influencia` has **no mark to transcribe** —
+   that is pre-1943 orthography. Recorded as **R21**: transcription normalises
+   *where* a diacritic sits, never *whether* it exists. Adding the circumflex
+   would emend INEP's source and silently modernise a period artefact the exam
+   reproduces deliberately.
