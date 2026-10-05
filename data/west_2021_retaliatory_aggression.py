@@ -74,11 +74,11 @@ def main() -> None:
     s6, c6 = _load(Path("Study 6/Data + Code/Study6_OSF.csv"),
                    {"Gender": "cov_gender"}, "study6", "Participant")
     # Study 6 has two different people under Participant 241 (different
-    # gender and answers). The second, in file order, gets id max + 1 (270),
-    # unused in study 6, so ids are unique within each study (irw#2845).
+    # gender and answers). The second, in file order, becomes 241b (irw#2845).
     dup = s6.index[s6["id"].duplicated()]
     assert s6.loc[dup, "id"].tolist() == [241], s6.loc[dup, "id"].tolist()
-    s6.loc[dup, "id"] = s6["id"].max() + 1
+    s6["id"] = s6["id"].astype("Int64").astype(str)
+    s6.loc[dup, "id"] = "241b"
 
     cov_union = ["cov_age", "cov_gender", "cov_provocation",
                  "cov_coldpressor", "cov_condition", "cov_study"]
@@ -90,6 +90,13 @@ def main() -> None:
                 long = long.drop(columns=[c])
         if "cov_study" in long.columns:
             studies = sorted(long["cov_study"].dropna().unique())
+            if len(studies) > 1:
+                # Each study numbers its own participants from 1, so the same
+                # number is a different person in each study: prefix the
+                # study (audit/2401/RULES.md, rule 4; irw#2845).
+                num = pd.to_numeric(long["id"], errors="coerce")
+                raw = num.astype("Int64").astype(str).where(num.notna(), long["id"].astype(str))
+                long["id"] = long["cov_study"] + "_" + raw
             if len(studies) == 1:
                 tag = studies[0]
                 long = long.drop(columns=["cov_study"])
