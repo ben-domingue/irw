@@ -144,36 +144,72 @@ def convert_study2_efa_to_irw(read_dir, write_dir):
     return out
 
 
-def _sav_covs_study3():
-    return ["gender", "age", "country", "emp_status", "emp_filed", "keep_job", "work_env", "covid_infected",
-            "finance_threat", "sd_practice", "covid_stress", "pcvd_ses", "pol_or", "gender_2", "data_type", "cfa_rep"]
+##Study 3 is read with pyreadstat so the numeric codes survive (irw#2837).
+##Most of its 1-7 items label only the endpoints; codes 2-6 carry EMPTY labels,
+##so pd.read_spss turned them into "" and the old label-to-number mapping
+##dropped every 2-6 answer (69.6% of responses). The prosocial items (endpoint
+##labels "Extremely (un)willing") and the WHO-5 items (perswb, fully labelled
+##in words) never mapped at all and were missing.
+STUDY3_ITEM_PREFIXES = ("VALUE", "CovTh", "cope_pers", "cope_coll", "Ident_", "pgrowth_",
+                        "sgrowth_", "perswb", "socwb", "prosoc_comm", "prosoc_global",
+                        "govtsoli_global", "govtsoli_ref")
+##nominal covariates ship as their value label (an unlabelled code as the bare
+##code); ordinal ones (1-7 / 1-10 with endpoint labels) and age as numbers.
+##Emp_Filed (free-text occupation) is not shipped.
+STUDY3_COVS_LABELLED = {"Gender": "cov_gender", "Country": "cov_country",
+                        "Emp_Status": "cov_emp_status", "Keep_Job": "cov_keep_job",
+                        "Work_env": "cov_work_env", "Covid_infected": "cov_covid_infected",
+                        "Data_Type": "cov_data_type", "CFA_rep": "cov_cfa_rep"}
+STUDY3_COVS_NUMERIC = {"Age": "cov_age", "Finance_threat": "cov_finance_threat",
+                       "SD_practice": "cov_sd_practice", "COVID_stress": "cov_covid_stress",
+                       "Pcvd_SES": "cov_pcvd_ses", "Pol_Or": "cov_pol_or",
+                       "Gender_2": "cov_gender_2"}
+
+
+def _labelled(ser, labels):
+    def one(x):
+        if pd.isna(x):
+            return pd.NA
+        lab = (labels or {}).get(x, "").strip()
+        return lab if lab else str(int(x))
+    return ser.map(one)
 
 
 def convert_study3_cfa_to_irw(read_dir, write_dir):
+    import pyreadstat
     path = os.path.join(read_dir, COVID_SAV_CFA)
     if not os.path.isfile(path):
         return None
-    try:
-        df = pd.read_spss(path)
-    except Exception:
-        return None
-    df = _irw_columns(df)
-    id_col = "part_no" if "part_no" in df.columns else "id"
-    if id_col not in df.columns:
-        df["id"] = range(1, len(df) + 1)
-        id_col = "id"
-    cov_candidates = [c for c in _sav_covs_study3() if c in df.columns]
-    item_cols = [c for c in df.columns if c != id_col and c not in cov_candidates]
-    for c in item_cols:
-        if c in df.columns:
-            df[c] = _spss_label_to_numeric(df[c], text_map=SPSS_TEXT_LABEL_MAP)
-    out = convert_wide_to_irw(df, id_col, cov_candidates, item_cols)
-    if out.empty:
-        return None
-    out = out[(out["resp"] >= 1) & (out["resp"] <= 7)]
+    df, meta = pyreadstat.read_sav(path)
+    items = [c for c in df.columns if c.startswith(STUDY3_ITEM_PREFIXES)]
+    assert len(items) == 150, len(items)
+    ##Part_No 381 is two different people (one MTURK, one SNOWBALL): keep both,
+    ##suffixed with their recruitment source.
+    pid = df["Part_No"].astype(int).astype(str)
+    dup = df["Part_No"].duplicated(keep=False)
+    src = df["Data_Type"].map({1.0: "mturk", 2.0: "snowball"})
+    assert dup.sum() == 2 and src[dup].notna().all() and src[dup].nunique() == 2
+    pid[dup] = pid[dup] + "_" + src[dup]
+    wide = pd.DataFrame({"id": pid})
+    for c, new in STUDY3_COVS_LABELLED.items():
+        wide[new] = _labelled(df[c], meta.variable_value_labels.get(c))
+    for c, new in STUDY3_COVS_NUMERIC.items():
+        wide[new] = df[c].astype("Int64")
+    wide = pd.concat([wide, df[items]], axis=1)
+    out = wide.melt(id_vars=[c for c in wide.columns if c not in items], value_vars=items,
+                    var_name="item", value_name="resp")
+    out = out.dropna(subset=["resp"])
+    out["item"] = out["item"].str.lower()
+    out["resp"] = out["resp"].astype(int)
+    ##VALUE (PVQ-21) and perswb (WHO-5) are 1-6; every other block is 1-7
+    six = out["item"].str.startswith(("value", "perswb"))
+    assert out.loc[six, "resp"].between(1, 6).all() and out.loc[~six, "resp"].between(1, 7).all()
+    assert not out.duplicated(["id", "item"]).any()
+    covs = [c for c in out.columns if c.startswith("cov_")]
+    out = out[["id", "item", "resp"] + covs]
     out_path = os.path.join(write_dir, OUT_CFA)
     out.to_csv(out_path, index=False)
-    print("  %s: rows=%d" % (OUT_CFA, len(out)))
+    print("  %s: rows=%d ids=%d items=%d" % (OUT_CFA, len(out), out["id"].nunique(), out["item"].nunique()))
     return out
 
 
