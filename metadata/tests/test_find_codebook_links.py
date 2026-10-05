@@ -98,6 +98,29 @@ class IngestLinksTest(unittest.TestCase):
                          [("foo_2026", "recorded_at_ingest", "Codebook v2.pdf", "osf.io")])
 
 
+class DeepRepositoryTest(unittest.TestCase):
+    """#2787 follow-up: documents in repository deposits, past their names."""
+
+    def test_analysis_output_is_not_documentation(self):
+        ega = ("library(EGAnet); data <- read_excel('x.xlsx') ... Variable pairs with wTO > 0.25 "
+               "node_i node_j wto ... loadings ... items_1 items_2 items_3")
+        efa = "Table SM2. EFAs of the full Spanish BFI-2. Loadings of BFI1 ... BFI60"
+        self.assertTrue(fcl.looks_like_output(ega))
+        self.assertTrue(fcl.looks_like_output(efa))
+
+    def test_questionnaires_and_codebooks_pass(self):
+        q = ("TABLE I: Full questionnaire ID German Question English Translation F01r Der Besuch einer "
+             "Kunstausstellung ... P12_1. Skup zakona ... 1 - Uopste nije vazno 5 - Vrlo vazno")
+        cb = "Variable: nfc_xxx_01_x  Label: I get a kick when ...  Values: 1 = Strongly disagree ... 7 = Strongly agree"
+        self.assertFalse(fcl.looks_like_output(q))
+        self.assertFalse(fcl.looks_like_output(cb))
+
+    def test_text_files_in_deposits_are_not_read(self):
+        # a deposit's .txt/.dat is usually the data, whose header names every column
+        self.assertNotIn("txt", fcl.REPO_TEXT_EXT)
+        self.assertNotIn("csv", fcl.REPO_TEXT_EXT)
+
+
 class ReviewLinksTest(unittest.TestCase):
     """#2787 step 3: codebook_by_review.csv, found by hand, never by a crawler."""
 
