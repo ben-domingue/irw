@@ -320,6 +320,36 @@ local({
           "with nothing held, the pending file is written empty rather than left stale")
 })
 
+local({
+    ##A withdrawn or Private table will never publish, so its row is not held:
+    ##otherwise the pending file fills with rows nobody can ever clear.
+    live <- tempfile(fileext = ".csv"); pend <- tempfile(fileext = ".csv")
+    wd <- tempfile(fileext = ".csv")
+    on.exit(unlink(c(live, pend, wd)), add = TRUE)
+    readr::write_csv(data.frame(table = c(sprintf("t%04d", 1:1500), "a_2020")), live)
+    readr::write_csv(data.frame(table = c("Gone_2025", "part_2024"),
+                                kind = c("whole", "partial")), wd)
+    a <- fake_auto(auto_row("a_2020"), auto_row("draft_2026"), auto_row("gone_2025"),
+                   auto_row("part_2024"), auto_row("secret_2009", reshare = "Private"))
+    kept <- drop_dead_dict_rows(a, live, "core", pending.file = pend,
+                                withdrawals.file = wd)
+    held <- readr::read_csv(pend, col_types = readr::cols(.default = readr::col_character()))
+    check(nrow(kept) == 1L && kept$table[1] == "a_2020",
+          "withdrawn and Private rows still stay out of the union")
+    check(setequal(held$table, c("draft_2026", "part_2024")),
+          "only rows that can still publish are held (a partial withdrawal still can)")
+})
+
+local({
+    live <- tempfile(fileext = ".csv"); pend <- tempfile(fileext = ".csv")
+    on.exit(unlink(c(live, pend)), add = TRUE)
+    readr::write_csv(data.frame(table = c(sprintf("t%04d", 1:1500), "a_2020")), live)
+    drop_dead_dict_rows(fake_auto(auto_row("gone_2025")), live, "core",
+                        pending.file = pend, withdrawals.file = tempfile())
+    check(nrow(readr::read_csv(pend, show_col_types = FALSE)) == 1L,
+          "a missing withdrawals file holds as before rather than failing")
+})
+
 cat("DOI (for data) -- the #1690 split\n")
 
 local({

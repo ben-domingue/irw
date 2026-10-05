@@ -200,7 +200,8 @@ getrows<-function(l) {
         ## complete, where a 9-row core one would be a truncated read.
         auto <- drop_dead_dict_rows(auto, l$file.live, name,
                                     min_oracle_rows = if (is.null(l$min.live)) 1000 else l$min.live,
-                                    pending.file = l$file.pending)
+                                    pending.file = l$file.pending,
+                                    withdrawals.file = l$file.withdrawals)
         u <- union_dict(irw_dict, auto, name)
         irw_dict <- u$dict
         write_dict_provenance(u$provenance, l$file.prov)
@@ -391,7 +392,8 @@ dbs<-list(
               file.auto="../automated_finding/dictionary_auto.csv",
               file.live="metadata.csv",
               file.prov="biblio_provenance.csv",
-              file.pending="biblio_pending.csv"),
+              file.pending="biblio_pending.csv",
+              file.withdrawals="../itemtext/withdrawals.csv"),
     comps=list(name="comps",
               irw_dict=gsheet2tbl('https://docs.google.com/spreadsheets/d/1WZZYyVC2cmw8CUJM69qP0F_ZlQjQfdkCZbdsG-8mUrs/edit?gid=1337607315#gid=1337607315'),
               user=IRW_OWNER,
