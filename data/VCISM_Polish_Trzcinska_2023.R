@@ -13,7 +13,10 @@ remove_na <- function(df) {
 }
 
 df <- read_sav("psiat_validation.sav")
+# id = row number of the .sav. The source's child_code holds the children's
+# initials (e.g. three letters), which IRW does not publish (Ben 2026-10-05).
 df <- df |>
+  mutate(child_code = row_number()) |>
   select(child_code, starts_with("pspcsa"), -PSPCSA, 
          -PSPCSA_competences, -PSPCSA_acceptance) |>
   rename(id=child_code)  
@@ -42,4 +45,4 @@ retest_df$wave <- 1
 
 df <- rbind(test_df, retest_df)
 save(df, file="VCISM_Polish_Trzcińska_2023.Rdata")
-write.csv(df, "VCISM_Polish_Trzcińska_2023.csv", row.names=FALSE)
+write.csv(df, "VCISM_Polish_Trzcińska_2023.csv", row.names=FALSE, na="")
