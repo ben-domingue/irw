@@ -7,9 +7,13 @@ inside a large addition. This reports what a reviewer actually needs -- rows
 added, rows REMOVED, and existing rows whose content changed -- keyed the same
 way run_pipeline.sh diffs them.
 
-Removals are called out separately because they are the alarming case: every
-run so far has removed nothing, and a table vanishing from metadata.csv means
-it disappeared from Redivis.
+Removals are called out separately because they are the alarming case: a
+table vanishing from metadata.csv means it disappeared from Redivis, and each
+one needs a known reason (a withdrawal, a rename).
+
+--ref is the commit to compare the working tree against. Before the run's
+output is committed that is HEAD; after it (as in the workflow) it is HEAD~1,
+since comparing a commit with itself reports no changes (#2341).
 
 Usage:  summarize_changes.py --ref HEAD --dir metadata
 """
