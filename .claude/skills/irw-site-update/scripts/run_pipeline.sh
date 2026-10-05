@@ -94,7 +94,8 @@
 # 15_codebook_links.py (issue #2770, added 2026-10-02) runs after 14: it reads
 # column_docs.csv and table_scripts.csv for the README check. It sweeps only
 # tables not yet in codebook_links_checked.csv (find_codebook_links.py
-# --new-only), so a week's new tables cost minutes. It calls public file-listing
+# --new-only --deep: names, then workbook sheets, zip members and document
+# text, #2787), so a week's new tables cost minutes. It calls public file-listing
 # APIs and, for item names, Redivis; per-deposit failures are recorded in the
 # checked CSV, not raised.
 #
