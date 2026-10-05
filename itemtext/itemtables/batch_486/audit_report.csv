@@ -1,0 +1,4 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"spain_2014_debate_agreement","WARN",17,17,TRUE,TRUE,FALSE,TRUE,0,0,"row-count anomaly (possible item-code conflation or missingness skew), median=231: p13a_1, p13a_2, p13a_3, p13a_4, p13a_5, p13a_7"
+"spain_2014_debate_debate","PASS",3,3,TRUE,TRUE,FALSE,TRUE,0,0,""
+"spain_2014_debate_general","PASS",2,2,TRUE,TRUE,FALSE,TRUE,0,0,""

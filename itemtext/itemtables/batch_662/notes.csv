@@ -1,0 +1,2 @@
+"table","note"
+"wallace_2026_s2_profcert","Clean pass (data_labels, item = source column name, live counts match source exactly). Caveat only: item text refers back to 'the previous questions' = professor-mindset items IQB1/IQB2R/IQB3/IQB4 in wallace_2026_mcm_check (Study 2); no instructions text exists in the deposit. Option labels had Qualtrics trailing digits ('Not at all1', 'Very much7') stripped."

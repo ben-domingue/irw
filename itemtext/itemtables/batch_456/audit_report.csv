@@ -1,0 +1,4 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"eammi_grahe_2018_physsx","WARN",13,13,TRUE,TRUE,FALSE,TRUE,0,50,"row-count anomaly (possible item-code conflation or missingness skew), median=2766: physSx_12 | 50% of rows have blank option_text"
+"hao_2025_emotional_regulation","PASS",4,4,TRUE,TRUE,FALSE,TRUE,0,100,"100% of rows have blank option_text"
+"hao_2025_metacognitive_regulation","PASS",7,7,TRUE,TRUE,FALSE,TRUE,0,100,"100% of rows have blank option_text"

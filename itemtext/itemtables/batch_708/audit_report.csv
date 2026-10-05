@@ -1,0 +1,3 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"deception_professors","WARN",21,21,TRUE,TRUE,FALSE,TRUE,0,82.5,"82.5% of rows have blank option_text | 4 of 21 items have NO option_text rows while others do (1, 2, 3, 17)"
+"lestari_2026_working_memory","PASS",16,16,TRUE,NA,TRUE,TRUE,0,0,"using raw_resp (no scoring key recoverable) -- resp-set check skipped by design"

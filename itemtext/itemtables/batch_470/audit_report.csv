@@ -1,0 +1,4 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"eldor_2022_political_resilience","PASS",49,49,TRUE,TRUE,FALSE,TRUE,0,57.1,"57.1% of rows have blank option_text"
+"eldor_2022_realistic_threat","PASS",3,3,TRUE,TRUE,FALSE,TRUE,0,57.1,"57.1% of rows have blank option_text"
+"eldor_2022_relative_deprivation","WARN",6,6,TRUE,TRUE,FALSE,TRUE,16.7,57.1,"16.7% of rows have blank item_text | 57.1% of rows have blank option_text"

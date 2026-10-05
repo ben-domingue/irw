@@ -1,0 +1,2 @@
+"table","batch","mapping_basis","uploaded","route","status","evidence"
+"spain_2014_family_activities","batch_554","data_labels","","none","NOT_NEEDED","mapping_basis=data_labels: item codes are the CIS 3032 variable names P21G01-P21G08 (lower-cased by the .do; Da3032 cols 216-223 per Es3032); Es3032 variable labels match Cues3032 P.21g grid 8/8 character for character, value labels 1-4 shared; rebuild from Da3032 reproduces live 6756/6756 rows, 870 ids, 0 resp mismatches; exempt from Step 5b"

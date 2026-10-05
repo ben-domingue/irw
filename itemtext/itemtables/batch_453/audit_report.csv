@@ -1,0 +1,4 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"celik_2026_academic_motivation","PASS",28,28,TRUE,TRUE,FALSE,TRUE,0,57.1,"57.1% of rows have blank option_text"
+"onah_2021_covid_info_sources","PASS",10,10,TRUE,TRUE,FALSE,TRUE,0,0,""
+"onah_2021_covid_knowledge","PASS",25,25,TRUE,TRUE,FALSE,TRUE,0,0,""

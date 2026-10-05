@@ -14,7 +14,7 @@ itemtext/BATCH_PROCESS.md if you need context beyond this prompt.
 Run: ls -d itemtables/batch_* 2>/dev/null | sort -V
 
 Stop, self-cancel, and log if ANY of these hold:
-- itemtables/batch_430 already exists (round cap reached)
+- itemtables/batch_759 already exists (round cap reached)
 - zero rows with status=="pending" in extraction_batches/queue_state.csv (queue exhausted)
 - extraction_batches/circuit_breaker.flag exists (a prior round tripped it; human review pending)
 
@@ -72,7 +72,7 @@ the next round, and the wrapper will decline to start one for the same reason.
   numbers itself consecutively from 206 upward. batch_100 caught the original form of this bug; the
   rule is written down so the next round does not have to.
   mkdir -p itemtables/batch_<NNN>
-- Take the first 3 rows with status=="pending" from queue_state.csv (fewer is fine if the queue
+- Take the first 2 rows with status=="pending" from queue_state.csv (fewer is fine if the queue
   is nearly empty — don't stall). ONLY status=="pending" rows are eligible: rows marked
   "excluded" are off-limits permanently (currently the 52 enem* tables, whose item text Ben is
   handling separately). Never re-mark an excluded row as pending.
@@ -88,7 +88,15 @@ the next round, and the wrapper will decline to start one for the same reason.
 **Dispatch ONE AGENT PER TABLE** (subagent_type "general-purpose"), all in the same message so
 they run in parallel.
 
-**THREE agents per round — 2026-09-11, Ben's call ("reduce the number of agents"), cut from six
+**TWO agents per round (two tables) — 2026-09-28 evening, Ben's call ("double the number of agents"), raised
+from one for #2382 slice 18. A throughput preference, not a failure signal. Dispatch exactly one general-purpose
+subagent per claimed table, both in the same message.**
+
+**Previously ONE agent per round (one table) — 2026-09-27, Ben's call ("only use one agent to minimize token usage"),
+cut from three for the #2382 slice 13-18 restart. A cost preference, not a failure signal. Dispatch exactly
+one general-purpose subagent for the one claimed table.**
+
+**Previously THREE agents per round — 2026-09-11, Ben's call ("reduce the number of agents"), cut from six
 for the batch_190–199 chain. No kill prompted it: six ran 16 clean rounds (batch_174–189). This is a
 preference, not a failure signal, so do not read it as evidence about the kill rules below.**
 
