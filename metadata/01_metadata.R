@@ -20,6 +20,15 @@ dataset <- user$dataset("irw_meta")
 table <- dataset$table("metadata")
 meta <- table$to_tibble()
 if (!"variables" %in% names(meta)) meta$variables <- NA_character_ ##first run after this fix, or a historical gap -- forces a one-time refetch for those rows below rather than crashing
+##One row per table. zhou_2025_peer_relationship carried two identical rows from the
+##2026-09-10 rename (#2149) on, because each run starts from the published table and
+##nothing below removes a second copy of a name that is still live.
+dup<-duplicated(meta$table)
+if (any(dup)) {
+  message("dropping ",sum(dup)," duplicate row(s) from published irw_meta.metadata: ",
+          paste(unique(meta$table[dup]),collapse=", "))
+  meta<-meta[!dup,]
+}
 meta<-meta[,c("table", "n_responses", "n_categories", "n_participants",
               "n_items", "responses_per_participant", "responses_per_item",
               "density", "variables")]
