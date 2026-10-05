@@ -1,11 +1,7 @@
 why,table,Reference_x,URL__for_data_
-"biblio row dropped, table not live",nba_2012-2018,"Rossotti, P. (2018). NBA enhanced box score and standings (2012–2018) (Version 27) [Data set]. Kaggle. https://www.kaggle.com/datasets/pablote/nba-enhanced-stats",https://www.kaggle.com/datasets/pablote/nba-enhanced-stats
-"biblio row dropped, table not live",epl_matches_2021-2022,NA,https://www.kaggle.com/datasets/shubhamgadekar/english-premier-league20202022-dataset
-"biblio row dropped, table not live",nfl_2010-2019,NA,https://www.kaggle.com/datasets/davidsasser/nfl-game-stats-20102019
-"biblio row dropped, table not live",nhl_post1917,NA,https://cran.r-project.org/web/packages/NHLData/index.html
-"biblio row dropped, table not live",lichess,NA,https://database.lichess.org/
-"biblio row dropped, table not live",debate,NA,https://www.tabroom.com/index/index.mhtml
-"biblio row dropped, table not live",league_of_legends,NA,https://developer.riotgames.com/
-"biblio row dropped, table not live",NHL_hockey,NA,https://gitlab.com/dword4/nhlapi
-"biblio row dropped, table not live",cricket,NA,https://cricsheet.org/
-"biblio row dropped, table not live",MLB_Baseball,NA,https://www.retrosheet.org/game.htm#Notice
+"dictionary row held, table not live",MLB_Baseball,NA,NA
+"dictionary row held, table not live",NHL_hockey,NA,NA
+"dictionary row held, table not live",cricket,NA,NA
+"dictionary row held, table not live",debate,NA,NA
+"dictionary row held, table not live",league_of_legends,NA,NA
+"dictionary row held, table not live",epl_matches_2021-2022,NA,NA
