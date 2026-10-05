@@ -5,13 +5,10 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
 ## From the 2026-10-05 PMC sweep (last 208 backlog terms, PeerJ + Sci Rep only)
 
-- [ ] **18 tables (817,775 responses) + 10 item text tables need uploading.**
+- [ ] **18 tables (817,775 responses) + 10 item text tables.** Item text uploaded (ben-domingue, confirmed 2026-10-05; `uploaded=2026-10-05` stamped); response-table upload not yet confirmed.
   `irw_output/`: wu_2022_dcep x6, lyu_2024 x9, sung_2026_marital_quality,
   elshafie_2020_edsc, scheerhagen_2019_reproq. `itemtext_output/`: lyu_2024 x9,
-  elshafie_2020_edsc. Both folders still hold the 46 / 25 files from the
-  2026-10-04 batch (already uploaded) -- upload only the new ones. Stamp
-  `uploaded=` in `itemtext_provenance.csv` and `mapping_verification.csv` after
-  ben confirms.
+  elshafie_2020_edsc.
 - [ ] **Issues-page entry owed:** `elshafie_2020_edsc` (IRW-written English
   translation of the Arabic checklist; `public_note` drafted in provenance).
 - [ ] **Rulings (none blocks upload):** Lyu item text shipped as English with
