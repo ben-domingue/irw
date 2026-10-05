@@ -1,4 +1,4 @@
-# item-text tables in the Redivis shards as of 2026-10-03
+# item-text tables in the Redivis shards as of 2026-10-05
 # status=published: a reader can fetch it. status=draft: uploaded, not released yet.
 # generated -- do not hand-edit; rerun itemtext/refresh_live_tables.py (irw#1828)
 table,shard,status
@@ -392,6 +392,10 @@ christensen_2018_wsssf_5831,irw_text_2,published
 chuemchit_2024_nonpartner_violence,irw_text,published
 chuemchit_2024_partner_violence,irw_text,published
 cinar_tanriverdi_2023_gad7,irw_text,published
+clemente_2024_attitude_father,irw_text_3,published
+clemente_2024_attitude_mother,irw_text_3,published
+clemente_2024_pmd,irw_text_3,published
+clemente_2024_sd4,irw_text_3,published
 climatechange_geiger_2025,irw_text_3,published
 clipa_2025_mslq,irw_text_2,published
 cmq_kay_2025,irw_text,published
@@ -452,6 +456,7 @@ degirolamo_2022_tipi,irw_text_3,published
 deilkas_2019_patient_safety_climate,irw_text,published
 dejesus_2017_lequesne,irw_text,published
 dejesus_2017_sf36,irw_text,published
+dejonckheere_2018_esm_affect,irw_text_3,published
 den_kay_2025,irw_text_3,published
 depression_anxiety_stress,irw_text,published
 depue_2023_gds15,irw_text_3,published
@@ -542,6 +547,7 @@ eldor_2022_symbolic_threat,irw_text_3,published
 eldor_2022_violent_intentions,irw_text_3,published
 ellis_2016_calc_instrprac,irw_text,published
 ellis_2016_calc_instrqual,irw_text,published
+elshafie_2020_edsc,irw_text_3,published
 emidy2024_fevs,irw_text,published
 emobank_buechel_2017,irw_text,published
 emsc_kuan-chin_2023,irw_text,published
@@ -629,6 +635,9 @@ fad_dataset2,irw_text,published
 falih_2026_dass21,irw_text,published
 falih_2026_mds16,irw_text,published
 famous_melodies,irw_text_2,published
+fang_2021_pbc,irw_text_3,published
+fang_2021_peb,irw_text_3,published
+fang_2021_pn,irw_text_3,published
 fatima_2025_mslq,irw_text,published
 fcv19s_hossain_2022_anxiety,irw_text,published
 fcv19s_hossain_2022_fear,irw_text,published
@@ -1056,6 +1065,10 @@ jung_2018_media_use,irw_text_2,published
 jutte_2024_loneliness,irw_text_2,published
 jutte_2024_personality,irw_text_2,published
 kalichman1995_scs,irw_text_2,published
+kanwal_2024_csr,irw_text_3,published
+kanwal_2024_goc,irw_text_3,published
+kanwal_2024_gsv,irw_text_3,published
+kanwal_2024_wpeb,irw_text_3,published
 karajko2025_ai_benefit,irw_text,published
 karajko2025_ai_governance,irw_text,published
 karajko2025_ai_risk,irw_text,published
@@ -1143,6 +1156,7 @@ li_2025_socmedia_revisit,irw_text_2,published
 li_2025_socmedia_satisfaction,irw_text_2,published
 li_2025_socmedia_usefulness,irw_text_2,published
 li_2026_imi_teq,irw_text_2,published
+li_2026_psmus,irw_text_3,published
 li_2026_sas_sv,irw_text_3,published
 liang_2026_extrinsic_motivation,irw_text_2,published
 liang_2026_intrinsic_motivation,irw_text_2,published
@@ -1205,6 +1219,15 @@ lys_2020_rape_3_rma,irw_text,published
 lys_2020_rape_3_rwa,irw_text_2,published
 lys_2020_rape_3_sj,irw_text_2,published
 lys_2020_rape_3_unjust,irw_text_2,published
+lyu_2024_ate,irw_text_3,published
+lyu_2024_nfa,irw_text_3,published
+lyu_2024_org,irw_text_3,published
+lyu_2024_pbc,irw_text_3,published
+lyu_2024_pvs,irw_text_3,published
+lyu_2024_rtp,irw_text_3,published
+lyu_2024_sef,irw_text_3,published
+lyu_2024_sei,irw_text_3,published
+lyu_2024_sun,irw_text_3,published
 ma2021_sme_covid,irw_text_2,published
 ma2026_bsmas,irw_text_2,published
 ma2026_sabas,irw_text_2,published
@@ -1216,6 +1239,9 @@ maes_2020_ospaq,irw_text_3,published
 magiccats_ozono_2020,irw_text_2,published
 majeed_2024_luxury_purchase,irw_text_2,published
 makai_2023_entrepreneurial_transdanubia,irw_text_2,published
+makovi_2021_environmental_concern,irw_text_3,published
+makovi_2021_environmental_risk,irw_text_3,published
+makovi_2021_symbolic_racism,irw_text_3,published
 makowska_2023_pdts,irw_text_2,published
 makransky_2016_mcq_correct,irw_text_2,published
 makransky_2016_self_efficacy,irw_text_2,published
@@ -1271,6 +1297,8 @@ menaldi_2023_brief_cope,irw_text_2,published
 mendes_2019_snycq,irw_text_2,published
 mendezhinojosa_2026_ebea,irw_text_3,published
 meng_2017_referent_assignment,irw_text_2,published
+menghini_2023_task_control,irw_text_3,published
+menghini_2023_task_demands,irw_text_3,published
 mental_health_wang_2024_gad,irw_text_2,published
 mental_health_wang_2024_phq,irw_text_2,published
 merlo2025_eet,irw_text_2,published
@@ -1793,6 +1821,9 @@ selfcompassionscale_shortform_fuochi_2025,irw_text_3,published
 sem_cnes,irw_text_2,published
 sexual_compulsivity,irw_text,published
 sexual_selfconcept,irw_text,published
+shen_2025_bsmas,irw_text_3,published
+shen_2025_dass21,irw_text_3,published
+shen_2025_sabas,irw_text_3,published
 shi_2021_gentrification,irw_text_2,published
 shi_2025_dass21,irw_text_2,published
 shin2024_creactability_adaptability,irw_text_2,published
@@ -2144,6 +2175,7 @@ stoyel_2021_neg_affect,irw_text_2,published
 stoyel_2021_pos_affect,irw_text_2,published
 stoyel_2021_social_modeling,irw_text_2,published
 strohacker_2024_arms_readiness,irw_text_2,published
+strojny_2026_gmi,irw_text_3,published
 su_2024_gad7,irw_text_3,published
 su_2024_phq9,irw_text_3,published
 sugiura_2015_disaster_characteristics,irw_text_2,published
@@ -2265,6 +2297,9 @@ ucla_BrummerHoffman_2021,irw_text_2,published
 uffler_2017_lecture_seating,irw_text_2,published
 uffler_2017_seat_reasons,irw_text_2,published
 ups_vangsness_2019,irw_text,published
+usmani_2024_iwe,irw_text_3,published
+usmani_2024_ks,irw_text_3,published
+usmani_2024_pops,irw_text_3,published
 uti_newlands_2023_gad,irw_text_2,published
 uti_newlands_2023_phq,irw_text_2,published
 uti_newlands_2023_wpai,irw_text_2,published
@@ -2411,6 +2446,9 @@ yoshimura_2026_isu_scale,irw_text_3,published
 yoshimura_2026_psych_safety,irw_text_3,published
 yu_2025_bedtime_procrastination,irw_text_2,published
 yu_2025_physical_activity,irw_text_2,published
+yuan_2024_contact,irw_text_3,published
+yuan_2024_trust,irw_text_3,published
+yuan_2024_ucla,irw_text_3,published
 yuebo_2024_netbenefit,irw_text_2,published
 zaehl2023_twq_commitment,irw_text_2,published
 zaehl2023_twq_support,irw_text_2,published
