@@ -40,7 +40,15 @@ codebook named `S1_File.pdf` gets no link; that is the honest answer.
                                  TEXT names >= README_MIN_NAMES of the table's
                                  names (#2792). name_codebook there means the
                                  authors' caption or a workbook SHEET name says
-                                 codebook / variables / legend
+                                 codebook / variables / legend. Since #2787's
+                                 follow-up the same three checks reach
+                                 repository deposits (OSF, Zenodo, figshare,
+                                 Mendeley, Dataverse, GitHub/GitLab): a text
+                                 document whose text names the table's items (not
+                                 analysis output: see STATS_OUTPUT), a workbook
+                                 sheet named like a codebook, and a codebook-named
+                                 file inside a zip ("x.pdf (inside y.zip)", read
+                                 from the zip's directory by range request)
                  questionnaire   a supplementary file the authors caption as
                                  the questionnaire / instrument; kept only when
                                  nothing above documents the table (#2792)
@@ -590,6 +598,112 @@ WORKBOOK_EXT = {"xlsx", "xlsm", "xls"}
 TEXT_DOC_EXT = {"docx", "doc", "pdf", "txt", "rtf", "odt"}
 SUPP_CAP = 60_000_000           ##bytes; a larger file is listed but not opened
 _TEXTS: Optional[Dict[str, str]] = None
+##Repository deposits whose files are opened past their names (#2787 follow-up).
+##A .txt / .dat there is usually the data, whose header names every column, so
+##only document formats are read for their text.
+REPO_HOSTS = {"osf", "zenodo", "figshare", "figshare_collection", "mendeley", "dataverse", "github", "gitlab"}
+REPO_TEXT_EXT = {"docx", "doc", "pdf", "rtf", "odt", "md"}
+SOURCE_ZIP_MAX = 5              ##codebook-named members linked from one zip
+##a zip of code bundles libraries: mpdf ships a hyphenation 'dictionary.txt'
+ZIP_VENDORED = re.compile(r"(^|/)(vendor|node_modules|site-packages|lib|libs|renv|packrat|\.git|__MACOSX)/", re.I)
+ZIP_LIST_CAP = 40_000_000       ##bytes fetched whole when a server ignores Range
+##Analysis output names every item too: an R/EGA printout, a loadings table, the
+##paper itself. A pilot of 40 no-match deposits (10-04) found 19 content hits;
+##the 13 that were output (EGAnet printouts, PCA/EFA tables, papers) each carried
+##two or more of these markers, and the 6 instruments and codebooks none. The
+##full sweep's precision sample (10-04) added descriptives and correlation
+##tables and Mplus input/output.
+STATS_OUTPUT = re.compile(r"library\(|\bloadings?\b|eigenvalue|\b(?:EFA|CFA|PCA|ESEM|SEM)s?\b|RMSEA|\bCFI\b|\bTLI\b|"
+                          r"\bp\s*[<=]\s*0?\.\d|chi-?square|χ2|\bAIC\b|\bBIC\b|cronbach|omega|"
+                          r"standardi[sz]ed (?:estimate|coefficient)|regression|ANOVA|\bwTO\b|"
+                          r"standard deviations?|\bM\s+SD\b|correlations?\b|confidence intervals?|skewness|kurtosis|"
+                          r"\bMplus\b|\bMODEL:|\bMODINDICES\b|\bSTANDARDIZED\b|\bESTIMATOR\b", re.I)
+STATS_OUTPUT_MIN = 2
+
+
+def looks_like_output(text: str) -> bool:
+    """A document whose text carries STATS_OUTPUT_MIN distinct analysis markers."""
+    return len({m.group(0).lower() for m in STATS_OUTPUT.finditer(text[:400_000])}) >= STATS_OUTPUT_MIN
+
+
+class _RangeFile(io.RawIOBase):
+    """A remote file read by HTTP Range requests, so zipfile can read a zip's
+    central directory without downloading the archive."""
+
+    def __init__(self, url: str, size: int):
+        self.url, self.size, self.pos = url, size, 0
+
+    def readable(self): return True
+    def seekable(self): return True
+    def tell(self): return self.pos
+
+    def seek(self, off, whence=0):
+        self.pos = {0: off, 1: self.pos + off, 2: self.size + off}[whence]
+        return self.pos
+
+    def read(self, n=-1):
+        if n is None or n < 0:
+            n = self.size - self.pos
+        if n <= 0 or self.pos >= self.size:
+            return b""
+        end = min(self.pos + n, self.size) - 1
+        req = urllib.request.Request(self.url, headers={"User-Agent": UA, "Range": f"bytes={self.pos}-{end}"})
+        with urllib.request.urlopen(req, timeout=120) as r:
+            if r.status != 206:
+                raise OSError("Range ignored")
+            b = r.read()
+        self.pos += len(b)
+        return b
+
+    def readinto(self, b):
+        d = self.read(len(b))
+        b[:len(d)] = d
+        return len(d)
+
+
+def zip_names(url: str, host: str) -> Optional[List[str]]:
+    """The member names of a remote zip: by Range when the server allows it,
+    else the whole file up to ZIP_LIST_CAP. None when it cannot be read."""
+    import zipfile
+    wait = HOST_PACE.get(host, 1.0) - (time.time() - _last_call.get(host, 0))
+    if wait > 0:
+        time.sleep(wait)
+    _last_call[host] = time.time()
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": UA, "Range": "bytes=0-0"})
+        with urllib.request.urlopen(req, timeout=60) as r:
+            rng = r.headers.get("Content-Range", "")
+            final = r.geturl()
+        size = int(rng.rsplit("/", 1)[-1]) if r.status == 206 and "/" in rng else 0
+        if size:
+            return zipfile.ZipFile(_RangeFile(final, size)).namelist()
+    except Exception:
+        pass
+    status, raw = get_capped(url, host, cap=ZIP_LIST_CAP)
+    try:
+        return zipfile.ZipFile(io.BytesIO(raw)).namelist() if raw else None
+    except Exception:
+        return None
+
+
+def open_deposit_file(f: dict, h: str) -> bool:
+    """Fill a repository file's `sheets` (workbook) or `zip` (member names) in
+    place, so an --offline re-match can use them. True when it fetched."""
+    ext = f["name"].lower().rsplit(".", 1)[-1] if "." in f["name"] else ""
+    if ext not in WORKBOOK_EXT and ext != "zip":
+        return False
+    if "sheets" in f or "zip" in f:
+        return False
+    url = download_url({"url": f["url"], "host": h, "raw": f.get("raw", "")})
+    if not url:
+        f["opened"] = "no_download_url"
+        return False
+    if ext == "zip":
+        f["zip"] = zip_names(url, h)
+    else:
+        status, raw = get_capped(url, h)
+        f["sheets"] = sheet_names(raw, ext) if raw else None
+    return True
 
 
 def texts() -> Dict[str, str]:
@@ -1026,6 +1140,10 @@ def check_readmes(links: List[dict], offline: bool) -> None:
                 specific = [n for n in hit if re.search(r"[0-9_ ]|[a-z][A-Z]", n)]
                 if len(specific) < README_MIN_NAMES and len(hit) < max(README_MIN_NAMES, len(names) / 2):
                     items_hit = []
+                ##a repository's analysis output names every item too (#2787)
+                if x["host"] in REPO_HOSTS and looks_like_output(text):
+                    items_hit = []
+                    x["evidence"] += " (analysis output)"
             if len(hit) >= README_MIN_NAMES and items_hit:
                 x["how_found"] = ("doc_names_columns" if x["how_found"] == "doc_candidate"
                                   else "readme_names_columns")
@@ -1179,6 +1297,9 @@ def main() -> int:
     ap.add_argument("--recheck", action="store_true", help="re-list deposits already in the cache")
     ap.add_argument("--new-only", action="store_true",
                     help="keep committed rows; sweep only tables not yet in the checked file")
+    ap.add_argument("--deep", action="store_true",
+                    help="repository deposits: also open workbooks (sheet names), zips (member "
+                         "names) and text documents (content check), past the file names")
     ap.add_argument("--no-readme-check", action="store_true",
                     help="skip reading README texts (README hits stay name_readme)")
     args = ap.parse_args()
@@ -1276,6 +1397,7 @@ def main() -> int:
         for _, h, k in rs:
             siblings.setdefault((h, k), set()).add(t)
     links, checked = [], []
+    n_opened = 0
     for t, _ in tables:
         for u, h, k in routed[t]:
             row = {"table": t, "data_url": u, "host": h, "deposit": k if h != "skip" else "", "checked_at": ""}
@@ -1315,6 +1437,29 @@ def main() -> int:
                                      "host": h, "how_found": "package_doc", "checked_at": row["checked_at"]})
                     continue
                 how = "typed_codebook" if f.get("typed") else match(f["name"])
+                if not how and h in REPO_HOSTS and args.deep:
+                    ##past the name (#2787 follow-up): sheets, zip members, text
+                    if not args.offline and open_deposit_file(f, h):
+                        n_opened += 1
+                    shown_name = f.get("path") or f["name"]
+                    for sh in [x for x in (f.get("sheets") or []) if CODEBOOK.search(x) or SHEET_CODEBOOK.match(x)]:
+                        ##a one-sheet workbook called 'Variables' is the data itself
+                        if len(f.get("sheets") or []) > 1:
+                            hits.append({"table": t, "url": f["url"], "file_name": f"{sh} (sheet in {shown_name})",
+                                         "raw": f.get("raw", ""), "host": h, "how_found": "name_codebook",
+                                         "checked_at": row["checked_at"], "evidence": "sheet name"})
+                    inner = [x for x in (f.get("zip") or [])
+                             if match(x.rsplit("/", 1)[-1]) == "name_codebook" and not x.endswith("/")
+                             and not ZIP_VENDORED.search(x)]
+                    for x in inner[:SOURCE_ZIP_MAX]:
+                        hits.append({"table": t, "url": f["url"], "file_name": f"{x.rsplit('/', 1)[-1]} (inside {f['name']})",
+                                     "raw": f.get("raw", ""), "host": h, "how_found": "name_codebook",
+                                     "checked_at": row["checked_at"], "evidence": f"in zip: {x}"})
+                    ext = f["name"].lower().rsplit(".", 1)[-1] if "." in f["name"] else ""
+                    if ext in REPO_TEXT_EXT:
+                        hits.append({"table": t, "url": f["url"], "file_name": shown_name, "raw": f.get("raw", ""),
+                                     "host": h, "how_found": "doc_candidate", "checked_at": row["checked_at"],
+                                     "evidence": ""})
                 if how:
                     name = (f"{f['name']} (inside {k})" if h == "opsych" else f.get("path") or f["name"])
                     hits.append({"table": t, "url": f["url"], "file_name": name, "raw": f.get("raw", ""),
@@ -1339,6 +1484,8 @@ def main() -> int:
             kinds = sorted({x["how_found"] for x in hits})
             row["outcome"] = "hit:" + "+".join(kinds) if kinds else "no_match"
 
+    if n_opened and not args.offline:   ##sheets and zip members found while matching
+        CACHE.write_text(json.dumps(cache, indent=0, ensure_ascii=False))
     if not args.no_readme_check:
         check_readmes(links, args.offline)
     else:
@@ -1363,10 +1510,11 @@ def main() -> int:
     ##the table's names is kept or dropped only after the content check
     final_kinds: Dict[Tuple[str, str], set] = {}
     for x in links:
-        if x["host"] in ("plos", "epmc"):
-            final_kinds.setdefault((x["table"], x["host"]), set()).add(x["how_found"])
+        final_kinds.setdefault((x["table"], x["host"]), set()).add(x["how_found"])
     for row in checked:
-        if row["host"] in ("plos", "epmc") and (row["outcome"].startswith("hit:") or row["outcome"] == "no_match"):
+        ##journals always; a repository row only when it carried a doc_candidate
+        if ((row["host"] in ("plos", "epmc") and (row["outcome"].startswith("hit:") or row["outcome"] == "no_match"))
+                or (row["host"] in REPO_HOSTS and "doc_candidate" in row["outcome"])):
             kinds = sorted(final_kinds.get((row["table"], row["host"]), ()))
             row["outcome"] = "hit:" + "+".join(kinds) if kinds else "no_match"
     checked = kept_checked + checked
