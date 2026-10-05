@@ -14,12 +14,12 @@ import delimited "IFP maior planilha do mundo IFP.csv", clear
 rename *, lower
 
 * renames covariates
-rename nascimento cov_dob
+* nascimento (date of birth), profissão and instituição (free text) identify people
+* and are not kept (irw#2835); age, sex, education and segment are.
+drop nascimento profissão instituição
 rename idade cov_age
 rename sexo cov_sex
-rename profissão cov_profession
 rename escolaridade cov_education
-rename instituição cov_institution
 rename segmento cov_segment
 
 * keep only the covariates and response variables
