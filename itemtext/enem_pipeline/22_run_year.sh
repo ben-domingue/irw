@@ -19,7 +19,7 @@ W=/scratch/users/mazzafe/itemtext_years/$Y
 mkdir -p "$W/parsed"
 
 ./cut_pin.sh --check   # refuse to run a year against a stale pin
-PIN=$(ls -1 12_parse_booklet_pdf.v*.py | sort -V | tail -1)
+PIN=$(ls -1 pins/12_parse_booklet_pdf.v*.py | sort -V | tail -1)
 echo "  parser: $PIN"
 
 one() {  # glob expected label

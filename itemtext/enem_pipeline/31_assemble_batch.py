@@ -113,7 +113,26 @@ LATE_DESC_CLOSER = re.compile(
     r"(\?|\u00e9 mais pr[\u00f3o]xim[ao] de|corresponde a|deve ser|ser[\u00e1a] de|"
     r"[\u00e9e] igual a|em que|classificado como|da seguinte maneira|"
     r"respectivamente|[\u00e9e],? aproximadamente,?)\s*$", re.I)
-KEEP_LATE_DESC = {"78578", "141775", "87450", "59546", "89518"}
+# Imported, not copied. This used to be a hand-maintained duplicate of
+# 54_relocate_descriptions.py's KEEP, and it drifted the first time that list
+# changed: the 2026-10-02 round re-seated the relocated blocks so 89518 no
+# longer trips the rule and added 39342, which does. The copy still listed
+# 89518 and not 39342, so this gate refused to assemble a correctly built
+# 2018. One allow-list, one place.
+def _keep_late_desc():
+    import importlib.util
+    f = os.path.join(HERE, "54_relocate_descriptions.py")
+    spec = importlib.util.spec_from_file_location("_relocate", f)
+    m = importlib.util.module_from_spec(spec)
+    sys.path.insert(0, HERE)
+    try:
+        spec.loader.exec_module(m)
+    finally:
+        sys.path.remove(HERE)
+    return set(m.KEEP)
+
+
+KEEP_LATE_DESC = _keep_late_desc()
 
 UNFIXED = [
     ("46_strip_option_letter.py", "options still prefixed with their own letter",
@@ -132,9 +151,9 @@ UNFIXED = [
                     for r in rs)),
     # R13. A description that starts late in the stem AND follows a question
     # closer describes something the item has already stopped talking about.
-    # KEEP_LATE_DESC is the audited allow-list from 54_relocate_descriptions.py:
+    # KEEP_LATE_DESC is read straight out of 54_relocate_descriptions.py:
     # "Descricao das alternativas" legitimately follows the question, as do the
-    # two verified own-figure cases and the recipient of a relocation.
+    # verified own-figure cases.
     ("54_relocate_descriptions.py", "a figure description on the wrong item",
      lambda rs: any(
          r["item"] not in KEEP_LATE_DESC
@@ -161,6 +180,24 @@ def check_unfixed(path):
         if any(test(rs) for rs in by.values()):
             bad.append((script, why))
     return bad
+
+
+def prior_uploaded(dst):
+    """Carry forward the uploaded stamp this batch already has, if any.
+
+    This file is regenerated from scratch on every assemble, and `uploaded`
+    is the one field in it that records something the pipeline does not know:
+    whether the tables reached Redivis. 2018/2020/2022 were stamped
+    2026-09-24 by #2405, and re-assembling them to ship a text fix silently
+    cleared it back to "" -- which would have told the next reader that
+    published tables were never uploaded. Anything else in here is derived
+    and safe to rewrite; this is not.
+    """
+    f = os.path.join(dst, "provenance.csv")
+    if not os.path.exists(f):
+        return {}
+    return {r["table"]: (r.get("uploaded") or "")
+            for r in csv.DictReader(open(f, encoding="utf-8"))}
 
 
 def gate_for(y):
@@ -370,6 +407,7 @@ def main():
                 return 3
             shutil.copy(srcf, os.path.join(dst, name))
             tables.append((f"enem_{y}_1mil_{ar}", ar))
+        was_uploaded = prior_uploaded(dst)
         with open(os.path.join(dst, "provenance.csv"), "w", newline="", encoding="utf-8") as fh:
             w = csv.DictWriter(fh, PROV_COLS, quoting=csv.QUOTE_ALL); w.writeheader()
             for t, ar in tables:
@@ -382,7 +420,7 @@ def main():
                             "source_ref": (f"{SRC[y]['files']}; position->item map from "
                                            f"ITENS_PROVA_{y}.csv"),
                             "note": note_for(y, ar), "public_note": public_note_for(y, ar),
-                            "uploaded": ""})
+                            "uploaded": was_uploaded.get(t, "")})
         with open(os.path.join(dst, "notes.csv"), "w", newline="", encoding="utf-8") as fh:
             w = csv.DictWriter(fh, ["table", "note"], quoting=csv.QUOTE_ALL); w.writeheader()
             for t, ar in tables:
@@ -410,8 +448,8 @@ def main():
                "| script | pin used | md5 |", "|---|---|---|"]
         import glob as _g
         for stem in sorted({os.path.basename(f).split(".v")[0]
-                            for f in _g.glob(os.path.join(HERE, "*.v*.py"))}):
-            pins = sorted(_g.glob(os.path.join(HERE, f"{stem}.v*.py")),
+                            for f in _g.glob(os.path.join(HERE, "pins", "*.v*.py"))}):
+            pins = sorted(_g.glob(os.path.join(HERE, "pins", f"{stem}.v*.py")),
                           key=lambda q: int(re.search(r"\.v(\d+)\.py$", q).group(1)))
             if not pins:
                 continue

@@ -86,6 +86,16 @@ Ruled by the user 2026-09-15, following 2023:
   would be joined to responses as if it were printed. `correct_response` and
   `resp_raw` keep the options addressable.
 - Never generate an `option_text`.
+- **Label residue counts as "no text".** When the options are diagrams, what
+  the extractor finds is not option text but whatever letters and numbers are
+  printed *inside* the artwork, scraped in content-stream order. That is worse
+  than NA, because it looks like text and is not: 2016 MT 39198 shipped its
+  five options as `B\nC`, `A B`, `C A BC`, `A BC`, `A B\nC` — permutations of
+  three bare letters, the keyed one indistinguishable from the rest — and
+  2020 CN 62745 shipped the same four circuit labels reordered five times.
+  Both are now NA (#2462, ruled 2026-10-03). Fifty items across the twelve
+  years already shipped this way, so NA is the convention here, not an
+  exception to it.
 - Text recovered from INEP's own standard booklet is not generated text
   and is not marked. R15 has the two conditions; anything outside them is
   generated text and belongs to this rule.
@@ -180,6 +190,10 @@ Response CSVs are the #1942-corrected build, not the pre-fix ones.
 - Any case where following a rule here would require inventing an item code,
   an option letter, or a `resp` value.
 - A recovery that does not satisfy **both** of R15's conditions.
+- Removing a rendering of a stimulus that already shipped, **except** the one
+  case R20 now settles: a rendering that is demonstrably wrong about its own
+  figure, replaced by INEP's own correct words. Anything short of
+  demonstrably-wrong still escalates.
 
 ## R14. A table the accessibility edition dropped is recovered from the standard one
 
@@ -294,15 +308,249 @@ The audit in `54_relocate_descriptions.py` flags any stem whose last
 — a well-formed item describes its figure before asking about it. Three things
 trip it and only the first is a defect:
 
-- **misplaced** — belongs to another item; goes in `MOVES` with the evidence;
+- **misplaced** — belongs to another item; goes in `OPS` with the evidence;
 - **option set** — `Descrição das alternativas` describes the five options, so
   it correctly follows the question;
-- **own figure** — printed after the options but genuinely this item's.
+- **own figure** — printed after the options but genuinely this item's; goes
+  in `KEEP` with the evidence, *including* when the item is also an `OPS`
+  donor whose own block survives the move.
 
-Never strip a misplaced description without first looking for its owner. All
-three found so far had one, each already shipped and each carrying no
-description of its own, so the fix was a move. `--apply` refuses to run if the
-audit turns up a case in neither list.
+Never strip a misplaced description without first looking for its owner.
+`--apply` refuses to run if the audit turns up a case in neither list.
+
+### What the full 2013–2025 read added (2026-10-02, #2462)
+
+The first three cases were all the same easy shape: one block, at the end of
+the donor, going to an owner that had none. Scaling to 30 blocks broke every
+one of those assumptions, so each operation now states the four things that
+cannot be inferred.
+
+**Which block.** 10 of 27 donors carry two description blocks, one their own
+and one misplaced, and in 7 the misplaced block is *not* the last. Taking the
+last block would have corrupted both items in those cases — 2018 MT 111725's
+page-foot blocks are the frequency quadro of QUESTÃO 156 followed by 157's own
+cartesian-mesh figure. `cut_from` names the block verbatim.
+
+**Where it ends.** A description is not always the tail of the stem. 2022 CH
+44230 prints its own question *after* the block, so a cut that runs to the end
+of the stem carries the question off with the figure. `cut_to` names the text
+that follows; absent means the block genuinely runs to the end.
+
+**Where it lands.** The relocated block goes where the booklet printed it:
+after the stimulus, **before the sentence that asks the question**. Appending
+it to the end of the recipient — what this pass did until 2026-10-02 —
+reproduces in the recipient the exact shape this rule calls malformed, which
+is why `KEEP` used to carry the recipient 89518. It also breaks back-
+references: 2018 MT 15884's surviving description opens *"A mesma figura
+anterior"*, which points at nothing unless the moved block precedes it. Where
+the recipient is an LC item with an empty `TEXTO I`/`TEXTO II` slot, that slot
+is the insert point and decides itself.
+
+An anchor must span the **label** of an existing block, not just its body:
+anchoring on the body inserts the new block between a label and the text it
+introduces, leaving two `Descrição ...:` lines and an orphaned body.
+
+**Whether it lands at all.** Sometimes the recipient already has the content by
+another route, and then the block is removed from the donor without being
+re-homed (`op="drop"`). All three cases are 2018 quadros that R14 already
+recovered from the standard booklet, which is the edition the candidates in the
+response tables actually sat — so the standard rendering is the one to keep and
+the accessibility prose would merely state the same figures twice. The block
+still has to leave the wrong item. Note that `55_recover_tables.py` runs
+*after* this pass, so a drop is justified by the finished state of the year,
+not by the state mid-pipeline.
+
+## R20. A rendering that inverts the item is replaced, not kept alongside
+
+2022 CH 97262 is the one case where the recipient already held the block's
+content but **wrongly**: its `TEXTO 2` is a scrambled dump of the infographic
+with the percentages in one order and the labels in another, so read in
+document order it pairs *Mulher sem cônjuge e com filho(s)* with 30,4 % where
+the printed figure is 56,9 %. The item asks which factors intensify
+discrimination, so the scramble inverts the answer. The relocated prose block
+carries the correct pairings and **replaces** the dump.
+
+This is the only operation in the pass that deletes shipped text, and it was
+carried for a while as NOT YET RULED because deleting a shipped rendering in
+favour of a better one is not covered by R2, R13, R14 or R15.
+
+**Ruled 2026-10-04 (#2462): replace it.** The reasoning that settles it is that
+the two renderings are not two views of the same content — one of them is
+false. Read in document order the dump asserts pairings the printed figure
+contradicts, and the item asks which factors *intensify* discrimination, so a
+reader who trusts the text reaches the opposite answer from a reader who sees
+the figure. Keeping both would not hedge the risk; it would ship a correct
+rendering and an item-inverting one in the same cell and leave the reader to
+guess which governs. There is no reading of R2 under which text that inverts
+its own item is faithful to the source.
+
+The narrow form of the rule, so it does not become a licence to tidy:
+
+- it applies only where a rendering is **demonstrably wrong about its own
+  figure**, shown by comparing it against the figure, not where it is merely
+  clumsy, partial or ugly;
+- the replacement must be INEP's own words — here the relocated prose block —
+  never generated text, which keeps this clear of R5;
+- the deletion is recorded per operation in `54_relocate_descriptions.py` with
+  the specific numbers that disagree, so the claim is checkable rather than
+  asserted.
+
+R19 is the adjacent case and the contrast is worth keeping: there the deleted
+text was never part of the item at all, so no judgement about correctness was
+needed. Here it was part of the item and had to be judged false.
+
+## R21. Transcribe the marks that are there; never add one that is not
+
+Ruled 2026-10-04 (#2462). Old typography sometimes sets a diacritic beside its
+vowel rather than above it. 2013 CH 44785 reproduces a 1934 cartoon caption in
+which the acute and the grave are printed as small displaced apostrophes:
+`Havera' ainda quem resista a' poderosa influencia`.
+
+Those marks are **on the page**. Transcribing them in the modern position —
+`Haverá`, `à` — records what the typesetter marked, in the same spirit as R12
+and R16: reading the page's intent off its geometry is recovery, not
+generation. A reader-aloud, and a tokeniser, both need the accent where the
+language puts it.
+
+`influencia` in the same line keeps no accent, because there is **no mark
+there to transcribe**. Pre-1943 orthography simply spelled it that way. Adding
+a circumflex would be emending INEP's source — and the 1934 original's — which
+is generation, and would also silently modernise a word the exam reproduces as
+a period artefact.
+
+So the two halves of that line are not inconsistent, which is how it first
+looked in review; they follow one rule applied twice:
+
+- a diacritic that is **present but displaced** is transcribed in its proper
+  position;
+- a diacritic that is **absent** stays absent, however odd it looks to a
+  modern reader.
+
+The same principle settles the general case: transcription normalises *where* a
+mark sits, never *whether* it exists.
+
+## R16. A glyph the booklet DRAWS is recovered from the drawing
+
+Ruled 2026-10-02 (#2462): *"let's apply the same rule as for fractions — we are
+not really generating, we are only looking and recovering in a feasible
+manner."*
+
+A radical, an equilibrium arrow, a capital delta and a minus sign are not
+always characters. In these booklets they are sometimes **vector artwork**, so
+the text layer has a hole where they are printed and extraction yields
+
+    Utilize 1,7 como aproximação para 3.             (2013 MT 16538)
+    Cl_2 (g) + 2 H_2O (l)  HClO (aq) + H_3O^+ (aq)   (2013 CN 29002)
+
+No character is wrong and none is missing, so — as with R12 and R13 — no
+content gate can see it, while the mathematics and the chemistry are gone.
+
+R12 already settles the principle for the fraction bar: *"the only reliable
+signal is the bar itself, which is a drawing, not text"*, and a fraction
+restored from it is recovery. R16 states the same for a glyph. Reading
+`page.get_drawings()` and writing the character INEP drew adds nothing the page
+does not already say, so it owes no `(gerada por IA)` marking and no
+`description_source=partly_generated` — the same reasoning as R15, one step
+further out.
+
+**It is `⇌`, not `→`.** The review that surfaced these called them "reaction
+arrow lost". Writing `→` would ship a one-way reaction where INEP printed an
+equilibrium, inverting the chemistry of three items. The geometry decides it:
+an equilibrium arrow is **two antiparallel harpoons** — one shaft
+left-to-right with its head at the right end, a second right-to-left with its
+head at the left. Two parallel arrows would mean something else, so the
+opposite-heads test is load-bearing, not decoration.
+
+`57_drawn_glyphs.py` implements it, and the shape matters as much as the rule:
+
+- **Geometry audits; an explicit table applies.** The audit is what makes the
+  pass useful on a new year, and it refuses to run when a page carries a drawn
+  glyph the table does not account for — R13's contract.
+- **A drawing is a glyph only inside an intra-line text gap.** Over the 30
+  booklets the pipeline reads, that takes the radical signature from 15 hits to
+  3 and the one-drawing equilibrium from 6 to 5.
+- **The gap alone is not enough.** A hook is a radical only with its
+  **vinculum** — the separate zero-height line over the radicand; requiring it
+  drops a diagram element between two "Eletricidade" labels. A harpoon is an
+  equilibrium only with its **antiparallel partner**; requiring it drops a
+  figure element between "SOLO" and a question header. A sweep that stops at
+  the gap reports no false positives only because it has not looked.
+- **Zero-height paths are real.** The vinculum has `rect.height == 0.0`, so the
+  usual `height > 0.5` filter silently discards it.
+- **Anchoring the geometry automatically to a shipped cell does not work**, and
+  the table exists because of it. The spans adjoining a gap are often a
+  fragment (`O (l) `, `+`) that recurs across items — attempting it offered to
+  write a radical into two unrelated 2013 MT items and an arrow into two
+  unrelated 2015 CN ones. Widening to the whole line needs pymupdf's line
+  grouping, which splits a line *at* the gap; grouping by baseline instead
+  scatters every sub- and superscript onto its own row, so the line reads
+  `Cl (g) + 2 HO (l)` and cannot match a shipped `Cl_2 (g) + 2 H_2O (l)`.
+
+Where a glyph is a **sub-path of a larger drawing** the audit cannot isolate it
+and the table carries it alone, with the measurement: 2015 CN 25964's two
+deltas are sub-paths of one stroked drawing and its two minus signs of another,
+and they sit inside a figure rather than a text gap. That item's own prose
+already reads `ΔH 1` and `ΔH_2`, so the restored labels agree with it.
+
+## R17. A fraction side that is not a single token is parenthesised
+
+Ruled 2026-10-03 (#2462).
+
+`49_option_conventions.py` joins two printed lines with `/` and never
+parenthesised the result, so a bar drawn over a *product* shipped as though it
+covered only the first factor. That is not a presentation nicety — it changes
+the value:
+
+| cell | ships as | the page prints | shipped value | printed value |
+|---|---|---|---|---|
+| 2015 MT 60361 B | `9!/7! × 2!` | `9!/(7! × 2!)` | 144 | **36** |
+| 2016 MT 39762 D | `…4!/2! . 2!` | `…4!/(2! . 2!)` | — | — |
+| **2016 MT 39762 E** | `…4!/2! . 2!` | `…4!/(2! . 2!)` | 6 489 600 | **1 622 400** |
+
+39762 E is the **keyed** option. Measured, not inferred: 39762's bar is 27.60pt
+wide and spans the whole denominator, against 13.89pt for option C's genuine
+`4!/2!`; 60361 B's single bar at x 55.05–90.48 covers `7! × 2!` entire, while
+option D's `× 4!` sits *outside* its bar.
+
+So: **a fraction side that is not a single token is parenthesised** —
+`9!/(7! × 2!)`, `A/(A + B)`, `(62! 4!)/(10! 56!)`. A fractional exponent keeps
+the form 2015 MT 27281 already ships, `^(1/3)`.
+
+There was no prior precedent for `/(` in the corpus — the only occurrence was
+the unit `kJ/(kg °C)` in 2016 CN 24399 — so this is a new convention rather
+than an observed one. It is adopted because the alternative is text that reads
+as a different number from the one printed.
+
+## R18. Typographic emphasis lost in extraction is restored as `~~run~~`
+
+Ruled 2026-10-03 (#2462).
+
+Extraction keeps characters and discards their typeface, so an item whose
+question turns on *which* words are emphasised becomes unanswerable. 2013 LC
+43715 is the case: the booklet sets five verbs in `Arial-BoldMT` and the stem
+asks about *"a escolha das formas verbais **em destaque**"*, pointing at a
+highlight that is no longer there.
+
+**Marker: `~~run~~`.** Plain ASCII, searchable and reversible — the properties
+`48_mark_scripts.py`'s `^` and `_` were chosen for. The delimiter is forced by
+what is already in the corpus: `~` and `` ` `` occur **zero** times across all
+48 tables, while `*` occurs 125 times (footnote marks, and chemistry such as
+`TiO2|S*`) and `**` 20 times.
+
+**Mark every emphasised run in the cell, not only the ones the question needs.**
+A mechanical rule is reproducible; "mark what the item depends on" is a
+judgement that the next person will make differently.
+
+**Scope is narrower than it looks.** Nine items have stems mentioning
+*destaque*/*destacado*, but in eight of them the emphasis is ordinary
+typographic convention — italicised work titles, foreign words, `TEXTO I`
+labels — carrying nothing the question turns on, and those stems use the word
+in its plain sense. Checking the fonts, not the wording, is what separates
+them: only 43715 has emphasis the question depends on.
+
+**Locating the runs needs no guesswork.** Extraction leaves a DOUBLE SPACE at
+each font boundary (`carregamos  `, `dossiê  `), so the artifact marks where
+the emphasis was.
 
 ## R15. Text recovered from INEP's own booklet is not generated text
 
@@ -337,3 +585,48 @@ R15 is not a route around R5. It is the narrower statement that text INEP
 wrote never entered R5's scope in the first place; anything that falls outside
 these two conditions is generated text and carries R5's markings, if it is
 ruled shippable at all.
+
+## R19. The Redação section absorbed by the last LC item is removed
+
+In the day-1 booklet the essay section is printed straight after the final
+Linguagens question. It carries no question number and no `QUESTÃO` header, and
+the parser closes an item only when it meets the *next* question header — so
+for the **last** question of the area there is nothing to close against, and
+the whole essay apparatus lands inside that one item's `item_text`: the
+motivating texts, the infographic label residue, `PROPOSTA DE REDAÇÃO`, and
+sometimes a stray page number.
+
+It is removed. The essay prompt is a different task from the item that happens
+to precede it; leaving it in place means that item ships with 65–79 % of its
+text belonging to something else, and any model reading the cell is reading two
+unrelated prompts as one.
+
+Four items are affected and no others — 2017 LC 60715, 2019 LC 76167,
+2021 LC 120165, 2022 LC 86703. A scan of every `item_text` in every year for
+`PROPOSTA DE REDA`, `motivador`, `dissertativo-argumentativo` and
+`proposta de intervenção` returns exactly these four.
+
+Two things this rule does **not** license:
+
+- **`instructions` is not touched.** The booklet *cover* legitimately says the
+  day-1 caderno contains the essay proposal, so that column mentions the
+  Redação on purpose in every LC table.
+- **No cut without a keep-anchor.** The essay material has no reliable opening
+  marker: in 2021 and 2022 it starts with `Descrição da imagem:` (the
+  accessibility edition describing an essay TEXTO), in 2017 with
+  `Descrição do gráfico:`, and 2017's *own* stimulus already carries
+  `TEXTO I`/`TEXTO II` labels, so anchoring on `TEXTO` would cut the item in
+  half. What is stable is the end of the item's own question, so
+  `59_strip_essay_section.py` names the text to KEEP THROUGH and drops
+  everything after it. Each anchor was confirmed by checking that the item's
+  **keyed option completes the question grammatically**.
+
+Because this pass deletes text it fails closed: the removed span must contain
+one of the essay signals above, or the cut is refused and reported.
+
+This is narrower than R20's 2022 CH 97262 case.
+There, the deleted text was a (scrambled) rendering of the item's *own*
+figure, so removing it loses item content. Here the deleted text was never part
+of the item at all, and it remains in the booklet for anyone who wants the
+essay prompts — which, if IRW ever does, belong in their own records rather
+than appended to an unrelated Linguagens question.

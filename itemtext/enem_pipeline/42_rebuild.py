@@ -27,7 +27,11 @@ T = "/scratch/users/mazzafe/itemtext_years"
 
 def pin(stem):
     import glob, re
-    c = sorted(glob.glob(os.path.join(HERE, f"{stem}.v*.py")),
+    # pins/ is where cut_pin.sh writes and what is committed. This used to
+    # glob HERE, found nothing once the pins were tidied into pins/, and fell
+    # back to the live script -- so --pin was a no-op and nobody noticed,
+    # because every pin was byte-identical to its live script anyway.
+    c = sorted(glob.glob(os.path.join(HERE, "pins", f"{stem}.v*.py")),
                key=lambda p: int(re.search(r"\.v(\d+)\.py$", p).group(1)))
     if not c:
         return os.path.join(HERE, f"{stem}.py")
@@ -94,9 +98,27 @@ def find(pat):
     return hits[0]
 
 def run(cmd, quiet=True):
+    """Run a pass. A NON-ZERO EXIT IS ALWAYS REPORTED.
+
+    This used to honour quiet=True for failures too, so a pass could die and
+    the rebuild log looked normal. It cost real debugging twice: 56 and 57 both
+    reported problems into a swallowed stdout and were believed to have worked,
+    and a pass that REFUSES to act -- 58's stale anchors, 59's removed-length
+    guard -- is indistinguishable from one that had nothing to do. quiet now
+    controls only the stdout echo of a SUCCESSFUL pass.
+    """
     r = subprocess.run(cmd, capture_output=True, text=True)
-    if r.returncode != 0 and not quiet:
-        print("    !!", " ".join(str(c) for c in cmd[:3]), r.stderr[-300:])
+    name = os.path.basename(str(cmd[1])) if len(cmd) > 1 else str(cmd[0])
+    if r.returncode != 0:
+        print("    !! %s exited %d" % (name, r.returncode))
+        for stream in (r.stdout, r.stderr):
+            tail = (stream or "").strip()
+            if tail:
+                print("       " + tail[-600:].replace("\n", "\n       "))
+    elif not quiet:
+        tail = (r.stdout or "").strip()
+        if tail:
+            print("       " + tail.replace("\n", "\n       "))
     return r.stdout
 
 def rebuild(y, outdir):
@@ -179,13 +201,40 @@ def rebuild(y, outdir):
     # so they have to run here, where a rebuild cannot lose them, rather than
     # being applied to the batch copies by hand.
     run([sys.executable, os.path.join(HERE, "53_stacked_fractions.py"),
-         "--items-dir", outdir, "--year", y, "--apply"])
+         "--items-dir", outdir, "--year", y, "--apply"], quiet=False)
     run([sys.executable, os.path.join(HERE, "54_relocate_descriptions.py"),
-         "--items-dir", outdir, "--year", y, "--apply"])
+         "--items-dir", outdir, "--year", y, "--apply"], quiet=False)
     # Table contents the accessibility edition dropped. Runs last because its
     # anchors are sentences in the finished stem.
     run([sys.executable, os.path.join(HERE, "55_recover_tables.py"),
-         "--items-dir", outdir, "--year", y, "--apply"])
+         "--items-dir", outdir, "--year", y, "--apply"], quiet=False)
+    # Text the content stream emitted out of visual order. Runs after the
+    # option letter has been stripped (46) -- its guard compares the cell
+    # against the printed line character for character, so a cell still
+    # carrying its letter would simply fail to match and be reported.
+    run([sys.executable, os.path.join(HERE, "56_reading_order.py"),
+         "--items-dir", outdir, "--year", y, "--apply"]
+        + sum((["--pdf", p] for p in parses.values()), []), quiet=False)
+    # Glyphs the booklet DRAWS rather than setting as text (R16). Runs last
+    # because its anchors are the finished stem, and its audit refuses when a
+    # page carries a drawn glyph the table does not account for.
+    run([sys.executable, os.path.join(HERE, "57_drawn_glyphs.py"),
+         "--items-dir", outdir, "--year", y, "--apply"]
+        + sum((["--pdf", p] for p in parses.values()), []), quiet=False)
+    # Hand-verified per-item corrections. Runs LAST on purpose: every anchor in
+    # its table was copied from the SHIPPED cell, i.e. from the text as it
+    # looks once every other pass has run.
+    run([sys.executable, os.path.join(HERE, "58_verified_patches.py"),
+         "--items-dir", outdir, "--year", y, "--apply"], quiet=False)
+    # Removes the Redacao section the last LC item absorbed (R19). After 58 so
+    # its keep-anchors see finished text, and because 58 may edit the very
+    # question closer this pass anchors on.
+    run([sys.executable, os.path.join(HERE, "59_strip_essay_section.py"),
+         "--items-dir", outdir, "--year", y, "--apply"], quiet=False)
+    # Missing stimulus descriptions (R5). Runs after 59 so its anchors see the
+    # finished stem -- 59 can delete the very text an anchor would match.
+    run([sys.executable, os.path.join(HERE, "60_stimulus_descriptions.py"),
+         "--items-dir", outdir, "--year", y, "--apply"], quiet=False)
     return outdir
 
 def main():
