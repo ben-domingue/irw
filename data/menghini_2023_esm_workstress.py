@@ -251,9 +251,12 @@ def main():
 
     # stamped "Z" but local Italian time (see coding notes)
     local = pd.to_datetime(df["submission_timestamp"].str.rstrip("Z"))
-    df["date"] = (local.dt.tz_localize("Europe/Rome", ambiguous="raise",
-                                       nonexistent="raise")
-                  .dt.tz_convert("UTC").astype("int64") // 10**9)
+    utc = local.dt.tz_localize("Europe/Rome", ambiguous="raise",
+                               nonexistent="raise").dt.tz_convert("UTC")
+    # whole seconds since the epoch, independent of the datetime resolution
+    # (pandas 3 parses to microseconds, so astype("int64") // 10**9 is wrong)
+    df["date"] = ((utc - pd.Timestamp("1970-01-01", tz="UTC"))
+                  // pd.Timedelta(seconds=1))
     first = df.loc[df["beep"] == 1, "run_timestamp"].str[11:16]
     assert first.between("09:00", "10:45").all()
     df = df.sort_values(["id", "date"], kind="stable")
