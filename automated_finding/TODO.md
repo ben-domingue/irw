@@ -25,11 +25,11 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   - Label mismatch on item 9: `clemente_2024_attitude_{father,mother}`.
   - Truncated stem CSRN3: `kanwal_2024_csr`.
 
-- [ ] **Covariate-label harvest** for the new `.sav`-reading scripts that ship
-  `cov_*`: strojny_2026, usmani_2024, shen_2025, clemente_2024, yuan_2024
-  (rzeszutek reads .xlsx, so no harvest is needed).
-  `python3 metadata/covariate_labels/harvest.py --commit HEAD <stem>` then
-  `build.py`.
+- [ ] **Covariate labels: run `build.py` after upload.** The harvest is done
+  (2026-10-04, `--commit 4bdd4271`; all 5 .sav-reading scripts exit 0: strojny_2026,
+  usmani_2024, shen_2025, clemente_2024, yuan_2024). `build.py` keeps live tables
+  only (those in `metadata/metadata.csv`), so these reach `covariate_labels.csv` on
+  the first `python3 metadata/covariate_labels/build.py` after the release.
 
 - [ ] **208 scored terms remain unrun** in `pmc_term_backlog_2026-09-25.csv`
   (ranks 301+, projected 5 or fewer new DOIs per term).
