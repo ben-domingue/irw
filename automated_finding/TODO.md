@@ -3,6 +3,37 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## From the 2026-10-04 PMC scout-2 sweep (ranks 101-300 + owed pairs)
+
+- [ ] **46 tables (647,006 responses) + 25 item text tables need uploading**:
+  `irw_output/` (fong_2023 ×5, kanwal_2024 ×4, strojny_2026 ×4, przybylski_2016_igd,
+  fang_2021 ×4, makovi_2021 ×3, usmani_2024 ×3, shen_2025 ×4, clemente_2024 ×4,
+  li_2026_psmus, kramer_2023 ×2, yamagishi_2016_pd, yuan_2024 ×3, mohamed_2021 ×2,
+  rzeszutek_2023 ×5).
+  Then upload `itemtext_output/` (25 `__items.csv`). Response tables go up first.
+  Dictionary, tag, codebook and data-note rows are staged. Stamp `uploaded=` in
+  `itemtext_provenance.csv` and `itemtext/mapping_verification.csv` only after
+  ben confirms.
+
+- [ ] **Issues-page entries owed in datapages/irw once live**. The text is drafted
+  in each `public_note` of `itemtext_provenance.csv`:
+  - IRW-written translations: `strojny_2026_gmi`, `clemente_2024_sd4`,
+    `clemente_2024_pmd`.
+  - English substitutes for a Chinese administration: `fang_2021_{pbc,pn,peb}`,
+    `shen_2025_{dass21,bsmas,sabas}`, `yuan_2024_{ucla,contact,trust}`,
+    `li_2026_psmus`.
+  - Label mismatch on item 9: `clemente_2024_attitude_{father,mother}`.
+  - Truncated stem CSRN3: `kanwal_2024_csr`.
+
+- [ ] **Covariate-label harvest** for the new `.sav`-reading scripts that ship
+  `cov_*`: strojny_2026, usmani_2024, shen_2025, clemente_2024, yuan_2024
+  (rzeszutek reads .xlsx, so no harvest is needed).
+  `python3 metadata/covariate_labels/harvest.py --commit HEAD <stem>` then
+  `build.py`.
+
+- [ ] **208 scored terms remain unrun** in `pmc_term_backlog_2026-09-25.csv`
+  (ranks 301+, projected 5 or fewer new DOIs per term).
+
 ## From the 2026-10-02 human_review re-check batch 4 (25 rows, 14 shipped)
 
 - [x] **69 tables + 9 item text tables uploaded** (ben-domingue, confirmed
