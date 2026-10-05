@@ -5,7 +5,7 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
 ## From the 2026-10-05 PMC sweep (last 208 backlog terms, PeerJ + Sci Rep only)
 
-- [ ] **18 tables (817,775 responses) + 10 item text tables.** Item text uploaded (ben-domingue, confirmed 2026-10-05; `uploaded=2026-10-05` stamped); response-table upload not yet confirmed.
+- [x] **18 tables (817,775 responses) + 10 item text tables uploaded** (ben-domingue, confirmed 2026-10-05; item text `uploaded=2026-10-05` stamped).
   `irw_output/`: wu_2022_dcep x6, lyu_2024 x9, sung_2026_marital_quality,
   elshafie_2020_edsc, scheerhagen_2019_reproq. `itemtext_output/`: lyu_2024 x9,
   elshafie_2020_edsc.
