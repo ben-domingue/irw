@@ -1,4 +1,6 @@
 table,column,kind,was,now
-dtmr_sim,Original_License,fill,NA,MIT
-lnirt_sim,Original_License,fill,NA,CC0 1.0
-raschmix_rost2_sim,Original_License,fill,NA,CC0 1.0
+aberrance_pk_sim,Original_License,fill,NA,CC0 1.0
+aberrance_speeded_sim,Original_License,fill,NA,CC0 1.0
+hmcdm_learning_sim,Original_License,fill,NA,CC0 1.0
+hrm_rater_sim,Original_License,fill,NA,CC0 1.0
+ising_network_sim,Original_License,fill,NA,CC0 1.0
