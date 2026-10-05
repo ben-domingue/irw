@@ -3,6 +3,27 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## From the 2026-10-05 PMC sweep (last 208 backlog terms, PeerJ + Sci Rep only)
+
+- [ ] **18 tables (817,775 responses) + 10 item text tables need uploading.**
+  `irw_output/`: wu_2022_dcep x6, lyu_2024 x9, sung_2026_marital_quality,
+  elshafie_2020_edsc, scheerhagen_2019_reproq. `itemtext_output/`: lyu_2024 x9,
+  elshafie_2020_edsc. Both folders still hold the 46 / 25 files from the
+  2026-10-04 batch (already uploaded) -- upload only the new ones. Stamp
+  `uploaded=` in `itemtext_provenance.csv` and `mapping_verification.csv` after
+  ben confirms.
+- [ ] **Issues-page entry owed:** `elshafie_2020_edsc` (IRW-written English
+  translation of the Arabic checklist; `public_note` drafted in provenance).
+- [ ] **Rulings (none blocks upload):** Lyu item text shipped as English with
+  no language column although the sample is Chinese and the paper never names
+  the administered language (tags say `chi`, inferred) -- keep, or recast as a
+  translated substitute? ReproQ shipped as one table with phase-suffixed items
+  and wave 1/2 rather than two tables.
+- [ ] **Covariate labels: run `build.py` after upload** (harvest done for
+  elshafie_2020_edsc and scheerhagen_2019_reproq).
+- [ ] **The sweep owes 9 journals for all 208 terms** (killed for low memory):
+  `--journals jofintelligence,mbr,behavsci,apm,bmcmrm,jopd,bmcpubhealth,heliyon,psychometrika`.
+
 ## From the 2026-10-04 PMC scout-2 sweep (ranks 101-300 + owed pairs)
 
 - [x] **46 tables (647,006 responses) + 25 item text tables uploaded** (ben-domingue, confirmed 2026-10-04; item text `uploaded=2026-10-04` stamped). Original:
@@ -31,8 +52,6 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   only (those in `metadata/metadata.csv`), so these reach `covariate_labels.csv` on
   the first `python3 metadata/covariate_labels/build.py` after the release.
 
-- [ ] **208 scored terms remain unrun** in `pmc_term_backlog_2026-09-25.csv`
-  (ranks 301+, projected 5 or fewer new DOIs per term).
 
 ## From the 2026-10-02 human_review re-check batch 4 (25 rows, 14 shipped)
 
