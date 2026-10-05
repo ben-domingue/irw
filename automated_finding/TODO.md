@@ -9,16 +9,10 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   `irw_output/`: wu_2022_dcep x6, lyu_2024 x9, sung_2026_marital_quality,
   elshafie_2020_edsc, scheerhagen_2019_reproq. `itemtext_output/`: lyu_2024 x9,
   elshafie_2020_edsc.
-- [ ] **Issues-page entry for `elshafie_2020_edsc`:** datapages/irw#319, open,
-  merge now (the table is live).
-- [ ] **Covariate labels: run `build.py` after the release.** The harvest is done
-  for elshafie_2020_edsc and scheerhagen_2019_reproq. `build.py` keeps only tables
-  in `metadata/metadata.csv`, and these are not there until the draft is published
-  and `01_metadata.R` re-runs (a run on 2026-10-05 added nothing). The same holds
-  for the 2026-10-04 batch's item below.
-- [ ] **4 tables (4,408 responses) need uploading** (2026-10-05c, remaining-journals
-  pass): `irw_output/` matsaid_2022_abcdm_{knowledge,perceived_risk,perceived_benefits,intention}.
-  No item text.
+- [x] **Issues-page entry for `elshafie_2020_edsc`:** datapages/irw#319, merged.
+- [x] **Covariate labels built 2026-10-05** after the release: elshafie_2020_edsc and
+  scheerhagen_2019_reproq are in `covariate_labels.csv`. matsaid reads an xlsx, so it has no labels.
+- [x] **4 matsaid_2022_abcdm tables (4,408 responses) uploaded** (ben-domingue, confirmed 2026-10-05).
 - **The PMC term backlog is exhausted:** no scored term in
   `pmc_term_backlog_2026-09-25.csv` is left unrun. A further PMC pass needs a new
   term ranking.
@@ -45,11 +39,9 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   - Label mismatch on item 9: `clemente_2024_attitude_{father,mother}`.
   - Truncated stem CSRN3: `kanwal_2024_csr`.
 
-- [ ] **Covariate labels: run `build.py` after upload.** The harvest is done
-  (2026-10-04, `--commit 4bdd4271`; all 5 .sav-reading scripts exit 0: strojny_2026,
-  usmani_2024, shen_2025, clemente_2024, yuan_2024). `build.py` keeps live tables
-  only (those in `metadata/metadata.csv`), so these reach `covariate_labels.csv` on
-  the first `python3 metadata/covariate_labels/build.py` after the release.
+- [x] **Covariate labels built 2026-10-05:** shen_2025, clemente_2024 and yuan_2024
+  are in `covariate_labels.csv`. strojny_2026 and usmani_2024 ship text-label
+  covariates, so they have no codes to label.
 
 
 ## From the 2026-10-02 human_review re-check batch 4 (25 rows, 14 shipped)
