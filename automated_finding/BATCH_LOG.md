@@ -17336,3 +17336,14 @@ These were not logged:
 **Dryad note:** Dryad file downloads 401 without a token, but the files load
 through headless Chrome from the dataset page. This is not wired into the
 pipeline.
+
+## 2026-10-05b — rulings on the 2026-10-05 batch
+
+ben-domingue, 2026-10-05:
+- **Lyu 2024 item text:** the English is accepted as the study's own item
+  list, as shipped (no language column, no issues-page entry).
+- **ReproQ:** one table, with phase-suffixed items and wave 1/2, as shipped.
+
+`elshafie_2020_edsc`'s issues-page entry is datapages/irw#319. The covariate
+labels wait on the release: `build.py` still adds nothing, because the tables
+are not yet in `metadata.csv`.

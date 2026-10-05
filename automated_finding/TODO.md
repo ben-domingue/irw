@@ -9,17 +9,15 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   `irw_output/`: wu_2022_dcep x6, lyu_2024 x9, sung_2026_marital_quality,
   elshafie_2020_edsc, scheerhagen_2019_reproq. `itemtext_output/`: lyu_2024 x9,
   elshafie_2020_edsc.
-- [ ] **Issues-page entry owed:** `elshafie_2020_edsc` (IRW-written English
-  translation of the Arabic checklist; `public_note` drafted in provenance).
-- [ ] **Rulings (none blocks upload):** Lyu item text shipped as English with
-  no language column although the sample is Chinese and the paper never names
-  the administered language (tags say `chi`, inferred) -- keep, or recast as a
-  translated substitute? ReproQ shipped as one table with phase-suffixed items
-  and wave 1/2 rather than two tables.
-- [ ] **Covariate labels: run `build.py` after upload** (harvest done for
-  elshafie_2020_edsc and scheerhagen_2019_reproq).
-- [ ] **The sweep owes 9 journals for all 208 terms** (killed for low memory):
-  `--journals jofintelligence,mbr,behavsci,apm,bmcmrm,jopd,bmcpubhealth,heliyon,psychometrika`.
+- [ ] **Issues-page entry for `elshafie_2020_edsc`:** datapages/irw#319, open,
+  merge now (the table is live).
+- [ ] **Covariate labels: run `build.py` after the release.** The harvest is done
+  for elshafie_2020_edsc and scheerhagen_2019_reproq. `build.py` keeps only tables
+  in `metadata/metadata.csv`, and these are not there until the draft is published
+  and `01_metadata.R` re-runs (a run on 2026-10-05 added nothing). The same holds
+  for the 2026-10-04 batch's item below.
+- [ ] **Remaining 9 journals for the 208 terms:** relaunched 2026-10-05 as
+  `runs/pmc_scout2_2026-10-05b_triage.csv`.
 
 ## From the 2026-10-04 PMC scout-2 sweep (ranks 101-300 + owed pairs)
 
