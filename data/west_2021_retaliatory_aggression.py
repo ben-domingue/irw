@@ -37,7 +37,9 @@ def _canon_cast(item: pd.Series) -> pd.Series:
 
 def _canon_bpaq(item: pd.Series) -> pd.Series:
     s = item.str.replace(r"^bp_?p(\d+)(r?)$", r"bpaq\1\2", regex=True)
-    s = s.str.replace(r"^bpaq(\d+)p$", r"bpaq\1", regex=True)
+    # Study 5 names its items BPAQ<k>p and BPAQ7rp: strip the "p" but keep the
+    # reverse-key "r" (bpaq7rp had been left as its own item; irw#2845).
+    s = s.str.replace(r"^bpaq(\d+)(r?)p$", r"bpaq\1\2", regex=True)
     return s
 
 
@@ -71,6 +73,12 @@ def main() -> None:
                    {"Gender": "cov_gender"}, "study5", "Participant")
     s6, c6 = _load(Path("Study 6/Data + Code/Study6_OSF.csv"),
                    {"Gender": "cov_gender"}, "study6", "Participant")
+    # Study 6 has two different people under Participant 241 (different
+    # gender and answers). The second, in file order, gets id max + 1 (270),
+    # unused in study 6, so ids are unique within each study (irw#2845).
+    dup = s6.index[s6["id"].duplicated()]
+    assert s6.loc[dup, "id"].tolist() == [241], s6.loc[dup, "id"].tolist()
+    s6.loc[dup, "id"] = s6["id"].max() + 1
 
     cov_union = ["cov_age", "cov_gender", "cov_provocation",
                  "cov_coldpressor", "cov_condition", "cov_study"]
