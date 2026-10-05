@@ -98,6 +98,46 @@ class IngestLinksTest(unittest.TestCase):
                          [("foo_2026", "recorded_at_ingest", "Codebook v2.pdf", "osf.io")])
 
 
+class ReviewLinksTest(unittest.TestCase):
+    """#2787 step 3: codebook_by_review.csv, found by hand, never by a crawler."""
+
+    def _run(self, rows, live):
+        with tempfile.TemporaryDirectory() as d:
+            p = Path(d) / "codebook_by_review.csv"
+            with open(p, "w", newline="") as f:
+                w = csv.DictWriter(f, fieldnames=fcl.REVIEW_FIELDS)
+                w.writeheader()
+                for r in rows:
+                    w.writerow({k: r.get(k, "") for k in fcl.REVIEW_FIELDS})
+            old = fcl.REVIEW_CODEBOOKS
+            fcl.REVIEW_CODEBOOKS = p
+            try:
+                return fcl.review_links(live)
+            finally:
+                fcl.REVIEW_CODEBOOKS = old
+
+    def test_codebook_and_questionnaire_rows(self):
+        md = "https://www.cis.es/documents/20117/1555121/MD2913.zip"
+        rows = self._run([
+            {"table": "spain_2011_immigrant_family", "url": md, "file_name": "codigo2913.pdf (inside MD2913.zip)",
+             "doc_type": "codebook", "series": "CIS", "wave": "2913", "evidence": "study 2913", "reviewed_at": "2026-10-04"},
+            {"table": "spain_2011_immigrant_family", "url": "https://www.cis.es/documents/20117/1555121/cues2913.pdf.zip",
+             "doc_type": "questionnaire", "series": "CIS", "wave": "2913", "reviewed_at": "2026-10-04"},
+            {"table": "retired_2011", "url": md, "doc_type": "codebook"},
+        ], {"spain_2011_immigrant_family"})
+        self.assertEqual([(r["how_found"], r["file_name"], r["host"], r["n_same_kind_in_deposit"]) for r in rows],
+                         [("recorded_by_review", "codigo2913.pdf (inside MD2913.zip)", "cis.es", 1),
+                          ("questionnaire", "cues2913.pdf.zip", "cis.es", 1)])
+        self.assertEqual(rows[0]["evidence"], "study 2913")
+        self.assertEqual(rows[0]["checked_at"], "2026-10-04")
+
+    def test_a_bad_row_stops_the_run(self):
+        for bad in ({"table": "t", "url": "https://x.org/a.pdf", "doc_type": "guess"},
+                    {"table": "t", "url": "", "doc_type": "codebook"}):
+            with self.assertRaises(SystemExit):
+                self._run([bad], {"t"})
+
+
 if __name__ == "__main__":
     unittest.main()
 

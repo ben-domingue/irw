@@ -524,7 +524,7 @@ drop bp2_1 bp2_2_01 bp2_2_02 bp2_2_03 bp2_2_04 bp2_2_05 bp2_2_06 bp2_2_07 bp2_2_
 
 sort id item
 
-export delimited using "mexico_2025_q2conflicts.csv", replace
+export delimited using "mexico_2025_q2safety_conflicts.csv", replace
 
 **# Bookmark #7: Q2 2025 Government Performance
 
@@ -598,7 +598,7 @@ drop bp4_1_1 bp4_1_2 bp4_1_3 bp4_1_4 bp4_1_5 bp4_1_6 bp4_1_7 bp4_1_8 bp4_1_9
 
 sort id item
 
-export delimited using "mexico_2025_q2harassment.csv", replace
+export delimited using "mexico_2025_q2safety_harassment.csv", replace
 
 **# Bookmark #9: Q3 2025 Public Safety Perception
 
