@@ -78,7 +78,7 @@ foreach var of local survey_cols {
 
 use `long_data', clear
 drop if missing(item) | item == ""
-replace resp = . if resp == 3
+* code 3 is the scale's middle answer (volunteered, NO LEER), kept (irw#2843)
 drop if missing(resp)
 sort id item
 drop gradoimpor1_1 gradoimpor1_2 gradoimpor1_3 gradoimpor1_4 gradoimpor1_5

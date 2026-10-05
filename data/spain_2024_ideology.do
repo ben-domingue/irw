@@ -73,9 +73,7 @@ foreach var of local survey_cols {
 use `long_data', clear
 drop if missing(item) | item == ""
 
-* drop the (NO LEER) volunteered midpoint
-
-replace resp = . if resp == 3
+* code 3 is the scale's middle answer (volunteered, NO LEER), kept (irw#2843)
 
 drop if missing(resp)
 sort id item
@@ -118,9 +116,7 @@ foreach var of local survey_cols {
 use `long_data', clear
 drop if missing(item) | item == ""
 
-* drop the (NO LEER) volunteered midpoint
-
-replace resp = . if resp == 3
+* code 3 is the scale's middle answer (volunteered, NO LEER), kept (irw#2843)
 
 drop if missing(resp)
 sort id item
@@ -161,9 +157,7 @@ foreach var of local survey_cols {
 use `long_data', clear
 drop if missing(item) | item == ""
 
-* drop the (NO LEER) volunteered midpoint
-
-replace resp = . if resp == 3
+* code 3 is the scale's middle answer (volunteered, NO LEER), kept (irw#2843)
 
 drop if missing(resp)
 sort id item
@@ -206,9 +200,7 @@ foreach var of local survey_cols {
 use `long_data', clear
 drop if missing(item) | item == ""
 
-* drop the (NO LEER) volunteered midpoint
-
-replace resp = . if resp == 3
+* code 3 is the scale's middle answer (volunteered, NO LEER), kept (irw#2843)
 
 drop if missing(resp)
 sort id item

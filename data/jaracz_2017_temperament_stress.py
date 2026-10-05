@@ -10,17 +10,20 @@
 # civil servants, "group" col = 1/2) plus a third block of 58 rows with all
 # scale columns blank (no group label either) -- dropped as non-respondents.
 # Two genuine multi-item raw scales found:
-#   - Zmn8..Zmn116: TEMPS-A-style affective temperament items, binary 0/1
-#     (109 items)
+#   - TEMPS1, Zmn8..Zmn116: the 110 TEMPS-A affective temperament items,
+#     binary 0/1. The source names item 1 TEMPS1 and the rest by SPSS
+#     variable position ("Zmn" = zmienna, variable), so ZmnK is TEMPS-A item
+#     K - 6. Shipped as temps1..temps110 (irw#2849; TEMPS1 had been dropped
+#     as a "single lead-in item" and the rest shipped as Zmn8..Zmn116).
 #   - stres_1, stres_2, stres3, stres4, stres_5, stres_6, stres_7, stres8:
 #     8-item job stress scale, 0-5 scale (column names have inconsistent
 #     underscores in the source file itself, renamed item1..item8 here)
 # MBI_WE/MBI_DEP/MBI_ocena_wm/MBI_general columns are pre-computed
 # composite/subscale scores, not raw items -- excluded per the
-# no-composite-scores rule. TEMPS1 is a single lead-in item, excluded per
-# the no-single-item-scale rule.
+# no-composite-scores rule. (So are the TEMPS_* subscale scores.)
 
 import os
+import sys
 
 import pandas as pd
 import requests
@@ -31,7 +34,8 @@ OUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)),
 URL = "https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0176698.s001"
 UA = {"User-Agent": "IRW-Finder/1.0 (ben.domingue@gmail.com)"}
 
-TEMPS_ITEMS = [f"Zmn{i}" for i in range(8, 117)]
+TEMPS_ITEMS = ["TEMPS1"] + [f"Zmn{i}" for i in range(8, 117)]
+TEMPS_RENAME = {"TEMPS1": "temps1", **{f"Zmn{i}": f"temps{i - 6}" for i in range(8, 117)}}
 STRESS_ITEMS = ["stres_1", "stres_2", "stres3", "stres4", "stres_5", "stres_6", "stres_7", "stres8"]
 
 
@@ -64,7 +68,7 @@ def convert():
     print("Fetching S1 Dataset (XLSX)...")
     raw = fetch_raw()
 
-    temps = build_long(raw, TEMPS_ITEMS)
+    temps = build_long(raw, TEMPS_ITEMS, rename=TEMPS_RENAME)
 
     stress_rename = {old: f"stress_item{i+1}" for i, old in enumerate(STRESS_ITEMS)}
     stress = build_long(raw, STRESS_ITEMS, rename=stress_rename)
@@ -77,4 +81,6 @@ def convert():
 
 
 if __name__ == "__main__":
+    if len(sys.argv) > 1:
+        OUT_DIR = sys.argv[1]
     convert()

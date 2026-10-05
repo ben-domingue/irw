@@ -1,5 +1,7 @@
-# Paper:
-# Data:
+# VCISM_Polish_Trzcinska_2023 (PSPCSA items from psiat_validation.sav;
+# data DOI 10.17605/OSF.IO/K2QEW).
+# This file was data/PMT_Trzcińska_2023.R until irw#2844: despite that name it
+# never built the PMT tables, whose script is now data/PMT_Trzcinska_2023.R.
 library(haven)
 library(dplyr)
 library(tidyr)
