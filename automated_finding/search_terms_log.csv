@@ -8977,3 +8977,4 @@ date,query,output_file,notes
 2026-10-05,work engagement,runs/monthly_candidates_weekly_2026-10-05.csv,"monthly automated run; 1 candidates; sources=osf,dataverse,datacite; since=2026-10-02"
 2026-10-05,psychological resilience,runs/monthly_candidates_weekly_2026-10-05.csv,"monthly automated run; 0 candidates; sources=osf,dataverse,datacite; since=2026-09-29"
 2026-10-05,procrastination,runs/monthly_candidates_weekly_2026-10-05.csv,"monthly automated run; 2 candidates; sources=osf,dataverse; since=2026-10-02; not_searched=datacite"
+2026-10-05,growth mindset,runs/monthly_candidates_weekly_2026-10-05.csv,"monthly automated run; 1 candidates; sources=osf,dataverse; since=2026-10-02; not_searched=datacite"
