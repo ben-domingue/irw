@@ -17228,3 +17228,111 @@ under CC BY 4.0, so it ships CC BY.
 run on an older checkout. The seen-ledger rows were rewritten through main's
 `seen_ledger.append_seen` with their flags (#2222) rather than the old
 two-column writer.
+
+## 2026-10-05 — PMC scout-2 sweep, the last 208 backlog terms (PeerJ + Sci Rep only): 126 candidates, 27 leads, 18 tables / 817,775 responses
+
+**Terms.** `irw_discover_pmc.py` over the 208 unrun terms of
+`pmc_term_backlog_2026-09-25.csv` (ranks 301+). Claude Code killed the run for
+low system memory partway through the third journal (jofintelligence), so
+only **PeerJ and Scientific Reports** finished. Because the process was killed,
+the script's `finally` block never ran. Its seen-ledger write and its
+in-process Step 2b were both lost. They were redone by hand:
+- Step 2b: `irw_retriage_ha.py`, which archived 3 rows to
+  `human_review/human_review_pmc_2026-10-05.csv`.
+- The seen ledger: 107 DOIs through `seen_ledger.append_seen` with their
+  flags. The 17 `download_failed` and 2 `error` rows were left out, per
+  `INCONCLUSIVE_FLAGS`.
+- The backlog: a new `partial_2026_10_05` column (`peerj; screports`). **The
+  other 9 journals are still owed for all 208 terms.** Resume with the same
+  208 terms and `--journals jofintelligence,mbr,behavsci,apm,bmcmrm,jopd,bmcpubhealth,heliyon,psychometrika`.
+
+| flag | n |
+|---|---|
+| `no_usable_file` | 50 |
+| `license_restricted` (all CC BY-NC-ND) | 30 |
+| `human_assistance` | 17 |
+| `download_failed` | 17 |
+| `below_min_n` | 3 |
+| `good` | 2 |
+| `error` / `timeout` / `not_item_response` | 2 each |
+| `external_unresolved` | 1 |
+
+`refined_flag` over the 17: `recoverable_format` 8, `worth_retrying` 4,
+`human_review` 3, `aggregate_continuous` 2.
+
+**27 leads -> `leads/pmc_leads_2026-10-05.csv`.** These are the `good`, `human_assistance`, `error` and
+human-subject `download_failed` rows. All are terminal: **5 shipped, 15
+rejected on content, 7 blocked on licence.** The download failures were
+transient: every Europe PMC supplementary zip came back 200 on retry, and
+none held usable data. Non-human or non-survey failures (crinoids,
+earthworms, mouse/rodent studies, CLSA) were not worked.
+
+| table(s) | script | ids | items | resp |
+|---|---|---|---|---|
+| `wu_2022_dcep_{risk,habit,social_influence,national_identity,fairness,usage}` | `data/wu_2022_dcep.py` | 295 | 3 each | 1-7 |
+| `lyu_2024_{rtp,sef,nfa,pvs,org,ate,sun,pbc,sei}` | `data/lyu_2024_social_entrepreneurship.py` | 681 | 4-5 | 1-5 |
+| `sung_2026_marital_quality` | `data/sung_2026_marital_quality.py` | 616 spouses / 308 couples (`cluster_id`) | 6 | 1-3 |
+| `elshafie_2020_edsc` | `data/elshafie_2020_edsc.py` | 1,503 | 54 | 0-1 |
+| `scheerhagen_2019_reproq` | `data/scheerhagen_2019_reproq.py` | 13,111 | 88 | 1-4, `wave` 1/2 |
+
+All 18 pass `run_qc` and `irw-validate --profile upload`, and none has a
+duplicate key. The warnings are response concentration on milestone items, on
+ceiling-heavy satisfaction items and on Sung's `p_demand`, plus the ReproQ
+`Pnb` (1-3) and `Svd_P` (1-2) items being narrower than the rest.
+- **Sung:** the deposit's answer-label strings contradict the paper. Read
+  literally, no spouse ever answers "often". The coding that reproduces the
+  deposit's own composites exactly for every spouse is the paper's 1-3, and
+  that is what ships (data-noted).
+- **elshafie:** the flagged s005 held only totals. The 54 milestones are in
+  s004, an SPSS `.sav` served under a `.zip` name.
+- **ReproQ:** the invitation token links the antenatal and postnatal files for
+  2,770 women; perinatal unit, parity and age band agree far above chance.
+  Changes made:
+  - 94 exact same-token double submissions dropped.
+  - Tokens that recur with different answers treated as collisions and left
+    unlinked.
+  - Tokens replaced by a row-index id.
+  - Pregnancy-phase items suffixed `_P`.
+  - Not-applicable codes dropped, including `Pnb` code 4 ("did not want to be
+    involved").
+- **Lyu:** 3 adjacent pairs identical on all 42 items and all demographics
+  were dropped (684 -> 681).
+- **Wu:** 11 groups of identical near-constant patterns, kept.
+
+**Item text: 10 tables** (`itemtext_output/`). They pass `normalize_nulls`,
+`validate_items --resp-csv`, `audit_batch --resp-dir` and `irw-validate`.
+- `lyu_2024_*` (9): `data_labels`. SI Table S1's codes are the csv headers
+  (42/42).
+- `elshafie_2020_edsc`: administered Arabic, with an IRW-written English
+  `_translated`. `verify_elshafie_2020_edsc.R` gives `VERDICT: PASS`, status
+  PARTIAL (age-band ordering). It owes an issues-page entry.
+- **Not shipped, and where the text actually is:**
+  - wu: English statements in MOESM1 docx, tied to codes by position within a
+    construct only.
+  - sung: six stems in the paper's Methods, tied to codes by content.
+  - ReproQ: the `.sav` labels are English glosses of a Dutch questionnaire
+    that neither the deposit nor the SI carries.
+
+**Licence:** 7 blocked. Four went to `license_blocked_candidates.csv`:
+- deception about study purpose (998 × 71)
+- attended-emotion mood judgments
+- authoritarianism text / EU immigration
+- 3-wave US social/political trust panel (21,418)
+
+These were not logged:
+- the AUSSDA scientific-use schadenfreude data (a restricted archive, not a
+  licence gap)
+- private OSF qdz3n (AUT human vs AI)
+- the marginal trial-level HD-tDCS vigilance task
+
+**Staged:**
+- 18 `dictionary_auto.csv` rows, each with `codebook_url`
+- 18 `codebook_at_ingest.csv` rows
+- 18 `tags/tags_auto.csv` rows (`test_tags_union.R` passes)
+- 18 `itemtext_provenance.csv` rows
+- 10 `itemtext/mapping_verification.csv` rows
+- 18 `metadata/data_notes.csv` rows
+
+**Dryad note:** Dryad file downloads 401 without a token, but the files load
+through headless Chrome from the dataset page. This is not wired into the
+pipeline.
