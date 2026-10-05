@@ -6,6 +6,14 @@
 # CC BY 4.0.
 # Download raw file: https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0143612.s001
 #
+# E1-E21 are the 21 items of the Beck Depression Inventory (4-point, 1-4; the
+# paper's Instruments section; E19 weight loss, E21 loss of interest in sex
+# and E9 suicidal thoughts are the rarest endorsements, as BDI norms predict).
+# The table was first published as yu_2015_family_environment, a name taken
+# from the paper's title; the Family Environment Scale is in the deposit only
+# as 10 subscale totals. Renamed yu_2015_bdi 2026-10-05 (irw#2840); the
+# responses are unchanged.
+#
 # The raw "Number" column is NOT a unique person id -- rows sharing the same
 # Number have different Gender/Age (confirmed by inspection), so it's some
 # other code, not a participant identifier. Falls back to row index per
@@ -55,11 +63,15 @@ def convert():
                     var_name="item", value_name="resp")
     long["resp"] = pd.to_numeric(long["resp"], errors="coerce")
     long = long.dropna(subset=["resp"]).reset_index(drop=True)
+    ##the .sav stores whole numbers as doubles; write them as integers
+    long["resp"] = long["resp"].astype(int)
+    for c in COV_COLS:
+        long[c] = long[c].astype("Int64")
     long = long[["id", "item", "resp"] + COV_COLS]
 
-    path = os.path.join(OUT_DIR, "yu_2015_family_environment.csv")
+    path = os.path.join(OUT_DIR, "yu_2015_bdi.csv")
     long.to_csv(path, index=False)
-    print(f"yu_2015_family_environment: rows={len(long)} ids={long['id'].nunique()} "
+    print(f"yu_2015_bdi: rows={len(long)} ids={long['id'].nunique()} "
           f"items={long['item'].nunique()} resp={long['resp'].min():.0f}-{long['resp'].max():.0f}")
 
 

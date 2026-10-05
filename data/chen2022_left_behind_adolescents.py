@@ -32,20 +32,26 @@ COV_MAP = {
 # Scale boundaries confirmed from response distributions (max values: CLS=5, SES=4, SASC=3)
 # CLS: A1-A24 present (16 items; 8 items removed from original numbering A1-A24)
 # SES: A25-A34 (10 items, contiguous)
-# SASC: A35-A48 (14 items; Chinese version is 14-item, not 10)
+# SASC: A35-A44 (10 items). The file stores A35-A44 as one block (in the order
+#   A35, 38, 39, 41, 43, 36, 37, 40, 42, 44) and A45-A48 separately. The paper
+#   (PMC9679498, Measures) describes the SASC as "a 10-item ... 3-point scale";
+#   alpha for A35-A44 is .72 (paper .73). A45-A48 are four further 1-3 items of
+#   unknown content (alpha .66 among themselves, r .22-.35 with the SASC-10
+#   sum), so they are not shipped (irw#2841, 2026-10-05; the earlier build had
+#   all 14 under chen2022_sasc).
 SCALES = {
     "cls":  ["A1","A3","A4","A6","A8","A9","A10","A12",
              "A14","A16","A17","A18","A20","A21","A22","A24"],
     "ses":  [f"A{i}" for i in range(25, 35)],
-    "sasc": [f"A{i}" for i in range(35, 49)],
+    "sasc": [f"A{i}" for i in range(35, 45)],
 }
 
 SCALE_NOTES = {
     "cls":  ("Children's Loneliness Scale (CLS; 16 items); 1-5; "
              "8 items absent from file (likely removed during adaptation)"),
     "ses":  "Rosenberg Self-Esteem Scale (SES; 10 items); 1-4",
-    "sasc": ("Social Anxiety Scale for Children (SASC; 14 items); 1-3; "
-             "Chinese version has 14 items vs 10 in original"),
+    "sasc": ("Social Anxiety Scale for Children (SASC; 10 items, A35-A44); 1-3; "
+             "A45-A48 (four non-SASC items) not shipped"),
 }
 
 INDEX_FIELDS = ["file", "doi", "title", "scale", "n_participants", "n_items",
@@ -88,6 +94,7 @@ def convert():
         long["resp"] = pd.to_numeric(long["resp"], errors="coerce")
         long = long.dropna(subset=["resp"]).reset_index(drop=True)
         long = long.sort_values(["id", "item"]).reset_index(drop=True)
+        long = long[["id", "item", "resp"] + cov_cols]
 
         fname = f"chen2022_{scale}.csv"
         long.to_csv(OUT_DIR / fname, index=False)
