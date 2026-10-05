@@ -604,14 +604,20 @@ _TEXTS: Optional[Dict[str, str]] = None
 REPO_HOSTS = {"osf", "zenodo", "figshare", "figshare_collection", "mendeley", "dataverse", "github", "gitlab"}
 REPO_TEXT_EXT = {"docx", "doc", "pdf", "rtf", "odt", "md"}
 SOURCE_ZIP_MAX = 5              ##codebook-named members linked from one zip
+##a zip of code bundles libraries: mpdf ships a hyphenation 'dictionary.txt'
+ZIP_VENDORED = re.compile(r"(^|/)(vendor|node_modules|site-packages|lib|libs|renv|packrat|\.git|__MACOSX)/", re.I)
 ZIP_LIST_CAP = 40_000_000       ##bytes fetched whole when a server ignores Range
 ##Analysis output names every item too: an R/EGA printout, a loadings table, the
 ##paper itself. A pilot of 40 no-match deposits (10-04) found 19 content hits;
 ##the 13 that were output (EGAnet printouts, PCA/EFA tables, papers) each carried
-##two or more of these markers, and the 6 instruments and codebooks none.
+##two or more of these markers, and the 6 instruments and codebooks none. The
+##full sweep's precision sample (10-04) added descriptives and correlation
+##tables and Mplus input/output.
 STATS_OUTPUT = re.compile(r"library\(|\bloadings?\b|eigenvalue|\b(?:EFA|CFA|PCA|ESEM|SEM)s?\b|RMSEA|\bCFI\b|\bTLI\b|"
                           r"\bp\s*[<=]\s*0?\.\d|chi-?square|χ2|\bAIC\b|\bBIC\b|cronbach|omega|"
-                          r"standardi[sz]ed (?:estimate|coefficient)|regression|ANOVA|\bwTO\b", re.I)
+                          r"standardi[sz]ed (?:estimate|coefficient)|regression|ANOVA|\bwTO\b|"
+                          r"standard deviations?|\bM\s+SD\b|correlations?\b|confidence intervals?|skewness|kurtosis|"
+                          r"\bMplus\b|\bMODEL:|\bMODINDICES\b|\bSTANDARDIZED\b|\bESTIMATOR\b", re.I)
 STATS_OUTPUT_MIN = 2
 
 
@@ -1443,7 +1449,8 @@ def main() -> int:
                                          "raw": f.get("raw", ""), "host": h, "how_found": "name_codebook",
                                          "checked_at": row["checked_at"], "evidence": "sheet name"})
                     inner = [x for x in (f.get("zip") or [])
-                             if match(x.rsplit("/", 1)[-1]) == "name_codebook" and not x.endswith("/")]
+                             if match(x.rsplit("/", 1)[-1]) == "name_codebook" and not x.endswith("/")
+                             and not ZIP_VENDORED.search(x)]
                     for x in inner[:SOURCE_ZIP_MAX]:
                         hits.append({"table": t, "url": f["url"], "file_name": f"{x.rsplit('/', 1)[-1]} (inside {f['name']})",
                                      "raw": f.get("raw", ""), "host": h, "how_found": "name_codebook",
