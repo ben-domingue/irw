@@ -20,14 +20,28 @@ T = "/scratch/users/mazzafe/itemtext_years"
 DEPS = [
     (f"{T}/*/rb_repaired/*.pdf",   ["17_decode_2018.py", "25_repair_2021.py"]),
     (f"{T}/*/rb_parsed/*.csv",     ["12_parse_booklet_pdf.py"]),
+    # EVERY pass that writes an out_rb item table belongs here, or a stale
+    # build caused by editing it goes unnoticed -- which is the one thing this
+    # file exists to prevent. 23, 29, 55, 56 and 57 were missing: the first
+    # three predate this list, and 56/57/58/59 were added by #2462.
+    # 58 was itself left out when it landed -- exactly the miss described here. Cross-check
+    # against the run() calls in 42_rebuild.py rebuild() when adding a pass.
     (f"{T}/*/out_rb/*__items.csv", ["13_join.py", "14_fill_gaps.py",
+                                    "23_decode_symbolmt.py",
                                     "26_strip_page_furniture.py",
+                                    "29_decode_2021_notation.py",
                                     "43_normalize_glyphs.py",
                                     "46_strip_option_letter.py",
                                     "48_mark_scripts.py",
                                     "49_option_conventions.py",
                                     "53_stacked_fractions.py",
-                                    "54_relocate_descriptions.py"]),
+                                    "54_relocate_descriptions.py",
+                                    "55_recover_tables.py",
+                                    "56_reading_order.py",
+                                    "57_drawn_glyphs.py",
+                                    "58_verified_patches.py",
+                                    "59_strip_essay_section.py",
+                                    "60_stimulus_descriptions.py"]),
 ]
 
 REPO = os.path.expanduser("~/irw/itemtext/itemtables")

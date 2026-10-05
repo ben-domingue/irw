@@ -10,7 +10,7 @@ sebele2023 <- read_dta(glue("{raw}/56 rf_clean_student_data_endline.dta")) |>
          treat = treatment_el, 
          tot = treatment_intensity,
          cov_age = age_bl,
-         cov_male = gender_bl,
+         cov_female = gender_bl, # 0 = Male, 1 = Female in source (#2794)
          letter_pass_el, beg_sound_pass_el,
          cvc_pass_el, word_pass_el,
          # no baseline for math so excluding those endline items

@@ -291,7 +291,7 @@ O banho (3) tem acesso apenas à sala (1).
 A suíte (4) tem acesso à sala (1) e ao banho (5).
 O banho (5) tem acesso apenas à suíte (4).
 A cozinha (6) tem acesso apenas à sala (1).
-A sequência de deslocamentos pelos cômodos, conforme o consumo de energia apresentado no gráfico, é","A","14 54 16 14→→→→ →→ →",1,NA,NA,NA,NA,"Portuguese","A"
+A sequência de deslocamentos pelos cômodos, conforme o consumo de energia apresentado no gráfico, é","A","1 → 4 → 5 → 4 → 1 → 6 → 1 → 4",1,NA,NA,NA,NA,"Portuguese","A"
 "enem_2019_1mil_mt","enem_2019_1mil_mt_1",111518,"ENEM 2019 - MT","ATENÇÃO: transcreva no espaço apropriado do seu CARTÃO-RESPOSTA,
 com sua caligrafia usual, considerando as letras maiúsculas e minúsculas, a seguinte frase:
 Temos todo o tempo do mundo.
@@ -344,7 +344,7 @@ O banho (3) tem acesso apenas à sala (1).
 A suíte (4) tem acesso à sala (1) e ao banho (5).
 O banho (5) tem acesso apenas à suíte (4).
 A cozinha (6) tem acesso apenas à sala (1).
-A sequência de deslocamentos pelos cômodos, conforme o consumo de energia apresentado no gráfico, é","A","12 3141 44→→→ →→ →→",0,NA,NA,NA,NA,"Portuguese","B"
+A sequência de deslocamentos pelos cômodos, conforme o consumo de energia apresentado no gráfico, é","A","1 → 2 → 3 → 1 → 4 → 1 → 4 → 4",0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2019_1mil_mt","enem_2019_1mil_mt_1",111518,"ENEM 2019 - MT","ATENÇÃO: transcreva no espaço apropriado do seu CARTÃO-RESPOSTA,
 com sua caligrafia usual, considerando as letras maiúsculas e minúsculas, a seguinte frase:
 Temos todo o tempo do mundo.
@@ -397,7 +397,7 @@ O banho (3) tem acesso apenas à sala (1).
 A suíte (4) tem acesso à sala (1) e ao banho (5).
 O banho (5) tem acesso apenas à suíte (4).
 A cozinha (6) tem acesso apenas à sala (1).
-A sequência de deslocamentos pelos cômodos, conforme o consumo de energia apresentado no gráfico, é","A","14 54 1612 3→→→→ →→ →→",0,NA,NA,NA,NA,"Portuguese","C"
+A sequência de deslocamentos pelos cômodos, conforme o consumo de energia apresentado no gráfico, é","A","1 → 4 → 5 → 4 → 1 → 6 → 1 → 2 → 3",0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2019_1mil_mt","enem_2019_1mil_mt_1",111518,"ENEM 2019 - MT","ATENÇÃO: transcreva no espaço apropriado do seu CARTÃO-RESPOSTA,
 com sua caligrafia usual, considerando as letras maiúsculas e minúsculas, a seguinte frase:
 Temos todo o tempo do mundo.
@@ -450,7 +450,7 @@ O banho (3) tem acesso apenas à sala (1).
 A suíte (4) tem acesso à sala (1) e ao banho (5).
 O banho (5) tem acesso apenas à suíte (4).
 A cozinha (6) tem acesso apenas à sala (1).
-A sequência de deslocamentos pelos cômodos, conforme o consumo de energia apresentado no gráfico, é","A","12 35 4161 4→→→→ →→ →→",0,NA,NA,NA,NA,"Portuguese","D"
+A sequência de deslocamentos pelos cômodos, conforme o consumo de energia apresentado no gráfico, é","A","1 → 2 → 3 → 5 → 4 → 1 → 6 → 1 → 4",0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2019_1mil_mt","enem_2019_1mil_mt_1",111518,"ENEM 2019 - MT","ATENÇÃO: transcreva no espaço apropriado do seu CARTÃO-RESPOSTA,
 com sua caligrafia usual, considerando as letras maiúsculas e minúsculas, a seguinte frase:
 Temos todo o tempo do mundo.
@@ -503,7 +503,7 @@ O banho (3) tem acesso apenas à sala (1).
 A suíte (4) tem acesso à sala (1) e ao banho (5).
 O banho (5) tem acesso apenas à suíte (4).
 A cozinha (6) tem acesso apenas à sala (1).
-A sequência de deslocamentos pelos cômodos, conforme o consumo de energia apresentado no gráfico, é","A","14 23 5161 4→ →→→→ →→ →",0,NA,NA,NA,NA,"Portuguese","E"
+A sequência de deslocamentos pelos cômodos, conforme o consumo de energia apresentado no gráfico, é","A","1 → 4 → 2 → 3 → 5 → 1 → 6 → 1 → 4",0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2019_1mil_mt","enem_2019_1mil_mt_1",111593,"ENEM 2019 - MT","ATENÇÃO: transcreva no espaço apropriado do seu CARTÃO-RESPOSTA,
 com sua caligrafia usual, considerando as letras maiúsculas e minúsculas, a seguinte frase:
 Temos todo o tempo do mundo.

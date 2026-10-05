@@ -34,22 +34,52 @@ codebook named `S1_File.pdf` gets no link; that is the honest answer.
                                  data(x), pkg::x): the package documentation IS
                                  the codebook. Only that dataset, never the
                                  whole manual
+                 doc_names_columns
+                                 a journal supplementary document (PLOS, Europe
+                                 PMC; text documents only, never the data) whose
+                                 TEXT names >= README_MIN_NAMES of the table's
+                                 names (#2792). name_codebook there means the
+                                 authors' caption or a workbook SHEET name says
+                                 codebook / variables / legend. Since #2787's
+                                 follow-up the same three checks reach
+                                 repository deposits (OSF, Zenodo, figshare,
+                                 Mendeley, Dataverse, GitHub/GitLab): a text
+                                 document whose text names the table's items (not
+                                 analysis output: see STATS_OUTPUT), a workbook
+                                 sheet named like a codebook, and a codebook-named
+                                 file inside a zip ("x.pdf (inside y.zip)", read
+                                 from the zip's directory by range request)
+                 questionnaire   a supplementary file the authors caption as
+                                 the questionnaire / instrument; kept only when
+                                 nothing above documents the table (#2792)
                  recorded_at_ingest
                                  the codebook file whoever built the table
                                  named, via stage_dict_row.py `codebook_url`
                                  (automated_finding/codebook_at_ingest.csv,
                                  #2770). The strongest evidence: a person read
                                  it to write the build script
+                 recorded_by_review
+                                 a codebook found by hand (or by an agent) for
+                                 a source no crawler can list -- statistics
+                                 offices (#2787 step 3) -- recorded with its
+                                 evidence in metadata/codebook_by_review.csv.
+                                 Ranked with recorded_at_ingest. That file's
+                                 questionnaire rows become `questionnaire`, and
+                                 are shown BESIDE its codebook rows: a CIS
+                                 codigo lists the columns, its questionnaire
+                                 holds the response codes
 
 Hosts with an API that lists a deposit's files: OSF, Dataverse (Harvard and
 dataverse.nl), figshare (incl. the frontiersin/plos portals), Zenodo, Mendeley
 Data, GitHub, GitLab; LDbase (its server-rendered pages list typed documents);
 CRAN (the reference manual's topic index); openpsychometrics.org (the zip the
-table's reference or script names, listed inside -- #2787). Only tables in the matching *metadata.csv are swept: the biblio files
+table's reference or script names, listed inside -- #2787); PLOS and
+Europe PMC articles (the JATS supplementary-material list; workbooks and
+text documents are downloaded, size-capped, and opened -- #2792). Only tables in the matching *metadata.csv are swept: the biblio files
 keep rows for renamed and retired tables (#2767). doi.org links are routed by DOI prefix, and resolved by one HEAD request
-only when the prefix is unknown. Everything else (PLOS supplementary files,
-statistics offices, openICPSR, which returns 403 to scripts) is recorded in the
-checked file with its reason and not crawled.
+only when the prefix is unknown. Everything else (statistics offices, openICPSR, which returns 403 to scripts) is recorded in the
+checked file with its reason and not crawled; a statistics office's codebook is found by review
+instead and recorded in codebook_by_review.csv (#2787 step 3).
 
 Outputs:
   metadata/codebook_links.csv          table, url, file_name, host, how_found,
@@ -106,6 +136,8 @@ README_CACHE = HERE / "logs" / "codebook_readme_text.json"
 NAMES_CACHE = HERE / "logs" / "codebook_table_names.json"
 COLUMN_DOCS = HERE / "column_docs.csv"
 INGEST_CODEBOOKS = HERE.parent / "automated_finding" / "codebook_at_ingest.csv"
+REVIEW_CODEBOOKS = HERE / "codebook_by_review.csv"
+REVIEW_FIELDS = ["table", "url", "file_name", "doc_type", "series", "wave", "evidence", "reviewed_at"]
 LINK_FIELDS = ["table", "url", "file_name", "host", "how_found",
                "n_same_kind_in_deposit", "deposit_url", "evidence", "checked_at"]
 CHECKED_FIELDS = ["table", "data_url", "host", "deposit", "outcome", "checked_at"]
@@ -137,7 +169,7 @@ CODE_EXT = re.compile(r"\.(r|py|do|sps|sas|jl|m|ipynb|rdata|rds)$", re.I)
 
 HOST_PACE = {"osf": 2.5, "dataverse": 0.5, "figshare": 0.5, "figshare_collection": 0.5, "zenodo": 0.7,
              "mendeley": 0.7, "doi": 0.5, "github": 1.0, "gitlab": 1.0, "ldbase": 1.5, "cran": 0.5,
-             "opsych": 1.0}
+             "opsych": 1.0, "plos": 1.0, "epmc": 1.5}
 _last_call: Dict[str, float] = {}
 
 
@@ -208,7 +240,11 @@ def route(url: str) -> Tuple[str, str]:
     if net == "openicpsr.org":
         return "skip", "openicpsr_blocks_scripts"
     if net == "journals.plos.org":
-        return "skip", "plos_supplementary"
+        m = re.search(r"(10\.1371/journal\.[a-z]{4}\.\d{7})", urllib.parse.unquote(p.query + path), re.I)
+        return ("plos", m.group(1).lower()) if m else ("skip", "plos_unparsed")
+    if net == "europepmc.org":
+        m = re.search(r"/(PMC\d+)", path, re.I)
+        return ("epmc", m.group(1).upper()) if m else ("skip", "epmc_not_pmc")
     return "skip", f"host:{net}"
 
 
@@ -221,7 +257,8 @@ def dataset_pid(pid: str) -> str:
 def route_doi(doi: str) -> Tuple[str, str]:
     d = doi.lower()
     if d.startswith("10.1371/"):
-        return "skip", "plos_supplementary"
+        m = re.match(r"(10\.1371/journal\.[a-z]{4}\.\d{7})", d)
+        return ("plos", m.group(1)) if m else ("skip", "plos_unparsed")
     if d.startswith("10.7910/"):
         return "dataverse", f"dataverse.harvard.edu|{dataset_pid('doi:' + doi)}"
     if d.startswith("10.34894/"):
@@ -518,9 +555,380 @@ def list_opsych(zipname: str) -> dict:
             "files": [{"name": n.rsplit("/", 1)[-1], "inner": n, "url": url} for n in names]}
 
 
+##--- journal supplementary files (PLOS, Europe PMC; #2792) -----------------
+##PLOS authors almost never upload a file called a codebook (0 of 40 sampled
+##articles, 10-02); the files are S1_File.xlsx. So an article's supplementary
+##files are judged by what is IN them or what the authors' caption says:
+##  name_codebook      the caption says codebook / data dictionary / ..., or a
+##                     workbook has a SHEET with such a name
+##  doc_names_columns  a text document (never .csv/.xlsx: those may be the
+##                     data, whose header names every column) names >=
+##                     README_MIN_NAMES of the table's own names
+##  questionnaire      the caption says questionnaire / instrument; shown only
+##                     when none of the above was found for the table
+
+PLOS_JOURNALS = {"pone": "plosone", "pmed": "plosmedicine", "pbio": "plosbiology",
+                 "pcbi": "ploscompbiol", "pgen": "plosgenetics", "ppat": "plospathogens",
+                 "pntd": "plosntds", "pgph": "globalpublichealth", "pdig": "digitalhealth",
+                 "pclm": "climate", "pmen": "mentalhealth", "pwat": "water",
+                 "pstr": "sustainabilitytransformation", "pcsy": "complexsystems"}
+CAPTION_CODEBOOK = re.compile(
+    r"code[\s_-]?book|data[\s_-]?dictionar|variable[\s_-]?(list|label|description|definition|key|guide)s?|"
+    r"(description|definition|list)s? of (the |all )?variables|data[\s_-]?key|"
+    r"legend (of|for) (the )?(variables|data|codes|columns)|libro de c[oó]digos|diccionario de (datos|variables)",
+    re.I)
+CAPTION_SKIP = re.compile(r"^attachment$|checklist|reviewer|response to|strobe|prisma|consort|"
+                          r"tripod|stard|arrive|minimal (underlying )?data set? (statement|policy)", re.I)
+CAPTION_QUESTIONNAIRE = re.compile(r"questionnaires?|\binstruments?\b|survey (items|form|tool|instrument)|"
+                                   r"\bscale items|item (wording|list)|survey questions|cuestionario|question[aá]rio", re.I)
+CAPTION_IS_DATA = re.compile(r"\bdata(set|base)?\b|\bresponses\b|\braw\b", re.I)
+##Results tables name the items too (loadings per item, correlations): naming
+##the columns is not documenting them. Pilot 10-02: "correlations between
+##PHQ-9 items and with other questionnaires", "Data processing output".
+CAPTION_RESULTS = re.compile(r"correlat|coefficient|loading|descriptive|statistic|regression|\bresults?\b|"
+                             r"output|\bfit\b|invariance|distribution|\bmeans?\b|anova|reliabilit|"
+                             r"\balpha\b|frequenc|percentage|\bscores\b|analys[ie]s|matrix|\bfactors?\b", re.I)
+##A qualitative coding scheme for interviews is called a codebook too, and
+##documents no column (pilot: "Interview codebook").
+CAPTION_EXPLICIT = re.compile(r"code[\s_-]?book|dictionar|variable[\s_-]?(description|definition)s?", re.I)
+CAPTION_QUALITATIVE = re.compile(r"interview|qualitative|thematic|open[- ]ended|focus group|translation", re.I)
+SHEET_CODEBOOK = re.compile(r"^\s*(variables?|legend|descriptions?|data description|variable description|"
+                            r"key|codes|coding)\s*$", re.I)
+WORKBOOK_EXT = {"xlsx", "xlsm", "xls"}
+TEXT_DOC_EXT = {"docx", "doc", "pdf", "txt", "rtf", "odt"}
+SUPP_CAP = 60_000_000           ##bytes; a larger file is listed but not opened
+_TEXTS: Optional[Dict[str, str]] = None
+##Repository deposits whose files are opened past their names (#2787 follow-up).
+##A .txt / .dat there is usually the data, whose header names every column, so
+##only document formats are read for their text.
+REPO_HOSTS = {"osf", "zenodo", "figshare", "figshare_collection", "mendeley", "dataverse", "github", "gitlab"}
+REPO_TEXT_EXT = {"docx", "doc", "pdf", "rtf", "odt", "md"}
+SOURCE_ZIP_MAX = 5              ##codebook-named members linked from one zip
+##a zip of code bundles libraries: mpdf ships a hyphenation 'dictionary.txt'
+ZIP_VENDORED = re.compile(r"(^|/)(vendor|node_modules|site-packages|lib|libs|renv|packrat|\.git|__MACOSX)/", re.I)
+ZIP_LIST_CAP = 40_000_000       ##bytes fetched whole when a server ignores Range
+##Analysis output names every item too: an R/EGA printout, a loadings table, the
+##paper itself. A pilot of 40 no-match deposits (10-04) found 19 content hits;
+##the 13 that were output (EGAnet printouts, PCA/EFA tables, papers) each carried
+##two or more of these markers, and the 6 instruments and codebooks none. The
+##full sweep's precision sample (10-04) added descriptives and correlation
+##tables and Mplus input/output.
+STATS_OUTPUT = re.compile(r"library\(|\bloadings?\b|eigenvalue|\b(?:EFA|CFA|PCA|ESEM|SEM)s?\b|RMSEA|\bCFI\b|\bTLI\b|"
+                          r"\bp\s*[<=]\s*0?\.\d|chi-?square|χ2|\bAIC\b|\bBIC\b|cronbach|omega|"
+                          r"standardi[sz]ed (?:estimate|coefficient)|regression|ANOVA|\bwTO\b|"
+                          r"standard deviations?|\bM\s+SD\b|correlations?\b|confidence intervals?|skewness|kurtosis|"
+                          r"\bMplus\b|\bMODEL:|\bMODINDICES\b|\bSTANDARDIZED\b|\bESTIMATOR\b", re.I)
+STATS_OUTPUT_MIN = 2
+
+
+def looks_like_output(text: str) -> bool:
+    """A document whose text carries STATS_OUTPUT_MIN distinct analysis markers."""
+    return len({m.group(0).lower() for m in STATS_OUTPUT.finditer(text[:400_000])}) >= STATS_OUTPUT_MIN
+
+
+class _RangeFile(io.RawIOBase):
+    """A remote file read by HTTP Range requests, so zipfile can read a zip's
+    central directory without downloading the archive."""
+
+    def __init__(self, url: str, size: int):
+        self.url, self.size, self.pos = url, size, 0
+
+    def readable(self): return True
+    def seekable(self): return True
+    def tell(self): return self.pos
+
+    def seek(self, off, whence=0):
+        self.pos = {0: off, 1: self.pos + off, 2: self.size + off}[whence]
+        return self.pos
+
+    def read(self, n=-1):
+        if n is None or n < 0:
+            n = self.size - self.pos
+        if n <= 0 or self.pos >= self.size:
+            return b""
+        end = min(self.pos + n, self.size) - 1
+        req = urllib.request.Request(self.url, headers={"User-Agent": UA, "Range": f"bytes={self.pos}-{end}"})
+        with urllib.request.urlopen(req, timeout=120) as r:
+            if r.status != 206:
+                raise OSError("Range ignored")
+            b = r.read()
+        self.pos += len(b)
+        return b
+
+    def readinto(self, b):
+        d = self.read(len(b))
+        b[:len(d)] = d
+        return len(d)
+
+
+def zip_names(url: str, host: str) -> Optional[List[str]]:
+    """The member names of a remote zip: by Range when the server allows it,
+    else the whole file up to ZIP_LIST_CAP. None when it cannot be read."""
+    import zipfile
+    wait = HOST_PACE.get(host, 1.0) - (time.time() - _last_call.get(host, 0))
+    if wait > 0:
+        time.sleep(wait)
+    _last_call[host] = time.time()
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": UA, "Range": "bytes=0-0"})
+        with urllib.request.urlopen(req, timeout=60) as r:
+            rng = r.headers.get("Content-Range", "")
+            final = r.geturl()
+        size = int(rng.rsplit("/", 1)[-1]) if r.status == 206 and "/" in rng else 0
+        if size:
+            return zipfile.ZipFile(_RangeFile(final, size)).namelist()
+    except Exception:
+        pass
+    status, raw = get_capped(url, host, cap=ZIP_LIST_CAP)
+    try:
+        return zipfile.ZipFile(io.BytesIO(raw)).namelist() if raw else None
+    except Exception:
+        return None
+
+
+def open_deposit_file(f: dict, h: str) -> bool:
+    """Fill a repository file's `sheets` (workbook) or `zip` (member names) in
+    place, so an --offline re-match can use them. True when it fetched."""
+    ext = f["name"].lower().rsplit(".", 1)[-1] if "." in f["name"] else ""
+    if ext not in WORKBOOK_EXT and ext != "zip":
+        return False
+    if "sheets" in f or "zip" in f:
+        return False
+    url = download_url({"url": f["url"], "host": h, "raw": f.get("raw", "")})
+    if not url:
+        f["opened"] = "no_download_url"
+        return False
+    if ext == "zip":
+        f["zip"] = zip_names(url, h)
+    else:
+        status, raw = get_capped(url, h)
+        f["sheets"] = sheet_names(raw, ext) if raw else None
+    return True
+
+
+def texts() -> Dict[str, str]:
+    """README / document texts by link url (README_CACHE), loaded once."""
+    global _TEXTS
+    if _TEXTS is None:
+        _TEXTS = json.loads(README_CACHE.read_text()) if README_CACHE.exists() else {}
+    return _TEXTS
+
+
+def sheet_names(raw: bytes, ext: str) -> Optional[List[str]]:
+    try:
+        if ext == "xls" and raw[:2] != b"PK":
+            import xlrd
+            return xlrd.open_workbook(file_contents=raw, on_demand=True).sheet_names()
+        import openpyxl
+        return openpyxl.load_workbook(io.BytesIO(raw), read_only=True).sheetnames
+    except Exception:
+        return None
+
+
+def caption_kind(label: str, caption: str) -> Optional[str]:
+    """What the authors' own label + caption says the file is."""
+    lc = f"{label} {caption}"
+    if CAPTION_CODEBOOK.search(lc) and not CAPTION_QUALITATIVE.search(lc):
+        ##"Dataset ... with English variable labels" is the data file
+        if not (CAPTION_IS_DATA.search(lc) and not CAPTION_EXPLICIT.search(lc)):
+            return "name_codebook"
+    if CAPTION_IS_DATA.search(lc) or CAPTION_RESULTS.search(lc):
+        return "data_or_results"
+    ##"Dutch guidelines for questionnaire research", "List of controls and
+    ##instruments used" (full run, 10-02)
+    if CAPTION_QUESTIONNAIRE.search(lc) and not re.search(r"guideline|\bcontrols\b", lc, re.I):
+        return "questionnaire"
+    return None
+
+
+def open_supp(f: dict, raw: Optional[bytes]) -> None:
+    """Fill a supplementary file's sheets (workbooks) or text (documents), in place."""
+    ext = f["name"].lower().rsplit(".", 1)[-1] if "." in f["name"] else ""
+    if raw is None:
+        f["opened"] = "too_large_or_failed"
+        return
+    f["opened"] = "ok"
+    if ext in WORKBOOK_EXT:
+        f["sheets"] = sheet_names(raw, ext)
+    elif ext in TEXT_DOC_EXT:
+        texts()[f["url"]] = extract_text(raw, f["name"])[:400_000]
+
+
+def wants_bytes(f: dict) -> bool:
+    ext = f["name"].lower().rsplit(".", 1)[-1] if "." in f["name"] else ""
+    return ext in WORKBOOK_EXT or ext in TEXT_DOC_EXT
+
+
+def get_capped(url: str, host: str, cap: int = SUPP_CAP, timeout: int = 180) -> Tuple[int, Optional[bytes]]:
+    """get_raw with a size cap: (status, bytes), bytes None if over the cap."""
+    for attempt in range(3):
+        wait = HOST_PACE.get(host, 1.0) - (time.time() - _last_call.get(host, 0))
+        if wait > 0:
+            time.sleep(wait)
+        _last_call[host] = time.time()
+        try:
+            with urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": UA}), timeout=timeout) as r:
+                b = r.read(cap + 1)
+                return r.status, (b if len(b) <= cap else None)
+        except urllib.error.HTTPError as e:
+            if e.code in (429, 500, 502, 503, 504) and attempt < 2:
+                time.sleep(30 * (attempt + 1))
+                continue
+            return e.code, None
+        except (urllib.error.URLError, TimeoutError, OSError):
+            if attempt < 2:
+                time.sleep(15)
+                continue
+            return -1, None
+    return -1, None
+
+
+def _jats_text(x: str) -> str:
+    return html_unescape(re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", x))).strip()
+
+
+def jats_supplements(xml: str) -> List[dict]:
+    """label, caption, href, mimetype of each <supplementary-material>, deduplicated by href."""
+    out, seen = [], set()
+    for m in re.finditer(r"<supplementary-material\b(.*?)</supplementary-material>", xml, re.S):
+        body = m.group(1)
+        href = re.search(r'xlink:href="([^"]+)"', body)
+        if not href or href.group(1) in seen:
+            continue
+        seen.add(href.group(1))
+        lab = re.search(r"<label>(.*?)</label>", body, re.S)
+        cap = re.search(r"<caption>(.*?)</caption>", body, re.S)
+        mime = re.search(r'mimetype="([^"]*)"(?:\s+mime-subtype="([^"]*)")?', body)
+        out.append({"href": href.group(1), "label": _jats_text(lab.group(1)) if lab else "",
+                    "caption": _jats_text(cap.group(1)) if cap else "",
+                    "mime": "/".join(x for x in (mime.groups() if mime else ()) if x)})
+    return out
+
+
+def _ext_of(sup: dict) -> str:
+    m = re.search(r"\(([A-Z0-9]{2,5})\)\s*$", sup["caption"])
+    if m:
+        return m.group(1).lower()
+    mt = sup["mime"].lower()
+    for k, v in (("spreadsheetml", "xlsx"), ("ms-excel", "xls"), ("wordprocessingml", "docx"),
+                 ("msword", "doc"), ("pdf", "pdf"), ("text/plain", "txt"), ("rtf", "rtf"),
+                 ("zip", "zip"), ("csv", "csv")):
+        if k in mt:
+            return v
+    return ""
+
+
+def list_plos(doi: str) -> dict:
+    """A PLOS article's supplementary files, from its JATS XML; workbooks and
+    text documents are downloaded (size-capped) and opened."""
+    code = doi.split(".")[-2]
+    journal = PLOS_JOURNALS.get(code)
+    if not journal:
+        return {"status": f"error:unknown_journal_{code}"}
+    base = f"https://journals.plos.org/{journal}/article"
+    s, b = get_raw(f"{base}/file?id={doi}&type=manuscript", "plos", accept="application/xml")
+    if s != 200 or not b:
+        return {"status": f"error:{s}"}
+    out = []
+    for sup in jats_supplements(b.decode("utf-8", "replace")):
+        sid = sup["href"].rsplit(".", 1)[-1]             ##s001
+        if CAPTION_SKIP.search(sup["label"]) or CAPTION_SKIP.search(sup["caption"]):
+            continue
+        ext = _ext_of(sup)
+        f = {"name": sup["label"].replace(" ", "_") + (f".{ext}" if ext else ""), "supp_id": sid,
+             "url": f"{base}/file?type=supplementary&id={doi}.{sid}",
+             "label": sup["label"], "caption": sup["caption"]}
+        if wants_bytes(f):
+            s2, raw = get_capped(f["url"], "plos")
+            open_supp(f, raw if s2 == 200 else None)
+        out.append(f)
+    return {"status": "ok", "landing": f"{base}?id={doi}", "files": out}
+
+
+def list_epmc(pmcid: str) -> dict:
+    """A PMC article's supplementary files: the captions from Europe PMC's
+    full-text XML, the bytes from its one-zip-per-article endpoint. The public
+    link is the file on pmc.ncbi.nlm.nih.gov."""
+    rest = f"https://www.ebi.ac.uk/europepmc/webservices/rest/{pmcid}"
+    s, b = get_raw(f"{rest}/fullTextXML", "epmc", tries=5, accept="application/xml")
+    if s != 200 or not b:
+        return {"status": f"error:{s}"}
+    sups = [x for x in jats_supplements(b.decode("utf-8", "replace"))
+            if not (CAPTION_SKIP.search(x["label"]) or CAPTION_SKIP.search(x["caption"]))]
+    out = []
+    for sup in sups:
+        name = sup["href"].rsplit("/", 1)[-1]
+        out.append({"name": name, "label": sup["label"], "caption": sup["caption"],
+                    "url": f"https://pmc.ncbi.nlm.nih.gov/articles/instance/{pmcid[3:]}/bin/{urllib.parse.quote(name)}"})
+    if any(wants_bytes(f) for f in out):
+        import zipfile
+        s2, raw = get_capped(f"{rest}/supplementaryFiles", "epmc", cap=4 * SUPP_CAP,
+                              timeout=600)   ##it builds the zip first: 230 s seen 10-02
+        zf = None
+        if s2 == 200 and raw:
+            try:
+                zf = zipfile.ZipFile(io.BytesIO(raw))
+            except zipfile.BadZipFile:
+                zf = None
+        inner = {n.rsplit("/", 1)[-1]: n for n in (zf.namelist() if zf else [])}
+        for f in out:
+            if wants_bytes(f):
+                n = inner.get(f["name"])
+                open_supp(f, zf.read(n) if n and zf.getinfo(n).file_size <= SUPP_CAP else None)
+    return {"status": "ok", "landing": f"https://europepmc.org/article/PMC/{pmcid}", "files": out}
+
+
+def caption_owners(caption: str, siblings: set) -> set:
+    """The article's tables a caption names by acronym ("CBI-K" -> jeon_2019_cbi).
+
+    Empty when it names none of them: then the file is the article's and goes
+    to every table. When it names some, it belongs to those only (pilot 10-02:
+    the CBI-K questionnaire was attached to the article's CES-D table).
+    """
+    toks = set()
+    for a in re.findall(r"\b[A-Z][A-Za-z0-9]*[A-Z][A-Za-z0-9-]*\b", caption):
+        toks |= {x.lower() for x in [a.replace("-", "")] + a.split("-") if len(x) >= 3}
+    return {s for s in siblings if any(tok in part for part in s.lower().split("_") if len(part) >= 3
+                                       for tok in toks)}
+
+
+def supp_hits(t: str, h: str, res: dict, own_ids: set, checked_at: str,
+              siblings: Optional[set] = None) -> List[dict]:
+    """Candidate rows for one table from one article's supplementary files.
+
+    Text documents become `doc_candidate` rows, judged against the table's
+    names by check_readmes (kept as doc_names_columns or dropped). The table's
+    own data file is never a candidate for the content check.
+    """
+    hits = []
+    for f in res.get("files") or []:
+        row = {"table": t, "url": f["url"], "host": h, "checked_at": checked_at,
+               "file_name": f["name"]}
+        kind = caption_kind(f.get("label", ""), f.get("caption", ""))
+        owners = caption_owners(f.get("caption", ""), siblings or set())
+        if owners and t not in owners:
+            continue
+        if kind == "name_codebook":
+            hits.append({**row, "how_found": "name_codebook", "evidence": f"caption: {f['caption'][:200]}"})
+            continue
+        sheets = [x for x in (f.get("sheets") or []) if CODEBOOK.search(x) or SHEET_CODEBOOK.match(x)]
+        for sh in sheets:
+            hits.append({**row, "url": f["url"], "file_name": f"{sh} (sheet in {f['name']})",
+                         "how_found": "name_codebook", "evidence": "sheet name"})
+        if sheets:
+            continue
+        ext = f["name"].lower().rsplit(".", 1)[-1] if "." in f["name"] else ""
+        if (ext in TEXT_DOC_EXT and kind != "data_or_results" and f.get("supp_id", f["url"]) not in own_ids
+                and f["url"] in texts()):
+            hits.append({**row, "how_found": "doc_candidate", "evidence": ""})
+        if kind == "questionnaire":
+            hits.append({**row, "how_found": "questionnaire", "evidence": f"caption: {f['caption'][:200]}"})
+    return hits
+
+
 LISTERS = {"zenodo": list_zenodo, "figshare": list_figshare, "figshare_collection": list_figshare_collection, "mendeley": list_mendeley,
            "github": list_github, "gitlab": list_gitlab, "ldbase": list_ldbase, "cran": list_cran,
-           "opsych": list_opsych,
+           "opsych": list_opsych, "plos": list_plos, "epmc": list_epmc,
            "dataverse": list_dataverse, "osf": list_osf}
 
 
@@ -667,8 +1075,15 @@ def script_literals(paths: List[str]) -> set:
 
 
 def names_in_text(names: List[str], text: str) -> List[str]:
-    low = text.lower()
-    return [n for n in names if re.search(r"(?<![a-z0-9_])" + re.escape(n.lower()) + r"(?![a-z0-9_])", low)]
+    """The names the text contains, whole-word, case-blind, each counted once
+    (`Education` and `education` from two sources are one name)."""
+    low, seen, out = text.lower(), set(), []
+    for n in names:
+        k = n.lower()
+        if k not in seen and re.search(r"(?<![a-z0-9_])" + re.escape(k) + r"(?![a-z0-9_])", low):
+            seen.add(k)
+            out.append(n)
+    return out
 
 
 def read_csv(path: Path) -> List[dict]:
@@ -687,7 +1102,7 @@ def write_csv(path: Path, rows: List[dict], fields: List[str]) -> None:
 
 def check_readmes(links: List[dict], offline: bool) -> None:
     """Promote README rows whose text names the table's columns (in place)."""
-    texts = json.loads(README_CACHE.read_text()) if README_CACHE.exists() else {}
+    texts_ = texts()
     names_cache = json.loads(NAMES_CACHE.read_text()) if NAMES_CACHE.exists() else {}
     scripts_of = {r["table"].lower(): [x for x in re.split(r"[;|]\s*", r.get("scripts") or "") if x]
                   for r in read_csv(TABLE_SCRIPTS)}
@@ -699,9 +1114,9 @@ def check_readmes(links: List[dict], offline: bool) -> None:
         for r in read_csv(HERE / b.replace("biblio", "metadata")):
             if r.get("dataset"):
                 dataset_of[r["table"].lower()] = r["dataset"]
-    readmes = [x for x in links if x["how_found"] == "name_readme"]
+    readmes = [x for x in links if x["how_found"] in ("name_readme", "doc_candidate")]
     for i, x in enumerate(readmes):
-        text = readme_text(x, texts, offline)
+        text = readme_text(x, texts_, offline)
         names = table_names(x["table"], dataset_of.get(x["table"].lower()), names_cache, docs, offline,
                             scripts_of.get(x["table"].lower()))
         if text is None or names is None:
@@ -711,14 +1126,44 @@ def check_readmes(links: List[dict], offline: bool) -> None:
         else:
             hit = names_in_text(names, text)
             x["evidence"] = f"names {len(hit)}/{len(names)}" + (": " + ", ".join(hit[:8]) if hit else "")
-            if len(hit) >= README_MIN_NAMES:
-                x["how_found"] = "readme_names_columns"
+            ##a journal document must name something besides covariates: a
+            ##questionnaire matching only demographics (Education, Tenure)
+            ##shows nothing about this table's items (pilot 10-02)
+            covs = {n.lower() for r in docs.get(x["table"].lower(), []) if r["column"].startswith("cov_")
+                    for n in (r["column"][4:], r.get("source_column") or "")}
+            items_hit = [n for n in hit if n.lower() not in covs] \
+                if x["how_found"] == "doc_candidate" else ["n/a"]
+            ##plain words (economic, health, afraid) turn up in any text on the
+            ##topic: with fewer than README_MIN_NAMES specific names (a code,
+            ##a phrase), a document must name at least half the table's names
+            if x["how_found"] == "doc_candidate":
+                specific = [n for n in hit if re.search(r"[0-9_ ]|[a-z][A-Z]", n)]
+                if len(specific) < README_MIN_NAMES and len(hit) < max(README_MIN_NAMES, len(names) / 2):
+                    items_hit = []
+                ##a repository's analysis output names every item too (#2787)
+                if x["host"] in REPO_HOSTS and looks_like_output(text):
+                    items_hit = []
+                    x["evidence"] += " (analysis output)"
+            if len(hit) >= README_MIN_NAMES and items_hit:
+                x["how_found"] = ("doc_names_columns" if x["how_found"] == "doc_candidate"
+                                  else "readme_names_columns")
         if not offline and i % 25 == 24:
-            README_CACHE.write_text(json.dumps(texts, ensure_ascii=False))
+            README_CACHE.write_text(json.dumps(texts_, ensure_ascii=False))
             NAMES_CACHE.write_text(json.dumps(names_cache, ensure_ascii=False))
     if not offline:
-        README_CACHE.write_text(json.dumps(texts, ensure_ascii=False))
+        README_CACHE.write_text(json.dumps(texts_, ensure_ascii=False))
         NAMES_CACHE.write_text(json.dumps(names_cache, ensure_ascii=False))
+    ##a journal document that does not name the table's columns is not linked;
+    ##a questionnaire is shown only when nothing documents the columns (#2792)
+    links[:] = [x for x in links if x["how_found"] != "doc_candidate"]
+    documented = {x["table"] for x in links if x["host"] in ("plos", "epmc")
+                  and x["how_found"] in ("name_codebook", "doc_names_columns")}
+    links[:] = [x for x in links if not (x["how_found"] == "questionnaire" and x["table"] in documented)]
+    for kind in ("doc_names_columns", "questionnaire"):
+        for t in {x["table"] for x in links if x["how_found"] == kind}:
+            same = [x for x in links if x["table"] == t and x["how_found"] == kind]
+            for x in same:
+                x["n_same_kind_in_deposit"] = len(same)
     ##n_same_kind counts the README kinds again now that some were promoted
     by_dep: Dict[Tuple[str, str], int] = {}
     for x in links:
@@ -811,14 +1256,50 @@ def ingest_links(live: set) -> List[dict]:
     return out
 
 
+def review_links(live: set) -> List[dict]:
+    """Rows from codebook_by_review.csv, for live tables (#2787 step 3).
+
+    Found by a person or an agent who opened the document, never by a crawler
+    guessing: doc_type codebook -> recorded_by_review, questionnaire ->
+    questionnaire. A row without a url or with another doc_type is an error in
+    the side file, so it stops the run rather than vanishing.
+    """
+    out = []
+    for r in read_csv(REVIEW_CODEBOOKS):
+        table, url, kind = (r.get(k, "").strip() for k in ("table", "url", "doc_type"))
+        if not url.lower().startswith("http") or kind not in ("codebook", "questionnaire"):
+            sys.exit(f"{REVIEW_CODEBOOKS.name}: bad row for {table!r} (url {url!r}, doc_type {kind!r})")
+        if table not in live:
+            continue
+        p = urllib.parse.urlparse(url)
+        out.append({"table": table, "url": url,
+                    "file_name": r.get("file_name", "").strip()
+                    or urllib.parse.unquote(p.path.rstrip("/").rsplit("/", 1)[-1]) or url,
+                    "host": p.netloc.lower().removeprefix("www."),
+                    "how_found": "recorded_by_review" if kind == "codebook" else "questionnaire",
+                    "deposit_url": "", "evidence": r.get("evidence", "").strip(),
+                    "checked_at": r.get("reviewed_at", "").strip()})
+    for x in out:
+        x["n_same_kind_in_deposit"] = sum(1 for y in out if (y["table"], y["how_found"]) == (x["table"], x["how_found"]))
+    return out
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--hosts", default="", help="comma list to crawl (default: all crawlable)")
     ap.add_argument("--limit", type=int, default=0, help="crawl at most N new deposits")
     ap.add_argument("--offline", action="store_true", help="no network; re-match cached listings")
+    ap.add_argument("--rematch", default="",
+                    help="with --new-only: comma list of hosts whose tables are matched again "
+                         "(from the listing cache, so rule changes apply)")
+    ap.add_argument("--sample", type=int, default=0,
+                    help="seed: crawl deposits in a seeded random order (pilots, with --limit)")
     ap.add_argument("--recheck", action="store_true", help="re-list deposits already in the cache")
     ap.add_argument("--new-only", action="store_true",
                     help="keep committed rows; sweep only tables not yet in the checked file")
+    ap.add_argument("--deep", action="store_true",
+                    help="repository deposits: also open workbooks (sheet names), zips (member "
+                         "names) and text documents (content check), past the file names")
     ap.add_argument("--no-readme-check", action="store_true",
                     help="skip reading README texts (README hits stay name_readme)")
     args = ap.parse_args()
@@ -844,10 +1325,16 @@ def main() -> int:
         ##swept again; everything else already checked stands
         newly = {r["table"] for r in prev_checked
                  if r["outcome"].startswith("out_of_scope") and route(r["data_url"])[0] != "skip"}
+        rematch = set(filter(None, args.rematch.split(",")))
+        newly |= {r["table"] for r in prev_checked if r["host"] in rematch}
         done = {r["table"] for r in prev_checked if r["outcome"] != "not_yet_checked"} - newly
         kept_checked = [r for r in prev_checked if r["table"] in done]
+        ##ingest and review rows are re-read from their side files below, so
+        ##an edited or deleted side-file row does not linger
+        reviewed = {(r["table"], r["url"]) for r in read_csv(REVIEW_CODEBOOKS)}
         kept_links = [r for r in read_csv(LINKS_OUT)
-                      if r["table"] in done and r["how_found"] != "recorded_at_ingest"]
+                      if r["table"] in done and r["how_found"] not in ("recorded_at_ingest", "recorded_by_review")
+                      and (r["table"], r["url"]) not in reviewed]
         tables = [(t, u) for t, u in tables if t not in done]
         print(f"--new-only: {len(done)} tables already checked, {len(tables)} to sweep",
               file=sys.stderr)
@@ -871,6 +1358,9 @@ def main() -> int:
             routed[t].append((u, h, k))
 
     todo = sorted({(h, k) for rs in routed.values() for _, h, k in rs if h in LISTERS and (not hosts or h in hosts)})
+    if args.sample:
+        import random
+        random.Random(args.sample).shuffle(todo)
     ##An offline FULL run rebuilds both CSVs from the local listing cache alone.
     ##A cache that is missing deposits (a fresh worktree, a deleted cache) would
     ##silently drop every table it lacks -- it did, on 10-02, down to 299 of
@@ -896,11 +1386,18 @@ def main() -> int:
         if n % 20 == 0:
             CACHE.parent.mkdir(exist_ok=True)
             CACHE.write_text(json.dumps(cache, indent=0, ensure_ascii=False))
+            README_CACHE.write_text(json.dumps(texts(), ensure_ascii=False))
     if not args.offline:   ##an offline re-match must not race a crawl writing the cache
         CACHE.parent.mkdir(exist_ok=True)
         CACHE.write_text(json.dumps(cache, indent=0, ensure_ascii=False))
+        README_CACHE.write_text(json.dumps(texts(), ensure_ascii=False))
 
+    siblings: Dict[Tuple[str, str], set] = {}
+    for t, rs in routed.items():
+        for _, h, k in rs:
+            siblings.setdefault((h, k), set()).add(t)
     links, checked = [], []
+    n_opened = 0
     for t, _ in tables:
         for u, h, k in routed[t]:
             row = {"table": t, "data_url": u, "host": h, "deposit": k if h != "skip" else "", "checked_at": ""}
@@ -916,6 +1413,20 @@ def main() -> int:
             if res["status"] != "ok":
                 row["outcome"] = res["status"]
                 continue
+            if h in ("plos", "epmc"):
+                own = {sid for uu, hh, _ in routed[t] if hh == "plos" for sid in re.findall(r"\.(s\d{3})\b", uu)}
+                hits = supp_hits(t, h, res, own, row["checked_at"], siblings.get((h, k), set()))
+                for kind in ("name_codebook",):
+                    same = [x for x in hits if x["how_found"] == kind]
+                    for x in same:
+                        x["n_same_kind_in_deposit"] = len(same)
+                for x in hits:
+                    x.setdefault("n_same_kind_in_deposit", "")
+                    x["deposit_url"] = res.get("landing", "")
+                links += hits
+                kinds = sorted({x["how_found"] for x in hits})
+                row["outcome"] = "hit:" + "+".join(kinds) if kinds else "no_match"
+                continue
             hits = []
             wanted = cran_datasets(t, k, scripts_of) if h == "cran" else set()
             for f in res.get("files") or []:
@@ -926,6 +1437,29 @@ def main() -> int:
                                      "host": h, "how_found": "package_doc", "checked_at": row["checked_at"]})
                     continue
                 how = "typed_codebook" if f.get("typed") else match(f["name"])
+                if not how and h in REPO_HOSTS and args.deep:
+                    ##past the name (#2787 follow-up): sheets, zip members, text
+                    if not args.offline and open_deposit_file(f, h):
+                        n_opened += 1
+                    shown_name = f.get("path") or f["name"]
+                    for sh in [x for x in (f.get("sheets") or []) if CODEBOOK.search(x) or SHEET_CODEBOOK.match(x)]:
+                        ##a one-sheet workbook called 'Variables' is the data itself
+                        if len(f.get("sheets") or []) > 1:
+                            hits.append({"table": t, "url": f["url"], "file_name": f"{sh} (sheet in {shown_name})",
+                                         "raw": f.get("raw", ""), "host": h, "how_found": "name_codebook",
+                                         "checked_at": row["checked_at"], "evidence": "sheet name"})
+                    inner = [x for x in (f.get("zip") or [])
+                             if match(x.rsplit("/", 1)[-1]) == "name_codebook" and not x.endswith("/")
+                             and not ZIP_VENDORED.search(x)]
+                    for x in inner[:SOURCE_ZIP_MAX]:
+                        hits.append({"table": t, "url": f["url"], "file_name": f"{x.rsplit('/', 1)[-1]} (inside {f['name']})",
+                                     "raw": f.get("raw", ""), "host": h, "how_found": "name_codebook",
+                                     "checked_at": row["checked_at"], "evidence": f"in zip: {x}"})
+                    ext = f["name"].lower().rsplit(".", 1)[-1] if "." in f["name"] else ""
+                    if ext in REPO_TEXT_EXT:
+                        hits.append({"table": t, "url": f["url"], "file_name": shown_name, "raw": f.get("raw", ""),
+                                     "host": h, "how_found": "doc_candidate", "checked_at": row["checked_at"],
+                                     "evidence": ""})
                 if how:
                     name = (f"{f['name']} (inside {k})" if h == "opsych" else f.get("path") or f["name"])
                     hits.append({"table": t, "url": f["url"], "file_name": name, "raw": f.get("raw", ""),
@@ -950,24 +1484,48 @@ def main() -> int:
             kinds = sorted({x["how_found"] for x in hits})
             row["outcome"] = "hit:" + "+".join(kinds) if kinds else "no_match"
 
+    if n_opened and not args.offline:   ##sheets and zip members found while matching
+        CACHE.write_text(json.dumps(cache, indent=0, ensure_ascii=False))
     if not args.no_readme_check:
         check_readmes(links, args.offline)
+    else:
+        links = [x for x in links if x["how_found"] != "doc_candidate"]
 
     for x in links:
         x.setdefault("evidence", "")
-    links = ingest_links(live_tables) + kept_links + links
+    review = review_links(live_tables)
+    links = ingest_links(live_tables) + review + kept_links + links
     ##one row per (table, url): a deposit reached by two routes (a multi-URL
     ##cell, a child component) lists the same file twice. Keep the strongest.
-    rank = {"recorded_at_ingest": 0, "typed_codebook": 1, "package_doc": 1, "name_codebook": 1,
-            "readme_names_columns": 2,
-            "name_readme": 3, "dataverse_ddi": 4}
+    rank = {"recorded_at_ingest": 0, "recorded_by_review": 0, "typed_codebook": 1, "package_doc": 1, "name_codebook": 1,
+            "readme_names_columns": 2, "doc_names_columns": 2,
+            "name_readme": 3, "questionnaire": 3, "doc_candidate": 8, "dataverse_ddi": 4}
     best: Dict[Tuple[str, str], dict] = {}
     for x in links:
         k = (x["table"], x["url"])
         if k not in best or rank.get(x["how_found"], 9) < rank.get(best[k]["how_found"], 9):
             best[k] = x
     links = list(best.values())
+    ##journal outcomes from the FINAL links: a doc_candidate judged against
+    ##the table's names is kept or dropped only after the content check
+    final_kinds: Dict[Tuple[str, str], set] = {}
+    for x in links:
+        final_kinds.setdefault((x["table"], x["host"]), set()).add(x["how_found"])
+    for row in checked:
+        ##journals always; a repository row only when it carried a doc_candidate
+        if ((row["host"] in ("plos", "epmc") and (row["outcome"].startswith("hit:") or row["outcome"] == "no_match"))
+                or (row["host"] in REPO_HOSTS and "doc_candidate" in row["outcome"])):
+            kinds = sorted(final_kinds.get((row["table"], row["host"]), ()))
+            row["outcome"] = "hit:" + "+".join(kinds) if kinds else "no_match"
     checked = kept_checked + checked
+    ##a table no crawler can list, documented by review: say so in the
+    ##checked file rather than leaving it out_of_scope
+    review_kinds: Dict[str, set] = {}
+    for x in review:
+        review_kinds.setdefault(x["table"], set()).add(x["how_found"])
+    for row in checked:
+        if row["table"] in review_kinds and row["outcome"].startswith("out_of_scope"):
+            row["outcome"] = "hit:" + "+".join(sorted(review_kinds[row["table"]]))
     links.sort(key=lambda x: (x["table"].lower(), x["how_found"], x["url"]))
     checked.sort(key=lambda x: (x["table"].lower(), x["data_url"]))
     write_csv(LINKS_OUT, links, LINK_FIELDS)

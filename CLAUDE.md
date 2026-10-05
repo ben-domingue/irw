@@ -11,24 +11,19 @@ the data lives, and which document is authoritative when two disagree.
 
 ## Running Things
 
-**Streamlit dataset builder:**
-```bash
-streamlit run irw-dataset-builder/main.py
-```
-
-**Metadata pipeline.** `metadata/` holds twelve numbered scripts, and numeric
-order is *not* run order. Do not invent a sequence — run the wrapper, which is
+**Metadata pipeline.** `metadata/` holds numbered R and Python stages, and
+numeric order is *not* run order. Do not invent a sequence — run the wrapper, which is
 authoritative because it is the thing that actually executes:
 
 ```bash
-.claude/skills/irw-site-update/scripts/run_pipeline.sh        # default: 01 05 06 07 02 03 08 10 11 12 13 09
+.claude/skills/irw-site-update/scripts/run_pipeline.sh        # every stage in DEFAULT_ORDER
 .claude/skills/irw-site-update/scripts/run_pipeline.sh 01 03  # just metadata.csv + tags.csv
 ```
 
 It snapshots each stage's CSVs before and after so `diff_csv.py` can report what
 changed. `04_tables.R` (QC) is deliberately excluded — superseded by
-`audit_tables.R`; `10_collections.R` runs after 08; the old `09_hero_status.R` is retired
-(the site builds the hero from published irw_meta, #1940). Nothing here uploads to Redivis: uploading is a separate,
+`audit_tables.R`; the old `09_hero_status.R` is retired (the site builds the hero
+from published irw_meta, #1940), so there is no stage 09. Nothing here uploads to Redivis: uploading is a separate,
 manual step, and it only ever writes a draft version for a human to publish.
 One tool does every upload — `red_up` (see `red_up/README.md`); the metadata
 CSVs go up with `upload_meta.py`, which is a thin wrapper around it.
@@ -38,17 +33,17 @@ CSVs go up with `upload_meta.py`, which is a thin wrapper around it.
 ## Repository Structure
 
 - **`data/`** — Per-dataset processing scripts (R, Python, Stata), one per dataset. Each converts raw data into IRW format and is self-contained. Branch naming convention: `username/dataset_identifier`.
-- **`metadata/`** — Numbered R scripts that regenerate the metadata, biblio, tags, item text and collections CSVs. Uploading them is a separate manual step (see above).
-- **`irw-dataset-builder/`** — Streamlit web app for interactively building IRW-formatted datasets. Modular tabs in `tabs/`, shared components in `components/`, helpers in `utils/`.
+- **`metadata/`** — Numbered R and Python stages that regenerate the metadata, biblio, tags, item text, collections and Codebook CSVs (ARCHITECTURE.md §4). Uploading them is a separate manual step (see above).
 - **`itemtext/`** — Scripts for extracting and uploading item text content.
 - **`manuscript_src/`** — Reproducible analysis scripts for the IRW paper.
-- **`misc/`** — Utility R functions (reliability, psychometric models).
+- **`misc/`** — Small R utilities, and `validate_irw.R`, the R twin of `irw_validate`.
 - **`tags/`** — Tagging data with human annotators.
 - **`collections/`** — Curated groupings of tables (`registry.csv` + `curated/`), read by `metadata/10_collections.R`.
 - **`training/`** — Workshop and training materials.
 - **`processing_notes/`** — Data processing guidelines and licensing docs.
 - **`red_up/`** — The single Redivis uploader. **`irw_validate/`** — The format validator used to gate a table before upload.
-- **`tools/withdrawals/`** — One already-run script per table withdrawal, cited by path in provenance records.
+- **`tools/withdrawals/`**, **`tools/repairs/`** — One already-run script per table withdrawal or one-off repair, cited by path in provenance records.
+- **`audit/2401/`** — The #2401 retroactive corpus audit (rules, detectors, dossiers).
 - **`automated_finding/`** — Automated pipeline that discovers, triages, and
   standardizes candidate datasets from public repositories (Dataverse,
   Figshare, OSF, Zenodo, Dryad). See its
@@ -86,8 +81,7 @@ Additional rules:
 - Each measurement scale is saved as a **separate file**
 - Response times in **seconds**
 - Longitudinal timestamps in **Unix time**
-- Output saved as both `.csv` and `.RData` — except the `automated_finding`
-  pipeline, where `datastandard.md` overrides this
+- Output saved as `.csv` only (no `.RData`; see `datastandard.md`)
 
 ## Typical Processing Script Pattern
 
@@ -106,7 +100,6 @@ d <- d %>% pivot_longer(cols = starts_with("item"), names_to = "item", values_to
 
 # 5. Save
 write.csv(d, "output/dataset.csv", row.names = FALSE)
-save(d, file = "output/dataset.RData")
 ```
 
 Python scripts follow the same logic using `pandas.melt()` instead of `pivot_longer()`.
@@ -121,12 +114,12 @@ Full guidance: `processing_notes/DataProcessingInstructions.md`. Summary:
 
 - The goal is not to empty the queue — it's to maximize data in the IRW. There will always be more incoming, so use time on what grows the IRW most rather than rushing to clear the backlog.
 - Before processing a dataset raised in a GitHub issue: check the [dictionary](https://docs.google.com/spreadsheets/d/1nhPyvuAm3JO8c9oa1swPvQZghAvmnf4xlYgbvsFH99s) for an existing duplicate, and prioritize by format quality and data volume — a messy, small (e.g. ~150-respondent), unpublished dataset can wait.
-- **License must be explicitly and verifiably open** (cc0, cc-by, cc-by-sa, or equivalent) confirmed on the source page. Unknown/missing license, or a platform UUID that doesn't resolve to a named open license → skip; don't write a processing script speculatively. If unsure, email the author for permission using the template in `processing_notes/Licensing.txt`, but don't process until permission or updated license terms are confirmed.
+- **Check the license first**, confirmed on the source page. The rule (open and non-commercial licences proceed; no licence means ask for permission; ND and scraped third-party data stop) is in `datastandard.md`'s "Before you start". Unknown/missing license, or a platform UUID that doesn't resolve to a named open license → skip; don't write a processing script speculatively. If unsure, email the author for permission using the template in `processing_notes/Licensing.txt`, but don't process until permission or updated license terms are confirmed.
 - Ask clarifying questions before processing rather than guessing on an ambiguous dataset; move on to the next one while waiting on an answer instead of blocking.
 
 ## Key Conventions
 
-- **R** is the primary language; heavy use of `dplyr`/`tidyr` (tidyverse). Python is used for the Streamlit app and some newer scripts. Stata (`.do`) files handle some complex datasets.
+- `data/` scripts are R (tidyverse) or Python (pandas); most new scripts, including everything `automated_finding` writes, are Python. Stata (`.do`) files handle some complex datasets. The metadata pipeline is mostly R, with Python stages.
 - Data scripts in `data/` are self-contained — they read raw inputs and write IRW-formatted outputs. Do not introduce shared dependencies between scripts.
-- The Redivis API is used to upload metadata tables. Credentials are managed externally (not in this repo).
+- Every Redivis upload goes through `red_up`. The write-scoped token is resolved in one place, `irw_secrets.py`; the token itself is never in this repo.
 - Branch PRs reference GitHub issue numbers (e.g., `#253` in commit messages).

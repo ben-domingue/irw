@@ -31,30 +31,28 @@ PRESENCE_COLS <- paste0("TP_PRESENCA_", c("CN", "CH", "LC", "MT"))
 }
 source(file.path(.enem_dir, "enem_checks.R"))
 
-# some years ship PARTICIPANTES + RESULTADOS instead of one MICRODADOS file
+# This year ships one MICRODADOS file, so id is NU_INSCRICAO.
+#
+# From 2024 INEP splits the microdata into PARTICIPANTES + RESULTADOS and
+# provides no key joining them, and those years take id from RESULTADOS' own
+# NU_SEQUENCIAL instead -- see data/enem_2024.R and #2812. There is deliberately
+# ONE loader per year rather than a shared branch on both layouts: it keeps the
+# source of `id` unambiguous inside each script, which is what
+# metadata/column_docs.csv reports by scanning for the rename. A script holding
+# both branches makes that scan guess, and for 2024/2025 it guessed wrong.
 find_ci <- function(dir, pattern) {
   hits <- list.files(dir, pattern = pattern, ignore.case = TRUE, full.names = TRUE)
   if (length(hits) > 0) hits[1] else file.path(dir, pattern)
 }
 data_dir <- "DADOS"
 single <- find_ci(data_dir, sprintf("^MICRODADOS_ENEM_%s\\.csv$", year))
-partic <- find_ci(data_dir, sprintf("^PARTICIPANTES_%s\\.csv$", year))
-resul  <- find_ci(data_dir, sprintf("^RESULTADOS_%s\\.csv$", year))
-if (file.exists(single)) {
-  microdata <- vroom(single, delim = ";",
-                     col_select = list(id = NU_INSCRICAO, tp_lingua = TP_LINGUA,
-                                       starts_with("CO_PROVA"), starts_with("TP_PRESENCA"),
-                                       starts_with("TX_RESPOSTAS")),
-                     show_col_types = FALSE)
-} else if (file.exists(partic) && file.exists(resul)) {
-  p <- vroom(partic, delim = ";", col_select = list(id = NU_INSCRICAO), show_col_types = FALSE)
-  r <- vroom(resul, delim = ";",
-             col_select = list(tp_lingua = TP_LINGUA, starts_with("CO_PROVA"),
-                               starts_with("TP_PRESENCA"), starts_with("TX_RESPOSTAS")),
-             show_col_types = FALSE)
-  stopifnot(nrow(p) == nrow(r))
-  microdata <- bind_cols(p, r)
-} else stop(sprintf("No microdata found in %s", data_dir))
+if (!file.exists(single))
+  stop(sprintf("No MICRODADOS_ENEM_%s.csv in %s", year, data_dir))
+microdata <- vroom(single, delim = ";",
+                   col_select = list(id = NU_INSCRICAO, tp_lingua = TP_LINGUA,
+                                     starts_with("CO_PROVA"), starts_with("TP_PRESENCA"),
+                                     starts_with("TX_RESPOSTAS")),
+                   show_col_types = FALSE)
 
 # ---- absence filter (#1942) -------------------------------------------------
 # INEP encodes absence in TX_RESPOSTAS differently by year: all dots in 2013 and

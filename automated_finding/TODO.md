@@ -3,11 +3,53 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## From the 2026-10-05 PMC sweep (last 208 backlog terms, PeerJ + Sci Rep only)
+
+- [x] **18 tables (817,775 responses) + 10 item text tables uploaded** (ben-domingue, confirmed 2026-10-05; item text `uploaded=2026-10-05` stamped).
+  `irw_output/`: wu_2022_dcep x6, lyu_2024 x9, sung_2026_marital_quality,
+  elshafie_2020_edsc, scheerhagen_2019_reproq. `itemtext_output/`: lyu_2024 x9,
+  elshafie_2020_edsc.
+- [x] **Issues-page entry for `elshafie_2020_edsc`:** datapages/irw#319, merged.
+- [x] **Covariate labels built 2026-10-05** after the release: elshafie_2020_edsc and
+  scheerhagen_2019_reproq are in `covariate_labels.csv`. matsaid reads an xlsx, so it has no labels.
+- [x] **4 matsaid_2022_abcdm tables (4,408 responses) uploaded** (ben-domingue, confirmed 2026-10-05).
+- **The PMC term backlog is exhausted:** no scored term in
+  `pmc_term_backlog_2026-09-25.csv` is left unrun. A further PMC pass needs a new
+  term ranking.
+
+## From the 2026-10-04 PMC scout-2 sweep (ranks 101-300 + owed pairs)
+
+- [x] **46 tables (647,006 responses) + 25 item text tables uploaded** (ben-domingue, confirmed 2026-10-04; item text `uploaded=2026-10-04` stamped). Original:
+  `irw_output/` (fong_2023 ×5, kanwal_2024 ×4, strojny_2026 ×4, przybylski_2016_igd,
+  fang_2021 ×4, makovi_2021 ×3, usmani_2024 ×3, shen_2025 ×4, clemente_2024 ×4,
+  li_2026_psmus, kramer_2023 ×2, yamagishi_2016_pd, yuan_2024 ×3, mohamed_2021 ×2,
+  rzeszutek_2023 ×5).
+  Then upload `itemtext_output/` (25 `__items.csv`). Response tables go up first.
+  Dictionary, tag, codebook and data-note rows are staged. Stamp `uploaded=` in
+  `itemtext_provenance.csv` and `itemtext/mapping_verification.csv` only after
+  ben confirms.
+
+- [ ] **Issues-page entries owed in datapages/irw once live**. The text is drafted
+  in each `public_note` of `itemtext_provenance.csv`:
+  - IRW-written translations: `strojny_2026_gmi`, `clemente_2024_sd4`,
+    `clemente_2024_pmd`.
+  - English substitutes for a Chinese administration: `fang_2021_{pbc,pn,peb}`,
+    `shen_2025_{dass21,bsmas,sabas}`, `yuan_2024_{ucla,contact,trust}`,
+    `li_2026_psmus`.
+  - Label mismatch on item 9: `clemente_2024_attitude_{father,mother}`.
+  - Truncated stem CSRN3: `kanwal_2024_csr`.
+
+- [x] **Covariate labels built 2026-10-05:** shen_2025, clemente_2024 and yuan_2024
+  are in `covariate_labels.csv`. strojny_2026 and usmani_2024 ship text-label
+  covariates, so they have no codes to label.
+
+
 ## From the 2026-10-02 human_review re-check batch 4 (25 rows, 14 shipped)
 
-- [ ] **69 response tables uploading** (ben-domingue, 2026-10-02) from
-  `/home/ben/irw-wt/hr-recheck-batch4/automated_finding/irw_output/`; tick
-  once confirmed. The 9 item text tables are uploaded and stamped (#2797).
+- [x] **69 tables + 9 item text tables uploaded** (ben-domingue, confirmed
+  2026-10-02). `alqerem_2025_gina_control` failed once in `red_up`
+  (AttributeError inside the upload call, no partial table left) and went up
+  on a single-file re-run, row count verified.
 - [ ] **Licence call (Ben):** HRQoL/musculoskeletal pain in health-science
   students (`10.5281/zenodo.7782495`): Zenodo API says CC BY 4.0, the deposit
   readme says CC BY-NC-ND. Treated as blocked (in

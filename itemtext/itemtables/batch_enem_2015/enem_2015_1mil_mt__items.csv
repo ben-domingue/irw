@@ -2255,12 +2255,7 @@ jogador são como no esquema:
 34%
 0,75
 4,3
-7,5 4
-3 6,8
-3
-4
-3
-4Carta da mesa Cartas da mão
+7,5 4/3 6,8 3/4 3/4Carta da mesa Cartas da mão
 Segundo as regras do jogo, quantas cartas da mão desse 
 jogador podem formar um par com a carta da mesa?","E","9",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2015_1mil_mt","enem_2015_1mil_mt_1",62901,"ENEM 2015 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
@@ -2404,12 +2399,7 @@ jogador são como no esquema:
 34%
 0,75
 4,3
-7,5 4
-3 6,8
-3
-4
-3
-4Carta da mesa Cartas da mão
+7,5 4/3 6,8 3/4 3/4Carta da mesa Cartas da mão
 Segundo as regras do jogo, quantas cartas da mão desse 
 jogador podem formar um par com a carta da mesa?","E","7",0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2015_1mil_mt","enem_2015_1mil_mt_1",62901,"ENEM 2015 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
@@ -2553,12 +2543,7 @@ jogador são como no esquema:
 34%
 0,75
 4,3
-7,5 4
-3 6,8
-3
-4
-3
-4Carta da mesa Cartas da mão
+7,5 4/3 6,8 3/4 3/4Carta da mesa Cartas da mão
 Segundo as regras do jogo, quantas cartas da mão desse 
 jogador podem formar um par com a carta da mesa?","E","5",0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2015_1mil_mt","enem_2015_1mil_mt_1",62901,"ENEM 2015 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
@@ -2702,12 +2687,7 @@ jogador são como no esquema:
 34%
 0,75
 4,3
-7,5 4
-3 6,8
-3
-4
-3
-4Carta da mesa Cartas da mão
+7,5 4/3 6,8 3/4 3/4Carta da mesa Cartas da mão
 Segundo as regras do jogo, quantas cartas da mão desse 
 jogador podem formar um par com a carta da mesa?","E","4",0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2015_1mil_mt","enem_2015_1mil_mt_1",62901,"ENEM 2015 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
@@ -2851,12 +2831,7 @@ jogador são como no esquema:
 34%
 0,75
 4,3
-7,5 4
-3 6,8
-3
-4
-3
-4Carta da mesa Cartas da mão
+7,5 4/3 6,8 3/4 3/4Carta da mesa Cartas da mão
 Segundo as regras do jogo, quantas cartas da mão desse 
 jogador podem formar um par com a carta da mesa?","E","3",1,NA,NA,NA,NA,"Portuguese","E"
 "enem_2015_1mil_mt","enem_2015_1mil_mt_1",41816,"ENEM 2015 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
@@ -11403,7 +11378,7 @@ Considere P a quantidade anual de produtos fabricados
 no ano t de funcionamento da indústria.
 Se a estimativa for alcançada, qual é a expressão que 
 determina o número de unidades produzidas P em função 
-de t, para t ≥1?","E","P(t) = 0,5 · t −^1 + 8 000",0,NA,NA,NA,NA,"Portuguese","A"
+de t, para t ≥1?","E","P(t) = 0,5 · t^−1 + 8 000",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2015_1mil_mt","enem_2015_1mil_mt_1",27281,"ENEM 2015 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -11538,7 +11513,7 @@ Considere P a quantidade anual de produtos fabricados
 no ano t de funcionamento da indústria.
 Se a estimativa for alcançada, qual é a expressão que 
 determina o número de unidades produzidas P em função 
-de t, para t ≥1?","E","P(t) = 50 · t −^1 + 8 000",0,NA,NA,NA,NA,"Portuguese","B"
+de t, para t ≥1?","E","P(t) = 50 · t^−1 + 8 000",0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2015_1mil_mt","enem_2015_1mil_mt_1",27281,"ENEM 2015 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -11673,7 +11648,7 @@ Considere P a quantidade anual de produtos fabricados
 no ano t de funcionamento da indústria.
 Se a estimativa for alcançada, qual é a expressão que 
 determina o número de unidades produzidas P em função 
-de t, para t ≥1?","E","P(t) = 4 000 · t −^1 + 8 000",0,NA,NA,NA,NA,"Portuguese","C"
+de t, para t ≥1?","E","P(t) = 4 000 · t^−1 + 8 000",0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2015_1mil_mt","enem_2015_1mil_mt_1",27281,"ENEM 2015 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -11808,7 +11783,7 @@ Considere P a quantidade anual de produtos fabricados
 no ano t de funcionamento da indústria.
 Se a estimativa for alcançada, qual é a expressão que 
 determina o número de unidades produzidas P em função 
-de t, para t ≥1?","E","P(t) = 8 000 · (0,5) t − 1",0,NA,NA,NA,NA,"Portuguese","D"
+de t, para t ≥1?","E","P(t) = 8 000 · (0,5)^(t−1)",0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2015_1mil_mt","enem_2015_1mil_mt_1",27281,"ENEM 2015 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -11943,7 +11918,7 @@ Considere P a quantidade anual de produtos fabricados
 no ano t de funcionamento da indústria.
 Se a estimativa for alcançada, qual é a expressão que 
 determina o número de unidades produzidas P em função 
-de t, para t ≥1?","E","P(t) = 8 000 · (1,5) t − 1",1,NA,NA,NA,NA,"Portuguese","E"
+de t, para t ≥1?","E","P(t) = 8 000 · (1,5)^(t−1)",1,NA,NA,NA,NA,"Portuguese","E"
 "enem_2015_1mil_mt","enem_2015_1mil_mt_1",40487,"ENEM 2015 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -12822,11 +12797,7 @@ do vidro seja paralela ao eixo  x. Obedecendo a essas
 condições, o engenheiro determinou uma expressão que 
 fornece a altura h do vidro em função da medida n de sua 
 base, em metros.
-A expressão algébrica que determina a altura do vidro é","E","log (
-n + √n^2 + 4
-) − log (
-n − √n2 + 4
-)22",0,NA,NA,NA,NA,"Portuguese","A"
+A expressão algébrica que determina a altura do vidro é","E","log ((n + √(n^2 + 4))/2) − log ((n − √(n^2 + 4))/2)",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2015_1mil_mt","enem_2015_1mil_mt_1",81781,"ENEM 2015 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -12965,11 +12936,7 @@ do vidro seja paralela ao eixo  x. Obedecendo a essas
 condições, o engenheiro determinou uma expressão que 
 fornece a altura h do vidro em função da medida n de sua 
 base, em metros.
-A expressão algébrica que determina a altura do vidro é","E","log (1+
-n
-) − log (1 −
-n
-)22",0,NA,NA,NA,NA,"Portuguese","B"
+A expressão algébrica que determina a altura do vidro é","E","log (1 + n/2) − log (1 − n/2)",0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2015_1mil_mt","enem_2015_1mil_mt_1",81781,"ENEM 2015 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -13108,11 +13075,7 @@ do vidro seja paralela ao eixo  x. Obedecendo a essas
 condições, o engenheiro determinou uma expressão que 
 fornece a altura h do vidro em função da medida n de sua 
 base, em metros.
-A expressão algébrica que determina a altura do vidro é","E","log (1+
-n
-) + log (1 −
-n
-)22",0,NA,NA,NA,NA,"Portuguese","C"
+A expressão algébrica que determina a altura do vidro é","E","log (1 + n/2) + log (1 − n/2)",0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2015_1mil_mt","enem_2015_1mil_mt_1",81781,"ENEM 2015 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -13251,9 +13214,7 @@ do vidro seja paralela ao eixo  x. Obedecendo a essas
 condições, o engenheiro determinou uma expressão que 
 fornece a altura h do vidro em função da medida n de sua 
 base, em metros.
-A expressão algébrica que determina a altura do vidro é","E","log (
-n + √n^2 + 4
-)2",0,NA,NA,NA,NA,"Portuguese","D"
+A expressão algébrica que determina a altura do vidro é","E","log ((n + √(n^2 + 4))/2)",0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2015_1mil_mt","enem_2015_1mil_mt_1",81781,"ENEM 2015 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -13392,9 +13353,7 @@ do vidro seja paralela ao eixo  x. Obedecendo a essas
 condições, o engenheiro determinou uma expressão que 
 fornece a altura h do vidro em função da medida n de sua 
 base, em metros.
-A expressão algébrica que determina a altura do vidro é","E","2 log (
-n + √n^2 + 4
-)2",1,NA,NA,NA,NA,"Portuguese","E"
+A expressão algébrica que determina a altura do vidro é","E","2 log ((n + √(n^2 + 4))/2)",1,NA,NA,NA,NA,"Portuguese","E"
 "enem_2015_1mil_mt","enem_2015_1mil_mt_1",29167,"ENEM 2015 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -13518,7 +13477,7 @@ LINGUAGENS, CÓDIGOS E SUAS
 TECNOLOGIAS
 Questões de 91 a 135
 Questões de 91 a 95 (opção inglês)",NA,"Uma empresa de telefonia celular possui duas antenas 
-que serão  por uma nova, mais potente. 
+que serão substituídas por uma nova, mais potente. 
 As áreas de cobertura das antenas que serão substituídas 
 são círculos de raio 2 km, cujas circunferências se 
 tangenciam no ponto O, como mostra a figura.
@@ -13658,7 +13617,7 @@ LINGUAGENS, CÓDIGOS E SUAS
 TECNOLOGIAS
 Questões de 91 a 135
 Questões de 91 a 95 (opção inglês)",NA,"Uma empresa de telefonia celular possui duas antenas 
-que serão  por uma nova, mais potente. 
+que serão substituídas por uma nova, mais potente. 
 As áreas de cobertura das antenas que serão substituídas 
 são círculos de raio 2 km, cujas circunferências se 
 tangenciam no ponto O, como mostra a figura.
@@ -13798,7 +13757,7 @@ LINGUAGENS, CÓDIGOS E SUAS
 TECNOLOGIAS
 Questões de 91 a 135
 Questões de 91 a 95 (opção inglês)",NA,"Uma empresa de telefonia celular possui duas antenas 
-que serão  por uma nova, mais potente. 
+que serão substituídas por uma nova, mais potente. 
 As áreas de cobertura das antenas que serão substituídas 
 são círculos de raio 2 km, cujas circunferências se 
 tangenciam no ponto O, como mostra a figura.
@@ -13938,7 +13897,7 @@ LINGUAGENS, CÓDIGOS E SUAS
 TECNOLOGIAS
 Questões de 91 a 135
 Questões de 91 a 95 (opção inglês)",NA,"Uma empresa de telefonia celular possui duas antenas 
-que serão  por uma nova, mais potente. 
+que serão substituídas por uma nova, mais potente. 
 As áreas de cobertura das antenas que serão substituídas 
 são círculos de raio 2 km, cujas circunferências se 
 tangenciam no ponto O, como mostra a figura.
@@ -14078,7 +14037,7 @@ LINGUAGENS, CÓDIGOS E SUAS
 TECNOLOGIAS
 Questões de 91 a 135
 Questões de 91 a 95 (opção inglês)",NA,"Uma empresa de telefonia celular possui duas antenas 
-que serão  por uma nova, mais potente. 
+que serão substituídas por uma nova, mais potente. 
 As áreas de cobertura das antenas que serão substituídas 
 são círculos de raio 2 km, cujas circunferências se 
 tangenciam no ponto O, como mostra a figura.
@@ -15535,10 +15494,7 @@ Questões de 91 a 135
 Questões de 91 a 95 (opção inglês)",NA,"A expressão “Fórmula de Young” é utilizada para 
 calcular a dose infantil de um medicamento, dada a dose 
 do adulto: 
-dose de criança =(
-idade da criança (em anos)
-) · dose do adulto
-idade da criança (em anos) + 12
+dose de criança = (idade da criança (em anos)/(idade da criança (em anos) + 12)) · dose do adulto
 Uma enfermeira deve administrar um medicamento 
 X a uma criança inconsciente, cuja dosagem de adulto 
 é de 60 mg. A enfermeira não consegue descobrir onde 
@@ -15674,10 +15630,7 @@ Questões de 91 a 135
 Questões de 91 a 95 (opção inglês)",NA,"A expressão “Fórmula de Young” é utilizada para 
 calcular a dose infantil de um medicamento, dada a dose 
 do adulto: 
-dose de criança =(
-idade da criança (em anos)
-) · dose do adulto
-idade da criança (em anos) + 12
+dose de criança = (idade da criança (em anos)/(idade da criança (em anos) + 12)) · dose do adulto
 Uma enfermeira deve administrar um medicamento 
 X a uma criança inconsciente, cuja dosagem de adulto 
 é de 60 mg. A enfermeira não consegue descobrir onde 
@@ -15813,10 +15766,7 @@ Questões de 91 a 135
 Questões de 91 a 95 (opção inglês)",NA,"A expressão “Fórmula de Young” é utilizada para 
 calcular a dose infantil de um medicamento, dada a dose 
 do adulto: 
-dose de criança =(
-idade da criança (em anos)
-) · dose do adulto
-idade da criança (em anos) + 12
+dose de criança = (idade da criança (em anos)/(idade da criança (em anos) + 12)) · dose do adulto
 Uma enfermeira deve administrar um medicamento 
 X a uma criança inconsciente, cuja dosagem de adulto 
 é de 60 mg. A enfermeira não consegue descobrir onde 
@@ -15952,10 +15902,7 @@ Questões de 91 a 135
 Questões de 91 a 95 (opção inglês)",NA,"A expressão “Fórmula de Young” é utilizada para 
 calcular a dose infantil de um medicamento, dada a dose 
 do adulto: 
-dose de criança =(
-idade da criança (em anos)
-) · dose do adulto
-idade da criança (em anos) + 12
+dose de criança = (idade da criança (em anos)/(idade da criança (em anos) + 12)) · dose do adulto
 Uma enfermeira deve administrar um medicamento 
 X a uma criança inconsciente, cuja dosagem de adulto 
 é de 60 mg. A enfermeira não consegue descobrir onde 
@@ -16091,10 +16038,7 @@ Questões de 91 a 135
 Questões de 91 a 95 (opção inglês)",NA,"A expressão “Fórmula de Young” é utilizada para 
 calcular a dose infantil de um medicamento, dada a dose 
 do adulto: 
-dose de criança =(
-idade da criança (em anos)
-) · dose do adulto
-idade da criança (em anos) + 12
+dose de criança = (idade da criança (em anos)/(idade da criança (em anos) + 12)) · dose do adulto
 Uma enfermeira deve administrar um medicamento 
 X a uma criança inconsciente, cuja dosagem de adulto 
 é de 60 mg. A enfermeira não consegue descobrir onde 
@@ -16779,8 +16723,7 @@ rendimentos mensais dos 10% mais ricos correspondeu a
 Disponível em: www.estadao.com.br. Acesso em: 16 nov. 2011(adaptado).
 Qual foi a diferença, em reais, entre a renda média mensal 
 de um brasileiro que estava na faixa dos 10% mais ricos e 
-de um brasileiro que estava na faixa dos 10% mais pobres?","E","5 216,68
- substituídas ",1,NA,NA,NA,NA,"Portuguese","E"
+de um brasileiro que estava na faixa dos 10% mais pobres?","E","5 216,68",1,NA,NA,NA,NA,"Portuguese","E"
 "enem_2015_1mil_mt","enem_2015_1mil_mt_1",28143,"ENEM 2015 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -19791,7 +19734,7 @@ as mostradas em branco.
 LG
 Disponível em: www.gebh.net. Acesso em: 30 out. 2013 (adaptado).
 O número de formas distintas de se acomodar a família 
-nesse voo é calculado por","A","9!/7! × 2!",0,NA,NA,NA,NA,"Portuguese","B"
+nesse voo é calculado por","A","9!/(7! × 2!)",0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2015_1mil_mt","enem_2015_1mil_mt_1",60361,"ENEM 2015 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -20057,9 +20000,7 @@ as mostradas em branco.
 LG
 Disponível em: www.gebh.net. Acesso em: 30 out. 2013 (adaptado).
 O número de formas distintas de se acomodar a família 
-nesse voo é calculado por","A","5!
-2!
-× 4!",0,NA,NA,NA,NA,"Portuguese","D"
+nesse voo é calculado por","A","5!/2! × 4!",0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2015_1mil_mt","enem_2015_1mil_mt_1",60361,"ENEM 2015 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -20192,10 +20133,7 @@ as mostradas em branco.
 LG
 Disponível em: www.gebh.net. Acesso em: 30 out. 2013 (adaptado).
 O número de formas distintas de se acomodar a família 
-nesse voo é calculado por","A","5!
-4!
-× 4!
-3!",0,NA,NA,NA,NA,"Portuguese","E"
+nesse voo é calculado por","A","5!/4! × 4!/3!",0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2015_1mil_mt","enem_2015_1mil_mt_1",63152,"ENEM 2015 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -30748,10 +30686,7 @@ preços mais baixos, o que ocorre no mês de produção
 máxima da safra.
 A partir de uma série histórica, observou-se que o preço 
 P, em reais, do quilograma de um certo produto sazonal 
-pode ser descrito pela função P(x) = 8 + 5cos (
-πx − π
-)6
-,
+pode ser descrito pela função P(x) = 8 + 5cos ((πx − π)/6),
 onde x representa o mês do ano, sendo x = 1 associado 
 ao mês de janeiro, x = 2 ao mês de fevereiro, e assim 
 sucessivamente, até x = 12 associado ao mês de 
@@ -30890,10 +30825,7 @@ preços mais baixos, o que ocorre no mês de produção
 máxima da safra.
 A partir de uma série histórica, observou-se que o preço 
 P, em reais, do quilograma de um certo produto sazonal 
-pode ser descrito pela função P(x) = 8 + 5cos (
-πx − π
-)6
-,
+pode ser descrito pela função P(x) = 8 + 5cos ((πx − π)/6),
 onde x representa o mês do ano, sendo x = 1 associado 
 ao mês de janeiro, x = 2 ao mês de fevereiro, e assim 
 sucessivamente, até x = 12 associado ao mês de 
@@ -31032,10 +30964,7 @@ preços mais baixos, o que ocorre no mês de produção
 máxima da safra.
 A partir de uma série histórica, observou-se que o preço 
 P, em reais, do quilograma de um certo produto sazonal 
-pode ser descrito pela função P(x) = 8 + 5cos (
-πx − π
-)6
-,
+pode ser descrito pela função P(x) = 8 + 5cos ((πx − π)/6),
 onde x representa o mês do ano, sendo x = 1 associado 
 ao mês de janeiro, x = 2 ao mês de fevereiro, e assim 
 sucessivamente, até x = 12 associado ao mês de 
@@ -31174,10 +31103,7 @@ preços mais baixos, o que ocorre no mês de produção
 máxima da safra.
 A partir de uma série histórica, observou-se que o preço 
 P, em reais, do quilograma de um certo produto sazonal 
-pode ser descrito pela função P(x) = 8 + 5cos (
-πx − π
-)6
-,
+pode ser descrito pela função P(x) = 8 + 5cos ((πx − π)/6),
 onde x representa o mês do ano, sendo x = 1 associado 
 ao mês de janeiro, x = 2 ao mês de fevereiro, e assim 
 sucessivamente, até x = 12 associado ao mês de 
@@ -31316,10 +31242,7 @@ preços mais baixos, o que ocorre no mês de produção
 máxima da safra.
 A partir de uma série histórica, observou-se que o preço 
 P, em reais, do quilograma de um certo produto sazonal 
-pode ser descrito pela função P(x) = 8 + 5cos (
-πx − π
-)6
-,
+pode ser descrito pela função P(x) = 8 + 5cos ((πx − π)/6),
 onde x representa o mês do ano, sendo x = 1 associado 
 ao mês de janeiro, x = 2 ao mês de fevereiro, e assim 
 sucessivamente, até x = 12 associado ao mês de 

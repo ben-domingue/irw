@@ -22,30 +22,48 @@ PRESENCE_COLS <- paste0("TP_PRESENCA_", c("CN", "CH", "LC", "MT"))
 }
 source(file.path(.enem_dir, "enem_checks.R"))
 
-# some years ship PARTICIPANTES + RESULTADOS instead of one MICRODADOS file
+# From 2024 INEP ships PARTICIPANTES_<year>.csv + RESULTADOS_<year>.csv instead
+# of one MICRODADOS file, and ships NO key joining them: PARTICIPANTES is keyed
+# NU_INSCRICAO, RESULTADOS NU_SEQUENCIAL, and the only columns they share are
+# the test-location ones.
+#
+# This used to read id from PARTICIPANTES and bind_cols() it to RESULTADOS by
+# ROW POSITION on a row-count check alone. That was wrong, and measurably so
+# (#2812). The shared CO_MUNICIPIO_PROVA gives a direct test: compared row by
+# row over all 4 332 944 rows of 2024, the two files agree on 0.51% of rows
+# against the 0.54% expected if the pairing were random -- indistinguishable
+# from chance. 2025 behaves the same (0.56%). So the join was pairing each
+# candidate's answers with a stranger's registration number.
+#
+# The keys show why: PARTICIPANTES is ordered by NU_INSCRICAO (210062064233,
+# ...234, ...235) while NU_SEQUENCIAL is a scrambled permutation of 1..N. The
+# 2024 Leia-Me says the model was changed for LGPD compliance so the public
+# files would not support re-identification, so the split is deliberate and the
+# files are not meant to be linked.
+#
+# id therefore comes from RESULTADOS' own NU_SEQUENCIAL and PARTICIPANTES is
+# not read at all -- nothing here ever used a column from it (TX_GABARITO comes
+# from ITENS_PROVA). There is deliberately ONE loader per year rather than a
+# branch on both layouts, so the source of `id` is unambiguous inside this
+# script: metadata/column_docs.csv finds it by scanning for the rename, and a
+# script holding both branches makes that scan guess.
+#
+# NU_SEQUENCIAL is a WITHIN-YEAR surrogate: unique inside a year, but carrying
+# no meaning across years -- 2024 and 2025 even open with the same three values
+# -- so it must not be used to follow a person between years.
 find_ci <- function(dir, pattern) {
   hits <- list.files(dir, pattern = pattern, ignore.case = TRUE, full.names = TRUE)
   if (length(hits) > 0) hits[1] else file.path(dir, pattern)
 }
 data_dir <- "DADOS"
-single <- find_ci(data_dir, sprintf("^MICRODADOS_ENEM_%s\\.csv$", year))
-partic <- find_ci(data_dir, sprintf("^PARTICIPANTES_%s\\.csv$", year))
-resul  <- find_ci(data_dir, sprintf("^RESULTADOS_%s\\.csv$", year))
-if (file.exists(single)) {
-  microdata <- vroom(single, delim = ";",
-                     col_select = list(id = NU_INSCRICAO, tp_lingua = TP_LINGUA,
-                                       starts_with("CO_PROVA"), starts_with("TP_PRESENCA"),
-                                       starts_with("TX_RESPOSTAS")),
-                     show_col_types = FALSE)
-} else if (file.exists(partic) && file.exists(resul)) {
-  p <- vroom(partic, delim = ";", col_select = list(id = NU_INSCRICAO), show_col_types = FALSE)
-  r <- vroom(resul, delim = ";",
-             col_select = list(tp_lingua = TP_LINGUA, starts_with("CO_PROVA"),
-                               starts_with("TP_PRESENCA"), starts_with("TX_RESPOSTAS")),
-             show_col_types = FALSE)
-  stopifnot(nrow(p) == nrow(r))
-  microdata <- bind_cols(p, r)
-} else stop(sprintf("No microdata found in %s", data_dir))
+resul <- find_ci(data_dir, sprintf("^RESULTADOS_%s\\.csv$", year))
+if (!file.exists(resul))
+  stop(sprintf("No RESULTADOS_%s.csv in %s", year, data_dir))
+microdata <- vroom(resul, delim = ";",
+                   col_select = list(id = NU_SEQUENCIAL, tp_lingua = TP_LINGUA,
+                                     starts_with("CO_PROVA"), starts_with("TP_PRESENCA"),
+                                     starts_with("TX_RESPOSTAS")),
+                   show_col_types = FALSE)
 
 # ---- absence filter (#1942) -------------------------------------------------
 # INEP encodes absence in TX_RESPOSTAS differently by year: all dots in 2013 and

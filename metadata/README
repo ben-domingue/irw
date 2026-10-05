@@ -7,22 +7,21 @@ cell looks like a suspiciously long raw-text dump), and never overwrites
 silently. Both scripts live in that skill, not in this directory:
 
   .claude/skills/irw-site-update/scripts/run_pipeline.sh
-                              # generate: 01 -> 02 -> 03 -> 05 -> 06 -> 07
-                              #           -> 08 -> 10 -> 09
+                              # generate: every stage in its DEFAULT_ORDER
   .claude/skills/irw-site-update/scripts/audit_tables.R
                               # cross-source table-name consistency audit;
                               # run AFTER run_pipeline.sh, in the same directory
 
-That order is a copy, not the source of truth. The authoritative run order is
-`DEFAULT_ORDER` in run_pipeline.sh, which is what actually executes -- check it
-there before running anything by hand, and see ../ARCHITECTURE.md, whose
+The run order is deliberately not restated here: it is `DEFAULT_ORDER` in
+run_pipeline.sh, which is what actually executes -- check it there before
+running anything by hand, and see ../ARCHITECTURE.md, whose
 authority table points at the same variable for this reason (#1726, #1729).
 
 Needs ANTHROPIC_API_KEY set (02_biblio.R's BibTeX-generation fallback calls
 Claude when a DOI-based lookup fails) and Redivis credentials configured
 externally, as before.
 
-Manual run order, if not using the skill:
+What each stage makes (listed by number; run them in DEFAULT_ORDER, not this order):
 
 1. 01_metadata.R: makes metadata.csv [numbers computed from raw core tables such as # of unique `id`s]
 2. 02_biblio.R: makes biblio.csv, comps_biblio.csv, nominal_biblio.csv, simsyn_biblio.csv [bibliographic information for citing -- one pass per source.
@@ -49,9 +48,24 @@ Manual run order, if not using the skill:
    executes each row's rule against metadata.csv/tags.csv. NEEDS NO CREDENTIALS
    AND NO REDIVIS ACCESS: the only stage a reviewer can run end to end offline.
    Adding a collection is a data change (one line in ../collections/registry.csv),
-   never a code change -- see ../collections/README. Numbered 10 but runs BEFORE
-   09, which must stay last; numeric order already differs from run order here,
-   cf. 04.]
+   never a code change -- see ../collections/README.]
+11. 11_status.R: makes status.json + status_history.tsv
+   [the corpus-state numbers (table counts, tag and item-text coverage) published
+   from one place so they stop being quoted from memory, #1765]
+12. 12_stragglers.R: makes straggler_watch.tsv [names live tables that have
+   stayed missing from metadata.csv across runs; ADVISORY, its non-zero exit is
+   reported, never fatal, #1765]
+13. 13_script_index.py: makes table_scripts.csv [table -> data/ script map for
+   tables whose script is named for something else; read by the MCP's
+   get_processing_notes, #2494]
+14. 14_column_docs.py: makes column_docs.csv [per table and column: what the
+   data standard says it is and which source column it was renamed from; the
+   table pages' Codebook section, #2763]
+15. 15_codebook_links.py: makes codebook_links.csv + codebook_links_checked.csv
+   [links to each source deposit's own codebook file, new tables only
+   (find_codebook_links.py --new-only), #2766/#2770]
+The Codebook files, and the hand-run covariate_labels/ stage that feeds them,
+are mapped in ../ARCHITECTURE.md section 4.
 
 9. (retired 2026-10-01, #1940) 09_hero_status.R used to write irw_site's data/hero_stats.json;
    the site now builds it at render time from published irw_meta (landing/hero_stats.R there).

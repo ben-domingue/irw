@@ -17063,3 +17063,347 @@ ben-domingue confirmed the 9 batch-4 item text tables are uploaded;
 `mapping_verification.csv`. The 69 response tables were uploading at the
 close of the session and are not yet confirmed (TODO). datapages/irw PR #305
 (the `wu_2015_cias` / `wu_2015_bsrs5` issues-page callouts) is merged.
+
+## 2026-10-02l — re-check batch 4 stamped uploaded
+
+ben-domingue confirmed all 69 batch-4 response tables are in the
+`item_response_warehouse_6` draft (item text was stamped in 2026-10-02k).
+One table, `alqerem_2025_gina_control`, failed on the first run with
+`AttributeError: 'NoneType' object has no attribute 'get'`, raised inside the
+upload call. `push_one` deleted the half-made table, so the draft held no empty
+copy. The other 68 were checked against their CSV row counts, and a dry run of
+the failed file validated cleanly. A single-file re-run then uploaded it with a
+verified row count. The cause was not pinned down without a traceback; a
+transient API response while red_up polled the upload status is the likeliest
+explanation. If it recurs, capture the traceback.
+
+## 2026-10-04 — PMC scout-2 sweep, ranks 101-300 + the owed pairs: 923 candidates, 80 leads, 46 tables / 647,006 responses
+
+**Terms.** Three passes of `irw_discover_pmc.py` over the backlog in
+`pmc_term_backlog_2026-09-25.csv`. Each finished cleanly with 0 `QUERY FAILED`:
+
+- Ranks 101-150 (50 terms × 11 journals): 302 candidates, about 1.5h.
+- The 98 (term, journal) pairs the 2026-09-28 run owed after its Europe PMC 503 outage: 170 candidates.
+- Ranks 151-300 (150 terms): 446 candidates, about 3h.
+
+The backlog has new `run_2026_10_04`, `owed_rerun_2026_10_04` and
+`run_2026_10_04b` columns, and **208 scored terms remain unrun**. Step 2b ran
+in-process on every pass. Its `human_review` rows went to
+`human_review/human_review_pmc_2026-10-04.csv`.
+
+| flag (all passes) | n |
+|---|---|
+| `no_usable_file` | 516 |
+| `license_restricted` | 228 |
+| `human_assistance` | 82 |
+| `download_failed` | 35 |
+| `not_item_response` | 22 |
+| `below_min_n` | 17 |
+| `error` | 8 |
+| `good` | 6 |
+| other | 9 |
+
+`refined_flag` over the 82: `recoverable_format` 48, `human_review` 16,
+`aggregate_continuous` 11, `worth_retrying` 5, `not_item_response` 2.
+
+**The NC ruling caught this run mid-flight.** #2808/#2809 (2026-10-03) let CC BY-NC
+and BY-NC-SA through, but the passes ran on an older checkout whose gate still
+blocked them. Of the 228 `license_restricted` rows, 218 are ND (still blocked)
+and **10 are NC**. Those 10 were pulled out by hand as leads
+(`flag=license_restricted_nc`) and worked under the new rule.
+
+**80 leads -> `leads/pmc_leads_2026-10-04.csv`.** Every lead is terminal:
+**15 shipped, 46 rejected on content, 19 blocked on licence.**
+
+| table(s) | script | ids | items | resp |
+|---|---|---|---|---|
+| `fong_2023_ssqol12` / `_hads` / `_shs` / `_rses` / `_sf12` | `data/fong_2023_ssqol.py` | 184 (rses 181) | 12 / 14 / 6 / 10 / 12 | mixed; ssqol12 has `wave` |
+| `kanwal_2024_csr` / `_goc` / `_gsv` / `_wpeb` | `data/kanwal_2024_csr.py` | 345 | 26 / 9 / 4 / 6 | 1-5 |
+| `strojny_2026_gmi` / `_igds9sf` / `_gdt` / `_gis` | `data/strojny_2026_gaming_motivation.py` | 911 | 88 / 9 / 4 / 12 | 1-7 / 1-5 / 1-5 / minutes |
+| `przybylski_2016_igd` | `data/przybylski_2016_igd.py` | 8,658 | 10 | 0-1 |
+| `fang_2021_pbc` / `_pn` / `_sn` / `_peb` | `data/fang_2021_pro_environmental.py` | 225 | 4 / 3 / 5 / 5 | 1-5 |
+| `makovi_2021_symbolic_racism` / `_environmental_concern` / `_environmental_risk` | `data/makovi_2021_racism_environment.py` | 1,582 | 11 / 8 / 4 | 1-5 / 1-4 / 1-4 |
+| `usmani_2024_iwe` / `_ks` / `_pops` | `data/usmani_2024_islamic_work_ethic.py` | 123 | 17 / 10 / 12 | 1-5 |
+| `shen_2025_dass21` / `_bsmas` / `_sabas` / `_igds9sf` | `data/shen_2025_teacher_distress.py` | 1,259 | 21 / 6 / 6 / 9 | mixed |
+| `clemente_2024_attitude_father` / `_mother` / `_sd4` / `_pmd` | `data/clemente_2024_divorced_parents.py` | 414 | 10 / 10 / 28 / 8 | 1-5 / 1-7 (pmd) |
+| `li_2026_psmus` | `data/li_2026_psmus.py` | 785 | 15 | 1-8 |
+| `kramer_2023_gfmt2sa` / `_efct` | `data/kramer_2023_face_matching.py` | 220 | 40 / 168 | 0-1; efct has `wave` + `treat` |
+| `yamagishi_2016_pd` | `data/yamagishi_2016_pd_stakes.py` | 479 | 12 | 0-1 |
+| `yuan_2024_ucla` / `_contact` / `_trust` | `data/yuan_2024_intergroup_contact.py` | 679 | 20 / 9 / 4 | 1-4 / 1-7; `wave` |
+| `mohamed_2021_covid_attitude` / `_practice` | `data/mohamed_2021_covid_kap.py` | 982 | 5 / 6 | 0-1 / 0-3 |
+| `rzeszutek_2023_danieli` / `_pds5` / `_pds5_events` / `_ees` / `_swls` | `data/rzeszutek_2023_wwii_trauma.py` | 1,598 (pds5 964) | 60 / 22 / 8 / 34 / 5 | 1-5 / 0-4 / 0-1 / 1-5 / 1-7 |
+
+All 46 tables were re-run centrally through `irw-validate --profile upload`
+and pass, and none has a duplicate (id, item[, wave, treat]) key. Every
+warning was explained by the source:
+- concentration on binary or floor-heavy items
+- multi_scale on instruments with subscale prefixes
+- SF-12's native mixed formats
+- `strojny_2026_gis` being minutes per day
+
+**Item text: 25 tables** (`itemtext_output/`). They pass `normalize_nulls`,
+`validate_items --resp-csv`, `audit_batch --resp-dir` (no anomalies) and
+`irw-validate`.
+- **Verification scripts:**
+  - `makovi_2021_symbolic_racism` / `_environmental_concern`,
+    `clemente_2024_sd4` and `li_2026_psmus` are `paper_order` with
+    `verify_*.R`, all `VERDICT: PASS`, status PARTIAL: each block is pinned,
+    but order within a block is not.
+  - `fang_2021_{pbc,pn,peb}` are VERIFIED by per-item means against the paper.
+  - The rest are `data_labels`.
+- **Held:** `shen_2025_igds9sf` item text was extracted but is NOT shipped,
+  because IGDS9-SF is `block` in the rights register. The file is held outside
+  the upload folder. `strojny_2026_igds9sf` and `_gdt` (same holder) were never
+  extracted.
+- **Not shipped, and where the text actually is:**
+  - fong (the Chinese instruments are only cited)
+  - przybylski (bare criterion names)
+  - fang_2021_sn (the data's codes don't match the paper's items)
+  - strojny_gis (English glosses with copy errors)
+  - kramer (picture stimuli)
+  - yamagishi (no wording)
+  - mohamed (the paper's Table 2 prints the attitude/practice statements, and
+    the counts match)
+  - rzeszutek (the xlsx carries Polish codes only; the wording is in the cited
+    Polish adaptations)
+
+**Duplicates dropped, each asserted and data-noted** (isolated exact pairs, the
+Csibra 2025 treatment):
+- kanwal: 2 pairs, where items match but demographics differ, so all 4 rows
+  were dropped
+- strojny: 19 rows
+- usmani: 2 double-entered questionnaires
+- li: 3 pairs
+- mohamed: 5 double submissions
+- przybylski: the Study 2 "US" cohort held 1,258 Canadian copies, kept once
+  under Canada
+
+Rejected as duplicate networks:
+- Farid 2023 dairy TPB (6 groups with altered demographics, plus mismatches with the paper's table)
+- rabies KAP `10.1186/s12889-020-09388-9` (97 rows in 69 groups)
+- `10.1186/s12889-025-21596-9` (rows repeated 3-4 times)
+
+**Rulings from ben-domingue, 2026-10-04:**
+- **Rzeszutek 2023 WWII trauma** (`10.1038/s41598-023-44300-6`) was first
+  skipped on PII, because its free-text trauma narratives (`pds5inne`) name
+  places and family deaths. Ruled: drop the column and ship. `pds5inne` is the
+  file's only non-numeric column (asserted), and there is no hard identifier.
+  `year` is age, matching the paper's M=48.78, range 18-97.
+  - The Danieli Inventory stacks three parallel ancestor blocks (one per
+    respondent) with `cov_danieli_target`.
+  - The 270 WWII-knowledge items (yes/no/don't know) are a nominal-standard
+    candidate, left out.
+- **Duplicates:** trim, as built.
+- **`mohamed_2021_covid_knowledge`:** skip. Its scored select-all options don't
+  map onto the paper's 19 options. The script now records `k1..k22` as skipped.
+- **`yamagishi_2016_pd`:** kept on Claude's recommendation (the role × stake
+  design fits id/item/resp).
+- **GDT item text:** blocked. The page was re-fetched 2026-10-04, and it carries
+  the same CC BY-NC-ND footer and other-language clause as IGDS9-SF; a register
+  row was added.
+
+**Licence:** 19 blocked, almost all the usual shape: an OSF node that is
+private, or public with no licence. Five went to
+`license_blocked_candidates.csv`:
+- Huber prejudice (996)
+- Tinder prejudice (Study 2, 481)
+- narcissism/emotion (147+520)
+- Vossoughi (3 studies)
+- Krabbe/Jylkkä (629 × 276)
+
+`usmani_2024` came in through the NC re-run, but its data sit on Mendeley
+under CC BY 4.0, so it ships CC BY.
+
+**Staged:**
+- 46 `dictionary_auto.csv` rows, each with `codebook_url`, so 46
+  `codebook_at_ingest.csv` rows
+- 46 `tags/tags_auto.csv` rows: setting / tool / format / language only, per
+  the publish gate, and `test_tags_union.R` passes
+- 46 `itemtext_provenance.csv` rows
+- 25 `itemtext/mapping_verification.csv` rows
+- 30 `metadata/data_notes.csv` rows
+- issues-page entries drafted for datapages/irw (see TODO)
+
+**Process note.** The branch was cut from `origin/main` after the sweeps had
+run on an older checkout. The seen-ledger rows were rewritten through main's
+`seen_ledger.append_seen` with their flags (#2222) rather than the old
+two-column writer.
+
+## 2026-10-05 — PMC scout-2 sweep, the last 208 backlog terms (PeerJ + Sci Rep only): 126 candidates, 27 leads, 18 tables / 817,775 responses
+
+**Terms.** `irw_discover_pmc.py` over the 208 unrun terms of
+`pmc_term_backlog_2026-09-25.csv` (ranks 301+). Claude Code killed the run for
+low system memory partway through the third journal (jofintelligence), so
+only **PeerJ and Scientific Reports** finished. Because the process was killed,
+the script's `finally` block never ran. Its seen-ledger write and its
+in-process Step 2b were both lost. They were redone by hand:
+- Step 2b: `irw_retriage_ha.py`, which archived 3 rows to
+  `human_review/human_review_pmc_2026-10-05.csv`.
+- The seen ledger: 107 DOIs through `seen_ledger.append_seen` with their
+  flags. The 17 `download_failed` and 2 `error` rows were left out, per
+  `INCONCLUSIVE_FLAGS`.
+- The backlog: a new `partial_2026_10_05` column (`peerj; screports`). **The
+  other 9 journals are still owed for all 208 terms.** Resume with the same
+  208 terms and `--journals jofintelligence,mbr,behavsci,apm,bmcmrm,jopd,bmcpubhealth,heliyon,psychometrika`.
+
+| flag | n |
+|---|---|
+| `no_usable_file` | 50 |
+| `license_restricted` (all CC BY-NC-ND) | 30 |
+| `human_assistance` | 17 |
+| `download_failed` | 17 |
+| `below_min_n` | 3 |
+| `good` | 2 |
+| `error` / `timeout` / `not_item_response` | 2 each |
+| `external_unresolved` | 1 |
+
+`refined_flag` over the 17: `recoverable_format` 8, `worth_retrying` 4,
+`human_review` 3, `aggregate_continuous` 2.
+
+**27 leads -> `leads/pmc_leads_2026-10-05.csv`.** These are the `good`, `human_assistance`, `error` and
+human-subject `download_failed` rows. All are terminal: **5 shipped, 15
+rejected on content, 7 blocked on licence.** The download failures were
+transient: every Europe PMC supplementary zip came back 200 on retry, and
+none held usable data. Non-human or non-survey failures (crinoids,
+earthworms, mouse/rodent studies, CLSA) were not worked.
+
+| table(s) | script | ids | items | resp |
+|---|---|---|---|---|
+| `wu_2022_dcep_{risk,habit,social_influence,national_identity,fairness,usage}` | `data/wu_2022_dcep.py` | 295 | 3 each | 1-7 |
+| `lyu_2024_{rtp,sef,nfa,pvs,org,ate,sun,pbc,sei}` | `data/lyu_2024_social_entrepreneurship.py` | 681 | 4-5 | 1-5 |
+| `sung_2026_marital_quality` | `data/sung_2026_marital_quality.py` | 616 spouses / 308 couples (`cluster_id`) | 6 | 1-3 |
+| `elshafie_2020_edsc` | `data/elshafie_2020_edsc.py` | 1,503 | 54 | 0-1 |
+| `scheerhagen_2019_reproq` | `data/scheerhagen_2019_reproq.py` | 13,111 | 88 | 1-4, `wave` 1/2 |
+
+All 18 pass `run_qc` and `irw-validate --profile upload`, and none has a
+duplicate key. The warnings are response concentration on milestone items, on
+ceiling-heavy satisfaction items and on Sung's `p_demand`, plus the ReproQ
+`Pnb` (1-3) and `Svd_P` (1-2) items being narrower than the rest.
+- **Sung:** the deposit's answer-label strings contradict the paper. Read
+  literally, no spouse ever answers "often". The coding that reproduces the
+  deposit's own composites exactly for every spouse is the paper's 1-3, and
+  that is what ships (data-noted).
+- **elshafie:** the flagged s005 held only totals. The 54 milestones are in
+  s004, an SPSS `.sav` served under a `.zip` name.
+- **ReproQ:** the invitation token links the antenatal and postnatal files for
+  2,770 women; perinatal unit, parity and age band agree far above chance.
+  Changes made:
+  - 94 exact same-token double submissions dropped.
+  - Tokens that recur with different answers treated as collisions and left
+    unlinked.
+  - Tokens replaced by a row-index id.
+  - Pregnancy-phase items suffixed `_P`.
+  - Not-applicable codes dropped, including `Pnb` code 4 ("did not want to be
+    involved").
+- **Lyu:** 3 adjacent pairs identical on all 42 items and all demographics
+  were dropped (684 -> 681).
+- **Wu:** 11 groups of identical near-constant patterns, kept.
+
+**Item text: 10 tables** (`itemtext_output/`). They pass `normalize_nulls`,
+`validate_items --resp-csv`, `audit_batch --resp-dir` and `irw-validate`.
+- `lyu_2024_*` (9): `data_labels`. SI Table S1's codes are the csv headers
+  (42/42).
+- `elshafie_2020_edsc`: administered Arabic, with an IRW-written English
+  `_translated`. `verify_elshafie_2020_edsc.R` gives `VERDICT: PASS`, status
+  PARTIAL (age-band ordering). It owes an issues-page entry.
+- **Not shipped, and where the text actually is:**
+  - wu: English statements in MOESM1 docx, tied to codes by position within a
+    construct only.
+  - sung: six stems in the paper's Methods, tied to codes by content.
+  - ReproQ: the `.sav` labels are English glosses of a Dutch questionnaire
+    that neither the deposit nor the SI carries.
+
+**Licence:** 7 blocked. Four went to `license_blocked_candidates.csv`:
+- deception about study purpose (998 × 71)
+- attended-emotion mood judgments
+- authoritarianism text / EU immigration
+- 3-wave US social/political trust panel (21,418)
+
+These were not logged:
+- the AUSSDA scientific-use schadenfreude data (a restricted archive, not a
+  licence gap)
+- private OSF qdz3n (AUT human vs AI)
+- the marginal trial-level HD-tDCS vigilance task
+
+**Staged:**
+- 18 `dictionary_auto.csv` rows, each with `codebook_url`
+- 18 `codebook_at_ingest.csv` rows
+- 18 `tags/tags_auto.csv` rows (`test_tags_union.R` passes)
+- 18 `itemtext_provenance.csv` rows
+- 10 `itemtext/mapping_verification.csv` rows
+- 18 `metadata/data_notes.csv` rows
+
+**Dryad note:** Dryad file downloads 401 without a token, but the files load
+through headless Chrome from the dataset page. This is not wired into the
+pipeline.
+
+## 2026-10-05b — rulings on the 2026-10-05 batch
+
+ben-domingue, 2026-10-05:
+- **Lyu 2024 item text:** the English is accepted as the study's own item
+  list, as shipped (no language column, no issues-page entry).
+- **ReproQ:** one table, with phase-suffixed items and wave 1/2, as shipped.
+
+`elshafie_2020_edsc`'s issues-page entry is datapages/irw#319. The covariate
+labels wait on the release: `build.py` still adds nothing, because the tables
+are not yet in `metadata.csv`.
+
+## 2026-10-05c — PMC sweep, the remaining 9 journals for the 208 terms: 65 candidates, 13 leads, 4 tables / 4,408 responses
+
+This completes the 208 terms of 2026-10-05 across all 11 journals. It ran
+with `--journals jofintelligence,mbr,behavsci,apm,bmcmrm,jopd,bmcpubhealth,heliyon,psychometrika`
+and finished with 0 `QUERY FAILED`. Step 2b ran in-process and archived 2
+`human_review` rows. The backlog has a new `run_2026_10_05b` column, and
+**no scored terms remain unrun** in `pmc_term_backlog_2026-09-25.csv`.
+
+| flag | n |
+|---|---|
+| `no_usable_file` | 39 |
+| `license_restricted` (all CC BY-NC-ND) | 13 |
+| `download_failed` | 6 |
+| `human_assistance` | 4 |
+| `external_unresolved` | 2 |
+| `error` | 1 |
+
+**13 leads -> `leads/pmc_leads_2026-10-05b.csv`:** 1 shipped, 5 rejected on
+content, 7 blocked on licence.
+
+| table | script | ids | items | resp |
+|---|---|---|---|---|
+| `matsaid_2022_abcdm_knowledge` | `data/matsaid_2022_abcdm.py` | 179 | 8 | 0-1 |
+| `matsaid_2022_abcdm_perceived_risk` | same | 175 | 8 | 1-4 |
+| `matsaid_2022_abcdm_perceived_benefits` | same | 177 | 4 | 1-4 |
+| `matsaid_2022_abcdm_intention` | same | 179 | 6 | 1-4 |
+
+- **ABCD-M (Malay):** triage read the workbook's "Figures legend" sheet, but
+  the item data are on its "Raw data" sheet. Code 0 ("non-applicable") was
+  dropped, and items 15, 23 and 26 are stored reverse-scored. All four tables
+  pass `run_qc` and `irw-validate --profile upload`.
+- **Item text not shipped.** SI MOESM2 numbers the wording 1-26 to match the
+  codes. But the deposit does not reproduce the paper's Table 2 loadings for
+  items 15/16 or for the intention items, so the numbering is not trusted.
+  This is data-noted.
+
+**Licence:**
+- Two strong rows went to `license_blocked_candidates.csv`, both on public
+  OSF nodes with no licence:
+  - Chinese men's gender-role legitimacy, `10.3390/bs16091609`:
+    200×29 + 270×36 `.sav`.
+  - Implicit-bias interventions in courts, `10.3390/bs15091269`: raw
+    Qualtrics, N≈1016, about 60 Likert items.
+- Private OSF r3xfy and e2xsr were already logged on 2026-09-23. 87ew5 is
+  private and N=78.
+- Two restricted archives were not logged, the same treatment AUSSDA got: the
+  NCMI Youth Health DB (application plus virtual desktop) and a ScienceDB set
+  ("obtain after agreement").
+
+**Rejected:** Dutch health literacy (the SI is definitions plus a summary
+table), the brucellosis questionnaire (no data), the HFMD collinearity table,
+Heliyon e18517 (humans N=12) and Heliyon e39093 (a REDCap dictionary only;
+data on request).
+
+**Staged:**
+- 4 `dictionary_auto.csv` rows and 4 `codebook_at_ingest.csv` rows
+- 4 `tags/tags_auto.csv` rows (`test_tags_union.R` passes)
+- 4 `itemtext_provenance.csv` rows
+- 4 `metadata/data_notes.csv` rows

@@ -46,7 +46,7 @@ física em altitudes elevadas. Nessas condições, ocorrerá
 uma diminuição na concentração de hemoglobina 
 oxigenada (HbO 2) em equilíbrio no sangue, conforme a 
 relação:
-Hb (aq) + O_2 (aq)  HbO_2 (aq)
+Hb (aq) + O_2 (aq) ⇌ HbO_2 (aq)
 Mal da montanha. Disponível em: www.feng.pucrs.br. Acesso em: 11 fev. 2015 (adaptado).
 A alteração da concentração de hemoglobina oxigenada 
 no sangue ocorre por causa do(a)","D","elevação da pressão arterial.",0,NA,NA,NA,NA,"Portuguese","A"
@@ -97,7 +97,7 @@ física em altitudes elevadas. Nessas condições, ocorrerá
 uma diminuição na concentração de hemoglobina 
 oxigenada (HbO 2) em equilíbrio no sangue, conforme a 
 relação:
-Hb (aq) + O_2 (aq)  HbO_2 (aq)
+Hb (aq) + O_2 (aq) ⇌ HbO_2 (aq)
 Mal da montanha. Disponível em: www.feng.pucrs.br. Acesso em: 11 fev. 2015 (adaptado).
 A alteração da concentração de hemoglobina oxigenada 
 no sangue ocorre por causa do(a)","D","aumento da temperatura corporal.",0,NA,NA,NA,NA,"Portuguese","B"
@@ -148,7 +148,7 @@ física em altitudes elevadas. Nessas condições, ocorrerá
 uma diminuição na concentração de hemoglobina 
 oxigenada (HbO 2) em equilíbrio no sangue, conforme a 
 relação:
-Hb (aq) + O_2 (aq)  HbO_2 (aq)
+Hb (aq) + O_2 (aq) ⇌ HbO_2 (aq)
 Mal da montanha. Disponível em: www.feng.pucrs.br. Acesso em: 11 fev. 2015 (adaptado).
 A alteração da concentração de hemoglobina oxigenada 
 no sangue ocorre por causa do(a)","D","redução da temperatura do ambiente.",0,NA,NA,NA,NA,"Portuguese","C"
@@ -199,7 +199,7 @@ física em altitudes elevadas. Nessas condições, ocorrerá
 uma diminuição na concentração de hemoglobina 
 oxigenada (HbO 2) em equilíbrio no sangue, conforme a 
 relação:
-Hb (aq) + O_2 (aq)  HbO_2 (aq)
+Hb (aq) + O_2 (aq) ⇌ HbO_2 (aq)
 Mal da montanha. Disponível em: www.feng.pucrs.br. Acesso em: 11 fev. 2015 (adaptado).
 A alteração da concentração de hemoglobina oxigenada 
 no sangue ocorre por causa do(a)","D","queda da pressão parcial de oxigênio.",1,NA,NA,NA,NA,"Portuguese","D"
@@ -250,7 +250,7 @@ física em altitudes elevadas. Nessas condições, ocorrerá
 uma diminuição na concentração de hemoglobina 
 oxigenada (HbO 2) em equilíbrio no sangue, conforme a 
 relação:
-Hb (aq) + O_2 (aq)  HbO_2 (aq)
+Hb (aq) + O_2 (aq) ⇌ HbO_2 (aq)
 Mal da montanha. Disponível em: www.feng.pucrs.br. Acesso em: 11 fev. 2015 (adaptado).
 A alteração da concentração de hemoglobina oxigenada 
 no sangue ocorre por causa do(a)","D","diminuição da quantidade de hemácias.",0,NA,NA,NA,NA,"Portuguese","E"
@@ -1889,7 +1889,7 @@ onda. A parte refratada do feixe 3  incide na interface
 O observador indicado enxergará aquela região do filme 
 com coloração equivalente à do comprimento de onda 
 que sofre interferência completamente construtiva entre 
-os raios 2  e 5 , mas essa condição só é possível para 
+os raios_2  e_5 , mas essa condição só é possível para 
 uma espessura mínima da película. Considere que o 
 caminho percorrido em 3  e 4  corresponde ao dobro da 
 espessura E da película de óleo.
@@ -1904,9 +1904,7 @@ E
 43
 Disponível em: http://2011.igem.org. Acesso em: 18 nov. 2014 (adaptado).
 Expressa em termos do comprimento de onda (λ), a 
-espessura mínima é igual a","A","λ
-4
-.",1,NA,NA,NA,NA,"Portuguese","A"
+espessura mínima é igual a","A","λ/4.",1,NA,NA,NA,NA,"Portuguese","A"
 "enem_2015_1mil_cn","enem_2015_1mil_cn_1",82658,"ENEM 2015 - CN","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE CIÊNCIAS HUMANAS E SUAS TECNOLOGIAS
 PROVA DE CIÊNCIAS DA NATUREZA E SUAS TECNOLOGIAS
@@ -1960,7 +1958,7 @@ onda. A parte refratada do feixe 3  incide na interface
 O observador indicado enxergará aquela região do filme 
 com coloração equivalente à do comprimento de onda 
 que sofre interferência completamente construtiva entre 
-os raios 2  e 5 , mas essa condição só é possível para 
+os raios_2  e_5 , mas essa condição só é possível para 
 uma espessura mínima da película. Considere que o 
 caminho percorrido em 3  e 4  corresponde ao dobro da 
 espessura E da película de óleo.
@@ -1975,9 +1973,7 @@ E
 43
 Disponível em: http://2011.igem.org. Acesso em: 18 nov. 2014 (adaptado).
 Expressa em termos do comprimento de onda (λ), a 
-espessura mínima é igual a","A","λ
-2
-.",0,NA,NA,NA,NA,"Portuguese","B"
+espessura mínima é igual a","A","λ/2.",0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2015_1mil_cn","enem_2015_1mil_cn_1",82658,"ENEM 2015 - CN","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE CIÊNCIAS HUMANAS E SUAS TECNOLOGIAS
 PROVA DE CIÊNCIAS DA NATUREZA E SUAS TECNOLOGIAS
@@ -2031,7 +2027,7 @@ onda. A parte refratada do feixe 3  incide na interface
 O observador indicado enxergará aquela região do filme 
 com coloração equivalente à do comprimento de onda 
 que sofre interferência completamente construtiva entre 
-os raios 2  e 5 , mas essa condição só é possível para 
+os raios_2  e_5 , mas essa condição só é possível para 
 uma espessura mínima da película. Considere que o 
 caminho percorrido em 3  e 4  corresponde ao dobro da 
 espessura E da película de óleo.
@@ -2046,9 +2042,7 @@ E
 43
 Disponível em: http://2011.igem.org. Acesso em: 18 nov. 2014 (adaptado).
 Expressa em termos do comprimento de onda (λ), a 
-espessura mínima é igual a","A","3λ
-4
-.",0,NA,NA,NA,NA,"Portuguese","C"
+espessura mínima é igual a","A","3λ/4.",0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2015_1mil_cn","enem_2015_1mil_cn_1",82658,"ENEM 2015 - CN","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE CIÊNCIAS HUMANAS E SUAS TECNOLOGIAS
 PROVA DE CIÊNCIAS DA NATUREZA E SUAS TECNOLOGIAS
@@ -2102,7 +2096,7 @@ onda. A parte refratada do feixe 3  incide na interface
 O observador indicado enxergará aquela região do filme 
 com coloração equivalente à do comprimento de onda 
 que sofre interferência completamente construtiva entre 
-os raios 2  e 5 , mas essa condição só é possível para 
+os raios_2  e_5 , mas essa condição só é possível para 
 uma espessura mínima da película. Considere que o 
 caminho percorrido em 3  e 4  corresponde ao dobro da 
 espessura E da película de óleo.
@@ -2171,7 +2165,7 @@ onda. A parte refratada do feixe 3  incide na interface
 O observador indicado enxergará aquela região do filme 
 com coloração equivalente à do comprimento de onda 
 que sofre interferência completamente construtiva entre 
-os raios 2  e 5 , mas essa condição só é possível para 
+os raios_2  e_5 , mas essa condição só é possível para 
 uma espessura mínima da película. Considere que o 
 caminho percorrido em 3  e 4  corresponde ao dobro da 
 espessura E da película de óleo.
@@ -6520,12 +6514,8 @@ arremesso, quando submetidos à mesma força aplicada.
 Sabe-se que a constante elástica k_d (do estilingue mais 
 “duro”) é o dobro da constante elástica k_m (do estilingue 
 mais “mole”).
-A razão entre os alcances D^d
-D_m
-, referentes aos estilingues 
-com borrachas “dura” e “mole”, respectivamente, é igual a","B","1
-4
-.",0,NA,NA,NA,NA,"Portuguese","A"
+A razão entre os alcances D_d/D_m, referentes aos estilingues 
+com borrachas “dura” e “mole”, respectivamente, é igual a","B","1/4.",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2015_1mil_cn","enem_2015_1mil_cn_1",53958,"ENEM 2015 - CN","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE CIÊNCIAS HUMANAS E SUAS TECNOLOGIAS
 PROVA DE CIÊNCIAS DA NATUREZA E SUAS TECNOLOGIAS
@@ -6574,12 +6564,8 @@ arremesso, quando submetidos à mesma força aplicada.
 Sabe-se que a constante elástica k_d (do estilingue mais 
 “duro”) é o dobro da constante elástica k_m (do estilingue 
 mais “mole”).
-A razão entre os alcances D^d
-D_m
-, referentes aos estilingues 
-com borrachas “dura” e “mole”, respectivamente, é igual a","B","1
-2
-.",1,NA,NA,NA,NA,"Portuguese","B"
+A razão entre os alcances D_d/D_m, referentes aos estilingues 
+com borrachas “dura” e “mole”, respectivamente, é igual a","B","1/2.",1,NA,NA,NA,NA,"Portuguese","B"
 "enem_2015_1mil_cn","enem_2015_1mil_cn_1",53958,"ENEM 2015 - CN","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE CIÊNCIAS HUMANAS E SUAS TECNOLOGIAS
 PROVA DE CIÊNCIAS DA NATUREZA E SUAS TECNOLOGIAS
@@ -6628,9 +6614,7 @@ arremesso, quando submetidos à mesma força aplicada.
 Sabe-se que a constante elástica k_d (do estilingue mais 
 “duro”) é o dobro da constante elástica k_m (do estilingue 
 mais “mole”).
-A razão entre os alcances D^d
-D_m
-, referentes aos estilingues 
+A razão entre os alcances D_d/D_m, referentes aos estilingues 
 com borrachas “dura” e “mole”, respectivamente, é igual a","B","1.",0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2015_1mil_cn","enem_2015_1mil_cn_1",53958,"ENEM 2015 - CN","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE CIÊNCIAS HUMANAS E SUAS TECNOLOGIAS
@@ -6680,9 +6664,7 @@ arremesso, quando submetidos à mesma força aplicada.
 Sabe-se que a constante elástica k_d (do estilingue mais 
 “duro”) é o dobro da constante elástica k_m (do estilingue 
 mais “mole”).
-A razão entre os alcances D^d
-D_m
-, referentes aos estilingues 
+A razão entre os alcances D_d/D_m, referentes aos estilingues 
 com borrachas “dura” e “mole”, respectivamente, é igual a","B","2.",0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2015_1mil_cn","enem_2015_1mil_cn_1",53958,"ENEM 2015 - CN","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE CIÊNCIAS HUMANAS E SUAS TECNOLOGIAS
@@ -6732,9 +6714,7 @@ arremesso, quando submetidos à mesma força aplicada.
 Sabe-se que a constante elástica k_d (do estilingue mais 
 “duro”) é o dobro da constante elástica k_m (do estilingue 
 mais “mole”).
-A razão entre os alcances D^d
-D_m
-, referentes aos estilingues 
+A razão entre os alcances D_d/D_m, referentes aos estilingues 
 com borrachas “dura” e “mole”, respectivamente, é igual a","B","4.",0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2015_1mil_cn","enem_2015_1mil_cn_1",13038,"ENEM 2015 - CN","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE CIÊNCIAS HUMANAS E SUAS TECNOLOGIAS
@@ -6783,14 +6763,14 @@ cálcio pode ser adicionado ao efluente, em
 quantidades apropriadas, pois produz bicarbonato, 
 que neutraliza a água. As equações envolvidas no 
 processo são apresentadas:
-(I) CaCO_3 (s) + CO_2 (g) + H_2O (l)  Ca2+ (aq) + 2 HCO_3
+(I) CaCO_3 (s) + CO_2 (g) + H_2O (l) ⇌ Ca2+ (aq) + 2 HCO_3
 − (aq)
 (II) HCO_3
-− (aq)  H+ (aq) + CO_3
+− (aq) ⇌ H+ (aq) + CO_3
 2− (aq)       K 1 = 3,0×10−11
-(III) CaCO_3 (s)  Ca2+ (aq) + CO_3
+(III) CaCO_3 (s) ⇌ Ca2+ (aq) + CO_3
 2− (aq)       K 2 = 6,0×10−9
-(IV) CO_2 (g) + H_2O (l)  H+ (aq) + HCO_3
+(IV) CO_2 (g) + H_2O (l) ⇌ H+ (aq) + HCO_3
 − (aq)       K_3 = 2,5×10^−7
 Com base nos valores das constantes de equilíbrio das 
 reações II, III e IV a 25 °C, qual é o valor numérico da 
@@ -6842,14 +6822,14 @@ cálcio pode ser adicionado ao efluente, em
 quantidades apropriadas, pois produz bicarbonato, 
 que neutraliza a água. As equações envolvidas no 
 processo são apresentadas:
-(I) CaCO_3 (s) + CO_2 (g) + H_2O (l)  Ca2+ (aq) + 2 HCO_3
+(I) CaCO_3 (s) + CO_2 (g) + H_2O (l) ⇌ Ca2+ (aq) + 2 HCO_3
 − (aq)
 (II) HCO_3
-− (aq)  H+ (aq) + CO_3
+− (aq) ⇌ H+ (aq) + CO_3
 2− (aq)       K 1 = 3,0×10−11
-(III) CaCO_3 (s)  Ca2+ (aq) + CO_3
+(III) CaCO_3 (s) ⇌ Ca2+ (aq) + CO_3
 2− (aq)       K 2 = 6,0×10−9
-(IV) CO_2 (g) + H_2O (l)  H+ (aq) + HCO_3
+(IV) CO_2 (g) + H_2O (l) ⇌ H+ (aq) + HCO_3
 − (aq)       K_3 = 2,5×10^−7
 Com base nos valores das constantes de equilíbrio das 
 reações II, III e IV a 25 °C, qual é o valor numérico da 
@@ -6901,14 +6881,14 @@ cálcio pode ser adicionado ao efluente, em
 quantidades apropriadas, pois produz bicarbonato, 
 que neutraliza a água. As equações envolvidas no 
 processo são apresentadas:
-(I) CaCO_3 (s) + CO_2 (g) + H_2O (l)  Ca2+ (aq) + 2 HCO_3
+(I) CaCO_3 (s) + CO_2 (g) + H_2O (l) ⇌ Ca2+ (aq) + 2 HCO_3
 − (aq)
 (II) HCO_3
-− (aq)  H+ (aq) + CO_3
+− (aq) ⇌ H+ (aq) + CO_3
 2− (aq)       K 1 = 3,0×10−11
-(III) CaCO_3 (s)  Ca2+ (aq) + CO_3
+(III) CaCO_3 (s) ⇌ Ca2+ (aq) + CO_3
 2− (aq)       K 2 = 6,0×10−9
-(IV) CO_2 (g) + H_2O (l)  H+ (aq) + HCO_3
+(IV) CO_2 (g) + H_2O (l) ⇌ H+ (aq) + HCO_3
 − (aq)       K_3 = 2,5×10^−7
 Com base nos valores das constantes de equilíbrio das 
 reações II, III e IV a 25 °C, qual é o valor numérico da 
@@ -6960,14 +6940,14 @@ cálcio pode ser adicionado ao efluente, em
 quantidades apropriadas, pois produz bicarbonato, 
 que neutraliza a água. As equações envolvidas no 
 processo são apresentadas:
-(I) CaCO_3 (s) + CO_2 (g) + H_2O (l)  Ca2+ (aq) + 2 HCO_3
+(I) CaCO_3 (s) + CO_2 (g) + H_2O (l) ⇌ Ca2+ (aq) + 2 HCO_3
 − (aq)
 (II) HCO_3
-− (aq)  H+ (aq) + CO_3
+− (aq) ⇌ H+ (aq) + CO_3
 2− (aq)       K 1 = 3,0×10−11
-(III) CaCO_3 (s)  Ca2+ (aq) + CO_3
+(III) CaCO_3 (s) ⇌ Ca2+ (aq) + CO_3
 2− (aq)       K 2 = 6,0×10−9
-(IV) CO_2 (g) + H_2O (l)  H+ (aq) + HCO_3
+(IV) CO_2 (g) + H_2O (l) ⇌ H+ (aq) + HCO_3
 − (aq)       K_3 = 2,5×10^−7
 Com base nos valores das constantes de equilíbrio das 
 reações II, III e IV a 25 °C, qual é o valor numérico da 
@@ -7019,14 +6999,14 @@ cálcio pode ser adicionado ao efluente, em
 quantidades apropriadas, pois produz bicarbonato, 
 que neutraliza a água. As equações envolvidas no 
 processo são apresentadas:
-(I) CaCO_3 (s) + CO_2 (g) + H_2O (l)  Ca2+ (aq) + 2 HCO_3
+(I) CaCO_3 (s) + CO_2 (g) + H_2O (l) ⇌ Ca2+ (aq) + 2 HCO_3
 − (aq)
 (II) HCO_3
-− (aq)  H+ (aq) + CO_3
+− (aq) ⇌ H+ (aq) + CO_3
 2− (aq)       K 1 = 3,0×10−11
-(III) CaCO_3 (s)  Ca2+ (aq) + CO_3
+(III) CaCO_3 (s) ⇌ Ca2+ (aq) + CO_3
 2− (aq)       K 2 = 6,0×10−9
-(IV) CO_2 (g) + H_2O (l)  H+ (aq) + HCO_3
+(IV) CO_2 (g) + H_2O (l) ⇌ H+ (aq) + HCO_3
 − (aq)       K_3 = 2,5×10^−7
 Com base nos valores das constantes de equilíbrio das 
 reações II, III e IV a 25 °C, qual é o valor numérico da 
@@ -7335,7 +7315,7 @@ reduz neutros e neutrinos, e abana-se com o leque da
 reação em cadeia
 ANDRADE, C. D. Poesia completa e prosa. Rio de Janeiro: Aguilar, 1973 (fragmento).
 Nesse fragmento de poema, o autor refere-se à bomba 
-atômica de urânio. Essa reação é dita “em cadeia” porque na","C","fissão do 235U ocorre liberação de grande quantidade 
+atômica de urânio. Essa reação é dita “em cadeia” porque na","C","fissão do ^235U ocorre liberação de grande quantidade 
 de calor, que dá continuidade à reação.",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2015_1mil_cn","enem_2015_1mil_cn_1",54393,"ENEM 2015 - CN","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE CIÊNCIAS HUMANAS E SUAS TECNOLOGIAS
@@ -7381,9 +7361,9 @@ reduz neutros e neutrinos, e abana-se com o leque da
 reação em cadeia
 ANDRADE, C. D. Poesia completa e prosa. Rio de Janeiro: Aguilar, 1973 (fragmento).
 Nesse fragmento de poema, o autor refere-se à bomba 
-atômica de urânio. Essa reação é dita “em cadeia” porque na","C","fissão de 235U ocorre liberação de energia, que vai 
-desintegrando o isótopo 238U, enriquecendo-o em 
-mais 235U.",0,NA,NA,NA,NA,"Portuguese","B"
+atômica de urânio. Essa reação é dita “em cadeia” porque na","C","fissão de ^235U ocorre liberação de energia, que vai 
+desintegrando o isótopo ^238U, enriquecendo-o em 
+mais ^235U.",0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2015_1mil_cn","enem_2015_1mil_cn_1",54393,"ENEM 2015 - CN","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE CIÊNCIAS HUMANAS E SUAS TECNOLOGIAS
 PROVA DE CIÊNCIAS DA NATUREZA E SUAS TECNOLOGIAS
@@ -7428,7 +7408,7 @@ reduz neutros e neutrinos, e abana-se com o leque da
 reação em cadeia
 ANDRADE, C. D. Poesia completa e prosa. Rio de Janeiro: Aguilar, 1973 (fragmento).
 Nesse fragmento de poema, o autor refere-se à bomba 
-atômica de urânio. Essa reação é dita “em cadeia” porque na","C","fissão do 235U ocorre uma liberação de nêutrons, que 
+atômica de urânio. Essa reação é dita “em cadeia” porque na","C","fissão do ^235U ocorre uma liberação de nêutrons, que 
 bombardearão outros núcleos.",1,NA,NA,NA,NA,"Portuguese","C"
 "enem_2015_1mil_cn","enem_2015_1mil_cn_1",54393,"ENEM 2015 - CN","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE CIÊNCIAS HUMANAS E SUAS TECNOLOGIAS
@@ -7474,7 +7454,7 @@ reduz neutros e neutrinos, e abana-se com o leque da
 reação em cadeia
 ANDRADE, C. D. Poesia completa e prosa. Rio de Janeiro: Aguilar, 1973 (fragmento).
 Nesse fragmento de poema, o autor refere-se à bomba 
-atômica de urânio. Essa reação é dita “em cadeia” porque na","C","fusão do 235U com 238U ocorre formação de neutrino, 
+atômica de urânio. Essa reação é dita “em cadeia” porque na","C","fusão do ^235U com ^238U ocorre formação de neutrino, 
 que bombardeará outros núcleos radioativos.",0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2015_1mil_cn","enem_2015_1mil_cn_1",54393,"ENEM 2015 - CN","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE CIÊNCIAS HUMANAS E SUAS TECNOLOGIAS
@@ -7520,7 +7500,7 @@ reduz neutros e neutrinos, e abana-se com o leque da
 reação em cadeia
 ANDRADE, C. D. Poesia completa e prosa. Rio de Janeiro: Aguilar, 1973 (fragmento).
 Nesse fragmento de poema, o autor refere-se à bomba 
-atômica de urânio. Essa reação é dita “em cadeia” porque na","C","fusão do 235U com 238U ocorre formação de 
+atômica de urânio. Essa reação é dita “em cadeia” porque na","C","fusão do ^235U com ^238U ocorre formação de 
 outros elementos radioativos mais pesados, que 
 desencadeiam novos processos de fusão.",0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2015_1mil_cn","enem_2015_1mil_cn_1",28572,"ENEM 2015 - CN","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
@@ -10195,8 +10175,8 @@ CO  (g)
 CO  (g)
 H O (g)
 H O ( )ℓ
-H  =   18,8 kJ/g
-H  =   2,4 kJ/g
+ΔH  =   −18,8 kJ/g
+ΔH  =   −2,4 kJ/g
 2
 2
 2
@@ -10261,8 +10241,8 @@ CO  (g)
 CO  (g)
 H O (g)
 H O ( )ℓ
-H  =   18,8 kJ/g
-H  =   2,4 kJ/g
+ΔH  =   −18,8 kJ/g
+ΔH  =   −2,4 kJ/g
 2
 2
 2
@@ -10327,8 +10307,8 @@ CO  (g)
 CO  (g)
 H O (g)
 H O ( )ℓ
-H  =   18,8 kJ/g
-H  =   2,4 kJ/g
+ΔH  =   −18,8 kJ/g
+ΔH  =   −2,4 kJ/g
 2
 2
 2
@@ -10393,8 +10373,8 @@ CO  (g)
 CO  (g)
 H O (g)
 H O ( )ℓ
-H  =   18,8 kJ/g
-H  =   2,4 kJ/g
+ΔH  =   −18,8 kJ/g
+ΔH  =   −2,4 kJ/g
 2
 2
 2
@@ -10459,8 +10439,8 @@ CO  (g)
 CO  (g)
 H O (g)
 H O ( )ℓ
-H  =   18,8 kJ/g
-H  =   2,4 kJ/g
+ΔH  =   −18,8 kJ/g
+ΔH  =   −2,4 kJ/g
 2
 2
 2
