@@ -20,9 +20,13 @@ License: openESM lists its copy as GPL-3.0 (inherited from the code
     repository); the OSF data deposit is CC BY 4.0. The table carries GPL-3.0,
     the terms of the copy it is built from (datastandard.md, "Before you
     start").
-Item text: shipped. Italian wording and anchors from the app screenshots in
-    S6 (https://osf.io/download/ehw38/), English from the same figures (the
-    authors' own), translation_source=study_supplied. The screenshots show
+Item text: shipped for the task tables only. Italian wording and anchors
+    from the app screenshots in S6 (https://osf.io/download/ehw38/), English
+    from the same figures (the authors' own), translation_source=
+    study_supplied. The MDMQ wording is not written: the MDMQ adapts Steyer
+    et al.'s MDBF, which is `block` in itemtext/instrument_rights_register.csv
+    (Hogrefe charges a reprint fee for its test items). Its wording stays in
+    TABLES below for reference only. The screenshots show
     the feminine Italian forms (rilassata, tesa, ...); the app presumably
     gendered the adjectives per participant, so men saw masculine forms.
 
@@ -170,6 +174,8 @@ TABLES = {
                               "I could schedule the time of the task"),
         }),
 }
+# MDBF-derived wording: rights register verdict block (Hogrefe reprint fee)
+NO_ITEMTEXT = {"menghini_2023_mdmq"}
 EXPECTED = {"menghini_2023_mdmq": 175, "menghini_2023_task_demands": 174,
             "menghini_2023_task_control": 174}
 
@@ -281,6 +287,8 @@ def main():
         print(f"{path}: {long['id'].nunique()} people x "
               f"{long['item'].nunique()} items = {len(long):,} responses, "
               f"max wave {long['wave'].max()}")
+        if table in NO_ITEMTEXT:
+            continue
         ipath, k = write_items(table, instrument, prompt, items)
         print(f"{ipath}: {k} item text rows")
 
