@@ -153,14 +153,16 @@ jobs:
             echo
             echo "## What changed"
             echo
+            # HEAD~1, not HEAD: the run's output was committed above, so HEAD
+            # already holds it and a diff against HEAD is always empty (#2341).
             python3 .claude/skills/irw-site-update/scripts/summarize_changes.py \
-              --ref HEAD --dir metadata
+              --ref HEAD~1 --dir metadata
             echo
             echo "## How to review this"
             echo
             echo "1. **Rows removed.** Additions are normal growth; a *removal* means a"
             echo "   table disappeared from Redivis, and that is the line worth stopping"
-            echo "   on. Every run so far has removed nothing."
+            echo "   on: name the reason for each one (a withdrawal, a rename) before merging."
             echo "2. **Existing rows changed.** The real signal. A changed"
             echo "   \`n_participants\`, \`density\` or \`responses_per_participant\` on a"
             echo "   table that already existed means the underlying data moved --"
