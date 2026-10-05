@@ -5,7 +5,7 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
 ## From the 2026-10-04 PMC scout-2 sweep (ranks 101-300 + owed pairs)
 
-- [ ] **46 tables (647,006 responses) + 25 item text tables need uploading**:
+- [ ] **46 tables (647,006 responses) need uploading; the 25 item text tables were uploaded** (ben-domingue, confirmed 2026-10-04; `uploaded=2026-10-04` stamped):
   `irw_output/` (fong_2023 ×5, kanwal_2024 ×4, strojny_2026 ×4, przybylski_2016_igd,
   fang_2021 ×4, makovi_2021 ×3, usmani_2024 ×3, shen_2025 ×4, clemente_2024 ×4,
   li_2026_psmus, kramer_2023 ×2, yamagishi_2016_pd, yuan_2024 ×3, mohamed_2021 ×2,
