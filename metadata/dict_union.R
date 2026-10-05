@@ -205,8 +205,15 @@ read_dict_auto <- function(path, label) {
 ##a table metadata.csv has never heard of. Without this file the only trace is a
 ##message in a long pipeline log -- which is the silent-failure shape this whole
 ##change exists to end.
+##
+##Not every absent table is waiting on a publish. A table withdrawn whole
+##(`withdrawals.file`, itemtext/withdrawals.csv) or marked `Public Reshare? =
+##Private` never will be, and holding its row made biblio_pending.csv a list
+##nobody could empty (33 rows on 2026-10-05, none of them waiting on anything).
+##Those rows are still dropped from the union, and named once in the log, but
+##they are not written to the pending file.
 drop_dead_dict_rows <- function(auto, live.file, label, min_oracle_rows = 1000,
-                                pending.file = NULL) {
+                                pending.file = NULL, withdrawals.file = NULL) {
     if (is.null(auto) || is.null(live.file)) {
         write_dict_pending(NULL, pending.file)
         return(auto)
@@ -229,14 +236,33 @@ drop_dead_dict_rows <- function(auto, live.file, label, min_oracle_rows = 1000,
     key  <- dict_key(auto[["table.lower"]])
     key[dict_blank(key)] <- dict_key(auto[["table"]])[dict_blank(key)]
     keep <- key %in% dict_key(live$table)
-    if (any(!keep)) {
-        message(label, ": holding ", sum(!keep), " automated row(s) naming a ",
+    settled <- !keep & (key %in% withdrawn_whole(withdrawals.file) |
+                        tolower(trimws(as.character(auto[["Public Reshare?"]]))) == "private")
+    settled[is.na(settled)] <- FALSE
+    if (any(settled)) {
+        message(label, ": not holding ", sum(settled), " automated row(s) for ",
+                "tables withdrawn whole or marked Private (they will never publish): ",
+                paste(auto[["table"]][settled], collapse = ", "))
+    }
+    held <- !keep & !settled
+    if (any(held)) {
+        message(label, ": holding ", sum(held), " automated row(s) naming a ",
                 "table absent from ", live.file,
                 " (publish the table and they land next run): ",
-                paste(auto[["table"]][!keep], collapse = ", "))
+                paste(auto[["table"]][held], collapse = ", "))
     }
-    write_dict_pending(auto[!keep, , drop = FALSE], pending.file)
+    write_dict_pending(auto[held, , drop = FALSE], pending.file)
     auto[keep, , drop = FALSE]
+}
+
+##Keys of tables withdrawn whole in itemtext/withdrawals.csv. A missing file
+##yields none, so the hold falls back to its old behaviour rather than failing.
+withdrawn_whole <- function(withdrawals.file) {
+    if (is.null(withdrawals.file) || !file.exists(withdrawals.file)) return(character(0))
+    w <- readr::read_csv(withdrawals.file, show_col_types = FALSE, progress = FALSE,
+                         col_types = readr::cols(.default = readr::col_character()))
+    if (!all(c("table", "kind") %in% names(w))) return(character(0))
+    dict_key(w$table[!is.na(w$kind) & w$kind == "whole"])
 }
 
 ##Biblio carries LIVE tables only, for sources with `drop.retired` (#2767).
