@@ -17347,3 +17347,63 @@ ben-domingue, 2026-10-05:
 `elshafie_2020_edsc`'s issues-page entry is datapages/irw#319. The covariate
 labels wait on the release: `build.py` still adds nothing, because the tables
 are not yet in `metadata.csv`.
+
+## 2026-10-05c — PMC sweep, the remaining 9 journals for the 208 terms: 65 candidates, 13 leads, 4 tables / 4,408 responses
+
+This completes the 208 terms of 2026-10-05 across all 11 journals. It ran
+with `--journals jofintelligence,mbr,behavsci,apm,bmcmrm,jopd,bmcpubhealth,heliyon,psychometrika`
+and finished with 0 `QUERY FAILED`. Step 2b ran in-process and archived 2
+`human_review` rows. The backlog has a new `run_2026_10_05b` column, and
+**no scored terms remain unrun** in `pmc_term_backlog_2026-09-25.csv`.
+
+| flag | n |
+|---|---|
+| `no_usable_file` | 39 |
+| `license_restricted` (all CC BY-NC-ND) | 13 |
+| `download_failed` | 6 |
+| `human_assistance` | 4 |
+| `external_unresolved` | 2 |
+| `error` | 1 |
+
+**13 leads -> `leads/pmc_leads_2026-10-05b.csv`:** 1 shipped, 5 rejected on
+content, 7 blocked on licence.
+
+| table | script | ids | items | resp |
+|---|---|---|---|---|
+| `matsaid_2022_abcdm_knowledge` | `data/matsaid_2022_abcdm.py` | 179 | 8 | 0-1 |
+| `matsaid_2022_abcdm_perceived_risk` | same | 175 | 8 | 1-4 |
+| `matsaid_2022_abcdm_perceived_benefits` | same | 177 | 4 | 1-4 |
+| `matsaid_2022_abcdm_intention` | same | 179 | 6 | 1-4 |
+
+- **ABCD-M (Malay):** triage read the workbook's "Figures legend" sheet, but
+  the item data are on its "Raw data" sheet. Code 0 ("non-applicable") was
+  dropped, and items 15, 23 and 26 are stored reverse-scored. All four tables
+  pass `run_qc` and `irw-validate --profile upload`.
+- **Item text not shipped.** SI MOESM2 numbers the wording 1-26 to match the
+  codes. But the deposit does not reproduce the paper's Table 2 loadings for
+  items 15/16 or for the intention items, so the numbering is not trusted.
+  This is data-noted.
+
+**Licence:**
+- Two strong rows went to `license_blocked_candidates.csv`, both on public
+  OSF nodes with no licence:
+  - Chinese men's gender-role legitimacy, `10.3390/bs16091609`:
+    200×29 + 270×36 `.sav`.
+  - Implicit-bias interventions in courts, `10.3390/bs15091269`: raw
+    Qualtrics, N≈1016, about 60 Likert items.
+- Private OSF r3xfy and e2xsr were already logged on 2026-09-23. 87ew5 is
+  private and N=78.
+- Two restricted archives were not logged, the same treatment AUSSDA got: the
+  NCMI Youth Health DB (application plus virtual desktop) and a ScienceDB set
+  ("obtain after agreement").
+
+**Rejected:** Dutch health literacy (the SI is definitions plus a summary
+table), the brucellosis questionnaire (no data), the HFMD collinearity table,
+Heliyon e18517 (humans N=12) and Heliyon e39093 (a REDCap dictionary only;
+data on request).
+
+**Staged:**
+- 4 `dictionary_auto.csv` rows and 4 `codebook_at_ingest.csv` rows
+- 4 `tags/tags_auto.csv` rows (`test_tags_union.R` passes)
+- 4 `itemtext_provenance.csv` rows
+- 4 `metadata/data_notes.csv` rows

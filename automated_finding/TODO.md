@@ -16,8 +16,12 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   in `metadata/metadata.csv`, and these are not there until the draft is published
   and `01_metadata.R` re-runs (a run on 2026-10-05 added nothing). The same holds
   for the 2026-10-04 batch's item below.
-- [ ] **Remaining 9 journals for the 208 terms:** relaunched 2026-10-05 as
-  `runs/pmc_scout2_2026-10-05b_triage.csv`.
+- [ ] **4 tables (4,408 responses) need uploading** (2026-10-05c, remaining-journals
+  pass): `irw_output/` matsaid_2022_abcdm_{knowledge,perceived_risk,perceived_benefits,intention}.
+  No item text.
+- **The PMC term backlog is exhausted:** no scored term in
+  `pmc_term_backlog_2026-09-25.csv` is left unrun. A further PMC pass needs a new
+  term ranking.
 
 ## From the 2026-10-04 PMC scout-2 sweep (ranks 101-300 + owed pairs)
 
