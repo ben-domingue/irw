@@ -1,4 +1,4 @@
-# item-text tables in the Redivis shards as of 2026-10-05
+# item-text tables in the Redivis shards as of 2026-10-06
 # status=published: a reader can fetch it. status=draft: uploaded, not released yet.
 # generated -- do not hand-edit; rerun itemtext/refresh_live_tables.py (irw#1828)
 table,shard,status
@@ -500,7 +500,6 @@ eammi_grahe_2018_exploit,irw_text,published
 eammi_grahe_2018_idea,irw_text,published
 eammi_grahe_2018_marriage_attitudes,irw_text,published
 eammi_grahe_2018_marriage_identity_allocation,irw_text_3,published
-eammi_grahe_2018_marriage_timing,irw_text,published
 eammi_grahe_2018_moa1,irw_text,published
 eammi_grahe_2018_moa2,irw_text,published
 eammi_grahe_2018_npi,irw_text,published
