@@ -7,8 +7,9 @@ doi:10.6084/m9.figshare.3413665, "PlosOne SPSS File.sav" (pinned by sha256).
 
 Licence: figshare record "CC BY 4.0".
 
-451 employees of a UK organisation, assessed in a selection and development
-programme:
+451 ambulance personnel (401 men, 50 women, aged 21-64) assessed as part of
+selection and development for roles responding to high-threat or terror
+incidents (UK authors; the country is not stated):
 - BOUT1..6  Copenhagen Burnout Inventory, work-related burnout scale, 1-5.
             The deposit holds item 4 only as BOUT4REC, i.e. already
             reverse-scored; the item is shipped under that name so the
@@ -18,6 +19,10 @@ programme:
 Not shipped: the eleven Hogan Development Survey columns, which are scale
 scores rather than items, and the totals, factor scores and z-scored
 interaction terms. No demographics are deposited.
+
+Item text: not shipped -- the .sav has no variable labels; the wording is
+the published CBI (work-related) and RS-14 (Wagnild; licensed by the Resilience
+Center, rights not checked).
 
 id = row number (the deposit has no id column). No missing or fractional
 item values.

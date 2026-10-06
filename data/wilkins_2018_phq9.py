@@ -13,6 +13,15 @@ nurses within days of the stroke, March 2016 - March 2017.
 - PHQ1..PHQ9  Patient Health Questionnaire-9, 0 (not at all) - 3 (nearly every day)
 - "." marks an item not recorded and is dropped.
 
+Administered in each patient's "first/best language" by a nurse who spoke
+it (paper, Methods); the language is not recorded per patient. Most patients
+are expatriates (the deposit records nationality, not shipped).
+
+Item text: not shipped -- no labels in the deposit. PHQ-9 wording is cleared
+to ship (rights register, PHQ row); PHQ1..PHQ9 follow the standard PHQ-9
+order. Any item text table would be the English canonical wording, not what
+most respondents read.
+
 Mapping
 - id         = SN (serial number; unique)
 - cov_age    = Age

@@ -17,10 +17,14 @@ Mapping
 - id         = ID_1 (1-179; unique). The column name carries a U+200E
                mark in the deposit, so it is found by prefix.
 - cov_site   = the letter prefix of the participant code ID_2 (K 90, S 59,
-               M 17, F 13). Not documented; most likely the recruiting
-               clinic, as the paper recruited at several.
+               M 17, F 13). Not documented; possibly the recruiting site
+               (the paper recruited at five clinics and hospitals).
 - cov_age    = age
 - cov_sex    = sex, as coded in the deposit (0/1; no codebook is deposited)
+
+Item text: not shipped -- the deposit has column codes only; the ASES-8J
+wording is in Uritani et al.'s earlier cross-cultural adaptation paper
+(rights not checked).
 
 Not shipped: the other measures (WOMAC, PCS, PSEQ, DASS, fear of movement),
 which are deposited only as totals or subscale scores.

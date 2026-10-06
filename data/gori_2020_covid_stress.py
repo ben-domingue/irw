@@ -15,6 +15,10 @@ Licence: figshare record "CC BY 4.0".
 - SWLS_1..5     Satisfaction With Life Scale, 1 (strongly disagree) - 7 (strongly agree)
 Scales and anchors are from the paper's Measures section.
 
+Item text: not shipped -- the .sav has no variable labels. PSS and SWLS are
+blocked in itemtext/instrument_rights_register.csv; COPE-NVI and the Italian
+DSQ-40 would need the published Italian versions (rights not checked).
+
 Imputed cells are dropped. The deposit is the analysis file, and 1.3% of item
 cells hold a non-integer value. Every item has exactly ONE distinct
 non-integer value, i.e. the item mean was written into missing cells; the
