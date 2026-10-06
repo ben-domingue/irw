@@ -9113,3 +9113,4 @@ date,query,output_file,notes
 2026-10-05,مؤشر أوسويستري للإعاقة,runs/repos_triage_2026-10-05.csv,"repos mode-3 batch 2026-10-05 (15 new English instrument terms x 9 languages; ar); 1331 candidates, surf (dataverse.nl) timed out on all 135 queries"
 2026-10-05,oswestry disability index vragenlijst,runs/repos_triage_2026-10-05.csv,"repos mode-3 batch 2026-10-05 (15 new English instrument terms x 9 languages; nl); 1331 candidates, surf (dataverse.nl) timed out on all 135 queries"
 2026-10-05,오스웨스트리 장애지수,runs/repos_triage_2026-10-05.csv,"repos mode-3 batch 2026-10-05 (15 new English instrument terms x 9 languages; ko); 1331 candidates, surf (dataverse.nl) timed out on all 135 queries"
+2026-10-06,[weekly] 15 terms x journals=plosone,runs/plos_monthly_candidates_weekly_2026-10-06.csv,plos monthly-script automated run; mode=weekly; 53 candidates triaged; 15/15 terms visited (13 hit per-term cap 4)
