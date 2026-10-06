@@ -17407,3 +17407,171 @@ data on request).
 - 4 `tags/tags_auto.csv` rows (`test_tags_union.R` passes)
 - 4 `itemtext_provenance.csv` rows
 - 4 `metadata/data_notes.csv` rows
+
+## 2026-10-05/06 — Repos mode-3 batch: 15 new terms x 9 languages, 1,331 candidates, 11 deposits / 32 tables / 136,013 responses
+
+One agent, serial, every heavy process under `systemd-run --user --scope -p
+MemoryMax=6G -p MemorySwapMax=0` (no OOM kills; triage peaked ~2.2 GB RSS).
+
+**Terms (new to `search_terms_log.csv`, each in English + es/de/fr/zh/ja/ar/nl/ko,
+135 queries):** cloze test, situational judgment test, reading the mind in the
+eyes, system usability scale, effort reward imbalance, picture naming task,
+grammaticality judgment, cambridge face memory test, nasa task load index,
+eHealth literacy scale, tampa scale of kinesiophobia, morningness eveningness
+questionnaire, edinburgh postnatal depression scale, geriatric depression scale,
+oswestry disability index.
+
+- **Discovery:** 1,331 candidates (zenodo 432, dataverse 402, figshare 307,
+  scholars_portal 130, datacite 49, mendeley 6, osf 4, dryad 1). **SURF
+  (dataverse.nl) timed out on all 135 queries** -- not searched at all this run;
+  dataverse 10 and mendeley 2 transient misses.
+- **Triage** (`--retriage`; `--limit 10 --ignore-seen-keys` sanity check first):
+  139 already in the seen ledger, 1,192 triaged: `no_usable_file` 526,
+  `human_assistance` 365, `download_failed` 99, `below_min_n` 79,
+  `not_item_response` 63, `error` 26, `pii_suspected` 14, **`good` 13**,
+  `license_restricted` 7. Wall clock ~10h (slowed sharply overnight).
+- **Step 2b ran** (chained): 365 HA -> recoverable_format 140, not_item_response
+  99, human_review 57, worth_retrying 51, aggregate_continuous 18.
+  `[human_review] archived 57 row(s) -> human_review/human_review_zenodo_2026-10-06.csv`.
+- **Leads -> `leads/repos_leads_2026-10-05.csv`** (126 rows: the 13 good + every
+  licence-ok worth_retrying/recoverable_format row with 100 <= N <= 50,000 and
+  8-700 items): 11 shipped, 106 unworked, 6 rejected on content, 2 blocked on
+  licence, 1 PII skip.
+
+| table | script | ids | items | resp |
+|---|---|---|---|---|
+| `sauerbronn_2025_authentic_leadership` | `data/sauerbronn_2025_leadership.py` | 193 | 16 | 1-5 |
+| `sauerbronn_2025_affective_presence` | same | 193 | 8 | 1-5 |
+| `sauerbronn_2025_job_satisfaction` | same | 193 | 4 | 1-7 |
+| `sauerbronn_2025_interactional_justice` | same | 193 | 6 | 1-6 |
+| `khan_2018_ethical_leadership_real` | `data/khan_2018_ethical_leadership.py` | 173 | 20 | 1-6 |
+| `khan_2018_ethical_leadership_vignette` | same | 173 | 20 | 1-6 |
+| `khan_2018_moral_identity` | same | 176 | 10 | 1-7 |
+| `khan_2018_bidr_sde` | same | 174 | 20 | 1-5 |
+| `khan_2018_bidr_im` | same | 174 | 19 | 1-5 |
+| `khan_2018_moral_motivation` | same | 176 | 8 | 1-7 |
+| `tang_2026_rmet_c` | `data/tang_2026_rmet_c.py` | 288 | 47 | 0-1 |
+| `yan_2023_eri` | `data/yan_2023_coach_burnout.py` | 398 | 10 | 1-4 |
+| `yan_2023_overcommitment` | same | 398 | 6 | 1-4 |
+| `yan_2023_job_stress` | same | 398 | 4 | 1-5 |
+| `yan_2023_coaching_efficacy` | same | 398 | 24 | 1-5 |
+| `yan_2023_coach_burnout` | same | 398 | 15 | 1-5 |
+| `weber_2026_name_interaction` | `data/weber_2026_name_interaction.py` | 270 | 59 | 1-5 |
+| `cordova_2026_who5` | `data/cordova_2026_police_wellbeing.py` | 250 | 5 | 0-3 |
+| `cordova_2026_workload` | same | 250 | 6 | 0-4 |
+| `cordova_2026_self_efficacy` | same | 250 | 10 | 0-6 |
+| `morales_2025_ehealth_much` | `data/morales_2025_ehealth_much.py` | 1068 | 21 | 1-5 |
+| `atik_2025_ai_life_satisfaction` | `data/atik_2025_life_satisfaction.py` | 804 | 5 | 1-7 |
+| `atik_2025_swls` | same | 804 | 5 | 1-5 |
+| `atik_2025_gwb` | same | 802 | 14 | 1-5 |
+| `bado_2018_ohla_b` | `data/bado_2018_ohla_b.py` | 250 | 24 | 0-1 |
+| `lane_2020_pss` | `data/lane_2020_pss.py` | 161 | 10 | 0-4 |
+| `heriyati_2026_digital_info_literacy` | `data/heriyati_2026_digital_entrepreneurship.py` | 100 | 9 | 2-5 |
+| `heriyati_2026_digital_networking` | same | 100 | 9 | 3-5 |
+| `heriyati_2026_entrepreneurship_edu` | same | 100 | 9 | 2-5 |
+| `heriyati_2026_digital_safety` | same | 100 | 9 | 1-5 |
+| `heriyati_2026_entrepreneurial_se` | same | 100 | 9 | 3-5 |
+| `heriyati_2026_entrepreneurial_intention` | same | 100 | 9 | 3-5 |
+
+All 32 pass `run_qc` (with permitted values) and `irw-validate --profile upload`.
+Licences verified on the deposit record: CC0 (Dataverse, Dryad/Zenodo,
+figshare RMET-C) or CC BY 4.0 (figshare coach burnout, three Zenodo).
+
+### Coding decisions
+
+- **`tang_2026_rmet_c`: item codes are column positions.** The README places the
+  47 target-word items in columns 7-54 with an all-pass attention check at 47.
+  But mapping column 7+k to the deposit's "47-item No." does not reproduce
+  `rmet_30itemdata.csv` (2 of 30 columns match; its columns are raw columns
+  8, 9, 13, 14, 16, ... in raw order). So `tw_cNN` names a response column and
+  makes no claim about which image it is (data note). Sex-judgment (a
+  classification) and valence blocks were not shipped: block 3 has 50 columns
+  against 47 + practice + attention.
+- **`khan_2018_*`:** these are PhD thesis data with no paper DOI. Several
+  items are stored reversed, so their value labels run the other way (FEL20,
+  all IM). Codes are kept as stored. One FEL20 = 0 and one SDE1 = 7 were
+  dropped. The DIT stage scores are derived and Story1-4 is undocumented, so
+  neither shipped. `cluster_id` = SchoolID and `cov_condition` = vignette leader
+  type.
+- **`atik_2025_*`:** the deposit has no labels. Blocks were identified from the
+  paper's Methods: B = the 7-point AI scale, and A = SWLS, because
+  mean(A)~mean(B) r = .74, the paper's criterion r. C = the 14-item SGWB. The
+  EFA (503) and CFA (301) samples are stacked with `cov_sample` and
+  sample-prefixed ids. 17 out-of-set cells were dropped, 10 of them C1 = 6/7.
+  Demographics were not shipped: they have no labels, and gender has 5 codes.
+- **`yan_2023_*`:** the deposit is figshare (Dojin Jang) with no codebook. The
+  constructs come from the paper's abstract and from item counts and ranges:
+  ERI-10, OC-6, CES-24, burnout-15. "OS" was mapped to the paper's job-stress
+  mediator, which is an inference (data note).
+- **`heriyati_2026_*`:** N=100, exactly at the floor. The six 9-column blocks are
+  matched to the record's six named constructs. The script asserts the first
+  stem of each block. There is a strong ceiling effect.
+- **`lane_2020_pss`:** the stored q1-q10 sum to the deposit's PSS total. Items
+  4/5/7/8 are therefore likely stored already reversed. -999 is treated as
+  missing in the items, age and GEM.
+- **`sauerbronn_2025_interactional_justice`:** the questionnaire labels the six
+  options 1, 2, 3, 5, 6, 7, but the data store 1-6.
+
+### Skips and rejections
+
+- **PII, `10.7910/DVN/92VSGO`** (AI literacy, Chinese postgraduates, CC0, 126 x
+  63). The raw Wenjuanxing export (Sheet1 of `Coding List.xlsx`) carries `来自IP`
+  (respondent IP + city) and `您的称呼（真名或代称）` ("your name: real name or
+  alias"). Skipped whole per the PII rule. The deposit also holds interview audio.
+- **Licence, logged in `license_blocked_candidates.csv`:** Borealis
+  `10.7939/DVN/10732` (Alberta Context Tool/CRU, German LTC, 821 x 93) and
+  `10.7939/DVN/10302` (Energy Literacy Survey, 3000 x 175). Both say "made
+  available without information on how it can be used".
+- **Content:** these were rejected:
+  - FNZTML: headerless totals.
+  - NPRBTR: model output tables (350k rows).
+  - LN7GCJ: binary outcome flags only.
+  - QIFMOT: EPDS total only.
+  - Zenodo 6671384: audiometry only.
+  - DVN/QGEBUB and DVN/GDCXUQ: Eugene-Springfield files, already built
+    2026-08-26.
+- **Good, not worked:** DVN/U6YTI5 (Roadmaps to Representation exit-poll policy
+  items). It is in the leads file as `unworked`.
+
+### Item text: none shipped (batch kept lean)
+
+Per-table "where the text is" is in each script header and in 32
+`itemtext_provenance.csv` rows. The cheap follow-ups are:
+- `morales_2025_ehealth_much`: the xlsx "Leyenda" sheet has the Spanish stems.
+- `khan_2018` REL/FEL/MID: the .sav variable labels have the stems.
+- `heriyati_2026_*`: the headers are the Indonesian stems.
+- `weber_2026`: English wording table plus the German questionnaire PDF.
+- `lane_2020_pss`: the deposit has the questionnaire .docx.
+
+Held for rights: `sauerbronn` ALQ (Mind Garden) and the `atik` AI scale (ND
+article appendix).
+
+**Staged:**
+- 32 rows each in `dictionary_auto.csv` and `codebook_at_ingest.csv`
+- 32 `tags/tags_auto.csv` rows (`test_tags_union.R` passes)
+- 32 `itemtext_provenance.csv` rows
+- 4 `metadata/data_notes.csv` rows
+- 2 `license_blocked_candidates.csv` rows
+- 135 `search_terms_log.csv` rows
+
+**Covariate-label harvest NOT run:** `khan_2018_ethical_leadership.py` reads a
+.sav and ships coded covariates. The harvest re-runs scripts from a committed
+checkout, and nothing in this batch is committed. It is owed before the data PR:
+`python3 metadata/covariate_labels/harvest.py --commit HEAD khan_2018_ethical_leadership`,
+then `build.py`. `atik_2025` reads .sav files but ships only `cov_sample`.
+Nothing uploaded, nothing committed.
+
+## 2026-10-06 — rulings on the repos mode-3 batch
+
+- `tang_2026_rmet_c` is **held** (ben-domingue). The items are keyed by raw column, and the
+  deposit's column-to-image tie does not reproduce its own 30-item file. The script is kept and
+  marked HELD, the output is moved to `runs/held/`, and its dictionary, codebook, tags and
+  data-note rows are removed. Lead status is `held`.
+- `heriyati_2026_*` ships: N=100 and the ceiling are accepted.
+- The batch now ships **31 tables, 122,477 responses**.
+
+## 2026-10-06b — repos mode-3 batch stamped uploaded
+
+ben-domingue confirmed the 31 tables (122,477 responses) are uploaded. No item text was in this
+batch, so there is nothing to stamp in `itemtext_provenance.csv`. The khan_2018 covariate labels
+are built after the release (see TODO). `tang_2026_rmet_c` stays held.
