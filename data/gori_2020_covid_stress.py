@@ -61,6 +61,7 @@ assert (w["Covid19"] == 2).all()
 w = w.rename(columns={"Age": "cov_age", "Gender": "cov_gender"})
 w["cov_age"] = w["cov_age"].where(w["cov_age"] % 1 == 0)
 covs = ["cov_age", "cov_gender"]
+w[covs] = w[covs].astype("Int64")
 
 SCALES = {  # table: (prefix, n items, min, max)
     "gori_2020_pss10": ("PSS10_", 10, 0, 4),

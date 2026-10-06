@@ -14,9 +14,13 @@ Licence: article CC BY 4.0, which covers its SI.
               columns, so the retest is not shipped.
 
 Mapping
-- id         = ID_2 (participant code, e.g. K001; unique)
+- id         = ID_1 (1-179; unique). The column name carries a U+200E
+               mark in the deposit, so it is found by prefix.
+- cov_site   = the letter prefix of the participant code ID_2 (K 90, S 59,
+               M 17, F 13). Not documented; most likely the recruiting
+               clinic, as the paper recruited at several.
 - cov_age    = age
-- cov_sex    = sex, as coded in the deposit (no codebook is deposited)
+- cov_sex    = sex, as coded in the deposit (0/1; no codebook is deposited)
 
 Not shipped: the other measures (WOMAC, PCS, PSEQ, DASS, fear of movement),
 which are deposited only as totals or subscale scores.
@@ -44,10 +48,13 @@ if not CACHE.exists():
 assert hashlib.sha256(CACHE.read_bytes()).hexdigest() == SHA256
 
 w = pd.read_excel(CACHE)
-assert len(w) == 179 and w["ID_2"].is_unique
+id_col = next(c for c in w.columns if c.startswith("ID") and c != "ID_2")
+assert len(w) == 179 and w[id_col].is_unique and w["ID_2"].is_unique
 items = [f"ASES1_{i}" for i in range(1, 9)]
-w = w.rename(columns={"ID_2": "id", "age": "cov_age", "sex": "cov_sex"})
-covs = ["cov_age", "cov_sex"]
+w["cov_site"] = w["ID_2"].str[0]
+assert set(w["cov_site"]) == {"K", "S", "M", "F"}
+w = w.rename(columns={id_col: "id", "age": "cov_age", "sex": "cov_sex"})
+covs = ["cov_site", "cov_age", "cov_sex"]
 df = w.melt(id_vars=["id"] + covs, value_vars=items, var_name="item", value_name="resp")
 df["resp"] = pd.to_numeric(df["resp"], errors="coerce")
 df = df.dropna(subset=["resp"])
