@@ -3,6 +3,35 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## From the 2026-10-05/06 repos mode-3 batch (15 new terms x 9 languages)
+
+- [ ] **31 tables (122,477 responses) need uploading + 0 item text tables.**
+  `irw_output/`: sauerbronn_2025 x4, khan_2018 x6,
+  yan_2023 x5, weber_2026_name_interaction, cordova_2026 x3,
+  morales_2025_ehealth_much, atik_2025 x3, bado_2018_ohla_b, lane_2020_pss,
+  heriyati_2026 x6. Dictionary/codebook/tags/provenance rows are staged.
+- [ ] **`tang_2026_rmet_c` HELD** (ben-domingue, 2026-10-06): items keyed by raw
+  column; the deposit's column-to-image tie does not reproduce its own 30-item
+  file. Script kept (`data/tang_2026_rmet_c.py`, marked HELD), output moved to
+  `runs/held/`, staged dictionary/codebook/tags/data-note rows removed. Ships only
+  once the mapping is resolved.
+- Ruled 2026-10-06: `heriyati_2026_*` ships (N=100, ceiling accepted).
+- [ ] **106 unworked leads** are in `leads/repos_leads_2026-10-05.csv`, all with a
+  licence-ok `worth_retrying`/`recoverable_format` status and in the N/item
+  shape band. Notable ones:
+  - SQJFVA / Zenodo 13859254/8 (9,775 x 66, health literacy and mental health)
+  - FVEQHE (7,992 x 584)
+  - ZLFLRT (5,818 x 444)
+  - Social Reward Questionnaire-A (Zenodo 4944935, 568 x 60)
+  - DASS-16 (Zenodo 19896978)
+  - WM7IXF (authoritarian personality national surveys, 1,080 x 56)
+  - Yoruba Oswestry (plos.figshare 11554833, 136 x 17)
+  - DVN/U6YTI5 (good by triage)
+- [ ] **SURF (dataverse.nl) timed out on all 135 queries** in this run, so it was
+  never searched. Worth a check before the next repos run.
+- **Two licence-blocked rows added** (Borealis 10.7939/DVN/10732 and 10302). Email
+  for permission if wanted.
+
 ## From the 2026-10-05 PMC sweep (last 208 backlog terms, PeerJ + Sci Rep only)
 
 - [x] **18 tables (817,775 responses) + 10 item text tables uploaded** (ben-domingue, confirmed 2026-10-05; item text `uploaded=2026-10-05` stamped).
