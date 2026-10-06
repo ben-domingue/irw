@@ -17569,3 +17569,9 @@ Nothing uploaded, nothing committed.
   data-note rows are removed. Lead status is `held`.
 - `heriyati_2026_*` ships: N=100 and the ceiling are accepted.
 - The batch now ships **31 tables, 122,477 responses**.
+
+## 2026-10-06b — repos mode-3 batch stamped uploaded
+
+ben-domingue confirmed the 31 tables (122,477 responses) are uploaded. No item text was in this
+batch, so there is nothing to stamp in `itemtext_provenance.csv`. The khan_2018 covariate labels
+are built after the release (see TODO). `tang_2026_rmet_c` stays held.

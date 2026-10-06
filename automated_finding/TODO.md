@@ -5,7 +5,7 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
 ## From the 2026-10-05/06 repos mode-3 batch (15 new terms x 9 languages)
 
-- [ ] **31 tables (122,477 responses) need uploading + 0 item text tables.**
+- [x] **31 tables (122,477 responses) uploaded** (ben-domingue, confirmed 2026-10-06; no item text in this batch).
   `irw_output/`: sauerbronn_2025 x4, khan_2018 x6,
   yan_2023 x5, weber_2026_name_interaction, cordova_2026 x3,
   morales_2025_ehealth_much, atik_2025 x3, bado_2018_ohla_b, lane_2020_pss,
