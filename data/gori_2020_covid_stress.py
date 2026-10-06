@@ -28,9 +28,10 @@ are reverse-scored copies of items already present and are not shipped.
 
 Mapping
 - id         = row number (the deposit has no id column)
-- cov_age    = Age
+- cov_age    = Age; the one non-integer age (the mean, imputed) is set missing
 - cov_gender = Gender (1 Male, 2 Female; SPSS value labels)
-- cov_covid19 = Covid19 (Covid-19 infection: 1 Yes, 2 No)
+
+Not shipped: Covid19 (Covid-19 infection), which is "No" for every respondent.
 """
 import hashlib
 import sys
@@ -56,8 +57,10 @@ assert hashlib.sha256(CACHE.read_bytes()).hexdigest() == SHA256
 w = pd.read_spss(CACHE, convert_categoricals=False)
 assert len(w) == 1102
 w.insert(0, "id", range(1, len(w) + 1))
-w = w.rename(columns={"Age": "cov_age", "Gender": "cov_gender", "Covid19": "cov_covid19"})
-covs = ["cov_age", "cov_gender", "cov_covid19"]
+assert (w["Covid19"] == 2).all()
+w = w.rename(columns={"Age": "cov_age", "Gender": "cov_gender"})
+w["cov_age"] = w["cov_age"].where(w["cov_age"] % 1 == 0)
+covs = ["cov_age", "cov_gender"]
 
 SCALES = {  # table: (prefix, n items, min, max)
     "gori_2020_pss10": ("PSS10_", 10, 0, 4),
