@@ -15,6 +15,10 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   file. Script kept (`data/tang_2026_rmet_c.py`, marked HELD), output moved to
   `runs/held/`, staged dictionary/codebook/tags/data-note rows removed. Ships only
   once the mapping is resolved.
+- [ ] **Covariate labels for `khan_2018_*` after the release.** Harvested
+  2026-10-06 at 38634ddd (the log is in ~/.cache/irw/covariate_labels/logs). `build.py` only
+  labels tables that are in metadata.csv, so run `python3 metadata/covariate_labels/build.py`
+  once the khan tables are live, then commit covariate_labels.csv.
 - Ruled 2026-10-06: `heriyati_2026_*` ships (N=100, ceiling accepted).
 - [ ] **106 unworked leads** are in `leads/repos_leads_2026-10-05.csv`, all with a
   licence-ok `worth_retrying`/`recoverable_format` status and in the N/item
