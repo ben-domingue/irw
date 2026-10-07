@@ -30,6 +30,18 @@ DICT_AUTO_COLS <- c(
     "Custom License (derived)", "Notes", "Contributor", "Date", "Source via"
 )
 
+##A dictionary with no sheet behind it: zero rows in the sheet's own layout
+##(core's column names, so normalize_dict_layout() has nothing to do). For a
+##source that runs from its automated file alone -- conj, by Ben's call on
+##2026-10-07 -- union_dict() then turns every automated row into a dictionary
+##row, exactly as it adds a table the sheet lacks for the other sources.
+empty_sheet_dict <- function() {
+    cols <- setdiff(DICT_AUTO_COLS, c("DOI (for data)", "Source via"))
+    d <- as.data.frame(setNames(replicate(length(cols), character(0), simplify = FALSE), cols),
+                       check.names = FALSE, stringsAsFactors = FALSE)
+    d
+}
+
 ##Columns that exist HERE and not in the sheet.
 ##
 ##`DOI (for data)` is the #1690 schema change, and it deliberately never becomes
@@ -352,7 +364,7 @@ write_dict_pending <- function(pending, pending.file) {
 ##between them would silently swap source terms for derived ones.
 ensure_dict_auto_cols <- function(dict) {
     for (cl in DICT_AUTO_ONLY_COLS) {
-        if (!cl %in% names(dict)) dict[[cl]] <- NA_character_
+        if (!cl %in% names(dict)) dict[[cl]] <- rep(NA_character_, nrow(dict))  # rep(): also safe on a zero-row dict
     }
     dict
 }
