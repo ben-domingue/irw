@@ -1,0 +1,50 @@
+doi,title,licence,lead,status,tables,notes
+10.7910/dvn/thjyqr,"Hainmueller, Hopkins & Yamamoto (2014) Causal inference in conjoint analysis",CC0 1.0,pilot,uploaded,hainmueller_2014_candidate; hainmueller_2014_immigrant,irw_conjoint v1.0; script hainmueller_2014.R
+10.7910/dvn/6bsjyp,Kreps et al. (2020) COVID-19 vaccine acceptance conjoint,CC0 1.0,pilot,uploaded,kreps_2020_covid_vaccine,irw_conjoint v1.0; script kreps_2020.R
+10.7910/dvn/tlpmvi,Bansak et al. (2018) The number of choice tasks and survey satisficing,none (Dataverse: no information on use),pilot,held: no licence,,Converted in the pilot as a format test; needs the authors' permission
+10.7910/dvn/fj82vu,How and When Democratic Values Matter: Challenging the Effectiveness Centric Framework in Program Evaluation,CC0 1.0,phase2 sample,todo,,est. respondents: 1154 (verified); design: both
+10.7910/dvn/numv0i,Diversity without Adversity? Ethnic Bias toward Refugees in a Co-Religious Society,CC0 1.0,phase2 sample; avina2026 sources,todo,,"est. respondents: 2362 (verified: abstract N=2,362; 14172 profile rows = 2362x6); design: rating"
+10.7910/dvn/jykrgy,City Limits to Partisan Polarization in the American Public,CC0 1.0,phase2 sample,todo,,est. respondents: 7800 (verified rows; YouGov 8-city survey); design: forced_choice
+10.7910/dvn/2zkw5f,Re-evaluating the Role of Ideology in Chile,CC0 1.0,phase2 sample,todo,,est. respondents: ~300 (inferred: 3000 rows / 5 pairs x 2 candidates); design: forced_choice
+10.7910/dvn/j9ijgm,The Limits of Partisan Loyalty,CC0 1.0,phase2 sample,todo,,est. respondents: ~3073-3188 (inferred: respondentIndex max 3188; 43022 rows / 14); design: forced_choice
+10.7910/dvn/66anek,Cleaning up Politics: Anti-Corruption Appeals in Electoral Campaigns,CC0 1.0,phase2 sample,todo,,est. respondents: 2060 (verified: unique id in RData); design: unclear
+10.7910/dvn/z4gacs,What Kinds of Trade Liberalization Agreements Do People in Developing Countries Want?,CC0 1.0,phase2 sample,todo,,est. respondents: 821 in Costa Rica file (verified); ~2400 across 3 countries (inferred); design: both
+10.7910/dvn/3dnbnq,Shaping Post-Withdrawal Relations With a Leaving State: Brexit Dilemmas and Public Opinion,CC0 1.0,phase2 sample,todo,,est. respondents: 4796 (verified: respondent_id max 4796 = 57552/12); design: forced_choice
+10.7910/dvn/3edwhf,Voter’s policy preferences in the time of democratic backsliding in Israel,CC0 1.0,phase2 sample,todo,,est. respondents: ~1516 (verified rows in raw Qualtrics CSV); design: both
+10.7910/dvn/x2wkuz,"""Heroes & villains: motivated projection of political identities""",CC0 1.0,phase2 sample,todo,,"est. respondents: UK ~1594, US ~1573 (inferred: rows/14); design: forced_choice"
+10.7910/dvn/d737fp,Replication Data for: Education as identity? A meta-analysis of education-based in-group preferences in candidate choice experiments,CC0 1.0; restricted files=0,phase2 sample,held: re-hosted compilation,,Re-hosts ~20 other authors' conjoints under its own CC0; the originals' licences govern
+10.7910/dvn/50rwsi,Legislator or representative? Politicians’ Tasks According to Voters”.,CC0 1.0,phase2 sample,todo,,"est. respondents: 9952 (verified rows, wide file); design: forced_choice"
+10.7910/dvn/aumlxm,"Status Threat, Partisanship, and Voters' Conservative Shift toward Right-wing Candidates",CC0 1.0,phase2 sample,todo,,est. respondents: 2042 (verified unique rid); design: forced_choice
+10.7910/dvn/c6ptyd,Deontological and consequentialist preferences towards arms exports: A comparative conjoint experiment in France and Germany,CC0 1.0,phase2 sample,todo,,"est. respondents: 6617 (verified: abstract N=6,617; 79404 rows = 6617x12); design: rating"
+10.7910/dvn/3tgwgg,Trade Politics at the Checkout Lane – Ethnocentrism and Consumer Preferences,CC0 1.0,phase2 sample,todo,,est. respondents: 1539 (w1w2) + 1117 (Lucid) (verified id max); design: both
+10.7910/dvn/legbp2,Bureaucratic Discretion Against Female Politicians,CC0 1.0,phase2 sample,todo,,est. respondents: ~216 (inferred: 1730 rows / 4 rounds x 2); design: unclear
+10.7910/dvn/dn2qha,"Empowered Minipublics for Democratic Renewal? Evidence from Three Conjoint Experiments in the United States, Ireland and Finland",CC0 1.0,phase2 sample,todo,,est. respondents: 6057 (verified unique respondent_id); design: both
+10.7910/dvn/oelhkg,In situ or ex situ overseas climate adaptation?  Public support for immigration and climate aid in the Netherlands,CC0 1.0,phase2 sample,todo,,est. respondents: ~1199 (inferred: 11990 rows / 5 questions x 2 alts); design: forced_choice
+10.7910/dvn/xkszcu,"Peacekeeping by any other name: A conjoint experiment evaluating support for peacekeeping, diplomatic and humanitarian missions in Japan and the UK",CC BY 4.0,phase2 sample,todo,,"est. respondents: JP 646, UK 1511 (verified rows, wide); design: both"
+10.7910/dvn/fu62ps,Public Opinion & Cyber-Terrorism,CC0 1.0,phase2 sample,todo,,"est. respondents: 3036 (verified rows, raw Qualtrics wide); design: rating"
+10.17026/ss/r6lxp1,PACES  Public Opinion Dataset,CC-BY-4.0 (from DANS API),phase2 sample,todo,,est. respondents: 9045 (verified unique uuid; ~1500 per country x 6); design: both
+10.7910/dvn/mth58p,People use both heterogeneity and minority representation to evaluate diversity,CC0 1.0,phase2 sample,todo,,"est. respondents: 2001 (verified rows, wide Qualtrics); design: both"
+10.7910/dvn/id1kjg,All Sins are not Created Equal: The Factors that Drive Perceptions of Corruption Severity,CC0 1.0,phase2 sample,todo,,est. respondents: 778 (verified rows respondent_level_clean); design: rating
+10.7910/dvn/ekm4b3,How Group Appeals Shape Group-Party Linkages in Two Political Systems,CC0 1.0,phase2 sample,todo,,"est. respondents: Britain 2001, Norway ~3190 (Britain verified RespondentSerial max; Norway inferred 12760/4); design: both"
+10.7910/dvn/1hpt9n,"""Fit for the Job: Candidate Qualifications and Vote Choice in Low Information Elections""",CC0 1.0,phase2 sample,todo,,est. respondents: ~1500 (inferred: 9000 rows / 3 tasks x 2); design: forced_choice
+10.7910/dvn/zqifhg,Partners in Government: Politicians’ Gender Preferences in Coalition Formation,CC0 1.0,phase2 sample,todo,,"est. respondents: ~509-1018 politicians (inferred; id_conjoint max 1018, 4072 rows); design: both"
+10.7910/dvn/vcn1bf,"""Public Support for Migration Policies in New Immigration Countries: Evidence from Framing and Conjoint Experiments in East Asia""",CC0 1.0,phase2 sample,todo,,est. respondents: ~4502 (inferred: 45020 rows / 5 tasks x 2); design: forced_choice
+10.7910/dvn/jviarv,Gender Stereotypes and Candidate Qualifications in Judicial Elections,CC0 1.0,phase2 sample,todo,,"est. respondents: 999 (verified rows, raw Qualtrics wide); design: both"
+10.7910/dvn/lttbk3,The Prodigal Child Returns? Attitudes towards Return Migration in a Developing Economy,CC0 1.0,phase2 sample,todo,,"est. respondents: ~2100 (verified 2103 rows in conjoint.csv, raw Qualtrics); design: both"
+10.7910/dvn/0k48fz,Argote and Daly (2024) (immigration conjoint in Avina et al. 2026),CC0 1.0 (DataCite),avina2026 sources,todo,,article doi 10.1080/03050629.2024.2309999
+10.7910/dvn/fdml2n,Arias and Blair (2022) (immigration conjoint in Avina et al. 2026),CC0 1.0 (DataCite),avina2026 sources,todo,,article doi 10.1086/715163
+10.7910/dvn/m4zjtv,Avina (2024) (immigration conjoint in Avina et al. 2026),CC0 1.0 (DataCite),avina2026 sources,todo,,article doi 10.1093/poq/nfag012
+10.7910/dvn/kl0fdf,Bansak et al. (2016) (immigration conjoint in Avina et al. 2026),CC0 1.0 (DataCite),avina2026 sources,todo,,article doi 10.1126/science.aag2147
+10.7910/dvn/ftl1mm,Bansak et al. (2023) (immigration conjoint in Avina et al. 2026),CC0 1.0 (DataCite),avina2026 sources,todo,,article doi 10.1038/s41586-023-06417-6
+10.7910/dvn/frghvr,Berinsky et al. (2020) (immigration conjoint in Avina et al. 2026),CC0 1.0 (DataCite),avina2026 sources,todo,,article doi 10.1007/s11109-018-9518-9
+10.7910/dvn/2oold7,Clayton et al. (2021) (immigration conjoint in Avina et al. 2026),CC0 1.0 (DataCite),avina2026 sources,todo,,article doi 10.1007/s11109-019-09550-z
+10.7910/dvn/nyxqmg,Donnaloja (2022) (immigration conjoint in Avina et al. 2026),CC0 1.0 (DataCite),avina2026 sources,todo,,article doi 10.1093/esr/jcab034
+10.7910/dvn/crzqsm,Donnaloja and Vink (2023) (immigration conjoint in Avina et al. 2026),CC0 1.0 (DataCite),avina2026 sources,todo,,article doi 10.1080/1369183x.2023.2282388
+10.7910/dvn/25505,Hainmueller and Hopkins (2015) (immigration conjoint in Avina et al. 2026),CC0 1.0 (DataCite),avina2026 sources,todo,,article doi 10.1111/ajps.12138
+10.7910/dvn/pzzb1z,Holland et al. (2024) (immigration conjoint in Avina et al. 2026),CC0 1.0 (DataCite),avina2026 sources,todo,,article doi 10.1086/729943
+10.7910/dvn/ttae29,Kao and Liu (2025) (immigration conjoint in Avina et al. 2026),CC0 1.0 (DataCite),avina2026 sources,todo,,article doi 10.1177/10659129251319737
+10.7910/dvn/cwgnzr,Malik et al. (2025) (immigration conjoint in Avina et al. 2026),CC0 1.0 (DataCite),avina2026 sources,todo,,article doi 10.31235/osf.io/56drf_v1 (preprint)
+10.7910/dvn/egarnt,"Margalit and Solodoch (2022), Designs 1-3 (immigration conjoint in Avina et al. 2026)",CC0 1.0 (DataCite),avina2026 sources,todo,,article doi 10.1017/s0007123420000940
+10.7910/dvn/hze7ff,Shockley and Gengler (2024) (immigration conjoint in Avina et al. 2026),CC0 1.0 (DataCite),avina2026 sources,todo,,article doi 10.1017/psrm.2023.18
+10.7910/dvn/zzysiz,Wimmer et al. (2024) (immigration conjoint in Avina et al. 2026),CC0 1.0 (DataCite),avina2026 sources,todo,,article doi 10.1017/s0003055424000753
+10.7910/dvn/k2ji6i,Zhirkov (2022) (immigration conjoint in Avina et al. 2026),CC0 1.0 (DataCite),avina2026 sources,todo,,article doi 10.1017/pan.2021.4
