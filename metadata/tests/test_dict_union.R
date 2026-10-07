@@ -1076,6 +1076,22 @@ local({
           "non-core: blank custom terms stay blank")
 })
 
+##------------------------------------------------- no sheet (conj, 10-07) ---
+cat("no sheet: a source run from its automated file alone\n")
+local({
+    e <- empty_sheet_dict()
+    check(nrow(e) == 0L && all(c("table", "Public Reshare?", "Derived License") %in% names(e)),
+          "empty_sheet_dict has the sheet's columns and no rows")
+    auto <- read_dict_auto("../automated_finding/dictionary_auto_conj.csv", "conj")
+    u <- suppressMessages(union_dict(e, auto, "conj"))$dict
+    check(nrow(u) == nrow(auto) && nrow(u) >= 20L,
+          "every automated conj row becomes a dictionary row")
+    check(all(u$`Public Reshare?` == "Public"),
+          "Public Reshare? survives the union, so biblio does not drop the rows")
+    check(all(!is.na(u$`DOI (for data)`) & nzchar(u$`DOI (for data)`)),
+          "the deposit DOI column comes through")
+})
+
 ##------------------------------------------------------------------ result ---
 cat("\n")
 if (failures > 0L) { cat(failures, "FAILURE(S)\n"); quit(status = 1L) }

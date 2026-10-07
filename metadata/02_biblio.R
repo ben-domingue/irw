@@ -222,7 +222,21 @@ getrows<-function(l) {
     user <- redivis$user(user)
     dataset <- user$dataset(dataset)
     biblio_table <- dataset$table(table)
-    biblio <- biblio_table$to_tibble()
+    ## `bootstrap = TRUE` (conj only, until its first irw_meta upload) lets a
+    ## source whose biblio table does not exist yet start from an empty one.
+    ## Opt-in per source on purpose: tolerating a failed read everywhere would
+    ## let a transient error on core start an empty biblio and regenerate every
+    ## citation from scratch.
+    biblio <- tryCatch(biblio_table$to_tibble(), error = function(e) {
+        if (!isTRUE(l$bootstrap)) stop(e)
+        message(name, ": ", table, " not readable in irw_meta (", conditionMessage(e),
+                "); starting from an empty biblio")
+        tibble::tibble(table = character(0), DOI__for_paper_ = character(0),
+                       DOI__for_data_ = character(0), Reference_x = character(0),
+                       URL__for_data_ = character(0), Original_License = character(0),
+                       Derived_License = character(0), Custom_License_Terms = character(0),
+                       Description = character(0), BibTex = character(0), Source_via = character(0))
+    })
     head(biblio)
     ## reuse previously generated BibTeX before deciding what is "new"
     biblio <- seed_from_local(biblio, file.out)
@@ -431,6 +445,27 @@ dbs<-list(
              min.live=5,
               drop.retired=TRUE)
 )
+
+##Conjoint experiments (irw_conjoint): no dictionary sheet, by Ben's call on
+##2026-10-07 -- the dictionary is dictionary_auto_conj.csv alone, staged with
+##stage_dict_row.py --source conj. Active only once `conj` is registered in
+##redivis_config.R (with the package configs), since its liveness oracle
+##conj_metadata.csv comes from 16_conjoint.R, which runs from then on.
+if ("conj" %in% names(IRW_AUX_DATASETS)) {
+    dbs$conj <- list(name="conj",
+                     irw_dict=empty_sheet_dict(),
+                     user=IRW_OWNER,
+                     dataset="irw_meta",
+                     table="conj_biblio",
+                     file.out="conj_biblio.csv",
+                     file.auto="../automated_finding/dictionary_auto_conj.csv",
+                     file.live="conj_metadata.csv",
+                     file.prov="conj_biblio_provenance.csv",
+                     file.pending="conj_biblio_pending.csv",
+                     min.live=10,
+                     drop.retired=TRUE,
+                     bootstrap=TRUE)
+}
 
 for (i in 1:length(dbs)) {
     print(i)
