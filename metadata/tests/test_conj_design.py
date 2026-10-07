@@ -1,4 +1,5 @@
-"""The conjoint design records (data/conjoint/design_tables.csv, design_outcomes.csv).
+"""The conjoint design records (data/conjoint/design_tables.csv, design_outcomes.csv)
+and the attribute crosswalk (data/conjoint/crosswalk.csv).
 
 Offline. Checks the codes each column may hold, that keys are unique, and that
 every table the ledger (data/conjoint/candidates.csv) marks built or uploaded
@@ -104,6 +105,51 @@ class OutcomesFile(unittest.TestCase):
                 lo, hi = float(r["scale_min"]), float(r["scale_max"])
                 self.assertLess(lo, hi, k)
                 self.assertTrue(r["low_anchor"] and r["high_anchor"], k)
+
+
+#: concept -> the harmonized values it may take. A new concept is added here
+#: with its values, and documented in data/conjoint/README.md.
+CONCEPTS = {"profile_gender": {"female", "male"}}
+CROSSWALK_COLS = ["concept", "table", "attribute", "level", "value", "signal", "evidence"]
+
+
+class CrosswalkFile(unittest.TestCase):
+    def setUp(self):
+        self.cols, self.rows = read("crosswalk.csv")
+        _, tabs = read("design_tables.csv")
+        self.tables = {r["table"] for r in tabs}
+
+    def test_columns(self):
+        self.assertEqual(self.cols, CROSSWALK_COLS)
+
+    def test_unique(self):
+        keys = [(r["concept"], r["table"], r["attribute"], r["level"]) for r in self.rows]
+        self.assertEqual(len(keys), len(set(keys)))
+
+    def test_codes(self):
+        for r in self.rows:
+            k = f'{r["concept"]}:{r["table"]}:{r["attribute"]}:{r["level"]}'
+            self.assertIn(r["concept"], CONCEPTS, k)
+            self.assertIn(r["value"], CONCEPTS[r["concept"]], k)
+            self.assertIn(r["signal"], {"explicit", "name"}, k)
+            self.assertTrue(r["attribute"].startswith("attr_"), k)
+            self.assertTrue(r["level"] and r["evidence"], k)
+            self.assertIn(r["table"], self.tables, f"{k}: table has no design record")
+
+    def test_one_attribute_per_table_and_concept(self):
+        seen = {}
+        for r in self.rows:
+            seen.setdefault((r["concept"], r["table"]), set()).add(r["attribute"])
+        many = {k: v for k, v in seen.items() if len(v) > 1}
+        self.assertFalse(many, "a concept maps to one attribute per table")
+
+    def test_contrast_exists(self):
+        """A table where every level maps to one value has no contrast to estimate."""
+        vals = {}
+        for r in self.rows:
+            vals.setdefault((r["concept"], r["table"]), set()).add(r["value"])
+        flat = sorted(k for k, v in vals.items() if len(v) < 2)
+        self.assertFalse(flat, f"no contrast: {flat}")
 
 
 if __name__ == "__main__":
