@@ -1,4 +1,5 @@
 table,source,codebook_url,recorded_at
+abascal_2021_neighborhood_diversity,conj,https://dataverse.harvard.edu/api/access/datafile/4289246,2026-10-07
 ahmed_2025_coping,core,none,2026-10-02
 ahmed_2025_pcl5,core,none,2026-10-02
 alqerem_2025_anq,core,none,2026-10-02
@@ -16,6 +17,7 @@ bacon_2025_cfni45,core,none,2026-10-02
 bacon_2025_phq9,core,none,2026-10-02
 bacon_2025_stss,core,none,2026-10-02
 bado_2018_ohla_b,core,none,2026-10-05
+bansak_2016_asylum,conj,https://dataverse.harvard.edu/api/access/datafile/2863400,2026-10-07
 bauwens_2022_autonomy,core,none,2026-10-02
 bauwens_2022_empowering_leadership,core,none,2026-10-02
 bauwens_2022_engagement,core,none,2026-10-02
@@ -55,6 +57,7 @@ fang_2021_peb,core,none,2026-10-04
 fang_2021_pn,core,none,2026-10-04
 fang_2021_sn,core,none,2026-10-04
 faruk_2026_rpsc,core,https://ndownloader.figshare.com/files/67070450,2026-10-02
+ferrari_2025_status_threat,conj,https://osf.io/download/78vb3/,2026-10-07
 fong_2023_hads,core,none,2026-10-04
 fong_2023_rses,core,none,2026-10-04
 fong_2023_sf12,core,none,2026-10-04
@@ -64,6 +67,10 @@ garciabacete_2023_victimization,core,https://zenodo.org/api/records/7393759/file
 gerbig_2023_ctq,core,https://zenodo.org/api/records/7749115/files/Codebook_Dataset_Loneliness_ACE_Ethiopia.pdf/content,2026-10-02
 gerbig_2023_ucla,core,https://zenodo.org/api/records/7749115/files/Codebook_Dataset_Loneliness_ACE_Ethiopia.pdf/content,2026-10-02
 gerbig_2023_who5,core,https://zenodo.org/api/records/7749115/files/Codebook_Dataset_Loneliness_ACE_Ethiopia.pdf/content,2026-10-02
+getmansky_2024_refugees,conj,none,2026-10-07
+goldberg_2025_minipublics_finland,conj,https://dataverse.harvard.edu/api/access/datafile/10272607,2026-10-07
+goldberg_2025_minipublics_ireland,conj,https://dataverse.harvard.edu/api/access/datafile/10272607,2026-10-07
+goldberg_2025_minipublics_usa,conj,https://dataverse.harvard.edu/api/access/datafile/10272607,2026-10-07
 gonzalezros_2025_eqi,core,none,2026-10-02
 gonzalezros_2025_ostes,core,none,2026-10-02
 gonzalezros_2025_tmms24,core,none,2026-10-02
@@ -80,6 +87,8 @@ heriyati_2026_digital_safety,core,none,2026-10-06
 heriyati_2026_entrepreneurial_intention,core,none,2026-10-06
 heriyati_2026_entrepreneurial_se,core,none,2026-10-06
 heriyati_2026_entrepreneurship_edu,core,none,2026-10-06
+jurado_2022_brexit_deal_germany,conj,https://static.cambridge.org/content/id/urn:cambridge.org:id:article:S0020818321000412/resource/name/S0020818321000412sup001.docx,2026-10-07
+jurado_2022_brexit_deal_spain,conj,https://static.cambridge.org/content/id/urn:cambridge.org:id:article:S0020818321000412/resource/name/S0020818321000412sup001.docx,2026-10-07
 kanwal_2024_csr,core,https://ars.els-cdn.com/content/image/1-s2.0-S2405844024150189-mmc2.docx,2026-10-04
 kanwal_2024_goc,core,https://ars.els-cdn.com/content/image/1-s2.0-S2405844024150189-mmc2.docx,2026-10-04
 kanwal_2024_gsv,core,https://ars.els-cdn.com/content/image/1-s2.0-S2405844024150189-mmc2.docx,2026-10-04
@@ -100,6 +109,7 @@ kul_2026_math_self_efficacy,core,https://ndownloader.figshare.com/files/67746372
 lane_2020_pss,core,https://zenodo.org/api/records/4264764/files/Stress_Questionnaire_for_Medical_Students_November_2020.docx/content,2026-10-06
 li_2024_mas,core,none,2026-10-02
 li_2026_psmus,core,https://doi.org/10.7717/peerj.21138/supp-4,2026-10-04
+liu_2023_program_evaluation,conj,none,2026-10-07
 luttenberger_2021_ferus,core,none,2026-10-02
 luttenberger_2021_fkb,core,none,2026-10-02
 luttenberger_2021_gad7,core,none,2026-10-02
@@ -130,6 +140,7 @@ mairean_2024_shai,core,none,2026-10-02
 makovi_2021_environmental_concern,core,https://static-content.springer.com/esm/art%3A10.1038%2Fs41598-021-00329-z/MediaObjects/41598_2021_329_MOESM1_ESM.pdf,2026-10-04
 makovi_2021_environmental_risk,core,https://static-content.springer.com/esm/art%3A10.1038%2Fs41598-021-00329-z/MediaObjects/41598_2021_329_MOESM1_ESM.pdf,2026-10-04
 makovi_2021_symbolic_racism,core,https://static-content.springer.com/esm/art%3A10.1038%2Fs41598-021-00329-z/MediaObjects/41598_2021_329_MOESM1_ESM.pdf,2026-10-04
+martin_2021_corruption,conj,https://dataverse.harvard.edu/api/access/datafile/3374460,2026-10-07
 matsaid_2022_abcdm_intention,core,https://static-content.springer.com/esm/art%3A10.1186%2Fs12889-022-13811-8/MediaObjects/12889_2022_13811_MOESM2_ESM.pdf,2026-10-05
 matsaid_2022_abcdm_knowledge,core,https://static-content.springer.com/esm/art%3A10.1186%2Fs12889-022-13811-8/MediaObjects/12889_2022_13811_MOESM2_ESM.pdf,2026-10-05
 matsaid_2022_abcdm_perceived_benefits,core,https://static-content.springer.com/esm/art%3A10.1186%2Fs12889-022-13811-8/MediaObjects/12889_2022_13811_MOESM2_ESM.pdf,2026-10-05
@@ -182,6 +193,8 @@ mutuyimana_2026_social_axioms,core,none,2026-10-02
 mutuyimana_2026_subjective_vitality,core,none,2026-10-02
 mutuyimana_2026_trauma_exposure,core,none,2026-10-02
 olajubu_2024_srh_hlq,core,none,2026-10-02
+pickering_2025_peacekeeping_japan,conj,https://dataverse.harvard.edu/api/access/datafile/12134783,2026-10-07
+pickering_2025_peacekeeping_uk,conj,https://dataverse.harvard.edu/api/access/datafile/12134783,2026-10-07
 przybylski_2016_igd,core,none,2026-10-04
 rzeszutek_2023_danieli,core,none,2026-10-04
 rzeszutek_2023_ees,core,none,2026-10-04
@@ -203,6 +216,9 @@ schroeter_2015_ecrr,core,none,2026-10-02
 schroeter_2015_ffbhr,core,none,2026-10-02
 schroeter_2015_hads,core,none,2026-10-02
 schroeter_2015_rq,core,none,2026-10-02
+shandler_2023_cyberterror_il,conj,none,2026-10-07
+shandler_2023_cyberterror_uk,conj,none,2026-10-07
+shandler_2023_cyberterror_us,conj,none,2026-10-07
 shen_2025_bsmas,core,https://doi.org/10.7717/peerj.19707/supp-3,2026-10-04
 shen_2025_dass21,core,https://doi.org/10.7717/peerj.19707/supp-3,2026-10-04
 shen_2025_igds9sf,core,https://doi.org/10.7717/peerj.19707/supp-3,2026-10-04
@@ -227,6 +243,7 @@ uritani_2023_ases8,core,none,2026-10-06
 usmani_2024_iwe,core,https://data.mendeley.com/public-files/datasets/6xt3b959nv/files/ae60b205-3109-4deb-9021-dd89a6bf54d9/file_downloaded,2026-10-04
 usmani_2024_ks,core,https://data.mendeley.com/public-files/datasets/6xt3b959nv/files/ae60b205-3109-4deb-9021-dd89a6bf54d9/file_downloaded,2026-10-04
 usmani_2024_pops,core,https://data.mendeley.com/public-files/datasets/6xt3b959nv/files/ae60b205-3109-4deb-9021-dd89a6bf54d9/file_downloaded,2026-10-04
+vera_2025_anticorruption,conj,none,2026-10-07
 weber_2026_name_interaction,core,https://dataverse.harvard.edu/api/access/datafile/14203958,2026-10-05
 wellbeing_kocar_2025_ls,core,none,2026-10-05
 wellbeing_kocar_2025_swb,core,none,2026-10-05

@@ -18,7 +18,8 @@ One row per respondent × task × profile.
 | `task` | task index within respondent, in the order shown |
 | `profile` | position within the task (1 = left or first) |
 | `choice` | 1 if this profile was chosen, else 0. With an opt-out, both profiles can be 0. |
-| `rating` | numeric rating of this profile, higher = more favourable; further ratings go in `rating_<name>` |
+| `rating` | numeric rating of this profile, higher = more favourable |
+| `choice_<name>`, `rating_<name>` | further outcomes asked about the same tasks (e.g. "which would you vote for" and "which would reduce corruption most"); same coding as `choice`/`rating` |
 | `attr_<name>` | the level **as displayed**, as text (never a numeric code); blank = attribute not shown |
 | `attrpos_<name>` | row position of the attribute, when attribute order was randomized |
 | `cov_<name>` | respondent covariates; a survey weight is `cov_survey_weight` |
