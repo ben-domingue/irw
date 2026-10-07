@@ -38,7 +38,7 @@ META_TABLES = {
     "metadata", "biblio", "tags", "nominal_tags", "comps_biblio",
     "nominal_biblio", "simsyn_biblio", "simsyn_metadata", "comps_metadata",
     "nominal_metadata", "itemtext_metadata", "collections",
-    "collection_members", "covariate_labels",
+    "collection_members", "covariate_labels", "conj_metadata", "conj_biblio",
 }
 
 

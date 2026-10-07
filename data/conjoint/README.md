@@ -6,7 +6,13 @@ Processing scripts for the tables in the Redivis dataset `datapages.irw_conjoint
 red_up . --dataset irw_conjoint --allow-unregistered --no-validate
 ```
 
-Run that from a staging folder that holds only the files to upload. Run `check_conj.R` on every file first, because the core validator does not apply to this layout.
+Run that from a staging folder that holds only the files to upload. First check every file with
+
+```
+python3 -m irw_validate.conjoint *.csv
+```
+
+because the core validator does not apply to this layout. Once `conj` is registered, `red_up` runs these checks itself for the `irw_conjoint` target, and `--allow-unregistered --no-validate` go away.
 
 ## Layout (draft conjoint standard)
 
