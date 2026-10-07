@@ -75,6 +75,20 @@ The tables share one layout but not one meaning: `choice` is "vote for" in one t
 | `opt_out` | choice rows only: `yes` if respondents could choose neither profile, otherwise `no` |
 | `scale_min`, `scale_max`, `low_anchor`, `high_anchor` | rating rows only: the stored range and the labels of its two ends |
 
+## Attribute crosswalk
+
+Attribute columns keep the text respondents saw, so the same idea arrives under different names and in different languages: `attr_gender` = Female/Male, `attr_sex` = Femmina/Maschio, `attr_gender` = Mujer/Hombre. `crosswalk.csv` maps those levels to one shared coding, one concept at a time, so that an effect can be compared across tables. It adds nothing to the tables themselves.
+
+| column | |
+|---|---|
+| `concept` | the shared idea. So far only `profile_gender`: the gender of the person a profile describes. |
+| `table`, `attribute`, `level` | the stored level text, exactly as in the table |
+| `value` | the harmonized value. For `profile_gender` this is `female` or `male`. |
+| `signal` | `explicit` when the attribute states the concept; `name` when it is carried by a gendered first name and the authors' own coding says which names are which |
+| `evidence` | where the mapping comes from |
+
+Every level of a mapped attribute has a row, and each concept maps to at most one attribute per table. A `name` signal carries other things too: Pedersen's names also mark ethnicity (majority versus Turkish), so a gender contrast there is within the names the authors chose. A new concept is added with its allowed values in `metadata/tests/test_conj_design.py` (`CONCEPTS`) and a line here.
+
 ## Scripts
 
 Each script takes `<raw dir> <output dir>` and reads only the files named in its header. Downloads are untrusted: no code shipped with a deposit is ever run.
