@@ -73,7 +73,7 @@ SHARDED = ("core", "text")
 # equal and the check passes green while checking nothing at all. These are
 # deliberately floors, not exact counts: adding a seventh warehouse is a normal
 # Tuesday and must not have to edit this file.
-MIN_DATASETS = {"core": 6, "text": 2, "meta": 1, "sim": 1, "comp": 1, "nom": 1}
+MIN_DATASETS = {"core": 6, "text": 2, "meta": 1, "sim": 1, "comp": 1, "nom": 1, "conj": 1}
 
 
 class ParseError(RuntimeError):
@@ -210,6 +210,7 @@ PY_NAMES = {
     "SIM_REF": "sim",
     "COMP_REF": "comp",
     "NOM_REF": "nom",
+    "CONJ_REF": "conj",
 }
 
 

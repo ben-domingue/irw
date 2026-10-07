@@ -23,6 +23,12 @@ metadata/**/*.txt
 !metadata/nominal_tags.csv
 !metadata/comps_metadata.csv
 !metadata/nominal_metadata.csv
+!metadata/conj_metadata.csv
+!metadata/conj_biblio.csv
+##conj has no dictionary sheet: its union provenance and pending rows are the only
+##record of which biblio rows were machine-written or held back, as for core below.
+!metadata/conj_biblio_provenance.csv
+!metadata/conj_biblio_pending.csv
 !metadata/simsyn_metadata.csv
 !metadata/itemtext_metadata.csv
 !metadata/collections.csv
@@ -79,6 +85,7 @@ metadata/logs/codebook_table_names.json
 !metadata/logs/biblio_refresh_log.csv
 !metadata/logs/comps_biblio_refresh_log.csv
 !metadata/logs/nominal_biblio_refresh_log.csv
+!metadata/logs/conj_biblio_refresh_log.csv
 !metadata/logs/simsyn_biblio_refresh_log.csv
 ##Which citations the run refetched because they named a DOI their row does not
 ##claim (#2301). Committed for the reason above, one step further along: the
@@ -89,6 +96,7 @@ metadata/logs/codebook_table_names.json
 !metadata/logs/biblio_bibtex_refetch_log.csv
 !metadata/logs/comps_biblio_bibtex_refetch_log.csv
 !metadata/logs/nominal_biblio_bibtex_refetch_log.csv
+!metadata/logs/conj_biblio_bibtex_refetch_log.csv
 !metadata/logs/simsyn_biblio_bibtex_refetch_log.csv
 ##Which `Derived_License` cells were derived from `Original License`, and on
 ##what basis (#2040). Committed for the same reason as the refresh log: the
@@ -98,12 +106,14 @@ metadata/logs/codebook_table_names.json
 !metadata/logs/biblio_license_log.csv
 !metadata/logs/comps_biblio_license_log.csv
 !metadata/logs/nominal_biblio_license_log.csv
+!metadata/logs/conj_biblio_license_log.csv
 !metadata/logs/simsyn_biblio_license_log.csv
 ##Biblio rows dropped because their table is in neither the dictionary nor
 ##the source's metadata.csv (#2767). Committed so the weekly pipeline PR shows
 ##every drop for review before it publishes.
 !metadata/logs/comps_biblio_drop_log.csv
 !metadata/logs/nominal_biblio_drop_log.csv
+!metadata/logs/conj_biblio_drop_log.csv
 !metadata/logs/simsyn_biblio_drop_log.csv
 .env
 .Rproj.user

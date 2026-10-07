@@ -56,5 +56,8 @@ IRW_AUX_DATASETS <- c(
   meta = "irw_meta",
   sim  = "irw_simsyn",
   comp = "irw_competitions",
-  nom  = "irw_nominal"
+  nom  = "irw_nominal",
+  ## Conjoint experiments in their own layout, see data/conjoint/README.md. Experimental.
+  ## No parentheses in comments inside this c, red_up/targets.py reads up to the first one.
+  conj = "irw_conjoint"
 )
