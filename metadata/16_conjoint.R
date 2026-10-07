@@ -15,6 +15,17 @@
 ##  n_attributes (attr_ columns), outcomes (choice/rating columns, ";"-joined),
 ##  n_optout_tasks (tasks where `choice` exists and no profile was chosen; 0
 ##  for a forced choice, NA when the table has no `choice`).
+##Design columns, joined from the hand-kept data/conjoint/design_tables.csv (the
+##numbers above come from the data; these come from the scripts' headers and the
+##deposits, and say what the numbers mean): country, display_language,
+##label_language, restrictions, restrictions_note, task_source, profile_source.
+##Their codes are documented in data/conjoint/README.md.
+##
+##Also writes conj_outcomes.csv: data/conjoint/design_outcomes.csv (one row per
+##table x outcome column: type, question wording, opt-out, stored scale and its
+##anchors) restricted to the live tables. Pooling across tables needs it: `choice`
+##means "vote for" in one table and "admit" in another, and ratings run 1-7, 0-10
+##or 0-100.
 ##
 ##Runs in run_pipeline.sh with 05/06/07, before 02_biblio.R, which uses
 ##conj_metadata.csv as the liveness oracle for conj_biblio.
@@ -59,5 +70,33 @@ one <- function(tab) {
 out <- do.call(rbind, lapply(tabs, function(t) { message(t$name); one(t) }))
 out <- out[order(out$table), ]
 stopifnot(nrow(out) == length(tabs), !anyNA(out$n_respondents), all(out$n_attributes >= 2))
+
+##A table without a design record still gets its row, with NA design columns, so
+##that one missing record cannot stop the weekly run; it is reported here and
+##metadata/tests/test_conj_design.py catches it earlier for every table the
+##ledger (data/conjoint/candidates.csv) marks built or uploaded.
+read_design <- function(f) read.csv(file.path("..", "data", "conjoint", f), colClasses = "character",
+                                    na.strings = character(0), check.names = FALSE)
+dtab <- read_design("design_tables.csv")
+dout <- read_design("design_outcomes.csv")
+design_cols <- c("country", "display_language", "label_language", "restrictions",
+                 "restrictions_note", "task_source", "profile_source")
+out <- merge(out, dtab[, c("table", design_cols)], by = "table", all.x = TRUE, sort = TRUE)
+no_design <- out$table[is.na(out$restrictions)]
+if (length(no_design)) message("  ! no design record (data/conjoint/design_tables.csv): ",
+                               paste(no_design, collapse = ", "))
+expected <- do.call(rbind, lapply(seq_len(nrow(out)), function(i)
+  data.frame(table = out$table[i], outcome = strsplit(out$outcomes[i], ";", fixed = TRUE)[[1]])))
+key <- function(d) paste(d$table, d$outcome, sep = ":")
+no_outcome <- expected[!key(expected) %in% key(dout), ]
+if (nrow(no_outcome)) message("  ! no outcome record (data/conjoint/design_outcomes.csv): ",
+                              paste(key(no_outcome), collapse = ", "))
+stale <- dout[dout$table %in% out$table & !key(dout) %in% key(expected), ]
+if (nrow(stale)) message("  ! outcome record for a column the live table lacks: ",
+                         paste(key(stale), collapse = ", "))
+outcomes <- dout[key(dout) %in% key(expected), setdiff(names(dout), "evidence")]
+outcomes <- outcomes[order(outcomes$table, outcomes$outcome), ]
+
 write.csv(out, "conj_metadata.csv", quote = TRUE, row.names = FALSE)
-message("conj_metadata.csv: ", nrow(out), " tables")
+write.csv(outcomes, "conj_outcomes.csv", quote = TRUE, row.names = FALSE)
+message("conj_metadata.csv: ", nrow(out), " tables; conj_outcomes.csv: ", nrow(outcomes), " outcomes")

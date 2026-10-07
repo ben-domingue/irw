@@ -24,6 +24,7 @@ metadata/**/*.txt
 !metadata/comps_metadata.csv
 !metadata/nominal_metadata.csv
 !metadata/conj_metadata.csv
+!metadata/conj_outcomes.csv
 !metadata/conj_biblio.csv
 ##conj has no dictionary sheet: its union provenance and pending rows are the only
 ##record of which biblio rows were machine-written or held back, as for core below.
