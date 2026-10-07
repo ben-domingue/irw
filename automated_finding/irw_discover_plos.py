@@ -164,12 +164,17 @@ _FORMAT_EXT = {
 
 _RE_DATA_AVAIL = re.compile(
     r"Data Availability:\s*</strong>\s*(.*?)</p>", re.IGNORECASE | re.DOTALL)
-_RE_SI_BLOCK = re.compile(
-    r'<div class="supplementary-material">.*?'
-    r'href="(article/file\?type=supplementary&amp;id=[^"]+)".*?'
-    r'>(S\d+\s+\w+)\.\s*</a>(.*?)'
-    r'<p class="postSiDOI">\(([A-Za-z0-9]+)\)</p>',
-    re.DOTALL)
+# Each SI item is parsed within its own <div class="supplementary-material">
+# block. A single regex spanning blocks used to require a one-word label
+# ("S1 Dataset."); a multi-word one ("S1 CONSORT Checklist.", "S1 Raw Data.")
+# didn't match, so the lazy match ran on into the NEXT block and paired this
+# block's URL with that block's label and format. pone.0147763 fetched its
+# CONSORT .doc as "S1_Dataset.sav" ("Invalid file") and never saw the real
+# .sav; a data file with a multi-word label was silently skipped or misread.
+_SI_BLOCK_START = '<div class="supplementary-material">'
+_RE_SI_HREF = re.compile(r'href="(article/file\?type=supplementary&amp;id=[^"]+)"')
+_RE_SI_LABEL = re.compile(r'>\s*(S\d+\s+[^<]*?)\.?\s*</a>')
+_RE_SI_FORMAT = re.compile(r'<p class="postSiDOI">\(([A-Za-z0-9]+)\)</p>')
 _RE_TAG = re.compile(r"<[^>]+>")
 _RE_URL = re.compile(r'https?://[^\s"\'<>]+')
 _RE_BARE_DOI = re.compile(r'\b10\.\d{4,9}/[^\s,;)"\'<>]+')
@@ -201,9 +206,14 @@ def extract_si_files(html: str, doi: str, journal: str = DEFAULT_JOURNAL) -> lis
     declared format. filename is synthesized (SI blocks don't expose a real
     one) so load_table() can dispatch on its extension."""
     out = []
-    for m in _RE_SI_BLOCK.finditer(html):
-        rel_url, si_id, caption, fmt = m.groups()
-        fmt = fmt.upper()
+    for block in html.split(_SI_BLOCK_START)[1:]:
+        href, fmt_m = _RE_SI_HREF.search(block), _RE_SI_FORMAT.search(block)
+        label = _RE_SI_LABEL.search(block, href.end()) if href else None
+        if not (href and label and fmt_m):
+            continue
+        rel_url, fmt = href.group(1), fmt_m.group(1).upper()
+        si_id = label.group(1).strip()
+        caption = block[label.end():fmt_m.start()]
         ext = _FORMAT_EXT.get(fmt)
         if not ext:
             continue   # DOCX/PDF/PPTX/TIFF/ZIP etc. -- not directly tabular
