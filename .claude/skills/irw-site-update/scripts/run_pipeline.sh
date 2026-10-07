@@ -186,7 +186,7 @@ declare -A STAGE_OUTPUTS=(
   [13]="table_scripts.csv"
   [14]="column_docs.csv"
   [15]="codebook_links.csv codebook_links_checked.csv"
-  [16]="conj_metadata.csv"
+  [16]="conj_metadata.csv conj_outcomes.csv"
 )
 # 16 (conjoint) runs with 05/06/07, before 02: conj_metadata.csv is 02's
 # liveness oracle for conj_biblio, exactly as comps_metadata.csv is for comps.
@@ -202,6 +202,7 @@ declare -A DIFF_KEY=(
   [column_docs.csv]="table,column"
   [codebook_links.csv]="table,url"
   [codebook_links_checked.csv]="table,data_url"
+  [conj_outcomes.csv]="table,outcome"
 )
 
 stages=()
