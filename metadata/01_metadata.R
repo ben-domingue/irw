@@ -13,25 +13,68 @@
 options(scipen=999)
 
 ##tables from last version of metadata
+##
+##Start from the repo's metadata.csv, not the published irw_meta.metadata table.
+##Until 2026-10-07 this read the published table, so any row corrected on main
+##but not yet uploaded was silently reverted: #2830 fixed 10 rows from live
+##Redivis on 2026-10-05 (Aspirations_Sonmez_2022 473 people, not 265), irw_meta
+##was not re-uploaded, and that night's run (#2860) wrote the stale published
+##values back because the rolling refresh below happened not to revisit them.
+##The repo is what this script writes and what upload_meta.py ships, so it is
+##the right base; published is still read, only to report where the two differ.
+##A row that differs is EXPECTED after a merged-but-unuploaded pipeline PR; one
+##where published is ahead of main means irw_meta was uploaded from a branch that
+##never merged, and this run will overwrite it -- check those before merging.
 library(redivis)
 source("redivis_config.R")
 user <- redivis$user(IRW_OWNER)
 dataset <- user$dataset("irw_meta")
 table <- dataset$table("metadata")
-meta <- table$to_tibble()
+published <- as.data.frame(table$to_tibble())
+base.cols<-c("table", "n_responses", "n_categories", "n_participants",
+             "n_items", "responses_per_participant", "responses_per_item",
+             "density", "variables")
+repo <- if (file.exists("metadata.csv")) {
+  tryCatch(read.csv("metadata.csv",stringsAsFactors=FALSE,colClasses=c(table="character",variables="character")),
+           error=function(e) { message("  ! unreadable metadata.csv: ",conditionMessage(e)); NULL })
+} else NULL
+if (!is.null(repo) && nrow(repo)>0 && all(base.cols %in% names(repo))) {
+  meta <- repo
+  message("base: repo metadata.csv (",nrow(repo)," rows); published irw_meta.metadata has ",nrow(published))
+  ##report, don't fail: the repo wins either way
+  only.pub<-setdiff(published$table,repo$table)
+  only.repo<-setdiff(repo$table,published$table)
+  if (length(only.pub)>0) message("base: ",length(only.pub)," table(s) in published but not repo: ",paste(head(only.pub,40),collapse=", "))
+  if (length(only.repo)>0) message("base: ",length(only.repo)," table(s) in repo but not published: ",paste(head(only.repo,40),collapse=", "))
+  num.cols<-setdiff(intersect(base.cols,names(published)),c("table","variables"))
+  both<-intersect(repo$table,published$table)
+  r<-repo[match(both,repo$table),num.cols,drop=FALSE]
+  p<-published[match(both,published$table),num.cols,drop=FALSE]
+  differs<-sapply(seq_along(both),function(k) {
+    a<-suppressWarnings(as.numeric(unlist(r[k,]))); b<-suppressWarnings(as.numeric(unlist(p[k,])))
+    !isTRUE(all.equal(a,b))
+  })
+  if (any(differs)) {
+    message("base: ",sum(differs)," table(s) whose stats differ between repo and published (repo kept): ",
+            paste(head(both[differs],40),collapse=", "))
+  } else message("base: repo and published agree on every shared row")
+} else {
+  ##no usable repo copy (fresh checkout of an old commit, or a broken file):
+  ##fall back to published, which is what this script did before 2026-10-07
+  message("  ! no usable metadata.csv in the working directory; starting from published irw_meta.metadata")
+  meta <- published
+}
 if (!"variables" %in% names(meta)) meta$variables <- NA_character_ ##first run after this fix, or a historical gap -- forces a one-time refetch for those rows below rather than crashing
 ##One row per table. zhou_2025_peer_relationship carried two identical rows from the
-##2026-09-10 rename (#2149) on, because each run starts from the published table and
+##2026-09-10 rename (#2149) on, because each run started from the published table and
 ##nothing below removes a second copy of a name that is still live.
 dup<-duplicated(meta$table)
 if (any(dup)) {
-  message("dropping ",sum(dup)," duplicate row(s) from published irw_meta.metadata: ",
+  message("dropping ",sum(dup)," duplicate row(s) from the base metadata: ",
           paste(unique(meta$table[dup]),collapse=", "))
   meta<-meta[!dup,]
 }
-meta<-meta[,c("table", "n_responses", "n_categories", "n_participants",
-              "n_items", "responses_per_participant", "responses_per_item",
-              "density", "variables")]
+meta<-meta[,base.cols]
 dim(meta)
 old.tables<-meta$table
 length(old.tables)
