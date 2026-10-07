@@ -50,6 +50,32 @@ Other rules:
 - **A dictionary row,** staged with `automated_finding/stage_dict_row.py --source conj`, which writes to `dictionary_auto_conj.csv`.
 - **A processing note** in `metadata/data_notes.csv`.
 - **A row in `candidates.csv`,** the ledger of every deposit considered. Its status is `todo`, `built`, `uploaded`, or `held: <reason>`.
+- **A design record:** one row in `design_tables.csv` and one row per outcome column in `design_outcomes.csv` (below). `metadata/tests/test_conj_design.py` fails if a built or uploaded table has none.
+
+## Design records
+
+The tables share one layout but not one meaning: `choice` is "vote for" in one table and "admit" in another, and ratings run 1–7, 0–10 or 0–100. These two files make what the header says machine-readable, so that tables can be pooled. `metadata/16_conjoint.R` joins `design_tables.csv` into `conj_metadata.csv` and publishes `design_outcomes.csv` as `conj_outcomes.csv`, both without the `evidence` column. When no source states a fact, the value is `unknown`. Never guess one.
+
+`design_tables.csv`, one row per table:
+
+| column | |
+|---|---|
+| `country` | where it was fielded: ISO 3166 alpha-2, `;`-joined if the table pools countries |
+| `display_language` | the language respondents saw: ISO 639-1, or ISO 639-3 for a language without a two-letter code (Lusoga is `xog`), `;`-joined |
+| `label_language` | the language of the `attr_` text as stored. This can differ from `display_language` when only an English instrument survives. |
+| `restrictions` | `none` when a source says levels were randomized independently and uniformly; `yes` when a source states prohibited combinations, conditional levels or non-uniform weights; `observed` when no source documents it but the table shows it (combinations that never occur, clearly unequal level shares); otherwise `unknown`. With `yes` or `observed`, the estimator has to account for the restriction (for example, by estimating within the allowed combinations); a plain difference in means across levels can mislead. |
+| `restrictions_note` | the rule, when `restrictions` is `yes` or `observed` |
+| `task_source`, `profile_source` | `recorded` (the deposit has the column), `inferred` (rebuilt from row order), or `unknown`. Position and task-order analyses should drop `inferred`. |
+| `evidence` | where each value came from: header lines, codebook pages |
+
+`design_outcomes.csv`, one row per table × outcome column:
+
+| column | |
+|---|---|
+| `outcome`, `type` | the column name, and `choice` or `rating` |
+| `question` | the wording, verbatim. If the source gives only a translation or a paraphrase, it ends with "(translated)" or "(paraphrase)". |
+| `opt_out` | choice rows only: `yes` if respondents could choose neither profile, otherwise `no` |
+| `scale_min`, `scale_max`, `low_anchor`, `high_anchor` | rating rows only: the stored range and the labels of its two ends |
 
 ## Scripts
 

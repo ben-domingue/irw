@@ -192,6 +192,11 @@ jobs:
         working-directory: data
         run: Rscript tests/test_enem_checks.R
 
+      # The conjoint design records: the codes each column may hold, and a row
+      # for every table the conjoint ledger marks built or uploaded.
+      - name: conjoint design records
+        run: python metadata/tests/test_conj_design.py -v
+
   # A PR to data/ contains a conversion SCRIPT, never a table --
   # automated_finding/irw_output/ is gitignored, so no output is ever in the
   # diff. This checks the script's contract; the data is checked by

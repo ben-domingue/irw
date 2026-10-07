@@ -1,0 +1,110 @@
+"""The conjoint design records (data/conjoint/design_tables.csv, design_outcomes.csv).
+
+Offline. Checks the codes each column may hold, that keys are unique, and that
+every table the ledger (data/conjoint/candidates.csv) marks built or uploaded
+has a design row. Whether every outcome COLUMN of a live table has an outcome
+row needs the table schema, so 16_conjoint.R reports that when it runs.
+
+Run: python metadata/tests/test_conj_design.py -v
+"""
+import csv
+import re
+import unittest
+from pathlib import Path
+
+CONJ = Path(__file__).resolve().parents[2] / "data" / "conjoint"
+
+TABLE_COLS = ["table", "country", "display_language", "label_language", "restrictions",
+              "restrictions_note", "task_source", "profile_source", "evidence"]
+OUTCOME_COLS = ["table", "outcome", "type", "question", "opt_out", "scale_min", "scale_max",
+                "low_anchor", "high_anchor", "evidence"]
+SOURCE = {"recorded", "inferred", "unknown"}
+ISO_LIST = re.compile(r"^(unknown|[a-z]{2,3}(;[a-z]{2,3})*)$")
+COUNTRY_LIST = re.compile(r"^(unknown|[A-Z]{2}(;[A-Z]{2})*)$")
+NAME = re.compile(r"^[a-z0-9_]+")
+
+
+def read(name):
+    with open(CONJ / name, newline="", encoding="utf-8") as f:
+        r = csv.DictReader(f)
+        return r.fieldnames, list(r)
+
+
+def ledger_tables():
+    """Tables the ledger marks built or uploaded. A cell can carry a note after the
+    name ("shandler_2023_cyberterror (replaces _us/_uk/_il)"); the name is the
+    leading token."""
+    _, rows = read("candidates.csv")
+    out = set()
+    for r in rows:
+        if r["status"] in ("built", "uploaded"):
+            for piece in r["tables"].split(";"):
+                m = NAME.match(piece.strip())
+                if m:
+                    out.add(m.group(0))
+    return out
+
+
+class TablesFile(unittest.TestCase):
+    def setUp(self):
+        self.cols, self.rows = read("design_tables.csv")
+
+    def test_columns(self):
+        self.assertEqual(self.cols, TABLE_COLS)
+
+    def test_unique(self):
+        names = [r["table"] for r in self.rows]
+        self.assertEqual(len(names), len(set(names)))
+
+    def test_codes(self):
+        for r in self.rows:
+            t = r["table"]
+            self.assertRegex(r["country"], COUNTRY_LIST, t)
+            self.assertRegex(r["display_language"], ISO_LIST, t)
+            self.assertRegex(r["label_language"], ISO_LIST, t)
+            self.assertIn(r["restrictions"], {"none", "yes", "observed", "unknown"}, t)
+            self.assertEqual(bool(r["restrictions_note"]), r["restrictions"] in ("yes", "observed"),
+                             f"{t}: restrictions_note is filled exactly when restrictions is yes or observed")
+            self.assertIn(r["task_source"], SOURCE, t)
+            self.assertIn(r["profile_source"], SOURCE, t)
+
+    def test_ledger_covered(self):
+        missing = ledger_tables() - {r["table"] for r in self.rows}
+        self.assertFalse(missing, f"built/uploaded tables with no design row: {sorted(missing)}")
+
+
+class OutcomesFile(unittest.TestCase):
+    def setUp(self):
+        self.cols, self.rows = read("design_outcomes.csv")
+        _, tabs = read("design_tables.csv")
+        self.tables = {r["table"] for r in tabs}
+
+    def test_columns(self):
+        self.assertEqual(self.cols, OUTCOME_COLS)
+
+    def test_unique(self):
+        keys = [(r["table"], r["outcome"]) for r in self.rows]
+        self.assertEqual(len(keys), len(set(keys)))
+
+    def test_every_table_has_outcomes(self):
+        self.assertEqual({r["table"] for r in self.rows}, self.tables)
+
+    def test_codes(self):
+        for r in self.rows:
+            k = f'{r["table"]}:{r["outcome"]}'
+            self.assertRegex(r["outcome"], r"^(choice|rating)(_[a-z0-9_]+)?$", k)
+            self.assertEqual(r["type"], r["outcome"].split("_")[0], k)
+            self.assertTrue(r["question"], k)
+            if r["type"] == "choice":
+                self.assertIn(r["opt_out"], {"yes", "no", "unknown"}, k)
+                for c in ("scale_min", "scale_max", "low_anchor", "high_anchor"):
+                    self.assertEqual(r[c], "", f"{k}: {c} is for ratings")
+            else:
+                self.assertEqual(r["opt_out"], "", k)
+                lo, hi = float(r["scale_min"]), float(r["scale_max"])
+                self.assertLess(lo, hi, k)
+                self.assertTrue(r["low_anchor"] and r["high_anchor"], k)
+
+
+if __name__ == "__main__":
+    unittest.main()
