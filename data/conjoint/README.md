@@ -1,18 +1,16 @@
 # Conjoint experiments (`irw_conjoint`)
 
-Processing scripts for the tables in the Redivis dataset `datapages.irw_conjoint`. This is an experimental source, like competitions and nominal. It is **not yet registered** in `metadata/redivis_config.R` or the packages. Until it is, tables go up with:
+Processing scripts for the tables in the Redivis dataset `datapages.irw_conjoint`, the `conj` source: experimental, like competitions and nominal. Users fetch them with `irw_fetch(name, source = "conj")` in R or `irw.fetch(name, source="conj")` in Python, and `irw_conj_long()` / `irw.conj_long()` give the core id/item/resp view. Upload from a staging folder that holds only the files to upload:
 
 ```
-red_up . --dataset irw_conjoint --allow-unregistered --no-validate
+red_up . --dataset irw_conjoint
 ```
 
-Run that from a staging folder that holds only the files to upload. First check every file with
+`red_up` runs the conjoint checks (`irw_validate.conjoint`) for this target instead of the core validator. To check files before staging them:
 
 ```
 python3 -m irw_validate.conjoint *.csv
 ```
-
-because the core validator does not apply to this layout. Once `conj` is registered, `red_up` runs these checks itself for the `irw_conjoint` target, and `--allow-unregistered --no-validate` go away.
 
 ## Layout (draft conjoint standard)
 

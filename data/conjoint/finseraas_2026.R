@@ -39,6 +39,11 @@
 ##  rating_represent = represented: to what extent the candidate would represent "someone like
 ##    you", 1 (not at all) to 7 (to a very great extent); higher = more represented.
 ##  rating_leftright = rightrating: placement of the candidate from 1 (far left) to 7 (far right).
+##    Checked 2026-10-07: codebook.pdf labels rightrating "Profile: Left-right rating" for Norway
+##    and "Profile: Rating" for Britain, but the authors' code.do runs the same left-right
+##    regressions on rightrating in both countries and combines them in one figure. Norway's
+##    separately labelled `rating` (1 = Helt til venstre ... 7 = Helt til hoyre, 9996 = NA) equals
+##    rightrating in all 12,437 non-missing cases, so it is a labelled duplicate and is not kept.
 ##    Not a favourability scale: higher = further right.
 ##Covariates: cov_male, cov_working_class (Britain: class identity; Norway: EGP class from
 ##occupation, many missing), cov_vote_conservative (Britain: votes Conservative vs Labour; Norway:

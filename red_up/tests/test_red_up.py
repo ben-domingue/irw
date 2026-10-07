@@ -43,6 +43,25 @@ def write(directory: Path, name: str, body: str) -> Path:
     return path
 
 
+class RegistryAgreesWithParityParser(unittest.TestCase):
+    """red_up and metadata/check_config_parity.py parse redivis_config.R with
+    different code. On 2026-10-07 a comment containing "(...)" inside
+    IRW_AUX_DATASETS made red_up's regex stop early and silently drop `conj`,
+    while the parity check (a different parser) read it fine. Every dataset the
+    parity parser sees in the real file must be a red_up target."""
+
+    def test_every_configured_dataset_is_a_target(self):
+        import importlib.util
+        path = targets_mod.find_config()
+        spec = importlib.util.spec_from_file_location(
+            "check_config_parity", path.parent / "check_config_parity.py")
+        parity = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(parity)
+        declared = {name for names in parity.parse_pipeline_config(path).values() for name in names}
+        _, targets = load_registry(path)
+        self.assertEqual(declared, {t.name for t in targets})
+
+
 class Registry(unittest.TestCase):
     """The dataset list is parsed from metadata/redivis_config.R, not restated."""
 
@@ -65,10 +84,10 @@ class Registry(unittest.TestCase):
         self.assertEqual(text[1:],
                          [f"irw_text_{i}" for i in range(2, len(text) + 1)])
 
-        # The four plain aux datasets are a fixed set; item text is not among
+        # The plain aux datasets are a fixed set; item text is not among
         # them, because it is declared as IRW_TEXT_DATASETS.
         self.assertEqual(sorted(aux),
-                         ["irw_competitions", "irw_meta", "irw_nominal", "irw_simsyn"])
+                         ["irw_competitions", "irw_conjoint", "irw_meta", "irw_nominal", "irw_simsyn"])
 
         # Core first, then text shards, then the rest -- the menu order.
         self.assertEqual(names, core + text + aux)
