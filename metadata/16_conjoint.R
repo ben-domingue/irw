@@ -16,13 +16,12 @@
 ##  n_optout_tasks (tasks where `choice` exists and no profile was chosen; 0
 ##  for a forced choice, NA when the table has no `choice`).
 ##
-##Not yet wired into run_pipeline.sh: that happens when `conj` is registered in
-##redivis_config.R together with the package configs (the parity check compares
-##all three). Until then the dataset name falls back to "irw_conjoint".
+##Runs in run_pipeline.sh with 05/06/07, before 02_biblio.R, which uses
+##conj_metadata.csv as the liveness oracle for conj_biblio.
 options(scipen=999)
 library(redivis)
 source("redivis_config.R")
-conj_dataset <- if ("conj" %in% names(IRW_AUX_DATASETS)) IRW_AUX_DATASETS[["conj"]] else "irw_conjoint"
+conj_dataset <- IRW_AUX_DATASETS[["conj"]]
 
 ds <- redivis$organization(IRW_OWNER)$dataset(conj_dataset)
 tabs <- ds$list_tables()
