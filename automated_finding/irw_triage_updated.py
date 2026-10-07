@@ -186,6 +186,22 @@ def _stringify_columns(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
+def _sniff_sep(src) -> str | None:
+    """The delimiter of a delimited text file, or None if csv.Sniffer can't tell."""
+    import csv as _csv
+    if hasattr(src, "read"):
+        head = src.read(65536)
+    else:
+        with open(src, "rb") as f:
+            head = f.read(65536)
+    if isinstance(head, bytes):
+        head = head.decode("utf-8", errors="replace")
+    try:
+        return _csv.Sniffer().sniff(head, delimiters=",;\t|").delimiter
+    except _csv.Error:
+        return None
+
+
 def _load_table(path_or_bytes, filename: str = "") -> pd.DataFrame:
     name = (filename or str(path_or_bytes)).lower()
 
@@ -211,6 +227,27 @@ def _load_table(path_or_bytes, filename: str = "") -> pd.DataFrame:
             return pd.read_csv(_src(), header=header)
         except UnicodeDecodeError:
             return pd.read_csv(_src(), header=header, encoding="latin-1")
+        except pd.errors.ParserError:
+            # A ';'-delimited export (European locale) read with ',' is one
+            # column until the first decimal comma ("1,6"), where the C parser
+            # dies with "Expected 1 fields in line N, saw 3". That exception
+            # reached process_one() as `download_failed` -- before
+            # reread_hint's delimiter sniffing could run -- so a fully
+            # downloaded, readable file was retried and failed every week.
+            # 117 DOIs across the run outputs as of 2026-10-07, among them
+            # pone.0262960 (STICSA, 42 items x 1153 respondents).
+            sep = _sniff_sep(_src())
+            if sep in (None, ","):
+                raise
+            # ';' is the decimal-comma locale's delimiter; read "1,6" as 1.6
+            # rather than as a string that fails every numeric check.
+            decimal = "," if sep == ";" else "."
+            try:
+                return pd.read_csv(_src(), sep=sep, decimal=decimal, header=header,
+                                   skipinitialspace=True)
+            except UnicodeDecodeError:
+                return pd.read_csv(_src(), sep=sep, decimal=decimal, header=header,
+                                   skipinitialspace=True, encoding="latin-1")
 
     if name.endswith(".sav"):
         # pandas.read_spss (via pyreadstat) accepts a file-like object directly.
