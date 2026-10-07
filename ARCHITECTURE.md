@@ -66,6 +66,15 @@ metadata, biblio, tags and collections tables), plus one
 each for the `simsyn`, `competitions` and `nominal` sources. These are single
 datasets rather than shard lists only because none is near the cap.
 
+`irw_conjoint` holds conjoint experiments in their own layout (one row per
+respondent × task × profile, no `item`/`resp`; `data/conjoint/README.md`). It is
+experimental and **not yet registered**: it is absent from `redivis_config.R` and
+both packages' configs, so the clients cannot fetch it and `red_up` reaches it
+only with `--allow-unregistered`. Registering it means changing all three config
+files together (the parity check below compares them); `red_up`
+(`targets.py`), the validator (`irw_validate.conjoint`) and the metadata stage
+(`16_conjoint.R`) are already written for it.
+
 How many of each exist today is *not* recorded here, deliberately — that number
 grows, and a count written into prose is wrong the day it changes. `redivis_config.R`
 is the answer:
@@ -465,7 +474,7 @@ directory's README (where there is one) goes further:
 
 | Path | What it is |
 |---|---|
-| `data/` | One script per dataset (R, Python, Stata). Subfolders group scripts by Redivis source or by family: `competitions/`, `nominal/`, `simsyn/` for the auxiliary datasets; `trials/` for trial-level sports tables; `gilbert_hte/` for the IL-HTE `gilbert_meta_*` series; `pisa/` for PISA; `tests/` for the CI checks on the ENEM scoring helpers. Older top-level scripts predate the naming rule in `datastandard.md` and keep their names, because `metadata/table_scripts.csv` and the MCP find scripts by path |
+| `data/` | One script per dataset (R, Python, Stata). Subfolders group scripts by Redivis source or by family: `competitions/`, `nominal/`, `simsyn/`, `conjoint/` for the auxiliary datasets; `trials/` for trial-level sports tables; `gilbert_hte/` for the IL-HTE `gilbert_meta_*` series; `pisa/` for PISA; `tests/` for the CI checks on the ENEM scoring helpers. Older top-level scripts predate the naming rule in `datastandard.md` and keep their names, because `metadata/table_scripts.csv` and the MCP find scripts by path |
 | `audit/2401/` | The #2401 retroactive corpus audit: `RULES.md` (the audit's frozen rules), detectors, pilot and sample dossiers, triage and repair builders. A workstream folder, not a pipeline stage |
 | `tools/withdrawals/`, `tools/repairs/` | One already-run script per withdrawal or one-off repair, kept because provenance records cite them by path. `tools/withdrawals/ledger.py` is the live part: withdrawal scripts call it to append to `itemtext/withdrawals.csv` |
 | `collections/` | `registry.csv` and `curated/` are the data `10_collections.R` reads (#1633); `scout_instruments.py` and `presort_instruments.py` propose curated members for human review |

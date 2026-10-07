@@ -851,6 +851,30 @@ class ValidatorGate(unittest.TestCase):
         self.assertTrue(report.ok, report.errors)
         self.assertEqual([], report.errors)
 
+    CONJ = Target(name="irw_conjoint", label="conjoint experiments", kind="aux", source="conj")
+
+    def _conj_rows(self, chosen_both=False):
+        rows = []
+        for i in range(1, 121):
+            for t in (1, 2):
+                for p in (1, 2):
+                    c = 1 if (p == 1 or chosen_both) else 0
+                    rows.append(f"{i},{t},{p},{c},{p + 2},{'Democrat' if p == 1 else 'Republican'},{40 + 5 * p}")
+        return "id,task,profile,choice,rating,attr_party,attr_age\n" + "\n".join(rows) + "\n"
+
+    def test_a_conjoint_table_gets_the_conjoint_checks_not_the_core_ones(self):
+        """No item/resp is right for conj; the core validator would fail C1."""
+        path = self._csv("smith_2024_candidates.csv", self._conj_rows())
+        report = self._check(path, "smith_2024_candidates", target=self.CONJ)
+        self.assertTrue(report.ok, report.errors)
+        self.assertFalse(any("required_columns" in w and "item" in w for w in report.warnings))
+
+    def test_a_broken_conjoint_table_is_blocked(self):
+        path = self._csv("smith_2024_candidates.csv", self._conj_rows(chosen_both=True))
+        report = self._check(path, "smith_2024_candidates", target=self.CONJ)
+        self.assertFalse(report.ok)
+        self.assertTrue(any("conj_choice" in e for e in report.errors), report.errors)
+
     def test_a_target_with_required_columns_is_still_validated(self):
         """The exemption must not become a hole: response data still gets it."""
         path = self._csv("broken_2024_scale.csv",

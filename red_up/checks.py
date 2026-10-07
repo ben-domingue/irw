@@ -123,6 +123,27 @@ def run_validator(path: Path, context: dict | None = None) -> tuple[list[str], l
             [f"{f.check}: {f.message}" for f in report.warnings])
 
 
+def run_conjoint_validator(path: Path) -> tuple[list[str], list[str]]:
+    """The conjoint-table checks (irw_validate.conjoint). -> (errors, warnings)
+
+    A conjoint table has no item/resp, so the core validator would fail every
+    one on C1. Same failure rules as run_validator: a missing dependency or an
+    unreadable file is an error, never a pass.
+    """
+    sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+    try:
+        from irw_validate.conjoint import validate_conjoint_file
+    except ImportError as exc:
+        return ([f"conjoint validator unavailable ({exc}) -- install pandas, or pass "
+                 f"--no-validate to upload without a format check"], [])
+    try:
+        report = validate_conjoint_file(path)
+    except Exception as exc:
+        return ([f"conjoint validator could not read this file: {exc}"], [])
+    return ([f"{f.check}: {f.message}" for f in report.errors],
+            [f"{f.check}: {f.message}" for f in report.warnings])
+
+
 def validate_for_target(report: FileReport, target: Target,
                         enabled: bool = True, context: dict | None = None) -> None:
     """Run the full IRW format validator, where the target expects that format.
@@ -146,6 +167,11 @@ def validate_for_target(report: FileReport, target: Target,
         return
     if report.errors:
         return                # a file that is not a table yet is not worth validating
+    if target.source == "conj":
+        errors, warnings = run_conjoint_validator(report.path)
+        report.errors.extend(errors)
+        report.warnings.extend(warnings)
+        return
     errors, warnings = run_validator(report.path, context)
     report.errors.extend(errors)
     report.warnings.extend(warnings)

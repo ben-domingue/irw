@@ -402,6 +402,17 @@ Known exceptions, being converted rather than blessed: seven published tables ca
 readers that must cope with both (e.g. the item-text validator) accept either spelling;
 that tolerance is there for these seven, not as licence to add an eighth.
 
+### Conjoint experiments go to their own tranche
+
+A conjoint experiment (respondents choose between or rate profiles whose attributes are
+randomly assigned: hypothetical candidates, immigrants, vaccines, policies) is **not**
+converted to this schema. Every profile is a fresh random bundle, so there is no fixed
+probe to call `item`; forcing one in produces tables that pass this validator and mean
+nothing. These go to the conjoint tranche (`irw_conjoint`) in their own layout, one row
+per respondent × task × profile with `choice`/`rating` and `attr_*` columns, described
+in `data/conjoint/README.md` and checked with `python3 -m irw_validate.conjoint`.
+Scripts live in `data/conjoint/`.
+
 ### Q-matrix / cognitive diagnostic data
 If the dataset includes item-by-attribute classifications for cognitive diagnostic modeling, encode them as separate columns named `qmatrix1`, `qmatrix2`, … (one column per attribute). These are item-level columns, not response-level.
 

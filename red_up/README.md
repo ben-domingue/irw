@@ -88,7 +88,7 @@ a human click after reviewing the diff (`ARCHITECTURE.md` §4).
 |---|---|
 | Owner and dataset names | `metadata/redivis_config.R`, *parsed*, not restated (`IRW_CORE_DATASETS`, `IRW_TEXT_DATASETS`, `IRW_AUX_DATASETS`) |
 | Write token | `irw_secrets.load_write_token()` → `~/.config/irw/redivis-write.env` |
-| Required columns | `datastandard.md` |
+| Required columns | `datastandard.md`; per source in `targets.REQUIRED_COLUMNS` (`conj`: `id, task, profile`, checked by `irw_validate.conjoint` instead of the core validator; see `data/conjoint/README.md`) |
 
 There is no dataset list in this package. `redivis_config.R` is already
 authoritative (`ARCHITECTURE.md` §5) and the project already carries three

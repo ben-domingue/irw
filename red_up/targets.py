@@ -31,6 +31,7 @@ AUX_LABELS = {
     "nom": "nominal",
     "comp": "pairs / competitions",
     "sim": "simulated + synthetic",
+    "conj": "conjoint experiments",
 }
 
 
@@ -223,6 +224,10 @@ REQUIRED_COLUMNS: dict[str, tuple[str, ...]] = {
     "text": ("table", "item", "item_text"),
     "comp": (),
     "meta": (),
+    #: Conjoint tables have no item/resp: one row per respondent x task x
+    #: profile (data/conjoint/README.md). checks.validate_for_target runs
+    #: irw_validate.conjoint for this source instead of the core validator.
+    "conj": ("id", "task", "profile"),
 }
 
 
