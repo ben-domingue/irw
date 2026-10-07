@@ -7,18 +7,23 @@
 ##(not run) for the level codes, and the article (open access, PMC10127534) for the design.
 ##Usage: Rscript shandler_2023.R <dir holding the .csv, saved as combined.csv> <output dir>
 ##
-##One design fielded simultaneously on 26 August 2020 in three countries; each country is
-##its own population and the Israeli version was shown in Hebrew, so it is split into
-##three tables: shandler_2023_cyberterror_us (MTurk, 1,012 respondents),
-##shandler_2023_cyberterror_uk (Prolific, 1,010) and shandler_2023_cyberterror_il (Midgam,
-##1,014, Hebrew). Counts match the article's retained samples (respondents who completed
-##all conjoint questions and passed reCAPTCHA; the deposit holds only these).
+##One design fielded simultaneously on 26 August 2020 in three countries: US (MTurk, 1,012
+##respondents), UK (Prolific, 1,010) and Israel (Midgam, 1,014, shown in Hebrew). ONE table,
+##shandler_2023_cyberterror, with cov_country, because the authors analyse the three
+##samples together (Replication_Code.R reads one combined file, fits a pooled AMCE, then
+##country interactions), and they work with the English level labels for all three; this
+##follows the IRW rule of keeping a design together where the researchers did (Ben,
+##2026-10-07). Until 2026-10-07 this was three tables (_us, _uk, _il, irw_conjoint v1.1).
+##Counts match the article's retained samples (respondents who completed all conjoint
+##questions and passed reCAPTCHA; the deposit holds only these).
 ##Each respondent read 7 single scenarios (profile is always 1; task 1-7 in order shown)
 ##describing a cyber incident with 5 attributes: method, target, actor, motivation,
-##outcome. attr_* hold the sentence fragments as displayed (English in the US and UK,
-##Hebrew in Israel). The Qualtrics export had double-encoded UTF-8 (Hebrew read as
-##Windows-1252 mojibake, and "a malicious" with a garbled no-break space); this is
-##repaired byte-for-byte and the no-break space written as a plain space. Restriction:
+##outcome. attr_* hold the ENGLISH sentence fragments as displayed in the US and UK. For
+##Israel each level is mapped through its level code (Method<k>, Target<k>, Agent<k>,
+##Motivation<k>, Outcome<k>) to the same English fragment; Israeli respondents saw the
+##Hebrew version, which is not kept. The code -> text map is checked to be one-to-one in
+##the US and UK rows. The Qualtrics export had double-encoded UTF-8 (a garbled no-break
+##space in "a malicious"); this is repaired and written as a plain space. Restriction:
 ##an attack on online databases never had a minor or major explosion outcome.
 ##Outcome: rating = 1 if the respondent classified the incident as cyberterrorism, 0 if
 ##not (source Scenario<k>: 1 = yes, 2 = no; the authors' TerrorBinary). The exact
@@ -27,11 +32,11 @@
 ##higher = labelled terrorism, not "more favourable". There is no choice column.
 ##Covariates: cov_age (2020 - year born), cov_male (1 = male; source Gender == 2, as the
 ##authors code it), cov_education and cov_income (country questionnaires' raw codes,
-##labels not deposited), cov_political_position (1 = most liberal ... 6 = most
-##conservative), cov_party_id_us (US only, 1-7 raw code, labels not deposited).
+##labels not deposited; codes differ by country), cov_political_position (1 = most liberal
+##... 6 = most conservative), cov_party_id_us (US only, 1-7 raw code, labels not deposited).
 ##Dropped: IP address, latitude/longitude, Qualtrics ResponseId, Prolific/Midgam ID,
 ##page timings, threat/exposure/COVID batteries, and attention checks. id is the row
-##number of the source file (re-keyed per table to 1..n).
+##number of the source file (re-keyed to 1..n across all three countries).
 ##Count note: 3,036 x 7 = 21,252 classifications are in the deposit; the article reports
 ##21,238 (14 fewer). Not reconciled.
 library(data.table)
@@ -47,23 +52,32 @@ fix <- function(x) vapply(x, function(z) {
 }, "", USE.NAMES = FALSE)
 names(s)[87:91] <- paste0(c("MethodOfAttack", "TargetOfAttack", "ActorType", "MotivationOfAttack", "OutcomeOfAttack"), 1)
 s[, src := .I]
-d <- rbindlist(lapply(1:7, function(k) data.table(src = s$src, task = k, profile = 1L,
-  rating = as.integer(c(`1` = 1L, `2` = 0L)[as.character(s[[paste0("Scenario", k)]])]),
-  attr_method = fix(s[[paste0("MethodOfAttack", k)]]), attr_target = fix(s[[paste0("TargetOfAttack", k)]]),
-  attr_actor = fix(s[[paste0("ActorType", k)]]), attr_motivation = fix(s[[paste0("MotivationOfAttack", k)]]),
-  attr_outcome = fix(s[[paste0("OutcomeOfAttack", k)]]),
-  code_target = s[[paste0("Target", k)]], code_outcome = s[[paste0("Outcome", k)]])))
+attrs <- c(method = "MethodOfAttack", target = "TargetOfAttack", actor = "ActorType",
+           motivation = "MotivationOfAttack", outcome = "OutcomeOfAttack")
+codes <- c(method = "Method", target = "Target", actor = "Agent", motivation = "Motivation", outcome = "Outcome")
+d <- rbindlist(lapply(1:7, function(k) {
+  x <- data.table(src = s$src, country = s$CountryCode, task = k, profile = 1L,
+                  rating = as.integer(c(`1` = 1L, `2` = 0L)[as.character(s[[paste0("Scenario", k)]])]))
+  for (a in names(attrs)) {
+    x[, paste0("code_", a) := s[[paste0(codes[[a]], k)]]]
+    x[, paste0("txt_", a) := s[[paste0(attrs[[a]], k)]]]
+  }
+  x
+}))
 stopifnot(!anyNA(d$rating), d[code_target == 5, all(code_outcome %in% c(1, 4, 5))])
-d[, c("code_target", "code_outcome") := NULL]
-cv <- s[, .(src, country = CountryCode, cov_age = 2020L - as.integer(Year_Born), cov_male = as.integer(Gender == 2),
+## English text per level code, from the US and UK rows; must be one-to-one
+for (a in names(attrs)) {
+  en <- unique(d[country != 3, .(code = get(paste0("code_", a)), txt = fix(get(paste0("txt_", a))))])
+  stopifnot(!anyDuplicated(en$code), !anyDuplicated(en$txt), all(d[[paste0("code_", a)]] %in% en$code))
+  d[, paste0("attr_", a) := en$txt[match(get(paste0("code_", a)), en$code)]]
+}
+d[, (grep("^(code|txt)_", names(d), value = TRUE)) := NULL]
+cv <- s[, .(src, cov_country = c("United States", "United Kingdom", "Israel")[CountryCode],
+            cov_age = 2020L - as.integer(Year_Born), cov_male = as.integer(Gender == 2),
             cov_education = as.integer(Education), cov_income = as.integer(Income),
             cov_political_position = as.integer(Political_position), cov_party_id_us = as.integer(Party_ID_US))]
-d <- merge(d, cv, by = "src")
-for (cc in list(c(1, "us"), c(2, "uk"), c(3, "il"))) {
-  x <- d[country == as.integer(cc[1])][, country := NULL]
-  if (cc[2] != "us") x[, cov_party_id_us := NULL]
-  x[, id := match(src, sort(unique(src)))][, src := NULL]
-  setcolorder(x, c("id", "task", "profile", "rating"))
-  setorder(x, id, task, profile)
-  fwrite(x, file.path(out, paste0("shandler_2023_cyberterror_", cc[2], ".csv")))
-}
+d <- merge(d[, country := NULL], cv, by = "src")
+d[, id := match(src, sort(unique(src)))][, src := NULL]
+setcolorder(d, c("id", "task", "profile", "rating"))
+setorder(d, id, task, profile)
+fwrite(d, file.path(out, "shandler_2023_cyberterror.csv"))

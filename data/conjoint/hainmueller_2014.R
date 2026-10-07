@@ -4,8 +4,9 @@
 ##Political Analysis, 22(1), 1-30. https://doi.org/10.1093/pan/mpt024
 ##Replication data: Harvard Dataverse doi:10.7910/DVN/THJYQR, CC0 1.0. Files read:
 ##candidate.dta and immigrant.dta (Dataverse "original format" downloads, which keep
-##the Stata value labels; the .tab versions do not).
-##Usage: Rscript hainmueller_2014.R <dir holding the two .dta files> <output dir>
+##the Stata value labels; the .tab versions do not), plus repdata.dta from
+##doi:10.7910/DVN/25505 (see the immigrant table below).
+##Usage: Rscript hainmueller_2014.R <dir holding the three .dta files> <output dir>
 ##
 ##hainmueller_2014_candidate: 311 MTurk respondents, up to 6 pairs of hypothetical
 ##  presidential candidates, 8 attributes. Outcomes: forced choice (selected) and a
@@ -22,6 +23,18 @@
 ##  language and prior-trips attributes are kept as attrpos_*. The same 1,396
 ##  respondents ship with the cjoint R package (immigrationconjoint); AMCEs computed
 ##  from this table match cjoint's to 1e-14.
+##  ENRICHED 2026-10-07 from the same experiment's fuller deposit, Hainmueller & Hopkins
+##  (2015), AJPS 59(3), https://doi.org/10.1111/ajps.12138, Harvard Dataverse
+##  doi:10.7910/DVN/25505, CC0 1.0, file repdata.dta. Rows are matched on respondent,
+##  pairing and all nine attribute codes: every one of the 13,960 rows matches exactly
+##  once and the choices agree on all of them. Added: rating = Rating_Immigrant, 1-7
+##  (higher = more supportive of admitting the immigrant); cov_survey_weight = weight2
+##  (post-stratification weight); cov_age, cov_education (ppeducat 1-4), cov_race
+##  (ppethm), cov_gender (ppgender, 1 male / 2 female), cov_income (ppincimp),
+##  cov_party_id (1-7), cov_ideology (1-7), as GfK panel codes. Not added:
+##  Support_Admission (exactly rating >= 5, so derived), the attitude batteries, state
+##  and ZIP-level measures. The 2015 file has 8 further respondents with choices who are
+##  not in the 2014 file; they are left out so the table stays the 1,396 that cjoint ships.
 library(haven); library(data.table)
 a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]
 lab <- function(x) { l <- attr(x, "labels"); names(l)[match(x, l)] }
@@ -46,5 +59,18 @@ imap <- c(FeatEd = "education", FeatGender = "gender", FeatCountry = "origin", F
 for (v in names(imap)) d[, paste0("attr_", imap[[v]]) := lab(m[[v]])]
 d[, attrpos_language := as.integer(m$LangPos)][, attrpos_prior_trips := as.integer(m$PriorPos)]
 d[, cov_ethnocentrism := as.numeric(m$ethnocentrism)]
+r <- as.data.table(zap_labels(read_dta(file.path(raw, "repdata.dta"))))
+key <- c("CaseID", "contest_no", names(imap))
+r <- r[!is.na(FeatEd), c(key, "Chosen_Immigrant", "Rating_Immigrant", "weight2", "ppage", "ppeducat", "ppethm",
+                          "ppgender", "ppincimp", "Party_ID", "Ideology"), with = FALSE]
+stopifnot(!anyDuplicated(r[, ..key]))
+mk <- as.data.table(zap_labels(m))[, ..key]
+j <- r[mk, on = key]
+stopifnot(nrow(j) == nrow(d), !anyNA(j$Rating_Immigrant), all(j$Chosen_Immigrant == d$choice))
+d[, rating := as.integer(j$Rating_Immigrant)]
+d[, `:=`(cov_survey_weight = as.numeric(j$weight2), cov_age = as.integer(j$ppage), cov_education = as.integer(j$ppeducat),
+         cov_race = as.integer(j$ppethm), cov_gender = as.integer(j$ppgender), cov_income = as.integer(j$ppincimp),
+         cov_party_id = as.integer(j$Party_ID), cov_ideology = as.integer(j$Ideology))]
+setcolorder(d, c("id", "task", "profile", "choice", "rating"))
 setorder(d, id, task, profile)
 fwrite(d, file.path(out, "hainmueller_2014_immigrant.csv"))
