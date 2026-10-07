@@ -9,8 +9,8 @@ source("../redivis_config.R")
 
 datasets <- rbind(
   data.frame(dataset = IRW_CORE_DATASETS, group = "core"),
-  data.frame(dataset = IRW_AUX_DATASETS[c("comp", "nom", "sim")],
-             group   = c("comps", "nominal", "simsyn")),
+  data.frame(dataset = IRW_AUX_DATASETS[c("comp", "nom", "sim", "conj")],
+             group   = c("comps", "nominal", "simsyn", "conjoint")),
   data.frame(dataset = IRW_TEXT_DATASETS, group = "itemtext")
 )
 

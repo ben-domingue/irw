@@ -68,12 +68,11 @@ datasets rather than shard lists only because none is near the cap.
 
 `irw_conjoint` holds conjoint experiments in their own layout (one row per
 respondent × task × profile, no `item`/`resp`; `data/conjoint/README.md`). It is
-experimental and **not yet registered**: it is absent from `redivis_config.R` and
-both packages' configs, so the clients cannot fetch it and `red_up` reaches it
-only with `--allow-unregistered`. Registering it means changing all three config
-files together (the parity check below compares them); `red_up`
-(`targets.py`), the validator (`irw_validate.conjoint`) and the metadata stage
-(`16_conjoint.R`) are already written for it.
+experimental, registered as `conj` (2026-10-07) in all three config files, and
+fetched with `source = "conj"`. `red_up` checks its tables with
+`irw_validate.conjoint` rather than the core validator, `16_conjoint.R` writes
+`conj_metadata`, and its biblio comes from the automated dictionary file alone,
+with no sheet.
 
 How many of each exist today is *not* recorded here, deliberately — that number
 grows, and a count written into prose is wrong the day it changes. `redivis_config.R`

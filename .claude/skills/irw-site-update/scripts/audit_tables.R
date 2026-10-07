@@ -77,12 +77,14 @@ dir_path   <- get_arg("--dir", ".")
 out_path   <- get_arg("--out", file.path(dir_path, "table_audit_report.md"))
 skip_dict  <- "--skip-dict" %in% args
 
-sources <- c("core", "comp", "nom", "sim")
+sources <- c("core", "comp", "nom", "sim", "conj")
 
 metadata_csvs <- c(core = "metadata.csv", comp = "comps_metadata.csv",
-                    nom  = "nominal_metadata.csv", sim  = "simsyn_metadata.csv")
+                    nom  = "nominal_metadata.csv", sim  = "simsyn_metadata.csv",
+                    conj = "conj_metadata.csv")
 biblio_csvs   <- c(core = "biblio.csv", comp = "comps_biblio.csv",
-                    nom  = "nominal_biblio.csv", sim  = "simsyn_biblio.csv")
+                    nom  = "nominal_biblio.csv", sim  = "simsyn_biblio.csv",
+                    conj = "conj_biblio.csv")
 ## Per-source tag CSVs. core and nom have one each (03_tags.R); comp and sim
 ## deliberately have none -- see Rpkg/inst/developer/tags.md.
 tags_csvs <- c(core = "tags.csv", nom = "nominal_tags.csv")
