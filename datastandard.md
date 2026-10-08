@@ -59,7 +59,7 @@ Every IRW file is a CSV in long format with one row per person-item observation.
 | `id` | yes | Identifier for the focal unit being measured — typically a person, but sometimes another entity (e.g., a word in a lexical task). Integer or string. Must be unique per focal unit (not per row). |
 | `item` | yes | Item identifier. String. Use original column names when they are meaningful; use `item_1`, `item_2`, … when they are not. Item names should be chosen to allow straightforward downstream matching with item text — prefer names that correspond directly to identifiers used in the source instrument or codebook (e.g., `BDI_1`, `PHQ_3`) over generic positional labels whenever such identifiers exist. |
 | `resp` | yes | Response value. Must be numeric. Higher values represent a consistent directional change **within** each item, but direction may vary **across** items — do not recode reverse-scored items unless you have specific reason to. Remove imputed values. Continuous responses are acceptable (e.g. a 0–100 slider, "how well does this describe you?") — keep `resp` as a float and don't coerce to integer. Don't confuse this with an *aggregate* score summed/averaged across items; that's a composite, not a response, and doesn't belong in `resp` (see "Subscale aggregate columns" below). |
-| `resp_raw` | no | The response as originally recorded, where `resp` holds a scored or recoded version of it — the letter a candidate marked (`A`–`E`), an option label, a categorical string. Use it only when `resp` genuinely loses information; don't mirror a numeric `resp` into it. **Spell it `resp_raw`, not `raw_resp`.** Both spellings are live in the corpus and this is the one to emit — see "The raw response and the nominal tranche" below for why the spelling is load-bearing rather than cosmetic. |
+| `resp_raw` | no | The response as originally recorded, where `resp` holds a scored or recoded version of it — the letter a candidate marked (`A`–`E`), an option label, a categorical string. Use it only when `resp` genuinely loses information; don't mirror a numeric `resp` into it. **Spell it `resp_raw`, not `raw_resp`.** Both spellings are live in the corpus and this is the one to emit — see "The raw response and the nominal family" below for why the spelling is load-bearing rather than cosmetic. |
 | `cov_*` | no | Covariates that are invariant to the focal unit (e.g., a person's gender or age). Always prefix with `cov_`. |
 | `itemcov_*` | no | Covariates invariant to measurement probes (item-level attributes). Always prefix with `itemcov_`. |
 | `wave` | no | Longitudinal wave indicator. Larger values indicate later collection. Use when the same focal unit appears at multiple time points. |
@@ -364,10 +364,10 @@ data = raw.iloc[2:].reset_index(drop=True)  # skip rows 0 and 1
 ### Item-level covariates (`itemcov_*`)
 When the source data includes attributes of the items themselves (e.g., item difficulty category, domain, modality) rather than attributes of the person, prefix those columns with `itemcov_` rather than `cov_`. They should still be consistent within each item across all rows for that item.
 
-### The raw response (`resp_raw`) and the nominal tranche
+### The raw response (`resp_raw`) and the nominal family
 
 `resp_raw` is not a private convenience column. It is the warehouse-side name for
-exactly the content the **nominal tranche** publishes as `text`, and the scripts in
+exactly the content the **nominal family** publishes as `text`, and the scripts in
 `data/nominal/` are a rename and nothing more:
 
 ```r
@@ -375,7 +375,7 @@ df$text <- df$resp_raw
 df$resp_raw <- NULL
 ```
 
-The nominal tranche (Redivis source `irw_nominal`) is where the *unscored* response is
+The nominal family (Redivis dataset `irw_nominal`) is where the *unscored* response is
 the object of interest rather than a footnote to it — which option was chosen, not
 whether it was right. `resp` is retained alongside `text` as the score, so a nominal
 table is the same observation seen from the other side.
@@ -385,7 +385,7 @@ wrapper hardcodes one spelling, so a warehouse table that emits the other is sim
 unreadable by it until someone edits the wrapper. Today the split runs straight through
 `data/nominal/`: `enem.R`, `borges_brazil.R` and `himmelstein.R` read `resp_raw`, while
 `much_tte_2025.R` and `wilmer.R` read `raw_resp`. Emitting `resp_raw` means a table can
-be lifted into the nominal tranche without a bespoke wrapper.
+be lifted into the nominal family without a bespoke wrapper.
 
 Two consequences for a converter:
 
@@ -402,13 +402,13 @@ Known exceptions, being converted rather than blessed: seven published tables ca
 readers that must cope with both (e.g. the item-text validator) accept either spelling;
 that tolerance is there for these seven, not as licence to add an eighth.
 
-### Conjoint experiments go to their own tranche
+### Conjoint experiments go to their own family
 
 A conjoint experiment (respondents choose between or rate profiles whose attributes are
 randomly assigned: hypothetical candidates, immigrants, vaccines, policies) is **not**
 converted to this schema. Every profile is a fresh random bundle, so there is no fixed
 probe to call `item`; forcing one in produces tables that pass this validator and mean
-nothing. These go to the conjoint tranche (`irw_conjoint`) in their own layout, one row
+nothing. These go to the conjoint family (`irw_conjoint`) in their own layout, one row
 per respondent × task × profile with `choice`/`rating` and `attr_*` columns, described
 in `data/conjoint/README.md` and checked with `python3 -m irw_validate.conjoint`.
 Scripts live in `data/conjoint/`.

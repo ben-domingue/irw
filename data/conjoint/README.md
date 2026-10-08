@@ -1,6 +1,6 @@
 # Conjoint experiments (`irw_conjoint`)
 
-Processing scripts for the tables in the Redivis dataset `datapages.irw_conjoint`, the `conj` source: experimental, like competitions and nominal. Users fetch them with `irw_fetch(name, source = "conj")` in R or `irw.fetch(name, source="conj")` in Python, and `irw_conj_long()` / `irw.conj_long()` give the core id/item/resp view. Upload from a staging folder that holds only the files to upload:
+Processing scripts for the tables in the Redivis dataset `datapages.irw_conjoint`, the conjoint data family (`source = "conj"`). Users fetch them with `irw_fetch(name, source = "conj")` in R or `irw.fetch(name, source="conj")` in Python, and `irw_conj_long()` / `irw.conj_long()` give the core id/item/resp view. Upload from a staging folder that holds only the files to upload:
 
 ```
 red_up . --dataset irw_conjoint

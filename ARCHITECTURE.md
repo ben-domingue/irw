@@ -61,18 +61,39 @@ between shards — moving one *creates* the shadowing problem rather than solvin
 it. `Rpkg/inst/developer/warehouses.md` carries the checklist for adding a shard
 of either kind.
 
-**Auxiliary datasets** hold everything else: `irw_meta` (all
-metadata, biblio, tags and collections tables), plus one
-each for the `simsyn`, `competitions` and `nominal` sources. These are single
-datasets rather than shard lists only because none is near the cap.
+**Data families.** Every response table belongs to exactly one of five *data
+families*, and each family lives in its own Redivis dataset or shard list. Core is
+the shard list above; the other four are single datasets, only because none is
+near the cap:
 
-`irw_conjoint` holds conjoint experiments in their own layout (one row per
-respondent × task × profile, no `item`/`resp`; `data/conjoint/README.md`). It is
-experimental, registered as `conj` (2026-10-07) in all three config files, and
-fetched with `source = "conj"`. `red_up` checks its tables with
-`irw_validate.conjoint` rather than the core validator, `16_conjoint.R` writes
-`conj_metadata`, and its biblio comes from the automated dictionary file alone,
-with no sheet.
+| Family | `source =` | Redivis dataset | What defines it | Standard |
+|---|---|---|---|---|
+| core | (default) | `item_response_warehouse`, `_2`, … | person × item → ordered or continuous response | `datastandard.md` |
+| nominal | `nom` | `irw_nominal` | response categories with no order | site `nominal_standard.qmd` |
+| competitions | `comp` | `irw_competitions` | two agents meet and an outcome is recorded; also pairwise comparisons of fixed things, such as texts judged against each other | site `comps_standard.qmd` |
+| simsyn | `sim` | `irw_simsyn` | responses not produced by real people | site `simsyn.qmd` |
+| conjoint | `conj` | `irw_conjoint` | respondent × task × profile choices or ratings, profiles randomly assembled from attributes | `data/conjoint/README.md`, site `conjoint_standard.qmd` |
+
+Four families are defined by the shape of the data; simsyn is defined by
+provenance (a simulated table can be dichotomous, nominal, anything). The
+families are still exclusive in practice, one table to one dataset. The line
+between competitions and conjoint is what is compared: competitions compare the
+same named agents again and again, conjoint compares bundles of attributes
+assembled at random for each task. The packages' `source` argument selects the
+family; it keeps that name, though "source" elsewhere in this repo means data
+provenance.
+
+Conjoint tables have their own layout (one row per respondent × task × profile,
+no `item`/`resp`). `red_up` checks them with `irw_validate.conjoint` rather
+than the core validator, `16_conjoint.R` writes `conj_metadata` and
+`conj_outcomes`, and their biblio comes from the automated dictionary file
+alone, with no sheet.
+
+**Auxiliary datasets** hold no response data and describe the tables in the
+families: `irw_meta` (all metadata, biblio, tags and collections tables) and
+item text. "Auxiliary" means only these. Groups inside a family, such as the
+trial-level sports tables, ESM, PISA or the `gilbert_meta_*` series, are
+*groups* (or collections, when curated), not families.
 
 How many of each exist today is *not* recorded here, deliberately — that number
 grows, and a count written into prose is wrong the day it changes. `redivis_config.R`
@@ -117,7 +138,7 @@ metadata that is not derivable from the data itself:
 | Sheet | What it holds |
 |---|---|
 | Data Dictionary — core | Descriptions, origins, licenses, references. Read by `metadata/02_biblio.R` and many other call sites (`git grep` its sheet id) |
-| Data Dictionary — competitions, nominal, simsyn | The same, one per non-core source |
+| Data Dictionary — competitions, nominal, simsyn | The same, one per family. Conjoint has no sheet (`automated_finding/dictionary_auto_conj.csv` only) |
 | IRW Tags | The eight hand-annotated tag columns. Read by `metadata/03_tags.R` |
 | Nominal tags | The same, for the `nominal` source |
 | Item text index | Not data: a table of *links*. `itemtext/join.R` reads a URL from each of columns 3–6 and fetches four further per-table tabs (`instrument`, `sections`, `items`, `responses`), then merges them |
@@ -281,7 +302,7 @@ newest core shard), checks every shard of both kinds for an existing table of th
 same name before writing — because a copy in a newer shard *shadows* the older one
 rather than replacing it — and verifies each table with a `count(*)` afterwards.
 When a name is already in use somewhere that could not legally hold the file, it
-stops rather than routing across families.
+stops rather than writing to a dataset of another kind.
 
 `irw_site` builds its homepage hero numbers (`data/hero_stats.json`, untracked)
 at render time from published irw_meta, in the pre-render step
@@ -473,7 +494,7 @@ directory's README (where there is one) goes further:
 
 | Path | What it is |
 |---|---|
-| `data/` | One script per dataset (R, Python, Stata). Subfolders group scripts by Redivis source or by family: `competitions/`, `nominal/`, `simsyn/`, `conjoint/` for the auxiliary datasets; `trials/` for trial-level sports tables; `gilbert_hte/` for the IL-HTE `gilbert_meta_*` series; `pisa/` for PISA; `tests/` for the CI checks on the ENEM scoring helpers. Older top-level scripts predate the naming rule in `datastandard.md` and keep their names, because `metadata/table_scripts.csv` and the MCP find scripts by path |
+| `data/` | One script per dataset (R, Python, Stata). Subfolders group scripts by data family or by group: `competitions/`, `nominal/`, `simsyn/`, `conjoint/` for the four families other than core; `trials/` for trial-level sports tables; `gilbert_hte/` for the IL-HTE `gilbert_meta_*` series; `pisa/` for PISA; `tests/` for the CI checks on the ENEM scoring helpers. Older top-level scripts predate the naming rule in `datastandard.md` and keep their names, because `metadata/table_scripts.csv` and the MCP find scripts by path |
 | `audit/2401/` | The #2401 retroactive corpus audit: `RULES.md` (the audit's frozen rules), detectors, pilot and sample dossiers, triage and repair builders. A workstream folder, not a pipeline stage |
 | `tools/withdrawals/`, `tools/repairs/` | One already-run script per withdrawal or one-off repair, kept because provenance records cite them by path. `tools/withdrawals/ledger.py` is the live part: withdrawal scripts call it to append to `itemtext/withdrawals.csv` |
 | `collections/` | `registry.csv` and `curated/` are the data `10_collections.R` reads (#1633); `scout_instruments.py` and `presort_instruments.py` propose curated members for human review |
