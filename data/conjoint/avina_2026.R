@@ -1,4 +1,4 @@
-##Immigrant-admission conjoint (Study 2) from
+##Immigrant-benefit conjoint (Study 2) from
 ##Aviña, M. M. (2026). Perceived economic contributions increase positivity toward
 ##undocumented immigrants. Public Opinion Quarterly, 90(3), 591-629.
 ##https://doi.org/10.1093/poq/nfag012 (online 2026-04-04; Dataverse/Aviña et al. call it Aviña 2024)
@@ -10,10 +10,13 @@
 ##1,999 US adults (24-character hex respondent IDs of the Prolific type; re-keyed to
 ##integers), one survey in which Study 1 (an information experiment) came first and the
 ##Study 2 conjoint followed. Each respondent saw 5 pairs of hypothetical immigrants
-##(choice_no = task, immigrant_no = profile), 5 attributes. The article is paywalled and
-##the deposit has no questionnaire, so the exact question wording was NOT seen: the
-##outcome is the codebook's "Immigrant selected (TRUE / FALSE)", a forced choice (every
-##pair has exactly one selected profile; no opt-out). choice = selected.
+##(choice_no = task, immigrant_no = profile), 5 attributes. The deposit has no
+##questionnaire; the wording is in the OSF preprint's SI B.6 (doi:10.31219/osf.io/ud9k4_v1,
+##p. SI-7): "Which of these two immigrants is most beneficial to the US?" That is a
+##sociotropic judgement, not an admission decision, hence the table name (renamed from
+##avina_2026_immigrant_admission on 2026-10-08, #2887). The codebook calls the outcome
+##"Immigrant selected (TRUE / FALSE)", a forced choice (every pair has exactly one selected
+##profile; no opt-out). choice = selected.
 ##Attribute names follow the codebook ("Immigration status", "Country of origin",
 ##"Education level", "Current employment", "Total taxes paid in 2021"); levels are the
 ##factor labels in the file, which match the codebook and presumably the display text
@@ -54,4 +57,4 @@ d <- s[, .(id = nid, task = as.integer(choice_no), profile = as.integer(immigran
            cov_survey_weight = weight, cov_party_id = fcoalesce(bi_pid, independents), cov_race = bi_race, cov_nativity = bi_immstat)]
 stopifnot(!anyNA(d[, .SD, .SDcols = patterns("^attr_")]), d[, sum(choice), .(id, task)][, all(V1 == 1)])
 setorder(d, id, task, profile)
-fwrite(d, file.path(out, "avina_2026_immigrant_admission.csv"))
+fwrite(d, file.path(out, "avina_2026_immigrant_benefit.csv"))
