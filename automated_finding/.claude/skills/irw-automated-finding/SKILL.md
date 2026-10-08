@@ -105,7 +105,9 @@ the environment, not to skip the check.
    scheduled routines did exactly that between 2026-08-25 and 2026-09-07
    before the top-level names were ignored too. What a run should commit is
    the standing record only — the `search_terms_log.csv` and seen-key
-   appends, plus the `BATCH_LOG.md` write-up. Put the flag breakdown and
+   appends, the `BATCH_LOG.md` write-up, and any rows Step 2b appended to
+   `data/conjoint/candidates.csv` (the conjoint ledger; it lives outside
+   `automated_finding/`, so add it by path). Put the flag breakdown and
    anything a human needs to act on in the PR description and BATCH_LOG,
    not in a committed CSV.
 
@@ -115,7 +117,8 @@ the environment, not to skip the check.
    `repo_triage_seen_keys.csv`, `license_blocked_candidates.csv`,
    `plos_deferred_candidates.csv`, any `pii_blocked_candidates.csv`, the
    `biblio_*.csv` handed to the user for the dictionary sheet, plus
-   `BATCH_LOG.md`, `TODO.md`, and the `human_review/` directory.
+   `BATCH_LOG.md`, `TODO.md`, and the `human_review/` directory. (The
+   conjoint ledger, `data/conjoint/candidates.csv`, is standing too.)
 
    **A batch's unworked leads and its unrun ranked terms are standing
    records too** (added 2026-09-20). A sweep's per-run triage CSV is
