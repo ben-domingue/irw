@@ -32,19 +32,26 @@
 ##  source file, which may not be the screen position; do not use it for position effects.
 ##  Attribute order fixed as in Figure A1 (no attrpos_). Randomization restrictions: none
 ##  documented beyond the product rule above.
-##  Covariates (deposit codes; the deposit carries no value labels except educ and pid3):
-##  cov_age (years), cov_gender (1/2, undocumented), cov_race (1-7, undocumented), cov_educ
-##  (1 HS or less ... 5 prof degree/PhD as labelled), cov_income (1-?, undocumented),
-##  cov_pid3_lean (wave-2, 1 Democrat 2 Pure Independent 3 Republican as labelled),
-##  cov_ft_* (0-100 wave-1 feeling thermometers toward the US, China, Mexico, UK, Germany,
-##  Japan, Puerto Rico), cov_ethno1..6 (wave-1 ethnocentrism items, 1-5, wording not in the
-##  deposit). Dropped: the authors' ethnocentrism scale and bins, college dummy, wave-1 pid,
+##  Covariates: cov_age (years: the deposit's age is coded 1 = 18; the authors' Appendix.R
+##  L80 computes age = age + 17, applied here), cov_gender (female/male; gender 1 Male, 2 Female
+##  per the authors' recode in Appendix.R L57-63; no code 3 occurs, and the 5 respondents with
+##  no gender, whom the authors count as "Other", are NA), cov_race (1-7, undocumented),
+##  cov_education (educ as text from the .dta value labels: HS or Less, Some College, 2-year
+##  Degree, College, Prof Degree/PhD), cov_income (1-11, undocumented), cov_party_id (wave-2
+##  pid3_lean_w2 as text from the .dta value labels: Democrat, Pure Independent, Republican;
+##  leaners folded in by the source), cov_ft_* (0-100 wave-1 feeling thermometers toward the US,
+##  China, Mexico, UK, Germany, Japan, Puerto Rico), cov_ethno1..6 (wave-1 ethnocentrism
+##  items, 1-5, wording not in the deposit). No survey weight, duration or attention check in
+##  the deposit. Dropped: the authors' ethnocentrism scale and bins, college dummy, wave-1 pid,
 ##  undocumented items q2/q5/q11_*/q22/Q14_*, the *_cat recodes.
 ##  The Lucid replication (lucid_formatted.dta, 1,117 ids, countries US/Canada/Japan/China/
 ##  India) is NOT built: it carries no product column, so the displayed price cannot be rebuilt.
 library(haven); library(data.table)
 a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]
-k <- as.data.table(zap_labels(read_dta(file.path(raw, "final_w1w2.dta"))))
+k0 <- read_dta(file.path(raw, "final_w1w2.dta"))
+lab <- function(v) { l <- attr(k0[[v]], "labels"); unname(setNames(names(l), l)[as.character(as.numeric(k0[[v]]))]) }
+k <- as.data.table(zap_labels(k0))
+k[, `:=`(educ_txt = lab("educ"), pid_txt = lab("pid3_lean_w2"))]
 k[, r := .I]
 m <- k[is.na(wave1_only)]
 stopifnot(uniqueN(m$id) == 996, m[, .N, .(id, task_num)][, all(N == 2)], m[, uniqueN(product), .(id, task_num)][, all(V1 == 1)])
@@ -53,14 +60,16 @@ base <- c("1 pound of butter" = 3, "1 pound of cheese" = 3.5, "1 pound of coffee
           "96 oz laundry detergent" = 12, "12-inch non-stick skillet" = 30, "Toaster" = 30, "Microwave" = 100,
           "Washing Machine" = 500, "Small bottle of super glue" = 6, "Roll of black duct tape" = 7.5,
           "Cell phone screen protector" = 8.5)
+stopifnot(all(m$gender %in% c(1, 2, NA)), !anyNA(m$educ_txt), !anyNA(m$pid_txt))
 stopifnot(all(m$product %in% names(base)), all(m$mark_up %in% c(0, .25, .5, 1)))
 setorder(m, id, task_num, r)
 cents <- floor(base[m$product] * (1 + m$mark_up) * 100 + 0.5 + 1e-6)
 d <- m[, .(id = as.integer(id), task = as.integer(task_num), choice = as.integer(profile_chosen),
            attr_product = product, attr_rating = rating, attr_price = sprintf("$%.2f", cents / 100),
            attr_country = country,
-           cov_age = as.integer(age), cov_gender = as.integer(gender), cov_race = as.integer(race), cov_educ = as.integer(educ),
-           cov_income = as.integer(inc), cov_pid3_lean = as.integer(pid3_lean_w2),
+           cov_age = as.integer(age + 17), cov_gender = c("1" = "male", "2" = "female")[as.character(gender)],
+           cov_race = as.integer(race), cov_education = educ_txt,
+           cov_income = as.integer(inc), cov_party_id = pid_txt,
            cov_ft_us = ft_us, cov_ft_china = ft_china, cov_ft_mexico = ft_mexico, cov_ft_uk = ft_UK, cov_ft_germany = ft_germ,
            cov_ft_japan = ft_japan, cov_ft_puerto_rico = ft_PR,
            cov_ethno1 = ethno1, cov_ethno2 = ethno2, cov_ethno3 = ethno3, cov_ethno4 = ethno4, cov_ethno5 = ethno5, cov_ethno6 = ethno6)]

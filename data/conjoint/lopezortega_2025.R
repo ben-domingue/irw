@@ -40,10 +40,15 @@
 ##proposal appears more than once for a respondent (in the data this holds for ~97-99% of
 ##respondents for faces, names and countries, not for reasoning or proposals, which have fewer
 ##levels than the 10 profiles shown).
-##Covariates: cov_gender 1 = Man 2 = Woman; cov_birth_year; cov_education 1 = low 2 = middle
-##3 = high; cov_left_right 0-10; cov_sexuality (Heterosexual/LGB); cov_immigration_economy,
+##Covariates: cov_gender from respondent_gender (conjoint_choice.Rdata value labels 1 = Man,
+##2 = Woman -> male/female); cov_birth_year (respondent_age holds years of birth, 1927..; the
+##authors' scripts call it Birthyear); cov_education from respondent_edu, as its value-label text
+##"Low education" / "Middle education" / "High education" (the only education variable in the
+##file, already banded; script1_primary_analysis.R L42-44 relabels the same codes "Primary/
+##Secondary/Tertiary studies"); cov_left_right 0-10; cov_sexuality (Heterosexual/LGB); cov_immigration_economy,
 ##cov_immigration_culture, cov_immigration_placetolive (ESS-style 0-10 items, direction as
-##deposited); cov_attention_check (0-10 item; correct answer not documented);
+##deposited); cov_attention_check (0-10 item; correct answer not documented, so it is not
+##recoded to cov_attention_pass);
 ##cov_survey_weight (`weight`, used in the authors' cj() calls).
 ##Spot check: pooled weighted share chosen for Muslim group names (the ☪ emoji) = 0.46, the
 ##article's "only 46% of the time".
@@ -55,6 +60,9 @@ library(data.table)
 a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]
 e <- new.env(); load(file.path(raw, "replicationfiles_LopezOrtega_TurnbullDugarte_PSRM", "data", "conjoint_choice.Rdata"), envir = e)
 s <- as.data.table(e$conjoint_choice)
+stopifnot(identical(unname(attr(s$respondent_gender, "labels")), c(1, 2)), identical(names(attr(s$respondent_gender, "labels")), c("Man", "Woman")),
+          identical(names(attr(s$respondent_edu, "labels")), c("Low education", "Middle education", "High education")),
+          identical(unname(attr(s$respondent_edu, "labels")), c(1, 2, 3)), all(s$respondent_gender %in% c(NA, 1, 2)), all(s$respondent_edu %in% c(NA, 1:3)))
 ch <- function(x) trimws(as.character(x))
 for (cc in c("The Netherlands", "Germany")) {
   x <- s[country == cc]
@@ -65,8 +73,8 @@ for (cc in c("The Netherlands", "Germany")) {
                   attr_national_support = ch(x$national_support), attr_country = ch(x$worldRec),
                   attr_face = sub(".*[?&]id=", "", ch(x$face)), attr_photo_gender = ch(x$gender), attr_photo_age = ch(x$age),
                   attr_photo_ethnicity = ch(x$ethinicity), attr_lgbt_marker = ch(x$LGBT),
-                  cov_gender = as.integer(x$respondent_gender), cov_birth_year = as.integer(x$respondent_age),
-                  cov_education = as.integer(x$respondent_edu), cov_left_right = as.integer(x$respondent_leri),
+                  cov_gender = c("male", "female")[as.integer(x$respondent_gender)], cov_birth_year = as.integer(x$respondent_age),
+                  cov_education = c("Low education", "Middle education", "High education")[as.integer(x$respondent_edu)], cov_left_right = as.integer(x$respondent_leri),
                   cov_sexuality = ch(x$respondent_sexuality), cov_immigration_economy = x$immigration_economy,
                   cov_immigration_culture = x$immigration_culture, cov_immigration_placetolive = x$immigration_placetolive,
                   cov_attention_check = x$attention_check, cov_survey_weight = x$weight)

@@ -27,7 +27,9 @@
 ##  pairs (240 version x task x profile cells), 100-103 respondents per version. Only 223 of the
 ##  960 possible profiles occur; binary levels are exactly balanced (12,048 rows each). Not
 ##  documented in the deposit. Attribute order not recorded.
-##Covariates (Portuguese text as deposited): cov_sex, cov_age, cov_class (NSE A..D-E),
+##Covariates (Portuguese text as deposited, except cov_gender): cov_gender (source `sex`: Mulher ->
+##  female, Homem -> male, as in the authors' code lines 193-194 'sex=="Homem", "Male"' /
+##  'sex=="Mulher", "Female"'), cov_age (years), cov_class (NSE A..D-E),
 ##  cov_region, cov_state, cov_race (P25), cov_education (P26), cov_income (P28, monthly
 ##  household income bracket), cov_national_attachment_1..3 (P1 "something negative about
 ##  Brazilian people, how much do you feel it is about you?", P2 "to what extent does being
@@ -36,7 +38,9 @@
 ##  other nations?", P6 "how much better would the world be if foreigners were more like
 ##  Brazilians?", P7 "how many things about Brazil make you feel ashamed?"), cov_employed
 ##  (P10), cov_employment_type (P13), cov_sector (P14) (item paraphrases from the authors'
-##  code comments), cov_survey_weight (ponde; the authors run unweighted analyses).
+##  code comments), cov_education = P26 answer text (main education question, Portuguese
+##  categories as deposited), cov_survey_weight (ponde; the authors run unweighted analyses).
+##  No attention check in the deposit; no repeated task.
 ##Dropped: CodPanelista (panel member ID) and key/numericalId (survey IDs; respondents re-keyed
 ##  to integers), city, IBGE municipality codes and microregion (quasi-identifiers), device,
 ##  timestamps/durations, consent item, items whose meaning is not documented (P4, P9A, P11,
@@ -56,10 +60,12 @@ an <- c(atr1 = "size", atr2 = "origin", atr3 = "mode", atr4 = "sales", atr5 = "j
 for (v in names(an)) d[, paste0("attr_", an[[v]]) := x[[v]]]
 stopifnot(!anyNA(d), all(d[, unlist(.SD), .SDcols = patterns("^attr_")] != ""))
 d[, trial_version := as.integer(x$version)]
-cv <- c(sex = "sex", age = "age", class = "NSE", region = "REGIAO", state = "ESTADO", race = "P25", education = "P26",
+cv <- c(age = "age", class = "NSE", region = "REGIAO", state = "ESTADO", race = "P25", education = "P26",
         income = "P28", national_attachment_1 = "P1", national_attachment_2 = "P2", national_attachment_3 = "P3",
         chauvinism_1 = "P5", chauvinism_2 = "P6", chauvinism_3 = "P7", employed = "P10", employment_type = "P13",
         sector = "P14", survey_weight = "ponde")
+stopifnot(all(x$sex %in% c("Mulher", "Homem")))
+d[, cov_gender := c(Mulher = "female", Homem = "male")[x$sex]]
 for (v in names(cv)) d[, paste0("cov_", v) := x[[cv[[v]]]]]
 for (v in grep("^cov_", names(d), value = TRUE)) if (is.character(d[[v]])) set(d, i = which(d[[v]] == ""), j = v, value = NA)
 stopifnot(d[, sum(choice_state), .(id, task)][, all(V1 == 1)], d[, sum(choice_family), .(id, task)][, all(V1 == 1)])

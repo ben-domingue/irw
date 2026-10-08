@@ -30,10 +30,16 @@
 ##ETHNICITY*LANGUAGE): in the data, computer programmer, doctor, financial analyst and
 ##research scientist occur only with university or postgraduate education, and Russian
 ##ethnicity occurs only with "Kazakh and Russian", "Russian and broken Kazakh" or "Russian
-##and no Kazakh". Attribute order is not documented or recorded.
+##and no Kazakh". Level probabilities are not documented; the shares are unequal (Russian
+##ethnicity 762 profiles vs about 2,150 for the others; the four high-skill professions about
+##570 vs about 1,970; university/postgraduate 1.5x the other education levels), which is what
+##uniform draws under the two constraints would give. Attribute order is not documented or
+##recorded, nor how the profiles were shown (interviewer-administered). No task is repeated
+##(checked). No survey weight, attention check or duration in either file.
 ##All respondents are kept (the article analyses Muslim respondents, respondent_religion ==
 ##"Islam": 2,097 of 3,000 here).
-##Covariates (labels from Data_MainSurvey.csv): cov_gender, cov_age (years), cov_ethnicity,
+##Covariates (labels from Data_MainSurvey.csv): cov_gender ("Are you male or female?",
+##answer text Male/Female, lowercased to male/female), cov_age (AGE, years 18-75), cov_ethnicity,
 ##cov_region, cov_interview_language (RUS/KAZ), cov_religion (the authors' respondent_religion:
 ##Islam / Christinanity [sic] / No religion / blank = missing).
 ##Dropped: QUESTIONNAIREID/IdAnkety (survey UUIDs; re-keyed to integers), interviewer code,
@@ -60,7 +66,8 @@ d <- s[, .(id = match(IdAnkety, ids), task, profile, choice = as.integer(chosen)
            attr_stay = STAY, attr_legal_status = VISA, IdAnkety, rr = respondent_religion)]
 stopifnot(s[, all(chosen == as.integer(choice == profile))])
 d <- m[d, on = "IdAnkety"]
-d[, `:=`(cov_gender = gender, cov_age = as.integer(age), cov_ethnicity = ethnicity, cov_region = region,
+stopifnot(all(m$gender %in% c("Male", "Female")))
+d[, `:=`(cov_gender = tolower(gender), cov_age = as.integer(age), cov_ethnicity = ethnicity, cov_region = region,
          cov_interview_language = lang, cov_religion = rr)]
 d[, c("IdAnkety", "gender", "age", "ethnicity", "region", "lang", "rr") := NULL]
 at <- grep("^attr_", names(d), value = TRUE)

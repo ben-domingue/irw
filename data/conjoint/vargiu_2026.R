@@ -46,10 +46,24 @@
 ##straight-liner on the 6 authority items, duration >= half the median; dplyr::filter also drops
 ##missing attention check / missing SD), as in their code: 1,884 respondents, the report's n.
 ##1,843 of them have ratings and are in this table.
-##Covariates kept as in the source: sex, age, education (years and category), race, political
-##interest, left-right and liberal-conservative self-placement (0-10), party direction and
-##strength, issue importance (6), populism (7), authoritarian aggression (6), status loss/gain,
-##Dirty Dozen (12) and aggression (12) items. Dropped: RESPID (re-keyed 1..n in file order),
+##Covariates. Reserved names (codebook .html; questionnaire = Appendix D):
+##  cov_gender (SEX "Respondent's sex", factor Female/Male, lowercased; Appendix D Q2.2 "What is
+##    your gender?" also offered "Other, non-binary" and "I prefer not to answer", which the
+##    deposit holds only as NA, 29 respondents).
+##  cov_age (AGE, "Respondent's age in number", years; Q2.3).
+##  cov_education (EDU_NUM, the answer text of Appendix D Q3.6 "What is the highest level of
+##    school you have completed or the highest degree you have received?" for codes 1-16; codes
+##    match the codebook's EDU_CAT1 collapse, e.g. 9 = High school diploma, 10 = Some college).
+##    The authors' collapsed EDU_CAT1 keeps its name (cov_edu_cat1).
+##  cov_party_id (PID_DIR "partisan identification (direction)": Democrat / Republican; the
+##    authors' coding from Q5.1-Q5.4 with leaners counted as partisans, so pure independents
+##    and "Neither" are NA).
+##  cov_party_id7 (PID_STR "partisan identification (strength)", the authors' 7 labels: Strong
+##    Democrat, Democrat, Weak Democrat, Independent, Weak Republican, Republican, Strong
+##    Republican).
+##Kept as in the source: race, political interest, left-right and liberal-conservative
+##self-placement (0-10), issue importance (6), populism (7), authoritarian aggression (6),
+##status loss/gain, Dirty Dozen (12) and aggression (12) items. Dropped: RESPID (re-keyed 1..n in file order),
 ##DURATION, ATTENTIONCHECK (folded into cov_in_authors_sample).
 library(data.table)
 a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]
@@ -78,6 +92,17 @@ for (v in cv) {
   x <- s[[v]]; x <- if (is.factor(x)) as.character(x) else as.numeric(x)
   d[, paste0("cov_", tolower(v)) := x[id]]
 }
+## reserved names and codings (header)
+q36 <- c("Less than 1st grade", "1st, 2nd, 3rd or 4th grade", "5th or 6th grade", "7th or 8th grade", "9th grade",
+         "10th grade", "11th grade", "12th grade no diploma",
+         "High school graduate - high school diploma or equivalent (for example: GED)", "Some college but no degree",
+         "Associate degree in college - Occupational/vocational program", "Associate degree in college - Academic program",
+         "Bachelor's degree (For example: BA, AB, BS)", "Master's degree (For example: MA, MS, MEng, MEd, MSW, MBA)",
+         "Professional School Degree (For example: MD,DDS,DVM,LLB,JD)", "Doctorate degree (For example: PhD, EdD)")
+stopifnot(all(d$cov_edu_num %in% c(1:16, NA)), all(d$cov_sex %in% c("Female", "Male", NA)))
+d[, cov_edu_num := q36[cov_edu_num]][, cov_sex := tolower(cov_sex)]
+setnames(d, c("cov_sex", "cov_edu_num", "cov_pid_dir", "cov_pid_str"),
+         c("cov_gender", "cov_education", "cov_party_id", "cov_party_id7"))
 d[, cov_in_authors_sample := s$cov_in_authors_sample[id]]
 d[, id := frank(id, ties.method = "dense")]
 setorder(d, id, task, profile)

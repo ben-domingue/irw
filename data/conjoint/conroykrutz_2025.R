@@ -28,9 +28,15 @@
 ##task-numbered AttC1-4 and Pref1-4 of the wide file for all 4,975 respondents (matched on
 ##covariates), so task = row order (INFERRED, verified). Randomization restrictions are not
 ##documented; level shares are roughly but not exactly equal.
-##Covariates keep the source's numeric codes (labels in the .dta / codebook): cov_age (years),
-##cov_female (V7), cov_lived_poverty (V8), cov_trust_president (V23), cov_trust_opposition
-##(V24), cov_education (V25), cov_ethnicity (V26); 8/9 and 98/99 are refused/don't know.
+##Covariates: cov_age (V6 "How old are you?", years as stored; the codebook gives the range
+##18-99 and no missing code, so the 31 respondents at 99 are kept as 99), cov_gender (V7 "What
+##is your gender?", 0 = Male, 1 = Female in the .dta value labels and the codebook row V7,
+##written female/male), cov_education (V25 "What is the highest level of education that you
+##have achieved?", as the answer text of the .dta value labels = codebook row V25, e.g.
+##"Completed secondary school"; Refused (98) is NA, Don't know (99) kept as that text). These keep the
+##source's numeric codes (labels in the .dta / codebook): cov_lived_poverty (V8),
+##cov_trust_president (V23), cov_trust_opposition (V24), cov_ethnicity (V26); 8/9 and 98/99
+##are refused/don't know.
 ##The interview date (V2) and the subject ID's source are not needed; subj is already 1..4975.
 ##Spot check: MASS::polr of 0-4 punish on the same terms as the authors' pooled ologit
 ##(Figure 1, N 17,781) reproduces all 8 attribute coefficients in the log to 4 decimals
@@ -43,8 +49,9 @@ s <- data.table(subj = as.integer(k$subj), cou = lab(k$COU), A = lab(k$AttA), B 
                 pref = as.integer(zap_labels(k$Pref)), cAttC = as.integer(zap_labels(k$AttC)),
                 age = as.integer(k$V6), fem = as.integer(zap_labels(k$V7)), pov = as.integer(zap_labels(k$V8)),
                 tp = as.integer(zap_labels(k$V23)), to = as.integer(zap_labels(k$V24)),
-                ed = as.integer(zap_labels(k$V25)), eth = as.integer(zap_labels(k$V26)))
-stopifnot(s[, .N, subj][, all(N == 4)], !is.unsorted(s$subj))
+                ed = replace(lab(k$V25), zap_labels(k$V25) == 98, NA), eth = as.integer(zap_labels(k$V26)))
+stopifnot(s[, .N, subj][, all(N == 4)], !is.unsorted(s$subj), all(s$fem %in% 0:1), 
+          identical(unname(attr(k$V7, "labels")), c(0, 1)), identical(names(attr(k$V7, "labels")), c("Male", "Female")))
 s[, task := seq_len(.N), subj]
 ##task-order check against the wide file (task-numbered AttC1-4 / Pref1-4)
 w <- as.data.table(zap_labels(read_dta(file.path(raw, "Muzzling_Wide_JOP_23.dta"))))
@@ -59,7 +66,7 @@ s <- s[pref %in% 1:5]
 iso <- c("Cote d'Ivoire" = "CI", Kenya = "KE", Nigeria = "NG", Uganda = "UG")
 d <- s[, .(id = subj, task, profile = 1L, rating = pref,
            attr_funding = A, attr_accuser = B, attr_infraction = C,
-           cov_country = unname(iso[cou]), cov_age = age, cov_female = fem, cov_lived_poverty = pov,
+           cov_country = unname(iso[cou]), cov_age = age, cov_gender = c("male", "female")[fem + 1L], cov_lived_poverty = pov,
            cov_trust_president = tp, cov_trust_opposition = to, cov_education = ed, cov_ethnicity = eth)]
 stopifnot(nrow(d) == 19396, !anyNA(d$cov_country), d[, uniqueN(attr_infraction)] == 6)
 setorder(d, id, task, profile)

@@ -32,9 +32,12 @@
 ##documented; level shares are roughly equal, with the "(not shown)" level 1/5 to 1/3 of profiles.
 ##The survey was administered in Tunisia (enumerator-recorded gender), presumably in Arabic;
 ##the deposit holds English text only.
-##Covariates: cov_religiosity (Devoutly/Somewhat/Hardly religious), cov_gender (Male/Female,
-##enumerator-recorded), cov_age (years), cov_employment, cov_income (monthly, dinar bands),
-##cov_education, cov_raised (Rural/Urban), all as the English label text.
+##Covariates: cov_religiosity (Devoutly/Somewhat/Hardly religious), cov_gender (male/female,
+##lowercased from the factor labels of Setup1b "Enumerator: Please indicate whether the respondent
+##is male or female."), cov_age (Demo1 "How old are you", years), cov_employment, cov_income
+##(monthly, dinar bands), cov_education (Demo10 "What is the highest level of education you have
+##completed?", factor label text, e.g. "Secondary"), cov_raised (Rural/Urban), all as the English
+##label text in cj_a.rds.
 ##Spot check (appendix Table 6, under-40 respondents with employment recorded, lm): jobs for
 ##women who don't wear the hijab vs for men, rating -0.905 / choice -0.167 (appendix -0.911 /
 ##-0.169), factories vs call centers +0.549 / +0.106 (0.548 / 0.106), n 974 / 986 respondents
@@ -63,8 +66,9 @@ stopifnot(levels(x$cj1a_1)[c(1, 7)] == c("1 - Very strongly support", "7 - Very 
 d <- d[!is.na(choice) | !is.na(rating)]
 stopifnot(d[!is.na(choice), sum(choice), .(id, task)][, all(V1 == 1)])
 lab <- function(f) as.character(f)
-cv <- x[, .(id, cov_religiosity = lab(Relig2), cov_gender = lab(Setup1b), cov_age = as.integer(Demo1),
+cv <- x[, .(id, cov_religiosity = lab(Relig2), cov_gender = tolower(lab(Setup1b)), cov_age = as.integer(Demo1),
             cov_employment = lab(Emp1), cov_income = lab(Inc1), cov_education = lab(Demo10), cov_raised = lab(Demo4))]
+stopifnot(all(cv$cov_gender %in% c("female", "male")))
 d <- merge(d, cv, by = "id")
 d[, id := match(id, sort(unique(id)))]
 stopifnot(uniqueN(d$id) == 1497)

@@ -32,10 +32,16 @@
 ##Randomization RESTRICTED (design_adj$dependence: Party <-> Ideology): a Democratic nominee
 ##is Liberal or Moderate, a Republican Conservative or Moderate. Level weights are NOT uniform
 ##(observed: race White 38%, Black 25%, others 12-13%; law school Yale 19.5%, Stanford 17%,
-##Harvard 13%, Chicago 10%, others 3-7%); the design object carries the joint probabilities.
-##Covariates: cov_survey_weight (YouGov weight), cov_pid3 (text), cov_pid7 (1 = strong
-##Democrat .. 7 = strong Republican, 8 = not sure, per the authors' plot labels and recode),
-##cov_ideo5 (1 = very liberal .. 5 = very conservative, 6 = not sure, same source).
+##Harvard 13%, Chicago 10%, others 3-7%); the design object carries the joint probabilities
+##(its marginals give race .38/.25/.12/.12/.12 and law school .200/.167/.133/.100/.067/.033...,
+##matching the data, but ABA rating .50/.33/.17 and a 7-level Philosophy, which the data do not
+##show: ABA rating is about 1/3 each and Philosophy has 8 levels).
+##Covariates: cov_survey_weight (YouGov weight), cov_party_id (pid3, factor labels as stored:
+##Democrat / Republican / Independent / Other / Not Sure), cov_party_id7_code (pid7, kept as
+##codes 1-8: the deposit gives only the ends, "Partisanship (Strong Democrat to Strong
+##Republican)" in the authors' plot label, and 8 = not sure from their recode to NA; no source
+##names codes 2-6), cov_ideo5 (1 = very liberal .. 5 = very conservative, 6 = not sure, same
+##source). No attention check, duration or repeated task in the deposit.
 ##Dropped: YouGov respondent ids (re-keyed 1..1,000 in file order), the authors' derived
 ##Philosophy2 (computed in their code, not stored).
 ##N: 1,000 = the companion paper's N; the article was not checked (paywalled).
@@ -58,8 +64,8 @@ d <- data.table(id = ids, task = blk %/% 2L + 1L, profile = blk %% 2L + 1L,
                 attr_position = as.character(s$Position), attr_philosophy = as.character(s$Philosophy),
                 attr_aba_rating = as.character(s$Rating), attr_held_office = as.character(s$Held_Office),
                 attr_ideology = as.character(s$Ideology), attr_party = as.character(s$Party),
-                cov_survey_weight = s$weight, cov_pid3 = as.character(s$pid3),
-                cov_pid7 = as.integer(as.character(s$pid7)), cov_ideo5 = as.integer(as.character(s$ideo5)))
+                cov_survey_weight = s$weight, cov_party_id = as.character(s$pid3),
+                cov_party_id7_code = as.integer(as.character(s$pid7)), cov_ideo5 = as.integer(as.character(s$ideo5)))
 stopifnot(d[, .(s = sum(choice), n = sum(is.na(choice))), .(id, task)][, all((n == 0 & s == 1) | n == 2)])
 stopifnot(d[, !any((attr_party == "Democratic" & attr_ideology == "Conservative") | (attr_party == "Republican" & attr_ideology == "Liberal"))])
 d <- d[!(is.na(choice) & is.na(rating))]

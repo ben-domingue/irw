@@ -32,8 +32,10 @@
 ##Randomization restrictions and attribute order are not documented here.
 ##13 profiles have a missing attribute value (not saved); those tasks are dropped. Tasks with
 ##neither answer are omitted.
-##Covariates: cov_female, cov_age, cov_literate, cov_education (0 none, 1 grade school, 2 high
-##school, 3 college or above), cov_hh_income (as entered), cov_years_in_market (author's version
+##Covariates: cov_gender (female: Codebook.pdf "Binary: 1 = Female, 0 = Not female" -> "female" /
+##"male"), cov_age, cov_literate, cov_education (educ_cat as the Codebook.pdf text: 0 "None",
+##1 "Grade school", 2 "High school", 3 "College or above"; the deposit has no finer education
+##variable), cov_hh_income (as entered), cov_years_in_market (author's version
 ##with data-entry errors set to missing), cov_service (1 sells a service, 0 a good), cov_sells_daily,
 ##cov_intend_vote, cov_registered, cov_ngo_apathy (agreement with "When nongovernmental
 ##organizations work on our behalf, we need to do less work ourselves to get the government to
@@ -74,8 +76,8 @@ d[, bad := any(is.na(unlist(.SD))), by = .(id, task), .SDcols = ac]
 stopifnot(d[profile == 1, sum(rowSums(is.na(.SD)) > 0), .SDcols = ac] + d[profile == 2, sum(rowSums(is.na(.SD)) > 0), .SDcols = ac] == 13)
 d <- d[bad == FALSE & !(is.na(choice_meeting) & is.na(choice_scandal))][, bad := NULL]
 for (q in c("choice_meeting", "choice_scandal")) stopifnot(d[!is.na(get(q)), .(s = sum(get(q)), n = .N), .(id, task)][, all(s == 1 & n == 2)])
-cv <- v[, .(id, cov_female = as.integer(female), cov_age = as.integer(age), cov_literate = as.integer(literacy_any),
-            cov_education = as.integer(educ_cat), cov_hh_income = hh_income, cov_years_in_market = yrs_in_mkt_fix,
+cv <- v[, .(id, cov_gender = c("male", "female")[as.integer(female) + 1L], cov_age = as.integer(age), cov_literate = as.integer(literacy_any),
+            cov_education = c("None", "Grade school", "High school", "College or above")[as.integer(educ_cat) + 1L], cov_hh_income = hh_income, cov_years_in_market = yrs_in_mkt_fix,
             cov_service = as.integer(service), cov_sells_daily = as.integer(sell_daily), cov_intend_vote = as.integer(intend_vote),
             cov_registered = as.integer(registered_vt),
             cov_ngo_apathy = match(as.character(apathy_NGO), c("Strongly Disagree", "Somewhat Disagree", "Somewhat Agree", "Strongly Agree")),
@@ -85,4 +87,4 @@ cv <- v[, .(id, cov_female = as.integer(female), cov_age = as.integer(age), cov_
 stopifnot(all(is.na(v$apathy_NGO) == is.na(cv$cov_ngo_apathy)))
 d <- merge(d, cv, by = "id")
 setorder(d, id, task, profile)
-fwrite(d, file.path(out, "hoellerbauer_2023_civil_society_orgs.csv"))
+fwrite(d, file.path(out, "hoellerbauer_2023_civil_society_orgs.csv"), scipen = 100)

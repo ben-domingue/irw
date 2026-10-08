@@ -34,12 +34,16 @@
 ##Business or Finance (each two source codes, double weight) / Teacher / Public Servant; origin
 ##"Born and Raised" / "Immigrated" (the authors' wording: the stored label names one country,
 ##India, but respondents saw their own country; ~86% born and raised).
-##Covariates: cov_country; cov_female 1 = Female 2 = Male (source `female`); cov_age; cov_highered
+##Covariates: cov_country; cov_gender female / male (source `female`, Stata value labels
+##"Female" = 1, "Male" = 2, variable label "Respondent Gender"); cov_age; cov_highered
 ##0/1; cov_dominant_ethnicity 0/1; cov_left_right 0 = Left .. 10 = Right, 97 = prefer not to say
-##(respideologyx1; missing in US wave 2); cov_attention_check 1 = passed; cov_factcheck_passed
+##(respideologyx1; missing in US wave 2); cov_attention_check (attcheck, variable label "Attention
+##Check", 0/1 with no value labels; 98% are 1, but no deposit file says which value is a pass, so
+##it is not recoded to cov_attention_pass); cov_factcheck_passed
 ##(local/national manipulation check, missing where not asked); cov_asi_benevolent1-4,
 ##cov_asi_hostile1-4 (ambivalent sexism items, codes as deposited); cov_masculine, cov_feminine
 ##(Contgender_1/2, 0-10 self-rated masculinity/femininity); cov_survey_weight (`weight`).
+##No repeated task (7 distinct tasks); no duration kept (page timings dropped below).
 ##Spot check: weighted LPM of choice on all attributes + country fixed effects gives female
 ##+0.030, the article's pooled +3.0 points. N = 14,369 matches the article before the 45 empty rows.
 ##Dropped: free-text fields (qEnd survey comments, `comments`, partyid_open, the bot-check
@@ -70,9 +74,10 @@ for (t in 1:7) for (p in 1:2) {
 d <- rbindlist(res)
 stopifnot(!anyNA(d))
 office <- c("national", "local")[as.integer(zap_labels(k$Splitsample_conj))]
+stopifnot(identical(attr(k$female, "labels"), c(Female = 1, Male = 2)), all(zap_labels(k$female) %in% 1:2))
 r <- data.table(id = seq_len(n), trial_wave = wave, trial_office = office,
                 trial_attr_order = ifelse(k$attr_order %in% c("", NA), NA_character_, k$attr_order),
-                cov_country = k$country, cov_female = as.integer(zap_labels(k$female)), cov_age = as.integer(k$age),
+                cov_country = k$country, cov_gender = c("female", "male")[as.integer(zap_labels(k$female))], cov_age = as.integer(k$age),
                 cov_highered = as.integer(zap_labels(k$highered)), cov_dominant_ethnicity = as.integer(zap_labels(k$domethnicity)),
                 cov_left_right = as.integer(zap_labels(k$respideologyx1)), cov_attention_check = as.integer(k$attcheck),
                 cov_factcheck_passed = as.integer(k$passedfactcheck))

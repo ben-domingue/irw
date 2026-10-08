@@ -32,12 +32,18 @@
 ##Respondents assigned to the other arm answered a debt-relief-plan conjoint
 ##(choice<t>_plan, plan<k>_vote) whose attributes are NOT in the deposit; it is not built.
 ##Their attribute columns hold randomized values they never saw and are ignored.
-##Covariates (codebook codes): cov_gender (1 Male, 2 Female, 3 Other/prefer not), cov_age
-##(years), cov_inc (1-7), cov_educ (1-7), cov_race (1 White .. 7 other), cov_sl_debt (ever had
-##student loan debt: 1 Yes, 2 No, 3 Can't remember), cov_pid4 (1 Dem, 2 Ind, 3 Rep, 4 Other),
-##cov_pid_lean (1 Lean Rep, 2 Lean Dem, 3 Neither), cov_relief_student (support government
+##Covariates (3-codebook.xlsx; the .dta has no value labels): cov_gender_code (codes kept:
+##1 Male, 2 Female, 3 "Other gender identity or prefer not to disclose"; code 3 merges other
+##identities with refusals, so it fits neither "other" nor NA and the reserved cov_gender is not
+##used), cov_age (years), cov_inc (1-7), cov_education (educ, "What is the highest level of
+##education you have completed?", the codebook's answer text, 7 categories), cov_race (1 White ..
+##7 other), cov_sl_debt (ever had student loan debt: 1 Yes, 2 No, 3 Can't remember),
+##cov_party_id (pid4 "Do you generally consider yourself a Democrat, an Independent, a
+##Republican, or something else?": Democrat / Independent / Republican / Something Else, codebook
+##text), cov_pid_lean (1 Lean Rep, 2 Lean Dem, 3 Neither), cov_relief_student (support government
 ##relief of student loan debt, 1 Strongly oppose .. 5 Strongly support). The framing
 ##experiment's arms and outcome (support_*, cancel_support) are a separate experiment, dropped.
+##No survey weight, attention check or duration in the deposit. No repeated task.
 ##id = the authors' id_no (assigned; the source Prolific IDs are not in the deposit).
 ##Rows with neither a choice nor a rating are omitted.
 ##AUTHORS' CODE BUG: the do-file builds borrower B's repayment history from borrower A's column
@@ -77,8 +83,14 @@ d <- d[!is.na(choice) | !is.na(rating)]
 stopifnot(d[task <= 4, !anyNA(attr_race)], d[task > 4, all(is.na(attr_race))],
           !anyNA(d[, setdiff(paste0("attr_", an), "attr_race"), with = FALSE]),
           d[!is.na(choice), sum(choice), .(id, task)][, all(V1 == 1)], d[, all(rating %in% 1:5 | is.na(rating))])
-cv <- w[, .(id = as.integer(id_no), cov_gender = gender, cov_age = age, cov_inc = inc, cov_educ = educ, cov_race = race,
-            cov_sl_debt = sl_debt, cov_pid4 = pid4, cov_pid_lean = pid_lean, cov_relief_student = relief_student)]
+ed <- c("Some high school, no degree", "High school degree or equivalent (G.E.D)", "Some college, no degree",
+        "2-year college degree (associates)", "4-year college degree (bachelors)", "Masters degree",
+        "Doctoral degree (PhD) or other terminal degree (JD, MD, DDS, EdD, etc.)")
+pid <- c("Democrat", "Independent", "Republican", "Something Else")
+stopifnot(all(w$educ %in% c(1:7, NA)), all(w$pid4 %in% c(1:4, NA)))
+cv <- w[, .(id = as.integer(id_no), cov_gender_code = gender, cov_age = age, cov_inc = inc, cov_education = ed[educ],
+            cov_race = race, cov_sl_debt = sl_debt, cov_party_id = pid[pid4], cov_pid_lean = pid_lean,
+            cov_relief_student = relief_student)]
 d <- d[task <= 4]
 d <- merge(d, cv, by = "id")
 stopifnot(uniqueN(d[!is.na(choice)]$id) == 746, uniqueN(d$id) == 747)

@@ -35,12 +35,18 @@
 ##  "Control" (product advert), "Low viability" (= the paper's discrimination campaign),
 ##  "High viability" (= the paper's progress campaign); mapping from the counts above and the
 ##  authors' code (tr_video_lv relevels to "Low viability").
-##Covariates: cov_age (q5_age), cov_gender (q4: 1 Male, 2 Female, 3 Prefer not to say),
+##Covariates: cov_age (q5_age, years), cov_gender (q4, codebook labels(q4): 1 Male = "male",
+##2 Female = "female", 3 Prefer not to say = NA),
 ##cov_region (Central/Southern), cov_constituency (q2 label), cov_vote_man_more_likely_win (q19_v),
 ##cov_more_women_mps_2025 (q20_v), cov_woman_faces_discrimination (q21_v),
 ##cov_men_better_leaders (q22_v) (all 1 Strongly agree ... 4 Strongly disagree, -999 refused,
-##999 don't know), cov_close_to_party (q27: 1 No, 2 Yes, -999, 999), cov_party_close (q28 codes,
-##codebook), cov_voted_last_election (turnout_last_elect, 0/1).
+##999 don't know), cov_close_to_party (q27: 1 No, 2 Yes, -999, 999), cov_party_id (q28 "What party
+##is that?", asked of those close to a party: the party name text from the codebook's labels(q28),
+##e.g. "Democratic Progressive Party (DPP)", "Other"; -999 refused and 999 don't know -> NA; NA
+##when not asked), cov_voted_last_election (turnout_last_elect, 0/1).
+##No survey weight in the deposit (an_cj_pop_weight.R weights PROFILES to real-world attribute
+##distributions for a population AMCE; not a respondent weight). No attention check, duration or
+##repeated task.
 ##Dropped: respondent uuid (re-keyed), enumerator NAMES, interview date, free-text q23, the
 ##video recall item q24, the authors' derived dummies (female, primary_or_less, assets, ethnic_*,
 ##party_*, conservative, ...).
@@ -65,12 +71,22 @@ d[, s := sum(choice_others), .(KEY, task)][s == 0, choice_others := NA_integer_]
 const <- c(`47` = "Nkhotakota South East", `44` = "Nkhotakota North East", `49` = "Ntchisi South", `50` = "Ntchisi North",
            `60` = "Salima Central", `59` = "Salima North", `143` = "Chiradzulu East", `140` = "Chiradzulu South",
            `193` = "Nsanje North", `191` = "Nsanje Central", `170` = "Phalombe Central", `169` = "Phalombe South")
+q28lab <- c(`1` = "Alliance for Democracy (AFORD)", `2` = "Democratic Progressive Party (DPP)",
+            `3` = "Malawi Forum for Unity and Development (MAFUNDE)", `4` = "Malawi Congress Party (MCP)",
+            `5` = "National Salvation Front (NSF)", `6` = "New Rainbow Coalition Party (NARC)",
+            `7` = "People’s Democratic Movement (PDM)", `8` = "People’s Party (PP)",
+            `9` = "People’s Progressive Movement (PPM)", `10` = "People’s Transformation Party (PETRA)",
+            `11` = "Republican Party (RP)", `12` = "United Democratic Front (UDF)", `13` = "New Labor Party (NLP)",
+            `14` = "Chipani Cha Fuko (CCP)", `15` = "United Independent Party (UIP)", `16` = "Tonse Alliance (MCP-UTM)",
+            `17` = "DPP-UDF Alliance", `18` = "United Transformation Movement (UTM)",
+            `19` = "Mbakuwaku Movement for Development (MMD)", `99` = "Other")
+stopifnot(all(rs$q4 %in% 1:3), all(rs$q28 %in% c(as.integer(names(q28lab)), -999L, 999L, NA)))
 cv <- rs[, .(KEY, id, attrpos_party = party_order, attrpos_policy_focus = promises_order, attrpos_education = education_order,
              attrpos_gender = gender_order, attrpos_profession = profession_order, trial_video = tr_video,
-             cov_age = q5_age, cov_gender = q4, cov_region = c(`2` = "Central", `3` = "Southern")[as.character(region)],
+             cov_age = q5_age, cov_gender = c("male", "female", NA)[q4], cov_region = c(`2` = "Central", `3` = "Southern")[as.character(region)],
              cov_constituency = const[as.character(q2)], cov_vote_man_more_likely_win = q19_v, cov_more_women_mps_2025 = q20_v,
              cov_woman_faces_discrimination = q21_v, cov_men_better_leaders = q22_v, cov_close_to_party = q27,
-             cov_party_close = q28, cov_voted_last_election = turnout_last_elect)]
+             cov_party_id = q28lab[as.character(q28)], cov_voted_last_election = turnout_last_elect)]
 d <- merge(d, cv, by = "KEY")[, KEY := NULL]
 d <- d[!(is.na(choice) & is.na(choice_others))]
 stopifnot(uniqueN(d$id) == 2233, nrow(d) == 26744, d[, .N, .(id, task)][, all(N == 2)], !anyNA(d[, .SD, .SDcols = patterns("^attr_")]),

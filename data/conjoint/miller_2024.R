@@ -16,12 +16,13 @@
 ##attributes: average July temperature, most popular tourist attractions, travel time from
 ##your home (by air), state-level 2020 presidential election result, recent state news,
 ##destination community type. Task and profile are recorded (F-<task>-<profile>-<pos>
-##Qualtrics columns). Attribute ORDER was randomized per task: attrpos_<attr> = the row
+##Qualtrics columns). Attribute ORDER was randomized once per respondent (the same order in all
+##of a respondent's tasks, checked in the data): attrpos_<attr> = the row
 ##(1-6) at which the attribute appeared (F-<task>-<pos> holds the attribute name).
 ##Sample: the authors' filter (consent "I AGREE", not typing REMOVE at debrief) leaves 2,254
 ##rows; a task is kept when its choice question was answered: 2,076 respondents (the authors'
 ##Study1_Final.csv has 2,077, one with no answered choice; the article says "nearly 2,100"). Partial completers keep
-##the tasks they answered. Attention-check failures are kept (cov_attention1/2).
+##the tasks they answered. Attention-check failures are kept (cov_attention_pass_1/_2).
 ##Outcomes (one table, same tasks), wording from the Qualtrics header row:
 ##  choice: "At which of these destinations are you most interested in vacationing?"
 ##          Destination 1 / 2 / 3 / "None of these destinations". OPT-OUT: "None" tasks have
@@ -33,10 +34,17 @@
 ##"voters ability" news levels in the raw file (codebook note 2), so those two levels read
 ##"voters ability"; and temperatures are stored as shown in the data (64, 67, 72, 78).
 ##Restrictions are not documented; level shares look uniform.
-##Covariates from Study1_Final.csv (codebook codes): cov_pid (D/I/R/O), cov_gender (1 male,
-##2 female), cov_income (1-6), cov_age (years), cov_educ (1-5), cov_ideology (1 very
-##conservative - 7 very liberal), cov_region (Lucid code, unlabelled), cov_attention1,
-##cov_attention2 (1 = passed).
+##Covariates from Study1_Final.csv: cov_party_id (pid3, the authors' recode of Lucid's
+##political_party, written out per Study1_Final_Codebook.txt "D=Democrat, I=Independent,
+##R=Republican, O=Other"; Study1_DataPrep.R L22-28 counts Independent/Other leaners as
+##Democrat/Republican), cov_gender (gender, Final codebook "1=Male, 2=Female", written
+##male/female), cov_income (codes 1-6), cov_age (years), cov_ideology (1 very conservative - 7
+##very liberal), cov_region (Lucid code, unlabelled), cov_attention_pass_1 / cov_attention_pass_2
+##(attention1/attention2, Final codebook "correctly answered the first/second attention check
+##question": 1 = passed, 0 = failed). cov_education is Lucid's own education question from
+##Study1_Raw.csv (the authors' educ collapses it to 5 groups), as the answer text of
+##Study1_Raw_Codebook.txt "education" (1 Some high school or less ... 8 Doctoral degree, -3105
+##None of the above); the one respondent with the undocumented code 10 is blank.
 ##Dropped: ResponseId (Qualtrics; re-keyed to integers in file order), dates, durations,
 ##free-text answers (Q46, Q100), the authors' derived race and age-bin dummies.
 ##Spot check: choice rate for the two "limit" news levels minus the economic-commission
@@ -74,9 +82,15 @@ chk <- f[!is.na(choice), .(ResponseId, task, profile, fc = choice, fr = rating, 
   d, on = .(ResponseId, task, profile)]
 stopifnot(chk[, all(!is.na(fc))], chk[, all(fc == choice)], chk[, all(ft == attr_temperature)], chk[, all(fn == attr_recent_news)],
           chk[, all((is.na(fr) & is.na(rating)) | fr == rating, na.rm = TRUE)])
-cv <- unique(f[, .(ResponseId, cov_pid = pid3, cov_gender = gender, cov_income = income, cov_age = age, cov_educ = educ,
-                   cov_ideology = ideology, cov_region = region, cov_attention1 = attention1, cov_attention2 = attention2)])
-stopifnot(!anyDuplicated(cv$ResponseId))
+pl <- c(D = "Democrat", I = "Independent", R = "Republican", O = "Other")  # Study1_Final_Codebook.txt, pid
+el <- c("1" = "Some high school or less", "2" = "High school graduate", "3" = "Other post high school vocational training",
+        "4" = "Completed some college, but no degree", "5" = "Associate's degree", "6" = "Bachelor's degree",
+        "7" = "Master's degree", "8" = "Doctoral degree", "-3105" = "None of the above")  # Study1_Raw_Codebook.txt, education
+stopifnot(all(f$pid3 %in% names(pl)), all(f$gender %in% 1:2), all(f$attention1 %in% 0:1), all(f$attention2 %in% 0:1))
+cv <- unique(f[, .(ResponseId, cov_party_id = unname(pl[pid3]), cov_gender = c("male", "female")[gender], cov_income = income, cov_age = age,
+                   cov_ideology = ideology, cov_region = region, cov_attention_pass_1 = attention1, cov_attention_pass_2 = attention2)])
+stopifnot(!anyDuplicated(cv$ResponseId), all(r$education %in% c(names(el), "10")))
+cv[, cov_education := unname(el[r$education[match(ResponseId, r$ResponseId)]])]
 d <- cv[d, on = "ResponseId"]
 ids <- unique(r$ResponseId); d[, id := match(ResponseId, ids)][, ResponseId := NULL]
 stopifnot(uniqueN(d$id) == 2076, !anyDuplicated(d[, .(id, task, profile)]), d[, .N, .(id, task)][, all(N == 3)],

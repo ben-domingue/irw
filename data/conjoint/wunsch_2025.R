@@ -12,7 +12,9 @@
 ##gender, region, 2020 vote). 2,910 respondents in cjoint_data (ids are already anonymous
 ##"respondent_NNNN"; re-keyed to integers), 12 tasks each of 2 candidates for the Sejm,
 ##7 attributes; task (`choice` 1-12) and profile (Candidate A/B) are recorded. Attribute order
-##was randomized per task (not recorded). One respondent (source respondent_2592) has no
+##was randomized per task (not recorded). Profiles were fully randomized (article footnote 3: "We deliberately
+##choose to fully randomize all candidate profiles"); only candidate gender has unequal level
+##probabilities (SI Table A.1). No survey weight in the deposit. No task repeats an earlier pair. One respondent (source respondent_2592) has no
 ##attribute values and is dropped: 2,909 respondents.
 ##Outcomes (Polish instrument; English from the SI screenshot, my translation):
 ##  choice: "Na ktorego kandydata najprawdopodobniej zaglosowal(a)bys?" (Which candidate would you
@@ -27,13 +29,24 @@
 ##  "Lib:/Maj:/Auth:" prefixes in Table A.1 are the authors' annotations and are dropped).
 ##  Source codes -> text: tax_rich/tax_all/tax_less, abortion_lib/abortion_illib, judges_L/M/A,
 ##  media_L/M/A, as in Table A.1 order and 02_recoding.R.
-##Covariates (survey_data_subset; 2,623 of the respondents, others blank): cov_age (2021 -
-##birth year, as the authors), cov_gender, cov_party_preference (Q103, English labels as
-##deposited), cov_education, cov_income, cov_financial_situation, cov_duration_minutes, and
-##the authors' attention-check flags cov_check_1_pass / cov_check_2_pass (rules from
-##02_recoding.R; their analysis keeps respondents passing either: 1,979 in the main models
-##after further dropping speeders and failing pre-experiment checks, SI B). Not kept: the
-##understanding-of-democracy and benchmark items (Q102_*, Q117_*), raw attention-check answers.
+##Covariates (survey_data_subset; 2,623 of the respondents, others blank): cov_age
+##(2021 - birthyear, computed by the authors in 02_recoding.R L97; kept as their age variable),
+##cov_birth_year (birthyear, as recorded), cov_gender (gender, codebook.pdf item 10: Male /
+##Female -> male / female), cov_party_preference (Q103 "Party preference of the respondent",
+##English labels as deposited; its options include "Would not support any of these", so it reads
+##as party support / vote intention, not party identification, and keeps its name),
+##cov_education (education_level2_pl_rc, codebook.pdf item 11: Primary/vocational,
+##Secondary/Post-secondary, Higher; the deposit's "NA" (codebook "No response") -> NA; the only
+##education variable deposited, already grouped by the authors), cov_income ("No response"
+##kept as answer text), cov_financial_situation, cov_duration_sec (duration, codebook item 9
+##"Duration of the survey response in minutes", x 60: whole-survey duration in seconds), and
+##the authors' attention checks cov_attention_pass_1 (instructed-response item Q1_4, re-asked as
+##Q2_4 and Q4_4 after a failure: 1 = "Radio" selected at any try, 02_recoding.R L105-108) and
+##cov_attention_pass_2 (instructed "select Slightly important" grid Q101A_1-4: 1 = passed in
+##any version shown, 02_recoding.R L109-114); their analysis keeps respondents passing either:
+##1,979 in the main models after further dropping speeders and failing pre-experiment checks,
+##SI B. Not kept: the age_group item,
+##the understanding-of-democracy and benchmark items (Q102_*, Q117_*), raw attention-check answers.
 ##Hungary replication (hungary_choices.rds) is NOT built: it re-hosts two attributes of
 ##Wunsch & Gessler (2023, Democratization) and is not the full design.
 ##N: 2,910 in the deposit = the article's initial N = 2,910 (analytic 1,979).
@@ -73,14 +86,16 @@ stopifnot(!anyNA(d$profile), all(d$attr_gender %in% c("Female", "Male")), all(d$
 v[, ResponseId := as.character(ResponseId)]
 stopifnot(!anyDuplicated(v$ResponseId))
 cv <- v[, .(id = as.integer(sub("respondent_", "", ResponseId)),
-            cov_age = 2021L - as.integer(as.character(birthyear)), cov_gender = as.character(gender),
+            cov_age = 2021L - as.integer(as.character(birthyear)), cov_birth_year = as.integer(as.character(birthyear)), cov_gender = tolower(as.character(gender)),
             cov_party_preference = as.character(Q103), cov_education = as.character(education_level2_pl_rc),
             cov_income = as.character(income_PL_rc), cov_financial_situation = as.character(financial_situation_rc),
-            cov_duration_minutes = round(as.numeric(duration), 2),
-            cov_check_1_pass = as.integer(Q1_4 %in% "Radio" | Q2_4 %in% "Radio" | Q4_4 %in% "Radio"),
-            cov_check_2_pass = as.integer(Q101A_1 %in% "Slightly important" | Q101A_2 %in% "Slightly important" |
+            cov_duration_sec = round(as.numeric(duration) * 60, 2),
+            cov_attention_pass_1 = as.integer(Q1_4 %in% "Radio" | Q2_4 %in% "Radio" | Q4_4 %in% "Radio"),
+            cov_attention_pass_2 = as.integer(Q101A_1 %in% "Slightly important" | Q101A_2 %in% "Slightly important" |
                                           Q101A_3 %in% "Slightly important" | Q101A_4 %in% "Slightly important"))]
-for (c in c("cov_education", "cov_income")) cv[get(c) == "NA", (c) := "No response"]
+stopifnot(all(cv$cov_gender %in% c("female", "male")), all(cv$cov_education %in% c("Primary/vocational", "Secondary/Post-secondary", "Higher", "NA")))
+cv[cov_education == "NA", cov_education := NA]
+cv[cov_income == "NA", cov_income := "No response"]
 d <- merge(d, cv, by = "id", all.x = TRUE)
 setorder(d, id, task, profile)
 fwrite(d, file.path(out, "wunsch_2025_democratic_backsliding.csv"))

@@ -54,6 +54,11 @@
 ##use (social_media_1-5, 99 = none), q1 Twitter/FB use frequency, q2_a-f internet skills (1 = No
 ##understanding .. 5 = Full understanding), q3_a-g power-user items (-3 = Strongly disagree ..
 ##3 = Strongly agree); weight -> cov_survey_weight (the authors weight their AMCEs).
+##Reserved covariates, from the export's own answer text: cov_birth_year (birthyr), cov_gender
+##(gender_demo Female/Male, stored lowercase female/male), cov_education (educ_demo as exported:
+##No HS / High school graduate / Some college / 2-year / 4-year / Post-grad), cov_party_id
+##(pid3: Democrat / Republican / Independent / Other / Not sure), cov_party_id7 (pid7: Strong
+##Democrat .. Strong Republican, Not sure).
 ##Dropped: YouGov caseid (re-keyed to 1..500), consent, attention checks, free-text "other"
 ##fields (employ_t, pid3_t, religpew_t), start/end timestamps.
 ##N = 500 matches the article.
@@ -69,6 +74,8 @@ covs <- c(paste0("social_media_", c(1:5, 99)), "q1", paste0("q2_", letters[1:6])
           "pew_bornagain", "pew_religimp", "pew_churatd", "pew_prayer", "religpew", "religpew_protestant")
 cv <- s[, c("rid", "weight", covs), with = FALSE]
 setnames(cv, c("rid", "weight", covs), c("rid", "cov_survey_weight", paste0("cov_", sub("_demo$", "", covs))))
+setnames(cv, c("cov_birthyr", "cov_educ", "cov_pid3", "cov_pid7"), c("cov_birth_year", "cov_education", "cov_party_id", "cov_party_id7"))
+cv[, cov_gender := tolower(cov_gender)]
 
 ## text conjoint
 at <- c(generation = "gen", gender = "gender", race = "race", party = "party", military = "military",

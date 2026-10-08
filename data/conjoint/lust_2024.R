@@ -36,8 +36,11 @@
 ##Respondents with all ten outcomes missing are omitted. No survey weights in the deposit.
 ##Dropped: SbjNum (vendor respondent number; re-keyed), SurveyDate, Consent (all yes),
 ##Governorate (labels are only "Governorate N"), Education_other (Arabic free text), and the
-##authors' derived variables (Congruent*, *Bi). Covariates keep the source codes (labels in the
-##.dta): cov_age, cov_gender (1 male, 2 female, 3 refused), cov_citizen, cov_education,
+##authors' derived variables (Congruent*, *Bi). Covariates: cov_age, cov_gender (Stata value labels
+##on Gender: 1 "Male" -> "male", 2 "Female" -> "female", 3 "Refuse to Answer" -> NA), cov_education
+##(the Stata value-label text of Education: "Less than high school", "High school", "Bachelor
+##degree", "Masters, professional degree, or PhD", "Other (specify)"; the Arabic free text of
+##"Other" is dropped). The rest keep the source codes (labels in the .dta): cov_citizen,
 ##cov_religiosity (0-10, 98/99 -> NA), the six stereotype/sexism items, and the two manipulation
 ##checks (cov_check_gender, cov_check_background).
 library(haven); library(data.table)
@@ -55,7 +58,10 @@ d[, attr_gender := lab(x$CandidateGender)][, attr_background := lab(x$Competency
 d[, attr_party_goals := lab(x$PartyGoals)][, attr_success := lab(x$Successful)]
 d[, cov_country := lab(x$Country)]
 d[, cov_age := as.integer(x$Age)]
-for (v in c("Gender", "Citizen", "Education")) d[, paste0("cov_", tolower(v)) := as.integer(zap_labels(x[[v]]))]
+stopifnot(identical(names(attr(x$Gender, "labels")), c("Male", "Female", "Refuse to Answer")))
+d[, cov_gender := c("male", "female", NA)[as.integer(zap_labels(x$Gender))]]
+d[, cov_citizen := as.integer(zap_labels(x$Citizen))]
+d[, cov_education := lab(x$Education)]
 d[, cov_religiosity := num(x$Religiosity)]
 for (v in c("ComSexism", "BizAppropriate", "CSOAppropriate", "BizAbility", "CSOAbility", "BenSexism", "HosSexism"))
   d[, paste0("cov_", tolower(v)) := as.integer(zap_labels(x[[v]]))]

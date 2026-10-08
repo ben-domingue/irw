@@ -36,9 +36,13 @@
 ##          labels in the file; question wording not in the deposit).
 ##Not stored: identify_person* (how the respondent thinks each person identifies: Black / Mixed
 ##race / White), a categorical answer that fits neither choice nor rating.
-##Covariates (answer text): cov_age (years; one value >= 100 kept as is), cov_sex, cov_race
+##Covariates (answer text): cov_age (years; the one value above 120, not a possible age, is set
+##to NA), cov_gender (source
+##sex, answer text in replication.csv: Female/Male/Non-Binary -> female/male/other), cov_race
 ##(respondentrace, multiple answers comma-joined), cov_mixed_black_white (1 = said "yes" to the
-##mixed-race item), cov_state, cov_income, cov_education, cov_ideology, cov_party, cov_party_lean.
+##mixed-race item), cov_state, cov_income, cov_education, cov_ideology, cov_party_id (source
+##partyid, answer text as stored: Democratic Party, Republican Party, None or 'Independent',
+##Other (Please specify)), cov_party_lean (follow-up lean, kept).
 ##Dropped: ResponseId/ResponseID (Qualtrics ids, re-keyed), dates, durations, page timings,
 ##Status, gc, race_quota, the strength-of-partisanship items.
 library(data.table)
@@ -85,9 +89,12 @@ stopifnot(!anyNA(d$choice), d[, sum(choice), .(id, task)][, all(V1 == 1)], !anyN
           d[, all(attr_gender %in% c("Female", "Male"))], d[, all(attr_skin_tone %in% c("Dark-skinned", "Light-skinned"))])
 d[, trial_ancestry_shown := fifelse(form %in% c("race", "racebst"), "yes", "no")]
 d[, trial_skin_tone_row := fifelse(form %in% c("racebst", "nrbst"), "bottom", "top")][, form := NULL]
-cv <- s[, .(id, cov_age = suppressWarnings(as.integer(age)), cov_sex = sex, cov_race = respondentrace,
+stopifnot(all(s$sex %in% c("Female", "Male", "Non-Binary", NA)))
+cv <- s[, .(id, cov_age = suppressWarnings(as.integer(age)), cov_gender = unname(c(Female = "female", Male = "male", `Non-Binary` = "other")[sex]), cov_race = respondentrace,
             cov_mixed_black_white = as.integer(!is.na(mixed) & mixed == "yes"), cov_state = state, cov_income = income,
-            cov_education = education, cov_ideology = ideology, cov_party = partyid, cov_party_lean = partylean)]
+            cov_education = education, cov_ideology = ideology, cov_party_id = partyid, cov_party_lean = partylean)]
+stopifnot(cv[cov_age > 120, .N] == 1)
+cv[cov_age > 120, cov_age := NA]
 d <- merge(d, cv, by = "id")
 setcolorder(d, c("id", "task", "profile", "choice", "rating", paste0("attr_", an)))
 setorder(d, id, task, profile)

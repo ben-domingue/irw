@@ -32,7 +32,11 @@
 ##Restrictions: MP is Labour or Conservative, the challenger always a different party (only
 ##  the 4 seat types above occur); age levels differ by role. Otherwise randomized per the
 ##  article; uniformity not stated.
-##Covariates: cov_female (respondent), cov_agegroup, cov_socialgrade (ABC1/C2DE), as deposited.
+##Covariates: cov_gender (resp.female: 1 = female, 0 = male, per the authors' replication code
+##  evw_gender_accountability_replication_code.R line 76, Factor(resp.female, levelnames =
+##  c("Male", "Female"))), cov_age_group (agegroup, band text as deposited: 18-24 / 25-39 /
+##  40-59 / 60+), cov_socialgrade (ABC1/C2DE), as deposited. No repeated task (5 distinct
+##  comparisons), no attention check or duration in the deposit.
 ##Dropped: incid/chaid/minorid (respondent identifies with the MP's / challenger's / another
 ##  party: task-level derived flags), agegroup.1 (copy of agegroup), the 0/1 dummies
 ##  mp.female/cha.female (same as attr_gender). No survey weight is deposited.
@@ -47,7 +51,7 @@ st <- as.character(x$seat.type); stopifnot(all(st %in% c("ConLab", "ConLib", "La
 sexlab <- function(f) ifelse(f == 1, "Female", "Male")
 conduct <- ifelse(x$mp.misconduct == 1, "Last year, the current MP was found to have inappropriately claimed over £10,000 on expenses.",
                   "Last year, the current MP received a commendation for diligent and ethical service from a Westminster watchdog")
-stopifnot(all(x$cha.sex == sexlab(x$cha.female)))
+stopifnot(all(x$cha.sex == sexlab(x$cha.female)), all(x$resp.female %in% 0:1))
 mk <- function(p) {
   inc <- p == 1L
   data.table(id = as.integer(x$id), task = as.integer(x$comparison), profile = p,
@@ -57,7 +61,7 @@ mk <- function(p) {
              attr_gender = sexlab(if (inc) x$mp.female else x$cha.female),
              attr_previous_job = paste("Formerly", as.character(if (inc) x$mp.prevjob else x$cha.prevjob)),
              attr_conduct = if (inc) conduct else "(not shown)",
-             cov_female = as.integer(x$resp.female), cov_agegroup = as.character(x$agegroup),
+             cov_gender = c("male", "female")[x$resp.female + 1], cov_age_group = as.character(x$agegroup),
              cov_socialgrade = as.character(x$socialgrade))
 }
 d <- rbind(mk(1L), mk(2L))

@@ -38,11 +38,15 @@
 ##appeared at the top; the article says
 ##profile order was randomized within respondents; attribute order is not recorded.
 ##Covariates: cov_survey_weight (YouGov weight); respondent items with codebook codes:
-##cov_party_vote, cov_res, cov_welfare, cov_undeclared, cov_homo, cov_gender_role, cov_age
-##(14 bands), cov_region, cov_edu, cov_personal_income, cov_household_income, cov_occupation,
-##cov_pol_interest, cov_rel, cov_gender (1 = Woman, 2 = Man), cov_att_naiv and cov_att_coop
-##(validity checks, 1-7), cov_att_ind and cov_att_group (attention checks, 1 = pass),
-##cov_device. Dropped: derived variables (age_cat, treat_np, id_* shared-identity flags,
+##cov_party_vote (2019 vote, not party ID), cov_res, cov_welfare, cov_undeclared, cov_homo,
+##cov_gender_role, cov_region, cov_personal_income, cov_household_income, cov_occupation,
+##cov_pol_interest, cov_rel, cov_att_naiv and cov_att_coop (the author's "validity checks",
+##agreement 1-7, not attention checks), cov_device. As text from the .dta value labels:
+##cov_age_group (r_age "Respondent: Age", 14 bands "18-22" ... "83+"), cov_education (r_edu,
+##e.g. "Vocational education", "Long cycle higher education (BA/MA from university)"; "Do not
+##wish to say", a refusal, -> NA), cov_gender (r_gender, labels 1 Woman / 2 Man -> female/male).
+##cov_attention_pass_1 / _2 = att_ind / att_group ("Attention check #1/#2", labels 0 Not pass,
+##1 Pass). Dropped: derived variables (age_cat, treat_np, id_* shared-identity flags,
 ##r_age_cat, pass), constant r_eth, timing variables (endtime, tot_time, duration).
 ##id = row order of the sorted YouGov caseid, re-keyed 1-4,368.
 ##Spot check (Figure 2A model, control condition, lm with SEs clustered by id): Middle Eastern
@@ -81,10 +85,13 @@ for (v in names(shown)) {
   d[!trial_information %in% shown[[v]], (v) := "(not shown)"]
 }
 stopifnot(!anyNA(d[, grep("^attr_", names(d)), with = FALSE]))
-for (v in c("party_vote", "res", "welfare", "undeclared", "homo", "gender_role", "age", "region", "edu", "personal_income",
-            "household_income", "occupation", "Pol_interest", "rel", "gender"))
+for (v in c("party_vote", "res", "welfare", "undeclared", "homo", "gender_role", "region", "personal_income",
+            "household_income", "occupation", "Pol_interest", "rel"))
   d[, paste0("cov_", tolower(v)) := z(k[[paste0("r_", v)]])]
-for (v in c("att_naiv", "att_coop", "att_ind", "att_group")) d[, paste0("cov_", v) := z(k[[v]])]
+stopifnot(all(z(k$r_gender) %in% 1:2), all(z(k$att_ind) %in% 0:1), all(z(k$att_group) %in% 0:1))
+d[, `:=`(cov_age_group = lab(k$r_age), cov_education = sub("^Do not wish to say$", NA, lab(k$r_edu)), cov_gender = c("female", "male")[z(k$r_gender)])]
+for (v in c("att_naiv", "att_coop")) d[, paste0("cov_", v) := z(k[[v]])]
+d[, `:=`(cov_attention_pass_1 = z(k$att_ind), cov_attention_pass_2 = z(k$att_group))]
 d[, cov_device := z(k$device_category)]
 setorder(d, id, task, profile)
 fwrite(d, file.path(out, "kruse_2025_expected_contribution.csv"))

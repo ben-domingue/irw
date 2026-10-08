@@ -29,8 +29,9 @@
 ##  rating = justification of military action against each country, 0-10, 0 = Completely
 ##    unjustified, 10 = Completely justified (article note to Supplement B). Higher = more
 ##    justified (i.e. more hawkish); not recoded.
-##Covariates: cov_sample, cov_college (1 = college degree), cov_pid2 (1 Democrat, 2
-##Republican; blank for independents/experts not answering). The ethnocentrism and hawkishness
+##Covariates: cov_sample, cov_college (1 = college degree; variable label "College degree vs.
+##not"), cov_party_id (source pid2, Stata label "Partisanship, 2 categories", value labels
+##1 Democrat, 2 Republican, stored as that text; blank for independents/experts not answering). The ethnocentrism and hawkishness
 ##battery scores (ethnoc, hawk) and their median splits are derived scales and are dropped.
 ##Respondent ids are the authors' sequential respid.
 ##Rows with neither a choice nor a rating (57) are dropped; one mass respondent answered
@@ -47,8 +48,8 @@ d <- data.table(id = as.integer(s$respid), profile = as.integer(s$profile), choi
                 rating = as.integer(s$rating),
                 attr_reason = lab("conj_reas"), attr_regime = lab("conj_regm"), attr_religion = lab("conj_relg"),
                 attr_us_ally = lab("conj_ally"), attr_military = lab("conj_milt"), attr_trade = lab("conj_trde"),
-                cov_sample = lab("sampl"), cov_college = as.integer(s$college), cov_pid2 = as.integer(zap_labels(s$pid2)))
-stopifnot(all(rle(d$id)$lengths == 12), uniqueN(d$id) == 1132)
+                cov_sample = lab("sampl"), cov_college = as.integer(s$college), cov_party_id = lab("pid2"))
+stopifnot(all(rle(d$id)$lengths == 12), uniqueN(d$id) == 1132, all(d$cov_party_id %in% c("Democrat", "Republican", NA)))
 d[, r := seq_len(.N), id][, task := (r + 1L) %/% 2L]
 stopifnot(d[, all(profile == 2L - r %% 2L)])
 d[, r := NULL]

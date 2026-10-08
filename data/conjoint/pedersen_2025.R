@@ -19,7 +19,9 @@
 ##years), years in profession before parliament (1-3, 7-9, 13-15 years), occupation (25,
 ##grouped by the authors into short/medium/long education) and task priority (8 statements,
 ##odd = functional, even = relational). RESTRICTION (article): young candidates (25-34) always
-##have short (1-3 years) work experience. Attribute order not recorded.
+##have short (1-3 years) work experience. In the data the surname's origin always matches the
+##first name's (majority first names only with the 20 majority surnames, Turkish with the 20
+##Turkish ones); not stated in the sources read. Attribute order not recorded.
 ##TABLES: the deposit's value labels are ONE English master set (UK-oriented: "Parliament",
 ##UK surnames). The article analyses each country separately, and the other surveys showed
 ##localised text (the US task list says "House of Representatives"; the Danish and German
@@ -30,12 +32,13 @@
 ##not verifiable). DENMARK AND GERMANY ARE HELD: the majority names shown there were
 ##presumably Danish/German names, which the deposit does not hold, so the level text as
 ##displayed is not recoverable.
-##Covariates: cov_gender 1=female 2=male; cov_age (years); cov_trust_mps (q9) 1=no trust ..
+##Covariates: cov_gender ("Gender", .dta value labels 1 Female, 2 Male -> female/male); cov_age (years); cov_trust_mps (q9) 1=no trust ..
 ##7=a great deal, 8=don't know; cov_interest_politics (q16) 1=not at all .. 4=very
 ##interested; cov_left_right (q17) 1=left .. 7=right, 8=don't know; cov_task_importance_1..10
 ##(q2_1-q2_10, importance of the ten tasks listed in the appendix, 0=not important at all ..
 ##10=very important, 11=don't know); cov_task_time_1..10 (q3_*_1, share of time 0-100).
-##Dropped: survey duration, the authors' age bands and derived indices; respondents with no
+##Dropped: survey duration (duration, unit not documented; no survey weight in the file), the
+##authors' age bands and derived indices; respondents with no
 ##conjoint answers (did not consent).
 ##N: UK 2,231 and US 2,185 respondents answered the conjoint (2,849 and 2,554 in the article
 ##are all who entered). Spot check (lm of choice on majority-name and female-name dummies
@@ -49,7 +52,8 @@ stopifnot(nrow(k) == 9952)
 lab <- function(x) as.character(as_factor(x))
 atts <- c(attr1 = "first_name", attr2 = "surname", attr3 = "age", attr4 = "years_in_profession", attr5 = "occupation", attr6 = "task_priority")
 num <- function(v) as.integer(zap_labels(k[[v]]))
-cv <- data.table(cov_gender = num("gender"), cov_age = num("age"), cov_trust_mps = num("q9"), cov_interest_politics = num("q16"),
+stopifnot(all(num("gender") %in% 1:2))
+cv <- data.table(cov_gender = c("female", "male")[num("gender")], cov_age = num("age"), cov_trust_mps = num("q9"), cov_interest_politics = num("q16"),
                  cov_left_right = num("q17"))
 for (i in 1:10) cv[, paste0("cov_task_importance_", i) := num(paste0("q2_", i))]
 for (i in 1:10) cv[, paste0("cov_task_time_", i) := as.numeric(k[[paste0("q3_", i, "_1")]])]

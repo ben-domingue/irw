@@ -26,9 +26,16 @@
 ##(AfD)", "No PID"). Restriction: arrival is randomized for patient A only and patient B's level
 ##follows (First <-> Second, Same time <-> Same time; preprint fn 5, verified in the data).
 ##Attribute order randomized per respondent, constant across tasks, not recorded.
-##Covariates: cov_resp_pid (respondent's party ID, authors' coding), cov_age_resp, cov_male,
-##cov_children_household, cov_cjattcheck (passed the survival-rate manipulation check; NA for 289
-##respondents). Dropped: `weight` (constant within country: a country-size weight for the pooled
+##Covariates: cov_party_id (resp_pid: the respondent's party identification in the authors' coding
+##relative to the country's two conjoint parties, e.g. "Left PID (Democrat)", "Right PID (PiS)",
+##"No PID", "No/Other PID"; text as deposited); cov_age (age_resp, age in years, 18-80; the
+##authors' variable, presumably from dat_wide's coded birthyear item "What is your year of birth?");
+##cov_gender_code (male, 0/1, kept as codes: 1 = male, verified against dat_wide.RDS gender, value
+##labels 1 = Male, 2 = Female, 3 = Other, whose per-country Male counts equal male == 1 exactly;
+##0 pools Female and Other (14 respondents), so it cannot be mapped to female/other);
+##cov_children_household; cov_attention_pass (cjattcheck, 1 = passed; the authors' 02_descriptives.R
+##tabulates it as "Passed Attention Check" (appendix table 4); a check on the conjoint's survival-rate
+##attribute; NA for 289 respondents). Dropped: `weight` (constant within country: a country-size weight for the pooled
 ##estimate, not a survey weight), partisanship1/2 and resp_pid1/2 (dummies), affective_pol and
 ##resp_pview1/2 (derived/ambiguous: their variable labels name the German CDU/CSU for every
 ##country), and ResponseId (re-keyed; it was already a country_n index).
@@ -40,9 +47,9 @@ d <- data.table(rid = x$ResponseId, task = as.integer(x$time), profile = match(x
                 choice = as.integer(x$y), attr_age = x$age, attr_gender = x$gender, attr_children = x$child,
                 attr_job = x$job, attr_arrival = x$arrival, attr_survival_chance = x$chance,
                 attr_partisanship = as.character(x$partisanship),
-                cov_country = x$Cntry, cov_resp_pid = x$resp_pid, cov_age_resp = as.integer(x$age_resp),
-                cov_male = as.integer(x$male), cov_children_household = as.integer(x$children_household),
-                cov_cjattcheck = as.integer(x$cjattcheck))
+                cov_country = x$Cntry, cov_party_id = x$resp_pid, cov_age = as.integer(x$age_resp),
+                cov_gender_code = as.integer(x$male), cov_children_household = as.integer(x$children_household),
+                cov_attention_pass = as.integer(x$cjattcheck))
 stopifnot(d[, .(s = sum(choice), n = .N), .(rid, task)][, all(s == 1 & n == 2)])
 ctry <- c(USA = 1, Germany = 2, Italy = 3, Poland = 4, Brazil = 5)
 d[, k1 := ctry[cov_country]][, k2 := as.integer(sub(".*_", "", rid))]

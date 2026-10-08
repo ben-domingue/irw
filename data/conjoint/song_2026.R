@@ -28,9 +28,13 @@
 ##opt-out.
 ##trial_framing: the between-respondent framing arm read before the conjoint (Control; Treatment1 =
 ##government emphasis on marriage migrants; Treatment2 = emphasis on labor migrants).
-##Covariates (the deposit's numeric codes; the appendix gives no value labels beyond the missing
-##codes, which are set missing here: education 6, urban 4, married 3, children 4, income 999):
-##cov_sex, cov_age (years), cov_education, cov_urban, cov_married, cov_children, cov_income,
+##Covariates: cov_gender (R_Sex "Respondent sex": 1 = male, 2 = female; no label in the deposit,
+##but the appendix's census-comparison tables (IPSR_code.html section 4.3, sample n by sex x age
+##18-39/40-59/60+) match R_Sex 2 = Female and 1 = Male exactly in both samples, e.g. Japan Female
+##380/456/428), cov_age (R_Age, years). The rest keep the deposit's numeric codes (the appendix
+##gives no value labels beyond the missing codes, which are set missing here: education 6, urban 4,
+##married 3, children 4, income 999): cov_education_code (R_Educ "Respondent education", 1-5,
+##unlabelled, hence _code), cov_urban, cov_married, cov_children, cov_income,
 ##cov_survey_weight (post-stratification weight on sex and age; the authors weight all estimates).
 ##Dropped: ID (Qualtrics ResponseId; ids re-keyed to integers in file order).
 ##Spot check: the weighted marginal mean for female migrants in the Japanese sample is .518, as in
@@ -38,7 +42,7 @@
 library(data.table)
 a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]
 s <- fread(file.path(raw, "dataset.csv"))
-stopifnot(nrow(s) == 45020, s[, .N, .(ID, Task, Profile)][, all(N == 1)], s[, sum(Outcome), .(ID, Task)][, all(V1 == 1)])
+stopifnot(nrow(s) == 45020, s[, .N, .(ID, Task, Profile)][, all(N == 1)], s[, sum(Outcome), .(ID, Task)][, all(V1 == 1)], all(s$R_Sex %in% 1:2))
 s[, id := match(ID, unique(ID))]
 miss <- function(x, code) { x <- as.integer(x); x[x %in% code] <- NA_integer_; x }
 for (smp in c("Japanese", "Korean")) {
@@ -46,7 +50,7 @@ for (smp in c("Japanese", "Korean")) {
   d <- k[, .(id = match(id, unique(id)), task = as.integer(Task), profile = as.integer(Profile), choice = as.integer(Outcome),
              attr_gender = Sex, attr_age = as.character(Age), attr_nationality = Nationality, attr_education = Education,
              attr_previous_job = PreviousJob, attr_purpose = Purpose, attr_duration = Duration, trial_framing = Group,
-             cov_sex = as.integer(R_Sex), cov_age = as.integer(R_Age), cov_education = miss(R_Educ, 6), cov_urban = miss(R_Urban, 4),
+             cov_gender = c("male", "female")[R_Sex], cov_age = as.integer(R_Age), cov_education_code = miss(R_Educ, 6), cov_urban = miss(R_Urban, 4),
              cov_married = miss(R_Married, 3), cov_children = miss(R_Child, 4), cov_income = miss(R_Income, 999),
              cov_survey_weight = weight)]
   stopifnot(d[, .N, id][, all(N == 10)], uniqueN(d$id) == c(Japanese = 2511, Korean = 1991)[[smp]],

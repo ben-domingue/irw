@@ -29,8 +29,11 @@
 ##outcome agree with the authors' long file (stopifnot below).
 ##cov_survey_weight = the authors' raking weight to the 2016 ANES (weights.nes; used for their
 ##"All - Reweighted" model; present for every kept respondent).
-##Covariates kept as the answer text: gender, income, race, hispanic, education, age_group
-##(Q1.3-Q1.8), party (Q1.12), party_strength (Q1.14/Q1.15), ideology (Q1.16), vote_2016 (Q1.17),
+##Covariates kept as the export's answer text: cov_gender (Q1.3, Female/Male lowercased to
+##female/male), income, race, hispanic (Q1.4-Q1.6), cov_education (Q1.7), cov_age_group (Q1.8; "Prefer not to
+##answer" -> NA), cov_party_id (Q1.12, party identification: Democrat/
+##Republican; Q1.14/Q1.15 are its strength follow-ups), party_strength (Q1.14/Q1.15), ideology
+##(Q1.16), vote_2016 (Q1.17),
 ##the respondent's own stance on the conjoint issues (Q2.2, Q2.3, Q2.4, Q81, Q2.8, Q2.9:
 ##"should (not) raise corporate income taxes" etc.) and their importance (Q3.2, Q3.3, Q3.4,
 ##Q3.9, Q3.10: Extremely important .. Not that important, No opinion).
@@ -84,7 +87,7 @@ stopifnot(!anyDuplicated(w$ResponseId))
 s <- merge(s, w, by = "ResponseId", all.x = TRUE)
 s[, party_strength := fifelse(Q1.14 != "", Q1.14, Q1.15)]
 cv <- c(Q1.3 = "gender", Q1.4 = "income", Q1.5 = "race", Q1.6 = "hispanic", Q1.7 = "education", Q1.8 = "age_group",
-        Q1.12 = "party", party_strength = "party_strength", Q1.16 = "ideology", Q1.17 = "vote_2016",
+        Q1.12 = "party_id", party_strength = "party_strength", Q1.16 = "ideology", Q1.17 = "vote_2016",
         Q2.2 = "stance_corporate_tax", Q2.3 = "stance_muslim_immigration", Q2.4 = "stance_obamacare",
         Q81 = "stance_birth_control", Q2.8 = "stance_deportation", Q2.9 = "stance_path_to_citizenship",
         Q3.2 = "importance_corporate_tax", Q3.3 = "importance_muslim_immigration", Q3.4 = "importance_obamacare",
@@ -92,6 +95,9 @@ cv <- c(Q1.3 = "gender", Q1.4 = "income", Q1.5 = "race", Q1.6 = "hispanic", Q1.7
 cs <- s[, c("id", names(cv), "w"), with = FALSE]
 setnames(cs, c("id", paste0("cov_", cv), "cov_survey_weight"))
 for (v in grep("^cov_", names(cs), value = TRUE)) if (is.character(cs[[v]])) cs[get(v) == "", (v) := NA]
+stopifnot(all(cs$cov_gender %in% c("Female", "Male", NA)))
+cs[, cov_gender := tolower(cov_gender)]
+cs[cov_age_group == "Prefer not to answer", cov_age_group := NA]
 d <- merge(d, cs, by = "id")
 stopifnot(d[, sum(choice), .(id, task)][, all(V1 == 1)], uniqueN(d$id) == nrow(s))
 setcolorder(d, c("id", "task", "profile", "choice"))

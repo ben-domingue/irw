@@ -31,14 +31,17 @@
 ##reproduce the authors' favorability results.
 ##Attribute order was randomized (article) but not recorded. Restrictions are not
 ##documented; level shares look uniform.
-##Covariates (source codes, no labels deposited): cov_education (1-13), cov_sex (1-4; the
-##authors' code treats 1 = male, 2 = female), cov_minority (1 = minority, 2 = majority),
+##Covariates (source codes, no labels deposited): cov_education_code (CODES 1-13; no answer
+##text deposited, kept as codes), cov_gender_code (source `sex`, CODES 1-4 kept: pb_script.Rmd
+##L101-102 labels 1 = Male and 2 = Female, but nothing documents 3 and 4 (19 respondents), so
+##the column is not mapped to text), cov_minority (1 = minority, 2 = majority),
 ##cov_sample (small_cities: 0 = 10 largest municipalities, 1 = middle-sized and small,
 ##99 = one of the 10 largest; the three surveys), cov_relational_trust and
 ##cov_external_efficacy (1-7), cov_pref_<project> = the respondent's 1-7 preference for each
 ##of the eight project types (Dutch names as stored: voetpaden footpaths, fietspaden bike
 ##paths, speeltuinen playgrounds, pleinen squares, verlichting lighting, verkeersdrempels
-##speed bumps, bosjes shrubs, vuilnisbakken litter bins; translations ours).
+##speed bumps, bosjes shrubs, vuilnisbakken litter bins; translations ours). No survey weight
+##is deposited (quota samples).
 ##Dropped: X1 (row number), responseid (Qualtrics ResponseId; re-keyed to integers in file
 ##order), the derived higher_education, gender, minorities, disadvataged (all NA) and the two
 ##favorability variables.
@@ -53,7 +56,7 @@ d <- s[, .(id = match(responseid, unique(responseid)), task = as.integer(task), 
            choice = as.integer(choice), rating = as.integer(selected),
            attr_who_submits = residents_allowed_submit, attr_projects_allowed = projects_allowed,
            attr_municipal_support = support_municipality, attr_who_chooses_winner = choice_winning_project,
-           cov_education = as.integer(education), cov_sex = as.integer(sex), cov_minority = as.integer(minority),
+           cov_education_code = as.integer(education), cov_gender_code = as.integer(sex), cov_minority = as.integer(minority),
            cov_sample = as.integer(small_cities), cov_relational_trust = as.integer(relational_trust),
            cov_external_efficacy = as.integer(external_efficacy))]
 for (p in c("voetpaden", "fietspaden", "speeltuinen", "pleinen", "verlichting", "verkeersdrempels", "bosjes", "vuilnisbakken"))

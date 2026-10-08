@@ -42,11 +42,15 @@
 ##the questionnaire specifies).
 ##Attribute row order was randomized per respondent (1/3 fully random, 2/3 by thematic blocks,
 ##fixed across that respondent's pairs; hidden variable CONJOINTORDER) but is not in the deposit.
-##Covariates: cov_country; cov_gender Male/Female/Other; cov_age_group (bands 18-24..65-120);
-##cov_education Low/Middle/High (authors' ISCED bands of the country question); cov_region
+##Covariates: cov_country; cov_gender female/male/other (the deposit's Gender text Male/Female/Other,
+##lowercased; the authors' df_clean.R labels Q4 1 "Male", 2 "Female", 3 "Other"); cov_age_group (the
+##band text 18-24 .. 65-120, df_clean.R labels of hAge); cov_education Low/Middle/High (the authors'
+##ISCED bands of the country question, df_clean.R labels of edulevel / edulevel_FR; the raw answer
+##options are not deposited, so this is the only education text available); cov_region
 ##(Bundesland or Region); cov_job; cov_household_income (authors' 7 collapsed net monthly bands;
-##"don't know"/no answer missing; raw 15-band answer not deposited); cov_party (vote intention,
-##country-specific party labels; "no answer" missing); cov_restrict_arms_exports (Q20C, "Should
+##"don't know"/no answer missing; raw 15-band answer not deposited); cov_vote_intention (the
+##authors' party_choice_de / party_choice_fr: vote intention, not party identification; country-
+##specific party labels; "no answer" missing); cov_restrict_arms_exports (Q20C, "Should
 ##arms exports be restricted much more or much less than now?" 1 = much more .. 7 = much less);
 ##cov_arms_sometimes_necessary (Q20D, "Under certain conditions arms deliveries are necessary to
 ##help a country fend off an enemy or maintain internal security", 1 = not at all .. 7 = fully
@@ -61,7 +65,7 @@
 ##is INFERRED from the questionnaire's printed order (peace items r1-r5 are not deposited).
 ##Dropped: the vignette experiment that followed the conjoint (VIGNETTE, Q17, Choice,
 ##pipe_Choice_Pipe, Q19r1) and its free-text justification Q18; the party-position split
-##experiment (Q20A, Q20B, ParteDisplay_*); raw party codes Q13/Q13_FR (= cov_party); per-task
+##experiment (Q20A, Q20B, ParteDisplay_*); raw party codes Q13/Q13_FR (= cov_vote_intention); per-task
 ##timers (CJ_3_timer equals CJ_4_timer in every row, so they are not trustworthy); the Kantar
 ##uuid (re-keyed to integers 1..6617 in file order). No survey weight is deposited.
 ##N = 6,617 (3,250 / 3,367) matches the article. Spot check (OLS of choice on all attributes,
@@ -104,10 +108,10 @@ for (t in 1:6) for (p in 1:2) {
 }
 d <- rbindlist(rows)
 fc <- function(x) { x <- as.character(x); bad <- !is.na(x) & !validUTF8(x); x[bad] <- iconv(x[bad], "latin1", "UTF-8"); x } # Windows latin1 labels
-cv <- s[, .(id = rid, cov_country = ctry, cov_gender = fc(Gender), cov_age_group = fc(Age), cov_education = fc(Education),
+cv <- s[, .(id = rid, cov_country = ctry, cov_gender = tolower(fc(Gender)), cov_age_group = fc(Age), cov_education = fc(Education),
             cov_region = ifelse(ctry == "Germany", fc(region_de), fc(region_fr)), cov_job = fc(Job_situation),
             cov_household_income = fc(Household_Income),
-            cov_party = ifelse(ctry == "Germany", fc(party_choice_de), fc(party_choice_fr)),
+            cov_vote_intention = ifelse(ctry == "Germany", fc(party_choice_de), fc(party_choice_fr)),
             cov_restrict_arms_exports = as.integer(Q20C), cov_arms_sometimes_necessary = as.integer(Q20D),
             cov_arms_trade_never = as.integer(Q20E), cov_trade_for_economy = as.integer(Q20F),
             cov_war_1 = as.integer(Q21r6), cov_war_2 = as.integer(Q21r7), cov_war_3 = as.integer(Q21r8),

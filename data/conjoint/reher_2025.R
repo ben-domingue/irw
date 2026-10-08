@@ -31,12 +31,25 @@
 ##ethnic background were carried only by the candidate's NAME (e.g. "Paul Smith"/"Anna Smith"/
 ##"Sofia Garcia"); the names are NOT in the deposit, so attr_gender (Female/Male) and
 ##attr_name_minority ("Minority ethnic name"/"Non-minority name") are the codebook's codings of
-##the name shown, not displayed text. Restrictions (SI Table S1): non-uniform weights
-##(disability none 0.4 vs 0.2 each type; minority names 0.3 vs 0.7); one party per side.
+##the name shown, not displayed text. Level weights (SI Table S1): disability none 0.4 vs 0.2
+##each type; names 0.35/0.35 (majority female/male) vs 0.15/0.15 (minority). Restriction
+##(observed, not stated in the SI): in the party task the two candidates always have
+##opposite parties (5,931 of 5,931 two-profile party tasks). Pairs of country-specific level
+##texts (US vs UK wording) never co-occur, by construction. Profiles were prose vignettes
+##with a fixed sentence order (SI Figure S1); the two comparisons are different experiments,
+##not a repeat. No attention check or duration in the deposit.
 ##Covariates: cov_country; cov_lr_self (lrown.s x 10, 0 = Left .. 10 = Right); cov_lr_group
-##(the author's left/centre/right split of it); cov_age_group 1=18-24 .. 6=65+; cov_gender
-##(Male/Female/Other); cov_education age left full-time education 0=15 or under 1=16 2=17-18
-##3=19 4=20+ or still in education; cov_employment (author's 4 groups); cov_disabled 0/1.
+##(the author's left/centre/right split of it); cov_age_group = age.n as band text:
+##the data hold 0-5, the accepted manuscript's SI sec. 3 (p. 6) gives "0=1-24, 1=25-34,
+##2=35-44, 3=45-54, 4=55-64, 5=65+" ("1-24" a typo: Codebook.pdf p.2, "What age group do
+##you belong to?", lists the same bands as 1=18-24 .. 6=65+, one off from the data), so
+##0 "18-24", 1 "25-34", 2 "35-44", 3 "45-54", 4 "55-64", 5 "65+";
+##cov_gender = gender lowercased (Codebook p.3 "Which gender do you identify as?"
+##Male/Female/Other -> male/female/other); cov_education = edu as the codebook's answer text
+##(Codebook p.3, "At what age did you finish full-time education (including college or
+##university)?": 0 "15 or under", 1 "16", 2 "17-18", 3 "19", 4 "20 or above or still at
+##school / full-time student"; the SI splits 4 and 5 = still at school, but the data stop
+##at 4, as in the codebook); cov_employment (author's 4 groups); cov_disabled 0/1.
 ##Dropped: row index columns, Disability / c.disdummy (derived), c.party3 (derived), c.party
 ##(-> attr_party). No survey weight in the deposit.
 ##N: 6,011 ids in the deposit vs "N=3,000" per country in the article; 5,969 kept (above).
@@ -80,8 +93,10 @@ stopifnot(!anyNA(d$attr_children), !anyNA(d$attr_job), s[, all(c.female %in% 0:1
 d[, trial_party_shown := ifelse(is.na(s$c.party), "no", "yes")]
 stopifnot(d[, uniqueN(trial_party_shown), .(id, task)][, all(V1 == 1)], d[, uniqueN(trial_party_shown), id][, all(V1 == 2)])
 d[, `:=`(cov_country = s$country, cov_lr_self = as.integer(round(s$lrown.s * 10)), cov_lr_group = s$lrcat,
-         cov_age_group = as.integer(s$age.n), cov_gender = s$gender, cov_education = as.integer(s$edu),
+         cov_age_group = c("18-24", "25-34", "35-44", "45-54", "55-64", "65+")[s$age.n + 1L], cov_gender = tolower(s$gender),
+         cov_education = c("15 or under", "16", "17-18", "19", "20 or above or still at school / full-time student")[s$edu + 1L],
          cov_employment = s$emp1, cov_disabled = as.integer(s$disown))]
+stopifnot(all(s$age.n %in% 0:5), all(s$gender %in% c("Male", "Female", "Other")), all(is.na(s$edu) | s$edu %in% 0:4))
 stopifnot(d[!is.na(choice), sum(choice), .(id, task)][, all(V1 == 1)])
 d <- d[!(is.na(choice) & is.na(rating_ideology) & is.na(rating_represent))]
 setorder(d, id, task, profile)

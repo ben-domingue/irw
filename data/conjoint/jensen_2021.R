@@ -29,15 +29,20 @@
 ##ONE TABLE pooling the eight cities with cov_city: the authors pool them (pooled AMCE table
 ##A-5, hierarchical model) and the attribute set is the same everywhere.
 ##Covariates: cov_city (metro area text); cov_survey_weight (YouGov weight, used in the
-##paper); cov_birth_year; cov_gender 1=Male 2=Female 3=Other; cov_race (q58) 1=White 2=Black
-##or African American 3=Hispanic or Latino 4=Asian or Asian-American 5=Native American
-##6=Mixed race 7=Other; cov_education (q51) 1=No schooling .. 4=High school graduate 5=Some
-##college 6=Associate's 7=Bachelor's 8=Master's 9=Professional 10=Doctorate; cov_party_id
-##(q41) 1=Democrat 2=Republican 3=Independent 4=Something else; cov_party_strength (q41_a)
-##1=strong 2=not very strong; cov_party_lean (q41_b, independents etc.) 1=closer to the
-##Republican Party 2=closer to the Democratic Party 3=neither; cov_ideology (q40) 1=very
-##conservative .. 5=very liberal; cov_vote_2016 (q43) 1=Clinton 2=Trump 3=Other (NA = did
-##not vote / unsure); cov_us_born (q48) 1=United States 2=other.
+##paper); cov_birth_year (q47, year born); cov_gender (q50: the .dta value labels Male / Female
+##/ Other, lowercased to male / female / other); cov_race (q58) 1=White 2=Black or African
+##American 3=Hispanic or Latino 4=Asian or Asian-American 5=Native American 6=Mixed race
+##7=Other; cov_education (q51, "Education": answer text from the .dta value labels, e.g. "No
+##schooling completed or less than 1 year" .. "High school graduate (or equivalent)", "Some
+##college", "Associate's degree (including occupational or academic degrees)", "Bachelor's
+##degree (BA, BS, etc.)" .. "Doctorate degree (PhD, EdD, etc.)"); cov_party_id (q41,
+##"Political identity": value-label text Democrat / Republican / Independent / Something
+##else); cov_party_strength (q41_a) 1=strong 2=not very strong; cov_party_lean (q41_b,
+##independents etc.) 1=closer to the Republican Party 2=closer to the Democratic Party
+##3=neither; cov_ideology (q40) 1=very conservative .. 5=very liberal; cov_vote_2016 (q43)
+##1=Clinton 2=Trump 3=Other (NA = did not vote / unsure); cov_us_born (q48) 1=United States
+##2=other. The labels "skipped" / "not asked" would be NA; none occur in q41, q50 or q51.
+##No task repeats an earlier pair (data check).
 ##Dropped: county, ZIP code and state of residence (fine geography), the free-text items
 ##(q9, q63, *_other), start/end times, all other survey items.
 ##N = 7,800 respondents and 78,000 rows, as in appendix Table A-5. Spot check: weighted OLS of
@@ -50,14 +55,15 @@ stopifnot(nrow(k) == 7800, !anyDuplicated(k$caseid))
 city <- as.character(as_factor(k$msa))
 state <- c(Charlotte = "North Carolina", Cleveland = "Ohio", Houston = "Texas", Indianapolis = "Indiana",
            Memphis = "Tennessee", Rochester = "New York", "St. Louis" = "Missouri", Seattle = "Washington")[city]
-stopifnot(!anyNA(state))
+stopifnot(!anyNA(state), all(k$q50 %in% 1:3), all(k$q51 %in% 1:10), all(k$q41 %in% 1:4))
 dims <- c("educ", "hieduc", "invest", "gov", "workers", "local")
 anames <- c(educ = "education", hieduc = "higher_education", invest = "investment_taxes", gov = "governance",
             workers = "workers_entrepreneurs", local = "local_services")
 id <- seq_len(nrow(k))  # re-keyed 1..7800 in source order (caseid is a YouGov panel id)
 num <- function(v) as.integer(zap_labels(k[[v]]))
+lab <- function(v) { x <- as.character(as_factor(k[[v]])); x[x %in% c("skipped", "not asked")] <- NA; x }
 cv <- data.table(cov_city = city, cov_survey_weight = as.numeric(k$weight), cov_birth_year = num("q47"),
-                 cov_gender = num("q50"), cov_race = num("q58"), cov_education = num("q51"), cov_party_id = num("q41"),
+                 cov_gender = tolower(lab("q50")), cov_race = num("q58"), cov_education = lab("q51"), cov_party_id = lab("q41"),
                  cov_party_strength = num("q41_a"), cov_party_lean = num("q41_b"), cov_ideology = num("q40"),
                  cov_vote_2016 = num("q43"), cov_us_born = num("q48"))
 rows <- list()

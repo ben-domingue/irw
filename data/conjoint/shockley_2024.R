@@ -27,10 +27,14 @@
 ##   1 children, 2 born, 3 tribe, 4 skills, 5 service is inferred from the indicators, with
 ##   which it agrees on every row; blank when the group was not in the basket).
 ##   488 respondents, 1,425 tasks (10 respondents have 1 contest, 19 have 2). 488 matches the
-##   authors' cjoint log ("Number of Respondents = 488"). Covariates: cov_female (1 = female;
-##   source female 1 = Male, 2 = Female per the R code), cov_age (years). No survey weight in
-##   this file. Dropped: unlabelled education/income/region codes, the authors' factor scores,
-##   attitude indices, quantile recodes and dummies.
+##   authors' cjoint log ("Number of Respondents = 488"). Covariates: cov_gender (source
+##   `female` 1 = Male, 2 = Female per "PSRM Replication Code.R" factor(..., levels = c(1,2),
+##   labels = c("Male","Female")); agrees with the file's `gender` labels MALE = 3 / FEMALE = 5
+##   and its `male` dummy on every row), cov_age (years), cov_survey_weight (wgt: this file has
+##   no weight, so it is taken from "PSRM conjoint replication.dta" by caseid, the same SESRI
+##   case number; one value per case there; NA for the 33 of 488 respondents who are not in
+##   that file). Dropped: unlabelled education/income/region codes, the authors' factor
+##   scores, attitude indices, quantile recodes and dummies.
 ##
 ##2. shockley_2024_qatar_residency (individual-candidate conjoint; paper Figure 3, Table A.3).
 ##   Three pairs of hypothetical candidates for permanent residency, 6 attributes:
@@ -49,7 +53,7 @@
 ##   657 respondents (of 733 completes); the authors' Figure 3 model uses the 554 with a
 ##   non-missing income answer. Covariates: cov_survey_weight (wgt), cov_income_over_40k
 ##   (1 = monthly household income more than 40K, 0 = less; NA = not answered; the authors'
-##   recode of qinco1).
+##   recode of qinco1). No attention check or duration is deposited for either experiment.
 ##Respondent ids are re-keyed to 1..n within each table (source caseid is a survey case
 ##number); the two tables share 455 respondents but ids are not linked across tables.
 ##Spot checks: lm(choice ~ attr_children_of_qatari_mothers), SE clustered by id, gives
@@ -74,7 +78,11 @@ for (k in seq_along(grp)) {
   stopifnot(identical(!is.na(pos), v == 2))
   g[, paste0("attrpos_", names(grp)[k]) := pos]
 }
-g[, cov_female := as.integer(p$female == 2)][, cov_age := as.integer(p$age)]
+stopifnot(all(p$female %in% 1:2))
+g[, cov_gender := c("male", "female")[p$female]][, cov_age := as.integer(p$age)]
+w <- unique(as.data.table(zap_labels(read_dta(file.path(raw, "PSRM conjoint replication.dta"))))[, .(caseid, wgt)])
+stopifnot(!anyDuplicated(w$caseid))
+g[, cov_survey_weight := as.numeric(w$wgt[match(p$caseid, w$caseid)])]
 stopifnot(uniqueN(g$id) == 488)
 setorder(g, id, task, profile)
 fwrite(g, file.path(out, "shockley_2024_qatar_groups.csv"))

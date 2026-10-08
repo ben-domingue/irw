@@ -21,9 +21,13 @@
 ##Outcome: choice = source `selected` (y_ = 1 Museum A / 2 Museum B); forced choice between
 ##two museums, exact question wording not deposited. One task (one respondent) has no answer
 ##(y_ missing, selected 0 on both) and is dropped: 2,315 tasks.
-##Randomization restrictions are not documented; level shares look uniform.
-##Covariates (source codes, Stata labels): cov_gender (Q19_OPS: 1 Male, 2 Female, 3 Other),
-##cov_party (Q24_OPS: 1 Democrat, 2 Republican, 3 Independent, 4 Other), cov_race (race5cat:
+##Randomization restrictions are not documented; level shares look uniform. No survey weight.
+##No repeat task: in the data only one respondent's task 6 equals an earlier pair (swapped),
+##as chance allows with mostly two-level attributes.
+##Covariates (source codes and Stata labels unless stated): cov_gender (Q19_OPS "How would you
+##describe your gender?", value labels Male / Female / Other -> male / female / other),
+##cov_party_id (Q24_OPS "Which of the following categories best describes your political
+##affiliation?", value-label text Democrat / Republican / Independent / Other), cov_race (race5cat:
 ##1 White, 2 Black, 3 Hispanic, 4 Asian, 9 Other), cov_generation (age3: 1 Gen X,
 ##2 Millenial, 3 Gen Z; the only labelled age measure, age4 is unlabelled), cov_visited_mint
 ##(Q101: 1 Uptown, 2 Randolph, 3 both, 4 neither), cov_museum_last12m (visit_any: 1 Yes, 2 No,
@@ -34,12 +38,13 @@ library(haven); library(data.table)
 a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]
 s <- as.data.table(read_dta(file.path(raw, "final.dta")))
 lab <- function(x) as.character(as_factor(x, levels = "labels"))
+stopifnot(all(s$Q19_OPS %in% 1:3), all(s$Q24_OPS %in% c(1:4, NA)))
 d <- s[, .(id = as.integer(id), task = as.integer(choice), profile = as.integer(Profile),
            choice = as.integer(selected), y = as.integer(zap_labels(y_)),
            attr_artist = lab(artist), attr_description = lab(description), attr_event = lab(events),
            attr_program = lab(programs), attr_cost = paste0("$", as.integer(zap_labels(cost))),
            attr_location = lab(location),
-           cov_gender = as.integer(zap_labels(Q19_OPS)), cov_party = as.integer(zap_labels(Q24_OPS)),
+           cov_gender = tolower(lab(Q19_OPS)), cov_party_id = lab(Q24_OPS),
            cov_race = as.integer(zap_labels(race5cat)), cov_generation = as.integer(zap_labels(age3)),
            cov_visited_mint = as.integer(zap_labels(Q101)), cov_museum_last12m = as.integer(zap_labels(visit_any)))]
 stopifnot(d[, .N, .(id, task)][, all(N == 2)], uniqueN(d$id) == 386)

@@ -26,12 +26,20 @@
 ##Within-subject design conditions (blocks of 15 trials, block order randomized):
 ##trial_condition = treatnum as text (Normal, Incongruent, Nonsensical, Combined per the
 ##codebook); trial_block = treat_iter (1-4, position of the condition in the respondent's
-##sequence). RESTRICTIONS: the article says the Normal condition contained no "odd"
-##(incongruent or nonsensical) combinations, which the other conditions allowed; the
-##authors' code lists the combinations (e.g. a 25-year-old Governor/Senator/Representative or
-##medical doctor; Democrat opposing taxes on the wealthy). Level shares are also unequal
-##(e.g. candidate age 25 and 41 about 12% each vs about 25% for 55/62/71). Attribute order was
-##randomized per respondent and condition (article) but not recorded.
+##sequence). RESTRICTIONS: the level SETS depend on the condition (article sec. 3.1: "varying
+##the degree of oddness across the four designs required changing the attribute levels and/or
+##attributes themselves across conditions"); the Normal condition's sets contain no "odd"
+##(incongruent or nonsensical) combinations, which the other conditions allowed (authors'
+##code lists them, e.g. a 25-year-old Governor/Senator/Representative or medical doctor).
+##E.g. candidate age 25 occurs only in Nonsensical/Combined, 41 only in Normal/Incongruent;
+##so the pooled level shares are unequal (25 and 41 about 12% each). Within a condition the
+##article says levels "were randomized independently and uniformly" (checked: every level pair
+##occurs, max/min level share <= 1.19 within each condition). Attribute order: "randomized
+##order across respondents and conditions but held fixed for the duration of the condition
+##for each respondent" (article), i.e. one order per respondent x condition block; not
+##recorded. Profiles were shown as a table, two columns x eight rows (article, Figure A.1).
+##No task is repeated (checked: no task repeats an earlier pair, same or swapped).
+##No survey weight (lab sample; none in the deposit).
 ##No respondent covariates are deposited. The eye-tracking measures (resp-trial_*_fix.csv:
 ##fixation counts and durations per attribute) are not included; use the deposit.
 ##Dropped: nothing identifying; subjid (anonymized lab id) is kept as id.

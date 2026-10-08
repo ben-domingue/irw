@@ -26,13 +26,18 @@
 ##Rows with neither outcome are omitted. 2 respondents (40 rows) have no attribute values at all
 ##(blank in source = missing, not "not shown") and are dropped: 203 respondents, 4,030 rows; 38
 ##kept tasks have ratings but no choice.
-##Restrictions: the authors' cjoint design (replication.R, makeDesign) weights sexual orientation
-##LGBT 1/5, Straight 4/5; everything else uniform. Race shares in the data are also unequal
-##(White 48%, Asian American 21%, Black 16%, Hispanic 15%), not documented.
-##Covariates (respondent answers, as stored): year in school, party (pid3, lean, pid3_withlean),
-##age, gender, race (multi-select), own religion, LGBT, hobbies (multi-select), music,
+##Level weights: the authors' cjoint design (replication.R, makeDesign level.probs) weights sexual
+##orientation LGBT 1/5, Straight 4/5; everything else uniform. Race shares in the data are also
+##unequal (White 48%, Asian American 21%, Black 16%, Hispanic 15%), contrary to that design. No
+##combination rule is documented (makeDesign has no constraints); every attribute pair co-occurs.
+##Covariates (respondent answers, as stored): year in school, cov_party_id (pid3: Democrat /
+##Independent / Republican / "Other party (please specify)", stored text), pid_lean and
+##pid3_withlean (lean follow-up and the 3-category version with leaners), cov_age (years),
+##cov_gender (stored text Male/Female/Other lowercased), race (multi-select), own religion, LGBT, hobbies (multi-select), music,
 ##cleanliness, social life, values, bedtime, importance ranks of 11 roommate traits (*_rank),
-##and perceived party association of 15 activities (*_pid).
+##and perceived party association of 15 activities (*_pid; the attribute column traits_pid is not
+##one of them and is not copied as a covariate). No survey weight, attention check or duration in
+##the deposit; no repeated task documented.
 ##Dropped: Qualtrics ResponseId (re-keyed 1..n in order of first appearance), the row index,
 ##pid_other (free text), the authors' derived match / relative-party / recoded variables
 ##(traits_*_match, traits_pid_relative, polinterest_r).
@@ -48,8 +53,11 @@ an <- c(race = "traits_race", sexual_orientation = "traits_lgbt", religion = "tr
 for (k in names(an)) d[, paste0("attr_", k) := fifelse(x[[an[[k]]]] == "", NA_character_, x[[an[[k]]]])]
 cv <- c("year_in_school", "pid3", "pid_lean", "pid3_withlean", "age", "gender", "race", "r_religious", "r_lgbt",
         "r_hobbies", "r_music", "r_cleanliness", "r_social", "r_values", "r_bedtime",
-        grep("_rank$|_pid$", names(x), value = TRUE))
+        setdiff(grep("_rank$|_pid$", names(x), value = TRUE), "traits_pid"))
 for (v in cv) d[, paste0("cov_", sub("^r_", "own_", v)) := x[[v]]]
+setnames(d, "cov_pid3", "cov_party_id")
+stopifnot(all(d$cov_gender %in% c("Male", "Female", "Other", "", NA)))
+d[, cov_gender := fifelse(cov_gender %in% c("", NA), NA_character_, tolower(cov_gender))]
 stopifnot(d[, .N, .(id, task)][, all(N == 2)], d[, sum(choice), .(id, task)][!is.na(V1), all(V1 == 1)])
 d[, miss := anyNA(.SD), .SDcols = patterns("^attr_"), by = .(id, task)]
 d <- d[miss == FALSE & !(is.na(choice) & is.na(rating))][, miss := NULL]

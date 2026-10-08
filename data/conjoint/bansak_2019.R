@@ -45,9 +45,14 @@
 ##           described above?" Hotels: 1-7 rating of each room (wording not shown).
 ##trial_n_fillers = condition (number of filler attributes shown; checked against the
 ##non-"(not shown)" fillers in every row).
-##Covariates (readme codes): cov_gender (1 male, 2 female), cov_age, cov_educ (1-6),
-##cov_income (1-7), cov_party (1 Rep, 2 Dem, 3 Ind, 4 Other), cov_party_strength (1 strong,
-##2 not very), cov_lean (-1 Dem, 0 neither, 1 Rep).
+##Covariates. Text mappings from the deposit readme.txt (r_ variable list): cov_gender
+##(r_gender 1 = male, 2 = female), cov_age (r_age, years), cov_education (r_educ, readme text:
+##"less than high school", "high school", "some college", "2-year college degree", "4-year
+##college degree", "graduate degree"), cov_party_id (r_party: 1 Republican, 2 Democrat,
+##3 Independent, 4 Other). Kept as codes: cov_income (1-7, readme brackets $0-24,999 ...
+##$200,000+), cov_party_strength (readme says 1 strong / 2 not very strong, but the data hold
+##0/1: stored as in the data), cov_lean (-1 Dem, 0 neither, 1 Rep). No survey weight,
+##attention check or duration in the deposit. No repeated task.
 ##Dropped: r_id (Qualtrics ResponseId; re-keyed to integers in file order), the authors'
 ##recoded concordance variables (cpartyp, cmarriagep, chealthcarep, cagep) and `partisan`.
 ##Spot check: hotels, condition 0, lm(pref ~ view + floor + furniture + internet) clustered
@@ -72,8 +77,12 @@ build <- function(f, core, n_id, tab) {
   d[, trial_n_fillers := as.integer(s$condition)]
   fa <- paste0("attr_", sapply(fill, ren))
   stopifnot(rowSums(d[, ..fa] != NS) == d$trial_n_fillers)
-  d[, `:=`(cov_gender = as.integer(s$r_gender), cov_age = as.integer(s$r_age), cov_educ = as.integer(s$r_educ),
-           cov_income = as.integer(s$r_income), cov_party = as.integer(s$r_party),
+  lab <- function(x, v) { y <- unname(v[x]); stopifnot(!anyNA(y) | is.na(x)); y }
+  ed <- c("1" = "less than high school", "2" = "high school", "3" = "some college", "4" = "2-year college degree",
+          "5" = "4-year college degree", "6" = "graduate degree")
+  d[, `:=`(cov_gender = lab(s$r_gender, c("1" = "male", "2" = "female")), cov_age = as.integer(s$r_age),
+           cov_education = lab(s$r_educ, ed), cov_income = as.integer(s$r_income),
+           cov_party_id = lab(s$r_party, c("1" = "Republican", "2" = "Democrat", "3" = "Independent", "4" = "Other")),
            cov_party_strength = as.integer(s$r_strength), cov_lean = as.integer(s$r_lean))]
   stopifnot(!anyNA(d$choice), !anyNA(d$rating), d[, all(rating %in% 1:7)], !anyDuplicated(d[, .(id, task, profile)]),
             d[, sum(choice), .(id, task)][, all(V1 == 1)])

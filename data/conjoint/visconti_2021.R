@@ -32,9 +32,12 @@
 ##4=none; cov_left_right (a5) 1=left .. 10=right, 88=DK, 99=DA (the article's left <= 4,
 ##centre 5-6, right >= 7, no identification = 88/99); cov_vote_intention (a10) 1=Pinera
 ##2=Sanchez 3=Guillier 4=Goic 5=Enriquez-Ominami 6=other 88=DK 99=DA; cov_voted_2013 (a11)
-##1=yes 2=no 88=DK 99=DA; cov_age (b1, years); cov_education (b2) 1=primary incomplete ..
-##4=secondary complete 5=technical incomplete 6=technical complete 7=college incomplete
-##8=college complete 9=graduate; cov_female (b6 = 2); cov_social_benefits_party (c1) and
+##1=yes 2=no 88=DK 99=DA; cov_age (b1, years); cov_education (b2, answer text as in the
+##supplement's English rendering, Appendix M b2: Primary incomplete, Primary complete,
+##Secondary incomplete, Secondary complete, Technical incomplete, Technical complete, College
+##incomplete, College complete, Graduate studies; DK/DA codes 88/99 do not occur); cov_gender
+##(b6 "Gender [DO NOT ASK]", recorded by the enumerator: (1) Male = male, (2) Female = female,
+##Appendix M); cov_social_benefits_party (c1) and
 ##cov_iron_fist_party (c2) 1=left-wing politicians 2=right-wing politicians (3 occurs, not
 ##in the instrument) 88=DK 99=DA; cov_crime_policy (d2) 1=iron fist 2=rehabilitation (3
 ##occurs, not in the instrument) 88=DK 99=DA; cov_enumerator (1-4).
@@ -58,12 +61,15 @@ stopifnot(nrow(s) == 300, all(k$vignette == 3), k[, .N, idnum][, all(N == 10)],
 k <- k[selected %in% 1:3]
 stopifnot(uniqueN(k$idnum) == 290)
 ids <- sort(unique(as.integer(k$idnum)))
+stopifnot(all(k$b2 %in% 1:9), all(k$b6 %in% 1:2))
+edu <- c("Primary incomplete", "Primary complete", "Secondary incomplete", "Secondary complete", "Technical incomplete",
+         "Technical complete", "College incomplete", "College complete", "Graduate studies")
 k[, id := match(as.integer(idnum), ids)]
 d <- k[, .(id, task = as.integer(pair), profile = as.integer(candidate), choice = as.integer(selected == candidate),
            attr_ideology = ideo, attr_profession = prof, attr_age = agel,
            cov_interest_politics = as.integer(a3), cov_left_right = as.integer(a5), cov_vote_intention = as.integer(a10),
-           cov_voted_2013 = as.integer(a11), cov_age = as.integer(b1), cov_education = as.integer(b2),
-           cov_female = as.integer(b6 == 2), cov_social_benefits_party = as.integer(c1), cov_iron_fist_party = as.integer(c2),
+           cov_voted_2013 = as.integer(a11), cov_age = as.integer(b1), cov_education = edu[b2],
+           cov_gender = c("male", "female")[b6], cov_social_benefits_party = as.integer(c1), cov_iron_fist_party = as.integer(c2),
            cov_crime_policy = as.integer(d2), cov_enumerator = as.integer(enumerator))]
 stopifnot(setequal(d$attr_ideology, c("izquierda", "derecha")), setequal(d$attr_profession, c("jardinero", "profesor", "ingeniero")),
           setequal(d$attr_age, c("30", "40", "50")))

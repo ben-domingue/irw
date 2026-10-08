@@ -22,7 +22,8 @@
 ##the value label); attr_outside_activity = the disclosed outside activity and income, one
 ##displayed line, e.g. "Anwalt, Einkünfte zwischen 1000€ und 3500€" (13 levels: none, or
 ##4 activities x 3 income bands; the authors split it into job and income).
-##Restrictions (observed, not documented): "Keine veröffentlichungspflichtigen
+##Level weights (observed, not documented; every pair of levels occurs, so no combination rule
+##is visible): "Keine veröffentlichungspflichtigen
 ##Nebentätigkeiten und Nebeneinkünfte" is 25% of profiles vs about 6% for each of the 12
 ##other levels; parties are unequal (SPD 32%, CDU/CSU 30%, Greens 19%, FDP 14%, Linke 6%,
 ##the same shares as the authors' 2021 vote-share weights).
@@ -41,9 +42,12 @@
 ##cov_survey_weight = the authors' raking-style weight (target shares for gender, East/West,
 ##age group and party from the 2021 federal election, computed in 1_read_survey_data.do on
 ##the 4,025 passing respondents; recomputed here the same way, NA for the 3 failing).
-##Covariates: cov_age_group 1=18-29 2=30-39 3=40-49 4=50-59 5=60+; cov_gender 1=male
-##2=female; cov_west 1=West Germany 0=East Germany (incl. Berlin); cov_party_preference
-##1=SPD 2=CDU/CSU 3=Greens 4=FDP 5=Die Linke; cov_informed_* 0/1 (has informed themself
+##Covariates: cov_age_group = the band text of the Stata value labels on age_participant ("18-29",
+##"30-39", "40-49", "50-59", ">= 60"; "Wie alt sind Sie?"); cov_gender from gender_participant
+##(value labels 1 "Männlich" -> "male", 2 "Weiblich" -> "female"; "Divers"/"Keine Angabe" do not
+##occur); cov_west 1=West Germany 0=East Germany (incl. Berlin); cov_party_preference
+##1=SPD 2=CDU/CSU 3=Greens 4=FDP 5=Die Linke (vote intention, "Welche Partei würden Sie wählen,
+##wenn am kommenden Sonntag ...", so not party identification; codes kept); cov_informed_* 0/1 (has informed themself
 ##about MPs' outside activities via friends / Bundestag website / media / social media / no
 ##/ no answer).
 ##Dropped: the panel's captured ID (platform identifier), interview time. Respondent ids
@@ -54,17 +58,21 @@ x <- read_dta(file.path(raw, "114945 Uni Köln Vignettenstudie - FD_4000.dta"))
 lab <- function(v) { l <- attr(v, "labels"); r <- names(l)[match(as.numeric(v), l)]; stopifnot(!anyNA(r)); r }
 stopifnot(!anyDuplicated(x$record))
 pass <- with(x, quality_check2r1 == 1 & quality_check2r2 == 0 & quality_check2r3 == 0 & quality_check2r4 == 0 & quality_check2r5 == 1)
-cv <- data.table(id = seq_len(nrow(x)), cov_age_group = as.integer(x$age_participant), cov_gender = as.integer(x$gender_participant),
+stopifnot(identical(names(attr(x$age_participant, "labels"))[1:5], c("18-29", "30-39", "40-49", "50-59", ">= 60")),
+          identical(names(attr(x$gender_participant, "labels"))[1:2], c("Männlich", "Weiblich")))
+cv <- data.table(id = seq_len(nrow(x)), age_code = as.integer(x$age_participant), gender_code = as.integer(x$gender_participant),
                  cov_west = as.integer(x$state_participant == 1), cov_party_preference = as.integer(x$party_preference),
                  cov_attention_pass = as.integer(pass))
 for (k in 1:6) cv[, paste0("cov_informed_", c("friends", "bundestag_site", "media", "social_media", "no", "no_answer")[k]) := as.integer(x[[paste0("info_participantr", k)]])]
-stopifnot(all(cv$cov_age_group %in% 1:5), all(cv$cov_gender %in% 1:2), all(cv$cov_party_preference %in% 1:5))
+stopifnot(all(cv$age_code %in% 1:5), all(cv$gender_code %in% 1:2), all(cv$cov_party_preference %in% 1:5))
 # authors' weight (1_read_survey_data.do), on the passing respondents
 w <- cv[cov_attention_pass == 1]
-w[, tgt := c(0.48, 0.52)[cov_gender] * fifelse(cov_west == 1, 0.80, 0.20) * c(0.13, 0.14, 0.14, 0.20, 0.39)[cov_age_group] *
+w[, tgt := c(0.48, 0.52)[gender_code] * fifelse(cov_west == 1, 0.80, 0.20) * c(0.13, 0.14, 0.14, 0.20, 0.39)[age_code] *
             c(0.32, 0.30, 0.18, 0.14, 0.06)[cov_party_preference]]
-w[, act := .N / nrow(w), by = .(cov_gender, cov_west, cov_age_group, cov_party_preference)]
+w[, act := .N / nrow(w), by = .(gender_code, cov_west, age_code, cov_party_preference)]
 cv[w, on = "id", cov_survey_weight := i.tgt / i.act]
+cv[, `:=`(age_code = c("18-29", "30-39", "40-49", "50-59", ">= 60")[age_code], gender_code = c("male", "female")[gender_code])]
+setnames(cv, c("age_code", "gender_code"), c("cov_age_group", "cov_gender"))
 blk <- c("A", "B", "C")
 d <- rbindlist(lapply(1:3, function(t) {
   r <- function(k) as.integer(x[[sprintf("F5%sMP_conjoint%s%d", blk[t], blk[t], k)]])

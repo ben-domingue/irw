@@ -24,11 +24,13 @@
 ##Randomization: the article says levels were drawn uniformly with no restrictions on
 ##combinations, but names are not uniform: each White-coded name appears ~80-110 times, each
 ##Black- or Latino-coded name ~15-45 times (White 65% of profiles).
-##Covariates (CES codes; 8/98 = skipped, 9/99 = not asked): cov_pid3 1=Democrat 2=Republican
-##3=Independent 4=Other 5=Not sure; cov_race 1=White 2=Black 3=Hispanic 4=Asian 5=Native
+##Covariates (CES codes; 8/98 = skipped, 9/99 = not asked), except two now text from the
+##RData's own value labels: cov_party_id (pid3, "3 point party ID": Democrat, Republican,
+##Independent, Other, Not sure) and cov_gender (gender4, "Gender": Man = male, Woman = female,
+##Non-binary and Other = other; skipped/not asked would be missing, none occur); cov_race 1=White 2=Black 3=Hispanic 4=Asian 5=Native
 ##American 6=Two or more 7=Other 8=Middle Eastern; cov_residency (CC22_361) 1=<1 month 2=2-6
 ##months 3=7-11 months 4=1-2 years 5=3-4 years 6=5+ years; cov_urbancity 1=City 2=Suburb 3=Town
-##4=Rural area 5=Other; cov_gender4 1=Man 2=Woman 3=Non-binary 4=Other; cov_ownhome 1=Own 2=Rent
+##4=Rural area 5=Other; cov_ownhome 1=Own 2=Rent
 ##3=Other; cov_survey_weight = teamweight (blank for 308 respondents).
 ##Dropped: CES caseid (re-keyed to integers in file order).
 ##N: 1,308 = the article. Spot check (authors' formula, lm clustered by respondent, name gender/
@@ -42,14 +44,19 @@ n <- uniqueN(s$caseid); stopifnot(n == 1308, nrow(s) == 5 * n)
 for (k in 1:4) stopifnot(identical(s$caseid[seq_len(n) + k * n], s$caseid[seq_len(n)]))
 s[, `:=`(task = rep(1:5, each = n), id = match(caseid, unique(caseid)))]
 stopifnot(all(s$conjoint_choice %in% 1:2))
-cov <- c(cov_pid3 = "pid3", cov_race = "race", cov_residency = "CC22_361", cov_urbancity = "urbancity",
-         cov_gender4 = "gender4", cov_ownhome = "ownhome")
+cov <- c(cov_race = "race", cov_residency = "CC22_361", cov_urbancity = "urbancity", cov_ownhome = "ownhome")
+stopifnot(all(s$pid3 %in% 1:5), all(s$gender4 %in% 1:4),
+          identical(names(attr(e$d$pid3, "labels"))[1:5], c("Democrat", "Republican", "Independent", "Other", "Not sure")),
+          identical(names(attr(e$d$gender4, "labels"))[1:4], c("Man", "Woman", "Non-binary", "Other")))
+pid <- c("Democrat", "Republican", "Independent", "Other", "Not sure")[s$pid3]
+gen <- c("male", "female", "other", "other")[s$gender4]
 one <- function(p, k) {
   x <- s[, .(id = as.integer(id), task = as.integer(task), profile = k, choice = as.integer(conjoint_choice == k),
              attr_name = get(paste0(p, "_Name")), attr_age = as.character(get(paste0(p, "_Age"))),
              attr_career = get(paste0(p, "_CareerHistory")), attr_community_ties = get(paste0(p, "_CommunityTies")),
              attr_political = get(paste0(p, "_Political")), attr_endorsement = get(paste0(p, "_Endorsements")),
              attr_family = get(paste0(p, "_Family")))]
+  x[, `:=`(cov_party_id = pid, cov_gender = gen)]
   for (c in names(cov)) x[, (c) := as.integer(s[[cov[[c]]]])]
   x[, cov_survey_weight := s$teamweight]
 }

@@ -32,8 +32,12 @@
 ##for each other level, and attributes are associated (election restored co-occurs with "easily
 ##visit a clinic" in 2,113 profiles vs 1,668 with "only in emergency"; with Pfizer/Moderna in
 ##1,670 vs about 1,055 for each other vaccine level), as in a pre-generated (e.g. efficient)
-##choice design (restrictions = observed). Estimate effects with all attributes in the model.
-##No covariates in this file. The source ID (9-digit, possibly a panel ID) is re-keyed to 1..756.
+##choice design. Every pair of levels does occur, so no combination is ruled out (restrictions
+##= unknown; the association is in the restrictions note); the unequal vaccine shares make
+##level_weights = observed. Estimate effects with all attributes in the model.
+##Attribute order and the display format are not documented. No task is repeated (checked).
+##No covariates in this file and no survey weight in the deposit (Vignette.dta, a separate
+##experiment, has female / age group / education; not linked here). The source ID (9-digit, possibly a panel ID) is re-keyed to 1..756.
 ##Spot check: lm(choice ~ attributes) as in the .do's Table 5 column 1 gives an election-restored
 ##effect of +.59; the paper's table was not reachable (abstract: democracy preferred "by a wide
 ##margin").
