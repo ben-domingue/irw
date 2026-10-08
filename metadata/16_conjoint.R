@@ -111,6 +111,8 @@ no_xw <- unlist(lapply(names(gender_attrs), function(t) {
 if (length(no_xw)) message("  ! gender attribute with no crosswalk rows (data/conjoint/crosswalk.csv): ",
                            paste(no_xw, collapse = ", "))
 
-write.csv(out, "conj_metadata.csv", quote = TRUE, row.names = FALSE)
-write.csv(outcomes, "conj_outcomes.csv", quote = TRUE, row.names = FALSE)
+##na = "": a literal "NA" makes Redivis type the whole column as text
+##(n_optout_tasks, NA for rating-only tables, arrived as a string in v37.1).
+write.csv(out, "conj_metadata.csv", quote = TRUE, row.names = FALSE, na = "")
+write.csv(outcomes, "conj_outcomes.csv", quote = TRUE, row.names = FALSE, na = "")
 message("conj_metadata.csv: ", nrow(out), " tables; conj_outcomes.csv: ", nrow(outcomes), " outcomes")
