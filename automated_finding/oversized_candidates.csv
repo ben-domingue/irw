@@ -1,2 +1,4 @@
 date_added,source,title,url,doi,license,data_file,reasons
 2026-08-29,zenodo,Homophily in Voting Behavior,https://zenodo.org/records/7070556,10.5281/zenodo.7070556,cc-by,replication_data_20220910.RData,"replication_data_20220910.RData: 79,699,579 bytes exceeds the 26,214,400-byte ceiling for this format, which expands 10-40x in memory; not downloaded"
+2026-10-07,dataverse,Replication Data for: Does the presence of foreign troops affect stability in the host country?,https://doi.org/10.7910/DVN/A1MXIX,10.7910/dvn/a1mxix,cc0,Replication Data UPDATED.tab,"tabular file(s) exceed the 209,715,200-byte ceiling, not downloaded: Replication Data UPDATED.tab (369,516,517 bytes)"
+2026-10-07,zenodo,BURNOUT IN SCHIZOPHRENIA CARE,https://zenodo.org/records/13735583,10.5281/zenodo.13735583,cc-by,Dati_ENMO_1min_Hildebrand.rdata,"Dati_ENMO_1min_Hildebrand.rdata: 196,316,069 bytes exceeds the 26,214,400-byte ceiling for this format, which expands 10-40x in memory; not downloaded"

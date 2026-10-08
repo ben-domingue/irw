@@ -3,6 +3,48 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## From the 2026-10-07 repos mode-3 batch (15 new terms x 9 languages)
+
+- [x] **168 tables (1,897,483 responses) + 37 item text tables uploaded** (ben-domingue,
+  confirmed 2026-10-07; response tables to `item_response_warehouse_5`; item text
+  `uploaded=2026-10-07` stamped).
+- [ ] **Issues-page entries owed in datapages/irw once live** (IRW-written English;
+  drafted in each `public_note`):
+  - gwen_2025 x4, tangarife_2026 x7, fernandez_prados_2025 x6,
+    prihandoko_2025_ews, dassean_2025_bsmas, leon_rubio_2025_cdpe x5.
+  - useche_2022 x2: most respondents read undeposited translations.
+  - `check_provenance.R` does not read `automated_finding/itemtext_provenance.csv`,
+    so it will not flag these.
+- [ ] **Covariate-label harvest owed** after the data PR is committed:
+  dassean_2025_bsmas, ali_2026_gses, fernandez_prados_2025_ai_attitudes,
+  blaszyk_2023_ptps, kolanska_stronka_2026_climate_anxiety,
+  kermen_2019_attentional_control, mclean_2022_perfectionism,
+  islam_2021_covid_mental_health (`harvest.py --commit HEAD <stem>`, then `build.py`
+  once the tables are live).
+- [ ] **Rulings wanted (none blocks upload):**
+  - PII calls that could be overruled:
+    - Malay home-address column (zenodo 21318421/21126480)
+    - name initials (3hvsgx2sbv)
+    - self-generated initials + digits + month ids (DVN/WI6EWW)
+  - galindo_2026: adolescents' free-text emotional disclosures were dropped and
+    the deposit was not treated as PII. Confirm.
+  - rexand_galais_2022_ipo: Study 1 sample 2 has odd distributions (bimodal; RT items
+    pile at 1). It ships pooled.
+  - crysdale_2020_big5 has 61 items where BFI-2 has 60; the extra one is unidentified.
+  - hlado_2025 is named after the dataset contact (the record author is anonymised).
+  - kasparek_2025_audit item text is held under the AUDIT rights question.
+  - Tags: the skill says blank `Construct type` and the Sample FRAME facet before
+    staging (both under the 90% bar on 2026-09-03). Recent batches, and these 168
+    rows, fill them. Raised as irw#2892.
+- [ ] **Cheap item text not built:** galindo_2026 (Spanish .sav labels), song_2026
+  (Chinese .sav labels), blaszyk_2023 (Polish .sav labels). All need IRW English.
+- [ ] **101 unworked leads** in `leads/repos_leads_2026-10-07.csv`. Two were worked and
+  stalled on a missing codebook: zenodo 10535997 (floral sector, N=1272) and
+  zenodo 18993680 (teacher AI readiness).
+- [ ] **`dictionary_auto.csv` rows 1441-1443** (`fullscaleiq_*_options`, already on main)
+  have 18 fields against a 16-column header; `pandas.read_csv` fails on the file.
+  `stage_dict_row.py --force` appends instead of replacing.
+
 ## From the 2026-10-05/06 repos mode-3 batch (15 new terms x 9 languages)
 
 - [x] **31 tables (122,477 responses) uploaded** (ben-domingue, confirmed 2026-10-06; no item text in this batch).
@@ -31,8 +73,7 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   - WM7IXF (authoritarian personality national surveys, 1,080 x 56)
   - Yoruba Oswestry (plos.figshare 11554833, 136 x 17)
   - DVN/U6YTI5 (good by triage)
-- [ ] **SURF (dataverse.nl) timed out on all 135 queries** in this run, so it was
-  never searched. Worth a check before the next repos run.
+- [x] SURF timeout: reachable again 2026-10-07 (240 hits that run).
 - **Two licence-blocked rows added** (Borealis 10.7939/DVN/10732 and 10302). Email
   for permission if wanted.
 

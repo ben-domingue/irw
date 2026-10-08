@@ -17575,3 +17575,176 @@ Nothing uploaded, nothing committed.
 ben-domingue confirmed the 31 tables (122,477 responses) are uploaded. No item text was in this
 batch, so there is nothing to stamp in `itemtext_provenance.csv`. The khan_2018 covariate labels
 are built after the release (see TODO). `tang_2026_rmet_c` stays held.
+
+## 2026-10-07 — Repos mode-3 batch: 15 new terms x 9 languages, 1,708 candidates, 40 deposits / 168 tables / 1,897,483 responses
+
+Coordinator plus two processing agents (A and B, 27 and 26 deposits) and two tagging agents.
+Heavy processes ran under `systemd-run --user --scope -p MemoryMax=6G -p MemorySwapMax=0`.
+
+**Terms (new to `search_terms_log.csv`, each in English + es/de/fr/zh/ja/ar/nl/ko,
+135 queries):** hospital anxiety and depression scale, general self-efficacy scale,
+brief resilience scale, bergen social media addiction scale, mindful attention
+awareness scale, childhood trauma questionnaire, posttraumatic growth inventory,
+foreign language classroom anxiety scale, burnout assessment tool, kidscreen, unified
+theory of acceptance and use of technology, social responsiveness scale, mental
+toughness questionnaire, artificial intelligence anxiety scale, algebra test.
+
+- **Discovery:** 1,708 candidates (zenodo 530, dataverse 484, figshare 247, **surf 240**
+  (reachable again after timing out on all of the 2026-10-05 queries), scholars_portal 111,
+  datacite 51, mendeley 38, dryad 5, osf 2). Two datacite queries 500'd.
+- **Triage** (`--retriage`; `--limit 10 --ignore-seen-keys` sanity check first): 1,119
+  triaged: `no_usable_file` 490, `human_assistance` 339, `download_failed` 94,
+  `not_item_response` 63, `below_min_n` 48, `error` 26, `pii_suspected` 25, **`good` 22**,
+  `license_restricted` 10, `file_too_large` 2. About 45 min of wall clock.
+  **Two OOM kills at the 6G cap**, both large census/social-survey files:
+  `10.7910/dvn/crpaa8` (ACS housing tables) and `10.5683/sp3/uxz4it` (Canada GSS 2010
+  cycle 24). Each was dropped from the candidate list and the run resumed. A
+  scratchpad wrapper did this automatically on the second kill. Neither is
+  item-response data at this scale; both are untriaged and not in the seen ledger.
+- **Step 2b ran** (chained): 339 HA -> recoverable_format 170, not_item_response 66,
+  worth_retrying 47, human_review 37, aggregate_continuous 19.
+  `[human_review] archived 37 row(s) -> human_review/human_review_dataverse_2026-10-07.csv`.
+- **Leads -> `leads/repos_leads_2026-10-07.csv`** (174 rows: the 22 good, plus every
+  licence-ok worth_retrying/recoverable_format row with 100 <= N <= 50,000 and 8-700 items).
+  By deposit: **44 shipped**, 101 unworked, 21 rejected on content, 6 PII skips, 2
+  blocked on licence. The 53 deposits worked were hand-picked for instrument shape;
+  the unworked remainder is mostly political-science replication files, firm panels,
+  and small mixed surveys.
+
+**Shipped (168 tables).** Scripts are in `../data/`. Every table passes `run_qc` (no
+fail) and `irw-validate --profile upload`. 37 have item text.
+
+| deposit | script | tables | item text |
+|---|---|---|---|
+| s9g2zmc2zn KIDSCREEN-52 MX | galan_cuevas_2021_kidscreen52.py | 1 (2257 x 52) | blocked (rights) |
+| figshare 19396173-82 BAT | hadzibajramovic_2022_bat23.py | 1 (2978 x 23) | blocked (rights) |
+| tv6w6yyfy8 IPO | rexand_galais_2022_ipo.py | ipo, ipofr | ipofr (codebook PDF, FR + authors' EN) |
+| upresearchdata 23634318 | iilonga_2023_algebra_word_problems.py | 1 (351 x 24, rubric 0-4) | not deposited |
+| figshare 34032243 | adebiyi_2026_representational_fluency.py | 1 (285 x 4, 0-1) | instrument PDF |
+| figshare 28375283 BSMAS | dassean_2025_bsmas.py | bsmas, dass21 | bsmas (Arabic docx, IRW EN) |
+| zenodo 22829237 | belyakova_2026_mindfulness_meaning.py | bfi2s, pil, maas | no |
+| zenodo 16890070 | harlianto_2025_cyberloafing.py | 3 | no |
+| zenodo 17982683 | gwen_2025_social_support.py | 4 | headers, IRW EN |
+| figshare 33106967 | tangarife_2026_genai_adoption.py | 7 | Diccionario sheet, IRW EN |
+| zenodo 15671603 | syamsuar_2025_antivirus_pmt_utaut.py | 12 | no |
+| f86brhwxpj (+ brs8d6dvzd) | ali_2026_gses.py | 1 | no |
+| zenodo 18056003 | prihandoko_2025_ews.py | 1 | headers, IRW EN |
+| 2gwnjx729x | fernandez_prados_2025_ai_attitudes.py | 6 | .sav labels + docx, IRW EN |
+| x2rxtpzg4v PTPS | blaszyk_2023_ptps.py | 8 | held (Polish; EN would be IRW's) |
+| figshare 31331989 | kolanska_stronka_2026_climate_anxiety.py | 3 | no |
+| figshare 32104447 | takacs_2026_aces.py | 5 | 4 (codebook EN); cdrisc blocked |
+| figshare 33296244 | pinho_2026_genai_he_students.py | 11 | no |
+| surf y3h5gx | sijbrandij_2018_qol_indonesia.py | whoqol_bref, eq5d5l | blocked (rights) |
+| DVN/EP6QLN CBQ 19 countries | useche_2022_cbq.py | cbq, rprs | questionnaire + codebook (PARTIAL verify) |
+| zenodo 1015002 | tavolacci_2017_student_burnout.py | 4 | no (headers only) |
+| zenodo 17899509 CDPE | leon_rubio_2025_cdpe.py | 5 | Spanish PDF, IRW EN (4 PARTIAL, coping NO_ROUTE) |
+| DVN/4FNIYH | bak_sosnowska_2025_dass21.py | 1 | no |
+| DVN/GTJZQA | trusz_2025_ai_tpack.py | 3 | no |
+| dryad p5hqbzkrk | ackeret_2022_coach_burnout.py | 3 (3 waves) | no |
+| dryad vhhmgqnpv | kermen_2019_attentional_control.py | 4 | no |
+| dryad 6g7j6 TRACK | dishman_2017_track.py | 6 (3 waves) | no (labels cut at 40 chars) |
+| DVN/GNIOTF | moore_2023_benefit_finding.py | 3 (5 waves) | no |
+| DVN/WABYKR | hlado_2025_teacher_work_ability.py | 8 (2 waves) | no |
+| DVN/CCMJTJ | kasparek_2025_violence_psychopathology.py | 6 | 5 (DataDescriptions.xlsx); audit held |
+| DVN/UTBOEQ | mclean_2022_perfectionism.py | 7 | no |
+| DVN/ZA15RI | galindo_2026_ai_uses.py | 9 | no (cheap: Spanish .sav labels) |
+| DVN/SUKK1K | xu_2018_teacher_burnout.py | 4 | no |
+| 6szgbkpzn8 | islam_2021_covid_mental_health.py | 5 | no |
+| msxv59kwcx | matuz_2024_covid_distress.py | 7 | no |
+| fpsyt.2024.1414105 | chen_2024_childhood_trauma_psychache.py | 5 | no |
+| fpsyg.2022.1005176 | zeng_2022_ptg_academic_burnout.py | 3 | no |
+| fpsyg.2024.1422207 | gao_2024_athlete_burnout.py | 4 | no |
+| sp2/s9d7rw | crysdale_2020_persuasion.py | big5, storyboards | no |
+| DVN/P5G6RW | song_2026_family_quality_of_life.py | 3 | no (cheap: Chinese .sav labels) |
+
+### Coding decisions
+
+- **Stored reversed, kept as stored:** KIDSCREEN negatives, pinho `_R`, kermen ACS "y",
+  mclean OOP/PSP3/NDPI6/NDCI9/LSE, xu exhaustion_10_rev. leon_rubio's codebook says the
+  inverse items are "already inverted", but they correlate negatively with their
+  siblings, so they ship as worded.
+- **Shifted scales shipped as stored:** chen_2024_cesd 1-4, gao_2024 GAD/PHQ 1-4,
+  kasparek audit_1 0/1/2/3/5 (per codebook). blaszyk GTS/OLBI/COPSOQ are stored low =
+  agree (data note).
+- **Collapsed:** the four BAT figshare files are one table. Files 5 and 6 are 800-person
+  subsets of file 7, and file 8 is its BAT12 columns. brs8d6dvzd is the GSES sample's
+  totals. rexand Study 1's two samples are pooled with `cov_study`.
+- **Imputation dropped:** fractional cells in blaszyk (508), sijbrandij (2), tavolacci,
+  matuz (13) and kermen. SMEAN copies (kermen) and WHO-5 `.y` copies (moore) were skipped.
+- **Duplicates dropped:** 4 depositor-flagged (belyakova), 12 double entries (xu), 2
+  (galindo). useche's 229 repeated rows are kept, because the paper says duplicate MAC
+  addresses were already removed.
+- **Inferred constructs (data notes):** gwen (from statement content), syamsuar (PMT/UTAUT
+  abbreviations), kolanska (sum columns), gao (located by the file's own scores).
+- **matuz_2024:** its three surveys sampled different people, so the survey wave is
+  `cov_survey_wave`, not `wave`.
+- **hlado_2025:** the record's author is anonymised ("A, A"), so the tables are named
+  after the dataset contact.
+- **kasparek_2025:** the Prolific ID was replaced by the row index (2026-09-20 ruling).
+
+### Skips and rejections
+
+- **PII (6):**
+  - zenodo 21318421 + 21126480 (Malay ATPS/MAKS): home addresses.
+  - 9swc639brb: IPv4 addresses.
+  - 3hvsgx2sbv: name initials.
+  - DVN/XOPDQ5 (Duraj & Trusz math anxiety): id is initials + day/month of birth, for
+    13-14-year-olds.
+  - DVN/WI6EWW: self-generated initials + digits + month ids, plus EM-imputed fractions.
+- **Content (21 deposits),** notable ones:
+  - 5jpctb5dr5: HADS "item scores" derived from totals; items differ by at most 1 in all
+    400 administrations.
+  - The Carrard medical-school deposits (15149289, 8405764, 15281864), zenodo 4304273,
+    DVN/UJ1HDR and 45425mzxjs: scores only.
+  - zenodo 11491023: constructs can't be identified.
+  - surf svnjgu: indices only.
+  - CoCAST synthetic responses, plus firm/country panels.
+- **Licence (2, no new rows):** DVN/FH74D9 (not to be distributed outside Harvard
+  Dataverse) and DVN/XHRC8Y (limited information).
+- **Worked, not shipped:** zenodo 10535997 (floral sector, N=1272: no codebook, 15
+  unnamed code blocks) and zenodo 18993680 (teacher AI readiness: multi-construct item
+  tags).
+
+### Item text: 37 tables
+
+All 37 pass `normalize_nulls.R`, `validate_items.R --resp-csv`, `irw-validate`, and
+`audit_batch.R` (37 PASS, no anomalies). The `itemtext_output/` folder is clean.
+`mapping_verification.csv` rows:
+- 31 NOT_NEEDED (data_labels).
+- useche ×2 and leon_rubio ×4 PARTIAL, with `verify_*.R` in `itemtext_verification/`.
+- leon_rubio coping NO_ROUTE.
+
+The rights_register WARN on CDPE160 vs PSS is a false positive: "Me noto nervioso/a y a
+punto de 'explotar' constantemente" is CDPE's own item. Per-table "where the text is"
+is in each script header and in its `itemtext_provenance.csv` row.
+
+**Staged:**
+- 168 rows each in `dictionary_auto.csv` and `codebook_at_ingest.csv`
+- 168 `tags/tags_auto.csv` rows (`test_tags_union.R` passes)
+- 168 `itemtext_provenance.csv` rows
+- 37 `mapping_verification.csv` rows
+- 38 `metadata/data_notes.csv` rows
+- 135 `search_terms_log.csv` rows
+
+**Housekeeping:** the 31 already-uploaded 2026-10-06 tables were still in `irw_output/`.
+They were moved to `runs/uploaded_2026-10-06/` so they cannot be re-uploaded (uploads
+append).
+
+**Found along the way:**
+- `dictionary_auto.csv` rows 1441-1443 (`fullscaleiq_{vocab,mentalrotation,memory}_options`,
+  already on main) have 18 fields against the 16-column header.
+- `stage_dict_row.py --force` appends a second copy instead of replacing. Agent A removed
+  the six identical duplicates it produced.
+
+**Covariate-label harvest NOT run** (it needs a commit). It is owed for `dassean_2025_bsmas`,
+`ali_2026_gses`, `fernandez_prados_2025_ai_attitudes`, `blaszyk_2023_ptps`,
+`kolanska_stronka_2026_climate_anxiety`, `kermen_2019_attentional_control`,
+`mclean_2022_perfectionism` and `islam_2021_covid_mental_health`.
+Nothing uploaded, nothing committed.
+
+## 2026-10-07b — repos mode-3 batch: item text stamped uploaded
+
+ben-domingue confirmed the 37 item text tables uploaded. `uploaded=2026-10-07` is stamped
+on those 37 rows in `itemtext_provenance.csv` and `itemtext/mapping_verification.csv`.
+`red_up` now defaults new response data to `item_response_warehouse_5` (`CORE_DEFAULT` in
+`red_up/targets.py`), because shard 6 is near the 1,000-table cap.
