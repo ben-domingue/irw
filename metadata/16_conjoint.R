@@ -52,60 +52,104 @@ query1 <- function(sql) {
   stop("query failed four times: ", sql)
 }
 
-one <- function(tab) {
-  ref <- tab$qualified_reference
+design_obs <- list()     ##table -> observed level shares / empty pairs
+gender_attrs <- list()   ##table -> its gender attribute(s), for the crosswalk check
+
+##Tables are queried in batches: one query per batch for each of three things
+##(counts, level shares, level pairs), each a UNION ALL over the batch. One
+##query per table and kind took about 2.5 minutes a table, almost all of it
+##Redivis job overhead -- over nine hours for 216 tables, against the weekly
+##job's 120-minute limit.
+BATCH <- 20
+##A UNION ALL of many hundred sub-selects fails on Redivis with no message (the
+##level-pair checks of one batch did), so each query carries at most this many.
+MAX_PARTS <- 50
+union_query <- function(parts)
+  do.call(rbind, lapply(split(parts, ceiling(seq_along(parts) / MAX_PARTS)),
+                        function(p) as.data.frame(query1(paste(p, collapse = " UNION ALL ")))))
+q <- function(a) sprintf("`%s`", a)
+lit <- function(x) sprintf("'%s'", gsub("'", "\\\\'", x))
+
+info <- lapply(tabs, function(tab) {
   cols <- sapply(tab$list_variables(), function(v) v$name)
-  g <- grep("^attr_(.*_)?(gender|sex)$", cols, value = TRUE)
-  if (length(g)) gender_attrs[[tab$name]] <<- g
-  outcomes <- grep("^(choice|rating)(_.+)?$", cols, value = TRUE)
-  s <- query1(sprintf(paste("SELECT COUNT(*) AS n_rows, COUNT(DISTINCT id) AS n_respondents,",
-                            "MAX(task) AS n_tasks, MAX(profile) AS n_profiles FROM `%s`"), ref))
-  optout <- NA
-  if ("choice" %in% cols) {
-    o <- query1(sprintf(paste("SELECT COUNTIF(s = 0) AS n FROM (SELECT SUM(choice) AS s FROM `%s`",
-                              "WHERE choice IS NOT NULL GROUP BY id, task)"), ref))
-    optout <- as.numeric(o$n[1])
-  }
-  attrs <- grep("^attr_", cols, value = TRUE)
-  if (length(attrs) >= 2) design_obs[[tab$name]] <<- observe_design(ref, attrs, as.numeric(s$n_rows[1]))
-  data.frame(table = tab$name,
-             n_respondents = as.numeric(s$n_respondents[1]), n_rows = as.numeric(s$n_rows[1]),
-             n_tasks = as.numeric(s$n_tasks[1]), n_profiles = as.numeric(s$n_profiles[1]),
-             n_attributes = sum(startsWith(cols, "attr_")),
-             outcomes = paste(outcomes, collapse = ";"),
-             n_optout_tasks = optout)
+  list(name = tab$name, ref = tab$qualified_reference, cols = cols,
+       attrs = grep("^attr_", cols, value = TRUE),
+       outcomes = grep("^(choice|rating)(_.+)?$", cols, value = TRUE))
+})
+names(info) <- sapply(info, `[[`, "name")
+for (t in info) {
+  g <- grep("^attr_(.*_)?(gender|sex)$", t$cols, value = TRUE)
+  if (length(g)) gender_attrs[[t$name]] <- g
+}
+batches <- split(names(info), ceiling(seq_along(info) / BATCH))
+
+##Counts, and opt-out tasks: choice tasks where no profile was chosen (0 for a
+##forced choice, NA without a `choice` column).
+counts_sql <- function(t) {
+  optout <- if ("choice" %in% t$cols)
+    sprintf("(SELECT COUNTIF(s = 0) FROM (SELECT SUM(choice) AS s FROM `%s` WHERE choice IS NOT NULL GROUP BY id, task))", t$ref)
+  else "CAST(NULL AS INT64)"
+  sprintf(paste("SELECT %s AS tbl, COUNT(*) AS n_rows, COUNT(DISTINCT id) AS n_respondents,",
+                "CAST(MAX(task) AS FLOAT64) AS n_tasks, CAST(MAX(profile) AS FLOAT64) AS n_profiles,",
+                "%s AS n_optout_tasks FROM `%s`"), lit(t$name), optout, t$ref)
 }
 
-##Level shares and never-seen level pairs, in one query per table, leaving out
-##'(not shown)', which is the design hiding an attribute, not a level. A pair is
-##tested only when both attributes have at most 20 levels and every combination
-##would be expected at least 20 times under independent uniform draws, so that a
-##missing pair is unlikely to be chance.
-observe_design <- function(ref, attrs, n_rows) {
-  q <- function(a) sprintf("`%s`", a)
-  shares <- paste(sprintf("SELECT '%s' AS a, CAST(%s AS STRING) AS la, COUNT(*) AS n FROM `%s` WHERE CAST(%s AS STRING) != '(not shown)' GROUP BY 2",
-                          attrs, q(attrs), ref, q(attrs)), collapse = " UNION ALL ")
-  lv <- query1(paste0("SELECT a, la, n FROM (", shares, ")"))
-  nlev <- tapply(lv$la, lv$a, length)
-  ratio <- max(tapply(as.numeric(lv$n), lv$a, function(x) max(x) / min(x)))
-  pairs <- t(combn(attrs, 2))
-  keep <- apply(pairs, 1, function(p) nlev[p[1]] <= 20 && nlev[p[2]] <= 20 &&
-                  n_rows / (nlev[p[1]] * nlev[p[2]]) >= 20)
-  empty <- 0
-  if (any(keep)) {
-    pp <- pairs[keep, , drop = FALSE]
-    sql <- paste(sprintf("SELECT '%s|%s' AS p, COUNT(*) AS k FROM (SELECT DISTINCT %s, %s FROM `%s` WHERE CAST(%s AS STRING) != '(not shown)' AND CAST(%s AS STRING) != '(not shown)')",
-                         pp[, 1], pp[, 2], q(pp[, 1]), q(pp[, 2]), ref, q(pp[, 1]), q(pp[, 2])), collapse = " UNION ALL ")
-    seen <- query1(sql)
-    want <- setNames(nlev[pp[, 1]] * nlev[pp[, 2]], paste(pp[, 1], pp[, 2], sep = "|"))
-    empty <- sum(as.numeric(seen$k) < want[seen$p])
-  }
-  list(empty_pairs = empty, max_level_ratio = ratio, n_rows = n_rows)
-}
+##Level shares, leaving out '(not shown)', which is the design hiding an
+##attribute, not a level.
+shares_sql <- function(t)
+  sprintf("SELECT %s AS tbl, %s AS a, CAST(%s AS STRING) AS la, COUNT(*) AS n FROM `%s` WHERE CAST(%s AS STRING) != '(not shown)' GROUP BY 3",
+          lit(t$name), lit(t$attrs), q(t$attrs), t$ref, q(t$attrs))
 
-design_obs <- list()     ##filled by one(): table -> observed level shares / empty pairs
-gender_attrs <- list()   ##filled by one(): table -> its gender attribute(s), for the crosswalk check
-out <- do.call(rbind, lapply(tabs, function(t) { message(t$name); one(t) }))
+##Never-seen level pairs. A pair is tested only when both attributes have at
+##most 20 levels and every combination would be expected at least 20 times
+##under independent uniform draws, so that a missing pair is unlikely to be
+##chance.
+test_pairs <- function(t, nlev, n_rows) {
+  pairs <- t(combn(t$attrs, 2))
+  keep <- apply(pairs, 1, function(p) isTRUE(nlev[p[1]] <= 20 && nlev[p[2]] <= 20 &&
+                                               n_rows / (nlev[p[1]] * nlev[p[2]]) >= 20))
+  pairs[keep, , drop = FALSE]
+}
+pairs_sql <- function(t, pp)
+  sprintf("SELECT %s AS tbl, '%s|%s' AS p, COUNT(*) AS k FROM (SELECT DISTINCT %s, %s FROM `%s` WHERE CAST(%s AS STRING) != '(not shown)' AND CAST(%s AS STRING) != '(not shown)')",
+          lit(t$name), pp[, 1], pp[, 2], q(pp[, 1]), q(pp[, 2]), t$ref, q(pp[, 1]), q(pp[, 2]))
+
+rows <- list()
+for (b in batches) {
+  message("tables ", match(b[1], names(info)), "-", match(b[length(b)], names(info)), " of ", length(info))
+  cnt <- union_query(sapply(info[b], counts_sql))
+  with_attrs <- Filter(function(t) length(t$attrs) >= 2, info[b])
+  lv <- if (length(with_attrs))
+    union_query(unlist(lapply(with_attrs, shares_sql)))
+  pair_sql <- character(0); want <- c()
+  for (t in with_attrs) {
+    l <- lv[lv$tbl == t$name, ]
+    nlev <- tapply(l$la, l$a, length)
+    n_rows <- as.numeric(cnt$n_rows[cnt$tbl == t$name])
+    design_obs[[t$name]] <- list(empty_pairs = 0, n_rows = n_rows,
+                                 max_level_ratio = max(tapply(as.numeric(l$n), l$a, function(x) max(x) / min(x))))
+    pp <- test_pairs(t, nlev, n_rows)
+    if (nrow(pp)) {
+      pair_sql <- c(pair_sql, pairs_sql(t, pp))
+      want <- c(want, setNames(nlev[pp[, 1]] * nlev[pp[, 2]], paste(t$name, pp[, 1], pp[, 2], sep = "|")))
+    }
+  }
+  if (length(pair_sql)) {
+    seen <- union_query(pair_sql)
+    short <- as.numeric(seen$k) < want[paste(seen$tbl, seen$p, sep = "|")]
+    for (t in unique(seen$tbl[short])) design_obs[[t]]$empty_pairs <- sum(short & seen$tbl == t)
+  }
+  for (n in b) {
+    t <- info[[n]]; r <- cnt[cnt$tbl == n, ]
+    rows[[n]] <- data.frame(table = n,
+                            n_respondents = as.numeric(r$n_respondents), n_rows = as.numeric(r$n_rows),
+                            n_tasks = as.numeric(r$n_tasks), n_profiles = as.numeric(r$n_profiles),
+                            n_attributes = length(t$attrs),
+                            outcomes = paste(t$outcomes, collapse = ";"),
+                            n_optout_tasks = as.numeric(r$n_optout_tasks))
+  }
+}
+out <- do.call(rbind, rows)
 out <- out[order(out$table), ]
 stopifnot(nrow(out) == length(tabs), !anyNA(out$n_respondents))
 ##Fewer than two attributes breaks the conjoint rule (irw_validate.conjoint J4)
