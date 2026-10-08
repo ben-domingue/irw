@@ -17,7 +17,7 @@
 ##column names (traits<task>a/b; the "more Black" item per task).
 ##FOUR FORMS, randomized between respondents and pooled by the authors, so one table:
 ##  trial_ancestry_shown  yes/no: whether the parents' race attribute was in the profile ("race"
-##                        vs "nr" forms); without it attr_parents is blank (not shown).
+##                        vs "nr" forms); without it attr_parents is the text "(not shown)".
 ##  trial_skin_tone_row   top/bottom: the "bst" (bottom skin tone) forms list skin tone after
 ##                        discrimination, just above party; otherwise it is near the top (3rd with
 ##                        ancestry, 2nd without). Order of the traits string as parsed by the
@@ -70,7 +70,7 @@ d <- rbindlist(lapply(1:5, function(t) rbindlist(lapply(1:2, function(p) {
                   choice = as.integer(ans == paste("Person", toupper(L[2 * (t - 1) + 1:2])[p])),
                   rating = as.integer(sub(" = .*", "", s[[paste0("howblack_person", lt)]])),
                   tr = s[[sprintf("traits%d%s", t, c("a", "b")[p])]])
-  for (n in an) x[, paste0("attr_", n) := ""]
+  for (n in an) x[, paste0("attr_", n) := "(not shown)"]
   for (f in names(cols)) { w <- which(x$form == f); parts <- lapply(tstrsplit(x$tr[w], ";", fixed = TRUE), trimws, whitespace = "[\\h\\v]")
     stopifnot(length(parts) == length(cols[[f]]))
     for (k in seq_along(cols[[f]])) set(x, w, paste0("attr_", cols[[f]][k]), parts[[k]]) }
@@ -81,6 +81,7 @@ stopifnot(d[bad == TRUE, .N] == 4)
 d <- d[bad == FALSE][, bad := NULL]
 stopifnot(!anyNA(d$choice), d[, sum(choice), .(id, task)][, all(V1 == 1)], !anyNA(d$rating), d[, all(rating %in% 0:10)],
           d[form %in% c("race", "racebst"), all(attr_parents %in% c("Two Black parents", "One Black parent, one White parent"))],
+          d[form %in% c("nr", "nrbst"), all(attr_parents == "(not shown)")], !d[, any(.SD == "" | is.na(.SD)), .SDcols = paste0("attr_", an)],
           d[, all(attr_gender %in% c("Female", "Male"))], d[, all(attr_skin_tone %in% c("Dark-skinned", "Light-skinned"))])
 d[, trial_ancestry_shown := fifelse(form %in% c("race", "racebst"), "yes", "no")]
 d[, trial_skin_tone_row := fifelse(form %in% c("racebst", "nrbst"), "bottom", "top")][, form := NULL]

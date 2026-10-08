@@ -16,7 +16,8 @@
 ##attributes race, gender, age, political experience, career experience, and party. All levels
 ##"fully randomized so that every possible candidate profile is equally likely"; attribute order
 ##randomized (not recorded). Whether party is shown is randomized per election: in nonpartisan
-##elections the party row is absent, stored as blank attr_party (trial_election = nonpartisan).
+##elections the party row is absent, stored as attr_party "(not shown)" (trial_election =
+##nonpartisan).
 ##Level text = the codebook/factor labels (e.g. "Stay-at-Home Dad/Mom"); the stimuli are only
 ##shown as images in the paper, so capitalisation as displayed is not verified.
 ##Outcomes (paper p. 580):
@@ -44,11 +45,12 @@ build <- function(x, idcol) {
   d <- data.table(rid = x$rid, task = as.integer(x$contest_no), profile = x$profile,
                   choice = as.integer(x$win), rating = as.integer(x$comp))
   for (v in c("Gender", "Age", "Race", "Job", "Political")) d[, paste0("attr_", tolower(v)) := as.character(x[[v]])]
-  d[, attr_party := ifelse(x$Party == "non-partisan", "", as.character(x$Party))]
+  d[, attr_party := ifelse(x$Party == "non-partisan", "(not shown)", as.character(x$Party))]
   d[, trial_election := ifelse(x$Party == "non-partisan", "nonpartisan", "partisan")]
   d[, cov_pid7 := as.integer(x$resp_pid_7)]
   d[, cov_pid3 := x$resp_pid_3_text]
   if ("weight" %in% names(x)) d[, cov_survey_weight := x$weight]
+  stopifnot(!d[, any(.SD == "" | is.na(.SD)), .SDcols = patterns("^attr_")])
   stopifnot(d[, .(s = sum(choice), u = uniqueN(trial_election)), .(rid, task)][, all(s == 1 & u == 1)])
   d[, id := as.integer(factor(rid, levels = unique(rid)))][, rid := NULL]
   setcolorder(d, c("id", "task", "profile"))

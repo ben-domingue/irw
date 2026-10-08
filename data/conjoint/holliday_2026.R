@@ -15,7 +15,7 @@
 ##policies drawn from a pool; both candidates were described on the same 4 policies, and
 ##each position was the affirmative or the negated text, e.g. "Substantially reduce the size
 ##of the U.S. military (federal government)" / "Not substantially reduce ...". The 4 rows
-##are stored as attr_<policy> (blank = policy not in that task); which row each policy took
+##are stored as attr_<policy> ("(not shown)" = policy not in that task); which row each policy took
 ##is in the raw exports only, so no attrpos_. Pool: 10 national policies plus 10 state
 ##policies (state tables) or 9 municipal policies (municipal table). 10 tasks per
 ##respondent: tasks 1-5 "Given this choice, which federal House of Representatives
@@ -29,7 +29,7 @@
 ##  holliday_2026_policy_state_2022: 2022 wave, House vs state assembly, every candidate
 ##    also shown a party label (attr_party: Democrat / Republican) (1,537 respondents).
 ##  holliday_2026_policy_municipal: 2022 wave, House vs city council; party labels shown to
-##    a random half of respondents (trial_show_party 1/0; attr_party blank when not shown)
+##    a random half of respondents (trial_show_party 1/0; attr_party "(not shown)" when not shown)
 ##    (3,027 respondents).
 ##The appendix-10 extra wave (May 2025, a different provider, 8 tasks, assistance
 ##conditions) is a separate, appendix-only experiment and is NOT built here.
@@ -62,11 +62,11 @@ build <- function(x, pol, office, name) {
   for (i in seq_len(nrow(pol))) {
     v <- pol$label[i]; val <- x[[v]]
     stopifnot(all(val %in% c(0, 1, NA)))
-    d[, paste0("attr_", v) := fifelse(val == 1, pol$pos_level[i], fifelse(val == 0, pol$neg_level[i], NA_character_))]
+    d[, paste0("attr_", v) := fifelse(is.na(val), "(not shown)", fifelse(val == 1, pol$pos_level[i], pol$neg_level[i]))]
     n_shown <- n_shown + !is.na(val)
   }
   stopifnot(all(n_shown == 4))
-  if (any(!is.na(x$party_text))) d[, attr_party := x$party_text]
+  if (any(!is.na(x$party_text))) d[, attr_party := fifelse(is.na(x$party_text), "(not shown)", x$party_text)]
   d[, trial_office := fifelse(x$conjoint_id <= 5, "federal House of Representatives", office)]
   if (uniqueN(x$showParty) > 1) d[, trial_show_party := as.integer(x$showParty)]
   d[, `:=`(cov_survey_weight = x$weights, cov_pid3 = as.character(x$pid3), cov_age = as.character(x$age),
@@ -74,7 +74,7 @@ build <- function(x, pol, office, name) {
            cov_education = as.character(x$education), cov_region = as.character(x$region),
            cov_household_income = as.character(x$household_income))]
   for (v in pol$label) d[, paste0("cov_baseline_", v) := as.integer(x[[paste0("policy_", v)]])]
-  stopifnot(d[, uniqueN(cov_survey_weight), id][, all(V1 == 1)])
+  stopifnot(d[, uniqueN(cov_survey_weight), id][, all(V1 == 1)], !anyNA(d[, grep("^attr_", names(d)), with = FALSE]))
   setorder(d, id, task, profile)
   fwrite(d, file.path(out, paste0(name, ".csv")))
   cat(name, nrow(d), uniqueN(d$id), "\n")

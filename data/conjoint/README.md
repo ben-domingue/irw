@@ -24,7 +24,7 @@ One row per respondent × task × profile.
 | `choice` | 1 if this profile was chosen, else 0. With an opt-out, both profiles can be 0. |
 | `rating` | numeric rating of this profile, higher = more favourable |
 | `choice_<name>`, `rating_<name>` | further outcomes asked about the same tasks (e.g. "which would you vote for" and "which would reduce corruption most"); same coding as `choice`/`rating` |
-| `attr_<name>` | the level **as displayed**, as text (never a numeric code); blank = attribute not shown |
+| `attr_<name>` | the level **as displayed**, as text (never a numeric code). An attribute the design left off this profile is the exact text `(not shown)`; never blank (below) |
 | `attrpos_<name>` | row position of the attribute, when attribute order was randomized |
 | `cov_<name>` | respondent covariates; a survey weight is `cov_survey_weight` |
 | `trial_<name>` | other task-level details, such as experiment arm |
@@ -33,6 +33,7 @@ Other rules:
 - One experiment per table: one attribute set, one population, one fielding.
 - Drop derived variables (dummy codings, "co-partisan" flags).
 - Rows with no outcome are omitted.
+- **`(not shown)`** is the one reserved `attr_` value: the design left this attribute off this profile (hidden attributes, arms that show a subset, clauses omitted by design). It is the same string in every table and language, so one equality test finds it across tables. Text respondents actually saw stays as displayed, even when it reads like an absence ("No information", "None"). A blank `attr_` cell would mean only that the level is missing in the source (not saved, unknown); such tasks are dropped or the table is held, so a blank cell is an error (J4).
 
 ## Intake rules
 
@@ -87,7 +88,7 @@ Attribute columns keep the text respondents saw, so the same idea arrives under 
 | `signal` | `explicit` when the attribute states the concept; `name` when it is carried by a gendered first name and the authors' own coding says which names are which; `photo` when it is shown only in a photograph and the authors' own coding of the photo says which |
 | `evidence` | where the mapping comes from |
 
-Every level of a mapped attribute has a row, and each concept maps to at most one attribute per table. A `name` signal carries other things too: Pedersen's names also mark ethnicity (majority versus Turkish), so a gender contrast there is within the names the authors chose. A new concept is added with its allowed values in `metadata/tests/test_conj_design.py` (`CONCEPTS`) and a line here.
+Every displayed level of a mapped attribute has a row (`(not shown)` has none, since nothing was shown), and each concept maps to at most one attribute per table. A `name` signal carries other things too: Pedersen's names also mark ethnicity (majority versus Turkish), so a gender contrast there is within the names the authors chose. A new concept is added with its allowed values in `metadata/tests/test_conj_design.py` (`CONCEPTS`) and a line here.
 
 ## Scripts
 
