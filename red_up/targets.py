@@ -169,6 +169,23 @@ def newest_shard(targets: list[Target]) -> Target:
     return core[-1]
 
 
+#: Where new response data goes by default, overriding "newest shard" while it
+#: is set -- the core-shard twin of ITEMTEXT_DEFAULT below, and safe for the
+#: same reason: it changes only where tables that exist nowhere yet are created.
+#: 2026-10-07: Ben switched new response data to shard 5
+#: (item_response_warehouse_6 near the 1000-table cap; shard 5 at ~290).
+CORE_DEFAULT: str | None = "item_response_warehouse_5"
+
+
+def core_target(targets: list[Target]) -> Target:
+    """The response-data destination: the pinned shard, else the newest."""
+    if CORE_DEFAULT is not None:
+        for shard in targets:
+            if shard.kind == "core" and shard.name == CORE_DEFAULT:
+                return shard
+    return newest_shard(targets)
+
+
 def text_shards(targets: list[Target]) -> list[Target]:
     """Every item-text shard, oldest to newest."""
     return [t for t in targets if t.is_itemtext]
@@ -270,4 +287,4 @@ def guess_target(files: list[Path], targets: list[Target]) -> Target:
         if target is None:
             raise ConfigError("no item-text dataset in redivis_config.R")
         return target
-    return newest_shard(targets)
+    return core_target(targets)
