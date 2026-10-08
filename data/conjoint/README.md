@@ -63,7 +63,7 @@ Other rules:
 
 ## Intake rules
 
-- **Licence.** CC0, CC BY or CC BY-SA, confirmed from the Dataverse API, with no restricted files. For a compilation that re-hosts other studies, the original study's licence governs.
+- **Licence.** CC0, CC BY, CC BY-SA or CC BY-NC (non-commercial is accepted, as elsewhere in IRW; a no-derivatives licence is not), confirmed from the Dataverse API, with no restricted files. The table's licence fields carry the deposit's licence. For a compilation that re-hosts other studies, the original study's licence governs.
 - **At least 100 respondents** per table.
 - **Strip identifying columns:** MTurk, Prolific or panel worker IDs, IP addresses, GPS coordinates, and free-text personal information. Re-key respondent IDs to integers when the source ID is a platform ID.
 - **Labels are required.** Attribute levels must be the text respondents saw. If a deposit ships only numeric codes and no codebook maps them, hold it.
