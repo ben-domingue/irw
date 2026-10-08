@@ -25,6 +25,9 @@ recoverable_format  -- data likely good but file needs re-reading (wrong delimit
 aggregate_continuous -- responses appear continuous/aggregate rather than ordinal
 worth_retrying       -- plausible longitudinal or mapping issue; worth a second download
 human_review         -- genuinely ambiguous; needs eyes on the raw file
+conj                 -- a conjoint experiment: belongs in the `conj` source
+                       (Redivis irw_conjoint), not core. Logged as a `todo`
+                       (or `held: ...`) row in data/conjoint/candidates.csv.
 
 Output
 ------
@@ -33,10 +36,17 @@ human_review/human_review_<source>_<date>.csv
                      -- the human_review rows, copied into the permanent
                         archive that discovery runs read for exclusions.
                         Suppress with --no-archive.
+data/conjoint/candidates.csv
+                     -- conjoint designs, from the human_assistance rows AND
+                        from any other row of the triage (a conjoint often
+                        triages `good` as a bare id/item/resp file). Appended,
+                        never rewritten; a DOI already in the ledger is
+                        skipped. Suppress with --no-archive.
 """
 
 from __future__ import annotations
 
+import os
 import re
 import pandas as pd
 from irw_discover_updated import in_runs_dir, resolve_in_path
@@ -125,6 +135,41 @@ def _raw_semicolon_header(reasons: str) -> str | None:
 
 
 # ---------------------------------------------------------------------------
+# Conjoint designs (#2887)
+# ---------------------------------------------------------------------------
+# Conjoints used to be skipped as "out of scope" or squashed into a core
+# id/item/resp file (the LGBTQ-judges deposit DVN/CDLVDH, batch 19; a PLOS
+# tourism choice experiment). Neither is right now that the `conj` source
+# exists (Redivis irw_conjoint, data/conjoint/README.md): randomized profile
+# attributes are the point of the design, and the core standard cannot hold
+# them (itemcov_* must be constant within an item). So a conjoint is routed,
+# never built as core and never dropped.
+
+CONJ_TITLE = re.compile(
+    r"\bconjoint\b|\bdiscrete[- ]choice\s+experiment|\bchoice[- ]based\s+conjoint",
+    re.IGNORECASE)
+# Column signals: a task index and a profile index together, the conjoint
+# long layout. Either alone is common (a "task" column in a cognitive battery).
+_CONJ_TASK_COL = re.compile(r"^(task|task_?(num|no|number|id|index)|choice_?set|contest)$",
+                            re.IGNORECASE)
+_CONJ_PROFILE_COL = re.compile(r"^(profile|profile_?(num|no|number|id|index)|alternative|alt)$",
+                               re.IGNORECASE)
+
+
+def looks_like_conjoint(title: str, cols) -> str | None:
+    """Return why a candidate looks like a conjoint experiment, or None."""
+    m = CONJ_TITLE.search(str(title or ""))
+    if m:
+        return f"title says '{m.group(0)}'"
+    names = [str(c).strip() for c in (cols or [])]
+    task = [c for c in names if _CONJ_TASK_COL.match(c)]
+    prof = [c for c in names if _CONJ_PROFILE_COL.match(c)]
+    if task and prof:
+        return f"columns {task[0]!r} and {prof[0]!r} (task x profile layout)"
+    return None
+
+
+# ---------------------------------------------------------------------------
 # Classification rules (applied in priority order — first match wins)
 # ---------------------------------------------------------------------------
 
@@ -137,6 +182,16 @@ def classify(row: pd.Series) -> tuple[str, str]:
 
     cols = _cols_from_reasons(reasons)
     cols_lower = [c.lower() for c in cols]
+
+    # ── RULE C: conjoint experiment -> the `conj` source, not core ──────────
+    # First, ahead of the parse rules: whatever is wrong with the read, a
+    # conjoint is built under data/conjoint/'s layout, not re-read for core.
+    why = looks_like_conjoint(title, cols)
+    if why:
+        return ("conj",
+                f"Conjoint experiment ({why}) — route to the `conj` source "
+                "(data/conjoint/README.md): logged in data/conjoint/candidates.csv, "
+                "not built as a core table.")
 
     # ── RULE 0: triage already re-read the file, and it parsed cleanly ───────
     # reread_hint() (irw_triage_updated, #2221) tries the obvious other reads
@@ -311,6 +366,7 @@ def classify(row: pd.Series) -> tuple[str, str]:
 # ---------------------------------------------------------------------------
 
 FLAG_ORDER = [
+    "conj",
     "not_item_response",
     "wrong_file_selected",
     "recoverable_format",
@@ -400,6 +456,148 @@ def archive_human_review(retriage_csv, *, source=None, date=None, stream=None):
     return out
 
 
+CONJ_LEDGER = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                           os.pardir, "data", "conjoint", "candidates.csv")
+CONJ_LEDGER_COLS = ["doi", "title", "licence", "lead", "status", "tables", "notes"]
+
+# Intake rules, data/conjoint/README.md. The licence is screened here only so a
+# clearly-ineligible deposit is logged as held rather than todo; whoever builds
+# a todo row still confirms CC0 / CC BY / CC BY-SA from the Dataverse API.
+_CONJ_OK_LICENCE = re.compile(r"cc0|cc[- ]?zero|public[- ]domain|cc[- ]?by\b|"
+                              r"creative[- ]commons[- ]attribution", re.IGNORECASE)
+_CONJ_BAD_LICENCE = re.compile(r"(\bnc\b|non[- ]?commercial|\bnd\b|no[- ]?deriv|"
+                               r"-nc\b|-nd\b|-nc-|-nd-)", re.IGNORECASE)
+_CONJ_NO_LICENCE = re.compile(r"limited[- ]information|^none\b|no[- ]information",
+                              re.IGNORECASE)
+CONJ_MIN_RESPONDENTS = 100
+CONJ_INTAKE_NOTE = ("intake (data/conjoint/README.md): licence CC0/CC BY/CC BY-SA "
+                    "confirmed from the Dataverse API with no restricted files; "
+                    ">=100 respondents; attribute levels as displayed text, "
+                    "else hold")
+
+
+def conj_ledger_row(row, *, lead: str, why: str = "") -> dict:
+    """One candidates.csv row for a conjoint lead, screened against the intake rules.
+
+    Status is `todo` unless the triage already shows a rule fails: a named
+    licence outside CC0 / CC BY / CC BY-SA, Dataverse's "no information on use"
+    text, or fewer than 100 respondents -> `held: <reason>`. A blank or
+    `unknown` licence stays `todo`: the triage often misses a licence the
+    deposit page states."""
+    from irw_discover_updated import norm_doi
+    doi = norm_doi(str(row.get("doi") or "")) if pd.notna(row.get("doi")) else ""
+    if not doi:
+        doi = str(row.get("url") or "").strip()
+    lic = row.get("license")
+    lic = "" if lic is None or (isinstance(lic, float) and pd.isna(lic)) else str(lic).strip()
+    n = row.get("n_participants")
+    n = None if n is None or pd.isna(n) else int(n)
+
+    held = []
+    if lic and lic.lower() != "unknown":
+        if _CONJ_NO_LICENCE.search(lic):
+            held.append("no licence")
+        elif _CONJ_BAD_LICENCE.search(lic) or not _CONJ_OK_LICENCE.search(lic):
+            held.append(f"licence {lic} is not CC0/CC BY/CC BY-SA")
+    if n is not None and n < CONJ_MIN_RESPONDENTS:
+        held.append(f"fewer than {CONJ_MIN_RESPONDENTS} respondents (triage count {n})")
+
+    notes = []
+    if n is not None:
+        notes.append(f"est. respondents: {n} (triage)")
+    if not lic or lic.lower() == "unknown":
+        notes.append("licence not found by triage")
+    if why:
+        notes.append(f"detected: {why}")
+    url = row.get("url")
+    if url is not None and pd.notna(url) and str(url).strip():
+        notes.append(f"url {str(url).strip()}")
+    notes.append(CONJ_INTAKE_NOTE)
+    return {
+        "doi": doi,
+        "title": str(row.get("title") or "").strip(),
+        "licence": lic or "unknown",
+        "lead": lead,
+        "status": ("held: " + "; ".join(held)) if held else "todo",
+        "tables": "",
+        "notes": "; ".join(notes),
+    }
+
+
+def route_conjoints(rows, *, source=None, date=None, ledger=None, stream=None):
+    """Append conjoint leads to data/conjoint/candidates.csv, the conj ledger.
+
+    `rows` is a DataFrame of triage rows already judged conjoint; an optional
+    `conj_why` column carries the detector's reason. A DOI already in the
+    ledger (any status) is skipped, so re-running a batch adds nothing twice
+    and a human's later edit to a row is never overwritten. Returns the
+    number of rows added."""
+    import csv, sys
+    from datetime import date as _date
+    from irw_discover_updated import norm_doi
+    stream = stream or sys.stderr
+    ledger = ledger or CONJ_LEDGER
+    if rows is None or len(rows) == 0:
+        return 0
+    if source is None:
+        col = rows["source"] if "source" in rows.columns else None
+        source = str(col.mode().iat[0]) if col is not None and not col.mode().empty else "unknown"
+    lead = f"automated_finding {source} {date or _date.today().isoformat()}"
+
+    have = set()
+    if os.path.exists(ledger):
+        with open(ledger, newline="", encoding="utf-8") as f:
+            r = csv.DictReader(f)
+            if list(r.fieldnames or []) != CONJ_LEDGER_COLS:
+                print(f"!! conj routing skipped: {ledger} header is "
+                      f"{r.fieldnames}, expected {CONJ_LEDGER_COLS}",
+                      file=stream, flush=True)
+                return 0
+            have = {norm_doi(x.get("doi") or "") for x in r}
+
+    new = []
+    for _, row in rows.iterrows():
+        rec = conj_ledger_row(row, lead=lead, why=str(row.get("conj_why") or ""))
+        key = norm_doi(rec["doi"])
+        if not key or key in have:
+            continue
+        have.add(key)
+        new.append(rec)
+    if not new:
+        return 0
+
+    exists = os.path.exists(ledger)
+    if exists:                                  # never glue a row onto a last
+        with open(ledger, "rb") as f:           # line that lacks its newline
+            f.seek(0, os.SEEK_END)
+            if f.tell():
+                f.seek(-1, os.SEEK_END)
+                if f.read(1) != b"\n":
+                    with open(ledger, "a", encoding="utf-8") as g:
+                        g.write("\n")
+    else:
+        os.makedirs(os.path.dirname(ledger), exist_ok=True)
+    with open(ledger, "a", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=CONJ_LEDGER_COLS, lineterminator="\n")
+        if not exists:
+            w.writeheader()
+        w.writerows(new)
+    print(f"[conj] routed {len(new)} conjoint lead(s) -> {ledger} "
+          f"({sum(r['status'] == 'todo' for r in new)} todo)", flush=True)
+    return len(new)
+
+
+def find_conjoints(df) -> "pd.DataFrame":
+    """Rows of a whole triage CSV that look like conjoints, with a `conj_why`
+    column. Covers every flag, not just human_assistance: a conjoint's
+    profile rows parse as a clean id/item/resp file often enough (DVN/CDLVDH
+    triaged `good`)."""
+    whys = [looks_like_conjoint(r.get("title"), _cols_from_reasons(str(r.get("reasons") or "")))
+            for _, r in df.iterrows()]
+    out = df.assign(conj_why=whys)
+    return out[out["conj_why"].notna()].drop_duplicates()
+
+
 def chain_step2b(triage_csv, *, run=True, stream=None):
     """Run Step 2b over `triage_csv`'s human_assistance rows, or say it wasn't.
 
@@ -439,6 +637,12 @@ def chain_step2b(triage_csv, *, run=True, stream=None):
         return None
     n_ha = int((df["flag"] == "human_assistance").sum())
     if not n_ha:
+        # main() routes conjoints, but it never runs on a batch with no
+        # human_assistance rows -- and a conjoint can triage `good` (#2887).
+        if run:
+            conj = find_conjoints(df)
+            if not conj.empty:
+                route_conjoints(conj)
         return None
 
     out = os.path.splitext(str(triage_csv))[0] + ".retriage_ha.csv"
@@ -502,6 +706,10 @@ def main():
     # this script through main().
     if not args.no_archive:
         archive_human_review(args.output)
+        # Conjoints go to the conj ledger whatever their triage flag (#2887).
+        conj = find_conjoints(df)
+        if not conj.empty:
+            route_conjoints(conj)
 
     # ── Summary ──────────────────────────────────────────────────────────────
     counts = ha["refined_flag"].value_counts()
@@ -510,6 +718,7 @@ def main():
     print("RETRIAGE SUMMARY")
     print("=" * 60)
     descriptions = {
+        "conj":                "Conjoint experiment — routed to data/conjoint/candidates.csv",
         "not_item_response":   "Clearly not item-response data (drop)",
         "wrong_file_selected": "Right dataset, wrong file — check other files",
         "recoverable_format":  "Wrong delimiter or per-scale split — re-read and re-triage",

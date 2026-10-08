@@ -3076,6 +3076,10 @@ do not treat the CSV's `proposed_name` column as a work list.
   person needs to decide whether to ship a bare id/item/resp file without
   the attribute detail, or treat conjoint designs as out of scope). See
   `BATCH_LOG.md`'s "Batch 19" entry for the full reasoning on all 17 rows.
+  **Superseded 2026-10-07 (#2887):** neither. Conjoints now go to their own
+  source, `irw_conjoint` (`data/conjoint/README.md`), and the pipeline routes
+  them to `data/conjoint/candidates.csv` (README, "Conjoint experiments").
+  DVN/CDLVDH is not in that ledger yet.
 
 - [x] **Pipeline improvement: no file-size guard in `irw_batch_updated.py`
   — fixed 2026-08-02.** Batch 19 hit a Dataverse candidate (`DVN/BRCRS5`)

@@ -135,10 +135,11 @@ python irw_retriage_ha.py --input runs/irw_triage.csv --output runs/irw_retriage
 ```
 
 This reads the 400-char `reasons` strings already in the triage CSV and
-sub-classifies each `human_assistance` row into one of six buckets:
+sub-classifies each `human_assistance` row into one of seven buckets:
 
 | refined_flag | Typical cause | Action |
 |---|---|---|
+| `conj` | A conjoint experiment: "conjoint" or "discrete choice experiment" in the title, or `task` and `profile` columns together. Checked first, ahead of the parse rules | Nothing: already appended to `data/conjoint/candidates.csv` (see "Conjoint experiments" below). Never build it as a core table and never skip it as out of scope |
 | `not_item_response` | HTML-markup scraped tables, data dictionaries, implausible participant counts | Drop |
 | `aggregate_continuous` | >50 unique resp values after melt; extreme dup_id_item ratio | Drop *if* it's a composite/subscale score smuggled in as an item — but a genuinely continuous per-item response (e.g. a 0–100 slider) is valid IRW data and should not be dropped just for tripping this heuristic; check which case it is before deciding |
 | `wrong_file_selected` | Codebook file downloaded instead of data matrix (common with SAPA-Project) | Re-resolve landing page manually |
@@ -690,6 +691,49 @@ columns and prints a summary with actionable follow-up lists.
 ```
 Run this after any full batch triage to reduce the manual review burden before
 deciding which `human_assistance` cases to escalate.
+Unless `--no-archive`, it also writes the `human_review` rows to
+`human_review/` and appends every conjoint in the triage CSV, whatever its
+`flag`, to `data/conjoint/candidates.csv`.
+
+### Conjoint experiments (#2887)
+
+A conjoint (profiles with randomly assigned attributes that respondents choose
+between or rate) belongs in the `conj` source, Redivis `irw_conjoint`, not in
+core: `datastandard.md` ("Conjoint experiments go to their own tranche") and
+`data/conjoint/README.md`. Until 2026-10-07 this pipeline skipped them as "out
+of scope" or reduced them to a bare `id`/`item`/`resp` file (DVN/CDLVDH, batch
+19). Now `irw_retriage_ha.py` routes them to the conjoint ledger,
+`data/conjoint/candidates.csv`, the same hand-off `human_review/` is for
+ambiguous core rows:
+
+- `find_conjoints()` checks every triage row (a conjoint can triage `good`),
+  and `classify()` gives a `human_assistance` conjoint `refined_flag = conj`.
+- `route_conjoints()` appends one row per new DOI (`lead` =
+  `automated_finding <source> <date>`). A DOI already in the ledger is skipped,
+  so a rerun adds nothing and a human's edits are never overwritten.
+- Status is `todo`, or `held: <reason>` when the triage already shows an
+  intake rule fails: a named licence other than CC0, CC BY or CC BY-SA,
+  Dataverse's "limited information on how it can be used" text, or fewer than
+  100 respondents. A blank or `unknown` licence stays `todo`. Whoever builds a
+  `todo` row still confirms the licence from the Dataverse API and checks that
+  attribute levels are stored as the displayed text, and holds the row if they
+  are not.
+- `_load_auto_exclusions()` reads the ledger, so a routed DOI is not
+  re-discovered.
+
+The detector only sees titles and column names. A conjoint you recognise by
+hand (from the paper, say) is routed the same way:
+
+```bash
+python3 -c "import pandas as pd, irw_retriage_ha as R; R.route_conjoints(pd.DataFrame([{
+  'source': 'dataverse', 'doi': '10.7910/DVN/XXXXXX', 'title': '...',
+  'license': 'cc0', 'n_participants': 1249, 'url': 'https://...'}]))"
+```
+
+Building a `todo` row is conjoint work, not this pipeline's: follow
+`data/conjoint/README.md` (script in `data/conjoint/`, dictionary row with
+`stage_dict_row.py --source conj`, design records, `red_up . --dataset
+irw_conjoint`).
 
 ### `irw_extract_evaluated_dois.py`
 Mines `BATCH_LOG.md` for DOI-like identifiers of every dataset already

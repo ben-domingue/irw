@@ -998,6 +998,9 @@ the 15 rows the automated retriage couldn't resolve — 17 rows total):
   person to decide whether to ship a bare `id`/`item`/`resp`/`cov_*` file
   (losing the conjoint attribute detail) or treat conjoint designs as out of
   scope for IRW's shared-item psychometric paradigm.
+  *(2026-10-07, #2887: settled. Conjoints go to the `conj` source,
+  `irw_conjoint`, and are routed to `data/conjoint/candidates.csv`; see
+  README "Conjoint experiments".)*
 
 **Net result this batch**: 0 new tables in `irw_output/` — every `good` and
 `worth_retrying` lead turned out to be aggregate/composite data, non-survey
@@ -2368,7 +2371,7 @@ cases: a tourism choice-experiment (`10.1371/journal.pone.0270531`) and a
 preference-reversal betting experiment (`10.1371/journal.pone.0292011`)
 were skipped as conjoint/trial-level economic-game designs, the same open
 scope question as the LGBTQ-judges conjoint case from batch 19 (see
-TODO.md); a full-body-mirror-exposure eating-pathology study
+TODO.md; settled 2026-10-07 by #2887: conjoints route to the `conj` source); a full-body-mirror-exposure eating-pathology study
 (`10.1371/journal.pone.0257303`) turned out to be the identical paper
 already deferred from batch 6's worth_retrying pass, just resurfaced via
 a different search term; a small (N=26) JIA/SDQ study and a small (N=41)
