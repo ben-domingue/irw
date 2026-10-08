@@ -1,12 +1,11 @@
-##Two adaptive (bandit) paired-profile experiments from
+##Adaptive (bandit) paired-profile immigrant-admission experiment from
 ##Gosciak, J., Molitor, D., & Lundberg, I. (2026). Adaptive randomization in conjoint survey
 ##experiments. Political Analysis, 1-28. https://doi.org/10.1017/pan.2026.10040
 ##Replication data: Harvard Dataverse doi:10.7910/DVN/7EBDDY, CC0 1.0. Files read ("original
 ##format" downloads): immigrants_{main,max,min}_response.csv, immigrants_{main,max,min}_metadata.csv,
-##job_applicants_data_clean_2025_08_01.csv. data/README.md, README.md, immigrants_plots.R and
+##data/README.md, README.md, immigrants_plots.R and
 ##job_applicants_plots.R read as text (not run). Design facts are from the article (open access).
 ##Usage: Rscript gosciak_2026.R <raw dir> <output dir>
-##Writes two tables (different attribute sets, populations and fieldings):
 ##
 ##1. gosciak_2026_immigrant_admission. Prolific, US adults, 24-30 June 2024. ONE task per
 ##respondent: two immigrant profiles, 5 attributes: education (focal: "College degree" vs "No
@@ -39,27 +38,9 @@
 ##article reports 10,000 recruited (2,000 warm-up, 6,000 adaptive, 2,000 validation); the deposit
 ##has 9,146 non-garbage responses (7,279 main + 946 max + 921 min).
 ##
-##2. gosciak_2026_job_applicants. Prolific, US adults, Feb-Mar 2024 (the article says 8 Feb - 13
-##Mar; StartDate range in the file is 25 Feb - 13 Mar). One task: two resumes for a marketing
-##coordinator applying to an HR position. Profile 1 = "Candidate 1" (name1/education1/volunteer1),
-##profile 2 = "Candidate 2". Randomized: race context via names (Laurie Schmitt / Allison O'Connell
-##= white; Tanisha Rivers / Keisha Mosely = Black), school-rank context (mid: California State
-##University, Long Beach / San Diego State University; high: University of Pennsylvania / MIT), and
-##which candidate carries the motherhood signal (PTA volunteer line + cover-letter sentence vs a
-##neighbourhood-association treasurer line). Contexts assigned adaptively in batches of 200
-##(nonuniform). Other resume text (experience, phone, cover-letter opening) is fixed per position
-##and not stored. attr_ text is as displayed (resume lines; the cover-letter sentence is
-##attr_cover_letter_volunteer).
-##  choice: Q1-Q8 (one per batch block; Q*_orig hold "Candidate 1"/"Candidate 2"). Question wording
-##  is not in the deposit or the article: paraphrase. Forced choice; the authors' chose_mother
-##  equals "chose the PTA candidate" in every row (checked).
-##Covariates: cov_gender (QD5: Female/Male; "Prefer not to disclose" -> NA), cov_age (authors' clean
-##age; entries below 10 set NA), cov_race (authors' clean race text; "Prefer not to disclose" -> NA), cov_hispanic (QD4 text;
-##"Prefer not to disclose" -> NA), cov_duration_sec (Qualtrics whole-survey duration),
-##trial_phase (batch_type), trial_context (context_label). Dropped (PII FOUND): IPAddress,
-##LocationLatitude/Longitude, PROLIFIC_PID, STUDY_ID, SESSION_ID, free-text fields; also the
-##manipulation check (wording not in deposit) and assignment probabilities.
-##4,053 respondents = sum of the article's Figure 9 Ns (574 + 1,031 + 1,550 + 898).
+##The deposit's second experiment (job_applicants_data_clean_2025_08_01.csv, resumes differing
+##only in a motherhood signal within each pair) is NOT built: Ben 2026-10-08 skipped it (effectively a
+##single-factor paired experiment).
 library(data.table)
 a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]
 ## ---- immigrants
@@ -108,26 +89,3 @@ cv <- data.table(id = r$id, cov_gender = fcase(r$sex == "female", "female", r$se
 d <- merge(d, cv, by = "id")
 setorder(d, id, task, profile)
 fwrite(d, file.path(out, "gosciak_2026_immigrant_admission.csv"))
-## ---- job applicants
-j <- fread(file.path(raw, "job_applicants_data_clean_2025_08_01.csv"))
-stopifnot(nrow(j) == 4053, uniqueN(j$unique_id) == 4053)
-q <- paste0("Q", 1:8, "_orig")
-ch <- apply(j[, ..q], 1, function(z) { z <- z[!is.na(z) & z != ""]; if (length(z) == 1) z else NA_character_ })
-cp <- as.integer(sub("Candidate ", "", ch)); stopifnot(all(cp %in% 1:2))
-mpos <- ifelse(grepl("Parent Teacher", j$volunteer1), 1L, 2L)
-stopifnot(all(as.integer(cp == mpos) == j$chose_mother))
-cl <- function(x) trimws(x)
-jj <- rbind(j[, .(id = unique_id, profile = 1L, choice = as.integer(cp == 1L), attr_name = name1, attr_education = education1,
-                  attr_volunteer = cl(volunteer1), attr_cover_letter_volunteer = cl(treatment1))],
-            j[, .(id = unique_id, profile = 2L, choice = as.integer(cp == 2L), attr_name = name2, attr_education = education2,
-                  attr_volunteer = cl(volunteer2), attr_cover_letter_volunteer = cl(treatment2))])
-jj[, task := 1L]
-nd <- function(x) fifelse(x == "Prefer not to disclose" | x == "", NA_character_, x)
-jc <- j[, .(id = unique_id, trial_phase = batch_type, trial_context = context_label,
-            cov_gender = c(Female = "female", Male = "male")[QD5], cov_age = fifelse(age >= 10 & age <= 120, age, NA_real_), cov_race = nd(race), cov_hispanic = nd(QD4),
-            cov_duration_sec = `Duration (in seconds)`)]
-jj <- merge(jj, jc, by = "id")
-setcolorder(jj, c("id", "task", "profile", "choice"))
-stopifnot(!anyNA(jj[, .SD, .SDcols = patterns("^attr_")]), jj[, sum(choice), id][, all(V1 == 1)])
-setorder(jj, id, task, profile)
-fwrite(jj, file.path(out, "gosciak_2026_job_applicants.csv"))
