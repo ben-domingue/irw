@@ -956,14 +956,41 @@ def _load_human_review_exclusions() -> set:
     return dois
 
 
+CONJ_LEDGER = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                           os.pardir, "data", "conjoint", "candidates.csv")
+
+
+def _load_conj_ledger_exclusions(path: str = CONJ_LEDGER) -> set:
+    """DOIs already in the conjoint ledger, data/conjoint/candidates.csv.
+
+    Conjoint leads are routed there (irw_retriage_ha.route_conjoints, #2887)
+    rather than to human_review/, so without this every run would re-surface
+    and re-triage them. Any status counts: todo, built, uploaded and held rows
+    are all decided or queued in the conj source."""
+    dois = set()
+    try:
+        with open(path, newline="", encoding="utf-8") as f:
+            for row in csv.DictReader(f):
+                d = norm_doi(row.get("doi", "") or "")
+                if "/" in d and " " not in d:
+                    dois.add(d)
+    except FileNotFoundError:
+        pass
+    except Exception as e:
+        print(f"[warn] Could not read {path}: {e}", file=sys.stderr)
+    return dois
+
+
 def _load_auto_exclusions() -> set:
-    """Load DOIs to exclude: already in the IRW dictionary, or already
-    logged as a human_review row in a past batch."""
+    """Load DOIs to exclude: already in the IRW dictionary, already logged
+    as a human_review row in a past batch, or already in the conjoint ledger."""
     existing = _load_existing_irw_dois()
     reviewed = _load_human_review_exclusions()
+    conj = _load_conj_ledger_exclusions()
     print(f"[exclude] {len(existing)} DOIs already in IRW, "
-          f"{len(reviewed)} already logged in human_review/", flush=True)
-    return existing | reviewed
+          f"{len(reviewed)} already logged in human_review/, "
+          f"{len(conj)} in the conjoint ledger", flush=True)
+    return existing | reviewed | conj
 
 
 RUNS_DIR = "runs"

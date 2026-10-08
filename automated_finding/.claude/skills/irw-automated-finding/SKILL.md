@@ -237,7 +237,8 @@ Step 2b.
   "English-terms re-discovery" entry for the concrete phase-1/phase-2
   pattern.
 - Sort `runs/irw_triage.csv` by `flag`, `good` first.
-- `good` rows → go straight to Step 3 (write a processing script). There is
+- `good` rows → go straight to Step 3 (write a processing script), unless
+  Step 2b routed the row to the conjoint ledger (see Step 2b). There is
   no "stage it in the queue sheet first" step — that tab exists but this
   pipeline doesn't write to it (confirmed 2026-07-14: none of batches 14-16's
   processed DOIs were ever added to it). Don't add that step back in.
@@ -287,10 +288,25 @@ either — so the whole `human_assistance` bucket silently becomes nobody's
 job. If you are reporting on a run, "Step 2b: skipped" is a defect to state
 plainly, not a detail to omit.
 
-Sub-classifies each `human_assistance` row into `not_item_response` /
+Sub-classifies each `human_assistance` row into `conj` / `not_item_response` /
 `aggregate_continuous` / `wrong_file_selected` / `recoverable_format` /
 `worth_retrying` / `human_review` (see README for what each means and the
 typical action). Usually resolves ~60% of the bucket automatically.
+
+**Conjoints go to the `conj` source (#2887), not core and not "out of
+scope".** The same step scans every row of the triage, `good` included, and
+appends each conjoint to `data/conjoint/candidates.csv` as `todo`, or as
+`held: <reason>` when the triage already shows a failed intake rule (a licence
+other than CC0, CC BY or CC BY-SA; fewer than 100 respondents). Check the
+`[conj] routed N` line. A conjoint is detected from its title ("conjoint",
+"discrete choice experiment") or from `task` and `profile` columns together;
+one you only recognise on reading (randomized candidate, immigrant, vaccine or
+policy profiles that respondents choose between or rate) you route by hand
+with `route_conjoints()` (README, "Conjoint experiments"). Do not write a core
+processing script for it, do not reduce it to a bare `id`/`item`/`resp` file
+(the LGBTQ-judges deposit DVN/CDLVDH, batch 19), and do not skip it. Building
+a ledger row is separate work under `data/conjoint/README.md`: labels as
+displayed or hold, `stage_dict_row.py --source conj`, design records.
 
 **Only rows whose `refined_flag` is literally `human_review` go into
 `human_review/`.** Since 2026-09-09 the script does this for you: at the
@@ -1057,9 +1073,10 @@ the new script is not yet. Commit the `covariate_labels.csv` change in the same
 PR. Nothing else re-runs it: it is a manual stage because it re-runs build
 scripts (#1775).
 
-**Comps, nominal and simsyn tables too** (#2628): add `--source comps`,
-`--source nom` or `--source sim`, which writes `dictionary_auto_comps.csv`,
-`_nom.csv` or `_sim.csv`. Same fields, same refusals. Never hand Ben rows to
+**Comps, nominal, simsyn and conjoint tables too** (#2628, #2887): add
+`--source comps`, `--source nom`, `--source sim` or `--source conj`, which
+writes `dictionary_auto_comps.csv`, `_nom.csv`, `_sim.csv` or `_conj.csv`.
+Same fields, same refusals. Never hand Ben rows to
 paste into the competitions, nominal or simsyn sheet; a row staged here reaches
 that source's biblio on the first pipeline run after the table is released.
 
