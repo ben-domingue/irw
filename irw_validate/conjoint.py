@@ -26,7 +26,7 @@ from .model import Finding, Report
 
 REQUIRED = ("id", "task", "profile")
 #: Named columns a conjoint table may carry besides the prefixed ones.
-NAMED = {"id", "task", "profile", "choice", "rating", "rt", "date", "wave", "treat"}
+NAMED = {"id", "task", "profile", "choice", "rating"}
 PREFIXES = ("attr_", "attrpos_", "cov_", "trial_", "choice_", "rating_")
 OUTCOME = re.compile(r"^(choice|rating)(_.+)?$")
 CHOICE = re.compile(r"^choice(_.+)?$")
@@ -42,8 +42,14 @@ def _f(check: str, severity: str, message: str, table: str, details: tuple = ())
     return Finding(check, severity, message, table=table, group="conjoint", details=details)
 
 
-def validate_conjoint_frame(df, *, label: str = "") -> Report:
-    """Check one conjoint table against rules J1-J7 and the intake floor."""
+def validate_conjoint_frame(df, *, label: str = "", opt_out: dict | None = None) -> Report:
+    """Check one conjoint table against rules J1-J7 and the intake floor.
+
+    `opt_out` maps a choice column to its design_outcomes.csv value (yes/no/unknown).
+    The table alone cannot say whether a task with no chosen profile is an opt-out,
+    so without it (standalone use) such tasks only warn. red_up passes it: "no"
+    makes them an error, "yes" makes them silent, "unknown" keeps the warning.
+    """
     table = Path(label).stem if label else ""
     report = Report(label=label, profile="upload", kind="conjoint")
     out = report.findings
@@ -82,12 +88,26 @@ def validate_conjoint_frame(df, *, label: str = "") -> Report:
             if bad:
                 out.append(_f("conj_choice", "error", f"[J3] {c} is not 0/1 (also {bad[:5]})", table))
             elif not missing:
-                s = df.dropna(subset=[c]).groupby(["id", "task"])[c].sum()
+                # A choice is answered on every profile of a task or on none: one profile
+                # at NA and the other at 0 is a lost answer, not an opt-out.
+                g = df[c].notna().groupby([df["id"], df["task"]])
+                k, n = g.sum(), g.size()
+                mixed = (k > 0) & (k < n)
+                if mixed.any():
+                    out.append(_f("conj_choice", "error",
+                                  f"[J3] {c}: {int(mixed.sum())} tasks with a choice on some profiles "
+                                  "but not others", table))
+                s = df[c].groupby([df["id"], df["task"]]).sum()[(k == n) & (n > 0)]
                 many, none = int((s > 1).sum()), int((s == 0).sum())
                 if many:
                     out.append(_f("conj_choice", "error",
                                   f"[J3] {c}: {many} tasks with more than one chosen profile", table))
-                if none:
+                design = (opt_out or {}).get(c, "unknown")
+                if none and design == "no":
+                    out.append(_f("conj_choice", "error",
+                                  f"[J3] {c}: {none} tasks with no chosen profile, but "
+                                  "design_outcomes.csv says the design had no opt-out (opt_out=no)", table))
+                elif none and design != "yes":
                     out.append(_f("conj_choice", "warn",
                                   f"[J3] {c}: {none} tasks with no chosen profile -- valid only "
                                   "when the design offered an opt-out; say so in the script header "
@@ -161,7 +181,7 @@ def validate_conjoint_frame(df, *, label: str = "") -> Report:
     return report
 
 
-def validate_conjoint_file(path, *, label: str | None = None) -> Report:
+def validate_conjoint_file(path, *, label: str | None = None, opt_out: dict | None = None) -> Report:
     import pandas as pd
     path = Path(path)
     if not path.is_file():
@@ -169,7 +189,7 @@ def validate_conjoint_file(path, *, label: str | None = None) -> Report:
     # Only an empty cell is missing: "None" and "NA" are displayed levels in some designs
     # (no sanctions, no scandal), and pandas would otherwise read them as missing.
     df = pd.read_csv(path, low_memory=False, keep_default_na=False, na_values=[""])
-    return validate_conjoint_frame(df, label=label or str(path))
+    return validate_conjoint_frame(df, label=label or str(path), opt_out=opt_out)
 
 
 def main(argv=None) -> int:

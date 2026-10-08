@@ -46,6 +46,47 @@ class ConjointTest(unittest.TestCase):
         self.assertIn("conj_choice", checks(df, "warn"))
         self.assertNotIn("conj_choice", checks(df, "error"))
 
+    def test_a_choice_missing_on_one_profile_is_an_error_not_an_opt_out(self):
+        df = table()
+        df.loc[(df.id == 1) & (df.task == 1) & (df.profile == 1), "choice"] = None
+        r = validate_conjoint_frame(df, label="smith_2024_candidates.csv")
+        msgs = [f.message for f in r.findings if f.check == "conj_choice"]
+        self.assertTrue(any("some profiles but not others" in m for m in msgs), msgs)
+        self.assertFalse(any("no chosen profile" in m for m in msgs), msgs)
+
+    def test_a_choice_missing_on_every_profile_of_a_task_is_fine(self):
+        df = table()
+        df.loc[(df.id == 1) & (df.task == 1), "choice"] = None
+        self.assertEqual(checks(df, "error"), set())
+        self.assertNotIn("conj_choice", checks(df, "warn"))
+
+    def test_a_rating_missing_on_one_profile_is_allowed(self):
+        df = table()
+        df.loc[(df.id == 1) & (df.task == 1) & (df.profile == 1), "rating"] = None
+        self.assertEqual(checks(df, "error"), set())
+
+    def test_no_chosen_profile_is_an_error_when_the_design_had_no_opt_out(self):
+        df = table()
+        df.loc[(df.id == 1) & (df.task == 1), "choice"] = 0
+        r = validate_conjoint_frame(df, label="smith_2024_candidates.csv", opt_out={"choice": "no"})
+        self.assertIn("conj_choice", {f.check for f in r.errors})
+
+    def test_no_chosen_profile_is_silent_when_the_design_had_an_opt_out(self):
+        df = table()
+        df.loc[(df.id == 1) & (df.task == 1), "choice"] = 0
+        r = validate_conjoint_frame(df, label="smith_2024_candidates.csv", opt_out={"choice": "yes"})
+        self.assertFalse([f for f in r.findings if f.check == "conj_choice"])
+        r = validate_conjoint_frame(df, label="smith_2024_candidates.csv", opt_out={"choice": "unknown"})
+        self.assertIn("conj_choice", {f.check for f in r.warnings})
+
+    def test_bare_rt_date_wave_treat_are_undefined(self):
+        for col in ("rt", "date", "wave", "treat"):
+            self.assertIn("conj_columns", checks(table(**{col: 1}), "error"), col)
+
+    def test_prefixed_trial_columns_are_allowed(self):
+        df = table(trial_rt_sec=1.5, trial_date="2020-01-01", trial_wave=1, cov_wave=1, trial_treat="a")
+        self.assertEqual(checks(df, "error"), set())
+
     def test_named_extra_outcomes_are_allowed(self):
         df = table()
         df["choice_effective"] = df["choice"]

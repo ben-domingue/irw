@@ -33,6 +33,8 @@ Other rules:
 - One experiment per table: one attribute set, one population, one fielding.
 - Drop derived variables (dummy codings, "co-partisan" flags).
 - Rows with no outcome are omitted.
+- A choice column is present on every profile of a task or on none of them.
+- Where `design_outcomes.csv` says `opt_out` is `no`, every task has exactly one chosen profile.
 - **`(not shown)`** is the one reserved `attr_` value: the design left this attribute off this profile (hidden attributes, arms that show a subset, clauses omitted by design). It is the same string in every table and language, so one equality test finds it across tables. Text respondents actually saw stays as displayed, even when it reads like an absence ("No information", "None"). A blank `attr_` cell would mean only that the level is missing in the source (not saved, unknown); such tasks are dropped or the table is held, so a blank cell is an error (J4).
 
 ## Intake rules

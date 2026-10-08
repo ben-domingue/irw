@@ -897,14 +897,16 @@ class ValidatorGate(unittest.TestCase):
     CONJ = Target(name="irw_conjoint", label="conjoint experiments", kind="aux", source="conj")
 
     def _conj_design(self, tables=("smith_2024_candidates",), outcomes=("choice", "rating"),
-                     crosswalk=()):
+                     crosswalk=(), opt_out=""):
         """Design records in a scratch dir, pointed to by IRW_CONJ_DESIGN_DIR."""
         d = Path(tempfile.mkdtemp())
         self.addCleanup(shutil.rmtree, d, ignore_errors=True)
         (d / "design_tables.csv").write_text(
             "table,country\n" + "".join(f"{t},US\n" for t in tables), encoding="utf-8")
         (d / "design_outcomes.csv").write_text(
-            "table,outcome\n" + "".join(f"{t},{o}\n" for t in tables for o in outcomes),
+            "table,outcome,type,opt_out\n" + "".join(
+                f"{t},{o},{o.split('_')[0]},{opt_out if o.startswith('choice') else ''}\n"
+                for t in tables for o in outcomes),
             encoding="utf-8")
         (d / "crosswalk.csv").write_text(
             "concept,table,attribute,level,value\n" + "".join(
@@ -951,12 +953,12 @@ class ValidatorGate(unittest.TestCase):
         report = self._check(path, "smith_2024_candidates", target=self.CONJ)
         self.assertTrue(any("unreadable" in e for e in report.errors), report.errors)
 
-    def _conj_rows(self, chosen_both=False):
+    def _conj_rows(self, chosen_both=False, opted_out=0):
         rows = []
         for i in range(1, 121):
             for t in (1, 2):
                 for p in (1, 2):
-                    c = 1 if (p == 1 or chosen_both) else 0
+                    c = 1 if (p == 1 or chosen_both) and i > opted_out else 0
                     rows.append(f"{i},{t},{p},{c},{p + 2},{'Democrat' if p == 1 else 'Republican'},{40 + 5 * p}")
         return "id,task,profile,choice,rating,attr_party,attr_age\n" + "\n".join(rows) + "\n"
 
@@ -974,6 +976,28 @@ class ValidatorGate(unittest.TestCase):
         report = self._check(path, "smith_2024_candidates", target=self.CONJ)
         self.assertFalse(report.ok)
         self.assertTrue(any("conj_choice" in e for e in report.errors), report.errors)
+
+    def test_no_chosen_profile_blocks_when_the_design_had_no_opt_out(self):
+        self._conj_design(opt_out="no")
+        path = self._csv("smith_2024_candidates.csv", self._conj_rows(opted_out=3))
+        report = self._check(path, "smith_2024_candidates", target=self.CONJ)
+        self.assertFalse(report.ok)
+        self.assertTrue(any("choice: 6 tasks with no chosen profile" in e and "opt_out=no" in e
+                            for e in report.errors), report.errors)
+
+    def test_no_chosen_profile_is_quiet_when_the_design_had_an_opt_out(self):
+        self._conj_design(opt_out="yes")
+        path = self._csv("smith_2024_candidates.csv", self._conj_rows(opted_out=3))
+        report = self._check(path, "smith_2024_candidates", target=self.CONJ)
+        self.assertTrue(report.ok, report.errors)
+        self.assertFalse(any("no chosen profile" in w for w in report.warnings), report.warnings)
+
+    def test_no_chosen_profile_still_warns_when_the_opt_out_is_unknown(self):
+        self._conj_design(opt_out="unknown")
+        path = self._csv("smith_2024_candidates.csv", self._conj_rows(opted_out=3))
+        report = self._check(path, "smith_2024_candidates", target=self.CONJ)
+        self.assertTrue(report.ok, report.errors)
+        self.assertTrue(any("no chosen profile" in w for w in report.warnings), report.warnings)
 
     def test_a_target_with_required_columns_is_still_validated(self):
         """The exemption must not become a hole: response data still gets it."""
