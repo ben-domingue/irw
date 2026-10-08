@@ -76,14 +76,15 @@ one <- function(tab) {
              n_optout_tasks = optout)
 }
 
-##Level shares and never-seen level pairs, in one query per table. A pair is
+##Level shares and never-seen level pairs, in one query per table, leaving out
+##'(not shown)', which is the design hiding an attribute, not a level. A pair is
 ##tested only when both attributes have at most 20 levels and every combination
 ##would be expected at least 20 times under independent uniform draws, so that a
 ##missing pair is unlikely to be chance.
 observe_design <- function(ref, attrs, n_rows) {
   q <- function(a) sprintf("`%s`", a)
-  shares <- paste(sprintf("SELECT '%s' AS a, '' AS b, CAST(%s AS STRING) AS la, '' AS lb, COUNT(*) AS n FROM `%s` GROUP BY 3",
-                          attrs, q(attrs), ref), collapse = " UNION ALL ")
+  shares <- paste(sprintf("SELECT '%s' AS a, CAST(%s AS STRING) AS la, COUNT(*) AS n FROM `%s` WHERE CAST(%s AS STRING) != '(not shown)' GROUP BY 2",
+                          attrs, q(attrs), ref, q(attrs)), collapse = " UNION ALL ")
   lv <- query1(paste0("SELECT a, la, n FROM (", shares, ")"))
   nlev <- tapply(lv$la, lv$a, length)
   ratio <- max(tapply(as.numeric(lv$n), lv$a, function(x) max(x) / min(x)))
@@ -93,8 +94,8 @@ observe_design <- function(ref, attrs, n_rows) {
   empty <- 0
   if (any(keep)) {
     pp <- pairs[keep, , drop = FALSE]
-    sql <- paste(sprintf("SELECT '%s|%s' AS p, COUNT(*) AS k FROM (SELECT DISTINCT %s, %s FROM `%s`)",
-                         pp[, 1], pp[, 2], q(pp[, 1]), q(pp[, 2]), ref), collapse = " UNION ALL ")
+    sql <- paste(sprintf("SELECT '%s|%s' AS p, COUNT(*) AS k FROM (SELECT DISTINCT %s, %s FROM `%s` WHERE CAST(%s AS STRING) != '(not shown)' AND CAST(%s AS STRING) != '(not shown)')",
+                         pp[, 1], pp[, 2], q(pp[, 1]), q(pp[, 2]), ref, q(pp[, 1]), q(pp[, 2])), collapse = " UNION ALL ")
     seen <- query1(sql)
     want <- setNames(nlev[pp[, 1]] * nlev[pp[, 2]], paste(pp[, 1], pp[, 2], sep = "|"))
     empty <- sum(as.numeric(seen$k) < want[seen$p])

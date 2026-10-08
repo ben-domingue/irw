@@ -42,7 +42,7 @@ Respondent covariates. Most `cov_` columns keep the name and coding of the sourc
 | column | values |
 |---|---|
 | `cov_gender` | `female`, `male` or `other` (non-binary, self-described); NA when missing or refused |
-| `cov_age` | age in years at the survey, from a variable that records age in years |
+| `cov_age` | age in years at the survey, as the deposit records it (including an age the authors computed from year of birth; the header says so) |
 | `cov_birth_year` | year of birth, as recorded (age is not computed from it) |
 | `cov_age_group` | an age band, as the text of the band ("18-29") |
 | `cov_education` | the main education question, as the text of the answer option in the source's own categories and language |
@@ -51,7 +51,7 @@ Respondent covariates. Most `cov_` columns keep the name and coding of the sourc
 | `cov_duration_sec` | survey or module duration in seconds; the header says which |
 | `cov_survey_weight` | the per-respondent survey weight |
 
-Codes are mapped to text only from the deposit's own codebook, value labels or recode code, and the script header names the source of each mapping. When no source maps a covariate's codes, the column keeps the codes and takes a `_code` suffix (`cov_gender_code`), so a reserved name never holds codes. `irw_validate.conjoint` checks the reserved codings (J8).
+In the text covariates, a refusal ("prefer not to say", "no answer") is NA, while "don't know" stays as answer text. Codes are mapped to text only from the deposit's own codebook, value labels or recode code, and the script header names the source of each mapping. When no source maps a covariate's codes, the column keeps the codes and takes a `_code` suffix (`cov_gender_code`), so a reserved name never holds codes. `irw_validate.conjoint` checks the reserved codings (J8).
 
 Other rules:
 - One experiment per table: one attribute set, one population, one fielding.
@@ -93,7 +93,7 @@ The tables share one layout but not one meaning: `choice` is "vote for" in one t
 | `restrictions_note` | the rule or the probabilities, when `restrictions` or `level_weights` is not `none`/`uniform`/`unknown` |
 | `attr_order` | the order attributes were listed in: `fixed`, randomized once per `respondent`, randomized per `task`, or `unknown`. With `respondent` or `task`, the table has `attrpos_` columns when the deposit recorded the order. |
 | `survey_weight` | `kept` (the table has `cov_survey_weight`), `none` (the deposit documents no weight), `not_kept` (the deposit has a weight the table lacks; the evidence says why), or `unknown` |
-| `presentation` | `grid` (profiles shown as an attribute table), `text` (a vignette or prose), or `unknown` |
+| `presentation` | `grid` (profiles shown as an attribute table), `text` (a vignette or prose), `image` (a picture, photo or mock-up such as a social-media profile), or `unknown` |
 | `task_source`, `profile_source` | `recorded` (the deposit has the column), `inferred` (rebuilt from row order), or `unknown`. Position and task-order analyses should drop `inferred`. |
 | `evidence` | where each value came from: header lines, codebook pages |
 

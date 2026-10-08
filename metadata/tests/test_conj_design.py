@@ -74,7 +74,7 @@ class TablesFile(unittest.TestCase):
                 self.assertFalse(r["restrictions_note"], f"{t}: restrictions_note with nothing to describe")
             self.assertIn(r["attr_order"], {"fixed", "respondent", "task", "unknown"}, t)
             self.assertIn(r["survey_weight"], {"kept", "none", "not_kept", "unknown"}, t)
-            self.assertIn(r["presentation"], {"grid", "text", "unknown"}, t)
+            self.assertIn(r["presentation"], {"grid", "text", "image", "unknown"}, t)
             self.assertIn(r["task_source"], SOURCE, t)
             self.assertIn(r["profile_source"], SOURCE, t)
 
