@@ -4,7 +4,7 @@ A conjoint table does not have the core layout. There is no `item` or `resp`:
 one row is one respondent x task x profile, with the profile's attribute levels
 in `attr_` columns and the answers in `choice` and/or `rating`. The layout is the
 draft conjoint standard, written down in `data/conjoint/README.md`. Its rules are
-numbered J1-J7 so they cannot be confused with the core standard's C1-C7.
+numbered J1-J8 so they cannot be confused with the core standard's C1-C7.
 
 The core checks (`validate_file`) would fail every one of these tables on C1, so
 `red_up` runs this module instead for the `conj` source. It replaces the R
@@ -36,6 +36,40 @@ NOT_SHOWN = "(not shown)"
 #: not a rule: the README's intake rules say to strip these at ingest.
 PII = re.compile(r"(^|_)(ip(_?address)?|lat(itude)?|lon(gitude)?|lng|gps|prolific(_?id)?|"
                  r"worker(_?id)?|mturk(_?id)?|email|response_?id|respondent_?id_raw)($|_)", re.I)
+
+
+#: Reserved covariates with fixed codings, and older names that map to them.
+GENDER_VALUES = {"female", "male", "other"}
+DEPRECATED_COV = {"cov_female": "cov_gender", "cov_male": "cov_gender", "cov_sex": "cov_gender",
+                  "cov_educ": "cov_education", "cov_pid": "cov_party_id", "cov_pid3": "cov_party_id",
+                  "cov_pid7": "cov_party_id7", "cov_partyid": "cov_party_id",
+                  "cov_birthyr": "cov_birth_year", "cov_agegroup": "cov_age_group"}
+
+
+def _reserved_cov_problems(df, cols):
+    """(column, problem) for reserved covariates whose values break their coding."""
+    import pandas as pd
+    out = []
+    if "cov_gender" in cols:
+        bad = sorted(set(df["cov_gender"].dropna().astype(str)) - GENDER_VALUES)
+        if bad:
+            out.append(("cov_gender", f"values must be female/male/other or missing (also {bad[:5]})"))
+    for c in ("cov_age", "cov_birth_year", "cov_duration_sec"):
+        if c in cols and not pd.api.types.is_numeric_dtype(df[c]) and df[c].notna().any():
+            out.append((c, "must be numeric"))
+    if "cov_age" in cols and pd.api.types.is_numeric_dtype(df["cov_age"]):
+        a = df["cov_age"].dropna()
+        if len(a) and (a.min() < 10 or a.max() > 120):
+            out.append(("cov_age", f"is age in years; observed {a.min()}-{a.max()}"))
+    for c in cols:
+        if c == "cov_attention_pass" or c.startswith("cov_attention_pass_"):
+            bad = sorted(set(pd.to_numeric(df[c], errors="coerce").dropna()) - {0, 1})
+            if bad or (df[c].notna() & pd.to_numeric(df[c], errors="coerce").isna()).any():
+                out.append((c, "must be 1 (passed), 0 (failed) or missing"))
+    for c in ("cov_education", "cov_party_id", "cov_party_id7", "cov_age_group"):
+        if c in cols and pd.api.types.is_numeric_dtype(df[c]) and df[c].notna().any():
+            out.append((c, "holds codes; it is the answer text"))
+    return out
 
 
 def _f(check: str, severity: str, message: str, table: str, details: tuple = ()) -> Finding:
@@ -162,6 +196,19 @@ def validate_conjoint_frame(df, *, label: str = "", opt_out: dict | None = None)
         out.append(_f("conj_columns", "error",
                       f"[J7] column(s) with no defined meaning: {', '.join(undefined)}",
                       table, tuple(undefined)))
+    # J8: reserved respondent covariates (data/conjoint/README.md, "Respondent covariates")
+    for c, msg in _reserved_cov_problems(df, cols):
+        out.append(_f("conj_reserved_cov", "error", f"[J8] {c}: {msg}", table, (c,)))
+    old = [c for c in cols if c in DEPRECATED_COV]
+    if old:
+        out.append(_f("conj_reserved_cov", "warn",
+                      "[J8] covariate name(s) with a reserved equivalent: "
+                      + ", ".join(f"{c} -> {DEPRECATED_COV[c]}" for c in old)
+                      + " (map the codes to the reserved coding from the codebook)", table, tuple(old)))
+    if "trial_repeat_of" in cols:
+        r = df["trial_repeat_of"].dropna()
+        if len(r) and not (pd.to_numeric(r, errors="coerce") % 1 == 0).all():
+            out.append(_f("conj_columns", "error", "[J8] trial_repeat_of must hold task numbers", table))
     pii = [c for c in cols if PII.search(c)]
     if pii:
         out.append(_f("conj_pii_hint", "warn",

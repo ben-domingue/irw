@@ -12,7 +12,11 @@ red_up . --dataset irw_conjoint
 python3 -m irw_validate.conjoint *.csv
 ```
 
-## Layout (draft conjoint standard)
+## Scope
+
+A table belongs here when respondents evaluate profiles whose attributes were randomized: at least two attributes, each with varying levels. That includes paired and single-profile conjoints, and factorial surveys or vignette experiments that randomize the attributes of a text vignette (`presentation = text` in the design record). A fixed set of vignettes shown identically to everyone, such as anchoring vignettes, is a set of ordinary items and belongs in the core warehouse.
+
+## Layout
 
 One row per respondent × task × profile.
 
@@ -22,12 +26,32 @@ One row per respondent × task × profile.
 | `task` | task index within respondent, in the order shown |
 | `profile` | position within the task (1 = left or first) |
 | `choice` | 1 if this profile was chosen, else 0. With an opt-out, both profiles can be 0. |
-| `rating` | numeric rating of this profile, higher = more favourable |
+| `rating` | a numeric judgement of this profile, stored as in the source, without rescaling or reversal. What it measures, its range and its direction are in `design_outcomes.csv`. |
 | `choice_<name>`, `rating_<name>` | further outcomes asked about the same tasks (e.g. "which would you vote for" and "which would reduce corruption most"); same coding as `choice`/`rating` |
 | `attr_<name>` | the level **as displayed**, as text (never a numeric code). An attribute the design left off this profile is the exact text `(not shown)`; never blank (below) |
 | `attrpos_<name>` | row position of the attribute, when attribute order was randomized |
 | `cov_<name>` | respondent covariates; a survey weight is `cov_survey_weight` |
-| `trial_<name>` | other task-level details, such as experiment arm |
+| `trial_<name>` | other task-level details, such as experiment arm. `trial_repeat_of` is reserved: on the rows of a task that repeats an earlier one (often task 1 shown again at the end, perhaps with the profiles swapped), the number of the task it repeats; NA elsewhere. The script header says whether the profiles were swapped. |
+
+Choice or rating:
+- `choice` (or `choice_<name>`) is a pick among the profiles of a task: 0/1, at most one 1 per task. A single-profile accept/reject (or vote/don't vote) question is also a `choice`, with `opt_out = yes`, since rejecting is the outside option.
+- Everything else asked about a profile is a `rating`, including 0/1 judgements that do not pick among profiles (for example, "is this candidate a Democrat?" asked of each profile). The question wording in `design_outcomes.csv` says what it means.
+
+Respondent covariates. Most `cov_` columns keep the name and coding of the source. These names are reserved and mean the same in every table:
+
+| column | values |
+|---|---|
+| `cov_gender` | `female`, `male` or `other` (non-binary, self-described); NA when missing or refused |
+| `cov_age` | age in years at the survey, from a variable that records age in years |
+| `cov_birth_year` | year of birth, as recorded (age is not computed from it) |
+| `cov_age_group` | an age band, as the text of the band ("18-29") |
+| `cov_education` | the main education question, as the text of the answer option in the source's own categories and language |
+| `cov_party_id` | party identification (the party a respondent identifies with or feels closest to), as answer text. A US 7-point scale is `cov_party_id7`, as text. Vote choice is not party identification. |
+| `cov_attention_pass`, `cov_attention_pass_<k>` | 1 = passed an attention check, 0 = failed, NA = not asked |
+| `cov_duration_sec` | survey or module duration in seconds; the header says which |
+| `cov_survey_weight` | the per-respondent survey weight |
+
+Codes are mapped to text only from the deposit's own codebook, value labels or recode code, and the script header names the source of each mapping. When no source maps a covariate's codes, the column keeps the codes and takes a `_code` suffix (`cov_gender_code`), so a reserved name never holds codes. `irw_validate.conjoint` checks the reserved codings (J8).
 
 Other rules:
 - One experiment per table: one attribute set, one population, one fielding.
@@ -64,10 +88,16 @@ The tables share one layout but not one meaning: `choice` is "vote for" in one t
 | `country` | where it was fielded: ISO 3166 alpha-2, `;`-joined if the table pools countries |
 | `display_language` | the language respondents saw: ISO 639-1, or ISO 639-3 for a language without a two-letter code (Lusoga is `xog`), `;`-joined |
 | `label_language` | the language of the `attr_` text as stored. This can differ from `display_language` when only an English instrument survives. |
-| `restrictions` | `none` when a source says levels were randomized independently and uniformly; `yes` when a source states prohibited combinations, conditional levels or non-uniform weights; `observed` when no source documents it but the table shows it (combinations that never occur, clearly unequal level shares); otherwise `unknown`. With `yes` or `observed`, the estimator has to account for the restriction (for example, by estimating within the allowed combinations); a plain difference in means across levels can mislead. |
-| `restrictions_note` | the rule, when `restrictions` is `yes` or `observed` |
+| `restrictions` | rules about **combinations** of levels: prohibited pairs, conditional levels, levels drawn without repetition. `none` when a source says attributes were randomized independently; `yes` when a source states such a rule; `observed` when no source documents one but the table shows combinations that never occur; otherwise `unknown`. With `yes` or `observed`, an AMCE has to be estimated within the allowed combinations (for example, by conditioning on the restricting attribute); a plain difference in means across levels can mislead. |
+| `level_weights` | the probabilities of the levels within an attribute: `uniform` when a source says levels were equally likely; `nonuniform` when a source gives unequal probabilities; `observed` when no source does but the table's level shares are clearly unequal; otherwise `unknown`. Unequal but independent weights leave the AMCE identified (Hainmueller, Hopkins & Yamamoto 2014), but they change what it averages over, and marginal means depend on them. |
+| `restrictions_note` | the rule or the probabilities, when `restrictions` or `level_weights` is not `none`/`uniform`/`unknown` |
+| `attr_order` | the order attributes were listed in: `fixed`, randomized once per `respondent`, randomized per `task`, or `unknown`. With `respondent` or `task`, the table has `attrpos_` columns when the deposit recorded the order. |
+| `survey_weight` | `kept` (the table has `cov_survey_weight`), `none` (the deposit documents no weight), `not_kept` (the deposit has a weight the table lacks; the evidence says why), or `unknown` |
+| `presentation` | `grid` (profiles shown as an attribute table), `text` (a vignette or prose), or `unknown` |
 | `task_source`, `profile_source` | `recorded` (the deposit has the column), `inferred` (rebuilt from row order), or `unknown`. Position and task-order analyses should drop `inferred`. |
 | `evidence` | where each value came from: header lines, codebook pages |
+
+`metadata/16_conjoint.R` also checks each table against its record: it computes the level shares and the pairs of levels that never occur together, and warns when `restrictions` is `none` but pairs are missing, or `level_weights` is `uniform` but shares are clearly unequal.
 
 `design_outcomes.csv`, one row per table × outcome column:
 
@@ -91,6 +121,13 @@ Attribute columns keep the text respondents saw, so the same idea arrives under 
 | `evidence` | where the mapping comes from |
 
 Every displayed level of a mapped attribute has a row (`(not shown)` has none, since nothing was shown), and each concept maps to at most one attribute per table. A `name` signal carries other things too: Pedersen's names also mark ethnicity (majority versus Turkish), so a gender contrast there is within the names the authors chose. A new concept is added with its allowed values in `metadata/tests/test_conj_design.py` (`CONCEPTS`) and a line here.
+
+## Using the tables
+
+- Attribute levels are text, even when they are numbers (price, age, number of children); parse them for a numeric analysis.
+- No baseline level is recorded. AMCEs need one and the user chooses it; marginal means do not (Leeper, Hobolt & Tilley 2020).
+- `irw_conj_long()` / `irw.conj_long()` give one row per respondent × profile × outcome (`item` = outcome column, `resp` = its value, `task`/`profile`/`attr_` as `trial_` columns): a view for explanatory IRT models (response ~ attributes + respondent), not a person × item matrix. It does not keep which profiles shared a task or what each outcome means; join `conj_outcomes` for that.
+- For a conditional logit with an outside option (`mlogit`, Apollo), add a row with `profile = 0` to each task of an `opt_out = yes` outcome, with `choice = 1` when no profile was chosen.
 
 ## Scripts
 

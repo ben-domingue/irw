@@ -174,6 +174,9 @@ def conj_opt_out(table: str) -> dict[str, str]:
         return {}
 
 
+_CONJ_GENDER = re.compile(r"^attr_(.*_)?(gender|sex)$")
+
+
 def check_conj_design(report: FileReport) -> tuple[list[str], list[str]]:
     """A conjoint table needs its design records before it goes up. -> (errors, warnings)
 
@@ -208,8 +211,10 @@ def check_conj_design(report: FileReport) -> tuple[list[str], list[str]]:
     if stale:
         warnings.append(f"conj_design: design_outcomes.csv has row(s) for column(s) this file "
                         f"lacks: {', '.join(stale)}")
-    for a in ("attr_gender", "attr_sex"):
-        if a in cols and (t, a) not in crosswalk:
+    # attr_gender, attr_sex, attr_candidate_gender, ... (not attr_sexuality). A
+    # gender carried only by first names or photos cannot be detected here.
+    for a in (c for c in cols if _CONJ_GENDER.match(c)):
+        if (t, a) not in crosswalk:
             warnings.append(f"conj_crosswalk: {a} has no rows in crosswalk.csv "
                             f"(profile_gender); add them so the table pools with the others")
     return errors, warnings
