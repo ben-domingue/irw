@@ -8,6 +8,8 @@ and is exercised by the end-to-end procedure in red_up/README.md instead.
 
 from __future__ import annotations
 
+import os
+import shutil
 import tempfile
 import builtins
 from unittest import mock
@@ -872,6 +874,61 @@ class ValidatorGate(unittest.TestCase):
 
     CONJ = Target(name="irw_conjoint", label="conjoint experiments", kind="aux", source="conj")
 
+    def _conj_design(self, tables=("smith_2024_candidates",), outcomes=("choice", "rating"),
+                     crosswalk=()):
+        """Design records in a scratch dir, pointed to by IRW_CONJ_DESIGN_DIR."""
+        d = Path(tempfile.mkdtemp())
+        self.addCleanup(shutil.rmtree, d, ignore_errors=True)
+        (d / "design_tables.csv").write_text(
+            "table,country\n" + "".join(f"{t},US\n" for t in tables), encoding="utf-8")
+        (d / "design_outcomes.csv").write_text(
+            "table,outcome\n" + "".join(f"{t},{o}\n" for t in tables for o in outcomes),
+            encoding="utf-8")
+        (d / "crosswalk.csv").write_text(
+            "concept,table,attribute,level,value\n" + "".join(
+                f"profile_gender,{t},{a},Female,female\n" for t, a in crosswalk), encoding="utf-8")
+        patcher = mock.patch.dict(os.environ, {"IRW_CONJ_DESIGN_DIR": str(d)})
+        patcher.start()
+        self.addCleanup(patcher.stop)
+        return d
+
+    def test_a_conjoint_table_without_design_records_is_blocked(self):
+        self._conj_design(tables=())
+        path = self._csv("smith_2024_candidates.csv", self._conj_rows())
+        report = self._check(path, "smith_2024_candidates", target=self.CONJ)
+        self.assertFalse(report.ok)
+        self.assertTrue(any("design_tables.csv" in e for e in report.errors), report.errors)
+
+    def test_an_outcome_without_a_design_row_is_blocked(self):
+        self._conj_design(outcomes=("choice",))
+        path = self._csv("smith_2024_candidates.csv", self._conj_rows())
+        report = self._check(path, "smith_2024_candidates", target=self.CONJ)
+        self.assertTrue(any("design_outcomes.csv" in e and "rating" in e for e in report.errors),
+                        report.errors)
+
+    def test_stale_outcome_rows_and_a_missing_gender_crosswalk_only_warn(self):
+        self._conj_design(outcomes=("choice", "rating", "rating_old"))
+        rows = self._conj_rows().replace("attr_age", "attr_gender")
+        path = self._csv("smith_2024_candidates.csv", rows)
+        report = self._check(path, "smith_2024_candidates", target=self.CONJ)
+        self.assertTrue(report.ok, report.errors)
+        self.assertTrue(any("rating_old" in w for w in report.warnings), report.warnings)
+        self.assertTrue(any("conj_crosswalk" in w for w in report.warnings), report.warnings)
+
+    def test_a_gender_attribute_with_crosswalk_rows_is_quiet(self):
+        self._conj_design(crosswalk=(("smith_2024_candidates", "attr_gender"),))
+        rows = self._conj_rows().replace("attr_age", "attr_gender")
+        path = self._csv("smith_2024_candidates.csv", rows)
+        report = self._check(path, "smith_2024_candidates", target=self.CONJ)
+        self.assertFalse(any("conj_crosswalk" in w for w in report.warnings), report.warnings)
+
+    def test_unreadable_design_records_block(self):
+        d = self._conj_design()
+        (d / "design_tables.csv").unlink()
+        path = self._csv("smith_2024_candidates.csv", self._conj_rows())
+        report = self._check(path, "smith_2024_candidates", target=self.CONJ)
+        self.assertTrue(any("unreadable" in e for e in report.errors), report.errors)
+
     def _conj_rows(self, chosen_both=False):
         rows = []
         for i in range(1, 121):
@@ -883,12 +940,14 @@ class ValidatorGate(unittest.TestCase):
 
     def test_a_conjoint_table_gets_the_conjoint_checks_not_the_core_ones(self):
         """No item/resp is right for conj; the core validator would fail C1."""
+        self._conj_design()
         path = self._csv("smith_2024_candidates.csv", self._conj_rows())
         report = self._check(path, "smith_2024_candidates", target=self.CONJ)
         self.assertTrue(report.ok, report.errors)
         self.assertFalse(any("required_columns" in w and "item" in w for w in report.warnings))
 
     def test_a_broken_conjoint_table_is_blocked(self):
+        self._conj_design()
         path = self._csv("smith_2024_candidates.csv", self._conj_rows(chosen_both=True))
         report = self._check(path, "smith_2024_candidates", target=self.CONJ)
         self.assertFalse(report.ok)

@@ -50,6 +50,8 @@ query1 <- function(sql) {
 one <- function(tab) {
   ref <- tab$qualified_reference
   cols <- sapply(tab$list_variables(), function(v) v$name)
+  g <- intersect(c("attr_gender", "attr_sex"), cols)
+  if (length(g)) gender_attrs[[tab$name]] <<- g
   outcomes <- grep("^(choice|rating)(_.+)?$", cols, value = TRUE)
   s <- query1(sprintf(paste("SELECT COUNT(*) AS n_rows, COUNT(DISTINCT id) AS n_respondents,",
                             "MAX(task) AS n_tasks, MAX(profile) AS n_profiles FROM `%s`"), ref))
@@ -67,6 +69,7 @@ one <- function(tab) {
              n_optout_tasks = optout)
 }
 
+gender_attrs <- list()   ##filled by one(): table -> its gender attribute(s), for the crosswalk check
 out <- do.call(rbind, lapply(tabs, function(t) { message(t$name); one(t) }))
 out <- out[order(out$table), ]
 stopifnot(nrow(out) == length(tabs), !anyNA(out$n_respondents), all(out$n_attributes >= 2))
@@ -96,6 +99,17 @@ if (nrow(stale)) message("  ! outcome record for a column the live table lacks: 
                          paste(key(stale), collapse = ", "))
 outcomes <- dout[key(dout) %in% key(expected), setdiff(names(dout), "evidence")]
 outcomes <- outcomes[order(outcomes$table, outcomes$outcome), ]
+
+##A table with a gender attribute but no crosswalk rows does not pool with the
+##others (data/conjoint/README.md, "Attribute crosswalk"). Reported, not fatal.
+xw <- read_design("crosswalk.csv")
+no_xw <- unlist(lapply(names(gender_attrs), function(t) {
+  a <- gender_attrs[[t]]
+  a <- a[!paste(t, a) %in% paste(xw$table, xw$attribute)]
+  if (length(a)) paste0(t, ":", a)
+}))
+if (length(no_xw)) message("  ! gender attribute with no crosswalk rows (data/conjoint/crosswalk.csv): ",
+                           paste(no_xw, collapse = ", "))
 
 write.csv(out, "conj_metadata.csv", quote = TRUE, row.names = FALSE)
 write.csv(outcomes, "conj_outcomes.csv", quote = TRUE, row.names = FALSE)

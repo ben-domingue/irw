@@ -63,6 +63,59 @@ class StageDictRowTest(unittest.TestCase):
                 self.stage(self.ok_payload(notes=value))
                 self.assertEqual(self.rows()[0]["Notes"], value)
 
+    def stage_flag(self, payload, *flags):
+        env = dict(os.environ, IRW_DICT_AUTO_PATH=self.path,
+                   IRW_CODEBOOK_INGEST_PATH=self.path + ".codebook.csv")
+        return subprocess.run([sys.executable, str(SCRIPT), *flags], input=payload,
+                              text=True, capture_output=True, env=env)
+
+    def test_replace_swaps_the_row_in_place(self):
+        self.stage(self.ok_payload(table="a_2026", notes="old"))
+        self.stage(self.ok_payload(table="b_2026", description='keeps "this", and\nthat'))
+        self.stage(self.ok_payload(table="c_2026"))
+        r = self.stage_flag(self.ok_payload(table="b_2026", notes="new"), "--replace")
+        self.assertEqual(r.returncode, 0, r.stderr)
+        rows = self.rows()
+        self.assertEqual([x["table"] for x in rows], ["a_2026", "b_2026", "c_2026"])
+        self.assertEqual(rows[1]["Notes"], "new")
+        self.assertEqual(rows[0]["Notes"], "old")
+
+    def test_replace_leaves_other_rows_byte_identical(self):
+        self.stage(self.ok_payload(table="a_2026"))
+        self.stage(self.ok_payload(table="b_2026"))
+        ##A row written by hand with quoting csv would not choose.
+        with open(self.path, "a", newline="", encoding="utf-8") as f:
+            f.write('"c_2026","c_2026","d","","","","","","","Public","CC BY 4.0","","","automated","",""\n')
+        before = open(self.path, encoding="utf-8").read().splitlines(keepends=True)
+        self.stage_flag(self.ok_payload(table="a_2026", notes="x"), "--replace")
+        after = open(self.path, encoding="utf-8").read().splitlines(keepends=True)
+        self.assertEqual(before[2:], after[2:])
+        self.assertNotEqual(before[1], after[1])
+
+    def test_replace_collapses_duplicates_into_one_row(self):
+        self.stage(self.ok_payload(table="a_2026"))
+        self.stage_flag(self.ok_payload(table="a_2026"), "--force")
+        self.assertEqual(len(self.rows()), 2)
+        self.stage_flag(self.ok_payload(table="a_2026", notes="one"), "--replace")
+        self.assertEqual([x["Notes"] for x in self.rows()], ["one"])
+
+    def test_replace_refuses_a_table_not_in_the_file(self):
+        self.stage(self.ok_payload(table="a_2026"))
+        r = self.stage_flag(self.ok_payload(table="typo_2026"), "--replace")
+        self.assertNotEqual(r.returncode, 0)
+        self.assertIn("not in", r.stderr)
+        self.assertEqual([x["table"] for x in self.rows()], ["a_2026"])
+
+    def test_force_and_replace_together_are_refused(self):
+        self.stage(self.ok_payload(table="a_2026"))
+        r = self.stage_flag(self.ok_payload(table="a_2026"), "--force", "--replace")
+        self.assertNotEqual(r.returncode, 0)
+
+    def test_the_duplicate_refusal_names_replace(self):
+        self.stage(self.ok_payload(table="a_2026"))
+        r = self.stage(self.ok_payload(table="a_2026"))
+        self.assertIn("--replace", r.stderr)
+
     def test_comma_quote_newline_round_trip(self):
         desc = 'A comma, a "quote", and\na newline'
         self.stage(self.ok_payload(description=desc))

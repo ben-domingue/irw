@@ -25,7 +25,10 @@ procedure someone has to remember:
     run on a file containing any other contributor
 
 Refuses to add a table already in the staging file (local idempotency) unless
---force is passed. This does NOT check the live sheet -- a table the humans
+--force (add a second row) or --replace (swap the existing row for this one, in
+place) is passed. --replace refuses a table that is not in the file, so a typo
+cannot quietly add a row, and it rewrites only that table's lines: every other
+row stays byte-for-byte as it was, whatever quoting it was written with. This does NOT check the live sheet -- a table the humans
 already described is not an error, the union will simply let their cells win.
 
 Usage: pass one row as JSON on stdin, e.g.:
@@ -44,6 +47,7 @@ reads as its strongest evidence (`how_found = recorded_at_ingest`). Restaging
 a table replaces its codebook row.
 """
 import csv
+import io
 import json
 import os
 import re
@@ -167,8 +171,50 @@ def clean(value):
     return str(value).replace("\r\n", "\n").replace("\r", "\n").strip()
 
 
+def _raw_records(raw):
+    """Split CSV text into its records, each the exact text it was written as.
+
+    A record ends at a newline outside quotes, i.e. once its count of '"' is
+    even (RFC 4180 escapes a quote by doubling it, so parity is exact).
+    """
+    out, cur = [], ""
+    for line in raw.splitlines(keepends=True):
+        cur += line
+        if cur.count('"') % 2 == 0:
+            out.append(cur)
+            cur = ""
+    if cur:
+        out.append(cur)
+    return out
+
+
+def replace_row(path, row):
+    """Swap the record(s) for row's table for one new record, in place."""
+    with open(path, newline="", encoding="utf-8") as f:
+        raw = f.read()
+    records = _raw_records(raw)
+    new = io.StringIO(newline="")
+    csv.DictWriter(new, fieldnames=COLUMNS, lineterminator="\n").writerow(row)
+    out, placed = [records[0]], False
+    for rec in records[1:]:
+        fields = next(csv.reader(io.StringIO(rec, newline="")), [""])
+        if fields and fields[0].strip().lower() == row["table.lower"]:
+            if not placed:
+                out.append(new.getvalue())
+                placed = True
+            continue
+        out.append(rec)
+    if not placed:
+        sys.exit(f"{row['table']} is not in {path} -- --replace only swaps an existing row")
+    with open(path, "w", newline="", encoding="utf-8") as f:
+        f.write("".join(out))
+
+
 def main():
     force = "--force" in sys.argv
+    replace = "--replace" in sys.argv
+    if force and replace:
+        sys.exit("--force adds a duplicate row and --replace swaps the existing one; pass one")
 
     # Check for --source-via flag if passed via CLI args
     cli_source_via = None
@@ -291,9 +337,19 @@ def main():
             for r in reader:
                 existing.add((r.get("table") or "").strip().lower())
 
+    if replace:
+        if not file_exists:
+            sys.exit(f"{path} does not exist -- --replace only swaps an existing row")
+        replace_row(path, row)
+        print(f"replaced {row['table']} in {path}")
+        if codebook:
+            record_codebook(row["table"], source, codebook)
+            print(f"recorded codebook for {row['table']} -> {CODEBOOK_PATH}")
+        return
+
     if row["table.lower"] in existing and not force:
         sys.exit(f"{row['table']} is already in {path} "
-                 f"-- use --force to add a duplicate row")
+                 f"-- use --replace to swap it, or --force to add a duplicate row")
 
     with open(path, "a", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=COLUMNS, lineterminator="\n")
