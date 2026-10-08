@@ -125,12 +125,14 @@ def run_validator(path: Path, context: dict | None = None) -> tuple[list[str], l
             [f"{f.check}: {f.message}" for f in report.warnings])
 
 
-def run_conjoint_validator(path: Path) -> tuple[list[str], list[str]]:
+def run_conjoint_validator(path: Path, opt_out: dict | None = None) -> tuple[list[str], list[str]]:
     """The conjoint-table checks (irw_validate.conjoint). -> (errors, warnings)
 
     A conjoint table has no item/resp, so the core validator would fail every
     one on C1. Same failure rules as run_validator: a missing dependency or an
-    unreadable file is an error, never a pass.
+    unreadable file is an error, never a pass. `opt_out` (from conj_opt_out)
+    settles J3's "no chosen profile" warning: an error where the design had no
+    opt-out, silent where it had one.
     """
     sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
     try:
@@ -139,7 +141,7 @@ def run_conjoint_validator(path: Path) -> tuple[list[str], list[str]]:
         return ([f"conjoint validator unavailable ({exc}) -- install pandas, or pass "
                  f"--no-validate to upload without a format check"], [])
     try:
-        report = validate_conjoint_file(path)
+        report = validate_conjoint_file(path, opt_out=opt_out)
     except Exception as exc:
         return ([f"conjoint validator could not read this file: {exc}"], [])
     return ([f"{f.check}: {f.message}" for f in report.errors],
@@ -155,6 +157,21 @@ def _conj_design_dir() -> Path:
 
 
 _CONJ_OUTCOME = re.compile(r"^(choice|rating)(_.+)?$")
+
+
+def conj_opt_out(table: str) -> dict[str, str]:
+    """{choice column: opt_out} for one table, from design_outcomes.csv.
+
+    Empty when the records cannot be read: check_conj_design reports that as an
+    error, and the validator then falls back to warning, as it does standalone.
+    """
+    try:
+        with open(_conj_design_dir() / "design_outcomes.csv", newline="", encoding="utf-8") as f:
+            return {r["outcome"]: (r.get("opt_out") or "unknown").strip()
+                    for r in csv.DictReader(f)
+                    if r["table"] == table and r.get("type", "choice") == "choice"}
+    except (OSError, KeyError):
+        return {}
 
 
 def check_conj_design(report: FileReport) -> tuple[list[str], list[str]]:
@@ -222,7 +239,7 @@ def validate_for_target(report: FileReport, target: Target,
     if report.errors:
         return                # a file that is not a table yet is not worth validating
     if target.source == "conj":
-        errors, warnings = run_conjoint_validator(report.path)
+        errors, warnings = run_conjoint_validator(report.path, conj_opt_out(report.table))
         report.errors.extend(errors)
         report.warnings.extend(warnings)
         errors, warnings = check_conj_design(report)
