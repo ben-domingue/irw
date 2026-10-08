@@ -46,7 +46,9 @@ IRW_TEXT_DATASETS <- c(
   "irw_text_3"
 )
 
-## Auxiliary (non-core) datasets, by the `source` name the irw package uses.
+## The data families other than core, by the `source` name the irw package uses,
+## plus irw_meta, which is auxiliary and holds no response data. ARCHITECTURE.md
+## section 2 defines the families.
 ##
 ## Item text is deliberately NOT here: it is a shard list (IRW_TEXT_DATASETS
 ## above), and this vector is named, so it could only ever hold one text entry.
@@ -57,7 +59,7 @@ IRW_AUX_DATASETS <- c(
   sim  = "irw_simsyn",
   comp = "irw_competitions",
   nom  = "irw_nominal",
-  ## Conjoint experiments in their own layout, see data/conjoint/README.md. Experimental.
+  ## Conjoint experiments in their own layout, see data/conjoint/README.md.
   ## No parentheses in comments inside this c, red_up/targets.py reads up to the first one.
   conj = "irw_conjoint"
 )

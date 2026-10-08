@@ -52,7 +52,7 @@ Worked examples for both live on the site's
 
 | Directory | Contents |
 |---|---|
-| `data/` | Per-dataset processing scripts (R, Python, Stata) — one per dataset, self-contained, no shared dependencies. Subfolders group the non-core sources and a few families ([ARCHITECTURE.md §8](ARCHITECTURE.md#8-the-rest-of-the-tree)) |
+| `data/` | Per-dataset processing scripts (R, Python, Stata) — one per dataset, self-contained, no shared dependencies. Subfolders hold the data families other than core and a few groups ([ARCHITECTURE.md §8](ARCHITECTURE.md#8-the-rest-of-the-tree)) |
 | `metadata/` | Numbered R and Python stages that regenerate the metadata, biblio, tags, item text, collections and table-page Codebook CSVs |
 | `automated_finding/` | Pipeline that discovers, triages, and standardizes candidate datasets from public repositories |
 | `itemtext/` | Extraction and upload of instrument, section, item, and response-option text |

@@ -17,7 +17,8 @@ from pathlib import Path
 #: Filenames matching this go to the item-text dataset, never to a shard.
 ITEMS_SUFFIX = "__items.csv"
 
-#: How each non-core dataset is labelled in the menu. Keys are the `source`
+#: How each dataset outside core is labelled in the menu: the four other data
+#: families, plus metadata and item text. Keys are the `source`
 #: names `redivis_config.R` uses. Note "pairs" is `irw_competitions`: there is
 #: no `irw_pairs` dataset and never has been.
 #:
