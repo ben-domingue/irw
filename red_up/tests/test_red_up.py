@@ -26,6 +26,7 @@ from red_up.targets import (
     ConfigError,
     required_columns,
     Target,
+    core_target,
     eligible,
     guess_target,
     itemtext_target,
@@ -187,6 +188,26 @@ class TwoTextShards(unittest.TestCase):
                 guess_target([Path("x__items.csv")], self.targets).name,
                 "irw_text_2")
 
+    def test_response_data_defaults_to_the_newest_core_shard(self):
+        with mock.patch.object(targets_mod, "CORE_DEFAULT", None):
+            self.assertEqual(
+                guess_target([Path("x_2024_scale.csv")], self.targets).name, "w2")
+
+    def test_a_pinned_core_default_overrides_the_newest_shard(self):
+        # w2 near the 1000-table cap: new response tables are created in w1.
+        with mock.patch.object(targets_mod, "CORE_DEFAULT", "w1"):
+            self.assertEqual(
+                guess_target([Path("x_2024_scale.csv")], self.targets).name, "w1")
+            # Item text is untouched by the core pin.
+            self.assertEqual(
+                guess_target([Path("x__items.csv")], self.targets).name[:8],
+                "irw_text")
+
+    def test_a_core_pin_to_an_unregistered_shard_falls_back_to_the_newest(self):
+        with mock.patch.object(targets_mod, "CORE_DEFAULT", "w9"):
+            self.assertEqual(
+                guess_target([Path("x_2024_scale.csv")], self.targets).name, "w2")
+
     def test_a_pinned_default_still_updates_a_table_where_it_lives(self):
         # The shadowing guard: a table already in irw_text_2 is ELSEWHERE from
         # the pinned irw_text, and its home is irw_text_2, not the pin.
@@ -307,9 +328,10 @@ class TargetGuessing(unittest.TestCase):
         self.assertEqual(guess_target(files, self.targets).name,
                          itemtext_target(self.targets).name)
 
-    def test_plain_csvs_go_to_the_newest_shard(self):
+    def test_plain_csvs_go_to_the_core_default(self):
+        # The pinned core shard while CORE_DEFAULT is set, else the newest.
         self.assertEqual(guess_target([Path("a.csv")], self.targets).name,
-                         "item_response_warehouse_6")
+                         core_target(self.targets).name)
 
     def test_eligibility_is_decided_by_the_target(self):
         text = next(t for t in self.targets if t.is_itemtext)
