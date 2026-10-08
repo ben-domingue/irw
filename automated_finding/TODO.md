@@ -8,13 +8,8 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 - [x] **168 tables (1,897,483 responses) + 37 item text tables uploaded** (ben-domingue,
   confirmed 2026-10-07; response tables to `item_response_warehouse_5`; item text
   `uploaded=2026-10-07` stamped).
-- [ ] **Issues-page entries owed in datapages/irw once live** (IRW-written English;
-  drafted in each `public_note`):
-  - gwen_2025 x4, tangarife_2026 x7, fernandez_prados_2025 x6,
-    prihandoko_2025_ews, dassean_2025_bsmas, leon_rubio_2025_cdpe x5.
-  - useche_2022 x2: most respondents read undeposited translations.
-  - `check_provenance.R` does not read `automated_finding/itemtext_provenance.csv`,
-    so it will not flag these.
+- [x] **Issues-page entries:** 30 entries in datapages/irw#329 (24 IRW-written English,
+  useche x2, takacs x4 English substitute for a Hungarian administration).
 - [ ] **Covariate labels: harvested 2026-10-07** at 3935e416 for dassean_2025_bsmas,
   ali_2026_gses, fernandez_prados_2025_ai_attitudes, blaszyk_2023_ptps,
   kolanska_stronka_2026_climate_anxiety, kermen_2019_attentional_control,
