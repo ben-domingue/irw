@@ -630,3 +630,5 @@
 "profile_gender","tiradocastro_2026_gender_affinity","attr_gender","Male candidate","male","explicit","codebook 2.1 gender_cand 0 = Male candidate"
 "profile_gender","zhirkov_2025_immigrant_regions","attr_gender","Female","female","explicit","conj_gend_full text"
 "profile_gender","zhirkov_2025_immigrant_regions","attr_gender","Male","male","explicit","conj_gend_full text"
+"profile_gender","harris_2023_neighbor_cooperation","attr_gender","man","male","explicit","level text (lexp_q6 value label)"
+"profile_gender","harris_2023_neighbor_cooperation","attr_gender","woman","female","explicit","level text (lexp_q6 value label)"
