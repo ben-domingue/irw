@@ -15,12 +15,12 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   - useche_2022 x2: most respondents read undeposited translations.
   - `check_provenance.R` does not read `automated_finding/itemtext_provenance.csv`,
     so it will not flag these.
-- [ ] **Covariate-label harvest owed** after the data PR is committed:
-  dassean_2025_bsmas, ali_2026_gses, fernandez_prados_2025_ai_attitudes,
-  blaszyk_2023_ptps, kolanska_stronka_2026_climate_anxiety,
-  kermen_2019_attentional_control, mclean_2022_perfectionism,
-  islam_2021_covid_mental_health (`harvest.py --commit HEAD <stem>`, then `build.py`
-  once the tables are live).
+- [ ] **Covariate labels: harvested 2026-10-07** at 3935e416 for dassean_2025_bsmas,
+  ali_2026_gses, fernandez_prados_2025_ai_attitudes, blaszyk_2023_ptps,
+  kolanska_stronka_2026_climate_anxiety, kermen_2019_attentional_control,
+  mclean_2022_perfectionism, islam_2021_covid_mental_health. `build.py` labels only
+  tables in metadata.csv, so run `python3 metadata/covariate_labels/build.py` after the
+  next pipeline run and commit covariate_labels.csv.
 - [ ] **Rulings wanted (none blocks upload):**
   - PII calls that could be overruled:
     - Malay home-address column (zenodo 21318421/21126480)
