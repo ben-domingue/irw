@@ -146,7 +146,14 @@ def _raw_semicolon_header(reasons: str) -> str | None:
 # never built as core and never dropped.
 
 CONJ_TITLE = re.compile(
-    r"\bconjoint\b|\bdiscrete[- ]choice\s+experiment|\bchoice[- ]based\s+conjoint",
+    r"\bconjoint\b|\bdiscrete[- ]choice\s+experiment|\bchoice[- ]based\s+conjoint"
+    # Factorial surveys and vignette experiments randomize a vignette's
+    # attributes, so they are conj too (data/conjoint/README.md, `presentation
+    # = text`; the 10-07 standard review, #2919). A bare "vignette" is not
+    # enough: a fixed set of vignettes shown to everyone (anchoring vignettes)
+    # is ordinary items and stays core.
+    r"|\b(multi)?factorial[- ](survey|vignette)s?\b|\bvignette[- ]experiments?\b"
+    r"|\b(experimental|randomi[sz]ed)\s+vignettes?\b",
     re.IGNORECASE)
 # Column signals: a task index and a profile index together, the conjoint
 # long layout. Either alone is common (a "task" column in a cognitive battery).

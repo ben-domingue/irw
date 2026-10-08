@@ -139,7 +139,7 @@ sub-classifies each `human_assistance` row into one of seven buckets:
 
 | refined_flag | Typical cause | Action |
 |---|---|---|
-| `conj` | A conjoint experiment: "conjoint" or "discrete choice experiment" in the title, or `task` and `profile` columns together. Checked first, ahead of the parse rules | Nothing: already appended to `data/conjoint/candidates.csv` (see "Conjoint experiments" below). Never build it as a core table and never skip it as out of scope |
+| `conj` | A conjoint experiment: "conjoint" or "discrete choice experiment" in the title (or a factorial survey / vignette experiment: "factorial survey", "factorial vignette", "vignette experiment", "randomized vignettes"; a bare "vignette" is not enough), or `task` and `profile` columns together. Checked first, ahead of the parse rules | Nothing: already appended to `data/conjoint/candidates.csv` (see "Conjoint experiments" below). Never build it as a core table and never skip it as out of scope |
 | `not_item_response` | HTML-markup scraped tables, data dictionaries, implausible participant counts | Drop |
 | `aggregate_continuous` | >50 unique resp values after melt; extreme dup_id_item ratio | Drop *if* it's a composite/subscale score smuggled in as an item — but a genuinely continuous per-item response (e.g. a 0–100 slider) is valid IRW data and should not be dropped just for tripping this heuristic; check which case it is before deciding |
 | `wrong_file_selected` | Codebook file downloaded instead of data matrix (common with SAPA-Project) | Re-resolve landing page manually |
@@ -712,7 +712,7 @@ ambiguous core rows:
   `automated_finding <source> <date>`). A DOI already in the ledger is skipped,
   so a rerun adds nothing and a human's edits are never overwritten.
 - Status is `todo`, or `held: <reason>` when the triage already shows an
-  intake rule fails: a named licence other than CC0, CC BY or CC BY-SA,
+  intake rule fails: a named licence other than CC0, CC BY, CC BY-SA or CC BY-NC (any ND is held),
   Dataverse's "limited information on how it can be used" text, or fewer than
   100 respondents. A blank or `unknown` licence stays `todo`. Whoever builds a
   `todo` row still confirms the licence from the Dataverse API and checks that
