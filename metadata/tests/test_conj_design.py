@@ -67,11 +67,8 @@ class TablesFile(unittest.TestCase):
             self.assertIn(r["restrictions"], {"none", "yes", "observed", "unknown"}, t)
             self.assertIn(r["level_weights"], {"uniform", "nonuniform", "observed", "unknown"}, t)
             needs = r["restrictions"] in ("yes", "observed") or r["level_weights"] == "nonuniform"
-            quiet = r["restrictions"] in ("none", "unknown") and r["level_weights"] in ("uniform", "unknown")
-            if needs:
+            if needs:   # a note may also explain a none/unknown/uniform value
                 self.assertTrue(r["restrictions_note"], f"{t}: restrictions_note gives the rule or the weights")
-            if quiet:
-                self.assertFalse(r["restrictions_note"], f"{t}: restrictions_note with nothing to describe")
             self.assertIn(r["attr_order"], {"fixed", "respondent", "task", "unknown"}, t)
             self.assertIn(r["survey_weight"], {"kept", "none", "not_kept", "unknown"}, t)
             self.assertIn(r["presentation"], {"grid", "text", "image", "unknown"}, t)
