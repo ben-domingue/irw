@@ -43,12 +43,17 @@
 ##  attr_military_service: "None" or "U.S. military service (branch not recorded)".
 ##  attr_friends_describe_as: "compromise descriptor (wording not recorded)" (e.g. "pragmatic")
 ##     or "principles descriptor (wording not recorded)" (e.g. "uncompromising").
-##Covariates: cov_democrat (chair's party; also which primary was described), cov_female,
-##cov_age, cov_education (1 = no HS .. 6 = post-grad), cov_income (1 = <$10k .. 14 = $150k+,
+##Covariates: cov_democrat (chair's party; also which primary was described), cov_gender
+##(self-reported: .dta/build_dataset.do L207-208 'Female (1=yes)' on the renamed
+##whatisyourgender item, appendix p. 2 'reported being female'; 1 -> female, 0 -> male),
+##cov_age (the authors' 2016 minus year of birth, build_dataset.do L169-171; the year itself
+##is not deposited), cov_education_code (CODES 1 = no HS .. 6 = post-grad: the deposit labels
+##only the two ends, 'Education (1=No HS; 6=post-grad)', so the answer text is unknown and the
+##codes are kept), cov_income (1 = <$10k .. 14 = $150k+,
 ##15 = refused), cov_race_white/black/hispanic/other (0/1), cov_recruit_candidates,
 ##cov_state_local_requests, cov_federal_requests, cov_connect_donors, cov_advise_congress ("how
 ##common are the following scenarios": 0 = not at all .. 3 = very common, per the appendix
-##response options; codes as deposited).
+##response options; codes as deposited). The deposit documents no survey weight.
 ##Dropped: the anonymized county code (fips) and all county-level context variables (the
 ##authors added random noise to them for anonymity), the chair's name-based gender/Hispanic
 ##codings, the authors' derived dummies, congruence and "not presented" indicators, and
@@ -77,7 +82,7 @@ d <- data.table(id = as.integer(s$responseid), task = as.integer(s$task), profil
                 attr_paid_family_leave = f(s$proleave_, c(`0` = "Opposes", `1` = "Supports")),
                 attr_friends_describe_as = f(s$compromise_, c(`1` = "compromise descriptor (wording not recorded)",
                                                               `0` = "principles descriptor (wording not recorded)")),
-                cov_democrat = s$democrat, cov_female = s$female, cov_age = s$age, cov_education = s$educ, cov_income = s$income,
+                cov_democrat = s$democrat, cov_gender = c("male", "female")[s$female + 1], cov_age = s$age, cov_education_code = s$educ, cov_income = s$income,
                 cov_race_white = s$r_white, cov_race_black = s$r_black, cov_race_hispanic = s$r_hispanic, cov_race_other = s$r_other,
                 cov_recruit_candidates = s$youactivelyrecruitaprospectiveca, cov_state_local_requests = s$candidatesforstateorlocalofficer,
                 cov_federal_requests = s$candidatesforfederalofficereques, cov_connect_donors = s$youhelptoconnectcandidateswithdo,
@@ -86,6 +91,6 @@ a10 <- grep("^attr_", names(d), value = TRUE)[-1]
 stopifnot(rowSums(d[, lapply(.SD, `!=`, NS), .SDcols = a10]) == 4,
           s[, all(is.na(marital_) == (marital_np == 1) & is.na(occupation_) == (occupation_np == 1) &
                   is.na(foodstamp_) == (foodstamp_np == 1) & is.na(guns_) == (guns_np == 1))],
-          d[, sum(choice), .(id, task)][, all(V1 == 1)], d[, .N, .(id, task)][, all(N == 2)], !anyNA(d$attr_name))
+          d[, sum(choice), .(id, task)][, all(V1 == 1)], d[, .N, .(id, task)][, all(N == 2)], !anyNA(d$attr_name), s$female %in% 0:1)
 setorder(d, id, task, profile)
 fwrite(d, file.path(out, "doherty_2019_party_chairs.csv"))

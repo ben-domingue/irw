@@ -32,9 +32,17 @@
 ##Dropped: 8 tasks (16 rows) where every attribute is the string "NA" (levels not saved), and 24
 ##tasks (48 rows) with no choice recorded (as the authors' na.omit); 3 respondents lose all
 ##tasks, leaving 1,935 respondents, 7,720 tasks. Respondent UUIDs re-keyed.
-##Covariates (text as in the files): cov_gender, cov_age (years), cov_employment, cov_party,
-##cov_education, cov_race, cov_household_income, cov_modern_sexism_1..4 (agreement with the four
-##codebook statements, Strongly Agree .. Strongly Disagree).
+##Covariates (text as in the files): cov_gender (dem_gender, "Which gender do you identify
+##with?", codebook options Male / Female / Other / Prefer not to say, lowercased to male /
+##female / other, "Prefer not to say" = NA; the data hold only Male and Female), cov_age (years,
+##age_consent), cov_employment, cov_party_id (pid, codebook "Generally speaking, do you think of
+##yourself as a...": Republican / Democrat / Independent), cov_education (edu, codebook "What is
+##the highest level of education you have received?", the codebook's 8 answer texts),
+##cov_race, cov_household_income, cov_modern_sexism_1..4 (agreement with the four codebook
+##statements, Strongly Agree .. Strongly Disagree). The deposit has no survey weight, attention
+##check or duration (codebook, read.me.rtf). No repeated task (profilenum 1-8 all distinct).
+##The files are read in Dataverse's archival tab-separated form (the default download); the
+##?format=original CSVs are comma-separated with CR line ends and do not parse here.
 library(data.table)
 a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]
 p <- fread(file.path(raw, "HKM_profiledata.csv"), na.strings = "")
@@ -54,7 +62,9 @@ stopifnot(all(p$profile_fair %in% c(names(fair), "NA", NA)))
 d <- p[, .(id, task, profile, choice = as.integer(profile1_chosen), rating = unname(fair[profile_fair]),
            attr_childcare = childcare_level, attr_wife_work = fearnings_level, attr_husband_work = mearnings_level,
            attr_chore_time = division_level, attr_husband_feminine_tasks = contribution_level)]
-d <- merge(d, r[, .(id, cov_gender = dem_gender, cov_age = as.integer(age_consent), cov_employment = employ, cov_party = pid,
+stopifnot(all(r$dem_gender %in% c("Male", "Female", "Other", "Prefer not to say", NA)))
+r[, gender := c(Male = "male", Female = "female", Other = "other")[dem_gender]]
+d <- merge(d, r[, .(id, cov_gender = gender, cov_age = as.integer(age_consent), cov_employment = employ, cov_party_id = pid,
                     cov_education = edu, cov_race = race, cov_household_income = income_house,
                     cov_modern_sexism_1 = modernsexism_1, cov_modern_sexism_2 = modernsexism_2,
                     cov_modern_sexism_3 = modernsexism_3, cov_modern_sexism_4 = modernsexism_4)], by = "id")

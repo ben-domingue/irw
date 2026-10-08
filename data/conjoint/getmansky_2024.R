@@ -44,8 +44,12 @@
 ##in the civil war with Free Syrian Army forces before coming to Turkey"/"Fought in the civil
 ##war with pro-Assad forces before coming to Turkey"; torture. Respondents saw Turkish text.
 ##Covariates (codes per the instrument; only those whose coding could be confirmed):
-##  cov_female 0/1; cov_age years; cov_province Turkish plate code (34 = Istanbul);
-##  cov_party June 2018 vote 1=AKP 2=CHP 3=MHP 4=HDP 5=Iyi Parti 6=other 7=didn't vote 8=no
+##  cov_gender "female"/"male" (respondent_female 1/0; the authors' replication R script,
+##  DiversityWithoutAdversity_Replication.R L118-120, labels 0 = "Male", 1 = "Female"; PAP
+##  D01 "What is your gender?" Male/Female); cov_age years (D02 "How old are you?");
+##  cov_province Turkish plate code (34 = Istanbul);
+##  cov_vote_june2018 (D17 "Which political party did you vote for in June 24 elections?"; a
+##  vote, not party identification) 1=AKP 2=CHP 3=MHP 4=HDP 5=Iyi Parti 6=other 7=didn't vote 8=no
 ##  answer; cov_religion 1=none 2=Muslim 3=Christian 4=Jewish 5=other; cov_pray (Muslims)
 ##  1=no 2=only during Ramadan 3=every Friday 4=5 times a day; cov_proud_turkish 1=very
 ##  proud..4=not at all proud 5=I am not Turkish; cov_identity_* ("I see myself as part of
@@ -62,7 +66,9 @@
 ##and no codebook is deposited); mother-tongue items (asked only of speakers); the authors'
 ##derived variables (dummies, 0-1 rescaled ratings, binary-ness flags, akp_supporter,
 ##religion2/education2/ethnicity composites, scale differences, testdifference) and the
-##design `version` column. No survey weight is deposited.
+##design `version` column. No survey weight is deposited (the PAP's "Weighting" section plans
+##province weights relative to registered voters; none is in the deposit). The PAP's attention
+##check (C04, "please select the option of yellow") is not in the deposit. No repeated task.
 ##N = 2,362 matches the article. Spot check: OLS of the 0-1 rescaled neighbor rating on the
 ##attribute dummies reproduces appendix Table B.1 col. 1 (Arab -0.065, Kurd -0.069).
 library(data.table)
@@ -89,7 +95,7 @@ stopifnot(s[, all((arab == 1) == (ethnicity == 3) & (kurd == 1) == (ethnicity ==
                   (alawite == 1) == (religion == 2) & (christian == 1) == (religion == 3) & (university == 1) == (education == 5) &
                   (primary == 1) == (education == 2) & (foughtwithfsa == 1) == (fighter == 2) & (foughtwithasad == 1) == (fighter == 3))])
 d[, trial_outcome_order := s$sys_block_set_1]
-cmap <- c(respondent_female = "female", respondent_age = "age", QIL = "province", D17 = "party", respondent_religion = "religion",
+cmap <- c(respondent_age = "age", QIL = "province", D17 = "vote_june2018", respondent_religion = "religion",
           pray = "pray", proud_turkish = "proud_turkish", mem_muslim_community = "identity_muslim_community",
           mem_turkish_nation = "identity_turkish_nation", mem_local_community = "identity_local_community",
           world_citizen = "identity_world_citizen", auto_individual = "identity_autonomous_individual",
@@ -98,6 +104,8 @@ cmap <- c(respondent_female = "female", respondent_age = "age", QIL = "province"
           cheated = "contact_cheated", motherborninturkey = "mother_born_turkey", fatherborninturkey = "father_born_turkey",
           livedinrefprovince = "lived_refugee_province", havekids = "has_kids", landline = "owns_landline", washer = "owns_washer",
           creditcard = "owns_creditcard", plasmatv = "owns_flatscreen_tv", internet = "owns_internet", homestatus = "home")
+stopifnot(all(s$respondent_female %in% 0:1))
+d[, cov_gender := fifelse(s$respondent_female == 1L, "female", "male")]
 for (v in names(cmap)) d[, paste0("cov_", cmap[[v]]) := s[[v]]]
 for (l in c("kurd", "arab", "bulgarian", "macedonian", "bosnian", "laz", "circassian", "georgian", "armenian", "greek", "albanian"))
   d[, paste0("cov_knows_", l) := s[[paste0("respondent_", l, "_lang")]]]

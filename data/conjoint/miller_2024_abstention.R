@@ -49,9 +49,14 @@
 ##
 ##Both: rows are kept when the task has an answer; respondents who never reached the conjoint are
 ##omitted. No attention-check or IP filtering is applied (the authors' code applies none to the
-##choice data). Covariates: the survey answers as given (age band or birth year, gender,
-##education, race, Hispanic, income, ideology, party ID and strength/lean, issue items; the news
-##design also health insurance, health job, student, losing weight, cigarettes).
+##choice data). Covariates: the survey answers as given (cov_age_group or cov_birth_year,
+##education, race, Hispanic, income, ideology, cov_party_id (Q12 Democrat / Republican /
+##Independent / Other) and the strength/lean follow-ups, issue items; the news design also
+##health insurance, health job, student, losing weight, cigarettes). cov_gender: answer Q4
+##Female / Male / "Other (Please specify)" -> female / male / other, blank = NA (answer text in
+##the export; Q4 options in both codebooks). The open-ended attention checks (Q50, Q386) are
+##text summaries with no pass/fail coding, so there is no cov_attention_pass. Qualtrics
+##"Duration (in seconds)" is not kept; no survey weight.
 ##PII / identifiers dropped: Qualtrics ResponseId (re-keyed 1..n in file order), MTurk
 ##confirmation codes, IP_block, IP_country, dates, the free-text "other" boxes (Q4_3_TEXT,
 ##Q7_6_TEXT), the open-ended attention/manipulation answers (Q386, Q50).
@@ -63,6 +68,7 @@ rd <- function(f) {
   list(x = suppressWarnings(fread(f, skip = 3, header = FALSE, col.names = h, colClasses = "character")),
        lab = unlist(suppressWarnings(fread(f, nrows = 1, header = TRUE, colClasses = "character"))[1]))
 }
+gmap <- c("Female" = "female", "Male" = "male", "Other (Please specify)" = "other")
 cell <- function(x, cols, rows) vapply(seq_along(rows), function(i) if (is.na(cols[i])) NA_character_ else x[[cols[i]]][rows[i]], "")
 ## ---------- (1) news selection ----------
 m <- rd("mummolo_data.csv"); x <- m$x
@@ -105,6 +111,8 @@ mc <- c(cov_birth_year = "Q2", cov_gender = "Q4", cov_education = "Q6", cov_race
         cov_losing_weight = "Q19", cov_cigarettes = "Q20")
 for (v in names(mc)) nw[, (v) := x[[mc[[v]]]][match(id, x$id)]]
 nw[, cov_birth_year := suppressWarnings(as.integer(cov_birth_year))]
+stopifnot(all(nw$cov_gender %in% c(names(gmap), "")))
+nw[, cov_gender := unname(gmap[cov_gender])]
 nw[, id := frank(id, ties.method = "dense")]
 setcolorder(nw, c("id", "task", "profile", "choice"))
 setorder(nw, id, task, profile)
@@ -173,10 +181,12 @@ stopifnot(sk$ans %in% c("", "Candidate A", "Candidate B", "Neither candidate"), 
           !anyNA(sk[, .SD, .SDcols = patterns("^attr_")]), sk[, all(unlist(.SD) != ""), .SDcols = patterns("^attr_")],
           sk[, .N, .(id, task)][, all(N == 2)])
 sk[, choice := fifelse(ans == "", NA_integer_, as.integer(ans == c("Candidate A", "Candidate B")[profile]))][, ans := NULL]
-fcv <- c(cov_age_band = "Q2", cov_gender = "Q4", cov_education = "Q6", cov_race = "Q7", cov_hispanic = "Q8", cov_income = "Q9",
+fcv <- c(cov_age_group = "Q2", cov_gender = "Q4", cov_education = "Q6", cov_race = "Q7", cov_hispanic = "Q8", cov_income = "Q9",
          cov_ideology = "Q11", cov_party_id = "Q12", cov_dem_strength = "Q13", cov_rep_strength = "Q14", cov_ind_lean = "Q15",
          cov_abortion = "Q383", cov_gov_spending = "Q384", cov_immigration = "Q385")
 for (v in names(fcv)) sk[, (v) := y[[fcv[[v]]]][match(id, y$id)]]
+stopifnot(all(sk$cov_gender %in% c(names(gmap), "")))
+sk[, cov_gender := unname(gmap[cov_gender])][cov_age_group == "", cov_age_group := NA]
 sk[, id := frank(id, ties.method = "dense")]
 setcolorder(sk, c("id", "task", "profile", "choice"))
 setorder(sk, id, task, profile)

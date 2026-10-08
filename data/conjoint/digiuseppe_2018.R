@@ -33,8 +33,12 @@
 ##Respondent 580 (anonymous id) has no regime value on any of his 10 profiles (its regime
 ##dummies are all 0, which would mean "Wealthy and undemocratic" ten times): dropped. One
 ##empty row dropped. 2,513 respondents in the file -> 2,512 here, matching the article's 2,512.
-##Covariates: cov_age (years), cov_race (value-label text), cov_male, cov_attention_check1/2
-##(1 = pass). Dropped: Qualtrics responseid (re-keyed: id = the deposit's anonymous id
+##Covariates: cov_age (years as recorded; one respondent's recorded age of 8 is impossible for an
+##adult MTurk sample and is set to NA), cov_race (value-label text), cov_gender (from male: 1 -> "male",
+##0 -> "female"; DK18_rep.dta variable label "Male", and DK18_repcode.do labels male==0 "female",
+##male==1 "male" in the subgroup plot), cov_attention_pass_1 / cov_attention_pass_2 (attck1 /
+##attck2, value labels 0 "Fail" 1 "Pass"; DK18_repcode.do calls them "the attention checks").
+##Dropped: Qualtrics responseid (re-keyed: id = the deposit's anonymous id
 ##anymid), task timings, the authors' derived dummies and composites (pdem.., ally.., geopolC,
 ##partnerB, liberal, democrat, protrade, Hawk, LowIncome, PassCheck, ...). No survey weight.
 ##Spot check: in the control arm, OLS of choice on the four economic attributes (baseline "No
@@ -49,7 +53,7 @@ s <- data.table(id = as.integer(k$anymid), task = as.integer(k$task), profile = 
                 group = as.integer(k$Group), jobs = lab(k$jobs), us = lab(k$USgrowth), tp = lab(k$TPgrowth), regime = lab(k$regime),
                 geo = lab(k$geopolB), partner = as.integer(zap_labels(k$partner)),
                 ally = k$ally, rival = k$rival, neither = k$noallyrival, ourside = k$ourside, rivalside = k$rivalside,
-                age = as.integer(k$age), race = lab(k$race), male = as.integer(k$male), at1 = as.integer(k$attck1), at2 = as.integer(k$attck2))
+                age = { x <- as.integer(k$age); x[x < 18] <- NA_integer_; x }, race = lab(k$race), male = as.integer(k$male), at1 = as.integer(k$attck1), at2 = as.integer(k$attck2))
 s <- s[!is.na(task)]
 stopifnot(s[is.na(regime), all(id == 580)], s[id == 580, all(is.na(regime))])
 s <- s[id != 580]
@@ -64,7 +68,8 @@ d <- s[, .(id, task, profile, choice, attr_jobs = jobs, attr_us_growth = us, att
            attr_global_influence = fifelse(group == 2, paste(geo, "US global political influence"), "(not shown)"),
            attr_relationship = fifelse(group == 3, rel[partner + 1L], "(not shown)"),
            trial_arm = c("control", "global_influence", "political_relations")[group],
-           cov_age = age, cov_race = race, cov_male = male, cov_attention_check1 = at1, cov_attention_check2 = at2)]
+           cov_age = age, cov_race = race, cov_gender = c("female", "male")[male + 1L],
+           cov_attention_pass_1 = at1, cov_attention_pass_2 = at2)]
 stopifnot(!anyNA(d[, grep("^attr_", names(d)), with = FALSE]))
 stopifnot(d[, sum(choice), .(id, task)][, all(V1 == 1)], d[, uniqueN(trial_arm), id][, all(V1 == 1)])
 setorder(d, id, task, profile)

@@ -1,4 +1,4 @@
-"""Conjoint-table checks (irw_validate.conjoint, the draft standard's J1-J7)."""
+"""Conjoint-table checks (irw_validate.conjoint, the draft standard's J1-J8)."""
 import unittest
 
 import pandas as pd
@@ -140,3 +140,30 @@ class ConjointTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class ReservedCovariateTest(unittest.TestCase):
+    """J8: reserved covariate names hold their fixed codings (data/conjoint/README.md)."""
+
+    def test_gender_text_passes(self):
+        self.assertNotIn("conj_reserved_cov", checks(table(cov_gender="female"), "error"))
+
+    def test_gender_codes_are_an_error(self):
+        self.assertIn("conj_reserved_cov", checks(table(cov_gender=2), "error"))
+
+    def test_attention_must_be_0_1(self):
+        self.assertIn("conj_reserved_cov", checks(table(cov_attention_pass=2), "error"))
+        self.assertNotIn("conj_reserved_cov", checks(table(cov_attention_pass_1=1), "error"))
+
+    def test_education_codes_are_an_error(self):
+        self.assertIn("conj_reserved_cov", checks(table(cov_education=3), "error"))
+        self.assertNotIn("conj_reserved_cov", checks(table(cov_education_code=3), "error"))
+
+    def test_age_out_of_range_is_an_error(self):
+        self.assertIn("conj_reserved_cov", checks(table(cov_age=1990), "error"))
+
+    def test_old_name_warns(self):
+        self.assertIn("conj_reserved_cov", checks(table(cov_female=1), "warn"))
+
+    def test_repeat_of_must_be_a_task_number(self):
+        self.assertIn("conj_columns", checks(table(trial_repeat_of="first"), "error"))

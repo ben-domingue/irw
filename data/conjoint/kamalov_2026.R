@@ -26,11 +26,14 @@
 ##a space). Attribute display order is not in the data.
 ##The deposit is already restricted to the authors' analysis sample (all rows: living outside
 ##Russia, left in 2022); those two constant columns are dropped.
-##Covariates (from the second survey wave, as deposited): cov_female (sex: 1 = female), cov_age
-##(years), cov_country (country of residence, English), cov_left_after_mobilization (1 = left
-##after 21 Sept 2022, 0 = before), cov_has_children (1/0), cov_education (1 = incomplete
-##secondary (9 grades or less), 2 = complete secondary, 3 = vocational, 4 = incomplete higher,
-##5 = higher, 6 = academic degree), cov_politics_interest (interest in Russian politics,
+##Covariates (from the second survey wave, as deposited): cov_gender from sex (input_data.sav value
+##labels 1 = "0. Male", 2 = "1. Female" -> male/female), cov_age (age_respondent, "Сколько вам полных
+##лет?", years), cov_country (country of residence, English), cov_left_after_mobilization (1 = left
+##after 21 Sept 2022, 0 = before), cov_has_children (1/0), cov_education (education, "Ваше
+##образование:", as the Russian value-label text in input_data.sav: 1 "Неполная средняя школа (9
+##классов и менее)", 2 "Полное среднее (10 - 11 классов)", 3 "Профессиональное - ПТУ, техникум,
+##училище, колледж", 4 "Незаконченное высшее", 5 "Высшее", 6 "Ученая степень (кандидат, доктор,
+##PhD)"), cov_politics_interest (interest in Russian politics,
 ##1 = very interested .. 4 = not at all), cov_income (authors' 1 = poorest .. 6 = richest),
 ##cov_guilt ("guilt for Russia's actions in Ukraine", 1 = do not feel at all .. 5 = feel strongly),
 ##cov_responsibility (responsibility for the consequences of Russia's actions towards Ukraine,
@@ -52,15 +55,15 @@ d <- data.table(id = as.integer(s$ResponseId), task = as.integer(s$task), profil
 stopifnot(all(as.integer(sub("\\..*$", "", s$profile)) == d$task))
 for (v in c("Age", "Gender", "Children", "Profession", "Ethnicity", "Motivation")) d[, paste0("attr_", tolower(v)) := lab(s[[v]])]
 z <- function(x) as.integer(zap_labels(x))
-d[, `:=`(cov_female = z(s$sex) - 1L, cov_age = as.integer(s$age_respondent), cov_country = s$country_english,
+d[, `:=`(cov_gender = c("male", "female")[z(s$sex)], cov_age = as.integer(s$age_respondent), cov_country = s$country_english,
          cov_left_after_mobilization = z(s$when_left_mobiliz) - 1L, cov_has_children = 2L - z(s$child_bin),
-         cov_education = z(s$education), cov_politics_interest = z(s$politics_interest_ru), cov_income = z(s$income_consum_num),
+         cov_education = trimws(as.character(as_factor(s$education, levels = "labels"))), cov_politics_interest = z(s$politics_interest_ru), cov_income = z(s$income_consum_num),
          cov_guilt = z(s$guilt), cov_responsibility = z(s$responsiblity), cov_repression_count = z(s$repress_total),
          cov_protest_permitted = z(s$polit_merged_meet_safe), cov_protest_unpermitted = z(s$polit_merged_meet_unsafe),
          cov_help_ukrainian_refugees = z(s$polit_merged_help_ukr), cov_help_russian_emigrants = z(s$polit_merged_help_rus),
          cov_help_russian_ngos = z(s$polit_merged_help_ngo))]
 d[cov_country == "", cov_country := NA]
 stopifnot(d[, .(s = sum(choice), n = .N), .(id, task)][, all(s == 1 & n == 2)], uniqueN(d$id) == 2036)
-stopifnot(all(d$cov_female %in% c(NA, 0:1)), all(d$cov_has_children %in% c(NA, 0:1)), all(d$cov_left_after_mobilization %in% c(NA, 0:1)))
+stopifnot(all(z(s$sex) %in% c(NA, 1:2)), all(z(s$education) %in% c(NA, 1:6)), all(d$cov_has_children %in% c(NA, 0:1)), all(d$cov_left_after_mobilization %in% c(NA, 0:1)))
 setorder(d, id, task, profile)
 fwrite(d, file.path(out, "kamalov_2026_emigrant_aid.csv"))

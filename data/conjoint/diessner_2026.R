@@ -29,15 +29,20 @@
 ##  own, so its profiles are task 1's profiles swapped (profile 1 = task 1 worker 2) and its
 ##  attrpos_ are task 1's; outcomes Q33 (choice), Q34_1/Q35_1 (ratings, assumed worker 1/2
 ##  like the other tasks). The reversal is supported by the data: Q2 x Q33 = 393/1657 vs
-##  1682/259 (83% answer consistently under reversal). trial_repeat = 1 marks task 6.
+##  1682/259 (83% answer consistently under reversal). trial_repeat_of = 1 on task 6 rows (the
+##  task it repeats, profiles swapped), NA on tasks 1-5.
 ##  The authors drop it from their main analyses.
 ##trial_ict_info = 1 if the respondent saw the information screen on ICT and the college
 ##  labour market before the conjoint (authors: TreatTime_Page Submit present), 0 = control.
-##Covariates kept as the answer text (Qualtrics labels): age (years), gender, ethnicity
-##  (multi-select, comma-joined), children, education, field of qualification, income,
-##  employment, subjective class, trust, left-right, party, 2020 presidential vote, and three
+##Covariates kept as the answer text (Qualtrics labels): age (years), ethnicity
+##  (multi-select, comma-joined), children, education (cov_education, the export's option text),
+##  field of qualification, income, employment, subjective class, trust, left-right,
+##  cov_party_id (Party: Democratic Party / Republican Party / Other, the export's answer text; the
+##  authors' code calls it party_ident), 2020 presidential vote, and three
 ##  0-7 items the authors use (InvestSkillsCollege_7, EasyJobCollege_7, WinnersICT_1;
-##  wording not deposited). Dropped: Qualtrics ResponseId (re-keyed to row order),
+##  wording not deposited). cov_gender from Gender, the export's answer text lowercased
+##  (Female/Male/Other -> female/male/other; "Prefer not to answer" -> NA). cov_duration_sec =
+##  Qualtrics Duration (in seconds) of the whole survey. Dropped: Qualtrics ResponseId (re-keyed to row order),
 ##  Progress, Consent, timing of the info screens, OpenFeedback (free text).
 ##Tasks with no choice answer are omitted (ratings may be missing on kept tasks).
 ##Randomization: the authors' cjoint design uses no constraints; levels uniform (checked).
@@ -69,15 +74,17 @@ for (t in 1:6) {
 d <- rbindlist(rows, fill = TRUE)
 d <- d[ch %in% c("Worker 1", "Worker 2")]
 d[, choice := as.integer(ch == paste("Worker", profile))][, ch := NULL]
-d[, trial_repeat := as.integer(task == 6L)]
+d[, trial_repeat_of := fifelse(task == 6L, 1L, NA_integer_)]
 cv <- s[, .(id, trial_ict_info = as.integer(`TreatTime_Page Submit` != ""),
             cov_finished = as.integer(Finished == "TRUE"), cov_duration_sec = as.integer(Duration),
-            cov_age = as.integer(Age), cov_gender = Gender, cov_ethnicity = Ethnicity, cov_children = Children,
+            cov_age = as.integer(Age),
+            cov_gender = c(Female = "female", Male = "male", Other = "other")[Gender], cov_ethnicity = Ethnicity, cov_children = Children,
             cov_education = Education, cov_qualification = Qualification, cov_income = Income,
             cov_employment = Employment, cov_class = Class, cov_trust = as.integer(Trust_1),
-            cov_left_right = as.integer(LeftRight_1), cov_party = Party, cov_vote2020 = President2020,
+            cov_left_right = as.integer(LeftRight_1), cov_party_id = Party, cov_vote2020 = President2020,
             cov_invest_skills_college = as.integer(InvestSkillsCollege_7),
             cov_easy_job_college = as.integer(EasyJobCollege_7), cov_winners_ict = as.integer(WinnersICT_1))]
+stopifnot(s[!Gender %in% c("Female", "Male", "Other"), all(Gender %in% c("Prefer not to answer", ""))])
 d <- merge(d, cv, by = "id")
 stopifnot(!anyNA(d[, .SD, .SDcols = patterns("^attr")]), d[, .N, .(id, task)][, all(N == 2)],
           d[, sum(choice), .(id, task)][, all(V1 == 1)], d[, all(rating %between% c(0, 10), na.rm = TRUE)])

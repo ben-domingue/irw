@@ -42,17 +42,29 @@
 ##increase, 2 = no effect, 3 = reduce (from the dummies priceinc/pricenoeff/pricered);
 ##*_skills 1 = no, 2 = yes. Attribute row order was fixed (not randomized) as far as the
 ##article says; no randomization restrictions are reported.
-##Covariates: cov_female (Costa Rica, Nicaragua: sexo 2 = female); cov_education (codes as
-##labelled in the .dta. Costa Rica/Nicaragua 0 none, 1 primary, 2 secondary, 3 vocational,
-##4 college, 5 university, 6 postgraduate, one Costa Rican coded 7 (unlabelled) set missing; Vietnam 1 none, 2 primary, 3 secondary, 4 high
-##school, 5 vocational, 6 college or university, 7 postgraduate); cov_age (Vietnam only, years).
+##Covariates: cov_gender (Costa Rica, Nicaragua: sexo, .dta label "Gender of respondent",
+##value labels "1 - male", "2 - female" -> male/female); cov_education = the .dta value
+##label of education ("Highest level of education"; English labels, number prefix removed):
+##Costa Rica/Nicaragua 0 "Did not attend school", 1 "Primary school", 2 "Secondary school",
+##3 "Vocational school", 4 "College", 5 "University", 6 "Postgraduate"; one Costa Rican coded
+##7 (unlabelled) set missing; Vietnam 1 "Did not attend school", 2 "Primary school", 3
+##"Secondary school", 4 "High School", 5 "Vocational school", 6 "College or University", 7
+##"Postgraduate"; cov_age (Vietnam only, years). Vietnam's gender has no value labels, so it
+##stays dropped. No survey weight in the files.
+##Design facts not in the deposit: level probabilities, restrictions and attribute order are
+##not reported (level shares within 1.11x, every level pair occurs). No task is repeated
+##(checked). In Vietnam the chosen agreement is rated higher in 100% of tasks with no ties
+##(Costa Rica 85% with 9% ties, Nicaragua 76% with 10% ties): the Vietnamese choice may have
+##been derived from, or forced consistent with, the ratings; not documented, kept as is.
 ##Dropped: sector of employment, p7_1, p7_7 and Vietnam's gender and person (no labels deposited),
 ##the source respondent id (re-keyed from the running number), all attribute dummies, like2.
 library(haven); library(data.table)
 a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]
 lv <- function(x, l) { stopifnot(all(x %in% seq_along(l))); l[x] }
 build <- function(file, origins, drop_task, tab) {
-  s <- as.data.table(zap_labels(read_dta(file.path(raw, file))))
+  s0 <- read_dta(file.path(raw, file))
+  vl <- function(v) { l <- attr(s0[[v]], "labels"); setNames(trimws(sub("^\\s*[0-9]+\\s*-\\s*", "", names(l))), l) }
+  s <- as.data.table(zap_labels(s0))
   n <- uniqueN(s$respondent)
   stopifnot(nrow(s) == 10 * n, all(s$respondent == rep(seq_len(n), 10)))
   s[, blk := rep(1:10, each = n)][, task := (blk + 1L) %/% 2L][, profile := 2L - blk %% 2L]
@@ -78,9 +90,14 @@ build <- function(file, origins, drop_task, tab) {
                     (job_ag == 3) == (job_ag_more == 1) & (job_man == 1) == (job_man_less == 1) & (job_ser == 2) == (job_ser_same == 1) &
                     (job_high_skills == 2) == (high_skills_yes == 1) & (job_low_skills == 2) == (low_skill_yes == 1) &
                     (count == 5) == (count_150 == 1) & (origin == 6) == (US == 1))])
-  if ("sexo" %in% names(s)) d[, cov_female := as.integer(s$sexo == 2)]
-  d[, cov_education := as.integer(s$education)]
-  if ("sexo" %in% names(s)) d[!cov_education %in% 0:6, cov_education := NA_integer_]  # one Costa Rican coded 7, unlabelled
+  if ("sexo" %in% names(s)) {
+    stopifnot(identical(unname(vl("sexo")[c("1", "2")]), c("male", "female")), all(s$sexo %in% 1:2))
+    d[, cov_gender := unname(vl("sexo")[as.character(s$sexo)])]
+  }
+  el <- vl("education")
+  stopifnot(length(el) == 7)
+  d[, cov_education := unname(el[as.character(s$education)])]  # one Costa Rican coded 7, unlabelled -> NA
+  stopifnot(sum(is.na(d$cov_education)) == sum(!as.character(s$education) %in% names(el)))
   if ("age" %in% names(s)) d[, cov_age := as.integer(s$age)]
   setorder(d, id, task, profile)
   fwrite(d, file.path(out, paste0(tab, ".csv")))

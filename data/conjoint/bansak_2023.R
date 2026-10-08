@@ -31,8 +31,14 @@
 ##    article's Supplementary Information, not retrieved. ratebin (rate > 4) is dropped.
 ##  trial_frame: one of four frames shown at the start of the survey (general,
 ##    mediterranean, afghanistan, ukraine; wording in the SI); respondent-level.
-##  Covariates (source codes, see the respondent codebook): cov_country, cov_gender,
-##    cov_age, cov_home_born, cov_educ_eisced (1-7), cov_emp_status (text), cov_inc_decile,
+##  Covariates (source codes, see the respondent codebook, unless stated): cov_country,
+##    cov_gender (source gender Female/Male/Other, lowercased to female/male/other),
+##    cov_age (age in years), cov_home_born, cov_education (source educ_EISCED, codes 1-7
+##    mapped to the codebook's category text: respondent_data_codebook.txt, educ_EISCED:
+##    1 less than lower secondary, 2 lower secondary, 3 lower tier upper secondary, 4 upper
+##    tier upper secondary, 5 advanced vocational/sub-degree, 6 lower tertiary education/BA
+##    level, 7 higher tertiary education and >= MA level; the deposit holds only this
+##    harmonized scale, not the national answer options), cov_emp_status (text), cov_inc_decile,
 ##    cov_ideo (0 left - 10 right), cov_feel_therm_* (0-100: compatriots, Afghanistan,
 ##    Eritrea, Iraq, Kosovo, Pakistan, Syria, Ukraine), cov_asy_change_home,
 ##    cov_asy_change_europe, cov_immig_change_home (-2 greatly decrease .. 2 greatly
@@ -73,6 +79,12 @@ rv <- c("cty", "gender", "age", "home_born", "educ_EISCED", "emp_status", "inc_d
 rr <- r[, c("ResponseId", "frame", rv), with = FALSE]
 setnames(rr, rv, paste0("cov_", tolower(rv)))
 setnames(rr, c("frame", "cov_cty", "cov_weight", "cov_alt_weight"), c("trial_frame", "cov_country", "cov_survey_weight", "cov_survey_weight_alt"))
+stopifnot(all(rr$cov_gender %in% c("Female", "Male", "Other")), all(rr$cov_educ_eisced %in% c(1:7, NA)))
+rr[, cov_gender := tolower(cov_gender)]
+eisced <- c("less than lower secondary", "lower secondary", "lower tier upper secondary", "upper tier upper secondary",
+            "advanced vocational/sub-degree", "lower tertiary education/BA level", "higher tertiary education and >= MA level")
+rr[, cov_educ_eisced := eisced[cov_educ_eisced]]
+setnames(rr, "cov_educ_eisced", "cov_education")
 d <- merge(d, rr, by = "ResponseId")[, ResponseId := NULL]
 stopifnot(d[, sum(choice), .(id, task)][, all(V1 == 1)], uniqueN(d$id) == 14966, nrow(d) == 149660)
 setorder(d, id, task, profile)

@@ -35,10 +35,15 @@
 ##    answers are reversed (8 - x) as in the author's do-file. Kept as trial_scale_reversed.
 ##    The rating was asked in 2 of the 4 tasks only (article fn 10); rating is blank in the
 ##    other two (9,334 of 18,672 rows).
-##Covariates: source codes (labels in the codebook): cov_age (years), cov_gender (1 male,
-##2 female), cov_state, cov_region, cov_education (1-10), cov_employ, cov_household_size,
-##cov_income, cov_pol_interest, cov_left_right (0-10), cov_presvote20 (2020 vote), cov_pid3,
-##cov_vote_intention (Q4_2_US), cov_survey_weight (W8). The article's partisan groups
+##Covariates. As text, from the .dta value labels (identical in yougov_codebook.xlsx, sheet
+##Labels): cov_gender (gender: 1 Male, 2 Female; stored male / female), cov_education
+##(education, "What is your highest level of education? ...": the 10 option labels as stored,
+##e.g. "Bachelors or equivalent level degree"; labels 6 and 7 are cut at 120 characters in both
+##the .dta and the codebook, and are kept as cut), cov_party_id (pid3 "3 point party ID":
+##Democrat, Republican, Independent, Other, Not sure). Source codes (labels in the codebook):
+##cov_age (years), cov_state, cov_region, cov_employ, cov_household_size, cov_income,
+##cov_pol_interest, cov_left_right (0-10), cov_presvote20 (2020 vote), cov_vote_intention
+##(Q4_2_US), cov_survey_weight (W8). The article's partisan groups
 ##(Democrat 758, Republican 739, other 837) come from presvote20post (1 / 2 / else) and
 ##reproduce from cov_presvote20. Dropped: the vignette experiment (Q13*, one-factor, separate),
 ##the open vote-intention text (Q4_2_US_open), quota cell (pastvote_by_race), the scale endpoint
@@ -72,8 +77,12 @@ d <- rbindlist(lapply(1:4, function(t) rbindlist(lapply(1:2, function(p) {
 cv <- c(cov_age = "age", cov_gender = "gender", cov_state = "inputstate", cov_region = "vRegionGrouped",
         cov_education = "education", cov_employ = "employ", cov_household_size = "profile_household_size",
         cov_income = "profile_gross_household", cov_pol_interest = "lmu_polInterest", cov_left_right = "pol_spect",
-        cov_presvote20 = "presvote20post", cov_pid3 = "pid3", cov_vote_intention = "Q4_2_US")
+        cov_presvote20 = "presvote20post", cov_party_id = "pid3", cov_vote_intention = "Q4_2_US")
 for (v in names(cv)) d[, (v) := z(m[[cv[[v]]]])[id]]
+vl <- function(v) { l <- attr(m[[v]], "labels"); x <- z(m[[v]]); stopifnot(all(x %in% l)); names(l)[match(x, l)] }
+stopifnot(identical(names(attr(m$gender, "labels"))[1:2], c("Male", "Female")))
+d[, cov_gender := tolower(vl("gender"))[id]][, cov_education := vl("education")[id]][, cov_party_id := vl("pid3")[id]]
+stopifnot(all(d$cov_gender %in% c("male", "female")))
 d[, cov_survey_weight := as.numeric(m$W8)[id]]
 stopifnot(d[, sum(choice), .(id, task)][, all(V1 == 1)],
           d[, sum(!is.na(rating)), .(id, task)][, all(V1 %in% c(0L, 2L))],

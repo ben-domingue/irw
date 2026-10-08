@@ -28,14 +28,18 @@
 ##respondents with at least one complete task). Here a row is kept if it has at least one of
 ##the three outcomes (outcomes missing individually stay NA): 2,075 respondents; 13
 ##respondents answered no task at all.
-##Covariates: cov_female (0/1); cov_age_group, cov_education, cov_income (source codes 0-4,
-##0-6, 0-4; labels not deposited); cov_region (central/east/north/south, from the source's four
-##region dummies); cov_party (text as in the source); cov_father_* / cov_mother_* (parent's
+##Covariates: cov_gender_code (source `female`, CODES 0/1 kept: no label, codebook or recode
+##code confirms which value is female, so the codes are not mapped to text); cov_age_group_code,
+##cov_education_code, cov_income (source CODES 0-4, 0-6, 0-4; no labels deposited, so the band
+##and answer text are unknown and the codes are kept under _code names); cov_region
+##(central/east/north/south, from the source's four region dummies); cov_party_id (the
+##source's `party` text as stored, incl. "I do not support any of these party"; the refusal
+##"Prefer not to answer" -> NA; the authors' do-file L166-171 treats it as party ID); cov_father_* / cov_mother_* (parent's
 ##group: hakka, minnan, mainlander, aborigine, newresident, other; 0/1 as in the source);
 ##cov_proficiency_* (mandarin, minnan, hakka, aborigine, seasia, english, other; source codes
 ##0-3, 0 = none per the authors' code, higher = more proficient presumably); cov_visit_*
 ##(mainland, hk, sea, usa; source codes 0-10, 0 = never); cov_work_* (0/1); cov_tw_economy
-##(-1/0/1). Dropped: the authors' A_/B_ attribute dummies, person_A/person_B profile indexes,
+##(-1/0/1). No survey weight in the deposit. Dropped: the authors' A_/B_ attribute dummies, person_A/person_B profile indexes,
 ##dupindicator (Stata expansion flag), the "Person A/B" answer strings (recoded into the
 ##outcomes). record is re-keyed to 1..n.
 ##Count vs paper: not checked (article not reachable). The authors' complete-case sample from
@@ -55,8 +59,8 @@ d <- k[, .(src = record, task = as.integer(round), profile = as.integer(profile)
 stopifnot(k[!is.na(selected_immigration), all(selected_immigration == as.integer((immigration == "Person A") == (profile == 1)))])
 reg <- c("central", "east", "north", "south")
 rm <- as.matrix(k[, paste0("region_", reg), with = FALSE]); stopifnot(all(rowSums(rm) == 1))
-d[, cov_female := as.integer(k$female)][, cov_age_group := as.integer(k$age)][, cov_education := as.integer(k$education)]
-d[, cov_income := as.integer(k$income)][, cov_region := reg[max.col(rm)]][, cov_party := k$party]
+d[, cov_gender_code := as.integer(k$female)][, cov_age_group_code := as.integer(k$age)][, cov_education_code := as.integer(k$education)]
+d[, cov_income := as.integer(k$income)][, cov_region := reg[max.col(rm)]][, cov_party_id := fifelse(k$party %in% c("", "Prefer not to answer"), NA_character_, k$party)]
 for (p in c("father", "mother")) for (g in c("hakka", "minnan", "mainlander", "aborigine", "newresident", "other"))
   d[, paste0("cov_", p, "_", g) := as.integer(k[[paste0(p, "_", g)]])]
 for (g in c("mandarin", "minnan", "hakka", "aborigine", "seasia", "english", "other"))

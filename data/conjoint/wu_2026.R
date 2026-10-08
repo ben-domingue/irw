@@ -34,14 +34,20 @@
 ##attribute, so attrpos_<attr> = the row r the attribute was shown in (1-8), recovered from the level
 ##text. Attribute order varies across respondents and is constant within a respondent (checked).
 ##Attribute text as displayed (the export's level strings, which match attributes_and_levels.csv).
-##Covariates (respondent answers as text, as exported): cov_age (band), cov_education, cov_ethnicity
-##(Hispanic), cov_race, cov_sex, cov_state, cov_partisan, cov_republican_strength,
+##Covariates (respondent answers as text, as exported; question text from EVSCOTUSJan6.docx):
+##cov_age_group (age "How old are you?", band text as exported, e.g. "35 - 44"), cov_education
+##("What is the highest level of school you have completed ...", answer text), cov_ethnicity
+##(Hispanic), cov_race, cov_gender (sex "What is your sex?" Male/Female -> male/female),
+##cov_state, cov_party_id (partisan "Generally speaking, do you usually think of yourself as a
+##Republican, a Democrat, an Independent, or something else?", answer text), cov_republican_strength,
 ##cov_democrat_strength, cov_leaner, cov_ideology, cov_political_interest, cov_voted (electionvote),
 ##cov_income, cov_court_knowledge_composition (realcomp) and cov_court_conservatives (currentconservative,
 ##the number of conservative justices the respondent believes are on the Court, 0-9). These are the
 ##survey's own items; the authors' columns age...32 etc. are used, not Lucid-supplied demographics.
 ##PII in the export, not kept: IPAddress, LocationLatitude/Longitude, ResponseId, rid (Lucid respondent
-##ID), zip code, timing and browser metadata. IDs are re-keyed to integers in file order. The survey's
+##ID), zip code, timing and browser metadata. Attention checks: every respondent kept passed both
+##(filter above), so no cov_attention_pass column is stored. Duration not kept. No survey weight in
+##the deposit. No repeated task. IDs are re-keyed to integers in file order. The survey's
 ##other experiments (electric vehicles, January 6 items) are not part of this table.
 library(data.table)
 a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]
@@ -80,13 +86,15 @@ d <- rbindlist(rows, use.names = TRUE)
 stopifnot(!anyNA(d), d[, sum(choice), .(id, task)][, all(V1 == 1)],
           d[, uniqueN(paste(attrpos_age, attrpos_gender, attrpos_position, attrpos_partisanship, attrpos_race,
                             attrpos_religion, attrpos_law_school, attrpos_law_clerk)), id][, all(V1 == 1)])
-cv <- c(cov_age = "age...32", cov_education = "education...131", cov_ethnicity = "ethnicity...132", cov_race = "race",
-        cov_sex = "sex", cov_state = "state", cov_partisan = "partisan", cov_republican_strength = "republicanstrength",
+cv <- c(cov_age_group = "age...32", cov_education = "education...131", cov_ethnicity = "ethnicity...132", cov_race = "race",
+        cov_gender = "sex", cov_state = "state", cov_party_id = "partisan", cov_republican_strength = "republicanstrength",
         cov_democrat_strength = "democratstrength", cov_leaner = "leaner", cov_ideology = "ideology",
         cov_political_interest = "polint", cov_voted = "electionvote", cov_income = "income",
         cov_court_knowledge_composition = "realcomp", cov_court_conservatives = "currentconservative")
 cvd <- data.table(id = seq_along(ids)); for (v in names(cv)) cvd[, (v) := { y <- k[[cv[[v]]]]; y[y == ""] <- NA; y }]
 cvd[, cov_court_conservatives := as.integer(cov_court_conservatives)]
+stopifnot(all(cvd$cov_gender %in% c("Male", "Female", NA)))
+cvd[, cov_gender := tolower(cov_gender)]
 d <- merge(d, cvd, by = "id")
 setcolorder(d, c("id", "task", "profile", "choice", sort(grep("^attr_", names(d), value = TRUE)),
                  sort(grep("^attrpos_", names(d), value = TRUE)), "trial_court"))

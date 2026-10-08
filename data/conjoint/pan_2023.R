@@ -28,10 +28,14 @@
 ##university (985 elite / not 985 elite). Task = row order within respondent (one resume per
 ##task, profile = 1): INFERRED, not verifiable; the varied allegiance order suggests the file
 ##keeps the display order. Respondent ids are already 1..506 (Qualtrics-style name
-##ResponseId, but not platform IDs). Covariates: respondent gender, age, non-Han, urban
-##hukou, CCP member, has direct reports, sector; the authors' dummy sets for work experience,
-##HR experience, hukou region, education and income are collapsed back into one text column
-##each (every respondent falls in exactly one group; income is missing for 36 respondents).
+##ResponseId, but not platform IDs). Covariates: cov_gender (female; ReadMe (10) "=1 if
+##identified as woman, =0 otherwise": 1 = female, 0 = male), age, non-Han, urban hukou, CCP
+##member, has direct reports, sector; the authors' dummy sets for work experience, HR
+##experience, hukou region, education and income are collapsed back into one text column each
+##(every respondent falls in exactly one group; income is missing for 36 respondents).
+##cov_education uses the ReadMe (24)-(26) wording: "High school or below", "Bachelor",
+##"Graduate degree" (the authors' three groups; the raw answer options are not deposited).
+##No survey weight, attention check or duration in the deposit (ReadMe).
 ##Spot check: lm(rating ~ study group) reproduces the log's non-conformity effect, -6.7% of
 ##the conformity callback rate (.852) (Log_main.txt: -6.728538).
 ##
@@ -57,6 +61,7 @@ h <- fread(file.path(raw, "HRSurvey.csv"))
 stopifnot(h[, .N, ResponseId][, all(N == 3)], uniqueN(h$ResponseId) == 506,
           h[, uniqueN(resume_allegiance), ResponseId][, all(V1 == 3)])
 h[, task := seq_len(.N), ResponseId]
+stopifnot(all(h$female %in% 0:1))
 pick <- function(...) { x <- list(...); lab <- names(x); m <- do.call(cbind, x)
   stopifnot(all(rowSums(m, na.rm = TRUE) <= 1)); r <- lab[max.col(m, ties.method = "first")]
   r[rowSums(m) == 0 | is.na(rowSums(m))] <- NA_character_; r }
@@ -70,13 +75,13 @@ d <- h[, .(id = as.integer(ResponseId), task, profile = 1L, rating = as.integer(
            attr_political_statement = fifelse(resume_statement == 1, "Explicit political statement", "No political statement"),
            attr_major = fifelse(resume_STEMMajor == 1, "STEM major", "Non-STEM major"),
            attr_university = fifelse(resume_hightierU == 1, "985 elite university", "Not a 985 elite university"),
-           cov_female = as.integer(female), cov_age = as.integer(age), cov_non_han = as.integer(nonHan),
+           cov_gender = c("male", "female")[female + 1L], cov_age = as.integer(age), cov_non_han = as.integer(nonHan),
            cov_urban_hukou = as.integer(urban), cov_ccp_member = as.integer(ccp), cov_manager = as.integer(manager),
            cov_sector = sector,
            cov_work_experience = pick(`1-3 years` = exp_1_3, `4-7 years` = exp_4_7, `8+ years` = exp_8more),
            cov_hr_experience = pick(`1-3 years` = hrexp_1_3, `4-7 years` = hrexp_4_7, `8+ years` = hrexp_8more),
            cov_hukou_region = pick(East = HukouEast, Middle = HukouMiddle, West = HukouWest),
-           cov_education = pick(`High school or below` = hs, Bachelor = bachelor, Graduate = graduate),
+           cov_education = pick(`High school or below` = hs, Bachelor = bachelor, `Graduate degree` = graduate),
            cov_income = pick(`<=5000 RMB` = inc_low, `5001-8000 RMB` = inc_mid, `8001-20000 RMB` = inc_upmid, `>20000 RMB` = inc_high))]
 stopifnot(!anyNA(d$attr_study_group), d[, uniqueN(cov_age), id][, all(V1 == 1)])
 setorder(d, id, task, profile)

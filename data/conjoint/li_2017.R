@@ -29,9 +29,10 @@
 ##    support' and 1 equal to 'no support at all.'" (English translation in the appendix).
 ##4 tasks (8 profile rows, 3 respondents) have no embedded attribute text or order (not
 ##saved); they are dropped, leaving 2,846 respondents and 11,380 tasks.
-##Covariates (authors' codes): cov_age_group (1-6; the file carries no labels and the appendix
-##lists the bands inconsistently, so the code is kept as is), cov_han,
-##cov_male, cov_rural_hukou, cov_coastal, cov_college, cov_ccp, cov_cyl, cov_income (1-7,
+##Covariates (authors' codes): cov_age_group_code (age group 1-6; the file carries no labels and
+##the appendix lists the bands inconsistently, so the code is kept, under the _code name),
+##cov_gender (male: readme.txt "male: gender (male=1)", and code.do Figure E4 labels male==0
+##Female; written male/female), cov_han, cov_rural_hukou, cov_coastal, cov_college, cov_ccp, cov_cyl, cov_income (1-7,
 ##N10), cov_social_status (0-9 as stored), cov_soe, cov_foreign_firm, cov_private_firm,
 ##cov_manufacturing, cov_service, cov_news_interest (1-4).
 ##Dropped: Qualtrics ResponseId (v1, re-keyed to integers), occupation free text (q39_text),
@@ -41,7 +42,7 @@ a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]
 s <- as.data.table(zap_labels(read_dta(file.path(raw, "data.dta"))))
 for (v in grep("_text$", names(s), value = TRUE)) s[, (v) := trimws(iconv(get(v), "GB18030", "UTF-8"))]
 s[, v1 := as.character(v1)][, blk := seq_len(.N), v1]
-stopifnot(s[, .N, v1][, all(N == 8)])
+stopifnot(s[, .N, v1][, all(N == 8)], all(s$male %in% 0:1))
 s[, task := (blk - 1L) %% 4L + 1L][, profile := (blk - 1L) %/% 4L + 1L]
 stopifnot(s[, sum(prefer), .(v1, task)][, all(V1 == 1)])
 s[, miss := Reduce(`|`, lapply(paste0("q68_", 1:7, "_text"), function(v) is.na(get(v)) | get(v) == ""))]
@@ -63,7 +64,7 @@ stopifnot(s[, uniqueN(q68_15_text), .(v1, task)][, all(V1 == 1)])
 s[, id := match(v1, unique(v1))]
 d <- s[, c(list(id = id, task = task, profile = profile, choice = as.integer(prefer), rating = as.integer(rating)),
            .SD[, c(paste0("attr_", names(an)), paste0("attrpos_", names(an))), with = FALSE],
-           list(trial_wave = as.integer(wave), cov_age_group = as.integer(age), cov_han = as.integer(han), cov_male = as.integer(male),
+           list(trial_wave = as.integer(wave), cov_age_group_code = as.integer(age), cov_han = as.integer(han), cov_gender = c("female", "male")[male + 1L],
                 cov_rural_hukou = as.integer(rural), cov_coastal = as.integer(eastern), cov_college = as.integer(college),
                 cov_ccp = as.integer(ccp), cov_cyl = as.integer(cyl), cov_income = as.integer(income),
                 cov_social_status = as.integer(socialstatus), cov_soe = as.integer(SOE), cov_foreign_firm = as.integer(foreign),

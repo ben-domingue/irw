@@ -38,11 +38,13 @@
 ##Covariates (Stata labels): cov_degree (SIE/GLO/SPO), cov_pol_interest (1 none .. 4 substantial),
 ##cov_importance_education / _income / _integrity / _taxes_services / _same_sex (Q29, 1 none ..
 ##4 substantial), cov_left_right (1 left .. 10 right), cov_voted (0/1), cov_birth_year, cov_age
-##(authors': survey year - birth year), cov_male (gender: 1 = male, 0 = female), cov_italian (0/1),
+##(authors': survey year - birth year), cov_gender (Q.32 'Il suo genere è' Maschio/Femmina, Conjoint survey.docx;
+##data.dta `gender` labels Female = 0, Male = 1 -> female/male), cov_italian (0/1),
 ##cov_secondary_school (1 liceo, 2 istituto tecnico, 3 istituto professionale, 66 other),
 ##cov_work_hours (1 do not work, 2 1-10, 3 11-20, 4 21-30, 5 more than 30 hours), cov_iseeu (means
 ##tested, 0/1), cov_school_grade (authors' converted grade), cov_lives_milan (0/1),
-##cov_survey_wave (2012/2013).
+##cov_survey_wave (2012/2013). cov_age is the deposit's own `age` (label '= survey - birthy'),
+##not computed here. The deposit documents no survey weight.
 ##Dropped: IDContatto (panel contact id; re-keyed), Data (date and time of participation), the
 ##raw nationality code (only Italy/Albania/France/China/Romania labelled; the authors' italian
 ##dummy kept), derived ftstudent/lyceum dummies, gr, nonmissing, vote/candidate (in choice/profile).
@@ -50,7 +52,8 @@
 library(haven); library(data.table)
 a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]
 s <- as.data.table(read_dta(file.path(raw, "data.dta")))
-stopifnot(nrow(s) == 21870, uniqueN(s$IDContatto) == 405)
+stopifnot(nrow(s) == 21870, uniqueN(s$IDContatto) == 405, identical(unname(attr(s$gender, "labels")), c(0, 1)),
+          identical(names(attr(s$gender, "labels")), c("Female", "Male")), s$gender %in% 0:1)
 s[, id := match(IDContatto, sort(unique(IDContatto)))]
 z <- function(x) as.integer(zap_labels(x))
 lv <- list(education = c("Licenza media", "Diploma superiore", "Laurea"),
@@ -74,7 +77,7 @@ cv <- unique(s[, .(id, cov_degree = as.character(as_factor(Campione)), cov_pol_i
                    cov_importance_education = z(edu_imp), cov_importance_income = z(inc_imp), cov_importance_integrity = z(hon_imp),
                    cov_importance_taxes_services = z(taxspend_imp), cov_importance_same_sex = z(samesex_imp),
                    cov_left_right = z(left_right), cov_voted = z(voter), cov_birth_year = z(birthy), cov_age = z(age),
-                   cov_male = z(gender), cov_italian = z(italian), cov_secondary_school = z(sec_school), cov_work_hours = z(working_h),
+                   cov_gender = c("female", "male")[z(gender) + 1L], cov_italian = z(italian), cov_secondary_school = z(sec_school), cov_work_hours = z(working_h),
                    cov_iseeu = z(ISEEU), cov_school_grade = as.numeric(school_grade2), cov_lives_milan = z(milan),
                    cov_survey_wave = 2012L + z(survey))])
 stopifnot(!anyDuplicated(cv$id))

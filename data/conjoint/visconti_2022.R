@@ -25,7 +25,9 @@
 ##conjoints"; most of their answers are 999). cov_flood_exposed = the author's treatment
 ##indicator (damage level a2 > 2); cov_zone 1/2/3 = sampled zone A/B/C (labels from
 ##survey_paipote_final.dta; the author treats A and C as the affected area). Other survey
-##codes (c1-c3, b1, a3, a4) have no labels in the deposit and are dropped.
+##codes (c1-c3, b1, a3, a4) have no labels in the deposit and are dropped (the author's
+##004_conjoint_diagnostic.R uses c1 as respondent gender in a balance test, but no file gives
+##its codes). No survey weight, attention check or duration is deposited.
 ##Respondent ids are the source's sequential idnum (1-210).
 library(haven); library(data.table)
 a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]

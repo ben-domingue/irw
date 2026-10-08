@@ -27,12 +27,18 @@
 ##Outcome: choice = `votefor`: "which of the two candidates they would rather vote for" (article
 ##paraphrase), forced; one candidate chosen per task. 132 tasks with no answer are omitted, which
 ##removes 20 respondents entirely: 1,485 respondents in the table (article: 1,505 assigned).
-##Covariates (README coding): cov_female, cov_thin_pop1-8 (populist attitude items, 1-5
+##Covariates (README coding): cov_gender (female; README "whether the respondent is female (1)
+##or not (0)": 1 = female, 0 = male), cov_thin_pop1-8 (populist attitude items, 1-5
 ##disagree-agree), cov_party_id (Republican / Independent / Democrat, leaners included),
 ##cov_host1_immigrants, cov_host2_tariffs, cov_host3_intervention, cov_host4_rich (1-7
 ##disagree-agree), cov_income (hhi, 1-26, 27 = prefer not to answer), cov_age, cov_white,
-##cov_black, cov_hispanic (0/1), cov_education (1-12), cov_attention_check (att1; 3 = passed;
-##the article keeps failures, 13%).
+##cov_black, cov_hispanic (0/1), cov_education_code (Education, kept as codes: the README
+##lists 1-12 = "3rd Grade or less" ... "None of the Above", but under that key 26% of
+##respondents would have stopped at middle school and 1.3% hold a college degree, with no
+##masters, so the key does not fit these data and no other source maps them),
+##cov_attention_pass (att1; README "attention check, which required respondents to answer with
+##3": 1 = answered 3, 0 = any other answer, NA = no answer; the article keeps failures, 13%).
+##No survey weight, duration or repeated task in the deposit (README).
 ##Dropped: Qualtrics ResponseId (re-keyed 1..n in file order).
 library(data.table)
 a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]
@@ -52,12 +58,15 @@ for (k in seq_along(pr)) {
 }
 d[, attr_immigration := s$A1_immigration][, attr_military := s$A2_military]
 d[, attr_redistribution := s$A3_redistribution][, attr_globalization := s$A4_globalization]
-cv <- c(cov_female = "female", setNames(paste0("thin_pop", 1:8), paste0("cov_thin_pop", 1:8)), cov_party_id = "party_id",
+cv <- c(setNames(paste0("thin_pop", 1:8), paste0("cov_thin_pop", 1:8)), cov_party_id = "party_id",
         cov_host1_immigrants = "thick_pop1_immigrants", cov_host2_tariffs = "thick_pop2_tariffs",
         cov_host3_intervention = "thick_pop3_intervention", cov_host4_rich = "thick_pop4_rich", cov_income = "hhi",
-        cov_age = "age", cov_white = "White", cov_black = "Black", cov_hispanic = "Hispanic", cov_education = "Education",
-        cov_attention_check = "att1")
+        cov_age = "age", cov_white = "White", cov_black = "Black", cov_hispanic = "Hispanic", cov_education_code = "Education")
 for (v in names(cv)) d[, (v) := s[[cv[[v]]]]]
+stopifnot(all(s$female %in% 0:1), all(s$att1 %in% c(1:5, NA)))
+d[, cov_gender := c("male", "female")[s$female + 1L]]
+d[, cov_attention_pass := as.integer(s$att1 == 3)]
+setcolorder(d, "cov_gender", before = "cov_thin_pop1")
 stopifnot(d[, rowSums(.SD != "(not shown)") == 2, .SDcols = patterns("^attr_priority_")],
           !anyNA(d[, .SD, .SDcols = patterns("^attr_")]), d[, .N, .(id, task)][, all(N == 2)])
 d <- d[!is.na(choice)]

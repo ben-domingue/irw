@@ -25,15 +25,21 @@
 ##dichotomized attribute (for their individual-level estimates); that is an analysis choice and
 ##is NOT applied here, so all 929 respondents are kept. Their dichotomized/collapsed attribute
 ##codes (*_bin, *_cat) are not reproduced.
-##Covariates (data_01_survey.dta, Lucid-supplied, source codes kept): cov_age (years),
-##cov_gender (1 = Male, 2 = Female), cov_income (household income, 1 = less than $14,999 ..
-##24 = $250,000 and above, $5,000 bands to $100,000, then $25,000/$50,000 bands), cov_race
-##(1 = White, 2 = Black or African American, 3 = American Indian or Alaska Native, 4 = Asian,
-##5 = Pacific Islander, 6 = Other), cov_hispanic (0 = No, 1 = Yes), cov_education (1 = Less
-##than high school, 2 = Complete high school, 3 = Post high school vocational training, 4 =
-##Some college no degree, 5 = Associate's, 6 = Bachelor's, 7 = Master's or professional, 8 =
-##Doctorate), cov_pid (1 = Strong Democrat .. 7 = Strong Republican). Dropped: the authors'
-##derived ethnocentrism scale score (the item responses are not deposited). No survey weight.
+##Covariates (data_01_survey.dta, Lucid-supplied): cov_age (years); cov_gender (value labels
+##1 = Male, 2 = Female -> male/female); cov_education = the value-label text of education
+##("Education category"): Less than high school, Complete high school, Post high school
+##vocational training, Some college, no degree, Associate's degree, Bachelor's degree,
+##Master's or professional degree, Dcotorate degree [sic, verbatim]; cov_party_id7 = the
+##value-label text of pid ("Party identification"): Strong Democrat, Not very strong
+##Democrat, Independent, lean Democrat, Independent, Independent, lean Republican, Not very
+##strong Republican, Strong Republican. Source codes kept: cov_income (household income,
+##1 = less than $14,999 .. 24 = $250,000 and above, $5,000 bands to $100,000, then
+##$25,000/$50,000 bands), cov_race (1 = White, 2 = Black or African American, 3 = American
+##Indian or Alaska Native, 4 = Asian, 5 = Pacific Islander, 6 = Other), cov_hispanic (0 = No,
+##1 = Yes). Dropped: the authors' derived ethnocentrism scale score (the item responses are
+##not deposited). No survey weight, attention check or duration in the deposit (readme).
+##Profiles were shown as the usual two-column conjoint table (article Figure 1). No task is
+##repeated (checked). The 7 omitted missing ratings leave 7 tasks with one profile.
 ##Count check: 929 respondents matches the article. Spot check: OLS of rating on the
 ##dichotomized attributes (as in the authors' Figure 2), clustered by id, gives no prior
 ##violation +1.473 (SE .071), college +0.665, good English +0.626, female +0.085; the deposited
@@ -63,10 +69,12 @@ setcolorder(d, c("id", "task", "profile", "rating", paste0("attr_", nm), paste0(
 stopifnot(d[, all(rating %in% c(0:10, NA))], !anyNA(d[, paste0("attr_", nm), with = FALSE]))
 d <- d[!is.na(rating)]
 s <- as.data.table(read_dta(file.path(raw, "data_01_survey.dta")))
-cv <- s[, .(id = as.integer(respid), cov_age = as.integer(age), cov_gender = as.integer(zap_labels(gender)),
+vl <- function(v) { l <- attr(v, "labels"); x <- names(l)[match(as.numeric(v), l)]; stopifnot(all(is.na(v) | !is.na(x))); x }
+stopifnot(all(s$gender %in% 1:2), identical(vl(haven::labelled(1:2, attr(s$gender, "labels"))), c("Male", "Female")))
+cv <- s[, .(id = as.integer(respid), cov_age = as.integer(age), cov_gender = tolower(vl(gender)),
             cov_income = as.integer(zap_labels(income)), cov_race = as.integer(zap_labels(race)),
-            cov_hispanic = as.integer(zap_labels(hispanic)), cov_education = as.integer(zap_labels(education)),
-            cov_pid = as.integer(zap_labels(pid)))]
+            cov_hispanic = as.integer(zap_labels(hispanic)), cov_education = vl(education),
+            cov_party_id7 = vl(pid))]
 stopifnot(uniqueN(cv$id) == nrow(cv), setequal(cv$id, d$id))
 d <- merge(d, cv, by = "id")
 stopifnot(uniqueN(d$id) == 929)

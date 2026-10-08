@@ -14,25 +14,29 @@
 ##least one task and are kept (all from days 35-40). The authors' sample is good completes
 ##(gc = 1) with Day > 34: cov_good_complete == 1 gives 1,481 respondents (1,883 kept here;
 ##of the other 402, 6 are flagged speeders and 396 have no completion code). The authors
-##analyse Republicans (P2a = 1, 1,096 kept) and Independent/Other (787) separately (cov_party).
+##analyse Republicans (P2a = 1, 1,096 kept) and Independent/Other (787) separately (cov_party_id).
 ##Question (codebook Q189-Q191, 3 tasks): "Suppose you are voting in a primary election between
 ##two Republican candidates who are running for Congress. Which candidate do you prefer?"
 ##Candidate 1 / Candidate 2, no opt-out. choice = 1 for the preferred candidate.
-##Attributes (7, Qualtrics CBCONJOINT cells, text as displayed, fixed row order in the
-##codebook): Profession, Military Service, Religion, Race/Ethnicity, Gender, Age, Election
-##Opinion (Trump lost vs won the 2020 election, with certification vote).
-##Randomization restrictions are not documented; level shares are uneven (Protestant 40%,
-##Jewish 32%, Catholic 28%; Age 36 = 20% vs 60 = 14%), so the Qualtrics design weights were
-##probably not uniform.
-##Covariates (codebook codes): cov_gender (D1: 1 Male, 2 Female, 3 Something else, 4 No
-##answer), cov_birth_year (D3, free-text year; non-numeric answers set missing),
-##cov_education (D4: 1 no HS ... 6 postgraduate, 7 No answer), cov_race (D5: 1 White,
-##2 Black, 3 Hispanic, 4 Asian, 5 Native American, 6 Middle Eastern, 7 Other, 8 No answer),
-##cov_party (P2a: 1 Republican, 2 Democrat, 3 Independent, 4 Other, 5 No answer),
-##cov_party_strength (P2b: 1 Strong, 2 Not very strong Republican), cov_party_lean (P2d:
-##1 Republican, 2 Democratic, 3 Neither), cov_election_legitimate (E3: "Do you accept the
-##election results as legitimate?" 1 Yes, 2 No, 3 No answer), cov_survey_day (Day),
-##cov_good_complete (gc == 1).
+##Attributes (7, Qualtrics CBCONJOINT cells, text as displayed): Profession, Military Service,
+##Religion, Race/Ethnicity, Gender, Age, Election Opinion (Trump lost vs won the 2020 election,
+##with certification vote). Attribute order is fixed: the codebook's Q189-Q191 text pipes the
+##seven fields in this order for both candidates, shown as a Candidate 1 / Candidate 2 table.
+##Randomization restrictions and level weights are not documented. Level shares in the table
+##are close to uniform (every attribute within 1.02x; an earlier version of this header
+##reported uneven shares, which the table does not show) and no combination is missing.
+##Covariates (codebook = ELTS Questionnaire and Codebook.docx, answer options and codes):
+##cov_gender (D1: 1 Male -> "male", 2 Female -> "female", 3 Something else -> "other",
+##4 No answer -> NA), cov_birth_year (D3, free-text year; non-numeric answers set missing),
+##cov_education (D4 option text: "Did not graduate from high school", "High school graduate",
+##"Some college, but no degree (yet)", "2-year college degree", "4-year college degree",
+##"Postgraduate degree (MA, MBA, MD, JD, PhD, etc.)"; 7 No answer -> NA), cov_race (D5 codes:
+##1 White, 2 Black, 3 Hispanic, 4 Asian, 5 Native American, 6 Middle Eastern, 7 Other,
+##8 No answer), cov_party_id (P2a option text: "Republican", "Independent"; only these two
+##reach the conjoint), cov_party_strength (P2b: 1 Strong, 2 Not very strong Republican),
+##cov_party_lean (P2d: 1 Republican, 2 Democratic, 3 Neither), cov_election_legitimate (E3:
+##"Do you accept the election results as legitimate?" 1 Yes, 2 No, 3 No answer),
+##cov_survey_day (Day), cov_good_complete (gc == 1).
 ##The authors' weights (entropy balancing inside their script) are not stored in the deposit.
 ##Dropped: panel identifiers (rid, RISN, QPMID, TolunaEnc, ...), dates, all free-text word
 ##association answers (WUSA, WDJT, ...), D5a (free text), D2 (state), timers.
@@ -62,8 +66,14 @@ d <- rbindlist(rows)
 d <- d[ans %in% c("1", "2")]
 d[, choice := as.integer(as.integer(ans) == profile)][, ans := NULL]
 by <- num(s$D3)
-cv <- s[, .(id, cov_gender = num(D1), cov_birth_year = fifelse(by %between% c(1900L, 2002L), by, NA_integer_),
-            cov_education = num(D4), cov_race = num(D5), cov_party = num(P2a), cov_party_strength = num(P2b),
+lab <- function(x, l) unname(l[x])
+d1 <- c("1" = "male", "2" = "female", "3" = "other")
+d4 <- c("1" = "Did not graduate from high school", "2" = "High school graduate",
+        "3" = "Some college, but no degree (yet)", "4" = "2-year college degree",
+        "5" = "4-year college degree", "6" = "Postgraduate degree (MA, MBA, MD, JD, PhD, etc.)")
+p2a <- c("1" = "Republican", "2" = "Democrat", "3" = "Independent", "4" = "Other")
+cv <- s[, .(id, cov_gender = lab(D1, d1), cov_birth_year = fifelse(by %between% c(1900L, 2002L), by, NA_integer_),
+            cov_education = lab(D4, d4), cov_race = num(D5), cov_party_id = lab(P2a, p2a), cov_party_strength = num(P2b),
             cov_party_lean = num(P2d), cov_election_legitimate = num(E3), cov_survey_day = num(Day),
             cov_good_complete = as.integer(gc == "1"))]
 d <- merge(d, cv, by = "id")

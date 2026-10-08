@@ -29,9 +29,13 @@
 ##  pairing and all nine attribute codes: every one of the 13,960 rows matches exactly
 ##  once and the choices agree on all of them. Added: rating = Rating_Immigrant, 1-7
 ##  (higher = more supportive of admitting the immigrant); cov_survey_weight = weight2
-##  (post-stratification weight); cov_age, cov_education (ppeducat 1-4), cov_race
-##  (ppethm), cov_gender (ppgender, 1 male / 2 female), cov_income (ppincimp),
-##  cov_party_id (1-7), cov_ideology (1-7), as GfK panel codes. Not added:
+##  (post-stratification weight); cov_age (ppage, years); cov_education (ppeducat, as the
+##  .dta value-label text: Less than high school, High school, Some college, Bachelor's degree
+##  or higher); cov_gender (ppgender, value labels 1 Male / 2 Female -> male/female);
+##  cov_party_id7 (Party_ID "Political Party Affiliation", as the value-label text, Strong
+##  Republican ... Undecided/Independent/Other ... Strong Democrat; -1 Refused = NA);
+##  cov_race (ppethm), cov_income (ppincimp) and cov_ideology (1-7, -1 = refused) stay GfK
+##  panel codes (the .dta labels them). Not added:
 ##  Support_Admission (exactly rating >= 5, so derived), the attitude batteries, state
 ##  and ZIP-level measures. The 2015 file has 8 further respondents with choices who are
 ##  not in the 2014 file; they are left out so the table stays the 1,396 that cjoint ships.
@@ -68,9 +72,12 @@ mk <- as.data.table(zap_labels(m))[, ..key]
 j <- r[mk, on = key]
 stopifnot(nrow(j) == nrow(d), !anyNA(j$Rating_Immigrant), all(j$Chosen_Immigrant == d$choice))
 d[, rating := as.integer(j$Rating_Immigrant)]
-d[, `:=`(cov_survey_weight = as.numeric(j$weight2), cov_age = as.integer(j$ppage), cov_education = as.integer(j$ppeducat),
-         cov_race = as.integer(j$ppethm), cov_gender = as.integer(j$ppgender), cov_income = as.integer(j$ppincimp),
-         cov_party_id = as.integer(j$Party_ID), cov_ideology = as.integer(j$Ideology))]
+rl <- read_dta(file.path(raw, "repdata.dta"), n_max = 1)
+txt <- function(v, x) { l <- attr(rl[[v]], "labels"); l <- l[l > 0]; stopifnot(all(x %in% c(l, -1, NA))); names(l)[match(x, l)] }
+stopifnot(all(j$ppage > 0), all(j$ppgender %in% 1:2))
+d[, `:=`(cov_survey_weight = as.numeric(j$weight2), cov_age = as.integer(j$ppage), cov_education = txt("ppeducat", j$ppeducat),
+         cov_race = as.integer(j$ppethm), cov_gender = c("male", "female")[j$ppgender], cov_income = as.integer(j$ppincimp),
+         cov_party_id7 = txt("Party_ID", j$Party_ID), cov_ideology = as.integer(j$Ideology))]
 setcolorder(d, c("id", "task", "profile", "choice", "rating"))
 setorder(d, id, task, profile)
 fwrite(d, file.path(out, "hainmueller_2014_immigrant.csv"))

@@ -16,7 +16,8 @@ from pathlib import Path
 CONJ = Path(__file__).resolve().parents[2] / "data" / "conjoint"
 
 TABLE_COLS = ["table", "country", "display_language", "label_language", "restrictions",
-              "restrictions_note", "task_source", "profile_source", "evidence"]
+              "level_weights", "restrictions_note", "attr_order", "survey_weight", "presentation",
+              "task_source", "profile_source", "evidence"]
 OUTCOME_COLS = ["table", "outcome", "type", "question", "opt_out", "scale_min", "scale_max",
                 "low_anchor", "high_anchor", "evidence"]
 SOURCE = {"recorded", "inferred", "unknown"}
@@ -64,8 +65,13 @@ class TablesFile(unittest.TestCase):
             self.assertRegex(r["display_language"], ISO_LIST, t)
             self.assertRegex(r["label_language"], ISO_LIST, t)
             self.assertIn(r["restrictions"], {"none", "yes", "observed", "unknown"}, t)
-            self.assertEqual(bool(r["restrictions_note"]), r["restrictions"] in ("yes", "observed"),
-                             f"{t}: restrictions_note is filled exactly when restrictions is yes or observed")
+            self.assertIn(r["level_weights"], {"uniform", "nonuniform", "observed", "unknown"}, t)
+            needs = r["restrictions"] in ("yes", "observed") or r["level_weights"] == "nonuniform"
+            if needs:   # a note may also explain a none/unknown/uniform value
+                self.assertTrue(r["restrictions_note"], f"{t}: restrictions_note gives the rule or the weights")
+            self.assertIn(r["attr_order"], {"fixed", "respondent", "task", "unknown"}, t)
+            self.assertIn(r["survey_weight"], {"kept", "none", "not_kept", "unknown"}, t)
+            self.assertIn(r["presentation"], {"grid", "text", "image", "unknown"}, t)
             self.assertIn(r["task_source"], SOURCE, t)
             self.assertIn(r["profile_source"], SOURCE, t)
 

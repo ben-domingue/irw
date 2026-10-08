@@ -43,7 +43,8 @@
 ##              not discussed in the article's main text). In pair 2 the WIN value labels are
 ##              Russian (Да/Нет) instead of Yes/No, same codes; both map to 1/0 here. (The
 ##              authors' WIN == "Yes" recode would score every pair-2 answer 0.)
-##Covariates: cov_female (1 = female respondent), cov_age (years), cov_interview_language
+##Covariates: cov_gender (RSPSEX "1. Gender", .dta value labels 1 Male, 2 Female -> male/female;
+##-7 Not applicable does not occur), cov_age (RSPAGE "2. Age (numeric)", years), cov_interview_language
 ##(Ukrainian/Russian), cov_macroregion, cov_settlement_type, cov_survey_weight (wt_fin, the
 ##authors' weight to the non-rural population). Dropped: PANELID (panel member ID), ID re-keyed,
 ##dates, all other survey items, the authors' derived sexism scales (hs, bs).
@@ -67,12 +68,12 @@ d <- rbindlist(lapply(1:4, function(t) rbindlist(lapply(1:2, function(p) {
              gend = v("GEND"), type = v("TYPE"))
 }))))
 for (n in names(anames)) d[, paste0("attrpos_", n) := apply(pos, 1, function(r) match(anames[[n]], r))[id]]
-cv <- data.table(id = s$rid, cov_female = as.integer(lab(s$RSPSEX) == "Female"), cov_age = as.integer(s$RSPAGE),
+cv <- data.table(id = s$rid, cov_gender = c(Male = "male", Female = "female")[lab(s$RSPSEX)], cov_age = as.integer(s$RSPAGE),
                  cov_interview_language = lab(s$QLANG), cov_macroregion = lab(s$MACREG),
                  cov_settlement_type = lab(s$SETTTYPE), cov_survey_weight = as.numeric(s$wt_fin))
 d <- merge(d, cv, by = "id")
 stopifnot(d[, uniqueN(paste(gend, type)), attr_name][, all(V1 == 1)], d[, uniqueN(attr_name), .(gend, type)][, all(V1 == 8)])
 d[, c("gend", "type") := NULL]
-stopifnot(!anyNA(d$attr_name), d[, uniqueN(attr_name)] == 48, d[attr_experience == "15 years", !any(attr_age == "25 years old")])
+stopifnot(!anyNA(d$cov_gender), !anyNA(d$attr_name), d[, uniqueN(attr_name)] == 48, d[attr_experience == "15 years", !any(attr_age == "25 years old")])
 setorder(d, id, task, profile)
 fwrite(d, file.path(out, "erlich_2023_ukraine_candidates.csv"))

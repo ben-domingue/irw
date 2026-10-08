@@ -16,8 +16,9 @@
 ##Military), weapon (None / Assault Rifle), gender (Female / Male), skin colour (Dark /
 ##Light; the .dta labels are Non-white / White). The 16 combinations are the 16 photos
 ##(`imageperson`, e.g. "Armed brown female police"), so the photo itself is not stored.
-##The two photos in a pair always differ (checked); restrictions and weights are not
-##documented. trial_prompt: the security prompt each respondent saw before the photos
+##The two photos in a pair always differ (checked; independent draws of 16 photos would give
+##about 75 identical pairs in 1,205), an apparent rule (restrictions = observed); otherwise
+##restrictions and weights are not documented, and level shares are near-equal. trial_prompt: the security prompt each respondent saw before the photos
 ##(.dta value labels "Fighting Crime" / "Public Security").
 ##Outcomes (wording NOT in the deposit; .dta variable labels):
 ##  choice = whicheffective, "Forced choice, who is more effective"; one per pair, no opt-out.
@@ -31,10 +32,12 @@
 ##  this is not confirmed. No `rating` column: all four are named.
 ##Check: OLS of the standardized civil-liberties rating on the four attributes reproduces
 ##the deposit's All_CivLib.txt (gender -0.088, skin 0.038, uniform 0.078, weapon 0.133).
-##Covariates (labels from the .dta): cov_female (sexo 2 = Female), cov_age (years),
+##Covariates (labels from the .dta): cov_gender (sexo, label "Resp sex", value labels
+##1 = Male, 2 = Female; stored female / male), cov_age (years),
 ##cov_education (ed_level text), cov_victim (crime victim in past 12 months, 1 = yes),
 ##cov_ideology (1 = Left to 10 = Right), cov_trust_army (1 = Not at all to 7 = Absolutely),
-##cov_party (mixedPartyId text), cov_skin_tone (surveyor-perceived, 1 lightest to 11
+##cov_party_id (mixedPartyId "Mixed Political Party Identification", value-label text:
+##PRI, PAN, PRD, MORENA, PT, PVEM, PES, MC, None), cov_skin_tone (surveyor-perceived, 1 lightest to 11
 ##darkest), cov_state (state abbreviation).
 ##DROPPED: municipality code and name and the municipal homicide/confrontation measures
 ##(they locate the respondent to a municipality), household income code, the authors'
@@ -52,11 +55,11 @@ d <- s[, .(id = as.integer(idresp), task = 1L, profile = as.integer(photo), choi
            rating_effective = effective, rating_civil_liberties = lib, rating_corrupt = corrupt, rating_neighborhood = neighb,
            attr_uniform = c("Police", "Military")[uniform + 1], attr_weapon = c("None", "Assault Rifle")[weapon + 1],
            attr_gender = c("Female", "Male")[gender + 1], attr_skin_color = c("Dark", "Light")[race + 1],
-           cov_female = as.integer(sexo == 2), cov_age = as.integer(age), cov_victim = as.integer(vict),
+           cov_gender = c("male", "female")[sexo], cov_age = as.integer(age), cov_victim = as.integer(vict),
            cov_ideology = as.integer(polspectrum), cov_trust_army = as.integer(army), cov_skin_tone = as.integer(skintone),
            cov_state = edo_name)]
-d[, trial_prompt := lab("mediation")][, cov_education := lab("ed_level")][, cov_party := lab("mixedPartyId")]
-stopifnot(!anyNA(d$trial_prompt), all(round(unlist(d[, .(rating_effective, rating_corrupt)]) * 9, 4) %% 1 == 0))
+d[, trial_prompt := lab("mediation")][, cov_education := lab("ed_level")][, cov_party_id := lab("mixedPartyId")]
+stopifnot(!anyNA(d$trial_prompt), all(s$sexo %in% 1:2), identical(attr(k$sexo, "labels"), c(Male = 1, Female = 2)), all(round(unlist(d[, .(rating_effective, rating_corrupt)]) * 9, 4) %% 1 == 0))
 setcolorder(d, c("id", "task", "profile", "choice", grep("^rating_", names(d), value = TRUE), grep("^attr_", names(d), value = TRUE), "trial_prompt"))
 setorder(d, id, task, profile)
 fwrite(d, file.path(out, "floresmacias_2022_militarization.csv"))

@@ -55,7 +55,9 @@
 ##analysis), cov_superiority_1..3 (the three "belief in national superiority" items, 1-5;
 ##wording not deposited; LOWER = more agreement, inferred from the authors' chauv_bin "Yes"
 ##having a mean scale of 1.8 vs 3.5 for "No"), and from data_test.csv (45,396 of 45,724
-##matched): cov_age (years, "80+" = 80), cov_female (1 = Woman, 0 = Man, NA otherwise),
+##matched): cov_age (years, "80+" = 80), cov_gender (gender text: Woman = female, Man = male,
+##Non-binary and "A gender not listed here (please specify)" = other; the specified text is not
+##deposited),
 ##cov_postsec_education (source ed_postsec 0/1; the authors label 1 ">BA"), cov_income_quintile
 ##(1-5), cov_citizen (1 = citizen of the survey country). Dropped: Qualtrics ResponseId,
 ##response timestamps and duration, employment and marital status text, the derived
@@ -79,9 +81,9 @@ d <- s[, .(src = ResponseId, task = as.integer(task), profile = as.integer(profi
            cov_days_since_invasion = as.integer(bef_after_war), cov_superiority_1 = as.integer(chauv_num_1),
            cov_superiority_2 = as.integer(chauv_num_2), cov_superiority_3 = as.integer(chauv_num_3))]
 t <- fread(file.path(raw, "data_test.csv"))
-stopifnot(!anyDuplicated(t$ResponseId))
+stopifnot(!anyDuplicated(t$ResponseId), all(t$gender %in% c("Woman", "Man", "Non-binary", "A gender not listed here (please specify)")))
 t <- t[, .(src = ResponseId, cov_age = suppressWarnings(as.integer(sub("80+", "80", age, fixed = TRUE))),
-           cov_female = fifelse(gender == "Woman", 1L, fifelse(gender == "Man", 0L, NA_integer_)),
+           cov_gender = unname(c(Woman = "female", Man = "male", "Non-binary" = "other", "A gender not listed here (please specify)" = "other")[gender]),
            cov_postsec_education = as.integer(ed_postsec), cov_income_quintile = as.integer(income_quintile),
            cov_citizen = fifelse(citizen == "Yes", 1L, fifelse(citizen == "No", 0L, NA_integer_)))]
 d <- merge(d, t, by = "src", all.x = TRUE, sort = FALSE)

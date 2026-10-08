@@ -14,7 +14,8 @@
 ##constitutional revision, Diet seat reduction), 3-4 levels each; each level is a real party's
 ##2014 platform position. Level text is the Japanese text shown (Qualtrics F-<task>-<profile>-
 ##<row> fields, "<br>" line breaks removed); attribute names (F-<task>-<row>) are mapped to English
-##column names. Attribute row order was randomized per task and is recorded (attrpos_, 1-9).
+##column names. Attribute row order was randomized and is recorded (attrpos_, 1-9); in the data
+##it is the same in all five tasks of a respondent, i.e. drawn once per respondent.
 ##The authors' English labels (HSY-preprocess.R) end with the parties holding each position in
 ##brackets; those brackets were not displayed and are not stored.
 ##Outcome: choice = "Suppose that the following two parties were nominating candidates in this
@@ -28,10 +29,17 @@
 ##Restrictions: not documented in the deposit (article paywalled, not read); level shares in the
 ##table are close to uniform. N: 1,951 respondents answer at least one task (1,928 answer all
 ##five); the article's N was not checked.
-##Covariates (codebook codes): cov_age (C1 + 19 = years, as the authors' code), cov_gender
-##(1 male, 2 female), cov_education (C3, 1-5), cov_prefecture (C4, 1-47), cov_employment (C6),
-##cov_income (C8, 1-14), cov_left_right (D1_1, 0-10), cov_turnout_history (D2), cov_smd_vote
-##(D3), cov_pr_vote (D5), cov_party_id (D6), cov_abe_approval (D8). The authors' entropy-
+##Covariates: cov_age (C1 + 19 = years, as HSY-makedata.R L48; 90 = "90 or older", codebook
+##C1); cov_gender (C2, codebook p5: 1 Male, 2 Female -> male/female); cov_education (C3,
+##codebook English text: Middle school / High school / Polytechnic, two-year college, advanced
+##vocational school / Four-year college or post-graduate school / Others (e.g., never attended
+##school)); cov_party_id (D6 "which party do you usually support?", codebook p7 English text:
+##Liberal Democratic Party of Japan, Democratic Party of Japan, Japan Innovation Party,
+##Komeito, Party for Future Generations, Japan Communist Party, People's Life Party, Social
+##Democratic Party, Other party, No party to support). The instrument was Japanese; these are
+##the codebook's English translations. Codebook codes: cov_prefecture (C4, 1-47),
+##cov_employment (C6), cov_income (C8, 1-14), cov_left_right (D1_1, 0-10),
+##cov_turnout_history (D2), cov_smd_vote (D3), cov_pr_vote (D5), cov_abe_approval (D8). The authors' entropy-
 ##balancing weights are derived (computed from population margins) and are not stored.
 ##Dropped: Qualtrics ResponseID (re-keyed 1..n in file order), Research Now study id, dates,
 ##comments (E1, free text), location accuracy.
@@ -72,6 +80,12 @@ cv <- c(cov_age = "C1", cov_gender = "C2", cov_education = "C3", cov_prefecture 
         cov_pr_vote = "D5", cov_party_id = "D6", cov_abe_approval = "D8")
 for (v in names(cv)) d[, (v) := as.integer(x[[cv[[v]]]])[id]]
 d[, cov_age := cov_age + 19L]
+d[, cov_gender := c("male", "female")[cov_gender]]
+d[, cov_education := c("Middle school", "High school", "Polytechnic, two-year college, advanced vocational school",
+                       "Four-year college or post-graduate school", "Others (e.g., never attended school)")[cov_education]]
+d[, cov_party_id := c("Liberal Democratic Party of Japan", "Democratic Party of Japan", "Japan Innovation Party", "Komeito",
+                      "Party for Future Generations", "Japan Communist Party", "People's Life Party",
+                      "Social Democratic Party", "Other party", "No party to support")[cov_party_id]]
 d[, id := frank(id, ties.method = "dense")]
 setorder(d, id, task, profile)
 fwrite(d, file.path(out, "horiuchi_2018_japan_manifestos.csv"))

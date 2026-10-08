@@ -2,7 +2,8 @@
 ##Ridge, H. M. (2024). Democratic commitment in the Middle East: A conjoint analysis. Political
 ##Science Research and Methods, 12(2), 285-300. https://doi.org/10.1017/psrm.2023.21
 ##Replication data: Harvard Dataverse doi:10.7910/DVN/GBJVAF, CC0 1.0, no restricted files.
-##Files read: Egypt.csv (tab-separated despite the name), Morocco.csv (comma-separated; 12 empty
+##Files read: Egypt.csv (the Dataverse archival .tab download saved under that name, so
+##tab-separated; the "original format" download is comma-separated and is not what this reads), Morocco.csv (comma-separated; 12 empty
 ##trailing columns ignored). Design from the article (CC BY), section 3, footnote 10 and Figure 1
 ##(English and Arabic screenshots of a task).
 ##Usage: Rscript ridge_2024.R <raw dir> <output dir>

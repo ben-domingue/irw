@@ -29,11 +29,18 @@
 ##Attribute text is the authors' Stata value labels (gender Woman/Man, English Good/Poor,
 ##benefits None/Food stamps/Medicaid/SSI/Welfare, ...); the displayed wording may have been
 ##longer. Police record has 6 labelled levels but only 4 occur (no "Drunk driving",
-##"Trespassing"), and "No record" is about half of all profiles: randomization weights were
-##not uniform (restrictions = observed). Attribute order not recorded.
-##Covariates: cov_age (years), cov_gender (1 = Male, 2 = Female), cov_race (1-8, labels in
-##the .dta: 1 White .. 7 Other; 3 and 8 are both labelled Hispanic or Latino/a), cov_educ (1-6),
-##cov_income (1-6), cov_pid8 (1 Strong Democrat .. 7 Strong Republican, 8 Other; no 4),
+##"Trespassing"), and "No record" is about half of all profiles; benefits "None" is also about
+##half: randomization weights were not uniform (level_weights = observed). Every pair of levels of
+##two attributes occurs, so no combination restriction is visible. Attribute order not recorded.
+##Covariates: cov_age (years), cov_gender (gender, "Respondent's gender", value labels 1 = Male,
+##2 = Female -> male/female), cov_race (1-8, labels in the .dta: 1 White .. 7 Other; 3 and 8 are
+##both labelled Hispanic or Latino/a), cov_education (educ, "Respondent's education", as its value-
+##label text: "Some high school or less", "High school diploma or GED", "Some college, but no
+##degree", "Associates or technical degree", "Bachelor’s degree", "Graduate or professional
+##degree"), cov_income (1-6), cov_party_id7 (pid8, "Partisanship, 8 categories", as its value-label
+##text, spelling as in the source: "Strong Democrat", "Not strong Democrat", "Lean Democrat",
+##"Lean Repiblican", "Not strong Repiblican", "Strong Repiblican", "Other"; no code 4: the
+##deposit's pid3 counts the leaners as Independent),
 ##cov_enforc_daca (DACA: oppose), cov_enforc_snct (sanctuary: oppose), cov_enforc_pprs
 ##(SB 1070: support), cov_enforc_wall (wall: support), each 1-7 as in the source (higher =
 ##more pro-enforcement per the authors' labels), cov_term_pref (1 = Illegal, 2 = Undocumented).
@@ -57,6 +64,10 @@ stopifnot(all(s$cond %in% 1:2))
 cv <- data.table(id = as.integer(s$respid), trial_condition = c("illegal", "undocumented")[s$cond])
 for (v in c("age", "gender", "race", "educ", "income", "pid8", "enforc_daca", "enforc_snct", "enforc_pprs",
             "enforc_wall", "term_pref")) cv[, paste0("cov_", v) := as.integer(zap_labels(s[[v]]))]
+stopifnot(all(s$gender %in% c(NA, 1:2)), all(s$educ %in% c(NA, 1:6)), all(s$pid8 %in% c(NA, 1:3, 5:8)),
+          identical(names(attr(s$gender, "labels")), c("Male", "Female")))
+cv[, `:=`(cov_gender = c("male", "female")[cov_gender], cov_educ = lab(s$educ), cov_pid8 = lab(s$pid8))]
+setnames(cv, c("cov_educ", "cov_pid8"), c("cov_education", "cov_party_id7"))
 d <- merge(d, cv, by = "id")
 stopifnot(uniqueN(d$id) == 1080, nrow(d) == 12916)
 setcolorder(d, c("id", "task", "profile", "choice", "trial_condition"))

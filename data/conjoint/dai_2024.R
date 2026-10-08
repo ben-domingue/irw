@@ -23,10 +23,15 @@
 ##task = choiceNum, profile = candNum (recorded). Randomization restrictions are not documented;
 ##level shares look uniform (each job ~10%, each statement 7-9% or 11-14%). Whether the same
 ##statement could appear for both candidates: yes, 8-13% of pairs share a statement.
-##Covariates (Survey_clean): cov_age, cov_female, cov_white, cov_college (the authors' 0/1
-##codings), cov_ideology3, cov_partyid3, cov_attention_pass (appendix fn 1: passed the end-of-
-##survey attention check; ~70%). Dropped as derived: Republican2/Democrat2/partyid2,
-##Populist2/populismatt/populismattstr (built from the six populism items, not deposited).
+##Covariates (Survey_clean): cov_age (years), cov_gender from Female2 (1 = female, 0 = male:
+##appendix Table A3 'Female' mean 0.38 = 381/1004 coded 1; Rmd labels Female2 "Female"),
+##cov_white, cov_college (the authors' 0/1 codings; College+ is the only education variable),
+##cov_ideology3, cov_party_id = partyid3 (text Democrat/Republican/Independent as deposited;
+##leaners count as partisans, appendix D: Independents asked a lean follow-up and only 52 remain
+##Independent), cov_attention_pass (appendix fn 1: passed the end-of-survey attention check
+##"In the survey, you read about:"; ~70%). No weight or duration deposited. No repeated task.
+##Dropped as derived: Republican2/Democrat2/partyid2, Populist2/populismatt/populismattstr (built
+##from the six populism items, not deposited).
 ##No MTurk IDs are in the deposit (id is already 1..1004).
 library(data.table)
 a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]
@@ -37,8 +42,9 @@ d <- data.table(id = as.integer(as.character(x$id)), task = as.integer(x$choiceN
                 choice = as.integer(x$Y), attr_job = x$job, attr_office = x$office, attr_polls = x$polls,
                 attr_pluralism = x$pluralism, attr_moralism = x$moralism, attr_immigration = x$immigration,
                 attr_economy = x$economy)
-cv <- s[, .(id = as.integer(id), cov_age = age, cov_female = Female2, cov_white = White2, cov_college = College2,
-            cov_ideology3 = ideology3, cov_partyid3 = partyid3, cov_attention_pass = attention.pass)]
+cv <- s[, .(id = as.integer(id), cov_age = age, cov_gender = unname(c("0" = "male", "1" = "female")[as.character(Female2)]),
+            cov_white = White2, cov_college = College2,
+            cov_ideology3 = ideology3, cov_party_id = partyid3, cov_attention_pass = attention.pass)]
 d <- merge(d, cv, by = "id", all.x = TRUE)
 stopifnot(d[, .(s = sum(choice), n = .N), .(id, task)][, all(s == 1 & n == 2)], uniqueN(d$id) == 1004L)
 setorder(d, id, task, profile)

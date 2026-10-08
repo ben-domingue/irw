@@ -38,8 +38,11 @@
 ##in power..."), so the wave-2 screen text varied slightly.
 ##Covariates: cov_ideology = left_right_8 (1-7; the authors' code treats 1-3 as conservative, 4 moderate,
 ##5-7 liberal; wording not deposited). From socio_demo.xlsx, joined by Prolific ID where the ID occurs once
-##in each file: cov_age, cov_sex, cov_education (Highest education level), cov_party (Political
-##Affiliation (US)); Prolific's own profile fields, "N/A" stored as blank. Other survey items (control_1,
+##in each file: cov_age (Age, years; 7 respondents with an impossible Age of 2-5 are set blank,
+##7 more aged 15-17 are kept as stored although Prolific samples adults), cov_gender (sex: Prolific's Male/Female written male/female),
+##cov_education (Highest education level, Prolific's answer text, e.g. "Undergraduate degree
+##(BA/BSc/other)"), cov_party_id (Political Affiliation (US): Democrat, Republican, Other, None, as
+##stored); Prolific's own profile fields, text as in socio_demo.xlsx, "N/A" stored as blank. Other survey items (control_1,
 ##war, leadersorexperts_*, promoting*, ps_*, pol_interest) are not documented and are dropped.
 ##PII in the deposit, not kept: ResponseId (V1), IP address (V6), Prolific IDs (prol_id; session_id and
 ##Participant id in socio_demo.xlsx), latitude/longitude, free-text feedback, randomization seeds.
@@ -83,7 +86,9 @@ pid <- d$prol_id; ok <- !is.na(pid) & !pid %in% pid[duplicated(pid)] & !s$`Parti
 m <- match(ifelse(ok, pid, NA), s$`Participant id`)
 na <- function(y) { y <- as.character(y); y[y %in% c("N/A", "")] <- NA; y }
 cv <- data.table(id = seq_len(nrow(d)), cov_ideology = as.integer(d$left_right_8), cov_age = as.integer(na(s$Age[m])),
-                 cov_sex = na(s$sex[m]), cov_education = na(s$`Highest education level`[m]), cov_party = na(s$`Political Affiliation (US)`[m]))
+                 cov_gender = tolower(na(s$sex[m])), cov_education = na(s$`Highest education level`[m]), cov_party_id = na(s$`Political Affiliation (US)`[m]))
+stopifnot(all(cv$cov_gender %in% c("female", "male", NA)), cv[cov_age < 10, .N] == 7L)
+cv[cov_age < 10, cov_age := NA]  # 2-5 years: not an age in years of a Prolific respondent
 x <- merge(x, cv, by = "id")
 setorder(x, id, task, profile)
 fwrite(x, file.path(out, "escribafolch_2021_democracy_promotion.csv"))

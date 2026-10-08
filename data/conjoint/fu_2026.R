@@ -23,8 +23,10 @@
 ##the levels are stored as the authors' English factor labels. Randomization rules and
 ##attribute order are not documented in the deposit: restrictions unknown.
 ##task = `round`, profile = `profile` (recorded). Exactly one profile chosen per task.
-##Covariates: cov_gender (Male/Female), cov_birth_year, cov_age_group, cov_region (6 regions),
-##cov_identity (Taiwanese / Dual/Chinese; blank = neither). IDs are the authors' integers.
+##Covariates (factor labels in the .rda): cov_gender (`gender` Male/Female, stored lowercase
+##male/female), cov_birth_year (`year`), cov_age_group (`age`, band text "20-29" .. "60 or
+##above"), cov_region (`loc`, 6 regions), cov_identity (Taiwanese / Dual/Chinese; blank =
+##neither). No survey weight in the deposit. IDs are the authors' integers.
 library(data.table)
 a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]
 build <- function(file, obj, n, name) {
@@ -34,7 +36,7 @@ build <- function(file, obj, n, name) {
           att5 = "readiness", att6 = "morale", att7 = "party_unity")
   d <- s[, .(id = as.integer(ID), task = as.integer(round), profile = as.integer(profile), choice = as.integer(chosen))]
   for (k in names(nm)) d[, paste0("attr_", nm[[k]]) := as.character(s[[k]])]
-  d[, `:=`(cov_gender = as.character(s$gender), cov_birth_year = as.integer(s$year), cov_age_group = as.character(s$age),
+  d[, `:=`(cov_gender = tolower(as.character(s$gender)), cov_birth_year = as.integer(s$year), cov_age_group = as.character(s$age),
            cov_region = as.character(s$loc), cov_identity = as.character(s$identity))]
   stopifnot(uniqueN(d$id) == n, d[, .N, id][, all(N == 10)], d[, sum(choice), .(id, task)][, all(V1 == 1)],
             !anyNA(d[, .SD, .SDcols = patterns("^attr_")]))

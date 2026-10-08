@@ -25,12 +25,15 @@
 ##preferred scenario (marginal means with projoint's measurement-error correction).
 ##Restrictions (the authors' cjoint constraint lists, qmd L627-641 and L821-839):
 ##  2021: a remaining term of 0 occurs only with reason "full term" (任期満了のため) and vice
-##    versa (holds exactly in the data).
+##    versa (holds exactly in the data). Not in the authors' list, but in the data a remaining
+##    term of 0 never occurs with newspaper "sudden" (突然の解散と選挙実施; 0 of 292 profiles).
 ##  2022: remaining term 0 occurs only with how = "term expired" (任期満了のため) and vice versa
 ##    (holds exactly). The authors' code also forbids remaining term 0 with any reason other
 ##    than "full term", but the data contain 2,179 such profiles (0 with leader change,
 ##    no-confidence, ...); "full term" itself occurs only with remaining term 0. Flagged.
-##Attribute order is not recorded.
+##Attribute order is not recorded. Level shares are unequal for remaining term and reason (the
+##term-0 level is rare because of the restriction above); no probabilities are documented.
+##No survey weight in the deposit. No task repeats an earlier pair (data check).
 ##Covariates: cov_age (years); cov_party_group: the authors' grouping of party ID (qmd
 ##L1226-1228, L1396-1398): party codes 1, 4 = "government", 88 = "independent", 2,3,5,6,7 (2022
 ##also 8, 11) = "opposition", other codes (99 etc.) blank. Raw party, gender and education codes

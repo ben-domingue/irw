@@ -30,7 +30,8 @@
 ##tasks (attrpos_*, 1 = top row; verified constant across tasks).
 ##Tasks 1-10 are independent pairs; task 11 repeats task 1 with the groups swapped
 ##(Qualtrics block "8_att_symp_choice - 1 (repeated, flipped)"): it is stored as task 11
-##with the displayed sides (profile 1 = task 1's Group B) and trial_repeat = 1. The authors
+##with the displayed sides (profile 1 = task 1's Group B) and trial_repeat_of = 1 (NA on tasks
+##1-10); the profiles WERE swapped. The authors
 ##use it (projoint) to correct for intra-respondent reliability.
 ##Outcomes:
 ##  choice = "Which side do you sympathize more with: Group A or Group B? Even if you are
@@ -53,14 +54,18 @@
 ##applying those rules to the deposited CSV removes only 32 / 80 respondents, not 55 / 103;
 ##the extra 23 per study cannot be explained from the deposit, so the authors' own kept-id
 ##list is used. Six / four respondents have no prior-sympathy answer (cov_perspective NA).
-##Covariates (codes): cov_perspective (the authors' 6-point prior sympathy) 1=strongly
-##pro-Palestinian .. 6=strongly pro-Israeli; cov_party (authors' coding) 1=strong
-##Republican 2=not very strong Republican 3=leans Republican 4=leans Democratic 5=not very
-##strong Democrat 6=strong Democrat (pure independents NA); cov_age_group 1=18-20 2=21-25
-##3=26-35 4=36-45 5=46-55 6=56-65 7=66+; cov_gender 1=man 2=woman 3=other; cov_education
-##1=did not graduate high school 2=high school 3=some college 4=two-year degree
-##5=four-year degree 6=graduate degree; cov_race 1=White 2=Black 3=Hispanic 4=Asian
-##5=Native American 6=Other.
+##Covariates. cov_perspective (the authors' 6-point prior sympathy, code) 1=strongly
+##pro-Palestinian .. 6=strongly pro-Israeli. cov_party_id7: the branched party ID as the
+##answer text of the follow-up the respondent saw (study<s>.csv answers, wording in
+##study<s>.pdf): "Strong Democrat" / "Not very strong Democrat" (Democrats), "Strong
+##Republican" / "Not very strong Republican" (Republicans), "Closer to the Democratic Party" /
+##"Closer to the Republican Party" (Independents and Other Party, who all answered the lean
+##question; there is no pure-independent option, so the scale has 6 points). cov_age_group,
+##cov_education: the answer text as exported ("18-20 years old" ... "66 years old or older";
+##"Did not graduate from high school" ... "Graduate degree"). cov_gender: answer Man / Woman /
+##Other -> male / female / other. cov_race (code) 1=White 2=Black 3=Hispanic 4=Asian
+##5=Native American 6=Other. The export's "Duration (in seconds)" is not kept; no attention
+##check or survey weight in the deposit.
 ##PII in the deposit (not read into the table): IP addresses, latitude/longitude, Qualtrics
 ##ResponseIds and panel transaction ids. Respondent ids are re-keyed to integers in file
 ##order. Dropped: open-ended answers, attribute-importance items, all other survey blocks.
@@ -90,12 +95,16 @@ build <- function(s) {
   party <- fcase(g("party1") == "Strong Democrat", 6L, g("party1") == "Not very strong Democrat", 5L,
                  g("party3") == "Closer to the Democratic Party", 4L, g("party3") == "Closer to the Republican Party", 3L,
                  g("party2") == "Not very strong Republican", 2L, g("party2") == "Strong Republican", 1L)
-  cv <- data.table(id = seq_len(nrow(r)), cov_perspective = persp, cov_party = party,
-    cov_age_group = code(g("age"), c("18-20 years old", "21-25 years old", "26-35 years old", "36-45 years old",
-                                     "46-55 years old", "56-65 years old", "66 years old or older")),
-    cov_gender = code(g("gender"), c("Man", "Woman", "Other")),
-    cov_education = code(g("edu"), c("Did not graduate from high school", "High school", "Some college, no degree",
-                                     "Two-year degree", "Four-year degree", "Graduate degree")),
+  ptxt <- c("Strong Republican", "Not very strong Republican", "Closer to the Republican Party",
+            "Closer to the Democratic Party", "Not very strong Democrat", "Strong Democrat")
+  agl <- c("18-20 years old", "21-25 years old", "26-35 years old", "36-45 years old",
+           "46-55 years old", "56-65 years old", "66 years old or older")
+  edl <- c("Did not graduate from high school", "High school", "Some college, no degree",
+           "Two-year degree", "Four-year degree", "Graduate degree")
+  cv <- data.table(id = seq_len(nrow(r)), cov_perspective = persp, cov_party_id7 = ptxt[party],
+    cov_age_group = agl[code(g("age"), agl)],
+    cov_gender = c("male", "female", "other")[code(g("gender"), c("Man", "Woman", "Other"))],
+    cov_education = edl[code(g("edu"), edl)],
     cov_race = code(tolower(g("race")), c("white", "black", "hispanic", "asian", "native american", "other")),
     cov_in_authors_sample = as.integer(r$ResponseId %in% keep))
   # attribute order: fixed per respondent
@@ -121,7 +130,7 @@ build <- function(s) {
       x[, paste0("attr_", attrs[j]) := lv[cbind(seq_len(nrow(r)), k)]]
     }
     for (j in seq_along(attrs)) x[, paste0("attrpos_", attrs[j]) := pos[, j]]
-    x[, trial_repeat := as.integer(t == 11)]
+    x[, trial_repeat_of := if (t == 11) 1L else NA_integer_]
     x
   }))))
   # mirror-image restriction and one chosen per pair

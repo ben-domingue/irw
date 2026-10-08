@@ -11,7 +11,9 @@
 ##Two tables, one per country: the attribute sets differ (Britain has a climate-vs-growth and an EU
 ##attribute, Norway a carbon-tax and an abortion attribute) and the paper analyses each country
 ##separately. Each respondent saw 2 tasks of 2 fictional candidates, 9 attributes, all levels
-##fully randomized with equal probability (appendix); attribute order fixed (no attrpos_).
+##fully randomized with equal probability and no restrictions on combinations (appendix L617;
+##pre-analysis plans 'Randomization'); attribute order is not documented and not in the deposit (no
+##attrpos_). Survey weights: the plans say none will be applied; the deposit has no weight.
 ##  finseraas_2026_group_appeals_britain: YouGov UK Omnibus, May 2023, 2,001 respondents (as in
 ##    the paper).
 ##  finseraas_2026_group_appeals_norway: Kantar online panel, Jan-Feb 2022, 3,190 respondents in
@@ -45,7 +47,8 @@
 ##    separately labelled `rating` (1 = Helt til venstre ... 7 = Helt til hoyre, 9996 = NA) equals
 ##    rightrating in all 12,437 non-missing cases, so it is a labelled duplicate and is not kept.
 ##    Not a favourability scale: higher = further right.
-##Covariates: cov_male, cov_working_class (Britain: class identity; Norway: EGP class from
+##Covariates: cov_gender (from male: 1 -> "male", 0 -> "female"; Stata variable label "Male" in both
+##files, codebook.pdf "male  Male"; no other categories in the data), cov_working_class (Britain: class identity; Norway: EGP class from
 ##occupation, many missing), cov_vote_conservative (Britain: votes Conservative vs Labour; Norway:
 ##votes Høyre), cov_age_scaled (Britain only: age rescaled 0-1 by the authors), cov_voted (Britain:
 ##turnout), cov_university (Norway), cov_leftright_scaled (Norway: self-placement rescaled 0-1).
@@ -87,7 +90,7 @@ db[, attr_climate := c("Prioritize climate" = "combat climate change, even if it
                        "Prioritize growth" = "increase economic growth, even if causes climate change")[lab(b$policy_environment)]]
 db[, attr_eu := c("EU cooperation" = "ensure closer cooperation with EU",
                   "EU independence" = "ensure greater independence from the EU")[lab(b$policy_eu)]]
-db[, `:=`(cov_male = as.integer(b$male), cov_working_class = as.integer(zap_labels(b$workingclass)),
+db[, `:=`(cov_gender = c("female", "male")[as.integer(b$male) + 1L], cov_working_class = as.integer(zap_labels(b$workingclass)),
           cov_vote_conservative = as.integer(b$vote_consvlab), cov_voted = as.integer(b$voted), cov_age_scaled = round(as.numeric(b$aged), 4))]
 stopifnot(!anyNA(db[, .(attr_immigration, attr_climate, attr_eu, choice)]), db[, sum(choice), .(id, task)][, all(V1 == 1)],
           uniqueN(db$id) == 2001, db[, .N, .(id, task, profile)][, all(N == 1)])
@@ -103,7 +106,7 @@ dn[, attr_climate := c("Increase CO2 tax" = "increase the carbon tax", "Decrease
 dn[, attr_abortion := c("More liberal abortion" = "expand the right to abortion to week 18",
                         "No change in abortion" = "keep the right to abortion at week 12")[lab(n$policy_abort)]]
 wc <- lab(n$workingclass)
-dn[, `:=`(cov_male = as.integer(n$male), cov_working_class = as.integer(c("working class" = 1L, "middle class" = 0L)[wc]),
+dn[, `:=`(cov_gender = c("female", "male")[as.integer(n$male) + 1L], cov_working_class = as.integer(c("working class" = 1L, "middle class" = 0L)[wc]),
           cov_vote_conservative = as.integer(n$hvoter), cov_university = as.integer(zap_labels(n$uniedu)),
           cov_leftright_scaled = round(as.numeric(n$rightscale), 4))]
 stopifnot(!anyNA(dn[, .(attr_immigration, attr_climate, attr_abortion)]), dn[, .N, .(id, task, profile)][, all(N == 1)])

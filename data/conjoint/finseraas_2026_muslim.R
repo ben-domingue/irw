@@ -20,7 +20,8 @@
 ##people: the draft says the samples are independent), so id is re-keyed by (stage, responseid).
 ##6 tasks (source `round`) of 2 candidates (source `candidate`) per respondent; task and profile are
 ##recorded. The draft says the sixth pair repeats the first with the two profiles swapped (to measure
-##swapping error); the table keeps it as task 6.
+##swapping error); the table keeps it as task 6, with trial_repeat_of = 1 on its rows (NA on tasks
+##1-5). Checked: task 6's two profiles are task 1's with positions swapped for every respondent.
 ##Outcome: choice = selected, forced choice between the two candidates (the draft speaks of voters'
 ##"willingness to vote for them"; the verbatim Norwegian question is not in the deposit or draft).
 ##No opt-out; exactly one candidate chosen in every pair.
@@ -33,8 +34,9 @@
 ##was displayed (a stated religion or a name) is not documented in the material read.
 ##Randomization: "independent, and all levels within an attribute had the same probability of
 ##selection"; attribute order randomized across respondents but fixed across tasks (not recorded).
-##Covariates: cov_age, cov_female, cov_high_education, cov_paid_work, cov_left_right (0-1, higher =
-##right). Check: the baseline Muslim-vs-Christian AMCE (arms 0-1) is -0.093, the draft's "9 percentage
+##Covariates: cov_age; cov_gender from the 0/1 dummy female (variable label "Female", so 1 = female,
+##0 = male); cov_high_education (the authors' 0/1 "High education" dummy, the only education variable in
+##the deposit; kept under its name); cov_paid_work; cov_left_right (0-1, higher = right). Check: the baseline Muslim-vs-Christian AMCE (arms 0-1) is -0.093, the draft's "9 percentage
 ##points". Dropped: municipality, post-task evaluation items, the authors' derived flags (baseline,
 ##leftist, rightist, id_round).
 library(haven); library(data.table)
@@ -57,12 +59,13 @@ for (g in names(arm)) for (v in paste0("attr_", arm[[g]])) {
   s[trial_arm != as.integer(g), (v) := "(not shown)"]
 }
 stopifnot(!anyNA(s[, grep("^attr_", names(s)), with = FALSE]))
-s[, `:=`(cov_age = as.numeric(k$age), cov_female = as.integer(k$female), cov_high_education = as.integer(k$highedu),
+s[, `:=`(cov_age = as.numeric(k$age), cov_gender = c("male", "female")[as.integer(k$female) + 1L], cov_high_education = as.integer(k$highedu),
          cov_paid_work = as.integer(k$paidwork), cov_left_right = as.numeric(k$rightwing))]
 stopifnot(s[, .N, .(stage, rid)][, all(N == 12)], !anyDuplicated(s[, .(stage, rid, task, profile)]))
 stopifnot(s[, sum(choice), .(stage, rid, task)][, all(V1 == 1)], s[, uniqueN(trial_arm), .(stage, rid)][, all(V1 == 1)])
 key <- unique(s[, .(stage, rid)])[order(stage, rid)][, id := .I]
 s <- merge(s, key, by = c("stage", "rid"))[, c("stage", "rid") := NULL]
+s[, trial_repeat_of := fifelse(task == 6L, 1L, NA_integer_)]
 stopifnot(s[trial_stage == 1, uniqueN(id)] == 629, s[trial_stage == 2, uniqueN(id)] == 2542)
 setcolorder(s, c("id", "task", "profile", "choice"))
 setorder(s, id, task, profile)

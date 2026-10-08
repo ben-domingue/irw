@@ -21,7 +21,8 @@
 ##  work done" for; the exact wording is in the article, not the deposit. Forced choice, no
 ##  opt-out (every task has an answer). task = round, profile = Candidate (1 = Sarpanch 1).
 ##  Attribute order and randomization restrictions not documented.
-##  Covariate: cov_female (respondent gender, 1 = Female). The descriptive file
+##  Covariate: cov_gender (respondent_gender, stored as text Male / Female -> male / female).
+##  No survey weight in the deposit. The descriptive file
 ##  (bdodata_descriptive_replication) with age, birth state, education, caste and the years the
 ##  officer joined government and became BDO is NOT merged: in a population of a few hundred
 ##  named officials those together could identify people. Response.ID (Qualtrics) is replaced
@@ -32,12 +33,12 @@ library(data.table)
 a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]
 s <- fread(file.path(raw, "bdodata_conjoint_replication.csv"))
 stopifnot(nrow(s) == 1730, s[, .N, .(Response.ID, round)][, all(N == 2)], all(s$Candidate %in% 1:2),
-          all(s$conjoint_work %in% c("Sarpanch 1", "Sarpanch 2")))
+          all(s$conjoint_work %in% c("Sarpanch 1", "Sarpanch 2")), all(s$respondent_gender %in% c("Male", "Female")))
 s[, id := match(Response.ID, unique(Response.ID))]
 d <- s[, .(id, task = as.integer(round), profile = as.integer(Candidate),
            choice = as.integer(conjoint_work == paste("Sarpanch", Candidate)),
            attr_gender = Gender, attr_reservation = Reservation, attr_education = Education,
-           attr_family_background = Family.Background, cov_female = as.integer(respondent_gender == "Female"))]
+           attr_family_background = Family.Background, cov_gender = tolower(respondent_gender))]
 stopifnot(d[, sum(choice), .(id, task)][, all(V1 == 1)], uniqueN(d$id) == 221)
 setorder(d, id, task, profile)
 fwrite(d, file.path(out, "purohit_2026_bureaucrat_help.csv"))

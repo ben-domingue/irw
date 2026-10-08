@@ -43,15 +43,20 @@
 ##  cov_fielding 3 = from 5 Jan 2018 (1,026): final wording.
 ##  These three spelling variants are harmonized here to the final (cfh.php) wording; nothing
 ##  else differs. cov_fielding is derived from the start date, which is not kept.
-##Covariates (source codes; codebook wording): cov_age_group QID33 (2 = 18-19, 3 = 20-29,
-##  4 = 30-39, 5 = 40-49, 6 = 50-59, 7 = 60+); cov_gender QID34 (1 male, 2 female);
-##  cov_nationality QID35 (1 born French, 2 became French, 3 foreign; all
-##  1,500 kept respondents are 1); cov_region QID36 (13
-##  metropolitan regions, codebook order); cov_education QID15 (1 no schooling, 2 primary only,
-##  3 high school only, 4 university/grande école diploma, 5 postgraduate, 6 other graduate
-##  studies); cov_income QID16 (1 EUR 0-19,999 ... 6 EUR 100,000+); cov_left_right QID17 recoded
-##  from code 1-11 to the displayed 0-10 (0 far left); cov_party QID18 (1-13, codebook list;
-##  12 = other, its free text dropped; 13 = no party closer than others); cov_voted_2017 QID19 (1 yes 2 no); cov_vote_2017 QID20
+##Covariates (source codes and codebook wording unless stated): cov_age_group QID33 as the
+##  codebook's band text (18 to 19 years, 20 to 29 years, ..., 60 years and over); cov_gender
+##  QID34 (codebook 1 Male, 2 Female -> male/female); cov_education QID15 as the codebook's
+##  answer text (No school instruction, Primary school only, High School only, Diploma from a
+##  university or a polytechnic school, Postgraduate degree, Other graduate studies);
+##  cov_party_id QID18 ("Is there a political party you identify with more than the other
+##  parties?") as the codebook's answer text (Standing France, ..., The Republic on the move!,
+##  "Others (DVG, DVD, REG, NI, ECO, EXD)", "There is no party I feel closer to than others.").
+##  The codebook (documents/Codebook.docx) is the authors' English translation of the French
+##  questionnaire; the French option text is not in the deposit, so these texts are English.
+##  cov_nationality QID35 (1 born French, 2 became French, 3 foreign; all 1,500 kept
+##  respondents are 1); cov_region QID36 (13 metropolitan regions, codebook order); cov_income
+##  QID16 (1 EUR 0-19,999 ... 6 EUR 100,000+); cov_left_right QID17 recoded from code 1-11 to
+##  the displayed 0-10 (0 far left); cov_voted_2017 QID19 (1 yes 2 no); cov_vote_2017 QID20
 ##  (1 Macron 2 Le Pen); cov_public_transport QID21 (1 never ... 5 every day); cov_school_
 ##  satisfaction QID22 (1 very satisfied ... 5 very dissatisfied); cov_contact_everyday QID23
 ##  (daily exchanges with people born abroad, 1 never ... 5 every day); cov_meal_foreign_born
@@ -61,8 +66,9 @@
 ##  lot ... 5 decreased a lot).
 ##Dropped: Qualtrics IDs, IP address, latitude/longitude, start/end times, postal code and
 ##département (the authors' exposure measures are built from postal code + INSEE data, not
-##included), free-text comments (QID27) and party text, the panel's tic/term/i flags,
-##groupsize (authors: "error in this variable"). No survey weight ships.
+##included), free-text comments (QID27) and party "other" text (QID18_TEXT), the panel's
+##tic/term/i flags, groupsize (authors: "error in this variable"), Q_TotalDuration (panel-set total duration). No
+##survey weight ships; no attention check in the codebook.
 ##The authors' odd-combination filter removes 332 tasks, all from cov_fielding 1.
 ##Spot check (2026-10-07): after that filter, language differences in choice probability vs fluent
 ##French (interpreter -0.1785, tried but unable -0.1523, broken French -0.0924) match the
@@ -101,12 +107,22 @@ stopifnot(d[, uniqueN(attrpos_origin), id][, all(V1 == 1)])  # order fixed per r
 dt <- as.Date(substr(x$V8, 1, 10))
 x[, cov_fielding := fifelse(dt <= as.Date("2017-12-28"), 1L, fifelse(dt <= as.Date("2018-01-04"), 2L, 3L))]
 cv <- c(QID33 = "age_group", QID34 = "gender", QID35 = "nationality", QID36 = "region", QID15 = "education", QID16 = "income",
-        QID17 = "left_right", QID18 = "party", QID19 = "voted_2017", QID20 = "vote_2017", QID21 = "public_transport",
+        QID17 = "left_right", QID18 = "party_id", QID19 = "voted_2017", QID20 = "vote_2017", QID21 = "public_transport",
         QID22 = "school_satisfaction", QID23 = "contact_everyday", QID24 = "meal_foreign_born", QID25 = "trusted_foreign_born",
         QID26 = "immigration_level")
 cx <- x[, .(id, cov_fielding)]
 for (v in names(cv)) cx[, paste0("cov_", cv[[v]]) := suppressWarnings(as.integer(x[[v]]))]
 cx[, cov_left_right := cov_left_right - 1L]
+txt <- list(  # documents/Codebook.docx answer options, by code
+  cov_age_group = c("Under 18", "18 to 19 years", "20 to 29 years", "30 to 39 years", "40 to 49 years", "50 to 59 years", "60 years and over"),
+  cov_gender = c("male", "female"),
+  cov_education = c("No school instruction", "Primary school only", "High School only", "Diploma from a university or a polytechnic school",
+                    "Postgraduate degree", "Other graduate studies"),
+  cov_party_id = c("Standing France", "Republican People's Union", "National Front", "French Communist Party",
+                   "Union of Democrats and Independents", "Left Radical Party", "France insubordinate", "Socialist Party",
+                   "Democratic Movement", "The Republicans", "The Republic on the move!", "Others (DVG, DVD, REG, NI, ECO, EXD)",
+                   "There is no party I feel closer to than others."))
+for (v in names(txt)) { stopifnot(all(cx[[v]] %in% c(seq_along(txt[[v]]), NA))); cx[, (v) := txt[[v]][get(v)]] }
 d <- merge(d, cx, by = "id")
 setorder(d, id, task, profile)
 fwrite(d, file.path(out, "clayton_2021_france_immigrants.csv"))

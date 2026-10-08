@@ -3,7 +3,9 @@
 ##Journal of Experimental Political Science, 9(1), 118-130. https://doi.org/10.1017/XPS.2020.30
 ##Replication data: Harvard Dataverse doi:10.7910/DVN/KVKGUB, CC0 1.0, no restricted files, no
 ##terms. File read: "May+2020+Public+Affairs+Survey+V2_May+24,+2020_10.36 - Copy.csv" (Qualtrics
-##export, TAB-separated despite the name, triple header: names / question text / ImportId).
+##export, triple header: names / question text / ImportId), as the Dataverse archival .tab
+##download (TAB-separated; the ?format=original download is comma-separated and is not what
+##this script reads).
 ##Codebook May_2020_Public_Affairs_Survey_V2.docx and the authors' study1.R read as text only.
 ##Study 2 (Contact+tracing+conjoint_June...csv) is a single 7-point question with a one-factor
 ##prime, not a conjoint, and is not built.
@@ -28,11 +30,16 @@
 ##So levels are far from uniform (e.g. contacts uploaded None 45%).
 ##trial_breach_prime: respondent-level arm shown before the conjoint, "control" (Q21, data
 ##security text) or "breach" (Q22, same text plus a paragraph on data breaches).
-##Covariates (codebook codes): cov_gender (1 male, 2 female, 4 transgender, 5 none of these,
-##6 rather not say), cov_birth_year, cov_region (1 East of England .. 12 Yorkshire & Humberside),
+##Covariates (codebook May_2020_Public_Affairs_Survey_V2.docx): cov_gender from Q2 "How would
+##you describe yourself?" (1 Male -> "male", 2 Female -> "female", 4 Transgender and 5 "Do not
+##identify as male, female or transgender" -> "other", 6 "I would rather not say" -> NA),
+##cov_birth_year (Q3), cov_region codes (Q4: 1 East of England .. 12 Yorkshire & Humberside),
 ##cov_trust_nhs (0 = do not trust at all .. 10 = complete trust), cov_gov_handling (1 very badly
-##.. 4 very well, 5 don't know), cov_education (1 no formal .. 4 university degree, 5 don't know,
-##6 prefer not to say). Dropped: Qualtrics ResponseId (re-keyed), dates, durations, the
+##.. 4 very well, 5 don't know), cov_education = Q96 answer text as worded in the codebook ("No
+##Formal Qualification", "Up to GCE O level, GSCE, School Certificate or equivalent
+##qualification", "A level, Higher Certificate or equivalent qualification", "University degree
+##or higher, or equivalent", "Don’t know"; 6 "Prefer not to say" -> NA). No survey weight or
+##attention check in the deposit; no task is repeated by design. Dropped: Qualtrics ResponseId (re-keyed), dates, durations, the
 ##(empty) recipient name/email columns, other survey experiments and items.
 library(data.table)
 a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]
@@ -55,8 +62,14 @@ d <- d[d[, .N, .(id, task)][N == 2], on = .(id, task)][, N := NULL]
 d[, choice := as.integer(ans == as.character(profile))][, ans := NULL]
 d[, attr_storage := sub("\\.$", "", attr_storage)]
 cv <- s[, .(id = rid, trial_breach_prime = fifelse(ctrace_pre_stimulus_DO == "Q22", "breach", "control"),
-            cov_gender = as.integer(Q2), cov_birth_year = as.integer(Q3), cov_region = as.integer(Q4),
-            cov_trust_nhs = as.integer(Q6_1), cov_gov_handling = as.integer(Q8), cov_education = as.integer(Q96))]
+            cov_gender = c("1" = "male", "2" = "female", "4" = "other", "5" = "other")[Q2],
+            cov_birth_year = as.integer(Q3), cov_region = as.integer(Q4),
+            cov_trust_nhs = as.integer(Q6_1), cov_gov_handling = as.integer(Q8),
+            cov_education = c("1" = "No Formal Qualification",
+                              "2" = "Up to GCE O level, GSCE, School Certificate or equivalent qualification",
+                              "3" = "A level, Higher Certificate or equivalent qualification",
+                              "4" = "University degree or higher, or equivalent", "5" = "Don\u2019t know")[Q96])]
+stopifnot(all(s$Q2 %in% c("1", "2", "4", "5", "6")), all(s$Q96 %in% c(as.character(1:6), "")))
 stopifnot(cv[id %in% d$id, all(s$ctrace_pre_stimulus_DO[id] %in% c("Q21", "Q22"))])
 d <- merge(d, cv, by = "id")
 setcolorder(d, c("id", "task", "profile", "choice", paste0("attr_", key), paste0("attrpos_", key)))

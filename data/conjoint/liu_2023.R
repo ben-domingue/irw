@@ -24,12 +24,21 @@
 ##  relabels "Diverse local communities" as "Local communities"; the displayed text is kept.
 ##Covariates (source codes): cov_trust = trust in US local government, 0-100, measured
 ##  after the prime; cov_manip_check = answer to the prime manipulation check (23/24),
-##  cov_manip_check_pass and cov_attention_pass (1 = passed); cov_us (source "us", 0/1,
-##  meaning undocumented); cov_male (1 = male, from sex 1 = male, 2 = female);
-##  cov_race (1 White, 2 Black, 3 Hispanic, 4 Asian, 5 other; from the authors' dummies);
-##  cov_age in years; cov_income (1-7) and cov_education (1-8) ordinal codes, labels not
-##  shipped; cov_ideology (1 very liberal ... 5 very conservative, 6 none/don't know,
-##  inferred from the authors' ideo1/ideo2 recodes); cov_duration (survey seconds).
+##  cov_manip_check_pass and cov_attention_pass (1 = passed; source `at`, which the authors'
+##  LLB_PPMR2023.R calls the "attention test"); cov_us (source "us", 0/1, meaning
+##  undocumented); cov_gender female/male from the authors' dummies `female`/`male` (sex 1
+##  -> male = 1, sex 2 -> female = 1, checked; LLB_PPMR2023.R reports survey$female as
+##  "Female" in its descriptive table); cov_race (1 White, 2 Black, 3 Hispanic, 4 Asian, 5
+##  other; from the authors' dummies); cov_age in years; cov_income (1-7) ordinal code and
+##  cov_education_code (1-8; the main education question, but no source maps the codes, so
+##  they stay codes); cov_ideology (1 very liberal ... 5 very conservative, 6 none/don't
+##  know, inferred from the authors' ideo1/ideo2 recodes); cov_duration_sec = Qualtrics
+##  total survey duration (source `duration`; the unit is not documented, but values run
+##  50-14,227 with median 274, which only makes sense as seconds).
+##Design: attribute levels' probabilities and any restrictions are not documented (each
+##  attribute has two levels; shares within 1.05x; all level pairs occur). Profiles are the
+##  Qualtrics conjoint table (F.<task>.<profile>.<row> fields). No task is designed as a
+##  repeat (with 16 possible profiles, some pairs recur by chance). No survey weight.
 ##Dropped: Qualtrics RandomID, the observation counter, the authors' ideology recodes.
 library(data.table)
 a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]
@@ -54,9 +63,10 @@ pos[, c("a1", "a2", "a3", "a4") := NULL]
 stopifnot(!anyNA(pos))
 cov <- sv[, .(id = as.integer(id), cov_trust = as.numeric(trust), cov_manip_check = as.integer(mc),
               cov_manip_check_pass = as.integer(mc.t), cov_attention_pass = as.integer(at), cov_us = as.integer(us),
-              cov_male = as.integer(male), cov_race = fifelse(white == 1, 1L, fifelse(blk == 1, 2L, fifelse(his == 1, 3L, fifelse(asian == 1, 4L, 5L)))),
-              cov_age = as.integer(age), cov_income = as.integer(income), cov_education = as.integer(education),
-              cov_ideology = as.integer(ideo), cov_duration = as.integer(duration))]
+              cov_gender = fifelse(female == 1, "female", fifelse(male == 1, "male", NA_character_)), cov_race = fifelse(white == 1, 1L, fifelse(blk == 1, 2L, fifelse(his == 1, 3L, fifelse(asian == 1, 4L, 5L)))),
+              cov_age = as.integer(age), cov_income = as.integer(income), cov_education_code = as.integer(education),
+              cov_ideology = as.integer(ideo), cov_duration_sec = as.integer(duration))]
+stopifnot(sv[, all(is.na(sex) | (sex == 1 & male == 1 & female == 0) | (sex == 2 & female == 1 & male == 0))])
 stopifnot(nrow(pos) == uniqueN(d$id), nrow(cov) == uniqueN(d$id))
 d <- merge(merge(d, pos, by = "id"), cov, by = "id")
 stopifnot(d[, sum(choice), .(id, task)][, all(V1 == 1)])

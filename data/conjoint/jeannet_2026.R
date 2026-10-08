@@ -34,11 +34,15 @@
 ##  is not documented.
 ##  Spot check: where the two ratings differ, the chosen policy has the higher rating in 84%
 ##  of tasks.
-##  Covariates: cov_country, cov_survey_weight (Weight), cov_gender (1 Male, 2 Female, 3 Other),
-##  cov_birth_year, cov_education (A06, 1-6), cov_income_feeling (A07, 1 living comfortably ..
-##  4 finding it very difficult), cov_work_status (A08, 1-9), cov_political_views (A09, 1 very
+##  Covariates: cov_country, cov_survey_weight (Weight), cov_gender (A01 answer text Male/Female/
+##  Other in the data file and codebook -> male/female/other; Refusal NA), cov_birth_year (A02),
+##  cov_education (A06 "How would you describe your education attainment?", the codebook's English
+##  answer text, as in the data file; Refusal/Don't know NA), cov_income_feeling (A07, 1 living
+##  comfortably .. 4 finding it very difficult), cov_work_status (A08, 1-9), cov_political_views (A09, 1 very
 ##  conservative .. 5 very progressive, 6 none of the above), cov_discriminated_group (A10,
-##  1 yes 2 no); codes as in the codebook, Refusal/Don't know set missing.
+##  1 yes 2 no); codes as in the codebook, Refusal/Don't know set missing. Not kept: qtime /
+##  qtime_min (interview time) and the page timings. No attention check in the codebook.
+##  No repeated task.
 ##  Dropped: uuid (panel participant id; ids re-keyed to integers in file order), record, the
 ##  PRIVACY consent flag (all consented), region/province of residence, migration history and
 ##  attitude batteries (B*, C*, D*), page timings.
@@ -72,9 +76,10 @@ for (t in 1:5) for (p in 1:2) {
 d <- rbindlist(L)
 stopifnot(!anyNA(d$rating), d[, all(rating %in% 1:7)], d[, sum(choice), .(id, task)][, all(V1 == 1)])
 code <- function(v, labs) match(s[[v]], labs)
+lab <- function(v, labs) fifelse(s[[v]] %in% labs, s[[v]], NA_character_)
 cv <- s[, .(id, cov_country = country, cov_survey_weight = Weight,
-            cov_gender = match(A01, c("Male", "Female", "Other")), cov_birth_year = as.integer(A02),
-            cov_education = code("A06", c("No formal education", "Incomplete secondary school or less", "Complete secondary school",
+            cov_gender = c(Male = "male", Female = "female", Other = "other")[A01], cov_birth_year = as.integer(A02),
+            cov_education = lab("A06", c("No formal education", "Incomplete secondary school or less", "Complete secondary school",
                                           "Some university-level education, without degree", "University-level education, with degree",
                                           "Post-graduate education or above")),
             cov_income_feeling = code("A07", c("Living comfortably on present income", "Coping on present income",

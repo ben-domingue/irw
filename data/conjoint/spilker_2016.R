@@ -46,12 +46,19 @@
 ##tables gives .361/.656 and .480/.692 (differences from the dropped tasks).
 ##Randomization: "completely independent randomization of the values for each attribute";
 ##attribute order was randomized per respondent (fixed across their tasks) but not recorded.
+##Paper-and-pencil conjoint tables (Supplementary Material, Appendix 2). No survey weight in the
+##deposit. No task repeats an earlier pair (data check).
 ##DROPPED: tasks where a profile has no level for an attribute (political system missing in
 ##311 Costa Rica and 335 Nicaragua rows, economic size in 536 Nicaragua rows; all dummies 0),
 ##and 13 Costa Rica tasks where neither country is chosen (forced choice, so the answer is
 ##missing). Two Costa Rica ratings are missing and kept as NA.
-##Covariates as in the source: cov_gender (1/2; which is female is not documented),
-##cov_education (0 illiterate .. 6 postgraduate), cov_trade_salience (1 = thought much about
+##Covariates as in the source: cov_gender_code (source `gender`, codes 1/2 kept: the .dta has
+##no value labels and the do-files and supplements do not say which code is female; in
+##Nicaragua the Appendix 1 sample shares, male 48.4%, match code 1 = 387 of 800, but that is
+##not a stated mapping, and Costa Rica's 50.0/50.0 cannot tell), cov_education_code (source
+##`education`, codes kept: the variable label gives only the ends, "0 illiterate to 6
+##Postgraduate" in Costa Rica and "0 illiterate to 5 Postgraduate" in Nicaragua, so the middle
+##codes have no text), cov_trade_salience (1 = thought much about
 ##trade .. 4 = not at all), cov_income (Costa Rica: code 0-5; Nicaragua: amount as reported,
 ##currency not documented). The surveys' respondent id is re-keyed to `respondent` (1..n).
 library(haven); library(data.table)
@@ -83,10 +90,10 @@ build <- function(file, rel, tab, nresp) {
              attr_religion = rel[religion], attr_political_system = lv$democracy[democracy],
              attr_environmental_standards = lv$env[env], attr_labor_standards = lv$labor[labor],
              attr_military_alliance = lv$military[military],
-             cov_gender = as.integer(gender), cov_education = as.integer(education),
+             cov_gender_code = as.integer(gender), cov_education_code = as.integer(education),
              cov_trade_salience = as.integer(salience), cov_income = as.numeric(income))]
   stopifnot(!anyNA(d[, .SD, .SDcols = patterns("^attr_")]), d[, sum(choice), .(id, task)][, all(V1 == 1)],
-            d[, uniqueN(cov_education), id][, all(V1 == 1)])
+            d[, uniqueN(cov_education_code), id][, all(V1 == 1)])
   setorder(d, id, task, profile)
   fwrite(d, file.path(out, paste0(tab, ".csv")))
 }

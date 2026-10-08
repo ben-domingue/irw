@@ -32,13 +32,20 @@
 ##Dropped: the authors' derived pair codings (adv_*, disadv_*, nukeAdv, numDisadv, types,
 ##mil_adv, disadv_index), the numeric *_N copies of covariates, `education` (copy of educ) and
 ##`ethnicity` (raw race question, free-text "other" entries appear in it; `race` kept).
-##Covariates: cov_survey_weight (weight), age, gender, educ, race, hispanic, party, region,
+##Covariates: cov_survey_weight (weight), age, gender, educ, race, hispanic, party ID, region,
 ##income bracket (hhi), employment, political interest/discussion/advice, the foreign-policy
 ##goal importance and use-of-force items (text answers), mobile, and the respondent's arms in the
 ##separate vignette experiment (s_num: nuclear-success treatment; d_num: destructiveness
 ##treatment). The PILOT conjoint (BGG_pilot_conjoint_diffs_clean.csv) is NOT built: it stores
 ##each pair twice with the nuclear strike moved to the first slot, so which option was shown
 ##first is not recoverable, and its covariates are unlabelled codes.
+##Reserved covariates (BGG_readme.txt variable list; the file stores answer text): cov_age =
+##age (years); cov_gender = gender "Female"/"Male" lowercased to female/male; cov_education =
+##educ as stored ("Did not complete high school" .. "Graduate or professional degree", "None of
+##the above"); cov_party_id7 = political_party ("respondent's partisan affiliation") as stored:
+##the 7-point scale (Strong / Not very strong Democrat, Independent Democrat, Independent -
+##neither, Independent Republican, Not very strong / Strong Republican) plus an "Other" branch
+##(Other - leaning Democrat / Other - neither / Other - leaning Republican), 10 values.
 library(data.table)
 a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]
 s <- fread(file.path(raw, "BGG_mainstudy_choiceExperiment.csv"))
@@ -48,8 +55,8 @@ stopifnot(s[, all(choice %in% c("Option 1", "Option 2"))], s[, all(chosen == (ch
 att <- function(p) s[, .(attr_strike_type = get(paste0(p, "_strike")), attr_chance_of_success = get(paste0(p, "_chance")),
                          attr_military_casualties = get(paste0(p, "_mil")), attr_allies_approve = get(paste0(p, "_ally")),
                          attr_civilian_casualties = as.character(get(paste0(p, "_civ"))), attr_environmental_damage = get(paste0(p, "_env")))]
-cv <- s[, .(cov_survey_weight = weight, cov_age = as.integer(age), cov_gender = gender, cov_education = educ, cov_race = race,
-            cov_hispanic = hispanic, cov_party = political_party, cov_region = region, cov_income = hhi, cov_employment = employ,
+cv <- s[, .(cov_survey_weight = weight, cov_age = as.integer(age), cov_gender = tolower(gender), cov_education = educ, cov_race = race,
+            cov_hispanic = hispanic, cov_party_id7 = political_party, cov_region = region, cov_income = hhi, cov_employment = employ,
             cov_pol_interest = pol_interest, cov_pol_discuss = pol_discuss, cov_pol_advice = pol_advice,
             cov_goal_defend_allies = foreign_defendAllies, cov_goal_energy_supply = foreign_energySupply,
             cov_goal_help_un = foreign_helpUN, cov_goal_prevent_nukes = foreign_preventNuke,

@@ -41,8 +41,10 @@
 ##Attribute row order in Figure 1: local news, location, size, political climate, salary,
 ##culture; whether it was randomized is not documented (no order fields in the export).
 ##Covariates: cov_birth_year (YRBORN as entered; two entries 1880/1881 that the authors read as
-##1980/1981 are kept as entered), cov_pid7 (the authors' 7-point construction from PID2/PID3/PID4:
-##1-3 Democrat, 4 independent, 5-7 Republican), cov_covid_concern (Q299, "How concerned are you
+##1980/1981 are kept as entered), cov_party_id7_code (the authors' 7-point party-ID construction
+##from PID2/PID3/PID4, kept as CODES: the deposit labels neither the PID items nor the 7 points;
+##the authors' code only groups them as 1-3 Democrat, 4 independent, 5-7 Republican, so the
+##text of each point, e.g. strong vs lean, is undocumented), cov_covid_concern (Q299, "How concerned are you
 ##about a coronavirus epidemic here in the United States?", raw code; the authors treat 1-2 as
 ##concerned, 3-4 as not concerned, 5 as don't know). Other demographics are unlabelled Qualtrics
 ##codes and are dropped, as are the timing fields and the authors' derived variables.
@@ -81,7 +83,7 @@ for (t in 1:15) for (p in 1:2) {
   r[, choice := fifelse(is.na(acc), NA_integer_, as.integer(acc == p))]
   r[, rating := rec[s[[paste0("offer", p, "_", t)]]]]
   for (k in names(lv)) { code <- s[[paste0(k, j, "_DO")]]; stopifnot(all(code %in% seq_along(lv[[k]]))); r[, paste0("attr_", an[[k]]) := lv[[k]][code]] }
-  r[, cov_birth_year := as.integer(s$YRBORN)][, cov_pid7 := pid][, cov_covid_concern := as.integer(s$Q299)]
+  r[, cov_birth_year := as.integer(s$YRBORN)][, cov_party_id7_code := pid][, cov_covid_concern := as.integer(s$Q299)]
   rows[[length(rows) + 1]] <- r
 }
 d <- rbindlist(rows)

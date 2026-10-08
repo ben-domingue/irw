@@ -30,10 +30,15 @@
 ##  policy".
 ##choice: "Based on this information, which ONE of these two MPs would you prefer to have as
 ##  your MP?" (MP 1 / MP 2; a response was required, no opt-out).
-##Covariates: cov_gender, cov_age, cov_region (GOR), cov_qual, cov_socialgrade (ABC1/C2DE),
-##  cov_party_id (pidfull), cov_interest, cov_lr_self, cov_lr_con, cov_lr_lab (left-right
-##  placements as deposited), cov_local_years, cov_local_feel, cov_local_care (numeric, as
-##  deposited), cov_survey_weight (W8).
+##Covariates: cov_gender ("female"/"male", lowercased from the deposited factor gender
+##  Female/Male), cov_age (years), cov_region (GOR), cov_education (qual, the deposit's
+##  highest-qualification variable as stored: "None/Other/Unknown", "Level 1/2", "Level 3",
+##  "Level 4"; the deposit has no finer version), cov_socialgrade (ABC1/C2DE), cov_party_id
+##  (partyid, the deposited answer text, e.g. "Yes - Labour", "NoneDK"; the same answers as
+##  the abbreviated pidfull used before), cov_interest, cov_lr_self, cov_lr_con, cov_lr_lab
+##  (left-right placements as deposited), cov_local_years, cov_local_feel, cov_local_care
+##  (numeric, as deposited), cov_survey_weight (W8, YouGov weight). No attention check or
+##  duration in the deposit.
 ##Dropped: parliamentary constituency (quasi-identifier), YouGov refno, response date, web
 ##  browser / operating system / device, the authors' derived recodes (age/qualification/
 ##  social-grade groupings, lr* comparisons, local* categorisations).
@@ -62,12 +67,13 @@ for (t in 1:5) for (p in 1:2) {
     attr_influence = g("influence"), attr_policy = g("policy"))
 }
 d <- rbindlist(rows)
-cv <- c(gender = "gender", age = "age", region = "region_GOR", qual = "qual", socialgrade = "socialgrade", party_id = "pidfull",
+cv <- c(gender = "gender", age = "age", region = "region_GOR", education = "qual", socialgrade = "socialgrade", party_id = "partyid",
         interest = "interest", lr_self = "lrself", lr_con = "lrcon", lr_lab = "lrlab", local_years = "localyears",
         local_feel = "localfeel.num", local_care = "localcare.num", survey_weight = "W8")
 cvd <- w[, c("ID", cv), with = FALSE]; setnames(cvd, c("id", paste0("cov_", names(cv))))
 for (v in names(cvd)) if (is.factor(cvd[[v]])) set(cvd, j = v, value = as.character(cvd[[v]]))
-cvd[, id := as.integer(id)]
+cvd[, id := as.integer(id)][, cov_gender := tolower(cov_gender)]
+stopifnot(all(cvd$cov_gender %in% c("female", "male")))
 d <- merge(d, cvd, by = "id")
 stopifnot(d[, sum(choice), .(id, task)][, all(V1 == 1)], nrow(d) == 17190L)
 setorder(d, id, task, profile)

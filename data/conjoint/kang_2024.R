@@ -32,9 +32,11 @@
 ##attribute gives one age band for both accuser and accused. Randomization restrictions and
 ##attribute order are not documented, but occupation levels are unequal: in exp1 accuser
 ##occupation is unemployed on 14% of profiles (low-SES 44%, high-SES 42%), and in exp2 accuser
-##and accused occupation are unemployed on about 8% (restrictions = observed). Spot check:
+##and accused occupation are unemployed on about 8% (level_weights = observed; every pair of levels
+##occurs, so no combination rule is visible). Spot check:
 ##exp1 cases with a female accuser are prioritized 57% of the time vs 43% for a male accuser.
-##cov_gender = the investigator's gender (1 = male, 2 = female; missing for 255 exp1 and 4 exp2
+##cov_gender = the investigator's gender as text (Stata value labels on gender: 1 "maleinvestigator"
+##-> "male", 2 "femaleinvestigator" -> "female"; missing for 255 exp1 and 4 exp2
 ##answering respondents; the authors' models drop them). exp2: one answering respondent's 6
 ##rows have no attribute values and are dropped (631 respondents remain).
 library(haven); library(data.table)
@@ -46,7 +48,8 @@ build <- function(f, attrs) {
   d <- data.table(id = as.integer(k$id), task = as.integer((k$profile + 1) %/% 2), profile = as.integer(2 - k$profile %% 2),
                   choice = as.integer(zap_labels(k$DV)))
   for (nm in names(attrs)) d[, paste0("attr_", nm) := lab(k[[attrs[[nm]]]])]
-  d[, cov_gender := as.integer(zap_labels(k$gender))]
+  d[, cov_gender := c("male", "female")[as.integer(zap_labels(k$gender))]]
+  stopifnot(identical(unname(attr(k$gender, "labels")), c(1, 2)), identical(names(attr(k$gender, "labels")), c("maleinvestigator", "femaleinvestigator")))
   stopifnot(d[, uniqueN(cov_gender), id][, all(V1 == 1)])
   d[, keep := !all(is.na(choice)) & !anyNA(.SD), .(id, task), .SDcols = paste0("attr_", names(attrs))]
   d <- d[keep == TRUE][, keep := NULL]

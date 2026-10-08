@@ -2,7 +2,8 @@
 ##Lipps, J., Sczepanski, R., & Malet, G. (2025). Understanding preferences over borders.
 ##International Studies Quarterly, 69(1), sqaf003. https://doi.org/10.1093/isq/sqaf003
 ##Replication data: Harvard Dataverse doi:10.7910/DVN/H6KD6R, CC0 1.0, no restricted files.
-##File read: survey_dat_clean_conjoint.csv (the authors' long conjoint file). Design facts from the
+##Files read: survey_dat_clean_conjoint.csv (the authors' long conjoint file) and, for respondent
+##gender only, survey_dat_clean.csv (columns id, sex). Design facts from the
 ##article (Research design; open access). The deposit has no codebook or questionnaire; the
 ##authors' 03_likertscale.R gives the gender coding (read as text, not run).
 ##Usage: Rscript lipps_2025.R <raw dir> <output dir>
@@ -34,8 +35,11 @@
 ##Covariates (as deposited; scales not documented in the deposit): cov_border_open_close (0-10,
 ##the article's open (0) .. closed (10) borders item), cov_vote_intention, cov_left_right,
 ##cov_immigration_general, cov_european_integration, cov_urban_rural (German text: Dorf,
-##Kleinstadt, Vorstadt einer Grossstadt, Grossstadt), cov_migration_background (0/1), cov_female
-##(source `gender`: 0 = Maennlich, 1 = otherwise, per 03_likertscale.R), cov_state (Land).
+##Kleinstadt, Vorstadt einer Grossstadt, Grossstadt), cov_migration_background (0/1), cov_gender
+##(from the answer text `sex` in survey_dat_clean.csv, joined by id: Weiblich -> female, Maennlich
+##-> male, nichtbinaer -> other, "Moechte ich nicht mitteilen" -> NA; the conjoint file's 0/1
+##`gender` = 0 Maennlich / 1 everything else, 03_likertscale.R, lumps women, non-binary and
+##refusals), cov_state (Land). No survey weight, attention check or duration in the deposit.
 ##Dropped: the authors' open_cat category (derived), the source row number, and the
 ##respondent-location variables: nearest border country and distances to the closest border,
 ##to each of four borders, to the Berlin Wall and to the Iron Curtain (together they locate
@@ -47,6 +51,11 @@ library(data.table)
 a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]
 s <- fread(file.path(raw, "survey_dat_clean_conjoint.csv"), na.strings = c("", "NA"), encoding = "UTF-8")
 stopifnot(s[, .N, id][, all(N == 8)], s[, sum(chosen), .(id, Category)][, all(V1 == 1)])
+r <- fread(file.path(raw, "survey_dat_clean.csv"), select = c("id", "sex"), encoding = "UTF-8")
+gl <- c("Weiblich" = "female", "M\u00e4nnlich" = "male", "nichtbin\u00e4r" = "other", "M\u00f6chte ich nicht mitteilen" = NA)
+stopifnot(!anyDuplicated(r$id), all(r$sex %in% names(gl)), all(s$id %in% r$id))
+s[, sex := r$sex[match(id, r$id)]]
+stopifnot(s[, all((sex == "M\u00e4nnlich") == (gender == 0))])
 m <- c(Fences = "Building border fences", `DE Border guards` = "Increasing national border patrols",
        `EU Border guards` = "Deploying European border guards", Surveillance = "Increasing electronic border surveillance")
 g <- c(Refugees = "Regulating the flow of people fleeing a war zone", `Illeg. immig` = "Limiting illegal migration",
@@ -58,7 +67,7 @@ d <- data.table(id = as.integer(s$id), task = as.integer(s$Category), choice = a
                 cov_border_open_close = s$border_open_close_1, cov_vote_intention = s$vote_intention,
                 cov_left_right = s$left_right_1, cov_immigration_general = s$immigration_general_1,
                 cov_european_integration = s$european_integration_1, cov_urban_rural = s$urban_rural,
-                cov_migration_background = s$migration_background, cov_female = s$gender, cov_state = s$lan_name)
+                cov_migration_background = s$migration_background, cov_gender = unname(gl[s$sex]), cov_state = s$lan_name)
 setorder(d, id, task, attr_measure, attr_country, attr_aim)
 d[, profile := seq_len(.N), .(id, task)]
 setcolorder(d, c("id", "task", "profile"))

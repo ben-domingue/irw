@@ -31,12 +31,16 @@
 ##  C2b_attr_order lists the attribute numbers in display order (policy always first), stored as
 ##  attrpos_<attr> (row position 1-7; the reading of the list as display order is inferred from
 ##  the variable label "Attribute order"). Randomization restrictions are not documented.
+##  Level probabilities are not documented either (level shares within 1.05x, every level pair
+##  occurs). Profiles were "two side-by-side profiles in a table, headed 'Proposal A' and
+##  'Proposal B'" (article p. 333). No task is repeated (checked in the data).
 ##Covariates (value-label text as deposited, English or German): cov_trust (SQG1, how often one
 ##  can trust the government, German), cov_climate_importance (SQ11_1, "Tackling climate
 ##  change", 0-10), cov_trust_climate (SQ12_1, trust on tackling climate change, 0-10),
 ##  cov_climate_myth (SQ16_2), cov_scientists_panic (SQ16_3), cov_worried_effects (SQ7_4, "The
 ##  effects of climate change"), cov_left_right (SQ30x_1, 1-10; code 997, unlabelled, set to NA),
-##  cov_vote_2021 (DE_q_BTW21_Quote). Respondent IDs re-keyed to integers. No survey weight.
+##  cov_vote_2021 (DE_q_BTW21_Quote; vote choice, not party ID). Respondent IDs re-keyed to
+##  integers. No survey weight in the deposit; no gender, age or education variable is deposited.
 ##N = 1,558 and 6,232 tasks match the article; the authors' Table A4 level counts reproduce.
 library(data.table); library(haven)
 a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]

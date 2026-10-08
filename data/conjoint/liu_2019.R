@@ -25,8 +25,11 @@
 ##excellence, student leadership); prior work experience (no experience, company job,
 ##government job); father's occupation (private sector worker, SOE worker (CCP member), private
 ##entrepreneur, government official). Randomization restrictions and attribute order: not
-##documented in the deposit (level shares look uniform).
-##Covariates: cov_female (res_gender 2; res_gender 1 = male per res_male), cov_age, cov_ccp,
+##documented in the deposit (level shares look uniform). No survey weight. One respondent's task 4
+##happens to repeat an earlier pair; no repeat task is documented.
+##Covariates: cov_gender (res_gender 1 = male, 2 = female, missing = NA; res_gender has no value
+##labels, the direction comes from res_male, variable label "respondent characteristic: male",
+##which is 1 exactly where res_gender = 1), cov_age (res_age, years), cov_ccp,
 ##cov_rank (1-6, codes not labelled in the deposit), cov_leader, cov_interviewer (has
 ##interviewer experience), cov_workunit (label text), cov_online.
 ##Dropped: PairID, match_win (derived), res_male (duplicate of res_gender, codes missing
@@ -39,6 +42,7 @@
 library(haven); library(data.table)
 a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]
 s <- as.data.table(read_dta(file.path(raw, "conjoint_ncse.dta")))
+stopifnot(all(zap_labels(s$res_gender) %in% c(1, 2, NA)), s[!is.na(res_gender), all((zap_labels(res_gender) == 1) == (zap_labels(res_male) == 1))])
 lab <- function(x) { l <- attr(x, "labels"); y <- names(l)[match(as.integer(x), l)]; stopifnot(!anyNA(y)); y }
 d <- data.table(id = s$ObsID, task = as.integer(s$task), profile = as.integer(s$profile),
                 choice = as.integer(s$win), rating_qualified = as.integer(s$match),
@@ -46,7 +50,7 @@ d <- data.table(id = s$ObsID, task = as.integer(s$task), profile = as.integer(s$
                 attr_gender = lab(s$male), attr_political_affiliation = lab(s$ccp), attr_college = lab(s$eliteuniv),
                 attr_education = lab(s$postgrad), attr_award = lab(s$prize), attr_work_experience = lab(s$workexp),
                 attr_father_occupation = lab(s$fatherjob),
-                cov_female = as.integer(zap_labels(s$res_gender) == 2), cov_age = as.integer(s$res_age),
+                cov_gender = c("male", "female")[as.integer(zap_labels(s$res_gender))], cov_age = as.integer(s$res_age),
                 cov_ccp = as.integer(s$res_ccp), cov_rank = as.integer(s$res_rank), cov_leader = as.integer(s$res_leader),
                 cov_interviewer = as.integer(s$res_interviewer),
                 cov_workunit = { l <- attr(s$res_workunit, "labels"); names(l)[match(as.integer(s$res_workunit), l)] },

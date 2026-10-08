@@ -33,9 +33,13 @@
 ##  choice. The author's main model uses 3,526 rows / 905 clusters, which this table reproduces;
 ##  the article text reports 979 mayors and 3,324 observations (not reconciled here).
 ##  Covariates (the deposit's grouped codes; the author withheld ungrouped data because the
-##  combination would identify mayors): cov_female (1 = woman), cov_over50 (1 = 50 or older),
-##  cov_education (1 primary, 2 secondary, 3-4 university; the do-file pools 3 and 4),
-##  cov_ideology (1 left, 2 center, 3 right). To limit re-identification the party, municipality
+##  combination would identify mayors): cov_gender (genderresp, "Respondent gender": 0 = male,
+##  1 = female, from main_analysis.do Appendix 4.2, where genderresp==0 is stored as "men" and
+##  ==1 as "women", plotted as Men / Women), cov_age_group (ageresp_g, "Respondent age
+##  (grouped)": 0 = "Under 50", 1 = "Over 50", the do-file's Figure A7b labels for young/old),
+##  cov_education_code (edurespondent, "Respondent education level", CODES: the do-file labels
+##  1 Primary, 2 Secondary and 3 or 4 together as University; codes 3 and 4 are not told apart
+##  in any deposit file, so the codes are kept), cov_ideology (1 left, 2 center, 3 right). To limit re-identification the party, municipality
 ##  population group, seniority, occupation, plans to run again, majority status, feminist-movement
 ##  and honesty-task variables and page timings are NOT carried.
 ##  Spot check: lm(choice ~ attributes) gives Woman +.0899 and University +.0543, as in the
@@ -45,7 +49,7 @@ a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]
 k0 <- read_dta(file.path(raw, "main_database.dta"))
 k <- as.data.table(zap_labels(k0))
 lab <- function(v) as.character(as_factor(k0[[v]]))
-stopifnot(k[, .N, id_conjoint][, all(N == 4)])
+stopifnot(k[, .N, id_conjoint][, all(N == 4)], all(k$genderresp %in% c(0, 1, NA)), all(k$ageresp_g %in% c(0, 1, NA)))
 k[, r := seq_len(.N), id_conjoint][, `:=`(task = (r + 1L) %/% 2L, profile = 2L - r %% 2L)]
 stopifnot(k[task == 1, all(is.na(polpref))], k[!is.na(person), sum(person), .(id_conjoint, task)][, all(V1 == 1)],
           k[, uniqueN(is.na(person)), .(id_conjoint, task)][, all(V1 == 1)])
@@ -55,8 +59,8 @@ d <- data.table(id = as.integer(k$id_conjoint), task = as.integer(k$task), profi
                 rating_capacity_to_govern = as.integer(k$capacity), rating_trustworthy = as.integer(k$confidence),
                 attr_gender = lab("gender"), attr_age = lab("age"), attr_education = lab("edu"), attr_terms = lab("legis"),
                 attr_ideology = lab("ideolog"), attr_seats = lab("seats"),
-                cov_female = as.integer(k$genderresp), cov_over50 = as.integer(k$ageresp_g),
-                cov_education = as.integer(k$edurespondent), cov_ideology = as.integer(k$ideolresp_g))
+                cov_gender = c("male", "female")[k$genderresp + 1L], cov_age_group = c("Under 50", "Over 50")[k$ageresp_g + 1L],
+                cov_education_code = as.integer(k$edurespondent), cov_ideology = as.integer(k$ideolresp_g))
 stopifnot(d[, all(attr_education %in% c("Primary", "Secondary", "University", "Doctorate", NA))])
 d <- d[!is.na(attr_gender)]
 stopifnot(!anyNA(d[, .(attr_age, attr_education, attr_terms, attr_ideology, attr_seats)]))

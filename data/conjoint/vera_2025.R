@@ -29,11 +29,16 @@
 ##probably relative to the respondent's own position; not verifiable from the deposit),
 ##party (Established/New), embezzlement, competence (job-creation record), age (30/40/50
 ##years old), education (Primary/Secondary/College Ed.). Attribute order and any
-##randomization restrictions are not documented in the deposit. Platform levels are unbalanced
-##(no 7,600 rows, vague 4,746, concrete 8,234), so randomization weights were not uniform.
-##Covariates: cov_age (years), cov_female (1 = Mujer), cov_education_years (years of
-##schooling from the answer text, 0-18, 18 = "18 or more"; "No sé" and "Prefiero no decir"
-##set missing).
+##randomization restrictions are not documented in the deposit (no attribute combination is
+##missing). Level weights OBSERVED: platform is unbalanced (no 7,600 rows, vague 4,746,
+##concrete 8,234), and ideology, age and education each have one level at ~23% against
+##~37-40% for the other two; bribery, gender, party, embezzlement, competence are 50/50.
+##Covariates: cov_age (Q1, years), cov_gender (Q2 answer text: "Mujer" -> "female", "Hombre"
+##-> "male"; the author's anticorr_representative_matching.R L27 codes Mujer as female),
+##cov_education (a1, the answer text as stored, e.g. "12 años: 3er curso de la E. Media o 6to
+##curso", "No sé/ No estoy seguro"; trailing no-break spaces trimmed; "Prefiero no decir" -> NA),
+##cov_education_years (years of schooling taken from that answer text, 0-18, 18 = "18 or
+##more"; "No sé" and "Prefiero no decir" set missing).
 library(data.table)
 a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]
 e <- new.env(); load(file.path(raw, "anticorr_replication_data.RData"), envir = e)
@@ -42,12 +47,14 @@ stopifnot(s[, .N, id][, all(N == 10)])
 s[, r := seq_len(.N), id][, task := (r + 1L) %/% 2L][, profile := 2L - r %% 2L]
 s <- s[!is.na(anticorruption)]
 stopifnot(s[, .N, id][, all(N == 10)], uniqueN(s$id) == 2058)
+stopifnot(all(s$Q2 %in% c("Mujer", "Hombre")))
 clean <- function(x) trimws(gsub("^•\\s*", "", x))
 d <- s[, .(id = as.integer(id), task = as.integer(task), profile = as.integer(profile),
            attr_anticorruption = clean(atributo4), attr_bribery = clean(atributo1), attr_gender = clean(atributo7),
            attr_ideology = as.character(ideology), attr_party = as.character(party), attr_embezzlement = as.character(embezzlement),
            attr_competence = as.character(competence), attr_age = as.character(age), attr_education = as.character(education),
-           cov_age = as.integer(Q1), cov_female = as.integer(Q2 == "Mujer"),
+           cov_age = as.integer(Q1), cov_gender = c(Mujer = "female", Hombre = "male")[as.character(Q2)],
+           cov_education = fifelse(a1 == "Prefiero no decir", NA_character_, trimws(as.character(a1), whitespace = "[\\h\\v]")),
            cov_education_years = suppressWarnings(as.integer(sub("^([0-9]+) a.*", "\\1", a1))))]
 stopifnot(d[, uniqueN(attr_anticorruption)] == 3, d[, uniqueN(attr_bribery)] == 2, d[, uniqueN(attr_gender)] == 2)
 vote <- as.integer(s$outcome_q1); vote[is.na(vote)] <- 0L

@@ -18,12 +18,18 @@
 ##para el Brexit A/B") with 7 attributes, and answered "Welche Brexit-Vereinbarung würden Sie
 ##wählen, wenn die Entscheidung bei Ihnen läge?" / "¿Qué acuerdo para el Brexit elegiría si la
 ##decisión la tomara usted?" (Which Brexit agreement would you choose if the decision were
-##yours?). Forced choice, no opt-out; every task has exactly one chosen profile. The
-##attribute ROW ORDER was randomized across respondents (visible in the two appendix screens)
-##but row positions are not in the data, so no attrpos_ columns. Every pair of levels
-##co-occurs (no sign of restrictions), but level frequencies are not uniform (e.g. brexit
-##bill "None" 24% vs "Small" 21%; free movement "Some restrictions" 29% vs "No
-##restrictions" 37%), so randomization weights were apparently unequal; not documented.
+##yours?). Forced choice, no opt-out; every task has exactly one chosen profile. Profiles were
+##shown side by side in a table (the two appendix screens). The attribute ROW ORDER differs
+##between the two appendix screens (one German, one Spanish), so it was not fixed, but whether
+##it was drawn per respondent or per task is not documented, and row positions are not in
+##the data, so no attrpos_ columns. Every pair of levels co-occurs (no sign of restrictions),
+##but level frequencies are not uniform (e.g. brexit bill "None" 24% vs "Small" 21%; free
+##movement "Some restrictions" 29% vs "No restrictions" 37%; max/min share 1.3 in a 28,656-row
+##table, chi-square p < 1e-8 for every attribute), so randomization weights were apparently
+##unequal; not documented. No task is designed as a repeat, but 98 German and 92 Spanish
+##respondents have a later task whose two profiles are identical to an earlier task's (same
+##order; 2-4% per task, growing with task number), far above chance for this level space;
+##kept as deposited.
 ##profile = source `ab` + 1. The deposit does not document `ab`; ab = 0 is taken to be
 ##agreement A (left column). This is an assumption.
 ##LEVEL TEXT: respondents saw German or Spanish text; the data carry the authors' English
@@ -32,8 +38,12 @@
 ##Binnenmarkt: Keine Handelsbeschränkungen"). "Programmes" levels "+ crime" = including
 ##cooperation against terrorism and organised crime.
 ##Covariates (from the survey file, joined on respondent_id; numeric codes):
-##  cov_agegroup 1=18-25 2=26-35 3=36-45 4=46-55 5=56-65 6=over 65; cov_gender 1=female
-##  2=male; cov_education 1=low 2=medium 3=high; cov_ideology 0=extreme left..10=extreme
+##  cov_age_group = agegroup as its value-label text ("18-25", "26-35", "36-45", "46-55",
+##  "56-65", "Over 65"; survey.dta label "28.Age groups"); cov_gender = gender as text
+##  (survey.dta label "29.Gender" 1=Female 2=Male -> female/male); cov_education =
+##  education_tri as its value-label text ("Low education", "Medium education", "High
+##  education"; label "Education_threecats", the authors' three-category coding and the only
+##  education measure deposited); cov_ideology 0=extreme left..10=extreme
 ##  right; cov_vote party vote intention (1 CDU/CSU 2 SPD 3 FDP 4 Linke 5 Grüne 6 AfD 101 PP
 ##  102 PSOE 103 Podemos 104 Cs 105 PNV 106 PDeCat 107 ERC 997 other); cov_eu_opinion
 ##  1=very negative..5=very positive (source survey file coding); cov_eu_referendum
@@ -55,14 +65,20 @@ library(haven); library(data.table)
 a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]
 lab <- function(x) { l <- attr(x, "labels"); names(l)[match(x, l)] }
 k <- read_dta(file.path(raw, "conjoint.dta"))
-s <- as.data.table(zap_labels(read_dta(file.path(raw, "survey.dta"))))
+s0 <- read_dta(file.path(raw, "survey.dta"))
+s <- as.data.table(zap_labels(s0))
+# reserved covariates as value-label text (survey.dta labels)
+stopifnot(all(s$agegroup %in% 1:6), all(s$gender %in% 1:2), all(s$education_tri %in% 1:3))
+for (v in c("agegroup", "education_tri")) s[, (v) := lab(s0[[v]])]
+s[, gender := c("female", "male")[gender]]
+stopifnot(identical(names(attr(s0$gender, "labels"))[match(1:2, attr(s0$gender, "labels"))], c("Female", "Male")))
 d <- data.table(id = as.integer(k$respondent_id), task = as.integer(k$task), profile = as.integer(k$ab) + 1L,
                 choice = as.integer(k$choice), country = as.integer(zap_labels(k$country)), trial_wave = as.integer(k$wave))
 amap <- c(brexitbill = "brexit_bill", rights = "rights_eu_citizens_in_uk", circulation = "freedom_of_movement",
           eulaw = "eu_law_applicability", trade = "trade", business = "business_freedom", programmes = "eu_programmes")
 for (v in names(amap)) d[, paste0("attr_", amap[[v]]) := lab(k[[v]])]
 d[attr_trade == "None", attr_trade := "No trade barriers (UK stays in the single market)"]
-cmap <- c(agegroup = "agegroup", gender = "gender", education_tri = "education", ideology = "ideology", vote = "vote",
+cmap <- c(agegroup = "age_group", gender = "gender", education_tri = "education", ideology = "ideology", vote = "vote",
           eu_opinion = "eu_opinion", eu_referendum = "eu_referendum", friends_uk = "friends_uk", ties = "business_ties",
           risk_personality = "risk", economicharm = "economic_harm", softhard = "soft_hard", country_handling = "country_handling",
           goal_avoidleave = "goal_avoid_more_exits", goal_avoidcontribution = "goal_avoid_more_contributions",

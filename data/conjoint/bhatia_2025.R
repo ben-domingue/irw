@@ -29,13 +29,17 @@
 ##  source's Treatment): 1 control (facts about Afghanistan), 2 bribery, 3 nepotism, 4 insecurity;
 ##  codes 5 (2 respondents) and NA (4) are undocumented and kept as NA. The authors' main
 ##  analysis compares control and insecurity; all arms are kept here.
-##Restrictions: none documented; level shares are clearly unequal for some attributes (Military
-##  about half the share of other careers, Kandahar about a fifth of other birthplaces, age 28
-##  less often), i.e. observed non-uniform weights.
-##Covariates (source codes; labels from the codebook): cov_female (Res_Gender 2 -> 1, 1 -> 0),
-##  cov_age (years), cov_ethnicity (1 Pashtun 2 Tajik 3 Uzbek 4 Turkmen 5 Hazara 6 Baloch 7
-##  Other), cov_education (1 none 2 primary 3 secondary 4 post-secondary vocational 5 some
-##  university 6 university degree 8 madrassa), cov_marital (1 single 2 married 3 divorced 4
+##Restrictions: none documented. In the data some combinations never occur (Female never
+##  Military; Madrassa never age 28; Kandahar birthplace only with Pashto ethnicity), and level
+##  shares are clearly unequal for some attributes (Military about half the share of other
+##  careers, Kandahar about a fifth of other birthplaces, age 28 less often): observed, not
+##  documented. Attribute order is not recorded.
+##Covariates: cov_gender ("male"/"female" from Res_Gender, enumerator-filled; codebook Full
+##  Data sheet, Res_Gender 1 Male, 2 Female), cov_age (Res_Age, years), cov_education (Res_Education
+##  answer text as in the codebook Full Data sheet: None / Primary School / Secondary School /
+##  Post-Secondary Vocational Training / Some University / University Degree / Madrassa). The
+##  rest keep the source codes (labels from the codebook): cov_ethnicity (1 Pashtun 2 Tajik 3
+##  Uzbek 4 Turkmen 5 Hazara 6 Baloch 7 Other), cov_marital (1 single 2 married 3 divorced 4
 ##  widowed), cov_income (household income last year: 1 0-10,000 AFS, 4 10,000-50,000, 6
 ##  50,000-100,000, 7 100,000-250,000, 8 250,000+, 9 don't know), cov_province, cov_language,
 ##  cov_trust_provincial_gov / cov_trust_national_gov (1 a lot of confidence .. 5 none at all),
@@ -63,8 +67,11 @@ for (t in 1:3) for (p in 1:2) {
 }
 d <- rbindlist(rows)
 stopifnot(!anyNA(d[, .SD, .SDcols = patterns("^attr_|^rating$")]), all(d$rating %in% 1:5))
-cvd <- x[, .(id = as.integer(ID), cov_female = as.integer(Res_Gender == 2), cov_age = Res_Age, cov_ethnicity = Res_Ethnicity,
-             cov_education = Res_Education, cov_marital = Marital_Status, cov_income = Income, cov_province = Province,
+stopifnot(all(x$Res_Gender %in% 1:2), all(x$Res_Education %in% c(1:6, 8)))
+edu <- c("None", "Primary School", "Secondary School", "Post-Secondary Vocational Training", "Some University",
+         "University Degree", "Madrassa")
+cvd <- x[, .(id = as.integer(ID), cov_gender = c("male", "female")[Res_Gender], cov_age = Res_Age, cov_ethnicity = Res_Ethnicity,
+             cov_education = edu[match(Res_Education, c(1:6, 8))], cov_marital = Marital_Status, cov_income = Income, cov_province = Province,
              cov_language = conjoint_language, cov_trust_provincial_gov = TrustProvGov, cov_trust_national_gov = TrustCentGov,
              cov_intl_forces_remain = IntForces, cov_econ_change = Econ_Change)]
 d <- merge(d, cvd, by = "id")

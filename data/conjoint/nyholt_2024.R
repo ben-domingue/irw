@@ -29,13 +29,21 @@
 ##Randomization: localism attributes uniform; gender, age, occupation, party drawn from the 2019
 ##Folketing candidates' marginal distribution (article), i.e. non-uniform weights.
 ##trial_prime: respondent-level arm (1 = Prime, 2 = No prime, source `Prime`).
-##Covariates (source numeric codes; labels in the .dta, Danish): cov_gender 1=Kvinde 2=Mand;
-##cov_age years; cov_region 1-5; cov_education (9-category profile_education, 9 = won't say);
-##cov_education3; cov_personal_income / cov_household_income (4 = don't know/won't say);
-##cov_urban 1-6; cov_occupation (occupation2); cov_house_type; cov_vote_intention (FT_next);
-##cov_partisanship1-4 (party ID items); cov_local1-3 (local identity items, 977 = Ved ikke);
-##cov_total_time (seconds; the authors drop respondents under 180 s, +15 s with the prime: 242
-##respondents, article); cov_survey_weight (`weight`, used in the authors' cj() calls).
+##Covariates (source numeric codes unless stated; labels in the .dta, Danish): cov_gender
+##(gender "Køn", value labels 1 Kvinde -> "female", 2 Mand -> "male"); cov_age (age_recoded,
+##"Eksakt alder", years); cov_region 1-5; cov_education (profile_education "Uddannelse", stored
+##as its value-label text, e.g. "Grund-/folkeskole", "Forskeruddannelse (f.eks. ph.d.)"; 9 =
+##"Ønsker ikke at oplyse" -> NA); cov_education3 (the 3-category education_3split, codes);
+##cov_personal_income / cov_household_income (4 = don't know/won't say); cov_urban 1-6;
+##cov_occupation (occupation2); cov_house_type; cov_vote_intention (FT_next);
+##cov_partisanship1 (partisan yes/no/don't know, codes), cov_party_id (partisanship2 "Hvilket
+##parti er der tale om?", asked of partisans, stored as its value-label text, e.g.
+##"A: Socialdemokratiet", "Ved ikke"), cov_partisanship3 (strength, codes), cov_partisanship4
+##(lean: "Er der alligevel et parti, som du synes du står nærmere end andre partier?", asked of
+##non-partisans, codes 1-18 as in the .dta labels); cov_local1-3 (local identity items, 977 =
+##Ved ikke); cov_duration_sec (Tot_time, total survey time in seconds; the authors drop
+##respondents under 180 s, +15 s with the prime: 242 respondents, article; analysis.R L51-53);
+##cov_survey_weight (`weight`, used in the authors' cj() calls).
 ##Dropped: page timings, employee job title, work-status dummies, the category age band.
 ##All 1,021 respondents are kept (the article's 1,021 before the inattention exclusion).
 library(haven); library(data.table)
@@ -60,15 +68,19 @@ d <- rbindlist(res)
 for (v in c("attr_behavioral_localism", "attr_symbolic_localism")) d[get(v) == "1", (v) := "(not shown)"]
 d[, attr_descriptive_localism := sub("^ +", "", attr_descriptive_localism)]
 for (v in grep("^attr_", names(d), value = TRUE)) d[, (v) := trimws(get(v))]
-cv <- c(Prime = "trial_prime", gender = "cov_gender", age_recoded = "cov_age", region = "cov_region", profile_education = "cov_education",
+cv <- c(Prime = "trial_prime", age_recoded = "cov_age", region = "cov_region",
         education_3split = "cov_education3", personal_income_recoded = "cov_personal_income",
         household_income_recoded = "cov_household_income", urban = "cov_urban", occupation2 = "cov_occupation",
         house_type = "cov_house_type", FT_next = "cov_vote_intention", partisanship1 = "cov_partisanship1",
-        partisanship2 = "cov_partisanship2", partisanship3 = "cov_partisanship3", partisanship4 = "cov_partisanship4",
+        partisanship3 = "cov_partisanship3", partisanship4 = "cov_partisanship4",
         local1 = "cov_local1", local2 = "cov_local2", local3 = "cov_local3")
 r <- data.table(id = as.integer(k$id))
 for (v in names(cv)) r[, (cv[[v]]) := as.integer(zap_labels(k[[v]]))]
-r[, cov_total_time := as.numeric(k$Tot_time)][, cov_survey_weight := as.numeric(k$weight)]
+labna <- function(x, na = integer(0)) { v <- as.integer(zap_labels(x)); y <- lab(x[!is.na(v)]); o <- rep(NA_character_, length(v)); o[!is.na(v)] <- y; o[v %in% na] <- NA; o }
+stopifnot(all(k$gender %in% 1:2))
+r[, cov_gender := c("female", "male")[as.integer(zap_labels(k$gender))]]
+r[, cov_education := labna(k$profile_education, na = 9L)][, cov_party_id := labna(k$partisanship2)]
+r[, cov_duration_sec := as.numeric(k$Tot_time)][, cov_survey_weight := as.numeric(k$weight)]
 stopifnot(!anyDuplicated(r$id))
 d <- merge(d, r, by = "id")
 setcolorder(d, c("id", "task", "profile", "choice", "rating", "trial_prime"))

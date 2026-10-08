@@ -28,7 +28,8 @@
 ##levels not saved). Left: 3,108 tasks, 1,037 respondents (22 lose all three tasks). The authors' derived variables (copartisan,
 ##attribute-seen dummies, issue proximity, candidate.profile type) and choice.time are dropped;
 ##Qualtrics ResponseIds re-keyed.
-##Covariates: cov_party (Democrat/Republican), cov_abortion_opinion and cov_spending_opinion (the
+##Covariates: cov_party_id (the respondent's party, party.id: Democrat/Republican as stored; party
+##identification is how the sample was defined), cov_abortion_opinion and cov_spending_opinion (the
 ##respondent's own positions on the two issue attributes, answer text; blank = no answer).
 library(data.table)
 a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]
@@ -48,7 +49,7 @@ d <- s[, .(id, task = as.integer(choice.task.number), profile = as.integer(candi
            attr_military_service = ns(military.service.candidate), attr_education = ns(education.candidate),
            attr_abortion = ns(abortion.stance.candidate), attr_spending = ns(spending.stance.candidate),
            trial_information_condition = as.integer(information.condition),
-           cov_party = party.id, cov_abortion_opinion = abortion.opinion, cov_spending_opinion = spending.opinion)]
+           cov_party_id = party.id, cov_abortion_opinion = abortion.opinion, cov_spending_opinion = spending.opinion)]
 a9 <- grep("^attr_", names(d), value = TRUE)[-1]
 stopifnot(d[, rowSums(.SD != "(not shown)") == trial_information_condition, .SDcols = a9],
           !d[, any(.SD == "" | is.na(.SD)), .SDcols = c("attr_party", a9)],

@@ -25,7 +25,8 @@
 ##  forced choice, no opt-out; the stored label is cut off after "Bemaerk, at posterne er
 ##  identiske i alle andre henseender end").
 ##Randomization: the article says simple randomization, every level with probability 1/3
-##  (restrictions none). Position is always the top attribute; the order of the other three
+##  (restrictions none, level weights uniform). The 8 stored position texts are 3 designed
+##  levels worded by municipality type; by designed level the shares are 34/33/33%. Position is always the top attribute; the order of the other three
 ##  was randomized between respondents and held fixed across their 7 tasks
 ##  (conjoint_attr_order_record, e.g. "0,1,3,2,4"): attrpos_* = rank in that record (position = 1).
 ##Sample: 2,391 survey records; 250 made no choice (149 never reached the experiment) and are
@@ -35,8 +36,13 @@
 ##  the authors' filter (3_fig3.R). That filter gives 1,939 respondents and 27,146 rows (men 18,214)
 ##  in the authors' own long file too; the article reports 1,938 / 27,132 (men 18,200), one man
 ##  fewer. Not resolved.
-##Covariates (numeric codes; Danish labels in the SPSS file): cov_female (c_Koen == "Kvinde"),
-##  cov_birth_year, cov_education (uddannelse 1-8), cov_elected_2021 (kom_valg: 1 first-time
+##Covariates (numeric codes unless stated; Danish labels in the SPSS file): cov_gender (c_Koen,
+##  stored as text: "Kvinde" -> "female", "Mand" -> "male"; the authors' 0_cleaning_n_pivoting.R
+##  L189 codes Kvinde as Woman), cov_birth_year (alder_o1, year of birth: the authors compute
+##  age = 2021 - alder_o1, L192), cov_education (uddannelse, "Hvad er den højeste uddannelse du
+##  har gennemført?", stored as its SPSS value-label text, e.g. "Grundskole (7.-10. klasse)",
+##  "Andet"; the label of code 6 is cut off at 120 characters in the SPSS file and is kept as
+##  stored), cov_elected_2021 (kom_valg: 1 first-time
 ##  elected, 2 re-elected, 3 not elected but previously, 4 never elected), cov_marital (1 married,
 ##  2 in a relationship, 3 single, 4 prefer not to say), cov_left_right (0-10, 0 = very
 ##  left-wing), cov_political_hours (weekly hours on political work), cov_harassed_1..5 (five
@@ -72,12 +78,13 @@ stopifnot(!anyNA(d[, .(attr_position, attr_remuneration, attr_workload, attr_env
           d[, uniqueN(attr_remuneration)] == 3, d[, uniqueN(attr_workload)] == 3, d[, uniqueN(attr_environment)] == 3,
           d[, uniqueN(attr_position)] == 8)
 stopifnot(d[, .(s = sum(choice), n = .N), .(nid, task)][, all(s == 1 & n == 2)])
+stopifnot(all(w$c_Koen %in% c("Kvinde", "Mand")), all(is.na(w$uddannelse) | w$uddannelse %in% 1:8))
 pos <- t(vapply(ord, function(o) match(c("1", "2", "3", "4"), o) - 1L, integer(4)))
 stopifnot(all(pos[, 1] == 1L), !anyNA(pos))
 cv <- w[, .(nid, attrpos_position = pos[, 1], attrpos_remuneration = pos[, 2], attrpos_workload = pos[, 3],
             attrpos_environment = pos[, 4],
-            cov_female = as.integer(c_Koen == "Kvinde"), cov_birth_year = as.integer(alder_o1),
-            cov_education = as.integer(uddannelse), cov_elected_2021 = as.integer(kom_valg),
+            cov_gender = unname(c(Kvinde = "female", Mand = "male")[c_Koen]), cov_birth_year = as.integer(alder_o1),
+            cov_education = unname(lab("uddannelse")[as.character(uddannelse)]), cov_elected_2021 = as.integer(kom_valg),
             cov_marital = as.integer(civilstatus), cov_left_right = as.integer(politik_skala),
             cov_political_hours = as.numeric(arbejdstid),
             cov_harassed_1 = as.integer(kraenkelser_1_resp), cov_harassed_2 = as.integer(kraenkelser_2_resp),

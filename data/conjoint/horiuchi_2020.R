@@ -31,10 +31,16 @@
 ##Attribute row order was randomized per respondent and held across tasks: attrpos_<name>
 ##(1-9) records it. Randomization restriction OBSERVED (no design file deposited): experience
 ##"在職経験なし" (never in office) occurs exactly when terms = "なし" (none), and otherwise never.
-##Covariates (codebook codes): cov_prefecture (Q2.1, 1-47 in JIS order, 13 = 東京都),
-##cov_age (Q2.5 code + 19, top code 90 = "90 or older"), cov_female (Q2.6 = 2), cov_education
-##(Q2.7: 1 = elementary/junior high, 2 = high school, 3 = junior college/technical, 4 =
-##university/graduate, 5 = still in school), cov_income (Q2.8 household income 2014, 1 = under
+##Level weights OBSERVED (not documented): terms "なし" is 14.5% of profiles against about 28%
+##for each other level, and experience "在職経験なし" 14.5% against about 43%.
+##Profiles were shown as a table (codebook Q3.1 "同じような表が続けて５回表示されます";
+##Q3.19 etc. lay out 人物 1 / 人物 2 columns with one row per attribute).
+##Covariates (codebook = docs/codebook.docx): cov_prefecture (Q2.1, 1-47 in JIS order, 13 =
+##東京都), cov_age (Q2.5 code + 19: codebook 20歳 (1) .. 89歳 (70), 90歳以上 (71), so top code
+##90 = "90 or older"), cov_gender (Q2.6: 男性 (1) -> "male", 女性 (2) -> "female"; also the
+##authors' 20_conjoint-preprocess.R respfemale = Q2.6 - 1), cov_education (Q2.7 option text:
+##1 小学校・中学校（旧制高等小学校を含む）, 2 高校（旧制中学校を含む）, 3 短大・高専（専修学校を含む）,
+##4 大学・大学院, 5 在学中 = still in school), cov_income (Q2.8 household income 2014, 1 = under
 ##1M yen .. 14 = 20M yen or more). The authors' entropy-balancing weights are computed in
 ##their code, not deposited, and are not rebuilt here.
 ##Dropped: Qualtrics ResponseID, name/email/external-reference fields (empty), timings,
@@ -72,8 +78,10 @@ d <- rbindlist(rows, use.names = TRUE)
 an <- c("party", "age", "gender", "terms", "experience", "hometown", "education", "occupation", "parent")
 stopifnot(!anyNA(d[, paste0("attr_", an), with = FALSE]), d[, sum(choice), .(id, task)][, all(V1 == 1)])
 stopifnot(d[, all((attr_experience == "在職経験なし") == (attr_terms == "なし"))])
-cv <- D[, .(id, cov_prefecture = as.integer(Q2.1), cov_age = as.integer(Q2.5) + 19L, cov_female = as.integer(as.integer(Q2.6) == 2L),
-            cov_education = as.integer(Q2.7), cov_income = as.integer(Q2.8))]
+stopifnot(all(D$Q2.6 %in% c("1", "2")), all(D$Q2.7 %in% as.character(1:5)))
+edu <- c("小学校・中学校（旧制高等小学校を含む）", "高校（旧制中学校を含む）", "短大・高専（専修学校を含む）", "大学・大学院", "在学中")
+cv <- D[, .(id, cov_prefecture = as.integer(Q2.1), cov_age = as.integer(Q2.5) + 19L, cov_gender = c("male", "female")[as.integer(Q2.6)],
+            cov_education = edu[as.integer(Q2.7)], cov_income = as.integer(Q2.8))]
 d <- merge(d, cv, by = "id")
 setcolorder(d, c("id", "task", "profile", "choice", paste0("attr_", an), paste0("attrpos_", an), "trial_house", "trial_tier"))
 setorder(d, id, task, profile)

@@ -25,8 +25,11 @@
 ##this district" where the deposit has "No community or family", and its candidate count says "More
 ##than 15" where the deposit says "More than 14". So the deposit labels are kept rather than mapped.
 ##Levels were "randomly assigned"; attribute order fixed (article p.834). No restrictions are stated.
-##Covariates (distrito_afro_regs.csv): cov_age (years, as recorded; max 100), cov_female (1 = female),
-##cov_department (department of residence). Dropped: the authors' derived group-consciousness and
+##Covariates (distrito_afro_regs.csv): cov_age (edad, years, as recorded; max 100), cov_gender
+##("female" = female 1, "male" = female 0; direction: the authors label the variable "Female" in
+##their .Rmd tables, covariate.labels L374/L390, and the article p.832 says respondents were
+##"primarily ... women", matching the 58% with female = 1), cov_department (department of
+##residence). No survey weight (convenience sample). No task is repeated. Dropped: the authors' derived group-consciousness and
 ##organization indicators and their survey-item sources. Source ids are survey numbers (not
 ##platform ids), kept.
 library(data.table)
@@ -39,8 +42,8 @@ d <- s[, .(id = as.integer(id), task = as.integer((k + 1L) %/% 2L), profile = as
            attr_district_type = FeatCirc, attr_num_candidates = FeatNumcand, attr_experience = FeatExp,
            attr_vote_buying = FeatClient, attr_candidate_ethnicity = FeatEth, attr_projects = FeatLegis, attr_networks = FeatFam)]
 stopifnot(d[, sum(choice), .(id, task)][, all(V1 == 1)], !anyNA(d))
-cv <- r[, .(id = as.integer(id), cov_age = as.integer(edad), cov_female = as.integer(female), cov_department = departamento)]
-stopifnot(!anyDuplicated(cv$id), all(d$id %in% cv$id))
+cv <- r[, .(id = as.integer(id), cov_age = as.integer(edad), cov_gender = c("male", "female")[female + 1L], cov_department = departamento)]
+stopifnot(!anyDuplicated(cv$id), all(d$id %in% cv$id), all(r$female %in% 0:1))
 d <- merge(d, cv, by = "id")
 setorder(d, id, task, profile)
 fwrite(d, file.path(out, "villamizar_2024_afro_districts.csv"))

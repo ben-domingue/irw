@@ -22,15 +22,22 @@
 ##displayed text of Table 1 / Figure 1 (e.g. "Cut military budget" -> "Wants to cut military
 ##budget and keep the U.S. out of war"); the rest is as stored (Figure 1 shows age as "52";
 ##the file's "52 years old" is kept). Attribute order was randomized per respondent (fixed
-##across the 10 tasks) and is not recorded. All attributes randomized independently and
-##uniformly (working paper p. 11, "complete randomization of all attributes").
+##across the 10 tasks) and is not recorded. All attributes randomized independently (working
+##paper p. 11, "For each profile, we randomly assign a value of each attribute"; "complete
+##randomization of all attributes"); level probabilities are not stated (shares in the data are
+##near-equal).
 ##Dropped: the authors' derived pair flags (Party competition, Sex competition, Implausible
 ##pair) and R_Agegroup (derived from age); R_Ideology (7-point code, direction not
-##documented). Covariates: cov_sex, cov_age, cov_region, cov_race, cov_partisanship,
+##documented). Covariates: cov_gender ("female"/"male", R_Sex Female/Male lowercased), cov_age
+##(R_Age, years), cov_region, cov_race, cov_party_id (R_Partisanship Democrat/Republican/
+##Independent, as stored: "party identification using the first of the standard branching
+##questions", leaners not separated, working paper p. 21 fn 9; was cov_partisanship),
 ##cov_hillary (feeling about Hillary Clinton: Like/Neutral/Dislike), cov_ba_degree (R_Education
 ##2 = BA degree, 1 = no BA; counts match appendix Table A1, 888/666), cov_class (R_Class
 ##1 lower, 2 middle, 3 upper; Table A1 counts match), cov_political_interest (R_Interest 1 =
-##not at all .. 4 = very interested, appendix section 5).
+##not at all .. 4 = very interested, appendix section 5). cov_ba_degree is kept as is: the
+##deposit's education variable is itself only the 1/2 BA split. No survey weight (quota
+##sample, none in the file). No task is repeated.
 ##Spot check: lm(choice ~ all attributes), SEs clustered by id, gives the female AMCE -1.3
 ##points the paper reports.
 library(data.table)
@@ -59,10 +66,11 @@ d <- s[, .(id = as.integer(respondentIndex), task = as.integer(task), profile = 
              "Don't reduce deficit now" = "Does not want to reduce the deficit now")),
            attr_favorability = `Favorability rating among the public`,
            trial_office = Office,
-           cov_sex = R_Sex, cov_age = as.integer(R_Age), cov_region = R_Region, cov_race = R_Race,
-           cov_partisanship = R_Partisanship, cov_hillary = R_Hillary,
+           cov_gender = tolower(R_Sex), cov_age = as.integer(R_Age), cov_region = R_Region, cov_race = R_Race,
+           cov_party_id = R_Partisanship, cov_hillary = R_Hillary,
            cov_ba_degree = as.integer(R_Education == 2), cov_class = as.integer(R_Class),
            cov_political_interest = as.integer(R_Interest))]
-stopifnot(d[, uniqueN(trial_office), .(id, task)][, all(V1 == 1)], d[, uniqueN(cov_age), id][, all(V1 == 1)])
+stopifnot(d[, uniqueN(trial_office), .(id, task)][, all(V1 == 1)], d[, uniqueN(cov_age), id][, all(V1 == 1)],
+          all(d$cov_gender %in% c("female", "male")))
 setorder(d, id, task, profile)
 fwrite(d, file.path(out, "ono_2019_candidate_sex.csv"))

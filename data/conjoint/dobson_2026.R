@@ -38,18 +38,22 @@
 ##the shown order (1, 3, 4, 5).
 ##Tasks with no answer to any of the three questions are omitted; a task missing only some
 ##questions keeps NA on those. Randomization restrictions are not documented; the authors'
-##cregg calls assume design = "uniform". In the table, salary $0k is on 3,155 profiles vs
-##about 4,250 for each other salary, and session "Unlimited" on 3,099 vs about 4,270 for each
-##month level; other attributes are balanced. Weights were probably not uniform
-##(restrictions = observed). Table: 1,996 respondents with any answered task, 15,898 rows.
+##cregg calls assume design = "uniform". In the table, session "Unlimited" never occurs with
+##salary $0k (0 of 15,898 profiles; every other session x salary cell has ~1,000-1,130), an
+##apparent prohibited pair (restrictions = observed). It accounts for the lower counts of
+##salary $0k (3,155 vs about 4,250 for each other salary) and session "Unlimited" (3,099 vs
+##about 4,270); other attributes are balanced. Table: 1,996 respondents with any answered task, 15,898 rows.
 ##The article's N is not known (paywalled). Spot check: marginal mean of the white-collar
 ##level is 0.42 on choice (benefit society) and 0.60 on choice_q3, in line with the abstract
 ##(white-collar legislatures seen as professional but not governing for the public).
-##Covariates (source codes; the export carries no value labels): cov_gender (authors: 2 =
-##female), cov_party (authors: 1 = Democrat, 2 = Republican, 3 = Independent), cov_working_class
-##(authors: 1 = working class, else white collar), cov_race_<group> (1 = selected, 0 = not),
-##cov_hisp, cov_check (attention check; authors treat 5 as passing), cov_finished (Qualtrics
-##finished flag). Other profile items (birth year, education, marital status, employment,
+##Covariates (source codes; the export carries no value labels): cov_gender_code (codes 1-4;
+##the authors' conjoint.R codes only female = gender == 2, so the other codes have no
+##documented meaning and are kept as codes), cov_party_id_code (codes 1-4; conjoint.R: 1 =
+##Democrat, 2 = Republican, 3 = Independent, code 4 undocumented, so kept as codes),
+##cov_working_class (authors: 1 = working class, else white collar), cov_race_<group> (1 =
+##selected, 0 = not), cov_hisp, cov_attention_pass (source `check`, variable label "Check";
+##the authors' conjoint.R sets check1 = check == 5: 1 = passed (5), 0 = failed (4), NA = no
+##answer; question wording not in the deposit), cov_finished (Qualtrics finished flag). Other profile items (birth year, education, marital status, employment,
 ##state, income, economic situation, q39) have unlabelled codes and are dropped.
 ##PII in the source, dropped: IP address, latitude/longitude, Qualtrics ResponseId, the
 ##consent field (Prolific IDs), free-text occupation, start/end dates. id = row order of
@@ -112,10 +116,11 @@ d <- d[task != 2]
 stopifnot(!anyNA(d[, paste0("attr_", names(lev)), with = FALSE]))
 for (o in c("choice", "choice_people_like_you", "choice_q3"))
   stopifnot(d[!is.na(get(o)), sum(get(o)), .(id, task)][, all(V1 == 1)])
-cv <- k[, .(id, cov_gender = as.integer(gender), cov_party = as.integer(party), cov_working_class = as.integer(working_class))]
+cv <- k[, .(id, cov_gender_code = as.integer(gender), cov_party_id_code = as.integer(party), cov_working_class = as.integer(working_class))]
 for (r in c("white", "black", "hisp", "native", "asian", "nhpi", "mena", "mixed", "other"))
   cv[, paste0("cov_race_", r) := as.integer(!is.na(k[[paste0("race_", r)]]))]
-cv[, `:=`(cov_hisp = as.integer(k$hisp), cov_check = as.integer(k$check), cov_finished = as.integer(k$finished))]
+stopifnot(all(k$check %in% c(4, 5, NA)))
+cv[, `:=`(cov_hisp = as.integer(k$hisp), cov_attention_pass = as.integer(k$check == 5), cov_finished = as.integer(k$finished))]
 d <- merge(d, cv, by = "id")
 setcolorder(d, c("id", "task", "profile", "choice", "choice_people_like_you", "choice_q3",
                  paste0("attr_", names(lev)), paste0("attrpos_", names(lev))))

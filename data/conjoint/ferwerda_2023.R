@@ -57,11 +57,22 @@
 ##Ids: Qualtrics ResponseIds re-keyed to integers (id); cov_panel_id = the panel PID
 ##re-keyed to integers with ONE mapping for both tables, so the same person can be linked
 ##across waves. Some PIDs appear on more than one response in a wave.
-##Covariates (from sdata, wave-1 measures; codebook.pdf): cov_female 1/0; cov_age 1=18-24
-##2=25-34 3=35-44 4=45-54 5=55-64 6=65+; cov_leftright 0-10 (left-right self-placement,
-##11-point); cov_vote 1=M5S 2=Lega 3=Forza Italia 4=PD 5=Fratelli d'Italia 6=Italia Viva
+##Covariates (from sdata, wave-1 measures; codebook.pdf): cov_gender female/male from sdata
+##female (codebook p.2 "female (1=yes,0=no)"; agrees with gender 1=male 2=female);
+##cov_age_group = sdata age as band text: codebook p.2 "age: W1: Age (ordinal version of
+##binary variables above)", age1-age6 = "Age 18-24", "25-34", "35-44", "45-54", "55-64",
+##"65+"; checked in sdata that code k has agek = 1. Code 7 (49 people) has age6 = 1, so it is
+##"65+" too (the source does not label 6 and 7 separately; presumably a finer split of 65+);
+##cov_leftright 0-10 (left-right self-placement, 11-point); cov_vote = votechoice_current
+##("Preferred Party", codebook p.3, which includes "Will not vote", so vote intention, not
+##party ID) 1=M5S 2=Lega 3=Forza Italia 4=PD 5=Fratelli d'Italia 6=Italia Viva
 ##9=Sinistra/MDP/Articolo 1 10=Più Europa 13=other 14=will not vote; cov_region 1-7
-##(anonymized); cov_non_citizen 1/0. Dropped: dates, Finished flag, other sdata items.
+##(anonymized); cov_non_citizen 1/0. Dropped: dates, Finished flag, other sdata items
+##(including the edu1-edu7 dummies). No survey weight, attention check or duration in the
+##deposit. Level probabilities and restrictions are not documented; in wave 1 every level
+##pair occurs, and the level shares are uniform except birthplace "Africa" (above). Profiles
+##are the Qualtrics conjoint table (F-<set>-<profile>-<row> fields, one row per attribute).
+##No task is repeated (checked in the data).
 ##PII in deposit (not read into the table): Qualtrics ResponseIds and panel PIDs.
 library(data.table)
 a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]
@@ -69,7 +80,9 @@ e <- new.env(); load(file.path(raw, "combined_waves.Rdata"), envir = e); sd <- a
 sd[, PID := format(PID, scientific = FALSE, trim = TRUE)]
 sd <- sd[PID != "NA" & !is.na(PID)]
 auth <- sd[both_waves == 1 & abs(w2_age - age) <= 1, PID]
-cv <- sd[, .(PID, cov_female = as.integer(female), cov_age = as.integer(age), cov_leftright = as.numeric(leftright),
+agegrp <- c("18-24", "25-34", "35-44", "45-54", "55-64", "65+", "65+")   # codebook age1-age6; 7 has age6 = 1
+stopifnot(sd[!is.na(age), all(age %in% 1:7)], sd[!is.na(female), all(female %in% 0:1)])
+cv <- sd[, .(PID, cov_gender = fifelse(female == 1, "female", "male"), cov_age_group = agegrp[age], cov_leftright = as.numeric(leftright),
              cov_vote = as.integer(votechoice_current), cov_region = as.integer(region), cov_non_citizen = as.integer(non_citizen))]
 cv <- unique(cv)   # sdata repeats a few PIDs as identical rows
 stopifnot(!anyDuplicated(cv$PID))

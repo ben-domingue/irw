@@ -37,12 +37,16 @@
 ##distribution, participation, emissions and monitoring as in Table 1 / the deposit labels ("20 of
 ##192", "40% of current emissions", "Your government"). Text is English for all four countries; the
 ##exact French/German screen text is not in the deposit. The euro sign is written "EUR" as in the SI.
-##Covariates: cov_survey_weight = weight; cov_age; cov_ideology (0 = left .. 10 = right); cov_female
-##(1 = female); cov_income (country-specific income bands, codes as in Readme.doc); cov_education
-##(the country's own education-group variable: FR 1 = CAP/BEP or less, 2 = Bac to Bac+2, 3 = Bac+3 or
-##more; DE and UK 1 = 16 years or fewer, 2 = 17-19, 3 = 20 or more; US 1 = HS or less, 2 = some
-##college, 3 = college graduate, 4 = postgraduate); cov_know_defense and cov_know_term (political
-##knowledge items, 1 = correct); cov_attention_pass (1 = passed the attention test).
+##Covariates: cov_survey_weight = weight (YouGov sample weight; the SI's regressions use it); cov_age;
+##cov_ideology (0 = left .. 10 = right); cov_gender from female (variable label "Female", value labels
+##0 = Male, 1 = Female in the .dta; agrees with gender 1/2 "Gender: Female"), as female/male;
+##cov_income (country-specific income bands, codes as in Readme.doc); cov_education = the country's own
+##education-group variable (the only education variable in the deposit), as the Readme.doc option text:
+##FR educgr_fr "CAP/BEP or less", "Bac to Bac+2", "Bac+3 or more"; DE educgr_ge and UK educgr_uk
+##"16 years or fewer", "17-19 years", "20 years or more"; US educgr_us "HS or less", "Some College",
+##"College Graduate", "Postgraduate" (Readme.doc entries educgr_fr/_ge/_uk/_us; the .dta value labels
+##agree); cov_know_defense and cov_know_term (political knowledge items, 1 = correct);
+##cov_attention_pass (attentioncheck_pass, "Attention test: Pass", 1 = passed, 0 = failed).
 ##Dropped: the authors' median-split indicators (recip_s_high_group, support_iec_high_group,
 ##ewill_pay_high, reductions_important, right, inc_high_group, educ_high), incon (derived
 ##rating/choice inconsistency flag), gender (duplicate of female), cj_order (undocumented code).
@@ -60,6 +64,9 @@ dist <- c("Only rich countries pay", "Proportional to current emissions", "Propo
           "Rich countries pay more than poor countries")
 mon <- c("Your government", "Independent commission", "United Nations", "Greenpeace")
 educ <- c(fr = "educgr_fr", de = "educgr_ge", uk = "educgr_uk", us = "educgr_us")
+yrs <- c("16 years or fewer", "17-19 years", "20 years or more")
+educ_txt <- list(fr = c("CAP/BEP or less", "Bac to Bac+2", "Bac+3 or more"), de = yrs, uk = yrs,
+                 us = c("HS or less", "Some College", "College Graduate", "Postgraduate"))
 for (cc in names(cost)) {
   x <- s[country == match(cc, c("fr", "de", "uk", "us"))]
   ids <- unique(x$ID)
@@ -71,11 +78,12 @@ for (cc in names(cost)) {
              attr_sanctions = c("None", paste(sanc[[cc]], "per household and month"))[sanctions_cj],
              attr_monitoring = mon[monitoring_cj],
              cov_survey_weight = weight, cov_age = as.integer(age), cov_ideology = as.integer(ideology),
-             cov_female = as.integer(female), cov_income = as.integer(income), cov_education = as.integer(get(educ[[cc]])),
+             cov_gender = c("male", "female")[as.integer(female) + 1L], cov_income = as.integer(income),
+             cov_education = educ_txt[[cc]][as.integer(get(educ[[cc]]))],
              cov_know_defense = as.integer(gknow1), cov_know_term = as.integer(gknow3),
              cov_attention_pass = as.integer(attentioncheck_pass))]
   stopifnot(!anyNA(d[, .SD, .SDcols = patterns("^attr_|^choice$|^rating$")]), d[, sum(choice), .(id, task)][, all(V1 == 1)],
-            d[, all(rating %in% 1:10)])
+            d[, all(rating %in% 1:10)], d[, sum(is.na(cov_education))] == x[, sum(is.na(get(educ[[cc]])))])
   setorder(d, id, task, profile)
   fwrite(d, file.path(out, paste0("bechtel_2013_climate_agreements_", cc, ".csv")))
 }

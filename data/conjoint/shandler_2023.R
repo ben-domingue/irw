@@ -30,10 +30,15 @@
 ##question wording is not in the deposit or the article text ("participants responded
 ##whether they would or would not classify the incident as cyberterrorism"). Direction:
 ##higher = labelled terrorism, not "more favourable". There is no choice column.
-##Covariates: cov_age (2020 - year born), cov_male (1 = male; source Gender == 2, as the
-##authors code it), cov_education and cov_income (country questionnaires' raw codes,
+##Covariates: cov_age (2020 - year born, as the authors compute it, Replication_Code.R L201),
+##cov_birth_year (Year_Born),
+##cov_gender (Gender: 2 = "male", per the authors' Replication_Code.R L198 Male <- Gender == 2;
+##1 = "female", the only other substantive code; code 3, 11 respondents, has no label in the
+##deposit -> NA), cov_education_code and cov_income_code (country questionnaires' raw codes,
 ##labels not deposited; codes differ by country), cov_political_position (1 = most liberal
-##... 6 = most conservative), cov_party_id_us (US only, 1-7 raw code, labels not deposited).
+##... 6 = most conservative), cov_party_id_code (US only, Party_ID_US raw code 1-7, labels and
+##direction not deposited). No survey weight in the deposit. Presentation: each scenario was a
+##prose vignette (article Figure 1). No task is repeated.
 ##Dropped: IP address, latitude/longitude, Qualtrics ResponseId, Prolific/Midgam ID,
 ##page timings, threat/exposure/COVID batteries, and attention checks. id is the row
 ##number of the source file (re-keyed to 1..n across all three countries).
@@ -73,9 +78,10 @@ for (a in names(attrs)) {
 }
 d[, (grep("^(code|txt)_", names(d), value = TRUE)) := NULL]
 cv <- s[, .(src, cov_country = c("United States", "United Kingdom", "Israel")[CountryCode],
-            cov_age = 2020L - as.integer(Year_Born), cov_male = as.integer(Gender == 2),
-            cov_education = as.integer(Education), cov_income = as.integer(Income),
-            cov_political_position = as.integer(Political_position), cov_party_id_us = as.integer(Party_ID_US))]
+            cov_age = 2020L - as.integer(Year_Born), cov_birth_year = as.integer(Year_Born), cov_gender = c("female", "male", NA)[Gender],
+            cov_education_code = as.integer(Education), cov_income_code = as.integer(Income),
+            cov_political_position = as.integer(Political_position), cov_party_id_code = as.integer(Party_ID_US))]
+stopifnot(all(s$Gender %in% 1:3))
 d <- merge(d[, country := NULL], cv, by = "src")
 d[, id := match(src, sort(unique(src)))][, src := NULL]
 setcolorder(d, c("id", "task", "profile", "rating"))

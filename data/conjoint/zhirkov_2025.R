@@ -30,10 +30,13 @@
 ##that sample the 11 AMCEs of the deposit's Figure A2 estimates (lm, SEs clustered by id)
 ##reproduce exactly (criminal record collapsed to none/drug/violent as the authors do).
 ##Covariates (source codes, Lucid profile variables stored as text and converted to integer):
-##cov_age (years), cov_gender (1 = male, 2 = female per the authors' female = gender - 1),
-##cov_hhi (income bracket 1-24), cov_education (1-8, negatives = missing), cov_political_party
-##(Lucid code; authors' pid7: 1-5 = Strong Dem..Lean Rep, 9 = Republican, 10 = Strong Rep),
-##cov_ethnicity, cov_hispanic (Lucid codes). Survey items keep their 1-7 source codes:
+##cov_age (years), cov_gender (gender 1 -> "male", 2 -> "female": code/code_01_repl_process_survey.do
+##"gen female = gender - 1", label "Female vs. male"), cov_hhi (income bracket 1-24), cov_education
+##(the text of the authors' label define education in code_01: 1 "Some high school or less" ..
+##8 "Dcotorate degree" [sic]; negative codes = missing), cov_party_id_code (Lucid political_party
+##CODES kept: code_01 maps 1-5, 9, 10 to pid7 "Strong Democrat", "Democrat", "Lean Democrat",
+##"Independent", "Lean Republican", "Republican", "Strong Republican" but sets codes 6-8 missing
+##without a label, so no source maps every code; the column keeps the codes), cov_ethnicity, cov_hispanic (Lucid codes). Survey items keep their 1-7 source codes:
 ##cov_welfar0-4 (spending on welfare / TANF / Medicaid / SNAP / housing assistance;
 ##1 = Increased substantially .. 7 = Decreased substantially), cov_fire1-4 and cov_indiv1-4
 ##(1 = Agree strongly .. 7 = Disagree strongly; item text in the .dta variable labels).
@@ -68,7 +71,13 @@ cv <- c("age", "gender", "hhi", "education", "political_party", "ethnicity", "hi
 cvd <- k[, c("id", cv), with = FALSE]
 for (v in cv) set(cvd, j = v, value = suppressWarnings(as.integer(cvd[[v]])))
 cvd[education < 0, education := NA]
+stopifnot(all(cvd$gender %in% 1:2), all(cvd$education %in% c(NA, 1:8)))
+cvd[, gender := c("male", "female")[gender]]
+cvd[, education := c("Some high school or less", "High school graduate", "Other post high school vocational training",
+                     "Completed some college, but no degree", "Associate's degree", "Bachelor's degree",
+                     "Master's or professional degree", "Dcotorate degree")[education]]
 setnames(cvd, cv, paste0("cov_", cv))
+setnames(cvd, "cov_political_party", "cov_party_id_code")
 d <- merge(d, cvd, by = "id")
 setcolorder(d, c("id", "task", "profile", "rating", paste0("attr_", nm), paste0("attrpos_", nm)))
 ## article sample check: non-Hispanic white with varying ratings = 1,271

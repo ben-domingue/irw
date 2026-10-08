@@ -42,10 +42,13 @@
 ##differences from the screen (capitalisation, spacing) are possible.
 ##Restriction: Romania never appears with "Senza permesso di soggiorno" (EU citizens);
 ##checked. Attribute row order was randomized (spec) but is not recorded in the deposit.
-##Covariates (source codes; labels in the .dta, Italian): cov_age (years), cov_gender
-##(1 = Uomo, 2 = Donna), cov_region (1 = Nord Ovest, 2 = Nord Est, 3 = Centro, 4 = Sud,
-##5 = Isole), cov_education (education_level_it, 1 = Nessun diploma .. 12 = Dottorato/master
-##di secondo livello, 13 = Altro, 14 = Preferisco non rispondere), cov_vote_2018 (1 = M5S,
+##Covariates: cov_age (years, "Quanti anni hai?"); cov_gender ("Sei...?", .dta labels 1 = Uomo,
+##2 = Donna, stored as male/female); cov_education ("Qual è il più alto livello di istruzione o
+##qualifica che hai raggiunto?", education_level_it), stored as the Italian .dta label text
+##(Nessun diploma, Licenza di scuola elementare, ... Dottorato / master di secondo livello,
+##Altro, Preferisco non rispondere). The rest are source codes (labels in the .dta, Italian):
+##cov_region (1 = Nord Ovest, 2 = Nord Est, 3 = Centro, 4 = Sud,
+##5 = Isole), cov_vote_2018 (1 = M5S,
 ##2 = Lega, 3 = Forza Italia, 4 = Fratelli d'Italia, 5 = PD, 6 = +Europa, 7 = Liberi e
 ##Uguali, 8 = abstain, 98 = other, 99 = ref/DK), cov_vote_ep_2019 (1 = Lega, 2 = M5S, 3 = PD,
 ##4 = FI, 5 = FdI, 6 = other, 7 = abstain, 8 = ref/DK), cov_employment (empl_stat_eu,
@@ -98,8 +101,8 @@ d <- rbindlist(lapply(1:5, function(t) rbindlist(lapply(1:2, function(p) {
 stopifnot(!anyNA(d$rating))
 stopifnot(d[attr_country == "Romania", all(attr_legal_status == "Con permesso di soggiorno")])
 z <- function(x) as.integer(zap_labels(x))
-cv <- k[, .(id, cov_age = as.integer(age), cov_gender = z(gender), cov_region = z(region_grouped_it),
-            cov_education = z(education_level_it), cov_vote_2018 = z(vote_18_quote_it), cov_vote_ep_2019 = z(epl_19_quote_it),
+cv <- k[, .(id, cov_age = as.integer(age), cov_gender = c("male", "female")[z(gender)], cov_region = z(region_grouped_it),
+            cov_education = as.character(as_factor(education_level_it, levels = "labels")), cov_vote_2018 = z(vote_18_quote_it), cov_vote_ep_2019 = z(epl_19_quote_it),
             cov_employment = z(empl_stat_eu), cov_household_income = z(profile_gross_household_eu),
             cov_survey_weight = as.numeric(weight))]
 d <- merge(d, cv, by = "id")

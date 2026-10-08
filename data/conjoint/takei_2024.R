@@ -28,8 +28,10 @@
 ##Restrictions: none (appendix p.7: no restrictions on combinations, so e.g. "the United States"
 ##can be "a dictatorship"; the authors' robustness check drops such profiles).
 ##Dropped: the authors' derived variables (inattention flags, threat_hawk_female, threeway) and
-##the wide duplicates. Covariates keep the appendix codings: cov_male, cov_age (1 = 18-24 ...
-##6 = 65+), cov_white, cov_ideology (1 = extremely conservative ... 7 = extremely liberal),
+##the wide duplicates (the inattention flags mark choice/rating inconsistencies, not attention
+##checks). Covariates: cov_gender (Male: value labels 0 "Female", 1 "Male"; appendix p.2 "1 = Male;
+##0 = Female"), cov_age_group (Age, as the band text of its Stata value labels "18-24", "25-34",
+##"35-44", "45-54", "55-64", "65 or Over"; appendix p.2), and in the appendix codings cov_white, cov_ideology (1 = extremely conservative ... 7 = extremely liberal),
 ##cov_income (1-9), cov_democrat. The survey weights in the appendix were computed on the fly
 ##and are not deposited.
 library(haven); library(data.table)
@@ -65,7 +67,10 @@ d[, attr_past_initiator := m(x$initiator, c("0" = "it was challenged", "1" = "it
 d[, attr_past_other_state := m(x$identity, c("0" = "ally of the United States", "1" = "adversary of the United States"))]
 d[, attr_past_outcome := m(x$outcome, c("0" = "the country ultimately stood firm", "1" = "the country ultimately backed down"))]
 d[, attr_past_leader := m(x$leadchange, c("0" = "led by the same leader as the one in the current dispute", "1" = "led by a different leader than the one in the current dispute"))]
-for (v in c("Male", "Age", "White", "Ideology", "Income", "Democrat")) d[, paste0("cov_", tolower(v)) := as.integer(x[[v]])]
+stopifnot(all(x$Male %in% c(NA, 0, 1)), all(x$Age %in% 1:6))
+d[, cov_gender := c("female", "male")[as.integer(x$Male) + 1L]]
+d[, cov_age_group := c("18-24", "25-34", "35-44", "45-54", "55-64", "65 or Over")[as.integer(x$Age)]]
+for (v in c("White", "Ideology", "Income", "Democrat")) d[, paste0("cov_", tolower(v)) := as.integer(x[[v]])]
 stopifnot(!anyNA(d[, grep("^attr_", names(d)), with = FALSE]), d[, sum(choice), .(id, task)][, all(V1 == 1)])
 setorder(d, id, task, profile)
 fwrite(d, file.path(out, "takei_2024_public_threats.csv"))

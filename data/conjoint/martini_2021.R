@@ -21,7 +21,8 @@
 ##design count (1,536 combinations = 6 jobs) and main text leave out; the appendix model "full sample
 ##(artisan included)" uses all 3,096. This table keeps all 3,096 and the artisan level (420 of 12,384
 ##profiles, 3.4%, against about 16% for each other job): the artisan level was clearly not drawn
-##uniformly, so restrictions = observed. Why artisan was dropped is not documented.
+##uniformly, so level weights = observed; combinations are unrestricted per the article
+##(restrictions = none). Why artisan was dropped is not documented.
 ##task/profile: the source `profile` (Candidate 1-4) is mapped to task = 1 for candidates 1-2 and 2 for
 ##3-4, profile = position within the pair. This is inferred from row order and checked: exactly one
 ##candidate is chosen in each of the 6,192 pairs.

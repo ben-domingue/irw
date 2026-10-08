@@ -27,7 +27,8 @@
 ##The authors drop speeders' tasks (do-file: drop if timer1_3 < 15 | timer2_3 < 10 | timer3_3 < 9,
 ##row-wise, so a fast task is dropped, not the whole respondent); all tasks are kept here, and
 ##the rule can be applied with trial_page_seconds (< 15 / 10 / 9 for tasks 1 / 2 / 3).
-##Covariates: cov_female (Mujer = 1), cov_age, cov_education, cov_party_id, cov_party_closeness,
+##Covariates: cov_gender (`gender` "Eres...", value labels 1 Hombre = "male", 2 Mujer =
+##"female", .dta), cov_age, cov_education, cov_party_id, cov_party_closeness,
 ##cov_employment, cov_income (Spanish label text); cov_ideology 0 (left) .. 10 (right), source
 ##1-11 minus 1, "No lo sé" (12) -> NA; cov_turnout_municipal 0 (Seguro que no votaría) .. 10
 ##(Seguro que votaría), source codes 1-10 -> 0-9 and 13 -> 10 per the value labels;
@@ -36,8 +37,9 @@
 ##cov_knowledge_1..3 (answer text of three political-knowledge items: who is pictured
 ##(Juncker correct), the acting employment minister (Fátima Báñez correct), what EU elections
 ##elect (MEPs correct)) and cov_knowledge_unemployment (estimated unemployment rate, %).
+##No survey weight, attention check or total duration in the .dta. No repeated task.
 ##Dropped: survey respondent id gid (re-keyed 1..2,248), the duplicate `gender`/`sex` codings
-##kept once (cov_female from `gender`; `sex` is the candidate attribute), the authors' derived
+##kept once (cov_gender from `gender`; `sex` is the candidate attribute), the authors' derived
 ##variables. 1 respondent has only 2 tasks; 1 pair has no choice; 2 profiles no rating.
 ##N: 2,248 respondents / 6,742 pairs in the deposit vs the article's 2,275 surveyed. Applying the
 ##speeder rule leaves 12,284 rated profiles, exactly the article's count (it says 6,142 pairs;
@@ -58,8 +60,9 @@ d <- data.table(gid = s$gid, task = as.integer(s$round), profile = as.integer(s$
                 trial_page_seconds = fcase(s$round == 1, s$timer1_3, s$round == 2, s$timer2_3, s$round == 3, s$timer3_3))
 stopifnot(d[!is.na(choice), sum(choice), .(gid, task)][, all(V1 == 1)], all(d$rating %in% c(0:10, NA)))
 ideo <- as.integer(zap_labels(s$ideol)); ideo <- ifelse(ideo == 12L, NA_integer_, ideo - 1L)
+stopifnot(all(zap_labels(s$gender) %in% c(1, 2, NA)))
 tv <- as.integer(zap_labels(s$voteprob)); stopifnot(all(tv %in% c(1:10, 13L)))
-d[, `:=`(cov_female = as.integer(zap_labels(s$gender) == 2), cov_age = as.integer(s$age), cov_education = lab(s$studies),
+d[, `:=`(cov_gender = c("male", "female")[as.integer(zap_labels(s$gender))], cov_age = as.integer(s$age), cov_education = lab(s$studies),
          cov_ideology = ideo, cov_party_id = lab(s$partyid), cov_party_closeness = lab(s$partyclose),
          cov_turnout_municipal = ifelse(tv == 13L, 10L, tv - 1L),
          cov_ptv_pp = as.integer(s$voteprob4_1), cov_ptv_psoe = as.integer(s$voteprob4_2),

@@ -23,12 +23,15 @@
 ##the codebook's bi_status marks pairs where both immigrants share a status.
 ##Kept: cov_survey_weight (weight), trial_study1_arm (Study 1 treatment the respondent
 ##  had just received: Control / Fact-check / Narratives, from immigration_t 0/1/2 and
-##  bi_treatment; respondent-level, constant across tasks), cov_party (bi_pid and
-##  independents combined: Democrats / Republicans / Independents; the split of leaners is
-##  not documented), cov_race (White / Nonwhite), cov_nativity (US Native / Immigrant).
+##  bi_treatment; respondent-level, constant across tasks), cov_party_id (party
+##  identification: bi_pid and independents combined, text Democrats / Republicans /
+##  Independents as in study2.rds factor labels and study2_codebook.xlsx "Respondent's party
+##  identification"; the split of leaners is not documented), cov_race (White / Nonwhite), cov_nativity (US Native / Immigrant).
 ##Dropped: bi_educ, bi_income, bi_ideo (authors' high/low splits with the middle set
 ##  missing), bi_immigration (derived from Study 1 outcomes), bi_status (derived), the
 ##  platform IDs. The deposit has no finer respondent covariates.
+##No attention check, duration, gender, age or education in the deposit. Attribute order and
+##presentation (grid or text) are not documented. No repeated task (5 tasks, codebook).
 ##Count: 1,999 respondents x 5 tasks x 2 profiles = 19,990 rows, as in the deposit. The
 ##article's N could not be read (paywall; abstract gives none).
 ##Spot-check (descriptive only; no paper number was readable): weighted selection rate by
@@ -48,7 +51,7 @@ d <- s[, .(id = nid, task = as.integer(choice_no), profile = as.integer(immigran
            attr_immigration_status = as.character(status), attr_country_of_origin = as.character(country),
            attr_education_level = as.character(skill), attr_current_employment = as.character(job),
            attr_total_taxes_paid_2021 = as.character(taxes), trial_study1_arm,
-           cov_survey_weight = weight, cov_party = fcoalesce(bi_pid, independents), cov_race = bi_race, cov_nativity = bi_immstat)]
+           cov_survey_weight = weight, cov_party_id = fcoalesce(bi_pid, independents), cov_race = bi_race, cov_nativity = bi_immstat)]
 stopifnot(!anyNA(d[, .SD, .SDcols = patterns("^attr_")]), d[, sum(choice), .(id, task)][, all(V1 == 1)])
 setorder(d, id, task, profile)
 fwrite(d, file.path(out, "avina_2026_immigrant_admission.csv"))
