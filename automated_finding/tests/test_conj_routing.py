@@ -65,9 +65,13 @@ class Screen(unittest.TestCase):
         self.assertEqual(self.status(license="unknown"), "todo")
         self.assertEqual(self.status(license=float("nan")), "todo")
 
-    def test_nc_nd_and_no_licence_are_held(self):
-        self.assertTrue(self.status(license="cc-by-nc").startswith("held: licence"))
-        self.assertTrue(self.status(license="cc-by-nd-4.0").startswith("held: licence"))
+    def test_nc_is_todo(self):
+        for lic in ("cc-by-nc", "cc-by-nc-4.0", "CC BY-NC 4.0", "cc-by-nc-sa-4.0"):
+            self.assertEqual(self.status(license=lic), "todo", lic)
+
+    def test_nd_and_no_licence_are_held(self):
+        for lic in ("cc-by-nd-4.0", "cc-by-nc-nd-4.0", "CC BY-NC-ND 4.0"):
+            self.assertTrue(self.status(license=lic).startswith("held: licence"), lic)
         self.assertEqual(self.status(
             license="this-dataset-is-made-available-with-limited-information-on-how-it-can-be-used."),
             "held: no licence")

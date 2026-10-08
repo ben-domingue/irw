@@ -462,15 +462,16 @@ CONJ_LEDGER_COLS = ["doi", "title", "licence", "lead", "status", "tables", "note
 
 # Intake rules, data/conjoint/README.md. The licence is screened here only so a
 # clearly-ineligible deposit is logged as held rather than todo; whoever builds
-# a todo row still confirms CC0 / CC BY / CC BY-SA from the Dataverse API.
+# a todo row still confirms the licence (CC0, CC BY, CC BY-SA or CC BY-NC, no
+# ND) from the Dataverse API.
 _CONJ_OK_LICENCE = re.compile(r"cc0|cc[- ]?zero|public[- ]domain|cc[- ]?by\b|"
                               r"creative[- ]commons[- ]attribution", re.IGNORECASE)
-_CONJ_BAD_LICENCE = re.compile(r"(\bnc\b|non[- ]?commercial|\bnd\b|no[- ]?deriv|"
-                               r"-nc\b|-nd\b|-nc-|-nd-)", re.IGNORECASE)
+# NC is admitted (Ben 2026-10-07, as elsewhere in IRW); ND still stops a deposit.
+_CONJ_BAD_LICENCE = re.compile(r"(\bnd\b|no[- ]?deriv|-nd\b|-nd-)", re.IGNORECASE)
 _CONJ_NO_LICENCE = re.compile(r"limited[- ]information|^none\b|no[- ]information",
                               re.IGNORECASE)
 CONJ_MIN_RESPONDENTS = 100
-CONJ_INTAKE_NOTE = ("intake (data/conjoint/README.md): licence CC0/CC BY/CC BY-SA "
+CONJ_INTAKE_NOTE = ("intake (data/conjoint/README.md): licence CC0/CC BY/CC BY-SA/CC BY-NC "
                     "confirmed from the Dataverse API with no restricted files; "
                     ">=100 respondents; attribute levels as displayed text, "
                     "else hold")
@@ -480,7 +481,7 @@ def conj_ledger_row(row, *, lead: str, why: str = "") -> dict:
     """One candidates.csv row for a conjoint lead, screened against the intake rules.
 
     Status is `todo` unless the triage already shows a rule fails: a named
-    licence outside CC0 / CC BY / CC BY-SA, Dataverse's "no information on use"
+    licence outside CC0 / CC BY / CC BY-SA / CC BY-NC (any ND), Dataverse's "no information on use"
     text, or fewer than 100 respondents -> `held: <reason>`. A blank or
     `unknown` licence stays `todo`: the triage often misses a licence the
     deposit page states."""
@@ -498,7 +499,7 @@ def conj_ledger_row(row, *, lead: str, why: str = "") -> dict:
         if _CONJ_NO_LICENCE.search(lic):
             held.append("no licence")
         elif _CONJ_BAD_LICENCE.search(lic) or not _CONJ_OK_LICENCE.search(lic):
-            held.append(f"licence {lic} is not CC0/CC BY/CC BY-SA")
+            held.append(f"licence {lic} is not CC0/CC BY/CC BY-SA/CC BY-NC")
     if n is not None and n < CONJ_MIN_RESPONDENTS:
         held.append(f"fewer than {CONJ_MIN_RESPONDENTS} respondents (triage count {n})")
 
