@@ -34,9 +34,12 @@
 ##order of attributes and any randomization restrictions are not documented.
 ##The authors' code has slips the table does NOT reproduce: task 5 choice read from accept_9,
 ##task 11 profile 2 partisanship from pol2_DO.
-##Covariates: cov_birth_year (YRBORN), cov_pid7 (the authors' 7-point construction from PID2/
-##PID3/PID4: 1-3 Democrat, 4 independent, 5-7 Republican). Other demographics are unlabelled
-##Qualtrics codes and are dropped.
+##Covariates: cov_birth_year (YRBORN), cov_party_id7_code (CODES 1-7: the authors' 7-point
+##party ID built from PID2/PID3/PID4, JOP_Replication.R L16-23; their 3-way recode L507-508
+##names 1-3 Democrat, 4 Independent, 5-7 Republican, but no source gives the text of the seven
+##points or of the PID questions, so the codes are kept). Other demographics are unlabelled
+##Qualtrics codes and are dropped; the export has Qualtrics "Duration (in seconds)" (not kept).
+##No survey weight in the deposit.
 ##PII in the deposit (dropped): IP addresses, latitude/longitude, Qualtrics ResponseId, a
 ##per-respondent random code (`random`, likely the MTurk completion code). Ids are re-keyed to
 ##row order.
@@ -64,7 +67,7 @@ build <- function(file, name) {
     r[, choice := fifelse(is.na(acc), NA_integer_, as.integer(acc == p))]
     r[, rating := rec[s[[paste0("offer", p, "_", t)]]]]
     for (k in names(lv)) { code <- s[[paste0(k, j, "_DO")]]; stopifnot(all(code %in% c(NA, seq_along(lv[[k]])))); r[, paste0("attr_", an[[k]]) := lv[[k]][code]] }
-    r[, cov_birth_year := as.integer(s$YRBORN)][, cov_pid7 := pid]
+    r[, cov_birth_year := as.integer(s$YRBORN)][, cov_party_id7_code := pid]
     rows[[length(rows) + 1]] <- r
   }
   d <- rbindlist(rows)

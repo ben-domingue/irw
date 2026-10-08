@@ -27,7 +27,8 @@
 ##pairs; agnostics (10) got 7, unlike the article's description. The design asks respondents to act as
 ##an immigration official choosing whom to admit.
 ##Six attributes; attribute order was randomized across respondents (the report tabulates the
-##attribute name in each row position) but the order is not in the .dta, so no attrpos_*.
+##attribute name in each row position; the tallies for F-1-1, F-2-1, F-3-1, ... are identical,
+##so the order was drawn once per respondent) but it is not in the .dta, so no attrpos_*.
 ##Displayed attribute names: Country of Origin, Language Skills, Attends Religious Services,
 ##Gender, Religion, Education Level. Level text = the .dta value labels (the displayed text).
 ##Restriction: an Atheist immigrant always has "Never" for religious attendance; Atheist was
@@ -43,18 +44,23 @@
 ##  70 tasks have ratings but no choice (choice blank); 15 tasks have a choice but a rating
 ##  for one or neither profile. Rows with no outcome are omitted, so one task (rated for one
 ##  immigrant only, no choice) has a single row.
-##Covariates (source codes; wording from the report):
-##  cov_gender 1 male 2 female; cov_birth_year (from the Qualtrics year-of-birth code);
+##Covariates (source codes unless said; wording from the report). The .dta carries no value
+##labels for respondent variables; text mappings are from SSI_conjoint2014_qualtricsreport.pdf
+##(Q1 "What is your gender?" 1 Male 2 Female; Q4 "What is the highest level of education you
+##have completed?"; Q95 "Generally speaking, do you consider yourself a..."), and the report's
+##counts match the .dta codes (e.g. Q95 564/375/524/87 vs 563/373/524/87 in the data):
+##  cov_gender female / male; cov_birth_year (from the Qualtrics year-of-birth code);
 ##  cov_race_black/asian/white/latino/nativeamerican/middleeast/other: 1 = selected, 0 = not
-##  (multi-select; all missing if none selected); cov_education 1 did not graduate HS, 2 HS
-##  graduate, 3 some college, 4 2-year degree, 5 4-year degree, 6 postgraduate;
+##  (multi-select; all missing if none selected); cov_education as text: Did not graduate from
+##  high school / High school graduate / Some college, but no degree / 2-year college degree /
+##  4-year college degree / Postgraduate degree (MA, MBA, MD, JD, PhD, etc.);
 ##  cov_religion 1 Protestant 2 Roman Catholic 3 Mormon 4 Orthodox 5 Jewish 6 Muslim 7 Buddhist
 ##  8 Hindu 9 Atheist 10 Agnostic 11 None; cov_attends 1 more than once a week ... 6 never;
 ##  cov_believe_god 1 yes 2 no; cov_religion_importance (source codes) 6 extremely, 11 very,
 ##  7 somewhat, 8 not very, 10 not at all important; cov_other_language_home 1 yes 2 no;
 ##  cov_employed 1 no 2 yes; cov_ft_* feeling thermometers 0-100 (Protestants, Catholics,
 ##  Mormons, Orthodox, Jews, Muslims, Buddhists, Hindus, atheists, agnostics, Asians, feminists,
-##  business, working class); cov_party_id 1 Democrat 2 Republican 3 Independent 4 other;
+##  business, working class); cov_party_id as text: Democrat / Republican / Independent / Other Party;
 ##  cov_strong_dem / cov_strong_rep 1 strong 2 not very strong; cov_state 1-52 (the report's
 ##  list: 50 states alphabetical with D.C. and Puerto Rico); cov_legal_immigration ("number of
 ##  legal immigrants ... should be" 1 increased a lot ... 5 reduced a lot, asked after the
@@ -63,7 +69,8 @@
 ##Spot check (2026-10-07): all eight cells of the article's Table 6 (mean ratings rescaled to
 ##0-1 by respondent and immigrant religiosity, Muslim vs non-Muslim) reproduce to 2 decimals,
 ##with the cell N of 621 respondents.
-##Dropped: sm_index (derived self-monitoring index), imm_num. No survey weight ships.
+##Dropped: sm_index (derived self-monitoring index), imm_num. No survey weight ships. The
+##report's attention check (Q100, type "k" next to "other") is not in the .dta.
 library(haven); library(data.table)
 a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]
 s <- as.data.table(read_dta(file.path(raw, "SSI_conjoint_2014.dta")))
@@ -74,7 +81,8 @@ d <- s[, .(id = as.integer(caseid), task = as.integer((imm_num + 1) %/% 2), prof
            attr_country = lab(country), attr_language = lab(language), attr_attends = lab(attends),
            attr_gender = lab(gender), attr_religion = lab(religion), attr_education = lab(education))]
 z <- function(v) as.integer(zap_labels(v))
-d[, cov_gender := z(s$gender_resp)]
+txt <- function(v, lv) { v <- z(v); stopifnot(all(is.na(v) | v %in% seq_along(lv))); lv[v] }
+d[, cov_gender := txt(s$gender_resp, c("male", "female"))]
 ag <- z(s$age)  # Qualtrics codes: 1 = 1996, 2-75 = 1973 down to 1900, 97 = 1993, 98 = 1992, 99 = 1995, 100 = 1994, 101-118 = 1991 down to 1974
 by <- rep(NA_integer_, length(ag))
 by[ag %in% 1] <- 1996L; i <- ag %in% 2:75; by[i] <- 1975L - ag[i]
@@ -93,6 +101,10 @@ covs <- c(education_resp = "education", religion_resp = "religion", attends_resp
           pid = "party_id", strongdem = "strong_dem", strongrep = "strong_rep", state = "state", numbimm = "legal_immigration",
           illegalimm = "deport_illegal")
 for (v in names(covs)) d[, paste0("cov_", covs[[v]]) := z(s[[v]])]
+d[, cov_education := txt(s$education_resp, c("Did not graduate from high school", "High school graduate",
+  "Some college, but no degree", "2-year college degree", "4-year college degree",
+  "Postgraduate degree (MA, MBA, MD, JD, PhD, etc.)"))]
+d[, cov_party_id := txt(s$pid, c("Democrat", "Republican", "Independent", "Other Party"))]
 d <- d[!is.na(choice) | !is.na(rating)]
 stopifnot(!anyNA(d[, .SD, .SDcols = patterns("^attr_")]), d[, sum(choice), .(id, task)][!is.na(V1), all(V1 == 1)])
 setorder(d, id, task, profile)

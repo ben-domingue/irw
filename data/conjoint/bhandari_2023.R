@@ -29,8 +29,9 @@
 ##  blank on both are omitted, which drops 7 respondents: 2,382 respondents, 18,962 rows.
 ##  The article's N was not checked (paywalled). Spot check (OLS, SEs clustered by id):
 ##  informal vs formal contract -0.27 on rating; no published number was available to compare.
-##Covariates: cov_female (codebook gender 1 = Female), cov_age (years; 8 values above 100,
-##data-entry errors up to 707,000,000, set blank), cov_formal_firm (1 = formal firm).
+##Covariates: cov_gender (codebook p. 2, `gender` "Sex of respondent" 0 = Male, 1 = Female), cov_age (years; 8 values above 100,
+##data-entry errors up to 707,000,000, set blank), cov_formal_firm (1 = formal firm). The deposit
+##documents no survey weight.
 ##DROPPED: KEY (ODK instance uuid; re-keyed to integers), neighbourhood and its free-text
 ##"other", the free-text ethnicity/religion/party "other" fields, the authors' coethnic and
 ##coreligion flags (derived from the profile), and the other firm survey items.
@@ -39,7 +40,7 @@ a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]
 e <- new.env(); load(file.path(raw, "conjoint_data.RData"), envir = e)
 s <- as.data.table(e$conjoint_data)
 stopifnot(nrow(s) == 19112, uniqueN(s$KEY) == 2389, s[, .N, KEY][, all(N == 8)], s[, .N, .(KEY, round, profile)][, all(N == 1)],
-          s[, uniqueN(prefer), .(KEY, round)][, all(V1 == 1)], s[, uniqueN(breach), .(KEY, round)][, all(V1 == 1)])
+          s[, uniqueN(prefer), .(KEY, round)][, all(V1 == 1)], s[, uniqueN(breach), .(KEY, round)][, all(V1 == 1)], s$gender %in% 0:1)
 judge <- function(ans, prof) fifelse(ans %in% c(98, 99), NA_integer_, as.integer(ans == prof | ans == 4))
 key <- sort(unique(as.character(s$KEY)))
 d <- s[, .(id = match(as.character(KEY), key), task = as.integer(round), profile = as.integer(profile),
@@ -48,7 +49,7 @@ d <- s[, .(id = match(as.character(KEY), key), task = as.integer(round), profile
            attr_political_affiliation = as.character(c_political_affil), attr_business_size = as.character(c_business_size),
            attr_manager_ethnicity = as.character(c_ethnicity), attr_manager_religion = as.character(c_religion),
            trial_attribute_order = as.integer(`Randomization scheme`),
-           cov_female = as.integer(gender), cov_age = fifelse(age > 100, NA_integer_, as.integer(pmin(age, 1e6))),
+           cov_gender = c("male", "female")[gender + 1L], cov_age = fifelse(age > 100, NA_integer_, as.integer(pmin(age, 1e6))),
            cov_formal_firm = as.integer(formal_firm))]
 stopifnot(all(d$rating == s$preferred_firm, na.rm = TRUE), all(d$rating_breach == s$breach_risk, na.rm = TRUE))
 d <- d[!(is.na(rating) & is.na(rating_breach))]

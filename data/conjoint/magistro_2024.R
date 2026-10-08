@@ -45,10 +45,12 @@
 ##20 respondents (19 Australia, 1 US) have no stored attribute values in any table although
 ##some answered: their tasks are dropped (levels not saved). Respondents with no answer to
 ##either outcome in a task have that task omitted.
-##Covariates: cov_country, cov_language (Qualtrics UserLanguage: EN, FR-CA, ES-ES), cov_female
-##(0/1), cov_college (0/1), cov_lr (left/centre/right), cov_age, cov_income (as entered),
-##cov_employment (text of the screener answer), cov_attention_check (answer to the item that asks
-##respondents to pick "Somewhat disagree"), cov_policy_* (support for 8 policies, 1 = strongly
+##Covariates: cov_country, cov_language (Qualtrics UserLanguage: EN, FR-CA, ES-ES), cov_gender
+##(source `female`: models_main_paper.R L171-173 female == 0 "Male", female == 1 "Female"; stored
+##male / female), cov_college (0/1), cov_lr (left/centre/right), cov_age, cov_income (as entered),
+##cov_employment (text of the screener answer), cov_attention_pass (source screen1: article p.791
+##fn 6, "The attention check item asks respondents to select 'Somehow disagree'"; 1 = answered
+##"Somewhat disagree", 0 = any other answer, NA = no answer), cov_policy_* (support for 8 policies, 1 = strongly
 ##disagree .. 5 = strongly agree, asked AFTER the four tables, so post-treatment).
 ##Dropped: ResponseId (Qualtrics, PII), the knowledge-check answers (they contain unpiped
 ##Qualtrics placeholders) and the authors' derived categories, the summary agree_1/agree_2
@@ -84,11 +86,13 @@ stopifnot(all(d$rating %in% c(NA, 1:5)), all(d$rating_ceo %in% c(NA, 1:5)))
 pl <- list(Plane = c(1e8, 8e7, 5e7), Avion = c(1e8, 8e7, 5e7), Car = c(25000, 20000, 12500), Automobile = c(25000, 20000, 12500),
            smartphone = c(600, 480, 300), "Téléphone intelligent" = c(600, 480, 300), Vaccine = c(25, 20, 12.5), Vaccin = c(25, 20, 12.5))
 stopifnot(all(d$attr_product %in% names(pl)), d[, all(mapply(function(p, x) as.numeric(x) %in% pl[[p]], attr_product, attr_price_after))])
-cv <- s[, .(id, cov_country = country, cov_language = UserLanguage, cov_female = as.integer(female), cov_college = as.integer(college),
+stopifnot(all(s$female %in% c("0", "1", NA)), all(s$screen1 %in% c("Strongly disagree", "Somewhat disagree", "Neither agree nor disagree",
+                                                                    "Somewhat agree", "Strongly agree", NA)))
+cv <- s[, .(id, cov_country = country, cov_language = UserLanguage, cov_gender = c("male", "female")[as.integer(female) + 1L], cov_college = as.integer(college),
             cov_lr = LR, cov_age = as.integer(age), cov_income = as.numeric(income), cov_employment = employment_screener,
-            cov_attention_check = screen1)]
+            cov_attention_pass = as.integer(screen1 == "Somewhat disagree"))]
 for (p in c("socialspend", "basicincome", "jobguarantee", "unskilled", "skilled", "trade", "reskill", "automationtax"))
   cv[, paste0("cov_policy_", p) := as.integer(s[[paste0("policy_", p)]])]
 d <- merge(d, cv, by = "id")
 setorder(d, id, task, profile)
-fwrite(d, file.path(out, "magistro_2024_automation_fairness.csv"))
+fwrite(d, file.path(out, "magistro_2024_automation_fairness.csv"), scipen = 50)   # cov_income as 100000, not 1e+05

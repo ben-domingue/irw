@@ -19,9 +19,13 @@
 ##  arias_2022_climate_migrants_germany  German adults; "Ihr Land"
 ##Each respondent saw 9 tasks of two migrant profiles ("Migrant 1", "Migrant 2") described by
 ##7 attributes: gender, language fluency, occupation, origin, reason for migration, religion,
-##vulnerability. Attribute ORDER was re-randomized on every task and is kept as attrpos_*
-##(1 = top row). Restriction (design file): language fluency "None" never shown with origin
-##"Another region in your country". Levels uniform otherwise. Germany: level text as shown
+##vulnerability. Attribute ORDER was randomized once per respondent (the F-<task>-<k> order
+##is the same on all 9 tasks for every respondent in the data) and is kept as attrpos_*
+##(1 = top row). No task is repeated. Restriction (design file): language fluency "None" never shown with origin
+##"Another region in your country". Levels uniform otherwise (design-file Weights block). The
+##restriction held only in Germany. The US design file names the attribute "Country of
+##Origin", which is not an attribute ("Origin"), and the US data show all 15 origin x fluency
+##combinations at near-equal shares, so the rule was not applied in the US. Germany: level text as shown
 ##in German, except religion, which the German design file and data show in English
 ##("Christian", "Muslim", "Atheist"); the German fielding showed "Atheist" where the US
 ##showed "Agnostic".
@@ -35,8 +39,17 @@
 ##    in your state?" Forced choice, no opt-out (choice is missing when skipped).
 ##Kept: all non-preview responses (Status 0); tasks with any outcome. Unfinished responses
 ##keep the tasks they answered.
-##Covariates: cov_age (years; values outside 18-99 set missing), cov_female (GENDER_resp 2;
-##the authors' code treats 2 as female; code 3 = other/unspecified -> missing),
+##Covariates: cov_age (years, "How old are you?"/"Wie alt sind Sie"; values outside 18-99 set
+##missing). Gender ("What is your gender?"/"Was ist Ihr Geschlecht?", GENDER_resp, numeric
+##codes only, no value labels in the export):
+##  Germany: cov_gender, 2 = "female", 1 = "male" (authors' Migration_Analysis_Final.R L826,
+##    GENDER_num <- GENDER_resp == 2, used as the female indicator); code 3 (2 respondents)
+##    has no label in any deposit file -> NA.
+##  US: cov_gender_code, the raw GENDER_resp code (1, 2, 3) unmapped: the authors' US code
+##    recodes a text GENDER == "Female" (L213) that is not in the deposited export, so no
+##    deposit file states what the US codes mean. (Was cov_female = code 2.)
+##No survey weight for the conjoint samples (the authors' weight wt is for the separate
+##vignette experiment, usclimate_exp1).
 ##cov_native_born (NATIVE_BORN 1 = born in the survey country, per the authors' code),
 ##cov_state (US: state abbreviation; Germany: Land name from germany_state_key.csv).
 ##Dropped: IP address, latitude/longitude, Qualtrics ResponseId, panel id (psid), city,
@@ -68,10 +81,11 @@ for (cc in names(files)) {
   num <- function(v) suppressWarnings(as.integer(v))
   age <- num(x$Age); age[!is.na(age) & (age < 18 | age > 99)] <- NA
   g <- num(x$GENDER_resp)
-  cv <- data.table(id = x$id, cov_age = age, cov_female = fifelse(g == 2L, 1L, fifelse(g == 1L, 0L, NA_integer_)),
+  cv <- data.table(id = x$id, cov_age = age,
                    cov_native_born = fifelse(num(x$NATIVE_BORN) == 1L, 1L, fifelse(num(x$NATIVE_BORN) == 2L, 0L, NA_integer_)),
                    cov_state = if (cc == "us") x$state_region else key$state_name[match(num(x$state_region), key$code)])
   cv[cov_state == "", cov_state := NA]
+  if (cc == "germany") cv[, cov_gender := fifelse(g == 2L, "female", fifelse(g == 1L, "male", NA_character_))] else cv[, cov_gender_code := g]
   d <- rbindlist(lapply(1:9, function(t) rbindlist(lapply(1:2, function(p) {
     r <- data.table(id = x$id, task = t, profile = p, rating = num(x[[rq[[t]][p]]]), fc = num(x[[rq[[t]][3]]]))
     for (k in 1:7) {

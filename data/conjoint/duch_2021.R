@@ -28,14 +28,22 @@
 ##country's survey used is not documented beyond the UK English questionnaire. Attribute order and
 ##randomization restrictions are not documented.
 ##Covariates (as in the data, English text where the source has text): cov_country, cov_age,
-##cov_gender, cov_ideology (0 left - 10 right; not asked in China), cov_income (High/Low relative
-##to the country median), cov_education (High/Medium/Low relative to the country),
+##cov_gender (codebook.pdf `gender`: Female/Male/Other lowercased to "female"/"male"/"other";
+##UK Q3.2 "What is your gender?" Male/Female/Other/Prefer not to say/I do not know, the last two NA
+##in the data), cov_ideology (0 left - 10 right; not asked in China), cov_income (High/Low relative
+##to the country median), cov_education_relative (the authors' High/Medium/Low classification
+##relative to the country, codebook.pdf `education`; derived, not the answer to the national
+##education question, so not stored as cov_education),
 ##cov_side_effect_concern ("I am concerned about serious side effects of the COVID-19 vaccine",
 ##5-point text + "Do not know"), cov_vaccine_access and cov_pay_privately (text),
 ##cov_mandatory_vaccine (int_pol_implem_6, 0-100), cov_survey_weight (`weights`; 1 for every
 ##respondent in Canada, Spain, Uganda and India, where data_formatting.R sets no weights).
 ##Dropped: `ans` (the chosen letter, duplicates select). Source ids ("Canada_1") are re-keyed to
 ##integers in order of country and number.
+##cov_age is Q3.1 "What is your current age?" in years; 11 respondents with values below 10 or above
+##120 (1 and 10; not ages in years, some look like birth years) are set to NA. 4 others under 18
+##(the survey required 18+) and 1 at 101-120 are kept as recorded. Attention checks and durations are not in the deposited data.
+##Design: grid (UK questionnaire Q5.2, Person A / Person B attribute table); 8 tasks, none repeated.
 library(data.table)
 a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]
 s <- as.data.table(readRDS(file.path(raw, "nbh_clean_conjoint_global.rds")))
@@ -45,9 +53,10 @@ d <- s[, .(id = key$k[match(id, key$id)], task = as.integer(sub("person", "", pe
            choice = as.integer(select),
            attr_vulnerability = as.character(vulnerability), attr_transmission = as.character(transmission),
            attr_income = as.character(income), attr_occupation = as.character(occupation), attr_age = as.character(age_category),
-           cov_country = country, cov_age = age, cov_gender = gender, cov_ideology = ideology, cov_income = ind_inc,
-           cov_education = education, cov_side_effect_concern = hes_covid_2, cov_vaccine_access = wtp_access,
+           cov_country = country, cov_age = fifelse(age < 10 | age > 120, NA_real_, age), cov_gender = tolower(as.character(gender)), cov_ideology = ideology, cov_income = ind_inc,
+           cov_education_relative = education, cov_side_effect_concern = hes_covid_2, cov_vaccine_access = wtp_access,
            cov_pay_privately = wtp_private, cov_mandatory_vaccine = int_pol_implem_6, cov_survey_weight = weights)]
+stopifnot(all(d$cov_gender %in% c("female", "male", "other", NA)))
 stopifnot(!anyDuplicated(d[, .(id, task, profile)]), d[, .N, id][, all(N == 16)])
 stopifnot(d[, sum(choice), .(id, task)][, all(V1 == 1)], all(d$choice == as.integer(s$ans == s$candidate)))
 setorder(d, id, task, profile)

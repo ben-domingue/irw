@@ -27,13 +27,19 @@
 ##mil/day), peace lasts (<1 year / ~3 years / foreseeable future), target regime (strong
 ##democracy / weak democracy / dictatorship). Randomization restrictions and attribute order are
 ##not documented in the deposit.
-##Covariates (codes in the instrument's option order, A2; gender, party and attention coding
-##confirmed by the authors' .do file, education by their `college` dummy): cov_gender 1=Female
-##2=Male 3=Other 4=Prefer not to say; cov_education 1=Did not finish high school .. 6=Graduate
-##or professional degree; cov_partyid 1=Strong Democrat .. 7=Strong Republican; cov_race
+##Covariates: the .dta has no value labels and the instrument (supplement A2) is not in the
+##deposit, so gender, education, party ID and age group stay CODES under _code names (not
+##re-checkable from the deposit; the keys below are as read from A2 when the script was written):
+##cov_gender_code 1=Female 2=Male 3=Other 4=Prefer not to say (replicationcode.do: women = 1 if
+##gender==1, 0 if gender 2/3/4; but in surveytwo.dta the authors' `man` dummy = gender==1, so the
+##direction is contested); cov_education_code 1=Did not finish high school .. 6=Graduate or
+##professional degree; cov_party_id7_code 1=Strong Democrat .. 7=Strong Republican (do-file:
+##democrat = 1-3, republican = 5-7); cov_race
 ##(multiple answers, comma-joined: 1=Caucasian (white) 2=African-American 3=American Indian or
-##Native American 4=Asian-American 5=Other); cov_hispanic 1=Yes 2=No; cov_age_group 1=18-19
-##2=20-29 .. 6=60-69 7=Older than 69; cov_attention_pass (attention1 == 3, "I have a question").
+##Native American 4=Asian-American 5=Other); cov_hispanic 1=Yes 2=No; cov_age_group_code 1=18-19
+##2=20-29 .. 6=60-69 7=Older than 69; cov_attention_pass (attention1 == 3, "I have a question";
+##the do-file's "attention check passers" are attention1==3). No survey weight or duration is
+##deposited; no repeated task.
 ##Dropped: Qualtrics ResponseId (re-keyed to integers in file order), IP_country, recaptcha score,
 ##consent, news/vote/armedforces/combat/income (codings not documented), the authors' derived
 ##variables (successbi, college, reversed duplicates SecurityOutcome .. TargetRegime).
@@ -54,8 +60,8 @@ d <- s[, .(id = as.integer(id), task = as.integer(task), profile = as.integer(pr
            attr_soldiers_killed = lab(interventionx_milcasualty), attr_civilians_killed = lab(interventionx_civcasualty),
            attr_financial_costs = lab(interventionx_costs), attr_peace_lasts = lab(interventionx_peace),
            attr_target_regime = lab(interventionx_regime),
-           cov_gender = as.integer(gender), cov_education = as.integer(education), cov_partyid = as.integer(partyid),
-           cov_race = as.character(race), cov_hispanic = as.integer(hispanic), cov_age_group = as.integer(age),
+           cov_gender_code = as.integer(gender), cov_education_code = as.integer(education), cov_party_id7_code = as.integer(partyid),
+           cov_race = as.character(race), cov_hispanic = as.integer(hispanic), cov_age_group_code = as.integer(age),
            cov_attention_pass = as.integer(attention1 == 3))]
 stopifnot(!anyNA(d[, .SD, .SDcols = patterns("^attr_")]), all(d$rating %in% c(1:4, NA)),
           d[!is.na(choice), sum(choice), .(id, task)][, all(V1 == 1)], d[, uniqueN(is.na(choice)), .(id, task)][, all(V1 == 1)])

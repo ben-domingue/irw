@@ -31,8 +31,12 @@
 ##ID appears with two sets of 5 contests (20 rows) and is dropped; contests left with one row
 ##by the authors' na.omit (4 contests) are dropped. Dropped as derived: democrat, republican,
 ##same_party, policy_index and valence_index (indices built from follow-up items not deposited).
-##Covariates: cov_pid7 (respondent 7-point party ID, 1 = strong Democrat), cov_pid3 (text),
-##cov_survey_weight (YouGov only). Respondent N is not given in the paper's main text.
+##Covariates: cov_party_id (resp_pid_3_text, the deposit's text Democrat / Independent /
+##Republican); cov_party_id7_code (resp_pid_7, the 7-point party ID as the deposit's codes 1-7:
+##the codebooks give no labels, and the data show only that 1-3 = Democrat, 4 = Independent,
+##5-7 = Republican in resp_pid_3_text; which of 1-3 is strong vs lean is not documented, so the
+##codes are kept); cov_survey_weight (YouGov `weight`; MTurk has none). Respondent N is not
+##given in the paper's main text.
 library(data.table)
 a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]
 ld <- function(f, o) { e <- new.env(); load(file.path(raw, f), envir = e); as.data.table(get(o, e)) }
@@ -47,8 +51,8 @@ build <- function(x, idcol) {
   for (v in c("Gender", "Age", "Race", "Job", "Political")) d[, paste0("attr_", tolower(v)) := as.character(x[[v]])]
   d[, attr_party := ifelse(x$Party == "non-partisan", "(not shown)", as.character(x$Party))]
   d[, trial_election := ifelse(x$Party == "non-partisan", "nonpartisan", "partisan")]
-  d[, cov_pid7 := as.integer(x$resp_pid_7)]
-  d[, cov_pid3 := x$resp_pid_3_text]
+  d[, cov_party_id7_code := as.integer(x$resp_pid_7)]
+  d[, cov_party_id := x$resp_pid_3_text]
   if ("weight" %in% names(x)) d[, cov_survey_weight := x$weight]
   stopifnot(!d[, any(.SD == "" | is.na(.SD)), .SDcols = patterns("^attr_")])
   stopifnot(d[, .(s = sum(choice), u = uniqueN(trial_election)), .(rid, task)][, all(s == 1 & u == 1)])

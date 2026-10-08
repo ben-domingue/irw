@@ -38,8 +38,17 @@
 ##`id` by replaying the authors' respondent filter (processed id = row number among the kept raw
 ##rows); the match is checked: the 9 raw choices equal the processed ones for every respondent.
 ##Randomization: levels randomly assigned to each destination (paper p. 12); attribute order was
-##randomized in Qualtrics (the raw F/G/H-t-k fields) but is not carried into these tables.
-##Covariates (processed files): cov_country, cov_age (years), cov_gender, cov_ideology (0 left ..
+##randomized in Qualtrics (the raw F/G/H-t-k fields: once per respondent and conjoint, the same
+##order on all 3 tasks of a conjoint) but is not carried into these tables. No task is repeated.
+##The country conjoint's unequal attr_country shares are the UK pool's Canada-for-U.K. swap;
+##within each pool the three labels are near-equal. No survey weight (student pools).
+##Covariates (processed files unless noted): cov_country, cov_age (the processed files' age in
+##years, which the authors computed as 2018 - birth year, minus 1 unless born in January or
+##February (India: January-May), initial_data_processing.R L31/L450/L877/L1262), cov_birth_year
+##(raw export Q28, "What are your year and month of birth? Year"), cov_gender
+##("female", "male", "other": the processed gender text Female/Male/Other lowercased; the
+##authors translated the Chile/China answers to English, initial_data_processing.R L443, L867),
+##cov_ideology (0 left ..
 ##10 right), cov_interest (interest in employment abroad, 1-7), cov_likely (likelihood of moving
 ##abroad for a job in 2-3 years, 1-7), cov_rating_australia / _canada_or_uk / _us (1-7 favourability
 ##ratings of the three countries; in Chile, China and India the source's "can" column holds the
@@ -58,7 +67,7 @@ consent <- c(chile = "Sí, he leído y comprendido", china = "是，我已阅读
              india = "Yes, I have read the above statement and understood it", uk = "Yes, I have read the above statement and understood it")
 rq <- list(c("Q5", "Q6"), c("Q100", "Q99"), c("Q107", "Q106"))  # choice, rating stems per conjoint
 dig <- function(x) { y <- suppressWarnings(as.integer(gsub("\\D", "", x))); y }
-proc <- list(); rat <- list()
+proc <- list(); rat <- list(); byr <- list()
 for (k in names(ctry)) {
   ps <- lapply(1:3, function(j) { p <- fread(file.path(raw, sprintf("conjoint%d_%s.csv", j, k)))
     if (j == 3) setnames(p, "country", "country_label")
@@ -78,6 +87,7 @@ for (k in names(ctry)) {
     ps[[j]][task == t & destination == 1][order(id), candidate]))), nrow = n)
   stopifnot(length(keep) == n, all(ch[keep, ] == pr))
   rr <- r[keep]
+  byr[[k]] <- data.table(country = k, id = seq_len(n), birth_year = suppressWarnings(as.integer(rr$Q28)))
   ##gender must agree too: a second check on the alignment (UK/India text; Chile/China translated)
   if (k %in% c("uk", "india")) stopifnot(all(rr$Q30 == ps[[1]][task == 1 & candidate == 1][order(id), gender]))
   for (j in 1:3) {
@@ -91,6 +101,8 @@ for (k in names(ctry)) {
 }
 P <- rbindlist(proc, fill = TRUE); RT <- rbindlist(rat)
 P <- merge(P, RT, by = c("country", "cj", "id", "task", "candidate"), all.x = TRUE)
+P <- merge(P, rbindlist(byr), by = c("country", "id"), all.x = TRUE)
+stopifnot(P[!is.na(age) | !is.na(birth_year), all(2018L - birth_year - as.integer(age) %in% 0:1)])
 P[, gid := as.integer(factor(paste(country, sprintf("%04d", id))))]
 stopifnot(P[, sum(destination), .(cj, gid, task)][, all(V1 == 1)], uniqueN(P$gid) == 942)
 nm <- c("duch_2022_destination_muslim_ban", "duch_2022_destination_deportation", "duch_2022_destination_country")
@@ -99,11 +111,11 @@ for (j in 1:3) {
   d <- x[, .(id = gid, task, profile = as.integer(candidate), choice = as.integer(destination), rating,
              attr_social_benefits = social, attr_economic_performance = econ, attr_service_salaries = service)]
   if (j < 3) d[, attr_immigration_policy := x$immigration] else d[, attr_country := x$country_label]
-  d[, `:=`(attr_education = x$education, cov_country = unname(ctry[x$country]), cov_age = as.integer(x$age),
-           cov_gender = x$gender, cov_ideology = as.numeric(x$ideology), cov_interest = as.numeric(x$interest),
+  d[, `:=`(attr_education = x$education, cov_country = unname(ctry[x$country]), cov_age = as.integer(x$age), cov_birth_year = x$birth_year,
+           cov_gender = tolower(x$gender), cov_ideology = as.numeric(x$ideology), cov_interest = as.numeric(x$interest),
            cov_likely = as.numeric(x$likely), cov_rating_australia = as.numeric(x$aus),
            cov_rating_canada_or_uk = as.numeric(x$can), cov_rating_us = as.numeric(x$us), cov_ret_correct = as.integer(x$dice))]
-  stopifnot(!anyNA(d[, .SD, .SDcols = patterns("^attr_")]))
+  stopifnot(!anyNA(d[, .SD, .SDcols = patterns("^attr_")]), all(d$cov_gender %in% c("female", "male", "other", NA)))
   setorder(d, id, task, profile)
   fwrite(d, file.path(out, paste0(nm[j], ".csv")))
 }

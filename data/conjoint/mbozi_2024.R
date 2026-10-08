@@ -47,10 +47,11 @@
 ##  rating_officer_pressure = "The presiding officer may have been put under pressure from other groups in the polling station."
 ##Task/profile: task = run, profile = the author's form_proper (A/B); verified one chosen
 ##form per task.
-##Covariates: cov_country kenya/malawi (text); cov_age years; cov_gender 1=female 2=male
-##3=prefer not to say; cov_education 1=some secondary 2=secondary completed
-##3=post-secondary training not at a university 4=some university 5=university completed;
-##cov_trust_emb (trust in IEBC / MEC) 1=do not trust 2=somewhat 3=a lot 4=not sure
+##Covariates: cov_country kenya/malawi (text); cov_age years; cov_gender female / male (answer
+##text in rep_full_df.csv gender: Female, Male; "Prefer not to say" = missing); cov_education
+##(answer text in rep_full_df.csv educ, as worded: Some secondary school, Secondary school
+##completed, Post-secondary training but not at a university, Some university, University
+##completed); cov_trust_emb (trust in IEBC / MEC) 1=do not trust 2=somewhat 3=a lot 4=not sure
 ##5=rather not say. Dropped: ethnicity, party, knowledge and role-attribution items.
 ##Respondent ids (row numbers per country) re-keyed to integers, Malawi first.
 library(data.table)
@@ -70,9 +71,10 @@ d <- data.table(id = s$id, task = as.integer(sub("r", "", s$run)), profile = cod
                 attr_presiding_officer = sig(1), attr_ruling_party_agent = sig(2), attr_opposition_agent = sig(3),
                 attr_observer = sig(4), attr_ruling_party_tally = cor(5), attr_opposition_tally = cor(6),
                 cov_country = s$country, cov_age = as.integer(s$age),
-                cov_gender = code(s$gender, c("Female", "Male", "Prefer not to say")),
-                cov_education = code(s$educ, c("Some secondary school", "Secondary school completed",
-                                               "Post-secondary training but not at a university", "Some university", "University completed")),
+                cov_gender = c("female", "male", NA)[code(s$gender, c("Female", "Male", "Prefer not to say"))],
+                cov_education = c("Some secondary school", "Secondary school completed", "Post-secondary training but not at a university",
+                                  "Some university", "University completed")[code(s$educ, c("Some secondary school", "Secondary school completed",
+                                               "Post-secondary training but not at a university", "Some university", "University completed"))],
                 cov_trust_emb = code(s$trust_EMB, c("I do not trust them", "I somewhat trust them", "I trust them a lot", "Not sure", "Rather not say")))
 stopifnot(!anyDuplicated(d[, .(id, task, profile)]), d[, sum(choice), .(id, task)][, all(V1 == 1)],
           uniqueN(d$id) == 390, nrow(d) == 2340,

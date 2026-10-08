@@ -27,11 +27,12 @@
 ##answer are omitted (Colombians 29 tasks, Venezuelans 44). In the Colombian file the reason-for-
 ##leaving level of task 3, profile b is missing for 51 respondents (source rows 955-1005); those
 ##51 task-3 pairs are dropped, as the authors' drop_na() does (the respondents' other tasks stay).
-##Covariates kept: cov_male (0/1), cov_city (Cali / Cucuta), cov_left_right (pol_ideo,
+##Covariates kept: cov_gender (source `male` 0/1; Colombia_SI.Rnw L382-385 and L721-724 label
+##0 = Female, 1 = Male -> female/male), cov_city (Cali / Cucuta), cov_left_right (pol_ideo,
 ##"Ideologia (izquierda / derecha)", 1 = left .. 10 = right; Venezuelans have 194 missing),
 ##cov_pilot_test (source pilot_test 0/1; the authors keep pilot-flagged interviews in every
 ##analysis, so they are kept here too). Age, education, etc. are stored as unlabelled codes and
-##are dropped. DROPPED for privacy: the deposit's public files contain respondents' names,
+##are dropped. No survey weight is deposited or described. DROPPED for privacy: the deposit's public files contain respondents' names,
 ##phone numbers, street addresses, neighbourhoods, IP addresses, GPS coordinates, Qualtrics
 ##response IDs and free text; none of it is read into the output. id = row number of the source
 ##file (the authors' own id), re-keyed within each table.
@@ -44,6 +45,7 @@ feat <- c(identity = "Identity of Migrant", gender = "Gender", race = "Race", sk
 build <- function(file) {
   s <- as.data.table(readRDS(file.path(raw, file)))
   s[, id := .I]
+  stopifnot(s$male %in% 0:1)
   d <- rbindlist(lapply(1:5, function(t) rbindlist(lapply(1:2, function(p) {
     x <- data.table(id = s$id, task = t, profile = p, con = as.integer(s[[paste0("con", t)]]))
     for (f in names(feat)) x[, paste0("attr_", f) := s[[paste0("rd_", t, "_", c("a", "b")[p], "_", feat[[f]])]]]
@@ -51,7 +53,7 @@ build <- function(file) {
   }))))
   d[, miss := rowSums(is.na(.SD)) > 0, .SDcols = patterns("^attr_")][, miss := any(miss), .(id, task)]
   d <- d[!is.na(con) & !miss][, choice := as.integer(con == profile)][, c("con", "miss") := NULL]
-  cv <- s[, .(id, cov_male = as.integer(male), cov_city = city, cov_left_right = as.integer(pol_ideo),
+  cv <- s[, .(id, cov_gender = c("female", "male")[as.integer(male) + 1L], cov_city = city, cov_left_right = as.integer(pol_ideo),
               cov_pilot_test = as.integer(pilot_test))]
   d <- merge(d, cv, by = "id")
   stopifnot(d[, .N, .(id, task)][, all(N == 2)], d[, sum(choice), .(id, task)][, all(V1 == 1)],

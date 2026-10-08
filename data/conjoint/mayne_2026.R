@@ -40,13 +40,24 @@
 ##three images, mapped from the image IDs exactly as the preparation .do file's encode/recode does
 ##(IM_0Ojv... = Unimodal, IM_cZwp... = Flat, IM_3giQ... = Bipolar). Check: the voice marginal mean
 ##for Bipolar matches Table SM3 (0.400).
-##Covariates (codes as in the source; labels from the .do file / questionnaire): cov_gender (1 Man,
-##2 Woman, 3 Nonbinary, 4 Something else), cov_age (2025 - birth year, as the authors), cov_income
-##(1 <$10k ... 6 $250k+; "Prefer not to say" blank), cov_education (1-16, the 16 questionnaire
-##options; "Other" blank), cov_hispanic (1 yes, 0 no), cov_ideology (1 extremely liberal - 7
-##extremely conservative; "Haven't thought much" blank), cov_satisfaction_democracy (0-10),
-##cov_party_id (1 Republican, 2 Democrat, 3 Independent, 4 Other), cov_party_id7 (the authors' 1 strong
-##Democrat - 7 strong Republican). Dropped: Qualtrics ResponseId (re-keyed to integers in file order),
+##Covariates (text from Study 1 Questionnaire.pdf, codes matched via "Study 1 Preparation.do"):
+##cov_gender ("What is your gender?" p.1: 1 Man -> "male", 2 Woman -> "female", 3 Nonbinary and
+##4 "Something else (please specify)" -> "other"; .do L738 "1 if man; 2 if woman; 3 if
+##non-binary; 4 if other"), cov_age (2025 - birth year, as the authors compute it, Preparation.do
+##L755), cov_birth_year ("In what year were you born?"), cov_income (1 <$10k ... 6 $250k+; "Prefer not to say"
+##blank), cov_education (answer text of "What is your highest level of school you have
+##completed or highest degree that you received?", p.6, e.g. "Bachelor’s degree (For example:
+##BA, AB, BS)"; codes 1-16 per .do label educ_categories L792-811, code 95 = "Other (please
+##specify)"), cov_hispanic (1 yes, 0 no), cov_ideology (1 extremely liberal - 7 extremely
+##conservative; "Haven't thought much" blank), cov_satisfaction_democracy (0-10), cov_party_id
+##(answer text of "Generally speaking, do you think of yourself as a Republican, Democrat, or an
+##independent?", p.10: "Republican", "Democrat", "Independent", "Other party (please
+##specify)"; codes per .do party_id_labels L1017-1022), cov_party_id7 (the authors' 7-point
+##scale from PID and the strength/lean follow-ups, as text with the .do labels L1040-1048:
+##"Strong Democrat", "Weak Democrat", "Independent Democrat", "Independent", "Independent
+##Republican", "Weak Republican", "Strong Republican"). No survey weight in the deposit. Every
+##respondent passed the instructed-response item (IMC = 4), so no attention column is kept.
+##No task is repeated. Dropped: Qualtrics ResponseId (re-keyed to integers in file order),
 ##free-text "specify" fields, race (multi-select codes), state, recall/manipulation checks.
 library(readxl); library(data.table)
 a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]
@@ -75,13 +86,24 @@ id_img <- sub('.*IM=(IM_[A-Za-z0-9]+).*', "\\1", d$attr_ideo_rep)
 stopifnot(all(id_img %in% names(img)))
 d[, attr_ideo_rep := paste0("Ideologically, members of the House are distributed like this: [graph: ", img[id_img], "]")]
 num <- function(x, na = NULL) { x <- as.numeric(x); x[x %in% na] <- NA; x }
-cv <- s[, .(rid, cov_gender = num(gender), cov_age = 2025 - num(birth_year), cov_income = num(income, 99),
-            cov_education = num(educ, 95), cov_hispanic = c(1, 0)[match(num(hispanic, 99), c(1, 2))],
-            cov_ideology = num(ideo, 99), cov_satisfaction_democracy = num(SWD, 99), cov_party_id = num(PID))]
-cv[, cov_party_id7 := fcase(cov_party_id == 2 & s$PID_Dem_Strength == "1", 1, cov_party_id == 2 & s$PID_Dem_Strength == "2", 2,
-                            cov_party_id == 3 & s$PID_Ind_Lean == "2", 3, cov_party_id == 3 & s$PID_Ind_Lean == "3", 4,
-                            cov_party_id == 3 & s$PID_Ind_Lean == "1", 5, cov_party_id == 1 & s$PID_Rep_Strength == "2", 6,
-                            cov_party_id == 1 & s$PID_Rep_Strength == "1", 7)]
+educ_txt <- c("Less than 1st grade", "1st, 2nd, 3rd or 4th grade", "5th or 6th grade", "7th or 8th grade", "9th grade",
+              "10th grade", "11th grade", "12th grade no diploma",
+              "High school graduate - High school diploma or equivalent (for example: GED)", "Some college but no degree",
+              "Associate degree in college - Occupational/vocational program", "Associate degree in college - Academic program",
+              "Bachelor\u2019s degree (For example: BA, AB, BS)", "Master\u2019s degree (For example: MA, MS, MEng, MEd, MSW, MBA)",
+              "Professional school degree (For example: MD, DDS, DVM, LLB, JD)", "Doctorate degree (For example: PhD, EdD)")
+stopifnot(all(s$gender %in% c("1", "2", "3", "4", NA)), all(s$educ %in% c(as.character(c(1:16, 95)), NA)), all(s$PID %in% c("1", "2", "3", "4", NA)))
+cv <- s[, .(rid, cov_gender = c("male", "female", "other", "other")[num(gender)], cov_age = 2025 - num(birth_year), cov_birth_year = as.integer(birth_year),
+            cov_income = num(income, 99),
+            cov_education = fifelse(educ == "95", "Other (please specify)", educ_txt[num(educ, 95)]),
+            cov_hispanic = c(1, 0)[match(num(hispanic, 99), c(1, 2))],
+            cov_ideology = num(ideo, 99), cov_satisfaction_democracy = num(SWD, 99), pid = num(PID))]
+cv[, cov_party_id := c("Republican", "Democrat", "Independent", "Other party (please specify)")[pid]]
+cv[, cov_party_id7 := c("Strong Democrat", "Weak Democrat", "Independent Democrat", "Independent", "Independent Republican",
+                        "Weak Republican", "Strong Republican")[fcase(pid == 2 & s$PID_Dem_Strength == "1", 1, pid == 2 & s$PID_Dem_Strength == "2", 2,
+                            pid == 3 & s$PID_Ind_Lean == "2", 3, pid == 3 & s$PID_Ind_Lean == "3", 4,
+                            pid == 3 & s$PID_Ind_Lean == "1", 5, pid == 1 & s$PID_Rep_Strength == "2", 6,
+                            pid == 1 & s$PID_Rep_Strength == "1", 7)]][, pid := NULL]
 d <- merge(d, cv, by = "rid")
 ids <- sort(unique(d$rid)); d[, id := match(rid, ids)][, rid := NULL]
 for (o in c("choice", "choice_voice", "choice_governability", "choice_responsiveness"))

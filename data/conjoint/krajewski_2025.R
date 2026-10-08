@@ -23,7 +23,8 @@
 ##pair of attribute levels co-occurs and level shares look uniform.
 ##Covariates kept (the underlying items are not deposited): cov_selfcontrol_avg (mean of the
 ##self-control items, 0-4), cov_prior_offending (offenderD, 1 = prior offending),
-##cov_attention_passed (1 = passed all attention checks; the authors do not filter on it).
+##cov_attention_pass (attentioncheck, Stata label "Passed all attention checks": 1 = passed all,
+##0 = failed at least one; the authors do not filter on it). No survey weight is deposited.
 ##Dropped: the authors' derived attribute dummies (victimD, victim_indiv, victim_biz,
 ##peopleinvolvedD, peopleinvolved_group, timeuntilpayoutD, possiblepunishmentD).
 ##The id column is a Stata-generated respondent number (not a platform id).
@@ -38,7 +39,7 @@ d[, choice := as.integer(k$cj1_chosen)]
 for (v in c("victim", "peopleinvolved", "completiontime", "yourpayout", "timeuntilpayout", "chanceofarrest", "possiblepunishment"))
   d[, paste0("attr_", v) := lab(v)]
 d[, `:=`(cov_selfcontrol_avg = as.numeric(k$selfcontrol_avg), cov_prior_offending = as.integer(k$offenderD),
-         cov_attention_passed = as.integer(k$attentioncheck))]
+         cov_attention_pass = as.integer(k$attentioncheck))]
 stopifnot(d[, .(n = sum(is.na(choice))), .(id, task)][, all(n %in% c(0L, 2L))])
 d <- d[!is.na(choice)]
 stopifnot(d[, sum(choice), .(id, task)][, all(V1 == 1)], !anyNA(d[, .SD, .SDcols = patterns("^attr_")]))

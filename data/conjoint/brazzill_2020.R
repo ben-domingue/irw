@@ -19,9 +19,16 @@
 ##respondents answered at least one task. In 121
 ##answered tasks neither package is selected; whether the question offered "neither" is not
 ##documented (the authors keep these tasks in their AMCE models).
-##Randomization: not documented; level shares are close to equal.
-##Covariates (codebook labels applied): cov_age_group (10s .. 80s), cov_gender, cov_occupation
-##(ISCO major groups, students, unemployed), cov_employment_type, cov_education, cov_social_values
+##Randomization: restrictions, level weights and attribute order are not documented; level
+##shares are close to equal (every attribute within 1.13x) and no combination is missing.
+##Covariates (codebook labels applied): cov_age_group (10s .. 80s, as stored), cov_gender
+##("female"/"male" as stored; codebook: "Other" was offered but chosen by no one), cov_occupation
+##(ISCO major groups, students, unemployed), cov_employment_type, cov_education (the stored short
+##codes replaced by the codebook's educ option text: junior-high -> "Junior high school (9th
+##Grade)", highschool -> "High school graduate", hs+ -> "High school + vocational school",
+##some college -> "Some college", bachelor -> "Bachelor's degree", master+ -> "Master's degree or
+##higher"; codebook p.2, matched in the codebook's order as the authors' .Rmd groups them,
+##lines 118-120; "elementary" does not occur), cov_social_values
 ##and cov_economic_values (1-4 codes, 5 = don't know/refused; wording in the codebook),
 ##cov_income (household income bracket as stored, in 10,000 yen). Dropped: emp_other_detail
 ##(free text).
@@ -40,12 +47,16 @@ occ <- c("Managers", "Professionals", "Technicians and Associate Professionals",
          "Elementary Occupations", "Armed Forces Occupations", "Students", "Unemployed")
 emp <- c("Regular Employees", "Part-time and Temporary Workers", "Dispatched Workers from Temporary Labour Agency",
          "Contract and Entrusted Employees", "Self-Employed and Family Workers", "Other")
+edu <- c("elementary" = "Elementary school (6th Grade) or less", "junior-high" = "Junior high school (9th Grade)",
+         "highschool" = "High school graduate", "hs+" = "High school + vocational school",
+         "some college" = "Some college", "bachelor" = "Bachelor\u2019s degree", "master+" = "Master\u2019s degree or higher")
+stopifnot(all(s$educ %in% names(edu)))
 d <- s[, .(id = as.integer(ID), task = as.integer(task), profile = as.integer(profile), choice = as.integer(selected),
            attr_education_spending = govedu, attr_womens_employment_spending = govfem,
            attr_childcare_spending = govccare, attr_social_security_spending = govssec,
            attr_income_tax = inctax, attr_sales_tax = salestax, attr_corporate_tax = corptax, attr_government_debt = govdebt,
            cov_age_group = age, cov_gender = gender, cov_occupation = occ[occupation], cov_employment_type = emp[emp_type],
-           cov_education = educ, cov_social_values = as.integer(socialv), cov_economic_values = as.integer(economicv),
+           cov_education = edu[educ], cov_social_values = as.integer(socialv), cov_economic_values = as.integer(economicv),
            cov_income = as.character(income))]
 stopifnot(!anyNA(d[, .SD, .SDcols = patterns("^attr_")]))
 setorder(d, id, task, profile)

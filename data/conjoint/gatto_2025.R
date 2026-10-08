@@ -37,7 +37,14 @@
 ##  who answered only some tasks keep the tasks they answered.
 ##Covariates (stored text): cov_country, cov_party_family, cov_party_quota, cov_ideology_group
 ##  (Left Wing / Center / Right Wing; decides the ideology wording), cov_left_right (0-10),
-##  cov_economic_position (0-10), cov_gender, cov_age_group, cov_education, cov_migration.
+##  cov_economic_position (0-10), cov_gender (source `Gender` text Female/Male, lowercased),
+##  cov_age_group (band text as stored, e.g. "50-59", "Unter 20"), cov_education (answer text as
+##  stored), cov_migration (4 fixed answer options, not free text).
+##No survey weight, attention check or duration column is used (none documented). No task is
+##repeated. The 5 profiles with the French education level "Diplôme universitaire" account for all
+##never-seen attribute combinations and the extreme education level share; without them every
+##attribute pair co-occurs. attr_ideology shares differ by design (the wording set depends on
+##cov_ideology_group).
 ##Dropped: raw ID (re-keyed), party name, state, board level, salutation and academic title
 ##  (Anrede2, Titel2, from the sampling list), Party2/State2/Country2, policy and representation
 ##  items, the authors' derived columns.
@@ -70,8 +77,9 @@ stopifnot(!anyNA(d), d[, all(attr_age != "" & trial_list_share != "")], d[, uniq
 stopifnot(d[, .(s = sum(choice), n = .N), .(nid, task)][, all(s == 1 & n == 2)])
 cv <- s[, .(nid, cov_country = Country, cov_party_family = PartyFam, cov_party_quota = Quota,
             cov_ideology_group = Rough_Ideology, cov_left_right = as.integer(Ideology),
-            cov_economic_position = as.integer(Economic_Pos), cov_gender = Gender, cov_age_group = Age,
+            cov_economic_position = as.integer(Economic_Pos), cov_gender = tolower(Gender), cov_age_group = Age,
             cov_education = Education, cov_migration = Migration, cov_in_authors_sample = insample)]
+stopifnot(all(cv$cov_gender %in% c("female", "male", "")))
 for (v in names(cv)) if (is.character(cv[[v]])) cv[get(v) == "", (v) := NA]
 d <- merge(d, cv, by = "nid")
 used <- sort(unique(d$nid)); d[, id := match(nid, used)][, nid := NULL]

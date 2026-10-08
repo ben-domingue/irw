@@ -31,11 +31,18 @@
 ##  rating_values = value1..8, "To what degree do you think immigrant k has shared values with the U.S.?
 ##                  Choosing 1 signifies having no shared values, and 7 signifies a great deal of shared
 ##                  values." 1-7.
-##Randomization: no restrictions are documented (codebook lists the levels only); unknown.
-##Covariates (respondent answers as text): cov_gender, cov_citizen, cov_born_citizen, cov_party
-##(resp_politics), cov_sexuality, cov_education, cov_religion, cov_attend, cov_know_lg (lesbian or gay
+##Randomization: the codebook lists sexuality as "gay/lesbian; straight (that is, not gay/lesbian)":
+##the word shown follows the immigrant's gender (gay / not gay for a man, lesbian / not lesbian for a
+##woman), a conditional level (restrictions = yes); no other rules are documented.
+##Covariates (respondent answers as text): cov_gender (resp_gender "What is your gender?", codebook
+##options Man, Woman, Other; stored male / female / other), cov_citizen, cov_born_citizen, cov_party_id
+##(resp_politics "Do you consider yourself a Democrat, a Republican, an independent, or none of
+##these?", text as exported: Democrat, Republican, Independent, None of these), cov_sexuality,
+##cov_education (resp_education, as worded), cov_religion, cov_attend, cov_know_lg (lesbian or gay
 ##friends/family), cov_imm_1 .. cov_imm_11 (the 11 immigration statements, codebook order); from
-##Prolific: cov_age, cov_sex, cov_ethnicity. The authors' post-stratification weights (raked to Pew
+##Prolific: cov_age, cov_sex_panel (Prolific's "Sex: Male, Female", kept as text; cov_gender is the
+##survey's own question), cov_ethnicity. The survey's two attention checks (attention_color,
+##attention_number) and "Duration (in seconds)" are not kept. The authors' post-stratification weights (raked to Pew
 ##ATP wave 112, not deposited) are not built.
 ##PII in the deposit, not kept: Prolific IDs (prolific_pid, PROLIFIC_PID; Participant id and Submission id
 ##in prolific.csv), ResponseId, start/end times. IP addresses and locations are already redacted.
@@ -66,15 +73,17 @@ setnames(x, c("attr_gdp", "attr_lang"), c("attr_country_wealth", "attr_english")
 stopifnot(!anyNA(x$choice), x[, sum(choice), .(id, task)][, all(V1 == 1)],
           x[!is.na(choice_values), sum(choice_values), .(id, task)][, all(V1 == 1)],
           all(x$rating %in% 1:7), !anyNA(x[, .SD, .SDcols = patterns("^attr_")]), all(x$attr_country_wealth %in% c("low-income", "moderately wealthy")))
-cv <- c(cov_gender = "resp_gender", cov_citizen = "resp_citizen", cov_born_citizen = "resp_born", cov_party = "resp_politics",
+cv <- c(cov_gender = "resp_gender", cov_citizen = "resp_citizen", cov_born_citizen = "resp_born", cov_party_id = "resp_politics",
         cov_sexuality = "resp_sexuality", cov_education = "resp_education", cov_religion = "resp_religion", cov_attend = "resp_attend",
         cov_know_lg = "resp_knowlg", setNames(paste0("resp_imm_support_", 1:11), paste0("cov_imm_", 1:11)))
 c2 <- data.table(id = seq_len(nrow(s)))
 for (v in names(cv)) c2[, (v) := { y <- s[[cv[[v]]]]; y[y == ""] <- NA; y }]
+stopifnot(all(c2$cov_gender %in% c("Man", "Woman", "Other", NA)))
+c2[, cov_gender := c(Man = "male", Woman = "female", Other = "other")[cov_gender]]
 c2[, cov_age := s$age]
 pm <- match(s$PROLIFIC_PID, p$`Participant id`)
-c2[, cov_sex := p$Sex[pm]][, cov_ethnicity := p$`Ethnicity simplified`[pm]]
-c2[cov_sex %in% c("DATA_EXPIRED", ""), cov_sex := NA][cov_ethnicity %in% c("DATA_EXPIRED", ""), cov_ethnicity := NA]
+c2[, cov_sex_panel := p$Sex[pm]][, cov_ethnicity := p$`Ethnicity simplified`[pm]]
+c2[cov_sex_panel %in% c("DATA_EXPIRED", ""), cov_sex_panel := NA][cov_ethnicity %in% c("DATA_EXPIRED", ""), cov_ethnicity := NA]
 x <- merge(x, c2, by = "id")
 setorder(x, id, task, profile)
 fwrite(x, file.path(out, "hoffmann_2025_immigrant_sexuality.csv"))

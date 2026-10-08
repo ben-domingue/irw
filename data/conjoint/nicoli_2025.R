@@ -35,7 +35,8 @@
 ##    collapses 1-2 / 3 / 4-5 to -1/0/1, which fixes the direction). Higher = more favourable.
 ##Covariates: cov_country (text), cov_survey_weight (Weight_Country), cov_age (age_year),
 ##cov_education3 (Education_R2: 1 Low, 2 Middle, 3 High; the authors' recode, the only
-##education measure deposited), cov_attention_pass (AttentionCheck 1 = pass).
+##education measure deposited; codes kept, not the reserved cov_education), cov_attention_pass
+##(AttentionCheck, .dta label "Recode attention check: pass or fail", 0 = Fail, 1 = Pass).
 ##Dropped: income_class (no labels), support_type, supportB1, supportB3, firstpack,
 ##total_opposition, d*_pairval (the other package's levels), the _est_* estimation flags.
 ##Randomization: independent uniform draws per dimension (article); level shares uniform.

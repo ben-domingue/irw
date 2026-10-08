@@ -59,11 +59,18 @@
 ##  3 know well, 4 participated), cov_experience_value (q16, 1-7, asked if familiar),
 ##  cov_retro_appropriate (q20, asked after the conjoint, 1-7), cov_trust_minipublics (1-7),
 ##  cov_trust_citizens1/2 (1-7). Ireland/USA also: cov_video_time_spent,
-##  cov_recruitment_time_spent, cov_authorization_time_spent, cov_conjoint_time_spent
-##  (seconds on those survey pages). Finland also: cov_age (free-text answer; values
-##  outside 18-99 set missing, 10 rows), cov_gender (1 male, 2 female, 3 other, 4 prefer
-##  not to say), cov_education (Finnish codes 1-11, 9 no education, 10 prefer not to say,
-##  11 don't know). Finland's video_time_spent is on an undocumented scale and is dropped.
+##  cov_recruitment_time_spent, cov_authorization_time_spent (seconds on those survey
+##  pages) and cov_duration_sec (source conjoint_time_spent: seconds on the conjoint
+##  module's pages, not the whole survey; seconds per the authors' appendix script, which
+##  treats the *_time_spent variables as seconds, "video was about 90 seconds"). Finland
+##  also: cov_age (free-text answer; values outside 18-99 set missing, 10 rows),
+##  cov_gender (socio_Fin.sav S2_gender value labels: 1 "Mies/ Male" = male, 2 "Nainen/
+##  female" = female, 3 "Muu/ other" = other, 4 "En halua sanoa/ I don't want to say" =
+##  missing), cov_education (socio_Fin.sav S4_education value labels, Finnish answer text
+##  as worded, e.g. "Ylioppilastutkinto"; includes "Ei koulutusta" (no education) and "En
+##  osaa sanoa" (don't know) as answered; the refusal "En halua sanoa" (prefer not to say,
+##  code 10) is set missing).
+##  Finland's video_time_spent is on an undocumented scale and is dropped.
 ##Dropped: outcome.fav (derived: output x respondent's own issue preference; the issue-
 ##  preference items themselves are not in the deposit), pair, choice (A/B, duplicated in
 ##  `choice` here), the Qualtrics response IDs. No survey weight ships.
@@ -88,7 +95,7 @@ covmap <- list(
           q12_01 = "salience_climate", q12_02 = "salience_immigration", q15 = "familiarity", q16 = "experience_value",
           q20 = "retro_appropriate", q21 = "trust_minipublics", q22_01 = "trust_citizens1", q22_02 = "trust_citizens2",
           video_time_spent = "video_time_spent", recruitment_time_spent = "recruitment_time_spent",
-          authorization_time_spent = "authorization_time_spent", conjoint_time_spent = "conjoint_time_spent"))
+          authorization_time_spent = "authorization_time_spent", conjoint_time_spent = "duration_sec"))
 covmap$USA <- covmap$IRE; names(covmap$USA)[1] <- "q2_US"
 tname <- c(FIN = "finland", IRE = "ireland", USA = "usa")
 for (cc in names(tname)) {
@@ -105,7 +112,9 @@ for (cc in names(tname)) {
     stopifnot(nrow(link) == uniqueN(d$id), setequal(link$id, d$id))
     s <- as.data.table(read_sav(file.path(raw, "socio_Fin.sav")))
     age <- suppressWarnings(as.integer(s$S1_age)); age[!is.na(age) & (age < 18 | age > 99)] <- NA
-    s <- data.table(rid = s$ResponseId, cov_age = age, cov_gender = as.integer(zap_labels(s$S2_gender)), cov_education = as.integer(zap_labels(s$S4_education)))
+    s <- data.table(rid = s$ResponseId, cov_age = age, cov_gender = c("male", "female", "other", NA)[as.integer(zap_labels(s$S2_gender))],
+                    cov_education = fifelse(zap_labels(s$S4_education) == 10, NA_character_, as.character(as_factor(s$S4_education, levels = "labels"))))
+    stopifnot(all(zap_labels(s$S2_gender) %in% 1:4), all(zap_labels(s$S4_education) %in% 1:11))
     s <- merge(link[, .(id, rid)], s, by = "rid", all.x = TRUE)[, rid := NULL]
     stopifnot(nrow(s) == nrow(link))
     d <- merge(d, s, by = "id")

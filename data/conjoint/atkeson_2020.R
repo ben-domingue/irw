@@ -18,9 +18,12 @@
 ##  Outcome: choice = vote, which of the two candidates the respondent would vote for (exact
 ##  wording in the article, not the deposit). Forced choice, no opt-out: one chosen in every task.
 ##  Attribute order and randomization restrictions not documented.
-##  Covariates (text as answered): cov_birth_year, cov_gender, cov_race, cov_income, cov_education,
-##  cov_party, cov_party_strength (Strong/Weak, partisans only), cov_party_lean (independents
-##  only), cov_ideology. Blank answers are left empty.
+##  Covariates (text as answered unless noted): cov_birth_year (born), cov_gender (female / male /
+##  other, from the deposit's own answer text in mturk_dta.csv gender: Female, Male, "Other [Please
+##  Specify]:"), cov_race, cov_income, cov_education (answer text), cov_party_id (party: Democrat,
+##  Independent, Republican, "Other [Please Specify]:"), cov_party_strength (Strong/Weak,
+##  partisans only), cov_party_lean (independents only), cov_ideology. Blank answers are left
+##  empty. No survey weight in the deposit.
 ##  Dropped: mturk_ids_rep (Qualtrics ResponseId; ids re-keyed to integers in file order), the
 ##  free-text "other" fields (gender_other, race_other, education_other, party_other), and the
 ##  authors' derived shared_party / Candidate-Respondent Party.
@@ -32,8 +35,9 @@ s[, id := match(mturk_ids_rep, unique(mturk_ids_rep))]
 d <- s[, .(id, task = as.integer(choicetask), profile = as.integer(candoption - 2L * (choicetask - 1L)), choice = as.integer(vote),
            attr_occupation = occup_profile, attr_party = party_profile, attr_incumbent = incumb_profile,
            attr_race = race_profile, attr_gender = gender_profile,
-           cov_birth_year = suppressWarnings(as.integer(born)), cov_gender = gender, cov_race = race, cov_income = income,
-           cov_education = education, cov_party = party, cov_party_strength = party_strength, cov_party_lean = party_indep,
+           cov_birth_year = suppressWarnings(as.integer(born)),
+           cov_gender = unname(c(Female = "female", Male = "male", "Other [Please Specify]:" = "other")[gender]), cov_race = race, cov_income = income,
+           cov_education = education, cov_party_id = party, cov_party_strength = party_strength, cov_party_lean = party_indep,
            cov_ideology = ideology)]
 for (v in grep("^cov_", names(d), value = TRUE)) if (is.character(d[[v]])) set(d, which(d[[v]] == ""), v, NA_character_)
 stopifnot(d[, sum(choice), .(id, task)][, all(V1 == 1)], uniqueN(d$id) == 1500)

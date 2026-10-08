@@ -43,9 +43,17 @@
 ##rows with no answer to any statement: 2,653 respondents, 24,233 rows remain (article: 1,719 + 1,016 =
 ##2,735 recruited). Respondent_ID (Qualtrics response IDs for the Dynata sample) re-keyed to
 ##integers. Free text (race, Hispanic and Asian origin write-ins, university major) and the
-##raw Q* survey codes are dropped; the authors' labelled respondent variables are kept:
-##cov_race (Wht/Blk/Hisp/Asn), cov_gender, cov_income, cov_nativity, cov_party,
-##cov_education, cov_birth_year.
+##raw Q* survey codes are dropped, except three recoded to the answer text below; the
+##authors' labelled respondent variables are kept: cov_race (Wht/Blk/Hisp/Asn), cov_income,
+##cov_nativity, cov_birth_year (the authors' rYOB). Covariates from the raw questions, codes
+##mapped with the authors' own recode lines in replication_file_who_polices_abascal_et_al.R
+##(read as text; same key in the student and Dynata blocks, L300-330 and L366-396):
+##cov_gender from Q5_gender (1 female, 2 male, 3 other; L301-307; the authors' Gender column
+##sets "Other" to NA); cov_education from Q26_level_edu ("Less than high school", "High
+##school", "Some college", "Bachelor's degree or higher"; L311-318; the authors' educ merges
+##the last two); cov_party_id from Q19_partyID ("Democrat", "Republican", "Independent",
+##"Some other party", the authors' Dem/Rep/Ind/Some other party written out; L322-329; code
+##5, which the authors set to NA and do not label, is NA). No survey weight in the deposit.
 ##Check: share agreeing (4-5) that a profile is White/Latino/MENA = 28%/30%/30% (article
 ##p. 27: White 28%, Latino 31%, MENA 30%).
 library(data.table)
@@ -60,7 +68,8 @@ par_map <- c("White (parents)" = "White", "Black/African-American" = "Black/Afri
              "Hispanic/Latino(a/x)" = "Latino/Latino(a/x)", "Asian/Asian-American" = "Asian/Asian American",
              "Middle Eastern or North African" = "Middle Eastern or North African")
 stopifnot(all(s$selfID_ethnic %in% names(self_map)), all(s$birthparents_ethnicID %in% names(par_map)),
-          all(s$english %in% c("Speak English at home", "Don't speak English at home")))
+          all(s$english %in% c("Speak English at home", "Don't speak English at home")),
+          s$Q5_gender %in% c(1:3, NA), s$Q19_partyID %in% c(1:5, NA), s$Q26_level_edu %in% c(1:4, NA))
 key <- unique(s$Respondent_ID)
 d <- s[, .(id = match(Respondent_ID, key), task = as.integer(Profile), profile = 1L,
            rating_white = White_agree, rating_black = Black_agree, rating_latino = Hispanic_agree,
@@ -69,8 +78,11 @@ d <- s[, .(id = match(Respondent_ID, key), task = as.integer(Profile), profile =
            attr_photo = image_ID, attr_skin_tone = trimws(skin_tone), attr_photo_gender = gender, attr_photo_ethnicity = ethnicity,
            attr_parents_occupation = parents_occupation, attr_religion = religion,
            attr_english_at_home = ifelse(english == "Speak English at home", "Yes", "No"), attr_age = as.character(age),
-           trial_condition = Condition, cov_sample = Sample, cov_race = resrace, cov_gender = Gender, cov_income = Income,
-           cov_nativity = Nativity, cov_party = party, cov_education = educ, cov_birth_year = as.integer(rYOB))]
+           trial_condition = Condition, cov_sample = Sample, cov_race = resrace, cov_gender = c("female", "male", "other")[Q5_gender],
+           cov_income = Income, cov_nativity = Nativity,
+           cov_party_id = c("Democrat", "Republican", "Independent", "Some other party", NA)[Q19_partyID],
+           cov_education = c("Less than high school", "High school", "Some college", "Bachelor's degree or higher")[Q26_level_edu],
+           cov_birth_year = as.integer(rYOB))]
 oc <- grep("^rating_", names(d), value = TRUE)
 d <- d[rowSums(!is.na(d[, ..oc])) > 0]
 d[, id := match(id, sort(unique(id)))]

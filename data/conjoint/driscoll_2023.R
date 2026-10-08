@@ -41,9 +41,12 @@
 ##    chosen 33%, 2 = raw 3 is chosen 48%), so the raw midpoint code may not mean what the
 ##    recode assumes. 86 rows blank.
 ##  rating_mobilize = c_mobil, "Mobilization Outcome", same 5-point recode; 53 rows blank.
-##Covariates: cov_pid (7-point party ID, 1 = strong Democrat to 7 = strong Republican,
-##per Study2.R's 1:3 = Democrat, 5:7 = Republican), cov_ideology (7-point, 1 = liberal,
-##per Study2.R's 1:3 = Liberal).
+##Covariates: cov_party_id7_code (7-point party ID as stored, codes 1-7; Study2.R groups
+##1:3 = Democrat, 4 = independent, 5:7 = Republican, but no deposited file gives the text of
+##the seven answer options, so the codes are kept and the column carries the _code suffix),
+##cov_ideology (7-point, 1 = liberal, per Study2.R's 1:3 = Liberal).
+##Attribute order, presentation and level weights are not documented in the deposit
+##(Appendix B is not deposited). No survey weight in the codebook.
 library(data.table)
 a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]
 s <- fread(file.path(raw, "Study2.csv"), na.strings = "NA")
@@ -70,7 +73,7 @@ d <- s[, .(id = as.integer(respondent), task = as.integer(trial), profile = as.i
            attr_court = ifelse(c_court == 1, court_yes[ctype], court_no[ctype]),
            trial_court_proposal = court_prop[ctype],
            trial_election = ifelse(trial <= 10, "general", "primary"),
-           cov_pid = as.integer(pid), cov_ideology = as.integer(ideo))]
+           cov_party_id7_code = as.integer(pid), cov_ideology = as.integer(ideo))]
 stopifnot(d[!is.na(choice), sum(choice), .(id, task)][, all(V1 == 1)],
           d[, uniqueN(is.na(choice)), .(id, task)][, all(V1 == 1)])
 d <- d[!(is.na(choice) & is.na(rating) & is.na(rating_mobilize))]

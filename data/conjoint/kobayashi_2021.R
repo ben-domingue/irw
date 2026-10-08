@@ -28,8 +28,10 @@
 ##Attribute text is the authors' English labels (some are shortened or ungrammatical, e.g.
 ##"Waived one month's of rents"; kept as written). Respondents likely saw Chinese; not
 ##verifiable from the deposit.
-##Covariate: cov_pid = the respondent's political camp as stored (Pro-establishment,
-##Pan-democrats, Localist), the authors' subgroup variable.
+##Covariate: cov_party_id = the respondent's political camp as stored (Pro-establishment,
+##Pan-democrats, Localist): source column PID, the authors' subgroup variable (cj(..., by = ~PID)
+##in JJPS_KSC_Replication.R); the question wording is not deposited. No survey weight,
+##attention check or duration is deposited. No repeated task; presentation not documented.
 ##Dropped: the source ID (a Qualtrics ResponseId, R_...), re-keyed to integers 1..n per wave.
 library(data.table)
 a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]
@@ -67,7 +69,7 @@ build <- function(f, n_attr, n_id, tab) {
     stopifnot(all(s[[k]] %in% names(lab)), all(substr(s[[k]], 1, 1) == k))
     d[, paste0("attr_", nm[[k]]) := unname(lab[s[[k]]])]
   }
-  d[, cov_pid := s$PID]
+  d[, cov_party_id := s$PID]
   stopifnot(uniqueN(d$id) == n_id, d[, .N, id][, all(N == 10)], !anyDuplicated(d[, .(id, task, profile)]),
             d[, sum(choice), .(id, task)][, all(V1 == 1)])
   setorder(d, id, task, profile)

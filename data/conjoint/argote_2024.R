@@ -23,16 +23,20 @@
 ##    direction is INFERRED: chosen profiles average 4.7, unchosen 3.0, and the authors'
 ##    support AMCEs have the same signs as the choice AMCEs, so 7 = most support.
 ##  - Attribute order and randomization restrictions are not documented.
+##Design: one task, so no repeated task; attribute order and presentation (grid or read
+##aloud) are not documented. Survey weight: none in the deposit; `ipw` is the authors'
+##inverse-probability weight for answering the conjoint (derived, dropped).
 ##Rows: 1,515 respondents (2 rows each). 5 have no attributes (dropped). Kept: profiles
 ##with choice or rating; choice is missing (not an opt-out) for 423 rows answered only on
 ##support. 1,429 respondents kept; 1,214 answered the choice (2,428 rows) and 2,811 rows
 ##carry support, matching the Obs. counts of the authors' Table D1 (2,428 / 2,811). The
 ##article's total N is not checked (paywalled).
 ##Covariates (source codes, Ipsos variable names in brackets): cov_age (years, [EDAD]
-##continuous), cov_female (gender 2; the authors' balance table uses gender==2 as
-##"Female"), cov_urban (urban_cat 1; the authors use urban_cat==1 as "Urban"), cov_nse
-##(socio-economic stratum code, 0-6 [NSE]), cov_education (code 1-7 [D3A], labels not in
-##the deposit; higher = more education is implied by the authors' "college" dummy but not
+##continuous), cov_gender ([GENERO] `gender`: 1 = "male", 2 = "female", from the authors'
+##04_appendix_E.do, Table E7 subsets "if gender == 1 // male" and "if gender == 2 // female";
+##the .dta has no value labels), cov_urban (urban_cat 1; the authors use urban_cat==1 as "Urban"), cov_nse
+##(socio-economic stratum code, 0-6 [NSE]), cov_education_code (code 1-7 [D3A], labels not in
+##the deposit, so kept as codes under a _code name; higher = more education is implied by the authors' "college" dummy but not
 ##verified), cov_region (Ipsos region, text, accents repaired).
 ##Dropped: respondent_serial (in some rows it holds an entire raw survey record, including
 ##a phone number, an email address and free text, so it is replaced by integer ids), the
@@ -55,12 +59,13 @@ lv <- list(country = c("Venezuela", "Peru"), skills = c("Low-skilled", "High-ski
 src <- c(country = "exp8_country", skills = "exp8_skill", age = "exp8_age", gender = "exp8_gender", travelling = "exp8_number",
          ideology = "exp8_ideology", colombian_relatives = "exp8_relatives", reason = "exp8_reasons")
 for (v in names(src)) for (j in 1:2) stopifnot(all(k[get(src[[v]]) == j][[paste0(src[[v]], "_", j)]] == 1))
+stopifnot(all(k$gender %in% c(1, 2, NA)))
 k <- k[!is.na(exp8_country)]
 d <- k[, .(id, task = 1L, profile = as.integer(contest), choice = as.integer(choice_exp8), rating = as.integer(support_exp8))]
 for (v in names(src)) d[, paste0("attr_", v) := lv[[v]][k[[src[[v]]]]]]
 fixenc <- function(x) { y <- iconv(x, "UTF-8", "latin1"); y <- ifelse(is.na(y), x, y); y[y == ""] <- NA; y }
-d[, `:=`(cov_age = as.integer(k$age_continuous), cov_female = as.integer(k$gender == 2), cov_urban = as.integer(k$urban_cat == 1),
-         cov_nse = as.integer(k$nse), cov_education = as.integer(k$education), cov_region = fixenc(k$region))]
+d[, `:=`(cov_age = as.integer(k$age_continuous), cov_gender = c("male", "female")[k$gender], cov_urban = as.integer(k$urban_cat == 1),
+         cov_nse = as.integer(k$nse), cov_education_code = as.integer(k$education), cov_region = fixenc(k$region))]
 d <- d[!is.na(choice) | !is.na(rating)]
 stopifnot(!anyNA(d[, .SD, .SDcols = patterns("^attr_")]), d[!is.na(choice), sum(choice), .(id, task)][, all(V1 == 1)],
           d[!is.na(choice), .N] == 2428, d[!is.na(rating), .N] == 2811, all(d$rating %in% c(1:7, NA)))

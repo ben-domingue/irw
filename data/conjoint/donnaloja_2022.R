@@ -35,12 +35,15 @@
 ##Randomization restrictions (article Table 3): refugee clause only for Pakistan, Nigeria,
 ##Syria, Somalia; Ireland and Australia always "an excellent" English; Poland never Muslim.
 ##Attribute order fixed (sentence template).
-##Covariates keep the source codes; labels are in Codebook.xlsx: cov_female (1 = female;
-##source Gender 2), cov_age (years), cov_region_gor (1-12), cov_social_grade (1 AB, 2 C1,
+##Covariates: cov_gender ("male"/"female"; Codebook.xlsx Variable Info, Gender "Are you male
+##or female?" 1 Male, 2 Female), cov_age (Age, years), cov_education (Education_level "What is
+##the highest educational or work-related qualification you have?", the 20 answer texts of
+##Codebook.xlsx Variable Info; "Don't know" kept as text, the refusal "Prefer not to say" (20) = NA). The others keep
+##the source codes; labels are in Codebook.xlsx: cov_region_gor (1-12), cov_social_grade (1 AB, 2 C1,
 ##3 C2, 4 DE), cov_vote2017 (1 Con, 2 Lab, 3 Lib Dem, 4 UKIP, 5 Green, 6 Other, 7 Don't
 ##know/didn't vote), cov_euref (1 Remain, 2 Leave, 3 did not vote, 4 can't remember),
 ##cov_citizenship (1 British only, 2 British and another, 3 another country only),
-##cov_work_industry (1-21), cov_education (1-20), cov_household_income (1-17),
+##cov_work_industry (1-21), cov_household_income (1-17),
 ##cov_personal_income (1-16), cov_marital (1-8), cov_ethnicity (1-19), cov_survey_weight
 ##(YouGov design weight). Dropped: response date, constant columns ns/total, the authors'
 ##Region recode. id is the source ID (1..1648, not a platform ID).
@@ -86,11 +89,20 @@ stopifnot(d[attr_refugee != "(not shown)", all(attr_origin %in% c("Pakistan", "N
 ## pronoun agrees with gender
 for (t in 1:5) for (ab in c("A", "B")) stopifnot(all(num(k[[sprintf("genderage%s_screen%d", ab, t)]]) ==
                                                      num(k[[sprintf("gendernoun%s_screen%d", ab, t)]])))
-cv <- data.table(id = as.integer(k$ID), cov_female = as.integer(num(k$Gender) == 2), cov_age = as.integer(num(k$Age)),
+## Education_level answer text, Codebook.xlsx (Variable Info value labels)
+edu <- c("No formal qualifications", "Youth training certificate/skillseekers", "Recognised trade apprenticeship completed",
+         "Clerical and commercial", "City & Guilds certificate", "City & Guilds certificate - advanced", "ONC",
+         "CSE grades 2-5", "CSE grade 1, GCE O level, GCSE, School Certificate", "Scottish Ordinary/ Lower Certificate",
+         "GCE A level or Higher Certificate", "Scottish Higher Certificate", "Nursing qualification (e.g. SEN, SRN, SCM, RGN)",
+         "Teaching qualification (not degree)", "University diploma", "University or CNAA first degree (e.g. BA, B.Sc, B.Ed)",
+         "University or CNAA higher degree (e.g. M.Sc, Ph.D)", "Other technical, professional or higher qualification",
+         "Don't know", NA)  # 20 "Prefer not to say" = refusal -> NA
+stopifnot(all(num(k$Gender) %in% 1:2), all(num(k$Education_level) %in% 1:20))
+cv <- data.table(id = as.integer(k$ID), cov_gender = c("male", "female")[num(k$Gender)], cov_age = as.integer(num(k$Age)),
                  cov_region_gor = as.integer(num(k$Region_GOR)), cov_social_grade = as.integer(num(k$Socialgrade)),
                  cov_vote2017 = as.integer(num(k$Vote2017)), cov_euref = as.integer(num(k$Pastvote_EURef)),
                  cov_citizenship = as.integer(num(k$Citizenship)), cov_work_industry = as.integer(num(k$Work_industry)),
-                 cov_education = as.integer(num(k$Education_level)),
+                 cov_education = edu[num(k$Education_level)],
                  cov_household_income = as.integer(num(k$Gross_household_income)),
                  cov_personal_income = as.integer(num(k$Gross_personal_income)),
                  cov_marital = as.integer(num(k$Marital)), cov_ethnicity = as.integer(num(k$Ethnicity)),

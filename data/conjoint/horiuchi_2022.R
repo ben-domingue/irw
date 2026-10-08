@@ -22,7 +22,8 @@
 ##  respondent and constant across tasks (attrpos_*, recorded).
 ##  One MTurk ID that answered wave 2 twice is dropped (3,073 respondents remain).
 ##  Covariates: the raw wave-1 answers matched on the MTurk ID (then dropped): cov_age_group
-##  (Q2.4), cov_race (Q2.7), cov_party (Q2.8), cov_env_1..5 (Q3.1 environment items) and
+##  (Q2.4), cov_race (Q2.7), cov_party_id (Q2.8 "Generally, do you usually think of yourself as a
+##  Republican, a Democrat, an Independent, or something else?", wave-1 instrument), cov_env_1..5 (Q3.1 environment items) and
 ##  cov_sd_1..8 (Q6.1 social-desirability items), as the text answered.
 ##horiuchi_2022_sdb_candidates (Study 2, Prolific, Dec 3-6 2020)
 ##  Respondents rated 10 pairs of hypothetical congressional candidates from their own party
@@ -37,9 +38,17 @@
 ##  sexual-harassment scandal (observed in the data); trial_prime = 1 if shown the face-to-face-interview
 ##  prime (Q6.2) before the tasks. Attribute order randomized per respondent (attrpos_*).
 ##  Kept: Finished == TRUE respondents with at least one rating (the authors further drop those
-##  failing attention check Q4.1, flagged here as cov_attention_pass, and one with missing
-##  income). Covariates: raw text of Q3.2 age, Q3.3 education, Q3.4 gender, Q3.5 race, Q3.6-Q3.9
-##  party ID items, Q3.10 ideology, Q3.11 income.
+##  failing attention check Q4.1, flagged here as cov_attention_pass_1 (1 = selected exactly "Every
+##  day" and "Never" as instructed), and one with missing income; cov_attention_pass_2 = second
+##  attention check Q36.1, 1 = selected exactly "Donald Trump" and "Joe Biden" as instructed, NA if
+##  unanswered; the authors' step02_check_response_quality.R reads both as acheck1/acheck2).
+##  Covariates: raw text of Q3.2 age band (cov_age_group), Q3.3 education (cov_education), Q3.4
+##  gender "With which gender do you most identify?" (cov_gender: Man = "male", Woman = "female",
+##  Other = "other", study2 instrument), Q3.5 race, Q3.6 party ID (cov_party_id: "Generally, do you
+##  usually think of yourself as a Republican, a Democrat, an Independent, or something else?"),
+##  Q3.7-Q3.9 strength/lean follow-ups, Q3.10 ideology, Q3.11 income.
+##  Neither study deposits a survey weight; Qualtrics durations are not kept. No task is repeated;
+##  profiles shown as attribute tables (instruments: "Please examine each table carefully").
 ##Dropped everywhere: MTurk IDs (Q2.1, MID, WorkerId), PROLIFIC_PID, STUDY_ID, SESSION_ID,
 ##IPAddress, LocationLatitude/Longitude, ResponseId (respondents re-keyed), timing and free-text
 ##comment fields, and the authors' derived indicators. PII FOUND in the deposit: IP addresses
@@ -96,7 +105,7 @@ d_tc <- dif("treat constrained"); d_cc <- dif("control constrained")
 stopifnot(names(which(d_tc > 0)) == "attr_eco_friendly_materials", names(which(d_cc > 0)) == "attr_gel_cushioning")
 w1[, mid := toupper(trimws(WorkerId))]
 w1 <- w1[!duplicated(mid)]
-cv1 <- w1[, c(list(mid = mid, cov_age_group = Q2.4, cov_race = Q2.7, cov_party = Q2.8),
+cv1 <- w1[, c(list(mid = mid, cov_age_group = Q2.4, cov_race = Q2.7, cov_party_id = Q2.8),
               setNames(lapply(1:5, function(i) get(paste0("Q3.1_", i))), paste0("cov_env_", 1:5)),
               setNames(lapply(1:8, function(i) as.character(get(paste0("Q6.1_", i)))), paste0("cov_sd_", 1:8)))]
 s1 <- merge(s1, cv1, by = "mid", all.x = TRUE)
@@ -113,12 +122,15 @@ rc <- lapply(1:10, function(t) paste0("Q7.", qn[t], "_", 1:2))
 s2 <- widen(stack_block(x, "K", "-", 10, 8, rc), 8)
 s2 <- s2[!is.na(rating)]
 s2[, `:=`(rid = x$ResponseId[row], trial_design = x$type[row], trial_prime = as.integer(x$Treatment[row]),
-          trial_candidate_party = x$party[row], cov_attention_pass = as.integer(x$Q4.1[row] == "Every day,Never"))]
+          trial_candidate_party = x$party[row], cov_attention_pass_1 = as.integer(x$Q4.1[row] == "Every day,Never"),
+          cov_attention_pass_2 = as.integer(x$Q36.1[row] == "Donald Trump,Joe Biden"))]
 for (q in c("3.2", "3.3", "3.4", "3.5", "3.6", "3.7", "3.8", "3.9", "3.10", "3.11"))
   s2[, paste0("cov_q", sub(".", "_", q, fixed = TRUE)) := x[[paste0("Q", q)]][row]]
 setnames(s2, c("cov_q3_2", "cov_q3_3", "cov_q3_4", "cov_q3_5", "cov_q3_6", "cov_q3_7", "cov_q3_8", "cov_q3_9", "cov_q3_10", "cov_q3_11"),
-         c("cov_age_group", "cov_education", "cov_gender", "cov_race", "cov_party", "cov_dem_strength", "cov_rep_strength",
+         c("cov_age_group", "cov_education", "cov_gender", "cov_race", "cov_party_id", "cov_dem_strength", "cov_rep_strength",
            "cov_party_lean", "cov_ideology", "cov_income"))
+stopifnot(all(s2$cov_gender %in% c("Man", "Woman", "Other", NA)))
+s2[, cov_gender := c(Man = "male", Woman = "female", Other = "other")[cov_gender]]
 z <- s2[trial_design == "treat constrained"]
 ac <- grep("^attr_", names(z), value = TRUE)
 d2 <- sapply(ac, function(v) z[, uniqueN(get(v)), .(rid, task)][, mean(V1 > 1)])

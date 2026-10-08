@@ -34,12 +34,14 @@
 ##  attr_years_in_pakistan "3 years" / "15 years" / "40 years" (time the family has resided
 ##    in Pakistan).
 ##Labels are the English codebook labels; respondents heard Urdu or Pashto.
-##Covariates (codebook codes; 998/999 refused/don't know set missing): cov_female (1 =
-##female), cov_age, cov_ethnicity (e1: 1 Urdu Speaking Muhajir 2 Punjabi 3 Sindhi 4 Balochi
+##Covariates (codebook codes; 998/999 refused/don't know set missing): cov_gender (s2q0,
+##recorded by the enumerator, not asked; codebook / .dta labels 1 = Male, 2 = Female ->
+##male/female), cov_age, cov_ethnicity (e1: 1 Urdu Speaking Muhajir 2 Punjabi 3 Sindhi 4 Balochi
 ##5 Pashtun 6 Others 7 Hindkon/Hazarewal 8 Hazarewal 9 Siraiki), cov_province and
 ##cov_district (names), cov_urban (1 = urban), cov_interview_pashto (1 = Pashto),
-##cov_hh_occupation (S12q8 code), cov_income (1-7 monthly bands), cov_education (edu_years
-##1-9 code), cov_religion (1 Islam 2 Christianity 3 Hindu 4 Others), cov_sect (1 Shia 2 Sunni
+##cov_hh_occupation (S12q8 code), cov_income (1-7 monthly bands), cov_education (S12q9
+##edu_years, the .dta value-label text, e.g. "Matriculation (secondary/high school)";
+##998 refused NA, 999 kept as "Don't Know"), cov_religion (1 Islam 2 Christianity 3 Hindu 4 Others), cov_sect (1 Shia 2 Sunni
 ##3 Aga Khani 4 Deobandi 5 Barelvi 6 Other), cov_radio_arm (lab_exp, the separate radio-
 ##message experiment arm; the two experiments' order was randomized). No survey weight.
 ##Dropped: GPS latitude/longitude, interview duration, Gallup id_no (re-keyed to 1..n in
@@ -54,10 +56,12 @@ stopifnot(nrow(k) == 3500, !anyDuplicated(k$id_no))
 lab <- function(x) { y <- as.character(as_factor(x, levels = "labels")); stopifnot(!anyNA(y)); y }
 num <- function(x) { y <- as.integer(zap_labels(x)); y[y %in% c(997L, 998L, 999L)] <- NA; y }
 k$rid <- seq_len(nrow(k))
-cv <- data.table(id = k$rid, cov_female = as.integer(k$gender == 2), cov_age = as.integer(k$age),
+stopifnot(k$gender %in% 1:2, k$edu_years %in% c(1:9, 998, 999))
+edu <- k$edu_years; edu[edu %in% 998] <- NA
+cv <- data.table(id = k$rid, cov_gender = c("male", "female")[as.integer(k$gender)], cov_age = as.integer(k$age),
                  cov_ethnicity = num(k$e1), cov_province = as.character(k$province), cov_district = as.character(k$district),
                  cov_urban = as.integer(k$urban_rural == 1), cov_interview_pashto = as.integer(k$interview_lang == 1),
-                 cov_hh_occupation = num(k$hh_occupation), cov_income = num(k$income), cov_education = num(k$edu_years),
+                 cov_hh_occupation = num(k$hh_occupation), cov_income = num(k$income), cov_education = as.character(as_factor(edu, levels = "labels")),
                  cov_religion = num(k$religion), cov_sect = num(k$sect), cov_radio_arm = as.character(k$lab_exp))
 d <- rbindlist(lapply(1:3, function(r) rbindlist(lapply(1:2, function(p) {
   g <- function(v) k[[sprintf("%s_%d_p%d", v, r, p)]]

@@ -32,9 +32,11 @@
 ##about 17% each), although the pre-registration says "fully randomized" over the three. Race "Latino/a" was shown as "Latino" for
 ##male and "Latina" for female partners (pre-registration Table 1), rebuilt here from gender.
 ##The pre-registration's example screen reads "heavily engaged"; its level table reads "highly
-##engaged" (used). Attribute order fixed (as in the example screen); not recorded.
-##Covariates: cov_age (years), cov_gender, cov_race_ethnicity (Ipsos text), cov_party (QPID100
-##text; "-1" set missing), cov_political_participation (Q33, 0-4 count of acts), cov_social_media_
+##engaged" (used). Attribute order is not stated; the example screen shows the Table 1 order as
+##a grid of labelled rows ("Text to Display" labels); order not recorded.
+##Covariates: cov_age (ppage, years), cov_gender (ppgender text Female / Male -> female / male),
+##cov_race_ethnicity (Ipsos text), cov_party_id (QPID100 text: Democrat, Independent,
+##Republican, Something else; "-1" set missing), cov_political_participation (Q33, 0-4 count of acts), cov_social_media_
 ##news (Q34, 0-3 mean of two items), cov_trust_media (Q45, 0 = not at all .. 3 = great deal; half
 ##the sample got "the news media", half "...to report the news even-handedly"), cov_local_
 ##conversation (Q46_6, 0 = never .. 4 = daily). Dropped: ppeduc5 (Ipsos codes, labels not in the
@@ -77,9 +79,9 @@ d <- x[, .(id = as.integer(ID), task = as.integer(convoNum), profile = 1L, ratin
            attr_engagement = fifelse(HidAttribute6 == 1, "This person is highly engaged in politics", "This person is not engaged in politics at all"),
            attr_race = fifelse(HidAttribute7 == "Latino/a", fifelse(HidAttribute8 == "Female", "Latina", "Latino"), HidAttribute7),
            attr_gender = HidAttribute8,
-           cov_age = as.integer(ppage), cov_gender = ppgender, cov_race_ethnicity = ppethm,
-           cov_party = fifelse(QPID100 == "-1", NA_character_, QPID100),
+           cov_age = as.integer(ppage), cov_gender = unname(c(Female = "female", Male = "male")[ppgender]), cov_race_ethnicity = ppethm,
+           cov_party_id = fifelse(QPID100 == "-1", NA_character_, QPID100),
            cov_political_participation = Q33, cov_social_media_news = Q34, cov_trust_media = Q45, cov_local_conversation = as.integer(Q46_6))]
-stopifnot(d[, uniqueN(attr_party)] == 5, d[, uniqueN(attr_race)] == 5, d[, uniqueN(attr_gender)] == 2, d[, uniqueN(attr_news)] == 5)
+stopifnot(!anyNA(d$cov_gender), d[, uniqueN(attr_party)] == 5, d[, uniqueN(attr_race)] == 5, d[, uniqueN(attr_gender)] == 2, d[, uniqueN(attr_news)] == 5)
 setorder(d, id, task, profile)
 fwrite(d, file.path(out, "carlson_2023_free_expression.csv"))

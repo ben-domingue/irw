@@ -32,9 +32,15 @@
 ##section S8 adds them back. All 1,999 are kept here with cov_straightliner = 1/0.
 ##Respondent IDs are Qualtrics ResponseIDs, re-keyed to integers in file order. Dropped:
 ##start/end/recorded dates and duration.
-##Covariates (numeric codes): cov_age years; cov_gender 1=male 2=female; cov_education
-##1=less than high school 2=high school/GED 3=some college 4=2-year degree 5=4-year degree
-##6=graduate degree; cov_race 1=White 2=Black 3=Hispanic/Latino 4=Asian; cov_income
+##Covariates. As answer text (export answer text, checked against the codebook "03 Qualtrics_
+##Data_Codebook_dec2019.docx"): cov_gender "What gender do you consider yourself?" female /
+##male (codebook gender 1 = Male, 2 = Female, 3 = Something else; no "Something else" in the
+##export); cov_education "What is the highest level of education you have completed?" as
+##worded in the export: Less than high school / High school/GED / Some college / 2-year
+##degree (Associate's) / 4-year degree (Bachelor's) / Graduate or professional degree
+##(codebook educ 1-6); cov_party_id (export variable party1; not in the codebook) Democrat /
+##Republican / Independent / Something else, as in the export.
+##Numeric codes: cov_age years; cov_race 1=White 2=Black 3=Hispanic/Latino 4=Asian; cov_income
 ##1=<$10k 2=$10-20k ... 10=$90-100k 11=$100-150k 12=$150k+; cov_born 1=US 2=US territory
 ##3=other country; cov_immigration 1=keep at present level 2=increase 3=decrease;
 ##cov_aa_1 (race in college admissions) 1=favor 2=oppose 3=neither; cov_aa_2 (if favor)
@@ -44,9 +50,8 @@
 ##cov_white_advantage (being White affects getting ahead) 1=helps a lot 2=helps a little
 ##3=neither 4=hurts a little 5=hurts a lot; cov_employment 1=full time 2=part time 3=with a
 ##job but not at work 4=unemployed/looking 5=retired 6=in school 7=keeping house
-##8=something else; cov_party 1=Democrat 2=Republican 3=independent 4=something else;
-##cov_party_strength 1=strong 2=not very strong; cov_party_lean 1=closer to Democratic
-##2=closer to Republican 3=neither; cov_ideology 1=extremely liberal..7=extremely
+##8=something else; cov_party_strength 1=strong 2=not very strong; cov_party_lean
+##1=closer to Democratic 2=closer to Republican 3=neither; cov_ideology 1=extremely liberal..7=extremely
 ##conservative, 8=haven't thought much about this; cov_ideology_forced 1=liberal
 ##2=conservative 3=neither; cov_vote2016 1=Clinton 2=Trump 3=someone else 4=did not vote.
 library(data.table)
@@ -55,11 +60,12 @@ r <- fread(file.path(raw, "conjoint.csv"), colClasses = "character", na.strings 
 r <- r[-(1:2)]   # question-text and ImportId rows
 stopifnot(!anyDuplicated(r$ResponseID))
 code <- function(x, lv) { i <- match(x, lv); stopifnot(all(is.na(x) | !is.na(i))); i }
+chk <- function(x, lv) { code(x, lv); x }   # keep the answer text, checked against the known options
 cv <- data.table(id = seq_len(nrow(r)),
   cov_age = as.integer(r$age),
-  cov_gender = code(r$gender, c("Male", "Female")),
-  cov_education = code(r$educ, c("Less than high school", "High school/GED", "Some college", "2-year degree (Associate's)",
-                                 "4-year degree (Bachelor's)", "Graduate or professional degree")),
+  cov_gender = tolower(chk(r$gender, c("Male", "Female"))),
+  cov_education = chk(r$educ, c("Less than high school", "High school/GED", "Some college", "2-year degree (Associate's)",
+                          "4-year degree (Bachelor's)", "Graduate or professional degree")),
   cov_race = code(r$race, c("White", "Black/African American", "Hispanic/Latino(a)", "Asian/Asian American")),
   cov_income = code(r$faminc, c("Less than $10,000", "$10,000 - $19,999", "$20,000 - $29,999", "$30,000 - $39,999",
                                 "$40,000 - $49,999", "$50,000 - $59,999", "$60,000 - $69,999", "$70,000 - $79,999",
@@ -74,7 +80,7 @@ cv <- data.table(id = seq_len(nrow(r)),
   cov_employment = code(r$empstat, c("Working full time", "Working part time",
                                      "With a job, but not at work for temporary reason (e.g,. illness, vacation, strike)",
                                      "Unemployed, laid off, or looking for work", "Retired", "In school", "Keeping house", "Something else")),
-  cov_party = code(r$party1, c("Democrat", "Republican", "Independent", "Something else")),
+  cov_party_id = chk(r$party1, c("Democrat", "Republican", "Independent", "Something else")),
   cov_party_strength = code(sub(" \\$\\{.*", "", r$party2), c("Strong", "Not very strong")),
   cov_party_lean = code(r$party3, c("Closer to the Democratic Party", "Closer to the Republican Party", "Neither")),
   cov_ideology = code(r$ideo1, c("Extremely liberal", "Liberal", "Slightly liberal", "Moderate, middle of the road",

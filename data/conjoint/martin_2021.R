@@ -26,7 +26,8 @@
 ##  Direction: higher = MORE SEVERE corruption (i.e. less favourable to the official);
 ##  kept as in the source, not reversed. task = profile (pair 1-4), profile = profileab
 ##  (1 = first official).
-##  Covariates: cov_age (years), cov_male (1 = male), cov_urban (1 = lives in a town,
+##  Covariates: cov_age (years, "What is your age?"), cov_gender (male/female, from `male`,
+##  .dta variable label "1 if male, 0 if female"), cov_urban (1 = lives in a town,
 ##  0 = village), cov_education_years (0-14; 14 = trade school or any post-secondary),
 ##  cov_occupation (1 market vendor, 2 boda-boda driver, 3 shopkeeper/small vendor),
 ##  cov_steal_upset (1-5, how upset at rumours a local official is corrupt), and four 1-4
@@ -48,7 +49,7 @@ d[, attr_funds_source := pick(c("donor", "tax", "transfer"), c("Donor Funds", "C
 d[, attr_money_spent_on := pick(c("self", "kinvill", "buyel"), c("Himself", "Help Kin / village", "Buy election support for his party"))]
 d[, attr_funds_purpose := pick(c("water", "health", "sal", "infra", "educ"),
                                c("Water", "Health Care", "Government Salaries", "Roads / Infrastructure", "Education"))]
-d[, cov_age := num(p$age)][, cov_male := num(p$male)][, cov_urban := num(p$urban_dum)]
+d[, cov_age := num(p$age)][, cov_gender := c("female", "male")[num(p$male) + 1]][, cov_urban := num(p$urban_dum)]
 d[, cov_education_years := num(p$education_years)][, cov_occupation := num(p$primaryoccupate)]
 for (v in c("steal_upset", "goprotest", "contact_official", "campaign_against", "talkneighb")) d[, paste0("cov_", v) := num(p[[v]])]
 stopifnot(d[, sum(choice), .(id, task)][, all(V1 == 1)])

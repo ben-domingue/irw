@@ -26,8 +26,11 @@
 ##race Black/White, age 35/45/55/65, job Business executive/Factory worker, experience
 ##None/1/2/3+. How the profiles were laid out and whether attribute order was randomized are
 ##not documented. Randomization restrictions are not documented.
-##Covariate: cov_party_id, "Generally speaking, do you usually think of yourself as a
-##republican, a democrat or as an independent?" 1 = Strong Democrat .. 7 = Strong Republican.
+##Covariate: cov_party_id7, "Generally speaking, do you usually think of yourself as a
+##republican, a democrat or as an independent?" (source partyc), stored as the label text:
+##Strong Democrat, Weak Democrat, Independent-Democrat, Independent, Independent-Republican,
+##Weak Republican, Strong Republican (Stata value labels of partyc, codes 1-7; codebook partyc).
+##No 3-category party ID in the deposit. No survey weight in the deposit or codebook.
 ##Dropped: ResponseId (Qualtrics/MTurk response ID; re-keyed to integers in source order).
 ##N: 1,363 ids, arms 683/662 match the authors' log; 1,326 respondents (679 no-party, 647 party)
 ##have >= 1 answer and are kept; rows with no answer are omitted (1 task keeps one profile).
@@ -45,7 +48,7 @@ d <- data.table(id = as.integer(s$id), task = as.integer(s$scenario), profile = 
                 attr_party = lab(s$party), attr_gender = lab(s$gen), attr_race = lab(s$race), attr_age = lab(s$age),
                 attr_job = lab(s$job), attr_experience = lab(s$exp),
                 trial_party_info = ifelse(zap_labels(s$experiment1) == 1, "Party information", "No party information"),
-                cov_party_id = as.integer(zap_labels(s$partyc)))
+                cov_party_id7 = lab(s$partyc))
 d <- d[!(is.na(choice) & is.na(rating_guess_democrat))]
 stopifnot(d[trial_party_info == "No party information", all(is.na(attr_party))],
           d[trial_party_info == "Party information", !anyNA(attr_party)],

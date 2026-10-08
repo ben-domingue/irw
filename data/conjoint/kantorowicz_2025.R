@@ -33,7 +33,10 @@
 ##one of the two is selected, in every row of all three files). Each half is 6 consecutive
 ##blocks of all respondents in the same respondent order (verified); block k is taken as task k.
 ##The order in which tasks were shown is therefore an assumption.
-##Covariates: cov_gender (1 = male, 2 = female per the authors' code; other codes undocumented),
+##Covariates: gender (source codes; copyrights_script.R L2040, L2419-2431: gender == 1 "Male",
+##gender == 2 "Female", other codes filtered out and undocumented). uk_pros and us_pros hold only
+##codes 1 and 2, so there it is cov_gender (male / female). uk_public also has one respondent
+##with code 4, which no source explains, so that table keeps the codes as cov_gender_code.
 ##cov_age (years). Dropped: education (codes 1-5 with no labels; the authors group 2-4 as higher
 ##educated), Response.ID (panel response id; respondents re-keyed to integers in file order).
 ##No survey weight is deposited.
@@ -54,7 +57,14 @@ for (s in names(files)) {
   d <- data.table(Response.ID = x$Response.ID, task = rep(rep(1:6, each = r), 2), profile = rep(1:2, each = h),
                   choice = as.integer(x$selected))
   for (v in names(nmap)) d[, (nmap[[v]]) := as.character(x[[v]])]
-  d[, `:=`(cov_gender = as.integer(x$gender), cov_age = as.integer(x$age))]
+  g <- as.integer(x$gender)
+  if (s == "uk_public") {
+    stopifnot(all(g %in% c(1:2, 4, NA)))
+    d[, `:=`(cov_gender_code = g, cov_age = as.integer(x$age))]
+  } else {
+    stopifnot(all(g %in% c(1:2, NA)))
+    d[, `:=`(cov_gender = c("male", "female")[g], cov_age = as.integer(x$age))]
+  }
   d <- merge(key, d, by = "Response.ID")[, Response.ID := NULL]
   stopifnot(d[, sum(choice), .(id, task)][, all(V1 == 1)], d[, .N, .(id, task)][, all(N == 2)])
   setcolorder(d, c("id", "task", "profile", "choice"))

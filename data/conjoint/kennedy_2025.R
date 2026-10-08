@@ -27,15 +27,29 @@
 ##           The source codes 1 (most qualified) to 4 (least qualified); the response-option
 ##           wording is not in the deposit. As in the authors' code (rating = 5 - code) the
 ##           scale is reversed here so that 4 = most qualified, 1 = least qualified.
-##Covariates keep the source's Qualtrics codes; value labels are NOT in the deposit except
-##where the authors' code implies them (cov_gender 1 male, 2 female, 3-5 other / self-
-##describe / prefer not to say; cov_pid1 1 Democrat, 2 Republican, 3 independent, 4 other;
-##cov_pid4 leaners 1 Republican, 2 Democrat, 3 neither; cov_polinterest 1-2 high, 3-4 low).
+##Covariates keep the source's Qualtrics codes; the answer-option labels are NOT in the
+##deposit, so the reserved covariates whose codes cannot be fully mapped carry a _code suffix:
+##  cov_gender_code ("How do you describe yourself?"): 1 male and 2 female per the authors'
+##    code (Female = 1 for gender 2, 0 for gender 1; 3-5 set to NA), 4 "Prefer to self-describe"
+##    (export column gender_4_TEXT); what 3 and 5 are is not in the deposit.
+##  cov_party_id_code (source pid1, "Generally speaking, do you usually think of yourself as a
+##    Democrat, a Republican, an independent, or what?"): 1 Democrat, 2 Republican per the
+##    authors' code; 3 and 4 are both coded independent there, which of them is "independent"
+##    and which "other" is not in the deposit.
+##  cov_education_code (source degree, "What is the highest grade or year of school you have
+##    completed?", 1-8; the authors' code makes 7-8 "College Degree", 1-6 "No College Degree").
+##Strength/lean follow-ups (codes kept): cov_party_strength_dem (source pid2, "Would you call
+##yourself a strong Democrat or a not very strong Democrat?"), cov_party_strength_rep (pid3, the
+##same for Republicans), cov_party_lean (pid4, "Do you think of yourself as closer to the
+##Republican Party or to the Democratic Party": 1 Republican, 2 Democrat, 3 neither, per the
+##authors' code); cov_polinterest 1-2 high, 3-4 low (authors' code).
 ##cov_birth_year (yyyy), cov_state (Qualtrics 50 states + DC + PR list), cov_hispanic,
-##cov_race and cov_mobilization (multi-select, comma-separated codes as text), cov_degree,
-##cov_marital, cov_child18, cov_votefreq, cov_ideology (1-7), cov_pid1-4, cov_sexism_1-5,
+##cov_race and cov_mobilization (multi-select, comma-separated codes as text),
+##cov_marital, cov_child18, cov_votefreq, cov_ideology (1-7), cov_sexism_1-5,
 ##political-knowledge items cov_knowgender_1/2 (numeric guesses), cov_knowgov, cov_knowleg,
-##cov_knowct, cov_knowlastsay, cov_attention1 (attention check, multi-select as text).
+##cov_knowct, cov_knowlastsay, cov_attention1 (instructed-response attention check: "select
+##FoxNews.com and NBC.com"; multi-select codes as text, kept as is because the code of each
+##website is not in the deposit, so it is not recoded to cov_attention_pass).
 ##Dropped: IP address, latitude/longitude, Prolific ID, Qualtrics ResponseId, free-text gender
 ##self-description, the free-text closing comment, page timers, dates, durations. Respondent
 ##ids are re-keyed 1..997 in file order. Two Prolific IDs appear twice (995 distinct IDs for
@@ -71,9 +85,9 @@ for (t in 1:10) for (p in 1:2) {
 d <- rbindlist(rows, use.names = TRUE)
 setcolorder(d, c("id", "task", "profile", "choice", "rating", paste0("attr_", att), paste0("attrpos_", att)))
 stopifnot(!anyNA(d[, .SD, .SDcols = patterns("^attr")]), !anyNA(d$rating), d[!is.na(choice), sum(choice), .(id, task)][, all(V1 == 1)])
-num <- c(yearborn = "birth_year", state = "state", gender = "gender", hisp = "hispanic", degree = "degree", marstat = "marital",
-         child18 = "child18", polinterest = "polinterest", votefreq = "votefreq", ideo = "ideology", pid1 = "pid1", pid2 = "pid2",
-         pid3 = "pid3", pid4 = "pid4", sexism_1 = "sexism_1", sexism_2 = "sexism_2", sexism_3 = "sexism_3", sexism_4 = "sexism_4",
+num <- c(yearborn = "birth_year", state = "state", gender = "gender_code", hisp = "hispanic", degree = "education_code", marstat = "marital",
+         child18 = "child18", polinterest = "polinterest", votefreq = "votefreq", ideo = "ideology", pid1 = "party_id_code", pid2 = "party_strength_dem",
+         pid3 = "party_strength_rep", pid4 = "party_lean", sexism_1 = "sexism_1", sexism_2 = "sexism_2", sexism_3 = "sexism_3", sexism_4 = "sexism_4",
          sexism_5 = "sexism_5", knowgender_1 = "knowgender_1", knowgender_2 = "knowgender_2", knowgov = "knowgov",
          knowleg = "knowleg", knowct = "knowct", knowlastsay = "knowlastsay")
 txt <- c(race = "race", mobil = "mobilization", ATTENTION1 = "attention1")

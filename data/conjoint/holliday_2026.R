@@ -38,9 +38,16 @@
 ##Check: agreement on military size (candidate position = respondent's baseline), weighted
 ##OLS on the 2021 table: 0.292, N = 4,934 profiles, as in the deposit's
 ##figures/saved_objects/data_figure_2_amce.csv (0.2923, N 4,934).
-##Covariates: cov_survey_weight (the authors' raked weight, Nationscape targets), cov_pid3,
-##cov_age (bracket), cov_gender, cov_race, cov_hispanic, cov_education, cov_region,
-##cov_household_income (text as stored), and cov_baseline_<policy>: the respondent's own
+##Covariates: cov_survey_weight (the authors' raked weight, Nationscape targets);
+##cov_party_id (the authors' pid3, cleaning/scripts/weights.R: Democrat / Republican from P1,
+##independents who lean ("Closer to the Democratic/Republican Party", P1.I) folded into the
+##party, P1.I "Neither" = Independent); cov_age_group (the authors' bands from weights.R:
+##18-23, 24-29, 30-39, 40-49, 50-59, 60-69, 70+); cov_gender ("male"/"female", the authors'
+##Male/Female from weights.R, Lucid gender 1 = Male, 2 = Female, lowercased); cov_education
+##(the authors' text from weights.R, which COLLAPSES Lucid's education codes: 1 and -3105 No
+##high school diploma, 3-4 Some college, 7-8 Graduate degree; Lucid's own labels are not in
+##the deposit); cov_race, cov_hispanic, cov_region, cov_household_income (text as stored),
+##and cov_baseline_<policy>: the respondent's own
 ##answer on that policy asked separately (1 = agrees with the affirmative text, 0 = with the
 ##negated text), which the authors use to code candidate-respondent agreement. Lucid's
 ##unlabelled numeric codes (hhi, ethnicity, political_party), the P1 party items and the
@@ -69,10 +76,11 @@ build <- function(x, pol, office, name) {
   if (any(!is.na(x$party_text))) d[, attr_party := fifelse(is.na(x$party_text), "(not shown)", x$party_text)]
   d[, trial_office := fifelse(x$conjoint_id <= 5, "federal House of Representatives", office)]
   if (uniqueN(x$showParty) > 1) d[, trial_show_party := as.integer(x$showParty)]
-  d[, `:=`(cov_survey_weight = x$weights, cov_pid3 = as.character(x$pid3), cov_age = as.character(x$age),
-           cov_gender = as.character(x$gender), cov_race = as.character(x$race), cov_hispanic = as.character(x$hispanic),
+  d[, `:=`(cov_survey_weight = x$weights, cov_party_id = as.character(x$pid3), cov_age_group = as.character(x$age),
+           cov_gender = tolower(as.character(x$gender)), cov_race = as.character(x$race), cov_hispanic = as.character(x$hispanic),
            cov_education = as.character(x$education), cov_region = as.character(x$region),
            cov_household_income = as.character(x$household_income))]
+  stopifnot(all(d$cov_gender %in% c("female", "male")))
   for (v in pol$label) d[, paste0("cov_baseline_", v) := as.integer(x[[paste0("policy_", v)]])]
   stopifnot(d[, uniqueN(cov_survey_weight), id][, all(V1 == 1)], !anyNA(d[, grep("^attr_", names(d)), with = FALSE]))
   setorder(d, id, task, profile)
