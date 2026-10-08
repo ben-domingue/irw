@@ -131,7 +131,7 @@ class CrosswalkFile(unittest.TestCase):
             k = f'{r["concept"]}:{r["table"]}:{r["attribute"]}:{r["level"]}'
             self.assertIn(r["concept"], CONCEPTS, k)
             self.assertIn(r["value"], CONCEPTS[r["concept"]], k)
-            self.assertIn(r["signal"], {"explicit", "name"}, k)
+            self.assertIn(r["signal"], {"explicit", "name", "photo"}, k)
             self.assertTrue(r["attribute"].startswith("attr_"), k)
             self.assertTrue(r["level"] and r["evidence"], k)
             self.assertIn(r["table"], self.tables, f"{k}: table has no design record")

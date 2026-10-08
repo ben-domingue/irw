@@ -84,7 +84,7 @@ Attribute columns keep the text respondents saw, so the same idea arrives under 
 | `concept` | the shared idea. So far only `profile_gender`: the gender of the person a profile describes. |
 | `table`, `attribute`, `level` | the stored level text, exactly as in the table |
 | `value` | the harmonized value. For `profile_gender` this is `female` or `male`. |
-| `signal` | `explicit` when the attribute states the concept; `name` when it is carried by a gendered first name and the authors' own coding says which names are which |
+| `signal` | `explicit` when the attribute states the concept; `name` when it is carried by a gendered first name and the authors' own coding says which names are which; `photo` when it is shown only in a photograph and the authors' own coding of the photo says which |
 | `evidence` | where the mapping comes from |
 
 Every level of a mapped attribute has a row, and each concept maps to at most one attribute per table. A `name` signal carries other things too: Pedersen's names also mark ethnicity (majority versus Turkish), so a gender contrast there is within the names the authors chose. A new concept is added with its allowed values in `metadata/tests/test_conj_design.py` (`CONCEPTS`) and a line here.
