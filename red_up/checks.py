@@ -14,6 +14,8 @@ from __future__ import annotations
 
 import csv
 import hashlib
+import os
+import re
 import sys
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -144,6 +146,58 @@ def run_conjoint_validator(path: Path) -> tuple[list[str], list[str]]:
             [f"{f.check}: {f.message}" for f in report.warnings])
 
 
+#: The conjoint design records (data/conjoint/README.md, "Design records" and
+#: "Attribute crosswalk"). IRW_CONJ_DESIGN_DIR points the check at another
+#: directory, for tests; production never sets it.
+def _conj_design_dir() -> Path:
+    env = os.environ.get("IRW_CONJ_DESIGN_DIR")
+    return Path(env) if env else Path(__file__).resolve().parent.parent / "data" / "conjoint"
+
+
+_CONJ_OUTCOME = re.compile(r"^(choice|rating)(_.+)?$")
+
+
+def check_conj_design(report: FileReport) -> tuple[list[str], list[str]]:
+    """A conjoint table needs its design records before it goes up. -> (errors, warnings)
+
+    Errors: no row in design_tables.csv, or an outcome column with no row in
+    design_outcomes.csv -- without them the table cannot be pooled with the
+    others (conj_metadata/conj_outcomes would carry NA for it), and nothing
+    later forces anyone to come back. Warnings: an outcome row for a column the
+    file lacks (stale), and a gender attribute with no crosswalk.csv rows.
+    Unreadable records are an error, never a pass.
+    """
+    d = _conj_design_dir()
+    try:
+        with open(d / "design_tables.csv", newline="", encoding="utf-8") as f:
+            tables = {r["table"] for r in csv.DictReader(f)}
+        with open(d / "design_outcomes.csv", newline="", encoding="utf-8") as f:
+            outcomes = {(r["table"], r["outcome"]) for r in csv.DictReader(f)}
+        with open(d / "crosswalk.csv", newline="", encoding="utf-8") as f:
+            crosswalk = {(r["table"], r["attribute"]) for r in csv.DictReader(f)}
+    except (OSError, KeyError) as exc:
+        return ([f"conj design records unreadable in {d} ({exc})"], [])
+    t, cols = report.table, report.columns
+    errors, warnings = [], []
+    where = "data/conjoint/README.md, \"Design records\""
+    if t not in tables:
+        errors.append(f"conj_design: {t} has no row in design_tables.csv ({where})")
+    have = [c for c in cols if _CONJ_OUTCOME.match(c)]
+    missing = [c for c in have if (t, c) not in outcomes]
+    if missing:
+        errors.append(f"conj_design: outcome column(s) with no row in design_outcomes.csv: "
+                      f"{', '.join(missing)} ({where})")
+    stale = sorted(o for (tt, o) in outcomes if tt == t and o not in have)
+    if stale:
+        warnings.append(f"conj_design: design_outcomes.csv has row(s) for column(s) this file "
+                        f"lacks: {', '.join(stale)}")
+    for a in ("attr_gender", "attr_sex"):
+        if a in cols and (t, a) not in crosswalk:
+            warnings.append(f"conj_crosswalk: {a} has no rows in crosswalk.csv "
+                            f"(profile_gender); add them so the table pools with the others")
+    return errors, warnings
+
+
 def validate_for_target(report: FileReport, target: Target,
                         enabled: bool = True, context: dict | None = None) -> None:
     """Run the full IRW format validator, where the target expects that format.
@@ -169,6 +223,9 @@ def validate_for_target(report: FileReport, target: Target,
         return                # a file that is not a table yet is not worth validating
     if target.source == "conj":
         errors, warnings = run_conjoint_validator(report.path)
+        report.errors.extend(errors)
+        report.warnings.extend(warnings)
+        errors, warnings = check_conj_design(report)
         report.errors.extend(errors)
         report.warnings.extend(warnings)
         return
