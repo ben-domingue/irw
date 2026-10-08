@@ -11,7 +11,7 @@
 ##1,363 MTurk respondents (ResponseId in the source), each 5 tasks (scenario) of 2 candidate
 ##profiles (candidate 1/2): task and profile are recorded. Between-subject arms
 ##(trial_party_info, source experiment1): "Party information" (662) shows the candidate's party;
-##"No party information" (683) does not (attr_party blank). 18 respondents have no arm, no
+##"No party information" (683) does not (attr_party "(not shown)"). 18 respondents have no arm, no
 ##attributes and no answers and are dropped with the other rows lacking any outcome.
 ##The party arm is the same MTurk sample as Hjortskov & Andersen (2024, BJPolS,
 ##doi:10.1017/S0007123424000048; data doi:10.7910/DVN/F53FQ1, party arm only); this deposit
@@ -50,6 +50,8 @@ d <- d[!(is.na(choice) & is.na(rating_guess_democrat))]
 stopifnot(d[trial_party_info == "No party information", all(is.na(attr_party))],
           d[trial_party_info == "Party information", !anyNA(attr_party)],
           d[!is.na(rating_guess_democrat), all(task == 5 & trial_party_info == "No party information")])
+d[trial_party_info == "No party information", attr_party := "(not shown)"]
+stopifnot(!anyNA(d[, grep("^attr_", names(d)), with = FALSE]))
 stopifnot(!anyNA(d$attr_gender), !anyNA(d$trial_party_info), d[!is.na(choice), sum(choice), .(id, task)][, all(V1 == 1)])
 setorder(d, id, task, profile)
 fwrite(d, file.path(out, "andersen_2026_party_masking.csv"))

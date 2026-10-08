@@ -25,9 +25,9 @@
 ##     politics." 0 = strongly disagree .. 4 = strongly agree.
 ##Rows whose three outcomes are all missing are omitted (42 respondents have none at all; 62
 ##tasks keep one profile only). 5,969 respondents remain, 5,275 of them with a vote answer.
-##Attributes (text from SI Table S1): attr_disability ("(no disability sentence)" when no
-##disability was mentioned, p = 0.4), attr_age (35-65), attr_children, attr_job, attr_experience
-##(years, 4-17), attr_office, attr_party (blank in the no-party task). Gender and minority
+##Attributes (text from SI Table S1): attr_disability ("(not shown)" when no disability sentence
+##was shown, p = 0.4), attr_age (35-65), attr_children, attr_job, attr_experience
+##(years, 4-17), attr_office, attr_party ("(not shown)" in the no-party task). Gender and minority
 ##ethnic background were carried only by the candidate's NAME (e.g. "Paul Smith"/"Anna Smith"/
 ##"Sofia Garcia"); the names are NOT in the deposit, so attr_gender (Female/Male) and
 ##attr_name_minority ("Minority ethnic name"/"Non-minority name") are the codebook's codings of
@@ -51,7 +51,7 @@ d <- data.table(id = as.integer(s$ID), task = (s$candidate + 1L) %/% 2L, profile
                 choice = as.integer(s$vote.n), rating_ideology = as.integer(round(s$lr.s * 10)),
                 rating_represent = as.integer(s$represent.n))
 stopifnot(all(abs(s$lr.s * 10 - round(s$lr.s * 10)) < 1e-9, na.rm = TRUE))
-dis <- list(None = c("(no disability sentence)", "(no disability sentence)"),
+dis <- list(None = c("(not shown)", "(not shown)"),
             Paralysed = c("is paralyzed below the waist and uses a wheelchair to get around.",
                           "is paralysed below the waist and uses a wheelchair to get around."),
             Blind = rep("is blind and reads using text-to-speech software.", 2),
@@ -74,7 +74,8 @@ d[, `:=`(attr_disability = mapply(function(x, i) dis[[x]][i], s$c.dis, k, USE.NA
          attr_office = ifelse(s$c.heldoffice == 1, ifelse(us, "has previously served as a state legislator",
                                                           "has previously served as a local councillor"),
                               "has not yet held elected office"),
-         attr_party = s$c.party)]
+         attr_party = fifelse(is.na(s$c.party), "(not shown)", s$c.party))]
+stopifnot(!anyNA(d[, grep("^attr_", names(d)), with = FALSE]))
 stopifnot(!anyNA(d$attr_children), !anyNA(d$attr_job), s[, all(c.female %in% 0:1 & c.minority %in% 0:1 & c.heldoffice %in% 0:1)])
 d[, trial_party_shown := ifelse(is.na(s$c.party), "no", "yes")]
 stopifnot(d[, uniqueN(trial_party_shown), .(id, task)][, all(V1 == 1)], d[, uniqueN(trial_party_shown), id][, all(V1 == 2)])

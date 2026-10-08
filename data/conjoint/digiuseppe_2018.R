@@ -19,7 +19,7 @@
 ##compare arms): trial_arm = control (Group 1: economic attributes only), global_influence
 ##(Group 2: adds "Global influence effect"), political_relations (Group 3: adds "Other
 ##country's relationship to the United States"). attr_global_influence / attr_relationship
-##are blank where that attribute was not shown.
+##are "(not shown)" where the arm did not show that attribute.
 ##Attributes (Stata value labels; text as in article Table 1): jobs ("Effect on US jobs"),
 ##us_growth, partner_growth, regime_economy ("Other country's political system and economy",
 ##one attribute with 6 combined levels), global_influence (geopolB labels Increases /
@@ -61,10 +61,11 @@ stopifnot(s[group == 3, all((partner == 0) == (ally == 1) & (partner == 1) == (r
                             (partner == 3) == (ourside == 1) & (partner == 4) == (rivalside == 1))],
           s[group != 3, all(is.na(partner))], s[group == 2, all(geo %in% c("Increases", "Diminishes", "Maintains"))], s[group != 2, all(geo == "Not asked")])
 d <- s[, .(id, task, profile, choice, attr_jobs = jobs, attr_us_growth = us, attr_partner_growth = tp, attr_regime_economy = regime,
-           attr_global_influence = fifelse(group == 2, paste(geo, "US global political influence"), NA_character_),
-           attr_relationship = fifelse(group == 3, rel[partner + 1L], NA_character_),
+           attr_global_influence = fifelse(group == 2, paste(geo, "US global political influence"), "(not shown)"),
+           attr_relationship = fifelse(group == 3, rel[partner + 1L], "(not shown)"),
            trial_arm = c("control", "global_influence", "political_relations")[group],
            cov_age = age, cov_race = race, cov_male = male, cov_attention_check1 = at1, cov_attention_check2 = at2)]
+stopifnot(!anyNA(d[, grep("^attr_", names(d)), with = FALSE]))
 stopifnot(d[, sum(choice), .(id, task)][, all(V1 == 1)], d[, uniqueN(trial_arm), id][, all(V1 == 1)])
 setorder(d, id, task, profile)
 fwrite(d, file.path(out, "digiuseppe_2018_trade_agreements.csv"))

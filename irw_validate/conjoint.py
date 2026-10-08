@@ -30,6 +30,8 @@ NAMED = {"id", "task", "profile", "choice", "rating", "rt", "date", "wave", "tre
 PREFIXES = ("attr_", "attrpos_", "cov_", "trial_", "choice_", "rating_")
 OUTCOME = re.compile(r"^(choice|rating)(_.+)?$")
 CHOICE = re.compile(r"^choice(_.+)?$")
+#: The reserved attr_ value for an attribute the design left off a profile (data/conjoint/README.md).
+NOT_SHOWN = "(not shown)"
 #: Column names that usually mean an identifier or a location was kept. A hint,
 #: not a rule: the README's intake rules say to strip these at ingest.
 PII = re.compile(r"(^|_)(ip(_?address)?|lat(itude)?|lon(gitude)?|lng|gps|prolific(_?id)?|"
@@ -109,6 +111,22 @@ def validate_conjoint_frame(df, *, label: str = "") -> Report:
         out.append(_f("conj_attributes", "error", f"[J4] attr_ column(s) entirely missing: {', '.join(empty)}",
                       table, tuple(empty)))
     import pandas as pd
+    # A profile without an attribute is the reserved text NOT_SHOWN, never a blank:
+    # a blank cannot say whether the design hid the attribute or the source lost it.
+    blank = [c for c in attrs if c not in empty and df[c].isna().any()]
+    if blank:
+        out.append(_f("conj_attributes", "error",
+                      f"[J4] blank attr_ cell(s) in {', '.join(blank)}: an attribute left off a profile by "
+                      f"design is the text '{NOT_SHOWN}'; a level missing in the source means dropping that task",
+                      table, tuple(blank)))
+    def _variant(col):
+        v = df[col].dropna().astype(str)
+        return (v.str.contains(r"not\s*(?:shown|displayed)", case=False) & (v != NOT_SHOWN)).any()
+    variant = [c for c in attrs if c not in empty and not pd.api.types.is_numeric_dtype(df[c]) and _variant(c)]
+    if variant:
+        out.append(_f("conj_attributes", "warn",
+                      f"[J4] attr_ column(s) with a 'not shown' variant: {', '.join(variant)}; the reserved text is "
+                      f"exactly '{NOT_SHOWN}'", table, tuple(variant)))
     coded = [c for c in attrs if c not in empty and pd.api.types.is_numeric_dtype(df[c])
              and df[c].dropna().nunique() > 1 and (df[c].dropna() % 1 == 0).all()
              and df[c].dropna().max() <= 20]
@@ -148,7 +166,9 @@ def validate_conjoint_file(path, *, label: str | None = None) -> Report:
     path = Path(path)
     if not path.is_file():
         raise FileNotFoundError(path)
-    df = pd.read_csv(path, low_memory=False)
+    # Only an empty cell is missing: "None" and "NA" are displayed levels in some designs
+    # (no sanctions, no scandal), and pandas would otherwise read them as missing.
+    df = pd.read_csv(path, low_memory=False, keep_default_na=False, na_values=[""])
     return validate_conjoint_frame(df, label=label or str(path))
 
 

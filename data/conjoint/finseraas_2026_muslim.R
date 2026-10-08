@@ -15,7 +15,7 @@
 ##    probability to five arms (trial_arm, source `group`): 1 baseline only, 2 + party label,
 ##    3 + general policy positions (urban/rural spending, Ukraine, EU), 4 + minority-rights positions
 ##    (refugees, Pride flag, discrimination law), 5 + personal characteristics (network, personal
-##    votes, social media). Stage 1 rows have trial_arm = 0. Attributes not shown in an arm are blank.
+##    votes, social media). Stage 1 rows have trial_arm = 0. Attributes not shown in an arm are "(not shown)".
 ##The source responseid restarts across the two samples (592 ids occur in both and are different
 ##people: the draft says the samples are independent), so id is re-keyed by (stage, responseid).
 ##6 tasks (source `round`) of 2 candidates (source `candidate`) per respondent; task and profile are
@@ -50,6 +50,13 @@ for (v in c("gender", "age", "occupation", "familysit", "experience", "religion"
 party <- c(Ap = "Labour Party", SV = "Socialist Left Party", Sp = "Center Party", V = "Liberal Party", H = "Conservative Party", FrP = "Progress Party")
 stopifnot(all(na.omit(s$attr_party) %in% names(party)))
 s[, attr_party := unname(party[attr_party])]
+arm <- list(`2` = "party", `3` = c("cities", "ukraine", "eu"), `4` = c("immigration", "pride", "discrimination"),
+            `5` = c("network", "persvotes", "socialmedia"))
+for (g in names(arm)) for (v in paste0("attr_", arm[[g]])) {
+  stopifnot(s[trial_arm == as.integer(g), !anyNA(get(v))], s[trial_arm != as.integer(g), all(is.na(get(v)))])
+  s[trial_arm != as.integer(g), (v) := "(not shown)"]
+}
+stopifnot(!anyNA(s[, grep("^attr_", names(s)), with = FALSE]))
 s[, `:=`(cov_age = as.numeric(k$age), cov_female = as.integer(k$female), cov_high_education = as.integer(k$highedu),
          cov_paid_work = as.integer(k$paidwork), cov_left_right = as.numeric(k$rightwing))]
 stopifnot(s[, .N, .(stage, rid)][, all(N == 12)], !anyDuplicated(s[, .(stage, rid, task, profile)]))

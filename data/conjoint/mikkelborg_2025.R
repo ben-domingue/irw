@@ -36,7 +36,7 @@
 ##Study 2 (2,000 white respondents of all parties; the paper's analyses use Democrats, cov_pid
 ##  5-7): two between-subject versions (trial_version): "Policy" shows healthcare, climate and
 ##  reparations positions; "Self-placement" shows the candidate's self-described ideology instead
-##  (the other attributes are blank). Age is stored as codes 1-5 = 44/47/50/55/58 (authors'
+##  (the other attributes are "(not shown)"). Age is stored as codes 1-5 = 44/47/50/55/58 (authors'
 ##  1_clean.R). Same six "describes" ratings as study 1 (0-1). One respondent has no answers and
 ##  is dropped: 1,999 (1,852 with cov_pid 5-7 = Table B1's white Democrats).
 ##Study 3 (273 respondents who did the conjoint first; the deposit holds only those, codebook):
@@ -67,7 +67,8 @@ a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]
 rd <- function(f) fread(file.path(raw, f), na.strings = c("", "NA"))
 fin <- function(d, name) {
   stopifnot(d[, .N, .(id, task, profile)][, all(N == 1)], d[, .N, id][, all(N == 2)],
-            d[!is.na(choice), sum(choice), id][, all(V1 == 1)], d[, uniqueN(attr_race), id][, all(V1 == 2)])
+            d[!is.na(choice), sum(choice), id][, all(V1 == 1)], d[, uniqueN(attr_race), id][, all(V1 == 2)],
+            !anyNA(d[, grep("^attr_", names(d)), with = FALSE]))
   setorder(d, id, task, profile); fwrite(d, file.path(out, paste0(name, ".csv")))
 }
 pr <- function(x) { stopifnot(x[, .N, X][, all(N == 2)]); x[, profile := seq_len(.N), X][, id := match(X, unique(X))] }
@@ -95,6 +96,11 @@ d[, `:=`(attr_race = s$race, attr_age = c("44", "47", "50", "55", "58")[s$candag
          attr_climate = s$climate, attr_reparations = s$reparations, attr_ideology = s$candselfplacement,
          trial_version = s$treat, cov_age01 = s$age, cov_female = s$female, cov_region = s$region, cov_educ = s$educ,
          cov_hhinc = s$hhinc, cov_pid = s$pid, cov_ideo = s$ideo)]
+pol <- c("attr_healthcare", "attr_climate", "attr_reparations")
+stopifnot(d[trial_version == "Policy", !anyNA(.SD) & all(is.na(attr_ideology)), .SDcols = pol],
+          d[trial_version == "Self-placement", all(is.na(unlist(.SD))) & !anyNA(attr_ideology), .SDcols = pol])
+for (v in pol) d[trial_version == "Self-placement", (v) := "(not shown)"]
+d[trial_version == "Policy", attr_ideology := "(not shown)"]
 oc <- grep("^(choice|rating_)", names(d), value = TRUE)
 d <- d[rowSums(!is.na(d[, ..oc])) > 0]
 stopifnot(uniqueN(d$id) == 1999)

@@ -26,11 +26,11 @@
 ##granted; there is no choice column. No missing answers.
 ##Attributes (attr_*, the vignette fragments as displayed, from the codebook labels):
 ##gender (man/woman; the pronoun He/She always agrees and is dropped), residency (4/6/10/20
-##years), ancestry ("and has a British parent" / "and has a British grandparent"; "(no ancestry
-##clause)" = the article's "Neither" level; source code 3, unlabelled),
+##years), ancestry ("and has a British parent" / "and has a British grandparent"; "(not shown)"
+##= no ancestry clause, the article's "Neither" level; source code 3, unlabelled),
 ##origin (10 countries), religion, english ("a basic"/"a good"/"an excellent"), occupation
 ##(9 levels), refugee ("and did not enter the country as a refugee" / "and entered the
-##country as a refugee"; "(no refugee clause)" = clause not shown, source code 3: by design only for
+##country as a refugee"; "(not shown)" = clause not shown, source code 3: by design only for
 ##Pakistan, Nigeria, Syria and Somalia).
 ##Randomization restrictions (article Table 3): refugee clause only for Pakistan, Nigeria,
 ##Syria, Somalia; Ireland and Australia always "an excellent" English; Poland never Muslim.
@@ -57,14 +57,14 @@ fixed <- list(gender = "genderage", residency = "residency", ancestry = "Britpar
 ## value labels copied from Codebook.xlsx (the .dta carries none); code 3 of ancestry and
 ## refugee is labelled "3" there, i.e. no clause shown
 labs <- list(gender = c("man", "woman"), residency = c("4 years", "6 years", "10 years", "20 years"),
-             ancestry = c("and has a British parent", "and has a British grandparent", "(no ancestry clause)"),
+             ancestry = c("and has a British parent", "and has a British grandparent", "(not shown)"),
              origin = c("Poland", "Germany", "Italy", "India", "Pakistan", "Nigeria", "Ireland", "Australia", "Syria", "Somalia"),
              religion = c("is a practising Christian", "is a practising Muslim", "does not practise any religion"),
              english = c("a basic", "a good", "an excellent"),
              occupation = c("works as a corporate manager", "works as a doctor", "works as an IT professional",
                             "works as a language teacher", "works as an admin worker", "works on a farm",
                             "works as a cleaner", "is unemployed", "is a stay at home parent"),
-             refugee = c("and did not enter the country as a refugee", "and entered the country as a refugee", "(no refugee clause)"))
+             refugee = c("and did not enter the country as a refugee", "and entered the country as a refugee", "(not shown)"))
 d <- rbindlist(lapply(1:5, function(t) rbindlist(lapply(1:2, function(p) {
   ab <- c("A", "B")[p]
   x <- data.table(id = as.integer(k$ID), task = t, profile = p,
@@ -79,8 +79,8 @@ d <- rbindlist(lapply(1:5, function(t) rbindlist(lapply(1:2, function(p) {
 }))))
 stopifnot(!anyNA(d$rating), nrow(d) == 1648 * 10)
 ## restrictions hold
-stopifnot(d[attr_refugee != "(no refugee clause)", all(attr_origin %in% c("Pakistan", "Nigeria", "Syria", "Somalia"))],
-          d[attr_refugee == "(no refugee clause)", all(!attr_origin %in% c("Pakistan", "Nigeria", "Syria", "Somalia"))],
+stopifnot(d[attr_refugee != "(not shown)", all(attr_origin %in% c("Pakistan", "Nigeria", "Syria", "Somalia"))],
+          d[attr_refugee == "(not shown)", all(!attr_origin %in% c("Pakistan", "Nigeria", "Syria", "Somalia"))],
           d[attr_origin %in% c("Ireland", "Australia"), all(attr_english == "an excellent")],
           d[attr_origin == "Poland", all(attr_religion != "is a practising Muslim")])
 ## pronoun agrees with gender

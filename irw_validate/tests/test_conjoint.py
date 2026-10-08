@@ -63,6 +63,33 @@ class ConjointTest(unittest.TestCase):
         df["attr_party"] = [1, 2] * (len(df) // 2)
         self.assertIn("conj_attributes", checks(df, "warn"))
 
+    def test_not_shown_text_is_valid(self):
+        df = table()
+        df.loc[df.profile == 2, "attr_age"] = "(not shown)"
+        self.assertEqual(checks(df, "error"), set())
+        self.assertNotIn("conj_attributes", checks(df, "warn"))
+
+    def test_a_blank_attribute_cell_is_an_error(self):
+        df = table()
+        df.loc[0, "attr_age"] = None
+        self.assertIn("conj_attributes", checks(df, "error"))
+
+    def test_a_displayed_none_level_is_not_blank(self):
+        import tempfile, os
+        from irw_validate.conjoint import validate_conjoint_file
+        df = table()
+        df["attr_age"] = ["None", "45"] * (len(df) // 2)
+        with tempfile.TemporaryDirectory() as d:
+            p = os.path.join(d, "smith_2024_candidates.csv")
+            df.to_csv(p, index=False)
+            r = validate_conjoint_file(p)
+        self.assertEqual({f.check for f in r.findings if f.severity == "error"}, set())
+
+    def test_a_not_shown_variant_warns(self):
+        df = table()
+        df.loc[df.profile == 2, "attr_age"] = "Not shown"
+        self.assertIn("conj_attributes", checks(df, "warn"))
+
     def test_identifier_column_names_warn(self):
         self.assertIn("conj_pii_hint", checks(table(cov_ip_address="1.2.3.4"), "warn"))
 

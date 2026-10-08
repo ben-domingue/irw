@@ -23,7 +23,7 @@
 ##Cultural values adds gender-role and same-sex-marriage attitudes; Norm compliance adds
 ##undeclared work and welfare/work status; Full information adds all six; Placebo adds pet,
 ##nature, colour, exercise, drink and TV preferences. Attributes not shown in a condition are
-##blank. The author pools conditions in some models (Figures 4, 6, 7), so one table.
+##"(not shown)". The author pools conditions in some models (Figures 4, 6, 7), so one table.
 ##attr_name is the first name shown (36 male names, 18 Danish and 18 Middle Eastern, from the
 ##Stata labels of names_all; that label set stores "Søren" as a Latin-1 byte, re-encoded
 ##to UTF-8; only strings that are not valid UTF-8 are touched).
@@ -71,6 +71,16 @@ d <- data.table(id = match(k$caseid, ids), task = z(k$round), profile = z(k$play
 stopifnot(d[, all(profile %in% 1:3)], d[, .N, .(id, task)][, all(N == 3)], d[, sum(choice), .(id, task)][, all(V1 == 1)],
           d[, all(rating %in% 0:10)], uniqueN(d$id) == 4368, uniqueN(d$attr_name) == 36, "Søren" %in% d$attr_name)
 stopifnot(d[, uniqueN(attr_name_origin), attr_name][, all(V1 == 1)])
+shown <- list(attr_education = c("Socio-economy", "Full information"), attr_residence = c("Socio-economy", "Full information"),
+              attr_gender_roles = c("Cultural values", "Full information"), attr_homosexual_marriage = c("Cultural values", "Full information"),
+              attr_undeclared_work = c("Norm compliance", "Full information"), attr_work_status = c("Norm compliance", "Full information"))
+for (v in c("attr_pets", "attr_nature", "attr_color", "attr_exercise", "attr_drinks", "attr_tv")) shown[[v]] <- "Placebo"
+stopifnot(all(unlist(shown) %in% d$trial_information))
+for (v in names(shown)) {
+  stopifnot(d[trial_information %in% shown[[v]], !anyNA(get(v))], d[!trial_information %in% shown[[v]], all(is.na(get(v)))])
+  d[!trial_information %in% shown[[v]], (v) := "(not shown)"]
+}
+stopifnot(!anyNA(d[, grep("^attr_", names(d)), with = FALSE]))
 for (v in c("party_vote", "res", "welfare", "undeclared", "homo", "gender_role", "age", "region", "edu", "personal_income",
             "household_income", "occupation", "Pol_interest", "rel", "gender"))
   d[, paste0("cov_", tolower(v)) := z(k[[paste0("r_", v)]])]

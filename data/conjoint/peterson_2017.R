@@ -11,7 +11,8 @@
 ##1,059 US respondents, all Democrats or Republicans (party.id), 3 tasks (choice.task.number,
 ##RECORDED) x 2 candidates (candidate.order, RECORDED). Each task showed the candidates' party
 ##plus 1, 3, 5, 7 or 9 of nine further attributes (trial_information_condition = how many; it
-##varies across a respondent's tasks); an attribute not shown is blank (source "NOT.SEEN").
+##varies across a respondent's tasks); an attribute not shown is the text "(not shown)" (source
+##"NOT.SEEN").
 ##attr_party is NOT in the file: it is rebuilt from the authors' copartisan flag and the
 ##respondent's party (copartisan = 1 -> the respondent's party, 0 -> the other one), stored as
 ##"Democrat"/"Republican"; the exact party wording on screen is not documented (the same
@@ -40,7 +41,7 @@ stopifnot(s[is.na(information.condition), .N] == 108)
 s <- s[drop == FALSE]
 other <- c(Democrat = "Republican", Republican = "Democrat")
 s[, attr_party := fifelse(copartisan == 1, party.id, other[party.id])]
-ns <- function(x) { x <- as.character(x); x[x == "NOT.SEEN"] <- ""; x }
+ns <- function(x) { x <- as.character(x); x[x == "NOT.SEEN"] <- "(not shown)"; x }
 d <- s[, .(id, task = as.integer(choice.task.number), profile = as.integer(candidate.order), choice = as.integer(chosen.candidate),
            attr_party, attr_gender = ns(gender.candidate), attr_profession = ns(profession.candidate), attr_age = ns(age.candidate),
            attr_family_status = ns(family.status.candidate), attr_race = ns(race.candidate),
@@ -49,7 +50,8 @@ d <- s[, .(id, task = as.integer(choice.task.number), profile = as.integer(candi
            trial_information_condition = as.integer(information.condition),
            cov_party = party.id, cov_abortion_opinion = abortion.opinion, cov_spending_opinion = spending.opinion)]
 a9 <- grep("^attr_", names(d), value = TRUE)[-1]
-stopifnot(d[, rowSums(.SD != "") == trial_information_condition, .SDcols = a9],
+stopifnot(d[, rowSums(.SD != "(not shown)") == trial_information_condition, .SDcols = a9],
+          !d[, any(.SD == "" | is.na(.SD)), .SDcols = c("attr_party", a9)],
           d[, sum(choice), .(id, task)][, all(V1 == 1)], d[, .N, .(id, task)][, all(N == 2)])
 setorder(d, id, task, profile)
 fwrite(d, file.path(out, "peterson_2017_information_environment.csv"))
