@@ -17882,3 +17882,9 @@ proceeds, and the output keeps birth year or age only, never the month. RMUJNX i
 on other grounds (no codebook for its 19 job-satisfaction items). The four data-noted tables
 (gunandran, sanz_martos, fischer, vasquez) ship as they are. Third-party panel re-deposits
 (KLIPS, TEDS) stay rejected (ruled the same day).
+
+## 2026-10-09e — Published
+
+Ben published the drafts on 2026-10-09: 218 tables in `item_response_warehouse_5` and 27 item
+text tables in `irw_text_3`. He merged #2926 and datapages/irw#338 (7 issues-page entries). The
+remaining open item is the covariate-label build after the next pipeline run (TODO.md).

@@ -5,13 +5,7 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
 ## From the 2026-10-08 repos mode-3 discovery (15 new terms x 9 languages)
 
-- [ ] **28 tables + 10 item text tables uploaded as DRAFTS 2026-10-09** (Claude, on Ben's
-  instruction): `item_response_warehouse_5` and `irw_text_3` need publishing. Issues-page
-  entry for buzzi_2025_autonomy is datapages/irw#338.
 - Ruled 2026-10-09 (ben-domingue): the five decisions on the 2026-10-09 batch stand (karrot split, CAQ as one table, CYRM-12 item text held, AMTB item text shipped, bland/nguyen block-based constructs).
-- [ ] **190 more tables + 17 item text tables uploaded as DRAFTS 2026-10-09** (Claude, on Ben's
-  instruction) to `item_response_warehouse_5` / `irw_text_3`; need publishing. Issues-page entries
-  (buzzi + purnama x6) are datapages/irw#338.
 - [ ] **Covariate labels: harvested 2026-10-09** at 54cacc4b for 20 scripts (abu_tabar_2021_copd,
   blumel_2018_mrs, wang_2026_moral_models_psm, nicholson_crotty_2021_psm, favero_2020_covid_prosocial,
   mullinix_2015_political_knowledge, dey_2017_mistreatment_childbirth, sadish_2021_covid_beliefs,
