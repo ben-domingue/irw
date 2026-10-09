@@ -3,6 +3,14 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## From the 2026-10-08 repos mode-3 discovery (15 new terms x 9 languages)
+
+- [ ] **123 unworked leads** in `leads/repos_leads_2026-10-08.csv` (13 `good`). Discovery and
+  triage only. No processing has started.
+- [ ] The Canada GSS 2010 files (`10.5683/sp3/uxz4it`, `sp3/a6dbgs`) and `10.7910/dvn/crpaa8`
+  OOM at 6G every run and are never written to the seen ledger. Add them to the ledger as
+  `file_too_large` (or equivalent) so they stop resurfacing.
+
 ## From the 2026-10-07 repos mode-3 batch (15 new terms x 9 languages)
 
 - [x] **168 tables (1,897,483 responses) + 37 item text tables uploaded** (ben-domingue,

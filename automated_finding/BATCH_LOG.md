@@ -17751,3 +17751,40 @@ ben-domingue confirmed the 37 item text tables uploaded. `uploaded=2026-10-07` i
 on those 37 rows in `itemtext_provenance.csv` and `itemtext/mapping_verification.csv`.
 `red_up` now defaults new response data to `item_response_warehouse_5` (`CORE_DEFAULT` in
 `red_up/targets.py`), because shard 6 is near the 1,000-table cap.
+
+## 2026-10-08 — Repos mode-3 discovery + triage: 15 new terms x 9 languages, 1,654 candidates, 13 good, 123 leads
+
+Discovery and triage only. No scripts written, nothing staged, nothing uploaded.
+
+**Terms (new to `search_terms_log.csv`, each in English + es/de/fr/zh/ja/ar/nl/ko,
+135 queries):** acceptance and action questionnaire, achievement goal questionnaire,
+beck anxiety inventory, science motivation questionnaire, nature relatedness scale,
+information literacy test, EQ-5D, white bear suppression inventory, pediatric quality of
+life inventory, cannabis use disorders identification test, diabetes distress scale, fear
+of childbirth questionnaire, menopause rating scale, brief self-control scale, thought
+control questionnaire.
+
+- **Discovery:** 1,654 candidates (dataverse 446, zenodo 436, figshare 297, surf 236,
+  scholars_portal 128, datacite 79, mendeley 28, dryad 2, **osf 0**).
+- **Triage** (`--retriage`, 6G cap; no `--limit 10` sanity run): 937 triaged after the seen
+  ledger: `no_usable_file` 371, `human_assistance` 302, `download_failed` 133,
+  `below_min_n` 50, `not_item_response` 39, `error` 15, **`good` 13**,
+  `license_restricted` 6, `pii_suspected` 5, `file_too_large` 3.
+  **Two OOM kills again on the same files as 2026-10-07:** Canada GSS 2010 cycle 24
+  (`10.5683/sp3/uxz4it`; its sibling episode file `sp3/a6dbgs` was dropped with it) and
+  `10.7910/dvn/crpaa8` (ACS housing). All three were dropped from the candidate list and
+  remain untriaged and out of the seen ledger, so they will resurface in every future run.
+- **Step 2b ran** (chained): 302 HA -> recoverable_format 119, not_item_response 95,
+  worth_retrying 46, human_review 25, aggregate_continuous 17. No conjoints routed.
+  `[human_review] archived 25 row(s) -> human_review/human_review_zenodo_2026-10-08.csv`.
+- **Leads -> `leads/repos_leads_2026-10-08.csv`** (123 rows, all `unworked`: the 13 good,
+  plus every licence-ok worth_retrying/recoverable_format row with 100 <= N <= 50,000 and
+  8-700 items). The 13 good include Creative Achievement Questionnaire (DVN/2IBBMG,
+  5,650 x 140), public service motivation + moral foundations (DVN/MHVAJZ, 544 x 108),
+  Vietnamese teacher motivation (DVN/7IZW37), Chilean EFL motivation (DVN/KOQP5C) and
+  Karrot market (DVN/HPJFSD). Two of them are under the 8-item floor (EQ-5D-5L Morocco,
+  6 items; DVN/JXWDRA, 6 items). Larger recoverable leads include EQ-5D valuation
+  sets (zenodo 5109908/5109944, figshare 33937120; probably preference data, not item
+  responses), PROMIS-29 + EQ-5D (DVN/FNYYQR, 4,512 x 63), DFAQ-CU (PLOS 0178194,
+  2,062 x 42), competitive achievement goals (figshare 32599122, 1,883 x 111), and a Dutch
+  oral-language assessment (DANS xjd-rgey, 2,324 x 114).
