@@ -17821,3 +17821,55 @@ codebook nor study); mendeley mtm2hbmwky (no multi-item instrument).
 `mapping_verification.csv` rows (NOT_NEEDED, data_labels); 16 `metadata/data_notes.csv` rows.
 Item text `uploaded=2026-10-09` stamped. Issues page: `buzzi_2025_autonomy` only
 (datapages/irw#338). No covariate-label harvest owed (no .sav/.dta sources).
+
+## 2026-10-09b — rulings on the 2026-10-09 batch
+
+ben-domingue accepted all five: kim_2025_karrot attitude/behaviour split as shipped,
+zabelina_2022_caq as one table, CYRM-12 item text held, AMTB item text shipped, and the
+block-based constructs for bland_2024/nguyen_2024.
+
+## 2026-10-09c — The other 110 leads from 2026-10-08: 49 deposits / 190 tables / 1,123,925 responses, 17 item text tables
+
+Two processing agents (A2: 59 leads, B2: 51). Every lead now has a status in
+`leads/repos_leads_2026-10-08.csv`: 58 shipped (incl. the 7 from 2026-10-09 and duplicates
+of shipped deposits), 51 rejected on content, 12 PII skips, 2 below N. No licence blocks.
+Uploaded by Claude on ben-domingue's instruction to `item_response_warehouse_5` /
+`irw_text_3` as drafts; files moved to `runs/uploaded_2026-10-09c/`.
+
+**A2 (25 deposits, 82 tables):** liu_2026_competitive_goals (5), abu_tabar_2021_copd (2),
+vilela_estrada_2025_hads, sejna_2025_school_anxiety (3), blumel_2018_mrs, tian_2025_poms_diary
+(6, 7-day waves), babenko_2018_medical_students (5), chen_2026_loneliness_social_anxiety
+(`chen_2026_clubs_*`, 4; `chen_2026_social_anxiety` was already published from DVN/QS5D8C),
+chen_2025_phone_addiction (2), chen_2024_learning_motivation (4), wang_2026_moral_models_psm (8),
+nicholson_crotty_2021_psm, favero_2020_covid_prosocial (3, item text from the .qsf),
+leis_2025_english_motivation (item text), ghasemy_2021_polytechnic_leadership (`ghasemy_2021_poly_*`,
+4), fatimah_2026_green_hrm (6), halim_2025_digital_finance (7), mullinix_2015_political_knowledge,
+zhang_2025_schistosomiasis_kap (3), dey_2017_mistreatment_childbirth (2), sadish_2021_covid_beliefs,
+prilyasinta_2026_balinese_motivation (6, item text), khan_2023_ethical_leadership (3),
+garcia_ull_2026_confinement (3).
+
+**B2 (24 deposits, 108 tables):** fischer_2018_promis29 (8), wolbers_2017_oral_language (13),
+cuttler_2017_cannabis (6; DFAQ-CU item text), holzknecht_2022_listening, zhou_2024_eq5dy_covid (5,
+waved; Mendeley t98vt5yg8v is the same data, paper 10.1007/s40273-025-01473-4),
+ghasemy_2021_academics (3), purnama_2023_dengue (6, item text), galindo_2025_chatgpt_dependence (5),
+lin_2023_smartphone_addiction (4), ghasemy_2020_servant_leadership (4), beza_2017_citizen_science,
+elson_2024_tungiasis_qol (2), wenzke_2025_carbon_offsetting (9), zhang_2025_stress_mindset (5),
+chen_2026_entrepreneurship (3), lei_2024_learning_motivation (4), salomon_2014_essentialism (9),
+rogowska_2025_achievement_goals (7), rodriguez_lima_2023_eq5d3l, leis_2025_efl_confidence (5),
+gunandran_2023_whoqol_bref, sanz_martos_2024_stai (2, baseline only), arista_2010_achievement_motivation,
+vasquez_2013_reading_comprehension. The Frontiers .s001 lead was already in IRW as gan_2024_*.
+
+All 190 pass `run_qc` (no fail) and `irw-validate --profile upload`. 17 item text tables pass
+every gate; 7 issues-page entries (buzzi + purnama x6) in datapages/irw#338. Three EQ-5D DCE
+valuation deposits (zenodo 5109908, 5109944, 5115949) were routed to `data/conjoint/candidates.csv`
+as todo. Dryad file downloads 403 to scripts (Anubis); B2 fetched via headless Chrome, and the beza
+and purnama scripts stop with instructions if the file is not placed by hand.
+
+**Skips:** PII: XOPDQ5, SWV9GJ (IPs), OLKE5F (street letters + birth year), RMUJNX (birth
+month/year), QIEEJU + 1IWRQA (RAPID: ZIP + birth year + county), zenodo 20838 (names), GE9SKV
+(email), zenodo 15386134 (birthdates), KJKXEB (names in free text). Content: scores/composites
+only, non-respondent panels, experiment manipulation checks, third-party re-deposits (KLIPS
+RWPOMI, TEDS QIGM1P), valuation data, unmappable item blocks; details in the leads file notes.
+
+**Staged:** 190 rows each in `dictionary_auto.csv`, `codebook_at_ingest.csv`, `tags/tags_auto.csv`,
+`itemtext_provenance.csv`; 17 `mapping_verification.csv` rows; 80 `metadata/data_notes.csv` rows.
