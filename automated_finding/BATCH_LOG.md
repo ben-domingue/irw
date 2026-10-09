@@ -17859,6 +17859,8 @@ only.
 this run's own Step 2b but was **not** pushed anywhere — it fell outside this run's task
 prompt's explicit "push only these two files to main" / "commit only the candidates CSV
 to the branch" scope, and the permission layer that enforces the latter declined a
-same-shaped push of a third file. It is flagged in this PR's description for
-ben-domingue's attention; without a follow-up commit it will not survive this
-container.
+same-shaped push of a third file (tried both as a direct push to main and as an addition
+to this branch). Rather than leave it stranded on disk, it was deleted: all 5 DOIs are
+already in `plos_seen_dois.csv` (pushed to main, so the dedup purpose is unaffected) and
+the row detail is captured above, so nothing is lost. A human-readable `human_review/*.csv`
+for this batch can be regenerated from this entry if still wanted.

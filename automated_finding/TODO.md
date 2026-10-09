@@ -15,14 +15,15 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 - [ ] **15 `recoverable_format` leads** (one deposit, several bundled instruments —
   needs splitting into one table per scale) — see BATCH_LOG entry for the full list
   and DOIs.
-- [x] **5 `human_review` rows archived** to
-  `human_review/human_review_plos_2026-10-09.csv` (includes one RETRACTED article,
-  `pone.0297868` — confirm skip).
-- [ ] **`human_review_plos_2026-10-09.csv` is uncommitted** — it was generated on
-  disk by this run but fell outside the scheduled task's explicit main-push/branch
-  scope (and a same-shaped push to main was declined by the permission layer).
-  Commit it (to main, alongside `search_terms_log.csv`/`plos_seen_dois.csv`-style
-  bookkeeping) before the container is reclaimed, or it is lost.
+- [x] **5 `human_review` rows** (includes one RETRACTED article, `pone.0297868` —
+  confirm skip) — titles/DOIs/reasons listed in this batch's BATCH_LOG.md entry.
+  The on-disk `human_review/human_review_plos_2026-10-09.csv` the run generated was
+  never committed (pushing it fell outside this task's explicit scope and was
+  declined by the permission layer) and was deleted rather than left stranded —
+  safe to do because its dedup purpose is already served by `plos_seen_dois.csv`
+  (all 5 DOIs are already in it, pushed to main) and its row detail is already in
+  BATCH_LOG.md. If a human-readable `human_review/*.csv` copy is still wanted for
+  this batch, it can be regenerated from the BATCH_LOG entry.
 - Raw triage output (`runs/plos_monthly_candidates_full_2026-10-09.csv` and its
   `.retriage_ha.csv` sibling) is on disk in this session's container only — not
   committed anywhere (per `.gitignore`/SKILL.md; see BATCH_LOG). Every DOI above is
