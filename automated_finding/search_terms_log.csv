@@ -9250,6 +9250,7 @@ date,query,output_file,notes
 2026-10-07,اختبار الجبر,runs/repos_triage_2026-10-07.csv,"repos mode-3 batch 2026-10-07 (15 new English instrument terms x 9 languages; ar); 1708 candidates, surf searched (240 hits); 2 OOM skips"
 2026-10-07,algebratoets,runs/repos_triage_2026-10-07.csv,"repos mode-3 batch 2026-10-07 (15 new English instrument terms x 9 languages; nl); 1708 candidates, surf searched (240 hits); 2 OOM skips"
 2026-10-07,대수 검사,runs/repos_triage_2026-10-07.csv,"repos mode-3 batch 2026-10-07 (15 new English instrument terms x 9 languages; ko); 1708 candidates, surf searched (240 hits); 2 OOM skips"
+2026-10-09,[full] 125 terms x journals=plosone,runs/plos_monthly_candidates_full_2026-10-09.csv,plos monthly-script automated run; mode=full; 121 candidates triaged; 125/125 terms visited (121 hit per-term cap 1)
 2026-10-08,acceptance and action questionnaire,runs/repos_triage_2026-10-08.csv,"repos mode-3 batch 2026-10-08 (15 new English instrument terms x 9 languages; en); 1654 candidates, osf 0 hits; 2 OOM kills, 3 rows dropped"
 2026-10-08,cuestionario de aceptación y acción,runs/repos_triage_2026-10-08.csv,"repos mode-3 batch 2026-10-08 (15 new English instrument terms x 9 languages; es); 1654 candidates, osf 0 hits; 2 OOM kills, 3 rows dropped"
 2026-10-08,Fragebogen zu Akzeptanz und Handeln,runs/repos_triage_2026-10-08.csv,"repos mode-3 batch 2026-10-08 (15 new English instrument terms x 9 languages; de); 1654 candidates, osf 0 hits; 2 OOM kills, 3 rows dropped"
