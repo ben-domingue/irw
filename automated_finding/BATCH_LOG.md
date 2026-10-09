@@ -17751,3 +17751,134 @@ ben-domingue confirmed the 37 item text tables uploaded. `uploaded=2026-10-07` i
 on those 37 rows in `itemtext_provenance.csv` and `itemtext/mapping_verification.csv`.
 `red_up` now defaults new response data to `item_response_warehouse_5` (`CORE_DEFAULT` in
 `red_up/targets.py`), because shard 6 is near the 1,000-table cap.
+
+## 2026-10-08 — Repos mode-3 discovery + triage: 15 new terms x 9 languages, 1,654 candidates, 13 good, 123 leads
+
+Discovery and triage only. No scripts written, nothing staged, nothing uploaded.
+
+**Terms (new to `search_terms_log.csv`, each in English + es/de/fr/zh/ja/ar/nl/ko,
+135 queries):** acceptance and action questionnaire, achievement goal questionnaire,
+beck anxiety inventory, science motivation questionnaire, nature relatedness scale,
+information literacy test, EQ-5D, white bear suppression inventory, pediatric quality of
+life inventory, cannabis use disorders identification test, diabetes distress scale, fear
+of childbirth questionnaire, menopause rating scale, brief self-control scale, thought
+control questionnaire.
+
+- **Discovery:** 1,654 candidates (dataverse 446, zenodo 436, figshare 297, surf 236,
+  scholars_portal 128, datacite 79, mendeley 28, dryad 2, **osf 0**).
+- **Triage** (`--retriage`, 6G cap; no `--limit 10` sanity run): 937 triaged after the seen
+  ledger: `no_usable_file` 371, `human_assistance` 302, `download_failed` 133,
+  `below_min_n` 50, `not_item_response` 39, `error` 15, **`good` 13**,
+  `license_restricted` 6, `pii_suspected` 5, `file_too_large` 3.
+  **Two OOM kills again on the same files as 2026-10-07:** Canada GSS 2010 cycle 24
+  (`10.5683/sp3/uxz4it`; its sibling episode file `sp3/a6dbgs` was dropped with it) and
+  `10.7910/dvn/crpaa8` (ACS housing). All three were dropped from the candidate list and
+  remain untriaged and out of the seen ledger, so they will resurface in every future run.
+- **Step 2b ran** (chained): 302 HA -> recoverable_format 119, not_item_response 95,
+  worth_retrying 46, human_review 25, aggregate_continuous 17. No conjoints routed.
+  `[human_review] archived 25 row(s) -> human_review/human_review_zenodo_2026-10-08.csv`.
+- **Leads -> `leads/repos_leads_2026-10-08.csv`** (123 rows, all `unworked`: the 13 good,
+  plus every licence-ok worth_retrying/recoverable_format row with 100 <= N <= 50,000 and
+  8-700 items). The 13 good include Creative Achievement Questionnaire (DVN/2IBBMG,
+  5,650 x 140), public service motivation + moral foundations (DVN/MHVAJZ, 544 x 108),
+  Vietnamese teacher motivation (DVN/7IZW37), Chilean EFL motivation (DVN/KOQP5C) and
+  Karrot market (DVN/HPJFSD). Two of them are under the 8-item floor (EQ-5D-5L Morocco,
+  6 items; DVN/JXWDRA, 6 items). Larger recoverable leads include EQ-5D valuation
+  sets (zenodo 5109908/5109944, figshare 33937120; probably preference data, not item
+  responses), PROMIS-29 + EQ-5D (DVN/FNYYQR, 4,512 x 63), DFAQ-CU (PLOS 0178194,
+  2,062 x 42), competitive achievement goals (figshare 32599122, 1,883 x 111), and a Dutch
+  oral-language assessment (DANS xjd-rgey, 2,324 x 114).
+
+## 2026-10-09 — The 13 good leads from 2026-10-08: 7 deposits / 28 tables / 489,330 responses, 10 item text tables, uploaded
+
+Coordinator plus two processing agents (A: 7 deposits, B: 6). Uploaded by Claude on
+ben-domingue's instruction: 28 response tables to `item_response_warehouse_5`, then 10 item
+text tables to `irw_text_3`. Both are drafts, row-count verified by `red_up`; Ben publishes.
+Files moved to `runs/uploaded_2026-10-09/` so they cannot be re-uploaded.
+
+| deposit | script | tables | item text |
+|---|---|---|---|
+| DVN/2IBBMG (CAQ) | zabelina_2022_caq.py | 1 (5,395 x 81) | not shipped: no labels; wording in PsyArXiv h2rp8 appendix pp. 47-56, needs Step 5b |
+| DVN/HPJFSD (Karrot) | kim_2025_karrot.py | 6 (450 x 2-5, 1-7) | not shipped: q-numbers don't follow S1's numbering |
+| DVN/KOQP5C (AMTB, Chile) | moreno_jorquera_2025_amtb.py | 9 (136 x 4-6, 1-7) | 9 shipped: Spanish headers, English from article Table 17 (43/43 item means match) |
+| mendeley kfk5j9g4xc | azizi_2023_eq5d5l.py | 1 (213 x 5) | blocked (EQ-5D rights) |
+| DVN/7IZW37 (Vietnam CPD) | nguyen_2024_cpd.py | 4 (390 x 5-12, 1-6) | not shipped: no labels, no questionnaire |
+| DVN/MHVAJZ (Bland) | bland_2024_prosocial_default.py | 5 (MFQ-20, GCOS x3, PSM; 544) | not shipped: positional; GCOS blocked (CSDT) |
+| zenodo 15305238 (Buzzi) | buzzi_2025_students_covid.py | autonomy 145 x 4, cyrm12 145 x 12 | autonomy shipped (IRW English); CYRM-12 held for rights |
+
+All 28 pass `run_qc` (no fail) and `irw-validate --profile upload`. Item text passes
+`normalize_nulls.R`, `validate_items.R --resp-csv`, `audit_batch.R`, `irw-validate`,
+`check_provenance.R`. `CAad8` (CAQ) has no endorsements in 5,395 respondents; shipped.
+
+**Skipped (6):** DVN/JXWDRA (Qualtrics IPAddress column, PII; actually ~70 items, not 6);
+zenodo 21120591 (respondent names, PII); DVN/JSBBMR (looks randomly generated: uniform items,
+r ~ 0, templated interview quotes); zenodo 16813728 (undocumented 0/1/2 recode, N exactly
+100, corrupted mean column); zenodo 22088275 (FO3 = OE4 cell for cell, headers match neither
+codebook nor study); mendeley mtm2hbmwky (no multi-item instrument).
+
+**Staged:** 28 rows each in `dictionary_auto.csv`, `codebook_at_ingest.csv`,
+`tags/tags_auto.csv` (`test_tags_union.R` passes) and `itemtext_provenance.csv`; 10
+`mapping_verification.csv` rows (NOT_NEEDED, data_labels); 16 `metadata/data_notes.csv` rows.
+Item text `uploaded=2026-10-09` stamped. Issues page: `buzzi_2025_autonomy` only
+(datapages/irw#338). No covariate-label harvest owed (no .sav/.dta sources).
+
+## 2026-10-09b — rulings on the 2026-10-09 batch
+
+ben-domingue accepted all five: kim_2025_karrot attitude/behaviour split as shipped,
+zabelina_2022_caq as one table, CYRM-12 item text held, AMTB item text shipped, and the
+block-based constructs for bland_2024/nguyen_2024.
+
+## 2026-10-09c — The other 110 leads from 2026-10-08: 49 deposits / 190 tables / 1,123,925 responses, 17 item text tables
+
+Two processing agents (A2: 59 leads, B2: 51). Every lead now has a status in
+`leads/repos_leads_2026-10-08.csv`: 58 shipped (incl. the 7 from 2026-10-09 and duplicates
+of shipped deposits), 51 rejected on content, 12 PII skips, 2 below N. No licence blocks.
+Uploaded by Claude on ben-domingue's instruction to `item_response_warehouse_5` /
+`irw_text_3` as drafts; files moved to `runs/uploaded_2026-10-09c/`.
+
+**A2 (25 deposits, 82 tables):** liu_2026_competitive_goals (5), abu_tabar_2021_copd (2),
+vilela_estrada_2025_hads, sejna_2025_school_anxiety (3), blumel_2018_mrs, tian_2025_poms_diary
+(6, 7-day waves), babenko_2018_medical_students (5), chen_2026_loneliness_social_anxiety
+(`chen_2026_clubs_*`, 4; `chen_2026_social_anxiety` was already published from DVN/QS5D8C),
+chen_2025_phone_addiction (2), chen_2024_learning_motivation (4), wang_2026_moral_models_psm (8),
+nicholson_crotty_2021_psm, favero_2020_covid_prosocial (3, item text from the .qsf),
+leis_2025_english_motivation (item text), ghasemy_2021_polytechnic_leadership (`ghasemy_2021_poly_*`,
+4), fatimah_2026_green_hrm (6), halim_2025_digital_finance (7), mullinix_2015_political_knowledge,
+zhang_2025_schistosomiasis_kap (3), dey_2017_mistreatment_childbirth (2), sadish_2021_covid_beliefs,
+prilyasinta_2026_balinese_motivation (6, item text), khan_2023_ethical_leadership (3),
+garcia_ull_2026_confinement (3).
+
+**B2 (24 deposits, 108 tables):** fischer_2018_promis29 (8), wolbers_2017_oral_language (13),
+cuttler_2017_cannabis (6; DFAQ-CU item text), holzknecht_2022_listening, zhou_2024_eq5dy_covid (5,
+waved; Mendeley t98vt5yg8v is the same data, paper 10.1007/s40273-025-01473-4),
+ghasemy_2021_academics (3), purnama_2023_dengue (6, item text), galindo_2025_chatgpt_dependence (5),
+lin_2023_smartphone_addiction (4), ghasemy_2020_servant_leadership (4), beza_2017_citizen_science,
+elson_2024_tungiasis_qol (2), wenzke_2025_carbon_offsetting (9), zhang_2025_stress_mindset (5),
+chen_2026_entrepreneurship (3), lei_2024_learning_motivation (4), salomon_2014_essentialism (9),
+rogowska_2025_achievement_goals (7), rodriguez_lima_2023_eq5d3l, leis_2025_efl_confidence (5),
+gunandran_2023_whoqol_bref, sanz_martos_2024_stai (2, baseline only), arista_2010_achievement_motivation,
+vasquez_2013_reading_comprehension. The Frontiers .s001 lead was already in IRW as gan_2024_*.
+
+All 190 pass `run_qc` (no fail) and `irw-validate --profile upload`. 17 item text tables pass
+every gate; 7 issues-page entries (buzzi + purnama x6) in datapages/irw#338. Three EQ-5D DCE
+valuation deposits (zenodo 5109908, 5109944, 5115949) were routed to `data/conjoint/candidates.csv`
+as todo. Dryad file downloads 403 to scripts (Anubis); B2 fetched via headless Chrome, and the beza
+and purnama scripts stop with instructions if the file is not placed by hand.
+
+**Skips:** PII: XOPDQ5, SWV9GJ (IPs), OLKE5F (street letters + birth year), RMUJNX (birth
+month/year), QIEEJU + 1IWRQA (RAPID: ZIP + birth year + county), zenodo 20838 (names), GE9SKV
+(email), zenodo 15386134 (birthdates), KJKXEB (names in free text). Content: scores/composites
+only, non-respondent panels, experiment manipulation checks, third-party re-deposits (KLIPS
+RWPOMI, TEDS QIGM1P), valuation data, unmappable item blocks; details in the leads file notes.
+
+**Staged:** 190 rows each in `dictionary_auto.csv`, `codebook_at_ingest.csv`, `tags/tags_auto.csv`,
+`itemtext_provenance.csv`; 17 `mapping_verification.csv` rows; 80 `metadata/data_notes.csv` rows.
+
+## 2026-10-09d — Rulings on the 2026-10-09c batch
+
+Ben ruled: a 5-digit ZIP with birth year is PII, so the RAPID Louisiana panel (DVN/QIEEJU,
+DVN/1IWRQA) stays skipped. Birth month + year without day is not a birthdate: such a deposit
+proceeds, and the output keeps birth year or age only, never the month. RMUJNX is still skipped
+on other grounds (no codebook for its 19 job-satisfaction items). The four data-noted tables
+(gunandran, sanz_martos, fischer, vasquez) ship as they are. Third-party panel re-deposits
+(KLIPS, TEDS) stay rejected (ruled the same day).
