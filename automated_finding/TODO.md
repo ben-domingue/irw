@@ -24,9 +24,8 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   (RAPID DVN/QIEEJU, 1IWRQA stay skipped); birth month + year is not a birthdate (keep year or
   age only; RMUJNX still skipped, no codebook); the four data-noted tables, the conj routing and
   the purnama issues entries stand.
-- [ ] **Ruling wanted:** third-party re-deposits (KLIPS DVN/RWPOMI, TEDS 2024-T DVN/QIGM1P) are
-  rejected because the uploader's CC0 cannot relicense a panel the originating institute
-  distributes under its own terms. Stands unless Ben overrides.
+- Ruled 2026-10-09 (ben-domingue): third-party re-deposits (KLIPS DVN/RWPOMI, TEDS 2024-T
+  DVN/QIGM1P) stay rejected; an uploader's CC0 cannot relicense a panel its institute distributes.
 - [ ] The Canada GSS 2010 files (`10.5683/sp3/uxz4it`, `sp3/a6dbgs`) and `10.7910/dvn/crpaa8`
   OOM at 6G every run and are never written to the seen ledger. Add them to the ledger as
   `file_too_large` (or equivalent) so they stop resurfacing.

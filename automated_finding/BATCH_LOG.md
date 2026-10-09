@@ -17881,4 +17881,4 @@ DVN/1IWRQA) stays skipped. Birth month + year without day is not a birthdate: su
 proceeds, and the output keeps birth year or age only, never the month. RMUJNX is still skipped
 on other grounds (no codebook for its 19 job-satisfaction items). The four data-noted tables
 (gunandran, sanz_martos, fischer, vasquez) ship as they are. Third-party panel re-deposits
-(KLIPS, TEDS) remain rejected pending Ben's confirmation.
+(KLIPS, TEDS) stay rejected (ruled the same day).
