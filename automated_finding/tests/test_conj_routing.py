@@ -36,6 +36,16 @@ class Detect(unittest.TestCase):
         self.assertTrue(R.looks_like_conjoint("A discrete choice experiment on tourism", []))
         self.assertIsNone(R.looks_like_conjoint("Big Five inventory norms", []))
 
+    def test_factorial_surveys_and_vignette_experiments(self):
+        for t in ("A factorial survey experiment on fairness of earnings",
+                  "Multifactorial vignettes on punishment", "A vignette experiment on hiring",
+                  "Replication data for: Randomized vignettes and trust"):
+            self.assertTrue(R.looks_like_conjoint(t, []), t)
+        for t in ("Anchoring vignettes for self-rated health",
+                  "A vignette study of teacher practice",
+                  "Exploratory factorial analysis of the BFI"):
+            self.assertIsNone(R.looks_like_conjoint(t, []), t)
+
     def test_task_and_profile_columns(self):
         self.assertTrue(R.looks_like_conjoint("x", ["id", "task", "profile", "selected"]))
         self.assertIsNone(R.looks_like_conjoint("x", ["id", "task", "rt"]))
