@@ -17873,3 +17873,12 @@ RWPOMI, TEDS QIGM1P), valuation data, unmappable item blocks; details in the lea
 
 **Staged:** 190 rows each in `dictionary_auto.csv`, `codebook_at_ingest.csv`, `tags/tags_auto.csv`,
 `itemtext_provenance.csv`; 17 `mapping_verification.csv` rows; 80 `metadata/data_notes.csv` rows.
+
+## 2026-10-09d — Rulings on the 2026-10-09c batch
+
+Ben ruled: a 5-digit ZIP with birth year is PII, so the RAPID Louisiana panel (DVN/QIEEJU,
+DVN/1IWRQA) stays skipped. Birth month + year without day is not a birthdate: such a deposit
+proceeds, and the output keeps birth year or age only, never the month. RMUJNX is still skipped
+on other grounds (no codebook for its 19 job-satisfaction items). The four data-noted tables
+(gunandran, sanz_martos, fischer, vasquez) ship as they are. Third-party panel re-deposits
+(KLIPS, TEDS) remain rejected pending Ben's confirmation.

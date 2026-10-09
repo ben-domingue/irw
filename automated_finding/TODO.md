@@ -20,18 +20,13 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   lei_2024_learning_motivation, chen_2026_entrepreneurship, salomon_2014_essentialism,
   arista_2010_achievement_motivation, vasquez_2013_reading_comprehension). Run
   `python3 metadata/covariate_labels/build.py` after the next pipeline run and commit covariate_labels.csv.
-- [ ] **Rulings wanted (none blocks):**
-  - PII: is a 5-digit ZIP + birth year PII? It decides RAPID (DVN/QIEEJU, 1IWRQA: 1,000 x 5 waves
-    of labelled emotion/worry/racial-resentment batteries, the strongest lead left). Is birth
-    month + year a birthdate (DVN/RMUJNX)?
-  - Third-party re-deposits of panel data (KLIPS DVN/RWPOMI, TEDS 2024-T DVN/QIGM1P): rejected; OK?
-  - Three EQ-5D DCE valuation deposits were routed to the conj ledger as todo rather than rejected.
-  - purnama_2023 item text got issues-page entries on the takacs precedent (English codebook,
-    administered language unstated).
-  - Shipped with data notes: gunandran_2023_whoqol_bref (Q3/Q4/Q26 direction unclear),
-    sanz_martos_2024_stai (baseline only; post-test columns are near-copies),
-    fischer_2018_promis29 (codes are PROMIS scores, not label order),
-    vasquez_2013 (9 of 28 items at ceiling for all 120 pupils).
+- Ruled 2026-10-09 (ben-domingue) on the 2026-10-09c batch: 5-digit ZIP + birth year is PII
+  (RAPID DVN/QIEEJU, 1IWRQA stay skipped); birth month + year is not a birthdate (keep year or
+  age only; RMUJNX still skipped, no codebook); the four data-noted tables, the conj routing and
+  the purnama issues entries stand.
+- [ ] **Ruling wanted:** third-party re-deposits (KLIPS DVN/RWPOMI, TEDS 2024-T DVN/QIGM1P) are
+  rejected because the uploader's CC0 cannot relicense a panel the originating institute
+  distributes under its own terms. Stands unless Ben overrides.
 - [ ] The Canada GSS 2010 files (`10.5683/sp3/uxz4it`, `sp3/a6dbgs`) and `10.7910/dvn/crpaa8`
   OOM at 6G every run and are never written to the seen ledger. Add them to the ledger as
   `file_too_large` (or equivalent) so they stop resurfacing.
