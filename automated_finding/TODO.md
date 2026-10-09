@@ -3,6 +3,32 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## From the 2026-10-09 PLOS monthly run (full sweep, 125 terms x plosone)
+
+- [ ] **2 `good` candidates to write scripts for (or skip with a reason):**
+  `pone.0237626` (COVID-19 risk perception, China college students, 1461p/45i) and
+  `pone.0200483` (Garden Cafés community-engagement survey, 111p/28i). See
+  `BATCH_LOG.md`'s 2026-10-09 PLOS monthly entry for the QC notes to check first.
+- [ ] **1 `worth_retrying`:** `pone.0356524` (illness perception/resiliency in cancer
+  patients, 169p/24i) — `dup_id_item` failure likely a longitudinal shape, not a
+  real duplicate; re-triage to confirm.
+- [ ] **15 `recoverable_format` leads** (one deposit, several bundled instruments —
+  needs splitting into one table per scale) — see BATCH_LOG entry for the full list
+  and DOIs.
+- [x] **5 `human_review` rows archived** to
+  `human_review/human_review_plos_2026-10-09.csv` (includes one RETRACTED article,
+  `pone.0297868` — confirm skip).
+- [ ] **`human_review_plos_2026-10-09.csv` is uncommitted** — it was generated on
+  disk by this run but fell outside the scheduled task's explicit main-push/branch
+  scope (and a same-shaped push to main was declined by the permission layer).
+  Commit it (to main, alongside `search_terms_log.csv`/`plos_seen_dois.csv`-style
+  bookkeeping) before the container is reclaimed, or it is lost.
+- Raw triage output (`runs/plos_monthly_candidates_full_2026-10-09.csv` and its
+  `.retriage_ha.csv` sibling) is on disk in this session's container only — not
+  committed anywhere (per `.gitignore`/SKILL.md; see BATCH_LOG). Every DOI above is
+  reachable again from its URL, and all 121 triaged DOIs are now in
+  `plos_seen_dois.csv` so a future run won't re-surface them by accident.
+
 ## From the 2026-10-07 repos mode-3 batch (15 new terms x 9 languages)
 
 - [x] **168 tables (1,897,483 responses) + 37 item text tables uploaded** (ben-domingue,
