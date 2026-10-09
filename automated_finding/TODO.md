@@ -12,6 +12,14 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 - [ ] **190 more tables + 17 item text tables uploaded as DRAFTS 2026-10-09** (Claude, on Ben's
   instruction) to `item_response_warehouse_5` / `irw_text_3`; need publishing. Issues-page entries
   (buzzi + purnama x6) are datapages/irw#338.
+- [ ] **Covariate labels: harvested 2026-10-09** at 54cacc4b for 20 scripts (abu_tabar_2021_copd,
+  blumel_2018_mrs, wang_2026_moral_models_psm, nicholson_crotty_2021_psm, favero_2020_covid_prosocial,
+  mullinix_2015_political_knowledge, dey_2017_mistreatment_childbirth, sadish_2021_covid_beliefs,
+  khan_2023_ethical_leadership, fischer_2018_promis29, wolbers_2017_oral_language, cuttler_2017_cannabis,
+  galindo_2025_chatgpt_dependence, lin_2023_smartphone_addiction, wenzke_2025_carbon_offsetting,
+  lei_2024_learning_motivation, chen_2026_entrepreneurship, salomon_2014_essentialism,
+  arista_2010_achievement_motivation, vasquez_2013_reading_comprehension). Run
+  `python3 metadata/covariate_labels/build.py` after the next pipeline run and commit covariate_labels.csv.
 - [ ] **Rulings wanted (none blocks):**
   - PII: is a 5-digit ZIP + birth year PII? It decides RAPID (DVN/QIEEJU, 1IWRQA: 1,000 x 5 waves
     of labelled emotion/worry/racial-resentment batteries, the strongest lead left). Is birth
