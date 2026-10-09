@@ -17788,3 +17788,36 @@ control questionnaire.
   responses), PROMIS-29 + EQ-5D (DVN/FNYYQR, 4,512 x 63), DFAQ-CU (PLOS 0178194,
   2,062 x 42), competitive achievement goals (figshare 32599122, 1,883 x 111), and a Dutch
   oral-language assessment (DANS xjd-rgey, 2,324 x 114).
+
+## 2026-10-09 — The 13 good leads from 2026-10-08: 7 deposits / 28 tables / 489,330 responses, 10 item text tables, uploaded
+
+Coordinator plus two processing agents (A: 7 deposits, B: 6). Uploaded by Claude on
+ben-domingue's instruction: 28 response tables to `item_response_warehouse_5`, then 10 item
+text tables to `irw_text_3`. Both are drafts, row-count verified by `red_up`; Ben publishes.
+Files moved to `runs/uploaded_2026-10-09/` so they cannot be re-uploaded.
+
+| deposit | script | tables | item text |
+|---|---|---|---|
+| DVN/2IBBMG (CAQ) | zabelina_2022_caq.py | 1 (5,395 x 81) | not shipped: no labels; wording in PsyArXiv h2rp8 appendix pp. 47-56, needs Step 5b |
+| DVN/HPJFSD (Karrot) | kim_2025_karrot.py | 6 (450 x 2-5, 1-7) | not shipped: q-numbers don't follow S1's numbering |
+| DVN/KOQP5C (AMTB, Chile) | moreno_jorquera_2025_amtb.py | 9 (136 x 4-6, 1-7) | 9 shipped: Spanish headers, English from article Table 17 (43/43 item means match) |
+| mendeley kfk5j9g4xc | azizi_2023_eq5d5l.py | 1 (213 x 5) | blocked (EQ-5D rights) |
+| DVN/7IZW37 (Vietnam CPD) | nguyen_2024_cpd.py | 4 (390 x 5-12, 1-6) | not shipped: no labels, no questionnaire |
+| DVN/MHVAJZ (Bland) | bland_2024_prosocial_default.py | 5 (MFQ-20, GCOS x3, PSM; 544) | not shipped: positional; GCOS blocked (CSDT) |
+| zenodo 15305238 (Buzzi) | buzzi_2025_students_covid.py | autonomy 145 x 4, cyrm12 145 x 12 | autonomy shipped (IRW English); CYRM-12 held for rights |
+
+All 28 pass `run_qc` (no fail) and `irw-validate --profile upload`. Item text passes
+`normalize_nulls.R`, `validate_items.R --resp-csv`, `audit_batch.R`, `irw-validate`,
+`check_provenance.R`. `CAad8` (CAQ) has no endorsements in 5,395 respondents; shipped.
+
+**Skipped (6):** DVN/JXWDRA (Qualtrics IPAddress column, PII; actually ~70 items, not 6);
+zenodo 21120591 (respondent names, PII); DVN/JSBBMR (looks randomly generated: uniform items,
+r ~ 0, templated interview quotes); zenodo 16813728 (undocumented 0/1/2 recode, N exactly
+100, corrupted mean column); zenodo 22088275 (FO3 = OE4 cell for cell, headers match neither
+codebook nor study); mendeley mtm2hbmwky (no multi-item instrument).
+
+**Staged:** 28 rows each in `dictionary_auto.csv`, `codebook_at_ingest.csv`,
+`tags/tags_auto.csv` (`test_tags_union.R` passes) and `itemtext_provenance.csv`; 10
+`mapping_verification.csv` rows (NOT_NEEDED, data_labels); 16 `metadata/data_notes.csv` rows.
+Item text `uploaded=2026-10-09` stamped. Issues page: `buzzi_2025_autonomy` only
+(datapages/irw#338). No covariate-label harvest owed (no .sav/.dta sources).

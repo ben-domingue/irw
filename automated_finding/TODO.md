@@ -5,8 +5,18 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
 ## From the 2026-10-08 repos mode-3 discovery (15 new terms x 9 languages)
 
-- [ ] **123 unworked leads** in `leads/repos_leads_2026-10-08.csv` (13 `good`). Discovery and
-  triage only. No processing has started.
+- [ ] **28 tables + 10 item text tables uploaded as DRAFTS 2026-10-09** (Claude, on Ben's
+  instruction): `item_response_warehouse_5` and `irw_text_3` need publishing. Issues-page
+  entry for buzzi_2025_autonomy is datapages/irw#338.
+- [ ] **Rulings wanted (none blocks):**
+  - kim_2025_karrot attitude (q45/47/48/50) vs behav_intent (q52-54) split rests on the
+    article's Table 1 order; q45 and q50 correlate slightly more with the behaviour items.
+  - zabelina_2022_caq ships as one table (10 CAQ domains), per the CBQ precedent.
+  - CYRM-12 item text (buzzi_2025_cyrm12): resilienceresearch.org terms unclear; no register row.
+  - AMTB item text shipped as silence (Gardner's page 404s); a rights-register row may be wanted.
+  - bland_2024 and nguyen_2024 have no codebook; constructs follow header blocks, MFQ catch
+    items identified by position and response profile.
+- [ ] **110 unworked leads** in `leads/repos_leads_2026-10-08.csv` (the 13 good are done).
 - [ ] The Canada GSS 2010 files (`10.5683/sp3/uxz4it`, `sp3/a6dbgs`) and `10.7910/dvn/crpaa8`
   OOM at 6G every run and are never written to the seen ledger. Add them to the ledger as
   `file_too_large` (or equivalent) so they stop resurfacing.

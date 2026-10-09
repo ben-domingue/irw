@@ -35,6 +35,7 @@ atik_2025_gwb,core,none,2026-10-05
 atik_2025_swls,core,none,2026-10-05
 atkeson_2020_school_board,conj,none,2026-10-07
 avina_2026_immigrant_benefit,conj,https://dataverse.harvard.edu/api/access/datafile/12011167,2026-10-07
+azizi_2023_eq5d5l,core,https://data.mendeley.com/public-files/datasets/kfk5j9g4xc/files/f86ce460-4b85-4c5b-bb1e-a55f193ba277/file_downloaded,2026-10-09
 bacon_2025_cfni45,core,none,2026-10-02
 bacon_2025_phq9,core,none,2026-10-02
 bacon_2025_stss,core,none,2026-10-02
@@ -93,6 +94,11 @@ bhandari_2023_trade_partners,conj,https://dataverse.harvard.edu/api/access/dataf
 bhandari_2026_clientelism_consumers,conj,https://dataverse.harvard.edu/api/access/datafile/13996702,2026-10-08
 bhatia_2025_afghan_leaders,conj,https://dataverse.harvard.edu/api/access/datafile/10679576,2026-10-07
 blackman_2025_aid_tunisia,conj,none,2026-10-08
+bland_2024_gcos_autonomy,core,none,2026-10-09
+bland_2024_gcos_control,core,none,2026-10-09
+bland_2024_gcos_impersonal,core,none,2026-10-09
+bland_2024_mfq20,core,none,2026-10-09
+bland_2024_psm,core,none,2026-10-09
 blaszyk_2023_copsoq_js,core,https://data.mendeley.com/public-files/datasets/x2rxtpzg4v/files/ee3f39d0-aa48-47bb-94e9-9dd9184534ec/file_downloaded,2026-10-07
 blaszyk_2023_copsoq_se,core,https://data.mendeley.com/public-files/datasets/x2rxtpzg4v/files/ee3f39d0-aa48-47bb-94e9-9dd9184534ec/file_downloaded,2026-10-07
 blaszyk_2023_dtt,core,https://data.mendeley.com/public-files/datasets/x2rxtpzg4v/files/ee3f39d0-aa48-47bb-94e9-9dd9184534ec/file_downloaded,2026-10-07
@@ -124,6 +130,8 @@ bulman_2025_fdi_nigeria,conj,none,2026-10-08
 bulman_2025_fdi_peru,conj,none,2026-10-08
 bulman_2025_fdi_philippines,conj,none,2026-10-08
 bulman_2025_fdi_southafrica,conj,none,2026-10-08
+buzzi_2025_autonomy,core,https://zenodo.org/records/15305238/files/results-survey220905_grezzi%20per%20correlazione.xlsx,2026-10-09
+buzzi_2025_cyrm12,core,https://zenodo.org/records/15305238/files/results-survey220905_grezzi%20per%20correlazione.xlsx,2026-10-09
 cambaz_2023_berlin_wisdom,core,none,2026-10-02
 campbell_2019_dissent_frequency,conj,https://dataverse.harvard.edu/api/access/datafile/2804203,2026-10-08
 campbell_2019_dissent_type,conj,https://dataverse.harvard.edu/api/access/datafile/2804203,2026-10-08
@@ -421,6 +429,12 @@ khan_2018_moral_identity,core,none,2026-10-05
 khan_2018_moral_motivation,core,none,2026-10-05
 kim_2019_trade_policy_firms,conj,https://dataverse.harvard.edu/api/access/datafile/3450330,2026-10-08
 kim_2022_immigration_covid,conj,none,2026-10-08
+kim_2025_karrot_attitude,core,none,2026-10-09
+kim_2025_karrot_behav_intent,core,none,2026-10-09
+kim_2025_karrot_econ_motiv,core,none,2026-10-09
+kim_2025_karrot_env_motiv,core,none,2026-10-09
+kim_2025_karrot_interact_motiv,core,none,2026-10-09
+kim_2025_karrot_reput_motiv,core,none,2026-10-09
 kiratli_2024_intervention_turkey,conj,none,2026-10-08
 kiratli_2024_intervention_us,conj,none,2026-10-08
 kirkland_2018_candidates_mturk,conj,https://dataverse.harvard.edu/api/access/datafile/3027904,2026-10-07
@@ -609,6 +623,15 @@ moral_absolutism_goyal_2025_mr_agree,core,https://osf.io/download/mgs3b/,2026-10
 moral_absolutism_goyal_2025_nfc15,core,https://osf.io/download/d8pxb/,2026-10-05
 moral_absolutism_goyal_2025_nfc41,core,https://osf.io/download/u56gs/,2026-10-05
 morales_2025_ehealth_much,core,https://zenodo.org/api/records/15328068/files/alfabetizaci%C3%B3n%20en%20eSalud.%20eHealth-Much.xlsx/content,2026-10-05
+moreno_jorquera_2025_amtb_att_learn,core,https://dataverse.harvard.edu/api/access/datafile/13255557,2026-10-09
+moreno_jorquera_2025_amtb_att_people,core,https://dataverse.harvard.edu/api/access/datafile/13255557,2026-10-09
+moreno_jorquera_2025_amtb_course,core,https://dataverse.harvard.edu/api/access/datafile/13255557,2026-10-09
+moreno_jorquera_2025_amtb_desire,core,https://dataverse.harvard.edu/api/access/datafile/13255557,2026-10-09
+moreno_jorquera_2025_amtb_instrum,core,https://dataverse.harvard.edu/api/access/datafile/13255557,2026-10-09
+moreno_jorquera_2025_amtb_integr,core,https://dataverse.harvard.edu/api/access/datafile/13255557,2026-10-09
+moreno_jorquera_2025_amtb_intensity,core,https://dataverse.harvard.edu/api/access/datafile/13255557,2026-10-09
+moreno_jorquera_2025_amtb_interest,core,https://dataverse.harvard.edu/api/access/datafile/13255557,2026-10-09
+moreno_jorquera_2025_amtb_teacher,core,https://dataverse.harvard.edu/api/access/datafile/13255557,2026-10-09
 mortenson_2025_democracy_tradeoffs,conj,https://dataverse.harvard.edu/api/access/datafile/13099404,2026-10-08
 mummolo_2016_news_choice,conj,https://dataverse.harvard.edu/api/access/datafile/2804551,2026-10-08
 mummolo_2016_news_choice_mturk,conj,https://dataverse.harvard.edu/api/access/datafile/2804551,2026-10-08
@@ -634,6 +657,10 @@ neuner_2022_populist_candidates_2018,conj,https://dataverse.harvard.edu/api/acce
 neuner_2025_populism_uk,conj,https://osf.io/download/vm7j8/,2026-10-08
 neuner_2025_populism_us1,conj,https://osf.io/download/vm7j8/,2026-10-08
 neuner_2025_populism_us2,conj,https://osf.io/download/vm7j8/,2026-10-08
+nguyen_2024_cpd_benefits,core,none,2026-10-09
+nguyen_2024_cpd_conditions,core,none,2026-10-09
+nguyen_2024_cpd_motivation,core,none,2026-10-09
+nguyen_2024_cpd_willingness,core,none,2026-10-09
 nicoli_2025_defense_union,conj,none,2026-10-07
 nyholt_2024_local_candidates,conj,none,2026-10-07
 ofosu_2026_malawi_women_candidates,conj,https://dataverse.harvard.edu/api/access/datafile/10367465,2026-10-07
@@ -896,6 +923,7 @@ yu_2015_bdi,core,none,2026-10-05
 yuan_2024_contact,core,none,2026-10-04
 yuan_2024_trust,core,none,2026-10-04
 yuan_2024_ucla,core,none,2026-10-04
+zabelina_2022_caq,core,none,2026-10-09
 zeng_2022_academic_burnout,core,none,2026-10-07
 zeng_2022_core_beliefs,core,none,2026-10-07
 zeng_2022_ptgi,core,none,2026-10-07
