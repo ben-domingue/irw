@@ -66,8 +66,10 @@ passed 800 tables: `irw_conjoint`, `irw_conjoint_2`, … in `IRW_CONJ_DATASETS`,
 newest-first, first match wins. Unlike core, a name present in two conjoint
 shards is *flagged*: `16_conjoint.R` reports it, and both client packages warn
 from `list_tables(source = "conj")`, before the newest copy is kept. Where NEW
-conjoint tables are uploaded is `CONJ_DEFAULT` in `red_up/targets.py`; an
-existing table is always updated in the shard that holds it.
+conjoint tables are uploaded is `CONJ_DEFAULT` in `red_up/targets.py` (None:
+the newest shard, since 2026-10-09); an existing table is always updated in the
+shard that holds it. `red_up` refuses any upload that would take a dataset past
+the 1000-table cap, counting its open draft.
 
 **Data families.** Every response table belongs to exactly one of five *data
 families*, and each family lives in its own Redivis dataset or shard list. Core

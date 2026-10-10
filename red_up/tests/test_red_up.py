@@ -102,8 +102,8 @@ class Registry(unittest.TestCase):
         self.assertEqual(names, core + text + aux + conj)
         self.assertEqual(newest_shard(targets).name, core[-1])
         self.assertEqual(newest_text_shard(targets).name, text[-1])
-        # New conjoint tables go to irw_conjoint until Ben flips CONJ_DEFAULT.
-        self.assertEqual(targets_mod.conj_target(targets).name, "irw_conjoint")
+        # New conjoint tables go to the newest conj shard (Ben, 2026-10-09).
+        self.assertEqual(targets_mod.conj_target(targets).name, conj[-1])
 
     def test_item_text_declared_twice_is_refused(self):
         # The three "single source of truth" files drifted once (#1733).
@@ -198,9 +198,13 @@ class TwoConjShards(unittest.TestCase):
         self.assertTrue(all(t.kind == "aux" and t.source == "conj" for t in shards))
         self.assertIn("newest shard", shards[-1].label)
 
-    def test_new_conjoint_tables_stay_in_irw_conjoint_while_pinned(self):
-        # Ben's ruling for item text was to fill shard 1 first (#2403); the
-        # default stays pinned to irw_conjoint until he rules on conj.
+    def test_new_conjoint_tables_go_to_the_newest_shard(self):
+        # Ben, 2026-10-09: new conj tables go to irw_conjoint_2, not into
+        # irw_conjoint's remaining room.
+        self.assertIsNone(targets_mod.CONJ_DEFAULT)
+        self.assertEqual(targets_mod.conj_target(self.targets).name, "irw_conjoint_2")
+
+    def test_a_pin_still_wins(self):
         with mock.patch.object(targets_mod, "CONJ_DEFAULT", "irw_conjoint"):
             self.assertEqual(targets_mod.conj_target(self.targets).name, "irw_conjoint")
 
@@ -1168,3 +1172,24 @@ class PushOne(unittest.TestCase):
         self.assertTrue(r.ok)
         self.assertFalse(t.deleted)
         self.assertEqual(t.up.kwargs.get("delimiter"), ",")
+
+
+class TableCapTests(unittest.TestCase):
+    """plan.over_cap: Redivis refuses a dataset's 1001st table."""
+
+    def _items(self, dataset, new=0, update=0):
+        mk = lambda status, i: planning.Item(report=mock.Mock(table=f"t{status}{i}"), status=status, dataset=dataset, found_in=[])
+        return [mk(planning.NEW, i) for i in range(new)] + [mk(planning.UPDATE, i) for i in range(update)]
+
+    def test_up_to_the_cap_is_allowed(self):
+        self.assertEqual(planning.over_cap(self._items("d", new=194), {"d": 806}), {})
+
+    def test_one_past_the_cap_is_refused(self):
+        self.assertEqual(planning.over_cap(self._items("d", new=195), {"d": 806}), {"d": (806, 195)})
+
+    def test_updates_add_no_table(self):
+        self.assertEqual(planning.over_cap(self._items("d", update=50), {"d": 1000}), {})
+
+    def test_each_dataset_is_counted_on_its_own(self):
+        items = self._items("a", new=5) + self._items("b", new=5)
+        self.assertEqual(planning.over_cap(items, {"a": 996, "b": 10}), {"a": (996, 5)})

@@ -275,11 +275,12 @@ def conj_shards(targets: list[Target]) -> list[Target]:
 #: a table that exists nowhere yet is created here rather than in the newest
 #: shard; a table that already lives in some conj shard is still updated there
 #: (planning.build marks it UPDATE or ELSEWHERE, and `_home_for` sends it
-#: home). Ben's item-text ruling was to fill shard 1 to ~990 before switching
-#: new tables to the newest shard (#2403, #2431); the same question is open for
-#: conj, so this stays on irw_conjoint until he says otherwise. None means
-#: "the newest shard in IRW_CONJ_DATASETS".
-CONJ_DEFAULT: str | None = "irw_conjoint"
+#: home). None means "the newest shard in IRW_CONJ_DATASETS". Ben, 2026-10-09:
+#: new conjoint tables go to the new shard (irw_conjoint_2) rather than filling
+#: irw_conjoint to the cap; irw_conjoint keeps its 806 tables and the room left
+#: there serves in-place repairs. cli's table-cap check stops any upload that
+#: would take a dataset past Redivis' 1000 tables.
+CONJ_DEFAULT: str | None = None
 
 
 def conj_target(targets: list[Target]) -> Target | None:

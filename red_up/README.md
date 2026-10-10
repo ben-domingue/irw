@@ -40,8 +40,15 @@ Response data, item text and conjoint are **shard lists**, because Redivis caps
 a dataset at 1000 tables (`ARCHITECTURE.md` §2). Another item-text or conjoint
 shard is a one-line edit to `IRW_TEXT_DATASETS` / `IRW_CONJ_DATASETS`; nothing
 in this package changes. Conjoint uploads name their shard with `--dataset`;
-`CONJ_DEFAULT` in `targets.py` (`irw_conjoint`) records where NEW conjoint
-tables go, and a table already in another conjoint shard is updated there.
+`CONJ_DEFAULT` in `targets.py` (None: the newest shard, `irw_conjoint_2` since
+2026-10-09) records where NEW conjoint tables go, and a table already in another
+conjoint shard is updated there.
+
+**Refuses to pass the table cap.** Redivis caps a dataset at 1000 tables and
+refuses the 1001st mid-run, after the earlier tables have gone in. Before
+uploading, red_up counts each destination's tables (its open draft if there is
+one, else the release) and stops if the run's NEW tables would pass 1000; above
+990 it warns that the next shard is due. Updates add no table.
 
 **Refuses a history tree.** A directory holding a `provenance.csv` is a record
 of a past batch, not a place uploads are staged from, and red_up stops rather
