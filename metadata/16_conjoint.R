@@ -1,4 +1,5 @@
-##conj_metadata.csv: one row per table in the conjoint source (irw_conjoint).
+##conj_metadata.csv: one row per table in the conjoint source (every shard in
+##IRW_CONJ_DATASETS: irw_conjoint, irw_conjoint_2, ...).
 ##
 ##The conjoint layout has no item/resp (data/conjoint/README.md), so the core
 ##metadata (01_metadata.R) does not apply. This is the conjoint counterpart of
@@ -37,10 +38,29 @@
 options(scipen=999)
 library(redivis)
 source("redivis_config.R")
-conj_dataset <- IRW_AUX_DATASETS[["conj"]]
-
-ds <- redivis$organization(IRW_OWNER)$dataset(conj_dataset)
-tabs <- ds$list_tables()
+##Every conjoint shard, newest first: the clients resolve a table name
+##newest-first, so a name present in two shards is read from the newest. That
+##is an upload mistake (red_up updates a table where it lives), so it is
+##reported here and the newest copy kept -- never merged silently.
+tabs <- list()
+tab_shard <- character(0)
+for (conj_dataset in rev(IRW_CONJ_DATASETS)) {
+  ds <- redivis$organization(IRW_OWNER)$dataset(conj_dataset)
+  shard_tabs <- ds$list_tables()
+  message("  ", conj_dataset, ": ", length(shard_tabs), " tables")
+  for (tab in shard_tabs) {
+    if (tab$name %in% names(tabs)) {
+      message("  ! ", tab$name, " is in both ", tab_shard[[tab$name]], " and ",
+              conj_dataset, "; keeping the copy in ", tab_shard[[tab$name]],
+              " -- clients resolve newest-first, so the older one is unreachable")
+      next
+    }
+    tabs[[tab$name]] <- tab
+    tab_shard[[tab$name]] <- conj_dataset
+  }
+}
+tabs <- unname(tabs)
+if (!length(tabs)) stop("no conjoint tables listed in ", paste(IRW_CONJ_DATASETS, collapse = ", "))
 
 query1 <- function(sql) {
   for (attempt in 1:4) {

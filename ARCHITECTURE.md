@@ -39,8 +39,8 @@ stale.
 All data lives on Redivis under the account **`datapages`**. Everything else in
 this repository reads that from one place:
 
-> `IRW_OWNER`, `IRW_CORE_DATASETS`, `IRW_TEXT_DATASETS` and `IRW_AUX_DATASETS`
-> in [`metadata/redivis_config.R`](metadata/redivis_config.R) are authoritative
+> `IRW_OWNER`, `IRW_CORE_DATASETS`, `IRW_TEXT_DATASETS`, `IRW_CONJ_DATASETS` and
+> `IRW_AUX_DATASETS` in [`metadata/redivis_config.R`](metadata/redivis_config.R) are authoritative
 > for the owner and the dataset names.
 
 > **Redivis caps any single dataset at 1000 tables.** That cap is the reason
@@ -61,10 +61,18 @@ between shards — moving one *creates* the shadowing problem rather than solvin
 it. `Rpkg/inst/developer/warehouses.md` carries the checklist for adding a shard
 of either kind.
 
+**Conjoint shards the same way too**, since October 2026, when `irw_conjoint`
+passed 800 tables: `irw_conjoint`, `irw_conjoint_2`, … in `IRW_CONJ_DATASETS`,
+newest-first, first match wins. Unlike core, a name present in two conjoint
+shards is *flagged*: `16_conjoint.R` reports it, and both client packages warn
+from `list_tables(source = "conj")`, before the newest copy is kept. Where NEW
+conjoint tables are uploaded is `CONJ_DEFAULT` in `red_up/targets.py`; an
+existing table is always updated in the shard that holds it.
+
 **Data families.** Every response table belongs to exactly one of five *data
-families*, and each family lives in its own Redivis dataset or shard list. Core is
-the shard list above; the other four are single datasets, only because none is
-near the cap:
+families*, and each family lives in its own Redivis dataset or shard list. Core
+and conjoint are shard lists; the other three are single datasets, only because
+none is near the cap:
 
 | Family | `source =` | Redivis dataset | What defines it | Standard |
 |---|---|---|---|---|
@@ -72,7 +80,7 @@ near the cap:
 | nominal | `nom` | `irw_nominal` | response categories with no order | site `nominal_standard.qmd` |
 | competitions | `comp` | `irw_competitions` | two agents meet and an outcome is recorded; also pairwise comparisons of fixed things, such as texts judged against each other | site `comps_standard.qmd` |
 | simsyn | `sim` | `irw_simsyn` | responses not produced by real people | site `simsyn.qmd` |
-| conjoint | `conj` | `irw_conjoint` | respondent × task × profile choices or ratings, profiles randomly assembled from attributes | `data/conjoint/README.md`, site `conjoint_standard.qmd` |
+| conjoint | `conj` | `irw_conjoint`, `_2`, … | respondent × task × profile choices or ratings, profiles randomly assembled from attributes | `data/conjoint/README.md`, site `conjoint_standard.qmd` |
 
 Four families are defined by the shape of the data; simsyn is defined by
 provenance (a simulated table can be dichotomous, nominal, anything). The
@@ -101,7 +109,7 @@ is the answer:
 
 ```r
 source("metadata/redivis_config.R")
-IRW_CORE_DATASETS; IRW_TEXT_DATASETS; IRW_AUX_DATASETS
+IRW_CORE_DATASETS; IRW_TEXT_DATASETS; IRW_CONJ_DATASETS; IRW_AUX_DATASETS
 ```
 
 Until August 2026 all of this lived under the personal Redivis account
@@ -113,10 +121,11 @@ older scripts still work.
 > `src/irw/config.py` in `Python-pkg`. All three describe themselves as a single
 > source of truth. They are reconcilable — this repo carries plain dataset
 > *names*, the two packages additionally carry version *hashes* — but a new shard
-> must be added in all three, and each file carries *two* shard lists, core and
-> item text (`IRW_CORE_DATASETS`/`IRW_TEXT_DATASETS`,
-> `.irw_datasource_specs$core`/`.irw_itemtext_specs`,
-> `MAIN_REFS`/`ITEMTEXT_REFS`), so adding a shard means six edits, not three.
+> must be added in all three, and each file carries *three* shard lists, core,
+> item text and conjoint (`IRW_CORE_DATASETS`/`IRW_TEXT_DATASETS`/`IRW_CONJ_DATASETS`,
+> `.irw_datasource_specs$core`/`.irw_itemtext_specs`/`.irw_datasource_specs$conj`,
+> `MAIN_REFS`/`ITEMTEXT_REFS`/`CONJ_REFS`), so adding a shard means one edit per
+> file, in all three files, and the parity check compares order for all three lists.
 >
 > They drifted once already, undetected for months: `Python-pkg` had no
 > reference to `irw_nominal`, so that source was reachable from R and not from

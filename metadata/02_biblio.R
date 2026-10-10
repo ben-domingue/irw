@@ -446,12 +446,12 @@ dbs<-list(
               drop.retired=TRUE)
 )
 
-##Conjoint experiments (irw_conjoint): no dictionary sheet, by Ben's call on
-##2026-10-07 -- the dictionary is dictionary_auto_conj.csv alone, staged with
-##stage_dict_row.py --source conj. Active only once `conj` is registered in
-##redivis_config.R (with the package configs), since its liveness oracle
-##conj_metadata.csv comes from 16_conjoint.R, which runs from then on.
-if ("conj" %in% names(IRW_AUX_DATASETS)) {
+##Conjoint experiments (the IRW_CONJ_DATASETS shards): no dictionary sheet, by
+##Ben's call on 2026-10-07 -- the dictionary is dictionary_auto_conj.csv alone,
+##staged with stage_dict_row.py --source conj. Active only while a conj shard is
+##registered in redivis_config.R (with the package configs), since its liveness
+##oracle conj_metadata.csv comes from 16_conjoint.R, which covers every shard.
+if (length(IRW_CONJ_DATASETS) > 0) {
     dbs$conj <- list(name="conj",
                      irw_dict=empty_sheet_dict(),
                      user=IRW_OWNER,
