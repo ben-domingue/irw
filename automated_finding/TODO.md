@@ -24,6 +24,31 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   OOM at 6G every run and are never written to the seen ledger. Add them to the ledger as
   `file_too_large` (or equivalent) so they stop resurfacing.
 
+## From the 2026-10-09 PLOS monthly run (full sweep, 125 terms x plosone)
+
+- [x] **2 `good` + 1 `worth_retrying` worked (PR #2940, 2026-10-10):** `pone.0237626` ->
+  `ding_2020_covid_knowledge` + `ding_2020_covid_risk_perception` (item text shipped);
+  `pone.0356524` -> `panth_2026_bipq` + `panth_2026_cdrisc10` (the `dup_id_item` was one
+  duplicated serial number). `pone.0200483` (Garden Cafés) rejected again: values 2-8 vs the
+  paper's 1-7 scale, no codebook. See BATCH_LOG 2026-10-10.
+- [ ] **15 `recoverable_format` leads** (one deposit, several bundled instruments —
+  needs splitting into one table per scale) — see BATCH_LOG entry for the full list
+  and DOIs.
+- [x] **5 `human_review` rows** (includes one RETRACTED article, `pone.0297868` —
+  confirm skip) — titles/DOIs/reasons listed in this batch's BATCH_LOG.md entry.
+  The on-disk `human_review/human_review_plos_2026-10-09.csv` the run generated was
+  never committed (pushing it fell outside this task's explicit scope and was
+  declined by the permission layer) and was deleted rather than left stranded —
+  safe to do because its dedup purpose is already served by `plos_seen_dois.csv`
+  (all 5 DOIs are already in it, pushed to main) and its row detail is already in
+  BATCH_LOG.md. If a human-readable `human_review/*.csv` copy is still wanted for
+  this batch, it can be regenerated from the BATCH_LOG entry.
+- Raw triage output (`runs/plos_monthly_candidates_full_2026-10-09.csv` and its
+  `.retriage_ha.csv` sibling) is on disk in this session's container only — not
+  committed anywhere (per `.gitignore`/SKILL.md; see BATCH_LOG). Every DOI above is
+  reachable again from its URL, and all 121 triaged DOIs are now in
+  `plos_seen_dois.csv` so a future run won't re-surface them by accident.
+
 ## From the 2026-10-07 repos mode-3 batch (15 new terms x 9 languages)
 
 - [x] **168 tables (1,897,483 responses) + 37 item text tables uploaded** (ben-domingue,

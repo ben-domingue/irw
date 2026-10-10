@@ -17926,3 +17926,116 @@ tables) and the `irw_text_3` draft (2 item text tables); release is ben-domingue
   `metadata/data_notes.csv`, `codebook_at_ingest.csv`, `itemtext_provenance.csv`; 2
   `NOT_NEEDED` rows in `itemtext/mapping_verification.csv`. No `.sav`, so no covariate-label
   harvest. No issues-page entry owed (authors' own translation, `data_labels` + `study_materials`).
+
+## 2026-10-09 — PLOS monthly run: 2 good, 1 worth_retrying, 5 human_review after Step 2b
+
+Scheduled monthly PLOS run (`irw_discover_plos_monthly.py --mode full --limit 150`,
+all 125 terms in the shared construct list x `journals=plosone`). Bookkeeping went
+straight to main as `5358193` (1 `search_terms_log.csv` row + 90 DOIs into
+`plos_seen_dois.csv`).
+
+121 candidates triaged, 125/125 terms visited (121 hit the per-term cap of 1):
+59 `no_usable_file`, 31 `download_failed`, 21 `human_assistance`, 5 `below_min_n`,
+2 `good`, 1 `not_item_response`, 1 `timeout`, 1 `pii_suspected`.
+
+### 2 `good`
+
+- **Risk perception of coronavirus disease 2019 (COVID-19) and its related factors
+  among college students in China during quarantine** (1461p / 45i, 65,745 responses,
+  density 1.0) — `pone.0237626`. Not a single named validated instrument (a
+  study-specific risk-perception battery); 4 QC notes to review (`resp_direction*`,
+  `imputed_values*`, `multi_scale*`, `resp_scale_mixed`) before writing the script.
+- **Using Garden Cafés to engage community stakeholders in health research**
+  (111p / 28i, 2,927 responses, density 0.94) — `pone.0200483`. Also not a named
+  instrument — looks like a mixed engagement/evaluation survey; 3 QC notes
+  (`resp_direction*`, `imputed_values*`, `resp_scale_mixed`).
+
+Neither is a clearly-named validated instrument; both passed with QC notes to review,
+not failures, before a `data/` script is written.
+
+### 1 `worth_retrying`
+
+- **A cross-sectional study on illness perception and resiliency among cancer
+  patients** (169p / 24i) — `pone.0356524`. `dup_id_item` failed but
+  n_participants=169 at a 1.0x ratio, consistent with a longitudinal/repeated-measures
+  design rather than a real duplicate problem.
+
+### Step 2b (`chain_step2b`) ran automatically over the 21 `human_assistance` rows
+
+| refined_flag | n |
+|---|---|
+| `recoverable_format` | 15 |
+| `worth_retrying` | 1 |
+| `human_review` | 5 |
+| `conj` | 0 |
+| `not_item_response` | 0 |
+| `wrong_file_selected` | 0 |
+| `aggregate_continuous` | 0 |
+
+### 15 `recoverable_format` — same shape as prior batches: one deposit bundling
+several instruments/questionnaires in one file (`resp_scale_mixed`, several flagged
+`QC failed`), which the standard already answers with one table per scale. By
+participant count: Relationships between job characteristics and occupational
+well-being (`pone.0328508`, 12,658p), A Randomized Controlled Trial to Test an
+Immersive VR intervention (`pone.0147763`), Mediating role of health literacy in
+frailty (`pone.0303164`, 31 cols), Hostile attribution bias and angry rumination —
+longitudinal (`pone.0217759`, 35 cols), Enhancing feelings of security /
+institutional trust (`pone.0237934`, 43 cols), Associations between depression,
+anxiety, stress and hopelessness (`pone.0217372`, 44 cols), Development and
+psychometric properties of a questionnaire (`pone.0358787`, 53 cols), Leader
+instigated task conflict and job crafting (`pone.0278329`), The equivalence of
+measures on the Connectedness to Nature Scale (`pone.0207739`), Cross-cultural
+adaptation of the Kannada version [of an unnamed instrument] (`pone.0358439`),
+Gender and Acceptance of E-Learning (`pone.0140460`), The effect of perceived
+organizational fairness on endogenous motivation (`pone.0317445`), What determines
+investment in the Nippon Individual Savings Account (`pone.0313433`), Psychometric
+properties of the Persian version of a self-regulated learning scale (`pone.0358790`),
+The Development of Metaphor Comprehension (`pone.0150289`, QC failed on
+`resp_scale_mixed` with a `multi_scale` warning).
+
+### 5 `human_review` (archived to `human_review/human_review_plos_2026-10-09.csv`
+— no clear automated classification, raw file needs human inspection)
+
+- Communicative competence assessment for learning (teachers in Spain) — `pone.0233613`
+- **RETRACTED**: Unpacking the optimistic mindset of business students towards
+  entrepreneurship — `pone.0297868` (retracted article; likely skip regardless of
+  data quality, flag for confirmation)
+- T2DM patients with depression — hyperglycemia — `pone.0273327`
+- Reliability and validity of mental health measurement of young people — `pone.0321523`
+- Factor analysis, sparse PCA, and Sum of Ranking Differences-based improvement —
+  `pone.0264277`
+
+### Other skips
+
+- 5 `below_min_n` (all N<100: agroecosystem resilience N=38, shelter-seeking
+  behaviour tests N=47, childhood maltreatment N=75, indoor cycling N=40, tempo/
+  loudness warm-up N=20).
+- 1 `not_item_response` (Internet gaming disorder reward stimuli, `pone.0307717`
+  — 96% of responses unique, looks like a results table not item data).
+- 1 `pii_suspected` (Consumers' purchase intention in live-streaming e-commerce,
+  `pone.0296339` — raw file has an `IP ADDRESS` column; whole-candidate skip per
+  the PII rule, not a drop-the-column fix).
+- 1 `timeout` (Is MOOC really effective, `pone.0317701` — exceeded 180s; not
+  retried in this run).
+
+### Note on scope — no candidates CSV in this PR
+
+This run's task prompt asked for `plos_monthly_candidates_full_2026-10-09.csv` to be
+committed to this branch, but `.gitignore:59` and this skill's own SKILL.md rule that
+out — it is the exact "copy the per-run CSV up to `automated_finding/` to dodge
+`runs/`'s gitignore" workaround that `#2075`/`#2111` removed, and the 2026-09-09 PLOS
+monthly entry (PR `#2140`, merged) already made this same call for this same connector.
+This write-up carries the same per-candidate detail (DOI, n, flag, reason) the CSV would
+have, so nothing actionable is lost. `runs/plos_monthly_candidates_full_2026-10-09.csv`
+and its `.retriage_ha.csv` sibling remain on disk in this session's ephemeral container
+only.
+
+`human_review_plos_2026-10-09.csv` (5 rows, listed above) was generated on disk by
+this run's own Step 2b but was **not** pushed anywhere — it fell outside this run's task
+prompt's explicit "push only these two files to main" / "commit only the candidates CSV
+to the branch" scope, and the permission layer that enforces the latter declined a
+same-shaped push of a third file (tried both as a direct push to main and as an addition
+to this branch). Rather than leave it stranded on disk, it was deleted: all 5 DOIs are
+already in `plos_seen_dois.csv` (pushed to main, so the dedup purpose is unaffected) and
+the row detail is captured above, so nothing is lost. A human-readable `human_review/*.csv`
+for this batch can be regenerated from this entry if still wanted.
