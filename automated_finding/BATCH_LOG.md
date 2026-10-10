@@ -18039,3 +18039,56 @@ to this branch). Rather than leave it stranded on disk, it was deleted: all 5 DO
 already in `plos_seen_dois.csv` (pushed to main, so the dedup purpose is unaffected) and
 the row detail is captured above, so nothing is lost. A human-readable `human_review/*.csv`
 for this batch can be regenerated from this entry if still wanted.
+## 2026-10-10 — Repos mode-3 discovery + triage: 15 new terms x 9 languages, 1,483 candidates, 10 good, 78 leads
+
+Discovery and triage only, run locally on ben-domingue's instruction ("fire an automated
+search locally for core tables"). No scripts written, nothing staged, nothing uploaded.
+
+**Terms (new to `search_terms_log.csv`, each in English + es/de/fr/zh/ja/ar/nl/ko,
+135 queries):** belief in conspiracy theories, social media disorder scale, motivated
+strategies for learning questionnaire, intrinsic motivation inventory, hospital survey on
+patient safety culture, negative acts questionnaire, zarit burden interview, falls efficacy
+scale, macarthur communicative development inventory, behavior rating inventory of executive
+function, mood and feelings questionnaire, youth self-report, remote associates test, rape
+myth acceptance, user experience questionnaire. (effort-reward imbalance was drafted and
+dropped: its 2026-10-05 translations were already logged.)
+
+- **Discovery** (~75 min): 1,483 candidates (zenodo 500, dataverse 362, surf 234,
+  figshare 225, scholars_portal 102, datacite 42, mendeley 9, osf 6, dryad 3). The process
+  lingered after writing the CSV and was killed by hand; the file was complete.
+- **Ledger fix first:** the three files that OOM-killed the 2026-10-07 and 2026-10-08 runs
+  (`10.5683/sp3/uxz4it`, `sp3/a6dbgs`, `10.7910/dvn/crpaa8`) were written to
+  `repo_triage_seen_keys.csv` as `file_too_large` by hand and recorded in
+  `oversized_candidates.csv`, closing the 2026-10-09 TODO item. No OOM kills this run.
+- **Triage** (`--retriage`, 6G cap; no `--limit 10` sanity run): 738 triaged after the
+  seen ledger excluded 745: `no_usable_file` 355, `human_assistance` 166,
+  `download_failed` 115 (dataverse 64, figshare 55, surf 45, zenodo 33; transient, not
+  ledgered), `not_item_response` 38, `below_min_n` 31, `error` 12 (11 of them the same
+  "arg must be a list, tuple, 1-d array, or Series" reader fault, worth a look at
+  `load_table()`), **`good` 10**, `pii_suspected` 7 (IP/phone/name/DOB columns, mostly
+  Harvard political-science replication files), `file_too_large` 2, `license_restricted` 2
+  (both CC BY-NC-ND).
+  Operator note: a watcher with a wrong `pgrep` pattern reported the run dead at row 47 and a
+  second `--resume` run was started by mistake; it ran ~2 min alongside the original before
+  being killed. The original's in-memory results are what `repos_triage_2026-10-10.csv`
+  holds; the only trace is some duplicate rows in the gitignored checkpoint file.
+- **Step 2b ran** (chained): 166 HA -> recoverable_format 71, not_item_response 43,
+  worth_retrying 27, human_review 15, aggregate_continuous 10. `[conj] routed 0`.
+  `[human_review] archived 15 row(s) -> human_review/human_review_zenodo_2026-10-10.csv`.
+- **Leads -> `leads/repos_leads_2026-10-10.csv`** (78 rows, all `unworked`: the 10 good,
+  plus every licence-ok worth_retrying/recoverable_format row with 100 <= N <= 50,000 and
+  8-700 items). The 10 good: haptic-guidance personality (zenodo 16539273, 126 x 16), AI in
+  Indonesian higher education (zenodo 19680489, 120 x 33), 5E-STEAM EUREKA questionnaire
+  (zenodo 21383291, 115 x 11), voice-assistant adoption (dryad jdfn2z3g5, 262 x 33),
+  Chinese university teachers' well-being (zenodo 12609724, 283 x 20, **licence unknown**,
+  resolve before touching), negativity-bias risk paths (DVN/GRXTZY, 131,071 x 8, likely a
+  paths/trial file rather than a questionnaire), pediatric TBI BRIEF table (Frontiers
+  s002, 2,708 x 8, probably a summary table), emotional-companion AI UX (figshare 32576487,
+  615 x 38), Italian student technology/Covid survey (zenodo 15305238, 145 x 23), Indonesian
+  human-AI collaboration (zenodo 21963745, 237 x 33). Larger recoverable leads: optimistic
+  personality (DVN/5ZAFIF, 20,000 x 73), IMF lending (DVN/D2XPSP, 21,531 x 42), presidential
+  negative partisanship (DVN/FPPDKN, 16,010 x 21), FES-I short form Iran (DVN/3SCNGV +
+  mendeley yxp8rbjrn8, same deposit twice, 9,117 x 29), NAQ-R psychometrics (figshare
+  24955368, 5,074 x 47), Schoen 2007 Big Five + foreign policy (DVN/26506, 2,508 x 73),
+  SMARS Spanish adolescents (figshare 32626206, 1,043 x 158), Juntos CCT Peru
+  (DVN/6NSLTP, 1,902 x 137).

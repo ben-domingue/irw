@@ -3,6 +3,15 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## From the 2026-10-10 repos mode-3 discovery (15 new terms x 9 languages)
+
+- [ ] **78 unworked leads** in `leads/repos_leads_2026-10-10.csv` (10 good + 68 recoverable/
+  worth_retrying). One good row (zenodo 12609724) has licence `unknown`; resolve on the
+  record before working it. Triage CSVs sit in `runs/repos_triage_2026-10-10*.csv` until the
+  leads are worked.
+- [ ] 11 `error` rows share one reader fault ("arg must be a list, tuple, 1-d array, or
+  Series"); check `load_table()` before the next run or those candidates are retried blind.
+
 ## From the 2026-10-08 repos mode-3 discovery (15 new terms x 9 languages)
 
 - Ruled 2026-10-09 (ben-domingue): the five decisions on the 2026-10-09 batch stand (karrot split, CAQ as one table, CYRM-12 item text held, AMTB item text shipped, bland/nguyen block-based constructs).
@@ -20,9 +29,8 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   the purnama issues entries stand.
 - Ruled 2026-10-09 (ben-domingue): third-party re-deposits (KLIPS DVN/RWPOMI, TEDS 2024-T
   DVN/QIGM1P) stay rejected; an uploader's CC0 cannot relicense a panel its institute distributes.
-- [ ] The Canada GSS 2010 files (`10.5683/sp3/uxz4it`, `sp3/a6dbgs`) and `10.7910/dvn/crpaa8`
-  OOM at 6G every run and are never written to the seen ledger. Add them to the ledger as
-  `file_too_large` (or equivalent) so they stop resurfacing.
+- [x] The Canada GSS 2010 files and `10.7910/dvn/crpaa8` added to the seen ledger as
+  `file_too_large` by hand (2026-10-10).
 
 ## From the 2026-10-09 PLOS monthly run (full sweep, 125 terms x plosone)
 
