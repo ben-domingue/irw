@@ -1,6 +1,6 @@
 ## Pull timestamped table counts across every version of the IRW datasets on
-## Redivis -- the core warehouses, the competitions/nominal/simsyn shards, and
-## the item-text shards -- for plotting growth over time.
+## Redivis -- the core warehouses, the competitions/nominal/simsyn datasets, and
+## the item-text and conjoint shards -- for plotting growth over time.
 ## Output: metadata/table_count/dataset_growth.csv
 
 library(redivis)
@@ -9,8 +9,9 @@ source("../redivis_config.R")
 
 datasets <- rbind(
   data.frame(dataset = IRW_CORE_DATASETS, group = "core"),
-  data.frame(dataset = IRW_AUX_DATASETS[c("comp", "nom", "sim", "conj")],
-             group   = c("comps", "nominal", "simsyn", "conjoint")),
+  data.frame(dataset = IRW_AUX_DATASETS[c("comp", "nom", "sim")],
+             group   = c("comps", "nominal", "simsyn")),
+  data.frame(dataset = IRW_CONJ_DATASETS, group = "conjoint"),
   data.frame(dataset = IRW_TEXT_DATASETS, group = "itemtext")
 )
 

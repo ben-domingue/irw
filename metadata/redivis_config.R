@@ -46,20 +46,31 @@ IRW_TEXT_DATASETS <- c(
   "irw_text_3"
 )
 
+## Conjoint shards, oldest to newest. Conjoint experiments in their own layout,
+## see data/conjoint/README.md. irw_conjoint neared the 1000-table cap in
+## October 2026, so the family is a shard list on the item-text pattern:
+## clients search these newest-first. Append a shard here only once it has a
+## PUBLISHED release, and together with Rpkg's .irw_datasource_specs$conj and
+## Python-pkg's CONJ_REFS, in that order. Where NEW conjoint tables go is
+## CONJ_DEFAULT in red_up/targets.py, not the order here.
+## No parentheses in comments inside this c, red_up/targets.py reads up to the first one.
+IRW_CONJ_DATASETS <- c(
+  "irw_conjoint",
+  "irw_conjoint_2"
+)
+
 ## The data families other than core, by the `source` name the irw package uses,
 ## plus irw_meta, which is auxiliary and holds no response data. ARCHITECTURE.md
 ## section 2 defines the families.
 ##
-## Item text is deliberately NOT here: it is a shard list (IRW_TEXT_DATASETS
-## above), and this vector is named, so it could only ever hold one text entry.
-## Naming the dataset in both places would duplicate it within a single file --
-## the very thing ARCHITECTURE.md section 2 warns about.
+## Item text and conjoint are deliberately NOT here: each is a shard list
+## (IRW_TEXT_DATASETS, IRW_CONJ_DATASETS above), and this vector is named, so it
+## could only ever hold one entry per family. Naming a dataset in both places
+## would duplicate it within a single file -- the very thing ARCHITECTURE.md
+## section 2 warns about; red_up refuses such a config.
 IRW_AUX_DATASETS <- c(
   meta = "irw_meta",
   sim  = "irw_simsyn",
   comp = "irw_competitions",
-  nom  = "irw_nominal",
-  ## Conjoint experiments in their own layout, see data/conjoint/README.md.
-  ## No parentheses in comments inside this c, red_up/targets.py reads up to the first one.
-  conj = "irw_conjoint"
+  nom  = "irw_nominal"
 )

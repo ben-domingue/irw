@@ -22,10 +22,11 @@ ITEMS_SUFFIX = "__items.csv"
 #: names `redivis_config.R` uses. Note "pairs" is `irw_competitions`: there is
 #: no `irw_pairs` dataset and never has been.
 #:
-#: "text" is the odd one out: item text is a *shard list*
-#: (`IRW_TEXT_DATASETS`), not an entry in `IRW_AUX_DATASETS`, for the same
-#: reason the core warehouses are a list -- Redivis caps a dataset at 1000
-#: tables. Its label still lives here so the menu reads uniformly.
+#: "text" and "conj" are the odd ones out: item text and conjoint are *shard
+#: lists* (`IRW_TEXT_DATASETS`, `IRW_CONJ_DATASETS`), not entries in
+#: `IRW_AUX_DATASETS`, for the same reason the core warehouses are a list --
+#: Redivis caps a dataset at 1000 tables. Their labels still live here so the
+#: menu reads uniformly.
 AUX_LABELS = {
     "text": "item text (__items.csv)",
     "meta": "metadata tables",
@@ -56,6 +57,15 @@ class Target:
     @property
     def is_meta(self) -> bool:
         return self.source == "meta"
+
+    @property
+    def is_conj(self) -> bool:
+        return self.source == "conj"
+
+
+#: The aux sources declared as their own shard-list vector in redivis_config.R
+#: rather than as a key of IRW_AUX_DATASETS: source -> R symbol.
+SHARD_VECTORS = {"text": "IRW_TEXT_DATASETS", "conj": "IRW_CONJ_DATASETS"}
 
 
 def find_config(start: Path | None = None) -> Path:
@@ -154,8 +164,33 @@ def load_registry(config_path: Path | None = None) -> tuple[str, list[Target]]:
             f"redivis_config.R has aux source(s) red_up does not know: "
             f"{sorted(unknown)}. Add them to AUX_LABELS in targets.py."
         )
+
+    # Conjoint shards (IRW_CONJ_DATASETS, since irw_conjoint neared the cap).
+    # Optional in the file so an older config, with `conj =` still inside
+    # IRW_AUX_DATASETS, keeps parsing; declaring it both ways is refused.
+    conj_shards: list[Target] = []
+    if re.search(r"^IRW_CONJ_DATASETS\s*<-", text, re.M):
+        if "conj" in aux:
+            raise ConfigError(
+                "redivis_config.R declares conjoint twice: `conj` is a key in "
+                "IRW_AUX_DATASETS and IRW_CONJ_DATASETS also exists. Conjoint is "
+                "a shard list -- remove the `conj =` entry from IRW_AUX_DATASETS."
+            )
+        conj_shards = [
+            Target(name=value, label=AUX_LABELS["conj"], kind="aux", source="conj")
+            for _, value in _parse_char_vector(text, "IRW_CONJ_DATASETS")
+        ]
+        if len(conj_shards) > 1:
+            conj_shards[-1] = Target(
+                name=conj_shards[-1].name,
+                label=f"{AUX_LABELS['conj']} -- newest shard",
+                kind="aux", source="conj",
+            )
+
     for source, label in AUX_LABELS.items():
-        if source != "text" and source in aux:
+        if source == "conj" and conj_shards:
+            targets.extend(conj_shards)
+        elif source != "text" and source in aux:
             targets.append(
                 Target(name=aux[source], label=label, kind="aux", source=source)
             )
@@ -231,6 +266,32 @@ def itemtext_target(targets: list[Target]) -> Target | None:
 
 #: Columns a table must have to belong in a given destination.
 #:
+def conj_shards(targets: list[Target]) -> list[Target]:
+    """Every conjoint shard, oldest to newest."""
+    return [t for t in targets if t.is_conj]
+
+
+#: Where NEW conjoint tables go. The conj twin of ITEMTEXT_DEFAULT: while set,
+#: a table that exists nowhere yet is created here rather than in the newest
+#: shard; a table that already lives in some conj shard is still updated there
+#: (planning.build marks it UPDATE or ELSEWHERE, and `_home_for` sends it
+#: home). Ben's item-text ruling was to fill shard 1 to ~990 before switching
+#: new tables to the newest shard (#2403, #2431); the same question is open for
+#: conj, so this stays on irw_conjoint until he says otherwise. None means
+#: "the newest shard in IRW_CONJ_DATASETS".
+CONJ_DEFAULT: str | None = "irw_conjoint"
+
+
+def conj_target(targets: list[Target]) -> Target | None:
+    """The conjoint destination: the pinned shard, else the newest."""
+    shards = conj_shards(targets)
+    if CONJ_DEFAULT is not None:
+        for shard in shards:
+            if shard.name == CONJ_DEFAULT:
+                return shard
+    return shards[-1] if shards else None
+
+
 #: Response data (the shards, plus nominal and simsyn) is `datastandard.md`'s
 #: schema. Item text is the shape `itemtext/join.R` writes. Two destinations
 #: are deliberately unchecked: `irw_competitions` holds pairwise/arena data

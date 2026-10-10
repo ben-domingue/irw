@@ -143,7 +143,7 @@ Ground truth is `irw::irw_list_tables(source = c("core","comp","nom","sim","conj
 not a raw re-query of Redivis. It wraps exactly the Redivis datasets the
 numbered scripts use: `core` → `item_response_warehouse`/`_2`/`_3`/`_4`/`_5`/`_6` (01),
 `comp` → `irw_competitions` (05), `nom` → `irw_nominal` (06), `sim` →
-`irw_simsyn` (07), `conj` → `irw_conjoint` (16).
+`irw_simsyn` (07), `conj` → the `IRW_CONJ_DATASETS` shards, `irw_conjoint` first (16).
 
 **Expect ~90 seconds minimum for the default run, most of it in the `core`
 fetch alone** (measured 2026-07-27: `core` ≈ 59s for 2233 tables, `comp` ≈
