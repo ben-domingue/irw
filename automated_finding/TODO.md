@@ -3,12 +3,27 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
-## From the 2026-10-10 repos mode-3 discovery (15 new terms x 9 languages)
+## From the 2026-10-10 repos mode-3 batch (15 new terms x 9 languages)
 
-- [ ] **78 unworked leads** in `leads/repos_leads_2026-10-10.csv` (10 good + 68 recoverable/
-  worth_retrying). One good row (zenodo 12609724) has licence `unknown`; resolve on the
-  record before working it. Triage CSVs sit in `runs/repos_triage_2026-10-10*.csv` until the
-  leads are worked.
+- [ ] **107 tables (2,042,413 responses) + 33 item text tables need uploading** from
+  `automated_finding/irw_output/` and `itemtext_output/` (response tables first). All 107 are new
+  (the `perez_hernandez_2021_*` tables were written and extended within this batch; nothing is
+  live yet). Stamp `uploaded=` in `itemtext_provenance.csv` only after ben-domingue confirms.
+- [ ] **Issues-page entries** (datapages/irw) for the item text tables with a `public_note` in
+  `itemtext_provenance.csv` (see BATCH_LOG 2026-10-10b).
+- [ ] **Covariate labels:** after commit run `python3 metadata/covariate_labels/harvest.py --commit HEAD`
+  for meden_2026_podcast, kacovsky_2022_imi, jarbin_2020_mfq, spasovski_2020_perma,
+  asadollahi_2022_fesi, perez_hernandez_2021_encovid, wendel_2022_rfq, stecula_2020_antivax,
+  schoen_2007_neoffi, stapleton_2021_optimism, lee_2022_social_trust,
+  deilkas_2019_saq_nursing_homes, van_beveren_2019_youth_emotion, cwalina_2023_covid_framing,
+  deryahanoglu_2024_exercise_personality; then `build.py` after the release and commit
+  covariate_labels.csv.
+- [ ] **Rulings wanted** (none blocks upload): see BATCH_LOG 2026-10-10b (PLS-SEM small blocks as
+  one table, stapleton CCAP/CCES as own data, schoen_2007, hatemi_2017 content, jarbin dx covariates,
+  kahraman 19-item ZBI, montana_blasco unkeyed statements, lee_2022 treat collapse, blank option_text
+  tables, YB5PVO anonymous deposit).
+- [ ] 2 unworked leads in `leads/repos_leads_2026-10-10.csv`: DVN/YB5PVO (needs an author name),
+  DVN/IZKSL7 (Swiss AV panel, heavy recoding).
 - [ ] 11 `error` rows share one reader fault ("arg must be a list, tuple, 1-d array, or
   Series"); check `load_table()` before the next run or those candidates are retried blind.
 

@@ -18092,3 +18092,66 @@ dropped: its 2026-10-05 translations were already logged.)
   24955368, 5,074 x 47), Schoen 2007 Big Five + foreign policy (DVN/26506, 2,508 x 73),
   SMARS Spanish adolescents (figshare 32626206, 1,043 x 158), Juntos CCT Peru
   (DVN/6NSLTP, 1,902 x 137).
+
+## 2026-10-10b — The 78 leads from 2026-10-10: 42 deposits / 107 tables / 2,042,413 responses, 33 item text tables
+
+Two processing forks (A: 39 leads, B: 39) on ben-domingue's "go for it". Every lead now has a
+status in `leads/repos_leads_2026-10-10.csv`: 44 shipped (incl. duplicate deposits of shipped
+data), 26 rejected on content, 3 PII skips, 2 below N, 1 licence block (zenodo 12609724, no
+licence field, in `license_blocked_candidates.csv`), 2 unworked (DVN/YB5PVO anonymous TEIQue-SF
+deposit with no author name; DVN/IZKSL7 Swiss AV panel, hours of German recoding). Nothing
+uploaded; output sits in `irw_output/` (107 files) and `itemtext_output/` (33 `__items.csv`).
+
+**A (22 deposits, 60 tables):** jo_2023_via, kahraman_2026 (zbi, bai), fauziah_2026 (5, item
+text), meden_2026_podcast (3), kacovsky_2022_imi, zhao_2023 (4), diredja_2025_utaut2,
+naulia_2026 (2), jarbin_2020_mfq (self + parent via `rater`), zhang_2023_smoking (4),
+spasovski_2020_perma, pinheiro_2024 (naqr, srq20; 10,148 ids), xu_2026 (3, item text),
+asadollahi_2022_short_fesi (9,117 ids; mendeley yxp8rbjrn8 is the same file), perez_hernandez_2021
+(gad7, elcsa, cesd7; item text), wendel_2022_rfq, stecula_2020_antivax, schoen_2007_neoffi,
+vegetti_2021 (8), orsini_2018 (5), fang_2026_anime_museum (item text), montana_blasco_2026 (8,
+item text for 4 blocks).
+
+**B (20 deposits, 47 tables + 3 extended):** stapleton_2021 (lotr, tipi, polknow, polknow18;
+CCAP08 + CCES18 pooled), darko_2025 (4, item text), lee_2022_social_trust (4, treat),
+hatemi_2017_sex_freq, deilkas_2019 (saq, collaboration; item text), fox_2023 (bct, pss10, gad7;
+OSF sfuz9 CC BY resolved; item text bct + gad7), rothlin_2022_scs_sf (item text),
+van_beveren_2019 (3; mean-imputed cells dropped), cwalina_2023 (3, treat), deryahanoglu_2024 (2),
+karsen_2025_mooc_motivation, wunn_2026 (3, waves + treat, item text), dharmawan_2026 (7),
+makkiyah_2023 (4, item text), rosado_2026_eureka, frost_2023 (cbq, gcbs), zhang_2026_ai_companion
+(item text), xue_2026_physiology_mcq. B also added the June ENCOVID wave (zenodo 4602365) to A's
+perez_hernandez_2021 tables (+1,674 ids each; dictionary rows replaced). zenodo 15305238 was
+already in IRW as buzzi_2025_*. Both Dryad leads were fetched from their Zenodo mirrors.
+
+All 107 pass `run_qc` (no fail) and `irw-validate --profile upload`; 33 item text tables pass
+normalize_nulls → validate_items → audit_batch (4 WARNs, all missingness skew: deilkas x2,
+montana_blasco P7120, perez_hernandez gad1/gad2 carrying both waves) → irw-validate.
+`itemtext_output/` holds only `*__items.csv`. Agent B had overwritten
+`itemtext_verification/make_itemtext_zhang_2026.py` (the JPSP #2547 builder); restored from git
+and B's builder renamed `make_itemtext_zhang_2026_ai_companion.py`.
+
+**Skips:** PII: zenodo 19680489 (full names), mendeley cfwf7zp6tr (children's DOB), zenodo
+20208708 (full names). Content: duplicates (0YUSTJ of OLTXFC), experiment/check-all/debrief items
+(OLTXFC, YKDXJL, 1UYR8D, D4PHZD, LN9WDR, figshare 29398943), household/agri/time-series surveys
+(LDU1EA, NIGDBQ, QEHZAW, O4CX4D, 2KLNFX), composites or scores only (ZMT5X6, zenodo 20804,
+fpsyg.614502, x6n4hhk45v, 7033562, 4884989), genomic table (fsysb.1293265), design table
+(GRXTZY), speech text (FPPDKN), third-party re-deposits (6NSLTP Young Lives, D2XPSP barometers,
+NBTRGA election studies, 7IWKOV ANES/CCAP/DNES), ENCOVID August GAD-2 only (4602382). Below N:
+zenodo 16539273 (42), dryad s4mw6m9b6 (20 macaques).
+
+**Staged:** 107 rows in `dictionary_auto.csv` (3 replaced), `codebook_at_ingest.csv`,
+`tags/tags_auto.csv` (Construct type and Sample FRAME blank); 33 `itemtext_provenance.csv` +
+`mapping_verification.csv` rows (all data_labels / NOT_NEEDED); 34 `metadata/data_notes.csv`
+rows. Issues-page entries owed at upload for the 33 item text tables that carry a public_note
+(IRW English translations: fauziah x5, xu x3, fang, perez_hernandez x3, montana_blasco x4,
+makkiyah x4, rothlin, deilkas x2, zhang_2026; fox_2023_bct Study 2 rewording).
+
+**Rulings wanted (none blocks upload):** 2-5 item PLS-SEM blocks shipped as one table (jo_2023,
+diredja_2025, fang_2026, xu_2026) under the bland/nguyen reading; stapleton_2021 CCAP08/CCES18
+modules treated as the authors' own, not a panel re-deposit; schoen_2007 commissioned 2002
+survey treated as depositor's own; hatemi_2017 sexual-behaviour frequency items; jarbin_2020
+clinical dx flags as cov_dx_*; kahraman_2026_zbi has 19 of 22 ZBI items as deposited;
+montana_blasco mh_statements shipped unkeyed, four adapted-scale blocks' item text withheld;
+lee_2022 three arms collapsed to treat 0/1 + cov_condition; makkiyah/zhang/wunn item text with
+blank option_text; YB5PVO anonymous deposit. (Agent B reported the perez_hernandez_2021_* tables as
+"live" and growing; they are not on Redivis, they were agent A's tables from this same batch, so
+the upload is a plain new upload.)
