@@ -29,7 +29,8 @@
 ##    familia." / lowbrow "..., casi como el que pasan en La isla de las tentaciones, que veo en
 ##    casa en la televisión." (leading punctuation/brackets stripped).
 ##  (The essay also embeds the father's occupation; that is the same SES factor as the email.)
-##Full factorial; "non-realistic combinations ... are not excluded" (article): restrictions none.
+##Full factorial; "non-realistic combinations ... are not excluded" (article). Recorded as restrictions yes:
+##student name and father's email both carry the ethnicity factor, so the surnames always match.
 ##Outcomes (sliders with decimals; stored raw, rounded to 4 decimals to remove Stata float noise):
 ##  rating: essay grade 1-10, "What grade from 1 to 10 (including decimal points) would you give to
 ##    the essay considering its syntactic structure, orthography, vocabulary, and creativity?"

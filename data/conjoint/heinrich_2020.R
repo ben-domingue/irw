@@ -36,7 +36,8 @@
 ##    "(not shown)" (INFERRED: the screenshot shows the placebo issue with no remedy line, and
 ##    the authors' code sets the target to 0 whenever the amount is 0).
 ##Restrictions: yes (remedy amount is 0 unless the issue is one of the four nasty-regime
-##issues; codebook). Levels drawn with rand(): uniform. Attribute order fixed (screenshot).
+##issues; codebook). Levels drawn with rand(), probabilities not stated; observed issue shares are None and
+##the Olympics placebo 10% each, each regime issue about 20% (level_weights observed). Attribute order fixed (screenshot).
 ##Covariates: cov_birth_year (BIRTHYR), cov_gender (GENDER 1 male, 2 female: the authors' CCES
 ##recode in "1_Prep the data.R" codes Female = 2, else 1), cov_state, cov_education (Q2_2,
 ##codebook text), cov_faminc (Q2_3, codes as stored; codebook bands, with 9 = $80-89k and
