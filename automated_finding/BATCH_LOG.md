@@ -17888,3 +17888,41 @@ on other grounds (no codebook for its 19 job-satisfaction items). The four data-
 Ben published the drafts on 2026-10-09: 218 tables in `item_response_warehouse_5` and 27 item
 text tables in `irw_text_3`. He merged #2926 and datapages/irw#338 (7 issues-page entries). The
 remaining open item is the covariate-label build after the next pipeline run (TODO.md).
+
+## 2026-10-10 — PLOS monthly 2026-10-09 follow-up: 2 deposits / 4 tables / 43,967 responses, 2 item text tables (PR #2940)
+
+Worked the two `good` rows and the one `worth_retrying` row of the 2026-10-09 PLOS monthly
+run (PR #2929). Uploaded by Claude to the `item_response_warehouse_5` draft (4 response
+tables) and the `irw_text_3` draft (2 item text tables); release is ben-domingue's.
+
+| table | rows | people × items | scale | source |
+|---|---|---|---|---|
+| `ding_2020_covid_knowledge` | 35,064 | 1,461 × 24 | 0/1 scored (+ `resp_raw`) | pone.0237626 S1 Data, CC BY |
+| `ding_2020_covid_risk_perception` | 5,844 | 1,461 × 4 | 1-5 | same |
+| `panth_2026_bipq` | 1,360 | 170 × 8 | 0-10 | pone.0356524 S1 Data, CC BY |
+| `panth_2026_cdrisc10` | 1,699 | 170 × 10 | 0-4 | same |
+
+- **ding_2020** (`good`, "45 items" in triage = every deposit column). The deposit stores
+  each tick-all-that-apply option of the knowledge questions as its own 0/1 column, so each
+  option is an item, scored against the key printed in the questionnaire (S1/S2 File); Q11
+  (single choice) is scored correct = option E. Q14/Q15 (self-rated knowledge, 1-5) are not
+  items and are not shipped. Risk perception = the four Part-four items as deposited. Free-text
+  school/home locations reduced to Hubei indicators. Item text shipped for both tables: the
+  Chinese questionnaire (S1 File) is the administered wording, the authors' English (S2 File)
+  the `_translated` twin; gates PASS. The `imputed_values*` warnings are ceiling effects
+  (binary knowledge items at 0.86-1.00 correct; all integers).
+- **panth_2026** (`worth_retrying`: `dup_id_item` at 1.0x). The deposit's SN is duplicated
+  once (two different rows numbered 153; the paper's N is 170), so id = row order. One
+  CD-RISC cell held 9 (dropped). The three unlabelled "Variable 1-3" columns are the Modified
+  Kuppuswamy SES components (their ranges match education/occupation/income and sum to
+  "Total SE"), shipped as `cov_ses` only. Item text not shipped (codes only; CD-RISC blocked).
+- **Rejected again: pone.0200483 (Garden Cafés, `good`).** Headerless 112-row CSV with no
+  codebook. The 14 rating columns (5 literacy items + knowledge + readiness, each pre/post)
+  take values 2-8 while the paper describes a 1-7 scale, and neither reading (8 = a scale
+  point; 8 = not applicable; 2-8 shifted to 1-7) reproduces the paper's Table 2 means. Also
+  5-digit ZIP codes. Same verdict as its earlier skip (BATCH_LOG, "headerless file"). Its
+  DOI stays `good` in `plos_seen_dois.csv`, so it will not resurface.
+- Bookkeeping: 4 rows each in `dictionary_auto.csv`, `tags/tags_auto.csv`,
+  `metadata/data_notes.csv`, `codebook_at_ingest.csv`, `itemtext_provenance.csv`; 2
+  `NOT_NEEDED` rows in `itemtext/mapping_verification.csv`. No `.sav`, so no covariate-label
+  harvest. No issues-page entry owed (authors' own translation, `data_labels` + `study_materials`).
