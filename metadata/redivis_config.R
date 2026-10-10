@@ -55,7 +55,8 @@ IRW_TEXT_DATASETS <- c(
 ## CONJ_DEFAULT in red_up/targets.py, not the order here.
 ## No parentheses in comments inside this c, red_up/targets.py reads up to the first one.
 IRW_CONJ_DATASETS <- c(
-  "irw_conjoint"
+  "irw_conjoint",
+  "irw_conjoint_2"
 )
 
 ## The data families other than core, by the `source` name the irw package uses,
