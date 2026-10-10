@@ -36,6 +36,10 @@ IRW_TEXT_DATASETS <- c(
   "irw_text",
   "irw_text_2"
 )
+IRW_CONJ_DATASETS <- c(
+  "irw_conjoint",
+  "irw_conjoint_2"
+)
 IRW_AUX_DATASETS <- c(
   meta = "irw_meta",
   sim  = "irw_simsyn",
@@ -62,6 +66,10 @@ RPKG_R = """
   ),
   nom = list(
     list(user = "datapages", dataset = "irw_nominal:614n")
+  ),
+  conj = list(
+    list(user = "datapages", dataset = "irw_conjoint:5wjx"),
+    list(user = "datapages", dataset = "irw_conjoint_2:zzzz")
   )
 )
 .irw_meta_spec <- list(user = "datapages", dataset = "irw_meta:bdxt")
@@ -86,6 +94,10 @@ SIM_REF: ClassVar[Tuple[str, str]] = ("datapages", "irw_simsyn:0btg")
 COMP_REF: ClassVar[Tuple[str, str]] = ("datapages", "irw_competitions:cmd7")
 NOM_REF: ClassVar[Tuple[str, str]] = ("datapages", "irw_nominal:614n")
 META_REF: ClassVar[Tuple[str, str]] = ("datapages", "irw_meta:bdxt")
+CONJ_REFS: ClassVar[Tuple[Tuple[str, str], ...]] = (
+    ("datapages", "irw_conjoint:5wjx"),
+    ("datapages", "irw_conjoint_2:zzzz"),
+)
 ITEMTEXT_REFS: ClassVar[Tuple[Tuple[str, str], ...]] = (
     ("datapages", "irw_text:07b6"),
     ("datapages", "irw_text_2:ae47"),
@@ -107,6 +119,7 @@ EXPECTED = {
     "sim": ["irw_simsyn"],
     "comp": ["irw_competitions"],
     "nom": ["irw_nominal"],
+    "conj": ["irw_conjoint", "irw_conjoint_2"],
 }
 
 
@@ -189,8 +202,16 @@ class CompareTests(unittest.TestCase):
         self.assertIn("ORDER", problems[0])
 
     def test_unsharded_source_order_is_not_compared(self):
-        """Only `core` and `text` are shard lists; the rest are single datasets."""
-        self.assertEqual(ccp.SHARDED, ("core", "text"))
+        """`core`, `text` and `conj` are shard lists; the rest are single datasets."""
+        self.assertEqual(ccp.SHARDED, ("core", "text", "conj"))
+
+    def test_conj_shard_order_is_compared(self):
+        rpkg = dict(EXPECTED)
+        rpkg["conj"] = list(reversed(EXPECTED["conj"]))
+        problems = ccp.compare(self.configs(rpkg=rpkg))
+        self.assertEqual(len(problems), 1)
+        self.assertIn("conj", problems[0])
+        self.assertIn("ORDER", problems[0])
 
 
 if __name__ == "__main__":

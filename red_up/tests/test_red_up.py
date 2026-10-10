@@ -18,7 +18,7 @@ from pathlib import Path
 
 from red_up import cli
 from red_up import plan as planning
-from red_up.checks import (check_all, check_schema, history_dirs, scan,
+from red_up.checks import (FileReport, check_all, check_schema, history_dirs, scan,
                           validate_for_target)
 from red_up import targets as targets_mod
 from red_up.discover import discover, table_name
@@ -74,8 +74,9 @@ class Registry(unittest.TestCase):
         names = [t.name for t in targets]
         core = [t.name for t in targets if t.kind == "core"]
         text = [t.name for t in text_shards(targets)]
+        conj = [t.name for t in targets_mod.conj_shards(targets)]
         aux = [t.name for t in targets
-               if t.kind == "aux" and not t.is_itemtext]
+               if t.kind == "aux" and not t.is_itemtext and not t.is_conj]
 
         # Both families are shard lists that grow, so assert their shape rather
         # than a frozen tail -- pinning the newest name here means every future
@@ -86,16 +87,23 @@ class Registry(unittest.TestCase):
         self.assertEqual(text[0], "irw_text")
         self.assertEqual(text[1:],
                          [f"irw_text_{i}" for i in range(2, len(text) + 1)])
+        self.assertEqual(conj[0], "irw_conjoint")
+        self.assertEqual(conj[1:],
+                         [f"irw_conjoint_{i}" for i in range(2, len(conj) + 1)])
 
-        # The plain aux datasets are a fixed set; item text is not among
-        # them, because it is declared as IRW_TEXT_DATASETS.
+        # The plain aux datasets are a fixed set; item text and conjoint are
+        # not among them, because they are declared as IRW_TEXT_DATASETS and
+        # IRW_CONJ_DATASETS.
         self.assertEqual(sorted(aux),
-                         ["irw_competitions", "irw_conjoint", "irw_meta", "irw_nominal", "irw_simsyn"])
+                         ["irw_competitions", "irw_meta", "irw_nominal", "irw_simsyn"])
 
-        # Core first, then text shards, then the rest -- the menu order.
-        self.assertEqual(names, core + text + aux)
+        # Core first, then text shards, then the rest in AUX_LABELS order, the
+        # conj shards where AUX_LABELS puts "conj" -- the menu order.
+        self.assertEqual(names, core + text + aux + conj)
         self.assertEqual(newest_shard(targets).name, core[-1])
         self.assertEqual(newest_text_shard(targets).name, text[-1])
+        # New conjoint tables go to the newest conj shard (Ben, 2026-10-09).
+        self.assertEqual(targets_mod.conj_target(targets).name, conj[-1])
 
     def test_item_text_declared_twice_is_refused(self):
         # The three "single source of truth" files drifted once (#1733).
@@ -111,6 +119,31 @@ class Registry(unittest.TestCase):
             with self.assertRaises(ConfigError) as caught:
                 load_registry(path)
             self.assertIn("twice", str(caught.exception))
+
+    def test_conjoint_declared_twice_is_refused(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "redivis_config.R"
+            path.write_text(
+                'IRW_OWNER <- "datapages"\n'
+                'IRW_CORE_DATASETS <- c("a")\n'
+                'IRW_TEXT_DATASETS <- c("irw_text")\n'
+                'IRW_CONJ_DATASETS <- c("irw_conjoint")\n'
+                'IRW_AUX_DATASETS <- c(conj = "irw_conjoint")\n')
+            with self.assertRaises(ConfigError) as caught:
+                load_registry(path)
+            self.assertIn("twice", str(caught.exception))
+
+    def test_an_older_config_with_conj_inside_aux_still_parses(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "redivis_config.R"
+            path.write_text(
+                'IRW_OWNER <- "datapages"\n'
+                'IRW_CORE_DATASETS <- c("a")\n'
+                'IRW_TEXT_DATASETS <- c("irw_text")\n'
+                'IRW_AUX_DATASETS <- c(conj = "irw_conjoint")\n')
+            _, targets = load_registry(path)
+            self.assertEqual([t.name for t in targets_mod.conj_shards(targets)],
+                             ["irw_conjoint"])
 
     def test_pairs_is_competitions(self):
         # There is no irw_pairs dataset and never has been; "pairs" is the
@@ -138,6 +171,60 @@ class Registry(unittest.TestCase):
             _, targets = load_registry(path)
             self.assertEqual([t.name for t in targets],
                              ["a", "b", "irw_text", "irw_meta"])
+
+
+class TwoConjShards(unittest.TestCase):
+    """The conjoint twin of TwoTextShards: irw_conjoint is near the cap, and
+    the second shard must be a config edit on the day it is released."""
+
+    CONFIG = (
+        'IRW_OWNER <- "datapages"\n'
+        'IRW_CORE_DATASETS <- c("w1", "w2")\n'
+        'IRW_TEXT_DATASETS <- c("irw_text")\n'
+        'IRW_CONJ_DATASETS <- c("irw_conjoint", "irw_conjoint_2")\n'
+        'IRW_AUX_DATASETS <- c(meta = "irw_meta")\n'
+    )
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        path = Path(self.tmp.name) / "redivis_config.R"
+        path.write_text(self.CONFIG)
+        _, self.targets = load_registry(path)
+
+    def test_both_shards_are_registered_oldest_first_as_conj(self):
+        shards = targets_mod.conj_shards(self.targets)
+        self.assertEqual([t.name for t in shards], ["irw_conjoint", "irw_conjoint_2"])
+        self.assertTrue(all(t.kind == "aux" and t.source == "conj" for t in shards))
+        self.assertIn("newest shard", shards[-1].label)
+
+    def test_new_conjoint_tables_go_to_the_newest_shard(self):
+        # Ben, 2026-10-09: new conj tables go to irw_conjoint_2, not into
+        # irw_conjoint's remaining room.
+        self.assertIsNone(targets_mod.CONJ_DEFAULT)
+        self.assertEqual(targets_mod.conj_target(self.targets).name, "irw_conjoint_2")
+
+    def test_a_pin_still_wins(self):
+        with mock.patch.object(targets_mod, "CONJ_DEFAULT", "irw_conjoint"):
+            self.assertEqual(targets_mod.conj_target(self.targets).name, "irw_conjoint")
+
+    def test_unpinned_default_is_the_newest_shard(self):
+        with mock.patch.object(targets_mod, "CONJ_DEFAULT", None):
+            self.assertEqual(targets_mod.conj_target(self.targets).name, "irw_conjoint_2")
+
+    def test_both_shards_are_one_family_for_duplicate_detection(self):
+        # A table already in irw_conjoint_2 uploaded to irw_conjoint is the
+        # ELSEWHERE case, and both shards count as the same source for
+        # planning.within_source_duplicates -- never a cross-source clash.
+        shards = targets_mod.conj_shards(self.targets)
+        self.assertEqual({planning._family(t) for t in shards}, {"conj"})
+        conj1, conj2 = shards
+        report = FileReport(path=Path("x_2024_cands.csv"), table="x_2024_cands")
+        items = planning.build([report], conj1, {"x_2024_cands": ["irw_conjoint_2"]})
+        self.assertEqual(items[0].status, planning.ELSEWHERE)
+        planning.cross_source_conflicts(items, conj1, self.targets,
+                                        {"x_2024_cands": ["irw_conjoint_2"]})
+        self.assertEqual(items[0].status, planning.ELSEWHERE)
 
 
 class TwoTextShards(unittest.TestCase):
@@ -1085,3 +1172,24 @@ class PushOne(unittest.TestCase):
         self.assertTrue(r.ok)
         self.assertFalse(t.deleted)
         self.assertEqual(t.up.kwargs.get("delimiter"), ",")
+
+
+class TableCapTests(unittest.TestCase):
+    """plan.over_cap: Redivis refuses a dataset's 1001st table."""
+
+    def _items(self, dataset, new=0, update=0):
+        mk = lambda status, i: planning.Item(report=mock.Mock(table=f"t{status}{i}"), status=status, dataset=dataset, found_in=[])
+        return [mk(planning.NEW, i) for i in range(new)] + [mk(planning.UPDATE, i) for i in range(update)]
+
+    def test_up_to_the_cap_is_allowed(self):
+        self.assertEqual(planning.over_cap(self._items("d", new=194), {"d": 806}), {})
+
+    def test_one_past_the_cap_is_refused(self):
+        self.assertEqual(planning.over_cap(self._items("d", new=195), {"d": 806}), {"d": (806, 195)})
+
+    def test_updates_add_no_table(self):
+        self.assertEqual(planning.over_cap(self._items("d", update=50), {"d": 1000}), {})
+
+    def test_each_dataset_is_counted_on_its_own(self):
+        items = self._items("a", new=5) + self._items("b", new=5)
+        self.assertEqual(planning.over_cap(items, {"a": 996, "b": 10}), {"a": (996, 5)})

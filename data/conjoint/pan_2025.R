@@ -1,55 +1,68 @@
-##National-security-defender conjoint (Taiwan) from
-##Pan, H.-H., & Kagotani, K. (forthcoming). Diplomatic visits and image-building: A conjoint
-##analysis in Taiwan. Asian Survey. (Citation as given in the deposit; no article DOI found.)
-##Replication data: Harvard Dataverse doi:10.7910/DVN/HMRB9N, CC0 1.0, no restricted files.
-##File read: visit_analysis.dta (Dataverse "original format" of visit_analysis.tab).
-##Read as text, not run: PK_Visit_AS_ReadMe.txt, visit_analysis.do. The questionnaire is the
-##article's Appendix 1 ("English Translation Follows the Original Text in Traditional
-##Chinese"), not in the deposit, so the outcome wording below is a PARAPHRASE.
-##Usage: Rscript pan_2025.R <dir holding the .dta> <output dir>
+##Cross-Strait agreement conjoint from
+##Pan, H.-H., Kastner, S. L., & Pearson, M. M. (2025). Is China-Taiwan rapprochement possible?
+##Experimental evidence from Taiwan. Journal of Conflict Resolution, 69(7-8), 1143-1171.
+##https://doi.org/10.1177/00220027241300045
+##Replication data: Harvard Dataverse doi:10.7910/DVN/6CWQYJ, CC0 1.0. File read:
+##PPK_CSRAgreement_JCR_.tab (Dataverse original .dta = csr_analysis.dta). Clause text from the
+##authors' analysis do-file (PPK_CSRAgreement_JCR_analysis.do, read as text, Figure 2 eqlabels)
+##and the .dta variable labels. The article was not accessible (publisher 403).
+##Usage: Rscript pan_2025.R <dir holding ppk.dta (the original .dta renamed)> <output dir>
 ##
-##2,245 Taiwanese respondents (survey, mode and date not stated in the deposit), 5 tasks of 2
-##hypothetical politicians, 6 attributes. task and profile come from the recorded `contest`
-##("t_p", set_card). Outcome:
-##  choice: which of the two politicians the respondent prefers as a defender of national
-##    security (paraphrase from the do-file's figure titles "Probability of a Politician Being
-##    Preferred as a National Security Defender"). OPT-OUT (inferred): never are both profiles
-##    of a task chosen (with independent yes/no answers at a 27% rate, ~7% of tasks would
-##    be), and in 5,105 of 11,225 tasks neither is (choice = 0 on both; 514
-##    respondents chose neither in all 5 tasks), so the question evidently allowed "neither";
-##    the answer options are not in the deposit. Mean choice 0.27, matching the do-file's
-##    marginal-mean axis (0.20-0.35).
-##Attribute text: respondents saw Traditional Chinese (do-file, Figure 1 note); only the .dta
-##English value labels survive and are stored as is: gender Female/Male; party Independent/
-##DPP/KMT; education BA/MA/PhD; met_china_officials ("Ever met with any senior Chinese
-##officials") No/Yes; met_us_officials ("Ever met with any senior US officials") No/Yes;
-##cross_strait_policy ("Cross-Strait relations policy") "Oppose 92 Consensus"/"Support 92
-##Consensus". Attribute order and randomization rules are not documented; all level pairs
-##occur.
-##Covariates (.dta value-label text; all are the authors' coarsened versions, no raw answers
-##are deposited): cov_gender (r_gender Female -> female, Male -> male), cov_born_before_1978
-##(r_age2, "Before 1978"/"After 1978"), cov_college (r_edu, "W/0 college"/"w/ college"),
-##cov_residence (r_reside, "6 Capitals"/"Others"), cov_cross_strait_relations (r_chtw3,
-##perceived Cross-Strait relations Bad/Average/Good), cov_us_taiwan_relations (r_ustw3,
-##perceived US-Taiwan relations Bad/Average/Good). Dropped: r_chtw2, r_ustw2 (two-category
-##collapses of the 3-category items). No survey weight in the deposit.
-##N: 2,245 respondents; the article was not accessible to compare.
-##Spot check (no published numbers available): OLS of choice on the attributes, SEs clustered
-##by id: met US officials +0.033 (0.006), met Chinese officials +0.016 (0.006), DPP -0.050 and
-##KMT -0.055 vs Independent, within the do-file's AMCE axis (-0.10 to 0.05).
+##Online survey in Taiwan, April 2022 (wave 2); 3,446 respondents x 5 hypothetical cross-Strait
+##agreements = 17,230 rows (published summaries report 2,905 respondents: not reconciled).
+##Single-profile design: each agreement shows a subset of 8 possible concessions, 4 by China
+##(pledge to unify without force; stop fighter jets / reduce missiles; support Taiwan's
+##participation in IOs such as WHO; increase Taiwan's exports to China) and 4 by Taiwan (reduce
+##arms procurement from the US; renounce independence; recognize both sides belong to one China;
+##reduce restrictions on mainland investment). Each clause is coded Shown/Hidden in the source:
+##Shown -> the clause text, Hidden -> "(not shown)". Each clause appears in ~50% of agreements;
+##no agreement has zero clauses (observed restriction: 1-8 clauses shown).
+##choice = support_w2, "Support for CSR agreement" (Support = 1 / Oppose = 0; accept/reject of a
+##single agreement, so opt_out = yes). Wording paraphrased (questionnaire not deposited).
+##trial_us_china_frame = random_usch_w2, a respondent-level randomized framing (none / US support /
+##China threat / US support and China threat; "[Blank]" label -> "none").
+##Task = row order within respondent (no task column; display order of the 5 agreements is not
+##recorded); profile = 1.
+##Covariates: cov_gender (gender_w2: Female = 0, Male = 1, value labels); the deposit's other
+##respondent variables are the authors' binary recodes and are kept with their codes (labels in
+##the .dta): cov_born_before_1978, cov_north, cov_college, cov_income_above_median, cov_pan_blue
+##(ptyid: Pan-Green 0 / Pan-Blue 1), cov_natlid_chinese_or_both, cov_pro_unification,
+##cov_pro_independence, cov_economy_over_security, cov_us_credible, cov_china_credible,
+##cov_us_defend_no_indep / cov_us_defend_indep (1-4), cov_social_contact_china_live/born,
+##cov_prob_china_attack (0-100, before the agreements), cov_prob_attack_if_accept /
+##cov_prob_attack_if_reject (0-100, asked once per respondent). Qualtrics ResponseIds re-keyed;
+##start/end timestamps dropped. No survey weight in the deposit.
 library(haven); library(data.table)
 a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]
-k <- read_dta(file.path(raw, "visit_analysis.dta"))
-lt <- function(x) as.character(as_factor(x, levels = "labels"))
-tp <- tstrsplit(k$contest, "_")
-d <- data.table(id = as.integer(k$id), task = as.integer(tp[[1]]), profile = as.integer(tp[[2]]), choice = as.integer(k$choice),
-                attr_gender = lt(k$p_gender), attr_party = lt(k$p_party), attr_education = lt(k$p_edu),
-                attr_met_china_officials = lt(k$p_ch), attr_met_us_officials = lt(k$p_us), attr_cross_strait_policy = lt(k$p_consensus),
-                cov_gender = c(Female = "female", Male = "male")[lt(k$r_gender)], cov_born_before_1978 = lt(k$r_age2),
-                cov_college = lt(k$r_edu), cov_residence = lt(k$r_reside),
-                cov_cross_strait_relations = lt(k$r_chtw3), cov_us_taiwan_relations = lt(k$r_ustw3))
-stopifnot(all(d$task %in% 1:5), all(d$profile %in% 1:2), d[, .N, .(id, task)][, all(N == 2)], !anyNA(d$choice),
-          d[, sum(choice), .(id, task)][, all(V1 <= 1)], uniqueN(d$id) == 2245)
-for (v in grep("^attr_", names(d), value = TRUE)) stopifnot(!anyNA(d[[v]]))
+f <- list.files(raw, pattern = "\\.dta$", full.names = TRUE); stopifnot(length(f) == 1)
+x <- as.data.table(zap_labels(read_dta(f)))
+x[, rid := as.character(responseid_w2)]
+stopifnot(length(rle(x$rid)$lengths) == uniqueN(x$rid))           # rows of a respondent are contiguous
+ids <- unique(x$rid); x[, id := match(rid, ids)]; x[, task := seq_len(.N), by = id]
+cl <- c(ch_force_w2 = "attr_china_no_force", ch_missile_w2 = "attr_china_reduce_military", ch_who_w2 = "attr_china_ios_who",
+        ch_exp_w2 = "attr_china_imports", tw_usarm_w2 = "attr_taiwan_us_arms", tw_indep_w2 = "attr_taiwan_renounce_independence",
+        tw_onech_w2 = "attr_taiwan_one_china", tw_invest_w2 = "attr_taiwan_china_investment")
+txt <- c(ch_force_w2 = "China: Pledge to unify Taiwan without the use of force",
+         ch_missile_w2 = "China: Stop fighter jets from circling Taiwan and reduce missiles targeting Taiwan",
+         ch_who_w2 = "China: Support our country's participation in IOs such as WHO",
+         ch_exp_w2 = "China: Increase our country's export to China",
+         tw_usarm_w2 = "Taiwan: Reduce arms procurement from the US",
+         tw_indep_w2 = "Taiwan: Pledge to renounce Taiwan's independence",
+         tw_onech_w2 = "Taiwan: Recognize that both sides belong to one China",
+         tw_invest_w2 = "Taiwan: Reduce restrictions on mainland China's investments in our country")
+d <- x[, .(id, task, profile = 1L, choice = as.integer(support_w2))]
+for (v in names(cl)) { stopifnot(all(x[[v]] %in% 0:1)); d[, (cl[[v]]) := ifelse(x[[v]] == 1, txt[[v]], "(not shown)")] }
+stopifnot(all(rowSums(x[, names(cl), with = FALSE]) >= 1), !anyNA(d$choice), x[, uniqueN(random_usch_w2), id][, all(V1 == 1)])
+d[, trial_us_china_frame := c("none", "US support", "China threat", "US support and China threat")[x$random_usch_w2]]
+d[, `:=`(cov_gender = c("female", "male")[x$gender_w2 + 1L], cov_born_before_1978 = x$age_w2, cov_north = x$reg_w2,
+         cov_college = x$college_w2, cov_income_above_median = x$inc_w2, cov_pan_blue = x$ptyid_w2,
+         cov_natlid_chinese_or_both = x$natlid_w2, cov_pro_unification = x$unify_w2, cov_pro_independence = x$indep_w2,
+         cov_economy_over_security = x$economy_w2, cov_us_credible = x$us_credit_w2, cov_china_credible = x$ch_credit_w2,
+         cov_us_defend_no_indep = x$usdef_noindep_w2, cov_us_defend_indep = x$usdef_indep_w2,
+         cov_social_contact_china_live = x$soc_ch2_w2, cov_social_contact_china_born = x$soc_ch1_w2,
+         cov_prob_china_attack = x$prob_chwar_w2, cov_prob_attack_if_accept = round(x$accept_prob_chwar_w2, 4),
+         cov_prob_attack_if_reject = round(x$reject_prob_chwar_w2, 4))]
+stopifnot(!anyNA(d$cov_gender), d[, .N, id][, all(N == 5)])
 setorder(d, id, task, profile)
-fwrite(d, file.path(out, "pan_2025_diplomatic_visits.csv"))
+fwrite(d, file.path(out, "pan_2025_crossstrait_agreement.csv"))
+cat(nrow(d), uniqueN(d$id), mean(d$choice), "\n")

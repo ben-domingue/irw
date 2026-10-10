@@ -1,10 +1,12 @@
-# Conjoint experiments (`irw_conjoint`)
+# Conjoint experiments (`irw_conjoint`, `irw_conjoint_2`, …)
 
-Processing scripts for the tables in the Redivis dataset `datapages.irw_conjoint`, the conjoint data family (`source = "conj"`). Users fetch them with `irw_fetch(name, source = "conj")` in R or `irw.fetch(name, source="conj")` in Python, and `irw_conj_long()` / `irw.conj_long()` give the core id/item/resp view. Upload from a staging folder that holds only the files to upload:
+Processing scripts for the tables in the conjoint data family (`source = "conj"`): the Redivis datasets listed in `IRW_CONJ_DATASETS` (`metadata/redivis_config.R`), `datapages.irw_conjoint` first. Redivis caps a dataset at 1000 tables, so the family is a **shard list** on the item-text pattern (`ARCHITECTURE.md` §2): both client packages read every shard and resolve a name newest-first, and a user never names a shard. Users fetch tables with `irw_fetch(name, source = "conj")` in R or `irw.fetch(name, source="conj")` in Python, and `irw_conj_long()` / `irw.conj_long()` give the core id/item/resp view. Upload from a staging folder that holds only the files to upload:
 
 ```
 red_up . --dataset irw_conjoint
 ```
+
+NEW conjoint tables go to the newest shard, `irw_conjoint_2` (`CONJ_DEFAULT = None` in `red_up/targets.py`, Ben 2026-10-09); `irw_conjoint` stays at its 806 tables, and its remaining room is for in-place repairs. `red_up` refuses an upload that would take any shard past 1000 tables. A table that already exists in another shard is updated **there**: `red_up` lists every shard first and offers "update where it lives" as the default, because a second copy in a different shard would shadow the first rather than replace it. `16_conjoint.R` and `irw_list_tables(source = "conj")` flag any name that does end up in two shards. Never move a table between shards. To register a new shard, follow "Adding a conjoint shard" in `Rpkg/inst/developer/warehouses.md`: the dataset needs a **published release** before any config names it, and the entry lands in Rpkg, Python-pkg, then here.
 
 `red_up` runs the conjoint checks (`irw_validate.conjoint`) for this target instead of the core validator. To check files before staging them:
 

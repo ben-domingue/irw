@@ -3,15 +3,34 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## From the 2026-10-08 repos mode-3 discovery (15 new terms x 9 languages)
+
+- Ruled 2026-10-09 (ben-domingue): the five decisions on the 2026-10-09 batch stand (karrot split, CAQ as one table, CYRM-12 item text held, AMTB item text shipped, bland/nguyen block-based constructs).
+- [ ] **Covariate labels: harvested 2026-10-09** at 54cacc4b for 20 scripts (abu_tabar_2021_copd,
+  blumel_2018_mrs, wang_2026_moral_models_psm, nicholson_crotty_2021_psm, favero_2020_covid_prosocial,
+  mullinix_2015_political_knowledge, dey_2017_mistreatment_childbirth, sadish_2021_covid_beliefs,
+  khan_2023_ethical_leadership, fischer_2018_promis29, wolbers_2017_oral_language, cuttler_2017_cannabis,
+  galindo_2025_chatgpt_dependence, lin_2023_smartphone_addiction, wenzke_2025_carbon_offsetting,
+  lei_2024_learning_motivation, chen_2026_entrepreneurship, salomon_2014_essentialism,
+  arista_2010_achievement_motivation, vasquez_2013_reading_comprehension). Run
+  `python3 metadata/covariate_labels/build.py` after the next pipeline run and commit covariate_labels.csv.
+- Ruled 2026-10-09 (ben-domingue) on the 2026-10-09c batch: 5-digit ZIP + birth year is PII
+  (RAPID DVN/QIEEJU, 1IWRQA stay skipped); birth month + year is not a birthdate (keep year or
+  age only; RMUJNX still skipped, no codebook); the four data-noted tables, the conj routing and
+  the purnama issues entries stand.
+- Ruled 2026-10-09 (ben-domingue): third-party re-deposits (KLIPS DVN/RWPOMI, TEDS 2024-T
+  DVN/QIGM1P) stay rejected; an uploader's CC0 cannot relicense a panel its institute distributes.
+- [ ] The Canada GSS 2010 files (`10.5683/sp3/uxz4it`, `sp3/a6dbgs`) and `10.7910/dvn/crpaa8`
+  OOM at 6G every run and are never written to the seen ledger. Add them to the ledger as
+  `file_too_large` (or equivalent) so they stop resurfacing.
+
 ## From the 2026-10-09 PLOS monthly run (full sweep, 125 terms x plosone)
 
-- [ ] **2 `good` candidates to write scripts for (or skip with a reason):**
-  `pone.0237626` (COVID-19 risk perception, China college students, 1461p/45i) and
-  `pone.0200483` (Garden Cafés community-engagement survey, 111p/28i). See
-  `BATCH_LOG.md`'s 2026-10-09 PLOS monthly entry for the QC notes to check first.
-- [ ] **1 `worth_retrying`:** `pone.0356524` (illness perception/resiliency in cancer
-  patients, 169p/24i) — `dup_id_item` failure likely a longitudinal shape, not a
-  real duplicate; re-triage to confirm.
+- [x] **2 `good` + 1 `worth_retrying` worked (PR #2940, 2026-10-10):** `pone.0237626` ->
+  `ding_2020_covid_knowledge` + `ding_2020_covid_risk_perception` (item text shipped);
+  `pone.0356524` -> `panth_2026_bipq` + `panth_2026_cdrisc10` (the `dup_id_item` was one
+  duplicated serial number). `pone.0200483` (Garden Cafés) rejected again: values 2-8 vs the
+  paper's 1-7 scale, no codebook. See BATCH_LOG 2026-10-10.
 - [ ] **15 `recoverable_format` leads** (one deposit, several bundled instruments —
   needs splitting into one table per scale) — see BATCH_LOG entry for the full list
   and DOIs.
