@@ -72,6 +72,45 @@ def index_tables(owner: str, dataset_names: list[str]) -> dict[str, list[str]]:
     return index
 
 
+#: Redivis caps a dataset at 1000 tables (ARCHITECTURE.md section 2). An upload
+#: that would add the 1001st is refused before anything is written; one that
+#: leaves a dataset above TABLE_WARN is allowed but says the next shard is due.
+TABLE_CAP = 1000
+TABLE_WARN = 990
+
+
+def table_counts(owner: str, dataset_names: list[str]) -> dict[str, int]:
+    """Tables per dataset as the next upload will find them.
+
+    The open draft if there is one, since that is where new tables land and it
+    can already hold more than the release; else the latest version.
+    index_tables cannot answer this: `dataset(name)` lists the release only.
+    """
+    import redivis
+
+    def fetch(name: str) -> tuple[str, int]:
+        try:
+            return name, len(redivis.organization(owner).dataset(name, version="next").list_tables())
+        except Exception:  # no draft open (NotFoundError), see push.open_draft
+            return name, len(redivis.organization(owner).dataset(name).list_tables())
+
+    with ThreadPoolExecutor(max_workers=min(8, len(dataset_names) or 1)) as pool:
+        return dict(pool.map(fetch, dataset_names))
+
+
+def over_cap(items: list[Item], counts: dict[str, int],
+             cap: int = TABLE_CAP) -> dict[str, tuple[int, int]]:
+    """Datasets this upload would take past `cap`: name -> (now, new tables).
+
+    Only NEW items add a table; an UPDATE replaces one in place.
+    """
+    adding: dict[str, int] = {}
+    for item in items:
+        if item.status == NEW and item.dataset:
+            adding[item.dataset] = adding.get(item.dataset, 0) + 1
+    return {name: (counts[name], n) for name, n in adding.items() if counts[name] + n > cap}
+
+
 #: `datastandard.md` caps a table name at 40 characters, and `irw_validate`
 #: raises that as an error. 130 live tables predate the rule -- the longest is
 #: 65 characters -- so enforcing it on the upload path means a table that is

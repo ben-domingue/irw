@@ -352,6 +352,26 @@ def main(argv: list[str] | None = None) -> int:
             for err in item.report.errors:
                 print(f"  {item.table}: {err}", file=sys.stderr)
 
+    # Redivis refuses a dataset's 1001st table, and only after the earlier
+    # tables of the run have gone in, leaving a half-uploaded batch. Checked
+    # against the open draft, which is what the upload adds to.
+    new_into = sorted({i.dataset for i in live if i.status == planning.NEW})
+    if new_into:
+        counts = planning.table_counts(owner, new_into)
+        breach = planning.over_cap(live, counts)
+        if breach:
+            die("\n".join(f"{name} holds {now} tables; adding {n} would pass Redivis' "
+                          f"{planning.TABLE_CAP}-table cap. Send new tables to a newer "
+                          f"shard (--dataset) or split the batch. Nothing uploaded."
+                          for name, (now, n) in breach.items()))
+        for name in new_into:
+            after = counts[name] + sum(i.dataset == name and i.status == planning.NEW for i in live)
+            print(f"{name}: {counts[name]} tables now, {after} after this upload "
+                  f"(cap {planning.TABLE_CAP})")
+            if after > planning.TABLE_WARN:
+                print(f"  warning: {name} will be above {planning.TABLE_WARN}; open the next shard.",
+                      file=sys.stderr)
+
     if args.dry_run:
         print(f"\n--dry-run: {len(live)} table(s) would be uploaded. Nothing was written.")
         return 1 if skipped else 0
