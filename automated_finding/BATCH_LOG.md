@@ -18221,3 +18221,80 @@ disengagement, obsessive compulsive, PANAS.)
   Buddhism psychometrics (zenodo, 2,285 x 55), NEO-PI-R (DVN, 857 x 275), Dark Triad and
   cyberbullying (DVN, 762 x 72), fluid intelligence and fertility intentions (DVN, 1,056 x
   242, worth_retrying).
+
+## 2026-10-11d — The 53 leads from 2026-10-11: 30 deposits / 83 tables / 2,006,984 responses, 32 item text tables
+
+Three forks on ben-domingue's "go for those 53 leads": A (27 leads, all worked), B (26 leads;
+wound down after 11 when ben-domingue asked for one agent at a time), C (B's remaining 15).
+Every lead now has a status in `leads/repos_leads_2026-10-11.csv`: 32 shipped (3 of them
+already in IRW from the 2026-10-08 batch: Holzknecht listening DVN/WWN1TS, Babenko medical
+students DVN/JHZDLR, Zhang stress mindset DVN/JU6K33; nothing rewritten), 19 rejected on
+content, 1 licence block (DVN/Y10EQV custom Dataverse terms + ANES/IAT re-deposit, in
+`license_blocked_candidates.csv`), 1 unworked (DVN/G7EOGT Ciuk TESS 2002/2010, 9,313 x 12,
+needs the TESS codebook to name the items). No PII skips. Nothing uploaded; output sits in
+`irw_output/` (83 files) and `itemtext_output/` (32 `__items.csv`). The 107 + 33 files of the
+already-uploaded 2026-10-10 batch were still in those folders and were moved to
+`runs/uploaded_2026-10-10/` so `red_up irw_output` cannot re-upload them.
+
+**A (12 deposits, 35 tables, 18 item text):** hernandez_martinez_2025_math_attitudes (6,078
+ids, AFE+AFC halves merged with cov_sample), duraj_2026 (amas, pe, te, pee; two waves),
+begum_2026 (isi, hama; 10,008 ids; hama item text), esteves_2026 (sdi, dddt; Portuguese + IRW
+English), sobczak_2024 (bmast rescored 0/1, dddt), bi_2026 (4 blocks; Chinese + IRW English),
+rajeev_2025 (superstition, panas, bigfive; item text), li_2026_online_aggression (coab, pev,
+nad, pd, empathy; item text), amiruddin_2023 (6 "gogy" blocks), kassas_2021 (covid_exposure,
+covid_mitigation; .dta labels), vogel_2024 (citizen_attributes_s2/_s3 with rt,
+attribute_valence_s3; 1,803 mean-imputed fit cells dropped), rathod_2026_drought_dass21.
+
+**B (5 deposits, 16 tables, no item text):** condon_2025 (caq 5,650 x 81 0/1, caq_freq),
+goldberg_2018_neo_pir (856 x 240; raw items of the ESCS dataset `goldberg_2018_escs.py`
+excluded as mixed), goldberg_2018_pea (7 tables: pea 178 items, health, belief, gambling,
+reading, childexp, experiences; demographics joined from DVN/VGMXJX), smith_2022 (trust,
+expressive_partisan, negative_partisan), stanford_2019 (bbrs_frequency and bbrs_belief with
+Study 1+2 pooled via cov_study, buddhism_attitud). CAQ has no labels and no codebook; NEO
+both label levels empty; PEA variable labels SPSS-truncated, full wording in the ESCS report.
+
+**C (12 deposits, 32 tables, 14 item text):** yuan_2026_vr_chinese (2 waves, treat),
+yang_2026 (epistemic_beliefs, ai_literacy, academic_dishonesty; deposit docx), pinedo_2026
+(genai_utaut2, 57 items), hou_2022 (dirty_dozen, perspective_taking, moral_disengagement,
+trait_anger, online_disinhibition, cyberbullying; 4 with Chinese + IRW English, item 1 blank
+from SPSS truncation), hitlan_2025 (ders16, dirty_dozen 1-9, celebrity_attitude; 17
+attention-check failures dropped), petrovici_2025 (cultural_participation,
+culture_appreciation 1/2 as deposited, wellbeing; Romanian + authors' English), gulec_2023
+(tipi, pcl5, pvs), ginting_2026 (5 blocks, 1,000 ids labelled SYN but stated real),
+izquierdo_lopez_2026_eosp (160 pupils x 36, rater = teacher; Spanish + IRW English),
+celikbas_2022 (pmq, mcq30, pcs, bpi), christian_2025_imagination (108 x 10),
+rapallini_2023_raven (1,677 x 12 0/1 with rt; key derived from the deposited total, exact for
+every respondent).
+
+**Skips (content):** 6 unkeyed Spanish quiz; 8 free text; 11 and 44 composites only; 14
+E-PVQ means; 18 facet sums; 21 TSP experiment edges; 24 single-indicator constructs; 26
+subscale scores; 29 2-3 item experiments; 33 moose mating records (no item structure); 36 M5S
+single items; 39 ESS Round 10 extract; 40 Russian panel indices; 41 CCAP 2008 re-deposit (TIPI
+live as stapleton_2021_tipi); 42 94 ids with data; 46 meta-analysis; 48 Asian Barometer
+re-deposit; 52 scale means only.
+
+All 83 pass `run_qc` (no fail) and `irw-validate --profile upload`; 32 item text tables pass
+normalize_nulls → validate_items → audit_batch (5 WARNs, all blank item_text: hou x4 item 1,
+kassas_2021_covid_mitigation `cleaning` whose deposit label repeats another question) →
+irw-validate; `check_provenance.R` clean. `itemtext_output/` holds only `*__items.csv`. Fork A
+had overwritten `itemtext_verification/make_itemtext_li_2026.py` (the li_2026_psmus builder,
+#2818); restored from git, A's builder renamed `make_itemtext_li_2026_online_aggression.py`.
+
+**Staged:** 83 rows in `dictionary_auto.csv` + `codebook_at_ingest.csv`, 83 in
+`tags/tags_auto.csv`, 32 in `itemtext_provenance.csv` + `mapping_verification.csv` (all
+data_labels / NOT_NEEDED), 20 `metadata/data_notes.csv` rows. Covariate-label harvest run
+against the batch commit for the 15 .sav/.dta scripts (all exit 0); `build.py` emits live
+tables only, so covariate_labels.csv changes after the release. Issues-page entries owed at
+upload for the IRW-translated tables (esteves x2, bi x4, hou x4, izquierdo_lopez) plus
+kassas_2021_covid_mitigation and petrovici_2025_culture_appreciation (public_note set).
+
+**Rulings wanted (none blocks upload):** small construct blocks shipped as one table per
+block (bi 16/4/5/5, amiruddin 5-7, yuan 6x3, pinedo 9 blocks, yang epistemic 4x3, christian,
+smith negative_partisan 5, PEA reading/childexp 8); ESCS raw-item tables under goldberg_2018_*;
+smith_2022 named for the depositor (paper is Mayer & Smith); esteves SDI/Dirty Dozen item text
+shipped though neither is in the rights register; li_2026 and yang_2026 item text with language
+blank (English questionnaire, Chinese sample, administration language unstated); rathod DASS
+anchors from the instrument not the file; hernandez age withheld (mixed coding); rapallini resp
+keyed from the deposited total, chosen option not shipped; petrovici culture_appreciation 1/2
+vs codebook 1/0; stanford buddhism_attitud opaque `attitude_k` codes; celikbas_pcs 14th column
+dropped; ginting SYN-labelled ids.
