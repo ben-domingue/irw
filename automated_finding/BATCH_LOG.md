@@ -18155,3 +18155,9 @@ lee_2022 three arms collapsed to treat 0/1 + cov_condition; makkiyah/zhang/wunn 
 blank option_text; YB5PVO anonymous deposit. (Agent B reported the perez_hernandez_2021_* tables as
 "live" and growing; they are not on Redivis, they were agent A's tables from this same batch, so
 the upload is a plain new upload.)
+
+## 2026-10-11 — repos batch 2026-10-10 uploaded
+
+PR #2946 merged; ben-domingue confirmed the 107 response tables and 33 item text tables
+uploaded. `uploaded=2026-10-11` stamped on the 33 `itemtext_provenance.csv` rows. Covariate-label
+harvest for the 15 .sav/.dta scripts run against the merge commit (see TODO).

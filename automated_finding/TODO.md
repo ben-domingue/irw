@@ -5,7 +5,7 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
 ## From the 2026-10-10 repos mode-3 batch (15 new terms x 9 languages)
 
-- [ ] **107 tables (2,042,413 responses) + 33 item text tables need uploading** from
+- [x] **107 tables (2,042,413 responses) + 33 item text tables uploaded** (ben-domingue, confirmed 2026-10-11; `uploaded=2026-10-11` stamped) from
   `automated_finding/irw_output/` and `itemtext_output/` (response tables first). All 107 are new
   (the `perez_hernandez_2021_*` tables were written and extended within this batch; nothing is
   live yet). Stamp `uploaded=` in `itemtext_provenance.csv` only after ben-domingue confirms.
