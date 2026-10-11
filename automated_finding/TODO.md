@@ -9,8 +9,7 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   `automated_finding/irw_output/` and `itemtext_output/` (response tables first). All 107 are new
   (the `perez_hernandez_2021_*` tables were written and extended within this batch; nothing is
   live yet). Stamp `uploaded=` in `itemtext_provenance.csv` only after ben-domingue confirms.
-- [ ] **Issues-page entries** (datapages/irw) for the item text tables with a `public_note` in
-  `itemtext_provenance.csv` (see BATCH_LOG 2026-10-10b).
+- [x] **Issues-page entries:** 25 entries in datapages/irw#342 (fox_2023_gad7 dropped as below the bar).
 - [ ] **Covariate labels:** after commit run `python3 metadata/covariate_labels/harvest.py --commit HEAD`
   for meden_2026_podcast, kacovsky_2022_imi, jarbin_2020_mfq, spasovski_2020_perma,
   asadollahi_2022_fesi, perez_hernandez_2021_encovid, wendel_2022_rfq, stecula_2020_antivax,
