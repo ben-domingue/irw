@@ -5,9 +5,17 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
 ## From the 2026-10-11 repos mode-3 batch (15 new terms x 9 languages)
 
-- [ ] 53 unworked leads in `leads/repos_leads_2026-10-11.csv` (11 good + 42 recoverable/worth_retrying);
-  see BATCH_LOG 2026-10-11c. DVN/Y10EQV carries a custom Dataverse terms string, resolve the licence
-  before touching it. Nothing written, staged or uploaded yet.
+- [ ] **83 tables (2,006,984 responses) + 32 item text tables need uploading** from
+  `automated_finding/irw_output/` and `itemtext_output/` (response tables first). All 83 are new.
+  The already-uploaded 2026-10-10 files were moved to `runs/uploaded_2026-10-10/`. Stamp
+  `uploaded=` in `itemtext_provenance.csv` only after ben-domingue confirms.
+- [ ] **Issues-page entries at upload:** esteves x2, bi x4, hou x4, izquierdo_lopez (IRW English
+  translations), kassas_2021_covid_mitigation (blank `cleaning` stem), petrovici_2025_culture_appreciation
+  (1/2 vs codebook 1/0).
+- [ ] **Covariate labels:** `build.py` after the release and commit covariate_labels.csv (harvest run
+  at commit for the 15 .sav/.dta scripts, see BATCH_LOG 2026-10-11d).
+- [ ] **Rulings wanted** (none blocks upload): see BATCH_LOG 2026-10-11d.
+- [ ] 1 unworked lead in `leads/repos_leads_2026-10-11.csv`: DVN/G7EOGT (Ciuk TESS 2002/2010, needs the TESS codebook).
 - [ ] The "arg must be a list, tuple, 1-d array, or Series" reader fault hit 13 more `error` rows
   (24 across the 2026-10-10 and 2026-10-11 runs); worth a look at `load_table()`.
 
