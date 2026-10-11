@@ -192,6 +192,16 @@ out <- merge(out, dtab[, c("table", design_cols)], by = "table", all.x = TRUE, s
 no_design <- out$table[is.na(out$restrictions)]
 if (length(no_design)) message("  ! no design record (data/conjoint/design_tables.csv): ",
                                paste(no_design, collapse = ", "))
+##Topic tags (data/conjoint/tags.csv; README "Topic tags"): what the study is
+##about (domain, multi-select joined with ";") and what a profile represents
+##(choice_object). Joined as two more columns, so the packages filter on them
+##like any other conj_metadata field. A table with no row gets NA and is
+##reported; metadata/tests/test_conj_design.py catches it earlier.
+dtags <- read_design("tags.csv")
+out <- merge(out, dtags[, c("table", "domain", "choice_object")], by = "table", all.x = TRUE, sort = TRUE)
+no_tags <- out$table[is.na(out$domain)]
+if (length(no_tags)) message("  ! no topic tags (data/conjoint/tags.csv): ",
+                             paste(no_tags, collapse = ", "))
 expected <- do.call(rbind, lapply(seq_len(nrow(out)), function(i)
   data.frame(table = out$table[i], outcome = strsplit(out$outcomes[i], ";", fixed = TRUE)[[1]])))
 key <- function(d) paste(d$table, d$outcome, sep = ":")
