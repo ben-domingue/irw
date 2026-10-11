@@ -18168,3 +18168,56 @@ harvest for the 15 .sav/.dta scripts run against the merge commit (see TODO).
 montana_blasco x4, perez_hernandez x3), English substitutes for non-English administrations
 (rothlin, deilkas x2, zhang_2026_ai_companion), and the fox_2023_bct Study 2 rewording.
 fox_2023_gad7 dropped as below the bar (`itemtext/fixes/issues_page_dropped.csv`).
+
+## 2026-10-11c — Repos mode-3 discovery + triage: 15 new terms x 9 languages, 1,208 candidates, 11 good, 53 leads
+
+Discovery and triage only, run locally on ben-domingue's instruction ("fire an automated
+search for core tables"). No scripts written, nothing staged, nothing uploaded.
+
+**Terms (new to `search_terms_log.csv`, each in English + es/de/fr/zh/ja/ar/nl/ko,
+135 queries):** dark triad dirty dozen, portrait values questionnaire, multifactor
+leadership questionnaire, metacognitions questionnaire, populist attitudes scale,
+fear-avoidance beliefs questionnaire, creative achievement questionnaire, study process
+questionnaire, drug abuse screening test, community of inquiry survey, ptsd checklist, team
+climate inventory, school climate survey, implicit theories of intelligence, vividness of
+visual imagery questionnaire. (Candidates dropped as already logged under a near-identical
+term: ambivalent sexism, internet gaming disorder, HEXACO, intolerance of uncertainty, moral
+disengagement, obsessive compulsive, PANAS.)
+
+- **Discovery** (~55 min): 1,208 candidates (dataverse 418, zenodo 364, surf 172,
+  figshare 118, scholars_portal 88, datacite 25, mendeley 18, dryad 4, osf 1).
+- **Triage** (`--retriage`, 6G cap; no `--limit 10` sanity run): 463 triaged after the
+  seen ledger excluded 745: `no_usable_file` 175, `human_assistance` 116,
+  `download_failed` 92 (dataverse 38, surf 30, scholars_portal 10, zenodo 6; transient, not
+  ledgered), `below_min_n` 24, `not_item_response` 19, `error` 16 (13 of them the same
+  "arg must be a list, tuple, 1-d array, or Series" reader fault as 2026-10-10 -- now 24
+  rows across two runs, still open in TODO), **`good` 11**, `license_restricted` 4 (all
+  CC BY-NC-ND), `pii_suspected` 4 (direct-identifier columns), `file_too_large` 2 (PISA
+  DVN/5Y4ZLQ, DVN/DZC0MT; both appended to `oversized_candidates.csv` by the script). No
+  OOM kills.
+  Operator note: the first two waiters used `pgrep` patterns that matched the waiter's own
+  shell (discovery) or missed `/usr/bin/python3` (triage); neither run was affected, and no
+  duplicate run was started. Wait on the PID.
+- **Step 2b ran** (chained): 116 HA -> recoverable_format 51, not_item_response 25,
+  human_review 21, aggregate_continuous 10, worth_retrying 9. `[conj]` routed none.
+  `[human_review] archived 21 row(s) -> human_review/human_review_zenodo_2026-10-11.csv`.
+- **Leads -> `leads/repos_leads_2026-10-11.csv`** (53 rows, all `unworked`: the 11 good,
+  plus every licence-ok worth_retrying/recoverable_format row with 100 <= N <= 50,000 and
+  8-700 items). The 11 good: Dark Triad + problematic drinking (mendeley 735s7fvt99, 565 x
+  31), Creative Achievement and Individual Differences (DVN/2IBBMG, 5,650 x 140), AI
+  literacy among preservice teachers (zenodo 22040756, 618 x 30), VR Chinese language
+  learning (figshare 34021359, 351 x 18), Onidra ISI + HAM-A insomnia/anxiety (mendeley
+  sg2whyws4h, 10,008 x 28), AI literacy / epistemic beliefs / academic dishonesty (mendeley
+  252r6gdx48, 972 x 64), dental students' emergency perceptions (mendeley x9d7bspnr3, 112 x
+  2 -- probably a summary file, check the other files), generative AI among marketing
+  undergraduates (zenodo 20400330, 310 x 60), human-AI visual co-creation (zenodo 19699406,
+  116 x 5), Personality, Emotions, and Attitudes PEA (DVN/NWYX4N, 749 x 304), white racial
+  attitudes (DVN/Y10EQV, 3,038 x 6, **licence is a custom Dataverse terms string**, resolve
+  before touching). Larger recoverable leads: Asian Barometer China image (DVN/..., 26,951 x
+  12), intermittent breaks / collective intelligence (26,214 x 311), personality and
+  political preferences multi-wave (20,000 x 25), democratic values by racial group (9,313 x
+  94), wars abroad / attitudes at home (7,233 x 20), class-size publication bias (2,906 x
+  60), Ecuadorian maths attitudes instrument (figshare, 2,449 x 39), Burmese Theravada
+  Buddhism psychometrics (zenodo, 2,285 x 55), NEO-PI-R (DVN, 857 x 275), Dark Triad and
+  cyberbullying (DVN, 762 x 72), fluid intelligence and fertility intentions (DVN, 1,056 x
+  242, worth_retrying).
