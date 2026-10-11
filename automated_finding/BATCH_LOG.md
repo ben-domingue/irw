@@ -18161,3 +18161,10 @@ the upload is a plain new upload.)
 PR #2946 merged; ben-domingue confirmed the 107 response tables and 33 item text tables
 uploaded. `uploaded=2026-10-11` stamped on the 33 `itemtext_provenance.csv` rows. Covariate-label
 harvest for the 15 .sav/.dta scripts run against the merge commit (see TODO).
+
+## 2026-10-11b — issues-page entries for the 2026-10-10 batch
+
+25 entries in datapages/irw#342: IRW English translations (fauziah x5, xu x3, fang, makkiyah x4,
+montana_blasco x4, perez_hernandez x3), English substitutes for non-English administrations
+(rothlin, deilkas x2, zhang_2026_ai_companion), and the fox_2023_bct Study 2 rewording.
+fox_2023_gad7 dropped as below the bar (`itemtext/fixes/issues_page_dropped.csv`).
