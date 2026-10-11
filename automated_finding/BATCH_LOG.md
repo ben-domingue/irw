@@ -18298,3 +18298,9 @@ anchors from the instrument not the file; hernandez age withheld (mixed coding);
 keyed from the deposited total, chosen option not shipped; petrovici culture_appreciation 1/2
 vs codebook 1/0; stanford buddhism_attitud opaque `attitude_k` codes; celikbas_pcs 14th column
 dropped; ginting SYN-labelled ids.
+
+## 2026-10-11e — repos leads batch 2026-10-11 uploaded
+
+PR #2957 merged; ben-domingue confirmed the 83 response tables and 32 item text tables
+uploaded. `uploaded=2026-10-11` stamped on the 32 `itemtext_provenance.csv` rows. Still open:
+issues-page entries (12 tables), `covariate_labels/build.py` after the release.
