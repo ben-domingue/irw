@@ -1722,3 +1722,5 @@
 "profile_gender","tomz_2019_us_party_sep","attr_gender","Male","male","explicit","level text"
 "profile_gender","wysienska_2024_just_pay","attr_gender","Female","female","explicit","level text"
 "profile_gender","wysienska_2024_just_pay","attr_gender","Male","male","explicit","level text"
+"profile_gender","tranvag_2021_precision_medicine","attr_sex","Female","female","explicit","level text (Sex: Female/Male, MOESM1 and MOESM3 revalue code)"
+"profile_gender","tranvag_2021_precision_medicine","attr_sex","Male","male","explicit","level text (Sex: Female/Male, MOESM1 and MOESM3 revalue code)"
