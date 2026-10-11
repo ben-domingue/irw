@@ -3,6 +3,14 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## From the 2026-10-11 repos mode-3 batch (15 new terms x 9 languages)
+
+- [ ] 53 unworked leads in `leads/repos_leads_2026-10-11.csv` (11 good + 42 recoverable/worth_retrying);
+  see BATCH_LOG 2026-10-11c. DVN/Y10EQV carries a custom Dataverse terms string, resolve the licence
+  before touching it. Nothing written, staged or uploaded yet.
+- [ ] The "arg must be a list, tuple, 1-d array, or Series" reader fault hit 13 more `error` rows
+  (24 across the 2026-10-10 and 2026-10-11 runs); worth a look at `load_table()`.
+
 ## From the 2026-10-10 repos mode-3 batch (15 new terms x 9 languages)
 
 - [x] **107 tables (2,042,413 responses) + 33 item text tables uploaded** (ben-domingue, confirmed 2026-10-11; `uploaded=2026-10-11` stamped) from
