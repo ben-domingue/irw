@@ -112,9 +112,6 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   - crysdale_2020_big5 has 61 items where BFI-2 has 60; the extra one is unidentified.
   - hlado_2025 is named after the dataset contact (the record author is anonymised).
   - kasparek_2025_audit item text is held under the AUDIT rights question.
-  - Tags: the skill says blank `Construct type` and the Sample FRAME facet before
-    staging (both under the 90% bar on 2026-09-03). Recent batches, and these 168
-    rows, fill them. Raised as irw#2892.
 - [ ] **Cheap item text not built:** galindo_2026 (Spanish .sav labels), song_2026
   (Chinese .sav labels), blaszyk_2023 (Polish .sav labels). All need IRW English.
 - [ ] **101 unworked leads** in `leads/repos_leads_2026-10-07.csv`. Two were worked and
