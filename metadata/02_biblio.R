@@ -80,11 +80,26 @@ anthropic_chat <- function(prompt, model = "claude-haiku-4-5", max_tokens = 1024
   if (!is.null(parsed_response$content) && length(parsed_response$content) > 0) {
     json_text <- parsed_response$content[[1]]$text
     json_text <- gsub("^```json\\s*|```\\s*$", "", json_text)  # strip fences if the model adds them anyway
-    bibtex_entry <- fromJSON(json_text)$bibtex  # Extract only the BibTeX field
-    return(bibtex_entry)
+    bibtex_entry <- tryCatch(fromJSON(json_text)$bibtex, error = function(e) NULL)
+    return(as_bibtex_string(bibtex_entry))
   } else {
-    return(NULL) # Failed
+    return(NA_character_) # Failed
   }
+}
+
+## The model is asked for one string under `bibtex`, but it does not always
+## comply: it has returned an array of entries, a nested object, and prose
+## that is not JSON at all. `df$BibTex[i] <- <list>` then silently turns the
+## whole column into a list and stage 02 dies 400 rows later in bind_rows()
+## ("Can't combine `..1$BibTex` <character> and `..2$BibTex` <list>",
+## 2026-10-12 run). Reduce whatever came back to exactly one character value:
+## several entries are joined, anything empty or unusable becomes NA so the
+## row is retried next run like any other blank.
+as_bibtex_string <- function(x) {
+  x <- unlist(x, use.names = FALSE)
+  x <- x[!is.na(x) & nzchar(trimws(as.character(x)))]
+  if (length(x) == 0) return(NA_character_)
+  paste(as.character(x), collapse = "\n\n")
 }
 
 ## A BibTeX value is "blank" if it is NA or whitespace-only. nzchar(NA) is TRUE,
@@ -171,6 +186,8 @@ generate_bibtex <- function(df) {
       )
     } else {
       message(sprintf("Skipping row %d — all fields are NA.", i))
+      pb$tick()
+      next  # previously fell through and sent the previous row's prompt again
     }
     df$BibTex[i] <- anthropic_chat(prompt)
     pb$tick()
