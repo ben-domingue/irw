@@ -184,8 +184,8 @@ def check_conj_design(report: FileReport) -> tuple[list[str], list[str]]:
     design_outcomes.csv -- without them the table cannot be pooled with the
     others (conj_metadata/conj_outcomes would carry NA for it), and nothing
     later forces anyone to come back. Warnings: an outcome row for a column the
-    file lacks (stale), and a gender attribute with no crosswalk.csv rows.
-    Unreadable records are an error, never a pass.
+    file lacks (stale), a gender attribute with no crosswalk.csv rows, and no
+    topic-tag row in tags.csv. Unreadable records are an error, never a pass.
     """
     d = _conj_design_dir()
     try:
@@ -195,6 +195,8 @@ def check_conj_design(report: FileReport) -> tuple[list[str], list[str]]:
             outcomes = {(r["table"], r["outcome"]) for r in csv.DictReader(f)}
         with open(d / "crosswalk.csv", newline="", encoding="utf-8") as f:
             crosswalk = {(r["table"], r["attribute"]) for r in csv.DictReader(f)}
+        with open(d / "tags.csv", newline="", encoding="utf-8") as f:
+            tagged = {r["table"] for r in csv.DictReader(f)}
     except (OSError, KeyError) as exc:
         return ([f"conj design records unreadable in {d} ({exc})"], [])
     t, cols = report.table, report.columns
@@ -211,6 +213,9 @@ def check_conj_design(report: FileReport) -> tuple[list[str], list[str]]:
     if stale:
         warnings.append(f"conj_design: design_outcomes.csv has row(s) for column(s) this file "
                         f"lacks: {', '.join(stale)}")
+    if t not in tagged:
+        warnings.append(f"conj_tags: {t} has no row in tags.csv (data/conjoint/README.md, "
+                        f"\"Topic tags\"); add domain and choice_object so the table is findable")
     # attr_gender, attr_sex, attr_candidate_gender, ... (not attr_sexuality). A
     # gender carried only by first names or photos cannot be detected here.
     for a in (c for c in cols if _CONJ_GENDER.match(c)):
