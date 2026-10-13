@@ -121,6 +121,19 @@
 #   scripts/run_pipeline.sh 11              # just the corpus status numbers
 #   scripts/run_pipeline.sh 12              # just the straggler watch
 #   scripts/run_pipeline.sh --no-09         # accepted no-op since stage 09 was retired (#1940)
+#   scripts/run_pipeline.sh --resume        # skip stages already recorded in metadata/pipeline_progress.txt
+#
+# --resume (2026-10-12): every completed stage appends its number to
+# metadata/pipeline_progress.txt (gitignored with the rest of metadata/*.txt).
+# A fresh run deletes that file first. With --resume it is kept, the stages it
+# names are skipped, and only the rest run. The point is the weekly workflow:
+# stages 01 and 16 take over an hour between them, and when 02 then dies on a
+# bad LLM answer (#2965) a plain re-dispatch pays that hour again. The workflow
+# uploads metadata/ as an artifact on every outcome, and a dispatch with
+# `resume_from_run` restores it and passes --resume. Outputs of stages that did
+# NOT complete are reset to the committed copy before the snapshot, so a stage
+# that died half-way through writing still diffs against last week, not
+# against its own partial output.
 #
 # Requires: Redivis credentials configured externally (per root CLAUDE.md;
 # see ~/.redivis_api_token handling below -- 2026-07-28: REDIVIS_API_TOKEN
@@ -206,12 +219,31 @@ declare -A DIFF_KEY=(
 )
 
 stages=()
+RESUME=0
 for a in "$@"; do
   case "$a" in
     --no-09) SKIP_09=1 ;;
+    --resume) RESUME=1 ;;
     *) stages+=("$a") ;;
   esac
 done
+PROGRESS_FILE="$METADATA_DIR/pipeline_progress.txt"
+declare -A DONE_STAGE=()
+if [[ "$RESUME" == "1" ]]; then
+  if [[ -f "$PROGRESS_FILE" ]]; then
+    done_list=""
+    while read -r done_stage; do
+      [[ -z "$done_stage" ]] && continue
+      DONE_STAGE[$done_stage]=1
+      done_list="$done_list $done_stage"
+    done < "$PROGRESS_FILE"
+    echo "== Resuming: stage(s) already complete and skipped:${done_list:- none} =="
+  else
+    echo "warn: --resume given but $PROGRESS_FILE does not exist; running everything" >&2
+  fi
+else
+  rm -f "$PROGRESS_FILE"
+fi
 if [[ ${#stages[@]} -eq 0 ]]; then stages=("${DEFAULT_ORDER[@]}"); fi
 if [[ "${SKIP_09:-0}" == "1" ]]; then
   # Drop the element, do not blank it. `${stages[@]/09}` substitutes the text
@@ -234,6 +266,12 @@ for stage in "${stages[@]}"; do
   [[ -z "$stage" ]] && continue   # parity with the run loop below
   for f in ${STAGE_OUTPUTS[$stage]:-}; do
     [[ -z "$f" ]] && continue
+    if [[ "$RESUME" == "1" && -z "${DONE_STAGE[$stage]:-}" ]]; then
+      # The restored tree may hold this stage's half-written output from the
+      # run that died. Its diff baseline must be the committed copy, not that.
+      # Untracked outputs have no committed copy; the checkout is a no-op there.
+      git -C "$REPO_ROOT" checkout --quiet -- "metadata/$f" 2>/dev/null || true
+    fi
     if [[ -f "$METADATA_DIR/$f" ]]; then
       cp "$METADATA_DIR/$f" "$SNAPSHOT_DIR/$f"
     fi
@@ -247,6 +285,11 @@ for stage in "${stages[@]}"; do
   script="${STAGE_SCRIPT[$stage]:-}"
   if [[ -z "$script" ]]; then
     echo "warn: unknown stage '$stage', skipping" >&2
+    continue
+  fi
+  if [[ -n "${DONE_STAGE[$stage]:-}" ]]; then
+    echo ""
+    echo "== Stage $stage: already complete in the resumed run, skipped =="
     continue
   fi
   echo ""
@@ -270,6 +313,9 @@ for stage in "${stages[@]}"; do
   else
     "$runner" "$script"
   fi
+  # Recorded only after the script returned: a stage that dies leaves no line,
+  # so --resume reruns it.
+  echo "$stage" >> "$PROGRESS_FILE"
 
   # Diff THIS stage's outputs immediately, not batched at the end -- if a
   # later stage fails, set -e aborts the script, and a batched-at-the-end

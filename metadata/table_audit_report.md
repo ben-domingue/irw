@@ -1,4 +1,4 @@
-# IRW table-name consistency audit -- 2026-10-05
+# IRW table-name consistency audit -- 2026-10-13
 
 Ground truth: `irw::irw_list_tables(source = c("core","comp","nom","sim"))`. 
 Dictionary sheets plus automated_finding/dictionary_auto*.csv included (Public rows only).
@@ -15,7 +15,6 @@ Full list, aligned columns: `table_audit_report_incomplete.txt`. Same data as CS
 | league_of_legends | comp |  | 1 |  |  |  |
 | mlb_baseball | comp |  | 1 |  |  |  |
 | nhl_hockey | comp |  | 1 |  |  |  |
-| 17 health-literate communication techniques rated for effectiveness, yes=1/no=2 (don't-know dropped); maryland family physicians. the 1-5 scale belongs to the _freqsibling. 25 responses carry out-of-range 3-5 from 3 respondents, see irw#2196 | core |  | 1 |  |  |  |
 | 2024_online_addiction_bsmas | core |  |  | 1 |  |  |
 | 2024_online_addiction_igds | core |  |  | 1 |  |  |
 | 2024_online_addiction_sabas | core |  |  | 1 |  |  |
@@ -26,6 +25,7 @@ Full list, aligned columns: `table_audit_report_incomplete.txt`. Same data as CS
 | hachenberger_2025_stroop_bin | core |  |  | 1 |  |  |
 | hachenberger_2025_webexec | core |  |  | 1 |  |  |
 | kazarovytska_2026_ingroup_event_attribution | core |  |  | 1 |  |  |
+| kwiatkowska_2022_bemas | core |  |  | 1 |  |  |
 | liang2026_extrinsic_motivation | core |  |  | 1 |  |  |
 | liang2026_intrinsic_motivation | core |  |  | 1 |  |  |
 | lindstrom2021_conscientiousness | core |  |  | 1 |  |  |
@@ -38,7 +38,7 @@ Full list, aligned columns: `table_audit_report_incomplete.txt`. Same data as CS
 | simsalrbim_mice_largevalence | core |  |  | 1 |  |  |
 | simsalrbim_mice_lowvalence | core |  |  | 1 |  |  |
 | simsalrbim_monkey_largevalence | core |  |  | 1 |  |  |
-| wvs_panasiuk_science | core |  |  | 1 |  |  |
+| thirdpartypunishmentunfairsharing_mcauliffe_2025_canada | core |  |  | 1 |  |  |
 _...and 147 more, see the .txt or .csv._
 
 ## B. Urgent -- live in Redivis, not in any local CSV yet
