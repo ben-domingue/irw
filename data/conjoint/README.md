@@ -100,7 +100,7 @@ The tables share one layout but not one meaning: `choice` is "vote for" in one t
 | `task_source`, `profile_source` | `recorded` (the deposit has the column), `inferred` (rebuilt from row order), or `unknown`. Position and task-order analyses should drop `inferred`. |
 | `evidence` | where each value came from: header lines, codebook pages |
 
-`metadata/16_conjoint.R` also checks each table against its record: it computes the level shares and the pairs of levels that never occur together, and warns when `restrictions` is `none` but pairs are missing, or `level_weights` is `uniform` but shares are clearly unequal.
+`metadata/16_conjoint.R` recomputes a table only when its Redivis listing (`updatedAt`, `numRows`, `hash`) differs from `metadata/conj_refresh_stamps.csv`, or when it falls in a small rolling slice; other rows are carried forward from `conj_metadata.csv` (#2970). It also checks each table against its record: it computes the level shares and the pairs of levels that never occur together, and warns when `restrictions` is `none` but pairs are missing, or `level_weights` is `uniform` but shares are clearly unequal.
 
 `design_outcomes.csv`, one row per table × outcome column:
 
