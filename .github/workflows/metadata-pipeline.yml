@@ -54,7 +54,10 @@ concurrency:
 jobs:
   pipeline:
     runs-on: ubuntu-latest
-    timeout-minutes: 120
+    # 240, not 120: the 2026-10-12 run took 117 minutes in Workflow 1 and was
+    # cancelled by the old limit six seconds after opening its PR (#2971). The
+    # stage-16 recompute (#2970) is most of the growth; until it lands, headroom.
+    timeout-minutes: 240
     steps:
       - uses: actions/checkout@v4
         with:
