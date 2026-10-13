@@ -51,29 +51,29 @@ robison_2026_retesting_symspan,w_5,4,261,3960,trial_;name,ACCEPT,symmetry span; 
 rr98_accuracy,w,33,30,12205,rt-sweep,ACCEPT,luminosity discrimination (Ratcliff & Rouder 1998); item = stimulus,rt item resp id
 spalex_aguasvivas_2020,w_2,102047,169628,16962757,rt-sweep,ACCEPT,"lexical decision, Spanish megastudy (SPALEX); item = word",id item resp rt date cov_trial_id cov_exp_id cov_trial_order cov_lexicality cov_gender cov_gender_re
 yu2025,w_2,5,167,24543,trialcol,ACCEPT,size perception; item = phase x stimulus,id trial item_cov_phase item item_cov_truth resp cov_age item_cov_rep item_unique resp_prop resp01 c
-brand_raffaelli_2024_recognition_20,w,101,592,59200,name,DECIDE,recognition memory test,id cov_gender cov_age item resp item_family
-chess_lnirt,w,40,259,10240,rt-sweep,DECIDE,"Amsterdam Chess Test, 40 timed items",resp rt item cov_elo id
-cifar10h,w_6,10000,2571,514200,trial_,DECIDE,"image labelling by MTurkers, trial_index: perception but not EF",id item resp resp_raw rt itemcov_true_category itemcov_subcategory trial_index
-cogcontrol_gyurkovics_2019_mwprobe,w_4,10,117,1170,trial_;name,DECIDE,"mind-wandering thought probes during SART, not a speeded task",id item resp rt trial_report trial_block trial_num cov_age cov_gender cov_agegroup cov_puberty cov_i
-dd_rotation,w,10,121,1178,rt-sweep,DECIDE,"mental rotation, 10 items",id item rt resp
-face_memory_amado_2024,w_2,80,597,56160,name,DECIDE,EGEFACE face memory test,id item resp cov_age cov_gender cov_education cov_handedness cov_phase cov_p_group cov_egeface_group
-face_memory_test,w,175,1768,309400,name,DECIDE,"face recognition memory test, 175 items, rt",id item resp rt
-fullscaleiq_memory,w,6,3194,19164,name,DECIDE,"short-term memory, 6 questions",id item resp raw_resp rt
-fullscaleiq_memory_options,w_6,48,3194,153312,name,DECIDE,option-level companion of fullscaleiq_memory,id item resp item_family
-graphmapping_study1,w,18,61,6318,rt-sweep,DECIDE,"graph mapping measure, order + rt",item rt resp order id
-himmelstein-admc_raw-2025,w_2,38,1194,45066,rt-sweep,DECIDE,"ADMC decision-making battery, trial-level",id item resp rt wave cov_session_id cov_session_restart_id
-hmcdm_spatialreasoning,w,50,350,3500,rt-sweep,DECIDE,"spatial reasoning task, 50 items, rt, qmatrix",item id rt resp qmatrix__1 qmatrix__2 qmatrix__3 qmatrix__4
-kaigaishi_2024_primate_cognition,w_6,8,138,6356,trial_;trialcol,DECIDE,"macaques, 8-task battery incl. inhibitory control, per-trial success",id item resp trial_number trial_source itemcov_domain cov_age_category cov_rank cov_sex
-mclaughlin_samuel_2025_auditory_session_2,w_2,43,209,17347,trial_,DECIDE,"auditory STM / speech perception, trial_index",id item resp trial_index itemcov_response_type itemcov_talker
-muller_2016_dog_inhibition,w_3,3,41,115,name,DECIDE,"dog cylinder task, 3 trials, ordinal",id item resp cov_sex cov_treatment
-nomt_hooper_2024_study2,w,144,393,56592,rt-sweep,DECIDE,Novel Object Memory Test,group id cov_gender cov_age cov_country_of_birth cov_country_of_residence cov_first_language cov_nat
-robison_2026_retesting_cued_recall,w_6,201,251,49446,trial_;name,DECIDE,"cued recall memory task (trial_list, serial position)",id item resp wave rt trial_list trial_serial_position cov_age cov_gender cov_race cov_native_english
-robison_2026_retesting_ifr,w_5,10,248,34437,trial_;name,DECIDE,immediate free recall,id item resp wave rt trial_list trial_target cov_age cov_gender cov_race cov_native_english cov_colo
-robison_2026_retesting_paper_folding,w_5,5,250,8980,trial_;trialcol;name,DECIDE,"paper folding, 5 items: spatial ability test rather than a trial task",id item resp wave trial_number trial_response cov_age cov_gender cov_race cov_native_english cov_col
-robison_2026_retesting_raven,w_5,18,259,8633,name,DECIDE,"Raven APM, 18 fixed items with rt: ability test",id item resp wave rt cov_age cov_gender cov_race cov_native_english cov_color_blind cov_wears_glasse
-robison_2026_retesting_recognition,w_5,2,248,56834,trial_;trialcol;name,DECIDE,recognition memory,id item resp wave rt trial_number trial_list cov_age cov_gender cov_race cov_native_english cov_colo
-robison_2026_retesting_tot,w_5,30,250,14300,trial_;trialcol;name,DECIDE,tip-of-the-tongue task,id item resp wave rt trial_number trial_difficulty cov_age cov_gender cov_race cov_native_english co
-santaca_2025_inhibitory_control,w_6,20,32,640,name,DECIDE,"reptile detour task, 20 trials as learning sequence",id item resp cov_species cov_sex
+brand_raffaelli_2024_recognition_20,w,101,592,59200,name,REJECT,recognition memory test (Ben 2026-10-13: out),id cov_gender cov_age item resp item_family
+chess_lnirt,w,40,259,10240,rt-sweep,REJECT,"Amsterdam Chess Test, 40 timed items (Ben 2026-10-13: out)",resp rt item cov_elo id
+cifar10h,w_6,10000,2571,514200,trial_,REJECT,"image labelling by MTurkers, trial_index: perception but not EF (Ben 2026-10-13: out)",id item resp resp_raw rt itemcov_true_category itemcov_subcategory trial_index
+cogcontrol_gyurkovics_2019_mwprobe,w_4,10,117,1170,trial_;name,REJECT,"mind-wandering thought probes during SART, not a speeded task (Ben 2026-10-13: out)",id item resp rt trial_report trial_block trial_num cov_age cov_gender cov_agegroup cov_puberty cov_i
+dd_rotation,w,10,121,1178,rt-sweep,REJECT,"mental rotation, 10 items (Ben 2026-10-13: out)",id item rt resp
+face_memory_amado_2024,w_2,80,597,56160,name,REJECT,EGEFACE face memory test (Ben 2026-10-13: out),id item resp cov_age cov_gender cov_education cov_handedness cov_phase cov_p_group cov_egeface_group
+face_memory_test,w,175,1768,309400,name,REJECT,"face recognition memory test, 175 items, rt (Ben 2026-10-13: out)",id item resp rt
+fullscaleiq_memory,w,6,3194,19164,name,REJECT,"short-term memory, 6 questions (Ben 2026-10-13: out)",id item resp raw_resp rt
+fullscaleiq_memory_options,w_6,48,3194,153312,name,REJECT,option-level companion of fullscaleiq_memory (Ben 2026-10-13: out),id item resp item_family
+graphmapping_study1,w,18,61,6318,rt-sweep,REJECT,"graph mapping measure, order + rt (Ben 2026-10-13: out)",item rt resp order id
+himmelstein-admc_raw-2025,w_2,38,1194,45066,rt-sweep,REJECT,"ADMC decision-making battery, trial-level (Ben 2026-10-13: out)",id item resp rt wave cov_session_id cov_session_restart_id
+hmcdm_spatialreasoning,w,50,350,3500,rt-sweep,REJECT,"spatial reasoning task, 50 items, rt, qmatrix (Ben 2026-10-13: out)",item id rt resp qmatrix__1 qmatrix__2 qmatrix__3 qmatrix__4
+kaigaishi_2024_primate_cognition,w_6,8,138,6356,trial_;trialcol,REJECT,"macaques, 8-task battery incl. inhibitory control, per-trial success (Ben 2026-10-13: out)",id item resp trial_number trial_source itemcov_domain cov_age_category cov_rank cov_sex
+mclaughlin_samuel_2025_auditory_session_2,w_2,43,209,17347,trial_,REJECT,"auditory STM / speech perception, trial_index (Ben 2026-10-13: out)",id item resp trial_index itemcov_response_type itemcov_talker
+muller_2016_dog_inhibition,w_3,3,41,115,name,REJECT,"dog cylinder task, 3 trials, ordinal (Ben 2026-10-13: out)",id item resp cov_sex cov_treatment
+nomt_hooper_2024_study2,w,144,393,56592,rt-sweep,REJECT,Novel Object Memory Test (Ben 2026-10-13: out),group id cov_gender cov_age cov_country_of_birth cov_country_of_residence cov_first_language cov_nat
+robison_2026_retesting_cued_recall,w_6,201,251,49446,trial_;name,ACCEPT,"cued recall memory task (trial_list, serial position) (Ben 2026-10-13: in)",id item resp wave rt trial_list trial_serial_position cov_age cov_gender cov_race cov_native_english
+robison_2026_retesting_ifr,w_5,10,248,34437,trial_;name,ACCEPT,immediate free recall (Ben 2026-10-13: in),id item resp wave rt trial_list trial_target cov_age cov_gender cov_race cov_native_english cov_colo
+robison_2026_retesting_paper_folding,w_5,5,250,8980,trial_;trialcol;name,REJECT,"paper folding, 5 items: spatial ability test rather than a trial task (Ben 2026-10-13: out)",id item resp wave trial_number trial_response cov_age cov_gender cov_race cov_native_english cov_col
+robison_2026_retesting_raven,w_5,18,259,8633,name,REJECT,"Raven APM, 18 fixed items with rt: ability test (Ben 2026-10-13: out)",id item resp wave rt cov_age cov_gender cov_race cov_native_english cov_color_blind cov_wears_glasse
+robison_2026_retesting_recognition,w_5,2,248,56834,trial_;trialcol;name,ACCEPT,recognition memory (Ben 2026-10-13: in),id item resp wave rt trial_number trial_list cov_age cov_gender cov_race cov_native_english cov_colo
+robison_2026_retesting_tot,w_5,30,250,14300,trial_;trialcol;name,ACCEPT,tip-of-the-tongue task (Ben 2026-10-13: in),id item resp wave rt trial_number trial_difficulty cov_age cov_gender cov_race cov_native_english co
+santaca_2025_inhibitory_control,w_6,20,32,640,name,REJECT,"reptile detour task, 20 trials as learning sequence (Ben 2026-10-13: out)",id item resp cov_species cov_sex
 acevedo_triana_2017_tmaze,w_6,100,21,1077,trialcol,REJECT,"rat T-maze, resp = arm chosen not correctness",id item resp trial rt date cov_group cov_weight_g
 anh_2026_digitaltrust,w_4,6,306,1836,name,REJECT,questionnaire/test matched by name only: 6-item Digital Trust scale (1-5 Likert) from a survey on financial well-being pr,id item resp cov_gender cov_age cov_area cov_education cov_occupation cov_income
 bauwens_2022_technostress_inhibitors,w_6,13,337,4358,name,REJECT,"questionnaire/test matched by name only: Technostress inhibitors: technical support, literacy facilitation, involvement f",id item resp cluster_id cov_gender cov_age cov_education cov_tenure cov_fulltime cov_temporary cov_c
