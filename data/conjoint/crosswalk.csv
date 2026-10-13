@@ -1762,3 +1762,5 @@
 "profile_gender","jung_2024_value_conjoint","attr_gender","Woman","female","explicit","level text"
 "profile_gender","madrid_2022_religious_candidates","attr_sex","Female","female","explicit","level text"
 "profile_gender","madrid_2022_religious_candidates","attr_sex","Male","male","explicit","level text"
+"profile_gender","prasetyo_2024_massage_parlor","attr_therapist","Terapis Wanita","female","explicit","level text (wanita = woman)"
+"profile_gender","prasetyo_2024_massage_parlor","attr_therapist","Terapis Pria","male","explicit","level text (pria = man)"

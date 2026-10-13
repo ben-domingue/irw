@@ -3,13 +3,27 @@
 ##
 ##The conjoint layout has no item/resp (data/conjoint/README.md), so the core
 ##metadata (01_metadata.R) does not apply. This is the conjoint counterpart of
-##05_comps.R / 06_nominal.R, with two differences:
-##  * it recomputes every table on every run rather than carrying rows forward
-##    from the published irw_meta table. The source is small, every number comes
-##    from a server-side query (no table export, so nothing counts against the
-##    Redivis export quota that 05_comps.R's comments describe), and a fresh
-##    computation cannot carry forward a stale row for a replaced table;
-##  * attribute and outcome columns are read from the table schema.
+##05_comps.R / 06_nominal.R: rows are carried forward from the repo's
+##conj_metadata.csv (the same base 01_metadata.R uses since #2880) and only the
+##tables that changed are recomputed. Attribute and outcome columns are read
+##from the table schema.
+##
+##Carry-forward (#2970). Until 2026-10-12 every table was recomputed on every
+##run; at 973 tables that was 33 minutes, longer than every other shard stage
+##together. ds$list_tables() returns updatedAt, numRows and hash per table in a
+##few seconds, and conj_refresh_stamps.csv (tracked) records those three for
+##every live table, with what else the recompute learns and a carried row would
+##otherwise lack: the attr_ and outcome columns (so list_variables() is skipped)
+##and the design-check observations (empty_pairs, max_level_ratio, so the check
+##below still runs over the whole corpus). A table is recomputed when it has no
+##row in conj_metadata.csv, no stamp, a stamp that differs from the listing, or
+##falls in the rolling slice of refresh.per.run oldest-refreshed tables (a safety
+##net, as in 01_metadata.R); every other table keeps its row and its stamp, and
+##a table no longer listed loses both. Redivis's hash is blind to values
+##swapping between rows, so the three stamps are used together: updatedAt moves
+##on any re-release. The escape hatch is CONJ_RECOMPUTE_ALL=1 (or deleting the
+##stamps file), which recomputes everything, as every run did before.
+##
 ##Columns:
 ##  table, n_respondents (distinct id), n_rows, n_tasks (largest task index),
 ##  n_profiles (largest profile index; 1 = single-profile design),
@@ -90,18 +104,89 @@ union_query <- function(parts)
 q <- function(a) sprintf("`%s`", a)
 lit <- function(x) sprintf("'%s'", gsub("'", "\\\\'", x))
 
-info <- lapply(tabs, function(tab) {
-  cols <- sapply(tab$list_variables(), function(v) v$name)
-  list(name = tab$name, ref = tab$qualified_reference, cols = cols,
-       attrs = grep("^attr_", cols, value = TRUE),
-       outcomes = grep("^(choice|rating)(_.+)?$", cols, value = TRUE))
+##---------------------------------------------------------------------------
+##What to recompute (header, "Carry-forward").
+##---------------------------------------------------------------------------
+base_file <- "conj_metadata.csv"
+stamps_file <- "conj_refresh_stamps.csv"
+refresh.per.run <- 40   ##two batches, about 80 s; sweeps the corpus in ~6 months
+computed_cols <- c("table", "n_respondents", "n_rows", "n_tasks", "n_profiles",
+                   "n_attributes", "outcomes", "n_optout_tasks")
+stamp_cols <- c("table", "updated_at", "num_rows", "hash", "attrs", "outcomes",
+                "empty_pairs", "max_level_ratio", "refreshed_at")
+read_tracked <- function(f) {
+  if (!file.exists(f)) return(NULL)
+  d <- tryCatch(read.csv(f, colClasses = "character", na.strings = character(0), check.names = FALSE),
+                error = function(e) { message("  ! unreadable ", f, ", ignoring it: ", conditionMessage(e)); NULL })
+  if (is.null(d) || !nrow(d)) NULL else d[!duplicated(d$table, fromLast = TRUE), ]
+}
+base <- read_tracked(base_file)
+if (!is.null(base) && !all(computed_cols %in% names(base))) {
+  message("  ! ", base_file, " lacks ", paste(setdiff(computed_cols, names(base)), collapse = ", "), "; recomputing everything")
+  base <- NULL
+}
+stamps <- read_tracked(stamps_file)
+if (!is.null(stamps) && !all(stamp_cols %in% names(stamps))) {
+  message("  ! ", stamps_file, " lacks ", paste(setdiff(stamp_cols, names(stamps)), collapse = ", "), "; recomputing everything")
+  stamps <- NULL
+}
+if (is.null(base)) base <- data.frame(matrix(character(0), 0, length(computed_cols), dimnames = list(NULL, computed_cols)))
+if (is.null(stamps)) stamps <- data.frame(matrix(character(0), 0, length(stamp_cols), dimnames = list(NULL, stamp_cols)))
+
+prop <- function(tab, k) { v <- tab$properties[[k]]; if (is.null(v)) NA else v }
+live <- data.frame(table = sapply(tabs, function(t) t$name),
+                   updated_at = sapply(tabs, function(t) sprintf("%.0f", as.numeric(prop(t, "updatedAt")))),
+                   num_rows = sapply(tabs, function(t) sprintf("%.0f", as.numeric(prop(t, "numRows")))),
+                   hash = sapply(tabs, function(t) as.character(prop(t, "hash"))),
+                   stringsAsFactors = FALSE)
+names(tabs) <- live$table
+old <- stamps[match(live$table, stamps$table), ]
+is_new <- !live$table %in% base$table
+no_stamp <- is.na(old$table)
+moved <- !no_stamp & (is.na(old$updated_at) | old$updated_at != live$updated_at |
+                      is.na(old$num_rows) | old$num_rows != live$num_rows |
+                      is.na(old$hash) | old$hash != live$hash)
+dropped <- setdiff(c(base$table, stamps$table), live$table)
+all_over <- identical(Sys.getenv("CONJ_RECOMPUTE_ALL"), "1")
+redo <- is_new | no_stamp | moved | all_over
+##Rolling slice: oldest-refreshed first (never-refreshed sorts first), name as tiebreak.
+slice <- character(0)
+if (refresh.per.run > 0 && !all_over) {
+  cand <- live$table[!redo]
+  last <- suppressWarnings(as.POSIXct(old$refreshed_at[match(cand, live$table)], tz = "UTC"))
+  slice <- head(cand[order(!is.na(last), last, cand)], refresh.per.run)
+  redo[live$table %in% slice] <- TRUE
+}
+message("stamps: ", sum(!redo), " of ", nrow(live), " table(s) carried forward from ", base_file,
+        "; recompute ", sum(redo), " (", sum(is_new), " new, ", sum(no_stamp & !is_new), " unstamped, ",
+        sum(moved & !is_new), " changed on Redivis, ", length(slice), " rolling slice",
+        if (all_over) ", CONJ_RECOMPUTE_ALL=1" else "", ")",
+        if (length(dropped)) paste0("; dropped ", length(dropped), ": ", paste(dropped, collapse = ", ")) else "")
+if (any(moved & !is_new)) message("  changed on Redivis: ", paste(live$table[moved & !is_new], collapse = ", "))
+
+split_cols <- function(x) if (is.na(x) || !nzchar(x)) character(0) else strsplit(x, ";", fixed = TRUE)[[1]]
+##The recomputed tables read their schema; a carried table's attr_ and outcome
+##columns come from its stamp (that is what the stamp is for).
+info <- lapply(seq_len(nrow(live)), function(i) {
+  tab <- tabs[[i]]
+  if (redo[i]) {
+    cols <- sapply(tab$list_variables(), function(v) v$name)
+    list(name = tab$name, ref = tab$qualified_reference, cols = cols,
+         attrs = grep("^attr_", cols, value = TRUE),
+         outcomes = grep("^(choice|rating)(_.+)?$", cols, value = TRUE))
+  } else {
+    attrs <- split_cols(old$attrs[i]); outcomes <- split_cols(old$outcomes[i])
+    list(name = tab$name, ref = tab$qualified_reference, cols = c(attrs, outcomes),
+         attrs = attrs, outcomes = outcomes)
+  }
 })
 names(info) <- sapply(info, `[[`, "name")
 for (t in info) {
-  g <- grep("^attr_(.*_)?(gender|sex)$", t$cols, value = TRUE)
+  g <- grep("^attr_(.*_)?(gender|sex)$", t$attrs, value = TRUE)
   if (length(g)) gender_attrs[[t$name]] <- g
 }
-batches <- split(names(info), ceiling(seq_along(info) / BATCH))
+todo <- live$table[redo]
+batches <- if (length(todo)) split(todo, ceiling(seq_along(todo) / BATCH)) else list()
 
 ##Counts, and opt-out tasks: choice tasks where no profile was chosen (0 for a
 ##forced choice, NA without a `choice` column).
@@ -136,7 +221,7 @@ pairs_sql <- function(t, pp)
 
 rows <- list()
 for (b in batches) {
-  message("tables ", match(b[1], names(info)), "-", match(b[length(b)], names(info)), " of ", length(info))
+  message("tables ", match(b[1], todo), "-", match(b[length(b)], todo), " of ", length(todo))
   cnt <- union_query(sapply(info[b], counts_sql))
   with_attrs <- Filter(function(t) length(t$attrs) >= 2, info[b])
   lv <- if (length(with_attrs))
@@ -169,9 +254,48 @@ for (b in batches) {
                             n_optout_tasks = as.numeric(r$n_optout_tasks))
   }
 }
-out <- do.call(rbind, rows)
+fresh <- if (length(rows)) do.call(rbind, rows) else NULL
+##Carried rows: the base's computed columns, typed as the fresh ones are.
+carried <- base[match(live$table[!redo], base$table), computed_cols]
+for (k in setdiff(computed_cols, c("table", "outcomes")))
+  carried[[k]] <- suppressWarnings(as.numeric(carried[[k]]))
+carried$outcomes[is.na(carried$outcomes)] <- ""
+##A rolling-slice table whose numbers moved under an unchanged stamp is worth a
+##line: it is the case the stamps are not supposed to let through.
+if (length(slice) && !is.null(fresh)) for (n in intersect(slice, base$table)) {
+  ov <- base[base$table == n, computed_cols][-1]; nv <- fresh[fresh$table == n, computed_cols][-1]
+  cell <- function(x) { x <- as.character(x); if (is.na(x)) "" else x }  ##NA is written as "" (below)
+  diff <- names(ov)[sapply(names(ov), function(k) !identical(cell(ov[[k]]), cell(nv[[k]])))]
+  if (length(diff)) message("  ! ", n, ": rolling slice found changed ", paste(diff, collapse = ", "),
+                            " under an unchanged stamp (", paste(ov[diff], collapse = ", "), " -> ",
+                            paste(nv[diff], collapse = ", "), ")")
+}
+out <- rbind(fresh, carried)
 out <- out[order(out$table), ]
 stopifnot(nrow(out) == length(tabs), !anyNA(out$n_respondents))
+for (n in live$table[!redo]) {
+  o <- old[match(n, live$table), ]
+  if (nzchar(o$max_level_ratio))
+    design_obs[[n]] <- list(empty_pairs = as.numeric(o$empty_pairs), n_rows = out$n_rows[out$table == n],
+                            max_level_ratio = as.numeric(o$max_level_ratio))
+}
+
+##The stamps for the next run: a recomputed table gets this listing's, a
+##carried table keeps its own.
+now <- format(Sys.time(), "%Y-%m-%d %H:%M:%S", tz = "UTC")
+new_stamps <- do.call(rbind, lapply(seq_len(nrow(live)), function(i) {
+  n <- live$table[i]
+  if (!redo[i]) return(old[i, stamp_cols])
+  o <- design_obs[[n]]
+  data.frame(table = n, updated_at = live$updated_at[i], num_rows = live$num_rows[i], hash = live$hash[i],
+             attrs = paste(info[[n]]$attrs, collapse = ";"), outcomes = paste(info[[n]]$outcomes, collapse = ";"),
+             empty_pairs = if (is.null(o)) "" else as.character(o$empty_pairs),
+             max_level_ratio = if (is.null(o)) "" else as.character(o$max_level_ratio),
+             refreshed_at = now, stringsAsFactors = FALSE)
+}))
+new_stamps <- new_stamps[order(tolower(new_stamps$table), new_stamps$table), ]  ##as canonicalize_csv.py sorts
+stopifnot(nrow(new_stamps) == nrow(live), !anyNA(new_stamps$hash))
+write.csv(new_stamps, stamps_file, quote = TRUE, row.names = FALSE, na = "")
 ##Fewer than two attributes breaks the conjoint rule (irw_validate.conjoint J4)
 ##but must not stop the weekly run; report it.
 few <- out$table[out$n_attributes < 2]
