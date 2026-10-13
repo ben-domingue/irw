@@ -76,7 +76,8 @@ COV_LABELLED = {
     "municipality_type": "cov_municipality_type",
 }
 COV_NUMERIC = {"age": "cov_age", "w_country": "cov_w_country", "w_eu27": "cov_w_eu27"}
-# the shipped labels are truncated at 80 characters; replace the two long ones
+# EU27 labels are truncated at 80 characters; replace the two long ones (EU27 codes only --
+# the EU4 file codes education on ISCED 0-8 and ships its own short labels)
 LABEL_FIX = {
     "education": {1: "Not completed primary", 2: "Completed primary", 3: "Completed secondary",
                   4: "Post-secondary vocational or bachelor", 5: "Master or doctoral"},
@@ -111,7 +112,7 @@ def load_sample(sample: str) -> pd.DataFrame:
     out["cov_sample"] = sample
     for src, dst in COV_LABELLED.items():
         lab = labs[src].astype("string")
-        if src in LABEL_FIX:
+        if sample == "eu27" and src in LABEL_FIX:
             lab = vals[src].map(LABEL_FIX[src]).astype("string")
         lab = lab.mask(vals[src].isin(NONRESP) | lab.str.startswith(NONRESP_LABELS, na=False))
         out[dst] = lab
