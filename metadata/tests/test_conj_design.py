@@ -1,5 +1,6 @@
-"""The conjoint design records (data/conjoint/design_tables.csv, design_outcomes.csv)
-and the attribute crosswalk (data/conjoint/crosswalk.csv).
+"""The conjoint design records (data/conjoint/design_tables.csv, design_outcomes.csv),
+the attribute crosswalk (data/conjoint/crosswalk.csv) and the topic tags
+(data/conjoint/tags.csv).
 
 Offline. Checks the codes each column may hold, that keys are unique, and that
 every table the ledger (data/conjoint/candidates.csv) marks built or uploaded
@@ -18,6 +19,17 @@ CONJ = Path(__file__).resolve().parents[2] / "data" / "conjoint"
 TABLE_COLS = ["table", "country", "display_language", "label_language", "restrictions",
               "level_weights", "restrictions_note", "attr_order", "survey_weight", "presentation",
               "task_source", "profile_source", "evidence"]
+TAG_COLS = ["table", "domain", "choice_object", "rater", "note"]
+#: data/conjoint/README.md, "Topic tags". Add a value there and here together.
+DOMAINS = {"candidate_choice", "immigration_asylum", "climate_energy_environment",
+           "international_economy", "democracy_institutions", "foreign_policy_security",
+           "health_covid", "tax_welfare_economy", "consumer_products",
+           "social_identity_interpersonal", "labour_hiring", "crime_justice_policing",
+           "technology_ai_privacy", "political_communication", "parties_platforms",
+           "public_administration", "corruption_accountability", "housing_neighbourhoods",
+           "other"}
+CHOICE_OBJECTS = {"person", "policy", "scenario", "product_service", "place", "organisation",
+                  "message"}
 OUTCOME_COLS = ["table", "outcome", "type", "question", "opt_out", "scale_min", "scale_max",
                 "low_anchor", "high_anchor", "evidence"]
 SOURCE = {"recorded", "inferred", "unknown"}
@@ -111,6 +123,33 @@ class OutcomesFile(unittest.TestCase):
                 lo, hi = float(r["scale_min"]), float(r["scale_max"])
                 self.assertLess(lo, hi, k)
                 self.assertTrue(r["low_anchor"] and r["high_anchor"], k)
+
+
+class TagsFile(unittest.TestCase):
+    def setUp(self):
+        self.cols, self.rows = read("tags.csv")
+        _, tabs = read("design_tables.csv")
+        self.tables = {r["table"] for r in tabs}
+
+    def test_columns(self):
+        self.assertEqual(self.cols, TAG_COLS)
+
+    def test_unique(self):
+        names = [r["table"] for r in self.rows]
+        self.assertEqual(len(names), len(set(names)))
+
+    def test_codes(self):
+        for r in self.rows:
+            t = r["table"]
+            domains = r["domain"].split(";")
+            self.assertTrue(all(d in DOMAINS for d in domains), f"{t}: domain {r['domain']}")
+            self.assertEqual(len(domains), len(set(domains)), t)
+            self.assertIn(r["choice_object"], CHOICE_OBJECTS, t)
+            self.assertTrue(r["rater"], t)
+
+    def test_every_design_table_tagged(self):
+        missing = self.tables - {r["table"] for r in self.rows}
+        self.assertFalse(missing, f"design tables with no topic tags: {sorted(missing)}")
 
 
 #: concept -> the harmonized values it may take. A new concept is added here

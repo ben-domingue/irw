@@ -57,6 +57,21 @@ COLUMNS = [
 ##"abstained" means no usable source, and `reason` says which kind.
 STATUS_VALUES = ("tagged", "abstained", "")
 
+##Keep in step with TAG_VOCAB and TAG_RENAMES in metadata/tag_normalize.R.
+ENUM_RENAMES = {"Internet-based (Mturkers, etc)": "Internet-based"}
+ENUM_VOCAB = {
+    "Sample": {
+        "AI/model", "Animal", "Clinical", "Educational", "General/non-specific",
+        "Internet-based", "NA", "Non-person unit", "Program-based",
+        "Representative", "Targeted/specific", "Workplace",
+    },
+    "Construct type": {
+        "Affective/mental health", "Behavioral", "Cognitive/educational",
+        "Developmental", "NA", "Opinion/attitude", "Other", "Personality",
+        "Physical health/functioning",
+    },
+}
+
 KEY_MAP = {
     "table": "table",
     "construct_name": "Construct Name",
@@ -91,6 +106,20 @@ def main():
 
     if row["Status"] not in STATUS_VALUES:
         sys.exit(f"status must be one of {STATUS_VALUES}, got {row['Status']!r}")
+    ##Mirror of TAG_VOCAB in metadata/tag_normalize.R. The weekly pipeline
+    ##halts on any value outside it (irw#2961: eleven invented construct
+    ##types staged on 2026-10-11 stopped the 2026-10-12 run), so refuse here,
+    ##at staging time, where the author of the row can still fix it.
+    for col, vocab in ENUM_VOCAB.items():
+        cell = str(row[col])
+        for old, new in ENUM_RENAMES.items():
+            cell = cell.replace(old, new)
+        atoms = [a.strip() for a in cell.split(",") if a.strip()]
+        bad = [a for a in atoms if a not in vocab]
+        if bad:
+            sys.exit(f"{col}: {bad} not in the controlled vocabulary {sorted(vocab)}. "
+                     f"Pick a listed value or leave the cell blank; new values are "
+                     f"added in metadata/tag_normalize.R only after a deliberate decision.")
     ##Infer rather than demand it, so every existing caller keeps working and
     ##the file still gains the distinction between "abstained" and "not yet
     ##looked at" that it was missing.

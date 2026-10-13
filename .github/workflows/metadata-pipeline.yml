@@ -30,11 +30,22 @@ on:
     # Mondays 13:00 UTC, the slot the crontab entry used in local time.
     - cron: "0 13 * * 1"
   workflow_dispatch:
+    inputs:
+      resume_from_run:
+        description: >-
+          Run ID of a failed run to resume (the number at the end of its URL).
+          Its metadata/ outputs are restored and only the stages that had not
+          completed are run. Leave blank for a full run.
+        required: false
+        default: ""
 
 permissions:
   contents: write
   pull-requests: write
   issues: write
+  # Reading another run's artifacts (the resume path) needs this; the default
+  # token scope for the job's own artifacts does not cover it.
+  actions: read
 
 concurrency:
   group: metadata-pipeline
@@ -43,7 +54,10 @@ concurrency:
 jobs:
   pipeline:
     runs-on: ubuntu-latest
-    timeout-minutes: 120
+    # 240, not 120: the 2026-10-12 run took 117 minutes in Workflow 1 and was
+    # cancelled by the old limit six seconds after opening its PR (#2971). The
+    # stage-16 recompute (#2970) is most of the growth; until it lands, headroom.
+    timeout-minutes: 240
     steps:
       - uses: actions/checkout@v4
         with:
@@ -95,6 +109,31 @@ jobs:
             github::redivis/redivis-r
             github::itemresponsewarehouse/Rpkg
 
+      - name: Restore outputs from the run being resumed
+        if: github.event.inputs.resume_from_run != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_ID: ${{ github.event.inputs.resume_from_run }}
+        run: |
+          set -euo pipefail
+          # Same-week only. The completed stages' outputs reflect Redivis as it
+          # was at that run; a week later they would silently publish a stale
+          # view of the warehouse as if freshly computed.
+          created="$(gh run view "$RUN_ID" --json createdAt --jq .createdAt)"
+          age_h=$(( ( $(date -u +%s) - $(date -u -d "$created" +%s) ) / 3600 ))
+          if (( age_h > 72 )); then
+            echo "::error::run $RUN_ID is ${age_h}h old; resume only within 72h. Dispatch a full run instead."
+            exit 1
+          fi
+          gh run download "$RUN_ID" --name metadata-outputs --dir metadata/
+          if [[ ! -f metadata/pipeline_progress.txt ]]; then
+            echo "::error::run $RUN_ID left no pipeline_progress.txt; nothing to resume. Dispatch a full run instead."
+            exit 1
+          fi
+          echo "Resuming run $RUN_ID (${age_h}h old). Stages already complete:"
+          tr '\n' ' ' < metadata/pipeline_progress.txt; echo
+          git status --short -- metadata/ | head -40
+
       - name: Workflow 1 -- generate and diff
         id: generate
         env:
@@ -107,7 +146,9 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
           set -o pipefail
-          .claude/skills/irw-site-update/scripts/run_pipeline.sh 2>&1 \
+          resume=""
+          [[ -n "${{ github.event.inputs.resume_from_run }}" ]] && resume="--resume"
+          .claude/skills/irw-site-update/scripts/run_pipeline.sh $resume 2>&1 \
             | tee pipeline.log
           echo "rc=$?" >> "$GITHUB_OUTPUT"
 
@@ -127,6 +168,18 @@ jobs:
           name: pipeline-log
           path: pipeline.log
           retention-days: 90
+
+      - name: Keep the stage outputs so a failed run can be resumed
+        # Every outcome, not just failure: a run can die in the audit step
+        # after Workflow 1 finished, and the resume needs the outputs either
+        # way. ~20 MB; a week is longer than the resume window above.
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: metadata-outputs
+          path: metadata/
+          retention-days: 7
+          if-no-files-found: warn
 
       - name: Open a pull request for what changed
         env:
@@ -224,6 +277,10 @@ jobs:
             echo "request was opened, so the committed metadata is untouched."
             echo
             echo "Run: $run_url"
+            echo
+            echo "To retry without repeating the stages that finished, dispatch the"
+            echo "workflow with \`resume_from_run\` = \`$GITHUB_RUN_ID\` (within 72 hours)."
+            echo "Stages recorded as complete: $(tr '\n' ' ' < metadata/pipeline_progress.txt 2>/dev/null || echo none)"
             echo
             echo '```'
             tail -c 40000 pipeline.log 2>/dev/null || echo "(no log produced)"

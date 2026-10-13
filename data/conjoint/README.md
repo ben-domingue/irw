@@ -77,7 +77,8 @@ Other rules:
 - **A dictionary row,** staged with `automated_finding/stage_dict_row.py --source conj`, which writes to `dictionary_auto_conj.csv`. To change a staged row, restage it with `--replace`. `--force` adds a second row.
 - **A processing note** in `metadata/data_notes.csv`.
 - **A row in `candidates.csv`,** the ledger of every deposit considered. Its status is `todo`, `built`, `uploaded`, or `held: <reason>`.
-- **A design record:** one row in `design_tables.csv` and one row per outcome column in `design_outcomes.csv` (below). `metadata/tests/test_conj_design.py` fails if a built or uploaded table has none. `red_up` refuses to upload a conjoint table with no `design_tables.csv` row, or with an outcome column that has no `design_outcomes.csv` row. It warns when a gender attribute has no rows in `crosswalk.csv`.
+- **A design record:** one row in `design_tables.csv` and one row per outcome column in `design_outcomes.csv` (below). `metadata/tests/test_conj_design.py` fails if a built or uploaded table has none. `red_up` refuses to upload a conjoint table with no `design_tables.csv` row, or with an outcome column that has no `design_outcomes.csv` row. It warns when a gender attribute has no rows in `crosswalk.csv`, or when the table has no row in `tags.csv`.
+- **Topic tags:** one row in `tags.csv` (below): what the study is about and what a profile represents. `metadata/tests/test_conj_design.py` fails if a design table has none.
 
 ## Design records
 
@@ -99,7 +100,7 @@ The tables share one layout but not one meaning: `choice` is "vote for" in one t
 | `task_source`, `profile_source` | `recorded` (the deposit has the column), `inferred` (rebuilt from row order), or `unknown`. Position and task-order analyses should drop `inferred`. |
 | `evidence` | where each value came from: header lines, codebook pages |
 
-`metadata/16_conjoint.R` also checks each table against its record: it computes the level shares and the pairs of levels that never occur together, and warns when `restrictions` is `none` but pairs are missing, or `level_weights` is `uniform` but shares are clearly unequal.
+`metadata/16_conjoint.R` recomputes a table only when its Redivis listing (`updatedAt`, `numRows`, `hash`) differs from `metadata/conj_refresh_stamps.csv`, or when it falls in a small rolling slice; other rows are carried forward from `conj_metadata.csv` (#2970). It also checks each table against its record: it computes the level shares and the pairs of levels that never occur together, and warns when `restrictions` is `none` but pairs are missing, or `level_weights` is `uniform` but shares are clearly unequal.
 
 `design_outcomes.csv`, one row per table × outcome column:
 
@@ -123,6 +124,63 @@ Attribute columns keep the text respondents saw, so the same idea arrives under 
 | `evidence` | where the mapping comes from |
 
 Every displayed level of a mapped attribute has a row (`(not shown)` has none, since nothing was shown), and each concept maps to at most one attribute per table. A `name` signal carries other things too: Pedersen's names also mark ethnicity (majority versus Turkish), so a gender contrast there is within the names the authors chose. A new concept is added with its allowed values in `metadata/tests/test_conj_design.py` (`CONCEPTS`) and a line here.
+
+## Topic tags
+
+Users search a conjoint family by subject ("the immigration conjoints") before anything else, and nothing in the design records says what a study is about. `tags.csv` does, one row per table, and `metadata/16_conjoint.R` joins its two tag columns into `conj_metadata.csv` so the packages filter on them like any other field. Tags are living (`tags/decisions/1850_tags_are_living.md`): a row shown to be wrong against the source is corrected by PR. The vocabulary was derived bottom-up from all 921 descriptions on 2026-10-11 and ruled by Ben with multi-select; the reasoning is in `tags/decisions/2919_conjoint_topic_tags.md`.
+
+| column | |
+|---|---|
+| `domain` | the **setting** of the study, one or more values from the list below, primary first, joined with `;`. A second value only when the study genuinely sits in two (about 9% of rows). |
+| `choice_object` | what one profile represents, exactly one value |
+| `rater` | who wrote the row (`claude-auto <date>`, or a person) |
+| `note` | how the call was made, or the alternative considered |
+
+`domain` records the setting, **not the manipulated attribute**: a candidate conjoint that varies gender is `candidate_choice`, not a gender tag. (Attribute concepts belong to the crosswalk.)
+
+| `domain` | |
+|---|---|
+| `candidate_choice` | people judged for public office, elected or appointed: candidates, legislators, ministers, judges, nominees, party leaders |
+| `immigration_asylum` | immigrant, refugee and naturalisation applicants; migration and border policy; migrants choosing destinations |
+| `climate_energy_environment` | climate, energy, transport, agricultural and food policy, land use, conservation |
+| `international_economy` | trade agreements, foreign investment, loans and bailouts, foreign aid, supply-chain laws, international organisations |
+| `democracy_institutions` | regime and institution design: countries described by democratic features, electoral rules, deliberative processes, legislatures, lobbying and legislative access, political participation |
+| `foreign_policy_security` | military intervention, nuclear and cyber threats by states, sanctions, alliances, arms exports, peacekeeping |
+| `health_covid` | vaccines, triage and priority setting, COVID restrictions, health services and providers, clinical and veterinary vignettes, insurance |
+| `tax_welfare_economy` | tax plans, welfare programmes and recipients, basic income, austerity, deservingness, redistribution |
+| `consumer_products` | goods and consumer services: food as a purchase, vehicles, cannabis, appliances, hotels, flights |
+| `social_identity_interpersonal` | judgments of ordinary people, families and groups: neighbours, roommates, dating profiles, racial classification, family ideals |
+| `labour_hiring` | job applicants, hiring and admissions into ordinary jobs, civil-service posts and faculties; job offers; pay |
+| `crime_justice_policing` | policing and police recruits, crime and violence scenarios, sentencing, protests and political violence, security versus liberty |
+| `technology_ai_privacy` | AI and algorithmic systems, surveillance, privacy, apps, digital ID, autonomous weapons, criminal cyberattacks |
+| `political_communication` | news items, ads, statements, tweets, speeches, frames, leaflets, when the artefact itself is judged |
+| `parties_platforms` | parties, manifestos, coalition agreements as the unit of choice |
+| `public_administration` | bureaucrats, public services, e-government, accountability demands, performance information |
+| `corruption_accountability` | corruption, bribery, scandal, clientelism, pledge-breaking, crisis blame |
+| `housing_neighbourhoods` | housing developments, city plans, neighbourhood composition |
+| `other` | residual: academia and journals, education, bioethics, copyright contracts, charities, survey methodology |
+
+| `choice_object` | |
+|---|---|
+| `person` | a described individual, family or group: candidate, applicant, patient, neighbour, official |
+| `policy` | a proposal, package, law, agreement, reform, project, scheme or governance arrangement |
+| `scenario` | a situation, event or case: crisis, attack, election outcome, clinical case, dispute |
+| `product_service` | a good, service, job or office offer, app, technology, contract or deal |
+| `place` | a country, city, society, neighbourhood, site or destination |
+| `organisation` | a party, firm, agency, committee, journal, charity, legislature, international body |
+| `message` | a text or media artefact judged as such: news story, ad, statement, tweet, leaflet, ballot or tally image |
+
+Rules settled on 2026-10-11, at the seams two blind passes disagreed on:
+
+- **Vehicle rule.** A news story, tweet, flyer or audio clip that describes a person, policy or event is the vehicle, not the object: tag the thing described (`person`, `policy`, `scenario`). `message` only when the artefact itself is what the respondent judges or chooses (which news item to read, which ad is more persuasive).
+- **Office versus job.** Anyone evaluated for public office, elected or appointed, is `candidate_choice`; hiring into ordinary jobs, civil-service posts, faculties or academies is `labour_hiring`. Police recruits are `crime_justice_policing`.
+- **Groups are persons.** A family, a couple or a group in a dispute is `person`.
+- **Cyber by actor.** State cyberattacks are `foreign_policy_security`; criminal attacks on firms are `technology_ai_privacy;crime_justice_policing`.
+- **Food and farming.** Food as a purchase is `consumer_products`; food, farm and agri-environmental policy is `climate_energy_environment`.
+- **Hypothetical countries.** Described by their own institutions, `democracy_institutions`/`place`; as targets of the respondent's own country's action, `foreign_policy_security`/`place`.
+- **Migrants as decision-makers.** Migrants choosing a destination are `immigration_asylum`/`place`.
+
+Adding a value: add it to `DOMAINS` or `CHOICE_OBJECTS` in `metadata/tests/test_conj_design.py` and to the table here, in one PR.
 
 ## Using the tables
 

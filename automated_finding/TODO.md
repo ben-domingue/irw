@@ -3,6 +3,45 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## From the 2026-10-11 repos mode-3 batch (15 new terms x 9 languages)
+
+- [x] **83 tables (2,006,984 responses) + 32 item text tables uploaded** (ben-domingue, confirmed 2026-10-11; `uploaded=2026-10-11` stamped) from
+  `automated_finding/irw_output/` and `itemtext_output/` (response tables first). All 83 are new.
+  The already-uploaded 2026-10-10 files were moved to `runs/uploaded_2026-10-10/`. Stamp
+  `uploaded=` in `itemtext_provenance.csv` only after ben-domingue confirms.
+- [ ] **Issues-page entries at upload:** esteves x2, bi x4, hou x4, izquierdo_lopez (IRW English
+  translations), kassas_2021_covid_mitigation (blank `cleaning` stem), petrovici_2025_culture_appreciation
+  (1/2 vs codebook 1/0).
+- [ ] **Covariate labels:** `build.py` after the release and commit covariate_labels.csv (harvest run
+  at commit for the 15 .sav/.dta scripts, see BATCH_LOG 2026-10-11d).
+- [ ] **Rulings wanted** (none blocks upload): see BATCH_LOG 2026-10-11d.
+- [ ] 1 unworked lead in `leads/repos_leads_2026-10-11.csv`: DVN/G7EOGT (Ciuk TESS 2002/2010, needs the TESS codebook).
+- [ ] The "arg must be a list, tuple, 1-d array, or Series" reader fault hit 13 more `error` rows
+  (24 across the 2026-10-10 and 2026-10-11 runs); worth a look at `load_table()`.
+
+## From the 2026-10-10 repos mode-3 batch (15 new terms x 9 languages)
+
+- [x] **107 tables (2,042,413 responses) + 33 item text tables uploaded** (ben-domingue, confirmed 2026-10-11; `uploaded=2026-10-11` stamped) from
+  `automated_finding/irw_output/` and `itemtext_output/` (response tables first). All 107 are new
+  (the `perez_hernandez_2021_*` tables were written and extended within this batch; nothing is
+  live yet). Stamp `uploaded=` in `itemtext_provenance.csv` only after ben-domingue confirms.
+- [x] **Issues-page entries:** 25 entries in datapages/irw#342 (fox_2023_gad7 dropped as below the bar).
+- [ ] **Covariate labels:** after commit run `python3 metadata/covariate_labels/harvest.py --commit HEAD`
+  for meden_2026_podcast, kacovsky_2022_imi, jarbin_2020_mfq, spasovski_2020_perma,
+  asadollahi_2022_fesi, perez_hernandez_2021_encovid, wendel_2022_rfq, stecula_2020_antivax,
+  schoen_2007_neoffi, stapleton_2021_optimism, lee_2022_social_trust,
+  deilkas_2019_saq_nursing_homes, van_beveren_2019_youth_emotion, cwalina_2023_covid_framing,
+  deryahanoglu_2024_exercise_personality; then `build.py` after the release and commit
+  covariate_labels.csv.
+- [ ] **Rulings wanted** (none blocks upload): see BATCH_LOG 2026-10-10b (PLS-SEM small blocks as
+  one table, stapleton CCAP/CCES as own data, schoen_2007, hatemi_2017 content, jarbin dx covariates,
+  kahraman 19-item ZBI, montana_blasco unkeyed statements, lee_2022 treat collapse, blank option_text
+  tables, YB5PVO anonymous deposit).
+- [ ] 2 unworked leads in `leads/repos_leads_2026-10-10.csv`: DVN/YB5PVO (needs an author name),
+  DVN/IZKSL7 (Swiss AV panel, heavy recoding).
+- [ ] 11 `error` rows share one reader fault ("arg must be a list, tuple, 1-d array, or
+  Series"); check `load_table()` before the next run or those candidates are retried blind.
+
 ## From the 2026-10-08 repos mode-3 discovery (15 new terms x 9 languages)
 
 - Ruled 2026-10-09 (ben-domingue): the five decisions on the 2026-10-09 batch stand (karrot split, CAQ as one table, CYRM-12 item text held, AMTB item text shipped, bland/nguyen block-based constructs).
@@ -20,9 +59,33 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   the purnama issues entries stand.
 - Ruled 2026-10-09 (ben-domingue): third-party re-deposits (KLIPS DVN/RWPOMI, TEDS 2024-T
   DVN/QIGM1P) stay rejected; an uploader's CC0 cannot relicense a panel its institute distributes.
-- [ ] The Canada GSS 2010 files (`10.5683/sp3/uxz4it`, `sp3/a6dbgs`) and `10.7910/dvn/crpaa8`
-  OOM at 6G every run and are never written to the seen ledger. Add them to the ledger as
-  `file_too_large` (or equivalent) so they stop resurfacing.
+- [x] The Canada GSS 2010 files and `10.7910/dvn/crpaa8` added to the seen ledger as
+  `file_too_large` by hand (2026-10-10).
+
+## From the 2026-10-09 PLOS monthly run (full sweep, 125 terms x plosone)
+
+- [x] **2 `good` + 1 `worth_retrying` worked (PR #2940, 2026-10-10):** `pone.0237626` ->
+  `ding_2020_covid_knowledge` + `ding_2020_covid_risk_perception` (item text shipped);
+  `pone.0356524` -> `panth_2026_bipq` + `panth_2026_cdrisc10` (the `dup_id_item` was one
+  duplicated serial number). `pone.0200483` (Garden Cafés) rejected again: values 2-8 vs the
+  paper's 1-7 scale, no codebook. See BATCH_LOG 2026-10-10.
+- [ ] **15 `recoverable_format` leads** (one deposit, several bundled instruments —
+  needs splitting into one table per scale) — see BATCH_LOG entry for the full list
+  and DOIs.
+- [x] **5 `human_review` rows** (includes one RETRACTED article, `pone.0297868` —
+  confirm skip) — titles/DOIs/reasons listed in this batch's BATCH_LOG.md entry.
+  The on-disk `human_review/human_review_plos_2026-10-09.csv` the run generated was
+  never committed (pushing it fell outside this task's explicit scope and was
+  declined by the permission layer) and was deleted rather than left stranded —
+  safe to do because its dedup purpose is already served by `plos_seen_dois.csv`
+  (all 5 DOIs are already in it, pushed to main) and its row detail is already in
+  BATCH_LOG.md. If a human-readable `human_review/*.csv` copy is still wanted for
+  this batch, it can be regenerated from the BATCH_LOG entry.
+- Raw triage output (`runs/plos_monthly_candidates_full_2026-10-09.csv` and its
+  `.retriage_ha.csv` sibling) is on disk in this session's container only — not
+  committed anywhere (per `.gitignore`/SKILL.md; see BATCH_LOG). Every DOI above is
+  reachable again from its URL, and all 121 triaged DOIs are now in
+  `plos_seen_dois.csv` so a future run won't re-surface them by accident.
 
 ## From the 2026-10-07 repos mode-3 batch (15 new terms x 9 languages)
 
@@ -49,9 +112,6 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   - crysdale_2020_big5 has 61 items where BFI-2 has 60; the extra one is unidentified.
   - hlado_2025 is named after the dataset contact (the record author is anonymised).
   - kasparek_2025_audit item text is held under the AUDIT rights question.
-  - Tags: the skill says blank `Construct type` and the Sample FRAME facet before
-    staging (both under the 90% bar on 2026-09-03). Recent batches, and these 168
-    rows, fill them. Raised as irw#2892.
 - [ ] **Cheap item text not built:** galindo_2026 (Spanish .sav labels), song_2026
   (Chinese .sav labels), blaszyk_2023 (Polish .sav labels). All need IRW English.
 - [ ] **101 unworked leads** in `leads/repos_leads_2026-10-07.csv`. Two were worked and

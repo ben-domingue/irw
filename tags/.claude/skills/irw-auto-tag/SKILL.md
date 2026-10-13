@@ -255,29 +255,35 @@ live-sheet half.
 Open a pull request with the new rows in `tags/tags_auto.csv`. **Merging is the
 accept** — no pasting, and nothing to confirm afterwards.
 
-### Columns publish per column, against a measured bar
+### Every column publishes; two are the first to sweep
 
-**Staging a value is not deciding to publish it.** Every column this skill fills
-is held to a per-atom precision bar — currently 90% — measured against the human
-gold set by `tags/scoring/`, and a column that has not cleared it is written by
-the tagger, kept in the predictions for later measurement, and **blanked before
-the rows are staged**. Selection is an act performed at assembly, deliberately
-and once, not something each tagging run decides for itself.
+**Every column this skill fills is published** once the row is merged. From
+2026-09-03 to 2026-10-12 this section described a per-column gate: a column
+had to clear 90% per-atom precision against the human gold set in
+`tags/scoring/` or be blanked before staging, and `construct type` and the FRAME
+facet of `sample` (Representative / Targeted/specific / General/non-specific)
+were held under it. The gate was retired on 2026-10-12 (#2892) because it was
+never enforced -- every batch filled both columns and 256 auto construct types
+were already live -- and because the measurement could not carry it: the 50%
+figure came from about 17 gold tables, the same comparison showed 92% in the
+other arm, and the gold set is itself soft (see the `age range` audit in
+`tags/scoring/age_range_gold_audit_2026-08-31.json`). Ben's standing decision
+(2026-09-02) is that tags are reversible annotation and a misplaced tag is not
+a deal-breaker, so coverage beats a precision bar the data cannot adjudicate.
 
-As of 2026-09-03 that means `primary language(s)`, `item format`, `measurement
-tool` and the SETTING facet of `sample` publish; `construct type` and
-`sample`'s FRAME facet do not. Those two are not broken — they are measured, and
-they are under the bar: on the 2026-09-03 comparison `construct type` scored
-50.0% per-atom precision and the frame facet 57.1%.
+What that leaves in force:
 
-Do not read the current list off this paragraph and assume it is live. **Quote
-`tags/scoring/` and the most recent results file**, the way `status.json` rather
-than prose is what you quote for coverage.
-
-The gate has earned itself once already: #1802 withheld 44 of 60 `primary
-language(s)` rows after four agents disclosed, unprompted, that they had
-inferred the language from the study's *country* — the move the `age range`
-rule forbids and which `vocab.md` had never addressed for language.
+- **Validity is still gated, in code.** `scripts/stage_tag_row.py` refuses any
+  `sample` or `construct type` atom outside the controlled vocabulary, and
+  `metadata/tag_normalize.R` halts the pipeline on one that slips through
+  (#2961). Pick a listed value or leave the cell blank; never coin one.
+- **Auto rows stay identifiable.** `Rater` is `claude-auto` on every row this
+  skill writes, so a later audit can find and sweep them. If one is run,
+  `construct type` and the frame facet are the two columns to sweep first.
+- **Still blank what you cannot source.** The rules in `vocab.md` about not
+  inferring age, language or frame from the study's country (#1802) are
+  unchanged. The gate's one documented catch -- 44 of 60 language rows inferred
+  from country -- was a sourcing failure, and sourcing is where it is prevented.
 
 Since #1723 the file is unioned into `tags.csv` by `03_tags.R`, with three rules
 worth knowing:
