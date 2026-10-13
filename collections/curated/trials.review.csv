@@ -1,0 +1,139 @@
+table,warehouse,n_items,n_participants,n_responses,signals,suggested,reason,variables
+alcoholstroop_jones2024,w,28,156,26208,trialcol;name,ACCEPT,alcohol Stroop; item = stimulus category,id trialnum stimulus item resp rt
+cogcontrol_gyurkovics_2019_flanker,w_4,16,118,34338,trial_;name,ACCEPT,flanker; item = congruency,id item resp rt itemcov_cong trial_block trial_num trial_prevcong trial_code trial_pausetime cov_age
+cogcontrol_gyurkovics_2019_sart,w_4,9,117,29484,trial_;name,ACCEPT,SART; item = go/no-go,id item resp rt itemcov_nogo trial_block trial_num cov_age cov_gender cov_agegroup cov_puberty cov_i
+cogcontrol_gyurkovics_2019_simon,w_4,8,118,34338,trial_;name,ACCEPT,Simon; item = congruency,id item resp rt itemcov_cong trial_block trial_num trial_prevcong trial_code trial_pausetime cov_age
+enkavi_2019_ant_flanker,w_3,48,523,96912,itemcov_cond;position+rt;name,ACCEPT,attention network / flanker; item = cue x condition,id item resp wave position rt itemcov_condition itemcov_cue
+enkavi_2019_dpx_axcpt,w_3,24,522,83967,itemcov_cond;position+rt;name,ACCEPT,DPX / AX-CPT; item = cue-probe condition,id item resp wave position rt itemcov_condition
+enkavi_2019_gonogo,w_3,4,523,235550,itemcov_cond;position+rt;name,ACCEPT,go/no-go; item = condition,id item resp wave position rt itemcov_condition
+enkavi_2019_navon,w_3,12,523,64608,itemcov_cond;position+rt;name,ACCEPT,Navon global-local; item = level x conflict,id item resp wave position rt itemcov_level itemcov_conflict
+enkavi_2019_simon,w_3,8,523,67300,itemcov_cond;position+rt;name,ACCEPT,Simon; item = condition,id item resp wave position rt itemcov_condition
+enkavi_2019_stopsignal,w_3,16,523,403800,itemcov_cond;position+rt;name,ACCEPT,stop-signal; item = trial type x delay,id item resp wave position rt itemcov_delay itemcov_trial_type
+enkavi_2019_stroop,w_3,9,523,64608,itemcov_cond;position+rt;name,ACCEPT,Stroop; item = condition,id item resp wave position rt itemcov_condition
+enkavi_2019_taskswitch,w_3,288,523,296120,itemcov_cond;position+rt;name,ACCEPT,task switching; item = task x switch,id item resp wave position rt itemcov_task itemcov_switch
+hachenberger_2025_gonogo_main,w_6,2,69,500200,trial_;trialcol;name,ACCEPT,go/no-go in EMA; item = go/no-go,id item resp rt wave trial_number cov_day cov_beep
+hachenberger_2025_gonogo_pilot,w_6,2,21,72964,trial_;trialcol;name,ACCEPT,go/no-go in EMA (pilot); item = go/no-go,id item resp rt wave trial_number cov_day cov_beep
+hachenberger_2025_stroop_main_bin,w_6,2,70,242880,trial_;trialcol;name,ACCEPT,Stroop in EMA; item = congruency,id item resp rt wave trial_number cov_day cov_beep trial_stimulus
+hachenberger_2025_stroop_pilot_bin,w_6,2,21,47808,trial_;trialcol;name,ACCEPT,Stroop in EMA (pilot); item = congruency,id item resp rt wave trial_number cov_day cov_beep trial_stimulus
+imps2025_hf,w_2,46.3931313131313,2475,114823,trial_;trialcol;name,ACCEPT,hearts and flowers; item = block x side,id cov_grade cov_female cov_age trial_num resp_side rt block time_limit stim_side time stim_shape co
+martinez_2024_gonogo,w_6,8,10,712,trialcol;itemcov_cond;name,ACCEPT,go/no-go; item = compatibility,id item resp trial rt date itemcov_compatibility
+martinez_2024_joint_simon,w_6,16,10,2753,trialcol;itemcov_cond;name,ACCEPT,joint Simon; item = compatibility,id item resp trial rt date itemcov_compatibility
+matzke-etal-2019,w_2,8,53,25751,rt-sweep,ACCEPT,stop-signal; item = condition,id item resp cov_s cov_ss cov_d rt cov_ssd
+matzke-experiment1-2022,w_2,2,7,2463,rt-sweep,ACCEPT,stop-signal; item = go/stop,id item resp cov_s cov_ss rt cov_ssd
+matzke-experiment2-2022,w_2,2,64,20251,rt-sweep,ACCEPT,stop-signal; item = go/stop,id item resp cov_s cov_ss rt cov_ssd
+matzke-experiment3-gamified-2022,w_2,2,9,4835,rt-sweep,ACCEPT,stop-signal (gamified); item = go/stop,id item resp cov_s cov_ss rt cov_ssd
+matzke-experiment3-standard,w_2,2,9,3361,rt-sweep,ACCEPT,stop-signal; item = go/stop,id item resp cov_s cov_ss rt cov_ssd
+megart_tonkovic_2021,w_2,5208,92,176964,rt-sweep,ACCEPT,"lexical decision, Croatian megastudy; item = word",id rt resp date item itemcov_type
+motion,w,30,106,31800,rt-sweep,ACCEPT,random dot motion discrimination; item = coherence,id resp rt item
+mturkddm_by,w,20,166,132800,trialcol,ACCEPT,numerosity discrimination (DDM); item = stimulus,id block order rt resp item
+mturkddm_lexical,w,4588,142,68160,trialcol;name,ACCEPT,lexical decision (DDM); item = word,id block order rt resp item
+mturkddm_recognition,w,2202,142,76908,trialcol;name,ACCEPT,word recognition (DDM); item = word,id block order rt resp item
+mturkddm_y25,w,12,166,127488,trialcol,ACCEPT,numerosity discrimination (DDM); item = stimulus,id block order rt resp item
+petley_2025_flanker_study1_childwoman,w_5,4,47,25780,name,ACCEPT,flanker (face stimuli); item = attend condition,id item resp rt_median itemcov_attend
+petley_2025_flanker_study1_girlman,w_5,4,42,23108,name,ACCEPT,flanker (face stimuli); item = attend condition,id item resp rt_median itemcov_attend
+petley_2025_flanker_study1_manwoman,w_5,4,53,28954,name,ACCEPT,flanker (face stimuli); item = attend condition,id item resp rt_median itemcov_attend
+petley_2025_flanker_study2_auditory,w_5,2,62,17036,name,ACCEPT,flanker (face stimuli); item = attend condition,id item resp rt_median wave
+petley_2025_flanker_study2_visual,w_5,2,62,17090,name,ACCEPT,flanker (face stimuli); item = attend condition,id item resp rt_median wave
+roar_lexical,w,500,123,61500,name,ACCEPT,lexical decision (ROAR); item = word,realpseudo resp rt item id
+robison_2026_retesting_antisaccade,w_5,2,261,37984,trial_;trialcol;name,ACCEPT,antisaccade; item = trial type,id item resp wave rt trial_number cov_age cov_gender cov_race cov_native_english cov_color_blind cov
+robison_2026_retesting_color,w_5,2,262,32511,trial_;trialcol;name,ACCEPT,color Stroop variant; item = trial type,id item resp wave rt trial_number trial_block cov_age cov_gender cov_race cov_native_english cov_col
+robison_2026_retesting_digitcomp,w_5,2,249,17919,trial_;trialcol;name,ACCEPT,digit comparison; item = trial type,id item resp wave rt trial_number trial_block trial_target_length cov_age cov_gender cov_race cov_na
+robison_2026_retesting_flanker,w_5,4,251,23375,trial_;trialcol;itemcov_cond;name,ACCEPT,flanker; item = conflict,id item resp wave rt trial_number itemcov_conflict cov_age cov_gender cov_race cov_native_english co
+robison_2026_retesting_letter,w_5,2,261,32955,trial_;trialcol;name,ACCEPT,letter task; item = trial type,id item resp wave rt trial_number trial_block cov_age cov_gender cov_race cov_native_english cov_col
+robison_2026_retesting_lettercomp,w_5,2,251,16735,trial_;trialcol;name,ACCEPT,letter comparison; item = trial type,id item resp wave rt trial_number trial_block trial_target_length cov_age cov_gender cov_race cov_na
+robison_2026_retesting_orientation,w_5,2,261,32864,trial_;trialcol;name,ACCEPT,orientation task; item = trial type,id item resp wave rt trial_number trial_block cov_age cov_gender cov_race cov_native_english cov_col
+robison_2026_retesting_ospan,w_5,5,262,4962,trial_;name,ACCEPT,operation span; item = set size,id item resp wave trial_list cov_age cov_gender cov_race cov_native_english cov_color_blind cov_wear
+robison_2026_retesting_rspan,w_5,5,261,4968,trial_;name,ACCEPT,reading span; item = set size,id item resp wave trial_list cov_age cov_gender cov_race cov_native_english cov_color_blind cov_wear
+robison_2026_retesting_sart,w_5,2,260,177769,trial_;trialcol;name,ACCEPT,SART; item = go/no-go,id item resp wave rt trial_number trial_falsealarm cov_age cov_gender cov_race cov_native_english co
+robison_2026_retesting_simon,w_5,4,250,41273,trial_;trialcol;itemcov_cond;name,ACCEPT,Simon; item = conflict,id item resp wave rt trial_number itemcov_conflict cov_age cov_gender cov_race cov_native_english co
+robison_2026_retesting_stroop,w_5,4,250,29367,trial_;trialcol;itemcov_cond;name,ACCEPT,Stroop; item = conflict,id item resp wave rt trial_number itemcov_conflict cov_age cov_gender cov_race cov_native_english co
+robison_2026_retesting_symspan,w_5,4,261,3960,trial_;name,ACCEPT,symmetry span; item = set size,id item resp wave trial_list cov_age cov_gender cov_race cov_native_english cov_color_blind cov_wear
+rr98_accuracy,w,33,30,12205,rt-sweep,ACCEPT,luminosity discrimination (Ratcliff & Rouder 1998); item = stimulus,rt item resp id
+spalex_aguasvivas_2020,w_2,102047,169628,16962757,rt-sweep,ACCEPT,"lexical decision, Spanish megastudy (SPALEX); item = word",id item resp rt date cov_trial_id cov_exp_id cov_trial_order cov_lexicality cov_gender cov_gender_re
+yu2025,w_2,5,167,24543,trialcol,ACCEPT,size perception; item = phase x stimulus,id trial item_cov_phase item item_cov_truth resp cov_age item_cov_rep item_unique resp_prop resp01 c
+brand_raffaelli_2024_recognition_20,w,101,592,59200,name,REJECT,recognition memory test (Ben 2026-10-13: out),id cov_gender cov_age item resp item_family
+chess_lnirt,w,40,259,10240,rt-sweep,REJECT,"Amsterdam Chess Test, 40 timed items (Ben 2026-10-13: out)",resp rt item cov_elo id
+cifar10h,w_6,10000,2571,514200,trial_,REJECT,"image labelling by MTurkers, trial_index: perception but not EF (Ben 2026-10-13: out)",id item resp resp_raw rt itemcov_true_category itemcov_subcategory trial_index
+cogcontrol_gyurkovics_2019_mwprobe,w_4,10,117,1170,trial_;name,REJECT,"mind-wandering thought probes during SART, not a speeded task (Ben 2026-10-13: out)",id item resp rt trial_report trial_block trial_num cov_age cov_gender cov_agegroup cov_puberty cov_i
+dd_rotation,w,10,121,1178,rt-sweep,REJECT,"mental rotation, 10 items (Ben 2026-10-13: out)",id item rt resp
+face_memory_amado_2024,w_2,80,597,56160,name,REJECT,EGEFACE face memory test (Ben 2026-10-13: out),id item resp cov_age cov_gender cov_education cov_handedness cov_phase cov_p_group cov_egeface_group
+face_memory_test,w,175,1768,309400,name,REJECT,"face recognition memory test, 175 items, rt (Ben 2026-10-13: out)",id item resp rt
+fullscaleiq_memory,w,6,3194,19164,name,REJECT,"short-term memory, 6 questions (Ben 2026-10-13: out)",id item resp raw_resp rt
+fullscaleiq_memory_options,w_6,48,3194,153312,name,REJECT,option-level companion of fullscaleiq_memory (Ben 2026-10-13: out),id item resp item_family
+graphmapping_study1,w,18,61,6318,rt-sweep,REJECT,"graph mapping measure, order + rt (Ben 2026-10-13: out)",item rt resp order id
+himmelstein-admc_raw-2025,w_2,38,1194,45066,rt-sweep,REJECT,"ADMC decision-making battery, trial-level (Ben 2026-10-13: out)",id item resp rt wave cov_session_id cov_session_restart_id
+hmcdm_spatialreasoning,w,50,350,3500,rt-sweep,REJECT,"spatial reasoning task, 50 items, rt, qmatrix (Ben 2026-10-13: out)",item id rt resp qmatrix__1 qmatrix__2 qmatrix__3 qmatrix__4
+kaigaishi_2024_primate_cognition,w_6,8,138,6356,trial_;trialcol,REJECT,"macaques, 8-task battery incl. inhibitory control, per-trial success (Ben 2026-10-13: out)",id item resp trial_number trial_source itemcov_domain cov_age_category cov_rank cov_sex
+mclaughlin_samuel_2025_auditory_session_2,w_2,43,209,17347,trial_,REJECT,"auditory STM / speech perception, trial_index (Ben 2026-10-13: out)",id item resp trial_index itemcov_response_type itemcov_talker
+muller_2016_dog_inhibition,w_3,3,41,115,name,REJECT,"dog cylinder task, 3 trials, ordinal (Ben 2026-10-13: out)",id item resp cov_sex cov_treatment
+nomt_hooper_2024_study2,w,144,393,56592,rt-sweep,REJECT,Novel Object Memory Test (Ben 2026-10-13: out),group id cov_gender cov_age cov_country_of_birth cov_country_of_residence cov_first_language cov_nat
+robison_2026_retesting_cued_recall,w_6,201,251,49446,trial_;name,ACCEPT,"cued recall memory task (trial_list, serial position) (Ben 2026-10-13: in)",id item resp wave rt trial_list trial_serial_position cov_age cov_gender cov_race cov_native_english
+robison_2026_retesting_ifr,w_5,10,248,34437,trial_;name,ACCEPT,immediate free recall (Ben 2026-10-13: in),id item resp wave rt trial_list trial_target cov_age cov_gender cov_race cov_native_english cov_colo
+robison_2026_retesting_paper_folding,w_5,5,250,8980,trial_;trialcol;name,REJECT,"paper folding, 5 items: spatial ability test rather than a trial task (Ben 2026-10-13: out)",id item resp wave trial_number trial_response cov_age cov_gender cov_race cov_native_english cov_col
+robison_2026_retesting_raven,w_5,18,259,8633,name,REJECT,"Raven APM, 18 fixed items with rt: ability test (Ben 2026-10-13: out)",id item resp wave rt cov_age cov_gender cov_race cov_native_english cov_color_blind cov_wears_glasse
+robison_2026_retesting_recognition,w_5,2,248,56834,trial_;trialcol;name,ACCEPT,recognition memory (Ben 2026-10-13: in),id item resp wave rt trial_number trial_list cov_age cov_gender cov_race cov_native_english cov_colo
+robison_2026_retesting_tot,w_5,30,250,14300,trial_;trialcol;name,ACCEPT,tip-of-the-tongue task (Ben 2026-10-13: in),id item resp wave rt trial_number trial_difficulty cov_age cov_gender cov_race cov_native_english co
+santaca_2025_inhibitory_control,w_6,20,32,640,name,REJECT,"reptile detour task, 20 trials as learning sequence (Ben 2026-10-13: out)",id item resp cov_species cov_sex
+acevedo_triana_2017_tmaze,w_6,100,21,1077,trialcol,REJECT,"rat T-maze, resp = arm chosen not correctness",id item resp trial rt date cov_group cov_weight_g
+anh_2026_digitaltrust,w_4,6,306,1836,name,REJECT,questionnaire/test matched by name only: 6-item Digital Trust scale (1-5 Likert) from a survey on financial well-being pr,id item resp cov_gender cov_age cov_area cov_education cov_occupation cov_income
+bauwens_2022_technostress_inhibitors,w_6,13,337,4358,name,REJECT,"questionnaire/test matched by name only: Technostress inhibitors: technical support, literacy facilitation, involvement f",id item resp cluster_id cov_gender cov_age cov_education cov_tenure cov_fulltime cov_temporary cov_c
+biswas_2024_digital_center_quality,w_4,26,332,8632,name,REJECT,"questionnaire/test matched by name only: 26-item structured questionnaire (7 sub-constructs: satisfaction, information/sy",id item resp cov_digital_center cov_age cov_sex cov_education cov_occupation cov_income
+chen_2024_tot,w_5,4,732,2928,name,REJECT,"questionnaire/test matched by name only: 4 items on a 1-7 agreement scale, Chinese fitness coaches; the source labels the",id item resp cov_gender cov_age_band cov_seniority cov_monthly_income
+demirbag_2025_goal_orientations,w_4,21,1073,22533,name,REJECT,"questionnaire/test matched by name only: Goal orientations, 1-5. 1073 respondents x 21 items = 22533 responses.",id item resp
+det_naismith_2023,w,3,573,3438,itemcov_cond,REJECT,questionnaire/test matched by name only: Certified DET for the independent writing,id item cov_gender cov_test_taker_intent cov_first_language cov_ielts_writing itemcov_condition item
+ginting_2026_digital_competence,w_5,6,1000,6000,name,REJECT,"questionnaire/test matched by name only: Digital competence, 6 items, 1-5; N = 1,000 Indonesian civil servants; cov_age_g",id item resp cov_age_group cov_gender cov_education cov_tenure cov_institution_type cov_job_type cov
+hachenberger_2025_webexec_main,w_6,6,73,16782,name,REJECT,subjective EF complaints questionnaire,id item resp wave cov_day cov_beep
+hachenberger_2025_webexec_pilot,w_6,6,21,6079,name,REJECT,subjective EF complaints questionnaire,id item resp wave cov_day cov_beep
+halim_2025_digital_finance,w_5,5,370,1850,name,REJECT,"questionnaire/test matched by name only: Digital finance use/perception (DFC1-5); 5 items, 1-5; 370 users of digital fina",id item resp
+heriyati_2026_digital_info_literacy,w_6,9,100,900,name,REJECT,"questionnaire/test matched by name only: Digital information literacy, 9 items, 1-5 (strongly disagree to strongly agree)",id item resp cov_graduated cov_gender cov_sector cov_location cov_employees cov_turnover cov_digital
+heriyati_2026_digital_networking,w_6,9,100,900,name,REJECT,"questionnaire/test matched by name only: Digital networking competence, 9 items, 1-5. Young entrepreneurs (university gra",id item resp cov_graduated cov_gender cov_sector cov_location cov_employees cov_turnover cov_digital
+heriyati_2026_digital_safety,w_6,9,100,900,name,REJECT,"questionnaire/test matched by name only: Digital safety and risk awareness, 9 items, 1-5. Young entrepreneurs (university",id item resp cov_graduated cov_gender cov_sector cov_location cov_employees cov_turnover cov_digital
+hou_2022_online_disinhibition,w_5,11,762,8382,name,REJECT,"questionnaire/test matched by name only: Online disinhibition scale, 11 items, 1-4; N = 762 Chinese college students; cov",id item resp cov_sex cov_age cov_grade cov_hometown cov_only_child
+idcr_martinez_2023_Story_Recall_1,w,42,236,9389,name,REJECT,story recall test items,id item resp
+idcr_martinez_2023_Story_Recall_2,w,48,235,10545,name,REJECT,story recall test items,id item resp
+idcr_martinez_2023_Story_Recall_3,w,32,235,7150,name,REJECT,story recall test items,id item resp
+IJLS_Eersel_2024_IJLSreaction,w,9,200,3303,name,REJECT,survey,id item wave resp
+kermen_2019_attentional_control,w_5,20,334,6637,name,REJECT,"questionnaire/test matched by name only: Attentional Control Scale (ACS, 20 items), 1-4, 334 high-school students in Ista",id item resp cov_gender cov_grade cov_age
+kermen_2022_attention,w_4,20,325,6500,name,REJECT,"questionnaire/test matched by name only: 20-item attention scale, 1-4. 325 respondents x 20 items = 6500 responses.",id item resp cov_gender cov_grade cov_age
+lestari_2026_inhibitory_control,w_5,40,785,31400,name,REJECT,questionnaire/test matched by name only: Psychometric Dataset for The Development of The Teacher Executive Regulation Sca,id item resp cov_institution cov_gender cov_study_program cov_semester cov_teaching_experience cov_t
+lestari_2026_working_memory,w_5,16,785,12560,name,REJECT,questionnaire/test matched by name only: Psychometric Dataset for The Development of The Teacher Executive Regulation Sca,id item resp cov_institution cov_gender cov_study_program cov_semester cov_teaching_experience cov_t
+lexical_difficulty_altgassen_2025_s01_knowledge,w_2,230,913,91300,name,REJECT,questionnaire/test matched by name only: Words don’t come easy: How lexical difficulty of items and vocabulary of subject,id item resp cov_attention_1 cov_attention_2 cov_dem_sex cov_dem_age cov_dem_edu cov_dem_pedu cov_de
+lexical_difficulty_altgassen_2025_s01_personality,w_2,230,913,91300,name,REJECT,questionnaire/test matched by name only: Words don’t come easy: How lexical difficulty of items and vocabulary of subject,id item resp cov_attention_1 cov_attention_2 cov_dem_sex cov_dem_age cov_dem_edu cov_dem_pedu cov_de
+lexical_difficulty_altgassen_2025_s02_gc,w_2,12,1106,13272,name,REJECT,questionnaire/test matched by name only: Words don’t come easy: How lexical difficulty of items and vocabulary of subject,id item resp cov_demgroup cov_sd_sex cov_sd_age cov_sd_bildung cov_sd_bildung_anders cov_sd_ses4 cov
+lexical_difficulty_altgassen_2025_s02_ws,w_2,30,1106,33180,name,REJECT,questionnaire/test matched by name only: Words don’t come easy: How lexical difficulty of items and vocabulary of subject,id item resp cov_demgroup cov_sd_sex cov_sd_age cov_sd_bildung cov_sd_bildung_anders cov_sd_ses4 cov
+lexical_difficulty_altgassen_2025_s03_per,w_2,56,542,30352,name,REJECT,questionnaire/test matched by name only: Words don’t come easy: How lexical difficulty of items and vocabulary of subject,id item resp cov_longstring_adj cov_sd_age cov_sd_sex cov_sd_bildung cov_sd_agegroup_num cov_sd_sexg
+mancone_2024_ravlt_recall,w_4,5,160,800,name,REJECT,RAVLT trial totals (counts 0-15),id item resp cov_gender cov_group cov_gaming_prevalence cov_expertise_years cov_age
+montana_blasco_2026_digital_skills,w_5,18,1037,16512,name,REJECT,"questionnaire/test matched by name only: SMARS 2024 (Spanish adolescents 12-18): digital skills self-assessment, 18 items",id item resp cov_gender cov_age cov_municipality_size cov_education cov_region
+much_tte_2025_actionorientation,w,12,1244,14928,name,REJECT,questionnaire/test matched by name only: Reflects stable individual differences in how people respond to failure and stay,id group cov_age cov_gender cov_education cov_language cov_country cov_device item resp
+nflverse_kicks,w_6,5,218,61267,trial_;trialcol,REJECT,sports attempt,id item resp date trial_number trial_dist trial_blocked trial_season trial_playoff trial_game trial_
+nflverse_passes,w_6,12,616,366274,trial_;trialcol,REJECT,sports attempt,id item resp date trial_number trial_airyards trial_interception trial_receiver trial_down trial_tog
+nguyen_2026_factcheck_digital_literacy,w,10,668,6680,name,REJECT,"questionnaire/test matched by name only: Digital literacy in GenAI usage: 10 items (technical skill, information evaluati",id item resp
+ni_2025_strategic_orientation,w_4,3,329,987,name,REJECT,"questionnaire/test matched by name only: 3-item innovation strategic orientation scale (1-5 Likert), raw items, from a su",id item resp
+ozkurt_2026_ego_orientation,w_3,10,374,3740,name,REJECT,"questionnaire/test matched by name only: Ego Orientation Questionnaire (10 items), 1-5 scale, N=374 elite Turkish wrestle",id item resp cov_age cov_gender cov_education cov_wrestling_style cov_sport_experience
+papousek_2017_anatomy,w_6,2894,18563,1182065,trial_,REJECT,adaptive practice of knowledge,id item resp resp_raw rt date itemcov_term trial_type trial_options trial_context trial_lang
+perales_2026_digital_financial_literacy,w_4,12,179,2148,name,REJECT,"questionnaire/test matched by name only: Digital financial literacy, 12 items, 1-5, gastronomic entrepreneurs in Chiclayo",id item resp itemcov_dimension cov_age_band cov_gender cov_education cov_business_tenure cov_formali
+powell_2018_memory,w_4,5,523,2615,name,REJECT,"questionnaire/test matched by name only: 5-item binary incidental memory check (true/false, 0/1), same merged sample as p",id item resp cov_gender cov_age cov_origin cov_econ_background cov_affiliation cov_condition
+previc_bohn2023,w,379,1190,451010,trialcol,REJECT,parent vocabulary report,_unnamed_var id item resp trial cov_sex cov_age itemcov_word_type itemcov_english_trans itemcov_aoa
+purnama_2023_digital_need,w_5,8,515,4120,name,REJECT,"questionnaire/test matched by name only: Perception of digital technology needs for dengue control, 8 items, 1-5 (strongl",id item resp
+reinecke_2018_online_vigilance,w_3,12,229,2748,name,REJECT,questionnaire/test matched by name only: 12-item Online Vigilance Scale (salience/reactibility/monitoring subscales),id item resp cov_age cov_sex
+robison_2026_retesting_bfi,w_5,44,241,10604,name,REJECT,"questionnaire/test matched by name only: Big Five Inventory (44 items), administered twice about two weeks apart to US un",id item resp cov_age cov_gender cov_race cov_native_english cov_color_blind cov_wears_glasses cov_no
+robison_2026_retesting_cesd,w_5,18,241,4338,name,REJECT,"questionnaire/test matched by name only: CES-D depressive symptoms (18 items), administered twice about two weeks apart t",id item resp cov_age cov_gender cov_race cov_native_english cov_color_blind cov_wears_glasses cov_no
+robison_2026_retesting_ls,w_5,15,261,6610,name,REJECT,"questionnaire/test matched by name only: Letter span, administered twice about two weeks apart to US undergraduates. 261 ",id item resp wave rt cov_age cov_gender cov_race cov_native_english cov_color_blind cov_wears_glasse
+robison_2026_retesting_ns,w_5,15,260,6358,name,REJECT,"questionnaire/test matched by name only: Number span, administered twice about two weeks apart to US undergraduates. 260 ",id item resp wave rt cov_age cov_gender cov_race cov_native_english cov_color_blind cov_wears_glasse
+robison_2026_retesting_pas,w_5,18,242,4356,name,REJECT,"questionnaire/test matched by name only: Perceptions of Academic Stress (18 items), administered twice about two weeks ap",id item resp cov_age cov_gender cov_race cov_native_english cov_color_blind cov_wears_glasses cov_no
+robison_2026_retesting_psqi,w_6,16,249,3982,name,REJECT,questionnaire/test matched by name only: Pittsburg Sleep Quality Index,id item resp cov_age cov_gender cov_race cov_native_english cov_color_blind cov_wears_glasses cov_no
+robison_2026_retesting_stai,w_5,12,241,2892,name,REJECT,"questionnaire/test matched by name only: State-Trait Anxiety Inventory (12 items), administered twice about two weeks apa",id item resp cov_age cov_gender cov_race cov_native_english cov_color_blind cov_wears_glasses cov_no
+roettl_2018_brand_recognition,w_4,8,234,1872,name,REJECT,questionnaire/test matched by name only: 8-item forced-choice brand recognition test (0/1 wrong/right) across 8 in-game b,id item resp cov_condition
+simsalrbim_human,w_6,14,111,4662,trialcol,REJECT,picture preference choices,id item resp trial cov_sample
+spain_2025_europe_attention,w_3,2,2426,4831,name,REJECT,questionnaire/test matched by name only: Interest in and information about European Union affairs,id item resp cov_sex cov_age
+spain_2025_inequality_recognition,w_3,4,4001,16004,name,REJECT,questionnaire/test matched by name only: National political leaders recognition,id item resp cov_sex cov_age
+spain_2025_sanitation_digital,w_3,4,2427,9516,name,REJECT,questionnaire/test matched by name only: Awareness and use of digital health services,id item resp cov_sex cov_age cov_education
+suarez_2026_statistics,w_6,85,431,6658,trial_,REJECT,exam,id item resp resp_raw trial_position itemcov_indicator itemcov_grafica itemcov_numerica_algebra item
+tian2026_digital_competence,w_2,29,764,22156,name,REJECT,"questionnaire/test matched by name only: Digital competence scale responses from Chinese kindergarten teachers (N=764, 29",id cov_region cov_gender cov_age cov_teaching_years cov_education cov_area_type cov_school_type cov_
+tsai_2017_treeit_h5_memory,w_4,7,101,707,name,REJECT,"questionnaire/test matched by name only: Zhang et al. usability heuristic H5 Memory load (7 items), TreeIt interface eval",id item resp cov_gender cov_age cov_education cov_sns_experience
+vollbracht_et_al_2026_ambulatory_assessment,w_2,15,406,224028,trial_,REJECT,ESM,id item resp trial_occasion rt date cov_age cov_careless cov_experience cov_gender cov_group cov_sma
+wyscout_shots,w_6,4,2386,45942,trial_;trialcol,REJECT,sports attempt,id item resp date trial_number trial_competition trial_match trial_gameclock trial_shootout trial_ho
+yandun2026_attention,w_2,5,50,500,name,REJECT,questionnaire/test matched by name only: Attention and Concentration subscale; cognitive development assessment; 50 child,id item resp wave cov_sex cov_group
+yandun2026_memory,w_2,5,50,500,name,REJECT,questionnaire/test matched by name only: Memory subscale; cognitive development assessment; 50 children (Ecuador); 1-5 sc,id item resp wave cov_sex cov_group
+zhang-eye-2022,w_2,36,202,7272,rt-sweep,REJECT,Raven with eye tracking: ability test,id item resp rt itemcov_ia_dwell_time itemcov_ia_dwell_time_pct itemcov_ia_first_run_dwell_time item
+zhao_2025_digital_literacy,w_4,7,6202,46060,name,REJECT,"questionnaire/test matched by name only: 7-item raw digital-literacy indicator battery (device access + usage frequency),",id item resp wave cov_labor_contract cov_wage_income_log cov_social_status cov_social_relations cov_

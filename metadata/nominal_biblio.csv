@@ -24,6 +24,458 @@ cos101_2026_nom,10.6084/m9.figshare.32109718.v1,NA,"Omotehinwa, Temidayo (2026).
   copyright = {Creative Commons Attribution 4.0 International}
 }
 ",NA
+encceja_2018_ef_ci_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2018 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2018.zip,https://download.inep.gov.br/microdados/microdados_encceja_2018.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2018_ef_ci: ENCCEJA 2018 (Brazil's national exam certifying school completion for youth and adults), lower-secondary (ensino fundamental) level, natural sciences (Ciências Naturais): 30 four-option multiple-choice items, 115,838 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep_encceja_2018,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do {E}ncceja 2018},
+  year = {2018},
+  address = {Brasília},
+  publisher = {Inep},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2018.zip}
+}",NA
+encceja_2018_ef_hg_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2018 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2018.zip,https://download.inep.gov.br/microdados/microdados_encceja_2018.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2018_ef_hg: ENCCEJA 2018 (Brazil's national exam certifying school completion for youth and adults), lower-secondary (ensino fundamental) level, history and geography (História e Geografia): 30 four-option multiple-choice items, 114,673 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep_encceja_2018,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do {E}ncceja 2018},
+  year = {2018},
+  publisher = {Inep},
+  address = {Brasília},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2018.zip}
+}",NA
+encceja_2018_ef_lp_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2018 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2018.zip,https://download.inep.gov.br/microdados/microdados_encceja_2018.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2018_ef_lp: ENCCEJA 2018 (Brazil's national exam certifying school completion for youth and adults), lower-secondary (ensino fundamental) level, Portuguese language, foreign language, arts and physical education (Língua Portuguesa, Língua Estrangeira Moderna, Artes e Educação Física): 30 four-option multiple-choice items, 121,871 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep2018encceja,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do {E}ncceja 2018},
+  year = {2018},
+  publisher = {Inep},
+  address = {Brasília},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2018.zip}
+}",NA
+encceja_2018_ef_ma_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2018 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2018.zip,https://download.inep.gov.br/microdados/microdados_encceja_2018.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2018_ef_ma: ENCCEJA 2018 (Brazil's national exam certifying school completion for youth and adults), lower-secondary (ensino fundamental) level, mathematics (Matemática): 30 four-option multiple-choice items, 118,490 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep2018encceja,
+  author = {Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)},
+  title = {Microdados do {E}ncceja 2018},
+  year = {2018},
+  address = {Brasília},
+  publisher = {Inep},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2018.zip}
+}",NA
+encceja_2018_em_ch_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2018 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2018.zip,https://download.inep.gov.br/microdados/microdados_encceja_2018.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2018_em_ch: ENCCEJA 2018 (Brazil's national exam certifying school completion for youth and adults), upper-secondary (ensino médio) level, human sciences (Ciências Humanas e suas Tecnologias): 30 four-option multiple-choice items, 529,921 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep2018encceja,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do {E}ncceja 2018},
+  year = {2018},
+  address = {Brasília},
+  publisher = {Inep},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2018.zip}
+}",NA
+encceja_2018_em_cn_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2018 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2018.zip,https://download.inep.gov.br/microdados/microdados_encceja_2018.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2018_em_cn: ENCCEJA 2018 (Brazil's national exam certifying school completion for youth and adults), upper-secondary (ensino médio) level, natural sciences (Ciências da Natureza e suas Tecnologias): 30 four-option multiple-choice items, 539,515 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep_2018,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do Encceja 2018},
+  year = {2018},
+  publisher = {Inep},
+  address = {Brasília},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2018.zip}
+}",NA
+encceja_2018_em_lc_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2018 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2018.zip,https://download.inep.gov.br/microdados/microdados_encceja_2018.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2018_em_lc: ENCCEJA 2018 (Brazil's national exam certifying school completion for youth and adults), upper-secondary (ensino médio) level, languages and codes (Linguagens, Códigos e suas Tecnologias): 30 four-option multiple-choice items, 580,975 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep2018encceja,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do Encceja 2018},
+  year = {2018},
+  publisher = {Inep},
+  address = {Brasília},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2018.zip},
+  note = {Data set}
+}",NA
+encceja_2018_em_mt_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2018 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2018.zip,https://download.inep.gov.br/microdados/microdados_encceja_2018.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2018_em_mt: ENCCEJA 2018 (Brazil's national exam certifying school completion for youth and adults), upper-secondary (ensino médio) level, mathematics (Matemática e suas Tecnologias): 30 four-option multiple-choice items, 574,651 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep2018,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do {E}ncceja 2018},
+  year = {2018},
+  address = {Brasília},
+  publisher = {Inep},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2018.zip}
+}",NA
+encceja_2019_ef_ci_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2019 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2019.zip,https://download.inep.gov.br/microdados/microdados_encceja_2019.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2019_ef_ci: ENCCEJA 2019 (Brazil's national exam certifying school completion for youth and adults), lower-secondary (ensino fundamental) level, natural sciences (Ciências Naturais): 30 four-option multiple-choice items, 167,684 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{Inep2019,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do Encceja 2019},
+  year = {2019},
+  address = {Brasília},
+  publisher = {Inep},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2019.zip}
+}",NA
+encceja_2019_ef_hg_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2019 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2019.zip,https://download.inep.gov.br/microdados/microdados_encceja_2019.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2019_ef_hg: ENCCEJA 2019 (Brazil's national exam certifying school completion for youth and adults), lower-secondary (ensino fundamental) level, history and geography (História e Geografia): 30 four-option multiple-choice items, 166,588 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep2019encceja,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do {E}ncceja 2019},
+  year = {2019},
+  address = {Brasília},
+  publisher = {Inep},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2019.zip}
+}",NA
+encceja_2019_ef_lp_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2019 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2019.zip,https://download.inep.gov.br/microdados/microdados_encceja_2019.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2019_ef_lp: ENCCEJA 2019 (Brazil's national exam certifying school completion for youth and adults), lower-secondary (ensino fundamental) level, Portuguese language, foreign language, arts and physical education (Língua Portuguesa, Língua Estrangeira Moderna, Artes e Educação Física): 30 four-option multiple-choice items, 175,184 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep_encceja_2019,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do Encceja 2019},
+  year = {2019},
+  address = {Brasília},
+  publisher = {Inep},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2019.zip}
+}",NA
+encceja_2019_ef_ma_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2019 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2019.zip,https://download.inep.gov.br/microdados/microdados_encceja_2019.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2019_ef_ma: ENCCEJA 2019 (Brazil's national exam certifying school completion for youth and adults), lower-secondary (ensino fundamental) level, mathematics (Matemática): 30 four-option multiple-choice items, 169,177 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep2019encceja,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do {E}ncceja 2019},
+  year = {2019},
+  address = {Brasília},
+  publisher = {Inep},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2019.zip}
+}",NA
+encceja_2019_em_ch_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2019 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2019.zip,https://download.inep.gov.br/microdados/microdados_encceja_2019.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2019_em_ch: ENCCEJA 2019 (Brazil's national exam certifying school completion for youth and adults), upper-secondary (ensino médio) level, human sciences (Ciências Humanas e suas Tecnologias): 30 four-option multiple-choice items, 795,299 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep_encceja_2019,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do {E}ncceja 2019},
+  year = {2019},
+  address = {Brasília},
+  publisher = {Inep},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2019.zip}
+}",NA
+encceja_2019_em_cn_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2019 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2019.zip,https://download.inep.gov.br/microdados/microdados_encceja_2019.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2019_em_cn: ENCCEJA 2019 (Brazil's national exam certifying school completion for youth and adults), upper-secondary (ensino médio) level, natural sciences (Ciências da Natureza e suas Tecnologias): 30 four-option multiple-choice items, 787,292 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep2019encceja,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do {E}ncceja 2019},
+  year = {2019},
+  address = {Brasília},
+  publisher = {Inep},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2019.zip}
+}",NA
+encceja_2019_em_lc_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2019 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2019.zip,https://download.inep.gov.br/microdados/microdados_encceja_2019.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2019_em_lc: ENCCEJA 2019 (Brazil's national exam certifying school completion for youth and adults), upper-secondary (ensino médio) level, languages and codes (Linguagens, Códigos e suas Tecnologias): 30 four-option multiple-choice items, 817,967 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep_encceja_2019,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do {E}ncceja 2019},
+  year = {2019},
+  publisher = {Inep},
+  address = {Brasília},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2019.zip}
+}",NA
+encceja_2019_em_mt_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2019 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2019.zip,https://download.inep.gov.br/microdados/microdados_encceja_2019.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2019_em_mt: ENCCEJA 2019 (Brazil's national exam certifying school completion for youth and adults), upper-secondary (ensino médio) level, mathematics (Matemática e suas Tecnologias): 30 four-option multiple-choice items, 874,787 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep_2019,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do {E}ncceja 2019},
+  year = {2019},
+  publisher = {Inep},
+  address = {Brasília},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2019.zip}
+}",NA
+encceja_2020_ef_ci_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2020 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2020.zip,https://download.inep.gov.br/microdados/microdados_encceja_2020.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2020_ef_ci: ENCCEJA 2020 (Brazil's national exam certifying school completion for youth and adults), lower-secondary (ensino fundamental) level, natural sciences (Ciências Naturais): 30 four-option multiple-choice items, 37,216 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep2020encceja,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do {E}ncceja 2020},
+  year = {2020},
+  publisher = {Inep},
+  address = {Brasília},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2020.zip}
+}",NA
+encceja_2020_ef_hg_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2020 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2020.zip,https://download.inep.gov.br/microdados/microdados_encceja_2020.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2020_ef_hg: ENCCEJA 2020 (Brazil's national exam certifying school completion for youth and adults), lower-secondary (ensino fundamental) level, history and geography (História e Geografia): 30 four-option multiple-choice items, 38,392 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep_encceja_2020,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do {E}ncceja 2020},
+  year = {2020},
+  address = {Brasília},
+  publisher = {Inep},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2020.zip}
+}",NA
+encceja_2020_ef_lp_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2020 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2020.zip,https://download.inep.gov.br/microdados/microdados_encceja_2020.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2020_ef_lp: ENCCEJA 2020 (Brazil's national exam certifying school completion for youth and adults), lower-secondary (ensino fundamental) level, Portuguese language, foreign language, arts and physical education (Língua Portuguesa, Língua Estrangeira Moderna, Artes e Educação Física): 30 four-option multiple-choice items, 39,483 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep_encceja_2020,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do Encceja 2020},
+  year = {2020},
+  address = {Brasília},
+  publisher = {Inep},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2020.zip}
+}",NA
+encceja_2020_ef_ma_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2020 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2020.zip,https://download.inep.gov.br/microdados/microdados_encceja_2020.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2020_ef_ma: ENCCEJA 2020 (Brazil's national exam certifying school completion for youth and adults), lower-secondary (ensino fundamental) level, mathematics (Matemática): 30 four-option multiple-choice items, 41,606 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep_encceja_2020,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do Encceja 2020},
+  year = {2020},
+  address = {Brasília},
+  publisher = {Inep},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2020.zip},
+  type = {Data set}
+}",NA
+encceja_2020_em_ch_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2020 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2020.zip,https://download.inep.gov.br/microdados/microdados_encceja_2020.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2020_em_ch: ENCCEJA 2020 (Brazil's national exam certifying school completion for youth and adults), upper-secondary (ensino médio) level, human sciences (Ciências Humanas e suas Tecnologias): 30 four-option multiple-choice items, 294,380 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep2020encceja,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do Encceja 2020},
+  year = {2020},
+  address = {Brasília},
+  publisher = {Inep},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2020.zip}
+}",NA
+encceja_2020_em_cn_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2020 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2020.zip,https://download.inep.gov.br/microdados/microdados_encceja_2020.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2020_em_cn: ENCCEJA 2020 (Brazil's national exam certifying school completion for youth and adults), upper-secondary (ensino médio) level, natural sciences (Ciências da Natureza e suas Tecnologias): 30 four-option multiple-choice items, 278,970 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep_encceja_2020,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do {E}ncceja 2020},
+  year = {2020},
+  publisher = {Inep},
+  address = {Brasília},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2020.zip}
+}",NA
+encceja_2020_em_lc_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2020 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2020.zip,https://download.inep.gov.br/microdados/microdados_encceja_2020.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2020_em_lc: ENCCEJA 2020 (Brazil's national exam certifying school completion for youth and adults), upper-secondary (ensino médio) level, languages and codes (Linguagens, Códigos e suas Tecnologias): 30 four-option multiple-choice items, 306,079 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep_encceja_2020,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do {E}ncceja 2020},
+  year = {2020},
+  publisher = {Inep},
+  address = {Brasília},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2020.zip}
+}",NA
+encceja_2020_em_mt_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2020 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2020.zip,https://download.inep.gov.br/microdados/microdados_encceja_2020.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2020_em_mt: ENCCEJA 2020 (Brazil's national exam certifying school completion for youth and adults), upper-secondary (ensino médio) level, mathematics (Matemática e suas Tecnologias): 30 four-option multiple-choice items, 377,729 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep_encceja_2020,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do Encceja 2020},
+  year = {2020},
+  address = {Brasília},
+  publisher = {Inep},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2020.zip}
+}",NA
+encceja_2022_ef_ci_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2022 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2022.zip,https://download.inep.gov.br/microdados/microdados_encceja_2022.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2022_ef_ci: ENCCEJA 2022 (Brazil's national exam certifying school completion for youth and adults), lower-secondary (ensino fundamental) level, natural sciences (Ciências Naturais): 30 four-option multiple-choice items, 52,436 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep_encceja_2022,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do {E}ncceja 2022},
+  year = {2022},
+  address = {Brasília},
+  publisher = {Inep},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2022.zip}
+}",NA
+encceja_2022_ef_hg_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2022 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2022.zip,https://download.inep.gov.br/microdados/microdados_encceja_2022.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2022_ef_hg: ENCCEJA 2022 (Brazil's national exam certifying school completion for youth and adults), lower-secondary (ensino fundamental) level, history and geography (História e Geografia): 30 four-option multiple-choice items, 53,949 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep_encceja_2022,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do {E}ncceja 2022},
+  year = {2022},
+  address = {Brasília},
+  publisher = {Inep},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2022.zip}
+}",NA
+encceja_2022_ef_lp_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2022 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2022.zip,https://download.inep.gov.br/microdados/microdados_encceja_2022.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2022_ef_lp: ENCCEJA 2022 (Brazil's national exam certifying school completion for youth and adults), lower-secondary (ensino fundamental) level, Portuguese language, foreign language, arts and physical education (Língua Portuguesa, Língua Estrangeira Moderna, Artes e Educação Física): 29 four-option multiple-choice items, 55,899 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep2022encceja,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do Encceja 2022},
+  year = {2022},
+  address = {Brasília},
+  publisher = {Inep},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2022.zip}
+}",NA
+encceja_2022_ef_ma_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2022 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2022.zip,https://download.inep.gov.br/microdados/microdados_encceja_2022.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2022_ef_ma: ENCCEJA 2022 (Brazil's national exam certifying school completion for youth and adults), lower-secondary (ensino fundamental) level, mathematics (Matemática): 29 four-option multiple-choice items, 54,837 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep2022encceja,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do Encceja 2022},
+  year = {2022},
+  address = {Brasília},
+  publisher = {Inep},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2022.zip}
+}",NA
+encceja_2022_em_ch_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2022 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2022.zip,https://download.inep.gov.br/microdados/microdados_encceja_2022.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2022_em_ch: ENCCEJA 2022 (Brazil's national exam certifying school completion for youth and adults), upper-secondary (ensino médio) level, human sciences (Ciências Humanas e suas Tecnologias): 30 four-option multiple-choice items, 380,869 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep2022,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do {E}ncceja 2022},
+  year = {2022},
+  publisher = {Inep},
+  address = {Brasília},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2022.zip}
+}",NA
+encceja_2022_em_cn_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2022 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2022.zip,https://download.inep.gov.br/microdados/microdados_encceja_2022.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2022_em_cn: ENCCEJA 2022 (Brazil's national exam certifying school completion for youth and adults), upper-secondary (ensino médio) level, natural sciences (Ciências da Natureza e suas Tecnologias): 30 four-option multiple-choice items, 361,759 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep_encceja_2022,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do Encceja 2022},
+  year = {2022},
+  publisher = {Inep},
+  address = {Brasília},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2022.zip}
+}",NA
+encceja_2022_em_lc_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2022 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2022.zip,https://download.inep.gov.br/microdados/microdados_encceja_2022.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2022_em_lc: ENCCEJA 2022 (Brazil's national exam certifying school completion for youth and adults), upper-secondary (ensino médio) level, languages and codes (Linguagens, Códigos e suas Tecnologias): 30 four-option multiple-choice items, 391,408 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep_encceja_2022,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do Encceja 2022},
+  year = {2022},
+  address = {Brasília},
+  publisher = {Inep},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2022.zip}
+}",NA
+encceja_2022_em_mt_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2022 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2022.zip,https://download.inep.gov.br/microdados/microdados_encceja_2022.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2022_em_mt: ENCCEJA 2022 (Brazil's national exam certifying school completion for youth and adults), upper-secondary (ensino médio) level, mathematics (Matemática e suas Tecnologias): 30 four-option multiple-choice items, 419,625 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep_encceja_2022,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do {E}ncceja 2022},
+  year = {2022},
+  publisher = {Inep},
+  address = {Brasília},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2022.zip}
+}",NA
+encceja_2023_ef_ci_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2023 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2023.zip,https://download.inep.gov.br/microdados/microdados_encceja_2023.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2023_ef_ci: ENCCEJA 2023 (Brazil's national exam certifying school completion for youth and adults), lower-secondary (ensino fundamental) level, natural sciences (Ciências Naturais): 30 four-option multiple-choice items, 33,450 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep2023encceja,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do Encceja 2023},
+  year = {2023},
+  address = {Brasília},
+  publisher = {Inep},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2023.zip}
+}",NA
+encceja_2023_ef_hg_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2023 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2023.zip,https://download.inep.gov.br/microdados/microdados_encceja_2023.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2023_ef_hg: ENCCEJA 2023 (Brazil's national exam certifying school completion for youth and adults), lower-secondary (ensino fundamental) level, history and geography (História e Geografia): 30 four-option multiple-choice items, 34,326 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep_encceja_2023,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do {E}ncceja 2023},
+  year = {2023},
+  address = {Brasília},
+  organization = {Inep},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2023.zip}
+}",NA
+encceja_2023_ef_lp_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2023 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2023.zip,https://download.inep.gov.br/microdados/microdados_encceja_2023.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2023_ef_lp: ENCCEJA 2023 (Brazil's national exam certifying school completion for youth and adults), lower-secondary (ensino fundamental) level, Portuguese language, foreign language, arts and physical education (Língua Portuguesa, Língua Estrangeira Moderna, Artes e Educação Física): 30 four-option multiple-choice items, 37,583 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep_encceja_2023,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do {E}ncceja 2023},
+  year = {2023},
+  address = {Brasília},
+  publisher = {Inep},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2023.zip}
+}",NA
+encceja_2023_ef_ma_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2023 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2023.zip,https://download.inep.gov.br/microdados/microdados_encceja_2023.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2023_ef_ma: ENCCEJA 2023 (Brazil's national exam certifying school completion for youth and adults), lower-secondary (ensino fundamental) level, mathematics (Matemática): 30 four-option multiple-choice items, 35,869 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep_encceja_2023,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do {E}ncceja 2023},
+  year = {2023},
+  address = {Brasília},
+  publisher = {Inep},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2023.zip}
+}",NA
+encceja_2023_em_ch_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2023 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2023.zip,https://download.inep.gov.br/microdados/microdados_encceja_2023.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2023_em_ch: ENCCEJA 2023 (Brazil's national exam certifying school completion for youth and adults), upper-secondary (ensino médio) level, human sciences (Ciências Humanas e suas Tecnologias): 30 four-option multiple-choice items, 237,696 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep_encceja_2023,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do Encceja 2023},
+  year = {2023},
+  address = {Brasília},
+  publisher = {Inep},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2023.zip}
+}",NA
+encceja_2023_em_cn_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2023 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2023.zip,https://download.inep.gov.br/microdados/microdados_encceja_2023.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2023_em_cn: ENCCEJA 2023 (Brazil's national exam certifying school completion for youth and adults), upper-secondary (ensino médio) level, natural sciences (Ciências da Natureza e suas Tecnologias): 30 four-option multiple-choice items, 236,773 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep_encceja_2023,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do Encceja 2023},
+  year = {2023},
+  address = {Brasília},
+  publisher = {Inep},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2023.zip}
+}",NA
+encceja_2023_em_lc_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2023 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2023.zip,https://download.inep.gov.br/microdados/microdados_encceja_2023.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2023_em_lc: ENCCEJA 2023 (Brazil's national exam certifying school completion for youth and adults), upper-secondary (ensino médio) level, languages and codes (Linguagens, Códigos e suas Tecnologias): 30 four-option multiple-choice items, 262,973 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep_encceja_2023,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do Encceja 2023},
+  year = {2023},
+  address = {Brasília},
+  publisher = {Inep},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2023.zip}
+}",NA
+encceja_2023_em_mt_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2023 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2023.zip,https://download.inep.gov.br/microdados/microdados_encceja_2023.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2023_em_mt: ENCCEJA 2023 (Brazil's national exam certifying school completion for youth and adults), upper-secondary (ensino médio) level, mathematics (Matemática e suas Tecnologias): 30 four-option multiple-choice items, 299,267 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep2023encceja,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do {Encceja} 2023},
+  year = {2023},
+  address = {Brasília},
+  publisher = {Inep},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2023.zip}
+}",NA
+encceja_2024_ef_ci_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2024 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2024.zip,https://download.inep.gov.br/microdados/microdados_encceja_2024.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2024_ef_ci: ENCCEJA 2024 (Brazil's national exam certifying school completion for youth and adults), lower-secondary (ensino fundamental) level, natural sciences (Ciências Naturais): 30 four-option multiple-choice items, 20,396 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep_encceja_2024,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do Encceja 2024},
+  year = {2024},
+  address = {Brasília},
+  publisher = {Inep},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2024.zip},
+  type = {Data set}
+}",NA
+encceja_2024_ef_hg_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2024 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2024.zip,https://download.inep.gov.br/microdados/microdados_encceja_2024.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2024_ef_hg: ENCCEJA 2024 (Brazil's national exam certifying school completion for youth and adults), lower-secondary (ensino fundamental) level, history and geography (História e Geografia): 30 four-option multiple-choice items, 21,200 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep2024encceja,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do {E}ncceja 2024},
+  year = {2024},
+  address = {Brasília},
+  publisher = {Inep},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2024.zip}
+}",NA
+encceja_2024_ef_lp_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2024 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2024.zip,https://download.inep.gov.br/microdados/microdados_encceja_2024.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2024_ef_lp: ENCCEJA 2024 (Brazil's national exam certifying school completion for youth and adults), lower-secondary (ensino fundamental) level, Portuguese language, foreign language, arts and physical education (Língua Portuguesa, Língua Estrangeira Moderna, Artes e Educação Física): 30 four-option multiple-choice items, 23,462 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep2024encceja,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do {E}ncceja 2024},
+  year = {2024},
+  address = {Brasília},
+  publisher = {Inep},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2024.zip}
+}",NA
+encceja_2024_ef_ma_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2024 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2024.zip,https://download.inep.gov.br/microdados/microdados_encceja_2024.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2024_ef_ma: ENCCEJA 2024 (Brazil's national exam certifying school completion for youth and adults), lower-secondary (ensino fundamental) level, mathematics (Matemática): 30 four-option multiple-choice items, 21,993 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep2024encceja,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do {E}ncceja 2024},
+  year = {2024},
+  address = {Brasília},
+  publisher = {Inep},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2024.zip}
+}",NA
+encceja_2024_em_ch_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2024 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2024.zip,https://download.inep.gov.br/microdados/microdados_encceja_2024.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2024_em_ch: ENCCEJA 2024 (Brazil's national exam certifying school completion for youth and adults), upper-secondary (ensino médio) level, human sciences (Ciências Humanas e suas Tecnologias): 30 four-option multiple-choice items, 166,794 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep_encceja_2024,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do {E}ncceja 2024},
+  year = {2024},
+  publisher = {Inep},
+  address = {Brasília},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2024.zip}
+}",NA
+encceja_2024_em_cn_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2024 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2024.zip,https://download.inep.gov.br/microdados/microdados_encceja_2024.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2024_em_cn: ENCCEJA 2024 (Brazil's national exam certifying school completion for youth and adults), upper-secondary (ensino médio) level, natural sciences (Ciências da Natureza e suas Tecnologias): 30 four-option multiple-choice items, 162,446 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep2024encceja,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do {E}ncceja 2024},
+  year = {2024},
+  address = {Brasília},
+  publisher = {Inep},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2024.zip}
+}",NA
+encceja_2024_em_lc_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2024 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2024.zip,https://download.inep.gov.br/microdados/microdados_encceja_2024.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2024_em_lc: ENCCEJA 2024 (Brazil's national exam certifying school completion for youth and adults), upper-secondary (ensino médio) level, languages and codes (Linguagens, Códigos e suas Tecnologias): 30 four-option multiple-choice items, 181,453 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep_encceja_2024,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do Encceja 2024},
+  year = {2024},
+  address = {Brasília},
+  publisher = {Inep},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2024.zip},
+  note = {Data set}
+}",NA
+encceja_2024_em_mt_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2024 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2024.zip,https://download.inep.gov.br/microdados/microdados_encceja_2024.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2024_em_mt: ENCCEJA 2024 (Brazil's national exam certifying school completion for youth and adults), upper-secondary (ensino médio) level, mathematics (Matemática e suas Tecnologias): 30 four-option multiple-choice items, 220,567 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep2024encceja,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do Encceja 2024},
+  year = {2024},
+  address = {Brasília},
+  publisher = {Inep},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2024.zip}
+}",NA
+encceja_2025_ef_ci_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2025 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2025.zip,https://download.inep.gov.br/microdados/microdados_encceja_2025.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2025_ef_ci: ENCCEJA 2025 (Brazil's national exam certifying school completion for youth and adults), lower-secondary (ensino fundamental) level, natural sciences (Ciências Naturais): 30 four-option multiple-choice items, 17,997 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep2025encceja,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do {E}ncceja 2025},
+  year = {2025},
+  address = {Brasília},
+  publisher = {Inep},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2025.zip}
+}",NA
+encceja_2025_ef_hg_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2025 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2025.zip,https://download.inep.gov.br/microdados/microdados_encceja_2025.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2025_ef_hg: ENCCEJA 2025 (Brazil's national exam certifying school completion for youth and adults), lower-secondary (ensino fundamental) level, history and geography (História e Geografia): 29 four-option multiple-choice items, 18,237 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep2025encceja,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do {E}ncceja 2025},
+  year = {2025},
+  address = {Brasília},
+  publisher = {Inep},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2025.zip}
+}",NA
+encceja_2025_ef_lp_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2025 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2025.zip,https://download.inep.gov.br/microdados/microdados_encceja_2025.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2025_ef_lp: ENCCEJA 2025 (Brazil's national exam certifying school completion for youth and adults), lower-secondary (ensino fundamental) level, Portuguese language, foreign language, arts and physical education (Língua Portuguesa, Língua Estrangeira Moderna, Artes e Educação Física): 30 four-option multiple-choice items, 19,581 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep2025encceja,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do {E}ncceja 2025},
+  year = {2025},
+  publisher = {Inep},
+  address = {Brasília},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2025.zip}
+}",NA
+encceja_2025_ef_ma_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2025 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2025.zip,https://download.inep.gov.br/microdados/microdados_encceja_2025.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2025_ef_ma: ENCCEJA 2025 (Brazil's national exam certifying school completion for youth and adults), lower-secondary (ensino fundamental) level, mathematics (Matemática): 28 four-option multiple-choice items, 19,104 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep_encceja_2025,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do Encceja 2025},
+  year = {2025},
+  address = {Brasília},
+  publisher = {Inep},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2025.zip}
+}",NA
+encceja_2025_em_ch_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2025 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2025.zip,https://download.inep.gov.br/microdados/microdados_encceja_2025.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2025_em_ch: ENCCEJA 2025 (Brazil's national exam certifying school completion for youth and adults), upper-secondary (ensino médio) level, human sciences (Ciências Humanas e suas Tecnologias): 30 four-option multiple-choice items, 151,857 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep2025encceja,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do {E}ncceja 2025},
+  year = {2025},
+  address = {Brasília},
+  publisher = {Inep},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2025.zip}
+}",NA
+encceja_2025_em_cn_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2025 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2025.zip,https://download.inep.gov.br/microdados/microdados_encceja_2025.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2025_em_cn: ENCCEJA 2025 (Brazil's national exam certifying school completion for youth and adults), upper-secondary (ensino médio) level, natural sciences (Ciências da Natureza e suas Tecnologias): 30 four-option multiple-choice items, 149,336 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep2025encceja,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do {E}ncceja 2025},
+  year = {2025},
+  address = {Brasília},
+  publisher = {Inep},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2025.zip}
+}",NA
+encceja_2025_em_lc_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2025 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2025.zip,https://download.inep.gov.br/microdados/microdados_encceja_2025.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2025_em_lc: ENCCEJA 2025 (Brazil's national exam certifying school completion for youth and adults), upper-secondary (ensino médio) level, languages and codes (Linguagens, Códigos e suas Tecnologias): 29 four-option multiple-choice items, 161,847 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep_encceja_2025,
+  author = {{Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)}},
+  title = {Microdados do {E}ncceja 2025},
+  year = {2025},
+  publisher = {Inep},
+  address = {Brasília},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2025.zip}
+}",NA
+encceja_2025_em_mt_nom,NA,NA,Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep). Microdados do Encceja 2025 [Data set]. Brasília: Inep. https://download.inep.gov.br/microdados/microdados_encceja_2025.zip,https://download.inep.gov.br/microdados/microdados_encceja_2025.zip,Missing (NA),CC BY 4.0,NA,"Nominal companion of encceja_2025_em_mt: ENCCEJA 2025 (Brazil's national exam certifying school completion for youth and adults), upper-secondary (ensino médio) level, mathematics (Matemática e suas Tecnologias): 29 four-option multiple-choice items, 186,322 candidates present (Nacional Regular application; prison-system file not included). resp = 1 if the letter marked matches INEP's key; text = letter marked (A-D, ""."" blank, ""*"" double mark, both scored 0); position and booklet are INEP's CO_POSICAO and CO_PROVA (standard and reader-adapted booklets). item = INEP CO_ITEM, which recurs across ENCCEJA years. id = INEP's masked NU_INSCRICAO, unique within a year only.","@dataset{inep2025,
+  author = {Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira},
+  title = {Microdados do {Encceja} 2025},
+  year = {2025},
+  publisher = {Inep},
+  address = {Brasília},
+  url = {https://download.inep.gov.br/microdados/microdados_encceja_2025.zip}
+}",NA
 enem_2013_1mil_ch_nom,10.46814/lajdv3n5-018,NA,"Martins, D. M. (2021). Estado da arte das pesquisas sobre ENEM no Brasil: State of the art of research on ENEM in Brazil. Latin American Journal of Development, 3(5), 2898-2907.",https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados/enem,Missing (NA),CC BY 4.0,NA,Nominal version of enem_2013_1mil_ch: text is the response option the examinee marked on the humanities portion of the 2013 Brazilian ENEM. resp is retained as the scored 0/1.," @article{Martins_2021, title={Estado da arte das pesquisas sobre ENEM no Brasil: State of the art of research on ENEM in Brazil}, volume={3}, ISSN={2674-9297}, url={http://dx.doi.org/10.46814/lajdv3n5-018}, DOI={10.46814/lajdv3n5-018}, number={5}, journal={Latin American Journal of Development}, publisher={South Florida Publishing LLC}, author={Martins, Dayse Marinho}, year={2021}, month=Sept, pages={2898–2907} }
 ",NA
 enem_2013_1mil_cn_nom,10.46814/lajdv3n5-018,NA,"Martins, D. M. (2021). Estado da arte das pesquisas sobre ENEM no Brasil: State of the art of research on ENEM in Brazil. Latin American Journal of Development, 3(5), 2898-2907.",https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados/enem,Missing (NA),CC BY 4.0,NA,Nominal version of enem_2013_1mil_cn: text is the response option the examinee marked on the natural sciences portion of the 2013 Brazilian ENEM. resp is retained as the scored 0/1.," @article{Martins_2021, title={Estado da arte das pesquisas sobre ENEM no Brasil: State of the art of research on ENEM in Brazil}, volume={3}, ISSN={2674-9297}, url={http://dx.doi.org/10.46814/lajdv3n5-018}, DOI={10.46814/lajdv3n5-018}, number={5}, journal={Latin American Journal of Development}, publisher={South Florida Publishing LLC}, author={Martins, Dayse Marinho}, year={2021}, month=Sept, pages={2898–2907} }

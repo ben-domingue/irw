@@ -984,7 +984,7 @@ class ValidatorGate(unittest.TestCase):
     CONJ = Target(name="irw_conjoint", label="conjoint experiments", kind="aux", source="conj")
 
     def _conj_design(self, tables=("smith_2024_candidates",), outcomes=("choice", "rating"),
-                     crosswalk=(), opt_out=""):
+                     crosswalk=(), opt_out="", tagged=None):
         """Design records in a scratch dir, pointed to by IRW_CONJ_DESIGN_DIR."""
         d = Path(tempfile.mkdtemp())
         self.addCleanup(shutil.rmtree, d, ignore_errors=True)
@@ -998,6 +998,10 @@ class ValidatorGate(unittest.TestCase):
         (d / "crosswalk.csv").write_text(
             "concept,table,attribute,level,value\n" + "".join(
                 f"profile_gender,{t},{a},Female,female\n" for t, a in crosswalk), encoding="utf-8")
+        (d / "tags.csv").write_text(
+            "table,domain,choice_object\n" + "".join(
+                f"{t},candidate_choice,person\n" for t in (tables if tagged is None else tagged)),
+            encoding="utf-8")
         patcher = mock.patch.dict(os.environ, {"IRW_CONJ_DESIGN_DIR": str(d)})
         patcher.start()
         self.addCleanup(patcher.stop)
@@ -1025,6 +1029,13 @@ class ValidatorGate(unittest.TestCase):
         self.assertTrue(report.ok, report.errors)
         self.assertTrue(any("rating_old" in w for w in report.warnings), report.warnings)
         self.assertTrue(any("conj_crosswalk" in w for w in report.warnings), report.warnings)
+
+    def test_a_missing_topic_tag_row_only_warns(self):
+        self._conj_design(tagged=())
+        path = self._csv("smith_2024_candidates.csv", self._conj_rows())
+        report = self._check(path, "smith_2024_candidates", target=self.CONJ)
+        self.assertTrue(report.ok, report.errors)
+        self.assertTrue(any("conj_tags" in w for w in report.warnings), report.warnings)
 
     def test_a_gender_attribute_with_crosswalk_rows_is_quiet(self):
         self._conj_design(crosswalk=(("smith_2024_candidates", "attr_gender"),))
