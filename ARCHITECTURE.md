@@ -158,7 +158,10 @@ The sheet URLs live in the scripts that read them; this file does not repeat
 them.
 
 `competitions` and `simsyn` have **no** tags sheet. That is a decision, not a
-gap — see `Rpkg/inst/developer/tags.md`.
+gap — see `Rpkg/inst/developer/tags.md`. Conjoint has no tags sheet either and
+no core-schema tags: its topic tags (`domain`, `choice_object`) live in
+`data/conjoint/tags.csv` and reach `irw_meta` as columns of `conj_metadata`
+via `metadata/16_conjoint.R` (`data/conjoint/README.md`, "Topic tags").
 
 An eighth sheet, the automated-finding processing queue, was **retired
 2026-08-12**. Its URL survives in `automated_finding/irw_process_queue.py` only
