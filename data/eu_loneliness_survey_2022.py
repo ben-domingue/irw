@@ -35,6 +35,7 @@
 from __future__ import annotations
 
 import io
+import sys
 import zipfile
 from pathlib import Path
 
@@ -42,6 +43,9 @@ import pandas as pd
 import requests
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(REPO_ROOT))
+from irw_validate._checks import run_qc  # noqa: E402
+
 OUT_DIR = REPO_ROOT / "automated_finding" / "irw_output"
 CACHE = REPO_ROOT / "data" / "eu_loneliness_survey_2022_raw"
 UA = {"User-Agent": "IRW-Finder/1.0 (ben.domingue@gmail.com)"}
@@ -137,6 +141,13 @@ def convert():
         long["resp"] = long["resp"].astype(int)
         long = long[["id", "item", "resp"] + COV_COLS].reset_index(drop=True)
         fn = f"euls_2022_{scale}.csv"
+        pv = {it: set(range(lo, hi + 1)) for it in items}
+        checks = run_qc(long, permitted_values=pv)
+        fails = [(c.name, c.detail) for c in checks if c.status == "fail"]
+        assert not fails, (fn, fails)
+        for c in checks:
+            if c.status == "warn":
+                print(f"    [qc warn] {c.name}: {c.detail[:160]}")
         long.to_csv(OUT_DIR / fn, index=False)
         per_item = long.groupby("item")["resp"].agg(["min", "max", "count"])
         print(f"{fn}: ids={long['id'].nunique()} items={long['item'].nunique()} "
