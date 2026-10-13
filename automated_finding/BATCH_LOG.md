@@ -18039,3 +18039,268 @@ to this branch). Rather than leave it stranded on disk, it was deleted: all 5 DO
 already in `plos_seen_dois.csv` (pushed to main, so the dedup purpose is unaffected) and
 the row detail is captured above, so nothing is lost. A human-readable `human_review/*.csv`
 for this batch can be regenerated from this entry if still wanted.
+## 2026-10-10 — Repos mode-3 discovery + triage: 15 new terms x 9 languages, 1,483 candidates, 10 good, 78 leads
+
+Discovery and triage only, run locally on ben-domingue's instruction ("fire an automated
+search locally for core tables"). No scripts written, nothing staged, nothing uploaded.
+
+**Terms (new to `search_terms_log.csv`, each in English + es/de/fr/zh/ja/ar/nl/ko,
+135 queries):** belief in conspiracy theories, social media disorder scale, motivated
+strategies for learning questionnaire, intrinsic motivation inventory, hospital survey on
+patient safety culture, negative acts questionnaire, zarit burden interview, falls efficacy
+scale, macarthur communicative development inventory, behavior rating inventory of executive
+function, mood and feelings questionnaire, youth self-report, remote associates test, rape
+myth acceptance, user experience questionnaire. (effort-reward imbalance was drafted and
+dropped: its 2026-10-05 translations were already logged.)
+
+- **Discovery** (~75 min): 1,483 candidates (zenodo 500, dataverse 362, surf 234,
+  figshare 225, scholars_portal 102, datacite 42, mendeley 9, osf 6, dryad 3). The process
+  lingered after writing the CSV and was killed by hand; the file was complete.
+- **Ledger fix first:** the three files that OOM-killed the 2026-10-07 and 2026-10-08 runs
+  (`10.5683/sp3/uxz4it`, `sp3/a6dbgs`, `10.7910/dvn/crpaa8`) were written to
+  `repo_triage_seen_keys.csv` as `file_too_large` by hand and recorded in
+  `oversized_candidates.csv`, closing the 2026-10-09 TODO item. No OOM kills this run.
+- **Triage** (`--retriage`, 6G cap; no `--limit 10` sanity run): 738 triaged after the
+  seen ledger excluded 745: `no_usable_file` 355, `human_assistance` 166,
+  `download_failed` 115 (dataverse 64, figshare 55, surf 45, zenodo 33; transient, not
+  ledgered), `not_item_response` 38, `below_min_n` 31, `error` 12 (11 of them the same
+  "arg must be a list, tuple, 1-d array, or Series" reader fault, worth a look at
+  `load_table()`), **`good` 10**, `pii_suspected` 7 (IP/phone/name/DOB columns, mostly
+  Harvard political-science replication files), `file_too_large` 2, `license_restricted` 2
+  (both CC BY-NC-ND).
+  Operator note: a watcher with a wrong `pgrep` pattern reported the run dead at row 47 and a
+  second `--resume` run was started by mistake; it ran ~2 min alongside the original before
+  being killed. The original's in-memory results are what `repos_triage_2026-10-10.csv`
+  holds; the only trace is some duplicate rows in the gitignored checkpoint file.
+- **Step 2b ran** (chained): 166 HA -> recoverable_format 71, not_item_response 43,
+  worth_retrying 27, human_review 15, aggregate_continuous 10. `[conj] routed 0`.
+  `[human_review] archived 15 row(s) -> human_review/human_review_zenodo_2026-10-10.csv`.
+- **Leads -> `leads/repos_leads_2026-10-10.csv`** (78 rows, all `unworked`: the 10 good,
+  plus every licence-ok worth_retrying/recoverable_format row with 100 <= N <= 50,000 and
+  8-700 items). The 10 good: haptic-guidance personality (zenodo 16539273, 126 x 16), AI in
+  Indonesian higher education (zenodo 19680489, 120 x 33), 5E-STEAM EUREKA questionnaire
+  (zenodo 21383291, 115 x 11), voice-assistant adoption (dryad jdfn2z3g5, 262 x 33),
+  Chinese university teachers' well-being (zenodo 12609724, 283 x 20, **licence unknown**,
+  resolve before touching), negativity-bias risk paths (DVN/GRXTZY, 131,071 x 8, likely a
+  paths/trial file rather than a questionnaire), pediatric TBI BRIEF table (Frontiers
+  s002, 2,708 x 8, probably a summary table), emotional-companion AI UX (figshare 32576487,
+  615 x 38), Italian student technology/Covid survey (zenodo 15305238, 145 x 23), Indonesian
+  human-AI collaboration (zenodo 21963745, 237 x 33). Larger recoverable leads: optimistic
+  personality (DVN/5ZAFIF, 20,000 x 73), IMF lending (DVN/D2XPSP, 21,531 x 42), presidential
+  negative partisanship (DVN/FPPDKN, 16,010 x 21), FES-I short form Iran (DVN/3SCNGV +
+  mendeley yxp8rbjrn8, same deposit twice, 9,117 x 29), NAQ-R psychometrics (figshare
+  24955368, 5,074 x 47), Schoen 2007 Big Five + foreign policy (DVN/26506, 2,508 x 73),
+  SMARS Spanish adolescents (figshare 32626206, 1,043 x 158), Juntos CCT Peru
+  (DVN/6NSLTP, 1,902 x 137).
+
+## 2026-10-10b — The 78 leads from 2026-10-10: 42 deposits / 107 tables / 2,042,413 responses, 33 item text tables
+
+Two processing forks (A: 39 leads, B: 39) on ben-domingue's "go for it". Every lead now has a
+status in `leads/repos_leads_2026-10-10.csv`: 44 shipped (incl. duplicate deposits of shipped
+data), 26 rejected on content, 3 PII skips, 2 below N, 1 licence block (zenodo 12609724, no
+licence field, in `license_blocked_candidates.csv`), 2 unworked (DVN/YB5PVO anonymous TEIQue-SF
+deposit with no author name; DVN/IZKSL7 Swiss AV panel, hours of German recoding). Nothing
+uploaded; output sits in `irw_output/` (107 files) and `itemtext_output/` (33 `__items.csv`).
+
+**A (22 deposits, 60 tables):** jo_2023_via, kahraman_2026 (zbi, bai), fauziah_2026 (5, item
+text), meden_2026_podcast (3), kacovsky_2022_imi, zhao_2023 (4), diredja_2025_utaut2,
+naulia_2026 (2), jarbin_2020_mfq (self + parent via `rater`), zhang_2023_smoking (4),
+spasovski_2020_perma, pinheiro_2024 (naqr, srq20; 10,148 ids), xu_2026 (3, item text),
+asadollahi_2022_short_fesi (9,117 ids; mendeley yxp8rbjrn8 is the same file), perez_hernandez_2021
+(gad7, elcsa, cesd7; item text), wendel_2022_rfq, stecula_2020_antivax, schoen_2007_neoffi,
+vegetti_2021 (8), orsini_2018 (5), fang_2026_anime_museum (item text), montana_blasco_2026 (8,
+item text for 4 blocks).
+
+**B (20 deposits, 47 tables + 3 extended):** stapleton_2021 (lotr, tipi, polknow, polknow18;
+CCAP08 + CCES18 pooled), darko_2025 (4, item text), lee_2022_social_trust (4, treat),
+hatemi_2017_sex_freq, deilkas_2019 (saq, collaboration; item text), fox_2023 (bct, pss10, gad7;
+OSF sfuz9 CC BY resolved; item text bct + gad7), rothlin_2022_scs_sf (item text),
+van_beveren_2019 (3; mean-imputed cells dropped), cwalina_2023 (3, treat), deryahanoglu_2024 (2),
+karsen_2025_mooc_motivation, wunn_2026 (3, waves + treat, item text), dharmawan_2026 (7),
+makkiyah_2023 (4, item text), rosado_2026_eureka, frost_2023 (cbq, gcbs), zhang_2026_ai_companion
+(item text), xue_2026_physiology_mcq. B also added the June ENCOVID wave (zenodo 4602365) to A's
+perez_hernandez_2021 tables (+1,674 ids each; dictionary rows replaced). zenodo 15305238 was
+already in IRW as buzzi_2025_*. Both Dryad leads were fetched from their Zenodo mirrors.
+
+All 107 pass `run_qc` (no fail) and `irw-validate --profile upload`; 33 item text tables pass
+normalize_nulls → validate_items → audit_batch (4 WARNs, all missingness skew: deilkas x2,
+montana_blasco P7120, perez_hernandez gad1/gad2 carrying both waves) → irw-validate.
+`itemtext_output/` holds only `*__items.csv`. Agent B had overwritten
+`itemtext_verification/make_itemtext_zhang_2026.py` (the JPSP #2547 builder); restored from git
+and B's builder renamed `make_itemtext_zhang_2026_ai_companion.py`.
+
+**Skips:** PII: zenodo 19680489 (full names), mendeley cfwf7zp6tr (children's DOB), zenodo
+20208708 (full names). Content: duplicates (0YUSTJ of OLTXFC), experiment/check-all/debrief items
+(OLTXFC, YKDXJL, 1UYR8D, D4PHZD, LN9WDR, figshare 29398943), household/agri/time-series surveys
+(LDU1EA, NIGDBQ, QEHZAW, O4CX4D, 2KLNFX), composites or scores only (ZMT5X6, zenodo 20804,
+fpsyg.614502, x6n4hhk45v, 7033562, 4884989), genomic table (fsysb.1293265), design table
+(GRXTZY), speech text (FPPDKN), third-party re-deposits (6NSLTP Young Lives, D2XPSP barometers,
+NBTRGA election studies, 7IWKOV ANES/CCAP/DNES), ENCOVID August GAD-2 only (4602382). Below N:
+zenodo 16539273 (42), dryad s4mw6m9b6 (20 macaques).
+
+**Staged:** 107 rows in `dictionary_auto.csv` (3 replaced), `codebook_at_ingest.csv`,
+`tags/tags_auto.csv` (Construct type and Sample FRAME blank); 33 `itemtext_provenance.csv` +
+`mapping_verification.csv` rows (all data_labels / NOT_NEEDED); 34 `metadata/data_notes.csv`
+rows. Issues-page entries owed at upload for the 33 item text tables that carry a public_note
+(IRW English translations: fauziah x5, xu x3, fang, perez_hernandez x3, montana_blasco x4,
+makkiyah x4, rothlin, deilkas x2, zhang_2026; fox_2023_bct Study 2 rewording).
+
+**Rulings wanted (none blocks upload):** 2-5 item PLS-SEM blocks shipped as one table (jo_2023,
+diredja_2025, fang_2026, xu_2026) under the bland/nguyen reading; stapleton_2021 CCAP08/CCES18
+modules treated as the authors' own, not a panel re-deposit; schoen_2007 commissioned 2002
+survey treated as depositor's own; hatemi_2017 sexual-behaviour frequency items; jarbin_2020
+clinical dx flags as cov_dx_*; kahraman_2026_zbi has 19 of 22 ZBI items as deposited;
+montana_blasco mh_statements shipped unkeyed, four adapted-scale blocks' item text withheld;
+lee_2022 three arms collapsed to treat 0/1 + cov_condition; makkiyah/zhang/wunn item text with
+blank option_text; YB5PVO anonymous deposit. (Agent B reported the perez_hernandez_2021_* tables as
+"live" and growing; they are not on Redivis, they were agent A's tables from this same batch, so
+the upload is a plain new upload.)
+
+## 2026-10-11 — repos batch 2026-10-10 uploaded
+
+PR #2946 merged; ben-domingue confirmed the 107 response tables and 33 item text tables
+uploaded. `uploaded=2026-10-11` stamped on the 33 `itemtext_provenance.csv` rows. Covariate-label
+harvest for the 15 .sav/.dta scripts run against the merge commit (see TODO).
+
+## 2026-10-11b — issues-page entries for the 2026-10-10 batch
+
+25 entries in datapages/irw#342: IRW English translations (fauziah x5, xu x3, fang, makkiyah x4,
+montana_blasco x4, perez_hernandez x3), English substitutes for non-English administrations
+(rothlin, deilkas x2, zhang_2026_ai_companion), and the fox_2023_bct Study 2 rewording.
+fox_2023_gad7 dropped as below the bar (`itemtext/fixes/issues_page_dropped.csv`).
+
+## 2026-10-11c — Repos mode-3 discovery + triage: 15 new terms x 9 languages, 1,208 candidates, 11 good, 53 leads
+
+Discovery and triage only, run locally on ben-domingue's instruction ("fire an automated
+search for core tables"). No scripts written, nothing staged, nothing uploaded.
+
+**Terms (new to `search_terms_log.csv`, each in English + es/de/fr/zh/ja/ar/nl/ko,
+135 queries):** dark triad dirty dozen, portrait values questionnaire, multifactor
+leadership questionnaire, metacognitions questionnaire, populist attitudes scale,
+fear-avoidance beliefs questionnaire, creative achievement questionnaire, study process
+questionnaire, drug abuse screening test, community of inquiry survey, ptsd checklist, team
+climate inventory, school climate survey, implicit theories of intelligence, vividness of
+visual imagery questionnaire. (Candidates dropped as already logged under a near-identical
+term: ambivalent sexism, internet gaming disorder, HEXACO, intolerance of uncertainty, moral
+disengagement, obsessive compulsive, PANAS.)
+
+- **Discovery** (~55 min): 1,208 candidates (dataverse 418, zenodo 364, surf 172,
+  figshare 118, scholars_portal 88, datacite 25, mendeley 18, dryad 4, osf 1).
+- **Triage** (`--retriage`, 6G cap; no `--limit 10` sanity run): 463 triaged after the
+  seen ledger excluded 745: `no_usable_file` 175, `human_assistance` 116,
+  `download_failed` 92 (dataverse 38, surf 30, scholars_portal 10, zenodo 6; transient, not
+  ledgered), `below_min_n` 24, `not_item_response` 19, `error` 16 (13 of them the same
+  "arg must be a list, tuple, 1-d array, or Series" reader fault as 2026-10-10 -- now 24
+  rows across two runs, still open in TODO), **`good` 11**, `license_restricted` 4 (all
+  CC BY-NC-ND), `pii_suspected` 4 (direct-identifier columns), `file_too_large` 2 (PISA
+  DVN/5Y4ZLQ, DVN/DZC0MT; both appended to `oversized_candidates.csv` by the script). No
+  OOM kills.
+  Operator note: the first two waiters used `pgrep` patterns that matched the waiter's own
+  shell (discovery) or missed `/usr/bin/python3` (triage); neither run was affected, and no
+  duplicate run was started. Wait on the PID.
+- **Step 2b ran** (chained): 116 HA -> recoverable_format 51, not_item_response 25,
+  human_review 21, aggregate_continuous 10, worth_retrying 9. `[conj]` routed none.
+  `[human_review] archived 21 row(s) -> human_review/human_review_zenodo_2026-10-11.csv`.
+- **Leads -> `leads/repos_leads_2026-10-11.csv`** (53 rows, all `unworked`: the 11 good,
+  plus every licence-ok worth_retrying/recoverable_format row with 100 <= N <= 50,000 and
+  8-700 items). The 11 good: Dark Triad + problematic drinking (mendeley 735s7fvt99, 565 x
+  31), Creative Achievement and Individual Differences (DVN/2IBBMG, 5,650 x 140), AI
+  literacy among preservice teachers (zenodo 22040756, 618 x 30), VR Chinese language
+  learning (figshare 34021359, 351 x 18), Onidra ISI + HAM-A insomnia/anxiety (mendeley
+  sg2whyws4h, 10,008 x 28), AI literacy / epistemic beliefs / academic dishonesty (mendeley
+  252r6gdx48, 972 x 64), dental students' emergency perceptions (mendeley x9d7bspnr3, 112 x
+  2 -- probably a summary file, check the other files), generative AI among marketing
+  undergraduates (zenodo 20400330, 310 x 60), human-AI visual co-creation (zenodo 19699406,
+  116 x 5), Personality, Emotions, and Attitudes PEA (DVN/NWYX4N, 749 x 304), white racial
+  attitudes (DVN/Y10EQV, 3,038 x 6, **licence is a custom Dataverse terms string**, resolve
+  before touching). Larger recoverable leads: Asian Barometer China image (DVN/..., 26,951 x
+  12), intermittent breaks / collective intelligence (26,214 x 311), personality and
+  political preferences multi-wave (20,000 x 25), democratic values by racial group (9,313 x
+  94), wars abroad / attitudes at home (7,233 x 20), class-size publication bias (2,906 x
+  60), Ecuadorian maths attitudes instrument (figshare, 2,449 x 39), Burmese Theravada
+  Buddhism psychometrics (zenodo, 2,285 x 55), NEO-PI-R (DVN, 857 x 275), Dark Triad and
+  cyberbullying (DVN, 762 x 72), fluid intelligence and fertility intentions (DVN, 1,056 x
+  242, worth_retrying).
+
+## 2026-10-11d — The 53 leads from 2026-10-11: 30 deposits / 83 tables / 2,006,984 responses, 32 item text tables
+
+Three forks on ben-domingue's "go for those 53 leads": A (27 leads, all worked), B (26 leads;
+wound down after 11 when ben-domingue asked for one agent at a time), C (B's remaining 15).
+Every lead now has a status in `leads/repos_leads_2026-10-11.csv`: 32 shipped (3 of them
+already in IRW from the 2026-10-08 batch: Holzknecht listening DVN/WWN1TS, Babenko medical
+students DVN/JHZDLR, Zhang stress mindset DVN/JU6K33; nothing rewritten), 19 rejected on
+content, 1 licence block (DVN/Y10EQV custom Dataverse terms + ANES/IAT re-deposit, in
+`license_blocked_candidates.csv`), 1 unworked (DVN/G7EOGT Ciuk TESS 2002/2010, 9,313 x 12,
+needs the TESS codebook to name the items). No PII skips. Nothing uploaded; output sits in
+`irw_output/` (83 files) and `itemtext_output/` (32 `__items.csv`). The 107 + 33 files of the
+already-uploaded 2026-10-10 batch were still in those folders and were moved to
+`runs/uploaded_2026-10-10/` so `red_up irw_output` cannot re-upload them.
+
+**A (12 deposits, 35 tables, 18 item text):** hernandez_martinez_2025_math_attitudes (6,078
+ids, AFE+AFC halves merged with cov_sample), duraj_2026 (amas, pe, te, pee; two waves),
+begum_2026 (isi, hama; 10,008 ids; hama item text), esteves_2026 (sdi, dddt; Portuguese + IRW
+English), sobczak_2024 (bmast rescored 0/1, dddt), bi_2026 (4 blocks; Chinese + IRW English),
+rajeev_2025 (superstition, panas, bigfive; item text), li_2026_online_aggression (coab, pev,
+nad, pd, empathy; item text), amiruddin_2023 (6 "gogy" blocks), kassas_2021 (covid_exposure,
+covid_mitigation; .dta labels), vogel_2024 (citizen_attributes_s2/_s3 with rt,
+attribute_valence_s3; 1,803 mean-imputed fit cells dropped), rathod_2026_drought_dass21.
+
+**B (5 deposits, 16 tables, no item text):** condon_2025 (caq 5,650 x 81 0/1, caq_freq),
+goldberg_2018_neo_pir (856 x 240; raw items of the ESCS dataset `goldberg_2018_escs.py`
+excluded as mixed), goldberg_2018_pea (7 tables: pea 178 items, health, belief, gambling,
+reading, childexp, experiences; demographics joined from DVN/VGMXJX), smith_2022 (trust,
+expressive_partisan, negative_partisan), stanford_2019 (bbrs_frequency and bbrs_belief with
+Study 1+2 pooled via cov_study, buddhism_attitud). CAQ has no labels and no codebook; NEO
+both label levels empty; PEA variable labels SPSS-truncated, full wording in the ESCS report.
+
+**C (12 deposits, 32 tables, 14 item text):** yuan_2026_vr_chinese (2 waves, treat),
+yang_2026 (epistemic_beliefs, ai_literacy, academic_dishonesty; deposit docx), pinedo_2026
+(genai_utaut2, 57 items), hou_2022 (dirty_dozen, perspective_taking, moral_disengagement,
+trait_anger, online_disinhibition, cyberbullying; 4 with Chinese + IRW English, item 1 blank
+from SPSS truncation), hitlan_2025 (ders16, dirty_dozen 1-9, celebrity_attitude; 17
+attention-check failures dropped), petrovici_2025 (cultural_participation,
+culture_appreciation 1/2 as deposited, wellbeing; Romanian + authors' English), gulec_2023
+(tipi, pcl5, pvs), ginting_2026 (5 blocks, 1,000 ids labelled SYN but stated real),
+izquierdo_lopez_2026_eosp (160 pupils x 36, rater = teacher; Spanish + IRW English),
+celikbas_2022 (pmq, mcq30, pcs, bpi), christian_2025_imagination (108 x 10),
+rapallini_2023_raven (1,677 x 12 0/1 with rt; key derived from the deposited total, exact for
+every respondent).
+
+**Skips (content):** 6 unkeyed Spanish quiz; 8 free text; 11 and 44 composites only; 14
+E-PVQ means; 18 facet sums; 21 TSP experiment edges; 24 single-indicator constructs; 26
+subscale scores; 29 2-3 item experiments; 33 moose mating records (no item structure); 36 M5S
+single items; 39 ESS Round 10 extract; 40 Russian panel indices; 41 CCAP 2008 re-deposit (TIPI
+live as stapleton_2021_tipi); 42 94 ids with data; 46 meta-analysis; 48 Asian Barometer
+re-deposit; 52 scale means only.
+
+All 83 pass `run_qc` (no fail) and `irw-validate --profile upload`; 32 item text tables pass
+normalize_nulls → validate_items → audit_batch (5 WARNs, all blank item_text: hou x4 item 1,
+kassas_2021_covid_mitigation `cleaning` whose deposit label repeats another question) →
+irw-validate; `check_provenance.R` clean. `itemtext_output/` holds only `*__items.csv`. Fork A
+had overwritten `itemtext_verification/make_itemtext_li_2026.py` (the li_2026_psmus builder,
+#2818); restored from git, A's builder renamed `make_itemtext_li_2026_online_aggression.py`.
+
+**Staged:** 83 rows in `dictionary_auto.csv` + `codebook_at_ingest.csv`, 83 in
+`tags/tags_auto.csv`, 32 in `itemtext_provenance.csv` + `mapping_verification.csv` (all
+data_labels / NOT_NEEDED), 20 `metadata/data_notes.csv` rows. Covariate-label harvest run
+against the batch commit for the 15 .sav/.dta scripts (all exit 0); `build.py` emits live
+tables only, so covariate_labels.csv changes after the release. Issues-page entries owed at
+upload for the IRW-translated tables (esteves x2, bi x4, hou x4, izquierdo_lopez) plus
+kassas_2021_covid_mitigation and petrovici_2025_culture_appreciation (public_note set).
+
+**Rulings wanted (none blocks upload):** small construct blocks shipped as one table per
+block (bi 16/4/5/5, amiruddin 5-7, yuan 6x3, pinedo 9 blocks, yang epistemic 4x3, christian,
+smith negative_partisan 5, PEA reading/childexp 8); ESCS raw-item tables under goldberg_2018_*;
+smith_2022 named for the depositor (paper is Mayer & Smith); esteves SDI/Dirty Dozen item text
+shipped though neither is in the rights register; li_2026 and yang_2026 item text with language
+blank (English questionnaire, Chinese sample, administration language unstated); rathod DASS
+anchors from the instrument not the file; hernandez age withheld (mixed coding); rapallini resp
+keyed from the deposited total, chosen option not shipped; petrovici culture_appreciation 1/2
+vs codebook 1/0; stanford buddhism_attitud opaque `attitude_k` codes; celikbas_pcs 14th column
+dropped; ginting SYN-labelled ids.
+
+## 2026-10-11e — repos leads batch 2026-10-11 uploaded
+
+PR #2957 merged; ben-domingue confirmed the 83 response tables and 32 item text tables
+uploaded. `uploaded=2026-10-11` stamped on the 32 `itemtext_provenance.csv` rows. Still open:
+issues-page entries (12 tables), `covariate_labels/build.py` after the release.
