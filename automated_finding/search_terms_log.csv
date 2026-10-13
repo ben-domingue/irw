@@ -9670,3 +9670,4 @@ date,query,output_file,notes
 2026-10-12,psychological resilience,runs/monthly_candidates_weekly_2026-10-12.csv,"monthly automated run; 0 candidates; sources=osf,dataverse,datacite; since=2026-10-05"
 2026-10-12,procrastination,runs/monthly_candidates_weekly_2026-10-12.csv,"monthly automated run; 4 candidates; sources=osf,dataverse,datacite; since=2026-10-02"
 2026-10-12,growth mindset,runs/monthly_candidates_weekly_2026-10-12.csv,"monthly automated run; 3 candidates; sources=osf,dataverse,datacite; since=2026-10-02"
+2026-10-13,[weekly] 15 terms x journals=plosone,runs/plos_monthly_candidates_weekly_2026-10-13.csv,plos monthly-script automated run; mode=weekly; 53 candidates triaged; 15/15 terms visited (13 hit per-term cap 4)
