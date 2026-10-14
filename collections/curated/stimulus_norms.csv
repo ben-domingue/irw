@@ -1,0 +1,13 @@
+table,basis,note
+kalimahnorms_alzahrani_2025,curated:inventory #2983,"Arabic words; 4 dimensions (AoA, concreteness, ...)"
+martineztomas_2026_pseudowords,curated:inventory #2983,"letter strings; valence, arousal, wordlikeness"
+rating_speed_2025,curated:inventory #2983,Dutch words; 8 affect dimensions
+emoji_scheffler_2024,curated:inventory #2983,emoji; 5 dimensions
+famous_melodies,curated:inventory #2983,melodies; 5 dimensions
+fractals_rating,curated:inventory #2983,fractal images; 7 features
+spelling2pronounce_edwards2023,curated:inventory #2983,English words; single dimension (difficulty)
+moralvignettes_rakhmankulova_2025,curated:inventory #2983,video vignettes; 16 features; 39 stimuli
+tears,curated:inventory #2983,videos; 11 emotion items; 72 stimuli
+wine_luckett2021,curated:inventory #2983,"odour samples; intense, pleasant, familiar; 17 stimuli"
+concretewords,curated:inventory #2983,multiword expressions; single dimension (concreteness); re-encoded item->rater under #2983
+emobank_buechel_2017,curated:inventory #2983,"sentences; valence, arousal, dominance x writer/reader perspective; source has no annotator id, so trial_annotation indexes the ~5 ratings per sentence in place of rater"

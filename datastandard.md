@@ -70,7 +70,7 @@ Every IRW file is a CSV in long format with one row per person-item observation.
 | `rt` | no | Response time. **Seconds only** — convert from milliseconds if needed. |
 | `date` | no | Calendar time in seconds — either seconds elapsed since data collection start (relative) or Unix time (absolute). Do not use other time units. |
 | `qmatrix1`…`qmatrixN` | no | Item classifications for cognitive diagnostic modeling (Q-matrix). One column per attribute. |
-| `rater` | no | Observer identifier in scenarios where items are rated by an external observer rather than self-reported. |
+| `rater` | no | Observer identifier in scenarios where items are rated by an external observer rather than self-reported. In a stimulus-norming study (people rating words, sentences, images, sounds on judgement dimensions) the stimulus is `id`, the dimension is `item` (a single value when the study rated one dimension), the participant is `rater`, and one table holds the study; the rater is never placed on `item`. |
 | `item_family` | no | Groups items that may violate local independence — testlets, clones, or clusters of similar items. |
 | `trial_*` | no | Trial-level details in repeated-trial designs: the trial index (`trial_number`), block, list, and so on. `item` still identifies the probe — it is always authoritative, never a placeholder with the probe moved into `trial_` columns. A `trial_` index is what tells repeated responses by one `id` to one `item` apart. |
 
@@ -417,7 +417,7 @@ Scripts live in `data/conjoint/`.
 If the dataset includes item-by-attribute classifications for cognitive diagnostic modeling, encode them as separate columns named `qmatrix1`, `qmatrix2`, … (one column per attribute). These are item-level columns, not response-level.
 
 ### Rater data
-When items are scored by an external observer (rather than self-reported), include a `rater` column identifying the observer. This is distinct from `id` (the focal unit being measured).
+When items are scored by an external observer (rather than self-reported), include a `rater` column identifying the observer. This is distinct from `id` (the focal unit being measured). Stimulus-norming studies follow the same shape: `id` = the stimulus being characterised, `item` = the judgement dimension (a single value when the study rated only one), `rater` = the participant, one table per study even when the dimensions use different scales (irw#1443, irw#2983). The rater is never placed on `item`.
 
 ### Item families (local independence violations)
 If items are organized into testlets, clones, or clusters that may violate local independence, include an `item_family` column grouping them. Use a consistent label (string or integer) for items within the same family.
