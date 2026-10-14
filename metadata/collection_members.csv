@@ -2792,3 +2792,71 @@ zhou_2024_eq_tips,longitudinal,rule:meta:longitudinal
 zhu_2024_pyd,longitudinal,rule:meta:longitudinal
 zorowitz_2023_marsib,response_time,rule:var:rt
 zou_2025_task_difficulty,longitudinal,rule:meta:longitudinal
+concretewords,stimulus_norms,curated:inventory #2983
+emobank_buechel_2017,stimulus_norms,curated:inventory #2983
+emoji_scheffler_2024,stimulus_norms,curated:inventory #2983
+famous_melodies,stimulus_norms,curated:inventory #2983
+fractals_rating,stimulus_norms,curated:inventory #2983
+kalimahnorms_alzahrani_2025,stimulus_norms,curated:inventory #2983
+martineztomas_2026_pseudowords,stimulus_norms,curated:inventory #2983
+moralvignettes_rakhmankulova_2025,stimulus_norms,curated:inventory #2983
+rating_speed_2025,stimulus_norms,curated:inventory #2983
+spelling2pronounce_edwards2023,stimulus_norms,curated:inventory #2983
+tears,stimulus_norms,curated:inventory #2983
+wine_luckett2021,stimulus_norms,curated:inventory #2983
+alcoholstroop_jones2024,trials,curated:scout
+cogcontrol_gyurkovics_2019_flanker,trials,curated:scout
+cogcontrol_gyurkovics_2019_sart,trials,curated:scout
+cogcontrol_gyurkovics_2019_simon,trials,curated:scout
+enkavi_2019_ant_flanker,trials,curated:scout
+enkavi_2019_dpx_axcpt,trials,curated:scout
+enkavi_2019_gonogo,trials,curated:scout
+enkavi_2019_navon,trials,curated:scout
+enkavi_2019_simon,trials,curated:scout
+enkavi_2019_stopsignal,trials,curated:scout
+enkavi_2019_stroop,trials,curated:scout
+enkavi_2019_taskswitch,trials,curated:scout
+hachenberger_2025_gonogo_main,trials,curated:scout
+hachenberger_2025_gonogo_pilot,trials,curated:scout
+hachenberger_2025_stroop_main_bin,trials,curated:scout
+hachenberger_2025_stroop_pilot_bin,trials,curated:scout
+imps2025_hf,trials,curated:scout
+martinez_2024_gonogo,trials,curated:scout
+martinez_2024_joint_simon,trials,curated:scout
+matzke-etal-2019,trials,curated:scout
+matzke-experiment1-2022,trials,curated:scout
+matzke-experiment2-2022,trials,curated:scout
+matzke-experiment3-gamified-2022,trials,curated:scout
+matzke-experiment3-standard,trials,curated:scout
+megart_tonkovic_2021,trials,curated:scout
+motion,trials,curated:scout
+mturkddm_by,trials,curated:scout
+mturkddm_lexical,trials,curated:scout
+mturkddm_recognition,trials,curated:scout
+mturkddm_y25,trials,curated:scout
+petley_2025_flanker_study1_childwoman,trials,curated:scout
+petley_2025_flanker_study1_girlman,trials,curated:scout
+petley_2025_flanker_study1_manwoman,trials,curated:scout
+petley_2025_flanker_study2_auditory,trials,curated:scout
+petley_2025_flanker_study2_visual,trials,curated:scout
+roar_lexical,trials,curated:scout
+robison_2026_retesting_antisaccade,trials,curated:scout
+robison_2026_retesting_color,trials,curated:scout
+robison_2026_retesting_cued_recall,trials,curated:scout
+robison_2026_retesting_digitcomp,trials,curated:scout
+robison_2026_retesting_flanker,trials,curated:scout
+robison_2026_retesting_ifr,trials,curated:scout
+robison_2026_retesting_letter,trials,curated:scout
+robison_2026_retesting_lettercomp,trials,curated:scout
+robison_2026_retesting_orientation,trials,curated:scout
+robison_2026_retesting_ospan,trials,curated:scout
+robison_2026_retesting_recognition,trials,curated:scout
+robison_2026_retesting_rspan,trials,curated:scout
+robison_2026_retesting_sart,trials,curated:scout
+robison_2026_retesting_simon,trials,curated:scout
+robison_2026_retesting_stroop,trials,curated:scout
+robison_2026_retesting_symspan,trials,curated:scout
+robison_2026_retesting_tot,trials,curated:scout
+rr98_accuracy,trials,curated:scout
+spalex_aguasvivas_2020,trials,curated:scout
+yu2025,trials,curated:scout
