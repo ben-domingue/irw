@@ -254,6 +254,8 @@ campbell_2019_local_roots,conj,https://dataverse.harvard.edu/api/access/datafile
 cao_2024_mbi,core,none,2026-10-02
 cao_2024_mspss,core,none,2026-10-02
 cao_2024_work_stress,core,none,2026-10-02
+caprara_2020_mnesres,core,none,2026-10-14
+caprara_2020_panas,core,none,2026-10-14
 carey_2020_democracy_donors,conj,https://dataverse.harvard.edu/api/access/datafile/3874939,2026-10-09
 carey_2020_democracy_public,conj,https://dataverse.harvard.edu/api/access/datafile/3874953,2026-10-09
 carey_2020_democracy_public_oct,conj,https://dataverse.harvard.edu/api/access/datafile/3874952,2026-10-09
@@ -634,6 +636,9 @@ gidengil_2022_executive_aggrandizement,conj,none,2026-10-09
 gift_2025_speech_scandals,conj,https://dataverse.harvard.edu/api/access/datafile/11602779,2026-10-09
 gilhernandez_2023_teacher_bias,conj,https://research-data.ec.europa.eu/api/records/n35rf-h7t17/files/DIGCLASS-BIAS.zip/content,2026-10-14
 gilhernandez_2024_teacher_bias,conj,https://zenodo.org/api/records/12666535/files/carjgil/teacher-bias-teacher-bias-package.zip/content,2026-10-09
+gimenez_espert_2026_aco,core,none,2026-10-14
+gimenez_espert_2026_unipsico,core,none,2026-10-14
+gimenez_espert_2026_violence,core,none,2026-10-14
 ginting_2026_ai_literacy,core,https://data.mendeley.com/public-files/datasets/9b26sb2k4g/files/79169627-a603-4bf6-9321-6f1405ae3a15/file_downloaded,2026-10-11
 ginting_2026_digital_competence,core,https://data.mendeley.com/public-files/datasets/9b26sb2k4g/files/79169627-a603-4bf6-9321-6f1405ae3a15/file_downloaded,2026-10-11
 ginting_2026_org_support,core,https://data.mendeley.com/public-files/datasets/9b26sb2k4g/files/79169627-a603-4bf6-9321-6f1405ae3a15/file_downloaded,2026-10-11
@@ -1574,8 +1579,8 @@ sejna_2025_academic_self_concept,core,none,2026-10-09
 sejna_2025_saqc,core,none,2026-10-09
 sejna_2025_social_integration,core,none,2026-10-09
 senninger_2023_mp_eu_oversight,conj,none,2026-10-07
-sergeeva_2026_xr_operators,conj,https://zenodo.org/api/records/18467408/files/20250203_THEIA_XR_Dataset.xlsx/content,2026-10-14
 sensorimotor_repetto_2022,core,none,2026-10-13
+sergeeva_2026_xr_operators,conj,https://zenodo.org/api/records/18467408/files/20250203_THEIA_XR_Dataset.xlsx/content,2026-10-14
 sevi_2026_election_outcomes,conj,none,2026-10-08
 shaffer_2020_local_refugees,conj,none,2026-10-08
 shafranek_2021_roommate_choice,conj,none,2026-10-07
@@ -1957,6 +1962,10 @@ zhao_2023_growth_mindset,core,none,2026-10-10
 zhao_2023_iwm,core,none,2026-10-10
 zhao_2023_ose,core,none,2026-10-10
 zhao_2023_vbl,core,none,2026-10-10
+zhao_2025_eheals,core,none,2026-10-14
+zhao_2025_htse,core,none,2026-10-14
+zhao_2025_ssrs,core,none,2026-10-14
+zhao_2025_technophobia,core,none,2026-10-14
 zhirkov_2022_immigrant_admission,conj,none,2026-10-07
 zhirkov_2025_illegal_undocumented,conj,none,2026-10-07
 zhirkov_2025_immigrant_illegality,conj,none,2026-10-07
