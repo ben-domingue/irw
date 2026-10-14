@@ -21,7 +21,13 @@ lt <- lt[!lt %in% remove]
 user    <- redivis$user(IRW_OWNER)
 dataset <- user$dataset("irw_meta")
 table   <- dataset$table("itemtext_metadata")
-existing <- as.data.frame(table$to_tibble())
+published <- as.data.frame(table$to_tibble())
+## Start from the repo CSV, not the published table; see base_guard.R. The
+## column set is whatever published carries, so a column added upstream still
+## arrives; FK_grade is back-filled below either way.
+source(file.path(here, "base_guard.R"))
+existing <- choose_base(file.path(here, "itemtext_metadata.csv"), published, names(published),
+                        label = "itemtext_metadata.csv")
 
 ## only process tables not yet present
 tables.new <- lt[!lt %in% existing$table]
