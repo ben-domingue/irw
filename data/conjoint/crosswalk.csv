@@ -1784,3 +1784,5 @@
 "profile_gender","rehmert_2026_geographic_responsiveness","attr_sex","Woman","female","explicit","cj_sex attribute in cj_1.RDS"
 "profile_gender","yang_2026_candidate_posts","attr_candidate_gender","Female","female","name","candidate Huang Hsiu-ying with an AI-generated female photo; authors' Table 3 labels Female"
 "profile_gender","yang_2026_candidate_posts","attr_candidate_gender","Male","male","name","candidate Chang Chien-hung with an AI-generated male photo; authors' Table 3 labels Male"
+"profile_gender","alhatmi_2026_oman_graduate_hiring","attr_gender","Female","female","explicit","level text"
+"profile_gender","alhatmi_2026_oman_graduate_hiring","attr_gender","Male","male","explicit","level text"
