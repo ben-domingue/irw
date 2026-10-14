@@ -260,8 +260,9 @@ red_up  ------------------------->   irw_meta, as a DRAFT version
 Two things about this are easy to get wrong:
 
 **Everything scheduled is a GitHub Action.** There is no crontab anywhere, on
-any machine. `.github/workflows/metadata-pipeline.yml` runs Mondays 13:00 UTC:
-it regenerates the metadata CSVs, runs `audit_tables.R` (which cross-checks
+any machine. `.github/workflows/metadata-pipeline.yml` runs Mondays and
+Thursdays at 13:00 UTC (Thursday only when a core-shard table has appeared or
+disappeared since the last run; `scripts/pipeline_gate.py` decides): it regenerates the metadata CSVs, runs `audit_tables.R` (which cross-checks
 table names across the metadata, tags and biblio outputs against the live
 Redivis datasets), and opens a **pull request** with the diff. It does not open
 an issue and does not auto-merge — there, the review is the product.
@@ -416,7 +417,7 @@ of this section — that is a third way things happen, but it is not a runner.
 
 | Workflow | When (UTC) | What it does | Merges? |
 |---|---|---|---|
-| `metadata-pipeline.yml` | Mon 13:00 | the metadata CSVs: every stage in `DEFAULT_ORDER` (section 5) | opens a PR, **never** auto-merges — the review is the product |
+| `metadata-pipeline.yml` | Mon + Thu 13:00 (Thu gated on new tables) | the metadata CSVs: every stage in `DEFAULT_ORDER` (section 5) | opens a PR, **never** auto-merges — the review is the product |
 | `version-manifest.yml` | daily 13:30 | records newly *released* Redivis versions | opens a PR and **squash-merges it**, because it only records what already happened |
 | `itemtext-issues.yml` | daily 13:45 | refreshes `itemtext/live_tables.csv`; fails when a live table's triage note never reached the public item-text issues page (#2236) | opens and **squash-merges** its own snapshot PR, like the manifest |
 | `drift-report.yml` | daily 14:00 | reports what downstream is behind | writes no code; rewrites issue #2085 in place |

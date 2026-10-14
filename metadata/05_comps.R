@@ -14,8 +14,10 @@ source("redivis_config.R")
 user <- redivis$user(IRW_OWNER)
 dataset <- user$dataset("irw_meta")
 table <- dataset$table("comps_metadata")
-meta <- table$to_tibble()
-meta<-meta[,c("table", "n_responses", "n_actors")]
+published <- table$to_tibble()
+##Start from the repo CSV, not the published table; see base_guard.R.
+source("base_guard.R")
+meta <- choose_base("comps_metadata.csv", published, c("table", "n_responses", "n_actors"))
 dim(meta)
 old.tables<-meta$table
 length(old.tables)

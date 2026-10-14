@@ -1,4 +1,4 @@
-# Weekly run of the IRW metadata pipeline -- Workflows 1 and 2 of
+# Twice-weekly run of the IRW metadata pipeline -- Workflows 1 and 2 of
 # .claude/skills/irw-site-update/SKILL.md.
 #
 # Regenerates the metadata CSVs from Redivis and the dictionary Google Sheets,
@@ -29,6 +29,14 @@ on:
   schedule:
     # Mondays 13:00 UTC, the slot the crontab entry used in local time.
     - cron: "0 13 * * 1"
+    # Thursdays too (2026-10-14). Intake roughly doubled in October: the
+    # 2026-10-12 run absorbed 692 new tables, took 117 minutes and needed
+    # three dispatches, and ~20 data PRs merged in the two days after it had
+    # to wait a week for their metadata rows. Halving the batch halves both
+    # the run time and what a failed run costs. The Thursday slot is gated
+    # by the `decide` job below and skips when no core table is new since
+    # the last run, so a quiet week still produces exactly one PR.
+    - cron: "0 13 * * 4"
   workflow_dispatch:
     inputs:
       resume_from_run:
@@ -52,7 +60,36 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  decide:
+    # Mondays and dispatches always run. Other scheduled slots run only when a
+    # core-shard table has appeared or disappeared since metadata.csv was last
+    # committed -- otherwise the run's whole diff would be a status.json
+    # timestamp and emptied logs (#2342). The gate fails open.
+    runs-on: ubuntu-latest
+    outputs:
+      run: ${{ steps.gate.outputs.run }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - id: gate
+        env:
+          REDIVIS_API_TOKEN: ${{ secrets.REDIVIS_API_TOKEN }}
+        run: |
+          if [[ "${{ github.event_name }}" != "schedule" || "$(date -u +%u)" == "1" ]]; then
+            echo "run=true" >> "$GITHUB_OUTPUT"
+            echo "run=true: ${{ github.event_name }} on $(date -u +%A); not gated"
+            exit 0
+          fi
+          python -m pip install --quiet redivis
+          python .claude/skills/irw-site-update/scripts/pipeline_gate.py
+
   pipeline:
+    needs: decide
+    if: needs.decide.outputs.run == 'true'
     runs-on: ubuntu-latest
     # 240, not 120: the 2026-10-12 run took 117 minutes in Workflow 1 and was
     # cancelled by the old limit six seconds after opening its PR (#2971). The
@@ -189,7 +226,7 @@ jobs:
           # Only the tracked outputs. Everything else the run writes -- the
           # *.diff.csv files above all -- stays ignored on purpose.
           if git diff --quiet -- metadata/ ; then
-            echo "No metadata changes this week; nothing to review."
+            echo "No metadata changes since the last run; nothing to review."
             exit 0
           fi
           date="$(date -u +%F)"
@@ -198,11 +235,11 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git checkout -b "$branch"
           git add -- metadata/
-          git commit -m "Metadata pipeline: weekly run for $date" \
+          git commit -m "Metadata pipeline: run for $date" \
                      -m "Automated run of .github/workflows/metadata-pipeline.yml. Workflow 3 (upload_meta.py) not run."
           git push -u origin "$branch"
           {
-            echo "Weekly metadata pipeline run for **$date**."
+            echo "Metadata pipeline run for **$date**."
             echo
             echo "## What changed"
             echo
@@ -262,7 +299,7 @@ jobs:
             echo "</details>"
           } > pr_body.md
           gh pr create --base main --head "$branch" \
-            --title "Metadata pipeline: weekly run for $date" \
+            --title "Metadata pipeline: run for $date" \
             --body-file pr_body.md --assignee ben-domingue
 
       - name: Report a failure
@@ -272,7 +309,7 @@ jobs:
         run: |
           run_url="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
           {
-            echo "@ben-domingue the weekly metadata pipeline failed. Nothing was"
+            echo "@ben-domingue the metadata pipeline failed. Nothing was"
             echo "published -- this job never runs upload_meta.py -- and no pull"
             echo "request was opened, so the committed metadata is untouched."
             echo

@@ -15,10 +15,13 @@ source("redivis_config.R")
 user <- redivis$user(IRW_OWNER)
 dataset <- user$dataset("irw_meta")
 table <- dataset$table("simsyn_metadata")
-meta <- table$to_tibble()
-meta<-meta[,c("table", "n_responses", "n_categories", "n_participants", 
-              "n_items", "responses_per_participant", "responses_per_item", 
-              "density")]
+published <- table$to_tibble()
+##Start from the repo CSV, not the published table; see base_guard.R.
+source("base_guard.R")
+meta <- choose_base("simsyn_metadata.csv", published,
+                    c("table", "n_responses", "n_categories", "n_participants",
+                      "n_items", "responses_per_participant", "responses_per_item",
+                      "density"))
 dim(meta)
 old.tables<-meta$table
 length(old.tables)
