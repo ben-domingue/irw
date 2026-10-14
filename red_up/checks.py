@@ -180,12 +180,15 @@ _CONJ_GENDER = re.compile(r"^attr_(.*_)?(gender|sex)$")
 def check_conj_design(report: FileReport) -> tuple[list[str], list[str]]:
     """A conjoint table needs its design records before it goes up. -> (errors, warnings)
 
-    Errors: no row in design_tables.csv, or an outcome column with no row in
-    design_outcomes.csv -- without them the table cannot be pooled with the
-    others (conj_metadata/conj_outcomes would carry NA for it), and nothing
-    later forces anyone to come back. Warnings: an outcome row for a column the
-    file lacks (stale), a gender attribute with no crosswalk.csv rows, and no
-    topic-tag row in tags.csv. Unreadable records are an error, never a pass.
+    Errors: no row in design_tables.csv, an outcome column with no row in
+    design_outcomes.csv, or no topic-tag row in tags.csv -- without them the
+    table cannot be pooled with the others (conj_metadata/conj_outcomes would
+    carry NA for it, and nobody searching by subject would find it), and
+    nothing later forces anyone to come back. The tags check was a warning
+    while the first batches were in flight (ben-domingue/irw#2956); every
+    batch since has shipped with rows. Warnings: an outcome row for a column
+    the file lacks (stale), and a gender attribute with no crosswalk.csv rows.
+    Unreadable records are an error, never a pass.
     """
     d = _conj_design_dir()
     try:
@@ -214,8 +217,8 @@ def check_conj_design(report: FileReport) -> tuple[list[str], list[str]]:
         warnings.append(f"conj_design: design_outcomes.csv has row(s) for column(s) this file "
                         f"lacks: {', '.join(stale)}")
     if t not in tagged:
-        warnings.append(f"conj_tags: {t} has no row in tags.csv (data/conjoint/README.md, "
-                        f"\"Topic tags\"); add domain and choice_object so the table is findable")
+        errors.append(f"conj_tags: {t} has no row in tags.csv (data/conjoint/README.md, "
+                      f"\"Topic tags\"); add domain and choice_object so the table is findable")
     # attr_gender, attr_sex, attr_candidate_gender, ... (not attr_sexuality). A
     # gender carried only by first names or photos cannot be detected here.
     for a in (c for c in cols if _CONJ_GENDER.match(c)):

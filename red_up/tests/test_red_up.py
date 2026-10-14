@@ -1030,12 +1030,13 @@ class ValidatorGate(unittest.TestCase):
         self.assertTrue(any("rating_old" in w for w in report.warnings), report.warnings)
         self.assertTrue(any("conj_crosswalk" in w for w in report.warnings), report.warnings)
 
-    def test_a_missing_topic_tag_row_only_warns(self):
+    def test_a_missing_topic_tag_row_is_blocked(self):
         self._conj_design(tagged=())
         path = self._csv("smith_2024_candidates.csv", self._conj_rows())
         report = self._check(path, "smith_2024_candidates", target=self.CONJ)
-        self.assertTrue(report.ok, report.errors)
-        self.assertTrue(any("conj_tags" in w for w in report.warnings), report.warnings)
+        self.assertFalse(report.ok)
+        self.assertTrue(any("conj_tags" in e and "tags.csv" in e for e in report.errors), report.errors)
+        self.assertFalse(any("conj_tags" in w for w in report.warnings), report.warnings)
 
     def test_a_gender_attribute_with_crosswalk_rows_is_quiet(self):
         self._conj_design(crosswalk=(("smith_2024_candidates", "attr_gender"),))
