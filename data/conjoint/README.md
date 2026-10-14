@@ -77,8 +77,8 @@ Other rules:
 - **A dictionary row,** staged with `automated_finding/stage_dict_row.py --source conj`, which writes to `dictionary_auto_conj.csv`. To change a staged row, restage it with `--replace`. `--force` adds a second row.
 - **A processing note** in `metadata/data_notes.csv`.
 - **A row in `candidates.csv`,** the ledger of every deposit considered. Its status is `todo`, `built`, `uploaded`, or `held: <reason>`.
-- **A design record:** one row in `design_tables.csv` and one row per outcome column in `design_outcomes.csv` (below). `metadata/tests/test_conj_design.py` fails if a built or uploaded table has none. `red_up` refuses to upload a conjoint table with no `design_tables.csv` row, or with an outcome column that has no `design_outcomes.csv` row. It warns when a gender attribute has no rows in `crosswalk.csv`, or when the table has no row in `tags.csv`.
-- **Topic tags:** one row in `tags.csv` (below): what the study is about and what a profile represents. `metadata/tests/test_conj_design.py` fails if a design table has none.
+- **A design record:** one row in `design_tables.csv` and one row per outcome column in `design_outcomes.csv` (below). `metadata/tests/test_conj_design.py` fails if a built or uploaded table has none. `red_up` refuses to upload a conjoint table with no `design_tables.csv` row, with an outcome column that has no `design_outcomes.csv` row, or with no `tags.csv` row. It warns when a gender attribute has no rows in `crosswalk.csv`.
+- **Topic tags:** one row in `tags.csv` (below): what the study is about and what a profile represents. `metadata/tests/test_conj_design.py` fails if a design table has none, and `red_up` refuses to upload a table without one.
 
 ## Design records
 
