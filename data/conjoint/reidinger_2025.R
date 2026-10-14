@@ -24,7 +24,7 @@
 ##only short tags (age_boomerlow, class_bluehigh, ethnicity_minequal ...); the displayed text could not be
 ##recovered (the PRQ article page is blocked to this agent and the ZORA copy sits behind a bot check), so
 ##THE TAGS ARE KEPT for those three. LABELS: tags only (age, class, ethnicity).
-##  attr_gender    gender    "20% Women, 80% Men" / "50% Women, 50% Men" / "65% Women, 35% Men"
+##  attr_gender_share    gender    "20% Women, 80% Men" / "50% Women, 50% Men" / "65% Women, 35% Men"
 ##  attr_ideology  ideology  "40% Left-wing, 60% Right-wing" / "50% Left-wing, 50% Right-wing" / "60% Left-wing, 40% Right-wing"
 ##  attr_age, attr_class, attr_ethnicity: tags as stored
 ##Outcomes, 0-10 numeric as stored. The README describes them only in words: COND_RAT "fairness for
@@ -49,15 +49,15 @@ prep <- function(d, off, blk, o1, o2, n1, n2) {
   d <- d[!is.na(gender) & !is.na(age) & !is.na(class) & !is.na(ethnicity) & !is.na(ideology) & !(is.na(get(o1)) & is.na(get(o2)))]
   data.table(id = unname(idmap[d$ResponseId]), task = d$task + off, profile = 1L,
     rating_cond = NA_real_, rating_recog = NA_real_, rating_rep = NA_real_, rating_stat = NA_real_,
-    attr_gender = unname(gl[as.character(d$gender)]), attr_age = as.character(d$age), attr_class = as.character(d$class),
+    attr_gender_share = unname(gl[as.character(d$gender)]), attr_age = as.character(d$age), attr_class = as.character(d$class),
     attr_ethnicity = as.character(d$ethnicity), attr_ideology = unname(il[as.character(d$ideology)]),
-    attrpos_gender = d$gender_loc, attrpos_age = d$age_loc, attrpos_class = d$class_loc,
+    attrpos_gender_share = d$gender_loc, attrpos_age = d$age_loc, attrpos_class = d$class_loc,
     attrpos_ethnicity = d$ethn_loc, attrpos_ideology = d$ideo_loc, trial_block = blk)[
     , (n1) := d[[o1]]][, (n2) := d[[o2]]][]
 }
 x <- rbind(prep(f, 0L, "fairness", "COND_RAT", "RECOG_RAT", "rating_cond", "rating_recog"),
            prep(o, 7L, "output", "REP_RAT", "STAT_RAT", "rating_rep", "rating_stat"))
-stopifnot(!anyNA(x$attr_gender), !anyNA(x$attr_ideology))
+stopifnot(!anyNA(x$attr_gender_share), !anyNA(x$attr_ideology))
 gm <- c(Female = "female", Male = "male", `Non-binary` = "other")
 al[, cov_gender := unname(gm[GENDER])]
 x <- merge(x, data.table(id = unname(idmap[al$ResponseId]), cov_gender = al$cov_gender), by = "id", all.x = TRUE)
