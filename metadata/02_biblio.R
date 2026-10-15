@@ -239,7 +239,7 @@ getrows<-function(l) {
     user <- redivis$user(user)
     dataset <- user$dataset(dataset)
     biblio_table <- dataset$table(table)
-    ## `bootstrap = TRUE` (conj only, until its first irw_meta upload) lets a
+    ## `bootstrap = TRUE` (conj and rank, until their first irw_meta upload) lets a
     ## source whose biblio table does not exist yet start from an empty one.
     ## Opt-in per source on purpose: tolerating a failed read everywhere would
     ## let a transient error on core start an empty biblio and regenerate every
@@ -480,6 +480,28 @@ if (length(IRW_CONJ_DATASETS) > 0) {
                      file.prov="conj_biblio_provenance.csv",
                      file.pending="conj_biblio_pending.csv",
                      min.live=10,
+                     drop.retired=TRUE,
+                     bootstrap=TRUE)
+}
+
+##Rankings (the IRW_RANK_DATASETS shards): no dictionary sheet, as conj -- the
+##dictionary is dictionary_auto_rank.csv alone, staged with stage_dict_row.py
+##--source rank. Active only while a rank shard is registered in
+##redivis_config.R, since its liveness oracle rank_metadata.csv comes from
+##18_rankings.R, which covers every shard. min.live is 1: the family was
+##registered with one table (2026-10-15).
+if (length(IRW_RANK_DATASETS) > 0) {
+    dbs$rank <- list(name="rank",
+                     irw_dict=empty_sheet_dict(),
+                     user=IRW_OWNER,
+                     dataset="irw_meta",
+                     table="rank_biblio",
+                     file.out="rank_biblio.csv",
+                     file.auto="../automated_finding/dictionary_auto_rank.csv",
+                     file.live="rank_metadata.csv",
+                     file.prov="rank_biblio_provenance.csv",
+                     file.pending="rank_biblio_pending.csv",
+                     min.live=1,
                      drop.retired=TRUE,
                      bootstrap=TRUE)
 }

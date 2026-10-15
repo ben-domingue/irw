@@ -176,7 +176,7 @@ declare -A STAGE_SCRIPT=( [01]=01_metadata.R [02]=02_biblio.R [03]=03_tags.R
                           [11]=11_status.R [12]=12_stragglers.R
                           [13]=13_script_index.py [14]=14_column_docs.py
                           [15]=15_codebook_links.py [16]=16_conjoint.R
-                          [17]=17_coverage.R )
+                          [17]=17_coverage.R [18]=18_rankings.R )
 
 # Stages whose non-zero exit is a FINDING, not a failure. 12 exits 1 when a
 # table has been stuck for several runs -- that is the report doing its job, and
@@ -192,7 +192,7 @@ declare -A ADVISORY_STAGE=( [12]=1 [17]=1 )
 # CSVs each stage is expected to touch (space-separated), for snapshot/diff.
 declare -A STAGE_OUTPUTS=(
   [01]="metadata.csv"
-  [02]="biblio.csv comps_biblio.csv nominal_biblio.csv simsyn_biblio.csv conj_biblio.csv"
+  [02]="biblio.csv comps_biblio.csv nominal_biblio.csv simsyn_biblio.csv conj_biblio.csv rank_biblio.csv"
   [03]="tags.csv nominal_tags.csv"
   [05]="comps_metadata.csv"
   [06]="nominal_metadata.csv"
@@ -206,12 +206,14 @@ declare -A STAGE_OUTPUTS=(
   [15]="codebook_links.csv codebook_links_checked.csv"
   [16]="conj_metadata.csv conj_outcomes.csv"
   [17]="coverage_matrix.csv"   # + coverage_report.md, not diffed (prose)
+  [18]="rank_metadata.csv"
 )
-# 16 (conjoint) runs with 05/06/07, before 02: conj_metadata.csv is 02's
-# liveness oracle for conj_biblio, exactly as comps_metadata.csv is for comps.
+# 16 (conjoint) and 18 (rankings) run with 05/06/07, before 02: conj_metadata.csv
+# and rank_metadata.csv are 02's liveness oracles for conj_biblio and
+# rank_biblio, exactly as comps_metadata.csv is for comps.
 # 17 runs last: it reads every other stage's output and judges the live corpus
 # against it, so it has to see the run's final CSVs.
-DEFAULT_ORDER=(01 05 06 07 16 02 03 08 10 11 12 13 14 15 17)
+DEFAULT_ORDER=(01 05 06 07 16 18 02 03 08 10 11 12 13 14 15 17)
 
 # Join key for the diff, per output file. Everything is keyed on `table` except
 # the two collections outputs (issue #1633): the registry is one row per

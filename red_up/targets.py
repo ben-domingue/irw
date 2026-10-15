@@ -22,11 +22,11 @@ ITEMS_SUFFIX = "__items.csv"
 #: names `redivis_config.R` uses. Note "pairs" is `irw_competitions`: there is
 #: no `irw_pairs` dataset and never has been.
 #:
-#: "text" and "conj" are the odd ones out: item text and conjoint are *shard
-#: lists* (`IRW_TEXT_DATASETS`, `IRW_CONJ_DATASETS`), not entries in
-#: `IRW_AUX_DATASETS`, for the same reason the core warehouses are a list --
-#: Redivis caps a dataset at 1000 tables. Their labels still live here so the
-#: menu reads uniformly.
+#: "text", "conj" and "rank" are the odd ones out: item text, conjoint and
+#: rankings are *shard lists* (`IRW_TEXT_DATASETS`, `IRW_CONJ_DATASETS`,
+#: `IRW_RANK_DATASETS`), not entries in `IRW_AUX_DATASETS`, for the same reason
+#: the core warehouses are a list -- Redivis caps a dataset at 1000 tables.
+#: Their labels still live here so the menu reads uniformly.
 AUX_LABELS = {
     "text": "item text (__items.csv)",
     "meta": "metadata tables",
@@ -34,6 +34,7 @@ AUX_LABELS = {
     "comp": "pairs / competitions",
     "sim": "simulated + synthetic",
     "conj": "conjoint experiments",
+    "rank": "rankings",
 }
 
 
@@ -62,10 +63,15 @@ class Target:
     def is_conj(self) -> bool:
         return self.source == "conj"
 
+    @property
+    def is_rank(self) -> bool:
+        return self.source == "rank"
+
 
 #: The aux sources declared as their own shard-list vector in redivis_config.R
 #: rather than as a key of IRW_AUX_DATASETS: source -> R symbol.
-SHARD_VECTORS = {"text": "IRW_TEXT_DATASETS", "conj": "IRW_CONJ_DATASETS"}
+SHARD_VECTORS = {"text": "IRW_TEXT_DATASETS", "conj": "IRW_CONJ_DATASETS",
+                 "rank": "IRW_RANK_DATASETS"}
 
 
 def find_config(start: Path | None = None) -> Path:
@@ -165,31 +171,36 @@ def load_registry(config_path: Path | None = None) -> tuple[str, list[Target]]:
             f"{sorted(unknown)}. Add them to AUX_LABELS in targets.py."
         )
 
-    # Conjoint shards (IRW_CONJ_DATASETS, since irw_conjoint neared the cap).
-    # Optional in the file so an older config, with `conj =` still inside
-    # IRW_AUX_DATASETS, keeps parsing; declaring it both ways is refused.
-    conj_shards: list[Target] = []
-    if re.search(r"^IRW_CONJ_DATASETS\s*<-", text, re.M):
-        if "conj" in aux:
+    # The other shard-list sources: conjoint (IRW_CONJ_DATASETS, since
+    # irw_conjoint neared the cap) and rankings (IRW_RANK_DATASETS, a shard
+    # list from its registration). Each vector is optional in the file so an
+    # older config, with `conj =` still inside IRW_AUX_DATASETS, keeps parsing;
+    # declaring a source both ways is refused.
+    shard_lists: dict[str, list[Target]] = {}
+    for source, symbol in SHARD_VECTORS.items():
+        if source == "text" or not re.search(rf"^{symbol}\s*<-", text, re.M):
+            continue
+        if source in aux:
             raise ConfigError(
-                "redivis_config.R declares conjoint twice: `conj` is a key in "
-                "IRW_AUX_DATASETS and IRW_CONJ_DATASETS also exists. Conjoint is "
-                "a shard list -- remove the `conj =` entry from IRW_AUX_DATASETS."
+                f"redivis_config.R declares {AUX_LABELS[source]} twice: `{source}` is a "
+                f"key in IRW_AUX_DATASETS and {symbol} also exists. It is a shard "
+                f"list -- remove the `{source} =` entry from IRW_AUX_DATASETS."
             )
-        conj_shards = [
-            Target(name=value, label=AUX_LABELS["conj"], kind="aux", source="conj")
-            for _, value in _parse_char_vector(text, "IRW_CONJ_DATASETS")
+        shards = [
+            Target(name=value, label=AUX_LABELS[source], kind="aux", source=source)
+            for _, value in _parse_char_vector(text, symbol)
         ]
-        if len(conj_shards) > 1:
-            conj_shards[-1] = Target(
-                name=conj_shards[-1].name,
-                label=f"{AUX_LABELS['conj']} -- newest shard",
-                kind="aux", source="conj",
+        if len(shards) > 1:
+            shards[-1] = Target(
+                name=shards[-1].name,
+                label=f"{AUX_LABELS[source]} -- newest shard",
+                kind="aux", source=source,
             )
+        shard_lists[source] = shards
 
     for source, label in AUX_LABELS.items():
-        if source == "conj" and conj_shards:
-            targets.extend(conj_shards)
+        if source in shard_lists:
+            targets.extend(shard_lists[source])
         elif source != "text" and source in aux:
             targets.append(
                 Target(name=aux[source], label=label, kind="aux", source=source)
@@ -295,6 +306,29 @@ def conj_target(targets: list[Target]) -> Target | None:
     return shards[-1] if shards else None
 
 
+def rank_shards(targets: list[Target]) -> list[Target]:
+    """Every rankings shard, oldest to newest."""
+    return [t for t in targets if t.is_rank]
+
+
+#: Where NEW rankings tables go: the rank twin of CONJ_DEFAULT, with the same
+#: meaning (None: the newest shard in IRW_RANK_DATASETS; a table that already
+#: lives in some rank shard is still updated there). One shard, irw_rank, at
+#: registration (2026-10-15); set this when a second shard exists and Ben
+#: wants the first filled to a particular count.
+RANK_DEFAULT: str | None = None
+
+
+def rank_target(targets: list[Target]) -> Target | None:
+    """The rankings destination: the pinned shard, else the newest."""
+    shards = rank_shards(targets)
+    if RANK_DEFAULT is not None:
+        for shard in shards:
+            if shard.name == RANK_DEFAULT:
+                return shard
+    return shards[-1] if shards else None
+
+
 #: Response data (the shards, plus nominal and simsyn) is `datastandard.md`'s
 #: schema. Item text is the shape `itemtext/join.R` writes. Two destinations
 #: are deliberately unchecked: `irw_competitions` holds pairwise/arena data
@@ -310,6 +344,12 @@ REQUIRED_COLUMNS: dict[str, tuple[str, ...]] = {
     #: profile (data/conjoint/README.md). checks.validate_for_target runs
     #: irw_validate.conjoint for this source instead of the core validator.
     "conj": ("id", "task", "profile"),
+    #: Rankings tables keep the core column names, but resp is a position and
+    #: a repeated id x item is allowed (data/rankings/README.md), so
+    #: checks.validate_for_target runs irw_validate.rankings for this source.
+    #: The column check alone cannot tell a rankings table from a core one;
+    #: the destination does.
+    "rank": ("id", "task", "item", "resp"),
 }
 
 

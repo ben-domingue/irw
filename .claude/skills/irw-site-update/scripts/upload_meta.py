@@ -44,6 +44,8 @@ FILE_TABLE_MAP = {
     "conj_metadata": "conj_metadata",       # 16_conjoint.R, 2026-10-07
     "conj_biblio": "conj_biblio",           # 02_biblio.R conj entry (auto file only), 2026-10-07
     "conj_outcomes": "conj_outcomes",       # 16_conjoint.R, from data/conjoint/design_outcomes.csv
+    "rank_metadata": "rank_metadata",       # 18_rankings.R, 2026-10-15
+    "rank_biblio": "rank_biblio",           # 02_biblio.R rank entry (auto file only), 2026-10-15
     "itemtext_metadata": "itemtext_metadata",  # 08_itemtext.R, 2026-08-02
     "collections": "collections",                # 10_collections.R, issue #1633
     "collection_members": "collection_members",  # 10_collections.R, issue #1633

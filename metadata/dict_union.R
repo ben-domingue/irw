@@ -33,7 +33,7 @@ DICT_AUTO_COLS <- c(
 ##A dictionary with no sheet behind it: zero rows in the sheet's own layout
 ##(core's column names, so normalize_dict_layout() has nothing to do). For a
 ##source that runs from its automated file alone -- conj, by Ben's call on
-##2026-10-07 -- union_dict() then turns every automated row into a dictionary
+##2026-10-07, and rank since its registration on 2026-10-15 -- union_dict() then turns every automated row into a dictionary
 ##row, exactly as it adds a table the sheet lacks for the other sources.
 empty_sheet_dict <- function() {
     cols <- setdiff(DICT_AUTO_COLS, c("DOI (for data)", "Source via"))

@@ -1,8 +1,8 @@
-# Rankings (`irw_rankings`, draft family)
+# Rankings (`irw_rank`, `source = "rank"`)
 
 Processing scripts and records for the **rankings** data family (`source = "rank"`): tables in which each respondent places a fixed set of options in order. The first source is FairVote's cast vote records from US ranked-choice elections; the layout is written to also hold Scottish, Australian and Irish ballot data and survey ranking questions.
 
-**Status (2026-10-15).** Draft standard with seven reference tables (`examples/`: six FairVote contests and one Eurovision jury show); 15 Eurovision tables built from `eurovision_jurors.py` (three more held under the 100-id floor). The family has no Redivis dataset yet, and nothing here is reachable from the packages or the site: Ben's ruling is to register the dataset, the package `source = "rank"` and the site page together once a decent number of tables exist. Until then, tables are built and checked locally with the two commands below, and a table counts as done when it passes the validator and has its rows in `design_tables.csv`, `candidates.csv` and the dictionary. The rulings that shaped this standard are logged at the end; the structural scouting that found the family is in `oneoff/structure-scouting-2026-10-13/`.
+**Status (2026-10-15).** Draft standard with seven reference tables (`examples/`: six FairVote contests and one Eurovision jury show); 15 Eurovision tables built from `eurovision_jurors.py` (three more held under the 100-id floor). The family is live: the Redivis dataset `irw_rank` (display name `IRW_rank`, reference id `93f5`; `IRW_RANK_DATASETS` in `metadata/redivis_config.R`, a shard list from day one) holds the first tables, both packages accept `source = "rank"` and ship a `rank_compress` helper (below), `red_up --dataset irw_rank` runs the validator and the design-row gate, `metadata/18_rankings.R` writes `rank_metadata`, and `metadata/02_biblio.R` reads the dictionary file. The site page (`rankings_standard.qmd`) is planned. Tables are built and checked locally with the two commands below, and a table counts as done when it passes the validator and has its rows in `design_tables.csv`, `candidates.csv` and the dictionary. The rulings that shaped this standard are logged at the end; the structural scouting that found the family is in `oneoff/structure-scouting-2026-10-13/`.
 
 ```
 python3 data/rankings/fairvote_cvr.py build <raw dir> <out dir> <table> [...]   # build FairVote tables
@@ -32,7 +32,7 @@ One row per respondent × task × marked position. The core column names are kep
 Rules:
 
 - **Skipped positions are not rows.** A skip is visible as a gap in `resp`. A ballot with no marks has no rows; the design record keeps `n_ballots_cast` and `n_ballots_with_marks` so denominators survive.
-- **Duplicate marks are kept as recorded.** A candidate marked at positions 1 and 2 gives two rows with the same `item` and different `resp`. Counting rules for duplicates differ by jurisdiction (most treat the later mark as a skip); the user applies theirs, the table does not. This is the one departure from one row per `id × item`, and it is the reason a core-style pivot of a rankings table needs care. A package helper that compresses positions and drops repeated marks is planned with the package work.
+- **Duplicate marks are kept as recorded.** A candidate marked at positions 1 and 2 gives two rows with the same `item` and different `resp`. Counting rules for duplicates differ by jurisdiction (most treat the later mark as a skip); the user applies theirs, the table does not. This is the one departure from one row per `id × item`, and it is the reason a core-style pivot of a rankings table needs care. The package helpers `irw_rank_compress()` (R) and `irw.rank_compress()` (Python) drop an item's later marks and renumber positions `1..k` within each ranking; the reserved values are never dropped.
 - **One position, one row.** Within `id × task`, `resp` values are unique (an overvote is already one row).
 - **`(overvote)`** is a row at the position where more than one candidate was marked; the source does not say which, so nothing else can be stored. **`(write-in)`** is a row with that item unless the source names the written-in candidate. Both are the one string in every table, like `(not shown)` in conjoint.
 - **One contest per table**: one option set, one electorate, one date (ruling 4). A survey with several ranking questions is one table with `task` distinguishing them.
@@ -49,20 +49,21 @@ Options that are not people (policies, schools, products in a survey ranking) ar
 - **At least 100 ballots with marks** per table (the 100-respondent floor).
 - **No voter identifiers.** A source's ballot ID or row index is dropped at re-keying.
 - **Table names:** election tables are `rcv_<jurisdiction>_<yyyymmdd>_<office>`, lowercase, at most 40 characters, with the abbreviations in `fairvote_cvr.py` (`nyc`, `sf`, `mpls`, `council`, `boe`, `hd`, `bp`, …). Other rankings use the usual `author_year_topic`.
-- **Size.** The largest FairVote files (New York City, San Francisco) are 100–125 MB wide and 2–3× that long, so they need the token upload path when the family goes to Redivis.
+- **Size.** The largest FairVote files (New York City, San Francisco) are 100–125 MB wide and 2–3× that long, so they need the token upload path.
+- **Uploading.** `red_up --dataset irw_rank <dir>`: a rankings table has `id`/`item`/`resp`, so only the destination tells `red_up` to run `irw_validate.rankings` (R1–R8 against `design_tables.csv`) instead of the core validator; a table with no design row is refused. New tables go to the newest shard (`RANK_DEFAULT` in `red_up/targets.py`).
 - **Downloads are untrusted.** Scripts read only the files named in their header; nothing shipped with a deposit is executed.
 
 ## Records kept for every table
 
 - **A script**, or for FairVote the table's row in `fairvote_manifest.csv` (the one script `fairvote_cvr.py` builds every FairVote table from its manifest row). A non-FairVote table gets its own script with the usual IRW header: citation, deposit DOI and licence, files read, what was dropped, and any count discrepancy with the source.
 - **A design record:** one row in `design_tables.csv` (below). `fairvote_cvr.py` writes it; other scripts append theirs.
-- **A dictionary row,** staged with `automated_finding/stage_dict_row.py --source rank`, which writes to `dictionary_auto_rank.csv`. `metadata/02_biblio.R` does not read that file yet (deferred with the Redivis work).
+- **A dictionary row,** staged with `automated_finding/stage_dict_row.py --source rank`, which writes to `dictionary_auto_rank.csv`. `metadata/02_biblio.R` reads that file alone (no sheet, as conjoint) and publishes `rank_biblio`.
 - **A row in `candidates.csv`,** the ledger of every file or deposit considered (claims and quirks go to tracking issue #3024), with status `todo`, `built`, `uploaded` or `held: <reason>`.
-- **A processing note** in `metadata/data_notes.csv` is deferred until the tables are on Redivis.
+- **A processing note** in `metadata/data_notes.csv`, once the table is on Redivis.
 
 ## Design record (`design_tables.csv`)
 
-The tables share a layout but not a meaning: how many positions a ballot offered, how many seats were filled and which counting rule applied all change what a ranking means. One row per table; when no source states a fact the value is `unknown`, never a guess.
+The tables share a layout but not a meaning: how many positions a ballot offered, how many seats were filled and which counting rule applied all change what a ranking means. One row per table; when no source states a fact the value is `unknown`, never a guess. `metadata/18_rankings.R` joins every column but `evidence` into `rank_metadata` (the record's `n_duplicate_marks` as `design_n_duplicate_marks`, beside the live count) and reports a record whose counts disagree with the live table.
 
 | column | |
 |---|---|
@@ -106,7 +107,7 @@ It also reports duplicate marks, ballots with a gap, and the marks-per-ballot di
 
 ## Using the tables
 
-- A person × item pivot is not safe without first handling duplicate marks and gaps; a helper is planned with the package work.
+- A person × item pivot is not safe without first handling duplicate marks and gaps: run `irw_rank_compress()` / `irw.rank_compress()` first. `irw_fetch(dedup = TRUE)` and `irw.fetch(dedup=True)` leave rankings tables alone for the same reason.
 - Plackett–Luce and Mallows fits want each ballot's ordered list of items by `resp`; overvote rows and write-in rows are usually dropped first.
 - Exhaustion and truncation analyses need `n_positions` and `n_candidates` from the design record, and `n_ballots_with_marks` as the denominator, not `n_ballots_cast`.
 

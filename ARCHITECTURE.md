@@ -39,8 +39,8 @@ stale.
 All data lives on Redivis under the account **`datapages`**. Everything else in
 this repository reads that from one place:
 
-> `IRW_OWNER`, `IRW_CORE_DATASETS`, `IRW_TEXT_DATASETS`, `IRW_CONJ_DATASETS` and
-> `IRW_AUX_DATASETS` in [`metadata/redivis_config.R`](metadata/redivis_config.R) are authoritative
+> `IRW_OWNER`, `IRW_CORE_DATASETS`, `IRW_TEXT_DATASETS`, `IRW_CONJ_DATASETS`,
+> `IRW_RANK_DATASETS` and `IRW_AUX_DATASETS` in [`metadata/redivis_config.R`](metadata/redivis_config.R) are authoritative
 > for the owner and the dataset names.
 
 > **Redivis caps any single dataset at 1000 tables.** That cap is the reason
@@ -71,10 +71,18 @@ the newest shard, since 2026-10-09); an existing table is always updated in the
 shard that holds it. `red_up` refuses any upload that would take a dataset past
 the 1000-table cap, counting its open draft.
 
-**Data families.** Every response table belongs to exactly one of five *data
-families*, and each family lives in its own Redivis dataset or shard list. Core
-and conjoint are shard lists; the other three are single datasets, only because
-none is near the cap:
+**Rankings shard the same way**, from the family's registration on 2026-10-15:
+`irw_rank`, … in `IRW_RANK_DATASETS` (one shard so far; the dataset's display
+name on Redivis is `IRW_rank`, and the reference id `93f5` is what resolves
+it). A shard list from day one because FairVote's cast vote records alone are
+657 contests. Conjoint's rules apply unchanged: newest-first, a name in two
+shards flagged by `18_rankings.R` and both packages, `RANK_DEFAULT` in
+`red_up/targets.py` for where NEW tables go.
+
+**Data families.** Every response table belongs to exactly one of six *data
+families*, and each family lives in its own Redivis dataset or shard list. Core,
+conjoint and rankings are shard lists; the other three are single datasets, only
+because none is near the cap:
 
 | Family | `source =` | Redivis dataset | What defines it | Standard |
 |---|---|---|---|---|
@@ -83,14 +91,9 @@ none is near the cap:
 | competitions | `comp` | `irw_competitions` | two agents meet and an outcome is recorded; also pairwise comparisons of fixed things, such as texts judged against each other | site `comps_standard.qmd` |
 | simsyn | `sim` | `irw_simsyn` | responses not produced by real people | site `simsyn.qmd` |
 | conjoint | `conj` | `irw_conjoint`, `_2`, … | respondent × task × profile choices or ratings, profiles randomly assembled from attributes | `data/conjoint/README.md`, site `conjoint_standard.qmd` |
+| rankings | `rank` | `irw_rank`, … | respondent × task × marked position, `resp` a rank (ranked-choice ballots, jury rankings, survey ranking questions) | `data/rankings/README.md`, site `rankings_standard.qmd` (planned) |
 
-A sixth family, **rankings** (`source = "rank"`, respondent × task × marked
-position, `resp` a rank), is a draft: its standard, validator and reference tables
-are in `data/rankings/` and `irw_validate/rankings.py`, and it has no Redivis
-dataset, package or site support yet (Ben, 2026-10-15: register all three
-together once there are enough tables).
-
-Four families are defined by the shape of the data; simsyn is defined by
+Five families are defined by the shape of the data; simsyn is defined by
 provenance (a simulated table can be dichotomous, nominal, anything). The
 families are still exclusive in practice, one table to one dataset. The line
 between competitions and conjoint is what is compared: competitions compare the
@@ -105,6 +108,15 @@ than the core validator, `16_conjoint.R` writes `conj_metadata` and
 `conj_outcomes`, and their biblio comes from the automated dictionary file
 alone, with no sheet.
 
+Rankings tables keep `id`/`item`/`resp`, so the core tooling reads them; what
+differs is the meaning: `resp` is a position as recorded, skips are gaps and a
+candidate marked twice is two rows. `red_up` checks them with
+`irw_validate.rankings` and a design-row gate (the destination `--dataset
+irw_rank` selects that, since nothing in the shape can), `18_rankings.R` writes
+`rank_metadata` (counts plus the design record), their biblio comes from
+`automated_finding/dictionary_auto_rank.csv` alone, and both packages ship a
+`rank_compress` helper that renumbers positions and drops repeated marks.
+
 **Auxiliary datasets** hold no response data and describe the tables in the
 families: `irw_meta` (all metadata, biblio, tags and collections tables) and
 item text. "Auxiliary" means only these. Groups inside a family, such as the
@@ -117,7 +129,7 @@ is the answer:
 
 ```r
 source("metadata/redivis_config.R")
-IRW_CORE_DATASETS; IRW_TEXT_DATASETS; IRW_CONJ_DATASETS; IRW_AUX_DATASETS
+IRW_CORE_DATASETS; IRW_TEXT_DATASETS; IRW_CONJ_DATASETS; IRW_RANK_DATASETS; IRW_AUX_DATASETS
 ```
 
 Until August 2026 all of this lived under the personal Redivis account
@@ -129,11 +141,11 @@ older scripts still work.
 > `src/irw/config.py` in `Python-pkg`. All three describe themselves as a single
 > source of truth. They are reconcilable — this repo carries plain dataset
 > *names*, the two packages additionally carry version *hashes* — but a new shard
-> must be added in all three, and each file carries *three* shard lists, core,
-> item text and conjoint (`IRW_CORE_DATASETS`/`IRW_TEXT_DATASETS`/`IRW_CONJ_DATASETS`,
-> `.irw_datasource_specs$core`/`.irw_itemtext_specs`/`.irw_datasource_specs$conj`,
-> `MAIN_REFS`/`ITEMTEXT_REFS`/`CONJ_REFS`), so adding a shard means one edit per
-> file, in all three files, and the parity check compares order for all three lists.
+> must be added in all three, and each file carries *four* shard lists, core,
+> item text, conjoint and rankings (`IRW_CORE_DATASETS`/`IRW_TEXT_DATASETS`/`IRW_CONJ_DATASETS`/`IRW_RANK_DATASETS`,
+> `.irw_datasource_specs$core`/`.irw_itemtext_specs`/`.irw_datasource_specs$conj`/`.irw_datasource_specs$rank`,
+> `MAIN_REFS`/`ITEMTEXT_REFS`/`CONJ_REFS`/`RANK_REFS`), so adding a shard means one edit per
+> file, in all three files, and the parity check compares order for all four lists.
 >
 > They drifted once already, undetected for months: `Python-pkg` had no
 > reference to `irw_nominal`, so that source was reachable from R and not from
@@ -155,7 +167,7 @@ metadata that is not derivable from the data itself:
 | Sheet | What it holds |
 |---|---|
 | Data Dictionary — core | Descriptions, origins, licenses, references. Read by `metadata/02_biblio.R` and many other call sites (`git grep` its sheet id) |
-| Data Dictionary — competitions, nominal, simsyn | The same, one per family. Conjoint has no sheet (`automated_finding/dictionary_auto_conj.csv` only) |
+| Data Dictionary — competitions, nominal, simsyn | The same, one per family. Conjoint and rankings have no sheet (`automated_finding/dictionary_auto_conj.csv`, `dictionary_auto_rank.csv` only) |
 | IRW Tags | The eight hand-annotated tag columns. Read by `metadata/03_tags.R` |
 | Nominal tags | The same, for the `nominal` source |
 | Item text index | Not data: a table of *links*. `itemtext/join.R` reads a URL from each of columns 3–6 and fetches four further per-table tabs (`instrument`, `sections`, `items`, `responses`), then merges them |
@@ -519,7 +531,7 @@ directory's README (where there is one) goes further:
 
 | Path | What it is |
 |---|---|
-| `data/` | One script per dataset (R, Python, Stata). Subfolders group scripts by data family or by group: `competitions/`, `nominal/`, `simsyn/`, `conjoint/` for the four families other than core; `trials/` for trial-level sports tables; `gilbert_hte/` for the IL-HTE `gilbert_meta_*` series; `pisa/` for PISA; `tests/` for the CI checks on the ENEM scoring helpers. Older top-level scripts predate the naming rule in `datastandard.md` and keep their names, because `metadata/table_scripts.csv` and the MCP find scripts by path |
+| `data/` | One script per dataset (R, Python, Stata). Subfolders group scripts by data family or by group: `competitions/`, `nominal/`, `simsyn/`, `conjoint/`, `rankings/` for the five families other than core; `trials/` for trial-level sports tables; `gilbert_hte/` for the IL-HTE `gilbert_meta_*` series; `pisa/` for PISA; `tests/` for the CI checks on the ENEM scoring helpers. Older top-level scripts predate the naming rule in `datastandard.md` and keep their names, because `metadata/table_scripts.csv` and the MCP find scripts by path |
 | `audit/2401/` | The #2401 retroactive corpus audit: `RULES.md` (the audit's frozen rules), detectors, pilot and sample dossiers, triage and repair builders. A workstream folder, not a pipeline stage |
 | `tools/withdrawals/`, `tools/repairs/` | One already-run script per withdrawal or one-off repair, kept because provenance records cite them by path. `tools/withdrawals/ledger.py` is the live part: withdrawal scripts call it to append to `itemtext/withdrawals.csv` |
 | `collections/` | `registry.csv` and `curated/` are the data `10_collections.R` reads (#1633); `scout_instruments.py` and `presort_instruments.py` propose curated members for human review |

@@ -1,4 +1,4 @@
-"""Checks for rankings tables (the draft `irw_rankings` family, `source = "rank"`).
+"""Checks for rankings tables (the `irw_rank` family, `source = "rank"`).
 
 A rankings table keeps the core column names but `resp` is a position, not a
 score: one row per respondent x task x marked position, `item` the option ranked
@@ -8,9 +8,9 @@ R1-R8 so they cannot be confused with the core standard's C1-C7 or conjoint's J1
 
 The core checks would misread these tables (a position is not an ordered
 response, and a repeated item within a ballot is allowed), so this module runs
-instead of them. Nothing uploads from it yet: the family has no Redivis dataset,
-and `red_up` does not know the source. It exists so that a collaborator can check
-a table before sending it:
+instead of them: `red_up --dataset irw_rank` calls validate_rankings_file() with
+the table's design row (checks.run_rankings_validator), and a collaborator can
+check a table before sending it:
 
     python3 -m irw_validate.rankings table.csv [table.csv ...]
     python3 -m irw_validate.rankings --design data/rankings/design_tables.csv table.csv

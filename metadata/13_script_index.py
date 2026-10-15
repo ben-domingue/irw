@@ -57,6 +57,7 @@ CATALOGUES = (
     "nominal_metadata.csv",
     "simsyn_metadata.csv",
     "conj_metadata.csv",   # written by 16_conjoint.R; absent until that stage runs
+    "rank_metadata.csv",   # written by 18_rankings.R; absent until that stage runs
 )
 
 

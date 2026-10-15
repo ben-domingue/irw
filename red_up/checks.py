@@ -228,6 +228,75 @@ def check_conj_design(report: FileReport) -> tuple[list[str], list[str]]:
     return errors, warnings
 
 
+def run_rankings_validator(path: Path, design: dict | None = None) -> tuple[list[str], list[str]]:
+    """The rankings-table checks (irw_validate.rankings). -> (errors, warnings)
+
+    A rankings table has id/item/resp, so the core validator would read it --
+    and misread it: resp is a position, not an ordered response, and a
+    repeated id x item is a duplicate mark, kept by the standard. Same failure
+    rules as run_validator. `design` is the table's row of
+    data/rankings/design_tables.csv (from rank_design); with it R7 and R8
+    compare the table to its record, without it they are skipped, and
+    check_rank_design reports the missing row as an error.
+    """
+    sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+    try:
+        from irw_validate.rankings import validate_rankings_file
+    except ImportError as exc:
+        return ([f"rankings validator unavailable ({exc}) -- install pandas, or pass "
+                 f"--no-validate to upload without a format check"], [])
+    try:
+        report = validate_rankings_file(path, design=design)
+    except Exception as exc:
+        return ([f"rankings validator could not read this file: {exc}"], [])
+    return ([f"{f.check}: {f.message}" for f in report.errors],
+            [f"{f.check}: {f.message}" for f in report.warnings])
+
+
+#: The rankings design records (data/rankings/README.md, "Design record").
+#: IRW_RANK_DESIGN_DIR points the check at another directory, for tests;
+#: production never sets it.
+def _rank_design_dir() -> Path:
+    env = os.environ.get("IRW_RANK_DESIGN_DIR")
+    return Path(env) if env else Path(__file__).resolve().parent.parent / "data" / "rankings"
+
+
+def rank_design(table: str) -> dict[str, str] | None:
+    """This table's row of design_tables.csv, or None when it has none or the
+    file cannot be read (check_rank_design reports both as errors)."""
+    try:
+        with open(_rank_design_dir() / "design_tables.csv", newline="", encoding="utf-8") as f:
+            for r in csv.DictReader(f):
+                if r.get("table") == table:
+                    return r
+    except OSError:
+        return None
+    return None
+
+
+def check_rank_design(report: FileReport) -> tuple[list[str], list[str]]:
+    """A rankings table needs its design record before it goes up. -> (errors, warnings)
+
+    Without a row in design_tables.csv the table cannot be pooled with the
+    others (rank_metadata would carry NA for how many positions the ballot
+    offered, how many seats were filled and which counting rule applied, which
+    is what a ranking means), and nothing later forces anyone to come back.
+    The rules of the record are in data/rankings/README.md, "Design record";
+    irw_validate.rankings R7/R8 check the table against the row's counts.
+    Unreadable records are an error, never a pass.
+    """
+    d = _rank_design_dir()
+    try:
+        with open(d / "design_tables.csv", newline="", encoding="utf-8") as f:
+            tables = {r["table"] for r in csv.DictReader(f)}
+    except (OSError, KeyError) as exc:
+        return ([f"rank design records unreadable in {d} ({exc})"], [])
+    if report.table not in tables:
+        return ([f"rank_design: {report.table} has no row in design_tables.csv "
+                 f"(data/rankings/README.md, \"Design record\")"], [])
+    return ([], [])
+
+
 def validate_for_target(report: FileReport, target: Target,
                         enabled: bool = True, context: dict | None = None) -> None:
     """Run the full IRW format validator, where the target expects that format.
@@ -256,6 +325,14 @@ def validate_for_target(report: FileReport, target: Target,
         report.errors.extend(errors)
         report.warnings.extend(warnings)
         errors, warnings = check_conj_design(report)
+        report.errors.extend(errors)
+        report.warnings.extend(warnings)
+        return
+    if target.source == "rank":
+        errors, warnings = run_rankings_validator(report.path, rank_design(report.table))
+        report.errors.extend(errors)
+        report.warnings.extend(warnings)
+        errors, warnings = check_rank_design(report)
         report.errors.extend(errors)
         report.warnings.extend(warnings)
         return

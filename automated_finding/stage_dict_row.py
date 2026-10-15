@@ -70,11 +70,11 @@ SOURCE_FILES = {
     "comps": "dictionary_auto_comps.csv",
     "nom": "dictionary_auto_nom.csv",
     "sim": "dictionary_auto_sim.csv",
-    ##Conjoint experiments (irw_conjoint). Staged here before the source is
-    ##registered; metadata/02_biblio.R does not read this file yet.
+    ##Conjoint experiments (irw_conjoint). Read by metadata/02_biblio.R alone,
+    ##with no sheet (dbs$conj, since 2026-10-07).
     "conj": "dictionary_auto_conj.csv",
-    ##Rankings (draft irw_rankings family, data/rankings/README.md). Staged here
-    ##before the source exists on Redivis; metadata/02_biblio.R does not read it yet.
+    ##Rankings (irw_rank, data/rankings/README.md). Read by metadata/02_biblio.R
+    ##alone, with no sheet, as conj (dbs$rank, since 2026-10-15).
     "rank": "dictionary_auto_rank.csv",
 }
 

@@ -12,6 +12,7 @@ datasets <- rbind(
   data.frame(dataset = IRW_AUX_DATASETS[c("comp", "nom", "sim")],
              group   = c("comps", "nominal", "simsyn")),
   data.frame(dataset = IRW_CONJ_DATASETS, group = "conjoint"),
+  data.frame(dataset = IRW_RANK_DATASETS, group = "rankings"),
   data.frame(dataset = IRW_TEXT_DATASETS, group = "itemtext")
 )
 
