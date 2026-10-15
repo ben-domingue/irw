@@ -4220,3 +4220,4 @@ zubair_2021_political_support,data/zubair_2021_psm.py
 zubair_2021_social_impact,data/zubair_2021_psm.py
 zvi_2022_legal_judgment,data/zvi_2022_harassment_perception.py
 zvi_2022_rei,data/zvi_2022_harassment_perception.py
+vocabulary_iq_survey,data/vocabulary_iq.R

@@ -9,8 +9,8 @@
 ##`text` codes: the two words joined by "+"; "don't know" where the source has -1
 ##(the respondent chose "don't know"); empty where the source has 0 (no response).
 ##The core table scores both -1 and 0 as missing; the distinction survives only here.
-##Items 46-75 (s1-s30, the optional 1-5 personality survey) are carried with an
-##empty `text`, so id/item/resp match the core table row for row.
+##The optional 1-5 personality survey that the source file bundles with the test is
+##its own table since 2026-10 (vocabulary_iq_survey, #3032); it has no nominal companion.
 library(dplyr); library(tidyr); library(readr); library(stringr)
 
 zip <- tempfile(fileext = ".zip")
@@ -47,7 +47,7 @@ pair <- function(q, code) {
 }
 
 ## Same id and item numbering as data/vocabulary_iq.R: id = row number, items in
-## column order q1-q45 then s1-s30 -> 1-75.
+## column order q1-q45 -> 1-45.
 qs <- paste0("q", 1:45)
 text <- raw |>
   mutate(id = row_number()) |>
@@ -60,9 +60,9 @@ text <- raw |>
 ## three-word selection (all scored wrong in core); `text` keeps what was selected.
 stopifnot(all(lengths(strsplit(na.omit(text$text[text$text != "don't know"]), "+", fixed = TRUE)) %in% 1:3))
 
-core <- irw::irw_fetch("vocabulary_iq")
+core <- irw::irw_fetch("vocabulary_iq") |> filter(item <= 45)  # filter is a no-op once the split is released
 nom <- core |> left_join(text, by = c("id", "item"))
-stopifnot(nrow(nom) == nrow(core), nrow(core) == 12173 * 75)
+stopifnot(nrow(nom) == nrow(core), nrow(core) == 12173 * 45)
 ## every scored vocabulary answer has a pair, and resp = 1 exactly where it is the keyed pair
 chk <- nom |> filter(item <= 45, !is.na(resp))
 stopifnot(!any(is.na(chk$text)))
