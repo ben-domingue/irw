@@ -3,6 +3,23 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## From the 2026-10-14 repos mode-3 batch (15 new terms x 9 languages)
+
+- [x] **191 tables (1,607,513 responses) + 82 item text tables uploaded** (ben-domingue, confirmed
+  2026-10-15; response tables to the new `item_response_warehouse_7`, item text to `irw_text_3`;
+  `uploaded=2026-10-15` stamped on the 82 `itemtext_provenance.csv` rows). Table list in
+  `runs/batch_tables_2026-10-14.txt`. The 40 + 36 openESM files parked in
+  `runs/openesm_pending_2026-10-13/` are a separate stream, not uploaded by this batch.
+- [ ] **Issues-page entries at upload:** 39 tables with public_note set, listed in BATCH_LOG 2026-10-14b.
+- [ ] **Covariate labels:** `build.py` after the release and commit covariate_labels.csv (harvest run at
+  db501a7c for the 25 .sav/.dta scripts).
+- [ ] **Rulings wanted** (none blocks upload): see BATCH_LOG 2026-10-14b. ben-domingue ruled 2026-10-15
+  that the 16 opaque-block tables (yao x6, li_2026_vocational x4, li_2026_efl_listening x6) ship as-is.
+- [ ] `prasetiyo_2022_act` item text held at `itemtext/fixes/repos_2026-10-14_A/` (verify FAIL:
+  nine reversed items). All 77 leads carry a status; none unworked.
+- [ ] The "arg must be a list, tuple, 1-d array, or Series" reader fault hit 12 more `error` rows
+  (36 across the 2026-10-10/11/14 runs); worth a look at `load_table()`.
+
 ## From the 2026-10-11 repos mode-3 batch (15 new terms x 9 languages)
 
 - [x] **83 tables (2,006,984 responses) + 32 item text tables uploaded** (ben-domingue, confirmed 2026-10-11; `uploaded=2026-10-11` stamped) from
@@ -16,8 +33,6 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   at commit for the 15 .sav/.dta scripts, see BATCH_LOG 2026-10-11d).
 - [ ] **Rulings wanted** (none blocks upload): see BATCH_LOG 2026-10-11d.
 - [ ] 1 unworked lead in `leads/repos_leads_2026-10-11.csv`: DVN/G7EOGT (Ciuk TESS 2002/2010, needs the TESS codebook).
-- [ ] The "arg must be a list, tuple, 1-d array, or Series" reader fault hit 13 more `error` rows
-  (24 across the 2026-10-10 and 2026-10-11 runs); worth a look at `load_table()`.
 
 ## From the 2026-10-10 repos mode-3 batch (15 new terms x 9 languages)
 
