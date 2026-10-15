@@ -356,6 +356,7 @@ file holds which fact.
 | `metadata/column_docs.csv` | Per (table, column): does `datastandard.md` define it, and which source column did the build script rename into it. The definition text is not copied: the page joins it from `datastandard.md` at render time | `metadata/14_column_docs.py` (stage 14) from `metadata.csv`'s `variables`, `table_scripts.csv` (stage 13) and the `data/` scripts. Core tables only: the other catalogues carry no column list | every pipeline run |
 | `metadata/covariate_labels.csv` | What each code of a coded `cov_*` column means, using the source's own value labels verbatim (1 = hombre). Also an irw_meta table | `metadata/covariate_labels/harvest.py` re-runs `data/` scripts that read SPSS/Stata files, then `build.py` turns the logs into the CSV. Scripts the harvest cannot re-run are entered by hand in `manual.csv` (with `not_harvestable.tsv` recording them as checked); `institutions.csv` decides which code lists are withheld | **by hand** (section 6): it downloads sources, so it cannot run in CI |
 | `metadata/codebook_links.csv` (+ `codebook_links_checked.csv`, what was swept) | A link to the source deposit's own codebook file, never a guess: `how_found` records the evidence | `metadata/find_codebook_links.py`. Stage 15 runs it `--new-only` on new tables; the wider crawls (#2787, #2792) are hand runs. `automated_finding/stage_dict_row.py --codebook-url` records a codebook a person found at ingest in `automated_finding/codebook_at_ingest.csv`, which it trusts first; `metadata/codebook_by_review.csv` does the same for statistics-office codebooks found by review (#2787 step 3) | weekly for new tables; by hand for crawls and reviews |
+| `metadata/coverage_matrix.csv` (+ `coverage_report.md`) | Per LIVE table, which of the things a table should have it has: metadata row, citation, licence, page (derived from the site's rule), tags, build script, column docs, codebook link, shipped item text, one `itemtext_status`, and `n_gaps`. A work queue over one denominator, not a scorecard; definitions in the script header | `metadata/17_coverage.R` (stage 17, last in `DEFAULT_ORDER`; advisory so its summary reaches the pipeline PR body). Report-only | every pipeline run; a human reads `coverage_report.md` **monthly** and turns its worst rows into issues |
 
 Two guards keep these honest. `metadata/check_label_harvest.py` runs in the
 `contract` job and warns, without failing, when a PR's script reads a labelled
@@ -472,6 +473,9 @@ be deleted from a session — https://claude.ai/code/routines.
 
 ### What is deliberately NOT scheduled
 
+- **The monthly coverage review.** Stage 17 writes `metadata/coverage_report.md`
+  every run; reading it and filing the work is a human step, once a month
+  (2026-10-15). Nothing files issues from it, by design: v1 is report-only.
 - **`upload_meta.py`, and the Publish click.** Section 4: that click is always a
   human action. `drift-report.yml` reports when the warehouse has fallen behind
   the repository; it never publishes.
