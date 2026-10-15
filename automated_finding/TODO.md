@@ -5,9 +5,13 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
 ## From the 2026-10-14 repos mode-3 batch (15 new terms x 9 languages)
 
-- [ ] **191 tables (1,607,513 responses) + 82 item text tables need uploading** from
-  `automated_finding/irw_output/` and `itemtext_output/` (response tables first; list in
-  `runs/batch_tables_2026-10-14.txt`). The staging folders now hold ONLY this batch: the 40 + 36
+- [ ] **191 tables (1,607,513 responses) + 82 item text tables need uploading** -- in two runs,
+  because shard 5 is at 870 live tables and Redivis caps a dataset at 1,000: `irw_output/` holds 120
+  tables for `item_response_warehouse_5` (to ~990), `irw_output_shard7/` holds 71 for a NEW
+  `item_response_warehouse_7` that ben-domingue must create on Redivis and that then needs
+  registering in `metadata/redivis_config.R` (`IRW_CORE_DATASETS`) with `CORE_DEFAULT` repointed
+  (`red_up/targets.py`). Lists in `runs/batch_tables_2026-10-14_shard{5,7}.txt`; `itemtext_output/`
+  (82) goes to `irw_text_3` after both. Deposits are kept whole within a shard. The staging folders now hold ONLY this batch: the 40 + 36
   openESM files from the 2026-10-13 ingest PRs (#2936-#2975, not live yet) were moved to
   `runs/openesm_pending_2026-10-13/{irw_output,itemtext_output}/` on 2026-10-15 so `red_up` cannot
   mix the two streams; upload those separately. Stamp `uploaded=` in `itemtext_provenance.csv`
