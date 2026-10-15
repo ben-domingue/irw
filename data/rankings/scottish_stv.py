@@ -10,7 +10,7 @@
 ##File layout (repo README): row 1 = `n_candidates,n_seats`; then one row per DISTINCT ranking,
 ##`count,c_i,c_j,...` (candidate numbers in preference order); then one row per candidate
 ##(`"Candidate k","Name","Party"`); last row the ward name. A weighted profile, so this script
-##settles rule R5 by EXPANDING: each distinct ranking becomes `count` ballots with their own `id`
+##follows rule R5 (Ben, 2026-10-15) by EXPANDING: each distinct ranking becomes `count` ballots with their own `id`
 ##(the family's `id` is one ballot everywhere else, n_ballots_with_marks must equal the id
 ##count, and a ward is at most a few tens of thousands of ballots). No cov_weight column.
 ##Candidates are coded c01.. alphabetically on the printed name (names and parties not stored).
@@ -84,7 +84,7 @@ def build(raw_dir: Path, out_dir: Path, paths: list[str]) -> int:
                   "write_in_allowed": "no", "candidate_order": "fixed",
                   "evidence": f"scot-elex {p} at commit {COMMIT[:7]} (McCune BLT files from the council's published "
                               f"preference profile); seats from the file header; weighted profile expanded to one id "
-                              f"per ballot (rule R5); the profile holds only ballots with at least one preference, so "
+                              f"per ballot (rule R5, Ben 2026-10-15); the profile holds only ballots with at least one preference, so "
                               f"n_ballots_cast = n_ballots_with_marks; candidates listed in surname order as on the "
                               f"statutory ballot paper (fixed); no write-ins on Scottish council ballots; counts "
                               f"computed by scottish_stv.py"}
