@@ -37,13 +37,16 @@ data goes to `item_response_warehouse_7`: unpinned 2026-10-15 with shards 5
 and 6 both near the cap). A table that already exists is still updated where it lives. The menu shows every dataset in
 `metadata/redivis_config.R` — Enter takes the default.
 
-Response data, item text and conjoint are **shard lists**, because Redivis caps
-a dataset at 1000 tables (`ARCHITECTURE.md` §2). Another item-text or conjoint
-shard is a one-line edit to `IRW_TEXT_DATASETS` / `IRW_CONJ_DATASETS`; nothing
-in this package changes. Conjoint uploads name their shard with `--dataset`;
+Response data, item text, conjoint and rankings are **shard lists**, because
+Redivis caps a dataset at 1000 tables (`ARCHITECTURE.md` §2). Another item-text,
+conjoint or rankings shard is a one-line edit to `IRW_TEXT_DATASETS` /
+`IRW_CONJ_DATASETS` / `IRW_RANK_DATASETS`; nothing in this package changes.
+Conjoint and rankings uploads name their shard with `--dataset` (a rankings
+table has `id`/`item`/`resp`, so nothing in its shape says it is not response
+data; `--dataset irw_rank` is what routes it to the rankings validator);
 `CONJ_DEFAULT` in `targets.py` (None: the newest shard, `irw_conjoint_2` since
-2026-10-09) records where NEW conjoint tables go, and a table already in another
-conjoint shard is updated there.
+2026-10-09) and `RANK_DEFAULT` (None) record where NEW tables of each family
+go, and a table already in another shard of its family is updated there.
 
 **Refuses to pass the table cap.** Redivis caps a dataset at 1000 tables and
 refuses the 1001st mid-run, after the earlier tables have gone in. Before
@@ -98,9 +101,9 @@ a human click after reviewing the diff (`ARCHITECTURE.md` §4).
 
 | Thing | Source |
 |---|---|
-| Owner and dataset names | `metadata/redivis_config.R`, *parsed*, not restated (`IRW_CORE_DATASETS`, `IRW_TEXT_DATASETS`, `IRW_CONJ_DATASETS`, `IRW_AUX_DATASETS`) |
+| Owner and dataset names | `metadata/redivis_config.R`, *parsed*, not restated (`IRW_CORE_DATASETS`, `IRW_TEXT_DATASETS`, `IRW_CONJ_DATASETS`, `IRW_RANK_DATASETS`, `IRW_AUX_DATASETS`) |
 | Write token | `irw_secrets.load_write_token()` → `~/.config/irw/redivis-write.env` |
-| Required columns | `datastandard.md`; per source in `targets.REQUIRED_COLUMNS` (`conj`: `id, task, profile`, checked by `irw_validate.conjoint` instead of the core validator; see `data/conjoint/README.md`) |
+| Required columns | `datastandard.md`; per source in `targets.REQUIRED_COLUMNS` (`conj`: `id, task, profile`, checked by `irw_validate.conjoint` instead of the core validator; see `data/conjoint/README.md`; `rank`: `id, task, item, resp`, checked by `irw_validate.rankings` plus a design-row gate; see `data/rankings/README.md`) |
 
 There is no dataset list in this package. `redivis_config.R` is already
 authoritative (`ARCHITECTURE.md` §5) and the project already carries three

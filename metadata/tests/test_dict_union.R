@@ -1090,6 +1090,13 @@ local({
           "Public Reshare? survives the union, so biblio does not drop the rows")
     check(all(!is.na(u$`DOI (for data)`) & nzchar(u$`DOI (for data)`)),
           "the deposit DOI column comes through")
+    ##rank runs the same way (02_biblio.R dbs$rank, since 2026-10-15).
+    auto_r <- read_dict_auto("../automated_finding/dictionary_auto_rank.csv", "rank")
+    u_r <- suppressMessages(union_dict(e, auto_r, "rank"))$dict
+    check(nrow(u_r) == nrow(auto_r) && nrow(u_r) >= 1L,
+          "every automated rank row becomes a dictionary row")
+    check(all(u_r$`Public Reshare?` == "Public"),
+          "rank: Public Reshare? survives the union")
 })
 
 ##------------------------------------------------------------------ result ---

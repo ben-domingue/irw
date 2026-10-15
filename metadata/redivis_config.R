@@ -60,12 +60,26 @@ IRW_CONJ_DATASETS <- c(
   "irw_conjoint_2"
 )
 
+## Rankings shards, oldest to newest. Ranked-choice ballots, jury rankings and
+## survey ranking questions in their own layout, see data/rankings/README.md.
+## A shard list from day one, October 2026: FairVote's cast vote records alone
+## are 657 contests, so the 1000-table cap is a matter of time. Clients search
+## these newest-first. The dataset's display name on Redivis is IRW_rank, the
+## reference id 93f5 resolves it, and Redivis matches names case-insensitively.
+## Append a shard here only once it has a PUBLISHED release, and together with
+## Rpkg's .irw_datasource_specs$rank and Python-pkg's RANK_REFS, in that order.
+## Where NEW rankings tables go is RANK_DEFAULT in red_up/targets.py.
+## No parentheses in comments inside this c, red_up/targets.py reads up to the first one.
+IRW_RANK_DATASETS <- c(
+  "irw_rank"
+)
+
 ## The data families other than core, by the `source` name the irw package uses,
 ## plus irw_meta, which is auxiliary and holds no response data. ARCHITECTURE.md
 ## section 2 defines the families.
 ##
-## Item text and conjoint are deliberately NOT here: each is a shard list
-## (IRW_TEXT_DATASETS, IRW_CONJ_DATASETS above), and this vector is named, so it
+## Item text, conjoint and rankings are deliberately NOT here: each is a shard
+## list (IRW_TEXT_DATASETS, IRW_CONJ_DATASETS, IRW_RANK_DATASETS above), and this vector is named, so it
 ## could only ever hold one entry per family. Naming a dataset in both places
 ## would duplicate it within a single file -- the very thing ARCHITECTURE.md
 ## section 2 warns about; red_up refuses such a config.

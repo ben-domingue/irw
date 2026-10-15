@@ -40,6 +40,9 @@ IRW_CONJ_DATASETS <- c(
   "irw_conjoint",
   "irw_conjoint_2"
 )
+IRW_RANK_DATASETS <- c(
+  "irw_rank"
+)
 IRW_AUX_DATASETS <- c(
   meta = "irw_meta",
   sim  = "irw_simsyn",
@@ -70,6 +73,9 @@ RPKG_R = """
   conj = list(
     list(user = "datapages", dataset = "irw_conjoint:5wjx"),
     list(user = "datapages", dataset = "irw_conjoint_2:zzzz")
+  ),
+  rank = list(
+    list(user = "datapages", dataset = "irw_rank:93f5")
   )
 )
 .irw_meta_spec <- list(user = "datapages", dataset = "irw_meta:bdxt")
@@ -98,6 +104,9 @@ CONJ_REFS: ClassVar[Tuple[Tuple[str, str], ...]] = (
     ("datapages", "irw_conjoint:5wjx"),
     ("datapages", "irw_conjoint_2:zzzz"),
 )
+RANK_REFS: ClassVar[Tuple[Tuple[str, str], ...]] = (
+    ("datapages", "irw_rank:93f5"),
+)
 ITEMTEXT_REFS: ClassVar[Tuple[Tuple[str, str], ...]] = (
     ("datapages", "irw_text:07b6"),
     ("datapages", "irw_text_2:ae47"),
@@ -120,6 +129,7 @@ EXPECTED = {
     "comp": ["irw_competitions"],
     "nom": ["irw_nominal"],
     "conj": ["irw_conjoint", "irw_conjoint_2"],
+    "rank": ["irw_rank"],
 }
 
 
@@ -202,8 +212,8 @@ class CompareTests(unittest.TestCase):
         self.assertIn("ORDER", problems[0])
 
     def test_unsharded_source_order_is_not_compared(self):
-        """`core`, `text` and `conj` are shard lists; the rest are single datasets."""
-        self.assertEqual(ccp.SHARDED, ("core", "text", "conj"))
+        """`core`, `text`, `conj` and `rank` are shard lists; the rest are single datasets."""
+        self.assertEqual(ccp.SHARDED, ("core", "text", "conj", "rank"))
 
     def test_conj_shard_order_is_compared(self):
         rpkg = dict(EXPECTED)
@@ -211,6 +221,19 @@ class CompareTests(unittest.TestCase):
         problems = ccp.compare(self.configs(rpkg=rpkg))
         self.assertEqual(len(problems), 1)
         self.assertIn("conj", problems[0])
+        self.assertIn("ORDER", problems[0])
+
+    def test_rank_missing_from_one_file_is_reported(self):
+        """rank was registered as a shard list from day one (October 2026)."""
+        pypkg = {k: v for k, v in EXPECTED.items() if k != "rank"}
+        problems = ccp.compare(self.configs(pypkg=pypkg))
+        self.assertEqual(len(problems), 1)
+        self.assertIn("rank", problems[0])
+        self.assertIn("MISSING", problems[0])
+        rpkg = dict(EXPECTED)
+        rpkg["rank"] = ["irw_rank_2", "irw_rank"]
+        problems = ccp.compare(self.configs(rpkg=rpkg))
+        self.assertEqual(len(problems), 1)
         self.assertIn("ORDER", problems[0])
 
 

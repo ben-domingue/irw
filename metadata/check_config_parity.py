@@ -28,7 +28,7 @@ legitimately differ in content -- redivis_config.R carries no hashes by design
 packages pin the same version hash is a real but separate question, and not
 always a defect: one package may pin an older dataset version deliberately.
 
-Order is compared for the sharded sources (`core`, `text`, `conj`). It is not
+Order is compared for the sharded sources (`core`, `text`, `conj`, `rank`). It is not
 decoration: all three files declare shards oldest-to-newest and every client
 searches them newest-first so a table resolves to its most recent copy. A file
 that listed them in a different order would resolve some tables to a stale copy
@@ -65,8 +65,9 @@ from typing import Dict, List, Sequence, Tuple
 
 # Sources that are shards -- ordered lists, oldest to newest. Everything else
 # is a single dataset. Order is compared for these and only these. conj joined
-# in October 2026 when irw_conjoint neared the cap.
-SHARDED = ("core", "text", "conj")
+# in October 2026 when irw_conjoint neared the cap; rank was a shard list from
+# its registration the same month.
+SHARDED = ("core", "text", "conj", "rank")
 
 # A floor on what a healthy parse returns, per source. The failure this guards
 # against is a parser that silently matches nothing -- if a file is reformatted
@@ -74,7 +75,8 @@ SHARDED = ("core", "text", "conj")
 # equal and the check passes green while checking nothing at all. These are
 # deliberately floors, not exact counts: adding a seventh warehouse is a normal
 # Tuesday and must not have to edit this file.
-MIN_DATASETS = {"core": 6, "text": 2, "meta": 1, "sim": 1, "comp": 1, "nom": 1, "conj": 1}
+MIN_DATASETS = {"core": 6, "text": 2, "meta": 1, "sim": 1, "comp": 1, "nom": 1, "conj": 1,
+                "rank": 1}
 
 
 class ParseError(RuntimeError):
@@ -160,11 +162,14 @@ def parse_pipeline_config(path: Path) -> Dict[str, List[str]]:
     out["conj"] = _require(
         path.name, "conj", _quoted(_r_assignment(text, "IRW_CONJ_DATASETS"))
     )
+    out["rank"] = _require(
+        path.name, "rank", _quoted(_r_assignment(text, "IRW_RANK_DATASETS"))
+    )
 
     # IRW_AUX_DATASETS is a *named* vector -- c(meta = "irw_meta", ...) -- so
     # the key is the source name the irw package uses and the value is the
-    # dataset. Item text and conjoint are deliberately absent from it (they are
-    # shard lists, handled above); anything else that appears here must be
+    # dataset. Item text, conjoint and rankings are deliberately absent from it
+    # (they are shard lists, handled above); anything else that appears here must be
     # matched.
     aux_block = _r_assignment(text, "IRW_AUX_DATASETS")
     for key, value in re.findall(r'(\w+)\s*=\s*"([^"]*)"', aux_block):
@@ -216,6 +221,7 @@ PY_NAMES = {
     "COMP_REF": "comp",
     "NOM_REF": "nom",
     "CONJ_REFS": "conj",
+    "RANK_REFS": "rank",
 }
 
 

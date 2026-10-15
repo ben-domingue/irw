@@ -75,8 +75,9 @@ class Registry(unittest.TestCase):
         core = [t.name for t in targets if t.kind == "core"]
         text = [t.name for t in text_shards(targets)]
         conj = [t.name for t in targets_mod.conj_shards(targets)]
+        rank = [t.name for t in targets_mod.rank_shards(targets)]
         aux = [t.name for t in targets
-               if t.kind == "aux" and not t.is_itemtext and not t.is_conj]
+               if t.kind == "aux" and not t.is_itemtext and not t.is_conj and not t.is_rank]
 
         # Both families are shard lists that grow, so assert their shape rather
         # than a frozen tail -- pinning the newest name here means every future
@@ -90,16 +91,19 @@ class Registry(unittest.TestCase):
         self.assertEqual(conj[0], "irw_conjoint")
         self.assertEqual(conj[1:],
                          [f"irw_conjoint_{i}" for i in range(2, len(conj) + 1)])
+        self.assertEqual(rank[0], "irw_rank")
+        self.assertEqual(rank[1:],
+                         [f"irw_rank_{i}" for i in range(2, len(rank) + 1)])
 
-        # The plain aux datasets are a fixed set; item text and conjoint are
-        # not among them, because they are declared as IRW_TEXT_DATASETS and
-        # IRW_CONJ_DATASETS.
+        # The plain aux datasets are a fixed set; item text, conjoint and
+        # rankings are not among them, because they are declared as
+        # IRW_TEXT_DATASETS, IRW_CONJ_DATASETS and IRW_RANK_DATASETS.
         self.assertEqual(sorted(aux),
                          ["irw_competitions", "irw_meta", "irw_nominal", "irw_simsyn"])
 
         # Core first, then text shards, then the rest in AUX_LABELS order, the
-        # conj shards where AUX_LABELS puts "conj" -- the menu order.
-        self.assertEqual(names, core + text + aux + conj)
+        # conj and rank shards where AUX_LABELS puts them -- the menu order.
+        self.assertEqual(names, core + text + aux + conj + rank)
         self.assertEqual(newest_shard(targets).name, core[-1])
         self.assertEqual(newest_text_shard(targets).name, text[-1])
         # New conjoint tables go to the newest conj shard (Ben, 2026-10-09).
@@ -171,6 +175,64 @@ class Registry(unittest.TestCase):
             _, targets = load_registry(path)
             self.assertEqual([t.name for t in targets],
                              ["a", "b", "irw_text", "irw_meta"])
+
+
+class RankShards(unittest.TestCase):
+    """Rankings were registered as a shard list from day one (2026-10-15): one
+    shard, with conj's semantics ready for the second."""
+
+    CONFIG = (
+        'IRW_OWNER <- "datapages"\n'
+        'IRW_CORE_DATASETS <- c("item_response_warehouse")\n'
+        'IRW_TEXT_DATASETS <- c("irw_text")\n'
+        'IRW_CONJ_DATASETS <- c("irw_conjoint")\n'
+        'IRW_RANK_DATASETS <- c("irw_rank", "irw_rank_2")\n'
+        'IRW_AUX_DATASETS <- c(meta = "irw_meta", sim = "irw_simsyn")\n'
+    )
+
+    def setUp(self):
+        with tempfile.TemporaryDirectory() as d:
+            path = Path(d) / "redivis_config.R"
+            path.write_text(self.CONFIG)
+            _, self.targets = targets_mod.load_registry(path)
+
+    def test_rank_shards_are_registered_oldest_first_as_rank(self):
+        shards = targets_mod.rank_shards(self.targets)
+        self.assertEqual([t.name for t in shards], ["irw_rank", "irw_rank_2"])
+        self.assertTrue(all(t.kind == "aux" and t.source == "rank" and t.is_rank for t in shards))
+        self.assertEqual(shards[-1].label, "rankings -- newest shard")
+        self.assertEqual(targets_mod.required_columns(shards[0]), ("id", "task", "item", "resp"))
+
+    def test_new_rankings_tables_go_to_the_newest_shard_unless_pinned(self):
+        self.assertIsNone(targets_mod.RANK_DEFAULT)
+        self.assertEqual(targets_mod.rank_target(self.targets).name, "irw_rank_2")
+        with mock.patch.object(targets_mod, "RANK_DEFAULT", "irw_rank"):
+            self.assertEqual(targets_mod.rank_target(self.targets).name, "irw_rank")
+
+    def test_rank_shards_sit_after_conj_in_the_menu(self):
+        names = [t.name for t in self.targets]
+        self.assertEqual(names, ["item_response_warehouse", "irw_text", "irw_meta",
+                                 "irw_simsyn", "irw_conjoint", "irw_rank", "irw_rank_2"])
+
+    def test_rankings_declared_twice_is_refused(self):
+        with tempfile.TemporaryDirectory() as d:
+            path = Path(d) / "redivis_config.R"
+            path.write_text(self.CONFIG.replace('sim = "irw_simsyn"', 'sim = "irw_simsyn", rank = "irw_rank"'))
+            with self.assertRaises(targets_mod.ConfigError) as cm:
+                targets_mod.load_registry(path)
+        self.assertIn("rank", str(cm.exception))
+
+    def test_a_config_without_rank_still_parses(self):
+        with tempfile.TemporaryDirectory() as d:
+            path = Path(d) / "redivis_config.R"
+            path.write_text(self.CONFIG.replace('IRW_RANK_DATASETS <- c("irw_rank", "irw_rank_2")\n', ""))
+            _, targets = targets_mod.load_registry(path)
+        self.assertEqual(targets_mod.rank_shards(targets), [])
+        self.assertIsNone(targets_mod.rank_target(targets))
+
+    def test_the_real_config_registers_the_rank_shard(self):
+        _, targets = targets_mod.load_registry()
+        self.assertEqual([t.name for t in targets_mod.rank_shards(targets)][:1], ["irw_rank"])
 
 
 class TwoConjShards(unittest.TestCase):
@@ -1050,6 +1112,76 @@ class ValidatorGate(unittest.TestCase):
         (d / "design_tables.csv").unlink()
         path = self._csv("smith_2024_candidates.csv", self._conj_rows())
         report = self._check(path, "smith_2024_candidates", target=self.CONJ)
+        self.assertTrue(any("unreadable" in e for e in report.errors), report.errors)
+
+    RANK = Target(name="irw_rank", label="rankings", kind="aux", source="rank")
+
+    def _rank_design(self, tables=("rcv_x_20240101_mayor",), n_positions=3, n_candidates=3,
+                     n_ballots=120):
+        """Design records in a scratch dir, pointed to by IRW_RANK_DESIGN_DIR."""
+        d = Path(tempfile.mkdtemp())
+        self.addCleanup(shutil.rmtree, d, ignore_errors=True)
+        (d / "design_tables.csv").write_text(
+            "table,method,seats,n_positions,n_candidates,n_ballots_with_marks\n" + "".join(
+                f"{t},irv,1,{n_positions},{n_candidates},{n_ballots}\n" for t in tables),
+            encoding="utf-8")
+        patcher = mock.patch.dict(os.environ, {"IRW_RANK_DESIGN_DIR": str(d)})
+        patcher.start()
+        self.addCleanup(patcher.stop)
+        return d
+
+    def _rank_rows(self, repeat=False):
+        """120 ballots over three candidates; ballot 1 marks c01 twice when `repeat`."""
+        rows = []
+        for i in range(1, 121):
+            rows.append(f"{i},1,c0{1 + i % 3},1,P{i % 2}")
+            rows.append(f"{i},1,c0{1 + (i + 1) % 3},2,P{i % 2}")
+            if repeat and i == 1:
+                rows.append(f"{i},1,c0{1 + i % 3},3,P{i % 2}")
+        return "id,task,item,resp,cov_precinct\n" + "\n".join(rows) + "\n"
+
+    def test_a_rankings_table_passes_its_own_validator_with_a_design_row(self):
+        """Rankings tables have id/item/resp: the destination, not the shape,
+        selects irw_validate.rankings over the core validator."""
+        self._rank_design()
+        path = self._csv("rcv_x_20240101_mayor.csv", self._rank_rows(repeat=True))
+        report = self._check(path, "rcv_x_20240101_mayor", target=self.RANK)
+        self.assertTrue(report.ok, report.errors)
+        # The repeated mark is data (data/rankings/README.md): no error, no dedup.
+        self.assertFalse(any("duplicate" in e.lower() for e in report.errors), report.errors)
+
+    def test_a_rankings_table_without_a_design_row_is_blocked(self):
+        self._rank_design(tables=())
+        path = self._csv("rcv_x_20240101_mayor.csv", self._rank_rows())
+        report = self._check(path, "rcv_x_20240101_mayor", target=self.RANK)
+        self.assertFalse(report.ok)
+        self.assertTrue(any("rank_design" in e and "design_tables.csv" in e for e in report.errors),
+                        report.errors)
+
+    def test_a_rankings_table_is_checked_against_its_design_row(self):
+        """R7: a position above n_positions in the record is an error."""
+        self._rank_design(n_positions=1)
+        path = self._csv("rcv_x_20240101_mayor.csv", self._rank_rows())
+        report = self._check(path, "rcv_x_20240101_mayor", target=self.RANK)
+        self.assertFalse(report.ok)
+        self.assertTrue(any("[R7]" in e for e in report.errors), report.errors)
+
+    def test_the_same_rows_sent_to_a_core_shard_get_the_core_validator(self):
+        """A rankings table that strays into a core shard is read as response
+        data, and its repeated id x item is then a duplicate -- which is why
+        rankings uploads name their shard with --dataset."""
+        self._rank_design()
+        path = self._csv("rcv_x_20240101_mayor.csv", self._rank_rows())
+        report = self._check(path, "rcv_x_20240101_mayor")
+        self.assertFalse(any("rank_design" in e for e in report.errors), report.errors)
+        self.assertFalse(any("[R" in e for e in report.errors + report.warnings))
+
+    def test_unreadable_rank_design_records_block(self):
+        d = self._rank_design()
+        (d / "design_tables.csv").unlink()
+        path = self._csv("rcv_x_20240101_mayor.csv", self._rank_rows())
+        report = self._check(path, "rcv_x_20240101_mayor", target=self.RANK)
+        self.assertFalse(report.ok)
         self.assertTrue(any("unreadable" in e for e in report.errors), report.errors)
 
     def _conj_rows(self, chosen_both=False, opted_out=0):

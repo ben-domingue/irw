@@ -138,12 +138,13 @@ Rscript ../.claude/skills/irw-site-update/scripts/audit_tables.R
 Rscript ../.claude/skills/irw-site-update/scripts/audit_tables.R --skip-dict   # faster, skips the 4 Google Sheet pulls
 ```
 
-Ground truth is `irw::irw_list_tables(source = c("core","comp","nom","sim","conj"))`
+Ground truth is `irw::irw_list_tables(source = c("core","comp","nom","sim","conj","rank"))`
 — the exported R-package accessor already used by the tags/itemtext skills,
 not a raw re-query of Redivis. It wraps exactly the Redivis datasets the
 numbered scripts use: `core` → `item_response_warehouse`/`_2`/`_3`/`_4`/`_5`/`_6` (01),
 `comp` → `irw_competitions` (05), `nom` → `irw_nominal` (06), `sim` →
-`irw_simsyn` (07), `conj` → the `IRW_CONJ_DATASETS` shards, `irw_conjoint` first (16).
+`irw_simsyn` (07), `conj` → the `IRW_CONJ_DATASETS` shards, `irw_conjoint` first (16),
+`rank` → the `IRW_RANK_DATASETS` shards (18).
 
 **Expect ~90 seconds minimum for the default run, most of it in the `core`
 fetch alone** (measured 2026-07-27: `core` ≈ 59s for 2233 tables, `comp` ≈
