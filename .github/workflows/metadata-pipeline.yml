@@ -46,6 +46,14 @@ on:
           completed are run. Leave blank for a full run.
         required: false
         default: ""
+      skip_stages:
+        description: >-
+          With resume_from_run: stage numbers, space-separated, to record as
+          complete before resuming (e.g. "15"). For a stage that cannot finish
+          in the run's window; its tracked outputs stay as committed. Blank
+          skips nothing.
+        required: false
+        default: ""
 
 permissions:
   contents: write
@@ -151,6 +159,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           RUN_ID: ${{ github.event.inputs.resume_from_run }}
+          SKIP_STAGES: ${{ github.event.inputs.skip_stages }}
         run: |
           set -euo pipefail
           # Same-week only. The completed stages' outputs reflect Redivis as it
@@ -167,6 +176,15 @@ jobs:
             echo "::error::run $RUN_ID left no pipeline_progress.txt; nothing to resume. Dispatch a full run instead."
             exit 1
           fi
+          # skip_stages (2026-10-15): stage 15's --deep sweep ran silent for
+          # over an hour on 83 deposits and had to be cancelled; the rest of the
+          # run should not wait on it. Recorded as complete, --resume skips it
+          # and its committed outputs ship unchanged.
+          for s in $SKIP_STAGES; do
+            [[ "$s" =~ ^[0-9]{2}$ ]] || { echo "::error::skip_stages: '$s' is not a two-digit stage number"; exit 1; }
+            grep -qx "$s" metadata/pipeline_progress.txt || echo "$s" >> metadata/pipeline_progress.txt
+            echo "Stage $s recorded as complete on request (skip_stages); its committed outputs stand."
+          done
           echo "Resuming run $RUN_ID (${age_h}h old). Stages already complete:"
           tr '\n' ' ' < metadata/pipeline_progress.txt; echo
           git status --short -- metadata/ | head -40
