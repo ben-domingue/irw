@@ -280,6 +280,24 @@ jobs:
               echo "_Stage 12 did not run._"
             fi
             echo
+            echo "## Coverage audit"
+            echo
+            # Stage 17 judges every LIVE table against the run's own CSVs: page,
+            # citation, licence, tags, script, column docs, codebook link, item
+            # text. Report-only. The per-table queue is metadata/coverage_matrix.csv
+            # and the readable version metadata/coverage_report.md; a human reads
+            # the latter once a month and turns its worst rows into work.
+            if grep -q -- "--- ADVISORY 17 BEGIN ---" pipeline.log; then
+              echo '```'
+              sed -n '/--- ADVISORY 17 BEGIN ---/,/--- ADVISORY 17 END ---/p' pipeline.log \
+                | sed '1d;$d'
+              echo '```'
+              echo
+              echo "Full matrix: \`metadata/coverage_matrix.csv\`; monthly review reads \`metadata/coverage_report.md\`."
+            else
+              echo "_Stage 17 did not run._"
+            fi
+            echo
             echo "Known noise, safe to skim: \`collections.csv\` definitions rewrite"
             echo "themselves most runs because they embed live coverage counts in their"
             echo "prose. \`n_tables\` is the field there that means something."
