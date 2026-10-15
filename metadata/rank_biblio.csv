@@ -1,0 +1,211 @@
+table,DOI__for_paper_,DOI__for_data_,Reference_x,URL__for_data_,Original_License,Derived_License,Custom_License_Terms,Description,BibTex,Source_via
+eurovision_2016_final,NA,10.5281/zenodo.10265412,"Burgoyne, J. A., Spijkervet, J., & Baker, D. J. (2023). Measuring the Eurovision Song Contest: A living dataset for real-world MIR. Proceedings of ISMIR 2023. Data: https://doi.org/10.5281/zenodo.10265412",https://doi.org/10.5281/zenodo.10265412,CC BY 4.0,CC BY 4.0,NA,"Eurovision Song Contest 2016 grand final: each of the five anonymous jurors (A-E) in every national jury ranks all songs in the show except their own country's; 26 songs, 210 jurors with a ranking (of 210 juror slots across 42 juries). One row per juror x song; item = performing country's ISO code (songs are not people, so the label is kept), resp = rank given (1 = best); cov_jury_country = voting country, cov_juror = letter. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@article{https://doi.org/10.5281/zenodo.10265412,
+  doi = {10.5281/ZENODO.10265412},
+  url = {https://zenodo.org/doi/10.5281/zenodo.10265412},
+  author = {John Ashley Burgoyne,  and Janne Spijkervet,  and David John Baker, },
+  title = {Measuring the Eurovision Song Contest: A Living Dataset for Real-World MIR},
+  publisher = {ISMIR},
+  year = {2023},
+  copyright = {Creative Commons Attribution 4.0 International}
+}
+",NA
+eurovision_2016_sf1,NA,10.5281/zenodo.10265412,"Burgoyne, J. A., Spijkervet, J., & Baker, D. J. (2023). Measuring the Eurovision Song Contest: A living dataset for real-world MIR. Proceedings of ISMIR 2023. Data: https://doi.org/10.5281/zenodo.10265412",https://doi.org/10.5281/zenodo.10265412,CC BY 4.0,CC BY 4.0,NA,"Eurovision Song Contest 2016 semi-final 1: each of the five anonymous jurors (A-E) in every national jury ranks all songs in the show except their own country's; 18 songs, 104 jurors with a ranking (of 105 juror slots across 21 juries). One row per juror x song; item = performing country's ISO code (songs are not people, so the label is kept), resp = rank given (1 = best); cov_jury_country = voting country, cov_juror = letter. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@article{https://doi.org/10.5281/zenodo.10265412,
+  doi = {10.5281/ZENODO.10265412},
+  url = {https://zenodo.org/doi/10.5281/zenodo.10265412},
+  author = {John Ashley Burgoyne,  and Janne Spijkervet,  and David John Baker, },
+  title = {Measuring the Eurovision Song Contest: A Living Dataset for Real-World MIR},
+  publisher = {ISMIR},
+  year = {2023},
+  copyright = {Creative Commons Attribution 4.0 International}
+}
+",NA
+eurovision_2016_sf2,NA,10.5281/zenodo.10265412,"Burgoyne, J. A., Spijkervet, J., & Baker, D. J. (2023). Measuring the Eurovision Song Contest: A living dataset for real-world MIR. Proceedings of ISMIR 2023. Data: https://doi.org/10.5281/zenodo.10265412",https://doi.org/10.5281/zenodo.10265412,CC BY 4.0,CC BY 4.0,NA,"Eurovision Song Contest 2016 semi-final 2: each of the five anonymous jurors (A-E) in every national jury ranks all songs in the show except their own country's; 18 songs, 105 jurors with a ranking (of 105 juror slots across 21 juries). One row per juror x song; item = performing country's ISO code (songs are not people, so the label is kept), resp = rank given (1 = best); cov_jury_country = voting country, cov_juror = letter. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@article{https://doi.org/10.5281/zenodo.10265412,
+  doi = {10.5281/ZENODO.10265412},
+  url = {https://zenodo.org/doi/10.5281/zenodo.10265412},
+  author = {John Ashley Burgoyne,  and Janne Spijkervet,  and David John Baker, },
+  title = {Measuring the Eurovision Song Contest: A Living Dataset for Real-World MIR},
+  publisher = {ISMIR},
+  year = {2023},
+  copyright = {Creative Commons Attribution 4.0 International}
+}
+",NA
+eurovision_2017_final,NA,10.5281/zenodo.10265412,"Burgoyne, J. A., Spijkervet, J., & Baker, D. J. (2023). Measuring the Eurovision Song Contest: A living dataset for real-world MIR. Proceedings of ISMIR 2023. Data: https://doi.org/10.5281/zenodo.10265412",https://doi.org/10.5281/zenodo.10265412,CC BY 4.0,CC BY 4.0,NA,"Eurovision Song Contest 2017 grand final: each of the five anonymous jurors (A-E) in every national jury ranks all songs in the show except their own country's; 26 songs, 210 jurors with a ranking (of 210 juror slots across 42 juries). One row per juror x song; item = performing country's ISO code (songs are not people, so the label is kept), resp = rank given (1 = best); cov_jury_country = voting country, cov_juror = letter. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@article{https://doi.org/10.5281/zenodo.10265412,
+  doi = {10.5281/ZENODO.10265412},
+  url = {https://zenodo.org/doi/10.5281/zenodo.10265412},
+  author = {John Ashley Burgoyne,  and Janne Spijkervet,  and David John Baker, },
+  title = {Measuring the Eurovision Song Contest: A Living Dataset for Real-World MIR},
+  publisher = {ISMIR},
+  year = {2023},
+  copyright = {Creative Commons Attribution 4.0 International}
+}
+",NA
+eurovision_2017_sf1,NA,10.5281/zenodo.10265412,"Burgoyne, J. A., Spijkervet, J., & Baker, D. J. (2023). Measuring the Eurovision Song Contest: A living dataset for real-world MIR. Proceedings of ISMIR 2023. Data: https://doi.org/10.5281/zenodo.10265412",https://doi.org/10.5281/zenodo.10265412,CC BY 4.0,CC BY 4.0,NA,"Eurovision Song Contest 2017 semi-final 1: each of the five anonymous jurors (A-E) in every national jury ranks all songs in the show except their own country's; 18 songs, 105 jurors with a ranking (of 105 juror slots across 21 juries). One row per juror x song; item = performing country's ISO code (songs are not people, so the label is kept), resp = rank given (1 = best); cov_jury_country = voting country, cov_juror = letter. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@article{https://doi.org/10.5281/zenodo.10265412,
+  doi = {10.5281/ZENODO.10265412},
+  url = {https://zenodo.org/doi/10.5281/zenodo.10265412},
+  author = {John Ashley Burgoyne,  and Janne Spijkervet,  and David John Baker, },
+  title = {Measuring the Eurovision Song Contest: A Living Dataset for Real-World MIR},
+  publisher = {ISMIR},
+  year = {2023},
+  copyright = {Creative Commons Attribution 4.0 International}
+}
+",NA
+eurovision_2017_sf2,NA,10.5281/zenodo.10265412,"Burgoyne, J. A., Spijkervet, J., & Baker, D. J. (2023). Measuring the Eurovision Song Contest: A living dataset for real-world MIR. Proceedings of ISMIR 2023. Data: https://doi.org/10.5281/zenodo.10265412",https://doi.org/10.5281/zenodo.10265412,CC BY 4.0,CC BY 4.0,NA,"Eurovision Song Contest 2017 semi-final 2: each of the five anonymous jurors (A-E) in every national jury ranks all songs in the show except their own country's; 18 songs, 105 jurors with a ranking (of 105 juror slots across 21 juries). One row per juror x song; item = performing country's ISO code (songs are not people, so the label is kept), resp = rank given (1 = best); cov_jury_country = voting country, cov_juror = letter. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@article{https://doi.org/10.5281/zenodo.10265412,
+  doi = {10.5281/ZENODO.10265412},
+  url = {https://zenodo.org/doi/10.5281/zenodo.10265412},
+  author = {John Ashley Burgoyne,  and Janne Spijkervet,  and David John Baker, },
+  title = {Measuring the Eurovision Song Contest: A Living Dataset for Real-World MIR},
+  publisher = {ISMIR},
+  year = {2023},
+  copyright = {Creative Commons Attribution 4.0 International}
+}
+",NA
+eurovision_2018_final,NA,10.5281/zenodo.10265412,"Burgoyne, J. A., Spijkervet, J., & Baker, D. J. (2023). Measuring the Eurovision Song Contest: A living dataset for real-world MIR. Proceedings of ISMIR 2023. Data: https://doi.org/10.5281/zenodo.10265412",https://doi.org/10.5281/zenodo.10265412,CC BY 4.0,CC BY 4.0,NA,"Eurovision Song Contest 2018 grand final: each of the five anonymous jurors (A-E) in every national jury ranks all songs in the show except their own country's; 26 songs, 215 jurors with a ranking (of 215 juror slots across 43 juries). One row per juror x song; item = performing country's ISO code (songs are not people, so the label is kept), resp = rank given (1 = best); cov_jury_country = voting country, cov_juror = letter. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@article{https://doi.org/10.5281/zenodo.10265412,
+  doi = {10.5281/ZENODO.10265412},
+  url = {https://zenodo.org/doi/10.5281/zenodo.10265412},
+  author = {John Ashley Burgoyne,  and Janne Spijkervet,  and David John Baker, },
+  title = {Measuring the Eurovision Song Contest: A Living Dataset for Real-World MIR},
+  publisher = {ISMIR},
+  year = {2023},
+  copyright = {Creative Commons Attribution 4.0 International}
+}
+",NA
+eurovision_2018_sf1,NA,10.5281/zenodo.10265412,"Burgoyne, J. A., Spijkervet, J., & Baker, D. J. (2023). Measuring the Eurovision Song Contest: A living dataset for real-world MIR. Proceedings of ISMIR 2023. Data: https://doi.org/10.5281/zenodo.10265412",https://doi.org/10.5281/zenodo.10265412,CC BY 4.0,CC BY 4.0,NA,"Eurovision Song Contest 2018 semi-final 1: each of the five anonymous jurors (A-E) in every national jury ranks all songs in the show except their own country's; 19 songs, 110 jurors with a ranking (of 110 juror slots across 22 juries). One row per juror x song; item = performing country's ISO code (songs are not people, so the label is kept), resp = rank given (1 = best); cov_jury_country = voting country, cov_juror = letter. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@article{https://doi.org/10.5281/zenodo.10265412,
+  doi = {10.5281/ZENODO.10265412},
+  url = {https://zenodo.org/doi/10.5281/zenodo.10265412},
+  author = {John Ashley Burgoyne,  and Janne Spijkervet,  and David John Baker, },
+  title = {Measuring the Eurovision Song Contest: A Living Dataset for Real-World MIR},
+  publisher = {ISMIR},
+  year = {2023},
+  copyright = {Creative Commons Attribution 4.0 International}
+}
+",NA
+eurovision_2018_sf2,NA,10.5281/zenodo.10265412,"Burgoyne, J. A., Spijkervet, J., & Baker, D. J. (2023). Measuring the Eurovision Song Contest: A living dataset for real-world MIR. Proceedings of ISMIR 2023. Data: https://doi.org/10.5281/zenodo.10265412",https://doi.org/10.5281/zenodo.10265412,CC BY 4.0,CC BY 4.0,NA,"Eurovision Song Contest 2018 semi-final 2: each of the five anonymous jurors (A-E) in every national jury ranks all songs in the show except their own country's; 18 songs, 105 jurors with a ranking (of 105 juror slots across 21 juries). One row per juror x song; item = performing country's ISO code (songs are not people, so the label is kept), resp = rank given (1 = best); cov_jury_country = voting country, cov_juror = letter. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@article{https://doi.org/10.5281/zenodo.10265412,
+  doi = {10.5281/ZENODO.10265412},
+  url = {https://zenodo.org/doi/10.5281/zenodo.10265412},
+  author = {John Ashley Burgoyne,  and Janne Spijkervet,  and David John Baker, },
+  title = {Measuring the Eurovision Song Contest: A Living Dataset for Real-World MIR},
+  publisher = {ISMIR},
+  year = {2023},
+  copyright = {Creative Commons Attribution 4.0 International}
+}
+",NA
+eurovision_2019_final,NA,10.5281/zenodo.10265412,"Burgoyne, J. A., Spijkervet, J., & Baker, D. J. (2023). Measuring the Eurovision Song Contest: A living dataset for real-world MIR. Proceedings of ISMIR 2023. Data: https://doi.org/10.5281/zenodo.10265412",https://doi.org/10.5281/zenodo.10265412,CC BY 4.0,CC BY 4.0,NA,"Eurovision Song Contest 2019 grand final: each of the five anonymous jurors (A-E) in every national jury ranks all songs in the show except their own country's; 26 songs, 200 jurors with a ranking (of 200 juror slots across 40 juries). One row per juror x song; item = performing country's ISO code (songs are not people, so the label is kept), resp = rank given (1 = best); cov_jury_country = voting country, cov_juror = letter. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@article{https://doi.org/10.5281/zenodo.10265412,
+  doi = {10.5281/ZENODO.10265412},
+  url = {https://zenodo.org/doi/10.5281/zenodo.10265412},
+  author = {John Ashley Burgoyne,  and Janne Spijkervet,  and David John Baker, },
+  title = {Measuring the Eurovision Song Contest: A Living Dataset for Real-World MIR},
+  publisher = {ISMIR},
+  year = {2023},
+  copyright = {Creative Commons Attribution 4.0 International}
+}
+",NA
+eurovision_2019_sf1,NA,10.5281/zenodo.10265412,"Burgoyne, J. A., Spijkervet, J., & Baker, D. J. (2023). Measuring the Eurovision Song Contest: A living dataset for real-world MIR. Proceedings of ISMIR 2023. Data: https://doi.org/10.5281/zenodo.10265412",https://doi.org/10.5281/zenodo.10265412,CC BY 4.0,CC BY 4.0,NA,"Eurovision Song Contest 2019 semi-final 1: each of the five anonymous jurors (A-E) in every national jury ranks all songs in the show except their own country's; 17 songs, 100 jurors with a ranking (of 100 juror slots across 20 juries). One row per juror x song; item = performing country's ISO code (songs are not people, so the label is kept), resp = rank given (1 = best); cov_jury_country = voting country, cov_juror = letter. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@article{https://doi.org/10.5281/zenodo.10265412,
+  doi = {10.5281/ZENODO.10265412},
+  url = {https://zenodo.org/doi/10.5281/zenodo.10265412},
+  author = {John Ashley Burgoyne,  and Janne Spijkervet,  and David John Baker, },
+  title = {Measuring the Eurovision Song Contest: A Living Dataset for Real-World MIR},
+  publisher = {ISMIR},
+  year = {2023},
+  copyright = {Creative Commons Attribution 4.0 International}
+}
+",NA
+eurovision_2019_sf2,NA,10.5281/zenodo.10265412,"Burgoyne, J. A., Spijkervet, J., & Baker, D. J. (2023). Measuring the Eurovision Song Contest: A living dataset for real-world MIR. Proceedings of ISMIR 2023. Data: https://doi.org/10.5281/zenodo.10265412",https://doi.org/10.5281/zenodo.10265412,CC BY 4.0,CC BY 4.0,NA,"Eurovision Song Contest 2019 semi-final 2: each of the five anonymous jurors (A-E) in every national jury ranks all songs in the show except their own country's; 18 songs, 105 jurors with a ranking (of 105 juror slots across 21 juries). One row per juror x song; item = performing country's ISO code (songs are not people, so the label is kept), resp = rank given (1 = best); cov_jury_country = voting country, cov_juror = letter. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@article{https://doi.org/10.5281/zenodo.10265412,
+  doi = {10.5281/ZENODO.10265412},
+  url = {https://zenodo.org/doi/10.5281/zenodo.10265412},
+  author = {John Ashley Burgoyne,  and Janne Spijkervet,  and David John Baker, },
+  title = {Measuring the Eurovision Song Contest: A Living Dataset for Real-World MIR},
+  publisher = {ISMIR},
+  year = {2023},
+  copyright = {Creative Commons Attribution 4.0 International}
+}
+",NA
+eurovision_2021_final,NA,10.5281/zenodo.10265412,"Burgoyne, J. A., Spijkervet, J., & Baker, D. J. (2023). Measuring the Eurovision Song Contest: A living dataset for real-world MIR. Proceedings of ISMIR 2023. Data: https://doi.org/10.5281/zenodo.10265412",https://doi.org/10.5281/zenodo.10265412,CC BY 4.0,CC BY 4.0,NA,"Eurovision Song Contest 2021 grand final: each of the five anonymous jurors (A-E) in every national jury ranks all songs in the show except their own country's; 26 songs, 195 jurors with a ranking (of 195 juror slots across 39 juries). One row per juror x song; item = performing country's ISO code (songs are not people, so the label is kept), resp = rank given (1 = best); cov_jury_country = voting country, cov_juror = letter. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@article{https://doi.org/10.5281/zenodo.10265412,
+  doi = {10.5281/ZENODO.10265412},
+  url = {https://zenodo.org/doi/10.5281/zenodo.10265412},
+  author = {John Ashley Burgoyne,  and Janne Spijkervet,  and David John Baker, },
+  title = {Measuring the Eurovision Song Contest: A Living Dataset for Real-World MIR},
+  publisher = {ISMIR},
+  year = {2023},
+  copyright = {Creative Commons Attribution 4.0 International}
+}
+",NA
+eurovision_2021_sf2,NA,10.5281/zenodo.10265412,"Burgoyne, J. A., Spijkervet, J., & Baker, D. J. (2023). Measuring the Eurovision Song Contest: A living dataset for real-world MIR. Proceedings of ISMIR 2023. Data: https://doi.org/10.5281/zenodo.10265412",https://doi.org/10.5281/zenodo.10265412,CC BY 4.0,CC BY 4.0,NA,"Eurovision Song Contest 2021 semi-final 2: each of the five anonymous jurors (A-E) in every national jury ranks all songs in the show except their own country's; 17 songs, 100 jurors with a ranking (of 100 juror slots across 20 juries). One row per juror x song; item = performing country's ISO code (songs are not people, so the label is kept), resp = rank given (1 = best); cov_jury_country = voting country, cov_juror = letter. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@article{https://doi.org/10.5281/zenodo.10265412,
+  doi = {10.5281/ZENODO.10265412},
+  url = {https://zenodo.org/doi/10.5281/zenodo.10265412},
+  author = {John Ashley Burgoyne,  and Janne Spijkervet,  and David John Baker, },
+  title = {Measuring the Eurovision Song Contest: A Living Dataset for Real-World MIR},
+  publisher = {ISMIR},
+  year = {2023},
+  copyright = {Creative Commons Attribution 4.0 International}
+}
+",NA
+eurovision_2022_final,NA,10.5281/zenodo.10265412,"Burgoyne, J. A., Spijkervet, J., & Baker, D. J. (2023). Measuring the Eurovision Song Contest: A living dataset for real-world MIR. Proceedings of ISMIR 2023. Data: https://doi.org/10.5281/zenodo.10265412",https://doi.org/10.5281/zenodo.10265412,CC BY 4.0,CC BY 4.0,NA,"Eurovision Song Contest 2022 grand final: each of the five anonymous jurors (A-E) in every national jury ranks all songs in the show except their own country's; 25 songs, 170 jurors with a ranking (of 170 juror slots across 34 juries). One row per juror x song; item = performing country's ISO code (songs are not people, so the label is kept), resp = rank given (1 = best); cov_jury_country = voting country, cov_juror = letter. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@article{https://doi.org/10.5281/zenodo.10265412,
+  doi = {10.5281/ZENODO.10265412},
+  url = {https://zenodo.org/doi/10.5281/zenodo.10265412},
+  author = {John Ashley Burgoyne,  and Janne Spijkervet,  and David John Baker, },
+  title = {Measuring the Eurovision Song Contest: A Living Dataset for Real-World MIR},
+  publisher = {ISMIR},
+  year = {2023},
+  copyright = {Creative Commons Attribution 4.0 International}
+}
+",NA
+rcv_alaska_20221108_hd10,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska House District 10, 8 November 2022 (ballot-level columns: ballot type, counting group, district, precinct, voting location): single-winner (instant-runoff) election, 3 candidates, 4 rank positions offered, 6823 ballots with at least one mark (of 7153 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_burlington_20060307_mayor,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Burlington, Vermont mayor, 7 March 2006: single-winner (instant-runoff) election, 6 candidates, 5 rank positions offered, 9788 ballots with at least one mark (of 9865 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_eastpointe_20191105_council,NA,10.7910/DVN/STVUET,FairVote. Proportional ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/STVUET,https://doi.org/10.7910/DVN/STVUET,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Eastpointe, Michigan city council, 5 November 2019: proportional (STV) election, 4 candidates, 4 rank positions offered, 5027 ballots with at least one mark (of 5145 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/stvuet,
+  doi = {10.7910/DVN/STVUET},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/STVUET},
+  author = {Laverty, Sabrina},
+  keywords = {Social Sciences},
+  title = {Proportional ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_genola_20211102_council,NA,10.7910/DVN/04LOQX,FairVote. Sequential ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/04LOQX,https://doi.org/10.7910/DVN/04LOQX,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Genola, Utah city council, 2 November 2021: sequential election, 3 candidates, 4 rank positions offered, 384 ballots with at least one mark (of 393 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/04loqx,
+  doi = {10.7910/DVN/04LOQX},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/04LOQX},
+  author = {Laverty, Sabrina},
+  keywords = {Social Sciences},
+  title = {Sequential ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_nyc_20210622_demcouncild49,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, New York City Democratic primary, City Council District 49, 22 June 2021 (the source lists every primary ballot, including precincts where this contest was not on the ballot; see n_ballots_eligible_est): single-winner (instant-runoff) election, 9 candidates, 5 rank positions offered, 13795 ballots with at least one mark (of 43503 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_takoma_20221108_councilward4,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Takoma Park, Maryland city council Ward 4, 8 November 2022 (one named candidate on the ballot): single-winner (instant-runoff) election, 1 candidates, 2 rank positions offered, 576 ballots with at least one mark (of 576 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
