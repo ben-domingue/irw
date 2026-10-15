@@ -1,711 +1,294 @@
 table,column,kind,was,now
-abu_tabar_2021_muis,Original_License,fill,NA,CC0 1.0
-abu_tabar_2021_stai_s,Original_License,fill,NA,CC0 1.0
-ackeret_2022_coach_burnout,Original_License,fill,NA,CC0 1.0
-ackeret_2022_scs_sf,Original_License,fill,NA,CC0 1.0
-ackeret_2022_social_support,Original_License,fill,NA,CC0 1.0
-adebiyi_2026_representational_fluency,Original_License,fill,NA,CC BY 4.0
-ali_2026_gses,Original_License,fill,NA,CC BY 4.0
-amiruddin_2023_andragogy,Original_License,fill,NA,CC BY 4.0
-amiruddin_2023_cybergogy,Original_License,fill,NA,CC BY 4.0
-amiruddin_2023_heutagogy,Original_License,fill,NA,CC BY 4.0
-amiruddin_2023_pedagogy,Original_License,fill,NA,CC BY 4.0
-amiruddin_2023_peeragogy,Original_License,fill,NA,CC BY 4.0
-amiruddin_2023_srl,Original_License,fill,NA,CC BY 4.0
-arista_2010_achievement_motivation,Original_License,fill,NA,CC0 1.0
-asadollahi_2022_short_fesi,Original_License,fill,NA,CC0 1.0
-atik_2025_ai_life_satisfaction,Original_License,fill,NA,CC0 1.0
-atik_2025_gwb,Original_License,fill,NA,CC0 1.0
-atik_2025_swls,Original_License,fill,NA,CC0 1.0
-azizi_2023_eq5d5l,Original_License,fill,NA,CC BY 4.0
-babenko_2018_achievement_goals,Original_License,fill,NA,CC0 1.0
-babenko_2018_basic_needs,Original_License,fill,NA,CC0 1.0
-babenko_2018_olbi_engagement,Original_License,fill,NA,CC0 1.0
-babenko_2018_olbi_exhaustion,Original_License,fill,NA,CC0 1.0
-babenko_2018_scs_sf,Original_License,fill,NA,CC0 1.0
-bado_2018_ohla_b,Original_License,fill,NA,CC0 1.0
-bak_sosnowska_2025_dass21,Original_License,fill,NA,CC0 1.0
-begum_2026_hama,Original_License,fill,NA,CC BY 4.0
-begum_2026_isi,Original_License,fill,NA,CC BY 4.0
-belyakova_2026_bfi2s,Original_License,fill,NA,CC BY 4.0
-belyakova_2026_maas,Original_License,fill,NA,CC BY 4.0
-belyakova_2026_pil,Original_License,fill,NA,CC BY 4.0
-beza_2017_motivation,Original_License,fill,NA,CC0 1.0
-bi_2026_agency_maintenance,Original_License,fill,NA,CC BY 4.0
-bi_2026_ai_literacy,Original_License,fill,NA,CC BY 4.0
-bi_2026_creative_ai_use,Original_License,fill,NA,CC BY 4.0
-bi_2026_trust_calibration,Original_License,fill,NA,CC BY 4.0
-bland_2024_gcos_autonomy,Original_License,fill,NA,CC0 1.0
-bland_2024_gcos_control,Original_License,fill,NA,CC0 1.0
-bland_2024_gcos_impersonal,Original_License,fill,NA,CC0 1.0
-bland_2024_mfq20,Original_License,fill,NA,CC0 1.0
-bland_2024_psm,Original_License,fill,NA,CC0 1.0
-blaszyk_2023_copsoq_js,Original_License,fill,NA,CC BY 4.0
-blaszyk_2023_copsoq_se,Original_License,fill,NA,CC BY 4.0
-blaszyk_2023_dtt,Original_License,fill,NA,CC BY 4.0
-blaszyk_2023_gts,Original_License,fill,NA,CC BY 4.0
-blaszyk_2023_olbi,Original_License,fill,NA,CC BY 4.0
-blaszyk_2023_ptps,Original_License,fill,NA,CC BY 4.0
-blaszyk_2023_tbm,Original_License,fill,NA,CC BY 4.0
-blaszyk_2023_tipi,Original_License,fill,NA,CC BY 4.0
-blumel_2018_mrs,Original_License,fill,NA,CC BY 4.0
-buzzi_2025_autonomy,Original_License,fill,NA,CC BY 4.0
-buzzi_2025_cyrm12,Original_License,fill,NA,CC BY 4.0
+abdollahi_2023_job_burnout,Original_License,fill,NA,CC BY 4.0
+abdollahi_2023_job_hardiness,Original_License,fill,NA,CC BY 4.0
+abdollahi_2023_job_passion,Original_License,fill,NA,CC BY 4.0
+ali_2022_covid_headlines,Original_License,fill,NA,CC0 1.0
+ali_2022_info_source_freq,Original_License,fill,NA,CC0 1.0
+altinsoy_2024_ol_engagement,Original_License,fill,NA,CC BY 4.0
+altinsoy_2024_ol_readiness,Original_License,fill,NA,CC BY 4.0
+altinsoy_2024_ol_satisfaction,Original_License,fill,NA,CC BY 4.0
+arbulu_2026_digital_competence,Original_License,fill,NA,CC BY 4.0
+arbulu_2026_technostress,Original_License,fill,NA,CC BY 4.0
+atoum_2026_academic_entitlement,Original_License,fill,NA,CC BY 4.0
+atoum_2026_cognitive_dissonance,Original_License,fill,NA,CC BY 4.0
+atoum_2026_mind_wandering,Original_License,fill,NA,CC BY 4.0
+aznar_diaz_2026_digital_competence,Original_License,fill,NA,CC BY 4.0
+bernik_2026_ase,Original_License,fill,NA,CC BY 4.0
+bernik_2026_classroom_engagement,Original_License,fill,NA,CC BY 4.0
+bernik_2026_idl,Original_License,fill,NA,CC BY 4.0
+bernik_2026_study_engagement,Original_License,fill,NA,CC BY 4.0
+caldwell_2026_eijqi,Original_License,fill,NA,CC BY 4.0
+caldwell_2026_mbi_gs,Original_License,fill,NA,CC BY 4.0
+caldwell_2026_seq_dod,Original_License,fill,NA,CC BY 4.0
+caldwell_2026_sf12,Original_License,fill,NA,CC BY 4.0
+caldwell_2026_stig9,Original_License,fill,NA,CC BY 4.0
+caprara_2020_mnesres,Original_License,fill,NA,CC BY 4.0
+caprara_2020_panas,Original_License,fill,NA,CC BY 4.0
 cdm_timss07,Description,conflict,Subsample of TIMSS 2007 grade 4 mathematics items from Austria (booklets 4 and 5) with Q matrix,Subsample of TIMSS items from Australia with Q matrix
-celikbas_2022_bpi,Original_License,fill,NA,CC BY 4.0
-celikbas_2022_mcq30,Original_License,fill,NA,CC BY 4.0
-celikbas_2022_pcs,Original_License,fill,NA,CC BY 4.0
-celikbas_2022_pmq,Original_License,fill,NA,CC BY 4.0
-chen_2024_aeq,Original_License,fill,NA,CC BY 4.0
-chen_2024_bisbas,Original_License,fill,NA,CC BY 4.0
-chen_2024_cesd,Original_License,fill,NA,CC BY 4.0
-chen_2024_ctq_sf,Original_License,fill,NA,CC BY 4.0
-chen_2024_learning_effectiveness,Original_License,fill,NA,CC0 1.0
-chen_2024_learning_engagement,Original_License,fill,NA,CC0 1.0
-chen_2024_learning_motivation,Original_License,fill,NA,CC0 1.0
-chen_2024_personality,Original_License,fill,NA,CC0 1.0
-chen_2024_psychache,Original_License,fill,NA,CC BY 4.0
-chen_2025_phone_addiction,Original_License,fill,NA,CC0 1.0
-chen_2025_social_anxiety,Original_License,fill,NA,CC0 1.0
-chen_2026_clubs_participation,Original_License,fill,NA,CC0 1.0
-chen_2026_clubs_phone_addiction,Original_License,fill,NA,CC0 1.0
-chen_2026_clubs_social_anxiety,Original_License,fill,NA,CC0 1.0
-chen_2026_clubs_ucla_loneliness,Original_License,fill,NA,CC0 1.0
-chen_2026_course_satisfaction,Original_License,fill,NA,CC0 1.0
-chen_2026_entre_intention,Original_License,fill,NA,CC0 1.0
-chen_2026_entre_motivation,Original_License,fill,NA,CC0 1.0
-chen2026_mpa,DOI__for_paper_,fill,NA,10.7910/dvn/qs5d8c
-chen2026_sa,DOI__for_paper_,fill,NA,10.7910/dvn/qs5d8c
-chen2026_sc,DOI__for_paper_,fill,NA,10.7910/dvn/qs5d8c
-christian_2025_imagination,Original_License,fill,NA,CC BY 4.0
+chen_2026_bat12,Original_License,fill,NA,CC BY 4.0
+chen_2026_dt_intention,Original_License,fill,NA,CC BY 4.0
+chen_2026_pos,Original_License,fill,NA,CC BY 4.0
+chen_2026_technostress,Original_License,fill,NA,CC BY 4.0
+chen_2026_uwes9,Original_License,fill,NA,CC BY 4.0
+cho_2023_ipss,Original_License,fill,NA,CC0 1.0
+cho_2023_oabss,Original_License,fill,NA,CC0 1.0
+cisneros_2023_digital_competence,Original_License,fill,NA,CC BY 4.0
 COACH_Chen_2022_CSQ,Description,conflict,"Consultation Satisfaction Questionnaire short form (CSQ-9), items 1-8, 5-point agree-disagree",Client Satisfaction Questionnaire 8-item
-condon_2025_caq,Original_License,fill,NA,CC0 1.0
-condon_2025_caq_freq,Original_License,fill,NA,CC0 1.0
 conner_2017_vitality,Description,conflict,"SF-36 Vitality (energy/fatigue) subscale, 4 items scored 0-100 in steps of 20 (6 ordinal levels), baseline/follow-up, N=171. The 'worn out' and 'tired' items are stored already reverse-scored.","Subjective Vitality Scale (4 items, 0-100 continuous), baseline/follow-up, N=171."
-cordova_2026_self_efficacy,Original_License,fill,NA,CC BY 4.0
-cordova_2026_who5,Original_License,fill,NA,CC BY 4.0
-cordova_2026_workload,Original_License,fill,NA,CC BY 4.0
+cordellieri_2026_bsss8,Original_License,fill,NA,CC BY 4.0
+cordellieri_2026_rpodd,Original_License,fill,NA,CC BY 4.0
+cordellieri_2026_scedd,Original_License,fill,NA,CC BY 4.0
 cordova2019_clinical_edu_environment,Description,conflict,"Perception of clinical educational environment by physiotherapy interns (PHEEM, 40 items, Chile)","Perception of clinical educational environment by physiotherapy interns (DREEM-based, Chile)"
-crysdale_2020_big5,Original_License,fill,NA,CC0 1.0
-crysdale_2020_storyboards,Original_License,fill,NA,CC0 1.0
-cuttler_2017_audit,Original_License,fill,NA,CC BY 4.0
-cuttler_2017_cast,Original_License,fill,NA,CC BY 4.0
-cuttler_2017_cudit_r,Original_License,fill,NA,CC BY 4.0
-cuttler_2017_cupit,Original_License,fill,NA,CC BY 4.0
-cuttler_2017_dfaqcu_freq,Original_License,fill,NA,CC BY 4.0
-cuttler_2017_msi,Original_License,fill,NA,CC BY 4.0
-cwalina_2023_affect,Original_License,fill,NA,CC BY 4.0
-cwalina_2023_covid_attitudes,Original_License,fill,NA,CC BY 4.0
-cwalina_2023_gcbs,Original_License,fill,NA,CC BY 4.0
-darko_2025_interventions,Original_License,fill,NA,CC0 1.0
-darko_2025_perceptions,Original_License,fill,NA,CC0 1.0
-darko_2025_reasons,Original_License,fill,NA,CC0 1.0
-darko_2025_rses,Original_License,fill,NA,CC0 1.0
-dassean_2025_bsmas,Original_License,fill,NA,CC BY 4.0
-dassean_2025_dass21,Original_License,fill,NA,CC BY 4.0
-deilkas_2019_collaboration,Original_License,fill,NA,CC BY 4.0
-deilkas_2019_saq,Original_License,fill,NA,CC BY 4.0
-deryahanoglu_2024_big5_10,Original_License,fill,NA,CC BY 4.0
-deryahanoglu_2024_exercise_motivation,Original_License,fill,NA,CC BY 4.0
-development_delay_anunciacao_asqse,Description,conflict,"Ages & Stages Questionnaires, Social-Emotional","Ages & Stages Questionnaires: Social-Emotional, 2nd ed. (ASQ:SE-2), nine age-interval forms (2-60 months); item scores 0/5/10, 10 = most concern"
-development_delay_anunciacao_concerns,Description,conflict,Parental Concerns,"ASQ:SE-2 parental concern flags: per-item ""this is a concern"" checks (0/5) and each form's two overall yes/no questions (5 = yes), nine age-interval forms (2-60 months)"
-dey_2017_mistreatment_observed,Original_License,fill,NA,CC0 1.0
-dey_2017_mistreatment_selfreport,Original_License,fill,NA,CC0 1.0
-dharmawan_2026_ac,Original_License,fill,NA,CC BY 4.0
-dharmawan_2026_ep,Original_License,fill,NA,CC BY 4.0
-dharmawan_2026_ghrm,Original_License,fill,NA,CC BY 4.0
-dharmawan_2026_gpi,Original_License,fill,NA,CC BY 4.0
-dharmawan_2026_hcl,Original_License,fill,NA,CC BY 4.0
-dharmawan_2026_oa,Original_License,fill,NA,CC BY 4.0
-dharmawan_2026_sp,Original_License,fill,NA,CC BY 4.0
-ding_2020_covid_knowledge,Original_License,fill,NA,CC BY 4.0
-ding_2020_covid_risk_perception,Original_License,fill,NA,CC BY 4.0
-diredja_2025_utaut2,Original_License,fill,NA,CC BY 4.0
-dishman_2017_barriers,Original_License,fill,NA,CC0 1.0
-dishman_2017_motives,Original_License,fill,NA,CC0 1.0
-dishman_2017_neighborhood,Original_License,fill,NA,CC0 1.0
-dishman_2017_parent_support,Original_License,fill,NA,CC0 1.0
-dishman_2017_peer_support,Original_License,fill,NA,CC0 1.0
-dishman_2017_self_efficacy,Original_License,fill,NA,CC0 1.0
-duraj_2026_amas,Original_License,fill,NA,CC0 1.0
-duraj_2026_pe,Original_License,fill,NA,CC0 1.0
-duraj_2026_pee,Original_License,fill,NA,CC0 1.0
-duraj_2026_te,Original_License,fill,NA,CC0 1.0
-elson_2024_kidscreen52,Original_License,fill,NA,CC BY 4.0
-elson_2024_tmdlqi,Original_License,fill,NA,CC BY 4.0
-encceja_2018_ef_ci,Original_License,fill,NA,Missing (NA)
-encceja_2018_ef_hg,Original_License,fill,NA,Missing (NA)
-encceja_2018_ef_lp,Original_License,fill,NA,Missing (NA)
-encceja_2018_ef_ma,Original_License,fill,NA,Missing (NA)
-encceja_2018_em_ch,Original_License,fill,NA,Missing (NA)
-encceja_2018_em_cn,Original_License,fill,NA,Missing (NA)
-encceja_2018_em_lc,Original_License,fill,NA,Missing (NA)
-encceja_2018_em_mt,Original_License,fill,NA,Missing (NA)
-encceja_2019_ef_ci,Original_License,fill,NA,Missing (NA)
-encceja_2019_ef_hg,Original_License,fill,NA,Missing (NA)
-encceja_2019_ef_lp,Original_License,fill,NA,Missing (NA)
-encceja_2019_ef_ma,Original_License,fill,NA,Missing (NA)
-encceja_2019_em_ch,Original_License,fill,NA,Missing (NA)
-encceja_2019_em_cn,Original_License,fill,NA,Missing (NA)
-encceja_2019_em_lc,Original_License,fill,NA,Missing (NA)
-encceja_2019_em_mt,Original_License,fill,NA,Missing (NA)
-encceja_2020_ef_ci,Original_License,fill,NA,Missing (NA)
-encceja_2020_ef_hg,Original_License,fill,NA,Missing (NA)
-encceja_2020_ef_lp,Original_License,fill,NA,Missing (NA)
-encceja_2020_ef_ma,Original_License,fill,NA,Missing (NA)
-encceja_2020_em_ch,Original_License,fill,NA,Missing (NA)
-encceja_2020_em_cn,Original_License,fill,NA,Missing (NA)
-encceja_2020_em_lc,Original_License,fill,NA,Missing (NA)
-encceja_2020_em_mt,Original_License,fill,NA,Missing (NA)
-encceja_2022_ef_ci,Original_License,fill,NA,Missing (NA)
-encceja_2022_ef_hg,Original_License,fill,NA,Missing (NA)
-encceja_2022_ef_lp,Original_License,fill,NA,Missing (NA)
-encceja_2022_ef_ma,Original_License,fill,NA,Missing (NA)
-encceja_2022_em_ch,Original_License,fill,NA,Missing (NA)
-encceja_2022_em_cn,Original_License,fill,NA,Missing (NA)
-encceja_2022_em_lc,Original_License,fill,NA,Missing (NA)
-encceja_2022_em_mt,Original_License,fill,NA,Missing (NA)
-encceja_2023_ef_ci,Original_License,fill,NA,Missing (NA)
-encceja_2023_ef_hg,Original_License,fill,NA,Missing (NA)
-encceja_2023_ef_lp,Original_License,fill,NA,Missing (NA)
-encceja_2023_ef_ma,Original_License,fill,NA,Missing (NA)
-encceja_2023_em_ch,Original_License,fill,NA,Missing (NA)
-encceja_2023_em_cn,Original_License,fill,NA,Missing (NA)
-encceja_2023_em_lc,Original_License,fill,NA,Missing (NA)
-encceja_2023_em_mt,Original_License,fill,NA,Missing (NA)
-encceja_2024_ef_ci,Original_License,fill,NA,Missing (NA)
-encceja_2024_ef_hg,Original_License,fill,NA,Missing (NA)
-encceja_2024_ef_lp,Original_License,fill,NA,Missing (NA)
-encceja_2024_ef_ma,Original_License,fill,NA,Missing (NA)
-encceja_2024_em_ch,Original_License,fill,NA,Missing (NA)
-encceja_2024_em_cn,Original_License,fill,NA,Missing (NA)
-encceja_2024_em_lc,Original_License,fill,NA,Missing (NA)
-encceja_2024_em_mt,Original_License,fill,NA,Missing (NA)
-encceja_2025_ef_ci,Original_License,fill,NA,Missing (NA)
-encceja_2025_ef_hg,Original_License,fill,NA,Missing (NA)
-encceja_2025_ef_lp,Original_License,fill,NA,Missing (NA)
-encceja_2025_ef_ma,Original_License,fill,NA,Missing (NA)
-encceja_2025_em_ch,Original_License,fill,NA,Missing (NA)
-encceja_2025_em_cn,Original_License,fill,NA,Missing (NA)
-encceja_2025_em_lc,Original_License,fill,NA,Missing (NA)
-encceja_2025_em_mt,Original_License,fill,NA,Missing (NA)
-esteves_2026_dddt,Original_License,fill,NA,CC BY 4.0
-esteves_2026_sdi,Original_License,fill,NA,CC BY 4.0
+cuneo_2018_csi,Original_License,fill,NA,CC BY 4.0
+dhammapeera_2026_gaid,Original_License,fill,NA,CC BY 4.0
+dhammapeera_2026_mhl,Original_License,fill,NA,CC BY 4.0
+dhammapeera_2026_mhsas,Original_License,fill,NA,CC BY 4.0
+dhammapeera_2026_sass,Original_License,fill,NA,CC BY 4.0
+duplaga_2026_dcqfn,Original_License,fill,NA,CC BY 4.0
+duplaga_2026_eheals,Original_License,fill,NA,CC BY 4.0
+euls_2022_civic,Original_License,fill,NA,CC BY 4.0
+euls_2022_djg,Original_License,fill,NA,CC BY 4.0
+euls_2022_education,Original_License,fill,NA,CC BY 4.0
+euls_2022_feelings,Original_License,fill,NA,CC BY 4.0
+euls_2022_social_support,Original_License,fill,NA,CC BY 4.0
+euls_2022_ucla,Original_License,fill,NA,CC BY 4.0
+euls_2022_work,Original_License,fill,NA,CC BY 4.0
 evpromisi_stone_2021_cdiag,Description,conflict,"Study's own 12-item chronic-diagnosis checklist (3 response levels). Not a PROMIS instrument, despite the evpromisi_ prefix.",PROMIS fatigue
-fang_2026_anime_museum,Original_License,fill,NA,CC0 1.0
-fatimah_2026_env_performance,Original_License,fill,NA,CC BY 4.0
-fatimah_2026_green_ability,Original_License,fill,NA,CC BY 4.0
-fatimah_2026_green_motivation,Original_License,fill,NA,CC BY 4.0
-fatimah_2026_green_opportunity,Original_License,fill,NA,CC BY 4.0
-fatimah_2026_green_workplace,Original_License,fill,NA,CC BY 4.0
-fatimah_2026_worker_productivity,Original_License,fill,NA,CC BY 4.0
-fauziah_2026_human_ai_collab,Original_License,fill,NA,CC BY 4.0
-fauziah_2026_humble_leadership,Original_License,fill,NA,CC BY 4.0
-fauziah_2026_intrinsic_motivation,Original_License,fill,NA,CC BY 4.0
-fauziah_2026_iwb,Original_License,fill,NA,CC BY 4.0
-fauziah_2026_psych_safety,Original_License,fill,NA,CC BY 4.0
-favero_2020_covid_attitudes,Original_License,fill,NA,CC0 1.0
-favero_2020_prosocial_motivation,Original_License,fill,NA,CC0 1.0
-favero_2020_social_distancing,Original_License,fill,NA,CC0 1.0
-fernandez_prados_2025_ai_uses,Original_License,fill,NA,CC BY 4.0
-fernandez_prados_2025_aias,Original_License,fill,NA,CC BY 4.0
-fernandez_prados_2025_attari,Original_License,fill,NA,CC BY 4.0
-fernandez_prados_2025_digcomp_comm,Original_License,fill,NA,CC BY 4.0
-fernandez_prados_2025_digcomp_info,Original_License,fill,NA,CC BY 4.0
-fernandez_prados_2025_gaais,Original_License,fill,NA,CC BY 4.0
-fischer_2018_eq5d5l,Original_License,fill,NA,CC0 1.0
-fischer_2018_promis29_anxiety,Original_License,fill,NA,CC0 1.0
-fischer_2018_promis29_depression,Original_License,fill,NA,CC0 1.0
-fischer_2018_promis29_fatigue,Original_License,fill,NA,CC0 1.0
-fischer_2018_promis29_pain,Original_License,fill,NA,CC0 1.0
-fischer_2018_promis29_physfunc,Original_License,fill,NA,CC0 1.0
-fischer_2018_promis29_sleep,Original_License,fill,NA,CC0 1.0
-fischer_2018_promis29_social,Original_License,fill,NA,CC0 1.0
-fox_2023_bct,Original_License,fill,NA,CC BY 4.0
-fox_2023_gad7,Original_License,fill,NA,CC BY 4.0
-fox_2023_pss10,Original_License,fill,NA,CC BY 4.0
-frost_2023_cbq,Original_License,fill,NA,CC BY 4.0
-frost_2023_gcbs,Original_License,fill,NA,CC BY 4.0
-fullscaleiq_memory,Original_License,fill,NA,Permission via Email
-fullscaleiq_memory_options,Original_License,fill,NA,Permission via Email
-fullscaleiq_mentalrotation,Original_License,fill,NA,Permission via Email
-fullscaleiq_mentalrotation_options,Original_License,fill,NA,Permission via Email
-fullscaleiq_vocab,Original_License,fill,NA,Permission via Email
-fullscaleiq_vocab_options,Original_License,fill,NA,Permission via Email
-galan_cuevas_2021_kidscreen52,Original_License,fill,NA,CC BY 4.0
-galindo_2025_amotivation,Original_License,fill,NA,CC0 1.0
-galindo_2025_chatgpt_dependence,Original_License,fill,NA,CC0 1.0
-galindo_2025_extrinsic_motiv,Original_License,fill,NA,CC0 1.0
-galindo_2025_intrinsic_motiv,Original_License,fill,NA,CC0 1.0
-galindo_2025_procrastination,Original_License,fill,NA,CC0 1.0
-galindo_2026_bullying,Original_License,fill,NA,CC0 1.0
-galindo_2026_emotional_intel,Original_License,fill,NA,CC0 1.0
-galindo_2026_grooming,Original_License,fill,NA,CC0 1.0
-galindo_2026_loneliness,Original_License,fill,NA,CC0 1.0
-galindo_2026_mpu_ai,Original_License,fill,NA,CC0 1.0
-galindo_2026_personality,Original_License,fill,NA,CC0 1.0
-galindo_2026_sexting,Original_License,fill,NA,CC0 1.0
-galindo_2026_social_support,Original_License,fill,NA,CC0 1.0
-galindo_2026_suicidal_ideation,Original_License,fill,NA,CC0 1.0
-gao_2024_abq,Original_License,fill,NA,CC BY 4.0
-gao_2024_apsq,Original_License,fill,NA,CC BY 4.0
-gao_2024_gad7,Original_License,fill,NA,CC BY 4.0
-gao_2024_phq9,Original_License,fill,NA,CC BY 4.0
-garcia_ull_2026_compliance,Original_License,fill,NA,CC BY 4.0
-garcia_ull_2026_measure_agreement,Original_License,fill,NA,CC BY 4.0
-garcia_ull_2026_perceived_surveil,Original_License,fill,NA,CC BY 4.0
-ghasemy_2020_commitment,Original_License,fill,NA,CC0 1.0
-ghasemy_2020_job_satisfaction,Original_License,fill,NA,CC0 1.0
-ghasemy_2020_motivation,Original_License,fill,NA,CC0 1.0
-ghasemy_2020_servant_leadership,Original_License,fill,NA,CC0 1.0
-ghasemy_2021_job_satisfaction,Original_License,fill,NA,CC0 1.0
-ghasemy_2021_motivation,Original_License,fill,NA,CC0 1.0
-ghasemy_2021_ocbi,Original_License,fill,NA,CC0 1.0
-ghasemy_2021_poly_conceptual_skills,Original_License,fill,NA,CC0 1.0
-ghasemy_2021_poly_creating_value,Original_License,fill,NA,CC0 1.0
-ghasemy_2021_poly_job_satisfaction,Original_License,fill,NA,CC0 1.0
-ghasemy_2021_poly_work_motivation,Original_License,fill,NA,CC0 1.0
-ginting_2026_ai_literacy,Original_License,fill,NA,CC BY 4.0
-ginting_2026_digital_competence,Original_License,fill,NA,CC BY 4.0
-ginting_2026_org_support,Original_License,fill,NA,CC BY 4.0
-ginting_2026_psm,Original_License,fill,NA,CC BY 4.0
-ginting_2026_work_performance,Original_License,fill,NA,CC BY 4.0
-goldberg_2018_neo_pir,Original_License,fill,NA,CC0 1.0
-goldberg_2018_pea,Original_License,fill,NA,CC0 1.0
-goldberg_2018_pea_belief,Original_License,fill,NA,CC0 1.0
-goldberg_2018_pea_childexp,Original_License,fill,NA,CC0 1.0
-goldberg_2018_pea_experiences,Original_License,fill,NA,CC0 1.0
-goldberg_2018_pea_gambling,Original_License,fill,NA,CC0 1.0
-goldberg_2018_pea_health,Original_License,fill,NA,CC0 1.0
-goldberg_2018_pea_reading,Original_License,fill,NA,CC0 1.0
-gori_2020_cope,Original_License,fill,NA,CC BY 4.0
-gori_2020_dsq40,Original_License,fill,NA,CC BY 4.0
-gori_2020_pss10,Original_License,fill,NA,CC BY 4.0
-gori_2020_swls,Original_License,fill,NA,CC BY 4.0
-gulec_2023_pcl5,Original_License,fill,NA,CC BY 4.0
-gulec_2023_pvs,Original_License,fill,NA,CC BY 4.0
-gulec_2023_tipi,Original_License,fill,NA,CC BY 4.0
-gunandran_2023_whoqol_bref,Original_License,fill,NA,CC0 1.0
-gwen_2025_interpersonal_comm,Original_License,fill,NA,CC BY 4.0
-gwen_2025_mental_health,Original_License,fill,NA,CC BY 4.0
-gwen_2025_self_esteem,Original_License,fill,NA,CC BY 4.0
-gwen_2025_social_support,Original_License,fill,NA,CC BY 4.0
-hadzibajramovic_2022_bat23,Original_License,fill,NA,CC BY 4.0
-halim_2025_digital_finance,Original_License,fill,NA,CC BY 4.0
-halim_2025_fin_behavior,Original_License,fill,NA,CC BY 4.0
-halim_2025_fin_literacy,Original_License,fill,NA,CC BY 4.0
-halim_2025_fin_self_efficacy,Original_License,fill,NA,CC BY 4.0
-halim_2025_fin_skills,Original_License,fill,NA,CC BY 4.0
-halim_2025_fin_stress,Original_License,fill,NA,CC BY 4.0
-halim_2025_fin_wellbeing,Original_License,fill,NA,CC BY 4.0
-harlianto_2025_burnout,Original_License,fill,NA,CC BY 4.0
-harlianto_2025_cyberloafing,Original_License,fill,NA,CC BY 4.0
-harlianto_2025_job_stress,Original_License,fill,NA,CC BY 4.0
-hatemi_2017_sex_freq,Original_License,fill,NA,CC0 1.0
-heriyati_2026_digital_info_literacy,Original_License,fill,NA,CC BY 4.0
-heriyati_2026_digital_networking,Original_License,fill,NA,CC BY 4.0
-heriyati_2026_digital_safety,Original_License,fill,NA,CC BY 4.0
-heriyati_2026_entrepreneurial_intention,Original_License,fill,NA,CC BY 4.0
-heriyati_2026_entrepreneurial_se,Original_License,fill,NA,CC BY 4.0
-heriyati_2026_entrepreneurship_edu,Original_License,fill,NA,CC BY 4.0
-hernandez_martinez_2025_math_attitudes,Original_License,fill,NA,CC BY 4.0
-hitlan_2025_celebrity_attitude,Original_License,fill,NA,CC0 1.0
-hitlan_2025_ders16,Original_License,fill,NA,CC0 1.0
-hitlan_2025_dirty_dozen,Original_License,fill,NA,CC0 1.0
-hlado_2025_burnout,Original_License,fill,NA,CC0 1.0
-hlado_2025_copsoq,Original_License,fill,NA,CC0 1.0
-hlado_2025_job_insecurity,Original_License,fill,NA,CC0 1.0
-hlado_2025_locus_of_control,Original_License,fill,NA,CC0 1.0
-hlado_2025_ptwa,Original_License,fill,NA,CC0 1.0
-hlado_2025_self_efficacy,Original_License,fill,NA,CC0 1.0
-hlado_2025_turnover,Original_License,fill,NA,CC0 1.0
-hlado_2025_work_engagement,Original_License,fill,NA,CC0 1.0
-holzknecht_2022_listening,Original_License,fill,NA,CC0 1.0
-hou_2022_cyberbullying,Original_License,fill,NA,CC0 1.0
-hou_2022_dirty_dozen,Original_License,fill,NA,CC0 1.0
-hou_2022_moral_disengagement,Original_License,fill,NA,CC0 1.0
-hou_2022_online_disinhibition,Original_License,fill,NA,CC0 1.0
-hou_2022_perspective_taking,Original_License,fill,NA,CC0 1.0
-hou_2022_trait_anger,Original_License,fill,NA,CC0 1.0
-iilonga_2023_algebra_word_problems,Original_License,fill,NA,CC BY 4.0
-islam_2021_bai,Original_License,fill,NA,CC BY 4.0
-islam_2021_lotr,Original_License,fill,NA,CC BY 4.0
-islam_2021_maas,Original_License,fill,NA,CC BY 4.0
-islam_2021_phq9,Original_License,fill,NA,CC BY 4.0
-islam_2021_pss4,Original_License,fill,NA,CC BY 4.0
-izquierdo_lopez_2026_eosp,Original_License,fill,NA,CC BY 4.0
-jarbin_2020_mfq_parent,Original_License,fill,NA,CC BY 4.0
-jarbin_2020_mfq_self,Original_License,fill,NA,CC BY 4.0
-jo_2023_via_adoption,Original_License,fill,NA,CC0 1.0
-kacovsky_2022_imi,Original_License,fill,NA,CC BY 4.0
-kahraman_2026_bai,Original_License,fill,NA,CC BY 4.0
-kahraman_2026_zbi,Original_License,fill,NA,CC BY 4.0
-karsen_2025_mooc_motivation,Original_License,fill,NA,CC BY 4.0
-kasparek_2025_audit,Original_License,fill,NA,CC BY-NC-SA 4.0
-kasparek_2025_bhs,Original_License,fill,NA,CC BY-NC-SA 4.0
-kasparek_2025_bpaq,Original_License,fill,NA,CC BY-NC-SA 4.0
-kasparek_2025_gad7,Original_License,fill,NA,CC BY-NC-SA 4.0
-kasparek_2025_jvq,Original_License,fill,NA,CC BY-NC-SA 4.0
-kasparek_2025_phq8,Original_License,fill,NA,CC BY-NC-SA 4.0
-kassas_2021_covid_exposure,Original_License,fill,NA,CC0 1.0
-kassas_2021_covid_mitigation,Original_License,fill,NA,CC0 1.0
-kermen_2019_anxiety,Original_License,fill,NA,CC0 1.0
-kermen_2019_attentional_control,Original_License,fill,NA,CC0 1.0
-kermen_2019_self_efficacy,Original_License,fill,NA,CC0 1.0
-kermen_2019_self_regulation,Original_License,fill,NA,CC0 1.0
-khan_2018_bidr_im,Original_License,fill,NA,CC0 1.0
-khan_2018_bidr_sde,Original_License,fill,NA,CC0 1.0
-khan_2018_ethical_leadership_real,Original_License,fill,NA,CC0 1.0
-khan_2018_ethical_leadership_vignette,Original_License,fill,NA,CC0 1.0
-khan_2018_moral_identity,Original_License,fill,NA,CC0 1.0
-khan_2018_moral_motivation,Original_License,fill,NA,CC0 1.0
-khan_2023_inspiration,Original_License,fill,NA,CC0 1.0
-khan_2023_perceived_motivation,Original_License,fill,NA,CC0 1.0
-khan_2023_perceived_purpose,Original_License,fill,NA,CC0 1.0
-kim_2025_karrot_attitude,Original_License,fill,NA,CC0 1.0
-kim_2025_karrot_behav_intent,Original_License,fill,NA,CC0 1.0
-kim_2025_karrot_econ_motiv,Original_License,fill,NA,CC0 1.0
-kim_2025_karrot_env_motiv,Original_License,fill,NA,CC0 1.0
-kim_2025_karrot_interact_motiv,Original_License,fill,NA,CC0 1.0
-kim_2025_karrot_reput_motiv,Original_License,fill,NA,CC0 1.0
-kolanska_stronka_2026_climate_anxiety,Original_License,fill,NA,CC BY 4.0
-kolanska_stronka_2026_gses,Original_License,fill,NA,CC BY 4.0
-kolanska_stronka_2026_mini_cope,Original_License,fill,NA,CC BY 4.0
-lane_2020_pss,Original_License,fill,NA,CC0 1.0
-lee_2022_ameritrust,Original_License,fill,NA,CC0 1.0
-lee_2022_gen_trust,Original_License,fill,NA,CC0 1.0
-lee_2022_perpol,Original_License,fill,NA,CC0 1.0
-lee_2022_stranger,Original_License,fill,NA,CC0 1.0
-lei_2024_effectiveness,Original_License,fill,NA,CC0 1.0
-lei_2024_engagement,Original_License,fill,NA,CC0 1.0
-lei_2024_external_motivation,Original_License,fill,NA,CC0 1.0
-lei_2024_internal_motivation,Original_License,fill,NA,CC0 1.0
-leis_2025_efl_extrinsic,Original_License,fill,NA,CC0 1.0
-leis_2025_efl_identified,Original_License,fill,NA,CC0 1.0
-leis_2025_efl_intrinsic,Original_License,fill,NA,CC0 1.0
-leis_2025_efl_introjected,Original_License,fill,NA,CC0 1.0
-leis_2025_efl_skill_rating,Original_License,fill,NA,CC0 1.0
-leis_2025_english_motivation,Original_License,fill,NA,CC0 1.0
-leon_rubio_2025_cdpe_antecedents,Original_License,fill,NA,CC BY-NC 4.0
-leon_rubio_2025_cdpe_burnout,Original_License,fill,NA,CC BY-NC 4.0
-leon_rubio_2025_cdpe_consequences,Original_License,fill,NA,CC BY-NC 4.0
-leon_rubio_2025_cdpe_coping,Original_License,fill,NA,CC BY-NC 4.0
-leon_rubio_2025_cdpe_hardiness,Original_License,fill,NA,CC BY-NC 4.0
+faruk_2021_gad7,Original_License,fill,NA,CC BY 4.0
+faruk_2021_phq9,Original_License,fill,NA,CC BY 4.0
+faruk_2021_soss,Original_License,fill,NA,CC BY 4.0
+faruk_2021_suicidal_behavior,Original_License,fill,NA,CC BY 4.0
+frantz_2021_cns,Original_License,fill,NA,CC0 1.0
+frantz_2021_empathy,Original_License,fill,NA,CC0 1.0
+frantz_2021_env_commitment,Original_License,fill,NA,CC0 1.0
+frantz_2021_env_concern,Original_License,fill,NA,CC0 1.0
+frantz_2021_env_norms,Original_License,fill,NA,CC0 1.0
+frantz_2021_mood,Original_License,fill,NA,CC0 1.0
+gimenez_espert_2026_aco,Original_License,fill,NA,CC BY 4.0
+gimenez_espert_2026_unipsico,Original_License,fill,NA,CC BY 4.0
+gimenez_espert_2026_violence,Original_License,fill,NA,CC BY 4.0
+golzar_2024_teacher_burnout,Original_License,fill,NA,CC BY 4.0
+golzar_2024_teacher_grit,Original_License,fill,NA,CC BY 4.0
+golzar_2024_teacher_motivation,Original_License,fill,NA,CC BY 4.0
+golzar_2024_teacher_self_efficacy,Original_License,fill,NA,CC BY 4.0
+guerrero_zambrano_2026_adaptation,Original_License,fill,NA,CC BY 4.0
+guerrero_zambrano_2026_ai_use,Original_License,fill,NA,CC BY 4.0
+guerrero_zambrano_2026_data_mgmt,Original_License,fill,NA,CC BY 4.0
+gutierrez_2025_pupil_digital_competence,Original_License,fill,NA,CC BY 4.0
+habibi_2020_burnout,Original_License,fill,NA,CC BY 4.0
+habibi_2020_te,Original_License,fill,NA,CC BY 4.0
+habibi_2020_tsc,Original_License,fill,NA,CC BY 4.0
+habibi_2021_pe_burnout,Original_License,fill,NA,CC BY 4.0
+habibi_2021_pe_te,Original_License,fill,NA,CC BY 4.0
+habibi_2021_pe_tsc,Original_License,fill,NA,CC BY 4.0
+habibi_2026_burnout,Original_License,fill,NA,CC BY 4.0
+habibi_2026_performance,Original_License,fill,NA,CC BY 4.0
+habibi_2026_teacher_self_concept,Original_License,fill,NA,CC BY 4.0
+habibi_2026_teacher_self_efficacy,Original_License,fill,NA,CC BY 4.0
+habibi_2026_teaching_anxiety,Original_License,fill,NA,CC BY 4.0
+habibi_2026_workload,Original_License,fill,NA,CC BY 4.0
+hendrikx_2022_autonomy,Original_License,fill,NA,CC BY 4.0
+hendrikx_2022_availability_norms,Original_License,fill,NA,CC BY 4.0
+hendrikx_2022_bat,Original_License,fill,NA,CC BY 4.0
+hendrikx_2022_telepressure,Original_License,fill,NA,CC BY 4.0
+heryanda_2025_gamification_features,Original_License,fill,NA,CC BY 4.0
+heryanda_2025_psychological_needs,Original_License,fill,NA,CC BY 4.0
+heryanda_2025_usage_outcomes,Original_License,fill,NA,CC BY 4.0
+hlado_2025b_burnout,Original_License,fill,NA,CC0 1.0
+hlado_2025b_twas,Original_License,fill,NA,CC0 1.0
+huentemilla_2026_digital_competence_test,Original_License,fill,NA,CC BY 4.0
+iclr_2024_peer_review,Original_License,fill,NA,CC BY 4.0
+jonathan_2026_ai_adoption,Original_License,fill,NA,CC BY 4.0
+jonathan_2026_digital_competence,Original_License,fill,NA,CC BY 4.0
+jonathan_2026_pbc,Original_License,fill,NA,CC BY 4.0
+jonathan_2026_technology_readiness,Original_License,fill,NA,CC BY 4.0
+karim_2026_mhl,Original_License,fill,NA,CC BY 4.0
+kellstedt_2017_civic_action,Original_License,fill,NA,CC0 1.0
+kellstedt_2017_climate_effects,Original_License,fill,NA,CC0 1.0
+kellstedt_2017_competence,Original_License,fill,NA,CC0 1.0
+kellstedt_2017_concern_future,Original_License,fill,NA,CC0 1.0
+kellstedt_2017_concern_now,Original_License,fill,NA,CC0 1.0
+kellstedt_2017_eco_behavior,Original_License,fill,NA,CC0 1.0
+kellstedt_2017_gwcc_attitudes,Original_License,fill,NA,CC0 1.0
+kellstedt_2017_info_source_trust,Original_License,fill,NA,CC0 1.0
+kellstedt_2017_info_source_use,Original_License,fill,NA,CC0 1.0
+kellstedt_2017_informed,Original_License,fill,NA,CC0 1.0
+kellstedt_2017_nep,Original_License,fill,NA,CC0 1.0
+kellstedt_2017_policy_support,Original_License,fill,NA,CC0 1.0
+kellstedt_2017_science_quiz,Original_License,fill,NA,CC0 1.0
+le_2024_digicas_hps,Original_License,fill,NA,CC BY 4.0
 li_2024_bdyz,Description,conflict,"4-item Expressive Suppression subscale of the ERQ (Gross & John, 2003; 1-7 Likert; deposit ships the items labelled 1/2/6/9), same sample as li_2024_fa","4-item body-image scale subset (items 1/2/6/9 only, 1-7 Likert), same sample as li_2024_fa"
-li_2026_coab,Original_License,fill,NA,CC BY 4.0
-li_2026_empathy,Original_License,fill,NA,CC BY 4.0
-li_2026_nad,Original_License,fill,NA,CC BY 4.0
-li_2026_pd,Original_License,fill,NA,CC BY 4.0
-li_2026_pev,Original_License,fill,NA,CC BY 4.0
-lin_2023_depression,Original_License,fill,NA,CC BY 4.0
-lin_2023_exp_avoidance,Original_License,fill,NA,CC BY 4.0
-lin_2023_harsh_parenting,Original_License,fill,NA,CC BY 4.0
-lin_2023_smartphone_addiction,Original_License,fill,NA,CC BY 4.0
-liu_2026_competitive_goals,Original_License,fill,NA,CC BY 4.0
-liu_2026_empathy,Original_License,fill,NA,CC BY 4.0
-liu_2026_moral_disengagement,Original_License,fill,NA,CC BY 4.0
-liu_2026_self_control,Original_License,fill,NA,CC BY 4.0
-liu_2026_social_alienation,Original_License,fill,NA,CC BY 4.0
-makkiyah_2023_eq,Original_License,fill,NA,CC BY 4.0
-makkiyah_2023_gse,Original_License,fill,NA,CC BY 4.0
-makkiyah_2023_motivation,Original_License,fill,NA,CC BY 4.0
-makkiyah_2023_srl,Original_License,fill,NA,CC BY 4.0
-matuz_2024_bdi9,Original_License,fill,NA,CC BY 4.0
-matuz_2024_cpdi,Original_License,fill,NA,CC BY 4.0
-matuz_2024_iesr,Original_License,fill,NA,CC BY 4.0
-matuz_2024_ptgi,Original_License,fill,NA,CC BY 4.0
-matuz_2024_stai_s,Original_License,fill,NA,CC BY 4.0
-matuz_2024_stai_t,Original_License,fill,NA,CC BY 4.0
-matuz_2024_woc,Original_License,fill,NA,CC BY 4.0
-mclean_2022_avpd,Original_License,fill,NA,CC0 1.0
-mclean_2022_dass21,Original_License,fill,NA,CC0 1.0
-mclean_2022_help_seeking,Original_License,fill,NA,CC0 1.0
-mclean_2022_mps,Original_License,fill,NA,CC0 1.0
-mclean_2022_pals,Original_License,fill,NA,CC0 1.0
-mclean_2022_psps,Original_License,fill,NA,CC0 1.0
-mclean_2022_rses,Original_License,fill,NA,CC0 1.0
-meden_2026_podcast_critical,Original_License,fill,NA,CC BY 4.0
-meden_2026_podcast_depth,Original_License,fill,NA,CC BY 4.0
-meden_2026_podcast_learning,Original_License,fill,NA,CC BY 4.0
-meyer_2022_bfi,Original_License,fill,NA,CC BY 4.0
-meyer_2022_covid_beliefs,Original_License,fill,NA,CC BY 4.0
-meyer_2022_covid_selfeff,Original_License,fill,NA,CC BY 4.0
-meyer_2022_pss10,Original_License,fill,NA,CC BY 4.0
-montana_blasco_2026_ai_literacy,Original_License,fill,NA,CC BY 4.0
-montana_blasco_2026_content_freq,Original_License,fill,NA,CC BY 4.0
-montana_blasco_2026_coping,Original_License,fill,NA,CC BY 4.0
-montana_blasco_2026_digital_skills,Original_License,fill,NA,CC BY 4.0
-montana_blasco_2026_mh_statements,Original_License,fill,NA,CC BY 4.0
-montana_blasco_2026_mi_attitudes,Original_License,fill,NA,CC BY 4.0
-montana_blasco_2026_sm_impact,Original_License,fill,NA,CC BY 4.0
-montana_blasco_2026_tiktok_wellbeing,Original_License,fill,NA,CC BY 4.0
-moore_2023_ptgi,Original_License,fill,NA,CC0 1.0
-moore_2023_well,Original_License,fill,NA,CC0 1.0
-moore_2023_who5,Original_License,fill,NA,CC0 1.0
-moral_absolutism_goyal_2025_immorality,Original_License,fill,NA,Permission via Email
-moral_absolutism_goyal_2025_mr_agree,Original_License,fill,NA,Permission via Email
-moral_absolutism_goyal_2025_nfc15,Original_License,fill,NA,Permission via Email
-moral_absolutism_goyal_2025_nfc41,Original_License,fill,NA,Permission via Email
-morales_2025_ehealth_much,Original_License,fill,NA,CC BY 4.0
-moreno_jorquera_2025_amtb_att_learn,Original_License,fill,NA,CC0 1.0
-moreno_jorquera_2025_amtb_att_people,Original_License,fill,NA,CC0 1.0
-moreno_jorquera_2025_amtb_course,Original_License,fill,NA,CC0 1.0
-moreno_jorquera_2025_amtb_desire,Original_License,fill,NA,CC0 1.0
-moreno_jorquera_2025_amtb_instrum,Original_License,fill,NA,CC0 1.0
-moreno_jorquera_2025_amtb_integr,Original_License,fill,NA,CC0 1.0
-moreno_jorquera_2025_amtb_intensity,Original_License,fill,NA,CC0 1.0
-moreno_jorquera_2025_amtb_interest,Original_License,fill,NA,CC0 1.0
-moreno_jorquera_2025_amtb_teacher,Original_License,fill,NA,CC0 1.0
-mullinix_2015_political_knowledge,Original_License,fill,NA,CC0 1.0
-naulia_2026_chatgpt_use,Original_License,fill,NA,CC BY 4.0
-naulia_2026_learning_motivation,Original_License,fill,NA,CC BY 4.0
-nguyen_2024_cpd_benefits,Original_License,fill,NA,CC0 1.0
-nguyen_2024_cpd_conditions,Original_License,fill,NA,CC0 1.0
-nguyen_2024_cpd_motivation,Original_License,fill,NA,CC0 1.0
-nguyen_2024_cpd_willingness,Original_License,fill,NA,CC0 1.0
-nicholson_crotty_2021_psm,Original_License,fill,NA,CC0 1.0
+li_2024_big_five,Original_License,fill,NA,CC BY 4.0
+li_2024_mind_wandering,Original_License,fill,NA,CC BY 4.0
+li_2024_trait_anxiety,Original_License,fill,NA,CC BY 4.0
+li_2026_efl_listening_bk,Original_License,fill,NA,CC BY 4.0
+li_2026_efl_listening_cs,Original_License,fill,NA,CC BY 4.0
+li_2026_efl_listening_lct,Original_License,fill,NA,CC BY 4.0
+li_2026_efl_listening_lts,Original_License,fill,NA,CC BY 4.0
+li_2026_efl_listening_ms,Original_License,fill,NA,CC BY 4.0
+li_2026_efl_listening_ps,Original_License,fill,NA,CC BY 4.0
+li_2026_hsc_awareness,Original_License,fill,NA,CC0 1.0
+li_2026_hsc_competence,Original_License,fill,NA,CC0 1.0
+li_2026_hsc_implementation,Original_License,fill,NA,CC0 1.0
+li_2026_hsc_recognition,Original_License,fill,NA,CC0 1.0
+li_2026_vocational_ct,Original_License,fill,NA,CC0 1.0
+li_2026_vocational_dc,Original_License,fill,NA,CC0 1.0
+li_2026_vocational_jts,Original_License,fill,NA,CC0 1.0
+li_2026_vocational_pi,Original_License,fill,NA,CC0 1.0
+liu_2024_teacher_grit,Original_License,fill,NA,CC BY 4.0
+loi_2018_exchange_ideology,Original_License,fill,NA,CC BY 4.0
+loi_2018_mbi_es,Original_License,fill,NA,CC BY 4.0
+loi_2018_pos,Original_License,fill,NA,CC BY 4.0
+loi_2018_teacher_self_efficacy,Original_License,fill,NA,CC BY 4.0
+loi_2018_workload_increase,Original_License,fill,NA,CC BY 4.0
+ma_2026_psec,Original_License,fill,NA,CC0 1.0
+ma_2026_towb,Original_License,fill,NA,CC0 1.0
+ma_2026_tpi,Original_License,fill,NA,CC0 1.0
+mairean_2023_cmq,Original_License,fill,NA,CC BY 4.0
+mairean_2023_covid_anxiety,Original_License,fill,NA,CC BY 4.0
+mairean_2023_covid_conspiracy,Original_License,fill,NA,CC BY 4.0
+mairean_2023_dogmatism,Original_License,fill,NA,CC BY 4.0
+mairean_2023_ius12,Original_License,fill,NA,CC BY 4.0
+mairean_2023_ukraine_anxiety,Original_License,fill,NA,CC BY 4.0
+mairean_2023_ukraine_conspiracy,Original_License,fill,NA,CC BY 4.0
+manylabs1_klein_2014_art_attitude,Original_License,fill,NA,CC0 1.0
+manylabs1_klein_2014_flagdv,Original_License,fill,NA,CC0 1.0
+manylabs1_klein_2014_imagined_contact,Original_License,fill,NA,CC0 1.0
+manylabs1_klein_2014_math_attitude,Original_License,fill,NA,CC0 1.0
+manylabs1_klein_2014_sysjust,Original_License,fill,NA,CC0 1.0
+manylabs2_klein_2018_alter,Original_License,fill,NA,CC0 1.0
+manylabs2_klein_2018_bauer,Original_License,fill,NA,CC0 1.0
+manylabs2_klein_2018_giessner,Original_License,fill,NA,CC0 1.0
+manylabs2_klein_2018_mfq,Original_License,fill,NA,CC0 1.0
+manylabs2_klein_2018_panas,Original_License,fill,NA,CC0 1.0
+manylabs2_klein_2018_swls,Original_License,fill,NA,CC0 1.0
+manylabs2_klein_2018_tipi,Original_License,fill,NA,CC0 1.0
+manylabs2_klein_2018_zhong,Original_License,fill,NA,CC0 1.0
+manylabs3_ebersole_2016_elm,Original_License,fill,NA,CC BY 4.0
+manylabs3_ebersole_2016_intrinsic,Original_License,fill,NA,CC BY 4.0
+manylabs3_ebersole_2016_nfc,Original_License,fill,NA,CC BY 4.0
+manylabs3_ebersole_2016_sexism_most,Original_License,fill,NA,CC BY 4.0
+manylabs3_ebersole_2016_sexism_some,Original_License,fill,NA,CC BY 4.0
+manylabs3_ebersole_2016_stress,Original_License,fill,NA,CC BY 4.0
+manylabs3_ebersole_2016_tipi,Original_License,fill,NA,CC BY 4.0
+manylabs4_klein_2022_essay,Original_License,fill,NA,CC0 1.0
+manylabs4_klein_2022_panasx,Original_License,fill,NA,CC0 1.0
+manysmiles_coles_2022_body_awareness,Original_License,fill,NA,CC0 1.0
+manysmiles_coles_2022_emotion,Original_License,fill,NA,CC0 1.0
+marian_2023_gad,Original_License,fill,NA,CC BY 4.0
+marian_2023_phq9,Original_License,fill,NA,CC BY 4.0
+marian_2023_thoughts,Original_License,fill,NA,CC BY 4.0
+martinez_lopez_2019_cobadi,Original_License,fill,NA,CC BY 4.0
+montenegro_villarreal_2026_utaut,Original_License,fill,NA,CC BY 4.0
+mugisha_2026_ehr_competence,Original_License,fill,NA,CC0 1.0
+mugisha_2026_ehr_status,Original_License,fill,NA,CC0 1.0
+mugisha_2026_ehr_use,Original_License,fill,NA,CC0 1.0
+nepal_2024_phq4,Original_License,fill,NA,CC BY-NC-SA 4.0
+nepal_2024_state_self_esteem,Original_License,fill,NA,CC BY-NC-SA 4.0
+neubauer_2021_paco_autonomy_support,Original_License,fill,NA,CC BY 4.0
+neubauer_2021_paco_bmpn,Original_License,fill,NA,CC BY 4.0
+neubauer_2021_paco_child_affect,Original_License,fill,NA,CC BY 4.0
+neubauer_2021_paco_corona_info,Original_License,fill,NA,CC BY 4.0
+neubauer_2021_paco_mindfulness,Original_License,fill,NA,CC BY 4.0
+neubauer_2021_paco_parent_affect,Original_License,fill,NA,CC BY 4.0
+neubauer_2021_paco_parenting,Original_License,fill,NA,CC BY 4.0
+neubauer_2021_paco_stressors,Original_License,fill,NA,CC BY 4.0
+neubauer_2021_paco_worry,Original_License,fill,NA,CC BY 4.0
+neubauer_2023_stecco_activity_motivation,Original_License,fill,NA,CC BY 4.0
+neubauer_2023_stecco_emotion_regulation,Original_License,fill,NA,CC BY 4.0
+neubauer_2023_stecco_eod_affect,Original_License,fill,NA,CC BY 4.0
+neubauer_2023_stecco_eod_bmpn,Original_License,fill,NA,CC BY 4.0
+neubauer_2023_stecco_esm_affect,Original_License,fill,NA,CC BY 4.0
+neubauer_2023_stecco_father_parenting,Original_License,fill,NA,CC BY 4.0
+neubauer_2023_stecco_mother_parenting,Original_License,fill,NA,CC BY 4.0
+neubauer_2023_stecco_study_motivation,Original_License,fill,NA,CC BY 4.0
+neubauer_2023_stecco_study_satisfaction,Original_License,fill,NA,CC BY 4.0
+oliveira_2026_healthcare_experiences,Original_License,fill,NA,CC BY 4.0
+oliveira_2026_wbis,Original_License,fill,NA,CC BY 4.0
+omale_2025_ppd_beliefs,Original_License,fill,NA,CC BY 4.0
+omale_2025_ppd_control,Original_License,fill,NA,CC BY 4.0
+omale_2025_ppd_info_sources,Original_License,fill,NA,CC BY 4.0
+omale_2025_ppd_intention,Original_License,fill,NA,CC BY 4.0
+omale_2025_ppd_knowledge,Original_License,fill,NA,CC BY 4.0
+omale_2025_ppd_norms,Original_License,fill,NA,CC BY 4.0
 opladen2025_edeq,Description,conflict,Eating Disorder Examination Questionnaire (EDE-Q; 28 items); German clinical sample BN/BDD/IAD N=217; 1-7 as deposited (the deposit's syntax recodes to the usual 0-6); items 13-18 are frequency counts 0-112,Eating Disorder Examination Questionnaire (EDE-Q; 28 items); German clinical sample BN/BDD/IAD N≈211; 0-6 (items 13-18 are frequency counts 0-28+)
 opladen2025_fkg,Description,conflict,"Health/illness-cognition items FKG (20 items, 1-4), probably the Fragebogen zu Körper und Gesundheit (Hiller et al., 1997) -- the deposit never names it; German clinical sample BN/BDD/IAD N=217",Body feelings questionnaire FKG (20 items); German clinical sample BN/BDD/IAD N≈210; 1-4
 opladen2025_fks,Description,conflict,"Fragebogen körperdysmorpher Symptome (FKS; Buhlmann et al., 2009), a German self-report screener for body dysmorphic disorder (17 of 18 items; FKS_2 absent from the deposit); German clinical sample BN/BDD/IAD N=217; 1-5",Body schema questionnaire FKS (17 items); German clinical sample BN/BDD/IAD N≈211; 0-5
 opladen2025_wi,Description,conflict,"Whiteley Index (WI; 14 items, binary 1-2), a health-anxiety (hypochondriasis) screener; German clinical sample BN/BDD/IAD N=217","Body image scale WI (14 items, binary 1-2); German clinical sample BN/BDD/IAD N≈210"
-orsini_2018_ams,Original_License,fill,NA,CC0 1.0
-orsini_2018_bpns,Original_License,fill,NA,CC0 1.0
-orsini_2018_learning_strategy,Original_License,fill,NA,CC0 1.0
-orsini_2018_self_esteem,Original_License,fill,NA,CC0 1.0
-orsini_2018_vitality,Original_License,fill,NA,CC0 1.0
-panth_2026_bipq,Original_License,fill,NA,CC BY 4.0
-panth_2026_cdrisc10,Original_License,fill,NA,CC BY 4.0
-perez_hernandez_2021_cesd7,Original_License,fill,NA,CC BY 4.0
-perez_hernandez_2021_elcsa,Original_License,fill,NA,CC BY 4.0
-perez_hernandez_2021_gad7,Original_License,fill,NA,CC BY 4.0
-petrovici_2025_cultural_participation,Original_License,fill,NA,CC BY 4.0
-petrovici_2025_culture_appreciation,Original_License,fill,NA,CC BY 4.0
-petrovici_2025_wellbeing,Original_License,fill,NA,CC BY 4.0
-pinedo_2026_genai_utaut2,Original_License,fill,NA,CC BY 4.0
-pinheiro_2024_naqr,Original_License,fill,NA,CC BY 4.0
-pinheiro_2024_srq20,Original_License,fill,NA,CC BY 4.0
-pinho_2026_ai_literacy,Original_License,fill,NA,CC BY 4.0
-pinho_2026_ai_self_efficacy,Original_License,fill,NA,CC BY 4.0
-pinho_2026_behavioral_intention,Original_License,fill,NA,CC BY 4.0
-pinho_2026_effort_expectancy,Original_License,fill,NA,CC BY 4.0
-pinho_2026_facilitating_conditions,Original_License,fill,NA,CC BY 4.0
-pinho_2026_genai_reliance,Original_License,fill,NA,CC BY 4.0
-pinho_2026_genai_task_use,Original_License,fill,NA,CC BY 4.0
-pinho_2026_genai_writing_use,Original_License,fill,NA,CC BY 4.0
-pinho_2026_habit,Original_License,fill,NA,CC BY 4.0
-pinho_2026_performance_expectancy,Original_License,fill,NA,CC BY 4.0
-pinho_2026_social_influence,Original_License,fill,NA,CC BY 4.0
-prihandoko_2025_ews,Original_License,fill,NA,CC BY 4.0
-prilyasinta_2026_connectedness,Original_License,fill,NA,CC BY 4.0
-prilyasinta_2026_identity,Original_License,fill,NA,CC BY 4.0
-prilyasinta_2026_intensity,Original_License,fill,NA,CC BY 4.0
-prilyasinta_2026_multilingualism,Original_License,fill,NA,CC BY 4.0
-prilyasinta_2026_pilot_items,Original_License,fill,NA,CC BY 4.0
-prilyasinta_2026_responsibility,Original_License,fill,NA,CC BY 4.0
-purnama_2023_attitude,Original_License,fill,NA,CC0 1.0
-purnama_2023_constraints,Original_License,fill,NA,CC0 1.0
-purnama_2023_digital_need,Original_License,fill,NA,CC0 1.0
-purnama_2023_environment,Original_License,fill,NA,CC0 1.0
-purnama_2023_program_benefit,Original_License,fill,NA,CC0 1.0
-purnama_2023_threat,Original_License,fill,NA,CC0 1.0
-rajeev_2025_bigfive,Original_License,fill,NA,CC0 1.0
-rajeev_2025_panas,Original_License,fill,NA,CC0 1.0
-rajeev_2025_superstition,Original_License,fill,NA,CC0 1.0
-rapallini_2023_raven,Original_License,fill,NA,CC0 1.0
-rathod_2026_dass21,Original_License,fill,NA,CC0 1.0
-rexand_galais_2022_ipo,Original_License,fill,NA,CC BY 4.0
-rexand_galais_2022_ipofr,Original_License,fill,NA,CC BY 4.0
-rodriguez_lima_2023_eq5d3l,Original_License,fill,NA,CC BY 4.0
-rogowska_2025_agq_other_app,Original_License,fill,NA,CC BY 4.0
-rogowska_2025_agq_other_av,Original_License,fill,NA,CC BY 4.0
-rogowska_2025_agq_self_app,Original_License,fill,NA,CC BY 4.0
-rogowska_2025_agq_self_av,Original_License,fill,NA,CC BY 4.0
-rogowska_2025_agq_task_app,Original_License,fill,NA,CC BY 4.0
-rogowska_2025_agq_task_av,Original_License,fill,NA,CC BY 4.0
-rogowska_2025_csai_cognitive,Original_License,fill,NA,CC BY 4.0
-rogowska_2025_csai_confidence,Original_License,fill,NA,CC BY 4.0
-rogowska_2025_csai_somatic,Original_License,fill,NA,CC BY 4.0
-rosado_2026_eureka,Original_License,fill,NA,CC BY 4.0
-rothlin_2022_scs_sf,Original_License,fill,NA,CC0 1.0
-sadish_2021_covid_beliefs,Original_License,fill,NA,CC0 1.0
-salomon_2014_ethnic_essentialism,Original_License,fill,NA,CC0 1.0
-salomon_2014_gender_essentialism,Original_License,fill,NA,CC0 1.0
-salomon_2014_hre_informative,Original_License,fill,NA,CC0 1.0
-salomon_2014_hre_innateness,Original_License,fill,NA,CC0 1.0
-salomon_2014_hre_stability,Original_License,fill,NA,CC0 1.0
-salomon_2014_hre_underlying,Original_License,fill,NA,CC0 1.0
-salomon_2014_hre_uniformity,Original_License,fill,NA,CC0 1.0
-salomon_2014_inherence,Original_License,fill,NA,CC0 1.0
-salomon_2014_race_essentialism,Original_License,fill,NA,CC0 1.0
-sanz_martos_2024_stai_state,Original_License,fill,NA,CC0 1.0
-sanz_martos_2024_stai_trait,Original_License,fill,NA,CC0 1.0
-sauerbronn_2025_affective_presence,Original_License,fill,NA,CC0 1.0
-sauerbronn_2025_authentic_leadership,Original_License,fill,NA,CC0 1.0
-sauerbronn_2025_interactional_justice,Original_License,fill,NA,CC0 1.0
-sauerbronn_2025_job_satisfaction,Original_License,fill,NA,CC0 1.0
-schoen_2007_neoffi,Original_License,fill,NA,CC0 1.0
-sejna_2025_academic_self_concept,Original_License,fill,NA,CC BY 4.0
-sejna_2025_saqc,Original_License,fill,NA,CC BY 4.0
-sejna_2025_social_integration,Original_License,fill,NA,CC BY 4.0
-sijbrandij_2018_eq5d5l,Original_License,fill,NA,CC0 1.0
-sijbrandij_2018_whoqol_bref,Original_License,fill,NA,CC0 1.0
-smith_2022_expressive_partisan,Original_License,fill,NA,CC0 1.0
-smith_2022_negative_partisan,Original_License,fill,NA,CC0 1.0
-smith_2022_trust,Original_License,fill,NA,CC0 1.0
-sobczak_2024_bmast,Original_License,fill,NA,CC BY 4.0
-sobczak_2024_dddt,Original_License,fill,NA,CC BY 4.0
-song_2026_fqol,Original_License,fill,NA,CC0 1.0
-song_2026_parenting_self_efficacy,Original_License,fill,NA,CC0 1.0
-song_2026_parenting_style,Original_License,fill,NA,CC0 1.0
-spasovski_2020_perma,Original_License,fill,NA,CC0 1.0
-stanford_2019_bbrs_belief,Original_License,fill,NA,CC0 1.0
-stanford_2019_bbrs_frequency,Original_License,fill,NA,CC0 1.0
-stanford_2019_buddhism_attitud,Original_License,fill,NA,CC0 1.0
-stapleton_2021_lotr,Original_License,fill,NA,CC0 1.0
-stapleton_2021_polknow,Original_License,fill,NA,CC0 1.0
-stapleton_2021_polknow18,Original_License,fill,NA,CC0 1.0
-stapleton_2021_tipi,Original_License,fill,NA,CC0 1.0
-stecula_2020_antivax,Original_License,fill,NA,CC0 1.0
-syamsuar_2025_behavioral_intention,Original_License,fill,NA,CC BY 4.0
-syamsuar_2025_effort_expectancy,Original_License,fill,NA,CC BY 4.0
-syamsuar_2025_facilitating_conditions,Original_License,fill,NA,CC BY 4.0
-syamsuar_2025_perceived_severity,Original_License,fill,NA,CC BY 4.0
-syamsuar_2025_perceived_vulnerability,Original_License,fill,NA,CC BY 4.0
-syamsuar_2025_performance_expectancy,Original_License,fill,NA,CC BY 4.0
-syamsuar_2025_protective_behavior,Original_License,fill,NA,CC BY 4.0
-syamsuar_2025_response_cost,Original_License,fill,NA,CC BY 4.0
-syamsuar_2025_response_efficacy,Original_License,fill,NA,CC BY 4.0
-syamsuar_2025_self_efficacy,Original_License,fill,NA,CC BY 4.0
-syamsuar_2025_social_influence,Original_License,fill,NA,CC BY 4.0
-syamsuar_2025_usage_behavior,Original_License,fill,NA,CC BY 4.0
-takacs_2026_aces,Original_License,fill,NA,CC BY 4.0
-takacs_2026_cdrisc10,Original_License,fill,NA,CC BY 4.0
-takacs_2026_gad7,Original_License,fill,NA,CC BY 4.0
-takacs_2026_maas,Original_License,fill,NA,CC BY 4.0
-takacs_2026_phq9,Original_License,fill,NA,CC BY 4.0
-tangarife_2026_ai_benefits,Original_License,fill,NA,CC BY 4.0
-tangarife_2026_ai_reservations,Original_License,fill,NA,CC BY 4.0
-tangarife_2026_ai_use,Original_License,fill,NA,CC BY 4.0
-tangarife_2026_ease_of_use,Original_License,fill,NA,CC BY 4.0
-tangarife_2026_research_barriers,Original_License,fill,NA,CC BY 4.0
-tangarife_2026_social_influence,Original_License,fill,NA,CC BY 4.0
-tangarife_2026_use_intention,Original_License,fill,NA,CC BY 4.0
-tavolacci_2017_audit,Original_License,fill,NA,CC BY 4.0
-tavolacci_2017_mbi_ee,Original_License,fill,NA,CC BY 4.0
-tavolacci_2017_pss10,Original_License,fill,NA,CC BY 4.0
-tavolacci_2017_scoff,Original_License,fill,NA,CC BY 4.0
-tian_2025_poms_anger,Original_License,fill,NA,CC BY 4.0
-tian_2025_poms_confusion,Original_License,fill,NA,CC BY 4.0
-tian_2025_poms_depression,Original_License,fill,NA,CC BY 4.0
-tian_2025_poms_fatigue,Original_License,fill,NA,CC BY 4.0
-tian_2025_poms_tension,Original_License,fill,NA,CC BY 4.0
-tian_2025_poms_vigor,Original_License,fill,NA,CC BY 4.0
-treglown_2016_burnout,Original_License,fill,NA,CC BY 4.0
-treglown_2016_rs14,Original_License,fill,NA,CC BY 4.0
-trusz_2025_ai_tpack,Original_License,fill,NA,CC0 1.0
-trusz_2025_techno_anxiety,Original_License,fill,NA,CC0 1.0
-trusz_2025_technostress,Original_License,fill,NA,CC0 1.0
-uffler_2017_lecture_seating,Description,conflict,"26-item, 1-7 Likert questionnaire on motivations for lecture-hall seating choice, health sciences students","MSLQ motivation section (Pintrich et al. 1991), 26 items on 1-7: the motivation block with its five test-anxiety items dropped and renumbered Q1..Q26; administered in  untested French translation; health sciences students, seat row recorded per student"
-uffler_2017_lecture_seating,Original_License,fill,NA,CC BY 4.0
-uritani_2023_ases8,Original_License,fill,NA,CC BY 4.0
-useche_2022_cbq,Original_License,fill,NA,CC0 1.0
-useche_2022_rprs,Original_License,fill,NA,CC0 1.0
-van_beveren_2019_cdi,Original_License,fill,NA,CC0 1.0
-van_beveren_2019_feelkj,Original_License,fill,NA,CC0 1.0
-van_beveren_2019_panasc,Original_License,fill,NA,CC0 1.0
-vasquez_2013_reading_comprehension,Original_License,fill,NA,CC0 1.0
-vegetti_2021_aggression,Original_License,fill,NA,CC0 1.0
-vegetti_2021_conspiracy,Original_License,fill,NA,CC0 1.0
-vegetti_2021_intself,Original_License,fill,NA,CC0 1.0
-vegetti_2021_radical_action,Original_License,fill,NA,CC0 1.0
-vegetti_2021_rwa,Original_License,fill,NA,CC0 1.0
-vegetti_2021_sdo,Original_License,fill,NA,CC0 1.0
-vegetti_2021_trust,Original_License,fill,NA,CC0 1.0
-vegetti_2021_violence,Original_License,fill,NA,CC0 1.0
-vilela_estrada_2025_hads,Original_License,fill,NA,CC BY 4.0
-vogel_2024_attribute_valence_s3,Original_License,fill,NA,CC BY 4.0
-vogel_2024_citizen_attributes_s2,Original_License,fill,NA,CC BY 4.0
-vogel_2024_citizen_attributes_s3,Original_License,fill,NA,CC BY 4.0
-wang_2026_cognitive_load,Original_License,fill,NA,CC0 1.0
-wang_2026_moral_elevation,Original_License,fill,NA,CC0 1.0
-wang_2026_moral_exposure,Original_License,fill,NA,CC0 1.0
-wang_2026_panas_na,Original_License,fill,NA,CC0 1.0
-wang_2026_panas_pa,Original_License,fill,NA,CC0 1.0
-wang_2026_pse,Original_License,fill,NA,CC0 1.0
-wang_2026_psm,Original_License,fill,NA,CC0 1.0
-wang_2026_social_desirability,Original_License,fill,NA,CC0 1.0
-weber_2026_name_interaction,Original_License,fill,NA,CC0 1.0
-wellbeing_kocar_2025_ls,Original_License,fill,NA,CC0 1.0
-wellbeing_kocar_2025_swb,Original_License,fill,NA,CC0 1.0
-wellbeing_kocar_2025_wb,Original_License,fill,NA,CC0 1.0
-wendel_2022_rfq,Original_License,fill,NA,CC0 1.0
-wenzke_2025_att_sd_a,Original_License,fill,NA,CC BY 4.0
-wenzke_2025_att_sd_b,Original_License,fill,NA,CC BY 4.0
-wenzke_2025_attitude,Original_License,fill,NA,CC BY 4.0
-wenzke_2025_info_quality,Original_License,fill,NA,CC BY 4.0
-wenzke_2025_intention,Original_License,fill,NA,CC BY 4.0
-wenzke_2025_knowledge,Original_License,fill,NA,CC BY 4.0
-wenzke_2025_pbc,Original_License,fill,NA,CC BY 4.0
-wenzke_2025_personal_norm,Original_License,fill,NA,CC BY 4.0
-wenzke_2025_social_norm,Original_License,fill,NA,CC BY 4.0
-wilkins_2018_phq9,Original_License,fill,NA,CC0
-wolbers_2017_class_contact,Original_License,fill,NA,CC0 1.0
-wolbers_2017_conversation,Original_License,fill,NA,CC0 1.0
-wolbers_2017_home_lang_act,Original_License,fill,NA,CC0 1.0
-wolbers_2017_home_resources,Original_License,fill,NA,CC0 1.0
-wolbers_2017_lang_act_par,Original_License,fill,NA,CC0 1.0
-wolbers_2017_listening,Original_License,fill,NA,CC0 1.0
-wolbers_2017_parent_dutch,Original_License,fill,NA,CC0 1.0
-wolbers_2017_parent_lit_act,Original_License,fill,NA,CC0 1.0
-wolbers_2017_speak_anxiety,Original_License,fill,NA,CC0 1.0
-wolbers_2017_speak_climate,Original_License,fill,NA,CC0 1.0
-wolbers_2017_speak_enjoy,Original_License,fill,NA,CC0 1.0
-wolbers_2017_speaking,Original_License,fill,NA,CC0 1.0
-wolbers_2017_teach_contact,Original_License,fill,NA,CC0 1.0
-wunn_2026_cognitive_load,Original_License,fill,NA,CC BY 4.0
-wunn_2026_imi,Original_License,fill,NA,CC BY 4.0
-wunn_2026_research_competence,Original_License,fill,NA,CC BY 4.0
-xu_2018_authentic_leadership,Original_License,fill,NA,CC0 1.0
-xu_2018_emotional_exhaustion,Original_License,fill,NA,CC0 1.0
-xu_2018_psych_empowerment,Original_License,fill,NA,CC0 1.0
-xu_2018_structural_empowerment,Original_License,fill,NA,CC0 1.0
-xu_2026_game_experience,Original_License,fill,NA,CC BY 4.0
-xu_2026_participation,Original_License,fill,NA,CC BY 4.0
-xu_2026_substitutability,Original_License,fill,NA,CC BY 4.0
-xue_2026_mcq,Original_License,fill,NA,CC BY 4.0
-yan_2023_coach_burnout,Original_License,fill,NA,CC BY 4.0
-yan_2023_coaching_efficacy,Original_License,fill,NA,CC BY 4.0
-yan_2023_eri,Original_License,fill,NA,CC BY 4.0
-yan_2023_job_stress,Original_License,fill,NA,CC BY 4.0
-yan_2023_overcommitment,Original_License,fill,NA,CC BY 4.0
-yang_2026_academic_dishonesty,Original_License,fill,NA,CC BY 4.0
-yang_2026_ai_literacy,Original_License,fill,NA,CC BY 4.0
-yang_2026_epistemic_beliefs,Original_License,fill,NA,CC BY 4.0
-yu_2015_bdi,Original_License,fill,NA,CC BY 4.0
-yuan_2026_vr_chinese,Original_License,fill,NA,CC BY 4.0
-zabelina_2022_caq,Original_License,fill,NA,CC0 1.0
-zeng_2022_academic_burnout,Original_License,fill,NA,CC BY 4.0
-zeng_2022_core_beliefs,Original_License,fill,NA,CC BY 4.0
-zeng_2022_ptgi,Original_License,fill,NA,CC BY 4.0
-zhang_2023_coping_appraisal,Original_License,fill,NA,CC BY 4.0
-zhang_2023_quit_intention,Original_License,fill,NA,CC BY 4.0
-zhang_2023_self_exempt,Original_License,fill,NA,CC BY 4.0
-zhang_2023_threat_appraisal,Original_License,fill,NA,CC BY 4.0
-zhang_2025_grit,Original_License,fill,NA,CC0 1.0
-zhang_2025_learning_engagement,Original_License,fill,NA,CC0 1.0
-zhang_2025_relative_grades,Original_License,fill,NA,CC0 1.0
-zhang_2025_schisto_attitude,Original_License,fill,NA,CC BY 4.0
-zhang_2025_schisto_knowledge,Original_License,fill,NA,CC BY 4.0
-zhang_2025_schisto_practice,Original_License,fill,NA,CC BY 4.0
-zhang_2025_stress_mindset,Original_License,fill,NA,CC0 1.0
-zhang_2025_study_performance,Original_License,fill,NA,CC0 1.0
-zhang_2026_ai_companion,Original_License,fill,NA,CC BY 4.0
-zhao_2023_growth_mindset,Original_License,fill,NA,CC BY 4.0
-zhao_2023_iwm,Original_License,fill,NA,CC BY 4.0
-zhao_2023_ose,Original_License,fill,NA,CC BY 4.0
-zhao_2023_vbl,Original_License,fill,NA,CC BY 4.0
-zhou_2024_eq_hwb_s,Original_License,fill,NA,CC BY 4.0
-zhou_2024_eq_tips,Original_License,fill,NA,CC BY 4.0
-zhou_2024_eq5d5l_parent,Original_License,fill,NA,CC BY 4.0
-zhou_2024_eq5dy3l_proxy,Original_License,fill,NA,CC BY 4.0
-zhou_2024_eq5dy3l_self,Original_License,fill,NA,CC BY 4.0
+prasetiyo_2022_act,Original_License,fill,NA,CC BY 4.0
+prasetiyo_2022_aq,Original_License,fill,NA,CC BY 4.0
+prasetiyo_2022_sct,Original_License,fill,NA,CC BY 4.0
+prasetiyo_2022_tpack,Original_License,fill,NA,CC BY 4.0
+prasetiyo_2025_digital_citizenship,Original_License,fill,NA,CC BY 4.0
+prasetiyo_2026_act,Original_License,fill,NA,CC BY 4.0
+prasetiyo_2026_digcompedu,Original_License,fill,NA,CC BY 4.0
+prasetiyo_2026_sct,Original_License,fill,NA,CC BY 4.0
+psa001_jones_2021_face_traits,Original_License,fill,NA,CC BY 4.0
+psacr001_dorison_2022_anxiety,Original_License,fill,NA,CC0 1.0
+psacr001_dorison_2022_behint,Original_License,fill,NA,CC0 1.0
+psacr001_dorison_2022_policy,Original_License,fill,NA,CC0 1.0
+psacr002_wang_2021_emotion,Original_License,fill,NA,CC0 1.0
+psacr003_legate_2022_avoidance,Original_License,fill,NA,CC BY 4.0
+psacr003_legate_2022_manipcheck,Original_License,fill,NA,CC BY 4.0
+psacr003_legate_2022_motivation,Original_License,fill,NA,CC BY 4.0
+psacr003_legate_2022_reactance,Original_License,fill,NA,CC BY 4.0
+quintanella_2025_sme_ai_readiness,Original_License,fill,NA,CC BY 4.0
+ringhand_2024_ccam_importance,Original_License,fill,NA,CC BY 4.0
+ringhand_2024_ccam_tpb,Original_License,fill,NA,CC BY 4.0
+rizqiansah_2026_ai,Original_License,fill,NA,CC BY 4.0
+rizqiansah_2026_audit_quality,Original_License,fill,NA,CC BY 4.0
+rizqiansah_2026_auditor_competence,Original_License,fill,NA,CC BY 4.0
+rizqiansah_2026_data_analytics,Original_License,fill,NA,CC BY 4.0
+rizqiansah_2026_e_audit,Original_License,fill,NA,CC BY 4.0
+rogers_2026_bees_feedback,Original_License,fill,NA,CC BY 4.0
+ryvkina_2023_s1_activity_affect,Original_License,fill,NA,CC BY 4.0
+ryvkina_2023_s1_activity_experience,Original_License,fill,NA,CC BY 4.0
+ryvkina_2023_s1_corona_worries,Original_License,fill,NA,CC BY 4.0
+ryvkina_2023_s1_interaction_affect,Original_License,fill,NA,CC BY 4.0
+ryvkina_2023_s1_interaction_behavior,Original_License,fill,NA,CC BY 4.0
+ryvkina_2023_s1_interaction_perception,Original_License,fill,NA,CC BY 4.0
+ryvkina_2023_s2_activity_affect,Original_License,fill,NA,CC BY 4.0
+ryvkina_2023_s2_activity_experience,Original_License,fill,NA,CC BY 4.0
+ryvkina_2023_s2_corona_worries,Original_License,fill,NA,CC BY 4.0
+ryvkina_2023_s2_interaction_affect,Original_License,fill,NA,CC BY 4.0
+ryvkina_2023_s2_interaction_behavior,Original_License,fill,NA,CC BY 4.0
+ryvkina_2023_s2_interaction_perception,Original_License,fill,NA,CC BY 4.0
+sakal_2026_ai_resistance,Original_License,fill,NA,CC BY 4.0
+scharbert_2024_esm_affect,Original_License,fill,NA,CC BY 4.0
+sensorimotor_repetto_2022,Original_License,fill,NA,CC BY-NC 4.0
+setsoafia_2026_ctd,Original_License,fill,NA,CC BY 4.0
+setsoafia_2026_digital_literacy,Original_License,fill,NA,CC BY 4.0
+setsoafia_2026_genai_literacy,Original_License,fill,NA,CC BY 4.0
+setsoafia_2026_sdr,Original_License,fill,NA,CC BY 4.0
+skrzypek_2020_neo_ffi,Original_License,fill,NA,CC BY 4.0
+skrzypek_2020_svs,Original_License,fill,NA,CC BY 4.0
+syafrijon_2026_digital_use,Original_License,fill,NA,CC BY 4.0
+syafrijon_2026_sdc,Original_License,fill,NA,CC BY 4.0
+szigeti_2022_bpq,Original_License,fill,NA,CC BY 4.0
+szigeti_2022_cesd,Original_License,fill,NA,CC BY 4.0
+szigeti_2022_eri_oc,Original_License,fill,NA,CC BY 4.0
+szigeti_2022_mbi_es,Original_License,fill,NA,CC BY 4.0
+tammilehto_2022_ecr_r,Original_License,fill,NA,CC BY 4.0
+tammilehto_2022_emotion_regulation,Original_License,fill,NA,CC BY 4.0
+tammilehto_2022_ipip_neuroticism,Original_License,fill,NA,CC BY 4.0
+tammilehto_2022_state_attachment,Original_License,fill,NA,CC BY 4.0
+timbreza_2026_mbi_es,Original_License,fill,NA,CC BY 4.0
+timbreza_2026_nctwcs,Original_License,fill,NA,CC BY 4.0
+valence_kyrolainen_2021,Original_License,fill,NA,CC BY-NC-SA 4.0
+vu_2026_school_manager_digital,Original_License,fill,NA,CC BY 4.0
+yao_2025_kindergarten_m,Original_License,fill,NA,CC BY 4.0
+yao_2025_kindergarten_x1,Original_License,fill,NA,CC BY 4.0
+yao_2025_kindergarten_x2,Original_License,fill,NA,CC BY 4.0
+yao_2025_kindergarten_x3,Original_License,fill,NA,CC BY 4.0
+yao_2025_kindergarten_x4,Original_License,fill,NA,CC BY 4.0
+yao_2025_kindergarten_y,Original_License,fill,NA,CC BY 4.0
+zang_2022_job_satisfaction,Original_License,fill,NA,CC BY 4.0
+zang_2022_mbi_es,Original_License,fill,NA,CC BY 4.0
+zang_2022_po_fit,Original_License,fill,NA,CC BY 4.0
+zhang_2026_pe_burnout,Original_License,fill,NA,CC BY 4.0
+zhang_2026_pe_identity,Original_License,fill,NA,CC BY 4.0
+zhang_2026_pe_uwes9,Original_License,fill,NA,CC BY 4.0
+zhao_2025_eheals,Original_License,fill,NA,CC BY 4.0
+zhao_2025_htse,Original_License,fill,NA,CC BY 4.0
+zhao_2025_ssrs,Original_License,fill,NA,CC BY 4.0
+zhao_2025_technophobia,Original_License,fill,NA,CC BY 4.0

@@ -1,11 +1,11 @@
-# IRW table-name consistency audit -- 2026-10-13
+# IRW table-name consistency audit -- 2026-10-15
 
 Ground truth: `irw::irw_list_tables(source = c("core","comp","nom","sim"))`. 
 Dictionary sheets plus automated_finding/dictionary_auto*.csv included (Public rows only).
 
 ## A. Incomplete coverage (missing >=2 sources, tag-only rows dropped -- matches metadata/04_tables.R's `zz`)
 
-Full list, aligned columns: `table_audit_report_incomplete.txt`. Same data as CSV: `table_audit_report_incomplete.csv` (177 rows). Nothing here is auto-fixed -- triage by hand.
+Full list, aligned columns: `table_audit_report_incomplete.txt`. Same data as CSV: `table_audit_report_incomplete.csv` (184 rows). Nothing here is auto-fixed -- triage by hand.
 
 | table | category | redivis | dictionary_sheet | biblio_csv | metadata_csv | tags_csv |
 |---|---|---|---|---|---|---|
@@ -39,7 +39,7 @@ Full list, aligned columns: `table_audit_report_incomplete.txt`. Same data as CS
 | simsalrbim_mice_lowvalence | core |  |  | 1 |  |  |
 | simsalrbim_monkey_largevalence | core |  |  | 1 |  |  |
 | thirdpartypunishmentunfairsharing_mcauliffe_2025_canada | core |  |  | 1 |  |  |
-_...and 147 more, see the .txt or .csv._
+_...and 154 more, see the .txt or .csv._
 
 ## B. Urgent -- live in Redivis, not in any local CSV yet
 

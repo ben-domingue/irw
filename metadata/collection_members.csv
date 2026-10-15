@@ -25,6 +25,7 @@ ai_fear_dong_2026_other_fear,continuous_response,curated:scout
 ai_fear_dong_2026_own_fear,continuous_response,curated:scout
 ai_fear_dong_2026_requirement,continuous_response,curated:scout
 alcoholstroop_jones2024,response_time,rule:var:rt
+alcoholstroop_jones2024,trials,curated:scout
 alexandrowicz_2018_cesd,cesd,name
 alfort_2023_finger_fx_prom,longitudinal,rule:meta:longitudinal
 ali_2021_gad7,gad7,wording
@@ -334,6 +335,7 @@ cao_2026_cdss_cognitive_load,rct,rule:var:treat
 cao_2026_cdss_intention_to_use,rct,rule:var:treat
 cao_2026_cdss_perceived_autonomy,rct,rule:var:treat
 cao_2026_cdss_professional_knowledge,rct,rule:var:treat
+caprara_2020_panas,affect_panas,rule:cname:panas|positive and negative af
 caselli_2023_abc,longitudinal,rule:meta:longitudinal
 caselli_2023_bbs,longitudinal,rule:meta:longitudinal
 ccapsvtskhpacr_mercedes_2023_beck,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
@@ -385,6 +387,8 @@ chile_2023_social-welfare-survey_ss,longitudinal,rule:meta:longitudinal
 chile_2023_social-welfare-survey_u,longitudinal,rule:meta:longitudinal
 chile_2023_social-welfare-survey_vv,longitudinal,rule:meta:longitudinal
 chile_2023_social-welfare-survey_yy,longitudinal,rule:meta:longitudinal
+cho_2023_ipss,longitudinal,rule:meta:longitudinal
+cho_2023_oabss,longitudinal,rule:meta:longitudinal
 choi_2020_ednet_listening,longitudinal,rule:meta:longitudinal
 choi_2020_ednet_listening,response_time,rule:var:rt
 choi_2020_ednet_reading,longitudinal,rule:meta:longitudinal
@@ -408,13 +412,17 @@ COACH_Chen_2022_SNS,longitudinal,rule:meta:longitudinal
 COACH_Chen_2022_treatmentStigma,longitudinal,rule:meta:longitudinal
 COACH_Chen_2022_WHOQOL_BREF,longitudinal,rule:meta:longitudinal
 cogcontrol_gyurkovics_2019_flanker,response_time,rule:var:rt
+cogcontrol_gyurkovics_2019_flanker,trials,curated:scout
 cogcontrol_gyurkovics_2019_mwprobe,response_time,rule:var:rt
 cogcontrol_gyurkovics_2019_sart,response_time,rule:var:rt
+cogcontrol_gyurkovics_2019_sart,trials,curated:scout
 cogcontrol_gyurkovics_2019_simon,response_time,rule:var:rt
+cogcontrol_gyurkovics_2019_simon,trials,curated:scout
 cognitive_children_2026,longitudinal,rule:meta:longitudinal
 cognitive_load_klimova_2023_know,continuous_response,curated:scout
 cognitive_load_klimova_2023_pwi,wellbeing,rule:cname:well.?being|life satisfaction|\bswls\b|quality of life|whoqol
 colombia_2023_politics_wellbeing,wellbeing,rule:cname:well.?being|life satisfaction|\bswls\b|quality of life|whoqol
+concretewords,stimulus_norms,curated:inventory #2983
 conner_2017_bfi,bfi44,name
 conner_2017_cesd,cesd,wording
 conner_2017_cesd,longitudinal,rule:meta:longitudinal
@@ -629,9 +637,11 @@ ehealth_rioux_2025_triplep,response_time,rule:var:rt
 Ellipse_Corssley_2024,rater_mediated,rule:var:rater
 elson_2024_kidscreen52,clustered,rule:var:cluster_id
 elson_2024_tmdlqi,clustered,rule:var:cluster_id
+emobank_buechel_2017,stimulus_norms,curated:inventory #2983
 emoji_scheffler_2024,continuous_response,curated:scout
 emoji_scheffler_2024,rater_mediated,rule:var:rater
 emoji_scheffler_2024,response_time,rule:var:rt
+emoji_scheffler_2024,stimulus_norms,curated:inventory #2983
 encceja_2018_ef_ci,item_position,rule:var:position
 encceja_2018_ef_ci,multistage,rule:var_any:booklet|block_id
 encceja_2018_ef_hg,item_position,rule:var:position
@@ -864,27 +874,35 @@ enem_2025_1mil_mt,multistage,rule:var_any:booklet|block_id
 enkavi_2019_ant_flanker,item_position,rule:var:position
 enkavi_2019_ant_flanker,longitudinal,rule:meta:longitudinal
 enkavi_2019_ant_flanker,response_time,rule:var:rt
+enkavi_2019_ant_flanker,trials,curated:scout
 enkavi_2019_dpx_axcpt,item_position,rule:var:position
 enkavi_2019_dpx_axcpt,longitudinal,rule:meta:longitudinal
 enkavi_2019_dpx_axcpt,response_time,rule:var:rt
+enkavi_2019_dpx_axcpt,trials,curated:scout
 enkavi_2019_gonogo,item_position,rule:var:position
 enkavi_2019_gonogo,longitudinal,rule:meta:longitudinal
 enkavi_2019_gonogo,response_time,rule:var:rt
+enkavi_2019_gonogo,trials,curated:scout
 enkavi_2019_navon,item_position,rule:var:position
 enkavi_2019_navon,longitudinal,rule:meta:longitudinal
 enkavi_2019_navon,response_time,rule:var:rt
+enkavi_2019_navon,trials,curated:scout
 enkavi_2019_simon,item_position,rule:var:position
 enkavi_2019_simon,longitudinal,rule:meta:longitudinal
 enkavi_2019_simon,response_time,rule:var:rt
+enkavi_2019_simon,trials,curated:scout
 enkavi_2019_stopsignal,item_position,rule:var:position
 enkavi_2019_stopsignal,longitudinal,rule:meta:longitudinal
 enkavi_2019_stopsignal,response_time,rule:var:rt
+enkavi_2019_stopsignal,trials,curated:scout
 enkavi_2019_stroop,item_position,rule:var:position
 enkavi_2019_stroop,longitudinal,rule:meta:longitudinal
 enkavi_2019_stroop,response_time,rule:var:rt
+enkavi_2019_stroop,trials,curated:scout
 enkavi_2019_taskswitch,item_position,rule:var:position
 enkavi_2019_taskswitch,longitudinal,rule:meta:longitudinal
 enkavi_2019_taskswitch,response_time,rule:var:rt
+enkavi_2019_taskswitch,trials,curated:scout
 erf_breuer_2017_tai,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 estcrm_epia,continuous_response,curated:review
 estcrm_selfeff,continuous_response,curated:review
@@ -918,6 +936,9 @@ FACIT_YOUNT_2021_limitations,longitudinal,rule:meta:longitudinal
 falih_2026_dass21,dass21,supplied
 famous_melodies,rater_mediated,rule:var:rater
 famous_melodies,response_time,rule:var:rt
+famous_melodies,stimulus_norms,curated:inventory #2983
+faruk_2021_gad7,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
+faruk_2021_phq9,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 fcupanas_cffsdas_reyna_2018,affect_panas,rule:cname:panas|positive and negative af
 fcupanas_cffsdas_reyna_2018,panas,name
 fcv19s_hossain_2022_anxiety,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
@@ -994,6 +1015,8 @@ fox_2023_gad7,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 frac20,math,rule:cname:^(?!.*(anxi|attitude|self.?efficacy|self.?concept|emotion|motivat|interest|enjoy|belief|confiden|value|stereotype)).*(\bmath|arithmetic|algebra|fraction)
 frac20,q_matrix,rule:var_prefix:qmatrix
 fractals_rating,rater_mediated,rule:var:rater
+fractals_rating,stimulus_norms,curated:inventory #2983
+frantz_2021_mood,longitudinal,rule:meta:longitudinal
 friedman_2018_risks_discrimination,longitudinal,rule:meta:longitudinal
 friedman_2018_risks_government,longitudinal,rule:meta:longitudinal
 ftna_kasper_2022,clustered,rule:var:cluster_id
@@ -1434,14 +1457,19 @@ gulec_2023_tipi,big_five,rule:cname:big.?five|five.?factor|\bipip\b|neo.?(pi|ffi
 gunandran_2023_whoqol_bref,wellbeing,rule:cname:well.?being|life satisfaction|\bswls\b|quality of life|whoqol
 gwen_2025_self_esteem,self_esteem,rule:cname:rosenberg|self.?esteem|\brses\b
 ha_2026_aspire_affect,longitudinal,rule:meta:longitudinal
+habibi_2026_teaching_anxiety,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 hachenberger_2025_gonogo_main,longitudinal,rule:meta:longitudinal
 hachenberger_2025_gonogo_main,response_time,rule:var:rt
+hachenberger_2025_gonogo_main,trials,curated:scout
 hachenberger_2025_gonogo_pilot,longitudinal,rule:meta:longitudinal
 hachenberger_2025_gonogo_pilot,response_time,rule:var:rt
+hachenberger_2025_gonogo_pilot,trials,curated:scout
 hachenberger_2025_stroop_main_bin,longitudinal,rule:meta:longitudinal
 hachenberger_2025_stroop_main_bin,response_time,rule:var:rt
+hachenberger_2025_stroop_main_bin,trials,curated:scout
 hachenberger_2025_stroop_pilot_bin,longitudinal,rule:meta:longitudinal
 hachenberger_2025_stroop_pilot_bin,response_time,rule:var:rt
+hachenberger_2025_stroop_pilot_bin,trials,curated:scout
 hachenberger_2025_webexec_main,longitudinal,rule:meta:longitudinal
 hachenberger_2025_webexec_pilot,longitudinal,rule:meta:longitudinal
 hads_multilcirt,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
@@ -1496,6 +1524,8 @@ hlado_2025_ptwa,longitudinal,rule:meta:longitudinal
 hlado_2025_self_efficacy,longitudinal,rule:meta:longitudinal
 hlado_2025_turnover,longitudinal,rule:meta:longitudinal
 hlado_2025_work_engagement,longitudinal,rule:meta:longitudinal
+hlado_2025b_burnout,longitudinal,rule:meta:longitudinal
+hlado_2025b_twas,longitudinal,rule:meta:longitudinal
 hmcdm_spatialreasoning,q_matrix,rule:var_prefix:qmatrix
 hmcdm_spatialreasoning,response_time,rule:var:rt
 holzknecht_2022_listening,rct,rule:var:treat
@@ -1507,6 +1537,8 @@ hoorani_2022_sp,longitudinal,rule:meta:longitudinal
 hou_2022_dirty_dozen,dark_triad,rule:cname:dark triad|machiavell|narciss|psychopath
 hpwt_bayona_2025_jobperformance,rater_mediated,rule:var:rater
 huang_2016_cesd,cesd,supplied
+huentemilla_2026_digital_competence_test,longitudinal,rule:meta:longitudinal
+huentemilla_2026_digital_competence_test,rct,rule:var:treat
 hui_2024_pss10,pss10,name
 hyatt_2023_aggression_aeq,longitudinal,rule:meta:longitudinal
 hyatt_2023_aggression_neo,big_five,rule:cname:big.?five|five.?factor|\bipip\b|neo.?(pi|ffi)|\bbfi\b|hexaco
@@ -1520,6 +1552,7 @@ hyatt_2023_aggression_s3_srp4,dark_triad,rule:cname:dark triad|machiavell|narcis
 hyatt_2023_aggression_s3_srp4,longitudinal,rule:meta:longitudinal
 hyatt_2023_aggression_s3_ssis,longitudinal,rule:meta:longitudinal
 ibrahim_2015_bfi,bfi44,name
+iclr_2024_peer_review,rater_mediated,rule:var:rater
 idas_machado2024,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 idas_machado2024,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 identity_fusion_gomez_2025,longitudinal,rule:meta:longitudinal
@@ -1565,6 +1598,7 @@ imos_2015,math,rule:cname:^(?!.*(anxi|attitude|self.?efficacy|self.?concept|emot
 imos_2016,math,rule:cname:^(?!.*(anxi|attitude|self.?efficacy|self.?concept|emotion|motivat|interest|enjoy|belief|confiden|value|stereotype)).*(\bmath|arithmetic|algebra|fraction)
 imos_2017,math,rule:cname:^(?!.*(anxi|attitude|self.?efficacy|self.?concept|emotion|motivat|interest|enjoy|belief|confiden|value|stereotype)).*(\bmath|arithmetic|algebra|fraction)
 imps2025_hf,response_time,rule:var:rt
+imps2025_hf,trials,curated:scout
 introversion_extroversion,response_time,rule:var:rt
 ipip_openpsychometrics_ad,big_five,rule:cname:big.?five|five.?factor|\bipip\b|neo.?(pi|ffi)|\bbfi\b|hexaco
 ipip_openpsychometrics_as,big_five,rule:cname:big.?five|five.?factor|\bipip\b|neo.?(pi|ffi)|\bbfi\b|hexaco
@@ -1613,6 +1647,7 @@ jutte_2024_loneliness,longitudinal,rule:meta:longitudinal
 kahraman_2026_bai,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 kalimahnorms_alzahrani_2025,rater_mediated,rule:var:rater
 kalimahnorms_alzahrani_2025,response_time,rule:var:rt
+kalimahnorms_alzahrani_2025,stimulus_norms,curated:inventory #2983
 KanjiOAHaS_Inoue_2024,reading_vocab,rule:cname:read(ing)?\b|vocab|lexical|spelling
 KanjiOAHaS_Inoue_2024,response_time,rule:var:rt
 Karim2022_tmoca_subscales_longitudinal,longitudinal,rule:meta:longitudinal
@@ -1681,7 +1716,15 @@ lhsbrasil_couto_2023_pss,pss10,name
 lhsbrasil_couto_2023_ses,rses,supplied
 lhsbrasil_couto_2023_ses,self_esteem,rule:cname:rosenberg|self.?esteem|\brses\b
 li_2024_bdyz,erq,supplied; subscale: suppression (4/10)
+li_2024_big_five,big_five,rule:cname:big.?five|five.?factor|\bipip\b|neo.?(pi|ffi)|\bbfi\b|hexaco
+li_2024_trait_anxiety,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 li_2025_icf_rs17,longitudinal,rule:meta:longitudinal
+li_2026_efl_listening_bk,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
+li_2026_efl_listening_cs,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
+li_2026_efl_listening_lct,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
+li_2026_efl_listening_lts,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
+li_2026_efl_listening_ms,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
+li_2026_efl_listening_ps,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 lin_2023_depression,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 liu_2018_gse,gse,supplied
 liu_2018_lot_r,lotr,name
@@ -1727,10 +1770,13 @@ luttenberger_2021_scl_social,rct,rule:var:treat
 ma2026_bsmas,longitudinal,rule:meta:longitudinal
 ma2026_igds,longitudinal,rule:meta:longitudinal
 ma2026_sabas,longitudinal,rule:meta:longitudinal
+ma_2026_towb,wellbeing,rule:cname:well.?being|life satisfaction|\bswls\b|quality of life|whoqol
 machivallianism_test_main,response_time,rule:var:rt
 machivallianism_test_tipi,tipi,wording
 machivallianism_test_vcl,dark_triad,rule:cname:dark triad|machiavell|narciss|psychopath
+mairean_2023_covid_anxiety,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 mairean_2023_pwb_ptcq,wellbeing,rule:cname:well.?being|life satisfaction|\bswls\b|quality of life|whoqol
+mairean_2023_ukraine_anxiety,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 mairean_2024_das,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 mairean_2024_das,longitudinal,rule:meta:longitudinal
 mairean_2024_panas,affect_panas,rule:cname:panas|positive and negative af
@@ -1739,6 +1785,42 @@ mairean_2024_shai,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 makransky_2016_mcq_correct,longitudinal,rule:meta:longitudinal
 makransky_2016_motivation,longitudinal,rule:meta:longitudinal
 makransky_2016_self_efficacy,longitudinal,rule:meta:longitudinal
+manylabs1_klein_2014_art_attitude,clustered,rule:var:cluster_id
+manylabs1_klein_2014_flagdv,clustered,rule:var:cluster_id
+manylabs1_klein_2014_flagdv,rct,rule:var:treat
+manylabs1_klein_2014_imagined_contact,clustered,rule:var:cluster_id
+manylabs1_klein_2014_imagined_contact,rct,rule:var:treat
+manylabs1_klein_2014_math_attitude,clustered,rule:var:cluster_id
+manylabs1_klein_2014_sysjust,clustered,rule:var:cluster_id
+manylabs1_klein_2014_sysjust,rct,rule:var:treat
+manylabs2_klein_2018_alter,clustered,rule:var:cluster_id
+manylabs2_klein_2018_alter,rct,rule:var:treat
+manylabs2_klein_2018_bauer,clustered,rule:var:cluster_id
+manylabs2_klein_2018_bauer,rct,rule:var:treat
+manylabs2_klein_2018_giessner,clustered,rule:var:cluster_id
+manylabs2_klein_2018_giessner,rct,rule:var:treat
+manylabs2_klein_2018_mfq,clustered,rule:var:cluster_id
+manylabs2_klein_2018_panas,clustered,rule:var:cluster_id
+manylabs2_klein_2018_panas,rct,rule:var:treat
+manylabs2_klein_2018_swls,clustered,rule:var:cluster_id
+manylabs2_klein_2018_swls,rct,rule:var:treat
+manylabs2_klein_2018_tipi,clustered,rule:var:cluster_id
+manylabs2_klein_2018_zhong,clustered,rule:var:cluster_id
+manylabs2_klein_2018_zhong,rct,rule:var:treat
+manylabs3_ebersole_2016_elm,clustered,rule:var:cluster_id
+manylabs3_ebersole_2016_elm,rct,rule:var:treat
+manylabs3_ebersole_2016_intrinsic,clustered,rule:var:cluster_id
+manylabs3_ebersole_2016_nfc,clustered,rule:var:cluster_id
+manylabs3_ebersole_2016_sexism_most,clustered,rule:var:cluster_id
+manylabs3_ebersole_2016_sexism_some,clustered,rule:var:cluster_id
+manylabs3_ebersole_2016_stress,clustered,rule:var:cluster_id
+manylabs3_ebersole_2016_tipi,clustered,rule:var:cluster_id
+manylabs4_klein_2022_essay,clustered,rule:var:cluster_id
+manylabs4_klein_2022_essay,rct,rule:var:treat
+manylabs4_klein_2022_panasx,clustered,rule:var:cluster_id
+manylabs4_klein_2022_panasx,rct,rule:var:treat
+manysmiles_coles_2022_body_awareness,clustered,rule:var:cluster_id
+manysmiles_coles_2022_emotion,clustered,rule:var:cluster_id
 margaretto_2025_translation_study_1_lextale,reading_vocab,rule:cname:read(ing)?\b|vocab|lexical|spelling
 margaretto_2025_translation_study_1_readingcomprehension,reading_vocab,rule:cname:read(ing)?\b|vocab|lexical|spelling
 margaretto_2025_translation_study_1_vocabulary_1,reading_vocab,rule:cname:read(ing)?\b|vocab|lexical|spelling
@@ -1747,11 +1829,20 @@ margaretto_2025_translation_study_1_vocabulary_3,reading_vocab,rule:cname:read(i
 margaretto_2025_translation_study_2_lextale,reading_vocab,rule:cname:read(ing)?\b|vocab|lexical|spelling
 margaretto_2025_translation_study_2_readingcomprehension,reading_vocab,rule:cname:read(ing)?\b|vocab|lexical|spelling
 margaretto_2025_translation_study_2_vocabulary_full,reading_vocab,rule:cname:read(ing)?\b|vocab|lexical|spelling
+marian_2023_gad,intensive_longitudinal,rule:var:date+wave
+marian_2023_gad,longitudinal,rule:meta:longitudinal
+marian_2023_phq9,intensive_longitudinal,rule:var:date+wave
+marian_2023_phq9,longitudinal,rule:meta:longitudinal
+marian_2023_thoughts,intensive_longitudinal,rule:var:date+wave
+marian_2023_thoughts,longitudinal,rule:meta:longitudinal
 martinez_2024_gonogo,longitudinal,rule:meta:longitudinal
 martinez_2024_gonogo,response_time,rule:var:rt
+martinez_2024_gonogo,trials,curated:scout
 martinez_2024_joint_simon,longitudinal,rule:meta:longitudinal
 martinez_2024_joint_simon,response_time,rule:var:rt
+martinez_2024_joint_simon,trials,curated:scout
 martineztomas_2026_pseudowords,rater_mediated,rule:var:rater
+martineztomas_2026_pseudowords,stimulus_norms,curated:inventory #2983
 mascherini_2021_meddiet,longitudinal,rule:meta:longitudinal
 matuz_2024_bdi9,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 matuz_2024_bdi9,longitudinal,rule:meta:longitudinal
@@ -1764,10 +1855,15 @@ matuz_2024_stai_t,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 matuz_2024_stai_t,longitudinal,rule:meta:longitudinal
 matuz_2024_woc,longitudinal,rule:meta:longitudinal
 matzke-etal-2019,response_time,rule:var:rt
+matzke-etal-2019,trials,curated:scout
 matzke-experiment1-2022,response_time,rule:var:rt
+matzke-experiment1-2022,trials,curated:scout
 matzke-experiment2-2022,response_time,rule:var:rt
+matzke-experiment2-2022,trials,curated:scout
 matzke-experiment3-gamified-2022,response_time,rule:var:rt
+matzke-experiment3-gamified-2022,trials,curated:scout
 matzke-experiment3-standard,response_time,rule:var:rt
+matzke-experiment3-standard,trials,curated:scout
 mcauliffe_2025_thirdpartypunishment,longitudinal,rule:meta:longitudinal
 mclean_2022_dass21,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 mclean_2022_dass21,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
@@ -1781,6 +1877,7 @@ MEFSIRODGAS_Nileksela_2023_severity,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\
 MEFSIRODGAS_Nileksela_2023_severity,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 megart_tonkovic_2021,longitudinal,rule:meta:longitudinal
 megart_tonkovic_2021,response_time,rule:var:rt
+megart_tonkovic_2021,trials,curated:scout
 mellat_2022_depression,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 mellat_2022_spiritual_wellbeing,wellbeing,rule:cname:well.?being|life satisfaction|\bswls\b|quality of life|whoqol
 menaldi_2023_brief_cope,brief_cope,name
@@ -1843,21 +1940,27 @@ moral_absolutism_goyal_2025_stance,longitudinal,rule:meta:longitudinal
 morales_2021_erq,erq,supplied
 moralvignettes_rakhmankulova_2025,longitudinal,rule:meta:longitudinal
 moralvignettes_rakhmankulova_2025,rater_mediated,rule:var:rater
+moralvignettes_rakhmankulova_2025,stimulus_norms,curated:inventory #2983
 morgan_2026_music_personality_bfi,big_five,rule:cname:big.?five|five.?factor|\bipip\b|neo.?(pi|ffi)|\bbfi\b|hexaco
 morgan_2026_music_personality_bfi,longitudinal,rule:meta:longitudinal
 morgan_2026_music_personality_music_activity,longitudinal,rule:meta:longitudinal
 morgan_2026_music_personality_pvq,longitudinal,rule:meta:longitudinal
 morgan_2026_music_personality_stompr,longitudinal,rule:meta:longitudinal
 motion,response_time,rule:var:rt
+motion,trials,curated:scout
 mpsycho_lakes,rater_mediated,rule:var:rater
 mpsycho_rogers_depression,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 mpsycho_youthdep,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 mq_supremecourt,longitudinal,rule:meta:longitudinal
 mturkddm_by,response_time,rule:var:rt
+mturkddm_by,trials,curated:scout
 mturkddm_lexical,reading_vocab,rule:cname:read(ing)?\b|vocab|lexical|spelling
 mturkddm_lexical,response_time,rule:var:rt
+mturkddm_lexical,trials,curated:scout
 mturkddm_recognition,response_time,rule:var:rt
+mturkddm_recognition,trials,curated:scout
 mturkddm_y25,response_time,rule:var:rt
+mturkddm_y25,trials,curated:scout
 much_tte_2025_concentrationtask,longitudinal,rule:meta:longitudinal
 much_tte_2025_currentmotivation,continuous_response,curated:bd
 much_tte_2025_currentmotivation,longitudinal,rule:meta:longitudinal
@@ -1927,6 +2030,46 @@ nature_relatedness,tipi,supplied
 neivasantos_2026_bes,longitudinal,rule:meta:longitudinal
 neivasantos_2026_comm_channels,longitudinal,rule:meta:longitudinal
 neivasantos_2026_oeq,longitudinal,rule:meta:longitudinal
+nepal_2024_phq4,intensive_longitudinal,rule:var:date+wave
+nepal_2024_phq4,longitudinal,rule:meta:longitudinal
+nepal_2024_state_self_esteem,intensive_longitudinal,rule:var:date+wave
+nepal_2024_state_self_esteem,longitudinal,rule:meta:longitudinal
+neubauer_2021_paco_autonomy_support,intensive_longitudinal,rule:var:date+wave
+neubauer_2021_paco_autonomy_support,longitudinal,rule:meta:longitudinal
+neubauer_2021_paco_bmpn,intensive_longitudinal,rule:var:date+wave
+neubauer_2021_paco_bmpn,longitudinal,rule:meta:longitudinal
+neubauer_2021_paco_child_affect,intensive_longitudinal,rule:var:date+wave
+neubauer_2021_paco_child_affect,longitudinal,rule:meta:longitudinal
+neubauer_2021_paco_corona_info,intensive_longitudinal,rule:var:date+wave
+neubauer_2021_paco_corona_info,longitudinal,rule:meta:longitudinal
+neubauer_2021_paco_mindfulness,intensive_longitudinal,rule:var:date+wave
+neubauer_2021_paco_mindfulness,longitudinal,rule:meta:longitudinal
+neubauer_2021_paco_parent_affect,intensive_longitudinal,rule:var:date+wave
+neubauer_2021_paco_parent_affect,longitudinal,rule:meta:longitudinal
+neubauer_2021_paco_parenting,intensive_longitudinal,rule:var:date+wave
+neubauer_2021_paco_parenting,longitudinal,rule:meta:longitudinal
+neubauer_2021_paco_stressors,intensive_longitudinal,rule:var:date+wave
+neubauer_2021_paco_stressors,longitudinal,rule:meta:longitudinal
+neubauer_2021_paco_worry,intensive_longitudinal,rule:var:date+wave
+neubauer_2021_paco_worry,longitudinal,rule:meta:longitudinal
+neubauer_2023_stecco_activity_motivation,intensive_longitudinal,rule:var:date+wave
+neubauer_2023_stecco_activity_motivation,longitudinal,rule:meta:longitudinal
+neubauer_2023_stecco_emotion_regulation,intensive_longitudinal,rule:var:date+wave
+neubauer_2023_stecco_emotion_regulation,longitudinal,rule:meta:longitudinal
+neubauer_2023_stecco_eod_affect,intensive_longitudinal,rule:var:date+wave
+neubauer_2023_stecco_eod_affect,longitudinal,rule:meta:longitudinal
+neubauer_2023_stecco_eod_bmpn,intensive_longitudinal,rule:var:date+wave
+neubauer_2023_stecco_eod_bmpn,longitudinal,rule:meta:longitudinal
+neubauer_2023_stecco_esm_affect,intensive_longitudinal,rule:var:date+wave
+neubauer_2023_stecco_esm_affect,longitudinal,rule:meta:longitudinal
+neubauer_2023_stecco_father_parenting,intensive_longitudinal,rule:var:date+wave
+neubauer_2023_stecco_father_parenting,longitudinal,rule:meta:longitudinal
+neubauer_2023_stecco_mother_parenting,intensive_longitudinal,rule:var:date+wave
+neubauer_2023_stecco_mother_parenting,longitudinal,rule:meta:longitudinal
+neubauer_2023_stecco_study_motivation,intensive_longitudinal,rule:var:date+wave
+neubauer_2023_stecco_study_motivation,longitudinal,rule:meta:longitudinal
+neubauer_2023_stecco_study_satisfaction,intensive_longitudinal,rule:var:date+wave
+neubauer_2023_stecco_study_satisfaction,longitudinal,rule:meta:longitudinal
 neurips_2022,longitudinal,rule:meta:longitudinal
 neurodegenerative_huizinga_2019_dass,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 neurodegenerative_huizinga_2019_dass,dass21,name
@@ -1942,6 +2085,11 @@ nonverbal_immediacy,response_time,rule:var:rt
 odachi_2022_fear_covid19,fcv19s,name
 offlinefriend_bigfive,big_five,rule:cname:big.?five|five.?factor|\bipip\b|neo.?(pi|ffi)|\bbfi\b|hexaco
 okoro_2022_interest_inventory,rct,rule:var:treat
+omale_2025_ppd_beliefs,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
+omale_2025_ppd_info_sources,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
+omale_2025_ppd_intention,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
+omale_2025_ppd_knowledge,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
+omale_2025_ppd_norms,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 onecm_kay_2025,longitudinal,rule:meta:longitudinal
 opentsstvr_linnig_2025_ssq,rct,rule:var:treat
 opentsstvr_linnig_2025_vas,continuous_response,curated:bd
@@ -2071,8 +2219,13 @@ peters_2025_si_current,longitudinal,rule:meta:longitudinal
 peters_2025_si_intention,longitudinal,rule:meta:longitudinal
 peters_2025_si_trigger,longitudinal,rule:meta:longitudinal
 peters_2025_work_precautions,longitudinal,rule:meta:longitudinal
+petley_2025_flanker_study1_childwoman,trials,curated:scout
+petley_2025_flanker_study1_girlman,trials,curated:scout
+petley_2025_flanker_study1_manwoman,trials,curated:scout
 petley_2025_flanker_study2_auditory,longitudinal,rule:meta:longitudinal
+petley_2025_flanker_study2_auditory,trials,curated:scout
 petley_2025_flanker_study2_visual,longitudinal,rule:meta:longitudinal
+petley_2025_flanker_study2_visual,trials,curated:scout
 petrovici_2025_wellbeing,wellbeing,rule:cname:well.?being|life satisfaction|\bswls\b|quality of life|whoqol
 pezzuti_2025_coolpeople_adventurous,longitudinal,rule:meta:longitudinal
 pezzuti_2025_coolpeople_autonomous,longitudinal,rule:meta:longitudinal
@@ -2100,16 +2253,10 @@ pietraszkiewicz_2017_leader_eval,longitudinal,rule:meta:longitudinal
 pilch_2021_fcv19s_validation,fcv19s,name
 pilch_2021_fear_covid19,fcv19s,name
 pirlsmissing_sirt,intl_assessment,rule:cname:\bpisa\b|timss|\bpirls\b|\bnaep\b
-pisa2000_math,intl_assessment,rule:cname:\bpisa\b|timss|\bpirls\b|\bnaep\b
-pisa2000_read,intl_assessment,rule:cname:\bpisa\b|timss|\bpirls\b|\bnaep\b
-pisa2000_science,intl_assessment,rule:cname:\bpisa\b|timss|\bpirls\b|\bnaep\b
 pisa2003_math,intl_assessment,rule:cname:\bpisa\b|timss|\bpirls\b|\bnaep\b
 pisa2003_problem_solving,intl_assessment,rule:cname:\bpisa\b|timss|\bpirls\b|\bnaep\b
 pisa2003_read,intl_assessment,rule:cname:\bpisa\b|timss|\bpirls\b|\bnaep\b
 pisa2003_science,intl_assessment,rule:cname:\bpisa\b|timss|\bpirls\b|\bnaep\b
-pisa2006_math,intl_assessment,rule:cname:\bpisa\b|timss|\bpirls\b|\bnaep\b
-pisa2006_read,intl_assessment,rule:cname:\bpisa\b|timss|\bpirls\b|\bnaep\b
-pisa2006_science,intl_assessment,rule:cname:\bpisa\b|timss|\bpirls\b|\bnaep\b
 pisa2009_math,intl_assessment,rule:cname:\bpisa\b|timss|\bpirls\b|\bnaep\b
 pisa2009_read,intl_assessment,rule:cname:\bpisa\b|timss|\bpirls\b|\bnaep\b
 pisa2009_science,intl_assessment,rule:cname:\bpisa\b|timss|\bpirls\b|\bnaep\b
@@ -2205,6 +2352,17 @@ PROMISPME_Forrest_2021_Strength_Children,promis,rule:cname:promis
 PROMISPME_Forrest_2021_Strength_Proxy,promis,rule:cname:promis
 protestant_workethic,response_time,rule:var:rt
 protestant_workethic,tipi,wording
+psa001_jones_2021_face_traits,rater_mediated,rule:var:rater
+psa001_jones_2021_face_traits,response_time,rule:var:rt
+psacr001_dorison_2022_anxiety,rct,rule:var:treat
+psacr001_dorison_2022_behint,rct,rule:var:treat
+psacr001_dorison_2022_policy,rct,rule:var:treat
+psacr002_wang_2021_emotion,longitudinal,rule:meta:longitudinal
+psacr002_wang_2021_emotion,rct,rule:var:treat
+psacr003_legate_2022_avoidance,rct,rule:var:treat
+psacr003_legate_2022_manipcheck,rct,rule:var:treat
+psacr003_legate_2022_motivation,rct,rule:var:treat
+psacr003_legate_2022_reactance,rct,rule:var:treat
 psychtools_bfi,big_five,rule:cname:big.?five|five.?factor|\bipip\b|neo.?(pi|ffi)|\bbfi\b|hexaco
 psychtools_sai,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 ptacek2023_dass21,dass21,name
@@ -2246,6 +2404,7 @@ rapm_poulton_2022_untimed,response_time,rule:var:rt
 rathod_2026_dass21,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 rathod_2026_dass21,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 rating_speed_2025,rater_mediated,rule:var:rater
+rating_speed_2025,stimulus_norms,curated:inventory #2983
 RD_PPCSEDSOF_Afable_2023,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 ren_2024_phq9,phq9,supplied
 riasec,tipi,wording
@@ -2257,50 +2416,68 @@ roar_gijbels2024,reading_vocab,rule:cname:read(ing)?\b|vocab|lexical|spelling
 roar_gijbels2024,response_time,rule:var:rt
 roar_lexical,reading_vocab,rule:cname:read(ing)?\b|vocab|lexical|spelling
 roar_lexical,response_time,rule:var:rt
+roar_lexical,trials,curated:scout
 robison_2026_retesting_antisaccade,longitudinal,rule:meta:longitudinal
 robison_2026_retesting_antisaccade,response_time,rule:var:rt
+robison_2026_retesting_antisaccade,trials,curated:scout
 robison_2026_retesting_bfi,bfi44,name
 robison_2026_retesting_bfi,big_five,rule:cname:big.?five|five.?factor|\bipip\b|neo.?(pi|ffi)|\bbfi\b|hexaco
 robison_2026_retesting_cesd,cesd,name; partial: 18/20 items
 robison_2026_retesting_cesd,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 robison_2026_retesting_color,longitudinal,rule:meta:longitudinal
 robison_2026_retesting_color,response_time,rule:var:rt
+robison_2026_retesting_color,trials,curated:scout
 robison_2026_retesting_cued_recall,longitudinal,rule:meta:longitudinal
 robison_2026_retesting_cued_recall,response_time,rule:var:rt
+robison_2026_retesting_cued_recall,trials,curated:scout
 robison_2026_retesting_digitcomp,longitudinal,rule:meta:longitudinal
 robison_2026_retesting_digitcomp,response_time,rule:var:rt
+robison_2026_retesting_digitcomp,trials,curated:scout
 robison_2026_retesting_flanker,longitudinal,rule:meta:longitudinal
 robison_2026_retesting_flanker,response_time,rule:var:rt
+robison_2026_retesting_flanker,trials,curated:scout
 robison_2026_retesting_ifr,longitudinal,rule:meta:longitudinal
 robison_2026_retesting_ifr,response_time,rule:var:rt
+robison_2026_retesting_ifr,trials,curated:scout
 robison_2026_retesting_letter,longitudinal,rule:meta:longitudinal
 robison_2026_retesting_letter,response_time,rule:var:rt
+robison_2026_retesting_letter,trials,curated:scout
 robison_2026_retesting_lettercomp,longitudinal,rule:meta:longitudinal
 robison_2026_retesting_lettercomp,response_time,rule:var:rt
+robison_2026_retesting_lettercomp,trials,curated:scout
 robison_2026_retesting_ls,longitudinal,rule:meta:longitudinal
 robison_2026_retesting_ls,response_time,rule:var:rt
 robison_2026_retesting_ns,longitudinal,rule:meta:longitudinal
 robison_2026_retesting_ns,response_time,rule:var:rt
 robison_2026_retesting_orientation,longitudinal,rule:meta:longitudinal
 robison_2026_retesting_orientation,response_time,rule:var:rt
+robison_2026_retesting_orientation,trials,curated:scout
 robison_2026_retesting_ospan,longitudinal,rule:meta:longitudinal
+robison_2026_retesting_ospan,trials,curated:scout
 robison_2026_retesting_paper_folding,longitudinal,rule:meta:longitudinal
 robison_2026_retesting_raven,longitudinal,rule:meta:longitudinal
 robison_2026_retesting_raven,response_time,rule:var:rt
 robison_2026_retesting_recognition,longitudinal,rule:meta:longitudinal
 robison_2026_retesting_recognition,response_time,rule:var:rt
+robison_2026_retesting_recognition,trials,curated:scout
 robison_2026_retesting_rspan,longitudinal,rule:meta:longitudinal
 robison_2026_retesting_rspan,reading_vocab,rule:cname:read(ing)?\b|vocab|lexical|spelling
+robison_2026_retesting_rspan,trials,curated:scout
 robison_2026_retesting_sart,longitudinal,rule:meta:longitudinal
 robison_2026_retesting_sart,response_time,rule:var:rt
+robison_2026_retesting_sart,trials,curated:scout
 robison_2026_retesting_simon,longitudinal,rule:meta:longitudinal
 robison_2026_retesting_simon,response_time,rule:var:rt
+robison_2026_retesting_simon,trials,curated:scout
 robison_2026_retesting_stai,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 robison_2026_retesting_stroop,longitudinal,rule:meta:longitudinal
 robison_2026_retesting_stroop,response_time,rule:var:rt
+robison_2026_retesting_stroop,trials,curated:scout
 robison_2026_retesting_symspan,longitudinal,rule:meta:longitudinal
+robison_2026_retesting_symspan,trials,curated:scout
 robison_2026_retesting_tot,longitudinal,rule:meta:longitudinal
 robison_2026_retesting_tot,response_time,rule:var:rt
+robison_2026_retesting_tot,trials,curated:scout
 rodas_2026_stait_trait_anxiety,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 roelen_2020_dietary_diversity,rct,rule:var:treat
 roelen_2020_k6,rct,rule:var:treat
@@ -2320,12 +2497,37 @@ rosharudin_2023_dass21,dass21,name
 rowe_2016_symptoms,longitudinal,rule:meta:longitudinal
 roy_2024_phq9,phq9,supplied
 rr98_accuracy,response_time,rule:var:rt
+rr98_accuracy,trials,curated:scout
 rrca_mcneish_2025_bdi,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 ruiz_parra_2023_bdi2,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 ruiz_parra_2023_maas,mindfulness,rule:cname:mindful|\bffmq\b|\bmaas\b
 RvKDCS_Romiacg_Miroshnik_2020_BFI,big_five,rule:cname:big.?five|five.?factor|\bipip\b|neo.?(pi|ffi)|\bbfi\b|hexaco
 rvobgvmaas_lsf_lehing_2024,longitudinal,rule:meta:longitudinal
 rvobgvmaas_lsf_lehing_2024,mindfulness,rule:cname:mindful|\bffmq\b|\bmaas\b
+ryvkina_2023_s1_activity_affect,intensive_longitudinal,rule:var:date+wave
+ryvkina_2023_s1_activity_affect,longitudinal,rule:meta:longitudinal
+ryvkina_2023_s1_activity_experience,intensive_longitudinal,rule:var:date+wave
+ryvkina_2023_s1_activity_experience,longitudinal,rule:meta:longitudinal
+ryvkina_2023_s1_corona_worries,intensive_longitudinal,rule:var:date+wave
+ryvkina_2023_s1_corona_worries,longitudinal,rule:meta:longitudinal
+ryvkina_2023_s1_interaction_affect,intensive_longitudinal,rule:var:date+wave
+ryvkina_2023_s1_interaction_affect,longitudinal,rule:meta:longitudinal
+ryvkina_2023_s1_interaction_behavior,intensive_longitudinal,rule:var:date+wave
+ryvkina_2023_s1_interaction_behavior,longitudinal,rule:meta:longitudinal
+ryvkina_2023_s1_interaction_perception,intensive_longitudinal,rule:var:date+wave
+ryvkina_2023_s1_interaction_perception,longitudinal,rule:meta:longitudinal
+ryvkina_2023_s2_activity_affect,intensive_longitudinal,rule:var:date+wave
+ryvkina_2023_s2_activity_affect,longitudinal,rule:meta:longitudinal
+ryvkina_2023_s2_activity_experience,intensive_longitudinal,rule:var:date+wave
+ryvkina_2023_s2_activity_experience,longitudinal,rule:meta:longitudinal
+ryvkina_2023_s2_corona_worries,intensive_longitudinal,rule:var:date+wave
+ryvkina_2023_s2_corona_worries,longitudinal,rule:meta:longitudinal
+ryvkina_2023_s2_interaction_affect,intensive_longitudinal,rule:var:date+wave
+ryvkina_2023_s2_interaction_affect,longitudinal,rule:meta:longitudinal
+ryvkina_2023_s2_interaction_behavior,intensive_longitudinal,rule:var:date+wave
+ryvkina_2023_s2_interaction_behavior,longitudinal,rule:meta:longitudinal
+ryvkina_2023_s2_interaction_perception,intensive_longitudinal,rule:var:date+wave
+ryvkina_2023_s2_interaction_perception,longitudinal,rule:meta:longitudinal
 rzeszutek_2020_swls,swls,name
 SABFI2_Gallardo_Pujol_2018_BFI,big_five,rule:cname:big.?five|five.?factor|\bipip\b|neo.?(pi|ffi)|\bbfi\b|hexaco
 SABFI2_Gallardo_Pujol_2018_Honest,big_five,rule:cname:big.?five|five.?factor|\bipip\b|neo.?(pi|ffi)|\bbfi\b|hexaco
@@ -2359,6 +2561,8 @@ schalet_2016_hrsa,longitudinal,rule:meta:longitudinal
 schalet_2016_hrsa,rct,rule:var:treat
 schalet_2016_hrsd,longitudinal,rule:meta:longitudinal
 schalet_2016_hrsd,rct,rule:var:treat
+scharbert_2024_esm_affect,intensive_longitudinal,rule:var:date+wave
+scharbert_2024_esm_affect,longitudinal,rule:meta:longitudinal
 scheerhagen_2019_reproq,longitudinal,rule:meta:longitudinal
 schoen_2007_neoffi,big_five,rule:cname:big.?five|five.?factor|\bipip\b|neo.?(pi|ffi)|\bbfi\b|hexaco
 schoen_2019_to_2022_mkt,longitudinal,rule:meta:longitudinal
@@ -2378,6 +2582,7 @@ sejna_2025_saqc,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 sel_marca_2025_estudantes,longitudinal,rule:meta:longitudinal
 sel_marca_2025_familiares,longitudinal,rule:meta:longitudinal
 sel_marca_2025_professores,longitudinal,rule:meta:longitudinal
+sensorimotor_repetto_2022,rater_mediated,rule:var:rater
 SF12_MLCIRTwithin,wellbeing,rule:cname:well.?being|life satisfaction|\bswls\b|quality of life|whoqol
 shi_2025_brums,longitudinal,rule:meta:longitudinal
 shi_2025_dass21,dass21,supplied
@@ -2396,6 +2601,7 @@ singh_2025_identity_pss,pss10,name
 sirventruiz_2025_pdat,longitudinal,rule:meta:longitudinal
 sison_2022_hiv_testing_stigma,longitudinal,rule:meta:longitudinal
 sison_2022_provider_mistrust,longitudinal,rule:meta:longitudinal
+skrzypek_2020_neo_ffi,big_five,rule:cname:big.?five|five.?factor|\bipip\b|neo.?(pi|ffi)|\bbfi\b|hexaco
 smoking_perseverance_mcneish_2025,longitudinal,rule:meta:longitudinal
 smpi_lorenzoluaces_2020_gad7,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 smpi_lorenzoluaces_2020_gad7,gad7,supplied
@@ -2423,9 +2629,11 @@ spain_2017_politics_wellbeing,wellbeing,rule:cname:well.?being|life satisfaction
 spalex_aguasvivas_2020,longitudinal,rule:meta:longitudinal
 spalex_aguasvivas_2020,reading_vocab,rule:cname:read(ing)?\b|vocab|lexical|spelling
 spalex_aguasvivas_2020,response_time,rule:var:rt
+spalex_aguasvivas_2020,trials,curated:scout
 spanishmegastudy,response_time,rule:var:rt
 spasovski_2020_perma,wellbeing,rule:cname:well.?being|life satisfaction|\bswls\b|quality of life|whoqol
 spelling2pronounce_edwards2023,rater_mediated,rule:var:rater
+spelling2pronounce_edwards2023,stimulus_norms,curated:inventory #2983
 spelling_assessment_study1,reading_vocab,rule:cname:read(ing)?\b|vocab|lexical|spelling
 spelling_assessment_study2,reading_vocab,rule:cname:read(ing)?\b|vocab|lexical|spelling
 SPQVS_Barnby_2017_SIAS,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
@@ -2490,11 +2698,14 @@ SV-MAIA2_Randelovic_2021_SHS,intensive_longitudinal,rule:var:date+wave
 SV-MAIA2_Randelovic_2021_SHS,longitudinal,rule:meta:longitudinal
 swmd_mokken,rater_mediated,rule:var:rater
 swmd_mokken,wellbeing,rule:cname:well.?being|life satisfaction|\bswls\b|quality of life|whoqol
+szigeti_2022_cesd,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 takacs_2026_gad7,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 takacs_2026_maas,mindfulness,rule:cname:mindful|\bffmq\b|\bmaas\b
 takacs_2026_phq9,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 talaifar_2025_study1_bfi,bfi44,name
 talaifar_2025_study1_bfi,big_five,rule:cname:big.?five|five.?factor|\bipip\b|neo.?(pi|ffi)|\bbfi\b|hexaco
+tammilehto_2022_emotion_regulation,longitudinal,rule:meta:longitudinal
+tammilehto_2022_state_attachment,longitudinal,rule:meta:longitudinal
 tanck_2021_bcq,longitudinal,rule:meta:longitudinal
 tanck_2021_edeq,longitudinal,rule:meta:longitudinal
 tang_2024_swls,swls,name
@@ -2504,6 +2715,7 @@ teacherjudgements_lohmann_2026_essayratings,response_time,rule:var:rt
 teacherjudgements_lohmann_2026_selfconcept,longitudinal,rule:meta:longitudinal
 tears,continuous_response,curated:bd
 tears,rater_mediated,rule:var:rater
+tears,stimulus_norms,curated:inventory #2983
 teq_novak_2021_bfin,bfi44,name; subscale: neuroticism (8/44)
 teq_novak_2021_bfin,big_five,rule:cname:big.?five|five.?factor|\bipip\b|neo.?(pi|ffi)|\bbfi\b|hexaco
 teq_novak_2021_selfesteem,rses,supplied
@@ -2594,6 +2806,8 @@ uti_newlands_2023_rutiiq,longitudinal,rule:meta:longitudinal
 uti_newlands_2023_uclals,longitudinal,rule:meta:longitudinal
 uti_newlands_2023_uclals,ucla_ls,name
 uti_newlands_2023_wpai,longitudinal,rule:meta:longitudinal
+valence_kyrolainen_2021,rater_mediated,rule:var:rater
+valence_kyrolainen_2021,response_time,rule:var:rt
 validatedtouchvideo_smit_2025_arousal,longitudinal,rule:meta:longitudinal
 validatedtouchvideo_smit_2025_category,longitudinal,rule:meta:longitudinal
 validatedtouchvideo_smit_2025_strength,longitudinal,rule:meta:longitudinal
@@ -2703,6 +2917,7 @@ wilmer-rmet-normative-data-set-2022,longitudinal,rule:meta:longitudinal
 wilmer-rmet-normative-data-set-2022,reading_vocab,rule:cname:read(ing)?\b|vocab|lexical|spelling
 wilson_2022_kelpie_personality,rater_mediated,rule:var:rater
 wine_luckett2021,rater_mediated,rule:var:rater
+wine_luckett2021,stimulus_norms,curated:inventory #2983
 wisniewski_2021_nihss,rater_mediated,rule:var:rater
 wolbers_2017_class_contact,clustered,rule:var:cluster_id
 wolbers_2017_conversation,clustered,rule:var:cluster_id
@@ -2756,6 +2971,7 @@ yao_2020_gad,gad7,supplied
 ye_2025_q25_scale,gse,name
 yin_2022_gad7,gad7,supplied
 yu2025,continuous_response,curated:review
+yu2025,trials,curated:scout
 yu_2025_bedtime_procrastination,longitudinal,rule:meta:longitudinal
 yu_2025_mobile_addiction,longitudinal,rule:meta:longitudinal
 yu_2025_physical_activity,longitudinal,rule:meta:longitudinal
@@ -2792,71 +3008,3 @@ zhou_2024_eq_tips,longitudinal,rule:meta:longitudinal
 zhu_2024_pyd,longitudinal,rule:meta:longitudinal
 zorowitz_2023_marsib,response_time,rule:var:rt
 zou_2025_task_difficulty,longitudinal,rule:meta:longitudinal
-concretewords,stimulus_norms,curated:inventory #2983
-emobank_buechel_2017,stimulus_norms,curated:inventory #2983
-emoji_scheffler_2024,stimulus_norms,curated:inventory #2983
-famous_melodies,stimulus_norms,curated:inventory #2983
-fractals_rating,stimulus_norms,curated:inventory #2983
-kalimahnorms_alzahrani_2025,stimulus_norms,curated:inventory #2983
-martineztomas_2026_pseudowords,stimulus_norms,curated:inventory #2983
-moralvignettes_rakhmankulova_2025,stimulus_norms,curated:inventory #2983
-rating_speed_2025,stimulus_norms,curated:inventory #2983
-spelling2pronounce_edwards2023,stimulus_norms,curated:inventory #2983
-tears,stimulus_norms,curated:inventory #2983
-wine_luckett2021,stimulus_norms,curated:inventory #2983
-alcoholstroop_jones2024,trials,curated:scout
-cogcontrol_gyurkovics_2019_flanker,trials,curated:scout
-cogcontrol_gyurkovics_2019_sart,trials,curated:scout
-cogcontrol_gyurkovics_2019_simon,trials,curated:scout
-enkavi_2019_ant_flanker,trials,curated:scout
-enkavi_2019_dpx_axcpt,trials,curated:scout
-enkavi_2019_gonogo,trials,curated:scout
-enkavi_2019_navon,trials,curated:scout
-enkavi_2019_simon,trials,curated:scout
-enkavi_2019_stopsignal,trials,curated:scout
-enkavi_2019_stroop,trials,curated:scout
-enkavi_2019_taskswitch,trials,curated:scout
-hachenberger_2025_gonogo_main,trials,curated:scout
-hachenberger_2025_gonogo_pilot,trials,curated:scout
-hachenberger_2025_stroop_main_bin,trials,curated:scout
-hachenberger_2025_stroop_pilot_bin,trials,curated:scout
-imps2025_hf,trials,curated:scout
-martinez_2024_gonogo,trials,curated:scout
-martinez_2024_joint_simon,trials,curated:scout
-matzke-etal-2019,trials,curated:scout
-matzke-experiment1-2022,trials,curated:scout
-matzke-experiment2-2022,trials,curated:scout
-matzke-experiment3-gamified-2022,trials,curated:scout
-matzke-experiment3-standard,trials,curated:scout
-megart_tonkovic_2021,trials,curated:scout
-motion,trials,curated:scout
-mturkddm_by,trials,curated:scout
-mturkddm_lexical,trials,curated:scout
-mturkddm_recognition,trials,curated:scout
-mturkddm_y25,trials,curated:scout
-petley_2025_flanker_study1_childwoman,trials,curated:scout
-petley_2025_flanker_study1_girlman,trials,curated:scout
-petley_2025_flanker_study1_manwoman,trials,curated:scout
-petley_2025_flanker_study2_auditory,trials,curated:scout
-petley_2025_flanker_study2_visual,trials,curated:scout
-roar_lexical,trials,curated:scout
-robison_2026_retesting_antisaccade,trials,curated:scout
-robison_2026_retesting_color,trials,curated:scout
-robison_2026_retesting_cued_recall,trials,curated:scout
-robison_2026_retesting_digitcomp,trials,curated:scout
-robison_2026_retesting_flanker,trials,curated:scout
-robison_2026_retesting_ifr,trials,curated:scout
-robison_2026_retesting_letter,trials,curated:scout
-robison_2026_retesting_lettercomp,trials,curated:scout
-robison_2026_retesting_orientation,trials,curated:scout
-robison_2026_retesting_ospan,trials,curated:scout
-robison_2026_retesting_recognition,trials,curated:scout
-robison_2026_retesting_rspan,trials,curated:scout
-robison_2026_retesting_sart,trials,curated:scout
-robison_2026_retesting_simon,trials,curated:scout
-robison_2026_retesting_stroop,trials,curated:scout
-robison_2026_retesting_symspan,trials,curated:scout
-robison_2026_retesting_tot,trials,curated:scout
-rr98_accuracy,trials,curated:scout
-spalex_aguasvivas_2020,trials,curated:scout
-yu2025,trials,curated:scout

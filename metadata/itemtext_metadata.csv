@@ -307,7 +307,7 @@ carver_2017_puggs_pilot1_genom_know,"Public Understanding and Attitudes towards 
 carver_2017_puggs_pilot1_traits,"Public Understanding and Attitudes towards Genetics and Genomics (PUGGS) Questionnaire, initial version used in the first pilot study — Section 2 Part 1: Table of Traits",1,2,59,-3.4
 carver_2017_puggs_pilot2_attitudes,"Public Understanding and Attitudes towards Genetics and Genomics (PUGGS) questionnaire, Section 5: Attitudes towards applications of modern genetics and genomics (second pilot version)",1,2,11,-3.4
 carver_2017_puggs_pilot2_det_core,"Public Understanding and Attitudes towards Genetics and Genomics (PUGGS) questionnaire, Section 3: Knowledge about gene-environment interaction (second pilot version)",1,2,4.5,-3.4
-carver_2017_puggs_pilot2_genom_know,"Public Understanding and Attitudes towards Genetics and Genomics (PUGGS) questionnaire, Section 4: Knowledge about modern genetics and genomics (second pilot / final version)",1,NA,NaN,NA
+carver_2017_puggs_pilot2_genom_know,"Public Understanding and Attitudes towards Genetics and Genomics (PUGGS) questionnaire, Section 4: Knowledge about modern genetics and genomics (second pilot / final version)",1,NA,NA,NA
 carver_2017_puggs_pilot2_traits,"Public Understanding and Attitudes towards Genetics and Genomics (PUGGS) questionnaire, Section 2: Belief in genetic determinism",1,2,58.6,-3.4
 cavalini_mokken,"Coping strategies questionnaire on odour annoyance (Cavalini 1992, 'It's an ill wind that brings no good: studies on odour annoyance and the dispersion of odorant concentrations from industries', doctoral dissertation, University of Groningen), distributed as the cavalini data set in the mokken R package (CRAN, GPL-2+); see also Sijtsma & Molenaar (2002), pp. 82-86. The statements are the package's English rendering; the study itself was administered in Dutch and Cavalini's 1992 dissertation is not online, so no Dutch original is shipped",4.05882352941176,23.7058823529412,5.5,4.63352088661551
 cbi_rodriguez_2021,Brief form of creative behavior inventory,10.8214285714286,66.0714285714286,15.5,6.30367692126356
@@ -997,10 +997,10 @@ hexaco_ashton_2014_o,"IPIP-HEXACO scales (Ashton, Lee & Goldberg, 2007), Opennes
 hexaco_ashton_2014_x,"IPIP-HEXACO scales (Ashton, Lee & Goldberg, 2007), Extraversion facets: Expressiveness, Social Boldness, Sociability, Liveliness",6.5,31.6,11.7142857142857,3.32884615384615
 hicks_2020_bioveda,Biological Variation In Experimental Design And Analysis (BioVEDA) assessment,62.6875,361.5,8,7.97682460550202
 himmelstein-admc_raw-2025,"Adult Decision Making Competence (ADMC): the Resistance to Framing and Applying Decision Rules subtests, administered as part of the Forecasting Proficiency Test battery.",69.2435233160622,391.020725388601,6.78756476683938,8.69536605771132
-himmelstein-berlin_numeracy-2025,This dataset measures numeracy with the Berlin Numeracy Test.,51.25,261.25,NaN,6.51231924882629
-himmelstein-cognitive_reflection-2025,This dataset measures the tendency to override intuitive answers using the 7-item Cognitive Reflection Test (CRT).,36.4285714285714,178.714285714286,NaN,3.59467258794845
+himmelstein-berlin_numeracy-2025,This dataset measures numeracy with the Berlin Numeracy Test.,51.25,261.25,NA,6.51231924882629
+himmelstein-cognitive_reflection-2025,This dataset measures the tendency to override intuitive answers using the 7-item Cognitive Reflection Test (CRT).,36.4285714285714,178.714285714286,NA,3.59467258794845
 himmelstein-impossible_question-2025,"This dataset measures accuracy on a two-alternative forced-choice general-knowledge task that also contains unanswerable ('impossible') questions, on which the correct response is to opt out.",10.6,60.9666666666667,2,6.68199414844472
-himmelstein-number_series-2025,This dataset measures accuracy on a number-series task where participants identify the next number in the sequence.,5.88888888888889,25.3333333333333,NaN,-1.10333333333333
+himmelstein-number_series-2025,This dataset measures accuracy on a number-series task where participants identify the next number in the sequence.,5.88888888888889,25.3333333333333,NA,-1.10333333333333
 hirwa_2024_antibiotic_attitudes,"Attitudes towards antimicrobial use and antimicrobial resistance (Hirwa et al. 2024 cattle-farmer KAP questionnaire, part five)",1,2,6.66666666666667,-3.4
 hitlan_2025_celebrity_attitude,Celebrity attitude items,1,2,12.8,-3.4
 hitlan_2025_ders16,"Difficulties in Emotion Regulation Scale, 16-item (DERS-16)",1,2,13.8,-3.4
@@ -1350,6 +1350,9 @@ manolika_2021_mini_ipip,"Mini-IPIP (Mini International Personality Item Pool; Do
 manolika_2021_movie_preferences,"Movie genre preferences (21 film genres; Manolika, 2022)",1,2,12.8,-3.4
 manolika_2021_reading_preferences,"Reading preferences: liking ratings for 27 genres of books (study-constructed questionnaire; Manolika, 2022)",1.14814814814815,8.88888888888889,12.8,13.4927272727273
 marcussonclavertz_2019_velten,Velten Mood Induction Procedure (80-statement pool),8.225,42.075,4,4.22398542385885
+marian_2023_gad,"GAD-Q-IV, adapted for EMA",1,NA,8,NA
+marian_2023_phq9,"Patient Health Questionnaire-9 (PHQ-9), adapted for EMA",1,NA,8,NA
+marian_2023_thoughts,"Negative automatic thoughts (13 items, study EMA list)",1,NA,12.25,NA
 marquessanchez_2023_kidmed,KIDMED Test of Adherence to the Mediterranean Diet (Mediterranean Diet Quality Index for Children and Adolescents),8.625,47.5625,2,4.49096830985916
 martindelcampo_2020_cvcv,"Contextual Victimization by Community Violence Scale (CVCV; Gurrola-Peña et al., 2018)",1,2,10.2,-3.4
 martindelcampo_2020_tipi,"Ten-Item Personality Inventory (TIPI; Gosling, Rentfrow & Swann, 2003)",1,2,17.5714285714286,-3.4
@@ -1526,7 +1529,7 @@ moreno_jorquera_2025_amtb_integr,"Attitude/Motivation Test Battery (AMTB), 43-it
 moreno_jorquera_2025_amtb_intensity,"Attitude/Motivation Test Battery (AMTB), 43-item Mexican Spanish version (Sandoval-Pineda 2011) with Chilean lexical adaptations",14,73,2,6.72714285714286
 moreno_jorquera_2025_amtb_interest,"Attitude/Motivation Test Battery (AMTB), 43-item Mexican Spanish version (Sandoval-Pineda 2011) with Chilean lexical adaptations",12,67.25,2,6.79
 moreno_jorquera_2025_amtb_teacher,"Attitude/Motivation Test Battery (AMTB), 43-item Mexican Spanish version (Sandoval-Pineda 2011) with Chilean lexical adaptations",10.6666666666667,60,2,7.37625
-morgan_2026_music_personality_music_activity,"Music-related Activities (10-item, study-specific measure; Morgan et al. 2026 raw survey materials -- not one of the paper's three named measures BFI-2-S/STOMP-R/PVQ-21)",6.9,48.6,NaN,10.3589710144928
+morgan_2026_music_personality_music_activity,"Music-related Activities (10-item, study-specific measure; Morgan et al. 2026 raw survey materials -- not one of the paper's three named measures BFI-2-S/STOMP-R/PVQ-21)",6.9,48.6,NA,10.3589710144928
 morgan_2026_music_personality_stompr,Short Test of Music Preferences - Revised (STOMP-R),1.1304347826087,7.73913043478261,16.4285714285714,4.12760869565217
 MotAcademica_Ribeiro_2019,"Escala de Motivação Académica (EMA), 29 items, Portuguese public higher education. Items, stem, instruction and response scale are the Anexo ('Instrumento de avaliação da Motivação no Ensino Superior') of Ribeiro, Saraiva, Pereira & Ribeiro (2019), Revista de Administração Contemporânea 23(3), scielo.br/j/rac/a/GpfDjHvMRDf9cyG4nmqQMtt (CC BY); the instrument is adapted from Guimarães & Bzuneck (2008), Ciências & Cognição 13(1), 101-113. Data: Harvard Dataverse doi:10.7910/DVN/KWTMWT (CC0), whose columns are Item1..Item29. The anexo prints five labels across the seven scale points, and the printed table aligns them 1 = Nenhuma correspondência, 2 = Pouca correspondência, 'Moderada correspondência' spanning 3-5, 6 = Muita correspondência, 7 = Total correspondência; the three middle points are therefore left unlabelled rather than assigning 'Moderada' to one of them. English is an IRW rendering.",10.1379310344828,55.9655172413793,13.1428571428571,7.91005160684964
 motion,"Random-dot motion discrimination task (""Space Race"")",10,58,8,6.93636363636364
@@ -1580,6 +1583,24 @@ nas_rogoza_2024_study5_nvs,"Narcissistic Vulnerability Scale (NVS), four-item da
 nature_relatedness,"Nature Relatedness Scale, 6-item short form (NR-6; Nisbet & Zelenski, 2013), administered with the Ten Item Personality Inventory (Gosling, Rentfrow & Swann, 2003) and a 16-word vocabulary check-list",3.99242424242424,27.4318181818182,12.1212121212121,10.7776187265918
 nelson2019_ipqrd,"Illness Perception Questionnaire - Revised for Dental Use in Older Adults (IPQ-RDE), 43-item form",11.8837209302326,66.6511627906977,14,7.05333030523256
 nelson_2019_ipqrde,Illness Perception Questionnaire - Revised for Dental Use in Older Adults (IPQ-RDE),11.8837209302326,66.6511627906977,14,7.05333030523256
+nepal_2024_phq4,Patient Health Questionnaire-4 (PHQ-4),1,NA,15.25,NA
+nepal_2024_state_self_esteem,"State Self-Esteem Scale, four items",1,NA,9.6,NA
+neubauer_2021_paco_autonomy_support,PACO daily autonomy-supportive parenting (Neubauer et al. 2021),15.4,71.6,24,5.088
+neubauer_2021_paco_child_affect,"PACO daily affect, target child, parent report (Neubauer et al. 2021)",1,9.4,9.5,35.31
+neubauer_2021_paco_corona_info,PACO daily corona information seeking (Neubauer et al. 2021),19.25,120.25,6.8,13.2187987012987
+neubauer_2021_paco_mindfulness,"Multidimensional State Mindfulness Questionnaire, four items (Blanke & Brose 2017; PACO daily)",12.25,68,13.125,7.24872448979592
+neubauer_2021_paco_parent_affect,"PACO daily affect, parent (Neubauer et al. 2021)",1,9.4,9.5,35.31
+neubauer_2021_paco_parenting,PACO daily parenting (Neubauer et al. 2021),10.6,52.4,24,4.57753846153846
+neubauer_2021_paco_stressors,Daily stressors after the Daily Inventory of Stressful Experiences (PACO daily),12.5,78.25,3,10.053
+neubauer_2021_paco_worry,"Ambulatory Worry Scale, five items (PACO daily)",8.2,42.8,24,3.72507317073171
+neubauer_2023_stecco_activity_motivation,"STECCO momentary motivation for another activity: external, introjected, identified and intrinsic regulation",9.125,50.875,24,201.642465753425
+neubauer_2023_stecco_emotion_regulation,"Momentary emotion regulation, adapted from the Heidelberg Form for Emotion Regulation Strategies (Izadpanah et al. 2019)",10.6,57.8,9.5,6.80060377358491
+neubauer_2023_stecco_eod_affect,STECCO end-of-day affect (Neubauer & Schmiedek 2023),1,7.4,9.5,35.31
+neubauer_2023_stecco_esm_affect,STECCO momentary affect (Neubauer & Schmiedek 2023),1,7.4,9.5,35.31
+neubauer_2023_stecco_father_parenting,"Perceived parenting today, father: autonomy support and psychological control (STECCO end of day)",11,61.5,24,6.80227272727273
+neubauer_2023_stecco_mother_parenting,"Perceived parenting today, mother: autonomy support and psychological control (STECCO end of day)",11,61.625,24,6.80227272727273
+neubauer_2023_stecco_study_motivation,"STECCO momentary study motivation: external, introjected, identified and intrinsic regulation",11.25,61.625,24,247.154444444444
+neubauer_2023_stecco_study_satisfaction,"Daily study satisfaction, items from the NEPS (STECCO end of day)",12.1818181818182,66.8181818181818,20.5,8.26986431478969
 neurodegenerative_huizinga_2019_dass,Depression Anxiety Stress Scales - 21 (DASS-21),9.66666666666667,50.3809523809524,34.75,5.94592334494774
 neurodegenerative_huizinga_2019_svc,Screening Visuele Klachten (SVK) / Screening of Visual Complaints (SVC),12.887323943662,74.6478873239437,8.85915492957746,7.30678357728068
 neurodegenerative_huizinga_2019_vfq,"National Eye Institute Visual Functioning Questionnaire - 25 (VFQ-25), version 2000, self-administered format",1,2,17.6231884057971,-3.4
@@ -1953,6 +1974,18 @@ rr98_accuracy,"Ratcliff & Rouder (1998, Experiment 1) brightness discrimination 
 ruiz_parra_2023_rfq8,"Reflective Functioning Questionnaire (RFQ-8), Spanish version",9.625,47.75,5.85714285714286,3.64167207792208
 RvKDCS_Romiacg_Miroshnik_2020_CBI,"Creative Behavior Inventory (CBI), 11-item Russian version",5.81818181818182,31.8181818181818,18.25,4.37909090909091
 rvobgvmaas_lsf_lehing_2024,"Maternal Antenatal Attachment Scale (MAAS; Condon 1993), German version (Mütterliche Antenatale Bindungsskala, MABS; Wittich, Hansche, Knappe & Martini 2009)",18.4736842105263,91.6842105263158,21.9789473684211,7.23081818181818
+ryvkina_2023_s1_activity_affect,EMOTIONS ESM: affect after the last activity (partly after the PANAS/PANAS-X),1,7.33333333333333,21,15.2833333333333
+ryvkina_2023_s1_activity_experience,EMOTIONS ESM: experience of the last activity without interaction,4,23.125,21,6.40056818181818
+ryvkina_2023_s1_corona_worries,EMOTIONS ESM: coronavirus-related momentary worries,5.15384615384615,30.2307692307692,9.5,134.564545454545
+ryvkina_2023_s1_interaction_affect,EMOTIONS ESM: affect after the last social interaction (partly after the PANAS/PANAS-X),1,7.33333333333333,21,15.2833333333333
+ryvkina_2023_s1_interaction_behavior,EMOTIONS ESM: own behaviour in the last social interaction (partly after the Interpersonal Adjective Scales),3.5,18.3333333333333,21,2.46727272727273
+ryvkina_2023_s1_interaction_perception,EMOTIONS ESM: perceived treatment in the last social interaction,3.83333333333333,19.3333333333333,21,2.8354347826087
+ryvkina_2023_s2_activity_affect,EMOTIONS ESM: affect after the last activity (partly after the PANAS/PANAS-X),1.07142857142857,7.92857142857143,21,15.5078571428571
+ryvkina_2023_s2_activity_experience,EMOTIONS ESM: experience of the last activity without interaction,4.11111111111111,24.1111111111111,21,6.86192982456141
+ryvkina_2023_s2_corona_worries,EMOTIONS ESM: coronavirus-related momentary worries,5.14285714285714,30.2857142857143,9.5,145.656666666667
+ryvkina_2023_s2_interaction_affect,EMOTIONS ESM: affect after the last social interaction (partly after the PANAS/PANAS-X),1.07142857142857,7.92857142857143,21,15.5078571428571
+ryvkina_2023_s2_interaction_behavior,EMOTIONS ESM: own behaviour in the last social interaction (partly after the Interpersonal Adjective Scales),3.875,20.5,21,3.30125
+ryvkina_2023_s2_interaction_perception,EMOTIONS ESM: perceived treatment in the last social interaction,4.875,27,21,5.97791666666667
 rzeszutek_2020_wwii_matgrandfather,Knowledge about World War II Events: Questionnaire (maternal (great)grandfather column),4.89655172413793,30.7586206896552,3,7.50979601748422
 rzeszutek_2020_wwii_matgrandmother,Knowledge about World War II Events: Questionnaire (maternal (great)grandmother column),4.89655172413793,30.7586206896552,3,7.50979601748422
 rzeszutek_2020_wwii_patgrandfather,Knowledge about World War II Events: Questionnaire (paternal (great)grandfather column),4.89655172413793,30.7586206896552,3,7.50979601748422
@@ -1972,6 +2005,7 @@ SBD_Smith_2020,Managing Bipolar Disorder Scale (Original Battery); published as 
 schafer_2016_music_effects,"Music-listening diary: effects of music listening (Schäfer, 2016)",14.3333333333333,95.6666666666667,3.5,12.1209090909091
 schafer_2016_music_goals,"Goals of music listening (diary questionnaire, Schäfer 2016)",1,2,3.5,-3.4
 schalet_2016_hrsa,"Hamilton Rating Scale for Anxiety (HRSA / HAM-A), 14 items",15.4285714285714,121.857142857143,8,15.9391798941799
+scharbert_2024_esm_affect,"Momentary well-being, ESM (Scharbert et al. 2024): three negative and three positive affect items",1,NA,12.6666666666667,NA
 schmidt_2017_fas,Family Affluence Scale II (FAS II),9.53846153846154,48.3846153846154,7.53846153846154,5.06870967741936
 schmidt_2017_pds,"Pubertal Development Scale (PDS), German version (Watzlawik, 2009)",8.66666666666667,45,26.9166666666667,2.77166666666667
 science_ltm,"Eurobarometer 38.1 (November 1992): attitudes to science and technology, Great Britain (Q.62, Q.66)",12.7142857142857,85.2857142857143,18.5,12.4382343499197
@@ -2009,7 +2043,7 @@ silva_2018_phcs,"Perceived Health Competence Scale (PHCS), unified Portuguese-la
 silva_2022_crsy,Community Resilience Scale for Youth (CRS-Y),11.8125,74.375,2,10.3797611256545
 silva_2023_ecohis,"Early Childhood Oral Health Impact Scale (ECOHIS; Pahel, Rozier & Slade, 2007), Brazilian Portuguese version (Tesch, Oliveira & Leão, 2008)",1,2,2,-3.4
 silvia_2024_funny,Humor Efficacy and Identity Short Scales (HEISS),8.5,40.75,7.4,5.07794117647059
-simsalrbim_human,Preference Test - Wide valence range (seven OASIS images),1,NaN,NaN,NA
+simsalrbim_human,Preference Test - Wide valence range (seven OASIS images),1,NA,NA,NA
 simsalRbim_Human_LargeValence_2017,Preference Test - Wide valence range (seven OASIS images),1,2,2,-3.4
 simsalRbim_Human_LargeValence_2018,"Pairwise picture preference test (Pfefferle et al. 2025, Behavior Research Methods), high-valence image set from the OASIS database (Kurdi et al. 2017)",7.42857142857143,49.1428571428571,2,48.7154901960784
 simsalRbim_Human_LowValence_2017,Preference Test: Narrow valence range (paired choices between seven OASIS pictures),1,2,2,-3.4
@@ -2416,6 +2450,8 @@ takacs_2026_phq9,Patient Health Questionnaire (PHQ-9),12,69.3333333333333,15.25,
 talaifar_2025_study1_lifestyle_survey,Lifestyle Survey,3.89247311827957,23.7741935483871,15.2,5.12823106038883
 talaifar_2025_study2_plp,"Perceived Lifestyle Polarization ratings (Talaifar et al., 2025, Study 2)",7.44162858329871,43.5700041545492,3.22912339011217,4.16944699870331
 talaifar_2025_study2_thermometer,Feeling thermometer toward conservatives and liberals,5,30.5431034482759,2.1551724137931,4.08034482758621
+tammilehto_2022_emotion_regulation,"Emotion regulation strategies, one item each (after Heiy & Cheavens, 2014)",1,NA,9.5,NA
+tammilehto_2022_state_attachment,"State Adult Attachment Measure (SAAM), 6 items",1,NA,15.5,NA
 tan_2026_stem_technology_integration,"Science Teacher’s Belief, Attitude, and Practice of Technology Integration in STEM Education",12.2666666666667,73.8666666666667,2,10.2048648648649
 tangarife_2026_ai_benefits,Beneficios percibidos de la IA,11,72,19.6,11.8857142857143
 tangarife_2026_ai_reservations,Retos y cuestiones éticas,12.75,81.75,19.6,11.4915384615385
