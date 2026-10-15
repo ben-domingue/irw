@@ -70,6 +70,16 @@ ENUM_VOCAB = {
         "Developmental", "NA", "Opinion/attitude", "Other", "Personality",
         "Physical health/functioning",
     },
+    ##Not in TAG_VOCAB (the pipeline does not halt on these), so this is the
+    ##only check. 52 rows staged with "Child (<18)", "Adult" and "Adolescent"
+    ##reached the site filter as extra age options (2026-10-15).
+    "Age Range": {
+        "Child (<18y)", "Adult (18+)", "Elderly (minimum age >50)", "Mixed",
+        "Not applicable (non-person)", "NA",
+    },
+    "Child Age (for child-focused studies)": {
+        "Early (<6y)", "Child (6-12y)", "Adolescent (12-18y)", "NA",
+    },
 }
 
 KEY_MAP = {
