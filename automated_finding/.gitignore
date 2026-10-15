@@ -81,4 +81,3 @@ journal_scout/cache/
 # Python
 __pycache__/
 *.pyc
-irw_output_shard7/
