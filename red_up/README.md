@@ -31,9 +31,10 @@ anything else. The old scripts `chdir`'d into their own directory first, so
 **Picks a default dataset.** Any `*__items.csv` present ⇒ the newest item-text
 shard, unless `ITEMTEXT_DEFAULT` in `targets.py` pins one (currently none, so
 new item text goes to `irw_text_3`: Ben switched on 2026-09-25, with `irw_text`
-at 965 of ~990 tables); otherwise the core shard pinned by `CORE_DEFAULT`
-(`item_response_warehouse_5` since 2026-10-07, with shard 6 near the cap), or
-the newest core shard when that is `None`. A table that already exists is still updated where it lives. The menu shows every dataset in
+at 965 of ~990 tables); otherwise the core shard pinned by `CORE_DEFAULT`, or
+the newest core shard when that is `None` (currently none, so new response
+data goes to `item_response_warehouse_7`: unpinned 2026-10-15 with shards 5
+and 6 both near the cap). A table that already exists is still updated where it lives. The menu shows every dataset in
 `metadata/redivis_config.R` — Enter takes the default.
 
 Response data, item text and conjoint are **shard lists**, because Redivis caps

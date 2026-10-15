@@ -136,14 +136,29 @@ Ruled 2026-09-04 by ben-domingue on irw#1891. Check this **before** transcribing
 after — the TIMSS extractions that produced this rule were finished, gated and verified
 before anyone asked whether they could be published.
 
-**The rule.** If the wording's rights holder states a non-commercial restriction on the
-item text, do not ship it. Write no `__items.csv`, record the table `blocked`, and quote
-the clause in `notes_<table>.csv`. This is a determinate block ("licence bars reuse"), not
-a retryable one — an unchanged retry cannot change it.
+**The rule, as revised 2026-10-15 (counsel's advice of 2026-10-08; Ben: "ship with
+notice").** Wording under a non-commercial *licence that permits redistribution* — CC BY-NC,
+CC BY-NC-SA, or an originator statement that reproduction and distribution are allowed for
+non-commercial use — SHIPS, with the licence carried on the table: add a row to
+`itemtext/itemtext_licences.csv` (licence, link, attribution, changes, basis) and run
+`itemtext/set_licence_notices.py` after upload. Counsel: IRW's own use is non-commercial and
+the licence, once stated prominently, shifts compliance to downstream users. Record the
+licence in `provenance.csv` `note` too. This matches `datastandard.md`, which since
+2026-09-11 lets NC response data proceed with the NC licence recorded.
 
-This mirrors `datastandard.md`, which stops response-data intake on "any NC/ND
-restriction". Until this ruling that rule had no item-text counterpart, so wording was
-being extracted under terms that would have barred the response data outright.
+**What still blocks.** A clause that reserves *redistribution* or *reproduction*, however
+it is dressed: "free for non-commercial research use" that says nothing about republishing,
+"contact the author for other uses", permission-required, a fee, no-derivatives, or a
+no-redistribution bar. Those are not NC licences; they are reservations, and the HEXACO,
+WHOQOL and DSES rulings below stand. Write no `__items.csv`, record the table `blocked`,
+quote the clause in `notes_<table>.csv`, and keep the extracted wording in
+`/home/ben/Dropbox/projects/irw/data/itemtext/` if it was extracted. This is a determinate
+block, not a retryable one — an unchanged retry cannot change it.
+
+Before 2026-10-15 every NC statement blocked. Tables blocked under the old rule on a genuine
+CC BY-NC source (nguyen_2026_factcheck ×5, gilbert_meta_32, the ECR Thai selection) can be
+re-queued with a notice row; those blocked on a bare "non-commercial use" reservation
+cannot.
 
 **It fires on a stated restriction, not on an inference.** The test is whether the rights
 holder's own terms — a licence page, a PDF front matter, a per-page watermark, a
@@ -152,10 +167,10 @@ the sentence. If you cannot quote one, the rule does not fire.
 
 It specifically does **not** fire because an instrument is a copyrighted scale, is
 reproduced without an explicit grant, or is merely free of charge rather than sold by a
-test publisher. Most academic scales are in that position and remain shippable; "silence
-is not permission" was considered and rejected as the rule, because it would block most of
-the queue. Record what you relied on in `provenance.csv` `note` so a weak basis stays
-auditable.
+test publisher. Those cases are not NC blocks. **But since 2026-10-15 a named third-party
+instrument with no located grant HOLDS rather than ships** (see "Silence" below); only
+wording the depositor originated ships on the deposit licence alone. Record what you relied
+on in `provenance.csv` `note` so a weak basis stays auditable.
 
 **A public-domain statement does not override an NC clause.** TIMSS 2003's page says both
 "Although the items are in the public domain" and "for non-commercial, educational, and
@@ -218,12 +233,20 @@ too, to any fee-licensed instrument. It withdrew `cucchi_2018_tas20` and `rmet_h
 blocked `ruiz_parra_2023_tas20`. It applies even where the source published the items under an open
 licence: `cucchi_2018_tas20`'s wording came from a CC BY 4.0 PeerJ article that printed all 20 items.
 
-**Both triggers are quote tests, and silence is permission.** Block only on something you can quote
-from the rights holder — an enforced fee, or an explicit no-redistribution clause. An instrument
-being merely copyrighted, commercially sold, well known, or reproduced somewhere without an explicit
-grant is **not** a block. If you cannot find and quote a restriction, extract normally; do not block
-on suspicion, and do not open a negotiation with a rights holder. Record the quoted sentence and its
-URL — a rights block with no quote in it is not a rights block.
+**Both triggers are quote tests.** A *block* needs something you can quote from the rights holder —
+an enforced fee, an explicit no-redistribution clause, an NC or ND term. Record the quoted sentence
+and its URL — a rights block with no quote in it is not a rights block. Do not open a negotiation
+with a rights holder.
+
+**Silence — ruled 2026-10-15 (counsel's advice of 2026-10-08).** "Silence is permission" is retired.
+A NAMED third-party instrument for which you can locate neither a restriction nor a positive grant
+from its originator does not ship: it is a `hold`, the row records the search, and the extracted
+`__items.csv` goes to `/home/ben/Dropbox/projects/irw/data/itemtext/` (local Dropbox store, not
+git) so that a later grant turns into an upload. Counsel's reasoning: copyright in scales is thin,
+but the licensing market and enforcement pattern make unlicensed redistribution of a named
+instrument high-risk relative to other content. Wording the depositor originated (study-authored
+items, a study's own adaptation, the owner's own questionnaire) still ships on the deposit licence.
+The 26 live silence tables were withdrawn the same day.
 
 ### No-redistribution clauses override the source licence — ruled 2026-09-04
 
@@ -238,10 +261,11 @@ strict direction. Together with the fee-licence ruling it means **the source dep
 longer sufficient on its own** — a rights holder's own restriction on the instrument outranks it,
 whether that restriction is a redistribution bar or an enforced fee.
 
-**It still fires only on something you can quote.** Silence remains permission, exactly as under the
-NC rule: an instrument that is merely copyrighted, or reproduced without an explicit grant, is not
-blocked. What changed is that finding the clause on the rights holder's copy is now enough — you no
-longer get to rely on the deposit you happened to take the words from.
+**It still fires only on something you can quote.** An instrument that is merely copyrighted, or
+reproduced without an explicit grant, is not *blocked* under this rule — though since 2026-10-15 a
+named instrument in that position *holds* (see "Silence" above). What changed here is that finding
+the clause on the rights holder's copy is now enough — you no longer get to rely on the deposit you
+happened to take the words from.
 
 **Consequence not yet worked through:** this narrows the ECR-R decision for a whole class of
 instruments, and already-shipped tables have never been audited against it. No re-audit has been

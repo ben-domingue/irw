@@ -46,6 +46,9 @@ metadata/**/*.txt
 !metadata/table_scripts_manual.csv
 # Per-column codebook rows the table pages render (#2763); stage 14.
 !metadata/column_docs.csv
+# Per-table coverage matrix over the live corpus (stage 17, the monthly data-QC
+# audit); its coverage_report.md beside it is not ignored by the rules above.
+!metadata/coverage_matrix.csv
 # Source codebook files found by name in each deposit, and what was checked
 # (#2766); find_codebook_links.py, run by hand. Its listing cache stays local.
 !metadata/codebook_links.csv

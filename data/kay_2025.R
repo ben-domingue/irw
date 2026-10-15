@@ -20,8 +20,9 @@ df_gcb5_wave2 <- df_gcb5_wave2 %>%
                names_to = "item", values_to = "resp")
 df_gcb5 <- bind_rows(df_gcb5_wave1, df_gcb5_wave2) %>%
   select(id, cov_age, cov_gender, wave, item, resp) %>%
-  arrange(id, wave, item) %>%
-  mutate(resp = resp + 4)
+  arrange(id, wave, item)
+# gcb5_2025 keeps the codebook's -3..3 coding (irw#1079): the published table and
+# its item-text anchors use it, so no +4 shift here, unlike the sibling tables.
 # Conspiracy Mentality Questionnaire (CMQ)
 df_cmq_wave1 <- df %>%
   mutate(wave=1) %>%

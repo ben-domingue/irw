@@ -18,6 +18,8 @@ python3 -m irw_validate.conjoint *.csv
 
 A table belongs here when respondents evaluate profiles whose attributes were randomized: at least two attributes, each with varying levels. That includes paired and single-profile conjoints, and factorial surveys or vignette experiments that randomize the attributes of a text vignette (`presentation = text` in the design record). A fixed set of vignettes shown identically to everyone, such as anchoring vignettes, is a set of ordinary items and belongs in the core warehouse.
 
+Discrete choice experiments are in scope regardless of discipline (health, transport, agricultural and food economics, environmental valuation, energy, tourism; issue #2978, 2026-10-14). Each choice set is a task and each alternative a profile, with levels stored as the displayed text including units and currency. A fixed "none", "neither" or status-quo alternative that shows no attributes is not a profile: it is recorded as `opt_out = yes` in `design_outcomes.csv`. A status-quo alternative shown with its own levels is a profile. Labelled alternatives ("Car", "Bus", "Train") carry the label in an `attr_*` column. Fixed or blocked designs are fine and are described in `restrictions_note`. Ranks of cards are stored in `rating` with the outcome wording stating that it is a rank and its direction. Utilities-only exports, contingent valuation, best-worst scaling and constant-sum allocation are out of scope; the `domain` tag, not the shard, is how users subset by field.
+
 ## Layout
 
 One row per respondent × task × profile.
