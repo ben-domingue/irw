@@ -29,7 +29,7 @@ Finally set the `status` of each row in `candidates.csv` to `built` and open a p
 
 ## Reporting a quirk
 
-The deposits have no codebook, so the standard describes what has been seen, not what exists. When the script prints a `WARN` about a suspected token, or a file has a column the README's list does not mention, or the validator blocks a table that looks right to you, do not work around it. Post in the family's tracking issue on GitHub (linked from `candidates.csv`'s header once it exists) with the file name, the exact value or column, and three example rows. Rulings get recorded in the README's rulings log, and `KNOWN_TOKENS` or the column list in `fairvote_cvr.py` gets updated in one PR, so the next person does not meet the same thing.
+The deposits have no codebook, so the standard describes what has been seen, not what exists. When the script prints a `WARN` about a suspected token, or a file has a column the README's list does not mention, or the validator blocks a table that looks right to you, do not work around it. Post in the family's tracking issue, [#3024](https://github.com/ben-domingue/irw/issues/3024), with the file name, the exact value or column, and three example rows. Rulings get recorded in the README's rulings log, and `KNOWN_TOKENS` or the column list in `fairvote_cvr.py` gets updated in one PR, so the next person does not meet the same thing.
 
 The things most likely to come up:
 
