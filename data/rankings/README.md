@@ -2,7 +2,7 @@
 
 Processing scripts and records for the **rankings** data family (`source = "rank"`): tables in which each respondent places a fixed set of options in order. The first source is FairVote's cast vote records from US ranked-choice elections; the layout is written to also hold Scottish, Australian and Irish ballot data and survey ranking questions.
 
-**Status (2026-10-15).** Draft standard with seven reference tables (`examples/`: six FairVote contests and one Eurovision jury show); 15 Eurovision tables built from `eurovision_jurors.py` (three more held under the 100-id floor). The family is live: the Redivis dataset `irw_rank` (display name `IRW_rank`, reference id `93f5`; `IRW_RANK_DATASETS` in `metadata/redivis_config.R`, a shard list from day one) holds the first tables, both packages accept `source = "rank"` and ship a `rank_compress` helper (below), `red_up --dataset irw_rank` runs the validator and the design-row gate, `metadata/18_rankings.R` writes `rank_metadata`, and `metadata/02_biblio.R` reads the dictionary file. The site page (`rankings_standard.qmd`) is planned. Tables are built and checked locally with the two commands below, and a table counts as done when it passes the validator and has its rows in `design_tables.csv`, `candidates.csv` and the dictionary. The rulings that shaped this standard are logged at the end; the structural scouting that found the family is in `oneoff/structure-scouting-2026-10-13/`.
+**Status (2026-10-15).** Draft standard with seven reference tables (`examples/`: six FairVote contests and one Eurovision jury show); 18 Eurovision tables built from `eurovision_jurors.py`. The family is live: the Redivis dataset `irw_rank` (display name `IRW_rank`, reference id `93f5`; `IRW_RANK_DATASETS` in `metadata/redivis_config.R`, a shard list from day one) holds the first tables, both packages accept `source = "rank"` and ship a `rank_compress` helper (below), `red_up --dataset irw_rank` runs the validator and the design-row gate, `metadata/18_rankings.R` writes `rank_metadata`, and `metadata/02_biblio.R` reads the dictionary file. The site page (`rankings_standard.qmd`) is planned. Tables are built and checked locally with the two commands below, and a table counts as done when it passes the validator and has its rows in `design_tables.csv`, `candidates.csv` and the dictionary. The rulings that shaped this standard are logged at the end; the structural scouting that found the family is in `oneoff/structure-scouting-2026-10-13/`.
 
 ```
 python3 data/rankings/fairvote_cvr.py build <raw dir> <out dir> <table> [...]   # build FairVote tables
@@ -46,7 +46,7 @@ Options that are not people (policies, schools, products in a survey ranking) ar
 ## Intake rules
 
 - **Licence:** CC0, CC BY, CC BY-SA or CC BY-NC, as elsewhere in IRW (a no-derivatives licence is not accepted). FairVote's three collections are CC0 1.0 throughout. Public election records are public records in their own right; the deposit's licence is what the dictionary carries.
-- **At least 100 ballots with marks** per table (the 100-respondent floor).
+- **At least 50 ballots with marks** per table. The core floor is 100 respondents; rankings use 50 rankers because a ranking over three or more objects contributes several positions, so 50 rankings carry at least as much information as 100 single responses on a short instrument (Ben, 2026-10-15). The validator warns below 50.
 - **No voter identifiers.** A source's ballot ID or row index is dropped at re-keying.
 - **Table names:** election tables are `rcv_<jurisdiction>_<yyyymmdd>_<office>`, lowercase, at most 40 characters, with the abbreviations in `fairvote_cvr.py` (`nyc`, `sf`, `mpls`, `council`, `boe`, `hd`, `bp`, …). Other rankings use the usual `author_year_topic`.
 - **Size.** The largest FairVote files (New York City, San Francisco) are 100–125 MB wide and 2–3× that long, so they need the token upload path.
@@ -94,7 +94,7 @@ The tables share a layout but not a meaning: how many positions a ballot offered
 | R6 | columns are the four above plus `cov_` and `trial_`; a `cov_` column is constant within a ballot |
 | R7 | with `--design`: a design row exists and no `resp` exceeds `n_positions` |
 | R8 | with `--design`: the table's candidate-code count and id count match `n_candidates` and `n_ballots_with_marks` |
-| floor | fewer than 100 ids warns |
+| floor | fewer than 50 ids warns (the rankings floor; core uses 100) |
 
 It also reports duplicate marks, ballots with a gap, and the marks-per-ballot distribution. (R5 is reserved for the ballot-weight rule, below.)
 
@@ -115,3 +115,4 @@ It also reports duplicate marks, ballots with a gap, and the marks-per-ballot di
 
 - **2026-10-15 (Ben).** (1) Duplicate marks are kept as recorded, not collapsed. (2) No renumbering after skips; a package helper will compress on request. (3) A new family, not a layout inside competitions. (4) One table per contest. (5) FairVote first; the second batch should be an international pool (Scotland or Australia) rather than the survey deposits, because the cross-source harmonisation is what the family is for. Candidate names are not stored; alphabetical codes. The Redivis dataset, packages and site are deferred until there are enough tables. Non-English ballot data is a separate scouting task.
 - **2026-10-15 (Ben), later.** Options that are not people keep their label as shown (country codes, song or policy text); only personal names are coded. Eurovision per-juror rankings are in scope: the family is about rankings, not the objects ranked. SUSHI is skipped (its originator forbids redistribution). Scouting memos: `oneoff/rankings-nonenglish-scouting-2026-10-15/`.
+- **2026-10-15 (Ben), floor.** The id floor for this family is 50 rankers, not the core 100, because each ranker over three or more objects contributes several positions. The three Eurovision semi-finals held under the old floor (2021 sf1, 2022 sf1, 2022 sf2: 95, 95 and 75 jurors) were built and uploaded under this rule.

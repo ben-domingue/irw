@@ -72,6 +72,11 @@ class RankingsTest(unittest.TestCase):
     def test_small_table_warns_on_floor(self):
         self.assertIn("sample_floor", checks(table(), "warn"))
 
+    def test_fifty_rankers_clear_the_floor(self):
+        """The rankings floor is 50 rankers, not the core 100 (README, Intake rules)."""
+        rows = [{"id": i, "task": 1, "item": f"c0{j}", "resp": j} for i in range(1, 51) for j in (1, 2, 3)]
+        self.assertNotIn("sample_floor", checks(pd.DataFrame(rows), "warn"))
+
 
 if __name__ == "__main__":
     unittest.main()
