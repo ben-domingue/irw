@@ -27,7 +27,12 @@ import re
 import sys
 from pathlib import Path
 
-from .extra import MIN_IDS, check_name
+from .extra import check_name
+
+#: The rankings floor is 50 rankers, not the core 100 (Ben, 2026-10-15): a ranker
+#: over three or more objects contributes several positions, so 50 rankings carry
+#: at least as much information as 100 single responses on a short instrument.
+MIN_IDS = 50
 from .model import Finding, Report
 
 REQUIRED = ("id", "task", "item", "resp")
@@ -153,7 +158,7 @@ def validate_rankings_frame(df, *, label: str = "", design: dict | None = None) 
     report.stats["n_ballots"] = n
     if n < MIN_IDS:
         out.append(_f("sample_floor", "warn",
-                      f"{n} unique ids; IRW intake policy sets a flat floor of {MIN_IDS}", table))
+                      f"{n} unique ids; the rankings family floor is {MIN_IDS} rankers (README, Intake rules)", table))
     per = df.groupby(["id", "task"]).size()
     report.stats["marks_per_ballot"] = {int(k): int(v) for k, v in per.value_counts().sort_index().items()}
     gaps = df.groupby(["id", "task"])["resp"].agg(lambda s: int(s.max() - len(s)) if len(s) else 0)
