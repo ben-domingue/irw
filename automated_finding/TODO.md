@@ -7,14 +7,16 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
 - [ ] **191 tables (1,607,513 responses) + 82 item text tables need uploading** from
   `automated_finding/irw_output/` and `itemtext_output/` (response tables first; list in
-  `runs/batch_tables_2026-10-14.txt`). **Both folders also hold 40 + 36 openESM files from other
-  in-flight work (mtime 2026-10-13, not this batch's)** -- separate before `red_up`. Stamp
-  `uploaded=` in `itemtext_provenance.csv` only after ben-domingue confirms.
+  `runs/batch_tables_2026-10-14.txt`). The staging folders now hold ONLY this batch: the 40 + 36
+  openESM files from the 2026-10-13 ingest PRs (#2936-#2975, not live yet) were moved to
+  `runs/openesm_pending_2026-10-13/{irw_output,itemtext_output}/` on 2026-10-15 so `red_up` cannot
+  mix the two streams; upload those separately. Stamp `uploaded=` in `itemtext_provenance.csv`
+  only after ben-domingue confirms.
 - [ ] **Issues-page entries at upload:** 39 tables with public_note set, listed in BATCH_LOG 2026-10-14b.
 - [ ] **Covariate labels:** `build.py` after the release and commit covariate_labels.csv (harvest run at
   db501a7c for the 25 .sav/.dta scripts).
-- [ ] **Rulings wanted** (none blocks upload): see BATCH_LOG 2026-10-14b. Biggest: 16 opaque-block
-  tables (yao x6, li_2026_vocational x4, li_2026_efl_listening x6) ship or reject.
+- [ ] **Rulings wanted** (none blocks upload): see BATCH_LOG 2026-10-14b. ben-domingue ruled 2026-10-15
+  that the 16 opaque-block tables (yao x6, li_2026_vocational x4, li_2026_efl_listening x6) ship as-is.
 - [ ] `prasetiyo_2022_act` item text held at `itemtext/fixes/repos_2026-10-14_A/` (verify FAIL:
   nine reversed items). All 77 leads carry a status; none unworked.
 - [ ] The "arg must be a list, tuple, 1-d array, or Series" reader fault hit 12 more `error` rows

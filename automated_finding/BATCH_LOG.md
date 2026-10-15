@@ -18471,3 +18471,14 @@ oliveira_2026_healthcare_experiences (English codebook wording only).
   data itself composite-only). kellstedt_2017_policy_support keeps split-ballot q93_v1/v2 as
   two items. mairean N = 196 across seven small tables. Lead 58 (zenodo 20748539, CC BY,
   500 x 11) rejected only because the creator is "Anonymous".
+
+## 2026-10-15 — 2026-10-14 batch: staging separated, opaque-block ruling
+
+ben-domingue ruled the 16 opaque-block tables (yao_2025 x6, li_2026_vocational x4,
+li_2026_efl_listening x6) are appropriate as shipped, since the deposits give no way to tell
+which item is which. On his "separate out anything I should not upload", the 40 response and
+36 item text files of the 2026-10-13 openESM ingest PRs (#2936-#2975; merged, not live, not
+this batch's) were moved from `irw_output/` / `itemtext_output/` to
+`runs/openesm_pending_2026-10-13/`, so the staging folders hold exactly the batch's 191 + 82
+files (`runs/batch_tables_2026-10-14.txt`). Nothing in the batch itself is held back: the only
+non-shipping artefact is the `prasetiyo_2022_act` item text under `itemtext/fixes/`.
