@@ -300,8 +300,11 @@ permissive deposits.
 
 **Ask what the clause does. Does it RESERVE A RIGHT, or DISCLAIM FITNESS?**
 
-**Reserves a right → BLOCK.** Any of: a licence fee, permission-required, non-commercial,
-no-derivatives, no-redistribution, "contact the author for other uses". It does not matter
+**Reserves a right → BLOCK.** Any of: a licence fee, permission-required, no-derivatives,
+no-redistribution, "contact the author for other uses", or a "non-commercial use" statement
+that says nothing about redistribution. (A CC BY-NC / BY-NC-SA licence is different: it
+*permits* redistribution, and since 2026-10-15 ships with a notice — see
+`itemtext_standard.md`, "The rule, as revised 2026-10-15".) It does not matter
 whether IRW's own use would comply. **IRW redistributes**: hosting hands the wording to
 downstream users whose use IRW cannot condition, including the use the holder reserved. So
 "our own use is non-profit academic research, which the clause allows" is *not* a defence —

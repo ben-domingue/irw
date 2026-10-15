@@ -6,7 +6,9 @@
 
 Rule 18 of the item-text licensing rules (2026-09-25): wording under CC BY-SA ships,
 but every such table has to carry the licence -- the source, the licence link and
-what IRW changed (CC BY-SA 4.0 s3(a)). IRW's own disclaimer otherwise says item
+what IRW changed (CC BY-SA 4.0 s3(a)). Since 2026-10-15 the same applies to wording
+under CC BY-NC / BY-NC-SA (counsel 2026-10-08: the stated licence shifts compliance
+to downstream users), so NC tables get a row here too. IRW's own disclaimer otherwise says item
 text "implies no license", which is wrong for these tables: users already hold a
 licence from the source.
 

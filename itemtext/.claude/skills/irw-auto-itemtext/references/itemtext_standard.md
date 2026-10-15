@@ -136,14 +136,29 @@ Ruled 2026-09-04 by ben-domingue on irw#1891. Check this **before** transcribing
 after — the TIMSS extractions that produced this rule were finished, gated and verified
 before anyone asked whether they could be published.
 
-**The rule.** If the wording's rights holder states a non-commercial restriction on the
-item text, do not ship it. Write no `__items.csv`, record the table `blocked`, and quote
-the clause in `notes_<table>.csv`. This is a determinate block ("licence bars reuse"), not
-a retryable one — an unchanged retry cannot change it.
+**The rule, as revised 2026-10-15 (counsel's advice of 2026-10-08; Ben: "ship with
+notice").** Wording under a non-commercial *licence that permits redistribution* — CC BY-NC,
+CC BY-NC-SA, or an originator statement that reproduction and distribution are allowed for
+non-commercial use — SHIPS, with the licence carried on the table: add a row to
+`itemtext/itemtext_licences.csv` (licence, link, attribution, changes, basis) and run
+`itemtext/set_licence_notices.py` after upload. Counsel: IRW's own use is non-commercial and
+the licence, once stated prominently, shifts compliance to downstream users. Record the
+licence in `provenance.csv` `note` too. This matches `datastandard.md`, which since
+2026-09-11 lets NC response data proceed with the NC licence recorded.
 
-This mirrors `datastandard.md`, which stops response-data intake on "any NC/ND
-restriction". Until this ruling that rule had no item-text counterpart, so wording was
-being extracted under terms that would have barred the response data outright.
+**What still blocks.** A clause that reserves *redistribution* or *reproduction*, however
+it is dressed: "free for non-commercial research use" that says nothing about republishing,
+"contact the author for other uses", permission-required, a fee, no-derivatives, or a
+no-redistribution bar. Those are not NC licences; they are reservations, and the HEXACO,
+WHOQOL and DSES rulings below stand. Write no `__items.csv`, record the table `blocked`,
+quote the clause in `notes_<table>.csv`, and keep the extracted wording in
+`/home/ben/Dropbox/projects/irw/data/itemtext/` if it was extracted. This is a determinate
+block, not a retryable one — an unchanged retry cannot change it.
+
+Before 2026-10-15 every NC statement blocked. Tables blocked under the old rule on a genuine
+CC BY-NC source (nguyen_2026_factcheck ×5, gilbert_meta_32, the ECR Thai selection) can be
+re-queued with a notice row; those blocked on a bare "non-commercial use" reservation
+cannot.
 
 **It fires on a stated restriction, not on an inference.** The test is whether the rights
 holder's own terms — a licence page, a PDF front matter, a per-page watermark, a
