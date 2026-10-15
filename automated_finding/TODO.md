@@ -5,14 +5,11 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
 ## From the 2026-10-14 repos mode-3 batch (15 new terms x 9 languages)
 
-- [ ] **191 tables (1,607,513 responses) + 82 item text tables need uploading** from
-  `automated_finding/irw_output/` and `itemtext_output/` (response tables first; list in
-  `runs/batch_tables_2026-10-14.txt`). All 191 go to the new `item_response_warehouse_7`
-  (`red_up irw_output --dataset item_response_warehouse_7`): shard 5's open draft already holds
-  962 tables, so a split was abandoned 2026-10-15. ben-domingue is wiring shard 7 into
-  `metadata/redivis_config.R` / `red_up/targets.py` himself -- do not register it from here.
-  **Item text: 82 tables uploaded to `irw_text_3` (ben-domingue, confirmed 2026-10-15;
-  `uploaded=2026-10-15` stamped). Response tables: upload to shard 7 in flight 2026-10-15.**
+- [x] **191 tables (1,607,513 responses) + 82 item text tables uploaded** (ben-domingue, confirmed
+  2026-10-15; response tables to the new `item_response_warehouse_7`, item text to `irw_text_3`;
+  `uploaded=2026-10-15` stamped on the 82 `itemtext_provenance.csv` rows). Table list in
+  `runs/batch_tables_2026-10-14.txt`. The 40 + 36 openESM files parked in
+  `runs/openesm_pending_2026-10-13/` are a separate stream, not uploaded by this batch.
 - [ ] **Issues-page entries at upload:** 39 tables with public_note set, listed in BATCH_LOG 2026-10-14b.
 - [ ] **Covariate labels:** `build.py` after the release and commit covariate_labels.csv (harvest run at
   db501a7c for the 25 .sav/.dta scripts).

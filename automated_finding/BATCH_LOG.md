@@ -18482,3 +18482,12 @@ this batch's) were moved from `irw_output/` / `itemtext_output/` to
 `runs/openesm_pending_2026-10-13/`, so the staging folders hold exactly the batch's 191 + 82
 files (`runs/batch_tables_2026-10-14.txt`). Nothing in the batch itself is held back: the only
 non-shipping artefact is the `prasetiyo_2022_act` item text under `itemtext/fixes/`.
+
+## 2026-10-15b — repos batch 2026-10-14 uploaded
+
+ben-domingue confirmed the 82 item text tables (`irw_text_3`) and then the 191 response
+tables uploaded. The response tables went whole to the new `item_response_warehouse_7`
+(registered on main in #3026) because shard 5's open draft already held 962 tables; the
+120/71 split prepared earlier was abandoned. `uploaded=2026-10-15` stamped on the 82
+`itemtext_provenance.csv` rows. Still open: issues-page entries (39 tables),
+`covariate_labels/build.py` after the release, the rulings list in 2026-10-14b.
