@@ -11,8 +11,8 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   (`red_up irw_output --dataset item_response_warehouse_7`): shard 5's open draft already holds
   962 tables, so a split was abandoned 2026-10-15. ben-domingue is wiring shard 7 into
   `metadata/redivis_config.R` / `red_up/targets.py` himself -- do not register it from here.
-  Item text goes to `irw_text_3`. Stamp `uploaded=` in `itemtext_provenance.csv` only after
-  ben-domingue confirms.
+  **Item text: 82 tables uploaded to `irw_text_3` (ben-domingue, confirmed 2026-10-15;
+  `uploaded=2026-10-15` stamped). Response tables: upload to shard 7 in flight 2026-10-15.**
 - [ ] **Issues-page entries at upload:** 39 tables with public_note set, listed in BATCH_LOG 2026-10-14b.
 - [ ] **Covariate labels:** `build.py` after the release and commit covariate_labels.csv (harvest run at
   db501a7c for the 25 .sav/.dta scripts).
