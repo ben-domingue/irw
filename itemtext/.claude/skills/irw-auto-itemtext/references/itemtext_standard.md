@@ -152,10 +152,10 @@ the sentence. If you cannot quote one, the rule does not fire.
 
 It specifically does **not** fire because an instrument is a copyrighted scale, is
 reproduced without an explicit grant, or is merely free of charge rather than sold by a
-test publisher. Most academic scales are in that position and remain shippable; "silence
-is not permission" was considered and rejected as the rule, because it would block most of
-the queue. Record what you relied on in `provenance.csv` `note` so a weak basis stays
-auditable.
+test publisher. Those cases are not NC blocks. **But since 2026-10-15 a named third-party
+instrument with no located grant HOLDS rather than ships** (see "Silence" below); only
+wording the depositor originated ships on the deposit licence alone. Record what you relied
+on in `provenance.csv` `note` so a weak basis stays auditable.
 
 **A public-domain statement does not override an NC clause.** TIMSS 2003's page says both
 "Although the items are in the public domain" and "for non-commercial, educational, and
@@ -218,12 +218,20 @@ too, to any fee-licensed instrument. It withdrew `cucchi_2018_tas20` and `rmet_h
 blocked `ruiz_parra_2023_tas20`. It applies even where the source published the items under an open
 licence: `cucchi_2018_tas20`'s wording came from a CC BY 4.0 PeerJ article that printed all 20 items.
 
-**Both triggers are quote tests, and silence is permission.** Block only on something you can quote
-from the rights holder — an enforced fee, or an explicit no-redistribution clause. An instrument
-being merely copyrighted, commercially sold, well known, or reproduced somewhere without an explicit
-grant is **not** a block. If you cannot find and quote a restriction, extract normally; do not block
-on suspicion, and do not open a negotiation with a rights holder. Record the quoted sentence and its
-URL — a rights block with no quote in it is not a rights block.
+**Both triggers are quote tests.** A *block* needs something you can quote from the rights holder —
+an enforced fee, an explicit no-redistribution clause, an NC or ND term. Record the quoted sentence
+and its URL — a rights block with no quote in it is not a rights block. Do not open a negotiation
+with a rights holder.
+
+**Silence — ruled 2026-10-15 (counsel's advice of 2026-10-08).** "Silence is permission" is retired.
+A NAMED third-party instrument for which you can locate neither a restriction nor a positive grant
+from its originator does not ship: it is a `hold`, the row records the search, and the extracted
+`__items.csv` goes to `/home/ben/Dropbox/projects/irw/data/itemtext/` (local Dropbox store, not
+git) so that a later grant turns into an upload. Counsel's reasoning: copyright in scales is thin,
+but the licensing market and enforcement pattern make unlicensed redistribution of a named
+instrument high-risk relative to other content. Wording the depositor originated (study-authored
+items, a study's own adaptation, the owner's own questionnaire) still ships on the deposit licence.
+The 26 live silence tables were withdrawn the same day.
 
 ### No-redistribution clauses override the source licence — ruled 2026-09-04
 
@@ -238,10 +246,11 @@ strict direction. Together with the fee-licence ruling it means **the source dep
 longer sufficient on its own** — a rights holder's own restriction on the instrument outranks it,
 whether that restriction is a redistribution bar or an enforced fee.
 
-**It still fires only on something you can quote.** Silence remains permission, exactly as under the
-NC rule: an instrument that is merely copyrighted, or reproduced without an explicit grant, is not
-blocked. What changed is that finding the clause on the rights holder's copy is now enough — you no
-longer get to rely on the deposit you happened to take the words from.
+**It still fires only on something you can quote.** An instrument that is merely copyrighted, or
+reproduced without an explicit grant, is not *blocked* under this rule — though since 2026-10-15 a
+named instrument in that position *holds* (see "Silence" above). What changed here is that finding
+the clause on the rights holder's copy is now enough — you no longer get to rely on the deposit you
+happened to take the words from.
 
 **Consequence not yet worked through:** this narrows the ECR-R decision for a whole class of
 instruments, and already-shipped tables have never been audited against it. No re-audit has been
