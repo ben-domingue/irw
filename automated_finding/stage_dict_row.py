@@ -35,7 +35,7 @@ Usage: pass one row as JSON on stdin, e.g.:
     echo '{"table": "foo_2024", "description": "...", "derived_license": "CC BY 4.0"}' \\
         | python stage_dict_row.py
 
-For a comps, nominal, simsyn or conjoint table add `--source comps|nom|sim|conj`; each
+For a comps, nominal, simsyn, conjoint or rankings table add `--source comps|nom|sim|conj|rank`; each
 dictionary has its own automated file (#2628). Default is core.
 
 `codebook_url` (#2770): the source's own codebook FILE -- whoever builds a
@@ -73,6 +73,9 @@ SOURCE_FILES = {
     ##Conjoint experiments (irw_conjoint). Staged here before the source is
     ##registered; metadata/02_biblio.R does not read this file yet.
     "conj": "dictionary_auto_conj.csv",
+    ##Rankings (draft irw_rankings family, data/rankings/README.md). Staged here
+    ##before the source exists on Redivis; metadata/02_biblio.R does not read it yet.
+    "rank": "dictionary_auto_rank.csv",
 }
 
 
