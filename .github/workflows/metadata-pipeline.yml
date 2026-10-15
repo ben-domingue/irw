@@ -171,7 +171,13 @@ jobs:
             echo "::error::run $RUN_ID is ${age_h}h old; resume only within 72h. Dispatch a full run instead."
             exit 1
           fi
-          gh run download "$RUN_ID" --name metadata-outputs --dir metadata/
+          # Into a scratch dir, then over the checkout: `gh run download`
+          # refuses to extract onto a file that exists, and the artifact is the
+          # whole metadata/ tree, scripts included (first hit 2026-10-15, run
+          # 38797586364 -- the first resume ever to reach this step).
+          rm -rf /tmp/metadata-outputs
+          gh run download "$RUN_ID" --name metadata-outputs --dir /tmp/metadata-outputs
+          cp -a /tmp/metadata-outputs/. metadata/
           if [[ ! -f metadata/pipeline_progress.txt ]]; then
             echo "::error::run $RUN_ID left no pipeline_progress.txt; nothing to resume. Dispatch a full run instead."
             exit 1
