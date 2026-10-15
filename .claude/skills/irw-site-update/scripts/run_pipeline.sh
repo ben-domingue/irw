@@ -206,7 +206,7 @@ declare -A STAGE_OUTPUTS=(
   [15]="codebook_links.csv codebook_links_checked.csv"
   [16]="conj_metadata.csv conj_outcomes.csv"
   [17]="coverage_matrix.csv"   # + coverage_report.md, not diffed (prose)
-  [18]="rank_metadata.csv"
+  [18]="rank_metadata.csv rank_refresh_stamps.csv"
 )
 # 16 (conjoint) and 18 (rankings) run with 05/06/07, before 02: conj_metadata.csv
 # and rank_metadata.csv are 02's liveness oracles for conj_biblio and

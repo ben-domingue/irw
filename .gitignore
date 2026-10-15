@@ -92,6 +92,8 @@ metadata/logs/codebook_table_names.json
 ##reason as the refresh log above: without it the Actions runner recomputes all
 ##973 tables every week (33 minutes). One row per table, sorted by name.
 !metadata/conj_refresh_stamps.csv
+##The same for the rankings family (18_rankings.R, #3039).
+!metadata/rank_refresh_stamps.csv
 ##Which published biblio cells the dictionary corrected on this run (#2001).
 ##Committed because it is the first run's review surface -- 336 cells across 223
 ##tables is a list a person can read, where the same change in biblio.csv is a
