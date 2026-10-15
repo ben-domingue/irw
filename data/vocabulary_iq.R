@@ -1,3 +1,12 @@
+## Vocabulary IQ Test (openpsychometrics.org, VIQT_data.zip). The source file holds
+## two instruments side by side: the 45 five-word synonym questions (Q1-Q45, scored
+## 0/1 against the codebook key) and the optional 30-item post-test personality
+## survey (S1-S30, 1-5 agreement). Until 2026-10 both were one table, which no
+## per-table metadata could describe (n_categories was 2 and 6 at once, #3032).
+## This script now writes two tables:
+##   vocabulary_iq         items 1-45  = Q1-Q45, resp 0/1
+##   vocabulary_iq_survey  items 1-30  = S1-S30, resp 1-5
+## `id` is the source row number in both, so the two tables join on id.
 library(tidyverse)
 library(readr)
 
@@ -112,23 +121,24 @@ df <- df |>
   # response2 become response variable
   rename(resp = resp2)
   
-# create item IDs for each survey item
-items <- as.data.frame(unique(df$item))
-items <- items |>
-  mutate(item_id = row_number())
-
+# Item codes are positional: q1-q45 -> 1-45 in the test table, s1-s30 -> 1-30 in
+# the survey table. The test keeps the numbering it has always had.
 df <- df |>
-  # merge item IDs with df
-  left_join(items, 
-            by=c("item" = "unique(df$item)")) |>
-  # drop character item variable
-  select(id, item_id, resp) |>
-  # use item_id column as the item column
-  rename(item = item_id)
+  mutate(block = if_else(str_starts(item, 'q'), 'test', 'survey'),
+         item = as.integer(str_sub(item, 2)))
+
+test <- df |> filter(block == 'test') |> select(id, item, resp)
+survey <- df |> filter(block == 'survey') |> select(id, item, resp)
+stopifnot(nrow(test) == 12173 * 45, nrow(survey) == 12173 * 30,
+          all(na.omit(test$resp) %in% 0:1), all(na.omit(survey$resp) %in% 1:5))
 
 # print response values
-table(df$resp)
+table(test$resp)
+table(survey$resp)
 
-# save df to Rdata file
+df <- test
 save(df, file="vocabulary_iq.Rdata")
-
+write_csv(test, "vocabulary_iq.csv", na = "")
+df <- survey
+save(df, file="vocabulary_iq_survey.Rdata")
+write_csv(survey, "vocabulary_iq_survey.csv", na = "")
