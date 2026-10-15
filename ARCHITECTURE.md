@@ -84,6 +84,12 @@ none is near the cap:
 | simsyn | `sim` | `irw_simsyn` | responses not produced by real people | site `simsyn.qmd` |
 | conjoint | `conj` | `irw_conjoint`, `_2`, … | respondent × task × profile choices or ratings, profiles randomly assembled from attributes | `data/conjoint/README.md`, site `conjoint_standard.qmd` |
 
+A sixth family, **rankings** (`source = "rank"`, respondent × task × marked
+position, `resp` a rank), is a draft: its standard, validator and reference tables
+are in `data/rankings/` and `irw_validate/rankings.py`, and it has no Redivis
+dataset, package or site support yet (Ben, 2026-10-15: register all three
+together once there are enough tables).
+
 Four families are defined by the shape of the data; simsyn is defined by
 provenance (a simulated table can be dichotomous, nominal, anything). The
 families are still exclusive in practice, one table to one dataset. The line
