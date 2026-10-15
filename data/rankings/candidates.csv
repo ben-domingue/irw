@@ -2,7 +2,7 @@ source,key,title,doi,licence,status,table,notes
 fairvote,rcv_alaska_20220816_ushousesp,Alaska_20220816_USHouse_Special.tab,10.7910/DVN/AMK8PJ,CC0 1.0,todo,,
 fairvote,rcv_alaska_20221108_gov,Alaska_20221108_GovernorLieutenantGovernor.tab,10.7910/DVN/AMK8PJ,CC0 1.0,todo,,
 fairvote,rcv_alaska_20221108_hd1,Alaska_20221108_HouseDistrict1.tab,10.7910/DVN/AMK8PJ,CC0 1.0,todo,,
-fairvote,rcv_alaska_20221108_hd10,Alaska_20221108_HouseDistrict10.tab,10.7910/DVN/AMK8PJ,CC0 1.0,built,rcv_alaska_20221108_hd10,reference table; in examples/
+fairvote,rcv_alaska_20221108_hd10,Alaska_20221108_HouseDistrict10.tab,10.7910/DVN/AMK8PJ,CC0 1.0,uploaded,rcv_alaska_20221108_hd10,reference table; in examples/
 fairvote,rcv_alaska_20221108_hd11,Alaska_20221108_HouseDistrict11.tab,10.7910/DVN/AMK8PJ,CC0 1.0,todo,,
 fairvote,rcv_alaska_20221108_hd12,Alaska_20221108_HouseDistrict12.tab,10.7910/DVN/AMK8PJ,CC0 1.0,todo,,
 fairvote,rcv_alaska_20221108_hd13,Alaska_20221108_HouseDistrict13.tab,10.7910/DVN/AMK8PJ,CC0 1.0,todo,,
@@ -157,7 +157,7 @@ fairvote,rcv_berkeley_20241105_mayor,Berkeley_20241105_Mayor.tab,10.7910/DVN/AMK
 fairvote,rcv_bloomington_20231107_councilal,Bloomington_20231107_CityCouncilAL.tab,10.7910/DVN/AMK8PJ,CC0 1.0,todo,,
 fairvote,rcv_bloomington_20231107_councild4,Bloomington_20231107_CityCouncilD4.tab,10.7910/DVN/AMK8PJ,CC0 1.0,todo,,
 fairvote,rcv_boulder_20231107_mayor,Boulder_20231107_Mayor.tab,10.7910/DVN/AMK8PJ,CC0 1.0,todo,,
-fairvote,rcv_burlington_20060307_mayor,Burlington_20060307_Mayor.tab,10.7910/DVN/AMK8PJ,CC0 1.0,built,rcv_burlington_20060307_mayor,reference table; in examples/
+fairvote,rcv_burlington_20060307_mayor,Burlington_20060307_Mayor.tab,10.7910/DVN/AMK8PJ,CC0 1.0,uploaded,rcv_burlington_20060307_mayor,reference table; in examples/
 fairvote,rcv_burlington_20090303_mayor,Burlington_20090303_Mayor.tab,10.7910/DVN/AMK8PJ,CC0 1.0,todo,,
 fairvote,rcv_burlington_20230307_councilcentrald,Burlington_20230307_CityCouncilCentralDistrict.tab,10.7910/DVN/AMK8PJ,CC0 1.0,todo,,
 fairvote,rcv_burlington_20230307_councileastd,Burlington_20230307_CityCouncilEastDistrict.tab,10.7910/DVN/AMK8PJ,CC0 1.0,todo,,
@@ -190,11 +190,11 @@ fairvote,rcv_cambridge_20231107_school,Cambridge_20231107_SchoolCommittee.tab,10
 fairvote,rcv_corvallis_20221108_councilward9,Corvallis_20221108_CityCouncilWard9.tab,10.7910/DVN/AMK8PJ,CC0 1.0,todo,,
 fairvote,rcv_corvallis_20221108_mayor,Corvallis_20221108_Mayor.tab,10.7910/DVN/AMK8PJ,CC0 1.0,todo,,
 fairvote,rcv_easthampton_20211102_mayor,Easthampton_20211102_Mayor.tab,10.7910/DVN/AMK8PJ,CC0 1.0,todo,,
-fairvote,rcv_eastpointe_20191105_council,Eastpointe_20191105_CityCouncil.tab,10.7910/DVN/STVUET,CC0 1.0,built,rcv_eastpointe_20191105_council,reference table; in examples/
+fairvote,rcv_eastpointe_20191105_council,Eastpointe_20191105_CityCouncil.tab,10.7910/DVN/STVUET,CC0 1.0,uploaded,rcv_eastpointe_20191105_council,reference table; in examples/
 fairvote,rcv_eastpointe_20201103_council,Eastpointe_20201103_CityCouncil.tab,10.7910/DVN/AMK8PJ,CC0 1.0,todo,,
 fairvote,rcv_eastpointe_20211102_council,Eastpointe_20211102_CityCouncil.tab,10.7910/DVN/STVUET,CC0 1.0,todo,,
 fairvote,rcv_elkridge_20211102_mayor,ElkRidge_20211102_Mayor.tab,10.7910/DVN/AMK8PJ,CC0 1.0,todo,,
-fairvote,rcv_genola_20211102_council,Genola_20211102_CityCouncil.tab,10.7910/DVN/04LOQX,CC0 1.0,built,rcv_genola_20211102_council,reference table; in examples/
+fairvote,rcv_genola_20211102_council,Genola_20211102_CityCouncil.tab,10.7910/DVN/04LOQX,CC0 1.0,uploaded,rcv_genola_20211102_council,reference table; in examples/
 fairvote,rcv_lascruces_20191105_councild2,LasCruces_20191105_CityCouncilDistrict2.tab,10.7910/DVN/AMK8PJ,CC0 1.0,todo,,
 fairvote,rcv_lascruces_20191105_councild4,LasCruces_20191105_CityCouncilDistrict4.tab,10.7910/DVN/AMK8PJ,CC0 1.0,todo,,
 fairvote,rcv_lascruces_20191105_mayor,LasCruces_20191105_Mayor.tab,10.7910/DVN/AMK8PJ,CC0 1.0,todo,,
@@ -353,7 +353,7 @@ fairvote,rcv_nyc_20210622_demcouncild45,NewYorkCity_20210622_DEM_CityCouncilD45.
 fairvote,rcv_nyc_20210622_demcouncild46,NewYorkCity_20210622_DEM_CityCouncilD46.tab,10.7910/DVN/AMK8PJ,CC0 1.0,todo,,
 fairvote,rcv_nyc_20210622_demcouncild47,NewYorkCity_20210622_DEM_CityCouncilD47.tab,10.7910/DVN/AMK8PJ,CC0 1.0,todo,,
 fairvote,rcv_nyc_20210622_demcouncild48,NewYorkCity_20210622_DEM_CityCouncilD48.tab,10.7910/DVN/AMK8PJ,CC0 1.0,todo,,
-fairvote,rcv_nyc_20210622_demcouncild49,NewYorkCity_20210622_DEM_CityCouncilD49.tab,10.7910/DVN/AMK8PJ,CC0 1.0,built,rcv_nyc_20210622_demcouncild49,reference table; in examples/
+fairvote,rcv_nyc_20210622_demcouncild49,NewYorkCity_20210622_DEM_CityCouncilD49.tab,10.7910/DVN/AMK8PJ,CC0 1.0,uploaded,rcv_nyc_20210622_demcouncild49,reference table; in examples/
 fairvote,rcv_nyc_20210622_demcouncild5,NewYorkCity_20210622_DEM_CityCouncilD5.tab,10.7910/DVN/AMK8PJ,CC0 1.0,todo,,
 fairvote,rcv_nyc_20210622_demcouncild6,NewYorkCity_20210622_DEM_CityCouncilD6.tab,10.7910/DVN/AMK8PJ,CC0 1.0,todo,,
 fairvote,rcv_nyc_20210622_demcouncild7,NewYorkCity_20210622_DEM_CityCouncilD7.tab,10.7910/DVN/AMK8PJ,CC0 1.0,todo,,
@@ -645,7 +645,7 @@ fairvote,rcv_stlouispark_20211102_councilward4,StLouisPark_20211102_CityCouncilW
 fairvote,rcv_takoma_20221108_councilward1,TakomaPark_20221108_CityCouncilWard1.tab,10.7910/DVN/AMK8PJ,CC0 1.0,todo,,
 fairvote,rcv_takoma_20221108_councilward2,TakomaPark_20221108_CityCouncilWard2.tab,10.7910/DVN/AMK8PJ,CC0 1.0,todo,,
 fairvote,rcv_takoma_20221108_councilward3,TakomaPark_20221108_CityCouncilWard3.tab,10.7910/DVN/AMK8PJ,CC0 1.0,todo,,
-fairvote,rcv_takoma_20221108_councilward4,TakomaPark_20221108_CityCouncilWard4.tab,10.7910/DVN/AMK8PJ,CC0 1.0,built,rcv_takoma_20221108_councilward4,reference table; in examples/
+fairvote,rcv_takoma_20221108_councilward4,TakomaPark_20221108_CityCouncilWard4.tab,10.7910/DVN/AMK8PJ,CC0 1.0,uploaded,rcv_takoma_20221108_councilward4,reference table; in examples/
 fairvote,rcv_takoma_20221108_councilward5,TakomaPark_20221108_CityCouncilWard5.tab,10.7910/DVN/AMK8PJ,CC0 1.0,todo,,
 fairvote,rcv_takoma_20221108_councilward6,TakomaPark_20221108_CityCouncilWard6.tab,10.7910/DVN/AMK8PJ,CC0 1.0,todo,,
 fairvote,rcv_takoma_20221108_mayor,TakomaPark_20221108_Mayor.tab,10.7910/DVN/AMK8PJ,CC0 1.0,todo,,
