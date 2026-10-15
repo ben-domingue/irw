@@ -84,6 +84,9 @@ atkeson_2020_school_board,conj,none,2026-10-07
 atoum_2026_academic_entitlement,core,none,2026-10-15
 atoum_2026_cognitive_dissonance,core,none,2026-10-15
 atoum_2026_mind_wandering,core,none,2026-10-15
+atsusaka_2024_alaska_rcv_survey,rank,none,2026-10-15
+atsusaka_2024_oakland_rcv_survey,rank,none,2026-10-15
+atsusaka_2025_ranking_questions,rank,none,2026-10-15
 avina_2026_immigrant_benefit,conj,https://dataverse.harvard.edu/api/access/datafile/12011167,2026-10-07
 azizi_2023_eq5d5l,core,https://data.mendeley.com/public-files/datasets/kfk5j9g4xc/files/f86ce460-4b85-4c5b-bb1e-a55f193ba277/file_downloaded,2026-10-09
 aznar_diaz_2026_digital_competence,core,none,2026-10-15
@@ -2106,6 +2109,16 @@ vogel_2024_attribute_valence_s3,core,https://zenodo.org/records/12732523/files/S
 vogel_2024_citizen_attributes_s2,core,https://zenodo.org/records/12732523/files/Study2_Codebook.xlsx,2026-10-11
 vogel_2024_citizen_attributes_s3,core,https://zenodo.org/records/12732523/files/Study3_Codebook.xlsx,2026-10-11
 vossler_2025_farmworker_projects,conj,https://dataverse.harvard.edu/api/access/datafile/14100684,2026-10-08
+voterautrement_2017_borda4,rank,https://zenodo.org/records/1199545/files/voter-autrement-online.pdf,2026-10-15
+voterautrement_2017_irv1,rank,https://zenodo.org/records/1199545/files/voter-autrement-online.pdf,2026-10-15
+voterautrement_2017_irv4,rank,https://zenodo.org/records/1199545/files/voter-autrement-online.pdf,2026-10-15
+voterautrement_2022_borda4,rank,https://zenodo.org/records/10998451/files/Voter_Autrement_2022.pdf,2026-10-15
+voterautrement_2022_irv1,rank,https://zenodo.org/records/10998451/files/Voter_Autrement_2022.pdf,2026-10-15
+voterautrement_2022_irv4,rank,https://zenodo.org/records/10998451/files/Voter_Autrement_2022.pdf,2026-10-15
+voterautrement_2024_rep_ranking,rank,https://zenodo.org/records/15075251/files/0_documentation.pdf,2026-10-15
+voterautrement_2024_rep_top2,rank,https://zenodo.org/records/15075251/files/0_documentation.pdf,2026-10-15
+voterautrement_2024_self_ranking,rank,https://zenodo.org/records/15075251/files/0_documentation.pdf,2026-10-15
+voterautrement_2024_self_top2,rank,https://zenodo.org/records/15075251/files/0_documentation.pdf,2026-10-15
 vu_2026_school_manager_digital,core,none,2026-10-15
 vuk_2026_participation_legitimacy,conj,https://dataverse.harvard.edu/api/access/datafile/14037210,2026-10-14
 wagner_2018_vaccine_attributes,conj,https://ndownloader.figshare.com/files/11888273,2026-10-14
