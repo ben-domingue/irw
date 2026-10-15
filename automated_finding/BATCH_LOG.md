@@ -18491,3 +18491,61 @@ tables uploaded. The response tables went whole to the new `item_response_wareho
 120/71 split prepared earlier was abandoned. `uploaded=2026-10-15` stamped on the 82
 `itemtext_provenance.csv` rows. Still open: issues-page entries (39 tables),
 `covariate_labels/build.py` after the release, the rulings list in 2026-10-14b.
+
+## 2026-10-15c — Repos mode-3 discovery + triage: 15 new terms x 9 languages, 1,225 candidates, 7 good, 77 leads
+
+Discovery and triage only, run locally on ben-domingue's instruction ("fire a search", then
+"push ahead while I'm gone"). No scripts written, nothing staged, nothing uploaded. The
+`irw_output/` and `itemtext_output/` folders still hold the already-uploaded 2026-10-14 batch
+and were not touched.
+
+**Terms (new to `search_terms_log.csv`, each in English + es/de/fr/zh/ja/ar/nl/ko,
+135 queries, in `runs/terms_2026-10-15.txt`):** disgust sensitivity, honesty-humility,
+self-objectification, sexting, parental burnout, assertiveness, moral identity, privacy
+concern, materialism scale, epistemic beliefs, free will beliefs, pseudoscience beliefs,
+chronotype questionnaire, altruism scale, willingness to communicate. (Candidates dropped as
+already logged under a near-identical term: AI anxiety, intercultural sensitivity, perceived
+discrimination, academic self-concept, school engagement, working memory span, video game
+engagement, false belief, obsessive compulsive inventory, binge watching.)
+
+- **Discovery** (~66 min): 1,225 candidates (zenodo 326, dataverse 308, figshare 197, surf
+  183, scholars_portal 79, osf 54, datacite 51, mendeley 23, dryad 4).
+- **Triage** (`--retriage`, 6G cap via `ulimit -v`, ~25 min): 528 triaged after the seen ledger
+  excluded 697: `no_usable_file` 203, `human_assistance` 160, `download_failed` 79 (dataverse
+  37, surf 23, scholars_portal 9, figshare 7, zenodo 2, dryad 1; transient, not ledgered),
+  `not_item_response` 29, `below_min_n` 20, `pii_suspected` 11 (a `dob` column on the
+  cross-cultural parental burnout OSF node; `Email ID`, `Phone`, `make phone`, a Chinese
+  `姓名` name column; five KAP dataverse files tripping on `BLOCKNUMBER` and one bibliometric
+  "Author full name" -- the last six are false positives of the detector but not item
+  response data either way), `error` 10 (9 the "arg must be a list, tuple, 1-d array, or
+  Series" reader fault -- now 45 rows across four runs, still open in TODO; 1 raw file
+  already has a `resp` column), **`good` 7**, `license_restricted` 7 (five CC BY-NC-ND, one
+  CC BY-ND, one all-rights-reserved), `file_too_large` 2 (appended to
+  `oversized_candidates.csv` by the script: a disgust/cytokine figshare deposit and DVN/7RVFL8
+  "Raw Response Data", a 443 MB xlsx). No OOM kills.
+- **Step 2b ran** (chained): 160 HA -> recoverable_format 78, not_item_response 40,
+  worth_retrying 25, human_review 11, aggregate_continuous 6. `[conj]` routed 0.
+  `[human_review] archived 11 row(s) -> human_review/human_review_zenodo_2026-10-15.csv`.
+- **Leads -> `leads/repos_leads_2026-10-15.csv`** (77 rows, all `unworked`: the 7 good, plus
+  every licence-ok worth_retrying/recoverable_format row with 100 <= N <= 50,000 and 8-700
+  items). Ten in-range rows excluded on licence: three dataverse custom-terms deposits (a
+  preschool-anxiety agreement, the asylum-seekers "scientific review only" file, a CC0-with-
+  modified-terms disgust/politics file) and seven OSF nodes reporting `unknown` -- those OSF
+  nodes (cognitive control, workers-as-objects, sexting x2, parental burnout across
+  boundaries, prosociality, virtuous victim signaling) were not resolved via
+  `api.osf.io/v2/licenses/`; worth one look before the leads are worked.
+  The 7 good: critical thinking x ChatGPT deep learning (zenodo 17958610, 386 x 37, xlsx),
+  self-reported political preference in China (DVN/DWPLBC, 392 x 45, CC0), social
+  comparison / social identity replication (DVN/GQEFOI, 309 x 13, CC0), a PLOS Digital
+  Health survey SI (plos.figshare 31864796, 122 x 6 -- below the 8-item rule of thumb, read
+  before writing), tourists' attitudes to AI recommender systems (mendeley cb4y7z9g2s, 367 x
+  39), AI voice assistants and EFL willingness to communicate (mendeley 395bxnfg9p, 483 x
+  17), epistemic beliefs in energy modelling (zenodo 14803512, 156 x 18, CC BY-SA). Larger
+  recoverable leads: social exclusion and political identity of Asian Americans (DVN/GMWOY6),
+  partisanship as a social identity (DVN/OF2PIH), self-esteem development (DVN/X4K8JP),
+  parenting style and cyber-aggression (Frontiers figshare), personality traits and
+  approaches (DVN/TBBSFI), the Parental Burnout Network (mendeley 8hz6bxdtnk) and a cluster
+  of eleven disgust-sensitivity-in-pregnancy figshare files from one lab (likely one
+  instrument, DS-R, across waves -- check for the same respondents before shipping them as
+  separate tables). The leads list is mechanical: the Pachira pasture trees, consensus
+  robustness and brain-image rows will fall out on reading.

@@ -3,6 +3,14 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## From the 2026-10-15 repos mode-3 discovery (15 new terms x 9 languages)
+
+- [ ] **77 unworked leads** in `leads/repos_leads_2026-10-15.csv` (7 good + 70 recoverable/worth_retrying);
+  see BATCH_LOG 2026-10-15c. Resolve the seven OSF `unknown`-licence nodes named there via
+  `api.osf.io/v2/licenses/` before treating them as blocked.
+- [ ] The "arg must be a list, tuple, 1-d array, or Series" reader fault hit 9 more `error` rows
+  (45 across the 2026-10-10/11/14/15 runs); still worth a look at `load_table()`.
+
 ## From the 2026-10-14 repos mode-3 batch (15 new terms x 9 languages)
 
 - [x] **191 tables (1,607,513 responses) + 82 item text tables uploaded** (ben-domingue, confirmed
