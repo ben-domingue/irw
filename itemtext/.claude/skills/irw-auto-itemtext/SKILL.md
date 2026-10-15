@@ -300,8 +300,11 @@ permissive deposits.
 
 **Ask what the clause does. Does it RESERVE A RIGHT, or DISCLAIM FITNESS?**
 
-**Reserves a right → BLOCK.** Any of: a licence fee, permission-required, non-commercial,
-no-derivatives, no-redistribution, "contact the author for other uses". It does not matter
+**Reserves a right → BLOCK.** Any of: a licence fee, permission-required, no-derivatives,
+no-redistribution, "contact the author for other uses", or a "non-commercial use" statement
+that says nothing about redistribution. (A CC BY-NC / BY-NC-SA licence is different: it
+*permits* redistribution, and since 2026-10-15 ships with a notice — see
+`itemtext_standard.md`, "The rule, as revised 2026-10-15".) It does not matter
 whether IRW's own use would comply. **IRW redistributes**: hosting hands the wording to
 downstream users whose use IRW cannot condition, including the use the holder reserved. So
 "our own use is non-profit academic research, which the clause allows" is *not* a defence —
@@ -316,11 +319,24 @@ suitable for determining whether an individual is lonely" (De Jong Gierveld). **
 not block.** Judging it and dropping it silently is not enough — the reader needs to see the
 clause and the reasoning, per table.
 
-**Silence is still permission.** An instrument merely being copyrighted, commercially sold or
-well known is not a block. If you cannot find and quote a restriction, extract normally. Do not
-block on suspicion, and do not open a negotiation with a rights holder — see the Shipley rule
-above. A bare copyright notice on a journal article is a notice about that article, not a term
-governing the instrument (the PANAS case).
+**Silence on a NAMED third-party instrument → HOLD, and keep the wording locally. Ruled
+2026-10-15, on counsel's advice of 2026-10-08.** "Silence is permission" was the rule until then;
+it is retired. Counsel's reasoning: copyright in a scale is thin and a fair-use position exists,
+but the field has an active licensing market and a pattern of enforcement and trolling, so
+redistributing a named instrument's wording without a located grant is high-risk relative to
+other content. So when the wording is a published, named instrument (PANAS, UCLA Loneliness,
+OHQ, RMQ and so on) and you can find neither a restriction nor a positive grant from the
+originator, the table does not ship. Record the row as `hold` with the search you ran, and
+**move the `__items.csv` to `/home/ben/Dropbox/projects/irw/data/itemtext/`** (Dropbox, not git)
+so a later clearance is an upload, not a redo. The 26 live tables that rested on silence were
+withdrawn that day (`tools/withdrawals/withdraw_silence_2026_10_15.py`).
+
+**What still ships without a grant:** wording the depositor originated — study-authored items,
+a study's own adaptation, a data owner's own questionnaire (the #2381 class ruling, R16). That
+is the depositor's wording under the deposit licence, which is counsel's easier case. A bare
+copyright notice on a journal article is still a notice about that article, not a term governing
+the instrument; it neither blocks nor clears. Do not open a negotiation with a rights holder —
+see the Shipley rule above.
 
 **The hard case, stated honestly:** the De Jong Gierveld manual puts its fitness cautions in the
 *same* list as its NC and ND bullets, all introduced by "They may do so under the following
