@@ -15,8 +15,13 @@ token those READMEs are left "not checked" rather than failing the run.
 `--deep` (#2787 follow-up) also opens a new table's repository deposit past the
 file names: workbook sheet names, the member list of each zip (read by HTTP
 Range, never downloaded whole), and the text of its documents, judged against
-the table's item names like a README. A week's new tables are few, so this
-costs seconds to minutes; without Redivis those documents stay unlinked.
+the table's item names like a README. Without Redivis those documents stay
+unlinked. It is budgeted (#3045: a 434-file OSF project hung the 2026-10-15 run
+for an hour with nothing printed): 120 s of opening per deposit, 40 min per
+run, workbooks capped at 5 MB, and one progress line per table in both the
+opening pass and the README check. A deposit over budget is finished by its
+file names and, with no hit, recorded `deep_timeout`, which the next weekly
+sweep tries again; a resume with `skip_stages=15` is the fallback.
 
 A full re-sweep stays manual: `python3 metadata/find_codebook_links.py`.
 """
