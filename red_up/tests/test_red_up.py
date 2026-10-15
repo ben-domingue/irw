@@ -604,7 +604,7 @@ class Planning(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             reports = self._reports(tmp, ["fresh", "here", "older"])
             index = {
-                "here": ["item_response_warehouse_6"],
+                "here": [self.shard.name],
                 "older": ["item_response_warehouse", "item_response_warehouse_3"],
             }
             items = {i.table: i for i in planning.build(reports, self.shard, index)}
