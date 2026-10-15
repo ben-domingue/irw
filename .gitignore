@@ -30,6 +30,11 @@ metadata/**/*.txt
 ##record of which biblio rows were machine-written or held back, as for core below.
 !metadata/conj_biblio_provenance.csv
 !metadata/conj_biblio_pending.csv
+##rankings (18_rankings.R, 2026-10-15): same shape as conj, same reason.
+!metadata/rank_metadata.csv
+!metadata/rank_biblio.csv
+!metadata/rank_biblio_provenance.csv
+!metadata/rank_biblio_pending.csv
 !metadata/simsyn_metadata.csv
 !metadata/itemtext_metadata.csv
 !metadata/collections.csv
