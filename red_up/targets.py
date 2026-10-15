@@ -210,7 +210,9 @@ def newest_shard(targets: list[Target]) -> Target:
 #: same reason: it changes only where tables that exist nowhere yet are created.
 #: 2026-10-07: Ben switched new response data to shard 5
 #: (item_response_warehouse_6 near the 1000-table cap; shard 5 at ~290).
-CORE_DEFAULT: str | None = "item_response_warehouse_5"
+#: 2026-10-15: unpinned. Shards 5 and 6 are both near the cap (962 and 926
+#: released), so new tables go to the newest shard, item_response_warehouse_7.
+CORE_DEFAULT: str | None = None
 
 
 def core_target(targets: list[Target]) -> Target:
