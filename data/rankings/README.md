@@ -56,7 +56,7 @@ Options that are not people (policies, schools, products in a survey ranking) ar
 - **A script**, or for FairVote the table's row in `fairvote_manifest.csv` (the one script `fairvote_cvr.py` builds every FairVote table from its manifest row). A non-FairVote table gets its own script with the usual IRW header: citation, deposit DOI and licence, files read, what was dropped, and any count discrepancy with the source.
 - **A design record:** one row in `design_tables.csv` (below). `fairvote_cvr.py` writes it; other scripts append theirs.
 - **A dictionary row,** staged with `automated_finding/stage_dict_row.py --source rank`, which writes to `dictionary_auto_rank.csv`. `metadata/02_biblio.R` does not read that file yet (deferred with the Redivis work).
-- **A row in `candidates.csv`,** the ledger of every file or deposit considered, with status `todo`, `built`, `uploaded` or `held: <reason>`.
+- **A row in `candidates.csv`,** the ledger of every file or deposit considered (claims and quirks go to tracking issue #3024), with status `todo`, `built`, `uploaded` or `held: <reason>`.
 - **A processing note** in `metadata/data_notes.csv` is deferred until the tables are on Redivis.
 
 ## Design record (`design_tables.csv`)
