@@ -9672,3 +9672,138 @@ date,query,output_file,notes
 2026-10-12,growth mindset,runs/monthly_candidates_weekly_2026-10-12.csv,"monthly automated run; 3 candidates; sources=osf,dataverse,datacite; since=2026-10-02"
 2026-10-13,[weekly] 15 terms x journals=plosone,runs/plos_monthly_candidates_weekly_2026-10-13.csv,plos monthly-script automated run; mode=weekly; 53 candidates triaged; 15/15 terms visited (13 hit per-term cap 4)
 2026-10-14,"[weekly] 15 terms x journals=peerj,screports,jofintelligence,mbr,behavsci,apm,bmcmrm,jopd,bmcpubhealth,heliyon,psychometrika",runs/pmc_monthly_candidates_weekly_2026-10-14.csv,pmc monthly-script automated run; mode=weekly; 10 candidates triaged; 15/15 terms visited (0 hit per-term cap 4)
+2026-10-14,short dark tetrad,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,tétrada oscura corta,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,kurze dunkle Tetrade,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,tétrade sombre courte,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,黑暗四联征量表,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,ダーク・テトラッド,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,الرباعية المظلمة,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,korte duistere tetrade,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,다크 테트라드,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,schwartz value survey,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,cuestionario de valores de Schwartz,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,Schwartz Wertefragebogen,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,questionnaire des valeurs de Schwartz,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,施瓦茨价值观量表,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,シュワルツ価値観調査,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,استبيان القيم شوارتز,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,Schwartz waardenvragenlijst,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,슈워츠 가치 조사,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,teacher burnout,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,burnout docente,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,Lehrerburnout,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,épuisement professionnel des enseignants,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,教师职业倦怠,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,教師バーンアウト,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,الاحتراق الوظيفي للمعلمين,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,burn-out bij leraren,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,교사 소진,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,mental health literacy,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,alfabetización en salud mental,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,Mental-Health-Literacy,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,littératie en santé mentale,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,心理健康素养,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,メンタルヘルスリテラシー,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,محو الأمية في الصحة النفسية,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,geletterdheid geestelijke gezondheid,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,정신건강 문해력,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,misinformation susceptibility,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,susceptibilidad a la desinformación,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,Anfälligkeit für Fehlinformationen,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,sensibilité à la désinformation,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,错误信息易感性,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,誤情報への脆弱性,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,القابلية للمعلومات المضللة,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,vatbaarheid voor desinformatie,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,허위정보 취약성,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,paranormal belief scale,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,escala de creencias paranormales,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,Skala paranormaler Überzeugungen,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,échelle de croyances paranormales,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,超自然信念量表,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,超常信念尺度,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,مقياس المعتقدات الخارقة,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,schaal paranormale overtuigingen,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,초자연적 믿음 척도,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,mind wandering questionnaire,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,cuestionario de divagación mental,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,Fragebogen Gedankenwandern,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,questionnaire de vagabondage mental,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,走神问卷,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,マインドワンダリング質問紙,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,استبيان شرود الذهن,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,vragenlijst dagdromen,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,마음방황 질문지,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,cultural intelligence scale,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,escala de inteligencia cultural,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,Skala kulturelle Intelligenz,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,échelle d'intelligence culturelle,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,文化智力量表,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,文化的知性尺度,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,مقياس الذكاء الثقافي,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,culturele intelligentie schaal,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,문화지능 척도,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,digital competence,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,competencia digital,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,digitale Kompetenz,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,compétence numérique,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,数字素养,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,デジタルコンピテンス,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,الكفاءة الرقمية,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,digitale competentie,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,디지털 역량,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,wisdom scale,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,escala de sabiduría,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,Weisheitsskala,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,échelle de sagesse,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,智慧量表,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,知恵尺度,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,مقياس الحكمة,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,wijsheidsschaal,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,지혜 척도,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,maximization scale,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,escala de maximización,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,Maximierungsskala,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,échelle de maximisation,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,最大化量表,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,最大化尺度,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,مقياس التعظيم,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,maximalisatieschaal,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,극대화 척도,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,dogmatism scale,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,escala de dogmatismo,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,Dogmatismusskala,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,échelle de dogmatisme,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,教条主义量表,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,独断主義尺度,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,مقياس الدوغمائية,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,dogmatismeschaal,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,독단주의 척도,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,weight bias,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,sesgo de peso,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,Gewichtsstigmatisierung,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,stigmatisation liée au poids,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,体重偏见,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,体重バイアス,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,التحيز ضد الوزن,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,gewichtsstigma,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,체중 편견,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,music sophistication index,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,índice de sofisticación musical,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,Index musikalischer Erfahrenheit,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,indice de sophistication musicale,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,音乐素养指数,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,音楽的洗練度指標,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,مؤشر التطور الموسيقي,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,muzikale geavanceerdheid index,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,음악 소양 지수,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,online learning readiness,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,preparación para el aprendizaje en línea,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,Bereitschaft zum Online-Lernen,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,préparation à l'apprentissage en ligne,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,在线学习准备度,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,オンライン学習レディネス,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,الاستعداد للتعلم عبر الإنترنت,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,gereedheid voor online leren,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates
+2026-10-14,온라인 학습 준비도,irw_triage_2026-10-14.csv,repos mode-3 batch 2026-10-14; 15 terms x 9 languages; 1264 candidates

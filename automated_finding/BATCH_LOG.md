@@ -18304,3 +18304,60 @@ dropped; ginting SYN-labelled ids.
 PR #2957 merged; ben-domingue confirmed the 83 response tables and 32 item text tables
 uploaded. `uploaded=2026-10-11` stamped on the 32 `itemtext_provenance.csv` rows. Still open:
 issues-page entries (12 tables), `covariate_labels/build.py` after the release.
+
+## 2026-10-14 — Repos mode-3 discovery + triage: 15 new terms x 9 languages, 1,264 candidates, 11 good, 77 leads
+
+Discovery and triage only, run locally on ben-domingue's instruction ("fire an automatic
+search"). No scripts written, nothing staged, nothing uploaded. The 40 CSVs sitting in
+`irw_output/` (marian/neubauer/ryvkina/tammilehto/nepal/scharbert, mtime 2026-10-13) belong to
+other in-flight work and were not touched.
+
+**Terms (new to `search_terms_log.csv`, each in English + es/de/fr/zh/ja/ar/nl/ko,
+135 queries):** short dark tetrad, schwartz value survey, teacher burnout, mental health
+literacy, misinformation susceptibility, paranormal belief scale, mind wandering
+questionnaire, cultural intelligence scale, digital competence, wisdom scale, maximization
+scale, dogmatism scale, weight bias, music sophistication index, online learning readiness.
+(Candidates dropped as already logged under a near-identical term: impostor phenomenon,
+procrastination, parenting styles, self-concept clarity, climate anxiety, gaming addiction,
+stigma, hope, quality of life, caregiver burden, belief in a just world.)
+
+- **Discovery** (~50 min): 1,264 candidates (zenodo 416, dataverse 292, surf 176,
+  figshare 152, scholars_portal 100, datacite 59, mendeley 45, osf 15, dryad 9).
+- **Triage** (`--retriage`, 6G cap via `ulimit -v`; no `--limit 10` sanity run): 519
+  triaged after the seen ledger excluded 745: `no_usable_file` 227, `human_assistance`
+  136, `download_failed` 77 (surf 25, dataverse 23, figshare 11, scholars_portal 11,
+  zenodo 4, dryad 3; transient, not ledgered), `below_min_n` 25, `not_item_response` 18,
+  `error` 13 (12 of them the "arg must be a list, tuple, 1-d array, or Series" reader
+  fault -- now 36 rows across three runs, still open in TODO; 1 "value_name (resp) cannot
+  match an element in the DataFrame columns", i.e. the raw file already has a `resp`
+  column), **`good` 11**, `pii_suspected` 7 (IPAddress / Email / Full Name columns; four of
+  the seven are bibliometric or review tables whose "Author full name" column tripped the
+  detector -- not item response data either way), `file_too_large` 3 (appended to
+  `oversized_candidates.csv` by the script: Airbnb leasing DVN, OpenFeeder RFID dryad,
+  partisanship-in-online-news DVN), `license_restricted` 2 (both CC BY-NC-ND). No OOM kills.
+- **Step 2b ran** (chained): 136 HA -> recoverable_format 71, not_item_response 26,
+  worth_retrying 18, aggregate_continuous 11, human_review 10. `[conj]` routed 0.
+  `[human_review] archived 10 row(s) -> human_review/human_review_zenodo_2026-10-14.csv`.
+- **Leads -> `leads/repos_leads_2026-10-14.csv`** (77 rows, all `unworked`: the 11 good,
+  plus every licence-ok worth_retrying/recoverable_format row with 100 <= N <= 50,000 and
+  8-700 items; one IFPRI custom-terms row, one CC BY-NC and one CC BY-NC-SA row excluded).
+  The 11 good: teachers' home-school-community collaborative competence (DVN/A9NUD7, 1,351 x
+  46, Chinese xlsx), Questionnaire Data on Teacher Burnout (figshare 29664803, 400 x 81),
+  pedagogical AI use among Chilean(?) teachers (figshare 33187878, 334 x 15, Spanish),
+  e-audit / AI in internal audit quality (mendeley gyfdrvfs7c, 135 x 25), GenAI preference
+  and digital citizenship among Indonesian students (mendeley h4gcfmbk5c, 2,007 x 24),
+  "Research Questionnaire" (mendeley mkd998xj9j, 415 x 44, title uninformative -- read the
+  deposit), internet use and web 2.0 digital competence COBADI (mendeley x4r7hpn4cz, 205 x
+  61), Scale of Cognitive and Emotional Distraction in Driving SCEDD (zenodo 22375285, 350 x
+  49), Short Dark Tetrad measurement invariance across cultures (osf p8v3k, 451 x 28, only the
+  USA file was triaged -- the node has more country files), teacher burnout and performance
+  Asian context (figshare 31672783, 1,068 x 37), gamification vs traditional teaching for
+  digital competence (zenodo 22256717, 104 x 128). Larger recoverable leads: partisanship and
+  tolerance (DVN, 3,946 x 195), preference falsification and the Arab Spring (DVN, 24,641 x
+  27), SINFONICA user-factors survey (zenodo, 4,472 x 79), social media use and partisan
+  misinformation (DVN, 16,000 x 20), burnout among corporate employees (DVN, 22,750 x 12),
+  political sophistication and value conflict (DVN, 1,093 x 190), digital literacy of
+  pre-service teachers Poland/Italy (mendeley, 1,045 x 96, worth_retrying), Spanish
+  digital-competence database (zenodo, 2,617 x 27). The leads list is mechanical: a few rows
+  (parasitoid host preference, preoperative bladder compliance, MOOC course descriptions)
+  will fall out on reading.

@@ -3,6 +3,13 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## From the 2026-10-14 repos mode-3 batch (15 new terms x 9 languages)
+
+- [ ] **77 unworked leads in `leads/repos_leads_2026-10-14.csv`** (11 good + 66 licence-ok
+  recoverable_format/worth_retrying); nothing scripted, staged or uploaded yet. See BATCH_LOG 2026-10-14.
+- [ ] The "arg must be a list, tuple, 1-d array, or Series" reader fault hit 12 more `error` rows
+  (36 across the 2026-10-10/11/14 runs); worth a look at `load_table()`.
+
 ## From the 2026-10-11 repos mode-3 batch (15 new terms x 9 languages)
 
 - [x] **83 tables (2,006,984 responses) + 32 item text tables uploaded** (ben-domingue, confirmed 2026-10-11; `uploaded=2026-10-11` stamped) from
@@ -16,8 +23,6 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   at commit for the 15 .sav/.dta scripts, see BATCH_LOG 2026-10-11d).
 - [ ] **Rulings wanted** (none blocks upload): see BATCH_LOG 2026-10-11d.
 - [ ] 1 unworked lead in `leads/repos_leads_2026-10-11.csv`: DVN/G7EOGT (Ciuk TESS 2002/2010, needs the TESS codebook).
-- [ ] The "arg must be a list, tuple, 1-d array, or Series" reader fault hit 13 more `error` rows
-  (24 across the 2026-10-10 and 2026-10-11 runs); worth a look at `load_table()`.
 
 ## From the 2026-10-10 repos mode-3 batch (15 new terms x 9 languages)
 
