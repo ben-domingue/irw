@@ -86,8 +86,8 @@ Outputs:
                                        n_same_kind_in_deposit, deposit_url, checked_at
   metadata/codebook_links_checked.csv  one row per (table, deposit): what was tried, and
                                        the outcome (hit / no_match / out_of_scope:<why>
-                                       / error:<what>). A re-run skips tables
-                                       already checked unless --recheck.
+                                       / error:<what> / deep_timeout). A re-run
+                                       skips tables already checked unless --recheck.
 
 Deposit file listings are cached in metadata/logs/codebook_listings.json
 (git-ignored), so the name patterns can be changed and re-applied with
@@ -104,6 +104,13 @@ local cache and takes minutes. Codebook files do not change once deposited.
     nice -n 19 python3 metadata/find_codebook_links.py [--hosts osf,zenodo] [--limit N]
     python3 metadata/find_codebook_links.py --offline     ##re-match the cache only
     python3 metadata/find_codebook_links.py --new-only    ##weekly: new tables only
+
+`--deep` opens repository deposits past their file names. It is budgeted
+(#3045): a deposit gets --deep-budget seconds of opening (workbooks capped at
+DEEP_WORKBOOK_CAP, zips by Range, documents in the README check) and the run
+--deep-total seconds in all. A deposit over budget is finished by name alone
+and, unless that found a hit, recorded `deep_timeout`, which the next
+--new-only sweep tries again. Both phases print one progress line per table.
 
 The README check needs each table's item names from Redivis (the `redivis`
 Python package and a token). Without them a README is left `name_readme` with
@@ -597,6 +604,13 @@ SHEET_CODEBOOK = re.compile(r"^\s*(variables?|legend|descriptions?|data descript
 WORKBOOK_EXT = {"xlsx", "xlsm", "xls"}
 TEXT_DOC_EXT = {"docx", "doc", "pdf", "txt", "rtf", "odt"}
 SUPP_CAP = 60_000_000           ##bytes; a larger file is listed but not opened
+##--deep budgets (#3045): the 2026-10-15 pipeline run opened a 434-file OSF
+##project at 2.5 s per call with nothing printed and was cancelled an hour in.
+DEEP_WORKBOOK_CAP = 5_000_000   ##bytes; sheet names need the workbook, not 60 MB of it
+DEEP_DEPOSIT_BUDGET = 120       ##seconds of opening per deposit, then deep_timeout
+DEEP_TOTAL_BUDGET = 2400        ##seconds of opening per run; the rest stay deep_timeout
+_deep = {"spent": {}, "total": 0.0, "timed_out": set(), "opened": 0,
+         "deposit": float(DEEP_DEPOSIT_BUDGET), "run": float(DEEP_TOTAL_BUDGET)}
 _TEXTS: Optional[Dict[str, str]] = None
 ##Repository deposits whose files are opened past their names (#2787 follow-up).
 ##A .txt / .dat there is usually the data, whose header names every column, so
@@ -624,6 +638,26 @@ STATS_OUTPUT_MIN = 2
 def looks_like_output(text: str) -> bool:
     """A document whose text carries STATS_OUTPUT_MIN distinct analysis markers."""
     return len({m.group(0).lower() for m in STATS_OUTPUT.finditer(text[:400_000])}) >= STATS_OUTPUT_MIN
+
+
+def deep_over(ck: str) -> bool:
+    """True once a deposit, or the run, has used its --deep opening budget.
+    The deposit is then recorded deep_timeout for the next --new-only sweep."""
+    if ck in _deep["timed_out"]:
+        return True
+    if ((_deep["run"] and _deep["total"] >= _deep["run"])
+            or (_deep["deposit"] and _deep["spent"].get(ck, 0.0) >= _deep["deposit"])):
+        _deep["timed_out"].add(ck)
+        return True
+    return False
+
+
+def deep_spend(ck: str, t0: float) -> float:
+    """Charge the time since t0 to a deposit's --deep budget and the run's."""
+    dt = time.time() - t0
+    _deep["spent"][ck] = _deep["spent"].get(ck, 0.0) + dt
+    _deep["total"] += dt
+    return dt
 
 
 class _RangeFile(io.RawIOBase):
@@ -679,7 +713,7 @@ def zip_names(url: str, host: str) -> Optional[List[str]]:
             return zipfile.ZipFile(_RangeFile(final, size)).namelist()
     except Exception:
         pass
-    status, raw = get_capped(url, host, cap=ZIP_LIST_CAP)
+    status, raw = get_capped(url, host, cap=ZIP_LIST_CAP, timeout=60, tries=1)
     try:
         return zipfile.ZipFile(io.BytesIO(raw)).namelist() if raw else None
     except Exception:
@@ -701,8 +735,12 @@ def open_deposit_file(f: dict, h: str) -> bool:
     if ext == "zip":
         f["zip"] = zip_names(url, h)
     else:
-        status, raw = get_capped(url, h)
+        ##sheet names need the workbook, not a 60 MB download of it (#3045);
+        ##one try, so a slow host costs a minute, not ten
+        status, raw = get_capped(url, h, cap=DEEP_WORKBOOK_CAP, timeout=60, tries=1)
         f["sheets"] = sheet_names(raw, ext) if raw else None
+        if raw is None:
+            f["opened"] = "too_large_or_failed"
     return True
 
 
@@ -759,9 +797,10 @@ def wants_bytes(f: dict) -> bool:
     return ext in WORKBOOK_EXT or ext in TEXT_DOC_EXT
 
 
-def get_capped(url: str, host: str, cap: int = SUPP_CAP, timeout: int = 180) -> Tuple[int, Optional[bytes]]:
+def get_capped(url: str, host: str, cap: int = SUPP_CAP, timeout: int = 180,
+               tries: int = 3) -> Tuple[int, Optional[bytes]]:
     """get_raw with a size cap: (status, bytes), bytes None if over the cap."""
-    for attempt in range(3):
+    for attempt in range(tries):
         wait = HOST_PACE.get(host, 1.0) - (time.time() - _last_call.get(host, 0))
         if wait > 0:
             time.sleep(wait)
@@ -771,12 +810,12 @@ def get_capped(url: str, host: str, cap: int = SUPP_CAP, timeout: int = 180) -> 
                 b = r.read(cap + 1)
                 return r.status, (b if len(b) <= cap else None)
         except urllib.error.HTTPError as e:
-            if e.code in (429, 500, 502, 503, 504) and attempt < 2:
+            if e.code in (429, 500, 502, 503, 504) and attempt < tries - 1:
                 time.sleep(30 * (attempt + 1))
                 continue
             return e.code, None
         except (urllib.error.URLError, TimeoutError, OSError):
-            if attempt < 2:
+            if attempt < tries - 1:
                 time.sleep(15)
                 continue
             return -1, None
@@ -1116,11 +1155,21 @@ def check_readmes(links: List[dict], offline: bool) -> None:
                 dataset_of[r["table"].lower()] = r["dataset"]
     readmes = [x for x in links if x["how_found"] in ("name_readme", "doc_candidate")]
     for i, x in enumerate(readmes):
-        text = readme_text(x, texts_, offline)
-        names = table_names(x["table"], dataset_of.get(x["table"].lower()), names_cache, docs, offline,
-                            scripts_of.get(x["table"].lower()))
+        ##a repository document queued by --deep draws on its deposit's budget
+        ##(#3045); over it, the document is left unread and the deposit retried
+        dep = x.get("_dep") or ""
+        if dep and deep_over(dep):
+            x["evidence"] = "not checked (deep_timeout)"
+            text = names = None
+        else:
+            t0 = time.time()
+            text = readme_text(x, texts_, offline)
+            names = table_names(x["table"], dataset_of.get(x["table"].lower()), names_cache, docs, offline,
+                                scripts_of.get(x["table"].lower()))
+            if dep:
+                deep_spend(dep, t0)
         if text is None or names is None:
-            x["evidence"] = "not checked"
+            x["evidence"] = x.get("evidence") or "not checked"
         elif not text.strip():
             x["evidence"] = "unreadable"
         else:
@@ -1147,6 +1196,8 @@ def check_readmes(links: List[dict], offline: bool) -> None:
             if len(hit) >= README_MIN_NAMES and items_hit:
                 x["how_found"] = ("doc_names_columns" if x["how_found"] == "doc_candidate"
                                   else "readme_names_columns")
+        print(f"[{i + 1}/{len(readmes)}] doc {x['table']}: {x['file_name'][:60]} -> {x['how_found']}, "
+              f"{x['evidence'][:60]}", file=sys.stderr, flush=True)
         if not offline and i % 25 == 24:
             README_CACHE.write_text(json.dumps(texts_, ensure_ascii=False))
             NAMES_CACHE.write_text(json.dumps(names_cache, ensure_ascii=False))
@@ -1300,9 +1351,14 @@ def main() -> int:
     ap.add_argument("--deep", action="store_true",
                     help="repository deposits: also open workbooks (sheet names), zips (member "
                          "names) and text documents (content check), past the file names")
+    ap.add_argument("--deep-budget", type=float, default=DEEP_DEPOSIT_BUDGET,
+                    help="--deep: seconds of opening per deposit before deep_timeout (0: none)")
+    ap.add_argument("--deep-total", type=float, default=DEEP_TOTAL_BUDGET,
+                    help="--deep: seconds of opening per run; deposits after it are deep_timeout (0: none)")
     ap.add_argument("--no-readme-check", action="store_true",
                     help="skip reading README texts (README hits stay name_readme)")
     args = ap.parse_args()
+    _deep["deposit"], _deep["run"] = args.deep_budget, args.deep_total
     hosts = set(filter(None, args.hosts.split(",")))
     today = date.today().isoformat()
 
@@ -1327,7 +1383,7 @@ def main() -> int:
                  if r["outcome"].startswith("out_of_scope") and route(r["data_url"])[0] != "skip"}
         rematch = set(filter(None, args.rematch.split(",")))
         newly |= {r["table"] for r in prev_checked if r["host"] in rematch}
-        done = {r["table"] for r in prev_checked if r["outcome"] != "not_yet_checked"} - newly
+        done = {r["table"] for r in prev_checked if r["outcome"] not in ("not_yet_checked", "deep_timeout")} - newly
         kept_checked = [r for r in prev_checked if r["table"] in done]
         ##ingest and review rows are re-read from their side files below, so
         ##an edited or deleted side-file row does not linger
@@ -1398,7 +1454,14 @@ def main() -> int:
             siblings.setdefault((h, k), set()).add(t)
     links, checked = [], []
     n_opened = 0
+    ##one progress line per table opened by --deep (#3045): the only sign of
+    ##life between the listing loop and the README check
+    deep_tables = [t for t, _ in tables if args.deep
+                   and any(h in REPO_HOSTS and (cache.get(f"{h}|{k}") or {}).get("status") == "ok"
+                           for _, h, k in routed[t])]
+    i_deep = 0
     for t, _ in tables:
+        t_opened, t_hits, t_t0 = n_opened, 0, time.time()
         for u, h, k in routed[t]:
             row = {"table": t, "data_url": u, "host": h, "deposit": k if h != "skip" else "", "checked_at": ""}
             checked.append(row)
@@ -1437,10 +1500,14 @@ def main() -> int:
                                      "host": h, "how_found": "package_doc", "checked_at": row["checked_at"]})
                     continue
                 how = "typed_codebook" if f.get("typed") else match(f["name"])
-                if not how and h in REPO_HOSTS and args.deep:
+                if not how and h in REPO_HOSTS and args.deep and not deep_over(f"{h}|{k}"):
                     ##past the name (#2787 follow-up): sheets, zip members, text
-                    if not args.offline and open_deposit_file(f, h):
-                        n_opened += 1
+                    if not args.offline:
+                        t0 = time.time()
+                        if open_deposit_file(f, h):
+                            n_opened += 1
+                            _deep["opened"] += 1
+                        deep_spend(f"{h}|{k}", t0)
                     shown_name = f.get("path") or f["name"]
                     for sh in [x for x in (f.get("sheets") or []) if CODEBOOK.search(x) or SHEET_CODEBOOK.match(x)]:
                         ##a one-sheet workbook called 'Variables' is the data itself
@@ -1459,7 +1526,7 @@ def main() -> int:
                     if ext in REPO_TEXT_EXT:
                         hits.append({"table": t, "url": f["url"], "file_name": shown_name, "raw": f.get("raw", ""),
                                      "host": h, "how_found": "doc_candidate", "checked_at": row["checked_at"],
-                                     "evidence": ""})
+                                     "evidence": "", "_dep": f"{h}|{k}"})
                 if how:
                     name = (f"{f['name']} (inside {k})" if h == "opsych" else f.get("path") or f["name"])
                     hits.append({"table": t, "url": f["url"], "file_name": name, "raw": f.get("raw", ""),
@@ -1481,8 +1548,15 @@ def main() -> int:
                 x.setdefault("n_same_kind_in_deposit", "")
                 x["deposit_url"] = res.get("landing", "")
             links += hits
+            t_hits += len(hits)
             kinds = sorted({x["how_found"] for x in hits})
             row["outcome"] = "hit:" + "+".join(kinds) if kinds else "no_match"
+        if t in deep_tables:
+            i_deep += 1
+            over = [k for _, h, k in routed[t] if f"{h}|{k}" in _deep["timed_out"]]
+            print(f"[{i_deep}/{len(deep_tables)}] deep {t}: opened {n_opened - t_opened} files, {t_hits} hits, "
+                  f"{time.time() - t_t0:.0f}s" + (f", over budget: {' '.join(over)}" if over else ""),
+                  file=sys.stderr, flush=True)
 
     if n_opened and not args.offline:   ##sheets and zip members found while matching
         CACHE.write_text(json.dumps(cache, indent=0, ensure_ascii=False))
@@ -1517,6 +1591,11 @@ def main() -> int:
                 or (row["host"] in REPO_HOSTS and "doc_candidate" in row["outcome"])):
             kinds = sorted(final_kinds.get((row["table"], row["host"]), ()))
             row["outcome"] = "hit:" + "+".join(kinds) if kinds else "no_match"
+    ##a deposit over its --deep budget was finished by name alone; without a
+    ##hit the row says so, and the next --new-only sweep tries it again
+    for row in checked:
+        if f"{row['host']}|{row['deposit']}" in _deep["timed_out"] and not row["outcome"].startswith("hit:"):
+            row["outcome"] = "deep_timeout"
     checked = kept_checked + checked
     ##a table no crawler can list, documented by review: say so in the
     ##checked file rather than leaving it out_of_scope
@@ -1530,6 +1609,10 @@ def main() -> int:
     checked.sort(key=lambda x: (x["table"].lower(), x["data_url"]))
     write_csv(LINKS_OUT, links, LINK_FIELDS)
     write_csv(CHECKED_OUT, checked, CHECKED_FIELDS)
+    if args.deep:
+        print(f"--deep: opened {_deep['opened']} files in {_deep['total']:.0f}s; "
+              f"{len(_deep['timed_out'])} deposits over budget (deep_timeout, retried next --new-only)",
+              file=sys.stderr, flush=True)
     print(f"{len(links)} links for {len({x['table'] for x in links})} tables -> {LINKS_OUT.name}", file=sys.stderr)
     return 0
 
