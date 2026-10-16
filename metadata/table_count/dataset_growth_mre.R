@@ -54,6 +54,10 @@ p <- ggplot(total_df, aes(x = log_days_ago, y = n_tables, color = group)) +
   theme_minimal() +
   theme(legend.position = "bottom", plot.margin = margin(5, 80, 5, 5))
 
-pdf("dataset_growth_mre.pdf", width = 9, height = 5.5)
+pdf("dataset_growth_mre.pdf", width = 7, height = 7)
+print(p)
+invisible(dev.off())
+
+png("dataset_growth_mre.png", width = 2100, height = 2100, res = 300)
 print(p)
 invisible(dev.off())
