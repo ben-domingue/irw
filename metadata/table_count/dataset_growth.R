@@ -1,7 +1,7 @@
 ## Pull timestamped table counts across every version of the IRW datasets on
 ## Redivis -- the core warehouses, the competitions/nominal/simsyn datasets, and
 ## the item-text and conjoint shards -- for plotting growth over time.
-## Output: metadata/table_count/dataset_growth.csv
+## Output: ~/Dropbox/projects/irw/dataset_growth.csv (else ./dataset_growth.csv)
 ##
 ## Incremental: a released version never changes, so its row is reused from the
 ## existing CSV and only new or unreleased versions are fetched. Rerunning to
@@ -22,7 +22,10 @@ datasets <- rbind(
 
 fmt_time <- function(ms) format(as.POSIXct(ms / 1000, origin = "1970-01-01", tz = "UTC"), "%Y-%m-%d %H:%M:%OS3")
 
-cache <- if (file.exists("dataset_growth.csv")) read.csv("dataset_growth.csv", colClasses = "character") else
+## The cache lives outside the repo (metadata/**/*.csv is gitignored) so it
+## survives fresh checkouts; without that folder, fall back to this directory.
+growth_csv <- if (dir.exists("~/Dropbox/projects/irw")) "~/Dropbox/projects/irw/dataset_growth.csv" else "dataset_growth.csv"
+cache <- if (file.exists(growth_csv)) read.csv(growth_csv, colClasses = "character") else
   data.frame(dataset = character(), tag = character(), is_released = character())
 cache <- cache[cache$is_released == "TRUE", ]
 cache_key <- paste(cache$dataset, cache$tag)
@@ -65,4 +68,5 @@ for (i in seq_len(nrow(datasets))) {
 
 growth <- do.call(rbind, lapply(rows, function(r) { r[] <- lapply(r, as.character); r }))
 growth <- growth[order(growth$dataset, growth$created_at), ]
-write.csv(growth, "dataset_growth.csv", row.names = FALSE)
+write.csv(growth, growth_csv, row.names = FALSE)
+message("wrote ", growth_csv)

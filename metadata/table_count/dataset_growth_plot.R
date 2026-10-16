@@ -3,13 +3,16 @@
 ## Right panel: the newer families (comps, simsyn, nom, rank, conj, itemtext),
 ## from the date the first of them appeared; that date is flagged on the left
 ## panel too. Log y-scale, since the families run from tens to thousands.
-## Input: metadata/table_count/dataset_growth.csv (from dataset_growth.R)
+## Input: ~/Dropbox/projects/irw/dataset_growth.csv, else ./dataset_growth.csv (from dataset_growth.R)
 ## Output: metadata/table_count/dataset_growth.pdf
 
 library(ggplot2)
 library(patchwork)
 
-growth <- read.csv("dataset_growth.csv")
+## The cache lives outside the repo (metadata/**/*.csv is gitignored) so it
+## survives fresh checkouts; without that folder, fall back to this directory.
+growth_csv <- if (dir.exists("~/Dropbox/projects/irw")) "~/Dropbox/projects/irw/dataset_growth.csv" else "dataset_growth.csv"
+growth <- read.csv(growth_csv)
 growth$created_at <- as.POSIXct(growth$created_at, tz = "UTC")
 growth <- growth[order(growth$dataset, growth$created_at), ]
 ## Older CSVs used long group names; map them onto the short ones.
