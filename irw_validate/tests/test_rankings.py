@@ -37,10 +37,13 @@ class RankingsTest(unittest.TestCase):
         self.assertEqual(r.stats["n_duplicate_marks"], 1)
         self.assertEqual(r.stats["n_ballots_with_gap"], 1)
 
-    def test_repeated_position_is_an_error(self):
+    def test_equal_ranks_are_a_warning_and_counted(self):
         df = table()
         df.loc[1, "resp"] = 1
-        self.assertIn("rank_positions", checks(df, "error"))
+        self.assertNotIn("rank_positions", checks(df, "error"))
+        self.assertIn("rank_positions", checks(df, "warning"))
+        r = validate_rankings_frame(df, label="rcv_town_20211102_council.csv")
+        self.assertEqual(r.stats["n_tied_ballots"], 1)
 
     def test_personal_name_is_an_error(self):
         df = table()
