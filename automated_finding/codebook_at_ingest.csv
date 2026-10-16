@@ -101,6 +101,8 @@ bacon_2025_stss,core,none,2026-10-02
 bado_2018_ohla_b,core,none,2026-10-05
 bajka_2025_occupation_choice,conj,none,2026-10-08
 bak_sosnowska_2025_dass21,core,none,2026-10-07
+bakker_2021_authoritarianism,core,https://dataverse.harvard.edu/api/access/datafile/4785762,2026-10-15
+bakker_2021_bfi15,core,https://dataverse.harvard.edu/api/access/datafile/4785762,2026-10-15
 bakker_2021_populist_appeal,conj,https://dataverse.harvard.edu/api/access/datafile/3582314,2026-10-09
 ballardrosa_2017_income_tax,conj,none,2026-10-08
 banda_2022_filibuster,conj,https://dataverse.harvard.edu/api/access/datafile/7591775,2026-10-14
@@ -201,6 +203,9 @@ blackman_2021_tunisia_household,conj,https://dataverse.harvard.edu/api/access/da
 blackman_2021_tunisia_online,conj,https://dataverse.harvard.edu/api/access/datafile/3599057,2026-10-09
 blackman_2025_aid_tunisia,conj,none,2026-10-08
 blais_2026_losers_consent,conj,https://dataverse.harvard.edu/api/access/datafile/14081607,2026-10-09
+blanc_2024_sdi,core,none,2026-10-15
+blanc_2024_sexual_assertiveness,core,none,2026-10-15
+blanc_2024_sos,core,none,2026-10-15
 bland_2024_gcos_autonomy,core,none,2026-10-09
 bland_2024_gcos_control,core,none,2026-10-09
 bland_2024_gcos_impersonal,core,none,2026-10-09
@@ -477,6 +482,8 @@ dishman_2017_neighborhood,core,https://zenodo.org/api/records/5011627/files/READ
 dishman_2017_parent_support,core,https://zenodo.org/api/records/5011627/files/README_for_TRACK%20COHORT%20857%20PLOS%20ONE%20short.pdf/content,2026-10-07
 dishman_2017_peer_support,core,https://zenodo.org/api/records/5011627/files/README_for_TRACK%20COHORT%20857%20PLOS%20ONE%20short.pdf/content,2026-10-07
 dishman_2017_self_efficacy,core,https://zenodo.org/api/records/5011627/files/README_for_TRACK%20COHORT%20857%20PLOS%20ONE%20short.pdf/content,2026-10-07
+dlouha_2023_dsr,core,none,2026-10-15
+dlouha_2023_tdds,core,none,2026-10-15
 dobson_2026_legislative_professionalism,conj,none,2026-10-07
 doherty_2019_party_chairs,conj,https://dataverse.harvard.edu/api/access/datafile/3181322,2026-10-07
 doherty_2020_blame_inaction,conj,https://dataverse.harvard.edu/api/access/datafile/3452460,2026-10-14
@@ -1016,6 +1023,10 @@ kamaludin_2025_refrigerator_energy_label,conj,none,2026-10-14
 kamwendo_2021_detergent_ranking,conj,none,2026-10-12
 kang_2024_police_priority_exp1,conj,none,2026-10-07
 kang_2024_police_priority_exp2,conj,none,2026-10-07
+kankova_2023_dsr,core,none,2026-10-15
+kankova_2023_invr,core,none,2026-10-15
+kankova_2023_stai6,core,none,2026-10-15
+kankova_2023_tdds_pathogen,core,none,2026-10-15
 kantorowicz_2025_copyright_uk_pros,conj,none,2026-10-07
 kantorowicz_2025_copyright_uk_public,conj,none,2026-10-07
 kantorowicz_2025_copyright_us_pros,conj,none,2026-10-07
@@ -1071,6 +1082,9 @@ kermen_2019_attentional_control,core,none,2026-10-07
 kermen_2019_self_efficacy,core,none,2026-10-07
 kermen_2019_self_regulation,core,none,2026-10-07
 kertzer_2021_resolve,conj,https://dataverse.harvard.edu/api/access/datafile/3194059,2026-10-09
+kessler_2020_ebcck_18,core,https://data.mendeley.com/public-files/datasets/tzv223xgsr/files/32b0b198-05cb-4da8-8494-f66a366a5642/file_downloaded,2026-10-15
+kessler_2020_ebcck_22,core,https://data.mendeley.com/public-files/datasets/tzv223xgsr/files/32b0b198-05cb-4da8-8494-f66a366a5642/file_downloaded,2026-10-15
+kessler_2020_ebcck_30,core,https://data.mendeley.com/public-files/datasets/tzv223xgsr/files/32b0b198-05cb-4da8-8494-f66a366a5642/file_downloaded,2026-10-15
 khan_2018_bidr_im,core,none,2026-10-05
 khan_2018_bidr_sde,core,none,2026-10-05
 khan_2018_ethical_leadership_real,core,none,2026-10-05
@@ -1207,9 +1221,14 @@ li_2017_fdi_china,conj,https://dataverse.harvard.edu/api/access/datafile/3052198
 li_2021_china_intervention,conj,https://dataverse.harvard.edu/api/access/datafile/3656911,2026-10-11
 li_2021_china_peacekeeping,conj,https://dataverse.harvard.edu/api/access/datafile/3656911,2026-10-11
 li_2024_big_five,core,none,2026-10-15
+li_2024_csc,core,none,2026-10-15
+li_2024_enjoyment,core,none,2026-10-15
 li_2024_mas,core,none,2026-10-02
 li_2024_mind_wandering,core,none,2026-10-15
+li_2024_self_confidence,core,none,2026-10-15
 li_2024_trait_anxiety,core,none,2026-10-15
+li_2024_wtc_cross_setting,core,none,2026-10-15
+li_2024_wtc_digital,core,none,2026-10-15
 li_2026_coab,core,https://data.mendeley.com/public-files/datasets/sjyrmwbcbx/files/6f0a4c00-63e0-426f-977e-b63e5e6dea90/file_downloaded,2026-10-11
 li_2026_efl_listening_bk,core,none,2026-10-15
 li_2026_efl_listening_cs,core,none,2026-10-15
@@ -1252,6 +1271,13 @@ liu_2026_moral_disengagement,core,https://ndownloader.figshare.com/files/6534985
 liu_2026_self_control,core,https://ndownloader.figshare.com/files/65349858,2026-10-09
 liu_2026_social_alienation,core,https://ndownloader.figshare.com/files/65349858,2026-10-09
 liu_2026_taiwan_ballots,conj,https://dataverse.harvard.edu/api/access/datafile/13577981,2026-10-09
+liuzza_2018_bods,core,https://zenodo.org/records/5023051/files/README.txt,2026-10-15
+liuzza_2018_dsr,core,https://zenodo.org/records/5023051/files/README.txt,2026-10-15
+liuzza_2018_pvd,core,https://zenodo.org/records/5023051/files/README.txt,2026-10-15
+liuzza_2018_rwa,core,https://zenodo.org/records/5023051/files/README.txt,2026-10-15
+liuzza_2018_sdo,core,https://zenodo.org/records/5023051/files/README.txt,2026-10-15
+liuzza_2018_tdds,core,https://zenodo.org/records/5023051/files/README.txt,2026-10-15
+liuzza_2018_tdds_short,core,https://zenodo.org/records/5023051/files/README.txt,2026-10-15
 lobo_2023_parties_be,conj,https://dataverse.harvard.edu/api/access/datafile/7521563,2026-10-08
 lobo_2023_parties_de,conj,https://dataverse.harvard.edu/api/access/datafile/7521563,2026-10-08
 lobo_2023_parties_es,conj,https://dataverse.harvard.edu/api/access/datafile/7521563,2026-10-08
@@ -1833,6 +1859,10 @@ salomon_2014_hre_underlying,core,none,2026-10-09
 salomon_2014_hre_uniformity,core,none,2026-10-09
 salomon_2014_inherence,core,none,2026-10-09
 salomon_2014_race_essentialism,core,none,2026-10-09
+samadieh_2026_crave_now,core,none,2026-10-15
+samadieh_2026_crave_week,core,none,2026-10-15
+samadieh_2026_physical_dysfunction,core,none,2026-10-15
+samadieh_2026_vitality,core,none,2026-10-15
 sanchezgarcia_2025_academic_dishonesty,core,none,2026-10-02
 sanchezgarcia_2025_moral_disengagement,core,none,2026-10-02
 sanchezgarcia_2025_sd4,core,none,2026-10-02
@@ -2163,6 +2193,7 @@ wagner_2018_vaccine_program,conj,https://ndownloader.figshare.com/files/11888273
 wagner_2025_provider_choice,conj,https://dataverse.harvard.edu/api/access/datafile/11827545,2026-10-09
 wang_2026_cognitive_load,core,none,2026-10-09
 wang_2026_green_space_heat,conj,none,2026-10-09
+wang_2026_interest,core,none,2026-10-15
 wang_2026_moral_elevation,core,none,2026-10-09
 wang_2026_moral_exposure,core,none,2026-10-09
 wang_2026_panas_na,core,none,2026-10-09
@@ -2170,6 +2201,8 @@ wang_2026_panas_pa,core,none,2026-10-09
 wang_2026_pse,core,none,2026-10-09
 wang_2026_psm,core,none,2026-10-09
 wang_2026_social_desirability,core,none,2026-10-09
+wang_2026_wtc_inclass,core,none,2026-10-15
+wang_2026_wtc_outclass,core,none,2026-10-15
 ward_2025_korean_candidates,conj,https://dataverse.harvard.edu/api/access/datafile/13987847,2026-10-08
 weber_2026_name_interaction,core,https://dataverse.harvard.edu/api/access/datafile/14203958,2026-10-05
 wehr_2026_housing_densification,conj,none,2026-10-09
@@ -2219,6 +2252,7 @@ wolbers_2017_speak_climate,core,https://ssh.datastations.nl/api/access/datafile/
 wolbers_2017_speak_enjoy,core,https://ssh.datastations.nl/api/access/datafile/184799,2026-10-09
 wolbers_2017_speaking,core,https://ssh.datastations.nl/api/access/datafile/184799,2026-10-09
 wolbers_2017_teach_contact,core,https://ssh.datastations.nl/api/access/datafile/184799,2026-10-09
+wong_2026_eca_disclosure,core,none,2026-10-15
 wood_2022_campaign_finance,conj,https://dataverse.harvard.edu/api/access/datafile/5745941,2026-10-09
 wozniakjechorek_2026_remote_work,conj,none,2026-10-08
 wright_2019_obesity_incentives,conj,https://dataverse.harvard.edu/api/access/datafile/3319179,2026-10-08
@@ -2264,7 +2298,11 @@ yan_2023_coaching_efficacy,core,none,2026-10-05
 yan_2023_eri,core,none,2026-10-05
 yan_2023_job_stress,core,none,2026-10-05
 yan_2023_overcommitment,core,none,2026-10-05
+yang_2024_academic_burnout,core,none,2026-10-15
 yang_2024_charity_regulation,conj,https://osf.io/download/ge4n7/,2026-10-09
+yang_2024_mindfulness,core,none,2026-10-15
+yang_2024_mobile_phone_addiction,core,none,2026-10-15
+yang_2024_technology_conflict,core,none,2026-10-15
 yang_2025_nigeria_tax_health,conj,none,2026-10-09
 yang_2026_academic_dishonesty,core,https://data.mendeley.com/public-files/datasets/252r6gdx48/files/d947890b-221a-442c-b758-8441fc5197a8/file_downloaded,2026-10-11
 yang_2026_ai_literacy,core,https://data.mendeley.com/public-files/datasets/252r6gdx48/files/d947890b-221a-442c-b758-8441fc5197a8/file_downloaded,2026-10-11
@@ -2301,6 +2339,10 @@ zhang_2019_gad7,core,none,2026-10-02
 zhang_2019_mini_ipip,core,none,2026-10-02
 zhang_2019_phq9,core,none,2026-10-02
 zhang_2020_contact_tracing_app,conj,none,2026-10-08
+zhang_2021_cyber_aggression,core,none,2026-10-15
+zhang_2021_moral_disengagement,core,none,2026-10-15
+zhang_2021_moral_identity,core,none,2026-10-15
+zhang_2021_parenting_style,core,none,2026-10-15
 zhang_2023_coping_appraisal,core,none,2026-10-10
 zhang_2023_quit_intention,core,none,2026-10-10
 zhang_2023_self_exempt,core,none,2026-10-10

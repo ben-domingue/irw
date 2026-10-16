@@ -1690,3 +1690,34 @@ west_2020_feeling_thermometer,0-100 thermometers toward twelve groups; the depos
 oskooii_2024_amid,AMID3 does not exist in any file; AMID5 was not asked in the 2020 Lucid sample. id = 10000 x sample index + row.,,2026-10-15
 oskooii_2024_anti_muslim_policy,"The deposit rescaled every policy item to 0-1 in quarter steps; mapped back to 0-4 (x4). Each sample asked a different subset: 2018 CCES banmuslims/sharia/registry, 2019 Lucid banmuslims/patrol/noweapon/sharia/restrictmosques, 2020 Lucid banmuslims/restrictmosques/sharia/noweapon. cov_income, cov_education, cov_ideology and cov_trump_approval are the deposit's 0-1 rescalings.",,2026-10-15
 leinauer_2023_dsr,"Background measures answered by all 381 participants before the custody vignette; the vignette DVs (condition-specific, n ~ 48 each) are not shipped. Items ship as answered; the deposit's *Rev columns are the authors' reverse-scoring.",,2026-10-15
+dlouha_2023_dsr,"Items DS-R1_R, DS-R6_R, DS-R10_R are stored already reversed by the depositors; the two DS-R catch items (12, 16) are not shipped. 26 fractional cells (person-mean imputations over the other items of the subscale) and two out-of-range cells (41, 6) were dropped.",,2026-10-15
+dlouha_2023_tdds,Six fractional cells (person-mean imputations over the other items of the subscale) were dropped.,,2026-10-15
+kankova_2023_dsr,"Columns the deposit marks '(revers)' (DS-R1, 6, 10) are stored reversed and ship with an _R suffix. The 550 women of the lab's 2021 deposit 10.6084/m9.figshare.16843210 are a strict subset of these 599 (DS-R item vector + age match), so that deposit is not shipped separately; its before/during-COVID flag is not in this file (cov_sample 1/2 is the deposit's own split).",,2026-10-15
+kankova_2023_invr,"Columns the deposit marks '(revers)' (INVR1, 3, 6, 7) are stored reversed and ship with an _R suffix.",,2026-10-15
+kankova_2023_stai6,"Columns the deposit marks '(revers)' (stai1, 4, 5) are stored reversed and ship with an _R suffix. Sample 2 only.",,2026-10-15
+liuzza_2018_bods,"Three studies pooled (cov_study); ids are 1000*study + row. The README states _R items 'must be reverse scored', i.e. values are as answered.",,2026-10-15
+liuzza_2018_rwa,Three studies pooled (cov_study); _R items are as answered (README: 'must be reverse scored').,,2026-10-15
+liuzza_2018_tdds_short,"Study 2 administered seven TDDS items labelled TDD1-TDD7; the deposit does not say which 7 of the 21 they are, so they are not pooled with liuzza_2018_tdds.",,2026-10-15
+liuzza_2018_dsr,DSS12_C and DSS16_C (DS-R catch items) are not shipped; _R items as answered.,,2026-10-15
+liuzza_2018_pvd,"Values are stored 19-25 in the deposit (seven distinct values, a 7-point scale with an export offset); shipped as deposited rather than re-based.",,2026-10-15
+liuzza_2018_sdo,SDO9_R-SDO16_R are as answered (README: 'must be reverse scored').,,2026-10-15
+blanc_2024_sos,"Value labels run 'Totalmente en desacuerdo' -> 'Totalmente de acuerdo' for SOS1 and the reverse for SOS2-16, i.e. the file stores the authors' item-direction recoding; shipped as stored (see item text).",,2026-10-15
+blanc_2024_sexual_assertiveness,One AsertiviSex6 cell of 6 (out of range) was dropped.,,2026-10-15
+bakker_2021_authoritarianism,"treat = 1 when the political questions preceded the trait items. Items are forced choices between two child qualities (1 and 5 are the two qualities, 3 = 'Both'); the deposit's id column is a sample flag and ships as cov_sample.",,2026-10-15
+bakker_2021_bfi15,treat = 1 when the political questions followed the trait items (politics2nd).,,2026-10-15
+kessler_2020_ebcck_30,"Item_k are the workbook's positional codes for the 30-item development pool. The deposited EB-CCK_30item.docx list does not reproduce the response polarities (14 of 30 columns correlate with the wrong sign for the stem at that position; several columns look reverse-scored), so the codes cannot be tied to wording and no item text ships.",,2026-10-15
+kessler_2020_ebcck_22,"Item_k are the workbook's positional codes for the 22-item development pool. The deposited EB-CCK_22item.docx list does not reproduce the response polarities (12 of 22 sign mismatches), so the codes cannot be tied to wording and no item text ships.",,2026-10-15
+kessler_2020_ebcck_18,Study 2 Sample 1 (ids 10001-10879) and Sample 2 (ids 20001-20296) pooled with cov_sample.,,2026-10-15
+wang_2026_wtc_inclass,"The deposit's NAME column is a within-class number (272 duplicates), not a person id; the three files cannot be linked. id is the row index.",,2026-10-15
+wang_2026_wtc_outclass,One Q6 cell of 54 and one Q8 cell of 6 (out of range) were dropped. Not linkable to the other two wang_2026 tables.,,2026-10-15
+wang_2026_interest,"Gender carries a few 3/4/5 codes the deposit does not explain, shipped as stored. Not linkable to the two WTC tables.",,2026-10-15
+li_2024_csc,"Built from three Mendeley deposits of the same 457 respondents (10.17632/4jfcp2psxf, 38ddjj8tcb, 394x5ynsd8); rows matched by position after confirming the shared CSC and WTC blocks are byte-identical. Same ids across the five li_2024_* tables.",,2026-10-15
+li_2024_wtc_digital,The first deposit's WTC1-4 (digital contexts) differ from WTC1-4 of the cross-setting WTC block in the other two deposits; shipped as a separate table.,,2026-10-15
+samadieh_2026_crave_now,"Three studies pooled (cov_study, ids 1000*study + sort); whether the samples share respondents is not stated.",,2026-10-15
+samadieh_2026_crave_week,"Three studies pooled (cov_study, ids 1000*study + sort); whether the samples share respondents is not stated.",,2026-10-15
+wong_2026_eca_disclosure,M1-M15 are the 15 post-session items; the deposit does not say which items form its six scored constructs. wave = interaction round (R1/R2); cov_script_version and cov_topic vary by round.,,2026-10-15
+yang_2024_mobile_phone_addiction,"0 is a missing code in the deposit (v7xxr = 6 - v7xx is blank wherever v7xx is 0) and was dropped from all four yang_2024 tables; the sheet name says missing values were completed, but the integer data show no imputation signature.",,2026-10-15
+yang_2024_mindfulness,"The deposit's reverse columns are 6 - v7xx, so the scale is 1-5; 5 is never endorsed. Block-to-construct assignment follows the composite name ZN (mindfulness).",,2026-10-15
+yang_2024_academic_burnout,Block-to-construct assignment follows the composite name XYJD (academic burnout).,,2026-10-15
+yang_2024_technology_conflict,Block-to-construct assignment follows the composite name JSCT (technology conflict).,,2026-10-15
+zhang_2021_parenting_style,42 s-EMBU items (PS1-PS42); the father/mother and rejection/warmth/over-protection assignment of the columns is not documented in the deposit.,,2026-10-15
