@@ -141,10 +141,17 @@ def pv_for(items, valid) -> dict:
 
 
 def osf_fetch(node: str, fname: str, raw_dir: Path) -> Path:
+    """Download one file of an OSF node, searching sub-folders of osfstorage too."""
     p = raw_dir / fname
     if not p.exists():
-        j = requests.get(f"https://api.osf.io/v2/nodes/{node}/files/osfstorage/", headers=UA, timeout=120).json()
-        url = [f["links"]["download"] for f in j["data"] if f["attributes"]["name"] == fname][0]
+        def walk(url):
+            for f in requests.get(url, headers=UA, timeout=120).json()["data"]:
+                if f["attributes"]["kind"] == "folder":
+                    yield from walk(f["relationships"]["files"]["links"]["related"]["href"])
+                else:
+                    yield f
+        url = [f["links"]["download"] for f in walk(f"https://api.osf.io/v2/nodes/{node}/files/osfstorage/")
+               if f["attributes"]["name"] == fname][0]
         download(url, p)
     return p
 
