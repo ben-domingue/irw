@@ -88,11 +88,14 @@ def validate_rankings_frame(df, *, label: str = "", design: dict | None = None) 
             out.append(_f("rank_types", "error", f"[R2] {c}: {bad} values that are not positive integers "
                           "(resp is the position marked, 1 = first choice)", table))
 
-    # R3: within a ballot (id x task), one row per position
-    dup = int(df.duplicated(["id", "task", "resp"]).sum())
-    if dup:
-        out.append(_f("rank_positions", "error",
-                      f"[R3] {dup} rows repeat a position within an id x task (an overvote is one row)", table))
+    # R3: within a ballot (id x task), a repeated position is a tie (equal ranks), allowed and reported
+    # (Ben, 2026-10-15: ties may exist, as in competitions). An overvote is still one row.
+    tied = df[df.duplicated(["id", "task", "resp"], keep=False)]
+    report.stats["n_tied_ballots"] = int(tied.groupby(["id", "task"]).ngroups) if len(tied) else 0
+    if len(tied):
+        out.append(_f("rank_positions", "warning",
+                      f"[R3] {report.stats['n_tied_ballots']} ballots rank two or more items equally "
+                      f"({len(tied)} rows share a position); allowed, reported", table))
 
     # R4: items are codes, reserved values, or option text; never a person's name
     items = df["item"].dropna().astype(str)
