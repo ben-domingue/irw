@@ -199,11 +199,26 @@ def convert(src: Path, meta: dict) -> tuple[list[dict], dict, list[str]]:
     return out, design, warn
 
 
+##Fields a person fills from the jurisdiction's own documents (seats, write_in_allowed,
+##candidate_order, evidence). The script's values for them are placeholders, so a rebuild
+##keeps whatever is already recorded for the table and only refreshes the counts.
+HUMAN_FIELDS = ("seats", "write_in_allowed", "candidate_order", "evidence")
+
+
 def upsert_design(record: dict) -> None:
     rows = []
+    kept = None
     if DESIGN.exists():
         with open(DESIGN, newline="") as f:
-            rows = [r for r in csv.DictReader(f) if r["table"] != record["table"]]
+            for r in csv.DictReader(f):
+                if r["table"] == record["table"]:
+                    kept = r
+                else:
+                    rows.append(r)
+    if kept is not None:
+        for field in HUMAN_FIELDS:
+            if field in kept:
+                record[field] = kept[field]
     rows.append(record)
     rows.sort(key=lambda r: r["table"])
     with open(DESIGN, "w", newline="") as f:
