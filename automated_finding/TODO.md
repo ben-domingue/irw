@@ -3,6 +3,21 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## From the 2026-10-15 repos mode-3 batch (15 new terms x 9 languages)
+
+- [x] **153 tables (1,571,458 responses) + 35 item text tables uploaded as drafts** by Claude on
+  ben-domingue's instruction (2026-10-15; response tables to `item_response_warehouse_7`, item text
+  to `irw_text_3`; `uploaded=2026-10-15` stamped). ben-domingue publishes the drafts. Table list in
+  `runs/batch_tables_2026-10-15.txt`. All 77 leads carry a status; none unworked.
+- [ ] **Issues-page entries at publish:** zhang_2025_parent_literacy_beliefs, zhang_2025_child_preliteracy.
+- [ ] **Covariate labels:** `build.py` after the release and commit covariate_labels.csv (harvest run for
+  the 18 .sav/.dta scripts).
+- [ ] **Rulings wanted** (none blocks publishing): see BATCH_LOG 2026-10-15d.
+- [ ] Seven OSF nodes with `unknown` licence sit outside the leads file pending a lookup via
+  `api.osf.io/v2/licenses/` (named in BATCH_LOG 2026-10-15c).
+- [ ] The "arg must be a list, tuple, 1-d array, or Series" reader fault hit 9 more `error` rows
+  (45 across the 2026-10-10/11/14/15 runs); still worth a look at `load_table()`.
+
 ## From the 2026-10-14 repos mode-3 batch (15 new terms x 9 languages)
 
 - [x] **191 tables (1,607,513 responses) + 82 item text tables uploaded** (ben-domingue, confirmed
