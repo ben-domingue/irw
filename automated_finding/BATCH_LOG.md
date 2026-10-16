@@ -18549,3 +18549,105 @@ engagement, false belief, obsessive compulsive inventory, binge watching.)
   instrument, DS-R, across waves -- check for the same respondents before shipping them as
   separate tables). The leads list is mechanical: the Pachira pasture trees, consensus
   robustness and brain-image rows will fall out on reading.
+
+## 2026-10-15d — The 77 leads from 2026-10-15: 47 deposits / 153 tables / 1,571,458 responses, 35 item text tables; uploaded
+
+Three forks, one at a time, on ben-domingue's "go!" (829bf396, 96f313d4, cbd8e153 + 1e04cdae).
+Every lead carries a status in `leads/repos_leads_2026-10-15.csv`: 53 shipped (3 of them via a
+sibling deposit of the same respondents), 20 rejected on content, 3 PII skips, 1 licence block.
+`[conj]` routed 0. Table list: `runs/batch_tables_2026-10-15.txt` (A/B/C sub-lists alongside).
+The staging folders were cleared of the 2026-10-14 batch first (moved to
+`runs/uploaded_2026-10-14/`), so `irw_output/` holds exactly these 153 and `itemtext_output/`
+these 35.
+
+**Uploaded by Claude on ben-domingue's instruction** ("you can now start uploads"), per fork as
+each committed, response tables first: 153/153 to `item_response_warehouse_7` (192 -> 345
+tables) and 35/35 to `irw_text_3` (828 -> 863), all row-count verified, draft versions
+(`runs/upload_{A,B,C}_{resp,items}_2026-10-15.log`). `uploaded=2026-10-15` stamped on the 35
+`itemtext_provenance.csv` rows. ben-domingue publishes the drafts.
+
+**A (16 deposits, 50 tables, 16 item text, ~560k responses):** zhang_2025 (chatgpt_use,
+cognitive_load, mslq, deep_learning; text from survey + codebook docx), khan_2021
+(place_identity, moral_identity, identity_importance, religious_orientation; .sav labels),
+habiba_2026_ai_tourism (32 items, 8 TAM blocks), bock_2025 (epistemic_beliefs, responsibility
+0-10 sliders), melati_may_2025_smart_home_privacy, calla_2010_self_esteem (N=100), girma_2024
+(hope, moral_identity, mlq, wemwbs), scattolin_2022 x7 (Study 1+2 pooled, cov_study),
+zhao_2026 (pba, parental_control, parenting_practices, work_family_conflict),
+niu_2026_ai_recommendation, gomez_meza_2025 (rses, rathus -3..3, patient_communication with
+patient as rater), venugopal_2025 (big_five, mfq), meule_2025 (spovi, qadp_brief,
+disgust_sensitivity, state_disgust 2 waves), west_2020 x5 (2 waves, feeling_thermometer
+0-100), oskooii_2024 (amid, muslim_resentment, anti_muslim_policy; 3 samples pooled N=6,333),
+leinauer_2023 (dsr, gender_role_beliefs, atlg, moral_traditionalism). Rejected: DVN/DWPLBC
+(binary checkboxes, no codebook), PLOS pdig SI (6 heterogeneous items), mendeley jwffz6f9py +
+figshare 31383304 (composites), DVN/LJQAII + 2CD3VZ (figure files), dryad 6f3q5 (genotypes),
+DVN/OZQGNV (district panel). PII: mendeley 395bxnfg9p (IP column), osf rjcea (IPAddress +
+lat/long).
+
+**B (12 deposits, 42 tables, 4 item text, ~511k responses):** dlouha_2023 (dsr, tdds; 32
+person-mean-imputed cells dropped), kankova_2023 (dsr, invr, tdds_pathogen, stai6; supersedes
+lead 30, a strict subset), liuzza_2018 x7 (bods/rwa pooled over 3 studies; pvd stored 19-25 as
+deposited), blanc_2024 (sos, sdi, sexual_assertiveness; Spanish .sav -> item text), bakker_2021
+(authoritarianism, bfi15; treat = question order; .Rdata via Rscript, pyreadstat segfaults),
+kessler_2020 (ebcck_30/_22/_18; text for _18 only, paper_order PARTIAL verify PASS), wang_2026
+(wtc_inclass, wtc_outclass, interest), li_2024 x5 (three Mendeley deposits of the same 457
+students, matched by position), samadieh_2026 (crave_now, crave_week, physical_dysfunction,
+vitality), wong_2026_eca_disclosure (2 rounds as wave), yang_2024 (mobile_phone_addiction,
+mindfulness, academic_burnout, technology_conflict; 0 = missing proven via reverse columns),
+zhang_2021 (moral_identity, moral_disengagement, cyber_aggression, parenting_style). Rejected:
+DVN/GMWOY6 (NAAS re-deposit), DVN/PYNYFP, figshare 27721332, DVN/TBH2RE (composites), zenodo
+21682077 (Anonymous creator), DVN/7SXKSF (single items), DVN/TBBSFI (legislator-level),
+DVN/X4K8JP (ANES/NLSY derived). PII: mendeley c64npp6vg9 (REDCap export with names, national
+IDs, phones). Lead 38 = A's leinauer_2023 .dta.
+
+**C (19 deposits, 61 tables, 15 item text, 579,331 responses):** khan_2019_moral_identity
+(DVN/4R9084 same respondents), khan_2020 (moral_identity, identity_importance), the Czech
+disgust-in-pregnancy lab as five deposits with wave columns and cohort-overlap data notes:
+dlouha_2022_pregnancy_dsr (4 waves; 19354688 is its subset, 19354643 scores only),
+benesova_2026 (dsr, tdds), kankova_2025_trimester (dsr, tdds, stai6), kankova_2026_conception
+(dsr, tdds, stai6, cdis), kankova_2025_postpartum (dsr, tdds, stai6, pss10, panas, child_disgust);
+kubicka_2025 x5 (mother/father as item suffixes), zheng_2017 x5 (PLOS; personality opaque),
+tuszynska_bogucka_2024_family_apgar, lavigne_2026_misinfo_attitudes, piotrowski_2024 x4
+(N=1,471), iwai_2023 x5 (cov_study), reinhardt_2023 x6 (HEXACO HH + counterfeit, N=1,067),
+huang_2025 x5 (mean-imputed cells dropped), kam_2015 x3 (CCES 2012, cov_placement),
+karinen_2019 x4, inshrah_2026_fintech_privacy, zhang_2025 (parent_literacy_beliefs,
+child_preliteracy; file exactly doubled -> 503). Rejected: DVN/9HLR8B (trade panel), figshare
+19354643 (scores), mendeley zjk69g27v5 (N<100 with answers), zenodo 4072162 (cockroach counts;
+B's unreachable lead 42). Blocked: zenodo 17348175 (CC BY badge, data on request only) ->
+`license_blocked_candidates.csv`.
+
+**Gates:** all 153 pass `run_qc` (no fail) and `irw-validate --profile upload`
+(`runs/validate_{A,B,C}_2026-10-15.log`). All 35 item text tables pass normalize_nulls ->
+validate_items --resp-csv -> audit_batch -> irw-validate; `check_provenance.R` exit 0;
+`itemtext_output/` holds only `*__items.csv`. WARNs explained in each fork's log: multi_scale on
+the deliberate multi-block tables, imputed_values concentration on floored items (integer data,
+no fractional cells), rights_register item-code matches with no wording shipped, zhang_2025 x2
+100% blank item_text (Chinese administration, English wording in `_translated`). girma
+moral_identity option rows limited to the observed resp set (syafrijon precedent).
+
+**Staged:** 153 rows in `dictionary_auto.csv` + `codebook_at_ingest.csv`, 153 in
+`tags/tags_auto.csv`, 153 in `itemtext_provenance.csv` (35 shipped, 118 not-shipped with
+reason), 35 in `mapping_verification.csv` (28 data_labels NOT_NEEDED; zhang_2025 x4
+paper_explicit VERIFIED; bock x2 and zhang_2025 x2 paper_explicit NOT_NEEDED, code printed
+beside each item; kessler_18 paper_order PARTIAL), 88 `metadata/data_notes.csv` rows.
+Covariate-label harvest run for the 18 .sav/.dta scripts (all exit 0); `build.py` after the
+release.
+
+**Issues-page entries owed:** zhang_2025_parent_literacy_beliefs, zhang_2025_child_preliteracy
+(English-only wording in `_translated`).
+
+**Rulings wanted (none blocks publishing):**
+- Disgust lab: five longitudinal deposits ship as separate tables though they re-sample the
+  same cohorts (overlap documented in data notes); kankova_2023 supersedes lead 30.
+- Opaque/positional blocks: kessler_2020_ebcck_30/_22 (deposited item lists fail the polarity
+  check), zheng_2017_personality, wong M1-15, zhang_2021 parenting_style, lavigne codes.
+- Multi-block single tables: habiba (8), melati (7), niu (9), zhang_2025 mslq, zhao x2,
+  bakker bfi15, inshrah, khan identity_importance.
+- Small blocks as own tables: zhao work_family_conflict 4, oskooii muslim_resentment 3,
+  leinauer moral_traditionalism 4, scattolin bcq 5, bakker authoritarianism 4, li wtc_digital
+  4, yang technology_conflict 6, samadieh vitality 6, tuszynska 5, iwai guilt 3, kam
+  racial_resentment 4, reinhardt risk 6.
+- As-stored codings: liuzza pvd 19-25, zheng pss10 1-5, khan/girma "(R)" items, wang Gender
+  3/4/5, kankova_2026 all-zero control item, zhao cov_gender inferred, kam cov_birth_year kept.
+- paper_explicit without a verify script: bock x2, zhang_2025 x2. calla N=100 at the floor.
+  Administration language blank for English instruments on non-English samples (zhang,
+  habiba, girma, melati).
