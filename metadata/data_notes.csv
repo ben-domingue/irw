@@ -1721,3 +1721,39 @@ yang_2024_mindfulness,"The deposit's reverse columns are 6 - v7xx, so the scale 
 yang_2024_academic_burnout,Block-to-construct assignment follows the composite name XYJD (academic burnout).,,2026-10-15
 yang_2024_technology_conflict,Block-to-construct assignment follows the composite name JSCT (technology conflict).,,2026-10-15
 zhang_2021_parenting_style,42 s-EMBU items (PS1-PS42); the father/mother and rejection/warmth/over-protection assignment of the columns is not documented in the deposit.,,2026-10-15
+khan_2019_moral_identity,"DVN/4R9084 ('Dataset_Study 1.sav', 167 rows) re-deposits the same respondents with regression diagnostics; not shipped separately.",,2026-10-15
+dlouha_2022_pregnancy_dsr,"Sibling deposit 10.6084/m9.figshare.19354688 (v4, 106 rows) holds the same women after exclusions (identical DS-R vectors by ID); 10.6084/m9.figshare.19354643 holds subscale scores only. Non-integer (person-mean imputed) cells dropped; cov_excluded marks the authors' exclusions.",,2026-10-15
+benesova_2026_dsr,"253 of 274 third-trimester DS-R vectors are identical to T3 vectors in kankova_2025_trimester_dsr (same lab, different codes): largely the same cohort; the postpartum wave is unique here.",,2026-10-15
+benesova_2026_tdds,Same cohort overlap with kankova_2025_trimester_tdds as benesova_2026_dsr (third trimester).,,2026-10-15
+kankova_2025_trimester_dsr,"Cohort overlaps: 152/246 T1 vectors match dlouha_2023_dsr (early pregnancy), 253 T3 vectors match benesova_2026_dsr, 37 T1 vectors match kankova_2025_postpartum_dsr. Non-integer (person-mean imputed) cells dropped.",,2026-10-15
+kankova_2025_trimester_tdds,Cohort overlaps as kankova_2025_trimester_dsr.,,2026-10-15
+kankova_2025_trimester_stai6,The deposit heads the T1 block's fourth item 'T2_stai4_R' and T2's 'T2_stai4_R.1' (header slip); mapped by block position. Cohort overlaps as kankova_2025_trimester_dsr.,,2026-10-15
+kankova_2026_conception_cdis,Control pictures are legitimately rated 0 by most women (20 of 40 items are >60% zeros; c-dis11_control is all zeros). cov_group G1-G4 is undocumented in the deposit.,,2026-10-15
+kankova_2025_postpartum_dsr,"Cohort overlaps: 120/159 first-trimester vectors match kankova_2023_dsr and 37 match kankova_2025_trimester_dsr (same lab, different codes); the postpartum waves are unique here. Non-integer (person-mean imputed) cells dropped.",,2026-10-15
+kankova_2025_postpartum_tdds,Cohort overlaps as kankova_2025_postpartum_dsr.,,2026-10-15
+kankova_2025_postpartum_stai6,Cohort overlaps as kankova_2025_postpartum_dsr.,,2026-10-15
+kankova_2025_postpartum_pss10,Cohort overlaps as kankova_2025_postpartum_dsr.,,2026-10-15
+kankova_2025_postpartum_panas,Cohort overlaps as kankova_2025_postpartum_dsr.,,2026-10-15
+kubicka_2025_csq,Items answered about the mother (_M) and father (_O) ship as separate items; 4 CSQ20 cells of 4 (out of the 0-2 range) dropped.,,2026-10-15
+kubicka_2025_security_scale,Items about mother (_M) and father (_O) as separate items; 2 cells of 0 (outside 1-4) dropped.,,2026-10-15
+kubicka_2025_physical_closeness,KBF items are deposited only in the depositor's recoded form (_REK); shipped as stored.,,2026-10-15
+zheng_2017_pss10,"Block q16 identified as the PSS-10 by its r = .76 with the file's PSS total; stored 1-5 where the paper reports 0-4; the file's reverse-coded copies sit on items 5-8, not the PSS key (4, 5, 7, 8). 0 = not answered.",,2026-10-15
+zheng_2017_sds_sas,"q17_1-20 = Zung SDS and q17_21-40 = Zung SAS, identified by the file's reverse-coded copies matching the SDS (2,5,6,11,12,14,16,17,18,20) and SAS (5,9,13,17,19) keys exactly. 0 = not answered.",,2026-10-15
+zheng_2017_swls,Only 163 of 311 respondents answered the block (0 = not answered).,,2026-10-15
+zheng_2017_personality,"40 items = BFI E (8) + O (10) + N (8) + normlessness (4) + IPIP altruism (10) by the per-trait score ranges, but the item-to-trait assignment is not established (the file's reverse-coded copies do not reproduce the BFI key): opaque block.",,2026-10-15
+tuszynska_bogucka_2024_family_apgar,"Only the Family APGAR is deposited at item level; PBA, CRS, MLQ, Positivity and MSPSS are subscale sums.",,2026-10-15
+lavigne_2026_misinfo_attitudes,"Item codes are the data columns (misinfo_exp1_1-5, misinfo_attitudes2_1-3); the codebook numbers the statements 9/14/10/12/13 and 9/10/12, so which statement each column holds is positional. misinfo_exp1 followed a randomised prompt (cov_prompt). Only the 1,500 panelists who reached the post-election block appear.",,2026-10-15
+piotrowski_2024_fczkt,FCZ-KT items are yes/no (0/1).,,2026-10-15
+iwai_2023_moral_identity,Studies 1 and 3 pooled (cov_study); MI3/MI4 are the reverse-worded items as answered (the depositor's _INV copies not shipped).,,2026-10-15
+iwai_2023_guilt,Three studies pooled (cov_study); respondents are distinct samples.,,2026-10-15
+reinhardt_2023_honesty_humility,Two MTurk studies pooled (cov_study); 38 + 2 respondents who declined data use at the end of the survey are dropped.,,2026-10-15
+reinhardt_2023_counterfeit_attitude,Two MTurk studies pooled (cov_study); consent-withdrawn respondents dropped.,,2026-10-15
+huang_2025_parental_phubbing,The record states missing values were mean-replaced; the resulting non-integer cells (36) are dropped.,,2026-10-15
+huang_2025_family_cohesion,Mean-replaced non-integer cells (120) dropped.,,2026-10-15
+huang_2025_core_self_evaluation,Mean-replaced non-integer cells (24) dropped.,,2026-10-15
+huang_2025_perceived_social_support,Mean-replaced non-integer cells (35) dropped.,,2026-10-15
+huang_2025_academic_burnout,Mean-replaced non-integer cells (80) dropped.,,2026-10-15
+kam_2015_disgust8,Placement experiment: each respondent answered the battery either mid-survey or at the end (cov_placement); VAN343 (monkey) is reverse-keyed per the authors' scoring and ships as stored.,,2026-10-15
+karinen_2019_immigrant_attitudes,"Ratings of a vignette immigrant whose contact and assimilation levels were manipulated (cov_contact, cov_assimilation); the authors' exclusion flag is cov_excluded, not applied.",,2026-10-15
+zhang_2025_parent_literacy_beliefs,"The deposited CSV is exactly doubled (1,006 rows = 503 respondents x 2); the record's 1,060 parents are not all present. Chinese administration; English questionnaire wording only.",,2026-10-15
+zhang_2025_child_preliteracy,Same de-duplication and language note as zhang_2025_parent_literacy_beliefs.,,2026-10-15
