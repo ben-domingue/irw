@@ -41,6 +41,52 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   11 already closed, 18 genuinely unworked. Every future re-mine batch should run
   `check_shipped.py` over its own leads file before working it.
 
+## From the #3077 zenodo_rest batch A (2026-10-18e)
+
+- [ ] **44 tables + 6 item text tables staged, nothing uploaded.** Response tables in
+  `automated_finding/irw_output/`, item text in `itemtext_output/`; response tables
+  first. 44 dictionary rows staged in `dictionary_auto.csv` and 44 `codebook_at_ingest`
+  rows. `uploaded=` is blank in `itemtext_provenance.csv` — stamp only after
+  ben-domingue confirms.
+- [ ] **Rulings wanted** (none blocks the 44):
+  - **zenodo.20550197** is a cross-sectional superset of the live
+    `gonzalezros_2025_ostes` — 200 of that table's 201 distinct OSTES response vectors
+    reappear in it. Supersede the live 202-respondent table, ship only the ~425 new
+    respondents, or skip? Not shipped either way until this is answered.
+  - **zenodo.20110159's HS block** (HS5/HS8/HS10/HS15) differs between the deposit's
+    two files for 323-417 of the 512 shared respondents. Dropped for now; the four
+    items are an adaptive-perfectionism discrepancy subscale, not the happiness scale
+    the code suggests.
+  - **Item text held on rights with the wording already in hand** — CCAS, OSTES, SWLS,
+    UWES-S, Grit, De Jong Gierveld, EQ-i, APS-R Order, Subjective Happiness, and the
+    unidentifiable 42-item social-support battery in zenodo.14200089. Each is
+    extraction-solved, so a ruling ships them without re-reading a deposit.
+- [ ] **Three deferred leads worth a follow-up pass**, all statused in
+  `leads/repos_ledger_remine_2026-10-18_zenodo_rest.csv`:
+  zenodo.15082823 (923 x ~145 items, full English stems in the headers — needs
+  splitting into one table per bundled instrument, and item text is cheap once split);
+  zenodo.14577475 (600 x ~140 labelled columns in Q-numbered blocks, needs the same);
+  zenodo.11083220 (EMA, no obvious respondent id — the N>=100 floor turns on reading
+  the linked paper, zenodo.10594764).
+- [ ] **77 leads still `todo`** in the same file, for batch B onwards.
+- [ ] **Covariate labels:** harvest run 2026-10-18 at HEAD for the 12 `.sav`-reading
+  scripts (hartmann_2026_ai_climate, chukwu_2026_help_seeking, oner_2026_pe_motivation,
+  lischer_2021_phq4, erdemir_2026_digital_burnout,
+  diazgarcia_2018_emotional_disorders, auerswald_2024_online_learning,
+  guerra_2010_teacher_resilience, sanchezmoreno_2024_ageing_loneliness,
+  hung_2026b_learning_engagement, hung_2026_parental_warmth,
+  hung_2026_short_form_video), all exit 0. Run `build.py` after the release and commit
+  `covariate_labels.csv`.
+- [ ] **Issues-page entries at publish:** `auerswald_2024_online_learning` — the
+  deposit reverses the response anchors on two of its four items (0 = "does not apply"
+  on Corona_1/3, 0 = "applies" on Corona_2/4) so that a high code always means a worse
+  experience. The numeric scale is comparable across items but the wording attached to
+  each code is not, which is a text-vs-table fact a reader needs.
+- [ ] **A PII-scan lesson worth folding into whatever scans next:** scan VALUES with an
+  email regex rather than header names, and treat pandas `StringDtype` ("str") as a
+  string dtype. Both gaps let a column of 3,130 real email addresses
+  (zenodo.10069489, `Nombredeusuario`) pass two scans before it was caught.
+
 ## From the 2026-10-16 PMC monthly re-triage (2026-10-18, #3059)
 
 - [ ] **Seven candidates want a human read** — listed in BATCH_LOG 2026-10-18 with

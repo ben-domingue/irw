@@ -19079,3 +19079,124 @@ something other than this batch -- this batch ran no discovery and touched no
 source but zenodo. They are left untracked and uncommitted here so they stay with
 whatever produced them. If that run expected to commit them from this worktree,
 they are still on disk.
+
+## 2026-10-18e — zenodo_rest batch A: the 26 highest-N leads, 44 tables (#3077)
+
+The first batch off `leads/repos_ledger_remine_2026-10-18_zenodo_rest.csv` (the
+421 zenodo `human_assistance` keys beyond the 2026-10-18c rate check, 103 of
+which passed the leads filter). Worked the 26 highest-N `todo` rows. Every one
+of the 26 now carries a status with a reason; 77 remain `todo` for batch B.
+
+**14 deposits shipped 44 tables.** No uploads — everything is staged in
+`automated_finding/irw_output/`.
+
+| deposit | tables | note |
+|---|---|---|
+| zenodo.1477084 | 6 | 595 Spanish outpatients with emotional disorders; PANAS (20 items, **longitudinal** pre/post), BDI-II 21, BAI 21, NEO-FFI-B 24, OASIS 5, PHQ-9 9 |
+| zenodo.19784064 | 6 | 582 Chinese students; FoMO, self-control, sensation seeking, impulsivity, restraint, problematic short-form-video use |
+| zenodo.22035722 | 5 | 845 US adults; AI use, AI environmental-impact awareness, climate anxiety, climate commitment, pro-climate intention |
+| zenodo.22070938 | 5 | 974 university lecturers; help-seeking, AI literacy, AI competency, academic self-efficacy, trust in AI |
+| zenodo.19784338 | 4 | the paper's **two studies merged** (727 + 669) on `cov_study`; SWLS, UWES-S, Grit, mindset |
+| zenodo.20110159 | 4 | 564 students; parental warmth (father + mother), APS-R Order, Grit, Subjective Happiness |
+| zenodo.21494885 | 4 | 617 Turkish pupils aged 10-14; PE enjoyment, PE boredom, motivation, basic needs |
+| zenodo.13926316 | 3 | 1,661 Polish respondents; technology anxiety, e-health attitudes, e-service use (dichotomous) |
+| zenodo.14200089 | 2 | 887 older adults in Spain; 42 social-support items (6 questions x 7 relationship targets), De Jong Gierveld loneliness |
+| zenodo.20779 | 1 | 710 Peruvian teachers x 71 resilience items (Callao thesis series, cc0) |
+| zenodo.10731829 | 1 | 1,918 German students, 959 answering 4 online-teaching items |
+| zenodo.13117893 | 1 | 742 Indonesian adolescents x 16 prosocial items |
+| zenodo.18595672 | 1 | 624 Turkish teachers x 10 digital-burnout items |
+| zenodo.5708255 | 1 | 458 Swiss students, PHQ-4 in German |
+
+**Item text: 6 tables**, all `data_labels`. hartmann x4 (English, from the SPSS
+variable labels, which are a shared instruction plus the item stem — the builder
+asserts the prefix and splits rather than composing); `lischer_2021_phq4`
+(administered German plus the official published English, the PHQ express grant
+being the one clear grant in this batch); `auerswald_2024_online_learning`
+(administered German plus the authors' own English, both in the deposit's labels).
+All 19 files in `itemtext_output` PASS `validate_items.R --resp-csv` and
+`audit_batch.R`, are clean on `irw-validate`, and `check_provenance.R` exits 0.
+
+**Item text HELD although the wording was in hand** — extraction is solved for
+each, so a ruling ships them cheaply: CCAS (`hartmann_2026_climate_anxiety`),
+OSTES, SWLS, UWES-S, Grit, De Jong Gierveld, EQ-i, APS-R Order, Subjective
+Happiness, and the unidentifiable 42-item social-support battery. Everything else
+not shipped is a genuine gap: the deposit carried anchors without stems
+(chukwu, oner), positional headers (syahputra), or no labels at all (duplaga,
+erdemir, guerra, diazgarcia).
+
+### Eight closed with a reason
+
+- **zenodo.10069489 — skipped_pii, and it was the batch's richest deposit.**
+  Ryff 29 items, STAI-20, BDI-II, MSPSS and UCLA over 3,135 respondents. A column
+  named `Nombredeusuario` holds 3,130 distinct real email addresses. Whole
+  candidate skipped per the blanket rule.
+- **zenodo.18023199 — rejected_content.** `Database v2.xls` is a firm x country x
+  year accounting and macro panel (CASH, TOTAL ASSETS, GDP, a country religiosity
+  index). The triage's "35,572 participants x 46 items" was the number of distinct
+  values in the CASH column — the "rank by instrument shape, not response count"
+  lesson, in its purest form.
+- **zenodo.14569979 — blocked_licence.** Its own description says the data are
+  extracts of INEC Ecuador's ENEMDU 2007 and ECV 2014 national surveys, so the
+  depositor's CC BY cannot relicense them (2026-10-09 KLIPS/TEDS ruling).
+  Structurally strong — an 11-domain 0-10 life-satisfaction battery over 18,933
+  respondents — so logged in `license_blocked_candidates.csv`.
+- **zenodo.7509975 — rejected_content.** 1,043 hotel housekeepers, but the file is
+  background characteristics plus select-all-that-apply care-arrangement and
+  domestic-task checklists; its only Likert ratings are single items on different
+  constructs.
+- **zenodo.17883387 and zenodo.4399469 — aggregate_continuous.** Both deposit only
+  scores. 17883387 is 35 columns of subscale sums plus their Z-scores; 4399469's
+  own labels read "catastrophising score time 1".
+- **zenodo.20715366 — below_n.** The 900 rows are 60 respondents x 15 days.
+- **zenodo.4058389 — rejected_content, and worth the detail.** The 14 Pre*/Post*
+  columns run 0-6 with a count-like skew, but the deposit's OWN questionnaire PDF
+  is a 5-point Likert (not at all / rather no / undecided / rather yes / yes
+  totally). The column codes are opaque German abbreviations the questionnaire does
+  not key, and 20 of 633 IDs are duplicated. Reading the deposited codebook is what
+  turned this from a 17,000-response table into a reject.
+
+### Four deferred, each with the reason
+
+- **zenodo.20550197 — overlaps live data, wants a ruling.** 627 teachers in Spain
+  and Colombia, OSTES (24 items, 1-9) plus a 51-item EQ-i, Spanish stems
+  throughout. But **200 of the 201 distinct OSTES response vectors in the live
+  `gonzalezros_2025_ostes`** (zenodo.18091343, 202 respondents, T1/T2) reappear
+  among this deposit's 618: it is a cross-sectional superset of the same project.
+  Shipping it would duplicate 202 live respondents. Options are supersede the live
+  table, ship only the ~425 new respondents, or skip.
+- **zenodo.15082823 — high value, needs instrument splitting.** 923 Chinese EFL
+  learners x ~145 items, 1-5 with -2 as the missing code, and every column header
+  is the full English stem, so item text is cheap here. It bundles the Grammar
+  Learning Strategy Inventory with other scales and the boundaries are unmarked.
+- **zenodo.14577475 — needs instrument splitting.** 600 South Asian Muslim women,
+  ~140 labelled columns in several Q-numbered blocks. Also a borderline PII
+  judgement recorded rather than buried: no listed PII class is present, but there
+  is a to-the-month migration date, immigration generation, prayer frequency and
+  free-text family history on a narrow population. Neither the date nor the free
+  text would ship.
+- **zenodo.11083220 — id column unresolved.** 665 rows x 102 columns of EMA data on
+  green-space visits. No column is an obvious respondent id and `age` is a constant
+  80, so whether 665 rows are 665 people cannot be settled without the linked paper
+  (isDescribedBy zenodo.10594764). The N>=100 floor turns on it.
+
+### Three things that cost or saved real work
+
+- **A name-based PII scan missed 3,130 email addresses twice over.** The
+  concatenated header `Nombredeusuario` has no word boundary around "nombre", so a
+  `\b`-anchored pattern does not match it; and `pyreadstat` returns pandas
+  `StringDtype` ("str") rather than `object` for SPSS string columns, so a
+  `dtype != object` guard skipped the column without reading a single value. Scan
+  VALUES with an email regex, and treat `str` as a string dtype.
+- **zenodo.20110159's two files disagree with themselves.** 512 ids appear in both
+  `Paternal.sav` and `Maternal.sav`. Every shared block is byte-identical between
+  them except HS5/HS8/HS10/HS15, which differ for 323, 360, 417 and 379 of those
+  512. The HS block is dropped and the rest merged once; stacking the two files
+  would have shipped 512 people twice.
+- **Two more rights-register code collisions, both false positives.** `TAS1-8` in
+  zenodo.22070938 is Trust in AI and `TAS1-11` in zenodo.13926316 is technology
+  anxiety, but both match the register's Toronto Alexithymia Scale row by code
+  name; `c1-c4` in zenodo.21494885 matches the CD-RISC row. Same shape as the
+  documented BNSSS/`^bpns` collision — resolve on item content, not code name.
+  Conversely the register's own patterns do NOT match the instruments that really
+  are blocked here: `^swls` misses `LS1`, `^uwes` misses `VE1`, and Grit has no
+  code pattern at all, so SWLS/UWES/Grit were caught only by reading the stems.
