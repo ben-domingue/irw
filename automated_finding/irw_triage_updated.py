@@ -761,14 +761,44 @@ _RE_BARE_NAME_LABEL = re.compile(
     r"^(?:name|names|nombre|nome|nom|navn|namn|isim|ad|ime)$", re.IGNORECASE)
 
 
+def _is_name_shaped(s: str) -> bool:
+    """One value that reads as a personal name, in ANY script.
+
+    This used to be the regex `^[A-Za-zÀ-ɏ][A-Za-zÀ-ɏ .'-]{0,40}$`, which is
+    Latin-only: every CJK, Cyrillic, Greek, Arabic, Hebrew, Thai and
+    Devanagari roster failed it and the column screened clean. figshare
+    27635013 held 455 distinct real Chinese personal names in a column
+    literally called `name` and the whole screen passed it (2026-10-18) --
+    the label tier cannot cover for that, because the label IS the bare word
+    `name`, which is exactly the case this content check exists for.
+
+    The test is "letters and combining marks, plus the few separators a name
+    carries" rather than "letters I listed". Combining marks matter: Thai and
+    Devanagari write vowels as marks (category Mn/Mc), which `isalpha()`
+    rejects, so an isalpha-only test still missed those two rosters.
+    """
+    if not s or len(s) > 41:
+        return False
+    import unicodedata
+    if not (s[0].isalpha() or unicodedata.category(s[0]) in ("Lo", "Mn", "Mc")):
+        return False
+    for c in s:
+        if c in " .'-·・‌‍":
+            continue
+        if c.isalpha() or unicodedata.category(c) in ("Mn", "Mc"):
+            continue
+        return False
+    return True
+
+
 def _looks_like_person_names(series) -> bool:
     """True when a column's values read as a list of personal names."""
     v = series.dropna().astype(str).str.strip()
     v = v[v != ""]
     if len(v) < 20:
         return False
-    # Mostly short, alphabetic, and nearly all distinct.
-    alpha = v.str.match(r"^[A-Za-zÀ-ɏ][A-Za-zÀ-ɏ .'-]{0,40}$")
+    # Mostly name-shaped, and nearly all distinct.
+    alpha = v.map(_is_name_shaped)
     if alpha.mean() < 0.8:
         return False
     if v.str.len().mean() > 30:
