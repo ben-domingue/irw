@@ -615,7 +615,8 @@ def main():
     # points were missed, and the 2026-09-22 PMC batch-2 sweep is what
     # caught it -- 16 human_assistance rows, Step 2b run by hand afterwards.
     from irw_retriage_ha import chain_step2b
-    chain_step2b(args.out, run=True)
+    chain_step2b(args.out, run=True, ledger=SEEN_DOIS_PATH, key_field="doi",
+                 update_ledger=not args.ignore_seen_dois)
     if SEARCH_FAILURES:
         print(f"WARNING: {SEARCH_FAILURES} search queries failed after all "
               f"retries -- their journal/term combinations were NOT actually "

@@ -606,7 +606,50 @@ def find_conjoints(df) -> "pd.DataFrame":
     return out[out["conj_why"].notna()].drop_duplicates()
 
 
-def chain_step2b(triage_csv, *, run=True, stream=None):
+def record_refined_flags(retriage_csv, ledger, key_field, *, key_of=None,
+                        normalize=None, stream=None):
+    """Write a retriage output's `refined_flag` back into the seen ledger.
+
+    Step 2 appends each triaged key to the ledger with its own verdict, and
+    Step 2b then refines the `human_assistance` ones -- but until 2026-10-18
+    the refinement lived only in the run's triage CSV under the gitignored
+    `runs/`. So every subsequent run skipped the key (it is in the ledger)
+    while the bucket that would have made it a lead was unreadable: 2,223
+    `human_assistance` keys accumulated that way on the repos ledger, and
+    re-mining the Dataverse share of them in 2026-10 returned 42 live tables
+    (irw#3051). The PMC ledger had already cost the same thing in irw#2203.
+
+    Returns (written, unmatched), or (0, 0) with a note when there is nothing
+    to write to.
+    """
+    import sys
+    stream = stream or sys.stderr
+    if not ledger:
+        return 0, 0
+    key_of = key_of or (lambda r: r.get(key_field, "") or "")
+    try:
+        df = pd.read_csv(retriage_csv)
+    except Exception as exc:
+        print(f"\n!! Step 2b's refined flags were NOT recorded in {ledger}: "
+              f"cannot read {retriage_csv} ({exc})", file=stream, flush=True)
+        return 0, 0
+    if "refined_flag" not in df.columns:
+        return 0, 0
+    refined = {}
+    for row in df.fillna("").to_dict("records"):
+        k, fl = key_of(row), (row.get("refined_flag") or "").strip()
+        if k and fl:
+            refined[k] = fl
+    from seen_ledger import record_refined_flags as _write
+    written, unmatched = _write(ledger, key_field, refined, normalize=normalize)
+    print(f"[step 2b] {written} refined flag(s) recorded in {ledger}"
+          + (f"; {unmatched} key(s) not in it" if unmatched else ""),
+          flush=True)
+    return written, unmatched
+
+
+def chain_step2b(triage_csv, *, run=True, stream=None, ledger=None,
+                 key_field=None, update_ledger=True):
     """Run Step 2b over `triage_csv`'s human_assistance rows, or say it wasn't.
 
     Step 2b was retitled REQUIRED on 2026-09-07 (#2076), which also gave
@@ -657,6 +700,18 @@ def chain_step2b(triage_csv, *, run=True, stream=None):
     script = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                           "irw_retriage_ha.py")
     cmd = [sys.executable, script, "--input", str(triage_csv), "--output", out]
+    # The refinement goes back into the ledger that made these keys skippable,
+    # through the same main() a hand-run uses rather than a second copy here.
+    # A run told to leave the ledger alone (--ignore-seen-keys /
+    # --ignore-seen-dois, which is how a re-mine is run) writes nothing.
+    if update_ledger and ledger:
+        cmd += ["--ledger", str(ledger), "--key-field", key_field or "doi"]
+    elif update_ledger and not ledger:
+        print("\n!! Step 2b's refined flags will NOT be recorded in a seen "
+              "ledger: this\n   entry point passed none, so they will exist "
+              "only under the gitignored\n   runs/ and the next run will skip "
+              "these keys with no record of why\n   (irw#3051). Pass "
+              "ledger=/key_field= to chain_step2b.", file=stream, flush=True)
     if not run:
         print(f"\n!! {n_ha} human_assistance row(s) are NOT yet sub-classified.",
               file=stream)
@@ -689,6 +744,14 @@ def main():
     ap.add_argument("--no-archive", action="store_true",
                     help="don't copy the human_review rows into human_review/ "
                          "(default: archive them, since runs/ is disposable)")
+    ap.add_argument("--ledger",
+                    help="seen ledger to write each row's refined_flag back "
+                         "into (repo_triage_seen_keys.csv, pmc_seen_dois.csv, "
+                         "plos_seen_dois.csv). chain_step2b passes this for "
+                         "you; on a re-mine, leave it off -- see irw#3051")
+    ap.add_argument("--key-field", default=None,
+                    help="the ledger's key column: 'key' for the repos "
+                         "ledger, 'doi' for the article ones")
     args = ap.parse_args()
 
     args.input = resolve_in_path(args.input)
@@ -718,6 +781,27 @@ def main():
         conj = find_conjoints(df)
         if not conj.empty:
             route_conjoints(conj)
+
+    # The ledger write-back. Run through chain_step2b this is already handled
+    # (and deliberately skipped on an --ignore-seen-keys re-mine); run BY HAND
+    # it has to be asked for, so say plainly when it didn't happen rather than
+    # guessing a ledger from the rows -- a refinement that exists only in
+    # runs/ is what irw#3051 and irw#2203 cost.
+    if args.ledger:
+        key_of = None
+        if args.key_field == "key":
+            from irw_batch_updated import _key, _seen_key_norm
+            key_of, norm = _key, _seen_key_norm
+        else:
+            norm = None
+        record_refined_flags(args.output, args.ledger,
+                             args.key_field or "doi", key_of=key_of,
+                             normalize=norm)
+    elif not args.no_archive:
+        print(f"!! refined_flag was NOT written back to any seen ledger: pass "
+              f"--ledger/--key-field\n   if this run's keys are in one, or "
+              f"they stay recorded only in {args.output}\n   (irw#3051). On a "
+              f"re-mine this is correct -- the ledger is left alone.\n")
 
     # ── Summary ──────────────────────────────────────────────────────────────
     counts = ha["refined_flag"].value_counts()

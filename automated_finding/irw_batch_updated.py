@@ -887,6 +887,15 @@ def _key(row: dict) -> str:
 SEEN_KEYS_PATH = "repo_triage_seen_keys.csv"
 
 
+def _seen_key_norm(key: str) -> str:
+    """The ledger's own key rule: canonicalise a DOI, pass a url/title through.
+
+    Same expression load_seen_keys() applies on read -- the ledger predates
+    canonical_doi() and still holds raw per-version keys, so Step 2b's
+    write-back has to match on the canonical form too."""
+    return canonical_doi(key) if "/" in (key or "") else (key or "")
+
+
 def load_seen_keys(path: str = SEEN_KEYS_PATH) -> set:
     if not os.path.exists(path):
         return set()
@@ -1112,7 +1121,9 @@ def main():
     # scheduled connectors, which never call this script, get the same step
     # rather than a second copy that drifts (see that docstring).
     from irw_retriage_ha import chain_step2b
-    chain_step2b(args.out, run=args.retriage)
+    chain_step2b(args.out, run=args.retriage,
+                 ledger=SEEN_KEYS_PATH, key_field="key",
+                 update_ledger=not args.ignore_seen_keys)
 
 
 if __name__ == "__main__":
