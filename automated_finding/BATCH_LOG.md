@@ -19200,3 +19200,116 @@ erdemir, guerra, diazgarcia).
   Conversely the register's own patterns do NOT match the instruments that really
   are blocked here: `^swls` misses `LS1`, `^uwes` misses `VE1`, and Grit has no
   code pattern at all, so SWLS/UWES/Grit were caught only by reading the stems.
+
+## 2026-10-18f — item 1 of #3077: the ledger's unworked `good` keys, 17 tables (#3077)
+
+Item 1 of the #3077 backlog, which is a different pool from batches A/B: the
+`good` keys of `repo_triage_seen_keys.csv` that nobody ever worked. A `good`
+flag is a triage prediction, and the early repos batches only shipped one if
+someone got to it, so 36 of the ledger's 128 sat unworked since 2026-08
+(irw#3051 measured that). The orchestrator re-triaged all 33 repo keys of
+those 36 — the other 3 are PLOS article SI DOIs and belong to the connector
+path — with `--ignore-seen-keys` and Step 2b by hand with `--no-archive`.
+**30 of 33 came back `good`**, which is the point: these were never
+rejections. 27 passed the 2026-09-20 leads filter and are the batch worked
+here, recorded in `leads/repos_ledger_goodkeys_2026-10-18_worked.csv`.
+
+A `good` flag from 2026-08 carries no N, no item count and no `data_file`, so
+the re-triage was also what made the pool workable at all.
+
+**Yield: 11 of 27 deposits shipped, 17 tables, 213,442 responses.**
+
+| deposit | tables | what |
+|---|---|---|
+| zenodo.10535997 | 2 | 1,272 Colombian floral-sector workers; a 67-item 1-5 battery (job satisfaction / stress / burnout / EI / motivation) + a 10-item financial-access block. 97,862 responses, the batch's largest |
+| zenodo.20017889 | 2 | domestic image of China, post-90s (357 x 21) and post-00s (1,672 x 25) |
+| zenodo.20734378 | 2 | 532 students in Iğdır, Türkiye: 20-item climate/environment battery + 6 party-policy evaluations |
+| mrrc83rt3b | 4 | 237 Indian healthcare workers, 2020: CAS, OCS, UWES-9, JAWS |
+| zenodo.10534309 | 1 | ISYQOL, 550 adolescents with scoliosis across 7 countries, 0-2 |
+| zenodo.17628395 | 1 | 279 Indonesian e-commerce users, gamification, 24 items |
+| zenodo.18227290 | 1 | 250 Indonesian shoppers, AR virtual try-on, UTAUT, 25 items |
+| zenodo.20783961 | 1 | 300 Indonesian Gen-Z UNIQLO app users, 21 items |
+| zenodo.5642537 | 1 | National Identity Scale under development, 300 Indonesians, 20 items |
+| zenodo.21408658 | 1 | 211 Indonesian students, digital fatigue, 21 items on a 1-6 scale |
+| zenodo.12619790 | 1 | 283 Chinese university teachers, work well-being, 15 items |
+
+All 94 tables staged in `irw_output/` (these 17 plus batch A's 77) pass
+`irw-validate --profile upload` with no failures.
+
+**Five PII skips, and one of them wants a ruling.** `10.17632/4fp3nxmcgs` is
+an otherwise clean 382 x 47 five-block AI-literacy instrument (information /
+application / collaboration / ethics / criticize, all 1-5) in which **one**
+respondent typed their own personal name into the free-text `school` field —
+376 of 382 answered with the university. The blanket rule says a real name
+anywhere disqualifies the candidate, and the harm it exists for is live here
+(a self-identified respondent beside their major, age, enrolment year and
+responses), so it is skipped. But the column would be dropped in any case and
+this is a one-cell data-entry accident rather than a name field, which is a
+class the rule has not been asked about. The other four are unambiguous:
+`Nama` columns holding 311 and 268 distinct real names, one with real GoJek
+mobile numbers, one with names plus a date-of-birth column.
+
+**A second ruling, on `zenodo.21121992`** (deferred, not skipped): its column
+2 holds a real personal name, but every value is a misspelling of one of the
+three **deposit authors** (Kartika, Saridewi, Marabel), whose names are
+published on the record — it is the enumerator tag, not a data subject. Is an
+author/enumerator self-name PII under the blanket rule, or authorship?
+
+**Two closures worth not re-deriving.** `zenodo.20118342` looked like a
+1,009-respondent network-psychometrics dataset and is entirely derived: the
+psychological blocks are fractional subscale MEANS (1.1, 1.2, ...) and the
+mathematics/reasoning blocks are correct-answer COUNTS. No item-level data
+anywhere. `zenodo.16892994` is an **instrument** deposit — its description
+says so and its only sheet is named `simulated_responses_100_siswa`.
+
+**Konuralp's knowledge items, and why they are not shipped.** `kq1`-`kq10`
+are multiple-choice climate-knowledge items stored as raw unordered option
+codes, which fail `resp`'s at-least-ordinal requirement and are
+nominal-standard territory. The codebook says "correct answers counted in
+`awareness_score`" but never gives the key, and `awareness_score` is a 0-10
+count — so the key is in principle recoverable from 10 unknowns against 532
+equations. It is not: a greedy fit reproduces 253 of 532 rows and an
+**exhaustive search over all 691,200 single-correct-option combinations finds
+no key that reproduces every row**, so the score is not a plain row-sum of
+ten single-key items. Recorded in the script so nobody repeats the search.
+
+**Item text: none shipped, and the reason is uniform.** Eight of these
+deposits carry the stems in their own column headers — several with the item
+code in the same cell, so the mapping is the source's own and parses in one
+line. But all eight were administered in Indonesian, Turkish or Chinese and
+none ships an author English version, and `itemtext_standard.md` requires the
+English in the parallel `_translated` fields for a non-English
+administration. That English would be IRW-generated, owing a
+`translation_source` and a public issues-page callout per table. Eight tables
+of that belongs in one deliberate translation round, not bolted onto a
+response batch. Two per-deposit notes:
+
+- **`zenodo.20017889` is the best candidate in the whole backlog**: it
+  deposits its questionnaire in **both** Chinese and English, so the
+  administered wording and the authors' own translation both exist — the one
+  configuration needing no IRW translation and no callout. What it needs is
+  PDF extraction and an alignment of 21 and 25 stems to the LSitem numbering.
+- **`zenodo.12619790` had both label levels checked**, which is the verdict
+  worth recording: `column_names_to_labels` gives real Chinese stems for
+  Q1-Q5 (the demographics) and returns the variable name for Q6-Q20 (every
+  shipped item), while `variable_value_labels` is populated for all 20. So
+  the file holds the response OPTIONS but not the questions, and shipping
+  option_text alone is what irw#1770 forbids when the stems are one hop away.
+
+**The duplicate pair resolved itself usefully.** `zenodo.12619790`'s Zenodo
+creator field holds only `/`. Its Mendeley twin `10.17632/txm4zf982j` — a
+separate unworked `good` key — titles the same file "Effects of Wages on the
+Well-being of University Teachers in China" and names Yang, Zimao. So the
+duplicate supplied the author name the primary record lacked, and the
+Mendeley key is statused `already_in_irw` against the shipped table.
+
+Covariate labels harvested at `c603adc2` for `yang_2024_teacher_wellbeing`
+(the batch's only `.sav` shipping coded `cov_*`; Chinese value labels for
+gender, teaching years, degree, academic title and salary band). `build.py`
+owed after the release.
+
+Seven deposits are deferred with a per-row reason in the leads file rather
+than dropped — the common shape is a Google Form export whose headers are
+full stems with no code, needing a documented derivation rule, plus one
+(`zenodo.18373473`) with banner text leaking into its data rows and one
+(`zenodo.14768211`) with two sheets whose row counts differ by one.

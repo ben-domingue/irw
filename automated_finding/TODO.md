@@ -87,6 +87,44 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   string dtype. Both gaps let a column of 3,130 real email addresses
   (zenodo.10069489, `Nombredeusuario`) pass two scans before it was caught.
 
+## From item 1 of #3077 — the ledger's unworked `good` keys (2026-10-18f)
+
+- [ ] **17 tables (213,442 responses) staged, NOT uploaded.** ben-domingue has held
+  all uploads for this round. Files in `automated_finding/irw_output/`; all 94 tables
+  there (these 17 plus batch A's 77) pass `irw-validate --profile upload` with no
+  failures. No item text accompanies them.
+- [ ] **Covariate labels:** harvested at `c603adc2` for `yang_2024_teacher_wellbeing`
+  (Chinese value labels for gender, teaching years, degree, academic title, salary
+  band). Run `python3 metadata/covariate_labels/build.py` after the release and
+  commit `covariate_labels.csv`.
+- [ ] **Two rulings wanted** (neither blocks anything):
+  - `10.17632/4fp3nxmcgs` — skipped as PII because ONE respondent typed their own
+    name into a free-text `school` field (376 of 382 gave the university). The column
+    would be dropped anyway and this is a one-cell data-entry accident, not a name
+    field; the blanket rule has not been asked about that class. An otherwise clean
+    382 x 47 five-block AI-literacy instrument if it may ship.
+  - `10.5281/zenodo.21121992` — deferred. Its name column holds the three **deposit
+    authors'** own names (the enumerator tag), published on the record, not data
+    subjects'. Author/enumerator self-name: PII under the blanket rule, or authorship?
+- [ ] **One deliberate item-text translation round** covers eight deposits in this
+  batch whose stems are already in hand in their own column headers but were
+  administered in Indonesian, Turkish or Chinese with no author English. Each would
+  need a `translation_source` and a public issues-page callout, which is why none
+  shipped here. Start with `10.5281/zenodo.20017889`: it deposits its questionnaire
+  in **both** Chinese and English, so it needs no IRW translation at all — just PDF
+  extraction and an alignment of 21 and 25 stems to the LSitem numbering.
+- [ ] **Seven deferred deposits**, each with its reason in
+  `leads/repos_ledger_goodkeys_2026-10-18_worked.csv`: zenodo.14903363, 21802067,
+  18993680, 14768211, 15547217, 18373473, 18890328 (plus 21121992 above). The common
+  shape is a Google Form export whose headers are full stems with no item code, so
+  the code needs a documented derivation rule. Two are messier: 18373473 has banner
+  text leaking into its data rows, and 14768211 has two sheets whose row counts
+  differ by one.
+- [ ] `zenodo.20734378`'s 10 climate-knowledge items are a **nominal-standard**
+  candidate, not core: raw unordered MC option codes. Do not retry recovering the
+  answer key from `awareness_score` — an exhaustive search over all 691,200
+  single-correct-option keys finds none that reproduces it (BATCH_LOG 2026-10-18f).
+
 ## From the 2026-10-16 PMC monthly re-triage (2026-10-18, #3059)
 
 - [ ] **Seven candidates want a human read** — listed in BATCH_LOG 2026-10-18 with
