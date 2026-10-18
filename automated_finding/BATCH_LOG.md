@@ -18736,10 +18736,13 @@ and the `leads/` + `human_review/` files, on the same key rule `_key()` uses.
 **69 shipped, 23 closed with a recorded reason, 36 still unworked.**
 Per-key result in `leads/repos_ledger_good_keys_2026-10-18.csv`.
 
-- **Shipped (69):** 65 carry a dictionary row (`dictionary_auto.csv` 43, core
-  Sheet 26 — the Sheet matters, so don't run this with `--no-sheets` and read
-  the lead count as final). Four more were found only by their processing
-  script, i.e. the table is live but no dictionary row records the data DOI:
+- **Shipped (69):** 65 carry a dictionary row — 64 of them in
+  `dictionary_auto.csv` and exactly **one** found only by a Sheet row. (26
+  Sheet rows match, but a key needs one hit, so the row count is not the
+  number of decisions the Sheets make: `--no-sheets` gives the same 69/36/23.
+  An earlier draft of this entry had that backwards.) Four more were found
+  only by their processing script, i.e. the table is live but no dictionary
+  row records the data DOI:
   `yang2026_efl_learner_perspective`, `tang_2026_rmet_c`,
   `mcdermott_2014_roadmaps_expert_ratings`, `political_preference_china`.
   Worth a look as a dictionary gap, separately from this issue.
@@ -18753,6 +18756,11 @@ Per-key result in `leads/repos_ledger_good_keys_2026-10-18.csv`.
   record no status — BATCH_LOG 2026-08-29b worked that pool largest-first and
   states plainly that 102 of its 110 leads had no `data/*.py`. 5 are marked
   `unworked` in `repos_leads_2026-10-07.csv`.
+
+`check_shipped.py` writes into `leads/`, so its own output would be read as
+a leads file on the next run and every `lead: unseen` key would come back
+`lead: unworked` citing that file as the evidence. Outputs are skipped by
+header shape, and two consecutive runs now give the same answer.
 
 Spot-checked three of the August leads: CC BY 4.0 questionnaire deposits
 (e-satisfaction/e-trust, service quality, a bare "Questionnaire Respondents

@@ -21,9 +21,12 @@ own key rule, against:
     python check_shipped.py --flag human_review  # or any other verdict
     python check_shipped.py --out leads/repos_ledger_good_keys_<date>.csv
 
-The Sheets exports are optional: without network, pass --no-sheets and read
-the result as dictionary_auto-only (the core Sheet held 26 of the 69 hits, so
-skipping it overstates the lead count).
+The Sheets exports are optional: without network, pass --no-sheets. Measured
+2026-10-18, it changes nothing -- of the 69 shipped keys, 64 are matched by
+dictionary_auto.csv, 4 by their processing script and exactly 1 only by a
+Sheet row. (26 Sheet ROWS match, but a key needs only one hit, so the row
+count is not the number of decisions the Sheets make.) Run with the Sheets
+when you have network anyway: the margin is one key, not zero.
 """
 from __future__ import annotations
 
@@ -123,16 +126,30 @@ def script_texts():
     return out
 
 
-def lead_rows():
-    """(file, status) per row of every leads / human_review file."""
+OWN_HEADER = ["key", "date", "status", "evidence"]
+
+
+def lead_rows(skip=()):
+    """(file, status, haystack) per row of every leads / human_review file.
+
+    This script's own output lives in `leads/`, so a second run would read
+    the previous run's file and report every `lead: unseen` key as already
+    tracked -- citing itself as the evidence. Skipped by header shape rather
+    than by name, so a renamed or older output is skipped too."""
     out = []
+    skip = {os.path.abspath(p) for p in skip if p}
     for d in ("leads", "human_review"):
         for fp in sorted(glob.glob(os.path.join(HERE, d, "*.csv"))):
+            if os.path.abspath(fp) in skip:
+                continue
             try:
                 rows = list(csv.DictReader(open(fp, encoding="utf-8",
                                                 errors="replace")))
             except Exception:
                 continue
+            with open(fp, encoding="utf-8", errors="replace") as fh:
+                if (next(csv.reader(fh), None) or []) == OWN_HEADER:
+                    continue    # one of this script's own outputs
             for r in rows:
                 out.append((os.path.basename(fp),
                             (r.get("status") or r.get("refined_flag") or "").strip(),
@@ -186,8 +203,10 @@ def main():
         raise SystemExit(f"{a.ledger}: no rows with {what}")
     print(f"{len(rows)} key(s) in {a.ledger} with {what}", flush=True)
 
+    out_path = (a.out if not a.out or os.path.isabs(a.out)
+                else os.path.join(HERE, a.out))
     dicts = dictionary_rows(sheets=not a.no_sheets)
-    scripts, leads = script_texts(), lead_rows()
+    scripts, leads = script_texts(), lead_rows(skip=(out_path,))
     print(f"against {len(dicts)} dictionary rows, {len(scripts)} scripts, "
           f"{len(leads)} leads/human_review rows\n", flush=True)
 
