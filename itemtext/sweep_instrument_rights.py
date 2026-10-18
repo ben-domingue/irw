@@ -1,4 +1,8 @@
-"""Sweep the corpus for wording from instruments ruled blocking.
+"""Sweep the corpus for wording from instruments ruled non-shipping.
+
+Non-shipping is `block` or `hold`. A block rests on a located clause or a settled
+rule; a hold records that the search for a grant came up empty and names what
+would resolve it. Neither ships, so both are swept.
 
 Ben ruled on 2026-09-08 that a blocked instrument gets a standing corpus sweep,
 rather than being rediscovered one round at a time. The PSS is why: the ruling
@@ -95,6 +99,10 @@ def load_register():
     return rows
 
 
+#: Verdicts whose wording must not be in the corpus. See the register's own
+#: vocabulary note in the irw-auto-itemtext SKILL.
+NONSHIPPING = ("block", "hold")
+
 TRANSLATED = ("item_text_translated", "option_text_translated",
               "instructions_translated", "section_prompt_translated")
 
@@ -183,9 +191,18 @@ def main():
     args = ap.parse_args()
 
     reg = load_register()
-    blocking = [r for r in reg if r["verdict"] == "block"]
-    print(f"register: {len(reg)} instruments, {len(blocking)} ruled blocking")
-    unauditable = [r["instrument"] for r in blocking if not r["clause"]]
+    # `hold` is swept alongside `block`: both mean the wording does not ship, so
+    # both need finding wherever they already reached the corpus. They differ in
+    # evidence, not in effect -- a block rests on a located clause, a hold records
+    # that the search came up empty -- which is why only blocks are audited for a
+    # transcribed clause below. A hold with no clause is correct, not a gap.
+    blocking = [r for r in reg if r["verdict"] in NONSHIPPING]
+    verdict_of = {r["instrument"]: r["verdict"] for r in blocking}
+    n_hold = sum(1 for r in blocking if r["verdict"] == "hold")
+    print(f"register: {len(reg)} instruments, {len(blocking)} ruled non-shipping "
+          f"({len(blocking) - n_hold} block, {n_hold} hold)")
+    unauditable = [r["instrument"] for r in blocking
+                   if r["verdict"] == "block" and not r["clause"]]
     if unauditable:
         print(f"WARNING: {len(unauditable)} blocking rows carry no transcribed clause and are "
               f"NOT auditable: {unauditable}")
@@ -232,7 +249,7 @@ def main():
                     hits.append((shard, tbl, fam, inst, col, sorted(items)))
                     strength = "STRONG" if len(items) >= 3 else "weak  "
                     print(f"  {strength} {shard}/{tbl} [{col}]: {len(items)} item(s) match {inst}"
-                          f" -- LEAD, read the items")
+                          f" [{verdict_of[inst]}] -- LEAD, read the items")
             if not found_any:
                 print(f"  no hits in {shard} ({args.version})")
             if skipped:
@@ -248,10 +265,11 @@ def main():
         if args.csv:
             with open(args.csv, "w", newline="") as fh:
                 w = csv.writer(fh)
-                w.writerow(["shard", "table", "family", "instrument", "column",
-                            "n_items", "items", "new_via_translated"])
+                w.writerow(["shard", "table", "family", "instrument", "verdict",
+                            "column", "n_items", "items", "new_via_translated"])
                 for s, t, fam, inst, col, items in hits:
-                    w.writerow([s, t, fam, inst, col, len(items), ";".join(items),
+                    w.writerow([s, t, fam, inst, verdict_of[inst], col, len(items),
+                                ";".join(items),
                                 col != "item_text" and (s, t, inst) not in base])
             print(f"wrote {len(hits)} hit(s) to {args.csv}")
 

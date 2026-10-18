@@ -372,12 +372,30 @@ Shipley exclusion is permanent. There is no `wording_rights` column — retired 
 
 **Check the register before deciding: `itemtext/instrument_rights_register.csv`.** One row per
 instrument — `instrument, family, verdict, rule, clause, source_url, source_sha256, fetched,
-match_item_text, match_item_code, notes`. `verdict` is `block` / `ship` / `ship_with_note` /
-`escalate`; `ship_with_note` is the LOT-R shape, where the table ships but the provenance note must
-quote the caution and say why it does not block. An instrument already carrying a verdict is
-settled and needs no new escalation — record that you applied it, do not re-derive it.
+match_item_text, match_item_code, notes`. `verdict` is `block` / `hold` / `ship` /
+`ship_with_note` / `escalate`; `ship_with_note` is the LOT-R shape, where the table ships but the
+provenance note must quote the caution and say why it does not block. An instrument already
+carrying a verdict is settled and needs no new escalation — record that you applied it, do not
+re-derive it.
 
-**A round may write a `block` row. A round may NEVER write `ship` or `ship_with_note`.**
+**`hold` vs `block`** (vocabulary added 2026-10-17 on Ben's ruling, after the 10-15 silence rule
+produced a class of rows with nowhere to live). Both mean the wording does not ship; they differ in
+what is known, not in what happens:
+
+- `block` — a restriction was **located**: a clause to quote, or a settled family rule. Auditable,
+  and `sweep_instrument_rights.py` warns about any block row with no transcribed `clause`.
+- `hold` — the search for a grant came up **empty**: a named third-party instrument, silence on
+  every route checked. Nothing to quote, so a hold carries no `clause` and the sweep's
+  clause warning does not apply to it. The row's job is to say what was searched and what would
+  resolve it, so the next round applies the hold instead of re-deriving it.
+
+Both are swept for corpus wording (`NONSHIPPING` in `sweep_instrument_rights.py`). A hold becomes a
+`block` when a restriction turns up, and becomes a `ship` only through Ben. Before 2026-10-17 holds
+were written as `block` rows whose `rule` text began "hold:", or kept outside the register
+altogether in `pending_index_notes.csv` and the round's decisions CSV, where no sweep could see
+them — that is the failure this vocabulary fixes.
+
+**A round may write a `block` or a `hold` row. A round may NEVER write `ship` or `ship_with_note`.**
 Ruled by Ben 2026-09-10, after batch_146 and batch_147 split on this in the same session:
 batch_146 found a `ship`-shaped picture for the PTCI and the SD3 and deliberately declined to
 write the rows; batch_147 wrote four, two of which (`SCCS`, the Qiu/Zheng/Wang `PANAS`) rest by
