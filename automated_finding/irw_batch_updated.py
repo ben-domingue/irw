@@ -454,6 +454,46 @@ _HOST_RESOLVERS = [
 ]
 
 
+# A candidate whose `url` is a bare doi.org link reaches none of the resolvers
+# above: _host_resolver() sees host `doi.org`, and the four URL-keyed helpers
+# (_zenodo_files, _figshare_files, _osf_files, _mendeley_files) all pull the
+# record id out of the landing URL, so they return an empty list and the row
+# is retired as `no_usable_file` -- a sticky verdict against a deposit nobody
+# looked at. _dryad_files and _dataverse_files work from the DOI instead,
+# which is why re-mining the repos ledger in 2026-10 produced leads from
+# Dataverse and nothing at all from Zenodo: all 52 Zenodo rows of the pilot
+# came back `no_usable_file`, and the one I checked afterwards
+# (10.5281/zenodo.14768211) has a CC BY 4.0 .xlsx sitting in it (irw#3051).
+#
+# Resolving the DOI to its landing page first fixes the four helpers and the
+# host dispatch in one place. One extra request, only for a row that would
+# otherwise have reached no resolver at all.
+_RE_RECORD_ID_IN_URL = re.compile(r"(?:record|records|articles|datasets|"
+                                  r"dataset\.xhtml|stash)", re.I)
+
+
+def _resolve_to_landing(url: str, doi: str) -> str:
+    """Follow a bare DOI to the repository landing page it points at.
+
+    Returns `url` unchanged when it already looks like a record page, when
+    there is no DOI to follow, or when the redirect cannot be read -- the
+    caller's existing behaviour then applies. The redirect itself is
+    _landing_url(), which the article connectors already use for the same
+    reason."""
+    if url and _RE_RECORD_ID_IN_URL.search(url):
+        return url
+    host = (urlparse(url).netloc or "").lower()
+    if url and host and "doi.org" not in host and _host_resolver(url):
+        return url          # a host we resolve, in a form we don't recognise
+    if not doi:
+        return url
+    try:
+        final = _landing_url(f"https://doi.org/{doi.strip()}")
+    except Exception:
+        return url
+    return final or url
+
+
 def _host_resolver(url: str):
     host = (urlparse(url).netloc or "").lower()
     for suffix, fn in _HOST_RESOLVERS:
@@ -504,6 +544,7 @@ def _resolve_data_files_any_order(row: dict) -> tuple:
     src = (row.get("source") or "").lower()
     url = row.get("url") or ""
     doi = row.get("doi") or ""
+    url = _resolve_to_landing(url, doi)
     try:
         # Host first, source second. `source` records which index surfaced
         # the candidate, not where the data lives, so dispatching on it
@@ -537,6 +578,19 @@ def _resolve_data_files_any_order(row: dict) -> tuple:
         # Harvard's WAF made this concrete: every blocked Dataverse candidate
         # was being retired as "no resolvable tabular file on landing page".
         raise FileListUnreachable(f"{type(e).__name__}: {str(e)[:150]}") from e
+
+    # Last resort: an institution's own figshare-powered portal
+    # (repository.uj.ac.za, and the 10.25415 / 10.48422 / ... DOI prefixes)
+    # is not a host we list, but its article ids are served by the central
+    # figshare API all the same -- checked on repository.uj.ac.za article
+    # 33093377, a CC BY 4.0 deposit the ledger had retired as
+    # no_usable_file. Only reached once host and source dispatch have both
+    # missed, and only for a URL shaped like a figshare article.
+    if re.search(r"/articles/(?:[^/?#]+/)*?\d{4,}/?(?:[?#]|$)", url):
+        try:
+            return _figshare_files(url)
+        except Exception as e:
+            raise FileListUnreachable(f"{type(e).__name__}: {str(e)[:150]}") from e
     return [], "", []
 
 
