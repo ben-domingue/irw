@@ -280,6 +280,48 @@ def cmd_leads(a):
     print("Every row carries a status; none may be left without one.")
 
 
+def cmd_shipcheck(a):
+    """Re-status a leads file's `todo` rows against what actually shipped.
+
+    The leads filter answers "does this row pass the shape and licence
+    tests". It does not answer "is this deposit missing from the IRW", and
+    those are different questions: 31 of the 2026-10-18 rate check's 49
+    `todo` rows were already live tables or already closed. A lead nobody
+    checked that way is a download budget spent on an answered question, so
+    this runs as its own step rather than living in a batch's head."""
+    sys.path.insert(0, HERE)
+    import check_shipped as cs
+    dicts = cs.dictionary_rows(sheets=not a.no_sheets)
+    scripts = cs.script_texts()
+    for path in a.leads:
+        rows = list(csv.DictReader(open(path, encoding="utf-8")))
+        if not rows:
+            continue
+        fields = list(rows[0].keys())
+        leads = cs.lead_rows(skip=(os.path.abspath(path),))
+        changed = collections.Counter()
+        for r in rows:
+            if (r.get("status") or "").strip() != "todo":
+                continue
+            st, ev = cs.classify(r["doi"] or r.get("url", ""),
+                                 cs.key_forms(r["doi"] or r.get("url", "")),
+                                 dicts, scripts, leads)
+            if st == "shipped":
+                r["status"] = f"already_in_irw: {ev}"
+                changed["already in the IRW"] += 1
+            elif st.startswith("closed:"):
+                r["status"] = f"{st[len('closed: '):]}: closed earlier in {ev}"
+                changed["closed earlier"] += 1
+            else:
+                changed["still a lead"] += 1
+        with open(path, "w", newline="", encoding="utf-8") as fh:
+            w = csv.DictWriter(fh, fieldnames=fields, lineterminator="\n")
+            w.writeheader()
+            w.writerows(rows)
+        print(f"{os.path.basename(path):55} "
+              + ", ".join(f"{n} {k}" for k, n in changed.most_common()))
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -312,6 +354,13 @@ def main():
     lp.add_argument("--retriage", help="Step 2b output (default: alongside)")
     lp.add_argument("--out", required=True)
     lp.set_defaults(func=cmd_leads)
+
+    s = sub.add_parser("shipcheck", help="re-status a leads file's todo rows "
+                                         "against the corpus -- run before "
+                                         "working any batch of leads")
+    s.add_argument("leads", nargs="+")
+    s.add_argument("--no-sheets", action="store_true")
+    s.set_defaults(func=cmd_shipcheck)
 
     a = ap.parse_args()
     a.func(a)
