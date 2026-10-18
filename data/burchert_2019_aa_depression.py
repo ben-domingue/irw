@@ -48,12 +48,36 @@ import os
 
 import pandas as pd
 
+
+# --- raw input -------------------------------------------------------------
+# Self-contained by design: the script fetches the deposit itself and caches
+# it next to this file, so it re-runs in a fresh checkout (which is what
+# metadata/covariate_labels/harvest.py does). Set BURCHERT_RAW to point at an
+# already-downloaded copy instead.
+_URL = ("https://zenodo.org/api/records/3384860/files/Dataset_14-day_AA_depression_symptoms_mood_and_PHQ-9.csv/content")
+_NAME = "zenodo_3384860__aa_depression.csv"
+
+
+def _raw():
+    override = os.environ.get("BURCHERT_RAW")
+    if override:
+        return override if os.path.isfile(override) else os.path.join(override, _NAME)
+    cache = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                         "..", "automated_finding", "runs", "raw_cache")
+    os.makedirs(cache, exist_ok=True)
+    dest = os.path.join(cache, _NAME)
+    if not os.path.exists(dest):
+        import urllib.request
+        req = urllib.request.Request(
+            _URL, headers={"User-Agent":
+                           "IRW-Finder/1.0 (ben.domingue@gmail.com)"})
+        with urllib.request.urlopen(req, timeout=300) as r, \
+                open(dest, "wb") as fh:
+            fh.write(r.read())
+    return dest
+
 OUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                        "..", "automated_finding", "irw_output")
-RAW = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..",
-                   "automated_finding", "runs", "hr5", "raw",
-                   "zenodo_3384860__Dataset_14-day_AA_depression_symptoms_"
-                   "mood_and_PHQ-9.csv")
 
 PHQ = [f"phq{i}" for i in range(1, 10)]
 MOOD = [f"q{i}" for i in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
@@ -63,7 +87,7 @@ MOOD_SCALE = {0.0, 1.0, 2.0, 3.0, 4.0}
 
 
 def convert():
-    df = pd.read_csv(RAW)
+    df = pd.read_csv(_raw())
     print(f"raw: {df.shape}")
 
     assert (df["user_id"] == df["id"]).all(), "user_id and id disagree"

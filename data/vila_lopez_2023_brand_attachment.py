@@ -59,11 +59,36 @@ import re
 import pandas as pd
 import pyreadstat
 
+
+# --- raw input -------------------------------------------------------------
+# Self-contained by design: the script fetches the deposit itself and caches
+# it next to this file, so it re-runs in a fresh checkout (which is what
+# metadata/covariate_labels/harvest.py does). Set VILALOPEZ_RAW to point at an
+# already-downloaded copy instead.
+_URL = ("https://zenodo.org/api/records/10254868/files/base%20de%20datos%20general.sav/content")
+_NAME = "zenodo_10254868__base_de_datos_general.sav"
+
+
+def _raw():
+    override = os.environ.get("VILALOPEZ_RAW")
+    if override:
+        return override if os.path.isfile(override) else os.path.join(override, _NAME)
+    cache = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                         "..", "automated_finding", "runs", "raw_cache")
+    os.makedirs(cache, exist_ok=True)
+    dest = os.path.join(cache, _NAME)
+    if not os.path.exists(dest):
+        import urllib.request
+        req = urllib.request.Request(
+            _URL, headers={"User-Agent":
+                           "IRW-Finder/1.0 (ben.domingue@gmail.com)"})
+        with urllib.request.urlopen(req, timeout=300) as r, \
+                open(dest, "wb") as fh:
+            fh.write(r.read())
+    return dest
+
 OUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                        "..", "automated_finding", "irw_output")
-RAW = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..",
-                   "automated_finding", "runs", "hr5", "raw",
-                   "zenodo_10254868__base de datos general.sav")
 
 BLOCKS = {"personality_a": ("AP", 10), "personality_b": ("PE", 15),
           "awareness": ("CA", 5), "credibility": ("CM", 6),
@@ -76,7 +101,7 @@ COVS = {"atri": "cov_attribute_condition", "CIUDAD": "cov_city",
 
 
 def convert():
-    df, meta = pyreadstat.read_sav(RAW)
+    df, meta = pyreadstat.read_sav(_raw())
     labs = meta.column_names_to_labels or {}
     vlabs = meta.variable_value_labels or {}
     print(f"raw: {df.shape}")

@@ -55,11 +55,36 @@ import pandas as pd
 import pyreadstat
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+
+# --- raw input -------------------------------------------------------------
+# Self-contained by design: the script fetches the deposit itself and caches
+# it next to this file, so it re-runs in a fresh checkout (which is what
+# metadata/covariate_labels/harvest.py does). Set FECKER_RAW to point at an
+# already-downloaded copy instead.
+_URL = ("https://zenodo.org/api/records/22014024/files/Data%20set_Mansplaining%20and%20Flow%20Experience%20in%20Alpine%20Outdoor%20Winter%20Sports.sav/content")
+_NAME = "zenodo_22014024__mansplaining.sav"
+
+
+def _raw():
+    override = os.environ.get("FECKER_RAW")
+    if override:
+        return override if os.path.isfile(override) else os.path.join(override, _NAME)
+    cache = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                         "..", "automated_finding", "runs", "raw_cache")
+    os.makedirs(cache, exist_ok=True)
+    dest = os.path.join(cache, _NAME)
+    if not os.path.exists(dest):
+        import urllib.request
+        req = urllib.request.Request(
+            _URL, headers={"User-Agent":
+                           "IRW-Finder/1.0 (ben.domingue@gmail.com)"})
+        with urllib.request.urlopen(req, timeout=300) as r, \
+                open(dest, "wb") as fh:
+            fh.write(r.read())
+    return dest
+
 OUT_DIR = os.path.join(HERE, "..", "automated_finding", "irw_output")
 TEXT_DIR = os.path.join(HERE, "..", "automated_finding", "itemtext_output")
-RAW = os.path.join(HERE, "..", "automated_finding", "runs", "hr5", "raw",
-                   "zenodo_22014024__Data set_Mansplaining and Flow "
-                   "Experience in Alpine Outdoor Winter Sports.sav")
 
 MANS = [f"v_{i}" for i in range(43, 49)]
 FLOW = [f"v_{i}" for i in range(25, 43)]
@@ -72,7 +97,7 @@ COVS = {"GENDER": "cov_gender", "SPORTM": "cov_main_sport",
 
 
 def convert():
-    df, meta = pyreadstat.read_sav(RAW)
+    df, meta = pyreadstat.read_sav(_raw())
     labs = meta.column_names_to_labels or {}
     vlabs = meta.variable_value_labels or {}
     print(f"raw: {df.shape}")

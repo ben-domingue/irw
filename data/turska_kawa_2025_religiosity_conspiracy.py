@@ -55,12 +55,36 @@ import re
 import pandas as pd
 import pyreadstat
 
+
+# --- raw input -------------------------------------------------------------
+# Self-contained by design: the script fetches the deposit itself and caches
+# it next to this file, so it re-runs in a fresh checkout (which is what
+# metadata/covariate_labels/harvest.py does). Set TURSKAKAWA_RAW to point at an
+# already-downloaded copy instead.
+_URL = ("https://zenodo.org/api/records/17234245/files/Religiosity%20and%20Conspiracy%20Beliefs%20Patterns%20of%20Relationships.sav/content")
+_NAME = "zenodo_17234245__religiosity_conspiracy.sav"
+
+
+def _raw():
+    override = os.environ.get("TURSKAKAWA_RAW")
+    if override:
+        return override if os.path.isfile(override) else os.path.join(override, _NAME)
+    cache = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                         "..", "automated_finding", "runs", "raw_cache")
+    os.makedirs(cache, exist_ok=True)
+    dest = os.path.join(cache, _NAME)
+    if not os.path.exists(dest):
+        import urllib.request
+        req = urllib.request.Request(
+            _URL, headers={"User-Agent":
+                           "IRW-Finder/1.0 (ben.domingue@gmail.com)"})
+        with urllib.request.urlopen(req, timeout=300) as r, \
+                open(dest, "wb") as fh:
+            fh.write(r.read())
+    return dest
+
 OUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                        "..", "automated_finding", "irw_output")
-RAW = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..",
-                   "automated_finding", "runs", "hr5", "raw",
-                   "zenodo_17234245__Religiosity and Conspiracy Beliefs "
-                   "Patterns of Relationships.sav")
 
 SCALE = {1.0, 2.0, 3.0, 4.0, 5.0}
 COVS = {"Sex": "cov_sex", "Age": "cov_age_group", "Edu": "cov_education",
@@ -68,7 +92,7 @@ COVS = {"Sex": "cov_sex", "Age": "cov_age_group", "Edu": "cov_education",
 
 
 def convert():
-    df, meta = pyreadstat.read_sav(RAW)
+    df, meta = pyreadstat.read_sav(_raw())
     labs = meta.column_names_to_labels or {}
     vlabs = meta.variable_value_labels or {}
     print(f"raw: {df.shape}")
