@@ -1,0 +1,293 @@
+"""Re-mine a verdict out of the seen ledger: build the candidates, then the leads.
+
+The ledger records a Step 2 verdict permanently. When the resolver or reader
+that produced that verdict is later fixed, the keys behind it are not
+rejections -- they are candidates nobody ever looked at. #3076 is the
+concrete case: `_zenodo_files()` reads the record id out of a `/records/<id>`
+landing URL, a re-mine carries only the DOI, so every zenodo row reached no
+resolver at all and was retired as `no_usable_file`. 2,223 `human_assistance`
+and 2,639 `no_usable_file` keys carry verdicts of that kind.
+
+This script is the two ends of such a re-mine. The middle is unchanged:
+
+    python remine_ledger.py candidates --source zenodo --flag human_assistance \
+        --out runs/remine_zenodo_rest.csv
+    python irw_batch_updated.py runs/remine_zenodo_rest.csv \
+        --out runs/remine_zenodo_rest_triage.csv --ignore-seen-keys --retriage
+    python remine_ledger.py leads runs/remine_zenodo_rest_triage.csv \
+        --out leads/repos_ledger_remine_<date>_zenodo_rest.csv
+
+`--ignore-seen-keys` is not optional on a re-mine: without it the run consults
+the very ledger it is re-mining and skips every key. It also suppresses the
+Step 2b write-back and the `human_review/` archive, which is correct here --
+a re-mine must not rewrite the record it is reading (#3073).
+
+Two things this adds over the ad-hoc version of the 2026-10-18 batches.
+
+**`candidates --exclude-worked` drops a key the corpus already answered.**
+A ledger verdict is not the only thing that went stale: a key can have been
+shipped, or closed for a recorded reason, by some later batch that reached it
+another way. Of the 49 leads the 2026-10-18 zenodo rate check called `todo`,
+20 were already live tables and 11 carried a recorded closure, so its real
+new-lead rate was 18/100 rather than 49/100 (#3077). `check_shipped.py`
+already knows how to answer that question against every dictionary, every
+`data/**` script and the `leads/`+`human_review/` files; this reuses it, so
+the download budget goes to keys that are actually open.
+
+**`leads` applies the 2026-09-20 filter with the NC guard.**
+`"cc-by-nc".startswith("cc-by")` is true, so a naive licence test passes NC;
+three CC BY-NC deposits reached the 2026-10-18 lead list that way before the
+filter was tightened. `nc` and `nd` are rejected explicitly here, once, rather
+than per batch script.
+
+Every row of the triage gets a status, leads and non-leads alike, because a
+batch's unworked leads are standing records (SKILL, 2026-09-20) -- that rule
+is why #3077 exists at all.
+"""
+from __future__ import annotations
+
+import argparse
+import collections
+import csv
+import os
+import random
+import re
+import sys
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+
+# DOI prefix -> the `source` name _resolve_data_files_any_order() dispatches on.
+# Host dispatch runs first and handles most rows once #3076 follows a bare DOI
+# to its landing page; `source` is the fallback, and a wrong one is what
+# retired 87 datacite rows in the 2026-08-24 run.
+PREFIX_SOURCE = {
+    "10.5281":  "zenodo",
+    "10.17632": "mendeley",
+    "10.6084":  "figshare",
+    "10.5061":  "dryad",
+    "10.17605": "osf",
+    "10.7910":  "dataverse",
+    "10.5683":  "dataverse",   # Scholars Portal / Borealis
+    "10.34894": "dataverse",   # DANS / SURF
+}
+# Keys that are not repo-resolver work at all: an article SI DOI belongs to the
+# PLOS/PMC connectors, and re-mining it from here just re-downloads an article.
+ARTICLE_PREFIXES = {"10.1371", "10.3389", "10.1016", "10.1038", "10.1080",
+                    "10.1007", "10.1177", "10.3390", "10.1111", "10.1186"}
+
+LEADS_COLS = ["status", "source", "doi", "url", "license", "n_participants",
+              "n_items", "refined_flag", "data_file", "reasons"]
+
+# The 2026-09-20 leads filter.
+OK_LICENCE = ("cc0", "cc-by", "cc-by-sa", "publicdomain", "public-domain")
+BAD_LICENCE = ("nc", "nd")
+N_MIN, N_MAX = 100, 50_000
+ITEMS_MIN, ITEMS_MAX = 8, 700
+LEAD_FLAGS = {"good", "worth_retrying", "recoverable_format", "human_review",
+              "wrong_file_selected"}
+DROP_FLAGS = {"aggregate_continuous", "not_item_response", "conj"}
+
+
+def source_of(key: str) -> str:
+    m = re.search(r"(10\.\d{4,9})/", key or "")
+    if m:
+        return PREFIX_SOURCE.get(m.group(1), "")
+    low = (key or "").lower()
+    for name in ("zenodo", "figshare", "osf.io", "dryad", "dataverse",
+                 "mendeley"):
+        if name in low:
+            return "osf" if name == "osf.io" else name
+    return ""
+
+
+def licence_ok(lic: str) -> bool:
+    """cc0 / cc-by / cc-by-sa only. NC and ND are rejected explicitly, because
+    a prefix test passes them: `"cc-by-nc".startswith("cc-by")` is true."""
+    lic = (lic or "").strip().lower().replace("_", "-").replace(" ", "-")
+    if not lic or lic == "unknown":
+        return False
+    parts = set(re.split(r"[-/]+", lic))
+    if parts & set(BAD_LICENCE):
+        return False
+    return any(lic.startswith(ok) for ok in OK_LICENCE)
+
+
+def _num(v):
+    try:
+        return float(v)
+    except (TypeError, ValueError):
+        return None
+
+
+def cmd_candidates(a):
+    path = a.ledger if os.path.isabs(a.ledger) else os.path.join(HERE, a.ledger)
+    rows = [r for r in csv.DictReader(open(path, encoding="utf-8"))
+            if r.get("flag") == a.flag]
+    if a.refined_flag:
+        rows = [r for r in rows if r.get("refined_flag") == a.refined_flag]
+    keys = [r["key"] for r in rows]
+    print(f"{len(keys)} ledger key(s) with flag={a.flag}"
+          + (f" refined_flag={a.refined_flag}" if a.refined_flag else ""))
+
+    picked, skipped = [], collections.Counter()
+    for k in keys:
+        src = source_of(k)
+        m = re.search(r"(10\.\d{4,9})/", k)
+        if m and m.group(1) in ARTICLE_PREFIXES:
+            skipped["article SI DOI -- the PLOS/PMC path, not this one"] += 1
+            continue
+        if a.source and src != a.source:
+            skipped[f"source {src or 'unrecognised'}"] += 1
+            continue
+        if not src:
+            skipped["no source could be derived from the key"] += 1
+            continue
+        picked.append({"source": src, "title": "", "url": "", "doi": k})
+
+    exclude = set()
+    for fp in a.exclude or []:
+        for r in csv.DictReader(open(fp, encoding="utf-8", errors="replace")):
+            for v in r.values():
+                for mm in re.finditer(r"10\.\d{4,9}/\S+", (v or "").lower()):
+                    exclude.add(mm.group(0).rstrip('",;)'))
+    if exclude:
+        before = len(picked)
+        picked = [p for p in picked if p["doi"].lower() not in exclude]
+        skipped["named in --exclude"] += before - len(picked)
+
+    if a.exclude_worked and picked:
+        sys.path.insert(0, HERE)
+        import check_shipped as cs
+        dicts = cs.dictionary_rows(sheets=not a.no_sheets)
+        scripts, leads = cs.script_texts(), cs.lead_rows()
+        keep = []
+        for p in picked:
+            st, ev = cs.classify(p["doi"], cs.key_forms(p["doi"]),
+                                 dicts, scripts, leads)
+            if st == "shipped":
+                skipped["already in the IRW"] += 1
+            elif st.startswith("closed:"):
+                skipped["closed earlier with a recorded reason"] += 1
+            else:
+                keep.append(p)
+        picked = keep
+
+    if a.sample and a.sample < len(picked):
+        random.Random(a.seed).shuffle(picked)
+        picked = picked[:a.sample]
+        print(f"sampled {len(picked)} (seed {a.seed})")
+
+    out = a.out if os.path.isabs(a.out) else os.path.join(HERE, a.out)
+    os.makedirs(os.path.dirname(out) or ".", exist_ok=True)
+    with open(out, "w", newline="", encoding="utf-8") as fh:
+        w = csv.DictWriter(fh, fieldnames=["source", "title", "url", "doi"],
+                           lineterminator="\n")
+        w.writeheader()
+        w.writerows(picked)
+    for why, n in skipped.most_common():
+        print(f"  skipped {n:5}  {why}")
+    print(f"\n{len(picked)} candidate(s) -> {out}")
+    print("Next: python irw_batch_updated.py %s --out runs/<name>_triage.csv "
+          "--ignore-seen-keys --retriage" % os.path.relpath(out, HERE))
+
+
+def cmd_leads(a):
+    tri = {}
+    for r in csv.DictReader(open(a.triage, encoding="utf-8")):
+        tri[(r.get("doi") or r.get("url") or "").lower()] = r
+    ha = a.retriage
+    if not ha:
+        for cand in (a.triage + ".retriage_ha.csv",
+                     os.path.splitext(a.triage)[0] + ".retriage_ha.csv"):
+            if os.path.exists(cand):
+                ha = cand
+                break
+    if ha and os.path.exists(ha):
+        for r in csv.DictReader(open(ha, encoding="utf-8")):
+            k = (r.get("doi") or r.get("url") or "").lower()
+            if k in tri:
+                tri[k]["refined_flag"] = r.get("refined_flag", "")
+                tri[k]["refined_reason"] = r.get("refined_reason", "")
+    else:
+        print("!! no retriage_ha.csv found -- Step 2b did not run, so every "
+              "human_assistance row is unclassified. Fix that before "
+              "believing this file.", file=sys.stderr)
+
+    out_rows, tally = [], collections.Counter()
+    for r in tri.values():
+        flag = (r.get("flag") or "").strip()
+        refined = (r.get("refined_flag") or "").strip()
+        eff = refined or flag
+        lic = r.get("license", "")
+        n, items = _num(r.get("n_participants")), _num(r.get("n_items"))
+        if eff in DROP_FLAGS:
+            status = f"skipped: {eff}"
+        elif not licence_ok(lic):
+            status = f"skipped: licence {lic or 'unknown'} is not cc0/cc-by/cc-by-sa"
+        elif flag not in LEAD_FLAGS and not refined:
+            status = f"skipped: {flag or 'no flag'}"
+        elif n is None or items is None:
+            status = f"deferred: N unknown until the file is read ({eff})"
+        elif not (N_MIN <= n <= N_MAX):
+            status = f"skipped: N={n:.0f} outside {N_MIN}-{N_MAX}"
+        elif not (ITEMS_MIN <= items <= ITEMS_MAX):
+            status = f"skipped: {items:.0f} items outside {ITEMS_MIN}-{ITEMS_MAX}"
+        else:
+            status = "todo"
+        tally[status.split(":")[0]] += 1
+        out_rows.append({"status": status, "source": r.get("source", ""),
+                         "doi": r.get("doi", ""), "url": r.get("url", ""),
+                         "license": lic,
+                         "n_participants": r.get("n_participants", ""),
+                         "n_items": r.get("n_items", ""),
+                         "refined_flag": refined or flag,
+                         "data_file": r.get("data_file", ""),
+                         "reasons": r.get("reasons", "")})
+    out_rows.sort(key=lambda r: (r["status"] != "todo",
+                                 -(_num(r["n_participants"]) or 0)))
+    out = a.out if os.path.isabs(a.out) else os.path.join(HERE, a.out)
+    with open(out, "w", newline="", encoding="utf-8") as fh:
+        w = csv.DictWriter(fh, fieldnames=LEADS_COLS, lineterminator="\n")
+        w.writeheader()
+        w.writerows(out_rows)
+    for st, n in tally.most_common():
+        print(f"  {st:10} {n}")
+    print(f"\n{len(out_rows)} row(s) -> {out}")
+    print("Every row carries a status; none may be left without one.")
+
+
+def main():
+    ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
+    sub = ap.add_subparsers(dest="cmd", required=True)
+
+    c = sub.add_parser("candidates", help="ledger keys -> a candidates CSV")
+    c.add_argument("--ledger", default="repo_triage_seen_keys.csv")
+    c.add_argument("--flag", default="human_assistance")
+    c.add_argument("--refined-flag")
+    c.add_argument("--source", help="keep only this source (zenodo, mendeley, "
+                                    "figshare, dryad, osf, dataverse)")
+    c.add_argument("--exclude", action="append", metavar="CSV",
+                   help="drop any key whose DOI appears in this file "
+                        "(repeatable) -- e.g. an earlier batch's leads file")
+    c.add_argument("--exclude-worked", action="store_true",
+                   help="drop keys check_shipped.py reports as shipped or "
+                        "closed; 31 of the 2026-10-18 batch's 100 were")
+    c.add_argument("--no-sheets", action="store_true",
+                   help="--exclude-worked without the Sheets exports (offline)")
+    c.add_argument("--sample", type=int)
+    c.add_argument("--seed", type=int, default=0)
+    c.add_argument("--out", required=True)
+    c.set_defaults(func=cmd_candidates)
+
+    lp = sub.add_parser("leads", help="a triage output -> a tracked leads CSV")
+    lp.add_argument("triage")
+    lp.add_argument("--retriage", help="Step 2b output (default: alongside)")
+    lp.add_argument("--out", required=True)
+    lp.set_defaults(func=cmd_leads)
+
+    a = ap.parse_args()
+    a.func(a)
+
+
+if __name__ == "__main__":
+    main()
