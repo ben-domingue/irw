@@ -1,6 +1,8 @@
 # Notes for the next scheduled pipeline run
 
-Runs as **`.github/workflows/metadata-pipeline.yml`, Mondays 13:00 UTC** -- a
+Runs as **`.github/workflows/metadata-pipeline.yml`, Mondays, Wednesdays and
+Fridays at 13:00 UTC** (Monday always; the other two are gated -- see
+`scripts/pipeline_gate.py`) -- a
 GitHub Action, not a crontab on anyone's machine, and it opens a pull request
 rather than an issue. Nothing reads this file: it is for the human reviewing
 that PR. Delete or trim entries once they have been checked off.
@@ -62,9 +64,11 @@ oldest-refreshed first, tracked in `metadata_refresh_log.csv`.
 
 What to check in the 2026-08-31 log:
 
-- A `refresh pass: N of M existing table(s)` line, then ~200 `refresh k/200`
-  lines. This adds roughly 45-60 min to stage 01. Set `refresh.per.run<-0` to
-  disable if a run needs to be quick.
+- A `refresh pass: N of M existing table(s)` line, then `refresh k/N` lines.
+  `refresh.per.run` is **400** since 2026-10-18 (was 200). The pass is
+  ~10.3 s/table measured -- 200 took 34 minutes in run 38778585737 on
+  2026-10-15, not the 45-60 min estimated here originally -- so budget ~68 min
+  for 400. Set `refresh.per.run<-0` to disable if a run needs to be quick.
 - `metadata_refresh_changes.csv` -- every stat that moved, with old and new
   values. On the smoke test the enem_2023/2024 shards were all wrong
   (`enem_2023_1mil_cn` n_items 93 -> 45, n_participants 1000000 -> 999722), so
