@@ -96,7 +96,15 @@ LEADS_COLS = ["status", "source", "doi", "url", "license", "n_participants",
 
 # The 2026-09-20 leads filter.
 OK_LICENCE = ("cc0", "cc-by", "cc-by-sa", "publicdomain", "public-domain")
+# Both the abbreviated and the spelled-out forms. OSF reports a licence by
+# NAME -- "CC-By Attribution-NonCommercial 4.0 International",
+# "CC-By Attribution-NoDerivatives 4.0" -- so a token test for {"nc","nd"}
+# alone misses it while `startswith("cc-by")` happily passes it. Three OSF
+# keys that the ledger had correctly flagged `license_restricted` came back
+# "open" from an earlier version of this check for exactly that reason.
 BAD_LICENCE = ("nc", "nd")
+BAD_LICENCE_SUBSTR = ("noncommercial", "non-commercial", "noderiv",
+                      "no-deriv", "nonderiv", "sharealike-noncommercial")
 N_MIN, N_MAX = 100, 50_000
 ITEMS_MIN, ITEMS_MAX = 8, 700
 LEAD_FLAGS = {"good", "worth_retrying", "recoverable_format", "human_review",
@@ -134,6 +142,15 @@ def licence_code(lic: str) -> str:
     return lic.replace("_", "-").replace(" ", "-")
 
 
+def is_nc(lic: str) -> bool:
+    """A non-commercial licence, abbreviated or spelled out -- not ND."""
+    lic = licence_code(lic)
+    parts = set(re.split(r"[-/]+", lic))
+    if "nd" in parts or "noderiv" in lic or "no-deriv" in lic or "nonderiv" in lic:
+        return False
+    return ("nc" in parts or "noncommercial" in lic or "non-commercial" in lic)
+
+
 def licence_ok(lic: str) -> bool:
     """cc0 / cc-by / cc-by-sa only. NC and ND are rejected explicitly, because
     a prefix test passes them: `"cc-by-nc".startswith("cc-by")` is true."""
@@ -142,6 +159,8 @@ def licence_ok(lic: str) -> bool:
         return False
     parts = set(re.split(r"[-/]+", lic))
     if parts & set(BAD_LICENCE):
+        return False
+    if any(s in lic for s in BAD_LICENCE_SUBSTR):
         return False
     return any(lic.startswith(ok) for ok in OK_LICENCE)
 
@@ -280,7 +299,22 @@ def cmd_leads(a):
         n, items = _num(r.get("n_participants")), _num(r.get("n_items"))
         if eff in DROP_FLAGS:
             status = f"skipped: {eff}"
-        elif not licence_ok(lic):
+        elif not licence_ok(lic) and is_nc(lic) and not a.allow_nc:
+            # Two rules disagree and the later one is not in the filter.
+            # `datastandard.md` "Before you start", ruled 2026-10-01: CC BY-NC
+            # and BY-NC-SA PROCEED, because `Derived_License` records the NC
+            # licence so commercial reuse can identify and exclude the table.
+            # The pipeline's leads filter is cc0/cc-by/cc-by-sa only, set
+            # 2026-09-20 -- nineteen days EARLIER -- and was never updated;
+            # #3077 restates the narrow form. So an NC row is not a licence
+            # rejection, it is a pending ruling, and it is kept visible rather
+            # than buried in a `skipped` status. `--allow-nc` treats them as
+            # leads once that ruling lands.
+            status = (f"deferred: licence {licence_code(lic)} is non-commercial"
+                      f" -- datastandard.md says proceed (2026-10-01), this"
+                      f" filter says cc0/cc-by/cc-by-sa (2026-09-20); wants a"
+                      f" ruling")
+        elif not licence_ok(lic) and not (is_nc(lic) and a.allow_nc):
             status = f"skipped: licence {lic or 'unknown'} is not cc0/cc-by/cc-by-sa"
         elif flag not in LEAD_FLAGS and not refined:
             status = f"skipped: {flag or 'no flag'}"
@@ -386,6 +420,11 @@ def main():
     lp = sub.add_parser("leads", help="a triage output -> a tracked leads CSV")
     lp.add_argument("triage")
     lp.add_argument("--retriage", help="Step 2b output (default: alongside)")
+    lp.add_argument("--allow-nc", action="store_true",
+                    help="treat CC BY-NC / BY-NC-SA as leads, per "
+                         "datastandard.md's 2026-10-01 ruling. Off by default "
+                         "because the pipeline filter and #3077 both still say "
+                         "cc0/cc-by/cc-by-sa; ND is never allowed either way")
     lp.add_argument("--out", required=True)
     lp.set_defaults(func=cmd_leads)
 
