@@ -339,11 +339,7 @@ class DepositDedupTest(unittest.TestCase):
                 "https://data.mendeley.com/datasets/7wfgz62xgs/1", ""), "")
 
 
-if __name__ == "__main__":
-    unittest.main()
-
-
-def test_a_bracketed_url_does_not_raise_invalid_ipv6(monkeypatch):
+class BracketedUrlTest(unittest.TestCase):
     """urlparse raises ValueError on a '[' in the authority (#3059).
 
     The 2026-10-16 PMC monthly run lost s41598-026-42435-w to flag `error`
@@ -351,7 +347,13 @@ def test_a_bracketed_url_does_not_raise_invalid_ipv6(monkeypatch):
     bracket into the link. An unparseable match must be skipped, and a good
     link later in the statement still found.
     """
-    from irw_batch_updated import extract_external_link
-    text = ("Data availability The data are at [https://[osf.io/abcde] and "
-            "also at https://osf.io/fghij/ .")
-    assert extract_external_link(text) == "https://osf.io/fghij/"
+
+    def test_a_bracketed_url_does_not_raise(self):
+        text = ("Data availability The data are at [https://[osf.io/abcde] "
+                "and also at https://osf.io/fghij/ .")
+        self.assertEqual(irw_batch_updated.extract_external_link(text),
+                         "https://osf.io/fghij/")
+
+
+if __name__ == "__main__":
+    unittest.main()
