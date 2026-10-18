@@ -3,6 +3,44 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## From the #3077 zenodo re-mine leads, worked (2026-10-18d)
+
+- [ ] **32 tables (1,015,867 responses) + 13 item text tables staged, nothing uploaded.**
+  `automated_finding/irw_output/` and `itemtext_output/` (response tables first). 14 of the
+  18 unworked leads shipped; see BATCH_LOG 2026-10-18d for the table list and the four
+  that did not. Stamp `uploaded=` in `itemtext_provenance.csv` only after ben-domingue
+  confirms.
+- [ ] **Issues-page entries at upload** (9 tables with a `public_note`): nguyen_2024_helia,
+  nguyen_2024_eheals, nguyen_2024_sleep_hygiene, hung_2026_growth_mindset,
+  markova_2025_gaais, markova_2025_mails (English-only wording for a non-English
+  administration), karas_2022_cetscale_pl and valenciano_2022_paqc (IRW English
+  translations), maharani_2025_ecommerce_uiux (English stems for an Indonesian
+  administration plus IRW English option labels).
+- [ ] **Covariate labels:** harvested 2026-10-18 at the data commit for
+  premkumar_2020_schizotypy, hung_2026_grit_mindset, karas_2022_cetscale,
+  valenciano_2022_paqc. Run `python3 metadata/covariate_labels/build.py` after the release
+  and commit covariate_labels.csv.
+- [ ] **`zenodo.20475015` needs a naming ruling, not work.** 860 respondents x 30 AIOAS
+  items, 1-5, clean, would be one table with `cov_study`. Deposit creators are
+  "Anonymous, Anonymous" and no published paper exists, so there is no author name. Same
+  question as the 2026-10-10 DVN/YB5PVO lead -- resolve both together.
+- [ ] **Rulings wanted** (none blocks upload): see BATCH_LOG 2026-10-18d -- the
+  white_2022 table names carrying question numbers instead of a construct; the rights
+  register's code matchers missing seven blocked instruments in one batch; blank
+  `option_text` on premkumar_2020_bpaq and hung_2026_growth_mindset; the excluded
+  `PSQIC` column in hu_2026_psqi.
+- [ ] **Widen `instrument_rights_register.csv`'s code matchers, or accept manual
+  identification.** `^swls` misses `LS1`, `^s?wemwbs` misses `D1`, `^uwes` misses
+  `VE1`/`DE7`/`AE12`, and the Grit and O-LIFE rows carry no matcher at all. All seven
+  blocked instruments in this batch were caught by hand; only `^r?cesd[_ ]?[0-9]` fired.
+- [ ] **The 30 `deferred` rows of `leads/repos_ledger_remine_2026-10-18_zenodo.csv` are
+  still unopened** -- N is blank because the file has not been parsed yet, so the leads
+  filter dropped them on the N test. They are the obvious next slice of this pool before
+  the untouched 511 zenodo keys.
+- [x] The 49 `todo` rows were re-checked against the corpus first: 20 already in the IRW,
+  11 already closed, 18 genuinely unworked. Every future re-mine batch should run
+  `check_shipped.py` over its own leads file before working it.
+
 ## From the 2026-10-16 PMC monthly re-triage (2026-10-18, #3059)
 
 - [ ] **Seven candidates want a human read** — listed in BATCH_LOG 2026-10-18 with

@@ -824,6 +824,12 @@ gothreau_2026_women_candidates,conj,https://dataverse.harvard.edu/api/access/dat
 graham_2020_undemocratic_candidates,conj,https://dataverse.harvard.edu/api/access/datafile/3654018,2026-10-09
 grahn_2025_tariffs_de,conj,none,2026-10-09
 grahn_2025_tariffs_uk,conj,none,2026-10-09
+granwald_2025_ami,core,none,2026-10-18
+granwald_2025_bis_bas,core,none,2026-10-18
+granwald_2025_cesd,core,none,2026-10-18
+granwald_2025_phq9,core,none,2026-10-18
+granwald_2025_shps,core,none,2026-10-18
+granwald_2025_zung_sds,core,none,2026-10-18
 griffin_2020_candidate_income,conj,https://dataverse.harvard.edu/api/access/datafile/3792889,2026-10-09
 grimmer_2017_credit_claiming,conj,none,2026-10-09
 gross_2026_cordon_dilemma,conj,https://dataverse.harvard.edu/api/access/datafile/13674600,2026-10-09
@@ -986,6 +992,8 @@ hou_2022_online_disinhibition,core,none,2026-10-11
 hou_2022_perspective_taking,core,none,2026-10-11
 hou_2022_trait_anger,core,none,2026-10-11
 hrbkova_2024_conversation_partners,conj,none,2026-10-08
+hu_2026_digital_nomad_wellbeing,core,none,2026-10-18
+hu_2026_psqi,core,none,2026-10-18
 huang_2025_academic_burnout,core,none,2026-10-15
 huang_2025_core_self_evaluation,core,none,2026-10-15
 huang_2025_family_cohesion,core,none,2026-10-15
@@ -1001,6 +1009,10 @@ huebscher_2018_austerity_uk,conj,https://dataverse.harvard.edu/api/access/datafi
 huentemilla_2026_digital_competence_test,core,https://zenodo.org/records/22256717/files/Gamification%20versus%20traditional%20teaching%20in%20the%20development%20of%20digital%20competence%20in%20higher%20education.xlsx,2026-10-15
 huidobro_2026_coalition_partner,conj,none,2026-10-07
 hultinrosenberg_2022_voting_rights,conj,none,2026-10-08
+hung_2026_grit,core,none,2026-10-18
+hung_2026_growth_mindset,core,none,2026-10-18
+hung_2026_swls,core,none,2026-10-18
+hung_2026_uwes_s,core,none,2026-10-18
 hutchinson_2023_household_arrangements,conj,https://dataverse.harvard.edu/api/access/datafile/6384150,2026-10-07
 huwyler_2025_side_income,conj,https://dataverse.harvard.edu/api/access/datafile/11982775,2026-10-09
 ibbett_2024_pa_compliance_scenario,conj,https://ndownloader.figshare.com/files/47553524,2026-10-14
@@ -1103,6 +1115,8 @@ kao_2021_covid_compliance,conj,https://dataverse.harvard.edu/api/access/datafile
 kao_2023_committee_gender,conj,https://dataverse.harvard.edu/api/access/datafile/6919221,2026-10-11
 kao_2024_tax_reform,conj,https://dataverse.harvard.edu/api/access/datafile/6566207,2026-10-09
 kao_2025_new_residents,conj,none,2026-10-07
+karas_2022_cetscale_en,core,none,2026-10-18
+karas_2022_cetscale_pl,core,none,2026-10-18
 karim_2026_mhl,core,https://ndownloader.figshare.com/files/69360969,2026-10-15
 karinen_2019_immigrant_attitudes,core,none,2026-10-15
 karinen_2019_sdo7,core,none,2026-10-15
@@ -1418,6 +1432,7 @@ magistro_2024_automation_fairness,conj,none,2026-10-07
 magni_2021_lgbt_candidates_nz,conj,none,2026-10-09
 magni_2021_lgbt_candidates_uk,conj,none,2026-10-09
 magni_2021_lgbt_candidates_us,conj,none,2026-10-09
+maharani_2025_ecommerce_uiux,core,https://zenodo.org/records/15628398/files/How%20UI_UX%20Design%20Influences%20-%20suppl%20material%20-%20Questionnaire%20.docx,2026-10-18
 mahlalela_2024_reed_dance_wetlands,conj,https://repository.up.ac.za/bitstreams/9ac4dad5-55b7-4db2-953e-9f1b78dd1583/download,2026-10-14
 maier_2026_supranational_de,conj,none,2026-10-12
 maier_2026_supranational_pl,conj,none,2026-10-12
@@ -1482,6 +1497,8 @@ marian_2023_gad,core,https://zenodo.org/records/22692208/files/0052_marian_codeb
 marian_2023_phq9,core,https://zenodo.org/records/22692208/files/0052_marian_codebook.xlsx,2026-10-11
 marian_2023_thoughts,core,https://zenodo.org/records/22692208/files/0052_marian_codebook.xlsx,2026-10-11
 markgraf_2024_credit_welfare,conj,https://dataverse.harvard.edu/api/access/datafile/7036219,2026-10-08
+markova_2025_gaais,core,https://zenodo.org/records/16745477/files/variable_codebook.xls,2026-10-18
+markova_2025_mails,core,https://zenodo.org/records/16745477/files/variable_codebook.xls,2026-10-18
 martin_2021_corruption,conj,https://dataverse.harvard.edu/api/access/datafile/3374460,2026-10-07
 martin_2021_minority_candidates,conj,none,2026-10-09
 martinet_2025_glyphosate_policy,conj,https://entrepot.recherche.data.gouv.fr/api/access/datafile/616391,2026-10-14
@@ -1688,6 +1705,10 @@ nguyen_2024_cpd_benefits,core,none,2026-10-09
 nguyen_2024_cpd_conditions,core,none,2026-10-09
 nguyen_2024_cpd_motivation,core,none,2026-10-09
 nguyen_2024_cpd_willingness,core,none,2026-10-09
+nguyen_2024_eheals,core,https://zenodo.org/records/13859254/files/CODEBOOK.docx,2026-10-18
+nguyen_2024_helia,core,https://zenodo.org/records/13859254/files/CODEBOOK.docx,2026-10-18
+nguyen_2024_sleep_hygiene,core,https://zenodo.org/records/13859254/files/CODEBOOK.docx,2026-10-18
+nguyen_2024_swemwbs,core,https://zenodo.org/records/13859254/files/CODEBOOK.docx,2026-10-18
 nicholson_2023_paediatric_care,conj,https://zenodo.org/api/records/6572717/files/Parent_Decision_Making_DCE_Survey.docx/content,2026-10-09
 nicholson_crotty_2021_psm,core,none,2026-10-09
 nicoli_2025_defense_union,conj,none,2026-10-07
@@ -1811,6 +1832,10 @@ prasetiyo_2026_digcompedu,core,https://data.mendeley.com/public-files/datasets/v
 prasetiyo_2026_sct,core,https://data.mendeley.com/public-files/datasets/v8k4k2km69/files/179cfa0c-6431-4738-8848-39dab510a632/file_downloaded,2026-10-15
 prasetyo_2024_massage_parlor,conj,none,2026-10-12
 prather_2020_foreign_aid_latino,conj,none,2026-10-11
+premkumar_2020_bpaq,core,none,2026-10-18
+premkumar_2020_dass21,core,none,2026-10-18
+premkumar_2020_lee,core,none,2026-10-18
+premkumar_2020_olife,core,none,2026-10-18
 prihandoko_2025_ews,core,none,2026-10-07
 prilyasinta_2026_connectedness,core,https://zenodo.org/api/records/18365911/files/Full%20questionnaire%20items%20for%20pilot%20and%20main%20Study.pdf/content,2026-10-09
 prilyasinta_2026_identity,core,https://zenodo.org/api/records/18365911/files/Full%20questionnaire%20items%20for%20pilot%20and%20main%20Study.pdf/content,2026-10-09
@@ -1829,6 +1854,8 @@ psacr003_legate_2022_avoidance,core,none,2026-10-14
 psacr003_legate_2022_manipcheck,core,none,2026-10-14
 psacr003_legate_2022_motivation,core,none,2026-10-14
 psacr003_legate_2022_reactance,core,none,2026-10-14
+purizaca_2012_parenting_styles,core,none,2026-10-18
+purizaca_2012_self_esteem,core,none,2026-10-18
 purnama_2023_attitude,core,https://datadryad.org/downloads/file_stream/2037150,2026-10-09
 purnama_2023_constraints,core,https://datadryad.org/downloads/file_stream/2037150,2026-10-09
 purnama_2023_digital_need,core,https://datadryad.org/downloads/file_stream/2037150,2026-10-09
@@ -2215,6 +2242,8 @@ rudolph_2026_ukraine_support,conj,https://dataverse.harvard.edu/api/access/dataf
 rudolph_2026_ukraine_western,conj,https://dataverse.harvard.edu/api/access/datafile/13172307,2026-10-09
 ruedin_2020_hiring_population,conj,https://dataverse.harvard.edu/api/access/datafile/3815112,2026-10-08
 ruedin_2020_hiring_students,conj,https://dataverse.harvard.edu/api/access/datafile/3815112,2026-10-08
+rumangkit_2025_streaming_resubscription,core,none,2026-10-18
+rumangkit_2026_entrepreneurial_marketing,core,none,2026-10-18
 ryvkina_2023_s1_activity_affect,core,https://osf.io/download/6dyrf/,2026-10-10
 ryvkina_2023_s1_activity_experience,core,https://osf.io/download/6dyrf/,2026-10-10
 ryvkina_2023_s1_corona_worries,core,https://osf.io/download/bgwkx/,2026-10-10
@@ -2520,6 +2549,7 @@ usmani_2024_iwe,core,https://data.mendeley.com/public-files/datasets/6xt3b959nv/
 usmani_2024_ks,core,https://data.mendeley.com/public-files/datasets/6xt3b959nv/files/ae60b205-3109-4deb-9021-dd89a6bf54d9/file_downloaded,2026-10-04
 usmani_2024_pops,core,https://data.mendeley.com/public-files/datasets/6xt3b959nv/files/ae60b205-3109-4deb-9021-dd89a6bf54d9/file_downloaded,2026-10-04
 valence_kyrolainen_2021,core,https://osf.io/download/thdxn/,2026-10-13
+valenciano_2022_paqc,core,none,2026-10-18
 valenzuela_2026_genai_news,conj,https://osf.io/download/tfbcy/,2026-10-09
 van_beveren_2019_cdi,core,none,2026-10-10
 van_beveren_2019_feelkj,core,none,2026-10-10
@@ -2617,6 +2647,8 @@ west_2020_trump_feel,core,none,2026-10-15
 west_2020_trump_qualities,core,none,2026-10-15
 west_2024_representation_men,conj,none,2026-10-11
 west_2024_representation_women,conj,none,2026-10-11
+white_2022_covid_vac_items_15_20,core,none,2026-10-18
+white_2022_covid_vac_items_1_6,core,none,2026-10-18
 wicki_2019_passenger_transport,conj,none,2026-10-08
 wicki_2020_vehicle_emissions,conj,none,2026-10-07
 wiesenthal_2026_energy_sharing,conj,https://zenodo.org/records/22829058/files/Questionnaire_Energy_Sharing_DE_EN.pdf,2026-10-09

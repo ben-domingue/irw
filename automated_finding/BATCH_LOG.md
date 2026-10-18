@@ -18863,3 +18863,219 @@ Two things worth recording:
 
 Licences across the 100: cc-by 86, cc0 8, cc-by-nc 3, cc-by-sa 1, unknown 1.
 No leads are worked here and nothing is uploaded.
+
+## 2026-10-18d — The 2026-10-18c zenodo leads, worked: 32 tables, 1,015,867 responses (#3077)
+
+The leads of 2026-10-18c, worked end to end. The first thing the batch did was
+re-check the 49 `todo` rows against the corpus, and that changed the shape of
+the job:
+
+**20 of the 49 were already in the IRW** and 11 already carried a recorded
+closure, so only **18 were genuinely unworked**. The 20 are dictionary rows
+written by the 2026-10-05/07/08/14/15 batches (atik_2026_climate_anxiety,
+tornoczky_2026_dass21, usc_2026_gasa, caldwell_2026_mbi_gs,
+aznar_diaz_2026_digital_competence, tavolacci_2017_audit,
+rodriguezsantero_2024_sats36, mairean_2023_dogmatism, li_2026_coach_leadership,
+quintanella_2025_sme_ai_readiness, makkiyah_2023_srl, suyato_2023_cbq,
+vogel_2024_citizen_attributes_s2, prilyasinta_2026_identity,
+gonzalezros_2025_ostes, garciabacete_2023_victimization, bekteshi_2024_eri_effort,
+calla_2010_self_esteem, arista_2010_achievement_motivation,
+vasquez_2013_reading_comprehension); the 11 closures are 9 `rejected_content`
+and 2 `skipped_pii` from the 2026-08-27/28 leads files and the human_review
+re-check batches 3 and 4.
+
+**So the batch's new-lead rate against the corpus is 18/100, not 49/100.** This
+is the same `good`-is-not-yield gap #3051 was opened for, one layer down: the
+2026-10-18c filter asked "does this row pass the shape and licence tests", which
+is not the same question as "is this deposit missing from the IRW". A re-mine of
+a ledger whose keys earlier batches partly worked has to ask the second one.
+`check_shipped.py` already answers it and was simply not run on that file. The
+leads file now carries `already_in_irw: <dictionary row>` or the earlier closure
+per row, so the next reader starts from the answer.
+
+**14 of the 18 shipped: 32 tables, 1,015,867 responses.** All CC BY 4.0 or CC0,
+verified on each Zenodo record page (not from the triage row).
+
+| table(s) | deposit | N x items |
+|---|---|---|
+| white_2022_covid_vac_items_1_6, _15_20 | zenodo.6875363 | 23,000 x 6 each |
+| nguyen_2024_helia, _swemwbs, _sleep_hygiene, _eheals | zenodo.13859254 | 9,775 x 33/7/3/8 |
+| karas_2022_cetscale_pl, _en | zenodo.7394999 | 1,083 / 724 x 17 |
+| markova_2025_gaais, _mails | zenodo.16745477 | 1,006 x 20 / 34 |
+| granwald_2025_phq9, _cesd, _zung_sds, _bis_bas, _ami, _shps | zenodo.17514160 | 528 x 9/20/20/24/18/14 |
+| hung_2026_swls, _uwes_s, _grit, _growth_mindset | zenodo.18113188 | 522 x 5/17/11/6 |
+| hu_2026_digital_nomad_wellbeing, _psqi | zenodo.18639119 | 539 x 58 / 12 |
+| premkumar_2020_lee, _olife, _bpaq, _dass21 | zenodo.3956134 | 104 x 38/104/29/21 |
+| purizaca_2012_parenting_styles, _self_esteem | zenodo.22592 | 100 x 45 / 16 |
+| valenciano_2022_paqc | zenodo.10608935 | 430 x 7 |
+| rumangkit_2025_streaming_resubscription | zenodo.16008605 | 222 x 44 |
+| maharani_2025_ecommerce_uiux | zenodo.15628398 | 201 x 27 |
+| rumangkit_2026_entrepreneurial_marketing | zenodo.18448609 | 150 x 27 |
+
+**The four that did not ship**, each with the reason in the leads file:
+
+- **zenodo.20198899 — PII, and it was the batch's one `good` flag.** The
+  workbook's `Nama` column holds real full respondent names, 271 distinct over
+  321 rows. Whole candidate skipped. Worth recording that the triage's single
+  strongest verdict in 100 keys was the one that had to be thrown away on a
+  column a human had to open the file to see.
+- **zenodo.21034710 — rejected on content.** 119 x 19, CC BY, licence and N both
+  fine. But 14 rows are exact duplicates of another row's full 19-item vector
+  (105 distinct vectors over 119 rows), the 5-item wellbeing block runs to
+  r = -0.89 against the 9-item technology-use block, and the 1-5 midpoint is
+  used once in 2,261 cells and never at all in 13 of the 19 items. Any one of
+  those is survivable; together they say the matrix was not collected the way it
+  is deposited.
+- **zenodo.22585 and zenodo.164836 — aggregate only.** Subscale percentage
+  scores and category bands in the first; LSRP totals, 30 NEO-PI facet scores,
+  EPQ/UPPS dimensions and trust-game outcomes in the second. No item-level
+  responses in either.
+
+**One deferred for a ruling, not for work: zenodo.20475015.** 860 respondents
+(EFA 344 + CFA_IRT 516) on the same 30 AIOAS items, 1-5, clean, and it would
+collapse to one table with `cov_study`. It has no author name: the deposit's
+creators are literally "Anonymous, Anonymous" and no published paper for the
+AI-Induced Occupational Anxiety Scale exists to take a name from. That is the
+same open question as the 2026-10-10 DVN/YB5PVO lead, so it waits on that
+ruling rather than being named by guesswork.
+
+### Item text: 13 tables shipped, 7 withheld on rights
+
+The cheap-gate window was unusually wide here -- six of the fourteen deposits
+ship a codebook, a questionnaire or full SPSS variable labels. 13 tables shipped:
+nguyen_2024_helia / _sleep_hygiene / _eheals (the deposit's CODEBOOK.docx, stems
+and anchors), hung_2026_growth_mindset (SPSS variable labels),
+premkumar_2020_lee / _bpaq / _dass21 (SPSS variable labels),
+karas_2022_cetscale_pl / _en (variable + value labels, both administered
+languages), markova_2025_gaais / _mails (the deposit's variable_codebook.xls),
+valenciano_2022_paqc (Spanish variable + value labels),
+maharani_2025_ecommerce_uiux (the deposit's questionnaire docx, which prints each
+stem beside its item code). All `mapping_basis=data_labels`, so NOT_NEEDED on the
+Step 5b route, with a row each in `mapping_verification.csv` naming the file and
+the label level that did the tying. Gates: 13/13 PASS on
+`validate_items.R --resp-csv`, 13/13 PASS with no anomalies on `audit_batch.R`,
+clean on `irw-validate`, and `check_provenance.R` exits 0.
+
+**Seven tables had their wording in hand and ship none of it, because
+`instrument_rights_register.csv` blocks the instrument:** hung_2026_swls (SWLS),
+hung_2026_uwes_s (UWES), hung_2026_grit (GRIT family), nguyen_2024_swemwbs
+(WEMWBS), premkumar_2020_olife (O-LIFE), hu_2026_psqi (PSQI),
+granwald_2025_shps (SHAPS).
+
+**A gap worth fixing: the register's code matchers do not catch these
+spellings.** `^swls` does not match `LS1`, `^s?wemwbs` does not match `D1`,
+`^uwes` does not match `VE1`/`DE7`/`AE12`, and the two Grit rows and the O-LIFE
+row carry no matcher at all. Every one of these seven was caught by identifying
+the instrument by hand from the deposit, not by the register firing. The one
+register warning that did fire in the whole batch was `ship_with_note` on
+granwald_2025_cesd, from `^r?cesd[_ ]?[0-9]`. A deposit that names its items by
+subscale rather than by instrument is invisible to a code-prefix matcher, which
+is most of them.
+
+The O-LIFE call is a judgment: the register's row is the 42-item Short O-LIFE and
+premkumar uses the 104-item full form, same originator, and the row's own rule
+says the reservation is INFERRED. Blocked under the standing "be conservative
+where the holder's own terms are unclear" (Ben, 2026-09-09).
+
+### Decisions and things found in the data
+
+- **Small blocks stay in one file.** rumangkit_2025 (ten blocks),
+  rumangkit_2026 (nine 3-item blocks), maharani_2025 (seven), hu_2026 (thirteen)
+  each ship as one table, under the reading already applied to jo_2023 /
+  diredja_2025 / fang_2026 / xu_2026.
+- **rumangkit_2026 was checked for fabrication and passed.** 26 of its 27 items
+  concentrate over 60% on one value inside a 3-5 range, which is what prompted
+  the check. Within-block r = 0.48 against between-block r = 0.045, no
+  straightlining, no duplicated response vectors: a real block structure in a
+  ceiling-heavy sample. The low overall mean inter-item r of 0.08 was dilution by
+  324 between-block pairs, not noise.
+- **karas is two tables, not one.** Same CETSCALE, same 7-point scale, two
+  samples -- but the Polish and British adaptations put different statements at
+  the same item code (PL `P2.1` is "buying products made abroad is wrong" where
+  EN `P2.1` is "British people should always buy British-made products"), so
+  collapsing on `cov_study` would have joined unrelated items. This is the case
+  the collapse rule's "confirmed identical administration" test is for.
+- **Three isolated out-of-range cells blanked**, each isolated to one item, which
+  is the data-entry-slip signature: `B1` = 7 on a 0-3 PSQI item (zenodo.18639119),
+  `ED45` = 5 on a 1-4 parenting item (zenodo.22592), and two impossible free-text
+  ages (-16 in both karas files, 123 in the Polish one).
+- **Three colliding or non-unique person keys replaced by the row index**:
+  valenciano's `Codigo` (430 rows, 363 distinct initials-plus-school codes, two
+  used three times), premkumar's `participant_order` (14 and 16 each twice), and
+  markova's `id` (1,003 distinct over 1,006 rows). Dropping valenciano's `Codigo`
+  also disposes of the only column in that file that reads back towards a named
+  child.
+- **Two source-label defects repaired deterministically, both asserted in code.**
+  The premkumar DASS value-3 label is its own value-2 label with the real anchor
+  concatenated on the end; the builder asserts the prefix and strips it. The
+  maharani questionnaire codes one row `AOV2` where the workbook heads the column
+  `AVO2`; the item text ships under the workbook's spelling, unambiguous because
+  AOV1/AOV3/AOV4 match by name.
+- **One anchor set rejected rather than shipped.** zenodo.18113188 attaches a
+  single generic frequency set ("The action or event never happens" ... "every
+  time") identically to all 40 of its variables, including the agree/disagree
+  instruments. hung_2026_growth_mindset therefore ships stems with blank
+  `option_text` rather than wording respondents cannot have read.
+- **markova MAILS item 24 is headed with the bare name `MAILS`**, unusable as a
+  code beside `MAILSI2f_23` and `MAILSI2f_25`. Renamed `MAILSI2f_24` on both the
+  response and item text sides.
+- **white_2022 ships two blocks and asserts no construct.** The deposit's second
+  file is analysis code with no labels, and the 2022 questionnaire is only in the
+  paywalled Nature Medicine SI (no PMC record). The 2021 wave IS open
+  (PMC9247969, CC BY) and publishes its questionnaire, in which questions 1-6 are
+  the six-item COVID-VAC agreement block -- but that instrument has 31 questions
+  where the 2022 file has 25, so the numbering demonstrably changed and the 2021
+  stems must not be assumed onto these columns. The tables are keyed by the
+  deposit's own question numbers for that reason. The q15-q20 grouping is the
+  authors' own: their SAS file tabulates exactly those six together.
+- **170 source columns skipped across the batch, each with a printed reason.**
+  Every script calls a `books()` helper that asserts every source column is
+  either shipped or named in a skip bucket, so a silent drop fails the build
+  rather than scrolling past.
+
+### Staged
+
+32 rows in `dictionary_auto.csv` and 32 in `codebook_at_ingest.csv` (five give a
+real codebook file, the rest `none`); 13 rows each in
+`automated_finding/itemtext_provenance.csv` and `itemtext/mapping_verification.csv`;
+`leads/repos_ledger_remine_2026-10-18_zenodo.csv` now carries a status with a
+reason for all 100 rows and none is `unworked`. Covariate labels harvested at the
+data commit for the four `.sav`-reading scripts that ship coded covariates
+(premkumar_2020_schizotypy, hung_2026_grit_mindset, karas_2022_cetscale,
+valenciano_2022_paqc); `build.py` is owed after the release.
+
+Nothing is uploaded.
+
+**Issues-page entries owed at upload** (nine tables with a `public_note`):
+nguyen_2024_helia, nguyen_2024_eheals, nguyen_2024_sleep_hygiene,
+hung_2026_growth_mindset, markova_2025_gaais, markova_2025_mails (all five:
+English-only wording for a non-English administration), karas_2022_cetscale_pl
+and valenciano_2022_paqc (IRW English translations), maharani_2025_ecommerce_uiux
+(English stems for an Indonesian administration, IRW English option labels, and
+four unlabeled midpoints).
+
+**Rulings wanted** (none blocks upload):
+
+- `zenodo.20475015`, the anonymous AIOAS deposit -- 860 x 30 and clean, held only
+  for want of an author name. Same question as DVN/YB5PVO.
+- `white_2022_covid_vac_items_1_6` / `_15_20`: table names that carry the
+  deposit's question numbers instead of a construct, chosen because the 2022
+  questionnaire is paywalled and the 2021 numbering does not transfer.
+- The rights register's code matchers missing seven blocked instruments in one
+  batch (above). Worth either widening the matchers or accepting that
+  identification stays manual.
+- `premkumar_2020_bpaq` ships blank `option_text` (the Buss items carry no value
+  labels), as does `hung_2026_growth_mindset` by the decision above -- the same
+  shape as the makkiyah/zhang/wunn blank-option_text question from 2026-10-10.
+- `hu_2026_psqi` excludes the deposit's `PSQIC` column: a 0-3 code matching
+  neither the raw-item nor the component naming pattern, so it could not be told
+  apart from a component and was left out rather than guessed at.
+
+### Note for whoever is mining the other sources
+
+Four untracked `human_review/human_review_{dataverse,figshare,mendeley,osf}_2026-10-18.csv`
+files appeared in this worktree between 07:29 and 07:39 on 2026-10-18, written by
+something other than this batch -- this batch ran no discovery and touched no
+source but zenodo. They are left untracked and uncommitted here so they stay with
+whatever produced them. If that run expected to commit them from this worktree,
+they are still on disk.
