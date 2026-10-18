@@ -192,7 +192,15 @@ def cmd_candidates(a):
     print(f"{len(keys)} ledger key(s) with flag={a.flag}"
           + (f" refined_flag={a.refined_flag}" if a.refined_flag else ""))
 
+    # Dedupe on the canonical DOI. The ledger holds a Mendeley deposit under
+    # every version it was seen as -- 10.17632/p622ddkyxf, .1 and .2 are three
+    # keys and one deposit -- and without this the pool hands a fork the same
+    # file several times. `canonical_doi` already collapses them (it is what
+    # `load_seen_keys` canonicalises with); this pool build simply never
+    # called it. 9 of the 22 mendeley blank-flag leads were redundant.
+    from irw_discover_updated import canonical_doi
     picked, skipped = [], collections.Counter()
+    seen_canon = {}
     for k in keys:
         src = source_of(k)
         m = re.search(r"(10\.\d{4,9})/", k)
@@ -226,6 +234,11 @@ def cmd_candidates(a):
         # file on landing page", which is the #3076 verdict all over again
         # on a deposit that is public and holds an .xlsx. Put each form in
         # the column that dispatch actually reads.
+        canon = canonical_doi(k.lower())
+        if canon in seen_canon:
+            skipped[f"another version of the same deposit is already in the pool"] += 1
+            continue
+        seen_canon[canon] = k
         if k.lower().startswith(("http://", "https://")):
             picked.append({"source": src, "title": "", "url": k, "doi": ""})
         else:
