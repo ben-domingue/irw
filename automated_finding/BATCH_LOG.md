@@ -19313,3 +19313,173 @@ than dropped — the common shape is a Google Form export whose headers are
 full stems with no code, needing a documented derivation rule, plus one
 (`zenodo.18373473`) with banner text leaking into its data rows and one
 (`zenodo.14768211`) with two sheets whose row counts differ by one.
+
+## 2026-10-18g — The whole repos ledger characterised: 3,601 keys re-mined, four resolver bugs (#3077)
+
+The other half of the day's #3077 work: not the leads (2026-10-18d/e/f did
+those) but the ledger itself. Every one of `repo_triage_seen_keys.csv`'s 6,549
+keys now sits in a slice that has been re-mined, measured as dead, shown
+unreachable, or handed to the article connectors. Nothing uploaded; the ledger
+was never written (`--ignore-seen-keys` throughout, Step 2b by hand with
+`--no-archive` after the first chain).
+
+### The headline: the two buckets are not alike, and the difference is measurable
+
+| bucket | keys re-mined | leads | rate |
+|---|---|---|---|
+| `human_assistance`, repo sources | 702 | 210 | **~30%** (18% net of already-worked, see below) |
+| `no_usable_file`, every non-article source | 2,311 | 10 | **0.4%** |
+| blank flag (pre-#2222, verdict never persisted) | 557 | in flight | — |
+| dryad, both buckets | 171 | 0 | unreachable |
+| Harvard dataverse `no_usable_file` | 293 | 0 | 67 blocked by WAF |
+| article-SI DOIs | 553 | — | PLOS/PMC path, not this one |
+
+**Do not reopen `no_usable_file`.** The resolver demonstrably ran on it -- the
+rows name the extensions they checked -- and the 61 zenodo rows that had come
+back HTTP 429 rather than a verdict resolved cleanly on retry and genuinely
+found nothing. Those verdicts are about the deposits. That is exactly what the
+`human_assistance` verdicts were not, and the contrast is the point: it is why
+the two had to be measured apart rather than reopened together, as item 4 of
+#3077 sketched. The `seen_ledger.py drop --flag no_usable_file` it proposes
+would cost a day of downloads for ten leads.
+
+### A `good` flag is not yield, and neither is a leads row
+
+The 2026-10-18c rate check reported 49 leads of 100 keys. Re-checked against
+the corpus: **20 were already live tables and 11 carried a recorded closure**,
+so its real new-lead rate was **18/100**. The leads filter asks whether a row
+passes the shape and licence tests; it does not ask whether the deposit is
+already in the IRW, and the two come apart badly. `check_shipped.py` answers
+the second question and had not been run on that file.
+
+Across the remaining pools the same check removed 111 of 532 zenodo keys and 9
+more in dvinst/osf. It is now `remine_ledger.py shipcheck`, a step run over a
+leads file before anything is worked, rather than something to remember. One
+caveat found doing it: for OSF **all five** already-answered keys matched only
+via a Google Sheet, so `--no-sheets` is safe for DOI-keyed sources and not for
+URL-keyed ones.
+
+### Four resolver bugs, each one a sticky wrong verdict
+
+1. **OSF keys are URLs, not DOIs.** Every OSF ledger key is
+   `https://osf.io/<guid>/`. Putting it in the candidate file's `doi` column
+   leaves `url` empty, so `_resolve_to_landing` has nothing to follow,
+   `_host_resolver` sees `""`, and `_osf_files("")` fails its guid regex and
+   returns no files -- all 16 osf rows came back "no resolvable tabular file
+   on landing page" against nodes that are public and hold data (osf.io/ph7mj
+   a 485KB .xlsx, osf.io/6xrw7 six files including a codebook, osf.io/d3qht an
+   opendata.sav). Mine, not the pipeline's; fixed in `remine_ledger.py`.
+2. **The figshare fallthrough guard rejected every versioned portal URL.**
+   `_figshare_files` gained a trailing-version group on 2026-09-16; the guard
+   deciding whether to CALL it did not. So
+   `/articles/dataset/<title>/30234109/1` -- the shape every institutional
+   portal serves -- failed the `\d{4,}`-anchored-at-end test. Proven on
+   orda.shef.ac.uk, figshare.manchester.ac.uk and drum.um.edu.mt: guard False,
+   extractor correct. **The one URL the 2026-10-18b fallthrough was tested
+   against, repository.uj.ac.za/.../33093377, carries no version segment,
+   which is why the gap survived its own test.** The Manchester deposit now
+   resolves a CC BY 4.0 .sav of 831,907 bytes.
+3. **Six Dataverse installations carry their own DOI prefix** (10.17026 DANS
+   SSH, 10.15139 Odum, 10.11588 heiDATA, 10.7939 Alberta, 10.21950, 10.25338
+   UC Davis). A blank source reaches no resolver for these. Mapped;
+   10.15139/s3/mwz1eo returns 3 files under CC0 and 10.17026/dans-zp9-wwm7
+   four under CC BY, against "no usable file" an hour earlier. The figshare
+   portals keep the blank source deliberately -- for them the fallthrough is
+   the right path, and no prefix map would ever be complete.
+4. **A Dataverse installation may report its licence as HTML.** heiDATA
+   answers `Licensed under a <a href='.../licenses/by/4.0/'>...`, which no
+   prefix test passes, so a CC BY deposit read as `unknown` and was skipped.
+   `licence_code()` reads the code out of the deed URL. NC and ND still
+   rejected -- tested on by-nc, by-nc-sa and by-nd in that HTML form.
+
+Validated on the other side of the same run: the corrected portal pools
+resolve 8 of 12 and 6 of 8 where the same keys returned all-`no_usable_file`.
+That is the difference between a resolver bug and a verdict.
+
+### Also fixed: the PII screen read labels, not values
+
+`10.5281/zenodo.10069489` -- Ryff 29, STAI-20, BDI-II, MSPSS and UCLA over
+3,135 respondents, the richest deposit in batch A -- carries **3,130 real
+email addresses** in a column named `Nombredeusuario`. The screen missed it
+twice: "nombre de usuario" with the spaces stripped has no word boundary for
+the Spanish pattern, `_RE_BARE_NAME_LABEL` wants the label to be exactly
+"nombre", nothing in the header said "email" -- and separately a
+`dtype == object` guard skipped the column without reading a value, because
+`pyreadstat` returns pandas `StringDtype`. A label pattern only catches a
+label someone anticipated. `_holds_email_addresses` now reads values over both
+dtypes, firing on >=5 hits AND >=20% of non-empty values so one institutional
+address quoted in a free-text answer is not a roster. Email only, deliberately:
+a phone or national ID written as digits is not separable from a legitimate
+numeric covariate without a locale.
+
+22 tests added for this and the figshare guard, which is the same failure
+shape. `test_figshare_portal_versioned_url` asserts the guard and extractor
+patterns stay identical, because their drifting apart WAS the bug. 206 pass.
+
+### Items 2 and 3 of #3077 are one queue, not two
+
+Pool (b) `resp_scale_mixed` rebuilt on batches 2-4's stated filters: 120 rows,
+matching the ~121 predicted. **38 of them are already open `todo` leads in the
+ledger re-mine files** -- the same deposits reached by two routes, since a key
+can sit in the ledger's `human_assistance` bucket and in the `human_review`
+archive at once. Six were inside a fork's batch as this was written. They are
+deferred in `leads/human_review_recheck_batch5_2026-10-18.csv` naming the file
+that owns each, so the ledger leads file stays the single place each gets
+worked. The issue's "~121 rows" and "183 open leads" describe **one queue of
+291**, not two of 304.
+
+### 616 ledger keys carry no verdict at all
+
+Not mentioned in #3077. They were written before irw#2222 added the flag
+column, so the key was recorded and the verdict was not -- the #3051 defect in
+its purest form, and every run since skips them. The current code appends
+`(key, flag)`, so this is a closed wound with a backlog behind it. 557 survive
+the already-answered check (portals 157 incl. PsychArchives 10.23668,
+dataverse 124, figshare 101, mendeley 59, osf 58, zenodo 57, dryad 1) and are
+triaging as this is written. A blank row is a mixture of verdicts, so the
+expected rate sits between the two measured above.
+
+### Rights register: 154 of 243 block rows can match nothing
+
+Both leads forks reported catching blocked instruments "only by reading
+stems", naming SWLS, UWES, WEMWBS, Grit and O-LIFE. Checked register-wide, the
+gap is far wider:
+
+| `block` rows (243) | |
+|---|---|
+| both surfaces | 36 |
+| item text only -- invisible on a response table | 6 |
+| item code only -- invisible to the sweep and to `__items` | 47 |
+| **inert: no text patterns, no code pattern** | **154** |
+
+`rights.py` turns an empty cell into `stems=[]` / `code=None`, and the sweep's
+item-code surface is an explicit stub, so a row with no text patterns is
+invisible to it whatever its code says. Among the inert: NEO-FFI, MBI-HSS,
+PSQI, SCL-90-R, HADS, BDI-II, the Insomnia Severity Index, PERMA-Profiler and
+the whole Ages & Stages family. The forks' five are instances -- UWES has
+`^uwes` and zero text patterns, WEMWBS the same, Grit x2 and O-LIFE have
+neither column filled.
+
+Reported, not fixed: `itemtext/check_register_coverage.py`. Writing a matcher
+is a rights ruling with real false-positive cost (`TAS` is both Trust-in-AI
+and technology anxiety; `alkouri_2025_icu_stressors` matches the PSS by name
+without being the PSS), and the register's own rule 2 is that a miss is not an
+all-clear. Which of the 154 get patterns is Ben's call.
+
+### New machinery
+
+`automated_finding/remine_ledger.py` -- the two ends of a ledger re-mine,
+`candidates` and `leads`, plus `shipcheck`. The 2026-10-18 batches built both
+ad hoc in `runs/`, so neither survived the batch. The 2026-09-20 leads filter
+lives here once now, with the NC guard, instead of being rewritten per batch.
+
+### One side effect, cleaned up
+
+The first chain ran Step 2b via `--retriage`, which also archives
+`human_review` rows -- forbidden on a re-mine (#3073), and `irw_batch_updated.py`
+exposes no `--no-archive`. Six new `human_review/*_2026-10-18.csv` files, 112
+rows, nothing overwritten. Committing them would have made 112 DOIs permanent
+discovery exclusions with nobody having reviewed them, while the same rows
+already carry a status in the tracked leads files. Ben ruled: moved to
+`runs/human_review_archive_side_effect/`. Later chains call
+`irw_retriage_ha.py --no-archive` directly, which is what the rule says.

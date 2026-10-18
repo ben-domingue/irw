@@ -3,6 +3,86 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## From the #3077 ledger characterisation (2026-10-18g)
+
+Nothing here is uploaded. Ben held PR #3089 and all uploads deliberately on
+2026-10-18; 94 tables and 19 item text tables sit staged in
+`automated_finding/irw_output/` and `itemtext_output/`.
+
+### Decisions wanted (none blocks anything already staged)
+
+- [ ] **Do not reopen `no_usable_file`** — recommendation, needs a yes. 2,311
+  keys re-mined returned 10 leads (0.4%) against `human_assistance`'s 18%, and
+  the resolver demonstrably ran. Item 4 of #3077 proposes
+  `seen_ledger.py drop --flag no_usable_file`; it would cost a day of
+  downloads for ten leads. Say no and the issue's item 4 closes.
+- [ ] **Rights register: 154 of 243 `block` rows can match nothing** on either
+  surface (`itemtext/check_register_coverage.py` for the breakdown; includes
+  NEO-FFI, MBI-HSS, PSQI, SCL-90-R, HADS, BDI-II, ISI, PERMA-Profiler, the
+  Ages & Stages family). Which get matchers is a rights ruling, so it is
+  yours. Deliberately not fixed here: a matcher has real false-positive cost.
+- [ ] **Two PII edge cases from the `good`-keys batch**, both skipped/deferred
+  under the blanket rule, both arguably outside its intent — see BATCH_LOG
+  2026-10-18f: `10.17632/4fp3nxmcgs` (one respondent of 382 typed their own
+  name into a free-text `school` field; 382x47 otherwise clean) and
+  `zenodo.21121992` (the name column holds the three deposit authors' own
+  names, published on the record — authorship, not a data subject).
+- [ ] **`zenodo.20550197`** duplicates live data: 200 of its 201 distinct
+  OSTES response vectors already exist in `gonzalezros_2025_ostes`. Supersede
+  the live table, ship only the ~425 new respondents, or skip?
+- [ ] **`zenodo.20475015`** (860x30 AIOAS, clean) held only because the
+  creators are literally "Anonymous, Anonymous" with no paper, so there is no
+  author name for the file-naming convention. Same question as DVN/YB5PVO;
+  one ruling settles both.
+
+### Leads still to work
+
+One queue of 291, not two — items 2 and 3 of #3077 overlap by 38 rows, which
+are deferred in batch 5's file naming the leads file that owns them.
+
+- [ ] **77** zenodo_rest, `leads/repos_ledger_remine_2026-10-18_zenodo_rest.csv`
+      (batch A took the 26 highest-N)
+- [ ] **46** mendeley, `leads/repos_ledger_remine_2026-10-18_mendeley.csv`
+- [ ] **25** human_review batch 5, `leads/human_review_recheck_batch5_2026-10-18.csv`
+      (+57 pool remainder, statused `unworked`)
+- [ ] **20** figshare, **13** dataverse installations, **1** osf
+- [ ] **16** deferred rows across batches A/f needing a derivation rule
+      (Google Form exports whose headers are stems with no item code)
+- [ ] **10** from the `no_usable_file` sweep — low priority, that is the whole
+      0.4%
+- [ ] **557** blank-flag keys triaging as of 2026-10-18g; leads file owed
+
+### Item text
+
+- [ ] **Eight deposits from the `good`-keys batch carry stems in their own
+  headers but were administered in Indonesian, Turkish or Chinese with no
+  author English.** Shipping them means IRW-generated translations, each owing
+  a `translation_source` and a public issues-page callout. That is one
+  deliberate round, not a bolt-on. **`zenodo.20017889` is the best candidate
+  in the backlog** — it deposits its questionnaire in both Chinese and
+  English, so it needs no IRW translation at all.
+- [ ] Issues-page entries owed at publish for the 2026-10-18d/e/f batches —
+  per-batch lists in those BATCH_LOG entries.
+
+### Owed after the next release
+
+- [ ] `metadata/covariate_labels/build.py` and commit `covariate_labels.csv`.
+  `harvest.py --commit HEAD` has been run three times today (batch d, batch A
+  at HEAD for 12 `.sav` scripts, batch f at `c603adc2` for
+  `yang_2024_teacher_wellbeing`).
+
+### Housekeeping
+
+- [ ] `irw_batch_updated.py` exposes no `--no-archive`, so `--retriage` on a
+  re-mine archives `human_review` rows the rule forbids (#3073). Either add
+  the flag or make `--ignore-seen-keys` imply it. Today's workaround was to
+  call `irw_retriage_ha.py --no-archive` directly, and the 112 rows the first
+  chain wrote are parked in
+  `runs/human_review_archive_side_effect/` (gitignored) rather than deleted.
+- [ ] `itemtext/sweep_instrument_rights.py` compiles `_code_re` (line 98) and
+  never uses it; its item-code surface is an explicit stub. Harmless, but it
+  reads as coverage that does not exist.
+
 ## From the #3077 zenodo re-mine leads, worked (2026-10-18d)
 
 - [ ] **32 tables (1,015,867 responses) + 13 item text tables staged, nothing uploaded.**
