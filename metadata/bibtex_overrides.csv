@@ -32,3 +32,15 @@ doi,BibTex,source_url,reason
   doi = {10.1007/978-3-642-83943-6_17},
   url = {https://doi.org/10.1007/978-3-642-83943-6_17}
 }",https://api.crossref.org/works/10.1007/978-3-642-83943-6_17,"irw#2513 (balance_mokken): dormant until the dictionary row gains this DOI. The cached citation, generated without a DOI, gives the chapter title as 'Problem solving strategies and the linear logistic test model'; Crossref's title is 'The Linear Logistic Test Model and heterogeneity of cognitive strategies' (van Maanen, Been & Sijtsma, pp. 267-287, in Roskam (Ed.), Mathematical Psychology in Progress, Springer 1989). A DOI-less cached citation is never refetched by the #2301 check, so without this row adding the DOI would leave the wrong title in place. Verified against Crossref 2026-09-28."
+10.5281/zenodo.15420092,"@misc{https://doi.org/10.5281/zenodo.15420092,
+  doi = {10.5281/ZENODO.15420092},
+  url = {https://zenodo.org/doi/10.5281/zenodo.15420092},
+  author = {Chen, Jianyu and Mzek, Tareq and Piras, Simone},
+  keywords = {underutilised crops, consumer preferences, farmer preferences, discrete choice experiment, public good game, food behaviour, farmer behaviour},
+  language = {en},
+  title = {Dataset of choice experiment surveys assessing consumers' and farmers' preferences for five underutilised crops in different European countries},
+  publisher = {Zenodo},
+  year = {2025},
+  copyright = {Creative Commons Attribution 4.0 International}
+}
+",https://zenodo.org/records/15420092,"Zenodo returns the depositor-entered all-caps surname (""CHEN, Jianyu""), which renders in running text as ""CHEN, Mzek, and Piras 2025"". Set to ordinary case; the name, spelling and author order are unchanged, and the ORCID record (0000-0003-4222-8620) confirms the given/family split. Applies to the six chen_2025_* conjoint tables that share this deposit DOI. Verified against the Zenodo record 2026-10-17."
