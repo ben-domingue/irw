@@ -69,7 +69,23 @@ PREFIX_SOURCE = {
     "10.7910":  "dataverse",
     "10.5683":  "dataverse",   # Scholars Portal / Borealis
     "10.34894": "dataverse",   # DANS / SURF
+    # Dataverse installations with their own prefix. These must carry
+    # source="dataverse": a blank source reaches no resolver, because
+    # _host_resolver does not list their hosts and dispatch then has nothing
+    # to fall through to. Verified by following each DOI -- every one lands on
+    # /dataset.xhtml?persistentId=, which is _dataverse_files' input.
+    "10.17026": "dataverse",   # DANS SSH datastations.nl
+    "10.15139": "dataverse",   # Odum / dataverse.unc.edu
+    "10.11588": "dataverse",   # heiDATA, Heidelberg
+    "10.7939":  "dataverse",   # University of Alberta
+    "10.21950": "dataverse",
+    "10.25338": "dataverse",   # UC Davis
 }
+# Institutional figshare portals: their article ids are served by the central
+# figshare API, so a blank source is right -- dispatch falls through on the
+# figshare-shaped URL. Listed only to document that the omission is deliberate:
+#   10.15131 Sheffield, 10.48420 Manchester, 10.60809 Malta, 10.5522 UCL,
+#   10.25403, 10.23642 USN, 10.4121 4TU, 10.17028 Loughborough, 10.25415 UJ.
 # Keys that are not repo-resolver work at all: an article SI DOI belongs to the
 # PLOS/PMC connectors, and re-mining it from here just re-downloads an article.
 ARTICLE_PREFIXES = {"10.1371", "10.3389", "10.1016", "10.1038", "10.1080",
@@ -100,10 +116,28 @@ def source_of(key: str) -> str:
     return ""
 
 
+def licence_code(lic: str) -> str:
+    """Normalise a repository's licence string to a bare code.
+
+    A Dataverse installation may report the licence as a block of HTML -- the
+    heiDATA record for 10.11588/data/kpy585 answers "Licensed under a <a
+    href='http://creativecommons.org/licenses/by/4.0/'>Creative Commons
+    Attribution 4.0 ...". A prefix test on that is false, so a CC BY deposit
+    reads as `unknown` and is skipped. Pull the code out of the deed URL when
+    one is there, since that is the unambiguous part."""
+    lic = (lic or "").strip().lower()
+    m = re.search(r"creativecommons\.org/(?:licenses|publicdomain)/"
+                  r"([a-z0-9-]+)", lic)
+    if m:
+        code = m.group(1)
+        return "cc0" if code in ("zero", "mark") else f"cc-{code}"
+    return lic.replace("_", "-").replace(" ", "-")
+
+
 def licence_ok(lic: str) -> bool:
     """cc0 / cc-by / cc-by-sa only. NC and ND are rejected explicitly, because
     a prefix test passes them: `"cc-by-nc".startswith("cc-by")` is true."""
-    lic = (lic or "").strip().lower().replace("_", "-").replace(" ", "-")
+    lic = licence_code(lic)
     if not lic or lic == "unknown":
         return False
     parts = set(re.split(r"[-/]+", lic))
