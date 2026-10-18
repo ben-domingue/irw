@@ -711,6 +711,55 @@ def _looks_like_person_names(series) -> bool:
     return v.str.split().str.len().mean() <= 4
 
 
+# A value-level screen, because the label-level one is defeated by any label
+# the patterns above did not anticipate. 10.5281/zenodo.10069489 (2026-10-18)
+# carried 3,130 real email addresses in a column named `Nombredeusuario`:
+# "nombre de usuario" with the spaces stripped, so there is no word boundary
+# around "nombre" and the Spanish pattern (which wants "nombre completo" or
+# "nombre del participante") could not fire, while `_RE_BARE_NAME_LABEL` wants
+# the label to be exactly "nombre". Nothing in the header said "email" at all.
+# An address is unmistakable in the VALUES whatever the column is called, so
+# this reads them instead of guessing from the label.
+_RE_EMAIL_VALUE = re.compile(r"[^\s@,;]+@[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?"
+                             r"(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?)*"
+                             r"\.[A-Za-z]{2,}")
+
+
+def _is_stringish(series) -> bool:
+    """Whether a column holds strings.
+
+    `dtype != object` is not that test: `pyreadstat` returns pandas
+    `StringDtype` for an SPSS string column, so an `== object` guard skipped
+    the Nombredeusuario column without reading a single value. This was the
+    second half of that miss."""
+    try:
+        from pandas.api.types import is_string_dtype, is_object_dtype
+        return bool(is_object_dtype(series) or is_string_dtype(series))
+    except Exception:
+        return series.dtype == object
+
+
+def _holds_email_addresses(series) -> bool:
+    """True when a column's values contain real email addresses.
+
+    Deliberately email-only. An address has an unambiguous shape, so the false
+    positive rate is near zero even on free-text answers; a phone or national
+    ID written as digits is not distinguishable from a legitimate numeric
+    covariate without a locale, and guessing there would start rejecting good
+    candidates. Phone/ID detection stays label-based above."""
+    if not _is_stringish(series):
+        return False
+    v = series.dropna().astype(str).str.strip()
+    v = v[v != ""]
+    if len(v) < 5:
+        return False
+    sample = v.head(2000)
+    hits = sample.str.contains(_RE_EMAIL_VALUE, regex=True, na=False)
+    # A handful could be an institutional contact quoted inside a free-text
+    # answer; a column OF addresses is a roster.
+    return bool(hits.sum() >= 5 and hits.mean() >= 0.2)
+
+
 _MAX_WEAK_WORDS = 5
 # Second guard for the weak tier. The word-count test alone does not survive
 # SPSS name mangling: a stripped item stem ("Ioftenfeelanxiouscheckingmyemail")
@@ -736,6 +785,10 @@ def screen_for_pii(columns, df=None) -> list[str]:
         elif (df is not None and _RE_BARE_NAME_LABEL.match(label.strip())
               and _looks_like_person_names(df[c])):
             hits.append(label)
+        elif df is not None and _holds_email_addresses(df[c]):
+            # Label-independent: whatever the column is called, a block of
+            # email addresses in it is a direct identifier.
+            hits.append(f"{label} (email addresses in the values)")
     return hits
 
 
