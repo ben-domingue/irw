@@ -252,6 +252,61 @@ uploads are held by Ben.
   4-item table each. A ruling on whether 4-item tables are worth shipping
   would close both.
 
+## From the #3077 blank-flag batch, non-dataverse (2026-10-18l)
+
+29 tables / 220,891 responses staged in `automated_finding/irw_output/`;
+nothing uploaded. All 35 leads carry a status. No item text shipped.
+
+### Decisions wanted
+
+- [ ] **PII screen, fourth gap: `_looks_like_person_names` is Latin-alphabet
+  only.** `figshare 27635013` has 455 distinct real Chinese names in a column
+  called `name` and screened CLEAN. The regex `^[A-Za-zÀ-ɏ]...`
+  fails every CJK, Cyrillic, Greek, Arabic, Hebrew, Thai and Devanagari
+  roster, and the bare label `name` is exactly the case the content check
+  exists for. Skipped by hand. `irw_triage_updated.py` is the parent
+  session's file, so not fixed here.
+- [ ] **IGD ruling — the biggest prize left in #3077.** `figshare 25123145` is
+  **8,662 respondents x 27 binary items with a deposited 27x9 q-matrix**. The
+  register blocks IGDS9-SF (9 items); this is a 27-item pool across the 9
+  DSM-5 criteria and the deposit ships **no item wording**, so it cannot be
+  shown not to be the blocked instrument. Deferred on that alone.
+- [ ] **Technology Readiness Index** (figshare 20071678, deferred): no
+  register row and commercially licensed. Wants a ruling before that deposit
+  is worked.
+- [ ] 10 new rows in `itemtext/register_gaps_2026-10-18.csv` (now 40, of which
+  22 have no register row at all), including FoMO under `TF`/`SF` whose item
+  text **would have shipped** on a clean `rights.py` run, and SDRS-5 whose
+  matcher columns are both empty.
+
+### Leads still to work from this slice
+
+- [ ] **48 `noflag_dataverse` leads** — untouched, a separate batch.
+- [ ] **15 deferred**, each naming its blocking fact in the leads file. Best
+  first: `figshare 30178486` (961 + 152, English stems in labels, Body
+  Appreciation Scale has no register row); `mendeley 5ywv53yyd3` (306 x 117,
+  nine clean blocks); `figshare 31077850` (499 x 86, Spanish COVID survey,
+  every stem in its labels, confirmed NOT HLS-EU-Q16); `figshare 13951619`
+  (344, two 30-item blocks behind an offset header).
+
+### Owed after the next release
+
+- [ ] `metadata/covariate_labels/build.py` and commit `covariate_labels.csv`.
+  `harvest.py --commit HEAD` run for contreras_valdez_2026,
+  deleon_villagran_2026, meule_2019, le_2026 and hung_2026d — all five exit 0,
+  so none of them reads a gitignored cache.
+
+### Item text owed on a ruling
+
+- [ ] **All five `hung_2026d` tables** have their item text held: FoMO and
+  SDRS-5 are register block rows and the 16-item burnout battery could not be
+  pinned to a row. Both label levels carry full English stems, so all five are
+  extraction-solved and ship the day a ruling lands.
+- [ ] `deleon_villagran_2026_tmms24` and `contreras_valdez_2026_*`: full
+  Spanish stems in the variable labels, no author English, so the English
+  would be IRW-generated and owes a `translation_source` plus an issues-page
+  callout. Same deferred round as the eight deposits in 2026-10-18f.
+
 ## From the #3077 ledger characterisation (2026-10-18g)
 
 Nothing here is uploaded. Ben held PR #3089 and all uploads deliberately on

@@ -20131,3 +20131,101 @@ an IRW translation (`osorio_2025_*` Spanish, `chaple_gil_2021_gad7` Spanish,
 `turska_kawa_2025_*` Polish), and two carry no label of either level
 (`burchert_2019_*`, `wang_2026_pmpu`). Each script's header says which levels
 were checked and where the text actually is.
+
+## 2026-10-18l — blank-flag batch, non-dataverse: 29 tables, 220,891 responses (#3077)
+
+The 35 non-dataverse leads of the 616 ledger keys that carry no verdict at all
+(written before irw#2222 added the flag column: the key was recorded and the
+verdict was not). Not rejections -- nobody had looked. Leads files:
+`leads/repos_ledger_remine_2026-10-18_noflag_{figshare,mendeley,zenodo,portals}.csv`,
+every one of the 35 rows now carrying a status and a reason.
+
+**12 of 35 deposits shipped, 29 tables, 220,891 responses.** All 334 tables in
+`irw_output/` pass `irw-validate --profile upload` with zero failures.
+
+| deposit | tables | what |
+|---|---|---|
+| figshare 32964434 | 1 | **1,938** students, 19-item Copenhagen Burnout Inventory (CBI-S). 36,822 resp |
+| mendeley zvdf6893rk | 4 | 1,558 students -- teacher responsibility 13, AI-supported learning 4, peer collaboration 4, wellbeing 11 |
+| mendeley gw4wcb9rft | 3 | 1,052 Mexican respondents -- CPQ 10, PERCI 8, RSES 8 |
+| zenodo 22240547 | 5 | 681 adolescents -- FoMO 12, learning anxiety 7, procrastination 9, academic burnout 16, SDRS-5 |
+| zenodo 20692950 | 3 | 637 students, 3 countries -- emotional competence 21, entrepreneurial intention 3, self-efficacy 5 |
+| mendeley yymf9dbr6h | 1 | 588, Indonesian Relationship-Contingent Self-Esteem |
+| mendeley p622ddkyxf | 1 | 491, TMMS-24 Spanish |
+| mendeley 3x3bzfdmbs | 1 | 453 patients, BIS-15 |
+| mendeley sk9mpyt4tv | 1 | 442, EAR 10 items |
+| mendeley wc9yc4z77r | 4 | 364 tech employees -- satisfaction/happiness/resilience/performance |
+| figshare 29209748 | 1 | 333, 32 opaque Q-coded items (2026-10-15 opaque-block ruling) |
+| figshare 30467291 | 4 | 276 Vietnamese L2 learners, engagement x4 |
+
+### A fourth PII surface: the bare-name content check is Latin-only
+
+`figshare 27635013` carries **455 distinct real Chinese personal names** in a
+column literally called `name`, over 460 rows — and the three-surface screen
+returned **clean**. `_looks_like_person_names` tests
+`^[A-Za-zÀ-ɏ][A-Za-zÀ-ɏ .'-]{0,40}$`, so CJK (and Cyrillic,
+Greek, Arabic, Hebrew, Thai, Devanagari) names fail the `alpha.mean() < 0.8`
+gate and the column is judged not-a-roster. The label tier cannot help: the
+label is the bare word `name`, which is exactly the case the content check
+exists for. Whole-candidate skip, by hand.
+
+That is the same shape as the two gaps already closed today — a surface the
+screen reads but a population it cannot see. Not fixed here:
+`irw_triage_updated.py` belongs to the parent session.
+
+### Rights: the register's matchers missed four more, two of them verbatim
+
+Found by reading stems, not codes. `register_gaps_2026-10-18.csv` grows
+30 → 40, now 22 instruments with no register row at all.
+
+- **FoMO under `TF`/`SF`** (zenodo 22240547). Register BLOCKS the Przybylski
+  FoMOs; matcher is `^fomo_[0-9]+$|^FOMO[0-9]` with zero text patterns, so a
+  trait/state coding is invisible. `TF1` is Przybylski item 1 verbatim. Its
+  item text **would have shipped** on a clean `rights.py` run — the third such
+  case today after the UWES and the WHO-5.
+- **SDRS-5 under `SDRS`** (same deposit). Register blocks it with **both**
+  matcher columns empty.
+- **EDE-Q** correctly caught by its own matcher (`EDEQ|edeq`) — worth recording
+  that the register does work when a row is filled in.
+- No row at all: CBI-S, BIS-15, TMMS-24, CPQ, PERCI, Lay's General
+  Procrastination Scale, the Technology Readiness Index, and the 27-item IGD
+  criterion pool.
+
+Following `hung_2026b_learning_engagement`, the five `hung_2026d` response
+tables ship and **all five have their item text held** — the wording is the
+restricted part, and both label levels carry full English stems, so every one
+is extraction-solved and ships immediately on a ruling.
+
+### Three rejected on content, one aggregate-only
+
+The top two leads by response count were both the shape the brief warned about:
+
+- **zenodo 22208810** (8,994 x 22): `df_model_denizli_TAM.csv` — "TAM" is
+  Turkish agricultural land monitoring, not Technology Acceptance Model. NDVI,
+  soil pH, slope, rainfall, SPEI drought indices, UTM coordinates; the rows are
+  remote-sensing grid cells.
+- **figshare 33170813** (46,336 x 23): an epidemiological cohort extract with
+  dementia and work-status outcomes.
+- **portals 10.7294/27018331** (6,500 x 26): 96 files of bootstrap and
+  sensitivity output for an organ-donation model.
+- **sussex 6106700**: 180 x 11 of composite scores; its labels read
+  "Well-being at time 1 (1-5 scale)".
+
+### The figshare 500s were rate limiting, not dead deposits
+
+Eight of the 35 returned HTTP 500 when resolved in one burst. All eight answer
+200 from `api.figshare.com/v2/articles/<id>` with valid `ndownloader` URLs, and
+all eight fetched cleanly when paced with backoff. Worth knowing before a
+future batch writes off a figshare row on a bare status code — the same lesson
+as `feedback_figshare_202_not_dead`, one status code along.
+
+### 15 deferred, each naming the blocking fact
+
+Best remaining, in order: **figshare 30178486** (961 + 152, English stems in
+labels, Body Appreciation Scale has no register row — genuinely shippable
+next); **mendeley 5ywv53yyd3** (306 x 117, nine clean blocks, Ukraine climate
+anxiety); **figshare 31077850** (499 x 86, study-authored Spanish COVID survey
+with every stem in its labels, confirmed NOT HLS-EU); **figshare 13951619**
+(344, two clean 30-item blocks behind an offset header). The largest, **figshare
+25123145** (8,662 x 27 binary with a deposited q-matrix), is blocked on the IGD
+ruling above and is the biggest single prize left in #3077.
