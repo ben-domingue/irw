@@ -873,13 +873,35 @@ def _alternative_reads(content: bytes, filename: str):
         except Exception:
             continue
         if isinstance(df.columns, pd.MultiIndex):
-            df.columns = ["_".join(str(p) for p in col
-                                   if not str(p).startswith("Unnamed:")).strip("_")
-                          or f"col{i}" for i, col in enumerate(df.columns)]
+            flat = ["_".join(str(p) for p in col
+                             if not str(p).startswith("Unnamed:")).strip("_")
+                    or f"col{i}" for i, col in enumerate(df.columns)]
+            # A banner row spanning the sheet flattens to the SAME name in
+            # every column ("Project: Eating Disorder Knowledge ..." in
+            # peerj.5868), and a duplicate label makes df[c] a frame, not a
+            # Series -- which crashed _small_int_block with "arg must be a
+            # list, tuple, 1-d array, or Series" and lost 4 cc-by candidates
+            # of the 2026-10-16 PMC monthly run as flag `error`.
+            df.columns = _dedupe_labels(flat)
         if header is None:
             df.columns = [f"V{i + 1}" for i in range(df.shape[1])]
         if df.shape[1] >= 3 and len(df) >= 10:
             yield how, _stringify_columns(df)
+
+
+def _dedupe_labels(names: list) -> list:
+    """Unique column labels, pandas' own read_csv convention ("x", "x.1")."""
+    seen: dict = {}
+    out = []
+    for n in names:
+        k = str(n)
+        if k in seen:
+            seen[k] += 1
+            k = f"{k}.{seen[k]}"
+        else:
+            seen[k] = 0
+        out.append(k)
+    return out
 
 
 def _small_int_block(df: pd.DataFrame) -> list:
@@ -893,6 +915,8 @@ def _small_int_block(df: pd.DataFrame) -> list:
     too -- so the caller names the columns for a person to judge.
     """
     groups: dict = {}
+    if df.columns.duplicated().any():      # a real duplicate header, not a banner
+        df = df.set_axis(_dedupe_labels(list(df.columns)), axis=1)
     for c in df.columns:
         v = pd.to_numeric(df[c], errors="coerce")
         present = v.dropna()

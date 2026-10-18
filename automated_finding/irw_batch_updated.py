@@ -304,14 +304,35 @@ def _dataverse_files(url: str, doi: str) -> tuple:
     return out, license_raw, oversized
 
 
+def _osf_api_get(url: str, params: dict) -> "requests.Response":
+    """GET an api.osf.io endpoint, retrying the transient refusals.
+
+    OSF answers 503 "Service Temporarily Unavailable" (and 429) under load,
+    and a single attempt turns a live deposit into a sticky `download_failed`
+    that reads exactly like a dead link: 10 of the 13 download_failed rows in
+    the 2026-10-16 PMC monthly run were this, all of them cc-by OSF deposits
+    that were never actually read.
+    """
+    for attempt in range(4):
+        r = requests.get(url, params=params, headers=UA, timeout=30)
+        # getattr: the existing test doubles are minimal response stubs.
+        status = getattr(r, "status_code", 200)
+        if status not in (429, 500, 502, 503, 504) or attempt == 3:
+            r.raise_for_status()
+            return r
+        time.sleep(float(getattr(r, "headers", {}).get("Retry-After") or 0)
+                   or 5 * (attempt + 1))
+    r.raise_for_status()
+    return r
+
+
 def _osf_license(kind: str, guid: str, params: dict) -> str:
     """The licence NAME. The relationship alone gives an opaque id
     ("563c1cf88c5e4a3877f9e96a"), which no licence check can read: a CC-BY
     node and an NC one look the same, and both fall through as unknown.
     ?embed=license returns the name in the same request."""
-    r = requests.get(f"https://api.osf.io/v2/{kind}/{guid}/",
-                     params={**params, "embed": "license"}, headers=UA, timeout=30)
-    r.raise_for_status()
+    r = _osf_api_get(f"https://api.osf.io/v2/{kind}/{guid}/",
+                     {**params, "embed": "license"})
     data = r.json().get("data", {})
     embedded = ((data.get("embeds", {}) or {}).get("license", {}) or {}).get("data", {}) or {}
     name = (embedded.get("attributes", {}) or {}).get("name", "")
@@ -339,9 +360,7 @@ def _osf_files(url: str) -> tuple:
     # A guid names a project, a registration or a single file, and
     # /v2/nodes/ answers 404 for the other two ("osf.io/3h5a7" in PLOS
     # 10.1371/journal.pone.0233137 is one .xlsx). Ask what it is first.
-    r = requests.get(f"https://api.osf.io/v2/guids/{guid}/",
-                     params=params, headers=UA, timeout=30)
-    r.raise_for_status()
+    r = _osf_api_get(f"https://api.osf.io/v2/guids/{guid}/", params)
     data = r.json().get("data", {})
     kind = data.get("type", "")
     out, oversized = [], []
@@ -365,8 +384,7 @@ def _osf_files(url: str) -> tuple:
     # Data usually sits one or two folders down ("Data/", "Study 1/raw/");
     # reading only the storage root reported those nodes as no_usable_file.
     def walk(listing_url, depth):
-        r2 = requests.get(listing_url, params=params, headers=UA, timeout=30)
-        r2.raise_for_status()
+        r2 = _osf_api_get(listing_url, params)
         for f in r2.json().get("data", []):
             attrs = f.get("attributes", {})
             name = attrs.get("name", "")
