@@ -246,7 +246,27 @@ cache.max.age.days<-30
 ##entirely. The log is deliberately a SEPARATE file from cache.file: the fetch
 ##cache expires after cache.max.age.days (it exists to resume an interrupted
 ##run), whereas the refresh log must persist indefinitely to drive the rotation.
-refresh.per.run<-200
+##
+##400, not 200, from 2026-10-18. The rotation only started persisting across
+##Actions runs on 2026-10-02 (#2785 -- before that each run lost the log and
+##re-refreshed the same slice), so as of 2026-10-18 it had covered 1,000 of
+##5,880 rows and 4,881 tables had never been re-checked at all. At 200 a run
+##and two runs a week that backlog is ~24 runs, about three months. It matters
+##more than it used to because the per-table statistics this pass computes are
+##what a psychometric-property filter would be built on (#1710): a column that
+##fills over a quarter is not a filter anyone can use.
+##
+##Why 400 and not more: the pass is MEASURED at ~10.3 s/table, not the "~10
+##min for 200" that was in circulation, nor the 45-60 min guessed in
+##pipeline_logs/NEXT_RUN_NOTES.md. In run 38778585737 (2026-10-15) it ran
+##17:48:11 -> 18:22:29 UTC for 200 tables -- 34 minutes -- inside a stage 01
+##that took 44.5 minutes in total. So each extra 200 costs ~34 minutes of job
+##time, forever, on every run. 400 puts stage 01 near 78 min and a heavy run
+##near 150 against the 240-minute timeout; 600 would put a 692-new-table week
+##within ~50 minutes of being cancelled, and a cancelled run costs a dispatch
+##and a second review. With the Mon/Wed/Fri schedule, 400 sweeps the corpus in
+##~15 runs, about five weeks. Raise it once a run at 400 has been timed.
+refresh.per.run<-400
 refresh.log.file<-'metadata_refresh_log.csv'
 dead.tables.file<-'metadata_dead_tables.csv'
 
