@@ -155,7 +155,18 @@ def cmd_candidates(a):
         elif not src:
             skipped["no source could be derived from the key"] += 1
             continue
-        picked.append({"source": src, "title": "", "url": "", "doi": k})
+        # A ledger key is a DOI *or* a landing URL -- every OSF key is the
+        # latter (`https://osf.io/<guid>/`). Putting a URL in `doi` leaves
+        # `url` empty, so `_resolve_to_landing` has nothing to follow,
+        # `_host_resolver` sees "" and `_osf_files("")` fails its guid regex
+        # and returns no files. The row then reads as "no resolvable tabular
+        # file on landing page", which is the #3076 verdict all over again
+        # on a deposit that is public and holds an .xlsx. Put each form in
+        # the column that dispatch actually reads.
+        if k.lower().startswith(("http://", "https://")):
+            picked.append({"source": src, "title": "", "url": k, "doi": ""})
+        else:
+            picked.append({"source": src, "title": "", "url": "", "doi": k})
 
     exclude = set()
     for fp in a.exclude or []:
