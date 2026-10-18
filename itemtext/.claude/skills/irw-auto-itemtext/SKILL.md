@@ -338,6 +338,29 @@ copyright notice on a journal article is still a notice about that article, not 
 the instrument; it neither blocks nor clears. Do not open a negotiation with a rights holder —
 see the Shipley rule above.
 
+**A word list is not wording. Ruled by Ben 2026-10-17 (R-wordlist).** The silence rule governs
+reproduced item *wording* — authored sentences whose expression belongs to the originator. It does
+not reach an item set that ships only single words or short category labels with no instructions
+and no declarative stems. A PANAS table ships about 25 common English words (20 adjectives plus
+"very slightly or not at all / a little / moderately / quite a bit / extremely") with
+`instructions` NA: individual common words carry no copyright, and a compilation interest in a
+selection printed in the literature since 1988 is too thin to hold. No protected expression is
+being reused, so no grant is needed and the table ships.
+
+The line is **authored sentences vs. a word list**, and the test is expression, not function. Do
+NOT ask "could a reader reconstruct and administer the instrument from this?" — that question was
+proposed on 10-17 and rejected, because it asks what copyright does not. HADS, SCS, IMI, ERQ, IUS,
+Grit, BFI-2-XS, UPPS-P, BSI, WHODAS and DSES all ship full declarative sentences and stay blocked.
+Two edges: where the words ARE the authored work (a test's invented foils, keyed content), judge
+the authored element — the Vermeiren ART is the open case, set aside by Ben on 2026-10-17. And
+enforcement risk is a separate axis from the analysis: `psychtools_sai` (the STAI-S 20-adjective
+checklist, the same shape as PANAS) was withdrawn anyway because Mind Garden enforces actively.
+Record such a split as a decision so it does not read as an oversight.
+
+Keep this distinct from the `huang_2016_cesd` ruling that the CES-D is omnipresent. That one is
+risk appetite and turns on how widely an instrument is used; this one is a rights fact and does
+not.
+
 **The hard case, stated honestly:** the De Jong Gierveld manual puts its fitness cautions in the
 *same* list as its NC and ND bullets, all introduced by "They may do so under the following
 conditions". A holder mislabelling a caveat as a condition does not convert it into a property
