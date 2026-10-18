@@ -18681,3 +18681,45 @@ release.
 - Reason: TEIQue-SF terms (LPL Researcher Account T&Cs, 2026) bar publishing instrument materials and the scoring key (cl.6, 7.3, 8). The table reverse-keyed items using the deposit's scoring columns. Recorded as a block in itemtext/instrument_rights_register.csv (commit f7eb1e2b). Script and dictionary/tag rows removed from main.
 - Item-text holds for named scales recorded as blocks in the same register commit (Eichmeier x6, Amornsriwatanakul x2, Mesaric SAQ-AV, Delapena F-scale, Munoz-Troncoso VI-GEC).
 - Final tally from the re-mine: 42 tables live (40 earlier + wicki_2021_av_concern, delapena_2026_fscale).
+
+## 2026-10-18 — PMC monthly 2026-10-16 re-triaged after three tooling fixes (#3059)
+
+Of the 36 candidates in `runs/pmc_monthly_candidates_full_2026-10-16.csv`, 16
+carried a verdict that was a failure of this pipeline rather than a judgment
+about the paper: 5 `error` and 11 `download_failed` that were transient or
+unparsed. All 16 re-triaged with `process_one` on the fixed code (no ledger
+writes; the DOIs were already ledgered on main). Output:
+`runs/pmc_monthly_retriage_2026-10-18.csv` (`was_flag` column keeps the old
+verdict).
+
+**Fixes** (branch `fix/pmc-triage-dupcols-osf-retry`):
+- `_alternative_reads`' `header=[0,1]` flattening gave every column the same
+  label when row 1 is a banner spanning the sheet, so `df[c]` was a frame and
+  `_small_int_block` raised "arg must be a list, tuple, 1-d array, or Series".
+  This is the standing TODO item that cost 45 rows across the 2026-10-10/11/14/15
+  runs as well as 4 here. Flattened labels are now uniquified.
+- The three `api.osf.io` calls were single attempts, so OSF's 503 became a
+  sticky `download_failed` reading exactly like a dead link (10 of 13 rows).
+  Now `_osf_api_get`, retrying 429/5xx with backoff, failing fast on 404.
+- `extract_external_link` let `urlparse` raise "Invalid IPv6 URL" on a
+  bracketed link (1 row).
+
+**Outcome:** 16 rows → 7 `human_assistance`, 6 `download_failed`,
+2 `below_min_n`, 1 `no_usable_file`. No `good` row. Zero of the 16 stayed
+`error`, and the 503s are gone.
+
+- Worth a human read (7): PMC13295900 (Cultural Congruity, OSF view-only,
+  **247 respondents x 17 items** via the re-read hint — the best of the batch),
+  PMC10991279 (HD-tDCS vigilance, 183 x 38, QC `dup_id_item`), PMC7445749
+  (hydrocortisone metacognition), and four whose supplements need a column
+  mapping: PMC10194081, PMC11374892, PMC6211262, PMC6089908.
+- Below the floor (2): PMC12365274 (60 respondents), PMC10363153 (86).
+- Still `download_failed` (6), and this is a real finding, not a retry
+  candidate: every one is OSF **401 Unauthorized** on
+  `api.osf.io/v2/nodes/<guid>/` — r3xfy, 87ew5, e2xsr, sm4cd, 6nt2s, 3s6ze.
+  Other OSF guids answer 200 anonymously in the same minute, so these are
+  private deposits behind an "openly available in OSF" statement, not an API
+  gate and not rate limiting. They are author-email candidates.
+
+Caveat: this re-triage ran under pandas 3.0.3, which is not necessarily the
+scheduled run's pandas.

@@ -1,5 +1,16 @@
 # IRW Automated Finding — TODO
 
+## From the 2026-10-16 PMC monthly re-triage (2026-10-18, #3059)
+
+- [ ] **Seven candidates want a human read** — listed in BATCH_LOG 2026-10-18 with
+  `runs/pmc_monthly_retriage_2026-10-18.csv`. PMC13295900 (247 x 17) and PMC10991279
+  (183 x 38, QC `dup_id_item`) are the two with counts already in hand.
+- [ ] **Six OSF deposits are private (401), not retryable** — r3xfy, 87ew5, e2xsr,
+  sm4cd, 6nt2s, 3s6ze. Each article says the data are openly available in OSF. Author
+  emails wanted; the permission template is in `processing_notes/Licensing.txt`.
+- [ ] Consider a distinct flag for "repository says 401/403" so a private deposit stops
+  reading as a dead link in future runs.
+
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
@@ -15,8 +26,12 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 - [ ] **Rulings wanted** (none blocks publishing): see BATCH_LOG 2026-10-15d.
 - [ ] Seven OSF nodes with `unknown` licence sit outside the leads file pending a lookup via
   `api.osf.io/v2/licenses/` (named in BATCH_LOG 2026-10-15c).
-- [ ] The "arg must be a list, tuple, 1-d array, or Series" reader fault hit 9 more `error` rows
-  (45 across the 2026-10-10/11/14/15 runs); still worth a look at `load_table()`.
+- [x] The "arg must be a list, tuple, 1-d array, or Series" reader fault is **fixed**
+  (2026-10-18, branch `fix/pmc-triage-dupcols-osf-retry`): not `load_table()` but
+  `_alternative_reads`' `header=[0,1]` flattening, which gives every column the same
+  label when row 1 is a banner spanning the sheet. See BATCH_LOG 2026-10-18. The 45
+  rows it cost across the 2026-10-10/11/14/15 runs are re-triageable, but those run
+  CSVs are not in the repo — only the PMC monthly 2026-10-16 rows were re-run.
 
 ## From the 2026-10-14 repos mode-3 batch (15 new terms x 9 languages)
 

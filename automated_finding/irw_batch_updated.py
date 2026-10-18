@@ -704,7 +704,15 @@ def extract_external_link(text: str) -> str:
     format (PLOS scrapes HTML, PMC reads JATS XML) and share this.
     """
     for m in _RE_URL.finditer(text or ""):
-        host = urlparse(m.group(0)).netloc
+        try:
+            host = urlparse(m.group(0)).netloc
+        except ValueError:
+            # A '[' inside the match ("[https://osf.io/abcde]", a bracketed
+            # citation run together with a link) makes urlparse raise
+            # "Invalid IPv6 URL", which process_one records as flag `error`
+            # -- it cost s41598-026-42435-w in the 2026-10-16 PMC monthly
+            # run. A link we cannot parse is simply not the link.
+            continue
         if any(h in host for h in _KNOWN_REPO_HOSTS) or "doi.org" in host:
             return strip_trailing_punctuation(m.group(0))
     # Statements often give a bare DOI ("doi: 10.5061/dryad.xxxx") with no
