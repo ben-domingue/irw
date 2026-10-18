@@ -136,10 +136,23 @@ def cmd_candidates(a):
         if m and m.group(1) in ARTICLE_PREFIXES:
             skipped["article SI DOI -- the PLOS/PMC path, not this one"] += 1
             continue
-        if a.source and src != a.source:
+        if a.include_unrecognised:
+            # An institution's own figshare- or Dataverse-powered portal has
+            # its own DOI prefix (10.15131 Sheffield, 10.48420 Manchester,
+            # 10.4121 4TU, 10.17026 DANS, 10.15139 Odum, ...), so no prefix
+            # map will ever be complete. Emit these with a blank `source` and
+            # let dispatch do it: #3076 follows the bare DOI to its real
+            # landing page, _host_resolver reads the host off that, and a
+            # figshare-shaped article URL falls through to _figshare_files
+            # even when the host is unlisted -- which is how the UJ deposit
+            # the ledger had retired was recovered.
+            if src:
+                skipped[f"source {src} (this run wants the unrecognised ones)"] += 1
+                continue
+        elif a.source and src != a.source:
             skipped[f"source {src or 'unrecognised'}"] += 1
             continue
-        if not src:
+        elif not src:
             skipped["no source could be derived from the key"] += 1
             continue
         picked.append({"source": src, "title": "", "url": "", "doi": k})
@@ -274,6 +287,10 @@ def main():
                         "closed; 31 of the 2026-10-18 batch's 100 were")
     c.add_argument("--no-sheets", action="store_true",
                    help="--exclude-worked without the Sheets exports (offline)")
+    c.add_argument("--include-unrecognised", action="store_true",
+                   help="keep ONLY the keys no prefix maps, with a blank "
+                        "source, so host dispatch resolves them -- the "
+                        "institutional figshare/Dataverse portals")
     c.add_argument("--sample", type=int)
     c.add_argument("--seed", type=int, default=0)
     c.add_argument("--out", required=True)
