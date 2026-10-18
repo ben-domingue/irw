@@ -18651,3 +18651,33 @@ release.
 - paper_explicit without a verify script: bock x2, zhang_2025 x2. calla N=100 at the floor.
   Administration language blank for English instruments on non-English samples (zhang,
   habiba, girma, melati).
+
+## 2026-10-17 — Dataverse re-mine (#3051): pilot + rest of the ledger's human_assistance keys; 30 tables uploaded
+
+- **Pilot** (2026-10-15): 100 sampled human_assistance keys (Zenodo, Figshare, Dryad, Dataverse), re-triaged with `--ignore-seen-keys`, Step 2b with `--no-archive`. 17 passed the lead filter, all Dataverse. Zenodo returned no_usable_file for all 52 rows, which looks like a resolver problem with `doi.org` URLs, not a result. Not investigated (Ben: not worth it).
+- **Rest** (2026-10-16): 421 unsampled Dataverse keys (75 dropped by DOI match against the dictionary). 225 passed the filter; 193 leads after dropping aggregate_continuous. Titles fetched from the Dataverse API (User-Agent header needed, Harvard returns 403 to the default Python UA); title dedup found 3 already in the IRW and 1 overlap (uj1hdr, skipped by default).
+- **Forks A–O** (Sonnet, one at a time, worktree per fork): 19 scripts on 13 branches, merged to main (integration branch remine-dataverse-2026-10-17). 32 tables built; 2 Baysan tables uploaded earlier (2026-10-15); 30 uploaded 2026-10-17 by Ben.
+- **Reverted by Claude on review** (not shipped): rimisp_2025_household_services (checklist, Ben: err on exclusion), goldberg_2018_6fpq (block deliberately excluded in goldberg_2018_escs.py), trusz_2022 x3 (self-generated codes = initials + date, PII rule), bankert_2017_partisan_identity (cross-country item mapping by position), khoury_2024 x2 (no codebook), dimarcantonio_2024_wpi (anchors inferred).
+- **Calls that stand, by Ben:** adult inference for Eichmeier, Hollibaugh, Shan, Mesaric, Guess, Austin (no age covariate); Baysan adult tag with 4 age-17 respondents; blank-age rows kept in amornsriwatanakul (1,764 of 15,066) under the adult tag; MPQ study IDs kept (not platform IDs).
+- **Item text:** none extracted. 17 of the 32 tags say item text is available in the source (Gambin, Muñoz-Troncoso, Eichmeier x6, Hollibaugh, Amornsriwatanakul x2, Austin, Chen, Mesaric, Guess x2); 15 say no.
+- **Yield:** 19 leads / 32 tables from 210 leads worked (17 pilot + 193 rest) across 15 forks. Yield fell sharply after batch I (last three forks: 1 lead, 0, 0 of 27).
+
+## 2026-10-17b — Dataverse re-mine, batches P–T: 8 tables uploaded by Ben
+
+- Uploaded 2026-10-17 (Ben, directly): stiglic_2019_wemwbs, espinoza_2024_dass21, sekowski_2023_rfq8, sekowski_2023_phq9, sekowski_2023_ada, christensen_2017_bfi10, christensen_2017_unethical, karim_2022_phq9.
+- Table names carry years that are unverified (deposit year, file name or citation): stiglic 2019 (file timestamp), espinoza 2024 (deposit), sekowski 2023 (citation), christensen 2017 (file name), karim 2022 (deposit). Names kept as shipped.
+- Batch branches P–T merged to main (84ec8e1e). Reverted before merge: woike_2019_crt, galindo_2024_fear_of_failure, bakker_2017_need_for_cognition, karim risk/coping tables.
+- Leads: 27 still todo in leads/repos_ledger_remine_2026-10-16_dataverse_rest.csv.
+
+## 2026-10-17c — Dataverse re-mine, batches U–W: 3 tables uploaded by Ben
+
+- Uploaded 2026-10-17 (Ben, directly): pavey_2021_teique (author name inferred from ORCID and contact; TEIQue research-use terms unchecked), wicki_2021_av_concern (deposit year), delapena_2026_fscale (deposit year; F-scale item text held, tag No).
+- Queue closed: all 180+ Dataverse leads are shipped or skipped with a reason (see leads/repos_ledger_remine_2026-10-16_dataverse_rest.csv).
+- Totals from the re-mine: 43 tables built; 40 uploaded earlier, 3 uploaded now.
+
+## 2026-10-17d — pavey_2021_teique withdrawn
+
+- Deleted from the Redivis draft by Ben (2026-10-17).
+- Reason: TEIQue-SF terms (LPL Researcher Account T&Cs, 2026) bar publishing instrument materials and the scoring key (cl.6, 7.3, 8). The table reverse-keyed items using the deposit's scoring columns. Recorded as a block in itemtext/instrument_rights_register.csv (commit f7eb1e2b). Script and dictionary/tag rows removed from main.
+- Item-text holds for named scales recorded as blocks in the same register commit (Eichmeier x6, Amornsriwatanakul x2, Mesaric SAQ-AV, Delapena F-scale, Munoz-Troncoso VI-GEC).
+- Final tally from the re-mine: 42 tables live (40 earlier + wicki_2021_av_concern, delapena_2026_fscale).
