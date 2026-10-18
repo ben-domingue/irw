@@ -3,6 +3,81 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## From the #3077 mendeley leads, worked (2026-10-18h)
+
+- [ ] **8 tables (132,575 responses) + 5 item text tables staged, nothing
+  uploaded.** `automated_finding/irw_output/` and `itemtext_output/`.
+  zara_2024_opd_sqs, zara_2024_phq4, yang_2026_flsaq,
+  yang_2026_appreciative_education, tantia_2024_ats_{field,course},
+  shehayeb_2024_math_{anxiety,teacher}. Item text for all but the two zara
+  tables and yang_2026_appreciative_education. Stamp `uploaded=` in
+  `itemtext_provenance.csv` only after ben-domingue confirms.
+
+### Rulings wanted (none blocks what is staged)
+
+- [ ] **Three instruments want a rights-register row**, all found by reading
+  stems because none has one: **CTQ** (Childhood Trauma Questionnaire,
+  Bernstein & Fink / Pearson -- 28 items withheld by hand from the otherwise
+  shipped `rkw2g38rjp`), **CARS2-ST** (WPS -- `yj5drfdzht` closed), **RS-25**
+  (Wagnild & Young Resilience Scale -- `dytvjkmv9z` deferred). This is the
+  concrete half of the 154-inert-block-rows finding in BATCH_LOG 2026-10-18g.
+- [ ] **The SDQ row exists and cannot fire.** `hp6y7cj9r2` carries the
+  Strengths and Difficulties Questionnaire under subscale names (`pconsid`,
+  `prestles`, `psomatic`, `ptantrum`, `ploner`, `pobeys`, `pworries`,
+  `pcaring`, `phyper`, `ppeer`, `pshares`, `pbullied`); the block row's
+  `match_item_code` is `SDQ1|SDQ_1|sdq1|SDQ_Pro1` and matches none of them.
+- [ ] **Two documented rights FALSE positives shipped anyway**, both read
+  rather than inferred, both recorded in `itemtext_provenance.csv`. Confirm
+  the readings stand: `tantia_2024_ats_course` c1-c9 vs the CD-RISC matcher
+  `^C[0-9]{1,2}$` (the stems are Wise's ATS course items), and
+  `yang_2026_flsaq` Q14 vs the PSS row on the substring "nervous and" (FLSAQ
+  Q14 is about speaking English in class). `irw-validate` says "do not ship
+  its item text without a ruling", so this is that ruling request.
+
+### Leads still to work from this file (33 deferred, each with its blocker)
+
+`leads/repos_ledger_remine_2026-10-18_mendeley.csv` carries a per-row reason.
+The highest-value ones, with what they need:
+
+- [ ] **`6bhr52dc5v`** (1,198) and **`wcszkbp9z8`** (524): the `T2S*` and
+  `_M1`/`_M2` suffixes are SECOND WAVES -- both want a `wave` column, not
+  extra tables. Both have English stems, so item text is cheap.
+- [ ] **`9dcs5nvwtw`** (918): MTAS + RCADS, English stems. Shares all 16 MTAS
+  codes with `6bhr52dc5v` but only 14 of 835 response vectors, so they are
+  different samples -- consider one merged MTAS table with `cov_study`.
+- [ ] **`dpcc2wms6h`** (1,317) TMMS-24 + ERQ, full Spanish stems.
+  **`j5zjb46tr7`** (1,092) UEF-1, value labels only so no item text.
+  **`5tjkv36r3s`** (916) AQ/BVAQ/PAQ -- drop the EQ (register block) and
+  handle a source labelling error where AQ value labels give both 1 and 4 as
+  "Acord total".
+- [ ] **`fwgxbt4pjr`** (229 + 435): CDAT_1-20 is identical across both
+  samples, so those merge with `cov_study`, offsetting sample 2's id past
+  sample 1's observed max. Full Polish stems.
+- [ ] **`zvj6cz68sc`** (545): `SUJETO` is a WITHIN-CENTRE serial -- 451 unique
+  over 545 rows, 94 repeats with different `CURSO`/`EDAD`/answers -- so `id`
+  must be prefixed by centre. Drop STAI (register block).
+- [ ] **Four offset-header workbooks**: `4n5x4ffzn5`, `wwccx5cx4z`,
+  `3cgh2fsgn4`, and `nd6nxj4y8t` (which has clean `.sav` files beside the
+  workbook -- use those; its 28- and 29-item files are nested subsets of the
+  31).
+- [ ] **`ry2dvfydjd`**: 300 rows over 259 patients with a date-of-admission
+  column -- repeated measures, needs a wave or date column.
+- [ ] **`zktjjx93sv`**: human_review. 563 x 300, 132 binary checkbox columns,
+  22 constant-zero, possible HLS-EU. Needs a person to map the instrument.
+- [ ] Remainder: `vptj28s8pk`, `tnkv5z3byg`, `4vkrzxjtwf` (note `Age` is a
+  BIRTH YEAR), `m7k8638rmc`, `9pzs3y5f82` (no person id, so pre/post cannot
+  be linked), `x49yj8588t`, `xfrvh9tkwk`, `n69rdbph73`, `m85v5s7gx2`,
+  `zb62c5snkm`, `kdw549kj22`, `v7kdvzcrns`, `sngb8z87tw` (-999 sentinels),
+  `kprdr35gwb`, `rj6t9w4v2j`, `hp6y7cj9r2`, `dytvjkmv9z`, `9h8p47sk8w`,
+  `ctg7km2fkr`.
+
+### Non-English item text already identified as cheap
+
+Adds to the deferred translation round already in TODO: `dpcc2wms6h` and
+`zb62c5snkm` (Spanish), `fwgxbt4pjr` (Polish), `m85v5s7gx2` and `dytvjkmv9z`
+(Persian). `x49yj8588t` needs no translation -- the deposit ships its own
+English questionnaire.
+
 ## From the #3077 ledger characterisation (2026-10-18g)
 
 Nothing here is uploaded. Ben held PR #3089 and all uploads deliberately on

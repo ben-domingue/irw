@@ -19483,3 +19483,151 @@ discovery exclusions with nobody having reviewed them, while the same rows
 already carry a status in the tracked leads files. Ben ruled: moved to
 `runs/human_review_archive_side_effect/`. Later chains call
 `irw_retriage_ha.py --no-archive` directly, which is what the rule says.
+
+## 2026-10-18h — the 46 mendeley re-mine leads: 8 tables, 132,575 responses (#3077)
+
+The mendeley share of the #3077 ledger re-mine, from
+`leads/repos_ledger_remine_2026-10-18_mendeley.csv`. 89 ledger keys were
+re-triaged in 2026-10-18g; 46 passed the leads filter and are worked here.
+Nothing uploaded -- Ben held PR #3089 and all uploads on 2026-10-18.
+
+All 46 deposits were downloaded and structurally profiled in one pass before
+any script was written, which is what made the triage below cheap: the profile
+prints every column's range, distinct count, both SPSS label levels and a PII
+screen per file. 45 resolved first time; `4xtjnbwjt8` needed one retry after a
+30s read timeout on a 67MB `.dta`.
+
+**Every one of the 46 carries a status. 4 shipped, 9 closed with a reason,
+33 deferred** -- each deferral naming the structural fact that makes it
+startable (an offset header, a sentinel, a wave suffix, a blocked subscale),
+so the next pass begins from an answer rather than re-deriving one.
+
+### Shipped: 4 deposits, 8 tables, 132,575 responses, 5 item text tables
+
+| deposit | tables | what |
+|---|---|---|
+| rkw2g38rjp | 2 | **5,041** representative German adults: OPD-SQS 12 items 0-4, PHQ-4 4 items 0-3. **80,174 responses**, the batch's largest |
+| zdfpy5wtmy | 2 | FLSAQ 18 items 1-5 over **1,044** Chinese EFL learners (+ item text); Appreciative Education 22 items over 209 teachers |
+| bxd8g5p4rb | 2 | Wise (1985) ATS, Field 19 items + Course 9 items, 474 Indian postgraduates (+ item text) |
+| 5cgmcxmp3y | 2 | math anxiety 13 items + teacher-practices 22 items, 450 school students (+ item text) |
+
+**Item text: 5 tables, all `data_labels`, all PASS.** `validate_items.R
+--resp-csv` and `audit_batch.R` pass on all five (24 tables audited, 24 PASS),
+`irw-validate` is clean, and `normalize_nulls.R` fixed 5 files.
+
+`zdfpy5wtmy` is the configuration the cheap gate exists for and the best
+item-text case since `zenodo.20017889`: each variable label carries the
+authors' **English stem and the administered Chinese in one cell**, each
+self-numbered 1-18 against columns Q1-Q18 -- so the code-to-text tie is the
+source's own numbering, not position, and the English is the authors' rather
+than IRW-generated, so no `translation_source` and no issues-page callout are
+owed. Its value labels are literally `{1:'1', ..., 5:'5'}`, i.e. unlabeled
+anchors, so `option_text` is blank at every point rather than padded with the
+number. Two source typos are transcribed as they stand (Q7 "n1ervous", Q9
+"conffdent"). `5cgmcxmp3y` is rarer still: every item carries value labels
+giving all five anchors, so its `option_text` is the source's own.
+
+### Two rights false positives, both read and both documented
+
+- **`tantia_2024_ats_course` trips the CD-RISC row.** Its `match_item_code` is
+  `^C[0-9]{1,2}$`, and the ATS "attitude toward Course" items are coded c1-c9.
+  The stems settle it -- "The thought of being enrolled in a statistics course
+  makes me nervous" is not the Connor-Davidson Resilience Scale. Predicted in
+  the script header before the check ran.
+- **`yang_2026_flsaq` Q14 trips the PSS row** on the substring "nervous and":
+  FLSAQ Q14 is "I get nervous and confused when I am speaking in English
+  classes"; the PSS-10 item is "felt nervous and stressed". Different
+  instrument, referent and timeframe.
+
+Both are the register's own rule 1 -- a hit is a lead, never a verdict -- and
+both are recorded in `itemtext_provenance.csv` so the next reader does not
+re-derive them.
+
+### Three instruments want a register row, found by reading stems
+
+None of these has a row in `itemtext/instrument_rights_register.csv`, so
+neither the sweep nor `irw_validate` would have stopped them. They are the
+other half of the 154-inert-rows finding in 2026-10-18g:
+
+- **CTQ** (Childhood Trauma Questionnaire, Bernstein & Fink / Pearson) --
+  28 items in `rkw2g38rjp`, withheld by hand. The rest of that deposit shipped.
+- **CARS2-ST** (WPS) -- `yj5drfdzht`, whole deposit closed.
+- **RS-25** (Wagnild & Young Resilience Scale) -- `dytvjkmv9z`, deferred.
+
+And one register row that exists but cannot fire: **`hp6y7cj9r2` carries the
+SDQ under subscale names** -- `pconsid`, `prestles`, `psomatic`, `ptantrum`,
+`ploner`, `pobeys`, `pworries`, `pcaring`, `phyper`, `ppeer`, `pshares`,
+`pbullied`. The SDQ block row's `match_item_code` is
+`SDQ1|SDQ_1|sdq1|SDQ_Pro1`, which matches **not one** of those twelve. This is
+the batch's clearest instance of the subscale-naming blind spot.
+
+### Closed with a reason (9)
+
+- **PII, 1.** `b6k3p332dn`: `adsoy` ("Ad-Soyad" = name-surname) in
+  `CAQnonclinic_pilotsample.sav` holds **216 real full personal names**. Whole
+  candidate skipped although the three main CAQ-8 files are clean -- the rule
+  is whole-candidate. Worth knowing separately: that deposit's
+  `CAQclinic_pilotsample.sav` labels its items literally `SMEAN(geo01)`, i.e.
+  the file admits to being SPSS mean-imputed.
+- **Not item response, 2.** `4xtjnbwjt8` is a CFPS-style Chinese national
+  household survey re-deposit -- 11,318 x **1,345** columns, county/year panel,
+  with interview location codes down to village committee. Not an instrument,
+  and a third-party national survey an uploader's CC BY cannot relicense (the
+  KLIPS/TEDS/ENEMDU class). `gfzx8n6wmb` is a 31-province x 2000-2020 panel of
+  GDP, patent counts and park counts.
+- **Aggregate only, 4.** `2hkrbgv5kb` (Gardner subscale counts and percentage
+  scores -- 87.5, 71.43, 28.57), `7c2zd56mzd` (SF-36 subscale scores 0-100),
+  `2c6rdhxfbn` (DTS/BES/SRP subscale means, fractional, both studies),
+  `kntxxpnth4` (anxiety/depression totals over binary demographics).
+- **Rights, 2.** `yj5drfdzht`, `trb8hsp23n` (GHQ-28 + Conner19).
+
+### Deferred (33), and the five facts worth not re-deriving
+
+Each row names its own blocker. The recurring ones:
+
+- **A wave suffix read as separate items.** `6bhr52dc5v`'s `T2S*` and
+  `wcszkbp9z8`'s `_M1`/`_M2` are second waves, so both want a `wave` column
+  rather than extra tables.
+- **An offset header.** `4n5x4ffzn5`, `wwccx5cx4z`, `3cgh2fsgn4` and the
+  `nd6nxj4y8t` workbooks all put section banners in row 0, which is why their
+  item columns arrive as `'1'`..`'39'` or `Unnamed: N` and their values as
+  strings. `nd6nxj4y8t` has clean `.sav` files beside the workbook -- use
+  those, and note its 28- and 29-item files are nested subsets of the 31.
+- **An id that is not a person.** `zvj6cz68sc`'s `SUJETO` is a within-centre
+  serial: 451 unique over 545 rows, and the 94 repeats carry different
+  `CURSO`, `EDAD` and answers, so `id` must be prefixed by centre.
+  `ry2dvfydjd` has 300 rows over 259 patients with a date-of-admission column
+  -- repeated measures, not a flat table.
+- **A blocked instrument to drop, not a deposit to reject.** UWES in
+  `vptj28s8pk` and `tnkv5z3byg`, STAI in `zvj6cz68sc`, EQ in `5tjkv36r3s`.
+- **Item text already cheap.** `6bhr52dc5v`, `9dcs5nvwtw`, `kprdr35gwb`
+  (English); `dpcc2wms6h`, `zb62c5snkm` (Spanish); `fwgxbt4pjr` (Polish);
+  `m85v5s7gx2`, `dytvjkmv9z` (Persian); `x49yj8588t` (author-translated
+  English). The non-English ones belong in the deferred translation round
+  already in TODO, not bolted onto a response batch.
+
+Two measured facts: the two Putwain deposits share all 16 MTAS codes but only
+**14 of 835 response vectors**, so they are different samples and a merged
+MTAS table with `cov_study` is the right shape, not a duplicate. And
+`fwgxbt4pjr`'s two samples share CDAT_1-20 identically, so those **do** merge
+with `cov_study`.
+
+### Pipeline defect fixed: item_variants collapsed every non-Latin item code
+
+`irw_validate.extra._squashed_key` strips `[^0-9A-Za-z]`, so it deletes every
+CJK, Arabic, Persian, Cyrillic, Greek, Hebrew and Thai character. Two
+unrelated Chinese codes both squashed to the empty string and were reported as
+renderings of one item; on a table whose codes are **all** non-Latin, every
+item would group into a single finding. Found on
+`yang_2026_appreciative_education`, whose codes are the deposit's own Chinese
+column names. The fix is the `None` return the docstring already promised and
+the body never gave. #2052's DART cases still fire; `item_1_2`/`item_12` still
+does not. 270 tests pass, 9 new.
+
+### Cross-route note
+
+24 of these 46 keys also sit `unworked` in `repo_leads_2026-08-27.csv`,
+`repos_leads_2026-10-05.csv` or `repos_leads_2026-10-07.csv`, and
+`gfzx8n6wmb` is deferred in `human_review_recheck_batch5_2026-10-18.csv`
+pointing here. Working them here closes all of those records at once -- the
+same one-queue-not-two shape 2026-10-18g recorded for items 2 and 3.
