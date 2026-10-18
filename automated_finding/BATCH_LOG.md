@@ -18819,3 +18819,47 @@ For scale: 53% of the Dataverse keys passed the same filter, and 210 worked
 leads returned 42 live tables. The ledger's 2,223 `human_assistance` keys are
 zenodo 632, dataverse 536 (mined), mendeley 179, figshare 117, dryad 86,
 osf 21, other 652. Nothing is queued here -- the remaining pool is Ben's call.
+
+## 2026-10-18c — Zenodo rate check: 100 ledger keys, 49 leads (#3077)
+
+The gate on #3077 item 3. 100 of the 632 zenodo `human_assistance` keys,
+sampled seed 3077, excluding the 21 that were in the 30-key sample behind
+the #3076 fix -- so the rate is independent of the sample that motivated it.
+`--ignore-seen-keys`, then Step 2b with `--no-archive` and no `--ledger`:
+the ledger and `human_review/` are untouched, per the re-mine rule.
+
+**Triage: 99 of 100 resolved** (`human_assistance` 98, `good` 1,
+`no_usable_file` 1). On main before #3076 the expected result was 100
+`no_usable_file`; the 30-key sample measured exactly that.
+
+**Step 2b over the 98:** `recoverable_format` 56, `worth_retrying` 18,
+`human_review` 18, `aggregate_continuous` 4, `not_item_response` 2.
+
+**Leads filter: 49 todo**, in
+`leads/repos_ledger_remine_2026-10-18_zenodo.csv` with a status per row.
+That is 49% against the 30-key sample's 57% and the Dataverse round's 53% --
+the three agree, so the pool is as productive as the one that returned 42
+live tables.
+
+| status | n |
+|---|---|
+| `todo` | 49 |
+| `deferred: N unknown until the file is read` | 30 (human_review 17, worth_retrying 9, recoverable_format 4) |
+| `skipped` | 21 (items outside 8-700: 11; aggregate_continuous 4; licence cc-by-nc 3; not_item_response 2; licence unknown 1) |
+
+Two things worth recording:
+
+- **The 30 `deferred` rows are not rejections.** N is blank because the file
+  has not been parsed into id/item/resp yet -- that is what
+  `recoverable_format` and `human_review` mean. The leads filter drops them
+  on the N test, so a naive reading of "49 of 100" understates the pool: up
+  to 79 of the 100 may be workable. They are in the tracked file rather than
+  in `runs/`, which is the #3051 lesson applied.
+- **A naive licence test passes NC.** `"cc-by-nc".startswith("cc-by")` is
+  true, so three CC BY-NC deposits reached the lead list on the first pass
+  of this batch's filter before it was tightened to reject `nc`/`nd`
+  explicitly. Any future batch script wants the same guard; the rule is
+  cc0 / cc-by / cc-by-sa only.
+
+Licences across the 100: cc-by 86, cc0 8, cc-by-nc 3, cc-by-sa 1, unknown 1.
+No leads are worked here and nothing is uploaded.
