@@ -3605,3 +3605,13 @@ do not treat the CSV's `proposed_name` column as a work list.
   (Slovenian stems in the `.sav`, no English), `martindelcampo_2020_*` and
   `modzelewska_2021_*` (English labels on Spanish/Polish administrations =
   `translated_substitute`), `dorsch_2025_ai_vignettes` (wording differs by arm).
+
+## From the 2026-10-17 Dataverse re-mine (#3051; BATCH_LOG.md 2026-10-15 to 2026-10-17d)
+
+- [ ] Confirm the table-name years against the papers (none is verified yet; names kept as shipped): stiglic_2019_wemwbs (file timestamp), espinoza_2024_dass21 (deposit year), sekowski_2023_* (citation), christensen_2017_* (file name), karim_2022_phq9 (deposit year), wicki_2021_av_concern (deposit year), delapena_2026_fscale (deposit year; preliminary paper).
+- [ ] Item text: gambin_2020_phq9 and gambin_2020_pandemic_diff are built in itemtext_output but not uploaded; karim_2022_phq9 has an items file there too. Check where the Gambin files went (only karim's is present now).
+- [ ] Item-text holds for named scales are recorded as blocks in itemtext/instrument_rights_register.csv (Eichmeier x6, Amornsriwatanakul x2, Mesaric SAQ-AV, Delapena F-scale, Munoz-Troncoso VI-GEC). Revisit only if a grant turns up.
+- [ ] TEIQue-SF: blocked (LPL terms cl.6, 7.3, 8). pavey_2021_teique withdrawn from Redivis by Ben, 2026-10-17. Re-ship only with a grant from LPL.
+- [ ] Remove the 29 fork worktrees under .claude/worktrees once nothing else needs them (all fork branches are merged to main).
+- [ ] Main working tree has uncommitted changes from the separate itemtext session (pending_index_notes.csv, batch_dv_remine provenance, tools/withdrawals/withdraw_3017_tranche2). Not from this round; don't commit them with this work.
+- [ ] Queue closed: no 'todo' leads left in leads/repos_ledger_remine_2026-10-16_dataverse_rest.csv (26 shipped, 201 skipped with reasons).
