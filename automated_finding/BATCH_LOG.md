@@ -18723,3 +18723,51 @@ verdict).
 
 Caveat: this re-triage ran under pandas 3.0.3, which is not necessarily the
 scheduled run's pandas.
+
+## 2026-10-18b — The Zenodo `no_usable_file` verdicts were a resolver bug (#3051)
+
+The pilot of 2026-10-15 returned `no_usable_file` for all 52 Zenodo rows of
+its 100-key sample, and the whole re-mine's yield came from Dataverse. That
+was not a result.
+
+**The bug.** `_zenodo_files()` pulls the record id out of the landing URL
+(`/records/<id>`). A re-mine of `repo_triage_seen_keys.csv` has only the key,
+so its candidates carry a bare `doi.org` URL -- which matches no
+`_HOST_RESOLVERS` entry either. The row reached no resolver at all and was
+retired as `no_usable_file`, a sticky verdict. `_figshare_files`,
+`_osf_files` and `_mendeley_files` are keyed off the URL the same way;
+`_dryad_files(doi)` and `_dataverse_files(url, doi)` work from the DOI, which
+is exactly why Dataverse was the only source that produced leads.
+
+Shown on one deposit: `10.5281/zenodo.14768211` returns 0 files through the
+`doi.org` form and 1 CC BY 4.0 `.xlsx` through `zenodo.org/records/14768211`.
+
+**The fix.** `_resolve_to_landing(url, doi)` follows a bare DOI to its
+landing page before dispatch, reusing `_landing_url()` -- the redirect helper
+the article connectors already use for DAS links. One extra request, only for
+a row that would otherwise have reached no resolver. Also, an institution's
+own figshare-powered portal (`repository.uj.ac.za`, DOI prefix 10.25415) is
+not a listed host but its article ids are served by the central figshare API,
+so a figshare-shaped landing URL now falls through to `_figshare_files` once
+host and source dispatch have both missed.
+
+**Measured, with a control.** 30 keys sampled (seed 3051) from the 928
+zenodo/figshare/mendeley `human_assistance` keys, re-triaged on both code
+paths with `--ignore-seen-keys`:
+
+| | no_usable_file | resolved |
+|---|---|---|
+| main | 30 | 0 |
+| fixed | 0 | 30 |
+
+Step 2b on the 30: `recoverable_format` 17, `worth_retrying` 5,
+`human_review` 5, `aggregate_continuous` 2, `not_item_response` 1. Applying
+the 2026-09-20 leads filter (cc0/cc-by/cc-by-sa, 100 <= N <= 50,000, 8-700
+items, aggregate_continuous dropped): **17 of 30 are leads** -- 14
+`recoverable_format`, 3 `worth_retrying`, every one CC BY. Of the 13 that
+dropped, 9 went on a blank N, which is a reader gap rather than a verdict.
+
+For scale: 53% of the Dataverse keys passed the same filter, and 210 worked
+leads returned 42 live tables. The ledger's 2,223 `human_assistance` keys are
+zenodo 632, dataverse 536 (mined), mendeley 179, figshare 117, dryad 86,
+osf 21, other 652. Nothing is queued here -- the remaining pool is Ben's call.
