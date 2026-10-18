@@ -129,6 +129,81 @@ Adds to the deferred translation round already in TODO: `dpcc2wms6h` and
 (Persian). `x49yj8588t` needs no translation -- the deposit ships its own
 English questionnaire.
 
+## From the #3077 zenodo_rest batch C (2026-10-18j)
+
+86 tables (147,644 responses) + 4 item text tables staged in
+`automated_finding/irw_output/` and `itemtext_output/`. Nothing uploaded; Ben
+held PR #3089 and all uploads. The leads file
+`leads/repos_ledger_remine_2026-10-18_zenodo_rest.csv` is **closed** -- all 77
+of its leads carry a status across batches A, B and C, 0 `todo`.
+
+### Rulings wanted (none blocks anything staged)
+
+- [ ] **A university NetID: PII or not?** `zenodo.5217991` was skipped because
+  `Username` holds 236 NetIDs (`bdz0311`, `btr3574`) for identifiable students
+  at one university. The narrowed carve-outs cover a platform participant ID
+  (2026-09-20) and a clinic register number (2026-09-26); a NetID that encodes
+  initials is neither, so the blanket rule was applied rather than the carve-out
+  widened. If it counts as an institutional serial, the remedy is the row index
+  and the deposit ships one 22-item table over 236 respondents (its other file
+  is the PSS and stays blocked either way). Third PII edge case in two days --
+  the other two are in BATCH_LOG 2026-10-18f.
+- [ ] **Register rows wanted**, every one found by reading stems because no
+  matcher could reach it: UTAUT/UTAUT2 generally (four deposits in this batch
+  ship UTAUT response tables); servant leadership other than van Dierendonck's
+  30-item SLS; organizational justice; OCB; Netemeyer's Work-Family Conflict
+  scale; the COPSOQ job-demand and social-support blocks; DES; BFI-10;
+  LPFS-BF. Adding to batch B's list (CTQ, PAI-BOR, ProQOL) and the mendeley
+  batch's (CARS2-ST, RS-25, SDQ-by-subscale).
+- [ ] **PLS-SEM 3-item construct batteries**: still one file per scale, as
+  batch B. Four more deposits with that shape here (binus_2025 x7,
+  cahyadi_2025 x9, rumangkit_2026_dm x6, triana_2025 x6). One ruling settles
+  all of them.
+
+### Bugs for whoever owns the file
+
+- [ ] **`remine_ledger.licence_ok` rejects `cc-zero`.** Zenodo's licence id for
+  CC0 1.0 is `cc-zero`, which fails the `startswith("cc0")` test and reads as
+  non-open. Three CC0 deposits in this batch carry it (zenodo.20844, 22609,
+  21054). No harm done here -- the leads file was built from the triage CSV's
+  `license` column, which normalises to `cc0` -- but a batch resolving the
+  licence from the Zenodo API directly would drop every CC0 Zenodo deposit.
+- [ ] `ghosh_2020_cas_ocs` is staged in `irw_output/` with no row in
+  `dictionary_auto.csv`. Not mine -- it belongs to the concurrent mendeley
+  batch -- but it is the only staged table of the 284 without one.
+
+### Owed after the next release
+
+- [ ] **Covariate labels:** `harvest.py --commit HEAD` for the three `.sav`
+  scripts in this batch that ship `cov_*` -- `baruah_2026_fake_news`,
+  `yu_2025_asian_american_coping`, `walton_2023_remote_work` -- then
+  `build.py` and commit `covariate_labels.csv`.
+
+### 29 deferred leads, each naming the blocking fact
+
+In the leads file with a per-row reason. The ones worth picking up first:
+
+- [ ] **zenodo.10942726** -- ERQ 10 and SWLS 5 are register `block`, but the
+  workbook also ships a **`dictionary` sheet** beside several study-authored
+  blocks. Separate the blocked instruments and the rest is a good item-text
+  case, which is rare in this pool.
+- [ ] **zenodo.7736935** -- 156 x 75 with **73 variable labels present** and no
+  ordinal block the profiler could identify. Another likely item-text case once
+  the item columns are picked out by hand.
+- [ ] **zenodo.4007786** -- TB knowledge/perception/adherence, three clean
+  blocks (perc 10 on 1-5, know 14 on 1-5, adh 8 on 0-1), deferred only for
+  time. The cheapest remaining win.
+- [ ] **zenodo.6625347** -- VisAWI 18 + SUS 10 + UEQ 6; SUS and UEQ are named
+  third-party usability instruments and want a rights read first.
+- [ ] **zenodo.3866196 / zenodo.3866225** -- adjacent record ids, one author;
+  check for a shared sample before shipping either (the 22089166/21522509 pair
+  in this batch is why).
+- [ ] **zenodo.2667331** -- 100 x 220 with twelve `e1`/`e2` blocks spanning
+  ranges from 0-1 to 0-9; needs its blocks mapped before any range is asserted.
+- [ ] **zenodo.6844831** -- multi-sheet Chinese workbook (部屬 / 主管 / 績效);
+  the sheets may be different units of observation, so the respondent mapping
+  has to be settled first.
+
 ## From the #3077 ledger characterisation (2026-10-18g)
 
 Nothing here is uploaded. Ben held PR #3089 and all uploads deliberately on

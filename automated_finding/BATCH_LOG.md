@@ -19801,3 +19801,155 @@ Covariate labels harvested at `0f50eb3a` for the nine `.sav` scripts shipping
 `cov_*` (hung_2026c, peng_2026, xue_2026, mairean_2024b/c, mairean_2023c,
 estevespairazaman, gonzalezrobles_2018, yang_2024c), all exit 0; `build.py`
 owed after the release.
+
+## 2026-10-18j — zenodo_rest batch C: the remaining 51 leads, 86 tables (#3077)
+
+The last 51 `todo` rows of
+`leads/repos_ledger_remine_2026-10-18_zenodo_rest.csv`, after batch A took 26
+and batch B took 26. **All 51 fetched and profiled before any script was
+written**, and every row now carries a status: the file is closed, 0 `todo`.
+Nothing uploaded -- Ben held PR #3089 and all uploads on 2026-10-18.
+
+**17 of 51 deposits shipped: 86 tables, 147,644 responses, 16 build scripts.**
+Biggest: heekerens_2025 (11 tables, 37,327 resp), hakkarainen_2021 (7, 31,654),
+cahyadi_2025 (9, 5,334), binus_2025 (7, 7,252), baruah_2026 (4, 7,684).
+All 284 tables now staged in `irw_output/` pass
+`irw-validate --profile upload` with **zero failures**.
+
+### Two blocked instruments were shipping under codes no matcher can see
+
+Both found by reading the stems, in one deposit (zenodo.7703332):
+
+- **`WE1`..`WE9` is the UWES-9 verbatim** -- "At my work, I feel that I am
+  bursting with energy", "I am enthusiastic about my job", "My job inspires
+  me", on the UWES's own 0-6 frequency scale. The register BLOCKS the UWES;
+  its matcher is `^uwes` with **zero** item-text patterns.
+- **`PWB1`..`PWB5` is the WHO-5 Well-Being Index verbatim** -- "I have felt
+  cheerful and in good spirits", "I woke up feeling fresh and rested", on
+  WHO-5's 0-5 scale. Register BLOCKS it, matcher `^who5|^who_5`, again **zero**
+  text patterns.
+
+Neither `rights.py` nor the sweep could reach either one, and both would have
+shipped on an automated check. Two more in the same batch:
+
+- **zenodo.5217991's other file is the PSS** under `Pre1`-`Pre10` /
+  `Post1`-`Post10`, which `^pss[_ ]?[0-9]|perceived_stress` also misses.
+- **zenodo.20192086's symptom block is the Beck Anxiety Inventory verbatim in
+  Spanish** -- "Torpe o entumecido", "Incapaz de relajarse", "Con temor a que
+  ocurra lo peor", "Con sensacion de bloqueo". The register blocks the BAI and
+  that row's matcher is **empty**. No other instrument is in the deposit, so it
+  is refused entire.
+
+Four instruments, one batch, every one invisible to the automated rights check.
+That is the concrete cost of the 154 inert `block` rows that
+`itemtext/check_register_coverage.py` counts, and it is now four batches in a
+row reaching the same conclusion by hand.
+
+### Also refused or rejected
+
+- **zenodo.10512109** is a **UWES-17 adaptation and validation study** by its
+  own record title -- the whole deposit is the blocked instrument. Refused
+  entire, as batch B refused zenodo.13117857.
+- **zenodo.5217991** skipped for PII: `Username`/`Username1` hold 236
+  university NetIDs (`bdz0311`, `btr3574`) for identifiable students. The
+  narrowed carve-outs cover a platform participant ID (2026-09-20) and a clinic
+  register number (2026-09-26); a NetID that encodes initials is neither, and
+  the blanket rule exists so severity is not re-litigated per candidate. Wants
+  a ruling rather than a unilateral widening -- in TODO.
+- **zenodo.20844** and **zenodo.15382756**: aggregate only. The first holds
+  `total` plus four fractional subscale scores and no item-level data; the
+  second's single sheet is named `Rata-rata` (Indonesian for average) with 96
+  of 119 columns fractional construct means.
+
+### Two deposits that are one data collection
+
+**zenodo.22089166 and zenodo.21522509** are both Rumangkit, both exactly 100
+rows, and share 24 columns (`SL1`-`SL7`, `OCB1`-`OCB17`). On those shared
+columns **all 75 distinct response vectors of 22089166 also occur in
+21522509**, while no row matches position-for-position -- the same people,
+reordered. Shipping both deposits' SL and OCB blocks would have put those 100
+respondents in the corpus twice.
+
+So each instrument ships exactly once, from whichever deposit carries it more
+completely: `sl`/`ocb`/`kk`/`ky` from 21522509, `oj`/`we`/`jp`/`eh` from
+22089166. The two groups get **different table prefixes**
+(`rumangkit_2026_*` and `rumangkit_2026b_*`) deliberately, because the row
+order differs and neither deposit carries a respondent key, so ids are not
+comparable across the groups and must not look as if they are.
+
+### Heekerens: two samples, merged on evidence rather than on assumption
+
+zenodo.14774618 deposits `cefsa_1.csv` (130) and `cefsa_2.csv` (243): 39
+shared columns and **zero** shared response vectors, so two independent
+samples. The CEFSA blocks were administered in both, so those two tables merge
+them on `cov_study` with sample 2's ids offset past sample 1's observed max --
+373 respondents.
+
+cefsa_1 spells two columns `an_exp_emot_1_r` and `an_exp_emot_5r` where cefsa_2
+has them unsuffixed. They are NOT reverse-scored: the means are 0.86 vs 0.87
+and 0.31 vs 0.50, same direction and magnitude, where a reversal on this 0-4
+scale would put sample 1 near 3.1. Merged under the cefsa_2 name on that
+evidence, which is recorded in the script rather than assumed.
+
+**Its PHQ-9 is scored 1-4**, not the 0-3 the PHQ-9 almost always uses, while
+the GAD-7 beside it is 0-3. Nothing but a per-table permitted set catches that
+-- the third batch running in which the range assertion earned its place.
+
+### Zenodo reports CC0 as `cc-zero`, which the leads filter rejects
+
+Three CC0 deposits in this batch (zenodo.20844, 22609, 21054 -- the Peruvian
+thesis family) have licence id **`cc-zero`** on the Zenodo API.
+`remine_ledger.licence_ok` tests `startswith("cc0")`, so `cc-zero` fails it and
+reads as a non-open licence. It did no harm here, because the leads file was
+built from the triage CSV's `license` column, which says `cc0` -- but a batch
+that resolves the licence from the API directly would drop every CC0 Zenodo
+deposit. Flagged in TODO for whoever owns that file; verified on the records
+that all three are genuinely CC0 1.0.
+
+### Item text: 4 tables, 170 rows, the one deposit that met the bar
+
+**baruah_2026** x4 (`data_labels` / `study_materials`): the SPSS variable
+labels carry the full English stem for all 34 items and the value labels carry
+all five anchors, so both `item_text` and `option_text` are the source file's
+own, and the instruments are Baruah's own so no rights row applies. Item codes
+are the deposit's own headers (`QFI1`, `TRR_P1_1`, ...), not positional, and
+the stem is looked up BY code, so no positional assumption is made. Treated as
+an English administration -- every text level in the file is English -- so the
+`*_translated` columns are omitted rather than emitted empty.
+
+Gates: 4/4 PASS on `validate_items.R --resp-csv`, **34/34 PASS on
+`audit_batch.R` with no anomalies**, `irw-validate` clean, `itemtext_output`
+holds nothing but `*__items.csv`. Rows in `itemtext_provenance.csv` and
+`itemtext/mapping_verification.csv` (NOT_NEEDED, `data_labels`). No
+issues-page entry is owed.
+
+Why only one: of the other sixteen shipped deposits, fifteen are bare CSV or
+Google-Forms exports with positional codes and no label level at all, and the
+sixteenth (hakkarainen_2021) has the stems in its header rows but **no
+anchors anywhere** -- every Likert section says only "To what extent do you
+agree or disagree" and the five scale points are unlabelled. Stems without
+anchors is not the cheap case; the wording is in that same workbook's header
+rows, which is where a later pass starts.
+
+### 29 deferred, each naming the fact that makes it startable
+
+Not a backlog of unknowns -- every row says what is in the way. Representative:
+four workbooks whose real header is on row 2 or 3 behind a value legend
+(zenodo.10066477, 13378346) or a title banner; a multi-sheet Chinese workbook
+whose sheets may be different units of observation (zenodo.6844831, 部屬 /
+主管 / 績效); three deposits where a register-blocked instrument sits beside
+shippable blocks and wants separating first (CERQ-36 in 10072515, ERQ+SWLS in
+10942726, CD-RISC in 8172838); the ProQOL deposit (6984974) waiting on the same
+ruling batch B asked for; a `qol` block in 19519335 that matches the register's
+WHOQOL row and needs confirming; and zenodo.3866196/3866225, adjacent record
+ids by one author, which want checking for a shared sample before either ships.
+
+### Register-row requests from this batch
+
+UTAUT/UTAUT2 generally (four deposits here ship UTAUT response tables on
+positional codes: binus_2025, cahyadi_2025, triana_2025, and 16760555);
+servant leadership other than van Dierendonck's 30-item SLS; organizational
+justice; OCB; Netemeyer's Work-Family Conflict scale; the COPSOQ job-demand and
+social-support blocks; DES; BFI-10; LPFS-BF. All ship as response tables with
+positional codes and no item text, so no wording is exposed -- BATCH_LOG
+2026-10-18i's ProQOL reasoning.
