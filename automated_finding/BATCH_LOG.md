@@ -19953,3 +19953,181 @@ justice; OCB; Netemeyer's Work-Family Conflict scale; the COPSOQ job-demand and
 social-support blocks; DES; BFI-10; LPFS-BF. All ship as response tables with
 positional codes and no item text, so no wording is exposed -- BATCH_LOG
 2026-10-18i's ProQOL reasoning.
+
+## 2026-10-18k — human_review re-check batch 5: 9 of 25 deposits, 21 tables, 509,000 responses (#3077 item 2)
+
+The 25 `todo` rows of `leads/human_review_recheck_batch5_2026-10-18.csv`, the
+`resp_scale_mixed` bucket of pool (b), selected on batches 2-4's filters. **All
+25 fetched and profiled before any script was written**; every row now carries
+a status, and 0 are left `todo`. Nothing uploaded — Ben held PR #3089 and all
+uploads on 2026-10-18.
+
+**9 of 25 deposits shipped: 21 tables, 508,411 responses, 9 build scripts.**
+All 305 tables now in `irw_output/` pass `irw-validate --profile upload` with
+**zero failures**. Biggest: osorio_2025 (3 tables, 278,451 responses over
+7,161 adolescents), vila_lopez_2023 (7 tables, 86,482), burchert_2019 (2
+tables, 36,496), green_2025 (2, 32,349), antunez_2015 (2, 29,055),
+turska_kawa_2025 (2, 28,735).
+
+### Yield, and the recommendation on the rest of the archive
+
+| batch | shipped / 25 |
+|---|---|
+| 2 | 21 |
+| 3 | 19 |
+| 4 | 14 |
+| **5** | **9** |
+
+**Recommendation: stop selecting from this pool, and do not work the remaining
+6,171-row archive as a queue.** The decline is monotone and this batch shows
+why it is structural rather than bad luck. Batches 2-4 took the pool's
+best-documented deposits; what is left is dominated by three shapes that cost
+a full profile each and ship nothing:
+
+- **aggregate-only files** (3 of 25 here): every analysis column is a subscale
+  mean, and the leads filter counted those means as items. `dvn/3yqpyz`'s
+  "4,248 x 17" is seventeen `_avg` columns.
+- **unlabelled matrix blocks** (4 of 25): 2,590 x 108 and 1,076 x 82 deposits
+  where no block can be named, so rights cannot be verified on either surface
+  and the deposit cannot be cleared at any price short of reading the paper.
+- **blocked instruments carrying the whole deposit** (2 of 25): KIDSCREEN-27
+  and a Jackson & Eklund flow scale, both refused whole.
+
+The 57 `unworked` pool-remainder rows stay in the leads file as standing
+records. If more is wanted from this archive, the better move is to select on
+"has a label level" rather than on shape — which is a property the triage
+already records and the filter already ignores.
+
+### A third surface the PII screen cannot see
+
+`10.5281/zenodo.13913289` (1,558 Italian respondents, conspiracy beliefs)
+carries **1,472 distinct real dates of birth** in `Q009`, beside municipality
+and province of residence. Whole-candidate skip.
+
+**`screen_for_pii` could not see it, and the reason is new.** The screen reads
+column NAMES and column VALUES. This file's column is named `Q009`; the words
+"Date of birth? (dd/mm/yyyy)" live in the SPSS **variable label**, which the
+screen never reads. Demonstrated directly:
+
+```
+screen_for_pii(df.columns, df)                      -> []
+screen_for_pii([labels[c] for c in df.columns], None) -> ['Date of birth? (dd/mm/yyyy)']
+```
+
+So every opaque-coded SPSS deposit — `Q001`, `v_12`, `CT1_SQ003` — is
+invisible to the label tier. This is the same shape as the value-level gap
+fixed earlier on 2026-10-18 (`Nombredeusuario`), one surface further out: a
+label pattern can only catch a label the screen actually looks at. The
+one-line fix is to run the existing label tier over
+`meta.column_names_to_labels` as well as over `df.columns`. Not applied here —
+`irw_triage_updated.py` was owned by a concurrent session during this batch.
+
+A second, smaller finding from the same check: the deposit ships an IT and an
+EN copy of the file, and the **IT copy screens clean** because its label reads
+"Data di nascita". A label pattern catches only the language it anticipates.
+The label screen was run over all 19 SPSS/Stata files in the batch; this was
+the only hit.
+
+### Four blocked instruments, three of them invisible to any automated check
+
+Every one found by reading stems against
+`itemtext/register_gaps_2026-10-18.csv`:
+
+- **KIDSCREEN-27** is the whole of `zenodo.17725366` (2,936 rows) — its column
+  headers ARE the Spanish item stems. Register blocks it; that row is inert on
+  both matcher columns. Refused entire.
+- **A Jackson & Eklund flow scale** is 18 of `zenodo.22014024`'s items,
+  verbatim ("… my abilities match the challenge of the situation", "… I
+  perform automatically", "… the way time passes seems to be different from
+  normal"). The register's row names the Brazilian-Portuguese DFS-2 and is
+  inert on both columns; the 2026-09-29 ruling makes it cover the English
+  administration. Block refused; the deposit's study-authored mansplaining
+  items shipped.
+- **CD-RISC-10** is `zenodo.18681901`'s `CDR1..CDR10`. The register blocks it
+  and its matcher is `^C[0-9]{1,2}$|cd[-_]?risc` — the first alternative wants
+  C followed only by digits, the second wants the word "risc", so `CDR1`
+  matches neither. Block dropped; the deposit's rMEQ and LOT-R shipped.
+- **UCLA Loneliness Scale and the Ruminative Responses Scale** are both in
+  `zenodo.16777938` (deferred for the split).
+
+`register_gaps_2026-10-18.csv` grows from 25 to 30 instruments: the three
+above plus two shipped instruments with **no register row at all** — the
+Differentiation of Self Inventory (22 items, 6,845 respondents) and the rMEQ.
+Both want a verdict.
+
+### Three deposits where reading the original file changed the answer
+
+- **`dvn/g1jvq4`: the `.tab` conversion hid a nominal recode.** Dataverse
+  serves `AIpaper_Data_R&Pclean.tab`, in which
+  `jobimpact1_technology..jobimpact8_recession` is a tidy six-item block of
+  1-4 with no missingness — the better-looking of the file's two blocks, and
+  the one the triage counted. The original Stata file's value labels say what
+  it is: `{1: 'No Impact', 2: 'Worsen', 3: 'Improve', 4: "Don't Know"}`. It is
+  **not ordinal** — 2='Worsen' sorts below 3='Improve' with 1='No Impact'
+  beneath both — and it folds the don't-knows into category 4. The labels also
+  name the two blocks "4 Cat Version" and "6 Cat Version" of one question, so
+  shipping both would have duplicated the answers. Only `longjobimpact*`
+  ships, with 99 (don't know) and 999 (not asked, aged 70+) filtered per
+  item-response. None of this is visible in the `.tab`.
+- **`zenodo.15345328`: a derived reverse-coded twin.** `dos01..dos21` is
+  `6 - vpa_dos01..21`, exactly, on every row where both are present — and the
+  match was searched over all 22 candidates rather than trusted positionally.
+  `vpa_dos22` has no twin, which is why there are 21 and not 22. Shipping both
+  would have put the same responses in twice under opposite polarity.
+- **`zenodo.20826719`: `MIL` and `PSU` are block means, not items.** Both read
+  as plausible single items on 1-7 and 1-6 (which is how the triage counted
+  them) and both are exactly the mean of their block on 100% of rows.
+
+### Two id problems, opposite in kind
+
+- **`zenodo.10254868`: id collisions, not repeated people.** `ID` has 1,893
+  distinct values over 1,922 rows. For every one of the 29 duplicated ids the
+  two rows differ on the items, and **0 of the 29 pairs has an identical
+  response vector** — so they are two different respondents sharing an id.
+  Treating `ID` as the person would have merged them and manufactured
+  within-person disagreement. The row index is used instead and all 1,922
+  respondents stay distinct.
+- **`zenodo.3384860`: one person, many rows.** The lead's "16,150
+  participants" is the row count; there are 185 people with 11-686 ambulatory
+  assessments each. The PHQ-9 is a baseline **repeated verbatim on every one
+  of a respondent's rows** (verified: exactly one distinct value per item per
+  person), so it collapses to 180 x 9. Melting it as deposited would have
+  shipped the same nine answers up to 686 times each.
+
+### Per-item scales, where one shared set would have failed
+
+`antunez_2015_rmeq`'s five items have deliberately different response sets —
+RMEQ1/3/4 run 1-5, RMEQ2 runs 1-4, RMEQ5 is scored 0/2/4/6 — because that is
+how the MEQ is built. Each item is validated against **its own value labels**
+from the `.sav`, the source's own codebook. `irw-validate` raises
+`resp_scale_nested_support` on the table, which is correct and expected: the
+nesting is instrument design, not a defect. The same warning on the five
+`vila_lopez_2023_*` tables is a rarely-endorsed 8 on some items of a 1-8
+scale.
+
+Five `imputed_values*` warnings are response concentration, not imputation —
+all values are integers inside an asserted permitted set. The sharpest,
+`vpa_drogas` at 98% zero, is 7,004 twelve-to-seventeen-year-olds reporting no
+other-drug use.
+
+### Item text: 1 table, 30 rows
+
+`fecker_2026_mansplaining`, `data_labels` / `study_materials`. Variable labels
+give the full English stem for all six items and value labels all five
+frequency anchors, so both halves are the source's own; the item codes are the
+deposit's own `v_43..v_48` and the stem is looked up BY code, never by
+position. The administration is English — all 58 variable labels are English
+with no German anywhere in the file despite the Austrian authorship, the same
+basis batch C used for `hung_2026c` — so the `*_translated` half is empty by
+design. PASS on `validate_items.R --resp-csv`, 35/35 PASS on `audit_batch.R`,
+clean on `irw-validate`, `check_provenance.R` exits 0. No issues-page entry
+owed (`data_labels` + `study_materials`).
+
+Of the other eight shipped deposits, three hold stems but **no anchors** at
+either label level (`vila_lopez_2023_*`, `turska_kawa_2025_*`,
+`green_2025_*` — the last has anchors but only topic descriptors where a stem
+should be), three are non-English administrations whose English half would be
+an IRW translation (`osorio_2025_*` Spanish, `chaple_gil_2021_gad7` Spanish,
+`turska_kawa_2025_*` Polish), and two carry no label of either level
+(`burchert_2019_*`, `wang_2026_pmpu`). Each script's header says which levels
+were checked and where the text actually is.

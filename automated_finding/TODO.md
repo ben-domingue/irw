@@ -204,6 +204,54 @@ In the leads file with a per-row reason. The ones worth picking up first:
   the sheets may be different units of observation, so the respondent mapping
   has to be settled first.
 
+## From human_review re-check batch 5 (2026-10-18k, #3077 item 2)
+
+Nothing uploaded. 21 tables + 1 item text table staged in
+`automated_finding/irw_output/` and `itemtext_output/`; PR #3089 and all
+uploads are held by Ben.
+
+- [ ] **Recommendation, needs a yes: stop selecting from the human_review
+  archive as a queue.** Shipped-per-25 ran 21, 19, 14, **9** across batches
+  2-5. Batch 5's misses are structural, not luck: aggregate-only files (3 of
+  25), unlabelled matrix blocks whose instruments cannot be named so rights
+  cannot be verified (4 of 25), and blocked instruments carrying the whole
+  deposit (2 of 25). If more is wanted from the remaining 6,171 rows, select
+  on "has a label level" — the triage already records it and the filter
+  already ignores it — rather than on shape.
+- [ ] **PII screen, third surface: it does not read SPSS variable labels.**
+  `zenodo.13913289` holds 1,472 real dates of birth in a column named `Q009`,
+  with "Date of birth? (dd/mm/yyyy)" in the variable label. `screen_for_pii`
+  reads names and values, never labels, so every opaque-coded SPSS deposit is
+  invisible to the label tier. One-line fix: run the existing label tier over
+  `meta.column_names_to_labels` too. Not applied — `irw_triage_updated.py` was
+  owned by a concurrent session. (Related: the deposit's Italian twin screens
+  clean because its label reads "Data di nascita".)
+- [ ] **Issues-page entry owed at publish:** `antunez_2015_lotr` (LOT-R is
+  verdict `ship_with_note`).
+- [ ] **Five register verdicts wanted**, now in
+  `itemtext/register_gaps_2026-10-18.csv` (30 instruments): three rows that
+  BLOCK but cannot match anything (KIDSCREEN-27 — refused a 2,936-row deposit
+  entire; the English Jackson & Eklund flow scale; CD-RISC-10 under `CDR*`
+  codes), and two instruments with NO row that this batch SHIPPED — the
+  Differentiation of Self Inventory (22 items, 6,845 respondents) and the
+  reduced Morningness-Eveningness Questionnaire.
+- [ ] **Covariate labels:** harvest owed for the eight `.sav`/`.dta` scripts
+  in this batch (osorio_2025_parenting_differentiation,
+  antunez_2015_circadian_optimism, chaple_gil_2021_gad7,
+  fecker_2026_mansplaining, wang_2026_pmpu_diary,
+  vila_lopez_2023_brand_attachment, turska_kawa_2025_religiosity_conspiracy,
+  green_2025_ai_job_expectations), then `build.py` after the release.
+- [ ] **10 deferred rows, each naming the fact that blocks it** — see the
+  leads file. The two cheapest: `zenodo.5090519` (1,000 respondents, 22
+  blocks, Latvian, no blocker found — just needs block-to-construct mapping)
+  and `zenodo.17367532` (1,000 respondents, Polish CATI, same shape).
+  `zenodo.16777938` is the highest-value: drop its blocked UCLA and RRS
+  blocks and the MSPSS + CES-D blocks are shippable from 69 labelled Chinese
+  columns.
+- [ ] `dvn/vidgon` and `zenodo.22035093` are deferred only on thinness — a
+  4-item table each. A ruling on whether 4-item tables are worth shipping
+  would close both.
+
 ## From the #3077 ledger characterisation (2026-10-18g)
 
 Nothing here is uploaded. Ben held PR #3089 and all uploads deliberately on
