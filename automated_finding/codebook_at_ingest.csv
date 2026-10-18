@@ -28,6 +28,10 @@ ahmed_2025_coping,core,none,2026-10-02
 ahmed_2025_pcl5,core,none,2026-10-02
 ahrens_2026_wealth_tax_spending,conj,none,2026-10-08
 ahsanjansson_2026_tax_compliance,conj,https://dataverse.harvard.edu/api/access/datafile/13325308,2026-10-09
+ahumada_tello_2026_happiness,core,none,2026-10-18
+ahumada_tello_2026_job_satisfaction,core,none,2026-10-18
+ahumada_tello_2026_org_resilience,core,none,2026-10-18
+ahumada_tello_2026_perceived_perform,core,none,2026-10-18
 akinwehinmi_2026_gari_biofortified,conj,https://jlupub.ub.uni-giessen.de/server/api/core/bitstreams/174ab133-fe76-401c-8e60-de96e2dc1844/content,2026-10-14
 aklin_2026_climate_pledges,conj,https://osf.io/download/6aada5af0ef8b6fd86390c5d/,2026-10-09
 aklin_2026_climate_transfers,conj,https://osf.io/download/6aada5af0ef8b6fd86390c5d/,2026-10-09
@@ -82,6 +86,7 @@ arista_2010_achievement_motivation,core,none,2026-10-09
 armaly_2024_scotus_nominees,conj,none,2026-10-09
 asadollahi_2022_short_fesi,core,none,2026-10-10
 aspide_2025_debt_austerity,conj,none,2026-10-09
+assyafiyah_2026_rcse,core,none,2026-10-18
 atik_2025_ai_life_satisfaction,core,none,2026-10-05
 atik_2025_gwb,core,none,2026-10-05
 atik_2025_swls,core,none,2026-10-05
@@ -313,6 +318,9 @@ butler_2019_elite_trust_game,conj,https://dataverse.harvard.edu/api/access/dataf
 buttler_2026_hiring_vignettes,conj,https://osf.io/download/2hp6e/,2026-10-09
 buzzi_2025_autonomy,core,https://zenodo.org/records/15305238/files/results-survey220905_grezzi%20per%20correlazione.xlsx,2026-10-09
 buzzi_2025_cyrm12,core,https://zenodo.org/records/15305238/files/results-survey220905_grezzi%20per%20correlazione.xlsx,2026-10-09
+cabanas_2026_emotional_competence,core,none,2026-10-18
+cabanas_2026_entrep_self_efficacy,core,none,2026-10-18
+cabanas_2026_entrepreneurial_intention,core,none,2026-10-18
 cahyadi_2025_behavioural_intention,core,none,2026-10-18
 cahyadi_2025_concern,core,none,2026-10-18
 cahyadi_2025_effort_expectancy,core,none,2026-10-18
@@ -469,6 +477,9 @@ cohen_2024_poll_watchers_s3,conj,https://dataverse.harvard.edu/api/access/datafi
 condon_2025_caq,core,none,2026-10-11
 condon_2025_caq_freq,core,none,2026-10-11
 conroykrutz_2025_media_restrictions,conj,https://dataverse.harvard.edu/api/access/datafile/8072167,2026-10-07
+contreras_valdez_2026_cpq,core,none,2026-10-18
+contreras_valdez_2026_perci,core,none,2026-10-18
+contreras_valdez_2026_rses,core,none,2026-10-18
 cordellieri_2026_bsss8,core,https://zenodo.org/api/records/22375285/files/SCEDD_codebook.xlsx/content,2026-10-15
 cordellieri_2026_rpodd,core,https://zenodo.org/api/records/22375285/files/SCEDD_codebook.xlsx/content,2026-10-15
 cordellieri_2026_scedd,core,https://zenodo.org/api/records/22375285/files/SCEDD_codebook.xlsx/content,2026-10-15
@@ -555,6 +566,7 @@ deilkas_2019_saq,core,none,2026-10-10
 dekleer_2025_protest_support,conj,https://dataverse.harvard.edu/api/access/datafile/12128035,2026-10-09
 dekruiff_2026_forests_poland,conj,none,2026-10-14
 dekruiff_2026_forests_slovakia,conj,none,2026-10-14
+deleon_villagran_2026_tmms24,core,none,2026-10-18
 delponte_2020_debt_dilemmas,conj,https://dataverse.harvard.edu/api/access/datafile/4271477,2026-10-11
 denny_2022_police_cooperation,conj,none,2026-10-09
 deryahanoglu_2024_big5_10,core,none,2026-10-10
@@ -901,6 +913,7 @@ gomez_meza_2025_patient_communication,core,none,2026-10-15
 gomez_meza_2025_rathus,core,none,2026-10-15
 gomez_meza_2025_rses,core,none,2026-10-15
 gomm_2026_sustainable_products,conj,https://zenodo.org/api/records/20008484/files/Dragons_ReplicationCode_Gomm.R/content,2026-10-11
+gonzalez_jimarez_2026_ear,core,none,2026-10-18
 gonzalezaguilera_2026_interurban_mode,conj,https://zenodo.org/api/records/21270302/files/Transporte-FCFM/Santiago-Rancagua-SP-dataset-v1.0.0.zip/content,2026-10-14
 gonzalezrobles_2018_oasis,core,none,2026-10-18
 gonzalezrobles_2018_odsis,core,none,2026-10-18
@@ -1156,6 +1169,11 @@ hung_2026c_academic_self_efficacy,core,none,2026-10-18
 hung_2026c_cognitive_load,core,none,2026-10-18
 hung_2026c_procrastination,core,none,2026-10-18
 hung_2026c_teacher_support,core,none,2026-10-18
+hung_2026d_academic_burnout,core,none,2026-10-18
+hung_2026d_fomo,core,none,2026-10-18
+hung_2026d_learning_anxiety,core,none,2026-10-18
+hung_2026d_procrastination,core,none,2026-10-18
+hung_2026d_social_desirability,core,none,2026-10-18
 hutchinson_2023_household_arrangements,conj,https://dataverse.harvard.edu/api/access/datafile/6384150,2026-10-07
 huwyler_2025_side_income,conj,https://dataverse.harvard.edu/api/access/datafile/11982775,2026-10-09
 ibbett_2024_pa_compliance_scenario,conj,https://ndownloader.figshare.com/files/47553524,2026-10-14
@@ -1202,6 +1220,7 @@ jensen_2021_city_development_plans,conj,https://dataverse.harvard.edu/api/access
 jeune_2024_research_use,conj,https://osf.io/download/py3sb/,2026-10-09
 jiang_2025_time_hearing,conj,none,2026-10-14
 jiang_2025_time_insurance,conj,none,2026-10-14
+jiang_2026_questionnaire,core,none,2026-10-18
 jo_2023_via_adoption,core,https://zenodo.org/api/records/7982557/files/README.md/content,2026-10-10
 jonathan_2026_ai_adoption,core,none,2026-10-15
 jonathan_2026_digital_competence,core,none,2026-10-15
@@ -1411,6 +1430,10 @@ laterzotingley_2024_crime_students,conj,https://dataverse.harvard.edu/api/access
 laustsen_2023_candidate_names,conj,none,2026-10-09
 lavigne_2026_misinfo_attitudes,core,none,2026-10-15
 le_2024_digicas_hps,core,https://data.mendeley.com/public-files/datasets/z9w44pc4dp/files/4c3c3b2a-f182-4eda-be7a-d3ef30493a45/file_downloaded,2026-10-15
+le_2026_agentic_engagement,core,none,2026-10-18
+le_2026_behavioural_engagement,core,none,2026-10-18
+le_2026_cognitive_engagement,core,none,2026-10-18
+le_2026_emotional_engagement,core,none,2026-10-18
 leal_2022_cyber_attribution,conj,https://dataverse.harvard.edu/api/access/datafile/5006986,2026-10-09
 lee_2022_ameritrust,core,none,2026-10-10
 lee_2022_gen_trust,core,none,2026-10-10
@@ -1724,6 +1747,7 @@ menghini_2023_mdmq,core,https://osf.io/download/ehw38/,2026-10-04
 menghini_2023_task_control,core,https://osf.io/download/ehw38/,2026-10-04
 menghini_2023_task_demands,core,https://osf.io/download/ehw38/,2026-10-04
 mercea_2025_movement_parties,conj,https://dataverse.harvard.edu/api/access/datafile/10287620,2026-10-08
+meule_2019_bis15,core,none,2026-10-18
 meule_2025_disgust_sensitivity,core,none,2026-10-15
 meule_2025_qadp_brief,core,none,2026-10-15
 meule_2025_spovi,core,none,2026-10-15
@@ -1871,6 +1895,10 @@ nguyen_2024_eheals,core,https://zenodo.org/records/13859254/files/CODEBOOK.docx,
 nguyen_2024_helia,core,https://zenodo.org/records/13859254/files/CODEBOOK.docx,2026-10-18
 nguyen_2024_sleep_hygiene,core,https://zenodo.org/records/13859254/files/CODEBOOK.docx,2026-10-18
 nguyen_2024_swemwbs,core,https://zenodo.org/records/13859254/files/CODEBOOK.docx,2026-10-18
+nguyen_2026_ai_supported_learning,core,none,2026-10-18
+nguyen_2026_fellow_student_collaboration,core,none,2026-10-18
+nguyen_2026_student_wellbeing,core,none,2026-10-18
+nguyen_2026_teacher_responsibility,core,none,2026-10-18
 nicholson_2023_paediatric_care,conj,https://zenodo.org/api/records/6572717/files/Parent_Decision_Making_DCE_Survey.docx/content,2026-10-09
 nicholson_crotty_2021_psm,core,none,2026-10-09
 nicoli_2025_defense_union,conj,none,2026-10-07
@@ -2519,6 +2547,7 @@ scattolin_2022_sop,core,https://data.mendeley.com/public-files/datasets/84tz3jkh
 schaap_2022_ai_agency_dating,conj,https://osf.io/download/bvds5/,2026-10-09
 schaap_2022_ai_agency_stocks,conj,https://osf.io/download/xvcbe/,2026-10-09
 schaap_2023_ai_agency_incentivized,conj,https://osf.io/download/6482e285cb70be01c2f969e8/,2026-10-09
+schaap_2025_cbi_s,core,none,2026-10-18
 scharbert_2024_esm_affect,core,https://osf.io/download/nfkze/,2026-10-10
 scheerhagen_2019_reproq,core,none,2026-10-05
 schick_2026_hazard_adaptation,conj,https://zenodo.org/api/records/21458444/files/README.pdf/content,2026-10-09
