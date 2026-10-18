@@ -50,8 +50,14 @@ import os
 
 import pandas as pd
 
-BASE = ("/tmp/claude-1000/-home-ben-Dropbox-projects-irw-src-automated-finding/"
-        "5eef9b18-8b21-4d62-a15f-a632f0def6f5/scratchpad/bC/raw")
+import sys
+from pathlib import Path as _Path
+sys.path.insert(0, str(_Path(__file__).resolve().parent.parent))
+from irw_validate._checks import run_qc  # noqa: E402
+_RAW_BASE = _Path(__file__).resolve().parent.parent / \
+    "automated_finding" / "runs" / "raw"
+
+BASE = (str(_RAW_BASE / "raw"))
 RAW_B = os.environ.get("RUMANGKIT_B_RAW", os.path.join(
     BASE, "zenodo.21522509", "Dataset_SL and Job Performance_rev1.xlsx"))
 RAW_A = os.environ.get("RUMANGKIT_A_RAW", os.path.join(
@@ -104,6 +110,15 @@ def build(path, scales, prefix, shared_note, written):
         table = f"{prefix}{name}"
         assert table not in written, f"duplicate output name {table}"
         written.add(table)
+        # The shared checks, which the script's own assertions are not
+        # (irw_validate.contract `no_validator`). Fails block; the
+        # warnings here are legitimate and are printed.
+        _checks = run_qc(long)
+        _fails = [(c.name, c.detail) for c in _checks if c.status == "fail"]
+        assert not _fails, _fails
+        for _c in _checks:
+            if _c.status == "warn":
+                print(f"    [qc warn] {_c.name}: {_c.detail[:160]}")
         long[["id", "item", "resp"]].to_csv(
             os.path.join(OUT, f"{table}.csv"), index=False)
         print(f"  {table}: {long['id'].nunique()} ids x "
@@ -116,8 +131,7 @@ def main():
     build(RAW_B, FROM_B, "rumangkit_2026_",
           "not an item of a scale shipped from this deposit", written)
     build(RAW_A, FROM_A, "rumangkit_2026b_",
-          "shipped from 21522509 instead -- the same 100 respondents, "
-          "so shipping it here too would duplicate them", written)
+          "shipped from 21522509 instead -- the same 100 respondents, so shipping it here too would duplicate them", written)
 
 
 if __name__ == "__main__":

@@ -45,6 +45,11 @@ import numpy as np
 import pandas as pd
 import pyreadstat
 
+import sys
+from pathlib import Path as _Path
+sys.path.insert(0, str(_Path(__file__).resolve().parent.parent))
+from irw_validate._checks import run_qc  # noqa: E402
+
 
 # --- raw input -------------------------------------------------------------
 # Self-contained by design: the script fetches the deposit itself and caches
@@ -147,6 +152,15 @@ def convert():
     long = long[["id", "item", "resp", "wave", "cov_gender", "cov_age"]]
 
     name = "wang_2026_pmpu"
+    # The shared checks, which the script's own assertions are not
+    # (irw_validate.contract `no_validator`). Fails block; the
+    # warnings here are legitimate and are printed.
+    _checks = run_qc(long)
+    _fails = [(c.name, c.detail) for c in _checks if c.status == "fail"]
+    assert not _fails, _fails
+    for _c in _checks:
+        if _c.status == "warn":
+            print(f"    [qc warn] {_c.name}: {_c.detail[:160]}")
     long.to_csv(os.path.join(OUT_DIR, f"{name}.csv"), index=False)
     print(f"{name}: rows={len(long)} ids={long['id'].nunique()} "
           f"items={long['item'].nunique()} waves={long['wave'].nunique()} "

@@ -48,11 +48,16 @@ import os
 import pandas as pd
 import pyreadstat
 
+import sys
+from pathlib import Path as _Path
+sys.path.insert(0, str(_Path(__file__).resolve().parent.parent))
+from irw_validate._checks import run_qc  # noqa: E402
+_RAW_BASE = _Path(__file__).resolve().parent.parent / \
+    "automated_finding" / "runs" / "raw"
+
 RAW = os.environ.get(
     "WALTON_RAW",
-    "/tmp/claude-1000/-home-ben-Dropbox-projects-irw-src-automated-finding/"
-    "5eef9b18-8b21-4d62-a15f-a632f0def6f5/scratchpad/bC/raw/zenodo.7703332/"
-    "Data Analysis.sav_12122021_latest with Mediation.sav")
+    str(_RAW_BASE / "Data_Analysis.sav_12122021_latest_with_Mediation.sav"))
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                    "..", "automated_finding", "irw_output")
 
@@ -61,10 +66,8 @@ SCALES = {
     "ss":  ([f"SS{i}" for i in range(1, 5)], {1, 2, 3, 4, 5, 6}),
     "wfc": ([f"WFC{i}" for i in range(1, 11)], {1, 2, 3, 4, 5, 6, 7}),
 }
-WITHHELD = {**{f"WE{i}": "UWES-9 verbatim -- register `block`, matcher ^uwes "
-                         "cannot see a WE* code" for i in range(1, 10)},
-            **{f"PWB{i}": "WHO-5 verbatim -- register `block`, matcher "
-                          "^who5|^who_5 cannot see a PWB* code"
+WITHHELD = {**{f"WE{i}": "UWES-9 verbatim -- register `block`, matcher ^uwes cannot see a WE* code" for i in range(1, 10)},
+            **{f"PWB{i}": "WHO-5 verbatim -- register `block`, matcher ^who5|^who_5 cannot see a PWB* code"
                for i in range(1, 6)}}
 COVS = {"GENDER": "cov_gender", "AGE": "cov_age_group",
         "MARITAL": "cov_marital", "EDUCATION": "cov_education",
@@ -116,6 +119,15 @@ def main():
         table = f"walton_2023_{name}"
         assert table not in written
         written.add(table)
+        # The shared checks, which the script's own assertions are not
+        # (irw_validate.contract `no_validator`). Fails block; the
+        # warnings here are legitimate and are printed.
+        _checks = run_qc(long)
+        _fails = [(c.name, c.detail) for c in _checks if c.status == "fail"]
+        assert not _fails, _fails
+        for _c in _checks:
+            if _c.status == "warn":
+                print(f"    [qc warn] {_c.name}: {_c.detail[:160]}")
         long[["id", "item", "resp"] + [COVS[c] for c in COVS]].to_csv(
             os.path.join(OUT, f"{table}.csv"), index=False)
         print(f"  {table}: {long['id'].nunique()} ids x "

@@ -24,12 +24,16 @@ import os
 import pandas as pd
 import pyreadstat
 
+import sys
+from pathlib import Path as _Path
+sys.path.insert(0, str(_Path(__file__).resolve().parent.parent))
+from irw_validate._checks import run_qc  # noqa: E402
+_RAW_BASE = _Path(__file__).resolve().parent.parent / \
+    "automated_finding" / "runs" / "raw"
+
 RAW = os.environ.get(
     "ROJAS_RAW",
-    "/tmp/claude-1000/-home-ben-Dropbox-projects-irw-src-automated-finding/"
-    "5eef9b18-8b21-4d62-a15f-a632f0def6f5/scratchpad/bC/raw/zenodo.22609/"
-    "2012_Rojas_Comprension_lectora_en_alumnos_de_6_grado_de_instituciones_"
-    "educativas_publicas_de_Ventanilla.sav")
+    str(_RAW_BASE / "2012_Rojas_Comprension_lectora_en_alumnos_de_6_grado_de_instituciones_educativas_publicas_de_Ventanilla.sav"))
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                    "..", "automated_finding", "irw_output")
 ITEMS = [f"IT{i}" for i in range(1, 29)]
@@ -57,6 +61,15 @@ def main():
         assert not bad, f"{it}: {sorted(bad)} outside 0/1"
     assert long["id"].nunique() >= 100 and long["item"].nunique() > 1
     os.makedirs(OUT, exist_ok=True)
+    # The shared checks, which the script's own assertions are not
+    # (irw_validate.contract `no_validator`). Fails block; the
+    # warnings here are legitimate and are printed.
+    _checks = run_qc(long)
+    _fails = [(c.name, c.detail) for c in _checks if c.status == "fail"]
+    assert not _fails, _fails
+    for _c in _checks:
+        if _c.status == "warn":
+            print(f"    [qc warn] {_c.name}: {_c.detail[:160]}")
     long[["id", "item", "resp", "cov_school"]].to_csv(
         os.path.join(OUT, "rojas_2012_reading_comprehension.csv"), index=False)
     print(f"  rojas_2012_reading_comprehension: {long['id'].nunique()} ids x "

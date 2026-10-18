@@ -54,6 +54,11 @@ import os
 import pandas as pd
 import pyreadstat
 
+import sys
+from pathlib import Path as _Path
+sys.path.insert(0, str(_Path(__file__).resolve().parent.parent))
+from irw_validate._checks import run_qc  # noqa: E402
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 
 # --- raw input -------------------------------------------------------------
@@ -145,6 +150,15 @@ def convert():
                       on="id", how="left")
     assert long["item"].nunique() == 6 and long["id"].nunique() >= 100
     long = long[["id", "item", "resp"] + list(cov_src.values())]
+    # The shared checks, which the script's own assertions are not
+    # (irw_validate.contract `no_validator`). Fails block; the
+    # warnings here are legitimate and are printed.
+    _checks = run_qc(long)
+    _fails = [(c.name, c.detail) for c in _checks if c.status == "fail"]
+    assert not _fails, _fails
+    for _c in _checks:
+        if _c.status == "warn":
+            print(f"    [qc warn] {_c.name}: {_c.detail[:160]}")
     long.to_csv(os.path.join(OUT_DIR, f"{TABLE}.csv"), index=False)
     print(f"{TABLE}: rows={len(long)} ids={long['id'].nunique()} "
           f"items={long['item'].nunique()} "

@@ -13,9 +13,16 @@ import os
 
 import pandas as pd
 
+import sys
+from pathlib import Path as _Path
+sys.path.insert(0, str(_Path(__file__).resolve().parent.parent))
+from irw_validate._checks import run_qc  # noqa: E402
+_RAW_BASE = _Path(__file__).resolve().parent.parent / \
+    "automated_finding" / "runs" / "raw"
+
 RAWDIR = os.environ.get(
     "GRAZIOTIN_RAWDIR",
-    "/tmp/claude-1000/-home-ben-Dropbox-projects-irw-src-automated-finding/5eef9b18-8b21-4d62-a15f-a632f0def6f5/scratchpad/bC/raw/zenodo.4911906")
+    str(_RAW_BASE / "zenodo.4911906"))
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                    "..", "automated_finding", "irw_output")
 
@@ -70,6 +77,15 @@ def main():
         assert table not in written, table
         written.add(table)
         cols_out = ["id", "item", "resp"] + [COVS[c] for c in COVS]
+        # The shared checks, which the script's own assertions are not
+        # (irw_validate.contract `no_validator`). Fails block; the
+        # warnings here are legitimate and are printed.
+        _checks = run_qc(long)
+        _fails = [(c.name, c.detail) for c in _checks if c.status == "fail"]
+        assert not _fails, _fails
+        for _c in _checks:
+            if _c.status == "warn":
+                print(f"    [qc warn] {_c.name}: {_c.detail[:160]}")
         long[cols_out].to_csv(os.path.join(OUT, table + ".csv"), index=False)
         print(f"  {table}: {long['id'].nunique()} ids x "
               f"{long['item'].nunique()} items = {len(long)} responses")
