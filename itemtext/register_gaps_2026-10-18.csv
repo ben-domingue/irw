@@ -1,0 +1,26 @@
+instrument,register_row,current_verdict,current_match_item_code,current_n_text_patterns,fields_verified_against_register,codes_observed,found_in,stems_read_verbatim,suggested_match_item_text,note
+Utrecht Work Engagement Scale (UWES),yes,block,^uwes,0,yes,VE1; WE1-WE9,zenodo_rest A and C,bursting with energy|My job inspires me|strong and vigorous,bursting with energy|my job inspires me|strong and vigorous|immersed in my work|proud of the work I do,"WOULD HAVE SHIPPED on an automated check. Zero text patterns, and ^uwes misses both the VE (subscale) and WE (work-engagement) codings."
+WHO-5 Well-Being Index,yes,block,^who5|^who_5,0,yes,PWB1-PWB5,zenodo_rest C,cheerful and in good spirits|woke up feeling fresh and rested,cheerful and in good spirits|calm and relaxed|active and vigorous|woke up feeling fresh and rested|daily life has been filled with things that interest me,WOULD HAVE SHIPPED on an automated check. Zero text patterns; ^who5|^who_5 misses a PWB coding.
+Beck Anxiety Inventory (BAI),yes,block,,0,yes,a Spanish symptom block,zenodo_rest C,Torpe o entumecido|Con temor a que ocurra lo peor,torpe o entumecido|con temor a que ocurra lo peor|incapaz de relajarse|numbness or tingling|fear of the worst happening|unable to relax,Both columns EMPTY -- inert. The row also names only the Chinese version while the deposit was Spanish; per the 2026-09-29 ruling a block row covers every language. Deposit refused entire by hand.
+Satisfaction With Life Scale (SWLS),yes,block,^swls,7,yes,LS1-LS5,the original 18,In most ways my life is close to my ideal,,Text surface IS covered (7 patterns); only the code pattern ^swls misses an LS coding. Lowest priority here.
+Warwick-Edinburgh Mental Well-being Scale (WEMWBS),yes (name not looked up here),,,,no,D1-D14,the original 18,,feeling optimistic about the future|feeling useful|feeling relaxed|dealing with problems well|thinking clearly|feeling close to other people|able to make up my own mind about things,Zero text patterns; ^s?wemwbs misses a D coding. Exact register name is longer than this label -- look it up by family WEMWBS.
+Perceived Stress Scale (PSS-4/10/14),yes,block,^pss[_ ]?[0-9]|perceived_stress,10,yes,Pre1-Pre10; Post1-Post10,zenodo.5217991,,,"Has 10 text patterns, so the text surface should have caught it; ^pss[_ ]?[0-9] misses a pre/post administration coding."
+Zimbardo Time Perspective Inventory (ZTPI),yes (name not looked up here),,,,no,ZTPI_1,zenodo_rest B,,,The matcher ^ZTPIQ[0-9]+R?$ misses the register's OWN instrument under an underscore coding. Zero text patterns.
+Strengths and Difficulties Questionnaire (SDQ),yes (name not looked up here),,,,no,pconsid; prestles; psomatic,mendeley hp6y7cj9r2,,,match_item_code SDQ1|SDQ_1|sdq1|SDQ_Pro1 matches none of the twelve subscale-named codes present. 4 text patterns.
+Big Five Inventory-10 (BFI-10),yes (name not looked up here),,,,no,,zenodo_rest C,,,"Row blocks, code pattern present, ZERO text patterns."
+12-Item Grit Scale (Duckworth et al. 2007),yes,block,,0,yes,,the original 18 and A,,,Blocks with BOTH columns empty -- inert.
+"Short Grit Scale (Grit-S, 8 items)",yes (name not looked up here),,,,no,,the original 18 and A,,,Blocks with BOTH columns empty -- inert.
+"Short O-LIFE (Mason, Linney & Claridge 2005)",yes (name not looked up here),,,,no,,the original 18,,,Blocks with BOTH columns empty -- inert.
+UTAUT2 / task-technology fit,yes (name not looked up here),,,,no,,zenodo_rest C,,,Row exists with verdict HOLD and both columns empty. Ruling wanted on scope: many 2026 AI-acceptance deposits carry UTAUT/UTAUT2 batteries.
+Childhood Trauma Questionnaire (CTQ),NO,,,,no,,mendeley and zenodo_rest B,,,NO REGISTER ROW. Pearson. Items withheld by hand from an otherwise-shipped deposit; found independently by two batches.
+Professional Quality of Life (ProQOL),NO,,,,no,pro1-pro30,zenodo_rest B,,,NO REGISTER ROW. Was about to ship as *_prosocial on the item prefix alone; identified from the derived scores beside it.
+PAI-Borderline (PAI-BOR),NO,,,,no,,zenodo_rest B,,,NO REGISTER ROW.
+CARS2-ST,NO,,,,no,,mendeley,,,NO REGISTER ROW. WPS.
+"Resilience Scale (RS-25), Wagnild & Young",NO,,,,no,,mendeley,,,NO REGISTER ROW. Distinct from the CD-RISC row that is there.
+Dissociative Experiences Scale (DES),NO,,,,no,,zenodo_rest B and C,,,NO REGISTER ROW. 3 tables shipped from zenodo.13905610 -- check before release if a row is added.
+Organizational justice,NO,,,,no,,zenodo_rest C,,,NO REGISTER ROW. Ruling wanted.
+Organizational citizenship behaviour (OCB),NO,,,,no,,zenodo_rest C,,,NO REGISTER ROW. Ruling wanted.
+Netemeyer work-family conflict,NO,,,,no,,zenodo_rest C,,,NO REGISTER ROW. Ruling wanted.
+COPSOQ job-demands / social-support blocks,NO,,,,no,,zenodo_rest C,,,NO REGISTER ROW. Ruling wanted.
+Servant leadership (non-SLS instrument),NO,,,,no,,zenodo_rest C,,,"NO REGISTER ROW for this one; the Servant Leadership Survey (SLS, 30 items) row exists and is NOT it."
+LPFS-BF,NO,,,,no,,zenodo_rest C,,,NO REGISTER ROW. Ruling wanted.

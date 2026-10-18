@@ -139,7 +139,17 @@ def licence_code(lic: str) -> str:
     if m:
         code = m.group(1)
         return "cc0" if code in ("zero", "mark") else f"cc-{code}"
-    return lic.replace("_", "-").replace(" ", "-")
+    lic = lic.replace("_", "-").replace(" ", "-")
+    # Zenodo's own licence id for CC0 1.0 is `cc-zero`, which fails a
+    # `startswith("cc0")` test. Three CC0 deposits in the 2026-10-18 zenodo_rest
+    # batch C carried it. It did no harm there because the leads file had
+    # already normalised them, but a caller resolving licences straight from
+    # the Zenodo API would have dropped every CC0 Zenodo deposit as unknown.
+    if lic in ("cc-zero", "cc-zero-1.0") or lic.startswith("cc-zero-"):
+        return "cc0"
+    if lic in ("publicdomain", "public-domain-mark", "pd"):
+        return "cc0"
+    return lic
 
 
 def is_nc(lic: str) -> bool:
