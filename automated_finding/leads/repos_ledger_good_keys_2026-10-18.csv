@@ -1,0 +1,129 @@
+key,date,status,evidence
+10.25415/ujhb.33093377.v1,2026-08-14,lead: unseen,in no leads or human_review file
+10.6084/m9.figshare.33140489.v1,2026-08-14,lead: unseen,in no leads or human_review file
+10.6084/m9.figshare.33110519.v2,2026-08-14,lead: unseen,in no leads or human_review file
+10.17632/b4byp3rn7j,2026-08-26,shipped,dictionary dictionary_auto.csv: aditama_2024_strs
+10.7910/dvn/terjak,2026-08-26,shipped,dictionary dictionary_auto.csv: goldberg_2018_tci
+10.7910/dvn/ymbild,2026-08-26,shipped,dictionary dictionary_auto.csv: goldberg_2018_hpi
+10.7910/dvn/dup1tt,2026-08-26,shipped,dictionary dictionary_auto.csv: goldberg_2018_jpir
+10.1371/journal.pone.0340479.s002,2026-08-26,shipped,script data/yang2026_efl_learner_perspective.py (no dictionary row carries this key -- worth a look)
+10.17632/6y7sbzjbny,2026-08-26,shipped,dictionary dictionary_auto.csv: lestari_2026_cognitive_flexibility
+10.17632/xd27t4g547,2026-08-26,shipped,dictionary dictionary_auto.csv: ramadan_2026_ai_awareness
+10.17632/mrrc83rt3b,2026-08-26,lead: unworked,mendeley_leads_2026-08-26.csv -- status 'good'
+10.17632/hwvsd5zd4d,2026-08-26,shipped,dictionary dictionary_auto.csv: dai_2025_music_motivation
+10.17632/tpgsnk4928,2026-08-26,shipped,dictionary dictionary_auto.csv: khoa_2023_assurance
+10.17632/4fp3nxmcgs,2026-08-28,lead: unworked,repo_leads_2026-08-27.csv -- that file records no status
+10.17632/zr54c7rxs3,2026-08-28,shipped,dictionary dictionary_auto.csv: nurjanah_2019_hls47
+10.5281/zenodo.22117910,2026-08-28,shipped,dictionary dictionary_auto.csv: apaza_2026_meim_r
+10.5281/zenodo.21408658,2026-08-28,lead: unworked,repo_leads_2026-08-27.csv -- that file records no status
+10.5281/zenodo.16892994,2026-08-28,lead: unworked,repo_leads_2026-08-27.csv -- that file records no status
+10.5281/zenodo.17628395,2026-08-28,lead: unworked,repo_leads_2026-08-27.csv -- that file records no status
+10.5281/zenodo.14903363,2026-08-28,lead: unworked,repo_leads_2026-08-27.csv -- that file records no status
+10.5281/zenodo.20017889,2026-08-28,lead: unworked,repo_leads_2026-08-27.csv -- that file records no status
+10.5281/zenodo.15160903,2026-08-28,shipped,dictionary dictionary_auto.csv: matosaslopez_2022_bars_teaching
+10.5281/zenodo.15151307,2026-08-28,shipped,dictionary dictionary_auto.csv: matosaslopez_2022_bars_teaching_inperson
+10.5281/zenodo.22104768,2026-08-28,shipped,dictionary dictionary_auto.csv: prihastiwi_2026_adcap
+10.5281/zenodo.21121992,2026-08-28,lead: unworked,repo_leads_2026-08-27.csv -- that file records no status
+10.5281/zenodo.18227290,2026-08-28,lead: unworked,repo_leads_2026-08-27.csv -- that file records no status
+10.5281/zenodo.14768211,2026-08-28,lead: unworked,repo_leads_2026-08-27.csv -- that file records no status
+10.5281/zenodo.16068892,2026-08-28,lead: unworked,repo_leads_2026-08-27.csv -- that file records no status
+10.5281/zenodo.18890328,2026-08-28,lead: unworked,repo_leads_2026-08-27.csv -- that file records no status
+10.5281/zenodo.20783961,2026-08-28,lead: unworked,repo_leads_2026-08-27.csv -- that file records no status
+10.5281/zenodo.5642537,2026-08-28,lead: unworked,repo_leads_2026-08-27.csv -- that file records no status
+10.5281/zenodo.15151243,2026-08-28,shipped,dictionary dictionary_auto.csv: matosaslopez_2024_questionnaire_quality
+10.7910/dvn/wv1yj1,2026-08-28,shipped,dictionary sheet:1nhPyv: ma2021_sme_covid
+10.17632/txm4zf982j,2026-08-28,lead: unworked,repo_leads_2026-08-27.csv -- that file records no status
+10.5281/zenodo.12619790,2026-08-28,lead: unworked,repo_leads_2026-08-27.csv -- that file records no status
+10.1371/journal.pone.0333422.s002,2026-08-28,lead: unworked,repo_leads_2026-08-27.csv -- that file records no status
+10.1371/journal.pone.0333422.s001,2026-08-28,lead: unworked,repo_leads_2026-08-27.csv -- that file records no status
+10.5281/zenodo.15164966,2026-08-28,lead: unworked,repo_leads_2026-08-27.csv -- that file records no status
+10.5281/zenodo.21802067,2026-08-28,lead: unworked,repo_leads_2026-08-27.csv -- that file records no status
+10.1371/journal.pone.0295581.s001,2026-08-28,lead: unworked,repo_leads_2026-08-27.csv -- that file records no status
+10.5281/zenodo.10534309,2026-08-28,lead: unworked,repo_leads_2026-08-27.csv -- that file records no status
+10.5281/zenodo.16009161,2026-08-28,lead: unworked,repo_leads_2026-08-27.csv -- that file records no status
+10.5281/zenodo.15547217,2026-08-28,lead: unseen,in no leads or human_review file
+10.5281/zenodo.20118342,2026-08-28,lead: unworked,zenodo_leads_2026-08-28.csv -- that file records no status
+10.5281/zenodo.18373473,2026-08-28,lead: unworked,zenodo_leads_2026-08-28.csv -- that file records no status
+10.5281/zenodo.5720946,2026-08-29,lead: unseen,in no leads or human_review file
+10.5281/zenodo.20734378,2026-08-29,lead: unseen,in no leads or human_review file
+10.6084/m9.figshare.33332604,2026-10-06,shipped,script data/tang_2026_rmet_c.py (no dictionary row carries this key -- worth a look)
+10.6084/m9.figshare.21195868,2026-10-06,shipped,dictionary dictionary_auto.csv: yan_2023_eri
+10.7910/dvn/u6yti5,2026-10-06,shipped,script data/mcdermott_2014_roadmaps_expert_ratings.py (no dictionary row carries this key -- worth a look)
+10.7910/dvn/szqhao,2026-10-06,shipped,dictionary dictionary_auto.csv: weber_2026_name_interaction
+10.5281/zenodo.20418454,2026-10-06,shipped,dictionary dictionary_auto.csv: cordova_2026_who5
+10.5281/zenodo.20199216,2026-10-06,shipped,dictionary dictionary_auto.csv: heriyati_2026_digital_info_literacy
+10.5061/dryad.jc6dt,2026-10-06,shipped,dictionary dictionary_auto.csv: bado_2018_ohla_b
+10.5281/zenodo.15328068,2026-10-06,shipped,dictionary dictionary_auto.csv: morales_2025_ehealth_much
+10.7910/dvn/l3kaa2,2026-10-06,shipped,dictionary dictionary_auto.csv: atik_2025_ai_life_satisfaction
+10.5061/dryad.2jm63xskj,2026-10-06,shipped,dictionary dictionary_auto.csv: lane_2020_pss
+10.7910/dvn/qifmot,2026-10-06,closed: rejected_content,repos_leads_2026-10-05.csv
+10.7910/dvn/ln7gcj,2026-10-06,closed: rejected_content,repos_leads_2026-10-05.csv
+10.5061/dryad.0zpc8670s,2026-10-06,closed: rejected_content,repos_leads_2026-10-05.csv
+10.5281/zenodo.18993680,2026-10-07,lead: unworked,repos_leads_2026-10-07.csv -- status 'unworked'
+10.6084/m9.figshare.33296244,2026-10-07,shipped,dictionary dictionary_auto.csv: pinho_2026_ai_literacy
+10.7910/dvn/cska4q,2026-10-07,lead: unworked,repos_leads_2026-10-07.csv -- status 'unworked'
+10.7910/dvn/bdkmxm,2026-10-07,closed: rejected_content,repos_leads_2026-10-07.csv
+10.5281/zenodo.18617769,2026-10-07,lead: unworked,repos_leads_2026-10-07.csv -- status 'unworked'
+10.5281/zenodo.22829237,2026-10-07,shipped,dictionary dictionary_auto.csv: belyakova_2026_bfi2s
+10.5281/zenodo.16890070,2026-10-07,shipped,dictionary dictionary_auto.csv: harlianto_2025_cyberloafing
+10.5281/zenodo.10535997,2026-10-07,lead: unworked,repos_leads_2026-10-07.csv -- status 'unworked'
+10.5281/zenodo.15281864,2026-10-07,closed: rejected_content,repos_leads_2026-10-07.csv
+10.5281/zenodo.18056003,2026-10-07,shipped,dictionary dictionary_auto.csv: prihandoko_2025_ews
+10.5281/zenodo.21318421,2026-10-07,closed: skipped_pii,repos_leads_2026-10-07.csv
+10.5281/zenodo.21126480,2026-10-07,closed: skipped_pii,repos_leads_2026-10-07.csv
+10.5281/zenodo.15671603,2026-10-07,shipped,dictionary dictionary_auto.csv: syamsuar_2025_perceived_severity
+10.7910/dvn/fh74d9,2026-10-07,closed: blocked_licence,repos_leads_2026-10-07.csv
+10.34894/jlkiny,2026-10-07,lead: unworked,repos_leads_2026-10-07.csv -- status 'unworked'
+10.5281/zenodo.17982683,2026-10-07,shipped,dictionary dictionary_auto.csv: gwen_2025_interpersonal_comm
+10.6084/m9.figshare.33106967,2026-10-07,shipped,dictionary dictionary_auto.csv: tangarife_2026_research_barriers
+10.7910/dvn/xhrc8y,2026-10-07,closed: blocked_licence,repos_leads_2026-10-07.csv
+10.6084/m9.figshare.34032243,2026-10-07,shipped,dictionary dictionary_auto.csv: adebiyi_2026_representational_fluency
+10.25403/upresearchdata.23634318.v1,2026-10-07,shipped,dictionary dictionary_auto.csv: iilonga_2023_algebra_word_problems
+10.7910/dvn/hpjfsd,2026-10-09,shipped,dictionary dictionary_auto.csv: kim_2025_karrot_econ_motiv
+10.7910/dvn/koqp5c,2026-10-09,shipped,dictionary dictionary_auto.csv: moreno_jorquera_2025_amtb_interest
+10.7910/dvn/7izw37,2026-10-09,shipped,dictionary dictionary_auto.csv: nguyen_2024_cpd_motivation
+10.7910/dvn/mhvajz,2026-10-09,shipped,dictionary dictionary_auto.csv: bland_2024_mfq20
+10.7910/dvn/jsbbmr,2026-10-09,closed: rejected_content,repos_leads_2026-10-08.csv
+10.7910/dvn/jxwdra,2026-10-09,closed: skipped_pii,repos_leads_2026-10-08.csv
+10.17632/mtm2hbmwky,2026-10-09,closed: rejected_content,repos_leads_2026-10-08.csv
+10.17632/kfk5j9g4xc,2026-10-09,shipped,dictionary dictionary_auto.csv: azizi_2023_eq5d5l
+10.5281/zenodo.21120591,2026-10-09,closed: skipped_pii,repos_leads_2026-10-08.csv
+10.5281/zenodo.16539273,2026-10-10,closed: below_n,repos_leads_2026-10-10.csv
+10.5281/zenodo.19680489,2026-10-10,closed: skipped_pii,repos_leads_2026-10-10.csv
+10.5281/zenodo.21383291,2026-10-10,shipped,dictionary dictionary_auto.csv: rosado_2026_eureka
+10.5281/zenodo.21963745,2026-10-10,shipped,dictionary dictionary_auto.csv: fauziah_2026_humble_leadership
+10.5061/dryad.jdfn2z3g5,2026-10-10,shipped,dictionary dictionary_auto.csv: jo_2023_via_adoption
+10.5281/zenodo.12609724,2026-10-10,closed: blocked_licence,repos_leads_2026-10-10.csv
+10.7910/dvn/grxtzy,2026-10-10,closed: rejected_content,repos_leads_2026-10-10.csv
+10.3389/fsysb.2024.1293265.s002,2026-10-10,closed: rejected_content,repos_leads_2026-10-10.csv
+10.5281/zenodo.15305238,2026-10-10,shipped,dictionary dictionary_auto.csv: buzzi_2025_autonomy
+10.6084/m9.figshare.32576487,2026-10-10,shipped,dictionary dictionary_auto.csv: zhang_2026_ai_companion
+10.17632/735s7fvt99,2026-10-11,shipped,dictionary dictionary_auto.csv: sobczak_2024_bmast
+10.7910/dvn/nwyx4n,2026-10-11,shipped,dictionary dictionary_auto.csv: goldberg_2018_pea
+10.7910/dvn/y10eqv,2026-10-11,closed: blocked_licence,repos_leads_2026-10-11.csv
+10.7910/dvn/2ibbmg,2026-10-11,shipped,dictionary dictionary_auto.csv: zabelina_2022_caq
+10.5281/zenodo.22040756,2026-10-11,shipped,dictionary dictionary_auto.csv: bi_2026_ai_literacy
+10.5281/zenodo.20400330,2026-10-11,shipped,dictionary dictionary_auto.csv: pinedo_2026_genai_utaut2
+10.6084/m9.figshare.34021359,2026-10-11,shipped,dictionary dictionary_auto.csv: yuan_2026_vr_chinese
+10.17632/sg2whyws4h,2026-10-11,shipped,dictionary dictionary_auto.csv: begum_2026_isi
+10.17632/252r6gdx48,2026-10-11,shipped,dictionary dictionary_auto.csv: yang_2026_epistemic_beliefs
+10.17632/x9d7bspnr3,2026-10-11,closed: rejected_content,repos_leads_2026-10-11.csv
+10.5281/zenodo.19699406,2026-10-11,closed: rejected_content,repos_leads_2026-10-11.csv
+https://osf.io/p8v3k/,2026-10-15,shipped,dictionary dictionary_auto.csv: blotner_2023_sd4_germany
+10.7910/dvn/a9nud7,2026-10-15,shipped,dictionary dictionary_auto.csv: li_2026_hsc_awareness
+10.6084/m9.figshare.31672783,2026-10-15,shipped,dictionary dictionary_auto.csv: habibi_2026_teacher_self_concept
+10.6084/m9.figshare.29664803,2026-10-15,shipped,dictionary dictionary_auto.csv: yao_2025_kindergarten_y
+10.5281/zenodo.22375285,2026-10-15,shipped,dictionary dictionary_auto.csv: cordellieri_2026_scedd
+10.5281/zenodo.22256717,2026-10-15,shipped,dictionary dictionary_auto.csv: huentemilla_2026_digital_competence_test
+10.6084/m9.figshare.33187878,2026-10-15,shipped,dictionary dictionary_auto.csv: guerrero_zambrano_2026_ai_use
+10.17632/gyfdrvfs7c,2026-10-15,shipped,dictionary dictionary_auto.csv: rizqiansah_2026_e_audit
+10.17632/h4gcfmbk5c,2026-10-15,shipped,dictionary dictionary_auto.csv: prasetiyo_2025_digital_citizenship
+10.17632/mkd998xj9j,2026-10-15,shipped,dictionary dictionary_auto.csv: heryanda_2025_gamification_features
+10.17632/x4r7hpn4cz,2026-10-15,shipped,dictionary dictionary_auto.csv: martinez_lopez_2019_cobadi
+10.5281/zenodo.17958610,2026-10-15,shipped,dictionary dictionary_auto.csv: zhang_2025_chatgpt_use
+10.7910/dvn/dwplbc,2026-10-15,shipped,script data/political_preference_china.py (no dictionary row carries this key -- worth a look)
+10.7910/dvn/gqefoi,2026-10-15,shipped,dictionary dictionary_auto.csv: khan_2021_place_identity
+10.1371/journal.pdig.0001325.s001,2026-10-15,closed: rejected_content,repos_leads_2026-10-15.csv
+10.17632/cb4y7z9g2s,2026-10-15,shipped,dictionary dictionary_auto.csv: habiba_2026_ai_tourism
+10.5281/zenodo.14803512,2026-10-15,shipped,dictionary dictionary_auto.csv: bock_2025_epistemic_beliefs
+10.17632/395bxnfg9p,2026-10-15,closed: skipped_pii,repos_leads_2026-10-15.csv

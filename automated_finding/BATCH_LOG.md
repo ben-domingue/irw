@@ -18724,6 +18724,46 @@ verdict).
 Caveat: this re-triage ran under pandas 3.0.3, which is not necessarily the
 scheduled run's pandas.
 
+## 2026-10-18 — The repos ledger's 128 `good` keys, cross-checked (#3051)
+
+The third bullet of #3051. A `good` triage verdict is a prediction, not a
+shipped table: the early repos batches only shipped a `good` row if someone
+got to it, and the key went into `repo_triage_seen_keys.csv` either way, so
+every later run skipped it. Nothing downloaded; `check_shipped.py` (new,
+tracked) matches each key against every dictionary, every `data/**` script,
+and the `leads/` + `human_review/` files, on the same key rule `_key()` uses.
+
+**69 shipped, 23 closed with a recorded reason, 36 still unworked.**
+Per-key result in `leads/repos_ledger_good_keys_2026-10-18.csv`.
+
+- **Shipped (69):** 65 carry a dictionary row (`dictionary_auto.csv` 43, core
+  Sheet 26 — the Sheet matters, so don't run this with `--no-sheets` and read
+  the lead count as final). Four more were found only by their processing
+  script, i.e. the table is live but no dictionary row records the data DOI:
+  `yang2026_efl_learner_perspective`, `tang_2026_rmet_c`,
+  `mcdermott_2014_roadmaps_expert_ratings`, `political_preference_china`.
+  Worth a look as a dictionary gap, separately from this issue.
+- **Closed (23):** `rejected_content` 12, `skipped_pii` 6,
+  `blocked_licence` 4, `below_n` 1 — all recorded in a 2026-10 leads file.
+  No action.
+- **Leads (36):** 6 appear in no leads or `human_review` file at all
+  (`ujhb.33093377`, `figshare.33140489`, `figshare.33110519`,
+  `zenodo.15547217`, `zenodo.5720946`, `zenodo.20734378`). 25 are the
+  unworked tail of the 2026-08-27/28 Zenodo-backlog sweep, whose leads files
+  record no status — BATCH_LOG 2026-08-29b worked that pool largest-first and
+  states plainly that 102 of its 110 leads had no `data/*.py`. 5 are marked
+  `unworked` in `repos_leads_2026-10-07.csv`.
+
+Spot-checked three of the August leads: CC BY 4.0 questionnaire deposits
+(e-satisfaction/e-trust, service quality, a bare "Questionnaire Respondents
+Dataset"), none of them in the dictionary or the core Sheet. The leads are
+real, not a matcher artifact.
+
+Not worked here: the 36 are a batch to run the #3048 way, in forks of ~26,
+one at a time, after Ben says so. They are **not** uploads-in-waiting — a
+`good` flag is not yield, and the 2026-10 Dataverse re-mine shipped 42 tables
+from 210 leads.
+
 ## 2026-10-18b — The Zenodo `no_usable_file` verdicts were a resolver bug (#3051)
 
 The pilot of 2026-10-15 returned `no_usable_file` for all 52 Zenodo rows of
