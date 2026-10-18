@@ -7,10 +7,13 @@ every institutional figshare portal -- which serves
 back "no resolvable tabular file on landing page". The one URL the 2026-10-18b
 fallthrough was tested against carries no version segment, which is why the
 gap survived its own test; these cases pin both shapes.
-"""
-import re
 
-import pytest
+unittest, not pytest: CI runs `python -m unittest discover` over every test
+directory (.github/workflows/tests.yml) and pytest is not installed there.
+"""
+import inspect
+import re
+import unittest
 
 import irw_batch_updated as b
 
@@ -27,34 +30,43 @@ UNVERSIONED = [
 
 # The guard as it appears in _resolve_data_files_any_order's last resort.
 GUARD = re.compile(r"articles/(?:[^/?#]+/)*?\d{4,}(?:/\d+)?/?(?:[?#]|$)")
+EXTRACT = re.compile(r"articles/(?:[^/?#]+/)*?(\d{4,})(?:/(\d+))?/?(?:[?#]|$)")
 
 
-@pytest.mark.parametrize("url", VERSIONED + UNVERSIONED)
-def test_guard_accepts_portal_article_urls(url):
-    assert GUARD.search(url), url
+class GuardAcceptsPortalUrls(unittest.TestCase):
+    def test_guard_accepts_portal_article_urls(self):
+        for url in VERSIONED + UNVERSIONED:
+            with self.subTest(url=url):
+                self.assertTrue(GUARD.search(url), url)
+
+    def test_guard_and_extractor_agree(self):
+        """Whatever the guard admits, the extractor must find an id in."""
+        for url in VERSIONED + UNVERSIONED:
+            with self.subTest(url=url):
+                self.assertTrue(GUARD.search(url))
+                m = EXTRACT.search(url)
+                self.assertIsNotNone(m, url)
+                self.assertGreaterEqual(len(m.group(1)), 4, url)
+
+    def test_extractor_reads_the_id_not_the_version(self):
+        m = EXTRACT.search("https://figshare.manchester.ac.uk/articles/"
+                           "dataset/x/30234109/1")
+        self.assertEqual(m.group(1), "30234109")
+        self.assertEqual(m.group(2), "1")
+
+    def test_non_article_url_is_not_admitted(self):
+        self.assertIsNone(
+            GUARD.search("https://example.org/datasets/collection/overview"))
 
 
-@pytest.mark.parametrize("url", VERSIONED + UNVERSIONED)
-def test_guard_and_extractor_agree(url):
-    """Whatever the guard admits, the extractor must find an id in."""
-    assert GUARD.search(url)
-    m = re.search(r"articles/(?:[^/?#]+/)*?(\d{4,})(?:/(\d+))?/?(?:[?#]|$)", url)
-    assert m is not None and len(m.group(1)) >= 4, url
+class GuardAndExtractorStayIdentical(unittest.TestCase):
+    """Their drifting apart IS the bug this file exists for."""
+
+    def test_guard_in_source_matches_the_pattern_under_test(self):
+        src = inspect.getsource(b._resolve_data_files_any_order)
+        self.assertIn(r"articles/(?:[^/?#]+/)*?\d{4,}(?:/\d+)?/?(?:[?#]|$)",
+                      src)
 
 
-def test_extractor_reads_the_id_not_the_version():
-    m = re.search(r"articles/(?:[^/?#]+/)*?(\d{4,})(?:/(\d+))?/?(?:[?#]|$)",
-                  "https://figshare.manchester.ac.uk/articles/dataset/x/30234109/1")
-    assert m.group(1) == "30234109"
-    assert m.group(2) == "1"
-
-
-def test_guard_in_source_matches_the_pattern_under_test():
-    """Guard against the two drifting apart again -- that drift is the bug."""
-    import inspect
-    src = inspect.getsource(b._resolve_data_files_any_order)
-    assert r"articles/(?:[^/?#]+/)*?\d{4,}(?:/\d+)?/?(?:[?#]|$)" in src
-
-
-def test_non_article_url_is_not_admitted():
-    assert not GUARD.search("https://example.org/datasets/collection/overview")
+if __name__ == "__main__":
+    unittest.main()
