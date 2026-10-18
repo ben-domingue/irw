@@ -1,7 +1,6 @@
-# item-text tables in the Redivis shards as of 2026-10-15
+# item-text tables in the Redivis shards as of 2026-10-17
 # status=published: a reader can fetch it. status=draft: uploaded, not released yet.
 # generated -- do not hand-edit; rerun itemtext/refresh_live_tables.py (irw#1828)
-# draft not listable by this token (needs data.edit) for irw_text, irw_text_3; its draft rows carried forward from the snapshot taken 2026-10-12
 table,shard,status
 16_personalityfactors,irw_text,published
 360emergencymed_azami_2024,irw_text,published
@@ -213,6 +212,7 @@ assessment_time_fournier_2025_pmpuq,irw_text,published
 assessment_time_fournier_2025_upps,irw_text,published
 audit_BrummerHoffman_2021,irw_text_2,published
 audretsch_2021_entrepreneurial_ecosystems,irw_text,published
+austin_2021_media_literacy,irw_text_3,draft
 autonomysupport_mokken,irw_text,published
 avilatamayo_2022_empl_stab,irw_text_2,published
 avilatamayo_2022_skills_dev,irw_text_2,published
@@ -263,8 +263,13 @@ bitew_2020_lte,irw_text,published
 bitew_2020_osss3,irw_text,published
 bitew_2020_phq9,irw_text,published
 bitew_2020_self_efficacy,irw_text,published
+blanc_2024_sdi,irw_text_3,draft
+blanc_2024_sexual_assertiveness,irw_text_3,draft
+blanc_2024_sos,irw_text_3,draft
 bled_2021_imagery_phenomenology,irw_text_3,published
 bled_2021_imagery_use,irw_text_3,published
+bock_2025_epistemic_beliefs,irw_text_3,draft
+bock_2025_responsibility,irw_text_3,draft
 boudreau_2022_police_reform,irw_text,published
 boyd_prism_2024,irw_text,published
 bps_boredom_bieleke2022,irw_text,published
@@ -376,6 +381,9 @@ chen_2021_acculturation,irw_text,published
 chen_2021_enculturation,irw_text,published
 chen_2022_gad,irw_text_3,published
 chen_2022_sasc,irw_text,published
+chen_2026_dt_intention,irw_text_3,draft
+chen_2026_pos,irw_text_3,draft
+chen_2026_technostress,irw_text_3,draft
 chile_2023_children-adolescents-survey_aa,irw_text_2,published
 chile_2023_children-adolescents-survey_cp_a,irw_text_2,published
 chile_2023_children-adolescents-survey_cp_c,irw_text_2,published
@@ -399,6 +407,7 @@ christensen_2018_wsssf_5831,irw_text_2,published
 chuemchit_2024_nonpartner_violence,irw_text,published
 chuemchit_2024_partner_violence,irw_text,published
 cinar_tanriverdi_2023_gad7,irw_text,published
+cisneros_2023_digital_competence,irw_text_3,draft
 clemente_2024_attitude_father,irw_text_3,published
 clemente_2024_attitude_mother,irw_text_3,published
 clemente_2024_pmd,irw_text_3,published
@@ -429,6 +438,9 @@ conspiracy_asd__thinking_styles,irw_text,published
 content_literacy_intervention_g1,irw_text,published
 cooper_2018_funny_topics,irw_text,published
 cooper_2018_offensive_topics,irw_text,published
+cordellieri_2026_bsss8,irw_text_3,draft
+cordellieri_2026_rpodd,irw_text_3,draft
+cordellieri_2026_scedd,irw_text_3,draft
 cordova2019_clinical_edu_environment,irw_text,published
 cormier_2024_cognitive_decline,irw_text,published
 cormier_2024_phq4,irw_text,published
@@ -657,6 +669,9 @@ fang_2021_pbc,irw_text_3,published
 fang_2021_peb,irw_text_3,published
 fang_2021_pn,irw_text_3,published
 fang_2026_anime_museum,irw_text_3,published
+faruk_2021_gad7,irw_text_3,draft
+faruk_2021_phq9,irw_text_3,draft
+faruk_2021_soss,irw_text_3,draft
 fatima_2025_mslq,irw_text,published
 fauziah_2026_human_ai_collab,irw_text_3,published
 fauziah_2026_humble_leadership,irw_text_3,published
@@ -721,6 +736,11 @@ fox_2023_gad7,irw_text_3,published
 frac20,irw_text,published
 fraijo_2022_mslq,irw_text_2,published
 franco_2024_unfolding,irw_text_2,published
+frantz_2021_cns,irw_text_3,draft
+frantz_2021_empathy,irw_text_3,draft
+frantz_2021_env_commitment,irw_text_3,draft
+frantz_2021_env_concern,irw_text_3,draft
+frantz_2021_env_norms,irw_text_3,draft
 fredborg_2018_asmr_triggers,irw_text_3,published
 fredrickson_2015_mhcsf,irw_text,published
 friedman_2018_risks_discrimination,irw_text_3,published
@@ -735,6 +755,8 @@ gabriel_2026_knowledge_confidence,irw_text_2,published
 gabriel_2026_knowledge_correct,irw_text_2,published
 gabriel_2026_media_use,irw_text_2,published
 gad_BrummerHoffman_2021,irw_text_2,published
+gambin_2020_pandemic_diff,irw_text_3,draft
+gambin_2020_phq9,irw_text_3,draft
 gan_2015_cesd,irw_text_2,published
 gan_2024_depression,irw_text,published
 ganbat_2022_pollution_disease_risk,irw_text_2,published
@@ -861,6 +883,10 @@ gilbert_meta_98,irw_text,published
 gilbert_meta_99,irw_text,published
 girma_2021_oslo3,irw_text_2,published
 girma_2021_phq9,irw_text_2,published
+girma_2024_hope,irw_text_3,draft
+girma_2024_mlq,irw_text_3,draft
+girma_2024_moral_identity,irw_text_3,draft
+girma_2024_wemwbs,irw_text_3,draft
 gizaw_2023_phq9,irw_text_2,published
 gmc_kay_2025,irw_text_3,published
 gobbens_2018_adl,irw_text_2,published
@@ -940,6 +966,9 @@ guatemala_2024_homes_transparency,irw_text_3,published
 guatemala_2024_homes_transport,irw_text_3,published
 guatemala_2024_homes_trash,irw_text_3,published
 guatemala_2024_homes_water,irw_text_3,published
+guerrero_zambrano_2026_adaptation,irw_text_3,draft
+guerrero_zambrano_2026_ai_use,irw_text_3,draft
+guerrero_zambrano_2026_data_mgmt,irw_text_3,draft
 gumus_2025_dietarian_identity,irw_text_2,published
 guo_2025_ar,irw_text_3,published
 guo_2025_ase,irw_text_3,published
@@ -948,7 +977,17 @@ gwen_2025_mental_health,irw_text_3,published
 gwen_2025_self_esteem,irw_text_3,published
 gwen_2025_social_support,irw_text_3,published
 ha_2026_aspire_affect,irw_text_3,published
+habiba_2026_ai_tourism,irw_text_3,draft
+habibi_2020_te,irw_text_3,draft
+habibi_2020_tsc,irw_text_3,draft
 habibi_2021_meim,irw_text_2,published
+habibi_2021_pe_te,irw_text_3,draft
+habibi_2021_pe_tsc,irw_text_3,draft
+habibi_2026_performance,irw_text_3,draft
+habibi_2026_teacher_self_concept,irw_text_3,draft
+habibi_2026_teacher_self_efficacy,irw_text_3,draft
+habibi_2026_teaching_anxiety,irw_text_3,draft
+habibi_2026_workload,irw_text_3,draft
 han_2015_peer_assisted_learning,irw_text_2,published
 han_2026_gad7,irw_text_2,published
 han_2026_isi,irw_text_2,published
@@ -977,6 +1016,9 @@ heekerens2025_sdq,irw_text,published
 hellstrom_2019_isi,irw_text_2,published
 herrera_2018_se_d_items,irw_text_3,published
 herreromontes_2022_audit,irw_text_3,published
+heryanda_2025_gamification_features,irw_text_3,draft
+heryanda_2025_psychological_needs,irw_text_3,draft
+heryanda_2025_usage_outcomes,irw_text_3,draft
 hewei_2022_msva_purchase,irw_text_2,published
 hexaco_ashton_2014_a,irw_text,published
 hexaco_ashton_2014_c,irw_text,published
@@ -1017,6 +1059,7 @@ hua_2023_efl_course_experience,irw_text_2,published
 huang_2016_cesd,irw_text_2,published
 huang_2023_d_scale,irw_text_2,published
 huang_2023_medseq,irw_text_2,published
+huentemilla_2026_digital_competence_test,irw_text_3,draft
 hui_2024_gbfs,irw_text_2,published
 humor_styles,irw_text_2,published
 hyatt_2023_aggression_aeq,irw_text_2,published
@@ -1117,6 +1160,11 @@ karajko2025_ai_benefit,irw_text,published
 karajko2025_ai_governance,irw_text,published
 karajko2025_ai_risk,irw_text,published
 karajko2025_ai_trust,irw_text,published
+karim_2026_mhl,irw_text_3,draft
+karinen_2019_immigrant_attitudes,irw_text_3,draft
+karinen_2019_sdo7,irw_text_3,draft
+karinen_2019_tdds_pathogen,irw_text_3,draft
+karinen_2019_traditionalism,irw_text_3,draft
 karlsson_2023_climate_risk,irw_text_3,published
 karpudewan_2022_stp_cca,irw_text_2,published
 karpudewan_2022_stp_efa,irw_text_2,published
@@ -1127,12 +1175,33 @@ kasparek_2025_jvq,irw_text_3,published
 kasparek_2025_phq8,irw_text_3,published
 kassas_2021_covid_exposure,irw_text_3,published
 kassas_2021_covid_mitigation,irw_text_3,published
+kellstedt_2017_civic_action,irw_text_3,draft
+kellstedt_2017_climate_effects,irw_text_3,draft
+kellstedt_2017_competence,irw_text_3,draft
+kellstedt_2017_concern_future,irw_text_3,draft
+kellstedt_2017_concern_now,irw_text_3,draft
+kellstedt_2017_eco_behavior,irw_text_3,draft
+kellstedt_2017_gwcc_attitudes,irw_text_3,draft
+kellstedt_2017_info_source_trust,irw_text_3,draft
+kellstedt_2017_info_source_use,irw_text_3,draft
+kellstedt_2017_informed,irw_text_3,draft
+kellstedt_2017_nep,irw_text_3,draft
+kellstedt_2017_policy_support,irw_text_3,draft
+kellstedt_2017_science_quiz,irw_text_3,draft
 kermen_2022_self_efficacy,irw_text_2,published
 kern_2021_connectedness,irw_text_2,published
 kern_2021_engagement,irw_text_2,published
 kern_2021_learning,irw_text_2,published
+kessler_2020_ebcck_18,irw_text_3,draft
 kfcovid_Li2020,irw_text_2,published
 kfcovid_fear_li2020,irw_text,published
+khan_2019_moral_identity,irw_text_3,draft
+khan_2020_identity_importance,irw_text_3,draft
+khan_2020_moral_identity,irw_text_3,draft
+khan_2021_identity_importance,irw_text_3,draft
+khan_2021_moral_identity,irw_text_3,draft
+khan_2021_place_identity,irw_text_3,draft
+khan_2021_religious_orientation,irw_text_3,draft
 khattak_2026_attitude,irw_text_2,published
 khattak_2026_confidence,irw_text_2,published
 khattak_2026_cr,irw_text_2,published
@@ -1173,6 +1242,7 @@ kushnir2017_bfi,irw_text_2,published
 kushnir2017_ftnd,irw_text_2,published
 laksmita_2020_mspss,irw_text_2,published
 latifi_2026_insect_fear,irw_text_2,published
+le_2024_digicas_hps,irw_text_3,draft
 lec5_xiong_2025,irw_text_3,published
 lee2024_relative_clause,irw_text,published
 lee_2020_alcohol_use,irw_text_3,published
@@ -1212,6 +1282,10 @@ li_2025_socmedia_satisfaction,irw_text_2,published
 li_2025_socmedia_usefulness,irw_text_2,published
 li_2026_coab,irw_text_3,published
 li_2026_empathy,irw_text_3,published
+li_2026_hsc_awareness,irw_text_3,draft
+li_2026_hsc_competence,irw_text_3,draft
+li_2026_hsc_implementation,irw_text_3,draft
+li_2026_hsc_recognition,irw_text_3,draft
 li_2026_imi_teq,irw_text_2,published
 li_2026_nad,irw_text_3,published
 li_2026_pd,irw_text_3,published
@@ -1255,6 +1329,10 @@ liu_2025_positive_cognition,irw_text_2,published
 liu_2025_speaking_selfefficacy,irw_text_2,published
 liu_2025_willingness_communicate,irw_text_2,published
 liu_2025_ydcy,irw_text_2,published
+loi_2018_exchange_ideology,irw_text_3,draft
+loi_2018_pos,irw_text_3,draft
+loi_2018_teacher_self_efficacy,irw_text_3,draft
+loi_2018_workload_increase,irw_text_3,draft
 lorenz_2016_efficacy1,irw_text_2,published
 lorenz_2016_hope,irw_text_2,published
 lorenz_2016_optimism2,irw_text_2,published
@@ -1290,6 +1368,9 @@ lyu_2024_sun,irw_text_3,published
 ma2021_sme_covid,irw_text_2,published
 ma2026_bsmas,irw_text_2,published
 ma2026_sabas,irw_text_2,published
+ma_2026_psec,irw_text_3,draft
+ma_2026_towb,irw_text_3,draft
+ma_2026_tpi,irw_text_3,draft
 machado_2020_cat_separation,irw_text_2,published
 machivallianism_test_main,irw_text,published
 machivallianism_test_tipi,irw_text,published
@@ -1517,6 +1598,9 @@ much_tte_2025_concentrationtask,irw_text_2,published
 much_tte_2025_currentmotivation,irw_text_2,published
 much_tte_2025_effort,irw_text_2,published
 much_tte_2025_matrixreasoning,irw_text_2,published
+mugisha_2026_ehr_competence,irw_text_3,draft
+mugisha_2026_ehr_status,irw_text_3,draft
+mugisha_2026_ehr_use,irw_text_3,draft
 muir_2025_resilience_behaviours,irw_text_2,published
 muir_2025_resilience_opinions,irw_text_2,published
 muller_2016_dog_inhibition,irw_text_2,published
@@ -1592,6 +1676,7 @@ ni_2025_relationship_network,irw_text,published
 ni_2025_strategic_orientation,irw_text_2,published
 niazi_2020_mfq,irw_text_2,published
 niazi_2020_mfq_stereotype,irw_text_2,published
+niu_2026_ai_recommendation,irw_text_3,draft
 nomt_hooper_2024_study1,irw_text_2,published
 nomt_hooper_2024_study2,irw_text_2,published
 nordhoff_2021_motive,irw_text_3,published
@@ -1601,6 +1686,13 @@ number_pattern_game,irw_text_2,published
 odachi_2022_fear_covid19,irw_text_2,published
 offlinefriend_ofaq,irw_text_2,published
 ojelabi_2019_sf36,irw_text_2,published
+oliveira_2026_healthcare_experiences,irw_text_3,draft
+omale_2025_ppd_beliefs,irw_text_3,draft
+omale_2025_ppd_control,irw_text_3,draft
+omale_2025_ppd_info_sources,irw_text_3,draft
+omale_2025_ppd_intention,irw_text_3,draft
+omale_2025_ppd_knowledge,irw_text_3,draft
+omale_2025_ppd_norms,irw_text_3,draft
 onah_2021_covid_info_sources,irw_text_3,published
 onah_2021_covid_knowledge,irw_text_3,published
 onecm_kay_2025,irw_text,published
@@ -1779,6 +1871,13 @@ poza2026_hlseu,irw_text_2,published
 pps_vangsness_2019,irw_text,published
 pranckeviciene_2022_gad7,irw_text_2,published
 pranckeviciene_2022_phq9,irw_text_2,published
+prasetiyo_2022_aq,irw_text_3,draft
+prasetiyo_2022_sct,irw_text_3,draft
+prasetiyo_2022_tpack,irw_text_3,draft
+prasetiyo_2025_digital_citizenship,irw_text_3,draft
+prasetiyo_2026_act,irw_text_3,draft
+prasetiyo_2026_digcompedu,irw_text_3,draft
+prasetiyo_2026_sct,irw_text_3,draft
 prcpsffmq_lecuona_2017,irw_text,published
 preschool_sel_akt,irw_text,published
 preschool_sel_box,irw_text,published
@@ -1856,6 +1955,12 @@ rd_ppcvdos_padconacns_jinbo_2019_dos,irw_text,published
 rdatasets_gssabortion,irw_text_2,published
 regalado_2023_tourism_value,irw_text_2,published
 reinecke_2018_online_vigilance,irw_text_2,published
+reinhardt_2023_counterfeit_attitude,irw_text_3,draft
+reinhardt_2023_honesty_humility,irw_text_3,draft
+reinhardt_2023_integrity,irw_text_3,draft
+reinhardt_2023_materialism,irw_text_3,draft
+reinhardt_2023_risk_aversion,irw_text_3,draft
+reinhardt_2023_self_concept_clarity,irw_text_3,draft
 reinwarth_2023_domain_importance,irw_text_2,published
 reinwarth_2023_domain_satisfaction,irw_text_2,published
 reinwarth_2023_phq4,irw_text_2,published
@@ -1870,6 +1975,7 @@ riasec,irw_text,published
 ribeiro_2019_academic_motivation,irw_text_2,published
 rightwing_authoritariansim,irw_text_2,published
 rinaldi_2021_mas,irw_text_2,published
+ringhand_2024_ccam_tpb,irw_text_3,draft
 risticdedic_2025_dhq_currentstate,irw_text_2,published
 risticdedic_2025_dhq_expectation,irw_text_2,published
 risticdedic_2025_dhq_importance,irw_text_2,published
@@ -1889,6 +1995,7 @@ roettl_2018_brand_recognition,irw_text_2,published
 roettl_2018_game_attitude,irw_text_2,published
 roettl_2018_scepticism,irw_text_2,published
 rogers_2021_financial_knowledge,irw_text_2,published
+rogers_2026_bees_feedback,irw_text_3,draft
 rogowska_2023_maia2,irw_text_2,published
 rollcall_house,irw_text_3,published
 rollcall_senate,irw_text_3,published
@@ -1923,6 +2030,7 @@ rzeszutek_2020_wwii_patgrandfather,irw_text_2,published
 rzeszutek_2020_wwii_patgrandmother,irw_text_2,published
 sabers_vesper2023,irw_text_2,published
 safiye_2023_rfq,irw_text_2,published
+sakal_2026_ai_resistance,irw_text_3,draft
 salleh_2023_aim_iam_fim,irw_text_2,published
 sapa_personality,irw_text,published
 sas_deters_2022,irw_text,published
@@ -2332,8 +2440,13 @@ sv-maia2_randelovic_2021_erq,irw_text,published
 sv-maia2_randelovic_2021_maas,irw_text,published
 sv-maia2_randelovic_2021_maia,irw_text,published
 swmd_mokken,irw_text,published
+syafrijon_2026_digital_use,irw_text_3,draft
+syafrijon_2026_sdc,irw_text_3,draft
 szameitat_2015_multitask_examples,irw_text_2,published
 szameitat_2015_occupation_multitask,irw_text_2,published
+szigeti_2022_bpq,irw_text_3,draft
+szigeti_2022_cesd,irw_text_3,draft
+szigeti_2022_eri_oc,irw_text_3,draft
 takacs_2026_aces,irw_text_3,published
 takacs_2026_gad7,irw_text_3,published
 takacs_2026_maas,irw_text_3,published
@@ -2447,6 +2560,7 @@ verbagg,irw_text_2,published
 vermeiren_2022_art,irw_text,published
 veterans_affairs_ssvf_survey_2018-20,irw_text,published
 vocabulary_iq,irw_text,published
+vocabulary_iq_survey,irw_text_3,draft
 wallace_2026_apply,irw_text_3,published
 wallace_2026_belong,irw_text_3,published
 wallace_2026_cengage,irw_text_3,published
@@ -2615,10 +2729,16 @@ zhang_2024_parasocial,irw_text_2,published
 zhang_2024_smoking_rationalisation,irw_text_2,published
 zhang_2024_streamer_dsp,irw_text_2,published
 zhang_2024_viewer_dsp,irw_text_2,published
+zhang_2025_chatgpt_use,irw_text_3,draft
+zhang_2025_child_preliteracy,irw_text_3,draft
 zhang_2025_coercive_pressure,irw_text_2,published
+zhang_2025_cognitive_load,irw_text_3,draft
+zhang_2025_deep_learning,irw_text_3,draft
 zhang_2025_environ_awareness,irw_text_2,published
 zhang_2025_green_supply_intent,irw_text_3,published
+zhang_2025_mslq,irw_text_3,draft
 zhang_2025_normative_pressure,irw_text_2,published
+zhang_2025_parent_literacy_beliefs,irw_text_3,draft
 zhang_2025_self_efficacy,irw_text_2,published
 zhang_2026_ai_companion,irw_text_3,published
 zhang_2026_episode_affect,irw_text_3,published
