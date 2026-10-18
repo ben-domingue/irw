@@ -1,5 +1,8 @@
 # IRW Automated Finding — TODO
 
+Currently open action items only. For the full batch-by-batch history and
+context behind these (and everything already resolved), see `BATCH_LOG.md`.
+
 ## From the 2026-10-16 PMC monthly re-triage (2026-10-18, #3059)
 
 - [ ] **Seven candidates want a human read** — listed in BATCH_LOG 2026-10-18 with
@@ -10,9 +13,6 @@
   emails wanted; the permission template is in `processing_notes/Licensing.txt`.
 - [ ] Consider a distinct flag for "repository says 401/403" so a private deposit stops
   reading as a dead link in future runs.
-
-Currently open action items only. For the full batch-by-batch history and
-context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
 ## From the 2026-10-15 repos mode-3 batch (15 new terms x 9 languages)
 
