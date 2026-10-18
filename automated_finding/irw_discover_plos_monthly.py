@@ -213,7 +213,7 @@ def main():
     # never reaches irw_batch_updated's --retriage flag, so #2076's "REQUIRED"
     # step had no way to run on a scheduled article sweep -- see chain_step2b.
     from irw_retriage_ha import chain_step2b
-    chain_step2b(out_path, run=True)
+    chain_step2b(out_path, run=True, ledger=SEEN_DOIS_PATH, key_field="doi")
 
     _append_log_rows([{
         "date": today,

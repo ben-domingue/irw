@@ -338,6 +338,28 @@ composite), or kept on disk as the batch's own retriage CSV with an open
 `worth_retrying`, and `aggregate_continuous` when it turns out to be a
 legitimate continuous per-item response).
 
+**Every refined flag is also written back to the seen ledger** (since
+2026-10-18, by `chain_step2b`, into the `refined_flag` column of
+`repo_triage_seen_keys.csv` / `pmc_seen_dois.csv` / `plos_seen_dois.csv`).
+Before that, Step 2's verdict was recorded permanently and Step 2b's was
+not: the key went into the ledger as `human_assistance`, every later run
+skipped it, and the bucket that would have made it a lead existed only in
+the gitignored `runs/`. The repos ledger accumulated **2,223** such keys
+that way; re-mining the Dataverse share of them in 2026-10 returned 42 live
+tables from ~500 keys (irw#3051, and irw#2203 is the same shape on the PMC
+ledger). So:
+
+- A run that is **meant** to leave the ledger alone passes
+  `--ignore-seen-keys` / `--ignore-seen-dois`, and the write-back is
+  skipped with it. That is the re-mine case and it is correct.
+- Check the `[step 2b] N refined flag(s) recorded in <ledger>` line is in
+  the run output. If instead you see `Step 2b's refined flags were NOT
+  recorded`, a new entry point is calling `chain_step2b` without
+  `ledger=`/`key_field=` — fix that, don't work around it.
+- To reopen a bucket once the resolver or reader that produced it improves:
+  `python seen_ledger.py drop <ledger> --refined-flag recoverable_format
+  --apply`, and the next run re-triages those keys.
+
 **When reviewing `human_review` rows by hand, check the reason string
 first.** Rows whose only reason is "Could not confidently identify item
 columns" are disproportionately real, recoverable datasets, not ambiguous
