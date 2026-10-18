@@ -19631,3 +19631,173 @@ does not. 270 tests pass, 9 new.
 `gfzx8n6wmb` is deferred in `human_review_recheck_batch5_2026-10-18.csv`
 pointing here. Working them here closes all of those records at once -- the
 same one-queue-not-two shape 2026-10-18g recorded for items 2 and 3.
+
+## 2026-10-18i — zenodo_rest batch B: the next 26 leads, 96 tables, 267,363 responses (#3077)
+
+The 26 highest-N `todo` rows of
+`leads/repos_ledger_remine_2026-10-18_zenodo_rest.csv` after batch A took the
+first 26. All 26 fetched and profiled before any script was written; all 26
+carry a status; **51 of the file's 77 remain `todo` for a batch C**. Nothing
+uploaded -- Ben held PR #3089 and all uploads on 2026-10-18.
+
+**18 of 26 deposits shipped: 96 tables, 267,363 responses, 19 build scripts.**
+Biggest: mairean_2024b (5 tables, 33,665 resp), mairean_2024c (3, 24,288),
+xue_2026 (8, 24,000), nita_2026 (7, 16,360), peng_2026 (3, 15,081).
+
+### The three findings worth not re-deriving
+
+**zenodo.20670480's fractional values are not imputation.** Every one of its
+eight blocks read as fractional, which is the mean-imputation signature, and
+the filename even says "MD". It is an artefact of prefix grouping: each block
+ends in a BARE unnumbered column (`PEOU`, `PU`, `CUR`, ...) holding that
+block's row mean, so the grouping swept the summary column in with its own
+items. The numbered items are clean integers throughout. The script now proves
+the identity (bare column == row mean of the block, >99% agreement) before
+dropping it, rather than asserting it in a comment.
+
+**`pro1`-`pro30` in zenodo.7840114 is the ProQOL, not a prosocial scale.**
+Identified from the three derived scores the deposit ships beside it --
+`compassion_satisfaction`, `STS`, `Burnout` -- which are the Professional
+Quality of Life Scale's three 10-item subscales. It was about to be named
+`mairean_2023c_prosocial` on the strength of the `pro*` prefix alone, which is
+the "rank by instrument shape, not by prefix" lesson in a new costume. The
+ProQOL has **no row in the rights register**; the response table ships because
+the item codes are positional and no item text is shipped, so nothing
+restricted is exposed, and it is flagged in TODO as a register-row request.
+That was caught only because the books-balancing assertion refused five
+unaccounted columns -- the check paying for itself.
+
+**zenodo.13905612 and zenodo.13905610 are one data collection.** Both deposit a
+`Database.sav` with md5 `6caeefb64b03b16cb4a827ec80e12e4d` -- byte-identical,
+two papers by overlapping authors. Shipped once from 13905610; 13905612 is
+statused `already_in_irw` naming the tables.
+
+### The range assertion earned its place
+
+Two deposits turned out to be on a **1-6** scale where the rest of the
+Indonesian/TAM family is 1-5: zenodo.15332365 and zenodo.15314083. They are
+exactly the two whose scale the automated profiling could not read -- one puts
+the stem in the column header, the other hides the header under a title banner,
+and a prefix grouping sees neither. A third, zenodo.17688586, was also 1-6.
+All three were caught by `assert not (set(resp) - SCALE)` and nothing else.
+Any batch that assumes a family's scale from its siblings will ship a wrong
+`permitted_values`; assert the range per deposit.
+
+### Rights: four deposits part-withheld, two refused whole
+
+Withheld blocks, every one checked by READING the item block rather than by the
+register's code matchers: SWLS (5) + PANAS (20) from peng_2026; BAI (21) +
+BDI-II (21) + PANAS (20) from gonzalezrobles_2018; WHOQOL-BREF (26) + ZTPI (18)
+from mairean_2024b; CTQ (28) + PAI-BOR (24) from mairean_2024c.
+
+Three of those would have been missed by matcher alone:
+- **WHOQOL-BREF** as `QoL_1`..`QoL_26`. The register's own
+  `whoqol|^qol[_ ]?[0-9` DOES match, so this one the matcher got -- and 26
+  items is the BREF's exact length, which is what confirmed it.
+- **ZTPI** as `ZTPI_1`..`ZTPI_18`. The register's pattern is `^ZTPIQ[0-9]+R?$`,
+  which matches none of them.
+- **CTQ** and **PAI-BOR** have no register row at all. Withheld on the
+  conservative reading, both flagged -- the CTQ independently of the mendeley
+  batch flagging it the same day, which is two batches reaching the same
+  uncovered instrument in one day.
+
+Refused whole: zenodo.13117857 (a UWES psychometric evaluation -- the whole
+deposit is the blocked instrument, and its `webarusajax.csv` also carries
+response values as its header row) and zenodo.5926209 (the EQ-5D descriptive
+system at t0-t4, blocked on two register rows, with nothing else in the file).
+
+### Two PII skips, and one false alarm checked rather than assumed
+
+- **zenodo.19912968**: `xm` in `第二次追踪.sav` holds 478 distinct real Chinese
+  personal names (阿古达木, 安甜甜, 敖嘉怡 ...). Whole candidate skipped. Its
+  creators are also "Anonymous, Anonymous", which would have parked it anyway.
+- **zenodo.8367372**: `来自IP` holds real geolocated IP addresses,
+  `117.155.249.71(湖北-黄石)` -- the same shape as DVN/L6G8UL (2026-08-25).
+  Whole candidate skipped.
+- **zenodo.8151671**: its `SeniorCitizenID` column is LABELLED "1. Name of the
+  Senior Citizen" and holds `1`..`500` sequential serials. Not PII. Worth
+  recording because the label alone would have skipped a clean deposit, and the
+  values alone would have missed the other two. Read both.
+  (It is rejected regardless: creators "Kept anonymous for peer-review" leave
+  no author name, and its 0/25/50/75/100 health block is SF-36/SF-12-shaped,
+  which the register blocks as QualityMetric's SF-12v2.)
+
+### Item text: 6 tables, 306 rows, both deposits `data_labels`
+
+Only two of the eighteen carry stems AND anchors in their own labels:
+
+- **zenodo.19951727 -> 4 hung_2026c tables.** English stems for all 28 items
+  and all seven anchors. Treated as an **English administration**, so
+  `language` and the four `*_translated` columns are omitted entirely rather
+  than emitted empty. Evidence in the provenance note: every text level in the
+  file is English -- stems, anchors, and the Gender/Grade value labels -- and
+  ASE1 reads "an excellent grade in English class". The only non-English token
+  in the whole file is the column name `序号`, a serial-number header from the
+  Chinese survey platform, which is not instrument text. The record does not
+  state the administration language; if the paper shows a Chinese
+  administration these four need `language=Chinese` and
+  `text_source=translated_substitute` and nothing else changes. Source typos
+  kept verbatim ("activitywas", "fifinished").
+- **zenodo.7011528 -> 2 estevespairazaman tables.** The standard's
+  `translated_substitute` fallback, cleanly: Spanish administration (Peru, and
+  the deposit ships Spanish CSVs too), the depositors' own file named "SPSS
+  DATA 1 ENGLISH VERSION.sav" supplies the English, and the administered
+  Spanish WORDING is nowhere in the deposit -- those CSVs carry only short
+  codes. So English in the base fields, `_translated` empty,
+  `language=Spanish`. The English is the AUTHORS' own, not IRW-generated, so
+  no issues-page callout is owed. `automated_finding/itemtext_provenance.csv`
+  has no `translation_source` column, which `check_provenance.R` counts as its
+  known `sub_nocol` class -- 72 existing rows are in the same position, and
+  the remedy is to add the column repo-wide, not per row. Noted in TODO.
+
+Gates: 6/6 PASS on `validate_items.R --resp-csv`, 30/30 PASS on
+`audit_batch.R`, `irw-validate` clean on all items files, `itemtext_output`
+holds only `*__items.csv`, `check_provenance.R` exits 0 (2,467 rows / 758
+files). No table earns an issues-page entry: both are `data_labels` +
+`study_materials`/author-English with no text-vs-table mismatch.
+
+### Deferred within the shipped deposits, each with the fact that closes it
+
+Not every column of a shipped deposit shipped. `estevespairazaman`'s "SPSS DATA
+2" (384 x 18) is left out: `D1`-`D3` are three frequency items but `D1I1`-`D3I7`
+are binary CHECKBOX indicators of reasons and of which drug was taken
+(Diazepam, Clonazepam, Alprazolam ...), which is a nominal pick-one-or-more and
+not an ordinal item. `mairean_2023c` leaves out four standalone war-worry
+questions that share no response format with any block. `mairean_2024b` leaves
+out `D_LEC_11`, in the sense that it ships with zero variance -- no respondent
+endorsed that event -- which is a fact about the sample, not a defect.
+
+### Scales, ids and covariates
+
+`gonzalezrobles_2018_oasis` ships a **wave**: `OASIS1-5pre` for all 583 records
+and `OASIS1-5post` for 92, as `wave=pre`/`wave=post` on five item codes rather
+than ten items. `run_qc` reports the 460 duplicate id+item rows and resolves
+them itself ("made unique by wave"), which is the check confirming the shape.
+
+Three deposits have **no usable respondent key**, so `id` is the row index:
+`gonzalezrobles_2018` is the interesting one -- `User` has 428 distinct values
+over 583 rows AND `(Study, User)` still leaves 153 duplicated pairs, so neither
+identifies a record. The row index can split one person enrolled in two studies
+into two ids but never merges two people, and `Study`/`User` ride along as
+covariates so the ambiguity stays visible.
+
+`mairean_2024c`'s `ICES1_M`..`ICES14_M` / `ICES1_T`..`ICES14_T` is the
+Invalidating Childhood Environment Scale asked about the **mother and the
+father in one sitting** -- a target, not a wave -- so it ships as 28 distinct
+item codes in the source's spelling rather than being melted into `wave`.
+
+`baydhowi_2026_national_identity`'s item codes come from the deposit's own
+**item-number row** (row 1 is `1, 2, 4, 12, 13, 3, 5, 7, ...`, not data), so
+the code is the author's numbering and not the column position. It is **not** a
+duplicate of the live `baydhowi_2021_national_identity`: checked rather than
+assumed, 261 distinct response vectors there against 417 here and **zero**
+exact-row overlap.
+
+`rumangkit_2025_intention` ships `EI1`-`EI7` and `EI9`. **`EI8` is absent from
+the deposit**; the author's numbering is kept rather than renumbered 1..8,
+which would have silently moved every item after the gap.
+
+Covariate labels harvested at `0f50eb3a` for the nine `.sav` scripts shipping
+`cov_*` (hung_2026c, peng_2026, xue_2026, mairean_2024b/c, mairean_2023c,
+estevespairazaman, gonzalezrobles_2018, yang_2024c), all exit 0; `build.py`
+owed after the release.

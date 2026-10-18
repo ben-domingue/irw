@@ -3,6 +3,57 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## From the #3077 zenodo_rest batch B, worked (2026-10-18i)
+
+- [ ] **96 tables (267,363 responses) + 6 item text tables staged, nothing uploaded.**
+  18 of 26 deposits shipped. Ben held PR #3089 and all uploads on 2026-10-18.
+  All 198 tables in `automated_finding/irw_output/` pass
+  `irw-validate --profile upload` with no failures.
+- [ ] **51 leads still `todo`** in `leads/repos_ledger_remine_2026-10-18_zenodo_rest.csv`
+  for a batch C. All 26 of this batch's rows carry a status.
+- [ ] **Covariate labels:** harvested at `0f50eb3a` for the nine `.sav` scripts
+  (hung_2026c_cognitive_load, peng_2026_mental_health_literacy,
+  xue_2026_admin_ai_acceptance, mairean_2024b_time_trauma,
+  mairean_2024c_childhood_dissociation, mairean_2023c_emergency_personnel,
+  estevespairazaman_2022_self_medication, gonzalezrobles_2018_oasis,
+  yang_2024c_online_film_festival), all exit 0. Run `build.py` after the
+  release and commit `covariate_labels.csv`.
+- [ ] **Issues-page entries: none owed by this batch.** Both item-text deposits
+  are `data_labels` with no text-vs-table mismatch, which is below the bar.
+
+### Register-row requests (rights)
+
+- [ ] **ProQOL (Professional Quality of Life Scale, Stamm / proqol.org) has no
+  register row.** `mairean_2023c_proqol` (30 items, 372 respondents) ships
+  because its item codes are the deposit's positional `pro1`-`pro30` and no
+  item text is shipped, so no wording is exposed -- but if a ruling blocks the
+  ProQOL, that table is what a withdrawal targets. Its own terms allow free
+  unmodified use with credit but not sale.
+- [ ] **CTQ** (Childhood Trauma Questionnaire, Pearson) and **PAI-BOR**
+  (Personality Assessment Inventory Borderline Features, PAR) have no register
+  rows. Both withheld from `mairean_2024c` on the conservative reading. The CTQ
+  was flagged independently by the mendeley batch the same day.
+- [ ] **ZTPI's matcher does not reach its own codes.** The register's pattern is
+  `^ZTPIQ[0-9]+R?$`; the deposit spells them `ZTPI_1`..`ZTPI_18`, so the block
+  was caught by reading the items. One more instance of the 154-inert-rows
+  finding in BATCH_LOG 2026-10-18g.
+
+### Smaller things
+
+- [ ] `automated_finding/itemtext_provenance.csv` has no `translation_source`
+  column, so the two `translated_substitute` rows this batch adds join the 72
+  rows already in `check_provenance.R`'s `sub_nocol` class. The remedy is to
+  add the column repo-wide and backfill, not to patch these rows.
+- [ ] `automated_finding/oversized_candidates.csv` has one uncommitted appended
+  row (`10.17632/pv7y6kmg86.1`, a 267MB `.rds`) written by the concurrent
+  mendeley run, not by this batch. It is a standing record and wants committing
+  by whoever owns that run.
+- [ ] A ruling would help on whether an 8-construct PLS-SEM battery of 3-item
+  scales should ship as 8 tables (what `septiani_2026` does here, following
+  datastandard.md's one-file-per-scale rule) or as one 24-item table. Six of
+  this batch's deposits have that shape; the choice was made consistently but
+  it is a convention question, not a data one. Nothing is blocked either way.
+
 ## From the #3077 mendeley leads, worked (2026-10-18h)
 
 - [ ] **8 tables (132,575 responses) + 5 item text tables staged, nothing
