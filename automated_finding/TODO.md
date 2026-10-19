@@ -3,6 +3,29 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## The 2026-10-19 upload happened: 78 tables are in the draft (2026-10-19)
+
+ben-domingue uploaded the 2026-10-19c and 2026-10-19d slices on 2026-10-19 --
+**78 tables, 557,054 responses**, from `automated_finding/irw_output`. Both
+sections in `BATCH_LOG.md` are stamped accordingly, because a stale "nothing
+uploaded" is the costly direction of wrong here: it invites a second upload and
+**Redivis uploads APPEND**.
+
+- [ ] **Release is still owed**, and so is the preceding draft: shard 7 held
+  374 tables before this upload, all unreleased, and `irw_text` holds the two
+  item-text tables from 2026-10-19b. The issues-page entry for
+  `gerou_2023_dass21` / `kembara_2026_civic_agency` is owed at that item-text
+  release.
+- [ ] **Item text for the five rights-clear tables of the 10-19 slices** is now
+  a second round rather than the same one: `kam_2016_ad_emotions` (5 items,
+  stems in the Stata labels plus the deposit's questionnaire and codebook
+  PDFs), `wei_2026_destination_image` (16 Chinese stems as column headers,
+  anchors printed in the first one) and the three `sirovica_2022_*` tables (21
+  items, deposit ships its own survey PDF). All study-own instruments, no
+  rights question.
+- [ ] The 2026-10-19f slice (#3103 group 2 tranche 1, 18 tables) is **not**
+  uploaded.
+
 ## The 2026-10-18 release happened; eight sections below were stale (2026-10-19)
 
 Reconciled against the corpus, because a stale "nothing uploaded" is the most
@@ -1128,6 +1151,25 @@ this list saying so.
   (Spielberger Trait-Anger, FSS-II, Mood Survey, Adult Hope Scale, Weinstein
   1980 events, MCQ, Moral Attentiveness, courage/TCS/wisdom items). STAI,
   BFI-2 and HEXACO are already `block`.
+
+## From the 2026-10-19f deferred-residue slice (#3103)
+
+- [ ] **Mendeley 6bhr52dc5v's 20-item S* block** — 1,198 English students at
+  two waves, and the coding is not consistent: the deposit's value labels
+  define four categories (0 Never .. 3 Almost Always), wave 1 holds 1-4, wave
+  2 holds 0-4, and 184 of 1,093 respondents use both 0 and 4 within the same
+  twenty items. Two tables (or one with `wave`) once someone establishes what
+  each wave's coding is; the paper may say. The deposit's other four blocks
+  shipped as `putwain_2022_*`.
+- [ ] **A register `block` does not stop response data, and the group-2
+  write-ups assumed it did.** Several #3103 rows carry a note like "UWES_1-24
+  must be DROPPED (register block)" or "the EQ is a register BLOCK row and
+  must be dropped". That is wrong as a rule: `irw_validate/rights.py` says
+  response data from a blocked instrument ships and only its wording cannot,
+  and the 2026-10-18 ERQ withdrawal removed item-text rows, not response
+  tables. Worth re-reading those rows before working them — at least
+  5tjkv36r3s (EQ), vptj28s8pk (UWES) and tnkv5z3byg (UWES) have items that
+  were going to be dropped for no reason.
 
 ## From the 2026-10-19d tail slice (#3077)
 
