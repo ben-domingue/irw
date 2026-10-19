@@ -3,6 +3,52 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## Rights-register patterns that are too broad (2026-10-18m)
+
+Found by running both rights surfaces over the 334 response tables and 35
+`__items` tables staged for the 2026-10-18 upload, which is the first batch
+where item text and response data went up together. **Nothing in that batch
+was blocked** — every code-surface hit is an opaque code, and the one item-text
+hit is a false positive — but three register defects surfaced that affect the
+whole corpus, not just this batch. These are the mirror image of
+`itemtext/register_gaps_2026-10-18.csv` (rows that match nothing): rows that
+match far too much.
+
+- **PSS stem `nervous and`** is a two-word fragment. It fired on
+  `yang_2026_flsaq`'s Q14, "I get nervous and confused when I am speaking in
+  English classes" — a Foreign Language Speaking Anxiety item with no relation
+  to the Perceived Stress Scale. A stem this short will fire on a large share
+  of any anxiety instrument in the corpus. It wants `^` anchoring or more
+  words ("felt nervous and stressed").
+- **CD-RISC code pattern `^C[0-9]{1,2}$`** matches the codes `c1`..`c99` that
+  any study may pick for any reason. It fired on three unrelated tables in one
+  batch: `tantia_2024_ats_course` (Attitudes Toward Statistics, Wise 1985),
+  `cahyadi_2025_concern` and `oner_2026_basic_needs`. A single generic letter
+  plus a number cannot identify an instrument.
+- **BMQ code pattern `B`** — one unanchored letter, matched case-insensitively
+  with `re.search`, so it matches any code containing a b. It is inert today
+  only by accident: `check_item_codes` skips rows whose verdict is `escalate`,
+  and BMQ's is. Any future verdict change on that row turns it on corpus-wide.
+
+A register-wide scan for the same shape found six rows whose `match_item_code`
+matches a plausibly generic code (IRI `^pts?[0-9]{1,2}$`, DASS `^item[0-9]{1,2}$`,
+CD-RISC, BMQ, HAM-A `^a[0-9]{2}$`, RMET). The IRI and DASS ones are the next
+most likely to misfire: `PT1`-`PT4` fired on `binus_2025_perceived_trust` and
+`septiani_2026_trust`, where PT is plainly "perceived trust".
+
+Decision wanted: these are warnings, by design (`rights.py`'s rule 1, a hit is
+a lead not a verdict), so none of this is urgent. But a check that cries wolf
+on generic codes trains people to skip reading it, which is exactly how
+`gillman_2023_pss` shipped. Worth one pass tightening the six patterns.
+
+Also noted, under `rights.py`'s rule 2 (a miss is not an all-clear): **FLCAS /
+the Foreign Language Classroom Anxiety Scale (Horwitz, Horwitz & Cope 1986) is
+not in the register at all**, and `yang_2026_flsaq`'s 18 Chinese items are an
+FLCAS-family instrument. Its wording went up in this batch. Not a
+contradiction of any ruling — there is no ruling — but if FLCAS should have a
+register row, that table is the one to check first.
+
+
 ## From the #3077 zenodo_rest batch B, worked (2026-10-18i)
 
 - [ ] **96 tables (267,363 responses) + 6 item text tables staged, nothing uploaded.**
