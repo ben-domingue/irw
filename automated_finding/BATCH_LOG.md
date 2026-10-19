@@ -20229,3 +20229,201 @@ with every stem in its labels, confirmed NOT HLS-EU); **figshare 13951619**
 (344, two clean 30-item blocks behind an offset header). The largest, **figshare
 25123145** (8,662 x 27 binary with a deposited q-matrix), is blocked on the IGD
 ruling above and is the biggest single prize left in #3077.
+
+## 2026-10-19a — the figshare re-mine slice: 20 leads, 41 tables, 190,707 responses (#3077)
+
+The 20 rows still statused `todo` in
+`leads/repos_ledger_remine_2026-10-18_figshare.csv`, worked end to end. Every
+one of the 20 now carries a status and a reason in that file, so it is closed:
+0 `todo` remain.
+
+**Recount first, because the queue's headline numbers were stale.** The brief
+listed 77 zenodo_rest and 46 mendeley leads ahead of this slice. Counted
+against the files, `repos_ledger_remine_2026-10-18_zenodo_rest.csv` has **0**
+`todo` rows (all 421 statused across batches A/B/C, as 2026-10-18j says) and
+`repos_ledger_remine_2026-10-18_mendeley.csv` has **0** (57 `deferred`, each
+wanting a derivation rule or a ruling rather than work). The genuinely
+unopened `todo` counts on 2026-10-19 are: noflag_dataverse 48, figshare 20,
+dvinst 13, ha_dvportals 3, plus singletons. This slice is the figshare 20.
+
+**`check_shipped.py` first, as the brief requires: nothing was already done.**
+Against 9,516 dictionary rows, 2,899 `data/**` scripts and 13,372
+leads/human_review rows, all 20 came back `lead` — 0 shipped, 0 closed. Unlike
+the last re-mine batch (49 `todo` → 20 already in the IRW, 11 already closed),
+this file's `todo` column was accurate.
+
+**But 10 of the 20 were also sitting `unworked` in two EARLIER leads files**
+(`repos_leads_2026-10-05.csv` ×6, `repos_leads_2026-10-07.csv` ×3,
+`repo_leads_2026-08-27.csv` ×1, which has no status column). Those rows are
+now closed too, pointing at this file. Worth knowing in general:
+`classify()` reports the FIRST leads file a key appears in, in sorted order, so
+a stale `unworked` in an older file would have masked today's verdict on the
+next run.
+
+**13 of 20 deposits shipped: 41 tables, 190,707 responses.** All 41 pass
+`irw-validate --profile upload` with zero failures and zero errors; every WARN
+is accounted for below.
+
+| deposit | tables | what |
+|---|---|---|
+| figshare 28138236 | 9 | **809** adults in China's eCNY pilot communities, 45 items at 1-7: a nine-construct UTAUT battery. 36,405 resp |
+| figshare 32016954 | 4 | **1,493** Indonesian Gen Z, financial behaviour 6 / knowledge 7 / self-efficacy 8 / attitude 6. 40,311 resp |
+| figshare 32969165 | 4 | 272 Indonesian students of English — feedback literacy 24, metacognitive awareness 19, academic self-concept 20, language mindsets 9 |
+| figshare 26788267 | 3 | 683 Chinese-speaking adults in Macao/Portugal — computer skills 10, eHEALS 8, vaccine conspiracy 7 |
+| figshare 29432735 | 4 | 522 Greek adults, the MISS validation sample — MISS 14, trust in scientists 3, conspiracy 5, headline judgments 4 |
+| figshare 32994878 | 6 | 204 Chinese students, six 8-item blocks: AI anxiety, AI self-efficacy, and four writing-SRL blocks |
+| figshare 24588120 | 3 | 188 Greek adults — HEXACO honesty-humility 16, DASS-21, Quiet Ego 14 |
+| figshare 31150441 | 2 | 400 Spanish panel respondents — eHLQ 35 at 1-4, eHEALS 8 at 1-5 |
+| figshare 33227889 | 2 | 417 Turkish sports-sciences students — academic self-efficacy 7, technology use 13 |
+| figshare 21070342 | 1 | 396 people × 4 thought probes × 10 occasions during a SART task, 13,160 resp, `wave` = the probe's trial |
+| figshare 32414913 | 1 | 392 Indonesian students, 6 civic-agency items |
+| figshare 28303889 | 1 | 267 postpartum women, a 10-item Arabic EPDS administration |
+| figshare 21176009 | 1 | 154 adolescents, 6 autonomy items |
+
+Dictionary: 41 rows in `dictionary_auto.csv` plus 41 in
+`codebook_at_ingest.csv` (3 real codebook files, 38 `none`). Tags: 41 rows in
+`automated_finding/tags_auto_2026-10-19.csv`, every atom checked against
+`TAG_VOCAB`.
+
+### The item code was three positions out, and only the variable LABEL knew
+
+`figshare 29432735` is a scale-validation deposit, and it renumbered the items
+it kept. The column named `MISS_1` carries the variable label `MISS_4`; the
+five items dropped in validation keep their original numbers under a `remove`
+suffix (`MISS_1remove` → label `MISS_1`). Taking the column names would have
+published a confidently-wrong 14-item instrument with a three-position shift,
+and nothing downstream compares anything but sets, so nothing would have
+caught it. The labels are the instrument's own numbering and are what shipped;
+the deposit's own `MISS_total_score` equals the sum of the nine retained items
+for 522 of 522 respondents, which is the arithmetic check on the relabelling.
+
+**The general rule: in a validation deposit, read the label level before
+trusting a column name.** A `remove`/`drop`/`excl` suffix is the tell that the
+retained columns have been renumbered.
+
+### Aggregate-only is this slice's dominant failure mode: 5 of 20
+
+Not a near miss in any of them — no item-level data exists in the file at all.
+All five are the same shape: a clinical or diary study that deposits its
+instruments as totals.
+
+- **figshare 30826265** (168 participants × 7 diary days): PSS_Total, BDI_Total,
+  the five CTQ subscale totals, MSPSS_Total, UCLA_Total, appraisal means. The
+  lead's "1,132 participants" was the row count.
+- **figshare 33075128** (142): CTQ_tot, and PSS and BDI at baseline, 1 month
+  and 6 months. Thirteen columns, no items.
+- **figshare 21708551** (269): antenatal depression as `EPDS_total` only.
+- **figshare 24777858** (150 + 78, two waves): PTG, CFQ, IUS and IES-R all as
+  totals; the `dup_id_item` QC failure the lead recorded was over those totals.
+- **figshare 14711232** (257 postpartum women, 42 columns): depression present
+  only as `EPPDscale`, the EPDS already dichotomised at 13.
+
+### Two figshare records, one study, one file — and no name collision
+
+`figshare 14705967` and `figshare 14711232` are the same deposit: same title,
+same `PPD full.sav` (byte-identical, 20,941 bytes), same two `.spv` outputs.
+The records differ in one co-author. Both sit in the repos ledger as separate
+keys and both were leads; nothing in the pipeline could see it, because the
+duplicate is in the SOURCE, not in the table names — the same blind spot that
+let `ghosh_2020_cas_ocs` reach the 2026-10-18 draft. Rejected on content
+anyway, so nothing was at stake this time. **A content hash of the resolved
+data file would have caught both cases**; `oversized_candidates.csv` already
+proves the resolver can see file size, so size-plus-name is a cheap first cut.
+
+### An attention check is not an item, and the header is the tell
+
+`figshare 32994878` ships 50 columns of which 48 are items. The two that are
+not are the only two whose header carries its own stem while every sibling
+carries a bare code: `MST5为了证明您在认真阅读，请在此题选择第 2 选项` ("to prove
+you are reading carefully, choose option 2"), answered `2` by 200 of 204, and
+`FH5我从来不想在写作任务中取得高分。` ("I never want to get a high score in
+writing tasks"), reverse-worded and answered 1-3 only. Both excluded. The
+deposit's own 总分 is the raw sum of all 50 columns, attention check included,
+so the total does NOT settle which columns are scale items — worth knowing
+before using a deposited total as evidence of a block.
+
+### A deposited SmartPLS report separates blocks that a prefix cannot
+
+`figshare 32969165` ships 72 opaque item codes across four constructs, with
+prefixes (SF, MS, UF, PF, MA, SC, SE, GLB, L2B, ASB, R, K) that do not map
+one-to-one onto them: the latent named **MA** (metacognitive awareness) takes
+the R\*/K\* items, while the **MA1-MA5 items** load on feedback literacy. The
+deposit's second file is a SmartPLS 4 report whose outer-loadings block names
+the latent each indicator loads on, which settles the grouping from the
+source's own modelling rather than from a guess. Reusable: a PLS-SEM deposit
+that ships its SmartPLS/AMOS output ships its measurement model with it.
+
+### The deposit's own recode is documentation
+
+`figshare 31150441` stores its eHEALS block twice, `P08_*` at 0-4 and
+`P08_*_R` at 1-5. The recode is exactly +1 on 400 of 400 rows for all ten
+columns, and the deposit's `eHEALS` composite equals the sum of
+`P08_3_R..P08_10_R` — which settles three things at once: 1-5 is the
+administered scale, the eight scored items are 3-10, and the two preliminary
+eHEALS questions are not part of the scale. Proving the relationship in the
+script is cheaper than reasoning about which copy to trust.
+
+### Item text: none shipped, six deposits extraction-solved, one rights-clear
+
+A deliberate choice — the slice was response tables, and five of the six owe a
+rights ruling rather than work. Where each one's text actually is:
+
+- **`gerou_2023_dass21` is rights-CLEAR and extraction-solved**: the DASS-21
+  register row's verdict is `ship`, and all 21 Greek stems are in the `.sav`
+  variable labels. This is the one table in the slice whose item text could go
+  up today. It was found by checking the register BY NAME; `load_register()`
+  keeps only `hold`/`note`, so the gate could never have reported it.
+- **`kembara_2026_civic_agency` needs no register row at all**: appendix A6
+  carries each item in Indonesian with the authors' own English and the
+  dimension it measures, and the items are the study's own.
+- Held on an existing verdict: `jiao_2024_eheals` and
+  `hernandezencuentra_2026_eheals` (eHEALS, `hold`),
+  `gerou_2023_hexaco_honesty_humility` (HEXACO-PI-R, `block`).
+- **Six instruments had no register row at all, and now do** — all `hold`,
+  all written here rather than handed back: the eHLQ (Kayser et al. 2018), the
+  EPDS (Cox et al. 1987), the Quiet Ego Scale (Wayment et al. 2015), Lown's
+  Financial Self-Efficacy Scale, the Vaccine Conspiracy Beliefs Scale (Shapiro
+  et al. 2016) and the Metacognitive Awareness Inventory. Four of the six have
+  deliberately EMPTY matchers, with the reason in the row: `^fse[0-9]+` and
+  `^[rk][0-9]{1,2}$` are exactly the generic single-prefix shapes the
+  2026-10-18m review found misfiring corpus-wide, so those rows are
+  check-by-name only. The register is now 349 rows.
+
+### Every WARN, accounted for
+
+- `multi_scale*` on the four paramartha tables and
+  `paramartha_2026_metacognitive_awareness`'s nested ranges: the prefixes are
+  real sub-blocks of one construct, grouped from the deposit's own SmartPLS
+  report (above), not candidates for further splitting.
+- `imputed_values*` on seven tables: ordinary concentration on a single
+  category — `jaber_2025_epds`'s self-harm item at 0 for 94% of respondents,
+  `gerou_2023_dass21` on 10 of 21 items, `galanis_2025_miss` MISS_3 at 1 for
+  85%. No fractional values anywhere in the slice; every script asserts
+  `resp % 1 == 0`.
+- `dup_id_item` on `he_2026_mind_wandering`: expected and reported as made
+  unique by `wave`, which is the repeated-probe design.
+
+### Smaller things found
+
+- **`figshare 33227889` carries a `cov_age` of 120** in a sample otherwise
+  aged 18-40. One cell, blanked as a data-entry error rather than shipped;
+  recorded in the script header and the dictionary note.
+- **`figshare 24588120` has a Greek capital eta in a column name**: `ΗH_4`,
+  where its fifteen siblings are `HH_*`. It ships as `HH_4`. A non-ASCII
+  look-alike in an item code is worth a dedicated check — this one was only
+  visible because the enumeration asserted the block was HH_1-HH_16.
+- **`figshare 24588120` also carries one response coded 8 on the DASS 0-3
+  scale**, the file's only out-of-range value anywhere: a user-missing code,
+  dropped rather than recoded.
+- **`figshare 30426739`** is a clean 54 × 10 lizard prey-preference matrix —
+  the non-human rule allows it, but 54 unique `id` is below the flat floor of
+  100, so it is `below_n`. Its lead row's 540 was the row count. Third lead in
+  this slice whose "n_participants" was a row count.
+- **No PII anywhere in the 20.** Two deposits carry free text and were scanned
+  rather than assumed: `figshare 32414913`'s open-ended civic-action plans (44k
+  characters; no emails, Indonesian mobile numbers, +62 numbers, NIM student
+  numbers or self-naming phrases) and `figshare 26788267`'s "other, please
+  specify" language and region fields (language and place names only). Neither
+  is shipped either way. One online-panel participant id
+  (`figshare 31150441`'s `respid`) was replaced by the row index under the
+  2026-09-20 narrowing, never hashed.
