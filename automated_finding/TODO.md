@@ -48,6 +48,42 @@ release" or "at upload" is **due now, not pending**:
   deliberately a separate file; merging it into `tags/tags_auto.csv` is a
   reviewed step.
 
+## "SDQ" is three unrelated instruments, and two of them ship (2026-10-19)
+
+Found by the newly wired item-code sweep, from a hit that correctly fell BELOW
+its thresholds: `addy_2021_sdq_ghana` matched the register's `block` SDQ row on
+2 of its 10 codes. Chasing a weak lead is how this one surfaced, which is the
+argument for printing them.
+
+- [ ] **The SDQ row's code pattern is a literal list, not a pattern.**
+  `SDQ1|SDQ_1|sdq1|SDQ_Pro1` matches the FIRST item's spellings only, so on a
+  table coded `SDQ_1`-`SDQ_10` it fires on `SDQ_1` and (by substring) `SDQ_10`
+  and misses the other eight. This is the inverse of the over-broad patterns in
+  2026-10-18m: a row that under-matches its own instrument reads as coverage
+  and gives none. Nothing here was missed as a result -- see below, the live
+  SDQ tables are not this instrument -- but the next one would be.
+- [ ] **The acronym covers at least three unrelated instruments.** The register
+  row is Goodman's **Strengths and Difficulties Questionnaire** (25 items).
+  Live under `SDQ_*` codes are also Marsh's **Self-Description Questionnaire**
+  (`amatus_cipora_2024_sdq_m__items`, `..._sdq_l__items`: "I am quite good at
+  mathematics", "I have good reading comprehension") and, in
+  `heekerens2025_sdq__items`, 20 German items on dissociation and
+  derealization. A name or code match on "SDQ" is therefore not evidence of
+  Goodman's SDQ, and the row should say so -- this is exactly the shape of the
+  `buss` false reassurance (the Revised Cheek & Buss Shyness Scale is not the
+  BPAQ).
+- [ ] **A ruling: two live item-text tables carry named instruments with no
+  register row.** Marsh's Self-Description Questionnaire (the two
+  `amatus_cipora_2024_sdq_*__items` tables) is a named third-party instrument
+  distributed by its originator. The 20 German items in
+  `heekerens2025_sdq__items` are a dissociation measure I did NOT identify --
+  they read as a state measure ("Es gab Momente, in denen...") rather than the
+  Somatoform Dissociation Questionnaire's symptom checklist, and I am not
+  willing to name it from wording alone. Both predate the 2026-10-15 silence
+  ruling and both are PUBLISHED, so withdrawal is not free and the call is
+  ben-domingue's: register them, or rule that the ruling does not reach
+  backwards.
+
 ## shehayeb_2024_* is a 2018 deposit, and its math anxiety is Fennema-Sherman (2026-10-19)
 
 Both findings come from resolving the one 2026-10-18 hold whose register row
