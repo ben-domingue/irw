@@ -1129,14 +1129,49 @@ this list saying so.
   1980 events, MCQ, Moral Attentiveness, courage/TCS/wisdom items). STAI,
   BFI-2 and HEXACO are already `block`.
 
+## From the 2026-10-19c noflag_dataverse slice (#3077)
+
+- [ ] **DVN/EEPE1L** — 275 students x 15 items at 1-7 in five clean 3-item
+  blocks, codes `TSI`, `ACP`, `TTF`, `CSI`, `PSE`. Deferred only because the
+  blocks cannot be named: no SPSS labels, no codebook, and a search for the
+  paper ("Understanding the Roles of Grit and Generative AI Alignment in
+  Academic Performance", Oh 2026) found nothing. Five tables the moment a
+  construct list turns up; only `TTF` (task-technology fit) is guessable, and
+  guessing five of five is not acceptable.
+- [ ] **DVN/IGFCET** — 2,415 PhD graduates with four 1-5 job-attribute
+  importance ratings (autonomy, pay, managerial activities, commercialization)
+  whose shared stem the deposit never states (a .dta plus one .do file, no
+  questionnaire). One four-item table if the paper confirms the stem.
+- [ ] **DVN/226PMX's other blocks** — DE05/DE06/DE07/DE08 (36 columns at 1-7),
+  PL05 (10 at 1-5), PL06 (8) and TE06 (8) are item responses, and the
+  deposit's questionnaire PDF names its blocks, but the counts do not line up:
+  one "DE5 Conceptions of democracy" entry listing 21 statements against four
+  data blocks totalling 36; 8 data columns against 7 listed statements, twice;
+  and PL05 is not in the PDF's overview at all. Needs the German original or
+  the paper's appendix to resolve which column is which. The three blocks
+  whose counts DID match are shipped.
+- [ ] **Count the category marginals before shipping a large block** — a
+  method item, not a dataset. DVN/D6WWCK was rejected because 138 of its 140
+  items have all five Likert categories within 140-180 of the 159.8 expected
+  under exact uniformity, with within-block r of 0.83-0.89 and every
+  cross-block pair at 0.33-0.40: a simulated file, not a questionnaire.
+  Nothing in `run_qc` looks at marginals — `imputed_values*` fires on
+  CONCENTRATION, so a perfectly flat item is precisely what it cannot flag.
+  Worth considering as a check in `irw_validate` or in the triage.
+- [ ] **The PII screen cannot see a free-typed numeric field** — DVN/VSFCVG
+  (853 students, 9 AI-in-mathematics items at 1-5, Spanish stems as headers)
+  was skipped whole because one respondent typed an email address into the
+  free-text `Edad` (age) column. `screen_for_pii` content-checks only
+  generically-named columns, so `Edad` was never read and the deposit screened
+  clean. Either content-check every string column or treat any free-text
+  demographic field as a screening surface.
+
 ## From the 2026-09-28 repos weekly batch
 
-- [ ] **DVN/GJOBOS** (Replication Data for: The Impact of Female Teachers on
-  Female Students' Lifetime Well-Being, cc0, N=30,108, 16 items) —
-  `human_assistance`, unclassified by this routine. Column mapping was a
-  low-confidence guess; QC also flagged `resp_ordinal*`/`resp_direction*`/
-  `imputed_values*`/`resp_scale_mixed`. Needs a human to confirm the column
-  mapping before it's trusted.
+- [x] **DVN/GJOBOS** — CLOSED 2026-10-19c: the deposit is an IPUMS/NHGIS
+  census microdata build (county and individual census variables, IPEDS
+  records, a county gazetteer). No item responses in any of its 57 files, so
+  there was no column mapping to confirm. `rejected_content`.
 - [ ] **figshare 10.6084/m9.figshare.33980614** (Activities of Daily Living
   Inventory (ADLI), French older adults) — `download_failed` (proxy/connection
   error reaching `ndownloader.figshare.com`). Retryable; left out of
@@ -1149,10 +1184,11 @@ this list saying so.
   cc0) — `human_assistance`, unclassified by this routine. No column met the
   id heuristic; row position was used as a fallback person id. Needs a human
   to confirm one row per respondent before it's trusted.
-- [ ] **DVN/OHBD3D** ("Old Friends or New Connections?" social
-  interaction/well-being, cc0, N=305) — `human_assistance`, unclassified by
-  this routine. `resp` has >50 unique values post-melt, likely
-  continuous/aggregate rather than ordinal item responses.
+- [x] **DVN/OHBD3D** — CLOSED 2026-10-19c on PII, before the
+  continuous-`resp` question was reached: Study1_Baseline_Demographics.sav
+  carries `IPAddress`, and Study3.sav carries `RecipientFirstName`,
+  `RecipientLastName` and email addresses in Q85. Whole candidate skipped
+  under `feedback_pii_skip_entirely`.
 - [ ] **Dryad 10.5061/dryad.hx3ffbgvs** (gaming motivation among college
   students) — `download_failed` (401 Unauthorized). Retryable; left out of
   `repo_triage_seen_keys.csv` so a later run picks it up automatically. No

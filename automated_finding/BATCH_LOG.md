@@ -20578,3 +20578,171 @@ to interpret, not a parse defect.
 - `kembara_2026_civic_agency` earns **no** entry: author-supplied translation,
   no text-vs-table mismatch, and blank option_text at unlabelled midpoints is
   explicitly not issues-page material.
+## 2026-10-19c — the noflag_dataverse slice: 48 leads closed, 42 tables, 264,547 responses (#3077)
+
+The 48 rows still statused `todo` in
+`leads/repos_ledger_remine_2026-10-18_noflag_dataverse.csv` — the largest
+unopened slice left in #3077 — worked end to end. All 48 now carry a status
+and a reason in that file, so it is closed: **0 `todo` remain.**
+
+**Ten of the 48 were not open work, and only a repo-wide grep showed it.**
+`check_shipped.py` came back `lead` on all 48 against 9,557 dictionary rows
+(including the four Sheets), 2,912 `data/**` scripts and 13,258
+leads/`human_review` rows — nothing had shipped. But grepping each DOI slug
+across the tracked tree found decisions the `todo` column did not know about:
+seven already rejected in this log with a reason (QUVQIR, XZTGXT, UODU1O,
+TCLUWN, GWISTQ, XNKYZS, EM3AZ2), JC6F9O skipped for geo-IP PII with an open
+question for ben-domingue in TODO.md, CZJJAF deferred pending a codebook, and
+MNAO24 already held in `data/conjoint/candidates.csv`. **A `todo` in a
+re-mine file is "this run did not work it", not "nobody has".** Two more
+(GJOBOS, OHBD3D) were open TODO.md items from the 2026-09-28 batch and are
+closed below.
+
+**The reader was wrong before any of this, and it looked like dead files.**
+Dataverse serves an ingested tabular file as `<name>.tab`, but
+`?format=original` returns the ORIGINAL Stata/SPSS/Excel bytes. Naming the
+download from `filename` hands a binary to the tab reader, which raises
+`ParserError: Expected 1 fields in line 8, saw 2` — indistinguishable from a
+corrupt deposit. 20 of 38 deposits "failed to read" that way on the first
+pass. The fix is to name the download from `originalFileName` (and, when that
+carries no extension at all, from `originalFormatLabel`). Worth writing into
+any future Dataverse batch script.
+
+**Licences: 38 of 38 CC0 1.0**, verified from the Dataverse API record at work
+time, not from the ledger. No licence casualties in this slice.
+
+### 9 deposits shipped: 42 tables, 264,547 responses
+
+All 42 pass `irw-validate --profile upload` with **zero failures and zero
+errors**; 30 report nothing at all and the 12 warnings are accounted for at
+the end. **Nothing is uploaded** — ben-domingue has not been asked.
+
+| deposit | tables | what |
+|---|---|---|
+| DVN/QDK2ZO | 22 | **919** Chinese university students, 115 items at 1-6 in 22 blocks on learning with generative AI. 105,685 resp |
+| DVN/D155SP | 1 | **17,400** US respondents, 5 emotion items about one of 29 ads from the 2012 campaign. 86,706 resp |
+| DVN/226PMX | 3 | **1,115** German respondents: AI in government (6), ambiguity intolerance (6), institutional trust (5). 18,954 resp |
+| DVN/MWIV98 | 6 | **368** Chinese EFL learners: emotions, enjoyment, two grit subscales, tolerance of ambiguity, self-rated skills. 14,546 resp |
+| DVN/EDRJYT | 3 | **410** Prolific respondents: the MFQ relevance block, the MFV vignettes, a 4-item compulsion scale. 13,940 resp |
+| DVN/T53TAK | 1 | **500** self-drive tourists in Shandong, 16 destination-image items at 1-5. 8,000 resp |
+| DVN/RRXBET | 1 | **387** Spanish undergraduates, a 17-item dichotomous knowledge test. 6,579 resp |
+| DVN/BVA71C | 1 | **577** university lecturers, the revised 9-item I-PANAS-SF. 5,193 resp |
+| DVN/HBQLA6 | 4 | **1,236** Kenyan students, 18 cognitive-bias problems scored 0/1, with `rt` and `treat`. 4,944 resp |
+
+Dictionary: 42 rows in `dictionary_auto.csv` plus 42 in
+`codebook_at_ingest.csv` (2 real codebook files — D155SP's wave-1 codebook PDF
+and 226PMX's questionnaire PDF — and 40 `none`). Tags: 42 rows appended to
+`tags_auto_2026-10-19.csv`, every atom checked against the vocab reference.
+
+### A deposit whose data is a generator, not a questionnaire (DVN/D6WWCK)
+
+799 international students in Northern Cyprus, 140 items across five sourced
+instruments (Demes & Geeraert acculturation, Groarke & Hogan music functions,
+Doğu & Aras social sustainability, Hoffman et al. sense of belonging, Ang et
+al. cultural intelligence), the stems as column headers, an INSTRUMENTS.docx
+naming every construct — and the responses are not real. **138 of the 140
+items have all five Likert categories within 140-180 of the 159.8 expected
+under exact uniformity** (799/5). At the same time within-block correlations
+run 0.83-0.89 and *every* cross-block pair runs 0.33-0.40, i.e. one dominant
+latent factor. Uniform marginals on 140 items plus a single factor is what a
+copula-style simulation produces; a real agreement item is skewed, and 140 of
+them are not all flat. The two exceptions (both "Listening to music has helped
+me ..." items) are the only realistically skewed columns in the file.
+
+**The general check, cheap and worth repeating: before shipping a large
+block, count each category per item.** Nothing else in the pipeline looks at
+marginals — `run_qc`'s `imputed_values*` fires on CONCENTRATION, so a
+perfectly flat item is exactly what it does not flag.
+
+### A PII surface the three-surface screen cannot see (DVN/VSFCVG)
+
+853 Spanish university students, 9 AI-in-mathematics items at 1-5, the
+administered Spanish stems as the column headers — a clean table, skipped
+whole, because one respondent typed **an email address into the free-text
+`Edad` (age) column**. The screen reads column names, column values and
+SPSS/Stata labels; `Edad` is not a generically-named column, so its values
+were never content-checked, and the deposit screened clean. **A free-typed
+numeric field is a PII surface**: one stray answer in 853 is enough, and the
+rule is blanket.
+
+### Two 2026-09-28 TODO items closed, with reasons
+
+- **DVN/GJOBOS** (30,108 x 115, "The Impact of Female Teachers on Female
+  Students' Lifetime Well-Being") is an IPUMS/NHGIS census microdata build —
+  county and individual census variables, IPEDS institution records, a county
+  gazetteer. No item responses anywhere in the 57-file deposit. The low
+  confidence the triage flagged was correct for a reason the flag could not
+  state.
+- **DVN/OHBD3D** ("Old Friends or New Connections?") carries `IPAddress` in
+  Study1_Baseline_Demographics.sav and `RecipientFirstName`,
+  `RecipientLastName` and email addresses in Q85 of Study3.sav. Whole
+  candidate skipped under `feedback_pii_skip_entirely`.
+
+### Deferred, with the exact blocker (3 deposits, 1 partial)
+
+- **DVN/EEPE1L** — 275 students x 15 items at 1-7 in five clean 3-item blocks
+  (TSI, ACP, TTF, CSI, PSE). Shippable the moment the blocks can be named; the
+  deposit has no labels and no codebook, and a search for the paper ("Grit and
+  Generative AI Alignment in Academic Performance", Oh 2026) found nothing.
+  Only TTF is guessable.
+- **DVN/IGFCET** — 2,415 PhD graduates with four 1-5 job-attribute importance
+  ratings (autonomy, pay, managerial activities, commercialization) that share
+  a stem the deposit never states. Needs the paper.
+- **DVN/226PMX, partially** — DE05/DE06/DE07/DE08 (36 columns at 1-7), PL05
+  (10), PL06 (8) and TE06 (8) are plainly item responses, and the deposit's
+  questionnaire PDF names its blocks — but the counts do not line up (one
+  "DE5 Conceptions of democracy" entry listing 21 statements against four data
+  blocks totalling 36; 8 columns against 7 listed statements, twice; and PL05
+  is not in the PDF's overview at all). Shipping would mean choosing which
+  column is the extra one.
+
+### The 29 closed on content, grouped by why
+
+**Not a person-level design (16).** The rows are countries, dyads, counties,
+county-months, class sections, organisations, conflict dyads, plots or
+sentences: 68MATY, 59HSGE, GCPM1D, YWQMMZ, KEUWTT, C94PHX, H0PYUO, WDXEXO,
+GBASNP, XRSUJU, XGO4PW, KEZ8CS, MSY9L1, 9BAZ7U, GJOBOS, JLOQ6V. Three of these
+were `worth_retrying` on a `dup_id_item` failure that was simply the unit
+repeating over time — the flag was right about the data and wrong about what
+it meant.
+
+**Aggregate-only (4).** Every scale appears as a mean or total and no
+item-level data exists: XXAXN5 (task scores on three different metrics),
+WYG39Y (four scale means), WQWLMU (six subscale totals), JNN55B
+(psychophysiological series).
+
+**Below the floor of 100 (3).** 7WVYRB (32 subjects; the lead's 120 was the
+row count), MPRY0U (28 and 32), and **FM4LLA**, which deserves its own line:
+104 patients x 15 photophobia items at 0-10, except that 7 of the 104 rows
+carry the deposit's `X` missing code on all fifteen items, leaving **97**
+respondents with any response at all. A 0-10 Rasch-analysed scale lost to
+three respondents.
+
+**Uninterpretable (1).** FRYK4A's population-estimate columns mix units
+within one column — the USA's population answered as 370, 423, 3 and 8 — so
+`resp` means nothing without knowing which respondent used which unit.
+
+**Already decided, restatused (7) and PII (3) and held (1)**, as above.
+
+### Every WARN, accounted for
+
+- `imputed_values*` on 10 tables: ordinary concentration. The strongest are
+  the cognitive-bias items (Anchoring1 answered correctly by 3%) and
+  Compulsion4 (74% at 1) — a hard task and a floor effect, not imputation.
+- `item_scale_outlier` on 3 tables: one item in each of the MFQ, the MFV and
+  the Wei block was never given its lowest category. Category non-use at
+  N=410 and N=500, not a different scale; the blocks' anchors are documented
+  once for all their items.
+- `resp_scale_nested_support` on ghasemy_2025_ipanas_sf: four of nine items
+  were never answered 0. Same thing.
+- `multi_scale*` on ghasemy_2025_ipanas_sf: the `pa`/`na` prefixes are the
+  I-PANAS-SF's two dimensions, which is the instrument the paper fits a
+  two-dimensional GRM to — one instrument, one table.
+
+### What is left in #3077 after this
+
+`dvinst` 13 `todo`, `ha_dvportals` 3, and nine singletons across
+`ha_portals2`, the four `nuf_*` files, `osf` and `tail`. Plus the standing
+residue that is not mining work: ~340 `deferred` rows wanting a derivation
+rule or a rights ruling, and the 56 `pending_ruling` rows in
+`nc_licence_pending_ruling_2026-10-18.csv`.
