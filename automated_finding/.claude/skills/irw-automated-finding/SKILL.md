@@ -507,6 +507,70 @@ Two carve-outs: **never extract item text for `enem*` tables** (Ben handles
 those separately), and a table skipped for PII/license/N<100 has its item text
 skipped with it.
 
+### Name the instrument from the stems before you ship it — REQUIRED
+
+**The deposit's own label is not an identification.** Of the 35 `__items`
+tables staged on 2026-10-18, five were concealed by the label this step wrote
+for them, because the label came from the deposit's metadata rather than from
+reading the stems:
+
+| the label written | what the stems actually were |
+|---|---|
+| "as administered by Hung 2026" | the Tuckman Procrastination Scale (1991), verbatim; and Leppink et al. 2013 cognitive load, with the IL/EL/GL subscale structure intact |
+| "Implicit theories of intelligence (growth mindset) items" | Dweck's ITIS, verbatim |
+| the construct, "academic self-efficacy" | the MSLQ self-efficacy subscale, with "English class" substituted for "this class" |
+| "Teacher support items" | a teacher-support scale that is **not** the Metheny TSS the register carries |
+
+A label written from deposit metadata describes who deposited the file. The
+rights rule turns on who wrote the items, and those are different facts. Read
+two or three distinctive stems and search them verbatim before you write the
+label, then record either an identification (author, year, instrument) or the
+fact that you looked and the stems match nothing published. "Author-developed"
+is a claim that needs the same evidence as any other.
+
+**`mapping_basis` and `text_source` are extraction bases, not rights bases.**
+`study_materials` says where the words were found. `canonical_instrument` says
+they are the instrument's own wording, which is the opposite of a permission —
+it was the starkest row in the 2026-10-18 batch. And a deposit's CC licence
+covers the depositors' own material, not a third-party instrument they
+reproduced inside it. None of the 35 staged rows recorded a rights basis at
+all, because the three bases available look like they answer the question.
+
+So write both into the row's `note`, first thing, in this shape:
+
+```
+instrument: Tuckman Procrastination Scale, Tuckman 1991 (stems searched verbatim); rights: none found -- HELD
+instrument: stems match no published scale (searched 3 verbatim); rights: study-authored under the deposit's CC BY
+```
+
+**Check the identified name against `itemtext/instrument_rights_register.csv`
+by name — do not just run the gate.** Two reasons, both load-bearing:
+
+- `load_register()` keeps only `hold`/`note` verdicts, so a `ship` ruling is
+  **invisible** to the gate. Running the gate can discover a prohibition and
+  never a permission. On 2026-10-18 that cost a correct table: the MSLQ is
+  registered `ship` (public domain, U-Michigan NCRIPTAL, citation only) with a
+  note saying adaptations ship too, and it was held anyway.
+- A miss is not an all-clear, and a hit is a lead rather than a verdict. The
+  register's `match_item_code` patterns miss freely (`^mslq` cannot match
+  `ASE1`) and its short stems over-fire (`nervous and` hit a Foreign Language
+  Speaking Anxiety item).
+
+**If the instrument has no row, silence does not ship** (ben-domingue,
+2026-10-15, on Stanford library copyright counsel's advice) — and writing the
+missing row, verdict included, is normal work for this step, not something to
+hand back. 14 of the 15 instruments behind the 2026-10-18 holds had no row at
+all, which is why nothing warned.
+
+**Hold it before upload, not after.** Pulling a table from an unpublished
+draft is one `draft.table(name).delete()`. Pulling a published one took a
+dedicated withdrawal script and a corpus-wide sweep. The record for a hold is
+a dated per-table list (see `automated_finding/itemtext_hold_2026-10-18.csv`),
+the held CSVs moved under `itemtext_output/held_<date>/` **with a
+`provenance.csv` marker in that directory** — `red_up`'s `HISTORY_MARKER`
+guard is what stops an uploader recursing back into them — and a
+`HELD, NOT SHIPPED <date>` note on the provenance row.
+
 ### Schema and extraction rules — do not restate them here
 
 The item text schema is defined in
@@ -691,7 +755,9 @@ Write it `QUOTE_ALL` with CRLF, matching the file's existing rows.
 A cheap-gate table should almost always be `data_labels` + `study_materials`,
 which is the one basis exempt from needing a `verify_<table>.R`. If you find
 yourself writing anything else, that is a signal the table failed the
-cheapness test — re-read the gate above before continuing.
+cheapness test — re-read the gate above before continuing. Neither column says
+anything about rights: see "Name the instrument from the stems" above for what
+the `note` has to carry instead.
 
 Nothing needs mirroring into `itemtext/`. That pipeline derives its queue by
 diffing live `irw_list_itemtext_tables()` against `irw_list_tables()`, so an
