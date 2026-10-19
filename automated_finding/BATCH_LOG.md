@@ -20615,7 +20615,9 @@ time, not from the ledger. No licence casualties in this slice.
 
 All 42 pass `irw-validate --profile upload` with **zero failures and zero
 errors**; 30 report nothing at all and the 12 warnings are accounted for at
-the end. **Nothing is uploaded** — ben-domingue has not been asked.
+the end. **All 42 uploaded 2026-10-19 by ben-domingue**, together with
+2026-10-19d's 36, from `automated_finding/irw_output`. Release is a separate
+step and is still owed.
 
 | deposit | tables | what |
 |---|---|---|
@@ -20773,8 +20775,9 @@ one file.
 ### 9 deposits shipped: 36 tables, 292,507 responses
 
 All 36 pass `irw-validate --profile upload` with **zero failures and zero
-errors**; the twelve warnings are accounted for at the end. **Nothing is
-uploaded.**
+errors**; the twelve warnings are accounted for at the end. **All 36 uploaded
+2026-10-19 by ben-domingue**, with 2026-10-19c's 42 — 78 tables, 557,054
+responses, from `automated_finding/irw_output`. Release is still owed.
 
 | deposit | tables | what |
 |---|---|---|
