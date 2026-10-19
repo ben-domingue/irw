@@ -129,6 +129,73 @@ contradiction of any ruling — there is no ruling — but if FLCAS should have 
 register row, that table is the one to check first.
 
 
+## From the #3077 figshare re-mine slice, worked (2026-10-19a)
+
+The 20 `todo` rows of `leads/repos_ledger_remine_2026-10-18_figshare.csv`,
+worked end to end; that file is now closed (0 `todo`). 13 of 20 deposits
+shipped. Full write-up in BATCH_LOG 2026-10-19a.
+
+- [ ] **41 tables (190,707 responses) staged in `automated_finding/irw_output/`
+  and NOTHING uploaded.** All 41 pass `irw-validate --profile upload` with
+  zero failures. Dictionary rows (41) and `codebook_at_ingest.csv` rows (41)
+  are committed; tags are in `automated_finding/tags_auto_2026-10-19.csv` (41
+  rows, every atom checked against `TAG_VOCAB`), deliberately a separate file
+  as on 2026-10-18.
+  `item_response_warehouse_7` held 333 tables before this batch.
+- [ ] **Covariate labels:** owed for the four `.sav` scripts shipping `cov_*`
+  (`jiao_2024_ehealth_literacy`, `galanis_2025_miss`,
+  `bulgay_2026_technology_use`, `gerou_2023_humility_quiet_ego`). Harvested at
+  this batch's data commit; run `python3 metadata/covariate_labels/build.py`
+  after the release and commit `covariate_labels.csv`.
+- [ ] **Issues-page entries owed by this batch: none.** No table ships item
+  text, so there is no text-vs-table mismatch to publish. Re-check if the two
+  item-text candidates below ship.
+
+### Item text: two tables are ready, and one needs no ruling
+
+This batch shipped no item text (the slice was response tables). Two of the
+six extraction-solved deposits are not waiting on anything:
+
+- [ ] **`gerou_2023_dass21` is rights-clear and extraction-solved.** The
+  DASS-21 register row's verdict is `ship`; all 21 Greek stems are in the
+  `.sav` variable labels. Found by checking the register BY NAME --
+  `load_register()` keeps only `hold`/`note`, so the gate cannot report a
+  `ship`. Needs the administered-language columns and a `translation_source`
+  for the published English.
+- [ ] **`kembara_2026_civic_agency` needs no register row at all.** Appendix A6
+  of the deposit carries all six items in Indonesian with the authors' own
+  English and the dimension each measures, and the items are the study's own
+  under its CC BY.
+- Held on an existing verdict, no work to do: `jiao_2024_eheals` and
+  `hernandezencuentra_2026_eheals` (eHEALS `hold`),
+  `gerou_2023_hexaco_honesty_humility` (HEXACO-PI-R `block`).
+- Held on a row this batch WROTE (six new `hold` rows, register now 349):
+  `hernandezencuentra_2026_ehlq` (eHLQ), `jaber_2025_epds` (EPDS),
+  `gerou_2023_quiet_ego` (Quiet Ego Scale),
+  `sadiyah_2026_financial_self_efficacy` (Lown's FSES),
+  `jiao_2024_vaccine_conspiracy` (VCBS), and the MAI as an instrument.
+  **A ruling on any of them releases an extraction-solved table.** Four of the
+  six carry deliberately empty matchers, with the reason in the row: check
+  them by name.
+
+### Worth fixing in the pipeline, not in this batch
+
+- [ ] **A duplicate DEPOSIT is invisible to every check we have.**
+  `figshare 14705967` and `14711232` are the same study, the same
+  byte-identical `PPD full.sav` (20,941 bytes) and the same two `.spv` files,
+  differing only in one co-author on the record. Both are separate ledger keys
+  and both were leads. `check_shipped.py` cannot see it (the table names would
+  not collide either -- the `ghosh_2020_cas_ocs` blind spot one level up), and
+  it cost two independent reviews here. A content hash, or even
+  size-plus-filename, over the resolved data file would catch both shapes;
+  `oversized_candidates.csv` already shows the resolver can see size.
+- [ ] **A lead's `n_participants` is a row count three times in 20 rows**
+  (figshare 30826265, 24777858, 30426739). The brief's "rank by instrument
+  shape, not response count" rule exists for this, but the leads files still
+  print the raw number as if it were N; a ratio of rows to distinct id in the
+  triage would make it visible at ranking time rather than at download time.
+
+
 ## From the #3077 zenodo_rest batch B, worked (2026-10-18i)
 
 - [x] **96 tables (267,363 responses) + 6 item text tables uploaded and released 2026-10-18**
@@ -469,15 +536,29 @@ Nothing here is uploaded. Ben held PR #3089 and all uploads deliberately on
 
 ### Leads still to work
 
-One queue of 291, not two — items 2 and 3 of #3077 overlap by 38 rows, which
-are deferred in batch 5's file naming the leads file that owns them.
+**Recounted against the files on 2026-10-19, because the numbers below had
+gone stale in two directions.** The `status` column is free text, so count it
+rather than trusting a remembered figure — and a slice can be closed without
+this list saying so.
 
-- [ ] **77** zenodo_rest, `leads/repos_ledger_remine_2026-10-18_zenodo_rest.csv`
-      (batch A took the 26 highest-N)
-- [ ] **46** mendeley, `leads/repos_ledger_remine_2026-10-18_mendeley.csv`
-- [ ] **25** human_review batch 5, `leads/human_review_recheck_batch5_2026-10-18.csv`
-      (+57 pool remainder, statused `unworked`)
-- [ ] **20** figshare, **13** dataverse installations, **1** osf
+- [x] **0** zenodo_rest, `leads/repos_ledger_remine_2026-10-18_zenodo_rest.csv`
+      — CLOSED. All 421 rows carry a status across batches A/B/C (143 of them
+      `deferred`); the "77" above was never a `todo` count.
+- [x] **0** mendeley, `leads/repos_ledger_remine_2026-10-18_mendeley.csv` — no
+      `todo` rows. The open work there is **57 `deferred`**, each naming its
+      blocker in the file; see the 2026-10-18h section above.
+- [x] **0** figshare, `leads/repos_ledger_remine_2026-10-18_figshare.csv` —
+      CLOSED 2026-10-19a: all 20 `todo` worked, 13 shipped, 41 tables.
+      15 `deferred` remain in that file, listed in the 2026-10-18l section.
+- [ ] **48** `noflag_dataverse`, `leads/repos_ledger_remine_2026-10-18_noflag_dataverse.csv`
+      — the largest genuinely unopened slice, and not previously listed here.
+- [ ] **57** human_review pool remainder, statused `unworked` in
+      `leads/human_review_recheck_batch5_2026-10-18.csv`. Batch 5's own 25 are
+      worked; 32 further rows are `deferred` to the zenodo_rest and dvinst
+      files that own them.
+- [ ] **13** dataverse installations, `leads/repos_ledger_remine_2026-10-18_dvinst.csv`;
+      **3** `ha_dvportals`, **1** osf, **1** `ha_portals2`, **1** tail, and
+      4 singletons across the `nuf_*` files.
 - [ ] **16** deferred rows across batches A/f needing a derivation rule
       (Google Form exports whose headers are stems with no item code)
 - [ ] **10** from the `no_usable_file` sweep — low priority, that is the whole
