@@ -489,6 +489,24 @@ not a triage rule, and it is owned by `itemtext_standard.md` -- see
 `irw-auto-itemtext`'s SKILL.md. Follow it there rather than re-deriving it
 here.
 
+**A translated instrument whose own terms are unestablished is ALSO already
+ruled, and it is the case this pipeline meets most.** The register clearing an
+instrument clears the instrument, not every translation of it: the DASS FAQ,
+for one, conditions its public-domain grant on translations being public domain
+too. That does not block the table and it is not a ruling request. Per
+`itemtext_standard.md`'s 2026-09-08 ruling (irw#2121), two instruments are in
+play and the test is the terms of **the thing you actually copied** -- so the
+original-language wording ships as a stand-in (`text_source=
+translated_substitute`, `language` still naming the administered language,
+`_translated` empty) while the adaptation's wording is held. Both limits bind:
+the adaptation must be a straight translation rather than a revision, and the
+original's own terms must be quoted in the provenance `note`, not asserted.
+`gerou_2023_dass21` (2026-10-19b) is the worked example from this pipeline:
+Lyrakos & Arvaniti's Greek DASS-21 held, the public-domain English shipped, all
+21 stems read across the two languages first. **Write the hold as a register
+row for the TRANSLATION** so the next reader meets it beside the instrument's
+`ship`, and do not stall the batch on it.
+
 When you skip, say **where the text actually is** in the `data/<table>.py`
 header and in the `BATCH_LOG.md` entry, so a later pass starts from an answer
 instead of re-deriving one. That is the whole cost of skipping — one sentence.

@@ -64,6 +64,19 @@ ship it; if it is not, take the fallback and say in provenance which files you c
 and that they contained no text in that script. Do not go hunting off-source for a
 published original — that is a later pass, not a blocker.
 
+**Recoverability is not the only road to the fallback: RIGHTS are the other one, and
+that case is already ruled.** When the administered wording is recoverable but is a
+translated adaptation whose own terms are unestablished, the fallback is what ships —
+the original-language wording as a stand-in — under "An authorization scoped to a
+POPULATION ..." below (ruled 2026-09-08, irw#2121): two instruments are in play, and
+the test is the terms of **the thing you actually copied**. So a rights-driven
+`translated_substitute` is not a pending ruling and not an exception; it is this rule
+applied. Both of that ruling's limits still bind — the adaptation must be a straight
+translation rather than a revision, and the original's own terms must be quoted rather
+than asserted. Worked examples: `li_2024_bdyz` (Chinese ERSS administered, Gross &
+John's English ERQ shipped) and `gerou_2023_dass21` (Lyrakos & Arvaniti's Greek DASS-21
+administered and held, the public-domain English DASS-21 shipped, 2026-10-19).
+
 **Several administered languages in one table: a semicolon list.** When one table's
 respondents read different language versions (a multi-country administration), `language`
 names every administered language, English included, separated by `; ` — e.g.

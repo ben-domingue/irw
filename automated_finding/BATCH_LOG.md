@@ -20469,12 +20469,36 @@ which is the schema's documented fallback: English in the base fields,
 `text_source=translated_substitute`. That combination is exactly the backfill
 query `language != '' AND item_text_translated == ''`.
 
-**One narrow ruling releases the Greek**: does the DASS site's grant reach the
-translations it hosts? A new register row —
-*"DASS-21 GREEK translation, Lyrakos & Arvaniti"*, verdict `hold` — records the
-question with the two quoted clauses, so the next reader starts from it rather
-than from the English row's `ship`. A `ship` ruling is re-run-and-replace here,
-not a withdrawal, because no Greek wording ships today.
+**Corrected the same day: this is not a pending ruling, it is an existing one.**
+First written up here as a question for Ben; it is already answered by
+`itemtext_standard.md`'s 2026-09-08 ruling (irw#2121), which says that when a
+study administers a translated adaptation and IRW ships the original-language
+wording as a stand-in, two instruments are in play and the test is the terms of
+**the thing you actually copied**. IRW copied the public-domain English
+DASS-21, so it ships; the Greek governs the Greek wording only. Both of that
+ruling's limits are met: a straight translation rather than a revision (Lyrakos
+et al. is titled a translation-and-validation study, and all 21 stems were read
+across the two languages), and the originator's own terms quoted rather than
+asserted from an audit row. `li_2024_bdyz` is the structural twin — Chinese
+ERSS administered, Gross & John's English ERQ shipped.
+
+What is genuinely open is only the **upgrade**, and nothing is blocked on it:
+could the Greek wording itself move into the base fields? That needs the
+translators' terms or a ruling that the DASS site's "copied without
+restriction" reaches the translations it hosts. The new register row —
+*"DASS-21 GREEK translation, Lyrakos & Arvaniti"*, verdict `hold` — records it
+with both clauses quoted, and the English DASS row now names it so a reader
+meeting `ship` sees the translation caveat beside it. A `ship` answer is
+re-run-and-replace, never a withdrawal.
+
+**Why it got re-derived from scratch, which is the real defect.** The #2121
+ruling was cited nowhere outside its own section — not from the fallback
+paragraph 580 lines earlier in the same file, not from this pipeline's SKILL.md,
+not from the DASS-21 register row. That is every place a batch actually looks,
+so the rule was invisible exactly when it applied, and the batch wrote a
+ruling request for a settled question. All three now point at it. Same shape as
+the 2026-10-18 finding that 14 of 15 held instruments had no register row: the
+decision existed, the path to it did not.
 
 The English came from the official form (`Dass21.pdf`,
 sha256 `8644cc86...bd638b5`, fetched 2026-10-19) — instructions, all 21 stems

@@ -178,17 +178,28 @@ shipped. Full write-up in BATCH_LOG 2026-10-19a.
   English, while the study administered a Greek translation that is withheld.
   The page lives in the datapages/irw repo. `kembara_2026_civic_agency` earns
   no entry (author-supplied translation, no text-vs-table mismatch).
-- [ ] **One narrow rights ruling would release the Greek DASS-21 wording.**
-  The DASS-21 is public domain and its register row says `ship`, but that
-  row's note records the FAQ's condition that TRANSLATIONS also be public
-  domain -- and the administered wording here is Lyrakos & Arvaniti's Greek
-  version, whose terms could not be located (the DASS site hosts the form but
-  its translations page only disclaims validity and redirects enquiries to the
-  translators). So the Greek is held, the canonical English ships in its place
-  under the schema's fallback, and a new register row
-  ("DASS-21 GREEK translation, Lyrakos & Arvaniti", verdict `hold`) carries the
-  question and both quoted clauses. **A `ship` ruling is re-run-and-replace,
-  not a withdrawal** -- no Greek wording ships today.
+- [x] **No ruling is needed for what shipped: #2121 already governs it.**
+  Corrected 2026-10-19 after this was first written up as a pending ruling.
+  `itemtext_standard.md`'s 2026-09-08 ruling (irw#2121) says that when a study
+  administers a translated adaptation and IRW ships the original-language
+  wording as a stand-in, two instruments are in play and the test is the terms
+  of **the thing you actually copied**. IRW copied the public-domain English
+  DASS-21, so it ships; Lyrakos & Arvaniti's Greek governs the Greek wording
+  only, and its terms could not be located, so the Greek is held. Both of the
+  ruling's limits are met -- a straight translation rather than a revision, and
+  the originator's terms quoted rather than asserted. The structural twin is
+  `li_2024_bdyz`.
+- [ ] **What IS open is only the upgrade**, and nothing is blocked on it: could
+  the Greek wording itself move into the base fields? That needs the
+  translators' terms, or a ruling that the DASS site's "copied without
+  restriction" reaches the translations it hosts. Recorded as a register row
+  ("DASS-21 GREEK translation, Lyrakos & Arvaniti", verdict `hold`) with both
+  clauses quoted. A `ship` answer is re-run-and-replace, never a withdrawal.
+- [x] **The reason this got re-derived from scratch is now fixed.** The #2121
+  ruling was cited nowhere outside its own section -- not from the fallback
+  paragraph in the same file, not from this pipeline's own SKILL.md, not from
+  the DASS-21 register row, which is every place a batch actually looks. All
+  three now point at it, and the English DASS row names the Greek row.
 - Held on an existing verdict, no work to do: `jiao_2024_eheals` and
   `hernandezencuentra_2026_eheals` (eHEALS `hold`),
   `gerou_2023_hexaco_honesty_humility` (HEXACO-PI-R `block`).
