@@ -20432,9 +20432,11 @@ rights ruling rather than work. Where each one's text actually is:
 
 ## 2026-10-19b — item text for the two ready tables of the figshare slice (#3077)
 
-The two tables 2026-10-19a left extraction-solved. Both are staged in
-`automated_finding/itemtext_output/` and **nothing is uploaded**; the response
-tables went up on 2026-10-19 and the item text is the owed second half.
+The two tables 2026-10-19a left extraction-solved. **Both uploaded 2026-10-19**
+by ben-domingue into the `irw_text` draft, after the response tables went up
+the same day; `uploaded=2026-10-19` stamped on both provenance and
+mapping_verification rows. Release is a separate step, and the issues-page
+entry below is owed at it.
 
 | table | rows | basis | what ships |
 |---|---|---|---|

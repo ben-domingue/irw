@@ -165,8 +165,12 @@ shipped. Full write-up in BATCH_LOG 2026-10-19a.
 ### Item text: both ready tables are now STAGED (2026-10-19b)
 
 - [x] **`gerou_2023_dass21__items.csv` (84 rows) and
-  `kembara_2026_civic_agency__items.csv` (30 rows) are staged in
-  `automated_finding/itemtext_output/` and NOT uploaded.** Full gate chain run
+  `kembara_2026_civic_agency__items.csv` (30 rows) UPLOADED 2026-10-19** by
+  ben-domingue into the `irw_text` draft (release is a separate step);
+  `uploaded=2026-10-19` is stamped on both rows of
+  `itemtext_provenance.csv` and `itemtext/mapping_verification.csv`.
+  Both table names were new in `irw_text`, so nothing appended.
+  Before upload, the full gate chain was run
   against the staged response CSVs: `normalize_nulls.R`,
   `validate_items.R --resp-csv` (item and resp sets match exactly on both),
   `audit_batch.R --resp-dir` (2 of 2 PASS, no anomalies), `irw-validate` (both
