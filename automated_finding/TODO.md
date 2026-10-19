@@ -1129,6 +1129,33 @@ this list saying so.
   1980 events, MCQ, Moral Attentiveness, courage/TCS/wisdom items). STAI,
   BFI-2 and HEXACO are already `block`.
 
+## From the 2026-10-19d tail slice (#3077)
+
+- [ ] **DANS SS/PVQ66Y's Adaptive Expertise Inventory** — BC1 (4 columns),
+  BC2 (4) and BC3 (3), each at two waves, are item responses, but the
+  deposit's Databeschrijving.pdf describes that instrument as two domains of
+  five items, and prints its response options with a duplicated "1." so the
+  number of points is ambiguous too. Three tables once the domain mapping is
+  known; the nine D-ADAPT and Adaptability tables shipped.
+- [ ] **DANS Z7Q-7ATH's EDE-Q block** — 28 columns in each of two studies,
+  mixing 0-6 band ratings with raw day counts (247 and 288 cells above 6, up
+  to 15 and beyond). The deposit ships a codebook PDF; splitting the block by
+  item metric needs it read item by item. The other six blocks shipped.
+- [ ] **Add institutional figshare instances to `_HOST_RESOLVERS`** —
+  `orda.shef.ac.uk` (Sheffield ORDA) is a figshare instance, and the
+  DOI-fallback path sent it to `_dataverse_files`, which raised its AWS-WAF
+  `SourceBlocked` message naming **dataverse.harvard.edu** for a site it never
+  called. Two fixes, both small: dispatch `*.figshare.com` and known
+  institutional instances to `_figshare_files` (the public figshare API
+  resolves ORDA ids fine), and make that WAF message name the host it
+  actually requested.
+- [ ] **A deposit can keep both copies of a reverse-scored item, and name the
+  ADMINISTERED one `*R`** — Mendeley x8zvbjv6p2 has `Differ3R` inside its
+  block and plain `Differ3` later as the scored copy (= 6 - R twin for all
+  1,387 rows). Taking the plain name because it looks unmodified ships
+  reverse-scored items among administered ones. Worth a line in the data
+  standard's "one file per scale" section: identify the administered copy by
+  position in the block and by arithmetic, not by the name.
 ## From the 2026-10-19c noflag_dataverse slice (#3077)
 
 - [ ] **DVN/EEPE1L** — 275 students x 15 items at 1-7 in five clean 3-item
