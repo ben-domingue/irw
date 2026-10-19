@@ -20429,3 +20429,126 @@ rights ruling rather than work. Where each one's text actually is:
   is shipped either way. One online-panel participant id
   (`figshare 31150441`'s `respid`) was replaced by the row index under the
   2026-09-20 narrowing, never hashed.
+
+## 2026-10-19b — item text for the two ready tables of the figshare slice (#3077)
+
+The two tables 2026-10-19a left extraction-solved. Both are staged in
+`automated_finding/itemtext_output/` and **nothing is uploaded**; the response
+tables went up on 2026-10-19 and the item text is the owed second half.
+
+| table | rows | basis | what ships |
+|---|---|---|---|
+| `kembara_2026_civic_agency` | 30 (6 items × 5 options) | `paper_explicit` / `study_materials` | the administered Indonesian stems, with the authors' own English in `item_text_translated` |
+| `gerou_2023_dass21` | 84 (21 items × 4 options) | `data_labels` / `translated_substitute` | the DASS-21's **official English**, `language=Greek`, `_translated` empty |
+
+Gate chain, all run from `itemtext/` against the staged response CSVs:
+`normalize_nulls.R` (2 files normalised) → `validate_items.R --resp-csv` (item
+sets and resp sets match exactly on both) → `audit_batch.R --resp-dir`
+(**2 of 2 PASS, no anomalies**) → `irw-validate` (both ok, nothing to report)
+→ `check_provenance.R` against the live issues page (exit 0, neither table
+flagged). `itemtext_output/` holds nothing but the two `*__items.csv`.
+
+### The DASS-21 is public domain; the Greek translation it was administered in is not
+
+`gerou_2023_dass21` looked like the easy one — register verdict `ship`, all 21
+stems sitting in the deposit's own `.sav` variable labels. Reading the register
+row's note is what stopped it: the DASS FAQ's grant is conditioned on
+**translations also being public domain**, and the administered wording here is
+a named third-party translation — George Lyrakos and Chrysa Arvaniti,
+University of Athens, validated in Lyrakos et al. 2011. The DASS site hosts
+that form, but its translations page says only "carried out by others. We are
+not able to provide any assurances about the adequacy or validity of the
+translations. Please address all enquiries to the person or group who carried
+out the translation" — a disclaimer, not a grant. The "copied without
+restriction" sentence lives on the *download* page, which links the English
+forms only.
+
+So the Greek wording is held and the canonical English ships in its place,
+which is the schema's documented fallback: English in the base fields,
+`language=Greek` anyway (it is a fact about the study), `_translated` empty,
+`text_source=translated_substitute`. That combination is exactly the backfill
+query `language != '' AND item_text_translated == ''`.
+
+**One narrow ruling releases the Greek**: does the DASS site's grant reach the
+translations it hosts? A new register row —
+*"DASS-21 GREEK translation, Lyrakos & Arvaniti"*, verdict `hold` — records the
+question with the two quoted clauses, so the next reader starts from it rather
+than from the English row's `ship`. A `ship` ruling is re-run-and-replace here,
+not a withdrawal, because no Greek wording ships today.
+
+The English came from the official form (`Dass21.pdf`,
+sha256 `8644cc86...bd638b5`, fetched 2026-10-19) — instructions, all 21 stems
+and all four anchors from that one file, so nothing is IRW-authored and nothing
+is machine-translated. Recorded in the provenance `note` because
+`itemtext_provenance.csv` still has no `translation_source` column (TODO.md).
+The deposit's own English value labels differ trivially ("Do not apply to me at
+all" for the form's "Did not apply"); the form wins, since it is the version
+being shipped.
+
+**The alignment was read, not assumed.** All 21 Greek labels were checked one
+by one against the official form's numbered items — 1 "Δεν μπορούσα να ηρεμήσω
+τον εαυτό μου" / "I found it hard to wind down", 2 dry mouth, 3 no positive
+feeling, … 21 "life was meaningless" — and every one matched, in canonical
+order. That is what licenses shipping English stems against the deposit's own
+`DASS_n` codes. No statistical route was available: all 21 items share one 0-3
+scale, so route 2 has no signature, and this sample publishes no per-item
+statistics, so route 1 has nothing to match. `mapping_verification.csv` records
+it as `data_labels` / `NOT_NEEDED` with that reasoning, not as a verified
+statistical claim.
+
+### `kembara_2026_civic_agency` verified exactly, on the deposit's own numbers
+
+`mapping_basis` is `paper_explicit` rather than `data_labels`: the stems are in
+a codebook sheet (`A6. Survey Instrument`, Code / Dimension / Item (Indonesian)
+/ Item (English)) rather than in a column label, so the tie rests on the
+deposit using Q1-Q6 consistently across its sheets. `A2. Descriptive
+Statistics` is what falsifies that, and `verify_kembara_2026_civic_agency.R`
+reproduces it: per-item n, mean, SD, min, max and the **complete 1-5 frequency
+vector** for all six items, against the staged response table. Mean and SD
+deviations are 0.0000 at a 0.005 tolerance and every frequency vector is
+identical. VERDICT: PASS.
+
+Worth noting for the tie rule: Q1 and Q2 differ by **0.018** in mean, inside
+the ~0.02 band `item_stats.R` flags, so means alone would not have separated
+them — the frequency vectors (17,35,136,122,82 vs 9,45,125,139,74) do. What it
+cannot establish, and no numeric route can: whether the authors assigned the
+right stem to the right dimension. These are the study's own items, searched
+and matching no published scale, so rights are the depositors' under CC BY and
+the register has nothing to rule on.
+
+Anchors: the appendix gives the scale as "1=Strongly Disagree to 5=Strongly
+Agree" — endpoints only, in English only. Those two go in
+`option_text_translated`, `option_text` stays empty (the administered
+Indonesian anchors are nowhere in the deposit), and resp 2-4 stay blank in
+both: an unlabelled midpoint must not be padded with its own number. The six
+dimension names are **not** shipped as text — each item is its own dimension,
+and a construct label is not something a respondent read.
+
+### One doubled quote was hiding 18% of `mapping_verification.csv` from its lint
+
+`lint_verification.R` is the only check that catches a status claiming more
+than its evidence supports. Run over the real file it reported **423 ERRORs on
+2,123 rows** — and the file has 2,585. The cause was a single malformed field
+on line 1705, `""PARTIAL"` instead of `"PARTIAL"` in
+`ritzel_2020_farmer_burden`'s `status`: R's parser desynchronises there and
+every row after it is garbage, so **462 rows (18%), including every row written
+since 2026-09-26, were invisible to the lint**. Python's `csv` reads the file
+fine, which is why nothing noticed; and the error spam looks like other
+people's rows, which is why nobody read it.
+
+Fixed byte-wise (one leading quote removed, nothing else touched). The lint now
+reports **2,585 rows, 1 ERROR** — and that one is a real finding of its own:
+`prasetiyo_2022_act` carries `status=FAILED`, which is not in the enum
+`VERIFIED/PARTIAL/NO_ROUTE/NOT_NEEDED`. Left as found; it is someone's verdict
+to interpret, not a parse defect.
+
+### Owed at publish
+
+- **An issues-page entry for `gerou_2023_dass21`**, forced by its non-empty
+  `public_note` ("the item text shipped is the DASS-21's official English
+  wording; the study administered a validated Greek translation whose own terms
+  could not be established, so the Greek wording is withheld"). Same shape as
+  the `markova_2025_*` entries owed from 2026-10-18d.
+- `kembara_2026_civic_agency` earns **no** entry: author-supplied translation,
+  no text-vs-table mismatch, and blank option_text at unlabelled midpoints is
+  explicitly not issues-page material.

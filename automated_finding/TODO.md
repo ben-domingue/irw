@@ -162,21 +162,33 @@ shipped. Full write-up in BATCH_LOG 2026-10-19a.
   text, so there is no text-vs-table mismatch to publish. Re-check if the two
   item-text candidates below ship.
 
-### Item text: two tables are ready, and one needs no ruling
+### Item text: both ready tables are now STAGED (2026-10-19b)
 
-This batch shipped no item text (the slice was response tables). Two of the
-six extraction-solved deposits are not waiting on anything:
-
-- [ ] **`gerou_2023_dass21` is rights-clear and extraction-solved.** The
-  DASS-21 register row's verdict is `ship`; all 21 Greek stems are in the
-  `.sav` variable labels. Found by checking the register BY NAME --
-  `load_register()` keeps only `hold`/`note`, so the gate cannot report a
-  `ship`. Needs the administered-language columns and a `translation_source`
-  for the published English.
-- [ ] **`kembara_2026_civic_agency` needs no register row at all.** Appendix A6
-  of the deposit carries all six items in Indonesian with the authors' own
-  English and the dimension each measures, and the items are the study's own
-  under its CC BY.
+- [x] **`gerou_2023_dass21__items.csv` (84 rows) and
+  `kembara_2026_civic_agency__items.csv` (30 rows) are staged in
+  `automated_finding/itemtext_output/` and NOT uploaded.** Full gate chain run
+  against the staged response CSVs: `normalize_nulls.R`,
+  `validate_items.R --resp-csv` (item and resp sets match exactly on both),
+  `audit_batch.R --resp-dir` (2 of 2 PASS, no anomalies), `irw-validate` (both
+  clean) and `check_provenance.R` against the live issues page (exit 0).
+  Provenance and `mapping_verification.csv` rows are written; the folder holds
+  nothing but the two `*__items.csv`. Write-up: BATCH_LOG 2026-10-19b.
+- [ ] **An issues-page entry is owed for `gerou_2023_dass21` at publish**,
+  forced by its `public_note`: the shipped wording is the DASS-21's official
+  English, while the study administered a Greek translation that is withheld.
+  The page lives in the datapages/irw repo. `kembara_2026_civic_agency` earns
+  no entry (author-supplied translation, no text-vs-table mismatch).
+- [ ] **One narrow rights ruling would release the Greek DASS-21 wording.**
+  The DASS-21 is public domain and its register row says `ship`, but that
+  row's note records the FAQ's condition that TRANSLATIONS also be public
+  domain -- and the administered wording here is Lyrakos & Arvaniti's Greek
+  version, whose terms could not be located (the DASS site hosts the form but
+  its translations page only disclaims validity and redirects enquiries to the
+  translators). So the Greek is held, the canonical English ships in its place
+  under the schema's fallback, and a new register row
+  ("DASS-21 GREEK translation, Lyrakos & Arvaniti", verdict `hold`) carries the
+  question and both quoted clauses. **A `ship` ruling is re-run-and-replace,
+  not a withdrawal** -- no Greek wording ships today.
 - Held on an existing verdict, no work to do: `jiao_2024_eheals` and
   `hernandezencuentra_2026_eheals` (eHEALS `hold`),
   `gerou_2023_hexaco_honesty_humility` (HEXACO-PI-R `block`).
@@ -188,6 +200,21 @@ six extraction-solved deposits are not waiting on anything:
   **A ruling on any of them releases an extraction-solved table.** Four of the
   six carry deliberately empty matchers, with the reason in the row: check
   them by name.
+
+### A one-character defect was hiding 18% of `mapping_verification.csv`
+
+- [x] **Fixed 2026-10-19b.** `lint_verification.R` -- the only check that
+  catches a status claiming more than its evidence supports -- reported 423
+  ERRORs over 2,123 rows of a 2,585-row file. One malformed field on line 1705
+  (`""PARTIAL"` for `"PARTIAL"` in `ritzel_2020_farmer_burden`'s `status`)
+  desynchronises R's CSV parser, so **462 rows, every one written since
+  2026-09-26, were invisible to the lint**; Python's `csv` reads the file
+  fine, which is why nothing noticed. Repaired byte-wise; the lint now reports
+  2,585 rows and 1 ERROR.
+- [ ] **That remaining ERROR is a real one to adjudicate**:
+  `prasetiyo_2022_act` carries `status=FAILED`, which is not in the enum
+  `VERIFIED/PARTIAL/NO_ROUTE/NOT_NEEDED`. Left exactly as found -- it is
+  someone's verdict to interpret, not a parse defect.
 
 ### Worth fixing in the pipeline, not in this batch
 
