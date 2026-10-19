@@ -1,11 +1,11 @@
-# IRW table-name consistency audit -- 2026-10-15
+# IRW table-name consistency audit -- 2026-10-19
 
 Ground truth: `irw::irw_list_tables(source = c("core","comp","nom","sim"))`. 
 Dictionary sheets plus automated_finding/dictionary_auto*.csv included (Public rows only).
 
 ## A. Incomplete coverage (missing >=2 sources, tag-only rows dropped -- matches metadata/04_tables.R's `zz`)
 
-Full list, aligned columns: `table_audit_report_incomplete.txt`. Same data as CSV: `table_audit_report_incomplete.csv` (184 rows). Nothing here is auto-fixed -- triage by hand.
+Full list, aligned columns: `table_audit_report_incomplete.txt`. Same data as CSV: `table_audit_report_incomplete.csv` (305 rows). Nothing here is auto-fixed -- triage by hand.
 
 | table | category | redivis | dictionary_sheet | biblio_csv | metadata_csv | tags_csv |
 |---|---|---|---|---|---|---|
@@ -20,26 +20,26 @@ Full list, aligned columns: `table_audit_report_incomplete.txt`. Same data as CS
 | 2024_online_addiction_sabas | core |  |  | 1 |  |  |
 | alomari_2025_student_questionnaire | core |  |  | 1 |  |  |
 | altahla_2024_whoqol_bref | core |  |  | 1 |  |  |
+| arvanitis_2023_compulsion | core |  | 1 |  |  |  |
+| arvanitis_2023_mfq | core |  | 1 |  |  |  |
+| arvanitis_2023_mfv | core |  | 1 |  |  |  |
+| dai_2024_acculturation_index | core |  | 1 |  |  |  |
+| dai_2024_cultural_difference | core |  | 1 |  |  |  |
+| dai_2024_self_esteem | core |  | 1 |  |  |  |
+| dai_2024_wellbeing | core |  | 1 |  |  |  |
+| dufour_2024_biosecurity_frequency | core |  | 1 |  |  |  |
+| dufour_2024_biosecurity_yesno | core |  | 1 |  |  |  |
 | dvivdtws_ppmial_marcatto_2023_cwb | core |  |  | 1 |  |  |
-| hachenberger_2025_gonogo | core |  |  | 1 |  |  |
-| hachenberger_2025_stroop_bin | core |  |  | 1 |  |  |
-| hachenberger_2025_webexec | core |  |  | 1 |  |  |
-| kazarovytska_2026_ingroup_event_attribution | core |  |  | 1 |  |  |
-| kwiatkowska_2022_bemas | core |  |  | 1 |  |  |
-| liang2026_extrinsic_motivation | core |  |  | 1 |  |  |
-| liang2026_intrinsic_motivation | core |  |  | 1 |  |  |
-| lindstrom2021_conscientiousness | core |  |  | 1 |  |  |
-| moral_absolutism_goyal_2025_moral | core |  |  | 1 |  |  |
-| moral_absolutism_goyal_2025_nfc | core |  |  | 1 |  |  |
-| robison_2026_retesting_mmi | core |  |  | 1 |  |  |
-| simsalrbim_human_largevalence_2017 | core |  |  | 1 |  |  |
-| simsalrbim_human_largevalence_2018 | core |  |  | 1 |  |  |
-| simsalrbim_human_lowvalence_2017 | core |  |  | 1 |  |  |
-| simsalrbim_mice_largevalence | core |  |  | 1 |  |  |
-| simsalrbim_mice_lowvalence | core |  |  | 1 |  |  |
-| simsalrbim_monkey_largevalence | core |  |  | 1 |  |  |
-| thirdpartypunishmentunfairsharing_mcauliffe_2025_canada | core |  |  | 1 |  |  |
-_...and 154 more, see the .txt or .csv._
+| enke_2023_anchoring | core |  | 1 |  |  |  |
+| enke_2023_brn | core |  | 1 |  |  |  |
+| enke_2023_crt | core |  | 1 |  |  |  |
+| enke_2023_wason | core |  | 1 |  |  |  |
+| ghasemy_2025_ipanas_sf | core |  | 1 |  |  |  |
+| glashouwer_2017_dpss_study1 | core |  | 1 |  |  |  |
+| glashouwer_2017_dpss_study2 | core |  | 1 |  |  |  |
+| glashouwer_2017_sdes_study2 | core |  | 1 |  |  |  |
+| glashouwer_2017_sds_study1 | core |  | 1 |  |  |  |
+_...and 275 more, see the .txt or .csv._
 
 ## B. Urgent -- live in Redivis, not in any local CSV yet
 
