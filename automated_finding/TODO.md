@@ -3,6 +3,48 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## The 2026-10-18 release happened; eight sections below were stale (2026-10-19)
+
+Reconciled against the corpus, because a stale "nothing uploaded" is the most
+expensive kind of wrong record in this file: it invites a second upload, and
+**Redivis uploads APPEND** -- delete-then-recreate is the only true replace,
+and that mistake has doubled tables three times.
+
+Eight 2026-10-18 batches (d, e, f, h, i, j, k, l) each said their tables were
+staged and nothing was uploaded. All eight went up: 32 + 44 + 17 + 8 + 96 + 86
++ 21 + 29 = **333**, which is exactly what `item_response_warehouse_7` holds,
+and both it and `irw_text_3` were released by ben-domingue on 2026-10-18. Each
+of those sections is now marked `[x]`.
+
+- Every uploaded table's row count was verified against its staged CSV: 334
+  matched exactly, so nothing appended and nothing was missed.
+- **`ghosh_2020_cas_ocs` was withdrawn** before release (334 -> 333). It is a
+  byte-identical union of `ghosh_2020_cas` and `ghosh_2020_ocs`, found by a
+  content scan of all 334 -- `red_up`'s collision check cannot see it, because
+  the names do not collide. The CSV is kept at
+  `irw_output/withdrawn_2026-10-18/`.
+- **Item text: 17 of the 35 staged `__items` tables shipped**, 18 were removed
+  from the `irw_text_3` draft before release under the 2026-10-15 silence rule.
+  `automated_finding/itemtext_hold_2026-10-18.csv` is the per-table record and
+  the 15 instruments behind them are now in
+  `itemtext/instrument_rights_register.csv`. The batch sections below still
+  count the staged item text, not the shipped item text; each now says which
+  of its own were held.
+- `hung_2026c_academic_self_efficacy__items` was held in ERROR -- it ships
+  under the MSLQ register row -- and is the one re-upload owed from this round.
+
+Because the release has happened, every item below written as "after the
+release" or "at upload" is **due now, not pending**:
+
+- [ ] `metadata/covariate_labels/build.py`, then commit `covariate_labels.csv`.
+  One run covers all of it; `harvest.py` has already been run for batches d, e,
+  f, i, j and k at their data commits.
+- [ ] The issues-page entries owed by batches d, e, j and k -- per-batch lists
+  in each section below and in the matching BATCH_LOG entries.
+- [ ] `automated_finding/tags_auto_2026-10-18.csv` (301 rows) is written but is
+  deliberately a separate file; merging it into `tags/tags_auto.csv` is a
+  reviewed step.
+
 ## Auto-tagging reads the construct's name as if it were the sample (2026-10-19)
 
 Found by spot-checking `tags_auto_2026-10-18.csv` (301 rows) against the
@@ -89,10 +131,11 @@ register row, that table is the one to check first.
 
 ## From the #3077 zenodo_rest batch B, worked (2026-10-18i)
 
-- [ ] **96 tables (267,363 responses) + 6 item text tables staged, nothing uploaded.**
-  18 of 26 deposits shipped. Ben held PR #3089 and all uploads on 2026-10-18.
-  All 198 tables in `automated_finding/irw_output/` pass
-  `irw-validate --profile upload` with no failures.
+- [x] **96 tables (267,363 responses) + 6 item text tables uploaded and released 2026-10-18**
+  (ben-domingue; `uploaded=2026-10-18` stamped). 18 of 26 deposits shipped.
+  All 198 tables passed `irw-validate --profile upload` with no failures
+  before upload, and every uploaded row count was verified against its staged
+  CSV afterwards.
 - [ ] **51 leads still `todo`** in `leads/repos_ledger_remine_2026-10-18_zenodo_rest.csv`
   for a batch C. All 26 of this batch's rows carry a status.
 - [ ] **Covariate labels:** harvested at `0f50eb3a` for the nine `.sav` scripts
@@ -140,13 +183,16 @@ register row, that table is the one to check first.
 
 ## From the #3077 mendeley leads, worked (2026-10-18h)
 
-- [ ] **8 tables (132,575 responses) + 5 item text tables staged, nothing
-  uploaded.** `automated_finding/irw_output/` and `itemtext_output/`.
+- [x] **8 tables (132,575 responses) + 5 item text tables uploaded and released 2026-10-18**
+  (ben-domingue; `uploaded=2026-10-18` stamped).
   zara_2024_opd_sqs, zara_2024_phq4, yang_2026_flsaq,
   yang_2026_appreciative_education, tantia_2024_ats_{field,course},
   shehayeb_2024_math_{anxiety,teacher}. Item text for all but the two zara
-  tables and yang_2026_appreciative_education. Stamp `uploaded=` in
-  `itemtext_provenance.csv` only after ben-domingue confirms.
+  tables and yang_2026_appreciative_education. NOTE: the item text for
+  yang_2026_flsaq, tantia_2024_ats_{field,course} and
+  shehayeb_2024_math_anxiety was HELD before release -- see the 2026-10-18
+  itemtext hold list -- so of this batch's 5 item text tables only
+  shehayeb_2024_math_teacher shipped.
 
 ### Rulings wanted (none blocks what is staged)
 
@@ -215,9 +261,8 @@ English questionnaire.
 
 ## From the #3077 zenodo_rest batch C (2026-10-18j)
 
-86 tables (147,644 responses) + 4 item text tables staged in
-`automated_finding/irw_output/` and `itemtext_output/`. Nothing uploaded; Ben
-held PR #3089 and all uploads. The leads file
+86 tables (147,644 responses) + 4 item text tables uploaded and released 2026-10-18
+(ben-domingue; `uploaded=2026-10-18` stamped). The leads file
 `leads/repos_ledger_remine_2026-10-18_zenodo_rest.csv` is **closed** -- all 77
 of its leads carry a status across batches A, B and C, 0 `todo`.
 
@@ -290,9 +335,8 @@ In the leads file with a per-row reason. The ones worth picking up first:
 
 ## From human_review re-check batch 5 (2026-10-18k, #3077 item 2)
 
-Nothing uploaded. 21 tables + 1 item text table staged in
-`automated_finding/irw_output/` and `itemtext_output/`; PR #3089 and all
-uploads are held by Ben.
+21 tables + 1 item text table uploaded and released 2026-10-18 (ben-domingue;
+`uploaded=2026-10-18` stamped).
 
 - [ ] **Recommendation, needs a yes: stop selecting from the human_review
   archive as a queue.** Shipped-per-25 ran 21, 19, 14, **9** across batches
@@ -338,8 +382,8 @@ uploads are held by Ben.
 
 ## From the #3077 blank-flag batch, non-dataverse (2026-10-18l)
 
-29 tables / 220,891 responses staged in `automated_finding/irw_output/`;
-nothing uploaded. All 35 leads carry a status. No item text shipped.
+29 tables / 220,891 responses uploaded and released 2026-10-18 (ben-domingue). All 35 leads carry
+a status. No item text shipped.
 
 ### Decisions wanted
 
@@ -473,11 +517,12 @@ are deferred in batch 5's file naming the leads file that owns them.
 
 ## From the #3077 zenodo re-mine leads, worked (2026-10-18d)
 
-- [ ] **32 tables (1,015,867 responses) + 13 item text tables staged, nothing uploaded.**
-  `automated_finding/irw_output/` and `itemtext_output/` (response tables first). 14 of the
-  18 unworked leads shipped; see BATCH_LOG 2026-10-18d for the table list and the four
-  that did not. Stamp `uploaded=` in `itemtext_provenance.csv` only after ben-domingue
-  confirms.
+- [x] **32 tables (1,015,867 responses) + 13 item text tables uploaded and released 2026-10-18**
+  (ben-domingue; `uploaded=2026-10-18` stamped). 14 of the 18 unworked leads shipped;
+  see BATCH_LOG 2026-10-18d for the table list and the four that did not. NOTE: several
+  of this batch's 13 item text tables were HELD before release under the 2026-10-15
+  silence rule; `automated_finding/itemtext_hold_2026-10-18.csv` is the per-table
+  record of which.
 - [ ] **Issues-page entries at upload** (9 tables with a `public_note`): nguyen_2024_helia,
   nguyen_2024_eheals, nguyen_2024_sleep_hygiene, hung_2026_growth_mindset,
   markova_2025_gaais, markova_2025_mails (English-only wording for a non-English
@@ -511,11 +556,9 @@ are deferred in batch 5's file naming the leads file that owns them.
 
 ## From the #3077 zenodo_rest batch A (2026-10-18e)
 
-- [ ] **44 tables + 6 item text tables staged, nothing uploaded.** Response tables in
-  `automated_finding/irw_output/`, item text in `itemtext_output/`; response tables
-  first. 44 dictionary rows staged in `dictionary_auto.csv` and 44 `codebook_at_ingest`
-  rows. `uploaded=` is blank in `itemtext_provenance.csv` — stamp only after
-  ben-domingue confirms.
+- [x] **44 tables + 6 item text tables uploaded and released 2026-10-18** (ben-domingue;
+  `uploaded=2026-10-18` stamped). 44 dictionary rows and 44 `codebook_at_ingest`
+  rows went with them.
 - [ ] **Rulings wanted** (none blocks the 44):
   - **zenodo.20550197** is a cross-sectional superset of the live
     `gonzalezros_2025_ostes` — 200 of that table's 201 distinct OSTES response vectors
@@ -557,10 +600,9 @@ are deferred in batch 5's file naming the leads file that owns them.
 
 ## From item 1 of #3077 — the ledger's unworked `good` keys (2026-10-18f)
 
-- [ ] **17 tables (213,442 responses) staged, NOT uploaded.** ben-domingue has held
-  all uploads for this round. Files in `automated_finding/irw_output/`; all 94 tables
-  there (these 17 plus batch A's 77) pass `irw-validate --profile upload` with no
-  failures. No item text accompanies them.
+- [x] **17 tables (213,442 responses) uploaded and released 2026-10-18** (ben-domingue). All 94 tables
+  staged at that point (these 17 plus batch A's 77) passed
+  `irw-validate --profile upload` with no failures. No item text accompanies them.
 - [ ] **Covariate labels:** harvested at `c603adc2` for `yang_2024_teacher_wellbeing`
   (Chinese value labels for gender, teaching years, degree, academic title, salary
   band). Run `python3 metadata/covariate_labels/build.py` after the release and
