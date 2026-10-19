@@ -135,18 +135,29 @@ The 20 `todo` rows of `leads/repos_ledger_remine_2026-10-18_figshare.csv`,
 worked end to end; that file is now closed (0 `todo`). 13 of 20 deposits
 shipped. Full write-up in BATCH_LOG 2026-10-19a.
 
-- [ ] **41 tables (190,707 responses) staged in `automated_finding/irw_output/`
-  and NOTHING uploaded.** All 41 pass `irw-validate --profile upload` with
-  zero failures. Dictionary rows (41) and `codebook_at_ingest.csv` rows (41)
-  are committed; tags are in `automated_finding/tags_auto_2026-10-19.csv` (41
-  rows, every atom checked against `TAG_VOCAB`), deliberately a separate file
-  as on 2026-10-18.
-  `item_response_warehouse_7` held 333 tables before this batch.
+- [x] **41 tables (190,707 responses) UPLOADED 2026-10-19** by ben-domingue
+  (`red_up`, so into the unreleased `item_response_warehouse_7` draft --
+  release is a separate step). All 41 passed `irw-validate --profile upload`
+  with zero failures beforehand, and all 41 names were new, so nothing
+  appended to an existing table. Dictionary rows (41) and
+  `codebook_at_ingest.csv` rows (41) are on main in #3097; tags are in
+  `automated_finding/tags_auto_2026-10-19.csv` (41 rows, every atom checked
+  against `TAG_VOCAB`), deliberately a separate file as on 2026-10-18.
+  `item_response_warehouse_7` held 333 tables before this batch, so **374
+  after**, against the 1,000-table shard cap.
+  Per-table staged counts (`rows`/`ids`/`items`) were snapshotted before the
+  staging folder was cleared, at
+  `runs/figshare_slice_2026-10-19_staged_counts.csv` -- gitignored, so it is a
+  session artifact, not a standing record: the authoritative counts are the
+  table list in BATCH_LOG 2026-10-19a.
+  **Do not upload this batch again** -- Redivis appends, and
+  delete-then-recreate is the only true replace.
 - [ ] **Covariate labels:** owed for the four `.sav` scripts shipping `cov_*`
   (`jiao_2024_ehealth_literacy`, `galanis_2025_miss`,
   `bulgay_2026_technology_use`, `gerou_2023_humility_quiet_ego`). Harvested at
-  this batch's data commit; run `python3 metadata/covariate_labels/build.py`
-  after the release and commit `covariate_labels.csv`.
+  this batch's data commit (`042113c6`, squash-merged as `e18521bf`); the
+  upload has happened, so `python3 metadata/covariate_labels/build.py` and a
+  commit of `covariate_labels.csv` are due at the next release.
 - [ ] **Issues-page entries owed by this batch: none.** No table ships item
   text, so there is no text-vs-table mismatch to publish. Re-check if the two
   item-text candidates below ship.
