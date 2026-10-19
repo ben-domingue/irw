@@ -3,6 +3,44 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## Auto-tagging reads the construct's name as if it were the sample (2026-10-19)
+
+Found by spot-checking `tags_auto_2026-10-18.csv` (301 rows) against the
+dictionary descriptions they were derived from, three samples of sixteen. The
+rows are fixed; the defects are general and belong in whatever tags the next
+batch, `irw-auto-tag` included.
+
+- **A keyword matched anywhere in a description is attributed to this table.**
+  A deposit's description often names several scales and only the first is the
+  one the table holds: `auerswald_2024_online_learning` came out
+  Affective/mental health because *PHQ* appears two sentences later, describing
+  a different scale in the same deposit. Construct type must read the leading
+  clause only. Sample, age and language can read the whole description --
+  those describe the study, which siblings share.
+- **Every word of a description that is not the respondent clause is about the
+  instrument.** `nguyen_2026_teacher_responsibility` ("13 teacher-responsibility
+  items ... from 1,558 higher-education students") came out Workplace on the
+  word *teacher*; the Clinical Perfectionism Questionnaire came out Clinical.
+  Read the sample from the clause that names who answered, and where that
+  clause names no known population leave it General/non-specific rather than
+  re-reading the construct's wording.
+- **A child topic is not a child sample.** `zara_2024_opd_sqs` -- a
+  representative German sample of 5,041 *adults* in a study of child
+  maltreatment -- came out Child (<18y).
+- **`\b(...|adolescen|...)\b` can never match "adolescents"**: the trailing
+  boundary falls between the n and the t. It was suppressing 14 of the batch's
+  22 child samples, `osorio_2025_dsi`'s 6,845 twelve-to-seventeen-year-olds
+  among them. Worth grepping the other keyword lists for a stem inside a
+  bounded group.
+- **A qualifier cannot be excluded with a lookbehind**, because a lookbehind
+  has to anticipate every spelling of it. `(?<!organizational )resilien` missed
+  both ways the batch writes it -- "organizational-resilience" in the
+  description and `_org_resilience` in the table name. Veto on the phrase.
+- **An unevidenced default is worse than a blank.** 120 of the 301 rows were
+  asserting `Primary Language(s)` = `eng` with nothing in the record to support
+  it. They are blank now: a blank is a question a human can answer and a wrong
+  language code is not.
+
 ## Rights-register patterns that are too broad (2026-10-18m)
 
 Found by running both rights surfaces over the 334 response tables and 35
