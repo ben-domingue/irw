@@ -49,10 +49,18 @@ REGISTER_ENV = "IRW_RIGHTS_REGISTER"
 _DEFAULT = (Path(__file__).resolve().parent.parent
             / "itemtext" / "instrument_rights_register.csv")
 
-#: Verdicts that put a table on hold for a person. `ship` and `allow` need
-#: nothing; `ship_with_note` ships only once its issues-page note exists.
+#: Verdicts that put a table on hold for a person. `ship_with_note` ships only
+#: once its issues-page note exists.
 HOLD = {"block", "hold", "escalate"}
 NOTE = {"ship_with_note"}
+#: Verdicts that are a RULING THAT IT SHIPS, not an absence of one. These warn
+#: about nothing, but they are not nothing: the register is also the only record
+#: that somebody established a permission, and until 2026-10-19 this module
+#: dropped them on load, so nothing built on it could find one. A gate discovers
+#: prohibitions; a permission has to be looked up (see `lookup`).
+PERMIT = {"ship", "allow"}
+#: What the two check functions read. Everything else loads but never warns.
+HOLDING = HOLD | NOTE
 
 _cache: dict = {}
 
@@ -86,8 +94,16 @@ def register_path() -> Path:
 
 
 def load_register(path: Path | None = None):
-    """The register rows that can hold a table, with patterns compiled, or
-    None when there is no register to read."""
+    """Every register row, with patterns compiled, or None when there is no
+    register to read.
+
+    It used to return only the rows that can HOLD a table, which made a `ship`
+    ruling unreadable through this module -- running the gate could discover a
+    prohibition and never a permission, and a correct table was held for it
+    (hung_2026c_academic_self_efficacy, 2026-10-18, a verbatim MSLQ subscale
+    with the MSLQ registered `ship`). The two check functions filter to
+    `HOLDING` themselves, so what the gate warns about is unchanged.
+    """
     path = Path(path) if path else register_path()
     if not path.is_file():
         return None
@@ -98,8 +114,6 @@ def load_register(path: Path | None = None):
     with path.open(newline="") as fh:
         for r in csv.DictReader(fh):
             verdict = (r.get("verdict") or "").strip()
-            if verdict not in HOLD | NOTE:
-                continue
             stems = [s.strip().lower() for s in (r.get("match_item_text") or "").split("|")
                      if s.strip()]
             try:
@@ -109,6 +123,8 @@ def load_register(path: Path | None = None):
             rows.append({"instrument": " ".join((r.get("instrument") or "").split()),
                          "family": r.get("family") or "", "verdict": verdict,
                          "rule": " ".join((r.get("rule") or "").split()),
+                         "notes": " ".join((r.get("notes") or "").split()),
+                         "code_src": (r.get("match_item_code") or "").strip(),
                          "stems": stems, "code": code})
     _cache.clear()
     _cache[key] = rows
@@ -154,7 +170,7 @@ def check_item_text(df, table: str, register=None) -> list:
         items = df.loc[texts.index, "item"].astype(str) if "item" in df.columns else texts
         surface = "item(s)' text" if col == "item_text" else f"item(s)' {col}"
         for row in register:
-            if not row["stems"]:
+            if row["verdict"] not in HOLDING or not row["stems"]:
                 continue
             hit = low.apply(lambda t: any(stem_hit(s, t) for s in row["stems"]))
             if hit.any():
@@ -190,7 +206,8 @@ def check_item_codes(df, table: str, register=None) -> list:
     codes = sorted({str(c) for c in df["item"].dropna().unique()})
     out = []
     for row in register:
-        if row["code"] is None or row["verdict"] == "escalate":
+        if row["verdict"] not in HOLDING or row["code"] is None or \
+                row["verdict"] == "escalate":
             continue
         names = [c for c in codes if row["code"].search(c)]
         if len(names) < min(MIN_CODE_HITS, len(codes)) or \
@@ -209,3 +226,101 @@ def check_item_codes(df, table: str, register=None) -> list:
               "text without a ruling. A match is a lead, not a verdict.",
             table=table, group="rights"))
     return out
+
+
+# --------------------------------------------------------------------------
+# Asking the register by NAME. A gate answers "does anything here match a
+# pattern?"; this answers "what has been ruled about this instrument?", which
+# is the question Step 3.5 of the irw-automated-finding skill requires asking
+# once the stems have been read and the instrument identified.
+
+#: Fields a name query reads. `rule` is included because an adaptation is often
+#: ruled on inside another instrument's rule text rather than getting its own
+#: row -- the MSLQ row's rule is what says adaptations ship too -- and the
+#: caller is told which field matched so it can judge.
+LOOKUP_FIELDS = ("instrument", "family", "notes", "rule")
+
+
+def verdict_meaning(verdict: str) -> str:
+    """One line saying what a verdict permits, in plain words."""
+    if verdict in PERMIT:
+        return "SHIPS -- a ruling, not an absence of one"
+    if verdict in NOTE:
+        return "SHIPS ONLY with its note on the item-text issues page"
+    if verdict == "escalate":
+        return "ESCALATE -- do not ship; this one needs a person"
+    if verdict in HOLD:
+        return "DOES NOT SHIP without a ruling"
+    return f"unrecognised verdict {verdict!r} -- treat as a hold and ask"
+
+
+def lookup(query: str, register=None, fields=LOOKUP_FIELDS):
+    """Register rows mentioning `query`, as (row, fields it matched in) pairs.
+
+    Substring, case-insensitive, deliberately loose: it is a way to FIND a
+    ruling, never a way to identify an instrument. A name match is not an
+    identification -- searching "buss" returns the Revised Cheek & Buss Shyness
+    Scale, which is not the Buss-Perry Aggression Questionnaire, and reading
+    that as coverage is how BPAQ came to look registered when it was not.
+    """
+    register = load_register() if register is None else register
+    if register is None:
+        return None
+    q = query.strip().lower()
+    out = []
+    for row in register:
+        where = [f for f in fields if q in (row.get(f) or "").lower()]
+        if where:
+            out.append((row, where))
+    return out
+
+
+def _cli(argv=None) -> int:
+    import sys
+    import textwrap
+    args = list(sys.argv[1:] if argv is None else argv)
+    if not args or args[0] in ("-h", "--help"):
+        print("usage: python -m irw_validate.rights <instrument name or acronym>\n"
+              "       Prints what the rights register has ruled about it.")
+        return 0 if args else 2
+    query = " ".join(args)
+    hits = lookup(query)
+    if hits is None:
+        print(f"No register at {register_path()} -- nothing can be looked up. "
+              "Installed from a wheel there is no register; work from a checkout.")
+        return 2
+    if not hits:
+        print(f'Nothing in the register mentions "{query}".\n'
+              "\nThat is SILENCE, not permission. Silence on a NAMED third-party "
+              "instrument does not ship\n(ben-domingue, 2026-10-15, on Stanford "
+              "library copyright counsel's advice), and writing\nthe missing row, "
+              "verdict included, is normal work -- 14 of the 15 instruments behind "
+              "the\n2026-10-18 holds had no row at all, which is why nothing warned.")
+        return 1
+    print(f'{len(hits)} register row(s) mention "{query}":')
+    for row, where in hits:
+        print(f"\n  {row['instrument']}")
+        print(f"    family   {row['family'] or '(none)'}")
+        print(f"    verdict  {row['verdict']} -- {verdict_meaning(row['verdict'])}")
+        print(f"    matched  in {', '.join(where)}")
+        if row["rule"]:
+            print(textwrap.fill(row["rule"], 76,
+                                initial_indent="    rule     ",
+                                subsequent_indent="             "))
+        print(f"    stems    {len(row['stems'])}"
+              + ("" if row["stems"] else "  <- none, so the text surface cannot fire"))
+        print(f"    codes    {row['code_src'] or '(none)'}"
+              + ("" if row["code_src"] else "  <- none, so the code surface cannot fire"))
+        if row["notes"]:
+            print(textwrap.fill(row["notes"][:600], 76,
+                                initial_indent="    notes    ",
+                                subsequent_indent="             "))
+    print("\nA name match is not an identification: read the row's instrument "
+          "name against the\nstems you actually have. And a row's matchers "
+          "missing does not mean the ruling does\nnot apply -- that is what "
+          "this lookup is for.")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(_cli())

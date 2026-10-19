@@ -543,18 +543,32 @@ instrument: Tuckman Procrastination Scale, Tuckman 1991 (stems searched verbatim
 instrument: stems match no published scale (searched 3 verbatim); rights: study-authored under the deposit's CC BY
 ```
 
-**Check the identified name against `itemtext/instrument_rights_register.csv`
-by name — do not just run the gate.** Two reasons, both load-bearing:
+**Check the identified name against the register by name — do not just run the
+gate.** One command, from the repo root:
 
-- `load_register()` keeps only `hold`/`note` verdicts, so a `ship` ruling is
-  **invisible** to the gate. Running the gate can discover a prohibition and
-  never a permission. On 2026-10-18 that cost a correct table: the MSLQ is
-  registered `ship` (public domain, U-Michigan NCRIPTAL, citation only) with a
-  note saying adaptations ship too, and it was held anyway.
+```bash
+python3 itemtext/rights_lookup.py MSLQ          # or any name, acronym or phrase
+```
+
+It prints every row whose instrument, family, notes or rule mentions the name,
+each verdict in plain words, and whether that row's matchers could fire at all.
+Exit 1 means nothing mentions it, which is silence rather than permission. Two
+reasons it exists rather than running the gate twice, both load-bearing:
+
+- The gate warns about hold/note rows only, so a `ship` ruling triggers
+  nothing: it can discover a prohibition and never a permission. On 2026-10-18
+  that cost a correct table — the MSLQ is registered `ship` (public domain,
+  U-Michigan NCRIPTAL, citation only) with a note saying adaptations ship too,
+  and it was held anyway. (`load_register()` dropped permissions entirely until
+  2026-10-19; it now loads the register whole, which is what the lookup reads.)
 - A miss is not an all-clear, and a hit is a lead rather than a verdict. The
   register's `match_item_code` patterns miss freely (`^mslq` cannot match
   `ASE1`) and its short stems over-fire (`nervous and` hit a Foreign Language
-  Speaking Anxiety item).
+  Speaking Anxiety item). The lookup prints `<- none, so the ... surface cannot
+  fire` against an empty matcher for exactly this reason, and a name match is
+  still not an identification: "buss" returns the Revised Cheek & Buss Shyness
+  Scale, which is not the Buss-Perry Aggression Questionnaire, and reading that
+  as coverage is how BPAQ came to look registered when it was not.
 
 **If the instrument has no row, silence does not ship** (ben-domingue,
 2026-10-15, on Stanford library copyright counsel's advice) — and writing the

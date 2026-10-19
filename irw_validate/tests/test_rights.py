@@ -5,7 +5,9 @@ warns and never errors; a clean table produces no finding at all (a miss is not
 a clearance); and the check runs on `upload` only. Against a small fixture
 register, so the tests do not move when the real one gains a row.
 """
+import contextlib
 import csv
+import io
 import os
 import sys
 import tempfile
@@ -158,11 +160,79 @@ class Rights(unittest.TestCase):
         self.assertIn("1 item(s)' text", f.message)
         self.assertIn("'q1'", f.message)
 
+    def test_a_ship_ruling_is_readable_even_though_it_never_warns(self):
+        """The 2026-10-18 defect: load_register() kept only hold/note verdicts,
+        so a permission was invisible to everything built on it. The gate can
+        discover a prohibition and never a permission."""
+        reg = rights.load_register()
+        ships = [r for r in reg if r["verdict"] in rights.PERMIT]
+        self.assertTrue(ships, "a `ship` row must survive loading")
+        self.assertIn("Rosenberg", [r["instrument"] for r in ships])
+        # and it still warns about nothing, on either surface
+        self.assertEqual(rights.check_item_text(
+            self.items(["I feel that I have a number of good qualities"]),
+            "x_2026_scale", reg), [])
+        self.assertEqual(rights.check_item_codes(
+            self.responses(["rses1", "rses2", "rses3"]), "x_2026_scale", reg), [])
+
+    def test_lookup_finds_a_ruling_by_name(self):
+        (row, where), = rights.lookup("rosenberg")
+        self.assertEqual(row["verdict"], "ship")
+        self.assertIn("instrument", where)
+        self.assertIn("SHIPS", rights.verdict_meaning(row["verdict"]))
+        self.assertIn("DOES NOT SHIP",
+                      rights.verdict_meaning("block"))
+        self.assertIn("note", rights.verdict_meaning("ship_with_note"))
+
+    def test_lookup_reads_the_rule_text_too(self):
+        """An adaptation is often ruled on inside another row's rule rather than
+        getting a row of its own, which is where the MSLQ's 'adaptations ship
+        too' lives."""
+        with self.reg.open("a", newline="") as fh:
+            csv.DictWriter(fh, FIELDS).writerow(
+                {"instrument": "Parent instrument", "family": "PI",
+                 "verdict": "ship", "rule": "adaptations such as the Widget "
+                                            "Scale ship under this row"})
+        hits = rights.lookup("widget scale")
+        self.assertEqual([w for _, w in hits], [["rule"]])
+
+    def test_lookup_on_an_unregistered_name_is_silence_not_nothing(self):
+        self.assertEqual(rights.lookup("Zarquon Anxiety Index"), [])
+        out = io.StringIO()
+        with contextlib.redirect_stdout(out):
+            code = rights._cli(["Zarquon", "Anxiety", "Index"])
+        self.assertEqual(code, 1, "an unregistered name is not a success")
+        self.assertIn("SILENCE, not permission", out.getvalue())
+
+    def test_cli_prints_the_verdict_and_says_which_surfaces_can_fire(self):
+        out = io.StringIO()
+        with contextlib.redirect_stdout(out):
+            code = rights._cli(["Rosenberg"])
+        text = out.getvalue()
+        self.assertEqual(code, 0)
+        self.assertIn("verdict  ship", text)
+        self.assertIn("not an identification", text)
+        self.assertIn("stems    1", text)
+
     def test_the_real_register_loads(self):
         os.environ.pop(rights.REGISTER_ENV)
         reg = rights.load_register()
         self.assertIsNotNone(reg, "itemtext/instrument_rights_register.csv not found")
         self.assertTrue(any(r["verdict"] == "block" for r in reg))
+        self.assertTrue(any(r["verdict"] in rights.PERMIT for r in reg),
+                        "the real register's permissions must load too")
+
+    def test_the_mslq_permission_is_findable_in_the_real_register(self):
+        """The case this exists for: a verbatim MSLQ subscale was held because
+        nothing could surface a `ship` ruling whose row carries no stems and
+        whose code pattern cannot match the table's codes."""
+        os.environ.pop(rights.REGISTER_ENV)
+        hits = rights.lookup("MSLQ")
+        mslq = [r for r, _ in hits if r["family"] == "MSLQ"]
+        self.assertTrue(mslq, "the MSLQ row must be findable by name")
+        self.assertEqual(mslq[0]["verdict"], "ship")
+        self.assertEqual(mslq[0]["stems"], [],
+                         "if this row gains stems, the comment above is stale")
 
 
 if __name__ == "__main__":

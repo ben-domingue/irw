@@ -36,9 +36,12 @@ of those sections is now marked `[x]`.
 Because the release has happened, every item below written as "after the
 release" or "at upload" is **due now, not pending**:
 
-- [ ] `metadata/covariate_labels/build.py`, then commit `covariate_labels.csv`.
-  One run covers all of it; `harvest.py` has already been run for batches d, e,
-  f, i, j and k at their data commits.
+- [ ] `metadata/covariate_labels/build.py`, then commit `covariate_labels.csv`
+  — **but it is blocked on the scheduled metadata run, not on anyone here.**
+  `build.py` emits a row only for a table present in `metadata/metadata.csv`,
+  and none of the 333 new tables is in it yet (stage 01 has not run since the
+  release). Running it today produces nothing for this batch. The harvests are
+  committed and waiting: batches d, e, f, i, j and k, each at its data commit.
 - [ ] The issues-page entries owed by batches d, e, j and k -- per-batch lists
   in each section below and in the matching BATCH_LOG entries.
 - [ ] `automated_finding/tags_auto_2026-10-18.csv` (301 rows) is written but is
