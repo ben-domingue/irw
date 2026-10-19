@@ -501,6 +501,36 @@ local({
 })
 
 local({
+    ##`Source via` is a key into aggregators.csv, not a provenance note: seven
+    ##euls_2022_* rows reached the released biblio carrying an ingest BATCH
+    ##name, which the clients read out to users as "was found via
+    ##repos_weekly_2026-10-12".
+    agg <- tempfile(fileext = ".csv")
+    writeLines(c("key,citation", "openESM,Siepe et al. (2026)"), agg)
+    d <- fake_sheet(sheet_row("a_2020"), sheet_row("b_2021"))
+    a <- fake_auto(auto_row("a_2020", source_via = "openESM"),
+                   auto_row("b_2021", source_via = "repos_weekly_2026-10-12"))
+    res <- union_dict(d, a)
+    b <- data.frame(table = c("a_2020", "b_2021"), stringsAsFactors = FALSE)
+    out <- suppressMessages(apply_source_via(b, res$dict, "core",
+                                             aggregators.file = agg))
+    check(identical(out$Source_via, c("openESM", NA)),
+          "a `Source via` naming no aggregator is dropped, a known key kept")
+
+    ##An unreadable vocabulary must not strip a column that is already right.
+    out <- suppressWarnings(suppressMessages(
+        apply_source_via(b, res$dict, "core",
+                         aggregators.file = file.path(tempdir(), "nope.csv"))))
+    check(identical(out$Source_via, c("openESM", "repos_weekly_2026-10-12")),
+          "a missing aggregators.csv drops nothing, and warns")
+
+    check(identical(source_via_keys(agg), "openESM"),
+          "source_via_keys() reads the `key` column")
+    check(is.null(source_via_keys(NULL)),
+          "and is NULL when no file is given")
+})
+
+local({
     d <- fake_sheet(sheet_row("a_2020"))
     b <- data.frame(table = "a_2020", stringsAsFactors = FALSE)
     out <- suppressMessages(apply_source_via(b, d))

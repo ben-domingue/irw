@@ -83,6 +83,17 @@ SOURCE_FILES = {
 ##row per table; restaging replaces it. Not part of the dictionary union.
 CODEBOOK_PATH = Path(os.environ.get("IRW_CODEBOOK_INGEST_PATH")
                      or Path(__file__).resolve().parent / "codebook_at_ingest.csv")
+
+##`Source via` is a key into metadata/aggregators.csv -- the intermediary
+##COLLECTION a table was found through, such as openESM -- and the clients print
+##it to users verbatim ("These data were found via openESM..."). It is not a
+##provenance field: seven `euls_2022_*` rows were staged with
+##`repos_weekly_2026-10-12`, an ingest batch name, and reached the released
+##biblio, where irw_fetch() would read it out to users. The batch belongs in the
+##automated_finding ledgers, which already record it.
+AGGREGATORS_PATH = Path(os.environ.get("IRW_AGGREGATORS_PATH")
+                        or Path(__file__).resolve().parents[1]
+                        / "metadata" / "aggregators.csv")
 CODEBOOK_COLUMNS = ["table", "source", "codebook_url", "recorded_at"]
 
 
@@ -154,6 +165,22 @@ KEY_MAP = {
     "date": "Date",
     "source_via": "Source via",
 }
+
+def aggregator_keys():
+    """The `key` column of metadata/aggregators.csv, or None if unreadable.
+
+    None means "do not check": an unreadable vocabulary should not block a
+    staging run whose `Source via` may well be right.
+    """
+    try:
+        with open(AGGREGATORS_PATH, newline="", encoding="utf-8") as fh:
+            rows = list(csv.DictReader(fh))
+    except OSError:
+        return None
+    if not rows or "key" not in rows[0]:
+        return None
+    return {(r["key"] or "").strip() for r in rows if (r["key"] or "").strip()}
+
 
 def clean(value):
     """One cell, normalised but never rewritten.
@@ -245,6 +272,22 @@ def main():
         sys.exit(f"'codebook_url' must be the codebook file's URL or \"none\": {codebook!r}")
     if codebook.lower() == "none":
         codebook = "none"
+
+    ##A `Source via` that names no aggregator is not an intermediary collection
+    ##(see AGGREGATORS_PATH above). Rejected here rather than filtered later, so
+    ##the staged row says what biblio will carry.
+    via = clean(payload.get("source_via"))
+    if via:
+        known = aggregator_keys()
+        if known is not None and via not in known:
+            sys.exit(
+                f"'source_via' must be a key in {AGGREGATORS_PATH.name} "
+                f"(known: {', '.join(sorted(known)) or 'none'}): {via!r}.\n"
+                "It names the intermediary collection a table was found "
+                "through, such as openESM, and the R and Python clients read it "
+                "out to users. An ingest batch or run name is not one -- the "
+                "automated_finding ledgers record that."
+            )
 
     row = {c: "" for c in COLUMNS}
     for key, value in payload.items():
