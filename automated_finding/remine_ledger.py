@@ -94,17 +94,28 @@ ARTICLE_PREFIXES = {"10.1371", "10.3389", "10.1016", "10.1038", "10.1080",
 LEADS_COLS = ["status", "source", "doi", "url", "license", "n_participants",
               "n_items", "refined_flag", "data_file", "reasons"]
 
-# The 2026-09-20 leads filter.
-OK_LICENCE = ("cc0", "cc-by", "cc-by-sa", "publicdomain", "public-domain")
-# Both the abbreviated and the spelled-out forms. OSF reports a licence by
-# NAME -- "CC-By Attribution-NonCommercial 4.0 International",
-# "CC-By Attribution-NoDerivatives 4.0" -- so a token test for {"nc","nd"}
-# alone misses it while `startswith("cc-by")` happily passes it. Three OSF
-# keys that the ledger had correctly flagged `license_restricted` came back
-# "open" from an earlier version of this check for exactly that reason.
-BAD_LICENCE = ("nc", "nd")
-BAD_LICENCE_SUBSTR = ("noncommercial", "non-commercial", "noderiv",
-                      "no-deriv", "nonderiv", "sharealike-noncommercial")
+# The leads filter's licence gate, aligned with datastandard.md 2026-10-19.
+#
+# It used to be cc0/cc-by/cc-by-sa only, set 2026-09-20. `datastandard.md`
+# "Before you start" has said since 2026-10-01 that NON-COMMERCIAL licences
+# PROCEED -- the restriction propagates into `Derived_License` instead of
+# disappearing -- and `check_license()` in irw_batch_updated.py has allowed
+# them at triage time all along. Only this filter disagreed, which parked 67
+# workable leads (56 in leads/nc_licence_pending_ruling_2026-10-18.csv plus 11
+# `deferred` rows, 27,697 respondents). ben-domingue ruled 2026-10-19: align
+# the filter with the standard.
+#
+# ND IS STILL A HARD STOP, and that is the whole reason the test below is not a
+# prefix test: reshaping to IRW's long format is a modification, which ND
+# forbids. OSF reports a licence by NAME -- "CC-By Attribution-NoDerivatives
+# 4.0 International" -- so a token test for "nd" alone misses it while
+# `startswith("cc-by")` happily passes it. Three OSF keys the ledger had
+# correctly flagged `license_restricted` came back "open" from an earlier
+# version of this check for exactly that reason.
+OK_LICENCE = ("cc0", "cc-by", "cc-by-sa", "cc-by-nc", "cc-by-nc-sa",
+              "publicdomain", "public-domain")
+BAD_LICENCE = ("nd",)
+BAD_LICENCE_SUBSTR = ("noderiv", "no-deriv", "nonderiv")
 N_MIN, N_MAX = 100, 50_000
 ITEMS_MIN, ITEMS_MAX = 8, 700
 LEAD_FLAGS = {"good", "worth_retrying", "recoverable_format", "human_review",
@@ -162,8 +173,11 @@ def is_nc(lic: str) -> bool:
 
 
 def licence_ok(lic: str) -> bool:
-    """cc0 / cc-by / cc-by-sa only. NC and ND are rejected explicitly, because
-    a prefix test passes them: `"cc-by-nc".startswith("cc-by")` is true."""
+    """cc0 / cc-by / cc-by-sa / cc-by-nc / cc-by-nc-sa, and ND never.
+
+    NC passes since 2026-10-19 (see OK_LICENCE above). ND is rejected
+    explicitly rather than by omission, because a prefix test would pass it:
+    `"cc-by-nd".startswith("cc-by")` is true."""
     lic = licence_code(lic)
     if not lic or lic == "unknown":
         return False
@@ -322,23 +336,9 @@ def cmd_leads(a):
         n, items = _num(r.get("n_participants")), _num(r.get("n_items"))
         if eff in DROP_FLAGS:
             status = f"skipped: {eff}"
-        elif not licence_ok(lic) and is_nc(lic) and not a.allow_nc:
-            # Two rules disagree and the later one is not in the filter.
-            # `datastandard.md` "Before you start", ruled 2026-10-01: CC BY-NC
-            # and BY-NC-SA PROCEED, because `Derived_License` records the NC
-            # licence so commercial reuse can identify and exclude the table.
-            # The pipeline's leads filter is cc0/cc-by/cc-by-sa only, set
-            # 2026-09-20 -- nineteen days EARLIER -- and was never updated;
-            # #3077 restates the narrow form. So an NC row is not a licence
-            # rejection, it is a pending ruling, and it is kept visible rather
-            # than buried in a `skipped` status. `--allow-nc` treats them as
-            # leads once that ruling lands.
-            status = (f"deferred: licence {licence_code(lic)} is non-commercial"
-                      f" -- datastandard.md says proceed (2026-10-01), this"
-                      f" filter says cc0/cc-by/cc-by-sa (2026-09-20); wants a"
-                      f" ruling")
-        elif not licence_ok(lic) and not (is_nc(lic) and a.allow_nc):
-            status = f"skipped: licence {lic or 'unknown'} is not cc0/cc-by/cc-by-sa"
+        elif not licence_ok(lic):
+            status = (f"skipped: licence {lic or 'unknown'} is not one of "
+                      f"{'/'.join(OK_LICENCE[:5])} (ND and unlicensed stop)")
         elif flag not in LEAD_FLAGS and not refined:
             status = f"skipped: {flag or 'no flag'}"
         elif n is None or items is None:
@@ -443,11 +443,12 @@ def main():
     lp = sub.add_parser("leads", help="a triage output -> a tracked leads CSV")
     lp.add_argument("triage")
     lp.add_argument("--retriage", help="Step 2b output (default: alongside)")
+    # Kept as an accepted no-op so the chain scripts and any saved command
+    # line that passes it still run. NC has been a lead by default since
+    # 2026-10-19; ND is never allowed either way.
     lp.add_argument("--allow-nc", action="store_true",
-                    help="treat CC BY-NC / BY-NC-SA as leads, per "
-                         "datastandard.md's 2026-10-01 ruling. Off by default "
-                         "because the pipeline filter and #3077 both still say "
-                         "cc0/cc-by/cc-by-sa; ND is never allowed either way")
+                    help="deprecated no-op: NC licences are leads by default "
+                         "since 2026-10-19 (datastandard.md). ND still stops.")
     lp.add_argument("--out", required=True)
     lp.set_defaults(func=cmd_leads)
 

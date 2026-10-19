@@ -857,9 +857,16 @@ output-format one:
   `public:` on an OSF node before treating its contents as openly licensed;
   `api.osf.io/v2/nodes/<id>/` 401s without a token when the node is private,
   and a tokenless file download returns an HTML page rather than failing.
-- **License.** Only proceed if the license is explicitly verified as open
-  (`cc0`, `cc-by`, `cc-by-sa`, or equivalent) on the source page itself. A
-  triage `license` of `unknown` does not count as verified — skip. A bare
+- **License.** Only proceed if the license is explicitly verified on the
+  source page itself: `cc0`, `cc-by`, `cc-by-sa`, **`cc-by-nc`, `cc-by-nc-sa`**
+  or equivalent. **NC proceeds** — `datastandard.md` "Before you start" has
+  ruled that since 2026-10-01, with the restriction propagating into
+  `Derived_License` rather than disappearing, and ben-domingue confirmed on
+  2026-10-19 that the leads filter follows the standard rather than its own
+  narrower 2026-09-20 list (`OK_LICENCE` in `remine_ledger.py`; the
+  `--allow-nc` flag is now an accepted no-op). **ND still stops**, whatever
+  else it carries, because reshaping to IRW's long format is a modification.
+  A triage `license` of `unknown` does not count as verified — skip. A bare
   OSF-style UUID is *not* automatically unverified, though: OSF nodes report
   their license as a raw license-object id (e.g.
   `563c1cf88c5e4a3877f9e96a`), not a name. Resolve it first —

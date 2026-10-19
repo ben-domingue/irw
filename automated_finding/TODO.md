@@ -2327,7 +2327,12 @@ do not treat the CSV's `proposed_name` column as a work list.
   is recorded in `SKILL.md` and costs nothing to keep: ASCII, no tab, CR,
   newline or double quote in any field, no leading `=`/`+`/`-`/`@`/`'`.
 
-- [ ] **Decide whether Qualtrics geo-IP coordinates count as PII**
+- [x] **RULED 2026-10-19: Qualtrics geo-IP coordinates disqualify the
+  candidate.** ben-domingue: "what the skill says is fine. no tables whose
+  origin had pii" -- the blanket rule stands and dropping the column is not an
+  option, so `10.7910/DVN/JC6F9O` stays skipped and its ~132,000 responses are
+  not available. Original note kept below for the record.
+- [ ] ~~**Decide whether Qualtrics geo-IP coordinates count as PII**~~
   (`10.7910/DVN/JC6F9O`, Hemesath & Tepe 2025, CC0). The export carries
   `LocationLatitude`/`LocationLongitude` at 4 decimal places for every row.
   It was skipped whole under `feedback_pii_skip_entirely`, which was written

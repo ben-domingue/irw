@@ -20886,3 +20886,39 @@ the 56 `pending_ruling` rows in `nc_licence_pending_ruling_2026-10-18.csv`,
 and the three new deferrals this slice recorded (PVQ66Y's Adaptive Expertise
 Inventory, Z7Q-7ATH's EDE-Q, plus 2026-10-19c's EEPE1L, IGFCET and 226PMX
 blocks).
+## 2026-10-19e — the leads filter now acknowledges NC; the PII rule stands (#3077, #3103)
+
+Two rulings from ben-domingue, both recorded here because they change what the
+pipeline does rather than what one batch did.
+
+**NC licences are leads.** `datastandard.md` "Before you start" has said since
+2026-10-01 that CC BY-NC and CC BY-NC-SA **proceed**, with the restriction
+propagating into `Derived_License` instead of disappearing, and
+`check_license()` in `irw_batch_updated.py` has allowed them at triage time all
+along. Only `remine_ledger.py`'s leads filter still carried its narrower
+2026-09-20 list (`cc0`/`cc-by`/`cc-by-sa`), and that disagreement parked **67
+workable leads**: 56 in `leads/nc_licence_pending_ruling_2026-10-18.csv` and 11
+`deferred` rows across five re-mine files, 27,697 respondents in total, the
+largest a 23,781 x 38 Borealis deposit. Ruled 2026-10-19: the filter follows the
+standard.
+
+- `OK_LICENCE` now carries `cc-by-nc` and `cc-by-nc-sa`; `BAD_LICENCE` is `nd`
+  alone, and the substring list is the ND spellings only.
+- **ND is still a hard stop** and is still rejected EXPLICITLY rather than by
+  omission, because `"cc-by-nd".startswith("cc-by")` is true. That is what
+  `tests/test_licence_filter.py` guards; `cc-by-nc-nd` stays in its CLOSED list.
+- `--allow-nc` is now an accepted no-op, so the chain scripts and any saved
+  command line keep working.
+- The 67 rows are restatused `todo`, i.e. open unworked leads again.
+
+**PII: unchanged, and the question is closed.** ben-domingue, 2026-10-19:
+"what the skill says is fine. no tables whose origin had pii". So the blanket
+rule in SKILL.md Step 4 stands as written — a source file containing names,
+emails, dates of birth, IP/GPS or national ID numbers ANYWHERE disqualifies the
+whole candidate, and dropping the offending column is not an option. The five
+deposits closed on PII in the 2026-10-19c/d slices stay closed, and the open
+TODO item asking whether Qualtrics geo-IP coordinates disqualify `DVN/JC6F9O`
+is answered: they do. The 2026-09-20 narrowing for a platform participant ID
+(Prolific/MTurk account ids are replaced by the row index) is untouched -- it is
+about an identifier that is never an item or a covariate, not about PII in the
+source.
