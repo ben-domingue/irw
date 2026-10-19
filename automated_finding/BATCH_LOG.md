@@ -20578,3 +20578,143 @@ to interpret, not a parse defect.
 - `kembara_2026_civic_agency` earns **no** entry: author-supplied translation,
   no text-vs-table mismatch, and blank option_text at unlabelled midpoints is
   explicitly not issues-page material.
+## 2026-10-19d — the ledger's tail: the last 25 open leads, 36 tables, 292,507 responses (#3077)
+
+Everything still statused `todo` in the nine re-mine files other than
+`noflag_dataverse` — `dvinst` 13, `ha_dvportals` 3, `ha_portals2` 1,
+`nuf_dvportals` 1, `nuf_mendeley` 2, `nuf_osf` 1, `nuf_zenodo` 2, `osf` 1,
+`tail` 1 — worked end to end. All 25 now carry a status and a reason, so
+**those nine files hold 0 `todo`**, and with 2026-10-19c's `noflag_dataverse`
+48 that is the whole open lead surface of #3077 closed.
+
+**Eight repositories in one slice**, which is what makes this the tail:
+Borealis/Scholars Portal (10.5683), DataverseNL (10.34894), DANS Data
+Stations (10.17026), Odum/UNC (10.15139), Sheffield ORDA, Mendeley Data, OSF,
+Zenodo and figshare. The pipeline's own resolvers were reused rather than
+reimplemented (`_dataverse_files` with `_dataverse_instance`,
+`_mendeley_files`, `_zenodo_files`, `_osf_files`, `_figshare_files`), so the
+host dispatch and licence read are the pipeline's.
+
+**One of the 25 had already shipped, and `check_shipped.py` caught it before
+any work**: `10.17632/yymf9dbr6h` is `assyafiyah_2026_rcse`
+(`data/assyafiyah_2026.py`), already in `dictionary_auto.csv` and already
+marked shipped in the `noflag_mendeley` file. And `10.5281/zenodo.16072049`
+turned out to be the same record as `...16072050` — two DOIs, one deposit,
+one file.
+
+### 9 deposits shipped: 36 tables, 292,507 responses
+
+All 36 pass `irw-validate --profile upload` with **zero failures and zero
+errors**; the twelve warnings are accounted for at the end. **Nothing is
+uploaded.**
+
+| deposit | tables | what |
+|---|---|---|
+| Borealis SP3/SWTZFF | 2 | **3,581** Quebec dairy farms, the ProAction biosecurity questionnaire: 28 frequency items at 1-4 and 5 yes/no items. 110,420 resp |
+| DANS Z7Q-7ATH | 6 | **577 + 346** Dutch undergraduates: DPSS, self-directed disgust, self-disgust experiences, trait disgust. 45,568 resp |
+| Borealis SP3/GQ8DUY | 3 | **1,794** Canadian and US respondents on dairy cow-calf welfare, 21 items over three blocks. 29,724 resp |
+| Mendeley x8zvbjv6p2 | 4 | **1,387** young Chinese adults: acculturation index, cultural difference, wellbeing, self-esteem. 29,127 resp |
+| DANS SS/PVQ66Y | 9 | **550** Dutch students, D-ADAPT's six domains and the Adaptability Scale's three, two waves each. 26,937 resp |
+| DataverseNL 8HOMVS | 2 | **680** Dutch students, burnout and engagement at three waves of the remote-teaching year. 16,320 resp |
+| Zenodo 16072050 | 6 | **353** Chinese university students, 44 items on online-learning readiness and flipped learning. 15,532 resp |
+| DataverseNL W3QRSV | 1 | **192** autistic and non-autistic (pre-)adolescents, the 65-item SRS. 12,480 resp |
+| DANS ZP9-WWM7 | 3 | **237** Dutch respondents in a 2x2x2 physician vignette: ECR-M16, general trust, vignette trust. 6,399 resp |
+
+Dictionary: 36 rows in `dictionary_auto.csv` plus 36 in
+`codebook_at_ingest.csv` — **6 of the 9 deposits ship a real codebook or
+questionnaire** (the Quebec codebook, the DANS Databeschrijving, the
+cow-calf survey PDF, the ERT codebook, the disgust documentation), which is a
+far higher rate than the figshare and Harvard slices and is mostly what made
+this slice decidable. Tags: 36 rows in `tags_auto_2026-10-19b.csv` (a
+separate file from 2026-10-19's, so the two open PRs do not collide).
+
+### Three sentinels that would each have published a wrong scale
+
+- **DANS SS/PVQ66Y: 6 means "niet van toepassing"** on all six D-ADAPT
+  domains. The data shows 1-6 and nothing marks the 6; the deposit's
+  Databeschrijving.pdf lists the options as 1 Niet ... 5 In zeer hoge mate,
+  6 niet van toepassing. 175 cells dropped. Had the PDF not been read, six
+  tables would have shipped a 6-point scale whose top category is a
+  non-response.
+- **Borealis SP3/SWTZFF: 5 means "not applicable" and 6 "I don't know"** on
+  28 frequency items (5,722 cells of 5), and the yes/no items are coded
+  **1 = No, 4 = Yes** — a binary that looks like a 4-point scale. `resp` is
+  the 0/1 recode with the source code kept in `resp_raw`.
+- **DANS Z7Q-7ATH: the EDE-Q block mixes two metrics.** 247 and 288 cells
+  (of ~10k and ~16k) hold values above 6, up to 15 and beyond: the EDE-Q's
+  first twelve questions recorded as raw days out of 28 rather than as its
+  0-6 bands. Deferred rather than shipped, because splitting it needs the
+  codebook read item by item.
+
+### The administered column can be the one named like a recode
+
+`Mendeley x8zvbjv6p2` keeps both copies of three items: `Differ3R`,
+`SEsteem2R` and `SEsteem4R` sit INSIDE their blocks, and plain `Differ3`,
+`SEsteem2`, `SEsteem4` appear later in the file. The plain ones are the
+scored copies — each equals 6 minus its `R` twin for all 1,387 rows, proved
+in the script. Taking the plain names because they look unmodified would
+have shipped three reverse-scored items among five administered ones.
+
+### Two PII skips, both caught by the label tier
+
+`DataverseNL KYFSP5` carries `Geboortedatum` — 229 distinct real dates of
+birth, label "Wat is je geboortedatum?" — and `osf.io/hgujs` carries
+`Pre_Q3`, labelled "date of birth". Both whole-candidate skips. The name tier
+would have seen neither; this is the tier added after zenodo.13913289.
+
+### orda.shef.ac.uk is a figshare instance, and the resolver said "Harvard"
+
+The DOI-fallback path sends an unrecognised host to `_dataverse_files`, which
+raised its AWS-WAF `SourceBlocked` message naming **dataverse.harvard.edu**
+for a Sheffield figshare URL answering HTTP 202. The diagnosis was confidently
+about the wrong site. `https://api.figshare.com/v2/articles/21197800` resolves
+the record fine — institutional figshare items share figshare.com's id space.
+Worth adding to `_HOST_RESOLVERS` and worth making that message name the host
+it actually called.
+
+### The 15 closed on content, grouped by why
+
+**Aggregate-only (6).** `bupajk` (an ESM study whose every column is already a
+composite), `mwz1eo` (IDEL/DIBELS fluency counts), `shef.data.21197800` (266
+children, and every outcome a standardised or raw test total), `5xktsv`
+(n-back d-prime and RT aggregates), `osf.io/d3qht` (PHQ-9 sums and BRS means
+only), `figshare 33245883` (social-media minutes per year, one column per
+year).
+
+**Not an item battery (5).** `qcq166` (a 547-column population survey of
+select-all blocks and screening composites), `nk8gdf` (bird nest records),
+`kq24l4` (an ophthalmology chart review whose rows are eyes), `ddcngq`
+(driving-cessation blocks that are select-all questions, "nothing" option and
+sum column included), `jicgq6` (relative-compliance ratios from an economics
+experiment).
+
+**Below the floor (1).** `neii5t`: 48 participants, and the lead's 1,128
+counted rater x case rows. Consistent with the `below_min_n` already recorded
+for it on 2026-10-08.
+
+**PII (2), duplicate version (1).** As above.
+
+### Every WARN, accounted for
+
+- `imputed_values*` on 6 tables: ordinary concentration — 22 of the 65 SRS
+  items sit at 0 for most children (an unselected school sample on a clinical
+  screener), and `Clean_sleeves` is "always" for 98% of dairy farms.
+- `rights_register` on `peerdeman_2020_ecr`: the gate matched the ECR row
+  (verdict `block`) against 16 item CODES, which is exactly what it is for.
+  Response data ships, wording does not, and the codes are codes.
+- `item_scale_outlier` on `oconnor_2020_srs` (srs54r never answered 3) and
+  `resp_scale_nested_support` on two tables: category non-use at N=192 and
+  N=237, not a different scale.
+- `multi_scale*` on two tables: `sirovica_2022_welfare_perception`'s prefixes
+  are the five welfare dimensions of one battery asked about three animals,
+  and `dufour_2024_biosecurity_frequency`'s `clean*`/`av*` are topical, not
+  separate instruments.
+
+### What is left in #3077 after this
+
+No open leads. What remains is not mining work: the ~340 `deferred` rows
+across the re-mine files (each wanting a derivation rule or a rights ruling),
+the 56 `pending_ruling` rows in `nc_licence_pending_ruling_2026-10-18.csv`,
+and the three new deferrals this slice recorded (PVQ66Y's Adaptive Expertise
+Inventory, Z7Q-7ATH's EDE-Q, plus 2026-10-19c's EEPE1L, IGFCET and 226PMX
+blocks).
