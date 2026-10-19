@@ -48,6 +48,37 @@ release" or "at upload" is **due now, not pending**:
   deliberately a separate file; merging it into `tags/tags_auto.csv` is a
   reviewed step.
 
+## shehayeb_2024_* is a 2018 deposit, and its math anxiety is Fennema-Sherman (2026-10-19)
+
+Both findings come from resolving the one 2026-10-18 hold whose register row
+said it must not be left unidentified. Done: the originator is
+**Fennema-Sherman**, and `itemtext/instrument_rights_register.csv` has a
+Fennema-Sherman row now (verdict `hold`), with the Shehayeb row narrowed to the
+11 items that remain unidentified.
+
+- `shehayeb_2024_math_anxiety`'s Q9A is a **verbatim** F-S Mathematics Anxiety
+  item and Q1A is the F-S Confidence item with one word changed ("studying
+  math" for "attempting mathematics"). The hold stands, now on a named
+  originator: NCTM holds copyright on the 1976 JRME brief report with all
+  rights reserved, no public-use statement for the instrument could be found,
+  and published adaptations describe obtaining permission as a required step.
+- The other 11 items match no published instrument I could find, and the
+  deposit holds a single `Data entry.sav` with no questionnaire document, so
+  there is nothing further in the source to identify them from. That row is a
+  narrowed, documented unknown now rather than an unexamined one.
+- **Sourcing caveat, stated in the row:** the item wording was read from a
+  15-item secondary reproduction hosted by UT Arlington, not from the 1976
+  original, which is behind NCTM's paywall. Leads, not a transcription.
+
+- [ ] **A ruling: `shehayeb_2024_*` carries the wrong year.** The Mendeley
+  deposit (`10.17632/5cgmcxmp3y`) has one version, published **2018-08-21**,
+  and links no article; the dictionary `Reference` says "(2024)". Both table
+  names say 2024 and both tables are live on shard 7, so a rename is not free.
+  Correct the citation and leave the names, or rename the pair? The same
+  question will recur -- the year in a Mendeley-sourced name should come from
+  the deposit's publish date when no article is linked, and nothing in the
+  pipeline checks that it does.
+
 ## Auto-tagging reads the construct's name as if it were the sample (2026-10-19)
 
 Found by spot-checking `tags_auto_2026-10-18.csv` (301 rows) against the
