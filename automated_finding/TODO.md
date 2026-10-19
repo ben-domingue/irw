@@ -48,6 +48,68 @@ release" or "at upload" is **due now, not pending**:
   deliberately a separate file; merging it into `tags/tags_auto.csv` is a
   reviewed step.
 
+## HANDOFF: the item-code sweep ran over the whole corpus, results UNWORKED (2026-10-19)
+
+**Nothing here has been acted on, and no row is a verdict.** The sweep is
+read-only; no register row, no table and no draft was touched on the strength
+of it. Ben stopped before the debrief, deliberately. Pick it up from this
+section.
+
+**Where the output is:** `itemtext/code_sweep_2026-10-19.csv`, tracked, 442
+rows over 416 distinct tables, every row `status=unworked`. (The run also wrote
+`automated_finding/runs/rights_sweep_2026-10-19_codes.csv`, which is gitignored
+and will vanish -- the tracked copy is the record.) To reproduce:
+
+```bash
+python3 itemtext/sweep_instrument_rights.py --codes-only --version current \
+        --csv automated_finding/runs/rights_sweep_<date>.csv
+```
+
+~14 minutes, read-only, query-only: it reads the `item` column server-side and
+returns one row per table, so it touches neither an export nor the 200GB cap.
+
+**What it found, and what that means.** The surface exists for ONE case: a
+script that used source column headers as item codes, so the instrument's
+WORDING sits in a response table where no item-text withdrawal reaches it
+(luu_2024_stai6 #2123, holden_2026_bsri #2101). That case came back EMPTY.
+
+- 426 of the 442 leads are `positional` codes -- `BFI1`, `AQ_10`,
+  `HEXACO_60_12`. That is the instrument's data, which ships. Not a problem.
+- 16 are `possible_wording`, and on reading them none actually is: they are
+  descriptive slugs (`wemwbs_calm`, `whodas_dressing`, `ucla_isolated`,
+  `promis_anx_angst_bothered`), suggestive of content but not reproductions of
+  stems. They are first in the CSV so they can be re-read quickly.
+- Both historical cases look remediated: BSRI's codes are now `BSRI_F01`.
+- 442/6,675 = 6.6% of tables, against 59/861 = 6.9% in the 2026-09-27
+  threshold measurement, so the thresholds behave as calibrated.
+
+**The secondary yield is the part worth the debrief**, and all of it is a
+rights judgment rather than work:
+
+- [ ] **A rights map of the corpus that did not exist before:** which
+  non-shipping instruments the published tables carry. CD-RISC 46, PANAS 29,
+  PSS 28, Pearson 22, BFI-44 17, SDT/CSDT 16, SWLS 15, BFI-2 15, TAS 13,
+  STAI 13, UCLA-L 12, HADS 10, IRI 10. Whether that map should become a
+  standing artifact (and what, if anything, follows from a table carrying a
+  blocked instrument's DATA) is the open question.
+- [ ] **It confirms the over-broad rows of 2026-10-18m at corpus scale.**
+  CD-RISC's `^C[0-9]{1,2}$` tops the list at 46 tables. The mechanism is
+  visible in the shortlist too: FATCOD matched `roettl_2018_game_attitude`
+  through `F1_`, CISS matched `collective_narcissism_*`, and DJG and UCLA both
+  matched anything named `loneliness_*`. These are register defects, not
+  corpus problems, and tightening a rights pattern is a rights judgment.
+- [ ] **Three limitations of the run, stated so the coverage claim is not
+  overread.** (1) 109 tables could not be queried at all -- no `item` column --
+  and the script truncates its own skip list to five, so the only ones named
+  are `amboseli_baboons_g1`-`g5`. That truncation is a defect in what I wrote:
+  a sweep whose point is not skipping quietly should print its whole skip list.
+  (2) The PID-5 row's `^pid5(?!bf)` is a negative lookahead, which RE2 refuses,
+  so that one row is NOT swept on this surface -- it needs rewriting without
+  the lookaround to be sweepable. (3) 9 tables matched more codes than the
+  60-code sample carries, so their per-instrument attribution is partial and
+  flagged `capped` in the run log (`cdm_timss11` 174 codes,
+  `spalex_aguasvivas_2020` 189).
+
 ## "SDQ" is three unrelated instruments, and two of them ship (2026-10-19)
 
 Found by the newly wired item-code sweep, from a hit that correctly fell BELOW
