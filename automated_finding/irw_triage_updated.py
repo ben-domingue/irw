@@ -167,6 +167,54 @@ def _looks_header_offset(df: pd.DataFrame) -> bool:
     return unnamed / df.shape[1] > 0.5
 
 
+def variable_labels(path_or_bytes, filename: str = "") -> dict:
+    """{column: variable label} for a .sav/.dta, or {} for anything else.
+
+    Best-effort and never raises: a failure here must not turn a readable file
+    into a `download_failed`. Exists for the PII screen, which otherwise cannot
+    see an opaque-coded SPSS deposit at all -- `zenodo.13913289` carries 1,472
+    real dates of birth in a column named `Q009` whose variable label reads
+    "Date of birth? (dd/mm/yyyy)", beside municipality of residence. The name
+    tier sees `Q009`, the value tier sees dates that look like any other date,
+    and the deposit screened clean. Its Italian twin screened clean too, for
+    the unrelated reason that its label says "Data di nascita".
+
+    Deliberately separate from `load_table`, which discards labels on purpose
+    (`convert_categoricals=False`, see that branch) -- this reads the metadata
+    only, so the triage read path is unchanged.
+    """
+    name = (filename or str(path_or_bytes)).lower()
+    if not name.endswith((".sav", ".dta")):
+        return {}
+    tmp_path = None
+    try:
+        import tempfile
+        if isinstance(path_or_bytes, (bytes, bytearray)):
+            tmp = tempfile.NamedTemporaryFile(
+                suffix=".sav" if name.endswith(".sav") else ".dta", delete=False)
+            tmp.write(path_or_bytes)
+            tmp.close()
+            tmp_path = src = tmp.name
+        else:
+            src = path_or_bytes
+        if name.endswith(".sav"):
+            import pyreadstat
+            _, meta = pyreadstat.read_sav(src, metadataonly=True)
+            return {str(k): str(v) for k, v in
+                    (meta.column_names_to_labels or {}).items() if v}
+        reader = pd.io.stata.StataReader(src)
+        return {str(k): str(v) for k, v in
+                (reader.variable_labels() or {}).items() if v}
+    except Exception:
+        return {}
+    finally:
+        if tmp_path:
+            try:
+                os.unlink(tmp_path)
+            except OSError:
+                pass
+
+
 def load_table(path_or_bytes, filename: str = "") -> pd.DataFrame:
     """Read csv/tsv/xlsx/sav/dta/sas7bdat/RData/rds into a DataFrame from a
     path or raw bytes.
@@ -176,8 +224,23 @@ def load_table(path_or_bytes, filename: str = "") -> pd.DataFrame:
     hands pandas an integer Index, and every downstream `c.lower()` /
     `c.startswith()` in this module then dies with "'int' object has no
     attribute 'lower'", which process_one records as a bare `error`
-    against a perfectly readable file."""
-    return _stringify_columns(_load_table(path_or_bytes, filename))
+    against a perfectly readable file.
+
+    Any SPSS/Stata variable labels ride along in `df.attrs`, so the PII screen
+    can read them. Done here rather than at the three call sites
+    (irw_batch_updated, irw_discover_plos, irw_discover_pmc) so every
+    connector gets the tier automatically -- the last two triage in-process
+    and would otherwise have been missed, which is the same way the Step 2b
+    write-back was missed for weeks (#2076)."""
+    df = _stringify_columns(_load_table(path_or_bytes, filename))
+    if df is not None:
+        try:
+            labels = variable_labels(path_or_bytes, filename)
+            if labels:
+                df.attrs["irw_variable_labels"] = labels
+        except Exception:
+            pass
+    return df
 
 
 def _stringify_columns(df: pd.DataFrame) -> pd.DataFrame:
@@ -646,6 +709,15 @@ _RE_PII_STRONG = re.compile(
     r"(?:respondent|participant|student|patient|child|parent)"
     r"|\bsurnames?\b(?![\s_\-]*of\b)"
     r"|\bdate[\s_\-]*of[\s_\-]*birth\b|\bbirth[\s_\-]*date\b|\bbirthday\b|\bdob\b"
+    # A full date of birth in the languages this pipeline actually sees. The
+    # variable-label tier made these reachable and immediately needed them:
+    # zenodo.13913289's Italian twin screened clean on "Data di nascita"
+    # alone (2026-10-18). Still only a FULL date -- a birth year is a
+    # legitimate covariate, so no bare "nacimiento"/"nascita" here.
+    r"|\bfecha[\s_\-]*de[\s_\-]*nacimiento\b|\bdata[\s_\-]*di[\s_\-]*nascita\b"
+    r"|\bdata[\s_\-]*de[\s_\-]*nascimento\b|\bgeburtsdatum\b"
+    r"|\bdate[\s_\-]*de[\s_\-]*naissance\b|\bgeboortedatum\b"
+    r"|\bdoğum[\s_\-]*tarihi\b|出生日期|生年月日|생년월일"
     r"|\bip[\s_\-]*address\b"
     # a column labelled exactly "IP" (or ip_addr) in a survey export is the
     # respondent's address -- 10.7910/dvn/l6g8ul (2026-08-25) stored them
@@ -689,14 +761,44 @@ _RE_BARE_NAME_LABEL = re.compile(
     r"^(?:name|names|nombre|nome|nom|navn|namn|isim|ad|ime)$", re.IGNORECASE)
 
 
+def _is_name_shaped(s: str) -> bool:
+    """One value that reads as a personal name, in ANY script.
+
+    This used to be the regex `^[A-Za-zÀ-ɏ][A-Za-zÀ-ɏ .'-]{0,40}$`, which is
+    Latin-only: every CJK, Cyrillic, Greek, Arabic, Hebrew, Thai and
+    Devanagari roster failed it and the column screened clean. figshare
+    27635013 held 455 distinct real Chinese personal names in a column
+    literally called `name` and the whole screen passed it (2026-10-18) --
+    the label tier cannot cover for that, because the label IS the bare word
+    `name`, which is exactly the case this content check exists for.
+
+    The test is "letters and combining marks, plus the few separators a name
+    carries" rather than "letters I listed". Combining marks matter: Thai and
+    Devanagari write vowels as marks (category Mn/Mc), which `isalpha()`
+    rejects, so an isalpha-only test still missed those two rosters.
+    """
+    if not s or len(s) > 41:
+        return False
+    import unicodedata
+    if not (s[0].isalpha() or unicodedata.category(s[0]) in ("Lo", "Mn", "Mc")):
+        return False
+    for c in s:
+        if c in " .'-·・‌‍":
+            continue
+        if c.isalpha() or unicodedata.category(c) in ("Mn", "Mc"):
+            continue
+        return False
+    return True
+
+
 def _looks_like_person_names(series) -> bool:
     """True when a column's values read as a list of personal names."""
     v = series.dropna().astype(str).str.strip()
     v = v[v != ""]
     if len(v) < 20:
         return False
-    # Mostly short, alphabetic, and nearly all distinct.
-    alpha = v.str.match(r"^[A-Za-zÀ-ɏ][A-Za-zÀ-ɏ .'-]{0,40}$")
+    # Mostly name-shaped, and nearly all distinct.
+    alpha = v.map(_is_name_shaped)
     if alpha.mean() < 0.8:
         return False
     if v.str.len().mean() > 30:
@@ -711,6 +813,55 @@ def _looks_like_person_names(series) -> bool:
     return v.str.split().str.len().mean() <= 4
 
 
+# A value-level screen, because the label-level one is defeated by any label
+# the patterns above did not anticipate. 10.5281/zenodo.10069489 (2026-10-18)
+# carried 3,130 real email addresses in a column named `Nombredeusuario`:
+# "nombre de usuario" with the spaces stripped, so there is no word boundary
+# around "nombre" and the Spanish pattern (which wants "nombre completo" or
+# "nombre del participante") could not fire, while `_RE_BARE_NAME_LABEL` wants
+# the label to be exactly "nombre". Nothing in the header said "email" at all.
+# An address is unmistakable in the VALUES whatever the column is called, so
+# this reads them instead of guessing from the label.
+_RE_EMAIL_VALUE = re.compile(r"[^\s@,;]+@[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?"
+                             r"(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?)*"
+                             r"\.[A-Za-z]{2,}")
+
+
+def _is_stringish(series) -> bool:
+    """Whether a column holds strings.
+
+    `dtype != object` is not that test: `pyreadstat` returns pandas
+    `StringDtype` for an SPSS string column, so an `== object` guard skipped
+    the Nombredeusuario column without reading a single value. This was the
+    second half of that miss."""
+    try:
+        from pandas.api.types import is_string_dtype, is_object_dtype
+        return bool(is_object_dtype(series) or is_string_dtype(series))
+    except Exception:
+        return series.dtype == object
+
+
+def _holds_email_addresses(series) -> bool:
+    """True when a column's values contain real email addresses.
+
+    Deliberately email-only. An address has an unambiguous shape, so the false
+    positive rate is near zero even on free-text answers; a phone or national
+    ID written as digits is not distinguishable from a legitimate numeric
+    covariate without a locale, and guessing there would start rejecting good
+    candidates. Phone/ID detection stays label-based above."""
+    if not _is_stringish(series):
+        return False
+    v = series.dropna().astype(str).str.strip()
+    v = v[v != ""]
+    if len(v) < 5:
+        return False
+    sample = v.head(2000)
+    hits = sample.str.contains(_RE_EMAIL_VALUE, regex=True, na=False)
+    # A handful could be an institutional contact quoted inside a free-text
+    # answer; a column OF addresses is a roster.
+    return bool(hits.sum() >= 5 and hits.mean() >= 0.2)
+
+
 _MAX_WEAK_WORDS = 5
 # Second guard for the weak tier. The word-count test alone does not survive
 # SPSS name mangling: a stripped item stem ("Ioftenfeelanxiouscheckingmyemail")
@@ -718,24 +869,64 @@ _MAX_WEAK_WORDS = 5
 _MAX_WEAK_CHARS = 60
 
 
-def screen_for_pii(columns, df=None) -> list[str]:
+def _pii_surfaces(columns, labels):
+    """(column, text, surface) for every string the screen should examine.
+
+    The column name first, then its SPSS/Stata variable label where one
+    differs -- so a hit is reported against the column the uploader has to
+    act on, and the name tier keeps precedence for the content checks (those
+    index `df[c]`, which the label cannot).
+    """
+    labels = labels or {}
+    for c in columns:
+        yield c, str(c), "name"
+    for c in columns:
+        lab = str(labels.get(c, "") or "").strip()
+        if lab and lab != str(c):
+            yield c, lab, "label"
+
+
+def screen_for_pii(columns, df=None, labels=None) -> list[str]:
     """Return the raw column labels that look like direct identifiers.
 
     Pass `df` to additionally content-check generically-named columns -- a
     bare `NAME` cannot be judged from its label alone, only from what is in
-    it."""
-    hits = []
-    for c in columns:
-        label = str(c)
+    it. Pass `labels` ({column: variable label}, from `variable_labels()`) to
+    screen the SPSS/Stata variable labels as well: a deposit that codes its
+    columns `Q001`/`v_12`/`CT1_SQ003` puts every word a pattern could match
+    in the label, so without this tier it is invisible to the name tier and
+    `Q009` holding 1,472 dates of birth screens clean (zenodo.13913289).
+
+    Three surfaces, because each has caught what the others could not: the
+    name (a `Nama` column), the values (3,130 emails under
+    `Nombredeusuario`), and now the variable label. A column labelled "Name
+    of the Senior Citizen" holding `1..500` serials is also why no single
+    surface can be trusted alone.
+    """
+    hits, seen_cols = [], set()
+    for c, label, where in _pii_surfaces(columns, labels):
+        if c in seen_cols:
+            continue
+        shown = label if where == "name" else f"{c} (variable label: {label!r})"
         if _RE_PII_STRONG.search(label):
-            hits.append(label)
+            hits.append(shown)
+            seen_cols.add(c)
         elif (_RE_PII_WEAK.search(label)
               and len(label.split()) <= _MAX_WEAK_WORDS
               and len(label) <= _MAX_WEAK_CHARS):
-            hits.append(label)
-        elif (df is not None and _RE_BARE_NAME_LABEL.match(label.strip())
+            hits.append(shown)
+            seen_cols.add(c)
+        elif (where == "name" and df is not None
+              and _RE_BARE_NAME_LABEL.match(label.strip())
               and _looks_like_person_names(df[c])):
             hits.append(label)
+            seen_cols.add(c)
+        elif (where == "name" and df is not None
+              and _holds_email_addresses(df[c])):
+            # Label-independent: whatever the column is called, a block of
+            # email addresses in it is a direct identifier.
+            hits.append(f"{label} (email addresses in the values)")
+            seen_cols.add(c)
     return hits
 
 
@@ -745,7 +936,9 @@ def triage_dataset(df_raw: pd.DataFrame) -> Triage:
 
     # PII first: it disqualifies the whole candidate regardless of how well
     # the file parses, so it must beat every other verdict including `good`.
-    pii = screen_for_pii(df_raw.columns, df_raw)
+    pii = screen_for_pii(df_raw.columns, df_raw,
+                         labels=(getattr(df_raw, "attrs", None) or {})
+                         .get("irw_variable_labels"))
     if pii:
         reasons.append(
             "Raw file has column(s) that look like direct identifiers: "

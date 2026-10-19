@@ -3,6 +3,512 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## From the #3077 zenodo_rest batch B, worked (2026-10-18i)
+
+- [ ] **96 tables (267,363 responses) + 6 item text tables staged, nothing uploaded.**
+  18 of 26 deposits shipped. Ben held PR #3089 and all uploads on 2026-10-18.
+  All 198 tables in `automated_finding/irw_output/` pass
+  `irw-validate --profile upload` with no failures.
+- [ ] **51 leads still `todo`** in `leads/repos_ledger_remine_2026-10-18_zenodo_rest.csv`
+  for a batch C. All 26 of this batch's rows carry a status.
+- [ ] **Covariate labels:** harvested at `0f50eb3a` for the nine `.sav` scripts
+  (hung_2026c_cognitive_load, peng_2026_mental_health_literacy,
+  xue_2026_admin_ai_acceptance, mairean_2024b_time_trauma,
+  mairean_2024c_childhood_dissociation, mairean_2023c_emergency_personnel,
+  estevespairazaman_2022_self_medication, gonzalezrobles_2018_oasis,
+  yang_2024c_online_film_festival), all exit 0. Run `build.py` after the
+  release and commit `covariate_labels.csv`.
+- [ ] **Issues-page entries: none owed by this batch.** Both item-text deposits
+  are `data_labels` with no text-vs-table mismatch, which is below the bar.
+
+### Register-row requests (rights)
+
+- [ ] **ProQOL (Professional Quality of Life Scale, Stamm / proqol.org) has no
+  register row.** `mairean_2023c_proqol` (30 items, 372 respondents) ships
+  because its item codes are the deposit's positional `pro1`-`pro30` and no
+  item text is shipped, so no wording is exposed -- but if a ruling blocks the
+  ProQOL, that table is what a withdrawal targets. Its own terms allow free
+  unmodified use with credit but not sale.
+- [ ] **CTQ** (Childhood Trauma Questionnaire, Pearson) and **PAI-BOR**
+  (Personality Assessment Inventory Borderline Features, PAR) have no register
+  rows. Both withheld from `mairean_2024c` on the conservative reading. The CTQ
+  was flagged independently by the mendeley batch the same day.
+- [ ] **ZTPI's matcher does not reach its own codes.** The register's pattern is
+  `^ZTPIQ[0-9]+R?$`; the deposit spells them `ZTPI_1`..`ZTPI_18`, so the block
+  was caught by reading the items. One more instance of the 154-inert-rows
+  finding in BATCH_LOG 2026-10-18g.
+
+### Smaller things
+
+- [ ] `automated_finding/itemtext_provenance.csv` has no `translation_source`
+  column, so the two `translated_substitute` rows this batch adds join the 72
+  rows already in `check_provenance.R`'s `sub_nocol` class. The remedy is to
+  add the column repo-wide and backfill, not to patch these rows.
+- [ ] `automated_finding/oversized_candidates.csv` has one uncommitted appended
+  row (`10.17632/pv7y6kmg86.1`, a 267MB `.rds`) written by the concurrent
+  mendeley run, not by this batch. It is a standing record and wants committing
+  by whoever owns that run.
+- [ ] A ruling would help on whether an 8-construct PLS-SEM battery of 3-item
+  scales should ship as 8 tables (what `septiani_2026` does here, following
+  datastandard.md's one-file-per-scale rule) or as one 24-item table. Six of
+  this batch's deposits have that shape; the choice was made consistently but
+  it is a convention question, not a data one. Nothing is blocked either way.
+
+## From the #3077 mendeley leads, worked (2026-10-18h)
+
+- [ ] **8 tables (132,575 responses) + 5 item text tables staged, nothing
+  uploaded.** `automated_finding/irw_output/` and `itemtext_output/`.
+  zara_2024_opd_sqs, zara_2024_phq4, yang_2026_flsaq,
+  yang_2026_appreciative_education, tantia_2024_ats_{field,course},
+  shehayeb_2024_math_{anxiety,teacher}. Item text for all but the two zara
+  tables and yang_2026_appreciative_education. Stamp `uploaded=` in
+  `itemtext_provenance.csv` only after ben-domingue confirms.
+
+### Rulings wanted (none blocks what is staged)
+
+- [ ] **Three instruments want a rights-register row**, all found by reading
+  stems because none has one: **CTQ** (Childhood Trauma Questionnaire,
+  Bernstein & Fink / Pearson -- 28 items withheld by hand from the otherwise
+  shipped `rkw2g38rjp`), **CARS2-ST** (WPS -- `yj5drfdzht` closed), **RS-25**
+  (Wagnild & Young Resilience Scale -- `dytvjkmv9z` deferred). This is the
+  concrete half of the 154-inert-block-rows finding in BATCH_LOG 2026-10-18g.
+- [ ] **The SDQ row exists and cannot fire.** `hp6y7cj9r2` carries the
+  Strengths and Difficulties Questionnaire under subscale names (`pconsid`,
+  `prestles`, `psomatic`, `ptantrum`, `ploner`, `pobeys`, `pworries`,
+  `pcaring`, `phyper`, `ppeer`, `pshares`, `pbullied`); the block row's
+  `match_item_code` is `SDQ1|SDQ_1|sdq1|SDQ_Pro1` and matches none of them.
+- [ ] **Two documented rights FALSE positives shipped anyway**, both read
+  rather than inferred, both recorded in `itemtext_provenance.csv`. Confirm
+  the readings stand: `tantia_2024_ats_course` c1-c9 vs the CD-RISC matcher
+  `^C[0-9]{1,2}$` (the stems are Wise's ATS course items), and
+  `yang_2026_flsaq` Q14 vs the PSS row on the substring "nervous and" (FLSAQ
+  Q14 is about speaking English in class). `irw-validate` says "do not ship
+  its item text without a ruling", so this is that ruling request.
+
+### Leads still to work from this file (33 deferred, each with its blocker)
+
+`leads/repos_ledger_remine_2026-10-18_mendeley.csv` carries a per-row reason.
+The highest-value ones, with what they need:
+
+- [ ] **`6bhr52dc5v`** (1,198) and **`wcszkbp9z8`** (524): the `T2S*` and
+  `_M1`/`_M2` suffixes are SECOND WAVES -- both want a `wave` column, not
+  extra tables. Both have English stems, so item text is cheap.
+- [ ] **`9dcs5nvwtw`** (918): MTAS + RCADS, English stems. Shares all 16 MTAS
+  codes with `6bhr52dc5v` but only 14 of 835 response vectors, so they are
+  different samples -- consider one merged MTAS table with `cov_study`.
+- [ ] **`dpcc2wms6h`** (1,317) TMMS-24 + ERQ, full Spanish stems.
+  **`j5zjb46tr7`** (1,092) UEF-1, value labels only so no item text.
+  **`5tjkv36r3s`** (916) AQ/BVAQ/PAQ -- drop the EQ (register block) and
+  handle a source labelling error where AQ value labels give both 1 and 4 as
+  "Acord total".
+- [ ] **`fwgxbt4pjr`** (229 + 435): CDAT_1-20 is identical across both
+  samples, so those merge with `cov_study`, offsetting sample 2's id past
+  sample 1's observed max. Full Polish stems.
+- [ ] **`zvj6cz68sc`** (545): `SUJETO` is a WITHIN-CENTRE serial -- 451 unique
+  over 545 rows, 94 repeats with different `CURSO`/`EDAD`/answers -- so `id`
+  must be prefixed by centre. Drop STAI (register block).
+- [ ] **Four offset-header workbooks**: `4n5x4ffzn5`, `wwccx5cx4z`,
+  `3cgh2fsgn4`, and `nd6nxj4y8t` (which has clean `.sav` files beside the
+  workbook -- use those; its 28- and 29-item files are nested subsets of the
+  31).
+- [ ] **`ry2dvfydjd`**: 300 rows over 259 patients with a date-of-admission
+  column -- repeated measures, needs a wave or date column.
+- [ ] **`zktjjx93sv`**: human_review. 563 x 300, 132 binary checkbox columns,
+  22 constant-zero, possible HLS-EU. Needs a person to map the instrument.
+- [ ] Remainder: `vptj28s8pk`, `tnkv5z3byg`, `4vkrzxjtwf` (note `Age` is a
+  BIRTH YEAR), `m7k8638rmc`, `9pzs3y5f82` (no person id, so pre/post cannot
+  be linked), `x49yj8588t`, `xfrvh9tkwk`, `n69rdbph73`, `m85v5s7gx2`,
+  `zb62c5snkm`, `kdw549kj22`, `v7kdvzcrns`, `sngb8z87tw` (-999 sentinels),
+  `kprdr35gwb`, `rj6t9w4v2j`, `hp6y7cj9r2`, `dytvjkmv9z`, `9h8p47sk8w`,
+  `ctg7km2fkr`.
+
+### Non-English item text already identified as cheap
+
+Adds to the deferred translation round already in TODO: `dpcc2wms6h` and
+`zb62c5snkm` (Spanish), `fwgxbt4pjr` (Polish), `m85v5s7gx2` and `dytvjkmv9z`
+(Persian). `x49yj8588t` needs no translation -- the deposit ships its own
+English questionnaire.
+
+## From the #3077 zenodo_rest batch C (2026-10-18j)
+
+86 tables (147,644 responses) + 4 item text tables staged in
+`automated_finding/irw_output/` and `itemtext_output/`. Nothing uploaded; Ben
+held PR #3089 and all uploads. The leads file
+`leads/repos_ledger_remine_2026-10-18_zenodo_rest.csv` is **closed** -- all 77
+of its leads carry a status across batches A, B and C, 0 `todo`.
+
+### Rulings wanted (none blocks anything staged)
+
+- [ ] **A university NetID: PII or not?** `zenodo.5217991` was skipped because
+  `Username` holds 236 NetIDs (`bdz0311`, `btr3574`) for identifiable students
+  at one university. The narrowed carve-outs cover a platform participant ID
+  (2026-09-20) and a clinic register number (2026-09-26); a NetID that encodes
+  initials is neither, so the blanket rule was applied rather than the carve-out
+  widened. If it counts as an institutional serial, the remedy is the row index
+  and the deposit ships one 22-item table over 236 respondents (its other file
+  is the PSS and stays blocked either way). Third PII edge case in two days --
+  the other two are in BATCH_LOG 2026-10-18f.
+- [ ] **Register rows wanted**, every one found by reading stems because no
+  matcher could reach it: UTAUT/UTAUT2 generally (four deposits in this batch
+  ship UTAUT response tables); servant leadership other than van Dierendonck's
+  30-item SLS; organizational justice; OCB; Netemeyer's Work-Family Conflict
+  scale; the COPSOQ job-demand and social-support blocks; DES; BFI-10;
+  LPFS-BF. Adding to batch B's list (CTQ, PAI-BOR, ProQOL) and the mendeley
+  batch's (CARS2-ST, RS-25, SDQ-by-subscale).
+- [ ] **PLS-SEM 3-item construct batteries**: still one file per scale, as
+  batch B. Four more deposits with that shape here (binus_2025 x7,
+  cahyadi_2025 x9, rumangkit_2026_dm x6, triana_2025 x6). One ruling settles
+  all of them.
+
+### Bugs for whoever owns the file
+
+- [ ] **`remine_ledger.licence_ok` rejects `cc-zero`.** Zenodo's licence id for
+  CC0 1.0 is `cc-zero`, which fails the `startswith("cc0")` test and reads as
+  non-open. Three CC0 deposits in this batch carry it (zenodo.20844, 22609,
+  21054). No harm done here -- the leads file was built from the triage CSV's
+  `license` column, which normalises to `cc0` -- but a batch resolving the
+  licence from the Zenodo API directly would drop every CC0 Zenodo deposit.
+- [ ] `ghosh_2020_cas_ocs` is staged in `irw_output/` with no row in
+  `dictionary_auto.csv`. Not mine -- it belongs to the concurrent mendeley
+  batch -- but it is the only staged table of the 284 without one.
+
+### Owed after the next release
+
+- [ ] **Covariate labels:** `harvest.py --commit HEAD` for the three `.sav`
+  scripts in this batch that ship `cov_*` -- `baruah_2026_fake_news`,
+  `yu_2025_asian_american_coping`, `walton_2023_remote_work` -- then
+  `build.py` and commit `covariate_labels.csv`.
+
+### 29 deferred leads, each naming the blocking fact
+
+In the leads file with a per-row reason. The ones worth picking up first:
+
+- [ ] **zenodo.10942726** -- ERQ 10 and SWLS 5 are register `block`, but the
+  workbook also ships a **`dictionary` sheet** beside several study-authored
+  blocks. Separate the blocked instruments and the rest is a good item-text
+  case, which is rare in this pool.
+- [ ] **zenodo.7736935** -- 156 x 75 with **73 variable labels present** and no
+  ordinal block the profiler could identify. Another likely item-text case once
+  the item columns are picked out by hand.
+- [ ] **zenodo.4007786** -- TB knowledge/perception/adherence, three clean
+  blocks (perc 10 on 1-5, know 14 on 1-5, adh 8 on 0-1), deferred only for
+  time. The cheapest remaining win.
+- [ ] **zenodo.6625347** -- VisAWI 18 + SUS 10 + UEQ 6; SUS and UEQ are named
+  third-party usability instruments and want a rights read first.
+- [ ] **zenodo.3866196 / zenodo.3866225** -- adjacent record ids, one author;
+  check for a shared sample before shipping either (the 22089166/21522509 pair
+  in this batch is why).
+- [ ] **zenodo.2667331** -- 100 x 220 with twelve `e1`/`e2` blocks spanning
+  ranges from 0-1 to 0-9; needs its blocks mapped before any range is asserted.
+- [ ] **zenodo.6844831** -- multi-sheet Chinese workbook (部屬 / 主管 / 績效);
+  the sheets may be different units of observation, so the respondent mapping
+  has to be settled first.
+
+## From human_review re-check batch 5 (2026-10-18k, #3077 item 2)
+
+Nothing uploaded. 21 tables + 1 item text table staged in
+`automated_finding/irw_output/` and `itemtext_output/`; PR #3089 and all
+uploads are held by Ben.
+
+- [ ] **Recommendation, needs a yes: stop selecting from the human_review
+  archive as a queue.** Shipped-per-25 ran 21, 19, 14, **9** across batches
+  2-5. Batch 5's misses are structural, not luck: aggregate-only files (3 of
+  25), unlabelled matrix blocks whose instruments cannot be named so rights
+  cannot be verified (4 of 25), and blocked instruments carrying the whole
+  deposit (2 of 25). If more is wanted from the remaining 6,171 rows, select
+  on "has a label level" — the triage already records it and the filter
+  already ignores it — rather than on shape.
+- [ ] **PII screen, third surface: it does not read SPSS variable labels.**
+  `zenodo.13913289` holds 1,472 real dates of birth in a column named `Q009`,
+  with "Date of birth? (dd/mm/yyyy)" in the variable label. `screen_for_pii`
+  reads names and values, never labels, so every opaque-coded SPSS deposit is
+  invisible to the label tier. One-line fix: run the existing label tier over
+  `meta.column_names_to_labels` too. Not applied — `irw_triage_updated.py` was
+  owned by a concurrent session. (Related: the deposit's Italian twin screens
+  clean because its label reads "Data di nascita".)
+- [ ] **Issues-page entry owed at publish:** `antunez_2015_lotr` (LOT-R is
+  verdict `ship_with_note`).
+- [ ] **Five register verdicts wanted**, now in
+  `itemtext/register_gaps_2026-10-18.csv` (30 instruments): three rows that
+  BLOCK but cannot match anything (KIDSCREEN-27 — refused a 2,936-row deposit
+  entire; the English Jackson & Eklund flow scale; CD-RISC-10 under `CDR*`
+  codes), and two instruments with NO row that this batch SHIPPED — the
+  Differentiation of Self Inventory (22 items, 6,845 respondents) and the
+  reduced Morningness-Eveningness Questionnaire.
+- [ ] **Covariate labels:** harvest owed for the eight `.sav`/`.dta` scripts
+  in this batch (osorio_2025_parenting_differentiation,
+  antunez_2015_circadian_optimism, chaple_gil_2021_gad7,
+  fecker_2026_mansplaining, wang_2026_pmpu_diary,
+  vila_lopez_2023_brand_attachment, turska_kawa_2025_religiosity_conspiracy,
+  green_2025_ai_job_expectations), then `build.py` after the release.
+- [ ] **10 deferred rows, each naming the fact that blocks it** — see the
+  leads file. The two cheapest: `zenodo.5090519` (1,000 respondents, 22
+  blocks, Latvian, no blocker found — just needs block-to-construct mapping)
+  and `zenodo.17367532` (1,000 respondents, Polish CATI, same shape).
+  `zenodo.16777938` is the highest-value: drop its blocked UCLA and RRS
+  blocks and the MSPSS + CES-D blocks are shippable from 69 labelled Chinese
+  columns.
+- [ ] `dvn/vidgon` and `zenodo.22035093` are deferred only on thinness — a
+  4-item table each. A ruling on whether 4-item tables are worth shipping
+  would close both.
+
+## From the #3077 blank-flag batch, non-dataverse (2026-10-18l)
+
+29 tables / 220,891 responses staged in `automated_finding/irw_output/`;
+nothing uploaded. All 35 leads carry a status. No item text shipped.
+
+### Decisions wanted
+
+- [ ] **PII screen, fourth gap: `_looks_like_person_names` is Latin-alphabet
+  only.** `figshare 27635013` has 455 distinct real Chinese names in a column
+  called `name` and screened CLEAN. The regex `^[A-Za-zÀ-ɏ]...`
+  fails every CJK, Cyrillic, Greek, Arabic, Hebrew, Thai and Devanagari
+  roster, and the bare label `name` is exactly the case the content check
+  exists for. Skipped by hand. `irw_triage_updated.py` is the parent
+  session's file, so not fixed here.
+- [ ] **IGD ruling — the biggest prize left in #3077.** `figshare 25123145` is
+  **8,662 respondents x 27 binary items with a deposited 27x9 q-matrix**. The
+  register blocks IGDS9-SF (9 items); this is a 27-item pool across the 9
+  DSM-5 criteria and the deposit ships **no item wording**, so it cannot be
+  shown not to be the blocked instrument. Deferred on that alone.
+- [ ] **Technology Readiness Index** (figshare 20071678, deferred): no
+  register row and commercially licensed. Wants a ruling before that deposit
+  is worked.
+- [ ] 10 new rows in `itemtext/register_gaps_2026-10-18.csv` (now 40, of which
+  22 have no register row at all), including FoMO under `TF`/`SF` whose item
+  text **would have shipped** on a clean `rights.py` run, and SDRS-5 whose
+  matcher columns are both empty.
+
+### Leads still to work from this slice
+
+- [ ] **48 `noflag_dataverse` leads** — untouched, a separate batch.
+- [ ] **15 deferred**, each naming its blocking fact in the leads file. Best
+  first: `figshare 30178486` (961 + 152, English stems in labels, Body
+  Appreciation Scale has no register row); `mendeley 5ywv53yyd3` (306 x 117,
+  nine clean blocks); `figshare 31077850` (499 x 86, Spanish COVID survey,
+  every stem in its labels, confirmed NOT HLS-EU-Q16); `figshare 13951619`
+  (344, two 30-item blocks behind an offset header).
+
+### Owed after the next release
+
+- [ ] `metadata/covariate_labels/build.py` and commit `covariate_labels.csv`.
+  `harvest.py --commit HEAD` run for contreras_valdez_2026,
+  deleon_villagran_2026, meule_2019, le_2026 and hung_2026d — all five exit 0,
+  so none of them reads a gitignored cache.
+
+### Item text owed on a ruling
+
+- [ ] **All five `hung_2026d` tables** have their item text held: FoMO and
+  SDRS-5 are register block rows and the 16-item burnout battery could not be
+  pinned to a row. Both label levels carry full English stems, so all five are
+  extraction-solved and ship the day a ruling lands.
+- [ ] `deleon_villagran_2026_tmms24` and `contreras_valdez_2026_*`: full
+  Spanish stems in the variable labels, no author English, so the English
+  would be IRW-generated and owes a `translation_source` plus an issues-page
+  callout. Same deferred round as the eight deposits in 2026-10-18f.
+
+## From the #3077 ledger characterisation (2026-10-18g)
+
+Nothing here is uploaded. Ben held PR #3089 and all uploads deliberately on
+2026-10-18; 94 tables and 19 item text tables sit staged in
+`automated_finding/irw_output/` and `itemtext_output/`.
+
+### Decisions wanted (none blocks anything already staged)
+
+- [ ] **Do not reopen `no_usable_file`** — recommendation, needs a yes. 2,311
+  keys re-mined returned 10 leads (0.4%) against `human_assistance`'s 18%, and
+  the resolver demonstrably ran. Item 4 of #3077 proposes
+  `seen_ledger.py drop --flag no_usable_file`; it would cost a day of
+  downloads for ten leads. Say no and the issue's item 4 closes.
+- [ ] **Rights register: 154 of 243 `block` rows can match nothing** on either
+  surface (`itemtext/check_register_coverage.py` for the breakdown; includes
+  NEO-FFI, MBI-HSS, PSQI, SCL-90-R, HADS, BDI-II, ISI, PERMA-Profiler, the
+  Ages & Stages family). Which get matchers is a rights ruling, so it is
+  yours. Deliberately not fixed here: a matcher has real false-positive cost.
+- [ ] **Two PII edge cases from the `good`-keys batch**, both skipped/deferred
+  under the blanket rule, both arguably outside its intent — see BATCH_LOG
+  2026-10-18f: `10.17632/4fp3nxmcgs` (one respondent of 382 typed their own
+  name into a free-text `school` field; 382x47 otherwise clean) and
+  `zenodo.21121992` (the name column holds the three deposit authors' own
+  names, published on the record — authorship, not a data subject).
+- [ ] **`zenodo.20550197`** duplicates live data: 200 of its 201 distinct
+  OSTES response vectors already exist in `gonzalezros_2025_ostes`. Supersede
+  the live table, ship only the ~425 new respondents, or skip?
+- [ ] **`zenodo.20475015`** (860x30 AIOAS, clean) held only because the
+  creators are literally "Anonymous, Anonymous" with no paper, so there is no
+  author name for the file-naming convention. Same question as DVN/YB5PVO;
+  one ruling settles both.
+
+### Leads still to work
+
+One queue of 291, not two — items 2 and 3 of #3077 overlap by 38 rows, which
+are deferred in batch 5's file naming the leads file that owns them.
+
+- [ ] **77** zenodo_rest, `leads/repos_ledger_remine_2026-10-18_zenodo_rest.csv`
+      (batch A took the 26 highest-N)
+- [ ] **46** mendeley, `leads/repos_ledger_remine_2026-10-18_mendeley.csv`
+- [ ] **25** human_review batch 5, `leads/human_review_recheck_batch5_2026-10-18.csv`
+      (+57 pool remainder, statused `unworked`)
+- [ ] **20** figshare, **13** dataverse installations, **1** osf
+- [ ] **16** deferred rows across batches A/f needing a derivation rule
+      (Google Form exports whose headers are stems with no item code)
+- [ ] **10** from the `no_usable_file` sweep — low priority, that is the whole
+      0.4%
+- [ ] **557** blank-flag keys triaging as of 2026-10-18g; leads file owed
+
+### Item text
+
+- [ ] **Eight deposits from the `good`-keys batch carry stems in their own
+  headers but were administered in Indonesian, Turkish or Chinese with no
+  author English.** Shipping them means IRW-generated translations, each owing
+  a `translation_source` and a public issues-page callout. That is one
+  deliberate round, not a bolt-on. **`zenodo.20017889` is the best candidate
+  in the backlog** — it deposits its questionnaire in both Chinese and
+  English, so it needs no IRW translation at all.
+- [ ] Issues-page entries owed at publish for the 2026-10-18d/e/f batches —
+  per-batch lists in those BATCH_LOG entries.
+
+### Owed after the next release
+
+- [ ] `metadata/covariate_labels/build.py` and commit `covariate_labels.csv`.
+  `harvest.py --commit HEAD` has been run three times today (batch d, batch A
+  at HEAD for 12 `.sav` scripts, batch f at `c603adc2` for
+  `yang_2024_teacher_wellbeing`).
+
+### Housekeeping
+
+- [ ] `irw_batch_updated.py` exposes no `--no-archive`, so `--retriage` on a
+  re-mine archives `human_review` rows the rule forbids (#3073). Either add
+  the flag or make `--ignore-seen-keys` imply it. Today's workaround was to
+  call `irw_retriage_ha.py --no-archive` directly, and the 112 rows the first
+  chain wrote are parked in
+  `runs/human_review_archive_side_effect/` (gitignored) rather than deleted.
+- [ ] `itemtext/sweep_instrument_rights.py` compiles `_code_re` (line 98) and
+  never uses it; its item-code surface is an explicit stub. Harmless, but it
+  reads as coverage that does not exist.
+
+## From the #3077 zenodo re-mine leads, worked (2026-10-18d)
+
+- [ ] **32 tables (1,015,867 responses) + 13 item text tables staged, nothing uploaded.**
+  `automated_finding/irw_output/` and `itemtext_output/` (response tables first). 14 of the
+  18 unworked leads shipped; see BATCH_LOG 2026-10-18d for the table list and the four
+  that did not. Stamp `uploaded=` in `itemtext_provenance.csv` only after ben-domingue
+  confirms.
+- [ ] **Issues-page entries at upload** (9 tables with a `public_note`): nguyen_2024_helia,
+  nguyen_2024_eheals, nguyen_2024_sleep_hygiene, hung_2026_growth_mindset,
+  markova_2025_gaais, markova_2025_mails (English-only wording for a non-English
+  administration), karas_2022_cetscale_pl and valenciano_2022_paqc (IRW English
+  translations), maharani_2025_ecommerce_uiux (English stems for an Indonesian
+  administration plus IRW English option labels).
+- [ ] **Covariate labels:** harvested 2026-10-18 at the data commit for
+  premkumar_2020_schizotypy, hung_2026_grit_mindset, karas_2022_cetscale,
+  valenciano_2022_paqc. Run `python3 metadata/covariate_labels/build.py` after the release
+  and commit covariate_labels.csv.
+- [ ] **`zenodo.20475015` needs a naming ruling, not work.** 860 respondents x 30 AIOAS
+  items, 1-5, clean, would be one table with `cov_study`. Deposit creators are
+  "Anonymous, Anonymous" and no published paper exists, so there is no author name. Same
+  question as the 2026-10-10 DVN/YB5PVO lead -- resolve both together.
+- [ ] **Rulings wanted** (none blocks upload): see BATCH_LOG 2026-10-18d -- the
+  white_2022 table names carrying question numbers instead of a construct; the rights
+  register's code matchers missing seven blocked instruments in one batch; blank
+  `option_text` on premkumar_2020_bpaq and hung_2026_growth_mindset; the excluded
+  `PSQIC` column in hu_2026_psqi.
+- [ ] **Widen `instrument_rights_register.csv`'s code matchers, or accept manual
+  identification.** `^swls` misses `LS1`, `^s?wemwbs` misses `D1`, `^uwes` misses
+  `VE1`/`DE7`/`AE12`, and the Grit and O-LIFE rows carry no matcher at all. All seven
+  blocked instruments in this batch were caught by hand; only `^r?cesd[_ ]?[0-9]` fired.
+- [ ] **The 30 `deferred` rows of `leads/repos_ledger_remine_2026-10-18_zenodo.csv` are
+  still unopened** -- N is blank because the file has not been parsed yet, so the leads
+  filter dropped them on the N test. They are the obvious next slice of this pool before
+  the untouched 511 zenodo keys.
+- [x] The 49 `todo` rows were re-checked against the corpus first: 20 already in the IRW,
+  11 already closed, 18 genuinely unworked. Every future re-mine batch should run
+  `check_shipped.py` over its own leads file before working it.
+
+## From the #3077 zenodo_rest batch A (2026-10-18e)
+
+- [ ] **44 tables + 6 item text tables staged, nothing uploaded.** Response tables in
+  `automated_finding/irw_output/`, item text in `itemtext_output/`; response tables
+  first. 44 dictionary rows staged in `dictionary_auto.csv` and 44 `codebook_at_ingest`
+  rows. `uploaded=` is blank in `itemtext_provenance.csv` — stamp only after
+  ben-domingue confirms.
+- [ ] **Rulings wanted** (none blocks the 44):
+  - **zenodo.20550197** is a cross-sectional superset of the live
+    `gonzalezros_2025_ostes` — 200 of that table's 201 distinct OSTES response vectors
+    reappear in it. Supersede the live 202-respondent table, ship only the ~425 new
+    respondents, or skip? Not shipped either way until this is answered.
+  - **zenodo.20110159's HS block** (HS5/HS8/HS10/HS15) differs between the deposit's
+    two files for 323-417 of the 512 shared respondents. Dropped for now; the four
+    items are an adaptive-perfectionism discrepancy subscale, not the happiness scale
+    the code suggests.
+  - **Item text held on rights with the wording already in hand** — CCAS, OSTES, SWLS,
+    UWES-S, Grit, De Jong Gierveld, EQ-i, APS-R Order, Subjective Happiness, and the
+    unidentifiable 42-item social-support battery in zenodo.14200089. Each is
+    extraction-solved, so a ruling ships them without re-reading a deposit.
+- [ ] **Three deferred leads worth a follow-up pass**, all statused in
+  `leads/repos_ledger_remine_2026-10-18_zenodo_rest.csv`:
+  zenodo.15082823 (923 x ~145 items, full English stems in the headers — needs
+  splitting into one table per bundled instrument, and item text is cheap once split);
+  zenodo.14577475 (600 x ~140 labelled columns in Q-numbered blocks, needs the same);
+  zenodo.11083220 (EMA, no obvious respondent id — the N>=100 floor turns on reading
+  the linked paper, zenodo.10594764).
+- [ ] **77 leads still `todo`** in the same file, for batch B onwards.
+- [ ] **Covariate labels:** harvest run 2026-10-18 at HEAD for the 12 `.sav`-reading
+  scripts (hartmann_2026_ai_climate, chukwu_2026_help_seeking, oner_2026_pe_motivation,
+  lischer_2021_phq4, erdemir_2026_digital_burnout,
+  diazgarcia_2018_emotional_disorders, auerswald_2024_online_learning,
+  guerra_2010_teacher_resilience, sanchezmoreno_2024_ageing_loneliness,
+  hung_2026b_learning_engagement, hung_2026_parental_warmth,
+  hung_2026_short_form_video), all exit 0. Run `build.py` after the release and commit
+  `covariate_labels.csv`.
+- [ ] **Issues-page entries at publish:** `auerswald_2024_online_learning` — the
+  deposit reverses the response anchors on two of its four items (0 = "does not apply"
+  on Corona_1/3, 0 = "applies" on Corona_2/4) so that a high code always means a worse
+  experience. The numeric scale is comparable across items but the wording attached to
+  each code is not, which is a text-vs-table fact a reader needs.
+- [ ] **A PII-scan lesson worth folding into whatever scans next:** scan VALUES with an
+  email regex rather than header names, and treat pandas `StringDtype` ("str") as a
+  string dtype. Both gaps let a column of 3,130 real email addresses
+  (zenodo.10069489, `Nombredeusuario`) pass two scans before it was caught.
+
+## From item 1 of #3077 — the ledger's unworked `good` keys (2026-10-18f)
+
+- [ ] **17 tables (213,442 responses) staged, NOT uploaded.** ben-domingue has held
+  all uploads for this round. Files in `automated_finding/irw_output/`; all 94 tables
+  there (these 17 plus batch A's 77) pass `irw-validate --profile upload` with no
+  failures. No item text accompanies them.
+- [ ] **Covariate labels:** harvested at `c603adc2` for `yang_2024_teacher_wellbeing`
+  (Chinese value labels for gender, teaching years, degree, academic title, salary
+  band). Run `python3 metadata/covariate_labels/build.py` after the release and
+  commit `covariate_labels.csv`.
+- [ ] **Two rulings wanted** (neither blocks anything):
+  - `10.17632/4fp3nxmcgs` — skipped as PII because ONE respondent typed their own
+    name into a free-text `school` field (376 of 382 gave the university). The column
+    would be dropped anyway and this is a one-cell data-entry accident, not a name
+    field; the blanket rule has not been asked about that class. An otherwise clean
+    382 x 47 five-block AI-literacy instrument if it may ship.
+  - `10.5281/zenodo.21121992` — deferred. Its name column holds the three **deposit
+    authors'** own names (the enumerator tag), published on the record, not data
+    subjects'. Author/enumerator self-name: PII under the blanket rule, or authorship?
+- [ ] **One deliberate item-text translation round** covers eight deposits in this
+  batch whose stems are already in hand in their own column headers but were
+  administered in Indonesian, Turkish or Chinese with no author English. Each would
+  need a `translation_source` and a public issues-page callout, which is why none
+  shipped here. Start with `10.5281/zenodo.20017889`: it deposits its questionnaire
+  in **both** Chinese and English, so it needs no IRW translation at all — just PDF
+  extraction and an alignment of 21 and 25 stems to the LSitem numbering.
+- [ ] **Seven deferred deposits**, each with its reason in
+  `leads/repos_ledger_goodkeys_2026-10-18_worked.csv`: zenodo.14903363, 21802067,
+  18993680, 14768211, 15547217, 18373473, 18890328 (plus 21121992 above). The common
+  shape is a Google Form export whose headers are full stems with no item code, so
+  the code needs a documented derivation rule. Two are messier: 18373473 has banner
+  text leaking into its data rows, and 14768211 has two sheets whose row counts
+  differ by one.
+- [ ] `zenodo.20734378`'s 10 climate-knowledge items are a **nominal-standard**
+  candidate, not core: raw unordered MC option codes. Do not retry recovering the
+  answer key from `awareness_score` — an exhaustive search over all 691,200
+  single-correct-option keys finds none that reproduces it (BATCH_LOG 2026-10-18f).
+
 ## From the 2026-10-16 PMC monthly re-triage (2026-10-18, #3059)
 
 - [ ] **Seven candidates want a human read** — listed in BATCH_LOG 2026-10-18 with

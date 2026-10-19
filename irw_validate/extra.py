@@ -180,8 +180,22 @@ def _squashed_key(item: str) -> str | None:
     "item_12": codes whose digit sequences differ are never compared this way.
     A code carrying no digits at all -- the personal-name case this comes from
     -- is always safe.
+
+    `None` for a code with no Latin alphanumerics at all. `_NON_ALNUM` is
+    `[^0-9A-Za-z]`, so it deletes every CJK, Arabic, Persian, Cyrillic, Greek,
+    Hebrew and Thai character: two unrelated Chinese item codes both squash to
+    the empty string and get reported as renderings of one item. Found on
+    yang_2026_appreciative_education, whose codes are the deposit's own Chinese
+    column names -- '您对赏识教育了解程度' and
+    '赏识教育鼓励下，你的学习成绩进步了' are different questions. On a table
+    whose codes are ALL non-Latin this would group every item into one finding.
+    The docstring promised this `None` from the start; the body never returned
+    it.
     """
-    return _NON_ALNUM.sub("", item).casefold() + "|" + ",".join(_DIGIT_RUN.findall(item))
+    squashed = _NON_ALNUM.sub("", item).casefold()
+    if not squashed:
+        return None
+    return squashed + "|" + ",".join(_DIGIT_RUN.findall(item))
 
 
 def check_item_variants(df: pd.DataFrame, table: str = "") -> list:
@@ -215,7 +229,10 @@ def check_item_variants(df: pd.DataFrame, table: str = "") -> list:
     for keyfn in (_separator_key, _squashed_key):
         buckets: dict = {}
         for item in items:
-            buckets.setdefault(keyfn(item), []).append(item)
+            key = keyfn(item)
+            if key is None:      # the key cannot judge this code safely
+                continue
+            buckets.setdefault(key, []).append(item)
         for members in buckets.values():
             if len(members) > 1:
                 groups[tuple(sorted(members))] = sorted(members)

@@ -1,0 +1,2 @@
+status,source,doi,url,license,n_participants,n_items,refined_flag,data_file,reasons
+skipped: licence unknown is not cc0/cc-by/cc-by-sa,dryad,10.5061/dryad.3bk3j9m1b,,unknown,,,no_usable_file,,"no resolvable tabular file on landing page (checked .csv, .tsv, .tab, .xlsx, .xls, .sav, .dta, .sas7bdat, .rdata, .rda, .rds)"

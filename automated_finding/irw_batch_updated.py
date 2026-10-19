@@ -586,7 +586,19 @@ def _resolve_data_files_any_order(row: dict) -> tuple:
     # 33093377, a CC BY 4.0 deposit the ledger had retired as
     # no_usable_file. Only reached once host and source dispatch have both
     # missed, and only for a URL shaped like a figshare article.
-    if re.search(r"/articles/(?:[^/?#]+/)*?\d{4,}/?(?:[?#]|$)", url):
+    #
+    # This guard must accept a trailing version segment, or it rejects the
+    # very URLs _figshare_files was taught to read. That function's own
+    # pattern gained the `(?:/(\d+))?` group on 2026-09-16; this copy did
+    # not, so ".../articles/dataset/<title>/30234109/1" -- the shape every
+    # institutional portal serves (orda.shef.ac.uk, figshare.manchester.ac.uk,
+    # drum.um.edu.mt, 10.15131 / 10.48420 / 10.60809 and the rest) -- never
+    # reached the resolver and came back "no resolvable tabular file on
+    # landing page". The one URL the 2026-10-18b fallthrough was checked
+    # against, repository.uj.ac.za/articles/dataset/foo/33093377, happens to
+    # carry no version segment, which is why the gap survived its test.
+    # Keep the two patterns identical.
+    if re.search(r"articles/(?:[^/?#]+/)*?\d{4,}(?:/\d+)?/?(?:[?#]|$)", url):
         try:
             return _figshare_files(url)
         except Exception as e:
