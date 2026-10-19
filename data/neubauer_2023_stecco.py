@@ -395,8 +395,9 @@ def main():
            - pd.to_datetime(esm["timestamp"], unit="s", utc=True))
     assert lag.between(pd.Timedelta(0), pd.Timedelta(hours=1)).mean() > 0.99
 
-    df["date"] = (pd.to_datetime(df["start_time"], utc=True).astype("int64")
-                  // 10**9)
+    df["date"] = (pd.to_datetime(df["start_time"], utc=True)
+                  - pd.Timestamp("1970-01-01", tz="UTC")) // pd.Timedelta(seconds=1)
+    assert df["date"].between(pd.Timestamp("2021-04-01", tz="UTC").timestamp(), pd.Timestamp("2021-08-01", tz="UTC").timestamp()).all(), "date outside collection window"
     assert not df.duplicated(["id", "date"]).any()
     df = df.sort_values(["id", "date"], kind="stable")
     df["wave"] = df.groupby("id").cumcount() + 1
