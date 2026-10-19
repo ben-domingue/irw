@@ -162,21 +162,48 @@ shipped. Full write-up in BATCH_LOG 2026-10-19a.
   text, so there is no text-vs-table mismatch to publish. Re-check if the two
   item-text candidates below ship.
 
-### Item text: two tables are ready, and one needs no ruling
+### Item text: both ready tables are now STAGED (2026-10-19b)
 
-This batch shipped no item text (the slice was response tables). Two of the
-six extraction-solved deposits are not waiting on anything:
-
-- [ ] **`gerou_2023_dass21` is rights-clear and extraction-solved.** The
-  DASS-21 register row's verdict is `ship`; all 21 Greek stems are in the
-  `.sav` variable labels. Found by checking the register BY NAME --
-  `load_register()` keeps only `hold`/`note`, so the gate cannot report a
-  `ship`. Needs the administered-language columns and a `translation_source`
-  for the published English.
-- [ ] **`kembara_2026_civic_agency` needs no register row at all.** Appendix A6
-  of the deposit carries all six items in Indonesian with the authors' own
-  English and the dimension each measures, and the items are the study's own
-  under its CC BY.
+- [x] **`gerou_2023_dass21__items.csv` (84 rows) and
+  `kembara_2026_civic_agency__items.csv` (30 rows) UPLOADED 2026-10-19** by
+  ben-domingue into the `irw_text` draft (release is a separate step);
+  `uploaded=2026-10-19` is stamped on both rows of
+  `itemtext_provenance.csv` and `itemtext/mapping_verification.csv`.
+  Both table names were new in `irw_text`, so nothing appended.
+  Before upload, the full gate chain was run
+  against the staged response CSVs: `normalize_nulls.R`,
+  `validate_items.R --resp-csv` (item and resp sets match exactly on both),
+  `audit_batch.R --resp-dir` (2 of 2 PASS, no anomalies), `irw-validate` (both
+  clean) and `check_provenance.R` against the live issues page (exit 0).
+  Provenance and `mapping_verification.csv` rows are written; the folder holds
+  nothing but the two `*__items.csv`. Write-up: BATCH_LOG 2026-10-19b.
+- [ ] **An issues-page entry is owed for `gerou_2023_dass21` at publish**,
+  forced by its `public_note`: the shipped wording is the DASS-21's official
+  English, while the study administered a Greek translation that is withheld.
+  The page lives in the datapages/irw repo. `kembara_2026_civic_agency` earns
+  no entry (author-supplied translation, no text-vs-table mismatch).
+- [x] **No ruling is needed for what shipped: #2121 already governs it.**
+  Corrected 2026-10-19 after this was first written up as a pending ruling.
+  `itemtext_standard.md`'s 2026-09-08 ruling (irw#2121) says that when a study
+  administers a translated adaptation and IRW ships the original-language
+  wording as a stand-in, two instruments are in play and the test is the terms
+  of **the thing you actually copied**. IRW copied the public-domain English
+  DASS-21, so it ships; Lyrakos & Arvaniti's Greek governs the Greek wording
+  only, and its terms could not be located, so the Greek is held. Both of the
+  ruling's limits are met -- a straight translation rather than a revision, and
+  the originator's terms quoted rather than asserted. The structural twin is
+  `li_2024_bdyz`.
+- [ ] **What IS open is only the upgrade**, and nothing is blocked on it: could
+  the Greek wording itself move into the base fields? That needs the
+  translators' terms, or a ruling that the DASS site's "copied without
+  restriction" reaches the translations it hosts. Recorded as a register row
+  ("DASS-21 GREEK translation, Lyrakos & Arvaniti", verdict `hold`) with both
+  clauses quoted. A `ship` answer is re-run-and-replace, never a withdrawal.
+- [x] **The reason this got re-derived from scratch is now fixed.** The #2121
+  ruling was cited nowhere outside its own section -- not from the fallback
+  paragraph in the same file, not from this pipeline's own SKILL.md, not from
+  the DASS-21 register row, which is every place a batch actually looks. All
+  three now point at it, and the English DASS row names the Greek row.
 - Held on an existing verdict, no work to do: `jiao_2024_eheals` and
   `hernandezencuentra_2026_eheals` (eHEALS `hold`),
   `gerou_2023_hexaco_honesty_humility` (HEXACO-PI-R `block`).
@@ -188,6 +215,21 @@ six extraction-solved deposits are not waiting on anything:
   **A ruling on any of them releases an extraction-solved table.** Four of the
   six carry deliberately empty matchers, with the reason in the row: check
   them by name.
+
+### A one-character defect was hiding 18% of `mapping_verification.csv`
+
+- [x] **Fixed 2026-10-19b.** `lint_verification.R` -- the only check that
+  catches a status claiming more than its evidence supports -- reported 423
+  ERRORs over 2,123 rows of a 2,585-row file. One malformed field on line 1705
+  (`""PARTIAL"` for `"PARTIAL"` in `ritzel_2020_farmer_burden`'s `status`)
+  desynchronises R's CSV parser, so **462 rows, every one written since
+  2026-09-26, were invisible to the lint**; Python's `csv` reads the file
+  fine, which is why nothing noticed. Repaired byte-wise; the lint now reports
+  2,585 rows and 1 ERROR.
+- [ ] **That remaining ERROR is a real one to adjudicate**:
+  `prasetiyo_2022_act` carries `status=FAILED`, which is not in the enum
+  `VERIFIED/PARTIAL/NO_ROUTE/NOT_NEEDED`. Left exactly as found -- it is
+  someone's verdict to interpret, not a parse defect.
 
 ### Worth fixing in the pipeline, not in this batch
 
