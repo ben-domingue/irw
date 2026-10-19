@@ -20262,7 +20262,9 @@ next run.
 
 **13 of 20 deposits shipped: 41 tables, 190,707 responses.** All 41 pass
 `irw-validate --profile upload` with zero failures and zero errors; every WARN
-is accounted for below.
+is accounted for below. **All 41 uploaded 2026-10-19 by ben-domingue** into the
+`item_response_warehouse_7` draft (333 tables before, 374 after); every name
+was new, so nothing appended to an existing table. Release is a separate step.
 
 | deposit | tables | what |
 |---|---|---|
