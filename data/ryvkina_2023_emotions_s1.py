@@ -278,7 +278,8 @@ def main():
     local = pd.to_datetime(df["created_esm"].str.rstrip("Z"))
     df["date"] = (local.dt.tz_localize("Europe/Berlin", ambiguous="raise",
                                        nonexistent="raise")
-                  .dt.tz_convert("UTC").astype("int64") // 10**9)
+                  .dt.tz_convert("UTC") - pd.Timestamp("1970-01-01", tz="UTC")) // pd.Timedelta(seconds=1)
+    assert df["date"].between(pd.Timestamp("2020-01-01", tz="UTC").timestamp(), pd.Timestamp("2020-05-01", tz="UTC").timestamp()).all(), "date outside collection window"
     assert not df.duplicated(["id", "date"]).any()
     span = df.groupby(["id", "dataset"])["date"].agg(["min", "max"]).unstack()
     both = span.dropna()

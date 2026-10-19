@@ -387,7 +387,8 @@ def main():
     assert not local.dt.hour.between(6, 18).any()
     df["date"] = (local.dt.tz_localize("Europe/Berlin", ambiguous="raise",
                                        nonexistent="raise")
-                  .dt.tz_convert("UTC").astype("int64") // 10**9)
+                  .dt.tz_convert("UTC") - pd.Timestamp("1970-01-01", tz="UTC")) // pd.Timedelta(seconds=1)
+    assert df["date"].between(pd.Timestamp("2020-03-01", tz="UTC").timestamp(), pd.Timestamp("2020-06-01", tz="UTC").timestamp()).all(), "date outside collection window"
 
     cov = covariates()
     df = df.merge(cov, on="id", how="left", validate="many_to_one")

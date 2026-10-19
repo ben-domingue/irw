@@ -292,7 +292,8 @@ def main():
     local = pd.to_datetime(df["created_esm"].str.rstrip("Z"))
     df["date"] = (local.dt.tz_localize("Europe/Berlin", ambiguous="raise",
                                        nonexistent="raise")
-                  .dt.tz_convert("UTC").astype("int64") // 10**9)
+                  .dt.tz_convert("UTC") - pd.Timestamp("1970-01-01", tz="UTC")) // pd.Timedelta(seconds=1)
+    assert df["date"].between(pd.Timestamp("2020-03-01", tz="UTC").timestamp(), pd.Timestamp("2020-07-01", tz="UTC").timestamp()).all(), "date outside collection window"
     assert not df.duplicated(["id", "date"]).any()
     df = df.sort_values(["id", "date"], kind="stable")
     df["wave"] = df.groupby("id").cumcount() + 1
