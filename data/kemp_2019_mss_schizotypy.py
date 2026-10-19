@@ -94,7 +94,15 @@ def _load_sample(url, study_label, id_offset, has_dates):
             wdf["cov_retest_interval_days"] = df["INTERVAL"]
         date_col = f"{t}_DATE"
         if has_dates and date_col in df.columns:
-            wdf["date"] = df[date_col].astype("int64") // 10**9  # Unix seconds
+            # Unix seconds. astype("int64") // 10**9 is wrong under pandas 3,
+            # which parses to datetime64[us] (#3100, #2821).
+            ts = pd.to_datetime(df[date_col], utc=True)
+            wdf["date"] = ((ts - pd.Timestamp("1970-01-01", tz="UTC"))
+                           // pd.Timedelta(seconds=1))
+            lo = pd.Timestamp("2017-09-01", tz="UTC").timestamp()
+            hi = pd.Timestamp("2018-01-01", tz="UTC").timestamp()
+            assert wdf["date"].dropna().between(lo, hi).all(), \
+                f"{date_col} outside the Oct-Nov 2017 collection window"
         # item columns present for this wave
         item_pat = re.compile(rf"^{t}_(DIS|NEG|POS)(\d{{3}})$")
         for c in df.columns:
