@@ -609,7 +609,17 @@ apply_data_doi <- function(biblio, dict, label = "core") {
 ##biblio's column names are Redivis-safe, like `DOI__for_data_` above (#2421).
 ##Joined across ALL rows, like apply_data_doi, so a backfill on an
 ##already-published table reaches it.
-apply_source_via <- function(biblio, dict, label = "core") {
+##`aggregators.file` is metadata/aggregators.csv, whose `key` column is the
+##closed vocabulary: a value that is not one of its keys is not an intermediary
+##collection and is dropped here with a message. Seven `euls_2022_*` rows reached
+##the released biblio carrying `repos_weekly_2026-10-12`, an ingest BATCH name,
+##and the clients print it to users as "was found via repos_weekly_2026-10-12".
+##The batch a table was ingested in is recorded in automated_finding's ledgers,
+##which is where it belongs; this column answers a different question. Entry is
+##also guarded in automated_finding/stage_dict_row.py, so a bad value normally
+##never gets this far.
+apply_source_via <- function(biblio, dict, label = "core",
+                             aggregators.file = NULL) {
     if (!"Source via" %in% names(dict)) {
         biblio$Source_via <- NA_character_
         return(biblio)
@@ -623,9 +633,44 @@ apply_source_via <- function(biblio, dict, label = "core") {
     biblio$Source_via <- ifelse(is.na(i) | dict_blank(src$source_via[i]),
                                 NA_character_, src$source_via[i])
 
+    known <- source_via_keys(aggregators.file)
+    if (!is.null(known)) {
+        bad <- !is.na(biblio$Source_via) & !biblio$Source_via %in% known
+        if (any(bad)) {
+            message(label, ": dropped ", sum(bad), " `Source via` value(s) that ",
+                    "name no aggregator in ", basename(aggregators.file), ": ",
+                    paste(sort(unique(biblio$Source_via[bad])), collapse = ", "))
+            biblio$Source_via[bad] <- NA_character_
+        }
+    }
+
     message(label, ": ", sum(!is.na(biblio$Source_via)),
             " row(s) carry a Source via")
     biblio
+}
+
+##The `key` column of metadata/aggregators.csv, or NULL when the file is not
+##given or not readable -- in which case nothing is dropped, because an
+##unreadable vocabulary is no reason to strip a column that is already right.
+source_via_keys <- function(aggregators.file) {
+    if (is.null(aggregators.file) || !file.exists(aggregators.file)) {
+        if (!is.null(aggregators.file)) {
+            warning(aggregators.file, " not found; `Source via` values not ",
+                    "checked against the aggregator list.", call. = FALSE)
+        }
+        return(NULL)
+    }
+    keys <- tryCatch({
+        a <- readr::read_csv(aggregators.file, show_col_types = FALSE,
+                             progress = FALSE)
+        if (!"key" %in% names(a)) NULL else trimws(as.character(a$key))
+    }, error = function(e) NULL)
+    if (is.null(keys)) {
+        warning(aggregators.file, " has no readable `key` column; `Source via` ",
+                "values not checked.", call. = FALSE)
+        return(NULL)
+    }
+    keys[nzchar(keys)]
 }
 
 ##Attach the custom licence terms to every biblio row.
