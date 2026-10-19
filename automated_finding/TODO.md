@@ -1129,6 +1129,25 @@ this list saying so.
   1980 events, MCQ, Moral Attentiveness, courage/TCS/wisdom items). STAI,
   BFI-2 and HEXACO are already `block`.
 
+## From the 2026-10-19f deferred-residue slice (#3103)
+
+- [ ] **Mendeley 6bhr52dc5v's 20-item S* block** — 1,198 English students at
+  two waves, and the coding is not consistent: the deposit's value labels
+  define four categories (0 Never .. 3 Almost Always), wave 1 holds 1-4, wave
+  2 holds 0-4, and 184 of 1,093 respondents use both 0 and 4 within the same
+  twenty items. Two tables (or one with `wave`) once someone establishes what
+  each wave's coding is; the paper may say. The deposit's other four blocks
+  shipped as `putwain_2022_*`.
+- [ ] **A register `block` does not stop response data, and the group-2
+  write-ups assumed it did.** Several #3103 rows carry a note like "UWES_1-24
+  must be DROPPED (register block)" or "the EQ is a register BLOCK row and
+  must be dropped". That is wrong as a rule: `irw_validate/rights.py` says
+  response data from a blocked instrument ships and only its wording cannot,
+  and the 2026-10-18 ERQ withdrawal removed item-text rows, not response
+  tables. Worth re-reading those rows before working them — at least
+  5tjkv36r3s (EQ), vptj28s8pk (UWES) and tnkv5z3byg (UWES) have items that
+  were going to be dropped for no reason.
+
 ## From the 2026-10-19d tail slice (#3077)
 
 - [ ] **DANS SS/PVQ66Y's Adaptive Expertise Inventory** — BC1 (4 columns),

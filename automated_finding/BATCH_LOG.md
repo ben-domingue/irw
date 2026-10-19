@@ -20922,3 +20922,118 @@ is answered: they do. The 2026-09-20 narrowing for a platform participant ID
 (Prolific/MTurk account ids are replaced by the row index) is untouched -- it is
 about an identifier that is never an item or a covariate, not about PII in the
 source.
+## 2026-10-19f — the deferred residue, group 2 tranche 1: 8 deposits, 18 tables, 535,016 responses (#3103)
+
+The eight largest `deferred` rows of #3103's group 2, worked largest-first on
+ben-domingue's call. All eight are now `shipped` in their leads files. Every
+one was already profiled and written up by an earlier pass, so this slice
+started from a described state rather than from a profile — which is most of
+why eight deposits fit in one batch.
+
+**A rights reading corrected first, because it unblocked the biggest one.**
+Several group-2 rows were deferred on the grounds that the rights register
+blocks an instrument in the deposit. A register verdict is about WORDING:
+`irw_validate/rights.py` says it in as many words ("Response data from this
+instrument can ship; its wording cannot"), and the 2026-10-18 ERQ withdrawal
+under the scoped-use ruling took item text out of `irw_text_2` (935 → 930
+rows), not response tables. So the register never stood in the way of the
+response data, and `figshare 25123145` — the largest prize in the whole
+re-mine — was deferred for a reason that did not apply.
+
+### 8 deposits, 18 tables, 535,016 responses
+
+All 18 pass `irw-validate --profile upload` with **zero failures and zero
+errors**; the ten warnings are accounted for below. **Nothing is uploaded.**
+
+| deposit | tables | what |
+|---|---|---|
+| figshare 25123145 | 1 | **8,662** Chinese college students x 27 binary IGD items, shipped WITH the study's 27x9 Q-matrix. 233,874 resp |
+| Mendeley 6bhr52dc5v | 4 | **1,198** English students 16-19, MTAS/buoyancy/wellbeing/adaptability at two waves. 79,679 resp |
+| Mendeley dpcc2wms6h | 4 | **1,317** Peruvian students: ERQ, SWLS, TMMS-24, PANAS, all in Spanish. 77,703 resp |
+| Mendeley 3cgh2fsgn4 | 1 | **1,635** Indonesian students, 22 motivation items at 1-7, two samples merged. 35,970 resp |
+| Mendeley 9dcs5nvwtw | 3 | **918** English students 13-19: MTAS, wellbeing, RCADS. 34,884 resp |
+| Mendeley j5zjb46tr7 | 1 | **1,092** Cuban students, the 31-item UEF-1. 33,852 resp |
+| figshare 30178486 | 3 | **961 + 152** Chinese adolescents: body appreciation, self-esteem, and a pre/post experiment. 22,258 resp |
+| figshare 33014132 | 1 | **1,292** Chinese undergraduates, 13 digital-health-literacy items. 16,796 resp |
+
+Dictionary: 18 rows in `dictionary_auto.csv` plus 18 in
+`codebook_at_ingest.csv` (all `none` — not one of the eight ships a codebook,
+which is a sharp contrast with the 2026-10-19d tail slice's 6 of 9 and is
+mostly why these needed naming decisions at all). Tags: 18 rows in
+`tags_auto_2026-10-19c.csv`.
+
+### A Q-matrix, which IRW has almost none of
+
+`figshare 25123145` is the first table in a while to ship `qmatrix*` columns:
+the deposit's own `IGD_Q.csv` maps each of the 27 items to one of the nine
+DSM-5 IGD criteria, three items per criterion, single-attribute throughout.
+It joins to the items BY ROW ORDER because that is the only correspondence the
+deposit offers — IGD_Q.csv has 27 unlabelled rows and `Dim1..Dim9` headers —
+so the script asserts the 27 x 9 shape, the 0/1 domain, exactly one attribute
+per item and exactly three items per attribute before relying on it.
+
+### Item codes can publish wording, and here they would have
+
+`Mendeley dpcc2wms6h` stores its SWLS and TMMS-24 items as name-mangled copies
+of the Spanish stems (`@17.Aunqueavecesmesientotri...`) and its PANAS items as
+the bare adjectives (`Nervioso`). Three of its four instruments are
+register-`block` for wording. Shipping the column names as `item` would have
+published that wording through the item codes — which is exactly what
+`irw_validate`'s rights gate warns about. Each block is renumbered from the
+item number inside its own label instead, and the PANAS adjective order is
+recorded in the script header, where it is documentation rather than published
+data.
+
+### A block whose own value labels condemn it
+
+`Mendeley 6bhr52dc5v`'s fifth block (20 items, "I argue with others.") is
+**deferred, not shipped**, and the deposit supplies the evidence: its value
+labels define four categories (0 Never .. 3 Almost Always), wave 1 holds 1-4,
+wave 2 holds 0-4, and **184 of 1,093 respondents use both 0 and 4 within the
+same twenty items**. So the coding is inconsistent both between waves and
+within wave 2, and an item whose value means a different category for
+different people cannot ship. The other four blocks of that deposit are clean
+1-5 with matching labels and did ship.
+
+### Smaller findings
+
+- **The split header was two rows, not one.** `Mendeley 3cgh2fsgn4` puts
+  section names in row 0 and item numbers 1-22 in row 1, and the two workbooks
+  have different leading columns (one adds `No`, the other adds `Faculty`), so
+  the item block is located by its numbering rather than sliced at a fixed
+  offset. The earlier write-up had it as "seven items"; it is 22.
+- **One row of 1,636 carries demographics and no item response at all.**
+  Dropped on the all-blank test, with an assertion that no row is PARTIALLY
+  answered — a partial row would be a different problem.
+- **Two cells hold 7 on a 1-4 self-esteem scale** (`figshare 30178486`,
+  study 1 pre-test). Dropped as out of range. The deposit's own pre-test total
+  includes them, which is one more reason no total is shipped.
+- **The deposit's own sums are what identified its pre/post blocks**: `B*` and
+  `G*` both carry the label "Self-Esteem Scale", and only the fact that
+  `Pre_test_..._total` equals the B sum and `Post_test_..._total` the G sum for
+  all 152 respondents settles which is which.
+- **Two MTAS administrations were NOT merged.** The 2020 and 2022 Putwain
+  deposits share all 16 item codes, but the samples differ (14 of 835 response
+  vectors in common) and so does the wording — "Before a test/ exam, I am
+  worried I will fail." against "Before an exam, I am worried I will fail."
+  Two administrations, two tables.
+
+### Every WARN, accounted for
+
+- `rights_register` on `yanacalla_2025_panas` and `_swls`: the gate matched the
+  PANAS and SWLS rows (both `block`) against item CODES, which is what it is
+  for. The codes are positions, not wording, and response data ships.
+- `imputed_values*` on 6 tables: ordinary concentration — 79% of adolescents
+  pick 7 on `BAS1`, and 27 of 27 IGD items sit at 0 for most respondents,
+  which is what a clinical screener looks like in an unselected sample.
+- `multi_scale*` on `cao_2026_digital_health_literacy`: the four prefixes are
+  the instrument's own subscales, kept in one table deliberately.
+- `resp_scale_nested_support` on one table: category non-use.
+- `dup_id_item` on the five two-wave tables: expected, and reported as made
+  unique by `wave`.
+
+### What is left in #3103 after this
+
+Group 2 goes from 84 rows to 76. Group 1's 242 unparsed rows are untouched and
+still want a yes/no on a parse pass. The new deferral is 6bhr52dc5v's 20-item
+block, recorded in `TODO.md` with its evidence.
