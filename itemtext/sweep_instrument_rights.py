@@ -27,7 +27,15 @@ BOTH surfaces a restricted instrument can reach the corpus through:
                 item-text withdrawal reaches: luu_2024_stai6 ships the six STAI-6
                 stems as item codes (irw#2123), holden_2026_bsri the 20 BSRI
                 adjectives (irw#2101). Renaming a published item code is neither
-                cheap nor reversible, so this half REPORTS and never acts.
+                cheap nor reversible, so this half REPORTS and never acts. It
+                applies the write-path gate's own thresholds, imported from
+                irw_validate.rights rather than restated, so a `match_item_code`
+                pattern means the same thing here and before an upload. Wired
+                2026-10-19; it printed "not yet wired" until then, while the
+                docstring already advertised it -- and `--codes-only` did
+                nothing at all. The corpus is ~6,700 response tables, so pilot
+                with `--codes-shard item_response_warehouse_3` before running
+                the lot.
 
 ============================ READ THIS BEFORE TRUSTING THE OUTPUT ============================
 
@@ -74,7 +82,8 @@ REG = Path(__file__).resolve().parent / "instrument_rights_register.csv"
 _SRC = str(Path(__file__).resolve().parents[1])
 if _SRC not in sys.path:
     sys.path.insert(0, _SRC)
-from irw_validate.rights import stem_core, stem_hit  # noqa: E402
+from irw_validate.rights import (MIN_CODE_HITS, MIN_CODE_SHARE,  # noqa: E402
+                                 stem_core, stem_hit)
 
 
 def text_shard_names():
@@ -88,6 +97,22 @@ def text_shard_names():
         sys.path.insert(0, src)
     from red_up.targets import load_registry, text_shards
     return tuple(t.name for t in text_shards(load_registry()[1]))
+
+
+def core_shard_names():
+    """The response shards, from the same registry the uploader reads.
+
+    Not a hardcoded tuple, for the reason text_shard_names() gives: a list
+    naming shards 1-6 would silently stop sweeping the day shard 7 went live,
+    and shard 7 is where 333 tables landed on 2026-10-18.
+    """
+    src = str(Path(__file__).resolve().parents[1])
+    if src not in sys.path:
+        sys.path.insert(0, src)
+    from red_up.targets import load_registry
+    owner, targets = load_registry()
+    return owner, [t.name for t in targets
+                   if not (t.is_itemtext or t.is_meta or t.is_conj or t.is_rank)]
 
 
 def load_register():
@@ -181,12 +206,171 @@ def scan(redivis, tables, names, col, pats):
     return found, skipped
 
 
+#: Regex constructs RE2 has no equivalent for, so BigQuery refuses them.
+RE2_UNSAFE = re.compile(r"\(\?[=!<(]|\\[1-9]")
+
+
+def re2_probe(redivis, srcs) -> bool:
+    """Does BigQuery accept this alternation? One query, no table touched."""
+    combined = "|".join(f"(?:{x})" for x in srcs)
+    try:
+        redivis.query(
+            f'SELECT REGEXP_CONTAINS("probe", r"(?i)({combined})") AS ok'
+        ).to_pandas_dataframe()
+        return True
+    except Exception:
+        return False
+
+
+def re2_accepts(redivis, usable):
+    """Split `usable` into (accepted, [(instrument, pattern) rejected]).
+
+    Bisects on a failure rather than probing 99 patterns one at a time: the
+    normal case is one probe, and a corpus with one bad pattern costs about
+    log2(n) more.
+    """
+    if not usable or re2_probe(redivis, [u[2] for u in usable]):
+        return usable, []
+    if len(usable) == 1:
+        return [], [(usable[0][0], usable[0][2])]
+    mid = len(usable) // 2
+    left_ok, left_bad = re2_accepts(redivis, usable[:mid])
+    right_ok, right_bad = re2_accepts(redivis, usable[mid:])
+    return left_ok + right_ok, left_bad + right_bad
+
+
+def code_scan(redivis, tables, names, pats):
+    """Chunked scan of `item` in response tables. Returns ({(tbl, family,
+    instrument): {code}}, {tbl: n_codes}, [skipped], [capped]).
+
+    The regex is pushed down to the query and re-tested here, because what comes
+    back must be attributed to an instrument and Python's `re` is what the
+    register's patterns were written against. A pattern RE2 rejects is reported
+    as not swept rather than dropped -- the thing this script exists to prevent
+    is a sweep that skips something without saying so.
+    """
+    import re as _re
+    usable, unsweepable = [], []
+    for inst, fam, src in pats:
+        # A double quote would close the r"..." literal the pattern is pushed
+        # down inside. Backslash escapes are fine there and in RE2. A lookaround
+        # or backreference is not: RE2 has no equivalent, and because the
+        # patterns go down as ONE alternation, a single unparseable row takes
+        # the whole sweep with it -- the PID5 row's `^pid5(?!bf)` skipped all
+        # 957 tables of the 2026-10-19 pilot before this screen existed.
+        if '"' in src or RE2_UNSAFE.search(src):
+            unsweepable.append((inst, src))
+            continue
+        usable.append((inst, fam, src, _re.compile(src, _re.I)))
+    if not usable:
+        return {}, {}, [], []
+    # Then prove it, because the screen above cannot know everything RE2 refuses.
+    usable, rejected = re2_accepts(redivis, usable)
+    unsweepable += rejected
+    if unsweepable:
+        # Leading newline: the probe query draws a progress bar with no newline
+        # of its own, which otherwise swallows this line.
+        print(f"\n  {len(unsweepable)} pattern(s) cannot be pushed down and are "
+              f"NOT swept on this surface: "
+              f"{[i for i, _ in unsweepable]}")
+        print("  (their text surface still runs; a code pattern RE2 rejects has "
+              "to be\n   rewritten without the lookaround to be sweepable)")
+    if not usable:
+        return {}, {}, [], []
+    combined = "|".join(f"(?:{src})" for _, _, src, _ in usable)
+    # One scan per table: the exact count of matching codes decides the
+    # thresholds, and a capped sample of them carries the attribution. Capping
+    # the sample keeps a word-list table from returning thousands of codes.
+    SAMPLE = 60
+    one = lambda n: (
+        f"SELECT '{n}' AS tbl, COUNT(DISTINCT CAST(item AS STRING)) AS n_codes, "
+        f"COUNT(DISTINCT IF(REGEXP_CONTAINS(CAST(item AS STRING), "
+        f'r"(?i)({combined})"), CAST(item AS STRING), NULL)) AS n_hits, '
+        f"ARRAY_TO_STRING(ARRAY_AGG(DISTINCT IF(REGEXP_CONTAINS("
+        f'CAST(item AS STRING), r"(?i)({combined})"), CAST(item AS STRING), NULL) '
+        f'IGNORE NULLS LIMIT {SAMPLE}), "\\u0001") AS hits '
+        f"FROM `{tables[n]}`")
+    sel = lambda ns: "\nUNION ALL\n".join(one(n) for n in ns)
+    CHUNK = 40
+    found, n_codes, skipped, capped = {}, {}, [], []
+    for i in range(0, len(names), CHUNK):
+        part = names[i:i + CHUNK]
+        try:
+            df = redivis.query(sel(part)).to_pandas_dataframe()
+        except Exception as exc:
+            print(f"  [item] chunk {i}-{i+CHUNK} failed ({str(exc)[:80]}); "
+                  f"retrying table by table")
+            frames = []
+            for n in part:
+                try:
+                    frames.append(redivis.query(sel([n])).to_pandas_dataframe())
+                except Exception as e2:
+                    skipped.append((n, "item", str(e2)[:60]))
+            import pandas as pd
+            df = (pd.concat(frames) if frames
+                  else pd.DataFrame(columns=["tbl", "n_codes", "n_hits", "hits"]))
+        for row in df.itertuples(index=False):
+            n_codes[row.tbl] = int(row.n_codes or 0)
+            if not row.n_hits:
+                continue
+            sample = [c for c in (row.hits or "").split("\u0001") if c]
+            if int(row.n_hits) > len(sample):
+                capped.append((row.tbl, int(row.n_hits)))
+            for inst, fam, _src, rx in usable:
+                m = [c for c in sample if rx.search(c)]
+                if m:
+                    found.setdefault((row.tbl, fam, inst), set()).update(m)
+        print(f"  [item] scanned {min(i+CHUNK, len(names))}/{len(names)}")
+    return found, n_codes, skipped, capped
+
+
+def report_codes(found, n_codes, capped, verdict_of):
+    """Apply the gate's thresholds and print what survives them.
+
+    MIN_CODE_HITS / MIN_CODE_SHARE are imported, not restated: they were
+    measured over 861 legacy tables (2026-09-27), where any-match flagged 308
+    and the thresholds flag 59. A sweep with its own looser rule would reopen
+    exactly that noise and would disagree with the write path about what a
+    pattern means.
+    """
+    rows = []
+    for (tbl, fam, inst), codes in found.items():
+        total = n_codes.get(tbl, 0)
+        if len(codes) < min(MIN_CODE_HITS, total or MIN_CODE_HITS) or \
+                len(codes) < MIN_CODE_SHARE * total:
+            continue
+        rows.append((len(codes), total, tbl, fam, inst, sorted(codes)))
+    for n, total, tbl, fam, inst, codes in sorted(rows, key=lambda r: -r[0]):
+        print(f"  LEAD {tbl}: {n} of {total} item code(s) match {inst} "
+              f"[{verdict_of.get(inst, '?')}] -- {', '.join(codes[:6])}"
+              f"{' ...' if len(codes) > 6 else ''}")
+    print(f"  {len(rows)} table(s) over the gate's thresholds "
+          f"({MIN_CODE_HITS}+ codes and {MIN_CODE_SHARE:.0%} of the table's codes), "
+          f"from {len(found)} raw pattern hit(s)")
+    if capped:
+        print(f"  {len(capped)} table(s) matched more codes than the sample "
+              f"carries, so their attribution is partial: {capped[:5]}")
+    print("  Response data from a restricted instrument ships; its WORDING does")
+    print("  not. A lead here means: are these codes the instrument's wording?")
+    print("  `pss1..pss10` is not; luu_2024_stai6's six STAI stems were. Renaming")
+    print("  a published code is neither cheap nor reversible, so this half")
+    print("  reports and never acts.")
+    return rows
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--version", default="next", choices=("current", "next"),
                     help="which shard version to sweep; 'next' is the draft that "
                          "reflects staged withdrawals, 'current' is what is published")
-    ap.add_argument("--codes-only", action="store_true")
+    ap.add_argument("--codes-only", action="store_true",
+                    help="skip the text surface and sweep item codes only")
+    ap.add_argument("--no-codes", action="store_true",
+                    help="skip the item-code surface")
+    ap.add_argument("--codes-shard", action="append", default=[],
+                    metavar="NAME",
+                    help="sweep codes in this response shard only (repeatable); "
+                         "the whole corpus is ~6,700 tables, so pilot on one")
     ap.add_argument("--csv", help="also write every text-surface hit to this CSV")
     args = ap.parse_args()
 
@@ -273,11 +457,48 @@ def main():
                                 col != "item_text" and (s, t, inst) not in base])
             print(f"wrote {len(hits)} hit(s) to {args.csv}")
 
-    print("\n=== item code surface (response tables) ===")
-    print("  Not yet wired to the response shards. The two known cases are")
-    print("  luu_2024_stai6 (irw#2123) and holden_2026_bsri (irw#2101); the remedy")
-    print("  for a published item code is an open question, so this half must")
-    print("  report only. See the register's match_item_code column.")
+    if args.no_codes:
+        print("\n=== item code surface: SKIPPED (--no-codes) ===")
+        return
+    print(f"\n=== item code surface, response tables ({args.version}) ===")
+    pats = [(r["instrument"], r["family"], r["match_item_code"])
+            for r in blocking if r["match_item_code"]]
+    print(f"  {len(pats)} of {len(blocking)} non-shipping rows carry a code pattern; "
+          f"the other {len(blocking) - len(pats)} cannot be swept on this surface")
+    owner, shards = core_shard_names()
+    if args.codes_shard:
+        unknown = [s for s in args.codes_shard if s not in shards]
+        if unknown:
+            print(f"  no such response shard: {unknown} (have {shards})")
+            return
+        shards = args.codes_shard
+    all_found, all_codes, all_skipped, all_capped = {}, {}, [], []
+    for shard in shards:
+        ds = redivis.organization(owner).dataset(shard, version=args.version)
+        tlist = ds.list_tables(max_results=2000)
+        tables = {t.name: t.properties["qualifiedReference"] for t in tlist}
+        print(f"{shard} ({args.version}): {len(tables)} tables")
+        found, n_codes, skipped, capped = code_scan(
+            redivis, tables, sorted(tables), pats)
+        all_found.update(found)
+        all_codes.update(n_codes)
+        all_skipped += skipped
+        all_capped += capped
+    rows = report_codes(all_found, all_codes, all_capped, verdict_of)
+    if all_skipped:
+        print(f"  NOT SWEPT ({len(all_skipped)} table(s) could not be queried): "
+              f"{all_skipped[:5]}{' ...' if len(all_skipped) > 5 else ''}")
+    if args.csv and rows:
+        out = args.csv.rsplit(".", 1)
+        path = f"{out[0]}_codes.{out[1]}" if len(out) == 2 else f"{args.csv}_codes"
+        with open(path, "w", newline="") as fh:
+            w = csv.writer(fh)
+            w.writerow(["table", "family", "instrument", "verdict", "n_hits",
+                        "n_codes", "codes"])
+            for n, total, tbl, fam, inst, codes in rows:
+                w.writerow([tbl, fam, inst, verdict_of.get(inst, ""), n, total,
+                            ";".join(codes)])
+        print(f"wrote {len(rows)} code lead(s) to {path}")
 
 
 if __name__ == "__main__":
