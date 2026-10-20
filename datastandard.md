@@ -46,6 +46,14 @@ own judgment, and do not skip it silently either: say what it is and ask.
 
 The one exception is **non-human (animal) data**, which the floor does not apply to (#2220). Animal studies are small by nature, often a few subjects with many trials each, so for them the floor would measure the wrong thing. Judge them by the complexity step below instead, and check that `resp` means what a modeller will assume: in a spontaneous-alternation maze, for example, it records which arm was chosen, not whether that was correct. Tag the `sample` as Animal.
 
+**Check the item count too: the floor is 3 distinct items.** Ruled 2026-10-19 by
+ben-domingue ("i can live with 3 items. 2 gets extreme"), settling six deferrals
+at once. A 3-item scale is thin but shippable; **2 items is not**, and 1 never
+was. The count is of distinct `item` values in the table as shipped, so a
+2-item block does not become shippable by being merged with an unrelated one.
+Note the leads filter's `8 <= items <= 700` band is a RANKING heuristic for
+choosing what to work next, not this floor — do not read it as an intake rule.
+
 **Assess complexity.** A dataset that clears the floor but is small, opaquely labeled, and in a non-standard format may not be worth the time. Large, well-structured datasets are higher priority.
 
 ---

@@ -81,3 +81,8 @@ journal_scout/cache/
 # Python
 __pycache__/
 *.pyc
+
+# A table built and validated but held from upload on a rights or provenance
+# question (see each directory's README.txt). Same lifecycle as irw_output/:
+# regenerable from its data/*.py script, and the README is the durable record.
+held_provenance_*/*.csv
