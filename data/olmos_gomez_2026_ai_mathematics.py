@@ -41,12 +41,16 @@ identifier anywhere in the 12-column file; this was re-verified off the source.
 from __future__ import annotations
 
 import io
+import sys
 from pathlib import Path
 
 import pandas as pd
 import requests
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(REPO_ROOT / "automated_finding"))
+from irw_validate.compat import run_qc  # noqa: E402
+
 OUT_DIR   = REPO_ROOT / "automated_finding" / "irw_output"
 ITEM_DIR  = REPO_ROOT / "automated_finding" / "itemtext_output"
 
@@ -55,6 +59,24 @@ FILE_ID = 14006774  # IA. MATH 853.xlsx
 UA      = {"User-Agent": "irw-batch/1.0 (research)"}
 
 TABLE = "olmos_gomez_2026_ai_mathematics"
+
+# Both are source-documented, never inferred from the observed scores. The
+# anchors are the article's Methods ("a five-point Likert scale from 1,
+# strongly disagree, to 5, strongly agree"); the construct labels are the
+# three first-order factors of its CFA, which is also why they are NOT in
+# `section_id` -- see the module docstring.
+PERMITTED_VALUES = [1, 2, 3, 4, 5]
+ITEM_CONSTRUCTS = {
+    "ai_lookup_theory":   "FACT1 instrumental use of AI for mathematics",
+    "ai_solve_equations": "FACT1 instrumental use of AI for mathematics",
+    "ai_solve_geometry":  "FACT1 instrumental use of AI for mathematics",
+    "ai_modelling":       "FACT1 instrumental use of AI for mathematics",
+    "ai_verify_solution": "FACT1 instrumental use of AI for mathematics",
+    "ai_create_practice": "FACT2 asking AI to generate practice",
+    "ai_makes_mistakes":  "FACT2 asking AI to generate practice",
+    "ai_unsure_reliable": "FACT3 trust in AI's mathematical reliability",
+    "ai_trust_answers":   "FACT3 trust in AI's mathematical reliability",
+}
 
 # Spanish header exactly as the spreadsheet spells it -> item code. The codes
 # come from the stems' content, so a one-position slip would be visible.
@@ -213,6 +235,20 @@ def build_itemtext(long: pd.DataFrame) -> pd.DataFrame:
 
 def main() -> None:
     long = convert()
+
+    # The gate, in the script rather than beside it: a rerun that silently
+    # breaks the table must not be able to write one. `fail` blocks; `warn`
+    # is printed and does not, since the resp-scale note is advisory.
+    checks = run_qc(long, permitted_values=PERMITTED_VALUES,
+                    item_constructs=ITEM_CONSTRUCTS)
+    bad = [c for c in checks if c.status == "fail"]
+    assert not bad, [(c.name, c.detail) for c in bad]
+    for c in checks:
+        if c.status == "warn":
+            print(f"  warn {c.name}: {c.detail}")
+    print(f"run_qc: {sum(c.status == 'pass' for c in checks)} pass / "
+          f"{sum(c.status == 'warn' for c in checks)} warn / 0 fail")
+
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     out = OUT_DIR / f"{TABLE}.csv"
     long.to_csv(out, index=False)
