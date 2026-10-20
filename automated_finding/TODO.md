@@ -36,6 +36,35 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   about `itemtext/itemtables/` and files pending RE-upload, a different thing
   from these staging dirs.
 
+## Repos batch 2026-10-19: 8 tables staged, 70 leads unworked (2026-10-20)
+
+Discovery, triage and a processing pass are done; standing records are written
+(`search_terms_log.csv` +135, `human_review/human_review_zenodo_2026-10-19.csv`,
+refined flags in `repo_triage_seen_keys.csv`, `BATCH_LOG.md`, 8 dictionary + 8
+tag + 2 provenance + 2 mapping + 2 rights-register rows). Leads and their
+verdicts are in `leads/repos_leads_2026-10-19.csv`.
+
+- [x] **Uploaded 2026-10-20**, confirmed by ben-domingue: the 8 response
+  tables (67,374 responses) into the newest shard and the 2 item text tables
+  into `irw_text`. `itemtext_provenance.csv` stamped `uploaded=2026-10-20` for
+  `feng_2023_fas` and `byrne_2026_health_info_sources`. **Both are in a draft
+  and still need releasing** -- as does everything ahead of them in this file.
+- [x] **The concurrent-session sweep is resolved.** Commit `f08d6007` on
+  `claude/olmos-gomez-2026-ai-mathematics` had swept in this batch's three
+  `data/*.py` scripts and its two new `instrument_rights_register.csv` rows
+  (FAS, HLQ). That session backed all five out itself in `5110f23d`, so each
+  now exists once, here. Nothing is owed at merge. `5110f23d` was still
+  unpushed as of 2026-10-20, so PR #3121 will show the fix only once that
+  session pushes.
+- [ ] **70 leads still unworked**: 53 `recoverable_format` (mostly "keep only
+  the N columns sharing one small integer domain, re-read"), 8
+  `worth_retrying`, 7 `aggregate_continuous`, 2 `pii_suspected` that still
+  need the structural-vs-incidental column check (zenodo 22749041, 20809).
+- [ ] **`zenodo.15254212` (reading engagement) was rejected on my judgement**
+  and is worth a second opinion if anyone disagrees: 1 never used by any of
+  260 respondents across 71 items, and every respondent uses at most 2
+  distinct values across a whole scale. Diagnostic is in the leads CSV.
+
 ## The 2026-10-19 upload happened: 78 tables are in the draft (2026-10-19)
 
 ben-domingue uploaded the 2026-10-19c and 2026-10-19d slices on 2026-10-19 --
@@ -109,13 +138,17 @@ safe command for any of them. Split by destination into `runs/`, described in
 `runs/STAGING.md`, with a per-file `MANIFEST.txt` (rows / ids / items / columns)
 in each:
 
-- `runs/stage_2026-10-19h/` -- this batch, 26 + 5, nothing uploaded.
+- `runs/uploaded_2026-10-20_nc11/` (was `stage_2026-10-19h/`) -- this batch,
+  26 + 5, all uploaded 2026-10-20.
 - `runs/uploaded_2026-10-19_openesm/` -- 30 PACO/STECCO/Ryvkina response tables
   and their 28 `__items`, **already released in `irw_5` v9.0** and live in
   `metadata.csv` / `itemtext_metadata.csv`. Kept as the record, never to be
   uploaded again.
-- [ ] `runs/stage_kemp_2019_date_fix/` -- **a pending repair nobody was tracking
-  as staged.** The three `kemp_2019_mss_*` rebuilds carry correct dates
+- [x] **`kemp_2019_mss_*` uploaded** (ben-domingue, confirmed 2026-10-20), a
+  REPLACE into `irw_4`; the three `metadata/table_changes.csv` rows are written
+  (#3110, `irw_version` blank until a manifest carries the release). Files kept
+  as the record in `runs/uploaded_2026-10-20_kemp_date_fix/`. It had been **a
+  pending repair nobody was tracking as staged**: The three `kemp_2019_mss_*` rebuilds carry correct dates
   (2017-10-11 to 2017-11-29); the LIVE tables in `irw_4` still read January
   1970, because irw_4 v14.0 was built from output staged ten minutes before
   #3100's fix landed. Commit 790384df says as much and deliberately left them
@@ -128,19 +161,26 @@ Also worth knowing: the 2026-10-19f slice's 18 tables were **not** among those
 
 ## From the 11 NC leads #3104 reopened (2026-10-19h, #3077)
 
-**26 tables / 282,482 responses staged in
-`automated_finding/runs/stage_2026-10-19h/`, nothing uploaded.** All 26 pass `irw-validate --profile upload` with zero
-failures and zero errors. (23 at first writing, plus the three the 3-item floor
+**26 tables / 282,482 responses, uploaded 2026-10-20** (ben-domingue
+confirmed the 5 item-text tables and then the 26 response tables). Files kept
+as the record in `automated_finding/runs/uploaded_2026-10-20_nc11/`. All 26 passed
+`irw-validate --profile upload` with zero failures and zero errors. (23 at first writing, plus the three the 3-item floor
 ruled the same day unblocked: `jones_2026_agi`, `jones_2026_tech_worry`,
 `baseke_2026_besaa3`.) 4 of the 11 leads carried data; the other 7 are
 closed with reasons in their leads files. Every `todo` row across the
 `repos_ledger_remine_2026-10-18_*` files is gone again (0 remaining).
 
-- [ ] **Upload is yours:** `red_up runs/stage_2026-10-19h/resp` (26 tables),
-  then `red_up runs/stage_2026-10-19h/items` (5 `__items.csv`). Response tables
-  first. The batch is no longer in `irw_output/`: on 2026-10-20 that folder held
-  three unrelated things at once and was split by destination -- see
-  `runs/STAGING.md`, and the 2026-10-20a BATCH_LOG entry for what was in there.
+- [x] **Uploaded in full** (ben-domingue, confirmed 2026-10-20): 26 response
+  tables and 5 item-text tables. `uploaded=2026-10-20` stamped on the five
+  `itemtext_provenance.csv` rows, the batch's 26 `metadata/data_notes.csv` rows
+  written (`baseke_2026_css11` among them), dictionary and tag rows staged. The
+  files are kept as the record in `runs/uploaded_2026-10-20_nc11/` -- do not
+  point `red_up` at them, uploads append. See `runs/STAGING.md` and the
+  2026-10-20a BATCH_LOG entry for what else that folder had been holding.
+- [ ] **Release is owed** -- everything landed on the unreleased draft. After
+  it: `metadata/covariate_labels/build.py` (the standing item at the top of this
+  file; `harvest.py` has already run for this batch) and nothing else from this
+  batch.
 - [ ] **`gilbert_2026_dep_symptoms` is HELD on provenance, and one message
   closes it.** The deposit (`10.7910/DVN/G68C5Y`, CC BY-NC-SA 4.0) redistributes
   a psychotherapy RCT's depression data that it never names -- the analysis
@@ -151,10 +191,10 @@ closed with reasons in their leads files. Every `todo` row across the
   `automated_finding/held_provenance_2026-10-19/`. **Asked in #3120**
   (assigned to @joshgilbert1994, 2026-10-19): either he names the source trial
   and its terms, or he confirms redistribution is fine. The table moves into
-  `runs/stage_2026-10-19h/resp/` unchanged if the answer is clean, and the script stays as the
+  a fresh staging folder unchanged if the answer is clean, and the script stays as the
   record if it is not.
 - [x] **Item text: 4 of the 8 candidate tables are STAGED** in
-  `automated_finding/runs/stage_2026-10-19h/items/` (179 rows; 5 tables and 200
+  `automated_finding/runs/uploaded_2026-10-20_nc11/items/` (179 rows; 5 tables and 200
   rows after the 3-item ruling added `jones_2026_agi`), all four through
   `normalize_nulls.R` -> `validate_items.R --resp-csv` -> `audit_batch.R
   --resp-dir` (4/4 PASS, no anomalies) and `irw-validate` (ok, nothing to
@@ -192,11 +232,16 @@ closed with reasons in their leads files. Every `todo` row across the
   seven appear on the next build after the release, and running it now would
   have swept 8,084 lines of other batches' pending harvests into this PR. That
   build is the standing item at the top of this file, not a new one.
-- [ ] **Issues-page entry owed at publish for `baseke_2026_css11`:** the paper
-  and the deposit codebook both document five options "rated from 0 (not
-  stressful at all) to 4 (extremely stressful)", while the shared data holds
-  exactly three distinct values on all eleven items, coded 1, 3 and 5. Shipped
-  as recorded; the anchor-to-code mapping is what is unknown.
+- [x] **The `baseke_2026_css11` caveat is written, as a data note** (2026-10-20):
+  the paper and the deposit codebook both document five options "rated from 0
+  (not stressful at all) to 4 (extremely stressful)", while the shared data holds
+  exactly three distinct values on all eleven items, coded 1, 3 and 5. Shipped as
+  recorded; the anchor-to-code mapping is what is unknown. It went to
+  `metadata/data_notes.csv`, **not** `itemtext_issues.qmd`: that page takes
+  concrete text-vs-table mismatches, and this is a source caveat about response
+  coding, which is what data notes are for (#2529). The same append covers all
+  26 tables of the batch -- one row each, which this batch had been owing and no
+  earlier write-up had listed.
 - [ ] **`tags_auto_2026-10-19d.csv` (23 rows), `tags_auto_2026-10-19e.csv`
   (3 rows) and `tags_auto_2026-10-19j.csv` (1 row)** are written and, like
   their predecessors, deliberately separate; merging them into
