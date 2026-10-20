@@ -863,8 +863,42 @@ output-format one:
     label and the values tell you the column's job was to collect a
     birthdate. Whole candidate skipped.
 
-  **Full postal codes are STRUCTURAL. Ruled 2026-10-19 — do not
-  re-litigate.** The Parkins deposit's `q37_0` ("What is your postal code?")
+  **GEOGRAPHIC CODES ARE NOT A WHOLE-CANDIDATE SKIP. Ruled 2026-10-20 by
+  ben-domingue, superseding the 2026-10-19 postal-code ruling below.** The
+  seam is no longer structural-vs-incidental for every identifier class. It
+  now turns on WHAT the identifier is:
+
+  - **A name or an email address in the data -> skip the whole candidate.**
+    Unchanged, and this is the tier the whole-candidate skip exists for.
+  - **A postal code, ZIP, or similar geographic/administrative code -> DROP
+    THE COLUMN and ship the rest of the table.** Not a skip. Do not carry it
+    forward in any form: not as a `cov_*`, not hashed, not truncated to a
+    coarser prefix. Drop it and say so in the script header.
+
+  ben-domingue's words, verbatim: "i want to distinguish between names and
+  emails. if those are in data, we should skip the whole table. if zip or
+  such codes are there, we should *not include* them in the irw but we can
+  post other data from the table".
+
+  This reversed two live skips on the day it was made: `10.7910/DVN/QIEEJU`
+  (Henderson, 2,862 respondents x 5 waves, skipped on `inputzip_w1`..`_w5`)
+  and `10.5061/dryad.6vs80` (HFMD, 3,500 patients, skipped on an 8-digit
+  `addressid`). Both are geographic codes, so both ship without those
+  columns. The two skips the same batch made on an `Email Address` column
+  (`zenodo.22749041`) and a `NOMBRE` column of schoolchildren's real surnames
+  (`zenodo.20809`) stand unchanged, because those are the name/email tier.
+
+  Dates of birth, IP/GPS coordinates, phone numbers, national ID numbers and
+  free-text clinical narratives were not named in this ruling and stay where
+  the paragraphs below put them. A date of birth in particular is neither a
+  name/email nor a geographic code — treat it as still disqualifying and ask
+  if it is the only thing blocking a strong candidate.
+
+  The superseded reasoning is kept below because the detector it produced is
+  still the right code; only the verdict it feeds changed.
+
+  **Full postal codes are STRUCTURAL. Ruled 2026-10-19 — SUPERSEDED
+  2026-10-20, see above; do not re-litigate the part that still stands.** The Parkins deposit's `q37_0` ("What is your postal code?")
   holds 2,917 full six-character Canadian postal codes over 3,000
   respondents, beside age, gender, education and income in the same file. A
   six-character Canadian postal code locates a respondent at block level,

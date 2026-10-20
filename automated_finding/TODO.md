@@ -3,6 +3,196 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## Repos batch 2026-10-20: 87 tables UPLOADED, release owed (2026-10-20)
+
+Six parallel agents; full write-up in `BATCH_LOG.md`. **87 response tables /
+1,104,108 responses** in `irw_output/` (+ `MANIFEST.txt`), 7 item text tables in
+`itemtext_output/`, all passing `irw-validate --profile upload` with zero
+failures. 87 dictionary rows and 87 tag rows staged. **Five collisions** were
+caught and dropped into `runs/dropped_2026-10-20/` -- including eight
+already-committed `henderson_2023_la_covid_*` tables that proved to be the
+wave-1 slice of a 5-wave superset (100% identical on 10,997/10,997 cells), now
+in `runs/dropped_2026-10-20/superseded_by_lapanel/`. Read the BATCH_LOG entry
+before touching that folder or re-adding anything from it.
+
+- [x] **`zheng_2018_hfmd_eq5d` mobility level 4: RESOLVED 2026-10-20**, settled
+  from the data rather than the paper (96.8% of the level-4 cells are
+  pre-ambulatory infants; a severity level would track severity, not age). The
+  567 cells are dropped as not-applicable, all 3,500 ids retained, all four
+  dimensions now 1-3. Not confirmed against the source paper, which was never
+  reached -- revisit if it documents level 4 as something else.
+- [x] **UPLOADED 2026-10-20**, confirmed by ben-domingue: all 87 response
+  tables and all 7 item text tables. 86 of the 87 verified on row count in the
+  first run; `zheng_2018_hfmd_eq5d` failed `red_up`'s row-count check and was
+  re-uploaded on its own, which is a true replace (`push_one` deletes any
+  existing table of the name first). No stray uploads reported. The cause was
+  mine: I rewrote that CSV in `irw_output/` at 15:40 to drop the mobility
+  level-4 cells, after having told Ben the folder was ready, so `red_up`'s
+  row count and its file stream straddled the edit. **Lesson: once the upload
+  folder is handed over, do not edit it -- stage the fix elsewhere and say so.**
+  `itemtext_provenance.csv` stamped `uploaded=2026-10-20` for the 7 shipped item
+  text tables. Dictionary and tag coverage verified 87/87 each, with the item
+  text flag agreeing with what shipped.
+- [ ] **Release is owed** -- everything landed on the unreleased draft of shard 7
+  and `irw_text`, as does everything ahead of it in this file. After the release:
+  `metadata/covariate_labels/build.py`, then commit `covariate_labels.csv`.
+- [ ] **`metadata/data_notes.csv` rows are owed for this batch** and have not
+  been written. Several tables carry a caveat a user would want on the table
+  page: `wu_2025_flow_state` (`id` rests on a positional pretest/posttest
+  pairing, no respondent key in either file), `yang_2026_vocabulary_size`
+  (scored against a key derived from the responses, verified to reproduce the
+  deposit's own total for 275/275), `yang_2021_butterfly_knowledge` (the scale
+  midpoint 3 is an explicit "unknown", 34% of responses -- a real trap for
+  anyone treating it as ordinal), `zheng_2018_hfmd_eq5d` (567 mobility
+  not-applicable cells dropped), `choi_2021_job_satisfaction` (two rows share an
+  MTurk id, so `id` is the row index and does not identify a person in 2 cases),
+  and the `vezhodulu_2025_yabis_a` positional actual/ideal read.
+- [x] **Tag rows written for all 87**, in `automated_finding/tags_auto_2026-10-20.csv`
+  (`Rater=claude-auto`). Deliberately a separate file: merging into
+  `tags/tags_auto.csv` is a reviewed step, same as the 10-18 batch.
+  **Do NOT merge `runs/worklist_2026-10-20/tagrows_s5.jsonl`** -- its 9 rows are
+  free text, not vocabulary-compliant (`Age Range: "Adult"`,
+  `Construct type: "Non-cognitive"`), and would halt `03_tags.R` on `TAG_VOCAB`.
+  The 87-row file supersedes them. Known gaps in it: `Age Range` blank on 19 rows
+  (not inferred from "college students" or a country; several carry `cov_age`, so
+  the computed rule gets them later) and `Child Age` blank on 81.
+- [ ] **Item text for the five author-written COVID batteries is SHIPPED** (7
+  tables), but `henderson_2023_lapanel_racial_resent` and
+  `henderson_2023_lapanel_tipi` are HELD for want of register rows -- Kinder &
+  Sanders and TIPI (Gosling, Rentfrow & Swann). Their response tables ship. Both
+  holds have provenance rows saying so.
+- [ ] **`codebook_url` is missing for the 9 discovery-slice tables.** Their
+  dictionary rows staged without it, so nothing reached
+  `codebook_at_ingest.csv`. The other 76 recorded `"none"`. Needs a pass over
+  those 9 deposits rather than a guessed value.
+- [x] **8 rights-register rows written**, all append-only (`git diff --numstat`
+  = 8/0), 360 data rows now. Three rest on a located clause: the **Flow Scales
+  suite** is `block` on Mind Garden's ToS SS3/SS5(d) prohibition on reproducing or
+  circulating assessment items (not the fee model, which is only corroborative) --
+  and per the 2026-09-29 #2401 ruling that a block covers every language, this
+  reaches the **Chinese CDFS-2** too, so `wu_2025_flow_state`'s Chinese stems
+  (sitting in its SPSS variable labels) stay unshipped. **ATI is `ship`** on the
+  authors' own "The scale is free to use" grant at ati-scale.org, and the grant
+  reaches its 13 published translations. **The VST is `hold`** on a located
+  near-miss: Nation's page grants permission for the *Updated VLT* alone, which
+  is a different instrument -- quoted in the row so nobody re-finds it and
+  misreads it. Five holds for want of terms: FSS-1 Portuguese, Ryff originals,
+  MUIS, Kinder & Sanders, BESAA.
+- [ ] **Two corrections that came out of that research, both worth acting on:**
+  - **`data/shan_2024_bfi_s.py` needs checking against register line 307.** The
+    BFI-10 row already blocks "any other short form built from BFI-44 or BFI-2
+    items, all translations", and your 2026-10-17 ruling (a short form of a
+    blocked long form is blocked) reaches the Gerlitz & Schupp BFI-S by that
+    row's own wording. If that script shipped BFI-S item text, it is live and
+    needs review.
+  - **`abu_tabar_2021_muis` is live and the MUIS is now `hold`.** Its deposit has
+    the English stems in SPSS variable labels, so confirm no MUIS item text was
+    ever staged rather than assuming it. Nothing appears to need withdrawing.
+- [ ] **`schadelbauer_2023_ati` item text is now unblocked and cheap** -- ATI is
+  `ship`, and the 9 verbatim stems are in the deposit's `DATA_CODING.txt`. This
+  is the single cheapest item-text job outstanding. Note the deposit's "[1-5]"
+  annotation is wrong: 6 is observed on all nine items and the table ships 1-6.
+- [ ] **Register rows still owed** (the earlier list, minus what was written):
+  the **Spanish DASS-21** translation row on the Greek pattern (still open --
+  the agent spent its box on the three-table Flow row instead), CaMir-R, BVAQ-B,
+  Celebrity Attitude Scale, YABIS, B-POHW, **BarOn EQ-i:YV / ICE:NA** (commercial,
+  MHS -- likely a quick located `block`), and PHC-PSQ (study-authored, likely
+  `ship`).
+- [ ] **The Kinder & Sanders hold has a concrete next step.**
+  electionstudies.org returns HTTP 403 behind a Cloudflare JS interstitial to an
+  agent, so the ANES terms were never actually read -- only search summaries,
+  and nothing was quoted. Fetch those pages from a real browser session, or read
+  the terms inside an ANES study's own documentation PDF, which travels with the
+  data and is not Cloudflare-fronted. Separate question: ANES terms would govern
+  the ANES fielding, but authorship is Kinder & Sanders (1996, *Divided by
+  Color*), so book-sourced wording is its own ask. This holds back
+  `henderson_2023_lapanel_racial_resent`.
+- [ ] **Ryff: a trap is recorded in the row.** The Wisconsin page's "Use of
+  scoring code is granted under CC BY-SA 4.0" covers the **scoring code only**;
+  its actual statement is "We do not have copyright authority over these
+  measures and cannot grant permission for use." Because the original is held,
+  no stand-in exists under irw#2121, so `ramirezparedes_2026_ryff` ships nothing
+  in either language.
+- [ ] **BESAA has an unresolved citation question**: a secondary source dates the
+  adult/adolescent form to 2011 rather than 2001, which could mean the row points
+  at the wrong article.
+- [ ] **15 rights-register rows are owed**, each with a located clause rather
+  than an asserted one. None blocks a response table; all block item text.
+  Stated by the agents, not written, because a defensible row needs terms
+  quoted and I ran out of box:
+  - **Flow State Scale / FSS-2 / DFSS-2** (Jackson & Marsh 1996; Jackson &
+    Eklund 2002) -- distributed under licence by Mind Garden, a located fact.
+    Proposed `hold`. Touches `borges_2026_flow_musicians`, `wu_2025_flow_state`.
+  - Chinese FSS-2/DFSS-2 ("CDFS-2") as administered by Wu 2025 -- translation,
+    own terms unestablished. Proposed `hold`. 33 stems sit in the .sav labels,
+    so cheap the moment the original clears.
+  - Portuguese FSS-1 adaptation (figshare 30166636 / 32995919) -- publisher
+    unlocated. Proposed `hold`.
+  - Ryff Scales of Psychological Well-Being + its Spanish adaptation (42 stems
+    present in the xlsx headers). Proposed `hold`. The register has no row for
+    the *original* Ryff either.
+  - Kinder & Sanders racial-resentment battery -- proposed `hold`; a permission
+    would live in the ANES terms if one exists.
+  - DASS-21 **Spanish** translation -- parallel to the existing Greek row; ship
+    the public-domain English as `translated_substitute` under irw#2121.
+  - BESAA / BESAA-S (Mendelson, Mendelson & White 2001) -- no row; the
+    register's only body-esteem row is a different instrument (Franzoi &
+    Shields, `block`).
+  - CaMir-R (Balluerka et al. Spanish adaptation) -- no row.
+  - MUIS (Mishel 1981/1988) -- stems in hand in the CC0 deposit; proposed
+    `hold`. Also relevant to the already-live `abu_tabar_2021_muis`.
+  - McKnight et al. technology-trust scales -- proposed `note`.
+  - BFI short form (Rammstedt & John / Gerlitz & Schupp) -- proposed `note`; a
+    citation-only `ship` is plausible but was not verified.
+  - ATI scale (Franke, Attig & Wessel 2019) -- proposed `ship`, published CC BY
+    with a free-use statement, but **fetch the statement before shipping**.
+  - Celebrity Attitude Scale and YABIS (parts A and B) -- proposed `note`.
+  - BVAQ-B; BarOn EQ-i:YV / ICE:NA (commercial); Vocabulary Size Test (Nation &
+    Beglar 2007); B-POHW and its English original; adapted L2MSS stems -- no
+    rows. PHC-PSQ is study-authored and could be registered `ship`.
+- [ ] **`covariate_labels/harvest.py --commit HEAD <stem>`** is owed for the
+  scripts in this batch that read `.sav`/`.dta` and ship `cov_*`. Not run for
+  any of them.
+- [ ] **Henderson waves 2-5 are ~4x the shipped volume and need a design call
+  first.** Only wave 1 shipped (8 tables, 1,000 ids). The five wave files are
+  **cumulative**, not parallel: wave 1 is 191 columns, wave 5 is 1,120, each
+  adding that wave's batteries with a `_wN` suffix. The wave-5 file carries all
+  five waves wide and its `caseid_w5` is complete for 1,000 respondents, but
+  **only 359 of them have a `caseid_w1`** -- the panel was refreshed, so wave 5
+  is NOT a superset of wave 1. A correct 5-wave build merges all five files on
+  their per-wave `caseid_wN` and would **replace** the eight wave-1 tables
+  rather than add to them. Wave 2's id column is `caseid_w2`, not `caseid`,
+  which is what made the naive read fail.
+- [ ] **Triage of the 2026-10-20b sweep is 394/1,174.** Resume, idempotent and
+  safe to re-run:
+  `python3 irw_batch_updated.py runs/candidates_2026-10-20b.csv --out runs/irw_triage_2026-10-20b.csv --resume --retriage`
+  Checkpoint: `runs/irw_triage_2026-10-20b.checkpoint.jsonl` (derived from the
+  `--out` name, so it must be that exact `--out`). Afterwards **regenerate
+  `leads/repos_leads_2026-10-20.csv`** -- 780 of its 844 rows are
+  `origin_flag=untriaged` and will move into real buckets.
+- [ ] **`sadish_2021_covid_beliefs`: the live table has 6 items, this batch
+  built 7** over the same 913 ids (9,398 rows vs 8,056). The new build was
+  dropped rather than shipped, because uploads append. If the 7th item is
+  right, this is a delete-then-recreate replace, not an upload.
+- [ ] **Widen the pre-write duplicate check.** `grep -rl "DOI: <doi>"
+  ../data/*.py` misses a script whose `# DOI:` line holds the *paper* DOI while
+  the data DOI sits on `# Source:`/`# Data:`. That is how `10.7910/DVN/VWRTAW`
+  was built twice (caught and withdrawn mid-batch) and how `sadish` reached
+  consolidation. Grep the whole header.
+- [ ] **Fold the Step 2b checkpoint-subset trick into the pipeline.**
+  `--retriage` only chains after the whole input finishes, so an interrupted run
+  yields no Step 2b at all. A candidates file restricted to already-checkpointed
+  rows reaches it in seconds; helper is in the discovery agent's scratchpad.
+- [ ] **Three leads worth one retry, not rejected**: Mendeley
+  `10.17632/3ffkvnzypc` (152 ids / 39 items, CC BY) -- the only blocker was
+  Mendeley's file-listing API returning `{"error":400}` for `folder_id=root`.
+  `zenodo.8401390` (119 ids x 10 items, 0-2 half steps, CC BY) -- clean on every
+  gate, but the deposit cannot tell you which instrument the ten columns are, so
+  shipping means guessing the construct. OSF `v4jqw` (HSPS Czech, ~1,143
+  respondents) and `zenodo.13133336` (~400 diabetic patients) are
+  **licence-blocked with no licence at all** and are in
+  `license_blocked_candidates.csv` with contributors -- both worth an email.
+
 ## Uploaded: one table + its item text (2026-10-19j, confirmed 2026-10-20)
 
 - [x] `olmos_gomez_2026_ai_mathematics` (7,677 rows, 853 x 9) + its

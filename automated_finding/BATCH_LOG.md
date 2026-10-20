@@ -7,6 +7,248 @@ checkboxes here just mean "this line item is settled," not "actionable."
 
 **For currently open action items, see `TODO.md`.**
 
+## Repos batch 2026-10-20: five parallel agents, 85 tables staged, 798,062 responses
+
+Ben asked for "serious searching" in a three-hour box with a hard 4pm stop, and
+for several agents at once. Five ran concurrently: four worked disjoint slices of
+the 63 actionable leads left unworked by the 2026-10-19 batch, and one ran a
+fresh 135-query discovery sweep. A sixth was launched at 15:05 on the two leads
+Ben's PII ruling unblocked (below).
+
+**Result: 87 response tables, 1,104,108 responses, all 87 passing
+`irw-validate --profile upload` with zero failures; 7 item text tables, gate
+chain green; 87 tag rows.** **All 87 response tables and all 7 item text tables were UPLOADED on
+2026-10-20** (ben-domingue), into shard 7 and `irw_text`, both still unreleased.
+87 dictionary rows via `stage_dict_row.py` and 87 tag rows in
+`tags_auto_2026-10-20.csv`; coverage verified 87/87 on both.
+
+86 of the 87 verified on row count in the first run. `zheng_2018_hfmd_eq5d`
+failed `red_up`'s check and was re-uploaded alone -- a true replace, since
+`push_one` deletes any existing table of the name before creating it. No stray
+uploads. The cause was an orchestration error rather than a data one: the
+mobility level-4 fix was written into `irw_output/` at 15:40, after the folder
+had been handed over for upload, so `red_up`'s row count and its file stream
+straddled the edit and disagreed by exactly the 567 dropped cells. The guard
+caught it, which is the system working -- a mismatch sets `result.error` without
+raising, so the table stays in the draft unverified rather than passing silently.
+**Rule for next time: once the upload folder is handed over, it is frozen; stage
+a late fix somewhere else and say so explicitly.**
+
+### Slice outcomes
+
+| slice | leads | shipped | tables | rejected/skipped |
+|---|---|---|---|---|
+| 1 | 16 | 7 | 21 | 2 blocked_licence, 5 rejected_content, 2 skipped_pii |
+| 2 | 16 | 8 | 24 | 5 rejected_content, 1 skipped_pii, 1 already-live withdrawn |
+| 3 | 16 | 8 | 25 | 5 rejected_content, 1 blocked_licence, 1 skipped_pii, 2 already-shipped |
+| 4 | 15 | 4 | 6 | 5 rejected_content, 1 skipped_pii, 3 already-live, 2 below floor |
+| 5 (discovery) | 1,174 cands | 6 deposits | 9 | see below |
+
+### THE PII RULE CHANGED (ben-domingue, 2026-10-20)
+
+Verbatim: "i want to distinguish between names and emails. if those are in data,
+we should skip the whole table. if zip or such codes are there, we should *not
+include* them in the irw but we can post other data from the table".
+
+This **supersedes the 2026-10-19 full-postal-code ruling**. Names and emails stay
+a whole-candidate skip; a postal code, ZIP or similar geographic/administrative
+code is now a dropped column, not a skip. Recorded in the SKILL's PII section and
+cross-referenced in `datastandard.md`'s "PII columns". It reversed two skips made
+the same afternoon -- `10.7910/DVN/QIEEJU` (Henderson, 2,862 ids x 5 waves, on
+`inputzip_w1..w5`) and `10.5061/dryad.6vs80` (HFMD, 3,500 patients, on an
+8-digit `addressid`) -- both handed to the sixth agent. Two skips stand
+unchanged because they are the name/email tier: `zenodo.22749041` (a Google
+Forms export whose second column is literally `Email Address`, populated across
+all 231 rows) and `zenodo.20809` (`NOMBRE`, 115 real surnames of 5th-grade
+children). Dates of birth, IP/GPS, phone and national ID were not named in the
+ruling and stay disqualifying.
+
+### Four collisions caught at consolidation -- none visible to `red_up`
+
+The parallel-agent design made this the batch's main risk, so every staged table
+was checked for name collisions across slices, name collisions against live
+`metadata.csv`, and byte/content-identical duplicates under non-colliding names.
+All four found are in `runs/dropped_2026-10-20/`:
+
+1. **The Portuguese-musicians FSS-1 study is deposited three times on figshare**
+   (30166957, 30166636, 32995919) and three agents each built it. Slice 3's
+   `borges_2026_flow_musicians` (382 ids) is a verified strict superset of slice
+   2's 194-id build: joined on (id, item), 6,962 shared cells, 100% agreement,
+   no cell in theirs absent from mine. Kept slice 3's; dropped slice 1's
+   382-id duplicate and slice 2's 194-id subset. Ben approved the `borges_2026`
+   attribution -- the 382-id deposits list only the placeholder "Research Team",
+   and the 194-id sibling names Nery Borges.
+2. **`sadish_2021_covid_beliefs` is already live** with 6 items / 8,056 rows;
+   the new build had 7 items / 9,398 rows over the same 913 ids. Dropped rather
+   than shipped, because uploads append. The extra item is a real potential
+   improvement and is in `TODO.md`.
+3. **`duplaga_2026_eheals` collides in NAME with a different live table**
+   (live: 800 ids / 10 items; staged: 561 ids / 8 items, parents of children
+   with IBD). Renamed `duplaga_2026_eheals_parents`.
+4. **`sakal_2026_ai_resistance`** -- staged file was not a duplicate but a
+   repair; see below.
+
+A process note from slice 2, worth acting on: the SKILL's
+`grep -rl "DOI: <doi>" ../data/*.py` pre-write check **does not fire** when the
+existing script's `# DOI:` line carries the *paper* DOI and the data DOI appears
+only on `# Source:`/`# Data:`. That is how `10.7910/DVN/VWRTAW` got built twice
+(caught, withdrawn) and how `sadish` reached consolidation. Widen the grep to
+the whole header.
+
+### A fifth collision, and the biggest: the Henderson panel was shipped twice
+
+The sixth agent's QIEEJU build exposed the eight `henderson_2023_la_covid_*`
+tables -- already committed -- as the wave-1 slice of the same panel. QIEEJU's
+own ReadMe points at `10.7910/DVN/1IWRQA` as the project depository, and two
+checks settled it: all 1,000 ids in each of the eight are `caseid_w1` values in
+QIEEJU (1000/1000, and 0/1000 against waves 2-5, because caseid is re-issued per
+wave), and joining on (id, item) gives 10,997 of 10,997 cells with `resp`
+identical in 100.0% of them.
+
+**The eight were pulled and the 5-wave superset ships instead** -- 9
+`henderson_2023_lapanel_*` tables, 2,862 respondents, keyed on the cross-wave
+`panelnum` so the longitudinal structure is actually usable, where the retired
+eight were keyed on wave-1 `caseid` and did not link across waves. `policy_support`
+and `comfort`, the two constructs the eight held that the first seven lapanel
+tables did not, were added from QIEEJU's un-shipped `q*` columns and turned out to
+exist in all five waves too. Their dictionary, provenance and mapping rows were
+reverted. Nothing had been uploaded, so this cost no withdrawal. The retired CSVs
+are in `runs/dropped_2026-10-20/superseded_by_lapanel/`.
+
+`masterfile_wide.dta` is one wide file rather than five per-wave files, so the
+cumulative-file trap the 1IWRQA build hit does not arise here.
+
+**Stata truncates variable labels at 80 characters, and 317 of that file's labels
+sit at the cap, cut mid-word** -- q20 ends `"...will get sick from the coronavirus ("`.
+Item text was therefore built from the SPSS variable labels of the 1IWRQA wave-1
+file, joined by question number, and the builder asserts no stem looks truncated.
+Anyone extracting item text from a `.dta` should expect this; the Stata labels
+looked perfectly usable and were not.
+
+A second prime-commandment catch, worth recording because it confirms the call not
+to re-key the retired item text: the new builder first emitted `item` as
+`<battery>_<suffix>`, copying the retired build's convention, while its own response
+tables carry the bare suffix. `validate_items.R` failed all 7 on item-set mismatch.
+The two builds derive item codes independently and genuinely do not agree.
+
+### `zheng_2018_hfmd_eq5d`: mobility level 4 settled from the data, cells dropped
+
+The build shipped `mobility` as 1-4 where its three sibling EQ-5D dimensions run
+1-3, flagging the 567 level-4 cells (16.2%) as needing the source paper. The
+paper was never reached, but the data settles it without one: the level-4 cells
+are 96.8% concentrated in the two youngest age bands -- 37.9% at 6m-1yr against
+1.6% of the 1-3 cells, 58.9% at 1-2yrs against 26.7% -- and essentially vanish
+above age 3 (0.4% at 3-4yrs, 0.0% at 4-5yrs). A genuine worst-health level would
+track severity, not age; severity is only mildly elevated among them (42.5% vs
+34.0%), nowhere near enough for an age gradient that steep, and those same
+patients answer the other three dimensions close to normally. The code means the
+child is pre-ambulatory and walking cannot be assessed.
+
+Shipped as `resp=4` it would have put a non-ordinal meaning on an ordinal scale,
+which is the `resp_ambiguous` defect class. So the 567 cells are dropped and
+those children carry three dimensions instead of four: 14,000 -> 13,433 rows, all
+3,500 ids retained, all four dimensions now 1-3. The `resp_scale_nested_support`
+warning cleared with it. Diagnostic and reasoning are in the script header.
+
+### Corpus-trust finding: an undocumented reversal in a live table, left as is
+
+Slice 4 found that the live `sakal_2026_ai_resistance` carries an undocumented
+reversal on 5 of its 27 items. The authors published a corrected deposit
+(`zenodo.23453429`) whose codebook states that in v1 the five Acceptance /
+Perceived Benefit items KBL_41..KBL_45 "were stored reverse-scored (6 - x),
+although this was not documented", and that v2 restores 1-5. Verified: v2 is
+identical to v1 on the other 22 items and differs on those five by exactly
+`resp -> 6 - resp`.
+
+**ben-domingue ruled: leave it as is** -- "if this data is already on redivis we
+can leave as is. i don't make guarantees about the direction ordinal item
+responses are recorded". The rebuild and its script are kept in
+`runs/dropped_2026-10-20/` as the record. The shipped item text is unaffected
+(stems unchanged).
+
+### Discovery sweep 2026-10-20b
+
+15 genuinely new English terms x 9 languages = **135 variants, all in one run**,
+all appended to `search_terms_log.csv` (10,080 -> 10,215). Terms were chosen in
+different territory from the 10-19 batch's anxiety/wellbeing surveys: cognitive
+and ability tasks (number line estimation, rapid automatized naming,
+grammaticality judgment, vocabulary knowledge, numeracy, music aptitude, L2
+proficiency, autism quotient, dementia screening) and clinical-professional
+instruments (oral health, nutrition knowledge, driver behaviour, breastfeeding
+self-efficacy, nurse competence, civic knowledge). Three translations were
+swapped after a dedup check found them already logged.
+
+**1,174 candidates; 394 triaged by the deadline** (211 no_usable_file, 86
+human_assistance, 65 download_failed, 18 not_item_response, 4 below_min_n, 4
+pii_suspected, 3 error, 2 good, 1 license_restricted). Step 2b sub-classified
+the 86: 38 not_item_response, 17 recoverable_format, 17 worth_retrying, 13
+human_review, 1 aggregate_continuous, 0 conj. Both bookkeeping lines appeared;
+the agent verified the underlying state rather than trusting them -- 183 refined
+flags are recorded against 2026-10-20 rows in `repo_triage_seen_keys.csv` and
+`human_review/human_review_figshare_2026-10-20.csv` holds 13 rows.
+
+Two findings from that run worth carrying:
+
+- **`--retriage` chains Step 2b only after the WHOLE input finishes**, so a run
+  still going at a deadline produces neither line -- the SKILL's silent-skip
+  shape reached by a new route. The agent worked around it with a
+  checkpoint-subset trick (`--resume --retriage` over only the already-
+  checkpointed rows reaches Step 2b in seconds, downloading nothing). Worth
+  folding into the pipeline.
+- The human_review archive filename derives from a row's source, not the run
+  mode, so a repos-mode run produced `human_review_figshare_2026-10-20.csv`
+  rather than a `_batchN` name.
+
+`leads/repos_leads_2026-10-20.csv` holds **844 rows**, of which 780 are
+`origin_flag=untriaged` -- candidates discovery found that triage never reached.
+They are deliberately written down: they are not in `repo_triage_seen_keys.csv`,
+but their terms ARE in `search_terms_log.csv`, so nothing would ever resurface
+them. 23 carry a hand-written verdict with its diagnostic.
+
+### Two gate behaviours worth knowing
+
+- **A registered `ship` is invisible to the gate, and a registered `block` can
+  be missed by it.** `GSS Wordsum` is registered `block` and the gate did NOT
+  warn, because its `match_item_code` pattern cannot match the deposit's
+  `ws1..ws10`. Checking by name is what caught it. Conversely the register's
+  CD-RISC row false-positived on `ahmad_2020_pharmacy_satisfaction`'s `C1/C2/C3`,
+  which are the PHC-PSQ's parking/transport/home convenience items.
+- The 2026-10-19 `recoverable_format` flag was right about 7 of 11 leads
+  carrying it and wrong about 4. What separated the wins: the raw file had a
+  contiguous run of same-domain integer columns with an instrument abbreviation
+  in the header. It never fired on the losses because those files have no such
+  run -- they are composite-only deposits with nothing to recover.
+
+### Item text
+
+7 tables shipped, all `henderson_2023_la_covid_*`, `mapping_basis=data_labels` /
+`text_source=study_materials`, so no `verify_<table>.R` is owed. Gate chain green
+(`normalize_nulls.R` 7/7, `validate_items.R --resp-csv` per table,
+`audit_batch.R --resp-dir` 6 PASS / 1 WARN, `irw-validate` clean). The one WARN
+is an item screened on "children under 18 in the household" -- missingness by
+design, not a conflation -- and **no table earns an `itemtext_issues.qmd` entry**;
+a per-item mismatch scan over all 7 found no unmatched resp, no blank
+`item_text`, no text on two items. Instruments identified from the stems: two
+searched verbatim, matching no published scale (hits are the LSU Manship
+School's own survey releases), so survey-authored under CC0.
+`henderson_2023_la_covid_racial_resent` is **HELD** -- Kinder & Sanders battery,
+no register row, silence does not ship -- and has a provenance row saying so.
+
+Across the rest of the batch item text was mostly not cheap: positional codes
+with no codebook. Two cases where the text IS in hand and is held only on
+rights: `zenodo.22766055`'s Spanish DASS-21 / CaMir-R / BESAA-S stems, and
+`wu_2025_flow_state`'s 33 Chinese stems. One agent's own per-label-level
+assertion caught two of its own header verdicts being wrong before they shipped
+-- the `estevez_2021`/#1770 failure shape, found by asserting rather than
+narrating.
+
+### Provisional author slugs, both ruled by Ben
+
+`zenodo.22766055`'s only creator field is literally "Anónimo". Ben: ship it, but
+name it construct + year + DOI tail. So `besaa_s_2026_22766055`,
+`camir_security_2026_22766055`, `dass21_2026_22766055`, built by
+`data/autoestima_corporal_2026_22766055.py`.
+
 ## Cleaning scripts (irw_output/queue/ → irw_output/cleaned/)
 
 **Priority queue (new good candidates, not yet processed):**
