@@ -21452,9 +21452,10 @@ human but review.
 
 ## 2026-10-20b — the 2026-10-19h batch and the kemp date repair uploaded (#3077, #3110)
 
-ben-domingue uploaded, 2026-10-20: the batch's **5 item-text tables** and the
-**3 `kemp_2019_mss_*`** date-repair tables are in, and the **26 response
-tables** were uploading when he said so. Stamped here rather than left pending
+ben-domingue uploaded, 2026-10-20: the batch's **5 item-text tables**, the
+**3 `kemp_2019_mss_*`** date-repair tables and then the **26 response
+tables** -- all confirmed done the same day. Release is owed; everything is on
+the unreleased draft. Stamped here rather than left pending
 because a stale "nothing uploaded" invites a second upload and **uploads
 append**.
 
@@ -21525,3 +21526,26 @@ register blocks.
 Verified: 26 rows, LF endings on a file with 63 pre-existing CRLF rows, names
 matching the 26 staged tables exactly, no table that already had a note, four
 fields on every row.
+
+## 2026-10-20d — the batch closes: everything uploaded, nothing staged (#3077)
+
+ben-domingue confirmed the 26 response tables in, after the 5 item-text tables
+and the 3 kemp repairs earlier the same day. **The 11 NC leads of #3104 are
+done:** 4 of the 11 deposits carried data, 26 tables / 282,482 responses and 5
+item-text tables / 200 rows are up, the other 7 leads are closed with reasons in
+their leads files, and `gilbert_2026_dep_symptoms` is the one table built and
+deliberately not uploaded, held on provenance pending #3120.
+
+`runs/stage_2026-10-19h/` is now `runs/uploaded_2026-10-20_nc11/`, and
+`runs/STAGING.md` says nothing is staged: every directory it describes has gone
+up, so `red_up` should not be pointed at any of them. The next batch stages into
+`irw_output/` as usual.
+
+Owed at the release, and nothing else from this batch:
+`metadata/covariate_labels/build.py` (the standing item -- `harvest.py` has run
+for this batch already). Still open but not this batch's: register rows for
+CCAS, the COVID-19 Stressors Scale, SMD and Political Life Events/EPV before
+their item text can ship; the five dated `tags_auto_*` files (163 rows) whose
+merge into `tags/tags_auto.csv` is a reviewed step; `dvn/vidgon` and
+`10.7910/dvn/vsfcvg` as ready leads; and the 56 `pending_ruling` NC rows in
+`leads/nc_licence_pending_ruling_2026-10-18.csv`.

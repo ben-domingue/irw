@@ -76,7 +76,8 @@ safe command for any of them. Split by destination into `runs/`, described in
 `runs/STAGING.md`, with a per-file `MANIFEST.txt` (rows / ids / items / columns)
 in each:
 
-- `runs/stage_2026-10-19h/` -- this batch, 26 + 5, nothing uploaded.
+- `runs/uploaded_2026-10-20_nc11/` (was `stage_2026-10-19h/`) -- this batch,
+  26 + 5, all uploaded 2026-10-20.
 - `runs/uploaded_2026-10-19_openesm/` -- 30 PACO/STECCO/Ryvkina response tables
   and their 28 `__items`, **already released in `irw_5` v9.0** and live in
   `metadata.csv` / `itemtext_metadata.csv`. Kept as the record, never to be
@@ -98,24 +99,26 @@ Also worth knowing: the 2026-10-19f slice's 18 tables were **not** among those
 
 ## From the 11 NC leads #3104 reopened (2026-10-19h, #3077)
 
-**26 tables / 282,482 responses, uploaded 2026-10-20** (the 5 item-text tables
-confirmed in, the 26 response tables uploading when ben last said so). Files
-kept as the record in `automated_finding/runs/stage_2026-10-19h/`. All 26 passed
+**26 tables / 282,482 responses, uploaded 2026-10-20** (ben-domingue
+confirmed the 5 item-text tables and then the 26 response tables). Files kept
+as the record in `automated_finding/runs/uploaded_2026-10-20_nc11/`. All 26 passed
 `irw-validate --profile upload` with zero failures and zero errors. (23 at first writing, plus the three the 3-item floor
 ruled the same day unblocked: `jones_2026_agi`, `jones_2026_tech_worry`,
 `baseke_2026_besaa3`.) 4 of the 11 leads carried data; the other 7 are
 closed with reasons in their leads files. Every `todo` row across the
 `repos_ledger_remine_2026-10-18_*` files is gone again (0 remaining).
 
-- [ ] **Upload: the 5 item-text tables are IN** (ben-domingue, confirmed
-  2026-10-20; `uploaded=2026-10-20` stamped on their five
-  `itemtext_provenance.csv` rows) and **the 26 response tables were uploading**
-  as of 2026-10-20. Treat `runs/stage_2026-10-19h/resp` as done unless ben says
-  the run failed -- re-pointing `red_up` at it appends. Release is owed. The
-  batch's 26 `metadata/data_notes.csv` rows are written, `baseke_2026_css11`
-  among them. The batch is no longer in `irw_output/`: on 2026-10-20 that folder held
-  three unrelated things at once and was split by destination -- see
-  `runs/STAGING.md`, and the 2026-10-20a BATCH_LOG entry for what was in there.
+- [x] **Uploaded in full** (ben-domingue, confirmed 2026-10-20): 26 response
+  tables and 5 item-text tables. `uploaded=2026-10-20` stamped on the five
+  `itemtext_provenance.csv` rows, the batch's 26 `metadata/data_notes.csv` rows
+  written (`baseke_2026_css11` among them), dictionary and tag rows staged. The
+  files are kept as the record in `runs/uploaded_2026-10-20_nc11/` -- do not
+  point `red_up` at them, uploads append. See `runs/STAGING.md` and the
+  2026-10-20a BATCH_LOG entry for what else that folder had been holding.
+- [ ] **Release is owed** -- everything landed on the unreleased draft. After
+  it: `metadata/covariate_labels/build.py` (the standing item at the top of this
+  file; `harvest.py` has already run for this batch) and nothing else from this
+  batch.
 - [ ] **`gilbert_2026_dep_symptoms` is HELD on provenance, and one message
   closes it.** The deposit (`10.7910/DVN/G68C5Y`, CC BY-NC-SA 4.0) redistributes
   a psychotherapy RCT's depression data that it never names -- the analysis
@@ -126,10 +129,10 @@ closed with reasons in their leads files. Every `todo` row across the
   `automated_finding/held_provenance_2026-10-19/`. **Asked in #3120**
   (assigned to @joshgilbert1994, 2026-10-19): either he names the source trial
   and its terms, or he confirms redistribution is fine. The table moves into
-  `runs/stage_2026-10-19h/resp/` unchanged if the answer is clean, and the script stays as the
+  a fresh staging folder unchanged if the answer is clean, and the script stays as the
   record if it is not.
 - [x] **Item text: 4 of the 8 candidate tables are STAGED** in
-  `automated_finding/runs/stage_2026-10-19h/items/` (179 rows; 5 tables and 200
+  `automated_finding/runs/uploaded_2026-10-20_nc11/items/` (179 rows; 5 tables and 200
   rows after the 3-item ruling added `jones_2026_agi`), all four through
   `normalize_nulls.R` -> `validate_items.R --resp-csv` -> `audit_batch.R
   --resp-dir` (4/4 PASS, no anomalies) and `irw-validate` (ok, nothing to
