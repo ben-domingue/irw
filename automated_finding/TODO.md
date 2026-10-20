@@ -97,9 +97,14 @@ closed with reasons in their leads files. Every `todo` row across the
   keeps only `hold`/`note`, so running the gate can discover a prohibition and
   never a permission. Platte and Gilbert are not shippable; the BATCH_LOG entry
   says where their wording actually is.
-- [ ] **`metadata/covariate_labels/harvest.py --commit HEAD platte_2026_mindset`,
-  then `build.py`** -- the one script in this batch that reads an SPSS file and
-  ships `cov_*` columns.
+- [x] **`covariate_labels/harvest.py --commit HEAD platte_2026_mindset`: run**
+  (the one script in this batch that reads an SPSS file and ships `cov_*`
+  columns). Its labels are in the harvest cache -- school 1-15, gender
+  1=Female/2=Male, class 6/7/8, achievement 1-5 -- but **not committed**:
+  `build.py` only emits rows for tables that are live in the corpus, so these
+  seven appear on the next build after the release, and running it now would
+  have swept 8,084 lines of other batches' pending harvests into this PR. That
+  build is the standing item at the top of this file, not a new one.
 - [ ] **Issues-page entry owed at publish for `baseke_2026_css11`:** the paper
   and the deposit codebook both document five options "rated from 0 (not
   stressful at all) to 4 (extremely stressful)", while the shared data holds
