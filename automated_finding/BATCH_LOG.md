@@ -21129,7 +21129,7 @@ about item text rather than as a separate message. Note the column is `q37_0`,
 not `q37`. It is worth the ask: 3,000 respondents, a published energy-literacy
 instrument, 264 columns.
 
-## 2026-10-19g — the first table the narrowed PII rule reopened: DVN/VSFCVG (#3077, #3113)
+## 2026-10-19j — the first table the narrowed PII rule reopened: DVN/VSFCVG (#3077, #3113)
 
 One table, worked because 2026-10-19's structural/incidental narrowing
 (#3113) un-skipped it. It is the case the narrowing was written for: the only
@@ -21194,8 +21194,25 @@ that finds the Spanish anchors should move the English across.
 which is 4.0% and clears the 2% floor, so both sides of 18 are present.
 "University students" reads as `Adult (18+)` and would have been wrong. Child
 Age is `Adolescent (12-18y)`, the only band holding anyone. Tags in
-`tags_auto_2026-10-19d.csv` (a separate file again, so it cannot collide with
+`tags_auto_2026-10-19j.csv` (a separate file again, so it cannot collide with
 the three open tag PRs).
+
+**Relabelled `g` -> `j` on 2026-10-20, and the reason is worth keeping.** This
+section was first written as `2026-10-19g` with tags in
+`tags_auto_2026-10-19d.csv`, and by the time the branch merged **both names were
+taken**: `g` already belonged to the narrowing ruling itself (#3113, the section
+immediately above), and #3117's `2026-10-19h` batch had independently written
+its own 23-row `tags_auto_2026-10-19d.csv`. Git caught the file as an `add/add`
+conflict, but nothing would have caught the duplicate `## 2026-10-19g` heading —
+two sections with one label, which is exactly the kind of silent collision the
+"a separate file so it cannot collide" sentence above was meant to prevent and
+did not. **The lesson: pick the batch letter against `origin/main` at merge
+time, not against the branch point.** Concurrent batches off the same base all
+see the same free letter. Everything here was relabelled together — heading,
+the tags filename, the `batch` value in `mapping_verification.csv`, and the
+TODO heading — so `repos_2026-10-19j_pii_reopen` is the one batch id for this
+table. The `2026-10-19g` references elsewhere in `TODO.md` point at the ruling,
+not at this batch, and are correct as they stand.
 
 **Gates.** `irw-validate` clean on both files; `run_qc` 3 pass / 0 warn with
 source-documented `permitted_values` (1-5) and `item_constructs` (the three
@@ -21257,3 +21274,266 @@ Two open `TODO.md` PII questions are now answered, and one is not:
 - `zenodo.21121992` — **still open.** Its name column holds the three deposit
   AUTHORS' own names, published on the record. The narrowing is about
   identifying respondents and says nothing about an author's self-name.
+
+## 2026-10-19h — the 11 NC leads #3104 reopened: 4 deposits, 26 tables, 282,482 responses (#3077)
+
+#3104 aligned `remine_ledger.py`'s leads filter with `datastandard.md` and in
+doing so restatused 11 `deferred` rows back to `todo` — after the 2026-10-19
+comment on #3077 had already reported "every `todo` row in every
+`repos_ledger_remine_2026-10-18_*` file now carries a status". Those 11 are this
+batch. **Every `todo` row is gone again** (0 across all the re-mine files), and
+the 56 rows in `leads/nc_licence_pending_ruling_2026-10-18.csv` are the other
+half of the same ruling, still unworked.
+
+All 11 licences were re-verified on the source record rather than taken from the
+ledger: 6 CC BY-NC, 5 CC BY-NC-SA, none ND. **4 of the 11 carried shippable
+data**, which is a 36% hit rate against the re-mine's usual 18% — unsurprising,
+since these rows had already passed a shape filter and were parked on licence
+alone.
+
+**26 tables, 282,482 responses, staged in `irw_output/`. Nothing is uploaded.**
+All 26 pass `irw-validate --profile upload` with zero failures and zero errors.
+(23 at first writing; the 3-item floor ruled the same day added three more --
+see the entry below.)
+
+| deposit | tables | responses |
+|---|---|---|
+| `10.7910/DVN/GJW7TL` — Jones, *Thinking Machines, Pondering Humans* | 10 | 67,369 |
+| `osf.io/f9ybp` — Kenyan adolescent mental health (Baseke et al. 2026) | 6 | 176,526 |
+| `10.17026/SS/QTQ8WL` — Platte, Dutch primary-school mindset | 7 | 24,340 |
+| `10.7910/DVN/G68C5Y` — Gilbert et al. 2026, idiographic IRT | (1) | (49,598) held |
+
+### What the four deposits turned out to be
+
+**Jones (CC BY-NC-SA 4.0) is ten batteries in two modes, and the modes cannot
+be pooled.** The "wide correlates" files put each attitude item on a -3..+3
+agreement scale on an online panel; the Google-Surveys files put the same
+questions on 1-7 with a response time, a sampling weight and a survey date.
+`jones_2026_ai_fear_2021` and `jones_2026_ai_fear_2023` are the clearest case:
+the same seven fears about AI, same item codes here, two scales — so two
+tables, not one merge. The 2023 and 2024 technology checklists DO pool, with
+`cov_study` naming the year.
+
+**Two Google-Surveys batteries are unshippable for a reason worth recording.**
+The confidence battery (4 prompts, 10,883 respondents) and the trust battery (5
+prompts, 13,227) carry **exactly one response per respondent** — Google Surveys
+serves one question at a time, and no respondent was served two prompts of the
+same battery. No two items share a respondent, so the table cannot be
+calibrated at all, and sparsity is not the issue: the familiarity battery is
+also sparse (7,339 singletons) but 1,865 respondents answered all ten prompts,
+which is what ties its items together. The script proves the one-per-respondent
+claim with an assert rather than asserting it in a comment.
+
+**101 duplicate responses in `stacked-oneq-results.csv`**, all on one prompt
+("confidence in *companies that use Artificial Intelligence systems*"), each
+appearing under two different `Survey_Date`s — and in all 101 the response is
+IDENTICAL across the two dates. Zero disagreement over 101 repeats is a
+duplication signature, not a re-measurement, so the later row is dropped rather
+than carried as a second wave.
+
+**Platte (CC BY-NC 4.0) administered seven instruments twice**, once about
+mathematics and once about language, to 421 Dutch primary-school students aged
+8-12. Each instrument is one table carrying both domains with
+`itemcov_domain`, because that is one scale asked about two school subjects, not
+two scales. The codebook marks 18 items for reversal; those marks ship as
+`itemcov_reverse_scored` and `resp` is left as administered. The four items the
+codebook records as "removed to improve internal consistency" ARE shipped — they
+were administered, and dropping them would hide an administered item. The
+script reads those marks out of the codebook `.xlsx` and asserts the set rather
+than transcribing it.
+
+**Kenya (CC BY-NC-SA 4.0) is two surveys that share two instruments.** PHQ-8 and
+GAD-7 were in both of the May-June 2023 surveys (5,592 adolescents, 74 schools),
+so each ships as one table with `cov_study`; survey E's ids are offset by
+100000. `cluster_id` is the school. Three things found in the file:
+
+- **CSS-11's codebook and its data disagree**, and this is an issues-page entry
+  when the table ships: the paper and the deposit codebook both document five
+  options "rated from 0 (not stressful at all) to 4 (extremely stressful)",
+  while the shared data holds exactly **three** distinct values on all eleven
+  items, coded 1, 3 and 5. Shipped as recorded — the direction is documented,
+  the anchor-to-code mapping is not, so nothing is rescaled.
+- **The interview date is typed by hand and the year is frequently wrong**:
+  2013, 2020, 2022, 2027, 2028, 2033, 2073, 2823, 2883, one literal "invalid".
+  `date` is kept only inside the documented May-June 2023 window, which blanks
+  ~13% of rows and is why these six tables each carry a `date_numeric*` warning.
+  Survey D is `dd/mm/yyyy` and survey E is `m/d/yyyy`; the script asserts which
+  reading is right instead of trusting one.
+- `GAD_Check` is an embedded attention check ("If you read this question,
+  respond 'Not at all'"), not an item, and is not shipped. Neither are the two
+  functional-impairment follow-ups, which are one question each on a different
+  response format.
+
+**Gilbert (CC BY-NC-SA 4.0) is built, validated, and HELD on provenance.** The
+deposit describes its empirical file as "9 dichotomous DSM-5 items in a
+psychotherapy RCT" and its analysis script refers to the data only as "per
+McNeish, limit to C group only" — it names no trial, paper or source deposit.
+The depositors' licence covers what they published; it does not establish the
+originating trial's redistribution terms, which is the case
+`datastandard.md`'s "scraped or relabelled third-party data" clause points at.
+The table (256 patients x 9 items x up to 28 sessions, with `wave` and `treat`,
+49,598 responses) sits in `automated_finding/held_provenance_2026-10-19/` with a
+README; one message to Josh Gilbert closes it either way. Separately, the
+deposit's own `*_lag` columns are computed in stored row order rather than
+session order, so for the file's last three rows — and for the session after
+each of them — the "lag" is not the previous session's response. Nothing here
+ships the lags; it bears on the published model, which used them.
+
+### The seven that did not carry data
+
+- `osf.io/sarzc` — an integrative-review **protocol**; two PDFs, no data.
+- `osf.io/fbre8` — describes an IRB-approved study of 1,040 patients and
+  deposits **nothing**: empty `osfstorage`, no components.
+- `osf.io/htx4z` — a theoretical proposal (the Sigma-factor model); empty.
+- `10.6084/m9.figshare.11609991` — SciELO deposited the **article's four
+  summary tables** (`Table_1..4.xls`, 5,632 bytes each). They also 404:
+  `api.figshare.com` lists them while both `ndownloader` and
+  `/v2/file/download` return S3 `NoSuchKey`.
+- `10.25439/rmt.33261075` — a 14-sheet **policy-framework mapping matrix**
+  (spatial scale x institution x theme), not person-item data.
+- `10.5281/zenodo.21648539` — a **3D scan of a Roman portrait sculpture**.
+- `10.25442/hku.30959672` — **files under embargo until 2032-12-28**. This one
+  is a real candidate (236 Hong Kong gifted adolescents; mindfulness,
+  self-compassion, perfectionism, well-being) and the only thing wrong with it
+  is the date. Worth knowing: the resolver reported it as "no resolvable
+  tabular file on landing page", so **an embargo and a dead deposit read
+  identically** — `api.figshare.com/v2/articles/<id>` returns
+  `is_embargoed=true`, `embargo_type=file`, `files=null`, which is the same
+  shape as the figshare-202 lesson from 2026-10-18.
+
+### Deferred on thinness — this batch adds four to the standing question
+
+The open ruling on 3-4 item tables (`dvn/vidgon`, `zenodo.22035093`) now gates
+four more, all clean and all built the moment it is answered:
+
+- Jones's **3-item AGI block** (possible / should / rights, -3..+3) across three
+  samples — Google Surveys 2021 (1,003), Prolific 2023 (459), Prolific 2024
+  (501) — which merges to ~1,963 respondents and is the deposit's flagship
+  measure. `prolific-agi-2024-results.csv` is the long twin of the wide file and
+  carries no `User_ID`, so build from the wide one.
+- Jones's **worry triple** (AI / self-driving cars / facial recognition, 0-6).
+- Kenya's **OAC-2** (2 items) and **BESAA-3** (3 items), whose stems the
+  codebook gives in full.
+
+### Item text: four tables shipped, four blocked on rights
+
+**Staged in `itemtext_output/` (179 rows, 4 tables), gated 4/4 PASS** through
+`normalize_nulls.R` -> `validate_items.R --resp-csv` -> `audit_batch.R
+--resp-dir`, plus `irw-validate` clean on each, with `itemtext_provenance.csv`
+and `mapping_verification.csv` rows:
+
+- `baseke_2026_phq8`, `baseke_2026_gad7` -- `paper_explicit` /
+  `canonical_instrument`. The codebook prints `<n>. <stem> -> PHQ_<n>`, and the
+  builder PARSES those arrows by regex rather than transcribing them, so no
+  position is involved. The register's "PHQ and GAD screener family" row is
+  verdict **ship**, read BY NAME in the file -- `load_register()` keeps only
+  `hold`/`note`, so the gate alone could never have surfaced that permission.
+  `mapping_verification` is `NO_ROUTE`, honestly: neither the preprint nor the
+  deposit publishes anything per item, so there is no distribution to check the
+  mapping against. A later route, if wanted, is
+  `writing/Supplementary Materials.pdf` or `output/step4_descriptives.rds`.
+- `jones_2026_tech_familiarity`, `jones_2026_ai_fear_2021` -- `data_labels` /
+  `study_materials`, `NOT_NEEDED`. The administered prompt is a COLUMN of the
+  response file, and the item codes are produced by the same `oneq_code()`
+  function (familiarity) and the same 7-entry phrase dict (fear) that built the
+  response tables, so both sides come from one string by one rule. Stems
+  searched verbatim: no published scale matches either battery -- the nearest
+  hits are a university course survey and the GSU CSAL familiarity
+  questionnaire -- so these are author-written items under the deposit's
+  CC BY-NC-SA, and the register has nothing to rule on. `option_text` is blank
+  on all seven points: the deposit publishes 1-7 with **no anchor labels
+  anywhere**, which is an unlabelled scale rather than unlabelled midpoints,
+  and padding a point with its own number is forbidden.
+
+**The other four Kenya tables are blocked on rights, not on extraction.** CCAS,
+CSS-11, SMD-9 and EPV-7 have their full stems in the codebooks, and **none of
+the four instruments has a register row**: the Climate Change Anxiety Scale
+(Clayton & Karazsia 2020), the COVID-19 Stressors Scale, the Social Media
+Disorder Scale (van den Eijnden, Lemmens & Valkenburg 2016) and the EPV index
+adapted from the Political Life Events scale. Silence does not ship, so each
+needs its terms located and quoted first -- that is the open item.
+
+Also owed, and deliberately not taken:
+
+- **`jones_2026_ai_fear_2023`** — its seven item codes ARE the 2021 table's
+  seven prompts, on -3..+3 instead of 1-7, so its text is one cross-file
+  mapping away. That is a deliberate mapping rather than a cheap extraction,
+  which is why it is not in this batch.
+- **Platte: not shippable.** Neither label level carries a stem — the SPSS
+  variable labels are block names repeated across all six items of a block
+  ("MindsetBelief Math") and the value labels are the 1-5 anchors; the codebook
+  `.xlsx` repeats the same block names. The administered Dutch wording is in the
+  thesis behind the deposit, which the record does not link.
+- **Gilbert: not shippable.** The item codes ARE the DSM-5 criterion names, but
+  the administered wording belongs to the unnamed source trial and the file is a
+  plain CSV with no label level at all.
+
+### Bookkeeping
+
+23 dictionary rows staged via `stage_dict_row.py` (with `codebook_url` for all
+13 tables whose source ships a codebook file and `none` for the Jones ten), 23
+tag rows in `tags_auto_2026-10-19d.csv`, and the 11 leads rows statused in
+their own files. `covariate_labels/harvest.py` is owed for
+`platte_2026_mindset` only — it is the one script here that reads an SPSS file
+and ships `cov_*` columns.
+
+## 2026-10-19i — the item-count floor is 3 (ruled), which ships three more tables and reopens a deferral
+
+**ben-domingue, 2026-10-19: "i can live with 3 items. 2 gets extreme."** Asked
+because the 2026-10-19h batch had four thin candidates and the corpus already
+had two deferred on the same question since 2026-10-18. Recorded in
+`datastandard.md` "Before you start" beside the N>=100 floor, because it is an
+intake rule and that is where intake rules live:
+
+> **Check the item count too: the floor is 3 distinct items.** A 3-item scale is
+> thin but shippable; 2 items is not, and 1 never was. The count is of distinct
+> `item` values in the table as shipped, so a 2-item block does not become
+> shippable by being merged with an unrelated one.
+
+The note also says what the leads filter's `8 <= items <= 700` band is NOT: a
+ranking heuristic for choosing what to work next, not an intake floor. Reading
+it as one is how four of these got parked in the first place.
+
+**Three tables ship under it, all from 2026-10-19h's deposits** (14,247
+responses, and all three pass `irw-validate --profile upload` clean):
+
+| table | items | ids | responses |
+|---|---|---|---|
+| `jones_2026_agi` | 3 | 1,963 | 3,883 |
+| `jones_2026_tech_worry` | 3 | 1,009 | 3,027 |
+| `baseke_2026_besaa3` | 3 | 2,493 | 7,337 |
+
+`jones_2026_agi` is the one worth the ruling on its own: it is the measure
+Jones's book is built around — whether an AGI can be built, whether it should
+be, whether it should have human rights — asked of three independent samples
+over four years and pooled here with `cov_study`, each sample's ids in their own
+block. Its item text ships too (21 rows): the administered prompt is a column of
+the 2021 and 2023 files.
+
+**Two things found while building it, both about the same column name.**
+
+- **`RT` means two different things in two different files of one deposit, in
+  two different units.** In `stacked-oneq-results.csv` and
+  `ai-fear-scenarios-results-2021.csv` it varies response by response — ten
+  distinct values for a respondent who answered ten prompts — and is in
+  milliseconds (medians 8,039 and 7,804), so it is a per-item `rt`. In the two
+  AGI long files it is CONSTANT within a respondent (all three of a 2023
+  respondent's answers carry the same value) and is already in seconds (medians
+  18 and 39). That is a whole-survey duration, so it ships as
+  `cov_completion_time_s`, never as `rt`. Both shipped `rt` columns were
+  re-checked against this test before the ruling's tables were added; both are
+  genuinely per-response.
+- `baseke_2026_besaa3` ships its responses and **not** its item text: the rights
+  register blocks the Body Esteem Scale, quoting Lipowska & Lipowski's own
+  statement that they "do not have permission to make its original version
+  available in scientific publications". The codebook has all three stems, so
+  this is a rights hold and not a gap.
+
+**What the floor does to the standing deferrals.** `dvn/vidgon` is **unblocked**
+and is a ready lead again — 4 items on 0-8 over 1,746 respondents, in
+`leads/human_review_recheck_batch5_2026-10-18.csv`. `zenodo.22035093` is
+**sharpened rather than closed**: its four columns are Femininity1/2 and
+Masculinity1/2, so if they are one instrument with two 2-item subscales it ships
+as a 4-item table, and if they are two separate 2-item measures neither does.
+That needs the paper. Kenya's **OAC-2 stays out** at 2 items, with both stems
+sitting in the codebook if the floor ever moves.
