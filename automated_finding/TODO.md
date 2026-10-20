@@ -81,8 +81,11 @@ in each:
   and their 28 `__items`, **already released in `irw_5` v9.0** and live in
   `metadata.csv` / `itemtext_metadata.csv`. Kept as the record, never to be
   uploaded again.
-- [ ] `runs/stage_kemp_2019_date_fix/` -- **a pending repair nobody was tracking
-  as staged.** The three `kemp_2019_mss_*` rebuilds carry correct dates
+- [x] **`kemp_2019_mss_*` uploaded** (ben-domingue, confirmed 2026-10-20), a
+  REPLACE into `irw_4`; the three `metadata/table_changes.csv` rows are written
+  (#3110, `irw_version` blank until a manifest carries the release). Files kept
+  as the record in `runs/uploaded_2026-10-20_kemp_date_fix/`. It had been **a
+  pending repair nobody was tracking as staged**: The three `kemp_2019_mss_*` rebuilds carry correct dates
   (2017-10-11 to 2017-11-29); the LIVE tables in `irw_4` still read January
   1970, because irw_4 v14.0 was built from output staged ten minutes before
   #3100's fix landed. Commit 790384df says as much and deliberately left them
@@ -95,17 +98,21 @@ Also worth knowing: the 2026-10-19f slice's 18 tables were **not** among those
 
 ## From the 11 NC leads #3104 reopened (2026-10-19h, #3077)
 
-**26 tables / 282,482 responses staged in
-`automated_finding/runs/stage_2026-10-19h/`, nothing uploaded.** All 26 pass `irw-validate --profile upload` with zero
-failures and zero errors. (23 at first writing, plus the three the 3-item floor
+**26 tables / 282,482 responses, uploaded 2026-10-20** (the 5 item-text tables
+confirmed in, the 26 response tables uploading when ben last said so). Files
+kept as the record in `automated_finding/runs/stage_2026-10-19h/`. All 26 passed
+`irw-validate --profile upload` with zero failures and zero errors. (23 at first writing, plus the three the 3-item floor
 ruled the same day unblocked: `jones_2026_agi`, `jones_2026_tech_worry`,
 `baseke_2026_besaa3`.) 4 of the 11 leads carried data; the other 7 are
 closed with reasons in their leads files. Every `todo` row across the
 `repos_ledger_remine_2026-10-18_*` files is gone again (0 remaining).
 
-- [ ] **Upload is yours:** `red_up runs/stage_2026-10-19h/resp` (26 tables),
-  then `red_up runs/stage_2026-10-19h/items` (5 `__items.csv`). Response tables
-  first. The batch is no longer in `irw_output/`: on 2026-10-20 that folder held
+- [ ] **Upload: the 5 item-text tables are IN** (ben-domingue, confirmed
+  2026-10-20; `uploaded=2026-10-20` stamped on their five
+  `itemtext_provenance.csv` rows) and **the 26 response tables were uploading**
+  as of 2026-10-20. Treat `runs/stage_2026-10-19h/resp` as done unless ben says
+  the run failed -- re-pointing `red_up` at it appends. Release is owed; the
+  issues-page entry for `baseke_2026_css11` falls due at that release. The batch is no longer in `irw_output/`: on 2026-10-20 that folder held
   three unrelated things at once and was split by destination -- see
   `runs/STAGING.md`, and the 2026-10-20a BATCH_LOG entry for what was in there.
 - [ ] **`gilbert_2026_dep_symptoms` is HELD on provenance, and one message
