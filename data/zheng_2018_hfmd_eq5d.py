@@ -33,12 +33,22 @@ Notes
 * No respondent identifier survives the address-code drop, so `id` is the
   1-based row index of Sheet1 (per IRW practice for register-number-keyed
   clinical files).
-* `mobility` runs 1-4 while the other three dimensions run 1-3. The level-4
-  responses are 567 of 3,500 (16.2%), so this is a real fourth response
-  option in this administration (the deposit documents no codebook), not the
-  isolated data-entry anomaly it first looks like. It is shipped as 1-4.
-  HUMAN CALL: if the source paper shows 4 is a missing/"unable to assess"
-  code rather than a worst-health level, those 567 cells should be dropped.
+* `mobility` arrives coded 1-4 while the other three dimensions run 1-3, and
+  the 567 level-4 cells (16.2%) are DROPPED as a not-applicable code rather
+  than shipped as a fourth severity level. The deposit documents no codebook,
+  so this was settled from the data (2026-10-20): the level-4 cells are 96.8%
+  concentrated in the two youngest age bands -- 37.9% at 6m-1yr against 1.6%
+  of the 1-3 cells, 58.9% at 1-2yrs against 26.7% -- and essentially vanish
+  above age 3 (0.4% at 3-4yrs, 0.0% at 4-5yrs). A genuine worst-health level
+  would track severity, not age; severity is only mildly elevated among them
+  (42.5% vs 34.0%), far too little to explain an age gradient that steep, and
+  these same patients answer the other three dimensions close to normally.
+  The code means the child is pre-ambulatory and walking cannot be assessed.
+  Shipping it as `resp=4` would put a non-ordinal meaning on an ordinal scale
+  (the `resp_ambiguous` defect class), so the cell is dropped and those
+  children simply have three dimensions instead of four.
+  Not yet confirmed against the source paper, which was not reached; if it
+  documents level 4 as something else, revisit.
 * `eq_vas` (0-100 visual analogue scale) is NOT shipped: it is a single
   item on a response scale incompatible with the four 1-3 ordinal
   dimensions, and IRW does not accept a one-item table.
@@ -98,10 +108,13 @@ assert not pii_hits, f"PII detected — stop, do not ship: {pii_hits}"
 d = df.copy()
 d["id"] = np.arange(1, len(d) + 1)
 
+# mobility level 4 is a not-applicable code (pre-ambulatory infant), not a
+# fourth severity level -- see Notes. Drop the cell, keep the patient.
 n4 = int((d["mobility"] == 4).sum())
-print(f"mobility: {n4} of {len(d)} responses at level 4 "
-      f"({100*n4/len(d):.1f}%) — kept as a real fourth ordinal level, not an "
-      f"anomaly; the other three dimensions are 1-3")
+d.loc[d["mobility"] == 4, "mobility"] = np.nan
+print(f"mobility: dropped {n4} of {len(d)} level-4 cells "
+      f"({100*n4/len(d):.1f}%) as not-applicable (pre-ambulatory); the "
+      f"dimension ships 1-3 like its three siblings")
 
 cov = d[["id"] + list(COVS)].rename(columns=COVS)
 cov["cov_serotype"] = cov["cov_serotype"].astype("string").str.replace(

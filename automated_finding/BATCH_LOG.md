@@ -15,7 +15,7 @@ the 63 actionable leads left unworked by the 2026-10-19 batch, and one ran a
 fresh 135-query discovery sweep. A sixth was launched at 15:05 on the two leads
 Ben's PII ruling unblocked (below).
 
-**Result: 87 response tables, 1,104,675 responses, all 87 passing
+**Result: 87 response tables, 1,104,108 responses, all 87 passing
 `irw-validate --profile upload` with zero failures; 7 item text tables, gate
 chain green; 87 tag rows.** Assembled into `irw_output/` (+ `MANIFEST.txt`) and
 `itemtext_output/`. 85 dictionary rows staged via `stage_dict_row.py`. NOT
@@ -117,6 +117,25 @@ to re-key the retired item text: the new builder first emitted `item` as
 `<battery>_<suffix>`, copying the retired build's convention, while its own response
 tables carry the bare suffix. `validate_items.R` failed all 7 on item-set mismatch.
 The two builds derive item codes independently and genuinely do not agree.
+
+### `zheng_2018_hfmd_eq5d`: mobility level 4 settled from the data, cells dropped
+
+The build shipped `mobility` as 1-4 where its three sibling EQ-5D dimensions run
+1-3, flagging the 567 level-4 cells (16.2%) as needing the source paper. The
+paper was never reached, but the data settles it without one: the level-4 cells
+are 96.8% concentrated in the two youngest age bands -- 37.9% at 6m-1yr against
+1.6% of the 1-3 cells, 58.9% at 1-2yrs against 26.7% -- and essentially vanish
+above age 3 (0.4% at 3-4yrs, 0.0% at 4-5yrs). A genuine worst-health level would
+track severity, not age; severity is only mildly elevated among them (42.5% vs
+34.0%), nowhere near enough for an age gradient that steep, and those same
+patients answer the other three dimensions close to normally. The code means the
+child is pre-ambulatory and walking cannot be assessed.
+
+Shipped as `resp=4` it would have put a non-ordinal meaning on an ordinal scale,
+which is the `resp_ambiguous` defect class. So the 567 cells are dropped and
+those children carry three dimensions instead of four: 14,000 -> 13,433 rows, all
+3,500 ids retained, all four dimensions now 1-3. The `resp_scale_nested_support`
+warning cleared with it. Diagnostic and reasoning are in the script header.
 
 ### Corpus-trust finding: an undocumented reversal in a live table, left as is
 

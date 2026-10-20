@@ -6,7 +6,7 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 ## Repos batch 2026-10-20: 85 tables staged and NOT uploaded (2026-10-20)
 
 Six parallel agents; full write-up in `BATCH_LOG.md`. **87 response tables /
-1,104,675 responses** in `irw_output/` (+ `MANIFEST.txt`), 7 item text tables in
+1,104,108 responses** in `irw_output/` (+ `MANIFEST.txt`), 7 item text tables in
 `itemtext_output/`, all passing `irw-validate --profile upload` with zero
 failures. 87 dictionary rows and 87 tag rows staged. **Five collisions** were
 caught and dropped into `runs/dropped_2026-10-20/` -- including eight
@@ -15,6 +15,12 @@ wave-1 slice of a 5-wave superset (100% identical on 10,997/10,997 cells), now
 in `runs/dropped_2026-10-20/superseded_by_lapanel/`. Read the BATCH_LOG entry
 before touching that folder or re-adding anything from it.
 
+- [x] **`zheng_2018_hfmd_eq5d` mobility level 4: RESOLVED 2026-10-20**, settled
+  from the data rather than the paper (96.8% of the level-4 cells are
+  pre-ambulatory infants; a severity level would track severity, not age). The
+  567 cells are dropped as not-applicable, all 3,500 ids retained, all four
+  dimensions now 1-3. Not confirmed against the source paper, which was never
+  reached -- revisit if it documents level 4 as something else.
 - [ ] **Upload is owed and is yours to trigger**: `red_up irw_output` (87
   tables) and then `red_up itemtext_output` (7). **Response tables first.**
   Nothing here has been uploaded; uploads APPEND, so do not point `red_up` at
