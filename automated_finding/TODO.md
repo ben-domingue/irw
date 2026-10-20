@@ -38,6 +38,57 @@ before touching that folder or re-adding anything from it.
   dictionary rows staged without it, so nothing reached
   `codebook_at_ingest.csv`. The other 76 recorded `"none"`. Needs a pass over
   those 9 deposits rather than a guessed value.
+- [x] **8 rights-register rows written**, all append-only (`git diff --numstat`
+  = 8/0), 360 data rows now. Three rest on a located clause: the **Flow Scales
+  suite** is `block` on Mind Garden's ToS SS3/SS5(d) prohibition on reproducing or
+  circulating assessment items (not the fee model, which is only corroborative) --
+  and per the 2026-09-29 #2401 ruling that a block covers every language, this
+  reaches the **Chinese CDFS-2** too, so `wu_2025_flow_state`'s Chinese stems
+  (sitting in its SPSS variable labels) stay unshipped. **ATI is `ship`** on the
+  authors' own "The scale is free to use" grant at ati-scale.org, and the grant
+  reaches its 13 published translations. **The VST is `hold`** on a located
+  near-miss: Nation's page grants permission for the *Updated VLT* alone, which
+  is a different instrument -- quoted in the row so nobody re-finds it and
+  misreads it. Five holds for want of terms: FSS-1 Portuguese, Ryff originals,
+  MUIS, Kinder & Sanders, BESAA.
+- [ ] **Two corrections that came out of that research, both worth acting on:**
+  - **`data/shan_2024_bfi_s.py` needs checking against register line 307.** The
+    BFI-10 row already blocks "any other short form built from BFI-44 or BFI-2
+    items, all translations", and your 2026-10-17 ruling (a short form of a
+    blocked long form is blocked) reaches the Gerlitz & Schupp BFI-S by that
+    row's own wording. If that script shipped BFI-S item text, it is live and
+    needs review.
+  - **`abu_tabar_2021_muis` is live and the MUIS is now `hold`.** Its deposit has
+    the English stems in SPSS variable labels, so confirm no MUIS item text was
+    ever staged rather than assuming it. Nothing appears to need withdrawing.
+- [ ] **`schadelbauer_2023_ati` item text is now unblocked and cheap** -- ATI is
+  `ship`, and the 9 verbatim stems are in the deposit's `DATA_CODING.txt`. This
+  is the single cheapest item-text job outstanding. Note the deposit's "[1-5]"
+  annotation is wrong: 6 is observed on all nine items and the table ships 1-6.
+- [ ] **Register rows still owed** (the earlier list, minus what was written):
+  the **Spanish DASS-21** translation row on the Greek pattern (still open --
+  the agent spent its box on the three-table Flow row instead), CaMir-R, BVAQ-B,
+  Celebrity Attitude Scale, YABIS, B-POHW, **BarOn EQ-i:YV / ICE:NA** (commercial,
+  MHS -- likely a quick located `block`), and PHC-PSQ (study-authored, likely
+  `ship`).
+- [ ] **The Kinder & Sanders hold has a concrete next step.**
+  electionstudies.org returns HTTP 403 behind a Cloudflare JS interstitial to an
+  agent, so the ANES terms were never actually read -- only search summaries,
+  and nothing was quoted. Fetch those pages from a real browser session, or read
+  the terms inside an ANES study's own documentation PDF, which travels with the
+  data and is not Cloudflare-fronted. Separate question: ANES terms would govern
+  the ANES fielding, but authorship is Kinder & Sanders (1996, *Divided by
+  Color*), so book-sourced wording is its own ask. This holds back
+  `henderson_2023_lapanel_racial_resent`.
+- [ ] **Ryff: a trap is recorded in the row.** The Wisconsin page's "Use of
+  scoring code is granted under CC BY-SA 4.0" covers the **scoring code only**;
+  its actual statement is "We do not have copyright authority over these
+  measures and cannot grant permission for use." Because the original is held,
+  no stand-in exists under irw#2121, so `ramirezparedes_2026_ryff` ships nothing
+  in either language.
+- [ ] **BESAA has an unresolved citation question**: a secondary source dates the
+  adult/adolescent form to 2011 rather than 2001, which could mean the row points
+  at the wrong article.
 - [ ] **15 rights-register rows are owed**, each with a located clause rather
   than an asserted one. None blocks a response table; all block item text.
   Stated by the agents, not written, because a defensible row needs terms
