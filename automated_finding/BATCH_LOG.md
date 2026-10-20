@@ -21391,3 +21391,61 @@ Masculinity1/2, so if they are one instrument with two 2-item subscales it ships
 as a 4-item table, and if they are two separate 2-item measures neither does.
 That needs the paper. Kenya's **OAC-2 stays out** at 2 items, with both stems
 sitting in the codebook if the floor ever moves.
+
+## 2026-10-20a — the staging folders were holding three destinations at once (#3077, #3100)
+
+No discovery, no new tables. ben-domingue asked for the staging folders to be
+segregated before the 2026-10-19h upload, on the grounds that `irw_output/` held
+more than that batch's 26 files. It held more than two batches' worth, and the
+third thing in it was a repair nobody had on a list.
+
+**What was in there.** 33 response CSVs and 28 `__items.csv`, of three kinds:
+
+1. **The 2026-10-19h batch** (26 + 5) — this was the part being looked for, and
+   it was in the `irw-nc11` worktree's `irw_output/`, not the main checkout's,
+   so neither folder on its own was the batch.
+2. **30 PACO / STECCO / Ryvkina response tables and their 28 `__items`** —
+   **already uploaded and released in `irw_5` v9.0.** All 30 are live in
+   `metadata/metadata.csv`, the 28 in `metadata/itemtext_metadata.csv`, and
+   their `table_changes.csv` rows are committed (790384df). Pointing `red_up` at
+   the folder would have re-uploaded a released shard's worth of tables for no
+   reason. Kept as the record of what went up, under
+   `runs/uploaded_2026-10-19_openesm/`.
+3. **The three `kemp_2019_mss_*` rebuilds** — a pending repair, and the one real
+   find. Their dates are correct here (2017-10-11 to 2017-11-29) while the LIVE
+   tables in `irw_4` still read January 1970: irw_4 v14.0 was built from output
+   staged ten minutes before #3100's pandas-3 fix landed. 790384df says exactly
+   that and deliberately left them out of `table_changes.csv` — "their rows go
+   in once a corrected upload is released" — but no open item anywhere said the
+   corrected files were sitting staged and ready. Now `runs/stage_kemp_2019_date_fix/`,
+   a REPLACE into `irw_4` (red_up will flag them `ELSEWHERE`), with three
+   `table_changes.csv` rows owed at that release.
+
+**Why a folder cannot be the unit.** `red_up <dir>` is the only upload route, so
+a folder that mixes destinations has no safe command at all — and the failure is
+silent in the expensive direction, because **uploads append**. The split is by
+destination, one leaf directory per red_up invocation, described in
+`runs/STAGING.md` with a per-file `MANIFEST.txt` (rows / unique ids / unique
+items / column list) in each, for the post-upload row-count check that `numRows`
+cannot give. No table name appears in two directories, so there is no shadowing
+risk between them. `irw_output/` and `itemtext_output/` were left empty; files
+from a later batch began arriving in `irw_output/` within the hour, which is the
+normal state of that folder and the reason the record now lives beside the files
+instead of in a folder name.
+
+Also noted while reconciling: the 2026-10-19f slice's 18 tables were **not**
+among those 33 files, so that slice is staged somewhere other than `irw_output/`.
+
+**One dictionary fix (#3122).** The seven `baseke_2026_*` rows carried the Data
+in Brief paper DOI and an empty `DOI (for data)`; the OSF deposit has a minted
+DOI (`10.17605/OSF.IO/F9YBP`, confirmed against the OSF identifiers API), which
+is what that column exists for. Seven lines edited in place so no other row's
+quoting moved. Nothing else about the 26 rows needed changing: licences read
+`CC BY-NC 4.0` / `CC BY-NC-SA 4.0` in both the Original and Derived columns,
+`Public Reshare?` is `Public`, `Contributor` is `automated`, and `Date` and
+`Source via` are blank, which is the current convention for staged rows — the
+last 120 rows of `dictionary_auto.csv` leave `Date` blank, and `Source via` is
+only for an aggregator key. **These rows are not pasted into the dictionary
+sheet and have not been since #2628**: `metadata/dict_union.R` merges the file
+into the sheet at export, cell by cell, so a staged row needs nothing from a
+human but review.

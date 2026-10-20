@@ -68,19 +68,46 @@ release" or "at upload" is **due now, not pending**:
   deliberately a separate file; merging it into `tags/tags_auto.csv` is a
   reviewed step.
 
+## The staging folders were holding three batches at once (2026-10-20)
+
+`irw_output/` held 33 response CSVs and `itemtext_output/` 28 `__items.csv`
+that belonged to three different destinations, so `red_up irw_output` was not a
+safe command for any of them. Split by destination into `runs/`, described in
+`runs/STAGING.md`, with a per-file `MANIFEST.txt` (rows / ids / items / columns)
+in each:
+
+- `runs/stage_2026-10-19h/` -- this batch, 26 + 5, nothing uploaded.
+- `runs/uploaded_2026-10-19_openesm/` -- 30 PACO/STECCO/Ryvkina response tables
+  and their 28 `__items`, **already released in `irw_5` v9.0** and live in
+  `metadata.csv` / `itemtext_metadata.csv`. Kept as the record, never to be
+  uploaded again.
+- [ ] `runs/stage_kemp_2019_date_fix/` -- **a pending repair nobody was tracking
+  as staged.** The three `kemp_2019_mss_*` rebuilds carry correct dates
+  (2017-10-11 to 2017-11-29); the LIVE tables in `irw_4` still read January
+  1970, because irw_4 v14.0 was built from output staged ten minutes before
+  #3100's fix landed. Commit 790384df says as much and deliberately left them
+  out of `table_changes.csv` ("their rows go in once a corrected upload is
+  released"). This is a REPLACE into `irw_4`, so red_up will flag them
+  `ELSEWHERE`; the three `table_changes.csv` rows are owed at that release.
+
+Also worth knowing: the 2026-10-19f slice's 18 tables were **not** among those
+33 files, so wherever that slice is staged, it is not `irw_output/`.
+
 ## From the 11 NC leads #3104 reopened (2026-10-19h, #3077)
 
-**26 tables / 282,482 responses staged in `automated_finding/irw_output/`,
-nothing uploaded.** All 26 pass `irw-validate --profile upload` with zero
+**26 tables / 282,482 responses staged in
+`automated_finding/runs/stage_2026-10-19h/`, nothing uploaded.** All 26 pass `irw-validate --profile upload` with zero
 failures and zero errors. (23 at first writing, plus the three the 3-item floor
 ruled the same day unblocked: `jones_2026_agi`, `jones_2026_tech_worry`,
 `baseke_2026_besaa3`.) 4 of the 11 leads carried data; the other 7 are
 closed with reasons in their leads files. Every `todo` row across the
 `repos_ledger_remine_2026-10-18_*` files is gone again (0 remaining).
 
-- [ ] **Upload is yours:** `irw_output/` holds this batch's 23 tables. Note that
-  the folder may also hold an earlier slice -- check mtimes before pointing
-  `red_up` at it.
+- [ ] **Upload is yours:** `red_up runs/stage_2026-10-19h/resp` (26 tables),
+  then `red_up runs/stage_2026-10-19h/items` (5 `__items.csv`). Response tables
+  first. The batch is no longer in `irw_output/`: on 2026-10-20 that folder held
+  three unrelated things at once and was split by destination -- see
+  `runs/STAGING.md`, and the 2026-10-20a BATCH_LOG entry for what was in there.
 - [ ] **`gilbert_2026_dep_symptoms` is HELD on provenance, and one message
   closes it.** The deposit (`10.7910/DVN/G68C5Y`, CC BY-NC-SA 4.0) redistributes
   a psychotherapy RCT's depression data that it never names -- the analysis
@@ -91,10 +118,11 @@ closed with reasons in their leads files. Every `todo` row across the
   `automated_finding/held_provenance_2026-10-19/`. **Asked in #3120**
   (assigned to @joshgilbert1994, 2026-10-19): either he names the source trial
   and its terms, or he confirms redistribution is fine. The table moves into
-  `irw_output/` unchanged if the answer is clean, and the script stays as the
+  `runs/stage_2026-10-19h/resp/` unchanged if the answer is clean, and the script stays as the
   record if it is not.
 - [x] **Item text: 4 of the 8 candidate tables are STAGED** in
-  `automated_finding/itemtext_output/` (179 rows), all four through
+  `automated_finding/runs/stage_2026-10-19h/items/` (179 rows; 5 tables and 200
+  rows after the 3-item ruling added `jones_2026_agi`), all four through
   `normalize_nulls.R` -> `validate_items.R --resp-csv` -> `audit_batch.R
   --resp-dir` (4/4 PASS, no anomalies) and `irw-validate` (ok, nothing to
   report), with provenance and `mapping_verification.csv` rows written:
