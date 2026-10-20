@@ -17,9 +17,22 @@ Ben's PII ruling unblocked (below).
 
 **Result: 87 response tables, 1,104,108 responses, all 87 passing
 `irw-validate --profile upload` with zero failures; 7 item text tables, gate
-chain green; 87 tag rows.** Assembled into `irw_output/` (+ `MANIFEST.txt`) and
-`itemtext_output/`. 85 dictionary rows staged via `stage_dict_row.py`. NOT
-uploaded.
+chain green; 87 tag rows.** **All 87 response tables and all 7 item text tables were UPLOADED on
+2026-10-20** (ben-domingue), into shard 7 and `irw_text`, both still unreleased.
+87 dictionary rows via `stage_dict_row.py` and 87 tag rows in
+`tags_auto_2026-10-20.csv`; coverage verified 87/87 on both.
+
+86 of the 87 verified on row count in the first run. `zheng_2018_hfmd_eq5d`
+failed `red_up`'s check and was re-uploaded alone -- a true replace, since
+`push_one` deletes any existing table of the name before creating it. No stray
+uploads. The cause was an orchestration error rather than a data one: the
+mobility level-4 fix was written into `irw_output/` at 15:40, after the folder
+had been handed over for upload, so `red_up`'s row count and its file stream
+straddled the edit and disagreed by exactly the 567 dropped cells. The guard
+caught it, which is the system working -- a mismatch sets `result.error` without
+raising, so the table stays in the draft unverified rather than passing silently.
+**Rule for next time: once the upload folder is handed over, it is frozen; stage
+a late fix somewhere else and say so explicitly.**
 
 ### Slice outcomes
 

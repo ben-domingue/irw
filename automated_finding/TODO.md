@@ -21,11 +21,32 @@ before touching that folder or re-adding anything from it.
   567 cells are dropped as not-applicable, all 3,500 ids retained, all four
   dimensions now 1-3. Not confirmed against the source paper, which was never
   reached -- revisit if it documents level 4 as something else.
-- [ ] **Upload is owed and is yours to trigger**: `red_up irw_output` (87
-  tables) and then `red_up itemtext_output` (7). **Response tables first.**
-  Nothing here has been uploaded; uploads APPEND, so do not point `red_up` at
-  `runs/dropped_2026-10-20/` or any `runs/stage_2026-10-20_s*/` folder -- those
-  are the per-agent originals and the withdrawn files, kept as the record.
+- [x] **UPLOADED 2026-10-20**, confirmed by ben-domingue: all 87 response
+  tables and all 7 item text tables. 86 of the 87 verified on row count in the
+  first run; `zheng_2018_hfmd_eq5d` failed `red_up`'s row-count check and was
+  re-uploaded on its own, which is a true replace (`push_one` deletes any
+  existing table of the name first). No stray uploads reported. The cause was
+  mine: I rewrote that CSV in `irw_output/` at 15:40 to drop the mobility
+  level-4 cells, after having told Ben the folder was ready, so `red_up`'s
+  row count and its file stream straddled the edit. **Lesson: once the upload
+  folder is handed over, do not edit it -- stage the fix elsewhere and say so.**
+  `itemtext_provenance.csv` stamped `uploaded=2026-10-20` for the 7 shipped item
+  text tables. Dictionary and tag coverage verified 87/87 each, with the item
+  text flag agreeing with what shipped.
+- [ ] **Release is owed** -- everything landed on the unreleased draft of shard 7
+  and `irw_text`, as does everything ahead of it in this file. After the release:
+  `metadata/covariate_labels/build.py`, then commit `covariate_labels.csv`.
+- [ ] **`metadata/data_notes.csv` rows are owed for this batch** and have not
+  been written. Several tables carry a caveat a user would want on the table
+  page: `wu_2025_flow_state` (`id` rests on a positional pretest/posttest
+  pairing, no respondent key in either file), `yang_2026_vocabulary_size`
+  (scored against a key derived from the responses, verified to reproduce the
+  deposit's own total for 275/275), `yang_2021_butterfly_knowledge` (the scale
+  midpoint 3 is an explicit "unknown", 34% of responses -- a real trap for
+  anyone treating it as ordinal), `zheng_2018_hfmd_eq5d` (567 mobility
+  not-applicable cells dropped), `choi_2021_job_satisfaction` (two rows share an
+  MTurk id, so `id` is the row index and does not identify a person in 2 cases),
+  and the `vezhodulu_2025_yabis_a` positional actual/ideal read.
 - [x] **Tag rows written for all 87**, in `automated_finding/tags_auto_2026-10-20.csv`
   (`Rater=claude-auto`). Deliberately a separate file: merging into
   `tags/tags_auto.csv` is a reviewed step, same as the 10-18 batch.
