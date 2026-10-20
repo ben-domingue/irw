@@ -21129,7 +21129,7 @@ about item text rather than as a separate message. Note the column is `q37_0`,
 not `q37`. It is worth the ask: 3,000 respondents, a published energy-literacy
 instrument, 264 columns.
 
-## 2026-10-19h — the 11 NC leads #3104 reopened: 4 deposits, 23 tables, 268,235 responses (#3077)
+## 2026-10-19h — the 11 NC leads #3104 reopened: 4 deposits, 26 tables, 282,482 responses (#3077)
 
 #3104 aligned `remine_ledger.py`'s leads filter with `datastandard.md` and in
 doing so restatused 11 `deferred` rows back to `todo` — after the 2026-10-19
@@ -21145,8 +21145,10 @@ data**, which is a 36% hit rate against the re-mine's usual 18% — unsurprising
 since these rows had already passed a shape filter and were parked on licence
 alone.
 
-**23 tables, 268,235 responses, staged in `irw_output/`. Nothing is uploaded.**
-All 23 pass `irw-validate --profile upload` with zero failures and zero errors.
+**26 tables, 282,482 responses, staged in `irw_output/`. Nothing is uploaded.**
+All 26 pass `irw-validate --profile upload` with zero failures and zero errors.
+(23 at first writing; the 3-item floor ruled the same day added three more --
+see the entry below.)
 
 | deposit | tables | responses |
 |---|---|---|
@@ -21328,3 +21330,64 @@ tag rows in `tags_auto_2026-10-19d.csv`, and the 11 leads rows statused in
 their own files. `covariate_labels/harvest.py` is owed for
 `platte_2026_mindset` only — it is the one script here that reads an SPSS file
 and ships `cov_*` columns.
+
+## 2026-10-19i — the item-count floor is 3 (ruled), which ships three more tables and reopens a deferral
+
+**ben-domingue, 2026-10-19: "i can live with 3 items. 2 gets extreme."** Asked
+because the 2026-10-19h batch had four thin candidates and the corpus already
+had two deferred on the same question since 2026-10-18. Recorded in
+`datastandard.md` "Before you start" beside the N>=100 floor, because it is an
+intake rule and that is where intake rules live:
+
+> **Check the item count too: the floor is 3 distinct items.** A 3-item scale is
+> thin but shippable; 2 items is not, and 1 never was. The count is of distinct
+> `item` values in the table as shipped, so a 2-item block does not become
+> shippable by being merged with an unrelated one.
+
+The note also says what the leads filter's `8 <= items <= 700` band is NOT: a
+ranking heuristic for choosing what to work next, not an intake floor. Reading
+it as one is how four of these got parked in the first place.
+
+**Three tables ship under it, all from 2026-10-19h's deposits** (14,247
+responses, and all three pass `irw-validate --profile upload` clean):
+
+| table | items | ids | responses |
+|---|---|---|---|
+| `jones_2026_agi` | 3 | 1,963 | 3,883 |
+| `jones_2026_tech_worry` | 3 | 1,009 | 3,027 |
+| `baseke_2026_besaa3` | 3 | 2,493 | 7,337 |
+
+`jones_2026_agi` is the one worth the ruling on its own: it is the measure
+Jones's book is built around — whether an AGI can be built, whether it should
+be, whether it should have human rights — asked of three independent samples
+over four years and pooled here with `cov_study`, each sample's ids in their own
+block. Its item text ships too (21 rows): the administered prompt is a column of
+the 2021 and 2023 files.
+
+**Two things found while building it, both about the same column name.**
+
+- **`RT` means two different things in two different files of one deposit, in
+  two different units.** In `stacked-oneq-results.csv` and
+  `ai-fear-scenarios-results-2021.csv` it varies response by response — ten
+  distinct values for a respondent who answered ten prompts — and is in
+  milliseconds (medians 8,039 and 7,804), so it is a per-item `rt`. In the two
+  AGI long files it is CONSTANT within a respondent (all three of a 2023
+  respondent's answers carry the same value) and is already in seconds (medians
+  18 and 39). That is a whole-survey duration, so it ships as
+  `cov_completion_time_s`, never as `rt`. Both shipped `rt` columns were
+  re-checked against this test before the ruling's tables were added; both are
+  genuinely per-response.
+- `baseke_2026_besaa3` ships its responses and **not** its item text: the rights
+  register blocks the Body Esteem Scale, quoting Lipowska & Lipowski's own
+  statement that they "do not have permission to make its original version
+  available in scientific publications". The codebook has all three stems, so
+  this is a rights hold and not a gap.
+
+**What the floor does to the standing deferrals.** `dvn/vidgon` is **unblocked**
+and is a ready lead again — 4 items on 0-8 over 1,746 respondents, in
+`leads/human_review_recheck_batch5_2026-10-18.csv`. `zenodo.22035093` is
+**sharpened rather than closed**: its four columns are Femininity1/2 and
+Masculinity1/2, so if they are one instrument with two 2-item subscales it ships
+as a 4-item table, and if they are two separate 2-item measures neither does.
+That needs the paper. Kenya's **OAC-2 stays out** at 2 items, with both stems
+sitting in the codebook if the floor ever moves.

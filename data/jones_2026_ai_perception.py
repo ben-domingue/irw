@@ -19,7 +19,7 @@
 #     per respondent (43,675 of 45,641 respondents in stacked-oneq answered a
 #     single prompt; 1,864 answered the whole 10-item familiarity battery).
 #
-# Tables (10), each a battery that was administered as a battery:
+# Tables (12), each a battery that was administered as a battery:
 #   jones_2026_ai_fear_2023        7 items  -3..3   500 ids
 #   jones_2026_ai_fear_2021        7 items  1-7     102 ids  (same items, 1-7)
 #   jones_2026_ai_art              6 items  -3..3   326 ids
@@ -30,10 +30,16 @@
 #   jones_2026_tech_familiarity   10 items  1-7   9,204 ids / 25,989 responses
 #   jones_2026_tech_worried       12 items  0/1   1,009 ids (2023+2024)
 #   jones_2026_tech_informed      12 items  0/1   1,009 ids (2023+2024)
+#   jones_2026_tech_worry          3 items  0-6   1,009 ids (2023+2024)
+#   jones_2026_agi                 3 items  -3..3 1,963 ids (2021+2023+2024)
 #
 # The 2023 and 2024 technology checklists are merged with cov_study naming the
 # year: the two files carry identical column sets and the deposit's own Year
 # column distinguishes them. 2024's ids are offset by 100000.
+#
+# The AGI block and the worry triple ship under the 3-item floor ruled
+# 2026-10-19 (datastandard.md "Before you start": 3 items is thin but
+# shippable, 2 is not).
 #
 # NOT shipped:
 #   * The stacked-oneq confidence battery (4 prompts, 10,883 respondents) and
@@ -42,18 +48,9 @@
 #     table can be calibrated. The script proves that rather than assuming it.
 #     Both batteries are in the corpus as complete -3..3 batteries from
 #     ai-trust-2023-wide.
-#   * The three AGI items (Possible / Should / Rights, -3..3) administered to
-#     Google Surveys 2021 (1,003), Prolific 2023 (459) and Prolific 2024 (501),
-#     which merge into one 3-item table of ~1,963 respondents. Deferred with
-#     the rest of the corpus's 3-4 item candidates pending a ruling on table
-#     thinness -- it is otherwise clean and would be the deposit's flagship.
-#     prolific-agi-2024-results.csv is the long-format twin of
-#     agi-2024-wide-correlates.csv and carries no User_ID at all, so the wide
-#     file is the one to build from if that ruling says ship.
 #   * Single items and pairs: oppose_or_support, the checkers/chess belief
 #     item, lobera_2020_ai_risk / _ai_benes (a 2-item scale on 1-5),
-#     tech_more_benefits / new_tech_danger, worry_ai / worry_self_driving /
-#     worry_facial (3 items on 0-6). Where the wide files carry a single
+#     tech_more_benefits / new_tech_danger. Where the wide files carry a single
 #     question about the respondent it ships as a covariate instead
 #     (Risk_Preference, Generalized_Trust, Party_1, Party_2).
 # Covariates: age, sex/gender, and per mode -- risk preference (0-10 self
@@ -61,7 +58,15 @@
 #   respondent chose), party identification and lean on the wide files;
 #   geography (US census region + state) and the survey's own sampling weight
 #   on the Google-Surveys files.
-# rt = RT/1000, the deposit's milliseconds converted to seconds.
+# rt = RT/1000, the deposit's milliseconds converted to seconds -- in
+#   stacked-oneq-results and ai-fear-scenarios-results-2021, where RT varies
+#   response by response (ten distinct values per respondent who answered ten
+#   prompts). The two AGI long files are different in BOTH respects: their RT
+#   is constant within a respondent (so it is the whole-survey duration, not a
+#   per-item time, and ships as cov_completion_time_s) and it is already in
+#   seconds (medians of 18 s and 39 s against 7,804 and 8,039 ms). Same
+#   deposit, same column name, two different quantities in two different
+#   units.
 # date = Survey_Date as Unix seconds (Google-Surveys files only).
 # id: every file identifies respondents by a PLATFORM ACCOUNT ID -- 24-hex
 #   Prolific ids in prolific-agi-2023-results, numeric Google ids elsewhere --
@@ -97,6 +102,8 @@ UA = {"User-Agent": "IRW-Finder/1.0 (ben.domingue@gmail.com)"}
 ACCESS = "https://dataverse.harvard.edu/api/access/datafile/{}?format=original"
 FILES = {
     "agi-2024-wide": 14140125,
+    "agi-2021-long": 14140123,
+    "agi-2023-long": 14140119,
     "ai-art-2023-wide": 14140116,
     "ai-fear-2023-wide": 14140122,
     "ai-fear-2021-long": 14140117,
@@ -153,17 +160,29 @@ CHECKLISTS = {
     "jones_2026_tech_worried": "worried_",
     "jones_2026_tech_informed": "informed_",
 }
+# Same two files, same respondents and the SAME id scheme as the checklists
+# above, so the three tables join: a 3-item worry triple on 0-6.
+WORRY_TRIPLE = ("jones_2026_tech_worry",
+                ["worry_ai", "worry_self_driving", "worry_facial"],
+                set(range(7)))
+# The deposit's flagship measure: three AGI items on -3..+3, asked of three
+# independent samples over four years. 2024 is built from the WIDE file --
+# prolific-agi-2024-results.csv is its long twin and carries no User_ID at all,
+# so it cannot be grouped by respondent.
+AGI_ITEMS = {
+    "I personally believe it will be possible to build an AGI.": "Possible",
+    "If scientists determine AGI can be built, it should be built.": "Should",
+    "An AGI should have the same rights as a human being.": "Rights",
+}
+AGI_SAMPLES = [
+    ("2021_google_surveys", "agi-2021-long", 0),
+    ("2023_prolific", "agi-2023-long", 100000),
+]
 # Wide columns deliberately left out of every table, with the reason.
 WIDE_DROPPED = {
-    "Possible": "AGI item 1 of 3 -- deferred on thinness",
-    "Should": "AGI item 2 of 3 -- deferred on thinness",
-    "Rights": "AGI item 3 of 3 -- deferred on thinness",
     "lobera_2020_ai_risk": "2-item scale on 1-5 -- too thin",
     "lobera_2020_ai_benes": "2-item scale on 1-5 -- too thin",
     "oppose_or_support": "single item",
-    "worry_ai": "3-item worry triple on 0-6 -- deferred on thinness",
-    "worry_self_driving": "3-item worry triple on 0-6 -- deferred on thinness",
-    "worry_facial": "3-item worry triple on 0-6 -- deferred on thinness",
     "tech_more_benefits": "2-item pair -- too thin",
     "new_tech_danger": "2-item pair -- too thin",
     "Year": "carried as cov_study where two years merge",
@@ -301,11 +320,14 @@ def do_wide(raw: dict) -> set:
 
 
 def do_checklists(raw: dict) -> set:
-    """The 0/1 'which of these worry you / do you feel informed about' lists,
-    2023 and 2024 pooled with cov_study."""
+    """The 0/1 'which of these worry you / do you feel informed about' lists and
+    the 0-6 worry triple -- 2023 and 2024 pooled with cov_study, on one id
+    scheme so the three tables join."""
     used = set()
-    for name, prefix in CHECKLISTS.items():
-        items = [prefix + topic for topic in CHECKLIST_TOPICS]
+    jobs = [(name, [prefix + t for t in CHECKLIST_TOPICS], {0, 1})
+            for name, prefix in CHECKLISTS.items()]
+    jobs.append(WORRY_TRIPLE)
+    for name, items, pv_set in jobs:
         parts = []
         for year, src, offset in ((2023, "ai-indices-2023-wide", 0),
                                   (2024, "ai-indices-2024-wide", 100000)):
@@ -330,13 +352,84 @@ def do_checklists(raw: dict) -> set:
         t = t.reset_index(drop=True)
 
         assert not t.duplicated(["id", "item"]).any()
-        assert t["item"].nunique() == 12
-        assert set(t["resp"].unique()) == {0, 1}
+        assert t["item"].nunique() == len(items)
+        assert set(t["resp"].unique()) <= pv_set, (name, sorted(set(t["resp"])))
         assert t.groupby("cov_study")["id"].nunique().min() >= 100
         assert t["id"].nunique() == 1009, t["id"].nunique()
-        gate(t, name, items, {0, 1}, name.replace("jones_2026_", ""))
+        gate(t, name, items, pv_set, name.replace("jones_2026_", ""))
         write(t, name)
     return used
+
+
+def do_agi(raw: dict) -> set:
+    """The three AGI items, pooled over three independent samples. 2021 and
+    2023 come from their long files (where the administered prompt is a column
+    and the item code is derived from it); 2024 comes from the wide file,
+    because its own long twin carries no respondent id."""
+    name = "jones_2026_agi"
+    parts = []
+    for study, src, offset in AGI_SAMPLES:
+        d = raw[src].copy()
+        assert set(d["Prompt"].unique()) == set(AGI_ITEMS), (src, d["Prompt"].unique())
+        # RT here is NOT a per-item response time and is not `rt`. In the 2023
+        # file it is IDENTICAL across each respondent's three answers, i.e. the
+        # whole-survey duration; in the 2021 file the survey is one question
+        # long, so it is the same quantity. It is also in SECONDS, unlike the
+        # millisecond RT of the other two long files in this same deposit
+        # (median 18 s and 39 s against medians of 7,804 and 8,039 ms) -- so it
+        # is neither divided nor renamed into `rt`.
+        per_person = d.groupby("User_ID")["RT"].nunique()
+        assert (per_person == 1).all(), (src, per_person.max())
+        assert d["RT"].between(1, 3600).all(), d["RT"].describe()
+        t = pd.DataFrame({
+            "id": participant_index(d["User_ID"]) + offset,
+            "item": d["Prompt"].map(AGI_ITEMS),
+            "resp": pd.to_numeric(d["Response"], errors="coerce"),
+            "cov_study": study,
+            "cov_completion_time_s": d["RT"],
+            "cov_age_band": d["Age"],
+            "cov_sex": d["Sex"],
+        })
+        parts.append(t)
+
+    w = raw["agi-2024-wide"].reset_index(drop=True)
+    long = w.melt(id_vars=[c for c in WIDE_COVS if c in w.columns],
+                  value_vars=list(AGI_ITEMS.values()),
+                  var_name="item", value_name="resp",
+                  ignore_index=False).reset_index(names="row")
+    long = long.rename(columns=WIDE_COVS)
+    long["id"] = long["row"] + 1 + 200000
+    long["cov_study"] = "2024_prolific"
+    parts.append(long[["id", "item", "resp", "cov_study", "cov_age", "cov_sex",
+                       "cov_risk_preference", "cov_generalized_trust",
+                       "cov_party", "cov_party_lean"]])
+
+    t = pd.concat(parts, ignore_index=True)
+    t["resp"] = pd.to_numeric(t["resp"], errors="coerce")
+    t = t.dropna(subset=["resp"])
+    t["resp"] = t["resp"].astype(int)
+    covs = sorted(c for c in t.columns if c.startswith("cov_"))
+    t = t[["id", "item", "resp"] + covs].sort_values(["id", "item"])
+    t = t.reset_index(drop=True)
+
+    items = sorted(t["item"].unique())
+    assert items == ["Possible", "Rights", "Should"], items
+    assert not t.duplicated(["id", "item"]).any()
+    assert set(t["resp"].unique()) <= AGREE
+    # Each sample's ids live in their own block, so nothing collides.
+    blocks = t.groupby("cov_study")["id"].agg(["min", "max", "nunique"])
+    assert blocks.loc["2021_google_surveys", "nunique"] == 1003
+    assert blocks.loc["2023_prolific", "nunique"] == 459
+    assert blocks.loc["2024_prolific", "nunique"] == 501
+    assert t["id"].nunique() == 1003 + 459 + 501
+    # 2021 is one prompt per respondent (Google Surveys); the other two are
+    # complete. That is what makes the pooled table calibrable.
+    per = t.groupby("id")["item"].nunique()
+    assert per[t.groupby("id")["cov_study"].first() == "2021_google_surveys"].eq(1).all()
+    gate(t, name, items, AGREE, "agi_attitudes")
+    write(t, name)
+    return {(src, "Prompt") for _, src, _ in AGI_SAMPLES} | \
+           {("agi-2024-wide", i) for i in AGI_ITEMS.values()}
 
 
 def do_fear_2021(raw: dict) -> None:
@@ -455,7 +548,7 @@ def do_stacked(raw: dict) -> None:
 def convert() -> None:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     raw = {k: fetch(k) for k in FILES}
-    used = do_wide(raw) | do_checklists(raw)
+    used = do_wide(raw) | do_checklists(raw) | do_agi(raw)
     do_fear_2021(raw)
     do_stacked(raw)
 

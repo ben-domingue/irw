@@ -70,9 +70,11 @@ release" or "at upload" is **due now, not pending**:
 
 ## From the 11 NC leads #3104 reopened (2026-10-19h, #3077)
 
-**23 tables / 268,235 responses staged in `automated_finding/irw_output/`,
-nothing uploaded.** All 23 pass `irw-validate --profile upload` with zero
-failures and zero errors. 4 of the 11 leads carried data; the other 7 are
+**26 tables / 282,482 responses staged in `automated_finding/irw_output/`,
+nothing uploaded.** All 26 pass `irw-validate --profile upload` with zero
+failures and zero errors. (23 at first writing, plus the three the 3-item floor
+ruled the same day unblocked: `jones_2026_agi`, `jones_2026_tech_worry`,
+`baseke_2026_besaa3`.) 4 of the 11 leads carried data; the other 7 are
 closed with reasons in their leads files. Every `todo` row across the
 `repos_ledger_remine_2026-10-18_*` files is gone again (0 remaining).
 
@@ -134,14 +136,20 @@ closed with reasons in their leads files. Every `todo` row across the
   stressful at all) to 4 (extremely stressful)", while the shared data holds
   exactly three distinct values on all eleven items, coded 1, 3 and 5. Shipped
   as recorded; the anchor-to-code mapping is what is unknown.
-- [ ] **`tags_auto_2026-10-19d.csv` (23 rows)** is written and, like its
-  predecessors, deliberately separate; merging it into `tags/tags_auto.csv` is a
-  reviewed step.
-- [ ] **The 3-4 item ruling now gates four more clean tables** (it already gated
-  `dvn/vidgon` and `zenodo.22035093`): Jones's 3-item AGI block, which merges
-  three samples into ~1,963 respondents and is that deposit's flagship measure;
-  Jones's 0-6 worry triple; and Kenya's OAC-2 (2 items) and BESAA-3 (3 items),
-  whose stems the codebook gives in full.
+- [ ] **`tags_auto_2026-10-19d.csv` (23 rows) and `tags_auto_2026-10-19e.csv`
+  (3 rows)** are written and, like their predecessors, deliberately separate;
+  merging them into `tags/tags_auto.csv` is a reviewed step.
+- [x] **The item-count floor is ruled: 3 ships, 2 does not** (ben-domingue,
+  2026-10-19, now in `datastandard.md` "Before you start"). Three of this
+  batch's four thin candidates are built and staged -- `jones_2026_agi` (the
+  AGI block, three samples pooled, 1,963 respondents, item text shipped too),
+  `jones_2026_tech_worry` and `baseke_2026_besaa3`. Kenya's OAC-2 stays out at
+  2 items. Of the two older deferrals the ruling reached: **`dvn/vidgon` is
+  unblocked and is a ready lead again** (4 items on 0-8 over 1,746 respondents,
+  in `leads/human_review_recheck_batch5_2026-10-18.csv`, now statused `todo`),
+  while `zenodo.22035093` is sharpened rather than closed -- one 4-item
+  instrument or two 2-item ones decides whether it ships at all, and that needs
+  the paper.
 - [ ] **`10.25442/hku.30959672` is embargoed until 2032-12-28**, not dead: 236
   Hong Kong gifted adolescents, mindfulness/self-compassion/perfectionism. Worth
   a diary note rather than a lead. **The pipeline defect behind it:** the

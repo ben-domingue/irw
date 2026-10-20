@@ -25,6 +25,7 @@
 #   baseke_2026_css11   CSS_1-11    see CAVEAT below, survey D
 #   baseke_2026_smd9    SMD_1-9     0/1  survey E
 #   baseke_2026_epv7    EPV_1-7     0-2  survey E
+#   baseke_2026_besaa3  BESAA1/5/12 0-4  survey E
 #
 # CSS-11 CAVEAT (an issues-page entry is owed if this table ships): the paper
 #   and the deposit's own codebook both document five options, "rated from 0
@@ -43,11 +44,15 @@
 #     respond 'Not at all'"), not an item. The paper's sensitivity analysis
 #     excludes respondents who failed it; this table keeps every respondent and
 #     does not carry the check.
-#   MEIS_9 / MEIS_12 (the paper's OAC-2 online-appearance-comparison pair) and
-#     BESAA1 / BESAA5 / BESAA12 (its BESAA-3 appearance items) -- two- and
-#     three-item scales. Deferred with the rest of the corpus's 3-4 item
-#     candidates pending a ruling on table thinness, not rejected: both are
-#     clean and the codebook gives their stems.
+#   MEIS_9 / MEIS_12 -- the paper's OAC-2 online-appearance-comparison pair, a
+#     TWO-item scale. Not shipped: the floor is 3 distinct items (ruled
+#     2026-10-19, datastandard.md "Before you start"). The codebook gives both
+#     stems, so it is one edit away if that ever changes.
+#     BESAA-3 (BESAA1/5/12) ships under the same ruling -- 3 items is thin but
+#     shippable. Its item text does NOT ship: the rights register blocks the
+#     Body Esteem Scale, quoting Lipowska & Lipowski's own statement that they
+#     "do not have permission to make its original version available in
+#     scientific publications".
 #   MEIS_Accounts (has social media y/n) and MEIS_Time (daily use band) are
 #     single screening questions and ship as covariates.
 # Covariates: study, age, gender, form, religion, county, surviving parents,
@@ -127,16 +132,15 @@ SCALES = {
                          ["survey_e"], {0, 1}),
     "baseke_2026_epv7": ([f"EPV_{i}" for i in range(1, 8)],
                          ["survey_e"], {0, 1, 2}),
+    "baseke_2026_besaa3": (["BESAA1", "BESAA5", "BESAA12"],
+                           ["survey_e"], {0, 1, 2, 3, 4}),
 }
 DROPPED = {
     "PHQ_Functioning": "functional-impairment follow-up, different format",
     "GAD_Functioning": "functional-impairment follow-up, different format",
     "GAD_Check": "embedded attention check, not an item",
-    "MEIS_9": "OAC-2, a 2-item scale -- deferred on thinness",
-    "MEIS_12": "OAC-2, a 2-item scale -- deferred on thinness",
-    "BESAA1": "BESAA-3, a 3-item scale -- deferred on thinness",
-    "BESAA5": "BESAA-3, a 3-item scale -- deferred on thinness",
-    "BESAA12": "BESAA-3, a 3-item scale -- deferred on thinness",
+    "MEIS_9": "OAC-2, a 2-item scale -- under the 3-item floor",
+    "MEIS_12": "OAC-2, a 2-item scale -- under the 3-item floor",
 }
 
 
