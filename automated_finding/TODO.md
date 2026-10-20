@@ -3,6 +3,27 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## Repos batch 2026-10-19: 76 unworked leads, nothing processed (2026-10-19)
+
+Discovery + triage are done and every standing record is written
+(`search_terms_log.csv` +135, `human_review/human_review_zenodo_2026-10-19.csv`,
+refined flags in `repo_triage_seen_keys.csv`, `BATCH_LOG.md`). No processing
+script was written. The leads live in `leads/repos_leads_2026-10-19.csv`.
+
+- [ ] **6 `good` candidates** await processing scripts — largest first:
+  Indonesian academic procrastination (2,111p/28i, CC BY, `10.17632/cg77typtk4`),
+  Ireland health literacy (448p/62i, CC BY), Functionality Appreciation Scale
+  (567p/17i, CC0), blended reading engagement (260p/74i, CC BY), chatbot
+  effectiveness (189p/14i, CC BY), comprensión lectora Ventanilla (110p/9i, CC0).
+  Check `grep -rl "DOI: <doi>" ../data/*.py` before writing each one.
+- [ ] **53 `recoverable_format` + 8 `worth_retrying` + 7 `aggregate_continuous`**
+  need a re-read before they can be judged. Most of the 53 are the same shape:
+  "keep only the N columns sharing one small integer domain, re-read".
+- [ ] **2 `pii_suspected` rows need the structural-vs-incidental column check**
+  (zenodo 22749041, zenodo 20809) before either is recorded as a skip. A
+  detector hit is not by itself a structural finding under the 2026-10-19 rule.
+
+
 ## The 2026-10-19 upload happened: 78 tables are in the draft (2026-10-19)
 
 ben-domingue uploaded the 2026-10-19c and 2026-10-19d slices on 2026-10-19 --

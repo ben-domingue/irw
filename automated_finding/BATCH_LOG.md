@@ -21128,3 +21128,64 @@ for a version with `q37_0` and `comments` dropped, in the same email that asks
 about item text rather than as a separate message. Note the column is `q37_0`,
 not `q37`. It is worth the ask: 3,000 respondents, a published energy-literacy
 instrument, 264 columns.
+
+## Repos discovery batch 2026-10-19 (mode 3) — discovery + triage only, nothing processed yet
+
+Fired on request ("fire an automated search"). Discovery and triage are
+complete and every standing record is written; **no processing script was
+written in this batch** — the 76 unworked leads are carried in
+`leads/repos_leads_2026-10-19.csv`, not in anyone's head.
+
+**Terms.** 15 constructs × 9 languages = 135 queries, every one checked
+against `search_terms_log.csv` first and absent from it. Constructs: sensory
+processing sensitivity, interoceptive awareness, boredom proneness, disgust
+sensitivity, flow state, caregiver burden, dental anxiety, academic
+procrastination, job crafting, organizational citizenship behavior,
+entrepreneurial intention, reading motivation, health literacy, body image,
+moral injury. All 135 appended to `search_terms_log.csv` (now 10,080 rows).
+This keeps the batch-9 multilingual discipline that batches 10-13 dropped.
+
+**Discovery.** 1,157 candidates in 67 min, after excluding 4,075 already-seen
+DOIs (1,616 in the IRW dictionary, 1,289 in `human_review/`, 1,184 in the
+conjoint ledger). By source: dataverse 333, zenodo 319, surf 197, figshare
+124, scholars_portal 95, datacite 55, mendeley 17, osf 10, dryad 7.
+
+**Triage** (369 rows resolved to a downloadable file; the rest fell out at
+file resolution). `good` 6 · `human_assistance` 97 · `no_usable_file` 131 ·
+`download_failed` 92 · `not_item_response` 21 · `below_min_n` 16 · `error` 3 ·
+`pii_suspected` 2 · `license_restricted` 1.
+
+**Step 2b ran** (chained via `--retriage`), over all 97 `human_assistance`
+rows: `recoverable_format` 53 (55%), `not_item_response` 19, `human_review`
+10, `worth_retrying` 8, `aggregate_continuous` 7, `conj` 0. The 10
+human_review rows were archived to
+`human_review/human_review_zenodo_2026-10-19.csv`, and all 97 refined flags
+were written back into `repo_triage_seen_keys.csv` — so the #2203/#3051
+failure shape (a verdict that exists only in gitignored `runs/` while the key
+is permanently in the ledger) does not apply to this batch.
+
+**The six `good` rows**, all licence-verified, none processed yet:
+
+| table-to-be | source | N | items | licence |
+|---|---|---|---|---|
+| Indonesian HE students — disorganization / fear of failure / academic procrastination (10.17632/cg77typtk4) | mendeley | 2,111 | 28 | CC BY |
+| Health literacy + trust in health information, Ireland (10.5281/zenodo.23318225) | zenodo | 448 | 62 | CC BY |
+| Functionality Appreciation Scale, Rasch, US adults (10.5061/dryad.66t1g1k4d) | zenodo | 567 | 17 | CC0 |
+| College students' reading engagement, blended classrooms (10.5281/zenodo.15254212) | zenodo | 260 | 74 | CC BY |
+| Chatbot effectiveness in academic assistance (10.5281/zenodo.23392748) | zenodo | 189 | 14 | CC BY |
+| Comprensión lectora, sexto grado, Ventanilla-Callao (10.5281/zenodo.20811) | zenodo | 110 | 9 | CC0 |
+
+**Two `pii_suspected` rows are NOT yet skips.** Under the rule narrowed on
+2026-10-19 the test is structural-vs-incidental at the *column* level, and
+that check has not been run on either (zenodo 22749041, zenodo 20809). They
+are carried as `unworked` with the check named, rather than recorded as
+skipped on a detector hit alone.
+
+**One licence stop.** The Jordan vaccine-literacy/asthma deposit
+(tandf.figshare 29986936) is CC BY-NC-ND. NC would proceed under the
+2026-10-01 ruling; ND stops it, because reshaping to IRW long format is a
+modification. That is a definitive skip, not a permission gap, so it is not
+a `license_blocked_candidates.csv` row.
+
+**Item text:** not assessed for any candidate — Step 3 was not reached, and
+Step 3.5 is only answerable with the raw deposit open.

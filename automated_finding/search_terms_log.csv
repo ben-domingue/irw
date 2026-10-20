@@ -9943,3 +9943,138 @@ date,query,output_file,notes
 2026-10-15,bereidheid tot communiceren,irw_triage_2026-10-15.csv,repos mode-3 batch 2026-10-15; 15 terms x 9 languages; 1225 candidates
 2026-10-15,의사소통 의지,irw_triage_2026-10-15.csv,repos mode-3 batch 2026-10-15; 15 terms x 9 languages; 1225 candidates
 2026-10-16,"[full] 125 terms x journals=peerj,screports,jofintelligence,mbr,behavsci,apm,bmcmrm,jopd,bmcpubhealth,heliyon,psychometrika",runs/pmc_monthly_candidates_full_2026-10-16.csv,pmc monthly-script automated run; mode=full; 36 candidates triaged; 125/125 terms visited (36 hit per-term cap 1)
+2026-10-19,sensory processing sensitivity,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,sensibilidad de procesamiento sensorial,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,sensorische Verarbeitungssensitivität,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,sensibilité du traitement sensoriel,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,感觉加工敏感性,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,感覚処理感受性,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,حساسية المعالجة الحسية,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,sensorische verwerkingsgevoeligheid,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,감각처리민감성,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,interoceptive awareness scale,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,escala de conciencia interoceptiva,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,Interozeptive Achtsamkeit Skala,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,échelle de conscience intéroceptive,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,内感受觉察量表,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,内受容感覚への気づき尺度,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,مقياس الوعي الداخلي,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,interoceptieve bewustzijn schaal,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,내수용 감각 자각 척도,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,boredom proneness scale,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,escala de propensión al aburrimiento,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,Langeweileneigung Skala,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,échelle de propension à l'ennui,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,无聊倾向量表,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,退屈傾向尺度,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,مقياس القابلية للملل,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,verveling geneigdheid schaal,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,권태 성향 척도,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,disgust sensitivity scale,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,escala de sensibilidad al asco,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,Ekelempfindlichkeit Skala,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,échelle de sensibilité au dégoût,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,厌恶敏感性量表,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,嫌悪感受性尺度,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,مقياس الحساسية للاشمئزاز,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,walging gevoeligheid schaal,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,혐오 민감성 척도,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,flow state scale,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,escala de estado de flujo,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,Flow-Zustand Skala,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,échelle d'état de flow,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,心流状态量表,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,フロー状態尺度,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,مقياس حالة التدفق,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,flow toestand schaal,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,몰입 상태 척도,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,caregiver burden inventory,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,inventario de sobrecarga del cuidador,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,Pflegebelastung Inventar,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,inventaire du fardeau de l'aidant,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,照顾者负担量表,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,介護負担感尺度,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,مقياس عبء مقدم الرعاية,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,mantelzorg belasting vragenlijst,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,돌봄 부담 척도,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,dental anxiety scale,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,escala de ansiedad dental,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,Zahnbehandlungsangst Skala,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,échelle d'anxiété dentaire,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,牙科焦虑量表,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,歯科不安尺度,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,مقياس قلق طب الأسنان,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,tandheelkundige angst schaal,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,치과 불안 척도,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,academic procrastination scale,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,escala de procrastinación académica,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,akademische Prokrastination Skala,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,échelle de procrastination académique,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,学业拖延量表,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,学業的先延ばし尺度,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,مقياس التسويف الأكاديمي,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,academisch uitstelgedrag schaal,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,학업 지연행동 척도,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,job crafting scale,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,escala de rediseño del trabajo,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,Job Crafting Skala,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,échelle de job crafting,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,工作重塑量表,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,ジョブクラフティング尺度,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,مقياس صياغة الوظيفة,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,job crafting schaal,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,잡 크래프팅 척도,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,organizational citizenship behavior scale,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,escala de conducta de ciudadanía organizacional,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,organisationales Bürgerverhalten Skala,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,échelle de comportement de citoyenneté organisationnelle,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,组织公民行为量表,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,組織市民行動尺度,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,مقياس سلوك المواطنة التنظيمية,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,organisatieburgerschapsgedrag schaal,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,조직시민행동 척도,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,entrepreneurial intention scale,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,escala de intención emprendedora,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,unternehmerische Absicht Skala,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,échelle d'intention entrepreneuriale,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,创业意向量表,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,起業意図尺度,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,مقياس النية الريادية,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,ondernemersintentie schaal,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,창업 의도 척도,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,reading motivation questionnaire,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,cuestionario de motivación lectora,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,Lesemotivation Fragebogen,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,questionnaire de motivation en lecture,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,阅读动机问卷,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,読書動機づけ質問紙,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,استبيان دافعية القراءة,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,leesmotivatie vragenlijst,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,읽기 동기 질문지,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,health literacy test,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,prueba de alfabetización en salud,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,Gesundheitskompetenz Test,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,test de littératie en santé,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,健康素养测试,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,ヘルスリテラシー尺度,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,اختبار الثقافة الصحية,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,gezondheidsvaardigheden test,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,건강 문해력 검사,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,body image scale,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,escala de imagen corporal,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,Körperbild Skala,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,échelle d'image corporelle,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,身体意象量表,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,身体イメージ尺度,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,مقياس صورة الجسم,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,lichaamsbeeld schaal,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,신체 이미지 척도,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,moral injury scale,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,escala de daño moral,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,moralische Verletzung Skala,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,échelle de blessure morale,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,道德伤害量表,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,道徳的傷害尺度,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,مقياس الإصابة الأخلاقية,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,morele verwonding schaal,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-19,도덕적 손상 척도,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
