@@ -21549,3 +21549,199 @@ their item text can ship; the five dated `tags_auto_*` files (163 rows) whose
 merge into `tags/tags_auto.csv` is a reviewed step; `dvn/vidgon` and
 `10.7910/dvn/vsfcvg` as ready leads; and the 56 `pending_ruling` NC rows in
 `leads/nc_licence_pending_ruling_2026-10-18.csv`.
+## Repos discovery batch 2026-10-19 (mode 3) — discovery + triage only, nothing processed yet
+
+Fired on request ("fire an automated search"). Discovery and triage are
+complete and every standing record is written; **no processing script was
+written in this batch** — the 76 unworked leads are carried in
+`leads/repos_leads_2026-10-19.csv`, not in anyone's head.
+
+**Terms.** 15 constructs × 9 languages = 135 queries, every one checked
+against `search_terms_log.csv` first and absent from it. Constructs: sensory
+processing sensitivity, interoceptive awareness, boredom proneness, disgust
+sensitivity, flow state, caregiver burden, dental anxiety, academic
+procrastination, job crafting, organizational citizenship behavior,
+entrepreneurial intention, reading motivation, health literacy, body image,
+moral injury. All 135 appended to `search_terms_log.csv` (now 10,080 rows).
+This keeps the batch-9 multilingual discipline that batches 10-13 dropped.
+
+**Discovery.** 1,157 candidates in 67 min, after excluding 4,075 already-seen
+DOIs (1,616 in the IRW dictionary, 1,289 in `human_review/`, 1,184 in the
+conjoint ledger). By source: dataverse 333, zenodo 319, surf 197, figshare
+124, scholars_portal 95, datacite 55, mendeley 17, osf 10, dryad 7.
+
+**Triage** (369 rows resolved to a downloadable file; the rest fell out at
+file resolution). `good` 6 · `human_assistance` 97 · `no_usable_file` 131 ·
+`download_failed` 92 · `not_item_response` 21 · `below_min_n` 16 · `error` 3 ·
+`pii_suspected` 2 · `license_restricted` 1.
+
+**Step 2b ran** (chained via `--retriage`), over all 97 `human_assistance`
+rows: `recoverable_format` 53 (55%), `not_item_response` 19, `human_review`
+10, `worth_retrying` 8, `aggregate_continuous` 7, `conj` 0. The 10
+human_review rows were archived to
+`human_review/human_review_zenodo_2026-10-19.csv`, and all 97 refined flags
+were written back into `repo_triage_seen_keys.csv` — so the #2203/#3051
+failure shape (a verdict that exists only in gitignored `runs/` while the key
+is permanently in the ledger) does not apply to this batch.
+
+**The six `good` rows**, all licence-verified, none processed yet:
+
+| table-to-be | source | N | items | licence |
+|---|---|---|---|---|
+| Indonesian HE students — disorganization / fear of failure / academic procrastination (10.17632/cg77typtk4) | mendeley | 2,111 | 28 | CC BY |
+| Health literacy + trust in health information, Ireland (10.5281/zenodo.23318225) | zenodo | 448 | 62 | CC BY |
+| Functionality Appreciation Scale, Rasch, US adults (10.5061/dryad.66t1g1k4d) | zenodo | 567 | 17 | CC0 |
+| College students' reading engagement, blended classrooms (10.5281/zenodo.15254212) | zenodo | 260 | 74 | CC BY |
+| Chatbot effectiveness in academic assistance (10.5281/zenodo.23392748) | zenodo | 189 | 14 | CC BY |
+| Comprensión lectora, sexto grado, Ventanilla-Callao (10.5281/zenodo.20811) | zenodo | 110 | 9 | CC0 |
+
+**Two `pii_suspected` rows are NOT yet skips.** Under the rule narrowed on
+2026-10-19 the test is structural-vs-incidental at the *column* level, and
+that check has not been run on either (zenodo 22749041, zenodo 20809). They
+are carried as `unworked` with the check named, rather than recorded as
+skipped on a detector hit alone.
+
+**One licence stop.** The Jordan vaccine-literacy/asthma deposit
+(tandf.figshare 29986936) is CC BY-NC-ND. NC would proceed under the
+2026-10-01 ruling; ND stops it, because reshaping to IRW long format is a
+modification. That is a definitive skip, not a permission gap, so it is not
+a `license_blocked_candidates.csv` row.
+
+**Item text:** not assessed for any candidate — Step 3 was not reached, and
+Step 3.5 is only answerable with the raw deposit open.
+
+## Repos batch 2026-10-19, processing pass (2026-10-20): 8 tables, 3 of the 6 `good` rows shipped
+
+The six `good` candidates from the 2026-10-19 discovery, worked through.
+**Three shipped (8 tables, 67,374 responses), three rejected** -- and the three
+rejections are the substance of this entry, because each was invisible to
+triage.
+
+### Shipped
+
+| table | N | items | resp | licence |
+|---|---|---|---|---|
+| `aldhi_2025_disorganization` | 2,111 | 5 | 1-5 | CC BY 4.0 |
+| `aldhi_2025_fear_of_failure` | 2,111 | 5 | 1-5 | CC BY 4.0 |
+| `aldhi_2025_acad_procrastination` | 2,111 | 5 | 1-5 | CC BY 4.0 |
+| `aldhi_2025_acad_performance` | 2,111 | 4 | 1-5 | CC BY 4.0 |
+| `byrne_2026_hlq_part1` | 448 | 23 | 1-4 | CC BY 4.0 |
+| `byrne_2026_hlq_part2` | 448 | 21 | 1-5 | CC BY 4.0 |
+| `byrne_2026_health_info_sources` | 448 | 8 | 1-5 | CC BY 4.0 |
+| `feng_2023_fas` | 567 | 7 | 0-4 | CC0 1.0 |
+
+Scripts: `data/aldhi_2025_procrastination.py`,
+`data/byrne_2026_health_literacy.py`, `data/feng_2023_fas.py`. All eight pass
+`irw-validate --profile upload` and `run_qc` with no `fail`. The only warnings
+are `imputed_values*` response-concentration notices (ceiling effects on
+agreement scales; every value is an integer on the documented scale and no
+source mentions imputation -- the Byrne codebook states missing data are blank
+cells) and one `resp_scale_nested_support` on `feng_2023_fas`, where items F3
+and F7 were simply never answered 0 by any of the 567 respondents.
+
+The Byrne split into three tables is the **codebook's own structure**, not an
+inference from observed ranges: it names "HLQ Part 1 (agreement scale)" 1-4 and
+"HLQ Part 2 (difficulty scale)" 1-5 as separate parts, item by item, and the
+eight Section 4 source items are a different instrument again.
+
+### Item text
+
+- `feng_2023_fas` -- **shipped**. All 7 FAS stems and all 5 anchors are printed
+  verbatim in the deposit README and the workbook's `Legend` sheet. The
+  instrument is third-party (Functionality Appreciation Scale, Alleva, Tylka &
+  Kroon Van Diest 2017), so the deposit's CC0 does not clear it; it had **no
+  row in the rights register**, so nothing would have warned. Registered
+  `ship` on an originator grant -- Alleva writes the FAS chapter of the
+  Cambridge Handbook of Body Image-Related Measures, whose summary states the
+  scale "is free to use in any setting". Recorded alongside it: the chapter
+  body's own permissions section is paywalled and was not read.
+- `byrne_2026_health_info_sources` -- **shipped**. The eight stems are
+  study-authored and fully worded in the deposit's codebook, under its CC BY.
+- `byrne_2026_hlq_part1` / `part2` -- **never shippable**, and now recorded as
+  such. The codebook states it outright: the HLQ "is used under licence from
+  Swinburne University of Technology. Under that licence the individual item
+  wording cannot be reproduced ... Researchers wishing to see the items should
+  contact Swinburne." Registered as a `block` so the next pass starts from the
+  ruling instead of re-deriving it.
+- `aldhi_2025_*` -- **not shipped**. Both levels checked: the .xlsx carries
+  bare codes (DIS1..APR4) as its only headers and has no label level at all,
+  and the deposit ships no codebook and cites no paper. The wording is in the
+  authors' own instrument, which the deposit does not reproduce.
+
+Gates on the two shipped item-text tables: `normalize_nulls.R`,
+`validate_items.R --resp-csv` (item and resp sets match exactly, both),
+`audit_batch.R --resp-dir` (2/2 PASS, no anomalies), `irw-validate` clean,
+`check_provenance.R` clean. Neither earns an issues-page entry: no unmatched
+observed resp, no blank `item_text`, no conflated stems. `feng_2023_fas`'s
+unendorsed resp-0 options on F3 and F7 are a fact about the responses, not a
+text defect.
+
+### Rejected, and why triage could not see it
+
+- **`10.5281/zenodo.23392748`, chatbot effectiveness (189p/14i, CC BY) --
+  STRUCTURAL PII, whole candidate skipped.** The column `Nama` ("Name") holds
+  185 distinct real given and full names across 193 rows. The column's job is
+  to collect a name, so this is the structural side of the 2026-10-19 seam,
+  not an incidental stray: the deposit was never de-identified by its
+  depositor. Triage flagged `good` because the Likert block parses cleanly;
+  the name column is simply not an item column.
+- **`10.5281/zenodo.20811`, comprensión lectora (110p/9i, CC0) -- not
+  item-response data.** `LECTURA1` and `LECTURA2` are per-passage TOTAL scores
+  (0-15 and 0-20), `lecturasimple` / `lectcompleja` / `NUEVASUMA` are banded
+  Bajo/Medio/Alto categorisations of those totals, and `SUMA` is their sum.
+  There is no item-level column in the file. The nine "items" triage counted
+  are all composites.
+- **`10.5281/zenodo.15254212`, reading engagement (260p/74i, CC BY) --
+  degenerate response patterns, held for human review.** The numbers:
+  across all 71 items and 260 respondents the value **1 is never used by
+  anyone**, and each respondent uses **at most 2 distinct values across an
+  entire scale** -- CRE 260/260 and PTS 260/260 respondents are within-scale
+  <=2 distinct, mean 1.93 distinct values per person over 25 and 14 items
+  respectively. Whole-row vectors are all unique, so this is not row
+  duplication; it is a person main effect plus noise on one or two items.
+  Real Likert data on a 16-25 item scale does not look like this. Not shipped
+  on my own judgement rather than referred, per the standing
+  "err on exclusion" rule; the diagnostic is in the leads CSV so a human can
+  overturn it cheaply.
+
+### Bookkeeping
+
+8 dictionary rows (`dictionary_auto.csv`), 8 codebook-at-ingest rows, 8 tag
+rows (`tags/tags_auto.csv`), 2 provenance rows, 2 `mapping_verification.csv`
+rows (both `data_labels`/`NOT_NEEDED`, each naming which label level did the
+tying), 2 new rights-register rows. No covariate-label harvest is owed: none
+of the three scripts reads a `.sav` or `.dta`.
+
+Lead statuses in `leads/repos_leads_2026-10-19.csv` updated: 3 shipped, 2
+rejected_content, 1 skipped_pii, 1 blocked_licence, 70 still unworked.
+
+**UPLOADED 2026-10-20**, confirmed by ben-domingue: all 8 response tables into
+the newest shard and both item text tables into `irw_text`.
+`itemtext_provenance.csv` is stamped accordingly. Both sit in an unreleased
+draft; the release is still owed, and this batch queues behind the ones
+already listed in `TODO.md`. Recorded here because a stale "nothing uploaded"
+is the expensive direction of wrong -- **Redivis uploads APPEND**, and a
+second upload would double all eight tables.
+
+### A concurrent session swept this work into its own commit
+
+While this batch was running, a parallel session on
+`claude/olmos-gomez-2026-ai-mathematics` staged the whole working tree and
+committed it as `f08d6007`. That commit therefore contains a stray copy of
+`data/aldhi_2025_procrastination.py`, `data/byrne_2026_health_literacy.py`,
+`data/feng_2023_fas.py` and the two new `instrument_rights_register.csv` rows,
+none of which belong to that batch. The work was recovered onto this branch
+and re-applied through the proper writers.
+
+**Resolved the same day.** That session backed all five out itself in
+`5110f23d` ("Fix the contract gate, and back out three files that were never
+mine"), so the scripts and the two register rows each exist exactly once, on
+this branch. Nothing is owed at merge. `5110f23d` was unpushed as of
+2026-10-20, so PR #3121 shows the fix only once that session pushes.
+
+This is the hazard the "verify `git log -1` is actually your commit" rule
+exists for, with a wrinkle worth recording: the sweep happened between my
+commit and my next write, so there was no commit of mine to check at the time.
+What caught it was a `FileNotFoundError` on a tracked file that existed
+minutes earlier -- a file vanishing from the working tree is the symptom to
+read as "someone switched the branch under me".

@@ -3,6 +3,35 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## Repos batch 2026-10-19: 8 tables staged, 70 leads unworked (2026-10-20)
+
+Discovery, triage and a processing pass are done; standing records are written
+(`search_terms_log.csv` +135, `human_review/human_review_zenodo_2026-10-19.csv`,
+refined flags in `repo_triage_seen_keys.csv`, `BATCH_LOG.md`, 8 dictionary + 8
+tag + 2 provenance + 2 mapping + 2 rights-register rows). Leads and their
+verdicts are in `leads/repos_leads_2026-10-19.csv`.
+
+- [x] **Uploaded 2026-10-20**, confirmed by ben-domingue: the 8 response
+  tables (67,374 responses) into the newest shard and the 2 item text tables
+  into `irw_text`. `itemtext_provenance.csv` stamped `uploaded=2026-10-20` for
+  `feng_2023_fas` and `byrne_2026_health_info_sources`. **Both are in a draft
+  and still need releasing** -- as does everything ahead of them in this file.
+- [x] **The concurrent-session sweep is resolved.** Commit `f08d6007` on
+  `claude/olmos-gomez-2026-ai-mathematics` had swept in this batch's three
+  `data/*.py` scripts and its two new `instrument_rights_register.csv` rows
+  (FAS, HLQ). That session backed all five out itself in `5110f23d`, so each
+  now exists once, here. Nothing is owed at merge. `5110f23d` was still
+  unpushed as of 2026-10-20, so PR #3121 will show the fix only once that
+  session pushes.
+- [ ] **70 leads still unworked**: 53 `recoverable_format` (mostly "keep only
+  the N columns sharing one small integer domain, re-read"), 8
+  `worth_retrying`, 7 `aggregate_continuous`, 2 `pii_suspected` that still
+  need the structural-vs-incidental column check (zenodo 22749041, 20809).
+- [ ] **`zenodo.15254212` (reading engagement) was rejected on my judgement**
+  and is worth a second opinion if anyone disagrees: 1 never used by any of
+  260 respondents across 71 items, and every respondent uses at most 2
+  distinct values across a whole scale. Diagnostic is in the leads CSV.
+
 ## The 2026-10-19 upload happened: 78 tables are in the draft (2026-10-19)
 
 ben-domingue uploaded the 2026-10-19c and 2026-10-19d slices on 2026-10-19 --
