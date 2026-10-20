@@ -21295,6 +21295,14 @@ of the three scripts reads a `.sav` or `.dta`.
 Lead statuses in `leads/repos_leads_2026-10-19.csv` updated: 3 shipped, 2
 rejected_content, 1 skipped_pii, 1 blocked_licence, 70 still unworked.
 
+**UPLOADED 2026-10-20**, confirmed by ben-domingue: all 8 response tables into
+the newest shard and both item text tables into `irw_text`.
+`itemtext_provenance.csv` is stamped accordingly. Both sit in an unreleased
+draft; the release is still owed, and this batch queues behind the ones
+already listed in `TODO.md`. Recorded here because a stale "nothing uploaded"
+is the expensive direction of wrong -- **Redivis uploads APPEND**, and a
+second upload would double all eight tables.
+
 ### A concurrent session swept this work into its own commit
 
 While this batch was running, a parallel session on

@@ -11,13 +11,11 @@ refined flags in `repo_triage_seen_keys.csv`, `BATCH_LOG.md`, 8 dictionary + 8
 tag + 2 provenance + 2 mapping + 2 rights-register rows). Leads and their
 verdicts are in `leads/repos_leads_2026-10-19.csv`.
 
-- [ ] **8 response tables + 2 item text tables need uploading.** In
-  `irw_output/`: `aldhi_2025_{disorganization,fear_of_failure,
-  acad_procrastination,acad_performance}`, `byrne_2026_{hlq_part1,hlq_part2,
-  health_info_sources}`, `feng_2023_fas` (67,374 responses). In
-  `itemtext_output/`: `feng_2023_fas__items.csv`,
-  `byrne_2026_health_info_sources__items.csv`. Response tables first.
-  Stamp `uploaded` in `itemtext_provenance.csv` only after confirmation.
+- [x] **Uploaded 2026-10-20**, confirmed by ben-domingue: the 8 response
+  tables (67,374 responses) into the newest shard and the 2 item text tables
+  into `irw_text`. `itemtext_provenance.csv` stamped `uploaded=2026-10-20` for
+  `feng_2023_fas` and `byrne_2026_health_info_sources`. **Both are in a draft
+  and still need releasing** -- as does everything ahead of them in this file.
 - [x] **The concurrent-session sweep is resolved.** Commit `f08d6007` on
   `claude/olmos-gomez-2026-ai-mathematics` had swept in this batch's three
   `data/*.py` scripts and its two new `instrument_rights_register.csv` rows
