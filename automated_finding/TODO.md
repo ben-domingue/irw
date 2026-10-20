@@ -17,11 +17,24 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   Both still sit in **unreleased drafts** -- `irw_7` at 79 pending since v1.3,
   `irw_text_3` at 1 pending since v5.2 -- so the table is not public yet and
   the release is Ben's.
-- [ ] **Clear the two staging directories** once `irw_text_3` is released. The
-  28 `__items.csv` and 33 response CSVs in them are all stamped uploaded
-  2026-10-15 but their draft is unreleased, so `clear_uploaded_itemtables.py
-  --apply` would destroy the only local copies a re-upload could use
-  (the 2026-09-23 hazard, again). Release first, then clear.
+- [x] **The two staging directories are cleared, and that was safe** --
+  checked against Redivis on 2026-10-20, not inferred. The openESM files in
+  them (marian / nepal / neubauer / ryvkina / scharbert / tammilehto) are all
+  in RELEASED versions: 40 response tables in `item_response_warehouse_5`
+  v9.0 and 36 `__items` in `irw_text_3` v5.2, spot-checked non-empty
+  (`scharbert_2024_esm_affect` 566,136 rows; its item table 36). All eight
+  generating scripts are tracked in `data/` as well, so the staging copies
+  were redundant twice over.
+
+  **The earlier bullet here was wrong and is worth the correction.** It said to
+  hold off "until `irw_text_3` is released" -- but it already was, at v5.2, and
+  the note had been carried forward from when those drafts were genuinely
+  unreleased. `red_up.drafts` reporting "N pending, Xd since v5.2" means v5.2
+  SHIPPED and the draft sits on top of it; reading that as "unreleased" is what
+  kept a dead hazard alive. Check the release state before repeating a
+  clearance warning -- see [[irw-clear-uploaded-itemtables-hazard]], which is
+  about `itemtext/itemtables/` and files pending RE-upload, a different thing
+  from these staging dirs.
 
 ## The 2026-10-19 upload happened: 78 tables are in the draft (2026-10-19)
 
