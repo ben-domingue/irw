@@ -808,38 +808,114 @@ One additional hard rule applies at this stage that isn't in
 `datastandard.md`, because it's a pipeline/triage concern rather than an
 output-format one:
 
-- **PII in the raw source file — skip the dataset entirely, don't
-  scrub-and-ship.** `datastandard.md`'s "no PII" checklist item is phrased
-  as "don't include it in the output," which reads as permission to drop
-  the offending column(s) and process the rest. That's not the policy for
-  this pipeline: if the raw supplementary file contains real names,
-  emails, birthdates, IP/GPS, or national ID numbers *anywhere* — even in
-  a column that would never be selected as an item or covariate — treat
-  the whole candidate as skip, the same tier as an unresolvable license,
-  not a fixable QC warning. Decided 2026-08-12 after two PMC-connector
-  candidates surfaced real PII (a participant email column on a study of
-  LGB medical students' mental health — skipped outright given the
-  compounding sensitivity of email + stigmatized-identity data on a
-  narrow population; a real `date of birth` column on an otherwise
-  unremarkable nursing-profession opinion survey — also skipped, even
-  though that case looked "lower severity" and the standard fix would
-  have just been dropping one column). The point of a blanket rule is to
-  not re-litigate severity per candidate — a source file containing PII at
-  all is reason enough to skip, regardless of how contained the fix would
-  otherwise look. Log the skip in `BATCH_LOG.md` with what the PII was and
-  why, same as a license-blocked candidate, but there is no
-  `pii_blocked_candidates.csv` standing file — unlike a license issue,
-  there's no path to later un-blocking a PII-flagged candidate, so nothing
+- **PII in the raw source file — skip the whole candidate, don't
+  scrub-and-ship. The test is whether the PII is STRUCTURAL or
+  INCIDENTAL.** `datastandard.md`'s "no PII" checklist item is phrased as
+  "don't include it in the output," which reads as permission to drop the
+  offending column(s) and process the rest. That is not the policy here: when
+  a source file carries **structural** PII, the whole candidate is a skip —
+  the same tier as an unresolvable license, not a fixable QC warning — and
+  dropping the column is not an option.
+
+  **Structural** means the PII is a property of a column: the column's job is
+  to collect an identifier, or it is populated with identifiers across the
+  file. Real names, email addresses, dates of birth, IP addresses, GPS or
+  geo-IP coordinates, full postal codes, phone numbers and national ID
+  numbers all qualify when they appear this way, as do free-text clinical
+  narratives. Judge the column, not the count: one column answered by three
+  respondents is still structural if that column asked for a date of birth. A
+  deposit with structural PII has not been de-identified by its depositor,
+  which is a fact about the whole deposit and not about one column.
+
+  **Incidental** means one respondent volunteered an identifier inside a
+  free-typed field whose purpose is not to collect identifiers — a stray
+  email or first name in a comments box, or in a free-text age field. That is
+  a data-entry accident on the depositor's side, not a collected identifier.
+  It does not disqualify the candidate: the value cannot reach IRW output,
+  which is `id`/`item`/`resp` plus `cov_*`, and skipping buys no privacy
+  because the deposit stays public either way. **Null the offending cell**
+  (don't carry it into a `cov_*` column), say in `BATCH_LOG.md` which cell it
+  was and why it was read as incidental, and process the rest.
+
+  **Narrowed 2026-10-19** from the blanket form, which had been reaffirmed
+  earlier the same day. It bit on the Parkins Energy Literacy deposit over
+  ONE respondent who typed their own email address and first name into a
+  comments box; ben-domingue: "i hadn't realized it is this flimsy. one
+  random email we can just not carry fwd. i thought we were talking about
+  whole columns of pii." The seam turns on a fact you can check about a
+  column, which is what keeps a bright line's resistance to motivated
+  reasoning — so check the column and record what you found, rather than
+  arguing severity per candidate.
+
+  Two worked examples, both real:
+
+  - **Incidental — ships.** `10.7939/DVN/10302`, Parkins Energy Literacy:
+    `comments` ("Is there anything you would like to add?") holds 809
+    answers, exactly one of which ends "You can get me at
+    B1mxsr86@gmail.com" and gives a first name. The column collects
+    comments. Null that cell; the candidate is not disqualified on this
+    ground. (It is disqualified on another — see the postal-code note
+    below.)
+  - **Structural — skipped.** `10.5281/zenodo.13913289`, conspiracy beliefs
+    in Italy: the column is named `Q009`, and its SPSS variable label is
+    "Date of birth?". It holds 1,472 distinct real dates of birth beside
+    municipality and province of residence. The name tells you nothing; the
+    label and the values tell you the column's job was to collect a
+    birthdate. Whole candidate skipped.
+
+  **Full postal codes are STRUCTURAL. Ruled 2026-10-19 — do not
+  re-litigate.** The Parkins deposit's `q37_0` ("What is your postal code?")
+  holds 2,917 full six-character Canadian postal codes over 3,000
+  respondents, beside age, gender, education and income in the same file. A
+  six-character Canadian postal code locates a respondent at block level,
+  which is the same re-identification surface as the Qualtrics geo-IP
+  coordinates ruled disqualifying on 2026-10-19 (`10.7910/DVN/JC6F9O`), and
+  the surrounding demographics are exactly what makes it bite. A
+  three-character forward sortation area is not the same thing and is not
+  covered by this. The deposit is a skip until a version without the column
+  is available. `screen_for_pii` had no postal-code detector at all and
+  returned clean on that file; it now content-checks for full codes
+  (`_holds_full_postal_codes`, guarded by `tests/test_pii_postal_codes.py`),
+  on the values rather than the label, because "What is your postal code?" is
+  the label on a de-identified FSA column too.
+
+  Log every skip in `BATCH_LOG.md` with what the PII was and why it read as
+  structural, same as a license-blocked candidate, but there is no
+  `pii_blocked_candidates.csv` standing file — a structural-PII skip can only
+  be un-blocked by the depositor publishing a different file, so nothing
   needs to persist past the batch writeup.
+
+  **Any PII screen must print how many columns it examined and assert that
+  the count is non-zero.** A screen that selects nothing reports clean, which
+  is the worst possible shape for a safety check. The specific trap, hit
+  2026-10-19 on the Parkins deposit: a screen selecting text columns with
+  `df[c].dtype == object` finds **zero** columns on a frame from
+  `pyreadstat.read_sav()`, because its text columns are pandas
+  `StringDtype`. On that file `dtype == object` gives 0 and
+  `pd.api.types.is_string_dtype(df[c])` gives 11 — and the 11 included both
+  the postal-code column and the comments box. Select with
+  `is_string_dtype`, never `dtype == object`, and print the denominator so a
+  zero is visible instead of silent.
+
+  The decision that originally set the whole-candidate tier was 2026-08-12,
+  after two PMC-connector candidates surfaced real PII: a participant email
+  column on a study of LGB medical students' mental health (skipped outright,
+  given the compounding sensitivity of email plus stigmatized-identity data
+  on a narrow population) and a real `date of birth` column on an otherwise
+  unremarkable nursing-profession opinion survey (also skipped, even though
+  it looked "lower severity"). Both are structural under the narrowed rule
+  and both stay skipped.
 
   **Narrowed 2026-09-20 for ONE identifier class: a platform participant
   ID.** ben-domingue ruled that a Prolific/MTurk-style account ID does not
   disqualify a candidate — it is replaced, and the dataset ships. The
   reasoning is that such a column is a pure identifier: it is never an item
   and never a covariate, so IRW's output is unchanged whether it is there or
-  not, and IRW's `id` is a row index anyway. Everything else in the rule is
-  untouched — names, emails, birthdates, IP/GPS, national ID numbers and
-  free-text clinical narratives still disqualify the whole candidate.
+  not, and IRW's `id` is a row index anyway. This carve-out is about an
+  identifier that is never an item and never a covariate, not about whether
+  the PII is structural — a column of names, emails, birthdates, IP/GPS,
+  full postal codes, national ID numbers or free-text clinical narratives is
+  structural and still disqualifies the whole candidate.
 
   **Replace it with the row index, never a hash of it.** A hash looks
   anonymous and is not: 24-hex Prolific IDs are enumerable from other public

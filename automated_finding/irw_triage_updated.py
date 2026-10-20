@@ -862,6 +862,41 @@ def _holds_email_addresses(series) -> bool:
     return bool(hits.sum() >= 5 and hits.mean() >= 0.2)
 
 
+# A FULL postal code, which the 2026-10-19 structural/incidental ruling made
+# disqualifying: a six-character Canadian code locates a respondent at block
+# level -- roughly a side of one street -- which is the same re-identification
+# surface as the Qualtrics geo-IP coordinates ruled out the same day. This is a
+# VALUES check, not a label check, because the label cannot tell the two apart:
+# "What is your postal code?" is answered with a full code in the Parkins
+# Energy Literacy deposit (10.7939/DVN/10302, `q37_0`, 2,917 of 3,000 rows) and
+# with a three-character forward sortation area in deposits that de-identified
+# properly. An FSA, a bare US 5-digit ZIP and a 4-digit European code are all
+# coarse enough to be legitimate covariates, so none of them appear here.
+_RE_POSTAL_FULL = re.compile(
+    r"^(?:"
+    r"[A-Za-z]\d[A-Za-z][\s-]?\d[A-Za-z]\d"          # Canada: K1A 0B1
+    r"|\d{5}-\d{4}"                                   # US ZIP+4
+    r"|[A-Za-z]{1,2}\d[A-Za-z\d]?[\s]?\d[A-Za-z]{2}"  # UK: SW1A 1AA
+    r")$")
+
+
+def _holds_full_postal_codes(series) -> bool:
+    """True when a column's values are full (not truncated) postal codes.
+
+    Same thresholds as `_holds_email_addresses`, and for the same reason: a
+    handful of codes typed into a free-text answer is incidental and does not
+    disqualify the candidate, while a column OF them is structural."""
+    if not _is_stringish(series):
+        return False
+    v = series.dropna().astype(str).str.strip()
+    v = v[v != ""]
+    if len(v) < 5:
+        return False
+    sample = v.head(2000)
+    hits = sample.str.match(_RE_POSTAL_FULL, na=False)
+    return bool(hits.sum() >= 5 and hits.mean() >= 0.2)
+
+
 _MAX_WEAK_WORDS = 5
 # Second guard for the weak tier. The word-count test alone does not survive
 # SPSS name mangling: a stripped item stem ("Ioftenfeelanxiouscheckingmyemail")
@@ -903,6 +938,32 @@ def screen_for_pii(columns, df=None, labels=None) -> list[str]:
     of the Senior Citizen" holding `1..500` serials is also why no single
     surface can be trusted alone.
     """
+    # A screen that examines nothing reports clean, which is the worst shape a
+    # safety check can take: on 2026-10-19 an ad-hoc screen selecting text
+    # columns with `dtype == object` checked ZERO of the Parkins deposit's 11
+    # string columns and printed no hits. So count the denominator of the
+    # content tier -- the columns whose VALUES this call can read -- publish it
+    # on `screen_for_pii.content_cols_screened`, and say so out loud when a
+    # frame was passed and none of it was readable.
+    content_cols = ([c for c in columns if _is_stringish(df[c])]
+                    if df is not None else [])
+    screen_for_pii.content_cols_screened = len(content_cols)
+    if df is not None and not content_cols:
+        # A genuinely all-numeric response matrix has no string column, and
+        # that zero is honest. The zero worth shouting about is the one where
+        # the frame DOES hold non-numeric columns that `_is_stringish` could
+        # not read -- that is the dtype bug, and it looks exactly like a pass.
+        unread = [c for c in columns
+                  if not pd.api.types.is_numeric_dtype(df[c])
+                  and not pd.api.types.is_datetime64_any_dtype(df[c])]
+        if unread:
+            print("WARNING: screen_for_pii content tier examined 0 of "
+                  f"{len(list(columns))} columns, yet {len(unread)} are "
+                  f"non-numeric (e.g. {unread[:3]}, dtypes "
+                  f"{[str(df[c].dtype) for c in unread[:3]]}). A screen that "
+                  "reads nothing reports clean -- this result is not evidence.",
+                  file=sys.stderr)
+
     hits, seen_cols = [], set()
     for c, label, where in _pii_surfaces(columns, labels):
         if c in seen_cols:
@@ -926,6 +987,13 @@ def screen_for_pii(columns, df=None, labels=None) -> list[str]:
             # Label-independent: whatever the column is called, a block of
             # email addresses in it is a direct identifier.
             hits.append(f"{label} (email addresses in the values)")
+            seen_cols.add(c)
+        elif (where == "name" and df is not None
+              and _holds_full_postal_codes(df[c])):
+            # Also label-independent, and it has to be: the label of a full
+            # postal code column and of a de-identified FSA column are the
+            # same question. Only the values separate them.
+            hits.append(f"{label} (full postal codes in the values)")
             seen_cols.add(c)
     return hits
 
