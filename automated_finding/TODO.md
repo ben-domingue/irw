@@ -3,26 +3,35 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
-## Repos batch 2026-10-19: 76 unworked leads, nothing processed (2026-10-19)
+## Repos batch 2026-10-19: 8 tables staged, 70 leads unworked (2026-10-20)
 
-Discovery + triage are done and every standing record is written
+Discovery, triage and a processing pass are done; standing records are written
 (`search_terms_log.csv` +135, `human_review/human_review_zenodo_2026-10-19.csv`,
-refined flags in `repo_triage_seen_keys.csv`, `BATCH_LOG.md`). No processing
-script was written. The leads live in `leads/repos_leads_2026-10-19.csv`.
+refined flags in `repo_triage_seen_keys.csv`, `BATCH_LOG.md`, 8 dictionary + 8
+tag + 2 provenance + 2 mapping + 2 rights-register rows). Leads and their
+verdicts are in `leads/repos_leads_2026-10-19.csv`.
 
-- [ ] **6 `good` candidates** await processing scripts — largest first:
-  Indonesian academic procrastination (2,111p/28i, CC BY, `10.17632/cg77typtk4`),
-  Ireland health literacy (448p/62i, CC BY), Functionality Appreciation Scale
-  (567p/17i, CC0), blended reading engagement (260p/74i, CC BY), chatbot
-  effectiveness (189p/14i, CC BY), comprensión lectora Ventanilla (110p/9i, CC0).
-  Check `grep -rl "DOI: <doi>" ../data/*.py` before writing each one.
-- [ ] **53 `recoverable_format` + 8 `worth_retrying` + 7 `aggregate_continuous`**
-  need a re-read before they can be judged. Most of the 53 are the same shape:
-  "keep only the N columns sharing one small integer domain, re-read".
-- [ ] **2 `pii_suspected` rows need the structural-vs-incidental column check**
-  (zenodo 22749041, zenodo 20809) before either is recorded as a skip. A
-  detector hit is not by itself a structural finding under the 2026-10-19 rule.
-
+- [ ] **8 response tables + 2 item text tables need uploading.** In
+  `irw_output/`: `aldhi_2025_{disorganization,fear_of_failure,
+  acad_procrastination,acad_performance}`, `byrne_2026_{hlq_part1,hlq_part2,
+  health_info_sources}`, `feng_2023_fas` (67,374 responses). In
+  `itemtext_output/`: `feng_2023_fas__items.csv`,
+  `byrne_2026_health_info_sources__items.csv`. Response tables first.
+  Stamp `uploaded` in `itemtext_provenance.csv` only after confirmation.
+- [ ] **De-duplicate two rights-register rows at merge.** A concurrent
+  session's commit `f08d6007` on `claude/olmos-gomez-2026-ai-mathematics`
+  swept in this batch's three `data/*.py` scripts and its two new
+  `instrument_rights_register.csv` rows (FAS, HLQ). The scripts are
+  byte-identical and merge cleanly; the register is append-only and will
+  duplicate. See the 2026-10-20 BATCH_LOG entry.
+- [ ] **70 leads still unworked**: 53 `recoverable_format` (mostly "keep only
+  the N columns sharing one small integer domain, re-read"), 8
+  `worth_retrying`, 7 `aggregate_continuous`, 2 `pii_suspected` that still
+  need the structural-vs-incidental column check (zenodo 22749041, 20809).
+- [ ] **`zenodo.15254212` (reading engagement) was rejected on my judgement**
+  and is worth a second opinion if anyone disagrees: 1 never used by any of
+  260 respondents across 71 items, and every respondent uses at most 2
+  distinct values across a whole scale. Diagnostic is in the leads CSV.
 
 ## The 2026-10-19 upload happened: 78 tables are in the draft (2026-10-19)
 
