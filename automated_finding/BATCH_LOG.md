@@ -21478,3 +21478,50 @@ append**.
 `baseke_2026_css11` -- the paper and codebook both document five options 0-4
 while the data holds only {1,3,5} -- and `metadata/covariate_labels/build.py`,
 which remains the standing pre-existing item.
+
+## 2026-10-20c — the batch's data notes, 26 rows, one per table (#3077, #2529)
+
+The caveat owed for `baseke_2026_css11` written, on ben-domingue's go-ahead, and
+with it the 25 the batch had never written. **It went to
+`metadata/data_notes.csv`, not `itemtext_issues.qmd`.** The two are not
+interchangeable: the item-text Known Issues page takes concrete text-vs-table
+mismatches, and this is a caveat about *response coding* in the source, which is
+exactly what data notes carry (#2529) -- a plain Notes section on the table's
+landing page, no banner, also returned by the MCP's `get_processing_notes`.
+IRW defects go to `known_issues.tsv` in irw_site and released fixes to
+`table_changes.csv`; neither applies, because nothing here is an IRW error.
+
+**That the other 25 were owed is the finding.** A batch of this size normally
+writes 20-88 data-note rows (see the 2026-09 and 2026-10 entries above); this one
+had written none, and three of the caveats were living only in
+`dictionary_auto.csv`'s Notes column, which no reader of a table ever sees.
+
+The three that most change how a table should be used:
+
+- **`baseke_2026_css11`** -- paper and codebook both document five options rated
+  0 (not stressful at all) to 4 (extremely stressful); the data holds exactly
+  three distinct values on all eleven items, coded 1, 3 and 5. Shipped as
+  recorded. The direction is documented; which anchor each code is, is not.
+- **`platte_2026_*`** -- `cov_achievement_math` / `cov_achievement_language` are
+  the study's outcome on a 1-5 band and the codebook's reversal mark is on those
+  two columns too, so a higher code is probably a LOWER band. A modeller who
+  reads them as "higher is better" gets the sign wrong, and the codebook says
+  only "1=score1 ... 5=score5".
+- **`jones_2026_agi`** -- `cov_completion_time_s` is a whole-survey duration, not
+  a per-item `rt`; it is identical across a respondent's three answers in the
+  2023 file. The deposit calls this column `RT` in four files and means two
+  different things by it.
+
+Also recorded per table: Kenya's row-index `id` (no respondent id in the shared
+data, survey E offset by 100000), the 13% of Kenya rows with no `date` (the
+interview year was hand-typed and often wrong, so only the documented May-June
+2023 window is kept), the Platte items that are reverse-scored but deliberately
+not recoded, the four Platte items the codebook calls removed that ship anyway
+because they were administered, Jones's participant-index `id` and which Jones
+tables therefore join on `id`, `tech_familiarity`'s sparsity by design (1,865
+answered all ten prompts, 7,339 one each), and the BESAA item text the rights
+register blocks.
+
+Verified: 26 rows, LF endings on a file with 63 pre-existing CRLF rows, names
+matching the 26 staged tables exactly, no table that already had a note, four
+fields on every row.

@@ -111,8 +111,9 @@ closed with reasons in their leads files. Every `todo` row across the
   2026-10-20; `uploaded=2026-10-20` stamped on their five
   `itemtext_provenance.csv` rows) and **the 26 response tables were uploading**
   as of 2026-10-20. Treat `runs/stage_2026-10-19h/resp` as done unless ben says
-  the run failed -- re-pointing `red_up` at it appends. Release is owed; the
-  issues-page entry for `baseke_2026_css11` falls due at that release. The batch is no longer in `irw_output/`: on 2026-10-20 that folder held
+  the run failed -- re-pointing `red_up` at it appends. Release is owed. The
+  batch's 26 `metadata/data_notes.csv` rows are written, `baseke_2026_css11`
+  among them. The batch is no longer in `irw_output/`: on 2026-10-20 that folder held
   three unrelated things at once and was split by destination -- see
   `runs/STAGING.md`, and the 2026-10-20a BATCH_LOG entry for what was in there.
 - [ ] **`gilbert_2026_dep_symptoms` is HELD on provenance, and one message
@@ -166,11 +167,16 @@ closed with reasons in their leads files. Every `todo` row across the
   seven appear on the next build after the release, and running it now would
   have swept 8,084 lines of other batches' pending harvests into this PR. That
   build is the standing item at the top of this file, not a new one.
-- [ ] **Issues-page entry owed at publish for `baseke_2026_css11`:** the paper
-  and the deposit codebook both document five options "rated from 0 (not
-  stressful at all) to 4 (extremely stressful)", while the shared data holds
-  exactly three distinct values on all eleven items, coded 1, 3 and 5. Shipped
-  as recorded; the anchor-to-code mapping is what is unknown.
+- [x] **The `baseke_2026_css11` caveat is written, as a data note** (2026-10-20):
+  the paper and the deposit codebook both document five options "rated from 0
+  (not stressful at all) to 4 (extremely stressful)", while the shared data holds
+  exactly three distinct values on all eleven items, coded 1, 3 and 5. Shipped as
+  recorded; the anchor-to-code mapping is what is unknown. It went to
+  `metadata/data_notes.csv`, **not** `itemtext_issues.qmd`: that page takes
+  concrete text-vs-table mismatches, and this is a source caveat about response
+  coding, which is what data notes are for (#2529). The same append covers all
+  26 tables of the batch -- one row each, which this batch had been owing and no
+  earlier write-up had listed.
 - [ ] **`tags_auto_2026-10-19d.csv` (23 rows) and `tags_auto_2026-10-19e.csv`
   (3 rows)** are written and, like their predecessors, deliberately separate;
   merging them into `tags/tags_auto.csv` is a reviewed step.
