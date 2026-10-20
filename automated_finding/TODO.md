@@ -3,6 +3,105 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## Repos batch 2026-10-20: 85 tables staged and NOT uploaded (2026-10-20)
+
+Five parallel agents; full write-up in `BATCH_LOG.md`. 85 response tables /
+798,062 responses in `irw_output/` (+ `MANIFEST.txt`), 7 item text tables in
+`itemtext_output/`, all passing `irw-validate --profile upload` with zero
+failures. 85 dictionary rows staged. Four collisions were caught and dropped
+into `runs/dropped_2026-10-20/` -- see the BATCH_LOG entry before touching that
+folder.
+
+- [ ] **Upload is owed and is yours to trigger**: `red_up irw_output` (85
+  tables) and then `red_up itemtext_output` (7). **Response tables first.**
+  Nothing here has been uploaded; uploads APPEND, so do not point `red_up` at
+  `runs/dropped_2026-10-20/` or any `runs/stage_2026-10-20_s*/` folder -- those
+  are the per-agent originals and the withdrawn files, kept as the record.
+- [ ] **Tag rows are owed for all 85 tables.** Only the discovery slice produced
+  any (9, in `runs/worklist_2026-10-20/tagrows_s5.jsonl`, unstaged). I did not
+  ask slices 1-4 for them -- my omission, not theirs. A finished batch owes
+  `tags_auto.csv` rows, so this is real outstanding work.
+- [ ] **`codebook_url` is missing for the 9 discovery-slice tables.** Their
+  dictionary rows staged without it, so nothing reached
+  `codebook_at_ingest.csv`. The other 76 recorded `"none"`. Needs a pass over
+  those 9 deposits rather than a guessed value.
+- [ ] **15 rights-register rows are owed**, each with a located clause rather
+  than an asserted one. None blocks a response table; all block item text.
+  Stated by the agents, not written, because a defensible row needs terms
+  quoted and I ran out of box:
+  - **Flow State Scale / FSS-2 / DFSS-2** (Jackson & Marsh 1996; Jackson &
+    Eklund 2002) -- distributed under licence by Mind Garden, a located fact.
+    Proposed `hold`. Touches `borges_2026_flow_musicians`, `wu_2025_flow_state`.
+  - Chinese FSS-2/DFSS-2 ("CDFS-2") as administered by Wu 2025 -- translation,
+    own terms unestablished. Proposed `hold`. 33 stems sit in the .sav labels,
+    so cheap the moment the original clears.
+  - Portuguese FSS-1 adaptation (figshare 30166636 / 32995919) -- publisher
+    unlocated. Proposed `hold`.
+  - Ryff Scales of Psychological Well-Being + its Spanish adaptation (42 stems
+    present in the xlsx headers). Proposed `hold`. The register has no row for
+    the *original* Ryff either.
+  - Kinder & Sanders racial-resentment battery -- proposed `hold`; a permission
+    would live in the ANES terms if one exists.
+  - DASS-21 **Spanish** translation -- parallel to the existing Greek row; ship
+    the public-domain English as `translated_substitute` under irw#2121.
+  - BESAA / BESAA-S (Mendelson, Mendelson & White 2001) -- no row; the
+    register's only body-esteem row is a different instrument (Franzoi &
+    Shields, `block`).
+  - CaMir-R (Balluerka et al. Spanish adaptation) -- no row.
+  - MUIS (Mishel 1981/1988) -- stems in hand in the CC0 deposit; proposed
+    `hold`. Also relevant to the already-live `abu_tabar_2021_muis`.
+  - McKnight et al. technology-trust scales -- proposed `note`.
+  - BFI short form (Rammstedt & John / Gerlitz & Schupp) -- proposed `note`; a
+    citation-only `ship` is plausible but was not verified.
+  - ATI scale (Franke, Attig & Wessel 2019) -- proposed `ship`, published CC BY
+    with a free-use statement, but **fetch the statement before shipping**.
+  - Celebrity Attitude Scale and YABIS (parts A and B) -- proposed `note`.
+  - BVAQ-B; BarOn EQ-i:YV / ICE:NA (commercial); Vocabulary Size Test (Nation &
+    Beglar 2007); B-POHW and its English original; adapted L2MSS stems -- no
+    rows. PHC-PSQ is study-authored and could be registered `ship`.
+- [ ] **`covariate_labels/harvest.py --commit HEAD <stem>`** is owed for the
+  scripts in this batch that read `.sav`/`.dta` and ship `cov_*`. Not run for
+  any of them.
+- [ ] **Henderson waves 2-5 are ~4x the shipped volume and need a design call
+  first.** Only wave 1 shipped (8 tables, 1,000 ids). The five wave files are
+  **cumulative**, not parallel: wave 1 is 191 columns, wave 5 is 1,120, each
+  adding that wave's batteries with a `_wN` suffix. The wave-5 file carries all
+  five waves wide and its `caseid_w5` is complete for 1,000 respondents, but
+  **only 359 of them have a `caseid_w1`** -- the panel was refreshed, so wave 5
+  is NOT a superset of wave 1. A correct 5-wave build merges all five files on
+  their per-wave `caseid_wN` and would **replace** the eight wave-1 tables
+  rather than add to them. Wave 2's id column is `caseid_w2`, not `caseid`,
+  which is what made the naive read fail.
+- [ ] **Triage of the 2026-10-20b sweep is 394/1,174.** Resume, idempotent and
+  safe to re-run:
+  `python3 irw_batch_updated.py runs/candidates_2026-10-20b.csv --out runs/irw_triage_2026-10-20b.csv --resume --retriage`
+  Checkpoint: `runs/irw_triage_2026-10-20b.checkpoint.jsonl` (derived from the
+  `--out` name, so it must be that exact `--out`). Afterwards **regenerate
+  `leads/repos_leads_2026-10-20.csv`** -- 780 of its 844 rows are
+  `origin_flag=untriaged` and will move into real buckets.
+- [ ] **`sadish_2021_covid_beliefs`: the live table has 6 items, this batch
+  built 7** over the same 913 ids (9,398 rows vs 8,056). The new build was
+  dropped rather than shipped, because uploads append. If the 7th item is
+  right, this is a delete-then-recreate replace, not an upload.
+- [ ] **Widen the pre-write duplicate check.** `grep -rl "DOI: <doi>"
+  ../data/*.py` misses a script whose `# DOI:` line holds the *paper* DOI while
+  the data DOI sits on `# Source:`/`# Data:`. That is how `10.7910/DVN/VWRTAW`
+  was built twice (caught and withdrawn mid-batch) and how `sadish` reached
+  consolidation. Grep the whole header.
+- [ ] **Fold the Step 2b checkpoint-subset trick into the pipeline.**
+  `--retriage` only chains after the whole input finishes, so an interrupted run
+  yields no Step 2b at all. A candidates file restricted to already-checkpointed
+  rows reaches it in seconds; helper is in the discovery agent's scratchpad.
+- [ ] **Three leads worth one retry, not rejected**: Mendeley
+  `10.17632/3ffkvnzypc` (152 ids / 39 items, CC BY) -- the only blocker was
+  Mendeley's file-listing API returning `{"error":400}` for `folder_id=root`.
+  `zenodo.8401390` (119 ids x 10 items, 0-2 half steps, CC BY) -- clean on every
+  gate, but the deposit cannot tell you which instrument the ten columns are, so
+  shipping means guessing the construct. OSF `v4jqw` (HSPS Czech, ~1,143
+  respondents) and `zenodo.13133336` (~400 diabetic patients) are
+  **licence-blocked with no licence at all** and are in
+  `license_blocked_candidates.csv` with contributors -- both worth an email.
+
 ## Repos batch 2026-10-19: 8 tables staged, 70 leads unworked (2026-10-20)
 
 Discovery, triage and a processing pass are done; standing records are written

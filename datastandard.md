@@ -346,6 +346,13 @@ df.insert(0, "id", df.index + 1)
 If IDs are strings like `"sub-01"` that identify distinct people, keep them as strings. Do not force numeric conversion if it would destroy the identifier.
 
 ### PII columns
+
+**Tiering, ruled 2026-10-20 (ben-domingue).** A real name or an email address
+in a source file disqualifies the whole candidate — don't scrub and ship. A
+postal code, ZIP, or similar geographic/administrative code does not: drop the
+column and ship the rest of the table. The processing pipelines carry the
+worked examples; see `automated_finding/.claude/skills/irw-automated-finding/SKILL.md`.
+
 Some raw files include real names, email addresses, IP addresses, GPS coordinates, dates of birth, or national ID-card numbers (not to be confused with an anonymous study-assigned participant ID). Drop these columns entirely — do not carry them into `cov_*`, do not use them as `id`, and never print/materialize their values while inspecting the file (check `.notna().sum()` counts instead of viewing actual values). If a source ID-card or similar column is the only candidate for `id`, treat it the same as any other unusable ID (see "Missing person ID" above) — use row index instead, not the PII column.
 
 ### Data entry errors at known values

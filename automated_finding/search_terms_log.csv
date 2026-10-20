@@ -10078,3 +10078,138 @@ date,query,output_file,notes
 2026-10-19,مقياس الإصابة الأخلاقية,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
 2026-10-19,morele verwonding schaal,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
 2026-10-19,도덕적 손상 척도,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-20,number line estimation task,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,tarea de estimación en la línea numérica,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,Zahlenstrahl-Schätzaufgabe,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,tâche d'estimation sur la ligne numérique,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,数线估计任务,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,数直線推定課題,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,مهمة تقدير خط الأعداد,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,getallenlijn schattingstaak,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,수직선 추정 과제,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,vocabulary knowledge test,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,prueba de conocimiento de vocabulario,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,Wortschatzwissen Test,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,test de connaissance du vocabulaire,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,词汇知识测试,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,語彙知識テスト,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,اختبار معرفة المفردات,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,woordenschatkennis toets,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,어휘 지식 검사,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,oral health questionnaire,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,cuestionario de salud oral,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,Mundgesundheit Fragebogen,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,questionnaire de santé buccodentaire,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,口腔健康问卷,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,口腔保健質問紙,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,استبيان صحة الفم,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,mondgezondheid vragenlijst,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,구강 건강 설문지,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,driver behaviour questionnaire,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,cuestionario de comportamiento del conductor,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,Fahrverhalten Fragebogen,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,questionnaire de comportement du conducteur,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,驾驶行为问卷,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,運転行動質問紙,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,استبيان سلوك السائق,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,rijgedrag vragenlijst,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,운전 행동 질문지,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,autism quotient,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,cociente de espectro autista,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,Autismus-Quotient,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,quotient du spectre autistique,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,自闭症商数量表,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,自閉症スペクトラム指数,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,معامل طيف التوحد,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,autisme quotiënt,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,자폐 지수 척도,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,dementia screening test,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,prueba de cribado de demencia,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,Demenz Screening Test,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,test de dépistage de la démence,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,痴呆筛查测试,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,認知症スクリーニング検査,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,اختبار فحص الخرف,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,dementie screeningstest,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,치매 선별 검사,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,numeracy test,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,prueba de numeración,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,Rechenfähigkeitstest,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,test de numératie,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,数字能力测试,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,数的能力テスト,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,اختبار المهارات الحسابية,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,rekenvaardigheidstoets,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,수리력 검사,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,rapid automatized naming,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,denominación rápida automatizada,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,schnelles automatisiertes Benennen,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,dénomination rapide automatisée,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,快速自动命名,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,高速自動化命名,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,التسمية السريعة التلقائية,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,snel serieel benoemen,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,빠른 자동 이름대기,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,civic knowledge assessment,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,evaluación de conocimiento cívico,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,staatsbürgerliches Wissen Test,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,évaluation des connaissances civiques,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,公民知识测评,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,市民的知識テスト,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,تقييم المعرفة المدنية,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,burgerschapskennis toets,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,시민 지식 평가,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,nutrition knowledge questionnaire,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,cuestionario de conocimientos nutricionales,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,Ernährungswissen Fragebogen,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,questionnaire de connaissances nutritionnelles,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,营养知识问卷,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,栄養知識質問紙,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,استبيان المعرفة التغذوية,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,voedingskennis vragenlijst,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,영양 지식 설문지,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,music aptitude test,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,prueba de aptitud musical,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,Musikalitätstest,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,test d'aptitude musicale,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,音乐能力倾向测验,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,音楽適性検査,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,اختبار الاستعداد الموسيقي,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,muzikaliteitstest,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,음악 적성 검사,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,second language proficiency test,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,prueba de competencia en segunda lengua,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,Zweitsprachkompetenz Test,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,test de compétence en langue seconde,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,第二语言水平测试,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,第二言語習熟度テスト,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,اختبار إتقان اللغة الثانية,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,tweedetaalvaardigheidstoets,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,제2언어 능숙도 시험,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,grammaticality judgment task,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,tarea de juicio de gramaticalidad,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,Grammatikalitätsurteil Aufgabe,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,tâche de jugement de grammaticalité,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,语法性判断任务,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,文法性判断課題,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,مهمة الحكم النحوي,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,grammaticaliteitsbeoordelingstaak,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,문법성 판단 과제,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,breastfeeding self-efficacy scale,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,escala de autoeficacia en lactancia materna,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,Stillselbstwirksamkeit Skala,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,échelle d'auto-efficacité de l'allaitement,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,母乳喂养自我效能量表,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,母乳育児自己効力感尺度,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,مقياس الكفاءة الذاتية للرضاعة الطبيعية,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,zelfeffectiviteit borstvoeding schaal,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,모유수유 자기효능감 척도,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,nurse competence scale,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,escala de competencia de enfermería,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,Pflegekompetenz Skala,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,échelle de compétence infirmière,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,护士能力量表,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,看護実践能力尺度,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,مقياس كفاءة الممرضات,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,verpleegkundige competentie schaal,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-20,간호사 역량 척도,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
