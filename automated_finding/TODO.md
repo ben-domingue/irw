@@ -68,6 +68,63 @@ release" or "at upload" is **due now, not pending**:
   deliberately a separate file; merging it into `tags/tags_auto.csv` is a
   reviewed step.
 
+## From the 11 NC leads #3104 reopened (2026-10-19g, #3077)
+
+**23 tables / 268,235 responses staged in `automated_finding/irw_output/`,
+nothing uploaded.** All 23 pass `irw-validate --profile upload` with zero
+failures and zero errors. 4 of the 11 leads carried data; the other 7 are
+closed with reasons in their leads files. Every `todo` row across the
+`repos_ledger_remine_2026-10-18_*` files is gone again (0 remaining).
+
+- [ ] **Upload is yours:** `irw_output/` holds this batch's 23 tables. Note that
+  the folder may also hold an earlier slice -- check mtimes before pointing
+  `red_up` at it.
+- [ ] **`gilbert_2026_dep_symptoms` is HELD on provenance, and one message
+  closes it.** The deposit (`10.7910/DVN/G68C5Y`, CC BY-NC-SA 4.0) redistributes
+  a psychotherapy RCT's depression data that it never names -- the analysis
+  script says only "per McNeish, limit to C group only" -- so the originating
+  trial's redistribution terms are unknown. The table is built and passes the
+  upload gate (256 patients x 9 dichotomous DSM-5 items x up to 28 sessions,
+  49,598 responses, with `wave` and `treat`) and sits in
+  `automated_finding/held_provenance_2026-10-19/`. Josh Gilbert can name the
+  source; it moves into `irw_output/` unchanged if the answer is clean.
+- [ ] **Item text, owed in this batch and cheap:** all six Kenya tables (both
+  deposit codebooks give every stem with its item code and every option with
+  its value) and Jones's `tech_familiarity` + `ai_fear_2021` (the administered
+  prompt is a column of the data file). Each Kenya instrument is third-party
+  (PHQ-8, GAD-7, CCAS, CSS-11, SMD-9, an EPV index from the Political Life
+  Events scale), so read each register row BY NAME first -- `load_register()`
+  keeps only `hold`/`note`, so running the gate can discover a prohibition and
+  never a permission. Platte and Gilbert are not shippable; the BATCH_LOG entry
+  says where their wording actually is.
+- [ ] **`metadata/covariate_labels/harvest.py --commit HEAD platte_2026_mindset`,
+  then `build.py`** -- the one script in this batch that reads an SPSS file and
+  ships `cov_*` columns.
+- [ ] **Issues-page entry owed at publish for `baseke_2026_css11`:** the paper
+  and the deposit codebook both document five options "rated from 0 (not
+  stressful at all) to 4 (extremely stressful)", while the shared data holds
+  exactly three distinct values on all eleven items, coded 1, 3 and 5. Shipped
+  as recorded; the anchor-to-code mapping is what is unknown.
+- [ ] **`tags_auto_2026-10-19d.csv` (23 rows)** is written and, like its
+  predecessors, deliberately separate; merging it into `tags/tags_auto.csv` is a
+  reviewed step.
+- [ ] **The 3-4 item ruling now gates four more clean tables** (it already gated
+  `dvn/vidgon` and `zenodo.22035093`): Jones's 3-item AGI block, which merges
+  three samples into ~1,963 respondents and is that deposit's flagship measure;
+  Jones's 0-6 worry triple; and Kenya's OAC-2 (2 items) and BESAA-3 (3 items),
+  whose stems the codebook gives in full.
+- [ ] **`10.25442/hku.30959672` is embargoed until 2032-12-28**, not dead: 236
+  Hong Kong gifted adolescents, mindfulness/self-compassion/perfectionism. Worth
+  a diary note rather than a lead. **The pipeline defect behind it:** the
+  resolver reported it as "no resolvable tabular file on landing page", so an
+  embargo and a dead deposit read identically. `api.figshare.com/v2/articles/<id>`
+  returns `is_embargoed`, `embargo_type` and `embargo_date`; reading them in
+  `_figshare_files` would turn a sticky wrong verdict into a dated one. Same
+  family as the figshare-202 lesson.
+- [ ] **The other half of #3104's ruling is still unworked:** 56 rows at
+  `pending_ruling` in `leads/nc_licence_pending_ruling_2026-10-18.csv`,
+  27,697 respondents, the largest a 23,781 x 38 Borealis deposit.
+
 ## Auto-tagging reads the construct's name as if it were the sample (2026-10-19)
 
 Found by spot-checking `tags_auto_2026-10-18.csv` (301 rows) against the

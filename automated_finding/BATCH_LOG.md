@@ -21040,3 +21040,175 @@ different people cannot ship. The other four blocks of that deposit are clean
 Group 2 goes from 84 rows to 76. Group 1's 242 unparsed rows are untouched and
 still want a yes/no on a parse pass. The new deferral is 6bhr52dc5v's 20-item
 block, recorded in `TODO.md` with its evidence.
+
+## 2026-10-19g — the 11 NC leads #3104 reopened: 4 deposits, 23 tables, 268,235 responses (#3077)
+
+#3104 aligned `remine_ledger.py`'s leads filter with `datastandard.md` and in
+doing so restatused 11 `deferred` rows back to `todo` — after the 2026-10-19
+comment on #3077 had already reported "every `todo` row in every
+`repos_ledger_remine_2026-10-18_*` file now carries a status". Those 11 are this
+batch. **Every `todo` row is gone again** (0 across all the re-mine files), and
+the 56 rows in `leads/nc_licence_pending_ruling_2026-10-18.csv` are the other
+half of the same ruling, still unworked.
+
+All 11 licences were re-verified on the source record rather than taken from the
+ledger: 6 CC BY-NC, 5 CC BY-NC-SA, none ND. **4 of the 11 carried shippable
+data**, which is a 36% hit rate against the re-mine's usual 18% — unsurprising,
+since these rows had already passed a shape filter and were parked on licence
+alone.
+
+**23 tables, 268,235 responses, staged in `irw_output/`. Nothing is uploaded.**
+All 23 pass `irw-validate --profile upload` with zero failures and zero errors.
+
+| deposit | tables | responses |
+|---|---|---|
+| `10.7910/DVN/GJW7TL` — Jones, *Thinking Machines, Pondering Humans* | 10 | 67,369 |
+| `osf.io/f9ybp` — Kenyan adolescent mental health (Baseke et al. 2026) | 6 | 176,526 |
+| `10.17026/SS/QTQ8WL` — Platte, Dutch primary-school mindset | 7 | 24,340 |
+| `10.7910/DVN/G68C5Y` — Gilbert et al. 2026, idiographic IRT | (1) | (49,598) held |
+
+### What the four deposits turned out to be
+
+**Jones (CC BY-NC-SA 4.0) is ten batteries in two modes, and the modes cannot
+be pooled.** The "wide correlates" files put each attitude item on a -3..+3
+agreement scale on an online panel; the Google-Surveys files put the same
+questions on 1-7 with a response time, a sampling weight and a survey date.
+`jones_2026_ai_fear_2021` and `jones_2026_ai_fear_2023` are the clearest case:
+the same seven fears about AI, same item codes here, two scales — so two
+tables, not one merge. The 2023 and 2024 technology checklists DO pool, with
+`cov_study` naming the year.
+
+**Two Google-Surveys batteries are unshippable for a reason worth recording.**
+The confidence battery (4 prompts, 10,883 respondents) and the trust battery (5
+prompts, 13,227) carry **exactly one response per respondent** — Google Surveys
+serves one question at a time, and no respondent was served two prompts of the
+same battery. No two items share a respondent, so the table cannot be
+calibrated at all, and sparsity is not the issue: the familiarity battery is
+also sparse (7,339 singletons) but 1,865 respondents answered all ten prompts,
+which is what ties its items together. The script proves the one-per-respondent
+claim with an assert rather than asserting it in a comment.
+
+**101 duplicate responses in `stacked-oneq-results.csv`**, all on one prompt
+("confidence in *companies that use Artificial Intelligence systems*"), each
+appearing under two different `Survey_Date`s — and in all 101 the response is
+IDENTICAL across the two dates. Zero disagreement over 101 repeats is a
+duplication signature, not a re-measurement, so the later row is dropped rather
+than carried as a second wave.
+
+**Platte (CC BY-NC 4.0) administered seven instruments twice**, once about
+mathematics and once about language, to 421 Dutch primary-school students aged
+8-12. Each instrument is one table carrying both domains with
+`itemcov_domain`, because that is one scale asked about two school subjects, not
+two scales. The codebook marks 18 items for reversal; those marks ship as
+`itemcov_reverse_scored` and `resp` is left as administered. The four items the
+codebook records as "removed to improve internal consistency" ARE shipped — they
+were administered, and dropping them would hide an administered item. The
+script reads those marks out of the codebook `.xlsx` and asserts the set rather
+than transcribing it.
+
+**Kenya (CC BY-NC-SA 4.0) is two surveys that share two instruments.** PHQ-8 and
+GAD-7 were in both of the May-June 2023 surveys (5,592 adolescents, 74 schools),
+so each ships as one table with `cov_study`; survey E's ids are offset by
+100000. `cluster_id` is the school. Three things found in the file:
+
+- **CSS-11's codebook and its data disagree**, and this is an issues-page entry
+  when the table ships: the paper and the deposit codebook both document five
+  options "rated from 0 (not stressful at all) to 4 (extremely stressful)",
+  while the shared data holds exactly **three** distinct values on all eleven
+  items, coded 1, 3 and 5. Shipped as recorded — the direction is documented,
+  the anchor-to-code mapping is not, so nothing is rescaled.
+- **The interview date is typed by hand and the year is frequently wrong**:
+  2013, 2020, 2022, 2027, 2028, 2033, 2073, 2823, 2883, one literal "invalid".
+  `date` is kept only inside the documented May-June 2023 window, which blanks
+  ~13% of rows and is why these six tables each carry a `date_numeric*` warning.
+  Survey D is `dd/mm/yyyy` and survey E is `m/d/yyyy`; the script asserts which
+  reading is right instead of trusting one.
+- `GAD_Check` is an embedded attention check ("If you read this question,
+  respond 'Not at all'"), not an item, and is not shipped. Neither are the two
+  functional-impairment follow-ups, which are one question each on a different
+  response format.
+
+**Gilbert (CC BY-NC-SA 4.0) is built, validated, and HELD on provenance.** The
+deposit describes its empirical file as "9 dichotomous DSM-5 items in a
+psychotherapy RCT" and its analysis script refers to the data only as "per
+McNeish, limit to C group only" — it names no trial, paper or source deposit.
+The depositors' licence covers what they published; it does not establish the
+originating trial's redistribution terms, which is the case
+`datastandard.md`'s "scraped or relabelled third-party data" clause points at.
+The table (256 patients x 9 items x up to 28 sessions, with `wave` and `treat`,
+49,598 responses) sits in `automated_finding/held_provenance_2026-10-19/` with a
+README; one message to Josh Gilbert closes it either way. Separately, the
+deposit's own `*_lag` columns are computed in stored row order rather than
+session order, so for the file's last three rows — and for the session after
+each of them — the "lag" is not the previous session's response. Nothing here
+ships the lags; it bears on the published model, which used them.
+
+### The seven that did not carry data
+
+- `osf.io/sarzc` — an integrative-review **protocol**; two PDFs, no data.
+- `osf.io/fbre8` — describes an IRB-approved study of 1,040 patients and
+  deposits **nothing**: empty `osfstorage`, no components.
+- `osf.io/htx4z` — a theoretical proposal (the Sigma-factor model); empty.
+- `10.6084/m9.figshare.11609991` — SciELO deposited the **article's four
+  summary tables** (`Table_1..4.xls`, 5,632 bytes each). They also 404:
+  `api.figshare.com` lists them while both `ndownloader` and
+  `/v2/file/download` return S3 `NoSuchKey`.
+- `10.25439/rmt.33261075` — a 14-sheet **policy-framework mapping matrix**
+  (spatial scale x institution x theme), not person-item data.
+- `10.5281/zenodo.21648539` — a **3D scan of a Roman portrait sculpture**.
+- `10.25442/hku.30959672` — **files under embargo until 2032-12-28**. This one
+  is a real candidate (236 Hong Kong gifted adolescents; mindfulness,
+  self-compassion, perfectionism, well-being) and the only thing wrong with it
+  is the date. Worth knowing: the resolver reported it as "no resolvable
+  tabular file on landing page", so **an embargo and a dead deposit read
+  identically** — `api.figshare.com/v2/articles/<id>` returns
+  `is_embargoed=true`, `embargo_type=file`, `files=null`, which is the same
+  shape as the figshare-202 lesson from 2026-10-18.
+
+### Deferred on thinness — this batch adds four to the standing question
+
+The open ruling on 3-4 item tables (`dvn/vidgon`, `zenodo.22035093`) now gates
+four more, all clean and all built the moment it is answered:
+
+- Jones's **3-item AGI block** (possible / should / rights, -3..+3) across three
+  samples — Google Surveys 2021 (1,003), Prolific 2023 (459), Prolific 2024
+  (501) — which merges to ~1,963 respondents and is the deposit's flagship
+  measure. `prolific-agi-2024-results.csv` is the long twin of the wide file and
+  carries no `User_ID`, so build from the wide one.
+- Jones's **worry triple** (AI / self-driving cars / facial recognition, 0-6).
+- Kenya's **OAC-2** (2 items) and **BESAA-3** (3 items), whose stems the
+  codebook gives in full.
+
+### Item text
+
+Owed, and cheap, in the next step of this batch:
+
+- **Kenya, all six tables** — both codebooks give every stem with its code
+  explicitly ("1. Little interest or pleasure in doing things? -> PHQ_1") and
+  every option with its value. All six instruments are third-party (PHQ-8,
+  GAD-7, the Climate Change Anxiety Scale, the COVID-19 Stressors Scale, the
+  Social Media Disorder Scale, an EPV index adapted from the Political Life
+  Events scale), so each needs its `instrument_rights_register.csv` row read by
+  name before its text ships — and `load_register()` hides a `ship` ruling, so
+  read the file, do not just run the gate.
+- **Jones `tech_familiarity` and `ai_fear_2021`** — the administered prompt is a
+  column of the data file, and `oneq_code()` derives each item code from it
+  reversibly. `ai_fear_2023` shares those seven codes, so its text is one
+  cross-file mapping away; that is a deliberate mapping, not a cheap one.
+- **Platte: not shippable.** Neither label level carries a stem — the SPSS
+  variable labels are block names repeated across all six items of a block
+  ("MindsetBelief Math") and the value labels are the 1-5 anchors; the codebook
+  `.xlsx` repeats the same block names. The administered Dutch wording is in the
+  thesis behind the deposit, which the record does not link.
+- **Gilbert: not shippable.** The item codes ARE the DSM-5 criterion names, but
+  the administered wording belongs to the unnamed source trial and the file is a
+  plain CSV with no label level at all.
+
+### Bookkeeping
+
+23 dictionary rows staged via `stage_dict_row.py` (with `codebook_url` for all
+13 tables whose source ships a codebook file and `none` for the Jones ten), 23
+tag rows in `tags_auto_2026-10-19d.csv`, and the 11 leads rows statused in
+their own files. `covariate_labels/harvest.py` is owed for
+`platte_2026_mindset` only — it is the one script here that reads an SPSS file
+and ships `cov_*` columns.
