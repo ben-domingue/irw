@@ -68,6 +68,100 @@ release" or "at upload" is **due now, not pending**:
   deliberately a separate file; merging it into `tags/tags_auto.csv` is a
   reviewed step.
 
+## From the 11 NC leads #3104 reopened (2026-10-19h, #3077)
+
+**26 tables / 282,482 responses staged in `automated_finding/irw_output/`,
+nothing uploaded.** All 26 pass `irw-validate --profile upload` with zero
+failures and zero errors. (23 at first writing, plus the three the 3-item floor
+ruled the same day unblocked: `jones_2026_agi`, `jones_2026_tech_worry`,
+`baseke_2026_besaa3`.) 4 of the 11 leads carried data; the other 7 are
+closed with reasons in their leads files. Every `todo` row across the
+`repos_ledger_remine_2026-10-18_*` files is gone again (0 remaining).
+
+- [ ] **Upload is yours:** `irw_output/` holds this batch's 23 tables. Note that
+  the folder may also hold an earlier slice -- check mtimes before pointing
+  `red_up` at it.
+- [ ] **`gilbert_2026_dep_symptoms` is HELD on provenance, and one message
+  closes it.** The deposit (`10.7910/DVN/G68C5Y`, CC BY-NC-SA 4.0) redistributes
+  a psychotherapy RCT's depression data that it never names -- the analysis
+  script says only "per McNeish, limit to C group only" -- so the originating
+  trial's redistribution terms are unknown. The table is built and passes the
+  upload gate (256 patients x 9 dichotomous DSM-5 items x up to 28 sessions,
+  49,598 responses, with `wave` and `treat`) and sits in
+  `automated_finding/held_provenance_2026-10-19/`. **Asked in #3120**
+  (assigned to @joshgilbert1994, 2026-10-19): either he names the source trial
+  and its terms, or he confirms redistribution is fine. The table moves into
+  `irw_output/` unchanged if the answer is clean, and the script stays as the
+  record if it is not.
+- [x] **Item text: 4 of the 8 candidate tables are STAGED** in
+  `automated_finding/itemtext_output/` (179 rows), all four through
+  `normalize_nulls.R` -> `validate_items.R --resp-csv` -> `audit_batch.R
+  --resp-dir` (4/4 PASS, no anomalies) and `irw-validate` (ok, nothing to
+  report), with provenance and `mapping_verification.csv` rows written:
+  - `baseke_2026_phq8` and `baseke_2026_gad7` -- stems and all four 0-3 anchors
+    PARSED out of the deposit's Survey D codebook, which prints each stem
+    beside its item code. The register's "PHQ and GAD screener family" row is
+    verdict **`ship`** (phqscreeners.com: no permission required), read by name
+    rather than discovered through the gate.
+  - `jones_2026_tech_familiarity` and `jones_2026_ai_fear_2021` -- the
+    administered prompt is a column of the response file, and the item codes
+    come from the same function/dict the response script used. Stems searched
+    verbatim and match no published scale; study-authored under the deposit's
+    CC BY-NC-SA. `option_text` is blank on all seven points because the deposit
+    publishes no anchor labels at all.
+- [ ] **The other four Kenya tables need a rights ruling before their text can
+  ship, and that is the remaining work here.** Their stems are all in the
+  codebooks, so extraction is minutes; what is missing is a register row for
+  each third-party instrument, none of which has one: the **Climate Change
+  Anxiety Scale** (Clayton & Karazsia 2020, J. Environ. Psychol.), the
+  **COVID-19 Stressors Scale**, the **Social Media Disorder Scale** (van den
+  Eijnden, Lemmens & Valkenburg 2016) and the **EPV index adapted from the
+  Political Life Events scale**. Silence does not ship (2026-10-15), so each
+  needs its terms located and quoted. Note `BESAA` is already registered
+  `block`, which is one reason its 3-item table is deferred anyway.
+- [ ] **`jones_2026_ai_fear_2023` has no text of its own and is one deliberate
+  cross-file mapping from having it:** its seven item codes are exactly the
+  2021 table's seven prompts, on a -3..+3 scale instead of 1-7. Not cheap by
+  the Step 3.5 test, so it was not taken here.
+- [x] **`covariate_labels/harvest.py --commit HEAD platte_2026_mindset`: run**
+  (the one script in this batch that reads an SPSS file and ships `cov_*`
+  columns). Its labels are in the harvest cache -- school 1-15, gender
+  1=Female/2=Male, class 6/7/8, achievement 1-5 -- but **not committed**:
+  `build.py` only emits rows for tables that are live in the corpus, so these
+  seven appear on the next build after the release, and running it now would
+  have swept 8,084 lines of other batches' pending harvests into this PR. That
+  build is the standing item at the top of this file, not a new one.
+- [ ] **Issues-page entry owed at publish for `baseke_2026_css11`:** the paper
+  and the deposit codebook both document five options "rated from 0 (not
+  stressful at all) to 4 (extremely stressful)", while the shared data holds
+  exactly three distinct values on all eleven items, coded 1, 3 and 5. Shipped
+  as recorded; the anchor-to-code mapping is what is unknown.
+- [ ] **`tags_auto_2026-10-19d.csv` (23 rows) and `tags_auto_2026-10-19e.csv`
+  (3 rows)** are written and, like their predecessors, deliberately separate;
+  merging them into `tags/tags_auto.csv` is a reviewed step.
+- [x] **The item-count floor is ruled: 3 ships, 2 does not** (ben-domingue,
+  2026-10-19, now in `datastandard.md` "Before you start"). Three of this
+  batch's four thin candidates are built and staged -- `jones_2026_agi` (the
+  AGI block, three samples pooled, 1,963 respondents, item text shipped too),
+  `jones_2026_tech_worry` and `baseke_2026_besaa3`. Kenya's OAC-2 stays out at
+  2 items. Of the two older deferrals the ruling reached: **`dvn/vidgon` is
+  unblocked and is a ready lead again** (4 items on 0-8 over 1,746 respondents,
+  in `leads/human_review_recheck_batch5_2026-10-18.csv`, now statused `todo`),
+  while `zenodo.22035093` is sharpened rather than closed -- one 4-item
+  instrument or two 2-item ones decides whether it ships at all, and that needs
+  the paper.
+- [ ] **`10.25442/hku.30959672` is embargoed until 2032-12-28**, not dead: 236
+  Hong Kong gifted adolescents, mindfulness/self-compassion/perfectionism. Worth
+  a diary note rather than a lead. **The pipeline defect behind it:** the
+  resolver reported it as "no resolvable tabular file on landing page", so an
+  embargo and a dead deposit read identically. `api.figshare.com/v2/articles/<id>`
+  returns `is_embargoed`, `embargo_type` and `embargo_date`; reading them in
+  `_figshare_files` would turn a sticky wrong verdict into a dated one. Same
+  family as the figshare-202 lesson.
+- [ ] **The other half of #3104's ruling is still unworked:** 56 rows at
+  `pending_ruling` in `leads/nc_licence_pending_ruling_2026-10-18.csv`,
+  27,697 respondents, the largest a 23,781 x 38 Borealis deposit.
+
 ## Auto-tagging reads the construct's name as if it were the sample (2026-10-19)
 
 Found by spot-checking `tags_auto_2026-10-18.csv` (301 rows) against the
