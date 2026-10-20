@@ -3,19 +3,20 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
-## Pending upload: one table + its item text (2026-10-19g)
+## Uploaded: one table + its item text (2026-10-19g, confirmed 2026-10-20)
 
-- [ ] `olmos_gomez_2026_ai_mathematics` (7,677 rows, 853 x 9) + its
-  `__items.csv` (45 rows) need uploading. **Upload them BY PATH, not by
-  directory:** `irw_output/` and `itemtext_output/` both still hold the
-  2026-10-15 neubauer/ryvkina batch, already uploaded, and Redivis uploads
-  APPEND, so `red_up irw_output` would double 33 live tables.
+- [x] `olmos_gomez_2026_ai_mathematics` (7,677 rows, 853 x 9) + its
+  `__items.csv` (45 rows) went up by path on 2026-10-20 and are **confirmed in
+  the drafts**, read back off Redivis rather than inferred from the uploader's
+  own report: `item_response_warehouse_7:next` holds 840 tables (839 before)
+  with the response table at exactly 7,677 rows, and `irw_text_3:next` holds
+  884 (883 before) with the item table at exactly 45. Single `NEW` adds, no
+  doubling. `uploaded` is stamped 2026-10-20 in `itemtext_provenance.csv` and
+  `itemtext/mapping_verification.csv`.
 
-      red_up automated_finding/irw_output/olmos_gomez_2026_ai_mathematics.csv
-      red_up automated_finding/itemtext_output/olmos_gomez_2026_ai_mathematics__items.csv
-
-  Stamp `uploaded` in `itemtext_provenance.csv` and
-  `itemtext/mapping_verification.csv` only once that is confirmed.
+  Both still sit in **unreleased drafts** -- `irw_7` at 79 pending since v1.3,
+  `irw_text_3` at 1 pending since v5.2 -- so the table is not public yet and
+  the release is Ben's.
 - [ ] **Clear the two staging directories** once `irw_text_3` is released. The
   28 `__items.csv` and 33 response CSVs in them are all stamped uploaded
   2026-10-15 but their draft is unreleased, so `clear_uploaded_itemtables.py
