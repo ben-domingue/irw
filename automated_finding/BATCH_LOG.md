@@ -21449,3 +21449,32 @@ only for an aggregator key. **These rows are not pasted into the dictionary
 sheet and have not been since #2628**: `metadata/dict_union.R` merges the file
 into the sheet at export, cell by cell, so a staged row needs nothing from a
 human but review.
+
+## 2026-10-20b — the 2026-10-19h batch and the kemp date repair uploaded (#3077, #3110)
+
+ben-domingue uploaded, 2026-10-20: the batch's **5 item-text tables** and the
+**3 `kemp_2019_mss_*`** date-repair tables are in, and the **26 response
+tables** were uploading when he said so. Stamped here rather than left pending
+because a stale "nothing uploaded" invites a second upload and **uploads
+append**.
+
+- `uploaded=2026-10-20` written on the five `itemtext_provenance.csv` rows
+  (`baseke_2026_phq8`, `baseke_2026_gad7`, `jones_2026_tech_familiarity`,
+  `jones_2026_ai_fear_2021`, `jones_2026_agi`), by editing those five lines in
+  place -- the file's 624 CRLF rows are untouched.
+- Three `metadata/table_changes.csv` rows for the kemp tables (#3110): `date`
+  was 1000x too small and read as January 1970, now 2017-10-11 to 2017-11-29,
+  only `date` changed. This was a REPLACE into `irw_4`, where the tables had
+  been live with the 1970 dates since v14.0 -- the same pandas-3 fix as #3100's
+  30 openESM tables but a release later, which is why 790384df left these three
+  out. `irw_version` is blank: never guessed, filled from the manifest once a
+  release carries it.
+- `runs/` directories renamed to match: `uploaded_2026-10-20_kemp_date_fix/`,
+  and `runs/STAGING.md` now reads "already uploaded" for the kemp set and the 5
+  `__items`. The 26 response files stay in `stage_2026-10-19h/resp/` as the
+  record; nobody should re-point `red_up` at them.
+
+**Still owed at the release** (not now): the issues-page entry for
+`baseke_2026_css11` -- the paper and codebook both document five options 0-4
+while the data holds only {1,3,5} -- and `metadata/covariate_labels/build.py`,
+which remains the standing pre-existing item.
