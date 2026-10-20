@@ -3,6 +3,25 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## Pending upload: one table + its item text (2026-10-19g)
+
+- [ ] `olmos_gomez_2026_ai_mathematics` (7,677 rows, 853 x 9) + its
+  `__items.csv` (45 rows) need uploading. **Upload them BY PATH, not by
+  directory:** `irw_output/` and `itemtext_output/` both still hold the
+  2026-10-15 neubauer/ryvkina batch, already uploaded, and Redivis uploads
+  APPEND, so `red_up irw_output` would double 33 live tables.
+
+      red_up automated_finding/irw_output/olmos_gomez_2026_ai_mathematics.csv
+      red_up automated_finding/itemtext_output/olmos_gomez_2026_ai_mathematics__items.csv
+
+  Stamp `uploaded` in `itemtext_provenance.csv` and
+  `itemtext/mapping_verification.csv` only once that is confirmed.
+- [ ] **Clear the two staging directories** once `irw_text_3` is released. The
+  28 `__items.csv` and 33 response CSVs in them are all stamped uploaded
+  2026-10-15 but their draft is unreleased, so `clear_uploaded_itemtables.py
+  --apply` would destroy the only local copies a re-upload could use
+  (the 2026-09-23 hazard, again). Release first, then clear.
+
 ## The 2026-10-19 upload happened: 78 tables are in the draft (2026-10-19)
 
 ben-domingue uploaded the 2026-10-19c and 2026-10-19d slices on 2026-10-19 --
@@ -411,6 +430,12 @@ of its leads carry a status across batches A, B and C, 0 `todo`.
 
 ### Rulings wanted (none blocks anything staged)
 
+- [x] **A university NetID: PII or not?** ANSWERED 2026-10-19 by the
+  structural/incidental narrowing (#3113, BATCH_LOG 2026-10-19g): `Username` is
+  a column whose job is to hold an identifier and it holds one for every
+  respondent, which is STRUCTURAL, so the whole-candidate skip stands and the
+  carve-out is not widened. The deposit stays skipped; its other file is the
+  PSS and was blocked anyway. Original note follows.
 - [ ] **A university NetID: PII or not?** `zenodo.5217991` was skipped because
   `Username` holds 236 NetIDs (`bdz0311`, `btr3574`) for identifiable students
   at one university. The narrowed carve-outs cover a platform participant ID
@@ -596,12 +621,19 @@ Nothing here is uploaded. Ben held PR #3089 and all uploads deliberately on
   NEO-FFI, MBI-HSS, PSQI, SCL-90-R, HADS, BDI-II, ISI, PERMA-Profiler, the
   Ages & Stages family). Which get matchers is a rights ruling, so it is
   yours. Deliberately not fixed here: a matcher has real false-positive cost.
-- [ ] **Two PII edge cases from the `good`-keys batch**, both skipped/deferred
-  under the blanket rule, both arguably outside its intent — see BATCH_LOG
-  2026-10-18f: `10.17632/4fp3nxmcgs` (one respondent of 382 typed their own
-  name into a free-text `school` field; 382x47 otherwise clean) and
-  `zenodo.21121992` (the name column holds the three deposit authors' own
-  names, published on the record — authorship, not a data subject).
+- [ ] **PII edge cases from the `good`-keys batch — one is now workable, one
+  is still open.** The structural/incidental narrowing (#3113, BATCH_LOG
+  2026-10-19g) resolves the first and does not reach the second:
+  - `10.17632/4fp3nxmcgs` **REOPENS as a workable lead.** One respondent of 382
+    typed their own name into a free-text `school` field (376 gave the
+    university). The column collects a school name, not identifiers, so this is
+    incidental: null the cell and ship. Otherwise a clean 382x47 five-block
+    AI-literacy instrument. NOT YET PROCESSED — it needs a normal pass.
+  - `zenodo.21121992` **stays open.** Its name column holds the three deposit
+    AUTHORS' own names (an enumerator tag published on the record), not data
+    subjects'. The narrowing is about identifying respondents and says nothing
+    about a self-named author, so this still wants a ruling rather than an
+    inference.
 - [ ] **`zenodo.20550197`** duplicates live data: 200 of its 201 distinct
   OSTES response vectors already exist in `gonzalezros_2025_ostes`. Supersede
   the live table, ship only the ~425 new respondents, or skip?
@@ -764,15 +796,15 @@ this list saying so.
   (Chinese value labels for gender, teaching years, degree, academic title, salary
   band). Run `python3 metadata/covariate_labels/build.py` after the release and
   commit `covariate_labels.csv`.
-- [ ] **Two rulings wanted** (neither blocks anything):
-  - `10.17632/4fp3nxmcgs` — skipped as PII because ONE respondent typed their own
-    name into a free-text `school` field (376 of 382 gave the university). The column
-    would be dropped anyway and this is a one-cell data-entry accident, not a name
-    field; the blanket rule has not been asked about that class. An otherwise clean
-    382 x 47 five-block AI-literacy instrument if it may ship.
-  - `10.5281/zenodo.21121992` — deferred. Its name column holds the three **deposit
-    authors'** own names (the enumerator tag), published on the record, not data
-    subjects'. Author/enumerator self-name: PII under the blanket rule, or authorship?
+- [ ] **One ruling wanted** (the other was answered 2026-10-19):
+  - `10.17632/4fp3nxmcgs` — ANSWERED. Incidental under the structural/incidental
+    narrowing (#3113): the free-text `school` column collects a school name, so
+    the one self-typed personal name is nulled and the deposit ships. It is a
+    workable lead now, tracked above; it has not been processed yet.
+  - `10.5281/zenodo.21121992` — STILL OPEN. Its name column holds the three
+    **deposit authors'** own names (the enumerator tag), published on the record,
+    not data subjects'. The narrowing speaks to identifying respondents and does
+    not reach an author's self-name, so this one still wants a ruling.
 - [ ] **One deliberate item-text translation round** covers eight deposits in this
   batch whose stems are already in hand in their own column headers but were
   administered in Indonesian, Turkish or Chinese with no author English. Each would

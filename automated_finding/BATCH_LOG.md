@@ -21128,3 +21128,132 @@ for a version with `q37_0` and `comments` dropped, in the same email that asks
 about item text rather than as a separate message. Note the column is `q37_0`,
 not `q37`. It is worth the ask: 3,000 respondents, a published energy-literacy
 instrument, 264 columns.
+
+## 2026-10-19g — the first table the narrowed PII rule reopened: DVN/VSFCVG (#3077, #3113)
+
+One table, worked because 2026-10-19's structural/incidental narrowing
+(#3113) un-skipped it. It is the case the narrowing was written for: the only
+PII in the 12-column file is one respondent's email address sitting among 40
+distinct values in the free-text `Edad` (age) column, which collects age and
+not identifiers. The cell is nulled, the candidate ships.
+
+| | |
+|---|---|
+| table | `olmos_gomez_2026_ai_mathematics` |
+| rows | 7,677 (853 respondents x 9 items, no missingness) |
+| data | `10.7910/DVN/VSFCVG`, CC0 1.0, `IA. MATH 853.xlsx` |
+| paper | `10.1057/s41599-026-08011-3`, Hum Soc Sci Commun 7(1), **CC BY 4.0** |
+| item text | shipped, 45 rows — the column headers ARE the administered Spanish stems |
+
+**The paper had to be found before anything could ship, and it was not
+findable by title.** Two title searches returned nothing; Crossref on the
+deposit's own title string found it. This matters because the register's
+standing pattern is that **a study-authored instrument's wording is governed by
+the article's version of record, not by the deposit licence** — `ai_fear_dong_2026`
+and `anunciacao_2025_*` are both blocked on CC BY-NC-ND VoRs sitting over
+unlicensed or permissively-licensed deposits. Here the VoR is CC BY 4.0, so the
+wording ships; had it been ND, the CC0 deposit would not have saved it. The
+Nature body is behind an IDP wall — `_reference.pdf` via the OpenAlex OA
+location is what fetched, where the landing page and `.pdf` both returned the
+wall as HTML.
+
+**Instrument: author-developed, and checked rather than assumed.** The article
+calls it "an ad hoc quantitative research design ... a questionnaire validated
+by a group of experts". Three stems were searched verbatim and match nothing
+published. A `ship` row was written to
+`itemtext/instrument_rights_register.csv` (family `AIMATH-OlmosGomez2026`)
+quoting the VoR licence clause, with `match_*` left empty on purpose so it
+cannot sweep.
+
+**One table, not three.** The article reports three correlated factors (5/2/2
+items, alphas .918 / .760 / .633) under a single second-order construct with
+one overall alpha of .883, and retains all nine items. Those are dimensions of
+one instrument rather than distinct constructs, so splitting would have
+produced two 2-item tables for no gain. The factor assignment is recorded in
+the script header. It is deliberately **not** written into `section_id`: the
+nine items were administered as one block with no section prompts and the
+factors came out of the CFA, so `section_id` is `<table>_1` throughout.
+
+**Item codes are content-derived, not positional**, and the derivation is
+corroborated twice over: the script maps each Spanish header through an
+explicit `ITEMS` dict (raising if a header is absent from the deposit), and the
+article's CFA "Item-Factor Association" table lists the authors' own English
+rendering of all nine items in exactly the spreadsheet's column order. That
+English is `item_text_translated`.
+
+**The option anchors are the one fallback.** The deposit stores only the codes
+1-5 and the administered SPANISH anchors are published nowhere, so
+`option_text` carries the authors' English from the Methods ("1 is 'Strongly
+disagree' ... 5 is 'Strongly agree'") with `option_text_translated` empty —
+the documented fallback for unrecoverable administered wording, applied to the
+option axis alone while the stems beside it are the real Spanish. A later pass
+that finds the Spanish anchors should move the English across.
+
+**Age Range is `Mixed`, which no one would have guessed.** Derived from
+`cov_age` per the #1760 rule rather than judged: 34 of 850 respondents are 17,
+which is 4.0% and clears the 2% floor, so both sides of 18 are present.
+"University students" reads as `Adult (18+)` and would have been wrong. Child
+Age is `Adolescent (12-18y)`, the only band holding anyone. Tags in
+`tags_auto_2026-10-19d.csv` (a separate file again, so it cannot collide with
+the three open tag PRs).
+
+**Gates.** `irw-validate` clean on both files; `run_qc` 3 pass / 0 warn with
+source-documented `permitted_values` (1-5) and `item_constructs` (the three
+factors); `validate_items` PASS on both join keys; `audit_batch` PASS with no
+anomalies; the per-item issues scan clean, so no issues-page entry is owed
+(`data_labels` + `study_materials` earns none by default);
+`check_provenance.R` reports nothing owed. `mapping_verification.csv` carries a
+`data_labels` / `NOT_NEEDED` row, which is the one basis exempt from a
+`verify_<table>.R` — the header is the stem, so there is no code-to-text
+inference for a statistical route to check.
+
+**`run_qc` was positive-controlled before its clean result was believed**,
+which is the 2026-10-19 lesson about screens that pass because they examined
+nothing. Injecting an out-of-range `resp` fails `resp_outside_permitted`, a
+missing `resp` warns, a duplicated `id`+`item` fails, and a fractional value
+fails against the permitted set. One probe did NOT fire: a single non-numeric
+`resp` among 7,677, because the non-numeric check carries a deliberate 99%
+threshold. That is documented behaviour and `irw-validate` is the gate for it,
+but it is worth knowing the check is a proportion and not a tripwire.
+
+### Two staging directories are not clean, and that is a live upload hazard
+
+`irw_output/` holds 33 response CSVs and `itemtext_output/` 28 `__items.csv`
+from the 2026-10-15 neubauer/ryvkina batch. **All 61 are stamped uploaded
+2026-10-15**, so a directory-wide `red_up irw_output` would re-upload them, and
+**Redivis uploads APPEND** (#2055). So this batch is uploaded BY PATH:
+
+    red_up automated_finding/irw_output/olmos_gomez_2026_ai_mathematics.csv
+    red_up automated_finding/itemtext_output/olmos_gomez_2026_ai_mathematics__items.csv
+
+Both dry-run as a single `NEW` add — `irw_7` 839 -> 840, `irw_text_3` 883 ->
+884, both well under the 1,000 cap.
+
+Moving the 61 aside was considered and rejected: a subdirectory carrying a
+`provenance.csv` marker makes `red_up` **die** rather than skip
+(`history_dirs`, cli.py), so it would have blocked this upload too. Deleting
+them is the 2026-09-23 hazard — their draft is unreleased, so the local copies
+are the only source a re-upload could use. They should be cleared after
+`irw_text_3` is released, which is now an item in `TODO.md`.
+
+`normalize_nulls.R` over `itemtext_output/` did rewrite all 28 of those files
+(reported as "fixed", 48-84 lines differing each). The change is quoting style
+only — `read.csv()` maps every on-disk null form to the same `NA`, which is
+why that script compares bytes — and the tables were already live, so nothing
+shipped changed. Worth recording because the diff looks alarming and is not.
+
+### What the narrowing reopened elsewhere
+
+Two open `TODO.md` PII questions are now answered, and one is not:
+
+- `10.17632/4fp3nxmcgs` — **reopens.** One respondent of 382 typed their own
+  name into a free-text `school` field (376 gave the university); the column
+  collects a school name, so this is incidental. An otherwise clean 382x47
+  five-block AI-literacy instrument. **Not processed here** — it wants a normal
+  pass.
+- `zenodo.5217991` — **stays skipped.** `Username` holds a NetID for all 236
+  respondents, which is a column whose job is to hold an identifier, so it is
+  structural and the carve-out is not widened.
+- `zenodo.21121992` — **still open.** Its name column holds the three deposit
+  AUTHORS' own names, published on the record. The narrowing is about
+  identifying respondents and says nothing about an author's self-name.
