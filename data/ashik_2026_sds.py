@@ -35,6 +35,10 @@ import pyreadstat
 
 EFA = Path(sys.argv[1])
 CFA = Path(sys.argv[2])
+REPO_ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(REPO_ROOT))
+from irw_validate._checks import run_qc  # noqa: E402
+
 OUT = Path(sys.argv[3]) if len(sys.argv) > 3 else Path(".")
 
 COV_MAP = {
@@ -114,6 +118,12 @@ def main() -> None:
         long = long[cols_out].sort_values(["id", "item"])
         assert table not in written
         written.add(table)
+        _checks = run_qc(long)
+        _fails = [(c.name, c.detail) for c in _checks if c.status == "fail"]
+        assert not _fails, (table, _fails)
+        for _c in _checks:
+            if _c.status == "warn":
+                print(f"  [qc warn] {table} {_c.name}: {_c.detail[:180]}")
         long.to_csv(OUT / f"{table}.csv", index=False)
         print(f"{table}: rows={len(long)} (of {n_all}) ids={long['id'].nunique()} "
               f"items={long['item'].nunique()} resp={sorted(long['resp'].unique())}")

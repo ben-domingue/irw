@@ -29,6 +29,10 @@ import pandas as pd
 import pyreadstat
 
 SRC = Path(sys.argv[1]) if len(sys.argv) > 1 else Path("data20221211.sav")
+REPO_ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(REPO_ROOT))
+from irw_validate._checks import run_qc  # noqa: E402
+
 OUT = Path(sys.argv[2]) if len(sys.argv) > 2 else Path(".")
 
 COV_MAP = {"Sex": "cov_sex", "Age": "cov_age", "Educate": "cov_educ"}
@@ -129,6 +133,12 @@ def write(long: pd.DataFrame, table: str, out: Path, written: set[str]) -> None:
                                                  if c.startswith("cov_")]
     long = long[cols].sort_values(["id"] + wave_cols + ["item"])
     path = out / f"{table}.csv"
+    _checks = run_qc(long)
+    _fails = [(c.name, c.detail) for c in _checks if c.status == "fail"]
+    assert not _fails, (table, _fails)
+    for _c in _checks:
+        if _c.status == "warn":
+            print(f"  [qc warn] {table} {_c.name}: {_c.detail[:180]}")
     long.to_csv(path, index=False)
     print(f"{table}: rows={len(long)} ids={long['id'].nunique()} "
           f"items={long['item'].nunique()} "

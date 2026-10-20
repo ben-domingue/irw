@@ -59,10 +59,13 @@ Notes
 import sys
 import os
 
-sys.path.insert(0, "/home/ben/.local/lib/python3.12/site-packages")
 
 import numpy as np
 import pandas as pd
+
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from irw_validate._checks import run_qc  # noqa: E402
 
 XLSX = sys.argv[1]
 OUTDIR = sys.argv[2]
@@ -134,11 +137,17 @@ assert len(NAME) <= 40, NAME
 for it, g in out.groupby("item"):
     print(f"  resp range {it}: {int(g.resp.min())}-{int(g.resp.max())}, "
           f"levels {sorted(g.resp.unique())}")
-assert out["resp"].between(1, 4).all(), "resp outside 1-4"
+assert out["resp"].between(1, 3).all(), "resp outside 1-3"
 assert out["id"].nunique() >= 100, "fewer than 100 ids"
 assert out["item"].nunique() >= 3, "fewer than 3 items"
 assert not out[["id", "item"]].duplicated().any(), "duplicate id/item"
 path = os.path.join(OUTDIR, NAME + ".csv")
+_checks = run_qc(out)
+_fails = [(c.name, c.detail) for c in _checks if c.status == "fail"]
+assert not _fails, (NAME, _fails)
+for _c in _checks:
+    if _c.status == "warn":
+        print(f"  [qc warn] {NAME} {_c.name}: {_c.detail[:180]}")
 out.to_csv(path, index=False)
 print(f"{NAME}: {len(out)} rows, {out['id'].nunique()} ids, "
       f"{out['item'].nunique()} items -> {path}")

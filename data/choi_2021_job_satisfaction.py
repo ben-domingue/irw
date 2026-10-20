@@ -27,6 +27,10 @@ import sys
 import pandas as pd
 
 SRC = Path(sys.argv[1])
+REPO_ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(REPO_ROOT))
+from irw_validate._checks import run_qc  # noqa: E402
+
 OUT = Path(sys.argv[2]) if len(sys.argv) > 2 else Path(".")
 
 TABLE = "choi_2021_job_satisfaction"
@@ -90,6 +94,12 @@ def main() -> None:
     assert long["id"].nunique() >= 100
     out = OUT / f"{TABLE}.csv"
     assert not (OUT / f"{TABLE}.csv").is_dir()
+    _checks = run_qc(long)
+    _fails = [(c.name, c.detail) for c in _checks if c.status == "fail"]
+    assert not _fails, (TABLE, _fails)
+    for _c in _checks:
+        if _c.status == "warn":
+            print(f"  [qc warn] {TABLE} {_c.name}: {_c.detail[:180]}")
     long.to_csv(out, index=False)
     print(f"{TABLE}: rows={len(long)} ids={long['id'].nunique()} "
           f"items={long['item'].nunique()} resp={sorted(long['resp'].unique())}")

@@ -48,9 +48,12 @@ Scope note: the stems come from the wave-1 file, and the item text is emitted
 import os
 import sys
 
-sys.path.insert(0, "/home/ben/.local/lib/python3.12/site-packages")
 
 import pandas as pd
+
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from irw_validate import validate_file  # noqa: E402
 import pyreadstat
 
 SAV = sys.argv[1]          # 1IWRQA wave1.sav, format=original
@@ -141,8 +144,23 @@ for battery, qmap in BATTERIES.items():
     out = pd.DataFrame(rows)
     assert not out[["item", "resp"]].duplicated().any(), f"{table}: duplicate item/resp"
     assert out["item"].nunique() == len(qmap), f"{table}: item code collision"
+    # An __items.csv is item text, not a response table. run_qc and
+    # validate_frame are both the WRONG gate here: they classify a frame with
+    # no `id` column as kind="responses" and error on the missing column.
+    # validate_file detects kind="item_text" from the __items name, so the gate
+    # has to see a correctly-named file -- hence write-validate-move, which
+    # keeps it a gate rather than a check after the fact. An earlier version
+    # asserted on a `failures` attribute Report does not have, so it passed
+    # unconditionally; assert on .ok/.errors.
     path = os.path.join(OUTDIR, f"{table}__items.csv")
-    out.to_csv(path, index=False)
+    staging = os.path.join(OUTDIR, ".gate")
+    os.makedirs(staging, exist_ok=True)
+    tmp = os.path.join(staging, f"{table}__items.csv")
+    out.to_csv(tmp, index=False)
+    _report = validate_file(tmp, profile="upload")
+    assert _report.kind == "item_text", (table, _report.kind)
+    assert _report.ok, (table, _report.errors)
+    os.replace(tmp, path)
     written.append((table, out["item"].nunique(), len(out)))
     print(f"{table}__items.csv: {out['item'].nunique()} items, {len(out)} rows")
 

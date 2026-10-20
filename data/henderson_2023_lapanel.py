@@ -49,11 +49,14 @@ Output: one table per instrument, long format, `wave` as its own column.
 import sys
 import os
 
-sys.path.insert(0, "/home/ben/.local/lib/python3.12/site-packages")
 
 import numpy as np
 import pandas as pd
 import pyreadstat
+
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from irw_validate._checks import run_qc  # noqa: E402
 
 DTA = sys.argv[1]
 OUTDIR = sys.argv[2]
@@ -188,6 +191,12 @@ for table, qmap in BATTERIES.items():
     assert out["id"].nunique() >= 100, f"{name}: fewer than 100 ids"
     assert out["item"].nunique() >= 3, f"{name}: fewer than 3 items"
     path = os.path.join(OUTDIR, name + ".csv")
+    _checks = run_qc(out)
+    _fails = [(c.name, c.detail) for c in _checks if c.status == "fail"]
+    assert not _fails, (name, _fails)
+    for _c in _checks:
+        if _c.status == "warn":
+            print(f"  [qc warn] {name} {_c.name}: {_c.detail[:180]}")
     out.to_csv(path, index=False)
     written[name] = out
     print(f"{name}: {len(out)} rows, {out['id'].nunique()} ids, "
