@@ -1146,6 +1146,15 @@ henderson_2023_la_covid_health_threat,core,https://dataverse.harvard.edu/api/acc
 henderson_2023_la_covid_policy_support,core,https://dataverse.harvard.edu/api/access/datafile/7047445,2026-10-20
 henderson_2023_la_covid_racial_resent,core,https://dataverse.harvard.edu/api/access/datafile/7047445,2026-10-20
 henderson_2023_la_covid_worry,core,https://dataverse.harvard.edu/api/access/datafile/7047445,2026-10-20
+henderson_2023_lapanel_comfort,core,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/1IWRQA,2026-10-20
+henderson_2023_lapanel_econ_emotion,core,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/1IWRQA,2026-10-20
+henderson_2023_lapanel_fin_threat,core,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/1IWRQA,2026-10-20
+henderson_2023_lapanel_health_emotion,core,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/1IWRQA,2026-10-20
+henderson_2023_lapanel_health_threat,core,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/1IWRQA,2026-10-20
+henderson_2023_lapanel_policy_support,core,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/1IWRQA,2026-10-20
+henderson_2023_lapanel_racial_resent,core,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/1IWRQA,2026-10-20
+henderson_2023_lapanel_tipi,core,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/1IWRQA,2026-10-20
+henderson_2023_lapanel_worry,core,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/1IWRQA,2026-10-20
 hendrikx_2022_autonomy,core,https://ssh.datastations.nl/api/access/datafile/30086,2026-10-15
 hendrikx_2022_availability_norms,core,https://ssh.datastations.nl/api/access/datafile/30086,2026-10-15
 hendrikx_2022_bat,core,https://ssh.datastations.nl/api/access/datafile/30086,2026-10-15
@@ -3352,6 +3361,7 @@ zheng_2017_pss10,core,none,2026-10-15
 zheng_2017_psss,core,none,2026-10-15
 zheng_2017_sds_sas,core,none,2026-10-15
 zheng_2017_swls,core,none,2026-10-15
+zheng_2018_hfmd_eq5d,core,none,2026-10-20
 zhirkov_2022_immigrant_admission,conj,none,2026-10-07
 zhirkov_2025_illegal_undocumented,conj,none,2026-10-07
 zhirkov_2025_immigrant_illegality,conj,none,2026-10-07

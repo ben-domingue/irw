@@ -15,9 +15,9 @@ the 63 actionable leads left unworked by the 2026-10-19 batch, and one ran a
 fresh 135-query discovery sweep. A sixth was launched at 15:05 on the two leads
 Ben's PII ruling unblocked (below).
 
-**Result: 85 response tables, 798,062 responses, all 85 passing
+**Result: 87 response tables, 1,104,675 responses, all 87 passing
 `irw-validate --profile upload` with zero failures; 7 item text tables, gate
-chain green.** Assembled into `irw_output/` (+ `MANIFEST.txt`) and
+chain green; 87 tag rows.** Assembled into `irw_output/` (+ `MANIFEST.txt`) and
 `itemtext_output/`. 85 dictionary rows staged via `stage_dict_row.py`. NOT
 uploaded.
 
@@ -81,6 +81,42 @@ existing script's `# DOI:` line carries the *paper* DOI and the data DOI appears
 only on `# Source:`/`# Data:`. That is how `10.7910/DVN/VWRTAW` got built twice
 (caught, withdrawn) and how `sadish` reached consolidation. Widen the grep to
 the whole header.
+
+### A fifth collision, and the biggest: the Henderson panel was shipped twice
+
+The sixth agent's QIEEJU build exposed the eight `henderson_2023_la_covid_*`
+tables -- already committed -- as the wave-1 slice of the same panel. QIEEJU's
+own ReadMe points at `10.7910/DVN/1IWRQA` as the project depository, and two
+checks settled it: all 1,000 ids in each of the eight are `caseid_w1` values in
+QIEEJU (1000/1000, and 0/1000 against waves 2-5, because caseid is re-issued per
+wave), and joining on (id, item) gives 10,997 of 10,997 cells with `resp`
+identical in 100.0% of them.
+
+**The eight were pulled and the 5-wave superset ships instead** -- 9
+`henderson_2023_lapanel_*` tables, 2,862 respondents, keyed on the cross-wave
+`panelnum` so the longitudinal structure is actually usable, where the retired
+eight were keyed on wave-1 `caseid` and did not link across waves. `policy_support`
+and `comfort`, the two constructs the eight held that the first seven lapanel
+tables did not, were added from QIEEJU's un-shipped `q*` columns and turned out to
+exist in all five waves too. Their dictionary, provenance and mapping rows were
+reverted. Nothing had been uploaded, so this cost no withdrawal. The retired CSVs
+are in `runs/dropped_2026-10-20/superseded_by_lapanel/`.
+
+`masterfile_wide.dta` is one wide file rather than five per-wave files, so the
+cumulative-file trap the 1IWRQA build hit does not arise here.
+
+**Stata truncates variable labels at 80 characters, and 317 of that file's labels
+sit at the cap, cut mid-word** -- q20 ends `"...will get sick from the coronavirus ("`.
+Item text was therefore built from the SPSS variable labels of the 1IWRQA wave-1
+file, joined by question number, and the builder asserts no stem looks truncated.
+Anyone extracting item text from a `.dta` should expect this; the Stata labels
+looked perfectly usable and were not.
+
+A second prime-commandment catch, worth recording because it confirms the call not
+to re-key the retired item text: the new builder first emitted `item` as
+`<battery>_<suffix>`, copying the retired build's convention, while its own response
+tables carry the bare suffix. `validate_items.R` failed all 7 on item-set mismatch.
+The two builds derive item codes independently and genuinely do not agree.
 
 ### Corpus-trust finding: an undocumented reversal in a live table, left as is
 

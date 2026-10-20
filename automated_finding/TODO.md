@@ -5,22 +5,35 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
 ## Repos batch 2026-10-20: 85 tables staged and NOT uploaded (2026-10-20)
 
-Five parallel agents; full write-up in `BATCH_LOG.md`. 85 response tables /
-798,062 responses in `irw_output/` (+ `MANIFEST.txt`), 7 item text tables in
+Six parallel agents; full write-up in `BATCH_LOG.md`. **87 response tables /
+1,104,675 responses** in `irw_output/` (+ `MANIFEST.txt`), 7 item text tables in
 `itemtext_output/`, all passing `irw-validate --profile upload` with zero
-failures. 85 dictionary rows staged. Four collisions were caught and dropped
-into `runs/dropped_2026-10-20/` -- see the BATCH_LOG entry before touching that
-folder.
+failures. 87 dictionary rows and 87 tag rows staged. **Five collisions** were
+caught and dropped into `runs/dropped_2026-10-20/` -- including eight
+already-committed `henderson_2023_la_covid_*` tables that proved to be the
+wave-1 slice of a 5-wave superset (100% identical on 10,997/10,997 cells), now
+in `runs/dropped_2026-10-20/superseded_by_lapanel/`. Read the BATCH_LOG entry
+before touching that folder or re-adding anything from it.
 
-- [ ] **Upload is owed and is yours to trigger**: `red_up irw_output` (85
+- [ ] **Upload is owed and is yours to trigger**: `red_up irw_output` (87
   tables) and then `red_up itemtext_output` (7). **Response tables first.**
   Nothing here has been uploaded; uploads APPEND, so do not point `red_up` at
   `runs/dropped_2026-10-20/` or any `runs/stage_2026-10-20_s*/` folder -- those
   are the per-agent originals and the withdrawn files, kept as the record.
-- [ ] **Tag rows are owed for all 85 tables.** Only the discovery slice produced
-  any (9, in `runs/worklist_2026-10-20/tagrows_s5.jsonl`, unstaged). I did not
-  ask slices 1-4 for them -- my omission, not theirs. A finished batch owes
-  `tags_auto.csv` rows, so this is real outstanding work.
+- [x] **Tag rows written for all 87**, in `automated_finding/tags_auto_2026-10-20.csv`
+  (`Rater=claude-auto`). Deliberately a separate file: merging into
+  `tags/tags_auto.csv` is a reviewed step, same as the 10-18 batch.
+  **Do NOT merge `runs/worklist_2026-10-20/tagrows_s5.jsonl`** -- its 9 rows are
+  free text, not vocabulary-compliant (`Age Range: "Adult"`,
+  `Construct type: "Non-cognitive"`), and would halt `03_tags.R` on `TAG_VOCAB`.
+  The 87-row file supersedes them. Known gaps in it: `Age Range` blank on 19 rows
+  (not inferred from "college students" or a country; several carry `cov_age`, so
+  the computed rule gets them later) and `Child Age` blank on 81.
+- [ ] **Item text for the five author-written COVID batteries is SHIPPED** (7
+  tables), but `henderson_2023_lapanel_racial_resent` and
+  `henderson_2023_lapanel_tipi` are HELD for want of register rows -- Kinder &
+  Sanders and TIPI (Gosling, Rentfrow & Swann). Their response tables ship. Both
+  holds have provenance rows saying so.
 - [ ] **`codebook_url` is missing for the 9 discovery-slice tables.** Their
   dictionary rows staged without it, so nothing reached
   `codebook_at_ingest.csv`. The other 76 recorded `"none"`. Needs a pass over
