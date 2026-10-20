@@ -21040,3 +21040,91 @@ different people cannot ship. The other four blocks of that deposit are clean
 Group 2 goes from 84 rows to 76. Group 1's 242 unparsed rows are untouched and
 still want a yes/no on a parse pass. The new deferral is 6bhr52dc5v's 20-item
 block, recorded in `TODO.md` with its evidence.
+
+## 2026-10-19g — the PII rule narrows to structural vs incidental; one deposit reopens (#3077, #3103)
+
+Recorded here because it changes what the pipeline does, not what one batch
+did. 2026-10-19e wrote down that the blanket whole-candidate PII rule stood as
+written. Later the same day it bit on the Parkins Energy Literacy deposit over
+ONE respondent who typed their own email address and first name into a
+comments box, and ben-domingue narrowed it: "i hadn't realized it is this
+flimsy. one random email we can just not carry fwd. i thought we were talking
+about whole columns of pii."
+
+**The rule now turns on the column, not the count.** SKILL.md Step 4 carries
+the full text with two worked examples. In short:
+
+- **Structural** — the column's job is to collect an identifier, or it is
+  populated with identifiers across the file. Whole-candidate skip, and
+  dropping the column is still not an option. A deposit with structural PII
+  has not been de-identified by its depositor, which is a fact about the whole
+  deposit.
+- **Incidental** — one respondent volunteered an identifier inside a
+  free-typed field whose purpose is not identifiers. Null that cell, say which
+  cell in this log, and process the rest. The value cannot reach IRW output
+  (`id`/`item`/`resp` plus `cov_*`), and skipping buys no privacy because the
+  deposit stays public either way.
+
+**Full postal codes are structural, ruled explicitly so it is not
+re-litigated.** The Parkins deposit's `q37_0` ("What is your postal code?")
+holds 2,917 full six-character Canadian codes over 3,000 rows, beside age,
+gender, education and income — block-level location, the same
+re-identification surface as the Qualtrics geo-IP coordinates ruled out in
+2026-10-19e. A three-character FSA, a bare US 5-digit ZIP and a 4-digit
+European code are not covered.
+
+### The 2026-10-19c/d PII closures, re-checked against the source files
+
+Four of the five stay closed. All verified by re-reading the deposit, not by
+trusting the ledger note.
+
+| deposit | what the column is | verdict |
+|---|---|---|
+| `10.7910/DVN/VSFCVG` | `Edad`, free-text age: 40 distinct values over 851 answers, 39 ages and one email | **incidental — REOPENED** |
+| `10.34894/KYFSP5` | `Geboortedatum`, label "Wat is je geboortedatum?", 239/239 answered, 229 distinct full dates | structural — stays |
+| `osf.io/hgujs` | `Pre_Q3`, label "date of birth", 150/150, 147 distinct | structural — stays |
+| `10.7910/DVN/OHBD3D` | `IPAddress` 305/305, and `Q85` "Please type in your uva email" holding 1,808 addresses | structural — stays |
+| `10.7910/DVN/JC6F9O` | whole-column Qualtrics geo-IP coordinates | structural — stays (2026-10-19e ruling; not re-downloaded) |
+
+`DVN/VSFCVG` is restatused `todo` in
+`leads/repos_ledger_remine_2026-10-18_noflag_dataverse.csv` with the evidence
+in its `reasons`. It is 853 Spanish university students x 9 AI-in-mathematics
+items at 1-5 with the administered Spanish stems as column headers, and
+`Género`/`Edad`/`Nivel socioeconómico` as covariates. Null the one `Edad` cell
+holding `ikramsita1234@gmail.com`; there is no name column and no other
+identifier anywhere in the 12-column file.
+
+### Two screen defects fixed
+
+Both were found by the same incident, and both have the shape where a safety
+check reports a pass because it examined nothing.
+
+- **The screen had no postal-code detector and returned clean on the Parkins
+  file.** `screen_for_pii` now content-checks for full codes
+  (`_holds_full_postal_codes`), on the VALUES and not the label, because
+  "What is your postal code?" is also the label on a properly de-identified
+  FSA column. Same `>= 5 hits and >= 20%` thresholds as the email check,
+  which gives the structural/incidental seam for free: one code typed into a
+  comments box does not fire. Guarded by `tests/test_pii_postal_codes.py`
+  (FSA, bare ZIP, 4-digit European codes and Likert responses must not fire).
+- **A screen that selects nothing reports clean.** The ad-hoc screen written
+  beside the pipeline selected text columns with `df[c].dtype == object`,
+  which on a `pyreadstat.read_sav()` frame finds **zero** columns because its
+  text columns are pandas `StringDtype`. On this file `dtype == object` gives
+  0 and `is_string_dtype` gives 11 — and the 11 held both the postal-code
+  column and the comments box. `screen_for_pii` itself always used the right
+  test, but it now publishes `screen_for_pii.content_cols_screened` and warns
+  when it read 0 columns of a frame that holds non-numeric ones. Any screen
+  must print its denominator and assert it is non-zero; SKILL.md Step 4 says
+  so.
+
+### Consequence for the Parkins deposit
+
+`10.7939/DVN/10302` (Borealis; Comeau, Beckley, Parkins & Stedman, Energy
+Literacy and Citizenship in Canada) has permission — granted 2026-10-19 by
+John Parkins, PR #3112, the deposit itself carrying no licence — but it still
+fails the narrowed rule on `q37_0`. **Do not ingest.** The plan is to ask him
+for a version with `q37_0` and `comments` dropped, in the same email that asks
+about item text rather than as a separate message. Note the column is `q37_0`,
+not `q37`. It is worth the ask: 3,000 respondents, a published energy-literacy
+instrument, 264 columns.
