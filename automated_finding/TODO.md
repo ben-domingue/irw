@@ -68,7 +68,7 @@ release" or "at upload" is **due now, not pending**:
   deliberately a separate file; merging it into `tags/tags_auto.csv` is a
   reviewed step.
 
-## From the 11 NC leads #3104 reopened (2026-10-19g, #3077)
+## From the 11 NC leads #3104 reopened (2026-10-19h, #3077)
 
 **23 tables / 268,235 responses staged in `automated_finding/irw_output/`,
 nothing uploaded.** All 23 pass `irw-validate --profile upload` with zero
@@ -86,8 +86,11 @@ closed with reasons in their leads files. Every `todo` row across the
   trial's redistribution terms are unknown. The table is built and passes the
   upload gate (256 patients x 9 dichotomous DSM-5 items x up to 28 sessions,
   49,598 responses, with `wave` and `treat`) and sits in
-  `automated_finding/held_provenance_2026-10-19/`. Josh Gilbert can name the
-  source; it moves into `irw_output/` unchanged if the answer is clean.
+  `automated_finding/held_provenance_2026-10-19/`. **Asked in #3120**
+  (assigned to @joshgilbert1994, 2026-10-19): either he names the source trial
+  and its terms, or he confirms redistribution is fine. The table moves into
+  `irw_output/` unchanged if the answer is clean, and the script stays as the
+  record if it is not.
 - [x] **Item text: 4 of the 8 candidate tables are STAGED** in
   `automated_finding/itemtext_output/` (179 rows), all four through
   `normalize_nulls.R` -> `validate_items.R --resp-csv` -> `audit_batch.R
