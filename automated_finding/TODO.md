@@ -3,7 +3,7 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
-## Repos batch 2026-10-20: 85 tables staged and NOT uploaded (2026-10-20)
+## Repos batch 2026-10-20: 87 tables UPLOADED, release owed (2026-10-20)
 
 Six parallel agents; full write-up in `BATCH_LOG.md`. **87 response tables /
 1,104,108 responses** in `irw_output/` (+ `MANIFEST.txt`), 7 item text tables in
@@ -192,6 +192,39 @@ before touching that folder or re-adding anything from it.
   respondents) and `zenodo.13133336` (~400 diabetic patients) are
   **licence-blocked with no licence at all** and are in
   `license_blocked_candidates.csv` with contributors -- both worth an email.
+
+## Uploaded: one table + its item text (2026-10-19j, confirmed 2026-10-20)
+
+- [x] `olmos_gomez_2026_ai_mathematics` (7,677 rows, 853 x 9) + its
+  `__items.csv` (45 rows) went up by path on 2026-10-20 and are **confirmed in
+  the drafts**, read back off Redivis rather than inferred from the uploader's
+  own report: `item_response_warehouse_7:next` holds 840 tables (839 before)
+  with the response table at exactly 7,677 rows, and `irw_text_3:next` holds
+  884 (883 before) with the item table at exactly 45. Single `NEW` adds, no
+  doubling. `uploaded` is stamped 2026-10-20 in `itemtext_provenance.csv` and
+  `itemtext/mapping_verification.csv`.
+
+  Both still sit in **unreleased drafts** -- `irw_7` at 79 pending since v1.3,
+  `irw_text_3` at 1 pending since v5.2 -- so the table is not public yet and
+  the release is Ben's.
+- [x] **The two staging directories are cleared, and that was safe** --
+  checked against Redivis on 2026-10-20, not inferred. The openESM files in
+  them (marian / nepal / neubauer / ryvkina / scharbert / tammilehto) are all
+  in RELEASED versions: 40 response tables in `item_response_warehouse_5`
+  v9.0 and 36 `__items` in `irw_text_3` v5.2, spot-checked non-empty
+  (`scharbert_2024_esm_affect` 566,136 rows; its item table 36). All eight
+  generating scripts are tracked in `data/` as well, so the staging copies
+  were redundant twice over.
+
+  **The earlier bullet here was wrong and is worth the correction.** It said to
+  hold off "until `irw_text_3` is released" -- but it already was, at v5.2, and
+  the note had been carried forward from when those drafts were genuinely
+  unreleased. `red_up.drafts` reporting "N pending, Xd since v5.2" means v5.2
+  SHIPPED and the draft sits on top of it; reading that as "unreleased" is what
+  kept a dead hazard alive. Check the release state before repeating a
+  clearance warning -- see [[irw-clear-uploaded-itemtables-hazard]], which is
+  about `itemtext/itemtables/` and files pending RE-upload, a different thing
+  from these staging dirs.
 
 ## Repos batch 2026-10-19: 8 tables staged, 70 leads unworked (2026-10-20)
 
@@ -399,9 +432,12 @@ closed with reasons in their leads files. Every `todo` row across the
   coding, which is what data notes are for (#2529). The same append covers all
   26 tables of the batch -- one row each, which this batch had been owing and no
   earlier write-up had listed.
-- [ ] **`tags_auto_2026-10-19d.csv` (23 rows) and `tags_auto_2026-10-19e.csv`
-  (3 rows)** are written and, like their predecessors, deliberately separate;
-  merging them into `tags/tags_auto.csv` is a reviewed step.
+- [ ] **`tags_auto_2026-10-19d.csv` (23 rows), `tags_auto_2026-10-19e.csv`
+  (3 rows) and `tags_auto_2026-10-19j.csv` (1 row)** are written and, like
+  their predecessors, deliberately separate; merging them into
+  `tags/tags_auto.csv` is a reviewed step. The `j` file was `d` until
+  2026-10-20: two concurrent batches off the same base both picked `d` and git
+  caught it as an `add/add` conflict on merge (see BATCH_LOG 2026-10-19j).
 - [x] **The item-count floor is ruled: 3 ships, 2 does not** (ben-domingue,
   2026-10-19, now in `datastandard.md` "Before you start"). Three of this
   batch's four thin candidates are built and staged -- `jones_2026_agi` (the
@@ -768,6 +804,12 @@ of its leads carry a status across batches A, B and C, 0 `todo`.
 
 ### Rulings wanted (none blocks anything staged)
 
+- [x] **A university NetID: PII or not?** ANSWERED 2026-10-19 by the
+  structural/incidental narrowing (#3113, BATCH_LOG 2026-10-19g): `Username` is
+  a column whose job is to hold an identifier and it holds one for every
+  respondent, which is STRUCTURAL, so the whole-candidate skip stands and the
+  carve-out is not widened. The deposit stays skipped; its other file is the
+  PSS and was blocked anyway. Original note follows.
 - [ ] **A university NetID: PII or not?** `zenodo.5217991` was skipped because
   `Username` holds 236 NetIDs (`bdz0311`, `btr3574`) for identifiable students
   at one university. The narrowed carve-outs cover a platform participant ID
@@ -953,12 +995,19 @@ Nothing here is uploaded. Ben held PR #3089 and all uploads deliberately on
   NEO-FFI, MBI-HSS, PSQI, SCL-90-R, HADS, BDI-II, ISI, PERMA-Profiler, the
   Ages & Stages family). Which get matchers is a rights ruling, so it is
   yours. Deliberately not fixed here: a matcher has real false-positive cost.
-- [ ] **Two PII edge cases from the `good`-keys batch**, both skipped/deferred
-  under the blanket rule, both arguably outside its intent — see BATCH_LOG
-  2026-10-18f: `10.17632/4fp3nxmcgs` (one respondent of 382 typed their own
-  name into a free-text `school` field; 382x47 otherwise clean) and
-  `zenodo.21121992` (the name column holds the three deposit authors' own
-  names, published on the record — authorship, not a data subject).
+- [ ] **PII edge cases from the `good`-keys batch — one is now workable, one
+  is still open.** The structural/incidental narrowing (#3113, BATCH_LOG
+  2026-10-19g) resolves the first and does not reach the second:
+  - `10.17632/4fp3nxmcgs` **REOPENS as a workable lead.** One respondent of 382
+    typed their own name into a free-text `school` field (376 gave the
+    university). The column collects a school name, not identifiers, so this is
+    incidental: null the cell and ship. Otherwise a clean 382x47 five-block
+    AI-literacy instrument. NOT YET PROCESSED — it needs a normal pass.
+  - `zenodo.21121992` **stays open.** Its name column holds the three deposit
+    AUTHORS' own names (an enumerator tag published on the record), not data
+    subjects'. The narrowing is about identifying respondents and says nothing
+    about a self-named author, so this still wants a ruling rather than an
+    inference.
 - [ ] **`zenodo.20550197`** duplicates live data: 200 of its 201 distinct
   OSTES response vectors already exist in `gonzalezros_2025_ostes`. Supersede
   the live table, ship only the ~425 new respondents, or skip?
@@ -1121,15 +1170,15 @@ this list saying so.
   (Chinese value labels for gender, teaching years, degree, academic title, salary
   band). Run `python3 metadata/covariate_labels/build.py` after the release and
   commit `covariate_labels.csv`.
-- [ ] **Two rulings wanted** (neither blocks anything):
-  - `10.17632/4fp3nxmcgs` — skipped as PII because ONE respondent typed their own
-    name into a free-text `school` field (376 of 382 gave the university). The column
-    would be dropped anyway and this is a one-cell data-entry accident, not a name
-    field; the blanket rule has not been asked about that class. An otherwise clean
-    382 x 47 five-block AI-literacy instrument if it may ship.
-  - `10.5281/zenodo.21121992` — deferred. Its name column holds the three **deposit
-    authors'** own names (the enumerator tag), published on the record, not data
-    subjects'. Author/enumerator self-name: PII under the blanket rule, or authorship?
+- [ ] **One ruling wanted** (the other was answered 2026-10-19):
+  - `10.17632/4fp3nxmcgs` — ANSWERED. Incidental under the structural/incidental
+    narrowing (#3113): the free-text `school` column collects a school name, so
+    the one self-typed personal name is nulled and the deposit ships. It is a
+    workable lead now, tracked above; it has not been processed yet.
+  - `10.5281/zenodo.21121992` — STILL OPEN. Its name column holds the three
+    **deposit authors'** own names (the enumerator tag), published on the record,
+    not data subjects'. The narrowing speaks to identifying respondents and does
+    not reach an author's self-name, so this one still wants a ruling.
 - [ ] **One deliberate item-text translation round** covers eight deposits in this
   batch whose stems are already in hand in their own column headers but were
   administered in Indonesian, Turkish or Chinese with no author English. Each would

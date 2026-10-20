@@ -84,6 +84,10 @@ import sys
 from dataclasses import dataclass, field
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+import check_client_reach as ccr  # noqa: E402
+
 REPO = "ben-domingue/irw"
 #: The Quarto site. Note the repository is `datapages/irw`, not `datapages/irw_site`
 #: -- the directory is called irw_site locally and the repository is not.
@@ -503,6 +507,88 @@ def check_status_json(root: Path) -> Check:
                   "means stage 11 did not run -- not merely that it ran a while ago."])
 
 
+def check_client_reach() -> Check:
+    """Can the RELEASED R and Python clients see every live shard? (#3091 item 8)
+
+    The one downstream consumer this report did not cover. Everything else here
+    asks whether the published corpus is behind the repository; this asks
+    whether the published *clients* are behind the corpus, which is a different
+    gap with a worse failure mode. A client blind to a shard does not error --
+    it returns a table listing that looks complete and is short by that shard,
+    and short counts travel into methods sections. That is not hypothetical:
+    the seventh core warehouse released on 2026-10-15 and CRAN's irw 1.3.1,
+    accepted three days later from an older tag, could not see its 761 tables.
+    Four days passed before anyone noticed, because nothing compared the two.
+
+    `check_config_parity.py` cannot answer this. It compares the three config
+    files with each other, every PR, offline -- and all three can agree while
+    all three are behind the warehouse, which is exactly the state above.
+
+    Red only when a released client is both short and unable to say so. Since
+    Rpkg#205 and Python-pkg#119 a client discovers shards that extend a family
+    it knows and tells its user once, so a short list in a release carrying
+    discovery is a release owed rather than a user misled: amber.
+
+    The work is in `metadata/check_client_reach.py`; this is the wiring. It
+    needs no credentials -- CRAN, PyPI and the Redivis organization catalog all
+    answer anonymously -- but it does need network, so like every check here it
+    reports ERROR with the reason rather than raising.
+    """
+    title = "Released clients vs live"
+    try:
+        live = ccr.live_shards()
+    except Exception as exc:
+        return Check("clients", title, ERROR, f"could not read the live catalog ({exc})")
+
+    clients = [ccr.cran_client(), ccr.pypi_client()]
+    for c in clients:
+        if c.status != ccr.ERROR:
+            c.missing = ccr.gaps(c, live)
+
+    broken = [c for c in clients if c.status == ccr.ERROR]
+    if len(broken) == len(clients):
+        return Check("clients", title, ERROR,
+                     "; ".join(f"{c.title}: {c.error}" for c in broken))
+
+    silent = [c for c in clients if c.status == ccr.SILENT]
+    loud = [c for c in clients if c.status == ccr.LOUD]
+
+    detail = []
+    for c in clients:
+        if c.status == ccr.ERROR:
+            detail.append(f"{c.title}: could not read it ({c.error})")
+            continue
+        if not c.missing:
+            detail.append(f"{c.title} {c.version} reaches all {len(live)} live datasets")
+            continue
+        lost = sum(s.tables for s in c.missing if s.tables)
+        shards = ", ".join(f"`{s.reference}` {s.version}" for s in c.missing)
+        detail.append(
+            f"{c.title} {c.version} does not list {shards} — **{lost:,} tables**"
+            + (", reachable through shard discovery; a release is owed"
+               if c.discovery else
+               ", and it has no shard discovery, so its users' counts are short "
+               "with nothing in the client to say so"))
+
+    if silent:
+        short = sum(sum(s.tables for s in c.missing if s.tables) for c in silent)
+        return Check("clients", title, STALE,
+                     f"{' and '.join(c.title for c in silent)} silently short by "
+                     f"**{short:,} tables**",
+                     detail + ["Fix: cut a release carrying the shard, or one "
+                               "carrying shard discovery (#3091 item 1)."])
+    if loud:
+        return Check("clients", title, AGING,
+                     f"{' and '.join(c.title for c in loud)} behind the corpus, "
+                     f"but discovery reaches it", detail)
+    if broken:
+        return Check("clients", title, ERROR,
+                     "; ".join(f"{c.title}: {c.error}" for c in broken), detail)
+    return Check("clients", title, OK,
+                 f"every released client reaches all {len(live)} live datasets",
+                 days=0.0)
+
+
 def metadata_rows(root: Path) -> int | None:
     """Row count of metadata.csv, or None if it cannot be read."""
     try:
@@ -682,6 +768,7 @@ def main(argv: list[str] | None = None) -> int:
         check_site_render(now),
         check_hero(root, now),
         check_status_json(root),
+        check_client_reach(),
     ]
 
     if args.json:

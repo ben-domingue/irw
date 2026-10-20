@@ -10078,6 +10078,7 @@ date,query,output_file,notes
 2026-10-19,مقياس الإصابة الأخلاقية,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
 2026-10-19,morele verwonding schaal,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
 2026-10-19,도덕적 손상 척도,runs/candidates_2026-10-19.csv,repos mode-3 batch 2026-10-19; 15 terms x 9 languages; 1157 candidates
+2026-10-20,[weekly] 15 terms x journals=plosone,runs/plos_monthly_candidates_weekly_2026-10-20.csv,plos monthly-script automated run; mode=weekly; 54 candidates triaged; 15/15 terms visited (13 hit per-term cap 4)
 2026-10-20,number line estimation task,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
 2026-10-20,tarea de estimación en la línea numérica,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
 2026-10-20,Zahlenstrahl-Schätzaufgabe,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
