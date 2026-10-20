@@ -1,7 +1,7 @@
-# item-text tables in the Redivis shards as of 2026-10-19
+# item-text tables in the Redivis shards as of 2026-10-20
 # status=published: a reader can fetch it. status=draft: uploaded, not released yet.
 # generated -- do not hand-edit; rerun itemtext/refresh_live_tables.py (irw#1828)
-# draft not listable by this token (needs data.edit) for irw_text_2; its draft rows carried forward from the snapshot taken 2026-10-18
+# draft not listable by this token (needs data.edit) for irw_text_3; its draft rows carried forward from the snapshot taken 2026-10-19
 table,shard,status
 16_personalityfactors,irw_text,published
 360emergencymed_azami_2024,irw_text,published
@@ -753,7 +753,6 @@ gao2025_spiritual_wellbeing,irw_text_2,published
 gao_2022_emotional_resilience,irw_text_3,published
 garciabacete_2023_loneliness,irw_text_3,published
 garciabacete_2023_victimization,irw_text_3,published
-garciabatista_2021_erq,irw_text_2,published
 gcb5_2025,irw_text,published
 gcbs_brotherton_2013,irw_text_3,published
 gcbs_brotherton_2013_tipi,irw_text_3,published
@@ -1250,7 +1249,6 @@ li_2021_cultural_intelligence,irw_text_2,published
 li_2021_knowledge_sharing,irw_text_2,published
 li_2021_org_cultural_diversity,irw_text,published
 li_2021_sustainable_innov_behav,irw_text_2,published
-li_2024_bdyz,irw_text_2,published
 li_2025_corporate_performance,irw_text_2,published
 li_2025_market_environment,irw_text_2,published
 li_2025_marketing_culture,irw_text_2,published
@@ -1530,7 +1528,6 @@ mobility,irw_text_2,published
 modzelewska_2021_emo_neg,irw_text_3,published
 modzelewska_2021_emo_pos,irw_text_3,published
 modzelewska_2021_hbeliefs,irw_text_3,published
-moe2025_erq,irw_text_2,published
 moe2025_scs,irw_text_2,published
 mohammed_2021_job_satisfaction,irw_text,published
 mohammed_2021_patient_safety_culture,irw_text_2,published
@@ -1544,7 +1541,6 @@ montana_blasco_2026_tiktok_wellbeing,irw_text_3,published
 moon_2023_korean_proficiency,irw_text_2,published
 moon_2023_pregnancy_stress,irw_text,published
 moon_2023_selfesteem,irw_text,published
-morales_2021_erq,irw_text_2,published
 morano_2019_self_efficacy,irw_text_3,published
 moreno_jorquera_2025_amtb_att_learn,irw_text_3,published
 moreno_jorquera_2025_amtb_att_people,irw_text_3,published
@@ -2708,7 +2704,6 @@ zhang_2026_ipip_patience,irw_text_3,published
 zhang_2026_tcs_honesty,irw_text_3,published
 zhang_2026_virtue_states,irw_text_3,published
 zhang_2026_wisdom,irw_text_3,published
-zhao_2024_erq,irw_text_2,published
 zhao_2025_digital_literacy,irw_text_2,published
 zhao_2025_leisure_involvement,irw_text_3,published
 zhao_2025_nat_env_perception,irw_text_2,published
