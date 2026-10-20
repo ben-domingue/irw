@@ -21303,9 +21303,17 @@ committed it as `f08d6007`. That commit therefore contains a stray copy of
 `data/aldhi_2025_procrastination.py`, `data/byrne_2026_health_literacy.py`,
 `data/feng_2023_fas.py` and the two new `instrument_rights_register.csv` rows,
 none of which belong to that batch. The work was recovered onto this branch
-and re-applied through the proper writers. **Whoever merges second must
-de-duplicate the two register rows** -- the scripts are byte-identical and will
-merge cleanly, but an append-only ledger will not. This is the hazard the
-"verify `git log -1` is actually your commit" rule exists for; here the sweep
-happened between the commit and the next write, so there was no commit of mine
-to check.
+and re-applied through the proper writers.
+
+**Resolved the same day.** That session backed all five out itself in
+`5110f23d` ("Fix the contract gate, and back out three files that were never
+mine"), so the scripts and the two register rows each exist exactly once, on
+this branch. Nothing is owed at merge. `5110f23d` was unpushed as of
+2026-10-20, so PR #3121 shows the fix only once that session pushes.
+
+This is the hazard the "verify `git log -1` is actually your commit" rule
+exists for, with a wrinkle worth recording: the sweep happened between my
+commit and my next write, so there was no commit of mine to check at the time.
+What caught it was a `FileNotFoundError` on a tracked file that existed
+minutes earlier -- a file vanishing from the working tree is the symptom to
+read as "someone switched the branch under me".

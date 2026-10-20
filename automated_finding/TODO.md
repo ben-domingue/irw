@@ -18,12 +18,13 @@ verdicts are in `leads/repos_leads_2026-10-19.csv`.
   `itemtext_output/`: `feng_2023_fas__items.csv`,
   `byrne_2026_health_info_sources__items.csv`. Response tables first.
   Stamp `uploaded` in `itemtext_provenance.csv` only after confirmation.
-- [ ] **De-duplicate two rights-register rows at merge.** A concurrent
-  session's commit `f08d6007` on `claude/olmos-gomez-2026-ai-mathematics`
-  swept in this batch's three `data/*.py` scripts and its two new
-  `instrument_rights_register.csv` rows (FAS, HLQ). The scripts are
-  byte-identical and merge cleanly; the register is append-only and will
-  duplicate. See the 2026-10-20 BATCH_LOG entry.
+- [x] **The concurrent-session sweep is resolved.** Commit `f08d6007` on
+  `claude/olmos-gomez-2026-ai-mathematics` had swept in this batch's three
+  `data/*.py` scripts and its two new `instrument_rights_register.csv` rows
+  (FAS, HLQ). That session backed all five out itself in `5110f23d`, so each
+  now exists once, here. Nothing is owed at merge. `5110f23d` was still
+  unpushed as of 2026-10-20, so PR #3121 will show the fix only once that
+  session pushes.
 - [ ] **70 leads still unworked**: 53 `recoverable_format` (mostly "keep only
   the N columns sharing one small integer domain, re-read"), 8
   `worth_retrying`, 7 `aggregate_continuous`, 2 `pii_suspected` that still
