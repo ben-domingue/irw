@@ -159,6 +159,21 @@ older scripts still work.
 python metadata/check_config_parity.py   # with Rpkg and Python-pkg as siblings
 ```
 
+> **And the other half: parity with the warehouse.** All three files can agree
+> and all three be behind Redivis. That is not hypothetical — the seventh core
+> warehouse released on 2026-10-15 and CRAN's `irw` 1.3.1, accepted on 10-18
+> from an older tag, could not see its 761 tables, so every CRAN install was
+> short by about 12% of the core corpus and had no way to say so
+> (ben-domingue/irw#3091). The parity check above cannot catch that: it compares
+> the three files with each other, not with the catalog.
+> [`metadata/check_client_reach.py`](metadata/check_client_reach.py) compares
+> what the *released* CRAN and PyPI clients declare against the live Redivis
+> catalog, and the daily drift report runs it.
+
+```bash
+python metadata/check_client_reach.py    # needs network; no credentials
+```
+
 ## 3. Google Sheets
 
 These Google Sheets are load-bearing. They are the human entry surface for

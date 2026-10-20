@@ -176,6 +176,13 @@ jobs:
       - name: config parity tests
         run: python metadata/tests/test_config_parity.py -v
 
+      # The reach check's own network step cannot run here -- tests.yml is
+      # offline by design -- but its comparison rules can, and they are where
+      # the mistakes would be. The script itself runs daily in drift-report.yml
+      # (#3091 item 8).
+      - name: client reach tests
+        run: python metadata/tests/test_client_reach.py -v
+
       - name: Redivis config parity
         run: |
           python metadata/check_config_parity.py \
