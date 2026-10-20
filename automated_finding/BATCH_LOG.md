@@ -21179,22 +21179,50 @@ four more, all clean and all built the moment it is answered:
 - Kenya's **OAC-2** (2 items) and **BESAA-3** (3 items), whose stems the
   codebook gives in full.
 
-### Item text
+### Item text: four tables shipped, four blocked on rights
 
-Owed, and cheap, in the next step of this batch:
+**Staged in `itemtext_output/` (179 rows, 4 tables), gated 4/4 PASS** through
+`normalize_nulls.R` -> `validate_items.R --resp-csv` -> `audit_batch.R
+--resp-dir`, plus `irw-validate` clean on each, with `itemtext_provenance.csv`
+and `mapping_verification.csv` rows:
 
-- **Kenya, all six tables** — both codebooks give every stem with its code
-  explicitly ("1. Little interest or pleasure in doing things? -> PHQ_1") and
-  every option with its value. All six instruments are third-party (PHQ-8,
-  GAD-7, the Climate Change Anxiety Scale, the COVID-19 Stressors Scale, the
-  Social Media Disorder Scale, an EPV index adapted from the Political Life
-  Events scale), so each needs its `instrument_rights_register.csv` row read by
-  name before its text ships — and `load_register()` hides a `ship` ruling, so
-  read the file, do not just run the gate.
-- **Jones `tech_familiarity` and `ai_fear_2021`** — the administered prompt is a
-  column of the data file, and `oneq_code()` derives each item code from it
-  reversibly. `ai_fear_2023` shares those seven codes, so its text is one
-  cross-file mapping away; that is a deliberate mapping, not a cheap one.
+- `baseke_2026_phq8`, `baseke_2026_gad7` -- `paper_explicit` /
+  `canonical_instrument`. The codebook prints `<n>. <stem> -> PHQ_<n>`, and the
+  builder PARSES those arrows by regex rather than transcribing them, so no
+  position is involved. The register's "PHQ and GAD screener family" row is
+  verdict **ship**, read BY NAME in the file -- `load_register()` keeps only
+  `hold`/`note`, so the gate alone could never have surfaced that permission.
+  `mapping_verification` is `NO_ROUTE`, honestly: neither the preprint nor the
+  deposit publishes anything per item, so there is no distribution to check the
+  mapping against. A later route, if wanted, is
+  `writing/Supplementary Materials.pdf` or `output/step4_descriptives.rds`.
+- `jones_2026_tech_familiarity`, `jones_2026_ai_fear_2021` -- `data_labels` /
+  `study_materials`, `NOT_NEEDED`. The administered prompt is a COLUMN of the
+  response file, and the item codes are produced by the same `oneq_code()`
+  function (familiarity) and the same 7-entry phrase dict (fear) that built the
+  response tables, so both sides come from one string by one rule. Stems
+  searched verbatim: no published scale matches either battery -- the nearest
+  hits are a university course survey and the GSU CSAL familiarity
+  questionnaire -- so these are author-written items under the deposit's
+  CC BY-NC-SA, and the register has nothing to rule on. `option_text` is blank
+  on all seven points: the deposit publishes 1-7 with **no anchor labels
+  anywhere**, which is an unlabelled scale rather than unlabelled midpoints,
+  and padding a point with its own number is forbidden.
+
+**The other four Kenya tables are blocked on rights, not on extraction.** CCAS,
+CSS-11, SMD-9 and EPV-7 have their full stems in the codebooks, and **none of
+the four instruments has a register row**: the Climate Change Anxiety Scale
+(Clayton & Karazsia 2020), the COVID-19 Stressors Scale, the Social Media
+Disorder Scale (van den Eijnden, Lemmens & Valkenburg 2016) and the EPV index
+adapted from the Political Life Events scale. Silence does not ship, so each
+needs its terms located and quoted first -- that is the open item.
+
+Also owed, and deliberately not taken:
+
+- **`jones_2026_ai_fear_2023`** — its seven item codes ARE the 2021 table's
+  seven prompts, on -3..+3 instead of 1-7, so its text is one cross-file
+  mapping away. That is a deliberate mapping rather than a cheap extraction,
+  which is why it is not in this batch.
 - **Platte: not shippable.** Neither label level carries a stem — the SPSS
   variable labels are block names repeated across all six items of a block
   ("MindsetBelief Math") and the value labels are the 1-5 anchors; the codebook

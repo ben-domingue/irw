@@ -88,15 +88,36 @@ closed with reasons in their leads files. Every `todo` row across the
   49,598 responses, with `wave` and `treat`) and sits in
   `automated_finding/held_provenance_2026-10-19/`. Josh Gilbert can name the
   source; it moves into `irw_output/` unchanged if the answer is clean.
-- [ ] **Item text, owed in this batch and cheap:** all six Kenya tables (both
-  deposit codebooks give every stem with its item code and every option with
-  its value) and Jones's `tech_familiarity` + `ai_fear_2021` (the administered
-  prompt is a column of the data file). Each Kenya instrument is third-party
-  (PHQ-8, GAD-7, CCAS, CSS-11, SMD-9, an EPV index from the Political Life
-  Events scale), so read each register row BY NAME first -- `load_register()`
-  keeps only `hold`/`note`, so running the gate can discover a prohibition and
-  never a permission. Platte and Gilbert are not shippable; the BATCH_LOG entry
-  says where their wording actually is.
+- [x] **Item text: 4 of the 8 candidate tables are STAGED** in
+  `automated_finding/itemtext_output/` (179 rows), all four through
+  `normalize_nulls.R` -> `validate_items.R --resp-csv` -> `audit_batch.R
+  --resp-dir` (4/4 PASS, no anomalies) and `irw-validate` (ok, nothing to
+  report), with provenance and `mapping_verification.csv` rows written:
+  - `baseke_2026_phq8` and `baseke_2026_gad7` -- stems and all four 0-3 anchors
+    PARSED out of the deposit's Survey D codebook, which prints each stem
+    beside its item code. The register's "PHQ and GAD screener family" row is
+    verdict **`ship`** (phqscreeners.com: no permission required), read by name
+    rather than discovered through the gate.
+  - `jones_2026_tech_familiarity` and `jones_2026_ai_fear_2021` -- the
+    administered prompt is a column of the response file, and the item codes
+    come from the same function/dict the response script used. Stems searched
+    verbatim and match no published scale; study-authored under the deposit's
+    CC BY-NC-SA. `option_text` is blank on all seven points because the deposit
+    publishes no anchor labels at all.
+- [ ] **The other four Kenya tables need a rights ruling before their text can
+  ship, and that is the remaining work here.** Their stems are all in the
+  codebooks, so extraction is minutes; what is missing is a register row for
+  each third-party instrument, none of which has one: the **Climate Change
+  Anxiety Scale** (Clayton & Karazsia 2020, J. Environ. Psychol.), the
+  **COVID-19 Stressors Scale**, the **Social Media Disorder Scale** (van den
+  Eijnden, Lemmens & Valkenburg 2016) and the **EPV index adapted from the
+  Political Life Events scale**. Silence does not ship (2026-10-15), so each
+  needs its terms located and quoted. Note `BESAA` is already registered
+  `block`, which is one reason its 3-item table is deferred anyway.
+- [ ] **`jones_2026_ai_fear_2023` has no text of its own and is one deliberate
+  cross-file mapping from having it:** its seven item codes are exactly the
+  2021 table's seven prompts, on a -3..+3 scale instead of 1-7. Not cheap by
+  the Step 3.5 test, so it was not taken here.
 - [x] **`covariate_labels/harvest.py --commit HEAD platte_2026_mindset`: run**
   (the one script in this batch that reads an SPSS file and ships `cov_*`
   columns). Its labels are in the harvest cache -- school 1-15, gender
