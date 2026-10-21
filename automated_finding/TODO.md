@@ -96,11 +96,12 @@ Owed:
   unlabelled `cov_student_status` (1, against `cov_student = no` in 2026), and
   its coding direction is not documented, so it is not evidence either way.
 
-  Ruling needed, but the shape is narrow: **1 shared respondent out of 535 and
-  1,323**, one instrument, no duplicated table and no duplicated response row.
-  Reads as incidental panel overlap -- Blotner recruits both samples from
-  German online panels -- rather than a redeposit. Nothing to withdraw on this
-  evidence.
+  **RULED 2026-10-21, Ben: one shared respondent is acceptable, both tables
+  stay as they are.** The shape is narrow -- 1 respondent out of 535 and
+  1,323, one instrument, no duplicated table and no duplicated response row --
+  and it reads as incidental panel overlap, since Blotner recruits both samples
+  from German online panels, rather than a redeposit. Nothing to withdraw, and
+  this item is closed.
 
   Noticed in passing, not a defect in either table: `autism_blotner_2025_s1_bes`
   carries raw covariate codes (`cov_sex` = 2, `cov_education` = 5) where
