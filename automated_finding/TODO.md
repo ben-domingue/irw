@@ -49,6 +49,16 @@ passing `irw-validate --profile upload`, uploaded by Ben in-session 2026-10-21:
 | `blotner_2026_bes` | 26,460 | 1,323 | 20 | 1-5 |
 | `blotner_2026_svo` | 7,938 | 1,323 | 6 | 1-9 |
 
+**Where they live, corrected 2026-10-21.** All five are in
+**`item_response_warehouse_8`'s draft**, 230,741 responses, release owed. The
+first upload put four of them in shard 7's draft and `people_pleasing` in
+shard 8, and every one of those copies was the **pre-age-filter** build
+(26,500 / 133,730 / 34,450 / 7,950 / 28,440) -- `age.between(18, 100)` is
+False for `NaN`, so three respondents with missing age survived. The shard-7
+copies were deleted and `people_pleasing` was replaced, so the warehouse now
+matches the figures in the table above, which is also what the script produces
+today.
+
 Written and committed: 5 dictionary rows (`dictionary_auto.csv`), 5 tag rows
 (`tags/tags_auto.csv`), 5 `codebook_at_ingest.csv` rows (all `none` -- the deposit
 ships no codebook file), 4 `metadata/covariate_labels/manual.csv` rows for
@@ -59,19 +69,44 @@ Owed:
 
 - [ ] **Weekly pipeline run** picks up metadata/biblio/tags/column_docs for the
   five tables. Nothing to do by hand -- do NOT run `run_pipeline.sh` ad hoc.
-- [ ] **Upload `automated_finding/itemtext_output/blotner_2026_people_pleasing__items.csv`**
-  (75 rows, 15 items x 5 response levels; German as administered + the author's
-  own English in the `*_translated` columns). Built AFTER Ben's upload of the
-  response tables, so it has not gone up; `itemtext_provenance.csv`'s `uploaded`
-  cell is deliberately blank until it does. Remember the live tables are named
-  `<table>__items`.
-- [ ] **Row-level overlap check, `blotner_2026_bes` vs `autism_blotner_2025_s1_bes`.**
-  Same 20-item Basic Empathy Scale, different Blotner paper and recruitment
-  (n = 535 vs 1,323), so almost certainly different people -- but Study 1 of this
-  deposit is explicitly a shared planned-missingness pool behind several of
-  Blotner's 2025 papers, so person-level overlap across his IRW tables is possible
-  in general. A `COUNT(*)`-style query against the live tables settles it; no
-  response is duplicated either way, since the instruments differ.
+- [x] **Item text UPLOADED 2026-10-21.**
+  `blotner_2026_people_pleasing__items`, 75 rows, is in **`irw_text_3`'s
+  draft** -- `red_up.drafts --dataset irw_text_3 --verbose` lists it as
+  `added`, and the staged CSV has been cleared from `itemtext_output/`.
+  `itemtext_provenance.csv`'s `uploaded` cell is now stamped. The release is
+  Ben's; note that `irw_text_3`'s draft also carries the licensing session's
+  withdrawals, so publishing it ships both.
+- [x] **Row-level overlap check DONE 2026-10-21: one shared respondent, needs
+  a ruling.** Both tables carry all 20 BES items under identical labels, so the
+  comparison is well posed. Complete 20-item response vectors (527 of 535 in
+  2025, 1,323 of 1,323 in 2026) give 6 vectors present in both deposits, 71
+  cross pairs. Five of the six are degenerate response styles rather than
+  shared people -- all-3 straight-lining (12 persons in 2025, 5 in 2026) and
+  perfect reverse-key mirroring at 5/1 and 4/2, where the low values fall
+  exactly on the `_R` items -- and those same vectors recur *within* each table
+  (16 duplicate vectors inside 2025, 14 inside 2026), which is what rules them
+  out.
+
+  **The exception: `autism_blotner_2025_s1_bes` id `100` and
+  `blotner_2026_bes` id `s2_1082` are almost certainly the same person.**
+  Identical on all 20 items with 5 distinct response values used (not a
+  straight-line: `4|2|2|4|5|4|2|1|5|2|4|4|2|4|4|3|4|4|2|2`), unique in both
+  tables rather than part of a cluster, and matching on age 33, female, and
+  university education. The only covariate that disagrees is the 2025 table's
+  unlabelled `cov_student_status` (1, against `cov_student = no` in 2026), and
+  its coding direction is not documented, so it is not evidence either way.
+
+  **RULED 2026-10-21, Ben: one shared respondent is acceptable, both tables
+  stay as they are.** The shape is narrow -- 1 respondent out of 535 and
+  1,323, one instrument, no duplicated table and no duplicated response row --
+  and it reads as incidental panel overlap, since Blotner recruits both samples
+  from German online panels, rather than a redeposit. Nothing to withdraw, and
+  this item is closed.
+
+  Noticed in passing, not a defect in either table: `autism_blotner_2025_s1_bes`
+  carries raw covariate codes (`cov_sex` = 2, `cov_education` = 5) where
+  `blotner_2026_bes` carries labels (`female`, `university`) -- a covariate
+  value-label gap on the 2025 table.
 - [ ] **osf.io/b4adh** adds only ~644 respondents on the 10 retained items and is
   private. Not worth waiting on; Blotner is a repeat contributor if we want it.
 
