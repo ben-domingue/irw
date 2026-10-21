@@ -32,6 +32,51 @@ merged, and the 552-row `tags/tags_auto.csv` merge is PR #3133.
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## Repos sweep 2026-10-21 — 13 tables staged, AWAITING UPLOAD
+
+Full write-up in `BATCH_LOG.md` (2026-10-21 and 2026-10-21b). All ten `good`
+rows worked to a decision; seven shipped, three did not.
+
+- [x] **13 response tables + 5 item text tables uploaded by Ben, 2026-10-21.**
+  `uploaded=2026-10-21` is stamped on the 5 shipped rows of
+  `itemtext_provenance.csv` and the 5 `itemtext/mapping_verification.csv` rows.
+  If any individual table did not in fact go up, that stamp is the thing to
+  correct -- the staged copies are in `automated_finding/irw_output/` and
+  `itemtext_output/` with a MANIFEST until Ben clears them.
+- [x] **Supplementary-file DOIs no longer re-surface an ingested paper**
+  (done 2026-10-21). `is_excluded()` in `irw_discover_updated.py` now tries a
+  candidate in both forms and `_load_auto_exclusions()` carries the article DOI
+  behind every supplement DOI in the set, so the match works whichever form
+  each side recorded; all three discovery modes use it. The suffix rule itself
+  is `doi_hygiene.strip_supplement_suffix()` -- one definition, not two.
+  Verified against the live exclusion set: `10.3389/fpsyt.2022.827519.s001`
+  now returns "supplement". 9 tests in
+  `tests/test_supplement_doi_exclusion.py`; full suite 216 passing.
+  A "supplement" match is deliberately coarser than an exact one -- it also
+  hides a *different* attached file of an ingested paper, e.g. an `.s002`
+  holding a second instrument -- so repos mode prints the count rather than
+  dropping them silently.
+- [ ] **`automated_finding/itemtext_provenance.csv` has no
+  `translation_source` column**, which the schema requires of a
+  `translated_substitute` row (`check_provenance.R` fails a blank one). The two
+  `li_2023_*` rows carry it as a labelled sentence inside `note` because the
+  column does not exist. `check_provenance.R` only walks
+  `itemtext/itemtables/**/provenance.csv`, so nothing failed -- but the batch
+  file cannot express the field, and it should get the column.
+- [ ] **Three item text tables are rights-clear and in hand but owe a
+  translation pass**: `saputra_2025_fomo_consumer` (Indonesian),
+  `andreu_sanchez_2023_information_sources` and `_lifestyle` (Spanish). The
+  wording is in each deposit's own sheets; shipping it means an English gloss
+  in the `_translated` fields, which is IRW-generated content and owes an
+  `itemtext_issues.qmd` line. Deferred, not forgotten -- see
+  `itemtext_provenance.csv`.
+- [ ] **Still open from the sweep itself** (unchanged by this pass):
+  the 8 `worth_retrying` rows, the 28 `recoverable_format` rows, the 40
+  retryable `download_failed` keys, the 2 `pii_suspected` rows, and the `surf`
+  (DataverseNL) connector question -- 214 candidates, 26 of 26 triaged rows
+  403. All carried in `leads/repos_leads_2026-10-21.csv`, whose 10 `good` rows
+  now hold their outcomes.
+
 ## Blotner people-pleasing deposit: 5 tables UPLOADED, pipeline run owed (2026-10-21)
 
 Found by Ben from a Behavior Research Methods preprint (`~/Downloads/Preprint IRT
@@ -270,13 +315,23 @@ before touching that folder or re-adding anything from it.
   their per-wave `caseid_wN` and would **replace** the eight wave-1 tables
   rather than add to them. Wave 2's id column is `caseid_w2`, not `caseid`,
   which is what made the naive read fail.
-- [ ] **Triage of the 2026-10-20b sweep is 394/1,174.** Resume, idempotent and
-  safe to re-run:
-  `python3 irw_batch_updated.py runs/candidates_2026-10-20b.csv --out runs/irw_triage_2026-10-20b.csv --resume --retriage`
-  Checkpoint: `runs/irw_triage_2026-10-20b.checkpoint.jsonl` (derived from the
-  `--out` name, so it must be that exact `--out`). Afterwards **regenerate
-  `leads/repos_leads_2026-10-20.csv`** -- 780 of its 844 rows are
-  `origin_flag=untriaged` and will move into real buckets.
+- [x] **Triage of the 2026-10-20b sweep is closed (2026-10-21).** The resume ran
+  clean and downloaded nothing new: of the 1,174 candidates, 1,081 were already
+  in `repo_triage_seen_keys.csv` with real flags from earlier batches (406 from
+  the 10-20 run itself, the rest from 10-06/10-07/08-13 and others), so the 780
+  rows `leads/repos_leads_2026-10-20.csv` recorded as `origin_flag=untriaged`
+  were duplicate deposits the new terms resurfaced, not unseen work. Final roll-up:
+  3 good, 103 human_assistance, 260 no_usable_file, 73 download_failed, 23
+  not_item_response, 7 below_min_n, 1 license_restricted, 3 error. Step 2b on the
+  103: 45 not_item_response, 20 worth_retrying, 18 recoverable_format, 18
+  human_review, 2 aggregate_continuous, 0 conj. `[step 2b] 0 refined flag(s)
+  recorded` is benign here -- 100 of the 103 keys already carry a `refined_flag`
+  from 10-20 and 3 are not in the ledger at all. The 18 human_review rows are in
+  `human_review/human_review_zenodo_2026-10-21.csv` (**uncommitted**).
+  Still open from it: regenerate `leads/repos_leads_2026-10-20.csv` so its
+  `untriaged` rows carry the ledger verdicts, and work the 3 `good` + 20
+  `worth_retrying` rows.
+
 - [ ] **`sadish_2021_covid_beliefs`: the live table has 6 items, this batch
   built 7** over the same 913 ids (9,398 rows vs 8,056). The new build was
   dropped rather than shipped, because uploads append. If the 7th item is

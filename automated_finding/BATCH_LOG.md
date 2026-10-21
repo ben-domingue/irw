@@ -22133,3 +22133,252 @@ commit and my next write, so there was no commit of mine to check at the time.
 What caught it was a `FileNotFoundError` on a tracked file that existed
 minutes earlier -- a file vanishing from the working tree is the symptom to
 read as "someone switched the branch under me".
+
+## 2026-10-21 — repos discovery sweep (mode 3) + the 10-20b sweep closed
+
+Discovery and triage only; nothing processed, nothing uploaded.
+
+### The 2026-10-20b sweep was already finished, not 394/1,174
+
+The open TODO said triage had reached 394 of 1,174 candidates. Resuming it
+(`--resume --retriage`, the exact command the TODO carried) downloaded nothing
+and finished in seconds: **1,081 of the 1,174 candidates were already in
+`repo_triage_seen_keys.csv`** with real flags from earlier batches — 406 from
+the 10-20 run itself, then 245 from 10-06, 127 from 08-13, 121 from 10-07 and a
+tail of others. So the 780 rows `leads/repos_leads_2026-10-20.csv` recorded as
+`origin_flag=untriaged` were **duplicate deposits the new terms resurfaced**,
+not unseen work. Worth knowing before the next sweep writes the same note: a
+large `untriaged` block in a leads file is as likely to be ledger overlap as
+unfinished work, and the two are told apart by joining on the key, not by the
+triage row count.
+
+Final roll-up of the 478-row checkpoint: 3 good, 103 human_assistance, 260
+no_usable_file, 73 download_failed, 23 not_item_response, 7 below_min_n, 1
+license_restricted, 3 error. Step 2b on the 103: 45 not_item_response, 20
+worth_retrying, 18 recoverable_format, 18 human_review, 2 aggregate_continuous,
+0 conj. 18 human_review rows archived to
+`human_review/human_review_zenodo_2026-10-21.csv`.
+
+`[step 2b] 0 refined flag(s) recorded in repo_triage_seen_keys.csv` appeared,
+which is the SKILL's stated defect signal — here it is **benign**, and the
+check that establishes that is worth repeating rather than trusting the line:
+100 of the 103 keys already carry a `refined_flag` from the 10-20 run and the
+other 3 are not in the ledger at all, so there was nothing new to write. The
+line reports "nothing written", not "nothing recorded".
+
+### The new sweep: 15 English terms x 9 languages
+
+135 variants, all verified absent from `search_terms_log.csv` before the run
+(10,216 -> 10,351 rows). Territory deliberately away from the last two batches
+(10-19 was anxiety/wellbeing, 10-20b cognitive tasks and clinical-professional
+instruments): social-political attitudes (moral disengagement, intolerance of
+uncertainty, dark triad, cyberbullying, conspiracy mentality, trust in science),
+tech/consumer/organizational (technology acceptance, e-learning readiness, media
+literacy, service quality, consumer ethnocentrism), behavioural addiction
+(internet gaming disorder, problematic smartphone use), plus sport motivation
+and spatial ability.
+
+**1,278 candidates** (dataverse 375, zenodo 368, surf 214, figshare 143,
+scholars_portal 106, datacite 35, dryad 19, mendeley 18). 948 were excluded as
+already in the ledger, leaving **330 triaged**: 10 good, 78 human_assistance,
+104 no_usable_file, 101 download_failed, 19 not_item_response, 13 below_min_n,
+1 license_restricted, 2 error. Step 2b on the 78: 28 recoverable_format, 25
+not_item_response, 14 human_review, 8 worth_retrying, 3 aggregate_continuous,
+0 conj. Both bookkeeping lines appeared and both were verified: 78 refined
+flags recorded, and the 14 human_review rows merged into
+`human_review/human_review_zenodo_2026-10-21.csv` (which the 10-20b resume had
+created earlier the same day, so that file now holds both sets).
+
+`leads/repos_leads_2026-10-21.csv` holds **153 rows** — 91 `unworked`, 61
+`blocked_access`, 1 `blocked_licence`.
+
+### 101 download_failed out of 330 is two different things, and one of them is a bug surface
+
+31% download_failed is far above this pipeline's norm, so the reasons were
+classified rather than taken as dead deposits:
+
+| class | n | reading |
+|---|---|---|
+| HTTP 403 (dataverse 30, surf 26, scholars_portal 5) | 61 | genuinely restricted files. `surf` is DataverseNL, and it failed on **26 of 26** rows — one carries the literal licence text "the combination of some of the variables can potentially lead to participants being identified". Not a tooling failure. |
+| HTTP 401 (dryad 12, datacite 1) | 13 | Dryad file downloads need no auth, so a 401 is a resolver defect, not a permission. |
+| HTTP 429 (dryad) | 3 | rate limiting, pure retry. |
+| HTTP 400 (dataverse) | 8 | malformed request from the resolver. |
+| HTTP 404 (figshare) | 7 | and a figshare status code is not evidence of a dead deposit — verify via `api.figshare.com/v2/articles/<id>`. |
+| reader/encoding errors | 9 | `'utf-8' codec can't decode byte 0xba`, `Error tokenizing data`, `Excel file format cannot be determined` — these are `recoverable_format` wearing a `download_failed` label. |
+
+So **40 of the 101 are retryable tooling failures, and all 101 are now in
+`repo_triage_seen_keys.csv` as `download_failed`**, which means a later run
+skips them — the exact #3077/#2203 shape. They are written into the leads file
+with the HTTP code in the `note` so the verdict does not die with `runs/`. The
+reopen is one command once the resolver is fixed:
+`python3 seen_ledger.py drop repo_triage_seen_keys.csv --flag download_failed
+--before 2026-10-22 --apply`, which is why the classification had to be
+recorded rather than summarised.
+
+`surf` is also worth a separate look as a *connector* question, not a bug: 214
+of 1,278 candidates came from it and not one yielded a readable file. If
+DataverseNL's holdings are systematically access-restricted, querying it is
+spending a sixth of each sweep's candidate budget for nothing.
+
+## 2026-10-21b — the 2026-10-21 sweep's `good` rows worked: 13 tables, 124,864 responses
+
+All ten `good` rows from the 2026-10-21 repos sweep, taken to a decision. Seven
+shipped, three did not. Nothing uploaded; `irw_output/` holds 13 response tables
+and `itemtext_output/` 5 item text tables, both gated.
+
+| deposit | outcome |
+|---|---|
+| zenodo.8057093, Andreu-Sánchez & Martín-Pascual 2023 | 3 tables, 11,988 responses |
+| zenodo.22084963, Mailangkay & Krisastianto 2026 | 1 table, 10,000 |
+| mendeley zbmd5x98gp, Chenghao Wang 2026 | 1 table, 6,545 |
+| zenodo.15363490, Saputra 2025 | 1 table, 1,400 |
+| fpsyg.2022.1031912, Li et al. 2023 | 3 tables, 51,480 |
+| mendeley mp49tfzx4w, Datta 2021 | 1 table, 22,800 |
+| dryad.qfttdz0ht, Huebner 2021 | 3 tables, 20,651 |
+| zenodo.15721650 | **skipped -- PII, name tier** |
+| zenodo.16813728 | **skipped -- banded recode at the N floor** |
+| fpsyt.2022.827519 | **already in IRW as six `wang2022_*` tables** |
+
+All 13 pass `irw-validate`'s upload profile: "IRW Data Standard 1.0: conforms /
+IRW upload gate: passes", no errors, the warnings all of the
+subscale-prefix and unused-extreme kind.
+
+### The three that did not ship
+
+**`zenodo.15721650` carries respondents' real names.** The `Responden` column
+holds first and full names -- 'Syifa Urahmi', 'Ida Fitriana', 'Tazkia'. Under
+the 2026-10-20 ruling that is the name/email tier, so the whole candidate is a
+skip and not a droppable column. (The sheet is also shaped as a report rather
+than data: header text in row 0, Total/Kategori/Interval/frequency columns
+appended.)
+
+**`zenodo.16813728` is a band recode, not the scale as administered.** Ten
+Spanish work-framed General Self-Efficacy items over exactly N=100 -- it clears
+the floor and the triage called it `good`. But the responses run 0-2 with
+89-97% of each item on the single top value, and the same file carries columns
+labelled "Frecuencia IA uso (1-2)" and "Frecuencia uso de IA (0-3)": the
+depositor banded variables for analysis, and there is no way to tell what the
+self-efficacy items were collected on. Its own composite column is additionally
+corrupted by Excel date coercion ("1.67" read as a date). Skipped.
+
+**`fpsyt.2022.827519` was already live, and the exclusion could not see it.**
+Discovery's dictionary exclusion matches the DOI exactly, and a Frontiers
+Supporting Information DOI appends `.s001` to the article DOI -- so
+`10.3389/fpsyt.2022.827519.s001` did not match the six `wang2022_*` rows
+already in `metadata/biblio.csv`. Worth a one-line fix in
+`_load_auto_exclusions()`: strip a trailing `.sNNN` before comparing. Caught
+here only because the batch grepped the base DOI against `metadata/biblio.csv`
+by hand before writing a script.
+
+### Three findings worth carrying
+
+**An explicit grant for the General Self-Efficacy Scale exists, and it is not
+on the scale's own page.** `userpage.fu-berlin.de/health/selfscal.htm` is
+silent, which under the 2026-10-15 ruling would be a hold. The FAQ it links to
+is not: "We hereby grant you permission to use and reproduce the General
+Self-Efficacy Scale for your study, given that appropriate recognition of the
+source of the scale is made in the write-up of your study", with a standing
+permission letter on page 9 of the same PDF. Citation reserves nothing, so the
+GSE now has a `ship` row in `itemtext/instrument_rights_register.csv`
+(sha256 `fdc6c30d...`, fetched 2026-10-21). The lesson generalises: a silent
+landing page is not the end of the search when the originators publish a FAQ.
+
+**The Achievement Motives Scale has no grant anywhere.** Gjesme & Nygard (1970)
+circulated as an unpublished Norwegian university report; nothing was located
+for it or for the Ye & Hagtvet (1992) Chinese revision. Registered `hold`, so
+`li_2023_achievement_motivation` ships its responses and not its 30 stems --
+which are sitting in the same CC BY supporting-information file as the two
+blocks that did ship. 15 of this sweep's instruments had no register row at
+all before today; two were written.
+
+**A value-equality join is a real mapping route, and it corrected the item
+count.** `zenodo.15363490`'s workbook has the coded items on one sheet and the
+same responses under full Indonesian stems on another. Matching them by exact
+value equality across all 100 rows gave a bijection -- and dropped FM01 out of
+it, because FM01 is the gender column, not an item. The triage had counted 15
+items; there are 14. Position would have shipped a 15-item table with every
+stem off by one.
+
+### Item text: 5 shipped, 8 recorded and not shipped
+
+Shipped, all five PASS on `normalize_nulls.R` -> `validate_items.R --resp-csv`
+-> `audit_batch.R --resp-dir` and clean on `irw-validate`:
+
+- `huebner_2021_weightlifting_attraction` / `_barriers` / `_pandemic` -- from
+  the deposit's own `wldat_dictionary.xlsx`, whose `Item` column NAMES each
+  data column. `mapping_basis=paper_explicit`, verified by
+  `itemtext_verification/verify_huebner_*.R`: the join is re-derived from the
+  raw codebook independently of the builder, every code printed beside its
+  stem, bijective both ways, VERDICT: PASS on all three.
+- `li_2023_self_efficacy` / `li_2023_social_support` -- the SI workbook's item
+  column HEADERS are the stems, so `mapping_basis=data_labels` (NOT_NEEDED).
+  Administered in Chinese with only the depositors' English rendering in hand,
+  which is the ruled fallback: English in the base fields, `language=Chinese`,
+  `_translated` empty, `text_source=translated_substitute`. `option_text` is
+  blank on every scale point -- neither deposit states anchor labels, and the
+  canonical ones are not in the source, so they are not invented.
+
+No issues-page entry is owed: no observed `resp` lacks an option row, no
+`item_text` is blank, no stem is shared by two items, and the two fallback
+tables' shipped wording came from the depositors rather than from IRW.
+
+Not shipped, each with where the text actually is, in
+`itemtext_provenance.csv`: `andreu_sanchez_2023_panas` (held -- PANAS is
+registered `block`, and so is a Spanish translation of it);
+`li_2023_achievement_motivation` (held -- AMS, no grant);
+`saputra_2025_fomo_consumer`, `andreu_sanchez_2023_information_sources`,
+`andreu_sanchez_2023_lifestyle` (rights-clear and in hand, but the
+administration was Indonesian or Spanish, so they owe a translation pass rather
+than a cheap-gate extraction); `datta_2021_spatial_visualization` (impossible
+in principle -- the items are figures); `mailangkay_2026_ai_health_acceptance`
+and `wang_2026_chatgpt_acceptance` (codes only, the wording is not in the
+deposit at all).
+
+### Bookkeeping
+
+13 dictionary rows via `stage_dict_row.py` (each with a `codebook_url`, "none"
+for the six deposits that ship none), 13 tag rows in
+`tags_auto_2026-10-21.csv` and merged into `tags/tags_auto.csv`, 5
+`mapping_verification.csv` rows, 13 `itemtext_provenance.csv` rows, 2
+instrument-rights-register rows. No `covariate_labels/harvest.py` is owed:
+none of these scripts reads a `.sav` or `.dta`.
+
+## 2026-10-21c — supplementary-file DOIs no longer re-surface an ingested paper
+
+The defect the 2026-10-21b batch found by hand, fixed. Frontiers and PLOS mint
+one DOI per attached file by appending `.s001`, `.s002`, ... to the article's
+own DOI, and figshare/DataCite index those as records in their own right. The
+exclusion sets hold whatever form the dictionary recorded -- usually the bare
+article DOI -- and the comparison was verbatim, so `10.3389/fpsyt.2022.827519
+.s001` arrived as a `good` candidate while `10.3389/fpsyt.2022.827519` was
+already live as six `wang2022_*` tables.
+
+- `doi_hygiene.strip_supplement_suffix()` / `SUPPLEMENT_SUFFIX_RE` now expose
+  the rule that already existed inside `normalize()`. **One definition, not
+  two** -- the whole reason this slipped is that the rule lived in the DOI
+  hygiene tool and discovery had no access to it. Exactly three digits is
+  deliberate and is pinned by `tests/test_doi_hygiene.py`: a Mendeley `.1` or a
+  figshare `.v4` is a version, not a supplement.
+- `is_excluded(doi, exclude)` in `irw_discover_updated.py` tries the candidate
+  in both forms and returns `""` / `"exact"` / `"supplement"`. All three
+  discovery modes call it (`irw_discover_updated.discover`,
+  `irw_discover_plos.py`, `irw_discover_pmc.py`), so the scheduled connectors
+  get it too.
+- `_load_auto_exclusions()` returns `_with_supplement_bases(...)`, which adds
+  the article DOI behind every supplement DOI already in the set. That covers
+  the other direction: some dictionary rows record the SI DOI in `DOI (for
+  paper)`, and the bare article DOI must then be excluded as well.
+
+**The coarsening is real and is printed rather than hidden.** A `supplement`
+match also drops a *different* attached file of an ingested paper -- an `.s002`
+holding a second instrument. That is the right default (the deposit is triaged
+as a whole, and shipping one table twice costs more than revisiting one paper),
+but repos mode now ends with a `[exclude] N hit(s) dropped as a
+supplementary-file DOI of a paper already accounted for` line so a run that
+loses real leads this way is visible.
+
+Verified against the LIVE exclusion set (4,140 DOIs), not just a fixture:
+`10.3389/fpsyt.2022.827519.s001` -> `supplement`, the bare article DOI ->
+`exact`, and today's two shipped deposits -> not excluded (their biblio rows
+do not reach the published dictionary until the pipeline runs). 9 new tests in
+`tests/test_supplement_doi_exclusion.py`; the full suite is 216 passing.

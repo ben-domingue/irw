@@ -44,6 +44,8 @@ from dataclasses import dataclass, asdict
 
 import requests
 
+from doi_hygiene import strip_supplement_suffix
+
 UA = {"User-Agent": "irw-discovery-scout/1.0 (research; contact itemresponsewarehouse@stanford.edu)"}
 
 # Source connectors raise this to signal a hard block (e.g. an AWS WAF
@@ -990,7 +992,49 @@ def _load_auto_exclusions() -> set:
     print(f"[exclude] {len(existing)} DOIs already in IRW, "
           f"{len(reviewed)} already logged in human_review/, "
           f"{len(conj)} in the conjoint ledger", flush=True)
-    return existing | reviewed | conj
+    return _with_supplement_bases(existing | reviewed | conj)
+
+
+def is_excluded(doi: str, exclude: set) -> str:
+    """Is this candidate already accounted for? Returns "" (no), "exact", or
+    "supplement".
+
+    The exclusion sets hold whatever form the dictionary, the human_review
+    archive and the conjoint ledger happen to record, and a journal's
+    SUPPLEMENTARY-FILE DOI is not that form: Frontiers and PLOS mint one per
+    attached file by appending `.s001`, `.s002`, ... to the article's own DOI.
+    A verbatim comparison therefore misses a paper whose data is already in
+    IRW under the bare article DOI -- which is how the 2026-10-21 repos sweep
+    re-surfaced `10.3389/fpsyt.2022.827519.s001` as a `good` candidate while
+    `10.3389/fpsyt.2022.827519` was already live as six `wang2022_*` tables
+    (caught by hand, before a script was written -- the SKILL's own
+    `10.7717/peerj.16295` incident is what it looks like when nobody catches
+    it). So the candidate is tried in both forms, against an exclusion set
+    that itself carries both (see `_with_supplement_bases`).
+
+    A "supplement" match is deliberately coarser than an "exact" one: it also
+    hides a *different* attached file of an already-ingested paper, e.g. an
+    `.s002` holding a second instrument. That is the right default -- the whole
+    deposit is triaged together, and shipping one table twice costs more than
+    revisiting one paper -- but callers print the count so the coarsening is
+    visible rather than silent.
+    """
+    if not doi:
+        return ""
+    d = norm_doi(doi)
+    if d in exclude:
+        return "exact"
+    base = strip_supplement_suffix(d)
+    if base != d and base in exclude:
+        return "supplement"
+    return ""
+
+
+def _with_supplement_bases(exclude: set) -> set:
+    """The exclusion set plus the article DOI behind every supplementary-file
+    DOI in it, so the match works whichever form each side recorded."""
+    extra = {b for b in (strip_supplement_suffix(d) for d in exclude) if b}
+    return exclude | extra
 
 
 RUNS_DIR = "runs"
@@ -1088,6 +1132,7 @@ def discover(queries, exclude: set, relevance_on: bool, sources=None,
     active = sources if sources is not None else SOURCES
     seen, results = set(), []
     n_unreachable = 0
+    n_supp_excluded = 0
     total = len(queries)
     t0 = _time.time()
     for i, q in enumerate(queries, 1):
@@ -1112,7 +1157,10 @@ def discover(queries, exclude: set, relevance_on: bool, sources=None,
                            else f"{hit.source}:{hit.title.strip().lower()}")
                     if not key or key in seen:
                         continue
-                    if hit.doi and hit.doi in exclude:
+                    how = is_excluded(hit.doi, exclude)
+                    if how:
+                        if how == "supplement":
+                            n_supp_excluded += 1
                         continue
                     if _unreachable_repo(hit.doi):
                         n_unreachable += 1
@@ -1150,6 +1198,12 @@ def discover(queries, exclude: set, relevance_on: bool, sources=None,
                 f"unsearched: {','.join(sorted(unsearched))}") if unsearched else ""
         print(f"  → {q_new} new this query | {len(results)} total | "
               f"{elapsed:.0f}s elapsed{note}", flush=True)
+    if n_supp_excluded:
+        print(f"[exclude] {n_supp_excluded} hit(s) dropped as a supplementary-"
+              f"file DOI of a paper already accounted for (its article DOI is "
+              f"in the dictionary, human_review/ or the conjoint ledger). This "
+              f"also hides a different attached file of such a paper -- see "
+              f"is_excluded().", flush=True)
     if n_unreachable:
         print(f"[discover] dropped {n_unreachable} hit(s) from repositories no "
               f"connector can fetch files from "
