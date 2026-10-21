@@ -1,0 +1,42 @@
+shard,table,family,instrument,verdict,column,n_items,items,new_via_translated
+irw_text,ecps_sahm_2024_emotion__items,ERQ,"Emotion Regulation Questionnaire (ERQ), Gross & John (2003), ENGLISH wording only",block,item_text,5,emotions_1_0neutral;emotions_2_0neutral;emotions_4_0neutral;emotions_5_0neutral;emotions_7_0neutral,False
+irw_text,florida_twins_dweck__items,ITIS-Dweck,"Implicit Theories of Intelligence Scale (ITIS / mindset items), Dweck (1999), incl. the 3-fixed/3-growth 6-item form",hold,item_text,5,qdweckt1;qdweckt2;qdweckt3;qdweckt6;qdweckt8,False
+irw_text,almuqbil_2022_epds__items,EPDS,"Edinburgh Postnatal Depression Scale (EPDS, 10 items), Cox, Holden & Sagovsky (1987), British Journal of Psychiatry 150:782-786",hold,item_text,3,epds_1;epds_10;epds_2,False
+irw_text,dpt_noncog__intolerance_of_uncertainty__items,IUS,"Intolerance of Uncertainty Scale (IUS, 27 items), Freeston et al. (1994); English version Buhr & Dugas (2002) -- English only",block,item_text,3,iu_2;iu_26;iu_3,False
+irw_text,oxfordcovid_xue_2024_bfi__items,BFI-44,"Big Five Inventory (BFI-44, John, Donahue & Kentle 1991), incl. subscales such as BFI-N, all translations",block,item_text,3,big_5_13;big_5_4;big_5_7,False
+irw_text,gps_vangsness_2019__items,Tuckman-APS,"Tuckman Procrastination Scale (16/35 items), Tuckman (1991), Educational and Psychological Measurement 51(2):473-480",hold,item_text,2,GPS_13;GPS_16,False
+irw_text,bae_boredom_bieleke2022__items,SDT/CSDT,"Center for Self-Determination Theory library (IMI, BPNS/BPNSFS, Aspiration Index, SRQ, PLOC, GCOS)",block,item_text,1,esc_05,False
+irw_text,conspiracy_asd__schizotypy__items,WSSSF,"Wisconsin Schizotypy Scales short forms (Perceptual Aberration, Magical Ideation, Revised Social Anhedonia, Physical Anhedonia; 15 items each), Winterstein, Silvia, Kwapil et al. (2011), from the Chapman scales",hold,item_text,1,schizotypy_2,False
+irw_text,conspiracy_asd__schizotypy__items,PSS,Perceived Stress Scale (PSS-4/10/14),block,item_text,1,schizotypy_8,False
+irw_text,fredrickson_2015_mhcsf__items,SWLS,Satisfaction With Life Scale (SWLS),block,item_text,1,MHCSF_3,False
+irw_text,florida_twins_chaos__items,PSS,Perceived Stress Scale (PSS-4/10/14),block,item_text,1,chaos4,False
+irw_text,pezzuti_2025_coolpeople_powerful__items,SCHWARTZ,"Schwartz value instruments: Portrait Values Questionnaire (PVQ40), Schwartz Value Survey (SVS), PVQ21 / ESS Human Values Scale (ESS21), PVQ-RR -- all authorized language versions",block,item_text,1,powerful2,False
+irw_text,oxfordcovid_xue_2024_bfi__items,BFI-2,"Big Five Inventory-2 (BFI-2), incl. BFI-2-XS and BFI-2-S, all versions and translations",block,item_text,1,big_5_5,False
+irw_text,mpsycho_asti__items,SSFS,"State Self-Forgiveness Scale (SSFS), incl. Pierro et al.'s 4-item feeling-subscale adaptation",block,item_text,1,ASTI20,False
+irw_text,sv-maia2_randelovic_2021_erq__items,ERQ,"Emotion Regulation Questionnaire (ERQ), Gross & John (2003), ENGLISH wording only",block,item_text_translated,5,ERQ_2;ERQ_4;ERQ_6;ERQ_8;ERQ_9,True
+irw_text,dasilva_2019_hexaco24__items,SDT/CSDT,"Center for Self-Determination Theory library (IMI, BPNS/BPNSFS, Aspiration Index, SRQ, PLOC, GCOS)",block,item_text_translated,1,HEXACO24_7,True
+irw_text,corti_2023_academic_adaptation__items,SWLS,Satisfaction With Life Scale (SWLS),block,item_text_translated,1,P1_d,True
+irw_text_2,christensen_2018_wsssf_2171__items,WSSSF,"Wisconsin Schizotypy Scales short forms (Perceptual Aberration, Magical Ideation, Revised Social Anhedonia, Physical Anhedonia; 15 items each), Winterstein, Silvia, Kwapil et al. (2011), from the Chapman scales",hold,item_text,7,mi06;mi14;pb03;pb06;py05;py06;sa08,False
+irw_text_2,christensen_2018_wsssf_5831__items,WSSSF,"Wisconsin Schizotypy Scales short forms (Perceptual Aberration, Magical Ideation, Revised Social Anhedonia, Physical Anhedonia; 15 items each), Winterstein, Silvia, Kwapil et al. (2011), from the Chapman scales",hold,item_text,7,mi06;mi14;pb03;pb06;py05;py06;sa08,False
+irw_text_2,kushnir2017_bfi__items,BFI-44,"Big Five Inventory (BFI-44, John, Donahue & Kentle 1991), incl. subscales such as BFI-N, all translations",block,item_text,5,"(BFI_1) Is talkative;(BFI_2) Tends to find fault with others;(BFI_3) Does a thorough job;(BFI_4) Is depressed, blue;(BFI_5) Is original, comes up with new ideas",False
+irw_text_2,kushnir2017_bfi__items,BFI-2,"Big Five Inventory-2 (BFI-2), incl. BFI-2-XS and BFI-2-S, all versions and translations",block,item_text,4,"(BFI_18) Tends to be disorganized;(BFI_36) Is outgoing, sociable;(BFI_41) Has few artistic interests;(BFI_9) Is relaxed, handles stress well",False
+irw_text_2,reyes_2022_eheals__items,eHEALS,"eHealth Literacy Scale (eHEALS, 8 items), Norman & Skinner (2006), J Medical Internet Research 8(4):e27",hold,item_text,4,eheals_4;eheals_5;eheals_6;eheals_8,False
+irw_text_2,cavalini_mokken__items,cavalini,"Cavalini coping questionnaire (odour annoyance), Cavalini (1992) Groningen dissertation",hold,item_text,2,Item1;Item17,False
+irw_text_2,pavic_2022_vaccine_conspiracy__items,VCBS,"Vaccine Conspiracy Beliefs Scale (VCBS, 7 items), Shapiro, Holding, Perez, Amsel & Rosberger (2016), Papillomavirus Research 2:167-172",hold,item_text,2,Vac_con1;Vac_con6,False
+irw_text_2,christensen_2018_wsssf_2171__items,PSS,Perceived Stress Scale (PSS-4/10/14),block,item_text,1,mi01,False
+irw_text_2,christensen_2018_wsssf_5831__items,PSS,Perceived Stress Scale (PSS-4/10/14),block,item_text,1,mi01,False
+irw_text_2,jutte_2024_personality__items,PSS,Perceived Stress Scale (PSS-4/10/14),block,item_text,1,Neuroticism_w2,False
+irw_text_2,goldberg_2018_ipip__items,SWLS,Satisfaction With Life Scale (SWLS),block,item_text,1,v169,False
+irw_text_2,zhou_2025_ehealth_literacy__items,eHEALS,"eHealth Literacy Scale (eHEALS, 8 items), Norman & Skinner (2006), J Medical Internet Research 8(4):e27",hold,item_text,1,eh2,False
+irw_text_2,merlo2025_eng_emotional__items,SDT/CSDT,"Center for Self-Determination Theory library (IMI, BPNS/BPNSFS, Aspiration Index, SRQ, PLOC, GCOS)",block,item_text_translated,1,ENG_EMO_09,True
+irw_text_3,girma_2024_mlq__items,MLQ,Meaning in Life Questionnaire (MLQ),block,item_text,5,MILP6;MILP9;MILS2;MILS7;MILS8,False
+irw_text_3,kasparek_2025_bpaq__items,BPAQ,"Buss-Perry Aggression Questionnaire (BPAQ, 29 items), Buss & Perry (1992), J Personality and Social Psychology 63(3):452-459",hold,item_text,3,bp_14;bp_2;bp_25,False
+irw_text_3,reinhardt_2023_self_concept_clarity__items,SCCS,Self-Concept Clarity Scale (SCCS),block,item_text,3,v_203;v_206;v_207,False
+irw_text_3,personalitychange_kramer_2025_sccs__items,SCCS,Self-Concept Clarity Scale (SCCS),block,item_text,3,sc01_01;sc01_04;sc01_05,False
+irw_text_3,c19prc_uk_mcbride_2021_vaccineattitudes__items,VCBS,"Vaccine Conspiracy Beliefs Scale (VCBS, 7 items), Shapiro, Holding, Perez, Amsel & Rosberger (2016), Papillomavirus Research 2:167-172",hold,item_text,1,Vaccines4,False
+irw_text_3,makovi_2021_symbolic_racism__items,RACIAL_RESENT,"Racial resentment / symbolic racism battery (4 items), Kinder & Sanders (1996), as fielded in the American National Election Studies",hold,item_text,1,rscale_9,False
+irw_text_3,wallace_2026_iqbelief__items,ITIS-Dweck,"Implicit Theories of Intelligence Scale (ITIS / mindset items), Dweck (1999), incl. the 3-fixed/3-growth 6-item form",hold,item_text,1,IQbelief3,False
+irw_text_3,wallace_2026_s2c_intoluncert__items,IUS,"Intolerance of Uncertainty Scale (IUS, 27 items), Freeston et al. (1994); English version Buhr & Dugas (2002) -- English only",block,item_text,1,intoluncert1,False
+irw_text_3,fernandez_prados_2025_gaais__items,GAAIS,"General Attitudes towards Artificial Intelligence Scale (GAAIS), Schepman & Rodway (2020), Computers in Human Behavior Reports 1:100014",hold,item_text_translated,3,Aschepam_SQ002;Aschepam_SQ003;Aschepam_SQ007,True
+irw_text_3,leon_rubio_2025_cdpe_consequences__items,PSS,Perceived Stress Scale (PSS-4/10/14),block,item_text_translated,1,CDPE160,True
+irw_text_3,petrovici_2025_wellbeing__items,SWLS,Satisfaction With Life Scale (SWLS),block,item_text_translated,1,C1,True
