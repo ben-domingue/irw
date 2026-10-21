@@ -32,6 +32,49 @@ merged, and the 552-row `tags/tags_auto.csv` merge is PR #3133.
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## Blotner people-pleasing deposit: 5 tables UPLOADED, pipeline run owed (2026-10-21)
+
+Found by Ben from a Behavior Research Methods preprint (`~/Downloads/Preprint IRT
+PPS.pdf`); the preprint's own OSF node (osf.io/b4adh) is private, but 1,894 of its
+2,538 respondents come from the CC BY 4.0 validation paper
+(10.1007/s12144-026-09519-2) whose node, osf.io/4n8sk, is public. Five response
+tables built by `data/blotner_2026_people_pleasing.py`, **230,741 responses**, all
+passing `irw-validate --profile upload`, uploaded by Ben in-session 2026-10-21:
+
+| table | rows | persons | items | resp |
+|---|---|---|---|---|
+| `blotner_2026_people_pleasing` | 28,395 | 1,894 | 15 | 1-5 |
+| `blotner_2026_hexaco60` | 133,550 | 3,131 | 60 | 1-5 |
+| `blotner_2026_lsrp` | 34,398 | 1,323 | 26 | 1-4 |
+| `blotner_2026_bes` | 26,460 | 1,323 | 20 | 1-5 |
+| `blotner_2026_svo` | 7,938 | 1,323 | 6 | 1-9 |
+
+Written and committed: 5 dictionary rows (`dictionary_auto.csv`), 5 tag rows
+(`tags/tags_auto.csv`), 5 `codebook_at_ingest.csv` rows (all `none` -- the deposit
+ships no codebook file), 4 `metadata/covariate_labels/manual.csv` rows for
+`cov_study`, a `not_harvestable.tsv` row, one `itemtext_provenance.csv` row and one
+`itemtext/instrument_rights_register.csv` row (PPS -> `ship`).
+
+Owed:
+
+- [ ] **Weekly pipeline run** picks up metadata/biblio/tags/column_docs for the
+  five tables. Nothing to do by hand -- do NOT run `run_pipeline.sh` ad hoc.
+- [ ] **Upload `automated_finding/itemtext_output/blotner_2026_people_pleasing__items.csv`**
+  (75 rows, 15 items x 5 response levels; German as administered + the author's
+  own English in the `*_translated` columns). Built AFTER Ben's upload of the
+  response tables, so it has not gone up; `itemtext_provenance.csv`'s `uploaded`
+  cell is deliberately blank until it does. Remember the live tables are named
+  `<table>__items`.
+- [ ] **Row-level overlap check, `blotner_2026_bes` vs `autism_blotner_2025_s1_bes`.**
+  Same 20-item Basic Empathy Scale, different Blotner paper and recruitment
+  (n = 535 vs 1,323), so almost certainly different people -- but Study 1 of this
+  deposit is explicitly a shared planned-missingness pool behind several of
+  Blotner's 2025 papers, so person-level overlap across his IRW tables is possible
+  in general. A `COUNT(*)`-style query against the live tables settles it; no
+  response is duplicated either way, since the instruments differ.
+- [ ] **osf.io/b4adh** adds only ~644 respondents on the 10 retained items and is
+  private. Not worth waiting on; Blotner is a repeat contributor if we want it.
+
 ## Repos batch 2026-10-20: 87 tables UPLOADED, release owed (2026-10-20)
 
 Six parallel agents; full write-up in `BATCH_LOG.md`. **87 response tables /

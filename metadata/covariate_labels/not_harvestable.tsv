@@ -60,3 +60,4 @@ data/scs_2025.R	source file local or downloaded; not checked
 data/sd3ypl_klimczak_2019.R	source file local or downloaded; not checked
 data/ssd12_habib_2025.R	source file local or downloaded; not checked
 data/wvs_panasiuk_2025.R	source file local or downloaded; not checked
+data/blotner_2026_people_pleasing.py	source file downloaded; plain CSV with no embedded value labels; cov_study entered in manual.csv
