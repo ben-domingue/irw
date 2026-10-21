@@ -10214,3 +10214,138 @@ date,query,output_file,notes
 2026-10-20,مقياس كفاءة الممرضات,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
 2026-10-20,verpleegkundige competentie schaal,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
 2026-10-20,간호사 역량 척도,runs/candidates_2026-10-20b.csv,repos batch 2026-10-20b; 15 English terms x 9 languages
+2026-10-21,moral disengagement scale,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,escala de desconexión moral,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,moralische Disengagement Skala,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,échelle de désengagement moral,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,道德推脱量表,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,道徳的離脱尺度,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,مقياس الانفصال الأخلاقي,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,morele disengagement schaal,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,도덕적 이탈 척도,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,intolerance of uncertainty scale,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,escala de intolerancia a la incertidumbre,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,Skala Intoleranz gegenüber Unsicherheit,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,échelle d'intolérance à l'incertitude,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,不确定性不容忍量表,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,不確実性への不耐性尺度,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,مقياس عدم تحمل الغموض,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,intolerantie voor onzekerheid schaal,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,불확실성에 대한 불내성 척도,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,dark triad questionnaire,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,cuestionario de la tríada oscura,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,Dunkle Triade Fragebogen,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,questionnaire de la triade noire,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,黑暗三角人格问卷,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,ダークトライアド質問紙,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,استبيان الثلاثية المظلمة,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,duistere triade vragenlijst,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,어둠의 3요소 질문지,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,cyberbullying questionnaire,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,cuestionario de ciberacoso,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,Cybermobbing Fragebogen,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,questionnaire de cyberharcèlement,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,网络欺凌问卷,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,ネットいじめ質問紙,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,استبيان التنمر الإلكتروني,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,cyberpesten vragenlijst,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,사이버 괴롭힘 질문지,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,conspiracy mentality questionnaire,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,cuestionario de mentalidad conspirativa,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,Fragebogen Verschwörungsmentalität,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,questionnaire de mentalité conspirationniste,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,阴谋论心态问卷,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,陰謀論的思考質問紙,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,استبيان العقلية التآمرية,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,complotdenken vragenlijst,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,음모론적 사고 질문지,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,trust in science scale,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,escala de confianza en la ciencia,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,Skala Vertrauen in die Wissenschaft,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,échelle de confiance envers la science,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,科学信任量表,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,科学への信頼尺度,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,مقياس الثقة في العلم,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,vertrouwen in wetenschap schaal,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,과학 신뢰 척도,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,technology acceptance questionnaire,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,cuestionario de aceptación de tecnología,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,Fragebogen zur Technologieakzeptanz,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,questionnaire d'acceptation de la technologie,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,技术接受度问卷,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,技術受容質問紙,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,استبيان تقبل التكنولوجيا,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,technologieacceptatie vragenlijst,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,기술 수용 질문지,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,e-learning readiness scale,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,escala de preparación para el aprendizaje en línea,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,Skala E-Learning Bereitschaft,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,échelle de préparation à l'apprentissage en ligne,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,在线学习准备度量表,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,eラーニング準備性尺度,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,مقياس الجاهزية للتعلم الإلكتروني,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,e-learning gereedheid schaal,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,이러닝 준비도 척도,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,media literacy test,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,prueba de alfabetización mediática,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,Medienkompetenz Test,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,test de littératie médiatique,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,媒介素养测验,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,メディアリテラシー検査,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,اختبار التربية الإعلامية,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,mediawijsheid toets,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,미디어 리터러시 검사,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,service quality questionnaire,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,cuestionario de calidad del servicio,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,Fragebogen zur Servicequalität,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,questionnaire de qualité de service,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,服务质量问卷,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,サービス品質質問紙,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,استبيان جودة الخدمة,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,servicekwaliteit vragenlijst,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,서비스 품질 질문지,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,consumer ethnocentrism scale,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,escala de etnocentrismo del consumidor,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,Skala Konsumentenethnozentrismus,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,échelle d'ethnocentrisme du consommateur,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,消费者民族中心主义量表,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,消費者エスノセントリズム尺度,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,مقياس التمركز العرقي للمستهلك,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,consumentenethnocentrisme schaal,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,소비자 자민족중심주의 척도,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,sport motivation scale,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,escala de motivación deportiva,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,Sportmotivation Skala,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,échelle de motivation sportive,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,运动动机量表,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,スポーツ動機尺度,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,مقياس الدافعية الرياضية,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,sportmotivatie schaal,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,스포츠 동기 척도,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,internet gaming disorder scale,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,escala de trastorno de juego por internet,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,Skala Internetspielsucht,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,échelle de trouble du jeu vidéo en ligne,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,网络游戏成瘾量表,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,インターネットゲーム障害尺度,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,مقياس اضطراب لعب الإنترنت,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,internetgamestoornis schaal,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,인터넷 게임 중독 척도,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,problematic smartphone use scale,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,escala de uso problemático del teléfono móvil,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,Skala problematische Smartphone Nutzung,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,échelle d'usage problématique du smartphone,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,智能手机问题性使用量表,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,問題的スマートフォン使用尺度,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,مقياس الاستخدام الإشكالي للهاتف الذكي,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,problematisch smartphonegebruik schaal,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,스마트폰 과의존 척도,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,spatial ability test,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,prueba de habilidad espacial,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,Test räumliches Vorstellungsvermögen,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,test d'aptitude spatiale,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,空间能力测验,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,空間能力検査,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,اختبار القدرة المكانية,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,ruimtelijk inzicht test,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-21,공간 능력 검사,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages

@@ -32,6 +32,36 @@ merged, and the 552-row `tags/tags_auto.csv` merge is PR #3133.
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## Repos discovery sweep 2026-10-21 — triaged, nothing processed
+
+Full write-up in `BATCH_LOG.md` (2026-10-21). 1,278 candidates, 330 triaged
+after ledger exclusion. Leads: `leads/repos_leads_2026-10-21.csv` (153 rows).
+
+- [ ] **Work the 10 `good` rows and the 8 `worth_retrying`.** Both sets are in
+  the leads file as `status=unworked`. Licence must be verified on the source
+  page before any script is written, and check `grep -r "<doi>" ../data/*.py`
+  over the WHOLE header, not just the `# DOI:` line.
+- [ ] **28 `recoverable_format` rows** — wrong delimiter or a per-scale split;
+  each needs one re-read with a different reader before it can be judged.
+- [ ] **40 of the 101 `download_failed` rows are retryable tooling failures**
+  (dryad 401 x12 + 429 x3, dataverse 400 x8, figshare 404 x7, 9 reader/encoding
+  errors, datacite 401 x1) and every one is already in
+  `repo_triage_seen_keys.csv` as `download_failed`, so a later run will skip
+  them. Reopen with
+  `python3 seen_ledger.py drop repo_triage_seen_keys.csv --flag download_failed --before 2026-10-22 --apply`
+  once the resolvers are fixed. The other 61 are HTTP 403 on restricted files
+  and are correctly closed (`status=blocked_access`).
+- [ ] **Decide whether `surf` (DataverseNL) is worth querying at all.** It
+  supplied 214 of the 1,278 candidates — a sixth of the sweep — and **26 of 26**
+  triaged rows were 403 on the data file. If its holdings are systematically
+  access-restricted, the connector is spending candidate budget for nothing.
+- [ ] **2 `pii_suspected` rows** need the 2026-10-20 ruling applied (names and
+  emails skip the candidate; geographic codes drop the column and the rest
+  ships).
+- [ ] **`human_review/human_review_zenodo_2026-10-21.csv` is untracked** — 32
+  rows (18 from the 10-20b resume, 14 from this sweep). It is a standing record
+  and needs committing.
+
 ## Blotner people-pleasing deposit: 5 tables UPLOADED, pipeline run owed (2026-10-21)
 
 Found by Ben from a Behavior Research Methods preprint (`~/Downloads/Preprint IRT
@@ -270,13 +300,23 @@ before touching that folder or re-adding anything from it.
   their per-wave `caseid_wN` and would **replace** the eight wave-1 tables
   rather than add to them. Wave 2's id column is `caseid_w2`, not `caseid`,
   which is what made the naive read fail.
-- [ ] **Triage of the 2026-10-20b sweep is 394/1,174.** Resume, idempotent and
-  safe to re-run:
-  `python3 irw_batch_updated.py runs/candidates_2026-10-20b.csv --out runs/irw_triage_2026-10-20b.csv --resume --retriage`
-  Checkpoint: `runs/irw_triage_2026-10-20b.checkpoint.jsonl` (derived from the
-  `--out` name, so it must be that exact `--out`). Afterwards **regenerate
-  `leads/repos_leads_2026-10-20.csv`** -- 780 of its 844 rows are
-  `origin_flag=untriaged` and will move into real buckets.
+- [x] **Triage of the 2026-10-20b sweep is closed (2026-10-21).** The resume ran
+  clean and downloaded nothing new: of the 1,174 candidates, 1,081 were already
+  in `repo_triage_seen_keys.csv` with real flags from earlier batches (406 from
+  the 10-20 run itself, the rest from 10-06/10-07/08-13 and others), so the 780
+  rows `leads/repos_leads_2026-10-20.csv` recorded as `origin_flag=untriaged`
+  were duplicate deposits the new terms resurfaced, not unseen work. Final roll-up:
+  3 good, 103 human_assistance, 260 no_usable_file, 73 download_failed, 23
+  not_item_response, 7 below_min_n, 1 license_restricted, 3 error. Step 2b on the
+  103: 45 not_item_response, 20 worth_retrying, 18 recoverable_format, 18
+  human_review, 2 aggregate_continuous, 0 conj. `[step 2b] 0 refined flag(s)
+  recorded` is benign here -- 100 of the 103 keys already carry a `refined_flag`
+  from 10-20 and 3 are not in the ledger at all. The 18 human_review rows are in
+  `human_review/human_review_zenodo_2026-10-21.csv` (**uncommitted**).
+  Still open from it: regenerate `leads/repos_leads_2026-10-20.csv` so its
+  `untriaged` rows carry the ledger verdicts, and work the 3 `good` + 20
+  `worth_retrying` rows.
+
 - [ ] **`sadish_2021_covid_beliefs`: the live table has 6 items, this batch
   built 7** over the same 913 ids (9,398 rows vs 8,056). The new build was
   dropped rather than shipped, because uploads append. If the 7th item is

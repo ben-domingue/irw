@@ -22133,3 +22133,89 @@ commit and my next write, so there was no commit of mine to check at the time.
 What caught it was a `FileNotFoundError` on a tracked file that existed
 minutes earlier -- a file vanishing from the working tree is the symptom to
 read as "someone switched the branch under me".
+
+## 2026-10-21 — repos discovery sweep (mode 3) + the 10-20b sweep closed
+
+Discovery and triage only; nothing processed, nothing uploaded.
+
+### The 2026-10-20b sweep was already finished, not 394/1,174
+
+The open TODO said triage had reached 394 of 1,174 candidates. Resuming it
+(`--resume --retriage`, the exact command the TODO carried) downloaded nothing
+and finished in seconds: **1,081 of the 1,174 candidates were already in
+`repo_triage_seen_keys.csv`** with real flags from earlier batches — 406 from
+the 10-20 run itself, then 245 from 10-06, 127 from 08-13, 121 from 10-07 and a
+tail of others. So the 780 rows `leads/repos_leads_2026-10-20.csv` recorded as
+`origin_flag=untriaged` were **duplicate deposits the new terms resurfaced**,
+not unseen work. Worth knowing before the next sweep writes the same note: a
+large `untriaged` block in a leads file is as likely to be ledger overlap as
+unfinished work, and the two are told apart by joining on the key, not by the
+triage row count.
+
+Final roll-up of the 478-row checkpoint: 3 good, 103 human_assistance, 260
+no_usable_file, 73 download_failed, 23 not_item_response, 7 below_min_n, 1
+license_restricted, 3 error. Step 2b on the 103: 45 not_item_response, 20
+worth_retrying, 18 recoverable_format, 18 human_review, 2 aggregate_continuous,
+0 conj. 18 human_review rows archived to
+`human_review/human_review_zenodo_2026-10-21.csv`.
+
+`[step 2b] 0 refined flag(s) recorded in repo_triage_seen_keys.csv` appeared,
+which is the SKILL's stated defect signal — here it is **benign**, and the
+check that establishes that is worth repeating rather than trusting the line:
+100 of the 103 keys already carry a `refined_flag` from the 10-20 run and the
+other 3 are not in the ledger at all, so there was nothing new to write. The
+line reports "nothing written", not "nothing recorded".
+
+### The new sweep: 15 English terms x 9 languages
+
+135 variants, all verified absent from `search_terms_log.csv` before the run
+(10,216 -> 10,351 rows). Territory deliberately away from the last two batches
+(10-19 was anxiety/wellbeing, 10-20b cognitive tasks and clinical-professional
+instruments): social-political attitudes (moral disengagement, intolerance of
+uncertainty, dark triad, cyberbullying, conspiracy mentality, trust in science),
+tech/consumer/organizational (technology acceptance, e-learning readiness, media
+literacy, service quality, consumer ethnocentrism), behavioural addiction
+(internet gaming disorder, problematic smartphone use), plus sport motivation
+and spatial ability.
+
+**1,278 candidates** (dataverse 375, zenodo 368, surf 214, figshare 143,
+scholars_portal 106, datacite 35, dryad 19, mendeley 18). 948 were excluded as
+already in the ledger, leaving **330 triaged**: 10 good, 78 human_assistance,
+104 no_usable_file, 101 download_failed, 19 not_item_response, 13 below_min_n,
+1 license_restricted, 2 error. Step 2b on the 78: 28 recoverable_format, 25
+not_item_response, 14 human_review, 8 worth_retrying, 3 aggregate_continuous,
+0 conj. Both bookkeeping lines appeared and both were verified: 78 refined
+flags recorded, and the 14 human_review rows merged into
+`human_review/human_review_zenodo_2026-10-21.csv` (which the 10-20b resume had
+created earlier the same day, so that file now holds both sets).
+
+`leads/repos_leads_2026-10-21.csv` holds **153 rows** — 91 `unworked`, 61
+`blocked_access`, 1 `blocked_licence`.
+
+### 101 download_failed out of 330 is two different things, and one of them is a bug surface
+
+31% download_failed is far above this pipeline's norm, so the reasons were
+classified rather than taken as dead deposits:
+
+| class | n | reading |
+|---|---|---|
+| HTTP 403 (dataverse 30, surf 26, scholars_portal 5) | 61 | genuinely restricted files. `surf` is DataverseNL, and it failed on **26 of 26** rows — one carries the literal licence text "the combination of some of the variables can potentially lead to participants being identified". Not a tooling failure. |
+| HTTP 401 (dryad 12, datacite 1) | 13 | Dryad file downloads need no auth, so a 401 is a resolver defect, not a permission. |
+| HTTP 429 (dryad) | 3 | rate limiting, pure retry. |
+| HTTP 400 (dataverse) | 8 | malformed request from the resolver. |
+| HTTP 404 (figshare) | 7 | and a figshare status code is not evidence of a dead deposit — verify via `api.figshare.com/v2/articles/<id>`. |
+| reader/encoding errors | 9 | `'utf-8' codec can't decode byte 0xba`, `Error tokenizing data`, `Excel file format cannot be determined` — these are `recoverable_format` wearing a `download_failed` label. |
+
+So **40 of the 101 are retryable tooling failures, and all 101 are now in
+`repo_triage_seen_keys.csv` as `download_failed`**, which means a later run
+skips them — the exact #3077/#2203 shape. They are written into the leads file
+with the HTTP code in the `note` so the verdict does not die with `runs/`. The
+reopen is one command once the resolver is fixed:
+`python3 seen_ledger.py drop repo_triage_seen_keys.csv --flag download_failed
+--before 2026-10-22 --apply`, which is why the classification had to be
+recorded rather than summarised.
+
+`surf` is also worth a separate look as a *connector* question, not a bug: 214
+of 1,278 candidates came from it and not one yielded a readable file. If
+DataverseNL's holdings are systematically access-restricted, querying it is
+spending a sixth of each sweep's candidate budget for nothing.
