@@ -118,12 +118,13 @@ read_csv_or_null <- function(path) {
 in_file <- function(k, tbl) if (is.null(tbl)) rep(NA, length(k)) else k %in% key(tbl$table)
 
 ## ---- 1. the live listing: the denominator ---------------------------------
-SOURCES <- c("core", "comp", "nom", "sim", "conj")
-## Non-core sources are each one Redivis dataset; core and conj tables carry
-## their shard in metadata.csv (core) or nowhere (conj: #2934 split, no shard
-## column), so `dataset` below is informative, not a key.
+SOURCES <- c("core", "comp", "nom", "sim", "conj", "rank")
+## Non-core sources are each one Redivis dataset, except conj and rank, which
+## are sharded; core tables carry their shard in metadata.csv, conj and rank
+## nowhere (#2934 split, no shard column), so `dataset` below is informative,
+## not a key.
 SOURCE_DATASET <- c(comp = "irw_competitions", nom = "irw_nominal",
-                    sim = "irw_simsyn", conj = "irw_conjoint")
+                    sim = "irw_simsyn", conj = "irw_conjoint", rank = "irw_rank")
 
 live <- if (!is.na(live_from)) {
   l <- read_csv_or_null(live_from)
@@ -144,9 +145,11 @@ if (nrow(live) == 0) stop("no live tables listed; refusing to write an empty mat
 
 ## ---- 2. inputs ----------------------------------------------------------
 md_files  <- c(core = "metadata.csv", comp = "comps_metadata.csv", nom = "nominal_metadata.csv",
-               sim = "simsyn_metadata.csv", conj = "conj_metadata.csv")
+               sim = "simsyn_metadata.csv", conj = "conj_metadata.csv",
+               rank = "rank_metadata.csv")
 bib_files <- c(core = "biblio.csv", comp = "comps_biblio.csv", nom = "nominal_biblio.csv",
-               sim = "simsyn_biblio.csv", conj = "conj_biblio.csv")
+               sim = "simsyn_biblio.csv", conj = "conj_biblio.csv",
+               rank = "rank_biblio.csv")
 tag_files <- c(core = "tags.csv", nom = "nominal_tags.csv")
 md  <- lapply(md_files,  function(f) read_csv_or_null(file.path(dir_path, f)))
 bib <- lapply(bib_files, function(f) read_csv_or_null(file.path(dir_path, f)))
