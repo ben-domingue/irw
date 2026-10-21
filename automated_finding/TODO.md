@@ -37,15 +37,12 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 Full write-up in `BATCH_LOG.md` (2026-10-21 and 2026-10-21b). All ten `good`
 rows worked to a decision; seven shipped, three did not.
 
-- [ ] **13 response tables + 5 item text tables need uploading.**
-  `automated_finding/irw_output/` (13 tables, 124,864 responses; see its
-  MANIFEST.txt) goes first, then `automated_finding/itemtext_output/` (5
-  `__items.csv`). All 13 pass `irw-validate`'s upload profile with no errors;
-  the 5 item text tables pass the whole gate chain and the folder holds nothing
-  but `*__items.csv`. Uploading is human-triggered -- not run from here.
-- [ ] **After Ben confirms the upload**, stamp `uploaded=<date>` in
-  `itemtext_provenance.csv` (5 shipped rows) and in the 5
-  `itemtext/mapping_verification.csv` rows. Not before.
+- [x] **13 response tables + 5 item text tables uploaded by Ben, 2026-10-21.**
+  `uploaded=2026-10-21` is stamped on the 5 shipped rows of
+  `itemtext_provenance.csv` and the 5 `itemtext/mapping_verification.csv` rows.
+  If any individual table did not in fact go up, that stamp is the thing to
+  correct -- the staged copies are in `automated_finding/irw_output/` and
+  `itemtext_output/` with a MANIFEST until Ben clears them.
 - [ ] **Strip a trailing `.sNNN` in `_load_auto_exclusions()`.** A Frontiers
   Supporting Information DOI appends `.s001` to the article DOI, so
   `10.3389/fpsyt.2022.827519.s001` did not match the six `wang2022_*` rows
