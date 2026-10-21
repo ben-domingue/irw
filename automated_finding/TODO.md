@@ -1,5 +1,34 @@
 # IRW Automated Finding — TODO
 
+## ALL SHARDS RELEASED 2026-10-20 (ben-domingue)
+
+Ben released every shard on 2026-10-20, after the 87-table repos batch and its
+7 item text tables went up. So **every item in this file written as "after the
+release", "at upload" or "release is owed" is now DUE, not pending** -- there
+are at least eight such bullets below, dating back several batches, and they
+were all waiting on this one event.
+
+The one that gates the others:
+
+- [ ] **`python3 metadata/covariate_labels/build.py`, then commit
+  `covariate_labels.csv`.** One run covers every batch's pending harvest at
+  once -- `harvest.py` has already been run for the batches below, and `build.py`
+  only emits rows for tables that are live, which is why it had to wait. Expect
+  a large diff (one earlier estimate was ~8,000 lines of other batches' pending
+  harvests) and review it as its own PR rather than folding it into a data PR.
+  This is a manual stage on purpose: it re-runs build scripts (#1775), so no
+  scheduled job will ever do it.
+
+Also now due rather than pending, each detailed in its own section below: the
+issues-page entries owed by the 10-18 d/e/j/k batches and by
+`gerou_2023_dass21` / `kembara_2026_civic_agency`, and the `irw_version` cells
+left blank in `metadata/table_changes.csv` for the three `kemp_2019_mss_*`
+repairs (derive the version from the manifest -- do not ask Ben for it).
+
+Nothing in THIS session's batch is owed at the release beyond `build.py`: its
+dictionary rows, tag rows, provenance and mapping rows are all written and
+merged, and the 552-row `tags/tags_auto.csv` merge is PR #3133.
+
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
