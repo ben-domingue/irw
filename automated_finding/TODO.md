@@ -32,35 +32,45 @@ merged, and the 552-row `tags/tags_auto.csv` merge is PR #3133.
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
-## Repos discovery sweep 2026-10-21 — triaged, nothing processed
+## Repos sweep 2026-10-21 — 13 tables staged, AWAITING UPLOAD
 
-Full write-up in `BATCH_LOG.md` (2026-10-21). 1,278 candidates, 330 triaged
-after ledger exclusion. Leads: `leads/repos_leads_2026-10-21.csv` (153 rows).
+Full write-up in `BATCH_LOG.md` (2026-10-21 and 2026-10-21b). All ten `good`
+rows worked to a decision; seven shipped, three did not.
 
-- [ ] **Work the 10 `good` rows and the 8 `worth_retrying`.** Both sets are in
-  the leads file as `status=unworked`. Licence must be verified on the source
-  page before any script is written, and check `grep -r "<doi>" ../data/*.py`
-  over the WHOLE header, not just the `# DOI:` line.
-- [ ] **28 `recoverable_format` rows** — wrong delimiter or a per-scale split;
-  each needs one re-read with a different reader before it can be judged.
-- [ ] **40 of the 101 `download_failed` rows are retryable tooling failures**
-  (dryad 401 x12 + 429 x3, dataverse 400 x8, figshare 404 x7, 9 reader/encoding
-  errors, datacite 401 x1) and every one is already in
-  `repo_triage_seen_keys.csv` as `download_failed`, so a later run will skip
-  them. Reopen with
-  `python3 seen_ledger.py drop repo_triage_seen_keys.csv --flag download_failed --before 2026-10-22 --apply`
-  once the resolvers are fixed. The other 61 are HTTP 403 on restricted files
-  and are correctly closed (`status=blocked_access`).
-- [ ] **Decide whether `surf` (DataverseNL) is worth querying at all.** It
-  supplied 214 of the 1,278 candidates — a sixth of the sweep — and **26 of 26**
-  triaged rows were 403 on the data file. If its holdings are systematically
-  access-restricted, the connector is spending candidate budget for nothing.
-- [ ] **2 `pii_suspected` rows** need the 2026-10-20 ruling applied (names and
-  emails skip the candidate; geographic codes drop the column and the rest
-  ships).
-- [ ] **`human_review/human_review_zenodo_2026-10-21.csv` is untracked** — 32
-  rows (18 from the 10-20b resume, 14 from this sweep). It is a standing record
-  and needs committing.
+- [ ] **13 response tables + 5 item text tables need uploading.**
+  `automated_finding/irw_output/` (13 tables, 124,864 responses; see its
+  MANIFEST.txt) goes first, then `automated_finding/itemtext_output/` (5
+  `__items.csv`). All 13 pass `irw-validate`'s upload profile with no errors;
+  the 5 item text tables pass the whole gate chain and the folder holds nothing
+  but `*__items.csv`. Uploading is human-triggered -- not run from here.
+- [ ] **After Ben confirms the upload**, stamp `uploaded=<date>` in
+  `itemtext_provenance.csv` (5 shipped rows) and in the 5
+  `itemtext/mapping_verification.csv` rows. Not before.
+- [ ] **Strip a trailing `.sNNN` in `_load_auto_exclusions()`.** A Frontiers
+  Supporting Information DOI appends `.s001` to the article DOI, so
+  `10.3389/fpsyt.2022.827519.s001` did not match the six `wang2022_*` rows
+  already in `metadata/biblio.csv` and the deposit resurfaced as a `good`
+  candidate. Caught by hand this time.
+- [ ] **`automated_finding/itemtext_provenance.csv` has no
+  `translation_source` column**, which the schema requires of a
+  `translated_substitute` row (`check_provenance.R` fails a blank one). The two
+  `li_2023_*` rows carry it as a labelled sentence inside `note` because the
+  column does not exist. `check_provenance.R` only walks
+  `itemtext/itemtables/**/provenance.csv`, so nothing failed -- but the batch
+  file cannot express the field, and it should get the column.
+- [ ] **Three item text tables are rights-clear and in hand but owe a
+  translation pass**: `saputra_2025_fomo_consumer` (Indonesian),
+  `andreu_sanchez_2023_information_sources` and `_lifestyle` (Spanish). The
+  wording is in each deposit's own sheets; shipping it means an English gloss
+  in the `_translated` fields, which is IRW-generated content and owes an
+  `itemtext_issues.qmd` line. Deferred, not forgotten -- see
+  `itemtext_provenance.csv`.
+- [ ] **Still open from the sweep itself** (unchanged by this pass):
+  the 8 `worth_retrying` rows, the 28 `recoverable_format` rows, the 40
+  retryable `download_failed` keys, the 2 `pii_suspected` rows, and the `surf`
+  (DataverseNL) connector question -- 214 candidates, 26 of 26 triaged rows
+  403. All carried in `leads/repos_leads_2026-10-21.csv`, whose 10 `good` rows
+  now hold their outcomes.
 
 ## Blotner people-pleasing deposit: 5 tables UPLOADED, pipeline run owed (2026-10-21)
 
