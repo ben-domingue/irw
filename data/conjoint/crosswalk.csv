@@ -1794,3 +1794,7 @@
 "profile_gender","ogrady_2026_welfare_sanctions","attr_claimant_name","Marek","male","name","vignette pronouns (she/he) in Welfare_description of the deposit"
 "profile_gender","liu_2026_instructor_identity","attr_professor_pronouns","she/her/her","female","explicit","attribute lists in Data Analysis.R (she/her/her and he/his/him; they/their/theirs left out)"
 "profile_gender","liu_2026_instructor_identity","attr_professor_pronouns","he/his/him","male","explicit","attribute lists in Data Analysis.R (she/her/her and he/his/him; they/their/theirs left out)"
+"profile_gender","arnesen_2019_candidate_choice","attr_gender","Female","female","explicit","level text; the authors' English labels in raw/labels-exp-represent.xlsx and raw/labels-exp-predict.xlsx translate Norwegian Kvinne/Mann"
+"profile_gender","arnesen_2019_candidate_choice","attr_gender","Male","male","explicit","level text; the authors' English labels in raw/labels-exp-represent.xlsx and raw/labels-exp-predict.xlsx translate Norwegian Kvinne/Mann"
+"profile_gender","arnesen_2019_attitude_prediction","attr_gender","Female","female","explicit","level text; the authors' English labels in raw/labels-exp-represent.xlsx and raw/labels-exp-predict.xlsx translate Norwegian Kvinne/Mann"
+"profile_gender","arnesen_2019_attitude_prediction","attr_gender","Male","male","explicit","level text; the authors' English labels in raw/labels-exp-represent.xlsx and raw/labels-exp-predict.xlsx translate Norwegian Kvinne/Mann"
