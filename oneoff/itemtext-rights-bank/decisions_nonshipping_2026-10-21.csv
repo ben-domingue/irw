@@ -1,0 +1,32 @@
+table,shard,family,verdict,action,evidence
+kushnir2017_bfi__items,irw_text_2,BFI-44,block,withdraw,44 of 44 items verbatim
+oxfordcovid_xue_2024_bfi__items,irw_text,BFI-44,block,withdraw,"15-item form, 15 verbatim"
+reinhardt_2023_self_concept_clarity__items,irw_text_3,SCCS,block,withdraw,12 of 12 verbatim
+personalitychange_kramer_2025_sccs__items,irw_text_3,SCCS,block,withdraw,12 of 12 verbatim
+sv-maia2_randelovic_2021_erq__items,irw_text,ERQ,block,withdraw,10 of 10 in item_text_translated
+ecps_sahm_2024_emotion__items,irw_text,ERQ,block,withdraw,8 items verbatim
+girma_2024_mlq__items,irw_text_3,MLQ,block,withdraw,10 of 10 verbatim
+dpt_noncog__intolerance_of_uncertainty__items,irw_text,IUS,block,withdraw,"IUS-27, 16 items verbatim"
+wallace_2026_s2c_intoluncert__items,irw_text_3,IUS,block,withdraw,"5-item subset, all verbatim IUS items"
+kasparek_2025_bpaq__items,irw_text_3,BPAQ,hold,withdraw,29 of 29 verbatim
+almuqbil_2022_epds__items,irw_text,EPDS,hold,withdraw,10 of 10 verbatim
+florida_twins_dweck__items,irw_text,ITIS-Dweck,hold,withdraw,8 of 8 verbatim
+wallace_2026_iqbelief__items,irw_text_3,ITIS-Dweck,hold,withdraw,"3 items verbatim, the fixed-mindset set"
+reyes_2022_eheals__items,irw_text_2,eHEALS,hold,withdraw,8 of 8 verbatim
+zhou_2025_ehealth_literacy__items,irw_text_2,eHEALS,hold,withdraw,"8 of 8, study's own rendering (rule 6)"
+fernandez_prados_2025_gaais__items,irw_text_3,GAAIS,hold,withdraw,8 items in item_text_translated
+pavic_2022_vaccine_conspiracy__items,irw_text_2,VCBS,hold,withdraw,7 of 7 verbatim
+makovi_2021_symbolic_racism__items,irw_text_3,RACIAL_RESENT,hold,withdraw,11 items verbatim
+silva_2018_mbds__items,irw_text_2,MBDS,hold,withdraw,"Portuguese, full scale (rule 6)"
+christensen_2018_wsssf_2171__items,irw_text_2,WSSSF,hold,withdraw,ruled by Ben 2026-10-18 (#3075); withdrawal never ran
+christensen_2018_wsssf_5831__items,irw_text_2,WSSSF,hold,withdraw,ruled by Ben 2026-10-18 (#3075); withdrawal never ran
+conspiracy_asd__schizotypy__items,irw_text,WSSSF,hold,keep_wrong_instrument,"37 items: Multidimensional Schizotypy Scale, NOT the Wisconsin short forms. Needs its own register row"
+gps_vangsness_2019__items,irw_text,Tuckman,hold,keep_wrong_instrument,"Lay (1986) General Procrastination Scale, not Tuckman. No register row exists"
+c19prc_uk_mcbride_2021_vaccineattitudes__items,irw_text_3,VCBS,hold,keep_incidental,one item overlaps the VCBS in an otherwise different battery
+cavalini_mokken__items,irw_text_2,Cavalini,hold,ruling_needed_likely_ship,17 short coping-ACTION labels; word-list rule says this is not wording
+dasilva_2019_hexaco24__items,irw_text,HEXACO,block,ruling_needed,"24 verbatim HEXACO-24 (Brief HEXACO) items; register blocks HEXACO-PI-R only, and that row has NO text pattern"
+reinwarth_2023_domain_importance__items,irw_text_2,FLZM,hold,ruling_needed_likely_ship,eight German life-domain labels; word-list rule says this is not wording
+yuebo_2024_netbenefit__items,irw_text_2,ISS-TPACK-Yuebo,hold,ruling_needed,"live, and its hold row is the one saying the PsycTESTS question needs PsycNET"
+moon_2023_pregnancy_stress__items,irw_text,PPP-Curry,hold,ruling_needed,looks like the Prenatal Psychosocial Profile in the study's own rendering; not confirmed against the instrument
+moon_2023_selfesteem__items,irw_text,PPP-Curry,hold,keep_wrong_instrument,"is the Rosenberg, which ships on an express grant"
+gerou_2023_dass21__items,irw_text_3,DASS,hold,keep_wrong_instrument,"English DASS-21, public domain; the hold covers the Greek translation only"
