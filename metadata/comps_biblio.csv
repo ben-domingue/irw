@@ -122,6 +122,17 @@ fivethirtyeight_soccer_2016_2023,NA,NA,FiveThirtyEight. Club soccer predictions 
   url={https://github.com/fivethirtyeight/data/tree/master/soccer-spi},
   note={Captured 2025-03-06}
 }",NA
+footballcharts_2023_2026,NA,10.5281/zenodo.23348754,"Devetak, D. (2026). Football Match Results and Goal Timing, 92 Leagues (2023-2026) (Version 2026.10) [Data set]. Zenodo.",https://doi.org/10.5281/zenodo.23348754,CC BY 4.0,CC BY 4.0,NA,"League football matches 2023-02-17 to 2026-07-05, 92 league competitions in 42 countries incl. 4 women's leagues (76,988 matches, 1,818 clubs); agent_a = home side, homefield ""agent_a"" throughout (league matches only, so no neutral-site flag); half-time scores and the minute of every goal on 92.3% of rows.","@misc{https://doi.org/10.5281/zenodo.23348754,
+  doi = {10.5281/ZENODO.23348754},
+  url = {https://zenodo.org/doi/10.5281/zenodo.23348754},
+  author = {Devetak, Damir},
+  keywords = {football, soccer, sports analytics, goal timing, match results, Dixon-Coles, multi-league, open data, lower divisions, women's football, stoppage time, goal minutes},
+  title = {Football Match Results and Goal Timing, 92 Leagues (2023–2026)},
+  publisher = {Zenodo},
+  year = {2026},
+  copyright = {Creative Commons Attribution 4.0 International}
+}
+",NA
 footbayes_england,10.32614/CRAN.package.footBayes,NA,NA,https://cran.r-project.org/web/packages/footBayes/index.html,GPL-2.0,GPL-2.0,NA,Top 4 England tiers from 1888/89 season to 2021/22 season.," @misc{Egidi_2022, title={footBayes: Fitting Bayesian and MLE Football Models}, url={http://dx.doi.org/10.32614/CRAN.package.footBayes}, DOI={10.32614/cran.package.footbayes}, journal={CRAN: Contributed Packages}, publisher={The R Foundation}, author={Egidi, Leonardo and Macrì Demartino, Roberto and Palaskas., Vasilis}, year={2022}, month=feb }
 ",NA
 footbayes_italy,10.32614/CRAN.package.footBayes,NA,NA,https://cran.r-project.org/web/packages/footBayes/index.html,GPL-2.0,GPL-2.0,NA,Top tier in Italy from 1934/35 season to 2021/22 season.," @misc{Egidi_2022, title={footBayes: Fitting Bayesian and MLE Football Models}, url={http://dx.doi.org/10.32614/CRAN.package.footBayes}, DOI={10.32614/cran.package.footbayes}, journal={CRAN: Contributed Packages}, publisher={The R Foundation}, author={Egidi, Leonardo and Macrì Demartino, Roberto and Palaskas., Vasilis}, year={2022}, month=feb }

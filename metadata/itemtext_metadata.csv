@@ -192,6 +192,8 @@ baruah_2026_qfi,"Fake News Identification (QFI), Baruah 2026",9.6,65.5,11.6,10.3
 baruah_2026_qfta,"Fake News Fact-checking Tactics Applied (QFTA), Baruah 2026",8.9,57.8,11.6,7.29196907216495
 baruah_2026_trr_att,"Trust Repair Response, attributed causes (TRR-P2), Baruah 2026",8,46,11.6,5.44071428571429
 baruah_2026_trr_own,"Trust Repair Response, own reactions (TRR-P1), Baruah 2026",4.85714285714286,30.7142857142857,11.6,3.89142857142857
+baseke_2026_gad7,Generalized Anxiety Disorder 7-item scale (GAD-7),6.85714285714286,43,26.25,7.73428571428571
+baseke_2026_phq8,Patient Health Questionnaire-8 (PHQ-8),11.625,67.625,26.25,7.15553113553114
 bate_2019_srq,Super Recognizer Questionnaire (SRQ),12.1,67.8,7.4,7.25488524590164
 baumgaertner_2018_vaccine_trust,"Vaccination likelihood under low-risk and high-risk scenarios (study-specific items; Baumgaertner, Carlisle & Justwan, 2018)",7,55.8333333333333,13,15.7971428571429
 bauwens_2022_autonomy,Autonomy (Dutch),1,2,15.2857142857143,-3.4
@@ -227,6 +229,7 @@ blanc_2024_sexual_assertiveness,"Hurlbert Index of Sexual Assertiveness (asertiv
 blanc_2024_sos,"Sexual Opinion Survey (erotofobia-erotofilia), 16 items, 1-7",1,2,18.2857142857143,-3.4
 bled_2021_imagery_phenomenology,"Phenomenological characteristics of visual mental representations (Bled et al. 2021), 3 items",17,105.666666666667,15.6666666666667,9.28053921568628
 bled_2021_imagery_use,"Use of visual mental representations in everyday life situations (Bled et al., 2021 online questionnaire, items 5-11)",21.4285714285714,112.714285714286,6,8.81514285714286
+blotner_2026_people_pleasing,"People Pleasing Scale (Blötner, 2026), 15-item development pool, German (10 items retained in the published scale)",9.13333333333333,47.0666666666667,15.2,4.41539130434783
 bock_2025_epistemic_beliefs,"Epistemic beliefs about energy modelling and scenarios, 18 agreement items",1,2,17.6,-3.4
 bock_2025_responsibility,"Perceived responsibility and information asymmetry between modeller and decision-maker / scenario-user, 19 sliders 0-10",1,2,2,-3.4
 boudreau_2022_police_reform,Support for police-reform proposals (statewide law-enforcement survey),25.75,163.75,94.6,15.5321116504854
@@ -264,6 +267,7 @@ buzgova_2023_qol,"Older People's Quality of Life questionnaire, brief version (O
 buzgova_2023_rses,Rosenberg Self-Esteem Scale (RSES),10.2,46.4,11,3.0801568627451
 buzgova_2023_soc,"Sense of Coherence Scale, 13-item short form (SOC-13; Antonovsky's Orientation to Life Questionnaire)",14.0769230769231,75.3846153846154,6.56043956043956,5.49428571428572
 buzzi_2025_autonomy,Autonomy in everyday activities (study-specific),8,56.75,8.4,9.43962121212121
+byrne_2026_health_info_sources,"iHF health literacy survey, Section 4: health information sources",6.875,50.75,7,8.719
 c19prc_uk_mcbride_2021_activity,"C19PRC-UK Wave 2 lockdown activities (daily activity frequency, 12 items)",7.33333333333333,40.0833333333333,9,4.97
 c19prc_uk_mcbride_2021_childimpact,C19PRC-UK Wave 2: Perceived impact of the pandemic on children,11,61.6,14,4.612
 c19prc_uk_mcbride_2021_cmq,"Conspiracy Mentality Questionnaire (CMQ; Bruder, Haffke, Neave, Nouripanah & Imhoff, 2013)",12.4,77.6,6.09090909090909,251.711929824561
@@ -686,6 +690,7 @@ FEDSP_Trzcinska_2023_MonKnow,"Money knowledge measure, Family Economic Deprivati
 fedsp_trzcinska_2023_prd,Relative deprevation amongst children,15.4,77.8,6.5,6.20041558441558
 fedsp_trzcinska_2023_pspcsa,Self-esteem amongst children,4,21.0833333333333,13.4,93.0058333333333
 fedsp_trzcinska_2023_smsd,Material and social deprevation amongst children,2.69230769230769,18.3846153846154,11.5,8.10666666666667
+feng_2023_fas,Functionality Appreciation Scale (FAS),13.7142857142857,69.1428571428571,14,7.33181148748159
 fernandez_prados_2025_ai_uses,Uso de la IA,4.5,31.6666666666667,27.6,10.6390740740741
 fernandez_prados_2025_aias,"Artificial Intelligence Anxiety Scale (AIAS; Wang y Wang, 2019)",12.0714285714286,75.3571428571429,21.7142857142857,7.18
 fernandez_prados_2025_attari,"Attitudes towards Artificial Intelligence (Stein et al., 2024)",8,44.1666666666667,21.7142857142857,5.72166666666667
@@ -1039,6 +1044,13 @@ heekerens2025_dss,"Dissociative Symptoms Scale – German Version (G-DSS): Asses
 heekerens2025_phq,"Gesundheitsfragebogen für Patienten (PHQ-D), 8-item depression module (PHQ-8), German version",11.625,68.25,20.25,7.67421245421246
 heekerens2025_sdq,Somatoform Dissociation Questionnaire – 20-item (German SDQ-20): Assesses somatoform dissociation (body-related dissociative phenomena) over the past 2 weeks,14.7,84.45,15.8,7.19652749140893
 hellstrom_2019_isi,Insomnia Severity Index (ISI),1,2,8.37142857142857,-3.4
+henderson_2023_lapanel_comfort,"LSU Manship School Public Policy Research Lab Louisiana coronavirus panel survey (Henderson, NSF #2031591), waves 1-5",13.2857142857143,84.7857142857143,19,276.33
+henderson_2023_lapanel_econ_emotion,"LSU Manship School Public Policy Research Lab Louisiana coronavirus panel survey (Henderson, NSF #2031591), waves 1-5",8,53.1111111111111,12.6,134.606031746032
+henderson_2023_lapanel_fin_threat,"LSU Manship School Public Policy Research Lab Louisiana coronavirus panel survey (Henderson, NSF #2031591), waves 1-5",12.1111111111111,70.7777777777778,22.4,202.538
+henderson_2023_lapanel_health_emotion,"LSU Manship School Public Policy Research Lab Louisiana coronavirus panel survey (Henderson, NSF #2031591), waves 1-5",8,51.4545454545455,12.6,156.934025974026
+henderson_2023_lapanel_health_threat,"LSU Manship School Public Policy Research Lab Louisiana coronavirus panel survey (Henderson, NSF #2031591), waves 1-5",13.1111111111111,70.7777777777778,22.4,215.255412844037
+henderson_2023_lapanel_policy_support,"LSU Manship School Public Policy Research Lab Louisiana coronavirus panel survey (Henderson, NSF #2031591), waves 1-5",22.3333333333333,136.777777777778,17.6,385.173846153846
+henderson_2023_lapanel_worry,"LSU Manship School Public Policy Research Lab Louisiana coronavirus panel survey (Henderson, NSF #2031591), waves 1-5",20.25,114.375,15.6,10.5417338709677
 herrera_2018_se_d_items,"Empathy and Personal Distress (state emotion ratings adapted from Batson, Early & Salvarani, 1997)",1,9.25,4.14285714285714,15.775
 herreromontes_2022_audit,"Alcohol Use Disorders Identification Test (AUDIT), Spanish version (Rubio Valladolid et al., 1998)",1,2,12.2391304347826,-3.4
 heryanda_2025_gamification_features,"Gamification features in digital banking apps (rewards, levels, points), 12 items",15.6666666666667,89.75,2,9.7263829787234
@@ -1183,6 +1195,9 @@ jo_2023_sni,"Social Networking Intensity (3 items, adapted from Eid & Al-Jabri 2
 jo_2023_sno,"Subjective Norms (3-item scale adapted from Ajzen 1991, Theory of Planned Behavior)",17,104,2,10.8781481481481
 johannisson_2016_ipip_neo,IPIP-NEO-120 (120-item International Personality Item Pool representation of the NEO-PI-R),4.55833333333333,26.2583333333333,19.8,4.54570246800731
 johnhenderson_2020_health_mindset,Health Mindset Scale,15,78.6666666666667,6.5,4.94444444444445
+jones_2026_agi,"Attitudes to artificial general intelligence (Jones, Thinking Machines, Pondering Humans)",11,56.6666666666667,2,5.86363636363636
+jones_2026_ai_fear_2021,"Fears about artificial intelligence (Jones, Thinking Machines, Pondering Humans)",21.8571428571429,132.571428571429,2,12.5238281979458
+jones_2026_tech_familiarity,"Familiarity with computer-related items (Jones, Thinking Machines, Pondering Humans)",10.6,75.8,2,10.0897905982906
 jordan_2020_burnout,"Copenhagen Burnout Inventory (personal burnout items and four work-related burnout items, school/work adaptation)",9.4,50.2,8.8,4.73732989690722
 jordan_2020_mindfulness,"Five Facet Mindfulness Questionnaire (FFMQ), 12-item short-form selection",15.6666666666667,82.75,17,7.40404255319149
 jordan_2020_resilience,Brief Resilience Scale (BRS),11,56.1666666666667,10.2,3.91126865671642
@@ -1747,6 +1762,7 @@ odachi_2022_fear_covid19,"Fear of COVID-19 Scale (FCV-19S), Japanese version",9.
 offlinefriend_ofaq,Offline-Friend Addiction Questionnaire (O-FAQ),13.9459459459459,72.5945945945946,14,5.17810810810811
 ojelabi_2019_sf36,"RAND 36-Item Health Survey 1.0 / MOS 36-Item Short Form Survey (SF-36), version 1",9.44295302013423,52.261744966443,15.1208053691275,5.21826695859151
 oliveira_2026_healthcare_experiences,"Healthcare experiences and experienced weight stigma inventory, 11 items",14.5,82.6190476190476,2,7.61967980295567
+olmos_gomez_2026_ai_mathematics,"Perceptions of artificial intelligence in mathematics education (Olmos-Gómez et al. 2026 ad hoc questionnaire, 9 items)",12.4444444444444,77.8888888888889,11.6,9.91507246376812
 omale_2025_ppd_beliefs,Beliefs about postpartum depression,1,2,10.6,-3.4
 omale_2025_ppd_control,Perceived control and barriers to seeking help for postpartum depression,1,2,10.6,-3.4
 omale_2025_ppd_info_sources,Sources of information on postpartum depression,1,2,10.6,-3.4
