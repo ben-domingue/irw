@@ -94,6 +94,22 @@ metadata/logs/codebook_table_names.json
 !metadata/conj_refresh_stamps.csv
 ##The same for the rankings family (18_rankings.R, #3039).
 !metadata/rank_refresh_stamps.csv
+##Tier-0 per-item statistics (19_item_classical.py, #1710) are NOT committed,
+##unlike every other pipeline output above, and the reason is size: one row per
+##table-item is 1,125,820 rows and 78 MB at full corpus coverage, rewritten on
+##every run. GitHub warns past 50 MB and refuses past 100, which the next few
+##hundred tables would reach. What the repo keeps instead is the four summary
+##columns the file is reduced to, which live in metadata.csv and upload with it.
+##
+##Nothing is lost by regenerating: the whole corpus recomputes in ~16 minutes,
+##so the store is a derived artifact like the *.diff.csv files, not state. The
+##stamps beside it are per-run bookkeeping for the same reason -- committed,
+##they would be 6,651 timestamps changing on every run and nothing else.
+##
+##Where the per-item table belongs is a published Redivis dataset; 100% coverage
+##on the first run is the trigger Ben set for that move on 2026-10-18.
+metadata/item_classical.csv
+metadata/item_classical_stamps.csv
 ##Which published biblio cells the dictionary corrected on this run (#2001).
 ##Committed because it is the first run's review surface -- 336 cells across 223
 ##tables is a list a person can read, where the same change in biblio.csv is a

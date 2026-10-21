@@ -91,6 +91,11 @@ jobs:
           python metadata/tests/test_find_codebook_links.py -v
           python metadata/tests/test_check_label_harvest.py -v
 
+      # Tier-0 item statistics (#1710): the rotation's batch packing and what
+      # the four metadata.csv columns mean. Offline -- no Redivis.
+      - name: tier-0 item statistics (stage 19)
+        run: python metadata/tests/test_item_classical.py -v
+
       # Drift-report name normalisation. Offline.
       - name: drift report names
         run: python metadata/tests/test_drift_names.py -v

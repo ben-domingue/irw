@@ -176,7 +176,8 @@ declare -A STAGE_SCRIPT=( [01]=01_metadata.R [02]=02_biblio.R [03]=03_tags.R
                           [11]=11_status.R [12]=12_stragglers.R
                           [13]=13_script_index.py [14]=14_column_docs.py
                           [15]=15_codebook_links.py [16]=16_conjoint.R
-                          [17]=17_coverage.R [18]=18_rankings.R )
+                          [17]=17_coverage.R [18]=18_rankings.R
+                          [19]=19_item_classical.py )
 
 # Stages whose non-zero exit is a FINDING, not a failure. 12 exits 1 when a
 # table has been stuck for several runs -- that is the report doing its job, and
@@ -207,13 +208,21 @@ declare -A STAGE_OUTPUTS=(
   [16]="conj_metadata.csv conj_outcomes.csv"
   [17]="coverage_matrix.csv"   # + coverage_report.md, not diffed (prose)
   [18]="rank_metadata.csv rank_refresh_stamps.csv"
+  [19]=""   # item_classical.csv and its stamps are gitignored (78 MB, see
+            # .gitignore) and metadata.csv was snapshotted before stage 01, so
+            # diffing it again here would only reprint 01's diff. The stage
+            # reports its own coverage line instead.
 )
 # 16 (conjoint) and 18 (rankings) run with 05/06/07, before 02: conj_metadata.csv
 # and rank_metadata.csv are 02's liveness oracles for conj_biblio and
 # rank_biblio, exactly as comps_metadata.csv is for comps.
 # 17 runs last: it reads every other stage's output and judges the live corpus
 # against it, so it has to see the run's final CSVs.
-DEFAULT_ORDER=(01 05 06 07 16 18 02 03 08 10 11 12 13 14 15 17)
+# 19 (tier-0 item statistics, #1710) runs straight after 01: it reads
+# metadata.csv for the table list and joins four summary columns back onto it,
+# and 01 rebuilds that file from base.cols alone, so anything 19 adds has to go
+# on after 01 has run and before the stages that read metadata.csv downstream.
+DEFAULT_ORDER=(01 19 05 06 07 16 18 02 03 08 10 11 12 13 14 15 17)
 
 # Join key for the diff, per output file. Everything is keyed on `table` except
 # the two collections outputs (issue #1633): the registry is one row per
@@ -227,6 +236,8 @@ declare -A DIFF_KEY=(
   [codebook_links_checked.csv]="table,data_url"
   [conj_outcomes.csv]="table,outcome"
   [coverage_matrix.csv]="table,source"
+  [item_classical.csv]="table,item"   # unused while 19 has no diffed output;
+                                      # kept so a future committed store sorts right
 )
 
 stages=()
