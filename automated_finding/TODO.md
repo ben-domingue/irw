@@ -43,11 +43,19 @@ rows worked to a decision; seven shipped, three did not.
   If any individual table did not in fact go up, that stamp is the thing to
   correct -- the staged copies are in `automated_finding/irw_output/` and
   `itemtext_output/` with a MANIFEST until Ben clears them.
-- [ ] **Strip a trailing `.sNNN` in `_load_auto_exclusions()`.** A Frontiers
-  Supporting Information DOI appends `.s001` to the article DOI, so
-  `10.3389/fpsyt.2022.827519.s001` did not match the six `wang2022_*` rows
-  already in `metadata/biblio.csv` and the deposit resurfaced as a `good`
-  candidate. Caught by hand this time.
+- [x] **Supplementary-file DOIs no longer re-surface an ingested paper**
+  (done 2026-10-21). `is_excluded()` in `irw_discover_updated.py` now tries a
+  candidate in both forms and `_load_auto_exclusions()` carries the article DOI
+  behind every supplement DOI in the set, so the match works whichever form
+  each side recorded; all three discovery modes use it. The suffix rule itself
+  is `doi_hygiene.strip_supplement_suffix()` -- one definition, not two.
+  Verified against the live exclusion set: `10.3389/fpsyt.2022.827519.s001`
+  now returns "supplement". 9 tests in
+  `tests/test_supplement_doi_exclusion.py`; full suite 216 passing.
+  A "supplement" match is deliberately coarser than an exact one -- it also
+  hides a *different* attached file of an ingested paper, e.g. an `.s002`
+  holding a second instrument -- so repos mode prints the count rather than
+  dropping them silently.
 - [ ] **`automated_finding/itemtext_provenance.csv` has no
   `translation_source` column**, which the schema requires of a
   `translated_substitute` row (`check_provenance.R` fails a blank one). The two

@@ -48,6 +48,7 @@ import requests
 
 from irw_discover_updated import (
     Hit, is_relevant, norm_doi, _load_auto_exclusions, in_runs_dir,
+    is_excluded,
 )
 from irw_batch_updated import (
     check_license, TABULAR_EXT, polite_get, FileTooLarge,
@@ -465,7 +466,8 @@ def main():
             for q in args.queries:
                 print(f"[{journal}] [query] {q}", flush=True)
                 for hit in from_plos(q, journal):
-                    if hit.doi in seen or hit.doi in exclude or hit.doi in global_seen:
+                    if (hit.doi in seen or hit.doi in global_seen
+                            or is_excluded(hit.doi, exclude)):
                         continue
                     seen.add(hit.doi)
                     row, pool = process_one_isolated(hit, pool)

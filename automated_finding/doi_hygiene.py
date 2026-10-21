@@ -95,6 +95,26 @@ DOI_RE = re.compile(r"10\.\d{4,9}/\S+")
 ##reports one.
 DOI_PREFIX_RE = re.compile(r"10\.\d{4,9}/")
 
+##`.s001` is a PLOS/Frontiers *supplementary file* DOI minted under the
+##article's own DOI. Exposed as a module constant because discovery needs the
+##same rule to see that an SI DOI and its article DOI name the same paper --
+##`is_excluded()` in irw_discover_updated.py. There must be one definition of
+##this suffix in the repo, not two that can drift: on 2026-10-21 discovery
+##re-surfaced 10.3389/fpsyt.2022.827519.s001 as a `good` candidate although its
+##article DOI was already in the dictionary as six `wang2022_*` tables, because
+##the exclusion compared the DOIs verbatim and this rule lived only here.
+##Exactly three digits, deliberately: a Mendeley `.1` or a figshare `.v4` is a
+##version, not a supplement, and an article DOI can end in digits of its own.
+SUPPLEMENT_SUFFIX_RE = re.compile(r"\.s\d{3}$")
+
+
+def strip_supplement_suffix(doi):
+    """The article DOI behind a supplementary-file DOI, or the input unchanged.
+
+    `10.3389/fpsyt.2022.827519.s001` -> `10.3389/fpsyt.2022.827519`.
+    """
+    return SUPPLEMENT_SUFFIX_RE.sub("", (doi or "").strip())
+
 
 def normalize(value):
     """Strip the mechanical wrappers. Returns (cleaned, [rules applied]).
@@ -122,7 +142,7 @@ def normalize(value):
 
     ##`.s001` is a PLOS/Frontiers *supplementary file* under the article's DOI.
     ##It resolves to the supplement, not the article; the article is the stem.
-    stripped = re.sub(r"\.s\d{3}$", "", s)
+    stripped = strip_supplement_suffix(s)
     if stripped != s:
         s, _ = stripped.strip(), rules.append("drop-supplement-suffix")
 

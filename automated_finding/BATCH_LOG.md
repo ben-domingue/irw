@@ -22342,3 +22342,43 @@ for the six deposits that ship none), 13 tag rows in
 `mapping_verification.csv` rows, 13 `itemtext_provenance.csv` rows, 2
 instrument-rights-register rows. No `covariate_labels/harvest.py` is owed:
 none of these scripts reads a `.sav` or `.dta`.
+
+## 2026-10-21c — supplementary-file DOIs no longer re-surface an ingested paper
+
+The defect the 2026-10-21b batch found by hand, fixed. Frontiers and PLOS mint
+one DOI per attached file by appending `.s001`, `.s002`, ... to the article's
+own DOI, and figshare/DataCite index those as records in their own right. The
+exclusion sets hold whatever form the dictionary recorded -- usually the bare
+article DOI -- and the comparison was verbatim, so `10.3389/fpsyt.2022.827519
+.s001` arrived as a `good` candidate while `10.3389/fpsyt.2022.827519` was
+already live as six `wang2022_*` tables.
+
+- `doi_hygiene.strip_supplement_suffix()` / `SUPPLEMENT_SUFFIX_RE` now expose
+  the rule that already existed inside `normalize()`. **One definition, not
+  two** -- the whole reason this slipped is that the rule lived in the DOI
+  hygiene tool and discovery had no access to it. Exactly three digits is
+  deliberate and is pinned by `tests/test_doi_hygiene.py`: a Mendeley `.1` or a
+  figshare `.v4` is a version, not a supplement.
+- `is_excluded(doi, exclude)` in `irw_discover_updated.py` tries the candidate
+  in both forms and returns `""` / `"exact"` / `"supplement"`. All three
+  discovery modes call it (`irw_discover_updated.discover`,
+  `irw_discover_plos.py`, `irw_discover_pmc.py`), so the scheduled connectors
+  get it too.
+- `_load_auto_exclusions()` returns `_with_supplement_bases(...)`, which adds
+  the article DOI behind every supplement DOI already in the set. That covers
+  the other direction: some dictionary rows record the SI DOI in `DOI (for
+  paper)`, and the bare article DOI must then be excluded as well.
+
+**The coarsening is real and is printed rather than hidden.** A `supplement`
+match also drops a *different* attached file of an ingested paper -- an `.s002`
+holding a second instrument. That is the right default (the deposit is triaged
+as a whole, and shipping one table twice costs more than revisiting one paper),
+but repos mode now ends with a `[exclude] N hit(s) dropped as a
+supplementary-file DOI of a paper already accounted for` line so a run that
+loses real leads this way is visible.
+
+Verified against the LIVE exclusion set (4,140 DOIs), not just a fixture:
+`10.3389/fpsyt.2022.827519.s001` -> `supplement`, the bare article DOI ->
+`exact`, and today's two shipped deposits -> not excluded (their biblio rows
+do not reach the published dictionary until the pipeline runs). 9 new tests in
+`tests/test_supplement_doi_exclusion.py`; the full suite is 216 passing.
