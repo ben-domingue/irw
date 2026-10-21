@@ -8,16 +8,43 @@ release", "at upload" or "release is owed" is now DUE, not pending** -- there
 are at least eight such bullets below, dating back several batches, and they
 were all waiting on this one event.
 
-The one that gates the others:
+The one that gated the others is **done**:
 
-- [ ] **`python3 metadata/covariate_labels/build.py`, then commit
-  `covariate_labels.csv`.** One run covers every batch's pending harvest at
-  once -- `harvest.py` has already been run for the batches below, and `build.py`
-  only emits rows for tables that are live, which is why it had to wait. Expect
-  a large diff (one earlier estimate was ~8,000 lines of other batches' pending
-  harvests) and review it as its own PR rather than folding it into a data PR.
-  This is a manual stage on purpose: it re-runs build scripts (#1775), so no
-  scheduled job will ever do it.
+- [x] **`metadata/covariate_labels/build.py` run 2026-10-21, merged as PR
+  #3153.** One run covered every batch's pending harvest: +8,198 rows, none
+  removed, for 14,604 rows over 836 tables and 3,496 table x covariate pairs,
+  with `coverage.csv` recording all 3,710 pairings (3,480 included, 214
+  excluded, 16 withheld). The ~8,000-line estimate was right. Seven reviewed
+  `covariate_labels/institutions.csv` lines went in with it, cutting the
+  build's unreviewed-institution warnings from 22 to 2; the two that remain
+  (`hernandez_martinez_2025_math_attitudes` cov_institution,
+  `yang_2026_appreciative_education` cov_school_runs_ae) are unruled on purpose
+  -- their source column could not be identified in the harvest logs, so they
+  stay withheld by default and keep warning. This stays a manual stage (#1775):
+  no scheduled job will ever run it, so the NEXT release owes it again.
+
+- [ ] **36 of the 499 covariate-label harvests produced an EMPTY log, so those
+  tables have no covariate labels and nothing said so.** Found while running
+  `build.py` on 2026-10-21. The list is
+  `metadata/covariate_labels/harvest_empty.tsv` (script, recorded exit, why).
+  32 of the 36 failed because the raw source file was not on disk when the
+  harvest ran -- the scripts read from `automated_finding/runs/.../raw/`, which
+  is gitignored and disposable, so re-running needs the raw files re-downloaded
+  first. Three things make this invisible rather than loud:
+    * `build.py` cannot tell "no labelled source" from "the harvest crashed" --
+      a script with an empty log simply contributes no pairs, and no coverage
+      row either, so it is absent from `coverage.csv` as well.
+    * **The exit code does not reveal it for 10 of the 36**, which
+      `harvest_status.tsv` records as `exit 0`: those scripts handle a missing
+      input by printing an error and returning 0 (e.g. `ders_valencia_2021`
+      "Error reading file", `sadism_west_2026` "File raw_data/SadismLR.sav does
+      not exist!", `xue_2024_covid_study` "No COVID data found"). A TODO entry
+      saying "all N exit 0" is therefore not evidence the harvest worked.
+    * 8 of the 36 are not in `harvest_status.tsv` at all.
+  So several per-batch TODO items below that read "harvest.py has been run for
+  this batch" are true and still produced nothing. The cheap fix for the next
+  run is for `harvest.py` to fail loudly on an empty log, and for `build.py`
+  to report scripts whose log is empty rather than skipping them silently.
 
 Also now due rather than pending, each detailed in its own section below: the
 issues-page entries owed by the 10-18 d/e/j/k batches and by
@@ -25,7 +52,7 @@ issues-page entries owed by the 10-18 d/e/j/k batches and by
 left blank in `metadata/table_changes.csv` for the three `kemp_2019_mss_*`
 repairs (derive the version from the manifest -- do not ask Ben for it).
 
-Nothing in THIS session's batch is owed at the release beyond `build.py`: its
+Nothing in THIS session's batch is owed at the release any more: its
 dictionary rows, tag rows, provenance and mapping rows are all written and
 merged, and the 552-row `tags/tags_auto.csv` merge is PR #3133.
 
@@ -185,9 +212,10 @@ before touching that folder or re-adding anything from it.
   `itemtext_provenance.csv` stamped `uploaded=2026-10-20` for the 7 shipped item
   text tables. Dictionary and tag coverage verified 87/87 each, with the item
   text flag agreeing with what shipped.
-- [ ] **Release is owed** -- everything landed on the unreleased draft of shard 7
-  and `irw_text`, as does everything ahead of it in this file. After the release:
-  `metadata/covariate_labels/build.py`, then commit `covariate_labels.csv`.
+- [x] **Released 2026-10-20, and the build that followed it is done** --
+  everything had landed on the unreleased draft of shard 7 and `irw_text`.
+  `metadata/covariate_labels/build.py` ran 2026-10-21 (PR #3153) and covered
+  this batch's harvest along with every other pending one.
 - [ ] **`metadata/data_notes.csv` rows are owed for this batch** and have not
   been written. Several tables carry a caveat a user would want on the table
   page: `wu_2025_flow_state` (`id` rests on a positional pretest/posttest
@@ -473,9 +501,9 @@ of those sections is now marked `[x]`.
 Because the release has happened, every item below written as "after the
 release" or "at upload" is **due now, not pending**:
 
-- [ ] `metadata/covariate_labels/build.py`, then commit `covariate_labels.csv`.
-  One run covers all of it; `harvest.py` has already been run for batches d, e,
-  f, i, j and k at their data commits.
+- [x] `metadata/covariate_labels/build.py` -- run 2026-10-21, PR #3153. One run
+  covered all of it, including batches d, e, f, i, j and k whose `harvest.py`
+  had already been run at their data commits.
 - [ ] The issues-page entries owed by batches d, e, j and k -- per-batch lists
   in each section below and in the matching BATCH_LOG entries.
 - [ ] `automated_finding/tags_auto_2026-10-18.csv` (301 rows) is written but is
