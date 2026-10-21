@@ -23,6 +23,22 @@ df <- df %>%
   filter(!(grepl("^promis_anx", item) & group == "Study 2 - Frame primed by symptom" & is.na(resp)))
 na_count <- which(is.na(df$resp))
 
+# Rights recode (irw#2101 precedent): the deposit's PROMIS column names carry the
+# bank's own symptom word -- promis_anx_apprehensive_frequency. PROMIS wording does
+# not ship (register verdict block, 2026-09-05), so the symptom word is replaced by
+# an index while the study's 16-stem x 5-frame design is kept intact. The index is
+# the alphabetical rank of the symptom word within its subscale, so no word list is
+# stored here and the recode regenerates from the raw file alone.
+promis <- grepl("^promis_(anx|dep)_", df$item)
+parts  <- regmatches(df$item[promis],
+                     regexec("^promis_(anx|dep)_(.+)_(ability|bothered|context|duration|frequency)$",
+                             df$item[promis]))
+sub    <- vapply(parts, `[`, "", 2)
+word   <- vapply(parts, `[`, "", 3)
+facet  <- vapply(parts, `[`, "", 4)
+rank   <- ave(word, sub, FUN = function(w) match(w, sort(unique(w))))
+df$item[promis] <- sprintf("promis_%s_%02d_%s", sub, as.integer(rank), facet)
+
 write.csv(df, "BF_BrummerHoffman_2021.csv", row.names=FALSE)
 
 ##bd add'n
