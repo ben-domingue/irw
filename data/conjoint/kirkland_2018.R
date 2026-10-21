@@ -2,6 +2,9 @@
 ##Kirkland, P. A., & Coppock, A. (2018). Candidate choice without party labels: New insights
 ##from conjoint survey experiments. Political Behavior, 40(3), 571-591.
 ##https://doi.org/10.1007/s11109-017-9414-8
+##Published errata (seven items, none changing a conclusion, none affecting these tables):
+##https://alexandercoppock.com/kirkland_coppock_2018_errata.pdf, code at
+##github.com/active-maintenance-aec/kirkland_coppock_2018. Summarised in the data_notes rows.
 ##Replication data: Harvard Dataverse doi:10.7910/DVN/WSUHI3, CC0 1.0. Files read (original
 ##format, both are .rdata despite the Dataverse extensions): mturk_replication.rdata
 ##(object mturk_clean), yougov_replication.rdata (object yougov_clean). Codebooks:
