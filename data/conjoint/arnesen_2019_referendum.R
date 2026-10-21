@@ -81,10 +81,16 @@
 ##trial_vignette_no; the attribute LEVELS are the authors' English labels (the percentages are
 ##language-neutral, the outcome labels are translations of "ja-siden"/"nei-siden"). So
 ##display_language = no, label_language = en.
-##Restrictions: the design is the full crossing of the three attributes plus each one's withheld state,
-##enumerated as the 144 deposited cells; no further restriction is documented. Cells are not equally
-##frequent in the realised sample (treat_id counts run 1-15), which is sampling, not a documented
-##weighting.
+##Restrictions and level frequencies - READ THIS BEFORE ESTIMATING. The design is the full crossing of
+##the three attributes plus each one's withheld state: 5 turnout x 4 majority x 3 outcome = 60 cells,
+##and all 60 appear in wiggle_treatments.csv. But the deposit enumerates those 60 cells as 144
+##`treat_id` lottery tickets, UNEVENLY: 36 cells hold one ticket, 12 hold three, 9 hold four, and the
+##three cells with both turnout and majority withheld hold TWELVE each. The codebook draws uniformly
+##over the 144 tickets (r7padpilot2_ran, range 1-144; all 144 are observed here), so the withheld
+##states are over-sampled by construction, not by chance: attr_turnout is "(not shown)" in 531 of
+##1,065 rows (50%) against 125-141 for each disclosed level, and attr_majority in 504 (47%) against
+##180-195. Level frequencies are therefore recorded as `observed` rather than `uniform`, and anything
+##that treats the levels as equiprobable will be wrong.
 library(data.table)
 a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]
 d <- fread(file.path(raw, "wiggle.csv"), encoding = "UTF-8", na.strings = c("NA", ""))
