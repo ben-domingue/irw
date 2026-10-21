@@ -10,14 +10,16 @@ were all waiting on this one event.
 
 The one that gates the others:
 
-- [ ] **`python3 metadata/covariate_labels/build.py`, then commit
-  `covariate_labels.csv`.** One run covers every batch's pending harvest at
-  once -- `harvest.py` has already been run for the batches below, and `build.py`
-  only emits rows for tables that are live, which is why it had to wait. Expect
-  a large diff (one earlier estimate was ~8,000 lines of other batches' pending
-  harvests) and review it as its own PR rather than folding it into a data PR.
-  This is a manual stage on purpose: it re-runs build scripts (#1775), so no
-  scheduled job will ever do it.
+- [x] **`metadata/covariate_labels/build.py` run 2026-10-21 -- PR #3153.**
+  +8,198 rows, none removed: 14,604 rows over 836 tables and 3,496 table x
+  covariate pairs, with coverage.csv recording all 3,710 pairings (3,480
+  included, 214 excluded, 16 withheld). The ~8,000-line estimate was right.
+  Seven reviewed `institutions.csv` lines went in with it, cutting the build's
+  unreviewed-institution warnings from 22 to 2; the two that remain
+  (`hernandez_martinez_2025_math_attitudes` cov_institution,
+  `yang_2026_appreciative_education` cov_school_runs_ae) are left unruled on
+  purpose -- their source column could not be identified in the harvest logs,
+  so they stay withheld by default.
 
 Also now due rather than pending, each detailed in its own section below: the
 issues-page entries owed by the 10-18 d/e/j/k batches and by
