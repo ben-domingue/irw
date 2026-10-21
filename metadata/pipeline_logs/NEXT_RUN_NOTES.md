@@ -26,6 +26,37 @@ Also fixed that day, no action needed now:
   `racialsocialnormsbrazilianstudents_portella_2022`).
 - `altahla_2024_swls` existed in two shards; deleted from shard 4.
 
+## NEW: stage 19 writes four psychometric columns into metadata.csv (#1710)
+
+First run with `19_item_classical.py`, which runs straight after 01. It queries
+every core table for per-item `n`, `mean`, `sd`, `n_levels`, `item_rest_r`,
+`min_resp` and `max_resp`, then reduces those to four columns on every
+metadata.csv row: `difficulty_spread`, `mean_item_rest_r`,
+`mean_abs_item_rest_r`, `prop_items_extreme`.
+
+What to expect in the log, and what would be wrong:
+
+1. `computed 6651 table(s) in ~950s` and `metadata.csv: 6651 of 6651 row(s)
+   carry tier-0 columns (100.0%)`. Anything well under 100% means tables failed;
+   they are named in the `! N table(s) failed` block and keep their old values
+   rather than going blank.
+2. **The stage adds ~16 minutes to the run.** The 2026-10-19 run was 2 h 49 m
+   against a 240-minute timeout, so this leaves ~55 minutes of headroom. If a
+   heavy-intake week ever gets close, `--per-run N` caps the stage instead of
+   disabling it.
+3. The per-item file it writes (`item_classical.csv`, 78 MB) is **gitignored on
+   purpose** -- it is regenerable in 16 minutes and would blow past GitHub's
+   file limit within a few hundred tables. Do not add it to the PR.
+4. The four columns ride to users inside `metadata.csv`, so they reach Redivis
+   through the ordinary `upload_meta.py` step and need nothing new there.
+   `irw_filter()` in both packages takes explicit named arguments, so filtering
+   *by* them is a separate package change.
+
+Two numbers worth sanity-checking the first time, because they are the ones a
+user would filter on: median `mean_abs_item_rest_r` should be about 0.49, and
+median `prop_items_extreme` should be 0 (floor and ceiling effects are rare;
+the quartiles are 0 too).
+
 ## NEW: 02_biblio.R derives a blank `Derived_License` (#2040)
 
 First run with `apply_derived_license()`. Expect two things in the stage 02 log,
