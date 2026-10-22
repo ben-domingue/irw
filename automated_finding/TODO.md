@@ -112,7 +112,16 @@ Full write-up in `BATCH_LOG.md` (2026-10-21d). Jobs 1, 3 and 4 of
 `leads/repos_leads_2026-10-21.csv` worked to a decision: 53 rows, 8 deposits
 shipping 35 response tables and 218,354 responses, 4 item text tables.
 
-- [ ] **35 response tables + 4 item text tables need uploading.**
+- [x] **35 response tables + 4 item text tables uploaded by Ben, 2026-10-21.**
+  `uploaded=2026-10-21` is stamped on the 4 shipped `itemtext_provenance.csv`
+  rows and the 4 `itemtext/mapping_verification.csv` rows. If any individual
+  table did not in fact go up, that stamp is the thing to correct -- the staged
+  copies are in `automated_finding/irw_output/` and `itemtext_output/` with a
+  MANIFEST until Ben clears them. **A release is owed** before these reach
+  `metadata.csv`, and with it the first `covariate_labels/build.py` run that
+  can pick up `cassidy_2024_*` (see the note below).
+
+  Original: **35 response tables + 4 item text tables need uploading.**
   `automated_finding/irw_output/` (with a MANIFEST) and
   `itemtext_output/`. Response tables first. All 35 pass `irw-validate`'s
   upload profile; the 4 item text tables PASS `normalize_nulls.R` ->
