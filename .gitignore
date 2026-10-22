@@ -106,8 +106,11 @@ metadata/logs/codebook_table_names.json
 ##stamps beside it are per-run bookkeeping for the same reason -- committed,
 ##they would be 6,651 timestamps changing on every run and nothing else.
 ##
-##Where the per-item table belongs is a published Redivis dataset; 100% coverage
-##on the first run is the trigger Ben set for that move on 2026-10-18.
+##Where it IS published is Redivis: `irw_meta.item_classical` (Ben, 2026-10-21 --
+##100% coverage on the first run was the trigger he set for that move on 10-18).
+##So the file is regenerated before an upload, not read out of git:
+##    python3 metadata/19_item_classical.py && cd metadata && python3 \
+##      ../.claude/skills/irw-site-update/scripts/upload_meta.py metadata item_classical
 metadata/item_classical.csv
 metadata/item_classical_stamps.csv
 ##Which published biblio cells the dictionary corrected on this run (#2001).
