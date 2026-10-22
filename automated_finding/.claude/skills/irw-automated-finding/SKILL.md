@@ -888,11 +888,35 @@ output-format one:
   (`zenodo.22749041`) and a `NOMBRE` column of schoolchildren's real surnames
   (`zenodo.20809`) stand unchanged, because those are the name/email tier.
 
-  Dates of birth, IP/GPS coordinates, phone numbers, national ID numbers and
-  free-text clinical narratives were not named in this ruling and stay where
-  the paragraphs below put them. A date of birth in particular is neither a
-  name/email nor a geographic code — treat it as still disqualifying and ask
-  if it is the only thing blocking a strong candidate.
+  Dates of birth, IP/GPS coordinates, phone numbers and national ID numbers
+  were not named in this ruling and stay where the paragraphs below put them.
+  A date of birth in particular is neither a name/email nor a geographic code
+  — treat it as still disqualifying and ask if it is the only thing blocking a
+  strong candidate.
+
+  **A short free-text CLINICAL self-report field is a drop-the-column case
+  too. Ruled 2026-10-21 by ben-domingue**, on exactly the question the
+  paragraph above tells you to ask. The candidate was
+  `10.1371/journal.pone.0211929` (Bottesi et al., the Italian IUS-R validation
+  battery): 761 respondents x ~361 item columns over 13 instruments, CC BY,
+  and the only thing standing in its way was two free-text follow-ups — "type
+  of psychological problem" (58 distinct answers, one of which narrates a
+  sibling's death) and "medication taken" (39 distinct, e.g. a named list) —
+  plus five of the same shape in its second file. No names, emails, dates of
+  birth, locations or IDs anywhere. **Drop the columns, in no form** (not as a
+  `cov_*`, not hashed, not bucketed), say so in the script header, and ship
+  the rest; the batch shipped 13 tables and 97,231 responses. Keep the binary
+  yes/no flags such a field follows up (`probl_psico`, `farmaci`) as
+  covariates — it is the free text that goes.
+
+  This narrows, and does not reverse, the "free-text clinical narratives"
+  wording further down. What that phrase is for is a clinical NARRATIVE — a
+  case note, a presenting-complaint paragraph, a treatment history written as
+  prose — not a one-line answer naming a condition or a drug. Judge the
+  column: if its job was to collect a condition or medication name and its
+  values are a few words each, drop it; if its job was to collect an account
+  of a patient, the deposit was never de-identified and the whole candidate is
+  a skip.
 
   The superseded reasoning is kept below because the detector it produced is
   still the right code; only the verdict it feeds changed.
@@ -949,7 +973,9 @@ output-format one:
   identifier that is never an item and never a covariate, not about whether
   the PII is structural — a column of names, emails, birthdates, IP/GPS,
   full postal codes, national ID numbers or free-text clinical narratives is
-  structural and still disqualifies the whole candidate.
+  structural and still disqualifies the whole candidate. (For the last of
+  those, read the 2026-10-21 narrowing above first: a one-line condition or
+  medication answer is a droppable column, a clinical narrative is not.)
 
   **Replace it with the row index, never a hash of it.** A hash looks
   anonymous and is not: 24-hex Prolific IDs are enumerable from other public
