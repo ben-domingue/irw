@@ -30,6 +30,7 @@
 ##        names as printed in this file; or the reserved values (write-in), (overvote)
 ##  resp  the position marked, 1 = first choice, as recorded; skips leave a gap
 ##  cov_* every other source column, snake_cased, repeated on each of the ballot's rows
+##        (a Count column of all 1s is dropped; see convert())
 ##Skipped cells are not rows. A ballot with no marks has no rows; the design record
 ##keeps n_ballots_cast and n_ballots_with_marks. Duplicate marks (one candidate at
 ##two positions) are kept as two rows. Candidate names are not stored anywhere: the
@@ -137,6 +138,17 @@ def convert(src: Path, meta: dict) -> tuple[list[dict], dict, list[str]]:
     assert rank_cols, f"{src.name}: no rank columns in {header}"
     cov_cols = [(snake(h), i) for i, h in enumerate(header)
                 if not RANK.match(h) and h.lower() not in ID_COLS]
+    ##The 2023 Minneapolis files lead with a Count column: the number of identical ballots
+    ##the row stands for. It is 1 on every row of every file read so far, so it says nothing
+    ##and is dropped rather than stored as cov_count. A value other than 1 is a ballot
+    ##weight, and the layout for weights is not settled (#3024), so stop there rather than
+    ##pass a weight off as a covariate or silently count the row once.
+    ccol = next((i for c, i in cov_cols if c == "cov_count"), None)
+    if ccol is not None:
+        other = sorted({row[ccol] for row in raw} - {"1"})
+        assert not other, (f"{src.name}: Count holds {other[:5]}, not 1 throughout; these are "
+                           f"ballot weights and the weights layout is unsettled (#3024)")
+        cov_cols = [(c, i) for c, i in cov_cols if c != "cov_count"]
 
     def classify(v: str):
         key = re.sub(r"[\s\-_]", "", v).lower()

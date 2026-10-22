@@ -33,6 +33,12 @@ One row per respondent × task × marked position. The core column names are kep
 | `cov_<name>` | ballot- or respondent-level columns from the source, as text, repeated on every row of the ballot: `cov_precinct`, `cov_ballot_style`, `cov_counting_group`, `cov_district`, `cov_voting_location`. |
 | `trial_<name>` | task-level details, if any (question order, survey arm). |
 
+A source column that is constant across every ballot of a file is not a covariate and is
+dropped. The name `cov_count` is reserved: a `Count` column in a cast vote record is the
+number of identical ballots a row stands for, which belongs to the collapsed layout still
+to be settled for the multi-million-ballot files, so `fairvote_cvr.py` drops `Count` while
+it is identically 1 and stops if it ever is not (#3024).
+
 Rules:
 
 - **Skipped positions are not rows.** A skip is visible as a gap in `resp`. A ballot with no marks has no rows; the design record keeps `n_ballots_cast` and `n_ballots_with_marks` so denominators survive.
