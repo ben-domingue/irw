@@ -15,3 +15,5 @@ blotner_2026_people_pleasing,cov_study,1,"Study 1 (scale derivation; commercial 
 blotner_2026_hexaco60,cov_study,1,"Study 1 (scale derivation; commercial panel Bilendi plus German university social-media groups, planned-missingness design)",data/blotner_2026_people_pleasing.py,data_PP_S1.csv,
 blotner_2026_people_pleasing,cov_study,2,Study 2 (replication and validation; predominantly students),data/blotner_2026_people_pleasing.py,dataS2.csv,
 blotner_2026_hexaco60,cov_study,2,Study 2 (replication and validation; predominantly students),data/blotner_2026_people_pleasing.py,dataS2.csv,
+luettgau_2026_political_knowledge,cov_study,2,"Study 2 (conversational AI -- GPT-4o, Claude or Mistral -- vs self-directed Google search)",data/luettgau_2026_political_ai.py,data/Ztable_misinfo_combined.csv,searchornot
+luettgau_2026_political_knowledge,cov_study,3,Study 3 (GPT-4o prompted to be persuasive or sycophantic vs GPT-4o under its default system prompt),data/luettgau_2026_political_ai.py,data/Ztable_misinfo_combined.csv,searchornot
