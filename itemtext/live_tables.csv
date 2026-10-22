@@ -1,4 +1,4 @@
-# item-text tables in the Redivis shards as of 2026-10-21
+# item-text tables in the Redivis shards as of 2026-10-22
 # status=published: a reader can fetch it. status=draft: uploaded, not released yet.
 # generated -- do not hand-edit; rerun itemtext/refresh_live_tables.py (irw#1828)
 table,shard,status
@@ -1047,6 +1047,9 @@ hua_2023_efl_course_experience,irw_text_2,published
 huang_2016_cesd,irw_text_2,published
 huang_2023_d_scale,irw_text_2,published
 huang_2023_medseq,irw_text_2,published
+huebner_2021_weightlifting_attraction,irw_text_3,published
+huebner_2021_weightlifting_barriers,irw_text_3,published
+huebner_2021_weightlifting_pandemic,irw_text_3,published
 huentemilla_2026_digital_competence_test,irw_text_3,published
 hui_2024_gbfs,irw_text_2,published
 humor_styles,irw_text_2,published
@@ -1253,6 +1256,8 @@ li_2021_cultural_intelligence,irw_text_2,published
 li_2021_knowledge_sharing,irw_text_2,published
 li_2021_org_cultural_diversity,irw_text,published
 li_2021_sustainable_innov_behav,irw_text_2,published
+li_2023_self_efficacy,irw_text_3,published
+li_2023_social_support,irw_text_3,published
 li_2025_corporate_performance,irw_text_2,published
 li_2025_market_environment,irw_text_2,published
 li_2025_marketing_culture,irw_text_2,published
@@ -1691,6 +1696,7 @@ os_tbmwtfs_schubert_2023_bmw3,irw_text,published
 os_tbmwtfs_schubert_2023_dmw,irw_text,published
 os_tbmwtfs_schubert_2023_ipip,irw_text,published
 os_tbmwtfs_schubert_2023_maas,irw_text,published
+otago_2018_library_support,irw_text_3,published
 otaki_2022_dental_adaptability,irw_text_2,published
 oxfordcovid_xue_2024_at,irw_text_2,published
 oxfordcovid_xue_2024_brs,irw_text,published
@@ -2009,6 +2015,9 @@ scs_2025_cfanonclinic,irw_text_3,published
 scs_2025_cfausatr,irw_text_3,published
 selfcompassionscale_shortform_fuochi_2025,irw_text_3,published
 sem_cnes,irw_text_2,published
+setiawan_2026_cybersecurity_behaviour,irw_text_3,published
+setiawan_2026_cybersecurity_ethics,irw_text_3,published
+setiawan_2026_cybersecurity_knowledge,irw_text_3,published
 sexual_compulsivity,irw_text,published
 sexual_selfconcept,irw_text,published
 shehayeb_2024_math_teacher,irw_text_3,published
