@@ -86,6 +86,27 @@ jobs:
       - name: covariate_labels generator and table (#1775)
         run: python metadata/tests/test_covariate_labels.py -v
 
+      # The gap auditor, and then the ratchet itself. A covariate-label gap is
+      # invisible by construction -- the harvest is a manual stage, so a script
+      # nobody harvests produces no error, no empty file and no row anywhere,
+      # which is how cassidy_2024_* shipped nine tables of coded, fully
+      # labelled covariates with none of them reaching the table page. The
+      # auditor reconstructs the gap from the committed record alone (no
+      # ~/.cache logs, no network), so it can run here.
+      #
+      # --ratchet, not --strict: --strict fails today on 447 live tables, so as
+      # a gate it would block every PR and be switched off within a week. The
+      # ratchet grandfathers whatever gaps.csv records and fails only on a
+      # table that is NEWLY in the gap, so the backlog can shrink but not grow
+      # unnoticed. Known limit: a table enters the report only once it is live,
+      # so a new script is caught on the first run after release rather than in
+      # the PR that adds it.
+      - name: covariate_labels gap auditor (#1775)
+        run: python metadata/tests/test_covariate_gaps.py -v
+
+      - name: covariate_labels gap ratchet (#1775)
+        run: python metadata/covariate_labels/audit_gaps.py --ratchet
+
       # Stage 14 imports stage 13, so both run here (#2494, #2763).
       - name: script index and column docs (stages 13, 14)
         run: |

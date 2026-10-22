@@ -69,6 +69,10 @@ metadata/logs/codebook_table_names.json
 !metadata/covariate_labels.csv
 !metadata/covariate_labels/institutions.csv
 !metadata/covariate_labels/coverage.csv
+##gaps.csv is the ratchet's BASELINE, so it has to be committed: CI
+##reads it to tell a known gap from a new one, and an ignored file
+##would make all 674 read as new on every run.
+!metadata/covariate_labels/gaps.csv
 
 ##The dictionary union's audit trail (#1732). Tracked, unlike 03_tags.R's
 ##tags_provenance.csv, which this file excludes and the weekly runner therefore
