@@ -899,6 +899,7 @@ frost_2023_gcbs,core,none,2026-10-10
 fu_2024_war_casualties,conj,https://dataverse.harvard.edu/api/access/datafile/10550236,2026-10-14
 fu_2026_victory_abstract,conj,https://dataverse.harvard.edu/api/access/datafile/13986750,2026-10-07
 fu_2026_victory_concrete,conj,https://dataverse.harvard.edu/api/access/datafile/13986750,2026-10-07
+funck_2022_scandal_candidates,conj,https://dataverse.harvard.edu/api/access/datafile/4215305,2026-10-22
 furnas_2023_staff_access,conj,none,2026-10-09
 gagnon_2025_local_candidates,conj,https://dataverse.harvard.edu/api/access/datafile/10698620,2026-10-07
 gagnon_2025_local_status,conj,https://dataverse.harvard.edu/api/access/datafile/10698620,2026-10-07
@@ -1397,6 +1398,7 @@ jost_2024_zambia_participation,conj,https://dataverse.harvard.edu/api/access/dat
 jung_2024_value_conjoint,conj,https://dataverse.harvard.edu/api/access/datafile/8944590,2026-10-11
 jurado_2022_brexit_deal_germany,conj,https://static.cambridge.org/content/id/urn:cambridge.org:id:article:S0020818321000412/resource/name/S0020818321000412sup001.docx,2026-10-07
 jurado_2022_brexit_deal_spain,conj,https://static.cambridge.org/content/id/urn:cambridge.org:id:article:S0020818321000412/resource/name/S0020818321000412sup001.docx,2026-10-07
+justesen_2025_brazil_clientelism,conj,none,2026-10-22
 kacovsky_2022_imi,core,none,2026-10-10
 kage_2019_elect_politician,conj,https://dataverse.harvard.edu/api/access/datafile/12515434,2026-10-09
 kage_2019_promote_politician,conj,https://dataverse.harvard.edu/api/access/datafile/12515434,2026-10-09
@@ -1613,6 +1615,7 @@ lee_2024_skilled_immig_probability,conj,https://dataverse.harvard.edu/api/access
 lee_2024_skilled_immig_volunteer,conj,https://dataverse.harvard.edu/api/access/datafile/10243061,2026-10-09
 lee_2025_constituent_feedback,conj,none,2026-10-09
 lee_2025_immigration_nimby,conj,https://dataverse.harvard.edu/api/access/datafile/11876161,2026-10-09
+leeper_2020_issue_importance,conj,https://dataverse.harvard.edu/api/access/datafile/3209315,2026-10-22
 lei_2024_effectiveness,core,none,2026-10-09
 lei_2024_engagement,core,none,2026-10-09
 lei_2024_external_motivation,core,none,2026-10-09
@@ -3215,6 +3218,7 @@ vuk_2026_participation_legitimacy,conj,https://dataverse.harvard.edu/api/access/
 wagner_2018_vaccine_attributes,conj,https://ndownloader.figshare.com/files/11888273,2026-10-14
 wagner_2018_vaccine_program,conj,https://ndownloader.figshare.com/files/11888273,2026-10-14
 wagner_2025_provider_choice,conj,https://dataverse.harvard.edu/api/access/datafile/11827545,2026-10-09
+wakefield_2025_latino_appeals,conj,none,2026-10-22
 walton_2023_jd,core,none,2026-10-18
 walton_2023_ss,core,none,2026-10-18
 walton_2023_wfc,core,none,2026-10-18
@@ -3239,6 +3243,7 @@ wang_2026_social_desirability,core,none,2026-10-09
 wang_2026_wtc_inclass,core,none,2026-10-15
 wang_2026_wtc_outclass,core,none,2026-10-15
 ward_2025_korean_candidates,conj,https://dataverse.harvard.edu/api/access/datafile/13987847,2026-10-08
+weaver_2021_peru_mayors,conj,https://dataverse.harvard.edu/api/access/datafile/3811300,2026-10-22
 weber_2026_name_interaction,core,https://dataverse.harvard.edu/api/access/datafile/14203958,2026-10-05
 wehr_2026_housing_densification,conj,none,2026-10-09
 wei_2026_destination_image,core,none,2026-10-19
