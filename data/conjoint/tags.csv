@@ -1151,3 +1151,7 @@ singleton_2021_roundabout_bicycle,climate_energy_environment,place,claude 2026-1
 "weaver_2021_peru_mayors","candidate_choice;corruption_accountability","person","claude-auto 2026-10-22","mayoral candidates; performance information and campaign gifts make accountability the second setting"
 "wakefield_2025_latino_appeals","candidate_choice","person","claude-auto 2026-10-22","candidate race and policy positions are manipulated attributes; the setting is a congressional election"
 "justesen_2025_brazil_clientelism","candidate_choice;corruption_accountability","person","claude-auto 2026-10-22","candidates judged for office; clientelism (patronage, vote buying) is the headline attribute, hence the second domain"
+"hadden_2026_energy_india","climate_energy_environment","scenario","claude 2026-10-22 (batch 12 build)","proposed energy projects: fuel, siting, destination, output, developer"
+"hadden_2026_energy_south_africa","climate_energy_environment","scenario","claude 2026-10-22 (batch 12 build)","proposed energy projects: fuel, siting, destination, output, developer"
+"hadden_2026_energy_turkey","climate_energy_environment","scenario","claude 2026-10-22 (batch 12 build)","proposed energy projects: fuel, siting, destination, output, developer"
+"hamanaka_2026_israel_institutions","democracy_institutions","policy","claude 2026-10-22 (batch 12 build)","hypothetical political systems described by eleven regime attributes"
