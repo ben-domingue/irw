@@ -131,6 +131,16 @@ shipping 35 response tables and 218,354 responses, 4 item text tables.
   `python3 seen_ledger.py drop repo_triage_seen_keys.csv --refined-flag
   recoverable_format --apply` followed by a re-triage of just those keys.
 
+- [ ] **`cassidy_2024_*`'s covariate labels land on the next `build.py` run,
+  not before.** The 2026-10-21d entry wrongly said no harvest was owed; it is,
+  because ten of the eleven `cov_*` columns ship the .sav's numeric codes and
+  the .sav labels all of them. The harvest has been run (exit 0, cached log)
+  and the script fixed so it can be harvested at all, but
+  `metadata/covariate_labels/build.py` includes only tables present in
+  `metadata/metadata.csv` -- so these nine tables need to be live first. No
+  action until then; this is a note so the next release's owed `build.py` run
+  is known to cover them.
+
 ### Two credential requests. Neither is a code change, and between them they
 ### unblock 9 rows here plus a share of every future sweep.
 
