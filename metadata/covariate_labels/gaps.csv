@@ -1,0 +1,675 @@
+table,scripts,klass,detail
+adamczyk_2022_cesd,data/adamczyk_2022_ras.py,considered_none_kept,"the script also feeds sext1 into cov_gender, and it is not labelled like GenderT1"
+adamczyk_2022_fbss,data/adamczyk_2022_ras.py,considered_none_kept,"the script also feeds sext1 into cov_gender, and it is not labelled like GenderT1"
+adamczyk_2022_mhc_sf,data/adamczyk_2022_ras.py,considered_none_kept,"the script also feeds sext1 into cov_gender, and it is not labelled like GenderT1"
+adamczyk_2022_qri,data/adamczyk_2022_ras.py,considered_none_kept,"the script also feeds sext1 into cov_gender, and it is not labelled like GenderT1"
+adamczyk_2022_resta,data/adamczyk_2022_ras.py,considered_none_kept,"the script also feeds sext1 into cov_gender, and it is not labelled like GenderT1"
+adamczyk_2022_selsa,data/adamczyk_2022_ras.py,considered_none_kept,"the script also feeds sext1 into cov_gender, and it is not labelled like GenderT1"
+adamczyk_2022_upps,data/adamczyk_2022_ras.py,considered_none_kept,"the script also feeds sext1 into cov_gender, and it is not labelled like GenderT1"
+adamczyk_2022_workbat,data/adamczyk_2022_ras.py,considered_none_kept,"the script also feeds sext1 into cov_gender, and it is not labelled like GenderT1"
+alan_2018_student_gender_attitudes,data/alan_2018_gender_stereotypes.py,considered_none_kept,shipped counts exceed source counts for code(s) 1: the script recoded this column
+karas_2022_cetscale_en,data/karas_2022_cetscale.py,considered_none_kept,P1 is unlabelled or labelled differently in another file the script read
+karas_2022_cetscale_pl,data/karas_2022_cetscale.py,considered_none_kept,P1 is unlabelled or labelled differently in another file the script read
+kemp_2019_mss_disorganized,data/kemp_2019_mss_schizotypy.py,considered_none_kept,"shipped counts exceed source counts for code(s) 0,1: the script recoded this column"
+kemp_2019_mss_negative,data/kemp_2019_mss_schizotypy.py,considered_none_kept,"shipped counts exceed source counts for code(s) 0,1: the script recoded this column"
+kemp_2019_mss_positive,data/kemp_2019_mss_schizotypy.py,considered_none_kept,"shipped counts exceed source counts for code(s) 0,1: the script recoded this column"
+makransky_2016_mcq_correct,data/makransky_2016_virtual_lab_sim.py,considered_none_kept,"shipped counts exceed source counts for code(s) 17,18,19,20,21,22,23,24,25,26,27,30,31,34,35,39,44: the script recoded this column"
+makransky_2016_motivation,data/makransky_2016_virtual_lab_sim.py,considered_none_kept,"shipped counts exceed source counts for code(s) 17,18,19,20,21,22,23,24,25,26,27,30,31,34,35,39,44: the script recoded this column"
+makransky_2016_self_efficacy,data/makransky_2016_virtual_lab_sim.py,considered_none_kept,"shipped counts exceed source counts for code(s) 17,18,19,20,21,22,23,24,25,26,27,30,31,34,35,39,44: the script recoded this column"
+perez_hernandez_2021_cesd7,data/perez_hernandez_2021_encovid.py,considered_none_kept,shipped counts exceed source counts for code(s) 1: the script recoded this column
+perez_hernandez_2021_elcsa,data/perez_hernandez_2021_encovid.py,considered_none_kept,"shipped counts exceed source counts for code(s) 0,1: the script recoded this column"
+perez_hernandez_2021_gad7,data/perez_hernandez_2021_encovid.py,considered_none_kept,"shipped counts exceed source counts for code(s) 0,1: the script recoded this column"
+sahin_2026_ai_attitudes,data/sahin_2026_pmas_ai.py,considered_none_kept,"ambiguous source column: cinsiyet_gender,edu,egitim_educatıon,gelir_ıncome,ıncome"
+sahin_2026_conspiracy,data/sahin_2026_pmas_ai.py,considered_none_kept,"ambiguous source column: cinsiyet_gender,edu,egitim_educatıon,gelir_ıncome,ıncome"
+sahin_2026_life_satisfaction,data/sahin_2026_pmas_ai.py,considered_none_kept,"ambiguous source column: cinsiyet_gender,edu,egitim_educatıon,gelir_ıncome,ıncome"
+sahin_2026_mind_attribution,data/sahin_2026_pmas_ai.py,considered_none_kept,"ambiguous source column: cinsiyet_gender,edu,egitim_educatıon,gelir_ıncome,ıncome"
+sahin_2026_pmas,data/sahin_2026_pmas_ai.py,considered_none_kept,"ambiguous source column: cinsiyet_gender,edu,egitim_educatıon,gelir_ıncome,ıncome"
+sahin_2026_social_desirability,data/sahin_2026_pmas_ai.py,considered_none_kept,"ambiguous source column: cinsiyet_gender,edu,egitim_educatıon,gelir_ıncome,ıncome"
+alcoholhealthwarninglabel_brennan_2022_awareness_harms_followup,data/alcoholhealthwarninglabel_brennan_2022.py,harvest_empty,the raw source file was not on disk when the harvest ran
+alcoholhealthwarninglabel_brennan_2022_emotional_arousal_followup,data/alcoholhealthwarninglabel_brennan_2022.py,harvest_empty,the raw source file was not on disk when the harvest ran
+alcoholhealthwarninglabel_brennan_2022_intentions_postexposure,data/alcoholhealthwarninglabel_brennan_2022.py,harvest_empty,the raw source file was not on disk when the harvest ran
+banerjee_2025_arithmetic_market,data/banerjee_2025_arithmetic.py,harvest_empty,the raw source file was not on disk when the harvest ran
+banerjee_2025_arithmetic_school,data/banerjee_2025_arithmetic.py,harvest_empty,the raw source file was not on disk when the harvest ran
+coroiu_2018_cses,data/coroiu_2018_scs.py,harvest_empty,the raw source file was not on disk when the harvest ran
+coroiu_2018_phq9,data/coroiu_2018_scs.py,harvest_empty,the raw source file was not on disk when the harvest ran
+ders_valencia_2025,data/ders_valencia_2021.py,harvest_empty,the raw source file was not on disk when the harvest ran
+jovanovic_2026_conscientiousness_bfi,data/jovanovic_2026_conscientiousness.py,harvest_empty,the raw source file was not on disk when the harvest ran
+jovanovic_2026_conscientiousness_dass_d,data/jovanovic_2026_conscientiousness.py,harvest_empty,the raw source file was not on disk when the harvest ran
+jovanovic_2026_conscientiousness_panas_na,data/jovanovic_2026_conscientiousness.py,harvest_empty,the raw source file was not on disk when the harvest ran
+jovanovic_2026_conscientiousness_spane_na,data/jovanovic_2026_conscientiousness.py,harvest_empty,the raw source file was not on disk when the harvest ran
+jovanovic_2026_conscientiousness_yips,data/jovanovic_2026_conscientiousness.py,harvest_empty,the raw source file was not on disk when the harvest ran
+li_2025_corporate_performance,data/li_2025_marketing_capability.py,harvest_empty,the raw source file was not on disk when the harvest ran
+li_2025_market_environment,data/li_2025_marketing_capability.py,harvest_empty,the raw source file was not on disk when the harvest ran
+li_2025_marketing_culture,data/li_2025_marketing_capability.py,harvest_empty,the raw source file was not on disk when the harvest ran
+li_2025_marketing_exploitation,data/li_2025_marketing_capability.py,harvest_empty,the raw source file was not on disk when the harvest ran
+li_2025_marketing_exploration,data/li_2025_marketing_capability.py,harvest_empty,the raw source file was not on disk when the harvest ran
+li_2025_marketing_learning,data/li_2025_marketing_capability.py,harvest_empty,the raw source file was not on disk when the harvest ran
+li_2025_marketing_operation,data/li_2025_marketing_capability.py,harvest_empty,the raw source file was not on disk when the harvest ran
+li_2025_policy_environment,data/li_2025_marketing_capability.py,harvest_empty,the raw source file was not on disk when the harvest ran
+mohammed_2021_job_satisfaction,data/mohammed_2021_patient_safety.py,harvest_empty,the raw source file was not on disk when the harvest ran
+mohammed_2021_patient_safety_culture,data/mohammed_2021_patient_safety.py,harvest_empty,the raw source file was not on disk when the harvest ran
+nolte_2017_hlq_appraisal,data/nolte_2017_hlq.py,harvest_empty,the raw source file was not on disk when the harvest ran
+nolte_2017_hlq_engage_providers,data/nolte_2017_hlq.py,harvest_empty,the raw source file was not on disk when the harvest ran
+nolte_2017_hlq_find_information,data/nolte_2017_hlq.py,harvest_empty,the raw source file was not on disk when the harvest ran
+nolte_2017_hlq_information,data/nolte_2017_hlq.py,harvest_empty,the raw source file was not on disk when the harvest ran
+nolte_2017_hlq_managing_health,data/nolte_2017_hlq.py,harvest_empty,the raw source file was not on disk when the harvest ran
+nolte_2017_hlq_navigating,data/nolte_2017_hlq.py,harvest_empty,the raw source file was not on disk when the harvest ran
+nolte_2017_hlq_provider_support,data/nolte_2017_hlq.py,harvest_empty,the raw source file was not on disk when the harvest ran
+nolte_2017_hlq_social_support,data/nolte_2017_hlq.py,harvest_empty,the raw source file was not on disk when the harvest ran
+nolte_2017_hlq_understand_info,data/nolte_2017_hlq.py,harvest_empty,the raw source file was not on disk when the harvest ran
+parentalempathy_gonzalez_2021_empatea_child_pilot,data/parentalempathy.py,harvest_empty,the raw source file was not on disk when the harvest ran
+parentalempathy_gonzalez_2021_empatea_child_tripleF,data/parentalempathy.py,harvest_empty,the raw source file was not on disk when the harvest ran
+parentalempathy_gonzalez_2021_empatea_self_pilot,data/parentalempathy.py,harvest_empty,the raw source file was not on disk when the harvest ran
+parentalempathy_gonzalez_2021_empatea_self_tripleF,data/parentalempathy.py,harvest_empty,the raw source file was not on disk when the harvest ran
+parentalempathy_gonzalez_2021_empates_child_tripleF,data/parentalempathy.py,harvest_empty,the raw source file was not on disk when the harvest ran
+parentalempathy_gonzalez_2021_iri_tripleF,data/parentalempathy.py,harvest_empty,the raw source file was not on disk when the harvest ran
+parentalempathy_gonzalez_2021_paqauthoritative_tripleF,data/parentalempathy.py,harvest_empty,the raw source file was not on disk when the harvest ran
+parentalempathy_gonzalez_2021_pareqs_tripleF,data/parentalempathy.py,harvest_empty,the raw source file was not on disk when the harvest ran
+parentalempathy_gonzalez_2021_parycsupport_tripleF,data/parentalempathy.py,harvest_empty,the raw source file was not on disk when the harvest ran
+parentalempathy_gonzalez_2021_pem_tripleF,data/parentalempathy.py,harvest_empty,the raw source file was not on disk when the harvest ran
+parentalempathy_gonzalez_2021_reacctcompliance_tripleF,data/parentalempathy.py,harvest_empty,the raw source file was not on disk when the harvest ran
+wallace_2026_certain,data/wallace_2026_mindsets.py,harvest_empty,the raw source file was not on disk when the harvest ran
+wallace_2026_fit,data/wallace_2026_mindsets.py,harvest_empty,the raw source file was not on disk when the harvest ran
+wallace_2026_interest,data/wallace_2026_mindsets.py,harvest_empty,the raw source file was not on disk when the harvest ran
+wallace_2026_interest_org,data/wallace_2026_mindsets.py,harvest_empty,the raw source file was not on disk when the harvest ran
+wallace_2026_mcm_check,data/wallace_2026_mindsets.py,harvest_empty,the raw source file was not on disk when the harvest ran
+wang_2026_pmpu,data/wang_2026_pmpu_diary.py,harvest_empty,the raw source file was not on disk when the harvest ran
+xue_2024_study2_efa,data/xue_2024_covid_study.py,harvest_empty,the raw source file was not on disk when the harvest ran
+xue_2024_study3_cfa,data/xue_2024_covid_study.py,harvest_empty,the raw source file was not on disk when the harvest ran
+abdelrheem_2026_eci,data/abdelrheem_2026_mindfulness.py,never_examined,no harvest log was ever built for this script
+abdelrheem_2026_ffmq,data/abdelrheem_2026_mindfulness.py,never_examined,no harvest log was ever built for this script
+abdollahi_2026_aps,data/abdollahi_2026_procrastination.py,never_examined,no harvest log was ever built for this script
+abdollahi_2026_tuckman,data/abdollahi_2026_procrastination.py,never_examined,no harvest log was ever built for this script
+abdullah_2024_blqol,data/abdullah_2024_bloating.py,never_examined,no harvest log was ever built for this script
+abdullah_2024_bsq_sev24,data/abdullah_2024_bloating.py,never_examined,no harvest log was ever built for this script
+abdullah_2024_bsq_sevgen,data/abdullah_2024_bloating.py,never_examined,no harvest log was ever built for this script
+abdullah_2024_hbbloat_attitude,data/abdullah_2024_bloating.py,never_examined,no harvest log was ever built for this script
+abdullah_2024_hbbloat_pbc,data/abdullah_2024_bloating.py,never_examined,no harvest log was ever built for this script
+abdullah_2024_hpbbloat_awareness,data/abdullah_2024_bloating.py,never_examined,no harvest log was ever built for this script
+abdullah_2024_hpbbloat_diet,data/abdullah_2024_bloating.py,never_examined,no harvest log was ever built for this script
+abdullah_2024_hpbbloat_physact,data/abdullah_2024_bloating.py,never_examined,no harvest log was ever built for this script
+abdullah_2024_hpbbloat_stress,data/abdullah_2024_bloating.py,never_examined,no harvest log was ever built for this script
+abdullah_2024_hpbbloat_treat,data/abdullah_2024_bloating.py,never_examined,no harvest log was ever built for this script
+abdullah_2024_ssbloat,data/abdullah_2024_bloating.py,never_examined,no harvest log was ever built for this script
+agogue_2020_self_perceived_creativity,data/agogue_2020_nudging_creativity.py,never_examined,no harvest log was ever built for this script
+ahmed_2025_coping,data/ahmed_2025_ptsd_coping.py,never_examined,no harvest log was ever built for this script
+ahmed_2025_pcl5,data/ahmed_2025_ptsd_coping.py,never_examined,no harvest log was ever built for this script
+alqerem_2025_anq,data/alqerem_2025_asthma.py,never_examined,no harvest log was ever built for this script
+alqerem_2025_asthma_knowledge,data/alqerem_2025_asthma.py,never_examined,no harvest log was ever built for this script
+alqerem_2025_gina_control,data/alqerem_2025_asthma.py,never_examined,no harvest log was ever built for this script
+alqerem_2025_mars5,data/alqerem_2025_asthma.py,never_examined,no harvest log was ever built for this script
+alqerem_2025_pedsql_asthma,data/alqerem_2025_asthma.py,never_examined,no harvest log was ever built for this script
+anjum_2022_gad7,data/anjum_2022_anxiety_bangladesh.py,never_examined,no harvest log was ever built for this script
+arnulf_2022_general_knowledge,data/arnulf_2022_conspiracy_thinking.py,never_examined,no harvest log was ever built for this script
+arvanitis_2023_compulsion,data/arvanitis_2023_moral_identity.py,never_examined,no harvest log was ever built for this script
+arvanitis_2023_mfq,data/arvanitis_2023_moral_identity.py,never_examined,no harvest log was ever built for this script
+arvanitis_2023_mfv,data/arvanitis_2023_moral_identity.py,never_examined,no harvest log was ever built for this script
+ashik_2026_paus,data/ashik_2026_sds.py,never_examined,no harvest log was ever built for this script
+ashik_2026_phq9,data/ashik_2026_sds.py,never_examined,no harvest log was ever built for this script
+ashik_2026_sas_sv,data/ashik_2026_sds.py,never_examined,no harvest log was ever built for this script
+atik_2025_ai_life_satisfaction,data/atik_2025_life_satisfaction.py,never_examined,no harvest log was ever built for this script
+atik_2025_gwb,data/atik_2025_life_satisfaction.py,never_examined,no harvest log was ever built for this script
+atik_2025_swls,data/atik_2025_life_satisfaction.py,never_examined,no harvest log was ever built for this script
+atik_2026_psych_resilience,data/atik_2026_climate_anxiety.py,never_examined,no harvest log was ever built for this script
+bacon_2025_cfni45,data/bacon_2025_self_silencing.py,never_examined,no harvest log was ever built for this script
+bacon_2025_phq9,data/bacon_2025_self_silencing.py,never_examined,no harvest log was ever built for this script
+bacon_2025_stss,data/bacon_2025_self_silencing.py,never_examined,no harvest log was ever built for this script
+bakker_2020_pss10,data/bakker_2020_pss_rses.py,never_examined,no harvest log was ever built for this script
+bakker_2020_rses,data/bakker_2020_pss_rses.py,never_examined,no harvest log was ever built for this script
+bauwens_2022_autonomy,data/bauwens_2022_childcare.py,never_examined,no harvest log was ever built for this script
+bauwens_2022_empowering_leadership,data/bauwens_2022_childcare.py,never_examined,no harvest log was ever built for this script
+bauwens_2022_engagement,data/bauwens_2022_childcare.py,never_examined,no harvest log was ever built for this script
+bauwens_2022_exhaustion,data/bauwens_2022_childcare.py,never_examined,no harvest log was ever built for this script
+bauwens_2022_lmx,data/bauwens_2022_childcare.py,never_examined,no harvest log was ever built for this script
+bauwens_2022_quality_of_care,data/bauwens_2022_childcare.py,never_examined,no harvest log was ever built for this script
+bauwens_2022_red_tape,data/bauwens_2022_childcare.py,never_examined,no harvest log was ever built for this script
+bauwens_2022_safety_of_care,data/bauwens_2022_childcare.py,never_examined,no harvest log was ever built for this script
+bauwens_2022_supervisory_support,data/bauwens_2022_childcare.py,never_examined,no harvest log was ever built for this script
+bauwens_2022_technostress_creators,data/bauwens_2022_childcare.py,never_examined,no harvest log was ever built for this script
+bauwens_2022_technostress_inhibitors,data/bauwens_2022_childcare.py,never_examined,no harvest log was ever built for this script
+bauwens_2022_work_pressure,data/bauwens_2022_childcare.py,never_examined,no harvest log was ever built for this script
+baysan_2026_ai_attitudes,data/baysan_2026_nursing_ai.py,never_examined,no harvest log was ever built for this script
+baysan_2026_self_directed_learning,data/baysan_2026_nursing_ai.py,never_examined,no harvest log was ever built for this script
+besaa_s_2026_22766055,data/autoestima_corporal_2026_22766055.py,never_examined,no harvest log was ever built for this script
+bitew_2020_anxiety,data/bitew_2020_ethiopia_battery.py,never_examined,no harvest log was ever built for this script
+bitew_2020_lte,data/bitew_2020_ethiopia_battery.py,never_examined,no harvest log was ever built for this script
+bitew_2020_osss3,data/bitew_2020_ethiopia_battery.py,never_examined,no harvest log was ever built for this script
+bitew_2020_phq9,data/bitew_2020_ethiopia_battery.py,never_examined,no harvest log was ever built for this script
+bitew_2020_self_efficacy,data/bitew_2020_ethiopia_battery.py,never_examined,no harvest log was ever built for this script
+bukurov_2022_comq12,data/bukurov_2022_comq12sf36.py,never_examined,no harvest log was ever built for this script
+bukurov_2022_sf36,data/bukurov_2022_comq12sf36.py,never_examined,no harvest log was ever built for this script
+buzgova_2023_gai,data/buzgova_2023_elder_battery.py,never_examined,no harvest log was ever built for this script
+buzgova_2023_gds,data/buzgova_2023_elder_battery.py,never_examined,no harvest log was ever built for this script
+buzgova_2023_lsita,data/buzgova_2023_elder_battery.py,never_examined,no harvest log was ever built for this script
+buzgova_2023_qol,data/buzgova_2023_elder_battery.py,never_examined,no harvest log was ever built for this script
+buzgova_2023_rses,data/buzgova_2023_elder_battery.py,never_examined,no harvest log was ever built for this script
+buzgova_2023_soc,data/buzgova_2023_elder_battery.py,never_examined,no harvest log was ever built for this script
+camir_security_2026_22766055,data/autoestima_corporal_2026_22766055.py,never_examined,no harvest log was ever built for this script
+cao_2024_mbi,data/cao_2024_burnout.py,never_examined,no harvest log was ever built for this script
+cao_2024_mspss,data/cao_2024_burnout.py,never_examined,no harvest log was ever built for this script
+cao_2024_work_stress,data/cao_2024_burnout.py,never_examined,no harvest log was ever built for this script
+chen2025_activity_motivation,data/chen2025_body_image.py,never_examined,no harvest log was ever built for this script
+chen2025_peer_support,data/chen2025_body_image.py,never_examined,no harvest log was ever built for this script
+chen2025_self_esteem,data/chen2025_body_image.py,never_examined,no harvest log was ever built for this script
+chen_2019_cdrsc,data/chen_2019_pain_appraisal_coping.py,never_examined,no harvest log was ever built for this script
+chen_2019_csq,data/chen_2019_pain_appraisal_coping.py,never_examined,no harvest log was ever built for this script
+chen_2021_acculturation,data/chen_2021_bidimensional_acculturation.py,never_examined,no harvest log was ever built for this script
+chen_2021_enculturation,data/chen_2021_bidimensional_acculturation.py,never_examined,no harvest log was ever built for this script
+chen_2024_ae,data/chen_2024_fitness_coach_creativity.py,never_examined,no harvest log was ever built for this script
+chen_2024_cc,data/chen_2024_fitness_coach_creativity.py,never_examined,no harvest log was ever built for this script
+chen_2024_cg,data/chen_2024_fitness_coach_creativity.py,never_examined,no harvest log was ever built for this script
+chen_2024_cotah,data/chen_2024_fitness_coach_creativity.py,never_examined,no harvest log was ever built for this script
+chen_2024_cr,data/chen_2024_fitness_coach_creativity.py,never_examined,no harvest log was ever built for this script
+chen_2024_ds,data/chen_2024_fitness_coach_creativity.py,never_examined,no harvest log was ever built for this script
+chen_2024_ec,data/chen_2024_fitness_coach_creativity.py,never_examined,no harvest log was ever built for this script
+chen_2024_je,data/chen_2024_fitness_coach_creativity.py,never_examined,no harvest log was ever built for this script
+chen_2024_kc,data/chen_2024_fitness_coach_creativity.py,never_examined,no harvest log was ever built for this script
+chen_2024_kd,data/chen_2024_fitness_coach_creativity.py,never_examined,no harvest log was ever built for this script
+chen_2024_sc,data/chen_2024_fitness_coach_creativity.py,never_examined,no harvest log was ever built for this script
+chen_2024_smu,data/chen_2024_fitness_coach_creativity.py,never_examined,no harvest log was ever built for this script
+chen_2024_spe,data/chen_2024_fitness_coach_creativity.py,never_examined,no harvest log was ever built for this script
+chen_2024_tot,data/chen_2024_fitness_coach_creativity.py,never_examined,no harvest log was ever built for this script
+chen_2024_ts,data/chen_2024_fitness_coach_creativity.py,never_examined,no harvest log was ever built for this script
+chen_2024_uf,data/chen_2024_fitness_coach_creativity.py,never_examined,no harvest log was ever built for this script
+chinvararak_2021_bdi,data/chinvararak_2021_attachment_depression.py,never_examined,no harvest log was ever built for this script
+chinvararak_2021_ecr,data/chinvararak_2021_attachment_depression.py,never_examined,no harvest log was ever built for this script
+chinvararak_2021_phq15,data/chinvararak_2021_attachment_depression.py,never_examined,no harvest log was ever built for this script
+chinvararak_2021_ssq,data/chinvararak_2021_attachment_depression.py,never_examined,no harvest log was ever built for this script
+chinvararak_2021_ylseq,data/chinvararak_2021_attachment_depression.py,never_examined,no harvest log was ever built for this script
+daderman_2023_naq_r,data/daderman_2023_workplace_incivility.py,never_examined,no harvest log was ever built for this script
+daderman_2023_wis,data/daderman_2023_workplace_incivility.py,never_examined,no harvest log was ever built for this script
+dai_2024_acculturation_index,data/dai_2024_multicultural_wellbeing.py,never_examined,no harvest log was ever built for this script
+dai_2024_cultural_difference,data/dai_2024_multicultural_wellbeing.py,never_examined,no harvest log was ever built for this script
+dai_2024_self_esteem,data/dai_2024_multicultural_wellbeing.py,never_examined,no harvest log was ever built for this script
+dai_2024_wellbeing,data/dai_2024_multicultural_wellbeing.py,never_examined,no harvest log was ever built for this script
+dass21_2026_22766055,data/autoestima_corporal_2026_22766055.py,never_examined,no harvest log was ever built for this script
+dolzdelcastellar_2021_eds,data/dolzdelcastellar_2021_faces_eds_stai.py,never_examined,no harvest log was ever built for this script
+dolzdelcastellar_2021_faces,data/dolzdelcastellar_2021_faces_eds_stai.py,never_examined,no harvest log was ever built for this script
+dolzdelcastellar_2021_stai,data/dolzdelcastellar_2021_faces_eds_stai.py,never_examined,no harvest log was ever built for this script
+domaradzka_2018_adq_anhedonic_depression,data/domaradzka_2018_cerq_adq.py,never_examined,no harvest log was ever built for this script
+domaradzka_2018_adq_apprehension_anxiety,data/domaradzka_2018_cerq_adq.py,never_examined,no harvest log was ever built for this script
+domaradzka_2018_adq_arousal_anxiety,data/domaradzka_2018_cerq_adq.py,never_examined,no harvest log was ever built for this script
+domaradzka_2018_adq_valence_depression,data/domaradzka_2018_cerq_adq.py,never_examined,no harvest log was ever built for this script
+domaradzka_2018_cerq,data/domaradzka_2018_cerq_adq.py,never_examined,no harvest log was ever built for this script
+dong_2024_engagement,data/dong_2024_ccaiq.py,never_examined,no harvest log was ever built for this script
+dopmeijer_2022_loneliness,data/dopmeijer_2022_burnout_battery.py,never_examined,no harvest log was ever built for this script
+dopmeijer_2022_performance_pressure,data/dopmeijer_2022_burnout_battery.py,never_examined,no harvest log was ever built for this script
+dopmeijer_2022_sense_belonging,data/dopmeijer_2022_burnout_battery.py,never_examined,no harvest log was ever built for this script
+dopmeijer_2022_ubos,data/dopmeijer_2022_burnout_battery.py,never_examined,no harvest log was ever built for this script
+enke_2023_anchoring,data/enke_2023_cognitive_biases.py,never_examined,no harvest log was ever built for this script
+enke_2023_brn,data/enke_2023_cognitive_biases.py,never_examined,no harvest log was ever built for this script
+enke_2023_crt,data/enke_2023_cognitive_biases.py,never_examined,no harvest log was ever built for this script
+enke_2023_wason,data/enke_2023_cognitive_biases.py,never_examined,no harvest log was ever built for this script
+esteves_2026_dddt,data/esteves_2026_sexual_disgust_dark_triad.py,never_examined,no harvest log was ever built for this script
+esteves_2026_sdi,data/esteves_2026_sexual_disgust_dark_triad.py,never_examined,no harvest log was ever built for this script
+extremera_2016_ei,data/extremera_2016_unemployment_wellbeing.py,never_examined,no harvest log was ever built for this script
+extremera_2016_sbq,data/extremera_2016_unemployment_wellbeing.py,never_examined,no harvest log was ever built for this script
+extremera_2016_shs,data/extremera_2016_unemployment_wellbeing.py,never_examined,no harvest log was ever built for this script
+extremera_2016_swls,data/extremera_2016_unemployment_wellbeing.py,never_examined,no harvest log was ever built for this script
+galindo_2026_bullying,data/galindo_2026_ai_uses.py,never_examined,no harvest log was ever built for this script
+galindo_2026_emotional_intel,data/galindo_2026_ai_uses.py,never_examined,no harvest log was ever built for this script
+galindo_2026_grooming,data/galindo_2026_ai_uses.py,never_examined,no harvest log was ever built for this script
+galindo_2026_loneliness,data/galindo_2026_ai_uses.py,never_examined,no harvest log was ever built for this script
+galindo_2026_mpu_ai,data/galindo_2026_ai_uses.py,never_examined,no harvest log was ever built for this script
+galindo_2026_personality,data/galindo_2026_ai_uses.py,never_examined,no harvest log was ever built for this script
+galindo_2026_sexting,data/galindo_2026_ai_uses.py,never_examined,no harvest log was ever built for this script
+galindo_2026_social_support,data/galindo_2026_ai_uses.py,never_examined,no harvest log was ever built for this script
+galindo_2026_suicidal_ideation,data/galindo_2026_ai_uses.py,never_examined,no harvest log was ever built for this script
+gambin_2020_pandemic_diff,data/gambin_2020_covid_poland.py,never_examined,no harvest log was ever built for this script
+gambin_2020_phq9,data/gambin_2020_covid_poland.py,never_examined,no harvest log was ever built for this script
+gan_2015_cesd,data/gan_2015_nursing_home.py,never_examined,no harvest log was ever built for this script
+gan_2015_rrs,data/gan_2015_nursing_home.py,never_examined,no harvest log was ever built for this script
+gan_2015_ucla_loneliness,data/gan_2015_nursing_home.py,never_examined,no harvest log was ever built for this script
+gao2025_attachment_anxiety,data/gao2025_family_support.py,never_examined,no harvest log was ever built for this script
+gao2025_attachment_avoidance,data/gao2025_family_support.py,never_examined,no harvest log was ever built for this script
+gao2025_spiritual_wellbeing,data/gao2025_family_support.py,never_examined,no harvest log was ever built for this script
+gao2025_sse,data/gao2025_family_support.py,never_examined,no harvest log was ever built for this script
+garciabatista_2021_erq,data/garciabatista_2021_erq_covid_healthworkers.py,never_examined,no harvest log was ever built for this script
+ge_2025_coping,data/ge_2025_worry.py,never_examined,no harvest log was ever built for this script
+ge_2025_cwms,data/ge_2025_worry.py,never_examined,no harvest log was ever built for this script
+ge_2025_eesc,data/ge_2025_worry.py,never_examined,no harvest log was ever built for this script
+ge_2025_mcqcr,data/ge_2025_worry.py,never_examined,no harvest log was ever built for this script
+gerbig_2023_ctq,data/gerbig_2023_loneliness_ace.py,never_examined,no harvest log was ever built for this script
+gerbig_2023_ucla,data/gerbig_2023_loneliness_ace.py,never_examined,no harvest log was ever built for this script
+gerbig_2023_who5,data/gerbig_2023_loneliness_ace.py,never_examined,no harvest log was ever built for this script
+gillman_2023_appraisals,data/gillman_2023_social_support_appraisals.py,never_examined,no harvest log was ever built for this script
+gillman_2023_pss,data/gillman_2023_social_support_appraisals.py,never_examined,no harvest log was ever built for this script
+gonzalezros_2025_eqi,data/gonzalezros_2025_ei_teacher.py,never_examined,no harvest log was ever built for this script
+gonzalezros_2025_ostes,data/gonzalezros_2025_ei_teacher.py,never_examined,no harvest log was ever built for this script
+gonzalezros_2025_tmms24,data/gonzalezros_2025_ei_teacher.py,never_examined,no harvest log was ever built for this script
+hellstrom_2019_isi,data/hellstrom_2019_sleep_battery.py,never_examined,no harvest log was ever built for this script
+hellstrom_2019_psqi,data/hellstrom_2019_sleep_battery.py,never_examined,no harvest log was ever built for this script
+hellstrom_2019_pss14,data/hellstrom_2019_sleep_battery.py,never_examined,no harvest log was ever built for this script
+hellstrom_2019_sci,data/hellstrom_2019_sleep_battery.py,never_examined,no harvest log was ever built for this script
+hernandezmantilla_2024_cfni,data/hernandezmantilla_2024_conformity_norms.py,never_examined,no harvest log was ever built for this script
+hernandezmantilla_2024_cmni,data/hernandezmantilla_2024_conformity_norms.py,never_examined,no harvest log was ever built for this script
+hilverda_2024_burnout,data/hilverda_2024_study_delay.py,never_examined,no harvest log was ever built for this script
+hilverda_2024_engagement,data/hilverda_2024_study_delay.py,never_examined,no harvest log was ever built for this script
+hoorani_2022_child_help,data/hoorani_2022_young_lives_battery.py,never_examined,no harvest log was ever built for this script
+hoorani_2022_epreas,data/hoorani_2022_young_lives_battery.py,never_examined,no harvest log was ever built for this script
+hoorani_2022_nps,data/hoorani_2022_young_lives_battery.py,never_examined,no harvest log was ever built for this script
+hoorani_2022_ps,data/hoorani_2022_young_lives_battery.py,never_examined,no harvest log was ever built for this script
+hoorani_2022_sp,data/hoorani_2022_young_lives_battery.py,never_examined,no harvest log was ever built for this script
+huang_2016_cesd,data/huang_2016_sleep_personality.py,never_examined,no harvest log was ever built for this script
+huang_2016_neo_conscientious,data/huang_2016_sleep_personality.py,never_examined,no harvest log was ever built for this script
+huang_2016_neo_neuroticism,data/huang_2016_sleep_personality.py,never_examined,no harvest log was ever built for this script
+huang_2023_b_scale,data/huang_2023_bullying_victimization.py,never_examined,no harvest log was ever built for this script
+huang_2023_c_scale,data/huang_2023_bullying_victimization.py,never_examined,no harvest log was ever built for this script
+huang_2023_d_scale,data/huang_2023_bullying_victimization.py,never_examined,no harvest log was ever built for this script
+huang_2023_e_scale,data/huang_2023_bullying_victimization.py,never_examined,no harvest log was ever built for this script
+ibrahim_2015_bfi,data/ibrahim_2015_ckd_personality_qol.py,never_examined,no harvest log was ever built for this script
+ibrahim_2015_sf36,data/ibrahim_2015_ckd_personality_qol.py,never_examined,no harvest log was ever built for this script
+jeon_2019_cbi,data/jeon_2019_cbi_cesd.py,never_examined,no harvest log was ever built for this script
+jeon_2019_cesd10,data/jeon_2019_cbi_cesd.py,never_examined,no harvest log was ever built for this script
+johnhenderson_2020_disinfection_behavior,data/johnhenderson_2020_health_mindsets.py,never_examined,no harvest log was ever built for this script
+johnhenderson_2020_health_mindset,data/johnhenderson_2020_health_mindsets.py,never_examined,no harvest log was ever built for this script
+jutte_2024_loneliness,data/jutte_2024_loneliness_battery.py,never_examined,no harvest log was ever built for this script
+jutte_2024_personality,data/jutte_2024_loneliness_battery.py,never_examined,no harvest log was ever built for this script
+karim_2022_phq9,data/karim_2022_covid_hcw.py,never_examined,no harvest log was ever built for this script
+kim_2023_gad7,data/kim_2023_pss_phq_gad.py,never_examined,no harvest log was ever built for this script
+kim_2023_phq9,data/kim_2023_pss_phq_gad.py,never_examined,no harvest log was ever built for this script
+kim_2023_pss10,data/kim_2023_pss_phq_gad.py,never_examined,no harvest log was ever built for this script
+korner_2022_gpsps_s1,data/korner_2022_gpsps.py,never_examined,no harvest log was ever built for this script
+korner_2022_gpsps_s2_partner,data/korner_2022_gpsps.py,never_examined,no harvest log was ever built for this script
+korner_2022_gpsps_s3_clinical,data/korner_2022_gpsps.py,never_examined,no harvest log was ever built for this script
+kumlander_2018_bdi,data/kumlander_2018_self_compassion.py,never_examined,no harvest log was ever built for this script
+kumlander_2018_scs,data/kumlander_2018_self_compassion.py,never_examined,no harvest log was ever built for this script
+lai_2023_parent_relation_father,data/lai_2023_social_adaptability.py,never_examined,no harvest log was ever built for this script
+lai_2023_parent_relation_mother,data/lai_2023_social_adaptability.py,never_examined,no harvest log was ever built for this script
+lai_2023_peer_relationship,data/lai_2023_social_adaptability.py,never_examined,no harvest log was ever built for this script
+lai_2023_teacher_student_rel,data/lai_2023_social_adaptability.py,never_examined,no harvest log was ever built for this script
+lavallee_2019_cas,data/lavallee_2019_jealousy_friendship.py,never_examined,no harvest log was ever built for this script
+lavallee_2019_harmony,data/lavallee_2019_jealousy_friendship.py,never_examined,no harvest log was ever built for this script
+lavallee_2019_jealousy,data/lavallee_2019_jealousy_friendship.py,never_examined,no harvest log was ever built for this script
+lavallee_2019_loneliness,data/lavallee_2019_jealousy_friendship.py,never_examined,no harvest log was ever built for this script
+lavallee_2019_oseb,data/lavallee_2019_jealousy_friendship.py,never_examined,no harvest log was ever built for this script
+lavallee_2019_sseb,data/lavallee_2019_jealousy_friendship.py,never_examined,no harvest log was ever built for this script
+leinauer_2023_atlg,data/leinauer_2023_disgust_custody.py,never_examined,no harvest log was ever built for this script
+leinauer_2023_dsr,data/leinauer_2023_disgust_custody.py,never_examined,no harvest log was ever built for this script
+leinauer_2023_gender_role_beliefs,data/leinauer_2023_disgust_custody.py,never_examined,no harvest log was ever built for this script
+leinauer_2023_moral_traditionalism,data/leinauer_2023_disgust_custody.py,never_examined,no harvest log was ever built for this script
+leon_guereno_2020_breq,data/leon_guereno_2020_breq_rs.py,never_examined,no harvest log was ever built for this script
+leon_guereno_2020_resilience,data/leon_guereno_2020_breq_rs.py,never_examined,no harvest log was ever built for this script
+lev_ari_2021_ders,data/lev_ari_2021_eating.py,never_examined,no harvest log was ever built for this script
+lev_ari_2021_des,data/lev_ari_2021_eating.py,never_examined,no harvest log was ever built for this script
+lev_ari_2021_edeq,data/lev_ari_2021_eating.py,never_examined,no harvest log was ever built for this script
+liu_2017_benefit_finding,data/liu_2017_cancer_exercise.py,never_examined,no harvest log was ever built for this script
+liu_2017_communication,data/liu_2017_cancer_exercise.py,never_examined,no harvest log was ever built for this script
+liu_2017_mcmq_coping,data/liu_2017_cancer_exercise.py,never_examined,no harvest log was ever built for this script
+liu_2017_qol,data/liu_2017_cancer_exercise.py,never_examined,no harvest log was ever built for this script
+liu_2017_scale_d,data/liu_2017_cancer_exercise.py,never_examined,no harvest log was ever built for this script
+liu_2017_scale_o,data/liu_2017_cancer_exercise.py,never_examined,no harvest log was ever built for this script
+liu_2017_ssrs_support,data/liu_2017_cancer_exercise.py,never_examined,no harvest log was ever built for this script
+luo_2021_acculturation_index,data/luo_2021_acculturation.py,never_examined,no harvest log was ever built for this script
+luo_2021_conational_ties,data/luo_2021_acculturation.py,never_examined,no harvest log was ever built for this script
+luo_2021_ecr,data/luo_2021_acculturation.py,never_examined,no harvest log was ever built for this script
+luo_2021_host_ties,data/luo_2021_acculturation.py,never_examined,no harvest log was ever built for this script
+luo_2021_intl_ties,data/luo_2021_acculturation.py,never_examined,no harvest log was ever built for this script
+luttenberger_2021_ferus,data/luttenberger_2021_bouldering.py,never_examined,no harvest log was ever built for this script
+luttenberger_2021_fkb,data/luttenberger_2021_bouldering.py,never_examined,no harvest log was ever built for this script
+luttenberger_2021_gad7,data/luttenberger_2021_bouldering.py,never_examined,no harvest log was ever built for this script
+luttenberger_2021_gse,data/luttenberger_2021_bouldering.py,never_examined,no harvest log was ever built for this script
+luttenberger_2021_madrs,data/luttenberger_2021_bouldering.py,never_examined,no harvest log was ever built for this script
+luttenberger_2021_phq9,data/luttenberger_2021_bouldering.py,never_examined,no harvest log was ever built for this script
+luttenberger_2021_rses,data/luttenberger_2021_bouldering.py,never_examined,no harvest log was ever built for this script
+luttenberger_2021_scl_social,data/luttenberger_2021_bouldering.py,never_examined,no harvest log was ever built for this script
+mairean_2023_ctq,data/mairean_2023_childhood_trauma.py,never_examined,no harvest log was ever built for this script
+mairean_2023_life_events,data/mairean_2023_childhood_trauma.py,never_examined,no harvest log was ever built for this script
+mairean_2023_mpfi,data/mairean_2023_childhood_trauma.py,never_examined,no harvest log was ever built for this script
+mairean_2023_pwb_ptcq,data/mairean_2023_childhood_trauma.py,never_examined,no harvest log was ever built for this script
+mairean_2023_scs_sf,data/mairean_2023_childhood_trauma.py,never_examined,no harvest log was ever built for this script
+mairean_2024_css12,data/mairean_2024_health_death_anxiety.py,never_examined,no harvest log was ever built for this script
+mairean_2024_das,data/mairean_2024_health_death_anxiety.py,never_examined,no harvest log was ever built for this script
+mairean_2024_hscm,data/mairean_2024_health_death_anxiety.py,never_examined,no harvest log was ever built for this script
+mairean_2024_panas,data/mairean_2024_health_death_anxiety.py,never_examined,no harvest log was ever built for this script
+mairean_2024_shai,data/mairean_2024_health_death_anxiety.py,never_examined,no harvest log was ever built for this script
+makowska_2023_pdts,data/makowska_2023_dtss.py,never_examined,no harvest log was ever built for this script
+makowska_2023_pss4,data/makowska_2023_dtss.py,never_examined,no harvest log was ever built for this script
+manolika_2021_dirty_dozen,data/manolika_2021_preferences.py,never_examined,no harvest log was ever built for this script
+manolika_2021_mini_ipip,data/manolika_2021_preferences.py,never_examined,no harvest log was ever built for this script
+manolika_2021_movie_preferences,data/manolika_2021_preferences.py,never_examined,no harvest log was ever built for this script
+manolika_2021_reading_preferences,data/manolika_2021_preferences.py,never_examined,no harvest log was ever built for this script
+marcussonclavertz_2019_velten,data/marcussonclavertz_2019_velten_mood_induction.py,never_examined,no harvest log was ever built for this script
+mendezlopez_2023_bfi10,data/mendezlopez_2023_ict_mental_health.py,never_examined,no harvest log was ever built for this script
+mendezlopez_2023_cdrisc10,data/mendezlopez_2023_ict_mental_health.py,never_examined,no harvest log was ever built for this script
+mendezlopez_2023_gad7,data/mendezlopez_2023_ict_mental_health.py,never_examined,no harvest log was ever built for this script
+mendezlopez_2023_gses12,data/mendezlopez_2023_ict_mental_health.py,never_examined,no harvest log was ever built for this script
+mendezlopez_2023_multicage_ict,data/mendezlopez_2023_ict_mental_health.py,never_examined,no harvest log was ever built for this script
+mendezlopez_2023_phq9,data/mendezlopez_2023_ict_mental_health.py,never_examined,no harvest log was ever built for this script
+mendezlopez_2023_rses,data/mendezlopez_2023_ict_mental_health.py,never_examined,no harvest log was ever built for this script
+mendezlopez_2023_soc13,data/mendezlopez_2023_ict_mental_health.py,never_examined,no harvest log was ever built for this script
+moe2025_erq,data/moe2025_selfcompassion.py,never_examined,no harvest log was ever built for this script
+moe2025_scs,data/moe2025_selfcompassion.py,never_examined,no harvest log was ever built for this script
+moe2025_sis,data/moe2025_selfcompassion.py,never_examined,no harvest log was ever built for this script
+nteveros_2021_mbi,data/nteveros_2021_mbi_who5_psqi_cyprus.py,never_examined,no harvest log was ever built for this script
+nteveros_2021_psqi_disturbance,data/nteveros_2021_mbi_who5_psqi_cyprus.py,never_examined,no harvest log was ever built for this script
+nteveros_2021_who5,data/nteveros_2021_mbi_who5_psqi_cyprus.py,never_examined,no harvest log was ever built for this script
+oskooii_2024_amid,data/oskooii_2024_anti_muslim_policy.py,never_examined,no harvest log was ever built for this script
+oskooii_2024_muslim_resentment,data/oskooii_2024_anti_muslim_policy.py,never_examined,no harvest log was ever built for this script
+park_2021_pss10,data/park_2021_pss_swls.py,never_examined,no harvest log was ever built for this script
+park_2021_swls,data/park_2021_pss_swls.py,never_examined,no harvest log was ever built for this script
+pavic_2022_healthcare_trust,data/pavic_2022_vaccine_conspiracy.py,never_examined,no harvest log was ever built for this script
+pavic_2022_natural_immunity,data/pavic_2022_vaccine_conspiracy.py,never_examined,no harvest log was ever built for this script
+pavic_2022_science_literacy,data/pavic_2022_vaccine_conspiracy.py,never_examined,no harvest log was ever built for this script
+pecino_2018_extrarole_wfb,data/pecino_2018_interpersonal_justice.py,never_examined,no harvest log was ever built for this script
+pecino_2018_justice_climate,data/pecino_2018_interpersonal_justice.py,never_examined,no harvest log was ever built for this script
+pierro_2018_assessment_s1,data/pierro_2018_selfforgiveness.py,never_examined,no harvest log was ever built for this script
+pierro_2018_assessment_s3,data/pierro_2018_selfforgiveness.py,never_examined,no harvest log was ever built for this script
+pierro_2018_assessment_s4,data/pierro_2018_selfforgiveness.py,never_examined,no harvest log was ever built for this script
+pierro_2018_hfs_s4,data/pierro_2018_selfforgiveness.py,never_examined,no harvest log was ever built for this script
+pierro_2018_locomotion_s1,data/pierro_2018_selfforgiveness.py,never_examined,no harvest log was ever built for this script
+pierro_2018_locomotion_s3,data/pierro_2018_selfforgiveness.py,never_examined,no harvest log was ever built for this script
+pierro_2018_locomotion_s4,data/pierro_2018_selfforgiveness.py,never_examined,no harvest log was ever built for this script
+pierro_2018_negaffect_s3,data/pierro_2018_selfforgiveness.py,never_examined,no harvest log was ever built for this script
+pierro_2018_posaffect_s3,data/pierro_2018_selfforgiveness.py,never_examined,no harvest log was ever built for this script
+pierro_2018_selfforgive_s1,data/pierro_2018_selfforgiveness.py,never_examined,no harvest log was ever built for this script
+pierro_2018_selfforgive_s2,data/pierro_2018_selfforgiveness.py,never_examined,no harvest log was ever built for this script
+pierro_2018_selfforgive_s3,data/pierro_2018_selfforgiveness.py,never_examined,no harvest log was ever built for this script
+pierro_2018_tf_future_s4,data/pierro_2018_selfforgiveness.py,never_examined,no harvest log was ever built for this script
+pierro_2018_tf_past_s4,data/pierro_2018_selfforgiveness.py,never_examined,no harvest log was ever built for this script
+pierro_2018_tf_present_s4,data/pierro_2018_selfforgiveness.py,never_examined,no harvest log was ever built for this script
+pranckeviciene_2022_gad7,data/pranckeviciene_2022_phq_gad.py,never_examined,no harvest log was ever built for this script
+pranckeviciene_2022_phq9,data/pranckeviciene_2022_phq_gad.py,never_examined,no harvest log was ever built for this script
+rahm_2017_hswbs,data/rahm_2017_spane_battery.py,never_examined,no harvest log was ever built for this script
+rahm_2017_panas,data/rahm_2017_spane_battery.py,never_examined,no harvest log was ever built for this script
+rahm_2017_shs,data/rahm_2017_spane_battery.py,never_examined,no harvest log was ever built for this script
+rahm_2017_spane,data/rahm_2017_spane_battery.py,never_examined,no harvest log was ever built for this script
+rahm_2017_swls,data/rahm_2017_spane_battery.py,never_examined,no harvest log was ever built for this script
+robie_2022_cab,data/robie_2022_response_order.py,never_examined,no harvest log was ever built for this script
+robie_2022_hexaco60,data/robie_2022_response_order.py,never_examined,no harvest log was ever built for this script
+roelen_2020_dietary_diversity,data/roelen_2020_haiti_battery.py,never_examined,no harvest log was ever built for this script
+roelen_2020_k6,data/roelen_2020_haiti_battery.py,never_examined,no harvest log was ever built for this script
+roelen_2020_rses,data/roelen_2020_haiti_battery.py,never_examined,no harvest log was ever built for this script
+roettl_2018_arousal,data/roettl_2018_game.py,never_examined,no harvest log was ever built for this script
+roettl_2018_brand_attitude,data/roettl_2018_game.py,never_examined,no harvest log was ever built for this script
+roettl_2018_brand_recognition,data/roettl_2018_game.py,never_examined,no harvest log was ever built for this script
+roettl_2018_game_attitude,data/roettl_2018_game.py,never_examined,no harvest log was ever built for this script
+roettl_2018_scepticism,data/roettl_2018_game.py,never_examined,no harvest log was ever built for this script
+rosharudin_2023_dass21,data/rosharudin_2023_ders18.py,never_examined,no harvest log was ever built for this script
+rzeszutek_2020_ghq28,data/rzeszutek_2020_wwii_grandparent_trauma.py,never_examined,no harvest log was ever built for this script
+rzeszutek_2020_swls,data/rzeszutek_2020_wwii_grandparent_trauma.py,never_examined,no harvest log was ever built for this script
+rzeszutek_2020_wwii_matgrandfather,data/rzeszutek_2020_wwii_grandparent_trauma.py,never_examined,no harvest log was ever built for this script
+rzeszutek_2020_wwii_matgrandmother,data/rzeszutek_2020_wwii_grandparent_trauma.py,never_examined,no harvest log was ever built for this script
+rzeszutek_2020_wwii_patgrandfather,data/rzeszutek_2020_wwii_grandparent_trauma.py,never_examined,no harvest log was ever built for this script
+rzeszutek_2020_wwii_patgrandmother,data/rzeszutek_2020_wwii_grandparent_trauma.py,never_examined,no harvest log was ever built for this script
+sadish_2021_covid_symptoms,data/sadish_2021_covid_information.py,never_examined,no harvest log was ever built for this script
+sadish_2021_numeracy,data/sadish_2021_covid_information.py,never_examined,no harvest log was ever built for this script
+safiye_2023_mbi,data/safiye_2023_mbi_rfq.py,never_examined,no harvest log was ever built for this script
+safiye_2023_rfq,data/safiye_2023_mbi_rfq.py,never_examined,no harvest log was ever built for this script
+sanchezgarcia_2025_moral_disengagement,data/sanchezgarcia_2025_academic_dishonesty.py,never_examined,no harvest log was ever built for this script
+sanchezgarcia_2025_sd4,data/sanchezgarcia_2025_academic_dishonesty.py,never_examined,no harvest log was ever built for this script
+sanchezgarcia_2025_vassip_bfi2s,data/sanchezgarcia_2025_academic_dishonesty.py,never_examined,no harvest log was ever built for this script
+sawatzky_2025_mqol_e,data/sawatzky_2025_qpss.py,never_examined,no harvest log was ever built for this script
+sawatzky_2025_qollti_f,data/sawatzky_2025_qpss.py,never_examined,no harvest log was ever built for this script
+schroeter_2015_ecrr,data/schroeter_2015_pain_attachment.py,never_examined,no harvest log was ever built for this script
+schroeter_2015_ffbhr,data/schroeter_2015_pain_attachment.py,never_examined,no harvest log was ever built for this script
+schroeter_2015_hads,data/schroeter_2015_pain_attachment.py,never_examined,no harvest log was ever built for this script
+schroeter_2015_rq,data/schroeter_2015_pain_attachment.py,never_examined,no harvest log was ever built for this script
+sekowski_2023_ada,data/sekowski_2023_attachment.py,never_examined,no harvest log was ever built for this script
+sekowski_2023_phq9,data/sekowski_2023_attachment.py,never_examined,no harvest log was ever built for this script
+sekowski_2023_rfq8,data/sekowski_2023_attachment.py,never_examined,no harvest log was ever built for this script
+shan_2020_cs,data/shan_2020_acculturative_stress.py,never_examined,no harvest log was ever built for this script
+shan_2020_f,data/shan_2020_acculturative_stress.py,never_examined,no harvest log was ever built for this script
+shan_2020_g,data/shan_2020_acculturative_stress.py,never_examined,no harvest log was ever built for this script
+shan_2020_hs,data/shan_2020_acculturative_stress.py,never_examined,no harvest log was ever built for this script
+shan_2020_pd,data/shan_2020_acculturative_stress.py,never_examined,no harvest log was ever built for this script
+shan_2020_ph,data/shan_2020_acculturative_stress.py,never_examined,no harvest log was ever built for this script
+shi_2025_brums,data/shi_2025_mindfulness.py,never_examined,no harvest log was ever built for this script
+shi_2025_dass21,data/shi_2025_mindfulness.py,never_examined,no harvest log was ever built for this script
+shi_2025_maas,data/shi_2025_mindfulness.py,never_examined,no harvest log was ever built for this script
+shi_2025_resilience,data/shi_2025_mindfulness.py,never_examined,no harvest log was ever built for this script
+shi_2025_rrs,data/shi_2025_mindfulness.py,never_examined,no harvest log was ever built for this script
+shineha_2024_gef_accept_factors,data/shineha_2024_genome_edited_food.py,never_examined,no harvest log was ever built for this script
+shineha_2024_gef_attitudes,data/shineha_2024_genome_edited_food.py,never_examined,no harvest log was ever built for this script
+shineha_2024_gef_info_topics,data/shineha_2024_genome_edited_food.py,never_examined,no harvest log was ever built for this script
+song_2026_fqol,data/song_2026_family_quality_of_life.py,never_examined,no harvest log was ever built for this script
+song_2026_parenting_self_efficacy,data/song_2026_family_quality_of_life.py,never_examined,no harvest log was ever built for this script
+song_2026_parenting_style,data/song_2026_family_quality_of_life.py,never_examined,no harvest log was ever built for this script
+stanford_2019_bbrs_belief,data/stanford_2019_burmese_buddhism.py,never_examined,no harvest log was ever built for this script
+stanford_2019_bbrs_frequency,data/stanford_2019_burmese_buddhism.py,never_examined,no harvest log was ever built for this script
+strojny_2026_gdt,data/strojny_2026_gaming_motivation.py,never_examined,no harvest log was ever built for this script
+strojny_2026_gis,data/strojny_2026_gaming_motivation.py,never_examined,no harvest log was ever built for this script
+strojny_2026_gmi,data/strojny_2026_gaming_motivation.py,never_examined,no harvest log was ever built for this script
+strojny_2026_igds9sf,data/strojny_2026_gaming_motivation.py,never_examined,no harvest log was ever built for this script
+talayero_2023_flood_management_adequacy,data/talayero_2023_flood.py,never_examined,no harvest log was ever built for this script
+talayero_2023_flood_mitigation_attitudes,data/talayero_2023_flood.py,never_examined,no harvest log was ever built for this script
+talayero_2023_flood_risk_perception,data/talayero_2023_flood.py,never_examined,no harvest log was ever built for this script
+tantia_2024_ats_course,data/tantia_2024_ats.py,never_examined,no harvest log was ever built for this script
+tantia_2024_ats_field,data/tantia_2024_ats.py,never_examined,no harvest log was ever built for this script
+thiessen_2023_bfi10,data/thiessen_2023_choking.py,never_examined,no harvest log was ever built for this script
+thiessen_2023_csia,data/thiessen_2023_choking.py,never_examined,no harvest log was ever built for this script
+thiessen_2023_sas,data/thiessen_2023_choking.py,never_examined,no harvest log was ever built for this script
+thiessen_2023_scs,data/thiessen_2023_choking.py,never_examined,no harvest log was ever built for this script
+tsujimura_2022_ams,data/tsujimura_2022_loh.py,never_examined,no harvest log was ever built for this script
+tsujimura_2022_bdi,data/tsujimura_2022_loh.py,never_examined,no harvest log was ever built for this script
+tsujimura_2022_ipss,data/tsujimura_2022_loh.py,never_examined,no harvest log was ever built for this script
+tsujimura_2022_shim,data/tsujimura_2022_loh.py,never_examined,no harvest log was ever built for this script
+tuason_2021_covid_coping_enjoy,data/tuason_2021_thriving_covid.py,never_examined,no harvest log was ever built for this script
+tuason_2021_loneliness_emotional,data/tuason_2021_thriving_covid.py,never_examined,no harvest log was ever built for this script
+tuason_2021_loneliness_social,data/tuason_2021_thriving_covid.py,never_examined,no harvest log was ever built for this script
+tuason_2021_sense_of_agency,data/tuason_2021_thriving_covid.py,never_examined,no harvest log was ever built for this script
+tuason_2021_wellbeing,data/tuason_2021_thriving_covid.py,never_examined,no harvest log was ever built for this script
+turner_2022_cognitive_mediation,data/turner_2022_abcs.py,never_examined,no harvest log was ever built for this script
+turner_2022_sr_belief_change,data/turner_2022_abcs.py,never_examined,no harvest log was ever built for this script
+turpochaparro_2026_family_communication,data/turpochaparro_2026_social_network_addiction.py,never_examined,no harvest log was ever built for this script
+turpochaparro_2026_self_esteem,data/turpochaparro_2026_social_network_addiction.py,never_examined,no harvest log was ever built for this script
+usmani_2024_iwe,data/usmani_2024_islamic_work_ethic.py,never_examined,no harvest log was ever built for this script
+usmani_2024_ks,data/usmani_2024_islamic_work_ethic.py,never_examined,no harvest log was ever built for this script
+usmani_2024_pops,data/usmani_2024_islamic_work_ethic.py,never_examined,no harvest log was ever built for this script
+wang_2016_study1_authalien,data/wang_2016_authenticity_relationship.py,never_examined,no harvest log was ever built for this script
+wang_2016_study1_authexternal,data/wang_2016_authenticity_relationship.py,never_examined,no harvest log was ever built for this script
+wang_2016_study1_authliving,data/wang_2016_authenticity_relationship.py,never_examined,no harvest log was ever built for this script
+wang_2016_study1_power,data/wang_2016_authenticity_relationship.py,never_examined,no harvest log was ever built for this script
+wang_2016_study1_relationship,data/wang_2016_authenticity_relationship.py,never_examined,no harvest log was ever built for this script
+wang_2016_study1_se,data/wang_2016_authenticity_relationship.py,never_examined,no harvest log was ever built for this script
+wang_2016_study3_auth,data/wang_2016_authenticity_relationship.py,never_examined,no harvest log was ever built for this script
+wang_2016_study3_power,data/wang_2016_authenticity_relationship.py,never_examined,no harvest log was ever built for this script
+wang_2016_study3_se,data/wang_2016_authenticity_relationship.py,never_examined,no harvest log was ever built for this script
+wang_2016_study3_social_desirability,data/wang_2016_authenticity_relationship.py,never_examined,no harvest log was ever built for this script
+wang_2024_emotion1,data/wang_2024_achievement_emotions.py,never_examined,no harvest log was ever built for this script
+wang_2024_emotion2,data/wang_2024_achievement_emotions.py,never_examined,no harvest log was ever built for this script
+wang_2024_emotion3,data/wang_2024_achievement_emotions.py,never_examined,no harvest log was ever built for this script
+wang_2024_emotion4,data/wang_2024_achievement_emotions.py,never_examined,no harvest log was ever built for this script
+wang_2024_emotion5,data/wang_2024_achievement_emotions.py,never_examined,no harvest log was ever built for this script
+west_2020_feeling_thermometer,data/west_2020_partisan_identity.py,never_examined,no harvest log was ever built for this script
+west_2020_partisan_traits,data/west_2020_partisan_identity.py,never_examined,no harvest log was ever built for this script
+west_2020_trump_approval,data/west_2020_partisan_identity.py,never_examined,no harvest log was ever built for this script
+west_2020_trump_feel,data/west_2020_partisan_identity.py,never_examined,no harvest log was ever built for this script
+west_2020_trump_qualities,data/west_2020_partisan_identity.py,never_examined,no harvest log was ever built for this script
+wolf_2017_study1_anxiety,data/wolf_2017_biodiversity_wellbeing.py,never_examined,no harvest log was ever built for this script
+wolf_2017_study1_posaff,data/wolf_2017_biodiversity_wellbeing.py,never_examined,no harvest log was ever built for this script
+wolf_2017_study1_vitality,data/wolf_2017_biodiversity_wellbeing.py,never_examined,no harvest log was ever built for this script
+wolf_2017_study2_anxiety_post,data/wolf_2017_biodiversity_wellbeing.py,never_examined,no harvest log was ever built for this script
+wolf_2017_study2_anxiety_pre,data/wolf_2017_biodiversity_wellbeing.py,never_examined,no harvest log was ever built for this script
+wolf_2017_study2_nature_connect,data/wolf_2017_biodiversity_wellbeing.py,never_examined,no harvest log was ever built for this script
+wolf_2017_study2_posaff_post,data/wolf_2017_biodiversity_wellbeing.py,never_examined,no harvest log was ever built for this script
+wolf_2017_study2_posaff_pre,data/wolf_2017_biodiversity_wellbeing.py,never_examined,no harvest log was ever built for this script
+wolf_2017_study2_video_liking,data/wolf_2017_biodiversity_wellbeing.py,never_examined,no harvest log was ever built for this script
+wolf_2017_study2_vitality_post,data/wolf_2017_biodiversity_wellbeing.py,never_examined,no harvest log was ever built for this script
+wolf_2017_study2_vitality_pre,data/wolf_2017_biodiversity_wellbeing.py,never_examined,no harvest log was ever built for this script
+wu_2015_bsrs5,data/wu_2015_internet_addiction.py,never_examined,no harvest log was ever built for this script
+wu_2015_cias,data/wu_2015_internet_addiction.py,never_examined,no harvest log was ever built for this script
+wu_2015_mpi_lie,data/wu_2015_internet_addiction.py,never_examined,no harvest log was ever built for this script
+wu_2015_mpi_neuroticism,data/wu_2015_internet_addiction.py,never_examined,no harvest log was ever built for this script
+wurm_2016_hbi,data/wurm_2016_burnout_battery.py,never_examined,no harvest log was ever built for this script
+wurm_2016_mdi,data/wurm_2016_burnout_battery.py,never_examined,no harvest log was ever built for this script
+xu_2018_authentic_leadership,data/xu_2018_teacher_burnout.py,never_examined,no harvest log was ever built for this script
+xu_2018_emotional_exhaustion,data/xu_2018_teacher_burnout.py,never_examined,no harvest log was ever built for this script
+xu_2018_psych_empowerment,data/xu_2018_teacher_burnout.py,never_examined,no harvest log was ever built for this script
+xu_2018_structural_empowerment,data/xu_2018_teacher_burnout.py,never_examined,no harvest log was ever built for this script
+xu_2023_hi,data/xu_2023_intelligent_service.py,never_examined,no harvest log was ever built for this script
+xu_2023_mi,data/xu_2023_intelligent_service.py,never_examined,no harvest log was ever built for this script
+xu_2023_oic,data/xu_2023_intelligent_service.py,never_examined,no harvest log was ever built for this script
+xu_2023_pca,data/xu_2023_intelligent_service.py,never_examined,no harvest log was ever built for this script
+yao_2023_boredom_proneness,data/yao_2023_tiktok.py,never_examined,no harvest log was ever built for this script
+yao_2023_depression,data/yao_2023_tiktok.py,never_examined,no harvest log was ever built for this script
+yao_2023_distress_intolerance,data/yao_2023_tiktok.py,never_examined,no harvest log was ever built for this script
+yao_2023_social_anxiety,data/yao_2023_tiktok.py,never_examined,no harvest log was ever built for this script
+yao_2023_tiktok_problem_use,data/yao_2023_tiktok.py,never_examined,no harvest log was ever built for this script
+yao_2023_tiktok_use_frequency,data/yao_2023_tiktok.py,never_examined,no harvest log was ever built for this script
+ye_2025_jl,data/ye_2025_imposter_battery.py,never_examined,no harvest log was ever built for this script
+ye_2025_mm,data/ye_2025_imposter_battery.py,never_examined,no harvest log was ever built for this script
+ye_2025_tq,data/ye_2025_imposter_battery.py,never_examined,no harvest log was ever built for this script
+ye_2025_xc,data/ye_2025_imposter_battery.py,never_examined,no harvest log was ever built for this script
+zautra_2015_caug,data/zautra_2015_social_intelligence_battery.py,never_examined,no harvest log was ever built for this script
+zautra_2015_iri,data/zautra_2015_social_intelligence_battery.py,never_examined,no harvest log was ever built for this script
+zautra_2015_tmms24,data/zautra_2015_social_intelligence_battery.py,never_examined,no harvest log was ever built for this script
+zeng_2025_adoption_flipped,data/zeng_2025_flipped_learning.py,never_examined,no harvest log was ever built for this script
+zeng_2025_attitude_flipped,data/zeng_2025_flipped_learning.py,never_examined,no harvest log was ever built for this script
+zeng_2025_motivation_for_learning,data/zeng_2025_flipped_learning.py,never_examined,no harvest log was ever built for this script
+zeng_2025_online_comm_self_efficacy,data/zeng_2025_flipped_learning.py,never_examined,no harvest log was ever built for this script
+zeng_2025_self_directed_learning,data/zeng_2025_flipped_learning.py,never_examined,no harvest log was ever built for this script
+zeng_2025_technology_readiness,data/zeng_2025_flipped_learning.py,never_examined,no harvest log was ever built for this script
+zhang_2026_pe_burnout,data/zhang_2026_pe_teacher_burnout.py,never_examined,no harvest log was ever built for this script
+zhang_2026_pe_identity,data/zhang_2026_pe_teacher_burnout.py,never_examined,no harvest log was ever built for this script
+zhang_2026_pe_uwes9,data/zhang_2026_pe_teacher_burnout.py,never_examined,no harvest log was ever built for this script
+ccapsvtskhpacr_mercedes_2023_beck,data/ccapsvtskhpacr_mercedes_2023.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+ccapsvtskhpacr_mercedes_2023_hada,data/ccapsvtskhpacr_mercedes_2023.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+ccapsvtskhpacr_mercedes_2023_physical,data/ccapsvtskhpacr_mercedes_2023.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+ccapsvtskhpacr_mercedes_2023_sf,data/ccapsvtskhpacr_mercedes_2023.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+ccapsvtskhpacr_mercedes_2023_tsk,data/ccapsvtskhpacr_mercedes_2023.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+chen_2022_cesd,data/mental_health_covid19/src/src/src/src/process_chen_2022_mental_health.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+chen_2022_gad,data/mental_health_covid19/src/src/src/src/process_chen_2022_mental_health.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+chen_2022_sasc,data/mental_health_covid19/src/src/src/src/process_chen_2022_mental_health.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+dscore_asq_weber_2019,data/dscore_weber_2019.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+dscore_barrera_weber_2019,data/dscore_weber_2019.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+dscore_battelle_weber_2019,data/dscore_weber_2019.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+dscore_bayley_weber_2019,data/dscore_weber_2019.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+dscore_denver_weber_2019,data/dscore_weber_2019.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+dscore_dutch_weber_2019,data/dscore_weber_2019.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+dscore_griffiths_weber_2019,data/dscore_weber_2019.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+dscore_macarthur_weber_2019,data/dscore_weber_2019.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+dscore_mds_weber_2019,data/dscore_weber_2019.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+dscore_pegboard_weber_2019,data/dscore_weber_2019.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+dscore_sbi_weber_2019,data/dscore_weber_2019.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+dscore_vineland_weber_2019,data/dscore_weber_2019.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+ecps_sahm_2024_distrust,data/ECPS_Sahm_2024.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+ecps_sahm_2024_dtl,data/ECPS_Sahm_2024.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+ecps_sahm_2024_emotion,data/ECPS_Sahm_2024.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+ecps_sahm_2024_ia,data/ECPS_Sahm_2024.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+ecps_sahm_2024_identity,data/ECPS_Sahm_2024.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+ecps_sahm_2024_moral,data/ECPS_Sahm_2024.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+ecps_sahm_2024_sscd,data/ECPS_Sahm_2024.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+ecps_sahm_2024_stress,data/ECPS_Sahm_2024.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+ecps_sahm_2024_support,data/ECPS_Sahm_2024.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+ecps_sahm_2024_trust,data/ECPS_Sahm_2024.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+ecps_sahm_2024_vaccine,data/ECPS_Sahm_2024.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+erf_breuer_2017_dosp,data/erf_breuer_2017.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+erf_breuer_2017_frmfr,data/erf_breuer_2017.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+erf_breuer_2017_frmmc,data/erf_breuer_2017.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+erf_breuer_2017_tai,data/erf_breuer_2017.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+fcupanas_cffsdas_reyna_2018_7pt,data/fcupanas_cffsdas_reyna_2018.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_10,data/gilbert_hte/il_hte_10_11_12.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_102,data/gilbert_meta_102through104.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_103,data/gilbert_meta_102through104.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_104,data/gilbert_meta_102through104.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_108,data/gilbert_108.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_109,data/gilbert_109through111.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_11,data/gilbert_hte/il_hte_10_11_12.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_110,data/gilbert_109through111.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_111,data/gilbert_109through111.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_12,data/gilbert_hte/il_hte_10_11_12.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_13,data/gilbert_hte/il_hte_13_14_15.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_14,data/gilbert_hte/il_hte_13_14_15.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_15,data/gilbert_hte/il_hte_13_14_15.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_16,data/gilbert_hte/il_hte_16.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_17,data/gilbert_hte/il_hte_17_18_19.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_18,data/gilbert_hte/il_hte_17_18_19.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_19,data/gilbert_hte/il_hte_17_18_19.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_2,data/content_literacy_intervention.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_22,data/gilbert_hte/il_hte_22.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_27,data/gilbert_hte/il_hte_27_28.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_28,data/gilbert_hte/il_hte_27_28.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_29,data/gilbert_hte/il_hte_29_30.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_30,data/gilbert_hte/il_hte_29_30.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_31,data/gilbert_hte/il_hte_31.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_33,data/gilbert_hte/il_hte_33.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_34,data/gilbert_hte/il_hte_34.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_35,data/gilbert_hte/il_hte_35_36.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_36,data/gilbert_hte/il_hte_35_36.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_37,data/gilbert_hte/il_hte_37_38.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_38,data/gilbert_hte/il_hte_37_38.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_39,data/gilbert_hte/il_hte_39_40.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_4,data/gilbert_hte/il_hte_04.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_40,data/gilbert_hte/il_hte_39_40.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_41,data/gilbert_hte/il_hte_41.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_42,data/gilbert_hte/il_hte_42_43.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_43,data/gilbert_hte/il_hte_42_43.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_44,data/gilbert_hte/il_hte_44.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_48,data/gilbert_hte/il_hte_48.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_5,data/gilbert_hte/il_hte_05.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_50,data/gilbert_hte/il_hte_50_51.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_51,data/gilbert_hte/il_hte_50_51.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_52,data/gilbert_hte/il_hte_52.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_55,data/gilbert_hte/il_hte_55.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_57,data/gilbert_hte/il_hte_57_58_59.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_58,data/gilbert_hte/il_hte_57_58_59.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_59,data/gilbert_hte/il_hte_57_58_59.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_6,data/gilbert_hte/il_hte_06.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_63,data/gilbert_hte/il_hte_63.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_68,data/gilbert_hte/il_hte_68_69.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_69,data/gilbert_hte/il_hte_68_69.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_7,data/gilbert_hte/il_hte_07_08.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_70,data/gilbert_hte/il_hte_70_71_72_73.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_71,data/gilbert_hte/il_hte_70_71_72_73.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_72,data/gilbert_hte/il_hte_70_71_72_73.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_73,data/gilbert_hte/il_hte_70_71_72_73.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_75,data/gilbert_hte/il_hte_75.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_8,data/gilbert_hte/il_hte_07_08.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_83,data/gilbert_meta_83through85.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_84,data/gilbert_meta_83through85.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_85,data/gilbert_meta_83through85.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_9,data/gilbert_hte/il_hte_09.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+gilbert_meta_94,data/gilbert_94.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+hpwt_bayona_2025_jobperformance,data/hpwt_bayona_2025.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+hpwt_bayona_2025_jobsatisfaction,data/hpwt_bayona_2025.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+hpwt_bayona_2025_workcharacteristics,data/hpwt_bayona_2025.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+iat_difference,data/iat.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+iat_poverty,data/iat.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+ieswriting_molloy_2022,data/iewsriting_molloy_2022.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+ipip_openpsychometrics_ad,data/ipip_openpsychometrics.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+ipip_openpsychometrics_as,data/ipip_openpsychometrics.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+ipip_openpsychometrics_do,data/ipip_openpsychometrics.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+ipip_openpsychometrics_sc,data/ipip_openpsychometrics.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+lec5_xiong_2025,data/ders16_xiong_2025.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+mhscdc_fried_2020_anger,data/mhscdc_fried_2020.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+mhscdc_fried_2020_conscientiousness,data/mhscdc_fried_2020.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+mhscdc_fried_2020_loneliness,data/mhscdc_fried_2020.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+mhscdc_fried_2020_mindfullness,data/mhscdc_fried_2020.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+mhscdc_fried_2020_motivation,data/mhscdc_fried_2020.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+mhscdc_fried_2020_procrastination,data/mhscdc_fried_2020.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+mhscdc_fried_2020_ps,data/mhscdc_fried_2020.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+mhscdc_fried_2020_se,data/mhscdc_fried_2020.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+mhscdc_fried_2020_smartphone,data/mhscdc_fried_2020.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+mhscdc_fried_2020_tired,data/mhscdc_fried_2020.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+nas_rogoza_2024_study1,data/nas_rogoza_2024.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+nas_rogoza_2024_study2_nas,data/nas_rogoza_2024.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+nas_rogoza_2024_study2_ngs,data/nas_rogoza_2024.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+nas_rogoza_2024_study2_nvs,data/nas_rogoza_2024.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+oxfordcovid_xue_2024_at,data/oxfordcovid_xue_2024.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+oxfordcovid_xue_2024_bfi,data/oxfordcovid_xue_2024.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+oxfordcovid_xue_2024_brs,data/oxfordcovid_xue_2024.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+oxfordcovid_xue_2024_edeq,data/oxfordcovid_xue_2024.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+oxfordcovid_xue_2024_gad,data/oxfordcovid_xue_2024.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+oxfordcovid_xue_2024_iusc,data/oxfordcovid_xue_2024.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+oxfordcovid_xue_2024_mfq,data/oxfordcovid_xue_2024.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+oxfordcovid_xue_2024_mh,data/oxfordcovid_xue_2024.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+oxfordcovid_xue_2024_pas,data/oxfordcovid_xue_2024.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+oxfordcovid_xue_2024_phq,data/oxfordcovid_xue_2024.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+oxfordcovid_xue_2024_pss,data/oxfordcovid_xue_2024.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+oxfordcovid_xue_2024_pswq_a,data/oxfordcovid_xue_2024.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+oxfordcovid_xue_2024_pswq_c,data/oxfordcovid_xue_2024.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+oxfordcovid_xue_2024_rse,data/oxfordcovid_xue_2024.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+oxfordcovid_xue_2024_school,data/oxfordcovid_xue_2024.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+oxfordcovid_xue_2024_swemws,data/oxfordcovid_xue_2024.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+oxfordcovid_xue_2024_ua,data/oxfordcovid_xue_2024.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+paampsmartsud_saba_2023_amps,data/paampsmartsud_saba_2023.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+paampsmartsud_saba_2023_attendance,data/paampsmartsud_saba_2023.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+pcl5_xiong_2025,data/ders16_xiong_2025.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+phq9_xiong_2025,data/ders16_xiong_2025.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+quopl2_forster_2021_quop,data/quopl2_forster_2021.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+scs_2025_cfaclinic,data/scs_2025.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+scs_2025_cfanonclinic,data/scs_2025.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+scs_2025_cfausatr,data/scs_2025.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+sd3ypl_klimczak_2019_sd3,data/sd3ypl_klimczak_2019.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+wooly_hartman2022,data/AVI-S.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
