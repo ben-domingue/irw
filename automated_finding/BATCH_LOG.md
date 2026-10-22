@@ -22382,3 +22382,329 @@ Verified against the LIVE exclusion set (4,140 DOIs), not just a fixture:
 `exact`, and today's two shipped deposits -> not excluded (their biblio rows
 do not reach the published dictionary until the pipeline runs). 9 new tests in
 `tests/test_supplement_doi_exclusion.py`; the full suite is 216 passing.
+
+
+## 2026-10-21d — the 2026-10-21 sweep's `worth_retrying`, `download_failed`, `pii_suspected` and `aggregate_continuous` leads worked: 35 tables, 218,354 responses
+
+Jobs 1, 3 and 4 of `leads/repos_leads_2026-10-21.csv`, taken to a decision:
+all 8 `human_assistance/worth_retrying`, all 40 retryable `download_failed`,
+both `pii_suspected` and all 3 `aggregate_continuous` rows — 53 rows, every
+one of which now carries its outcome in the leads file. **Job 2, the 28
+`human_assistance/recoverable_format` rows, was NOT worked** and those rows
+are still `unworked`; it was explicitly the last priority and the other three
+jobs produced a large batch. Nothing uploaded. `irw_output/` holds 35 response
+tables and `itemtext_output/` 4 item text tables, both gated.
+
+### What shipped
+
+| deposit | outcome |
+|---|---|
+| `10.1371/journal.pone.0211929`, Bottesi et al. 2019 | **13 tables, 97,231 responses** |
+| `10.7910/DVN/F9D6TH`, Christensen 2022 (BJPS) | 3 tables, 52,793 |
+| `10.25405/data.ncl.27335709`, Cassidy & Freeston 2024 | 9 tables, 33,017 |
+| `10.17632/8mvkw9kjvp`, Setiawan et al. 2026 | 3 tables, 13,980 (+ 3 item text) |
+| `10.7910/DVN/EL4KPR`, Gries 2011 | 1 table, 12,000 |
+| `10.5281/zenodo.22208333`, Leppla et al. 2026 | 3 tables, 4,420 |
+| `10.6084/m9.figshare.7464938`, Otago 2018 | 1 table, 3,014 (+ item text) |
+| `10.7910/DVN/ZXQBC7`, Rimisp 2021 | 2 tables, 1,899 |
+
+All 35 pass `irw-validate`'s upload profile — "IRW Data Standard 1.0:
+conforms / IRW upload gate: passes", no errors — with warnings only of the
+subscale-prefix, unused-extreme and response-concentration kind.
+
+### Two reader defects, both reproduced before being fixed
+
+**A latin-1 file that is ALSO ';'-delimited was unreadable, although each
+defect alone was handled.** `_read_tabular`'s first read raised
+UnicodeDecodeError, its handler retried in latin-1 *with the default comma*,
+and the ParserError that came back was raised from inside an `except` block —
+so the delimiter sniffing underneath it never ran. Four of the 40 retryable
+`download_failed` rows were this, including the sweep's largest find. The fix
+is `_read_delimited`, which loops over the encoding x delimiter cross product
+instead of nesting the two handlers. The synthetic fixture in
+`tests/test_load_table_encoding_delimiter.py` had to be built carefully to
+reproduce it: the non-UTF-8 byte must land *before* the first decimal comma
+(otherwise the first exception is a ParserError, which the old code did
+handle), and the comma count has to VARY between rows — with a constant count
+pandas quietly reads the leading field as an index and returns a 1-column
+frame rather than failing.
+
+**A BIFF2/3/4 workbook fails pandas' container sniffing and xlrd reads it
+fine.** Excel 2.x-4.0 files start with a bare `0x0009` BOF record and match
+neither the ZIP (xlsx) nor the OLE2 (BIFF5/8) magic, so `pd.read_excel` raises
+"Excel file format cannot be determined, you must specify an engine manually"
+on a perfectly readable file. Two Harvard Dataverse rows were this
+(`EL4KPR`, the Gries MFQ, and `1DDEBE`); `_read_excel` now falls back to
+`engine="xlrd"` on exactly that message. Old survey tools emitted this format
+into the 2010s, so it will recur.
+
+A third was reproduced and NOT fixed, deliberately. `pyreadstat` cannot read
+the three figshare `Data.sav` rows at ANY encoding — their variable labels are
+GBK Chinese and the UnicodeDecodeError is raised before `encoding=` is
+honoured; `foreign::read.spss(reencode="GBK")` in R reads the same file in one
+line. What WAS fixed is the guard that skipped the retry entirely: it tested
+`"encoding" not in str(e)`, and the message says "'utf-8' codec can't decode
+byte 0xba" — "codec", never "encoding". The deposit is a reject anyway (N=43,
+totals not items), so the R route was not wired in; it is recorded here
+instead.
+
+### The 101 download_failed rows: what the classification was actually worth
+
+The 2026-10-21 entry classified them and called 40 retryable. Working all 40
+by hand changes the reading:
+
+| class | n | what it turned out to be |
+|---|---|---|
+| figshare 404 | 7 | **not retryable.** `api.figshare.com/v2/articles/<id>` answers 200 for all seven, and every one is a SciELO journal record whose only tabular files are the article's `Table_1.xls`..`Table_n.xls` of 5-10 KB — aggregate statistics, not data. The file objects are gone too. Rejected on content. |
+| dryad 401 + 429 | 16 | **not a resolver defect** — the previous entry was wrong about this, and the error it made is worth naming: it inferred "Dryad needs no auth" rather than measuring. Measured 2026-10-21: `/api/v2/files/<id>/download` answers 401 "must have current bearer token" for a public CC0 file, and the unauthenticated `/downloads/file_stream/<id>` path now sits behind an **Anubis proof-of-work challenge** (a 4.3 KB "Validating..." page to a browser UA, 403 to curl). The `/api/v2/datasets/<doi>/download` zip and the `/stash/downloads/*` variants behave identically. Dryad's metadata and file listing stay open, so all 16 were triaged on content from those: 13 are ecology/genetics and are rejected, 3 are real candidates behind the gate. No Zenodo mirror exists for any of the 16 (checked). |
+| dataverse 400 | 8 | **guestbook, not a malformed request.** Harvard answers every one with "You may not download this file without the required Guestbook response for guestbookID *n*". The depositor attached a guestbook and the API honours it only for a token-carrying request; `?gbrecs=true` does not bypass it. The dataset lookup itself succeeds, which is why these rows carry a licence. 6 blocked on the token, 1 rejected on content (elite lettuce genotypes), 1 on licence. |
+| reader/encoding | 9 | the only genuinely retryable class. 3 shipped (16 tables between them), 1 is a PII skip, 5 rejected on content or N. |
+
+So of the 40, **3 deposits shipped 16 tables, 23 were rejected on content or N
+that no retry would have changed, 9 are blocked on a credential, 1 on licence
+and 1 on PII**. Two concrete consequences:
+
+- **No bulk `seen_ledger.py drop` was run, and that is the right call here.**
+  The command the leads file carries would re-triage all 40 keys; every one
+  now has a hand-worked verdict recorded in `leads/repos_leads_2026-10-21.csv`,
+  so re-running would spend a sweep's budget regenerating answers that already
+  exist. The reopen is still the right move after a *reader* fix lands on keys
+  nobody has read — it was not the right move after reading them.
+- **Two credential requests, not code.** A Dryad API bearer token and a
+  Harvard Dataverse API token would between them unblock 9 rows here and an
+  unknown share of every future sweep. Both are free to register and neither
+  is something a script can obtain. See `TODO.md`.
+
+### Both `pii_suspected` rows were false positives, each for a different reason
+
+This is the finding with the longest reach, because the screen is the one
+check whose failure mode is a silent pass in one direction and a silently
+closed candidate in the other.
+
+- **An empty column.** `10.7910/DVN/F9D6TH` was closed on
+  `RecipientLastName` and `RecipientFirstName`. Every Qualtrics export carries
+  those plus `RecipientEmail` whether or not the distribution used an email
+  list, and on an anonymous-link study all three are empty in every row — 0
+  non-blank of 6,132. The screen matched the NAME and never looked.
+  `screen_for_pii` now skips a name- or label-matched column that is entirely
+  blank, and prints which ones it skipped so the suppression is visible.
+  That deposit shipped 3 tables and 52,793 responses.
+- **A participant code read as a postcode.** `zenodo.22208333` was flagged on
+  a column named `Code` holding `J27SE`, `K29Ab`, `M17MN` — the self-generated
+  pseudonymous codes used in German classroom research (a letter, a two-digit
+  day of birth, two initials). A German postal code is five DIGITS, which
+  exactly one of the 130 values is. `_RE_POSTAL_FULL`'s UK branch now carries
+  the two constraints Royal Mail actually imposes (the first position never
+  uses Q, V or X, and J and Z are not area letters; the final two never use C,
+  I, K, M, O or V), which halves the hits on such a column without losing a
+  single real postcode — **but it does not eliminate them**, since "K29Ab" is
+  indistinguishable from "K2 9AB" by pattern alone. Measured, not assumed:
+  103/130 before, 64/130 after, still over the 0.2 firing threshold. A hit on
+  this detector stays a lead to read.
+
+**And the triage reason was giving the wrong instruction for the geographic
+tier.** Since Ben's 2026-10-20 ruling a postal or other geographic code means
+DROP THE COLUMN and ship the rest, while a name or an email still skips the
+whole candidate — but `triage_dataset` printed "this is a whole-candidate
+skip, not a drop-the-column fix" for both. That sentence is what a reader
+acts on, and it is what closed `10.7910/DVN/QIEEJU` (2,862 respondents x 5
+waves) and `10.5061/dryad.6vs80` before the ruling reopened them by hand.
+`screen_for_pii` now publishes which hits are geographic and the reason names
+the action its tier calls for. A name beside a postcode is not downgraded.
+11 tests in `tests/test_pii_tiers_and_blanks.py`; full suite 260 passing.
+
+The one genuine PII skip of the sweep is in the opposite direction and was
+read rather than inferred: `10.7910/DVN/IFV44M`, an "Intercultural Proficiency
+Questionnaire" deposit, carries **33 real German respondent names and email
+addresses**, 80 IP addresses and 79 pairs of GPS coordinates, in a public CC0
+file. Name/email tier, whole candidate skipped. Worth telling the depositor.
+
+### `aggregate_continuous`: two of the three were not aggregate at all
+
+`10.25405/data.ncl.27335709` arrived twice (figshare and DataCite records of
+one article) with "resp has >50 unique values after wide-to-long melt". The
+melt pooled 175 item columns across NINE instruments on five different
+response scales, plus the numeric age and country-code columns. >50 distinct
+values is what that pooling produces; each block separately is a clean 4-, 5-,
+6- or 7-point ordinal scale. 9 tables, 33,017 responses. Worth carrying: the
+flag fires on the melt of everything, so on a multi-instrument deposit it is
+close to uninformative — check the blocks, not the pool.
+
+The third, `10.6084/m9.figshare.24843606` (food-caching chickadees), is
+genuinely aggregate: all five CSVs hold per-bird summaries — total trials,
+mean location errors over the first 20 trials, across-year averages, winters
+survived — and the trial-level data behind them is not deposited. Rejected.
+
+### Findings worth carrying
+
+**"The largest lead" was synthetic, and the deposit said so.**
+`zenodo.23408374` (267 ids x 27 items) was named in the 2026-10-21 write-up as
+the best of the 8 `worth_retrying` rows. Its workbook has a
+`Generation_Method` sheet reading "Dummy/synthetic dataset for model
+prototyping, classroom experiment, and reproducibility testing. It must not be
+interpreted as real public health employee data." That is also what the
+`dup_id_item` failure was — generated rows repeat. Ranking leads by
+`n_participants x n_items` put it on top; reading one metadata sheet closed it.
+A triage flag that says "QC failed on dup_id_item" is as likely to mean
+"generated" as "repeated measures".
+
+**Four of the eight `worth_retrying` rows were published article TABLES.**
+`pone.0268838.t006`, `pone.0295262.t006`, `pone.0283859.t007` and one more are
+plos.figshare records of a paper's own Table *n*, deposited as records in their
+own right. The tell is in the triage reason itself, which quotes column names
+containing `<b>` and `<i>` HTML. That is cheap to detect and would have saved
+four reads; the `.tNNN` DOI suffix is an equally good signal (PLOS mints one
+per table, as it does `.sNNN` per supplementary file — the suffix rule fixed in
+2026-10-21c covers `.s` only).
+
+**Covariate codings with no codebook can be pinned by the paper's own
+percentages.** The Bottesi deposit documents nothing, but the article's
+Participants section reports every category's share. Mapping those to the
+codes gave exact matches on gender (302 men / 459 women against codes 1 and
+2), on all four marital-status categories, and on all NINE occupation
+categories — 3.8% vs 3.9% and 3.3% vs 3.4% are distinguishable, so the
+ordering is pinned rather than guessed. The script asserts the published
+counts, so a mis-ordered label fails the run instead of shipping. Nine
+labelled covariates where there would have been nine bare integer codes.
+
+**A one-month retest can masquerade as a reverse-code.** The Bottesi
+undergraduate file has `IUS2_01..12` and `IUS2_01_R..12_R`, and `_R` reads as
+"reversed". It is the retest: r = .44-.62 per item, identical on 40-79% of
+respondents, and exactly `6 - x` on only 1-17% (a reverse-code is exactly that
+on every row). Checked arithmetically before shipping, and the script keeps the
+check. Read as a reverse-code it would have silently halved a wave.
+
+**A blank id in an otherwise complete sequence is recoverable, not a dropped
+respondent.** One of the 163 undergraduates (Codice LC0390) has a blank `ID`
+and a complete pair of administrations. The 162 numbers present cover 1-163
+with exactly one gap, so the missing number is that respondent's own — derived,
+not invented, and asserted.
+
+**A ranking that was fielded as a rating matrix.** The Otago Q22 block says
+"rank with 1 being the most preferred and 5 the least preferred" over EIGHT
+options, which cannot be a ranking of eight things. Only 7 of 386 respondents
+used each value at most once; 437 repeated a value three or more times. So the
+eight rows are eight independent 1-5 ratings. The script asserts the
+distribution rather than trusting either the wording or the first reading.
+
+**A guestbook is not a licence.** Six of the eight Dataverse rows are CC0 or
+CC BY-NC-SA deposits whose files sit behind a registration form. That is an
+access control, not a rights restriction, and it should be recorded as
+`blocked_access` so a token reopens all six at once — not as a licence problem,
+which would never be revisited.
+
+### Item text: 4 shipped, 7 recorded and not shipped
+
+Shipped, all four PASS on `normalize_nulls.R` -> `validate_items.R --resp-csv`
+-> `audit_batch.R --resp-dir` and clean on `irw-validate`:
+
+- `setiawan_2026_cybersecurity_knowledge` / `_ethics` / `_behaviour` — from
+  the deposit's own `CSLE_instrument_ID-EN.csv`, whose `variable` column NAMES
+  each data column beside the item's Indonesian and English wording.
+  `mapping_basis=paper_explicit`, verified by
+  `itemtext_verification/verify_setiawan_2026_cybersecurity_*.R`: the name join
+  is re-derived from the raw instrument file independently of the builder,
+  every code printed beside its Indonesian stem, both languages matched,
+  bijective both ways, VERDICT: PASS on all three. Administered in Indonesian,
+  so Indonesian in the base fields and the depositors' own English in
+  `_translated`. `option_text` is blank while `option_text_translated` is
+  populated: the deposit states the anchors only in English, inside
+  `response_scale`, and the Indonesian labels respondents saw are not
+  published in it. instrument: stems match no published scale (ET01 searched
+  verbatim); rights: study-authored under the deposit's CC BY 4.0.
+- `otago_2018_library_support` — from the deposit's own "Transcript of
+  questions asked.docx". Qualtrics prints each matrix row with its row id,
+  "Printed guides  (1)", and those ids are the suffixes of the `Q22_1..Q22_8`
+  columns, so the tie is an id the source states rather than the order the
+  rows appear in. `mapping_basis=paper_order`, verified by
+  `verify_otago_2018_library_support.R`, which reads the .docx itself and
+  re-derives the eight stems independently of the builder: VERDICT: PASS.
+  English administration, so `language` and the `_translated` columns are
+  omitted. `option_text` populated for the two LABELLED points only — the form
+  printed "1 (most preferred)" and "5 (least preferred)" with bare 2, 3, 4
+  between them, and an unlabelled midpoint stays blank.
+
+No issues-page entry is owed by any of the four: no observed `resp` lacks an
+option row, no `item_text` is blank, no stem is shared by two items, and all
+four tables' shipped wording came from the depositors rather than from IRW.
+
+**Rights, not recoverability, is what held the rest — and in three cases the
+text was fully in hand.** Each is in `itemtext_provenance.csv` with where it
+is and which label levels were checked:
+
+- `bottesi_2019_ius_r` — `pone.0211929.s001.pdf` IS the complete Italian
+  IUS-R, numbered 1-12 with all five anchors printed. Held: the IUS family
+  carries a `block` verdict (2026-10-15 counsel ruling). A `hold` row for the
+  IUS-R (Italian version) was written, with the fact that could change it:
+  **Mark H. Freeston — the originator of the IUS, whose own 1994 terms the
+  block row records as never located — is a co-author of this CC BY article,
+  and its S1 File is the instrument in full.** That is the shape Ben ruled
+  `ship` for the MFQ-2 (rights bank R10). Overriding a standing block is his
+  call, so it is a ruling request rather than a decision; a `ship` would
+  release `cassidy_2024_ius_12` with it.
+- `cassidy_2024_*` — the .sav's variable labels ARE the item stems, verbatim
+  and complete, for all 177 item columns. Held on nine instruments at once:
+  the IUS-12's family is `block`, and the ECR-R, OCI-R, PSWQ, FAS, RSS and
+  ReSQ have no register row at all.
+- `leppla_2026_smokechem_*` — the workbook's Items sheet gives all 34 items in
+  the administered German AND the depositors' English. The cognitive-load
+  block is the Leppink et al. Cognitive Load Scale, registered `hold`
+  (2026-10-18). The BUS-11 and TAM blocks are the depositors' own
+  SMOKEChem-specific adaptations under their CC BY, which is the shape of
+  class ruling R16 — but R16 is deliberately non-sweeping ("a new table needs
+  its own triage showing the same shape") and the upstream triage for Borsci's
+  BUS-11 and Davis's TAM has not been done.
+- `rimisp_2021_*` — the codebook PDF gives every item's Spanish wording and
+  option labels against the column name. Deferred, not blocked: a Spanish
+  administration owes an English gloss in `_translated`, which is
+  IRW-generated content and owes an issues-page line, so it is queued with the
+  Indonesian and Spanish tables already waiting on that pass.
+- `gries_2011_moral_foundations` — not in the deposit (a single BIFF2 .xls, no
+  label levels at all). The wording is the MFQ's own relevance section
+  (moralfoundations.org / Graham, Haidt & Nosek 2009); the register's MFQ row
+  is for the MFQ-2, which this 2011 administration predates, and the column
+  names give the foundation rather than the question, so WHICH two relevance
+  items per foundation were fielded cannot be told from the deposit.
+- `christensen_2022_*` — not in the deposit (data plus five R scripts, no
+  codebook, no label levels). The wording is in the article's own
+  supplementary PDF on static.cambridge.org, one hop outside.
+- the other ten `bottesi_2019_*` tables — the wording is in the published
+  Italian forms (OBQ-87, NPOQ, PSWQ, BAI, BDI-II, NJRE-Q-R, DASS-21, OCI-R,
+  SPS), a multi-hop citation away and several commercially licensed; `ww37`
+  and `caq35` are not even named in the paper.
+
+**A lint note, and it is not this batch's rows.** `lint_verification.R` WARNs
+"VERIFIED but its evidence hedges (does not establish)" on a row whose hedge
+scopes something no route could settle, unless the row also asserts separation
+in one of the phrases `SEPARATION` lists. This batch's four rows were reworded
+to assert it ("distinguishes every item from every other with 0 mismatches")
+and now pass. The three `huebner_2021_weightlifting_*` rows from 2026-10-21b
+still WARN for the same reason and for the same non-defect — a one-line
+rewording, noted in `TODO.md` rather than changed here.
+
+### Two unidentified instruments shipped as such
+
+`bottesi_2019_ww37` and `bottesi_2019_caq35` are clean 37- and 35-item 1-5
+batteries answered by the same 429 respondents as the NPOQ and PSWQ, i.e. by
+one of the four studies the deposit merges. The paper's Measures section lists
+only the nine instruments it analyses and names neither. Checked before
+shipping them as unidentified: no WW or CAQ column equals any IUS-R item, the
+block means correlate .43 and .42 with the IUS-R (related but distinct), and
+"CAQ" is not the 25-item Cognitive Avoidance Questionnaire by item count. They
+ship with the deposit's own item codes, `Construct type = Other`, and a
+dictionary description that says plainly that the construct is unidentified —
+30,867 real item responses under CC BY, with an honest label rather than a
+guessed one. The other three source papers would name them.
+
+### Bookkeeping
+
+35 dictionary rows via `stage_dict_row.py`, each with a `codebook_url`
+("none" for the three deposits that ship none; the other 32 point at the
+actual codebook, instrument or questionnaire FILE, verified to resolve). 35
+tag rows appended into `tags/tags_auto.csv`. 11 `itemtext_provenance.csv`
+rows, 4 `itemtext/mapping_verification.csv` rows, 1
+`itemtext/instrument_rights_register.csv` row (the IUS-R `hold`). 4 new
+`itemtext_verification/` verify scripts and 2 builders. No
+`covariate_labels/harvest.py` is owed: of the new scripts only
+`cassidy_2024_uncertainty_attachment.py` reads a `.sav`, and its `cov_*`
+columns are already text categories rather than coded integers.
