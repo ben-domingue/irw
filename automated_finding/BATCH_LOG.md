@@ -7,6 +7,111 @@ checkboxes here just mean "this line item is settled," not "actionable."
 
 **For currently open action items, see `TODO.md`.**
 
+## One-off 2026-10-22: Luettgau 2026 (PNAS Nexus) eligibility check -> 2 tables, 384,573 responses
+
+Ben asked whether the data behind
+https://academic.oup.com/pnasnexus/article/5/10/pgag305/8865178 is IRW-eligible,
+then asked for the script. Eligible: the UK AI Security Institute's deposit
+(github.com/UKGovernmentBEIS/dhi1-analysis-public) is Open Government Licence
+v3.0 for `data/` per its own LICENSE-DATA (MIT for `code/` only), pseudonymised
+by the publisher, with the demographics stripped under UK GDPR Article 9 -- so
+open, commercial use permitted, and nothing to screen for PII, at the cost of
+zero covariates being available.
+
+Staged by `data/luettgau_2026_political_ai.py`:
+  luettgau_2026_political_knowledge  64 items, 1-7, 2,858 ids, 365,824 responses
+  luettgau_2026_source_trust          8 items, 1-4, 2,475 ids,  18,749 responses
+
+Three things that are easy to get wrong here, each now asserted in the script
+rather than left to a reader:
+
+**`resp` on the knowledge table is stored AGREE-FIRST: 1 = agree, 7 = disagree.**
+Nothing in the deposit says so. The article does, indirectly -- "True
+information received on average approximately one Likert scale point higher
+agreement ratings than false information (beta_TRUE = .67)" -- while in the
+file the `ground_truth == true` items average 3.45 against the false items'
+4.09, i.e. 0.64 points LOWER. The deposit's own pipeline reverses the column
+before modelling anything (`y = 6 - (df['response'].values - 1)`, for every
+outcome except trust), and the single most concentrated item in the file,
+covid_14, is a FALSE statement with 70% of responses at 7. Shipped in the
+source's coding per the standard's "do not recode reverse-scored items", with
+`check_scale_direction()` asserting all three signs on every run. A user who
+assumes 7 = agree gets every result backwards, so this is also stated in the
+dictionary Description, not only in the Notes.
+
+**`treat` is the within-subject manipulation, not the RCT arm.** Two nested
+randomisations cannot both be `treat`. Each participant researched two of four
+topics and rated all 64 statements pre and post regardless, so
+researched-vs-not is the contrast with an untreated comparison in it -- the
+article calls the other two topics "non-researched within-subject controls".
+The between-subject randomisation is modality, not treatment vs control (both
+study-2 arms research the topics; both study-3 arms use a chatbot), so it ships
+as `cov_arm`: ai_chatbot/google_search in study 2, prompted_chatbot/
+default_chatbot in study 3. `cov_model_arm` is the recruitment batch's model,
+NOT necessarily what the participant used -- a study-2 control subject in the
+`claude` batch researched with Google.
+
+**The survey battery's fifth option is "Don't know".** `options_codebook.csv`
+lists it as option 5 of 5 on all eight Q1b items, so the raw 1-5 column is a
+1-4 scale with an in-range non-response in it; 1,243 item-responses dropped,
+24 respondents lost entirely (they answered "Don't know" about all eight
+sources). Direction preserved: 1 = trust a great deal, 4 = do not trust at all,
+so higher means LESS trust.
+
+Not shipped, and why: `Ztable_trust_combined.csv` and
+`Ztable_private_combined.csv` hold ONE row per (subject, topic, question) with
+`presented` labelling it pre or post, rather than the pre/post pair the misinfo
+table carries -- the same subject-question reads "pre" under one topic and
+"post" under another, so what a row is cannot be settled from the deposit.
+`Ztable_extreme_combined.csv` is a sign-flip derivation of the private-belief
+responses. `Ztable_dur_combined.csv` is whole-task duration, not per-item `rt`.
+Left for a human read of the article's supplement; the trust and private
+batteries are 10 items each and worth recovering.
+
+Also: `presented` and the vestigial `presentation` column disagree on 416 rows
+(13 subjects, one topic each). The canonical pipeline never reads
+`presentation`; `presented` ships, documented rather than dropped, since
+dropping would leave those 13 a topic short of the published analysis sample.
+
+**Item text.** `luettgau_2026_source_trust__items.csv` SHIPPED to
+`itemtext_output/`: `mapping_basis=data_labels`, `text_source=study_materials` --
+`survey_codebook.csv` ties the verbatim stem and the eight source labels to the
+Q1b_N columns and `options_codebook.csv` gives the four option labels in value
+order, so there is no inference in it. `validate_items.R --resp-csv`: item sets
+match (8), resp sets match. Provenance row appended (CRLF, bytes, no rewrite);
+`check_provenance.R` exits 0.
+
+The knowledge table's 64 statements turned out to be fully published after all
+-- not in `statement_sourcing.csv` (31 true statements, no question numbers)
+but in the article's own appendix, which lists 8 TRUE then 8 FALSE statements
+for each of the four topics, verbatim. All 64 are transcribed in
+`itemtext/fixes/luettgau_2026_political_knowledge__items.PARKED.csv`. PARKED
+on two things, with the README beside it: (1) the block boundary at 8 is
+confirmed by the data but the order WITHIN each block is not -- nothing ties
+the appendix's listing order to the survey's question index, and a wrong order
+inside a block mislabels 8 items while passing every gate (item and resp sets
+would still match); (2) the seven scale point labels are published nowhere, so
+`option_text`/`resp` cannot be filled, and with the column stored agree-first,
+inventing labels is a coin flip on inverting them. `validate_items.R`: item set
+PASS 64/64, resp set FAIL (no values) -- which is the second blocker, recorded.
+One message to the authors' issue tracker resolves both.
+
+The same appendix also carries the trust statements, the private-belief
+statements (Progressive / Conservative per topic) and the five compliance
+questions per topic, so item text exists for the two sibling tables too; their
+blocker is the pre/post ambiguity, not the wording.
+
+Handoff: 2 `dictionary_auto.csv` rows, 2 tag rows (`tags_auto_2026-10-22.csv`,
+appended into `tags/tags_auto.csv`), 2 `metadata/covariate_labels/manual.csv`
+rows for `cov_study` (the only coded covariate; `irw_lint_covariates.py` is
+clean and no harvest is owed -- the script reads CSVs, not .sav/.dta). Gate:
+`irw_validate` upload profile, 0 errors. Two warnings stand and were
+inspected: `imputed_values*` on covid_14 (70% at 7 -- a rejected false
+statement; next item is 38%) and `multi_scale*` on the four topic prefixes
+(one instrument, four topic blocks every participant answered; splitting by
+topic would cut the researched/not-researched contrast, and `itemcov_topic`
+carries the split).
+
 ## Repos batch 2026-10-20: five parallel agents, 85 tables staged, 798,062 responses
 
 Ben asked for "serious searching" in a three-hour box with a hard 4pm stop, and
