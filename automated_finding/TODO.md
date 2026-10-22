@@ -97,12 +97,121 @@ rows worked to a decision; seven shipped, three did not.
   in the `_translated` fields, which is IRW-generated content and owes an
   `itemtext_issues.qmd` line. Deferred, not forgotten -- see
   `itemtext_provenance.csv`.
-- [ ] **Still open from the sweep itself** (unchanged by this pass):
-  the 8 `worth_retrying` rows, the 28 `recoverable_format` rows, the 40
-  retryable `download_failed` keys, the 2 `pii_suspected` rows, and the `surf`
-  (DataverseNL) connector question -- 214 candidates, 26 of 26 triaged rows
-  403. All carried in `leads/repos_leads_2026-10-21.csv`, whose 10 `good` rows
-  now hold their outcomes.
+- [x] **The 8 `worth_retrying`, 40 retryable `download_failed`, 2
+  `pii_suspected` and 3 `aggregate_continuous` rows are worked** (2026-10-21d,
+  see below). **The 28 `recoverable_format` rows are NOT** and are still
+  `unworked` in `leads/repos_leads_2026-10-21.csv`.
+- [ ] **The `surf` (DataverseNL) connector question is still open**: 214 of the
+  sweep's 1,278 candidates came from it and 26 of 26 triaged rows answered 403.
+  Querying it may be spending a sixth of each sweep's candidate budget for
+  nothing.
+
+## Repos sweep 2026-10-21, leads pass (2026-10-21d) — 35 tables staged, AWAITING UPLOAD
+
+Full write-up in `BATCH_LOG.md` (2026-10-21d). Jobs 1, 3 and 4 of
+`leads/repos_leads_2026-10-21.csv` worked to a decision: 53 rows, 8 deposits
+shipping 35 response tables and 218,354 responses, 4 item text tables.
+
+- [ ] **35 response tables + 4 item text tables need uploading.**
+  `automated_finding/irw_output/` (with a MANIFEST) and
+  `itemtext_output/`. Response tables first. All 35 pass `irw-validate`'s
+  upload profile; the 4 item text tables PASS `normalize_nulls.R` ->
+  `validate_items.R --resp-csv` -> `audit_batch.R --resp-dir` and are clean on
+  `irw-validate`. 35 dictionary rows and 35 tag rows are already staged, so
+  nothing needs pasting. Stamp `uploaded=` on the 4 shipped
+  `itemtext_provenance.csv` rows and the 4 `mapping_verification.csv` rows
+  only after Ben confirms.
+- [ ] **28 `recoverable_format` rows left unworked** in
+  `leads/repos_leads_2026-10-21.csv` (figshare 10, zenodo 8, mendeley 5,
+  dataverse 5). Each needs one re-read with a different reader or delimiter and
+  a re-triage. Note that the reader is now better than it was when they were
+  flagged -- the encoding x delimiter and BIFF2 `.xls` fixes in
+  `irw_triage_updated.py` landed with this batch -- so some of them may simply
+  read now. The cheap way in is
+  `python3 seen_ledger.py drop repo_triage_seen_keys.csv --refined-flag
+  recoverable_format --apply` followed by a re-triage of just those keys.
+
+### Two credential requests. Neither is a code change, and between them they
+### unblock 9 rows here plus a share of every future sweep.
+
+- [ ] **A Dryad API bearer token.** Measured 2026-10-21:
+  `datadryad.org/api/v2/files/<id>/download` answers 401 "Unauthorized, must
+  have current bearer token" for a public CC0 file, and the unauthenticated
+  `/downloads/file_stream/<id>` path now sits behind an Anubis proof-of-work
+  challenge (a "Validating..." page to a browser UA, 403 to curl). Every
+  variant behaves the same, and no Zenodo mirror exists for the 16 Dryad rows
+  checked. The previous entry's "Dryad needs no auth, so a 401 is a resolver
+  defect" was an inference, not a measurement, and it was wrong. Metadata and
+  file listings stay open, so content triage still works without the token --
+  13 of the 16 were rejected that way. The 3 that want the file are
+  `10.5061/dryad.dv41ns2db` (Turkish yoga consumers' motivation, **a scale
+  development study** -- the most valuable row behind the gate),
+  `10.5061/dryad.vx0k6dk33` (driver-vehicle interface questionnaire) and
+  `10.5061/dryad.h44j0zpv3` (vision-related quality of life).
+- [ ] **A Harvard Dataverse API token.** The 8 `download_failed` HTTP 400s were
+  not malformed requests: Harvard answers each with "You may not download this
+  file without the required Guestbook response for guestbookID *n*". The
+  depositor attached a guestbook and the API honours it only for a
+  token-carrying request (`?gbrecs=true` does not bypass it). A guestbook is an
+  access control, not a rights restriction -- these are CC0 and CC BY-NC-SA
+  deposits -- so they are recorded `blocked_access` and a token reopens 6 at
+  once: `10.7910/DVN/{Y8ICVZ,SV2OY4,WE0LSW,P6C98Y,V47G7M,26244}`.
+
+### Rulings wanted (none blocks anything already staged)
+
+- [ ] **The Italian IUS-R: `hold` -> `ship`?** Written as a `hold` row in
+  `itemtext/instrument_rights_register.csv` because the IUS FAMILY already
+  carries a `block` (2026-10-15 counsel ruling), and overriding a standing
+  block is Ben's call. The fact that would settle it: the complete 12-item
+  Italian IUS-R with all five anchors is published as the S1 File of a CC BY
+  4.0 PLOS ONE article (`10.1371/journal.pone.0211929`) whose co-authors
+  include **Mark H. Freeston, the originator of the IUS itself**, whose own
+  1994 terms the block row records as never located; the Italian version is by
+  the same group. That is the shape ruled `ship` for the MFQ-2 (rights bank
+  R10: originators' own CC BY release). A `ship` releases the item text for
+  `bottesi_2019_ius_r` (stems and anchors already in hand) and, by the same
+  family block, for `cassidy_2024_ius_12`.
+- [ ] **Seven instruments with no register row at all**, each holding item text
+  that is already in hand: the ECR-R, OCI-R, PSWQ, Family Accommodation Scale,
+  and the RSS and ReSQ reassurance-seeking batteries (all six in the .sav's own
+  variable labels for `cassidy_2024_*`, 177 item columns, verbatim), plus
+  Borsci et al.'s BUS-11 and Davis's TAM as adapted for
+  `leppla_2026_smokechem_*` (German + the depositors' English in the workbook's
+  Items sheet). The Leppink Cognitive Load Scale in the same deposit is already
+  `hold` (2026-10-18). The BUS-11/TAM pair is specifically the shape of class
+  ruling R16 (study-authored adaptation of items from a closed article stating
+  no terms, `ship`) -- but R16 is deliberately non-sweeping and wants a
+  per-table upstream triage, which has not been done.
+
+### Smaller things
+
+- [ ] **`10.7910/DVN/IFV44M` leaks respondent identities and is public and
+  CC0.** An "Intercultural Proficiency Questionnaire" deposit on Harvard
+  Dataverse whose Qualtrics export carries 33 real German names and email
+  addresses, 80 IP addresses and 79 pairs of GPS coordinates. Skipped here
+  under the name/email tier. Telling the depositor is Ben's call, not a
+  script's.
+- [ ] **The three `huebner_2021_weightlifting_*` rows in
+  `itemtext/mapping_verification.csv` still WARN on `lint_verification.R`**
+  ("VERIFIED but its evidence hedges (does not establish)"). It is not a real
+  hedge -- what the sentence scopes is whether the depositor's own codebook is
+  right about her survey, which no route could settle -- but the rows do not
+  assert separation in any of the phrases `SEPARATION` lists, so the warning
+  cannot clear. A one-line rewording of each evidence string fixes it; this
+  batch's four rows were written that way and pass.
+- [ ] **`rimisp_2021_household_services` and `_care_work` join the queue for
+  the deferred translation pass**, bringing it to five tables:
+  `saputra_2025_fomo_consumer` (Indonesian),
+  `andreu_sanchez_2023_information_sources` and `_lifestyle` (Spanish), and
+  these two (Spanish). All are rights-clear with the wording in hand; shipping
+  means an English gloss in the `_translated` fields, which is IRW-generated
+  content and owes an `itemtext_issues.qmd` line.
+- [ ] **A cheap triage filter nobody has written: a PLOS `.tNNN` DOI suffix is
+  an article TABLE, not a dataset.** Four of the eight `worth_retrying` rows
+  were a paper's own Table *n* deposited as a plos.figshare record, and the
+  triage reason quotes column names containing `<b>`/`<i>` HTML. The `.sNNN`
+  supplementary-file rule fixed in 2026-10-21c covers `.s` only; `.t` is the
+  same shape and never worth a download.
 
 ## Blotner people-pleasing deposit: 5 tables UPLOADED, pipeline run owed (2026-10-21)
 

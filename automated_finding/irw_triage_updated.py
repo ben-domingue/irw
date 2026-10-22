@@ -275,22 +275,68 @@ def _load_table(path_or_bytes, filename: str = "") -> pd.DataFrame:
             return io.BytesIO(path_or_bytes)
         return path_or_bytes
 
+    def _read_excel(header):
+        try:
+            return pd.read_excel(_src(), header=header)
+        except ValueError as e:
+            # "Excel file format cannot be determined, you must specify an
+            # engine manually." pandas sniffs the magic bytes and only knows
+            # the ZIP (xlsx) and OLE2 (BIFF5/8) containers. A BIFF2/3/4
+            # workbook -- Excel 2.x-4.0, which SPSS and old survey tools still
+            # emitted into the 2010s -- starts with a bare 0x0009 BOF record
+            # and matches neither, so the sniff fails on a file xlrd reads
+            # fine. Two real cases in the 2026-10-21 sweep, both Harvard
+            # Dataverse: 10.7910/DVN/EL4KPR (Gries MFQ, 1000 x 47) and
+            # 10.7910/DVN/1DDEBE, each recorded as `download_failed` against a
+            # fully downloaded file.
+            if "engine" not in str(e).lower():
+                raise
+            return pd.read_excel(_src(), header=header, engine="xlrd")
+
+    def _read_delimited(header, sep_override=None):
+        """Read a delimited text file, trying encoding and delimiter
+        INDEPENDENTLY.
+
+        These are two unrelated defects in a deposit, and until 2026-10-21
+        this function could only survive one at a time: the first read raised
+        UnicodeDecodeError, its handler retried in latin-1 *with the default
+        comma*, and the ParserError that came back from that retry was raised
+        from inside an except block, so the delimiter sniffing below it never
+        ran. A latin-1, ';'-delimited export was therefore unreadable even
+        though each defect alone was handled -- 4 rows of the 2026-10-21
+        sweep's 40 retryable `download_failed`s, including
+        10.1371/journal.pone.0211929 (Bottesi IUS-R, 761 x 361 items) and
+        10.7910/DVN/ZXQBC7. Hence the loop over the cross product rather
+        than nested try/except.
+        """
+        seps = [sep_override] if sep_override else [None]
+        last = None
+        for sep in seps:
+            for enc in (None, "latin-1"):
+                kw = {}
+                if sep:
+                    kw["sep"] = sep
+                    # ';' is the decimal-comma locale's delimiter; read "1,6"
+                    # as 1.6 rather than as a string that fails every numeric
+                    # check.
+                    kw["decimal"] = "," if sep == ";" else "."
+                    kw["skipinitialspace"] = True
+                if enc:
+                    kw["encoding"] = enc
+                try:
+                    return pd.read_csv(_src(), header=header, **kw)
+                except (UnicodeDecodeError, pd.errors.ParserError) as e:
+                    last = e
+        raise last
+
     def _read_tabular(header):
         if name.endswith((".xlsx", ".xls")):
-            return pd.read_excel(_src(), header=header)
+            return _read_excel(header)
         if name.endswith((".tsv", ".tab")):
-            try:
-                return pd.read_csv(_src(), sep="\t", header=header)
-            except UnicodeDecodeError:
-                # Some Dataverse/OSF exports (esp. non-English deposits) are
-                # Latin-1/cp1252, not UTF-8 -- fall back rather than fail
-                # outright (confirmed real case: 10.7910/DVN/33EY6I).
-                return pd.read_csv(_src(), sep="\t", header=header, encoding="latin-1")
+            return _read_delimited(header, sep_override="\t")
         try:
-            return pd.read_csv(_src(), header=header)
-        except UnicodeDecodeError:
-            return pd.read_csv(_src(), header=header, encoding="latin-1")
-        except pd.errors.ParserError:
+            return _read_delimited(header)
+        except (UnicodeDecodeError, pd.errors.ParserError):
             # A ';'-delimited export (European locale) read with ',' is one
             # column until the first decimal comma ("1,6"), where the C parser
             # dies with "Expected 1 fields in line N, saw 3". That exception
@@ -302,15 +348,7 @@ def _load_table(path_or_bytes, filename: str = "") -> pd.DataFrame:
             sep = _sniff_sep(_src())
             if sep in (None, ","):
                 raise
-            # ';' is the decimal-comma locale's delimiter; read "1,6" as 1.6
-            # rather than as a string that fails every numeric check.
-            decimal = "," if sep == ";" else "."
-            try:
-                return pd.read_csv(_src(), sep=sep, decimal=decimal, header=header,
-                                   skipinitialspace=True)
-            except UnicodeDecodeError:
-                return pd.read_csv(_src(), sep=sep, decimal=decimal, header=header,
-                                   skipinitialspace=True, encoding="latin-1")
+            return _read_delimited(header, sep_override=sep)
 
     if name.endswith(".sav"):
         # pandas.read_spss (via pyreadstat) accepts a file-like object directly.
@@ -345,7 +383,16 @@ def _load_table(path_or_bytes, filename: str = "") -> pd.DataFrame:
             # verdict that reads like a dead URL. 19 of the 28 download_failed
             # rows in the 2026-08-27 tier-A run were this, all Spanish- or
             # Turkish-language deposits, every one of them a real instrument.
-            if "encoding" not in str(e).lower():
+            # The guard used to be `"encoding" not in str(e)`, which misses
+            # the other half of the same failure: pyreadstat also raises a
+            # bare UnicodeDecodeError ("'utf-8' codec can't decode byte 0xba
+            # in position 0"), whose message contains "codec" and never the
+            # word "encoding", so the retry below was skipped entirely. Three
+            # rows of the 2026-10-21 sweep failed that way (figshare 34681230
+            # / 34657611 / 34651866, one deposit posted three times).
+            msg = str(e).lower()
+            if not isinstance(e, UnicodeDecodeError) and "encoding" not in msg \
+                    and "codec" not in msg:
                 raise
             import pyreadstat, tempfile, os as _os
             data = _src()
@@ -353,7 +400,14 @@ def _load_table(path_or_bytes, filename: str = "") -> pd.DataFrame:
             tmp = tempfile.NamedTemporaryFile(suffix=".sav", delete=False)
             try:
                 tmp.write(raw); tmp.close()
-                for enc in ("latin1", "cp1252", "utf-8"):
+                # gb18030/cp936 added 2026-10-21 for Chinese-locale SPSS
+                # builds. Known limit, measured rather than assumed: on the
+                # three figshare rows above, whose variable labels are GBK
+                # ("\u7f16\u53f7" = ID), pyreadstat fails at EVERY encoding -- the
+                # UnicodeDecodeError is raised before `encoding=` is honoured.
+                # R's foreign::read.spss(reencode="GBK") reads the same file.
+                # So this loop widens the net without claiming to close it.
+                for enc in ("latin1", "cp1252", "utf-8", "gb18030", "cp936"):
                     try:
                         df, _meta = pyreadstat.read_sav(
                             tmp.name, apply_value_formats=False, encoding=enc)
@@ -872,12 +926,44 @@ def _holds_email_addresses(series) -> bool:
 # with a three-character forward sortation area in deposits that de-identified
 # properly. An FSA, a bare US 5-digit ZIP and a 4-digit European code are all
 # coarse enough to be legitimate covariates, so none of them appear here.
+# The UK branch carries the two constraints Royal Mail actually imposes,
+# because without them it matched the self-generated pseudonymous participant
+# codes used in classroom research -- "J27SE", "M17MN", one letter, a two-digit
+# day of birth and two initials (zenodo.22208333, flagged `pii_suspected`
+# 2026-10-21 over a column of them). The first position never uses Q, V or X,
+# and J and Z are not area letters either; the final two positions never use
+# C, I, K, M, O or V. That halves the false hits on such a column without
+# losing a single real postcode -- but it does NOT eliminate them (a code like
+# "K29Ab" is indistinguishable from "K2 9AB" by pattern alone), so a hit on
+# this detector stays a lead to read rather than a verdict.
 _RE_POSTAL_FULL = re.compile(
     r"^(?:"
     r"[A-Za-z]\d[A-Za-z][\s-]?\d[A-Za-z]\d"          # Canada: K1A 0B1
     r"|\d{5}-\d{4}"                                   # US ZIP+4
-    r"|[A-Za-z]{1,2}\d[A-Za-z\d]?[\s]?\d[A-Za-z]{2}"  # UK: SW1A 1AA
+    r"|(?![QVXJZqvxjz])[A-Za-z]{1,2}\d[A-Za-z\d]?[\s]?\d"
+    r"(?![CIKMOVcikmov])[A-Za-z](?![CIKMOVcikmov])[A-Za-z]"  # UK: SW1A 1AA
     r")$")
+
+
+def _column_is_blank(series) -> bool:
+    """True when a column has no values at all -- NA or empty string only.
+
+    Every Qualtrics export carries `RecipientLastName`, `RecipientFirstName`
+    and `RecipientEmail` whether or not the distribution used an email list,
+    and on an anonymous-link study all three are empty in every row. The name
+    tier matched the NAME and never looked, so 10.7910/DVN/F9D6TH -- a CC0
+    replication file of 6,132 respondents with 0 non-blank values in all three
+    -- was recorded as `pii_suspected` and closed. A column with nothing in it
+    cannot contain an identifier.
+    """
+    if series is None:
+        return False
+    v = series.dropna()
+    if len(v) == 0:
+        return True
+    if _is_stringish(v):
+        return bool((v.astype(str).str.strip() == "").all())
+    return False
 
 
 def _holds_full_postal_codes(series) -> bool:
@@ -964,9 +1050,15 @@ def screen_for_pii(columns, df=None, labels=None) -> list[str]:
                   "reads nothing reports clean -- this result is not evidence.",
                   file=sys.stderr)
 
-    hits, seen_cols = [], set()
+    hits, seen_cols, geographic, blanked = [], set(), set(), []
     for c, label, where in _pii_surfaces(columns, labels):
         if c in seen_cols:
+            continue
+        if df is not None and c in getattr(df, "columns", []) \
+                and _column_is_blank(df[c]):
+            # Judge the column, not its name: an empty column holds nothing.
+            blanked.append(str(c))
+            seen_cols.add(c)
             continue
         shown = label if where == "name" else f"{c} (variable label: {label!r})"
         if _RE_PII_STRONG.search(label):
@@ -994,7 +1086,18 @@ def screen_for_pii(columns, df=None, labels=None) -> list[str]:
             # postal code column and of a de-identified FSA column are the
             # same question. Only the values separate them.
             hits.append(f"{label} (full postal codes in the values)")
+            geographic.add(f"{label} (full postal codes in the values)")
             seen_cols.add(c)
+    # Published alongside the hits because the TIER decides the action, and
+    # since Ben's 2026-10-20 ruling the two actions differ: a name or an email
+    # skips the whole candidate, a postal or other geographic code means drop
+    # the column and ship the rest. triage_dataset() reads this to say which.
+    screen_for_pii.geographic_hits = sorted(geographic)
+    screen_for_pii.blank_columns_skipped = blanked
+    if blanked:
+        print(f"screen_for_pii: {len(blanked)} column(s) matched on their "
+              f"name or label but are entirely empty, so they were not "
+              f"flagged: {blanked[:5]}")
     return hits
 
 
@@ -1008,12 +1111,27 @@ def triage_dataset(df_raw: pd.DataFrame) -> Triage:
                          labels=(getattr(df_raw, "attrs", None) or {})
                          .get("irw_variable_labels"))
     if pii:
-        reasons.append(
-            "Raw file has column(s) that look like direct identifiers: "
-            + ", ".join(repr(c) for c in pii[:5])
-            + ". Per the pipeline's PII rule this is a whole-candidate skip, "
-              "not a drop-the-column fix. Confirm the column really holds "
-              "personal data before overriding.")
+        geographic = set(getattr(screen_for_pii, "geographic_hits", []) or [])
+        if geographic and geographic >= set(pii):
+            # Every hit is a geographic code, so under the 2026-10-20 ruling
+            # the table SHIPS without those columns. Saying "whole-candidate
+            # skip" here is what closed 10.7910/DVN/QIEEJU and
+            # 10.5061/dryad.6vs80 before the ruling reopened them by hand.
+            reasons.append(
+                "Raw file has column(s) that look like full postal or other "
+                "geographic codes: "
+                + ", ".join(repr(c) for c in sorted(geographic)[:5])
+                + ". Under the 2026-10-20 ruling this is NOT a whole-candidate "
+                  "skip: DROP THE COLUMN -- not hashed, not truncated -- and "
+                  "ship the rest. Read the values before acting; this detector "
+                  "also matches self-generated participant codes.")
+        else:
+            reasons.append(
+                "Raw file has column(s) that look like direct identifiers: "
+                + ", ".join(repr(c) for c in pii[:5])
+                + ". Per the pipeline's PII rule this is a whole-candidate skip, "
+                  "not a drop-the-column fix. Confirm the column really holds "
+                  "personal data before overriding.")
         return Triage("pii_suspected", reasons, coerce, [], None)
 
     if coerce.df is None:
