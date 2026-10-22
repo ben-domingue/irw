@@ -22,6 +22,7 @@ determined" on a file xlrd reads fine (10.7910/DVN/EL4KPR, Gries MFQ).
 
 Offline, synthetic.
 """
+import importlib.util
 import io
 import random
 import sys
@@ -29,6 +30,12 @@ import unittest
 from pathlib import Path
 
 import pandas as pd
+
+# xlrd is in OPTIONAL_READERS, so preflight_deps() installs it for a pipeline
+# run -- but an environment that skipped that (the tests workflow, before
+# #3158) would see this class ERROR rather than skip, which turned main red on
+# an unrelated PR. Skip with a reason naming the package instead.
+HAVE_XLRD = importlib.util.find_spec("xlrd") is not None
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
@@ -115,6 +122,9 @@ class Latin1SemicolonCsv(unittest.TestCase):
         self.assertEqual(df.columns[0], "Età")
 
 
+@unittest.skipUnless(HAVE_XLRD, "xlrd not installed: the BIFF2 .xls fallback "
+                                 "cannot be exercised (it is in "
+                                 "OPTIONAL_READERS; pip install xlrd)")
 class Biff2Workbook(unittest.TestCase):
     def setUp(self):
         self.raw = _biff2_xls()

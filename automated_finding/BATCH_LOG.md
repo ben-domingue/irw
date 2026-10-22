@@ -22704,7 +22704,24 @@ actual codebook, instrument or questionnaire FILE, verified to resolve). 35
 tag rows appended into `tags/tags_auto.csv`. 11 `itemtext_provenance.csv`
 rows, 4 `itemtext/mapping_verification.csv` rows, 1
 `itemtext/instrument_rights_register.csv` row (the IUS-R `hold`). 4 new
-`itemtext_verification/` verify scripts and 2 builders. No
-`covariate_labels/harvest.py` is owed: of the new scripts only
-`cassidy_2024_uncertainty_attachment.py` reads a `.sav`, and its `cov_*`
-columns are already text categories rather than coded integers.
+`itemtext_verification/` verify scripts and 2 builders.
+
+**Correction, same day:** this entry first said no
+`covariate_labels/harvest.py` was owed because
+`cassidy_2024_uncertainty_attachment.py`'s `cov_*` columns "are already text
+categories rather than coded integers". They are not. Ten of its eleven
+covariates ship the .sav's own NUMERIC CODES -- `cov_gender` 1-5,
+`cov_nationality` 1-195, `cov_education` 1-11, `cov_ocd_experience` 1-5 and so
+on -- and the .sav carries a value label for every one of them ("1 = Cisgender
+woman ...", "185 = United Kingdom", "1 = I have been diagnosed with OCD"). The
+claim came from having read the PII screen's output, where those columns are
+absent because they are numeric, instead of looking at the shipped CSV. The
+harvest has since been run (exit 0, a 76 KB log) and the script fixed so it
+CAN be harvested: it required its input path as `argv[1]`, while `harvest.py`
+re-runs scripts in a detached checkout with no arguments and no raw files on
+disk -- exactly the shape behind the 32 empty harvest logs this same day --
+so it now fetches its own `.sav` into `$IRW_RAW_DIR`, verified to produce
+byte-identical tables. `build.py` includes LIVE tables only (those in
+`metadata/metadata.csv`), so the labels land on the first build after these
+tables are released; the log is cached until then. The other seven scripts are
+genuinely clear: none reads a `.sav` or `.dta`.

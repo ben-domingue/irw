@@ -112,7 +112,16 @@ Full write-up in `BATCH_LOG.md` (2026-10-21d). Jobs 1, 3 and 4 of
 `leads/repos_leads_2026-10-21.csv` worked to a decision: 53 rows, 8 deposits
 shipping 35 response tables and 218,354 responses, 4 item text tables.
 
-- [ ] **35 response tables + 4 item text tables need uploading.**
+- [x] **35 response tables + 4 item text tables uploaded by Ben, 2026-10-21.**
+  `uploaded=2026-10-21` is stamped on the 4 shipped `itemtext_provenance.csv`
+  rows and the 4 `itemtext/mapping_verification.csv` rows. If any individual
+  table did not in fact go up, that stamp is the thing to correct -- the staged
+  copies are in `automated_finding/irw_output/` and `itemtext_output/` with a
+  MANIFEST until Ben clears them. **A release is owed** before these reach
+  `metadata.csv`, and with it the first `covariate_labels/build.py` run that
+  can pick up `cassidy_2024_*` (see the note below).
+
+  Original: **35 response tables + 4 item text tables need uploading.**
   `automated_finding/irw_output/` (with a MANIFEST) and
   `itemtext_output/`. Response tables first. All 35 pass `irw-validate`'s
   upload profile; the 4 item text tables PASS `normalize_nulls.R` ->
@@ -130,6 +139,16 @@ shipping 35 response tables and 218,354 responses, 4 item text tables.
   read now. The cheap way in is
   `python3 seen_ledger.py drop repo_triage_seen_keys.csv --refined-flag
   recoverable_format --apply` followed by a re-triage of just those keys.
+
+- [ ] **`cassidy_2024_*`'s covariate labels land on the next `build.py` run,
+  not before.** The 2026-10-21d entry wrongly said no harvest was owed; it is,
+  because ten of the eleven `cov_*` columns ship the .sav's numeric codes and
+  the .sav labels all of them. The harvest has been run (exit 0, cached log)
+  and the script fixed so it can be harvested at all, but
+  `metadata/covariate_labels/build.py` includes only tables present in
+  `metadata/metadata.csv` -- so these nine tables need to be live first. No
+  action until then; this is a note so the next release's owed `build.py` run
+  is known to cover them.
 
 ### Two credential requests. Neither is a code change, and between them they
 ### unblock 9 rows here plus a share of every future sweep.
