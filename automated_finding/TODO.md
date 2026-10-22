@@ -5281,11 +5281,13 @@ do not treat the CSV's `proposed_name` column as a work list.
 
 ## From Luettgau 2026 (uploaded 2026-10-22, #3174; BATCH_LOG.md 2026-10-22)
 
-- [ ] **Upload `luettgau_2026_source_trust__items.csv`**, still staged in
-  `automated_finding/itemtext_output/` — the two response tables went up on
-  2026-10-22 but its item text did not. Gate is clean (`validate_items.R`:
-  item sets 8/8, resp sets match). Stamp `uploaded` in
-  `itemtext_provenance.csv` after, by editing the bytes in place.
+- [x] `luettgau_2026_source_trust__items.csv` uploaded 2026-10-22 and stamped
+  in `itemtext_provenance.csv`. The two gate steps skipped on the first pass
+  were run retrospectively against a rebuilt response CSV:
+  `normalize_nulls.R` changed quoting only (the NA tokens were already bare,
+  so the uploaded copy is byte-equivalent in content and needs no re-upload),
+  `audit_batch.R` PASS with no anomalies, `irw-validate` ok. The staged copy
+  is still in `automated_finding/itemtext_output/` for Ben to clear.
 - [ ] **Ask the authors two questions; both unpark 64 items of item text.**
   The deposit publishes an issue tracker
   (`github.com/UKGovernmentBEIS/dhi1-analysis-public`). (a) Which statement is
