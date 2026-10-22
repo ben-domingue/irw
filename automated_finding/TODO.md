@@ -140,7 +140,45 @@ shipping 35 response tables and 218,354 responses, 4 item text tables.
   `python3 seen_ledger.py drop repo_triage_seen_keys.csv --refined-flag
   recoverable_format --apply` followed by a re-triage of just those keys.
 
-- [ ] **`cassidy_2024_*`'s covariate labels land on the next `build.py` run,
+- [ ] **Re-run `metadata/covariate_labels/build.py` after the next pipeline
+  stage 01, and commit the diff. Expect ~558 new rows.** Ben released
+  everything on 2026-10-21 and `build.py` was run immediately after: it was a
+  **no-op**, correctly. `build.py` gates on `metadata/metadata.csv` ("live
+  tables only"), and that file is a repo SNAPSHOT that only stage 01
+  regenerates -- it was last written 16:32, before the upload, so all 35 new
+  tables were skipped as not-live. Releasing makes a table live on Redivis; it
+  does not refresh the snapshot. So the order is stage 01 -> `build.py`, and
+  nothing is wrong until that has happened.
+
+  The expected result, computed from the cached harvest log rather than
+  guessed: **10 of `cassidy_2024_*`'s 11 covariates are eligible** and should
+  produce **~558 rows** (~62 per table x 9 tables; the per-table count varies
+  a little because a different subset of respondents answered each
+  instrument). `cov_age` is the one exclusion and it is correct -- `Age` is a
+  free numeric with no value labels, so it fails the "at least half the codes
+  carry a source label" rule. `cov_ethnicity` is a near-miss worth a glance
+  when the diff lands: 2 shipped codes against 3 source labels with only 1
+  matching, which clears the half rule by exactly nothing.
+
+  The confirmation that it worked is also automatic now: the #3159 ratchet
+  will report those 9 tables as **closed** rather than as gaps.
+
+- [ ] **`build.py` writes a nondeterministic exclusion message into
+  `coverage.csv`.** Running it twice on identical inputs flips the `reason`
+  on four `sahin_2026_*` rows between "gelir_inkcome is unlabelled or labelled
+  differently in another file the script read" and "the script also feeds
+  income into cov_income, and it is not labelled like gelir_income". Both
+  describe the same exclusion, and the pair of candidate messages presumably
+  comes out of set or dict iteration order over the several source columns the
+  script read. It is cosmetic in effect but not harmless: `coverage.csv` is a
+  committed record, so every `build.py` run produces a 4-line diff that is
+  pure noise, and noise in a committed record is what trains people to stop
+  reading its diffs. Seen twice on 2026-10-21 (and reverted both times rather
+  than committed). One-line fix for whoever owns `build.py`: sort the
+  candidate source columns before choosing the message.
+
+- [ ] **(superseded by the two items above, kept for the record)
+  `cassidy_2024_*`'s covariate labels land on the next `build.py` run,
   not before.** The 2026-10-21d entry wrongly said no harvest was owed; it is,
   because ten of the eleven `cov_*` columns ship the .sav's numeric codes and
   the .sav labels all of them. The harvest has been run (exit 0, cached log)
