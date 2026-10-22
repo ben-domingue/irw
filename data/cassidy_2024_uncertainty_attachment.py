@@ -53,6 +53,18 @@ block-to-county locating the 2026-10-20 geographic ruling is about.
 `id` is the row index. The source's three identifier columns were already
 blanked by the depositors, so there is nothing else to use.
 
+Ten of the eleven covariates ship as the source's own NUMERIC CODES, not as
+labels: `cov_gender` 1-5, `cov_nationality` 1-195, `cov_education` 1-11,
+`cov_ocd_experience` 1-5 and so on. The .sav carries a value label for every
+one of them ("1 = Cisgender woman ...", "185 = United Kingdom", "1 = I have
+been diagnosed with OCD"), and those labels reach the table page only through
+`metadata/covariate_labels/` -- so this script is a harvest candidate and the
+harvest is owed whenever it changes. Run:
+
+    python3 metadata/covariate_labels/harvest.py --commit HEAD \
+        cassidy_2024_uncertainty_attachment
+    python3 metadata/covariate_labels/build.py
+
 Output: nine tables, one per instrument. Their response formats differ (1-7,
 1-6, 1-5) and they measure different constructs, so they are not one scale.
   cassidy_2024_ecr_r         36 items, 1-7, 201 ids, 7179 responses
@@ -68,15 +80,37 @@ Skipped: PHQ-2 and GAD-2, two items each, below the 3-item floor.
 """
 from __future__ import annotations
 
+import os
 from pathlib import Path
 import re
 import sys
 
 import pandas as pd
+import requests
 
-SRC = Path(sys.argv[1]) if len(sys.argv) > 1 else \
-    Path("Uncertainty_Attachment_Consented_Eligible 07.24.sav")
+# figshare's file endpoint for article 27335709's .sav. Fetched only when no
+# local copy is given: `metadata/covariate_labels/harvest.py` re-runs this
+# script in a detached checkout with no arguments and no raw files on disk, so
+# a script that cannot fetch its own input produces an EMPTY harvest log --
+# which is how 32 of the 499 harvests on 2026-10-21 silently produced no
+# covariate labels at all.
+DATA_URL = "https://ndownloader.figshare.com/files/50086155"
+UA = {"User-Agent": "Mozilla/5.0 (IRW research pipeline; ben.domingue@gmail.com)"}
+
+SRC = Path(sys.argv[1]) if len(sys.argv) > 1 else None
 OUT = Path(sys.argv[2]) if len(sys.argv) > 2 else Path(".")
+
+
+def source_file() -> Path:
+    if SRC is not None:
+        return SRC
+    raw = Path(os.environ.get("IRW_RAW_DIR", "/tmp")) / \
+        "cassidy_2024_uncertainty_attachment.sav"
+    if not raw.exists():
+        r = requests.get(DATA_URL, headers=UA, timeout=300)
+        r.raise_for_status()
+        raw.write_bytes(r.content)
+    return raw
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT))
@@ -136,7 +170,8 @@ def pii_screen(df: pd.DataFrame) -> None:
 
 def main() -> None:
     import pyreadstat
-    df, meta = pyreadstat.read_sav(str(SRC), apply_value_formats=False)
+    src = source_file()
+    df, meta = pyreadstat.read_sav(str(src), apply_value_formats=False)
     print("raw shape", df.shape)
     pii_screen(df)
     assert len(df) == 250, len(df)
