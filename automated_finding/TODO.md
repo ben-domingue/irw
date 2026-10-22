@@ -5278,3 +5278,30 @@ do not treat the CSV's `proposed_name` column as a work list.
 - [x] Cross-check the 128 `good` keys (done 2026-10-18, BATCH_LOG 2026-10-18): 69 shipped, 23 closed with a reason, 36 unworked. Per-key result in leads/repos_ledger_good_keys_2026-10-18.csv; re-runnable with `python check_shipped.py --out ...`.
 - [ ] **Work the 36 `good`-key leads** -- item 1 of #3077, the standing re-mine backlog. Forks of ~26, one at a time, the #3048 way. 6 are in no leads file at all, 25 are the unworked tail of the 2026-08-27/28 Zenodo backlog sweep, 5 are `unworked` in repos_leads_2026-10-07.csv.
 - [ ] **Dictionary gap found by the same pass:** four live tables have no dictionary row carrying their data DOI -- yang2026_efl_learner_perspective, tang_2026_rmet_c, mcdermott_2014_roadmaps_expert_ratings, political_preference_china. Separate from #3051.
+
+## From Luettgau 2026 (uploaded 2026-10-22, #3174; BATCH_LOG.md 2026-10-22)
+
+- [ ] **Upload `luettgau_2026_source_trust__items.csv`**, still staged in
+  `automated_finding/itemtext_output/` — the two response tables went up on
+  2026-10-22 but its item text did not. Gate is clean (`validate_items.R`:
+  item sets 8/8, resp sets match). Stamp `uploaded` in
+  `itemtext_provenance.csv` after, by editing the bytes in place.
+- [ ] **Ask the authors two questions; both unpark 64 items of item text.**
+  The deposit publishes an issue tracker
+  (`github.com/UKGovernmentBEIS/dhi1-analysis-public`). (a) Which statement is
+  which question index — ideally the instrument as fielded. The article's
+  appendix prints 8 true then 8 false statements per topic and the data
+  confirms the block boundary at 8, but nothing ties the listing order to the
+  index *within* a block. (b) The seven Likert point labels and their numeric
+  coding, which are published nowhere; the column is stored agree-first, so
+  guessing them would invert `option_text` against the responses half the
+  time. All 64 statements are already transcribed in
+  `itemtext/fixes/luettgau_2026_political_knowledge__items.PARKED.csv`.
+- [ ] **Decision: can `wave` be recovered for the trust and private-belief
+  batteries** (10 items each, same deposit, not shipped)? Both hold one row
+  per (subject, topic, question) with `presented` labelling it pre or post, so
+  the same subject-question reads "pre" under one topic and "post" under
+  another — either the battery was re-administered at four timepoints or the
+  rows are an artefact of the analysis table's topic join. Needs a human read
+  of the article's supplement. Their item text is in the same appendix as the
+  statements above, so wording is not the blocker.
