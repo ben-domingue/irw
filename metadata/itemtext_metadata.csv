@@ -1096,6 +1096,9 @@ hua_2023_efl_course_experience,"EFL Course Experience Questionnaire (EFL-CEQ), a
 huang_2016_cesd,Center for Epidemiologic Studies Depression Scale (CES-D),6.35,31,42.25,2.21720866141732
 huang_2023_d_scale,Index of Well-Being (幸福感指数量表),3.33333333333333,17.2222222222222,2.58730158730159,4.06666666666667
 huang_2023_medseq,Medicine Student Experience Questionnaire (MedSEQ),14.2727272727273,100.363636363636,2,13.4250141163185
+huebner_2021_weightlifting_attraction,Masters weightlifting survey (Huebner 2021): attractions,4,27.6,14,11.4183529411765
+huebner_2021_weightlifting_barriers,Masters weightlifting survey (Huebner 2021): barriers,3,20,14,13.4159398496241
+huebner_2021_weightlifting_pandemic,Masters weightlifting survey (Huebner 2021): the pandemic,10.875,59.25,14,6.66818181818182
 huentemilla_2026_digital_competence_test,"Digital competence knowledge test, 63 scored items (pre/post)",17.1269841269841,102.873015873016,2,9.53220322704572
 hui_2024_gbfs,"General Benefit Finding Scale (GBFS), Chinese version (益处发现量表)",7.96428571428571,41.2857142857143,3.6,4.4488068545804
 humor_styles,Humor Styles Questionnaire (HSQ),16.4375,84.28125,17,7.84762119771863
@@ -1327,6 +1330,8 @@ li_2021_cultural_intelligence,"Cultural Intelligence Scale (CQS), 12-item short 
 li_2021_knowledge_sharing,"Knowledge Sharing (KS) scale (Faraj & Sproull, 2000; as applied by Srivastava, Bartol & Locke, 2006)",1,2,2,-3.4
 li_2021_org_cultural_diversity,"Organizational Culture Differences scale (management style and organizational responsiveness), applied from Lavie, Haunschild & Khanna (2012)",1,2,2,-3.4
 li_2021_sustainable_innov_behav,"Sustainable Innovation Behavior scale, adapted from the Innovation Behavior Scale (Scott & Bruce, 1994)",1,2,2,-3.4
+li_2023_self_efficacy,"General Self-Efficacy Scale (GSE), Schwarzer & Jerusalem (1995), Chinese version",1,2,2,-3.4
+li_2023_social_support,"Multidimensional Scale of Perceived Social Support (MSPSS), Zimet et al. (1988), Chinese version",1,2,2,-3.4
 li_2024_bdyz,"Expressive Suppression subscale of the Emotion Regulation Questionnaire (ERQ; Gross & John, 2003), Chinese version (Zhao et al., 2015)",1,2,5.85714285714286,-3.4
 li_2025_corporate_performance,Corporate Performance (PERF) scale,1,2,13.6666666666667,-3.4
 li_2025_market_environment,Market Environment (ME) scale,7.8,52.8,13,9.84174358974359
@@ -1403,6 +1408,7 @@ lorenz_2016_optimism2,"Life-Orientation-Test - Revised (LOT-R), deutsche Version
 lshs-e_quidaja_2022,Online and paper forms of the Launay-Slade Hallucinations scale,17.25,98.3125,19.4,13.4572199820789
 lu_2017_gad7,Generalized Anxiety Disorder 7-item scale (GAD-7),1,2,15.25,-3.4
 lu_2017_phq9,Patient Health Questionnaire-9 (PHQ-9),1,2,15.25,-3.4
+luettgau_2026_source_trust,"Trust in sources of information about UK politics and current affairs (study-authored survey item, UK AI Security Institute 2024 post-election survey)",6.25,43.25,19.75,9.5035
 lunacortes_2019_interperson_conn,"Interpersonal connections on virtual social networks [IC] (Riper et al. 2013), 4 items",1,2,5.57142857142857,-3.4
 lunacortes_2019_satisfaction,"Satisfaction scale (McCollough et al., 2000)",1,2,5.57142857142857,-3.4
 lunacortes_2019_self_congruity,"Self-congruity [SELFCON] (Sirgy et al. 1997), 4 items",1,2,5.57142857142857,-3.4
@@ -1784,6 +1790,7 @@ os_tbmwtfs_schubert_2023_cerq,Cognitive Emotion-Regulation Questionnaire,14.5111
 os_tbmwtfs_schubert_2023_dmw,Deliberate Mind Wandering,7.75,43,3.46428571428571,4.79113636363637
 os_tbmwtfs_schubert_2023_ipip,International Personality Item Pool,5.44,27.78,19.8,4.01468823529412
 os_tbmwtfs_schubert_2023_maas,Mindful Attention Awareness Scale,14.3333333333333,78.2666666666667,16.1666666666667,7.39813953488372
+otago_2018_library_support,"Postgraduate Support at Otago student questionnaire, Q22 (Library support preferences) -- Research Support Unit Library, University of Otago (2018)",5,41.5,8.6,10.20375
 otaki_2022_dental_adaptability,Tailor-made self-reported adaptability survey (quantitative segment),18.75,112.5,8.66666666666667,10.9171666666667
 oxfordcovid_xue_2024_at,Oxford ARC study: activities and technology use,5.16666666666667,27.1666666666667,6.2,3.1733870967742
 oxfordcovid_xue_2024_bfi,Big Five Inventory,4,23.7333333333333,14.4285714285714,169.843333333333
@@ -2158,6 +2165,9 @@ scs_2025_cfanonclinic,"Self-Compassion Scale Short Form (SCS-SF; Raes, Pommier, 
 scs_2025_cfausatr,Self-Compassion Scale Short Form (SCS-SF),14.9166666666667,81.25,6.2,8.02638268156425
 selfcompassionscale_shortform_fuochi_2025,"Self-Compassion Scale Short Form (SCS-SF; Raes, Pommier, Neff & Van Gucht, 2011), Italian version (Fuochi, Voci & Moè, 2025; items from Veneziani, Fuochi & Voci, 2017)",14.9166666666667,81.25,5.4,8.02638268156425
 sem_cnes,"1997 Canadian Election Study (CES), Mail-Back Survey: traditional-values statements (MBSA2, MBSA7, MBSA8, MBSA9)",17,99,11,9.95470588235294
+setiawan_2026_cybersecurity_behaviour,"Cybersecurity Literacy of Educators (CSLE) questionnaire, Setiawan, Abdullah & Salam (2026) -- study-authored",15.65,93.65,2,11.1266305732484
+setiawan_2026_cybersecurity_ethics,"Cybersecurity Literacy of Educators (CSLE) questionnaire, Setiawan, Abdullah & Salam (2026) -- study-authored",18.95,130.1,2,15.711845646438
+setiawan_2026_cybersecurity_knowledge,"Cybersecurity Literacy of Educators (CSLE) questionnaire, Setiawan, Abdullah & Salam (2026) -- study-authored",16.65,102.45,2,11.6613233532934
 sexual_compulsivity,Answers to the Sexual Compulsivity Scale,11.7,62.6,16.25,6.32000854700855
 sexual_selfconcept,Data on participants' feelings about and self-concept of sexual activities,13.36,71.14,29,8.30836881077039
 shehayeb_2024_math_teacher,Mathematics teacher practices and manner items (study-authored),10.5454545454545,61,10.6,6.62962382445141

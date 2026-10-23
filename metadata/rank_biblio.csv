@@ -29,6 +29,46 @@ atsusaka_2025_ranking_questions,NA,10.7910/DVN/UCTXEF,"Atsusaka, Y., & Kim, S.-y
   year = {2024}
 }
 ",NA
+bakker_2021_childrearing_values,NA,10.7910/DVN/WZI945,"Bakker, B. N., Lelkes, Y. & Malka, A. 2021. 'Reconsidering the Link Between Self-Reported Personality Traits and Political Preferences.' American Political Science Review 115(4). Standardised in Atsusaka, Y. & Singh, S. (2026). Ranking Data in Political Science [database]. Political Rankings Database. https://political-rankings.github.io",https://political-rankings.github.io,CC0 1.0,CC0 1.0,NA,"Survey ranking question: GSS 2006 panel, Stenner child-rearing values: five qualities ranked 1 (most important) to 5; three waves stacked, one row per respondent x wave (cov_treat is the wave, cov_wave its label). 2490 respondents, 5 ranked items, 5 rank positions used, 12450 rows. One row per respondent x marked position; item = the option as the source prints it, resp = the position recorded (1 = most preferred). Standardised by the Political Rankings Database (Atsusaka & Singh 2026) from the authors' replication deposit; rankings layout (data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/wzi945,
+  doi = {10.7910/DVN/WZI945},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/WZI945},
+  author = {Bakker, Bert and Lelkes, Yphtach and Malka, Ariel},
+  keywords = {Social Sciences, Personality, Political preferences},
+  title = {Replication Data for: Reconsidering the Link Between Self-Reported Personality Traits and Political Preferences},
+  publisher = {Harvard Dataverse},
+  year = {2021}
+}
+",PRD
+boudreau_2019_police_blame,NA,10.7910/DVN/V83FXD,"Boudreau, C., MacKenzie, S. A. & Simmons, D. J. 2019. 'Police Violence and Public Perceptions: An Experimental Study of How Information and Endorsements Affect Support for Law Enforcement.' The Journal of Politics 81(3). Standardised in Atsusaka, Y. & Singh, S. (2026). Ranking Data in Political Science [database]. Political Rankings Database. https://political-rankings.github.io",https://political-rankings.github.io,CC0 1.0,CC0 1.0,NA,"Survey ranking question: full 1-7 ranking of the actors most to blame for the 2018 Stephon Clark shooting, in a three-arm information-framing experiment (cov_treat: 0 control, 1 pattern framing, 2 reform framing). 2465 respondents, 7 ranked items, 7 rank positions used, 17255 rows. One row per respondent x marked position; item = a candidate code c01.. in alphabetical order of the printed names (names not stored), resp = the position recorded (1 = most preferred). Standardised by the Political Rankings Database (Atsusaka & Singh 2026) from the authors' replication deposit; rankings layout (data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/v83fxd,
+  doi = {10.7910/DVN/V83FXD},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/V83FXD},
+  author = {Boudreau, Cheryl and MacKenzie, Scott and {Simmons, Daniel}},
+  keywords = {Social Sciences, police violence, endorsement, trust, blame attribution, local elections},
+  title = {Replication Data for: Police Violence and Public Perceptions: An Experimental Study of How Information and Endorsements Affect Support for Law Enforcement},
+  publisher = {Harvard Dataverse},
+  year = {2019}
+}
+",PRD
+corstange_2022_syria_factions_2015,NA,10.7910/DVN/S8LSKA,"Corstange, D. 2022. 'Mass Dissimulation in the Syrian Civil War.' The Journal of Politics 84(3); the deposit is titled 'Displacement and Dissimulation in the Syrian Civil War'. Standardised in Atsusaka, Y. & Singh, S. (2026). Ranking Data in Political Science [database]. Political Rankings Database. https://political-rankings.github.io",https://political-rankings.github.io,CC0 1.0,CC0 1.0,NA,"Survey ranking question: top-3 sympathy ranking of six civil-war factions, wave 1 (2015) of a survey of displaced Syrians; unranked factions are NA (cov_treat: 0 control, 1-3 framing arms). 1859 respondents, 6 ranked items, 3 rank positions used, 3779 rows. One row per respondent x marked position; item = the option as the source prints it, resp = the position recorded (1 = most preferred). Standardised by the Political Rankings Database (Atsusaka & Singh 2026) from the authors' replication deposit; rankings layout (data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/s8lska,
+  doi = {10.7910/DVN/S8LSKA},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/S8LSKA},
+  author = {Corstange, Daniel},
+  keywords = {Social Sciences},
+  title = {Replication Data for: Displacement and Dissimulation in the Syrian Civil War},
+  publisher = {Harvard Dataverse},
+  year = {2021}
+}
+",PRD
+corstange_2022_syria_factions_2017,NA,10.7910/DVN/S8LSKA,"Corstange, D. 2022. 'Mass Dissimulation in the Syrian Civil War.' The Journal of Politics 84(3); the deposit is titled 'Displacement and Dissimulation in the Syrian Civil War'. Standardised in Atsusaka, Y. & Singh, S. (2026). Ranking Data in Political Science [database]. Political Rankings Database. https://political-rankings.github.io",https://political-rankings.github.io,CC0 1.0,CC0 1.0,NA,"Survey ranking question: top-3 sympathy ranking of six civil-war factions, wave 2 (2017); questionnaire item numbering differs from the 2015 wave, so the cov_q* codes are not comparable across the two tables. 1564 respondents, 6 ranked items, 3 rank positions used, 2027 rows. One row per respondent x marked position; item = the option as the source prints it, resp = the position recorded (1 = most preferred). Standardised by the Political Rankings Database (Atsusaka & Singh 2026) from the authors' replication deposit; rankings layout (data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/s8lska,
+  doi = {10.7910/DVN/S8LSKA},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/S8LSKA},
+  author = {Corstange, Daniel},
+  keywords = {Social Sciences},
+  title = {Replication Data for: Displacement and Dissimulation in the Syrian Civil War},
+  publisher = {Harvard Dataverse},
+  year = {2021}
+}
+",PRD
 debian_2006_dpl,NA,NA,"Debian Project. Debian Project Leader Elections 2006. Vote record and tally sheet, https://www.debian.org/vote/2006/vote_002 (read 2026-10-15).",https://www.debian.org/vote/2006/vote_002,MIT (Expat) or GPL-2+,MIT,NA,"Debian Project Project Leader election (Debian Project Leader Elections 2006), voting period ending 2006-04-17: 421 developers each ranked 7 options plus the default option ('none of the above' / 'further discussion') under Debian's Condorcet (Schwartz sequential dropping) rule. One row per ballot x ranked option; item = candidates coded c01.. in alphabetical order of the printed names (names not stored); resp = the rank given (1 = best) as recorded; unranked options have no row; equal ranks are allowed and kept. Rankings layout (irw_rank family, data/rankings/README.md).","@misc{DebianProject2006,
   author = {{Debian Project}},
   title = {Debian Project Leader Elections 2006. Vote record and tally sheet},
@@ -441,6 +481,91 @@ eurovision_2022_sf2,NA,10.5281/zenodo.10265412,"Burgoyne, J. A., Spijkervet, J.,
   copyright = {Creative Commons Attribution 4.0 International}
 }
 ",NA
+farvaque_2007_faches_irv,10.3917/redp.192.0221,10.5281/zenodo.15290476,"Farvaque, E., Jayet, H. & Ragot, L. (2009). Quel mode de scrutin pour quel << vainqueur >> ? Une experience sur le vote preferentiel transferable. Revue d'economie politique, 119(2), 221-246. Data deposited by Theo Delemazure, Zenodo, https://doi.org/10.5281/zenodo.15290476",https://doi.org/10.5281/zenodo.15290476,ODbL 1.0,ODbL 1.0,NA,"Instant-runoff voting experiment run beside the first round of the 2007 French presidential election in Faches-Thumesnil, northern France: 893 voters leaving two polling stations ranked the twelve official candidates, 6559 rows. One row per ballot x marked position; item = a candidate code c01.. in alphabetical order of the printed names (names not stored), resp = the position as marked, cov_polling_station = bureau_1 or bureau_6. Four ballots place two candidates at one position (ties, kept as recorded). Rankings layout (data/rankings/README.md)."," @article{Farvaque_2009, title={Quel mode de scrutin pour quel « vainqueur » ? Une expérience sur le vote préférentiel transférable}, volume={Vol. 119}, ISSN={0373-2630}, url={http://dx.doi.org/10.3917/redp.192.0221}, DOI={10.3917/redp.192.0221}, number={2}, journal={Revue d’économie politique}, publisher={CAIRN}, author={Farvaque, Étienne and Jayet, Hubert and Ragot, Lionel}, year={2009}, month=Apr, pages={221–246} }
+",NA
+fielding_2018_party_ranking,NA,10.7910/DVN/GCPZZB,"Fielding, D. 2018. 'Traditions of Tolerance: The Long-Run Persistence of Regional Variation in Attitudes towards English Immigrants.' British Journal of Political Science 48(1). Standardised in Atsusaka, Y. & Singh, S. (2026). Ranking Data in Political Science [database]. Political Rankings Database. https://political-rankings.github.io",https://political-rankings.github.io,CC0 1.0,CC0 1.0,NA,"Survey ranking question: an imaginary alternative-vote ballot in the 2010 British Election Study, seven parties ranked. ONLY the UKIP and BNP positions are in the released extract; the other five parties are NA for every respondent because they were not released, not because the respondent stopped ranking. PRD converted the author's reverse-coded 0-6 ordinals to positions (rank = 7 - value, 0 -> NA). 5277 respondents, 2 ranked items, 6 rank positions used, 7178 rows. Only the UKIP and BNP positions were released, so the other five parties are NA for every respondent: the missingness is the release's, not the respondent's. One row per respondent x marked position; item = the option as the source prints it, resp = the position recorded (1 = most preferred). Standardised by the Political Rankings Database (Atsusaka & Singh 2026) from the authors' replication deposit; rankings layout (data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/gcpzzb,
+  doi = {10.7910/DVN/GCPZZB},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/GCPZZB},
+  author = {Fielding, David},
+  keywords = {Social Sciences},
+  title = {Replication Data for ""Traditions of Tolerance: The Long-Run Persistence of Regional Variation in Attitudes towards English Immigrants""},
+  publisher = {Harvard Dataverse},
+  year = {2017}
+}
+",PRD
+haas_2023_group_leader,NA,10.7910/DVN/F8SRTA,"Haas, N. & Lindstam, E. 2023. 'My History or Our History? Historical Revisionism and Entitlement to Lead.' American Political Science Review 118(4). Standardised in Atsusaka, Y. & Singh, S. (2026). Ranking Data in Political Science [database]. Political Rankings Database. https://political-rankings.github.io",https://political-rankings.github.io,CC0 1.0,CC0 1.0,NA,"Survey ranking question: full 1-3 ranking of the three members of a real-money group as ideal leader (self, another Hindu member, a Muslim member), Hindu respondents only (cov_treat: 0 neutral, 1 exclusive, 2 inclusive history). The raw file stores the two partners' reverse-coded demand scores and PRD derives the respondent's own position as the remaining rank; Muslim respondents' mirror task is not in PRD. 367 respondents, 3 ranked items, 3 rank positions used, 1101 rows. One row per respondent x marked position; item = the option as the source prints it, resp = the position recorded (1 = most preferred). Standardised by the Political Rankings Database (Atsusaka & Singh 2026) from the authors' replication deposit; rankings layout (data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/f8srta,
+  doi = {10.7910/DVN/F8SRTA},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/F8SRTA},
+  author = {Haas, Nicholas and Lindstam, Emmy},
+  keywords = {Social Sciences, historical revisionism, national identity, minority politics, leader emergence, representation},
+  title = {Replication Data for: My History or Our History? Historical Revisionism and Entitlement to Lead},
+  publisher = {Harvard Dataverse},
+  year = {2023}
+}
+",PRD
+jacoby_2014_political_values,NA,10.7910/DVN/26564,"Jacoby, W. G. 2014. 'Is There a Culture War? Conflicting Value Structures in American Public Opinion.' American Political Science Review 108(4). Standardised in Atsusaka, Y. & Singh, S. (2026). Ranking Data in Political Science [database]. Political Rankings Database. https://political-rankings.github.io",https://political-rankings.github.io,CC0 1.0,CC0 1.0,NA,"Survey ranking question: full 1-7 ranking of political values, produced by sequential elimination; observational, cov_treat 0. 775 respondents, 7 ranked items, 7 rank positions used, 5425 rows. One row per respondent x marked position; item = the option as the source prints it, resp = the position recorded (1 = most preferred). Standardised by the Political Rankings Database (Atsusaka & Singh 2026) from the authors' replication deposit; rankings layout (data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/26564,
+  doi = {10.7910/DVN/26564},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/26564},
+  author = {Jacoby, W},
+  title = {Is There a Culture War? Conflicting Value Structures in American Public Opinion},
+  publisher = {Harvard Dataverse},
+  year = {2014}
+}
+",PRD
+kerver_2021_prosthesis_items,10.1080/09638288.2021.1988734,10.34894/OCZJAL,"Kerver, N., van der Sluis, C. K., van Twillert, S. & Krabbe, P. F. M. Towards assessing the preferred usage features of upper limb prostheses: most important items regarding prosthesis use in people with major unilateral upper limb absence - a Dutch national survey. Disability and Rehabilitation. https://doi.org/10.1080/09638288.2021.1988734",https://doi.org/10.34894/OCZJAL,CC0 1.0,CC0 1.0,NA,"Dutch national survey of people with major unilateral upper limb absence: each participant chose their ten most important items regarding prosthesis use from the 79-item HealthFan diagram and ranked those ten from most to least important. 344 participants, 79 distinct items used, 3399 rows. One row per participant x position; item = the item's English label from the deposit's codebook, resp = the position, 1 = most important. Six participants who selected ten items but did not rank them (the deposit shows their items in random order) are not included, and the deposit's missing/unclear/not-ranked sentinel cells leave gaps. The depositors removed every personal detail because the Dutch population with upper limb absence is small, so the table has no covariates. Rankings layout (data/rankings/README.md)."," @article{Kerver_2021, title={Towards assessing the preferred usage features of upper limb prostheses: most important items regarding prosthesis use in people with major unilateral upper limb absence—a Dutch national survey}, volume={44}, ISSN={1464-5165}, url={http://dx.doi.org/10.1080/09638288.2021.1988734}, DOI={10.1080/09638288.2021.1988734}, number={24}, journal={Disability and Rehabilitation}, publisher={Informa UK Limited}, author={Kerver, Nienke and van der Sluis, Corry K. and van Twillert, Sacha and Krabbe, Paul F. M.}, year={2021}, month=Nov, pages={7554–7565} }
+",NA
+krupnikov_2019_issue_importance,NA,10.7910/DVN/EEMRS9,"Krupnikov, Y. & Levine, A. S. 2019. 'Political Issues, Evidence, and Citizen Engagement: The Case of Unequal Access to Affordable Health Care.' The Journal of Politics 81(2). Standardised in Atsusaka, Y. & Singh, S. (2026). Ranking Data in Political Science [database]. Political Rankings Database. https://political-rankings.github.io",https://political-rankings.github.io,CC0 1.0,CC0 1.0,NA,"Survey ranking question: six policy issues ranked by importance in a five-arm evidence-format experiment, but ONLY the inequality and health-care positions are in the released data; the other four issues are NA for every respondent because they were not released (cov_treat: 0 control, 1 human-interest story, 2 statistics as percentages, 3 statistics as counts, 4 counts with a denominator; 42 rows have no arm). 725 respondents, 2 ranked items, 6 rank positions used, 1450 rows. Only the inequality and health-care positions were released, so the other four issues are NA for every respondent: the missingness is the release's, not the respondent's. One row per respondent x marked position; item = the option as the source prints it, resp = the position recorded (1 = most preferred). Standardised by the Political Rankings Database (Atsusaka & Singh 2026) from the authors' replication deposit; rankings layout (data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/eemrs9,
+  doi = {10.7910/DVN/EEMRS9},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/EEMRS9},
+  author = {Krupnikov, Yanna and Levine, Adam Seth},
+  keywords = {Social Sciences, framing},
+  title = {Replication Data for: Political Issues, Evidence, and Citizen Engagement: The Case of Unequal Access to Affordable Health Care},
+  publisher = {Harvard Dataverse},
+  year = {2018}
+}
+",PRD
+malhotra_2008_katrina_blame,NA,10.7910/DVN/N7MFZW,"Malhotra, N. & Kuo, A. G. 2008. 'Attributing Blame: The Public's Response to Hurricane Katrina.' The Journal of Politics 70(1). Standardised in Atsusaka, Y. & Singh, S. (2026). Ranking Data in Political Science [database]. Political Rankings Database. https://political-rankings.github.io",https://political-rankings.github.io,CC0 1.0,CC0 1.0,NA,"Survey ranking question: full 1-7 ranking of officials most to blame for Hurricane Katrina, in a four-arm cue experiment (cov_treat: 0 names only, 1 office cue, 2 party cue, 3 both). 372 respondents, 7 ranked items, 7 rank positions used, 2554 rows. One row per respondent x marked position; item = a candidate code c01.. in alphabetical order of the printed names (names not stored), resp = the position recorded (1 = most preferred). Standardised by the Political Rankings Database (Atsusaka & Singh 2026) from the authors' replication deposit; rankings layout (data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/n7mfzw,
+  doi = {10.7910/DVN/N7MFZW},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/N7MFZW},
+  author = {Malhotra, Neil and Kuo, Alexander},
+  keywords = {hurricanes, natural disaster, preparedness},
+  title = {Assigning Blame: The Public’s Response to Hurricane Katrina},
+  publisher = {Harvard Dataverse},
+  year = {2011}
+}
+",PRD
+mcmurry_2022_identity_ranking,NA,10.7910/DVN/VW1GDD,"McMurry, N. 2022. 'From Recognition to Integration: Indigenous Autonomy, State Authority, and National Identity in the Philippines.' American Political Science Review 116(2). Standardised in Atsusaka, Y. & Singh, S. (2026). Ranking Data in Political Science [database]. Political Rankings Database. https://political-rankings.github.io",https://political-rankings.github.io,CC0 1.0,CC0 1.0,NA,"Survey ranking question: full 1-4 ranking of identity categories (cov_treat: 0 control, 1 identity treatment, 2 material treatment). 720 respondents, 4 ranked items, 4 rank positions used, 2880 rows. One row per respondent x marked position; item = the option as the source prints it, resp = the position recorded (1 = most preferred). Standardised by the Political Rankings Database (Atsusaka & Singh 2026) from the authors' replication deposit; rankings layout (data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/vw1gdd,
+  doi = {10.7910/DVN/VW1GDD},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/VW1GDD},
+  author = {McMurry, Nina},
+  keywords = {Social Sciences, Philippines, Land titling, Indigenous rights, State-building},
+  title = {Replication Data for: From recognition to integration: indigenous autonomy, state authority, and national identity in the Philippines},
+  publisher = {Harvard Dataverse},
+  year = {2021}
+}
+",PRD
+ojwang_2020_sweetpotato_traits,10.3389/fpls.2022.808597,10.5281/zenodo.14831654,"Ojwang, S. O. (2025). Sweetpotato Trait Preferences in Uganda: A Value Chain-Wide Survey Dataset (2020) [data set]. Zenodo. https://doi.org/10.5281/zenodo.14831654",https://doi.org/10.5281/zenodo.14831654,CC BY 4.0,CC BY 4.0,NA,"Sweetpotato trait preferences along the value chain in Central Uganda: 1327 farmers, vine multipliers, traders, processors and consumers each ranked 16 traits by importance (21232 rows), surveyed in Mpigi and Masaka in February 2020. One row per respondent x position; item = the trait text from the deposit's Stata variable labels, resp = the position, 1 = most important. The source records ties as averaged mid-ranks (15.5 for a tie at 15 and 16); they are decoded to this family's tie convention, where every item of a tie group takes the group's lowest position, which is exact and reversible. Ties are common: every respondent has at least one. Six rows whose mid-ranks cannot tile positions 1..16 are dropped (issue #3179). Rankings layout (data/rankings/README.md)."," @article{Okello_2022, title={Market Intelligence and Incentive-Based Trait Ranking for Plant Breeding: A Sweetpotato Pilot in Uganda}, volume={13}, ISSN={1664-462X}, url={http://dx.doi.org/10.3389/fpls.2022.808597}, DOI={10.3389/fpls.2022.808597}, journal={Frontiers in Plant Science}, publisher={Frontiers Media SA}, author={Okello, Julius J. and Swanckaert, Jolien and Martin-Collado, Daniel and Santos, Bruno and Yada, Benard and Mwanga, Robert O. M. and Schurink, Anouk and Quinn, Michael and Thiele, Graham and Heck, Simon and Byrne, Timothy J. and Hareau, Guy G. and Campos, Hugo}, year={2022}, month=Mar }
+",NA
+pradel_2024_speech_types,NA,10.7910/DVN/Y0YNMV,"Pradel, F., Zilinsky, J., Kosmidis, S. & Theocharis, Y. 2024. 'Toxic Speech and Limited Demand for Content Moderation on Social Media.' American Political Science Review 118(4). Standardised in Atsusaka, Y. & Singh, S. (2026). Ranking Data in Political Science [database]. Political Rankings Database. https://political-rankings.github.io",https://political-rankings.github.io,CC0 1.0,CC0 1.0,NA,"Survey ranking question: full 1-4 ranking of four speech types in a five-arm experiment (cov_treat: 0 control, 1 non-group-related control, 2 uncivil, 3 intolerant, 4 threatening; cov_treatment is the label). 988 respondents, 4 ranked items, 4 rank positions used, 3952 rows. One row per respondent x marked position; item = the option as the source prints it, resp = the position recorded (1 = most preferred). Standardised by the Political Rankings Database (Atsusaka & Singh 2026) from the authors' replication deposit; rankings layout (data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/y0ynmv,
+  doi = {10.7910/DVN/Y0YNMV},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/Y0YNMV},
+  author = {Pradel, Franziska and Zilinsky, Jan and Kosmidis, Spyros and Theocharis, Yannis},
+  keywords = {Social Sciences},
+  title = {Replication Data for: Toxic Speech and Limited Demand for Content Moderation on Social Media},
+  publisher = {Harvard Dataverse},
+  year = {2023}
+}
+",PRD
+rathbun_2022_trait_ranking,NA,10.7910/DVN/RZ1JVJ,"Rathbun, B. C. & Pomeroy, C. 2022. 'See No Evil, Speak No Evil? Morality, Evolutionary Psychology, and the Nature of International Relations.' International Organization 76(3). Standardised in Atsusaka, Y. & Singh, S. (2026). Ranking Data in Political Science [database]. Political Rankings Database. https://political-rankings.github.io",https://political-rankings.github.io,CC0 1.0,CC0 1.0,NA,"Survey ranking question: nine traits, of which respondents ranked at least two, so the NAs are by design (cov_treat is the rated group, 1 individuals / 2 countries, with no control arm -- it is not 0-indexed). 1245 respondents, 9 ranked items, 9 rank positions used, 5174 rows. One row per respondent x marked position; item = the option as the source prints it, resp = the position recorded (1 = most preferred). Standardised by the Political Rankings Database (Atsusaka & Singh 2026) from the authors' replication deposit; rankings layout (data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/rz1jvj,
+  doi = {10.7910/DVN/RZ1JVJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/RZ1JVJ},
+  author = {Rathbun, Brian C. and Pomeroy, Caleb},
+  keywords = {Social Sciences},
+  title = {Replication Data for: See No Evil, Speak No Evil? Morality, Evolutionary Psychology, and the Nature of International Relations},
+  publisher = {Harvard Dataverse},
+  year = {2021}
+}
+",PRD
 rcv_alaska_20221108_hd10,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska House District 10, 8 November 2022 (ballot-level columns: ballot type, counting group, district, precinct, voting location): single-winner (instant-runoff) election, 3 candidates, 4 rank positions offered, 6823 ballots with at least one mark (of 7153 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
   doi = {10.7910/DVN/AMK8PJ},
   url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
@@ -477,6 +602,536 @@ rcv_genola_20211102_council,NA,10.7910/DVN/04LOQX,FairVote. Sequential ranked ch
   author = {Laverty, Sabrina},
   keywords = {Social Sciences},
   title = {Sequential ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20091106_boardoftaxational,NA,10.7910/DVN/STVUET,FairVote. Proportional ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/STVUET,https://doi.org/10.7910/DVN/STVUET,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota Board of Estimate and Taxation at-large, 3 November 2009: proportional (STV) election, 6 candidates, 3 rank positions offered, 32086 ballots with at least one mark (of 45968 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/stvuet,
+  doi = {10.7910/DVN/STVUET},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/STVUET},
+  author = {Laverty, Sabrina},
+  keywords = {Social Sciences},
+  title = {Proportional ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20091106_mayor,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota mayor, 3 November 2009: single-winner (instant-runoff) election, 11 candidates, 3 rank positions offered, 45157 ballots with at least one mark (of 45968 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20091106_parksboardal,NA,10.7910/DVN/STVUET,FairVote. Proportional ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/STVUET,https://doi.org/10.7910/DVN/STVUET,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota Park and Recreation Board at-large, 3 November 2009: proportional (STV) election, 8 candidates, 3 rank positions offered, 36655 ballots with at least one mark (of 45968 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/stvuet,
+  doi = {10.7910/DVN/STVUET},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/STVUET},
+  author = {Laverty, Sabrina},
+  keywords = {Social Sciences},
+  title = {Proportional ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20091106_parksboardd1,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota Park and Recreation Board District 1, 3 November 2009: single-winner (instant-runoff) election, 3 candidates, 3 rank positions offered, 5842 ballots with at least one mark (of 6907 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20091106_parksboardd2,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota Park and Recreation Board District 2, 3 November 2009: single-winner (instant-runoff) election, 2 candidates, 3 rank positions offered, 5100 ballots with at least one mark (of 5944 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20091106_parksboardd3,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota Park and Recreation Board District 3, 3 November 2009: single-winner (instant-runoff) election, 2 candidates, 3 rank positions offered, 4736 ballots with at least one mark (of 6160 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20091106_parksboardd4,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota Park and Recreation Board District 4, 3 November 2009 (one named candidate on the ballot): single-winner (instant-runoff) election, 1 candidate, 3 rank positions offered, 5143 ballots with at least one mark (of 7389 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20091106_parksboardd5,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota Park and Recreation Board District 5, 3 November 2009: single-winner (instant-runoff) election, 5 candidates, 3 rank positions offered, 7848 ballots with at least one mark (of 9382 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20091106_parksboardd6,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota Park and Recreation Board District 6, 3 November 2009: single-winner (instant-runoff) election, 4 candidates, 3 rank positions offered, 8354 ballots with at least one mark (of 10186 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20091106_ward10council,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota city council Ward 10, 3 November 2009: single-winner (instant-runoff) election, 4 candidates, 3 rank positions offered, 3329 ballots with at least one mark (of 3431 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20091106_ward11council,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota city council Ward 11, 3 November 2009: single-winner (instant-runoff) election, 3 candidates, 3 rank positions offered, 4010 ballots with at least one mark (of 4235 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20091106_ward12council,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota city council Ward 12, 3 November 2009: single-winner (instant-runoff) election, 4 candidates, 3 rank positions offered, 4718 ballots with at least one mark (of 4818 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20091106_ward13council,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota city council Ward 13, 3 November 2009: single-winner (instant-runoff) election, 3 candidates, 3 rank positions offered, 5981 ballots with at least one mark (of 6059 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20091106_ward1council,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota city council Ward 1, 3 November 2009: single-winner (instant-runoff) election, 5 candidates, 3 rank positions offered, 3969 ballots with at least one mark (of 4016 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20091106_ward2council,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota city council Ward 2, 3 November 2009: single-winner (instant-runoff) election, 2 candidates, 3 rank positions offered, 2689 ballots with at least one mark (of 2842 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20091106_ward3council,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota city council Ward 3, 3 November 2009 (five names printed on the ballot, one of them not a candidate code in this file): single-winner (instant-runoff) election, 4 candidates, 3 rank positions offered, 2222 ballots with at least one mark (of 2257 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20091106_ward4council,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota city council Ward 4, 3 November 2009: single-winner (instant-runoff) election, 4 candidates, 3 rank positions offered, 3299 ballots with at least one mark (of 3322 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20091106_ward5council,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota city council Ward 5, 3 November 2009: single-winner (instant-runoff) election, 5 candidates, 3 rank positions offered, 2170 ballots with at least one mark (of 2200 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20091106_ward6council,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota city council Ward 6, 3 November 2009: single-winner (instant-runoff) election, 6 candidates, 3 rank positions offered, 1930 ballots with at least one mark (of 1982 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20091106_ward7council,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota city council Ward 7, 3 November 2009: single-winner (instant-runoff) election, 3 candidates, 3 rank positions offered, 4392 ballots with at least one mark (of 4532 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20091106_ward8council,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota city council Ward 8, 3 November 2009: single-winner (instant-runoff) election, 5 candidates, 3 rank positions offered, 3096 ballots with at least one mark (of 3239 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20091106_ward9council,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota city council Ward 9, 3 November 2009: single-winner (instant-runoff) election, 4 candidates, 3 rank positions offered, 2995 ballots with at least one mark (of 3035 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20131105_boardoftaxational,NA,10.7910/DVN/STVUET,FairVote. Proportional ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/STVUET,https://doi.org/10.7910/DVN/STVUET,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota Board of Estimate and Taxation at-large, 5 November 2013: proportional (STV) election, 4 candidates, 3 rank positions offered, 48915 ballots with at least one mark (of 80101 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/stvuet,
+  doi = {10.7910/DVN/STVUET},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/STVUET},
+  author = {Laverty, Sabrina},
+  keywords = {Social Sciences},
+  title = {Proportional ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20131105_councilward13,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota city council Ward 13, 5 November 2013: single-winner (instant-runoff) election, 5 candidates, 3 rank positions offered, 10460 ballots with at least one mark (of 10742 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20131105_councilward5,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota city council Ward 5, 5 November 2013: single-winner (instant-runoff) election, 4 candidates, 3 rank positions offered, 3499 ballots with at least one mark (of 3622 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20131105_councilward9,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota city council Ward 9, 5 November 2013: single-winner (instant-runoff) election, 6 candidates, 3 rank positions offered, 4180 ballots with at least one mark (of 4310 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20131105_mayor,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota mayor, 5 November 2013: single-winner (instant-runoff) election, 35 candidates, 3 rank positions offered, 79462 ballots with at least one mark (of 80101 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20131105_parksboardal,NA,10.7910/DVN/STVUET,FairVote. Proportional ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/STVUET,https://doi.org/10.7910/DVN/STVUET,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota Park and Recreation Board at-large, 5 November 2013: proportional (STV) election, 10 candidates, 3 rank positions offered, 59530 ballots with at least one mark (of 80101 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/stvuet,
+  doi = {10.7910/DVN/STVUET},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/STVUET},
+  author = {Laverty, Sabrina},
+  keywords = {Social Sciences},
+  title = {Proportional ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20131105_parksboardd2,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota Park and Recreation Board District 2, 5 November 2013: single-winner (instant-runoff) election, 2 candidates, 3 rank positions offered, 6054 ballots with at least one mark (of 8458 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20131105_parksboardd6,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota Park and Recreation Board District 6, 5 November 2013: single-winner (instant-runoff) election, 2 candidates, 3 rank positions offered, 13741 ballots with at least one mark (of 18523 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20171107_boardoftaxational,NA,10.7910/DVN/STVUET,FairVote. Proportional ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/STVUET,https://doi.org/10.7910/DVN/STVUET,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota Board of Estimate and Taxation at-large, 7 November 2017 (2 names printed on the ballot for 2 seats plus one write-in candidate named in the file): proportional (STV) election, 3 candidates, 3 rank positions offered, 69823 ballots with at least one mark (of 105928 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of all names in the file, the named write-ins included (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/stvuet,
+  doi = {10.7910/DVN/STVUET},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/STVUET},
+  author = {Laverty, Sabrina},
+  keywords = {Social Sciences},
+  title = {Proportional ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20171107_councilward1,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota city council Ward 1, 7 November 2017: single-winner (instant-runoff) election, 3 candidates, 3 rank positions offered, 8734 ballots with at least one mark (of 8864 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20171107_councilward10,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota city council Ward 10, 7 November 2017: single-winner (instant-runoff) election, 4 candidates, 3 rank positions offered, 7596 ballots with at least one mark (of 7911 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20171107_councilward11,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota city council Ward 11, 7 November 2017: single-winner (instant-runoff) election, 3 candidates, 3 rank positions offered, 9160 ballots with at least one mark (of 9592 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20171107_councilward12,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota city council Ward 12, 7 November 2017: single-winner (instant-runoff) election, 3 candidates, 3 rank positions offered, 10184 ballots with at least one mark (of 10704 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20171107_councilward13,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota city council Ward 13, 7 November 2017: single-winner (instant-runoff) election, 2 candidates, 3 rank positions offered, 11315 ballots with at least one mark (of 11742 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20171107_councilward2,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota city council Ward 2, 7 November 2017 (one named candidate on the ballot): single-winner (instant-runoff) election, 1 candidate, 3 rank positions offered, 6091 ballots with at least one mark (of 7034 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20171107_councilward3,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota city council Ward 3, 7 November 2017: single-winner (instant-runoff) election, 4 candidates, 3 rank positions offered, 9592 ballots with at least one mark (of 9877 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20171107_councilward4,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota city council Ward 4, 7 November 2017: single-winner (instant-runoff) election, 4 candidates, 3 rank positions offered, 5265 ballots with at least one mark (of 5349 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20171107_councilward5,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota city council Ward 5, 7 November 2017: single-winner (instant-runoff) election, 4 candidates, 3 rank positions offered, 4217 ballots with at least one mark (of 4278 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20171107_councilward6,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota city council Ward 6, 7 November 2017 (3 names printed on the ballot plus one write-in candidate named in the file): single-winner (instant-runoff) election, 4 candidates, 3 rank positions offered, 7238 ballots with at least one mark (of 7397 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of all names in the file, the named write-ins included (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20171107_councilward7,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota city council Ward 7, 7 November 2017: single-winner (instant-runoff) election, 4 candidates, 3 rank positions offered, 9090 ballots with at least one mark (of 9255 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20171107_councilward8,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota city council Ward 8, 7 November 2017: single-winner (instant-runoff) election, 4 candidates, 3 rank positions offered, 7898 ballots with at least one mark (of 8275 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20171107_councilward9,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota city council Ward 9, 7 November 2017: single-winner (instant-runoff) election, 4 candidates, 3 rank positions offered, 5519 ballots with at least one mark (of 5650 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20171107_mayor,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota mayor, 7 November 2017 (16 names printed on the ballot plus two write-in candidates named in the file): single-winner (instant-runoff) election, 18 candidates, 3 rank positions offered, 104559 ballots with at least one mark (of 105928 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of all names in the file, the named write-ins included (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20171107_parksboardal,NA,10.7910/DVN/STVUET,FairVote. Proportional ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/STVUET,https://doi.org/10.7910/DVN/STVUET,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota Park and Recreation Board at-large, 7 November 2017 (9 names printed on the ballot plus one write-in candidate named in the file): proportional (STV) election, 10 candidates, 3 rank positions offered, 84418 ballots with at least one mark (of 105928 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of all names in the file, the named write-ins included (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/stvuet,
+  doi = {10.7910/DVN/STVUET},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/STVUET},
+  author = {Laverty, Sabrina},
+  keywords = {Social Sciences},
+  title = {Proportional ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20171107_parksboardd1,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota Park and Recreation Board District 1, 7 November 2017: single-winner (instant-runoff) election, 3 candidates, 3 rank positions offered, 14306 ballots with at least one mark (of 17785 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20171107_parksboardd2,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota Park and Recreation Board District 2, 7 November 2017: single-winner (instant-runoff) election, 2 candidates, 3 rank positions offered, 8935 ballots with at least one mark (of 11162 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20171107_parksboardd3,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota Park and Recreation Board District 3, 7 November 2017: single-winner (instant-runoff) election, 3 candidates, 3 rank positions offered, 14645 ballots with at least one mark (of 16601 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20171107_parksboardd4,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota Park and Recreation Board District 4, 7 November 2017: single-winner (instant-runoff) election, 2 candidates, 3 rank positions offered, 13515 ballots with at least one mark (of 18167 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20171107_parksboardd5,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota Park and Recreation Board District 5, 7 November 2017: single-winner (instant-runoff) election, 3 candidates, 3 rank positions offered, 16240 ballots with at least one mark (of 20615 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20171107_parksboardd6,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota Park and Recreation Board District 6, 7 November 2017: single-winner (instant-runoff) election, 4 candidates, 3 rank positions offered, 18488 ballots with at least one mark (of 21598 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20200811_councilward6sp,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota city council Ward 6 special election, 11 August 2020: single-winner (instant-runoff) election, 12 candidates, 3 rank positions offered, 7758 ballots with at least one mark (of 8046 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
   publisher = {Harvard Dataverse},
   year = {2022}
 }
@@ -697,6 +1352,136 @@ rcv_mpls_20211102_parksboardal,NA,10.7910/DVN/STVUET,FairVote. Proportional rank
   author = {Laverty, Sabrina},
   keywords = {Social Sciences},
   title = {Proportional ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20231107_councilw1,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota city council Ward 1, 7 November 2023: single-winner (instant-runoff) election, 2 candidates, 3 rank positions offered, 4488 ballots with at least one mark (of 4500 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20231107_councilw10,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota city council Ward 10, 7 November 2023: single-winner (instant-runoff) election, 4 candidates, 3 rank positions offered, 6315 ballots with at least one mark (of 6316 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20231107_councilw11,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota city council Ward 11, 7 November 2023: single-winner (instant-runoff) election, 2 candidates, 3 rank positions offered, 5962 ballots with at least one mark (of 5972 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20231107_councilw12,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota city council Ward 12, 7 November 2023: single-winner (instant-runoff) election, 3 candidates, 3 rank positions offered, 12148 ballots with at least one mark (of 12167 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20231107_councilw13,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota city council Ward 13, 7 November 2023: single-winner (instant-runoff) election, 4 candidates, 3 rank positions offered, 10025 ballots with at least one mark (of 10028 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20231107_councilw2,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota city council Ward 2, 7 November 2023 (one named candidate on the ballot plus one write-in candidate named in the file): single-winner (instant-runoff) election, 2 candidates, 3 rank positions offered, 2061 ballots with at least one mark (of 2075 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of all names in the file, the named write-ins included (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20231107_councilw3,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota city council Ward 3, 7 November 2023: single-winner (instant-runoff) election, 2 candidates, 3 rank positions offered, 5695 ballots with at least one mark (of 5699 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20231107_councilw4,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota city council Ward 4, 7 November 2023: single-winner (instant-runoff) election, 4 candidates, 3 rank positions offered, 3426 ballots with at least one mark (of 3430 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20231107_councilw5,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota city council Ward 5, 7 November 2023: single-winner (instant-runoff) election, 3 candidates, 3 rank positions offered, 3186 ballots with at least one mark (of 3194 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20231107_councilw6,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota city council Ward 6, 7 November 2023: single-winner (instant-runoff) election, 4 candidates, 3 rank positions offered, 5185 ballots with at least one mark (of 5186 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20231107_councilw7,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota city council Ward 7, 7 November 2023: single-winner (instant-runoff) election, 3 candidates, 3 rank positions offered, 7990 ballots with at least one mark (of 7998 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20231107_councilw8,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota city council Ward 8, 7 November 2023: single-winner (instant-runoff) election, 4 candidates, 3 rank positions offered, 8064 ballots with at least one mark (of 8068 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_mpls_20231107_councilw9,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Minneapolis, Minnesota city council Ward 9, 7 November 2023: single-winner (instant-runoff) election, 2 candidates, 3 rank positions offered, 4324 ballots with at least one mark (of 4327 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
   publisher = {Harvard Dataverse},
   year = {2022}
 }

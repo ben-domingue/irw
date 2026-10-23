@@ -1,189 +1,80 @@
 table,column,kind,was,now
-ahmad_2020_pharmacy_satisfaction,Original_License,fill,NA,CC0 1.0
-aldhi_2025_acad_performance,Original_License,fill,NA,CC BY 4.0
-aldhi_2025_acad_procrastination,Original_License,fill,NA,CC BY 4.0
-aldhi_2025_disorganization,Original_License,fill,NA,CC BY 4.0
-aldhi_2025_fear_of_failure,Original_License,fill,NA,CC BY 4.0
-arvanitis_2023_compulsion,Original_License,fill,NA,CC0 1.0
-arvanitis_2023_mfq,Original_License,fill,NA,CC0 1.0
-arvanitis_2023_mfv,Original_License,fill,NA,CC0 1.0
-ashik_2026_paus,Original_License,fill,NA,CC BY 4.0
-ashik_2026_phq9,Original_License,fill,NA,CC BY 4.0
-ashik_2026_sas_sv,Original_License,fill,NA,CC BY 4.0
-ashik_2026_sds,Original_License,fill,NA,CC BY 4.0
-baseke_2026_besaa3,Original_License,fill,NA,CC BY-NC-SA 4.0
-baseke_2026_ccas,Original_License,fill,NA,CC BY-NC-SA 4.0
-baseke_2026_css11,Original_License,fill,NA,CC BY-NC-SA 4.0
-baseke_2026_epv7,Original_License,fill,NA,CC BY-NC-SA 4.0
-baseke_2026_gad7,Original_License,fill,NA,CC BY-NC-SA 4.0
-baseke_2026_phq8,Original_License,fill,NA,CC BY-NC-SA 4.0
-baseke_2026_smd9,Original_License,fill,NA,CC BY-NC-SA 4.0
-besaa_s_2026_22766055,Original_License,fill,NA,CC BY 4.0
-biggs_2024_burnout,Original_License,fill,NA,CC BY 4.0
-biggs_2024_moral_injury,Original_License,fill,NA,CC BY 4.0
-biggs_2024_perfectionism,Original_License,fill,NA,CC BY 4.0
-blotner_2026_people_pleasing,Original_License,fill,NA,CC BY 4.0
-byrne_2026_health_info_sources,Original_License,fill,NA,CC BY 4.0
-byrne_2026_hlq_part1,Original_License,fill,NA,CC BY 4.0
-byrne_2026_hlq_part2,Original_License,fill,NA,CC BY 4.0
-camir_security_2026_22766055,Original_License,fill,NA,CC BY 4.0
+andreu_sanchez_2023_information_sources,Original_License,fill,NA,CC BY 4.0
+andreu_sanchez_2023_lifestyle,Original_License,fill,NA,CC BY 4.0
+andreu_sanchez_2023_panas,Original_License,fill,NA,CC BY 4.0
+blotner_2026_bes,Original_License,fill,NA,CC BY 4.0
+blotner_2026_hexaco60,Original_License,fill,NA,CC BY 4.0
+blotner_2026_lsrp,Original_License,fill,NA,CC BY 4.0
+blotner_2026_svo,Original_License,fill,NA,CC BY 4.0
+bottesi_2019_bai,Original_License,fill,NA,CC BY 4.0
+bottesi_2019_bdi2,Original_License,fill,NA,CC BY 4.0
+bottesi_2019_caq35,Original_License,fill,NA,CC BY 4.0
+bottesi_2019_dass21,Original_License,fill,NA,CC BY 4.0
+bottesi_2019_ius_r,Original_License,fill,NA,CC BY 4.0
+bottesi_2019_njre_checklist,Original_License,fill,NA,CC BY 4.0
+bottesi_2019_njre_severity,Original_License,fill,NA,CC BY 4.0
+bottesi_2019_npoq,Original_License,fill,NA,CC BY 4.0
+bottesi_2019_obq87,Original_License,fill,NA,CC BY 4.0
+bottesi_2019_oci_r,Original_License,fill,NA,CC BY 4.0
+bottesi_2019_pswq,Original_License,fill,NA,CC BY 4.0
+bottesi_2019_sps,Original_License,fill,NA,CC BY 4.0
+bottesi_2019_ww37,Original_License,fill,NA,CC BY 4.0
+byun_2026_mascot_ratings,Original_License,fill,NA,Permission via Email
+cassidy_2024_ab,Original_License,fill,NA,CC BY-NC 4.0
+cassidy_2024_ecr_r,Original_License,fill,NA,CC BY-NC 4.0
+cassidy_2024_fas,Original_License,fill,NA,CC BY-NC 4.0
+cassidy_2024_ius_12,Original_License,fill,NA,CC BY-NC 4.0
+cassidy_2024_oci_r,Original_License,fill,NA,CC BY-NC 4.0
+cassidy_2024_pswq3,Original_License,fill,NA,CC BY-NC 4.0
+cassidy_2024_resq_cons,Original_License,fill,NA,CC BY-NC 4.0
+cassidy_2024_resq_int,Original_License,fill,NA,CC BY-NC 4.0
+cassidy_2024_rss,Original_License,fill,NA,CC BY-NC 4.0
 cdm_timss07,Description,conflict,Subsample of TIMSS 2007 grade 4 mathematics items from Austria (booklets 4 and 5) with Q matrix,Subsample of TIMSS items from Australia with Q matrix
-choi_2021_job_satisfaction,Original_License,fill,NA,CC0 1.0
+christensen_2022_policy_certainty,Original_License,fill,NA,CC0 1.0
+christensen_2022_policy_ideal,Original_License,fill,NA,CC0 1.0
+christensen_2022_policy_support,Original_License,fill,NA,CC0 1.0
 COACH_Chen_2022_CSQ,Description,conflict,"Consultation Satisfaction Questionnaire short form (CSQ-9), items 1-8, 5-point agree-disagree",Client Satisfaction Questionnaire 8-item
+comeau_2015_climate_beliefs,Original_License,fill,NA,Permission via Email
+comeau_2015_decision_considerations,Original_License,fill,NA,Permission via Email
+comeau_2015_energy_attitudes,Original_License,fill,NA,Permission via Email
+comeau_2015_energy_literacy,Original_License,fill,NA,Permission via Email
+comeau_2015_energy_literacy_sureness,Original_License,fill,NA,Permission via Email
+comeau_2015_energy_participation,Original_License,fill,NA,Permission via Email
+comeau_2015_energy_source_knowledge,Original_License,fill,NA,Permission via Email
+comeau_2015_energy_source_support,Original_License,fill,NA,Permission via Email
+comeau_2015_environmental_values,Original_License,fill,NA,Permission via Email
+comeau_2015_home_energy_intentions,Original_License,fill,NA,Permission via Email
+comeau_2015_home_energy_knowledge,Original_License,fill,NA,Permission via Email
+comeau_2015_information_trust,Original_License,fill,NA,Permission via Email
+comeau_2015_participation_barriers,Original_License,fill,NA,Permission via Email
+comeau_2015_provincial_process,Original_License,fill,NA,Permission via Email
 conner_2017_vitality,Description,conflict,"SF-36 Vitality (energy/fatigue) subscale, 4 items scored 0-100 in steps of 20 (6 ordinal levels), baseline/follow-up, N=171. The 'worn out' and 'tired' items are stored already reverse-scored.","Subjective Vitality Scale (4 items, 0-100 continuous), baseline/follow-up, N=171."
 cordova2019_clinical_edu_environment,Description,conflict,"Perception of clinical educational environment by physiotherapy interns (PHEEM, 40 items, Chile)","Perception of clinical educational environment by physiotherapy interns (DREEM-based, Chile)"
-dai_2024_acculturation_index,Original_License,fill,NA,CC BY 4.0
-dai_2024_cultural_difference,Original_License,fill,NA,CC BY 4.0
-dai_2024_self_esteem,Original_License,fill,NA,CC BY 4.0
-dai_2024_wellbeing,Original_License,fill,NA,CC BY 4.0
-dass21_2026_22766055,Original_License,fill,NA,CC BY 4.0
-dufour_2024_biosecurity_frequency,Original_License,fill,NA,CC BY 4.0
-dufour_2024_biosecurity_yesno,Original_License,fill,NA,CC BY 4.0
-duplaga_2026_care_satisfaction,Original_License,fill,NA,CC BY 4.0
-duplaga_2026_eheals_parents,Original_License,fill,NA,CC BY 4.0
-duplaga_2026_hls_eu_q16,Original_License,fill,NA,CC BY 4.0
-duplaga_2026_pss10,Original_License,fill,NA,CC BY 4.0
-enke_2023_anchoring,Original_License,fill,NA,CC0 1.0
-enke_2023_brn,Original_License,fill,NA,CC0 1.0
-enke_2023_crt,Original_License,fill,NA,CC0 1.0
-enke_2023_wason,Original_License,fill,NA,CC0 1.0
+datta_2021_spatial_visualization,Original_License,fill,NA,CC BY 4.0
 evpromisi_stone_2021_cdiag,Description,conflict,"Study's own 12-item chronic-diagnosis checklist (3 response levels). Not a PROMIS instrument, despite the evpromisi_ prefix.",PROMIS fatigue
-feng_2023_fas,Original_License,fill,NA,CC0 1.0
-ghasemy_2025_ipanas_sf,Original_License,fill,NA,CC0 1.0
-glashouwer_2017_dpss_study1,Original_License,fill,NA,CC0 1.0
-glashouwer_2017_dpss_study2,Original_License,fill,NA,CC0 1.0
-glashouwer_2017_sdes_study2,Original_License,fill,NA,CC0 1.0
-glashouwer_2017_sds_study1,Original_License,fill,NA,CC0 1.0
-glashouwer_2017_sds_study2,Original_License,fill,NA,CC0 1.0
-glashouwer_2017_tdss_study2,Original_License,fill,NA,CC0 1.0
-henderson_2023_lapanel_comfort,Original_License,fill,NA,CC0 1.0
-henderson_2023_lapanel_econ_emotion,Original_License,fill,NA,CC0 1.0
-henderson_2023_lapanel_fin_threat,Original_License,fill,NA,CC0 1.0
-henderson_2023_lapanel_health_emotion,Original_License,fill,NA,CC0 1.0
-henderson_2023_lapanel_health_threat,Original_License,fill,NA,CC0 1.0
-henderson_2023_lapanel_policy_support,Original_License,fill,NA,CC0 1.0
-henderson_2023_lapanel_racial_resent,Original_License,fill,NA,CC0 1.0
-henderson_2023_lapanel_tipi,Original_License,fill,NA,CC0 1.0
-henderson_2023_lapanel_worry,Original_License,fill,NA,CC0 1.0
-hilverda_2024_burnout,Original_License,fill,NA,CC BY 4.0
-hilverda_2024_engagement,Original_License,fill,NA,CC BY 4.0
-hissink_2025_affective_adapt,Original_License,fill,NA,CC BY 4.0
-hissink_2025_behavioral_adapt,Original_License,fill,NA,CC BY 4.0
-hissink_2025_cognitive_adapt,Original_License,fill,NA,CC BY 4.0
-hissink_2025_crisis_situations,Original_License,fill,NA,CC BY 4.0
-hissink_2025_cultural_situations,Original_License,fill,NA,CC BY 4.0
-hissink_2025_interpersonal,Original_License,fill,NA,CC BY 4.0
-hissink_2025_physical_demands,Original_License,fill,NA,CC BY 4.0
-hissink_2025_problem_solving,Original_License,fill,NA,CC BY 4.0
-hissink_2025_work_stress,Original_License,fill,NA,CC BY 4.0
-johnston_2024_csi,Original_License,fill,NA,CC BY 4.0
-johnston_2024_satq,Original_License,fill,NA,CC BY 4.0
-johnston_2024_spsq,Original_License,fill,NA,CC BY 4.0
-jones_2026_agi,Original_License,fill,NA,CC BY-NC-SA 4.0
-jones_2026_ai_art,Original_License,fill,NA,CC BY-NC-SA 4.0
-jones_2026_ai_benefit,Original_License,fill,NA,CC BY-NC-SA 4.0
-jones_2026_ai_fear_2021,Original_License,fill,NA,CC BY-NC-SA 4.0
-jones_2026_ai_fear_2023,Original_License,fill,NA,CC BY-NC-SA 4.0
-jones_2026_ai_threat,Original_License,fill,NA,CC BY-NC-SA 4.0
-jones_2026_tech_familiarity,Original_License,fill,NA,CC BY-NC-SA 4.0
-jones_2026_tech_informed,Original_License,fill,NA,CC BY-NC-SA 4.0
-jones_2026_tech_understanding,Original_License,fill,NA,CC BY-NC-SA 4.0
-jones_2026_tech_worried,Original_License,fill,NA,CC BY-NC-SA 4.0
-jones_2026_tech_worry,Original_License,fill,NA,CC BY-NC-SA 4.0
-jones_2026_trust_actors,Original_License,fill,NA,CC BY-NC-SA 4.0
-kam_2016_ad_emotions,Original_License,fill,NA,CC0 1.0
-koenig_2022_ai_in_government,Original_License,fill,NA,CC0 1.0
-koenig_2022_ambiguity_intolerance,Original_License,fill,NA,CC0 1.0
-koenig_2022_institutional_trust,Original_License,fill,NA,CC0 1.0
-leongabdullah_2025_aaq,Original_License,fill,NA,CC BY 4.0
-leongabdullah_2025_bis_malay,Original_License,fill,NA,CC BY 4.0
+gries_2011_moral_foundations,Original_License,fill,NA,CC0 1.0
+huebner_2021_weightlifting_attraction,Original_License,fill,NA,CC0 1.0
+huebner_2021_weightlifting_barriers,Original_License,fill,NA,CC0 1.0
+huebner_2021_weightlifting_pandemic,Original_License,fill,NA,CC0 1.0
+leppla_2026_smokechem_acceptance,Original_License,fill,NA,CC BY 4.0
+leppla_2026_smokechem_bot_usability,Original_License,fill,NA,CC BY 4.0
+leppla_2026_smokechem_cognitive_load,Original_License,fill,NA,CC BY 4.0
+li_2023_achievement_motivation,Original_License,fill,NA,CC BY 4.0
+li_2023_self_efficacy,Original_License,fill,NA,CC BY 4.0
+li_2023_social_support,Original_License,fill,NA,CC BY 4.0
 li_2024_bdyz,Description,conflict,"4-item Expressive Suppression subscale of the ERQ (Gross & John, 2003; 1-7 Likert; deposit ships the items labelled 1/2/6/9), same sample as li_2024_fa","4-item body-image scale subset (items 1/2/6/9 only, 1-7 Likert), same sample as li_2024_fa"
-mashat_2026_crisis_leadership,Original_License,fill,NA,CC BY 4.0
-mashat_2026_genai_use,Original_License,fill,NA,CC BY 4.0
-mashat_2026_innov_work_behaviour,Original_License,fill,NA,CC BY 4.0
-mashat_2026_job_crafting,Original_License,fill,NA,CC BY 4.0
-mcenaney_2023_aq10,Original_License,fill,NA,CC BY 4.0
-mcenaney_2023_bvaq,Original_License,fill,NA,CC BY 4.0
-mcenaney_2023_wordsum,Original_License,fill,NA,CC BY 4.0
-oconnor_2020_srs,Original_License,fill,NA,CC0 1.0
-olmos_gomez_2026_ai_mathematics,Original_License,fill,NA,CC0 1.0
+luettgau_2026_political_knowledge,Original_License,fill,NA,OGL (Open Government Licence)
+luettgau_2026_source_trust,Original_License,fill,NA,OGL (Open Government Licence)
+mailangkay_2026_ai_health_acceptance,Original_License,fill,NA,CC BY 4.0
 opladen2025_edeq,Description,conflict,Eating Disorder Examination Questionnaire (EDE-Q; 28 items); German clinical sample BN/BDD/IAD N=217; 1-7 as deposited (the deposit's syntax recodes to the usual 0-6); items 13-18 are frequency counts 0-112,Eating Disorder Examination Questionnaire (EDE-Q; 28 items); German clinical sample BN/BDD/IAD N≈211; 0-6 (items 13-18 are frequency counts 0-28+)
 opladen2025_fkg,Description,conflict,"Health/illness-cognition items FKG (20 items, 1-4), probably the Fragebogen zu Körper und Gesundheit (Hiller et al., 1997) -- the deposit never names it; German clinical sample BN/BDD/IAD N=217",Body feelings questionnaire FKG (20 items); German clinical sample BN/BDD/IAD N≈210; 1-4
 opladen2025_fks,Description,conflict,"Fragebogen körperdysmorpher Symptome (FKS; Buhlmann et al., 2009), a German self-report screener for body dysmorphic disorder (17 of 18 items; FKS_2 absent from the deposit); German clinical sample BN/BDD/IAD N=217; 1-5",Body schema questionnaire FKS (17 items); German clinical sample BN/BDD/IAD N≈211; 0-5
 opladen2025_wi,Description,conflict,"Whiteley Index (WI; 14 items, binary 1-2), a health-anxiety (hypochondriasis) screener; German clinical sample BN/BDD/IAD N=217","Body image scale WI (14 items, binary 1-2); German clinical sample BN/BDD/IAD N≈210"
-peerdeman_2020_ecr,Original_License,fill,NA,CC BY 4.0
-peerdeman_2020_general_trust,Original_License,fill,NA,CC BY 4.0
-peerdeman_2020_vignette_trust,Original_License,fill,NA,CC BY 4.0
-perazzo_2020_pohw,Original_License,fill,NA,CC BY 4.0
-platte_2026_challenges,Original_License,fill,NA,CC BY-NC 4.0
-platte_2026_effort,Original_License,fill,NA,CC BY-NC 4.0
-platte_2026_help_seeking,Original_License,fill,NA,CC BY-NC 4.0
-platte_2026_mindset_beliefs,Original_License,fill,NA,CC BY-NC 4.0
-platte_2026_mistakes,Original_License,fill,NA,CC BY-NC 4.0
-platte_2026_motivation,Original_License,fill,NA,CC BY-NC 4.0
-platte_2026_self_monitoring,Original_License,fill,NA,CC BY-NC 4.0
-rodriguezvillagra_2026_anxiety,Original_License,fill,NA,CC BY 4.0
-rodriguezvillagra_2026_conflict,Original_License,fill,NA,CC BY 4.0
-rodriguezvillagra_2026_interocept,Original_License,fill,NA,CC BY 4.0
-rodriguezvillagra_2026_iri_pt,Original_License,fill,NA,CC BY 4.0
-rosas_2010_emotional_intelligence,Original_License,fill,NA,CC0 1.0
-sadish_2021_covid_symptoms,Original_License,fill,NA,CC0 1.0
-sadish_2021_numeracy,Original_License,fill,NA,CC0 1.0
-sanzmartos_2024_contraceptive_knowledge,Original_License,fill,NA,CC0 1.0
-schadelbauer_2023_ati,Original_License,fill,NA,CC BY 4.0
-schadelbauer_2023_bfi,Original_License,fill,NA,CC BY 4.0
-schadelbauer_2023_tech_trust,Original_License,fill,NA,CC BY 4.0
-schadelbauer_2023_va_system_trust,Original_License,fill,NA,CC BY 4.0
-schadelbauer_2023_va_trust,Original_License,fill,NA,CC BY 4.0
-sirovica_2022_system_attitude,Original_License,fill,NA,CC0 1.0
-sirovica_2022_welfare_perception,Original_License,fill,NA,CC0 1.0
-sirovica_2022_welfare_relevance,Original_License,fill,NA,CC0 1.0
-vezhodulu_2025_celebrity_worship,Original_License,fill,NA,CC BY 4.0
-vezhodulu_2025_rses,Original_License,fill,NA,CC BY 4.0
-vezhodulu_2025_yabis_a,Original_License,fill,NA,CC BY 4.0
-vezhodulu_2025_yabis_b,Original_License,fill,NA,CC BY 4.0
-wang_2021_enjoyment,Original_License,fill,NA,CC0 1.0
-wang_2021_grit_interest,Original_License,fill,NA,CC0 1.0
-wang_2021_grit_perseverance,Original_License,fill,NA,CC0 1.0
-wang_2021_positive_emotions,Original_License,fill,NA,CC0 1.0
-wang_2021_self_rated_english,Original_License,fill,NA,CC0 1.0
-wang_2021_tolerance_ambiguity,Original_License,fill,NA,CC0 1.0
-wei_2026_destination_image,Original_License,fill,NA,CC0 1.0
-xuan_2026_ai_anxiety,Original_License,fill,NA,CC0 1.0
-xuan_2026_ai_attitude,Original_License,fill,NA,CC0 1.0
-xuan_2026_ai_dependence,Original_License,fill,NA,CC0 1.0
-xuan_2026_ai_readiness,Original_License,fill,NA,CC0 1.0
-xuan_2026_ai_self_efficacy,Original_License,fill,NA,CC0 1.0
-xuan_2026_conditional_knowledge,Original_License,fill,NA,CC0 1.0
-xuan_2026_declarative_knowledge,Original_License,fill,NA,CC0 1.0
-xuan_2026_external_support,Original_License,fill,NA,CC0 1.0
-xuan_2026_facilitating_conditions,Original_License,fill,NA,CC0 1.0
-xuan_2026_information_management,Original_License,fill,NA,CC0 1.0
-xuan_2026_intention_to_learn_ai,Original_License,fill,NA,CC0 1.0
-xuan_2026_intrinsic_motivation,Original_License,fill,NA,CC0 1.0
-xuan_2026_monitoring,Original_License,fill,NA,CC0 1.0
-xuan_2026_perceived_autonomy,Original_License,fill,NA,CC0 1.0
-xuan_2026_perceived_competence,Original_License,fill,NA,CC0 1.0
-xuan_2026_perceived_relatedness,Original_License,fill,NA,CC0 1.0
-xuan_2026_perceived_support,Original_License,fill,NA,CC0 1.0
-xuan_2026_perceived_usefulness,Original_License,fill,NA,CC0 1.0
-xuan_2026_planning,Original_License,fill,NA,CC0 1.0
-xuan_2026_procedural_knowledge,Original_License,fill,NA,CC0 1.0
-xuan_2026_regulation_strategies,Original_License,fill,NA,CC0 1.0
-xuan_2026_self_evaluation,Original_License,fill,NA,CC0 1.0
-yang_2021_butterfly_knowledge,Original_License,fill,NA,CC0 1.0
-yang_2026_l2_motivation,Original_License,fill,NA,CC BY 4.0
-yang_2026_vocabulary_size,Original_License,fill,NA,CC BY 4.0
-yao_2023_boredom_proneness,Original_License,fill,NA,CC BY 4.0
-yao_2023_depression,Original_License,fill,NA,CC BY 4.0
-yao_2023_distress_intolerance,Original_License,fill,NA,CC BY 4.0
-yao_2023_social_anxiety,Original_License,fill,NA,CC BY 4.0
-yao_2023_tiktok_problem_use,Original_License,fill,NA,CC BY 4.0
-yao_2023_tiktok_use_frequency,Original_License,fill,NA,CC BY 4.0
-zeng_2025_adoption_flipped,Original_License,fill,NA,CC BY-SA 4.0
-zeng_2025_attitude_flipped,Original_License,fill,NA,CC BY-SA 4.0
-zeng_2025_motivation_for_learning,Original_License,fill,NA,CC BY-SA 4.0
-zeng_2025_online_comm_self_efficacy,Original_License,fill,NA,CC BY-SA 4.0
-zeng_2025_self_directed_learning,Original_License,fill,NA,CC BY-SA 4.0
-zeng_2025_technology_readiness,Original_License,fill,NA,CC BY-SA 4.0
-zheng_2018_hfmd_eq5d,Original_License,fill,NA,CC0 1.0
+otago_2018_library_support,Original_License,fill,NA,CC BY 4.0
+rimisp_2021_care_work,Original_License,fill,NA,CC0 1.0
+rimisp_2021_household_services,Original_License,fill,NA,CC0 1.0
+saputra_2025_fomo_consumer,Original_License,fill,NA,CC BY 4.0
+setiawan_2026_cybersecurity_behaviour,Original_License,fill,NA,CC BY 4.0
+setiawan_2026_cybersecurity_ethics,Original_License,fill,NA,CC BY 4.0
+setiawan_2026_cybersecurity_knowledge,Original_License,fill,NA,CC BY 4.0
+wang_2026_chatgpt_acceptance,Original_License,fill,NA,CC BY 4.0
