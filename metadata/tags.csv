@@ -655,6 +655,7 @@ buzzi_2025_cyrm12,Adult (18+),NA,Educational,Affective/mental health,Survey/ques
 byrne_2026_health_info_sources,Adult (18+),NA,Internet-based,Behavioral,Survey/questionnaire,Likert Scale/selected response,eng,Frequency of use of health information sources
 byrne_2026_hlq_part1,Adult (18+),NA,Internet-based,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,eng,"Health literacy (HLQ Part 1, agreement scale)"
 byrne_2026_hlq_part2,Adult (18+),NA,Internet-based,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,eng,"Health literacy (HLQ Part 2, difficulty scale)"
+byun_2026_mascot_ratings,NA,NA,NA,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,eng,Tiger-mascot design ratings: six evaluative dimensions per design
 c19prc_uk_mcbride_2021_activity,Adult (18+),NA,Targeted/specific,"Affective/mental health, Opinion/attitude",Survey/questionnaire,Likert Scale/selected response,eng,Daily activity
 c19prc_uk_mcbride_2021_aq10,Adult (18+),NA,Targeted/specific,"Affective/mental health, Opinion/attitude",Survey/questionnaire,Likert Scale/selected response,eng,Autistic traits
 c19prc_uk_mcbride_2021_bces,Adult (18+),NA,Targeted/specific,"Affective/mental health, Opinion/attitude",Survey/questionnaire,Likert Scale/selected response,eng,Benevolent childhood experiences
@@ -1108,6 +1109,20 @@ colombia_2023_politics_voting,Adult (18+),NA,Representative,Opinion/attitude,Sur
 colombia_2023_politics_wellbeing,Adult (18+),NA,Representative,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,spa,Subjective Wellbeing and Fairness Norms
 colomer_perez_2021_asa,Mixed,Adolescent (12-18y),Educational,NA,Survey/questionnaire,Likert Scale/selected response,spa,NA
 colomer_perez_2021_soc13,Mixed,Adolescent (12-18y),Educational,NA,Survey/questionnaire,NA,spa,NA
+comeau_2015_climate_beliefs,Adult (18+),NA,"Internet-based, Representative",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, fre",Agreement with 5 statements on climate change and responsibility
+comeau_2015_decision_considerations,Adult (18+),NA,"Internet-based, Representative",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, fre",Importance of 6 considerations for energy-development decisions
+comeau_2015_energy_attitudes,Adult (18+),NA,"Internet-based, Representative",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, fre",Agreement with 13 energy-policy and local-control statements
+comeau_2015_energy_literacy,Adult (18+),NA,"Internet-based, Representative",Cognitive/educational,Test,Likert Scale/selected response,"eng, fre","Energy knowledge quiz, 4 items scored correct/incorrect"
+comeau_2015_energy_literacy_sureness,Adult (18+),NA,"Internet-based, Representative",NA,Survey/questionnaire,Likert Scale/selected response,"eng, fre",Self-rated sureness about each of the 4 energy knowledge answers
+comeau_2015_energy_participation,Adult (18+),NA,"Internet-based, Representative",Behavioral,Survey/questionnaire,Likert Scale/selected response,"eng, fre",Participation in 8 energy-related civic activities in the last three years
+comeau_2015_energy_source_knowledge,Adult (18+),NA,"Internet-based, Representative",NA,Survey/questionnaire,Likert Scale/selected response,"eng, fre",Self-rated knowledge of 11 energy sources
+comeau_2015_energy_source_support,Adult (18+),NA,"Internet-based, Representative",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, fre",Support for or opposition to development of 11 energy sources in Canada
+comeau_2015_environmental_values,Adult (18+),NA,"Internet-based, Representative",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, fre",Agreement with 8 environmental-values statements (NEP-style)
+comeau_2015_home_energy_intentions,Adult (18+),NA,"Internet-based, Representative",Behavioral,Survey/questionnaire,Likert Scale/selected response,"eng, fre",Stated likelihood of 3 home energy actions in the next three years
+comeau_2015_home_energy_knowledge,Adult (18+),NA,"Internet-based, Representative",NA,Survey/questionnaire,Likert Scale/selected response,"eng, fre",Self-rated knowledge of 5 home and transportation energy-use options
+comeau_2015_information_trust,Adult (18+),NA,"Internet-based, Representative",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, fre",Trust in 9 sources of information on energy issues
+comeau_2015_participation_barriers,Adult (18+),NA,"Internet-based, Representative",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, fre",Perceived barriers to participating in energy discussions (9 items)
+comeau_2015_provincial_process,Adult (18+),NA,"Internet-based, Representative",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, fre",Agreement with 6 statements on provincial energy decision-making
 concretewords,Not applicable (non-person),NA,Non-person unit,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,eng,Concreteness of words
 condon_2024_sapa_personality,NA,NA,Internet-based,NA,Survey/questionnaire,NA,eng,NA
 condon_2025_caq,Adult (18+),NA,Internet-based,Personality,Survey/questionnaire,Likert Scale/selected response,eng,"Creative Achievement Questionnaire (CAQ), revised SAPA version"
