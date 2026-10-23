@@ -1775,6 +1775,8 @@ blaszyk_2023_tipi,cov_specialty,69,Rehabilitacja medyczna
 blaszyk_2023_tipi,cov_specialty,70,Reumatologia
 blaszyk_2023_tipi,cov_specialty,72,Staż podyplomowy
 blaszyk_2023_tipi,cov_specialty,76,Urologia
+blotner_2026_hexaco60,cov_study,1,"Study 1 (scale derivation; commercial panel Bilendi plus German university social-media groups, planned-missingness design)"
+blotner_2026_hexaco60,cov_study,2,Study 2 (replication and validation; predominantly students)
 blotner_2026_people_pleasing,cov_study,1,"Study 1 (scale derivation; commercial panel Bilendi plus German university social-media groups, planned-missingness design)"
 blotner_2026_people_pleasing,cov_study,2,Study 2 (replication and validation; predominantly students)
 brederecke_2020_phq4,cov_nationality,1,Deutsch
@@ -1883,6 +1885,553 @@ calla_2010_self_esteem,cov_grade,1,5to primaria
 calla_2010_self_esteem,cov_grade,2,6to primaria
 calla_2010_self_esteem,cov_sex,1,Masculino
 calla_2010_self_esteem,cov_sex,2,Femenino
+cassidy_2024_ab,cov_anxiety_experience,1,I have been diagnosed with an anxiety disorder
+cassidy_2024_ab,cov_anxiety_experience,2,"I have never been diagnosed with an anxiety disorder, but I think I have one or more"
+cassidy_2024_ab,cov_anxiety_experience,3,I'm fairly sure I don't have an anxiety disorder
+cassidy_2024_ab,cov_anxiety_experience,5,I'm not sure
+cassidy_2024_ab,cov_disability,1,Yes - one such factor. Please describe or leave blank if you would prefer not to say.
+cassidy_2024_ab,cov_disability,2,Yes - two or more factors. Please describe or leave blank if you would prefer not to say.
+cassidy_2024_ab,cov_disability,3,No
+cassidy_2024_ab,cov_disability,4,Prefer not to say
+cassidy_2024_ab,cov_education,1,less than high school / secondary school
+cassidy_2024_ab,cov_education,2,High school graduate / completed secondary school
+cassidy_2024_ab,cov_education,3,A-levels or equivalent
+cassidy_2024_ab,cov_education,4,1 year degree
+cassidy_2024_ab,cov_education,5,2 year degree
+cassidy_2024_ab,cov_education,6,3 year degree
+cassidy_2024_ab,cov_education,7,4 year degree
+cassidy_2024_ab,cov_education,8,Vocational qualification (e.g. apprenticeship)
+cassidy_2024_ab,cov_education,9,Masters degree
+cassidy_2024_ab,cov_education,10,Professional degree
+cassidy_2024_ab,cov_education,11,Doctorate
+cassidy_2024_ab,cov_english_first_language,1,Yes
+cassidy_2024_ab,cov_english_first_language,2,No
+cassidy_2024_ab,cov_ethnicity,1,"Arab, Black, Mixed or multiple ethnicities, Other"
+cassidy_2024_ab,cov_gender,1,"Cisgender woman (""Cisgender"" refers to individuals whose sex assigned at birth aligns with their gender identity)"
+cassidy_2024_ab,cov_gender,2,"Cisgender man (""Cisgender ""refers to individuals whose sex assigned at birth aligns with their gender identity)"
+cassidy_2024_ab,cov_gender,3,"Transgender man, Transgender woman, or non-binary"
+cassidy_2024_ab,cov_gender,4,Prefer not to say
+cassidy_2024_ab,cov_gender,5,Self describe
+cassidy_2024_ab,cov_nationality,24,Brazil
+cassidy_2024_ab,cov_nationality,35,Chile
+cassidy_2024_ab,cov_nationality,36,China
+cassidy_2024_ab,cov_nationality,44,Cyprus
+cassidy_2024_ab,cov_nationality,48,Denmark
+cassidy_2024_ab,cov_nationality,53,Egypt
+cassidy_2024_ab,cov_nationality,61,France
+cassidy_2024_ab,cov_nationality,65,Germany
+cassidy_2024_ab,cov_nationality,78,India
+cassidy_2024_ab,cov_nationality,80,Iran
+cassidy_2024_ab,cov_nationality,82,Ireland
+cassidy_2024_ab,cov_nationality,104,Malaysia
+cassidy_2024_ab,cov_nationality,122,Netherlands
+cassidy_2024_ab,cov_nationality,130,Pakistan
+cassidy_2024_ab,cov_nationality,137,Poland
+cassidy_2024_ab,cov_nationality,141,Republic of Moldova
+cassidy_2024_ab,cov_nationality,143,Russian Federation
+cassidy_2024_ab,cov_nationality,185,United Kingdom of Great Britain and Northern Ireland
+cassidy_2024_ab,cov_nationality,187,United States of America
+cassidy_2024_ab,cov_ocd_experience,1,I have been diagnosed with OCD
+cassidy_2024_ab,cov_ocd_experience,2,"I have never been diagnosed with OCD, but I think I have it"
+cassidy_2024_ab,cov_ocd_experience,3,I am fairly confident I don't have OCD
+cassidy_2024_ab,cov_ocd_experience,5,I'm not sure
+cassidy_2024_ab,cov_relationship_status,1,Not in a relationship
+cassidy_2024_ab,cov_relationship_status,2,In a relationship
+cassidy_2024_ab,cov_relationship_status,3,Never been in a relationship
+cassidy_2024_ab,cov_relationship_status,4,Prefer not to say
+cassidy_2024_ab,cov_survey_access,1,Survey Circle
+cassidy_2024_ab,cov_survey_access,3,I accessed the link via a social media post
+cassidy_2024_ab,cov_survey_access,4,NU participation pool
+cassidy_2024_ab,cov_survey_access,5,I was sent the link directly
+cassidy_2024_ab,cov_survey_access,6,Other
+cassidy_2024_ecr_r,cov_anxiety_experience,1,I have been diagnosed with an anxiety disorder
+cassidy_2024_ecr_r,cov_anxiety_experience,2,"I have never been diagnosed with an anxiety disorder, but I think I have one or more"
+cassidy_2024_ecr_r,cov_anxiety_experience,3,I'm fairly sure I don't have an anxiety disorder
+cassidy_2024_ecr_r,cov_anxiety_experience,5,I'm not sure
+cassidy_2024_ecr_r,cov_disability,1,Yes - one such factor. Please describe or leave blank if you would prefer not to say.
+cassidy_2024_ecr_r,cov_disability,2,Yes - two or more factors. Please describe or leave blank if you would prefer not to say.
+cassidy_2024_ecr_r,cov_disability,3,No
+cassidy_2024_ecr_r,cov_disability,4,Prefer not to say
+cassidy_2024_ecr_r,cov_education,1,less than high school / secondary school
+cassidy_2024_ecr_r,cov_education,2,High school graduate / completed secondary school
+cassidy_2024_ecr_r,cov_education,3,A-levels or equivalent
+cassidy_2024_ecr_r,cov_education,4,1 year degree
+cassidy_2024_ecr_r,cov_education,5,2 year degree
+cassidy_2024_ecr_r,cov_education,6,3 year degree
+cassidy_2024_ecr_r,cov_education,7,4 year degree
+cassidy_2024_ecr_r,cov_education,8,Vocational qualification (e.g. apprenticeship)
+cassidy_2024_ecr_r,cov_education,9,Masters degree
+cassidy_2024_ecr_r,cov_education,10,Professional degree
+cassidy_2024_ecr_r,cov_education,11,Doctorate
+cassidy_2024_ecr_r,cov_english_first_language,1,Yes
+cassidy_2024_ecr_r,cov_english_first_language,2,No
+cassidy_2024_ecr_r,cov_ethnicity,1,"Arab, Black, Mixed or multiple ethnicities, Other"
+cassidy_2024_ecr_r,cov_gender,1,"Cisgender woman (""Cisgender"" refers to individuals whose sex assigned at birth aligns with their gender identity)"
+cassidy_2024_ecr_r,cov_gender,2,"Cisgender man (""Cisgender ""refers to individuals whose sex assigned at birth aligns with their gender identity)"
+cassidy_2024_ecr_r,cov_gender,3,"Transgender man, Transgender woman, or non-binary"
+cassidy_2024_ecr_r,cov_gender,4,Prefer not to say
+cassidy_2024_ecr_r,cov_gender,5,Self describe
+cassidy_2024_ecr_r,cov_nationality,24,Brazil
+cassidy_2024_ecr_r,cov_nationality,35,Chile
+cassidy_2024_ecr_r,cov_nationality,36,China
+cassidy_2024_ecr_r,cov_nationality,44,Cyprus
+cassidy_2024_ecr_r,cov_nationality,48,Denmark
+cassidy_2024_ecr_r,cov_nationality,53,Egypt
+cassidy_2024_ecr_r,cov_nationality,61,France
+cassidy_2024_ecr_r,cov_nationality,65,Germany
+cassidy_2024_ecr_r,cov_nationality,78,India
+cassidy_2024_ecr_r,cov_nationality,80,Iran
+cassidy_2024_ecr_r,cov_nationality,82,Ireland
+cassidy_2024_ecr_r,cov_nationality,84,Italy
+cassidy_2024_ecr_r,cov_nationality,104,Malaysia
+cassidy_2024_ecr_r,cov_nationality,122,Netherlands
+cassidy_2024_ecr_r,cov_nationality,130,Pakistan
+cassidy_2024_ecr_r,cov_nationality,137,Poland
+cassidy_2024_ecr_r,cov_nationality,141,Republic of Moldova
+cassidy_2024_ecr_r,cov_nationality,143,Russian Federation
+cassidy_2024_ecr_r,cov_nationality,157,Slovakia
+cassidy_2024_ecr_r,cov_nationality,185,United Kingdom of Great Britain and Northern Ireland
+cassidy_2024_ecr_r,cov_nationality,187,United States of America
+cassidy_2024_ecr_r,cov_ocd_experience,1,I have been diagnosed with OCD
+cassidy_2024_ecr_r,cov_ocd_experience,2,"I have never been diagnosed with OCD, but I think I have it"
+cassidy_2024_ecr_r,cov_ocd_experience,3,I am fairly confident I don't have OCD
+cassidy_2024_ecr_r,cov_ocd_experience,5,I'm not sure
+cassidy_2024_ecr_r,cov_relationship_status,1,Not in a relationship
+cassidy_2024_ecr_r,cov_relationship_status,2,In a relationship
+cassidy_2024_ecr_r,cov_relationship_status,3,Never been in a relationship
+cassidy_2024_ecr_r,cov_relationship_status,4,Prefer not to say
+cassidy_2024_ecr_r,cov_survey_access,1,Survey Circle
+cassidy_2024_ecr_r,cov_survey_access,3,I accessed the link via a social media post
+cassidy_2024_ecr_r,cov_survey_access,4,NU participation pool
+cassidy_2024_ecr_r,cov_survey_access,5,I was sent the link directly
+cassidy_2024_ecr_r,cov_survey_access,6,Other
+cassidy_2024_fas,cov_anxiety_experience,1,I have been diagnosed with an anxiety disorder
+cassidy_2024_fas,cov_anxiety_experience,2,"I have never been diagnosed with an anxiety disorder, but I think I have one or more"
+cassidy_2024_fas,cov_anxiety_experience,3,I'm fairly sure I don't have an anxiety disorder
+cassidy_2024_fas,cov_anxiety_experience,5,I'm not sure
+cassidy_2024_fas,cov_disability,1,Yes - one such factor. Please describe or leave blank if you would prefer not to say.
+cassidy_2024_fas,cov_disability,2,Yes - two or more factors. Please describe or leave blank if you would prefer not to say.
+cassidy_2024_fas,cov_disability,3,No
+cassidy_2024_fas,cov_disability,4,Prefer not to say
+cassidy_2024_fas,cov_education,1,less than high school / secondary school
+cassidy_2024_fas,cov_education,2,High school graduate / completed secondary school
+cassidy_2024_fas,cov_education,3,A-levels or equivalent
+cassidy_2024_fas,cov_education,4,1 year degree
+cassidy_2024_fas,cov_education,5,2 year degree
+cassidy_2024_fas,cov_education,6,3 year degree
+cassidy_2024_fas,cov_education,7,4 year degree
+cassidy_2024_fas,cov_education,8,Vocational qualification (e.g. apprenticeship)
+cassidy_2024_fas,cov_education,9,Masters degree
+cassidy_2024_fas,cov_education,10,Professional degree
+cassidy_2024_fas,cov_education,11,Doctorate
+cassidy_2024_fas,cov_english_first_language,1,Yes
+cassidy_2024_fas,cov_english_first_language,2,No
+cassidy_2024_fas,cov_ethnicity,1,"Arab, Black, Mixed or multiple ethnicities, Other"
+cassidy_2024_fas,cov_gender,1,"Cisgender woman (""Cisgender"" refers to individuals whose sex assigned at birth aligns with their gender identity)"
+cassidy_2024_fas,cov_gender,2,"Cisgender man (""Cisgender ""refers to individuals whose sex assigned at birth aligns with their gender identity)"
+cassidy_2024_fas,cov_gender,3,"Transgender man, Transgender woman, or non-binary"
+cassidy_2024_fas,cov_gender,4,Prefer not to say
+cassidy_2024_fas,cov_gender,5,Self describe
+cassidy_2024_fas,cov_nationality,31,Canada
+cassidy_2024_fas,cov_nationality,35,Chile
+cassidy_2024_fas,cov_nationality,36,China
+cassidy_2024_fas,cov_nationality,52,Ecuador
+cassidy_2024_fas,cov_nationality,53,Egypt
+cassidy_2024_fas,cov_nationality,61,France
+cassidy_2024_fas,cov_nationality,78,India
+cassidy_2024_fas,cov_nationality,80,Iran
+cassidy_2024_fas,cov_nationality,82,Ireland
+cassidy_2024_fas,cov_nationality,84,Italy
+cassidy_2024_fas,cov_nationality,104,Malaysia
+cassidy_2024_fas,cov_nationality,126,Nigeria
+cassidy_2024_fas,cov_nationality,130,Pakistan
+cassidy_2024_fas,cov_nationality,137,Poland
+cassidy_2024_fas,cov_nationality,141,Republic of Moldova
+cassidy_2024_fas,cov_nationality,143,Russian Federation
+cassidy_2024_fas,cov_nationality,157,Slovakia
+cassidy_2024_fas,cov_nationality,185,United Kingdom of Great Britain and Northern Ireland
+cassidy_2024_fas,cov_nationality,187,United States of America
+cassidy_2024_fas,cov_ocd_experience,1,I have been diagnosed with OCD
+cassidy_2024_fas,cov_ocd_experience,2,"I have never been diagnosed with OCD, but I think I have it"
+cassidy_2024_fas,cov_ocd_experience,3,I am fairly confident I don't have OCD
+cassidy_2024_fas,cov_ocd_experience,5,I'm not sure
+cassidy_2024_fas,cov_relationship_status,1,Not in a relationship
+cassidy_2024_fas,cov_relationship_status,2,In a relationship
+cassidy_2024_fas,cov_relationship_status,3,Never been in a relationship
+cassidy_2024_fas,cov_relationship_status,4,Prefer not to say
+cassidy_2024_fas,cov_survey_access,1,Survey Circle
+cassidy_2024_fas,cov_survey_access,3,I accessed the link via a social media post
+cassidy_2024_fas,cov_survey_access,4,NU participation pool
+cassidy_2024_fas,cov_survey_access,5,I was sent the link directly
+cassidy_2024_fas,cov_survey_access,6,Other
+cassidy_2024_ius_12,cov_anxiety_experience,1,I have been diagnosed with an anxiety disorder
+cassidy_2024_ius_12,cov_anxiety_experience,2,"I have never been diagnosed with an anxiety disorder, but I think I have one or more"
+cassidy_2024_ius_12,cov_anxiety_experience,3,I'm fairly sure I don't have an anxiety disorder
+cassidy_2024_ius_12,cov_anxiety_experience,5,I'm not sure
+cassidy_2024_ius_12,cov_disability,1,Yes - one such factor. Please describe or leave blank if you would prefer not to say.
+cassidy_2024_ius_12,cov_disability,2,Yes - two or more factors. Please describe or leave blank if you would prefer not to say.
+cassidy_2024_ius_12,cov_disability,3,No
+cassidy_2024_ius_12,cov_disability,4,Prefer not to say
+cassidy_2024_ius_12,cov_education,1,less than high school / secondary school
+cassidy_2024_ius_12,cov_education,2,High school graduate / completed secondary school
+cassidy_2024_ius_12,cov_education,3,A-levels or equivalent
+cassidy_2024_ius_12,cov_education,4,1 year degree
+cassidy_2024_ius_12,cov_education,5,2 year degree
+cassidy_2024_ius_12,cov_education,6,3 year degree
+cassidy_2024_ius_12,cov_education,7,4 year degree
+cassidy_2024_ius_12,cov_education,8,Vocational qualification (e.g. apprenticeship)
+cassidy_2024_ius_12,cov_education,9,Masters degree
+cassidy_2024_ius_12,cov_education,10,Professional degree
+cassidy_2024_ius_12,cov_education,11,Doctorate
+cassidy_2024_ius_12,cov_english_first_language,1,Yes
+cassidy_2024_ius_12,cov_english_first_language,2,No
+cassidy_2024_ius_12,cov_ethnicity,1,"Arab, Black, Mixed or multiple ethnicities, Other"
+cassidy_2024_ius_12,cov_gender,1,"Cisgender woman (""Cisgender"" refers to individuals whose sex assigned at birth aligns with their gender identity)"
+cassidy_2024_ius_12,cov_gender,2,"Cisgender man (""Cisgender ""refers to individuals whose sex assigned at birth aligns with their gender identity)"
+cassidy_2024_ius_12,cov_gender,3,"Transgender man, Transgender woman, or non-binary"
+cassidy_2024_ius_12,cov_gender,4,Prefer not to say
+cassidy_2024_ius_12,cov_gender,5,Self describe
+cassidy_2024_ius_12,cov_nationality,24,Brazil
+cassidy_2024_ius_12,cov_nationality,35,Chile
+cassidy_2024_ius_12,cov_nationality,36,China
+cassidy_2024_ius_12,cov_nationality,44,Cyprus
+cassidy_2024_ius_12,cov_nationality,48,Denmark
+cassidy_2024_ius_12,cov_nationality,52,Ecuador
+cassidy_2024_ius_12,cov_nationality,53,Egypt
+cassidy_2024_ius_12,cov_nationality,61,France
+cassidy_2024_ius_12,cov_nationality,65,Germany
+cassidy_2024_ius_12,cov_nationality,78,India
+cassidy_2024_ius_12,cov_nationality,80,Iran
+cassidy_2024_ius_12,cov_nationality,82,Ireland
+cassidy_2024_ius_12,cov_nationality,104,Malaysia
+cassidy_2024_ius_12,cov_nationality,122,Netherlands
+cassidy_2024_ius_12,cov_nationality,130,Pakistan
+cassidy_2024_ius_12,cov_nationality,137,Poland
+cassidy_2024_ius_12,cov_nationality,141,Republic of Moldova
+cassidy_2024_ius_12,cov_nationality,143,Russian Federation
+cassidy_2024_ius_12,cov_nationality,157,Slovakia
+cassidy_2024_ius_12,cov_nationality,185,United Kingdom of Great Britain and Northern Ireland
+cassidy_2024_ius_12,cov_nationality,187,United States of America
+cassidy_2024_ius_12,cov_ocd_experience,1,I have been diagnosed with OCD
+cassidy_2024_ius_12,cov_ocd_experience,2,"I have never been diagnosed with OCD, but I think I have it"
+cassidy_2024_ius_12,cov_ocd_experience,3,I am fairly confident I don't have OCD
+cassidy_2024_ius_12,cov_ocd_experience,5,I'm not sure
+cassidy_2024_ius_12,cov_relationship_status,1,Not in a relationship
+cassidy_2024_ius_12,cov_relationship_status,2,In a relationship
+cassidy_2024_ius_12,cov_relationship_status,3,Never been in a relationship
+cassidy_2024_ius_12,cov_relationship_status,4,Prefer not to say
+cassidy_2024_ius_12,cov_survey_access,1,Survey Circle
+cassidy_2024_ius_12,cov_survey_access,3,I accessed the link via a social media post
+cassidy_2024_ius_12,cov_survey_access,4,NU participation pool
+cassidy_2024_ius_12,cov_survey_access,5,I was sent the link directly
+cassidy_2024_ius_12,cov_survey_access,6,Other
+cassidy_2024_oci_r,cov_anxiety_experience,1,I have been diagnosed with an anxiety disorder
+cassidy_2024_oci_r,cov_anxiety_experience,2,"I have never been diagnosed with an anxiety disorder, but I think I have one or more"
+cassidy_2024_oci_r,cov_anxiety_experience,3,I'm fairly sure I don't have an anxiety disorder
+cassidy_2024_oci_r,cov_anxiety_experience,5,I'm not sure
+cassidy_2024_oci_r,cov_disability,1,Yes - one such factor. Please describe or leave blank if you would prefer not to say.
+cassidy_2024_oci_r,cov_disability,2,Yes - two or more factors. Please describe or leave blank if you would prefer not to say.
+cassidy_2024_oci_r,cov_disability,3,No
+cassidy_2024_oci_r,cov_disability,4,Prefer not to say
+cassidy_2024_oci_r,cov_education,1,less than high school / secondary school
+cassidy_2024_oci_r,cov_education,2,High school graduate / completed secondary school
+cassidy_2024_oci_r,cov_education,3,A-levels or equivalent
+cassidy_2024_oci_r,cov_education,4,1 year degree
+cassidy_2024_oci_r,cov_education,5,2 year degree
+cassidy_2024_oci_r,cov_education,6,3 year degree
+cassidy_2024_oci_r,cov_education,7,4 year degree
+cassidy_2024_oci_r,cov_education,8,Vocational qualification (e.g. apprenticeship)
+cassidy_2024_oci_r,cov_education,9,Masters degree
+cassidy_2024_oci_r,cov_education,10,Professional degree
+cassidy_2024_oci_r,cov_education,11,Doctorate
+cassidy_2024_oci_r,cov_english_first_language,1,Yes
+cassidy_2024_oci_r,cov_english_first_language,2,No
+cassidy_2024_oci_r,cov_ethnicity,1,"Arab, Black, Mixed or multiple ethnicities, Other"
+cassidy_2024_oci_r,cov_ethnicity,3,White
+cassidy_2024_oci_r,cov_gender,1,"Cisgender woman (""Cisgender"" refers to individuals whose sex assigned at birth aligns with their gender identity)"
+cassidy_2024_oci_r,cov_gender,2,"Cisgender man (""Cisgender ""refers to individuals whose sex assigned at birth aligns with their gender identity)"
+cassidy_2024_oci_r,cov_gender,3,"Transgender man, Transgender woman, or non-binary"
+cassidy_2024_oci_r,cov_gender,4,Prefer not to say
+cassidy_2024_oci_r,cov_gender,5,Self describe
+cassidy_2024_oci_r,cov_nationality,24,Brazil
+cassidy_2024_oci_r,cov_nationality,35,Chile
+cassidy_2024_oci_r,cov_nationality,36,China
+cassidy_2024_oci_r,cov_nationality,44,Cyprus
+cassidy_2024_oci_r,cov_nationality,48,Denmark
+cassidy_2024_oci_r,cov_nationality,52,Ecuador
+cassidy_2024_oci_r,cov_nationality,53,Egypt
+cassidy_2024_oci_r,cov_nationality,61,France
+cassidy_2024_oci_r,cov_nationality,65,Germany
+cassidy_2024_oci_r,cov_nationality,78,India
+cassidy_2024_oci_r,cov_nationality,80,Iran
+cassidy_2024_oci_r,cov_nationality,82,Ireland
+cassidy_2024_oci_r,cov_nationality,84,Italy
+cassidy_2024_oci_r,cov_nationality,104,Malaysia
+cassidy_2024_oci_r,cov_nationality,122,Netherlands
+cassidy_2024_oci_r,cov_nationality,130,Pakistan
+cassidy_2024_oci_r,cov_nationality,137,Poland
+cassidy_2024_oci_r,cov_nationality,141,Republic of Moldova
+cassidy_2024_oci_r,cov_nationality,143,Russian Federation
+cassidy_2024_oci_r,cov_nationality,185,United Kingdom of Great Britain and Northern Ireland
+cassidy_2024_oci_r,cov_nationality,187,United States of America
+cassidy_2024_oci_r,cov_ocd_experience,1,I have been diagnosed with OCD
+cassidy_2024_oci_r,cov_ocd_experience,2,"I have never been diagnosed with OCD, but I think I have it"
+cassidy_2024_oci_r,cov_ocd_experience,3,I am fairly confident I don't have OCD
+cassidy_2024_oci_r,cov_ocd_experience,5,I'm not sure
+cassidy_2024_oci_r,cov_relationship_status,1,Not in a relationship
+cassidy_2024_oci_r,cov_relationship_status,2,In a relationship
+cassidy_2024_oci_r,cov_relationship_status,3,Never been in a relationship
+cassidy_2024_oci_r,cov_relationship_status,4,Prefer not to say
+cassidy_2024_oci_r,cov_survey_access,1,Survey Circle
+cassidy_2024_oci_r,cov_survey_access,3,I accessed the link via a social media post
+cassidy_2024_oci_r,cov_survey_access,4,NU participation pool
+cassidy_2024_oci_r,cov_survey_access,5,I was sent the link directly
+cassidy_2024_oci_r,cov_survey_access,6,Other
+cassidy_2024_pswq3,cov_anxiety_experience,1,I have been diagnosed with an anxiety disorder
+cassidy_2024_pswq3,cov_anxiety_experience,2,"I have never been diagnosed with an anxiety disorder, but I think I have one or more"
+cassidy_2024_pswq3,cov_anxiety_experience,3,I'm fairly sure I don't have an anxiety disorder
+cassidy_2024_pswq3,cov_anxiety_experience,5,I'm not sure
+cassidy_2024_pswq3,cov_disability,1,Yes - one such factor. Please describe or leave blank if you would prefer not to say.
+cassidy_2024_pswq3,cov_disability,2,Yes - two or more factors. Please describe or leave blank if you would prefer not to say.
+cassidy_2024_pswq3,cov_disability,3,No
+cassidy_2024_pswq3,cov_disability,4,Prefer not to say
+cassidy_2024_pswq3,cov_education,1,less than high school / secondary school
+cassidy_2024_pswq3,cov_education,2,High school graduate / completed secondary school
+cassidy_2024_pswq3,cov_education,3,A-levels or equivalent
+cassidy_2024_pswq3,cov_education,4,1 year degree
+cassidy_2024_pswq3,cov_education,5,2 year degree
+cassidy_2024_pswq3,cov_education,6,3 year degree
+cassidy_2024_pswq3,cov_education,7,4 year degree
+cassidy_2024_pswq3,cov_education,8,Vocational qualification (e.g. apprenticeship)
+cassidy_2024_pswq3,cov_education,9,Masters degree
+cassidy_2024_pswq3,cov_education,10,Professional degree
+cassidy_2024_pswq3,cov_education,11,Doctorate
+cassidy_2024_pswq3,cov_english_first_language,1,Yes
+cassidy_2024_pswq3,cov_english_first_language,2,No
+cassidy_2024_pswq3,cov_ethnicity,1,"Arab, Black, Mixed or multiple ethnicities, Other"
+cassidy_2024_pswq3,cov_gender,1,"Cisgender woman (""Cisgender"" refers to individuals whose sex assigned at birth aligns with their gender identity)"
+cassidy_2024_pswq3,cov_gender,2,"Cisgender man (""Cisgender ""refers to individuals whose sex assigned at birth aligns with their gender identity)"
+cassidy_2024_pswq3,cov_gender,3,"Transgender man, Transgender woman, or non-binary"
+cassidy_2024_pswq3,cov_gender,4,Prefer not to say
+cassidy_2024_pswq3,cov_gender,5,Self describe
+cassidy_2024_pswq3,cov_nationality,24,Brazil
+cassidy_2024_pswq3,cov_nationality,35,Chile
+cassidy_2024_pswq3,cov_nationality,36,China
+cassidy_2024_pswq3,cov_nationality,44,Cyprus
+cassidy_2024_pswq3,cov_nationality,48,Denmark
+cassidy_2024_pswq3,cov_nationality,53,Egypt
+cassidy_2024_pswq3,cov_nationality,61,France
+cassidy_2024_pswq3,cov_nationality,65,Germany
+cassidy_2024_pswq3,cov_nationality,78,India
+cassidy_2024_pswq3,cov_nationality,80,Iran
+cassidy_2024_pswq3,cov_nationality,82,Ireland
+cassidy_2024_pswq3,cov_nationality,104,Malaysia
+cassidy_2024_pswq3,cov_nationality,122,Netherlands
+cassidy_2024_pswq3,cov_nationality,130,Pakistan
+cassidy_2024_pswq3,cov_nationality,137,Poland
+cassidy_2024_pswq3,cov_nationality,141,Republic of Moldova
+cassidy_2024_pswq3,cov_nationality,143,Russian Federation
+cassidy_2024_pswq3,cov_nationality,185,United Kingdom of Great Britain and Northern Ireland
+cassidy_2024_pswq3,cov_nationality,187,United States of America
+cassidy_2024_pswq3,cov_ocd_experience,1,I have been diagnosed with OCD
+cassidy_2024_pswq3,cov_ocd_experience,2,"I have never been diagnosed with OCD, but I think I have it"
+cassidy_2024_pswq3,cov_ocd_experience,3,I am fairly confident I don't have OCD
+cassidy_2024_pswq3,cov_ocd_experience,5,I'm not sure
+cassidy_2024_pswq3,cov_relationship_status,1,Not in a relationship
+cassidy_2024_pswq3,cov_relationship_status,2,In a relationship
+cassidy_2024_pswq3,cov_relationship_status,3,Never been in a relationship
+cassidy_2024_pswq3,cov_relationship_status,4,Prefer not to say
+cassidy_2024_pswq3,cov_survey_access,1,Survey Circle
+cassidy_2024_pswq3,cov_survey_access,3,I accessed the link via a social media post
+cassidy_2024_pswq3,cov_survey_access,4,NU participation pool
+cassidy_2024_pswq3,cov_survey_access,5,I was sent the link directly
+cassidy_2024_pswq3,cov_survey_access,6,Other
+cassidy_2024_resq_cons,cov_anxiety_experience,1,I have been diagnosed with an anxiety disorder
+cassidy_2024_resq_cons,cov_anxiety_experience,2,"I have never been diagnosed with an anxiety disorder, but I think I have one or more"
+cassidy_2024_resq_cons,cov_anxiety_experience,3,I'm fairly sure I don't have an anxiety disorder
+cassidy_2024_resq_cons,cov_anxiety_experience,5,I'm not sure
+cassidy_2024_resq_cons,cov_disability,1,Yes - one such factor. Please describe or leave blank if you would prefer not to say.
+cassidy_2024_resq_cons,cov_disability,2,Yes - two or more factors. Please describe or leave blank if you would prefer not to say.
+cassidy_2024_resq_cons,cov_disability,3,No
+cassidy_2024_resq_cons,cov_disability,4,Prefer not to say
+cassidy_2024_resq_cons,cov_education,1,less than high school / secondary school
+cassidy_2024_resq_cons,cov_education,2,High school graduate / completed secondary school
+cassidy_2024_resq_cons,cov_education,3,A-levels or equivalent
+cassidy_2024_resq_cons,cov_education,4,1 year degree
+cassidy_2024_resq_cons,cov_education,5,2 year degree
+cassidy_2024_resq_cons,cov_education,6,3 year degree
+cassidy_2024_resq_cons,cov_education,7,4 year degree
+cassidy_2024_resq_cons,cov_education,8,Vocational qualification (e.g. apprenticeship)
+cassidy_2024_resq_cons,cov_education,9,Masters degree
+cassidy_2024_resq_cons,cov_education,10,Professional degree
+cassidy_2024_resq_cons,cov_education,11,Doctorate
+cassidy_2024_resq_cons,cov_english_first_language,1,Yes
+cassidy_2024_resq_cons,cov_english_first_language,2,No
+cassidy_2024_resq_cons,cov_ethnicity,1,"Arab, Black, Mixed or multiple ethnicities, Other"
+cassidy_2024_resq_cons,cov_ethnicity,3,White
+cassidy_2024_resq_cons,cov_gender,1,"Cisgender woman (""Cisgender"" refers to individuals whose sex assigned at birth aligns with their gender identity)"
+cassidy_2024_resq_cons,cov_gender,2,"Cisgender man (""Cisgender ""refers to individuals whose sex assigned at birth aligns with their gender identity)"
+cassidy_2024_resq_cons,cov_gender,3,"Transgender man, Transgender woman, or non-binary"
+cassidy_2024_resq_cons,cov_gender,4,Prefer not to say
+cassidy_2024_resq_cons,cov_gender,5,Self describe
+cassidy_2024_resq_cons,cov_nationality,24,Brazil
+cassidy_2024_resq_cons,cov_nationality,35,Chile
+cassidy_2024_resq_cons,cov_nationality,36,China
+cassidy_2024_resq_cons,cov_nationality,44,Cyprus
+cassidy_2024_resq_cons,cov_nationality,48,Denmark
+cassidy_2024_resq_cons,cov_nationality,52,Ecuador
+cassidy_2024_resq_cons,cov_nationality,53,Egypt
+cassidy_2024_resq_cons,cov_nationality,61,France
+cassidy_2024_resq_cons,cov_nationality,78,India
+cassidy_2024_resq_cons,cov_nationality,80,Iran
+cassidy_2024_resq_cons,cov_nationality,82,Ireland
+cassidy_2024_resq_cons,cov_nationality,84,Italy
+cassidy_2024_resq_cons,cov_nationality,104,Malaysia
+cassidy_2024_resq_cons,cov_nationality,122,Netherlands
+cassidy_2024_resq_cons,cov_nationality,130,Pakistan
+cassidy_2024_resq_cons,cov_nationality,137,Poland
+cassidy_2024_resq_cons,cov_nationality,141,Republic of Moldova
+cassidy_2024_resq_cons,cov_nationality,143,Russian Federation
+cassidy_2024_resq_cons,cov_nationality,157,Slovakia
+cassidy_2024_resq_cons,cov_nationality,185,United Kingdom of Great Britain and Northern Ireland
+cassidy_2024_resq_cons,cov_nationality,187,United States of America
+cassidy_2024_resq_cons,cov_ocd_experience,1,I have been diagnosed with OCD
+cassidy_2024_resq_cons,cov_ocd_experience,2,"I have never been diagnosed with OCD, but I think I have it"
+cassidy_2024_resq_cons,cov_ocd_experience,3,I am fairly confident I don't have OCD
+cassidy_2024_resq_cons,cov_ocd_experience,5,I'm not sure
+cassidy_2024_resq_cons,cov_relationship_status,1,Not in a relationship
+cassidy_2024_resq_cons,cov_relationship_status,2,In a relationship
+cassidy_2024_resq_cons,cov_relationship_status,3,Never been in a relationship
+cassidy_2024_resq_cons,cov_relationship_status,4,Prefer not to say
+cassidy_2024_resq_cons,cov_survey_access,1,Survey Circle
+cassidy_2024_resq_cons,cov_survey_access,3,I accessed the link via a social media post
+cassidy_2024_resq_cons,cov_survey_access,4,NU participation pool
+cassidy_2024_resq_cons,cov_survey_access,5,I was sent the link directly
+cassidy_2024_resq_cons,cov_survey_access,6,Other
+cassidy_2024_resq_int,cov_anxiety_experience,1,I have been diagnosed with an anxiety disorder
+cassidy_2024_resq_int,cov_anxiety_experience,2,"I have never been diagnosed with an anxiety disorder, but I think I have one or more"
+cassidy_2024_resq_int,cov_anxiety_experience,3,I'm fairly sure I don't have an anxiety disorder
+cassidy_2024_resq_int,cov_anxiety_experience,5,I'm not sure
+cassidy_2024_resq_int,cov_disability,1,Yes - one such factor. Please describe or leave blank if you would prefer not to say.
+cassidy_2024_resq_int,cov_disability,2,Yes - two or more factors. Please describe or leave blank if you would prefer not to say.
+cassidy_2024_resq_int,cov_disability,3,No
+cassidy_2024_resq_int,cov_disability,4,Prefer not to say
+cassidy_2024_resq_int,cov_education,1,less than high school / secondary school
+cassidy_2024_resq_int,cov_education,2,High school graduate / completed secondary school
+cassidy_2024_resq_int,cov_education,3,A-levels or equivalent
+cassidy_2024_resq_int,cov_education,4,1 year degree
+cassidy_2024_resq_int,cov_education,5,2 year degree
+cassidy_2024_resq_int,cov_education,6,3 year degree
+cassidy_2024_resq_int,cov_education,7,4 year degree
+cassidy_2024_resq_int,cov_education,8,Vocational qualification (e.g. apprenticeship)
+cassidy_2024_resq_int,cov_education,9,Masters degree
+cassidy_2024_resq_int,cov_education,10,Professional degree
+cassidy_2024_resq_int,cov_education,11,Doctorate
+cassidy_2024_resq_int,cov_english_first_language,1,Yes
+cassidy_2024_resq_int,cov_english_first_language,2,No
+cassidy_2024_resq_int,cov_ethnicity,1,"Arab, Black, Mixed or multiple ethnicities, Other"
+cassidy_2024_resq_int,cov_ethnicity,3,White
+cassidy_2024_resq_int,cov_gender,1,"Cisgender woman (""Cisgender"" refers to individuals whose sex assigned at birth aligns with their gender identity)"
+cassidy_2024_resq_int,cov_gender,2,"Cisgender man (""Cisgender ""refers to individuals whose sex assigned at birth aligns with their gender identity)"
+cassidy_2024_resq_int,cov_gender,3,"Transgender man, Transgender woman, or non-binary"
+cassidy_2024_resq_int,cov_gender,4,Prefer not to say
+cassidy_2024_resq_int,cov_gender,5,Self describe
+cassidy_2024_resq_int,cov_nationality,24,Brazil
+cassidy_2024_resq_int,cov_nationality,35,Chile
+cassidy_2024_resq_int,cov_nationality,36,China
+cassidy_2024_resq_int,cov_nationality,44,Cyprus
+cassidy_2024_resq_int,cov_nationality,48,Denmark
+cassidy_2024_resq_int,cov_nationality,52,Ecuador
+cassidy_2024_resq_int,cov_nationality,53,Egypt
+cassidy_2024_resq_int,cov_nationality,61,France
+cassidy_2024_resq_int,cov_nationality,65,Germany
+cassidy_2024_resq_int,cov_nationality,78,India
+cassidy_2024_resq_int,cov_nationality,80,Iran
+cassidy_2024_resq_int,cov_nationality,82,Ireland
+cassidy_2024_resq_int,cov_nationality,84,Italy
+cassidy_2024_resq_int,cov_nationality,104,Malaysia
+cassidy_2024_resq_int,cov_nationality,122,Netherlands
+cassidy_2024_resq_int,cov_nationality,130,Pakistan
+cassidy_2024_resq_int,cov_nationality,137,Poland
+cassidy_2024_resq_int,cov_nationality,141,Republic of Moldova
+cassidy_2024_resq_int,cov_nationality,143,Russian Federation
+cassidy_2024_resq_int,cov_nationality,157,Slovakia
+cassidy_2024_resq_int,cov_nationality,185,United Kingdom of Great Britain and Northern Ireland
+cassidy_2024_resq_int,cov_nationality,187,United States of America
+cassidy_2024_resq_int,cov_ocd_experience,1,I have been diagnosed with OCD
+cassidy_2024_resq_int,cov_ocd_experience,2,"I have never been diagnosed with OCD, but I think I have it"
+cassidy_2024_resq_int,cov_ocd_experience,3,I am fairly confident I don't have OCD
+cassidy_2024_resq_int,cov_ocd_experience,5,I'm not sure
+cassidy_2024_resq_int,cov_relationship_status,1,Not in a relationship
+cassidy_2024_resq_int,cov_relationship_status,2,In a relationship
+cassidy_2024_resq_int,cov_relationship_status,3,Never been in a relationship
+cassidy_2024_resq_int,cov_relationship_status,4,Prefer not to say
+cassidy_2024_resq_int,cov_survey_access,1,Survey Circle
+cassidy_2024_resq_int,cov_survey_access,3,I accessed the link via a social media post
+cassidy_2024_resq_int,cov_survey_access,4,NU participation pool
+cassidy_2024_resq_int,cov_survey_access,5,I was sent the link directly
+cassidy_2024_resq_int,cov_survey_access,6,Other
+cassidy_2024_rss,cov_anxiety_experience,1,I have been diagnosed with an anxiety disorder
+cassidy_2024_rss,cov_anxiety_experience,2,"I have never been diagnosed with an anxiety disorder, but I think I have one or more"
+cassidy_2024_rss,cov_anxiety_experience,3,I'm fairly sure I don't have an anxiety disorder
+cassidy_2024_rss,cov_anxiety_experience,5,I'm not sure
+cassidy_2024_rss,cov_disability,1,Yes - one such factor. Please describe or leave blank if you would prefer not to say.
+cassidy_2024_rss,cov_disability,2,Yes - two or more factors. Please describe or leave blank if you would prefer not to say.
+cassidy_2024_rss,cov_disability,3,No
+cassidy_2024_rss,cov_disability,4,Prefer not to say
+cassidy_2024_rss,cov_education,1,less than high school / secondary school
+cassidy_2024_rss,cov_education,2,High school graduate / completed secondary school
+cassidy_2024_rss,cov_education,3,A-levels or equivalent
+cassidy_2024_rss,cov_education,4,1 year degree
+cassidy_2024_rss,cov_education,5,2 year degree
+cassidy_2024_rss,cov_education,6,3 year degree
+cassidy_2024_rss,cov_education,7,4 year degree
+cassidy_2024_rss,cov_education,8,Vocational qualification (e.g. apprenticeship)
+cassidy_2024_rss,cov_education,9,Masters degree
+cassidy_2024_rss,cov_education,10,Professional degree
+cassidy_2024_rss,cov_education,11,Doctorate
+cassidy_2024_rss,cov_english_first_language,1,Yes
+cassidy_2024_rss,cov_english_first_language,2,No
+cassidy_2024_rss,cov_ethnicity,1,"Arab, Black, Mixed or multiple ethnicities, Other"
+cassidy_2024_rss,cov_ethnicity,3,White
+cassidy_2024_rss,cov_gender,1,"Cisgender woman (""Cisgender"" refers to individuals whose sex assigned at birth aligns with their gender identity)"
+cassidy_2024_rss,cov_gender,2,"Cisgender man (""Cisgender ""refers to individuals whose sex assigned at birth aligns with their gender identity)"
+cassidy_2024_rss,cov_gender,3,"Transgender man, Transgender woman, or non-binary"
+cassidy_2024_rss,cov_gender,4,Prefer not to say
+cassidy_2024_rss,cov_gender,5,Self describe
+cassidy_2024_rss,cov_nationality,24,Brazil
+cassidy_2024_rss,cov_nationality,35,Chile
+cassidy_2024_rss,cov_nationality,36,China
+cassidy_2024_rss,cov_nationality,44,Cyprus
+cassidy_2024_rss,cov_nationality,48,Denmark
+cassidy_2024_rss,cov_nationality,52,Ecuador
+cassidy_2024_rss,cov_nationality,53,Egypt
+cassidy_2024_rss,cov_nationality,61,France
+cassidy_2024_rss,cov_nationality,65,Germany
+cassidy_2024_rss,cov_nationality,78,India
+cassidy_2024_rss,cov_nationality,80,Iran
+cassidy_2024_rss,cov_nationality,82,Ireland
+cassidy_2024_rss,cov_nationality,104,Malaysia
+cassidy_2024_rss,cov_nationality,122,Netherlands
+cassidy_2024_rss,cov_nationality,130,Pakistan
+cassidy_2024_rss,cov_nationality,137,Poland
+cassidy_2024_rss,cov_nationality,141,Republic of Moldova
+cassidy_2024_rss,cov_nationality,143,Russian Federation
+cassidy_2024_rss,cov_nationality,185,United Kingdom of Great Britain and Northern Ireland
+cassidy_2024_rss,cov_nationality,187,United States of America
+cassidy_2024_rss,cov_ocd_experience,1,I have been diagnosed with OCD
+cassidy_2024_rss,cov_ocd_experience,2,"I have never been diagnosed with OCD, but I think I have it"
+cassidy_2024_rss,cov_ocd_experience,3,I am fairly confident I don't have OCD
+cassidy_2024_rss,cov_ocd_experience,5,I'm not sure
+cassidy_2024_rss,cov_relationship_status,1,Not in a relationship
+cassidy_2024_rss,cov_relationship_status,2,In a relationship
+cassidy_2024_rss,cov_relationship_status,3,Never been in a relationship
+cassidy_2024_rss,cov_relationship_status,4,Prefer not to say
+cassidy_2024_rss,cov_survey_access,1,Survey Circle
+cassidy_2024_rss,cov_survey_access,3,I accessed the link via a social media post
+cassidy_2024_rss,cov_survey_access,4,NU participation pool
+cassidy_2024_rss,cov_survey_access,5,I was sent the link directly
+cassidy_2024_rss,cov_survey_access,6,Other
 cavojova_2017_cfc,cov_sample,0,teacher
 cavojova_2017_cfc,cov_sample,1,student
 cavojova_2017_cfc,cov_sex,1,man
@@ -9122,6 +9671,8 @@ lu_2026_stai,cov_soc_class,3,Lower Middle class
 lu_2026_stai,cov_soc_class,4,Middle class
 lu_2026_stai,cov_soc_class,5,Upper Middle class
 lu_2026_stai,cov_soc_class,6,Upper class
+luettgau_2026_political_knowledge,cov_study,2,"Study 2 (conversational AI -- GPT-4o, Claude or Mistral -- vs self-directed Google search)"
+luettgau_2026_political_knowledge,cov_study,3,Study 3 (GPT-4o prompted to be persuasive or sycophantic vs GPT-4o under its default system prompt)
 mairean_2023_cmq,cov_education,1,gimnaziale si liceale
 mairean_2023_cmq,cov_education,2,licenta
 mairean_2023_cmq,cov_education,3,master
