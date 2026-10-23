@@ -96,6 +96,29 @@ The tables share a layout but not a meaning: how many positions a ballot offered
 
 `seats`, `write_in_allowed` and `candidate_order` are the fields that need a person: they come from the jurisdiction's election page or statute, and the same value usually holds for every contest of one jurisdiction and year. That is the collaborator task (`COLLABORATORS.md`).
 
+## Counting rules (`counting_rules.csv`)
+
+How a jurisdiction counted its ballots depends on the jurisdiction and the date, not on the table, so the rules are written once per rule set in `counting_rules.csv` rather than as columns of `design_tables.csv` (Ben, 2026-10-22, #3165). A table's rules are in the row with its `jurisdiction` where `valid_from` <= `date` < `valid_to`, with `date` from `design_tables.csv`; an empty `valid_to` means no later text replaced the rule set in the texts saved. The first rows are Minneapolis 2009-2023. Other jurisdictions get rows when their rules are written down.
+
+`valid_from` and `valid_to` are the dates the city council adopted the ordinance text. They are not effective dates. The sources give adoption and mayoral approval dates but no effective date, so the join treats a text as in force from its adoption. That is a convention of this file, not a claim about when the text took effect.
+
+| column | |
+|---|---|
+| `jurisdiction` | as in `design_tables.csv` |
+| `rule_set` | a name for the rule set (`mpls_2009`, `mpls_2013`, `mpls_2015plus`); the names are not the city's |
+| `valid_from`, `valid_to` | council adoption dates (above) |
+| `ordinance`, `sections` | the ordinance, and the sections the rules below come from |
+| `overvote`, `skipped`, `duplicate` | `pass_over` (the position is passed over) or `exhaust` (the ballot stops counting) |
+| `max_consecutive_skips` | `none` (no limit) or a number: one more blank ranking in a row stops the ballot |
+| `batch_elimination` | the tests that defeat several candidates at once, joined by `+`: `test1_next_higher_total_surpass` (a group whose total only equals the next higher total is defeated), `test1_next_higher_total_equal_or_surpass` (it is not), `test2_sum_of_all_ranked_votes`, `undeclared_writeins_defeated_round2` |
+| `threshold` | `floor(votes_cast/(seats+1))+1`, then `; first_round_decided_at_maximum_possible_threshold` where a first-round check against the maximum possible threshold can end the count |
+| `surplus_transfer`, `surplus_decimals` | `fractional_all_votes_truncated`: every vote of an elected candidate moves on at the surplus fraction times its current value; the surplus fraction and each transfer value are truncated to `surplus_decimals` places |
+| `last_defeat_transfer` | the votes of the final defeat, the one that leaves as many continuing candidates as seats still to fill: `not_when_continuing_equals_seats_to_fill` (not transferred, as the text says) or `city_sheet_no_transfer` (not transferred, as the city's sheets show, although the text transfers them) |
+| `one_seat_stop` | when a one-seat count ends if no candidate reaches the threshold: `one_continuing` (one continuing candidate is left) or `two_continuing` (two are left and the one with more votes is elected) |
+| `source_url` | the official texts, separated by spaces |
+
+Where the 2009 Minneapolis text and the city's sheets disagree, the record follows the sheets. They disagree on the final defeat. The 2009 text (167.70(a)(1)c and e) transfers the votes of every defeated candidate, while the city's sheets for Board of Estimate and Taxation and Park Board at-large show the final defeat moving no votes; a count that follows the words elects the same people with different figures in the last round. `one_seat_stop` records a difference between rule sets, not between text and sheet: the 2009 text ends a one-seat count at two continuing candidates, as the city did in Park District 5, and the 2013 and later texts would go on to defeat the second one. Each date, section and rule cell rests on a quote of the saved ordinance texts, and `city_sheet_no_transfer` on the city's sheets; the table of quotes is available from the contributors on request (#3165). `minneapolis/recount.py` counts by the same three rule sets.
+
 ## Validator (`irw_validate/rankings.py`)
 
 | rule | |
@@ -161,3 +184,5 @@ It also reports duplicate marks, ballots with a gap, and the marks-per-ballot di
   election support it. The statutory wrinkle is recorded rather than treated as a blocker -- the 2020
   text of Minn. Stat. 204B.36 subd. 2 did not cover specials ("or special" arrived in Laws 2021
   ch. 31). Ben: "doesn't seem super impactful. if we can record them i guess it is fine."
+
+- **2026-10-22 (Ben), counting rules.** Counting rules go in `counting_rules.csv`, one row per jurisdiction and rule set, joined to a table by `jurisdiction` and `date`, not as columns of `design_tables.csv`: as columns the same cells would repeat on every row of a jurisdiction, and a correction to one ordinance URL would have to be made in all of them. The two 2009 Minneapolis points that change a last round are columns too (`last_defeat_transfer`, `one_seat_stop`), so the count can be reproduced from the file alone. Ruled on #3165.
