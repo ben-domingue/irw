@@ -48,6 +48,10 @@ import sys
 import os
 import pandas as pd
 
+sys.path.insert(0, os.path.dirname(os.path.dirname(
+    os.path.dirname(os.path.abspath(__file__)))))
+from irw_validate.conjoint import validate_conjoint_frame  # noqa: E402
+
 ATTRS = {
     "Material": "attr_material",
     "HeadBodyRatio": "attr_head_body_ratio",
@@ -100,6 +104,7 @@ for _, r in d.iterrows():
             })
 
 o = pd.DataFrame(rows)
+o["cov_duration_sec"] = o["cov_duration_sec"].astype(int)   # numeric, per J8
 # one chosen profile per task, three profiles per task
 per_task = o.groupby(["id", "task"])["choice"].agg(["sum", "count"])
 assert (per_task["sum"] == 1).all() and (per_task["count"] == 3).all()
@@ -109,6 +114,14 @@ assert len(design.drop_duplicates(list(ATTRS.values()))) == 18
 for c in ATTRS.values():
     assert set(design[c].value_counts()) == {6}, c
 assert len(o) == 1929 and len(per_task) == 643, (len(o), len(per_task))
+
+# the conjoint validator (rules J1-J7) gates the write; the core one would fail
+# C1 on a table with no item/resp. opt_out=no is this design's design_outcomes.csv row.
+report = validate_conjoint_frame(o, label="byun_2026_mascot",
+                                 opt_out={"choice": "no"})
+assert not report.errors, [(f.check, f.message) for f in report.errors]
+for f in report.findings:
+    print(f"  [{f.severity}] {f.check}: {f.message}")
 
 o.to_csv(os.path.join(out, "byun_2026_mascot.csv"), index=False)
 print("byun_2026_mascot.csv", o.shape, "respondents", o["id"].nunique(), "tasks", len(per_task))

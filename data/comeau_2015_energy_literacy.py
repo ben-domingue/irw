@@ -83,6 +83,11 @@ from pathlib import Path
 
 import pandas as pd
 
+REPO_ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(REPO_ROOT))
+import irw_validate  # noqa: E402
+from irw_validate._checks import run_qc  # noqa: E402
+
 SCALES = {
     "energy_source_knowledge": [f"q7_{i}" for i in range(11)],
     "energy_source_support": [f"q8_{i}" for i in range(11)],
@@ -136,7 +141,7 @@ def main() -> None:
             assert set(int(v) for v in vals) <= set(lab), (col, sorted(vals))
             cov[name] = d[col].map(lambda v: lab.get(int(v)) if pd.notna(v) else None)
 
-    tables = {}
+    tables, permitted = {}, {}
     for name, cols in SCALES.items():
         lv = {k for c in cols for k in labels[c]}
         for c in cols:
@@ -147,6 +152,7 @@ def main() -> None:
         t["resp"] = t["resp"].astype(int)
         t["item"] = pd.Categorical(t["item"], categories=cols, ordered=True)
         tables[f"comeau_2015_{name}"] = t
+        permitted[f"comeau_2015_{name}"] = sorted(int(v) for v in lv)
 
     # the knowledge quiz, rebuilt from the raw responses (see the header)
     frames = []
@@ -157,6 +163,7 @@ def main() -> None:
     quiz = pd.concat(frames, ignore_index=True)
     quiz["item"] = pd.Categorical(quiz["item"], categories=list(KEY), ordered=True)
     tables["comeau_2015_energy_literacy"] = quiz
+    permitted["comeau_2015_energy_literacy"] = [0, 1]
 
     out.mkdir(parents=True, exist_ok=True)
     for name, t in tables.items():
@@ -164,6 +171,18 @@ def main() -> None:
         t = t[["id", "item", "resp"] + [c for c in cov.columns if c != "id"]]
         assert not t[["id", "item"]].duplicated().any(), name
         assert t["id"].nunique() >= 100 and t["item"].nunique() >= 3, name
+        # the validator gates the write; permitted_values are the file's own
+        # value-label codes, not the observed range
+        pv = permitted[name]
+        fails = [(c.name, c.detail) for c in run_qc(t, permitted_values=pv)
+                 if c.status == "fail"]
+        assert not fails, (name, fails)
+        report = irw_validate.validate_frame(t, label=name, profile="upload",
+                                             context={"permitted_values": pv})
+        assert report.conforms and not report.errors, \
+            (name, [(f.check, f.message) for f in report.errors])
+        for f in report.findings:
+            print(f"  [{f.severity}] {f.check}: {f.message}")
         t.to_csv(out / f"{name}.csv", index=False)
         print(f"{name}.csv rows={len(t)} ids={t['id'].nunique()} items={t['item'].nunique()} "
               f"resp={t['resp'].min()}-{t['resp'].max()}")
