@@ -1,4 +1,4 @@
-# item-text tables in the Redivis shards as of 2026-10-22
+# item-text tables in the Redivis shards as of 2026-10-23
 # status=published: a reader can fetch it. status=draft: uploaded, not released yet.
 # generated -- do not hand-edit; rerun itemtext/refresh_live_tables.py (irw#1828)
 table,shard,status
@@ -1331,6 +1331,7 @@ lorenz_2016_optimism2,irw_text_2,published
 lshs-e_quidaja_2022,irw_text,published
 lu_2017_gad7,irw_text_2,published
 lu_2017_phq9,irw_text_2,published
+luettgau_2026_source_trust,irw_text_3,published
 lunacortes_2019_interperson_conn,irw_text_3,published
 lunacortes_2019_satisfaction,irw_text_2,published
 lunacortes_2019_self_congruity,irw_text_3,published
