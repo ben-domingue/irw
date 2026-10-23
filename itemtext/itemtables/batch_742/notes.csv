@@ -3,4 +3,4 @@
 "comeau_2015_energy_literacy","option_text blank by design: resp is a derived 0/1 correctness score."
 "comeau_2015_energy_literacy_sureness","Four items share one administered wording; the item code carries which knowledge question each followed."
 "comeau_2015_energy_attitudes","instructions blank: the two screens' stems are in the questionnaire PDF, not in the .sav, and were not invented."
-"comeau_2015_* (all 14)","Administration may have been bilingual (English and French): bilingual recruitment, language a panel quota, 629/3000 French-first. Only English wording is in the deposit; `language` is left unset pending Ben's ruling."
+"comeau_2015_* (all 14)","Administered in English and French (ruled by Ben 2026-10-23). language='English; French' ships; only English wording is in the deposit, so a French backfill is owed and the standing backfill query finds these."
