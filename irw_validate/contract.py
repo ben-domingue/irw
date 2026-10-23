@@ -35,8 +35,15 @@ from .model import Finding
 #: `data/AAQ-II.R` reads and writes `D:/Desktop/...`.
 LOCAL_PATH = re.compile(r"""['"](?:[A-Za-z]:[\\/]|/Users/|/home/|/mnt/[a-z]/)""")
 
-#: What counts as "the validator was called".
-VALIDATOR_NAMES = ("run_qc", "irw_validate", "validate_frame", "validate_file")
+#: What counts as "the validator was called". The conjoint and rankings entry
+#: points are here because those families have no `item`/`resp`: the core
+#: validator fails C1 on them by construction, so `validate_conjoint_frame` /
+#: `validate_rankings_frame` IS the validator for a `data/conjoint/` or
+#: `data/rankings/` script, and a new one could not otherwise satisfy this check
+#: (data/conjoint/byun_2026_mascot.py, the first Python conjoint builder, 2026-10-23).
+VALIDATOR_NAMES = ("run_qc", "irw_validate", "validate_frame", "validate_file",
+                   "validate_conjoint_frame", "validate_conjoint_file",
+                   "validate_rankings_frame", "validate_rankings_file")
 
 
 def _corpus_names(root: pathlib.Path) -> set:

@@ -54,6 +54,10 @@ import sys
 import os
 import pandas as pd
 
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import irw_validate  # noqa: E402
+from irw_validate._checks import run_qc  # noqa: E402
+
 DIMS = [
     ("impression", "A1 Impression", "B1 Impression"),
     ("approachable", "A2 Approachable", "B2??Approachable"),
@@ -98,6 +102,7 @@ long = d.melt(id_vars=["id"], value_vars=list(cols.values()),
 inv = {v: k for k, v in cols.items()}
 long["item"] = long["src"].map(inv)
 long = long[long["resp"] != ""].drop(columns=["src"])
+long["resp"] = long["resp"].astype(int)          # the stored 1-7 code
 o = long.merge(cov, on="id", how="left")
 o = o[["id", "item", "resp"] + [c for c in cov.columns if c != "id"]]
 o = o.sort_values(["id", "item"]).reset_index(drop=True)
@@ -105,6 +110,17 @@ o = o.sort_values(["id", "item"]).reset_index(drop=True)
 assert o["item"].nunique() == 12 and len(o) == 2704, (o["item"].nunique(), len(o))
 assert o["id"].nunique() == 229, o["id"].nunique()
 assert (o.groupby(["id", "item"]).size() == 1).all()
+
+# the validator gates the write; 1-7 is the administered scale, not an observed range
+PV = [1, 2, 3, 4, 5, 6, 7]
+fails = [(c.name, c.detail) for c in run_qc(o, permitted_values=PV) if c.status == "fail"]
+assert not fails, fails
+report = irw_validate.validate_frame(o, label="byun_2026_mascot_ratings",
+                                     profile="upload", context={"permitted_values": PV})
+assert report.conforms and not report.errors, [(f.check, f.message) for f in report.errors]
+for f in report.findings:
+    print(f"  [{f.severity}] {f.check}: {f.message}")
+
 o.to_csv(os.path.join(out, "byun_2026_mascot_ratings.csv"), index=False)
 print("byun_2026_mascot_ratings.csv", o.shape, "respondents", o["id"].nunique(),
       "items", o["item"].nunique())

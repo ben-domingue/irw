@@ -51,6 +51,17 @@ class Contract(unittest.TestCase):
     def test_writing_without_validating_is_an_error(self):
         self.assertIn("no_validator", self.checks(NO_VALIDATOR))
 
+    def test_the_conjoint_validator_counts_as_the_validator(self):
+        # a conjoint or rankings table has no item/resp, so the core validator
+        # fails C1 on it; its own checker is the only one that can gate the write
+        body = ('import pandas as pd\n'
+                'from irw_validate.conjoint import validate_conjoint_frame\n'
+                'df = pd.read_csv("r.csv")\n'
+                'report = validate_conjoint_frame(df, label="a_2026_x")\n'
+                'assert not report.errors\n'
+                'df.to_csv("a_2026_x.csv", index=False)\n')
+        self.assertNotIn("no_validator", self.checks(body))
+
     def test_validating_after_writing_is_not_a_gate(self):
         body = ('import pandas as pd\nfrom irw_triage_updated import run_qc\n'
                 'df = pd.read_csv("r.csv")\ndf.to_csv("a_2026_x.csv")\nrun_qc(df)\n')
