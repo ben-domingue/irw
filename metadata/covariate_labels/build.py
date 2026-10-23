@@ -20,11 +20,21 @@ Rules (all ruled on #1775, 2026-10-01):
   column, and a table x covariate pair is kept only if
   (a) the shipped column is numeric codes, not label strings;
   (b) at least half its distinct codes carry a source label (coverage.csv
-      lists any unlabelled codes); and
+      lists any unlabelled codes);
   (c) the shipped codes are the source's codes, not a recode: for every code,
       the number of distinct ids carrying it in the shipped table is at most
       the number of source rows carrying it. A 1/2 swap, a 0/1 recode or a
-      collapse fails this and the pair is left out (reason in coverage.csv).
+      collapse fails this and the pair is left out (reason in coverage.csv); and
+  (d) no unlabelled code carries more than half the respondents in the column
+      (``MAX_UNLABELLED_SHARE``). Rule (b) counts *distinct* codes, so a code
+      held by 216 of 250 people weighed the same as one held by 3, and
+      cassidy_2024_* cov_ethnicity passed (b) at exactly half while publishing
+      a label for 12% of the sample and nothing for the other 86% (#3203, Ben
+      ruled withhold + this rule, 2026-10-23). The denominator is every shipped
+      code, missing-value codes included, which is the conservative choice: it
+      can only make the share smaller and so excludes fewer pairs. The check
+      runs last, after (a)-(c), and can only turn ``included`` into
+      ``excluded`` -- it never admits a pair the old rules rejected.
 * **Institution names are withheld.** A pair listed as ``withhold`` in
   ``institutions.csv`` gets one row per code with ``label`` =
   WITHHELD_LABEL instead of the names. Any other pair that *looks* like an
@@ -55,6 +65,9 @@ DEFAULT_LOGS = Path.home() / ".cache" / "irw" / "covariate_labels" / "logs"
 COLUMNS = ["table", "covariate", "code", "label"]
 WITHHELD_LABEL = "[institution name withheld]"
 MIN_COVERAGE = 0.5
+#: Rule (d): the largest unlabelled code may carry at most this share of the
+#: respondents in the column. Ruled on #3203 (2026-10-23).
+MAX_UNLABELLED_SHARE = 0.5
 
 MISSING_RX = re.compile(
     r"^(missing|no answer|n/?a|na|refused|don'?t know|sin respuesta|sysmis|not asked|-?9+)$", re.I)
@@ -290,6 +303,13 @@ def assess(cov, info, labels, src_counts):
     if over:
         return ("excluded", "shipped counts exceed source counts for code(s) " + ",".join(sorted(over, key=code_key))
                 + ": the script recoded this column", unlabelled)
+    people = sum(shipped.values())
+    if people and unlabelled:
+        worst = max(unlabelled, key=lambda k: shipped.get(k, 0))
+        share = shipped.get(worst, 0) / people
+        if share > MAX_UNLABELLED_SHARE:
+            return ("excluded", f"code {worst} carries {share:.0%} of respondents and has no source label: "
+                    "the label set does not describe this column", unlabelled)
     return "included", "", unlabelled
 
 

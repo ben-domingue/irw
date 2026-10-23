@@ -387,7 +387,7 @@ cassidy_2024_ab,cov_anxiety_experience,data/cassidy_2024_uncertainty_attachment.
 cassidy_2024_ab,cov_disability,data/cassidy_2024_uncertainty_attachment.py,Disability_,included,,4,4,
 cassidy_2024_ab,cov_education,data/cassidy_2024_uncertainty_attachment.py,Education_achieve,included,,11,11,
 cassidy_2024_ab,cov_english_first_language,data/cassidy_2024_uncertainty_attachment.py,Language,included,,2,2,
-cassidy_2024_ab,cov_ethnicity,data/cassidy_2024_uncertainty_attachment.py,Ethnicity,included,,2,1,2
+cassidy_2024_ab,cov_ethnicity,data/cassidy_2024_uncertainty_attachment.py,Ethnicity,excluded,code 2 carries 88% of respondents and has no source label: the label set does not describe this column,2,1,2
 cassidy_2024_ab,cov_gender,data/cassidy_2024_uncertainty_attachment.py,Gender,included,,5,5,
 cassidy_2024_ab,cov_nationality,data/cassidy_2024_uncertainty_attachment.py,Nationality,included,,19,19,
 cassidy_2024_ab,cov_ocd_experience,data/cassidy_2024_uncertainty_attachment.py,OCD_,included,,4,4,
@@ -397,7 +397,7 @@ cassidy_2024_ecr_r,cov_anxiety_experience,data/cassidy_2024_uncertainty_attachme
 cassidy_2024_ecr_r,cov_disability,data/cassidy_2024_uncertainty_attachment.py,Disability_,included,,4,4,
 cassidy_2024_ecr_r,cov_education,data/cassidy_2024_uncertainty_attachment.py,Education_achieve,included,,11,11,
 cassidy_2024_ecr_r,cov_english_first_language,data/cassidy_2024_uncertainty_attachment.py,Language,included,,2,2,
-cassidy_2024_ecr_r,cov_ethnicity,data/cassidy_2024_uncertainty_attachment.py,Ethnicity,included,,2,1,2
+cassidy_2024_ecr_r,cov_ethnicity,data/cassidy_2024_uncertainty_attachment.py,Ethnicity,excluded,code 2 carries 89% of respondents and has no source label: the label set does not describe this column,2,1,2
 cassidy_2024_ecr_r,cov_gender,data/cassidy_2024_uncertainty_attachment.py,Gender,included,,5,5,
 cassidy_2024_ecr_r,cov_nationality,data/cassidy_2024_uncertainty_attachment.py,Nationality,included,,21,21,
 cassidy_2024_ecr_r,cov_ocd_experience,data/cassidy_2024_uncertainty_attachment.py,OCD_,included,,4,4,
@@ -407,7 +407,7 @@ cassidy_2024_fas,cov_anxiety_experience,data/cassidy_2024_uncertainty_attachment
 cassidy_2024_fas,cov_disability,data/cassidy_2024_uncertainty_attachment.py,Disability_,included,,4,4,
 cassidy_2024_fas,cov_education,data/cassidy_2024_uncertainty_attachment.py,Education_achieve,included,,11,11,
 cassidy_2024_fas,cov_english_first_language,data/cassidy_2024_uncertainty_attachment.py,Language,included,,2,2,
-cassidy_2024_fas,cov_ethnicity,data/cassidy_2024_uncertainty_attachment.py,Ethnicity,included,,2,1,2
+cassidy_2024_fas,cov_ethnicity,data/cassidy_2024_uncertainty_attachment.py,Ethnicity,excluded,code 2 carries 87% of respondents and has no source label: the label set does not describe this column,2,1,2
 cassidy_2024_fas,cov_gender,data/cassidy_2024_uncertainty_attachment.py,Gender,included,,5,5,
 cassidy_2024_fas,cov_nationality,data/cassidy_2024_uncertainty_attachment.py,Nationality,included,,19,19,
 cassidy_2024_fas,cov_ocd_experience,data/cassidy_2024_uncertainty_attachment.py,OCD_,included,,4,4,
@@ -417,7 +417,7 @@ cassidy_2024_ius_12,cov_anxiety_experience,data/cassidy_2024_uncertainty_attachm
 cassidy_2024_ius_12,cov_disability,data/cassidy_2024_uncertainty_attachment.py,Disability_,included,,4,4,
 cassidy_2024_ius_12,cov_education,data/cassidy_2024_uncertainty_attachment.py,Education_achieve,included,,11,11,
 cassidy_2024_ius_12,cov_english_first_language,data/cassidy_2024_uncertainty_attachment.py,Language,included,,2,2,
-cassidy_2024_ius_12,cov_ethnicity,data/cassidy_2024_uncertainty_attachment.py,Ethnicity,included,,2,1,2
+cassidy_2024_ius_12,cov_ethnicity,data/cassidy_2024_uncertainty_attachment.py,Ethnicity,excluded,code 2 carries 88% of respondents and has no source label: the label set does not describe this column,2,1,2
 cassidy_2024_ius_12,cov_gender,data/cassidy_2024_uncertainty_attachment.py,Gender,included,,5,5,
 cassidy_2024_ius_12,cov_nationality,data/cassidy_2024_uncertainty_attachment.py,Nationality,included,,21,21,
 cassidy_2024_ius_12,cov_ocd_experience,data/cassidy_2024_uncertainty_attachment.py,OCD_,included,,4,4,
@@ -427,7 +427,7 @@ cassidy_2024_oci_r,cov_anxiety_experience,data/cassidy_2024_uncertainty_attachme
 cassidy_2024_oci_r,cov_disability,data/cassidy_2024_uncertainty_attachment.py,Disability_,included,,4,4,
 cassidy_2024_oci_r,cov_education,data/cassidy_2024_uncertainty_attachment.py,Education_achieve,included,,11,11,
 cassidy_2024_oci_r,cov_english_first_language,data/cassidy_2024_uncertainty_attachment.py,Language,included,,2,2,
-cassidy_2024_oci_r,cov_ethnicity,data/cassidy_2024_uncertainty_attachment.py,Ethnicity,included,,3,2,2
+cassidy_2024_oci_r,cov_ethnicity,data/cassidy_2024_uncertainty_attachment.py,Ethnicity,excluded,code 2 carries 87% of respondents and has no source label: the label set does not describe this column,3,2,2
 cassidy_2024_oci_r,cov_gender,data/cassidy_2024_uncertainty_attachment.py,Gender,included,,5,5,
 cassidy_2024_oci_r,cov_nationality,data/cassidy_2024_uncertainty_attachment.py,Nationality,included,,21,21,
 cassidy_2024_oci_r,cov_ocd_experience,data/cassidy_2024_uncertainty_attachment.py,OCD_,included,,4,4,
@@ -437,7 +437,7 @@ cassidy_2024_pswq3,cov_anxiety_experience,data/cassidy_2024_uncertainty_attachme
 cassidy_2024_pswq3,cov_disability,data/cassidy_2024_uncertainty_attachment.py,Disability_,included,,4,4,
 cassidy_2024_pswq3,cov_education,data/cassidy_2024_uncertainty_attachment.py,Education_achieve,included,,11,11,
 cassidy_2024_pswq3,cov_english_first_language,data/cassidy_2024_uncertainty_attachment.py,Language,included,,2,2,
-cassidy_2024_pswq3,cov_ethnicity,data/cassidy_2024_uncertainty_attachment.py,Ethnicity,included,,2,1,2
+cassidy_2024_pswq3,cov_ethnicity,data/cassidy_2024_uncertainty_attachment.py,Ethnicity,excluded,code 2 carries 89% of respondents and has no source label: the label set does not describe this column,2,1,2
 cassidy_2024_pswq3,cov_gender,data/cassidy_2024_uncertainty_attachment.py,Gender,included,,5,5,
 cassidy_2024_pswq3,cov_nationality,data/cassidy_2024_uncertainty_attachment.py,Nationality,included,,19,19,
 cassidy_2024_pswq3,cov_ocd_experience,data/cassidy_2024_uncertainty_attachment.py,OCD_,included,,4,4,
@@ -447,7 +447,7 @@ cassidy_2024_resq_cons,cov_anxiety_experience,data/cassidy_2024_uncertainty_atta
 cassidy_2024_resq_cons,cov_disability,data/cassidy_2024_uncertainty_attachment.py,Disability_,included,,4,4,
 cassidy_2024_resq_cons,cov_education,data/cassidy_2024_uncertainty_attachment.py,Education_achieve,included,,11,11,
 cassidy_2024_resq_cons,cov_english_first_language,data/cassidy_2024_uncertainty_attachment.py,Language,included,,2,2,
-cassidy_2024_resq_cons,cov_ethnicity,data/cassidy_2024_uncertainty_attachment.py,Ethnicity,included,,3,2,2
+cassidy_2024_resq_cons,cov_ethnicity,data/cassidy_2024_uncertainty_attachment.py,Ethnicity,excluded,code 2 carries 87% of respondents and has no source label: the label set does not describe this column,3,2,2
 cassidy_2024_resq_cons,cov_gender,data/cassidy_2024_uncertainty_attachment.py,Gender,included,,5,5,
 cassidy_2024_resq_cons,cov_nationality,data/cassidy_2024_uncertainty_attachment.py,Nationality,included,,21,21,
 cassidy_2024_resq_cons,cov_ocd_experience,data/cassidy_2024_uncertainty_attachment.py,OCD_,included,,4,4,
@@ -457,7 +457,7 @@ cassidy_2024_resq_int,cov_anxiety_experience,data/cassidy_2024_uncertainty_attac
 cassidy_2024_resq_int,cov_disability,data/cassidy_2024_uncertainty_attachment.py,Disability_,included,,4,4,
 cassidy_2024_resq_int,cov_education,data/cassidy_2024_uncertainty_attachment.py,Education_achieve,included,,11,11,
 cassidy_2024_resq_int,cov_english_first_language,data/cassidy_2024_uncertainty_attachment.py,Language,included,,2,2,
-cassidy_2024_resq_int,cov_ethnicity,data/cassidy_2024_uncertainty_attachment.py,Ethnicity,included,,3,2,2
+cassidy_2024_resq_int,cov_ethnicity,data/cassidy_2024_uncertainty_attachment.py,Ethnicity,excluded,code 2 carries 88% of respondents and has no source label: the label set does not describe this column,3,2,2
 cassidy_2024_resq_int,cov_gender,data/cassidy_2024_uncertainty_attachment.py,Gender,included,,5,5,
 cassidy_2024_resq_int,cov_nationality,data/cassidy_2024_uncertainty_attachment.py,Nationality,included,,22,22,
 cassidy_2024_resq_int,cov_ocd_experience,data/cassidy_2024_uncertainty_attachment.py,OCD_,included,,4,4,
@@ -467,7 +467,7 @@ cassidy_2024_rss,cov_anxiety_experience,data/cassidy_2024_uncertainty_attachment
 cassidy_2024_rss,cov_disability,data/cassidy_2024_uncertainty_attachment.py,Disability_,included,,4,4,
 cassidy_2024_rss,cov_education,data/cassidy_2024_uncertainty_attachment.py,Education_achieve,included,,11,11,
 cassidy_2024_rss,cov_english_first_language,data/cassidy_2024_uncertainty_attachment.py,Language,included,,2,2,
-cassidy_2024_rss,cov_ethnicity,data/cassidy_2024_uncertainty_attachment.py,Ethnicity,included,,3,2,2
+cassidy_2024_rss,cov_ethnicity,data/cassidy_2024_uncertainty_attachment.py,Ethnicity,excluded,code 2 carries 87% of respondents and has no source label: the label set does not describe this column,3,2,2
 cassidy_2024_rss,cov_gender,data/cassidy_2024_uncertainty_attachment.py,Gender,included,,5,5,
 cassidy_2024_rss,cov_nationality,data/cassidy_2024_uncertainty_attachment.py,Nationality,included,,20,20,
 cassidy_2024_rss,cov_ocd_experience,data/cassidy_2024_uncertainty_attachment.py,OCD_,included,,4,4,
@@ -1035,7 +1035,7 @@ fazekas_2019_psci,cov_employed,data/fazekas_2019_psci.py,Employment_status,inclu
 fazekas_2019_psci,cov_living,data/fazekas_2019_psci.py,Living_situation,included,,4,4,
 fazekas_2019_psci,cov_marital,data/fazekas_2019_psci.py,Marital_status,included,,4,4,
 fazekas_2019_psci,cov_sex,data/fazekas_2019_psci.py,sex,included,,2,2,
-fazekas_2019_psci,cov_smoker,data/fazekas_2019_psci.py,smoking,included,,2,1,0
+fazekas_2019_psci,cov_smoker,data/fazekas_2019_psci.py,smoking,excluded,code 0 carries 82% of respondents and has no source label: the label set does not describe this column,2,1,0
 feng_2024_org_support,cov_age,data/feng_2024_teacher_work_values.py,年龄,included,,6,6,
 feng_2024_org_support,cov_education,data/feng_2024_teacher_work_values.py,学历,included,,5,5,
 feng_2024_org_support,cov_gender,data/feng_2024_teacher_work_values.py,性别,included,,2,2,
@@ -1517,7 +1517,7 @@ hou_2022_trait_anger,cov_grade,data/hou_2022_dark_triad_cyberbullying.py,grade,i
 hou_2022_trait_anger,cov_hometown,data/hou_2022_dark_triad_cyberbullying.py,hometown,included,,2,2,
 hou_2022_trait_anger,cov_only_child,data/hou_2022_dark_triad_cyberbullying.py,only_children,included,,2,2,
 hou_2022_trait_anger,cov_sex,data/hou_2022_dark_triad_cyberbullying.py,sex,included,,2,2,
-hung_2026_fomo,cov_gender,data/hung_2026_short_form_video.py,gender,included,,2,1,2
+hung_2026_fomo,cov_gender,data/hung_2026_short_form_video.py,gender,excluded,code 2 carries 75% of respondents and has no source label: the label set does not describe this column,2,1,2
 hung_2026_fomo,cov_grade,data/hung_2026_short_form_video.py,grace,included,,5,5,
 hung_2026_grit,cov_gender,data/hung_2026_grit_mindset.py,gender,included,,2,2,
 hung_2026_grit,cov_grade,data/hung_2026_grit_mindset.py,grade,included,,6,6,
@@ -1530,7 +1530,7 @@ hung_2026_growth_mindset,cov_gender,data/hung_2026_grit_mindset.py,gender,includ
 hung_2026_growth_mindset,cov_grade,data/hung_2026_grit_mindset.py,grade,included,,6,6,
 hung_2026_growth_mindset,cov_location,data/hung_2026_grit_mindset.py,location,included,,3,3,
 hung_2026_growth_mindset,cov_nation,data/hung_2026_grit_mindset.py,nation,included,,2,2,
-hung_2026_impulsivity,cov_gender,data/hung_2026_short_form_video.py,gender,included,,2,1,2
+hung_2026_impulsivity,cov_gender,data/hung_2026_short_form_video.py,gender,excluded,code 2 carries 75% of respondents and has no source label: the label set does not describe this column,2,1,2
 hung_2026_impulsivity,cov_grade,data/hung_2026_short_form_video.py,grace,included,,5,5,
 hung_2026_parental_warmth,cov_father_education,data/hung_2026_parental_warmth.py,FEL,included,,7,6,8
 hung_2026_parental_warmth,cov_gender,data/hung_2026_parental_warmth.py,gender,included,,2,2,
@@ -1538,13 +1538,13 @@ hung_2026_parental_warmth,cov_mother_education,data/hung_2026_parental_warmth.py
 hung_2026_perfectionism_order,cov_father_education,data/hung_2026_parental_warmth.py,FEL,included,,7,6,8
 hung_2026_perfectionism_order,cov_gender,data/hung_2026_parental_warmth.py,gender,included,,2,2,
 hung_2026_perfectionism_order,cov_mother_education,data/hung_2026_parental_warmth.py,MEL,included,,8,6,7|8
-hung_2026_problematic_video,cov_gender,data/hung_2026_short_form_video.py,gender,included,,2,1,2
+hung_2026_problematic_video,cov_gender,data/hung_2026_short_form_video.py,gender,excluded,code 2 carries 75% of respondents and has no source label: the label set does not describe this column,2,1,2
 hung_2026_problematic_video,cov_grade,data/hung_2026_short_form_video.py,grace,included,,5,5,
-hung_2026_restraint,cov_gender,data/hung_2026_short_form_video.py,gender,included,,2,1,2
+hung_2026_restraint,cov_gender,data/hung_2026_short_form_video.py,gender,excluded,code 2 carries 75% of respondents and has no source label: the label set does not describe this column,2,1,2
 hung_2026_restraint,cov_grade,data/hung_2026_short_form_video.py,grace,included,,5,5,
-hung_2026_self_control,cov_gender,data/hung_2026_short_form_video.py,gender,included,,2,1,2
+hung_2026_self_control,cov_gender,data/hung_2026_short_form_video.py,gender,excluded,code 2 carries 75% of respondents and has no source label: the label set does not describe this column,2,1,2
 hung_2026_self_control,cov_grade,data/hung_2026_short_form_video.py,grace,included,,5,5,
-hung_2026_sensation_seek,cov_gender,data/hung_2026_short_form_video.py,gender,included,,2,1,2
+hung_2026_sensation_seek,cov_gender,data/hung_2026_short_form_video.py,gender,excluded,code 2 carries 75% of respondents and has no source label: the label set does not describe this column,2,1,2
 hung_2026_sensation_seek,cov_grade,data/hung_2026_short_form_video.py,grace,included,,5,5,
 hung_2026_subjective_happiness,cov_father_education,data/hung_2026_parental_warmth.py,FEL,included,,7,6,8
 hung_2026_subjective_happiness,cov_gender,data/hung_2026_parental_warmth.py,gender,included,,2,2,
@@ -1573,13 +1573,13 @@ hung_2026b_uwes_s,cov_ethnicity,data/hung_2026b_learning_engagement.py,ethnicity
 hung_2026b_uwes_s,cov_gender,data/hung_2026b_learning_engagement.py,gender,included,,2,2,
 hung_2026b_uwes_s,cov_grade,data/hung_2026b_learning_engagement.py,grade,included,,6,6,
 hung_2026b_uwes_s,cov_location,data/hung_2026b_learning_engagement.py,location,included,,2,2,
-hung_2026c_academic_self_efficacy,cov_gender,data/hung_2026c_cognitive_load.py,Gender,included,,2,1,2
+hung_2026c_academic_self_efficacy,cov_gender,data/hung_2026c_cognitive_load.py,Gender,excluded,code 2 carries 78% of respondents and has no source label: the label set does not describe this column,2,1,2
 hung_2026c_academic_self_efficacy,cov_grade,data/hung_2026c_cognitive_load.py,Grade,included,,6,6,
-hung_2026c_cognitive_load,cov_gender,data/hung_2026c_cognitive_load.py,Gender,included,,2,1,2
+hung_2026c_cognitive_load,cov_gender,data/hung_2026c_cognitive_load.py,Gender,excluded,code 2 carries 78% of respondents and has no source label: the label set does not describe this column,2,1,2
 hung_2026c_cognitive_load,cov_grade,data/hung_2026c_cognitive_load.py,Grade,included,,6,6,
-hung_2026c_procrastination,cov_gender,data/hung_2026c_cognitive_load.py,Gender,included,,2,1,2
+hung_2026c_procrastination,cov_gender,data/hung_2026c_cognitive_load.py,Gender,excluded,code 2 carries 78% of respondents and has no source label: the label set does not describe this column,2,1,2
 hung_2026c_procrastination,cov_grade,data/hung_2026c_cognitive_load.py,Grade,included,,6,6,
-hung_2026c_teacher_support,cov_gender,data/hung_2026c_cognitive_load.py,Gender,included,,2,1,2
+hung_2026c_teacher_support,cov_gender,data/hung_2026c_cognitive_load.py,Gender,excluded,code 2 carries 78% of respondents and has no source label: the label set does not describe this column,2,1,2
 hung_2026c_teacher_support,cov_grade,data/hung_2026c_cognitive_load.py,Grade,included,,6,6,
 hung_2026d_academic_burnout,cov_gender,data/hung_2026d.py,Gender,included,,2,2,
 hung_2026d_academic_burnout,cov_grade,data/hung_2026d.py,Grade,included,,3,3,
@@ -2739,11 +2739,11 @@ peng_2024_grit,cov_gender,data/peng_2024_grit_efl.py,性别：,included,,2,2,
 peng_2024_language_boredom,cov_gender,data/peng_2024_grit_efl.py,性别：,included,,2,2,
 peng_2024_language_enjoyment,cov_gender,data/peng_2024_grit_efl.py,性别：,included,,2,2,
 peng_2026_mhl_attitude,cov_gender,data/peng_2026_mental_health_literacy.py,Gender,included,,2,2,
-peng_2026_mhl_attitude,cov_hukou,data/peng_2026_mental_health_literacy.py,Hukou,included,,2,1,2
+peng_2026_mhl_attitude,cov_hukou,data/peng_2026_mental_health_literacy.py,Hukou,excluded,code 2 carries 77% of respondents and has no source label: the label set does not describe this column,2,1,2
 peng_2026_mhl_knowledge,cov_gender,data/peng_2026_mental_health_literacy.py,Gender,included,,2,2,
-peng_2026_mhl_knowledge,cov_hukou,data/peng_2026_mental_health_literacy.py,Hukou,included,,2,1,2
+peng_2026_mhl_knowledge,cov_hukou,data/peng_2026_mental_health_literacy.py,Hukou,excluded,code 2 carries 77% of respondents and has no source label: the label set does not describe this column,2,1,2
 peng_2026_pyd,cov_gender,data/peng_2026_mental_health_literacy.py,Gender,included,,2,2,
-peng_2026_pyd,cov_hukou,data/peng_2026_mental_health_literacy.py,Hukou,included,,2,1,2
+peng_2026_pyd,cov_hukou,data/peng_2026_mental_health_literacy.py,Hukou,excluded,code 2 carries 77% of respondents and has no source label: the label set does not describe this column,2,1,2
 perez_hernandez_2021_cesd7,cov_sex,data/perez_hernandez_2021_encovid.py,sexo,excluded,shipped counts exceed source counts for code(s) 1: the script recoded this column,2,2,
 perez_hernandez_2021_cesd7,cov_state,data/perez_hernandez_2021_encovid.py,ent,excluded,"shipped counts exceed source counts for code(s) 5,6,7,9,11,14,15,18,23,28,30,32: the script recoded this column",33,32,99
 perez_hernandez_2021_elcsa,cov_sex,data/perez_hernandez_2021_encovid.py,sexo,excluded,"shipped counts exceed source counts for code(s) 0,1: the script recoded this column",2,2,
@@ -2756,7 +2756,7 @@ pham_2026_bsgt,cov_employment_status,data/pham_2026_digital_burnout.py,TÌNHTRAN
 pham_2026_bsgt,cov_follower_count,data/pham_2026_digital_burnout.py,FOLLOWER,included,,4,4,
 pham_2026_bsgt,cov_gender,data/pham_2026_digital_burnout.py,GIOITINH,included,,2,2,
 pham_2026_bsgt,cov_interaction,data/pham_2026_digital_burnout.py,TƯƠNGTAC,included,,3,3,
-pham_2026_bsgt,cov_major,data/pham_2026_digital_burnout.py,NGANHHOC,included,,10,9,0
+pham_2026_bsgt,cov_major,data/pham_2026_digital_burnout.py,NGANHHOC,excluded,code 0 carries 52% of respondents and has no source label: the label set does not describe this column,10,9,0
 pham_2026_bsgt,cov_posting_frequency,data/pham_2026_digital_burnout.py,TANSUATDANGBAI,included,,5,5,
 pham_2026_bsgt,cov_social_media_frequency,data/pham_2026_digital_burnout.py,TSMXH,included,,5,5,
 pham_2026_bsgt,cov_stress_single_item,data/pham_2026_digital_burnout.py,STRESS,included,,5,5,
@@ -2767,7 +2767,7 @@ pham_2026_bsth,cov_employment_status,data/pham_2026_digital_burnout.py,TÌNHTRAN
 pham_2026_bsth,cov_follower_count,data/pham_2026_digital_burnout.py,FOLLOWER,included,,4,4,
 pham_2026_bsth,cov_gender,data/pham_2026_digital_burnout.py,GIOITINH,included,,2,2,
 pham_2026_bsth,cov_interaction,data/pham_2026_digital_burnout.py,TƯƠNGTAC,included,,3,3,
-pham_2026_bsth,cov_major,data/pham_2026_digital_burnout.py,NGANHHOC,included,,10,9,0
+pham_2026_bsth,cov_major,data/pham_2026_digital_burnout.py,NGANHHOC,excluded,code 0 carries 52% of respondents and has no source label: the label set does not describe this column,10,9,0
 pham_2026_bsth,cov_posting_frequency,data/pham_2026_digital_burnout.py,TANSUATDANGBAI,included,,5,5,
 pham_2026_bsth,cov_social_media_frequency,data/pham_2026_digital_burnout.py,TSMXH,included,,5,5,
 pham_2026_bsth,cov_stress_single_item,data/pham_2026_digital_burnout.py,STRESS,included,,5,5,
@@ -2778,7 +2778,7 @@ pham_2026_bsyn,cov_employment_status,data/pham_2026_digital_burnout.py,TÌNHTRAN
 pham_2026_bsyn,cov_follower_count,data/pham_2026_digital_burnout.py,FOLLOWER,included,,4,4,
 pham_2026_bsyn,cov_gender,data/pham_2026_digital_burnout.py,GIOITINH,included,,2,2,
 pham_2026_bsyn,cov_interaction,data/pham_2026_digital_burnout.py,TƯƠNGTAC,included,,3,3,
-pham_2026_bsyn,cov_major,data/pham_2026_digital_burnout.py,NGANHHOC,included,,10,9,0
+pham_2026_bsyn,cov_major,data/pham_2026_digital_burnout.py,NGANHHOC,excluded,code 0 carries 52% of respondents and has no source label: the label set does not describe this column,10,9,0
 pham_2026_bsyn,cov_posting_frequency,data/pham_2026_digital_burnout.py,TANSUATDANGBAI,included,,5,5,
 pham_2026_bsyn,cov_social_media_frequency,data/pham_2026_digital_burnout.py,TSMXH,included,,5,5,
 pham_2026_bsyn,cov_stress_single_item,data/pham_2026_digital_burnout.py,STRESS,included,,5,5,
@@ -2789,7 +2789,7 @@ pham_2026_gp,cov_employment_status,data/pham_2026_digital_burnout.py,TÌNHTRANGC
 pham_2026_gp,cov_follower_count,data/pham_2026_digital_burnout.py,FOLLOWER,included,,4,4,
 pham_2026_gp,cov_gender,data/pham_2026_digital_burnout.py,GIOITINH,included,,2,2,
 pham_2026_gp,cov_interaction,data/pham_2026_digital_burnout.py,TƯƠNGTAC,included,,3,3,
-pham_2026_gp,cov_major,data/pham_2026_digital_burnout.py,NGANHHOC,included,,10,9,0
+pham_2026_gp,cov_major,data/pham_2026_digital_burnout.py,NGANHHOC,excluded,code 0 carries 52% of respondents and has no source label: the label set does not describe this column,10,9,0
 pham_2026_gp,cov_posting_frequency,data/pham_2026_digital_burnout.py,TANSUATDANGBAI,included,,5,5,
 pham_2026_gp,cov_social_media_frequency,data/pham_2026_digital_burnout.py,TSMXH,included,,5,5,
 pham_2026_gp,cov_stress_single_item,data/pham_2026_digital_burnout.py,STRESS,included,,5,5,
@@ -2800,7 +2800,7 @@ pham_2026_ktscx,cov_employment_status,data/pham_2026_digital_burnout.py,TÌNHTRA
 pham_2026_ktscx,cov_follower_count,data/pham_2026_digital_burnout.py,FOLLOWER,included,,4,4,
 pham_2026_ktscx,cov_gender,data/pham_2026_digital_burnout.py,GIOITINH,included,,2,2,
 pham_2026_ktscx,cov_interaction,data/pham_2026_digital_burnout.py,TƯƠNGTAC,included,,3,3,
-pham_2026_ktscx,cov_major,data/pham_2026_digital_burnout.py,NGANHHOC,included,,10,9,0
+pham_2026_ktscx,cov_major,data/pham_2026_digital_burnout.py,NGANHHOC,excluded,code 0 carries 52% of respondents and has no source label: the label set does not describe this column,10,9,0
 pham_2026_ktscx,cov_posting_frequency,data/pham_2026_digital_burnout.py,TANSUATDANGBAI,included,,5,5,
 pham_2026_ktscx,cov_social_media_frequency,data/pham_2026_digital_burnout.py,TSMXH,included,,5,5,
 pham_2026_ktscx,cov_stress_single_item,data/pham_2026_digital_burnout.py,STRESS,included,,5,5,
@@ -2811,7 +2811,7 @@ pham_2026_ktslh,cov_employment_status,data/pham_2026_digital_burnout.py,TÌNHTRA
 pham_2026_ktslh,cov_follower_count,data/pham_2026_digital_burnout.py,FOLLOWER,included,,4,4,
 pham_2026_ktslh,cov_gender,data/pham_2026_digital_burnout.py,GIOITINH,included,,2,2,
 pham_2026_ktslh,cov_interaction,data/pham_2026_digital_burnout.py,TƯƠNGTAC,included,,3,3,
-pham_2026_ktslh,cov_major,data/pham_2026_digital_burnout.py,NGANHHOC,included,,10,9,0
+pham_2026_ktslh,cov_major,data/pham_2026_digital_burnout.py,NGANHHOC,excluded,code 0 carries 52% of respondents and has no source label: the label set does not describe this column,10,9,0
 pham_2026_ktslh,cov_posting_frequency,data/pham_2026_digital_burnout.py,TANSUATDANGBAI,included,,5,5,
 pham_2026_ktslh,cov_social_media_frequency,data/pham_2026_digital_burnout.py,TSMXH,included,,5,5,
 pham_2026_ktslh,cov_stress_single_item,data/pham_2026_digital_burnout.py,STRESS,included,,5,5,
@@ -2822,7 +2822,7 @@ pham_2026_ktsth,cov_employment_status,data/pham_2026_digital_burnout.py,TÌNHTRA
 pham_2026_ktsth,cov_follower_count,data/pham_2026_digital_burnout.py,FOLLOWER,included,,4,4,
 pham_2026_ktsth,cov_gender,data/pham_2026_digital_burnout.py,GIOITINH,included,,2,2,
 pham_2026_ktsth,cov_interaction,data/pham_2026_digital_burnout.py,TƯƠNGTAC,included,,3,3,
-pham_2026_ktsth,cov_major,data/pham_2026_digital_burnout.py,NGANHHOC,included,,10,9,0
+pham_2026_ktsth,cov_major,data/pham_2026_digital_burnout.py,NGANHHOC,excluded,code 0 carries 52% of respondents and has no source label: the label set does not describe this column,10,9,0
 pham_2026_ktsth,cov_posting_frequency,data/pham_2026_digital_burnout.py,TANSUATDANGBAI,included,,5,5,
 pham_2026_ktsth,cov_social_media_frequency,data/pham_2026_digital_burnout.py,TSMXH,included,,5,5,
 pham_2026_ktsth,cov_stress_single_item,data/pham_2026_digital_burnout.py,STRESS,included,,5,5,
@@ -2833,7 +2833,7 @@ pham_2026_thbt,cov_employment_status,data/pham_2026_digital_burnout.py,TÌNHTRAN
 pham_2026_thbt,cov_follower_count,data/pham_2026_digital_burnout.py,FOLLOWER,included,,4,4,
 pham_2026_thbt,cov_gender,data/pham_2026_digital_burnout.py,GIOITINH,included,,2,2,
 pham_2026_thbt,cov_interaction,data/pham_2026_digital_burnout.py,TƯƠNGTAC,included,,3,3,
-pham_2026_thbt,cov_major,data/pham_2026_digital_burnout.py,NGANHHOC,included,,10,9,0
+pham_2026_thbt,cov_major,data/pham_2026_digital_burnout.py,NGANHHOC,excluded,code 0 carries 52% of respondents and has no source label: the label set does not describe this column,10,9,0
 pham_2026_thbt,cov_posting_frequency,data/pham_2026_digital_burnout.py,TANSUATDANGBAI,included,,5,5,
 pham_2026_thbt,cov_social_media_frequency,data/pham_2026_digital_burnout.py,TSMXH,included,,5,5,
 pham_2026_thbt,cov_stress_single_item,data/pham_2026_digital_burnout.py,STRESS,included,,5,5,
