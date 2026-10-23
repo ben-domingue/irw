@@ -205,6 +205,7 @@ becker_2025_tax_packages,conj,https://dataverse.harvard.edu/api/access/datafile/
 becker_2026_housing_text,conj,https://dataverse.harvard.edu/api/access/datafile/14243914,2026-10-09
 begum_2026_hama,core,https://data.mendeley.com/public-files/datasets/sg2whyws4h/files/449e23b6-488e-415a-900d-d6b6dcc2caf6/file_downloaded,2026-10-11
 begum_2026_isi,core,https://data.mendeley.com/public-files/datasets/sg2whyws4h/files/449e23b6-488e-415a-900d-d6b6dcc2caf6/file_downloaded,2026-10-11
+behrman_2026_family_scenarios,conj,none,2026-10-23
 beisermcgrath_2019_paris_cn,conj,https://dataverse.harvard.edu/api/access/datafile/3345051,2026-10-09
 beisermcgrath_2019_paris_us,conj,https://dataverse.harvard.edu/api/access/datafile/3345051,2026-10-09
 beisermcgrath_2019_revenue_de,conj,https://zenodo.org/api/records/18144632/files/_readme.txt/content,2026-10-11
@@ -967,6 +968,8 @@ gengler_2021_survey_participation,conj,https://dataverse.harvard.edu/api/access/
 gerbig_2023_ctq,core,https://zenodo.org/api/records/7749115/files/Codebook_Dataset_Loneliness_ACE_Ethiopia.pdf/content,2026-10-02
 gerbig_2023_ucla,core,https://zenodo.org/api/records/7749115/files/Codebook_Dataset_Loneliness_ACE_Ethiopia.pdf/content,2026-10-02
 gerbig_2023_who5,core,https://zenodo.org/api/records/7749115/files/Codebook_Dataset_Loneliness_ACE_Ethiopia.pdf/content,2026-10-02
+gereke_2023_trust,conj,none,2026-10-23
+gereke_2023_trustworthiness,conj,none,2026-10-23
 gerou_2023_dass21,core,none,2026-10-19
 gerou_2023_hexaco_honesty_humility,core,none,2026-10-19
 gerou_2023_quiet_ego,core,none,2026-10-19
@@ -2930,6 +2933,7 @@ setsoafia_2026_ctd,core,none,2026-10-15
 setsoafia_2026_digital_literacy,core,none,2026-10-15
 setsoafia_2026_genai_literacy,core,none,2026-10-15
 setsoafia_2026_sdr,core,none,2026-10-15
+sevi_2025_promise_keeping,conj,none,2026-10-23
 sevi_2026_election_outcomes,conj,none,2026-10-08
 shaffer_2020_local_refugees,conj,none,2026-10-08
 shafranek_2021_roommate_choice,conj,none,2026-10-07
