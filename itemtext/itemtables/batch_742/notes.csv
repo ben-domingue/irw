@@ -1,0 +1,6 @@
+"table","note"
+"byun_2026_mascot_ratings","option_text blank by design: the deposit records no anchors for the 1-7 scale."
+"comeau_2015_energy_literacy","option_text blank by design: resp is a derived 0/1 correctness score."
+"comeau_2015_energy_literacy_sureness","Four items share one administered wording; the item code carries which knowledge question each followed."
+"comeau_2015_energy_attitudes","instructions blank: the two screens' stems are in the questionnaire PDF, not in the .sav, and were not invented."
+"comeau_2015_* (all 14)","Administration may have been bilingual (English and French): bilingual recruitment, language a panel quota, 629/3000 French-first. Only English wording is in the deposit; `language` is left unset pending Ben's ruling."
