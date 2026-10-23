@@ -161,8 +161,24 @@ def days_since(when: dt.datetime, now: dt.datetime) -> float:
 
 
 def parse_iso(s: str) -> dt.datetime:
-    """Parse an ISO-8601 timestamp, tolerating the trailing Z."""
-    return dt.datetime.fromisoformat(s.replace("Z", "+00:00"))
+    """Parse an ISO-8601 timestamp, tolerating the trailing Z, as UTC.
+
+    Normalised here rather than at each format site, because every timestamp the
+    report prints is labelled "UTC" by a literal in its f-string while the
+    sources disagree: the GitHub API answers in Z, but `git log %aI` carries the
+    committer's own offset. A commit made at 12:49 -07:00 therefore printed its
+    local wall clock under a UTC label and read as seven hours earlier than it
+    was -- and `metadata/` "last changed" appeared to move BACKWARDS between two
+    runs on 2026-10-23, 17:55 (a bot commit, already UTC) then 12:49 (a commit
+    authored locally), although main had gained a metadata commit in between.
+
+    The deltas were never wrong: they are computed from the instant, which an
+    aware datetime carries whatever its offset. This is the printed string only.
+    """
+    d = dt.datetime.fromisoformat(s.replace("Z", "+00:00"))
+    if d.tzinfo is None:        # no offset in the source, which means UTC here
+        return d.replace(tzinfo=dt.timezone.utc)
+    return d.astimezone(dt.timezone.utc)
 
 
 # ---------------------------------------------------------------------------
