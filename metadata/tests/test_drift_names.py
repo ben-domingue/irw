@@ -19,6 +19,34 @@ SHARDS = ["item_response_warehouse", "item_response_warehouse_2",
           "item_response_warehouse_3"]
 
 
+class Timestamps(unittest.TestCase):
+    """Every timestamp the report prints is labelled UTC by a literal, so
+    parse_iso has to deliver UTC whatever offset the source used (2026-10-23)."""
+
+    def test_a_local_offset_is_converted_not_relabelled(self):
+        # the real case: #3202's commit, git log %aI, PDT
+        self.assertEqual(f"{d.parse_iso('2026-10-23T12:49:53-07:00'):%Y-%m-%d %H:%M}",
+                         "2026-10-23 19:49")
+
+    def test_z_and_explicit_utc_are_unchanged(self):
+        for s in ("2026-10-23T17:55:02Z", "2026-10-23T17:55:02+00:00"):
+            self.assertEqual(f"{d.parse_iso(s):%H:%M}", "17:55", s)
+
+    def test_an_offsetless_stamp_is_read_as_utc_not_local(self):
+        # naive input must not pick up the runner's zone, which is how a
+        # relabel would creep back in
+        self.assertEqual(f"{d.parse_iso('2026-10-23T12:49:53'):%H:%M}", "12:49")
+
+    def test_the_delta_is_unchanged_by_the_conversion(self):
+        # the bug was display-only: days_since reads the instant, so the same
+        # moment in two offsets must give the same answer
+        now = d.parse_iso("2026-10-23T19:49:53Z")
+        a = d.days_since(d.parse_iso("2026-10-22T00:16:00Z"), now)
+        b = d.days_since(d.parse_iso("2026-10-21T17:16:00-07:00"), now)
+        self.assertAlmostEqual(a, b, places=9)
+        self.assertAlmostEqual(a, 1.8, places=1)   # what the report prints
+
+
 class Names(unittest.TestCase):
     def test_duplicate_listed_oldest_first_newest_resolves(self):
         index = {"zhou_2025_peer": ["item_response_warehouse_3", "item_response_warehouse"],
