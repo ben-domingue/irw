@@ -946,6 +946,36 @@ amorim_2025_climej_suporteorganizacional,10.1590/1982-7849rac2025240272,NA,"Amor
 }",NA
 an_2020_efl_self_regulated,10.1371/journal.pone.0240094,NA,"An, Z., et al. (2020). Profiling Chinese EFL students' technology-based self-regulated English learning strategies. PLOS ONE.",https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0240094,CC BY 4.0,CC BY 4.0,NA,"Technology-based self-regulated English learning strategies scale, Chinese EFL students, 49 items, 1-7, N=525"," @article{An_2020, title={Profiling Chinese EFL students’ technology-based self-regulated English learning strategies}, volume={15}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0240094}, DOI={10.1371/journal.pone.0240094}, number={10}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={An, Zhujun and Gan, Zhengdong and Wang, Chuang}, editor={Xie, Haoran}, year={2020}, month=Oct, pages={e0240094} }
 ",NA
+andreu_sanchez_2023_information_sources,NA,10.5281/zenodo.8057093,"Andreu-Sanchez, C., & Martin-Pascual, M. A. (2023). Data - Positive and Negative Affect Schedule in early COVID-19 pandemic [Dataset]. Zenodo. https://doi.org/10.5281/zenodo.8057093",https://zenodo.org/records/8057093,CC BY 4.0,CC BY 4.0,NA,"Ten COVID-19 information sources (television, family and friends, radio, WhatsApp messages of unknown authorship, newspapers, co-workers, digital newspapers, social-media comments from strangers, neighbours, government press conferences) rated 1-5 by 333 adults in Spain, April-May 2020.","@misc{https://doi.org/10.5281/zenodo.8057093,
+  doi = {10.5281/ZENODO.8057093},
+  url = {https://zenodo.org/record/8057093},
+  author = {Andreu-Sánchez, Celia and Martín-Pascual, Miguel Ángel},
+  title = {Data - Positive and Negative Affect Schedule in early COVID-19 pandemic},
+  publisher = {Zenodo},
+  year = {2023},
+  copyright = {Creative Commons Attribution 4.0 International}
+}
+",NA
+andreu_sanchez_2023_lifestyle,NA,10.5281/zenodo.8057093,"Andreu-Sanchez, C., & Martin-Pascual, M. A. (2023). Data - Positive and Negative Affect Schedule in early COVID-19 pandemic [Dataset]. Zenodo. https://doi.org/10.5281/zenodo.8057093",https://zenodo.org/records/8057093,CC BY 4.0,CC BY 4.0,NA,"Six yes/no statements on lockdown lifestyle change (regular sport, more time sitting, adapted routines, eating more, motivation to exercise, watching more televised sport) answered by 333 adults in Spain, April-May 2020.","@misc{https://doi.org/10.5281/zenodo.8057093,
+  doi = {10.5281/ZENODO.8057093},
+  url = {https://zenodo.org/record/8057093},
+  author = {Andreu-Sánchez, Celia and Martín-Pascual, Miguel Ángel},
+  title = {Data - Positive and Negative Affect Schedule in early COVID-19 pandemic},
+  publisher = {Zenodo},
+  year = {2023},
+  copyright = {Creative Commons Attribution 4.0 International}
+}
+",NA
+andreu_sanchez_2023_panas,NA,10.5281/zenodo.8057093,"Andreu-Sanchez, C., & Martin-Pascual, M. A. (2023). Data - Positive and Negative Affect Schedule in early COVID-19 pandemic [Dataset]. Zenodo. https://doi.org/10.5281/zenodo.8057093",https://zenodo.org/records/8057093,CC BY 4.0,CC BY 4.0,NA,"Positive and Negative Affect Schedule (20 affect adjectives, 1-5) answered by 333 adults in Spain during the first weeks of the COVID-19 pandemic, April-May 2020. Questionnaire offered in Spanish and English; 308 of 333 answered in Spanish.","@misc{https://doi.org/10.5281/zenodo.8057093,
+  doi = {10.5281/ZENODO.8057093},
+  url = {https://zenodo.org/record/8057093},
+  author = {Andreu-Sánchez, Celia and Martín-Pascual, Miguel Ángel},
+  title = {Data - Positive and Negative Affect Schedule in early COVID-19 pandemic},
+  publisher = {Zenodo},
+  year = {2023},
+  copyright = {Creative Commons Attribution 4.0 International}
+}
+",NA
 andrich_mudfold,10.1177/014662168801200105,NA,"Andrich, D. (1988). The application of an unfolding model of the PIRT type to the measurement of attitude. Applied psychological measurement, 12(1), 33-51.",https://cran.r-project.org/web/packages/mudfold/index.html,"GPL-2.0, GPL-3.0",GPL-3.0,NA,Attitudes about capital punishment," @article{Andrich_1988, title={The Application of an Unfolding Model of the PIRT Type to the Measurement of Attitude}, volume={12}, ISSN={1552-3497}, url={http://dx.doi.org/10.1177/014662168801200105}, DOI={10.1177/014662168801200105}, number={1}, journal={Applied Psychological Measurement}, publisher={SAGE Publications}, author={Andrich, David}, year={1988}, month=Mar, pages={33–51} }
 ",NA
 anh_2026_ai_adoption,10.1371/journal.pone.0340002,NA,"Anh NQ (2026) An integrated model of financial socialization, technology, and financial capability in predicting financial well-being. PLoS One.",https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0340002.s001,CC BY 4.0,CC BY 4.0,NA,8-item Artificial-Intelligence-enabled finance adoption scale (1-5 Likert) from a survey on financial well-being predictors," @article{Anh_2026, title={An integrated model of financial socialization, technology, and financial capability in predicting financial well-being}, volume={21}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0340002}, DOI={10.1371/journal.pone.0340002}, number={3}, journal={PLOS One}, publisher={Public Library of Science (PLoS)}, author={Anh, Nguyen Quoc}, editor={Herrador, Manuel}, year={2026}, month=Mar, pages={e0340002} }
@@ -3124,7 +3154,15 @@ blotner_2023_sd4_germany,10.1027/1015-5759/a000715,10.17605/OSF.IO/P8V3K,"Blötn
 ",NA
 blotner_2023_sd4_usa,10.1027/1015-5759/a000715,10.17605/OSF.IO/P8V3K,"Blötner, C., Webster, G. D., & Wongsomboon, V. (2023). Measurement invariance of the Short Dark Tetrad across cultures and genders. European Journal of Psychological Assessment, 39(5), 331-336.",https://osf.io/p8v3k/,CC BY 4.0,CC BY 4.0,NA,"Short Dark Tetrad (SD4), English original, 28 items (1-5): Machiavellianism, narcissism, psychopathy and sadism, 451 U.S. respondents (the measurement-invariance paper's U.S. sample)"," @article{Bl_tner_2023, title={Measurement Invariance of the Short Dark Tetrad Across Cultures and 					Genders}, volume={39}, ISSN={2151-2426}, url={http://dx.doi.org/10.1027/1015-5759/a000715}, DOI={10.1027/1015-5759/a000715}, number={5}, journal={European Journal of Psychological Assessment}, publisher={Hogrefe Publishing Group}, author={Blötner, Christian and Webster, Gregory D. and Wongsomboon, Val}, year={2023}, month=Sept, pages={331–336} }
 ",NA
+blotner_2026_bes,10.1007/s12144-026-09519-2,10.17605/OSF.IO/4N8SK,"Blotner, C. (2026). Valuing others over oneself: development and validation of a people pleasing scale in two German samples. Current Psychology, 45, Article 952.",https://osf.io/4n8sk/,CC BY 4.0,CC BY 4.0,NA,"Basic Empathy Scale, German, affective (11 items) and cognitive (9 items) subscales, 1-5; 1,323 German adults (Study 2 of the people-pleasing paper). itemcov_subscale separates the two."," @article{Bl_tner_2026, title={Valuing others over oneself: development and validation of a people pleasing scale in two German samples}, volume={45}, ISSN={1936-4733}, url={http://dx.doi.org/10.1007/s12144-026-09519-2}, DOI={10.1007/s12144-026-09519-2}, number={9}, journal={Current Psychology}, publisher={Springer Science and Business Media LLC}, author={Blötner, Christian}, year={2026}, month=May }
+",NA
+blotner_2026_hexaco60,10.1007/s12144-026-09519-2,10.17605/OSF.IO/4N8SK,"Blotner, C. (2026). Valuing others over oneself: development and validation of a people pleasing scale in two German samples. Current Psychology, 45, Article 952.",https://osf.io/4n8sk/,CC BY 4.0,CC BY 4.0,NA,"German HEXACO-60, 10 items per domain (1-5), 3,131 German adults. A planned-missing cross of the paper's two samples: Study 1 (n = 1,808) was administered Honesty-Humility, Agreeableness and Emotionality only, Study 2 (n = 1,323) all six domains. itemcov_domain and itemcov_facet carry the authors' own facet keying. NOTE the deposit's prefixes are not mnemonic in English: E* is eXtraversion and N* is Emotionality."," @article{Bl_tner_2026, title={Valuing others over oneself: development and validation of a people pleasing scale in two German samples}, volume={45}, ISSN={1936-4733}, url={http://dx.doi.org/10.1007/s12144-026-09519-2}, DOI={10.1007/s12144-026-09519-2}, number={9}, journal={Current Psychology}, publisher={Springer Science and Business Media LLC}, author={Blötner, Christian}, year={2026}, month=May }
+",NA
+blotner_2026_lsrp,10.1007/s12144-026-09519-2,10.17605/OSF.IO/4N8SK,"Blotner, C. (2026). Valuing others over oneself: development and validation of a people pleasing scale in two German samples. Current Psychology, 45, Article 952.",https://osf.io/4n8sk/,CC BY 4.0,CC BY 4.0,NA,"Levenson Self-Report Psychopathy Scale, German, primary (16 items) and secondary (10 items) subscales, 1-4; 1,323 German adults (Study 2 of the people-pleasing paper). itemcov_subscale separates primary from secondary."," @article{Bl_tner_2026, title={Valuing others over oneself: development and validation of a people pleasing scale in two German samples}, volume={45}, ISSN={1936-4733}, url={http://dx.doi.org/10.1007/s12144-026-09519-2}, DOI={10.1007/s12144-026-09519-2}, number={9}, journal={Current Psychology}, publisher={Springer Science and Business Media LLC}, author={Blötner, Christian}, year={2026}, month=May }
+",NA
 blotner_2026_people_pleasing,10.1007/s12144-026-09519-2,10.17605/OSF.IO/4N8SK,"Blotner, C. (2026). Valuing others over oneself: development and validation of a people pleasing scale in two German samples. Current Psychology, 45, Article 952.",https://osf.io/4n8sk/,CC BY 4.0,CC BY 4.0,NA,"People Pleasing Scale 15-item development pool (1-5, 1 = does not apply at all to 5 = completely applies), 1,894 German adults pooled from the paper's two samples: Study 1 (n = 571; planned-missingness design, only one of three random conditions saw the people-pleasing items) and Study 2 (n = 1,323). cov_study separates them. itemcov_subscale carries the final 10-item scale's three dimensions -- Responsibility (PP12-PP14), Neglect of Own Needs (PP3, PP5, PP8, PP15), Others' Expectations (PP2, PP7, PP11) -- and marks the five pool items not retained."," @article{Bl_tner_2026, title={Valuing others over oneself: development and validation of a people pleasing scale in two German samples}, volume={45}, ISSN={1936-4733}, url={http://dx.doi.org/10.1007/s12144-026-09519-2}, DOI={10.1007/s12144-026-09519-2}, number={9}, journal={Current Psychology}, publisher={Springer Science and Business Media LLC}, author={Blötner, Christian}, year={2026}, month=May }
+",NA
+blotner_2026_svo,10.1007/s12144-026-09519-2,10.17605/OSF.IO/4N8SK,"Blotner, C. (2026). Valuing others over oneself: development and validation of a people pleasing scale in two German samples. Current Psychology, 45, Article 952.",https://osf.io/4n8sk/,CC BY 4.0,CC BY 4.0,NA,"Social Value Orientation Slider Measure, six items, each a choice among nine ordered own/other payoff allocations (resp = the chosen option, 1-9); 1,323 German adults (Study 2 of the people-pleasing paper). The deposit's SVO1-SVO6 columns hold the chosen option; the paper's SVO angle is a composite and is not shipped."," @article{Bl_tner_2026, title={Valuing others over oneself: development and validation of a people pleasing scale in two German samples}, volume={45}, ISSN={1936-4733}, url={http://dx.doi.org/10.1007/s12144-026-09519-2}, DOI={10.1007/s12144-026-09519-2}, number={9}, journal={Current Psychology}, publisher={Springer Science and Business Media LLC}, author={Blötner, Christian}, year={2026}, month=May }
 ",NA
 blum_2018_imak_bin,10.3389/fpsyg.2018.01286,NA,Blum D and Holling H (2018) Automatic Generation of Figural Analogies With the IMak Package. Front. Psychol. 9:1286. doi: 10.3389/fpsyg.2018.01286,https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2018.01286/full,CC BY 4.0,CC BY 4.0,NA,Binary Correctness Scoring of Analogical Reasoning Items," @article{Blum_2018, title={Automatic Generation of Figural Analogies With the IMak Package}, volume={9}, ISSN={1664-1078}, url={http://dx.doi.org/10.3389/fpsyg.2018.01286}, DOI={10.3389/fpsyg.2018.01286}, journal={Frontiers in Psychology}, publisher={Frontiers Media SA}, author={Blum, Diego and Holling, Heinz}, year={2018}, month=Aug }
 ",NA
@@ -3157,6 +3195,32 @@ boni_2018_mbi_ss,10.1371/journal.pone.0191746,NA,"Boni RADS, Paiva CE, de Olivei
 borges_brazil_residency_2024_cbt,10.3352/jeehp.2024.21.32,NA,"Borges, M. C., Santos, L. L., Manso, P. H., Moisés, E. C. D., Coltro, P. S., Fonseca, P. C., ... & Ricz, H. M. A. (2024). Increased accessibility of computer-based testing for residency application to a hospital in Brazil with item characteristics comparable to paper-based testing: a psychometric study. Journal of Educational Evaluation for Health Professions, 21, 32.",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/YJP1ZM,CC0 1.0,CC0 1.0,NA,Computer-based testing (CBT) for medical residency applications in Brazil," @article{Borges_2024, title={Increased accessibility of computer-based testing for residency application to a hospital in Brazil with item characteristics comparable to paper-based testing: a psychometric study}, volume={21}, ISSN={1975-5937}, url={http://dx.doi.org/10.3352/jeehp.2024.21.32}, DOI={10.3352/jeehp.2024.21.32}, journal={Journal of Educational Evaluation for Health Professions}, publisher={Korea Health Personnel Licensing Examination Institute}, author={Borges, Marcos Carvalho and Santos, Luciane Loures and Manso, Paulo Henrique and Moisés, Elaine Christine Dantas and Coltro, Pedro Soler and Fonseca, Priscilla Costa and Gentil, Paulo Roberto Alves and Santana, Rodrigo de Carvalho and Rodrigues, Lucas Faria and Maciel, Benedito Carlos and Ricz, Hilton Marcos Alves}, year={2024}, month=nov, pages={32} }
 ",NA
 borges_brazil_residency_2024_pbt,10.3352/jeehp.2024.21.32,NA,"Borges, M. C., Santos, L. L., Manso, P. H., Moisés, E. C. D., Coltro, P. S., Fonseca, P. C., ... & Ricz, H. M. A. (2024). Increased accessibility of computer-based testing for residency application to a hospital in Brazil with item characteristics comparable to paper-based testing: a psychometric study. Journal of Educational Evaluation for Health Professions, 21, 32.",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/YJP1ZM,CC0 1.0,CC0 1.0,NA,Paper-based testing (PBT) for medical residency applications in Brazil," @article{Borges_2024, title={Increased accessibility of computer-based testing for residency application to a hospital in Brazil with item characteristics comparable to paper-based testing: a psychometric study}, volume={21}, ISSN={1975-5937}, url={http://dx.doi.org/10.3352/jeehp.2024.21.32}, DOI={10.3352/jeehp.2024.21.32}, journal={Journal of Educational Evaluation for Health Professions}, publisher={Korea Health Personnel Licensing Examination Institute}, author={Borges, Marcos Carvalho and Santos, Luciane Loures and Manso, Paulo Henrique and Moisés, Elaine Christine Dantas and Coltro, Pedro Soler and Fonseca, Priscilla Costa and Gentil, Paulo Roberto Alves and Santana, Rodrigo de Carvalho and Rodrigues, Lucas Faria and Maciel, Benedito Carlos and Ricz, Hilton Marcos Alves}, year={2024}, month=nov, pages={32} }
+",NA
+bottesi_2019_bai,10.1371/journal.pone.0211929,NA,"Bottesi G, Noventa S, Freeston MH, Ghisi M (2019). Seeking certainty about Intolerance of Uncertainty: Addressing old and new issues through the Intolerance of Uncertainty Scale-Revised. PLOS ONE 14(2): e0211929.",https://plos.figshare.com/articles/dataset/Seeking_certainty_about_Intolerance_of_Uncertainty_Addressing_old_and_new_issues_through_the_Intolerance_of_Uncertainty_Scale-Revised/7703045,CC BY 4.0,CC BY 4.0,NA,"The 21-item Italian Beck Anxiety Inventory, 0-3, from 259 community adults. 5,400 responses."," @article{Bottesi_2019, title={Seeking certainty about Intolerance of Uncertainty: Addressing old and new issues through the Intolerance of Uncertainty Scale-Revised}, volume={14}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0211929}, DOI={10.1371/journal.pone.0211929}, number={2}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Bottesi, Gioia and Noventa, Stefano and Freeston, Mark H. and Ghisi, Marta}, editor={Steinborn, Michael B.}, year={2019}, month=Feb, pages={e0211929} }
+",NA
+bottesi_2019_bdi2,10.1371/journal.pone.0211929,NA,"Bottesi G, Noventa S, Freeston MH, Ghisi M (2019). Seeking certainty about Intolerance of Uncertainty: Addressing old and new issues through the Intolerance of Uncertainty Scale-Revised. PLOS ONE 14(2): e0211929.",https://plos.figshare.com/articles/dataset/Seeking_certainty_about_Intolerance_of_Uncertainty_Addressing_old_and_new_issues_through_the_Intolerance_of_Uncertainty_Scale-Revised/7703045,CC BY 4.0,CC BY 4.0,NA,"The 21-item Italian Beck Depression Inventory-II, 0-3, from 259 community adults. 5,434 responses."," @article{Bottesi_2019, title={Seeking certainty about Intolerance of Uncertainty: Addressing old and new issues through the Intolerance of Uncertainty Scale-Revised}, volume={14}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0211929}, DOI={10.1371/journal.pone.0211929}, number={2}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Bottesi, Gioia and Noventa, Stefano and Freeston, Mark H. and Ghisi, Marta}, editor={Steinborn, Michael B.}, year={2019}, month=Feb, pages={e0211929} }
+",NA
+bottesi_2019_caq35,10.1371/journal.pone.0211929,NA,"Bottesi G, Noventa S, Freeston MH, Ghisi M (2019). Seeking certainty about Intolerance of Uncertainty: Addressing old and new issues through the Intolerance of Uncertainty Scale-Revised. PLOS ONE 14(2): e0211929.",https://plos.figshare.com/articles/dataset/Seeking_certainty_about_Intolerance_of_Uncertainty_Addressing_old_and_new_issues_through_the_Intolerance_of_Uncertainty_Scale-Revised/7703045,CC BY 4.0,CC BY 4.0,NA,"A 35-item 1-5 agreement battery labelled CAQ_01..CAQ_35 in the deposit, answered by the same 429 community adults. Not named in the paper and not identified with a published scale; block mean correlates .42 with the IUS-R. 15,002 responses."," @article{Bottesi_2019, title={Seeking certainty about Intolerance of Uncertainty: Addressing old and new issues through the Intolerance of Uncertainty Scale-Revised}, volume={14}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0211929}, DOI={10.1371/journal.pone.0211929}, number={2}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Bottesi, Gioia and Noventa, Stefano and Freeston, Mark H. and Ghisi, Marta}, editor={Steinborn, Michael B.}, year={2019}, month=Feb, pages={e0211929} }
+",NA
+bottesi_2019_dass21,10.1371/journal.pone.0211929,NA,"Bottesi G, Noventa S, Freeston MH, Ghisi M (2019). Seeking certainty about Intolerance of Uncertainty: Addressing old and new issues through the Intolerance of Uncertainty Scale-Revised. PLOS ONE 14(2): e0211929.",https://plos.figshare.com/articles/dataset/Seeking_certainty_about_Intolerance_of_Uncertainty_Addressing_old_and_new_issues_through_the_Intolerance_of_Uncertainty_Scale-Revised/7703045,CC BY 4.0,CC BY 4.0,NA,"The 21-item Italian Depression Anxiety Stress Scales-21, 0-3, from 170 community adults. 3,563 responses."," @article{Bottesi_2019, title={Seeking certainty about Intolerance of Uncertainty: Addressing old and new issues through the Intolerance of Uncertainty Scale-Revised}, volume={14}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0211929}, DOI={10.1371/journal.pone.0211929}, number={2}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Bottesi, Gioia and Noventa, Stefano and Freeston, Mark H. and Ghisi, Marta}, editor={Steinborn, Michael B.}, year={2019}, month=Feb, pages={e0211929} }
+",NA
+bottesi_2019_ius_r,10.1371/journal.pone.0211929,NA,"Bottesi G, Noventa S, Freeston MH, Ghisi M (2019). Seeking certainty about Intolerance of Uncertainty: Addressing old and new issues through the Intolerance of Uncertainty Scale-Revised. PLOS ONE 14(2): e0211929.",https://plos.figshare.com/articles/dataset/Seeking_certainty_about_Intolerance_of_Uncertainty_Addressing_old_and_new_issues_through_the_Intolerance_of_Uncertainty_Scale-Revised/7703045,CC BY 4.0,CC BY 4.0,NA,"The 12-item Italian Intolerance of Uncertainty Scale-Revised, 1-5, pooled over the two samples of its validation study: 758 community adults and 163 psychology undergraduates retested one month later (cov_sample distinguishes them, wave carries the retest). 924 respondents, 12,987 responses."," @article{Bottesi_2019, title={Seeking certainty about Intolerance of Uncertainty: Addressing old and new issues through the Intolerance of Uncertainty Scale-Revised}, volume={14}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0211929}, DOI={10.1371/journal.pone.0211929}, number={2}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Bottesi, Gioia and Noventa, Stefano and Freeston, Mark H. and Ghisi, Marta}, editor={Steinborn, Michael B.}, year={2019}, month=Feb, pages={e0211929} }
+",NA
+bottesi_2019_njre_checklist,10.1371/journal.pone.0211929,NA,"Bottesi G, Noventa S, Freeston MH, Ghisi M (2019). Seeking certainty about Intolerance of Uncertainty: Addressing old and new issues through the Intolerance of Uncertainty Scale-Revised. PLOS ONE 14(2): e0211929.",https://plos.figshare.com/articles/dataset/Seeking_certainty_about_Intolerance_of_Uncertainty_Addressing_old_and_new_issues_through_the_Intolerance_of_Uncertainty_Scale-Revised/7703045,CC BY 4.0,CC BY 4.0,NA,"The Not Just Right Experiences Questionnaire-Revised checklist: 10 experiences marked 0/1 by 213 community adults. Shipped separately from the severity ratings, which are on a different scale. 2,130 responses."," @article{Bottesi_2019, title={Seeking certainty about Intolerance of Uncertainty: Addressing old and new issues through the Intolerance of Uncertainty Scale-Revised}, volume={14}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0211929}, DOI={10.1371/journal.pone.0211929}, number={2}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Bottesi, Gioia and Noventa, Stefano and Freeston, Mark H. and Ghisi, Marta}, editor={Steinborn, Michael B.}, year={2019}, month=Feb, pages={e0211929} }
+",NA
+bottesi_2019_njre_severity,10.1371/journal.pone.0211929,NA,"Bottesi G, Noventa S, Freeston MH, Ghisi M (2019). Seeking certainty about Intolerance of Uncertainty: Addressing old and new issues through the Intolerance of Uncertainty Scale-Revised. PLOS ONE 14(2): e0211929.",https://plos.figshare.com/articles/dataset/Seeking_certainty_about_Intolerance_of_Uncertainty_Addressing_old_and_new_issues_through_the_Intolerance_of_Uncertainty_Scale-Revised/7703045,CC BY 4.0,CC BY 4.0,NA,"The NJRE-Q-R severity section: 7 ratings of the respondent's most recent Not Just Right Experience, 1-7, from 213 community adults. 1,491 responses."," @article{Bottesi_2019, title={Seeking certainty about Intolerance of Uncertainty: Addressing old and new issues through the Intolerance of Uncertainty Scale-Revised}, volume={14}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0211929}, DOI={10.1371/journal.pone.0211929}, number={2}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Bottesi, Gioia and Noventa, Stefano and Freeston, Mark H. and Ghisi, Marta}, editor={Steinborn, Michael B.}, year={2019}, month=Feb, pages={e0211929} }
+",NA
+bottesi_2019_npoq,10.1371/journal.pone.0211929,NA,"Bottesi G, Noventa S, Freeston MH, Ghisi M (2019). Seeking certainty about Intolerance of Uncertainty: Addressing old and new issues through the Intolerance of Uncertainty Scale-Revised. PLOS ONE 14(2): e0211929.",https://plos.figshare.com/articles/dataset/Seeking_certainty_about_Intolerance_of_Uncertainty_Addressing_old_and_new_issues_through_the_Intolerance_of_Uncertainty_Scale-Revised/7703045,CC BY 4.0,CC BY 4.0,NA,"The 12-item Italian Negative Problem Orientation Questionnaire, 1-5, from 429 community adults in the Italian IUS-R validation study. 5,145 responses."," @article{Bottesi_2019, title={Seeking certainty about Intolerance of Uncertainty: Addressing old and new issues through the Intolerance of Uncertainty Scale-Revised}, volume={14}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0211929}, DOI={10.1371/journal.pone.0211929}, number={2}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Bottesi, Gioia and Noventa, Stefano and Freeston, Mark H. and Ghisi, Marta}, editor={Steinborn, Michael B.}, year={2019}, month=Feb, pages={e0211929} }
+",NA
+bottesi_2019_obq87,10.1371/journal.pone.0211929,NA,"Bottesi G, Noventa S, Freeston MH, Ghisi M (2019). Seeking certainty about Intolerance of Uncertainty: Addressing old and new issues through the Intolerance of Uncertainty Scale-Revised. PLOS ONE 14(2): e0211929.",https://plos.figshare.com/articles/dataset/Seeking_certainty_about_Intolerance_of_Uncertainty_Addressing_old_and_new_issues_through_the_Intolerance_of_Uncertainty_Scale-Revised/7703045,CC BY 4.0,CC BY 4.0,NA,"The 87-item Italian Obsessive Beliefs Questionnaire, 1-7, from 213 community adults. 18,528 responses."," @article{Bottesi_2019, title={Seeking certainty about Intolerance of Uncertainty: Addressing old and new issues through the Intolerance of Uncertainty Scale-Revised}, volume={14}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0211929}, DOI={10.1371/journal.pone.0211929}, number={2}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Bottesi, Gioia and Noventa, Stefano and Freeston, Mark H. and Ghisi, Marta}, editor={Steinborn, Michael B.}, year={2019}, month=Feb, pages={e0211929} }
+",NA
+bottesi_2019_oci_r,10.1371/journal.pone.0211929,NA,"Bottesi G, Noventa S, Freeston MH, Ghisi M (2019). Seeking certainty about Intolerance of Uncertainty: Addressing old and new issues through the Intolerance of Uncertainty Scale-Revised. PLOS ONE 14(2): e0211929.",https://plos.figshare.com/articles/dataset/Seeking_certainty_about_Intolerance_of_Uncertainty_Addressing_old_and_new_issues_through_the_Intolerance_of_Uncertainty_Scale-Revised/7703045,CC BY 4.0,CC BY 4.0,NA,"The 18-item Italian Obsessive Compulsive Inventory-Revised, 0-4, from 127 community adults. 2,286 responses."," @article{Bottesi_2019, title={Seeking certainty about Intolerance of Uncertainty: Addressing old and new issues through the Intolerance of Uncertainty Scale-Revised}, volume={14}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0211929}, DOI={10.1371/journal.pone.0211929}, number={2}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Bottesi, Gioia and Noventa, Stefano and Freeston, Mark H. and Ghisi, Marta}, editor={Steinborn, Michael B.}, year={2019}, month=Feb, pages={e0211929} }
+",NA
+bottesi_2019_pswq,10.1371/journal.pone.0211929,NA,"Bottesi G, Noventa S, Freeston MH, Ghisi M (2019). Seeking certainty about Intolerance of Uncertainty: Addressing old and new issues through the Intolerance of Uncertainty Scale-Revised. PLOS ONE 14(2): e0211929.",https://plos.figshare.com/articles/dataset/Seeking_certainty_about_Intolerance_of_Uncertainty_Addressing_old_and_new_issues_through_the_Intolerance_of_Uncertainty_Scale-Revised/7703045,CC BY 4.0,CC BY 4.0,NA,"The 16-item Italian Penn State Worry Questionnaire, 1-5, from 429 community adults. Items are shipped unrecoded; the deposit's five reverse-coded copies are not. 6,860 responses."," @article{Bottesi_2019, title={Seeking certainty about Intolerance of Uncertainty: Addressing old and new issues through the Intolerance of Uncertainty Scale-Revised}, volume={14}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0211929}, DOI={10.1371/journal.pone.0211929}, number={2}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Bottesi, Gioia and Noventa, Stefano and Freeston, Mark H. and Ghisi, Marta}, editor={Steinborn, Michael B.}, year={2019}, month=Feb, pages={e0211929} }
+",NA
+bottesi_2019_sps,10.1371/journal.pone.0211929,NA,"Bottesi G, Noventa S, Freeston MH, Ghisi M (2019). Seeking certainty about Intolerance of Uncertainty: Addressing old and new issues through the Intolerance of Uncertainty Scale-Revised. PLOS ONE 14(2): e0211929.",https://plos.figshare.com/articles/dataset/Seeking_certainty_about_Intolerance_of_Uncertainty_Addressing_old_and_new_issues_through_the_Intolerance_of_Uncertainty_Scale-Revised/7703045,CC BY 4.0,CC BY 4.0,NA,"The 20-item Italian Social Phobia Scale, 0-4, from 127 community adults. 2,540 responses."," @article{Bottesi_2019, title={Seeking certainty about Intolerance of Uncertainty: Addressing old and new issues through the Intolerance of Uncertainty Scale-Revised}, volume={14}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0211929}, DOI={10.1371/journal.pone.0211929}, number={2}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Bottesi, Gioia and Noventa, Stefano and Freeston, Mark H. and Ghisi, Marta}, editor={Steinborn, Michael B.}, year={2019}, month=Feb, pages={e0211929} }
+",NA
+bottesi_2019_ww37,10.1371/journal.pone.0211929,NA,"Bottesi G, Noventa S, Freeston MH, Ghisi M (2019). Seeking certainty about Intolerance of Uncertainty: Addressing old and new issues through the Intolerance of Uncertainty Scale-Revised. PLOS ONE 14(2): e0211929.",https://plos.figshare.com/articles/dataset/Seeking_certainty_about_Intolerance_of_Uncertainty_Addressing_old_and_new_issues_through_the_Intolerance_of_Uncertainty_Scale-Revised/7703045,CC BY 4.0,CC BY 4.0,NA,"A 37-item 1-5 agreement battery labelled WW_01..WW_37 in the deposit, answered by 429 community adults in the Italian IUS-R validation study. The paper lists only the nine instruments it analyses and does not name this block (the file merges four related studies), so the construct is unidentified; the block mean correlates .43 with the IUS-R. 15,865 responses."," @article{Bottesi_2019, title={Seeking certainty about Intolerance of Uncertainty: Addressing old and new issues through the Intolerance of Uncertainty Scale-Revised}, volume={14}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0211929}, DOI={10.1371/journal.pone.0211929}, number={2}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Bottesi, Gioia and Noventa, Stefano and Freeston, Mark H. and Ghisi, Marta}, editor={Steinborn, Michael B.}, year={2019}, month=Feb, pages={e0211929} }
 ",NA
 boudreau_2022_police_reform,10.1177/10659129221081007,NA,"Boudreau, C.; MacKenzie, S.; Simmons, D. (2022). Police Violence and Public Opinion After George Floyd: How the Black Lives Matter Movement and Endorsements Affect Support for Reforms. Political Research Quarterly 75(2): 497-511. DOI: 10.1177/10659129221081007",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/OXIMKR,CC0 1.0,CC0 1.0,NA,"Support for four police reform proposals (certification, carotid holds, review boards, intervention programs); N=1633, 4 items, 1-5 Likert; experimental survey with law enforcement endorsement conditions"," @article{Boudreau_2022, title={Police Violence and Public Opinion After George Floyd: How the Black Lives Matter Movement and Endorsements Affect Support for Reforms}, volume={75}, ISSN={1938-274X}, url={http://dx.doi.org/10.1177/10659129221081007}, DOI={10.1177/10659129221081007}, number={2}, journal={Political Research Quarterly}, publisher={SAGE Publications}, author={Boudreau, Cheryl and MacKenzie, Scott A. and Simmons, Daniel J.}, year={2022}, month=Apr, pages={497–511} }
 ",NA
@@ -3435,6 +3499,15 @@ byrne_2026_hlq_part2,NA,10.5281/zenodo.23318225,"Byrne, P., Saia Pope, J., O'Lea
   publisher = {Zenodo},
   year = {2026},
   copyright = {Creative Commons Attribution 4.0 International}
+}
+",NA
+byun_2026_mascot_ratings,NA,10.17605/osf.io/cyd9v,"Byun, J. (2026). A Perceptual Evaluation Framework for 3D Digital Character Design: Aggregate Preference versus Contextual Signaling in a Two-Phase Conjoint Study [Data set]. OSF. https://osf.io/cyd9v/",https://osf.io/cyd9v/,Permission via Email,CC BY 4.0,NA,"Perceptual ratings of two finished 3D tiger-mascot designs, fielded anonymously in the Rochester Institute of Technology community: 229 respondents x 12 items (2,704 responses) on 1-7 scales. Each respondent saw both designs in turn and rated each on the same six dimensions - overall impression, approachability, confidence, appropriateness for a university mascot, willingness to interact, and willingness to be photographed with it - so the items are stimulus x dimension (expert_*, datadriven_*). The two designs are an expert-designed mascot and one derived from the first phase's conjoint results; which was shown first is cov_presentation_order. Covariates: which design was preferred overall and how strongly, whether any visual difference was noticed, age band, gender and duration. Study 2 of a two-phase project; the conjoint phase is byun_2026_mascot.","@article{https://doi.org/10.17605/osf.io/cyd9v,
+  doi = {10.17605/OSF.IO/CYD9V},
+  url = {https://osf.io/cyd9v/},
+  author = {{Joey Byun}},
+  title = {A Perceptual Evaluation Framework for 3D Digital Character Design: Aggregate Preference versus Contextual Signaling in a Two-Phase Conjoint Study},
+  publisher = {OSF},
+  year = {2026}
 }
 ",NA
 c19prc_uk_mcbride_2021_activity,NA,10.5255/UKDA-SN-855552,"Bentall, Richard and Shevlin, Mark and McBride, Orla and Murphy, Jamie and Hartman, Todd K and Levita, Liat and Gibson-Miller, Jilly and Mason, Liam and Bennett, Kate (2022). The COVID-19 Psychological Research Consortium Study, 2020-2021. [Data Collection]. Colchester, Essex: UK Data Service. 10.5255/UKDA-SN-855552",https://osf.io/v2zur/,CC BY 4.0,CC BY 4.0,NA,"Daily activity frequency (12 items); C19PRC-UK panel, wave(s) 2","@misc{https://doi.org/10.5255/ukda-sn-855552,
@@ -4548,6 +4621,105 @@ cassandra_2026_self_efficacy,NA,10.5281/zenodo.20301395,"Cassandra, C. (2026). Q
   publisher = {Zenodo},
   year = {2026},
   copyright = {Creative Commons Attribution 4.0 International}
+}
+",NA
+cassidy_2024_ab,10.25405/data.ncl.27335709.v1,NA,"Cassidy, Dorothy; Freeston, Mark (2024). Test Hypothesised Mediation Model Data: intolerance of uncertainty, family accommodation and reassurance seeking as multiple serial mediators between attachment anxiety and OCD checking symptoms. Newcastle University.",https://outputs.ncl.ac.uk/articles/dataset/Test_Hypothesised_Mediation_Model_Data/27335709,CC BY-NC 4.0,CC BY-NC 4.0,NA,"A 23-item battery of reassurance-seeking behaviours directed at a romantic partner, 1-5, from 172 partnered adults. 3,953 responses.","@misc{https://doi.org/10.25405/data.ncl.27335709.v1,
+  doi = {10.25405/DATA.NCL.27335709.V1},
+  url = {https://data.ncl.ac.uk/articles/dataset/Test_Hypothesised_Mediation_Model_Data_-_specifically_investigating_whether_intolerance_of_uncertainty_family_accommodation_and_reassurance_seeking_are_multiple_serial_mediators_in_the_relationship_between_attachment_anxiety_and_OCD_checkin/27335709/1},
+  author = {Cassidy, Dorothy and Freeston, Mark},
+  keywords = {Clinical psychology},
+  title = {Test Hypothesised Mediation Model Data - specifically, investigating whether intolerance of uncertainty, family accommodation, and reassurance seeking, are multiple serial mediators in the relationship between attachment anxiety and OCD checking symptoms.},
+  publisher = {Newcastle University},
+  year = {2024},
+  copyright = {Creative Commons Attribution Non Commercial 4.0 International}
+}
+",NA
+cassidy_2024_ecr_r,10.25405/data.ncl.27335709.v1,NA,"Cassidy, Dorothy; Freeston, Mark (2024). Test Hypothesised Mediation Model Data: intolerance of uncertainty, family accommodation and reassurance seeking as multiple serial mediators between attachment anxiety and OCD checking symptoms. Newcastle University.",https://outputs.ncl.ac.uk/articles/dataset/Test_Hypothesised_Mediation_Model_Data/27335709,CC BY-NC 4.0,CC BY-NC 4.0,NA,"The 36-item Experiences in Close Relationships-Revised, 1-7, from 201 adults in an online study of attachment anxiety and OCD checking symptoms. 7,179 responses.","@misc{https://doi.org/10.25405/data.ncl.27335709.v1,
+  doi = {10.25405/DATA.NCL.27335709.V1},
+  url = {https://data.ncl.ac.uk/articles/dataset/Test_Hypothesised_Mediation_Model_Data_-_specifically_investigating_whether_intolerance_of_uncertainty_family_accommodation_and_reassurance_seeking_are_multiple_serial_mediators_in_the_relationship_between_attachment_anxiety_and_OCD_checkin/27335709/1},
+  author = {Cassidy, Dorothy and Freeston, Mark},
+  keywords = {Clinical psychology},
+  title = {Test Hypothesised Mediation Model Data - specifically, investigating whether intolerance of uncertainty, family accommodation, and reassurance seeking, are multiple serial mediators in the relationship between attachment anxiety and OCD checking symptoms.},
+  publisher = {Newcastle University},
+  year = {2024},
+  copyright = {Creative Commons Attribution Non Commercial 4.0 International}
+}
+",NA
+cassidy_2024_fas,10.25405/data.ncl.27335709.v1,NA,"Cassidy, Dorothy; Freeston, Mark (2024). Test Hypothesised Mediation Model Data: intolerance of uncertainty, family accommodation and reassurance seeking as multiple serial mediators between attachment anxiety and OCD checking symptoms. Newcastle University.",https://outputs.ncl.ac.uk/articles/dataset/Test_Hypothesised_Mediation_Model_Data/27335709,CC BY-NC 4.0,CC BY-NC 4.0,NA,"The 19-item Family Accommodation Scale (self-report), 1-5, from 149 adults who identified a relative involved in their obsessive-compulsive symptoms. 2,702 responses.","@misc{https://doi.org/10.25405/data.ncl.27335709.v1,
+  doi = {10.25405/DATA.NCL.27335709.V1},
+  url = {https://data.ncl.ac.uk/articles/dataset/Test_Hypothesised_Mediation_Model_Data_-_specifically_investigating_whether_intolerance_of_uncertainty_family_accommodation_and_reassurance_seeking_are_multiple_serial_mediators_in_the_relationship_between_attachment_anxiety_and_OCD_checkin/27335709/1},
+  author = {Cassidy, Dorothy and Freeston, Mark},
+  keywords = {Clinical psychology},
+  title = {Test Hypothesised Mediation Model Data - specifically, investigating whether intolerance of uncertainty, family accommodation, and reassurance seeking, are multiple serial mediators in the relationship between attachment anxiety and OCD checking symptoms.},
+  publisher = {Newcastle University},
+  year = {2024},
+  copyright = {Creative Commons Attribution Non Commercial 4.0 International}
+}
+",NA
+cassidy_2024_ius_12,10.25405/data.ncl.27335709.v1,NA,"Cassidy, Dorothy; Freeston, Mark (2024). Test Hypothesised Mediation Model Data: intolerance of uncertainty, family accommodation and reassurance seeking as multiple serial mediators between attachment anxiety and OCD checking symptoms. Newcastle University.",https://outputs.ncl.ac.uk/articles/dataset/Test_Hypothesised_Mediation_Model_Data/27335709,CC BY-NC 4.0,CC BY-NC 4.0,NA,"The 12-item Intolerance of Uncertainty Scale-12, 1-5, from 203 adults. 2,436 responses.","@misc{https://doi.org/10.25405/data.ncl.27335709.v1,
+  doi = {10.25405/DATA.NCL.27335709.V1},
+  url = {https://data.ncl.ac.uk/articles/dataset/Test_Hypothesised_Mediation_Model_Data_-_specifically_investigating_whether_intolerance_of_uncertainty_family_accommodation_and_reassurance_seeking_are_multiple_serial_mediators_in_the_relationship_between_attachment_anxiety_and_OCD_checkin/27335709/1},
+  author = {Cassidy, Dorothy and Freeston, Mark},
+  keywords = {Clinical psychology},
+  title = {Test Hypothesised Mediation Model Data - specifically, investigating whether intolerance of uncertainty, family accommodation, and reassurance seeking, are multiple serial mediators in the relationship between attachment anxiety and OCD checking symptoms.},
+  publisher = {Newcastle University},
+  year = {2024},
+  copyright = {Creative Commons Attribution Non Commercial 4.0 International}
+}
+",NA
+cassidy_2024_oci_r,10.25405/data.ncl.27335709.v1,NA,"Cassidy, Dorothy; Freeston, Mark (2024). Test Hypothesised Mediation Model Data: intolerance of uncertainty, family accommodation and reassurance seeking as multiple serial mediators between attachment anxiety and OCD checking symptoms. Newcastle University.",https://outputs.ncl.ac.uk/articles/dataset/Test_Hypothesised_Mediation_Model_Data/27335709,CC BY-NC 4.0,CC BY-NC 4.0,NA,"A 23-item Obsessive Compulsive Inventory-Revised battery, 1-5, from 206 adults. 4,729 responses.","@misc{https://doi.org/10.25405/data.ncl.27335709.v1,
+  doi = {10.25405/DATA.NCL.27335709.V1},
+  url = {https://data.ncl.ac.uk/articles/dataset/Test_Hypothesised_Mediation_Model_Data_-_specifically_investigating_whether_intolerance_of_uncertainty_family_accommodation_and_reassurance_seeking_are_multiple_serial_mediators_in_the_relationship_between_attachment_anxiety_and_OCD_checkin/27335709/1},
+  author = {Cassidy, Dorothy and Freeston, Mark},
+  keywords = {Clinical psychology},
+  title = {Test Hypothesised Mediation Model Data - specifically, investigating whether intolerance of uncertainty, family accommodation, and reassurance seeking, are multiple serial mediators in the relationship between attachment anxiety and OCD checking symptoms.},
+  publisher = {Newcastle University},
+  year = {2024},
+  copyright = {Creative Commons Attribution Non Commercial 4.0 International}
+}
+",NA
+cassidy_2024_pswq3,10.25405/data.ncl.27335709.v1,NA,"Cassidy, Dorothy; Freeston, Mark (2024). Test Hypothesised Mediation Model Data: intolerance of uncertainty, family accommodation and reassurance seeking as multiple serial mediators between attachment anxiety and OCD checking symptoms. Newcastle University.",https://outputs.ncl.ac.uk/articles/dataset/Test_Hypothesised_Mediation_Model_Data/27335709,CC BY-NC 4.0,CC BY-NC 4.0,NA,"The three-item Penn State Worry Questionnaire short form, 1-5, from 181 adults. 543 responses.","@misc{https://doi.org/10.25405/data.ncl.27335709.v1,
+  doi = {10.25405/DATA.NCL.27335709.V1},
+  url = {https://data.ncl.ac.uk/articles/dataset/Test_Hypothesised_Mediation_Model_Data_-_specifically_investigating_whether_intolerance_of_uncertainty_family_accommodation_and_reassurance_seeking_are_multiple_serial_mediators_in_the_relationship_between_attachment_anxiety_and_OCD_checkin/27335709/1},
+  author = {Cassidy, Dorothy and Freeston, Mark},
+  keywords = {Clinical psychology},
+  title = {Test Hypothesised Mediation Model Data - specifically, investigating whether intolerance of uncertainty, family accommodation, and reassurance seeking, are multiple serial mediators in the relationship between attachment anxiety and OCD checking symptoms.},
+  publisher = {Newcastle University},
+  year = {2024},
+  copyright = {Creative Commons Attribution Non Commercial 4.0 International}
+}
+",NA
+cassidy_2024_resq_cons,10.25405/data.ncl.27335709.v1,NA,"Cassidy, Dorothy; Freeston, Mark (2024). Test Hypothesised Mediation Model Data: intolerance of uncertainty, family accommodation and reassurance seeking as multiple serial mediators between attachment anxiety and OCD checking symptoms. Newcastle University.",https://outputs.ncl.ac.uk/articles/dataset/Test_Hypothesised_Mediation_Model_Data/27335709,CC BY-NC 4.0,CC BY-NC 4.0,NA,"The Reassurance Seeking Questionnaire's 11 items on how the respondent consumes and checks the reassurance received, 1-6, from 199 adults. 2,171 responses.","@misc{https://doi.org/10.25405/data.ncl.27335709.v1,
+  doi = {10.25405/DATA.NCL.27335709.V1},
+  url = {https://data.ncl.ac.uk/articles/dataset/Test_Hypothesised_Mediation_Model_Data_-_specifically_investigating_whether_intolerance_of_uncertainty_family_accommodation_and_reassurance_seeking_are_multiple_serial_mediators_in_the_relationship_between_attachment_anxiety_and_OCD_checkin/27335709/1},
+  author = {Cassidy, Dorothy and Freeston, Mark},
+  keywords = {Clinical psychology},
+  title = {Test Hypothesised Mediation Model Data - specifically, investigating whether intolerance of uncertainty, family accommodation, and reassurance seeking, are multiple serial mediators in the relationship between attachment anxiety and OCD checking symptoms.},
+  publisher = {Newcastle University},
+  year = {2024},
+  copyright = {Creative Commons Attribution Non Commercial 4.0 International}
+}
+",NA
+cassidy_2024_resq_int,10.25405/data.ncl.27335709.v1,NA,"Cassidy, Dorothy; Freeston, Mark (2024). Test Hypothesised Mediation Model Data: intolerance of uncertainty, family accommodation and reassurance seeking as multiple serial mediators between attachment anxiety and OCD checking symptoms. Newcastle University.",https://outputs.ncl.ac.uk/articles/dataset/Test_Hypothesised_Mediation_Model_Data/27335709,CC BY-NC 4.0,CC BY-NC 4.0,NA,"The Reassurance Seeking Questionnaire's 16 source-of-reassurance items, 1-5, from 202 adults. 3,219 responses.","@misc{https://doi.org/10.25405/data.ncl.27335709.v1,
+  doi = {10.25405/DATA.NCL.27335709.V1},
+  url = {https://data.ncl.ac.uk/articles/dataset/Test_Hypothesised_Mediation_Model_Data_-_specifically_investigating_whether_intolerance_of_uncertainty_family_accommodation_and_reassurance_seeking_are_multiple_serial_mediators_in_the_relationship_between_attachment_anxiety_and_OCD_checkin/27335709/1},
+  author = {Cassidy, Dorothy and Freeston, Mark},
+  keywords = {Clinical psychology},
+  title = {Test Hypothesised Mediation Model Data - specifically, investigating whether intolerance of uncertainty, family accommodation, and reassurance seeking, are multiple serial mediators in the relationship between attachment anxiety and OCD checking symptoms.},
+  publisher = {Newcastle University},
+  year = {2024},
+  copyright = {Creative Commons Attribution Non Commercial 4.0 International}
+}
+",NA
+cassidy_2024_rss,10.25405/data.ncl.27335709.v1,NA,"Cassidy, Dorothy; Freeston, Mark (2024). Test Hypothesised Mediation Model Data: intolerance of uncertainty, family accommodation and reassurance seeking as multiple serial mediators between attachment anxiety and OCD checking symptoms. Newcastle University.",https://outputs.ncl.ac.uk/articles/dataset/Test_Hypothesised_Mediation_Model_Data/27335709,CC BY-NC 4.0,CC BY-NC 4.0,NA,"A 30-item reassurance-seeking battery, 1-5, asking when and why the respondent seeks reassurance, from 203 adults. 6,085 responses.","@misc{https://doi.org/10.25405/data.ncl.27335709.v1,
+  doi = {10.25405/DATA.NCL.27335709.V1},
+  url = {https://data.ncl.ac.uk/articles/dataset/Test_Hypothesised_Mediation_Model_Data_-_specifically_investigating_whether_intolerance_of_uncertainty_family_accommodation_and_reassurance_seeking_are_multiple_serial_mediators_in_the_relationship_between_attachment_anxiety_and_OCD_checkin/27335709/1},
+  author = {Cassidy, Dorothy and Freeston, Mark},
+  keywords = {Clinical psychology},
+  title = {Test Hypothesised Mediation Model Data - specifically, investigating whether intolerance of uncertainty, family accommodation, and reassurance seeking, are multiple serial mediators in the relationship between attachment anxiety and OCD checking symptoms.},
+  publisher = {Newcastle University},
+  year = {2024},
+  copyright = {Creative Commons Attribution Non Commercial 4.0 International}
 }
 ",NA
 cavalini_mokken,NA,NA,"Cavalini, P. M. (1992). It’s an ill wind that brings no good. Studies on odour annoyance and the dispersion of odorant concentrations from industries. Unpublished doctoral disseratation. University of Groningen, The Netherlands.",https://cran.r-project.org/web/packages/mokken/index.html,"GPL-2.0, GPL-3.0",GPL-3.0,NA,Coping with noxious factory odor.,"@phdthesis{cavalini1992ill,
@@ -6070,6 +6242,36 @@ christensen_2018_wsssf_2171,10.3758/s13428-018-1032-9,NA,"Christensen, A.P., Ken
 ",NA
 christensen_2018_wsssf_5831,10.3758/s13428-018-1032-9,NA,"Christensen, A.P., Kenett, Y.N., Aste, T. et al. Network structure of the Wisconsin Schizotypy Scales–Short Forms: Examining psychometric network filtering approaches. Behav Res 50, 2531–2550 (2018).",https://osf.io/c6rqy/overview,CC0 1.0,CC0 1.0,NA,Schizotypy (Wisconsin Schizotypy Scales–Short Forms) with n=5831," @article{Christensen_2018, title={Network structure of the Wisconsin Schizotypy Scales–Short Forms: Examining psychometric network filtering approaches}, volume={50}, ISSN={1554-3528}, url={http://dx.doi.org/10.3758/s13428-018-1032-9}, DOI={10.3758/s13428-018-1032-9}, number={6}, journal={Behavior Research Methods}, publisher={Springer Science and Business Media LLC}, author={Christensen, Alexander P. and Kenett, Yoed N. and Aste, Tomaso and Silvia, Paul J. and Kwapil, Thomas R.}, year={2018}, month=Mar, pages={2531–2550} }
 ",NA
+christensen_2022_policy_certainty,NA,10.7910/DVN/F9D6TH,"Christensen, Love (2022). How Does Uncertainty Affect Voters' Preferences? British Journal of Political Science 52(3): 1186-1204. Replication data, Harvard Dataverse.",https://doi.org/10.7910/DVN/F9D6TH,CC0 1.0,CC0 1.0,NA,"How certain the respondent was about each of the same three policy proposals, 1-5, from 5,886 US respondents in Christensen's uncertainty experiment. 17,581 responses.","@misc{https://doi.org/10.7910/dvn/f9d6th,
+  doi = {10.7910/DVN/F9D6TH},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/F9D6TH},
+  author = {Christensen, Love},
+  keywords = {Social Sciences},
+  title = {Replication Data for: How Does Uncertainty Affect Voters’ Preferences?},
+  publisher = {Harvard Dataverse},
+  year = {2021}
+}
+",NA
+christensen_2022_policy_ideal,NA,10.7910/DVN/F9D6TH,"Christensen, Love (2022). How Does Uncertainty Affect Voters' Preferences? British Journal of Political Science 52(3): 1186-1204. Replication data, Harvard Dataverse.",https://doi.org/10.7910/DVN/F9D6TH,CC0 1.0,CC0 1.0,NA,"The respondent's own ideal level for each of the same three policy proposals, 1-7, from 5,886 US respondents in Christensen's uncertainty experiment. 17,633 responses.","@misc{https://doi.org/10.7910/dvn/f9d6th,
+  doi = {10.7910/DVN/F9D6TH},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/F9D6TH},
+  author = {Christensen, Love},
+  keywords = {Social Sciences},
+  title = {Replication Data for: How Does Uncertainty Affect Voters’ Preferences?},
+  publisher = {Harvard Dataverse},
+  year = {2021}
+}
+",NA
+christensen_2022_policy_support,NA,10.7910/DVN/F9D6TH,"Christensen, Love (2022). How Does Uncertainty Affect Voters' Preferences? British Journal of Political Science 52(3): 1186-1204. Replication data, Harvard Dataverse.",https://doi.org/10.7910/DVN/F9D6TH,CC0 1.0,CC0 1.0,NA,"Support for three policy proposals -- a minimum-wage increase, a corporate-tax cut and a trade agreement -- on a 1-7 scale, from 5,886 US respondents in a pre-registered experiment that showed each of them forecasts of the proposal's effects attributed to non-partisan experts, to a party, or to nobody (cov_condition). 17,579 responses.","@misc{https://doi.org/10.7910/dvn/f9d6th,
+  doi = {10.7910/DVN/F9D6TH},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/F9D6TH},
+  author = {Christensen, Love},
+  keywords = {Social Sciences},
+  title = {Replication Data for: How Does Uncertainty Affect Voters’ Preferences?},
+  publisher = {Harvard Dataverse},
+  year = {2021}
+}
+",NA
 christian_2025_imagination,NA,10.5281/zenodo.15249313,"Christian, M., Nan, G., Dewantara, Y. F., Geng, B., Muzammil, O. M., & Gularso, K. (2025). Datasets_raw data survey input_Imagination Over Intelligence [Dataset]. Zenodo. https://doi.org/10.5281/zenodo.15249313",https://zenodo.org/records/15249313,CC BY 4.0,CC BY 4.0,NA,"Imagination, perceived intelligence and willingness-to-act items (Imgn 4, P_Intlg 3, Wta 3), 10 items, 1-5; N = 108; no covariates.","@misc{https://doi.org/10.5281/zenodo.15249313,
   doi = {10.5281/ZENODO.15249313},
   url = {https://zenodo.org/doi/10.5281/zenodo.15249313},
@@ -6605,6 +6807,132 @@ colombia_2023_politics_wellbeing,NA,NA,Survey of Political Culture - ECP - 2023,
 colomer_perez_2021_asa,10.1371/journal.pone.0260827,NA,"Colomer-Perez, N., Useche, S. A. et al. (2021). Self-care appraisal in nursing assistant students: Adaptation, validation, and evaluation of the influencing sociodemographic factors. PLOS ONE. https://doi.org/10.1371/journal.pone.0260827",https://doi.org/10.1371/journal.pone.0260827,CC BY 4.0,CC BY 4.0,NA,Self-care appraisal in nursing assistant students: Appraisal of Self-Care Agency (ASA-A) and Sense of Coherence (SOC-13)," @article{Colomer_P_rez_2021, title={Self-care appraisal in nursing assistant students: Adaptation, validation and psychometric properties of the Spanish ASAS}, volume={16}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0260827}, DOI={10.1371/journal.pone.0260827}, number={12}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Colomer-Pérez, Natura and Useche, Sergio A.}, editor={Sudzina, Frantisek}, year={2021}, month=Dec, pages={e0260827} }
 ",NA
 colomer_perez_2021_soc13,10.1371/journal.pone.0260827,NA,"Colomer-Perez, N., Useche, S. A. et al. (2021). Self-care appraisal in nursing assistant students: Adaptation, validation, and evaluation of the influencing sociodemographic factors. PLOS ONE. https://doi.org/10.1371/journal.pone.0260827",https://doi.org/10.1371/journal.pone.0260827,CC BY 4.0,CC BY 4.0,NA,Self-care appraisal in nursing assistant students: Appraisal of Self-Care Agency (ASA-A) and Sense of Coherence (SOC-13)," @article{Colomer_P_rez_2021, title={Self-care appraisal in nursing assistant students: Adaptation, validation and psychometric properties of the Spanish ASAS}, volume={16}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0260827}, DOI={10.1371/journal.pone.0260827}, number={12}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Colomer-Pérez, Natura and Useche, Sergio A.}, editor={Sudzina, Frantisek}, year={2021}, month=Dec, pages={e0260827} }
+",NA
+comeau_2015_climate_beliefs,NA,10.7939/DVN/10302,"Comeau, L., Beckley, T., Parkins, J., & Stedman, R. (2015). Energy Literacy Survey [Data set]. Borealis. https://doi.org/10.7939/DVN/10302",https://doi.org/10.7939/DVN/10302,Permission via Email,CC BY 4.0,NA,"Five agreement items on climate change and Canada's role, rated 1 Strongly disagree to 5 Strongly agree. 3,000 Canadians surveyed in November 2014 for the Energy Literacy and Citizenship in Canada study; covariates cover gender, age band, province, community type, education, household income band, home tenure, first language and a 1-7 political-views code.","@misc{https://doi.org/10.7939/dvn/10302,
+  doi = {10.7939/DVN/10302},
+  url = {https://borealisdata.ca/citation?persistentId=doi:10.7939/DVN/10302},
+  author = {Comeau, Louise and Beckley, Thomas and Parkins, John and Stedman, Richard},
+  title = {Energy Literacy Survey},
+  publisher = {Borealis},
+  year = {2015}
+}
+",NA
+comeau_2015_decision_considerations,NA,10.7939/DVN/10302,"Comeau, L., Beckley, T., Parkins, J., & Stedman, R. (2015). Energy Literacy Survey [Data set]. Borealis. https://doi.org/10.7939/DVN/10302",https://doi.org/10.7939/DVN/10302,Permission via Email,CC BY 4.0,NA,"Six considerations the respondent believes should matter in energy decision-making, each rated 1 Not at all important to 5 Very important. 3,000 Canadians surveyed in November 2014 for the Energy Literacy and Citizenship in Canada study; covariates cover gender, age band, province, community type, education, household income band, home tenure, first language and a 1-7 political-views code.","@misc{https://doi.org/10.7939/dvn/10302,
+  doi = {10.7939/DVN/10302},
+  url = {https://borealisdata.ca/citation?persistentId=doi:10.7939/DVN/10302},
+  author = {Comeau, Louise and Beckley, Thomas and Parkins, John and Stedman, Richard},
+  title = {Energy Literacy Survey},
+  publisher = {Borealis},
+  year = {2015}
+}
+",NA
+comeau_2015_energy_attitudes,NA,10.7939/DVN/10302,"Comeau, L., Beckley, T., Parkins, J., & Stedman, R. (2015). Energy Literacy Survey [Data set]. Borealis. https://doi.org/10.7939/DVN/10302",https://doi.org/10.7939/DVN/10302,Permission via Email,CC BY 4.0,NA,"Thirteen agreement items on energy development, consumption and governance, shown over two screens and answered by every respondent, rated 1 Strongly disagree to 5 Strongly agree. 3,000 Canadians surveyed in November 2014 for the Energy Literacy and Citizenship in Canada study; covariates cover gender, age band, province, community type, education, household income band, home tenure, first language and a 1-7 political-views code.","@misc{https://doi.org/10.7939/dvn/10302,
+  doi = {10.7939/DVN/10302},
+  url = {https://borealisdata.ca/citation?persistentId=doi:10.7939/DVN/10302},
+  author = {Comeau, Louise and Beckley, Thomas and Parkins, John and Stedman, Richard},
+  title = {Energy Literacy Survey},
+  publisher = {Borealis},
+  year = {2015}
+}
+",NA
+comeau_2015_energy_literacy,NA,10.7939/DVN/10302,"Comeau, L., Beckley, T., Parkins, J., & Stedman, R. (2015). Energy Literacy Survey [Data set]. Borealis. https://doi.org/10.7939/DVN/10302",https://doi.org/10.7939/DVN/10302,Permission via Email,CC BY 4.0,NA,"Four multiple-choice energy-knowledge items scored correct (1) or incorrect (0): which household activity requires the least energy, what is impossible under the conservation of energy, what 'renewable' means, and what a 35%-efficient power plant means. ""Don't know"" scores 0. The answer key was rebuilt from the raw responses because the deposit's own correctness columns are row-shuffled; their marginal totals, which are correct, confirm the key. 3,000 Canadians surveyed in November 2014 for the Energy Literacy and Citizenship in Canada study; covariates cover gender, age band, province, community type, education, household income band, home tenure, first language and a 1-7 political-views code.","@misc{https://doi.org/10.7939/dvn/10302,
+  doi = {10.7939/DVN/10302},
+  url = {https://borealisdata.ca/citation?persistentId=doi:10.7939/DVN/10302},
+  author = {Comeau, Louise and Beckley, Thomas and Parkins, John and Stedman, Richard},
+  title = {Energy Literacy Survey},
+  publisher = {Borealis},
+  year = {2015}
+}
+",NA
+comeau_2015_energy_literacy_sureness,NA,10.7939/DVN/10302,"Comeau, L., Beckley, T., Parkins, J., & Stedman, R. (2015). Energy Literacy Survey [Data set]. Borealis. https://doi.org/10.7939/DVN/10302",https://doi.org/10.7939/DVN/10302,Permission via Email,CC BY 4.0,NA,"How sure the respondent was of each of the four energy-knowledge answers, rated 1 Not at all sure, 2 Somewhat sure, 3 Sure. 3,000 Canadians surveyed in November 2014 for the Energy Literacy and Citizenship in Canada study; covariates cover gender, age band, province, community type, education, household income band, home tenure, first language and a 1-7 political-views code.","@misc{https://doi.org/10.7939/dvn/10302,
+  doi = {10.7939/DVN/10302},
+  url = {https://borealisdata.ca/citation?persistentId=doi:10.7939/DVN/10302},
+  author = {Comeau, Louise and Beckley, Thomas and Parkins, John and Stedman, Richard},
+  title = {Energy Literacy Survey},
+  publisher = {Borealis},
+  year = {2015}
+}
+",NA
+comeau_2015_energy_participation,NA,10.7939/DVN/10302,"Comeau, L., Beckley, T., Parkins, J., & Stedman, R. (2015). Energy Literacy Survey [Data set]. Borealis. https://doi.org/10.7939/DVN/10302",https://doi.org/10.7939/DVN/10302,Permission via Email,CC BY 4.0,NA,"Eight forms of public participation on energy issues in the last three years, each answered 1 Have done it, 2 Haven't but willing, 3 Haven't and unwilling. 3,000 Canadians surveyed in November 2014 for the Energy Literacy and Citizenship in Canada study; covariates cover gender, age band, province, community type, education, household income band, home tenure, first language and a 1-7 political-views code.","@misc{https://doi.org/10.7939/dvn/10302,
+  doi = {10.7939/DVN/10302},
+  url = {https://borealisdata.ca/citation?persistentId=doi:10.7939/DVN/10302},
+  author = {Comeau, Louise and Beckley, Thomas and Parkins, John and Stedman, Richard},
+  title = {Energy Literacy Survey},
+  publisher = {Borealis},
+  year = {2015}
+}
+",NA
+comeau_2015_energy_source_knowledge,NA,10.7939/DVN/10302,"Comeau, L., Beckley, T., Parkins, J., & Stedman, R. (2015). Energy Literacy Survey [Data set]. Borealis. https://doi.org/10.7939/DVN/10302",https://doi.org/10.7939/DVN/10302,Permission via Email,CC BY 4.0,NA,"Self-rated knowledge of eleven energy sources (oil sands, wind, hydroelectric, shale gas, geothermal, nuclear, coal, solar, bioenergy, conventional oil, conventional natural gas), each rated 1 Nothing to 5 A lot. 3,000 Canadians surveyed in November 2014 for the Energy Literacy and Citizenship in Canada study; covariates cover gender, age band, province, community type, education, household income band, home tenure, first language and a 1-7 political-views code.","@misc{https://doi.org/10.7939/dvn/10302,
+  doi = {10.7939/DVN/10302},
+  url = {https://borealisdata.ca/citation?persistentId=doi:10.7939/DVN/10302},
+  author = {Comeau, Louise and Beckley, Thomas and Parkins, John and Stedman, Richard},
+  title = {Energy Literacy Survey},
+  publisher = {Borealis},
+  year = {2015}
+}
+",NA
+comeau_2015_energy_source_support,NA,10.7939/DVN/10302,"Comeau, L., Beckley, T., Parkins, J., & Stedman, R. (2015). Energy Literacy Survey [Data set]. Borealis. https://doi.org/10.7939/DVN/10302",https://doi.org/10.7939/DVN/10302,Permission via Email,CC BY 4.0,NA,"Support for further development of the same eleven energy sources, each rated 1 Strongly oppose to 5 Strongly support. 3,000 Canadians surveyed in November 2014 for the Energy Literacy and Citizenship in Canada study; covariates cover gender, age band, province, community type, education, household income band, home tenure, first language and a 1-7 political-views code.","@misc{https://doi.org/10.7939/dvn/10302,
+  doi = {10.7939/DVN/10302},
+  url = {https://borealisdata.ca/citation?persistentId=doi:10.7939/DVN/10302},
+  author = {Comeau, Louise and Beckley, Thomas and Parkins, John and Stedman, Richard},
+  title = {Energy Literacy Survey},
+  publisher = {Borealis},
+  year = {2015}
+}
+",NA
+comeau_2015_environmental_values,NA,10.7939/DVN/10302,"Comeau, L., Beckley, T., Parkins, J., & Stedman, R. (2015). Energy Literacy Survey [Data set]. Borealis. https://doi.org/10.7939/DVN/10302",https://doi.org/10.7939/DVN/10302,Permission via Email,CC BY 4.0,NA,"Eight agreement items on nature, fragility and human connectedness, rated 1 Strongly disagree to 5 Strongly agree. 3,000 Canadians surveyed in November 2014 for the Energy Literacy and Citizenship in Canada study; covariates cover gender, age band, province, community type, education, household income band, home tenure, first language and a 1-7 political-views code.","@misc{https://doi.org/10.7939/dvn/10302,
+  doi = {10.7939/DVN/10302},
+  url = {https://borealisdata.ca/citation?persistentId=doi:10.7939/DVN/10302},
+  author = {Comeau, Louise and Beckley, Thomas and Parkins, John and Stedman, Richard},
+  title = {Energy Literacy Survey},
+  publisher = {Borealis},
+  year = {2015}
+}
+",NA
+comeau_2015_home_energy_intentions,NA,10.7939/DVN/10302,"Comeau, L., Beckley, T., Parkins, J., & Stedman, R. (2015). Energy Literacy Survey [Data set]. Borealis. https://doi.org/10.7939/DVN/10302",https://doi.org/10.7939/DVN/10302,Permission via Email,CC BY 4.0,NA,"Stated likelihood of three home energy actions in the next year, rated 1 Definitely not to 4 Definitely. 3,000 Canadians surveyed in November 2014 for the Energy Literacy and Citizenship in Canada study; covariates cover gender, age band, province, community type, education, household income band, home tenure, first language and a 1-7 political-views code.","@misc{https://doi.org/10.7939/dvn/10302,
+  doi = {10.7939/DVN/10302},
+  url = {https://borealisdata.ca/citation?persistentId=doi:10.7939/DVN/10302},
+  author = {Comeau, Louise and Beckley, Thomas and Parkins, John and Stedman, Richard},
+  title = {Energy Literacy Survey},
+  publisher = {Borealis},
+  year = {2015}
+}
+",NA
+comeau_2015_home_energy_knowledge,NA,10.7939/DVN/10302,"Comeau, L., Beckley, T., Parkins, J., & Stedman, R. (2015). Energy Literacy Survey [Data set]. Borealis. https://doi.org/10.7939/DVN/10302",https://doi.org/10.7939/DVN/10302,Permission via Email,CC BY 4.0,NA,"Self-rated knowledge of five home and transportation energy-use options, each rated 1 Nothing to 5 A lot. 3,000 Canadians surveyed in November 2014 for the Energy Literacy and Citizenship in Canada study; covariates cover gender, age band, province, community type, education, household income band, home tenure, first language and a 1-7 political-views code.","@misc{https://doi.org/10.7939/dvn/10302,
+  doi = {10.7939/DVN/10302},
+  url = {https://borealisdata.ca/citation?persistentId=doi:10.7939/DVN/10302},
+  author = {Comeau, Louise and Beckley, Thomas and Parkins, John and Stedman, Richard},
+  title = {Energy Literacy Survey},
+  publisher = {Borealis},
+  year = {2015}
+}
+",NA
+comeau_2015_information_trust,NA,10.7939/DVN/10302,"Comeau, L., Beckley, T., Parkins, J., & Stedman, R. (2015). Energy Literacy Survey [Data set]. Borealis. https://doi.org/10.7939/DVN/10302",https://doi.org/10.7939/DVN/10302,Permission via Email,CC BY 4.0,NA,"Trust in nine sources of information on energy issues, each rated 1 Strongly distrust to 5 Strongly trust. 3,000 Canadians surveyed in November 2014 for the Energy Literacy and Citizenship in Canada study; covariates cover gender, age band, province, community type, education, household income band, home tenure, first language and a 1-7 political-views code.","@misc{https://doi.org/10.7939/dvn/10302,
+  doi = {10.7939/DVN/10302},
+  url = {https://borealisdata.ca/citation?persistentId=doi:10.7939/DVN/10302},
+  author = {Comeau, Louise and Beckley, Thomas and Parkins, John and Stedman, Richard},
+  title = {Energy Literacy Survey},
+  publisher = {Borealis},
+  year = {2015}
+}
+",NA
+comeau_2015_participation_barriers,NA,10.7939/DVN/10302,"Comeau, L., Beckley, T., Parkins, J., & Stedman, R. (2015). Energy Literacy Survey [Data set]. Borealis. https://doi.org/10.7939/DVN/10302",https://doi.org/10.7939/DVN/10302,Permission via Email,CC BY 4.0,NA,"Nine possible barriers to participating in energy discussions, each rated 1 Not a barrier, 2 Somewhat a barrier, 3 Very much a barrier. 3,000 Canadians surveyed in November 2014 for the Energy Literacy and Citizenship in Canada study; covariates cover gender, age band, province, community type, education, household income band, home tenure, first language and a 1-7 political-views code.","@misc{https://doi.org/10.7939/dvn/10302,
+  doi = {10.7939/DVN/10302},
+  url = {https://borealisdata.ca/citation?persistentId=doi:10.7939/DVN/10302},
+  author = {Comeau, Louise and Beckley, Thomas and Parkins, John and Stedman, Richard},
+  title = {Energy Literacy Survey},
+  publisher = {Borealis},
+  year = {2015}
+}
+",NA
+comeau_2015_provincial_process,NA,10.7939/DVN/10302,"Comeau, L., Beckley, T., Parkins, J., & Stedman, R. (2015). Energy Literacy Survey [Data set]. Borealis. https://doi.org/10.7939/DVN/10302",https://doi.org/10.7939/DVN/10302,Permission via Email,CC BY 4.0,NA,"Six agreement items on how the respondent's province handles energy decisions, rated 1 Strongly disagree to 5 Strongly agree. 3,000 Canadians surveyed in November 2014 for the Energy Literacy and Citizenship in Canada study; covariates cover gender, age band, province, community type, education, household income band, home tenure, first language and a 1-7 political-views code.","@misc{https://doi.org/10.7939/dvn/10302,
+  doi = {10.7939/DVN/10302},
+  url = {https://borealisdata.ca/citation?persistentId=doi:10.7939/DVN/10302},
+  author = {Comeau, Louise and Beckley, Thomas and Parkins, John and Stedman, Richard},
+  title = {Energy Literacy Survey},
+  publisher = {Borealis},
+  year = {2015}
+}
 ",NA
 concretewords,10.3758/s13428-022-01912-6,NA,"Muraki, E. J., Abdalla, S., Brysbaert, M., & Pexman, P. M. (2023). Concreteness ratings for 62,000 English multiword expressions. Behavior Research Methods, 55(5), 2522-2531.",https://osf.io/ksypa/,CC BY 4.0,CC BY 4.0,NA,Concreteness (is word's meaning understood through perception and action) of expressions,"@article{Muraki_2022, title={Concreteness ratings for 62,000 English multiword expressions}, volume={55}, ISSN={1554-3528}, url={http://dx.doi.org/10.3758/s13428-022-01912-6}, DOI={10.3758/s13428-022-01912-6}, number={5}, journal={Behavior Research Methods}, publisher={Springer Science and Business Media LLC}, author={Muraki, Emiko J. and Abdalla, Summer and Brysbaert, Marc and Pexman, Penny M.}, year={2022}, month=jul, pages={2522–2531} }
 ",NA
@@ -7240,6 +7568,16 @@ dassean_2025_dass21,NA,10.6084/m9.figshare.28375283.v2,"Dassean, K. (2025). Jord
   publisher = {figshare},
   year = {2025},
   copyright = {Creative Commons Attribution 4.0 International}
+}
+",NA
+datta_2021_spatial_visualization,NA,10.17632/mp49tfzx4w,"Datta, S. (2021). Spatial Visualization Ability test data [Dataset]. Mendeley Data. https://doi.org/10.17632/mp49tfzx4w.1",https://data.mendeley.com/datasets/mp49tfzx4w,CC BY 4.0,CC BY 4.0,NA,Spatial Visualization Ability test: 30 dichotomously scored figural items (0/1) administered to 760 schoolchildren aged 7-16.,"@misc{https://doi.org/10.17632/mp49tfzx4w,
+  doi = {10.17632/MP49TFZX4W},
+  url = {https://data.mendeley.com/datasets/mp49tfzx4w},
+  author = {Datta, Sumona},
+  keywords = {Cognition, Child Development},
+  title = {Spatial Visualization Ability test data},
+  publisher = {Mendeley},
+  year = {2021}
 }
 ",NA
 DbdIFdM_Puga_2021,NA,NA,"Puga, J. L., García, M. S., Moya-Faz, F. J., FJ Moya-Faz, & Ruiz-Ruano, A. M. (2022, February 24). Datos brutos del Inventario Friburgo de Mindfulness. Retrieved from osf.io/ymj6u",https://osf.io/ymj6u/,LGPL-3.0,LGPL-3.0,NA,Inventory of Mindfulness,"@misc{Puga2022,
@@ -13615,6 +13953,16 @@ green_2025_policy_preferences,NA,10.7910/DVN/G1JVQ4,"Green, J., Grant, Z., Evans
   year = {2025}
 }
 ",NA
+gries_2011_moral_foundations,NA,10.7910/DVN/EL4KPR,"Gries, Peter (2011). Replication data for: Moral Foundations Questionnaire: US national representative sample data Spring 2011. Harvard Dataverse, V1.",https://doi.org/10.7910/DVN/EL4KPR,CC0 1.0,CC0 1.0,NA,"Twelve moral-relevance items, 1-7, two per moral foundation (harm/care, fairness, loyalty, authority, purity, liberty), from a US national sample of 1,000 adults surveyed by YouGov in Spring 2011 alongside ideology, party identification and demographics. 12,000 responses.","@misc{https://doi.org/10.7910/dvn/el4kpr,
+  doi = {10.7910/DVN/EL4KPR},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/EL4KPR},
+  author = {Gries, Peter},
+  keywords = {moral foundations, ideology},
+  title = {Replication data for: Moral Foundations Questionnaire: US national representative sample data Spring 2011},
+  publisher = {Harvard Dataverse},
+  year = {2011}
+}
+",NA
 grit,10.1037/0022-3514.92.6.1087,NA,"Duckworth, A. L., Peterson, C., Matthews, M. D., & Kelly, D. R. (2007). Grit: perseverance and passion for long-term goals. Journal of personality and social psychology, 92(6), 1087.",https://openpsychometrics.org/_rawdata/,Missing (NA),CC BY 4.0,NA,Answers to grit scale items,"@article{Duckworth_2007, title={Grit: Perseverance and passion for long-term goals.}, volume={92}, ISSN={0022-3514}, url={http://dx.doi.org/10.1037/0022-3514.92.6.1087}, DOI={10.1037/0022-3514.92.6.1087}, number={6}, journal={Journal of Personality and Social Psychology}, publisher={American Psychological Association (APA)}, author={Duckworth, Angela L. and Peterson, Christopher and Matthews, Michael D. and Kelly, Dennis R.}, year={2007}, pages={1087–1101} }
 ",NA
 grit_BrummerHoffman_2021,10.1037/pas0001323,NA,"de Souza Brümmer, R., Krause, K. R., Salum, G. A., de Almeida Fleck, M. P., Porto, I. M., do Amaral, J. V., ... & Hoffmann, M. S. (2024). Beyond frequency: Evaluating the validity of assessing the context, duration, ability and botherement of depression and anxiety symptoms in south Brazil. Psychological Assessment.",https://osf.io/p8j2v/,CC BY 4.0,CC BY 4.0,NA,short version of the Grit Scale,"@article{Br_mmer_2024, title={Beyond frequency: Evaluating the validity of assessing the context, duration, ability, and botherment of depression and anxiety symptoms in South Brazil.}, volume={36}, ISSN={1040-3590}, url={http://dx.doi.org/10.1037/pas0001323}, DOI={10.1037/pas0001323}, number={8}, journal={Psychological Assessment}, publisher={American Psychological Association (APA)}, author={Brümmer, Reza de Souza and Krause, Karolin Rose and Salum, Giovanni Abrahão and Fleck, Marcelo Pio de Almeida and Porto, Ighor Miron and Amaral, João Villanova do and Pacheco, João Pedro Gonçalves and Moltrecht, Bettina and McElroy, Eoin and Hoffmann, Mauricio Scopel}, year={2024}, month=aug, pages={488–504} }
@@ -15419,6 +15767,42 @@ huang_2025_perceived_social_support,NA,10.6084/m9.figshare.29891609,"Huang, J., 
   publisher = {figshare},
   year = {2025},
   copyright = {Creative Commons Attribution 4.0 International}
+}
+",NA
+huebner_2021_weightlifting_attraction,NA,10.5061/dryad.qfttdz0ht,"Huebner, M. (2021). Weightlifting during the COVID-19 pandemic - A transnational study regarding motivation, barriers, and coping of master athletes [Dataset]. Zenodo. https://doi.org/10.5061/dryad.qfttdz0ht",https://zenodo.org/records/5500789,CC0 1.0,CC0 1.0,NA,"Five statements on what attracts Masters weightlifters to the sport (community, competition, stress management, strength and identity, health and fitness) rated 1-5 strongly agree to strongly disagree by 1,049 athletes in Australia, Canada, Europe and the USA, 2021.","@misc{https://doi.org/10.5061/dryad.qfttdz0ht,
+  doi = {10.5061/DRYAD.QFTTDZ0HT},
+  url = {https://datadryad.org/dataset/doi:10.5061/dryad.qfttdz0ht},
+  author = {Huebner, Marianne},
+  keywords = {FOS: Social sciences, FOS: Social sciences, Aging, COVID19, weightlifting, Sport, pandemic, health, Motivation, barriers, gender differences},
+  language = {en},
+  title = {Weightlifting during the COVID-19 pandemic—A transnational study regarding motivation, barriers, and coping of master athletes},
+  publisher = {Dryad},
+  year = {2021},
+  copyright = {Creative Commons Zero v1.0 Universal}
+}
+",NA
+huebner_2021_weightlifting_barriers,NA,10.5061/dryad.qfttdz0ht,"Huebner, M. (2021). Weightlifting during the COVID-19 pandemic - A transnational study regarding motivation, barriers, and coping of master athletes [Dataset]. Zenodo. https://doi.org/10.5061/dryad.qfttdz0ht",https://zenodo.org/records/5500789,CC0 1.0,CC0 1.0,NA,"Seven statements on barriers to weightlifting (finances, family, career, gym access, coach access, injury, other health) rated 1-5 strongly agree to strongly disagree by 1,048 Masters athletes in Australia, Canada, Europe and the USA, 2021.","@misc{https://doi.org/10.5061/dryad.qfttdz0ht,
+  doi = {10.5061/DRYAD.QFTTDZ0HT},
+  url = {https://datadryad.org/dataset/doi:10.5061/dryad.qfttdz0ht},
+  author = {Huebner, Marianne},
+  keywords = {FOS: Social sciences, FOS: Social sciences, Aging, COVID19, weightlifting, Sport, pandemic, health, Motivation, barriers, gender differences},
+  language = {en},
+  title = {Weightlifting during the COVID-19 pandemic—A transnational study regarding motivation, barriers, and coping of master athletes},
+  publisher = {Dryad},
+  year = {2021},
+  copyright = {Creative Commons Zero v1.0 Universal}
+}
+",NA
+huebner_2021_weightlifting_pandemic,NA,10.5061/dryad.qfttdz0ht,"Huebner, M. (2021). Weightlifting during the COVID-19 pandemic - A transnational study regarding motivation, barriers, and coping of master athletes [Dataset]. Zenodo. https://doi.org/10.5061/dryad.qfttdz0ht",https://zenodo.org/records/5500789,CC0 1.0,CC0 1.0,NA,"Eight statements on how the COVID-19 pandemic changed training (new activities, missing usual activity, more time, training alone, online tools, exercising for physical and for mental health, unchanged regime) rated 1-5 strongly agree to strongly disagree by 1,036 Masters weightlifters, 2021.","@misc{https://doi.org/10.5061/dryad.qfttdz0ht,
+  doi = {10.5061/DRYAD.QFTTDZ0HT},
+  url = {https://datadryad.org/dataset/doi:10.5061/dryad.qfttdz0ht},
+  author = {Huebner, Marianne},
+  keywords = {FOS: Social sciences, FOS: Social sciences, Aging, COVID19, weightlifting, Sport, pandemic, health, Motivation, barriers, gender differences},
+  language = {en},
+  title = {Weightlifting during the COVID-19 pandemic—A transnational study regarding motivation, barriers, and coping of master athletes},
+  publisher = {Dryad},
+  year = {2021},
+  copyright = {Creative Commons Zero v1.0 Universal}
 }
 ",NA
 huentemilla_2026_digital_competence_test,NA,10.5281/zenodo.22256717,"Huentemilla, G., & Manzano Leon, A. (2026). Bata base Gamification versus traditional teaching in the development of digital competence in higher education: A quasi-experimental study [data]. Zenodo. https://doi.org/10.5281/zenodo.22256717",https://zenodo.org/records/22256717,CC BY 4.0,CC BY 4.0,NA,"63 digital-competence test items scored 0/1, pre-test (wave 1, 99 students) and post-test (wave 2, 85 students); treat = 1 for the gamification and traditional-teaching arms, 0 for the control; cov_condition names the arm; N = 104 Chilean first-year university students; cov_condition, cov_gender, cov_school_type, cov_school_track, cov_mother_edu, cov_father_edu.","@misc{https://doi.org/10.5281/zenodo.22256717,
@@ -19149,6 +19533,39 @@ leongabdullah_2025_bis_malay,NA,10.6084/m9.figshare.29163374.v2,"Leong Bin Abdul
   copyright = {Creative Commons Attribution 4.0 International}
 }
 ",NA
+leppla_2026_smokechem_acceptance,NA,10.5281/zenodo.22208333,"Leppla, L. C., Spanier, M., & Seibert, J.-N. (2026). Technology acceptance, chatbot usability, and cognitive load of secondary school students in the SMOKEChem pilot study (Version 1) [Data set]. Zenodo.",https://zenodo.org/records/22208333,CC BY 4.0,CC BY 4.0,NA,"Technology acceptance (TAM) of the SMOKEChem web application, 15 items on a 1-5 agreement scale covering perceived usefulness, behavioural intention, perceived ease of use, ease of use and attitude towards using. 130 German tenth-grade students. 1,950 responses.","@misc{https://doi.org/10.5281/zenodo.22208333,
+  doi = {10.5281/ZENODO.22208333},
+  url = {https://zenodo.org/doi/10.5281/zenodo.22208333},
+  author = {Leppla, Laura Celine and Spanier, Michael and Seibert, Johann-Nikolaus},
+  keywords = {SMOKEChem},
+  title = {Technology acceptance, chatbot usability, and cognitive load of secondary school students in the SMOKEChem pilot study (Version 1)},
+  publisher = {Zenodo},
+  year = {2026},
+  copyright = {Creative Commons Attribution 4.0 International}
+}
+",NA
+leppla_2026_smokechem_bot_usability,NA,10.5281/zenodo.22208333,"Leppla, L. C., Spanier, M., & Seibert, J.-N. (2026). Technology acceptance, chatbot usability, and cognitive load of secondary school students in the SMOKEChem pilot study (Version 1) [Data set]. Zenodo.",https://zenodo.org/records/22208333,CC BY 4.0,CC BY 4.0,NA,"Chatbot usability (BUS-11), 11 items on a 1-5 agreement scale, from 130 tenth-grade German chemistry students rating the AI chatbot in the SMOKEChem web learning environment. 1,430 responses.","@misc{https://doi.org/10.5281/zenodo.22208333,
+  doi = {10.5281/ZENODO.22208333},
+  url = {https://zenodo.org/doi/10.5281/zenodo.22208333},
+  author = {Leppla, Laura Celine and Spanier, Michael and Seibert, Johann-Nikolaus},
+  keywords = {SMOKEChem},
+  title = {Technology acceptance, chatbot usability, and cognitive load of secondary school students in the SMOKEChem pilot study (Version 1)},
+  publisher = {Zenodo},
+  year = {2026},
+  copyright = {Creative Commons Attribution 4.0 International}
+}
+",NA
+leppla_2026_smokechem_cognitive_load,NA,10.5281/zenodo.22208333,"Leppla, L. C., Spanier, M., & Seibert, J.-N. (2026). Technology acceptance, chatbot usability, and cognitive load of secondary school students in the SMOKEChem pilot study (Version 1) [Data set]. Zenodo.",https://zenodo.org/records/22208333,CC BY 4.0,CC BY 4.0,NA,"Cognitive load during the SMOKEChem learning activity, 8 items on a 1-5 agreement scale covering intrinsic, germane and extraneous load. 130 German tenth-grade students. 1,040 responses.","@misc{https://doi.org/10.5281/zenodo.22208333,
+  doi = {10.5281/ZENODO.22208333},
+  url = {https://zenodo.org/doi/10.5281/zenodo.22208333},
+  author = {Leppla, Laura Celine and Spanier, Michael and Seibert, Johann-Nikolaus},
+  keywords = {SMOKEChem},
+  title = {Technology acceptance, chatbot usability, and cognitive load of secondary school students in the SMOKEChem pilot study (Version 1)},
+  publisher = {Zenodo},
+  year = {2026},
+  copyright = {Creative Commons Attribution 4.0 International}
+}
+",NA
 lessR_Mach4,10.1037/0022-3514.43.6.1293,NA,"Hunter, J. E., Gerbing, D. W., & Boster, F. J. (1982). Machiavellian beliefs and personality: Construct invalidity of the Machiavellianism dimension. Journal of personality and social psychology, 43(6), 1293.",https://cran.r-project.org/web/packages/lessR/index.html,"GPL-2.0, GPL-3.0",GPL-3.0,NA,Responses to Mach-4 scale on Machiavellianism,"@article{Hunter_1982, title={Machiavellian beliefs and personality: Construct invalidity of the Machiavellianism dimension.}, volume={43}, ISSN={0022-3514}, url={http://dx.doi.org/10.1037/0022-3514.43.6.1293}, DOI={10.1037/0022-3514.43.6.1293}, number={6}, journal={Journal of Personality and Social Psychology}, publisher={American Psychological Association (APA)}, author={Hunter, John E. and Gerbing, David W. and Boster, Franklin J.}, year={1982}, month=dec, pages={1293–1305} }
 ",NA
 lestari_2026_cognitive_flexibility,NA,10.17632/6y7sbzjbny,"lestari, t.; Jatnika, R.; Agustiani, H.; Purba, F.; Rakhmayanti, F.; Sudarmansyah, R. (2026). Psychometric Dataset for The Development of The Teacher Executive Regulation Scale (TERS) among Indonesian Higher Education Students. Mendeley Data, V1.",https://data.mendeley.com/datasets/6y7sbzjbny,CC BY 4.0,CC BY 4.0,NA,"Psychometric Dataset for The Development of The Teacher Executive Regulation Scale (TERS) among Indonesian Higher Education Students. IRW table lestari_2026_cognitive_flexibility: 785 respondents x 24 items, 18840 responses.","@misc{https://doi.org/10.17632/6y7sbzjbny,
@@ -19210,6 +19627,12 @@ li_2021_knowledge_sharing,10.1371/journal.pone.0250878,NA,"Li J, Wu N, Xiong S (
 li_2021_org_cultural_diversity,10.1371/journal.pone.0250878,NA,"Li J, Wu N, Xiong S (2021). Sustainable innovation in the context of organizational cultural diversity: The role of cultural intelligence and knowledge sharing. PLOS ONE, 16(5), e0250878. https://doi.org/10.1371/journal.pone.0250878",https://doi.org/10.1371/journal.pone.0250878.s002,CC BY 4.0,CC BY 4.0,NA,"Organizational Cultural Diversity scale, employees in culturally diverse organizations"," @article{Li_2021, title={Sustainable innovation in the context of organizational cultural diversity: The role of cultural intelligence and knowledge sharing}, volume={16}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0250878}, DOI={10.1371/journal.pone.0250878}, number={5}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Li, Jinlong and Wu, Na and Xiong, Shengxu}, editor={Damij, Nadja}, year={2021}, month=May, pages={e0250878} }
 ",NA
 li_2021_sustainable_innov_behav,10.1371/journal.pone.0250878,NA,"Li J, Wu N, Xiong S (2021). Sustainable innovation in the context of organizational cultural diversity: The role of cultural intelligence and knowledge sharing. PLOS ONE, 16(5), e0250878. https://doi.org/10.1371/journal.pone.0250878",https://doi.org/10.1371/journal.pone.0250878.s002,CC BY 4.0,CC BY 4.0,NA,"Sustainable Innovation Behavior scale, employees in culturally diverse organizations"," @article{Li_2021, title={Sustainable innovation in the context of organizational cultural diversity: The role of cultural intelligence and knowledge sharing}, volume={16}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0250878}, DOI={10.1371/journal.pone.0250878}, number={5}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Li, Jinlong and Wu, Na and Xiong, Shengxu}, editor={Damij, Nadja}, year={2021}, month=May, pages={e0250878} }
+",NA
+li_2023_achievement_motivation,10.3389/fpsyg.2022.1031912,NA,"Li, N., Yang, Y., Zhao, X., & Li, Y. (2023). The relationship between achievement motivation and college students' general self-efficacy: A moderated mediation model. Frontiers in Psychology, 13, 1031912. https://doi.org/10.3389/fpsyg.2022.1031912",https://doi.org/10.3389/fpsyg.2022.1031912,CC BY 4.0,CC BY 4.0,NA,"Achievement Motives Scale (30 items, 1-5) administered to 990 Chinese college students, 2022; half the items index motive to achieve success and half motive to avoid failure."," @article{Li_2023, title={The relationship between achievement motivation and college students’ general self-efficacy: A moderated mediation model}, volume={13}, ISSN={1664-1078}, url={http://dx.doi.org/10.3389/fpsyg.2022.1031912}, DOI={10.3389/fpsyg.2022.1031912}, journal={Frontiers in Psychology}, publisher={Frontiers Media SA}, author={Li, Na and Yang, Ying and Zhao, Xiang and Li, Yue}, year={2023}, month=Jan }
+",NA
+li_2023_self_efficacy,10.3389/fpsyg.2022.1031912,NA,"Li, N., Yang, Y., Zhao, X., & Li, Y. (2023). The relationship between achievement motivation and college students' general self-efficacy: A moderated mediation model. Frontiers in Psychology, 13, 1031912. https://doi.org/10.3389/fpsyg.2022.1031912",https://doi.org/10.3389/fpsyg.2022.1031912,CC BY 4.0,CC BY 4.0,NA,"General Self-Efficacy Scale (10 items, 1-4) administered to 990 Chinese college students alongside achievement motivation and perceived social support, 2022."," @article{Li_2023, title={The relationship between achievement motivation and college students’ general self-efficacy: A moderated mediation model}, volume={13}, ISSN={1664-1078}, url={http://dx.doi.org/10.3389/fpsyg.2022.1031912}, DOI={10.3389/fpsyg.2022.1031912}, journal={Frontiers in Psychology}, publisher={Frontiers Media SA}, author={Li, Na and Yang, Ying and Zhao, Xiang and Li, Yue}, year={2023}, month=Jan }
+",NA
+li_2023_social_support,10.3389/fpsyg.2022.1031912,NA,"Li, N., Yang, Y., Zhao, X., & Li, Y. (2023). The relationship between achievement motivation and college students' general self-efficacy: A moderated mediation model. Frontiers in Psychology, 13, 1031912. https://doi.org/10.3389/fpsyg.2022.1031912",https://doi.org/10.3389/fpsyg.2022.1031912,CC BY 4.0,CC BY 4.0,NA,"Multidimensional Scale of Perceived Social Support (12 items, 1-7) administered to 990 Chinese college students, 2022."," @article{Li_2023, title={The relationship between achievement motivation and college students’ general self-efficacy: A moderated mediation model}, volume={13}, ISSN={1664-1078}, url={http://dx.doi.org/10.3389/fpsyg.2022.1031912}, DOI={10.3389/fpsyg.2022.1031912}, journal={Frontiers in Psychology}, publisher={Frontiers Media SA}, author={Li, Na and Yang, Ying and Zhao, Xiang and Li, Yue}, year={2023}, month=Jan }
 ",NA
 li_2024_bdyz,10.7717/peerj.17910,NA,Li et al. (2024). Does how individuals handle social situations exacerbate the relationship between physique anxiety and food addiction? PeerJ.,https://europepmc.org/article/PMC/PMC11332389,CC BY 4.0,CC BY 4.0,NA,"4-item Expressive Suppression subscale of the ERQ (Gross & John, 2003; 1-7 Likert; deposit ships the items labelled 1/2/6/9), same sample as li_2024_fa"," @article{Li_2024, title={Does how individuals handle social situations exacerbate the relationship between physique anxiety and food addiction? The role of emotional expressive suppression and social avoidance and distress}, volume={12}, ISSN={2167-8359}, url={http://dx.doi.org/10.7717/peerj.17910}, DOI={10.7717/peerj.17910}, journal={PeerJ}, publisher={PeerJ}, author={Li, Yan and Fan, Yuxia and Lin, Jing and Shi, Shaobo}, year={2024}, month=Aug, pages={e17910} }
 ",NA
@@ -20189,6 +20612,10 @@ lu_2026_stai,10.1037/pspp0000586,NA,"Lu S, Efendic E, Feldman G (2026). Associat
   doi = {10.1037/pspp0000586},
   url = {https://osf.io/t5kz9/}
 }",NA
+luettgau_2026_political_knowledge,10.1093/pnasnexus/pgag305,NA,"Luettgau, L., Kirk, H. R., Hackenburg, K., Bergs, J., Davidson, H., Ogden, H., Siddarth, D., Huang, S., & Summerfield, C. (2026). Conversational AI increases political knowledge as effectively as self-directed internet search. PNAS Nexus, 5(10), pgag305.",https://github.com/UKGovernmentBEIS/dhi1-analysis-public,OGL (Open Government Licence),OGL (Open Government Licence),NA,"Agreement with 64 political statements -- 16 per topic across climate change, COVID-19 policy, criminal justice and immigration, 8 true and 8 false in each -- rated on a 7-point scale before and after a research task by 2,858 UK adults in two randomised trials around the 2024 general election. A complete pre/post panel, 365,824 responses. resp is stored AGREE-FIRST: 1 = agree, 7 = disagree, so a lower value means more agreement. treat is the within-subject manipulation (each participant researched two of the four topics); cov_arm is the between-subject randomisation (chatbot vs Google search in study 2, prompted vs default-prompted chatbot in study 3); itemcov_ground_truth marks whether the statement is true."," @article{Luettgau_2026, title={Conversational AI increases political knowledge as effectively as self-directed internet search}, volume={5}, ISSN={2752-6542}, url={http://dx.doi.org/10.1093/pnasnexus/pgag305}, DOI={10.1093/pnasnexus/pgag305}, number={10}, journal={PNAS Nexus}, publisher={Oxford University Press (OUP)}, author={Luettgau, Lennart and Kirk, Hannah Rose and Hackenburg, Kobi and Bergs, Jessica and Davidson, Henry and Ogden, Henry and Siddarth, Divya and Huang, Saffron and Summerfield, Christopher}, editor={Guess, Andrew}, year={2026}, month=Sept }
+",NA
+luettgau_2026_source_trust,10.1093/pnasnexus/pgag305,NA,"Luettgau, L., Kirk, H. R., Hackenburg, K., Bergs, J., Davidson, H., Ogden, H., Siddarth, D., Huang, S., & Summerfield, C. (2026). Conversational AI increases political knowledge as effectively as self-directed internet search. PNAS Nexus, 5(10), pgag305.",https://github.com/UKGovernmentBEIS/dhi1-analysis-public,OGL (Open Government Licence),OGL (Open Government Licence),NA,"How much 2,499 UK adults, a nationally representative sample surveyed around the 2024 general election, trust each of eight sources of political information (newspapers, television, radio, AI chatbots, social media, other internet sites, podcasts, internet search), 1 = trust a great deal to 4 = do not trust at all, so a higher value means less trust. 18,749 responses from 2,475 respondents."," @article{Luettgau_2026, title={Conversational AI increases political knowledge as effectively as self-directed internet search}, volume={5}, ISSN={2752-6542}, url={http://dx.doi.org/10.1093/pnasnexus/pgag305}, DOI={10.1093/pnasnexus/pgag305}, number={10}, journal={PNAS Nexus}, publisher={Oxford University Press (OUP)}, author={Luettgau, Lennart and Kirk, Hannah Rose and Hackenburg, Kobi and Bergs, Jessica and Davidson, Henry and Ogden, Henry and Siddarth, Divya and Huang, Saffron and Summerfield, Christopher}, editor={Guess, Andrew}, year={2026}, month=Sept }
+",NA
 lunacortes_2019_interperson_conn,10.1371/journal.pone.0217758,NA,"Luna-Cortés G, López-Bonilla LM, López-Bonilla JM (2019) The influence of social value and self-congruity on interpersonal connections in virtual social networks by Gen-Y tourists. PLoS ONE.",https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0217758.s001,CC BY 4.0,CC BY 4.0,NA,4-item interpersonal connections (IC) scale (1-7 Likert) from a survey of Spanish Gen-Y tourists on virtual social networks," @article{Luna_Cort_s_2019, title={The influence of social value and self-congruity on interpersonal connections in virtual social networks by Gen-Y tourists}, volume={14}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0217758}, DOI={10.1371/journal.pone.0217758}, number={6}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Luna-Cortés, Gonzalo and López-Bonilla, Luis Miguel and López-Bonilla, Jesús Manuel}, editor={Jankowski, Jarosław}, year={2019}, month=June, pages={e0217758} }
 ",NA
 lunacortes_2019_isnbi,10.1371/journal.pone.0217758,NA,"Luna-Cortés G, López-Bonilla LM, López-Bonilla JM (2019) The influence of social value and self-congruity on interpersonal connections in virtual social networks by Gen-Y tourists. PLoS ONE.",https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0217758.s001,CC BY 4.0,CC BY 4.0,NA,"3-item ISNBI scale (1-7 Likert, full name not spelled out in article text) from a survey of Spanish Gen-Y tourists on virtual social networks"," @article{Luna_Cort_s_2019, title={The influence of social value and self-congruity on interpersonal connections in virtual social networks by Gen-Y tourists}, volume={14}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0217758}, DOI={10.1371/journal.pone.0217758}, number={6}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Luna-Cortés, Gonzalo and López-Bonilla, Luis Miguel and López-Bonilla, Jesús Manuel}, editor={Jankowski, Jarosław}, year={2019}, month=June, pages={e0217758} }
@@ -20367,6 +20794,16 @@ maharani_2025_ecommerce_uiux,NA,10.5281/zenodo.15628398,"Maharani, S. Y., Asalla
   title = {Questionnaire and Responses Supporting: A Study on UI/UX and E-Commerce Profitability},
   publisher = {Zenodo},
   year = {2025},
+  copyright = {Creative Commons Attribution 4.0 International}
+}
+",NA
+mailangkay_2026_ai_health_acceptance,NA,10.5281/zenodo.22084963,"Mailangkay, A., & Krisastianto, G. A. W. (2026). Student Acceptance of Artificial Intelligence-Based Healthcare Applications: An Extended Technology Acceptance Model Approach dataset [Dataset]. Zenodo. https://doi.org/10.5281/zenodo.22084963",https://zenodo.org/records/22084963,CC BY 4.0,CC BY 4.0,NA,"Extended Technology Acceptance Model for AI-based healthcare applications: 50 items on one 1-6 agreement scale (perceived ease of use, perceived usefulness, attitude, behavioural intention, actual use, trust, perceived risk, trust in technology, facilitating conditions, subjective norms) answered by 200 Indonesian students, 2026.","@misc{https://doi.org/10.5281/zenodo.22084963,
+  doi = {10.5281/ZENODO.22084963},
+  url = {https://zenodo.org/doi/10.5281/zenodo.22084963},
+  author = {Mailangkay, Adele and Krisastianto, Gregorius Agung Wisnu},
+  title = {Student Acceptance of Artificial Intelligence-Based Healthcare Applications: An Extended Technology Acceptance Model Approach  dataset},
+  publisher = {Zenodo},
+  year = {2026},
   copyright = {Creative Commons Attribution 4.0 International}
 }
 ",NA
@@ -24142,6 +24579,17 @@ osorio_2025_substance_use,NA,10.5281/zenodo.15345328,"Osorio, A. (2025). Dataset
   copyright = {Creative Commons Attribution 4.0 International}
 }
 ",NA
+otago_2018_library_support,NA,10.6084/m9.figshare.7464938.v1,"Research Support Unit Library, University of Otago (2018). Postgraduate Support at Otago: Student Questionnaire Answers. figshare.",https://figshare.com/articles/dataset/Postgraduate_Support_at_Otago_Student_Questionnaire_Answers/7464938,CC BY 4.0,CC BY 4.0,NA,"Eight ways the University Library could support postgraduate study, each rated 1 (most preferred) to 5 (least preferred) by 386 postgraduate students at the University of Otago in 2018. Worded as a ranking but fielded as a rating matrix, and answered as one. Item text shipped. 3,014 responses.","@misc{https://doi.org/10.6084/m9.figshare.7464938.v1,
+  doi = {10.6084/M9.FIGSHARE.7464938.V1},
+  url = {https://figshare.com/articles/Postgraduate_Support_at_Otago_Student_Questionnaire_Answers/7464938/1},
+  author = {{Research Support Unit Library}},
+  keywords = {Library and Information Studies, FOS: Media and communications, FOS: Media and communications, 130103 Higher Education, FOS: Educational sciences, FOS: Educational sciences},
+  title = {Postgraduate Support at Otago: Student Questionnaire Answers},
+  publisher = {figshare},
+  year = {2018},
+  copyright = {Creative Commons Attribution 4.0 International}
+}
+",NA
 otaki_2022_dental_adaptability,10.1371/journal.pone.0270420,NA,"Otaki, F., et al. (2022). Self-reported adaptability among postgraduate dental learners and their instructors: Accelerated change induced by COVID-19. PLOS ONE.",https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0270420,CC BY 4.0,CC BY 4.0,NA,"Self-reported adaptability scale, postgraduate dental learners/instructors, 4 items, N=18"," @article{Otaki_2022, title={Self-reported adaptability among postgraduate dental learners and their instructors: Accelerated change induced by COVID-19}, volume={17}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0270420}, DOI={10.1371/journal.pone.0270420}, number={7}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Otaki, Farah and Amir-Rad, Fatemeh and Al-Halabi, Manal and Baqain, Zaid and Zary, Nabil}, editor={Ammar, Nour}, year={2022}, month=July, pages={e0270420} }
 ",NA
 oxfordcovid_xue_2024_at,10.5334/jopd.56,NA,"Parsons, S., Todorovic, A., Lim, M. C., Songco, A., & Fox, E. (2022). Data and protocol for the Oxford Achieving Resilience during COVID-19 (ARC) study. Journal of Open Psychology Data, 10(1), 4-4.",https://osf.io/4b85w/,CC BY 4.0,CC BY 4.0,NA,Oxford Activities and Technology Use Scale," @article{Parsons_2022, title={Data and Protocol for the Oxford Achieving Resilience During COVID-19 (ARC) Study}, volume={10}, ISSN={2050-9863}, url={http://dx.doi.org/10.5334/jopd.56}, DOI={10.5334/jopd.56}, number={1}, journal={Journal of Open Psychology Data}, publisher={Ubiquity Press, Ltd.}, author={Parsons, Sam and Todorovic, Ana and Lim, Michele C. and Songco, Annabel and Fox, Elaine}, year={2022}, month=Mar, pages={4} }
@@ -26965,6 +27413,26 @@ rightwing_authoritariansim,NA,NA,"Altemeyer, B (2015). Right-wing Authoritariani
   url = {https://openpsychometrics.org/_rawdata/RWAS.zip},
   note = {Retrieved from http://openpsychometrics.org/_rawdata/}
 }",NA
+rimisp_2021_care_work,NA,10.7910/DVN/ZXQBC7,Rimisp - Centro Latinoamericano para el Desarrollo Rural. Encuesta de medicion de calidad de vida y bienestar subjetivo de Valle del Cauca - Colombia. Harvard Dataverse.,https://doi.org/10.7910/DVN/ZXQBC7,CC0 1.0,CC0 1.0,NA,"How often care and reproductive work is recognised or paid, asked separately about the respondent's household, their community and the state: 3 items, 1-5 (never..always), from 300 residents of Valle del Cauca, Colombia. 900 responses.","@misc{https://doi.org/10.7910/dvn/zxqbc7,
+  doi = {10.7910/DVN/ZXQBC7},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/ZXQBC7},
+  author = {isp - Centro Latinoamericano para el Desarrollo Rural, el},
+  keywords = {Agricultural Sciences, Social Sciences},
+  title = {Encuesta de medición de calidad de vida y bienestar subjetivo de Valle del Cauca - Colombia},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rimisp_2021_household_services,NA,10.7910/DVN/ZXQBC7,Rimisp - Centro Latinoamericano para el Desarrollo Rural. Encuesta de medicion de calidad de vida y bienestar subjetivo de Valle del Cauca - Colombia. Harvard Dataverse.,https://doi.org/10.7910/DVN/ZXQBC7,CC0 1.0,CC0 1.0,NA,"Satisfaction with five household utilities (water, sewerage, electricity, fixed internet, mobile internet) on a 1-5 scale, from 299 rural and peri-urban residents of Valle del Cauca, Colombia, surveyed in late 2021. The questionnaire's sixth option, 'does not have the service', is a not-applicable sentinel and is set missing. 999 responses.","@misc{https://doi.org/10.7910/dvn/zxqbc7,
+  doi = {10.7910/DVN/ZXQBC7},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/ZXQBC7},
+  author = {isp - Centro Latinoamericano para el Desarrollo Rural, el},
+  keywords = {Agricultural Sciences, Social Sciences},
+  title = {Encuesta de medición de calidad de vida y bienestar subjetivo de Valle del Cauca - Colombia},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
 rinaldi_2021_mas,10.1371/journal.pone.0249272,NA,"Rinaldi T, Castelli I, Greco A, Greenberg DM, Jurist E, Valle A, Marchetti A (2021). The Mentalized Affectivity Scale (MAS): Development and validation of the Italian version. PLOS ONE, 16(4), e0249272. https://doi.org/10.1371/journal.pone.0249272",https://doi.org/10.1371/journal.pone.0249272.s001,CC BY 4.0,CC BY 4.0,NA,"Mentalized Affectivity Scale (MAS, 61 items, the paper's focal instrument, Italian validation), N=258"," @article{Rinaldi_2021, title={The Mentalized Affectivity Scale (MAS): Development and validation of the Italian version}, volume={16}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0249272}, DOI={10.1371/journal.pone.0249272}, number={4}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Rinaldi, Teresa and Castelli, Ilaria and Greco, Andrea and Greenberg, David M. and Jurist, Elliot and Valle, Annalisa and Marchetti, Antonella}, editor={Sudzina, Frantisek}, year={2021}, month=Apr, pages={e0249272} }
 ",NA
 ringhand_2024_ccam_importance,NA,10.5281/zenodo.14394129,"Ringhand, M., & Anke, J. (2024). SINFONICA - Online survey data - Survey on the user factors that affect the future deployment of CCAM. Zenodo. https://doi.org/10.5281/zenodo.14394129",https://zenodo.org/records/14394129,CC BY 4.0,CC BY 4.0,NA,"Importance of 15 public-transport service attributes (availability, accessibility, affordability, acceptability) for the future use of CCAM vehicles, 1 very unimportant - 101 very important slider; EU online survey, N = 4,472 in eight languages; cov_language, cov_age, cov_gender, cov_country, cov_education, cov_employment.","@misc{https://doi.org/10.5281/zenodo.14394129,
@@ -28276,6 +28744,17 @@ saputra_2023_perceived_usefulness,10.1371/journal.pone.0285293,NA,"Saputra DEE, 
 ",NA
 saputra_2023_system_quality,10.1371/journal.pone.0285293,NA,"Saputra DEE, Maulida Rahma V, Eliyana A, Pratama AS, Anggraini RD, Kamil NLM, et al. (2023) Do system quality and information quality affect job performance? The mediation role of users' perceptions. PLoS ONE.",https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0285293.s001,CC BY 4.0,CC BY 4.0,NA,"5-item System Quality (SQ) scale (Likert, observed range 3-5) from a survey on an information-system's effect on job performance"," @article{Saputra_2023, title={Do system quality and information quality affect job performance? The mediation role of users’ perceptions}, volume={18}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0285293}, DOI={10.1371/journal.pone.0285293}, number={6}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Saputra, Deddy Eduar Eka and Maulida Rahma, Vera and Eliyana, Anis and Pratama, Andika Setia and Anggraini, Rachmawati Dewi and Kamil, Nurul Liyana Mohd and Ismail, Izlin}, editor={Butt, Faisal Shafique}, year={2023}, month=June, pages={e0285293} }
 ",NA
+saputra_2025_fomo_consumer,NA,10.5281/zenodo.15363490,"Saputra, N. (2025). Dataset of Fear of Missing Out and the Digital Consumer Experience: Gender-Specific Analysis of Digital Moment of Truth [Dataset]. Zenodo. https://doi.org/10.5281/zenodo.15363490",https://zenodo.org/records/15363490,CC BY 4.0,CC BY 4.0,NA,"Fourteen purchase-journey statements on fear of missing out and the digital consumer experience (stock scarcity, social posting, peer parity, information search, comparison, evaluation, trial, after-sales, word of mouth, recommendation) rated 1-5 by 100 Indonesian Nike consumers, 2024-2025.","@misc{https://doi.org/10.5281/zenodo.15363490,
+  doi = {10.5281/ZENODO.15363490},
+  url = {https://zenodo.org/doi/10.5281/zenodo.15363490},
+  author = {Saputra, Nopriadi},
+  keywords = {digital consumer behavior, FOMO, Moment of Truth, Social Media, Nike},
+  title = {Dataset of Fear of Missing Out and the Digital Consumer Experience:  Gender-Specific Analysis of Digital Moment of Truth},
+  publisher = {Zenodo},
+  year = {2025},
+  copyright = {Creative Commons Attribution 4.0 International}
+}
+",NA
 SAS_Deters_2022,10.3390/bs12080247,NA,"Deters, L. B., Silvia, P. J., & Kwapil, T. R. (2022). The Schizotypal Ambivalence Scale: An Item Response Theory Analysis. Behavioral Sciences, 12(8), 247.",https://osf.io/ztycp/,CC BY 4.0,CC BY 4.0,NA,Schizotypal Ambivalence Scale (SAS),"@article{Deters_2022, title={The Schizotypal Ambivalence Scale: An Item Response Theory Analysis}, volume={12}, ISSN={2076-328X}, url={http://dx.doi.org/10.3390/bs12080247}, DOI={10.3390/bs12080247}, number={8}, journal={Behavioral Sciences}, publisher={MDPI AG}, author={Deters, Lauren B. and Silvia, Paul J. and Kwapil, Thomas R.}, year={2022}, month=jul, pages={247} }
 ",NA
 sat12_wilson_2003,NA,NA,"Wood, R., Wilson, D. T., Gibbons, R. D., Schilling, S. G., Muraki, E., & Bock, R. D. (2003). TESTFACT 4 for Windows: Test Scoring, Item Statistics, and Full-information Item Factor Analysis [Computer software]. Lincolnwood, IL: Scientific Software International.",https://github.com/philchalmers/mirt/blob/main/data/SAT12.RData,GPL-3.0,GPL-3.0,NA,grade 12 science assessment test (SAT),"@misc{wood2003testfact, author = {Wood, R. and Wilson, D. T. and Gibbons, R. D. and Schilling, S. G. and Muraki, E. and Bock, R. D.}, title = {TESTFACT 4 for Windows: Test Scoring, Item Statistics, and Full-information Item Factor Analysis}, year = {2003}, type = {Computer software}, address = {Lincolnwood, IL}, publisher = {Scientific Software International} }",NA
@@ -28681,6 +29160,36 @@ septiani_2026_visibility,NA,10.5281/zenodo.21157129,"Septiani, R. D. (2026). Sur
   publisher = {Zenodo},
   year = {2026},
   copyright = {Creative Commons Attribution 4.0 International}
+}
+",NA
+setiawan_2026_cybersecurity_behaviour,NA,10.17632/8mvkw9kjvp,"Setiawan, Y., Abdullah, A. G., & Salam, H. (2026). Cybersecurity literacy of Indonesian schoolteachers: a 60-item, three-dimension questionnaire dataset (N = 233) [Data set]. Mendeley Data.",https://data.mendeley.com/datasets/8mvkw9kjvp,CC BY 4.0,CC BY 4.0,NA,"Self-reported cybersecurity behaviour, 20 items on a 1-4 frequency scale (1 = never, 4 = always), same 233 Indonesian schoolteachers. Item text shipped. 4,660 responses.","@misc{https://doi.org/10.17632/8mvkw9kjvp,
+  doi = {10.17632/8MVKW9KJVP},
+  url = {https://data.mendeley.com/datasets/8mvkw9kjvp},
+  author = {wawan, Yudi and Gafar Abdullah, Ade and Salam, Haipan},
+  keywords = {Education, Survey, Computer Security Models},
+  title = {Cybersecurity literacy of Indonesian schoolteachers: a 60-item, three-dimension questionnaire dataset (N = 233)},
+  publisher = {Mendeley Data},
+  year = {2026}
+}
+",NA
+setiawan_2026_cybersecurity_ethics,NA,10.17632/8mvkw9kjvp,"Setiawan, Y., Abdullah, A. G., & Salam, H. (2026). Cybersecurity literacy of Indonesian schoolteachers: a 60-item, three-dimension questionnaire dataset (N = 233) [Data set]. Mendeley Data.",https://data.mendeley.com/datasets/8mvkw9kjvp,CC BY 4.0,CC BY 4.0,NA,"Cybersecurity ethical conviction, 20 items on a REVERSE-ANCHORED 4-point agreement scale (1 = strongly agree, 4 = strongly disagree, so lower = stronger ethical endorsement), shipped as administered and not reflected. Same 233 Indonesian schoolteachers. Item text shipped. 4,660 responses.","@misc{https://doi.org/10.17632/8mvkw9kjvp,
+  doi = {10.17632/8MVKW9KJVP},
+  url = {https://data.mendeley.com/datasets/8mvkw9kjvp},
+  author = {wawan, Yudi and Gafar Abdullah, Ade and Salam, Haipan},
+  keywords = {Education, Survey, Computer Security Models},
+  title = {Cybersecurity literacy of Indonesian schoolteachers: a 60-item, three-dimension questionnaire dataset (N = 233)},
+  publisher = {Mendeley Data},
+  year = {2026}
+}
+",NA
+setiawan_2026_cybersecurity_knowledge,NA,10.17632/8mvkw9kjvp,"Setiawan, Y., Abdullah, A. G., & Salam, H. (2026). Cybersecurity literacy of Indonesian schoolteachers: a 60-item, three-dimension questionnaire dataset (N = 233) [Data set]. Mendeley Data.",https://data.mendeley.com/datasets/8mvkw9kjvp,CC BY 4.0,CC BY 4.0,NA,"Cybersecurity knowledge, 20 items on a 1-5 agreement scale (higher = greater self-reported understanding), from 233 in-service schoolteachers in Riau and West Java, Indonesia. itemcov_focus_area gives each item's security domain. Item text shipped. 4,660 responses.","@misc{https://doi.org/10.17632/8mvkw9kjvp,
+  doi = {10.17632/8MVKW9KJVP},
+  url = {https://data.mendeley.com/datasets/8mvkw9kjvp},
+  author = {wawan, Yudi and Gafar Abdullah, Ade and Salam, Haipan},
+  keywords = {Education, Survey, Computer Security Models},
+  title = {Cybersecurity literacy of Indonesian schoolteachers: a 60-item, three-dimension questionnaire dataset (N = 233)},
+  publisher = {Mendeley Data},
+  year = {2026}
 }
 ",NA
 setsoafia_2026_ctd,NA,10.17632/jz6vbvv5t8,"Setsoafia, P., Essel, H. B., & Tachie-Menson, A. (2026). Dataset on Digital Literacy, Creative Thinking Disposition, And Generative Artificial Intelligence Literacy as Predictors of Academic Performance of Pre-service Visual Art Teachers in Ghana. Mendeley Data. https://doi.org/10.17632/jz6vbvv5t8",https://data.mendeley.com/datasets/jz6vbvv5t8,CC BY 4.0,CC BY 4.0,NA,"Creative thinking disposition, 25 items (1-5); N = 258 Ghanaian pre-service visual-art teachers; cov_age, cov_gender, cov_academic_level, cov_cgpa, cov_location.","@misc{https://doi.org/10.17632/jz6vbvv5t8,
@@ -34319,6 +34828,16 @@ wang_2025_impulse_control,NA,10.17632/dt5hj5j792,"Wang, Y. (2025). The chain med
 wang_2026_attitude,10.1371/journal.pone.0346229,NA,"Wang, Y., et al. (2026). Exploring EFL primary school teachers' behavioral intention towards digital game-based learning. PLOS ONE.",https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0346229,CC BY 4.0,CC BY 4.0,NA,"TAM attitude scale, EFL primary teachers, 3 items, 1-5, N=500"," @article{Wang_2026, title={Exploring EFL primary school teachers’ behavioral intention towards digital game-based learning}, volume={21}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0346229}, DOI={10.1371/journal.pone.0346229}, number={4}, journal={PLOS One}, publisher={Public Library of Science (PLoS)}, author={Wang, Yuting and Zou, Deping}, editor={Derakhshan, Ali}, year={2026}, month=Apr, pages={e0346229} }
 ",NA
 wang_2026_behavioral_intention,10.1371/journal.pone.0346229,NA,"Wang, Y., et al. (2026). Exploring EFL primary school teachers' behavioral intention towards digital game-based learning. PLOS ONE.",https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0346229,CC BY 4.0,CC BY 4.0,NA,"TAM behavioral-intention scale, EFL primary teachers, 5 items, 1-5, N=500"," @article{Wang_2026, title={Exploring EFL primary school teachers’ behavioral intention towards digital game-based learning}, volume={21}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0346229}, DOI={10.1371/journal.pone.0346229}, number={4}, journal={PLOS One}, publisher={Public Library of Science (PLoS)}, author={Wang, Yuting and Zou, Deping}, editor={Derakhshan, Ali}, year={2026}, month=Apr, pages={e0346229} }
+",NA
+wang_2026_chatgpt_acceptance,NA,10.17632/zbmd5x98gp,"Wang, C. (2026). Understanding EFL Teachers' Affective and Cognitive Responses to ChatGPT in Higher Education [Dataset]. Mendeley Data. https://doi.org/10.17632/zbmd5x98gp.1",https://data.mendeley.com/datasets/zbmd5x98gp,CC BY 4.0,CC BY 4.0,NA,"Thirty-five items on one 1-5 agreement scale measuring EFL teachers' affective and cognitive responses to ChatGPT (perceived usefulness, perceived ease of use, attitude, behavioural intention, technology competence, anxiety, facilitating conditions, self-efficacy, AI enthusiasm), answered by 187 higher-education teachers, 2026.","@misc{https://doi.org/10.17632/zbmd5x98gp,
+  doi = {10.17632/ZBMD5X98GP},
+  url = {https://data.mendeley.com/datasets/zbmd5x98gp},
+  author = {wang, Chenghao},
+  keywords = {Education, English},
+  title = {Understanding EFL Teachers’ Affective and Cognitive Responses to ChatGPT in Higher Education},
+  publisher = {Mendeley Data},
+  year = {2026}
+}
 ",NA
 wang_2026_cognitive_load,10.1111/padm.70091,10.7910/DVN/IDNB1Z,"Wang, X. (C.), Perry, J. L., Wang, Y., Chen, D., & Liu, B. (2026). Inspired to serve: Exposure to moral models to enhance public service motivation. Public Administration. https://doi.org/10.1111/padm.70091",https://doi.org/10.7910/DVN/IDNB1Z,CC0 1.0,CC0 1.0,NA,"Cognitive load (workload), 3 items (Study 2); 3 items, 1-6; 217 Chinese public employees (Study 1 recall experiment, n=131) and public-sector trainees (Study 2 field survey, n=217); covariates: cov_study, cov_age, cov_sex, cov_education, cov_tenure, cov_university; treat (Study 1)."," @article{Wang_2026, title={Inspired to Serve: Exposure to Moral Models to Enhance Public Service Motivation}, ISSN={1467-9299}, url={http://dx.doi.org/10.1111/padm.70091}, DOI={10.1111/padm.70091}, journal={Public Administration}, publisher={Wiley}, author={Wang, Xiaoyu and Perry, James L. and Wang, Yuming and Chen, Dingxiang and Liu, Bangcheng}, year={2026}, month=Sept }
 ",NA

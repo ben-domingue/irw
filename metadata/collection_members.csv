@@ -59,6 +59,7 @@ amatus_cipora_2024_stai,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 amiot_2022_swls,swls,name
 amiot_2022_ucla_loneliness,ucla_ls,name
 an_2020_efl_self_regulated,response_time,rule:var:rt
+andreu_sanchez_2023_panas,affect_panas,rule:cname:panas|positive and negative af
 anjum_2022_gad7,gad7,supplied
 antes_2020_pdm,longitudinal,rule:meta:longitudinal
 anxiety_gastro_symptoms,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
@@ -175,7 +176,14 @@ bitew_2020_anxiety,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 bitew_2020_phq9,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 bitew_2020_phq9,phq9,supplied
 bitew_2020_self_efficacy,gse,supplied
+blotner_2026_hexaco60,big_five,rule:cname:big.?five|five.?factor|\bipip\b|neo.?(pi|ffi)|\bbfi\b|hexaco
+blotner_2026_lsrp,dark_triad,rule:cname:dark triad|machiavell|narciss|psychopath
 blum_2018_imak_bin,response_time,rule:var:rt
+bottesi_2019_bai,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
+bottesi_2019_bdi2,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
+bottesi_2019_dass21,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
+bottesi_2019_dass21,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
+bottesi_2019_ius_r,longitudinal,rule:meta:longitudinal
 boudreau_2022_police_reform,rct,rule:var:treat
 BPAQ_Christopher_2024_BPAQSF,longitudinal,rule:meta:longitudinal
 BPAQ_Christopher_2024_BPAQSF,rct,rule:var:treat
@@ -1873,6 +1881,8 @@ lu_2017_phq9,longitudinal,rule:meta:longitudinal
 lu_2017_phq9,phq9,supplied
 lu_2017_pss10,longitudinal,rule:meta:longitudinal
 lu_2017_pss10,pss10,name
+luettgau_2026_political_knowledge,longitudinal,rule:meta:longitudinal
+luettgau_2026_political_knowledge,rct,rule:var:treat
 luttenberger_2021_ferus,longitudinal,rule:meta:longitudinal
 luttenberger_2021_ferus,rct,rule:var:treat
 luttenberger_2021_fkb,longitudinal,rule:meta:longitudinal
