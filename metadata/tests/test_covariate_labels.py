@@ -86,6 +86,29 @@ class BuildTest(unittest.TestCase):
         self.assertEqual([r["code"] for r in rows], ["1", "2", "3"])
         self.assertEqual(rec[("t1", "cov_education")]["unlabelled_codes"], "4")
 
+    def test_unlabelled_majority_code_is_left_out(self):
+        # the cassidy_2024_* shape (#3203): 1 of 2 shipped codes labelled passes rule (b)
+        # at exactly half, but the unlabelled code carries 216 of 250 respondents
+        rows, rec, _ = self.run_build([
+            read({"EDU": {"1": "Arab, Black, Mixed or multiple ethnicities, Other", "3": "White", "6": "x"}},
+                 {"EDU": {"1": 30, "2": 216, "3": 3}}),
+            write("t1", {"cov_education": cov(["1", "2", "3"], {"1": 30, "2": 216, "3": 3})}),
+        ])
+        self.assertEqual(rows, [])
+        r = rec[("t1", "cov_education")]
+        self.assertEqual(r["status"], "excluded")
+        self.assertIn("87% of respondents", r["reason"])
+        self.assertEqual(r["unlabelled_codes"], "2")
+
+    def test_unlabelled_minority_code_is_kept(self):
+        # the same shape under the threshold: rule (d) must not fire at exactly half
+        rows, rec, _ = self.run_build([
+            read({"EDU": {"1": "primary", "2": "secondary"}}, {"EDU": {"1": 5, "2": 5, "3": 10}}),
+            write("t1", {"cov_education": cov(["1", "2", "3"], {"1": 5, "2": 5, "3": 10})}),
+        ])
+        self.assertEqual([r["code"] for r in rows], ["1", "2"])
+        self.assertEqual(rec[("t1", "cov_education")]["status"], "included")
+
     def test_named_institutions_withheld(self):
         rows, rec, flagged = self.run_build(
             [read({"CENTRO": {"1": "Ceip Esteiro", "2": "Recimil"}}, {"CENTRO": {"1": 3, "2": 4}}),

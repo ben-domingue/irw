@@ -1906,7 +1906,6 @@ cassidy_2024_ab,cov_education,10,Professional degree
 cassidy_2024_ab,cov_education,11,Doctorate
 cassidy_2024_ab,cov_english_first_language,1,Yes
 cassidy_2024_ab,cov_english_first_language,2,No
-cassidy_2024_ab,cov_ethnicity,1,"Arab, Black, Mixed or multiple ethnicities, Other"
 cassidy_2024_ab,cov_gender,1,"Cisgender woman (""Cisgender"" refers to individuals whose sex assigned at birth aligns with their gender identity)"
 cassidy_2024_ab,cov_gender,2,"Cisgender man (""Cisgender ""refers to individuals whose sex assigned at birth aligns with their gender identity)"
 cassidy_2024_ab,cov_gender,3,"Transgender man, Transgender woman, or non-binary"
@@ -1965,7 +1964,6 @@ cassidy_2024_ecr_r,cov_education,10,Professional degree
 cassidy_2024_ecr_r,cov_education,11,Doctorate
 cassidy_2024_ecr_r,cov_english_first_language,1,Yes
 cassidy_2024_ecr_r,cov_english_first_language,2,No
-cassidy_2024_ecr_r,cov_ethnicity,1,"Arab, Black, Mixed or multiple ethnicities, Other"
 cassidy_2024_ecr_r,cov_gender,1,"Cisgender woman (""Cisgender"" refers to individuals whose sex assigned at birth aligns with their gender identity)"
 cassidy_2024_ecr_r,cov_gender,2,"Cisgender man (""Cisgender ""refers to individuals whose sex assigned at birth aligns with their gender identity)"
 cassidy_2024_ecr_r,cov_gender,3,"Transgender man, Transgender woman, or non-binary"
@@ -2026,7 +2024,6 @@ cassidy_2024_fas,cov_education,10,Professional degree
 cassidy_2024_fas,cov_education,11,Doctorate
 cassidy_2024_fas,cov_english_first_language,1,Yes
 cassidy_2024_fas,cov_english_first_language,2,No
-cassidy_2024_fas,cov_ethnicity,1,"Arab, Black, Mixed or multiple ethnicities, Other"
 cassidy_2024_fas,cov_gender,1,"Cisgender woman (""Cisgender"" refers to individuals whose sex assigned at birth aligns with their gender identity)"
 cassidy_2024_fas,cov_gender,2,"Cisgender man (""Cisgender ""refers to individuals whose sex assigned at birth aligns with their gender identity)"
 cassidy_2024_fas,cov_gender,3,"Transgender man, Transgender woman, or non-binary"
@@ -2085,7 +2082,6 @@ cassidy_2024_ius_12,cov_education,10,Professional degree
 cassidy_2024_ius_12,cov_education,11,Doctorate
 cassidy_2024_ius_12,cov_english_first_language,1,Yes
 cassidy_2024_ius_12,cov_english_first_language,2,No
-cassidy_2024_ius_12,cov_ethnicity,1,"Arab, Black, Mixed or multiple ethnicities, Other"
 cassidy_2024_ius_12,cov_gender,1,"Cisgender woman (""Cisgender"" refers to individuals whose sex assigned at birth aligns with their gender identity)"
 cassidy_2024_ius_12,cov_gender,2,"Cisgender man (""Cisgender ""refers to individuals whose sex assigned at birth aligns with their gender identity)"
 cassidy_2024_ius_12,cov_gender,3,"Transgender man, Transgender woman, or non-binary"
@@ -2146,8 +2142,6 @@ cassidy_2024_oci_r,cov_education,10,Professional degree
 cassidy_2024_oci_r,cov_education,11,Doctorate
 cassidy_2024_oci_r,cov_english_first_language,1,Yes
 cassidy_2024_oci_r,cov_english_first_language,2,No
-cassidy_2024_oci_r,cov_ethnicity,1,"Arab, Black, Mixed or multiple ethnicities, Other"
-cassidy_2024_oci_r,cov_ethnicity,3,White
 cassidy_2024_oci_r,cov_gender,1,"Cisgender woman (""Cisgender"" refers to individuals whose sex assigned at birth aligns with their gender identity)"
 cassidy_2024_oci_r,cov_gender,2,"Cisgender man (""Cisgender ""refers to individuals whose sex assigned at birth aligns with their gender identity)"
 cassidy_2024_oci_r,cov_gender,3,"Transgender man, Transgender woman, or non-binary"
@@ -2208,7 +2202,6 @@ cassidy_2024_pswq3,cov_education,10,Professional degree
 cassidy_2024_pswq3,cov_education,11,Doctorate
 cassidy_2024_pswq3,cov_english_first_language,1,Yes
 cassidy_2024_pswq3,cov_english_first_language,2,No
-cassidy_2024_pswq3,cov_ethnicity,1,"Arab, Black, Mixed or multiple ethnicities, Other"
 cassidy_2024_pswq3,cov_gender,1,"Cisgender woman (""Cisgender"" refers to individuals whose sex assigned at birth aligns with their gender identity)"
 cassidy_2024_pswq3,cov_gender,2,"Cisgender man (""Cisgender ""refers to individuals whose sex assigned at birth aligns with their gender identity)"
 cassidy_2024_pswq3,cov_gender,3,"Transgender man, Transgender woman, or non-binary"
@@ -2267,8 +2260,6 @@ cassidy_2024_resq_cons,cov_education,10,Professional degree
 cassidy_2024_resq_cons,cov_education,11,Doctorate
 cassidy_2024_resq_cons,cov_english_first_language,1,Yes
 cassidy_2024_resq_cons,cov_english_first_language,2,No
-cassidy_2024_resq_cons,cov_ethnicity,1,"Arab, Black, Mixed or multiple ethnicities, Other"
-cassidy_2024_resq_cons,cov_ethnicity,3,White
 cassidy_2024_resq_cons,cov_gender,1,"Cisgender woman (""Cisgender"" refers to individuals whose sex assigned at birth aligns with their gender identity)"
 cassidy_2024_resq_cons,cov_gender,2,"Cisgender man (""Cisgender ""refers to individuals whose sex assigned at birth aligns with their gender identity)"
 cassidy_2024_resq_cons,cov_gender,3,"Transgender man, Transgender woman, or non-binary"
@@ -2329,8 +2320,6 @@ cassidy_2024_resq_int,cov_education,10,Professional degree
 cassidy_2024_resq_int,cov_education,11,Doctorate
 cassidy_2024_resq_int,cov_english_first_language,1,Yes
 cassidy_2024_resq_int,cov_english_first_language,2,No
-cassidy_2024_resq_int,cov_ethnicity,1,"Arab, Black, Mixed or multiple ethnicities, Other"
-cassidy_2024_resq_int,cov_ethnicity,3,White
 cassidy_2024_resq_int,cov_gender,1,"Cisgender woman (""Cisgender"" refers to individuals whose sex assigned at birth aligns with their gender identity)"
 cassidy_2024_resq_int,cov_gender,2,"Cisgender man (""Cisgender ""refers to individuals whose sex assigned at birth aligns with their gender identity)"
 cassidy_2024_resq_int,cov_gender,3,"Transgender man, Transgender woman, or non-binary"
@@ -2392,8 +2381,6 @@ cassidy_2024_rss,cov_education,10,Professional degree
 cassidy_2024_rss,cov_education,11,Doctorate
 cassidy_2024_rss,cov_english_first_language,1,Yes
 cassidy_2024_rss,cov_english_first_language,2,No
-cassidy_2024_rss,cov_ethnicity,1,"Arab, Black, Mixed or multiple ethnicities, Other"
-cassidy_2024_rss,cov_ethnicity,3,White
 cassidy_2024_rss,cov_gender,1,"Cisgender woman (""Cisgender"" refers to individuals whose sex assigned at birth aligns with their gender identity)"
 cassidy_2024_rss,cov_gender,2,"Cisgender man (""Cisgender ""refers to individuals whose sex assigned at birth aligns with their gender identity)"
 cassidy_2024_rss,cov_gender,3,"Transgender man, Transgender woman, or non-binary"
@@ -4740,7 +4727,6 @@ fazekas_2019_psci,cov_marital,3,divorced
 fazekas_2019_psci,cov_marital,4,widowed
 fazekas_2019_psci,cov_sex,1,male
 fazekas_2019_psci,cov_sex,2,female
-fazekas_2019_psci,cov_smoker,1,smoker
 feng_2024_org_support,cov_age,1,25岁及以下
 feng_2024_org_support,cov_age,2,26-35岁
 feng_2024_org_support,cov_age,3,36-45岁
@@ -6504,7 +6490,6 @@ hou_2022_trait_anger,cov_only_child,1,是
 hou_2022_trait_anger,cov_only_child,2,否
 hou_2022_trait_anger,cov_sex,1,男
 hou_2022_trait_anger,cov_sex,2,女
-hung_2026_fomo,cov_gender,1,Female
 hung_2026_fomo,cov_grade,1,Freshman
 hung_2026_fomo,cov_grade,2,Sophomore
 hung_2026_fomo,cov_grade,3,Junior
@@ -6550,7 +6535,6 @@ hung_2026_growth_mindset,cov_location,2,town
 hung_2026_growth_mindset,cov_location,3,city
 hung_2026_growth_mindset,cov_nation,0,the Han nationality
 hung_2026_growth_mindset,cov_nation,1,minority nationality
-hung_2026_impulsivity,cov_gender,1,Female
 hung_2026_impulsivity,cov_grade,1,Freshman
 hung_2026_impulsivity,cov_grade,2,Sophomore
 hung_2026_impulsivity,cov_grade,3,Junior
@@ -6584,25 +6568,21 @@ hung_2026_perfectionism_order,cov_mother_education,3,high school
 hung_2026_perfectionism_order,cov_mother_education,4,Associate degree
 hung_2026_perfectionism_order,cov_mother_education,5,Bachelor's degree
 hung_2026_perfectionism_order,cov_mother_education,6,Graduate degree
-hung_2026_problematic_video,cov_gender,1,Female
 hung_2026_problematic_video,cov_grade,1,Freshman
 hung_2026_problematic_video,cov_grade,2,Sophomore
 hung_2026_problematic_video,cov_grade,3,Junior
 hung_2026_problematic_video,cov_grade,4,Senior
 hung_2026_problematic_video,cov_grade,5,Graduate student
-hung_2026_restraint,cov_gender,1,Female
 hung_2026_restraint,cov_grade,1,Freshman
 hung_2026_restraint,cov_grade,2,Sophomore
 hung_2026_restraint,cov_grade,3,Junior
 hung_2026_restraint,cov_grade,4,Senior
 hung_2026_restraint,cov_grade,5,Graduate student
-hung_2026_self_control,cov_gender,1,Female
 hung_2026_self_control,cov_grade,1,Freshman
 hung_2026_self_control,cov_grade,2,Sophomore
 hung_2026_self_control,cov_grade,3,Junior
 hung_2026_self_control,cov_grade,4,Senior
 hung_2026_self_control,cov_grade,5,Graduate student
-hung_2026_sensation_seek,cov_gender,1,Female
 hung_2026_sensation_seek,cov_grade,1,Freshman
 hung_2026_sensation_seek,cov_grade,2,Sophomore
 hung_2026_sensation_seek,cov_grade,3,Junior
@@ -6696,28 +6676,24 @@ hung_2026b_uwes_s,cov_grade,5,Grade11
 hung_2026b_uwes_s,cov_grade,6,Grade12
 hung_2026b_uwes_s,cov_location,0,Rural
 hung_2026b_uwes_s,cov_location,1,Urban
-hung_2026c_academic_self_efficacy,cov_gender,1,Female
 hung_2026c_academic_self_efficacy,cov_grade,1,First-year undergraduates
 hung_2026c_academic_self_efficacy,cov_grade,2,Second-year undergraduates
 hung_2026c_academic_self_efficacy,cov_grade,3,Third-year undergraduates
 hung_2026c_academic_self_efficacy,cov_grade,4,Fourth-year undergraduates
 hung_2026c_academic_self_efficacy,cov_grade,5,Graduate students
 hung_2026c_academic_self_efficacy,cov_grade,6,other year levels
-hung_2026c_cognitive_load,cov_gender,1,Female
 hung_2026c_cognitive_load,cov_grade,1,First-year undergraduates
 hung_2026c_cognitive_load,cov_grade,2,Second-year undergraduates
 hung_2026c_cognitive_load,cov_grade,3,Third-year undergraduates
 hung_2026c_cognitive_load,cov_grade,4,Fourth-year undergraduates
 hung_2026c_cognitive_load,cov_grade,5,Graduate students
 hung_2026c_cognitive_load,cov_grade,6,other year levels
-hung_2026c_procrastination,cov_gender,1,Female
 hung_2026c_procrastination,cov_grade,1,First-year undergraduates
 hung_2026c_procrastination,cov_grade,2,Second-year undergraduates
 hung_2026c_procrastination,cov_grade,3,Third-year undergraduates
 hung_2026c_procrastination,cov_grade,4,Fourth-year undergraduates
 hung_2026c_procrastination,cov_grade,5,Graduate students
 hung_2026c_procrastination,cov_grade,6,other year levels
-hung_2026c_teacher_support,cov_gender,1,Female
 hung_2026c_teacher_support,cov_grade,1,First-year undergraduates
 hung_2026c_teacher_support,cov_grade,2,Second-year undergraduates
 hung_2026c_teacher_support,cov_grade,3,Third-year undergraduates
@@ -10890,13 +10866,10 @@ peng_2024_language_enjoyment,cov_gender,1,男
 peng_2024_language_enjoyment,cov_gender,2,女
 peng_2026_mhl_attitude,cov_gender,1,Boy
 peng_2026_mhl_attitude,cov_gender,2,Girl
-peng_2026_mhl_attitude,cov_hukou,1,Rural
 peng_2026_mhl_knowledge,cov_gender,1,Boy
 peng_2026_mhl_knowledge,cov_gender,2,Girl
-peng_2026_mhl_knowledge,cov_hukou,1,Rural
 peng_2026_pyd,cov_gender,1,Boy
 peng_2026_pyd,cov_gender,2,Girl
-peng_2026_pyd,cov_hukou,1,Rural
 pham_2026_bsgt,cov_age_band,1,18-22 tuổi
 pham_2026_bsgt,cov_age_band,2,23-25 tuổi
 pham_2026_bsgt,cov_age_band,3,26-29 tuổi
@@ -10917,15 +10890,6 @@ pham_2026_bsgt,cov_gender,2,Nữ
 pham_2026_bsgt,cov_interaction,1,Ít
 pham_2026_bsgt,cov_interaction,2,Bình thường
 pham_2026_bsgt,cov_interaction,3,Nhiều
-pham_2026_bsgt,cov_major,1,Khoa học tự nhiên
-pham_2026_bsgt,cov_major,2,Kỹ thuật/Công nghệ
-pham_2026_bsgt,cov_major,3,Kinh tế/Quản trị
-pham_2026_bsgt,cov_major,4,Khoa học xã hội/Nhân văn
-pham_2026_bsgt,cov_major,5,Y-Dược
-pham_2026_bsgt,cov_major,6,Nông nghiệp/Thực phẩm
-pham_2026_bsgt,cov_major,7,Dịch vụ/Du lịch
-pham_2026_bsgt,cov_major,8,Truyền thông/Nghệ thuật
-pham_2026_bsgt,cov_major,9,Sư phạm
 pham_2026_bsgt,cov_posting_frequency,1,Không đăng
 pham_2026_bsgt,cov_posting_frequency,2,1-2‎ lần‎/tuần
 pham_2026_bsgt,cov_posting_frequency,3,3-6 lần‎/tuần
@@ -10970,15 +10934,6 @@ pham_2026_bsth,cov_gender,2,Nữ
 pham_2026_bsth,cov_interaction,1,Ít
 pham_2026_bsth,cov_interaction,2,Bình thường
 pham_2026_bsth,cov_interaction,3,Nhiều
-pham_2026_bsth,cov_major,1,Khoa học tự nhiên
-pham_2026_bsth,cov_major,2,Kỹ thuật/Công nghệ
-pham_2026_bsth,cov_major,3,Kinh tế/Quản trị
-pham_2026_bsth,cov_major,4,Khoa học xã hội/Nhân văn
-pham_2026_bsth,cov_major,5,Y-Dược
-pham_2026_bsth,cov_major,6,Nông nghiệp/Thực phẩm
-pham_2026_bsth,cov_major,7,Dịch vụ/Du lịch
-pham_2026_bsth,cov_major,8,Truyền thông/Nghệ thuật
-pham_2026_bsth,cov_major,9,Sư phạm
 pham_2026_bsth,cov_posting_frequency,1,Không đăng
 pham_2026_bsth,cov_posting_frequency,2,1-2‎ lần‎/tuần
 pham_2026_bsth,cov_posting_frequency,3,3-6 lần‎/tuần
@@ -11023,15 +10978,6 @@ pham_2026_bsyn,cov_gender,2,Nữ
 pham_2026_bsyn,cov_interaction,1,Ít
 pham_2026_bsyn,cov_interaction,2,Bình thường
 pham_2026_bsyn,cov_interaction,3,Nhiều
-pham_2026_bsyn,cov_major,1,Khoa học tự nhiên
-pham_2026_bsyn,cov_major,2,Kỹ thuật/Công nghệ
-pham_2026_bsyn,cov_major,3,Kinh tế/Quản trị
-pham_2026_bsyn,cov_major,4,Khoa học xã hội/Nhân văn
-pham_2026_bsyn,cov_major,5,Y-Dược
-pham_2026_bsyn,cov_major,6,Nông nghiệp/Thực phẩm
-pham_2026_bsyn,cov_major,7,Dịch vụ/Du lịch
-pham_2026_bsyn,cov_major,8,Truyền thông/Nghệ thuật
-pham_2026_bsyn,cov_major,9,Sư phạm
 pham_2026_bsyn,cov_posting_frequency,1,Không đăng
 pham_2026_bsyn,cov_posting_frequency,2,1-2‎ lần‎/tuần
 pham_2026_bsyn,cov_posting_frequency,3,3-6 lần‎/tuần
@@ -11076,15 +11022,6 @@ pham_2026_gp,cov_gender,2,Nữ
 pham_2026_gp,cov_interaction,1,Ít
 pham_2026_gp,cov_interaction,2,Bình thường
 pham_2026_gp,cov_interaction,3,Nhiều
-pham_2026_gp,cov_major,1,Khoa học tự nhiên
-pham_2026_gp,cov_major,2,Kỹ thuật/Công nghệ
-pham_2026_gp,cov_major,3,Kinh tế/Quản trị
-pham_2026_gp,cov_major,4,Khoa học xã hội/Nhân văn
-pham_2026_gp,cov_major,5,Y-Dược
-pham_2026_gp,cov_major,6,Nông nghiệp/Thực phẩm
-pham_2026_gp,cov_major,7,Dịch vụ/Du lịch
-pham_2026_gp,cov_major,8,Truyền thông/Nghệ thuật
-pham_2026_gp,cov_major,9,Sư phạm
 pham_2026_gp,cov_posting_frequency,1,Không đăng
 pham_2026_gp,cov_posting_frequency,2,1-2‎ lần‎/tuần
 pham_2026_gp,cov_posting_frequency,3,3-6 lần‎/tuần
@@ -11129,15 +11066,6 @@ pham_2026_ktscx,cov_gender,2,Nữ
 pham_2026_ktscx,cov_interaction,1,Ít
 pham_2026_ktscx,cov_interaction,2,Bình thường
 pham_2026_ktscx,cov_interaction,3,Nhiều
-pham_2026_ktscx,cov_major,1,Khoa học tự nhiên
-pham_2026_ktscx,cov_major,2,Kỹ thuật/Công nghệ
-pham_2026_ktscx,cov_major,3,Kinh tế/Quản trị
-pham_2026_ktscx,cov_major,4,Khoa học xã hội/Nhân văn
-pham_2026_ktscx,cov_major,5,Y-Dược
-pham_2026_ktscx,cov_major,6,Nông nghiệp/Thực phẩm
-pham_2026_ktscx,cov_major,7,Dịch vụ/Du lịch
-pham_2026_ktscx,cov_major,8,Truyền thông/Nghệ thuật
-pham_2026_ktscx,cov_major,9,Sư phạm
 pham_2026_ktscx,cov_posting_frequency,1,Không đăng
 pham_2026_ktscx,cov_posting_frequency,2,1-2‎ lần‎/tuần
 pham_2026_ktscx,cov_posting_frequency,3,3-6 lần‎/tuần
@@ -11182,15 +11110,6 @@ pham_2026_ktslh,cov_gender,2,Nữ
 pham_2026_ktslh,cov_interaction,1,Ít
 pham_2026_ktslh,cov_interaction,2,Bình thường
 pham_2026_ktslh,cov_interaction,3,Nhiều
-pham_2026_ktslh,cov_major,1,Khoa học tự nhiên
-pham_2026_ktslh,cov_major,2,Kỹ thuật/Công nghệ
-pham_2026_ktslh,cov_major,3,Kinh tế/Quản trị
-pham_2026_ktslh,cov_major,4,Khoa học xã hội/Nhân văn
-pham_2026_ktslh,cov_major,5,Y-Dược
-pham_2026_ktslh,cov_major,6,Nông nghiệp/Thực phẩm
-pham_2026_ktslh,cov_major,7,Dịch vụ/Du lịch
-pham_2026_ktslh,cov_major,8,Truyền thông/Nghệ thuật
-pham_2026_ktslh,cov_major,9,Sư phạm
 pham_2026_ktslh,cov_posting_frequency,1,Không đăng
 pham_2026_ktslh,cov_posting_frequency,2,1-2‎ lần‎/tuần
 pham_2026_ktslh,cov_posting_frequency,3,3-6 lần‎/tuần
@@ -11235,15 +11154,6 @@ pham_2026_ktsth,cov_gender,2,Nữ
 pham_2026_ktsth,cov_interaction,1,Ít
 pham_2026_ktsth,cov_interaction,2,Bình thường
 pham_2026_ktsth,cov_interaction,3,Nhiều
-pham_2026_ktsth,cov_major,1,Khoa học tự nhiên
-pham_2026_ktsth,cov_major,2,Kỹ thuật/Công nghệ
-pham_2026_ktsth,cov_major,3,Kinh tế/Quản trị
-pham_2026_ktsth,cov_major,4,Khoa học xã hội/Nhân văn
-pham_2026_ktsth,cov_major,5,Y-Dược
-pham_2026_ktsth,cov_major,6,Nông nghiệp/Thực phẩm
-pham_2026_ktsth,cov_major,7,Dịch vụ/Du lịch
-pham_2026_ktsth,cov_major,8,Truyền thông/Nghệ thuật
-pham_2026_ktsth,cov_major,9,Sư phạm
 pham_2026_ktsth,cov_posting_frequency,1,Không đăng
 pham_2026_ktsth,cov_posting_frequency,2,1-2‎ lần‎/tuần
 pham_2026_ktsth,cov_posting_frequency,3,3-6 lần‎/tuần
@@ -11288,15 +11198,6 @@ pham_2026_thbt,cov_gender,2,Nữ
 pham_2026_thbt,cov_interaction,1,Ít
 pham_2026_thbt,cov_interaction,2,Bình thường
 pham_2026_thbt,cov_interaction,3,Nhiều
-pham_2026_thbt,cov_major,1,Khoa học tự nhiên
-pham_2026_thbt,cov_major,2,Kỹ thuật/Công nghệ
-pham_2026_thbt,cov_major,3,Kinh tế/Quản trị
-pham_2026_thbt,cov_major,4,Khoa học xã hội/Nhân văn
-pham_2026_thbt,cov_major,5,Y-Dược
-pham_2026_thbt,cov_major,6,Nông nghiệp/Thực phẩm
-pham_2026_thbt,cov_major,7,Dịch vụ/Du lịch
-pham_2026_thbt,cov_major,8,Truyền thông/Nghệ thuật
-pham_2026_thbt,cov_major,9,Sư phạm
 pham_2026_thbt,cov_posting_frequency,1,Không đăng
 pham_2026_thbt,cov_posting_frequency,2,1-2‎ lần‎/tuần
 pham_2026_thbt,cov_posting_frequency,3,3-6 lần‎/tuần
