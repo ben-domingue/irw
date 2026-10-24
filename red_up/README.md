@@ -206,6 +206,27 @@ Two cautions the tool exists to enforce:
   *incomplete* one. Missing tables and missing rows wait happily; a table
   returning every item twice (`ben-domingue/irw#1816`) does not. See
   `ARCHITECTURE.md` §4.
+- **Before the Publish click, run the release gate.**
+
+  ```bash
+  python3 metadata/check_release_consistency.py
+  ```
+
+  It compares what the repository's records SAY about each table against what
+  the catalog actually publishes -- declared column lists against live schemas,
+  published counts against row counts, every correction against a release pin
+  and a table that still resolves, and the withdrawal ledger against the live
+  catalog and against biblio, tags and itemtext_metadata. Exit 1 means a record
+  disagrees with the data. Each check is held to an accepted count in
+  `metadata/release_gate_baseline.json` and fails only when its count goes UP,
+  so today's backlog does not block a release and a NEW mismatch does. Lower a
+  baseline when you fix something (`--update-baseline`); raising one to get a
+  release through is the move the file exists to prevent.
+
+  This is the control the 2026-10-24 review called the highest-leverage one in
+  its report, and the reason is the arithmetic: one gate closes seven of its
+  findings, where repairing them one at a time closes seven and prevents none.
+
 - **A released correction gets a line in `metadata/table_changes.csv`.** When
   a release replaces, renames or retires a *published* response table, append
   one row per table (`table, irw_version, date, change, issue, replaces,

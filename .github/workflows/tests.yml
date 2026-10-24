@@ -216,6 +216,14 @@ jobs:
       - name: client reach tests
         run: python metadata/tests/test_client_reach.py -v
 
+      # The release gate's comparison rules. Its network step cannot run here
+      # either -- tests.yml is offline by design -- and the gate is meant to be
+      # run by hand before a Publish click (red_up/README.md). What is tested
+      # here is every rule it decides on, including the three floors that make
+      # an unread source an ERROR rather than a clean result.
+      - name: release consistency tests
+        run: python metadata/tests/test_release_consistency.py -v
+
       - name: Redivis config parity
         run: |
           python metadata/check_config_parity.py \
