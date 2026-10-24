@@ -574,11 +574,31 @@ def read_baseline() -> Dict[str, int]:
     return {k: int(v) for k, v in counts.items() if isinstance(v, int)}
 
 
+DEFAULT_BASELINE_COMMENT = (
+    "Accepted mismatch counts for metadata/check_release_consistency.py. A check fails "
+    "when its count goes UP. Lower an entry when you fix something; never raise one to "
+    "let a release through.")
+
+
 def write_baseline(checks: Iterable[Check]) -> None:
+    """Rewrite the baseline counts, keeping whatever the file says about them.
+
+    `_comment` is preserved rather than regenerated: the counts are mechanical
+    and the note beside them is not -- it is where a reader finds out WHY a
+    baseline is 0 or 92, which is the only thing that makes raising one feel
+    like the mistake it is. An earlier version overwrote the note on every
+    `--update-baseline`, which silently deleted the explanation each time the
+    numbers moved.
+    """
+    existing = {}
+    if BASELINE.exists():
+        try:
+            existing = json.loads(BASELINE.read_text())
+        except (OSError, json.JSONDecodeError):
+            existing = {}
+    comment = existing.get("_comment") or DEFAULT_BASELINE_COMMENT
     BASELINE.write_text(json.dumps({
-        "_comment": ("Accepted mismatch counts for metadata/check_release_consistency.py. "
-                     "A check fails when its count goes UP. Lower an entry when you fix "
-                     "something; never raise one to let a release through."),
+        "_comment": comment,
         "updated": datetime.now(tz=timezone.utc).strftime("%Y-%m-%d"),
         "counts": {c.key: c.count for c in checks},
     }, indent=2) + "\n")

@@ -346,5 +346,31 @@ class CorrectionSuccessorTest(unittest.TestCase):
         self.assertEqual(chk.hits, ["old -> new (also absent)"])
 
 
+class BaselineWriteTest(unittest.TestCase):
+    """`--update-baseline` must not delete the note that explains the numbers."""
+
+    def test_an_existing_comment_survives_a_rewrite(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "baseline.json"
+            path.write_text(json.dumps(
+                {"_comment": "why these numbers are what they are",
+                 "counts": {"k": 3}}))
+            with mock.patch.object(crc, "BASELINE", path):
+                crc.write_baseline([crc.Check("k", "t", "R-00", "d", hits=["a"])])
+                written = json.loads(path.read_text())
+        self.assertEqual(written["_comment"], "why these numbers are what they are")
+        self.assertEqual(written["counts"], {"k": 1})
+
+    def test_a_missing_file_gets_the_default_comment(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "baseline.json"
+            with mock.patch.object(crc, "BASELINE", path):
+                crc.write_baseline([crc.Check("k", "t", "R-00", "d")])
+                written = json.loads(path.read_text())
+        self.assertEqual(written["_comment"], crc.DEFAULT_BASELINE_COMMENT)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
