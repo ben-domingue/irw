@@ -181,6 +181,25 @@ f<-function(tab) {
                  responses_per_participant=responses_per_participant,
                  responses_per_item=responses_per_item,
                  density=density)
+      ##Carry the live column list and the table's content hash back with the
+      ##stats. Both are free here: `nms` is already in hand from the
+      ##list_variables() call above, and $properties is populated by the
+      ##list_tables() listing, so neither costs an API request.
+      ##
+      ##The column list matters because `variables` used to be written once,
+      ##when a table first appeared, and never revisited -- the need_vars block
+      ##at the bottom of this script only fills a row that is NA or empty. A
+      ##table rebuilt with fewer columns therefore kept its ORIGINAL column
+      ##list in the published catalog for ever. In October 2026 nineteen rows
+      ##declared columns the data no longer had, and five of those removals had
+      ##been removals of PERSONAL fields, so irw_meta was republishing the names
+      ##of exactly the columns a correction had taken out. The refresh pass
+      ##below now updates `variables` from this attribute, which makes the
+      ##column list exactly as fresh as the seven numbers beside it.
+      attr(testvec,"variables")<-paste(nms,collapse="| ")
+      props<-tryCatch(tab$properties,error=function(e) NULL)
+      attr(testvec,"hash")<-if (is.null(props$hash)) NA_character_ else as.character(props$hash)
+      attr(testvec,"num_rows")<-if (is.null(props$numRows)) NA_real_ else as.numeric(props$numRows)
       testvec
   }
   try.counter<-0
@@ -341,8 +360,20 @@ length(unique(summaries$table))
 ##oldest-refreshed first, and update their rows in place. Tables fetched
 ##earlier in this same run are excluded -- their numbers are already current.
 ##---------------------------------------------------------------------------
+##The log records WHAT WAS SEEN as well as when, because the when alone cannot
+##answer "is this row still a true statement about the table?". Redivis resets
+##every table's `updatedAt` whenever the draft it sits in is touched
+##(ARCHITECTURE.md section 4), so a timestamp comparison calls the whole corpus
+##stale: all 1,031 tables in shards 7 and 8 reported an October 2026 `updatedAt`
+##on 2026-10-24. The content `hash` does not move unless the table does, so
+##`hash` here against the live `hash` is the freshness test that works, and it is
+##what metadata/check_release_consistency.py compares. Rows written before this
+##change carry no hash; the gate reports those as unknown rather than as stale,
+##and they fill in as the rotation reaches them.
+refresh.log.cols<-c("table","refreshed_at","num_rows","hash")
 read_refresh_log<-function() {
-  empty<-data.frame(table=character(0),refreshed_at=character(0),stringsAsFactors=FALSE)
+  empty<-setNames(data.frame(matrix(character(0),nrow=0,ncol=length(refresh.log.cols)),
+                             stringsAsFactors=FALSE),refresh.log.cols)
   if (!file.exists(refresh.log.file)) return(empty)
   rl<-tryCatch(read.csv(refresh.log.file,stringsAsFactors=FALSE),
                error=function(e) {
@@ -350,7 +381,8 @@ read_refresh_log<-function() {
                  NULL
                })
   if (is.null(rl) || nrow(rl)==0 || !all(c("table","refreshed_at") %in% names(rl))) return(empty)
-  rl<-rl[,c("table","refreshed_at")]
+  for (cc in refresh.log.cols) if (!cc %in% names(rl)) rl[[cc]]<-NA ##logs written before the hash columns existed
+  rl<-rl[,refresh.log.cols]
   rl[!duplicated(rl$table,fromLast=TRUE),] ##newest entry per table wins
 }
 
@@ -384,8 +416,22 @@ if (refresh.per.run>0) {
                                   stringsAsFactors=FALSE)[oldv!=new | is.na(oldv)!=is.na(new),]
       }
       for (cc in stat.cols) summaries[summaries$table==tb,cc]<-testvec[[cc]]
+      ##...and the column list, which is the half of the row that used never to
+      ##be revisited. See the attr() comment in getvars() above for what that
+      ##cost in October 2026.
+      vars.now<-attr(testvec,"variables")
+      if (!is.null(vars.now) && nzchar(vars.now)) {
+        vars.was<-summaries$variables[summaries$table==tb]
+        if (length(vars.was)==1 && !identical(tolower(vars.was),tolower(vars.now)))
+          message("    schema changed: ",tb," ",
+                  length(strsplit(vars.was,"\\|")[[1]])," -> ",
+                  length(strsplit(vars.now,"\\|")[[1]])," column(s)")
+        summaries$variables[summaries$table==tb]<-vars.now
+      }
       refreshed.rows[[tb]]<-data.frame(table=tb,
                                        refreshed_at=format(Sys.time(),tz="UTC"),
+                                       num_rows=attr(testvec,"num_rows"),
+                                       hash=attr(testvec,"hash"),
                                        stringsAsFactors=FALSE)
     } else {
       err<-attr(testvec,"last.error")
@@ -430,7 +476,7 @@ if (refresh.per.run>0) {
   ##than going to the back of the queue
   if (length(refreshed.rows)>0) {
     newlog<-do.call("rbind",refreshed.rows)
-    allog<-rbind(read_refresh_log(),newlog)
+    allog<-rbind(read_refresh_log()[,refresh.log.cols],newlog[,refresh.log.cols])
     allog<-allog[!duplicated(allog$table,fromLast=TRUE),]
     ##sorted by table so the committed log diffs as changed timestamps, not moved rows
     write.csv(allog[order(allog$table),],refresh.log.file,row.names=FALSE)
@@ -449,6 +495,13 @@ summaries<-merge(summaries,nt)
 ##`new.tables` (built above at the "new tables" step) already cover every
 ##currently-live table, old and new alike, so no need to re-fetch
 ##list_tables() a second time either.
+##
+##Filling a BLANK row is all this block does, and that is the whole of it: it
+##cannot notice that a row which already has a column list has the WRONG one.
+##That is why the refresh pass above rewrites `variables` for every table it
+##visits, from a column list it already holds. The two together are what keep
+##the published schema true -- this block for a table nobody has ever asked
+##about, the refresh pass for one that has been rebuilt since.
 need_vars <- which(is.na(summaries$variables) | summaries$variables=="")
 if (length(need_vars)>0) {
   jj <- match(summaries$table[need_vars], new.tables)
