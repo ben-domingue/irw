@@ -132,11 +132,10 @@ OWNER = "datapages"
 MIN_LIVE_TABLES = 6000
 MIN_DECLARED_ROWS = 6000
 
-#: Which declared CSV describes which family's dataset list. Core is the eight
-#: shards; the other five families are one dataset or one shard list each
-#: (ARCHITECTURE.md section 2). Conjoint is deliberately absent: its tables
-#: carry no `item`/`resp` and `conj_metadata.csv` has no `variables` column, so
-#: neither the schema nor the counts check is defined for it.
+#: Which declared CSV describes which family's dataset list, for the schema and
+#: counts checks. Conjoint is deliberately absent: its tables carry no
+#: `item`/`resp` and `conj_metadata.csv` has no `variables` column, so neither
+#: check is defined for it.
 FAMILIES = {
     "core": ("metadata.csv", "core"),
     "nom": ("nominal_metadata.csv", "nom"),
@@ -144,6 +143,19 @@ FAMILIES = {
     "sim": ("simsyn_metadata.csv", "sim"),
     "rank": ("rank_metadata.csv", "rank"),
 }
+
+#: Every family, for the "does this name still resolve to a table?" question.
+#:
+#: This is a SUPERSET of FAMILIES and the distinction is load-bearing. The
+#: records checks ask whether a correction or a withdrawal names something the
+#: catalog still serves, and conjoint tables are served -- so listing only the
+#: five families above made every conjoint table look absent. That reported six
+#: correction entries as unresolvable (`bankert_2023_consumer_origin`,
+#: `shandler_2023_cyberterror`, `arias_2022_climate_migrants_us`,
+#: `donnaloja_2022_citizenship` and the two `avina_2026_immigrant_*`) when all
+#: six are live, which is the exact failure mode this gate exists to catch,
+#: inverted: a record and the data agreeing, reported as a disagreement.
+ALL_FAMILY_KEYS = tuple(FAMILIES) + ("conj",)
 
 
 class SourceError(RuntimeError):
@@ -397,14 +409,29 @@ def check_corrections_resolve(changes: List[dict], live_names: set[str],
                 "an identifier in the correction log that is not live, has no "
                 "`replaced_by` that is live, and is not in the withdrawal "
                 "ledger, is a correction a reader cannot follow to any table")
+    #: Successors are collected per TABLE and not per row. A table usually has
+    #: several correction entries and only the last one names the successor:
+    #: `nba_2012-2018` has an ordinary correction from IRW 470 with an empty
+    #: `replaced_by` and a retirement from 2026-10-01 naming
+    #: `fivethirtyeight_nba_1946_2023`, which is live. Reading rows
+    #: independently reported the first of those as unresolvable while the
+    #: answer sat two hundred rows below it.
+    successors: Dict[str, set[str]] = {}
     for row in changes:
         table = (row.get("table") or "").strip()
-        if not table or table in live_names or table in withdrawn:
-            continue
         successor = (row.get("replaced_by") or "").strip()
-        if successor and successor in live_names:
+        if table and successor:
+            successors.setdefault(table, set()).add(successor)
+    seen: set[str] = set()
+    for row in changes:
+        table = (row.get("table") or "").strip()
+        if not table or table in seen or table in live_names or table in withdrawn:
             continue
-        chk.hits.append(f"{table}{f' -> {successor} (also absent)' if successor else ''}")
+        seen.add(table)
+        named = sorted(successors.get(table, ()))
+        if any(s in live_names for s in named):
+            continue
+        chk.hits.append(table + (f" -> {', '.join(named)} (also absent)" if named else ""))
     return chk
 
 
@@ -423,12 +450,14 @@ def check_withdrawals_live(ledger: List[dict], live_names: set[str]) -> Check:
     return chk
 
 
-def check_withdrawals_records(ledger: List[dict], surfaces: Dict[str, set[str]]) -> Check:
+def check_withdrawals_records(ledger: List[dict], surfaces: Dict[str, set[str]],
+                              live_names: set[str]) -> Check:
     chk = Check("withdrawals-records", "withdrawn tables still described by the records",
-                "R-14",
+                "R-14, R-27",
                 "withdrawals reach metadata, tags and collections but not "
                 "`biblio` or `itemtext_metadata`, so a retired table keeps its "
-                "citation and its item text is still served under the retired name")
+                "citation and its item text is still described under the "
+                "retired name")
     for row in ledger:
         if (row.get("kind") or "").strip() != "whole":
             continue
@@ -436,16 +465,27 @@ def check_withdrawals_records(ledger: List[dict], surfaces: Dict[str, set[str]])
         if not table:
             continue
         #: An item-text withdrawal retires the `*__items` table, not the
-        #: response table, so the response table's own records stay. Check the
-        #: base name against the records only for response-table withdrawals.
+        #: response table, so the response table's own records stay. Only
+        #: `itemtext_metadata` is checked for those, against the base name it
+        #: keys on.
         if table.endswith("__items"):
             base = table[: -len("__items")]
-            where = [s for s, names in surfaces.items()
-                     if s == "itemtext_metadata" and base in names]
+            where = ["itemtext_metadata"] if base in surfaces["itemtext_metadata"] else []
         else:
-            where = [s for s, names in surfaces.items() if table in names]
+            #: A table the ledger calls withdrawn and the catalog still serves
+            #: is a CLEAN REBUILD in every case checked during the 2026-10
+            #: review -- the withdrawal happened, the table came back corrected,
+            #: and nothing updated the ledger. Its biblio and tags rows are then
+            #: CORRECT, and flagging them would report 184 right answers as
+            #: wrong. The stale thing is the ledger row, which is what
+            #: `withdrawals-live` reports. So the records are only checked for a
+            #: table that is genuinely gone.
+            if table in live_names:
+                continue
+            where = [s for s in ("biblio", "tags", "itemtext_metadata")
+                     if table in surfaces[s]]
         if where:
-            chk.hits.append(f"{table}: still in {', '.join(sorted(where))}")
+            chk.hits.append(f"{table}: still in {', '.join(where)}")
     return chk
 
 
@@ -458,10 +498,14 @@ def gather(only: Sequence[str] | None) -> List[Check]:
     live: Dict[str, LiveTable] = {}
     live_ds: Dict[str, str] = {}
     live_names: set[str] = set()
-    for key, (_, cfg_key) in FAMILIES.items():
+    schema_keys = {FAMILIES[k][1] for k in FAMILIES}
+    for cfg_key in ALL_FAMILY_KEYS:
+        cfg_key = FAMILIES[cfg_key][1] if cfg_key in FAMILIES else cfg_key
         for dataset in cfg.get(cfg_key, []):
             for lt in live_tables(dataset):
                 live_names.add(lt.name)
+                if cfg_key not in schema_keys:
+                    continue
                 #: Core shards are searched newest-first and the first match
                 #: wins (ARCHITECTURE.md section 2), so a name in two shards
                 #: resolves to its newest copy -- which is the one a declared
@@ -507,7 +551,7 @@ def gather(only: Sequence[str] | None) -> List[Check]:
         check_corrections_pinned(changes),
         check_corrections_resolve(changes, live_names, withdrawn),
         check_withdrawals_live(ledger, live_names),
-        check_withdrawals_records(ledger, surfaces),
+        check_withdrawals_records(ledger, surfaces, live_names),
     ]
     out = [c for c in checks if c is not None and _wanted(c.key, only)]
     return out

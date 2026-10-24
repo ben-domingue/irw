@@ -179,20 +179,33 @@ class WithdrawalsTest(unittest.TestCase):
     def test_withdrawn_table_still_in_biblio_is_a_hit(self):
         chk = crc.check_withdrawals_records(
             [{"table": "t", "kind": "whole"}],
-            {"biblio": {"t"}, "tags": set(), "itemtext_metadata": set()})
+            {"biblio": {"t"}, "tags": set(), "itemtext_metadata": set()}, set())
         self.assertEqual(chk.hits, ["t: still in biblio"])
 
+    def test_a_withdrawn_table_that_came_back_is_not_a_records_hit(self):
+        """In every case checked in the 2026-10 review, a table the ledger calls
+        withdrawn and the catalog still serves is a clean rebuild. Its biblio and
+        tags rows are then CORRECT; the stale thing is the ledger row, which
+        `withdrawals-live` reports. Flagging them reported 184 right answers as
+        wrong."""
+        chk = crc.check_withdrawals_records(
+            [{"table": "t", "kind": "whole"}],
+            {"biblio": {"t"}, "tags": {"t"}, "itemtext_metadata": set()}, {"t"})
+        self.assertEqual(chk.hits, [])
+
     def test_itemtext_withdrawal_is_checked_against_its_base_name(self):
-        """`foo__items` is the item-text table; `itemtext_metadata` keys on `foo`."""
+        """`foo__items` is the item-text table; `itemtext_metadata` keys on `foo`.
+        The base response table is normally still live and should be: what is
+        withdrawn is its wording, not its responses."""
         chk = crc.check_withdrawals_records(
             [{"table": "foo__items", "kind": "whole"}],
-            {"biblio": {"foo"}, "tags": {"foo"}, "itemtext_metadata": {"foo"}})
+            {"biblio": {"foo"}, "tags": {"foo"}, "itemtext_metadata": {"foo"}}, {"foo"})
         self.assertEqual(chk.hits, ["foo__items: still in itemtext_metadata"])
 
     def test_itemtext_withdrawal_does_not_retire_the_response_table(self):
         chk = crc.check_withdrawals_records(
             [{"table": "foo__items", "kind": "whole"}],
-            {"biblio": {"foo"}, "tags": {"foo"}, "itemtext_metadata": set()})
+            {"biblio": {"foo"}, "tags": {"foo"}, "itemtext_metadata": set()}, {"foo"})
         self.assertEqual(chk.hits, [])
 
 
@@ -213,7 +226,8 @@ class FloorTest(unittest.TestCase):
     def test_short_catalog_is_an_error(self):
         with self.assertRaises(crc.SourceError) as ctx:
             self._gather([f"t{i}" for i in range(5)],
-                         [{"table": f"t{i}"} for i in range(crc.MIN_DECLARED_ROWS + 1)])
+                         [{"table": f"t{i}", "variables": "id| item| resp"}
+                          for i in range(crc.MIN_DECLARED_ROWS + 1)])
         self.assertIn("below the floor", str(ctx.exception))
 
     def test_short_declared_set_is_an_error(self):
@@ -258,6 +272,78 @@ class BaselineTest(unittest.TestCase):
         with redirect_stdout(buf):
             crc.report([chk], {"schema": 0}, True)
         self.assertIn("cov_dob", buf.getvalue())
+
+
+
+
+class FamilyCoverageTest(unittest.TestCase):
+    """Every family counts as "live", even the ones the schema check skips.
+
+    The records checks ask whether a correction or a withdrawal names something
+    the catalog still serves. Conjoint tables are served; they are only left
+    out of the schema and counts checks because `conj_metadata.csv` has no
+    `variables` column. Building the live-name set from the schema families
+    alone reported six live conjoint tables as unresolvable corrections -- a
+    record and the data agreeing, reported as a disagreement.
+    """
+
+    def test_conjoint_is_in_the_live_name_set(self):
+        self.assertIn("conj", crc.ALL_FAMILY_KEYS)
+
+    def test_conjoint_is_not_in_the_schema_families(self):
+        self.assertNotIn("conj", crc.FAMILIES)
+
+    def test_a_live_conjoint_table_resolves_a_correction(self):
+        conj = [f"conj_table_{i}" for i in range(3)]
+        tables = {
+            "item_response_warehouse": [f"t{i}" for i in range(crc.MIN_LIVE_TABLES + 1)],
+            "irw_conjoint": conj,
+        }
+
+        def fake_live(dataset):
+            return [crc.LiveTable(n, dataset, 10, 3, "h")
+                    for n in tables.get(dataset, [])]
+
+        # `variables` must agree with the listing's variableCount, or the schema
+        # check pays a real /variables call for every one of these rows.
+        declared_rows = {
+            "metadata.csv": [{"table": f"t{i}", "variables": "id| item| resp"}
+                             for i in range(crc.MIN_DECLARED_ROWS + 1)],
+            "table_changes.csv": [{"table": "conj_table_0", "irw_version": "600",
+                                   "replaced_by": ""}],
+        }
+        with mock.patch.object(crc, "live_tables", side_effect=fake_live), \
+             mock.patch.object(crc, "declared_datasets",
+                               return_value={"core": ["item_response_warehouse"],
+                                             "conj": ["irw_conjoint"],
+                                             "nom": [], "comp": [], "sim": [], "rank": []}), \
+             mock.patch.object(crc, "read_csv_rows",
+                               side_effect=lambda p: declared_rows.get(p.name, [])):
+            checks = {c.key: c for c in crc.gather(None)}
+        self.assertEqual(checks["corrections-resolve"].hits, [])
+
+
+class CorrectionSuccessorTest(unittest.TestCase):
+    """A successor named on ANY of a table's rows resolves all of them.
+
+    `nba_2012-2018` has an ordinary correction from IRW 470 whose
+    `replaced_by` is empty, and a retirement two hundred rows below naming
+    `fivethirtyeight_nba_1946_2023`, which is live. Reading rows independently
+    reported the first as unresolvable while the answer was already in the file.
+    """
+
+    CHANGES = [
+        {"table": "old", "irw_version": "470", "replaced_by": ""},
+        {"table": "old", "irw_version": "", "replaced_by": "new"},
+    ]
+
+    def test_a_later_successor_resolves_an_earlier_row(self):
+        chk = crc.check_corrections_resolve(self.CHANGES, {"new"}, set())
+        self.assertEqual(chk.hits, [])
+
+    def test_one_hit_per_table_not_per_row(self):
+        chk = crc.check_corrections_resolve(self.CHANGES, set(), set())
+        self.assertEqual(chk.hits, ["old -> new (also absent)"])
 
 
 if __name__ == "__main__":
