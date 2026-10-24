@@ -1,11 +1,11 @@
 {
-  "_comment": "Accepted mismatch counts for metadata/check_release_consistency.py. A check fails when its count goes UP. Lower an entry when you fix something; never raise one to let a release through. `schema` is 0 because the 88 stale column lists it found were repaired when the check was written, and `corrections-resolve` is 0 because every identifier does resolve once the comparison is done right; the other four are the October 2026 backlog.",
+  "_comment": "Accepted mismatch counts for metadata/check_release_consistency.py. A check fails when its count goes UP. Lower an entry when you fix something; never raise one to let a release through. `schema` is 0 because the 88 stale column lists it found were repaired when the check was written, and `corrections-resolve` is 0 because every identifier does resolve once the comparison is done right; `counts` and `corrections-pinned` are 0 from 2026-10-24: the 59 contradicted rows were refreshed (#3214, #3213) and all 92 unpinned corrections were placed in their release (#3216). The two withdrawal entries are the remaining October 2026 backlog.",
   "updated": "2026-10-24",
   "counts": {
-    "counts": 58,
+    "counts": 0,
     "schema": 0,
     "freshness": 0,
-    "corrections-pinned": 92,
+    "corrections-pinned": 0,
     "corrections-resolve": 0,
     "withdrawals-live": 38,
     "withdrawals-records": 338
