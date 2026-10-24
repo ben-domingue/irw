@@ -34,6 +34,7 @@ from .extra import check_name
 #: at least as much information as 100 single responses on a short instrument.
 MIN_IDS = 50
 from .model import Finding, Report
+from .pii import check_pii
 
 REQUIRED = ("id", "task", "item", "resp")
 PREFIXES = ("cov_", "trial_")
@@ -168,6 +169,13 @@ def validate_rankings_frame(df, *, label: str = "", design: dict | None = None) 
     report.stats["n_ballots_with_gap"] = int((gaps > 0).sum())
     report.stats["n_rows"] = int(len(df))
     out.extend(check_name(table))
+    # The write-path PII screen (#3227). The registry had no PII check for any
+    # family, so a table arriving by any route other than automated-finding
+    # triage reached Redivis unscreened; see irw_validate/pii.py for why a
+    # value match fails and a name match warns.
+    _findings, _checks = check_pii(df, report.label or "")
+    report.checks_run.extend(_checks)
+    report.findings.extend(_findings)
     return report
 
 

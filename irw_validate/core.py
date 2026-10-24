@@ -4,7 +4,7 @@ from __future__ import annotations
 import os
 from pathlib import Path
 
-from . import extra, rights
+from . import extra, pii, rights
 from ._checks import (irw_metadata, occasion_columns,
                       resolve_occasion, run_qc)
 from .model import STANDARD_VERSION, Finding, Report, severity_for
@@ -191,9 +191,24 @@ def _validate_item_text(df, label: str, profile: str) -> Report:
         report.findings.append(finding)
     if profile == "upload":
         _check_rights(report, rights.check_item_text, df, table)
+    if profile in ("upload", "legacy"):
+        _add_pii(report, df, table)
     report.stats = {"n_rows": len(df),
                     "n_items": int(df["item"].nunique()) if "item" in df else 0}
     return report
+
+
+def _add_pii(report, df, table: str) -> None:
+    """The write-path PII screen (#3227), on `upload` and `legacy`.
+
+    Both profiles, not just `upload`: `legacy` is how the published corpus is
+    swept, and the one real identifier the 2026-10-24 screen found was in a
+    table that had been live for 516 releases. A screen that only ever looks at
+    new tables cannot find that.
+    """
+    findings, checks = pii.check_pii(df, table)
+    report.checks_run.extend(checks)
+    report.findings.extend(findings)
 
 
 def _check_rights(report: Report, check, df, table: str) -> None:
@@ -305,6 +320,9 @@ def validate_frame(df, *, label: str = "", profile: str = "upload",
 
     if profile == "upload":
         _check_rights(report, rights.check_item_codes, df, table)
+
+    if profile in ("upload", "legacy"):
+        _add_pii(report, df, table)
 
     if {"id", "item", "resp"}.issubset(df.columns):
         try:
