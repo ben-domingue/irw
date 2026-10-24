@@ -32,7 +32,28 @@ rename race cov_race
 rename republican cov_republican
 rename startdate cov_startdate
 rename state cov_state
-rename zip cov_zip
+
+* ZIP is coarsened to its 3-digit prefix and never published in full.
+*
+* The source holds full 5-digit ZIPs: 2,634 distinct values over 3,110
+* respondents, so ZIP ALONE makes 72.0% of them unique -- published beside age,
+* gender, race, party, hispanic, income, education and state, in a survey about
+* perceived discrimination. The ZIP3 prefix takes that to 5.6% (median k = 3,
+* 675 distinct geographies) and keeps the variable usable regionally. It does
+* NOT make the table k-anonymous: zip3 + age + gender + race + party is still
+* 89.3% unique, and state + age + gender + race + party is 41.0%, so the
+* residual is the seven demographics rather than the ZIP. See
+* tools/repairs/friedman_2018_zip3.py, which applied the same change to the
+* already-published tables, and ben-domingue/irw#3219.
+*
+* string(), not a numeric prefix: a ZIP beginning with 0 is a 4-digit number,
+* and taking digits off the front of 2139 gives the wrong prefix for every
+* New England respondent. The published tables had exactly this defect -- 248
+* of 3,110 ZIPs were served 3 or 4 characters long.
+tostring zip, replace force
+replace zip = substr("00000" + zip, strlen("00000" + zip) - 4, 5)
+generate str3 cov_zip3 = substr(zip, 1, 3)
+drop zip
 
 * convert start dates of survey response to standard format, which is the time of the data point in UNIX format
 generate double cov_startdate_stata = clock(cov_startdate, "MDYhm")
