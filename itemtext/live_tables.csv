@@ -1,6 +1,7 @@
-# item-text tables in the Redivis shards as of 2026-10-23
+# item-text tables in the Redivis shards as of 2026-10-25
 # status=published: a reader can fetch it. status=draft: uploaded, not released yet.
 # generated -- do not hand-edit; rerun itemtext/refresh_live_tables.py (irw#1828)
+# draft not listable by this token (needs data.edit) for irw_text; its draft rows carried forward from the snapshot taken 2026-10-23
 table,shard,status
 16_personalityfactors,irw_text,published
 360emergencymed_azami_2024,irw_text,published
@@ -297,6 +298,7 @@ buzgova_2023_rses,irw_text,published
 buzgova_2023_soc,irw_text,published
 buzzi_2025_autonomy,irw_text_3,published
 byrne_2026_health_info_sources,irw_text_3,published
+byun_2026_mascot_ratings,irw_text_3,published
 c19prc_uk_mcbride_2021_activity,irw_text_3,published
 c19prc_uk_mcbride_2021_childimpact,irw_text_3,published
 c19prc_uk_mcbride_2021_cmq,irw_text_3,published
@@ -413,6 +415,20 @@ cogcontrol_gyurkovics_2019_simon,irw_text,published
 cognitive_children_2026,irw_text_2,published
 coh_goodman_2023_racial_comp,irw_text,published
 colomer_perez_2021_soc13,irw_text,published
+comeau_2015_climate_beliefs,irw_text_3,published
+comeau_2015_decision_considerations,irw_text_3,published
+comeau_2015_energy_attitudes,irw_text_3,published
+comeau_2015_energy_literacy,irw_text_3,published
+comeau_2015_energy_literacy_sureness,irw_text_3,published
+comeau_2015_energy_participation,irw_text_3,published
+comeau_2015_energy_source_knowledge,irw_text_3,published
+comeau_2015_energy_source_support,irw_text_3,published
+comeau_2015_environmental_values,irw_text_3,published
+comeau_2015_home_energy_intentions,irw_text_3,published
+comeau_2015_home_energy_knowledge,irw_text_3,published
+comeau_2015_information_trust,irw_text_3,published
+comeau_2015_participation_barriers,irw_text_3,published
+comeau_2015_provincial_process,irw_text_3,published
 condon_2024_sapa_personality,irw_text,published
 conner_2017_cesd,irw_text,published
 conner_2017_curiosity,irw_text,published
