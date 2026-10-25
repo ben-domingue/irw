@@ -11,6 +11,10 @@
 options(scipen=999)
 library(redivis)
 source("redivis_config.R")
+##The per-table statistics, shared with refresh_rows.R so a refreshed row is
+##the row this stage would write (see family_stats.R).
+source("family_stats.R")
+f<-f_comps
 user <- redivis$user(IRW_OWNER)
 dataset <- user$dataset("irw_meta")
 table <- dataset$table("comps_metadata")
@@ -24,7 +28,7 @@ length(old.tables)
 
 ##new tables
 tables<-new.tables<-list()
-for (dataset in c("irw_competitions")) {
+for (dataset in FAMILY_DATASETS$comps) {
      v1<- redivis$organization(IRW_OWNER)$dataset(dataset)
      tabs<-v1$list_tables()
      new.tables[[dataset]]<-data.frame(table=sapply(tabs,function(x) x$name),dataset=dataset)
@@ -60,47 +64,6 @@ dim(meta)
 ##is what got exhausted account-wide on 2026-08-18. Queries are not subject to
 ##the cap. COUNT(DISTINCT) ignores NULLs, matching `unique()` on a column with
 ##no missing agents -- verified equal to comps_metadata.csv on all 23 tables.
-count_actors_via_query<-function(tab) {
-  ref<-tab$qualified_reference
-  sql<-sprintf(paste("SELECT COUNT(DISTINCT agent) AS n FROM (",
-                     "SELECT CAST(agent_a AS STRING) AS agent FROM `%s`",
-                     "UNION ALL",
-                     "SELECT CAST(agent_b AS STRING) AS agent FROM `%s` )"),
-               ref, ref)
-  res<-redivis$query(sql)$to_tibble()
-  n<-as.numeric(res$n[1])
-  if (length(n)!=1 || is.na(n)) stop("actor count query returned no value for ",ref)
-  n
-}
-
-f<-function(tab) {
-    getvars<-function(tab) {
-      variables <- tab$list_variables() 
-      nms<-sapply(variables,function(x) x$get()$properties$name)
-      stats<-lapply(variables,function(x) x$get_statistics() ) 
-      ##
-      names(stats)<-nms
-      n_responses<-stats[["winner"]]$count
-      ##
-      n_actors<-count_actors_via_query(tab)
-      testvec<-c(n_responses=n_responses,
-                 n_actors=n_actors
-                 )
-      testvec
-  }
-  try.counter<-0
-  while (try.counter<4) { #sometimes the download fails, this gives multiple tries to get that
-      had_error<-FALSE
-      testvec<-tryCatch(getvars(tab), error=function(e) {
-          message("  ! request failed (attempt ", try.counter+1, "/4): ", conditionMessage(e))
-          had_error<<-TRUE
-          NULL
-      })
-      if (had_error) Sys.sleep(5) #network failure -- back off before retrying
-      if (length(testvec)==2) try.counter<-100 else try.counter<-try.counter+1
-  }
-  return(testvec)
-}
 out<-list()
 
 nms<-new.tables[!toadd]

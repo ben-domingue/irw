@@ -12,6 +12,10 @@
 options(scipen=999)
 library(redivis)
 source("redivis_config.R")
+##The per-table statistics, shared with refresh_rows.R so a refreshed row is
+##the row this stage would write (see family_stats.R).
+source("family_stats.R")
+f<-f_simsyn
 user <- redivis$user(IRW_OWNER)
 dataset <- user$dataset("irw_meta")
 table <- dataset$table("simsyn_metadata")
@@ -28,7 +32,7 @@ length(old.tables)
 
 ##new tables
 tables<-new.tables<-list()
-for (dataset in c("irw_simsyn")) {
+for (dataset in FAMILY_DATASETS$simsyn) {
     v1<- redivis$organization(IRW_OWNER)$dataset(dataset)
     tabs<-v1$list_tables()
     new.tables[[dataset]]<-data.frame(table=sapply(tabs,function(x) x$name),dataset=dataset)
@@ -73,62 +77,6 @@ count_resp_via_query<-function(tab) {
   n
 }
 
-f<-function(tab) {
-  getvars<-function(tab) {
-      variables <- tab$list_variables() 
-      nms<-sapply(variables,function(x) x$get()$properties$name)
-      stats<-lapply(variables,function(x) x$get_statistics() ) 
-      ##
-      names(stats)<-nms
-      n_responses<-stats[["resp"]]$count ##[[ ]] not $: $ partial-matches e.g. a lone `resp_time`
-      if (is.null(n_responses)) {
-          message("  no server-side resp count for ",tab$name,"; counting via query")
-          n_responses<-count_resp_via_query(tab)
-      }
-      ##
-      #n_categories<-stats$resp$numDistinct #see june 13 2025 email 'Redivis API deprecation notice for "statistics" property on variable.get endpoint'
-      resp.index<-which(nms=="resp")
-      variable<-variables[[resp.index]]
-      out<-variable$get_statistics()
-      out<-out$frequencyDistribution
-      z<-lapply(out,function(x) x$value)
-      z<-z[!sapply(z,is.null)]
-      ncats<-as.numeric(unlist(z))
-      n_categories<-length(ncats[!is.na(ncats)])
-      ##
-      n_participants<-stats$id$numDistinct
-      n_items<-stats$item$numDistinct
-      responses_per_participant = n_responses / n_participants
-      responses_per_item = n_responses / n_items
-      ##Responses per person-item cell, not the proportion of cells filled; see
-      ##the comment on the same line in table_stats.R (#3222).
-      density = (sqrt(n_responses) / n_participants) * (sqrt(n_responses) / n_items)
-      ##throttle
-                                        #i<-0
-                                        #while (i<10000000) i<-i+1
-      ##
-      testvec<-c(n_responses=n_responses,
-                 n_categories=n_categories,
-                 n_participants=n_participants,
-                 n_items=n_items,
-                 responses_per_participant=responses_per_participant,
-                 responses_per_item=responses_per_item,
-                 density=density)
-      testvec
-  }
-  try.counter<-0
-  while (try.counter<4) { #sometimes the download fails, this gives multiple tries to get that
-      had_error<-FALSE
-      testvec<-tryCatch(getvars(tab), error=function(e) {
-          message("  ! request failed (attempt ", try.counter+1, "/4): ", conditionMessage(e))
-          had_error<<-TRUE
-          NULL
-      })
-      if (had_error) Sys.sleep(5) #network failure -- back off before retrying
-      if (length(testvec)==7) try.counter<-100 else try.counter<-try.counter+1
-  }
-  return(testvec)
-}
 out<-list()
 
 nms<-new.tables[!toadd]

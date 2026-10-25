@@ -11,6 +11,10 @@
 options(scipen=999)
 library(redivis)
 source("redivis_config.R")
+##The per-table statistics, shared with refresh_rows.R so a refreshed row is
+##the row this stage would write (see family_stats.R).
+source("family_stats.R")
+f<-f_nominal
 user <- redivis$user(IRW_OWNER)
 dataset <- user$dataset("irw_meta")
 table <- dataset$table("nominal_metadata")
@@ -24,7 +28,7 @@ length(old.tables)
 
 ##new tables
 tables<-new.tables<-list()
-for (dataset in c("irw_nominal")) {
+for (dataset in FAMILY_DATASETS$nom) {
      v1<- redivis$organization(IRW_OWNER)$dataset(dataset)
      tabs<-v1$list_tables()
      new.tables[[dataset]]<-data.frame(table=sapply(tabs,function(x) x$name),dataset=dataset)
@@ -54,44 +58,6 @@ if (length(ii)>0) {
 dim(meta)
 
 
-f<-function(tab) {
-    getvars<-function(tab) {
-      variables <- tab$list_variables() 
-      nms<-sapply(variables,function(x) x$get()$properties$name)
-      stats<-lapply(variables,function(x) x$get_statistics() ) 
-      ##
-      names(stats)<-nms
-      n_participants<-stats$id$numDistinct
-      n_items<-stats$item$numDistinct
-      n_responses<-stats$text$count
-      responses_per_participant = n_responses / n_participants
-      ##
-      resp.index<-which(nms=="text")
-      variable<-variables[[resp.index]]
-      out<-variable$get_statistics()
-      n_categories<-out$numDistinct
-      ##
-      testvec<-c(n_responses=n_responses,
-                 n_participants=n_participants,
-                 n_items=n_items,
-                 responses_per_participant=responses_per_participant,
-                 n_categories=n_categories
-                 )
-      testvec
-  }
-  try.counter<-0
-  while (try.counter<4) { #sometimes the download fails, this gives multiple tries to get that
-      had_error<-FALSE
-      testvec<-tryCatch(getvars(tab), error=function(e) {
-          message("  ! request failed (attempt ", try.counter+1, "/4): ", conditionMessage(e))
-          had_error<<-TRUE
-          NULL
-      })
-      if (had_error) Sys.sleep(5) #network failure -- back off before retrying
-      if (length(testvec)==5) try.counter<-100 else try.counter<-try.counter+1
-  }
-  return(testvec)
-}
 out<-list()
 
 nms<-new.tables[!toadd]
