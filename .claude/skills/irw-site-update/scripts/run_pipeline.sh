@@ -140,9 +140,12 @@
 # deliberately no longer lives in ~/.Renviron, since that also leaks into
 # Ben's plain interactive `R` sessions and triggers the redivis package's
 # "deprecated and highly discouraged" interactive-token warning). Also
-# needs ANTHROPIC_API_KEY set for 02_biblio.R's BibTeX-generation fallback
-# (it calls Claude Haiku 4.5 and will prompt interactively if unset -- fine
-# for a foreground run, not for unattended use). Stage 08 additionally needs
+# needs Anthropic credentials for 02_biblio.R's BibTeX-generation fallback
+# (it calls Claude Haiku 4.5 and will prompt interactively if it finds none --
+# fine for a foreground run, not for unattended use). Either ANTHROPIC_API_KEY,
+# which is the local path, or the Workload Identity Federation variables the
+# metadata-pipeline workflow sets instead of holding a key; metadata/
+# anthropic_auth.R resolves the two. Stage 08 additionally needs
 # the `quanteda`/`quanteda.textstats` R packages installed.
 
 set -euo pipefail

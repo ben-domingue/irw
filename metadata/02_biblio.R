@@ -16,6 +16,7 @@ library(purrr)
 source("bibtex_overrides.R")
 bibtex_overrides <- read_bibtex_overrides("bibtex_overrides.csv")
 source("bibtex_doi_check.R")  ## #2301: a cached citation must name the row's own DOI
+source("anthropic_auth.R")    ## static key locally, federated token in CI
 
 add_json_field <- function(key, value) {
   if (!is.na(value)) {
@@ -50,29 +51,33 @@ fetch_bibtex_from_doi <- function(filename, doi) {
 
 # Function to call Claude and generate JSON formatted BibTeX output
 anthropic_chat <- function(prompt, model = "claude-haiku-4-5", max_tokens = 1024) {
-  api_key <- Sys.getenv("ANTHROPIC_API_KEY")
-  if (nchar(api_key) == 0) {
-    api_key <- readline("Enter your Anthropic API key: ")
-    Sys.setenv(ANTHROPIC_API_KEY = api_key)
-  }
   system_prompt <- "You are an expert in structured data extraction. You will receive details of a dataset and should return a BibTeX citation of the dataset in JSON format. Respond with ONLY the raw JSON object -- no markdown code fences, no commentary."
-  response <- POST(
-    url = "https://api.anthropic.com/v1/messages",
-    add_headers(
-      "x-api-key" = api_key,
-      "anthropic-version" = "2023-06-01"
-    ),
-    content_type_json(),
-    encode = "json",
-    body = toJSON(list(
-      model = model,
-      max_tokens = max_tokens,
-      system = system_prompt,
-      messages = list(
-        list(role = "user", content = prompt)
-      )
-    ), auto_unbox = TRUE)
-  )
+  body <- toJSON(list(
+    model = model,
+    max_tokens = max_tokens,
+    system = system_prompt,
+    messages = list(
+      list(role = "user", content = prompt)
+    )
+  ), auto_unbox = TRUE)
+  post_message <- function(force_refresh = FALSE) {
+    POST(
+      url = "https://api.anthropic.com/v1/messages",
+      add_headers(.headers = c(
+        anthropic_auth_header(force_refresh = force_refresh),
+        "anthropic-version" = "2023-06-01"
+      )),
+      content_type_json(),
+      encode = "json",
+      body = body
+    )
+  }
+  response <- post_message()
+  ## A federated token is short-lived (see anthropic_auth.R) and this loop runs
+  ## for as long as there are rows, so an expiry mid-stage is expected rather
+  ## than exceptional: mint a new one and retry once. On the static-key path the
+  ## retry re-sends the same key and the 401 stands, as it should.
+  if (status_code(response) == 401) response <- post_message(force_refresh = TRUE)
   if (status_code(response) != 200) {
     stop("Error: ", content(response, as = "parsed")$error$message)
   }
