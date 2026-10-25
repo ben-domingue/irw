@@ -26,6 +26,7 @@ published <- as.data.frame(table$to_tibble())
 ## column set is whatever published carries, so a column added upstream still
 ## arrives; FK_grade is back-filled below either way.
 source(file.path(here, "base_guard.R"))
+source(file.path(here, "itemtext_prune.R"))
 existing <- choose_base(file.path(here, "itemtext_metadata.csv"), published, names(published),
                         label = "itemtext_metadata.csv")
 
@@ -82,4 +83,9 @@ merge.new <- do.call(rbind, rows)
 if (!"FK_grade" %in% names(existing)) existing$FK_grade <- NA_real_
 
 df <- rbind(merge.new, existing[, names(merge.new)])
+
+## Drop rows whose item text is no longer served (see itemtext_prune.R for the
+## why, and for the guard that refuses to act on a failed listing).
+df <- prune_unserved_itemtext(df, lt)
+
 write.csv(df, file = file.path(here, "itemtext_metadata.csv"), quote = TRUE, row.names = FALSE)

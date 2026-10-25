@@ -148,6 +148,16 @@ jobs:
         working-directory: metadata
         run: Rscript tests/test_bibtex_doi_check.R
 
+      # The itemtext_metadata prune (#3224). 08_itemtext.R only ever added
+      # rows, so a withdrawn table kept its row for ever -- 199 of 2,921 on
+      # 2026-10-25. What this test is really guarding is the guard: a listing
+      # that failed must not be read as a corpus whose item text was withdrawn,
+      # and the deletion is of PUBLISHED rows, so it has to refuse rather than
+      # proceed when the listing looks wrong.
+      - name: itemtext_metadata prune guard
+        working-directory: metadata
+        run: Rscript tests/test_itemtext_prune.R
+
       # The dictionary union (#1732). Runs offline -- dict_union.R touches no
       # network -- so the merge rule is checked on every PR rather than only
       # when someone remembers to run it. Its load-bearing assertion is that a
