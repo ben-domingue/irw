@@ -74,6 +74,20 @@ f<-function(tab) {
       n_items<-stats$item$numDistinct
       responses_per_participant = n_responses / n_participants
       responses_per_item = n_responses / n_items
+      ##`density` is RESPONSES PER PERSON-ITEM CELL: n_responses over
+      ##n_participants * n_items, written as a product of square roots only so
+      ##that a billion-response table does not overflow the numerator.
+      ##
+      ##It is NOT the proportion of cells that are filled, and it is not bounded
+      ##by 1. 768 of 6,720 core tables are above 1 (measured 2026-10-25), which
+      ##is what a table with repeated measurements looks like: 700 of them carry
+      ##an occasion column (wave, rater, trial_*, session, ...), 122 carry
+      ##`date`, and the largest is hachenberger_2025_gonogo_main at 3,624.6 --
+      ##a go/no-go task where each person-item is measured thousands of times.
+      ##A value above 1 is therefore information about the design, never a
+      ##defect, and nothing downstream may treat it as one. The proportion of
+      ##distinct id-item cells filled is a different quantity, not computed
+      ##here (ben-domingue/irw#3222, review R-21).
       density = (sqrt(n_responses) / n_participants) * (sqrt(n_responses) / n_items)
       ##throttle
                                         #i<-0

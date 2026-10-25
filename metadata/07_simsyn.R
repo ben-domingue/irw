@@ -100,6 +100,8 @@ f<-function(tab) {
       n_items<-stats$item$numDistinct
       responses_per_participant = n_responses / n_participants
       responses_per_item = n_responses / n_items
+      ##Responses per person-item cell, not the proportion of cells filled; see
+      ##the comment on the same line in table_stats.R (#3222).
       density = (sqrt(n_responses) / n_participants) * (sqrt(n_responses) / n_items)
       ##throttle
                                         #i<-0

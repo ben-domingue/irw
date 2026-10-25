@@ -8,9 +8,9 @@
 ## never-refreshed first. That sweeps the corpus in about five weeks, which is
 ## fine for drift and useless for a row that is KNOWN to be wrong: review R-04
 ## (#3214) found number_pattern_game publishing n_items 255 against a true
-## 25,499 -- a density of 1.765, which the site's own definition says cannot
-## exceed 1 -- and review R-13 (#3213) found 58 tables publishing an
-## n_responses larger than the number of rows their table has. Those rows are
+## 25,499, and with it a density of 1.765 against a true 0.018 -- and review
+## R-13 (#3213) found 58 tables publishing an n_responses larger than the
+## number of rows their table has. Those rows are
 ## false statements about the data, and "the rotation will get there" is not an
 ## answer a reader of the catalog can use.
 ##
