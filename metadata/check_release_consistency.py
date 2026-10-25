@@ -34,6 +34,20 @@ The four kinds of mismatch, each with the case that motivated it:
               (review R-13, R-04). Both are the same defect: a published number
               computed against a table that has since been replaced.
 
+  unexplained-repeats
+              A published `density` above 1 is proof that an id-item pair
+              repeats: there are more responses than person-item cells. 743
+              tables are above 1 and 705 of them say why, with an occasion
+              column. The rest are silent, and on 2026-10-25 two thirds of them
+              were silent because `n_participants` was stale -- `sris_silvia2022`
+              published 221 against 1,192 live, a factor of 5.4 -- which the
+              `counts` check cannot see, since it bounds every count above by
+              numRows and a stale participant count is too SMALL. The remainder
+              hold duplicate rows that nothing in the table explains: one id
+              covering two respondents (`liu_2017_*`, where the covariates give
+              two different ages for the shared id), or a trial-level task whose
+              trial column was dropped at ingest (review R-21, #3222).
+
   corrections The corrections policy promises every fix names the release that
               carries it. 92 of 715 entries name no version (review R-12), and
               59 identifiers in the correction log match nothing in the public
@@ -359,6 +373,51 @@ def check_counts(declared: Dict[str, dict], live: Dict[str, LiveTable]) -> Check
     return chk
 
 
+#: The columns `datastandard.md` defines as indexing a repeated measurement,
+#: plus `date`. Deliberately the same list `irw_validate`'s occasion_columns()
+#: and the two clients' long2resp() use, so "this repeat is explained" means
+#: the same thing in the catalog, the validator and the reshape.
+OCCASION_COLUMNS = ("rater", "wave", "timepoint", "trialnum", "trial", "order",
+                    "session", "occasion", "period", "block", "subtest", "date")
+
+
+def _explains_a_repeat(variables: str | None) -> bool:
+    cols = split_variables(variables)
+    return any(c in OCCASION_COLUMNS or c.startswith("trial_") for c in cols)
+
+
+def check_unexplained_repeats(declared: Dict[str, dict]) -> Check:
+    chk = Check("unexplained-repeats",
+                "tables that must hold duplicate id-item rows nothing explains",
+                "R-21",
+                "`density` above 1 is proof by pigeonhole that an id-item pair "
+                "repeats -- there are more responses than person-item cells -- "
+                "and the published column list names no occasion column and no "
+                "`date` to key those repeats on, so either the row is stale or "
+                "the table holds duplicates that are a defect")
+    #: Query-free on purpose: this is arithmetic on the published row, so it
+    #: costs nothing at 6,720 tables and runs in the same pass as the rest.
+    #:
+    #: It fills the hole check_counts cannot reach. That check bounds every
+    #: count ABOVE, by numRows, which catches a count that grew too large and
+    #: is blind to one that stayed too small -- and a stale `n_participants` is
+    #: always too small, because tables gain respondents. On 2026-10-25 all 68
+    #: hits had a correct `n_responses` and 27 had an `n_participants` wrong by
+    #: up to 5.4x (`sris_silvia2022`, 221 published against 1,192 live), so the
+    #: counts gate passed every one of them.
+    #:
+    #: Above 1 is NOT itself a defect: 743 tables are, and 705 of them say why
+    #: with an occasion column. Only the silent ones are listed.
+    for name, row in sorted(declared.items()):
+        density = _num(row.get("density"))
+        if density is None or density <= 1:
+            continue
+        if _explains_a_repeat(row.get("variables")):
+            continue
+        chk.hits.append(f"{name}: density {density:.4f}")
+    return chk
+
+
 def check_freshness(declared: Dict[str, dict], live: Dict[str, LiveTable],
                     recorded_hash: Dict[str, str]) -> Check:
     chk = Check("freshness", "rows computed against a table that has since changed",
@@ -546,6 +605,7 @@ def gather(only: Sequence[str] | None) -> List[Check]:
 
     checks = [
         check_counts(declared, live),
+        check_unexplained_repeats(declared),
         check_schema(declared, live, live_ds) if _wanted("schema", only) else None,
         check_freshness(declared, live, recorded_hash),
         check_corrections_pinned(changes),

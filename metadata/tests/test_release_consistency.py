@@ -84,6 +84,53 @@ class SchemaTest(unittest.TestCase):
         self.assertEqual(chk.hits, [])
 
 
+class UnexplainedRepeatsTest(unittest.TestCase):
+    """`density` > 1 is proof an id-item pair repeats: there are more responses
+    than person-item cells. The check asks whether anything in the published
+    row says why (review R-21, #3222)."""
+
+    def test_density_above_one_with_no_occasion_column_is_a_hit(self):
+        chk = crc.check_unexplained_repeats({"t": declared(density="1.0029")})
+        self.assertEqual(len(chk.hits), 1)
+        self.assertIn("density 1.0029", chk.hits[0])
+
+    def test_an_occasion_column_explains_it(self):
+        for col in ("wave", "rater", "trialnum", "block", "subtest", "date",
+                    "trial_annotation"):
+            with self.subTest(col=col):
+                chk = crc.check_unexplained_repeats(
+                    {"t": declared(density="12.3", variables=f"id| item| resp| {col}")})
+                self.assertEqual(chk.hits, [])
+
+    def test_a_covariate_does_not_explain_it(self):
+        """`cov_group` and `cov_study` are between-person labels as far as the
+        standard is concerned. Several of the 2026-10-25 hits carried one, and
+        in every case the repeat was something else -- a stale participant count
+        or a genuine duplicate."""
+        chk = crc.check_unexplained_repeats(
+            {"t": declared(density="2.4", variables="id| item| resp| cov_group")})
+        self.assertEqual(len(chk.hits), 1)
+
+    def test_density_at_or_below_one_is_not_a_hit(self):
+        for value in ("1", "1.0", "0.5", "0.0176"):
+            with self.subTest(value=value):
+                chk = crc.check_unexplained_repeats({"t": declared(density=value)})
+                self.assertEqual(chk.hits, [])
+
+    def test_a_blank_density_is_skipped(self):
+        for value in ("", "NA", None):
+            with self.subTest(value=value):
+                chk = crc.check_unexplained_repeats({"t": declared(density=value)})
+                self.assertEqual(chk.hits, [])
+
+    def test_it_asks_no_questions_of_the_live_catalog(self):
+        """The check takes `declared` alone -- it is arithmetic on the published
+        row, which is what makes it free to run on 6,720 tables."""
+        import inspect
+        self.assertEqual(list(inspect.signature(crc.check_unexplained_repeats)
+                              .parameters), ["declared"])
+
+
 class CountsTest(unittest.TestCase):
     def test_n_responses_above_numrows_is_a_hit(self):
         chk = crc.check_counts({"t": declared(n_responses="101")}, {"t": live("t", rows=100)})
