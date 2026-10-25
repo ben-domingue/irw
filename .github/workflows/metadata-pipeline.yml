@@ -67,6 +67,10 @@ permissions:
   # Reading another run's artifacts (the resume path) needs this; the default
   # token scope for the job's own artifacts does not cover it.
   actions: read
+  # Lets the job request GitHub's own OIDC token for the run, which
+  # 02_biblio.R exchanges for a short-lived Anthropic token. Without this
+  # GitHub issues no identity token and the exchange has nothing to present.
+  id-token: write
 
 concurrency:
   group: metadata-pipeline
@@ -206,10 +210,19 @@ jobs:
           # run_pipeline.sh prefers an exported token over ~/.redivis_api_token,
           # which does not exist here. Read-only is all the pipeline needs.
           REDIVIS_API_TOKEN: ${{ secrets.REDIVIS_API_TOKEN }}
-          # 02_biblio.R falls back to Claude to generate missing BibTeX. With no
-          # key set it calls readline(), which returns empty non-interactively
-          # and fails confusingly rather than cleanly.
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          # 02_biblio.R falls back to Claude to generate missing BibTeX. It
+          # authenticates by Workload Identity Federation -- it exchanges this
+          # run's GitHub OIDC token for a short-lived Anthropic token -- so
+          # there is no ANTHROPIC_API_KEY secret in this repository to leak.
+          # These three are identifiers, not secrets, and are deliberately in
+          # the clear. Do NOT add ANTHROPIC_API_KEY back alongside them: a key
+          # in the environment shadows federation, in this script and in every
+          # Anthropic SDK, so these would become dead configuration.
+          ANTHROPIC_FEDERATION_RULE_ID: fdrl_01ULHjDcv36yQt85ftuMdheH
+          ANTHROPIC_ORGANIZATION_ID: 74eb46cc-b824-4c2b-b57d-f90e03374cb3
+          ANTHROPIC_SERVICE_ACCOUNT_ID: svac_01AzPY8zbQ17wCtMJDR3gx9n
+          # Only needed if the federation rule covers more than one workspace.
+          # ANTHROPIC_WORKSPACE_ID: wrkspc_REPLACE_ME
         run: |
           set -o pipefail
           resume=""
