@@ -220,7 +220,7 @@ jobs:
           # Anthropic SDK, so these would become dead configuration.
           ANTHROPIC_FEDERATION_RULE_ID: fdrl_REPLACE_ME
           ANTHROPIC_ORGANIZATION_ID: 00000000-0000-0000-0000-000000000000
-          ANTHROPIC_SERVICE_ACCOUNT_ID: svac_REPLACE_ME
+          ANTHROPIC_SERVICE_ACCOUNT_ID: svac_01AzPY8zbQ17wCtMJDR3gx9n
           # Only needed if the federation rule covers more than one workspace.
           # ANTHROPIC_WORKSPACE_ID: wrkspc_REPLACE_ME
         run: |
