@@ -945,6 +945,64 @@ _RE_POSTAL_FULL = re.compile(
     r")$")
 
 
+# A postal code served as an INTEGER. The content tier above is string-only by
+# design, for the documented reason that digits cannot be told from a legitimate
+# numeric covariate without a locale -- and that is right for a raw candidate.
+# It is not right for IRW's own corpus, where the 2026-10-24 live screen found
+# `friedman_2018_risks_*` publishing a full 5-digit US ZIP as an integer: the
+# content tier read 0 columns on 28 of the 29 tables it examined, and the one
+# real hit in the corpus was invisible to `_holds_full_postal_codes` because the
+# values were numeric (review R-41, issue #3227).
+#
+# Scoped to columns whose NAME says postal code, which is what makes it
+# locale-free: a numeric column called `cov_zip` holding 5-digit values is a ZIP
+# and nothing else, while the same values under `cov_income` are money. Without
+# that scope the detector would start rejecting ordinary covariates, which is
+# the failure mode the string-only rule was protecting against.
+#
+# Deliberately NOT matched: `zip3`, `zip_3`, `fsa`, or any name saying the code
+# is truncated -- a 3-digit prefix is the coarsening the 2026-10-19 ruling asks
+# for, so flagging it would flag the fix.
+_RE_POSTAL_NAME = re.compile(
+    r"(?:^|_|\b)(?:zip|zipcode|postal|postalcode|postcode|cp|codigo_?postal|"
+    r"code_?postal|plz|pincode)(?:$|_|\b)", re.IGNORECASE)
+_RE_POSTAL_NAME_TRUNCATED = re.compile(r"(?:zip|postal|postcode|cp)_?[1-4]\b|fsa|"
+                                       r"prefix|trunc", re.IGNORECASE)
+
+
+def _holds_numeric_postal_codes(series) -> bool:
+    """True when a numeric column's values are full 5-digit postal codes.
+
+    Only ever called on a column whose name says postal code (see
+    `_RE_POSTAL_NAME`), so this asks the narrow question that remains: are the
+    values a WHOLE code rather than a truncated prefix? Five digits is the US
+    ZIP and the German/Spanish/Italian/French code; a 3- or 4-digit value is
+    the coarsening, and passes.
+    """
+    try:
+        import pandas as _pd
+        if not _pd.api.types.is_numeric_dtype(series):
+            return False
+    except Exception:
+        return False
+    v = series.dropna()
+    if len(v) < 5:
+        return False
+    try:
+        whole = (v % 1 == 0)
+    except TypeError:
+        return False
+    v = v[whole]
+    if len(v) < 5:
+        return False
+    sample = v.head(2000)
+    five = (sample >= 10000) & (sample <= 99999)
+    # A column OF codes, on the same thresholds as the string detectors. The
+    # distinctness floor keeps a 5-digit coded CATEGORY -- a school id, a
+    # district code repeated across thousands of rows -- out of it.
+    return bool(five.sum() >= 5 and five.mean() >= 0.8 and sample.nunique() >= 10)
+
+
 def _column_is_blank(series) -> bool:
     """True when a column has no values at all -- NA or empty string only.
 
@@ -1051,6 +1109,12 @@ def screen_for_pii(columns, df=None, labels=None) -> list[str]:
                   file=sys.stderr)
 
     hits, seen_cols, geographic, blanked = [], set(), set(), []
+    #: The hits that came from reading VALUES rather than from a name or a
+    #: variable label. irw_validate's gate treats the two differently: of the
+    #: 29 live tables whose column NAME suggested an identifier on 2026-10-24,
+    #: 28 were coded yes/no flags, so a name match is a lead and a value match
+    #: is a finding (#3227).
+    value_hits = set()
     for c, label, where in _pii_surfaces(columns, labels):
         if c in seen_cols:
             continue
@@ -1073,12 +1137,14 @@ def screen_for_pii(columns, df=None, labels=None) -> list[str]:
               and _RE_BARE_NAME_LABEL.match(label.strip())
               and _looks_like_person_names(df[c])):
             hits.append(label)
+            value_hits.add(label)
             seen_cols.add(c)
         elif (where == "name" and df is not None
               and _holds_email_addresses(df[c])):
             # Label-independent: whatever the column is called, a block of
             # email addresses in it is a direct identifier.
             hits.append(f"{label} (email addresses in the values)")
+            value_hits.add(f"{label} (email addresses in the values)")
             seen_cols.add(c)
         elif (where == "name" and df is not None
               and _holds_full_postal_codes(df[c])):
@@ -1087,12 +1153,24 @@ def screen_for_pii(columns, df=None, labels=None) -> list[str]:
             # same question. Only the values separate them.
             hits.append(f"{label} (full postal codes in the values)")
             geographic.add(f"{label} (full postal codes in the values)")
+            value_hits.add(f"{label} (full postal codes in the values)")
+            seen_cols.add(c)
+        elif (where == "name" and df is not None
+              and _RE_POSTAL_NAME.search(label)
+              and not _RE_POSTAL_NAME_TRUNCATED.search(label)
+              and _holds_numeric_postal_codes(df[c])):
+            # The numeric tier (review R-41). Name-scoped, so it cannot fire on
+            # an ordinary numeric covariate; see _holds_numeric_postal_codes.
+            hits.append(f"{label} (full postal codes in the values, numeric)")
+            geographic.add(f"{label} (full postal codes in the values, numeric)")
+            value_hits.add(f"{label} (full postal codes in the values, numeric)")
             seen_cols.add(c)
     # Published alongside the hits because the TIER decides the action, and
     # since Ben's 2026-10-20 ruling the two actions differ: a name or an email
     # skips the whole candidate, a postal or other geographic code means drop
     # the column and ship the rest. triage_dataset() reads this to say which.
     screen_for_pii.geographic_hits = sorted(geographic)
+    screen_for_pii.value_hits = sorted(value_hits)
     screen_for_pii.blank_columns_skipped = blanked
     if blanked:
         print(f"screen_for_pii: {len(blanked)} column(s) matched on their "
