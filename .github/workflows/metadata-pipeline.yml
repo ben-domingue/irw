@@ -218,7 +218,7 @@ jobs:
           # the clear. Do NOT add ANTHROPIC_API_KEY back alongside them: a key
           # in the environment shadows federation, in this script and in every
           # Anthropic SDK, so these would become dead configuration.
-          ANTHROPIC_FEDERATION_RULE_ID: fdrl_REPLACE_ME
+          ANTHROPIC_FEDERATION_RULE_ID: fdrl_01ULHjDcv36yQt85ftuMdheH
           ANTHROPIC_ORGANIZATION_ID: 74eb46cc-b824-4c2b-b57d-f90e03374cb3
           ANTHROPIC_SERVICE_ACCOUNT_ID: svac_01AzPY8zbQ17wCtMJDR3gx9n
           # Only needed if the federation rule covers more than one workspace.
