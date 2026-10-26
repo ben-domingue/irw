@@ -1,80 +1,11 @@
 table,column,kind,was,now
-andreu_sanchez_2023_information_sources,Original_License,fill,NA,CC BY 4.0
-andreu_sanchez_2023_lifestyle,Original_License,fill,NA,CC BY 4.0
-andreu_sanchez_2023_panas,Original_License,fill,NA,CC BY 4.0
-blotner_2026_bes,Original_License,fill,NA,CC BY 4.0
-blotner_2026_hexaco60,Original_License,fill,NA,CC BY 4.0
-blotner_2026_lsrp,Original_License,fill,NA,CC BY 4.0
-blotner_2026_svo,Original_License,fill,NA,CC BY 4.0
-bottesi_2019_bai,Original_License,fill,NA,CC BY 4.0
-bottesi_2019_bdi2,Original_License,fill,NA,CC BY 4.0
-bottesi_2019_caq35,Original_License,fill,NA,CC BY 4.0
-bottesi_2019_dass21,Original_License,fill,NA,CC BY 4.0
-bottesi_2019_ius_r,Original_License,fill,NA,CC BY 4.0
-bottesi_2019_njre_checklist,Original_License,fill,NA,CC BY 4.0
-bottesi_2019_njre_severity,Original_License,fill,NA,CC BY 4.0
-bottesi_2019_npoq,Original_License,fill,NA,CC BY 4.0
-bottesi_2019_obq87,Original_License,fill,NA,CC BY 4.0
-bottesi_2019_oci_r,Original_License,fill,NA,CC BY 4.0
-bottesi_2019_pswq,Original_License,fill,NA,CC BY 4.0
-bottesi_2019_sps,Original_License,fill,NA,CC BY 4.0
-bottesi_2019_ww37,Original_License,fill,NA,CC BY 4.0
-byun_2026_mascot_ratings,Original_License,fill,NA,Permission via Email
-cassidy_2024_ab,Original_License,fill,NA,CC BY-NC 4.0
-cassidy_2024_ecr_r,Original_License,fill,NA,CC BY-NC 4.0
-cassidy_2024_fas,Original_License,fill,NA,CC BY-NC 4.0
-cassidy_2024_ius_12,Original_License,fill,NA,CC BY-NC 4.0
-cassidy_2024_oci_r,Original_License,fill,NA,CC BY-NC 4.0
-cassidy_2024_pswq3,Original_License,fill,NA,CC BY-NC 4.0
-cassidy_2024_resq_cons,Original_License,fill,NA,CC BY-NC 4.0
-cassidy_2024_resq_int,Original_License,fill,NA,CC BY-NC 4.0
-cassidy_2024_rss,Original_License,fill,NA,CC BY-NC 4.0
 cdm_timss07,Description,conflict,Subsample of TIMSS 2007 grade 4 mathematics items from Austria (booklets 4 and 5) with Q matrix,Subsample of TIMSS items from Australia with Q matrix
-christensen_2022_policy_certainty,Original_License,fill,NA,CC0 1.0
-christensen_2022_policy_ideal,Original_License,fill,NA,CC0 1.0
-christensen_2022_policy_support,Original_License,fill,NA,CC0 1.0
 COACH_Chen_2022_CSQ,Description,conflict,"Consultation Satisfaction Questionnaire short form (CSQ-9), items 1-8, 5-point agree-disagree",Client Satisfaction Questionnaire 8-item
-comeau_2015_climate_beliefs,Original_License,fill,NA,Permission via Email
-comeau_2015_decision_considerations,Original_License,fill,NA,Permission via Email
-comeau_2015_energy_attitudes,Original_License,fill,NA,Permission via Email
-comeau_2015_energy_literacy,Original_License,fill,NA,Permission via Email
-comeau_2015_energy_literacy_sureness,Original_License,fill,NA,Permission via Email
-comeau_2015_energy_participation,Original_License,fill,NA,Permission via Email
-comeau_2015_energy_source_knowledge,Original_License,fill,NA,Permission via Email
-comeau_2015_energy_source_support,Original_License,fill,NA,Permission via Email
-comeau_2015_environmental_values,Original_License,fill,NA,Permission via Email
-comeau_2015_home_energy_intentions,Original_License,fill,NA,Permission via Email
-comeau_2015_home_energy_knowledge,Original_License,fill,NA,Permission via Email
-comeau_2015_information_trust,Original_License,fill,NA,Permission via Email
-comeau_2015_participation_barriers,Original_License,fill,NA,Permission via Email
-comeau_2015_provincial_process,Original_License,fill,NA,Permission via Email
 conner_2017_vitality,Description,conflict,"SF-36 Vitality (energy/fatigue) subscale, 4 items scored 0-100 in steps of 20 (6 ordinal levels), baseline/follow-up, N=171. The 'worn out' and 'tired' items are stored already reverse-scored.","Subjective Vitality Scale (4 items, 0-100 continuous), baseline/follow-up, N=171."
 cordova2019_clinical_edu_environment,Description,conflict,"Perception of clinical educational environment by physiotherapy interns (PHEEM, 40 items, Chile)","Perception of clinical educational environment by physiotherapy interns (DREEM-based, Chile)"
-datta_2021_spatial_visualization,Original_License,fill,NA,CC BY 4.0
 evpromisi_stone_2021_cdiag,Description,conflict,"Study's own 12-item chronic-diagnosis checklist (3 response levels). Not a PROMIS instrument, despite the evpromisi_ prefix.",PROMIS fatigue
-gries_2011_moral_foundations,Original_License,fill,NA,CC0 1.0
-huebner_2021_weightlifting_attraction,Original_License,fill,NA,CC0 1.0
-huebner_2021_weightlifting_barriers,Original_License,fill,NA,CC0 1.0
-huebner_2021_weightlifting_pandemic,Original_License,fill,NA,CC0 1.0
-leppla_2026_smokechem_acceptance,Original_License,fill,NA,CC BY 4.0
-leppla_2026_smokechem_bot_usability,Original_License,fill,NA,CC BY 4.0
-leppla_2026_smokechem_cognitive_load,Original_License,fill,NA,CC BY 4.0
-li_2023_achievement_motivation,Original_License,fill,NA,CC BY 4.0
-li_2023_self_efficacy,Original_License,fill,NA,CC BY 4.0
-li_2023_social_support,Original_License,fill,NA,CC BY 4.0
 li_2024_bdyz,Description,conflict,"4-item Expressive Suppression subscale of the ERQ (Gross & John, 2003; 1-7 Likert; deposit ships the items labelled 1/2/6/9), same sample as li_2024_fa","4-item body-image scale subset (items 1/2/6/9 only, 1-7 Likert), same sample as li_2024_fa"
-luettgau_2026_political_knowledge,Original_License,fill,NA,OGL (Open Government Licence)
-luettgau_2026_source_trust,Original_License,fill,NA,OGL (Open Government Licence)
-mailangkay_2026_ai_health_acceptance,Original_License,fill,NA,CC BY 4.0
 opladen2025_edeq,Description,conflict,Eating Disorder Examination Questionnaire (EDE-Q; 28 items); German clinical sample BN/BDD/IAD N=217; 1-7 as deposited (the deposit's syntax recodes to the usual 0-6); items 13-18 are frequency counts 0-112,Eating Disorder Examination Questionnaire (EDE-Q; 28 items); German clinical sample BN/BDD/IAD N≈211; 0-6 (items 13-18 are frequency counts 0-28+)
 opladen2025_fkg,Description,conflict,"Health/illness-cognition items FKG (20 items, 1-4), probably the Fragebogen zu Körper und Gesundheit (Hiller et al., 1997) -- the deposit never names it; German clinical sample BN/BDD/IAD N=217",Body feelings questionnaire FKG (20 items); German clinical sample BN/BDD/IAD N≈210; 1-4
 opladen2025_fks,Description,conflict,"Fragebogen körperdysmorpher Symptome (FKS; Buhlmann et al., 2009), a German self-report screener for body dysmorphic disorder (17 of 18 items; FKS_2 absent from the deposit); German clinical sample BN/BDD/IAD N=217; 1-5",Body schema questionnaire FKS (17 items); German clinical sample BN/BDD/IAD N≈211; 0-5
 opladen2025_wi,Description,conflict,"Whiteley Index (WI; 14 items, binary 1-2), a health-anxiety (hypochondriasis) screener; German clinical sample BN/BDD/IAD N=217","Body image scale WI (14 items, binary 1-2); German clinical sample BN/BDD/IAD N≈210"
-otago_2018_library_support,Original_License,fill,NA,CC BY 4.0
-rimisp_2021_care_work,Original_License,fill,NA,CC0 1.0
-rimisp_2021_household_services,Original_License,fill,NA,CC0 1.0
-saputra_2025_fomo_consumer,Original_License,fill,NA,CC BY 4.0
-setiawan_2026_cybersecurity_behaviour,Original_License,fill,NA,CC BY 4.0
-setiawan_2026_cybersecurity_ethics,Original_License,fill,NA,CC BY 4.0
-setiawan_2026_cybersecurity_knowledge,Original_License,fill,NA,CC BY 4.0
-wang_2026_chatgpt_acceptance,Original_License,fill,NA,CC BY 4.0
