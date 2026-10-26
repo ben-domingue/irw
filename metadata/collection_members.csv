@@ -23,6 +23,7 @@ aguirre_camacho_2021_champion,longitudinal,rule:meta:longitudinal
 ahmed_2019_wellbeing,wellbeing,rule:cname:well.?being|life satisfaction|\bswls\b|quality of life|whoqol
 ai_fear_dong_2026_ai,continuous_response,curated:scout
 ai_fear_dong_2026_other_fear,continuous_response,curated:scout
+ai_fear_dong_2026_other_fear,rct,rule:var:treat
 ai_fear_dong_2026_own_fear,continuous_response,curated:scout
 ai_fear_dong_2026_requirement,continuous_response,curated:scout
 alcoholstroop_jones2024,response_time,rule:var:rt
@@ -463,6 +464,7 @@ cognitive_children_2026,longitudinal,rule:meta:longitudinal
 cognitive_load_klimova_2023_know,continuous_response,curated:scout
 cognitive_load_klimova_2023_pwi,wellbeing,rule:cname:well.?being|life satisfaction|\bswls\b|quality of life|whoqol
 colombia_2023_politics_wellbeing,wellbeing,rule:cname:well.?being|life satisfaction|\bswls\b|quality of life|whoqol
+concretewords,rater_mediated,rule:var:rater
 concretewords,stimulus_norms,curated:inventory #2983
 conner_2017_bfi,bfi44,name
 conner_2017_cesd,cesd,wording
@@ -663,28 +665,19 @@ EEEDPRM_Bulut_2021,self_esteem,rule:cname:rosenberg|self.?esteem|\brses\b
 EEN_Lacey_2024_Children,rct,rule:var:treat
 EEN_Lacey_2024_Parent,rct,rule:var:treat
 ehealth_rioux_2025_abiliti,longitudinal,rule:meta:longitudinal
-ehealth_rioux_2025_abiliti,response_time,rule:var:rt
 ehealth_rioux_2025_beam,longitudinal,rule:meta:longitudinal
-ehealth_rioux_2025_beam,response_time,rule:var:rt
 ehealth_rioux_2025_gad,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 ehealth_rioux_2025_gad,gad7,wording
 ehealth_rioux_2025_gad,longitudinal,rule:meta:longitudinal
-ehealth_rioux_2025_gad,response_time,rule:var:rt
 ehealth_rioux_2025_mssps,longitudinal,rule:meta:longitudinal
 ehealth_rioux_2025_mssps,mspss,wording
-ehealth_rioux_2025_mssps,response_time,rule:var:rt
 ehealth_rioux_2025_pci,longitudinal,rule:meta:longitudinal
-ehealth_rioux_2025_pci,response_time,rule:var:rt
 ehealth_rioux_2025_phq,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 ehealth_rioux_2025_phq,longitudinal,rule:meta:longitudinal
 ehealth_rioux_2025_phq,phq9,wording
-ehealth_rioux_2025_phq,response_time,rule:var:rt
 ehealth_rioux_2025_rse,longitudinal,rule:meta:longitudinal
-ehealth_rioux_2025_rse,response_time,rule:var:rt
 ehealth_rioux_2025_rses,longitudinal,rule:meta:longitudinal
-ehealth_rioux_2025_rses,response_time,rule:var:rt
 ehealth_rioux_2025_triplep,longitudinal,rule:meta:longitudinal
-ehealth_rioux_2025_triplep,response_time,rule:var:rt
 Ellipse_Corssley_2024,rater_mediated,rule:var:rater
 elson_2024_kidscreen52,clustered,rule:var:cluster_id
 elson_2024_tmdlqi,clustered,rule:var:cluster_id
@@ -1829,6 +1822,7 @@ kraft_todd_2017_panas,panas,wording
 kramer_2023_efct,longitudinal,rule:meta:longitudinal
 kramer_2023_efct,rct,rule:var:treat
 kreps_2023_ai_attitudes,rct,rule:var:treat
+KTEEM_Schoen_2019-2022,longitudinal,rule:meta:longitudinal
 KTEEM_Schoen_2019-2022,math,rule:cname:^(?!.*(anxi|attitude|self.?efficacy|self.?concept|emotion|motivat|interest|enjoy|belief|confiden|value|stereotype)).*(\bmath|arithmetic|algebra|fraction)
 kuehner_2017_mw_rumination,longitudinal,rule:meta:longitudinal
 kushnir2017_bfi,bfi44,name
@@ -2103,11 +2097,16 @@ mturkddm_recognition,response_time,rule:var:rt
 mturkddm_recognition,trials,curated:scout
 mturkddm_y25,response_time,rule:var:rt
 mturkddm_y25,trials,curated:scout
+much_tte_2025_actionorientation,rct,rule:var:treat
 much_tte_2025_concentrationtask,longitudinal,rule:meta:longitudinal
+much_tte_2025_concentrationtask,rct,rule:var:treat
 much_tte_2025_currentmotivation,continuous_response,curated:bd
 much_tte_2025_currentmotivation,longitudinal,rule:meta:longitudinal
+much_tte_2025_currentmotivation,rct,rule:var:treat
 much_tte_2025_effort,longitudinal,rule:meta:longitudinal
+much_tte_2025_effort,rct,rule:var:treat
 much_tte_2025_matrixreasoning,longitudinal,rule:meta:longitudinal
+much_tte_2025_matrixreasoning,rct,rule:var:treat
 much_tte_2025_matrixreasoning,response_time,rule:var:rt
 musifeast17_vanderwalle_2025,longitudinal,rule:meta:longitudinal
 muslih_2024_rses,rses,supplied
@@ -2226,6 +2225,7 @@ nguyen_2026_mspss,mspss,supplied
 nguyen_2026_student_wellbeing,wellbeing,rule:cname:well.?being|life satisfaction|\bswls\b|quality of life|whoqol
 nomt_hooper_2024_study2,response_time,rule:var:rt
 nonverbal_immediacy,response_time,rule:var:rt
+number_pattern_game,response_time,rule:var:rt
 odachi_2022_fear_covid19,fcv19s,name
 offlinefriend_bigfive,big_five,rule:cname:big.?five|five.?factor|\bipip\b|neo.?(pi|ffi)|\bbfi\b|hexaco
 okoro_2022_interest_inventory,rct,rule:var:treat
@@ -2450,7 +2450,7 @@ premkumar_2020_dass21,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bd
 previc_bohn2023,reading_vocab,rule:cname:read(ing)?\b|vocab|lexical|spelling
 prihandoko_2025_ews,wellbeing,rule:cname:well.?being|life satisfaction|\bswls\b|quality of life|whoqol
 project_kids_ctopp,longitudinal,rule:meta:longitudinal
-project_kids_kbit,longitudinal,rule:meta:longitudinal
+project_kids_kbit,rct,rule:var:treat
 project_kids_told_grade,longitudinal,rule:meta:longitudinal
 project_kids_told_wave,longitudinal,rule:meta:longitudinal
 project_kids_topel,longitudinal,rule:meta:longitudinal

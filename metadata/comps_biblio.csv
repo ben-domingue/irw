@@ -380,6 +380,13 @@ nflverse_nfl_1999_2025,NA,NA,nflverse (2026). nflverse-data: schedules/games.csv
   url = {https://github.com/nflverse/nflverse-data},
   howpublished = {\url{https://github.com/nflverse/nflverse-data}}
 }",NA
+ogs_go_2005_2021,NA,NA,"Vance, Z. (2021). OGS 2021 collection of Go games [Data set]. Internet Archive. https://archive.org/details/ogs2021",https://archive.org/details/ogs2021,Custom,Custom,Published on the basis above rather than under a licence of IRW's choosing: the dumper's public-domain release plus an OGS representative's research-use statement. Revisit if OGS replies to the outstanding ask (issue #2710).,"Go games played on Online-Go.com (OGS), 2005-11-05 to 2021-10-12: 25,492,142 decided games between 690,746 players, from Zachary Vance's 2021 dump of the OGS API. agent_a is black, agent_b is white, and homefield is ""agent_a"" throughout because black moves first; komi and handicap, both kept as columns, are what compensate that, so read the three together (white wins 59% of games, which is what handicap play does to the colour balance). winner is agent_a or agent_b and never a draw: the source records no tie. Also kept: the board size (19x19 11.9M, 9x9 10.3M, 13x13 3.3M, and 67,120 games on 5x5/7x7/15x15/17x17), the rule set, whether the game was ranked (19.3M were), the outcome as recorded (Resignation, Timeout, ""6.5 points"", Disconnection, Moderator Decision and imported-game variants) and margin_points for the 28% of games that were counted out. Dropped: 1.37M cancellations, 157,798 unfinished games, 59,145 on non-square or unusual boards, 3,267 whose recorded winner is neither player and 247 with a missing or shared player id. Games the players marked private are already absent from the dump; on top of that, usernames, player ranks, move records, chat and reviews are dropped and the OGS player ids are re-keyed to integers, so no row can be joined back to an OGS account.","@dataset{Vance2021,
+  author = {Vance, Z.},
+  year = {2021},
+  title = {OGS 2021 collection of Go games},
+  publisher = {Internet Archive},
+  url = {https://archive.org/details/ogs2021}
+}",NA
 openfootball_argentina_2018_2025,NA,NA,openfootball (2026). Football.TXT match data. https://github.com/openfootball,https://github.com/openfootball/south-america/tree/master/argentina,CC0 1.0,CC0 1.0,NA,"Argentina Primera División matches, 2018-19 to 2025 Apertura (2,435 matches, 34 clubs); agent_a = home side, winner from the score, shootouts in shootout_winner.","@misc{openfootball2026,
   author = {openFootball},
   year = {2026},

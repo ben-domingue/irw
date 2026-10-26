@@ -374,6 +374,7 @@ becker_2025_tax_packages,data/conjoint/becker_2025.R
 becker_2026_housing_text,data/conjoint/becker_2026.R
 begum_2026_hama,data/begum_2026_insomnia_anxiety.py
 begum_2026_isi,data/begum_2026_insomnia_anxiety.py
+behrman_2026_family_scenarios,data/conjoint/behrman_2026.R
 beisermcgrath_2019_paris_cn,data/conjoint/beisermcgrath_2019.R
 beisermcgrath_2019_paris_us,data/conjoint/beisermcgrath_2019.R
 beisermcgrath_2019_revenue_de,data/conjoint/beisermcgrath_2019_revenue.R
@@ -1583,6 +1584,8 @@ gerber_2022_selfesteem,data/gerber_2022_swisscamp.py
 gerbig_2023_ctq,data/gerbig_2023_loneliness_ace.py
 gerbig_2023_ucla,data/gerbig_2023_loneliness_ace.py
 gerbig_2023_who5,data/gerbig_2023_loneliness_ace.py
+gereke_2023_trust,data/conjoint/gereke_2023.R
+gereke_2023_trustworthiness,data/conjoint/gereke_2023.R
 germann_2026_environment,data/germann_2026_terrorism.py
 germann_2026_immigration,data/germann_2026_terrorism.py
 germann_2026_national_identity,data/germann_2026_terrorism.py
@@ -3260,6 +3263,7 @@ offlinefriend_ofaq,data/offline_friend.R
 ofosu_2026_malawi_women_candidates,data/conjoint/ofosu_2026.R
 ogrady_2026_immigration_sanctions,data/conjoint/ogrady_2026.R
 ogrady_2026_welfare_sanctions,data/conjoint/ogrady_2026.R
+ogs_go_2005_2021,data/competitions/ogs_go.py
 ogura_2022_partisan_labels,data/conjoint/ogura_2022.R
 ohmura_2022_covid_vaccination_lucid,data/conjoint/ohmura_2022.R
 ohmura_2022_covid_vaccination_ycs,data/conjoint/ohmura_2022.R
@@ -4003,6 +4007,7 @@ setiawan_2026_cybersecurity_knowledge,data/setiawan_2026_cybersecurity_literacy.
 setsoafia_2026_ctd,data/setsoafia_2026_genai_literacy.py
 setsoafia_2026_digital_literacy,data/setsoafia_2026_genai_literacy.py
 setsoafia_2026_sdr,data/setsoafia_2026_genai_literacy.py
+sevi_2025_promise_keeping,data/conjoint/sevi_2025.R
 sevi_2026_election_outcomes,data/conjoint/sevi_2026.R
 SF12_MLCIRTwithin,data/MLCIRTwithin.R
 shaffer_2020_local_refugees,data/conjoint/shaffer_2020.R
