@@ -52,6 +52,41 @@ It is usable to decide *which tables to look at* and never as the source for wha
 | **B** | 181 | ships English text | confirm the administered language, then either add `language` + `text_source=translated_substitute`, or close as a genuinely English study |
 | **C** | 31 | pure ASCII and not provably either way, or empty | inspect by hand |
 
+## Re-measured 2026-10-25: tier A is done bar the translations
+
+`audit_2026-09-01.csv` is eight weeks old and its tier A list is now a
+historical record, not a work queue. Measured against the live item-text
+listing and the published text of every table:
+
+| | tables |
+|---|---|
+| tier A in `audit_2026-09-01.csv` | 79 |
+| no longer serve item text at all (withdrawn since the audit) | −16 |
+| **live** | **63** |
+| already carry `language`, done by the item-text rounds since September | −61 |
+| **left** | **2** |
+
+The two were `pedroso_2021_ifsq_pressuring` (Portuguese) and `spanishmegastudy`
+(Spanish), both still on the pre-2026-09-01 schema with no `language` column at
+all. `round3/` names their language; nothing about the text changed, and the
+assertions in `round3/add_language.py` check that field by field, in memory and
+again on the file it wrote. Uploaded to the `irw_text` draft 2026-10-25, awaiting
+a publish.
+
+**What is left is translation, not disclosure, and it needs a decision.** Three
+tables carry their administered wording with the `_translated` columns empty:
+`spanishmegastudy` (the audit's DEFERRED case -- 1,270 item stems and 3,989
+option labels, about 5,259 strings), `pedroso_2021_ifsq_pressuring`, and
+`rosenberg_fadplus_goto2021` (Japanese, which already had `language`). IRW has no
+translator configured since OpenAI was retired from the project, so a bulk
+machine-translation pass plus a review is a decision about tooling rather than a
+task. Naming the language never depended on it.
+
+`ccapsvtskhpacr_mercedes_2023_beck`, the audit's HOLD (the BDI-II, where the
+official English wording is Pearson-licensed so the `_translated` column must be
+our own rendering of the Spanish rather than the published English), is among the
+16 that no longer serve item text, so that question is moot unless it returns.
+
 **The tier A count was published three times before it settled.** #1799 and commit
 `16a8720` say **104**; `69f28f9` corrected that to **83** ("the classifier was
 over-claiming"); this table and `audit_2026-09-01.csv` now say **79**. The CSV is
