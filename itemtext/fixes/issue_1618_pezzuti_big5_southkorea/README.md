@@ -5,7 +5,7 @@
 Not an item-code collision. The source SPSS file
 (`Data_main experiment_13 countries_July 2 2024.sav`) contains **ten** Korean
 BFI-10 columns, but one is misspelled: `koean_big5_art` (missing the `r`),
-labelled "예술에 대한 관심이 별로 없다" — *has little interest in art*.
+whose SPSS label is the Korean BFI-10 Openness item (the wording is not quoted here: this table's item text is blocked on rights, #3228).
 
 `data/pezzuti_2025_coolpeople.do:526` selected columns with
 `keep id cov_* korean_big5_*`. That wildcard never matched the misspelled
