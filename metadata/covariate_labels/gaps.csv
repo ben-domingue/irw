@@ -523,6 +523,13 @@ zeng_2025_technology_readiness,data/zeng_2025_flipped_learning.py,never_examined
 zhang_2026_pe_burnout,data/zhang_2026_pe_teacher_burnout.py,never_examined,no harvest log was ever built for this script
 zhang_2026_pe_identity,data/zhang_2026_pe_teacher_burnout.py,never_examined,no harvest log was ever built for this script
 zhang_2026_pe_uwes9,data/zhang_2026_pe_teacher_burnout.py,never_examined,no harvest log was ever built for this script
+PEMAIW_Qiu_2020_BWSS,data/PEMAIW_Qiu_2020.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+PEMAIW_Qiu_2020_DASS,data/PEMAIW_Qiu_2020.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+PEMAIW_Qiu_2020_FFMQ,data/PEMAIW_Qiu_2020.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+PEMAIW_Qiu_2020_MEQ,data/PEMAIW_Qiu_2020.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+PEMAIW_Qiu_2020_MLQ,data/PEMAIW_Qiu_2020.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+PEMAIW_Qiu_2020_PANAS,data/PEMAIW_Qiu_2020.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+PEMAIW_Qiu_2020_SWLS,data/PEMAIW_Qiu_2020.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
 ccapsvtskhpacr_mercedes_2023_beck,data/ccapsvtskhpacr_mercedes_2023.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
 ccapsvtskhpacr_mercedes_2023_hada,data/ccapsvtskhpacr_mercedes_2023.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
 ccapsvtskhpacr_mercedes_2023_physical,data/ccapsvtskhpacr_mercedes_2023.r,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
