@@ -281,6 +281,15 @@ jobs:
       - name: conjoint design records
         run: python metadata/tests/test_conj_design.py -v
 
+      # The rankings dictionary's release claim. Rankings has no dictionary
+      # sheet, and nothing rewrites dictionary_auto_rank.csv after staging, so
+      # "Not on Redivis yet." staged with a local table stayed true only until
+      # the upload -- it was false of 109 live tables when this was written.
+      # Clearing the sentence is the companion edit to flipping a ledger row to
+      # `uploaded`, and this is what catches the half that gets forgotten.
+      - name: rankings dictionary release claim
+        run: python metadata/tests/test_rank_dictionary.py -v
+
   # A PR to data/ contains a conversion SCRIPT, never a table --
   # automated_finding/irw_output/ is gitignored, so no output is ever in the
   # diff. This checks the script's contract; the data is checked by
