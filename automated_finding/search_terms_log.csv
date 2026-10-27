@@ -10349,3 +10349,4 @@ date,query,output_file,notes
 2026-10-21,اختبار القدرة المكانية,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
 2026-10-21,ruimtelijk inzicht test,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
 2026-10-21,공간 능력 검사,runs/candidates_2026-10-21.csv,repos batch 2026-10-21; 15 English terms x 9 languages
+2026-10-27,[weekly] 15 terms x journals=plosone,runs/plos_monthly_candidates_weekly_2026-10-27.csv,plos monthly-script automated run; mode=weekly; 54 candidates triaged; 15/15 terms visited (13 hit per-term cap 4)
