@@ -74,6 +74,11 @@ HIGH_YIELD_TERMS = [
 
 DEFAULT_LIMIT_BY_MODE = {"weekly": 60, "full": 150}
 
+# `--per-term-cap` counts only the candidates that reached a verdict, so a term
+# whose deposits are all unreachable needs a second bound or it would walk its
+# whole result set. A term stops after this many attempts per unit of cap.
+ATTEMPTS_PER_CAP = 3
+
 
 def _append_log_rows(rows: list[dict], path: str = LOG_PATH) -> None:
     fieldnames = ["date", "query", "output_file", "notes"]
@@ -102,7 +107,10 @@ def main():
     ap.add_argument("--out", default=None,
                      help=f"output CSV (default: {OUT_PREFIX}<mode>_<today>.csv)")
     ap.add_argument("--per-term-cap", type=int, default=None,
-                     help="max new candidates a single term may consume out of --limit "
+                     help="max candidates reaching a verdict that a single term may "
+                          "consume out of --limit; inconclusive rows do not count, "
+                          "though a term still stops after "
+                          f"{ATTEMPTS_PER_CAP}x the cap in attempts "
                           "(default: max(1, limit // n_terms), so a run's budget spreads "
                           "across the whole term list instead of one broad term eating it)")
     ap.add_argument("--dry-run", action="store_true",
@@ -143,6 +151,7 @@ def main():
     n_done = 0
     terms_visited = 0
     terms_capped = 0
+    terms_exhausted = 0
     pool = _new_pool()
     limit_hit = False
     try:
@@ -150,33 +159,56 @@ def main():
             print(f"\n[term] {term!r}", flush=True)
             terms_visited += 1
             term_done = 0
+            term_attempts = 0
             term_capped = False
+            term_exhausted = False
             for journal in journals:
                 for hit in from_pmc(term, journal):
                     if hit.doi in skip:
                         continue
                     skip.add(hit.doi)
                     row, pool = process_one_isolated(hit, pool)
+                    inconclusive = row["flag"] in INCONCLUSIVE_FLAGS
                     # Same guard as irw_discover_pmc.py's main(). Without it
                     # an infra failure (e.g. a missing xlrd) retired the DOI.
-                    if row["flag"] not in INCONCLUSIVE_FLAGS:
+                    if not inconclusive:
                         newly_attempted.append((hit.doi, row["flag"]))
                     writer.writerow(row)
                     outf.flush()
                     n_done += 1
-                    term_done += 1
+                    term_attempts += 1
+                    # Only a row that reached a verdict spends the term's
+                    # budget. An inconclusive one is a fetch that never got
+                    # that far, it is never written to the ledger, and so the
+                    # same DOIs come back every run: 34 of the 54 rows of
+                    # 2026-10-27 were a sandbox with no route to osf.io or
+                    # figshare, and counting them against the cap made each
+                    # run spend a larger share of a fixed budget re-failing on
+                    # them while reaching fewer new articles (irw#3256).
+                    if not inconclusive:
+                        term_done += 1
                     print(f"  [{row['flag']:18}] {hit.title[:70]}", flush=True)
                     if term_done >= per_term_cap:
                         term_capped = True
                         break
+                    # Inconclusive rows are free of the cap but not of the
+                    # clock: a term whose every deposit is unreachable would
+                    # otherwise walk its whole result set.
+                    if term_attempts >= per_term_cap * ATTEMPTS_PER_CAP:
+                        term_exhausted = True
+                        break
                     if n_done >= limit:
                         limit_hit = True
                         break
-                if term_capped or limit_hit:
+                if term_capped or term_exhausted or limit_hit:
                     break
             if term_capped:
                 terms_capped += 1
                 print(f"  (hit --per-term-cap={per_term_cap} for this term, moving on)", flush=True)
+            if term_exhausted:
+                terms_exhausted += 1
+                print(f"  ({term_attempts} candidates attempted for this term and only "
+                      f"{term_done} reached a verdict; moving on)", flush=True)
             if limit_hit:
                 print(f"\nHit --limit={limit}; stopping. Remaining terms picked up next run "
                       f"(seen-DOI state persists).", flush=True)
@@ -188,7 +220,8 @@ def main():
 
     print(f"\n{n_done} candidates triaged -> {out_path}")
     print(f"{terms_visited}/{len(terms)} terms visited this run "
-          f"({terms_capped} hit the per-term cap of {per_term_cap})")
+          f"({terms_capped} hit the per-term cap of {per_term_cap}, "
+          f"{terms_exhausted} ran out of attempts first)")
 
     # Step 2b, in-process. This connector triages off irw_triage_updated and
     # never reaches irw_batch_updated's --retriage flag, so #2076's "REQUIRED"
@@ -202,7 +235,8 @@ def main():
         "output_file": out_path,
         "notes": f"pmc monthly-script automated run; mode={args.mode}; "
                  f"{n_done} candidates triaged; {terms_visited}/{len(terms)} terms visited "
-                 f"({terms_capped} hit per-term cap {per_term_cap})",
+                 f"({terms_capped} hit per-term cap {per_term_cap}, "
+                 f"{terms_exhausted} out of attempts)",
     }])
 
 
