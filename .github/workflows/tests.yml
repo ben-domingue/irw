@@ -26,6 +26,10 @@ permissions:
 jobs:
   tests:
     runs-on: ubuntu-latest
+    # Nothing bounded this job, so a stuck step ran to GitHub's 6h default.
+    # The suite's own work is ~4 minutes; 30 turns a hang into a fast,
+    # re-runnable failure instead of an afternoon (#1775 follow-on).
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
 
@@ -128,10 +132,28 @@ jobs:
       - name: drift report names
         run: python metadata/tests/test_drift_names.py -v
 
-      - name: validate_irw.R still parses
+      # R used to come from `apt-get install r-base-core r-cran-*` here, run
+      # cold on every job. When a Debian mirror was slow that one step took
+      # hours -- 2026-10-26 saw four runs of 1h47m to over 4h against a
+      # ~4-minute suite, all parked in the apt call. setup-r caches R itself
+      # and `use-public-rspm` serves the packages as prebuilt binaries, so
+      # there is no compile and no apt. `gsheet` joins the same install
+      # (its own step used to shell out to cloud.r-project.org under sudo);
+      # 03_tags.R loads it for test_tags_union.R, which holds the only
+      # assertion that verbatim paper excerpts cannot reach a public CSV
+      # (#1863). readr/httr/stringr are what the R tests import. Nothing
+      # here fetches a sheet.
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      - name: R packages
         run: |
-          sudo apt-get update -qq && sudo apt-get install -y -qq r-base-core r-cran-readr r-cran-httr r-cran-stringr
-          Rscript misc/tests/smoke_validate_irw.R
+          Rscript -e 'install.packages(c("readr", "httr", "stringr", "gsheet"))' \
+                  -e 'invisible(lapply(c("readr", "httr", "stringr", "gsheet"), library, character.only = TRUE))'
+
+      - name: validate_irw.R still parses
+        run: Rscript misc/tests/smoke_validate_irw.R
 
       - name: Curated BibTeX corrections
         working-directory: metadata
@@ -167,13 +189,6 @@ jobs:
         run: Rscript tests/test_dict_union.R
 
       # Offline tests that existed but never ran here (found 2026-10-03).
-      # test_tags_union.R holds the only assertion that verbatim paper excerpts
-      # cannot reach a public CSV (#1863). It sources 03_tags.R, which loads
-      # `gsheet`; there is no apt package for it, so it comes from CRAN. Its
-      # imports (httr, stringr) are installed from apt above. Nothing here
-      # fetches a sheet.
-      - name: install gsheet
-        run: sudo Rscript -e 'install.packages("gsheet", repos = "https://cloud.r-project.org")' -e 'library(gsheet)'
       - name: tags union
         working-directory: metadata
         run: Rscript tests/test_tags_union.R
@@ -261,6 +276,7 @@ jobs:
   # irw-validate at processing time. See irw_validate/contract.py.
   contract:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     if: github.event_name == 'pull_request'
     steps:
       - uses: actions/checkout@v4
