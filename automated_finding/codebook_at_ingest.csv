@@ -964,6 +964,9 @@ gatto_2025_candidate_selection,conj,none,2026-10-07
 gazmararian_2024_net_metering,conj,https://dataverse.harvard.edu/api/access/datafile/8125328,2026-10-09
 gazmararian_2024_transition_fair,conj,https://dataverse.harvard.edu/api/access/datafile/7514613,2026-10-09
 gazmararian_2024_transition_national,conj,https://dataverse.harvard.edu/api/access/datafile/7514613,2026-10-09
+genai_arena_edit,comps,none,2026-10-27
+genai_arena_t2i,comps,none,2026-10-27
+genai_arena_t2v,comps,none,2026-10-27
 gengler_2021_survey_participation,conj,https://dataverse.harvard.edu/api/access/datafile/3373125,2026-10-09
 gerbig_2023_ctq,core,https://zenodo.org/api/records/7749115/files/Codebook_Dataset_Loneliness_ACE_Ethiopia.pdf/content,2026-10-02
 gerbig_2023_ucla,core,https://zenodo.org/api/records/7749115/files/Codebook_Dataset_Loneliness_ACE_Ethiopia.pdf/content,2026-10-02
@@ -1752,6 +1755,7 @@ liuzza_2018_sdo,core,https://zenodo.org/records/5023051/files/README.txt,2026-10
 liuzza_2018_tdds,core,https://zenodo.org/records/5023051/files/README.txt,2026-10-15
 liuzza_2018_tdds_short,core,https://zenodo.org/records/5023051/files/README.txt,2026-10-15
 lmarena_text_2025,comps,none,2026-10-27
+lmarena_text_55k,comps,none,2026-10-27
 lobo_2023_parties_be,conj,https://dataverse.harvard.edu/api/access/datafile/7521563,2026-10-08
 lobo_2023_parties_de,conj,https://dataverse.harvard.edu/api/access/datafile/7521563,2026-10-08
 lobo_2023_parties_es,conj,https://dataverse.harvard.edu/api/access/datafile/7521563,2026-10-08
@@ -2041,6 +2045,7 @@ moreno_jorquera_2025_amtb_intensity,core,https://dataverse.harvard.edu/api/acces
 moreno_jorquera_2025_amtb_interest,core,https://dataverse.harvard.edu/api/access/datafile/13255557,2026-10-09
 moreno_jorquera_2025_amtb_teacher,core,https://dataverse.harvard.edu/api/access/datafile/13255557,2026-10-09
 mortenson_2025_democracy_tradeoffs,conj,https://dataverse.harvard.edu/api/access/datafile/13099404,2026-10-08
+mtbench_human_2023,comps,none,2026-10-27
 mueller_2024_covid_governance,conj,none,2026-10-09
 mugisha_2026_ehr_competence,core,none,2026-10-15
 mugisha_2026_ehr_status,core,none,2026-10-15
@@ -2732,6 +2737,7 @@ reinhardt_2023_materialism,core,none,2026-10-15
 reinhardt_2023_risk_aversion,core,none,2026-10-15
 reinhardt_2023_self_concept_clarity,core,none,2026-10-15
 reinsberg_2026_imf_messages,conj,none,2026-10-09
+repochat_arena_2024_2025,comps,none,2026-10-27
 rexand_galais_2022_ipo,core,https://data.mendeley.com/public-files/datasets/tv6w6yyfy8/files/c2423e76-508e-4568-acc8-fea752230367/file_downloaded,2026-10-07
 rexand_galais_2022_ipofr,core,https://data.mendeley.com/public-files/datasets/tv6w6yyfy8/files/c2423e76-508e-4568-acc8-fea752230367/file_downloaded,2026-10-07
 ridge_2024_regime_egypt,conj,https://dataverse.harvard.edu/api/access/datafile/7094634,2026-10-07
