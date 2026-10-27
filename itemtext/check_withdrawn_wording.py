@@ -80,6 +80,11 @@ def withdrawn_for_rights():
     for row in rows:
         if (row.get("reason") or "").strip().lower() not in RIGHTS_REASONS:
             continue
+        #: A reinstated withdrawal is no longer a rights withdrawal: the grant
+        #: arrived and the text is published again, so its wording may sit in
+        #: the repo like any other table's.
+        if (row.get("reinstated") or "").strip():
+            continue
         table = re.sub(r"__items$", "", (row.get("table") or "")).lower()
         if table:
             names.add(table)

@@ -28,7 +28,13 @@ ROOT = Path(__file__).resolve().parents[2]
 LEDGER = ROOT / "itemtext" / "withdrawals.csv"
 
 COLUMNS = ["table", "dataset", "kind", "withdrawn", "reason", "family", "refs",
-           "rows", "released", "script", "note"]
+           "rows", "released", "script", "note", "reinstated"]
+#: `reinstated` is the date a withdrawal was undone -- the basis fell away (a
+#: permission arrived) and the table was uploaded again. Written by hand, not by
+#: `record`, and read by `check_release_consistency.py` and
+#: `itemtext/check_withdrawn_wording.py`, which drop a reinstated row: it is
+#: history, not current state. First used for WMD_bartczuk_2023__items
+#: (2026-10-27, Fida's grant).
 #: Why a table left. `rights` rows name the register `family` they rest on.
 #: `source_withdrawn`: the author took the source deposit down (#2565).
 #: `out_of_scope`: not item responses, e.g. a table whose only "response" is a
