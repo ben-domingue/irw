@@ -594,7 +594,13 @@ def gather(only: Sequence[str] | None) -> List[Check]:
             recorded_hash[name] = value
 
     changes = read_csv_rows(META / "table_changes.csv")
-    ledger = read_csv_rows(REPO / "itemtext" / "withdrawals.csv")
+    #: A row with a `reinstated` date is a withdrawal that was undone -- the
+    #: rights basis fell away (a grant arrived) and the table was uploaded
+    #: again. It is history, not current state, so it is dropped here rather
+    #: than in each check: left in, `withdrawals-live` reports the table as a
+    #: withdrawal the release still serves, which is exactly backwards.
+    ledger = [r for r in read_csv_rows(REPO / "itemtext" / "withdrawals.csv")
+              if not (r.get("reinstated") or "").strip()]
     withdrawn = {(r.get("table") or "").strip() for r in ledger}
     surfaces = {
         "biblio": {(r.get("table") or "").strip() for r in read_csv_rows(META / "biblio.csv")},
