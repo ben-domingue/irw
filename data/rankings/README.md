@@ -36,8 +36,8 @@ One row per respondent × task × marked position. The core column names are kep
 | `cov_<name>` | ballot- or respondent-level columns from the source, as text, repeated on every row of the ballot: `cov_precinct`, `cov_ballot_style`, `cov_counting_group`, `cov_district`, `cov_voting_location`. |
 | `trial_<name>` | task-level details, if any (question order, survey arm). |
 
-A source column that is constant across every ballot of a file is not a covariate and is
-dropped. The name `cov_count` is reserved: a `Count` column in a cast vote record is the
+A source column is not a covariate, and is dropped, only when it is constant across the whole
+source deposit. The name `cov_count` is reserved: a `Count` column in a cast vote record is the
 number of identical ballots a row stands for, which belongs to the collapsed layout still
 to be settled for the multi-million-ballot files, so `fairvote_cvr.py` drops `Count` while
 it is identically 1 and stops if it ever is not (#3024).
@@ -136,7 +136,7 @@ It also reports duplicate marks, ballots with a gap, and the marks-per-ballot di
 
 ## Source formats known so far
 
-- **Position-major** (FairVote): one row per ballot, `rank1..rankK` holding names or tokens. Tokens observed: `skipped`, `overvote`, `writein` / `Write-in` / `Write-In`; `undervote` is treated as a skip. Any other lowercase single-word value is reported by the script as a suspected token and should be added to `KNOWN_TOKENS` after checking. Ballot-level columns seen: `ballotID`, `Index`, `Cast.Vote.Record` (row keys, dropped); `precinct(s)`, `ward`, `Ballot.Style`, `ballot_type`, `countingGroup`, `district`, `districtType`, `votingLocation`, `tally_type` (kept as `cov_`); `source_file` (dropped).
+- **Position-major** (FairVote): one row per ballot, `rank1..rankK` holding names or tokens. Tokens observed: `skipped`, `overvote`, `writein` / `Write-in` / `Write-In`; `undervote` is treated as a skip. Any other lowercase single-word value is reported by the script as a suspected token and should be added to `KNOWN_TOKENS` after checking. Ballot-level columns seen: `ballotID`, `Index`, `Cast.Vote.Record` (row keys, dropped); `precinct(s)`, `ward`, `Ballot.Style`, `ballot_type`, `countingGroup`, `district`, `districtType`, `precinctPortion`, `votingLocation`, `tally_type` (kept as `cov_`); `source_file` (dropped).
 - **Candidate-major** (Australian Electoral Commission Senate formal preferences): one row per ballot, one column per candidate holding the preference number. Same layout after pivoting; a script for it is a second batch.
 - **Jury-major** (MIRoVision Eurovision jurors): one row per voting jury × entry, one column per juror holding the rank. `eurovision_jurors.py` pivots it; a juror never ranks their own country's entry, so that entry is simply absent from their rows (not a skip).
 - **Weighted profiles** (Scottish council elections, PrefLib): one row per distinct ranking with a count. **R5 (Ben, 2026-10-15):** expand to one `id` per ballot, no weight column. The expansion is exact (count and ranking are both given), so nothing is added or lost, and the script reports the number of distinct rankings so the compressed form is recoverable. `id` is one ballot everywhere else in the family, `n_ballots_with_marks` must equal the id count (R8), and a council ward is at most a few tens of thousands of ballots, so the cost is rows, not meaning. `scottish_stv.py` does this; the first table (`rcv_aberdeen_20170504_ward11`, 64 distinct rankings, 6,116 ballots) is built and held until the ruling and the licence are settled.
