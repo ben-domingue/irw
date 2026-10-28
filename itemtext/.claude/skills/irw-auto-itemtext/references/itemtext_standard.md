@@ -40,6 +40,26 @@ and `resp` are join keys and are never translated. For an English administration
 `language` and the `_translated` columns are left out entirely rather than emitted
 empty.
 
+> **Every table states its language, in `itemtext_metadata` rather than on the table**
+> (ruled on irw#3224, 2026-10-28). Omission above is a statement about the SHARD table's
+> columns, and on its own it is ambiguous: no table published before 2026-09-01 could
+> carry `language`, so a missing column means either "English administration" or "nobody
+> has established it" — which is the defect R-26 reported. The per-table record closes
+> that. `metadata/08_itemtext.R` writes `language` and `language_source` into
+> `itemtext_metadata` for every table: from the table's own column where it has one
+> (`language_source=table`), from the standard's omission rule for a table built under
+> this standard (`standard_omission`, i.e. English), from
+> `itemtext/itemtext_language.csv` for tables that predate the column (`audit_2026-09-01`),
+> and `unknown`/`unestablished` where nothing establishes it. `unknown` is a permitted
+> value and a tracked gap: `check_release_consistency.py`'s `itemtext-language` check
+> counts it against a baseline that may only come down.
+>
+> The field was NOT added to the 2,746 shard tables, which would have meant 1,095
+> replace-uploads and as many publish decisions to record a fact that belongs in the
+> per-table record anyway. A reader asking "what language is this?" reads
+> `itemtext_metadata`, as they already do for every other fact about an item-text
+> table.
+
 **The fallback, and what `language` holds in it.** When the administered original
 cannot be recovered and only an English version exists, the English goes in the base
 fields, the `_translated` fields stay empty, and `text_source=translated_substitute`

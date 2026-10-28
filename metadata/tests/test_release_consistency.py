@@ -211,6 +211,46 @@ class CorrectionsTest(unittest.TestCase):
         self.assertEqual(chk.hits, ["old -> gone (also absent)"])
 
 
+class ItemtextLanguageTest(unittest.TestCase):
+    """#3224: every item-text table says what language respondents read."""
+
+    def test_a_named_language_is_clean(self):
+        chk = crc.check_itemtext_language([{"table": "t", "language": "Spanish"}])
+        self.assertEqual(chk.hits, [])
+
+    def test_a_blank_language_is_a_hit(self):
+        chk = crc.check_itemtext_language([{"table": "t", "language": ""}])
+        self.assertEqual(chk.hits, ["t (blank)"])
+
+    def test_a_missing_column_is_a_hit(self):
+        """A file written before the field existed has no key at all."""
+        chk = crc.check_itemtext_language([{"table": "t"}])
+        self.assertEqual(chk.hits, ["t (blank)"])
+
+    def test_unknown_is_counted_too(self):
+        """`unknown` is a permitted VALUE and still a gap to close.
+
+        The ruling allows it so that absence becomes a fault, not so that the
+        corpus can stop at it: the baseline is what makes it shrink.
+        """
+        chk = crc.check_itemtext_language([{"table": "t", "language": "unknown"}])
+        self.assertEqual(chk.hits, ["t (unknown)"])
+
+    def test_the_literal_NA_is_not_a_language(self):
+        """IRW's published null is the string "NA"."""
+        chk = crc.check_itemtext_language([{"table": "t", "language": "NA"}])
+        self.assertEqual(chk.hits, ["t (NA)"])
+
+    def test_a_semicolon_list_is_a_language(self):
+        chk = crc.check_itemtext_language(
+            [{"table": "t", "language": "English; Turkish; German"}])
+        self.assertEqual(chk.hits, [])
+
+    def test_a_row_with_no_table_name_is_skipped(self):
+        chk = crc.check_itemtext_language([{"table": "", "language": ""}])
+        self.assertEqual(chk.hits, [])
+
+
 class WithdrawalsTest(unittest.TestCase):
     def test_whole_withdrawal_still_live_is_a_hit(self):
         chk = crc.check_withdrawals_live(

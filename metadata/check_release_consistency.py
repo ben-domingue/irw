@@ -499,6 +499,30 @@ def check_corrections_resolve(changes: List[dict], live_names: set[str],
     return chk
 
 
+def check_itemtext_language(itemtext_rows: List[dict]) -> Check:
+    chk = Check("itemtext-language", "item-text tables that cannot say what language was administered",
+                "R-26",
+                "a table whose `language` is blank or `unknown` leaves a reader "
+                "unable to tell administered wording from an English rendering "
+                "of it, and `language=X` with empty `_translated` columns means "
+                "`item_text` is NOT what respondents read (#3224)")
+    #: Ruled 2026-10-28: `language` is required per table, `unknown` permitted as
+    #: an explicit value. Both are counted here, because the ruling's point was
+    #: to make the gap VISIBLE and shrinkable rather than to accept it: a blank
+    #: is a pipeline fault, an `unknown` is an honest claim waiting on a reading
+    #: of the paper. The baseline can only come down -- a table arriving now gets
+    #: its language from its own column, or `English` from the standard's
+    #: omission rule, and never `unknown`.
+    for row in itemtext_rows:
+        table = (row.get("table") or "").strip()
+        if not table:
+            continue
+        value = (row.get("language") or "").strip()
+        if not value or value.lower() in ("na", "unknown", "none", "null"):
+            chk.hits.append(f"{table} ({value or 'blank'})")
+    return chk
+
+
 def check_withdrawals_live(ledger: List[dict], live_names: set[str],
                            live_itemtext_names: set[str]) -> Check:
     chk = Check("withdrawals-live", "wholly withdrawn tables still in the release",
@@ -642,11 +666,11 @@ def gather(only: Sequence[str] | None) -> List[Check]:
     ledger = [r for r in read_csv_rows(REPO / "itemtext" / "withdrawals.csv")
               if not (r.get("reinstated") or "").strip()]
     withdrawn = {(r.get("table") or "").strip() for r in ledger}
+    itemtext_rows = read_csv_rows(META / "itemtext_metadata.csv")
     surfaces = {
         "biblio": {(r.get("table") or "").strip() for r in read_csv_rows(META / "biblio.csv")},
         "tags": {(r.get("table") or "").strip() for r in read_csv_rows(META / "tags.csv")},
-        "itemtext_metadata": {(r.get("table") or "").strip()
-                              for r in read_csv_rows(META / "itemtext_metadata.csv")},
+        "itemtext_metadata": {(r.get("table") or "").strip() for r in itemtext_rows},
     }
 
     checks = [
@@ -658,6 +682,7 @@ def gather(only: Sequence[str] | None) -> List[Check]:
         check_corrections_resolve(changes, live_names, withdrawn),
         check_withdrawals_live(ledger, live_names, live_itemtext_names),
         check_withdrawals_records(ledger, surfaces, live_names),
+        check_itemtext_language(itemtext_rows),
     ]
     out = [c for c in checks if c is not None and _wanted(c.key, only)]
     return out
