@@ -1,4 +1,4 @@
-# item-text tables in the Redivis shards as of 2026-10-27
+# item-text tables in the Redivis shards as of 2026-10-28
 # status=published: a reader can fetch it. status=draft: uploaded, not released yet.
 # generated -- do not hand-edit; rerun itemtext/refresh_live_tables.py (irw#1828)
 table,shard,status
@@ -35,7 +35,6 @@ FGSIS_Berzeviczy_2018,irw_text_2,published
 FIVPEI_Perrig_2023_AttDiff,irw_text_2,published
 FPAS_Silva_2022,irw_text_3,published
 Fh_Okcsr_Roos_2022_study1_Feeling_Heard,irw_text_3,published
-FomoNegativeAffect_cremer_2026_panas,irw_text_3,published
 FomoNegativeAffect_cremer_2026_phq,irw_text_2,published
 IJLS_Eersel_2024_DenialAcceptance,irw_text_2,published
 IJLS_Eersel_2024_IJLSreaction,irw_text_2,published
@@ -451,6 +450,7 @@ cormier_2024_phq4,irw_text,published
 coroiu_2018_phq9,irw_text_3,published
 coroiu_2018_scs,irw_text_3,published
 corti_2023_academic_adaptation,irw_text,published
+costa_2020_punishment,irw_text_3,published
 covid_travel_mackenzie_2021,irw_text_2,published
 cox_2024_feedback_perceptions,irw_text,published
 criticalperiod_syntax,irw_text,published
@@ -1412,6 +1412,7 @@ marian_2023_gad,irw_text_3,published
 marian_2023_phq9,irw_text_3,published
 marian_2023_thoughts,irw_text_3,published
 marquessanchez_2023_kidmed,irw_text_2,published
+marsalek_2026_ai_attitudes,irw_text_3,published
 martindelcampo_2020_cvcv,irw_text_3,published
 martindelcampo_2020_tipi,irw_text_3,published
 matarboumosleh_2017_gad2,irw_text_2,published
@@ -2033,6 +2034,12 @@ scs_2025_cfanonclinic,irw_text_3,published
 scs_2025_cfausatr,irw_text_3,published
 selfcompassionscale_shortform_fuochi_2025,irw_text_3,published
 sem_cnes,irw_text_2,published
+senge_2025_app_review_use,irw_text_3,published
+senge_2025_bbd_attitudes,irw_text_3,published
+senge_2025_disposal_frequency,irw_text_3,published
+senge_2025_food_waste_talk,irw_text_3,published
+senge_2025_shopping_planning,irw_text_3,published
+senge_2025_storage,irw_text_3,published
 setiawan_2026_cybersecurity_behaviour,irw_text_3,published
 setiawan_2026_cybersecurity_ethics,irw_text_3,published
 setiawan_2026_cybersecurity_knowledge,irw_text_3,published
@@ -2485,6 +2492,7 @@ threat_isler_2024_exp3_cog_panas,irw_text,published
 threat_isler_2024_exp4_cog_crt,irw_text,published
 threat_isler_2024_exp4_cog_panas,irw_text,published
 tian2026_digital_competence,irw_text_2,published
+tolomeo_2026_icar16,irw_text_3,published
 tomioka_2022_srh_future_needs,irw_text_2,published
 tomioka_2022_srh_importance,irw_text_2,published
 tomioka_2022_srh_sufficiency,irw_text_3,published
