@@ -1129,6 +1129,59 @@ local({
           "rank: Public Reshare? survives the union")
 })
 
+##----------------------------------- licence overrides (#3226, 10-28) ---
+cat("licence overrides: a provenance note is not a licence\n")
+local({
+    b <- data.frame(
+        table = c("mexico_2023_quality_x", "colombia_2023_politics_x",
+                  "guatemala_2024_homes_x", "smpi_lorenzoluaces_2020_x",
+                  "anunciacao_2025_personality_x", "moved_on", "untouched"),
+        URL__for_data_ = c("https://www.inegi.org.mx/programas/encig/2023/#microdatos",
+                           "https://microdatos.dane.gov.co/index.php/catalog/822/get-microdata",
+                           "https://www.ine.gob.gt/encasba-2/",
+                           "https://osf.io/69nwe/",
+                           "https://osf.io/wkzan/overview",
+                           "https://www.ine.gob.gt/encasba-2/",
+                           "https://osf.io/abcde/"),
+        Derived_License = c("Permission via Email", "Permission via Email",
+                            "Permission via Email", "",
+                            "Permission via Email", "CC BY-NC 4.0",
+                            "Permission via Email"),
+        Custom_License_Terms = NA_character_,
+        stringsAsFactors = FALSE)
+    out <- suppressMessages(suppressWarnings(apply_license_overrides(b, "core")))
+    nb <- out$biblio
+    r <- function(t) nb[nb$table == t, ]
+    check(identical(r("mexico_2023_quality_x")$Derived_License, "Custom") &&
+          grepl("Libre Uso", r("mexico_2023_quality_x")$Custom_License_Terms, fixed = TRUE),
+          "INEGI rows become Custom and carry the free-use terms")
+    check(grepl("202610013472", r("colombia_2023_politics_x")$Custom_License_Terms, fixed = TRUE),
+          "DANE terms name the radicado that confirms public use")
+    check(grepl("academic research", r("guatemala_2024_homes_x")$Custom_License_Terms, fixed = TRUE),
+          "INE terms report what INE said, academic analysis included")
+    check(identical(r("smpi_lorenzoluaces_2020_x")$Derived_License, "CC BY 4.0") &&
+          is.na(r("smpi_lorenzoluaces_2020_x")$Custom_License_Terms),
+          "a blank cell on a letter-default deposit becomes CC BY 4.0 with no terms")
+    check(identical(r("anunciacao_2025_personality_x")$Derived_License, "CC BY 4.0"),
+          "the letter default converts a Permission via Email row too")
+    ##The self-disarming half: a row on a covered deposit that says something
+    ##else is REPORTED, never overwritten. This is what stops the override
+    ##outliving the defect it was written for.
+    check(identical(r("moved_on")$Derived_License, "CC BY-NC 4.0"),
+          "a row holding a different licence is left alone")
+    check(identical(r("untouched")$Derived_License, "Permission via Email"),
+          "a deposit no override names keeps its value")
+    check(nrow(out$log) == 5L && all(out$log$issue == "#3226"),
+          "every change is logged with its issue")
+    w <- tryCatch({ apply_license_overrides(b, "core"); "none" },
+                  warning = function(e) conditionMessage(e))
+    check(grepl("moved on|different value", w),
+          "the mismatch warns so the entry can be deleted")
+    ##Idempotent: a second pass over its own output changes nothing.
+    again <- suppressMessages(suppressWarnings(apply_license_overrides(nb, "core")))
+    check(nrow(again$log) == 0L, "re-running the override is a no-op")
+})
+
 ##------------------------------------------------------------------ result ---
 cat("\n")
 if (failures > 0L) { cat(failures, "FAILURE(S)\n"); quit(status = 1L) }
