@@ -68,15 +68,27 @@ def _addressable_key(df):
     """
     if "item" not in df.columns:
         return None, "resp"
+    # The standard's spelling is `resp_raw` (irw#2094); `raw_resp` is the
+    # retired one, still carried by older item-text tables. Both are accepted
+    # and `resp_raw` wins where a table somehow has both, because that is the
+    # one datastandard.md asks for. Recognising only `raw_resp` meant a table
+    # that followed the standard had NO addressable key: every option row of an
+    # item collided, and an unscored table with real per-option text was
+    # reported as `resp_ambiguous` -- "the same item+resp means two different
+    # things" -- which is the opposite of what it says. Found 2026-10-27 on
+    # tolomeo_2026_icar16__items, whose 102 option rows are keyed by the
+    # printed option label. Same omission, same file family, as the `cov_prefix`
+    # known-column list in _checks.py.
+    raw_col = next((c for c in ("resp_raw", "raw_resp") if c in df.columns), None)
     if "resp" not in df.columns:
-        if "raw_resp" in df.columns:
-            return df[["item", "raw_resp"]].copy(), "raw_resp"
+        if raw_col is not None:
+            return df[["item", raw_col]].copy(), raw_col
         return df[["item"]].copy(), "resp"
-    if "raw_resp" not in df.columns:
+    if raw_col is None:
         return df[["item", "resp"]].copy(), "resp"
     key = df[["item"]].copy()
-    key["addr"] = df["resp"].where(df["resp"].notna(), df["raw_resp"])
-    return key, "resp-or-raw_resp"
+    key["addr"] = df["resp"].where(df["resp"].notna(), df[raw_col])
+    return key, f"resp-or-{raw_col}"
 
 
 def _validate_item_text(df, label: str, profile: str) -> Report:
@@ -183,7 +195,7 @@ def _validate_item_text(df, label: str, profile: str) -> Report:
                 f"{dup} duplicate item+{addr_desc} rows with identical option text -- "
                 f"an item text table carries one row per response option, so a repeat "
                 f"is a doubled upload (#1810). Rows carrying neither `resp` nor "
-                f"`raw_resp` have no addressable key and count here: nothing can join "
+                f"`resp_raw` have no addressable key and count here: nothing can join "
                 f"them to a response (#2232)",
                 table=table, group="core"))
     for finding in extra.check_name(table):
