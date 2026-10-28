@@ -31,6 +31,7 @@
 ##  resp  the position marked, 1 = first choice, as recorded; skips leave a gap
 ##  cov_* every other source column, snake_cased, repeated on each of the ballot's rows
 ##        (a Count column of all 1s is dropped; see convert())
+##        Leading and trailing whitespace is stripped from cov_ values only (#3024).
 ##Skipped cells are not rows. A ballot with no marks has no rows; the design record
 ##keeps n_ballots_cast and n_ballots_with_marks. Duplicate marks (one candidate at
 ##two positions) are kept as two rows. Candidate names are not stored anywhere: the
@@ -149,6 +150,11 @@ def convert(src: Path, meta: dict) -> tuple[list[dict], dict, list[str]]:
         assert not other, (f"{src.name}: Count holds {other[:5]}, not 1 throughout; these are "
                            f"ballot weights and the weights layout is unsettled (#3024)")
         cov_cols = [(c, i) for c, i in cov_cols if c != "cov_count"]
+    ##A stray space must not make a separate covariate key (#3024). Only cov_ cells are
+    ##touched: rank cells (item, resp) and the id columns stay as recorded.
+    for row in raw:
+        for _, i in cov_cols:
+            row[i] = row[i].strip()
 
     def classify(v: str):
         key = re.sub(r"[\s\-_]", "", v).lower()
