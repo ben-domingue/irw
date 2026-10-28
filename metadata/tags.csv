@@ -1138,7 +1138,7 @@ conrad_2013_exploitation_client_financial,Elderly (minimum age >50),NA,"Clinical
 conrad_2013_exploitation_client_psychology,Elderly (minimum age >50),NA,"Clinical, Targeted/specific","Affective/mental health, Opinion/attitude, Physical health/functioning",Survey/questionnaire,Likert Scale/selected response,eng,Older Adult Mistreatment Assessment (OAMA) Client Questionnaire
 conrad_2013_exploitation_staff_financial,Elderly (minimum age >50),NA,"Clinical, Targeted/specific","Affective/mental health, Opinion/attitude, Physical health/functioning",Survey/questionnaire,Likert Scale/selected response,eng,Older Adult Mistreatment Assessment (OAMA) Staff Questionnaire
 conrad_2013_exploitation_staff_psychology,Elderly (minimum age >50),NA,"Clinical, Targeted/specific","Affective/mental health, Opinion/attitude, Physical health/functioning",Survey/questionnaire,Likert Scale/selected response,eng,Older Adult Mistreatment Assessment (OAMA) Staff Questionnaire
-consideration_future_consequences,Adult (18+),NA,Educational,Behavioral,Test,Likert Scale/selected response,eng,Experiences in Close Relationships Scale
+consideration_future_consequences,Adult (18+),NA,Educational,Behavioral,Test,Likert Scale/selected response,eng,Consideration of Future Consequences Scale
 conspiracy_asd__asd_aq10,Adult (18+),NA,Internet-based,NA,Survey/questionnaire,Likert Scale/selected response,eng,NA
 conspiracy_asd__cognitive_flexibility,Adult (18+),NA,Internet-based,NA,Survey/questionnaire,Likert Scale/selected response,eng,NA
 conspiracy_asd__conspiracy_gcbs,Adult (18+),NA,Internet-based,NA,Survey/questionnaire,Likert Scale/selected response,NA,NA
@@ -2589,7 +2589,7 @@ hyatt_2023_aggression_s3_cast,Adult (18+),NA,"General/non-specific, Internet-bas
 hyatt_2023_aggression_s3_daq,Adult (18+),NA,"General/non-specific, Internet-based",Behavioral,Survey/questionnaire,Likert Scale/selected response,eng,Displaced Aggression
 hyatt_2023_aggression_s3_srp4,Adult (18+),NA,"General/non-specific, Internet-based",Personality,Survey/questionnaire,Likert Scale/selected response,eng,Psychopathy
 hyatt_2023_aggression_s3_ssis,Adult (18+),NA,"General/non-specific, Internet-based",Behavioral,Survey/questionnaire,Likert Scale/selected response,eng,Short Sadistic Impulse Scale
-hypersensitive_narcissism,NA,NA,Targeted/specific,Cognitive/educational,Test,Likert Scale/selected response,eng,Open Hemispheric Brain Dominance Scale
+hypersensitive_narcissism,NA,NA,Targeted/specific,Personality,Test,Likert Scale/selected response,eng,The Hypersensitive Narcissism Scale
 iandolo_2021_asq,Adult (18+),NA,NA,NA,Survey/questionnaire,Likert Scale/selected response,spa,NA
 iat_difference,Mixed,NA,Internet-based,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,eng,Attitudes about difference
 iat_poverty,Mixed,NA,Internet-based,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,eng,Attitudes towards poverty
