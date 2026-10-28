@@ -180,7 +180,7 @@ declare -A STAGE_SCRIPT=( [01]=01_metadata.R [02]=02_biblio.R [03]=03_tags.R
                           [13]=13_script_index.py [14]=14_column_docs.py
                           [15]=15_codebook_links.py [16]=16_conjoint.R
                           [17]=17_coverage.R [18]=18_rankings.R
-                          [19]=19_item_classical.py )
+                          [19]=19_item_classical.py [20]=20_k1.py )
 
 # Stages whose non-zero exit is a FINDING, not a failure. 12 exits 1 when a
 # table has been stuck for several runs -- that is the report doing its job, and
@@ -215,6 +215,11 @@ declare -A STAGE_OUTPUTS=(
             # .gitignore) and metadata.csv was snapshotted before stage 01, so
             # diffing it again here would only reprint 01's diff. The stage
             # reports its own coverage line instead.
+  [20]="k1_by_table.csv"   # committed, unlike 19's store, and carrying no
+            # per-row timestamp -- so this diff is EMPTY unless a table's
+            # quasi-identifier values moved, which is the whole reason the file
+            # is kept (#3273). A row that changed without a table_changes.csv
+            # row to match is a finding; see the stage header.
 )
 # 16 (conjoint) and 18 (rankings) run with 05/06/07, before 02: conj_metadata.csv
 # and rank_metadata.csv are 02's liveness oracles for conj_biblio and
@@ -225,7 +230,12 @@ declare -A STAGE_OUTPUTS=(
 # metadata.csv for the table list and joins four summary columns back onto it,
 # and 01 rebuilds that file from base.cols alone, so anything 19 adds has to go
 # on after 01 has run and before the stages that read metadata.csv downstream.
-DEFAULT_ORDER=(01 19 05 06 07 16 18 02 03 08 10 11 12 13 14 15 17)
+# 20 (k=1 respondent uniqueness, #3273) is next for the same reason: it reads
+# metadata.csv's `variables` for each table's quasi-identifiers and joins two
+# columns back on, so it too has to be after 01. Its order relative to 19 is
+# only tidiness -- both stages rewrite metadata.csv preserving every column they
+# did not author, so neither can drop the other's.
+DEFAULT_ORDER=(01 19 20 05 06 07 16 18 02 03 08 10 11 12 13 14 15 17)
 
 # Join key for the diff, per output file. Everything is keyed on `table` except
 # the two collections outputs (issue #1633): the registry is one row per
