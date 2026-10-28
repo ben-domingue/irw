@@ -54,6 +54,7 @@ USAGE
 exits 1 and names the files if any are found.
 """
 import csv
+import os
 import pathlib
 import re
 import subprocess
@@ -61,7 +62,13 @@ import sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 WITHDRAWALS = ROOT / "itemtext" / "withdrawals.csv"
+BLOCKED = ROOT / "itemtext" / "blocked_wording_tables.csv"
 RIGHTS_REASONS = ("rights", "unlicensed")
+
+#: The local store of wording we hold but may not publish, outside the git
+#: repo at ~/Dropbox/projects/irw/data/itemtext/ (#3016). Read only to keep
+#: BLOCKED honest on a machine that has it; CI never sees it.
+STORE = pathlib.Path.home() / "Dropbox" / "projects" / "irw" / "data" / "itemtext"
 
 #: First person, a handful of words, ending like a sentence. Matches the stems
 #: that were actually found; does not pretend to generalise beyond them.
@@ -71,6 +78,47 @@ STEM = re.compile(
     re.IGNORECASE,
 )
 QUOTED = re.compile(r"""["']([^"'\n]{20,200})["']""")
+
+
+def blocked_before_shipping():
+    """Tables whose wording is held or blocked and was never published.
+
+    `withdrawals.csv` cannot answer this. A withdrawal row exists only for text
+    that SHIPPED and was then pulled, so an instrument blocked at triage --
+    PROMIS, PANAS, the MLQ translations, CAST-18 -- has no row there and was
+    invisible to this check. That is how 33 wording CSVs for blocked
+    instruments stayed tracked after #3249 reported the tree clean
+    (2026-10-28, #3228).
+
+    The list is table NAMES only, generated from the store's filenames. No
+    wording travels into git with it, and CI can read it.
+    """
+    if not BLOCKED.exists():
+        return set()
+    with open(BLOCKED, encoding="utf-8-sig") as f:
+        return {
+            re.sub(r"__items$", "", (row.get("table") or "").strip().lower())
+            for row in csv.DictReader(f)
+            if (row.get("table") or "").strip()
+        }
+
+
+def store_drift():
+    """Store tables missing from BLOCKED, on a machine that has the store.
+
+    Returns () in CI, where the store does not exist. This is the one thing
+    that can silently narrow the check: a table added to the store and not to
+    the list is a table this check stops seeing.
+    """
+    if not STORE.is_dir():
+        return ()
+    have = blocked_before_shipping()
+    return tuple(sorted(
+        re.sub(r"__items\.csv$", "", name).lower()
+        for name in os.listdir(STORE)
+        if name.endswith("__items.csv")
+        and re.sub(r"__items\.csv$", "", name).lower() not in have
+    ))
 
 
 def withdrawn_for_rights():
@@ -142,7 +190,7 @@ def wording_rows(path, names):
 
 
 def main():
-    names = withdrawn_for_rights()
+    names = withdrawn_for_rights() | blocked_before_shipping()
     problems = []
     for path in tracked_itemtext_files():
         if path.endswith(".csv"):
@@ -150,14 +198,14 @@ def main():
             if tables:
                 problems.append((
                     path,
-                    f"item_text rows for {len(tables)} withdrawn table(s): "
+                    f"item_text rows for {len(tables)} withheld table(s): "
                     f"{', '.join(sorted(tables)[:3])}",
                 ))
                 continue
         if table_of(path) not in names:
             continue
         if path.endswith("__items.csv"):
-            problems.append((path, "whole wording table for a rights withdrawal"))
+            problems.append((path, "whole wording table, withheld on rights"))
             continue
         stems = item_stems(path)
         if stems:
@@ -185,24 +233,36 @@ def main():
                 print(f"  {path}\n      names {sorted(named)[:2]}, "
                       f"{len(stems)} stem(s), e.g. {stems[0][:70]!r}")
 
+    drift = store_drift()
+    if drift:
+        print(
+            f"NOTE: {len(drift)} table(s) in the local store are missing from "
+            f"{BLOCKED.name}, so this check cannot see them. Regenerate the "
+            f"list: {', '.join(drift[:5])}"
+            + (", ..." if len(drift) > 5 else ""),
+            file=sys.stderr,
+        )
+
     if problems:
         print(
-            f"{len(problems)} tracked file(s) carry wording for a table "
-            f"withdrawn on rights grounds:",
+            f"{len(problems)} tracked file(s) carry wording for a table that "
+            f"is withdrawn on rights grounds or blocked before shipping:",
             file=sys.stderr,
         )
         for path, why in problems:
             print(f"  {path}\n      {why}", file=sys.stderr)
         print(
-            "\nA withdrawal removes the text from Redivis, not from the repo. "
-            "Delete the file; see itemtext/fixes/3228_withdrawn_wording/.",
+            "\nA withdrawal removes the text from Redivis, not from the repo, "
+            "and a block never put it there to remove. Delete the file -- the "
+            "store keeps a copy; see itemtext/fixes/3228_withdrawn_wording/.",
             file=sys.stderr,
         )
         sys.exit(1)
 
     print(
         f"OK: no tracked file under itemtext/ carries wording for any of the "
-        f"{len(names)} tables withdrawn for rights."
+        f"{len(names)} tables withdrawn on rights grounds or blocked before "
+        f"shipping."
     )
 
 

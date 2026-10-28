@@ -73,3 +73,50 @@ rather than items ("I hold the copyright to the BFI and it is not in the public
 domain"). Deciding those needs a person reading each file against the
 instrument, which is why CI does not run it and nothing here was deleted on its
 say-so.
+
+---
+
+## 2026-10-28: the check was looking at the wrong ledger
+
+The pass above reported the tree clean, and it was not. `withdrawals.csv`
+records text that **shipped and was then pulled**. An instrument blocked at
+triage never shipped, so it has no row there, and every held or blocked table
+was invisible to a check keyed on that file.
+
+Found by intersecting the local store's filenames with `git ls-files`:
+**33 tracked wording CSVs** for instruments we may not publish — 20 under
+`itemtext/quarantine/`, 13 under `itemtext/itemtables/`. 30 of them carry
+three-or-more-word `item_text`; across the set, **349 distinct item stems**.
+Every one is recorded in the store's own `INDEX.csv` with `action = copied`,
+which is the mechanism: the file was copied to the store and the tracked
+original left behind.
+
+What was in them: PROMIS EDDEP (HealthMeasures' terms bar redistribution),
+PANAS in Italian, the Chinese MLQ (covered by the 2026-09-29 translation
+ruling), CAST-18, the DAQ, the SSIS, RRS-22, the Singelis SCS, the MSCS,
+PES/NWI, DEQ-OE, the SCI, OECD/TALIS-adapted items, and 13 `tsai_2017_treeit_*`
+tables pulled on 2026-09-11.
+
+**The fix.** All 33 removed from HEAD — the store holds each one, so nothing is
+lost. The check now reads `itemtext/blocked_wording_tables.csv` as well, which
+is generated from the store's filenames and carries **table names only**, so no
+wording travels into git with it. On a machine that has the store, the check
+also reports tables present there and missing from the list, since that is the
+one way it can silently narrow.
+
+**History: deliberately not rewritten.** These files have been in public history
+since September. Ben's call, 2026-10-28: *"i think i can live with them just not
+being in head. those items are 'out there' anyways. i don't want to be in clear
+violation but them being in our github history is a different kind of thing."*
+Rewriting history on a repository this public, with ~35 live worktrees and
+unknown clones, costs more than the residual risk — the wording in question is
+published in the source papers and instrument records. The distinction being
+drawn is between an active violation and an archival trace, and it is recorded
+here so nobody re-opens it as an oversight.
+
+**The storage question (R-40's first half) is settled and was already right.**
+The store is `~/Dropbox/projects/irw/data/itemtext/` — outside the git repo,
+whose root is `src/`. It holds 152 `__items.csv` files and an `INDEX.csv`. The
+hazard was only that `data/itemtext` reads identically to the repo's own
+tracked `data/` tree of 3,000+ public build scripts, so the path is now in
+`.gitignore` and a test fails if the directory ever appears inside the repo.
