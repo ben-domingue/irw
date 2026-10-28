@@ -523,6 +523,36 @@ def check_itemtext_language(itemtext_rows: List[dict]) -> Check:
     return chk
 
 
+#: Every family's biblio export, in the order replay_license_edits.R reads them.
+#: `Custom` is family-agnostic: a conjoint row saying it is uninterpretable in
+#: exactly the way a core row is.
+BIBLIO_CSVS = ("biblio.csv", "comps_biblio.csv", "conj_biblio.csv",
+               "rank_biblio.csv", "nominal_biblio.csv", "simsyn_biblio.csv")
+
+
+def check_custom_license_terms(biblio_rows: Dict[str, List[dict]]) -> Check:
+    chk = Check("custom-license-terms", "`Custom` licences with nothing behind them",
+                "R-36",
+                "`Custom` names no terms a reader can look up, so a `Custom` "
+                "row with an empty `Custom_License_Terms` publishes a licence "
+                "nobody can act on -- the 309 rows of #3226 were all of them "
+                "spain, mexico and friedman, and each resolved to a terms "
+                "string rather than to 309 decisions")
+    #: A string that merely records that the SOURCE declares nothing still
+    #: counts: it is what a reader needs in order to act, and it is what makes
+    #: the row's real question (R-38) visible instead of hidden behind
+    #: `Custom`. The check is about an empty cell, never about the wording.
+    for name, rows in biblio_rows.items():
+        for row in rows:
+            if (row.get("Derived_License") or "").strip().lower() != "custom":
+                continue
+            terms = (row.get("Custom_License_Terms") or "").strip()
+            if not terms or terms.upper() == "NA":
+                table = (row.get("table") or "?").strip()
+                chk.hits.append(table if name == "biblio.csv" else f"{table} ({name})")
+    return chk
+
+
 def check_withdrawals_live(ledger: List[dict], live_names: set[str],
                            live_itemtext_names: set[str]) -> Check:
     chk = Check("withdrawals-live", "wholly withdrawn tables still in the release",
@@ -667,8 +697,11 @@ def gather(only: Sequence[str] | None) -> List[Check]:
               if not (r.get("reinstated") or "").strip()]
     withdrawn = {(r.get("table") or "").strip() for r in ledger}
     itemtext_rows = read_csv_rows(META / "itemtext_metadata.csv")
+    biblio_rows = {name: read_csv_rows(META / name) for name in BIBLIO_CSVS
+                   if (META / name).exists()}
     surfaces = {
-        "biblio": {(r.get("table") or "").strip() for r in read_csv_rows(META / "biblio.csv")},
+        "biblio": {(r.get("table") or "").strip()
+                   for r in biblio_rows.get("biblio.csv", [])},
         "tags": {(r.get("table") or "").strip() for r in read_csv_rows(META / "tags.csv")},
         "itemtext_metadata": {(r.get("table") or "").strip() for r in itemtext_rows},
     }
@@ -683,6 +716,7 @@ def gather(only: Sequence[str] | None) -> List[Check]:
         check_withdrawals_live(ledger, live_names, live_itemtext_names),
         check_withdrawals_records(ledger, surfaces, live_names),
         check_itemtext_language(itemtext_rows),
+        check_custom_license_terms(biblio_rows),
     ]
     out = [c for c in checks if c is not None and _wanted(c.key, only)]
     return out

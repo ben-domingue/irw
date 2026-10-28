@@ -1483,6 +1483,106 @@ LICENSE_OVERRIDES <- list(
         derived    = "CC0 1.0",
         terms      = NULL,
         why = "test_taking_patterns_over_time: the deposit is CC0 1.0"
+    ),
+    ##---------------------------------------------------------------------
+    ##A ShareAlike the source never had (#3226, R-09).
+    ##
+    ##The review recorded these 14 rows as a restriction silently dropped on the
+    ##way out: `personalitychange_kramer_2025_*` (7) going CC BY-SA 4.0 ->
+    ##CC BY 4.0 and `transyouth_leshin_2026_*` (7) going CC BY-NC-SA 4.0 ->
+    ##CC BY-NC 4.0, where 80 comparable rows kept their SA. Asking the deposits
+    ##reverses it. The OSF API reports osf.io/zevcs as "CC-By Attribution 4.0
+    ##International" and osf.io/t3a9r as "CC-BY Attribution-NonCommercial 4.0
+    ##International" (checked 2026-10-28, and on 2026-10-26 before that).
+    ##Neither carries ShareAlike, so the OUTBOUND licences were right all along
+    ##and it is `Original_License` that invented the clause.
+    ##
+    ##That is why both entries leave `derived` at the value the rows already
+    ##hold and correct `original` only -- the no-op guard takes `original` into
+    ##account for exactly this shape, so the entry fires once and then disarms.
+    ##
+    ##Acceptance, measurable on the export: no row in the corpus records a
+    ##ShareAlike source licence under a non-ShareAlike derived one. These 14 are
+    ##all 14 of them.
+    list(
+        url        = "osf\\.io/zevcs(/|$|[?#])",
+        issue      = "#3226",
+        superseded = "CC BY 4.0",
+        original   = "CC BY 4.0",
+        derived    = "CC BY 4.0",
+        terms      = NULL,
+        why = "OSF zevcs declares CC BY 4.0, not CC BY-SA 4.0 (Kramer 2025)"
+    ),
+    list(
+        url        = "osf\\.io/t3a9r(/|$|[?#])",
+        issue      = "#3226",
+        superseded = "CC BY-NC 4.0",
+        original   = "CC BY-NC 4.0",
+        derived    = "CC BY-NC 4.0",
+        terms      = NULL,
+        why = "OSF t3a9r declares CC BY-NC 4.0, not CC BY-NC-SA 4.0 (Leshin 2026)"
+    ),
+    ##---------------------------------------------------------------------
+    ##The last 15 `Custom` rows with no terms (#3226, R-36) -- and they are not
+    ##the missing-string problem the other 294 were.
+    ##
+    ##R-36 counted 309 `Custom` rows with an empty `Custom_License_Terms`, an
+    ##uninterpretable licence. 294 were CIS and resolved to one terms string
+    ##(#3267). These 15 are the remainder, and asking their sources turns the
+    ##finding into a different one: NEITHER SOURCE DECLARES ANY LICENCE AT ALL.
+    ##
+    ##  friedman_2018_risks_* (2). The Dataverse API reports `license: null` for
+    ##  doi:10.7910/DVN/ZSJA25 and a `termsOfUse` that is Dataverse's own
+    ##  placeholder for a deposit that set none (checked 2026-10-28).
+    ##
+    ##  mexico_2023_mobility_* (13). CEEY publishes the ESRU-EMOVI databases for
+    ##  open download from its own page and states no licence and no terms; the
+    ##  only rights statement on the site is a copyright notice (checked
+    ##  2026-10-28).
+    ##
+    ##So the terms below RECORD WHAT THE SOURCE SAYS, which for these two is
+    ##that it says nothing. That is what R-36 asked for -- a `Custom` row a
+    ##reader can interpret -- and it deliberately asserts no grant: both rows
+    ##belong to R-38's class (an outbound licence over a source licence nobody
+    ##recorded), and the answer there is an ask to the depositor, not a string.
+    ##Deleting these entries when a licence or a permission arrives is the
+    ##intended end state.
+    list(
+        url        = "doi:10\\.7910/DVN/ZSJA25",
+        issue      = "#3226",
+        superseded = "Custom",
+        derived    = "Custom",
+        terms      = paste(
+            "Source: Friedman, Jeffrey (2018), Replication Data for:",
+            "Priorities for Preventive Action: Explaining Americans' Divergent",
+            "Reactions to 100 Public Risks, Harvard Dataverse,",
+            "doi:10.7910/DVN/ZSJA25. The deposit declares NO licence. Its",
+            "stated terms of use are Dataverse's own text for a deposit that",
+            "set none -- \"This dataset is made available with limited",
+            "information on how it can be used. You may wish to communicate",
+            "with the Contact(s) specified before use.\" -- and the AJPS",
+            "Dataverse adds that the journal and the Odum Institute are not",
+            "responsible for the use of the data. IRW records this rather than",
+            "naming a licence: nothing here grants redistribution, so contact",
+            "the depositor before relying on it. Checked against the Dataverse",
+            "API on 2026-10-28."),
+        why = "R-36: the deposit's own terms are that it declares none"
+    ),
+    list(
+        url        = "ceey\\.org\\.mx/contenido/que-hacemos/emovi",
+        issue      = "#3226",
+        superseded = "Custom",
+        derived    = "Custom",
+        terms      = paste(
+            "Source: CEEY (Centro de Estudios Espinosa Yglesias), Encuesta ESRU",
+            "de Movilidad Social en Mexico (ESRU-EMOVI) 2023, published at",
+            "https://ceey.org.mx/contenido/que-hacemos/emovi/. CEEY offers the",
+            "EMOVI databases for open download from that page and declares no",
+            "licence and no terms of use; the only rights statement on the site",
+            "is a copyright notice. IRW records that position rather than",
+            "naming a licence: nothing there grants redistribution, so contact",
+            "CEEY before relying on it. Checked on 2026-10-28."),
+        why = "R-36: CEEY publishes EMOVI openly and declares no terms"
     )
 )
 

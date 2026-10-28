@@ -251,6 +251,64 @@ class ItemtextLanguageTest(unittest.TestCase):
         self.assertEqual(chk.hits, [])
 
 
+class CustomLicenseTermsTest(unittest.TestCase):
+    """#3226 R-36: `Custom` with an empty terms cell is an unreadable licence."""
+
+    def rows(self, *rows, name="biblio.csv"):
+        return {name: list(rows)}
+
+    def test_custom_with_terms_is_fine(self):
+        chk = crc.check_custom_license_terms(self.rows(
+            {"table": "t", "Derived_License": "Custom",
+             "Custom_License_Terms": "Ley 37/2007, conditions as CIS states them"}))
+        self.assertEqual(chk.hits, [])
+
+    def test_custom_with_no_terms_is_a_hit(self):
+        chk = crc.check_custom_license_terms(self.rows(
+            {"table": "t", "Derived_License": "Custom",
+             "Custom_License_Terms": ""}))
+        self.assertEqual(chk.hits, ["t"])
+
+    def test_the_literal_NA_is_not_terms(self):
+        """IRW's published null is the string "NA"."""
+        chk = crc.check_custom_license_terms(self.rows(
+            {"table": "t", "Derived_License": "Custom",
+             "Custom_License_Terms": "NA"}))
+        self.assertEqual(chk.hits, ["t"])
+
+    def test_terms_that_record_a_silent_source_still_count(self):
+        """The check is about an empty cell, never about the wording.
+
+        friedman and EMOVI publish terms saying their sources declare none.
+        That is the information a reader needs, and the rights question it
+        leaves open is R-38's, not this check's.
+        """
+        chk = crc.check_custom_license_terms(self.rows(
+            {"table": "friedman_2018_risks_government",
+             "Derived_License": "Custom",
+             "Custom_License_Terms": "The deposit declares NO licence."}))
+        self.assertEqual(chk.hits, [])
+
+    def test_a_non_custom_licence_is_not_asked_for_terms(self):
+        chk = crc.check_custom_license_terms(self.rows(
+            {"table": "t", "Derived_License": "CC BY 4.0",
+             "Custom_License_Terms": ""}))
+        self.assertEqual(chk.hits, [])
+
+    def test_case_does_not_hide_a_custom_row(self):
+        chk = crc.check_custom_license_terms(self.rows(
+            {"table": "t", "Derived_License": " custom ",
+             "Custom_License_Terms": ""}))
+        self.assertEqual(chk.hits, ["t"])
+
+    def test_another_family_names_its_file(self):
+        """A hit outside core says which export it came from."""
+        chk = crc.check_custom_license_terms(self.rows(
+            {"table": "t", "Derived_License": "Custom",
+             "Custom_License_Terms": ""}, name="conj_biblio.csv"))
+        self.assertEqual(chk.hits, ["t (conj_biblio.csv)"])
+
+
 class WithdrawalsTest(unittest.TestCase):
     def test_whole_withdrawal_still_live_is_a_hit(self):
         chk = crc.check_withdrawals_live(
