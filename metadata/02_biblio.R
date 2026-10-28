@@ -392,6 +392,13 @@ getrows<-function(l) {
     lic_ov <- apply_license_overrides(biblio, name,
                                       log.file = log_path("_license_override_log.csv"))
     biblio <- lic_ov$biblio
+    ## One licence spelled two ways is one licence the exact-match `license=`
+    ## filter cannot find (#3229). Maps a spelling onto the spelling the rest
+    ## of the corpus uses for the same licence, and deliberately supplies no
+    ## version nobody recorded. Runs after the overrides, which already write
+    ## canonical values. See LICENSE_SPELLINGS.
+    biblio <- canonicalise_license_spelling(biblio, name)
+    check_license_vocabulary(biblio, name)
     ## Correct the Descriptions that name an instrument the table does not
     ## contain (#1898, #1925, #1929, #1951, #1972). MUST run after the refresh
     ## above, which re-asserts the sheet's value on every row -- an override
