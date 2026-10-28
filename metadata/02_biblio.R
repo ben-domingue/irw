@@ -381,6 +381,17 @@ getrows<-function(l) {
     biblio <- apply_data_doi(biblio, irw_dict, name)
     biblio <- apply_source_via(biblio, irw_dict, name,
                                aggregators.file = "aggregators.csv")
+    ## Rows whose `Derived_License` is a provenance note rather than a licence
+    ## (#3226). `Permission via Email` grants a downstream user nothing, and on
+    ## the three national-statistics families it also asserted a permission the
+    ## correspondence shows was never given -- all three agencies were
+    ## confirming their own published terms. Runs AFTER the refresh and after
+    ## apply_osf_permission(), both of which re-assert the value being
+    ## replaced; exact-match and self-disarming, and the sheet is untouched.
+    ## See LICENSE_OVERRIDES.
+    lic_ov <- apply_license_overrides(biblio, name,
+                                      log.file = log_path("_license_override_log.csv"))
+    biblio <- lic_ov$biblio
     ## Correct the Descriptions that name an instrument the table does not
     ## contain (#1898, #1925, #1929, #1951, #1972). MUST run after the refresh
     ## above, which re-asserts the sheet's value on every row -- an override

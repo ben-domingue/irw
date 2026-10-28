@@ -1185,12 +1185,16 @@ apply_license_attribution <- function(biblio, label = "core",
 ##asks the OSF API whether each listed project publishes a licence and exits
 ##non-zero if one does.
 ##
-##The list is 6 projects, 25 tables.
+##69nwe (smpi_lorenzoluaces_2020_*, 4) and snmqt (mclaughlin_samuel_2025_*, 2)
+##came off on 2026-10-28: both depositors answered the standard letter without
+##countering, so the letter default governs and they are CC BY 4.0 in
+##LICENSE_OVERRIDES. Leaving them here would have had this fill
+##`Permission via Email` for the override to immediately replace.
+##
+##The list is 4 projects, 19 tables.
 OSF_PERMISSION_PROJECTS <- c(
     "75crd",  # 15  parentalempathy_gonzalez_2021_*
-    "69nwe",  #  4  smpi_lorenzoluaces_2020_*
     "kqxd5",  #  2  west_2021_aggnet_*
-    "snmqt",  #  2  mclaughlin_samuel_2025_*
     "9cm75",  #  1  steinberg_2023_mentalizing_momentary
     "mbywd"   #  1  west_2022_psychnet_pclsv
 )
@@ -1213,6 +1217,227 @@ apply_osf_permission <- function(biblio, label = "core",
     message(label, ": set `", value, "` on ", sum(hit),
             " OSF row(s) that had no licence")
     biblio
+}
+
+##---------------------------------------------------------------------------
+##`Permission via Email` where no permission was ever given (#3226, R-37).
+##
+##140 rows published the literal string `Permission via Email` in
+##`Derived_License`. That is not a licence: a user who downloads the table
+##receives no grant at all, and the string asserts a bespoke permission to IRW
+##on top. For 113 of them the assertion is also untrue -- read the
+##correspondence and all three national statistics agencies were answering a
+##question about their PUBLISHED terms, not granting IRW anything.
+##
+##  INEGI (Mexico, 62: encig 2023 x28, ensu x34). No email exists or was
+##  needed. INEGI publishes the Terminos de Libre Uso de la Informacion del
+##  INEGI, which already permit reproduction, distribution, adaptation and
+##  commercial use with attribution -- broader than the standard IRW letter
+##  asks for.
+##
+##  DANE (Colombia, 34). Radicado 202610013472, 2026-02-27, signed F. Buitrago
+##  Hoyos, answering Samuel Camacho's question of 2026-02-26 which named public,
+##  free and reusable access: "Toda la informacion dispuesta en la pagina
+##  oficial del Dane www.dane.gov.co es de uso publico y podra ser consultada y
+##  utilizada." Note the verbs: consulted and used. The letter does not say
+##  redistributed, so the terms below claim no more than it does.
+##
+##  INE Guatemala (17). Lcda. Maria Rossell, info@ine.gob.gt, 2026-02-10, with
+##  Ben on CC: ENCASBA is "publica, gratuita y de libre reutilizacion, tal como
+##  se indica en el sitio web", and "estos datos pueden utilizarse con fines de
+##  analisis e investigacion academica". That last clause is reported here as
+##  INE reported it rather than narrowed into an academic-only restriction
+##  (Ben, 2026-10-28: "nothing wrong with telling others what they told us").
+##
+##The remaining 24 are the ordinary case the standard letter covers. Licensing.txt
+##shows the grantor the CC BY 4.0 plan and invites a counter-offer, so silence is
+##assent to CC BY 4.0 and the rows that DON'T convert are the ones needing a
+##reason (Ben, 2026-10-28). Each of the three has a reply on file: Anunciacao
+##2024-12-13 "You can modify the dataset with no problem"; Lorenzo-Luaces
+##2026-02-11 "feel free to use any and all data we made available";
+##McLaughlin 2025-06-25 "happy for the images from my project to be part of the
+##IRW project ... supposed to be open use without restriction".
+##
+##NOT CONVERTED, and deliberately: sel_marca_2025_* (3) is still waiting on Luis
+##(#1849), and the 13 mexico_2023_mobility_* rows are CEEY's EMOVI survey, a
+##private foundation with its own terms -- a separate source, handled with the
+##rest of R-36.
+##
+##KEYED ON THE SOURCE URL, not on 113 table names, for the reason
+##apply_osf_permission() gives: a table added later from the same deposit
+##arrived under the same terms, and a name list goes stale on the first rename.
+##
+##EXACT-MATCH AND SELF-DISARMING, the apply_description_overrides() shape: an
+##entry fires only where the row still holds the value it was written against,
+##and warns instead of firing when the sheet has moved on. The sheet is never
+##written.
+LICENSE_OVERRIDES <- list(
+    list(
+        url        = "inegi\\.org\\.mx/programas/encig/",
+        issue      = "#3226",
+        superseded = "Permission via Email",
+        derived    = "Custom",
+        terms      = paste(
+            "Source: INEGI (Instituto Nacional de Estadistica y Geografia,",
+            "Mexico), Encuesta Nacional de Calidad e Impacto Gubernamental",
+            "(ENCIG) 2023. Released under the Terminos de Libre Uso de la",
+            "Informacion del INEGI",
+            "(https://www.inegi.org.mx/contenidos/inegi/doc/terminos_info.pdf),",
+            "which permit reproduction, distribution, adaptation and commercial",
+            "use with credit to INEGI. This IRW table reformats that information",
+            "into the IRW data standard; the transformation is the IRW's, not",
+            "INEGI's, and its publication here does not imply INEGI endorsement.",
+            "Cite the source as \"Fuente: INEGI, ENCIG 2023\"."),
+        why = "INEGI publishes free-use terms; no permission was sought or needed"
+    ),
+    list(
+        url        = "inegi\\.org\\.mx/programas/ensu",
+        issue      = "#3226",
+        superseded = "Permission via Email",
+        derived    = "Custom",
+        terms      = paste(
+            "Source: INEGI (Instituto Nacional de Estadistica y Geografia,",
+            "Mexico), Encuesta Nacional de Seguridad Publica Urbana (ENSU).",
+            "Released under the Terminos de Libre Uso de la Informacion del",
+            "INEGI",
+            "(https://www.inegi.org.mx/contenidos/inegi/doc/terminos_info.pdf),",
+            "which permit reproduction, distribution, adaptation and commercial",
+            "use with credit to INEGI. This IRW table reformats that information",
+            "into the IRW data standard; the transformation is the IRW's, not",
+            "INEGI's, and its publication here does not imply INEGI endorsement.",
+            "Cite the source as \"Fuente: INEGI, ENSU\"."),
+        why = "INEGI publishes free-use terms; no permission was sought or needed"
+    ),
+    list(
+        url        = "microdatos\\.dane\\.gov\\.co/index\\.php/catalog/822",
+        issue      = "#3226",
+        superseded = "Permission via Email",
+        derived    = "Custom",
+        terms      = paste(
+            "Source: DANE (Departamento Administrativo Nacional de Estadistica,",
+            "Colombia), Encuesta de Cultura Politica 2023, anonymised microdata",
+            "catalog 822 (https://microdatos.dane.gov.co/index.php/catalog/822).",
+            "DANE confirmed in writing (radicado 202610013472, 27 February 2026,",
+            "in reply to a question naming public, free and reusable access)",
+            "that all information published on www.dane.gov.co is of public use",
+            "and may be consulted and used. This IRW table reformats that",
+            "information into the IRW data standard; cite DANE as the source of",
+            "the original data."),
+        why = "DANE's written reply confirms public use of everything it publishes"
+    ),
+    list(
+        url        = "ine\\.gob\\.gt/encasba",
+        issue      = "#3226",
+        superseded = "Permission via Email",
+        derived    = "Custom",
+        terms      = paste(
+            "Source: INE Guatemala (Instituto Nacional de Estadistica), Encuesta",
+            "Nacional de Calidad de los Servicios Publicos Basicos (ENCASBA)",
+            "2024 (https://www.ine.gob.gt/encasba-2/). INE confirmed in writing",
+            "(10 February 2026) that ENCASBA is public, free of charge and",
+            "freely reusable, and may be used for analysis and academic",
+            "research. This IRW table reformats that information into the IRW",
+            "data standard; cite INE Guatemala as the source of the original",
+            "data."),
+        why = "INE's written reply confirms ENCASBA is public and freely reusable"
+    ),
+    ##The letter default, Licensing.txt: the grantor was shown CC BY 4.0 and did
+    ##not counter. Terms stay NULL -- CC BY 4.0 needs none.
+    list(
+        url        = "osf\\.io/(wkzan|9dps4)(/|$|[?#])",
+        issue      = "#3226",
+        superseded = "Permission via Email",
+        derived    = "CC BY 4.0",
+        terms      = NULL,
+        why = "Anunciacao, 2024-12-13: 'You can modify the dataset with no problem'"
+    ),
+    list(
+        url        = "osf\\.io/69nwe(/|$|[?#])",
+        issue      = "#3226",
+        ##Blank in the sheet, but biblio carries the value the retired OSF
+        ##stopgap wrote there, and the refresh never blanks a biblio cell from
+        ##an empty dictionary one -- so both spellings have to be accepted.
+        superseded = c("Permission via Email", ""),
+        derived    = "CC BY 4.0",
+        terms      = NULL,
+        why = "Lorenzo-Luaces, 2026-02-11: 'feel free to use any and all data we made available'"
+    ),
+    list(
+        url        = "osf\\.io/snmqt(/|$|[?#])",
+        issue      = "#3226",
+        superseded = c("Permission via Email", ""),
+        derived    = "CC BY 4.0",
+        terms      = NULL,
+        why = "McLaughlin, 2025-06-25: 'open use without restriction'"
+    )
+)
+
+apply_license_overrides <- function(biblio, label = "core",
+                                    overrides = LICENSE_OVERRIDES,
+                                    log.file = NULL) {
+    empty_log <- data.frame(table = character(0), url = character(0),
+                            from = character(0), to = character(0),
+                            issue = character(0), stringsAsFactors = FALSE)
+    if (!length(overrides) ||
+        !all(c("URL__for_data_", "Derived_License") %in% names(biblio))) {
+        if (!is.null(log.file)) readr::write_csv(empty_log, log.file)
+        return(list(biblio = biblio, log = empty_log))
+    }
+    if (!"Custom_License_Terms" %in% names(biblio)) {
+        biblio$Custom_License_Terms <- NA_character_
+    }
+
+    ##Same normalisation biblio_norm() uses: spelling and case are not
+    ##relicensing, and a blank is a blank however it is spelled.
+    lic <- tolower(gsub("\\s+", " ", trimws(as.character(biblio$Derived_License))))
+    lic[is.na(lic)] <- ""
+    log <- empty_log
+    stale <- character(0)
+
+    for (ov in overrides) {
+        on_url <- grepl(ov$url, biblio$URL__for_data_)
+        on_url[is.na(on_url)] <- FALSE
+        if (!any(on_url)) next                   ##not in this source's biblio
+        want <- tolower(gsub("\\s+", " ", trimws(ov$superseded)))
+        hit  <- on_url & lic %in% want
+        ##A row on the same deposit holding something else: the sheet has moved
+        ##on, or a second licence crept in. Report it rather than overwrite it.
+        other <- on_url & !(lic %in% want) & lic != tolower(ov$derived)
+        if (any(other)) {
+            stale <- c(stale, paste0(ov$issue, " ", ov$url, ": ", sum(other),
+                                     " row(s) say ",
+                                     paste(unique(biblio$Derived_License[other]),
+                                           collapse = "/")))
+        }
+        if (!any(hit)) next
+        log <- rbind(log, data.frame(
+            table = biblio$table[hit],
+            url   = ov$url,
+            from  = ifelse(nzchar(biblio$Derived_License[hit]) &
+                               !is.na(biblio$Derived_License[hit]),
+                           biblio$Derived_License[hit], "(blank)"),
+            to    = ov$derived,
+            issue = ov$issue,
+            stringsAsFactors = FALSE))
+        biblio$Derived_License[hit] <- ov$derived
+        if (!is.null(ov$terms)) biblio$Custom_License_Terms[hit] <- ov$terms
+        lic[hit] <- tolower(ov$derived)
+    }
+
+    log <- log[order(log$table), , drop = FALSE]
+    message(label, ": re-licensed ", nrow(log), " row(s) from ",
+            length(overrides), " override(s)")
+    if (length(stale)) {
+        warning(label, ": ", length(stale), " licence override(s) matched rows ",
+                "holding a different value -- delete the entry in ",
+                "LICENSE_OVERRIDES if the sheet is now right: ",
+                paste(stale, collapse = "; "), call. = FALSE)
+    }
+    if (!is.null(log.file)) {
+        readr::write_csv(log, log.file)
+        message("  wrote ", nrow(log), " licence override row(s) to ", log.file)
+    }
+    list(biblio = biblio, log = log)
 }
 
 ##---------------------------------------------------------------------------
