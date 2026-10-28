@@ -1291,6 +1291,87 @@ local({
           "an id that merely starts with the same characters is not matched")
 })
 
+##------------- a ShareAlike the source never had (#3226, R-09) ---
+cat("licence overrides: correcting a source cell that invented a clause\n")
+local({
+    b <- data.frame(
+        table = c("personalitychange_kramer_2025_bfi",
+                  "transyouth_leshin_2026_youth_anx",
+                  "kramer_moved_on", "other_osf_table"),
+        URL__for_data_ = c("https://osf.io/zevcs/",
+                           "https://osf.io/t3a9r/overview",
+                           "https://osf.io/zevcs/",
+                           "https://osf.io/zevcsZZZ/"),
+        Original_License = c("CC BY-SA 4.0", "CC BY-NC-SA 4.0",
+                             "CC BY-SA 4.0", "CC BY-SA 4.0"),
+        Derived_License = c("CC BY 4.0", "CC BY-NC 4.0", "CC0 1.0",
+                            "CC BY 4.0"),
+        Custom_License_Terms = NA_character_,
+        stringsAsFactors = FALSE)
+    out <- suppressMessages(suppressWarnings(apply_license_overrides(b, "core")))
+    nb <- out$biblio
+    r <- function(t) nb[nb$table == t, ]
+    ##The outbound licence was right; it is the SOURCE cell that was wrong, so
+    ##the derived value must come out of this untouched.
+    check(identical(r("personalitychange_kramer_2025_bfi")$Original_License, "CC BY 4.0") &&
+          identical(r("personalitychange_kramer_2025_bfi")$Derived_License, "CC BY 4.0"),
+          "zevcs records CC BY 4.0 as its source licence, derived unchanged")
+    check(identical(r("transyouth_leshin_2026_youth_anx")$Original_License, "CC BY-NC 4.0") &&
+          identical(r("transyouth_leshin_2026_youth_anx")$Derived_License, "CC BY-NC 4.0"),
+          "t3a9r records CC BY-NC 4.0 as its source licence, NC kept on the way out")
+    check(identical(r("kramer_moved_on")$Original_License, "CC BY-SA 4.0"),
+          "a row on the deposit holding a different derived licence is left alone")
+    ##`zevcs` must end its path segment, the apply_osf_permission() rule.
+    check(identical(r("other_osf_table")$Original_License, "CC BY-SA 4.0"),
+          "an id that merely starts with the same characters is not matched")
+    check(nrow(out$log) == 2L && all(out$log$issue == "#3226"),
+          "two rows change, logged against #3226")
+    again <- suppressMessages(suppressWarnings(apply_license_overrides(nb, "core")))
+    check(nrow(again$log) == 0L,
+          "an entry that only corrects the source cell still disarms itself")
+})
+
+##------- `Custom` with no terms, where the source declares none (#3226, R-36) ---
+cat("licence overrides: recording that a source states no terms at all\n")
+local({
+    b <- data.frame(
+        table = c("friedman_2018_risks_government", "mexico_2023_mobility_rooms",
+                  "friedman_relicensed"),
+        URL__for_data_ = c(
+            "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ZSJA25",
+            "https://ceey.org.mx/contenido/que-hacemos/emovi/",
+            "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ZSJA25"),
+        Original_License = c("Custom", "Custom", "CC BY 4.0"),
+        Derived_License = c("Custom", "Custom", "CC BY 4.0"),
+        Custom_License_Terms = NA_character_,
+        stringsAsFactors = FALSE)
+    out <- suppressMessages(suppressWarnings(apply_license_overrides(b, "core")))
+    nb <- out$biblio
+    r <- function(t) nb[nb$table == t, ]
+    check(identical(r("friedman_2018_risks_government")$Derived_License, "Custom") &&
+          grepl("declares NO licence",
+                r("friedman_2018_risks_government")$Custom_License_Terms, fixed = TRUE),
+          "the friedman rows keep Custom and say the deposit declares no licence")
+    check(grepl("ESRU-EMOVI", r("mexico_2023_mobility_rooms")$Custom_License_Terms,
+                fixed = TRUE) &&
+          grepl("contact CEEY", r("mexico_2023_mobility_rooms")$Custom_License_Terms,
+                fixed = TRUE),
+          "the EMOVI rows name the survey and say to contact CEEY")
+    ##Neither string may read as a grant: that is the whole point of R-38 being
+    ##a separate finding.
+    check(grepl("nothing here grants redistribution",
+                r("friedman_2018_risks_government")$Custom_License_Terms,
+                fixed = TRUE) &&
+          !grepl("licensed under|permission via email",
+                 r("friedman_2018_risks_government")$Custom_License_Terms,
+                 ignore.case = TRUE),
+          "the terms say outright that they grant nothing")
+    check(identical(r("friedman_relicensed")$Custom_License_Terms, NA_character_),
+          "a row someone has since relicensed is left alone")
+    again <- suppressMessages(suppressWarnings(apply_license_overrides(nb, "core")))
+    check(nrow(again$log) == 0L, "filling terms only is idempotent")
+})
+
 ##--------------- generated material has no upstream licence (#3229) ---
 cat("generated material: the input's licence does not carry over\n")
 local({
