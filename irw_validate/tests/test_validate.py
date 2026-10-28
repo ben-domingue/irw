@@ -277,6 +277,28 @@ class ItemText(unittest.TestCase):
         self.assertNotIn("dup_item_resp", checks)
         self.assertNotIn("resp_ambiguous", checks)
 
+    def test_option_rows_keyed_by_resp_raw_are_addressable(self):
+        # The STANDARD's spelling is `resp_raw` (irw#2094); `raw_resp` is the
+        # retired one. Recognising only the retired spelling meant a table
+        # written to the standard had no address at all, and its option rows
+        # came back as `resp_ambiguous` -- one resp value meaning two different
+        # things -- when the option label was what told them apart. Found
+        # 2026-10-27 on tolomeo_2026_icar16__items.
+        df = self._unkeyed().rename(columns={"raw_resp": "resp_raw"})
+        report = validate_frame(df, label="g_2024_naming__items.csv")
+        checks = [f.check for f in report.errors]
+        self.assertNotIn("dup_item_resp", checks)
+        self.assertNotIn("resp_ambiguous", checks)
+
+    def test_the_finding_names_resp_raw_when_that_is_the_spelling(self):
+        df = self._unkeyed().rename(columns={"raw_resp": "resp_raw"})
+        twin = df.iloc[[0]].copy()
+        twin["item_text"] = "name the picture (repeat)"
+        report = validate_frame(pd.concat([df, twin], ignore_index=True),
+                                label="g_2024_naming__items.csv")
+        msg = [f.message for f in report.errors if f.check == "dup_item_resp"][0]
+        self.assertIn("resp_raw", msg)
+
     def test_rows_with_neither_resp_nor_raw_resp_still_fail(self):
         # The case the fix must NOT lose: no address at all means nothing can
         # join these rows to a response, so they stay a finding. Dropping

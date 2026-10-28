@@ -1,7 +1,6 @@
-# item-text tables in the Redivis shards as of 2026-10-25
+# item-text tables in the Redivis shards as of 2026-10-27
 # status=published: a reader can fetch it. status=draft: uploaded, not released yet.
 # generated -- do not hand-edit; rerun itemtext/refresh_live_tables.py (irw#1828)
-# draft not listable by this token (needs data.edit) for irw_text; its draft rows carried forward from the snapshot taken 2026-10-23
 table,shard,status
 16_personalityfactors,irw_text,published
 360emergencymed_azami_2024,irw_text,published
@@ -63,6 +62,7 @@ SPQVS_Barnby_2017_SENPQ,irw_text_3,published
 VEI_Brazillian_Shiramizu_2018_EI,irw_text_3,published
 VSOCFP_Sebo_2024,irw_text_2,published
 Veterans_Affairs_SSVF_Survey_2016-17,irw_text_2,published
+WMD_bartczuk_2023,irw_text,published
 abdulkader_mohamed_2022_exer_attitude,irw_text_2,published
 abdulkader_mohamed_2022_exer_knowledge,irw_text_2,published
 abdulkader_mohamed_2022_exergame_exp,irw_text_2,published
@@ -965,6 +965,7 @@ guatemala_2024_homes_water,irw_text_3,published
 guerrero_zambrano_2026_adaptation,irw_text_3,published
 guerrero_zambrano_2026_ai_use,irw_text_3,published
 guerrero_zambrano_2026_data_mgmt,irw_text_3,published
+guess_2023_tech_attitudes,irw_text_3,published
 gumus_2025_dietarian_identity,irw_text_2,published
 guo_2025_ar,irw_text_3,published
 guo_2025_ase,irw_text_3,published
