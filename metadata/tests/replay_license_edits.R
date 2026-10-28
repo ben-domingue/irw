@@ -13,13 +13,20 @@ for (nm in names(files)) {
     b <- read.csv(f, stringsAsFactors = FALSE, check.names = FALSE,
                   colClasses = "character", na.strings = character(0))
     before <- b$Derived_License
+    before_o <- if ("Original_License" %in% names(b)) b$Original_License else NULL
     ov <- suppressMessages(suppressWarnings(apply_license_overrides(b, nm)))
     b2 <- suppressMessages(canonicalise_license_spelling(ov$biblio, nm))
+    b2 <- suppressMessages(suppressWarnings(apply_generated_license(b2, nm)))
     ch <- which(before != b2$Derived_License)
     cat("\n== ", nm, " (", nrow(b), " rows): ", length(ch), " changed\n", sep = "")
     if (length(ch)) {
         for (i in ch) cat("   ", b$table[i], ": ", before[i], " -> ",
                           b2$Derived_License[i], "\n", sep = "")
+    }
+    if (!is.null(before_o)) {
+        cho <- which(before_o != b2$Original_License)
+        for (i in cho) cat("    source licence  ", b$table[i], ": ", before_o[i],
+                           " -> ", b2$Original_License[i], "\n", sep = "")
     }
     suppressMessages(check_license_vocabulary(b2, nm)) -> leads
     if (length(leads)) cat("   unversioned leads: ", paste(leads, collapse = ", "), "\n", sep = "")
