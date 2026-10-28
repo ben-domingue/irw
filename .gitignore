@@ -215,6 +215,14 @@ data/*_raw/
 # itemtext/itemtables/batch_* remain the tracked record of what was extracted.
 itemtext/itemtables/clean/
 
+# The local store of wording we hold but may not publish lives OUTSIDE this
+# repo, at ~/Dropbox/projects/irw/data/itemtext/ (#3016). The repo root is
+# src/, so `data/` here is the tracked build-script tree -- 3,000+ public
+# files. The two read identically in prose, so ignore the store path inside
+# the repo: if someone follows the rule in the wrong directory, nothing can be
+# committed. itemtext/tests/test_withdrawn_wording.py also fails if it exists.
+data/itemtext/
+
 # Local tool state that no one should commit.
 .venv/
 venv/
