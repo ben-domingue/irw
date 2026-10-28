@@ -145,6 +145,11 @@ OWNER = "datapages"
 #: catalog listing that came back short would make every table look consistent.
 MIN_LIVE_TABLES = 6000
 MIN_DECLARED_ROWS = 6000
+#: The item-text shards held 2,738 tables on 2026-10-28. A floor matters more
+#: here than for the warehouses: a listing that came back empty would make
+#: every item-text withdrawal look as though it had taken effect, which is
+#: the one answer this check must never give by accident.
+MIN_LIVE_ITEMTEXT_TABLES = 2000
 
 #: Which declared CSV describes which family's dataset list, for the schema and
 #: counts checks. Conjoint is deliberately absent: its tables carry no
@@ -494,17 +499,32 @@ def check_corrections_resolve(changes: List[dict], live_names: set[str],
     return chk
 
 
-def check_withdrawals_live(ledger: List[dict], live_names: set[str]) -> Check:
+def check_withdrawals_live(ledger: List[dict], live_names: set[str],
+                           live_itemtext_names: set[str]) -> Check:
     chk = Check("withdrawals-live", "wholly withdrawn tables still in the release",
                 "R-10",
                 "the ledger records the table as withdrawn and the current "
                 "release still serves it. A withdrawal that does not reach a "
                 "consumer is not a withdrawal (#51)")
+    #: An item-text withdrawal retires a `*__items` table, which lives in the
+    #: irw_text shards -- and those were not listed here until 2026-10-28, so
+    #: `live_names` could not contain the name and this check could not fail on
+    #: one. It was blind to the whole category it most needed to see: an
+    #: item-text withdrawal is usually a RIGHTS withdrawal, where "still served"
+    #: means IRW is distributing instrument wording a register verdict says it
+    #: may not. Two were found live by hand that day --
+    #: `FomoNegativeAffect_cremer_2026_panas__items`, whose delete ran on a draft
+    #: that never reached a release, and `WMD_bartczuk_2023__items`, withdrawn
+    #: and released at irw_text v37.0 and present again at v40.0 -- and neither
+    #: had ever been reported here. See #3224.
     for row in ledger:
         if (row.get("kind") or "").strip() != "whole":
             continue
         table = (row.get("table") or "").strip()
-        if table and table in live_names:
+        if not table:
+            continue
+        pool = live_itemtext_names if table.endswith("__items") else live_names
+        if table in pool:
             chk.hits.append(f"{table} ({(row.get('reason') or '?').strip()})")
     return chk
 
@@ -571,6 +591,26 @@ def gather(only: Sequence[str] | None) -> List[Check]:
                 #: row is a statement about.
                 live[lt.name] = lt
                 live_ds[lt.name] = dataset
+    #: The irw_text shards, listed separately rather than folded into
+    #: `live_names`. Folding them in would change what every other check means
+    #: by "the catalog still serves this name" -- `corrections-resolve` would
+    #: start resolving a response-table identifier against an item-text table --
+    #: so the withdrawal check gets its own pool.
+    #: Three extra listings, so they are skipped when the one check that reads
+    #: them is not being run (`--only`). `_wanted` is the same predicate the
+    #: check list below uses, so the two cannot disagree about whether the work
+    #: is needed.
+    live_itemtext_names: set[str] = set()
+    if _wanted("withdrawals-live", only):
+        for dataset in cfg.get("text", []):
+            for lt in live_tables(dataset):
+                live_itemtext_names.add(lt.name)
+    if _wanted("withdrawals-live", only) and len(live_itemtext_names) < MIN_LIVE_ITEMTEXT_TABLES:
+        raise SourceError(f"the item-text shards listed {len(live_itemtext_names)} "
+                          f"tables, below the floor of {MIN_LIVE_ITEMTEXT_TABLES}; "
+                          "treating as unread rather than reporting every "
+                          "item-text withdrawal as effective")
+
     if len(live_names) < MIN_LIVE_TABLES:
         raise SourceError(f"the catalog listed {len(live_names)} tables, below the "
                           f"floor of {MIN_LIVE_TABLES}; treating as unread rather "
@@ -616,7 +656,7 @@ def gather(only: Sequence[str] | None) -> List[Check]:
         check_freshness(declared, live, recorded_hash),
         check_corrections_pinned(changes),
         check_corrections_resolve(changes, live_names, withdrawn),
-        check_withdrawals_live(ledger, live_names),
+        check_withdrawals_live(ledger, live_names, live_itemtext_names),
         check_withdrawals_records(ledger, surfaces, live_names),
     ]
     out = [c for c in checks if c is not None and _wanted(c.key, only)]
