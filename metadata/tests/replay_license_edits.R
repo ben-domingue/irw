@@ -16,6 +16,7 @@ for (nm in names(files)) {
     before_o <- if ("Original_License" %in% names(b)) b$Original_License else NULL
     ov <- suppressMessages(suppressWarnings(apply_license_overrides(b, nm)))
     b2 <- suppressMessages(canonicalise_license_spelling(ov$biblio, nm))
+    b2 <- suppressMessages(suppressWarnings(apply_generated_license(b2, nm)))
     ch <- which(before != b2$Derived_License)
     cat("\n== ", nm, " (", nrow(b), " rows): ", length(ch), " changed\n", sep = "")
     if (length(ch)) {

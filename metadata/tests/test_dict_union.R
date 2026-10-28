@@ -1291,6 +1291,53 @@ local({
           "an id that merely starts with the same characters is not matched")
 })
 
+##--------------- generated material has no upstream licence (#3229) ---
+cat("generated material: the input's licence does not carry over\n")
+local({
+    b <- data.frame(
+        table = c("lnirt_sim", "mudfoldsim", "nbashots_sim", "dtmr_sim",
+                  "gilbert_meta_3", "tirt_sim_trt"),
+        Original_License = c("CC0 1.0", "NA", "NA", "MIT", "CC BY 4.0",
+                             "Generated (no upstream data licence)"),
+        Derived_License = c("CC0 1.0", "CC0 1.0", "CC BY 4.0", "MIT",
+                            "CC BY 4.0", "CC0 1.0"),
+        stringsAsFactors = FALSE)
+    nb <- suppressMessages(suppressWarnings(apply_generated_license(b, "sim")))
+    r <- function(t) nb[nb$table == t, ]
+    check(identical(r("lnirt_sim")$Original_License,
+                    "Generated (no upstream data licence)"),
+          "a CC0 1.0 claimed over a GPL package's simulator becomes `generated`")
+    check(identical(r("nbashots_sim")$Derived_License, "CC0 1.0"),
+          "the CC BY 4.0 half of the split is brought to CC0 1.0")
+    check(identical(r("mudfoldsim")$Original_License,
+                    "Generated (no upstream data licence)") &&
+          identical(r("mudfoldsim")$Derived_License, "CC0 1.0"),
+          "a row already CC0 1.0 outbound still gets its source cell written")
+    ##The line the rule draws: data DISTRIBUTED by a source keeps the source's
+    ##licence even when the source simulated it. dcmdata ships its own
+    ##simulated DTMR data under MIT, so dtmr_sim is not in GENERATED_TABLES.
+    check(identical(r("dtmr_sim")$Derived_License, "MIT") &&
+          identical(r("dtmr_sim")$Original_License, "MIT"),
+          "a package's OWN shipped simulation keeps the package licence")
+    check(identical(r("gilbert_meta_3")$Derived_License, "CC BY 4.0"),
+          "a real-data row in the same family is untouched")
+    ##Idempotent, and a ruling made since must not be silently reverted.
+    again <- suppressMessages(suppressWarnings(apply_generated_license(nb, "sim")))
+    check(identical(again$Derived_License, nb$Derived_License) &&
+          identical(again$Original_License, nb$Original_License),
+          "a second pass changes nothing")
+    moved <- data.frame(table = "lnirt_sim", Original_License = "NA",
+                        Derived_License = "CC BY-NC 4.0",
+                        stringsAsFactors = FALSE)
+    w <- tryCatch({ apply_generated_license(moved, "sim"); "none" },
+                  warning = function(e) conditionMessage(e))
+    check(grepl("ruled since", w) &&
+          identical(suppressWarnings(
+              apply_generated_license(moved, "sim"))$Derived_License,
+              "CC BY-NC 4.0"),
+          "a row someone has since relicensed warns and is left alone")
+})
+
 ##------------------------- one licence, spelled two ways (#3229) ---
 cat("licence spellings: the exact-match filter finds one bucket\n")
 local({

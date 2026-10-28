@@ -1653,6 +1653,99 @@ check_license_vocabulary <- function(biblio, label = "core",
 }
 
 ##---------------------------------------------------------------------------
+##Material IRW generated: there is no upstream licence to record (#3229).
+##
+##THE RULE, and where it comes from. Rochelle Lundy (Stanford), 2026-03-16,
+##answering Ben's question about simulated and synthetic data in the IRW: "the
+##original license doesn't need to carry over to the newly generated synthetic
+##data because you aren't reproducing and resharing the original licensed
+##work." She named two cautions, and NEITHER reaches these 14 rows:
+##
+##  (a) a ShareAlike/copyleft input, because SA binds an "adaptation" and
+##      whether synthetic data is an adaptation is unsettled. The inputs here
+##      are GPL *programs*, not SA-licensed data, and the GPL does not cover a
+##      program's output (GPLv3 s0: output is covered only if it is itself a
+##      covered work). Each script's own header says what it is: "IRW's own
+##      seeded draw from aberrance::sim", "from LNIRT::simLNIRT", and so on.
+##  (b) synthetic data nearly identical to the input. There is no input
+##      dataset. Every one of the 14 takes parameters and a seed; not one
+##      reads a row of anyone's data.
+##
+##She also notes that every CC licence but CC0 bites only so far as the
+##content is copyright-protected, and machine-generated output is protected
+##only to the extent of human creative contribution -- which is a second
+##reason `CC0 1.0` is the honest outbound value here rather than CC BY 4.0.
+##
+##WHAT WAS WRONG. The 14 were one case recorded two ways. Seven ran a CRAN
+##package's simulator and claimed `Original_License = CC0 1.0` where the
+##package is in fact GPL -- an invented upstream licence, and the exact thing
+##the review warned about. Seven generate outright and said `NA` -- honest but
+##silent. Outbound split `CC BY 4.0` (5) and `CC0 1.0` (2) with nothing
+##distinguishing them.
+##
+##THE LINE THIS DRAWS, which is the durable part: data DISTRIBUTED by a
+##source carries that source's licence, whether it is real (`pks`'s
+##`probability`, GPL, #3229) or simulated by the source and shipped
+##(`dtmr_sim`, dcmdata, MIT -- correct as it stands and deliberately not in
+##the list below). Data GENERATED HERE by running code carries none.
+GENERATED_LICENSE_ORIGINAL <- "Generated (no upstream data licence)"
+GENERATED_LICENSE_DERIVED <- "CC0 1.0"
+##The value each row held when this was ruled. A row holding anything else is
+##reported and left alone -- the apply_license_overrides() discipline: an
+##entry that has outlived the state it was written against should say so
+##rather than overwrite whatever replaced it.
+GENERATED_TABLES <- c(
+    ##our script runs a CRAN package's simulator
+    "aberrance_pk_sim", "aberrance_speeded_sim", "hmcdm_learning_sim",
+    "hrm_rater_sim", "ising_network_sim", "lnirt_sim", "raschmix_rost2_sim",
+    ##our script generates it outright
+    "estcrm", "mirt_ggum", "mirt_mixed", "mirt_nonlin", "mudfoldsim",
+    "nbashots_sim", "tirt_sim_trt")
+GENERATED_SUPERSEDED <- c("CC0 1.0", "CC BY 4.0")
+
+apply_generated_license <- function(biblio, label = "core",
+                                    tables = GENERATED_TABLES,
+                                    superseded = GENERATED_SUPERSEDED,
+                                    original = GENERATED_LICENSE_ORIGINAL,
+                                    derived = GENERATED_LICENSE_DERIVED) {
+    if (!length(tables) || !"table" %in% names(biblio) ||
+        !"Derived_License" %in% names(biblio)) {
+        return(biblio)
+    }
+    named <- biblio$table %in% tables
+    if (!any(named)) return(biblio)                ##not in this family's biblio
+    lic <- trimws(as.character(biblio$Derived_License))
+    lic[is.na(lic)] <- ""
+    moved <- named & !(lic %in% c(superseded, derived))
+    if (any(moved)) {
+        warning(label, ": ", sum(moved), " generated table(s) now publish ",
+                paste(unique(lic[moved]), collapse = "/"),
+                " -- someone has ruled since #3229; remove them from ",
+                "GENERATED_TABLES: ",
+                paste(biblio$table[moved], collapse = ", "), call. = FALSE)
+    }
+    hit <- named & lic %in% superseded
+    ##`original` is half the point, so a row whose outbound licence is already
+    ##CC0 1.0 still needs the source cell written -- hence no no-op guard on
+    ##`derived` alone.
+    if ("Original_License" %in% names(biblio)) {
+        same <- !is.na(biblio$Original_License) &
+            biblio$Original_License == original
+        hit <- hit & !(lic == derived & same)
+    } else {
+        hit <- hit & lic != derived
+    }
+    if (!any(hit)) return(biblio)
+    message(label, ": ", sum(hit), " generated table(s) recorded as ",
+            "generated material, published ", derived)
+    if ("Original_License" %in% names(biblio)) {
+        biblio$Original_License[hit] <- original
+    }
+    biblio$Derived_License[hit] <- derived
+    biblio
+}
+
+##---------------------------------------------------------------------------
 ##Derived_License from Original_License, where the sheet records the source
 ##licence and nobody has said what IRW redistributes under (#2040).
 ##
