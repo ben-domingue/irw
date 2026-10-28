@@ -1216,6 +1216,81 @@ local({
           "18 siblings already holding CC0 1.0 raise no stale warning")
 })
 
+##------------- data in a GPL package is not ours to put under CC BY (#3229) ---
+cat("licence overrides: an entry that corrects the source licence too\n")
+local({
+    b <- data.frame(
+        table = c("heller2013_probability", "dmirt_forsberg_2024",
+                  "pks_already_right", "pks_moved_on"),
+        URL__for_data_ = c(
+            "https://cran.r-project.org/web/packages/pks/index.html",
+            "https://cran.r-project.org/web/packages/D3mirt/refman/D3mirt.html#anes0809offwaves",
+            "https://cran.r-project.org/web/packages/pks/index.html",
+            "https://cran.r-project.org/web/packages/pks/index.html"),
+        Original_License = c("NA", "GPL-3.0", "GPL-2.0, GPL-3.0", "NA"),
+        Derived_License = c("CC BY 4.0", "CC BY 4.0", "GPL-3.0", "CC BY-NC 4.0"),
+        Custom_License_Terms = NA_character_,
+        stringsAsFactors = FALSE)
+    out <- suppressMessages(suppressWarnings(apply_license_overrides(b, "sim")))
+    nb <- out$biblio
+    r <- function(t) nb[nb$table == t, ]
+    check(identical(r("heller2013_probability")$Derived_License, "GPL-3.0") &&
+          identical(r("heller2013_probability")$Original_License, "GPL-2.0, GPL-3.0"),
+          "pks's shipped data goes out GPL-3.0 and records GPL (>= 2) as its source")
+    check(identical(r("dmirt_forsberg_2024")$Derived_License, "GPL-3.0") &&
+          identical(r("dmirt_forsberg_2024")$Original_License, "GPL-3.0"),
+          "D3mirt's data goes out GPL-3.0, its already-correct source cell unchanged")
+    check(identical(r("pks_already_right")$Derived_License, "GPL-3.0"),
+          "a row already in the ruled state is left alone")
+    check(identical(r("pks_moved_on")$Derived_License, "CC BY-NC 4.0"),
+          "a row on the same package holding something else is not overwritten")
+    check(nrow(out$log) == 2L, "two rows change, and only two")
+    ##The reason `original` joins the no-op guard: an entry whose `derived`
+    ##already matches must still be able to correct the source cell.
+    only_source <- suppressMessages(suppressWarnings(apply_license_overrides(
+        data.frame(table = "pks_source_blank",
+                   URL__for_data_ = "https://cran.r-project.org/web/packages/pks/",
+                   Original_License = "NA", Derived_License = "GPL-3.0",
+                   Custom_License_Terms = NA_character_,
+                   stringsAsFactors = FALSE),
+        "sim",
+        overrides = list(list(url = "packages/pks(/|$)", issue = "#3229",
+                              superseded = c("CC BY 4.0", "GPL-3.0"),
+                              original = "GPL-2.0, GPL-3.0",
+                              derived = "GPL-3.0", terms = NULL)))))
+    check(identical(only_source$biblio$Original_License, "GPL-2.0, GPL-3.0"),
+          "an entry that only corrects the source licence still fires")
+    again <- suppressMessages(suppressWarnings(apply_license_overrides(nb, "sim")))
+    check(nrow(again$log) == 0L, "re-running over its own output is a no-op")
+})
+
+##------------------- CC0 at source, CC0 out: the 6 mirrored rows (#3229) ---
+cat("licence overrides: public-domain material is not re-conditioned\n")
+local({
+    b <- data.frame(
+        table = c("iat_difference", "icar_sapa", "number_pattern_game",
+                  "sapa_personality", "test_taking_patterns_over_time",
+                  "other_osf_table"),
+        URL__for_data_ = c(
+            "https://osf.io/52qxl/",
+            "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/AD9RVY",
+            "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/A8ZWLF",
+            "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/SD7SVE",
+            "https://openpsychologydata.metajnl.com/articles/10.5334/jopd.ab",
+            "https://osf.io/52qxlZZZ/"),
+        Original_License = c(rep("CC0 1.0", 5), "CC BY 4.0"),
+        Derived_License = rep("CC BY 4.0", 6),
+        Custom_License_Terms = NA_character_,
+        stringsAsFactors = FALSE)
+    out <- suppressMessages(suppressWarnings(apply_license_overrides(b, "core")))
+    nb <- out$biblio
+    check(all(nb$Derived_License[1:5] == "CC0 1.0"),
+          "all five CC0 deposits publish CC0 1.0")
+    ##The OSF id must end its path segment, or `52qxl` would swallow `52qxlZZZ`.
+    check(identical(nb$Derived_License[6], "CC BY 4.0"),
+          "an id that merely starts with the same characters is not matched")
+})
+
 ##------------------------- one licence, spelled two ways (#3229) ---
 cat("licence spellings: the exact-match filter finds one bucket\n")
 local({

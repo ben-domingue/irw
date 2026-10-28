@@ -1415,6 +1415,74 @@ LICENSE_OVERRIDES <- list(
         derived    = "CC0 1.0",
         terms      = NULL,
         why = "OSF qtqpb declares CC0 1.0 Universal; 18 of the 19 rows say so"
+    ),
+    ##Data shipped inside a GPL R package, published under CC BY 4.0 (#3229).
+    ##Ben, 2026-10-28: "sounds like the license applied to the package should
+    ##apply". Two rows, and both are the package's OWN data rather than the
+    ##output of its simulator:
+    ##
+    ##  `heller2013_probability` runs `data(probability)` from pks -- 504 real
+    ##  respondents, Heller & Wickelmaier's own, in a GPL (>= 2) package. The
+    ##  corpus already licences this exact deposit correctly one family away:
+    ##  core's `pks_probability` reads `GPL-2.0, GPL-3.0` / `GPL-3.0`, which is
+    ##  the convention for every one of the ~100 CRAN-sourced core rows, so the
+    ##  pair below is a copy of our own settled treatment, not a new choice.
+    ##
+    ##  `dmirt_forsberg_2024` is D3mirt's `anes0809offwaves`; D3mirt is
+    ##  GPL (>= 3) and the row already records `GPL-3.0` as the source licence,
+    ##  so only the outbound cell was wrong.
+    ##
+    ##CC BY on GPL material is a relicensing claim IRW is not in a position to
+    ##make, which is why these are a ruling and the dual-licensed Debian rows
+    ##(`MIT (Expat) or GPL-2+` -> `MIT`, 33 of them) are not: choosing one of
+    ##two offered licences is what a dual licence is for.
+    list(
+        url        = "cran\\.r-project\\.org/web/packages/pks(/|$)",
+        issue      = "#3229",
+        superseded = "CC BY 4.0",
+        original   = "GPL-2.0, GPL-3.0",
+        derived    = "GPL-3.0",
+        terms      = NULL,
+        why = "pks is GPL (>= 2) and `probability` is its shipped data, not a simulation"
+    ),
+    list(
+        url        = "cran\\.r-project\\.org/web/packages/D3mirt/",
+        issue      = "#3229",
+        superseded = "CC BY 4.0",
+        original   = "GPL-3.0",
+        derived    = "GPL-3.0",
+        terms      = NULL,
+        why = "D3mirt is GPL (>= 3) and anes0809offwaves is its shipped data"
+    ),
+    ##CC0 at source, CC BY 4.0 outbound (#3229). Lawful -- CC0 waives
+    ##attribution and permits relicensing a derivative -- but 2,144 rows mirror
+    ##CC0 outbound and these 6 did not, so the corpus answered "may I use this
+    ##without attributing anyone?" two ways for the same kind of material.
+    ##Reshaping into the IRW standard adds no copyrightable authorship, so
+    ##there is nothing of ours for an attribution clause to protect.
+    list(
+        url        = "osf\\.io/52qxl(/|$|[?#])",
+        issue      = "#3229",
+        superseded = "CC BY 4.0",
+        derived    = "CC0 1.0",
+        terms      = NULL,
+        why = "iat_difference / iat_poverty: the deposit is CC0 1.0"
+    ),
+    list(
+        url        = "doi:10\\.7910/DVN/(AD9RVY|A8ZWLF|SD7SVE)",
+        issue      = "#3229",
+        superseded = "CC BY 4.0",
+        derived    = "CC0 1.0",
+        terms      = NULL,
+        why = "icar_sapa / number_pattern_game / sapa_personality: CC0 1.0 at Dataverse"
+    ),
+    list(
+        url        = "openpsychologydata\\.metajnl\\.com/articles/10\\.5334/jopd\\.ab",
+        issue      = "#3229",
+        superseded = "CC BY 4.0",
+        derived    = "CC0 1.0",
+        terms      = NULL,
+        why = "test_taking_patterns_over_time: the deposit is CC0 1.0"
     )
 )
 
@@ -1456,7 +1524,19 @@ apply_license_overrides <- function(biblio, label = "core",
             !is.na(biblio$Custom_License_Terms) &
                 biblio$Custom_License_Terms == ov$terms
         }
-        hit <- hit & !(lic == tolower(ov$derived) & same_terms)
+        ##`original` is the same idea for the SOURCE licence cell, which is
+        ##published too (02_biblio.R writes it into biblio.csv). It takes part
+        ##in the no-op guard for the same reason `terms` does: an entry that
+        ##only corrects the source cell would otherwise never fire, because its
+        ##`derived` already matches.
+        same_original <- if (is.null(ov$original) ||
+                             !"Original_License" %in% names(biblio)) {
+            rep(TRUE, nrow(biblio))
+        } else {
+            !is.na(biblio$Original_License) &
+                biblio$Original_License == ov$original
+        }
+        hit <- hit & !(lic == tolower(ov$derived) & same_terms & same_original)
         ##A row on the same deposit holding something else: the sheet has moved
         ##on, or a second licence crept in. Report it rather than overwrite it.
         other <- on_url & !(lic %in% want) & lic != tolower(ov$derived)
@@ -1478,6 +1558,9 @@ apply_license_overrides <- function(biblio, label = "core",
             stringsAsFactors = FALSE))
         biblio$Derived_License[hit] <- ov$derived
         if (!is.null(ov$terms)) biblio$Custom_License_Terms[hit] <- ov$terms
+        if (!is.null(ov$original) && "Original_License" %in% names(biblio)) {
+            biblio$Original_License[hit] <- ov$original
+        }
         lic[hit] <- tolower(ov$derived)
     }
 
