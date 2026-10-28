@@ -39,6 +39,7 @@ ackeret_2022_coach_burnout,https://doi.org/10.5061/dryad.p5hqbzkrk,skip,,out_of_
 ackeret_2022_scs_sf,https://doi.org/10.5061/dryad.p5hqbzkrk,skip,,out_of_scope:doi_unresolved:406,
 ackeret_2022_social_support,https://doi.org/10.5061/dryad.p5hqbzkrk,skip,,out_of_scope:doi_unresolved:406,
 acl_mokken,https://cran.r-project.org/web/packages/mokken/index.html,cran,mokken,hit:package_doc,2026-10-02
+acpc_poker_2010_2017,https://web.archive.org/web/20131010083853/http://www.computerpokercompetition.org/downloads/,skip,,out_of_scope:host:web.archive.org,
 act_kay_2025,https://osf.io/uzrgk/files/osfstorage?view_only=aca403a5146240bda740e1e6d640751f,osf,uzrgk,no_match,2026-10-02
 acunamora_2018_gypes,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0201007,plos,10.1371/journal.pone.0201007,no_match,2026-10-02
 ada_boredom_bieleke2022,https://osf.io/nbw95/,osf,nbw95,no_match,2026-10-02
@@ -467,6 +468,9 @@ bateman_2026_depression,https://zenodo.org/records/19137231,zenodo,19137231,no_m
 bateman_2026_prse,https://zenodo.org/records/19137231,zenodo,19137231,no_match,2026-10-05
 batistafoguet_2021_mlq,https://doi.org/10.1371/journal.pone.0254329.s001,plos,10.1371/journal.pone.0254329,no_match,2026-10-02
 baudin_2024_static99r,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0307216,plos,10.1371/journal.pone.0307216,no_match,2026-10-02
+baumann_2023_distractions,https://osf.io/ur2km/,osf,ur2km,hit:name_codebook,2026-10-28
+baumann_2023_satisfaction,https://osf.io/ur2km/,osf,ur2km,hit:name_codebook,2026-10-28
+baumann_2023_strategy,https://osf.io/ur2km/,osf,ur2km,hit:name_codebook,2026-10-28
 baumgaertner_2018_vaccine_trust,https://doi.org/10.1371/journal.pone.0191728.s005,plos,10.1371/journal.pone.0191728,hit:doc_names_columns,2026-10-02
 bauwens_2022_autonomy,https://zenodo.org/records/7153436,zenodo,7153436,no_match,2026-10-05
 bauwens_2022_empowering_leadership,https://zenodo.org/records/7153436,zenodo,7153436,no_match,2026-10-05
@@ -1195,6 +1199,8 @@ coroiu_2018_scs,https://journals.plos.org/plosone/article?id=10.1371/journal.pon
 corti_2023_academic_adaptation,https://doi.org/10.1371/journal.pone.0294440,plos,10.1371/journal.pone.0294440,no_match,2026-10-02
 cos101_2026_nom,https://figshare.com/articles/dataset/2025_2026_Students_Responses_to_Open-Ended_Questions_on_COS101_Introduction_to_Computing_at_FUHSO_Nigeria/32109718,figshare,32109718,no_match,2026-10-02
 cosenza_2015_cfc,https://doi.org/10.7910/DVN/DWWZSI,dataverse,dataverse.harvard.edu|doi:10.7910/DVN/DWWZSI,hit:dataverse_ddi,2026-10-02
+costa_2020_punishment,https://doi.org/10.7910/DVN/MP3HQU,dataverse,dataverse.harvard.edu|doi:10.7910/DVN/MP3HQU,hit:dataverse_ddi+name_readme,2026-10-28
+costa_2020_sexism,https://doi.org/10.7910/DVN/MP3HQU,dataverse,dataverse.harvard.edu|doi:10.7910/DVN/MP3HQU,hit:dataverse_ddi+name_readme,2026-10-28
 costa_gine_2023_wpt_matches,https://zenodo.org/records/7860242,zenodo,7860242,no_match,2026-10-02
 covid_travel_mackenzie_2021,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/FN8RZK&version=3.0,dataverse,dataverse.harvard.edu|doi:10.7910/DVN/FN8RZK,hit:dataverse_ddi,2026-10-02
 cox_2024_feedback_perceptions,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0300205,plos,10.1371/journal.pone.0300205,no_match,2026-10-02
@@ -1367,6 +1373,10 @@ diazgarcia_2018_neoffi,https://zenodo.org/records/1477084,zenodo,1477084,no_matc
 diazgarcia_2018_oasis,https://zenodo.org/records/1477084,zenodo,1477084,no_match,2026-10-19
 diazgarcia_2018_panas,https://zenodo.org/records/1477084,zenodo,1477084,no_match,2026-10-19
 diazgarcia_2018_phq9,https://zenodo.org/records/1477084,zenodo,1477084,no_match,2026-10-19
+ding_2014_eri,https://figshare.com/articles/dataset/_/1136113,figshare,1136113,no_match,2026-10-28
+ding_2014_mbi,https://figshare.com/articles/dataset/_/1136113,figshare,1136113,no_match,2026-10-28
+ding_2014_overcommitment,https://figshare.com/articles/dataset/_/1136113,figshare,1136113,no_match,2026-10-28
+ding_2014_sas,https://figshare.com/articles/dataset/_/1136113,figshare,1136113,no_match,2026-10-28
 ding_2020_covid_knowledge,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0237626,plos,10.1371/journal.pone.0237626,hit:questionnaire,2026-10-12
 ding_2020_covid_risk_perception,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0237626,plos,10.1371/journal.pone.0237626,hit:questionnaire,2026-10-12
 ding_2025_iu,https://europepmc.org/article/PMC/PMC12318506,epmc,PMC12318506,hit:doc_names_columns,2026-10-02
@@ -2173,6 +2183,9 @@ ge_2025_mcqcr,https://osf.io/h7nes/,osf,h7nes,no_match,2026-10-02
 geacaballero_2019_pes_nwi,https://europepmc.org/article/PMC/PMC6660900,epmc,PMC6660900,hit:questionnaire,2026-10-02
 geacaballero_2019_pes_nwi_short,https://europepmc.org/article/PMC/PMC6660900,epmc,PMC6660900,hit:questionnaire,2026-10-02
 geiser_tam,https://cran.r-project.org/web/packages/TAM/index.html,cran,TAM,hit:package_doc,2026-10-02
+genai_arena_edit,https://huggingface.co/datasets/TIGER-Lab/GenAI-Arena-logs,skip,,out_of_scope:host:huggingface.co,
+genai_arena_t2i,https://huggingface.co/datasets/TIGER-Lab/GenAI-Arena-logs,skip,,out_of_scope:host:huggingface.co,
+genai_arena_t2v,https://huggingface.co/datasets/TIGER-Lab/GenAI-Arena-logs,skip,,out_of_scope:host:huggingface.co,
 gender_roles,http://openpsychometrics.org/_rawdata/,opsych,OSRI44_dev_data.zip,hit:name_codebook,2026-10-02
 genpsych_russell_2024_gemma,https://osf.io/zcytb/?view_only=79d2c8bf12c24393863d60c4143f8a0e,osf,zcytb,no_match,2026-10-02
 genpsych_russell_2024_gpt3_5,https://osf.io/zcytb/?view_only=79d2c8bf12c24393863d60c4143f8a0e,osf,zcytb,no_match,2026-10-02
@@ -2640,7 +2653,6 @@ heise_2024_mental_knowaccess,https://osf.io/kgr9t/overview,osf,kgr9t,no_match,20
 heise_2024_mental_knowexpert,https://osf.io/kgr9t/overview,osf,kgr9t,no_match,2026-10-02
 heise_2024_mental_truebel,https://osf.io/kgr9t/overview,osf,kgr9t,no_match,2026-10-02
 heise_2024_mental_vpt,https://osf.io/kgr9t/overview,osf,kgr9t,no_match,2026-10-02
-heller2013_probability,https://cran.r-project.org/web/packages/pks/index.html,cran,pks,no_match,2026-10-02
 hellstrom_2019_isi,https://doi.org/10.1371/journal.pone.0213533.s001,plos,10.1371/journal.pone.0213533,no_match,2026-10-02
 hellstrom_2019_psqi,https://doi.org/10.1371/journal.pone.0213533.s001,plos,10.1371/journal.pone.0213533,no_match,2026-10-02
 hellstrom_2019_pss14,https://doi.org/10.1371/journal.pone.0213533.s001,plos,10.1371/journal.pone.0213533,no_match,2026-10-02
@@ -3532,6 +3544,8 @@ liuzza_2018_sdo,https://zenodo.org/records/5023051,zenodo,5023051,hit:name_readm
 liuzza_2018_tdds,https://zenodo.org/records/5023051,zenodo,5023051,hit:name_readme,2026-10-19
 liuzza_2018_tdds_short,https://zenodo.org/records/5023051,zenodo,5023051,hit:name_readme,2026-10-19
 livacicrojas_2023_lvq,https://doi.org/10.7910/DVN/AEX8PP,dataverse,dataverse.harvard.edu|doi:10.7910/DVN/AEX8PP,no_match,2026-10-02
+lmarena_text_2025,https://huggingface.co/datasets/lmarena-ai/arena-human-preference-140k,skip,,out_of_scope:host:huggingface.co,
+lmarena_text_55k,https://huggingface.co/datasets/lmarena-ai/arena-human-preference-55k,skip,,out_of_scope:host:huggingface.co,
 lnirt_sim,https://cran.r-project.org/package=LNIRT,skip,,out_of_scope:cran_unparsed,
 LOC_fadplus_goto2021,https://osf.io/2xbe5/?view_only=,osf,2xbe5,no_match,2026-10-02
 loi_2018_exchange_ideology,https://figshare.com/articles/dataset/Work_intensification_and_burnout_in_secondary_teachers/6114659,figshare,6114659,no_match,2026-10-19
@@ -3742,6 +3756,7 @@ markova_2025_gaais,https://zenodo.org/records/16745477,zenodo,16745477,hit:name_
 markova_2025_mails,https://zenodo.org/records/16745477,zenodo,16745477,hit:name_codebook+name_readme,2026-10-19
 marquessanchez_2023_kidmed,https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0289553.s001&type=supplementary,plos,10.1371/journal.pone.0289553,no_match,2026-10-02
 marquezpalacios_2026_bdi2,https://osf.io/6dutb/,osf,6dutb,hit:name_codebook+name_readme,2026-10-02
+marsalek_2026_ai_attitudes,https://zenodo.org/records/23389256,zenodo,23389256,hit:name_readme,2026-10-28
 martindelcampo_2020_aq,https://europepmc.org/article/PMC/PMC7335500,epmc,PMC7335500,no_match,2026-10-02
 martindelcampo_2020_avs,https://europepmc.org/article/PMC/PMC7335500,epmc,PMC7335500,no_match,2026-10-02
 martindelcampo_2020_cvcv,https://europepmc.org/article/PMC/PMC7335500,epmc,PMC7335500,no_match,2026-10-02
@@ -4092,6 +4107,7 @@ mpsycho_wilmer,https://cran.r-project.org/web/packages/MPsychoR/index.html,cran,
 mpsycho_wilpat,https://cran.r-project.org/web/packages/MPsychoR/index.html,cran,MPsychoR,hit:package_doc,2026-10-02
 mpsycho_zareki,https://cran.r-project.org/web/packages/MPsychoR/index.html,cran,MPsychoR,hit:package_doc,2026-10-02
 mq_supremecourt,https://mqscores.lsa.umich.edu/replication.php,skip,,out_of_scope:host:mqscores.lsa.umich.edu,
+mtbench_human_2023,https://huggingface.co/datasets/lmsys/mt_bench_human_judgments,skip,,out_of_scope:host:huggingface.co,
 mthimkhulu_2023_pirls_reading,https://researchdata.up.ac.za/articles/dataset/_/24784086,skip,,out_of_scope:host:researchdata.up.ac.za,
 mthimkhulu_2023_pirls_reading_nom,https://researchdata.up.ac.za/articles/dataset/_/24784086,skip,,out_of_scope:host:researchdata.up.ac.za,
 mturkddm_by,https://osf.io/za9y8/,osf,za9y8,hit:name_readme,2026-10-02
@@ -5003,6 +5019,7 @@ ren_2024_eq5d,https://www.nature.com/articles/s41598-024-65095-0,skip,,out_of_sc
 ren_2024_loneliness,https://www.nature.com/articles/s41598-024-65095-0,skip,,out_of_scope:host:nature.com,
 ren_2024_phq9,https://www.nature.com/articles/s41598-024-65095-0,skip,,out_of_scope:host:nature.com,
 ren_2024_psqi,https://www.nature.com/articles/s41598-024-65095-0,skip,,out_of_scope:host:nature.com,
+repochat_arena_2024_2025,https://huggingface.co/datasets/lmarena-ai/repochat-arena-preference-4k,skip,,out_of_scope:host:huggingface.co,
 Resistance,https://osf.io/j5n6f/,osf,j5n6f,hit:name_codebook,2026-10-02
 retrosheet_mlb_1871_2025,https://www.retrosheet.org/gamelogs/index.html,skip,,out_of_scope:host:retrosheet.org,
 reuter_2021_emotions,https://europepmc.org/article/PMC/PMC8679900,epmc,PMC8679900,hit:doc_names_columns,2026-10-02
@@ -5166,6 +5183,10 @@ rumangkit_2026_dm_eo,https://zenodo.org/records/20389375,zenodo,20389375,no_matc
 rumangkit_2026_dm_mmp,https://zenodo.org/records/20389375,zenodo,20389375,no_match,2026-10-19
 rumangkit_2026_dm_pe,https://zenodo.org/records/20389375,zenodo,20389375,no_match,2026-10-19
 rumangkit_2026_dm_pi,https://zenodo.org/records/20389375,zenodo,20389375,no_match,2026-10-19
+rumangkit_2026_ecotourism_experience,https://zenodo.org/records/22744099,zenodo,22744099,no_match,2026-10-28
+rumangkit_2026_ecotourism_imc,https://zenodo.org/records/22744099,zenodo,22744099,no_match,2026-10-28
+rumangkit_2026_ecotourism_intention,https://zenodo.org/records/22744099,zenodo,22744099,no_match,2026-10-28
+rumangkit_2026_ecotourism_satisfaction,https://zenodo.org/records/22744099,zenodo,22744099,no_match,2026-10-28
 rumangkit_2026_entrepreneurial_marketing,https://zenodo.org/records/18448609,zenodo,18448609,no_match,2026-10-19
 rumangkit_2026_kk,https://zenodo.org/records/21522509,zenodo,21522509,no_match,2026-10-19
 rumangkit_2026_ky,https://zenodo.org/records/21522509,zenodo,21522509,no_match,2026-10-19
@@ -5350,6 +5371,17 @@ selfcompassionscale_shortform_fuochi_2025,https://osf.io/hfvxd/?view_only=51c676
 selm_2019_climate_knowledge,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0210149.s001,plos,10.1371/journal.pone.0210149,no_match,2026-10-02
 sem_cnes,https://cran.r-project.org/web/packages/sem/index.html,cran,sem,hit:package_doc,2026-10-02
 semeval2013_scientsbank_nom,https://github.com/myrosia/semeval-2013-task7,github,myrosia/semeval-2013-task7@:,hit:name_readme,2026-10-02
+senge_2025_app_facil_conditions,https://zenodo.org/records/13772955,zenodo,13772955,no_match,2026-10-28
+senge_2025_app_intention,https://zenodo.org/records/13772955,zenodo,13772955,no_match,2026-10-28
+senge_2025_app_review_use,https://zenodo.org/records/13772955,zenodo,13772955,no_match,2026-10-28
+senge_2025_app_usefulness,https://zenodo.org/records/13772955,zenodo,13772955,no_match,2026-10-28
+senge_2025_bbd_attitudes,https://zenodo.org/records/13772955,zenodo,13772955,no_match,2026-10-28
+senge_2025_disposal_frequency,https://zenodo.org/records/13772955,zenodo,13772955,no_match,2026-10-28
+senge_2025_env_awareness,https://zenodo.org/records/13772955,zenodo,13772955,no_match,2026-10-28
+senge_2025_food_waste_talk,https://zenodo.org/records/13772955,zenodo,13772955,no_match,2026-10-28
+senge_2025_shopping_planning,https://zenodo.org/records/13772955,zenodo,13772955,no_match,2026-10-28
+senge_2025_storage,https://zenodo.org/records/13772955,zenodo,13772955,no_match,2026-10-28
+senge_2025_tech_affinity,https://zenodo.org/records/13772955,zenodo,13772955,no_match,2026-10-28
 senosy_2025_anxiety_state,https://figshare.com/articles/dataset/30693638,figshare,30693638,hit:doc_names_columns,2026-10-02
 senosy_2025_anxiety_trait,https://figshare.com/articles/dataset/30693638,figshare,30693638,hit:doc_names_columns,2026-10-02
 sensorimotor_repetto_2022,https://osf.io/rcsnm/,osf,rcsnm,no_match,2026-10-19
@@ -5422,6 +5454,7 @@ shu_2025_translation_pcd,https://figshare.com/articles/dataset/Datasets_for_the_
 shu_2025_translation_pgv,https://figshare.com/articles/dataset/Datasets_for_the_project_of_Translation_and_cultural_adaption_of_MacLeod_Clark_Professional_Identity_Scale_among_Chinese_therapy_students_/28136309/1,figshare,28136309,no_match,2026-10-02
 shu_2025_translation_srt,https://figshare.com/articles/dataset/Datasets_for_the_project_of_Translation_and_cultural_adaption_of_MacLeod_Clark_Professional_Identity_Scale_among_Chinese_therapy_students_/28136309/1,figshare,28136309,no_match,2026-10-02
 si09_sirt,https://cran.r-project.org/web/packages/sirt/index.html,cran,sirt,no_match,2026-10-02
+siguenza_2025_ucla,https://osf.io/9zw43/,osf,9zw43,no_match,2026-10-28
 sijbrandij_2018_eq5d5l,https://doi.org/10.34894/Y3H5GX,dataverse,dataverse.nl|doi:10.34894/Y3H5GX,error:500,2026-10-12
 sijbrandij_2018_whoqol_bref,https://doi.org/10.34894/Y3H5GX,dataverse,dataverse.nl|doi:10.34894/Y3H5GX,error:500,2026-10-12
 silk_2019_hyperactive,https://doi.org/10.1371/journal.pone.0211053.s004,plos,10.1371/journal.pone.0211053,no_match,2026-10-02
@@ -6127,6 +6160,8 @@ timss_tam,https://cran.r-project.org/web/packages/TAM/index.html,cran,TAM,hit:pa
 tirt_sim_trt,https://github.com/ben-domingue/irw/blob/main/data/simsyn/tirt.R,skip,,out_of_scope:host:github.com,
 tma,https://openpsychometrics.org/_rawdata/,skip,,out_of_scope:opsych_no_zip_named,
 todor_2020_ikdc,https://europepmc.org/article/PMC/PMC7003694,epmc,PMC7003694,no_match,2026-10-02
+tolomeo_2026_crt,https://zenodo.org/records/23035572,zenodo,23035572,hit:name_codebook,2026-10-28
+tolomeo_2026_icar16,https://zenodo.org/records/23035572,zenodo,23035572,hit:name_codebook,2026-10-28
 tomioka_2022_srh_future_needs,https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0265830.s003&type=supplementary,plos,10.1371/journal.pone.0265830,hit:name_codebook,2026-10-02
 tomioka_2022_srh_importance,https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0265830.s003&type=supplementary,plos,10.1371/journal.pone.0265830,hit:name_codebook,2026-10-02
 tomioka_2022_srh_sufficiency,https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0265830.s003&type=supplementary,plos,10.1371/journal.pone.0265830,hit:name_codebook,2026-10-02

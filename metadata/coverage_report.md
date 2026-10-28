@@ -1,23 +1,23 @@
-# Coverage audit -- 2026-10-26
+# Coverage audit -- 2026-10-28
 
-Denominator: **8601 live tables** (8563 after excluding 38 withdrawn). Definitions in the header of `metadata/17_coverage.R`; per-table rows in `coverage_matrix.csv`. Report-only: nothing here is fixed automatically.
+Denominator: **8698 live tables** (8660 after excluding 38 withdrawn). Definitions in the header of `metadata/17_coverage.R`; per-table rows in `coverage_matrix.csv`. Report-only: nothing here is fixed automatically.
 
 ## Per dimension (active tables)
 
 | dimension | applicable | covered | missing | pct |
 |---|---|---|---|---|
-| metadata_row | 8563 | 8563 | 0 | 100 |
-| biblio_row | 8563 | 8495 | 68 | 99.2 |
-| citation | 8563 | 8495 | 68 | 99.2 |
-| licence | 8563 | 8495 | 68 | 99.2 |
-| page | 8563 | 8495 | 68 | 99.2 |
-| tag_row | 6822 | 6532 | 290 | 95.7 |
-| script | 8563 | 5166 | 3397 | 60.3 |
-| codebook_link | 6933 | 2770 | 4163 | 40 |
-| column_docs | 6682 | 4337 | 2345 | 64.9 |
-| data_note | 8546 | 1818 | 6728 | 21.3 |
-| has_construct_name | 6822 | 6532 | 290 | 95.7 |
-| itemtext_shipped | 8563 | 2713 | 5850 | 31.7 |
+| metadata_row | 8660 | 8660 | 0 | 100 |
+| biblio_row | 8660 | 8592 | 68 | 99.2 |
+| citation | 8660 | 8592 | 68 | 99.2 |
+| licence | 8660 | 8592 | 68 | 99.2 |
+| page | 8660 | 8592 | 68 | 99.2 |
+| tag_row | 6850 | 6542 | 308 | 95.5 |
+| script | 8660 | 5198 | 3462 | 60 |
+| codebook_link | 6969 | 2778 | 4191 | 39.9 |
+| column_docs | 6710 | 4351 | 2359 | 64.8 |
+| data_note | 8644 | 1842 | 6802 | 21.3 |
+| has_construct_name | 6850 | 6542 | 308 | 95.5 |
+| itemtext_shipped | 8660 | 2723 | 5937 | 31.4 |
 
 ## Item-text status
 
@@ -25,8 +25,8 @@ Issues against the public item-text page are the daily `itemtext-issues.yml` che
 
 | itemtext_status | n |
 |---|---|
-| unassessed | 5009 |
-| shipped | 2713 |
+| unassessed | 5096 |
+| shipped | 2723 |
 | excluded | 402 |
 | blocked | 307 |
 | done_not_shipped | 119 |
@@ -36,25 +36,25 @@ Issues against the public item-text page are the daily `itemtext-issues.yml` che
 
 | source | live | no_metadata | no_licence | no_page | untagged | no_script |
 |---|---|---|---|---|---|---|
-| comp | 111 | 0 | 0 | 0 | 0 | 68 |
+| comp | 119 | 0 | 0 | 0 | 0 | 69 |
 | conj | 1161 | 0 | 0 | 0 | 0 | 224 |
-| core | 6682 | 0 | 68 | 68 | 223 | 2583 |
+| core | 6710 | 0 | 68 | 68 | 241 | 2586 |
 | nom | 140 | 0 | 0 | 0 | 67 | 115 |
-| rank | 452 | 0 | 0 | 0 | 0 | 395 |
-| sim | 17 | 0 | 0 | 0 | 0 | 12 |
+| rank | 514 | 0 | 0 | 0 | 0 | 457 |
+| sim | 16 | 0 | 0 | 0 | 0 | 11 |
 
 ## Core, per shard
 
 | dataset | live | no_page | untagged | text_shipped |
 |---|---|---|---|---|
-| item_response_warehouse | 968 | 0 | 6 | 568 |
-| item_response_warehouse_2 | 864 | 2 | 12 | 365 |
+| item_response_warehouse | 968 | 0 | 6 | 569 |
+| item_response_warehouse_2 | 864 | 2 | 12 | 364 |
 | item_response_warehouse_3 | 955 | 0 | 3 | 547 |
 | item_response_warehouse_4 | 976 | 0 | 0 | 497 |
 | item_response_warehouse_5 | 962 | 0 | 83 | 275 |
 | item_response_warehouse_6 | 926 | 0 | 77 | 281 |
-| item_response_warehouse_7 | 961 | 66 | 42 | 154 |
-| item_response_warehouse_8 | 70 | 0 | 0 | 26 |
+| item_response_warehouse_7 | 961 | 66 | 42 | 155 |
+| item_response_warehouse_8 | 98 | 0 | 18 | 35 |
 
 ## Worst 20 tables (by n_gaps)
 

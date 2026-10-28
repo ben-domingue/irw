@@ -481,6 +481,9 @@ contreras_valdez_2022_rses,rses,name
 contreras_valdez_2026_rses,self_esteem,rule:cname:rosenberg|self.?esteem|\brses\b
 cordova_2026_who5,wellbeing,rule:cname:well.?being|life satisfaction|\bswls\b|quality of life|whoqol
 coroiu_2018_phq9,phq9,supplied
+costa_2020_punishment,rct,rule:var:treat
+costa_2020_sexism,longitudinal,rule:meta:longitudinal
+costa_2020_sexism,rct,rule:var:treat
 covid_travel_mackenzie_2021,longitudinal,rule:meta:longitudinal
 cox_2024_feedback_perceptions,longitudinal,rule:meta:longitudinal
 credentialform_lnirt,response_time,rule:var:rt
@@ -564,6 +567,7 @@ dey_2017_mistreatment_selfreport,clustered,rule:var:cluster_id
 diazgarcia_2018_neoffi,big_five,rule:cname:big.?five|five.?factor|\bipip\b|neo.?(pi|ffi)|\bbfi\b|hexaco
 diazgarcia_2018_panas,affect_panas,rule:cname:panas|positive and negative af
 diazgarcia_2018_panas,longitudinal,rule:meta:longitudinal
+ding_2014_sas,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 dinic_2025_shortdarktriad,dark_triad,rule:cname:dark triad|machiavell|narciss|psychopath
 dinic_2025_shortdarktriad,sd3,wording
 dishman_2017_barriers,longitudinal,rule:meta:longitudinal
