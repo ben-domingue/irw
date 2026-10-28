@@ -49,10 +49,11 @@ for row in rows:
         skipped_no_winner += 1
         continue
     winner_pair = winner_raw.replace("_", " / ")
+    ##The competition standard spells these agent_a / agent_b, not a / b (#3279).
     if winner_pair == agent_a:
-        winner = "a"
+        winner = "agent_a"
     elif winner_pair == agent_b:
-        winner = "b"
+        winner = "agent_b"
     else:
         skipped_no_winner += 1
         continue
