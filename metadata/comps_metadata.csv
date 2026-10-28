@@ -1,4 +1,5 @@
 table,n_responses,n_actors
+acpc_poker_2010_2017,683,91
 amboseli_baboons_g1,4118,61
 amboseli_baboons_g2,1667,28
 amboseli_baboons_g3,2387,36
@@ -43,6 +44,9 @@ friedman2019_risk_incidence,20790,100
 friedman2019_risk_longterm,20625,100
 friedman2019_risk_priority,19770,100
 friedman2019_risk_worry,21555,100
+genai_arena_edit,1264,11
+genai_arena_t2i,8094,28
+genai_arena_t2v,2622,17
 gombe_chimpanzees_females_1969_2013,1015,44
 gombe_chimpanzees_males_1978_2011,2741,22
 guinaudeau2024_largechambers,11453,723
@@ -53,6 +57,8 @@ jones_2020_cme_complexity,409889,1111
 lichess_2013_blitz,1313542,46808
 lichess_2013_bullet,905594,29778
 lichess_2013_classical,1159490,51498
+lmarena_text_2025,135624,53
+lmarena_text_55k,57477,64
 makri_2026_mathtext_relevance,1948,126
 metakaggle_connect_4_2023_2024,45292,82
 metakaggle_connectx_2020_2026,18330867,33933
@@ -74,6 +80,7 @@ metakaggle_rock_paper_scissors_2020_2021,7523108,48844
 metakaggle_santa_2020_2021,5564999,25355
 mlb_through2023,228326,89
 mountain_chickadees_2019_2020,118149,342
+mtbench_human_2023,3355,6
 nflverse_nfl_1999_2025,7276,35
 ogs_go_2005_2021,25492142,690746
 openfootball_argentina_2018_2025,2435,34
@@ -94,6 +101,7 @@ placepulse2_safer,509961,111389
 placepulse2_wealthier,174758,107845
 quizbowl_acf_regionals_2018,736,143
 ramos_2021_proof_explanation,760,9
+repochat_arena_2024_2025,3844,13
 retrosheet_mlb_1871_2025,235512,152
 rugby_union_tier1_1871_2026,2892,10
 sangwin_2021_proof_rigour_insight,3969,15

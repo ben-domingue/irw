@@ -464,6 +464,9 @@ bateman_2026_depression,Adult (18+),NA,General/non-specific,Affective/mental hea
 bateman_2026_prse,Adult (18+),NA,General/non-specific,Personality,Survey/questionnaire,Likert Scale/selected response,eng,Self-esteem
 batistafoguet_2021_mlq,NA,NA,Internet-based,NA,Survey/questionnaire,Likert Scale/selected response,eng,NA
 baudin_2024_static99r,NA,NA,Clinical,NA,Observational rating,Likert Scale/selected response,swe,NA
+baumann_2023_distractions,Adult (18+),NA,Internet-based,Behavioral,Survey/questionnaire,Likert Scale/selected response,eng,Working-from-home distraction inventory
+baumann_2023_satisfaction,Adult (18+),NA,Internet-based,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,eng,Domain satisfaction single items
+baumann_2023_strategy,Adult (18+),NA,Internet-based,Behavioral,Survey/questionnaire,Likert Scale/selected response,eng,Self-control strategy use
 baumgaertner_2018_vaccine_trust,Adult (18+),NA,Internet-based,NA,Survey/questionnaire,Likert Scale/selected response,eng,NA
 bauwens_2022_autonomy,Adult (18+),NA,"General/non-specific, Workplace",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,dut,Job autonomy
 bauwens_2022_empowering_leadership,Adult (18+),NA,"General/non-specific, Workplace",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,dut,Empowering leadership
@@ -1336,6 +1339,10 @@ diazgarcia_2018_oasis,Adult (18+),NA,Clinical,Affective/mental health,Survey/que
 diazgarcia_2018_panas,Adult (18+),NA,Clinical,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,spa,panas
 diazgarcia_2018_phq9,Adult (18+),NA,Clinical,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,spa,phq9
 difnlr_msatb,Child (<18y),Adolescent (12-18y),Targeted/specific,Opinion/attitude,Test,Likert Scale/selected response,eng,DIF and DDF Detection by Non-Linear Regression Models
+ding_2014_eri,Adult (18+),NA,Workplace,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,chi,"Effort-Reward Imbalance questionnaire (Chinese version), effort and reward"
+ding_2014_mbi,Adult (18+),NA,Workplace,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,chi,Maslach Burnout Inventory-General Survey (MBI-GS)
+ding_2014_overcommitment,Adult (18+),NA,Workplace,Personality,Survey/questionnaire,Likert Scale/selected response,chi,"Effort-Reward Imbalance questionnaire (Chinese version), overcommitment"
+ding_2014_sas,Adult (18+),NA,Workplace,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,chi,Zung Self-Rating Anxiety Scale (SAS)
 ding_2020_covid_knowledge,Adult (18+),NA,"Educational, Internet-based",Cognitive/educational,Test,Likert Scale/selected response,chi,COVID-19 knowledge (study-specific)
 ding_2020_covid_risk_perception,Adult (18+),NA,"Educational, Internet-based",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,chi,COVID-19 risk perception (study-specific)
 ding_2025_iu,NA,NA,Educational,NA,Survey/questionnaire,Likert Scale/selected response,chi,NA
@@ -5048,6 +5055,7 @@ shu_2025_translation_pcd,Mixed,NA,"Educational, Targeted/specific","Affective/me
 shu_2025_translation_pgv,Mixed,NA,"Educational, Targeted/specific","Affective/mental health, Opinion/attitude",Survey/questionnaire,Likert Scale/selected response,"eng, chi",Professional Goals and Values
 shu_2025_translation_srt,Mixed,NA,"Educational, Targeted/specific","Affective/mental health, Opinion/attitude",Survey/questionnaire,Likert Scale/selected response,"eng, chi",Self-fulfilment and Retention Tendency
 si09_sirt,Adult (18+),NA,NA,Behavioral,Survey/questionnaire,Likert Scale/selected response,NA,Employee-helping behavior across 8 countries.
+siguenza_2025_ucla,Child (<18y),14-18,Educational,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,spa,UCLA-R Loneliness Scale (Spanish version)
 sijbrandij_2018_eq5d5l,Adult (18+),NA,Clinical,"Affective/mental health, Physical health/functioning",Survey/questionnaire,Likert Scale/selected response,ind,EQ-5D-5L descriptive system
 sijbrandij_2018_whoqol_bref,Adult (18+),NA,Clinical,"Affective/mental health, Physical health/functioning",Survey/questionnaire,Likert Scale/selected response,ind,WHOQOL-BREF (Indonesian)
 silk_2019_hyperactive,Child (<18y),Child (6-12y),Educational,Behavioral,Observational rating,Likert Scale/selected response,eng,Hyperactive/Inattentive Symptoms
@@ -5744,6 +5752,8 @@ toledanotoledano_2018_caregiver_burden,Adult (18+),NA,"Clinical, Targeted/specif
 toledanotoledano_2018_parental_stress,Adult (18+),NA,"Clinical, Targeted/specific",Affective/mental health,Survey/questionnaire,Likert Scale/selected response,spa,12-item parental stress scale
 toledanotoledano_2018_quality_of_life,Adult (18+),NA,"Clinical, Targeted/specific","Affective/mental health, Physical health/functioning",Survey/questionnaire,Likert Scale/selected response,spa,26-item quality-of-life scale
 toledanotoledano_2018_wellbeing,Adult (18+),NA,"Clinical, Targeted/specific",Affective/mental health,Survey/questionnaire,Likert Scale/selected response,spa,10-item wellbeing scale
+tolomeo_2026_crt,Adult (18+),NA,General/non-specific,Cognitive/educational,Test,NA,ita,"Cognitive Reflection Test, long form (Italian)"
+tolomeo_2026_icar16,Adult (18+),NA,General/non-specific,Cognitive/educational,Test,Likert Scale/selected response,ita,International Cognitive Ability Resource 16 sample test (Italian adaptation)
 tomioka_2022_srh_future_needs,NA,NA,Workplace,NA,Survey/questionnaire,Likert Scale/selected response,jpn,NA
 tomioka_2022_srh_importance,NA,NA,Workplace,NA,Survey/questionnaire,Likert Scale/selected response,jpn,NA
 tomioka_2022_srh_sufficiency,NA,NA,Workplace,NA,Survey/questionnaire,Likert Scale/selected response,jpn,NA

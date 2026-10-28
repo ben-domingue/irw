@@ -39,6 +39,7 @@ acharya_2018_scotus_nominees,data/conjoint/acharya_2018.R
 ackeret_2022_scs_sf,data/ackeret_2022_coach_burnout.py
 ackeret_2022_social_support,data/ackeret_2022_coach_burnout.py
 acl_mokken,data/mokken.R
+acpc_poker_2010_2017,data/competitions/acpc_poker.py
 act_kay_2025,data/kay_2025.R
 adamczyk_2022_cesd,data/adamczyk_2022_ras.py
 adamczyk_2022_fbss,data/adamczyk_2022_ras.py
@@ -342,6 +343,9 @@ basinska_2023_bits_s1,data/basinska_2023_bits.py
 basinska_2023_bits_s2,data/basinska_2023_bits.py
 basinska_2023_work_overload,data/basinska_2023_bits.py
 bateman_2026_depression,data/bateman_2026_prse.py
+baumann_2023_distractions,data/baumann_2023_wfh.py
+baumann_2023_satisfaction,data/baumann_2023_wfh.py
+baumann_2023_strategy,data/baumann_2023_wfh.py
 bauwens_2022_autonomy,data/bauwens_2022_childcare.py
 bauwens_2022_empowering_leadership,data/bauwens_2022_childcare.py
 bauwens_2022_engagement,data/bauwens_2022_childcare.py
@@ -919,6 +923,8 @@ coroiu_2018_phq9,data/coroiu_2018_scs.py
 corstange_2022_syria_factions_2015,data/rankings/prd_rankings.py
 corstange_2022_syria_factions_2017,data/rankings/prd_rankings.py
 cos101_2026_nom,data/cos101_2026_openended.py
+costa_2020_punishment,data/costa_2020_metoo.py
+costa_2020_sexism,data/costa_2020_metoo.py
 costa_2023_research_ethics,data/conjoint/costa_2023.R
 cozza_2025_party_leaders,data/conjoint/cozza_2025.R
 CPDMMC_Kunnari_2020_HCD,data/CPDMMC_Kunnari_2020.R
@@ -1078,6 +1084,10 @@ difnlr_msatb,data/difNLR.R
 digiuseppe_2018_trade_agreements,data/conjoint/digiuseppe_2018.R
 digiuseppe_2022_tshirt_usa,data/conjoint/digiuseppe_2022.R
 digiuseppe_2022_tv_india,data/conjoint/digiuseppe_2022.R
+ding_2014_eri,data/ding_2014_healthcare_workers.py
+ding_2014_mbi,data/ding_2014_healthcare_workers.py
+ding_2014_overcommitment,data/ding_2014_healthcare_workers.py
+ding_2014_sas,data/ding_2014_healthcare_workers.py
 ding_2020_covid_knowledge,data/ding_2020_covid_students.py
 ding_2020_covid_risk_perception,data/ding_2020_covid_students.py
 ding_2025_iu,data/ding_2025_iu_ocd.py
@@ -1575,6 +1585,9 @@ ge_2025_eesc,data/ge_2025_worry.py
 ge_2025_mcqcr,data/ge_2025_worry.py
 geacaballero_2019_pes_nwi_short,data/geacaballero_2019_pes_nwi.py
 geiser_tam,data/tam.R
+genai_arena_edit,data/competitions/genai_arena.py
+genai_arena_t2i,data/competitions/genai_arena.py
+genai_arena_t2v,data/competitions/genai_arena.py
 gengler_2021_survey_participation,data/conjoint/gengler_2021.R
 geography_nom,data/nominal/geography.py
 gerber_2022_altruism,data/gerber_2022_swiss_camp.py|data/gerber_2022_swisscamp.py
@@ -2635,6 +2648,7 @@ liuzza_2018_rwa,data/liuzza_2018_disgust_authoritarianism.py
 liuzza_2018_sdo,data/liuzza_2018_disgust_authoritarianism.py
 liuzza_2018_tdds,data/liuzza_2018_disgust_authoritarianism.py
 liuzza_2018_tdds_short,data/liuzza_2018_disgust_authoritarianism.py
+lmarena_text_2025,data/competitions/genai_arena.py|data/competitions/lmarena_text.py|data/competitions/lmarena_text_55k.py|data/competitions/mtbench_human.py|data/competitions/repochat_arena.py
 lomholt_2025_teacher_expectations,data/conjoint/lomholt_2025.R
 loneliness_mudfold,data/mudfold.R
 lopezgarcia_2023_mx_military_proposal,data/conjoint/lopezgarcia_2023.R
@@ -3080,6 +3094,7 @@ mpsycho_wilpat,data/MPsychoR.R
 mpsycho_youthdep,data/MPsychoR.R
 mpsycho_zareki,data/MPsychoR.R
 mq_supremecourt,data/martinquinn_supremecourt.R
+mtbench_human_2023,data/competitions/mtbench_human.py
 mthimkhulu_2023_pirls_reading_nom,data/mthimkhulu_2023_pirls_reading_nominal.py
 mturkddm_by,data/mturk_ddm.R
 mturkddm_lexical,data/mturk_ddm.R
@@ -3731,6 +3746,7 @@ ren_2024_eq5d,data/ren_2024_rural_elderly.py
 ren_2024_loneliness,data/ren_2024_rural_elderly.py
 ren_2024_phq9,data/ren_2024_rural_elderly.py
 ren_2024_psqi,data/ren_2024_rural_elderly.py
+repochat_arena_2024_2025,data/competitions/repochat_arena.py
 retrosheet_mlb_1871_2025,data/competitions/retrosheet_mlb.R
 rexand_galais_2022_ipofr,data/rexand_galais_2022_ipo.py
 rimisp_2021_care_work,data/rimisp_2021_valle_del_cauca.py
@@ -3834,6 +3850,10 @@ rumangkit_2025_passion,data/rumangkit_2025_entrepreneurial_intention.py
 rumangkit_2025_perceived_control,data/rumangkit_2025_entrepreneurial_intention.py
 rumangkit_2025_self_efficacy,data/rumangkit_2025_entrepreneurial_intention.py
 rumangkit_2025_subjective_norm,data/rumangkit_2025_entrepreneurial_intention.py
+rumangkit_2026_ecotourism_experience,data/rumangkit_2026_ecotourism.py
+rumangkit_2026_ecotourism_imc,data/rumangkit_2026_ecotourism.py
+rumangkit_2026_ecotourism_intention,data/rumangkit_2026_ecotourism.py
+rumangkit_2026_ecotourism_satisfaction,data/rumangkit_2026_ecotourism.py
 RvKDCS_Romiacg_Miroshnik_2020_BFI,data/RvKDCS_Romiacg_Miroshnik_2020.R
 RvKDCS_Romiacg_Miroshnik_2020_CBI,data/RvKDCS_Romiacg_Miroshnik_2020.R
 RvKDCS_Romiacg_Miroshnik_2020_KDOCS,data/RvKDCS_Romiacg_Miroshnik_2020.R
@@ -3987,6 +4007,17 @@ sekowski_2025_mast,data/sekowski_2025_mast12.py
 sekowski_2025_pies,data/sekowski_2025_mast12.py
 sem_cnes,data/cnes.R
 semeval2013_scientsbank_nom,data/nominal/semeval2013_scientsbank.py
+senge_2025_app_facil_conditions,data/senge_2025_foodwaste_app.py
+senge_2025_app_intention,data/senge_2025_foodwaste_app.py
+senge_2025_app_review_use,data/senge_2025_foodwaste_app.py
+senge_2025_app_usefulness,data/senge_2025_foodwaste_app.py
+senge_2025_bbd_attitudes,data/senge_2025_foodwaste_app.py
+senge_2025_disposal_frequency,data/senge_2025_foodwaste_app.py
+senge_2025_env_awareness,data/senge_2025_foodwaste_app.py
+senge_2025_food_waste_talk,data/senge_2025_foodwaste_app.py
+senge_2025_shopping_planning,data/senge_2025_foodwaste_app.py
+senge_2025_storage,data/senge_2025_foodwaste_app.py
+senge_2025_tech_affinity,data/senge_2025_foodwaste_app.py
 senninger_2023_mp_eu_oversight,data/conjoint/senninger_2023.R
 senosy_2025_anxiety_state,data/senosy_2025_anxiety_nursing.py
 senosy_2025_anxiety_trait,data/senosy_2025_anxiety_nursing.py
@@ -4632,6 +4663,7 @@ titelman_2024_party_labels,data/conjoint/titelman_2024.R
 tjiong_2026_mobile_data,data/conjoint/tjiong_2026.R
 toenshoff_2025_climate_plans,data/conjoint/toenshoff_2025.R
 toenshoff_2025_energy_candidates,data/conjoint/toenshoff_2025.R
+tolomeo_2026_crt,data/tolomeo_2026_icar16.py
 tomioka_2022_srh_future_needs,data/tomioka_2022_srh_support.py
 tomioka_2022_srh_importance,data/tomioka_2022_srh_support.py
 tomioka_2022_srh_sufficiency,data/tomioka_2022_srh_support.py

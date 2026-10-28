@@ -566,7 +566,627 @@ rathbun_2022_trait_ranking,NA,10.7910/DVN/RZ1JVJ,"Rathbun, B. C. & Pomeroy, C. 2
   year = {2021}
 }
 ",PRD
-rcv_alaska_20221108_hd10,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska House District 10, 8 November 2022 (ballot-level columns: ballot type, counting group, district, precinct, voting location): single-winner (instant-runoff) election, 3 candidates, 4 rank positions offered, 6823 ballots with at least one mark (of 7153 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+rcv_alaska_20220816_ushousesp,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska special general election for U.S. Representative, 16 August 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 3 candidates, 4 rank positions offered, 189512 ballots with at least one mark (of 192289 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_gov,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska Governor and Lieutenant Governor, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 4 candidates, 5 rank positions offered, 264912 ballots with at least one mark (of 266693 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_hd1,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska House District 1, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 2 candidates, 3 rank positions offered, 6714 ballots with at least one mark (of 6888 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_hd10,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska House District 10, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 3 candidates, 4 rank positions offered, 6823 ballots with at least one mark (of 7153 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_hd11,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska House District 11, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 3 candidates, 4 rank positions offered, 7697 ballots with at least one mark (of 8190 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_hd12,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska House District 12, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 2 candidates, 3 rank positions offered, 6489 ballots with at least one mark (of 6774 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_hd13,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska House District 13, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 2 candidates, 3 rank positions offered, 5543 ballots with at least one mark (of 5790 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_hd14,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska House District 14, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 2 candidates, 3 rank positions offered, 5714 ballots with at least one mark (of 6155 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_hd15,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska House District 15, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 3 candidates, 4 rank positions offered, 7287 ballots with at least one mark (of 7709 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_hd16,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska House District 16, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 2 candidates, 3 rank positions offered, 7706 ballots with at least one mark (of 8068 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_hd17,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska House District 17, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 2 candidates, 3 rank positions offered, 5451 ballots with at least one mark (of 6465 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_hd18,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska House District 18, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 3 candidates, 4 rank positions offered, 2122 ballots with at least one mark (of 2297 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_hd19,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska House District 19, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 2 candidates, 3 rank positions offered, 3081 ballots with at least one mark (of 3728 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_hd2,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska House District 2, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 2 candidates, 3 rank positions offered, 7147 ballots with at least one mark (of 7567 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_hd20,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska House District 20, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 4 candidates, 5 rank positions offered, 5032 ballots with at least one mark (of 5469 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_hd21,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska House District 21, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 2 candidates, 3 rank positions offered, 7030 ballots with at least one mark (of 7313 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_hd22,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska House District 22, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 2 candidates, 3 rank positions offered, 3785 ballots with at least one mark (of 3964 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_hd23,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska House District 23, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 2 candidates, 3 rank positions offered, 7280 ballots with at least one mark (of 8336 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_hd24,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska House District 24, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 3 candidates, 4 rank positions offered, 7536 ballots with at least one mark (of 7996 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_hd25,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska House District 25, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 2 candidates, 3 rank positions offered, 7319 ballots with at least one mark (of 8378 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_hd26,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska House District 26, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 2 candidates, 3 rank positions offered, 6638 ballots with at least one mark (of 7213 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_hd27,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska House District 27, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 3 candidates, 4 rank positions offered, 5657 ballots with at least one mark (of 6678 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_hd28,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska House District 28, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 4 candidates, 5 rank positions offered, 6023 ballots with at least one mark (of 7098 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_hd29,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska House District 29, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 2 candidates, 3 rank positions offered, 7495 ballots with at least one mark (of 8220 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_hd3,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska House District 3, 8 November 2022 (one printed name on the ballot; ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 1 candidate, 2 rank positions offered, 6782 ballots with at least one mark (of 8804 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_hd30,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska House District 30, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 3 candidates, 4 rank positions offered, 7568 ballots with at least one mark (of 8135 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_hd31,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska House District 31, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 3 candidates, 4 rank positions offered, 5095 ballots with at least one mark (of 5330 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_hd32,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska House District 32, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 3 candidates, 4 rank positions offered, 3186 ballots with at least one mark (of 3406 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_hd33,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska House District 33, 8 November 2022 (one printed name on the ballot; ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 1 candidate, 2 rank positions offered, 5385 ballots with at least one mark (of 6256 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_hd34,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska House District 34, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 3 candidates, 4 rank positions offered, 7390 ballots with at least one mark (of 7693 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_hd35,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska House District 35, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 4 candidates, 5 rank positions offered, 7484 ballots with at least one mark (of 7878 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_hd36,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska House District 36, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 2 candidates, 3 rank positions offered, 7497 ballots with at least one mark (of 7952 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_hd37,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska House District 37, 8 November 2022 (one printed name on the ballot; ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 1 candidate, 2 rank positions offered, 3099 ballots with at least one mark (of 3665 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_hd38,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska House District 38, 8 November 2022 (one printed name on the ballot; ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 1 candidate, 2 rank positions offered, 3381 ballots with at least one mark (of 3763 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_hd39,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska House District 39, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 2 candidates, 3 rank positions offered, 3680 ballots with at least one mark (of 3817 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_hd4,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska House District 4, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 2 candidates, 3 rank positions offered, 6901 ballots with at least one mark (of 7713 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_hd40,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska House District 40, 8 November 2022 (one printed name on the ballot; ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 1 candidate, 2 rank positions offered, 2241 ballots with at least one mark (of 2476 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_hd5,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska House District 5, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 2 candidates, 3 rank positions offered, 5402 ballots with at least one mark (of 5989 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_hd6,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska House District 6, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 3 candidates, 4 rank positions offered, 9537 ballots with at least one mark (of 9847 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_hd7,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska House District 7, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 2 candidates, 3 rank positions offered, 6874 ballots with at least one mark (of 7443 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_hd8,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska House District 8, 8 November 2022 (one printed name on the ballot; ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 1 candidate, 2 rank positions offered, 7209 ballots with at least one mark (of 8793 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_hd9,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska House District 9, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 2 candidates, 3 rank positions offered, 9835 ballots with at least one mark (of 10284 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_sda,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska Senate District A, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 2 candidates, 3 rank positions offered, 13006 ballots with at least one mark (of 14455 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_sdb,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska Senate District B, 8 November 2022 (one printed name on the ballot; ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 1 candidate, 2 rank positions offered, 13460 ballots with at least one mark (of 16517 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_sdc,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska Senate District C, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 3 candidates, 4 rank positions offered, 14069 ballots with at least one mark (of 15836 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_sdd,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska Senate District D, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 3 candidates, 4 rank positions offered, 15295 ballots with at least one mark (of 16236 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_sde,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska Senate District E, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 3 candidates, 4 rank positions offered, 16746 ballots with at least one mark (of 17437 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_sdf,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska Senate District F, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 2 candidates, 3 rank positions offered, 14324 ballots with at least one mark (of 14964 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_sdg,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska Senate District G, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 2 candidates, 3 rank positions offered, 11236 ballots with at least one mark (of 11945 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_sdh,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska Senate District H, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 2 candidates, 3 rank positions offered, 15227 ballots with at least one mark (of 15777 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_sdi,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska Senate District I, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 2 candidates, 3 rank positions offered, 7590 ballots with at least one mark (of 8762 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_sdj,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska Senate District J, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 3 candidates, 4 rank positions offered, 8687 ballots with at least one mark (of 9197 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_sdk,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska Senate District K, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 2 candidates, 3 rank positions offered, 10839 ballots with at least one mark (of 11277 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_sdl,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska Senate District L, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 2 candidates, 3 rank positions offered, 14727 ballots with at least one mark (of 16332 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_sdm,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska Senate District M, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 2 candidates, 3 rank positions offered, 14867 ballots with at least one mark (of 15591 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_sdn,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska Senate District N, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 3 candidates, 4 rank positions offered, 11666 ballots with at least one mark (of 13776 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_sdo,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska Senate District O, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 2 candidates, 3 rank positions offered, 14339 ballots with at least one mark (of 16355 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_sdp,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska Senate District P, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 3 candidates, 4 rank positions offered, 8419 ballots with at least one mark (of 8736 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_sdq,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska Senate District Q, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 3 candidates, 4 rank positions offered, 13045 ballots with at least one mark (of 13949 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_sdr,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska Senate District R, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 3 candidates, 4 rank positions offered, 14695 ballots with at least one mark (of 15830 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_sds,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska Senate District S, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 2 candidates, 3 rank positions offered, 6949 ballots with at least one mark (of 7428 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_usrepresentative,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska U.S. Representative, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 4 candidates, 5 rank positions offered, 265585 ballots with at least one mark (of 266797 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
+  doi = {10.7910/DVN/AMK8PJ},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
+  author = {Otis, Deb},
+  keywords = {Social Sciences},
+  title = {Single winner ranked choice voting CVRs},
+  publisher = {Harvard Dataverse},
+  year = {2022}
+}
+",NA
+rcv_alaska_20221108_ussenator,NA,10.7910/DVN/AMK8PJ,FairVote. Single winner ranked choice voting CVRs [data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/AMK8PJ,https://doi.org/10.7910/DVN/AMK8PJ,CC0 1.0,CC0 1.0,NA,"Ranked-choice cast vote records, Alaska U.S. Senator, 8 November 2022 (ballot-level columns: ballot type, counting group, district, district type, precinct, precinct portion, voting location): single-winner (instant-runoff) election, 4 candidates, 5 rank positions offered, 264421 ballots with at least one mark (of 266797 in the file). One row per ballot x marked position; item = candidate code c01.. in alphabetical order of the printed names (names not stored), resp = position as marked. Rankings layout (draft irw_rankings family, data/rankings/README.md).","@misc{https://doi.org/10.7910/dvn/amk8pj,
   doi = {10.7910/DVN/AMK8PJ},
   url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/AMK8PJ},
   author = {Otis, Deb},
