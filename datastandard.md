@@ -211,6 +211,15 @@ quasi-identifiers, the median table leaves 18.9% of its respondents unique on
 them, and that is overwhelmingly a small-sample artefact -- 41.2% under 100
 respondents against 0.3% above 10,000 (#3232).
 
+That quantity is published rather than asserted: every core table carries
+`k1_prop` and `n_quasi_identifiers` in `metadata.csv`, recomputed on every
+pipeline run from the quasi-identifiers the table actually publishes, with the
+per-table detail in `metadata/k1_by_table.csv` (`metadata/20_k1.py`, #3273). It
+is a necessary condition for re-identification and not re-identification, and it
+gates nothing -- the rule above is the rule. It is there so that a reader of
+this paragraph, and a user choosing a table, can check the claim on the table in
+front of them instead of taking the corpus median on trust.
+
 ### 4. Identify item columns
 
 Item columns are the ones that contain actual responses to questionnaire items. Exclude:

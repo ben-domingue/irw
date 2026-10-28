@@ -98,6 +98,15 @@ metadata/logs/codebook_table_names.json
 !metadata/conj_refresh_stamps.csv
 ##The same for the rankings family (18_rankings.R, #3039).
 !metadata/rank_refresh_stamps.csv
+##k=1 respondent uniqueness (20_k1.py, #3273) IS committed, and it is the
+##contrast with the block below that explains why. One row per table, no
+##per-item explosion and -- deliberately -- no per-row timestamp, so the weekly
+##diff is EMPTY unless a table's quasi-identifier values actually moved. That is
+##the file's purpose as much as the numbers are: a published table's k=1 cannot
+##change unless its data changed, so a changed row with no matching
+##metadata/table_changes.csv row is a finding. A computed_at column would
+##rewrite all 6,720 rows every run and drown exactly that signal.
+!metadata/k1_by_table.csv
 ##Tier-0 per-item statistics (19_item_classical.py, #1710) are NOT committed,
 ##unlike every other pipeline output above, and the reason is size: one row per
 ##table-item is 1,125,820 rows and 78 MB at full corpus coverage, rewritten on
