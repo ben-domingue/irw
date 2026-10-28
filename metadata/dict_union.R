@@ -1399,6 +1399,22 @@ LICENSE_OVERRIDES <- list(
         derived    = "CC BY 4.0",
         terms      = NULL,
         why = "McLaughlin, 2025-06-25: 'open use without restriction'"
+    ),
+    ##EAMMi2 (#3229, the review's "like cases diverge within one OSF deposit").
+    ##19 tables come from osf.io/qtqpb and 18 of them publish `CC0 1.0`.
+    ##`eammi_grahe_2018_marriage_timing` alone says `Permission via Email`,
+    ##which is not a licence and is not what the deposit says: the OSF API
+    ##reports node licence "CC0 1.0 Universal" for qtqpb (checked 2026-10-28).
+    ##One wrong cell among 18 right ones, then, not a ruling. The 18 siblings
+    ##disarm nothing -- they already hold `derived`, so they are neither
+    ##changed nor reported stale.
+    list(
+        url        = "osf\\.io/qtqpb(/|$|[?#])",
+        issue      = "#3229",
+        superseded = "Permission via Email",
+        derived    = "CC0 1.0",
+        terms      = NULL,
+        why = "OSF qtqpb declares CC0 1.0 Universal; 18 of the 19 rows say so"
     )
 )
 
@@ -1479,6 +1495,78 @@ apply_license_overrides <- function(biblio, label = "core",
         message("  wrote ", nrow(log), " licence override row(s) to ", log.file)
     }
     list(biblio = biblio, log = log)
+}
+
+##---------------------------------------------------------------------------
+##One licence, spelled two ways (#3229, R-35's "silently excluded by both
+##packages' exact-match filters").
+##
+##`irw_filter(license=)` in R, `filter(license=)` in Python and the MCP
+##`rights` object all match `Derived_License` EXACTLY. A table whose cell
+##reads `CC0 1.0 (repository LICENSE file)` is therefore invisible to
+##`license = "CC0 1.0"` while being, in fact, CC0 1.0 -- the parenthetical
+##records how the licence was determined, which belongs in the dictionary's
+##notes (where it already is) and not in the value a client filters on. Same
+##for `MIT License` beside 42 rows that say `MIT`, and `CC0` beside 2,144
+##that say `CC0 1.0`.
+##
+##WHAT THIS DOES NOT DO. It maps a spelling to the spelling the rest of the
+##corpus already uses for THE SAME licence. It does not supply a version
+##nobody recorded: `CC BY`, `CC-BY (unspecified)` and `CC BY-NC-ND` are left
+##exactly as they are, because "which CC BY?" is a question about the source,
+##and answering it here would invent a fact. Those are logged as leads by
+##check_license_vocabulary() below instead.
+##
+##Runs over both licence columns and every family, after the overrides: an
+##override's `derived` is written in canonical form already, so order only
+##matters in that a superseded value is matched before it is renamed.
+LICENSE_SPELLINGS <- c(
+    "CC0 1.0 (repository LICENSE file)" = "CC0 1.0",
+    "CC0"                              = "CC0 1.0",
+    "MIT License"                      = "MIT")
+
+canonicalise_license_spelling <- function(biblio, label = "core",
+                                          spellings = LICENSE_SPELLINGS,
+                                          columns = c("Derived_License",
+                                                      "Original_License")) {
+    columns <- intersect(columns, names(biblio))
+    if (!length(columns) || !length(spellings)) return(biblio)
+    ##Case and internal spacing are not a different licence, so match on the
+    ##same normalisation the overrides use. The REPLACEMENT is the canonical
+    ##spelling, not the row's own.
+    key <- function(v) tolower(gsub("\\s+", " ", trimws(as.character(v))))
+    want <- setNames(as.character(spellings), key(names(spellings)))
+    n <- 0L
+    for (col in columns) {
+        k <- key(biblio[[col]])
+        hit <- !is.na(k) & k %in% names(want)
+        if (!any(hit)) next
+        biblio[[col]][hit] <- unname(want[k[hit]])
+        n <- n + sum(hit)
+    }
+    message(label, ": canonicalised ", n, " licence spelling(s) over ",
+            length(columns), " column(s)")
+    biblio
+}
+
+##The leads the map deliberately does not touch: a published licence value
+##that no other row in the corpus agrees with, or that names no version where
+##a versioned sibling exists. Reported, never changed -- each one is a
+##question for the source deposit.
+LICENSE_UNVERSIONED <- c("CC BY", "CC-BY (unspecified)", "CC BY-NC-ND",
+                         "CC BY-SA", "CC BY-NC")
+
+check_license_vocabulary <- function(biblio, label = "core",
+                                     unversioned = LICENSE_UNVERSIONED) {
+    if (!"Derived_License" %in% names(biblio)) return(invisible(NULL))
+    v <- trimws(as.character(biblio$Derived_License))
+    hit <- !is.na(v) & v %in% unversioned
+    if (any(hit)) {
+        message(label, ": ", sum(hit), " row(s) publish a licence with no ",
+                "version (", paste(sort(unique(v[hit])), collapse = ", "),
+                ") -- a filter for the versioned name will not find them")
+    }
+    invisible(sort(unique(v[hit])))
 }
 
 ##---------------------------------------------------------------------------

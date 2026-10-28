@@ -1191,6 +1191,78 @@ local({
     check(nrow(again$log) == 0L, "re-running the override is a no-op")
 })
 
+##--------------------------------- EAMMi2, one cell of 19 (#3229) ---
+cat("licence overrides: the one divergent row in an OSF deposit\n")
+local({
+    b <- data.frame(
+        table = c("eammi_grahe_2018_marriage_timing", "eammi_grahe_2018_swb",
+                  "eammi_grahe_2018_npi"),
+        URL__for_data_ = rep("https://osf.io/qtqpb/overview", 3),
+        Derived_License = c("Permission via Email", "CC0 1.0", "CC0 1.0"),
+        Custom_License_Terms = NA_character_,
+        stringsAsFactors = FALSE)
+    out <- suppressMessages(suppressWarnings(apply_license_overrides(b, "core")))
+    nb <- out$biblio
+    check(identical(nb$Derived_License, c("CC0 1.0", "CC0 1.0", "CC0 1.0")),
+          "the divergent row becomes CC0 1.0 and its siblings are unchanged")
+    check(nrow(out$log) == 1L && identical(out$log$issue, "#3229"),
+          "only the one changed row is logged, against #3229")
+    ##The siblings already hold `derived`, so they must not be reported as a
+    ##sheet that has moved on -- that warning is what tells us to delete an
+    ##entry, and a false one would retire this fix on the first read of the log.
+    w <- tryCatch({ apply_license_overrides(b, "core"); "none" },
+                  warning = function(e) conditionMessage(e))
+    check(!grepl("qtqpb", w, fixed = TRUE),
+          "18 siblings already holding CC0 1.0 raise no stale warning")
+})
+
+##------------------------- one licence, spelled two ways (#3229) ---
+cat("licence spellings: the exact-match filter finds one bucket\n")
+local({
+    b <- data.frame(
+        table = c("singleton_2021_roundabout_bicycle", "king_2026_urban_meadows",
+                  "wilkins_2018_phq9", "argentina_2012_aging_ageism",
+                  "neurips_2020", "ordinary"),
+        Derived_License = c("CC0 1.0 (repository LICENSE file)", "MIT License",
+                            "CC0", "CC-BY (unspecified)", "CC BY-NC-ND",
+                            "CC BY 4.0"),
+        Original_License = c("CC0 1.0 (repository LICENSE file)", "MIT License",
+                             "CC0", "CC-BY (unspecified)", "CC BY-NC-ND",
+                             "CC BY 4.0"),
+        stringsAsFactors = FALSE)
+    nb <- suppressMessages(canonicalise_license_spelling(b, "core"))
+    r <- function(t) nb[nb$table == t, ]
+    check(identical(r("singleton_2021_roundabout_bicycle")$Derived_License,
+                    "CC0 1.0"),
+          "a cell that records how the licence was determined becomes the licence")
+    check(identical(r("king_2026_urban_meadows")$Derived_License, "MIT"),
+          "MIT License joins the 42 rows that say MIT")
+    check(identical(r("wilkins_2018_phq9")$Derived_License, "CC0 1.0"),
+          "CC0 joins the rows that say CC0 1.0")
+    check(identical(r("singleton_2021_roundabout_bicycle")$Original_License,
+                    "CC0 1.0"),
+          "the source licence column is canonicalised too")
+    ##The half that matters most: no version is invented.
+    check(identical(r("argentina_2012_aging_ageism")$Derived_License,
+                    "CC-BY (unspecified)") &&
+          identical(r("neurips_2020")$Derived_License, "CC BY-NC-ND"),
+          "a licence with no recorded version is left exactly as it is")
+    check(identical(r("ordinary")$Derived_License, "CC BY 4.0"),
+          "a canonical value is untouched")
+    ##Idempotent, and case/spacing are not a different licence.
+    again <- suppressMessages(canonicalise_license_spelling(nb, "core"))
+    check(identical(again$Derived_License, nb$Derived_License),
+          "a second pass changes nothing")
+    cased <- suppressMessages(canonicalise_license_spelling(
+        data.frame(Derived_License = c("mit  license", " CC0 "),
+                   stringsAsFactors = FALSE), "core"))
+    check(identical(cased$Derived_License, c("MIT", "CC0 1.0")),
+          "case and internal spacing do not hide a spelling")
+    lead <- suppressMessages(check_license_vocabulary(b, "core"))
+    check(identical(lead, c("CC BY-NC-ND", "CC-BY (unspecified)")),
+          "the unversioned values are reported as leads instead")
+})
+
 ##------------------------------------------------------------------ result ---
 cat("\n")
 if (failures > 0L) { cat(failures, "FAILURE(S)\n"); quit(status = 1L) }
