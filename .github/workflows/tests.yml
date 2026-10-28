@@ -53,6 +53,14 @@ jobs:
           # turned main red (#3157 -> #3158). Installed rather than skipped:
           # a test that quietly skips is how a reader regression gets through.
           python -m pip install xlrd
+          # requests, because automated_finding imports it directly at module
+          # scope (irw_triage_updated, the discoverers, the queue runner) and
+          # declares it nowhere. It used to arrive transitively through
+          # `pip install -e .` -> redivis; redivis 0.22.0 moved to niquests
+          # and the closure stopped carrying it, which turned main red on
+          # 2026-10-28 with ModuleNotFoundError in tests that had passed four
+          # hours earlier on an unchanged tree.
+          python -m pip install requests
           python -m pip install -e .
           # irw_validate is its own distribution now, not a rider on
           # irw-red-up. Installing it here is also what checks its pyproject
