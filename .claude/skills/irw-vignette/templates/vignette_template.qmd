@@ -98,19 +98,25 @@ if (cache_ok && is_pilot) cat(
 )
 ```
 
-::: {.callout-note}
-This vignette — including the dataset search, the compute script, the
-analysis design, and the writing below — was produced largely by Claude
-(Anthropic), working from a task specification and with human review.
-Treat the methodological choices and interpretations accordingly, and
-check the compute script (`<NAME>_compute.R`) directly if you're relying
-on the numbers here.
+::: {.callout-note appearance="simple"}
+This vignette — the dataset search, the compute script, the analysis design,
+and the writing below — was produced largely by Claude (Anthropic), working
+from a task specification and with human review. Check the compute script
+(`<NAME>_compute.R`) directly if you are relying on the numbers here.
 :::
 
+{{< include _exploratory.qmd >}}
+
 <!--
-TODO(agent): if this vignette was NOT substantially authored by an
-automated agent, delete the callout-note block above rather than leaving a
-false disclosure in place.
+TODO(agent): two separate notes, and they are not interchangeable. The
+callout-note above is a provenance fact: delete it if this vignette was NOT
+substantially authored by an automated agent, rather than leaving a false
+disclosure in place. The _exploratory.qmd include is a claim about warrant:
+keep it on any page that draws a substantive conclusion from a convenience
+set of IRW tables, and drop the line only for a page whose deliverable is a
+procedure (cfa.qmd, imv.qmd, irt_python.qmd) or a self-contained simulation
+(diffsim.qmd). Never edit the shared text to suit one page — page-specific
+weaknesses belong in ## Limitations.
 -->
 
 ## Motivation
