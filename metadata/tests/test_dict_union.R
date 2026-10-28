@@ -1135,18 +1135,21 @@ local({
     b <- data.frame(
         table = c("mexico_2023_quality_x", "colombia_2023_politics_x",
                   "guatemala_2024_homes_x", "smpi_lorenzoluaces_2020_x",
-                  "anunciacao_2025_personality_x", "moved_on", "untouched"),
+                  "anunciacao_2025_personality_x", "moved_on", "untouched",
+                  "spain_2011_x", "spain_relicensed"),
         URL__for_data_ = c("https://www.inegi.org.mx/programas/encig/2023/#microdatos",
                            "https://microdatos.dane.gov.co/index.php/catalog/822/get-microdata",
                            "https://www.ine.gob.gt/encasba-2/",
                            "https://osf.io/69nwe/",
                            "https://osf.io/wkzan/overview",
                            "https://www.ine.gob.gt/encasba-2/",
-                           "https://osf.io/abcde/"),
+                           "https://osf.io/abcde/",
+                           "https://www.cis.es/es/estudios/algo?cuestionario=1",
+                           "https://www.cis.es/es/estudios/otro?cuestionario=2"),
         Derived_License = c("Permission via Email", "Permission via Email",
                             "Permission via Email", "",
                             "Permission via Email", "CC BY-NC 4.0",
-                            "Permission via Email"),
+                            "Permission via Email", "Custom", "CC BY 4.0"),
         Custom_License_Terms = NA_character_,
         stringsAsFactors = FALSE)
     out <- suppressMessages(suppressWarnings(apply_license_overrides(b, "core")))
@@ -1171,7 +1174,13 @@ local({
           "a row holding a different licence is left alone")
     check(identical(r("untouched")$Derived_License, "Permission via Email"),
           "a deposit no override names keeps its value")
-    check(nrow(out$log) == 5L && all(out$log$issue == "#3226"),
+    check(grepl("Ley 37/2007", r("spain_2011_x")$Custom_License_Terms, fixed = TRUE) &&
+          identical(r("spain_2011_x")$Derived_License, "Custom"),
+          "a CIS row keeps Custom and gains the Ley 37/2007 conditions (R-36)")
+    check(identical(r("spain_relicensed")$Derived_License, "CC BY 4.0") &&
+          is.na(r("spain_relicensed")$Custom_License_Terms),
+          "a CIS row someone has since relicensed is left alone")
+    check(nrow(out$log) == 6L && all(out$log$issue == "#3226"),
           "every change is logged with its issue")
     w <- tryCatch({ apply_license_overrides(b, "core"); "none" },
                   warning = function(e) conditionMessage(e))
