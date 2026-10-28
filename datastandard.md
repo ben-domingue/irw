@@ -186,6 +186,31 @@ harvested before its PR merges; the `contract` CI job warns when it has not been
 standard name (`cluster_id = teacher_name`) is what lets the Codebook say where
 a column came from; a column built indirectly shows no source. See `ARCHITECTURE.md` §4, "The table-page Codebook".
 
+**Never publish a covariate at finer granularity than its source.**
+
+A covariate is a copy, not a derivation. Rename the source's column and carry its
+values through; do not compute a finer value than the deposit published. Deriving
+an exact age from a date of birth the deposit gave only as a year, keeping a
+per-person timestamp the source reported as a wave, or splitting a region into a
+postcode are all ways a table can disclose more than the data it came from -- and
+IRW, unlike the depositor, made that choice. Coarsening below the source is always
+permitted and sometimes right; going finer is not.
+
+Where the source itself publishes a direct identifier, exclude the column rather
+than reformat it. `data/developmental_delay_anunciacao_2026.py` is the worked
+example: the deposit carries initials, postcode and two dates of birth, and the
+script keeps only age in whole months.
+
+This bounds what IRW is responsible for. The corpus republishes demographics its
+sources already published, under their licences, and does not de-identify beyond
+what the source did. Where IRW's own processing would add exposure, it coarsens --
+`friedman_2018_risks_*` publish a three-digit ZIP prefix rather than the deposit's
+full five-digit code (#3219). Demographic breadth on its own is not a reason to
+thin a table: measured across the 2,942 core tables carrying three or more
+quasi-identifiers, the median table leaves 18.9% of its respondents unique on
+them, and that is overwhelmingly a small-sample artefact -- 41.2% under 100
+respondents against 0.3% above 10,000 (#3232).
+
 ### 4. Identify item columns
 
 Item columns are the ones that contain actual responses to questionnaire items. Exclude:
