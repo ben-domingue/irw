@@ -1362,6 +1362,36 @@ LICENSE_OVERRIDES <- list(
         terms      = NULL,
         why = "Lorenzo-Luaces, 2026-02-11: 'feel free to use any and all data we made available'"
     ),
+    ##R-36, the terms half: 293 live `spain_*` rows publish the bare word
+    ##`Custom` with no terms a user can reach. CIS states its conditions
+    ##institution-wide at cis.es/es/condiciones-reutilizacion-datos-del-cis, so
+    ##this is one string for 35 studies rather than 35 decisions -- the study
+    ##itself is already named in `Reference`.
+    ##
+    ##`superseded` and `derived` are both `Custom`: this entry only ever fills
+    ##the terms. A row that has moved to a real licence stops matching and is
+    ##reported instead, as everywhere else here.
+    list(
+        url        = "cis\\.es/",
+        issue      = "#3226",
+        superseded = "Custom",
+        derived    = "Custom",
+        terms      = paste(
+            "Source: Centro de Investigaciones Sociologicas (CIS), Spain",
+            "(https://www.cis.es). CIS data are freely reusable under Ley",
+            "37/2007, de 16 de noviembre, sobre reutilizacion de la informacion",
+            "del sector publico, subject to CIS's general conditions for reuse:",
+            "the sense of the information must not be distorted; the source must",
+            "be cited, in the form \"Origen de los datos: Centro de",
+            "Investigaciones Sociologicas\"; the date of last update must be",
+            "given where the original document states one; it must not be",
+            "indicated, implied or suggested that CIS participates in, sponsors",
+            "or endorses the reuse; and metadata on the update date and the",
+            "applicable reuse conditions must be preserved. This IRW table",
+            "reformats the study's microdata into the IRW data standard; the",
+            "transformation is the IRW's, not CIS's."),
+        why = "CIS publishes institution-wide reuse conditions under Ley 37/2007"
+    ),
     list(
         url        = "osf\\.io/snmqt(/|$|[?#])",
         issue      = "#3226",
@@ -1400,6 +1430,17 @@ apply_license_overrides <- function(biblio, label = "core",
         if (!any(on_url)) next                   ##not in this source's biblio
         want <- tolower(gsub("\\s+", " ", trimws(ov$superseded)))
         hit  <- on_url & lic %in% want
+        ##An entry whose `superseded` and `derived` are the same value -- one
+        ##that only fills terms -- would otherwise match its own output and
+        ##re-log it on every run. Drop the rows where nothing would change, so
+        ##a second pass is a true no-op and the log counts real changes only.
+        same_terms <- if (is.null(ov$terms)) {
+            rep(TRUE, nrow(biblio))
+        } else {
+            !is.na(biblio$Custom_License_Terms) &
+                biblio$Custom_License_Terms == ov$terms
+        }
+        hit <- hit & !(lic == tolower(ov$derived) & same_terms)
         ##A row on the same deposit holding something else: the sheet has moved
         ##on, or a second licence crept in. Report it rather than overwrite it.
         other <- on_url & !(lic %in% want) & lic != tolower(ov$derived)
