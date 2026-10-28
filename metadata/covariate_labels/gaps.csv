@@ -33,6 +33,10 @@ banerjee_2025_arithmetic_school,data/banerjee_2025_arithmetic.py,harvest_empty,t
 coroiu_2018_cses,data/coroiu_2018_scs.py,harvest_empty,the raw source file was not on disk when the harvest ran
 coroiu_2018_phq9,data/coroiu_2018_scs.py,harvest_empty,the raw source file was not on disk when the harvest ran
 ders_valencia_2025,data/ders_valencia_2021.py,harvest_empty,the raw source file was not on disk when the harvest ran
+ding_2014_eri,data/ding_2014_healthcare_workers.py,harvest_empty,"the .sav labels only A3M, a grouped age band the script does not ship; the A1/A2/A3 columns behind its three cov_* carry no value labels"
+ding_2014_mbi,data/ding_2014_healthcare_workers.py,harvest_empty,"the .sav labels only A3M, a grouped age band the script does not ship; the A1/A2/A3 columns behind its three cov_* carry no value labels"
+ding_2014_overcommitment,data/ding_2014_healthcare_workers.py,harvest_empty,"the .sav labels only A3M, a grouped age band the script does not ship; the A1/A2/A3 columns behind its three cov_* carry no value labels"
+ding_2014_sas,data/ding_2014_healthcare_workers.py,harvest_empty,"the .sav labels only A3M, a grouped age band the script does not ship; the A1/A2/A3 columns behind its three cov_* carry no value labels"
 jovanovic_2026_conscientiousness_bfi,data/jovanovic_2026_conscientiousness.py,harvest_empty,the raw source file was not on disk when the harvest ran
 jovanovic_2026_conscientiousness_dass_d,data/jovanovic_2026_conscientiousness.py,harvest_empty,the raw source file was not on disk when the harvest ran
 jovanovic_2026_conscientiousness_panas_na,data/jovanovic_2026_conscientiousness.py,harvest_empty,the raw source file was not on disk when the harvest ran
