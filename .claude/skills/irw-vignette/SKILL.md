@@ -57,8 +57,11 @@ Three things must come from the user, not from a plausible guess:
   the actual content of the vignette; a wrong guess here produces a
   vignette that looks plausible but tests the wrong thing.
 - **Limitations content** — real caveats specific to what the method does
-  and doesn't handle. Not boilerplate ("this is exploratory, not
-  confirmatory" is fine *if true* — confirm it, don't assume it).
+  and doesn't handle. The generic "exploratory, and some of it is wrong"
+  disclaimer is already carried site-wide by `vignettes/_exploratory.qmd`
+  (see step 5), so do not restate it here: this section is for the
+  weaknesses only this page has (how many tables the key contrast actually
+  rests on, whether they are independent samples, what was never checked).
 
 Also ask for 1-3 "known-good" pilot tables if the genre calls for one (a
 case with an obvious expected answer, e.g. `dimensionality_compute.R`'s
@@ -125,9 +128,38 @@ Key points already baked into the template:
 - `cache-warning` and `pilot-warning` callout chunks (verbatim pattern,
   just re-point the `Rscript` path) so a page can be pushed for review
   before, or during, a full multi-hour batch.
-- AI-disclosure `callout-note` — keep it (this skill is doing the
-  authoring), delete it only if a human is writing this one largely
-  by hand.
+- **Two standing notes, which say different things.** The AI-disclosure
+  `callout-note` is a fact about *process* — who did the work. Keep it (this
+  skill is doing the authoring); delete it only if a human is writing this
+  one largely by hand. The `{{< include _exploratory.qmd >}}` line below it
+  is a claim about *warrant* — what the result is worth — and it applies
+  whoever wrote the page. Keep it on any page that draws a substantive
+  conclusion from a convenience set of IRW tables; drop it only where the
+  deliverable is a procedure (`cfa.qmd`, `imv.qmd`, `irt_python.qmd`) or a
+  self-contained simulation (`diffsim.qmd`), since the note's claims about
+  post-hoc question selection and uncorrected multiplicity are then false.
+  The text lives in one shared file: never fork it for a single page, and
+  never substitute one note for the other.
+
+  If the target repo has no `vignettes/_exploratory.qmd` yet, create it with
+  exactly this content and nothing else:
+
+  ```markdown
+  ::: {.callout-important appearance="simple"}
+  **Exploratory.** I pick these questions after looking at the data; the tables
+  are whatever IRW happens to hold, not a sample of anything; and nothing here
+  corrects for the many comparisons a corpus-wide sweep involves. So treat what
+  follows as suggestive. Some of it is also simply wrong: across this many
+  tables there will be mislabelled columns, fits that did not converge, and
+  coding errors that survived review. If a result matters to you, read the
+  compute script and refit it yourself — and
+  [tell me what you find](https://github.com/ben-domingue/irw/issues).
+  :::
+  ```
+
+  Quarto's freeze does not reliably notice when an *included* file changes, so
+  editing this shared text leaves it stale on every page that is not
+  re-rendered. Changing it means re-rendering the pages that include it.
 - Named palette variables (`irw_blue`, `irw_red`, `irw_grey`) — never
   scatter literal hex strings through the page.
 - `ggplot2` + `ggplotly(tooltip = "text")` with a `text=` aesthetic
