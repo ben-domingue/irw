@@ -214,13 +214,49 @@ class CorrectionsTest(unittest.TestCase):
 class WithdrawalsTest(unittest.TestCase):
     def test_whole_withdrawal_still_live_is_a_hit(self):
         chk = crc.check_withdrawals_live(
-            [{"table": "t", "kind": "whole", "reason": "rights"}], {"t"})
+            [{"table": "t", "kind": "whole", "reason": "rights"}], {"t"}, set())
         self.assertEqual(chk.hits, ["t (rights)"])
 
     def test_partial_withdrawal_is_expected_to_be_live(self):
         """A partial withdrawal removes rows and leaves the table."""
         chk = crc.check_withdrawals_live(
-            [{"table": "t", "kind": "partial", "reason": "personal_data"}], {"t"})
+            [{"table": "t", "kind": "partial", "reason": "personal_data"}], {"t"}, set())
+        self.assertEqual(chk.hits, [])
+
+    def test_a_live_itemtext_withdrawal_is_a_hit(self):
+        """The case this check was blind to until 2026-10-28 (#3224).
+
+        `*__items` tables live in the irw_text shards, and those were not listed
+        at all, so `live_names` could not contain the name and an item-text
+        withdrawal that never took effect could not be reported. Two real ones
+        were serving register-blocked instrument wording when this was found.
+        """
+        chk = crc.check_withdrawals_live(
+            [{"table": "foo__items", "kind": "whole", "reason": "rights"}],
+            set(), {"foo__items"})
+        self.assertEqual(chk.hits, ["foo__items (rights)"])
+
+    def test_an_itemtext_withdrawal_that_took_effect_is_clean(self):
+        chk = crc.check_withdrawals_live(
+            [{"table": "foo__items", "kind": "whole", "reason": "rights"}],
+            set(), {"bar__items"})
+        self.assertEqual(chk.hits, [])
+
+    def test_the_two_pools_are_not_interchangeable(self):
+        """An item-text name is looked up in the item-text pool and nowhere else.
+
+        Checking `*__items` against `live_names` would be the mirror of the old
+        bug: the response shards never hold an `__items` table, so every
+        item-text withdrawal would read as effective no matter what is served.
+        """
+        chk = crc.check_withdrawals_live(
+            [{"table": "foo__items", "kind": "whole", "reason": "rights"}],
+            {"foo__items"}, set())
+        self.assertEqual(chk.hits, [])
+
+    def test_a_response_withdrawal_ignores_the_itemtext_pool(self):
+        chk = crc.check_withdrawals_live(
+            [{"table": "t", "kind": "whole", "reason": "rights"}], set(), {"t"})
         self.assertEqual(chk.hits, [])
 
     def test_withdrawn_table_still_in_biblio_is_a_hit(self):
@@ -345,6 +381,10 @@ class FamilyCoverageTest(unittest.TestCase):
         tables = {
             "item_response_warehouse": [f"t{i}" for i in range(crc.MIN_LIVE_TABLES + 1)],
             "irw_conjoint": conj,
+            # The item-text shard has to clear its own floor, or `gather` treats
+            # the listing as failed rather than as an empty shard (#3224).
+            "irw_text": [f"t{i}__items"
+                         for i in range(crc.MIN_LIVE_ITEMTEXT_TABLES + 1)],
         }
 
         def fake_live(dataset):
@@ -363,6 +403,7 @@ class FamilyCoverageTest(unittest.TestCase):
              mock.patch.object(crc, "declared_datasets",
                                return_value={"core": ["item_response_warehouse"],
                                              "conj": ["irw_conjoint"],
+                                             "text": ["irw_text"],
                                              "nom": [], "comp": [], "sim": [], "rank": []}), \
              mock.patch.object(crc, "read_csv_rows",
                                side_effect=lambda p: declared_rows.get(p.name, [])):
