@@ -580,6 +580,8 @@ cordellieri_2026_scedd,core,https://zenodo.org/api/records/22375285/files/SCEDD_
 cordova_2026_self_efficacy,core,https://zenodo.org/api/records/20418454/files/DATOS%20PNP%20(2).xlsx/content,2026-10-05
 cordova_2026_who5,core,https://zenodo.org/api/records/20418454/files/DATOS%20PNP%20(2).xlsx/content,2026-10-05
 cordova_2026_workload,core,https://zenodo.org/api/records/20418454/files/DATOS%20PNP%20(2).xlsx/content,2026-10-05
+costa_2020_punishment,core,https://dataverse.harvard.edu/api/access/datafile/3851890,2026-10-27
+costa_2020_sexism,core,https://dataverse.harvard.edu/api/access/datafile/3851890,2026-10-27
 costa_2023_research_ethics,conj,https://osf.io/download/abgtn/,2026-10-09
 cozza_2025_party_leaders,conj,https://dataverse.harvard.edu/api/access/datafile/11636170,2026-10-09
 crabtree_2026_civilian_violence,conj,none,2026-10-09
@@ -1918,6 +1920,7 @@ marian_2023_thoughts,core,https://zenodo.org/records/22692208/files/0052_marian_
 markgraf_2024_credit_welfare,conj,https://dataverse.harvard.edu/api/access/datafile/7036219,2026-10-08
 markova_2025_gaais,core,https://zenodo.org/records/16745477/files/variable_codebook.xls,2026-10-18
 markova_2025_mails,core,https://zenodo.org/records/16745477/files/variable_codebook.xls,2026-10-18
+marsalek_2026_ai_attitudes,core,https://zenodo.org/records/23389256/files/SI_data_code.xlsx,2026-10-27
 martin_2021_corruption,conj,https://dataverse.harvard.edu/api/access/datafile/3374460,2026-10-07
 martin_2021_minority_candidates,conj,none,2026-10-09
 martinet_2025_glyphosate_policy,conj,https://entrepot.recherche.data.gouv.fr/api/access/datafile/616391,2026-10-14
@@ -2883,6 +2886,10 @@ rumangkit_2026_dm_eo,core,none,2026-10-18
 rumangkit_2026_dm_mmp,core,none,2026-10-18
 rumangkit_2026_dm_pe,core,none,2026-10-18
 rumangkit_2026_dm_pi,core,none,2026-10-18
+rumangkit_2026_ecotourism_experience,core,none,2026-10-27
+rumangkit_2026_ecotourism_imc,core,none,2026-10-27
+rumangkit_2026_ecotourism_intention,core,none,2026-10-27
+rumangkit_2026_ecotourism_satisfaction,core,none,2026-10-27
 rumangkit_2026_entrepreneurial_marketing,core,none,2026-10-18
 rumangkit_2026_kk,core,none,2026-10-18
 rumangkit_2026_ky,core,none,2026-10-18
@@ -2993,6 +3000,17 @@ seitz_2024_artist_vaccine_job,conj,https://dataverse.harvard.edu/api/access/data
 sejna_2025_academic_self_concept,core,none,2026-10-09
 sejna_2025_saqc,core,none,2026-10-09
 sejna_2025_social_integration,core,none,2026-10-09
+senge_2025_app_facil_conditions,core,https://zenodo.org/records/13772955/files/Survey-xFoWa.pdf,2026-10-27
+senge_2025_app_intention,core,https://zenodo.org/records/13772955/files/Survey-xFoWa.pdf,2026-10-27
+senge_2025_app_review_use,core,https://zenodo.org/records/13772955/files/Survey-xFoWa.pdf,2026-10-27
+senge_2025_app_usefulness,core,https://zenodo.org/records/13772955/files/Survey-xFoWa.pdf,2026-10-27
+senge_2025_bbd_attitudes,core,https://zenodo.org/records/13772955/files/Survey-xFoWa.pdf,2026-10-27
+senge_2025_disposal_frequency,core,https://zenodo.org/records/13772955/files/Survey-xFoWa.pdf,2026-10-27
+senge_2025_env_awareness,core,https://zenodo.org/records/13772955/files/Survey-xFoWa.pdf,2026-10-27
+senge_2025_food_waste_talk,core,https://zenodo.org/records/13772955/files/Survey-xFoWa.pdf,2026-10-27
+senge_2025_shopping_planning,core,https://zenodo.org/records/13772955/files/Survey-xFoWa.pdf,2026-10-27
+senge_2025_storage,core,https://zenodo.org/records/13772955/files/Survey-xFoWa.pdf,2026-10-27
+senge_2025_tech_affinity,core,https://zenodo.org/records/13772955/files/Survey-xFoWa.pdf,2026-10-27
 senninger_2023_mp_eu_oversight,conj,none,2026-10-07
 sensorimotor_repetto_2022,core,none,2026-10-13
 septiani_2026_attitude,core,none,2026-10-18

@@ -59,18 +59,32 @@ merged, and the 552-row `tags/tags_auto.csv` merge is PR #3133.
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
-## Repos sweep 2026-10-27 (mode 3) — 5 good rows + 83 leads UNWORKED
+## Repos sweep 2026-10-27 (mode 3) — 18 tables staged, AWAITING UPLOAD
 
-Discovery and triage ran overnight 2026-10-27; nothing processed, nothing
-uploaded. Full numbers in `BATCH_LOG.md`'s 2026-10-27 entry.
+Discovery, triage and the `good`-row processing pass all ran overnight
+2026-10-27. Full numbers in `BATCH_LOG.md`'s 2026-10-27 and 2026-10-27b
+entries. The five `good` rows are **done**: four shipped, one rejected on
+content (MOFWaste, `10.5281/zenodo.14999619` — nominal canteen multiple-choice,
+no item battery).
 
-- [ ] **Work the 5 `good` rows.** `10.7910/DVN/MP3HQU` (CC0, N=2,806, 5 items),
-  `10.5281/zenodo.13772955` (CC BY, N=520, 69 items),
-  `10.5281/zenodo.23389256` (CC BY, N=572, 21 items),
-  `10.5281/zenodo.14999619` (CC BY, N=182, 2 items),
-  `10.5281/zenodo.22744099` (CC BY, N=100, 18 items). The last two want the
-  file opened before a script is written — a 2-item block, and N exactly at the
-  100 floor.
+- [ ] **18 response tables (68,802 responses) + 8 item text tables need
+  uploading.** `irw_output/` and `itemtext_output/`, response tables first.
+  `irw_output/MANIFEST.txt` lists them. Costa 2020 x2 (CC0), Marsalek 2026 x1,
+  Senge 2025 x11, Rumangkit 2026 x4 (all CC BY 4.0). 19 `dictionary_auto.csv`
+  rows are staged for them and reach biblio on the first pipeline run after
+  release.
+- [ ] **Stamp `uploaded` in `itemtext_provenance.csv`** for the 8 shipped item
+  text tables once Ben confirms — edit the bytes in place, never a whole-file
+  rewrite.
+- [ ] **One issues-page entry owed, in the datapages/irw repo:**
+  `senge_2025_disposal_frequency` — the deposit's questionnaire documents the
+  five options on a -2..2 scale and the data codes them 1..5, so the labels are
+  attached to the table's own 1-5 in order. `marsalek_2026_ai_attitudes` also
+  carries a `public_note` (its English item text is IRW-generated and the Czech
+  response anchors are unpublished), which forces a callout.
+- [ ] **No covariate-label harvest is owed by this batch** — none of the four
+  scripts reads a `.sav` or `.dta`; the labelled covariates were mapped from
+  published codebooks inside the scripts.
 - [ ] **83 `unworked` leads** in `leads/repos_leads_2026-10-27.csv`: 23
   step-2b `worth_retrying`, 32 `recoverable_format`, 8 `aggregate_continuous`,
   and the retryable download failures (HTTP 400/401 + reader/encoding errors).

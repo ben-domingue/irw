@@ -22907,3 +22907,133 @@ The download-failure classification, for the record (the reopen command is in th
 | HTTP 401 (dryad 4, datacite 2) | 6 — Dryad needs no auth, so this is a resolver defect |
 | HTTP 400 (dataverse) | 2 |
 | reader/encoding errors (dataverse 5, zenodo 2) | 7 — `recoverable_format` wearing a `download_failed` label |
+
+## 2026-10-27b — the sweep's five `good` rows worked: 18 tables, 68,802 responses, 8 item text tables
+
+All five `good` rows from the 2026-10-27 sweep taken to a decision. Four
+shipped, one rejected on content. Nothing uploaded.
+
+### 1. Costa 2020, #MeToo scandals — 2 tables, 31,798 responses
+
+`10.7910/DVN/MP3HQU` (CC0 1.0, Harvard Dataverse), the replication data for
+Costa, *Research & Politics* 7(3), `10.1177/2053168020941727`. Downloaded with
+`format=original`, not the `.tab`.
+
+- `costa_2020_sexism` — the same four items pretest and posttest, so this is a
+  `wave` table: 22,448 rows, 2,806 ids.
+- `costa_2020_punishment` — 5 study-authored items on what the accused senator
+  should do, asked only in the two scandal arms: 9,350 rows, 1,870 ids.
+
+`treat` is 1 for the two scandal arms and 0 for control; `cov_story_type` keeps
+which story was shown and `cov_senator_party` the second randomised factor (the
+senator's party), because `treat` can only hold one. The deposit's 0-10
+favorability and vote-intention outcomes are **not** shipped: two items that are
+not a scale.
+
+**Item text: punishment shipped, sexism HELD.** `readme.pdf` in the deposit is a
+variable-by-variable codebook quoting every stem and the 1-5 anchors, so the
+punishment battery ships `data_labels`-grade text — except the basis is
+`paper_explicit`, so a route was run and recorded `PARTIAL`
+(`polarity_structure`: the two "no further action" stems correlate +0.46 and
+−0.53/−0.40 against the two sanction stems, which correlate +0.56; nothing
+separates item 1 from item 3). The four sexism items are **Glick & Fiske's
+Ambivalent Sexism Inventory hostile-sexism subscale**, read off the stems and
+searched verbatim — the deposit's CC0 covers Costa's material, not the ASI — so
+a `hold` row went into `itemtext/instrument_rights_register.csv` (the instrument
+was absent from it; nothing would have warned).
+
+### 2. Marsalek et al. 2026, AI in the Czech classroom — 1 table, 4,004 responses
+
+`10.5281/zenodo.23389256` (CC BY 4.0). `marsalek_2026_ai_attitudes`: the seven
+five-point attitude statements, 572 secondary-school students, 11 covariates.
+The other 60 columns are multi-select AI-tool and purpose **slots** (one column
+per selection, values are content-analysis category codes) plus the open text
+behind them — not item responses, and the script asserts the accounting.
+
+**Item text shipped.** The deposit's own `codebook` sheet ties each Czech
+wording to a variable name and the shipped item codes ARE those names, so
+`data_labels`/`NOT_NEEDED`. Two things are deliberate: `item_text` is the
+administered Czech with an **IRW-generated** English `item_text_translated`
+(disclosed, and the table carries a `public_note` for it), and `option_text` is
+blank on all 35 rows because the Czech anchor wording is not published anywhere
+in the deposit — README.md gives the scale only as English prose. Checked both
+label levels: the `codebook` sheet has every stem, `codebook_values` has value
+labels for the covariate questions and **no row for any `statement_*`
+variable**.
+
+The one QC warning is a 63% ceiling on "AI can generate incorrect information",
+which is substantively expected, not imputation: every value is an in-range
+integer and nothing is fractional.
+
+### 3. Senge et al. 2025, food-waste app — 11 tables, 31,200 responses
+
+`10.5281/zenodo.13772955` (CC BY 4.0), 520 German consumers, semicolon-delimited
+`Clean_dataset.csv`. The deposit publishes `Survey-xFoWa.pdf`, which numbers
+every battery, and the dataset's column prefixes follow it exactly, so the file
+splits into its own eleven batteries (`v_18` is two: perceived usefulness 7.3 and
+facilitating conditions 7.4). Dropped `v_15_k_Triffteherzu` and
+`v_16_QuizfrageMHD`, both single-valued.
+
+**Item text shipped for 6 of the 11, and the other 5 are instrument-rights
+holds.** The deposit states that its questionnaire *is* a translation — the
+administration was German and the German original is not deposited — so the six
+ship as `translated_substitute` with `language=German`, the study's own English
+in the base fields, `_translated` empty, and the deposit named as the
+translation source. Mapping is `VERIFIED` by a route worth naming because it is
+not statistical: every source column name carries a German mnemonic for its own
+item (`v_8_a_Einkaufsliste` = shopping list, `v_11_e_Aufschitt` = cold cuts), so
+each item is pinned individually and independently of order.
+
+The five holds, each identified by reading the stems rather than by the
+deposit's label:
+
+| table | what the stems are |
+|---|---|
+| `senge_2025_env_awareness` | the **GREEN scale** (green consumption values, Haws, Winterich & Naylor 2014), all six items. Registered `hold`. |
+| `senge_2025_tech_affinity` | the **TA-EG** enthusiasm and competence subscales (Karrer et al. 2009), nine for nine including both reverse-keyed competence items. Registered `hold`, identification marked *probable*: only the study's English translation is published, so the German original could not be matched verbatim. |
+| `senge_2025_app_usefulness`, `_app_facil_conditions`, `_app_intention` | UTAUT-shaped; no named instrument could be established, so no register row either — recorded in provenance instead. |
+
+`senge_2025_disposal_frequency` is the one table in the batch earning a public
+issues-page note: the questionnaire documents its five options on a −2..2 scale
+(Never … daily) and the data file codes them 1..5, so the option labels are
+attached to the table's own 1-5 in the same order.
+
+Two QC concentration warnings (82% "never" on canned food; 63% agree on "I try
+not to throw food away to save money") are substantive, not imputation.
+
+### 4. Rumangkit 2026, ecotourism — 4 tables, 1,800 responses
+
+`10.5281/zenodo.22744099` (CC BY 4.0). Four batteries on one five-point scale
+from the same 100 respondents: experience (5 items), integrated marketing
+communication (5), satisfaction (4), intention (4). **N is exactly 100, the
+floor.** Sanity-checked before shipping rather than taken on the `good` flag: no
+duplicate response rows, within-battery correlations 0.54-0.63, between-battery
+near zero.
+
+**Item text not shipped, and this is the cheap kind of skip to record:** the
+deposit is one spreadsheet, one sheet, bare positional codes (`ECE1`..`ECI4`),
+no codebook, no README and no linked publication — only the file name points at
+one (AJHTL). Nothing in the deposit carries the wording.
+
+### 5. MOFWaste — REJECTED on content
+
+`10.5281/zenodo.14999619` (CC BY 4.0, 182 Portuguese schoolchildren) is a Google
+Forms canteen survey: twelve columns of nominal multiple-choice text answers
+(which school, what was on the tray, where the waste happens) with no item
+battery on any common scale. The triage's "2 items" were an age field and a
+days-per-week count. Not item-response data; no script written.
+
+### Housekeeping
+
+`irw_output/MANIFEST.txt` was **stale** — it still described the 2026-10-22
+Luettgau batch, whose CSVs had already been uploaded and removed. Preserved as
+`MANIFEST_2026-10-22_uploaded.txt` and regenerated for this batch. Worth
+checking at the start of every batch: the manifest outlives the files it
+describes.
+
+Gates run: `irw-validate --profile upload` on all 18 response tables (18
+conform, 18 pass the upload gate, 4 warnings, all explained above);
+`normalize_nulls.R`, then `validate_items.R --resp-csv` per item text table (8
+PASS on both item and resp sets), then `audit_batch.R --resp-dir` (8/8 PASS, no
+anomalies), then `irw-validate` on the item files (8 clean).
+`itemtext_output/` holds nothing but `*__items.csv`.
