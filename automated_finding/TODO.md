@@ -59,6 +59,33 @@ merged, and the 552-row `tags/tags_auto.csv` merge is PR #3133.
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## Repos sweep 2026-10-27 (mode 3) — 5 good rows + 83 leads UNWORKED
+
+Discovery and triage ran overnight 2026-10-27; nothing processed, nothing
+uploaded. Full numbers in `BATCH_LOG.md`'s 2026-10-27 entry.
+
+- [ ] **Work the 5 `good` rows.** `10.7910/DVN/MP3HQU` (CC0, N=2,806, 5 items),
+  `10.5281/zenodo.13772955` (CC BY, N=520, 69 items),
+  `10.5281/zenodo.23389256` (CC BY, N=572, 21 items),
+  `10.5281/zenodo.14999619` (CC BY, N=182, 2 items),
+  `10.5281/zenodo.22744099` (CC BY, N=100, 18 items). The last two want the
+  file opened before a script is written — a 2-item block, and N exactly at the
+  100 floor.
+- [ ] **83 `unworked` leads** in `leads/repos_leads_2026-10-27.csv`: 23
+  step-2b `worth_retrying`, 32 `recoverable_format`, 8 `aggregate_continuous`,
+  and the retryable download failures (HTTP 400/401 + reader/encoding errors).
+  The 70 `blocked_access` rows (HTTP 403/404) and 3 `blocked_licence`
+  (`cc-by-nc-nd`, ND stops) need nothing.
+- [ ] **Decide whether to keep querying `surf` (DataverseNL).** Two sweeps
+  running: 237 of 1,332 candidates on 2026-10-27 and 214 of 1,278 on
+  2026-10-21, with zero readable files between them. Measure how many `surf`
+  candidates have ever reached `good`/`worth_retrying` in
+  `repo_triage_seen_keys.csv` before deciding; a sixth of each sweep's
+  candidate budget is riding on it.
+- [ ] **Dryad file downloads 401 (6 rows incl. datacite).** Dryad needs no
+  auth for file downloads, so this is a resolver defect, not a permission.
+  Noted on 2026-10-21 as well and still unfixed.
+
 ## Repos sweep 2026-10-21 — 13 tables staged, AWAITING UPLOAD
 
 Full write-up in `BATCH_LOG.md` (2026-10-21 and 2026-10-21b). All ten `good`

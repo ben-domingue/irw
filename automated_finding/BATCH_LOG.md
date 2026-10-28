@@ -22830,3 +22830,80 @@ byte-identical tables. `build.py` includes LIVE tables only (those in
 `metadata/metadata.csv`), so the labels land on the first build after these
 tables are released; the log is cached until then. The other seven scripts are
 genuinely clear: none reads a `.sav` or `.dta`.
+
+## 2026-10-27 — repos discovery sweep (mode 3): 15 new terms x 9 languages
+
+Discovery and triage only; nothing processed, nothing uploaded.
+
+### The sweep
+
+132 term variants, all verified absent from `search_terms_log.csv` before the
+run (10,352 -> 10,484 rows). Three of the planned 135 — the German, Chinese and
+Dutch driving-behaviour variants — were already logged and were dropped rather
+than re-run, so that topic went out in 6 of 9 languages.
+
+Territory deliberately away from the last three sweeps (10-19 anxiety/wellbeing,
+10-20b cognitive tasks and clinical-professional instruments, 10-21
+social-political attitudes and tech/consumer/organizational): health-professional
+and clinical instruments (clinical reasoning, medical knowledge test, patient
+satisfaction questionnaire, nurse burnout), women's-health and dietary
+instruments (food frequency questionnaire, breastfeeding attitudes, menstrual
+attitudes), language and cognition (intercultural sensitivity, language aptitude,
+working memory span task), plus adult hope scale, sexual attitudes scale,
+political knowledge quiz, doping attitudes and the driving behaviour
+questionnaire.
+
+**1,332 candidates** (zenodo 397, dataverse 295, surf 237, figshare 221,
+scholars_portal 94, datacite 50, mendeley 18, osf 11, dryad 9); 5,719 further
+hits were dropped by `_UNREACHABLE_DOI_PREFIXES` (10.3886 ICPSR, 10.6141) before
+they reached the file. 815 were excluded as already in
+`repo_triage_seen_keys.csv`, leaving **517 triaged**: 5 good, 136
+human_assistance, 235 no_usable_file, 82 download_failed, 27 not_item_response,
+19 below_min_n, 3 license_restricted, 3 error.
+
+Step 2b on the 136: 49 not_item_response, 32 recoverable_format, 24
+human_review, 23 worth_retrying, 8 aggregate_continuous, 0 conj. Both
+bookkeeping lines appeared and both were verified: **136 refined flags recorded**
+in `repo_triage_seen_keys.csv`, and the **24 human_review rows archived** to
+`human_review/human_review_zenodo_2026-10-27.csv`. 85 download_failed/error
+candidates were deliberately left OUT of the seen ledger by the script itself, so
+a later run retries them — that is the #3077/#2203 defect being handled at
+source rather than worked around in a leads file.
+
+`leads/repos_leads_2026-10-27.csv` holds **156 rows** — 83 `unworked`, 70
+`blocked_access`, 3 `blocked_licence` (all three `cc-by-nc-nd`: NC proceeds, ND
+stops).
+
+### The 5 `good` rows
+
+| doi | title | licence | N | items |
+|---|---|---|---|---|
+| 10.7910/DVN/MP3HQU | Partisanship and sexism in reactions to #MeToo scandals | CC0 | 2,806 | 5 |
+| 10.5281/zenodo.13772955 | Consumer attitudes to a food-waste smartphone app | CC BY | 520 | 69 |
+| 10.5281/zenodo.23389256 | AI in the classroom: usage, attitudes, risks among school students | CC BY | 572 | 21 |
+| 10.5281/zenodo.14999619 | MOFWaste root-cause-analysis questionnaire | CC BY | 182 | 2 |
+| 10.5281/zenodo.22744099 | Ecotourism experiences / satisfaction / intention | CC BY | 100 | 18 |
+
+The last two are thin — a 2-item block, and an N of exactly 100 at the floor —
+and want a look at the file before a script is written, not an assumption that a
+`good` flag means shippable.
+
+### `surf` is still spending a sixth of the candidate budget for nothing
+
+The 10-21 sweep flagged this as a connector question rather than a bug, and this
+sweep reproduces it: **237 of 1,332 candidates came from `surf` (DataverseNL),
+and 33 returned HTTP 403** with not one readable file among the rest. Two sweeps
+in a row is enough to make it worth measuring properly — how many `surf`
+candidates have *ever* reached a `good` or `worth_retrying` verdict — before
+continuing to query it.
+
+The download-failure classification, for the record (the reopen command is in the
+10-21 entry):
+
+| class | n |
+|---|---|
+| HTTP 403 (surf 33, dataverse 22, scholars_portal 3) | 58 |
+| HTTP 404 (figshare 8, dataverse 4) | 12 |
+| HTTP 401 (dryad 4, datacite 2) | 6 — Dryad needs no auth, so this is a resolver defect |
+| HTTP 400 (dataverse) | 2 |
+| reader/encoding errors (dataverse 5, zenodo 2) | 7 — `recoverable_format` wearing a `download_failed` label |
