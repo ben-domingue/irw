@@ -1647,6 +1647,7 @@ hyatt_2023_aggression_s3_daq,longitudinal,rule:meta:longitudinal
 hyatt_2023_aggression_s3_srp4,dark_triad,rule:cname:dark triad|machiavell|narciss|psychopath
 hyatt_2023_aggression_s3_srp4,longitudinal,rule:meta:longitudinal
 hyatt_2023_aggression_s3_ssis,longitudinal,rule:meta:longitudinal
+hypersensitive_narcissism,dark_triad,rule:cname:dark triad|machiavell|narciss|psychopath
 ibrahim_2015_bfi,bfi44,name
 iclr_2024_peer_review,rater_mediated,rule:var:rater
 idas_machado2024,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
