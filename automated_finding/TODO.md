@@ -40,12 +40,23 @@ SAPA's 1 and Akter's 7 -- plus 18 item text tables. (GPO-AI's three
 2026-10-29f, at Ben's prompting; see BATCH_LOG.) One MANIFEST covers all
 four, `irw_output/MANIFEST_2026-10-29b.txt`.
 
-- [ ] **Everything in `irw_output/` and `itemtext_output/` needs uploading.**
-  **Response tables first.** All 34 pass `irw-validate --profile upload`; the
-  18 item text tables pass the full gate chain (17 PASS, 1 WARN, explained in
-  the manifest). Dictionary and tag rows are staged for all 34, so nothing
-  needs pasting. Stamp `uploaded=` on the provenance and mapping rows only
-  once Ben confirms.
+- [x] **UPLOADED 2026-10-29 (ben-domingue).** 34 response tables, 8,464,014
+  responses, and 18 item text tables. `uploaded=2026-10-29` is stamped on the
+  18 shipped `itemtext_provenance.csv` rows and the 18
+  `itemtext/mapping_verification.csv` rows; the 16 rows recorded NOT SHIPPED
+  keep a blank `uploaded`, because nothing went up for them. If any individual
+  table did not in fact go up, that stamp is the thing to correct. The staging
+  folders are empty again.
+
+- [ ] **A RELEASE is owed before any of this reaches `metadata.csv`** -- and
+  with it the weekly pipeline run, which is what carries the 34 staged
+  dictionary rows and 34 tag rows into biblio and tags. Nothing here needs
+  pasting.
+
+- [ ] **PR #3312 still needs merging.** It holds the three processing scripts,
+  the dictionary/tag/provenance/mapping rows and the leads-file verdicts for
+  everything just uploaded. Until it merges, the tables are live and
+  undescribed.
 
 - [ ] **A covariate-label harvest is owed for `akter_2026_*` after the release,
   and ONLY for those seven.** That script reads an SPSS `.sav` and ships ten
