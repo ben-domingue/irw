@@ -23038,7 +23038,7 @@ PASS on both item and resp sets), then `audit_batch.R --resp-dir` (8/8 PASS, no
 anomalies), then `irw-validate` on the item files (8 clean).
 `itemtext_output/` holds nothing but `*__items.csv`.
 
-## 2026-10-28b — the 10-27 and 10-21 leads re-triaged, and 35 of the 106 worked: 45 tables, 464,389 responses
+## 2026-10-28b — the 10-27 and 10-21 leads re-triaged, and 36 of the 106 worked: 46 tables, 474,185 responses
 
 Nothing uploaded. Ben asked for a discovery sweep *and* for backlogged
 triage/leads work in the same session; this is the leads half. The sweep's own
@@ -23075,7 +23075,7 @@ pointing at it, so there is one live place per lead rather than three.
 ### Eleven worked, seven shipped (filtered to 100 <= N <= 50,000 and 8 <= items <= 700, then by volume)
 
 Nine are tabled here; the last two were worked after this table was written and
-are at the end of the entry. **Batch total: 45 tables, 464,389 responses.**
+are at the end of the entry. **Batch total: 46 tables, 474,185 responses.**
 
 | deposit | licence | outcome |
 |---|---|---|
@@ -23754,6 +23754,35 @@ geographic ruling — made the day *before* that table shipped — is what this
 batch used to drop a US state from `teriba_2026_*` and county/state from
 `gries`'s own would-be replacement. Whether a live table carrying a state wants
 correcting is a corpus-trust call, not a lead-working one.
+
+### A fifteenth: Soressa 2024 — the batch's cleanest item text
+
+`10.7910/DVN/2BD1HP` (CC0 1.0), 316 members of a community living near dams.
+`soressa_2024_dam_attitudes`, 31 items, 9,796 responses, **plus 155 item text
+rows**. **Batch total: 46 tables, 474,185 responses from 15 deposits.**
+
+Why this one ships item text where most of the batch held it: the items are the
+study's **own** dam-specific questions ("Lose of grazing and agricultural
+land", "Increases availability of recreational facilities and entertainment"),
+matching no published scale, so the deposit's CC0 is the wording's licence and
+there is no third-party instrument to rule on. Every one of the 31 variables
+carries its full English wording as a variable label and all five anchors as
+value labels, and both the processing script and the generator assert that
+rather than assuming it — all labels non-empty, all 31 DISTINCT, one shared
+five-anchor set.
+
+The shared STEM is not in the file. The labels are bare predicates that plainly
+continued a question the deposit does not record, so `instructions` and
+`section_prompt` are left **empty** rather than invented.
+
+**The response-range warnings are the interesting part.** Observed values differ
+by block — the positive-impact items run 1-4 and the negative-impact items 3-5 —
+so `run_qc` reports `resp_scale_mixed`. That is not two scales: the value labels
+define 1-5 for every item, and what the data show is a community that agrees
+with the harms and disagrees with the benefits. The documented set goes to
+`run_qc` as `permitted_values` and the docstring says what remains and why,
+rather than the warning being explained away. Same for `multi_scale` on the
+seven prefixes, which are the instrument's own nine dimensions.
 
 ### The `surf` (DataverseNL) question, measured and answered
 
