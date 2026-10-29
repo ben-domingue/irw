@@ -23038,7 +23038,7 @@ PASS on both item and resp sets), then `audit_batch.R --resp-dir` (8/8 PASS, no
 anomalies), then `irw-validate` on the item files (8 clean).
 `itemtext_output/` holds nothing but `*__items.csv`.
 
-## 2026-10-28b — the 10-27 and 10-21 leads re-triaged, and 14 of them worked: 34 tables, 383,408 responses
+## 2026-10-28b — the 10-27 and 10-21 leads re-triaged, and 16 of them worked: 37 tables, 401,764 responses
 
 Nothing uploaded. Ben asked for a discovery sweep *and* for backlogged
 triage/leads work in the same session; this is the leads half. The sweep's own
@@ -23075,7 +23075,7 @@ pointing at it, so there is one live place per lead rather than three.
 ### Eleven worked, seven shipped (filtered to 100 <= N <= 50,000 and 8 <= items <= 700, then by volume)
 
 Nine are tabled here; the last two were worked after this table was written and
-are at the end of the entry. **Batch total: 34 tables, 383,408 responses.**
+are at the end of the entry. **Batch total: 37 tables, 401,764 responses.**
 
 | deposit | licence | outcome |
 |---|---|---|
@@ -23485,6 +23485,41 @@ but on its page for the **SMS-II**, the *revised* scale, which is a different
 instrument. That is the 2026-09-04 "two pages, two terms" shape exactly. If CSDT
 also distributes the SMS-28 itself, this becomes a `ship`; and since the
 administration was Chinese, the 2026-09-08 ruling would then govern what ships.
+
+### An eleventh: Wan Sulaiman 2023 — 3 tables, and a deposit that is on figshare twice
+
+`10.6084/m9.figshare.23964495.v1` (CC BY 4.0), 353 Saudi Arabian university
+students. `wan_sulaiman_2023_resilience` (23 items, 1-5), `_depression` (18,
+0-3) and `_cyberbullying` (11, 1-5), 18,356 responses. **Batch total: 37
+tables, 401,764 responses from 11 deposits.**
+
+**The same file is deposited twice and both copies surfaced as separate
+candidates in this one triage.** figshare `23964495` ("new
+data-Cyberbullying, resilience and depression.xlsx") and `23977905` ("Excel
+Data: Cyberbullying, resilience and depression") carry a file of the same name,
+the same 92,655 bytes and the same MD5
+`063e8a222ddd9ca3b89cf56b4bce7a3a`. Shipped once; the second lead row is marked
+`rejected_content` as a duplicate with the MD5 recorded, so it cannot come back
+as a second dataset. This is the `10.7717/peerj.16295` double-ship of
+2026-08-12 in a different shape — there, the same DOI arrived twice by two
+routes; here, one dataset has two DOIs — and it is why the MD5 goes in the lead
+note rather than just "duplicate".
+
+**No instrument is named for any of the three, on purpose.** The deposit is a
+bare `.xlsx` — a format with no label level at all — its columns are `R1p..R23s`,
+`CB1..CB11`, `D1..D18`, and the figshare record cites **no** article
+(`resource_doi` is null) and names no instrument in its description. A 23-item
+five-factor resilience measure and an 18-item 0-3 depression screener are both
+recognisable *shapes*, and that is not an identification. Guessing would put a
+wrong name on the table and, worse, invite a wrong rights ruling against it
+later, so all three provenance rows say `unknown`/`unknown` and record that the
+paper has to be found first.
+
+What the script does establish rather than assume: the resilience block's item
+numbering runs **1..23 exactly once** across the five suffixes, which is what
+says the suffixes partition one instrument rather than marking five that happen
+to share a prefix. The codes keep the source names so the subscale structure
+survives for whoever does identify it.
 
 ### The `surf` (DataverseNL) question, measured and answered
 
