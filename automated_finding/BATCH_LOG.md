@@ -24504,3 +24504,163 @@ the gate was dropping rather more than the 38% quoted, and now drops 43%.
 
 `is_relevant()` itself is untouched; this is vocabulary and the matcher.
 11 new tests in `tests/test_relevance_stems.py`, full suite 286 green.
+
+## 2026-10-29d — repos sweep: 945 candidates, 199 triaged, 7 tables, 3,936 responses
+
+The sweep Ben asked for when he said "let's continue with the searching",
+plus the first batch run through the two connector changes made the same day
+(#3303, #3304).
+
+### The sweep
+
+**135 term variants** -- 15 new English topics x 9 languages, all verified
+absent from `search_terms_log.csv` before the run and all appended after it
+(10,618 -> 10,753 rows). Territory deliberately away from the last several
+sweeps: climate-change risk perception, decision-making style, frailty index,
+voice handicap, oral health literacy, hearing handicap, infant temperament,
+activities of daily living, fear of falling, disability assessment, sight-word
+reading, argumentation rubrics, historical reasoning, fraction comparison and
+peer-assessment rubrics.
+
+**945 candidates**: zenodo 295, dataverse 219, surf 216, scholars_portal 115,
+figshare 69, datacite 25, mendeley 5, dryad 1.
+
+**`is_article_object()` paid for itself exactly as the 10-28c entry predicted:
+367 hits dropped** as an article's own table or figure DOI, before any
+download. That class ate 15% of the previous sweep's triage budget and cost
+nothing here.
+
+**surf and scholars_portal were 331 of the 945 -- 35% of the pool** -- and
+were filtered out before triage under the same-day kill (#3303). They are not
+in the seen ledger, so the decision stays reversible. That left **614**, of
+which 415 were already in `repo_triage_seen_keys.csv`, leaving **199 triaged**:
+2 good, 49 human_assistance, 89 no_usable_file, 35 download_failed, 11
+below_min_n, 5 license_restricted, 1 not_item_response, 2 error.
+
+Step 2b on the 49: 18 `recoverable_format`, 14 `human_review`, 7
+`wrong_file_selected`, 6 `worth_retrying`, 2 `not_item_response`, 2
+`aggregate_continuous`, 0 `conj`. **Both bookkeeping lines appeared and both
+were checked**: 49 refined flags recorded in `repo_triage_seen_keys.csv`, and
+the 14 `human_review` rows archived to
+`human_review/human_review_dataverse_2026-10-29.csv`.
+
+`leads/repos_leads_2026-10-29b.csv` holds all 199 rows with their verdicts: 92
+`rejected_content`, 40 `unworked`, 37 `blocked_access`, 14
+`archived_human_review`, 11 `below_min_n`, 5 `blocked_licence`.
+
+### The psycharchives pass returned zero, and that is a real answer
+
+The same 135 terms were run against the new PsychArchives connector in a
+separate pass (its own `search_terms_log.csv` rows, file
+`candidates_2026-10-29b_psycharchives.csv`): **0 candidates**. Verified by
+re-querying five of the terms by hand -- "Fragebogen Sturzangst", "activities
+of daily living scale", "Risikowahrnehmung Klimawandel", "frailty index",
+"infant temperament questionnaire" -- all genuinely empty. ZPID's 1,051
+research-data records are mainstream psychology constructs, and this batch's
+territory (clinical and functional-status instruments, sensory handicap
+inventories, scoring rubrics) is not in them. The connector is fine: "stress"
+and "mindfulness" gave 37 candidates the same day.
+
+**So PsychArchives wants RECYCLED mainstream terms, not fresh territory** --
+the same rule the PLOS and PMC modes already follow, for the same reason. A
+repos sweep deliberately picks terms nobody has run; this source rewards the
+opposite. Worth a dedicated pass over the oldest, most ordinary terms in
+`search_terms_log.csv` rather than tacking it onto the next sweep.
+
+### The two `good` rows
+
+**Rejected: `10.5281/zenodo.19258319`, COSFAMM baseline** (1,252 older Mexican
+adults, CC BY). Composite-only. The deposit describes LSNS-6, MOS-SSS and the
+CESD-R, but the file has twelve columns and not one item among them: `cesdr`
+is a binary screening outcome, `social_isolation` and `social_sup` are
+dichotomised indicators, the rest are demographics and chronic-disease flags.
+The triage's "11 items" were those columns. Nothing to ship.
+
+**Shipped: `10.5281/zenodo.23763732`, Earja & Nursanti 2026** -- 123
+Indonesian Gen-Z beauty shoppers in Greater Jakarta, CC BY 4.0, who watched a
+simulated TikTok Shop Live session hosted by an AI streamer and then answered
+seven construct blocks on one 1-5 agreement scale. **Seven tables, 3,936
+responses**, split per `datastandard.md`'s "Multiple scales in one file" using
+the questionnaire's own section headings:
+
+| table | items | resp |
+|---|---|---|
+| earja_2026_algorithmic_transparency | 5 | 2-5 |
+| earja_2026_anthropomorphism | 5 | 2-5 |
+| earja_2026_perceived_risk | 5 | 3-5 |
+| earja_2026_trust | 5 | 2-5 |
+| earja_2026_fomo | 5 | 2-5 |
+| earja_2026_purchase_intention | 4 | 2-5 |
+| earja_2026_ai_literacy | 3 | 2-5 |
+
+`MV1`/`MV2`, the two common-method-bias marker items ("I prefer rainy weather
+to sunny weather"), do not ship: they belong to no construct, and two items is
+below the three-item floor ruled 2026-10-19, so they cannot be a table of
+their own either. `AL1`-`AL3` DO ship -- "collected, not used in the reported
+model" is a fact about the authors' analysis, not about the responses.
+
+PII: none, and the deposit says so ("No names, contact details or timestamps
+are included"). `ID` is a sequential 1-123.
+
+An arithmetic error was caught by the script's own books-balancing assertion
+rather than by review: the first run asserted 123 x 34 and got 3,936, because
+34 is the column count and 32 is what ships after the two marker items.
+
+### Item text: shipped for all seven
+
+The deposit's questionnaire PDF is a full codebook -- every item code with its
+administered Indonesian stem AND the authors' own English translation, plus
+the five anchors and the covariate codings. `mapping_basis=paper_explicit`,
+`text_source=study_materials`, `language=Indonesian`, English in the
+`_translated` fields (the authors' published gloss, not a machine
+translation).
+
+Three judgement calls, all on the side of not inventing text:
+
+- **Option wording is partial because the source is partial.** The PDF gives
+  the Indonesian anchor for 1 and 5 only ("sangat tidak setuju", "sangat
+  setuju") and English for all five. So `option_text` is blank at 2, 3 and 4
+  while `option_text_translated` is populated throughout. "tidak setuju" /
+  "netral" / "setuju" are obvious and still not published.
+- **`instructions` is blank.** The PDF narrates the stimulus in its own voice
+  for the codebook; it does not reproduce what respondents read.
+- **Only observed anchors get option rows.** The first generator emitted all
+  five and `validate_items.R` failed all seven tables on the resp set -- the
+  gate was right and the generator was wrong. The schema defines `resp` as a
+  value already present in the response data, and nobody in this sample used
+  1 (or 1-2 on perceived risk). The generator now intersects with the staged
+  response CSV instead of being corrected by hand.
+
+**Instrument identification**: the stems match no published scale. Searched
+verbatim ("The movements and expressions of this AI streamer look lifelike",
+"I worry that others get good deals that I miss") with nothing returned; the
+questionnaire is the authors' own, written in Indonesian for this study.
+Rights basis: study-authored material under the deposit's own CC BY 4.0.
+
+**Step 5b**: `automated_finding/itemtext_verification/verify_earja_2026_ai_streamer.R`.
+No published per-item statistic exists to predict against (standalone deposit,
+no article DOI, no related identifier), so the route is block coherence: each
+of the 32 items correlates more with its own block's score, item removed, than
+with any of the other six blocks', smallest margin 0.140. VERDICT: PASS, and
+recorded as **PARTIAL** -- it pins block membership, not within-block order.
+Within-block identity rests on a literal code match (the PDF's `Code` column
+reads AT1..AT5, the CSV headers are the same strings, and the processing
+script only lowercases them), so nothing in the chain is positional.
+
+No issues-page entry is owed for any of the seven: item and resp sets match
+exactly, and an anchor nobody used is a fact about the responses, not a defect
+in the text. `check_provenance.R` reports 0 tables shipping IRW-generated
+content without an entry.
+
+### Staged, not uploaded
+
+`irw_output/` (7 tables + `MANIFEST_2026-10-29b.txt`) and `itemtext_output/`
+(7 `__items.csv`, folder otherwise clean). 7 dictionary rows staged with
+`stage_dict_row.py` (each with the questionnaire PDF as `codebook_url`), 7 tag
+rows written to `tags_auto_2026-10-29b.csv` and appended into
+`tags/tags_auto.csv`, 7 provenance rows and 7 mapping-verification rows
+written with `uploaded` blank.
+
+No covariate-label harvest is owed: the source is a CSV, so there are no
+SPSS/Stata value labels to read. The codings are in the questionnaire PDF's
+Section E, which is what `codebook_url` now points at.
