@@ -24318,7 +24318,7 @@ moves: refreshing `live_tables.csv` so `check_issues_page.R` can report the five
 earlier, since a note is due only once the table is live — and the
 covariate-label harvest for `galanis_2025_*` and `aksin_2023_*`.
 
-## 2026-10-29b — connector audit: surf and scholars_portal killed, PsychArchives added
+## 2026-10-29b — connector audit: surf and scholars_portal killed, PsychArchives added (#3303)
 
 No discovery batch of its own; a change to which repositories every later
 sweep queries. Prompted by Ben pointing at

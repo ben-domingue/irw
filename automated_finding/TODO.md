@@ -33,7 +33,7 @@ release any more.
 
 ## Connector changes 2026-10-29 — two open questions, one deadline
 
-Full write-up in `BATCH_LOG.md` (2026-10-29b). `surf` and `scholars_portal`
+Full write-up in `BATCH_LOG.md` (2026-10-29b), PR #3303. `surf` and `scholars_portal`
 are out of the default source set (0.4% / 0.8% shipped rate), and
 `from_psycharchives` is in.
 
