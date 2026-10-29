@@ -182,14 +182,15 @@ def convert(year: str, vote: str, table: str, raw_dir: Path) -> tuple[list[dict]
               "method": "condorcet", "seats": 1 if is_dpl else "na",
               "n_positions": max(r["resp"] for r in rows),
               "n_candidates": sum(1 for o in labels if o not in NOTA),
-              "n_ballots_cast": len(ballots), "n_ballots_eligible_est": "unknown", "n_ballots_with_marks": with_marks,
+              "n_ballots_cast": len(ballots), "n_ballots_eligible_est": len(ballots), "n_ballots_with_marks": with_marks,
               "n_duplicate_marks": 0, "n_overvotes": 0, "n_writeins": 0,
               "write_in_allowed": "no", "candidate_order": "fixed",
               "evidence": f"{BASE}/{year}/{vote} and {vote}_tally.txt (one V: line per ballot, read 2026-10-15); "
                           f"voting period as printed: '{period}'; options in ballot order as listed on the page; "
                           f"n_candidates excludes the default option ({[o for o in labels if o in NOTA][0]!r}), which is an item "
                           f"in the table; equal ranks allowed: "
-                          f"n_tied_ballots={tied}; eligible developers not on the page (unknown); counts computed by "
+                          f"n_tied_ballots={tied}; n_ballots_eligible_est equals n_ballots_cast (no precinct column); "
+                          f"the number of developers, which sets the quorum, is in counting_values.csv; counts computed by "
                           f"debian_votes.py"}
     return rows, design
 
