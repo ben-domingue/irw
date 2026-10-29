@@ -31,6 +31,39 @@ release any more.
 - [ ] **The covariate-label harvest is now unblocked** for `galanis_2025_*` and
   `aksin_2023_*` x `cov_department`, which was waiting on this release.
 
+## Sweep 2026-10-29b — 7 tables staged, 40 leads unworked
+
+Full write-up in `BATCH_LOG.md` (2026-10-29d).
+
+- [ ] **7 response tables (3,936 responses) + 7 item text tables need
+  uploading.** `automated_finding/irw_output/` (with
+  `MANIFEST_2026-10-29b.txt`) and `itemtext_output/`. **Response tables
+  first.** All 7 pass `irw-validate --profile upload`; all 7 item text tables
+  pass normalize_nulls.R -> validate_items.R --resp-csv -> audit_batch.R
+  --resp-dir -> irw-validate (7/7 PASS, no anomalies). Dictionary and tag rows
+  are staged, so nothing needs pasting. Stamp `uploaded=` on the 7
+  `itemtext_provenance.csv` rows and the 7 `itemtext/mapping_verification.csv`
+  rows only once Ben confirms.
+
+- [ ] **40 unworked leads** in `leads/repos_leads_2026-10-29b.csv`: 18
+  `recoverable_format`, 7 `wrong_file_selected`, 6 `worth_retrying`, 2
+  `aggregate_continuous`, plus the 7 remaining. The 37 `blocked_access` rows
+  were deliberately left OUT of the seen ledger by the script, so a later run
+  retries them by itself.
+
+- [ ] **PsychArchives wants RECYCLED terms, not fresh ones.** The 135 fresh
+  terms of this sweep returned 0 candidates there (verified by hand), because
+  ZPID holds mainstream psychology constructs and this sweep deliberately
+  searched elsewhere. Worth one dedicated pass over the oldest, most ordinary
+  terms in `search_terms_log.csv` -- the same recycling rule the PLOS and PMC
+  modes follow. "stress" and "mindfulness" gave 37 candidates on the day the
+  connector landed, so the yield is there.
+
+- [ ] **Pre-existing, not from this batch: `lint_verification.R` reports one
+  ERROR** -- `prasetiyo_2022_act` carries status `FAILED`, which is not one of
+  VERIFIED/PARTIAL/NO_ROUTE/NOT_NEEDED. One row to correct, by whoever knows
+  what that verification actually concluded.
+
 ## Connector changes 2026-10-29 — two open questions, one deadline
 
 Full write-up in `BATCH_LOG.md` (2026-10-29b), PR #3303. `surf` and `scholars_portal`
