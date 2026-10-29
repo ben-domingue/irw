@@ -59,23 +59,23 @@ merged, and the 552-row `tags/tags_auto.csv` merge is PR #3133.
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
-## Leads pass 2026-10-28b — 41 tables + 5 item text tables, AWAITING UPLOAD
+## Leads pass 2026-10-28b — 43 tables + 6 item text tables, AWAITING UPLOAD
 
 Full write-up in `BATCH_LOG.md` (2026-10-28b). The 83 unworked leads of 10-27
-and the 28 of 10-21 were re-triaged together; 17 of the 106 were worked to a
-decision, 12 of those shipped.
+and the 28 of 10-21 were re-triaged together; 24 of the 106 were worked to a
+decision, 13 of those shipped.
 
-- [ ] **41 response tables (422,122 responses) + 5 item text tables need
+- [ ] **43 response tables (438,550 responses) + 6 item text tables need
   uploading.** `automated_finding/irw_output/` (with a MANIFEST) and
-  `itemtext_output/`. **Response tables first.** All 41 pass `irw-validate
-  --profile upload`; all 5 item text tables PASS `normalize_nulls.R` ->
+  `itemtext_output/`. **Response tables first.** All 43 pass `irw-validate
+  --profile upload`; all 6 item text tables PASS `normalize_nulls.R` ->
   `validate_items.R --resp-csv` -> `audit_batch.R --resp-dir` and are clean on
-  `irw-validate`. 41 dictionary rows and 41 tag rows are already staged, so
+  `irw-validate`. 43 dictionary rows and 43 tag rows are already staged, so
   nothing needs pasting. Stamp `uploaded=` on the 4 shipped
   `itemtext_provenance.csv` rows and the 4 `mapping_verification.csv` rows only
   after Ben confirms.
 
-  Two of the five item text tables --
+  Two of the six item text tables --
   `andreu_sanchez_2023_information_sources__items.csv` and
   `_lifestyle__items.csv` -- are for response tables that are **already live**
   (uploaded 2026-10-21). They go up with the rest of `itemtext_output/` and no
@@ -142,7 +142,7 @@ decision, 12 of those shipped.
   worth deciding whether that is acceptable here before spending the rights
   effort.
 
-- [ ] **76 `unworked` leads remain** in `leads/repos_leads_2026-10-28.csv`: 45
+- [ ] **75 `unworked` leads remain** in `leads/repos_leads_2026-10-28.csv`: 44
   `recoverable_format`, 8 `worth_retrying`, 8 `aggregate_continuous`, 12
   `download_failed` and 3 `error`. The `worth_retrying` bucket is now the thin
   one: its eleven article-table rows were rejected as a class and its four

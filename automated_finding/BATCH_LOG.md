@@ -23038,7 +23038,7 @@ PASS on both item and resp sets), then `audit_batch.R --resp-dir` (8/8 PASS, no
 anomalies), then `irw-validate` on the item files (8 clean).
 `itemtext_output/` holds nothing but `*__items.csv`.
 
-## 2026-10-28b — the 10-27 and 10-21 leads re-triaged, and 17 of them worked: 41 tables, 422,122 responses
+## 2026-10-28b — the 10-27 and 10-21 leads re-triaged, and 24 of them worked: 43 tables, 438,550 responses
 
 Nothing uploaded. Ben asked for a discovery sweep *and* for backlogged
 triage/leads work in the same session; this is the leads half. The sweep's own
@@ -23075,7 +23075,7 @@ pointing at it, so there is one live place per lead rather than three.
 ### Eleven worked, seven shipped (filtered to 100 <= N <= 50,000 and 8 <= items <= 700, then by volume)
 
 Nine are tabled here; the last two were worked after this table was written and
-are at the end of the entry. **Batch total: 41 tables, 422,122 responses.**
+are at the end of the entry. **Batch total: 43 tables, 438,550 responses.**
 
 | deposit | licence | outcome |
 |---|---|---|
@@ -23626,6 +23626,55 @@ applied to a number that can be wrong by 50x in exactly this bucket.
 That closes the interesting half of `worth_retrying`. With the eleven
 article-table rows rejected as a class and these four worked, the bucket is down
 from 23 to 8 and the whole leads file to 76 `unworked`.
+
+### A thirteenth: Sariyska et al. 2019 — two tables from one workbook, one shipped item text and one held
+
+`10.3389/fpsyg.2019.02591.s001` (CC BY 4.0), 444 German-speaking adults, study
+2 of a Frontiers paper on personality and dietary choices.
+`sariyska_2019_dark_triad` (27 items, 1-5) and `_food_frequency` (10 items,
+1-7), 16,428 responses, no missing data. **Batch total: 43 tables, 438,550
+responses from 13 deposits.**
+
+The `recoverable_format` flag was a **two-row title above the header** on the
+"Raw data" sheet — `header=2` and it reads. Worth noting as the cheapest class
+of that flag.
+
+**The workbook's second sheet is a real codebook**, three columns giving every
+variable's name, its full wording and its value list with every anchor named.
+That changes two things:
+
+- **The permitted response sets are documented, not inferred.** `run_qc` is
+  given them as `permitted_values`, and that is what turned three
+  `item_scale_outlier`/`resp_scale_nested_support` warnings into clean passes:
+  three SD3 items nobody answered 5 to are a rarely-used extreme, not a
+  different scale, and the codebook is what says so. This is the
+  response-scale-evidence path in the shared validator being used as intended
+  rather than the warnings being explained away.
+- **One of the two item text tables ships, and the contrast is the lesson.**
+  The ten food-frequency items are the study's OWN questions, so the deposit's
+  CC BY is the wording's licence and they ship (70 rows). The 27 SD3 items in
+  the same sheet are Jones & Paulhus's Short Dark Triad reproduced verbatim, and
+  a deposit's CC BY covers the depositors' material, not a third-party
+  instrument reproduced inside it — so they are held, and the SD3's **first**
+  register row goes in with verdict `hold`.
+
+Everything in the shipped item text is PARSED from the codebook sheet rather
+than retyped, and the script asserts the sheet's two awkward features instead of
+working around them: the shared stem appears once, on the first item's label,
+with the other nine labels being the bare food name (so the stem is split off
+and becomes `instructions`), and the anchors arrive as a single quoted
+`1 = "never", ...` string, parsed into seven option rows and asserted identical
+across all ten items. A mis-parse fails loudly rather than producing a
+plausible wrong mapping.
+
+The SD3 row carries two leads and one warning. The leads: Paulhus's own lab page
+is where a free distribution would live (third-party hosts say research use with
+acknowledgement, which is not the originator saying it), and if it clears,
+extraction is cheap from this same file — but check which language was
+administered first, since the sample is German-speaking and the codebook's
+wording is the English original. The warning: the register's existing
+SRP-III/SRP-4 rows are `block` on Qualification-Level-B terms, and those are a
+**different instrument's** terms that must not be read onto the SD3.
 
 ### The `surf` (DataverseNL) question, measured and answered
 
