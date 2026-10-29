@@ -23038,7 +23038,7 @@ PASS on both item and resp sets), then `audit_batch.R --resp-dir` (8/8 PASS, no
 anomalies), then `irw-validate` on the item files (8 clean).
 `itemtext_output/` holds nothing but `*__items.csv`.
 
-## 2026-10-28b — the 10-27 and 10-21 leads re-triaged, and 9 of them worked: 16 tables, 280,437 responses
+## 2026-10-28b — the 10-27 and 10-21 leads re-triaged, and 11 of them worked: 25 tables, 334,679 responses
 
 Nothing uploaded. Ben asked for a discovery sweep *and* for backlogged
 triage/leads work in the same session; this is the leads half. The sweep's own
@@ -23072,7 +23072,10 @@ All 106 rows, with those diagnoses, are in `leads/repos_leads_2026-10-28.csv`.
 The 78 + 28 superseded rows in the two older leads files now carry a note
 pointing at it, so there is one live place per lead rather than three.
 
-### The nine worked (filtered to 100 <= N <= 50,000 and 8 <= items <= 700, then by volume)
+### Eleven worked, seven shipped (filtered to 100 <= N <= 50,000 and 8 <= items <= 700, then by volume)
+
+Nine are tabled here; the last two were worked after this table was written and
+are at the end of the entry. **Batch total: 25 tables, 334,679 responses.**
 
 | deposit | licence | outcome |
 |---|---|---|

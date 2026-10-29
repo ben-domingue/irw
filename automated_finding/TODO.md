@@ -59,18 +59,18 @@ merged, and the 552-row `tags/tags_auto.csv` merge is PR #3133.
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
-## Leads pass 2026-10-28b — 16 tables + 4 item text tables, AWAITING UPLOAD
+## Leads pass 2026-10-28b — 25 tables + 4 item text tables, AWAITING UPLOAD
 
 Full write-up in `BATCH_LOG.md` (2026-10-28b). The 83 unworked leads of 10-27
-and the 28 of 10-21 were re-triaged together; 9 of the 106 were worked to a
-decision, 5 of those shipped.
+and the 28 of 10-21 were re-triaged together; 11 of the 106 were worked to a
+decision, 7 of those shipped.
 
 - [ ] **25 response tables (334,679 responses) + 4 item text tables need
   uploading.** `automated_finding/irw_output/` (with a MANIFEST) and
-  `itemtext_output/`. **Response tables first.** All 16 pass `irw-validate
+  `itemtext_output/`. **Response tables first.** All 25 pass `irw-validate
   --profile upload`; all 4 item text tables PASS `normalize_nulls.R` ->
   `validate_items.R --resp-csv` -> `audit_batch.R --resp-dir` and are clean on
-  `irw-validate`. 16 dictionary rows and 16 tag rows are already staged, so
+  `irw-validate`. 25 dictionary rows and 25 tag rows are already staged, so
   nothing needs pasting. Stamp `uploaded=` on the 4 shipped
   `itemtext_provenance.csv` rows and the 4 `mapping_verification.csv` rows only
   after Ben confirms.
