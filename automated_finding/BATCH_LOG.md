@@ -23038,7 +23038,7 @@ PASS on both item and resp sets), then `audit_batch.R --resp-dir` (8/8 PASS, no
 anomalies), then `irw-validate` on the item files (8 clean).
 `itemtext_output/` holds nothing but `*__items.csv`.
 
-## 2026-10-28b — the 10-27 and 10-21 leads re-triaged, and 36 of the 106 worked: 46 tables, 474,185 responses
+## 2026-10-28b — the 10-27 and 10-21 leads re-triaged, and 37 of the 106 worked: 48 tables, 484,073 responses
 
 Nothing uploaded. Ben asked for a discovery sweep *and* for backlogged
 triage/leads work in the same session; this is the leads half. The sweep's own
@@ -23075,7 +23075,7 @@ pointing at it, so there is one live place per lead rather than three.
 ### Eleven worked, seven shipped (filtered to 100 <= N <= 50,000 and 8 <= items <= 700, then by volume)
 
 Nine are tabled here; the last two were worked after this table was written and
-are at the end of the entry. **Batch total: 46 tables, 474,185 responses.**
+are at the end of the entry. **Batch total: 48 tables, 484,073 responses.**
 
 | deposit | licence | outcome |
 |---|---|---|
@@ -23783,6 +23783,57 @@ with the harms and disagrees with the benefits. The documented set goes to
 `run_qc` as `permitted_values` and the docstring says what remains and why,
 rather than the warning being explained away. Same for `multi_scale` on the
 seven prefixes, which are the instrument's own nine dimensions.
+
+### A sixteenth: Khashaba 2023 — a real two-wave design, and a pairing that had to be earned
+
+`10.7910/DVN/TN3UNW` (CC0 1.0), 133 nurses and housekeepers at Mansoura
+Emergency Hospital measured before and after a waste-management intervention.
+`khashaba_2023_waste_knowledge` (29 items x 2 waves) and `_attitude` (10 x 2),
+9,888 responses. **Batch total: 48 tables, 484,073 responses from 16 deposits.**
+
+This is `wave` used for what it means: two genuine occasions, not the
+retrospective recall the `mazzini_2026_*` pair deliberately avoided calling a
+wave.
+
+**The pre/post pairing is the work.** The column names do not pair: they are
+truncated SPSS names that drift between waves (`wast_manQ3_Pre` /
+`waste_manag_Q3_Post`, `amp.fing_Q14_Pre` / `amp.fings_Q14_Post`), and the
+question number is not even a key — **two different knowledge questions are
+both labelled Q9** (`Vaccin_Q9`, `Sharps_Q9`), while others carry the number
+without a Q and sometimes after the wave marker (`Dis.chem_pre_23`).
+
+So the pairing is positional, each block alternating Pre, Post, Pre, Post
+strictly — and because a one-position slip is exactly the defect that ships
+silently, it is **checked three ways** before any pair is accepted: the two
+names must share a normalised prefix of at least 3 characters (the tightest real
+pair shares exactly 3, `bio`, from `Bio.fluids.radio_Q19_Pre` /
+`Bio.radio_Q19_Post`); where both carry a question number it must be the same
+number; and where both carry a variable label the labels must correspond. The
+run prints every accepted pair with its shared prefix, so the whole mapping is
+reviewable rather than asserted. Item codes are the source name minus the wave
+marker (`med_w_q1`, `bio_fluids_radio_q19`), not a positional index.
+
+**Two things dropped, each for a stated reason.** One knowledge question is not
+correct/incorrect at all — "how do you dispose of chemicals" offers three
+UNORDERED categories (don't know / after dilution / in a special container) — so
+it is dropped rather than forced into a 0/1 table, and the loop asserts it is
+the only one. And the nine PRACTICE items are not shipped: five are genuine 0-3
+frequencies while four are a collapsed binary coded at the ENDPOINTS of that
+same scale (`['sometimes-always-fewtimes', 'No']`, only 0 and 3 observed), so
+one table would mix a four-category frequency with a two-category recode
+wearing the same numbers.
+
+**The attitude block's 0/1 is correctness, not a scale direction.** Its value
+labels differ by item — `['dont know or disagree', 'agree']` on some,
+`['agree 0r dont know', 'disagree']` on others — because the undesirable items
+are reverse-worded. In both cases 1 is the desirable answer, exactly as 1 is the
+correct answer in the knowledge block, so one table is right and the direction
+is uniform. Worth contrasting with `batool_2024_*` earlier in this batch, where
+differing directions were a real `resp_ambiguous` problem that had to be undone.
+
+Expect heavy `imputed_values*` concentration at wave 2 (98% correct on one
+knowledge item, 99% on one attitude item). The intervention worked; that is the
+result, not a defect.
 
 ### The `surf` (DataverseNL) question, measured and answered
 
