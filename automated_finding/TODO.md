@@ -34,14 +34,16 @@ release any more.
 ## Leads pass 2026-10-29c/d/e — 36 tables staged in all, 28 leads left
 
 Full write-up in `BATCH_LOG.md` (2026-10-29e). The staging folder now holds
-**36 response tables and 8,463,954 responses** -- the sweep's 7, GPO-AI's 21,
-SAPA's 1 and Akter's 7 -- plus 18 item text tables. One MANIFEST covers all
+**34 response tables and 8,464,014 responses** -- the sweep's 7, GPO-AI's 19,
+SAPA's 1 and Akter's 7 -- plus 18 item text tables. (GPO-AI's three
+`trust_actors_*` tables were merged into one crossed 24-item table on
+2026-10-29f, at Ben's prompting; see BATCH_LOG.) One MANIFEST covers all
 four, `irw_output/MANIFEST_2026-10-29b.txt`.
 
 - [ ] **Everything in `irw_output/` and `itemtext_output/` needs uploading.**
-  **Response tables first.** All 36 pass `irw-validate --profile upload`; the
+  **Response tables first.** All 34 pass `irw-validate --profile upload`; the
   18 item text tables pass the full gate chain (17 PASS, 1 WARN, explained in
-  the manifest). Dictionary and tag rows are staged for all 36, so nothing
+  the manifest). Dictionary and tag rows are staged for all 34, so nothing
   needs pasting. Stamp `uploaded=` on the provenance and mapping rows only
   once Ben confirms.
 

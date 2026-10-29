@@ -19,7 +19,8 @@ Item text: shipped. The codebook .docx gives every block's question stem, its
         the English master, so the item text ships as the standard's
         translated_substitute fallback -- see itemtext_provenance.csv.
 
-**Twenty-one tables, one per ordinal block**, as datastandard.md's "Multiple
+**Nineteen tables: one per ordinal block, except the three trust blocks,
+which are one crossed table (see CROSSED_TRUST)**, as datastandard.md's "Multiple
 scales in one file" asks. The blocks are the codebook's own question groups and
 the item codes keep the deposit's own column names (`populism_1`, `Justice_4`,
 lowercased), so each item stays tied to the codebook row that gives its stem.
@@ -81,13 +82,11 @@ prints its denominator, and asserts that no column holds names, emails,
 birthdates or geographic codes; `respondent_subnational` is dropped before
 anything else.
 
-Output: 21 tables, 2,935,076 responses -- 23,781 respondents, 129 items.
+Output: 19 tables, 2,935,076 responses -- 23,781 respondents, 129 items.
   * lee_whiting_2025_populism                6 items, resp 1-5
   * lee_whiting_2025_job_tasks              10 items, resp 1-4
   * lee_whiting_2025_ai_regulation_views     5 items, resp 1-5
-  * lee_whiting_2025_trust_actors_ai         8 items, resp 0-10
-  * lee_whiting_2025_trust_actors_privacy    8 items, resp 0-10
-  * lee_whiting_2025_trust_actors_security   8 items, resp 0-10
+  * lee_whiting_2025_trust_actors           24 items, resp 0-10
   * lee_whiting_2025_ai_impacts_now          5 items, resp 0-10
   * lee_whiting_2025_ai_impacts_10years      5 items, resp 0-10
   * lee_whiting_2025_gpt_org_permission      6 items, resp 1-4
@@ -112,8 +111,27 @@ them are forced choices between an AI and a human, which belong in core rather
 than the nominal standard: with exactly two options the ordered/unordered
 distinction is vacuous.
 
-**Seventeen tables become twenty-one**, then: the paragraph above describes the
-regex-found blocks and `EXPLICIT_BLOCKS` holds the rest.
+**So nineteen tables**: fourteen regex-found blocks, four in `EXPLICIT_BLOCKS`,
+and the crossed trust table.
+
+**The three trust blocks are one table, and that is what earns `item_family`.**
+`trust_AI`, `protection` and `security` ask about the SAME eight actors, in the
+same order, printed identically in the codebook for each block. So the design
+is 8 actors x 3 domains, the three items about one actor are clones that
+violate local independence, and `item_family` marks them. Kept as three tables
+the column would be degenerate -- one item per actor per table -- so the merge
+is the thing that makes it meaningful. `itemcov_domain` carries the domain.
+
+`item_family` is the actor's POSITION in the shared list (`actor_1`..`actor_8`),
+not its name: naming it would need the codebook's row order, the positional
+assumption this file declines to make for item text. The crossing claim is
+weaker and safe -- whatever actor k is, it is the same actor in all three
+domains.
+
+`lee_whiting_2025_ai_nurse_tradeoff` carries `itemcov_wait_minutes`
+(10/30/60/120/180), read off the COLUMN NAME rather than the codebook. It is
+the item attribute that orders the five items, which are otherwise one question
+asked five times.
 """
 from __future__ import annotations
 
@@ -160,14 +178,33 @@ AI_VS_HUMAN = "ai_vs_human"
 # Values that are not a point on their scale and are dropped, not coded.
 NOT_A_SCALE_POINT = {"Don't know"}
 
+# The three trust blocks are ONE table, not three. All three ask about the same
+# eight actors, in the same order, printed identically in the codebook -- the
+# crossing is 8 actors x 3 domains, and the three items about one actor are
+# clones that violate local independence, which is what `item_family` exists
+# to mark. Split across three tables the column would be degenerate (each
+# actor appears once per table), so the merge is what earns it.
+#
+# `item_family` is the actor's POSITION in that shared list, not its name.
+# Which actor position k is would require the codebook's row order, the
+# positional assumption this batch declined to make for item text (see the
+# module docstring). The crossing claim is weaker and safe: whatever actor k
+# is, it is the same actor in all three domains.
+CROSSED_TRUST = {
+    "table": "lee_whiting_2025_trust_actors",
+    "n_items": 8,
+    "domains": {                       # source prefix -> itemcov_domain value
+        "trust_AI": "using AI safely",
+        "protection": "protecting data and privacy",
+        "security": "ensuring safety and security",
+    },
+}
+
 # table -> (source prefix, number of items, option map)
 BLOCKS = {
     "lee_whiting_2025_populism":              ("populism", 6, AGREE),
     "lee_whiting_2025_job_tasks":             ("Tasks", 10, FREQ),
     "lee_whiting_2025_ai_regulation_views":   ("regulation_gvt", 5, AGREE),
-    "lee_whiting_2025_trust_actors_ai":       ("trust_AI", 8, SLIDER),
-    "lee_whiting_2025_trust_actors_privacy":  ("protection", 8, SLIDER),
-    "lee_whiting_2025_trust_actors_security": ("security", 8, SLIDER),
     "lee_whiting_2025_ai_impacts_now":        ("AI_impacts", 5, SLIDER),
     "lee_whiting_2025_ai_impacts_10years":    ("AI_impacts_10years", 5, SLIDER),
     "lee_whiting_2025_gpt_org_permission":    ("GPT_org", 6, PERMISSION),
@@ -179,6 +216,15 @@ BLOCKS = {
     "lee_whiting_2025_ai_justice":            ("Justice", 8, AGREE),
     "lee_whiting_2025_ai_healthcare":         ("Healthcare", 9, AGREE),
     "lee_whiting_2025_ai_government":         ("Government", 9, AGREE),
+}
+
+# The AI-nurse trade-off's item covariate: how long the human alternative made
+# the respondent wait. Read off the COLUMN NAME, not the codebook, so there is
+# no positional step -- and it is the thing that orders these five items, since
+# they are otherwise one question asked five times.
+NURSE_WAIT_MINUTES = {
+    "to_health_10m": 10, "to_health_30m": 30, "to_health_1h": 60,
+    "to_health_2h": 120, "to_health_3h": 180,
 }
 
 # Blocks whose columns do NOT share a `prefix_<n>` shape, so the regex above
@@ -310,6 +356,7 @@ def main() -> None:
 
     item_cols = {}
     option_maps = {}
+    crossed = build_crossed_trust(df)
     for table, (cols, omap) in EXPLICIT_BLOCKS.items():
         missing = [c for c in cols if c not in df.columns]
         assert not missing, (table, missing)
@@ -367,7 +414,63 @@ def main() -> None:
     total = 0
     for table, cols in item_cols.items():
         total += write(df, table, cols, covs, option_maps[table])
-    print(f"total responses across {len(item_cols)} tables: {total:,}")
+    total += write_crossed_trust(df, crossed, covs)
+    print(f"total responses across {len(item_cols) + 1} tables: {total:,}")
+
+
+def build_crossed_trust(df: pd.DataFrame) -> dict:
+    """{source column -> (item code, item_family, itemcov_domain)}.
+
+    Asserts the crossing the merge rests on: each of the three blocks has the
+    same number of items, so position k exists in all three.
+    """
+    out = {}
+    for prefix, domain in CROSSED_TRUST["domains"].items():
+        cols = sorted((c for c in df.columns
+                       if re.fullmatch(rf"{re.escape(prefix)}_\d+", c)),
+                      key=lambda c: int(re.sub(r"\D", "", c)))
+        assert len(cols) == CROSSED_TRUST["n_items"], (prefix, cols)
+        for c in cols:
+            k = int(re.sub(r"\D", "", c))
+            out[c] = (c.lower(), f"actor_{k}", domain)
+    assert len(out) == CROSSED_TRUST["n_items"] * 3, len(out)
+    return out
+
+
+def write_crossed_trust(df: pd.DataFrame, crossed: dict, covs: list) -> int:
+    table = CROSSED_TRUST["table"]
+    cols = list(crossed)
+    long = df[["id"] + covs + cols].melt(
+        id_vars=["id"] + covs, var_name="src", value_name="resp")
+    long = long[long["resp"].notna()]
+    long["resp"] = pd.to_numeric(long["resp"]).astype(int)
+    long["item"] = long["src"].map(lambda c: crossed[c][0])
+    long["item_family"] = long["src"].map(lambda c: crossed[c][1])
+    long["itemcov_domain"] = long["src"].map(lambda c: crossed[c][2])
+
+    permitted = sorted(SLIDER.values())
+    outside = sorted(set(long["resp"].unique()) - set(permitted))
+    assert not outside, f"{table}: resp outside {permitted}: {outside}"
+
+    # datastandard.md column order: id, item, resp, ... cov_*, itemcov_*, ...
+    # item_family last.
+    long = long[["id", "item", "resp"] + covs
+                + ["itemcov_domain", "item_family"]].sort_values(
+        ["id", "item"]).reset_index(drop=True)
+
+    checks = run_qc(long, permitted_values=permitted)
+    fails = [(c.name, c.detail) for c in checks if c.status == "fail"]
+    assert not fails, (table, fails)
+    for c in checks:
+        if c.status == "warn":
+            print(f"  [qc warn] {table} {c.name}: {c.detail[:150]}")
+    long.to_csv(OUT / f"{table}.csv", index=False)
+    print(f"  -> {table}: rows={len(long):,} ids={long['id'].nunique():,} "
+          f"items={long['item'].nunique()} "
+          f"families={long['item_family'].nunique()} "
+          f"domains={long['itemcov_domain'].nunique()} "
+          f"resp={min(long['resp'])}-{max(long['resp'])}")
+    return len(long)
 
 
 def strip_write_in(v):
@@ -421,7 +524,13 @@ def write(df: pd.DataFrame, table: str, cols: list, covs: list,
     outside = sorted(set(long["resp"].unique()) - set(permitted))
     assert not outside, f"{table}: resp outside {permitted}: {outside}"
 
-    long = long[["id", "item", "resp"] + covs].sort_values(
+    extra = []
+    if table == "lee_whiting_2025_ai_nurse_tradeoff":
+        long["itemcov_wait_minutes"] = long["item"].map(NURSE_WAIT_MINUTES)
+        assert long["itemcov_wait_minutes"].notna().all()
+        long["itemcov_wait_minutes"] = long["itemcov_wait_minutes"].astype(int)
+        extra = ["itemcov_wait_minutes"]
+    long = long[["id", "item", "resp"] + covs + extra].sort_values(
         ["id", "item"]).reset_index(drop=True)
 
     checks = run_qc(long, permitted_values=permitted)

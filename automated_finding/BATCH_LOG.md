@@ -24779,3 +24779,53 @@ One `good` row was rejected on content: `10.5281/zenodo.19258319` (COSFAMM,
 1,252 older Mexican adults) describes the LSNS-6, MOS-SSS and CESD-R but ships
 twelve columns with no items in them -- `cesdr` is a binary screening outcome
 and `social_isolation`/`social_sup` are dichotomised indicators.
+
+## 2026-10-29f — the three GPO-AI trust blocks become one crossed table (ben-domingue)
+
+A revision to 2026-10-29e, made on Ben's question: "should we have an
+item_family or item_cov info here?" for the three `trust_actors_*` tables.
+Yes, and only a merge earns it.
+
+`trust_AI`, `protection` and `security` ask about **the same eight actors, in
+the same order** -- the codebook prints the identical list for each block,
+checked before merging. So the design is 8 actors x 3 domains, fully crossed,
+and the three items about one actor are clones that violate local
+independence. Kept as three tables, `item_family` would have been degenerate
+(each actor appears once per table); merged, it does the work the column
+exists for.
+
+`lee_whiting_2025_trust_actors`: 24 items, 542,673 responses, 23,691 ids.
+`itemcov_domain` carries the domain ("using AI safely", "protecting data and
+privacy", "ensuring safety and security"). `item_family` is `actor_1`..
+`actor_8` -- the actor's POSITION in the shared list, not its name. Naming it
+would need the codebook's row order, which is the positional assumption this
+batch declined for item text; the crossing claim is weaker and safe, because
+whatever actor k is, it is the same actor in all three domains.
+
+Its one `irw-validate` WARN is `multi_scale` ("Item names have 3 repeated
+prefixes"), which is the crossing appearing in the item names. That is the
+check doing its job and the answer is in the two new columns.
+
+**`lee_whiting_2025_ai_nurse_tradeoff` gains `itemcov_wait_minutes`**
+(10/30/60/120/180), read off the COLUMN NAMES rather than the codebook, so no
+positional step. It is the item attribute that orders those five items, which
+are otherwise one question asked five times -- the thing that makes one harder
+than the next.
+
+**The forced-choice tables stay in core, not competitions.** Ben asked whether
+`ai_vs_human_choice` and `ai_nurse_tradeoff` are pairwise comparisons that
+belong in the competitions family. Under the 2026-10-08 shape rule that family
+covers pairwise comparisons between fixed, named things that recur -- and the
+same session excluded an AHP pairwise-comparison-of-criteria dataset as
+"criteria, not competitors". These are the AHP case: the two sides are response
+OPTIONS, not agents whose strength is being estimated, and a Bradley-Terry fit
+would have two parameters for the whole dataset. What the design measures is
+the respondent's threshold -- the nurse block walks the wait from 10 minutes to
+3 hours precisely to find where each person flips -- which is a person
+parameter against items of graded difficulty, i.e. core. Nor is it a conjoint:
+there are no randomized multi-attribute profiles, the pairs are fixed and
+identical for every respondent, so the `conj` route does not apply.
+
+Staging after this revision: **34 response tables, 8,464,014 responses**, and
+18 item text tables. Dictionary, tag and provenance rows were reconciled (-3
++1 in each).
