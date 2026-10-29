@@ -62,8 +62,9 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 ## Leads pass 2026-10-28b — 43 tables + 6 item text tables, AWAITING UPLOAD
 
 Full write-up in `BATCH_LOG.md` (2026-10-28b). The 83 unworked leads of 10-27
-and the 28 of 10-21 were re-triaged together; 24 of the 106 were worked to a
-decision, 13 of those shipped.
+and the 28 of 10-21 were re-triaged together; **31 of the 106 were worked to a
+decision and 13 of those shipped** -- 43 tables, 438,550 responses. 16 were
+rejected on content (eleven of them as one class) and 2 are below the N floor.
 
 - [ ] **43 response tables (438,550 responses) + 6 item text tables need
   uploading.** `automated_finding/irw_output/` (with a MANIFEST) and
