@@ -24284,3 +24284,21 @@ own processing script, plus the 8 parse failures and the one HTTP 504. The
 screening JSON for 34 of them is in this session's scratchpad only, so a later
 pass re-downloads; the leads files carry the DOIs and flags, which is what
 survives.
+
+### Uploaded 2026-10-29
+
+Ben uploaded this batch the same day it was built: **22 response tables,
+295,681 responses, and 3 item text tables**, response tables first.
+`uploaded=2026-10-29` is stamped on the 3 shipped `itemtext_provenance.csv`
+rows and the 3 `itemtext/mapping_verification.csv` rows, byte-wise in place so
+the mixed CRLF/LF endings in both files are untouched (764 CRLF of 1,409 lines
+in the provenance file, unchanged). The other 19 tables of the batch have
+`mapping_basis` `unknown` and correctly keep an empty stamp. The staging
+folders are empty and the manifest is archived as
+`irw_output/MANIFEST_2026-10-29_uploaded_22tables.txt`.
+
+This is the second upload of the day; the 64-table batch of 2026-10-28b/c went
+up earlier. **One release now covers both** -- 86 tables and 885,864 responses
+-- and nothing from either reaches `metadata.csv` until it happens. Waiting on
+it: the covariate-label harvest for `galanis_2025_*` and `aksin_2023_*` x
+`cov_department`, and the four register rows owed from the Ibaceta deposit.

@@ -59,21 +59,29 @@ merged, and the 552-row `tags/tags_auto.csv` merge is PR #3133.
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
-## Leads pass 2026-10-29 — 22 tables + 3 item text tables, AWAITING UPLOAD
+## Leads pass 2026-10-29 — 22 tables + 3 item text tables, UPLOADED 2026-10-29
 
 Full write-up in `BATCH_LOG.md` (2026-10-29). Ben asked for the 195 `unworked`
 leads of the two 2026-10-28 batches; **104 now carry a durable verdict, 91
 remain.** Seven deposits shipped.
 
-- [ ] **22 response tables (295,681 responses) + 3 item text tables need
-  uploading.** `automated_finding/irw_output/` (with a MANIFEST) and
-  `itemtext_output/`. **Response tables first.** All 22 pass `irw-validate
-  --profile upload` with zero failures; all 3 item text tables pass
-  `normalize_nulls.R` -> `validate_items.R --resp-csv` -> `audit_batch.R
-  --resp-dir` -> `irw-validate`. 22 dictionary rows and 22 tag rows are staged,
-  so nothing needs pasting. Stamp `uploaded=` on the 3 shipped
-  `itemtext_provenance.csv` rows and the 3 `mapping_verification.csv` rows only
-  after Ben confirms.
+- [x] **22 response tables (295,681 responses) + 3 item text tables uploaded by
+  Ben, 2026-10-29.** `uploaded=2026-10-29` is stamped on the 3 shipped
+  `itemtext_provenance.csv` rows and the 3 `itemtext/mapping_verification.csv`
+  rows. If any individual table did not in fact go up, that stamp is the thing
+  to correct. 22 dictionary rows and 22 tag rows were staged with them, so
+  nothing needed pasting. The staging folders are now empty and the manifest is
+  archived as `irw_output/MANIFEST_2026-10-29_uploaded_22tables.txt`.
+
+  **A release is owed** before these reach `metadata.csv` -- the same release
+  the 64-table batch of earlier the same day is waiting on.
+
+  Original: **22 response tables + 3 item text tables need uploading.**
+  `automated_finding/irw_output/` (with a MANIFEST) and `itemtext_output/`.
+  **Response tables first.** All 22 passed `irw-validate --profile upload` with
+  zero failures; all 3 item text tables passed `normalize_nulls.R` ->
+  `validate_items.R --resp-csv` -> `audit_batch.R --resp-dir` ->
+  `irw-validate`.
 
 - [ ] **91 unworked leads remain**, in `leads/repos_leads_2026-10-28.csv` and
   `...-28c.csv` with their flags. Mostly `recoverable_format` rows under about
