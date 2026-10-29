@@ -23037,3 +23037,1077 @@ conform, 18 pass the upload gate, 4 warnings, all explained above);
 PASS on both item and resp sets), then `audit_batch.R --resp-dir` (8/8 PASS, no
 anomalies), then `irw-validate` on the item files (8 clean).
 `itemtext_output/` holds nothing but `*__items.csv`.
+
+## 2026-10-28b — the 10-27 and 10-21 leads re-triaged, and 39 of the 106 worked: 56 tables, 509,873 responses
+
+Nothing uploaded. Ben asked for a discovery sweep *and* for backlogged
+triage/leads work in the same session; this is the leads half. The sweep's own
+entry is separate (2026-10-28c, below, once it finishes).
+
+### The re-triage
+
+`leads/repos_leads_2026-10-27.csv` carried 83 `unworked` rows and
+`leads/repos_leads_2026-10-21.csv` another 28, and the two overlap in kind: the
+10-21 entry says outright that "the reader is now better than it was when they
+were flagged", so the cheap first move was to put all of them back through
+triage rather than open them by hand. 106 distinct candidates (the five already-
+worked `good` rows of 10-27 excluded), triaged with `--ignore-seen-keys
+--retriage` so the ledger was left alone — which is the documented re-mine case,
+and the run printed the matching "refined_flag was NOT written back ... On a
+re-mine this is correct" line.
+
+**The reader improvements did not resolve a single one.** 91 human_assistance,
+12 download_failed, 3 error, and Step 2b put them back in the same buckets as
+before: 60 `recoverable_format`, 23 `worth_retrying`, 8 `aggregate_continuous`,
+0 `human_review`, 0 `not_item_response`, 0 `conj`. That is worth recording as a
+result: the 28 `recoverable_format` rows the 10-21 entry hoped might "simply
+read now" do not, and nobody needs to try that again. What the retriage DID do
+is reprint each row's diagnosis, and the diagnoses are specific enough to work
+from — "re-read with no change to the reader, keeping only the N columns that
+share one small integer domain, the file triages as good" is the signature of a
+questionnaire carrying several instruments, which is a processing-script job
+rather than a reader bug.
+
+All 106 rows, with those diagnoses, are in `leads/repos_leads_2026-10-28.csv`.
+The 78 + 28 superseded rows in the two older leads files now carry a note
+pointing at it, so there is one live place per lead rather than three.
+
+### Eleven worked, seven shipped (filtered to 100 <= N <= 50,000 and 8 <= items <= 700, then by volume)
+
+Nine are tabled here; the last two were worked after this table was written and
+are at the end of the entry. **Batch total: 56 tables, 509,873 responses.**
+
+| deposit | licence | outcome |
+|---|---|---|
+| 10.7910/DVN/HUYYQZ | CC0 1.0 | **2 tables**, 24,000 responses |
+| 10.5281/zenodo.17520820 | CC BY 4.0 | **6 tables**, 119,074 responses |
+| 10.17632/yxpj8h384j.1 | CC BY 4.0 | **2 tables**, 64,332 responses |
+| 10.7910/DVN/TX683E | CC0 1.0 | **1 table**, 26,260 responses |
+| 10.6084/m9.figshare.24264663.v1 | CC BY 4.0 | **5 tables**, 46,771 responses |
+| 10.7910/DVN/WHHV5X | CC0 1.0 | rejected: imputed |
+| 10.6084/m9.figshare.33148451.v1 | CC BY 4.0 | rejected: totals only |
+| 10.6084/m9.figshare.31217140.v2 | CC0 | deferred: instrument boundaries |
+| 10.7910/DVN/HGTS9H | CC0 1.0 | deferred: third-party rights |
+
+**Kubilay, Raiber, Spantig, Cahlíková & Kaaria 2023** (JDE 165:103147), scam
+identification in Kenya. A real test rather than a questionnaire: twelve phone-
+message vignettes — eight scams and four genuine official messages, in two
+fixed blocks of six — each classified scam/no-scam, each followed on the same
+page by a five-point confidence rating, with the page time recorded.
+`kubilay_2023_scam_identification` ships the classifications with per-vignette
+`rt`; `kubilay_2023_scam_confidence` the confidence ratings.
+**`wave` and `treat` are deliberately absent.** The tips treatment is
+administered *between* the two blocks, so block-2-ness is what makes a response
+post-treatment, and the deposit documents `OrderSIA_AB` only as "No/Yes" without
+saying which value means which block came first. The empirical check was
+inconclusive (tips move block A by +0.113 among Order=0 respondents but block B
+by only +0.029 among Order=1), so the condition and the order indicator ship as
+covariates instead of a `treat` that would be backwards for half the sample.
+Item text: **shipped**, and it is the interesting one — the stimuli are phone
+screenshots, so `item_text` is blank under the 2026-09-05 picture-stimulus
+ruling, and what ships is the deposit's option labels plus **the answer key**,
+from the article's appendix Table A1 (`Intention`: Genuine/Fraudulent).
+Table A1 prints six rows per block without naming them M1..M6, so
+`verify_kubilay_2023_scam_identification.R` tests the tie and PASSES: in each
+block independently the two lowest shares of "Scam" answers are exactly the two
+rows marked Genuine (A 0.351/0.448 vs 0.578 lowest fraudulent; B 0.161/0.368 vs
+0.631), and the paper reports only 12% of respondents got all six of block 1
+right, so the separation is a real test rather than an identity.
+
+**Plohl, Mlakar, Smrke, Bisconti & Aquilino 2025** (Zenodo 17520820), the EU
+SOLARIS project's UC1 deepfake experiments. The whole `recoverable_format`
+problem was a semicolon delimiter with comma decimal separators and a `' '`
+missing marker. 1,124 respondents in three countries saw a political deepfake on
+climate change and one on immigration; the two attitude batteries were
+administered **before and after**, so those two tables ship with `wave` 1 and 2
+over the same items rather than as four tables — 26,976 and 31,472 responses. The
+22-item PDTQ was rated separately about each video, which is two tables and not
+one merged table, because the same people rated both and merging would put two
+rows on every (id, item). Plus media literacy (6 items) and trust (4). `treat` is
+again absent on purpose: the deposit never says which of `CC_Group`/`IM_Group`'s
+six codes is the control.
+
+**Aksin 2023** (Mendeley 10.17632/yxpj8h384j.1), 1,218 Turkish preservice
+teachers. Two instruments, and two things had to be established before either
+could ship. (1) The `R`-suffixed columns are **already** reverse-scored, so
+`resp` runs one direction and the tables are not `resp_ambiguous`: every item in
+both blocks, R-suffixed ones included, correlates positively with its block
+total (KDÖ lowest 0.253, BFKÖ lowest 0.172). (2) `BFKÖ3` is a leftover
+**unreversed duplicate** of `BFKÖ3R`, not a 31st item in a 30-item block —
+`BFKÖ3 == 8 - BFKÖ3R` on all 1,217 rows where both are integers, and it is the
+one column in the block correlating negatively with the total. Keeping it would
+have shipped one item twice, once backwards. 222 model-imputed non-integer cells
+(0.5% of the file, spread over 54 columns, differing cell by cell so not a column
+mean) were dropped rather than rounded.
+
+**Kosgei 2026** (10.7910/DVN/TX683E), a 28-item 0/1 fisheries literacy exam
+given to 938 fishers at 37 Kenyan landing sites. The deposit states the scoring
+itself: "Each question is scored 1 if answered correctly and 0 if not". `run_qc`
+warns `multi_scale` on the five item-name prefixes and the answer is that they
+are the deposit's own five domains *within one exam*, not five instruments —
+same respondents, one administration, one total score — so one table.
+`latitude`, `longitude` and the landing site's **name** are dropped in no form
+under the 2026-10-20 geographic ruling (37 sites over 938 people is ~25 each),
+but the clustering is not lost: `cluster_id` ships an anonymous 1..37 site index.
+
+**Lotfi-Bejestani et al. 2023** (BMC Nursing 22:363), 500 Iranian psychiatric
+nurses, five instruments. A BIFF2 `.xls` — unsniffable by pandas, reads with
+`engine="xlrd"` — whose columns are `a1..a15`, `b1..b19`, `c1..c20`, `d1..d15`,
+`e1..e25` and nothing else. **Which block is which instrument was established
+three independent ways, not assumed**: item counts (POJ 20, MS 25, MC 15, MD 15,
+CBI 19) fix c, e and b and leave only MC-vs-MD; the deposit's own subscale totals
+reproduce the paper's published Table 3 exactly (`AA1/AA2/AA3` = 18.58/14.70/
+11.90 = the MD subscales; `DD1..DD5` = 10.35/10.78/10.91/10.61/10.46 = the MC
+subscales; `EE1..EE3` = 19.72/19.14/21.02 = the MS subscales; `CC1/CC2/CC3` span
+5, 6 and 9 items = Niehoff & Moorman's three dimensions), and summing each
+block's own items reproduces the matching total (block a 45.07 vs A's 45.18,
+block d 52.90 vs DD's 53.16, block e 59.66 vs EE's 59.81); and the response
+ranges settle a-vs-d, since MD is 0-6 with a real 0 category and MC is 1-7 with
+none. The script asserts all of that rather than asserting it in prose.
+
+Sentinels were dropped **per block against each instrument's documented range**
+rather than globally: 8 everywhere, and 9 additionally in the POJ block, both
+outside the documented sets and both rare where the real extremes are not (block
+c: 265 fives against 4 eights and 53 nines).
+
+**One anomaly ships as observed and is flagged publicly.** The moral-distress
+block holds 266 responses of 7 on a scale the paper documents as 0-6. 7 is far
+too common to be a missing code (the sentinel 8 appears 31 times) and the
+depositor's own MD total runs to 96 where 15 items on 0-6 would cap at 90, so the
+7s are in their scoring too. Shipped as stored, with an `itemtext_issues.qmd`
+callout owed — this is the page's canonical case, a documented scale that the
+data does not match.
+
+### Item text, one line per shipped table
+
+- `kubilay_2023_scam_identification` — **shipped**, 24 rows: answer key from the
+  article's appendix Table A1, option labels from the deposit's own codebook,
+  `item_text` blank by design (phone-screenshot stimuli).
+- `kubilay_2023_scam_confidence` — **shipped**, 60 rows: the five confidence
+  anchors from the same codebook, same twelve vignette slots.
+- `plohl_2025_pdtq_climate`, `_pdtq_immigration` — not shipped, and the location
+  is known: the 22 PDTQ items are published in the authors' own validation paper,
+  Plohl et al. 2024, IJHCI 41(11) 6786-6803, doi 10.1080/10447318.2024.2384821,
+  in three languages. One hop, but a paper fetch plus a rights read.
+- `plohl_2025_climate_denial`, `_immigration_attitudes`, `_media_literacy`,
+  `_trust` — not shipped; the wording is in neither the deposit nor the article.
+  Look in the two 2025 preprints the Zenodo record cites (SSRN
+  10.2139/ssrn.5351533 and PsyArXiv 10.31234/osf.io/knvby_v1).
+- `aksin_2023_intercultural_sensitivity` — not shipped. Both label levels
+  checked and both empty (0 variable labels over 64 columns; one value-label
+  set, for the `bölüm` covariate). The block is the Turkish ISS adaptation, which
+  means a paper hunt plus the translated-adaptation rights test.
+- `aksin_2023_big_five` — not shipped, and **which** published inventory this
+  adapts was not established: the stems are absent, so there is nothing to
+  search verbatim, and the deposit cites no article.
+- `kosgei_2026_fisheries_literacy` — not shipped, but the cheapest on the list
+  for a later pass: the headers already name each question's content
+  (`science_determine_cpue`, `ecology_knows_urchin_predator`), so only the
+  phrasing is missing. One caveat for whoever extracts it — the workbook repeats
+  the header `economics_understand_cost_benefit` three times for three different
+  questions, so `economics_cost_benefit_1/_2/_3` are tied to source column
+  ORDER, and that block needs the paper rather than the header.
+- the five `lotfi_bejestani_2023_*` — not shipped. A BIFF2 `.xls` carries no
+  label level at all, so neither was missed. Four of the five instruments are
+  published scales one hop away (Niehoff & Moorman 1993; Han et al. 2010;
+  Sekerka et al.; Ohnishi et al. 2018; Kristensen et al. 2005), but the
+  administration was **Persian**, so a later pass owes the administered wording
+  and the 2026-09-08 rights test, not just the English originals.
+
+### Also done: the two andreu_sanchez item text tables TODO.md has owed since 10-21
+
+`andreu_sanchez_2023_information_sources` and `_lifestyle` were deferred on
+2026-10-21 because "shipping it means an English gloss in the `_translated`
+fields, which is IRW-generated content". **That premise was wrong and the
+deferral cost nothing to clear**: the deposit carries the whole questionnaire in
+both languages ("QUESTIONNAIRE IN SPANISH" and "QUESTIONNAIRE IN ENGLISH"
+sheets), so the English is the *source's own* published translation and no
+IRW-generated content ships. Both tables are already live (uploaded 10-21), so
+this is item text only, 50 and 12 rows, gated against regenerated copies of the
+live response CSVs. `language` is `Spanish; English` — 308 of the 333
+respondents answered in Spanish and 25 in English — and per the 2026-09-11
+multi-language ruling the `public_note` says who read something else, which
+earns both tables an `itemtext_issues.qmd` line.
+
+`andreu_sanchez_2023_panas` stays **held**: its 20 affect adjectives are the
+PANAS, registered `block`.
+
+### Verification and gates
+
+- All 16 response tables: `irw-validate --profile upload` conforms and passes.
+- All 4 item text tables: `normalize_nulls.R` → `validate_items.R --resp-csv`
+  (item sets and resp sets match exactly) → `audit_batch.R --resp-dir` →
+  `irw-validate` clean.
+- `audit_batch.R` WARNs "100% of rows have blank item_text" on both kubilay
+  tables. That is the picture-stimulus ruling being followed, not a defect.
+- `irw-validate` WARNs `rights_register` on `lotfi_bejestani_2023_org_justice`:
+  item codes `c1`..`c20` match the register's CD-RISC `match_item_code` pattern.
+  **False positive** — the codes are the deposit's own column names, not item
+  wording, and the instrument is Niehoff & Moorman's POJ. Response data ships
+  regardless; nothing is owed.
+- `irw-validate` WARNs `pii_name` on the two kubilay tables for
+  `cov_phone_internet`, `cov_phone_social_media`, `cov_phone_shared`. All three
+  are 0/1 flags, labelled "Internet on phone (0/1)" etc. in the deposit's
+  codebook. False positives of the kind the check's own text anticipates.
+- `imputed_values*` concentration warnings on several tables are the expected
+  shape for binary classification and 0/1 knowledge items.
+
+### Bookkeeping
+
+16 `dictionary_auto.csv` rows, 16 `codebook_at_ingest.csv` rows (two real
+codebook URLs, the rest `none`), 16 tag rows in `tags_auto_2026-10-28.csv` and
+appended into `tags/tags_auto.csv`, 2 `mapping_verification.csv` rows for the
+kubilay pair plus 2 for the andreu pair, and 18 `itemtext_provenance.csv` rows
+(2 shipped kubilay, 2 rewritten andreu, 14 not-shipped with the location named).
+
+### A sixth deposit, worked after the write-up above: Galanis 2025, 5 more tables
+
+`10.6084/m9.figshare.28868615.v1` (CC BY 4.0), Petros Galanis, 410 Greek
+nurses, one questionnaire carrying five instruments —
+`galanis_2025_gaslighting_work` (18 items, 1-5), `_quiet_quitting` (9, 1-5),
+`_resilience` (6, 1-5), `_phq4` (4, 0-3) and `_work_engagement` (3, 0-6).
+16,400 responses. All five pass the upload profile. Running total for the
+batch: **21 tables, 296,837 responses.**
+
+**The GWS block is the part to read twice.** The deposit ships EIGHTEEN distinct
+gaslighting items in two differently-numbered groups: `GWS_item_1..11`, whose
+labels are numbered 1-11, and `GWS_4/7/9/10/11/15/17`, whose labels keep an
+original numbering from a longer form. The two groups overlap in NUMBER and not
+in CONTENT — `GWS_item_4` is "accuses you of lying when you disagree" while
+`GWS_4` is "makes you feel you are not perceiving things correctly". All
+eighteen labels were read, all eighteen are distinct, and the script asserts
+that. So the item codes must not be read as numbers, and they keep the source
+column names for exactly that reason. One table, because it is one instrument on
+one response scale administered in one sitting.
+
+Two single-item measures became covariates rather than one-item tables: the 0-10
+burnout self-rating and the six-point turnover-intention question.
+
+**Item text is CHEAP here and is HELD anyway — on rights.** This is the
+interesting case of the batch. The `.sav` is unusually complete: 66 of 67
+variables carry a variable label, every item's label IS its full Greek stem, and
+51 variables carry value labels giving the Greek wording of every anchor. So
+extraction would be a cheap-gate `data_labels` job and the administered wording
+is fully recoverable. What is not established is the right to ship it. Of the
+five instruments the register carries exactly two — the PHQ/GAD family is
+`ship`, the UWES is `block` — and the gaslighting, resilience and quiet-quitting
+scales have **no row at all**, where silence does not ship. `irw-validate`'s
+`rights_register` check fires on `uwes_1..3` and is correct to.
+
+So the hold is recorded per table in `itemtext_provenance.csv` with what each one
+still needs, and `TODO.md` carries the follow-up: three register rows and one
+fallback decision, after which four of the five ship from this same file without
+re-opening anything. `galanis_2025_phq4` is the closest to ready — its
+instrument is already `ship`, and the only open question is whether the Greek
+ships or the English ships as a `translated_substitute`.
+
+Worth noting for the register work: the depositor is the Quiet Quitting Scale's
+own author, which is a promising position on one of the three and not the same
+as an established one.
+
+### And a seventh: Aghaei et al. 2025, 4 more tables
+
+`10.5281/zenodo.15346545` (CC BY 4.0), 714 Iranian online shoppers, one 84-item
+Persian questionnaire — `aghaei_2025_internet_addiction` (20 items, 1-5),
+`_emotional_intelligence` (16, 1-5), `_mindfulness` (12, 1-4) and
+`_impulse_buying` (5, 1-5). 37,842 responses. Batch total: **25 tables,
+334,679 responses.**
+
+The instruments were identified from the stems rather than the column prefixes:
+`adi1` is Young's Internet Addiction Test's own first item ("how often do you
+stay online longer than you intended?"), the 16 EI items fall into four blocks
+of four matching the WLEIS's structure, and the 12 mindfulness items on 1-4 are
+the CAMS-R's length and response format. The last two are recorded as **leads,
+not findings** — the stems are Persian, so a verbatim search needs the
+translation rather than the original.
+
+Item text is again in hand and held. Every item's variable label is its full
+Persian stem, numbered with the position it held in the 84-item questionnaire
+(OIB 20-24, EI 37-52, mindfulness 53-64, addiction 65-84), so a later pass
+starts from that rather than re-deriving it. Two things block it: none of the
+four instruments has a register row, and the value-label level is **empty for
+every variable**, so even a cleared extraction would ship stems with no
+`option_text`.
+
+### An eighth: Teriba 2026, 6 more tables — and the clearest rights picture of the batch
+
+`10.7910/DVN/IQSSOU` (CC0 1.0), Akorede Teriba, 263 US collegiate athletes
+across 30 sports, six instruments in one questionnaire —
+`teriba_2026_sport_satisfaction` (16 items, 1-7), `_self_compassion` (12, 1-5),
+`_emotion_regulation` (10, 1-7), `_grit` (8, 1-5), `_mindset_intelligence`
+(8, 1-6), `_wellbeing_who5` (5, 1-6). 15,510 responses. **Batch total: 31
+tables, 350,189 responses from 8 deposits.**
+
+Two processing notes. The mindset block is **one** table: `Fixed1..4` and
+`Growth1..4` are the two poles of Dweck's ITIS administered together on one
+scale, and splitting them would turn one instrument into two four-item tables
+and lose the contrast the scale exists to measure (`run_qc` warns `multi_scale`
+on the two prefixes; the codes keep them so the pole stays readable). And `Q7`,
+"Which state is your school in?", is dropped in no form under the 2026-10-20
+geographic ruling, along with a 32-sport "choose all that apply" grid coded
+1/blank — reading blank as "not selected" would be an assumption about
+missingness.
+
+**This is the deposit where the register did all the work.** The label set is
+the richest of the batch: all 102 variables carry both a variable label (which
+IS the full item wording, as "instruction - item") and value labels (every
+anchor). So extraction is cheap for all six, and the rights question decides
+each one — which is exactly what the register exists for:
+
+| instrument | register | outcome |
+|---|---|---|
+| SCS-SF (Raes et al. 2011) | `ship` | **shipped**, 60 rows |
+| WHO-5 | `block` | held |
+| Grit-S (Duckworth & Quinn 2009) | `block` | held |
+| ERQ (Gross & John 2003), English | `block` | held |
+| ITIS (Dweck) | `hold` | held |
+| 16-item sport satisfaction | **no row** | **row written**, `hold` |
+
+Checking by NAME rather than only running the gate is what made the SCS-SF
+ship: `load_register()` keeps only `hold`/`note` verdicts, so a `ship` ruling is
+invisible to the gate, and this is the second batch in a fortnight where a
+correct table would have been held by running the gate alone (the first cost the
+MSLQ on 2026-10-18).
+
+The SCS-SF identification is **checked in code, not asserted**:
+`make_itemtext_teriba_2026.py` asserts that six of the register row's own
+`match_item_text` fragments appear verbatim among the twelve stems before it
+writes anything. The three unlabelled midpoints ship `option_text` blank — the
+source's value labels read "Almost never 1", "2", "3", "4", "Almost always 5",
+and a bare numeral is the scale point echoed back, not wording.
+
+The new register row is for the sport-satisfaction battery, verdict `hold`,
+written because no originator terms were locatable and silence on a named
+third-party instrument is a hold. It is **not** a Ben ruling and the row says
+so: the 16 items are recognisable as a subset of Riemer & Chelladurai's (1998)
+Athlete Satisfaction Questionnaire (ability utilisation and strategy both line
+up) but the wording is not verbatim, so it may be an adaptation, in which case
+the 2026-09-08 ruling makes the adaptation's terms the ones that matter.
+`match_item_code` is scoped to this one table's codes on purpose — a broad
+`sport_satisfaction_N` pattern would over-fire the way the register's short-stem
+patterns already do. `irw-validate` now fires on the table, which is the row
+working as intended; the response table ships regardless.
+
+### A ninth: Batool & Khan 2024 — and the batch's one real data repair
+
+`10.5281/zenodo.13760224` (CC BY 4.0), 272 Pakistani university students, the
+BFI-44 and the 20-item GAAIS. `batool_2024_big_five` and
+`batool_2024_ai_attitudes`, 17,292 responses. **Batch total: 33 tables, 367,481
+responses from 9 deposits.**
+
+**The responses are un-reversed back to raw agreement, and that is the decision
+worth checking.** The deposit stores 15 of the 44 BFI items and all 8 GAAIS
+negative-subscale items under an `R_` prefix, *already reverse-scored* —
+`R_BFI_6_E` is "Is reserved" and correlates **+0.333** with the rest of the
+extraversion block, which only happens if the stored value has been flipped.
+Independently confirmed: the deposit's own subscale scores equal the mean of
+these stored columns to four decimal places, so these are exactly the numbers
+the depositor averaged.
+
+Shipping that as-is would put two opposite response directions in one table — 5
+meaning "agree strongly" on 29 BFI items and "disagree strongly" on the other 15
+— which is the `resp_ambiguous` defect (#1827). Of the two ways to make it
+consistent, un-reversing is the faithful one: it reconstructs what the
+respondent actually endorsed, it is exact (`6 - x`), and the `R_` prefix names
+precisely which columns to undo. Item keying — that agreeing with "Is reserved"
+scores *low* on extraversion — is a scoring fact about the instrument, not a
+property of the response scale, and belongs to whoever scores it.
+
+**And the deposit missed one reversal, which this does not inherit.** The BFI-44
+has sixteen reverse-keyed items. This deposit flipped fifteen. The sixteenth is
+`BFI_31_E`, "Is sometimes shy, inhibited", whose two same-polarity siblings —
+item 6 "Is reserved" and item 21 "Tends to be quiet" — both carry the `R_`
+prefix and both correlate positively with the block. Item 31 is the only one of
+the eight extraversion items with a NEGATIVE corrected item-total correlation
+(-0.355, flipping to +0.355 reversed), so it was left raw while its siblings
+were flipped, and the depositor's own `BFI_E` score carries that through. Under
+the raw-agreement convention it needs no special handling at all — it is already
+raw — and it comes out consistent with everything else for the first time. The
+script asserts the whole diagnosis rather than trusting it.
+
+Three isolated cells coded 6 on a documented 1-5 scale (one each in
+`R_BFI_27_A`, `GAAIS_7_P`, `GAAIS_18_P`) are dropped as data-entry errors: one
+cell in one item, where the real extremes are used hundreds of times. They are
+also why two of the seven subscale means differ from the recomputed ones in the
+fourth decimal — the depositor summed them.
+
+The `R_` prefix is the one part of the source column name NOT kept in the item
+code, because it records a scoring state this script has undone and keeping it
+would assert something false about the shipped value. `bfi_6_e` means "BFI item
+6, extraversion", true either way, and the prefix is recoverable from the source
+file.
+
+**Two register patterns fixed as a side effect.** Item text is blocked by ruling
+here (BFI-44 `block`, GAAIS `hold`), but neither gate fired at first: the BFI-44
+row's `BFI_[NEOAC]_[0-9]` alternative puts the factor letter *before* the number
+and so could not match `bfi_1_e .. bfi_44_o`, and the GAAIS row's
+`match_item_code` was **empty**, so no GAAIS table could ever trip it. Both are
+now filled in, anchored and number-then-letter, and both fire. That is the
+"a miss is not an all-clear" warning in the skill arriving as a concrete pair of
+misses.
+
+### A tenth: Zheng, Zhao & Wu 2025 — the Sport Motivation Scale, and its first register row
+
+`10.6084/m9.figshare.29316266.v1` (CC BY 4.0), 571 Chinese primary-school and
+junior-high students aged 10-14. `zheng_2025_sport_motivation`, 15,927
+responses. **Batch total: 34 tables, 383,408 responses from 10 deposits.**
+
+**The instrument was identified from the subscale structure, not the deposit's
+label.** The deposit's label says nothing; what identifies it is that the file
+computes seven four-item subscale means and names them in Chinese in
+self-determination order — 求知 (to know), 成就 (accomplishment), 刺激
+(stimulation), 认同 (identification), 内摄 (introjection), 外部调节 (external
+regulation), 无动机 (amotivation) — and the stems match ("I used to have good
+reasons for doing sport, but now I am asking myself if I should continue"). That
+is the Sport Motivation Scale (SMS-28; Pelletier et al. 1995). One table: seven
+subscales, one response format, one administration, and the item codes keep the
+deposit's shuffled `MO1..MO28` so the grouping stays recoverable (it is printed
+by the script).
+
+**The IPAQ-style activity block is NOT shipped, and the reason is unit mixing
+inside one block.** `I1..I9` alternates counts of DAYS (I1, I3, I5, I8) with
+durations in MINUTES (the rest, running into the hundreds). One table would mix
+two incompatible response scales; splitting by unit would give two tables of
+four-ish behaviour-recall questions rather than a measured battery. Its nine
+`ZI*` z-scores and the `ZPA` composite go with it, as does `Group` — the paper's
+latent-profile class, which is derived from these same 28 items and is a result
+rather than a covariate.
+
+**Item text is in hand and held, and this batch wrote the SMS's first register
+row.** The `.sav` carries every item's full Chinese stem as its variable label
+and all five Chinese anchors as value labels, identical across the 28 (the
+script asserts both). So extraction is a cheap `data_labels` job from this one
+file whenever the rights clear. They do not clear yet: the SMS had **no**
+register row, and silence does not ship. The new row is verdict `hold` and
+carries a lead worth following before anyone rules on it — the Center for
+Self-Determination Theory publishes permissive terms (academic use permitted)
+but on its page for the **SMS-II**, the *revised* scale, which is a different
+instrument. That is the 2026-09-04 "two pages, two terms" shape exactly. If CSDT
+also distributes the SMS-28 itself, this becomes a `ship`; and since the
+administration was Chinese, the 2026-09-08 ruling would then govern what ships.
+
+### An eleventh: Wan Sulaiman 2023 — 3 tables, and a deposit that is on figshare twice
+
+`10.6084/m9.figshare.23964495.v1` (CC BY 4.0), 353 Saudi Arabian university
+students. `wan_sulaiman_2023_resilience` (23 items, 1-5), `_depression` (18,
+0-3) and `_cyberbullying` (11, 1-5), 18,356 responses. **Batch total: 37
+tables, 401,764 responses from 11 deposits.**
+
+**The same file is deposited twice and both copies surfaced as separate
+candidates in this one triage.** figshare `23964495` ("new
+data-Cyberbullying, resilience and depression.xlsx") and `23977905` ("Excel
+Data: Cyberbullying, resilience and depression") carry a file of the same name,
+the same 92,655 bytes and the same MD5
+`063e8a222ddd9ca3b89cf56b4bce7a3a`. Shipped once; the second lead row is marked
+`rejected_content` as a duplicate with the MD5 recorded, so it cannot come back
+as a second dataset. This is the `10.7717/peerj.16295` double-ship of
+2026-08-12 in a different shape — there, the same DOI arrived twice by two
+routes; here, one dataset has two DOIs — and it is why the MD5 goes in the lead
+note rather than just "duplicate".
+
+**No instrument is named for any of the three, on purpose.** The deposit is a
+bare `.xlsx` — a format with no label level at all — its columns are `R1p..R23s`,
+`CB1..CB11`, `D1..D18`, and the figshare record cites **no** article
+(`resource_doi` is null) and names no instrument in its description. A 23-item
+five-factor resilience measure and an 18-item 0-3 depression screener are both
+recognisable *shapes*, and that is not an identification. Guessing would put a
+wrong name on the table and, worse, invite a wrong rights ruling against it
+later, so all three provenance rows say `unknown`/`unknown` and record that the
+paper has to be found first.
+
+What the script does establish rather than assume: the resilience block's item
+numbering runs **1..23 exactly once** across the five suffixes, which is what
+says the suffixes partition one instrument rather than marking five that happen
+to share a prefix. The codes keep the source names so the subscale structure
+survives for whoever does identify it.
+
+### A twelfth: Mersin 2025 — 4 tables, and the source's own grouping as the basis
+
+`10.5281/zenodo.17631162` (CC BY 4.0), 702 Turkish pre-service mathematics
+teachers. `mersin_2025_technology_acceptance` (15 items, 1-5), `_ai_literacy`
+(6), `_ai_tpack` (5), `_ai_self_efficacy` (3). 20,358 responses, no missing
+data at all. **Batch total: 41 tables, 422,122 responses from 12 deposits.**
+
+**The four tables follow the deposit's own grouping rather than an inference
+from the column prefixes.** Its description names exactly four things — "AI
+literacy, AI-TPACK, self-efficacy, and technology acceptance" — and the 29
+columns fall into exactly four matching groups: `AIL` (6), `TPCK` (5), `SE` (3),
+and `PU`/`PEU`/`ATT`/`BI` (3+4+4+4), which are the four canonical
+technology-acceptance constructs. So technology acceptance is **one** 15-item
+table, not four thin ones: the source treats it as one construct, all 15 items
+share the response format and the administration, and the item codes keep the
+prefixes so anyone who wants `pu`, `peu`, `att` and `bi` separately can take
+them off the `item` column. `run_qc` warns `multi_scale` on those four
+prefixes, and the answer is that splitting on a prefix the source itself treats
+as one thing would read structure into it the source does not claim.
+
+This is the contrast with the Aldosari deferral earlier in the batch, and worth
+keeping the pair in mind: there, the construct names came from a FILE NAME and
+the item counts contradicted the instrument they implied, so nothing shipped.
+Here the names come from the deposit's own prose and the column counts match it
+exactly, so four tables ship — and still with no instrument named, because
+knowing the construct is not knowing the instrument.
+
+Item text is unrecoverable from this deposit and the script asserts why: **0 of
+29** variables carry a variable label and **0** carry value labels. The
+description says the data "supports the findings reported in the article"
+without naming or linking it and the record has no related identifier, so a
+later pass must find Mersin's paper first.
+
+### A whole class of lead rejected, and the filter moved to the source
+
+Eleven of the 23 `worth_retrying` rows turned out to be the same thing, and it
+is not a dataset: a DOI ending `.tNNN` on a journal article is the **article's
+own table** — figshare hosts each one as a separate deposit with its own DOI.
+The titles say it outright: "Regression model of burnout on quality of working
+life.", "Subgroup analyses for studies on burnout.", "Structure of the
+(sub)samples according to the working memory ...", "Descriptive statistics and
+Demographic Differences in Doping ...". They reached `worth_retrying` because
+the retriage's text-coded-Likert heuristic fires on any table with words in its
+cells, which a results table always has.
+
+All eleven are now `rejected_content` with one shared reason, rather than
+eleven individual verdicts. **And the rule moved into
+`doi_hygiene.py`** — `is_article_object()`, beside the existing
+`strip_supplement_suffix()`, with `irw_discover_updated.py` dropping such hits
+and printing the count the way it already does for
+`_UNREACHABLE_DOI_PREFIXES`. That file is the repo's single place for DOI-shape
+rules precisely so two copies cannot drift (the comment there records the
+2026-10-21 defect that taught it).
+
+**The distinction cuts both ways and the test enforces it.** `.sNNN` is a
+supplementary FILE and is frequently the real data —
+`10.3389/fpsyg.2022.845355.s001` in this same leads file is a genuine
+1,297-respondent dataset — so it must NOT be dropped on this reasoning.
+`tests/test_article_object_doi.py` asserts `.tNNN`/`.gNNN` are caught, that
+`.sNNN`, Mendeley `.1` and figshare `.v4` versions are not, and that the two
+rules do not interfere. Full suite: 276 passing.
+
+This takes effect on the NEXT discovery run; the 2026-10-28 sweep was already
+in flight with the old module loaded.
+
+### The four repeated-measures leads worked, and a 50x count error in the triage
+
+The `worth_retrying` bucket's other shape is a `dup_id_item` failure the
+retriage read as "consistent with a longitudinal/repeated-measures design",
+which is exactly what IRW wants a `wave` for. Four rows had it. None shipped,
+and two for a reason worth recording.
+
+- **`10.17026/ss/nidsij`** — the one that hurt. An experience-sampling study of
+  post-COVID symptoms: 10 momentary-affect items and 9 symptom items per beep
+  on 1-7, with `Timepoint_Total`/`Day`/`Timepoint_Day` sitting there as a wave.
+  Precisely the shape IRW is short of. **The triage reported
+  `n_participants=494`; the file has 749 rows and TEN unique participants**, at
+  27-84 beeps each — the count was off by a factor of 50, because in an ESM file
+  the rows are beeps and whatever the resolver counted was not people. Below the
+  flat N>=100 floor, so skipped outright, and the lead note says to reconsider
+  this deposit first if that floor is ever revisited for repeated-measures
+  designs.
+- **`10.5061/dryad.ksn02v73p`** — same error, smaller factor: 151 reported, **64
+  unique females** over 249 phonotaxis trials. Non-human is not itself a reason
+  to skip (2026-08-10) so it was judged on content, and it fails twice: the
+  floor, and no item battery — the conditions are 2 modalities x 4 silent
+  delays.
+- **`10.5281/zenodo.17198144`** — 110 children at two timepoints, above the
+  floor, but each timepoint has only four measures and every one is a subtest
+  TOTAL (Corsi forward, Corsi backward, locomotor, ball skill). Aggregate.
+- **`10.7910/DVN/KX1BYC`** — driving telemetry, including a 1.4 GB breadcrumb
+  file over the size cap, and the one clinical file holds composite neuropsych
+  scores only (trail A/B times, free-recall total, fluency count, CDR). No item
+  battery, and the breadcrumbs are GPS traces.
+
+**The lesson for the next lead-working pass: `n_participants` in a triage row
+is a resolver's guess, not a fact.** Both ESM/trial-level files reported a
+count several times the real subject count, and in both cases the real number
+decided the verdict. Check `nunique()` on the id column before ranking a
+repeated-measures lead by size — the 100 <= N <= 50,000 shape filter is being
+applied to a number that can be wrong by 50x in exactly this bucket.
+
+That closes the interesting half of `worth_retrying`. With the eleven
+article-table rows rejected as a class and these four worked, the bucket is down
+from 23 to 8 and the whole leads file to 76 `unworked`.
+
+### A thirteenth: Sariyska et al. 2019 — two tables from one workbook, one shipped item text and one held
+
+`10.3389/fpsyg.2019.02591.s001` (CC BY 4.0), 444 German-speaking adults, study
+2 of a Frontiers paper on personality and dietary choices.
+`sariyska_2019_dark_triad` (27 items, 1-5) and `_food_frequency` (10 items,
+1-7), 16,428 responses, no missing data. **Batch total: 43 tables, 438,550
+responses from 13 deposits.**
+
+The `recoverable_format` flag was a **two-row title above the header** on the
+"Raw data" sheet — `header=2` and it reads. Worth noting as the cheapest class
+of that flag.
+
+**The workbook's second sheet is a real codebook**, three columns giving every
+variable's name, its full wording and its value list with every anchor named.
+That changes two things:
+
+- **The permitted response sets are documented, not inferred.** `run_qc` is
+  given them as `permitted_values`, and that is what turned three
+  `item_scale_outlier`/`resp_scale_nested_support` warnings into clean passes:
+  three SD3 items nobody answered 5 to are a rarely-used extreme, not a
+  different scale, and the codebook is what says so. This is the
+  response-scale-evidence path in the shared validator being used as intended
+  rather than the warnings being explained away.
+- **One of the two item text tables ships, and the contrast is the lesson.**
+  The ten food-frequency items are the study's OWN questions, so the deposit's
+  CC BY is the wording's licence and they ship (70 rows). The 27 SD3 items in
+  the same sheet are Jones & Paulhus's Short Dark Triad reproduced verbatim, and
+  a deposit's CC BY covers the depositors' material, not a third-party
+  instrument reproduced inside it — so they are held, and the SD3's **first**
+  register row goes in with verdict `hold`.
+
+Everything in the shipped item text is PARSED from the codebook sheet rather
+than retyped, and the script asserts the sheet's two awkward features instead of
+working around them: the shared stem appears once, on the first item's label,
+with the other nine labels being the bare food name (so the stem is split off
+and becomes `instructions`), and the anchors arrive as a single quoted
+`1 = "never", ...` string, parsed into seven option rows and asserted identical
+across all ten items. A mis-parse fails loudly rather than producing a
+plausible wrong mapping.
+
+The SD3 row carries two leads and one warning. The leads: Paulhus's own lab page
+is where a free distribution would live (third-party hosts say research use with
+acknowledgement, which is not the originator saying it), and if it clears,
+extraction is cheap from this same file — but check which language was
+administered first, since the sample is German-speaking and the codebook's
+wording is the English original. The warning: the register's existing
+SRP-III/SRP-4 rows are `block` on Qualification-Level-B terms, and those are a
+**different instrument's** terms that must not be read onto the SD3.
+
+### A fourteenth: Mazzini & Riemer 2026 — 1,692 dogs, and `wave` deliberately not used
+
+`10.6084/m9.figshare.30540344.v3` (CC BY 4.0), the Big Dog Play and Motivation
+Questionnaire. `mazzini_2026_arousal_regulation` (9 items, 1-5, 1,692 dogs) and
+`_puppy` (the same nine answered retrospectively, 1,193 dogs). 25,839
+responses. **Batch total: 45 tables, 464,389 responses from 14 deposits.**
+
+`id` is the **dog**, which is what `datastandard.md` means by "the focal unit
+being measured -- typically a person, but sometimes another entity". Non-human
+subjects are not a reason to skip (2026-08-10) and this was judged on content:
+it is an ordinary repeated-item owner-rated battery.
+
+**Two tables rather than one with `wave`, and this is the judgement call of the
+deposit.** The nine items were answered twice — about the dog now
+(`problems_calming`) and retrospectively about the dog as a puppy
+(`puppy_problems_calming`) — but both answers were given at the SAME sitting.
+Putting them under `wave` 1 and 2 would present a single-occasion retrospective
+recall as a longitudinal measurement, which is exactly what `wave` tells anyone
+fitting a model to it. Two tables say what happened, and nothing is lost: the
+item codes are identical and both tables carry the same `id`, so the pair joins
+on `(id, item)`. The puppyhood table is smaller because about 1,180 of the 1,692
+owners had the dog from puppyhood — structural missingness, not attrition.
+
+**The AB-Q's own items are not in the deposit, and the range is what says so.**
+The description mentions the Addictive-like Behaviour Questionnaire, and
+`AB_Q_score` is there — spanning **15-75**, i.e. fifteen items on 1-5, while
+the nine items shipped here sum to 11-43 and correlate 0.48 with it. So the
+AB-Q is a *different*, 15-item instrument whose per-item responses were never
+deposited. The script prints and asserts that rather than leaving the next
+reader to wonder where fifteen items went.
+
+### THREE of the 106 leads were deposits IRW already has, and one nearly got a second script
+
+The best find of the pass, and it was nearly a defect instead. While working
+`10.7910/DVN/EL4KPR` — a 12-item Moral Foundations short form on a 1,000-person
+nationally representative US sample, CC0 — the Write tool refused the new
+`data/gries_2011_moral_foundations.py` because **that file already existed**.
+The table is live in `metadata/metadata.csv` (shard 8) with 12,000 responses,
+shipped on 2026-10-21. That is the SKILL.md Step 3 check ("`grep -rl "DOI: <the
+doi>" ../data/*.py` before writing a new script for any candidate") earning its
+place, and it is the 2026-08-12 double-ship of `10.7717/peerj.16295` in a new
+shape.
+
+So the whole leads file got cross-checked against everything IRW already
+accounts for — `dictionary_auto.csv`'s three DOI columns and every `DOI:`/`Data:`
+header line in `data/*.py`. **Three of the 106 were already shipped:**
+
+| lead DOI | already in IRW as |
+|---|---|
+| `10.7910/DVN/EL4KPR` | `gries_2011_moral_foundations` (live, shard 8) |
+| `10.7910/DVN/ZXQBC7` | `rimisp_2021_household_services`, `_care_work` |
+| `10.5281/zenodo.17802433` | `wenzke_2025_knowledge`, `_attitude` |
+
+**The cause is a timing gap, and it is now closed at source.**
+`_load_existing_irw_dois()` fetches the live dictionary **Google Sheet**, and a
+row staged by `stage_dict_row.py` only reaches that sheet when
+`metadata/02_biblio.R` next runs. In between — which can be a week — a deposit
+this pipeline has already processed is still discoverable, and the next sweep
+re-surfaces it as a fresh candidate. The seen ledgers do not help: they catch
+re-discovery within a connector, not a deposit already shipped by another route.
+
+`_load_staged_dict_exclusions()` now reads this repo's own
+`dictionary_auto*.csv` files (all five sources), both DOI columns and the data
+URL, and `_load_auto_exclusions()` unions them in and prints the count. On the
+live file that is **2,818 DOIs** the exclusion set did not previously carry, and
+all three of the leads above are in it.
+`tests/test_staged_dict_exclusion.py` covers both DOI columns, the URL
+fallback, all five source files, a missing file, and asserts the three real
+DOIs against the repo's actual `dictionary_auto.csv` rather than a fixture.
+Full suite: 280 passing.
+
+**One observation for Ben, recorded and not acted on.**
+`gries_2011_moral_foundations` is live carrying `cov_state`, `cov_south`,
+`cov_black` and `cov_hispanic`. `cov_state` is a US state, and the 2026-10-20
+geographic ruling — made the day *before* that table shipped — is what this
+batch used to drop a US state from `teriba_2026_*` and county/state from
+`gries`'s own would-be replacement. Whether a live table carrying a state wants
+correcting is a corpus-trust call, not a lead-working one.
+
+### A fifteenth: Soressa 2024 — the batch's cleanest item text
+
+`10.7910/DVN/2BD1HP` (CC0 1.0), 316 members of a community living near dams.
+`soressa_2024_dam_attitudes`, 31 items, 9,796 responses, **plus 155 item text
+rows**. **Batch total: 46 tables, 474,185 responses from 15 deposits.**
+
+Why this one ships item text where most of the batch held it: the items are the
+study's **own** dam-specific questions ("Lose of grazing and agricultural
+land", "Increases availability of recreational facilities and entertainment"),
+matching no published scale, so the deposit's CC0 is the wording's licence and
+there is no third-party instrument to rule on. Every one of the 31 variables
+carries its full English wording as a variable label and all five anchors as
+value labels, and both the processing script and the generator assert that
+rather than assuming it — all labels non-empty, all 31 DISTINCT, one shared
+five-anchor set.
+
+The shared STEM is not in the file. The labels are bare predicates that plainly
+continued a question the deposit does not record, so `instructions` and
+`section_prompt` are left **empty** rather than invented.
+
+**The response-range warnings are the interesting part.** Observed values differ
+by block — the positive-impact items run 1-4 and the negative-impact items 3-5 —
+so `run_qc` reports `resp_scale_mixed`. That is not two scales: the value labels
+define 1-5 for every item, and what the data show is a community that agrees
+with the harms and disagrees with the benefits. The documented set goes to
+`run_qc` as `permitted_values` and the docstring says what remains and why,
+rather than the warning being explained away. Same for `multi_scale` on the
+seven prefixes, which are the instrument's own nine dimensions.
+
+### A sixteenth: Khashaba 2023 — a real two-wave design, and a pairing that had to be earned
+
+`10.7910/DVN/TN3UNW` (CC0 1.0), 133 nurses and housekeepers at Mansoura
+Emergency Hospital measured before and after a waste-management intervention.
+`khashaba_2023_waste_knowledge` (29 items x 2 waves) and `_attitude` (10 x 2),
+9,888 responses. **Batch total: 48 tables, 484,073 responses from 16 deposits.**
+
+This is `wave` used for what it means: two genuine occasions, not the
+retrospective recall the `mazzini_2026_*` pair deliberately avoided calling a
+wave.
+
+**The pre/post pairing is the work.** The column names do not pair: they are
+truncated SPSS names that drift between waves (`wast_manQ3_Pre` /
+`waste_manag_Q3_Post`, `amp.fing_Q14_Pre` / `amp.fings_Q14_Post`), and the
+question number is not even a key — **two different knowledge questions are
+both labelled Q9** (`Vaccin_Q9`, `Sharps_Q9`), while others carry the number
+without a Q and sometimes after the wave marker (`Dis.chem_pre_23`).
+
+So the pairing is positional, each block alternating Pre, Post, Pre, Post
+strictly — and because a one-position slip is exactly the defect that ships
+silently, it is **checked three ways** before any pair is accepted: the two
+names must share a normalised prefix of at least 3 characters (the tightest real
+pair shares exactly 3, `bio`, from `Bio.fluids.radio_Q19_Pre` /
+`Bio.radio_Q19_Post`); where both carry a question number it must be the same
+number; and where both carry a variable label the labels must correspond. The
+run prints every accepted pair with its shared prefix, so the whole mapping is
+reviewable rather than asserted. Item codes are the source name minus the wave
+marker (`med_w_q1`, `bio_fluids_radio_q19`), not a positional index.
+
+**Two things dropped, each for a stated reason.** One knowledge question is not
+correct/incorrect at all — "how do you dispose of chemicals" offers three
+UNORDERED categories (don't know / after dilution / in a special container) — so
+it is dropped rather than forced into a 0/1 table, and the loop asserts it is
+the only one. And the nine PRACTICE items are not shipped: five are genuine 0-3
+frequencies while four are a collapsed binary coded at the ENDPOINTS of that
+same scale (`['sometimes-always-fewtimes', 'No']`, only 0 and 3 observed), so
+one table would mix a four-category frequency with a two-category recode
+wearing the same numbers.
+
+**The attitude block's 0/1 is correctness, not a scale direction.** Its value
+labels differ by item — `['dont know or disagree', 'agree']` on some,
+`['agree 0r dont know', 'disagree']` on others — because the undesirable items
+are reverse-worded. In both cases 1 is the desirable answer, exactly as 1 is the
+correct answer in the knowledge block, so one table is right and the direction
+is uniform. Worth contrasting with `batool_2024_*` earlier in this batch, where
+differing directions were a real `resp_ambiguous` problem that had to be undone.
+
+Expect heavy `imputed_values*` concentration at wave 2 (98% correct on one
+knowledge item, 99% on one attitude item). The intervention worked; that is the
+result, not a defect.
+
+### A seventeenth: Elhai 2025 — and a `ship` ruling that unlocks an instrument IRW will meet again
+
+`10.17632/sp3h5k27xk.1` (CC BY 4.0), 329 US college students.
+`elhai_2025_social_phobia` (17 items, 0-4), `_intolerance_uncertainty` (12,
+1-5) and `_smartphone_addiction` (10, 1-6). 12,668 responses. **Batch total: 51
+tables, 496,741 responses from 17 deposits.**
+
+Unusually for this batch, **nothing had to be identified**: the deposit's own
+description names all three instruments outright ("the 12 items of the
+Intolerance of Uncertainty Scale-12 appear (iu1 to iu12). Next, the ten items of
+the Smartphone Addiction Scale-Short Version ... Next, the 17 items of the
+Social Phobia Inventory"). Three tables, because three published instruments on
+three response scales are not subscales of one battery. `id` is the row index:
+the deposit calls its own id "consecutively numbering participants" but the
+values are seven digits, i.e. survey-platform response ids.
+
+**The useful part is the rights work, and one of the three came out `ship`.**
+
+- **SAS-SV — `ship`, and this is its first register row.** The scale's own
+  development paper, Kwon, Kim, Cho & Yang (2013), PLoS ONE 8(12):e83558, is
+  licence **cc by** per Europe PMC (PMC3877074) and prints the item wording
+  itself. That is originator-publishes-under-CC-BY, the same shape as the
+  register's MFQ-2 row, and the clause is quoted from the originators'
+  publication rather than from a third-party host. It is worth having beyond
+  this one table: the SAS-SV is common.
+
+  Not extracted in this batch for a concrete reason recorded in the row: the
+  article's Table 1 is the content-validity table of the **full 33-item SAS**,
+  and which ten became the short version has to be read off the paper rather
+  than inferred from that table's order.
+
+  Two warnings went into the row. Its `match_item_code` is deliberately narrow
+  (it requires an `sv`/`sassv` marker) and so will **not** fire on this very
+  table's bare `sas1..sas10` codes — `sas1` is far too generic to anchor on and
+  would collide with the Social Appearance Anxiety and Statistics Anxiety
+  scales. That is the skill's "a miss is not an all-clear" made concrete, in
+  the row itself. And the register's Smartphone Addiction **Inventory** (SPAI)
+  `block` row is a different instrument.
+
+- **IUS-12 — `block`, by derivation rather than new research.** The register
+  already carried the 27-item IUS as `block`, and a short form of a blocked
+  longer form is itself blocked (Ben's 2026-10-17 ruling on the BFI-10, which
+  derived the BFI-10 row forward the same way). The new row records that
+  derivation so nobody repeats it, and the gate now fires on `iu1..iu12`. The
+  register now holds **three** IUS rows that deliberately do not share a
+  verdict: the 27-item IUS (`block`), the Italian IUS-R revision (`hold`), and
+  this English short form (`block`).
+
+- **SPIN — still owed.** No register row, no originator terms located. Recorded
+  as owed rather than guessed; the starting point is whether Duke University
+  publishes terms for it.
+
+### An eighteenth: Codonhato 2025 — the deposit's own totals as the mapping key
+
+`10.6084/m9.figshare.29959520.v1` (CC BY 4.0), 196 Brazilian individual-sport
+athletes, no missing data anywhere.
+`codonhato_2025_doping_attitudes` (17 items, 1-6), `_achievement_goals` (16,
+1-5), `_morality` (13), `_passion` (12) and `_self_efficacy` (9). 13,132
+responses. **Batch total: 56 tables, 509,873 responses from 18 deposits.**
+
+**The five tables are the deposit's own five constructs, and what ties them to
+the blocks is its own computed totals.** The description names exactly five
+things — "morality, self-efficacy, achievement goals, passion, and doping
+attitudes" — and the file carries a total for each, in Portuguese, which is
+what makes the mapping a reading rather than a guess from the prefixes:
+`AUTOEF` is autoeficácia; `ORTASK`/`OREGO` are task and ego orientation;
+`PH`/`PO` are paixão harmoniosa and obsessiva, and 12 passion items splitting
+6/6 is the Passion Scale's own shape; `DOP` is doping. Item codes keep the
+source names so a user can take the subscales from the prefix.
+
+This is the third time in the batch the same question came up and got three
+different answers, which is worth keeping together: **Mersin** shipped four
+tables because the deposit's prose named four constructs and the column counts
+matched; **Aldosari** shipped nothing because the names came from a file name
+and the counts contradicted the instrument they implied; **Codonhato** ships
+five because the prose names five AND the deposit computes a total for each.
+The test that separates them is whether the source itself asserts the grouping.
+
+`DATASET` (1 or 2) distinguishes two samples and ships as `cov_dataset` — the
+"same instrument across samples" rule already satisfied, since the deposit
+delivers them as one file over one id space.
+
+Item text is not shippable (a bare `.xlsx`, no label level at all) and no
+published instrument is named, so there is nothing to check a register against.
+One lead recorded for a later pass: the 17-item 1-6 doping block has the shape
+of the Performance Enhancement Attitude Scale, which would make it a
+third-party instrument rather than study-authored — worth confirming before
+anything is extracted.
+
+### The `surf` (DataverseNL) question, measured and answered
+
+Two sweeps in a row flagged this. The ledger answers it: **314 `10.34894` keys
+have ever been triaged, and they have produced one `good`, zero
+`worth_retrying`, one shipped table, and 263 `no_usable_file`.** That is a
+~0.3% good rate against a corpus-wide rate nearer 1%, on a sixth of each sweep's
+candidate budget, and the failure mode is not relevance but access — DataverseNL
+answers 403 on file download. The 2026-10-28 discovery sweep was therefore run
+with `--sources` naming the other eight connectors and omitting `surf`. That is
+a per-run choice, not a code change: `surf` is still in `irw_discover_updated.py`
+and one flag brings it back.
+
+## 2026-10-28c — the sweep itself: 1,204 candidates, 388 triaged, 8 tables, 80,310 responses
+
+The discovery half of what Ben asked for on 2026-10-28. Nothing uploaded; the
+eight tables join the 2026-10-28b batch in the same staging folders.
+
+### The sweep
+
+**134 term variants** — 15 new English topics x 9 languages, with one French
+gambling-severity variant dropped as already logged — all verified absent from
+`search_terms_log.csv` before the run and all 134 appended after it (10,484 ->
+10,617 rows). Territory deliberately away from the last several sweeps:
+gambling severity, career-decision self-efficacy, mathematics anxiety, science
+attitudes, listening comprehension, procrastination, mindfulness, civic
+engagement, bullying victimisation, disordered eating, sense of coherence,
+digital literacy, musical ear, essay rating rubrics and interoceptive
+awareness.
+
+**1,204 candidates** in 100 minutes: zenodo 450, dataverse 316, figshare 239,
+scholars_portal 87, datacite 58, openaire 36, mendeley 14, dryad 4. A further
+5,197 hits were dropped by `_UNREACHABLE_DOI_PREFIXES` (ICPSR, SRDA) and 6 as
+supplementary-file DOIs of papers already accounted for. 816 of the 1,204 were
+already in `repo_triage_seen_keys.csv`, leaving **388 triaged**: 3 good, 116
+human_assistance, 169 no_usable_file, 61 download_failed, 18 below_min_n, 15
+not_item_response, 3 pii_suspected, 1 license_restricted, 2 error.
+
+Step 2b on the 116: 48 `recoverable_format`, 39 `not_item_response`, 18
+`worth_retrying`, 6 `human_review`, 5 `aggregate_continuous`, 0 `conj`. **Both
+bookkeeping lines appeared and were checked**: 116 refined flags recorded in
+`repo_triage_seen_keys.csv`, and the 6 `human_review` rows archived to
+`human_review/human_review_figshare_2026-10-28.csv`. 61 download failures were
+deliberately left OUT of the ledger by the script so a later run retries them.
+
+`leads/repos_leads_2026-10-28c.csv` holds all 387 distinct rows with their
+verdicts: 168 `blocked_access`, 128 `unworked`, 60 `rejected_content`, 18
+`below_min_n`, 6 `archived_human_review`, 3 `shipped`, 3 `skipped_pii`, 1
+`blocked_licence`.
+
+### 57 of the 388 were article tables — the fix made the same day would have caught them
+
+**15% of the triage budget went on published results tables.** 57 candidates
+carried a `.tNNN`/`.gNNN` DOI, i.e. an article's own table or figure hosted by
+figshare with its own DOI — "Internal consistency and correlations between the
+IPS and other measures", "Subset for logistic regression analysis". Every one
+was downloaded and parsed before being flagged, and they dominate the
+`worth_retrying` bucket because the text-coded-Likert heuristic fires on any
+table with words in its cells.
+
+`is_article_object()` in `doi_hygiene.py`, added earlier the same day for the
+2026-10-28b leads pass, drops exactly this shape at discovery — but this sweep
+had already loaded the old module when it was written, so the class is rejected
+by hand here. **The next sweep gets those 57 downloads back.** `.sNNN` is
+deliberately not caught: a supplementary file is frequently the real data.
+
+### Three structural-PII skips, each verified by opening the file
+
+The rule says to confirm the column really holds personal data before
+overriding, so all three were opened:
+
+- `10.5281/zenodo.22800681` — **three** identifier columns, each populated for
+  all 350 respondents: `Email Address` (349 distinct), `Nama` (346 distinct
+  given names) and `Email/No, WhatsApp` (332 distinct, mixing emails with phone
+  numbers).
+- `10.17632/dn9djfbj4r` — a `Name` column populated for all 302 rows with 292
+  distinct given names, beside `School Name` (153 distinct primary schools).
+  Children's names plus their school compounds the sensitivity rather than
+  reducing it.
+- `10.5281/zenodo.20790` — `nombre` populated for all 40 rows with 39 distinct
+  children's given names. Fails on a second independent ground too: N=40.
+
+All three are the name/email tier, which the 2026-10-20 narrowing did not touch
+— it moved only geographic codes. No `pii_blocked_candidates.csv` exists by
+design: a structural-PII skip can only be unblocked by the depositor publishing
+a different file.
+
+### The three `good` rows, all worked
+
+**Ibaceta 2026** (`zenodo.23498072`, CC BY), 474 Chilean students — 279
+secondary, 195 university. Five instruments, five tables, 64,981 responses:
+the FFMQ (39 items), Ryff's well-being scales (37), a mind-wandering content
+measure (26), the DERS (25) and the Daydreaming Frequency Scale (12).
+
+**Its "Coding" sheet is the best codebook of the day, and two things follow.**
+First, *the stored values are RAW*: the sheet has a `reverse_before_scoring`
+column (Yes on 40 items) and a `transformation` column spelling out `6 - raw
+response` / `7 - raw response`, and a transformation to be applied **before
+scoring** is one that has NOT been applied to the file. That is the exact
+opposite of `batool_2024_*` in the same day's leads pass, where the reversals
+*had* been baked in and had to be undone to stop `resp` carrying two
+directions — so the same evidence type, read correctly, leads to opposite
+actions, and the script asserts the two transformation strings are the only
+ones present so a change in convention fails loudly rather than silently
+inverting 40 items. Second, the codebook's facet for every item ships as
+**`itemcov_facet`**, which is what that column is for: a user gets the FFMQ's
+five facets, Ryff's six, the DERS's five and positive-vs-negative mind
+wandering without re-finding the deposit.
+
+Two instruments ship a subset of their own numbering and the item codes
+preserve it rather than renumbering — mind-wandering runs 3..39, Ryff's omits
+10 and 34 — because renumbering would destroy the only link back to the source
+instrument's item numbers. Item text is not shipped: the codebook maps
+structure, not wording. Ryff is registered `hold` and the gate fires; the FFMQ,
+this 25-item Spanish DERS, the mind-wandering measure and the DFS all need
+rows, and the register's existing DERS row is a *different* (28-item Spanish)
+adaptation whose `block` must not simply be read across.
+
+**Demirdelen, Özer Özkan & Acar Güvendir 2023** (`zenodo.8072287`, CC BY), a
+three-level Turkish maths-anxiety study. 413 students x 20 items and their
+parents x 16 items, 14,868 responses.
+
+**The nesting ships.** `cluster_id` is the teacher — 12 of them, 11 to 87
+students each — and the script asserts the teacher id agrees row-for-row across
+all three level-1 sheets before writing anything. The student and parent tables
+are **row-matched**: `öğrenci-1..413` and `ebeveyn-1..413` in the same order
+with the same teacher on every row, so parent N is student N's parent and the
+shared `id` is the family link, which the docstring states explicitly because
+the respondent differs between the two tables. The deposit's 29-item **teacher**
+instrument is a real battery and is NOT shipped: 12 respondents, far below the
+floor. Its level-2 demographics do ship, as `cov_teacher_*` on both student
+tables, joined on the teacher id.
+
+A nice detail: the covariate codings come from a hand-written legend sitting in
+trailing `Unnamed:` columns beside the data (`kadın:1`/`Erkek:2`,
+`ilkokul:1`..`üni:4`, `Yetersiz:1`/`Yeterli:2`). It is transcribed into the
+script's header, including the honest limit — the legend names only two of the
+variables it codes, so which yes/no pair belongs to which of `Okul Memn.`,
+`Sınıf Memn.`, `oda`, `Mat. Yetk` and `Hobi` is not stated by the deposit and is
+not guessed at.
+
+**Hohn 2024** (`zenodo.13269659`, CC BY), a bachelor-thesis library survey of
+105 MPI-EVA researchers. **One** of its two batteries ships, with item text:
+five agreement statements, 461 responses, 88% dense, the wording parsed from
+the survey platform's own column headers and the questions the library's own
+under CC BY.
+
+**The 13-item resource-relevance battery does not ship, and the arithmetic
+matters.** Each item offers "I don't know the resource. / I have never used the
+resource." and 35 to 90 of the 105 chose it, leaving **378 responses over 90
+ids and 13 items — 28% of cells, per-item n from 15 to 70**. 28% density alone
+would not disqualify it; what does is that total, those thinnest items, and the
+fact that the missingness is informative — what remains is "relevance among
+those who have used this resource", a conditional rating rather than the
+battery as posed. The script still computes and prints the whole thing so the
+call is auditable. (A first pass through this reported the density as 3%, which
+was simply wrong arithmetic; the figure is 28% and the reasoning above is what
+the decision actually rests on.)
+
+The header parse needed a **balanced-parenthesis** rule rather than a `[^()]+`
+character class, because one item is `(SSOAR (Social Science Open Access
+Repository))` and the non-nesting pattern fails on it. Both the processing
+script and the item text generator use the balanced rule and assert the shared
+stem is identical across the five items.
+
+### What the sweep leaves open
+
+128 `unworked` leads: 61 retryable download failures, 48
+`recoverable_format`, 12 `worth_retrying`, 5 `aggregate_continuous`, 2 `error`.
+The `recoverable_format` rows are the same shape the leads pass learned to work
+— a questionnaire carrying several instruments, needing a processing script
+rather than a reader fix.
+
+### Uploaded 2026-10-29
+
+Ben uploaded both 2026-10-28 batches together — the 2026-10-28b leads pass and
+the 2026-10-28c sweep shared the staging folders, so the handover was one set:
+**64 response tables, 590,183 responses, and 8 item text tables**, response
+tables first. `uploaded=2026-10-29` is stamped on the 8 shipped
+`itemtext_provenance.csv` rows and the 8 `itemtext/mapping_verification.csv`
+rows.
+
+A release is owed before these reach `metadata.csv`. Two things are waiting on
+it: the covariate-label harvest for `galanis_2025_*` and `aksin_2023_*` ×
+`cov_department`, and four register rows owed from the Ibaceta deposit (the
+FFMQ, the 25-item Spanish DERS, the mind-wandering measure and the Daydreaming
+Frequency Scale) — with the standing warning that the register's existing DERS
+row is the *28-item* adaptation and its `block` must not be read across.
