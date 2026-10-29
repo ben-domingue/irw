@@ -577,6 +577,12 @@ def from_gesis(query: str, max_pages: int = 5, per: int = 25):
 _DATACITE_SKIP = {
     "zenodo", "figshare", "dryad data", "harvard dataverse",
     "open science framework", "osf", "mendeley data",
+    # PsychArchives, as DataCite labels it (publisher string checked against
+    # prefix 10.23668 on 2026-10-29). Before from_psycharchives existed this
+    # was the ONLY route by which its records reached us, and all 35 of them
+    # died because DataCite's record carries no file list and no usable
+    # licence for a DSpace item -- see that connector's docstring.
+    "leibniz institute for psychology", "zpid", "psycharchives",
 }
 
 # Which _DATACITE_SKIP publisher strings belong to which connector. When that
@@ -596,6 +602,8 @@ _DATACITE_FALLBACK_FOR = {
     "scholars_portal": {"scholars portal", "scholars portal dataverse"},
     "surf":            {"surf"},
     "aussda":          {"aussda", "austrian social science data archive"},
+    "psycharchives":   {"leibniz institute for psychology", "zpid",
+                        "psycharchives"},
 }
 
 
@@ -780,6 +788,124 @@ from_surf            = _dataverse_connector("surf", "https://dataverse.nl")
 from_aussda          = _dataverse_connector("aussda", "https://data.aussda.at")
 
 
+_PSYCHARCHIVES_REST = "https://www.psycharchives.org/rest"
+
+# dc.type values that mark a PsychArchives record as primary response data.
+# The repository also holds articles, preprints, preregistrations, code and
+# -- confusingly for us -- `test`, which is ZPID's Open Test Archive:
+# instrument documentation and blank questionnaires, i.e. item TEXT with no
+# responses attached. Those are valuable (444 records, 164 of them CC-BY-SA
+# 4.0) but they belong to the itemtext pipeline and its rights register, not
+# to a response-data sweep, so this connector does not surface them.
+_PSYCHARCHIVES_DATA_TYPES = {"researchdata", "dataset"}
+
+# Searched in order; a record found by both is yielded once.
+_PSYCHARCHIVES_FIELDS = ("dc.title", "dc.description.abstract")
+
+_RE_PSYCHARCHIVES_DOI = re.compile(r"(10\.\d{4,9}/[^\s\"\'<>]+)")
+
+
+def _psycharchives_meta(item: dict) -> dict:
+    """Flatten DSpace's `[{key, value}]` metadata list.
+
+    Keys repeat (three authors, two abstracts, and -- the one that matters
+    here -- two `dc.identifier.uri` values, one handle and one DOI), so this
+    keeps a list per key rather than the first value. PsychArchives records
+    carry no `dc.identifier.doi` field at all; the DOI is only ever the
+    `dx.doi.org` member of that identifier pair."""
+    out: dict[str, list[str]] = {}
+    for m in item.get("metadata") or []:
+        k, v = m.get("key") or "", m.get("value") or ""
+        if k:
+            out.setdefault(k, []).append(v)
+    return out
+
+
+def _psycharchives_first(md: dict, key: str) -> str:
+    vals = md.get(key) or []
+    return vals[0] if vals else ""
+
+
+def from_psycharchives(query: str, max_pages: int = 5, per: int = 50):
+    """PsychArchives -- the Leibniz Institute for Psychology (ZPID) repository.
+
+    Added 2026-10-29, after the connector audit Ben asked for against
+    daniellakens.blogspot.com's repository comparison. This was not a new
+    repository to us so much as a hole we were already paying for: 35 of its
+    DOIs had reached `repo_triage_seen_keys.csv` through the DataCite
+    connector and every one died, 26 of them as "licence unknown is not
+    cc0/cc-by/cc-by-sa" and 23 as `no_usable_file`, for zero shipped tables.
+    Both verdicts were about us, not the deposits -- no resolver listed its
+    files and nothing read its licence field. Measured at the time: the
+    Research Data collection holds 1,051 records, and of the first 400,
+    105 are CC-BY 4.0 and 97 CC-BY-SA 4.0 (~52% explicitly open), against
+    139 `restrictedAccess` Scientific Use License ones that the licence gate
+    skips by itself. It is discipline-specific psychology primary data, which
+    is a better prior than anything else we query.
+
+    DSpace 6, so `/rest/filtered-items` is the only search there is -- no
+    free-text endpoint, no Solr. That is enough: the metadata filter ANDs,
+    so each query runs as `<field> contains <term>` AND `dc.type equals
+    researchData`, server-side, once per field in _PSYCHARCHIVES_FIELDS. The
+    type filter is approximate (a `code` record leaks through roughly one in
+    twenty), hence the second, local type check below.
+
+    `item-count` in the response is the size of the page returned, NOT a
+    total, so pagination runs until a short page arrives rather than against
+    a count.
+    """
+    seen_uuids: set[str] = set()
+    for field in _PSYCHARCHIVES_FIELDS:
+        for page in range(max_pages):
+            params = {
+                "query_field[]": [field, "dc.type"],
+                "query_op[]":    ["contains", "equals"],
+                "query_val[]":   [query, "researchData"],
+                "expand": "metadata",
+                "limit":  str(per),
+                "offset": str(page * per),
+            }
+            try:
+                r = requests.get(f"{_PSYCHARCHIVES_REST}/filtered-items",
+                                 params=params,
+                                 headers={**UA, "Accept": "application/json"},
+                                 timeout=45)
+                r.raise_for_status()
+                items = r.json().get("items") or []
+            except Exception as e:
+                raise SourceUnavailable(f"[psycharchives] {e}") from e
+            if not items:
+                break
+            for it in items:
+                uuid = it.get("uuid") or ""
+                if uuid and uuid in seen_uuids:
+                    continue
+                seen_uuids.add(uuid)
+                md = _psycharchives_meta(it)
+                dctype = _psycharchives_first(md, "dc.type").strip().lower()
+                if dctype.replace(" ", "") not in _PSYCHARCHIVES_DATA_TYPES:
+                    continue
+                doi = ""
+                for uri in md.get("dc.identifier.uri") or []:
+                    if "doi.org" in uri:
+                        m = _RE_PSYCHARCHIVES_DOI.search(uri)
+                        if m:
+                            doi = norm_doi(m.group(1))
+                            break
+                handle = it.get("handle") or ""
+                # The item page is the resolver's entry point, and a handle
+                # redirects to it, so prefer the form we can read directly.
+                url = (f"https://www.psycharchives.org/en/item/{uuid}" if uuid
+                       else f"https://hdl.handle.net/{handle}" if handle
+                       else (f"https://doi.org/{doi}" if doi else ""))
+                title = it.get("name") or _psycharchives_first(md, "dc.title")
+                yield Hit("psycharchives", title, url, doi,
+                          _psycharchives_first(md, "dc.date.issued")[:10])
+            if len(items) < per:
+                break
+            time.sleep(0.5)
+
+
 def _dig(obj, *keys, default=None):
     """`obj[k1][k2]...`, treating an explicit JSON `null` as absent.
 
@@ -854,7 +980,23 @@ _DATACITE_SKIP.update({"scholars portal", "scholars portal dataverse", "surf",
 
 
 SOURCES = [from_dataverse, from_zenodo, from_osf, from_dryad, from_figshare,
-           from_datacite, from_scholars_portal, from_surf, from_mendeley]
+           from_datacite, from_mendeley, from_psycharchives]
+
+# from_surf (DataverseNL) and from_scholars_portal were DROPPED from the
+# default set on 2026-10-29 (ben-domingue: "we should kill surf and
+# scholars_portal"), after the question the 10-27 sweep raised was finally
+# measured. Shipped-table rate per source over all 6,593 rows of
+# `leads/*.csv`: mendeley 16.6%, datacite 13.3%, figshare 11.0%, dataverse
+# 8.1%, zenodo 4.3%, osf 3.6% -- then scholars_portal 0.8% (1 of 123) and
+# surf 0.4% (1 of 279). surf was also the single most expensive connector
+# per shipped table: 237 of the 10-27 sweep's 1,332 candidates, 33 of them
+# straight HTTP 403, and 59 of its 279 lead rows `blocked_access`.
+#
+# They stay wired for `--sources surf ...` / `--sources scholars_portal ...`
+# and they stay in `_DATACITE_SKIP`, so killing the direct query does not
+# re-admit the same records through the DataCite aggregator. Re-measure
+# before putting either back; the four `data/*.py` scripts citing
+# 10.34894/dataverse.nl are what a 0.4% rate buys over five months.
 
 # Opt-in only -- reachable with `--sources openaire ...`, deliberately NOT in
 # SOURCES. OpenAIRE is an aggregator like DataCite (it re-indexes Zenodo,
@@ -868,7 +1010,8 @@ SOURCES = [from_dataverse, from_zenodo, from_osf, from_dryad, from_figshare,
 # from_gesis() is deliberately still not wired: as of 2026-08-25 the GESIS
 # Vitrine endpoint it calls returns HTTP 403 for every query, so it yields
 # nothing. Fix the endpoint before adding it here.
-OPTIONAL_SOURCES = [from_openaire]
+OPTIONAL_SOURCES = [from_openaire, from_surf, from_scholars_portal,
+                    from_aussda]
 
 SOURCE_MAP = {fn.__name__.replace("from_", ""): fn
               for fn in SOURCES + OPTIONAL_SOURCES}

@@ -440,6 +440,60 @@ def _mendeley_files(url: str) -> tuple:
     return out, license_raw, oversized
 
 
+_PSYCHARCHIVES = "https://www.psycharchives.org"
+_RE_PA_UUID   = re.compile(r"/items?/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-"
+                           r"[0-9a-f]{4}-[0-9a-f]{12})", re.I)
+_RE_PA_HANDLE = re.compile(r"(20\.500\.12034/[\w.]+)")
+
+
+def _psycharchives_files(url: str, doi: str) -> tuple:
+    """PsychArchives (ZPID), DSpace 6 at /rest.
+
+    Three URL shapes reach here and all three work: the item page
+    `/en/item/<uuid>` that from_psycharchives yields, a
+    `hdl.handle.net/20.500.12034/<n>` handle, and -- via the caller's
+    _resolve_to_landing() -- a bare 10.23668 DOI, which redirects to the
+    item page.
+
+    The licence is `dc.rights.uri`, which is a creativecommons.org URL for
+    the open half of the repository and so normalises through _norm_license()
+    unchanged. The other values it takes are deliberately left to read as
+    unknown, which skips them: `dc.rights` of `restrictedAccess` goes with a
+    Scientific Use License (a signed-agreement route, not a licence we can
+    redistribute under) or with /individualterms (per-file terms, not stated
+    in metadata at all).
+    """
+    m = _RE_PA_UUID.search(url or "")
+    if m:
+        endpoint = f"{_PSYCHARCHIVES}/rest/items/{m.group(1)}"
+    else:
+        h = _RE_PA_HANDLE.search(url or "")
+        if not h:
+            return [], "", []
+        endpoint = f"{_PSYCHARCHIVES}/rest/handle/{h.group(1)}"
+    r = requests.get(endpoint, params={"expand": "bitstreams,metadata"},
+                     headers={**UA, "Accept": "application/json"}, timeout=40)
+    r.raise_for_status()
+    data = r.json()
+    md = {}
+    for entry in data.get("metadata") or []:
+        md.setdefault(entry.get("key") or "", entry.get("value") or "")
+    license_raw = md.get("dc.rights.uri") or md.get("dc.rights") or ""
+    out, oversized = [], []
+    for b in data.get("bitstreams") or []:
+        name = b.get("name") or ""
+        link = b.get("retrieveLink") or ""
+        if not (name.lower().endswith(TABULAR_EXT) and link):
+            continue
+        size = b.get("sizeBytes") or 0
+        if size > MAX_FILE_BYTES:
+            oversized.append((name, size))
+            continue
+        out.append((f"{_PSYCHARCHIVES}{link}" if link.startswith("/") else link,
+                    name, size))
+    return out, license_raw, oversized
+
+
 # Hosts we can resolve regardless of which index surfaced the candidate.
 # Deliberately narrow: _dataverse_files() hardcodes the Harvard API base,
 # so other Dataverse installations (entrepot.recherche.data.gouv.fr,
@@ -451,6 +505,7 @@ _HOST_RESOLVERS = [
     ("osf.io",            lambda url, doi: _osf_files(url)),
     ("datadryad.org",     lambda url, doi: _dryad_files(doi)),
     ("dataverse.harvard.edu", _dataverse_files),
+    ("psycharchives.org", _psycharchives_files),
 ]
 
 
@@ -568,6 +623,8 @@ def _resolve_data_files_any_order(row: dict) -> tuple:
             return _dataverse_files(url, doi)
         if src == "osf":
             return _osf_files(url)
+        if src == "psycharchives":
+            return _psycharchives_files(url, doi)
     except SourceBlocked:
         raise
     except Exception as e:
