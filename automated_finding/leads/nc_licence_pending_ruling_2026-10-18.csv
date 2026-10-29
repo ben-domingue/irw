@@ -1,5 +1,5 @@
 status,source_leads_file,doi,url,license,license_code,n_participants,n_items,refined_flag,data_file
-todo: NC is a lead -- the filter was aligned with datastandard.md's 2026-10-01 ruling on 2026-10-19,repos_ledger_remine_2026-10-18_dvinst.csv,10.5683/sp3/wcun0s,,cc-by-nc,cc-by-nc,23781,38,recoverable_format,gpo-ai_data.csv
+"shipped 2026-10-29: lee_whiting_2025_* -- 21 tables, 2,935,076 responses, + 4 item text tables. CC BY-NC 4.0 carried into Derived_License.",repos_ledger_remine_2026-10-18_dvinst.csv,10.5683/sp3/wcun0s,,cc-by-nc,cc-by-nc,23781,38,recoverable_format,gpo-ai_data.csv
 todo: NC is a lead -- the filter was aligned with datastandard.md's 2026-10-01 ruling on 2026-10-19,repos_ledger_remine_2026-10-18_dvinst.csv,10.5683/sp3/u25vgb,,cc-by-nc-sa,cc-by-nc-sa,2102,22,recoverable_format,daily_diary_data.tab
 todo: NC is a lead -- the filter was aligned with datastandard.md's 2026-10-01 ruling on 2026-10-19,repos_ledger_remine_2026-10-18_dvinst.csv,10.5683/sp3/pd11yo,,cc-by-nc-sa,cc-by-nc-sa,894,34,recoverable_format,evening.tab
 todo: NC is a lead -- the filter was aligned with datastandard.md's 2026-10-01 ruling on 2026-10-19,repos_ledger_remine_2026-10-18_dvinst.csv,10.5683/sp3/wlahqq,,cc-by-nc,cc-by-nc,263,94,worth_retrying,Dataset Eng No Code.tab
