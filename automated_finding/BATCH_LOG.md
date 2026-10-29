@@ -24664,3 +24664,168 @@ written with `uploaded` blank.
 No covariate-label harvest is owed: the source is a CSV, so there are no
 SPSS/Stata value labels to read. The codings are in the questionnaire PDF's
 Section E, which is what `codebook_url` now points at.
+
+## 2026-10-29e — the leads worked: 29 tables, 8,460,018 responses, 11 item text tables
+
+Ben: "work those leads as well. and is there a note about a 'borealis' dataset
+that you can also pick up?" -- the Borealis note was `10.5683/SP3/WCUN0S`, the
+NEXT UP item from earlier the same day. Both are done here. Nothing uploaded.
+
+**This is the largest batch this pipeline has produced**, by an order of
+magnitude: 8.46M responses from three deposits, against 885,864 for the whole
+of 2026-10-29's two releases.
+
+### GPO-AI: 21 tables, 2,935,076 responses (the Borealis note)
+
+`10.5683/SP3/WCUN0S`, Global Public Opinion on Artificial Intelligence
+(Lee-Whiting, Loewen, Bergeron & the Schwartz Reisman Institute, 2025). 23,781
+respondents in 21 countries, fielded in 12 languages in October-November 2023,
+CC BY-NC 4.0 -- NC proceeds under the 2026-10-01 ruling and is carried into
+`Derived_License`. No decision was owed and none was asked for.
+
+The triage row said "38 items". The file has 324 columns, of which **129 are
+ordinal items in 21 blocks**. Four things were decided rather than assumed:
+
+- **Response coding is semantic, not positional.** The codebook prints the
+  agreement options top-down in different orders for different blocks
+  (populism leads with "Strongly agree", regulation_gvt with "Strongly
+  disagree"). Coding by display order would have shipped two opposite scale
+  directions under the same resp values. Every agreement block is mapped
+  1 = strongly disagree .. 5 = strongly agree instead.
+- **Eleven check-all-that-apply blocks and an attention check are NOT shipped.**
+  Each of their columns holds the LABEL of one option the respondent selected,
+  in no order, so the column index means nothing. Reshaping them to endorsement
+  indicators would be a new coding decision, not a transcription.
+- **Four blocks were nearly lost, and the books-balancing rule is what saved
+  them.** `aipi1`..`aipi6` and friends do not share the `prefix_<n>` shape the
+  grouping regex looks for. The script PRINTS its leftover columns rather than
+  counting them (SKILL.md, 2026-08-26), and reading that list turned up four
+  real blocks: job-loss expectations, digital-government support, and two
+  forced choices between an AI and a human decision-maker -- 15 items,
+  289,710 responses. The two forced-choice tables are dichotomous and belong
+  in core, not nominal: with exactly two options the ordered/unordered
+  distinction is vacuous.
+- **Two columns dropped on the PII rules, both named in the script header**:
+  `respondent_subnational` (396 regions -- a geographic code, so drop the
+  column and ship the rest, 2026-10-20) and `respondent_survey_data`, a
+  completion timestamp to the second, which times no measurement in a
+  single-wave survey. `respondent_survey_seconds` became
+  `cov_completion_time_s`, never `rt`.
+
+**Item text ships for 4 of the 21.** Those four have columns named by CONTENT
+(`TO_health_30m`, `Digital_gvt_laid`, `neighbour_replace`) and the codebook
+documents each variable under that name, so the tie is the source's own
+labelling. The other 17 appear in the codebook as a header row of options
+followed by unlabelled rows in order -- stem-to-code by ROW ORDER, which is the
+positional case behind every mapping defect found in the 2026-10 review. They
+are recorded NOT SHIPPED with the codebook named as where the text is, rather
+than shipped on an assumption. Administered in 12 languages with only the
+English master published, so the four that ship use the standard's
+`translated_substitute` fallback, `language` naming all twelve, and carry a
+`public_note` for the issues page.
+
+### SAPA 2006-2010: 1 table, 5,505,442 responses
+
+`10.7910/DVN/H9RQD6`, CC0. 99 of the 100 IPIP Big Five Factor Markers answered
+by 114,016 SAPA participants. **Eight of the 40 leads were the SAPA family and
+seven of them are already in IRW** -- the annual 2017-2024 releases are pooled
+as `condon_2024_sapa_personality`, and the lead was a `wrong_file_selected` on
+their `ItemInfo.csv`. The 2006-2010 deposit is NOT: `sapa-personality.R` covers
+2013-14 on the 696-item pool and the pooled table covers 2017-24 on the
+135-item bank, so this window and item set are new. Checking that before
+writing is the rule that stopped a second `moon_2023_*` in 2026-08.
+
+48.8% of cells are answered -- planned missingness, a median of 48 items per
+respondent, not attrition. `id` is the row index rather than the deposit's
+random `RID`.
+
+No item text, and this one is a PARTIAL-COVERAGE skip rather than an absent-text
+one: the IPIP items are public domain, but nothing in the deposit ties SAPA's
+`q_###` codes to the wording, and the sibling deposits' `ItemInfo.csv` covers
+23 of these 99. Shipping 23 would leave 76 blank, which the item-set gate
+forbids.
+
+### Akter 2026: 7 tables, 19,560 responses, 7 item text tables
+
+`10.26180/33183470` (Monash, CC BY 4.0). 652 Bangladeshi adults from slow-onset
+and rapid-onset climate-exposure regions, seven labelled blocks across four
+different anchor sets. Item text ships for all seven from the `.sav`'s own
+labels -- variable labels for the stems, value labels for the anchors -- which
+is `data_labels`, the one basis exempt from a Step 5b verification script.
+
+`Social_norms_Q` is reverse-keyed relative to the other agreement blocks (1 is
+"Strongly agree" there, "Strongly Disagree" elsewhere) and ships as the
+depositor coded it. Recoding would silently rewrite their data; the anchors
+ship with the item text, so the direction is explicit.
+
+**The PII screen earned its assertion here.** It asserts that every string
+column is either dropped by name or a coded covariate, and it failed the run
+on four columns the column list had not made obvious: `Department`,
+`Fathers_occupation`, `Mothers_occupation` and a free-typed multi-select. They
+were never going to reach the output, but they are now named in the header with
+the rule that drops them. Four district/division columns go on the geographic
+rule and `Occupation` (132 free-typed job titles) on the 2026-10-21 free-text
+rule.
+
+### The other 28 leads
+
+`leads/repos_leads_2026-10-29b.csv` now reads 93 `rejected_content`, 37
+`blocked_access`, 28 `unworked`, 14 `archived_human_review`, 11 `below_min_n`,
+11 `shipped`, 5 `blocked_licence`. The 28 that remain are mostly
+political-science replication files and animal-behaviour deposits whose item
+structure needs checking one at a time; the ranked shortlist is in TODO.
+
+One `good` row was rejected on content: `10.5281/zenodo.19258319` (COSFAMM,
+1,252 older Mexican adults) describes the LSNS-6, MOS-SSS and CESD-R but ships
+twelve columns with no items in them -- `cesdr` is a binary screening outcome
+and `social_isolation`/`social_sup` are dichotomised indicators.
+
+## 2026-10-29f — the three GPO-AI trust blocks become one crossed table (ben-domingue)
+
+A revision to 2026-10-29e, made on Ben's question: "should we have an
+item_family or item_cov info here?" for the three `trust_actors_*` tables.
+Yes, and only a merge earns it.
+
+`trust_AI`, `protection` and `security` ask about **the same eight actors, in
+the same order** -- the codebook prints the identical list for each block,
+checked before merging. So the design is 8 actors x 3 domains, fully crossed,
+and the three items about one actor are clones that violate local
+independence. Kept as three tables, `item_family` would have been degenerate
+(each actor appears once per table); merged, it does the work the column
+exists for.
+
+`lee_whiting_2025_trust_actors`: 24 items, 542,673 responses, 23,691 ids.
+`itemcov_domain` carries the domain ("using AI safely", "protecting data and
+privacy", "ensuring safety and security"). `item_family` is `actor_1`..
+`actor_8` -- the actor's POSITION in the shared list, not its name. Naming it
+would need the codebook's row order, which is the positional assumption this
+batch declined for item text; the crossing claim is weaker and safe, because
+whatever actor k is, it is the same actor in all three domains.
+
+Its one `irw-validate` WARN is `multi_scale` ("Item names have 3 repeated
+prefixes"), which is the crossing appearing in the item names. That is the
+check doing its job and the answer is in the two new columns.
+
+**`lee_whiting_2025_ai_nurse_tradeoff` gains `itemcov_wait_minutes`**
+(10/30/60/120/180), read off the COLUMN NAMES rather than the codebook, so no
+positional step. It is the item attribute that orders those five items, which
+are otherwise one question asked five times -- the thing that makes one harder
+than the next.
+
+**The forced-choice tables stay in core, not competitions.** Ben asked whether
+`ai_vs_human_choice` and `ai_nurse_tradeoff` are pairwise comparisons that
+belong in the competitions family. Under the 2026-10-08 shape rule that family
+covers pairwise comparisons between fixed, named things that recur -- and the
+same session excluded an AHP pairwise-comparison-of-criteria dataset as
+"criteria, not competitors". These are the AHP case: the two sides are response
+OPTIONS, not agents whose strength is being estimated, and a Bradley-Terry fit
+would have two parameters for the whole dataset. What the design measures is
+the respondent's threshold -- the nurse block walks the wait from 10 minutes to
+3 hours precisely to find where each person flips -- which is a person
+parameter against items of graded difficulty, i.e. core. Nor is it a conjoint:
+there are no randomized multi-attribute profiles, the pairs are fixed and
+identical for every respondent, so the `conj` route does not apply.
+
+Staging after this revision: **34 response tables, 8,464,014 responses**, and
+18 item text tables. Dictionary, tag and provenance rows were reconciled (-3
++1 in each).
