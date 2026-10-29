@@ -23038,7 +23038,7 @@ PASS on both item and resp sets), then `audit_batch.R --resp-dir` (8/8 PASS, no
 anomalies), then `irw-validate` on the item files (8 clean).
 `itemtext_output/` holds nothing but `*__items.csv`.
 
-## 2026-10-28b — the 10-27 and 10-21 leads re-triaged, and 13 of them worked: 33 tables, 367,481 responses
+## 2026-10-28b — the 10-27 and 10-21 leads re-triaged, and 14 of them worked: 34 tables, 383,408 responses
 
 Nothing uploaded. Ben asked for a discovery sweep *and* for backlogged
 triage/leads work in the same session; this is the leads half. The sweep's own
@@ -23075,7 +23075,7 @@ pointing at it, so there is one live place per lead rather than three.
 ### Eleven worked, seven shipped (filtered to 100 <= N <= 50,000 and 8 <= items <= 700, then by volume)
 
 Nine are tabled here; the last two were worked after this table was written and
-are at the end of the entry. **Batch total: 33 tables, 367,481 responses.**
+are at the end of the entry. **Batch total: 34 tables, 383,408 responses.**
 
 | deposit | licence | outcome |
 |---|---|---|
@@ -23445,6 +23445,46 @@ and so could not match `bfi_1_e .. bfi_44_o`, and the GAAIS row's
 now filled in, anchored and number-then-letter, and both fire. That is the
 "a miss is not an all-clear" warning in the skill arriving as a concrete pair of
 misses.
+
+### A tenth: Zheng, Zhao & Wu 2025 — the Sport Motivation Scale, and its first register row
+
+`10.6084/m9.figshare.29316266.v1` (CC BY 4.0), 571 Chinese primary-school and
+junior-high students aged 10-14. `zheng_2025_sport_motivation`, 15,927
+responses. **Batch total: 34 tables, 383,408 responses from 10 deposits.**
+
+**The instrument was identified from the subscale structure, not the deposit's
+label.** The deposit's label says nothing; what identifies it is that the file
+computes seven four-item subscale means and names them in Chinese in
+self-determination order — 求知 (to know), 成就 (accomplishment), 刺激
+(stimulation), 认同 (identification), 内摄 (introjection), 外部调节 (external
+regulation), 无动机 (amotivation) — and the stems match ("I used to have good
+reasons for doing sport, but now I am asking myself if I should continue"). That
+is the Sport Motivation Scale (SMS-28; Pelletier et al. 1995). One table: seven
+subscales, one response format, one administration, and the item codes keep the
+deposit's shuffled `MO1..MO28` so the grouping stays recoverable (it is printed
+by the script).
+
+**The IPAQ-style activity block is NOT shipped, and the reason is unit mixing
+inside one block.** `I1..I9` alternates counts of DAYS (I1, I3, I5, I8) with
+durations in MINUTES (the rest, running into the hundreds). One table would mix
+two incompatible response scales; splitting by unit would give two tables of
+four-ish behaviour-recall questions rather than a measured battery. Its nine
+`ZI*` z-scores and the `ZPA` composite go with it, as does `Group` — the paper's
+latent-profile class, which is derived from these same 28 items and is a result
+rather than a covariate.
+
+**Item text is in hand and held, and this batch wrote the SMS's first register
+row.** The `.sav` carries every item's full Chinese stem as its variable label
+and all five Chinese anchors as value labels, identical across the 28 (the
+script asserts both). So extraction is a cheap `data_labels` job from this one
+file whenever the rights clear. They do not clear yet: the SMS had **no**
+register row, and silence does not ship. The new row is verdict `hold` and
+carries a lead worth following before anyone rules on it — the Center for
+Self-Determination Theory publishes permissive terms (academic use permitted)
+but on its page for the **SMS-II**, the *revised* scale, which is a different
+instrument. That is the 2026-09-04 "two pages, two terms" shape exactly. If CSDT
+also distributes the SMS-28 itself, this becomes a `ship`; and since the
+administration was Chinese, the 2026-09-08 ruling would then govern what ships.
 
 ### The `surf` (DataverseNL) question, measured and answered
 

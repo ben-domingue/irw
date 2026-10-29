@@ -59,18 +59,18 @@ merged, and the 552-row `tags/tags_auto.csv` merge is PR #3133.
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
-## Leads pass 2026-10-28b — 33 tables + 5 item text tables, AWAITING UPLOAD
+## Leads pass 2026-10-28b — 34 tables + 5 item text tables, AWAITING UPLOAD
 
 Full write-up in `BATCH_LOG.md` (2026-10-28b). The 83 unworked leads of 10-27
-and the 28 of 10-21 were re-triaged together; 13 of the 106 were worked to a
-decision, 9 of those shipped.
+and the 28 of 10-21 were re-triaged together; 14 of the 106 were worked to a
+decision, 10 of those shipped.
 
-- [ ] **33 response tables (367,481 responses) + 5 item text tables need
+- [ ] **34 response tables (383,408 responses) + 5 item text tables need
   uploading.** `automated_finding/irw_output/` (with a MANIFEST) and
-  `itemtext_output/`. **Response tables first.** All 33 pass `irw-validate
+  `itemtext_output/`. **Response tables first.** All 34 pass `irw-validate
   --profile upload`; all 5 item text tables PASS `normalize_nulls.R` ->
   `validate_items.R --resp-csv` -> `audit_batch.R --resp-dir` and are clean on
-  `irw-validate`. 33 dictionary rows and 33 tag rows are already staged, so
+  `irw-validate`. 34 dictionary rows and 34 tag rows are already staged, so
   nothing needs pasting. Stamp `uploaded=` on the 4 shipped
   `itemtext_provenance.csv` rows and the 4 `mapping_verification.csv` rows only
   after Ben confirms.
@@ -142,7 +142,7 @@ decision, 9 of those shipped.
   worth deciding whether that is acceptable here before spending the rights
   effort.
 
-- [ ] **95 `unworked` leads remain** in `leads/repos_leads_2026-10-28.csv`: 49
+- [ ] **94 `unworked` leads remain** in `leads/repos_leads_2026-10-28.csv`: 48
   `recoverable_format`, 23 `worth_retrying`, 8 `aggregate_continuous`, 12
   `download_failed` and 3 `error`. Each `recoverable_format` row carries its own
   diagnosis from the retriage, and the diagnoses are specific — the common shape
