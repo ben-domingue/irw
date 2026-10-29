@@ -23554,6 +23554,38 @@ description says the data "supports the findings reported in the article"
 without naming or linking it and the record has no related identifier, so a
 later pass must find Mersin's paper first.
 
+### A whole class of lead rejected, and the filter moved to the source
+
+Eleven of the 23 `worth_retrying` rows turned out to be the same thing, and it
+is not a dataset: a DOI ending `.tNNN` on a journal article is the **article's
+own table** — figshare hosts each one as a separate deposit with its own DOI.
+The titles say it outright: "Regression model of burnout on quality of working
+life.", "Subgroup analyses for studies on burnout.", "Structure of the
+(sub)samples according to the working memory ...", "Descriptive statistics and
+Demographic Differences in Doping ...". They reached `worth_retrying` because
+the retriage's text-coded-Likert heuristic fires on any table with words in its
+cells, which a results table always has.
+
+All eleven are now `rejected_content` with one shared reason, rather than
+eleven individual verdicts. **And the rule moved into
+`doi_hygiene.py`** — `is_article_object()`, beside the existing
+`strip_supplement_suffix()`, with `irw_discover_updated.py` dropping such hits
+and printing the count the way it already does for
+`_UNREACHABLE_DOI_PREFIXES`. That file is the repo's single place for DOI-shape
+rules precisely so two copies cannot drift (the comment there records the
+2026-10-21 defect that taught it).
+
+**The distinction cuts both ways and the test enforces it.** `.sNNN` is a
+supplementary FILE and is frequently the real data —
+`10.3389/fpsyg.2022.845355.s001` in this same leads file is a genuine
+1,297-respondent dataset — so it must NOT be dropped on this reasoning.
+`tests/test_article_object_doi.py` asserts `.tNNN`/`.gNNN` are caught, that
+`.sNNN`, Mendeley `.1` and figshare `.v4` versions are not, and that the two
+rules do not interfere. Full suite: 276 passing.
+
+This takes effect on the NEXT discovery run; the 2026-10-28 sweep was already
+in flight with the old module loaded.
+
 ### The `surf` (DataverseNL) question, measured and answered
 
 Two sweeps in a row flagged this. The ledger answers it: **314 `10.34894` keys

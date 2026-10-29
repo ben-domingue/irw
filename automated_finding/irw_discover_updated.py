@@ -44,7 +44,7 @@ from dataclasses import dataclass, asdict
 
 import requests
 
-from doi_hygiene import strip_supplement_suffix
+from doi_hygiene import is_article_object, strip_supplement_suffix
 
 UA = {"User-Agent": "irw-discovery-scout/1.0 (research; contact itemresponsewarehouse@stanford.edu)"}
 
@@ -1132,6 +1132,7 @@ def discover(queries, exclude: set, relevance_on: bool, sources=None,
     active = sources if sources is not None else SOURCES
     seen, results = set(), []
     n_unreachable = 0
+    n_article_objects = 0
     n_supp_excluded = 0
     total = len(queries)
     t0 = _time.time()
@@ -1164,6 +1165,9 @@ def discover(queries, exclude: set, relevance_on: bool, sources=None,
                         continue
                     if _unreachable_repo(hit.doi):
                         n_unreachable += 1
+                        continue
+                    if is_article_object(hit.doi):
+                        n_article_objects += 1
                         continue
                     if not is_relevant(hit, relevance_on, query=q):
                         continue
@@ -1209,6 +1213,12 @@ def discover(queries, exclude: set, relevance_on: bool, sources=None,
               f"connector can fetch files from "
               f"({', '.join(p.rstrip('/') for p in _UNREACHABLE_DOI_PREFIXES)}) "
               f"-- see _UNREACHABLE_DOI_PREFIXES", flush=True)
+    if n_article_objects:
+        print(f"[discover] dropped {n_article_objects} hit(s) whose DOI names "
+              f"an article's own TABLE or FIGURE (.tNNN/.gNNN), not a deposit "
+              f"-- see is_article_object() in doi_hygiene.py. A .sNNN "
+              f"supplementary file is NOT dropped by this and is often the "
+              f"real data.", flush=True)
     if _blocked_sources:
         print(f"[discover] sources blocked this run (see BLOCKED lines "
               f"above for why): {', '.join(sorted(_blocked_sources))}",

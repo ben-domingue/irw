@@ -107,6 +107,30 @@ DOI_PREFIX_RE = re.compile(r"10\.\d{4,9}/")
 ##version, not a supplement, and an article DOI can end in digits of its own.
 SUPPLEMENT_SUFFIX_RE = re.compile(r"\.s\d{3}$")
 
+##The SIBLING suffixes name the article's own TABLE or FIGURE, which figshare
+##hosts as a separate deposit with its own DOI. Unlike `.sNNN`, these can never
+##be a dataset: `10.1371/journal.pone.0331247.t006` is the regression table
+##printed in that paper, and `.gNNN` is a figure image. The distinction matters
+##in both directions -- `10.3389/fpsyg.2022.845355.s001` is a real
+##1,297-respondent supplementary dataset, so `.sNNN` must NOT be dropped on this
+##reasoning. Same three-digit rule and same reason: a Mendeley `.1` or a
+##figshare `.v4` is a version, not an object. Eleven such hits reached
+##worth_retrying in the 2026-10-28 leads re-triage, every one of them a results
+##table ("Subgroup analyses for studies on burnout.", "Regression model of
+##burnout on quality of working life."), because the retriage's
+##text-coded-Likert heuristic fires on any table with words in its cells.
+ARTICLE_OBJECT_SUFFIX_RE = re.compile(r"\.[tg]\d{3}$")
+
+
+def is_article_object(doi):
+    """True if `doi` names an article's own table or figure rather than a deposit.
+
+    `10.1371/journal.pone.0331247.t006` -> True (a regression table).
+    `10.3389/fpsyg.2022.845355.s001`    -> False (a supplementary FILE, which
+                                           is frequently the real data).
+    """
+    return bool(ARTICLE_OBJECT_SUFFIX_RE.search((doi or "").strip()))
+
 
 def strip_supplement_suffix(doi):
     """The article DOI behind a supplementary-file DOI, or the input unchanged.

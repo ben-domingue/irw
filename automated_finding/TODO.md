@@ -142,16 +142,24 @@ decision, 12 of those shipped.
   worth deciding whether that is acceptable here before spending the rights
   effort.
 
-- [ ] **91 `unworked` leads remain** in `leads/repos_leads_2026-10-28.csv`: 45
-  `recoverable_format`, 23 `worth_retrying`, 8 `aggregate_continuous`, 12
+- [ ] **80 `unworked` leads remain** in `leads/repos_leads_2026-10-28.csv`: 45
+  `recoverable_format`, 12 `worth_retrying`, 8 `aggregate_continuous`, 12
   `download_failed` and 3 `error`. Each `recoverable_format` row carries its own
   diagnosis from the retriage, and the diagnoses are specific — the common shape
   is a questionnaire carrying several instruments, so the work is one processing
   script per deposit, not a reader fix. **Do not re-run the reader on them**;
   2026-10-28b already proved that changes nothing.
 
-- [ ] **Three deferrals with named blockers, each worth one answer rather than
+- [ ] **Four deferrals with named blockers, each worth one answer rather than
   more work:**
+  - `10.17632/s73vjz6wss` -- 259 respondents, 76 clean columns = nineteen
+    four-item blocks with no labels at all. Eight are reversed duplicates and
+    would be dropped, leaving 17 constructs x 4 items. **Four are identifiable**
+    — OPT, INNO, DISC and INSE are the Technology Readiness Index's optimism,
+    innovativeness, discomfort and insecurity — but the other thirteen (TC, AW,
+    EFF, AIL, ETH, PS, RISK, AP, COMP, EXP, REG, TMC, AUDR) are bare
+    abbreviations and the title says only "through TAM3". Shipping would mean
+    naming thirteen constructs on a guess. One look at the paper settles it.
   - `10.5281/zenodo.22276576` -- Aldosari, 377 graduate students, four clean
     integer blocks (`AI1-17`, `HP1-12`, `OP1-10`, `SS1-23`), ~23,000 responses,
     everything else about it clean. The deposit's description names exactly
