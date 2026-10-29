@@ -24447,3 +24447,60 @@ months' notice. Registries and Preprints are unaffected. Our `osf` connector
 ships at 3.6%, so the discovery loss is small — but any OSF-hosted candidate
 sitting in a leads file is now a wasting asset, and the standing
 `?view_only=` private-node rule has a shelf life. Entered in TODO.md.
+
+## 2026-10-29c — the relevance gate: a dozen vocabulary entries had never matched
+
+Follow-up to 2026-10-29b, where the gate was flagged as dropping a large share
+of what the new PsychArchives connector finds. Ben took the smaller of the
+three options on offer -- widen the vocabulary, don't exempt the source -- and
+the measurement that followed found a defect underneath it.
+
+**`_matcher()` made every stem entry unreachable.** It compiled each term as
+`\b(?:...)\b`, so a term written as a prefix could not match an inflected
+word: `\bpsychometri\b` cannot match "psychometrische", because the boundary
+would have to fall between "i" and "s", which are both word characters. A
+dozen entries in `TRANSLATED_TERMS_LATIN` were written as stems and had
+therefore never matched anything in their lives -- `psychometri` in four
+languages, plus `psicométric`, `depressiv`, `itemantwort`, `itemrespons`,
+`redeneer`. "Psychometrische Analyse eines Fragebogens" passed only because
+"fragebogen" happens to be an exact word in the list.
+
+A trailing `*` now marks a stem: leading boundary kept, trailing one dropped,
+minimum five characters so the short-acronym guarantee the function exists for
+("irt" must not match "shirt", "bai" must not match "bait") still holds. The
+intended stems are starred, and a few routine inflections with them
+(`cuestionario*`, `fragebogen*`, `vragenlijst*`, `leistungstest*`).
+
+**The raw/primary-data words, es/de/fr/nl only.** A deposit titled
+"Primärdaten zu ..." is announcing itself as primary response data, and the
+vocabulary had no word for that. Added `primärdaten`/`rohdaten`, `ruwe data`/
+`primaire data`, `datos brutos`/`crudos`/`primarios`, `données brutes`/
+`primaires`. The ENGLISH equivalents are deliberately left out: "raw data" is
+a routine title phrase in every field we don't want (sequencing, telemetry,
+sensor runs), while the repositories serving those four languages are
+overwhelmingly social-science.
+
+### Measured, A/B, on the same records
+
+On 258 unique PsychArchives `researchData` records from a 12-term probe:
+**124 passed before, 148 after (48.1% -> 57.4%), and nothing that passed
+before now fails.** 24 of the 26 newly admitted records came from the
+raw-data words and 2 from the stem fix. The 24 are German normative and
+longitudinal studies of exactly the shape IRW wants -- "Skalen zur Erfassung
+von Hoffnungslosigkeit. Primärdaten der Normierungsstichprobe", three waves of
+the Berliner Jugendlängsschnitt, "Beruflich bedingte Belastung von
+Lehrkräften".
+
+The widening risk was checked rather than assumed: run over all **3,434
+distinct titles in `leads/*.csv`**, the change admits **2 more** (one
+`rejected_content`, one `unworked`), so it is not a floodgate for the sources
+we already query.
+
+**A correction to the 2026-10-29b write-up**, which reported "166 of 266
+records passed, 100 dropped". Those were two different denominators -- 166 was
+a count of per-term hit *occurrences* (373 of them), not of unique records.
+The unique-record figure was unmeasured then and is 124 of 258 (48.1%), i.e.
+the gate was dropping rather more than the 38% quoted, and now drops 43%.
+
+`is_relevant()` itself is untouched; this is vocabulary and the matcher.
+11 new tests in `tests/test_relevance_stems.py`, full suite 286 green.

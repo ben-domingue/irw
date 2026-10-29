@@ -37,17 +37,14 @@ Full write-up in `BATCH_LOG.md` (2026-10-29b), PR #3303. `surf` and `scholars_po
 are out of the default source set (0.4% / 0.8% shipped rate), and
 `from_psycharchives` is in.
 
-- [ ] **Decide whether the relevance gate should apply to psycharchives
-  hits.** 100 of the 266 records a 12-term probe found were dropped by
-  `is_relevant()` on their titles, including one with four CC-BY-SA tabular
-  files and a codebook, and only 4 of 20 German-titled hits survived
-  ("Primärdaten" carries no weight in the vocabulary). Every hit this
-  connector yields is already `dc.type == researchData` by the repository's
-  own metadata, which is a stronger guarantee than a title regex — so the
-  options are a per-source exemption (`discover()` has no such mechanism
-  today), adding "primärdaten"/"rohdaten" to `_RE_STRONG`, or leaving it. Not
-  changed unilaterally because it is a global-vocabulary question that the
-  2026-08-25 measurement already showed cuts both ways.
+- [x] **The relevance gate was widened rather than bypassed (2026-10-29c).**
+  Ben took the vocabulary option. Found underneath it: `_matcher()` wrapped
+  every term in `\b...\b`, so a dozen entries written as stems had never
+  matched anything -- a trailing `*` now marks a stem. With the es/de/fr/nl
+  raw/primary-data words added, 148 of 258 PsychArchives records pass where
+  124 did, nothing that passed before fails, and over all 3,434 historical
+  lead titles the change admits 2 more. No per-source exemption was built;
+  revisit only if a later sweep still shows this bleeding.
 
 - [ ] **Email the Wharton Credibility Lab about ResearchBox API access.**
   `researchbox.org` returns ModSecurity 406 to the scout UA, so there is

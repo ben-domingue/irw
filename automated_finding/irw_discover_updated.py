@@ -168,34 +168,52 @@ AMBIGUOUS_TERMS = [       # match too much alone; only count WITH a term above
 # generic ambiguous words ("test", "escala", "問卷") are NOT here, for the
 # same reason AMBIGUOUS_TERMS aren't.
 TRANSLATED_TERMS_LATIN = [
+    # A trailing "*" is a stem (see _matcher): it matches the inflections the
+    # entry was always meant to cover. Entries written as stems before
+    # 2026-10-29 could never match anything -- the trailing word boundary made
+    # them unreachable -- so starring them is a fix, not a widening.
+    #
+    # The "raw data" / "primary data" entries are a 2026-10-29 addition, and
+    # only in these languages: a deposit titled "Primärdaten zu ..." or "Ruwe
+    # data van ..." is announcing itself as primary response data, which is
+    # exactly what the gate should let through. The ENGLISH equivalents are
+    # deliberately NOT in STRONG_TERMS, because "raw data" is a routine title
+    # phrase in every field we don't want (sequencing, telemetry, sensor
+    # runs), whereas the repositories serving these four languages are
+    # overwhelmingly social-science. Found while measuring why 38% of
+    # PsychArchives' researchData records were being dropped on their titles.
     # es
-    "respuesta al ítem", "psicométric", "cuestionario", "autoinforme",
+    "respuesta al ítem", "psicométric*", "cuestionario*", "autoinforme",
     "análisis factorial", "rendimiento académico", "comprensión lectora",
     "vocabulario", "competencia lingüística", "razonamiento", "habilidad espacial",
     "autoestima", "depresión", "ansiedad", "bienestar", "personalidad",
     "motivación", "resiliencia", "calidad de vida", "soledad", "agotamiento",
     "inteligencia", "aptitud", "conocimientos previos", "alfabetización",
+    "datos brutos", "datos crudos", "datos primarios",
     # de
-    "itemantwort", "psychometri", "fragebogen", "selbstbericht",
-    "faktorenanalyse", "schulleistung", "leseverständnis", "wortschatz",
+    "itemantwort*", "psychometri*", "fragebogen*", "selbstbericht",
+    "faktorenanalyse", "schulleistung*", "leseverständnis", "wortschatz",
     "sprachkompetenz", "denkaufgaben", "räumliches vorstellungsvermögen",
-    "selbstwertgefühl", "depressiv", "angst", "wohlbefinden", "persönlichkeit",
+    "selbstwertgefühl", "depressiv*", "angst", "wohlbefinden", "persönlichkeit",
     "motivation", "resilienz", "lebensqualität", "einsamkeit", "burnout",
-    "intelligenz", "kompetenzmessung", "leistungstest",
+    "intelligenz", "kompetenzmessung", "leistungstest*",
+    "primärdaten", "rohdaten",
     # fr
-    "réponse à l'item", "psychométri", "questionnaire", "auto-évaluation",
+    "réponse à l'item", "psychométri*", "questionnaire", "auto-évaluation",
     "analyse factorielle", "rendement scolaire", "compréhension écrite",
     "vocabulaire", "compétence linguistique", "raisonnement", "capacité spatiale",
     "estime de soi", "dépression", "anxiété", "bien-être", "personnalité",
     "motivation", "résilience", "qualité de vie", "solitude", "épuisement",
     "intelligence", "aptitude",
+    "données brutes", "données primaires",
     # nl
-    "itemrespons", "psychometri", "vragenlijst", "zelfrapportage",
-    "factoranalyse", "schoolprestatie", "begrijpend lezen", "woordenschat",
-    "taalvaardigheid", "redeneer", "ruimtelijk inzicht", "zelfwaardering",
-    "depressie", "angst", "welbevinden", "persoonlijkheid", "motivatie",
+    "itemrespons*", "psychometri*", "vragenlijst*", "zelfrapportage",
+    "factoranalyse", "schoolprestatie*", "begrijpend lezen", "woordenschat",
+    "taalvaardigheid", "redeneer*", "ruimtelijk inzicht", "zelfwaardering",
+    "depressie*", "angst", "welbevinden", "persoonlijkheid", "motivatie",
     "veerkracht", "levenskwaliteit", "eenzaamheid", "burn-out", "intelligentie",
-    "vaardigheidstoets", "leerlingtoets",
+    "vaardigheidstoets*", "leerlingtoets*",
+    "ruwe data", "primaire data",
 ]
 # Scripts with no word boundaries (\b never fires between two CJK/Arabic
 # characters, so these must be matched as bare substrings).
@@ -276,8 +294,33 @@ INSTRUMENT_TERMS = [
 
 # Compile word-boundary matchers so short acronyms are safe (e.g. "irt" won't
 # match inside "shirt", "bai" won't match inside "bait").
+#
+# A term ending in "*" is a STEM: it keeps the leading boundary and drops the
+# trailing one, so "psychometri*" fires on psychometrisch, psychometrie and
+# psychométrique. Without this the trailing \b made every stem entry in the
+# vocabulary unreachable -- `\bpsychometri\b` cannot match "psychometrische",
+# because the boundary has to fall between "i" and "s", which are both word
+# characters. A dozen entries were written as stems and so had never matched
+# anything in their lives: psychometri (in four languages), psicométric,
+# depressiv, itemantwort, itemrespons, redeneer. Measured 2026-10-29 while
+# asking why German-titled PsychArchives deposits fared worst at this gate;
+# "Psychometrische Analyse eines Fragebogens" was being dropped.
+#
+# Stems must be at least 5 characters, which is what keeps the
+# short-acronym guarantee above intact: a 3-letter stem would match inside
+# unrelated words exactly as "bai" would match "bait".
 def _matcher(terms):
-    return re.compile(r"\b(?:" + "|".join(re.escape(t) for t in terms) + r")\b")
+    parts = []
+    for t in terms:
+        if t.endswith("*"):
+            stem = t[:-1]
+            if len(stem) < 5:
+                raise ValueError(
+                    f"stem {t!r} is too short to be safe as a prefix match")
+            parts.append(re.escape(stem))
+        else:
+            parts.append(re.escape(t) + r"\b")
+    return re.compile(r"\b(?:" + "|".join(parts) + r")")
 
 _RE_INSTRUMENT = _matcher(INSTRUMENT_TERMS)
 _RE_STRONG     = _matcher(STRONG_TERMS)
