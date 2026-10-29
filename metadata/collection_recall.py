@@ -27,16 +27,38 @@ a rule over columns, where a name token means nothing. `metadata-complete`
 collections are excluded for the same reason -- their rule IS their definition,
 so recall against anything else is not a question.
 
+THE LEDGER, AND WHY IT IS A NAG RATHER THAN A PROMOTION
+-------------------------------------------------------
+`--report` keeps `collection_arrears.csv`: one row per (collection, table) that
+names a collection's own instrument and is not in it, with the date it first
+did. It is tracked, so the pipeline's own `git diff` is the review surface, the
+way every other committed output here is.
+
+It does NOT add anybody to a collection. `collections/README` holds membership
+to confirmed-only -- "a published collection is one somebody stands behind" --
+and the defect this answers is not that promotion needs approval, it is that
+the queue was INVISIBLE: 126 of the 230 misses on 2026-10-29 arrived after the
+curated lists were last gone through on 2026-09-30, and nothing anywhere said
+so for a month (#3225, ruled by Ben 2026-10-29).
+
+So the exit code reports **new** arrears only. A stage that exits non-zero on a
+standing backlog is a stage whose finding everyone learns to ignore -- the
+review's own lesson about a check that cries wolf. A row leaves the ledger when
+it is promoted or its table is withdrawn, which is what makes the diff readable:
+additions are work arriving, deletions are work done.
+
 USAGE (from src/metadata, no credentials needed)
 
   python3 collection_recall.py                  # the table, worst recall first
   python3 collection_recall.py --misses         # and every missed table name
   python3 collection_recall.py --collection phq9
+  python3 collection_recall.py --report         # update the ledger; 1 = new arrears
 """
 from __future__ import annotations
 
 import argparse
 import csv
+import datetime as dt
 import re
 import sys
 from pathlib import Path
@@ -60,6 +82,11 @@ STOPWORDS = {
 #: Collections whose membership is a rule over COLUMNS. A name token says
 #: nothing about whether a table has a `rater` column.
 SKIP_KINDS = {"design"}
+
+#: The tracked ledger `--report` maintains. Un-ignored by name in src/.gitignore,
+#: like every other committed pipeline output.
+LEDGER = "collection_arrears.csv"
+LEDGER_COLS = ["collection", "table", "coverage", "first_seen", "last_seen"]
 
 
 def read_csv(name: str) -> list[dict]:
@@ -159,11 +186,95 @@ def matches(token: str, table: str, tag: str) -> bool:
     return len(token) >= 4 and token in canon(tag)
 
 
+def read_ledger(path: Path) -> dict[tuple[str, str], dict]:
+    if not path.exists():
+        return {}
+    with path.open(encoding="utf-8-sig", newline="") as fh:
+        return {(r["collection"], r["table"]): r for r in csv.DictReader(fh)}
+
+
+def write_ledger(path: Path, rows: list[dict]) -> None:
+    #: Sorted by collection then table, so the committed diff shows the row
+    #: that moved rather than the whole file. Line ending is whatever the file
+    #: already has -- never assume per repository, only per file.
+    eol = "\n"
+    if path.exists():
+        with path.open("rb") as fh:
+            if b"\r\n" in fh.readline():
+                eol = "\r\n"
+    rows = sorted(rows, key=lambda r: (r["collection"], r["table"].lower()))
+    #: newline="" and NOT newline=eol. With newline="\r\n" Python also
+    #: translates the \n the writer emits, so every record ends "\r\r\n" --
+    #: which no csv convention round-trips, and some batch CSVs in this repo
+    #: really are in that state from exactly this mistake. The terminator is
+    #: the writer's job alone.
+    with path.open("w", encoding="utf-8", newline="") as fh:
+        writer = csv.DictWriter(fh, fieldnames=LEDGER_COLS, lineterminator=eol)
+        writer.writeheader()
+        writer.writerows(rows)
+
+
+def report(rows: list[dict], today: str, path: Path) -> int:
+    """Update the arrears ledger. Returns 1 when this run found NEW arrears.
+
+    `first_seen` is carried over from the previous ledger, so the age of a
+    queue entry survives every run; that age is the whole point, because a
+    candidate waiting since 2026-10-05 and one that arrived this morning are
+    not the same backlog.
+
+    The 230 rows the ledger was seeded with on 2026-10-29 could not get their
+    date this way, since no earlier ledger existed. They were dated from
+    evidence instead: 88 of them name a table that was already in metadata.csv
+    at the last commit before the curated lists were frozen (`d433ee64`,
+    2026-09-28), so their first_seen is that date and it is a FLOOR -- the
+    arrear may be older. The other 142 arrived during October and carry the
+    seeding date. Nothing invents a date it cannot defend.
+    """
+    before = read_ledger(path)
+    current = []
+    for r in rows:
+        for table in r["misses"]:
+            key = (r["collection"], table)
+            prior = before.get(key)
+            current.append({"collection": r["collection"], "table": table,
+                            "coverage": r["coverage"],
+                            "first_seen": prior["first_seen"] if prior else today,
+                            "last_seen": today})
+    write_ledger(path, current)
+
+    keys = {(r["collection"], r["table"]) for r in current}
+    new = sorted(k for k in keys if k not in before)
+    gone = sorted(k for k in before if k not in keys)
+    print(f"\narrears ledger: {len(current)} row(s) in {path.name} "
+          f"({len(new)} new, {len(gone)} resolved since the last run)")
+    for coll, table in gone:
+        print(f"  resolved  {coll:<16} {table}")
+    oldest = min((r["first_seen"] for r in current), default="")
+    if oldest and oldest != today:
+        waiting = sum(1 for r in current if r["first_seen"] == oldest)
+        print(f"  oldest entry {oldest} ({waiting} row(s) waiting since then)")
+    if not new:
+        print("no new arrears. Promotion stays a human step: "
+              "collections/README, invariant 1.")
+        return 0
+    print(f"\n{len(new)} NEW candidate(s) since the last run -- scout and promote "
+          f"the real ones (collections/scout_instruments.py), or leave them:")
+    for coll, table in new:
+        print(f"  new       {coll:<16} {table}")
+    return 1
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--misses", action="store_true", help="print every missed table")
     ap.add_argument("--collection", help="one collection only")
+    ap.add_argument("--report", action="store_true",
+                    help=f"update {LEDGER}; exit 1 when this run found new arrears")
+    ap.add_argument("--today", help="date to stamp (tests; default today)")
     args = ap.parse_args(argv)
+    if args.report and args.collection:
+        ap.error("--report writes the whole ledger, so it cannot be scoped "
+                 "to one collection")
 
     collections = read_csv("collections.csv")
     members = read_csv("collection_members.csv")
@@ -230,6 +341,9 @@ def main(argv=None) -> int:
                       f"{', '.join(r['tokens'])}):")
                 for name in r["misses"]:
                     print(f"  {name}")
+    if args.report:
+        today = args.today or dt.date.today().isoformat()
+        return report(rows, today, HERE / LEDGER)
     return 0
 
 

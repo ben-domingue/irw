@@ -145,6 +145,18 @@ Two calls in this batch stretch the rules and are recorded as such:
    output stays in curated/*.review.csv until a human promotes it. A published
    collection is one somebody stands behind.
 
+   This invariant survived #3225 deliberately. A curated list is a snapshot, and
+   126 tables that name a collection's own instrument arrived after the lists
+   were last gone through on 2026-09-30 -- but the defect was that the queue was
+   INVISIBLE, not that promotion needed a human. So the answer was a nag, not an
+   auto-promotion: stage 21 (metadata/collection_recall.py --report) runs every
+   pipeline, keeps metadata/collection_arrears.csv with the date each arrear
+   first appeared, and exits 1 when a run finds a NEW one. Read the ledger,
+   scout, promote. Nothing publishes a membership nobody stands behind. Ben
+   ruled this on 2026-10-29 ("i need to be nagged"); if the queue later proves
+   to be routine rubber-stamping, retiring this invariant for the `name` tier is
+   a smaller decision with evidence behind it.
+
 2. THIS STAGE NEVER OPENS THE TAGS GOOGLE SHEET. cname: rules read the already
    published tags.csv, whose "construct name" is column 3 of 03_tags.R's
    positional KEEP_COLS. Column 4 ("Context Text" -- verbatim excerpts from
