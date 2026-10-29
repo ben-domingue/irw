@@ -23586,6 +23586,47 @@ rules do not interfere. Full suite: 276 passing.
 This takes effect on the NEXT discovery run; the 2026-10-28 sweep was already
 in flight with the old module loaded.
 
+### The four repeated-measures leads worked, and a 50x count error in the triage
+
+The `worth_retrying` bucket's other shape is a `dup_id_item` failure the
+retriage read as "consistent with a longitudinal/repeated-measures design",
+which is exactly what IRW wants a `wave` for. Four rows had it. None shipped,
+and two for a reason worth recording.
+
+- **`10.17026/ss/nidsij`** — the one that hurt. An experience-sampling study of
+  post-COVID symptoms: 10 momentary-affect items and 9 symptom items per beep
+  on 1-7, with `Timepoint_Total`/`Day`/`Timepoint_Day` sitting there as a wave.
+  Precisely the shape IRW is short of. **The triage reported
+  `n_participants=494`; the file has 749 rows and TEN unique participants**, at
+  27-84 beeps each — the count was off by a factor of 50, because in an ESM file
+  the rows are beeps and whatever the resolver counted was not people. Below the
+  flat N>=100 floor, so skipped outright, and the lead note says to reconsider
+  this deposit first if that floor is ever revisited for repeated-measures
+  designs.
+- **`10.5061/dryad.ksn02v73p`** — same error, smaller factor: 151 reported, **64
+  unique females** over 249 phonotaxis trials. Non-human is not itself a reason
+  to skip (2026-08-10) so it was judged on content, and it fails twice: the
+  floor, and no item battery — the conditions are 2 modalities x 4 silent
+  delays.
+- **`10.5281/zenodo.17198144`** — 110 children at two timepoints, above the
+  floor, but each timepoint has only four measures and every one is a subtest
+  TOTAL (Corsi forward, Corsi backward, locomotor, ball skill). Aggregate.
+- **`10.7910/DVN/KX1BYC`** — driving telemetry, including a 1.4 GB breadcrumb
+  file over the size cap, and the one clinical file holds composite neuropsych
+  scores only (trail A/B times, free-recall total, fluency count, CDR). No item
+  battery, and the breadcrumbs are GPS traces.
+
+**The lesson for the next lead-working pass: `n_participants` in a triage row
+is a resolver's guess, not a fact.** Both ESM/trial-level files reported a
+count several times the real subject count, and in both cases the real number
+decided the verdict. Check `nunique()` on the id column before ranking a
+repeated-measures lead by size — the 100 <= N <= 50,000 shape filter is being
+applied to a number that can be wrong by 50x in exactly this bucket.
+
+That closes the interesting half of `worth_retrying`. With the eleven
+article-table rows rejected as a class and these four worked, the bucket is down
+from 23 to 8 and the whole leads file to 76 `unworked`.
+
 ### The `surf` (DataverseNL) question, measured and answered
 
 Two sweeps in a row flagged this. The ledger answers it: **314 `10.34894` keys

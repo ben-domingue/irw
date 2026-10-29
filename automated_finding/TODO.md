@@ -142,13 +142,27 @@ decision, 12 of those shipped.
   worth deciding whether that is acceptable here before spending the rights
   effort.
 
-- [ ] **80 `unworked` leads remain** in `leads/repos_leads_2026-10-28.csv`: 45
-  `recoverable_format`, 12 `worth_retrying`, 8 `aggregate_continuous`, 12
-  `download_failed` and 3 `error`. Each `recoverable_format` row carries its own
+- [ ] **76 `unworked` leads remain** in `leads/repos_leads_2026-10-28.csv`: 45
+  `recoverable_format`, 8 `worth_retrying`, 8 `aggregate_continuous`, 12
+  `download_failed` and 3 `error`. The `worth_retrying` bucket is now the thin
+  one: its eleven article-table rows were rejected as a class and its four
+  repeated-measures rows were worked, so what is left there is mostly
+  text-coded-Likert files that still need a reader pass. Each `recoverable_format` row carries its own
   diagnosis from the retriage, and the diagnoses are specific — the common shape
   is a questionnaire carrying several instruments, so the work is one processing
   script per deposit, not a reader fix. **Do not re-run the reader on them**;
   2026-10-28b already proved that changes nothing.
+
+- [ ] **`n_participants` in a triage row is a resolver's GUESS. Check
+  `nunique()` on the id column before ranking a repeated-measures lead by
+  size.** Found twice on 2026-10-28b, both in the `worth_retrying` bucket:
+  `10.17026/ss/nidsij` reported 494 participants and has **10** (749 ESM beeps),
+  and `10.5061/dryad.ksn02v73p` reported 151 and has **64** (249 trials). In
+  both cases the real count decided the verdict, and the shape filter this
+  pipeline ranks leads with (100 <= N <= 50,000) was being applied to a number
+  wrong by up to 50x. It is specifically the trial-level/ESM bucket where the
+  rows are occasions rather than people; worth a resolver fix, or at minimum a
+  rule in the lead-working routine.
 
 - [ ] **Four deferrals with named blockers, each worth one answer rather than
   more work:**
