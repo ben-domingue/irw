@@ -24095,3 +24095,19 @@ stem is identical across the five items.
 The `recoverable_format` rows are the same shape the leads pass learned to work
 — a questionnaire carrying several instruments, needing a processing script
 rather than a reader fix.
+
+### Uploaded 2026-10-29
+
+Ben uploaded both 2026-10-28 batches together — the 2026-10-28b leads pass and
+the 2026-10-28c sweep shared the staging folders, so the handover was one set:
+**64 response tables, 590,183 responses, and 8 item text tables**, response
+tables first. `uploaded=2026-10-29` is stamped on the 8 shipped
+`itemtext_provenance.csv` rows and the 8 `itemtext/mapping_verification.csv`
+rows.
+
+A release is owed before these reach `metadata.csv`. Two things are waiting on
+it: the covariate-label harvest for `galanis_2025_*` and `aksin_2023_*` ×
+`cov_department`, and four register rows owed from the Ibaceta deposit (the
+FFMQ, the 25-item Spanish DERS, the mind-wandering measure and the Daydreaming
+Frequency Scale) — with the standing warning that the register's existing DERS
+row is the *28-item* adaptation and its `block` must not be read across.

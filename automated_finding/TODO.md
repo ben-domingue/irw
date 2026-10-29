@@ -59,7 +59,7 @@ merged, and the 552-row `tags/tags_auto.csv` merge is PR #3133.
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
-## Repos sweep 2026-10-28 (mode 3) — 134 terms, 8 tables, AWAITING UPLOAD with 2026-10-28b
+## Repos sweep 2026-10-28 (mode 3) — 134 terms, 8 tables, UPLOADED 2026-10-29
 
 Discovery done: **1,204 candidates** in 100 minutes over 8 connectors (zenodo
 450, dataverse 316, figshare 239, scholars_portal 87, datacite 58, openaire 36,
@@ -145,23 +145,29 @@ responses in total.
   measurement recorded in the 2026-10-27 section. Nothing owed; noted so the
   candidate counts are comparable with earlier sweeps.
 
-## Leads pass 2026-10-28b — 56 tables + 7 item text tables, AWAITING UPLOAD
+## Leads pass 2026-10-28b — 56 tables + 7 item text tables, UPLOADED 2026-10-29
 
 Full write-up in `BATCH_LOG.md` (2026-10-28b). The 83 unworked leads of 10-27
 and the 28 of 10-21 were re-triaged together; **39 of the 106 were worked to a
 decision and 18 of those shipped** -- 56 tables, 509,873 responses. 16 were
 rejected on content (eleven of them as one class) and 2 are below the N floor.
 
-- [ ] **64 response tables (590,183 responses) + 8 item text tables need
-  uploading** -- this count covers BOTH the 2026-10-28b leads pass and the
-  2026-10-28c sweep, which share the staging folders. `automated_finding/irw_output/` (with a MANIFEST) and
-  `itemtext_output/`. **Response tables first.** All 64 pass `irw-validate
-  --profile upload`; all 7 item text tables PASS `normalize_nulls.R` ->
-  `validate_items.R --resp-csv` -> `audit_batch.R --resp-dir` and are clean on
-  `irw-validate`. 64 dictionary rows and 64 tag rows are already staged, so
-  nothing needs pasting. Stamp `uploaded=` on the 4 shipped
-  `itemtext_provenance.csv` rows and the 4 `mapping_verification.csv` rows only
-  after Ben confirms.
+- [x] **64 response tables (590,183 responses) + 8 item text tables uploaded by
+  Ben, 2026-10-29.** This covers BOTH the 2026-10-28b leads pass and the
+  2026-10-28c sweep, which shared the staging folders.
+  `uploaded=2026-10-29` is stamped on the 8 shipped `itemtext_provenance.csv`
+  rows and the 8 `itemtext/mapping_verification.csv` rows. If any individual
+  table did not in fact go up, that stamp is the thing to correct. 64
+  dictionary rows and 64 tag rows were staged with them, so nothing needed
+  pasting. **A release is owed** before these reach `metadata.csv` -- and with
+  it the covariate-label harvest for `galanis_2025_*` and `aksin_2023_*`
+  recorded below.
+
+  Original: **64 response tables + 8 item text tables need uploading.**
+  `automated_finding/irw_output/` (with a MANIFEST) and `itemtext_output/`.
+  **Response tables first.** All 64 passed `irw-validate --profile upload`; all
+  8 item text tables passed `normalize_nulls.R` -> `validate_items.R
+  --resp-csv` -> `audit_batch.R --resp-dir` and were clean on `irw-validate`.
 
   Two of the eight item text tables --
   `andreu_sanchez_2023_information_sources__items.csv` and
