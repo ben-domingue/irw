@@ -59,6 +59,76 @@ merged, and the 552-row `tags/tags_auto.csv` merge is PR #3133.
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## Leads pass 2026-10-28b — 16 tables + 4 item text tables, AWAITING UPLOAD
+
+Full write-up in `BATCH_LOG.md` (2026-10-28b). The 83 unworked leads of 10-27
+and the 28 of 10-21 were re-triaged together; 9 of the 106 were worked to a
+decision, 5 of those shipped.
+
+- [ ] **16 response tables (280,437 responses) + 4 item text tables need
+  uploading.** `automated_finding/irw_output/` (with a MANIFEST) and
+  `itemtext_output/`. **Response tables first.** All 16 pass `irw-validate
+  --profile upload`; all 4 item text tables PASS `normalize_nulls.R` ->
+  `validate_items.R --resp-csv` -> `audit_batch.R --resp-dir` and are clean on
+  `irw-validate`. 16 dictionary rows and 16 tag rows are already staged, so
+  nothing needs pasting. Stamp `uploaded=` on the 4 shipped
+  `itemtext_provenance.csv` rows and the 4 `mapping_verification.csv` rows only
+  after Ben confirms.
+
+  Two of the four item text tables --
+  `andreu_sanchez_2023_information_sources__items.csv` and
+  `_lifestyle__items.csv` -- are for response tables that are **already live**
+  (uploaded 2026-10-21). They go up with the rest of `itemtext_output/` and no
+  response upload is owed for them.
+
+- [ ] **Three `itemtext_issues.qmd` entries owed, in the datapages/irw repo.**
+  The `public_note` text is already written in `itemtext_provenance.csv`; it
+  just needs pasting into the YAML list in that file.
+  1. `lotfi_bejestani_2023_moral_distress` -- the paper documents the scale as
+     0-6 and the data hold 266 responses of 7, with the depositor's own total
+     running past the 0-6 maximum. This is the page's canonical case.
+  2. `andreu_sanchez_2023_information_sources` and 3. `_lifestyle` -- 25 of the
+     333 respondents answered the English version of a questionnaire whose
+     Spanish is in `item_text`, which the 2026-09-11 multi-language ruling says
+     must be stated publicly.
+  (These are *in addition to* the `senge_2025_disposal_frequency` and
+  `marsalek_2026_ai_attitudes` entries the 10-27 section still owes. One trip to
+  that repo clears all five.)
+
+- [ ] **No covariate-label harvest is owed by this batch.** Two of the five
+  scripts read a `.sav`/`.dta` (`kubilay_2023_*` reads Stata,
+  `aksin_2023_*` reads SPSS), so check this before the next release rather than
+  taking it on trust: `kubilay`'s covariates are coded and the deposit labels
+  them in an .xlsx codebook rather than in the .dta, and `aksin`'s .sav carries
+  exactly one value-label set, for `cov_department`. So there is **one**
+  harvestable table-x-covariate pairing in the batch, `aksin_2023_*` x
+  `cov_department`, which is worth one `harvest.py --commit HEAD` run when the
+  tables are live.
+
+- [ ] **99 `unworked` leads remain** in `leads/repos_leads_2026-10-28.csv`: 53
+  `recoverable_format`, 23 `worth_retrying`, 8 `aggregate_continuous`, 12
+  `download_failed` and 3 `error`. Each `recoverable_format` row carries its own
+  diagnosis from the retriage, and the diagnoses are specific — the common shape
+  is a questionnaire carrying several instruments, so the work is one processing
+  script per deposit, not a reader fix. **Do not re-run the reader on them**;
+  2026-10-28b already proved that changes nothing.
+
+- [ ] **Two deferrals with named blockers, both worth a ruling rather than more
+  work:**
+  - `10.7910/DVN/HGTS9H` -- a CC0 replication package whose data file is
+    `afrobarometer r9.tab`, i.e. **Afrobarometer Round 9** redistributed inside
+    it. 3,392 respondents x 135 Q-prefixed items, so it is a large, real
+    candidate. The depositor's CC0 covers the depositor's material, not
+    Afrobarometer's survey data, and Afrobarometer publishes its own terms.
+    Does IRW take third-party survey data from a CC0 replication package?
+  - `10.6084/m9.figshare.31217140.v2` -- 500 Iranian women, 129 clean integer
+    columns, 115 value-label sets, zero variable labels. The column prefixes
+    **contradict** the numbering (`MD1..MD27` then `Perfectionism28..30` run
+    1-30; `POS1..36` then `Psychological_F37..60` run 1-60), so the prefix is
+    not the instrument boundary and splitting on it would invent scales that
+    are not there. Needs the paper to say which items belong to which
+    instrument.
+
 ## Repos sweep 2026-10-27 (mode 3) — UPLOADED; follow-ups open
 
 Discovery, triage and the `good`-row processing pass all ran overnight
@@ -87,17 +157,21 @@ no item battery).
 - [ ] **No covariate-label harvest is owed by this batch** — none of the four
   scripts reads a `.sav` or `.dta`; the labelled covariates were mapped from
   published codebooks inside the scripts.
-- [ ] **83 `unworked` leads** in `leads/repos_leads_2026-10-27.csv`: 23
-  step-2b `worth_retrying`, 32 `recoverable_format`, 8 `aggregate_continuous`,
-  and the retryable download failures (HTTP 400/401 + reader/encoding errors).
-  The 70 `blocked_access` rows (HTTP 403/404) and 3 `blocked_licence`
-  (`cc-by-nc-nd`, ND stops) need nothing.
-- [ ] **Decide whether to keep querying `surf` (DataverseNL).** Two sweeps
-  running: 237 of 1,332 candidates on 2026-10-27 and 214 of 1,278 on
-  2026-10-21, with zero readable files between them. Measure how many `surf`
-  candidates have ever reached `good`/`worth_retrying` in
-  `repo_triage_seen_keys.csv` before deciding; a sixth of each sweep's
-  candidate budget is riding on it.
+- [x] **The 83 `unworked` leads are re-triaged and 7 of them worked**
+  (2026-10-28b). They moved, with the 28 from 10-21, into
+  `leads/repos_leads_2026-10-28.csv`, which is now the one live place for them;
+  the rows here carry a note pointing at it. 5 deposits shipped 16 tables, 2
+  were rejected on content, 2 deferred with a named blocker. The re-triage
+  itself resolved nothing -- same buckets as before -- so the open work is
+  reading the remaining 99 rows' diagnoses, not re-running the reader.
+- [x] **Measured and answered 2026-10-28: stop querying `surf`.** 314
+  `10.34894` keys have ever been triaged and produced **one** `good`, **zero**
+  `worth_retrying`, one shipped table and 263 `no_usable_file` -- a ~0.3% good
+  rate against a corpus rate nearer 1%, and the failure mode is access (403 on
+  file download), not relevance. The 2026-10-28 sweep ran with `--sources`
+  naming the other eight connectors. Left as a per-run choice rather than a
+  code change, so one flag brings it back; if Ben wants it permanent, drop
+  `from_surf` from `_CONNECTORS` in `irw_discover_updated.py`.
 - [ ] **Dryad file downloads 401 (6 rows incl. datacite).** Dryad needs no
   auth for file downloads, so this is a resolver defect, not a permission.
   Noted on 2026-10-21 as well and still unfixed.
@@ -133,21 +207,27 @@ rows worked to a decision; seven shipped, three did not.
   column does not exist. `check_provenance.R` only walks
   `itemtext/itemtables/**/provenance.csv`, so nothing failed -- but the batch
   file cannot express the field, and it should get the column.
-- [ ] **Three item text tables are rights-clear and in hand but owe a
-  translation pass**: `saputra_2025_fomo_consumer` (Indonesian),
-  `andreu_sanchez_2023_information_sources` and `_lifestyle` (Spanish). The
-  wording is in each deposit's own sheets; shipping it means an English gloss
-  in the `_translated` fields, which is IRW-generated content and owes an
-  `itemtext_issues.qmd` line. Deferred, not forgotten -- see
-  `itemtext_provenance.csv`.
+- [ ] **ONE item text table still owes a translation pass:
+  `saputra_2025_fomo_consumer`** (Indonesian). The other two are **done**
+  (2026-10-28b): `andreu_sanchez_2023_information_sources` and `_lifestyle` are
+  staged in `itemtext_output/`, gated and clean. The premise of the deferral was
+  wrong and clearing it cost nothing -- the deposit carries the whole
+  questionnaire in BOTH languages ("QUESTIONNAIRE IN SPANISH" and
+  "QUESTIONNAIRE IN ENGLISH" sheets), so the English is the source's own
+  published translation and **no IRW-generated content ships**. Both response
+  tables are already live (10-21), so only the item text needs uploading. They
+  do still owe an `itemtext_issues.qmd` line, but for a different reason: 25 of
+  the 333 respondents answered the English version, which the 2026-09-11
+  multi-language ruling says `public_note` must state. Worth checking whether
+  `saputra_2025_fomo_consumer`'s deposit has the same both-languages shape
+  before treating it as expensive.
 - [x] **The 8 `worth_retrying`, 40 retryable `download_failed`, 2
   `pii_suspected` and 3 `aggregate_continuous` rows are worked** (2026-10-21d,
-  see below). **The 28 `recoverable_format` rows are NOT** and are still
-  `unworked` in `leads/repos_leads_2026-10-21.csv`.
-- [ ] **The `surf` (DataverseNL) connector question is still open**: 214 of the
-  sweep's 1,278 candidates came from it and 26 of 26 triaged rows answered 403.
-  Querying it may be spending a sixth of each sweep's candidate budget for
-  nothing.
+  see below). **The 28 `recoverable_format` rows are re-triaged** (2026-10-28b)
+  and now live in `leads/repos_leads_2026-10-28.csv`; two of them shipped.
+- [x] **The `surf` (DataverseNL) question is answered** -- see the 2026-10-27
+  section above: measured 2026-10-28, ~0.3% lifetime good rate over 314 keys,
+  and the 2026-10-28 sweep omitted it.
 
 ## Repos sweep 2026-10-21, leads pass (2026-10-21d) — 35 tables staged, AWAITING UPLOAD
 
@@ -173,15 +253,16 @@ shipping 35 response tables and 218,354 responses, 4 item text tables.
   nothing needs pasting. Stamp `uploaded=` on the 4 shipped
   `itemtext_provenance.csv` rows and the 4 `mapping_verification.csv` rows
   only after Ben confirms.
-- [ ] **28 `recoverable_format` rows left unworked** in
-  `leads/repos_leads_2026-10-21.csv` (figshare 10, zenodo 8, mendeley 5,
-  dataverse 5). Each needs one re-read with a different reader or delimiter and
-  a re-triage. Note that the reader is now better than it was when they were
-  flagged -- the encoding x delimiter and BIFF2 `.xls` fixes in
-  `irw_triage_updated.py` landed with this batch -- so some of them may simply
-  read now. The cheap way in is
-  `python3 seen_ledger.py drop repo_triage_seen_keys.csv --refined-flag
-  recoverable_format --apply` followed by a re-triage of just those keys.
+- [x] **The 28 `recoverable_format` rows were re-triaged 2026-10-28b** and
+  the hope recorded here is **disproven**: none of them "simply read now". The
+  encoding x delimiter and BIFF2 `.xls` fixes change nothing for this bucket --
+  all 28 came back `recoverable_format` again. What they actually need is a
+  processing script per deposit, because the diagnosis
+  ("keeping only the N columns that share one small integer domain, the file
+  triages as good") is the signature of a questionnaire carrying several
+  instruments, not of a reader bug. Two of the 28 shipped this way; the rest are
+  in `leads/repos_leads_2026-10-28.csv`. Nobody needs to try the reader route
+  again.
 
 - [ ] **Re-run `metadata/covariate_labels/build.py` after the next pipeline
   stage 01, and commit the diff. Expect ~558 new rows.** Ben released

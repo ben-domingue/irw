@@ -41,6 +41,8 @@ ahumada_tello_2026_perceived_perform,core,none,2026-10-18
 akinwehinmi_2026_gari_biofortified,conj,https://jlupub.ub.uni-giessen.de/server/api/core/bitstreams/174ab133-fe76-401c-8e60-de96e2dc1844/content,2026-10-14
 aklin_2026_climate_pledges,conj,https://osf.io/download/6aada5af0ef8b6fd86390c5d/,2026-10-09
 aklin_2026_climate_transfers,conj,https://osf.io/download/6aada5af0ef8b6fd86390c5d/,2026-10-09
+aksin_2023_big_five,core,none,2026-10-28
+aksin_2023_intercultural_sensitivity,core,none,2026-10-28
 albers_2026_marine_user_rights,conj,https://data.mendeley.com/public-files/datasets/w2x33kmwhc/files/5682f613-acfe-48cd-a7d9-92d1c2a4113a/file_downloaded,2026-10-14
 albert_2024_negative_partisanship,conj,https://dataverse.harvard.edu/api/access/datafile/10451956,2026-10-09
 aldhi_2025_acad_performance,core,none,2026-10-20
@@ -1596,6 +1598,7 @@ koliev_2026_unfccc_reform,conj,https://dataverse.harvard.edu/api/access/datafile
 konuralp_2026_climate_attitudes,core,https://zenodo.org/records/20734378/files/igdir_survey_codebook.csv,2026-10-18
 konuralp_2026_party_environment,core,https://zenodo.org/records/20734378/files/igdir_survey_codebook.csv,2026-10-18
 koob_2026_protest_dimensions,conj,none,2026-10-09
+kosgei_2026_fisheries_literacy,core,none,2026-10-28
 krajewski_2025_criminal_opportunities,conj,none,2026-10-07
 krakowski_2023_informal_justice,conj,https://dataverse.harvard.edu/api/access/datafile/7019308,2026-10-08
 krakowski_2023_violence,conj,https://dataverse.harvard.edu/api/access/datafile/7019308,2026-10-08
@@ -1616,6 +1619,8 @@ kubicka_2025_csq,core,none,2026-10-15
 kubicka_2025_media_internalization,core,none,2026-10-15
 kubicka_2025_physical_closeness,core,none,2026-10-15
 kubicka_2025_security_scale,core,none,2026-10-15
+kubilay_2023_scam_confidence,core,https://dataverse.harvard.edu/api/access/datafile/7240091,2026-10-28
+kubilay_2023_scam_identification,core,https://dataverse.harvard.edu/api/access/datafile/7240091,2026-10-28
 kuecuekbalaban_2017_selftest,conj,https://ndownloader.figshare.com/files/8857876,2026-10-11
 kul_2026_academic_buoyancy,core,https://ndownloader.figshare.com/files/67746372,2026-10-02
 kul_2026_math_self_concept,core,https://ndownloader.figshare.com/files/67746372,2026-10-02
@@ -1790,6 +1795,11 @@ lopezgarcia_2025_haiti_property_tax,conj,https://dataverse.harvard.edu/api/acces
 lopezortega_2025_adoption_couples,conj,https://dataverse.harvard.edu/api/access/datafile/10755528,2026-10-14
 lopezortega_2025_curriculum_de,conj,none,2026-10-07
 lopezortega_2025_curriculum_nl,conj,none,2026-10-07
+lotfi_bejestani_2023_burnout,core,none,2026-10-28
+lotfi_bejestani_2023_moral_courage,core,none,2026-10-28
+lotfi_bejestani_2023_moral_distress,core,none,2026-10-28
+lotfi_bejestani_2023_moral_sensitivity,core,none,2026-10-28
+lotfi_bejestani_2023_org_justice,core,none,2026-10-28
 lu_2025_property_tax_lab,conj,https://dataverse.harvard.edu/api/access/datafile/10792189,2026-10-08
 lu_2025_property_tax_online,conj,https://dataverse.harvard.edu/api/access/datafile/10792189,2026-10-08
 lublin_2023_candidate_pairs,conj,https://dataverse.harvard.edu/api/access/datafile/6962034,2026-10-14
@@ -2290,6 +2300,12 @@ platte_2026_mindset_beliefs,core,https://ssh.datastations.nl/api/access/datafile
 platte_2026_mistakes,core,https://ssh.datastations.nl/api/access/datafile/621739,2026-10-19
 platte_2026_motivation,core,https://ssh.datastations.nl/api/access/datafile/621739,2026-10-19
 platte_2026_self_monitoring,core,https://ssh.datastations.nl/api/access/datafile/621739,2026-10-19
+plohl_2025_climate_denial,core,none,2026-10-28
+plohl_2025_immigration_attitudes,core,none,2026-10-28
+plohl_2025_media_literacy,core,none,2026-10-28
+plohl_2025_pdtq_climate,core,none,2026-10-28
+plohl_2025_pdtq_immigration,core,none,2026-10-28
+plohl_2025_trust,core,none,2026-10-28
 polgahecimovich_2021_admissions,conj,https://dataverse.harvard.edu/api/access/datafile/3256917,2026-10-08
 polgahecimovich_2021_faculty,conj,https://dataverse.harvard.edu/api/access/datafile/3256917,2026-10-08
 portmann_2021_candidate_stereotypes,conj,https://dataverse.harvard.edu/api/access/datafile/4171018,2026-10-14

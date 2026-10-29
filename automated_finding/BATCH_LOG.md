@@ -23037,3 +23037,234 @@ conform, 18 pass the upload gate, 4 warnings, all explained above);
 PASS on both item and resp sets), then `audit_batch.R --resp-dir` (8/8 PASS, no
 anomalies), then `irw-validate` on the item files (8 clean).
 `itemtext_output/` holds nothing but `*__items.csv`.
+
+## 2026-10-28b — the 10-27 and 10-21 leads re-triaged, and 9 of them worked: 16 tables, 280,437 responses
+
+Nothing uploaded. Ben asked for a discovery sweep *and* for backlogged
+triage/leads work in the same session; this is the leads half. The sweep's own
+entry is separate (2026-10-28c, below, once it finishes).
+
+### The re-triage
+
+`leads/repos_leads_2026-10-27.csv` carried 83 `unworked` rows and
+`leads/repos_leads_2026-10-21.csv` another 28, and the two overlap in kind: the
+10-21 entry says outright that "the reader is now better than it was when they
+were flagged", so the cheap first move was to put all of them back through
+triage rather than open them by hand. 106 distinct candidates (the five already-
+worked `good` rows of 10-27 excluded), triaged with `--ignore-seen-keys
+--retriage` so the ledger was left alone — which is the documented re-mine case,
+and the run printed the matching "refined_flag was NOT written back ... On a
+re-mine this is correct" line.
+
+**The reader improvements did not resolve a single one.** 91 human_assistance,
+12 download_failed, 3 error, and Step 2b put them back in the same buckets as
+before: 60 `recoverable_format`, 23 `worth_retrying`, 8 `aggregate_continuous`,
+0 `human_review`, 0 `not_item_response`, 0 `conj`. That is worth recording as a
+result: the 28 `recoverable_format` rows the 10-21 entry hoped might "simply
+read now" do not, and nobody needs to try that again. What the retriage DID do
+is reprint each row's diagnosis, and the diagnoses are specific enough to work
+from — "re-read with no change to the reader, keeping only the N columns that
+share one small integer domain, the file triages as good" is the signature of a
+questionnaire carrying several instruments, which is a processing-script job
+rather than a reader bug.
+
+All 106 rows, with those diagnoses, are in `leads/repos_leads_2026-10-28.csv`.
+The 78 + 28 superseded rows in the two older leads files now carry a note
+pointing at it, so there is one live place per lead rather than three.
+
+### The nine worked (filtered to 100 <= N <= 50,000 and 8 <= items <= 700, then by volume)
+
+| deposit | licence | outcome |
+|---|---|---|
+| 10.7910/DVN/HUYYQZ | CC0 1.0 | **2 tables**, 24,000 responses |
+| 10.5281/zenodo.17520820 | CC BY 4.0 | **6 tables**, 119,074 responses |
+| 10.17632/yxpj8h384j.1 | CC BY 4.0 | **2 tables**, 64,332 responses |
+| 10.7910/DVN/TX683E | CC0 1.0 | **1 table**, 26,260 responses |
+| 10.6084/m9.figshare.24264663.v1 | CC BY 4.0 | **5 tables**, 46,771 responses |
+| 10.7910/DVN/WHHV5X | CC0 1.0 | rejected: imputed |
+| 10.6084/m9.figshare.33148451.v1 | CC BY 4.0 | rejected: totals only |
+| 10.6084/m9.figshare.31217140.v2 | CC0 | deferred: instrument boundaries |
+| 10.7910/DVN/HGTS9H | CC0 1.0 | deferred: third-party rights |
+
+**Kubilay, Raiber, Spantig, Cahlíková & Kaaria 2023** (JDE 165:103147), scam
+identification in Kenya. A real test rather than a questionnaire: twelve phone-
+message vignettes — eight scams and four genuine official messages, in two
+fixed blocks of six — each classified scam/no-scam, each followed on the same
+page by a five-point confidence rating, with the page time recorded.
+`kubilay_2023_scam_identification` ships the classifications with per-vignette
+`rt`; `kubilay_2023_scam_confidence` the confidence ratings.
+**`wave` and `treat` are deliberately absent.** The tips treatment is
+administered *between* the two blocks, so block-2-ness is what makes a response
+post-treatment, and the deposit documents `OrderSIA_AB` only as "No/Yes" without
+saying which value means which block came first. The empirical check was
+inconclusive (tips move block A by +0.113 among Order=0 respondents but block B
+by only +0.029 among Order=1), so the condition and the order indicator ship as
+covariates instead of a `treat` that would be backwards for half the sample.
+Item text: **shipped**, and it is the interesting one — the stimuli are phone
+screenshots, so `item_text` is blank under the 2026-09-05 picture-stimulus
+ruling, and what ships is the deposit's option labels plus **the answer key**,
+from the article's appendix Table A1 (`Intention`: Genuine/Fraudulent).
+Table A1 prints six rows per block without naming them M1..M6, so
+`verify_kubilay_2023_scam_identification.R` tests the tie and PASSES: in each
+block independently the two lowest shares of "Scam" answers are exactly the two
+rows marked Genuine (A 0.351/0.448 vs 0.578 lowest fraudulent; B 0.161/0.368 vs
+0.631), and the paper reports only 12% of respondents got all six of block 1
+right, so the separation is a real test rather than an identity.
+
+**Plohl, Mlakar, Smrke, Bisconti & Aquilino 2025** (Zenodo 17520820), the EU
+SOLARIS project's UC1 deepfake experiments. The whole `recoverable_format`
+problem was a semicolon delimiter with comma decimal separators and a `' '`
+missing marker. 1,124 respondents in three countries saw a political deepfake on
+climate change and one on immigration; the two attitude batteries were
+administered **before and after**, so those two tables ship with `wave` 1 and 2
+over the same items rather than as four tables — 26,976 and 31,472 responses. The
+22-item PDTQ was rated separately about each video, which is two tables and not
+one merged table, because the same people rated both and merging would put two
+rows on every (id, item). Plus media literacy (6 items) and trust (4). `treat` is
+again absent on purpose: the deposit never says which of `CC_Group`/`IM_Group`'s
+six codes is the control.
+
+**Aksin 2023** (Mendeley 10.17632/yxpj8h384j.1), 1,218 Turkish preservice
+teachers. Two instruments, and two things had to be established before either
+could ship. (1) The `R`-suffixed columns are **already** reverse-scored, so
+`resp` runs one direction and the tables are not `resp_ambiguous`: every item in
+both blocks, R-suffixed ones included, correlates positively with its block
+total (KDÖ lowest 0.253, BFKÖ lowest 0.172). (2) `BFKÖ3` is a leftover
+**unreversed duplicate** of `BFKÖ3R`, not a 31st item in a 30-item block —
+`BFKÖ3 == 8 - BFKÖ3R` on all 1,217 rows where both are integers, and it is the
+one column in the block correlating negatively with the total. Keeping it would
+have shipped one item twice, once backwards. 222 model-imputed non-integer cells
+(0.5% of the file, spread over 54 columns, differing cell by cell so not a column
+mean) were dropped rather than rounded.
+
+**Kosgei 2026** (10.7910/DVN/TX683E), a 28-item 0/1 fisheries literacy exam
+given to 938 fishers at 37 Kenyan landing sites. The deposit states the scoring
+itself: "Each question is scored 1 if answered correctly and 0 if not". `run_qc`
+warns `multi_scale` on the five item-name prefixes and the answer is that they
+are the deposit's own five domains *within one exam*, not five instruments —
+same respondents, one administration, one total score — so one table.
+`latitude`, `longitude` and the landing site's **name** are dropped in no form
+under the 2026-10-20 geographic ruling (37 sites over 938 people is ~25 each),
+but the clustering is not lost: `cluster_id` ships an anonymous 1..37 site index.
+
+**Lotfi-Bejestani et al. 2023** (BMC Nursing 22:363), 500 Iranian psychiatric
+nurses, five instruments. A BIFF2 `.xls` — unsniffable by pandas, reads with
+`engine="xlrd"` — whose columns are `a1..a15`, `b1..b19`, `c1..c20`, `d1..d15`,
+`e1..e25` and nothing else. **Which block is which instrument was established
+three independent ways, not assumed**: item counts (POJ 20, MS 25, MC 15, MD 15,
+CBI 19) fix c, e and b and leave only MC-vs-MD; the deposit's own subscale totals
+reproduce the paper's published Table 3 exactly (`AA1/AA2/AA3` = 18.58/14.70/
+11.90 = the MD subscales; `DD1..DD5` = 10.35/10.78/10.91/10.61/10.46 = the MC
+subscales; `EE1..EE3` = 19.72/19.14/21.02 = the MS subscales; `CC1/CC2/CC3` span
+5, 6 and 9 items = Niehoff & Moorman's three dimensions), and summing each
+block's own items reproduces the matching total (block a 45.07 vs A's 45.18,
+block d 52.90 vs DD's 53.16, block e 59.66 vs EE's 59.81); and the response
+ranges settle a-vs-d, since MD is 0-6 with a real 0 category and MC is 1-7 with
+none. The script asserts all of that rather than asserting it in prose.
+
+Sentinels were dropped **per block against each instrument's documented range**
+rather than globally: 8 everywhere, and 9 additionally in the POJ block, both
+outside the documented sets and both rare where the real extremes are not (block
+c: 265 fives against 4 eights and 53 nines).
+
+**One anomaly ships as observed and is flagged publicly.** The moral-distress
+block holds 266 responses of 7 on a scale the paper documents as 0-6. 7 is far
+too common to be a missing code (the sentinel 8 appears 31 times) and the
+depositor's own MD total runs to 96 where 15 items on 0-6 would cap at 90, so the
+7s are in their scoring too. Shipped as stored, with an `itemtext_issues.qmd`
+callout owed — this is the page's canonical case, a documented scale that the
+data does not match.
+
+### Item text, one line per shipped table
+
+- `kubilay_2023_scam_identification` — **shipped**, 24 rows: answer key from the
+  article's appendix Table A1, option labels from the deposit's own codebook,
+  `item_text` blank by design (phone-screenshot stimuli).
+- `kubilay_2023_scam_confidence` — **shipped**, 60 rows: the five confidence
+  anchors from the same codebook, same twelve vignette slots.
+- `plohl_2025_pdtq_climate`, `_pdtq_immigration` — not shipped, and the location
+  is known: the 22 PDTQ items are published in the authors' own validation paper,
+  Plohl et al. 2024, IJHCI 41(11) 6786-6803, doi 10.1080/10447318.2024.2384821,
+  in three languages. One hop, but a paper fetch plus a rights read.
+- `plohl_2025_climate_denial`, `_immigration_attitudes`, `_media_literacy`,
+  `_trust` — not shipped; the wording is in neither the deposit nor the article.
+  Look in the two 2025 preprints the Zenodo record cites (SSRN
+  10.2139/ssrn.5351533 and PsyArXiv 10.31234/osf.io/knvby_v1).
+- `aksin_2023_intercultural_sensitivity` — not shipped. Both label levels
+  checked and both empty (0 variable labels over 64 columns; one value-label
+  set, for the `bölüm` covariate). The block is the Turkish ISS adaptation, which
+  means a paper hunt plus the translated-adaptation rights test.
+- `aksin_2023_big_five` — not shipped, and **which** published inventory this
+  adapts was not established: the stems are absent, so there is nothing to
+  search verbatim, and the deposit cites no article.
+- `kosgei_2026_fisheries_literacy` — not shipped, but the cheapest on the list
+  for a later pass: the headers already name each question's content
+  (`science_determine_cpue`, `ecology_knows_urchin_predator`), so only the
+  phrasing is missing. One caveat for whoever extracts it — the workbook repeats
+  the header `economics_understand_cost_benefit` three times for three different
+  questions, so `economics_cost_benefit_1/_2/_3` are tied to source column
+  ORDER, and that block needs the paper rather than the header.
+- the five `lotfi_bejestani_2023_*` — not shipped. A BIFF2 `.xls` carries no
+  label level at all, so neither was missed. Four of the five instruments are
+  published scales one hop away (Niehoff & Moorman 1993; Han et al. 2010;
+  Sekerka et al.; Ohnishi et al. 2018; Kristensen et al. 2005), but the
+  administration was **Persian**, so a later pass owes the administered wording
+  and the 2026-09-08 rights test, not just the English originals.
+
+### Also done: the two andreu_sanchez item text tables TODO.md has owed since 10-21
+
+`andreu_sanchez_2023_information_sources` and `_lifestyle` were deferred on
+2026-10-21 because "shipping it means an English gloss in the `_translated`
+fields, which is IRW-generated content". **That premise was wrong and the
+deferral cost nothing to clear**: the deposit carries the whole questionnaire in
+both languages ("QUESTIONNAIRE IN SPANISH" and "QUESTIONNAIRE IN ENGLISH"
+sheets), so the English is the *source's own* published translation and no
+IRW-generated content ships. Both tables are already live (uploaded 10-21), so
+this is item text only, 50 and 12 rows, gated against regenerated copies of the
+live response CSVs. `language` is `Spanish; English` — 308 of the 333
+respondents answered in Spanish and 25 in English — and per the 2026-09-11
+multi-language ruling the `public_note` says who read something else, which
+earns both tables an `itemtext_issues.qmd` line.
+
+`andreu_sanchez_2023_panas` stays **held**: its 20 affect adjectives are the
+PANAS, registered `block`.
+
+### Verification and gates
+
+- All 16 response tables: `irw-validate --profile upload` conforms and passes.
+- All 4 item text tables: `normalize_nulls.R` → `validate_items.R --resp-csv`
+  (item sets and resp sets match exactly) → `audit_batch.R --resp-dir` →
+  `irw-validate` clean.
+- `audit_batch.R` WARNs "100% of rows have blank item_text" on both kubilay
+  tables. That is the picture-stimulus ruling being followed, not a defect.
+- `irw-validate` WARNs `rights_register` on `lotfi_bejestani_2023_org_justice`:
+  item codes `c1`..`c20` match the register's CD-RISC `match_item_code` pattern.
+  **False positive** — the codes are the deposit's own column names, not item
+  wording, and the instrument is Niehoff & Moorman's POJ. Response data ships
+  regardless; nothing is owed.
+- `irw-validate` WARNs `pii_name` on the two kubilay tables for
+  `cov_phone_internet`, `cov_phone_social_media`, `cov_phone_shared`. All three
+  are 0/1 flags, labelled "Internet on phone (0/1)" etc. in the deposit's
+  codebook. False positives of the kind the check's own text anticipates.
+- `imputed_values*` concentration warnings on several tables are the expected
+  shape for binary classification and 0/1 knowledge items.
+
+### Bookkeeping
+
+16 `dictionary_auto.csv` rows, 16 `codebook_at_ingest.csv` rows (two real
+codebook URLs, the rest `none`), 16 tag rows in `tags_auto_2026-10-28.csv` and
+appended into `tags/tags_auto.csv`, 2 `mapping_verification.csv` rows for the
+kubilay pair plus 2 for the andreu pair, and 18 `itemtext_provenance.csv` rows
+(2 shipped kubilay, 2 rewritten andreu, 14 not-shipped with the location named).
+
+### The `surf` (DataverseNL) question, measured and answered
+
+Two sweeps in a row flagged this. The ledger answers it: **314 `10.34894` keys
+have ever been triaged, and they have produced one `good`, zero
+`worth_retrying`, one shipped table, and 263 `no_usable_file`.** That is a
+~0.3% good rate against a corpus-wide rate nearer 1%, on a sixth of each sweep's
+candidate budget, and the failure mode is not relevance but access — DataverseNL
+answers 403 on file download. The 2026-10-28 discovery sweep was therefore run
+with `--sources` naming the other eight connectors and omitting `surf`. That is
+a per-run choice, not a code change: `surf` is still in `irw_discover_updated.py`
+and one flag brings it back.
