@@ -23038,7 +23038,7 @@ PASS on both item and resp sets), then `audit_batch.R --resp-dir` (8/8 PASS, no
 anomalies), then `irw-validate` on the item files (8 clean).
 `itemtext_output/` holds nothing but `*__items.csv`.
 
-## 2026-10-28b — the 10-27 and 10-21 leads re-triaged, and 16 of them worked: 37 tables, 401,764 responses
+## 2026-10-28b — the 10-27 and 10-21 leads re-triaged, and 17 of them worked: 41 tables, 422,122 responses
 
 Nothing uploaded. Ben asked for a discovery sweep *and* for backlogged
 triage/leads work in the same session; this is the leads half. The sweep's own
@@ -23075,7 +23075,7 @@ pointing at it, so there is one live place per lead rather than three.
 ### Eleven worked, seven shipped (filtered to 100 <= N <= 50,000 and 8 <= items <= 700, then by volume)
 
 Nine are tabled here; the last two were worked after this table was written and
-are at the end of the entry. **Batch total: 37 tables, 401,764 responses.**
+are at the end of the entry. **Batch total: 41 tables, 422,122 responses.**
 
 | deposit | licence | outcome |
 |---|---|---|
@@ -23520,6 +23520,39 @@ numbering runs **1..23 exactly once** across the five suffixes, which is what
 says the suffixes partition one instrument rather than marking five that happen
 to share a prefix. The codes keep the source names so the subscale structure
 survives for whoever does identify it.
+
+### A twelfth: Mersin 2025 — 4 tables, and the source's own grouping as the basis
+
+`10.5281/zenodo.17631162` (CC BY 4.0), 702 Turkish pre-service mathematics
+teachers. `mersin_2025_technology_acceptance` (15 items, 1-5), `_ai_literacy`
+(6), `_ai_tpack` (5), `_ai_self_efficacy` (3). 20,358 responses, no missing
+data at all. **Batch total: 41 tables, 422,122 responses from 12 deposits.**
+
+**The four tables follow the deposit's own grouping rather than an inference
+from the column prefixes.** Its description names exactly four things — "AI
+literacy, AI-TPACK, self-efficacy, and technology acceptance" — and the 29
+columns fall into exactly four matching groups: `AIL` (6), `TPCK` (5), `SE` (3),
+and `PU`/`PEU`/`ATT`/`BI` (3+4+4+4), which are the four canonical
+technology-acceptance constructs. So technology acceptance is **one** 15-item
+table, not four thin ones: the source treats it as one construct, all 15 items
+share the response format and the administration, and the item codes keep the
+prefixes so anyone who wants `pu`, `peu`, `att` and `bi` separately can take
+them off the `item` column. `run_qc` warns `multi_scale` on those four
+prefixes, and the answer is that splitting on a prefix the source itself treats
+as one thing would read structure into it the source does not claim.
+
+This is the contrast with the Aldosari deferral earlier in the batch, and worth
+keeping the pair in mind: there, the construct names came from a FILE NAME and
+the item counts contradicted the instrument they implied, so nothing shipped.
+Here the names come from the deposit's own prose and the column counts match it
+exactly, so four tables ship — and still with no instrument named, because
+knowing the construct is not knowing the instrument.
+
+Item text is unrecoverable from this deposit and the script asserts why: **0 of
+29** variables carry a variable label and **0** carry value labels. The
+description says the data "supports the findings reported in the article"
+without naming or linking it and the record has no related identifier, so a
+later pass must find Mersin's paper first.
 
 ### The `surf` (DataverseNL) question, measured and answered
 
