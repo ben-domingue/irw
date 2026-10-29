@@ -23302,6 +23302,30 @@ Worth noting for the register work: the depositor is the Quiet Quitting Scale's
 own author, which is a promising position on one of the three and not the same
 as an established one.
 
+### And a seventh: Aghaei et al. 2025, 4 more tables
+
+`10.5281/zenodo.15346545` (CC BY 4.0), 714 Iranian online shoppers, one 84-item
+Persian questionnaire — `aghaei_2025_internet_addiction` (20 items, 1-5),
+`_emotional_intelligence` (16, 1-5), `_mindfulness` (12, 1-4) and
+`_impulse_buying` (5, 1-5). 37,842 responses. Batch total: **25 tables,
+334,679 responses.**
+
+The instruments were identified from the stems rather than the column prefixes:
+`adi1` is Young's Internet Addiction Test's own first item ("how often do you
+stay online longer than you intended?"), the 16 EI items fall into four blocks
+of four matching the WLEIS's structure, and the 12 mindfulness items on 1-4 are
+the CAMS-R's length and response format. The last two are recorded as **leads,
+not findings** — the stems are Persian, so a verbatim search needs the
+translation rather than the original.
+
+Item text is again in hand and held. Every item's variable label is its full
+Persian stem, numbered with the position it held in the 84-item questionnaire
+(OIB 20-24, EI 37-52, mindfulness 53-64, addiction 65-84), so a later pass
+starts from that rather than re-deriving it. Two things block it: none of the
+four instruments has a register row, and the value-label level is **empty for
+every variable**, so even a cleared extraction would ship stems with no
+`option_text`.
+
 ### The `surf` (DataverseNL) question, measured and answered
 
 Two sweeps in a row flagged this. The ledger answers it: **314 `10.34894` keys

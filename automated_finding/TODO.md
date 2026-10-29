@@ -65,7 +65,7 @@ Full write-up in `BATCH_LOG.md` (2026-10-28b). The 83 unworked leads of 10-27
 and the 28 of 10-21 were re-triaged together; 9 of the 106 were worked to a
 decision, 5 of those shipped.
 
-- [ ] **21 response tables (296,837 responses) + 4 item text tables need
+- [ ] **25 response tables (334,679 responses) + 4 item text tables need
   uploading.** `automated_finding/irw_output/` (with a MANIFEST) and
   `itemtext_output/`. **Response tables first.** All 16 pass `irw-validate
   --profile upload`; all 4 item text tables PASS `normalize_nulls.R` ->
@@ -131,7 +131,18 @@ decision, 5 of those shipped.
   `cov_department`, which is worth one `harvest.py --commit HEAD` run when the
   tables are live.
 
-- [ ] **99 `unworked` leads remain** in `leads/repos_leads_2026-10-28.csv`: 53
+- [ ] **Four more item text tables are blocked on register rows**
+  (`aghaei_2025_*`, `10.5281/zenodo.15346545`). Same shape as the
+  `galanis_2025_*` item above and worth doing in the same sitting: every item's
+  Persian stem is in the .sav's variable labels, but none of the four
+  instruments (Young's IAT, a WLEIS-shaped EI scale, a CAMS-R-shaped
+  mindfulness scale, five impulse-buying items) has a register row. **Second
+  blocker specific to this deposit:** the value-label level is empty for every
+  variable, so even a cleared extraction ships stems with no `option_text` --
+  worth deciding whether that is acceptable here before spending the rights
+  effort.
+
+- [ ] **97 `unworked` leads remain** in `leads/repos_leads_2026-10-28.csv`: 51
   `recoverable_format`, 23 `worth_retrying`, 8 `aggregate_continuous`, 12
   `download_failed` and 3 `error`. Each `recoverable_format` row carries its own
   diagnosis from the retriage, and the diagnoses are specific — the common shape
