@@ -59,20 +59,63 @@ merged, and the 552-row `tags/tags_auto.csv` merge is PR #3133.
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
-## Repos sweep 2026-10-28 (mode 3) — 134 term variants, triage running
+## Repos sweep 2026-10-28 (mode 3) — 134 terms, 8 tables, AWAITING UPLOAD with 2026-10-28b
 
 Discovery done: **1,204 candidates** in 100 minutes over 8 connectors (zenodo
 450, dataverse 316, figshare 239, scholars_portal 87, datacite 58, openaire 36,
 mendeley 14, dryad 4). 134 term variants, all verified absent from
 `search_terms_log.csv` before the run and all 134 logged after it. 5,197 further
 hits were dropped by `_UNREACHABLE_DOI_PREFIXES` (ICPSR, SRDA) and 6 as
-supplementary-file DOIs of papers already accounted for. Triage with
-`--retriage` is running; its write-up will be `BATCH_LOG.md` 2026-10-28c.
+supplementary-file DOIs of papers already accounted for. Triage with `--retriage` is
+done and all three `good` rows are worked; the write-up is `BATCH_LOG.md`
+2026-10-28c. **The 8 tables are staged in the SAME folders as the 2026-10-28b
+leads batch, so one upload covers both** -- 64 response tables and 590,183
+responses in total.
 
-- [ ] **Triage of the 1,204 is in flight.** When it lands: work the `good`
-  rows, write the batch's `leads/repos_leads_2026-10-28c.csv`, and confirm both
-  bookkeeping lines appear (`[step 2b] N refined flag(s) recorded in
-  repo_triage_seen_keys.csv` and `[human_review] archived N row(s)`).
+- [x] **Triage done: 388 triaged of the 1,204 (816 already in the ledger).**
+  3 good, 116 human_assistance -> 48 `recoverable_format`, 39
+  `not_item_response`, 18 `worth_retrying`, 6 `human_review`, 5
+  `aggregate_continuous`, 0 `conj`. **Both bookkeeping lines appeared and were
+  checked**: 116 refined flags recorded in `repo_triage_seen_keys.csv`, 6
+  `human_review` rows archived to
+  `human_review/human_review_figshare_2026-10-28.csv`. All 387 distinct rows
+  carry a verdict in `leads/repos_leads_2026-10-28c.csv`.
+
+- [x] **All three `good` rows worked, 8 tables and 80,310 responses** (see
+  `BATCH_LOG.md` 2026-10-28c). They are staged in the SAME folders as the
+  2026-10-28b leads batch, so the single upload covers both: the MANIFEST now
+  reads 64 response tables and 590,183 responses.
+
+- [x] **The three `pii_suspected` rows were each verified by opening the file
+  and all three are skips.** `zenodo.22800681` (three identifier columns, all
+  350 rows: email, name, email-or-WhatsApp), `10.17632/dn9djfbj4r` (302
+  children's names plus their schools) and `zenodo.20790` (40 children's names,
+  also below the N floor). Name/email tier, which the 2026-10-20 narrowing did
+  not touch. No standing file by design.
+
+- [ ] **57 of the 388 triaged candidates were article tables, and the fix for it
+  landed the same day but too late for this run.** A `.tNNN`/`.gNNN` DOI is an
+  article's own table or figure; `is_article_object()` now drops that shape at
+  discovery, but this sweep had already loaded the old module. **The next sweep
+  should show ~15% more of its triage budget going on real candidates** -- worth
+  checking that it does, since it is the cheapest confirmation the fix works.
+
+- [ ] **128 `unworked` leads** in `leads/repos_leads_2026-10-28c.csv`: 61
+  retryable download failures, 48 `recoverable_format`, 12 `worth_retrying`, 5
+  `aggregate_continuous`, 2 `error`. The `recoverable_format` rows are the shape
+  the leads pass learned to work -- a questionnaire carrying several
+  instruments, needing one processing script per deposit rather than a reader
+  fix.
+
+- [ ] **Four register rows owed from the Ibaceta deposit** (`zenodo.23498072`,
+  whose five response tables shipped): the FFMQ, the **25-item** Spanish DERS,
+  the mind-wandering content measure (whose published instrument is not even
+  identified -- the deposit names the construct only) and the Daydreaming
+  Frequency Scale. Ryff is already `hold` and its gate fires. **Careful on the
+  DERS**: the register's existing DERS row is the *28-item* Spanish adaptation
+  of Hervás & Jódar, a different instrument whose `block` cannot simply be read
+  onto this 25-item one, and whose `match_item_code` is empty so the gate stays
+  silent here.
 
 - [ ] **openaire answered only 7 of 134 queries, and the failures are three
   different problems.** Counted from the run log:
@@ -109,17 +152,18 @@ and the 28 of 10-21 were re-triaged together; **39 of the 106 were worked to a
 decision and 18 of those shipped** -- 56 tables, 509,873 responses. 16 were
 rejected on content (eleven of them as one class) and 2 are below the N floor.
 
-- [ ] **56 response tables (509,873 responses) + 7 item text tables need
-  uploading.** `automated_finding/irw_output/` (with a MANIFEST) and
-  `itemtext_output/`. **Response tables first.** All 56 pass `irw-validate
+- [ ] **64 response tables (590,183 responses) + 8 item text tables need
+  uploading** -- this count covers BOTH the 2026-10-28b leads pass and the
+  2026-10-28c sweep, which share the staging folders. `automated_finding/irw_output/` (with a MANIFEST) and
+  `itemtext_output/`. **Response tables first.** All 64 pass `irw-validate
   --profile upload`; all 7 item text tables PASS `normalize_nulls.R` ->
   `validate_items.R --resp-csv` -> `audit_batch.R --resp-dir` and are clean on
-  `irw-validate`. 56 dictionary rows and 56 tag rows are already staged, so
+  `irw-validate`. 64 dictionary rows and 64 tag rows are already staged, so
   nothing needs pasting. Stamp `uploaded=` on the 4 shipped
   `itemtext_provenance.csv` rows and the 4 `mapping_verification.csv` rows only
   after Ben confirms.
 
-  Two of the seven item text tables --
+  Two of the eight item text tables --
   `andreu_sanchez_2023_information_sources__items.csv` and
   `_lifestyle__items.csv` -- are for response tables that are **already live**
   (uploaded 2026-10-21). They go up with the rest of `itemtext_output/` and no

@@ -23935,3 +23935,163 @@ answers 403 on file download. The 2026-10-28 discovery sweep was therefore run
 with `--sources` naming the other eight connectors and omitting `surf`. That is
 a per-run choice, not a code change: `surf` is still in `irw_discover_updated.py`
 and one flag brings it back.
+
+## 2026-10-28c — the sweep itself: 1,204 candidates, 388 triaged, 8 tables, 80,310 responses
+
+The discovery half of what Ben asked for on 2026-10-28. Nothing uploaded; the
+eight tables join the 2026-10-28b batch in the same staging folders.
+
+### The sweep
+
+**134 term variants** — 15 new English topics x 9 languages, with one French
+gambling-severity variant dropped as already logged — all verified absent from
+`search_terms_log.csv` before the run and all 134 appended after it (10,484 ->
+10,617 rows). Territory deliberately away from the last several sweeps:
+gambling severity, career-decision self-efficacy, mathematics anxiety, science
+attitudes, listening comprehension, procrastination, mindfulness, civic
+engagement, bullying victimisation, disordered eating, sense of coherence,
+digital literacy, musical ear, essay rating rubrics and interoceptive
+awareness.
+
+**1,204 candidates** in 100 minutes: zenodo 450, dataverse 316, figshare 239,
+scholars_portal 87, datacite 58, openaire 36, mendeley 14, dryad 4. A further
+5,197 hits were dropped by `_UNREACHABLE_DOI_PREFIXES` (ICPSR, SRDA) and 6 as
+supplementary-file DOIs of papers already accounted for. 816 of the 1,204 were
+already in `repo_triage_seen_keys.csv`, leaving **388 triaged**: 3 good, 116
+human_assistance, 169 no_usable_file, 61 download_failed, 18 below_min_n, 15
+not_item_response, 3 pii_suspected, 1 license_restricted, 2 error.
+
+Step 2b on the 116: 48 `recoverable_format`, 39 `not_item_response`, 18
+`worth_retrying`, 6 `human_review`, 5 `aggregate_continuous`, 0 `conj`. **Both
+bookkeeping lines appeared and were checked**: 116 refined flags recorded in
+`repo_triage_seen_keys.csv`, and the 6 `human_review` rows archived to
+`human_review/human_review_figshare_2026-10-28.csv`. 61 download failures were
+deliberately left OUT of the ledger by the script so a later run retries them.
+
+`leads/repos_leads_2026-10-28c.csv` holds all 387 distinct rows with their
+verdicts: 168 `blocked_access`, 128 `unworked`, 60 `rejected_content`, 18
+`below_min_n`, 6 `archived_human_review`, 3 `shipped`, 3 `skipped_pii`, 1
+`blocked_licence`.
+
+### 57 of the 388 were article tables — the fix made the same day would have caught them
+
+**15% of the triage budget went on published results tables.** 57 candidates
+carried a `.tNNN`/`.gNNN` DOI, i.e. an article's own table or figure hosted by
+figshare with its own DOI — "Internal consistency and correlations between the
+IPS and other measures", "Subset for logistic regression analysis". Every one
+was downloaded and parsed before being flagged, and they dominate the
+`worth_retrying` bucket because the text-coded-Likert heuristic fires on any
+table with words in its cells.
+
+`is_article_object()` in `doi_hygiene.py`, added earlier the same day for the
+2026-10-28b leads pass, drops exactly this shape at discovery — but this sweep
+had already loaded the old module when it was written, so the class is rejected
+by hand here. **The next sweep gets those 57 downloads back.** `.sNNN` is
+deliberately not caught: a supplementary file is frequently the real data.
+
+### Three structural-PII skips, each verified by opening the file
+
+The rule says to confirm the column really holds personal data before
+overriding, so all three were opened:
+
+- `10.5281/zenodo.22800681` — **three** identifier columns, each populated for
+  all 350 respondents: `Email Address` (349 distinct), `Nama` (346 distinct
+  given names) and `Email/No, WhatsApp` (332 distinct, mixing emails with phone
+  numbers).
+- `10.17632/dn9djfbj4r` — a `Name` column populated for all 302 rows with 292
+  distinct given names, beside `School Name` (153 distinct primary schools).
+  Children's names plus their school compounds the sensitivity rather than
+  reducing it.
+- `10.5281/zenodo.20790` — `nombre` populated for all 40 rows with 39 distinct
+  children's given names. Fails on a second independent ground too: N=40.
+
+All three are the name/email tier, which the 2026-10-20 narrowing did not touch
+— it moved only geographic codes. No `pii_blocked_candidates.csv` exists by
+design: a structural-PII skip can only be unblocked by the depositor publishing
+a different file.
+
+### The three `good` rows, all worked
+
+**Ibaceta 2026** (`zenodo.23498072`, CC BY), 474 Chilean students — 279
+secondary, 195 university. Five instruments, five tables, 64,981 responses:
+the FFMQ (39 items), Ryff's well-being scales (37), a mind-wandering content
+measure (26), the DERS (25) and the Daydreaming Frequency Scale (12).
+
+**Its "Coding" sheet is the best codebook of the day, and two things follow.**
+First, *the stored values are RAW*: the sheet has a `reverse_before_scoring`
+column (Yes on 40 items) and a `transformation` column spelling out `6 - raw
+response` / `7 - raw response`, and a transformation to be applied **before
+scoring** is one that has NOT been applied to the file. That is the exact
+opposite of `batool_2024_*` in the same day's leads pass, where the reversals
+*had* been baked in and had to be undone to stop `resp` carrying two
+directions — so the same evidence type, read correctly, leads to opposite
+actions, and the script asserts the two transformation strings are the only
+ones present so a change in convention fails loudly rather than silently
+inverting 40 items. Second, the codebook's facet for every item ships as
+**`itemcov_facet`**, which is what that column is for: a user gets the FFMQ's
+five facets, Ryff's six, the DERS's five and positive-vs-negative mind
+wandering without re-finding the deposit.
+
+Two instruments ship a subset of their own numbering and the item codes
+preserve it rather than renumbering — mind-wandering runs 3..39, Ryff's omits
+10 and 34 — because renumbering would destroy the only link back to the source
+instrument's item numbers. Item text is not shipped: the codebook maps
+structure, not wording. Ryff is registered `hold` and the gate fires; the FFMQ,
+this 25-item Spanish DERS, the mind-wandering measure and the DFS all need
+rows, and the register's existing DERS row is a *different* (28-item Spanish)
+adaptation whose `block` must not simply be read across.
+
+**Demirdelen, Özer Özkan & Acar Güvendir 2023** (`zenodo.8072287`, CC BY), a
+three-level Turkish maths-anxiety study. 413 students x 20 items and their
+parents x 16 items, 14,868 responses.
+
+**The nesting ships.** `cluster_id` is the teacher — 12 of them, 11 to 87
+students each — and the script asserts the teacher id agrees row-for-row across
+all three level-1 sheets before writing anything. The student and parent tables
+are **row-matched**: `öğrenci-1..413` and `ebeveyn-1..413` in the same order
+with the same teacher on every row, so parent N is student N's parent and the
+shared `id` is the family link, which the docstring states explicitly because
+the respondent differs between the two tables. The deposit's 29-item **teacher**
+instrument is a real battery and is NOT shipped: 12 respondents, far below the
+floor. Its level-2 demographics do ship, as `cov_teacher_*` on both student
+tables, joined on the teacher id.
+
+A nice detail: the covariate codings come from a hand-written legend sitting in
+trailing `Unnamed:` columns beside the data (`kadın:1`/`Erkek:2`,
+`ilkokul:1`..`üni:4`, `Yetersiz:1`/`Yeterli:2`). It is transcribed into the
+script's header, including the honest limit — the legend names only two of the
+variables it codes, so which yes/no pair belongs to which of `Okul Memn.`,
+`Sınıf Memn.`, `oda`, `Mat. Yetk` and `Hobi` is not stated by the deposit and is
+not guessed at.
+
+**Hohn 2024** (`zenodo.13269659`, CC BY), a bachelor-thesis library survey of
+105 MPI-EVA researchers. **One** of its two batteries ships, with item text:
+five agreement statements, 461 responses, 88% dense, the wording parsed from
+the survey platform's own column headers and the questions the library's own
+under CC BY.
+
+**The 13-item resource-relevance battery does not ship, and the arithmetic
+matters.** Each item offers "I don't know the resource. / I have never used the
+resource." and 35 to 90 of the 105 chose it, leaving **378 responses over 90
+ids and 13 items — 28% of cells, per-item n from 15 to 70**. 28% density alone
+would not disqualify it; what does is that total, those thinnest items, and the
+fact that the missingness is informative — what remains is "relevance among
+those who have used this resource", a conditional rating rather than the
+battery as posed. The script still computes and prints the whole thing so the
+call is auditable. (A first pass through this reported the density as 3%, which
+was simply wrong arithmetic; the figure is 28% and the reasoning above is what
+the decision actually rests on.)
+
+The header parse needed a **balanced-parenthesis** rule rather than a `[^()]+`
+character class, because one item is `(SSOAR (Social Science Open Access
+Repository))` and the non-nesting pattern fails on it. Both the processing
+script and the item text generator use the balanced rule and assert the shared
+stem is identical across the five items.
+
+### What the sweep leaves open
+
+128 `unworked` leads: 61 retryable download failures, 48
+`recoverable_format`, 12 `worth_retrying`, 5 `aggregate_continuous`, 2 `error`.
+The `recoverable_format` rows are the same shape the leads pass learned to work
+— a questionnaire carrying several instruments, needing a processing script
+rather than a reader fix.
