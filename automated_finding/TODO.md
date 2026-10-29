@@ -65,7 +65,7 @@ Full write-up in `BATCH_LOG.md` (2026-10-28b). The 83 unworked leads of 10-27
 and the 28 of 10-21 were re-triaged together; 9 of the 106 were worked to a
 decision, 5 of those shipped.
 
-- [ ] **16 response tables (280,437 responses) + 4 item text tables need
+- [ ] **21 response tables (296,837 responses) + 4 item text tables need
   uploading.** `automated_finding/irw_output/` (with a MANIFEST) and
   `itemtext_output/`. **Response tables first.** All 16 pass `irw-validate
   --profile upload`; all 4 item text tables PASS `normalize_nulls.R` ->
@@ -95,8 +95,34 @@ decision, 5 of those shipped.
   `marsalek_2026_ai_attitudes` entries the 10-27 section still owes. One trip to
   that repo clears all five.)
 
-- [ ] **No covariate-label harvest is owed by this batch.** Two of the five
-  scripts read a `.sav`/`.dta` (`kubilay_2023_*` reads Stata,
+- [ ] **Three register rows and one fallback decision would ship four more
+  item text tables from a file already in hand** (`galanis_2025_*`,
+  `10.6084/m9.figshare.28868615.v1`). The text is not the problem: every item's
+  SPSS variable label IS its full Greek stem and 51 variables carry value
+  labels, so this is a cheap-gate `data_labels` extraction whose only blocker is
+  rights. Of the five instruments the register carries two — PHQ/GAD family
+  `ship`, UWES `block` — so:
+  - `galanis_2025_work_engagement` is **decided**: UWES wording never ships.
+    Nothing owed.
+  - `galanis_2025_phq4` needs only the translated-adaptation call (2026-09-08
+    ruling): does the Greek ship, or does the English ship as a
+    `translated_substitute` with the PHQ's own terms quoted?
+  - `galanis_2025_gaslighting_work`, `_resilience` and `_quiet_quitting` each
+    need a **register row written, verdict included**. Starting points:
+    the depositor (Petros Galanis) is the Quiet Quitting Scale's own author; the
+    resilience stems read as Smith et al.'s Brief Resilience Scale but were not
+    confirmed verbatim; and the gaslighting scale's two numbering groups imply a
+    longer published form the deposit never names, so that one needs identifying
+    before it can be ruled on.
+
+- [ ] **A covariate-label harvest IS owed for `galanis_2025_*`** after the next
+  release: all five tables ship `cov_gender`, `cov_education`,
+  `cov_turnover_intention` and `cov_burnout_single_item_0_10` as the `.sav`'s
+  numeric codes, and the `.sav` labels every one of them (in Greek).
+  `harvest.py --commit HEAD galanis_2025_gaslighting_work` then `build.py`.
+
+- [ ] **No covariate-label harvest is owed by the other five scripts.** Two of them
+  read a `.sav`/`.dta` (`kubilay_2023_*` reads Stata,
   `aksin_2023_*` reads SPSS), so check this before the next release rather than
   taking it on trust: `kubilay`'s covariates are coded and the deposit labels
   them in an .xlsx codebook rather than in the .dta, and `aksin`'s .sav carries

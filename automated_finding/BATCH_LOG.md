@@ -23257,6 +23257,51 @@ appended into `tags/tags_auto.csv`, 2 `mapping_verification.csv` rows for the
 kubilay pair plus 2 for the andreu pair, and 18 `itemtext_provenance.csv` rows
 (2 shipped kubilay, 2 rewritten andreu, 14 not-shipped with the location named).
 
+### A sixth deposit, worked after the write-up above: Galanis 2025, 5 more tables
+
+`10.6084/m9.figshare.28868615.v1` (CC BY 4.0), Petros Galanis, 410 Greek
+nurses, one questionnaire carrying five instruments —
+`galanis_2025_gaslighting_work` (18 items, 1-5), `_quiet_quitting` (9, 1-5),
+`_resilience` (6, 1-5), `_phq4` (4, 0-3) and `_work_engagement` (3, 0-6).
+16,400 responses. All five pass the upload profile. Running total for the
+batch: **21 tables, 296,837 responses.**
+
+**The GWS block is the part to read twice.** The deposit ships EIGHTEEN distinct
+gaslighting items in two differently-numbered groups: `GWS_item_1..11`, whose
+labels are numbered 1-11, and `GWS_4/7/9/10/11/15/17`, whose labels keep an
+original numbering from a longer form. The two groups overlap in NUMBER and not
+in CONTENT — `GWS_item_4` is "accuses you of lying when you disagree" while
+`GWS_4` is "makes you feel you are not perceiving things correctly". All
+eighteen labels were read, all eighteen are distinct, and the script asserts
+that. So the item codes must not be read as numbers, and they keep the source
+column names for exactly that reason. One table, because it is one instrument on
+one response scale administered in one sitting.
+
+Two single-item measures became covariates rather than one-item tables: the 0-10
+burnout self-rating and the six-point turnover-intention question.
+
+**Item text is CHEAP here and is HELD anyway — on rights.** This is the
+interesting case of the batch. The `.sav` is unusually complete: 66 of 67
+variables carry a variable label, every item's label IS its full Greek stem, and
+51 variables carry value labels giving the Greek wording of every anchor. So
+extraction would be a cheap-gate `data_labels` job and the administered wording
+is fully recoverable. What is not established is the right to ship it. Of the
+five instruments the register carries exactly two — the PHQ/GAD family is
+`ship`, the UWES is `block` — and the gaslighting, resilience and quiet-quitting
+scales have **no row at all**, where silence does not ship. `irw-validate`'s
+`rights_register` check fires on `uwes_1..3` and is correct to.
+
+So the hold is recorded per table in `itemtext_provenance.csv` with what each one
+still needs, and `TODO.md` carries the follow-up: three register rows and one
+fallback decision, after which four of the five ship from this same file without
+re-opening anything. `galanis_2025_phq4` is the closest to ready — its
+instrument is already `ship`, and the only open question is whether the Greek
+ships or the English ships as a `translated_substitute`.
+
+Worth noting for the register work: the depositor is the Quiet Quitting Scale's
+own author, which is a promising position on one of the three and not the same
+as an established one.
+
 ### The `surf` (DataverseNL) question, measured and answered
 
 Two sweeps in a row flagged this. The ledger answers it: **314 `10.34894` keys
