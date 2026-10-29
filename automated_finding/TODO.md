@@ -62,7 +62,7 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 ## Leads pass 2026-10-28b — 45 tables + 6 item text tables, AWAITING UPLOAD
 
 Full write-up in `BATCH_LOG.md` (2026-10-28b). The 83 unworked leads of 10-27
-and the 28 of 10-21 were re-triaged together; **32 of the 106 were worked to a
+and the 28 of 10-21 were re-triaged together; **35 of the 106 were worked to a
 decision and 14 of those shipped** -- 45 tables, 464,389 responses. 16 were
 rejected on content (eleven of them as one class) and 2 are below the N floor.
 
@@ -143,7 +143,7 @@ rejected on content (eleven of them as one class) and 2 are below the N floor.
   worth deciding whether that is acceptable here before spending the rights
   effort.
 
-- [ ] **74 `unworked` leads remain** in `leads/repos_leads_2026-10-28.csv`: 43
+- [ ] **71 `unworked` leads remain** in `leads/repos_leads_2026-10-28.csv`: 40
   `recoverable_format`, 8 `worth_retrying`, 8 `aggregate_continuous`, 12
   `download_failed` and 3 `error`. The `worth_retrying` bucket is now the thin
   one: its eleven article-table rows were rejected as a class and its four
@@ -153,6 +153,15 @@ rejected on content (eleven of them as one class) and 2 are below the N floor.
   is a questionnaire carrying several instruments, so the work is one processing
   script per deposit, not a reader fix. **Do not re-run the reader on them**;
   2026-10-28b already proved that changes nothing.
+
+- [ ] **A live table carries a US state, and the geographic ruling says it
+  should not — Ben's call, not acted on.** `gries_2011_moral_foundations` is
+  live in shard 8 carrying `cov_state` (plus `cov_south`, `cov_black`,
+  `cov_hispanic`). It shipped 2026-10-21, one day AFTER the 2026-10-20
+  geographic ruling that this batch used to drop a US state from
+  `teriba_2026_*`. Found because the deposit resurfaced as a lead and was
+  cross-checked. Whether a published table carrying a state wants correcting is
+  a corpus-trust decision; flagging it rather than touching it.
 
 - [ ] **`n_participants` in a triage row is a resolver's GUESS. Check
   `nunique()` on the id column before ranking a repeated-measures lead by

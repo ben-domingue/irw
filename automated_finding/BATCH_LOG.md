@@ -23038,7 +23038,7 @@ PASS on both item and resp sets), then `audit_batch.R --resp-dir` (8/8 PASS, no
 anomalies), then `irw-validate` on the item files (8 clean).
 `itemtext_output/` holds nothing but `*__items.csv`.
 
-## 2026-10-28b — the 10-27 and 10-21 leads re-triaged, and 32 of the 106 worked: 45 tables, 464,389 responses
+## 2026-10-28b — the 10-27 and 10-21 leads re-triaged, and 35 of the 106 worked: 45 tables, 464,389 responses
 
 Nothing uploaded. Ben asked for a discovery sweep *and* for backlogged
 triage/leads work in the same session; this is the leads half. The sweep's own
@@ -23706,6 +23706,54 @@ the nine items shipped here sum to 11-43 and correlate 0.48 with it. So the
 AB-Q is a *different*, 15-item instrument whose per-item responses were never
 deposited. The script prints and asserts that rather than leaving the next
 reader to wonder where fifteen items went.
+
+### THREE of the 106 leads were deposits IRW already has, and one nearly got a second script
+
+The best find of the pass, and it was nearly a defect instead. While working
+`10.7910/DVN/EL4KPR` — a 12-item Moral Foundations short form on a 1,000-person
+nationally representative US sample, CC0 — the Write tool refused the new
+`data/gries_2011_moral_foundations.py` because **that file already existed**.
+The table is live in `metadata/metadata.csv` (shard 8) with 12,000 responses,
+shipped on 2026-10-21. That is the SKILL.md Step 3 check ("`grep -rl "DOI: <the
+doi>" ../data/*.py` before writing a new script for any candidate") earning its
+place, and it is the 2026-08-12 double-ship of `10.7717/peerj.16295` in a new
+shape.
+
+So the whole leads file got cross-checked against everything IRW already
+accounts for — `dictionary_auto.csv`'s three DOI columns and every `DOI:`/`Data:`
+header line in `data/*.py`. **Three of the 106 were already shipped:**
+
+| lead DOI | already in IRW as |
+|---|---|
+| `10.7910/DVN/EL4KPR` | `gries_2011_moral_foundations` (live, shard 8) |
+| `10.7910/DVN/ZXQBC7` | `rimisp_2021_household_services`, `_care_work` |
+| `10.5281/zenodo.17802433` | `wenzke_2025_knowledge`, `_attitude` |
+
+**The cause is a timing gap, and it is now closed at source.**
+`_load_existing_irw_dois()` fetches the live dictionary **Google Sheet**, and a
+row staged by `stage_dict_row.py` only reaches that sheet when
+`metadata/02_biblio.R` next runs. In between — which can be a week — a deposit
+this pipeline has already processed is still discoverable, and the next sweep
+re-surfaces it as a fresh candidate. The seen ledgers do not help: they catch
+re-discovery within a connector, not a deposit already shipped by another route.
+
+`_load_staged_dict_exclusions()` now reads this repo's own
+`dictionary_auto*.csv` files (all five sources), both DOI columns and the data
+URL, and `_load_auto_exclusions()` unions them in and prints the count. On the
+live file that is **2,818 DOIs** the exclusion set did not previously carry, and
+all three of the leads above are in it.
+`tests/test_staged_dict_exclusion.py` covers both DOI columns, the URL
+fallback, all five source files, a missing file, and asserts the three real
+DOIs against the repo's actual `dictionary_auto.csv` rather than a fixture.
+Full suite: 280 passing.
+
+**One observation for Ben, recorded and not acted on.**
+`gries_2011_moral_foundations` is live carrying `cov_state`, `cov_south`,
+`cov_black` and `cov_hispanic`. `cov_state` is a US state, and the 2026-10-20
+geographic ruling — made the day *before* that table shipped — is what this
+batch used to drop a US state from `teriba_2026_*` and county/state from
+`gries`'s own would-be replacement. Whether a live table carrying a state wants
+correcting is a corpus-trust call, not a lead-working one.
 
 ### The `surf` (DataverseNL) question, measured and answered
 

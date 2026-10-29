@@ -983,16 +983,71 @@ def _load_conj_ledger_exclusions(path: str = CONJ_LEDGER) -> set:
     return dois
 
 
+_HERE = os.path.dirname(os.path.abspath(__file__))
+# Every dictionary file stage_dict_row.py writes, one per source. These are the
+# repo's own record of rows this pipeline has STAGED; they reach the dictionary
+# Google Sheet only when metadata/02_biblio.R next runs.
+STAGED_DICT_FILES = (
+    "dictionary_auto.csv", "dictionary_auto_comps.csv",
+    "dictionary_auto_nom.csv", "dictionary_auto_sim.csv",
+    "dictionary_auto_conj.csv",
+)
+
+
+def _load_staged_dict_exclusions(names=STAGED_DICT_FILES) -> set:
+    """DOIs this pipeline has already staged a dictionary row for.
+
+    `_load_existing_irw_dois()` reads the live dictionary SHEET, and a row
+    staged by `stage_dict_row.py` only reaches that sheet when
+    `metadata/02_biblio.R` next runs. In between -- which can be a week -- a
+    deposit this pipeline has already processed is still discoverable, and the
+    next sweep re-surfaces it as a fresh candidate. Three of the 106 leads in
+    the 2026-10-28 re-triage were exactly that (`10.7910/DVN/EL4KPR` ->
+    gries_2011_moral_foundations, `10.7910/DVN/ZXQBC7` -> rimisp_2021_*,
+    `10.5281/zenodo.17802433` -> wenzke_2025_*), and only the Write-tool guard
+    on an existing `data/*.py` stopped a second script being written for the
+    first of them. It is the same shape as the 2026-08-12 double-ship of
+    10.7717/peerj.16295, which SKILL.md Step 3 warns about: the seen ledgers
+    catch re-discovery within a connector, not a deposit already shipped by
+    another route.
+
+    Both DOI columns are read, because a deposit's own DOI lands in
+    `DOI (for data)` and a paper's in `DOI (for paper)`.
+    """
+    dois = set()
+    for name in names:
+        path = os.path.join(_HERE, name)
+        try:
+            with open(path, newline="", encoding="utf-8") as f:
+                for row in csv.DictReader(f):
+                    for col in ("DOI (for data)", "DOI (for paper)"):
+                        d = norm_doi(row.get(col, "") or "")
+                        if "/" in d and " " not in d:
+                            dois.add(d)
+                    url_doi = _extract_doi_from_url(row.get("URL (for data)", ""))
+                    if url_doi:
+                        dois.add(url_doi)
+        except FileNotFoundError:
+            continue
+        except Exception as e:
+            print(f"[warn] Could not read {path}: {e}", file=sys.stderr)
+    return dois
+
+
 def _load_auto_exclusions() -> set:
-    """Load DOIs to exclude: already in the IRW dictionary, already logged
-    as a human_review row in a past batch, or already in the conjoint ledger."""
+    """Load DOIs to exclude: already in the IRW dictionary, already staged in
+    this repo's own dictionary_auto*.csv, already logged as a human_review row
+    in a past batch, or already in the conjoint ledger."""
     existing = _load_existing_irw_dois()
     reviewed = _load_human_review_exclusions()
     conj = _load_conj_ledger_exclusions()
+    staged = _load_staged_dict_exclusions()
     print(f"[exclude] {len(existing)} DOIs already in IRW, "
           f"{len(reviewed)} already logged in human_review/, "
-          f"{len(conj)} in the conjoint ledger", flush=True)
-    return _with_supplement_bases(existing | reviewed | conj)
+          f"{len(conj)} in the conjoint ledger, "
+          f"{len(staged)} staged in dictionary_auto*.csv but not yet in the "
+          f"sheet", flush=True)
+    return _with_supplement_bases(existing | reviewed | conj | staged)
 
 
 def is_excluded(doi: str, exclude: set) -> str:
