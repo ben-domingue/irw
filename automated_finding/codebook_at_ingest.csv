@@ -43,6 +43,10 @@ ahumada_tello_2026_job_satisfaction,core,none,2026-10-18
 ahumada_tello_2026_org_resilience,core,none,2026-10-18
 ahumada_tello_2026_perceived_perform,core,none,2026-10-18
 akinwehinmi_2026_gari_biofortified,conj,https://jlupub.ub.uni-giessen.de/server/api/core/bitstreams/174ab133-fe76-401c-8e60-de96e2dc1844/content,2026-10-14
+akkus_cutuk_2025_cognitive_flexibility,core,none,2026-10-29
+akkus_cutuk_2025_digital_literacy,core,none,2026-10-29
+akkus_cutuk_2025_digital_wellbeing,core,none,2026-10-29
+akkus_cutuk_2025_metacognitive_awareness,core,none,2026-10-29
 aklin_2026_climate_pledges,conj,https://osf.io/download/6aada5af0ef8b6fd86390c5d/,2026-10-09
 aklin_2026_climate_transfers,conj,https://osf.io/download/6aada5af0ef8b6fd86390c5d/,2026-10-09
 aksin_2023_big_five,core,none,2026-10-28
@@ -95,6 +99,7 @@ arango_botero_2024_floral_sector,core,none,2026-10-18
 arbulu_2026_digital_competence,core,https://ndownloader.figshare.com/files/68525179,2026-10-15
 arbulu_2026_technostress,core,https://ndownloader.figshare.com/files/68525179,2026-10-15
 arceneaux_2023_republican_primary,conj,https://dataverse.harvard.edu/api/access/datafile/5806542,2026-10-07
+arciniegas_romero_2026_math_anxiety,core,none,2026-10-29
 argote_2023_independent_candidates,conj,none,2026-10-08
 argote_2024_migrants_colombia,conj,none,2026-10-07
 argote_2025_ideology_candidates_chile,conj,none,2026-10-08
@@ -115,6 +120,13 @@ ashik_2026_paus,core,none,2026-10-20
 ashik_2026_phq9,core,none,2026-10-20
 ashik_2026_sas_sv,core,none,2026-10-20
 ashik_2026_sds,core,none,2026-10-20
+aspell_2019_bas,core,none,2026-10-29
+aspell_2019_dms,core,none,2026-10-29
+aspell_2019_fas,core,none,2026-10-29
+aspell_2019_maas,core,none,2026-10-29
+aspell_2019_maia,core,none,2026-10-29
+aspell_2019_rses,core,none,2026-10-29
+aspell_2019_sataq,core,none,2026-10-29
 aspide_2025_debt_austerity,conj,none,2026-10-09
 assyafiyah_2026_rcse,core,none,2026-10-18
 atik_2025_ai_life_satisfaction,core,none,2026-10-05
@@ -1504,6 +1516,8 @@ kao_2021_covid_compliance,conj,https://dataverse.harvard.edu/api/access/datafile
 kao_2023_committee_gender,conj,https://dataverse.harvard.edu/api/access/datafile/6919221,2026-10-11
 kao_2024_tax_reform,conj,https://dataverse.harvard.edu/api/access/datafile/6566207,2026-10-09
 kao_2025_new_residents,conj,none,2026-10-07
+karahan_kaplan_2024_mindfulness,core,none,2026-10-29
+karahan_kaplan_2024_uwes9,core,none,2026-10-29
 karas_2022_cetscale_en,core,none,2026-10-18
 karas_2022_cetscale_pl,core,none,2026-10-18
 karim_2026_mhl,core,https://ndownloader.figshare.com/files/69360969,2026-10-15
@@ -1627,6 +1641,11 @@ koliev_2026_unfccc_reform,conj,https://dataverse.harvard.edu/api/access/datafile
 konuralp_2026_climate_attitudes,core,https://zenodo.org/records/20734378/files/igdir_survey_codebook.csv,2026-10-18
 konuralp_2026_party_environment,core,https://zenodo.org/records/20734378/files/igdir_survey_codebook.csv,2026-10-18
 koob_2026_protest_dimensions,conj,none,2026-10-09
+kopczynski_2021_core_self_evaluations,core,none,2026-10-29
+kopczynski_2021_fcv19s,core,none,2026-10-29
+kopczynski_2021_mspss,core,none,2026-10-29
+kopczynski_2021_pandemic_appraisal,core,none,2026-10-29
+kopczynski_2021_whoqol_bref,core,none,2026-10-29
 kosgei_2026_fisheries_literacy,core,none,2026-10-28
 krajewski_2025_criminal_opportunities,conj,none,2026-10-07
 krakowski_2023_informal_justice,conj,https://dataverse.harvard.edu/api/access/datafile/7019308,2026-10-08
@@ -3327,6 +3346,7 @@ useche_2022_rprs,core,https://dataverse.harvard.edu/api/access/datafile/7559247,
 usmani_2024_iwe,core,https://data.mendeley.com/public-files/datasets/6xt3b959nv/files/ae60b205-3109-4deb-9021-dd89a6bf54d9/file_downloaded,2026-10-04
 usmani_2024_ks,core,https://data.mendeley.com/public-files/datasets/6xt3b959nv/files/ae60b205-3109-4deb-9021-dd89a6bf54d9/file_downloaded,2026-10-04
 usmani_2024_pops,core,https://data.mendeley.com/public-files/datasets/6xt3b959nv/files/ae60b205-3109-4deb-9021-dd89a6bf54d9/file_downloaded,2026-10-04
+uzdil_2023_soc13,core,none,2026-10-29
 valence_kyrolainen_2021,core,https://osf.io/download/thdxn/,2026-10-13
 valenciano_2022_paqc,core,none,2026-10-18
 valenzuela_2026_genai_news,conj,https://osf.io/download/tfbcy/,2026-10-09
@@ -3675,6 +3695,8 @@ zheng_2017_psss,core,none,2026-10-15
 zheng_2017_sds_sas,core,none,2026-10-15
 zheng_2017_swls,core,none,2026-10-15
 zheng_2018_hfmd_eq5d,core,none,2026-10-20
+zheng_2020_hads,core,none,2026-10-29
+zheng_2020_scsq,core,none,2026-10-29
 zheng_2025_sport_motivation,core,none,2026-10-28
 zhirkov_2022_immigrant_admission,conj,none,2026-10-07
 zhirkov_2025_illegal_undocumented,conj,none,2026-10-07
