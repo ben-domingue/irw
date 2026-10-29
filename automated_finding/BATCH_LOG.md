@@ -24317,3 +24317,133 @@ moves: refreshing `live_tables.csv` so `check_issues_page.R` can report the five
 `itemtext_issues.qmd` entries this batch owes — they could not be written
 earlier, since a note is due only once the table is live — and the
 covariate-label harvest for `galanis_2025_*` and `aksin_2023_*`.
+
+## 2026-10-29b — connector audit: surf and scholars_portal killed, PsychArchives added (#3303)
+
+No discovery batch of its own; a change to which repositories every later
+sweep queries. Prompted by Ben pointing at
+`daniellakens.blogspot.com/2026/08/which-data-repository-should-you-use.html`
+and asking whether anything there was worth adding, on the back of the `surf`
+question the 2026-10-27 sweep left open.
+
+### What the two sweeps' suspicion was worth, measured
+
+The 10-21 and 10-27 sweeps both flagged `surf` (DataverseNL) as spending a
+sixth of the candidate budget for nothing, and both stopped short of a number.
+The number, over all 6,593 rows of `leads/*.csv` with a `source` column —
+shipped-table rate per source:
+
+| source | lead rows | shipped | rate |
+|---|---|---|---|
+| mendeley | 362 | 60 | 16.6% |
+| datacite | 90 | 12 | 13.3% |
+| figshare | 897 | 99 | 11.0% |
+| dataverse | 1,530 | 124 | 8.1% |
+| zenodo | 2,545 | 110 | 4.3% |
+| osf | 137 | 5 | 3.6% |
+| scholars_portal | 123 | 1 | 0.8% |
+| **surf** | **279** | **1** | **0.4%** |
+| dryad | 115 | 0 | 0% |
+| openaire | 35 | 0 | 0% |
+
+Neither is literally zero — one shipped lead each, and four `data/*.py`
+scripts cite a 10.34894/dataverse.nl source historically — but surf ships an
+order of magnitude worse than every main connector while taking 237 of the
+10-27 sweep's 1,332 candidate slots, 33 of them straight HTTP 403, with 59 of
+its 279 lead rows `blocked_access`. Ben: "we should kill surf and
+scholars_portal."
+
+Both are out of `SOURCES` and into `OPTIONAL_SOURCES`, so `--sources surf`
+still reaches them, and both stay in `_DATACITE_SKIP` — killing the direct
+query must not re-admit the same records through the aggregator.
+`irw_batch_updated.py`'s host resolver keeps handling both: a DOI on one of
+those hosts arriving from another route still has to resolve.
+
+### PsychArchives (ZPID) added — it was a hole we were already paying for
+
+Of the five repositories the post names, Zenodo, Dataverse, OSF and figshare
+are already queried, and GitHub mints no DOIs (our pipeline is DOI-keyed; the
+PLOS path already calls GitHub links `external_unresolved`). ResearchBox is
+the one real gap we cannot act on: `researchbox.org` returns ModSecurity 406
+to the scout UA, it mints no DOIs of its own, and Lakens says it backs up to
+Zenodo — so an email to the Wharton Credibility Lab about sanctioned API
+access, not a connector. 4TU.ResearchData is already arriving via DataCite
+(9 keys, 7 lead rows, all dead ends) and is an engineering repository; no.
+
+PsychArchives was the find, and it was not a new repository to us: 35 of its
+DOIs had already reached `repo_triage_seen_keys.csv` through DataCite and
+every one died — 26 lead rows as "licence unknown is not cc0/cc-by/cc-by-sa",
+23 ledger keys as `no_usable_file`, zero shipped. Both verdicts were about
+us: nothing resolved a DSpace item's files and nothing read its licence
+field.
+
+What is actually there:
+
+- **Research Data collection: 1,051 records.** Of the first 400, 105 CC-BY
+  4.0 and 97 CC-BY-SA 4.0 — ~52% explicitly open — against 139
+  `restrictedAccess` Scientific Use License records the licence gate skips by
+  itself, and 38 with no rights statement.
+- **Open Test Archive (`dc.type` = `test`): 444 records**, 164 of them
+  CC-BY-SA 4.0, 178 CC-BY-NC-ND (ND stops). That is instrument wording with a
+  grant attached — itemtext-pipeline and `instrument_rights_register.csv`
+  material, not response data. `from_psycharchives` deliberately does not
+  surface it.
+
+DSpace 6, so there is no free-text search endpoint: `/rest/filtered-items`
+ANDs metadata filters, and each query runs as `<field> contains <term>` AND
+`dc.type equals researchData`, once per field over `dc.title` and
+`dc.description.abstract`. The type filter is approximate (a `code` record
+leaks through about one in twenty), so there is a local type check too.
+`item-count` in the response is the size of the page returned, not a total,
+so pagination runs until a short page arrives.
+
+Two traps worth knowing, both now pinned by tests:
+
+- **There is no `dc.identifier.doi` field.** The DOI is the `dx.doi.org`
+  member of a repeated `dc.identifier.uri` pair whose other member is a
+  handle, so a parser keeping one value per key loses it entirely — which is
+  exactly the shape of the DataCite-era failure.
+- **The licence is `dc.rights.uri`**, a creativecommons.org URL for the open
+  half (which `_norm_license()` already handles unchanged). The other values
+  it takes — a Scientific Use License DOI, or `/individualterms` — read as
+  unknown and skip, which is correct.
+
+`_psycharchives_files()` in `irw_batch_updated.py` reads bitstreams and the
+licence from `/rest/items/<uuid>` or `/rest/handle/<handle>`; a bare 10.23668
+DOI reaches it through the caller's `_resolve_to_landing()`. Registered in
+`_HOST_RESOLVERS` on `psycharchives.org` and on `src == "psycharchives"`.
+
+**Verified end to end, not just unit-tested.** 12 varied terms returned 266
+unique `researchData` records; resolving a sample gave CC-BY-SA with real
+files (`Petrovcic et al_PROXY21_data.csv` + `.sav` + a codebook `.xlsx`,
+sorted behind the data by `_looks_like_documentation`), and the two
+Scientific-Use-License records in the sample came back unknown and skipped. A
+CLI run on "stress"/"mindfulness" produced 37 candidates; triaging 8 of them
+with `--ignore-seen-keys` gave 5 `human_assistance`, 1 `not_item_response`,
+1 `below_min_n`, 1 `no_usable_file`, with licences read as `cc-by`/`cc-by-sa`
+throughout — against the 100% death rate the DataCite route had. 16 new tests
+in `tests/test_psycharchives_connector.py`; the full suite is 275 green.
+
+### The relevance gate eats 38% of what this connector finds
+
+Of the 266 records, 166 passed `is_relevant()` and 100 were dropped. Some of
+the drops are real losses: "Dataset for: Survey on digital engagement of older
+adults in Slovenia" was dropped on its title and has four CC-BY-SA tabular
+files and a codebook. German titles fare worst — 4 of 20 passed for
+`Fragebogen`, and "Primärdaten" (primary data) carries no weight in the
+vocabulary at all. This is not PsychArchives-specific — it is the filter the
+2026-08-25 measurement already caught contradicting the search list — but it
+bites harder here, because every hit this connector yields is already
+`dc.type == researchData` by the repository's own metadata, which is a
+stronger guarantee than a title regex. Left as a question for Ben rather than
+changed unilaterally: see TODO.md.
+
+### OSF Projects is closing, which is the post's real headline for us
+
+Confirmed outside the blog (UW Libraries, Duke): no new OSF Projects from
+**2026-11-16**, existing projects **read-only from 2027-02-19**, public
+projects keep their DOIs, private projects may be removed later with 12
+months' notice. Registries and Preprints are unaffected. Our `osf` connector
+ships at 3.6%, so the discovery loss is small — but any OSF-hosted candidate
+sitting in a leads file is now a wasting asset, and the standing
+`?view_only=` private-node rule has a shelf life. Entered in TODO.md.

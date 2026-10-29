@@ -31,6 +31,46 @@ release any more.
 - [ ] **The covariate-label harvest is now unblocked** for `galanis_2025_*` and
   `aksin_2023_*` x `cov_department`, which was waiting on this release.
 
+## Connector changes 2026-10-29 — two open questions, one deadline
+
+Full write-up in `BATCH_LOG.md` (2026-10-29b), PR #3303. `surf` and `scholars_portal`
+are out of the default source set (0.4% / 0.8% shipped rate), and
+`from_psycharchives` is in.
+
+- [ ] **Decide whether the relevance gate should apply to psycharchives
+  hits.** 100 of the 266 records a 12-term probe found were dropped by
+  `is_relevant()` on their titles, including one with four CC-BY-SA tabular
+  files and a codebook, and only 4 of 20 German-titled hits survived
+  ("Primärdaten" carries no weight in the vocabulary). Every hit this
+  connector yields is already `dc.type == researchData` by the repository's
+  own metadata, which is a stronger guarantee than a title regex — so the
+  options are a per-source exemption (`discover()` has no such mechanism
+  today), adding "primärdaten"/"rohdaten" to `_RE_STRONG`, or leaving it. Not
+  changed unilaterally because it is a global-vocabulary question that the
+  2026-08-25 measurement already showed cuts both ways.
+
+- [ ] **Email the Wharton Credibility Lab about ResearchBox API access.**
+  `researchbox.org` returns ModSecurity 406 to the scout UA, so there is
+  nothing to measure and no connector to write; it mints no DOIs of its own
+  and backs up to Zenodo, so part of it may already arrive. Template in
+  `processing_notes/Licensing.txt` is the wrong one — this is an access
+  request, not a licence request.
+
+- [ ] **OSF Projects closes: no new projects from 2026-11-16, read-only from
+  2027-02-19.** Confirmed against UW Libraries and Duke, not just the blog.
+  Public projects keep their DOIs; private ones may be removed later on 12
+  months' notice. Registries and Preprints unaffected. Two consequences for
+  this pipeline: any OSF-hosted candidate still sitting in a leads file should
+  be worked before February rather than after, and the standing "check
+  `public:` before trusting a `?view_only=` node" rule
+  (`project_pmc_prolific_private_osf`) has a shelf life now.
+
+- [ ] **The 2026-10-29 sweep now running predates both changes** (it loaded
+  the old module): it will return `surf`/`scholars_portal` rows, which are to
+  be filtered out of the candidate file before triage rather than triaged, and
+  it queried no psycharchives. A psycharchives-only pass over the same 135
+  terms is worth running after it (~6s/query/field).
+
 ## NEXT UP, at Ben's request (2026-10-29)
 
 - [ ] **Work `10.5683/sp3/wcun0s` first: 23,781 respondents x 38 items.** A

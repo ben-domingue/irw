@@ -414,7 +414,33 @@ until permission or updated license terms come back confirmed.
 ## Scripts
 
 ### `irw_discover_updated.py`
-Searches Dataverse, Zenodo, OSF, Dryad, and Figshare. Tiered relevance filter:
+Searches, by default, Harvard Dataverse, Zenodo, OSF, Dryad, Figshare,
+DataCite, Mendeley Data and PsychArchives (`SOURCES`). OpenAIRE, DataverseNL
+(`surf`), Scholars Portal/Borealis and AUSSDA are wired but opt-in only
+(`OPTIONAL_SOURCES`, reachable with `--sources`).
+
+Two source changes on 2026-10-29, both measured rather than guessed, and both
+written up at `SOURCES` in the script:
+
+- **`surf` and `scholars_portal` dropped from the default set.** Shipped-table
+  rate across all 6,593 rows of `leads/*.csv`: mendeley 16.6%, datacite 13.3%,
+  figshare 11.0%, dataverse 8.1%, zenodo 4.3%, osf 3.6% — then
+  scholars_portal 0.8% (1 of 123) and surf 0.4% (1 of 279), the latter while
+  taking a sixth of each sweep's candidate budget.
+- **`psycharchives` added.** ZPID's psychology repository was reaching us only
+  through DataCite, where all 35 of its DOIs died as "licence unknown" or
+  `no_usable_file` for zero shipped tables — both verdicts artefacts of having
+  no resolver and no licence read, not of the deposits. Its Research Data
+  collection holds 1,051 records, ~52% of the first 400 explicitly CC-BY or
+  CC-BY-SA. DSpace 6, so search is `/rest/filtered-items` with
+  `<field> contains <term>` AND `dc.type equals researchData`, run once per
+  field over title and abstract; files and `dc.rights.uri` come from
+  `_psycharchives_files()` in `irw_batch_updated.py`. ZPID's Open Test Archive
+  (`dc.type` of `test`, 444 records, 164 CC-BY-SA) is deliberately NOT
+  surfaced — blank instruments are item text, so they belong to the itemtext
+  pipeline and its rights register, not to a response-data sweep.
+
+Tiered relevance filter:
 named instruments always pass; psychometric and construct terms pass unless
 blocked by epi/clinical study language; supplementary file titles
 (`Table N_…`, `Data Sheet N_…`) are always blocked.

@@ -46,7 +46,13 @@ Run:
     python irw_discover_monthly.py                      # full run (~100 terms), osf+dataverse
     python irw_discover_monthly.py --mode weekly         # HIGH_YIELD_TERMS subset (~15 terms)
     python irw_discover_monthly.py --dry-run             # show since-dates only, no queries
-    python irw_discover_monthly.py --sources osf dataverse surf aussda scholars_portal
+    python irw_discover_monthly.py --sources osf dataverse zenodo figshare
+
+`surf` (DataverseNL) and `scholars_portal` were dropped from
+irw_discover_updated.SOURCES on 2026-10-29 for a ~0.4%/0.8% shipped rate
+(see the comment on SOURCES there). They were never in DEFAULT_SOURCES
+here, and they stay reachable through --sources; don't put them back in
+an example without re-measuring.
 """
 
 from __future__ import annotations
