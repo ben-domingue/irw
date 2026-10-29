@@ -31,6 +31,44 @@ release any more.
 - [ ] **The covariate-label harvest is now unblocked** for `galanis_2025_*` and
   `aksin_2023_*` x `cov_department`, which was waiting on this release.
 
+## Leads pass 2026-10-29c/d/e — 36 tables staged in all, 28 leads left
+
+Full write-up in `BATCH_LOG.md` (2026-10-29e). The staging folder now holds
+**36 response tables and 8,463,954 responses** -- the sweep's 7, GPO-AI's 21,
+SAPA's 1 and Akter's 7 -- plus 18 item text tables. One MANIFEST covers all
+four, `irw_output/MANIFEST_2026-10-29b.txt`.
+
+- [ ] **Everything in `irw_output/` and `itemtext_output/` needs uploading.**
+  **Response tables first.** All 36 pass `irw-validate --profile upload`; the
+  18 item text tables pass the full gate chain (17 PASS, 1 WARN, explained in
+  the manifest). Dictionary and tag rows are staged for all 36, so nothing
+  needs pasting. Stamp `uploaded=` on the provenance and mapping rows only
+  once Ben confirms.
+
+- [ ] **Four GPO-AI item text tables carry a `public_note`**, so they owe an
+  `itemtext_issues.qmd` entry once live: the shipped wording is the study's
+  English master and the survey was administered in 12 languages, so for
+  respondents outside the English-fielding countries it is a stand-in. Same
+  handoff as the five entries at the top of this file.
+
+- [ ] **17 GPO-AI blocks have item text available but unshipped**, blocked only
+  by the codebook's row-order mapping. To ship them, pin the order against the
+  Schwartz Reisman Institute's public GPO-AI report (which publishes per-item
+  figures) or ask the depositor. That is ~114 items of text already written and
+  one hop from the deposit.
+
+- [ ] **28 leads still unworked** in `leads/repos_leads_2026-10-29b.csv`.
+  Ranked by what looked most like item data when screened: `10.7910/dvn/tvcx30`
+  (affective temperament, 383 x 106), `10.5281/zenodo.4266238` (Baby Steps
+  parental wellbeing, 1,347 x 30, already downloaded to the scratchpad),
+  `10.7910/dvn/xmlrkt` (loneliness in old age, 258 x 50),
+  `10.1371/journal.pone.0226747` (infant rhesus macaque personality ratings,
+  154 x 61 -- non-human is not a reason to skip), the two Mendeley oral-health
+  deposits (`10.17632/ww6kck8jw4`, `10.17632/7kr377hh6n`) and
+  `10.5061/dryad.jh9w0vt9c` (affective temperament, 759 x 8). The rest are
+  political-science replication files and animal-behaviour deposits that need
+  a look each.
+
 ## Sweep 2026-10-29b — 7 tables staged, 40 leads unworked
 
 Full write-up in `BATCH_LOG.md` (2026-10-29d).
@@ -103,19 +141,14 @@ are out of the default source set (0.4% / 0.8% shipped rate), and
 
 ## NEXT UP, at Ben's request (2026-10-29)
 
-- [ ] **Work `10.5683/sp3/wcun0s` first: 23,781 respondents x 38 items.** A
-  Borealis deposit, `cc-by-nc`, `recoverable_format`, file `gpo-ai_data.csv`.
-  **No decision is owed on it** -- NC proceeds under `datastandard.md`'s
-  2026-10-01 ruling, with the restriction propagating through
-  `Derived_License`. It is the largest row in
-  `leads/nc_licence_pending_ruling_2026-10-18.csv`, and bigger than anything in
-  the 2026-10-29 batch.
+- [x] **`10.5683/sp3/wcun0s` DONE 2026-10-29** -- shipped as 21 tables,
+  2,935,076 responses, plus 4 item text tables. See `BATCH_LOG.md`
+  (2026-10-29e). NC proceeded under the 2026-10-01 ruling with no decision
+  asked for.
 
-  That file's other 55 rows are the same shape and the same non-decision: its
-  own `status` column reads "todo: NC is a lead -- the filter was aligned with
-  datastandard.md's 2026-10-01 ruling on 2026-10-19". 27,697 respondents in
-  total, 54 of 56 plainly `cc-by-nc` or `cc-by-nc-sa`. They were being carried
-  in this file as if they needed a ruling; they need working.
+- [ ] **The other 55 NC rows of `leads/nc_licence_pending_ruling_2026-10-18.csv`
+  still need working** -- same shape, same non-decision, 27,697 respondents
+  between them.
 
 - [ ] **Before asking Ben for a licence or rights ruling, check whether one
   already exists.** Searched 2026-10-29 after several questions were put to him
