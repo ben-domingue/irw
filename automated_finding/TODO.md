@@ -1,5 +1,36 @@
 # IRW Automated Finding — TODO
 
+## RELEASED 2026-10-29 (ben-domingue) — both of the day's uploads are live
+
+86 tables and 885,864 responses: the 64-table 2026-10-28b/c batch and the
+22-table 2026-10-29 leads batch. Plus the `gries_2011_moral_foundations`
+replace that dropped `cov_state`. Nothing from 2026-10-29 is awaiting upload or
+release any more.
+
+- [ ] **FIRST THING NEXT SESSION, and it is cheap: refresh `live_tables.csv`,
+  then run `check_issues_page.R`.** The five `itemtext_issues.qmd` entries owed
+  for this batch could not be written before the release, because a note is DUE
+  only once the table is live and the checker reads liveness from
+  `itemtext/live_tables.csv` -- a committed snapshot last taken 2026-10-28,
+  which predates it. `itemtext/refresh_live_tables.py` updates the snapshot;
+  the checker then reports the five as DUE and they can be drafted with
+  `draft_issues_qmd.R` and pasted, the way the 15 `batch_742` entries were on
+  2026-10-29 (datapages/irw#405). The five: `senge_2025_disposal_frequency`,
+  `marsalek_2026_ai_attitudes`, `lotfi_bejestani_2023_moral_distress`,
+  `andreu_sanchez_2023_information_sources` and `_lifestyle`.
+
+  Apply the bar to each rather than pasting all five. Two look likely to fail
+  it: `lotfi_bejestani_2023_moral_distress`'s note is about a DATA oddity
+  (responses coded 7 against a documented 0-6 scale) on a table that ships no
+  item text at all, and the two `andreu_sanchez_2023_*` notes describe a normal
+  bilingual administration where the deposit published both languages -- no
+  IRW-generated text and no mismatch. A note dropped as below the bar goes in
+  `itemtext/fixes/issues_page_dropped.csv` with a reason, so it stops being
+  re-reported.
+
+- [ ] **The covariate-label harvest is now unblocked** for `galanis_2025_*` and
+  `aksin_2023_*` x `cov_department`, which was waiting on this release.
+
 ## NEXT UP, at Ben's request (2026-10-29)
 
 - [ ] **Work `10.5683/sp3/wcun0s` first: 23,781 respondents x 38 items.** A
@@ -126,7 +157,7 @@ remain.** Seven deposits shipped.
   nothing needed pasting. The staging folders are now empty and the manifest is
   archived as `irw_output/MANIFEST_2026-10-29_uploaded_22tables.txt`.
 
-  **A release is owed** before these reach `metadata.csv` -- the same release
+  **A release is owed** -- DONE 2026-10-29, see the top of this file; before these reach `metadata.csv` -- the same release
   the 64-table batch of earlier the same day is waiting on.
 
   Original: **22 response tables + 3 item text tables need uploading.**
@@ -306,7 +337,7 @@ rejected on content (eleven of them as one class) and 2 are below the N floor.
   rows and the 8 `itemtext/mapping_verification.csv` rows. If any individual
   table did not in fact go up, that stamp is the thing to correct. 64
   dictionary rows and 64 tag rows were staged with them, so nothing needed
-  pasting. **A release is owed** before these reach `metadata.csv` -- and with
+  pasting. **A release is owed** -- DONE 2026-10-29, see the top of this file; before these reach `metadata.csv` -- and with
   it the covariate-label harvest for `galanis_2025_*` and `aksin_2023_*`
   recorded below.
 
@@ -419,11 +450,12 @@ rejected on content (eleven of them as one class) and 2 are below the N floor.
   every respect but the one column, and clean on `irw-validate --profile
   upload`.
 
-- [ ] **The gries re-upload is a REPLACE and has not been done.** A plain
-  re-upload of an existing table has appended rather than replaced three times
-  before, doubling the row count without `numRows` showing it. Verify with
-  `SELECT COUNT(*)`; 24,000 means it appended and the table wants deleting and
-  recreating. The MANIFEST beside the file says so too.
+- [x] **The gries replace was done by Ben, 2026-10-29.** `cov_state` is off
+  the live table. Not re-verified against Redivis -- Ben's confirmation is the
+  record. The staged file is cleared and its manifest archived as
+  `irw_output/MANIFEST_2026-10-29_uploaded_gries_replace.txt`, which still
+  carries the append hazard and the `SELECT COUNT(*)` check in case the count
+  ever needs re-reading.
 
 - [ ] **One further call the gries ruling did not reach:** `cov_region_4`,
   `cov_region_9` and `cov_south` are still on that table. A census region is
@@ -585,7 +617,7 @@ shipping 35 response tables and 218,354 responses, 4 item text tables.
   rows and the 4 `itemtext/mapping_verification.csv` rows. If any individual
   table did not in fact go up, that stamp is the thing to correct -- the staged
   copies are in `automated_finding/irw_output/` and `itemtext_output/` with a
-  MANIFEST until Ben clears them. **A release is owed** before these reach
+  MANIFEST until Ben clears them. **A release is owed** -- DONE 2026-10-29, see the top of this file; before these reach
   `metadata.csv`, and with it the first `covariate_labels/build.py` run that
   can pick up `cassidy_2024_*` (see the note below).
 
