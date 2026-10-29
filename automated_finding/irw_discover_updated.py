@@ -780,6 +780,28 @@ from_surf            = _dataverse_connector("surf", "https://dataverse.nl")
 from_aussda          = _dataverse_connector("aussda", "https://data.aussda.at")
 
 
+def _dig(obj, *keys, default=None):
+    """`obj[k1][k2]...`, treating an explicit JSON `null` as absent.
+
+    `{}.get(k, {})` only substitutes the default when the key is MISSING. When
+    a key is present with the value `null` -- which is exactly how OpenAIRE
+    reports an empty result set (`{"response": {"results": null}}`) -- it
+    returns None, and the next `.get` raises
+    `'NoneType' object has no attribute 'get'`. In `from_openaire` that
+    exception became a `SourceUnavailable`, so a query that OpenAIRE answered
+    with "nothing found" was recorded as "source not searched". It cost 28 of
+    the 134 queries in the 2026-10-28 sweep -- not as lost candidates, since
+    there were none, but as a wrong account of the run's own coverage.
+    """
+    for k in keys:
+        if not isinstance(obj, dict):
+            return default
+        obj = obj.get(k)
+        if obj is None:
+            return default
+    return obj
+
+
 def from_openaire(query: str, max_pages: int = 5, per: int = 25):
     """OpenAIRE — European open research aggregator (EU-funded datasets)."""
     for page in range(1, max_pages + 1):
@@ -790,14 +812,17 @@ def from_openaire(query: str, max_pages: int = 5, per: int = 25):
                 headers=UA, timeout=30)
             r.raise_for_status()
             data = r.json()
-            results = data.get("response", {}).get("results", {}).get("result", [])
-            total = int(data.get("response", {}).get("header", {}).get("total", {}).get("$", 0))
+            results = _dig(data, "response", "results", "result", default=[])
+            total = int(_dig(data, "response", "header", "total", "$",
+                             default=0) or 0)
         except Exception as e:
             raise SourceUnavailable(f"[openaire] {e}") from e
         if not results:
             return
+        if isinstance(results, dict):      # a single hit comes back unwrapped
+            results = [results]
         for res in results:
-            md = res.get("metadata", {}).get("oaf:entity", {}).get("oaf:result", {})
+            md = _dig(res, "metadata", "oaf:entity", "oaf:result", default={})
             t = md.get("title", [])
             if isinstance(t, list) and t:
                 title = t[0].get("$", "")

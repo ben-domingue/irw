@@ -59,6 +59,49 @@ merged, and the 552-row `tags/tags_auto.csv` merge is PR #3133.
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## Repos sweep 2026-10-28 (mode 3) — 134 term variants, triage running
+
+Discovery done: **1,204 candidates** in 100 minutes over 8 connectors (zenodo
+450, dataverse 316, figshare 239, scholars_portal 87, datacite 58, openaire 36,
+mendeley 14, dryad 4). 134 term variants, all verified absent from
+`search_terms_log.csv` before the run and all 134 logged after it. 5,197 further
+hits were dropped by `_UNREACHABLE_DOI_PREFIXES` (ICPSR, SRDA) and 6 as
+supplementary-file DOIs of papers already accounted for. Triage with
+`--retriage` is running; its write-up will be `BATCH_LOG.md` 2026-10-28c.
+
+- [ ] **Triage of the 1,204 is in flight.** When it lands: work the `good`
+  rows, write the batch's `leads/repos_leads_2026-10-28c.csv`, and confirm both
+  bookkeeping lines appear (`[step 2b] N refined flag(s) recorded in
+  repo_triage_seen_keys.csv` and `[human_review] archived N row(s)`).
+
+- [ ] **openaire answered only 7 of 134 queries, and the failures are three
+  different problems.** Counted from the run log:
+  - **69 read timeouts** at the connector's 30s limit. Over half the queries.
+    Worth deciding whether to raise the timeout, retry once, or drop openaire
+    from multi-language sweeps; it is opt-in only (not in `SOURCES`), so this
+    costs nothing unless a run asks for it.
+  - **29 HTTP 409 Conflict**, every one on a non-Latin-script query (the
+    Chinese, Japanese, Arabic and Korean variants). Looks like OpenAIRE
+    rejecting the request rather than anything about the term.
+  - **28 `'NoneType' object has no attribute 'get'` — FIXED this batch.** That
+    was ours: `{}.get(k, {})` only substitutes its default when the key is
+    MISSING, and OpenAIRE reports an empty result set as an explicit
+    `null` (`{"response": {"results": null}}`). The crash became a
+    `SourceUnavailable`, so a query OpenAIRE answered with "nothing found" was
+    recorded as "source not searched" — a wrong account of the run's own
+    coverage rather than lost candidates. `_dig()` now treats an explicit null
+    as absent, a single unwrapped hit is handled too, and
+    `tests/test_openaire_null_results.py` covers both plus "a real outage still
+    raises". Suite 285 passing.
+
+  The 7 queries openaire did answer returned 36 candidates — about 5 per query,
+  against roughly 9 per query across all eight connectors — so it is not a low
+  yielder, it is an unreliable one.
+
+- [ ] **`surf`/DataverseNL was omitted from this sweep** via `--sources`, on the
+  measurement recorded in the 2026-10-27 section. Nothing owed; noted so the
+  candidate counts are comparable with earlier sweeps.
+
 ## Leads pass 2026-10-28b — 46 tables + 7 item text tables, AWAITING UPLOAD
 
 Full write-up in `BATCH_LOG.md` (2026-10-28b). The 83 unworked leads of 10-27
