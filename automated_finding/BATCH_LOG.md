@@ -23038,7 +23038,7 @@ PASS on both item and resp sets), then `audit_batch.R --resp-dir` (8/8 PASS, no
 anomalies), then `irw-validate` on the item files (8 clean).
 `itemtext_output/` holds nothing but `*__items.csv`.
 
-## 2026-10-28b — the 10-27 and 10-21 leads re-triaged, and 11 of them worked: 25 tables, 334,679 responses
+## 2026-10-28b — the 10-27 and 10-21 leads re-triaged, and 12 of them worked: 31 tables, 350,189 responses
 
 Nothing uploaded. Ben asked for a discovery sweep *and* for backlogged
 triage/leads work in the same session; this is the leads half. The sweep's own
@@ -23075,7 +23075,7 @@ pointing at it, so there is one live place per lead rather than three.
 ### Eleven worked, seven shipped (filtered to 100 <= N <= 50,000 and 8 <= items <= 700, then by volume)
 
 Nine are tabled here; the last two were worked after this table was written and
-are at the end of the entry. **Batch total: 25 tables, 334,679 responses.**
+are at the end of the entry. **Batch total: 31 tables, 350,189 responses.**
 
 | deposit | licence | outcome |
 |---|---|---|
@@ -23328,6 +23328,65 @@ starts from that rather than re-deriving it. Two things block it: none of the
 four instruments has a register row, and the value-label level is **empty for
 every variable**, so even a cleared extraction would ship stems with no
 `option_text`.
+
+### An eighth: Teriba 2026, 6 more tables — and the clearest rights picture of the batch
+
+`10.7910/DVN/IQSSOU` (CC0 1.0), Akorede Teriba, 263 US collegiate athletes
+across 30 sports, six instruments in one questionnaire —
+`teriba_2026_sport_satisfaction` (16 items, 1-7), `_self_compassion` (12, 1-5),
+`_emotion_regulation` (10, 1-7), `_grit` (8, 1-5), `_mindset_intelligence`
+(8, 1-6), `_wellbeing_who5` (5, 1-6). 15,510 responses. **Batch total: 31
+tables, 350,189 responses from 8 deposits.**
+
+Two processing notes. The mindset block is **one** table: `Fixed1..4` and
+`Growth1..4` are the two poles of Dweck's ITIS administered together on one
+scale, and splitting them would turn one instrument into two four-item tables
+and lose the contrast the scale exists to measure (`run_qc` warns `multi_scale`
+on the two prefixes; the codes keep them so the pole stays readable). And `Q7`,
+"Which state is your school in?", is dropped in no form under the 2026-10-20
+geographic ruling, along with a 32-sport "choose all that apply" grid coded
+1/blank — reading blank as "not selected" would be an assumption about
+missingness.
+
+**This is the deposit where the register did all the work.** The label set is
+the richest of the batch: all 102 variables carry both a variable label (which
+IS the full item wording, as "instruction - item") and value labels (every
+anchor). So extraction is cheap for all six, and the rights question decides
+each one — which is exactly what the register exists for:
+
+| instrument | register | outcome |
+|---|---|---|
+| SCS-SF (Raes et al. 2011) | `ship` | **shipped**, 60 rows |
+| WHO-5 | `block` | held |
+| Grit-S (Duckworth & Quinn 2009) | `block` | held |
+| ERQ (Gross & John 2003), English | `block` | held |
+| ITIS (Dweck) | `hold` | held |
+| 16-item sport satisfaction | **no row** | **row written**, `hold` |
+
+Checking by NAME rather than only running the gate is what made the SCS-SF
+ship: `load_register()` keeps only `hold`/`note` verdicts, so a `ship` ruling is
+invisible to the gate, and this is the second batch in a fortnight where a
+correct table would have been held by running the gate alone (the first cost the
+MSLQ on 2026-10-18).
+
+The SCS-SF identification is **checked in code, not asserted**:
+`make_itemtext_teriba_2026.py` asserts that six of the register row's own
+`match_item_text` fragments appear verbatim among the twelve stems before it
+writes anything. The three unlabelled midpoints ship `option_text` blank — the
+source's value labels read "Almost never 1", "2", "3", "4", "Almost always 5",
+and a bare numeral is the scale point echoed back, not wording.
+
+The new register row is for the sport-satisfaction battery, verdict `hold`,
+written because no originator terms were locatable and silence on a named
+third-party instrument is a hold. It is **not** a Ben ruling and the row says
+so: the 16 items are recognisable as a subset of Riemer & Chelladurai's (1998)
+Athlete Satisfaction Questionnaire (ability utilisation and strategy both line
+up) but the wording is not verbatim, so it may be an adaptation, in which case
+the 2026-09-08 ruling makes the adaptation's terms the ones that matter.
+`match_item_code` is scoped to this one table's codes on purpose — a broad
+`sport_satisfaction_N` pattern would over-fire the way the register's short-stem
+patterns already do. `irw-validate` now fires on the table, which is the row
+working as intended; the response table ships regardless.
 
 ### The `surf` (DataverseNL) question, measured and answered
 

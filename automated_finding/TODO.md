@@ -59,23 +59,23 @@ merged, and the 552-row `tags/tags_auto.csv` merge is PR #3133.
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
-## Leads pass 2026-10-28b — 25 tables + 4 item text tables, AWAITING UPLOAD
+## Leads pass 2026-10-28b — 31 tables + 5 item text tables, AWAITING UPLOAD
 
 Full write-up in `BATCH_LOG.md` (2026-10-28b). The 83 unworked leads of 10-27
-and the 28 of 10-21 were re-triaged together; 11 of the 106 were worked to a
-decision, 7 of those shipped.
+and the 28 of 10-21 were re-triaged together; 12 of the 106 were worked to a
+decision, 8 of those shipped.
 
-- [ ] **25 response tables (334,679 responses) + 4 item text tables need
+- [ ] **31 response tables (350,189 responses) + 5 item text tables need
   uploading.** `automated_finding/irw_output/` (with a MANIFEST) and
-  `itemtext_output/`. **Response tables first.** All 25 pass `irw-validate
-  --profile upload`; all 4 item text tables PASS `normalize_nulls.R` ->
+  `itemtext_output/`. **Response tables first.** All 31 pass `irw-validate
+  --profile upload`; all 5 item text tables PASS `normalize_nulls.R` ->
   `validate_items.R --resp-csv` -> `audit_batch.R --resp-dir` and are clean on
-  `irw-validate`. 25 dictionary rows and 25 tag rows are already staged, so
+  `irw-validate`. 31 dictionary rows and 31 tag rows are already staged, so
   nothing needs pasting. Stamp `uploaded=` on the 4 shipped
   `itemtext_provenance.csv` rows and the 4 `mapping_verification.csv` rows only
   after Ben confirms.
 
-  Two of the four item text tables --
+  Two of the five item text tables --
   `andreu_sanchez_2023_information_sources__items.csv` and
   `_lifestyle__items.csv` -- are for response tables that are **already live**
   (uploaded 2026-10-21). They go up with the rest of `itemtext_output/` and no
@@ -142,7 +142,7 @@ decision, 7 of those shipped.
   worth deciding whether that is acceptable here before spending the rights
   effort.
 
-- [ ] **97 `unworked` leads remain** in `leads/repos_leads_2026-10-28.csv`: 51
+- [ ] **96 `unworked` leads remain** in `leads/repos_leads_2026-10-28.csv`: 50
   `recoverable_format`, 23 `worth_retrying`, 8 `aggregate_continuous`, 12
   `download_failed` and 3 `error`. Each `recoverable_format` row carries its own
   diagnosis from the retriage, and the diagnoses are specific — the common shape
@@ -298,7 +298,9 @@ shipping 35 response tables and 218,354 responses, 4 item text tables.
   `irw-validate`. 35 dictionary rows and 35 tag rows are already staged, so
   nothing needs pasting. Stamp `uploaded=` on the 4 shipped
   `itemtext_provenance.csv` rows and the 4 `mapping_verification.csv` rows
-  only after Ben confirms.
+  only after Ben confirms (3 provenance rows and 3 mapping_verification rows:
+  the two kubilay tables, the two andreu_sanchez tables and
+  teriba_2026_self_compassion).
 - [x] **The 28 `recoverable_format` rows were re-triaged 2026-10-28b** and
   the hope recorded here is **disproven**: none of them "simply read now". The
   encoding x delimiter and BIFF2 `.xls` fixes change nothing for this bucket --
