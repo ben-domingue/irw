@@ -23038,7 +23038,7 @@ PASS on both item and resp sets), then `audit_batch.R --resp-dir` (8/8 PASS, no
 anomalies), then `irw-validate` on the item files (8 clean).
 `itemtext_output/` holds nothing but `*__items.csv`.
 
-## 2026-10-28b — the 10-27 and 10-21 leads re-triaged, and 37 of the 106 worked: 48 tables, 484,073 responses
+## 2026-10-28b — the 10-27 and 10-21 leads re-triaged, and 38 of the 106 worked: 51 tables, 496,741 responses
 
 Nothing uploaded. Ben asked for a discovery sweep *and* for backlogged
 triage/leads work in the same session; this is the leads half. The sweep's own
@@ -23075,7 +23075,7 @@ pointing at it, so there is one live place per lead rather than three.
 ### Eleven worked, seven shipped (filtered to 100 <= N <= 50,000 and 8 <= items <= 700, then by volume)
 
 Nine are tabled here; the last two were worked after this table was written and
-are at the end of the entry. **Batch total: 48 tables, 484,073 responses.**
+are at the end of the entry. **Batch total: 51 tables, 496,741 responses.**
 
 | deposit | licence | outcome |
 |---|---|---|
@@ -23834,6 +23834,58 @@ differing directions were a real `resp_ambiguous` problem that had to be undone.
 Expect heavy `imputed_values*` concentration at wave 2 (98% correct on one
 knowledge item, 99% on one attitude item). The intervention worked; that is the
 result, not a defect.
+
+### A seventeenth: Elhai 2025 — and a `ship` ruling that unlocks an instrument IRW will meet again
+
+`10.17632/sp3h5k27xk.1` (CC BY 4.0), 329 US college students.
+`elhai_2025_social_phobia` (17 items, 0-4), `_intolerance_uncertainty` (12,
+1-5) and `_smartphone_addiction` (10, 1-6). 12,668 responses. **Batch total: 51
+tables, 496,741 responses from 17 deposits.**
+
+Unusually for this batch, **nothing had to be identified**: the deposit's own
+description names all three instruments outright ("the 12 items of the
+Intolerance of Uncertainty Scale-12 appear (iu1 to iu12). Next, the ten items of
+the Smartphone Addiction Scale-Short Version ... Next, the 17 items of the
+Social Phobia Inventory"). Three tables, because three published instruments on
+three response scales are not subscales of one battery. `id` is the row index:
+the deposit calls its own id "consecutively numbering participants" but the
+values are seven digits, i.e. survey-platform response ids.
+
+**The useful part is the rights work, and one of the three came out `ship`.**
+
+- **SAS-SV — `ship`, and this is its first register row.** The scale's own
+  development paper, Kwon, Kim, Cho & Yang (2013), PLoS ONE 8(12):e83558, is
+  licence **cc by** per Europe PMC (PMC3877074) and prints the item wording
+  itself. That is originator-publishes-under-CC-BY, the same shape as the
+  register's MFQ-2 row, and the clause is quoted from the originators'
+  publication rather than from a third-party host. It is worth having beyond
+  this one table: the SAS-SV is common.
+
+  Not extracted in this batch for a concrete reason recorded in the row: the
+  article's Table 1 is the content-validity table of the **full 33-item SAS**,
+  and which ten became the short version has to be read off the paper rather
+  than inferred from that table's order.
+
+  Two warnings went into the row. Its `match_item_code` is deliberately narrow
+  (it requires an `sv`/`sassv` marker) and so will **not** fire on this very
+  table's bare `sas1..sas10` codes — `sas1` is far too generic to anchor on and
+  would collide with the Social Appearance Anxiety and Statistics Anxiety
+  scales. That is the skill's "a miss is not an all-clear" made concrete, in
+  the row itself. And the register's Smartphone Addiction **Inventory** (SPAI)
+  `block` row is a different instrument.
+
+- **IUS-12 — `block`, by derivation rather than new research.** The register
+  already carried the 27-item IUS as `block`, and a short form of a blocked
+  longer form is itself blocked (Ben's 2026-10-17 ruling on the BFI-10, which
+  derived the BFI-10 row forward the same way). The new row records that
+  derivation so nobody repeats it, and the gate now fires on `iu1..iu12`. The
+  register now holds **three** IUS rows that deliberately do not share a
+  verdict: the 27-item IUS (`block`), the Italian IUS-R revision (`hold`), and
+  this English short form (`block`).
+
+- **SPIN — still owed.** No register row, no originator terms located. Recorded
+  as owed rather than guessed; the starting point is whether Duke University
+  publishes terms for it.
 
 ### The `surf` (DataverseNL) question, measured and answered
 

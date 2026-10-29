@@ -102,19 +102,19 @@ supplementary-file DOIs of papers already accounted for. Triage with
   measurement recorded in the 2026-10-27 section. Nothing owed; noted so the
   candidate counts are comparable with earlier sweeps.
 
-## Leads pass 2026-10-28b — 48 tables + 7 item text tables, AWAITING UPLOAD
+## Leads pass 2026-10-28b — 51 tables + 7 item text tables, AWAITING UPLOAD
 
 Full write-up in `BATCH_LOG.md` (2026-10-28b). The 83 unworked leads of 10-27
-and the 28 of 10-21 were re-triaged together; **37 of the 106 were worked to a
-decision and 16 of those shipped** -- 48 tables, 484,073 responses. 16 were
+and the 28 of 10-21 were re-triaged together; **38 of the 106 were worked to a
+decision and 17 of those shipped** -- 51 tables, 496,741 responses. 16 were
 rejected on content (eleven of them as one class) and 2 are below the N floor.
 
-- [ ] **48 response tables (484,073 responses) + 7 item text tables need
+- [ ] **51 response tables (496,741 responses) + 7 item text tables need
   uploading.** `automated_finding/irw_output/` (with a MANIFEST) and
-  `itemtext_output/`. **Response tables first.** All 48 pass `irw-validate
+  `itemtext_output/`. **Response tables first.** All 51 pass `irw-validate
   --profile upload`; all 7 item text tables PASS `normalize_nulls.R` ->
   `validate_items.R --resp-csv` -> `audit_batch.R --resp-dir` and are clean on
-  `irw-validate`. 48 dictionary rows and 48 tag rows are already staged, so
+  `irw-validate`. 51 dictionary rows and 51 tag rows are already staged, so
   nothing needs pasting. Stamp `uploaded=` on the 4 shipped
   `itemtext_provenance.csv` rows and the 4 `mapping_verification.csv` rows only
   after Ben confirms.
@@ -186,7 +186,7 @@ rejected on content (eleven of them as one class) and 2 are below the N floor.
   worth deciding whether that is acceptable here before spending the rights
   effort.
 
-- [ ] **69 `unworked` leads remain** in `leads/repos_leads_2026-10-28.csv`: 38
+- [ ] **68 `unworked` leads remain** in `leads/repos_leads_2026-10-28.csv`: 37
   `recoverable_format`, 8 `worth_retrying`, 8 `aggregate_continuous`, 12
   `download_failed` and 3 `error`. The `worth_retrying` bucket is now the thin
   one: its eleven article-table rows were rejected as a class and its four
@@ -196,6 +196,18 @@ rejected on content (eleven of them as one class) and 2 are below the N floor.
   is a questionnaire carrying several instruments, so the work is one processing
   script per deposit, not a reader fix. **Do not re-run the reader on them**;
   2026-10-28b already proved that changes nothing.
+
+- [ ] **`elhai_2025_smartphone_addiction`'s item text is now extractable and
+  was not extracted.** The SAS-SV is registered `ship` as of this batch (its
+  originators published the items under CC BY in PLoS ONE 8(12):e83558). The one
+  remaining step is reading WHICH ten of the 33-item pool became the short
+  version off that paper -- its Table 1 is the full pool's content-validity
+  table, so the order is not the answer. Worth doing: the SAS-SV is common, so
+  this unblocks future tables too.
+
+- [ ] **The SPIN has no register row.** `elhai_2025_social_phobia` ships its
+  responses; its wording is owed a ruling. Connor et al. (2000), British Journal
+  of Psychiatry; the starting point is whether Duke University publishes terms.
 
 - [ ] **A live table carries a US state, and the geographic ruling says it
   should not — Ben's call, not acted on.** `gries_2011_moral_foundations` is
