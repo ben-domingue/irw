@@ -119,6 +119,12 @@ jobs:
       - name: covariate_labels gap ratchet (#1775)
         run: python metadata/covariate_labels/audit_gaps.py --ratchet
 
+      # The arrears ledger's exit code is the whole mechanism (#3225): it has to
+      # fire on a new candidate and stay silent on the standing backlog, or the
+      # advisory stage it drives becomes a line nobody reads.
+      - name: collection arrears ledger (stage 21, #3225)
+        run: python metadata/tests/test_collection_arrears.py -v
+
       # Stage 14 imports stage 13, so both run here (#2494, #2763).
       - name: script index and column docs (stages 13, 14)
         run: |

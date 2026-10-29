@@ -32,6 +32,16 @@
 # stays last. It needs no credentials and no Redivis access at all, so it is
 # the one stage that is fully reviewable offline.
 #
+# collection_recall.py (stage 21, #3225, added 2026-10-29) runs IMMEDIATELY AFTER
+# 10, because it reads what 10 has just written -- collections.csv and
+# collection_members.csv -- against metadata.csv and tags.csv, and nothing else.
+# It is credential-free for the same reason 10 is. It exists because a curated
+# collection is a snapshot: 126 tables that name a collection's own instrument
+# arrived after the lists were last gone through on 2026-09-30, and nothing
+# reported that for a month. It maintains collection_arrears.csv and exits 1 on a
+# NEW arrear only -- a standing backlog that fires every run is a finding nobody
+# reads. It never promotes anybody (collections/README, invariant 1).
+#
 # 11_status.R (issue #1940, added 2026-09-08) runs BETWEEN 10 and 09. It was
 # written for #1765/2.5c and then never wired in at all -- it was absent from
 # STAGE_SCRIPT, so `run_pipeline.sh 11` answered `warn: unknown stage` and the
@@ -180,7 +190,8 @@ declare -A STAGE_SCRIPT=( [01]=01_metadata.R [02]=02_biblio.R [03]=03_tags.R
                           [13]=13_script_index.py [14]=14_column_docs.py
                           [15]=15_codebook_links.py [16]=16_conjoint.R
                           [17]=17_coverage.R [18]=18_rankings.R
-                          [19]=19_item_classical.py [20]=20_k1.py )
+                          [19]=19_item_classical.py [20]=20_k1.py
+                          [21]=collection_recall.py )
 
 # Stages whose non-zero exit is a FINDING, not a failure. 12 exits 1 when a
 # table has been stuck for several runs -- that is the report doing its job, and
@@ -192,7 +203,18 @@ declare -A STAGE_SCRIPT=( [01]=01_metadata.R [02]=02_biblio.R [03]=03_tags.R
 # and the bracket is what carries its summary into the pull request body. It
 # cannot fail silently because it has no failure to hide -- it reports, and the
 # monthly review reads the report (metadata/coverage_report.md).
-declare -A ADVISORY_STAGE=( [12]=1 [17]=1 )
+# 21 (collection arrears, #3225) is advisory on the same terms as 12: it exits 1
+# when this run found a table that names a collection's own instrument and is not
+# in it, which is a queue entry, not a broken run. It cannot fail silently --
+# collection_arrears.csv is committed, so a run that found nothing and a run that
+# did not execute look different in the diff. Promotion stays a human step
+# (collections/README, invariant 1): this stage nags, it never adds a member.
+declare -A ADVISORY_STAGE=( [12]=1 [17]=1 [21]=1 )
+# Flags a stage needs. 21's script is also the hand tool a maintainer runs to read
+# recall per collection; `--report` is what makes it maintain the committed ledger
+# and exit 1 on a new arrear, so the pipeline asks for it explicitly rather than the
+# script guessing from its environment.
+declare -A STAGE_ARGS=( [21]="--report" )
 # CSVs each stage is expected to touch (space-separated), for snapshot/diff.
 declare -A STAGE_OUTPUTS=(
   [01]="metadata.csv"
@@ -203,6 +225,7 @@ declare -A STAGE_OUTPUTS=(
   [07]="simsyn_metadata.csv"
   [08]="itemtext_metadata.csv"
   [10]="collections.csv collection_members.csv"
+  [21]="collection_arrears.csv"
   [11]=""   # writes status.json + status_history.tsv -- reported separately below
   [12]=""   # writes straggler_watch.tsv -- reported separately below
   [13]="table_scripts.csv"
@@ -235,7 +258,7 @@ declare -A STAGE_OUTPUTS=(
 # columns back on, so it too has to be after 01. Its order relative to 19 is
 # only tidiness -- both stages rewrite metadata.csv preserving every column they
 # did not author, so neither can drop the other's.
-DEFAULT_ORDER=(01 19 20 05 06 07 16 18 02 03 08 10 11 12 13 14 15 17)
+DEFAULT_ORDER=(01 19 20 05 06 07 16 18 02 03 08 10 21 11 12 13 14 15 17)
 
 # Join key for the diff, per output file. Everything is keyed on `table` except
 # the two collections outputs (issue #1633): the registry is one row per
@@ -244,6 +267,7 @@ DEFAULT_ORDER=(01 19 20 05 06 07 16 18 02 03 08 10 11 12 13 14 15 17)
 declare -A DIFF_KEY=(
   [collections.csv]="collection"
   [collection_members.csv]="table,collection"
+  [collection_arrears.csv]="collection,table"
   [column_docs.csv]="table,column"
   [codebook_links.csv]="table,url"
   [codebook_links_checked.csv]="table,data_url"
@@ -337,7 +361,7 @@ for stage in "${stages[@]}"; do
     # rather than being buried in a 40kB log tail.
     echo "--- ADVISORY $stage BEGIN ---"
     set +e
-    "$runner" "$script"
+    "$runner" "$script" ${STAGE_ARGS[$stage]:-}
     stage_rc=$?
     set -e
     echo "--- ADVISORY $stage END ---"
@@ -346,7 +370,7 @@ for stage in "${stages[@]}"; do
       ADVISORY_HIT+=("$stage")
     fi
   else
-    "$runner" "$script"
+    "$runner" "$script" ${STAGE_ARGS[$stage]:-}
   fi
   # Recorded only after the script returned: a stage that dies leaves no line,
   # so --resume reruns it.

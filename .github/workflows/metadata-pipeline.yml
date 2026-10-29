@@ -322,6 +322,27 @@ jobs:
               echo "_Stage 12 did not run._"
             fi
             echo
+            echo "## Collection arrears"
+            echo
+            # Stage 21 names tables that say which instrument they administered and
+            # are not in that collection (#3225). The ledger is committed, so the
+            # queue is readable in the diff on every run; what belongs HERE is only
+            # what is NEW, because the standing backlog in the body of every pull
+            # request is a paragraph people learn to scroll past. Promotion is a
+            # human step by design -- collections/README, invariant 1.
+            if grep -q -- "NEW candidate(s) since the last run" pipeline.log; then
+              echo '```'
+              sed -n '/NEW candidate(s) since the last run/,/--- ADVISORY 21 END ---/p' pipeline.log \
+                | sed '$d'
+              echo '```'
+              echo
+              echo "Scout them with \`python3 collections/scout_instruments.py <slug>\`, promote the real ones into \`collections/curated/<slug>.csv\`, and leave the rest. Queue and ages: \`metadata/collection_arrears.csv\`."
+            elif grep -q -- "--- ADVISORY 21 BEGIN ---" pipeline.log; then
+              echo "_No new arrears this run._ Standing queue: \`metadata/collection_arrears.csv\`."
+            else
+              echo "_Stage 21 did not run._"
+            fi
+            echo
             echo "## Coverage audit"
             echo
             # Stage 17 judges every LIVE table against the run's own CSVs: page,
