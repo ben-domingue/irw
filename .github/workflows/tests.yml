@@ -307,6 +307,14 @@ jobs:
       - name: rankings dictionary release claim
         run: python metadata/tests/test_rank_dictionary.py -v
 
+      # Nothing in the pipeline reads data/rankings/counting_rules.csv yet, so a
+      # table whose counting rules cannot be found, or that matches two rule
+      # sets, would show up nowhere. New South Wales deposits one file per
+      # district, so 279 tables carry 98 jurisdiction keys and join their rules
+      # through `rules_jurisdiction` (Ben, 2026-10-29, #3024).
+      - name: rankings counting-rules join
+        run: python metadata/tests/test_rank_rules_join.py -v
+
   # A PR to data/ contains a conversion SCRIPT, never a table --
   # automated_finding/irw_output/ is gitignored, so no output is ever in the
   # diff. This checks the script's contract; the data is checked by
