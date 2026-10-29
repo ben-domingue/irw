@@ -40,12 +40,44 @@ SAPA's 1 and Akter's 7 -- plus 18 item text tables. (GPO-AI's three
 2026-10-29f, at Ben's prompting; see BATCH_LOG.) One MANIFEST covers all
 four, `irw_output/MANIFEST_2026-10-29b.txt`.
 
-- [ ] **Everything in `irw_output/` and `itemtext_output/` needs uploading.**
-  **Response tables first.** All 34 pass `irw-validate --profile upload`; the
-  18 item text tables pass the full gate chain (17 PASS, 1 WARN, explained in
-  the manifest). Dictionary and tag rows are staged for all 34, so nothing
-  needs pasting. Stamp `uploaded=` on the provenance and mapping rows only
-  once Ben confirms.
+- [x] **UPLOADED 2026-10-29 (ben-domingue).** 34 response tables, 8,464,014
+  responses, and 18 item text tables. `uploaded=2026-10-29` is stamped on the
+  18 shipped `itemtext_provenance.csv` rows and the 18
+  `itemtext/mapping_verification.csv` rows; the 16 rows recorded NOT SHIPPED
+  keep a blank `uploaded`, because nothing went up for them. If any individual
+  table did not in fact go up, that stamp is the thing to correct. The staging
+  folders are empty again.
+
+- [ ] **A RELEASE is owed before any of this reaches `metadata.csv`** -- and
+  with it the weekly pipeline run, which is what carries the 34 staged
+  dictionary rows and 34 tag rows into biblio and tags. Nothing here needs
+  pasting.
+
+- [x] **PR #3312 merged 2026-10-29.** It carried the four processing scripts,
+  the dictionary/tag/provenance/mapping rows and the leads-file verdicts.
+  **Four later commits on that branch did NOT make it into the squash** (the
+  upload stamps, the codebook_at_ingest reconciliation and these TODO edits);
+  they land separately, which is what this entry is here to record. Check a
+  squash picked up the whole branch when commits are pushed close to a merge.
+
+- [ ] **A covariate-label harvest is owed for `akter_2026_*` after the release,
+  and ONLY for those seven.** That script reads an SPSS `.sav` and ships ten
+  `cov_*` columns, so its value labels (1 = male, 2 = female, and the education,
+  income, region-type and exposure-type codings) reach the table pages only
+  through `metadata/covariate_labels/`:
+
+      python3 metadata/covariate_labels/harvest.py --commit HEAD akter_2026_climate_change
+      python3 metadata/covariate_labels/build.py
+
+  The other three deposits need nothing: GPO-AI and earja read plain CSVs and
+  SAPA an `.RData`, none of which carry value labels (GPO-AI's codings are in
+  its codebook `.docx`, which is what `codebook_url` points at).
+
+  **The raw file is NOT in the repo** -- harvest re-runs the script, so it needs
+  `Final Data.sav` back on disk first:
+  `curl -L -o 'Final Data.sav' https://ndownloader.figshare.com/files/67330487`
+  That is the gap behind the 32 empty harvest logs recorded further down this
+  file, so it is worth getting right rather than discovering again.
 
 - [ ] **Four GPO-AI item text tables carry a `public_note`**, so they owe an
   `itemtext_issues.qmd` entry once live: the shipped wording is the study's
