@@ -47,6 +47,25 @@ four, `irw_output/MANIFEST_2026-10-29b.txt`.
   needs pasting. Stamp `uploaded=` on the provenance and mapping rows only
   once Ben confirms.
 
+- [ ] **A covariate-label harvest is owed for `akter_2026_*` after the release,
+  and ONLY for those seven.** That script reads an SPSS `.sav` and ships ten
+  `cov_*` columns, so its value labels (1 = male, 2 = female, and the education,
+  income, region-type and exposure-type codings) reach the table pages only
+  through `metadata/covariate_labels/`:
+
+      python3 metadata/covariate_labels/harvest.py --commit HEAD akter_2026_climate_change
+      python3 metadata/covariate_labels/build.py
+
+  The other three deposits need nothing: GPO-AI and earja read plain CSVs and
+  SAPA an `.RData`, none of which carry value labels (GPO-AI's codings are in
+  its codebook `.docx`, which is what `codebook_url` points at).
+
+  **The raw file is NOT in the repo** -- harvest re-runs the script, so it needs
+  `Final Data.sav` back on disk first:
+  `curl -L -o 'Final Data.sav' https://ndownloader.figshare.com/files/67330487`
+  That is the gap behind the 32 empty harvest logs recorded further down this
+  file, so it is worth getting right rather than discovering again.
+
 - [ ] **Four GPO-AI item text tables carry a `public_note`**, so they owe an
   `itemtext_issues.qmd` entry once live: the shipped wording is the study's
   English master and the survey was administered in 12 languages, so for
