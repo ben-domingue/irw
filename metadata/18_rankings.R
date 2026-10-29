@@ -23,7 +23,9 @@
 ##  position marked), n_duplicate_marks (rows beyond the first per
 ##  id x task x item: a candidate marked at two positions).
 ##Design columns, joined from the hand-kept data/rankings/design_tables.csv
-##(everything but `evidence`): source_file, collection, jurisdiction, date,
+##(everything but `evidence` and `rules_jurisdiction`, which is the key a
+##table's counting rules are under in counting_rules.csv -- bookkeeping for
+##that file, not a property of the table): source_file, collection, jurisdiction, date,
 ##office, method, seats, n_positions, n_candidates, n_ballots_cast,
 ##n_ballots_eligible_est, n_ballots_with_marks, n_duplicate_marks (the record's
 ##own count, kept as design_n_duplicate_marks so the two can be compared),
@@ -172,7 +174,7 @@ write.csv(new_stamps, stamps_file, quote = TRUE, row.names = FALSE, na = "")
 ##and red_up refuses the upload earlier (checks.check_rank_design).
 dtab <- read.csv(file.path("..", "data", "rankings", "design_tables.csv"), colClasses = "character",
                  na.strings = character(0), check.names = FALSE)
-design_cols <- setdiff(names(dtab), c("table", "evidence"))
+design_cols <- setdiff(names(dtab), c("table", "evidence", "rules_jurisdiction"))
 dtab <- dtab[, c("table", design_cols)]
 names(dtab)[names(dtab) == "n_duplicate_marks"] <- "design_n_duplicate_marks"
 out <- merge(out, dtab, by = "table", all.x = TRUE, sort = TRUE)
