@@ -24302,3 +24302,18 @@ up earlier. **One release now covers both** -- 86 tables and 885,864 responses
 -- and nothing from either reaches `metadata.csv` until it happens. Waiting on
 it: the covariate-label harvest for `galanis_2025_*` and `aksin_2023_*` x
 `cov_department`, and the four register rows owed from the Ibaceta deposit.
+
+### Released 2026-10-29
+
+Ben released both of the day's uploads together — **86 tables and 885,864
+responses**, the 64-table 2026-10-28b/c batch and the 22-table 2026-10-29 leads
+batch — and separately did the `gries_2011_moral_foundations` replace that
+dropped `cov_state` from the live table. Neither is re-verified against
+Redivis: his confirmation is the record.
+
+That clears everything 2026-10-29 produced. Two things it unblocks are recorded
+at the top of `TODO.md` rather than here, because they are next session's first
+moves: refreshing `live_tables.csv` so `check_issues_page.R` can report the five
+`itemtext_issues.qmd` entries this batch owes — they could not be written
+earlier, since a note is due only once the table is live — and the
+covariate-label harvest for `galanis_2025_*` and `aksin_2023_*`.
