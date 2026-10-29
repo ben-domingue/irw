@@ -59,19 +59,19 @@ merged, and the 552-row `tags/tags_auto.csv` merge is PR #3133.
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
-## Leads pass 2026-10-28b — 43 tables + 6 item text tables, AWAITING UPLOAD
+## Leads pass 2026-10-28b — 45 tables + 6 item text tables, AWAITING UPLOAD
 
 Full write-up in `BATCH_LOG.md` (2026-10-28b). The 83 unworked leads of 10-27
-and the 28 of 10-21 were re-triaged together; **31 of the 106 were worked to a
-decision and 13 of those shipped** -- 43 tables, 438,550 responses. 16 were
+and the 28 of 10-21 were re-triaged together; **32 of the 106 were worked to a
+decision and 14 of those shipped** -- 45 tables, 464,389 responses. 16 were
 rejected on content (eleven of them as one class) and 2 are below the N floor.
 
-- [ ] **43 response tables (438,550 responses) + 6 item text tables need
+- [ ] **45 response tables (464,389 responses) + 6 item text tables need
   uploading.** `automated_finding/irw_output/` (with a MANIFEST) and
-  `itemtext_output/`. **Response tables first.** All 43 pass `irw-validate
+  `itemtext_output/`. **Response tables first.** All 45 pass `irw-validate
   --profile upload`; all 6 item text tables PASS `normalize_nulls.R` ->
   `validate_items.R --resp-csv` -> `audit_batch.R --resp-dir` and are clean on
-  `irw-validate`. 43 dictionary rows and 43 tag rows are already staged, so
+  `irw-validate`. 45 dictionary rows and 45 tag rows are already staged, so
   nothing needs pasting. Stamp `uploaded=` on the 4 shipped
   `itemtext_provenance.csv` rows and the 4 `mapping_verification.csv` rows only
   after Ben confirms.
@@ -143,7 +143,7 @@ rejected on content (eleven of them as one class) and 2 are below the N floor.
   worth deciding whether that is acceptable here before spending the rights
   effort.
 
-- [ ] **75 `unworked` leads remain** in `leads/repos_leads_2026-10-28.csv`: 44
+- [ ] **74 `unworked` leads remain** in `leads/repos_leads_2026-10-28.csv`: 43
   `recoverable_format`, 8 `worth_retrying`, 8 `aggregate_continuous`, 12
   `download_failed` and 3 `error`. The `worth_retrying` bucket is now the thin
   one: its eleven article-table rows were rejected as a class and its four

@@ -23038,7 +23038,7 @@ PASS on both item and resp sets), then `audit_batch.R --resp-dir` (8/8 PASS, no
 anomalies), then `irw-validate` on the item files (8 clean).
 `itemtext_output/` holds nothing but `*__items.csv`.
 
-## 2026-10-28b — the 10-27 and 10-21 leads re-triaged, and 31 of the 106 worked: 43 tables, 438,550 responses
+## 2026-10-28b — the 10-27 and 10-21 leads re-triaged, and 32 of the 106 worked: 45 tables, 464,389 responses
 
 Nothing uploaded. Ben asked for a discovery sweep *and* for backlogged
 triage/leads work in the same session; this is the leads half. The sweep's own
@@ -23075,7 +23075,7 @@ pointing at it, so there is one live place per lead rather than three.
 ### Eleven worked, seven shipped (filtered to 100 <= N <= 50,000 and 8 <= items <= 700, then by volume)
 
 Nine are tabled here; the last two were worked after this table was written and
-are at the end of the entry. **Batch total: 43 tables, 438,550 responses.**
+are at the end of the entry. **Batch total: 45 tables, 464,389 responses.**
 
 | deposit | licence | outcome |
 |---|---|---|
@@ -23675,6 +23675,37 @@ administered first, since the sample is German-speaking and the codebook's
 wording is the English original. The warning: the register's existing
 SRP-III/SRP-4 rows are `block` on Qualification-Level-B terms, and those are a
 **different instrument's** terms that must not be read onto the SD3.
+
+### A fourteenth: Mazzini & Riemer 2026 — 1,692 dogs, and `wave` deliberately not used
+
+`10.6084/m9.figshare.30540344.v3` (CC BY 4.0), the Big Dog Play and Motivation
+Questionnaire. `mazzini_2026_arousal_regulation` (9 items, 1-5, 1,692 dogs) and
+`_puppy` (the same nine answered retrospectively, 1,193 dogs). 25,839
+responses. **Batch total: 45 tables, 464,389 responses from 14 deposits.**
+
+`id` is the **dog**, which is what `datastandard.md` means by "the focal unit
+being measured -- typically a person, but sometimes another entity". Non-human
+subjects are not a reason to skip (2026-08-10) and this was judged on content:
+it is an ordinary repeated-item owner-rated battery.
+
+**Two tables rather than one with `wave`, and this is the judgement call of the
+deposit.** The nine items were answered twice — about the dog now
+(`problems_calming`) and retrospectively about the dog as a puppy
+(`puppy_problems_calming`) — but both answers were given at the SAME sitting.
+Putting them under `wave` 1 and 2 would present a single-occasion retrospective
+recall as a longitudinal measurement, which is exactly what `wave` tells anyone
+fitting a model to it. Two tables say what happened, and nothing is lost: the
+item codes are identical and both tables carry the same `id`, so the pair joins
+on `(id, item)`. The puppyhood table is smaller because about 1,180 of the 1,692
+owners had the dog from puppyhood — structural missingness, not attrition.
+
+**The AB-Q's own items are not in the deposit, and the range is what says so.**
+The description mentions the Addictive-like Behaviour Questionnaire, and
+`AB_Q_score` is there — spanning **15-75**, i.e. fifteen items on 1-5, while
+the nine items shipped here sum to 11-43 and correlate 0.48 with it. So the
+AB-Q is a *different*, 15-item instrument whose per-item responses were never
+deposited. The script prints and asserts that rather than leaving the next
+reader to wonder where fifteen items went.
 
 ### The `surf` (DataverseNL) question, measured and answered
 
