@@ -23038,7 +23038,7 @@ PASS on both item and resp sets), then `audit_batch.R --resp-dir` (8/8 PASS, no
 anomalies), then `irw-validate` on the item files (8 clean).
 `itemtext_output/` holds nothing but `*__items.csv`.
 
-## 2026-10-28b — the 10-27 and 10-21 leads re-triaged, and 12 of them worked: 31 tables, 350,189 responses
+## 2026-10-28b — the 10-27 and 10-21 leads re-triaged, and 13 of them worked: 33 tables, 367,481 responses
 
 Nothing uploaded. Ben asked for a discovery sweep *and* for backlogged
 triage/leads work in the same session; this is the leads half. The sweep's own
@@ -23075,7 +23075,7 @@ pointing at it, so there is one live place per lead rather than three.
 ### Eleven worked, seven shipped (filtered to 100 <= N <= 50,000 and 8 <= items <= 700, then by volume)
 
 Nine are tabled here; the last two were worked after this table was written and
-are at the end of the entry. **Batch total: 31 tables, 350,189 responses.**
+are at the end of the entry. **Batch total: 33 tables, 367,481 responses.**
 
 | deposit | licence | outcome |
 |---|---|---|
@@ -23387,6 +23387,64 @@ the 2026-09-08 ruling makes the adaptation's terms the ones that matter.
 `sport_satisfaction_N` pattern would over-fire the way the register's short-stem
 patterns already do. `irw-validate` now fires on the table, which is the row
 working as intended; the response table ships regardless.
+
+### A ninth: Batool & Khan 2024 — and the batch's one real data repair
+
+`10.5281/zenodo.13760224` (CC BY 4.0), 272 Pakistani university students, the
+BFI-44 and the 20-item GAAIS. `batool_2024_big_five` and
+`batool_2024_ai_attitudes`, 17,292 responses. **Batch total: 33 tables, 367,481
+responses from 9 deposits.**
+
+**The responses are un-reversed back to raw agreement, and that is the decision
+worth checking.** The deposit stores 15 of the 44 BFI items and all 8 GAAIS
+negative-subscale items under an `R_` prefix, *already reverse-scored* —
+`R_BFI_6_E` is "Is reserved" and correlates **+0.333** with the rest of the
+extraversion block, which only happens if the stored value has been flipped.
+Independently confirmed: the deposit's own subscale scores equal the mean of
+these stored columns to four decimal places, so these are exactly the numbers
+the depositor averaged.
+
+Shipping that as-is would put two opposite response directions in one table — 5
+meaning "agree strongly" on 29 BFI items and "disagree strongly" on the other 15
+— which is the `resp_ambiguous` defect (#1827). Of the two ways to make it
+consistent, un-reversing is the faithful one: it reconstructs what the
+respondent actually endorsed, it is exact (`6 - x`), and the `R_` prefix names
+precisely which columns to undo. Item keying — that agreeing with "Is reserved"
+scores *low* on extraversion — is a scoring fact about the instrument, not a
+property of the response scale, and belongs to whoever scores it.
+
+**And the deposit missed one reversal, which this does not inherit.** The BFI-44
+has sixteen reverse-keyed items. This deposit flipped fifteen. The sixteenth is
+`BFI_31_E`, "Is sometimes shy, inhibited", whose two same-polarity siblings —
+item 6 "Is reserved" and item 21 "Tends to be quiet" — both carry the `R_`
+prefix and both correlate positively with the block. Item 31 is the only one of
+the eight extraversion items with a NEGATIVE corrected item-total correlation
+(-0.355, flipping to +0.355 reversed), so it was left raw while its siblings
+were flipped, and the depositor's own `BFI_E` score carries that through. Under
+the raw-agreement convention it needs no special handling at all — it is already
+raw — and it comes out consistent with everything else for the first time. The
+script asserts the whole diagnosis rather than trusting it.
+
+Three isolated cells coded 6 on a documented 1-5 scale (one each in
+`R_BFI_27_A`, `GAAIS_7_P`, `GAAIS_18_P`) are dropped as data-entry errors: one
+cell in one item, where the real extremes are used hundreds of times. They are
+also why two of the seven subscale means differ from the recomputed ones in the
+fourth decimal — the depositor summed them.
+
+The `R_` prefix is the one part of the source column name NOT kept in the item
+code, because it records a scoring state this script has undone and keeping it
+would assert something false about the shipped value. `bfi_6_e` means "BFI item
+6, extraversion", true either way, and the prefix is recoverable from the source
+file.
+
+**Two register patterns fixed as a side effect.** Item text is blocked by ruling
+here (BFI-44 `block`, GAAIS `hold`), but neither gate fired at first: the BFI-44
+row's `BFI_[NEOAC]_[0-9]` alternative puts the factor letter *before* the number
+and so could not match `bfi_1_e .. bfi_44_o`, and the GAAIS row's
+`match_item_code` was **empty**, so no GAAIS table could ever trip it. Both are
+now filled in, anchored and number-then-letter, and both fire. That is the
+"a miss is not an all-clear" warning in the skill arriving as a concrete pair of
+misses.
 
 ### The `surf` (DataverseNL) question, measured and answered
 
