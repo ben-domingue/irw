@@ -53,10 +53,12 @@ four, `irw_output/MANIFEST_2026-10-29b.txt`.
   dictionary rows and 34 tag rows into biblio and tags. Nothing here needs
   pasting.
 
-- [ ] **PR #3312 still needs merging.** It holds the three processing scripts,
-  the dictionary/tag/provenance/mapping rows and the leads-file verdicts for
-  everything just uploaded. Until it merges, the tables are live and
-  undescribed.
+- [x] **PR #3312 merged 2026-10-29.** It carried the four processing scripts,
+  the dictionary/tag/provenance/mapping rows and the leads-file verdicts.
+  **Four later commits on that branch did NOT make it into the squash** (the
+  upload stamps, the codebook_at_ingest reconciliation and these TODO edits);
+  they land separately, which is what this entry is here to record. Check a
+  squash picked up the whole branch when commits are pushed close to a merge.
 
 - [ ] **A covariate-label harvest is owed for `akter_2026_*` after the release,
   and ONLY for those seven.** That script reads an SPSS `.sav` and ships ten
