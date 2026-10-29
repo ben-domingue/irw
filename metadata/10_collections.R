@@ -38,6 +38,22 @@ META_RULES <- c("var", "var_any", "var_prefix", "meta")
 
 stop_if <- function(cond, ...) if (isTRUE(cond)) stop(..., call. = FALSE)
 
+##Both outputs are tracked CRLF, and `readr::write_csv` writes LF, so a plain
+##write converts every line and puts all 3,222 memberships in the diff --
+##which buries the handful of rows that actually moved. Same failure and the
+##same fix as `refresh_rows.R` (#3239): detect the ending from the existing
+##file's bytes and write back the one it found. Never assume an ending per
+##repository, only per file.
+write_keeping_eol <- function(df, path) {
+    eol <- "\n"
+    if (file.exists(path)) {
+        first <- readLines(path, n = 1, warn = FALSE)
+        raw1 <- readBin(path, "raw", n = nchar(first, type = "bytes") + 2L)
+        if (length(raw1) && any(raw1 == as.raw(13))) eol <- "\r\n"
+    }
+    readr::write_csv(df, path, eol = eol)
+}
+
 ##---- inputs -------------------------------------------------------------
 
 read_registry <- function() {
@@ -226,11 +242,43 @@ main <- function() {
     reg$definition <- ifelse(reg$coverage == "tagged-subset-only",
                              paste0(reg$definition, tagged_note), reg$definition)
 
+    ##Recency belongs in the definition for the same reason the denominator
+    ##does. `curated-only` says a human chose the members and says nothing
+    ##about WHEN, so a list frozen in September reads exactly like one checked
+    ##this morning, while `tagged-subset-only` has carried its caveat all
+    ##along (review R-28, ben-domingue/irw#3225).
+    ##
+    ##The date is the member file's last revision taken from git, not a cell a
+    ##maintainer has to remember to bump: an unbumped date is worse than no
+    ##date, because a stale one reads as information rather than as age. Where
+    ##git is not available -- a tarball, a reviewer's copy, and this is the one
+    ##stage that must run without credentials -- the note drops the date and
+    ##keeps the claim, which is still the part a reader needs.
+    curated_file <- file.path(CURATED, paste0(reg$collection, ".csv"))
+    file_revised <- function(path) {
+        d <- tryCatch(suppressWarnings(
+            system2("git", c("log", "-1", "--format=%ad", "--date=short",
+                             "--", shQuote(path)),
+                    stdout = TRUE, stderr = FALSE)),
+            error = function(e) character(0))
+        if (!length(d) || is.na(d[1]) || !nzchar(d[1])) NA_character_ else d[1]
+    }
+    is_curated <- reg$coverage == "curated-only" & file.exists(curated_file)
+    for (i in which(is_curated)) {
+        d <- file_revised(curated_file[i])
+        reg$definition[i] <- paste0(
+            reg$definition[i],
+            if (is.na(d))
+                " (hand-curated; the member list is not re-checked against tables added since)"
+            else sprintf(paste0(" (hand-curated; member list last revised %s,",
+                                " not re-checked against tables added since)"), d))
+    }
+
     reg <- reg[, c("collection", "label", "kind", "definition", "rule",
                    "coverage", "basis", "n_tables", "maintainer", "added")]
 
-    readr::write_csv(reg, OUT_COLL)
-    readr::write_csv(mem, OUT_MEM)
+    write_keeping_eol(reg, OUT_COLL)
+    write_keeping_eol(mem, OUT_MEM)
 
     per_table <- table(table(mem$table))
     lines <- c(
