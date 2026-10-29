@@ -150,8 +150,17 @@ decision, 7 of those shipped.
   script per deposit, not a reader fix. **Do not re-run the reader on them**;
   2026-10-28b already proved that changes nothing.
 
-- [ ] **Two deferrals with named blockers, both worth a ruling rather than more
-  work:**
+- [ ] **Three deferrals with named blockers, each worth one answer rather than
+  more work:**
+  - `10.5281/zenodo.22276576` -- Aldosari, 377 graduate students, four clean
+    integer blocks (`AI1-17`, `HP1-12`, `OP1-10`, `SS1-23`), ~23,000 responses,
+    everything else about it clean. The deposit's description names exactly
+    three constructs (AI attitudes, the Dualistic Model of Passion, academic
+    stress), so the obvious reading is AI = AI attitudes, HP/OP = harmonious and
+    obsessive passion, SS = academic stress — but that is inferred from the
+    FILE NAME and it does not fit, because Vallerand's Passion Scale is 6 + 6
+    items and this is 12 + 10. Shipping would mean naming four constructs on a
+    guess the item counts contradict. One look at the paper settles it.
   - `10.7910/DVN/HGTS9H` -- a CC0 replication package whose data file is
     `afrobarometer r9.tab`, i.e. **Afrobarometer Round 9** redistributed inside
     it. 3,392 respondents x 135 Q-prefixed items, so it is a large, real
