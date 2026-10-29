@@ -1,5 +1,58 @@
 # IRW Automated Finding — TODO
 
+## NEXT UP, at Ben's request (2026-10-29)
+
+- [ ] **Work `10.5683/sp3/wcun0s` first: 23,781 respondents x 38 items.** A
+  Borealis deposit, `cc-by-nc`, `recoverable_format`, file `gpo-ai_data.csv`.
+  **No decision is owed on it** -- NC proceeds under `datastandard.md`'s
+  2026-10-01 ruling, with the restriction propagating through
+  `Derived_License`. It is the largest row in
+  `leads/nc_licence_pending_ruling_2026-10-18.csv`, and bigger than anything in
+  the 2026-10-29 batch.
+
+  That file's other 55 rows are the same shape and the same non-decision: its
+  own `status` column reads "todo: NC is a lead -- the filter was aligned with
+  datastandard.md's 2026-10-01 ruling on 2026-10-19". 27,697 respondents in
+  total, 54 of 56 plainly `cc-by-nc` or `cc-by-nc-sa`. They were being carried
+  in this file as if they needed a ruling; they need working.
+
+- [ ] **Before asking Ben for a licence or rights ruling, check whether one
+  already exists.** Searched 2026-10-29 after several questions were put to him
+  that his own written rules answered. The rules live in four places:
+
+  1. `datastandard.md` ss "Before you start" -- the data-licence decision table
+     (ruled 2026-10-01), the flat N>=100 floor and the >=3-item floor (ruled
+     2026-10-19).
+  2. `itemtext/instrument_rights_register.csv`, the `rule` column -- 379 rows
+     carrying prior rulings as citable precedent.
+  3. `irw_validate/rights.py` -- the write-path enforcement, whose docstring
+     holds the "a hit is a lead, a miss is not an all-clear" rules.
+  4. `processing_notes/Licensing.txt` -- the permission-request template for
+     the no-licence branch.
+
+  Three questions that had been carried as open were already governed:
+
+  - **Third-party data inside a permissively licensed replication package.**
+    `datastandard.md`: "Scraped or relabelled third-party data ... **do not
+    host**, even under a permissive licence. The re-uploader's licence does not
+    clear data they did not own; the originator's terms govern." That is the
+    Afrobarometer / ESS / PISA / Caucasus Barometer case, and the four
+    closures on 2026-10-29 were correct by rule, not by judgement.
+  - **A named third-party instrument with no located grant.** The 2026-10-15
+    ruling (counsel 2026-10-08 plus the Stanford library reply) already makes
+    it a `hold`, not a permission. So the CSES, Neff's SCS, the SPIN and the
+    other instruments listed in this file as "needs a rights call" do not need
+    one -- `hold` IS the ruled outcome, and writing the row is agent work. A
+    call is only wanted to move one off `hold`.
+  - **A 4-item table.** The item floor is 3, so 4 clears it; `dvn/vidgon` and
+    `zenodo.22035093` were deferred on thinness against a rule that permits
+    them.
+
+  What is NOT covered by a written rule, and so is genuinely Ben's: whether to
+  correct an already-published table (corpus trust), and any case
+  `datastandard.md` ends with -- "Anything that fits none of these goes to
+  ben-domingue."
+
 ## ALL SHARDS RELEASED 2026-10-20 (ben-domingue)
 
 Ben released every shard on 2026-10-20, after the 87-table repos batch and its
@@ -353,14 +406,29 @@ rejected on content (eleven of them as one class) and 2 are below the N floor.
   responses; its wording is owed a ruling. Connor et al. (2000), British Journal
   of Psychiatry; the starting point is whether Duke University publishes terms.
 
-- [ ] **A live table carries a US state, and the geographic ruling says it
-  should not — Ben's call, not acted on.** `gries_2011_moral_foundations` is
-  live in shard 8 carrying `cov_state` (plus `cov_south`, `cov_black`,
-  `cov_hispanic`). It shipped 2026-10-21, one day AFTER the 2026-10-20
-  geographic ruling that this batch used to drop a US state from
-  `teriba_2026_*`. Found because the deposit resurfaced as a lead and was
-  cross-checked. Whether a published table carrying a state wants correcting is
-  a corpus-trust decision; flagging it rather than touching it.
+- [x] **RULED 2026-10-29 (ben-domingue): drop `cov_state` and re-upload
+  `gries_2011_moral_foundations`.** The table is live in shard 8 having shipped
+  2026-10-21 with `cov_state`, one day after the 2026-10-20 geographic ruling.
+  The script had KEPT the state deliberately, arguing a state is standard survey
+  demography at 50-6,000x the population of a county while the ruling's concern
+  was block-to-county locating; that reading was put to Ben and he ruled the
+  other way.
+
+  `data/gries_2011_moral_foundations.py` now drops it, and the corrected table
+  is staged in `irw_output/` -- 12,000 rows, 1,000 ids, 12 items, identical in
+  every respect but the one column, and clean on `irw-validate --profile
+  upload`.
+
+- [ ] **The gries re-upload is a REPLACE and has not been done.** A plain
+  re-upload of an existing table has appended rather than replaced three times
+  before, doubling the row count without `numRows` showing it. Verify with
+  `SELECT COUNT(*)`; 24,000 means it appended and the table wants deleting and
+  recreating. The MANIFEST beside the file says so too.
+
+- [ ] **One further call the gries ruling did not reach:** `cov_region_4`,
+  `cov_region_9` and `cov_south` are still on that table. A census region is
+  coarser again than a state, and the question put to Ben was about the state,
+  so they were left. If regions should go too it is the same one-line change.
 
 - [ ] **`n_participants` in a triage row is a resolver's GUESS. Check
   `nunique()` on the id column before ranking a repeated-measures lead by
@@ -1770,7 +1838,9 @@ Nothing here is uploaded. Ben held PR #3089 and all uploads deliberately on
 - [ ] **`zenodo.20550197`** duplicates live data: 200 of its 201 distinct
   OSTES response vectors already exist in `gonzalezros_2025_ostes`. Supersede
   the live table, ship only the ~425 new respondents, or skip?
-- [ ] **`zenodo.20475015`** (860x30 AIOAS, clean) held only because the
+- [x] **RULED 2026-10-29 (ben-domingue): SKIP `zenodo.20475015`.** The naming question is closed by closing the deposit. 860 respondents x 30 AIOAS items, clean, would have been one table -- but its Zenodo creators are literally "Anonymous, Anonymous" with no linked paper, so `authorname_year_construct` has no author to use and there is no citation to give. Ben was offered a repository-stub name (`zenodo_20475015_aioas`), `anonymous_2025_aioas` and an instrument-first name, and chose to skip. **This is a precedent, not a one-off: a deposit with no attributable author and no paper does not ship, however clean its data.** Original note below.
+
+  **`zenodo.20475015`** (860x30 AIOAS, clean) held only because the
   creators are literally "Anonymous, Anonymous" with no paper, so there is no
   author name for the file-naming convention. Same question as DVN/YB5PVO;
   one ruling settles both.
@@ -1855,7 +1925,9 @@ this list saying so.
   premkumar_2020_schizotypy, hung_2026_grit_mindset, karas_2022_cetscale,
   valenciano_2022_paqc. Run `python3 metadata/covariate_labels/build.py` after the release
   and commit covariate_labels.csv.
-- [ ] **`zenodo.20475015` needs a naming ruling, not work.** 860 respondents x 30 AIOAS
+- [x] **RULED 2026-10-29 (ben-domingue): SKIP `zenodo.20475015`.** The naming question is closed by closing the deposit. 860 respondents x 30 AIOAS items, clean, would have been one table -- but its Zenodo creators are literally "Anonymous, Anonymous" with no linked paper, so `authorname_year_construct` has no author to use and there is no citation to give. Ben was offered a repository-stub name (`zenodo_20475015_aioas`), `anonymous_2025_aioas` and an instrument-first name, and chose to skip. **This is a precedent, not a one-off: a deposit with no attributable author and no paper does not ship, however clean its data.** Original note below.
+
+  **`zenodo.20475015` needs a naming ruling, not work.** 860 respondents x 30 AIOAS
   items, 1-5, clean, would be one table with `cov_study`. Deposit creators are
   "Anonymous, Anonymous" and no published paper exists, so there is no author name. Same
   question as the 2026-10-10 DVN/YB5PVO lead -- resolve both together.

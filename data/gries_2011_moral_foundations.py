@@ -36,10 +36,15 @@ cov_*, not hashed, not truncated to a coarser prefix: `casscountyfips` (504
 distinct county FIPS codes) and `countyname` (505 distinct "County ST"
 strings). A county of residence beside age, race, education and income in the
 same row is the re-identification surface the 2026-10-20 geographic-code
-ruling is about. `inputstate`, `REGION_4`, `REGION_9` and `SOUTH` are kept:
-a state or a census region is standard survey demography at 50-6,000x the
-population of a county, and the ruling's concern is block-to-county level
-locating.
+ruling is about. `inputstate` is ALSO dropped, on ben-domingue's 2026-10-29
+ruling. This script originally kept it, arguing that a state is standard survey
+demography at 50-6,000x the population of a county and that the ruling's
+concern was block-to-county locating. That reading was put to Ben when the
+deposit resurfaced as a lead and he ruled the other way, so the state goes and
+the version shipped on 2026-10-21 is superseded. `REGION_4`, `REGION_9` and
+`SOUTH` are still kept -- a census region is coarser again, and the ruling put
+to him was about the state. If they should go too that is a further call, and
+it is flagged in TODO.md rather than taken here.
 
 `id` is the deposit's own `caseid` (1,000 unique values in 9-1543, i.e. this
 sample is a subset of the larger study's case numbering). It is a survey case
@@ -101,7 +106,6 @@ COV_MAP = {"weight1000": "cov_survey_weight",
            "HISPANIC": "cov_hispanic",
            "EDUC": "cov_education",
            "INCOME_NEW": "cov_income",
-           "inputstate": "cov_state",
            "REGION_4": "cov_region_4",
            "REGION_9": "cov_region_9",
            "SOUTH": "cov_south",
@@ -118,6 +122,9 @@ DROPPED_GEO = {
                       "forward in any form",
     "countyname": "county name and state (505 distinct) -- geographic code, "
                   "DROPPED, not carried forward in any form",
+    "inputstate": "US state -- DROPPED on ben-domingue's 2026-10-29 ruling, "
+                  "which settled the question this script originally decided "
+                  "the other way (see the docstring)",
 }
 
 
