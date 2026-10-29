@@ -59,6 +59,92 @@ merged, and the 552-row `tags/tags_auto.csv` merge is PR #3133.
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## Leads pass 2026-10-29 — 22 tables + 3 item text tables, AWAITING UPLOAD
+
+Full write-up in `BATCH_LOG.md` (2026-10-29). Ben asked for the 195 `unworked`
+leads of the two 2026-10-28 batches; **104 now carry a durable verdict, 91
+remain.** Seven deposits shipped.
+
+- [ ] **22 response tables (295,681 responses) + 3 item text tables need
+  uploading.** `automated_finding/irw_output/` (with a MANIFEST) and
+  `itemtext_output/`. **Response tables first.** All 22 pass `irw-validate
+  --profile upload` with zero failures; all 3 item text tables pass
+  `normalize_nulls.R` -> `validate_items.R --resp-csv` -> `audit_batch.R
+  --resp-dir` -> `irw-validate`. 22 dictionary rows and 22 tag rows are staged,
+  so nothing needs pasting. Stamp `uploaded=` on the 3 shipped
+  `itemtext_provenance.csv` rows and the 3 `mapping_verification.csv` rows only
+  after Ben confirms.
+
+- [ ] **91 unworked leads remain**, in `leads/repos_leads_2026-10-28.csv` and
+  `...-28c.csv` with their flags. Mostly `recoverable_format` rows under about
+  8,000 responses each, which each need their own processing script; plus the 8
+  parse failures and one HTTP 504 described below. The 2026-10-29 screening
+  output lived in the session scratchpad, so a later pass re-downloads -- the
+  DOIs and flags in the leads files are what survive.
+
+- [ ] **A Dataverse GUESTBOOK gate is a nameable class the triage reports as a
+  plain download failure.** Five of the 55 retried downloads return HTTP 400
+  with `"You may not download this file without the required Guestbook
+  response for guestbookID N"`. Unlike the other 19 dataverse refusals this one
+  **a person can clear by filling the form**, so it deserves its own flag
+  rather than being pooled with dead links. Worth a `doi_hygiene`-style
+  detector so the reason reaches the leads file by itself.
+
+- [ ] **An API listing is not proof the bytes exist.** 15 figshare records are
+  live in `api.figshare.com/v2/articles/<id>` with files listed, and every
+  download path returns S3 `NoSuchKey`. The standing rule is that a figshare
+  202 means nothing and the API is the test; the API is the *better* test and
+  still not sufficient. If the resolver can cheaply HEAD one file before
+  reporting a deposit as resolvable, that is 15 wasted triage slots back.
+
+- [ ] **8 parse failures that download fine**, left unworked rather than
+  claimed fixed: 4 ragged CSVs (`Expected 17 fields in line 11, saw 21`, i.e. a
+  multi-block file with more than one table stacked in it), 2 truncated `.sav`s,
+  1 bad `.RData`, 1 undeclared encoding. Each is recoverable with a per-deposit
+  reader. One of the `.sav`s, `10.7910/DVN/IFV44M`, is also the 10-28 sweep's
+  verified name/email PII skip and stays closed on that ground.
+
+- [ ] **One HTTP 504** (`10.4121/20763007`, 4TU.ResearchData) is genuinely
+  transient and is the one row in that bucket worth retrying in a later sweep.
+
+- [x] **The `10.7910/DVN/HGTS9H` deferral is CLOSED.** It holds
+  `afrobarometer r9.tab` (3,392 x 400) plus `experimental data.tab` (360 x 40).
+  The Afrobarometer half is third-party survey data that a CC0 replication
+  package cannot relicense; the experimental half is a public-goods game, not
+  an item battery. Neither ships. The same reading closed three siblings in this
+  batch: the ESS (`DVN/YVMPNW`), PISA (`DVN/UVLSIY`) and Caucasus Barometer
+  (`DVN/0K34R2`).
+
+- [ ] **One register row was written and one rights answer is owed on it.** The
+  CSES (Core Self-Evaluations Scale, Judge, Erez, Bono & Thoresen 2003) had no
+  row; this batch wrote one with verdict `hold`, because the originating article
+  is paywalled and no statement from the authors or publisher was located. The
+  row quotes all 12 stems from the Polish `.sav` and names the one thing to
+  check: the SJDM/UBC DMIDI database describes the CSES as nonproprietary, which
+  is a secondary summary rather than the rights holder, and its page refused the
+  connection on 2026-10-29. One confirmation turns `kopczynski_2021_core_self_
+  evaluations` into an item text table with no further extraction work.
+
+- [ ] **Two item text tables are one identification away, not one extraction
+  away.** `karahan_kaplan_2024_mindfulness` has all twelve Turkish stems as its
+  column headers; the article describes a 12-item scale whose attention /
+  awareness / present-focus / acceptance facets and item count match the CAMS-R
+  (Feldman et al. 2007), but never names it, and no register row was written on
+  a resemblance. Confirming the instrument is the whole job. Likewise
+  `arciniegas_romero_2026_math_anxiety` holds all 12 Spanish stems and is held
+  only because the register's existing Fennema-Sherman row says `hold` -- it is
+  now a SECOND table waiting on that one answer.
+
+- [ ] **13 items x 429 respondents deliberately left unshipped** from
+  `10.3389/fpsyg.2024.1432328.s001`. The article splits emotional exhaustion and
+  emotional demands 7 and 6; the file's block order is not the article's
+  presentation order, and the content does not settle the boundary (two items
+  that read as exhaustion are plausibly demands). Any split would halve one
+  instrument or merge two. What unlocks it: the article's measurement-model
+  table, which is absent from the HTML full text, or a word from the authors.
+  Noted also that the same article describes "5-point" measures while all 34 of
+  its Likert columns hold 1-6 -- the file is what shipped.
+
 ## Repos sweep 2026-10-28 (mode 3) — 134 terms, 8 tables, UPLOADED 2026-10-29
 
 Discovery done: **1,204 candidates** in 100 minutes over 8 connectors (zenodo

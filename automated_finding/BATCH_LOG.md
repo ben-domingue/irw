@@ -24111,3 +24111,176 @@ it: the covariate-label harvest for `galanis_2025_*` and `aksin_2023_*` ×
 FFMQ, the 25-item Spanish DERS, the mind-wandering measure and the Daydreaming
 Frequency Scale) — with the standing warning that the register's existing DERS
 row is the *28-item* adaptation and its `block` must not be read across.
+
+## 2026-10-29 — the 195 unworked leads worked: 22 tables, 295,681 responses
+
+Ben asked for the 195 `unworked` rows of `leads/repos_leads_2026-10-28.csv`
+(67) and `...-28c.csv` (128). **104 of the 195 now carry a durable verdict and
+91 remain**, which is where the session ran out, not where the work stops.
+Nothing here is uploaded.
+
+### The 73 download failures were three different things wearing one label
+
+All 55 that were not already licence-blocked were re-downloaded, and **every
+one failed again** — so these are not transient. Classifying the cause turned
+an opaque bucket into verdicts:
+
+- **24 restricted** (HTTP 401/403). A permanent access gate.
+- **15 figshare records live in the API but dead at the storage layer.** The
+  API still lists their files; every download path returns S3 `NoSuchKey`. So
+  **an API listing is not proof the bytes exist** — worth knowing, because the
+  standing rule is that a figshare 202 means nothing and the API is the test.
+  The API is the better test and still not sufficient. Beside that, the listed
+  payloads are article figures (`.tif`/`.jpg`/`.png`) plus 5.6 KB
+  `Table_N.xls` summaries, so they would fail on content anyway.
+- **5 behind a Dataverse GUESTBOOK.** HTTP 400 with `"You may not download
+  this file without the required Guestbook response for guestbookID 110"`.
+  **A nameable class the triage reports only as a plain download failure**, and
+  one a person can actually clear by filling the form — unlike the other 19
+  dataverse refusals. Worth a `doi_hygiene`-style detector so the reason
+  reaches the leads file by itself.
+- **8 parse failures** that download fine: 4 ragged CSVs (`Expected 17 fields
+  in line 11, saw 21` — a multi-block file), 2 truncated `.sav`s, 1 bad
+  `.RData`, 1 undeclared encoding. Recoverable in principle with a per-deposit
+  reader; left unworked rather than claimed fixed.
+- **1 HTTP 504**, genuinely transient, left for a later sweep.
+- **2 that now parse cleanly.** The triage was simply wrong about them; they
+  are reopened rather than closed.
+
+One of the truncated `.sav`s is `10.7910/DVN/IFV44M`, which the 10-28 sweep had
+already closed as a verified name/email PII skip. It stays closed on that
+ground.
+
+### Seven deposits worked, 22 tables
+
+**Aspell 2019** (CC0, 815 Malay-speaking adults) — 7 tables, 95,731 responses:
+MAIA 32 items, SATAQ-4 30, DMS 15, MAAS 15, BAS 10, RSES 10, FAS 7.
+
+Two things the file forced, both asserted in code rather than in prose. The
+stored MAIA codes are 1-6 and the MAIA's scale is 0-5, so `resp` is recoded —
+and *the file says to*: every MAIA value label pairs its code with the
+published anchor number, "Tidak pernah / 0" through "Selalu / 5". The script
+reads the shift out of the labels and fails if they stop saying it, rather than
+hardcoding an off-by-one across 32 items. And **263 cells are imputed**: 0.26%
+of item cells hold a non-integer, and some fall outside their own documented
+scale (MAIA reaches 6.21 against a maximum of 6; SATAQ 0.85 against a minimum
+of 1). A value outside the response set cannot be a response. Any respondent
+with an imputed cell in a block is dropped from that table entirely, because
+mean or EM imputation lands on an integer some of the time and a block showing
+imputation anywhere is not trusted anywhere in it. The residual risk is stated
+in the docstring: an imputed integer in an otherwise clean row is invisible.
+
+The same assert caught a separate defect — one respondent answered 6 to
+`SATAQ_1` and `SATAQ_2` against a documented 1-5 scale. Isolated to one row and
+one above the maximum, that is a data-entry error, not a second scale.
+
+**Kopczynski & Bartoszek 2021** (CC BY, 1,000 Polish students) — 5 tables,
+81,000 responses, **3 of them with item text**. The `.sav` is unusually well
+documented: 98 of 109 variables carry their full Polish stem as the variable
+label and 94 their anchors as value labels. So item text here is a *rights*
+question, not an availability one, and the five blocks split three ways: the
+MSPSS and FCV-19S ship (both registered `ship`), the 23-adjective
+pandemic-appraisal checklist ships (study-authored), the WHOQOL-BREF is held
+(`block`), and **the CSES had no register row at all, so this batch wrote one
+with verdict `hold`** — the originating article is paywalled and no statement
+from the authors or publisher was located. That row quotes all 12 stems and
+names the one specific thing to check: the SJDM/UBC DMIDI database calls the
+CSES nonproprietary, which is a secondary summary and not the rights holder,
+and its page refused the connection on 2026-10-29. One confirmation turns it
+into a ship.
+
+The Polish wording ships in the base fields with no English gloss, because the
+deposit publishes none and an IRW-written translation would be generated text
+owing a disclosure.
+
+`kw1_27` is flagged as NOT a WHOQOL item but the authors' own addition about
+satisfaction with remote study, so a later pass does not read the WHOQOL block
+onto it.
+
+**Akkus Cutuk 2025** (CC BY, 711 Turkish students) — 4 tables, 42,660
+responses. All four instruments run 1-5, so a prefix split would have been a
+guess; they are separated on their **distinct anchor sets**, which the file
+supplies and the script asserts.
+
+**Arciniegas-Romero 2026** (CC BY, 2,508 Ecuadorian students) — 1 table, 30,096
+responses, 12 items, **13 schools as `cluster_id`**.
+
+**Zheng et al. 2020** (CC BY, 646 Chinese female undergraduates) — 2 tables,
+21,910 responses: SCSQ 20 items, HADS 14.
+
+**Uzdil 2023** (CC BY, 1,175 Turkish adolescents) — 1 table, 15,275 responses,
+SOC-13, 6 schools as `cluster_id`.
+
+**Karahan Kaplan et al. 2024** (CC BY, 429 Turkish healthcare workers) — 2
+tables, 9,009 responses: UWES-9 and a 12-item mindfulness scale.
+
+### The recurring finding: four deposits store SCORES where responses belong
+
+This is the single most useful thing the batch turned up, and it appeared four
+times in seven deposits. In each case the file holds a per-item number that is
+*not* the administered response, and in each case the source itself is what
+proves it:
+
+- **Uzdil's EAT-26**: value labels document a SIX-point administered scale
+  (1 "hiçbir zaman" .. 6 "her zaman") and the file holds 0-3, with 22,648 of
+  30,550 cells (74%) equal to 0 — the EAT-26's published scoring, which
+  collapses *sometimes*, *rarely* and *never* all to 0. Three of six
+  administered categories are indistinguishable. Not shipped.
+- **Uzdil's self-esteem scale**: labels document FOUR points, file holds 0/1.
+  Dichotomised. Not shipped.
+- **Zheng's EDI**: file holds 0-3 with 59% zeros; the *article* says the EDI's
+  "response options scored 0-5". Not shipped — 64 items of it.
+- And the inverse, which is why the rule is not "distrust every file":
+  **Ibaceta's codebook** on 10-28 flagged its reversals `reverse_before_scoring`,
+  meaning they had NOT been applied, so those values were raw. Same evidence
+  type, opposite correct action.
+
+Three different kinds of evidence settle it — value labels, the article's
+Measures section, and a codebook column — and the cheapest check is the first:
+**when a block's labels document more categories than the file contains, the
+file holds a score.** `uzdil_2023_soc13`'s sibling block passed exactly this
+test and shipped.
+
+### Three school-level `cluster_id`s, with the names withheld
+
+Three deposits identify the respondent's school. The first instinct was to drop
+the column under the 2026-10-20 geographic ruling, and `uzdil_2023_soc13` was
+written that way. That was wrong twice over: it threw away real nesting, and it
+was inconsistent with how `demirdelen_2023_*` shipped a teacher-level
+`cluster_id` a day earlier. All three now ship the opaque integer code as
+`cluster_id` and leave the school NAMES — which live only in the SPSS value
+labels — behind. The ruling drops a geographic *covariate*; it does not require
+discarding a design.
+
+`zheng_2020_*`'s clusters are very unbalanced (381, 152, 67, 32, 11, 1, 1, 1).
+The three singletons are kept rather than merged or trimmed, because they are
+what the deposit says; the imbalance is in the script and the dictionary row so
+a user meets it in the documentation rather than in their output.
+
+### One PII skip, verified
+
+`10.5281/zenodo.18369927` carries a `Nama` column populated for all 505 rows
+with 496 distinct values averaging 1.9 words — respondents' personal names.
+Name tier, so the whole candidate is skipped. Painful: its column headers are
+the full Indonesian item stems, which would have made an item text table
+immediately. Only the depositor publishing a name-free file can unblock it.
+
+### 10 rejected on content, and three of them are one class
+
+`10.7910/DVN/YVMPNW` is the **European Social Survey** (54,673 respondents,
+ESS design weights), `DVN/UVLSIY` is **PISA**-derived, `DVN/0K34R2` is
+**Caucasus Barometer** — each redistributed inside a CC0 replication package
+that cannot relicense a third party's survey. The same reading **closes the
+standing `10.7910/DVN/HGTS9H` deferral**: it holds Afrobarometer R9 plus a
+public-goods game, so neither half ships. The other rejections are country-year
+and state-year panels, trial-level RT data, and files whose psychometric
+columns are all composites or z-scores.
+
+### What is left
+
+**91 unworked**, all in the two leads files with their flags: the bulk are
+`recoverable_format` rows below the ~8,000-response mark that each need their
+own processing script, plus the 8 parse failures and the one HTTP 504. The
+screening JSON for 34 of them is in this session's scratchpad only, so a later
+pass re-downloads; the leads files carry the DOIs and flags, which is what
+survives.
