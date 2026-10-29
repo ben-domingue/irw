@@ -51,20 +51,25 @@ rather than smoothed over: `rtop` does NOT equal the sum of `r1..r10` -- they
 agree on only 2.6% of rows -- so it is a total of something else again, which
 is a further reason not to read the `r` block as responses.
 
-**Three columns are dropped on identification grounds, and the respondents
-being minors is why the first one goes.** `lise` names which of six specific
-named schools in one Turkish town the respondent attends (Yozgat Lisesi,
-Atatürk Sağlık Meslek Lisesi, ...); in a sample aged 13-19 that is a fine-grained
-locator, so it goes. `eskidenyasyer` and `simdiyasadıgıyer` are settlement-size
+**`cluster_id` is the school, and the school NAMES are deliberately not
+shipped.** `lise` is a code 1-6 whose value labels name six specific schools in
+one Turkish town (Yozgat Lisesi, Atatürk Sağlık Meslek Lisesi, ...), in a sample
+aged 13-19. The names are a fine-grained locator for minors and do not ship.
+The CODE does, as `cluster_id`, because 1,175 adolescents in 6 schools is real
+nesting that a user fitting a multilevel model needs, and an opaque 1-6 index
+carries no locating information by itself.
+
+`eskidenyasyer` and `simdiyasadıgıyer` ARE dropped: they are settlement-size
 codes (village / town / district / city / metropolis), i.e. geographic codes,
-dropped under the 2026-10-20 ruling, which is drop-the-column and ship the rest.
+dropped under the 2026-10-20 ruling, which is drop-the-column and ship the
+rest.
 
 PII: none beyond those three. Every column is numeric, there is no identifier
 (`id` is the row index), and no name, date or free-text column; the screen below
 prints its denominator.
 
 Output: one table, 15,275 responses -- 1,175 adolescents x 13 items, resp 1-7.
-  * uzdil_2023_soc13 -- 13 items, resp 1-7
+  * uzdil_2023_soc13 -- 13 items, resp 1-7, 6 clusters (schools)
 """
 from __future__ import annotations
 
@@ -112,8 +117,6 @@ SCORED_BLOCKS = {
 }
 
 DROP = {
-    "lise": "names which of six specific schools in one town the respondent "
-            "attends, in a sample aged 13-19 -- a fine-grained locator",
     "eskidenyasyer": "settlement-size code, dropped under the 2026-10-20 "
                      "geographic ruling",
     "simdiyasadıgıyer": "settlement-size code, dropped under the 2026-10-20 "
@@ -175,7 +178,7 @@ def main() -> None:
     print(f"variable labels present: {len(labelled)} of {len(df.columns)}, and "
           f"all of them demographic ({labelled[:4]}...) -- no item stems, so "
           "no item text can be recovered from this file")
-    assert set(labelled) <= set(COV_MAP) | set(DROP), labelled
+    assert set(labelled) <= set(COV_MAP) | set(DROP) | {"lise"}, labelled
 
     show_scored_blocks(df, meta)
 
@@ -191,12 +194,21 @@ def main() -> None:
 
     df = df.reset_index(drop=True)
     df["id"] = range(1, len(df) + 1)
+    df["cluster_id"] = df["lise"].astype(int)
+    sizes = df["cluster_id"].value_counts()
+    schools = meta.variable_value_labels.get("lise") or {}
+    print(f"cluster_id is the school: {df['cluster_id'].nunique()} clusters, "
+          f"{sizes.min()}-{sizes.max()} students each. The six school NAMES "
+          f"are in the value labels (e.g. {sorted(schools.values())[:2]}) and "
+          "are not read into any shipped column")
+    assert df["cluster_id"].nunique() == 6, df["cluster_id"].nunique()
     for src, dst in COV_MAP.items():
         assert src in df.columns, src
         df[dst] = df[src]
     covs = list(COV_MAP.values())
 
-    accounted = set(COV_MAP) | set(covs) | set(ITEMS) | {"id"} | set(DROP)
+    accounted = (set(COV_MAP) | set(covs) | set(ITEMS) | set(DROP)
+                 | {"id", "cluster_id", "lise"})
     accounted |= {f"{p}{i}" for p, (n, *_r) in SCORED_BLOCKS.items()
                   for i in range(1, n + 1)}
     leftover = [c for c in df.columns if c not in accounted]
@@ -204,15 +216,16 @@ def main() -> None:
     for c, why in sorted(DROP.items()):
         print(f"skipped column {c}: {why}")
 
-    long = df[["id"] + covs + ITEMS].melt(
-        id_vars=["id"] + covs, var_name="item", value_name="resp")
+    long = df[["id", "cluster_id"] + covs + ITEMS].melt(
+        id_vars=["id", "cluster_id"] + covs, var_name="item",
+        value_name="resp")
     before = long["resp"].notna().sum()
     long = long[long["resp"].isin(PERMITTED)]
     assert before == len(long), \
         f"{before - len(long)} cell(s) outside {PERMITTED}"
 
     long["resp"] = long["resp"].astype(int)
-    long = long[["id", "item", "resp"] + covs].sort_values(
+    long = long[["id", "item", "resp", "cluster_id"] + covs].sort_values(
         ["id", "item"]).reset_index(drop=True)
 
     checks = run_qc(long, permitted_values=PERMITTED)
@@ -223,7 +236,9 @@ def main() -> None:
             print(f"  [qc warn] {TABLE} {c.name}: {c.detail[:180]}")
     long.to_csv(OUT / f"{TABLE}.csv", index=False)
     print(f"{TABLE}: rows={len(long)} ids={long['id'].nunique()} "
-          f"items={long['item'].nunique()} resp={sorted(long['resp'].unique())}")
+          f"items={long['item'].nunique()} "
+          f"clusters={long['cluster_id'].nunique()} "
+          f"resp={sorted(long['resp'].unique())}")
 
 
 if __name__ == "__main__":
