@@ -23038,7 +23038,7 @@ PASS on both item and resp sets), then `audit_batch.R --resp-dir` (8/8 PASS, no
 anomalies), then `irw-validate` on the item files (8 clean).
 `itemtext_output/` holds nothing but `*__items.csv`.
 
-## 2026-10-28b — the 10-27 and 10-21 leads re-triaged, and 38 of the 106 worked: 51 tables, 496,741 responses
+## 2026-10-28b — the 10-27 and 10-21 leads re-triaged, and 39 of the 106 worked: 56 tables, 509,873 responses
 
 Nothing uploaded. Ben asked for a discovery sweep *and* for backlogged
 triage/leads work in the same session; this is the leads half. The sweep's own
@@ -23075,7 +23075,7 @@ pointing at it, so there is one live place per lead rather than three.
 ### Eleven worked, seven shipped (filtered to 100 <= N <= 50,000 and 8 <= items <= 700, then by volume)
 
 Nine are tabled here; the last two were worked after this table was written and
-are at the end of the entry. **Batch total: 51 tables, 496,741 responses.**
+are at the end of the entry. **Batch total: 56 tables, 509,873 responses.**
 
 | deposit | licence | outcome |
 |---|---|---|
@@ -23886,6 +23886,43 @@ values are seven digits, i.e. survey-platform response ids.
 - **SPIN — still owed.** No register row, no originator terms located. Recorded
   as owed rather than guessed; the starting point is whether Duke University
   publishes terms for it.
+
+### An eighteenth: Codonhato 2025 — the deposit's own totals as the mapping key
+
+`10.6084/m9.figshare.29959520.v1` (CC BY 4.0), 196 Brazilian individual-sport
+athletes, no missing data anywhere.
+`codonhato_2025_doping_attitudes` (17 items, 1-6), `_achievement_goals` (16,
+1-5), `_morality` (13), `_passion` (12) and `_self_efficacy` (9). 13,132
+responses. **Batch total: 56 tables, 509,873 responses from 18 deposits.**
+
+**The five tables are the deposit's own five constructs, and what ties them to
+the blocks is its own computed totals.** The description names exactly five
+things — "morality, self-efficacy, achievement goals, passion, and doping
+attitudes" — and the file carries a total for each, in Portuguese, which is
+what makes the mapping a reading rather than a guess from the prefixes:
+`AUTOEF` is autoeficácia; `ORTASK`/`OREGO` are task and ego orientation;
+`PH`/`PO` are paixão harmoniosa and obsessiva, and 12 passion items splitting
+6/6 is the Passion Scale's own shape; `DOP` is doping. Item codes keep the
+source names so a user can take the subscales from the prefix.
+
+This is the third time in the batch the same question came up and got three
+different answers, which is worth keeping together: **Mersin** shipped four
+tables because the deposit's prose named four constructs and the column counts
+matched; **Aldosari** shipped nothing because the names came from a file name
+and the counts contradicted the instrument they implied; **Codonhato** ships
+five because the prose names five AND the deposit computes a total for each.
+The test that separates them is whether the source itself asserts the grouping.
+
+`DATASET` (1 or 2) distinguishes two samples and ships as `cov_dataset` — the
+"same instrument across samples" rule already satisfied, since the deposit
+delivers them as one file over one id space.
+
+Item text is not shippable (a bare `.xlsx`, no label level at all) and no
+published instrument is named, so there is nothing to check a register against.
+One lead recorded for a later pass: the 17-item 1-6 doping block has the shape
+of the Performance Enhancement Attitude Scale, which would make it a
+third-party instrument rather than study-authored — worth confirming before
+anything is extracted.
 
 ### The `surf` (DataverseNL) question, measured and answered
 
