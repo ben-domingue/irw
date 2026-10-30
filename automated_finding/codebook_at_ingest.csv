@@ -1847,6 +1847,7 @@ leis_2025_english_motivation,core,none,2026-10-09
 lelkes_2021_candidate_ideology_party,conj,https://dataverse.harvard.edu/api/access/datafile/3346628,2026-10-14
 lemi_2020_multiracial_candidates,conj,https://dataverse.harvard.edu/api/access/datafile/3788703,2026-10-08
 lemke_2021_research_metrics,conj,none,2026-10-09
+lena_2025_rmdq_albanian,core,none,2026-10-30
 leon_rubio_2025_cdpe_antecedents,core,https://zenodo.org/api/records/17899509/files/CDPE_CODEBOOK.pdf/content,2026-10-07
 leon_rubio_2025_cdpe_burnout,core,https://zenodo.org/api/records/17899509/files/CDPE_CODEBOOK.pdf/content,2026-10-07
 leon_rubio_2025_cdpe_consequences,core,https://zenodo.org/api/records/17899509/files/CDPE_CODEBOOK.pdf/content,2026-10-07
@@ -2360,6 +2361,10 @@ neuner_2022_populist_candidates_2018,conj,https://dataverse.harvard.edu/api/acce
 neuner_2025_populism_uk,conj,https://osf.io/download/vm7j8/,2026-10-08
 neuner_2025_populism_us1,conj,https://osf.io/download/vm7j8/,2026-10-08
 neuner_2025_populism_us2,conj,https://osf.io/download/vm7j8/,2026-10-08
+ng_2026_shc_attitude,core,none,2026-10-30
+ng_2026_shc_knowledge,core,none,2026-10-30
+ng_2026_shc_price_sensitivity,core,none,2026-10-30
+ng_2026_shc_purchase_practice,core,none,2026-10-30
 nguyen_2021_farm_subsidies_ch,conj,none,2026-10-09
 nguyen_2021_farm_subsidies_us,conj,none,2026-10-09
 nguyen_2024_cpd_benefits,core,none,2026-10-09
@@ -3960,6 +3965,10 @@ zhou_2024_eq5dy3l_proxy,core,none,2026-10-09
 zhou_2024_eq5dy3l_self,core,none,2026-10-09
 zhou_2024_eq_hwb_s,core,none,2026-10-09
 zhou_2024_eq_tips,core,none,2026-10-09
+zhou_2024_esspri,core,none,2026-10-30
+zhou_2024_pssqol_impact,core,none,2026-10-30
+zhou_2024_pssqol_symptoms,core,none,2026-10-30
+zhou_2024_sf12,core,none,2026-10-30
 zhou_2026_zainichi_hiring_s1,conj,https://dataverse.harvard.edu/api/access/datafile/13437041,2026-10-08
 zhou_2026_zainichi_hiring_s2,conj,https://dataverse.harvard.edu/api/access/datafile/13437050,2026-10-08
 zhu_2023_corruption_competence,conj,https://dataverse.harvard.edu/api/access/datafile/6908073,2026-10-14

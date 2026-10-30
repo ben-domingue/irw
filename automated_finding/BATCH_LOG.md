@@ -7,13 +7,18 @@ checkboxes here just mean "this line item is settled," not "actionable."
 
 **For currently open action items, see `TODO.md`.**
 
-## PLOS leads worked, 2026-10-30 -- 103 tables, 1,699,095 responses
+## PLOS leads worked, 2026-10-30 -- 214 tables, 1,897,743 responses
 
-Twenty-three deposits, the largest `good` leads of the pass below, worked
-largest-first off `leads/plos_leads_2026-10-30.csv`. NOTHING UPLOADED; manifest
+FORTY-FOUR deposits: every `good` lead of the pass below above 5,000
+responses, worked largest-first off `leads/plos_leads_2026-10-30.csv`. Of the
+104 `good` leads, 44 shipped, 18 were blocked on licence, 7 were rejected on
+content with a written reason, and 35 are left unworked — every one of those
+35 under 5,000 responses, 67,203 in all. NOTHING UPLOADED; manifest
 `irw_output/MANIFEST_2026-10-30.txt`, which carries the per-deposit narrative.
-All 103 pass `irw-validate --profile upload`; 18 item text tables pass the
-four-gate chain. 62 actionable `good` leads remain.
+All 214 pass `irw-validate --profile upload`; 62 item text tables pass the
+four-gate chain. The per-deposit narrative is in
+`irw_output/MANIFEST_2026-10-30.txt`; the 2026-10-30 commits carry the
+write-ups deposit by deposit.
 
 | deposit | tables | responses | licence |
 |---|---|---|---|
@@ -40,6 +45,27 @@ four-gate chain. 62 actionable `good` leads remain.
 | Chen 2026 urban tourism co-creation | 6 | 12,168 | CC BY 4.0 (Mendeley) |
 | Robles-Mariños 2023 cyberchondria CSS-12 | 2 | 19,710 | CC BY 4.0 (Zenodo) |
 | Xu 2026 GAI and student creativity | 8 (+8 items) | 16,960 | CC BY 4.0 |
+| Jin 2025 folk sports, China + South Korea | 5 | 21,344 | CC BY 4.0 |
+| Danaei 2024 Persian EBMQ | 4 | 16,000 | CC BY 4.0 (figshare) |
+| Wang 2023 ecotourism, residents + tourists | 3 (+3 items) | 15,768 | CC BY 4.0 |
+| Song 2026 metaverse music | 11 (+10 items) | 15,660 | CC BY 4.0 (Zenodo) |
+| Bredbenner 2019 video abstracts | 7 (+5 items) | 13,355 | CC BY 4.0 |
+| Zhu 2026 live-streaming brands | 7 | 11,620 | CC BY 4.0 |
+| Liang 2026 ritual authenticity | 8 | 10,530 | CC BY 4.0 (figshare) |
+| Lena 2025 Albanian RMDQ (test/retest) | 1 | 9,599 | CC BY 4.0 |
+| Li 2024 VR museum exhibition | 8 (+8 items) | 8,451 | CC BY 4.0 |
+| Song 2026 IRS in EFL classrooms | 8 | 8,160 | CC BY 4.0 |
+| Zhou 2024 PSS-QoL Chinese | 4 (+3 items) | 7,964 | CC BY 4.0 |
+| Ng 2026 secondhand clothing KAP | 4 | 7,628 | CC BY 4.0 (Zenodo) |
+| Jenatabadi 2017 e-learning via Facebook | 8 | 7,310 | CC BY 4.0 |
+| Li 2024 environmental education | 4 | 6,368 | CC BY 4.0 |
+| Tian 2021 travel app engagement | 7 (+7 items) | 6,363 | CC BY 4.0 |
+| Huang 2026 elderly mHealth | 8 (+8 items) | 6,312 | CC BY 4.0 |
+| Mahajan 2023 college choice | 1 | 6,192 | CC BY 4.0 (figshare) |
+| Bohlouli 2026 maternal social media + HADS | 3 | 6,034 | CC BY 4.0 |
+| Ren 2026 amoral management | 4 | 4,980 | CC BY 4.0 |
+| Schoneberg 2022 PRRSV ELISA intercomparison | 1 | 4,866 | CC BY 4.0 |
+| Zhang 2025 digital fitness platforms | 5 | 4,144 | CC BY 4.0 |
 
 ### What generalises from deposits 5-21
 
@@ -79,6 +105,24 @@ responses that look like human ones.
 **Rotated-booklet planned missingness, asserted not assumed.** `bock_2021`
 ships two partial-credit achievement tests (PCK 34 items, CK 38, scored 0/1/2)
 whose per-item n runs 36-211 by design.
+
+**Check every deposit for a second data file.** Two leads here nearly doubled
+because the triage counted one file: ecotourism advertised 7,370 and yielded
+15,768, folk sports advertised 12,096 and yielded 21,344. And the two cases
+look identical and are not — Jin's two country files carry byte-identical
+column lists and concatenate safely, while Wang's two files have identical
+*shape* but five item numbers mean DIFFERENT QUESTIONS in the two forms. A
+merge on the item number would have pooled five pairs of different questions
+and passed every range, count and missingness check afterwards.
+
+**Seven leads were rejected on content and the reasons recur.** A
+questionnaire whose questions each have their own response set is not an item
+battery (three of the seven); a scored instrument whose key cannot be joined
+to its responses is not usable even when both exist (the 1,390-respondent
+ecological literacy quiz — its scoring sheet has 2,000 rows against the data's
+1,391 and no id column, and the raw-to-score mapping is non-deterministic
+under direct alignment); and a skip-routed export can leave every sub-block
+below the id floor. All seven carry their reason in the leads CSV.
 
 **A deposit can contradict its own paper in one half and reproduce it in the
 other.** `xu_2026`'s eight demographic columns are NAMED in the appendix, not
