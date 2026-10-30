@@ -35,15 +35,15 @@ and the standing leads backlog was reconciled and worked.
   `leads/plos_leads_2026-10-30.csv` written with 1,780 rows, BATCH_LOG entry
   written (2026-10-30). Full numbers there.
 
-- [ ] **57 response tables (1,513,286 responses) + 1 item text table need
+- [ ] **62 response tables (1,526,240 responses) + 1 item text table need
   uploading.** `automated_finding/irw_output/` with `MANIFEST_2026-10-30.txt`,
   and `itemtext_output/sabrina_2026_gad7__items.csv`. **Response tables
   first.** Ben is uploading this batch at the end, so the folder stays open and
-  tables keep accumulating. All 57 pass `irw-validate --profile upload`; the
-  item text table passes the four-gate chain. 57 dictionary rows, 57 codebook
-  rows, 57 tag rows (already appended into `tags/tags_auto.csv`), 57
+  tables keep accumulating. All 62 pass `irw-validate --profile upload`; the
+  item text table passes the four-gate chain. 62 dictionary rows, 62 codebook
+  rows, 62 tag rows (already appended into `tags/tags_auto.csv`), 62
   `itemtext_provenance` rows and 20 `instrument_rights_register` rows (14 hold,
-  5 ship, 1 ship_with_note) are staged, so nothing needs pasting. Fourteen
+  5 ship, 1 ship_with_note) are staged, so nothing needs pasting. Fifteen
   deposits:
   - `hocine_2016_psychosocial_stressors` -- 10,000 French employees x 58 items,
     figshare 10.6084/m9.figshare.3156154, CC BY 4.0 (verified on the DEPOSIT;
@@ -177,7 +177,9 @@ and the standing leads backlog was reconciled and worked.
   canonical UTAUT/TAM/SERVQUAL stems. These instruments recur constantly in
   this corpus. A single ruling on the UTAUT item pool -- or a decision that
   "adapted from" wording re-worded for a new domain is the adapters' own --
-  would settle all three and most future ones. Worth noting the asymmetry the
+  would settle all three and most future ones. Make that FOUR: a fifth
+  deposit, `diop_2019_vms_*`, has the same provenance and was deliberately
+  given no new row, pointing at the existing ones instead. Worth noting the asymmetry the
   `UTAUT2-STREAM` row records: that deposit's DATA is CC0 1.0, maximally
   permissive, and it still does not clear the instrument wording, because a
   depositor cannot CC0 someone else's items.
@@ -205,9 +207,9 @@ and the standing leads backlog was reconciled and worked.
   split off into section text with the target becoming `item_text`. Nine
   `__items` tables when done.
 
-- [ ] **72 actionable `good` PLOS leads, unworked** -- top of
+- [ ] **71 actionable `good` PLOS leads, unworked** -- top of
   `leads/plos_leads_2026-10-30.csv` (sorted unworked-first by response count).
-  Fourteen were worked on 2026-10-30 and are marked `shipped` there; 72
+  Fifteen were worked on 2026-10-30 and are marked `shipped` there; 71
   remain. 18 more `good` rows are `blocked_licence` (17 `unknown`, 1
   `no-license`) and recorded rather than dropped. The largest: a 60-item
   psychosocial-factors instrument at 10,000 respondents (600,000 responses,
