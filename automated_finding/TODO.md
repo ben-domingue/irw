@@ -1,5 +1,224 @@
 # IRW Automated Finding — TODO
 
+## Two searches + the leads backlog, 2026-10-29f/g/h — 17 tables, 145,844 responses
+
+Full write-up in `BATCH_LOG.md` (2026-10-29f). Two discovery passes were fired
+and the standing leads backlog was reconciled and worked.
+
+- [x] **UPLOADED 2026-10-30** — 17 response tables (145,844 responses) and
+  the 5 item text tables, confirmed by Ben. Manifest renamed
+  `irw_output/MANIFEST_2026-10-29f_uploaded.txt`; both staging folders are
+  empty again, which is the upload clearing them, not a sync fault. The 5
+  shipped `itemtext_provenance.csv` rows are stamped `uploaded=2026-10-30`
+  (the 12 rows recorded NOT SHIPPED keep a blank `uploaded`, by design).
+
+  From the leads backlog:
+  - `aguilar_latorre_2022_covid_{knowledge,risk,practices}` — 354 Spanish
+    adolescents, Zenodo 10.5281/zenodo.14748660, CC BY 4.0.
+  - `maywegpaus_2021_dialls_oer` (+ `__items`) — 138 teachers in four
+    countries, Zenodo 10.5281/zenodo.5553923, CC BY 4.0.
+  - `trusz_2022_{iieq_self,iieq_parent,iieq_teacher,amas,las}` (+ 4 `__items`)
+    — 897 Polish students, Harvard Dataverse 10.7910/DVN/3BZAUD, CC0 1.0.
+
+  From the PsychArchives search:
+  - `rosman_2022_{trust_science,trust_factors_scientist,trust_factors_general,
+    meti_s1,meti_s2,justification_beliefs,conspiracy}` — 1,092 German
+    respondents, 10.23668/psycharchives.6495, **CC BY-SA 4.0** (SA propagates
+    into `Derived_License`).
+  - `tung_2026_financial_literacy` — 393 US undergraduates,
+    10.23668/psycharchives.22277, CC BY 4.0.
+
+- [x] **The PLOS recycled-terms search is DONE** -- 467 terms (not 466; `wc -l`
+  undercounts a file with no trailing newline), **11,011 candidates, 104
+  `good`**, the largest single haul this pipeline has produced. Step 2b ran with
+  all three confirmation lines. 467 terms appended to `search_terms_log.csv`,
+  `leads/plos_leads_2026-10-30.csv` written with 1,780 rows, BATCH_LOG entry
+  written (2026-10-30). Full numbers there.
+
+- [ ] **15 response tables (1,092,618 responses) need uploading.**
+  `automated_finding/irw_output/` with `MANIFEST_2026-10-30.txt`. Response
+  tables only -- no item text in this batch. All 15 pass
+  `irw-validate --profile upload`. 15 dictionary rows, 15 codebook rows, 15 tag
+  rows (already appended into `tags/tags_auto.csv`), 15 `itemtext_provenance`
+  rows and 6 `instrument_rights_register` rows (5 hold, 1 ship) are staged, so
+  nothing needs pasting. Four deposits:
+  - `hocine_2016_psychosocial_stressors` -- 10,000 French employees x 58 items,
+    figshare 10.6084/m9.figshare.3156154, CC BY 4.0 (verified on the DEPOSIT;
+    the data is off-site, so the article's licence could not grant it).
+  - `kimuli_2025_tb_stigma` -- 31,337 Ugandan respondents x 10 items, CC0 1.0.
+  - `huang_2025_{school_climate,dass21,social_avoidance,resilience}` -- 1,507
+    Chinese students in grades 5-9, CC BY 4.0.
+  - 9 `kendall_2018_*` tables -- 850 urban Chinese consumers, CC BY 4.0.
+
+- [ ] **The `kendall_2018_*` item text is a queued extraction, not a block** --
+  the only item-text job in this batch that is rights-clear. All 77 stems and
+  targets are in the deposit's own 'Variable View' sheet and the instrument is
+  the authors' own, registered `ship`. Two obstacles, both mechanical: the
+  labels carry GBK/CP1252 round-trip mojibake (an apostrophe arrives as the
+  bytes for GBK's quote characters, so a naive read ships corrupted text), and
+  each of the nine batteries is stem-crossed-with-target, so the stem must be
+  split off into section text with the target becoming `item_text`. Nine
+  `__items` tables when done.
+
+- [ ] **82 actionable `good` PLOS leads, unworked** -- top of
+  `leads/plos_leads_2026-10-30.csv` (sorted unworked-first by response count).
+  The four largest were worked on 2026-10-30 and are marked `shipped` there;
+  82 remain. 18 more `good` rows are `blocked_licence` (17 `unknown`, 1
+  `no-license`) and recorded rather than dropped. The largest: a 60-item
+  psychosocial-factors instrument at 10,000 respondents (600,000 responses,
+  cc-by), a tuberculosis-stigma study at 33,349 respondents (cc0), a
+  107-item school-climate study at 1,507, and a Sexual Health Literacy scale
+  development paper at 1,235 x 49. Psychometric validation papers convert best
+  here -- the item-level matrix is in the Supporting Information because
+  reviewers asked for it.
+
+- [ ] **1,143 `recoverable_format` PLOS leads -- PILOTED 2026-10-30, and the
+  bucket splits cleanly in two.** 10 leads were sampled (6 from the
+  "keeping only N columns" sub-bucket, 4 from `resp_scale_mixed`) and each
+  file was opened. **4 of 10 hold a real wide item matrix**; a 5th
+  (10.1371/journal.pone.0277625) holds genuine item-response data that is
+  already in long format, so 5 of 10 are workable.
+
+  **The split is the finding, and it should drive the ranking:**
+  - the **column-selection** sub-bucket (731 rows) converted **4 of 6**;
+  - the **`resp_scale_mixed`** sub-bucket (181 rows) converted **0 of 4**, and
+    none of those four had any items at all -- two were animal studies whose
+    `n_participants` (302, 260) counted repeated-measure rows as people.
+  So work the 731 and deprioritise the 181. On a 4-in-6 rate the
+  column-selection subset implies roughly 400-500 workable datasets, which is
+  larger than everything this pipeline has shipped to date -- it needs a plan,
+  not a sprint.
+
+  Also measured, against expectation: **text-coded Likert labels did not
+  appear once** in the pilot. That artifact (the `aguilar_latorre_2022` shape)
+  was the motivating hypothesis for this bucket and it is not what is in it;
+  every real item block was numeric codes. Multi-instrument files appeared in
+  3 of 10 and are the dominant workable shape.
+
+  Verified by hand rather than taken on the subagent's word: pilot lead 6,
+  10.1371/journal.pone.0260676 (dog owners, depression/anxiety/happiness), has
+  1,505 respondents and seven scale blocks -- M1 18 items 1-7, M2 10 items 1-5,
+  M3 12 items 1-7, M4 20 items 1-5, M5 7 items 0-3, M7 29 items 1-6, S6 4 items
+  1-5 -- i.e. ~100 items and ~150,000 responses, **plus a `Datamap` sheet
+  carrying the stem and option text for every item**, so it is an item-text
+  candidate too. That one is worth building next after the `good` rows.
+
+  Alongside them: 295 `worth_retrying` (mostly repeated-measures designs
+  tripping `dup_id_item` at a ~1.0x ratio) and 143 `aggregate_continuous`.
+
+- [ ] **293 PLOS `human_review` rows** in
+  `human_review/human_review_plos_2026-10-30.csv`, deliberately not duplicated
+  into the leads file.
+
+- [ ] **295 `external_unresolved` PLOS rows were excluded from the leads file**
+  on the err-on-exclusion rule, without being examined. Their DOIs are in
+  `plos_seen_dois.csv`, so a future run will skip them -- if that bucket is ever
+  worth a pass, it has to come off the triage CSV before it is deleted.
+
+- [ ] **Two item-text jobs, both with the wording already in hand.**
+  - `rosman_2022_*`: all 92 German stems and anchors are in the two `.sav`
+    files' variable and value labels, both levels, every item. Not shipped
+    because the standard wants the German wording plus an English translation
+    in the `*_translated` columns, and 92 IRW-generated translations is content
+    that owes its own issues-page entry and provenance. That is the whole
+    obstacle — a day's careful work, not a research problem.
+  - `aguilar_latorre_2022_*`: all 40 Spanish questions are in the deposit's
+    `meaning - dateset validation.csv`, keyed by the same item codes. Blocked
+    on rights, not wording — see the licence question below.
+
+- [ ] **`maywegpaus_2021_dialls_oer` and the four `trusz_2022_*` item text
+  tables owe `itemtext_issues.qmd` entries once live**, and both meet the bar
+  for the same reason: the shipped wording is the study's English master while
+  the administration was in another language (German/UK English/Portuguese/
+  Hebrew for DIALLS; Polish for Trusz, inferred and recorded as an inference).
+  Same shape as the four `lee_whiting_2025_*` notes already owed, so they join
+  that handoff rather than making their own.
+
+- [ ] **A licence/rights question worth one line from Ben, not a blocker.**
+  The three `aguilar_latorre_2022_covid_*` tables ship their responses with
+  item text HELD, and the hold is the INVERSE of the `gerou_2023_dass21` shape:
+  here the ADAPTATION is openly licensed (the Frontiers article and the Zenodo
+  deposit are both CC BY 4.0, by the adapting authors themselves) while the
+  ORIGINAL — Honarvar et al. 2020, Int J Public Health 65:731-739 — is bronze
+  OA whose only permission was the PMC COVID-19 emergency grant, expressly
+  scoped "for the duration of the World Health Organization (WHO) declaration
+  of COVID-19 as a global pandemic", which ended 2023-05-05. So there is no
+  original-language stand-in to fall back on either, and both layers are
+  registered `hold`. If the adapting authors' own CC BY is read as reaching
+  their translation, the extraction is one pass over one already-downloaded
+  CSV.
+
+- [ ] **One PII reading worth confirming, also one line.**
+  `10.7910/dvn/kdz60y` (U.S. Public Support for Biofuels Tax Credits, 2,862
+  respondents, CC0) was skipped on `zip_code` AND `phone`. Under the
+  2026-10-20 geographic ruling the zip alone is drop-the-column-and-ship; a
+  `phone` column was not among the identifiers that ruling moved and was read
+  here as the same tier as an email address, so the skip stands. If that is
+  wrong the candidate ships with both columns dropped.
+
+- [ ] **70 unworked leads in `leads/psycharchives_leads_2026-10-29.csv`**, the
+  new standing record for that pass: 35 `recoverable_format`, 11
+  `human_review` (archived in `human_review/`), 3 `worth_retrying`, 2
+  `aggregate_continuous` and 19 `download_failed`. The `recoverable_format`
+  bucket is the seam — Step 2b's note on most of them is "Re-read with no
+  change to the reader, keeping only the N columns that share one small integer
+  domain", i.e. the item-column selector chose badly on a file that opened
+  fine. Named leads worth a look: "Competences and ability self-concepts of
+  students" (86 columns), "Research data of the Multiraterstudy Dark Triad
+  2015" (290 participants), "Healthcare avoidance predicted by psychological
+  reactance" (38 columns).
+
+- [ ] **The 2026-10-20 `untriaged` regeneration is still open** (carried over):
+  regenerate `leads/repos_leads_2026-10-20.csv` so its 780 `origin_flag=
+  untriaged` rows carry the ledger verdicts they already have in
+  `repo_triage_seen_keys.csv`. Until then the leads backlog reads ~1,350
+  unworked when the real figure is ~550.
+
+- [x] **86 stale `unworked` lead rows reconciled to `shipped`** across nine
+  `leads/*.csv` files, plus the Trusz pair below. Every one had already been
+  turned into a `data/*.py` script by a later batch and nobody had gone back to
+  mark the row, so the backlog read 573 real unworked leads when the true
+  figure was 487. Matched by checking each lead DOI against EVERY DOI in every
+  `data/` script header, not just the `# DOI:` line — the widening open since
+  2026-10-21. Worth re-running after any batch: one script, and it only
+  shrinks the backlog.
+
+- [x] **`10.7910/DVN/IEEH3O` is a duplicate of `10.7910/DVN/3BZAUD`** — same
+  eight files, byte-identical by md5, deposited four months apart; the later
+  one is titled "... After Review". Caught BEFORE building, which is the first
+  time that check has paid off rather than being a post-mortem. IEEH3O is
+  marked `rejected_content` in the leads file.
+
+- [x] **Two `pii_suspected` leads were FALSE POSITIVES**, one now shipped.
+  `10.5281/zenodo.5553923` (DIALLS) was flagged on a column labelled
+  "Respondent-Generated-Personal-Code 1: First letter of your first name" —
+  which is an anonymisation device, and the deposit's own "Anonymisation of the
+  data" section says so in terms. `10.5061/dryad.r5d54` was flagged on `DOB` in
+  a BIRDSONG study; a bird's hatch date is not human PII, and it is left
+  `worth_retrying` because its content question is untouched. The other three
+  skips in that file were re-checked against the 2026-10-20 ruling and stand.
+  **`pii_suspected` reads column NAMES and LABELS, so it is a lead, not a
+  verdict** — both of these labels contained "name" or "DOB" while the columns
+  contained neither.
+
+- [x] **PsychArchives recycled terms: DONE, and the hypothesis held.** The item
+  opened 2026-10-29d. 346 of the oldest, most ordinary terms in
+  `search_terms_log.csv` never run against that source returned **227
+  candidates**, against **0** from the 135 freshly-invented terms of the
+  2026-10-29b sweep. 2 `good` (both shipped above), 57 `human_assistance`, 107
+  `no_usable_file`, 19 `download_failed`, 12 `below_min_n`, 7
+  `not_item_response`. Step 2b ran, 11 `human_review` rows archived, 57 refined
+  flags written back to the ledger — all three confirmation lines present.
+
+- [x] **Four `instrument_rights_register.csv` rows written**, two of them for
+  instruments that had NO row at all and therefore warned nobody: the AMAS
+  (`hold` — SAGE subscription, no grant located) and the Lusardi & Mitchell
+  "Big Three" (`hold` — GFLEC's own page states no terms; these three questions
+  are in 40+ surveys worldwide, and that ubiquity is not a grant). Plus Trusz's
+  IIEQ and LAS (`ship` — originator published them in a CC0 deposit) and the
+  METI (`note`, recording the lead: its originating PLOS ONE article is CC BY,
+  which is where whoever needs it should start).
+
 ## RELEASED 2026-10-29 (ben-domingue) — both of the day's uploads are live
 
 86 tables and 885,864 responses: the 64-table 2026-10-28b/c batch and the
@@ -38,7 +257,7 @@ Full write-up in `BATCH_LOG.md` (2026-10-29e). The staging folder now holds
 SAPA's 1 and Akter's 7 -- plus 18 item text tables. (GPO-AI's three
 `trust_actors_*` tables were merged into one crossed 24-item table on
 2026-10-29f, at Ben's prompting; see BATCH_LOG.) One MANIFEST covers all
-four, `irw_output/MANIFEST_2026-10-29b.txt`.
+four, `irw_output/MANIFEST_2026-10-29b_uploaded.txt`.
 
 - [x] **UPLOADED 2026-10-29 (ben-domingue).** 34 response tables, 8,464,014
   responses, and 18 item text tables. `uploaded=2026-10-29` is stamped on the
@@ -107,15 +326,14 @@ four, `irw_output/MANIFEST_2026-10-29b.txt`.
 
 Full write-up in `BATCH_LOG.md` (2026-10-29d).
 
-- [ ] **7 response tables (3,936 responses) + 7 item text tables need
-  uploading.** `automated_finding/irw_output/` (with
-  `MANIFEST_2026-10-29b.txt`) and `itemtext_output/`. **Response tables
-  first.** All 7 pass `irw-validate --profile upload`; all 7 item text tables
-  pass normalize_nulls.R -> validate_items.R --resp-csv -> audit_batch.R
-  --resp-dir -> irw-validate (7/7 PASS, no anomalies). Dictionary and tag rows
-  are staged, so nothing needs pasting. Stamp `uploaded=` on the 7
-  `itemtext_provenance.csv` rows and the 7 `itemtext/mapping_verification.csv`
-  rows only once Ben confirms.
+- [x] **UPLOADED 2026-10-29** — these are the 7 `earja_2026_*` tables (3,936
+  responses) and their 7 item text tables. They went up inside the combined
+  34-table manifest, not separately, which is why this block sat open after
+  the fact: the upload was recorded against the 2026-10-29e entry above while
+  this per-sweep copy was never closed. Confirmed by Ben on 2026-10-30, and
+  all 7 `itemtext_provenance.csv` and 7 `itemtext/mapping_verification.csv`
+  rows already carry `uploaded=2026-10-29`. Manifest renamed
+  `irw_output/MANIFEST_2026-10-29b_uploaded.txt`.
 
 - [ ] **40 unworked leads** in `leads/repos_leads_2026-10-29b.csv`: 18
   `recoverable_format`, 7 `wrong_file_selected`, 6 `worth_retrying`, 2
@@ -123,7 +341,9 @@ Full write-up in `BATCH_LOG.md` (2026-10-29d).
   were deliberately left OUT of the seen ledger by the script, so a later run
   retries them by itself.
 
-- [ ] **PsychArchives wants RECYCLED terms, not fresh ones.** The 135 fresh
+- [x] **DONE 2026-10-29f: PsychArchives wants RECYCLED terms, not fresh ones.**
+  346 recycled terms were run against it; see the section at the top of this
+  file and `BATCH_LOG.md` (2026-10-29f). The 135 fresh
   terms of this sweep returned 0 candidates there (verified by hand), because
   ZPID holds mainstream psychology constructs and this sweep deliberately
   searched elsewhere. Worth one dedicated pass over the oldest, most ordinary
@@ -1170,7 +1390,10 @@ before touching that folder or re-adding anything from it.
   built 7** over the same 913 ids (9,398 rows vs 8,056). The new build was
   dropped rather than shipped, because uploads append. If the 7th item is
   right, this is a delete-then-recreate replace, not an upload.
-- [ ] **Widen the pre-write duplicate check.** `grep -rl "DOI: <doi>"
+- [x] **DONE 2026-10-29f: widened, and it found 86 stale lead rows.** The
+  reconciler at the top of this file matches a lead DOI against every DOI in a
+  `data/` script header rather than the `# DOI:` line, which is exactly this
+  item. Original wording: `grep -rl "DOI: <doi>"
   ../data/*.py` misses a script whose `# DOI:` line holds the *paper* DOI while
   the data DOI sits on `# Source:`/`# Data:`. That is how `10.7910/DVN/VWRTAW`
   was built twice (caught and withdrawn mid-batch) and how `sadish` reached
