@@ -7,19 +7,86 @@ checkboxes here just mean "this line item is settled," not "actionable."
 
 **For currently open action items, see `TODO.md`.**
 
-## PLOS leads worked, 2026-10-30 -- 15 tables, 1,092,618 responses
+## PLOS leads worked, 2026-10-30 -- 93 tables, 1,662,425 responses
 
-The four largest `good` leads of the pass below, worked largest-first off
-`leads/plos_leads_2026-10-30.csv`. NOTHING UPLOADED; manifest
-`irw_output/MANIFEST_2026-10-30.txt`. All 15 pass `irw-validate --profile
-upload`. 82 actionable `good` leads remain.
+Twenty-one deposits, the largest `good` leads of the pass below, worked
+largest-first off `leads/plos_leads_2026-10-30.csv`. NOTHING UPLOADED; manifest
+`irw_output/MANIFEST_2026-10-30.txt`, which carries the per-deposit narrative.
+All 93 pass `irw-validate --profile upload`; ten item text tables pass the
+four-gate chain. 64 actionable `good` leads remain.
 
 | deposit | tables | responses | licence |
 |---|---|---|---|
 | Hocine 2016 psychosocial stressors | 1 | 580,000 | CC BY 4.0 (figshare) |
 | Kimuli 2025 TB stigma | 1 | 294,962 | CC0 1.0 |
-| Huang 2025 (4 scales) | 4 | 152,206 | CC BY 4.0 |
+| Huang 2025 school climate (4 scales) | 4 | 152,206 | CC BY 4.0 |
+| Zhang 2025 fear of falling | 4 | 65,873 | CC BY 4.0 |
 | Kendall 2018 food integrity | 9 | 65,450 | CC BY 4.0 |
+| Wang 2026 research quality GPT-4o | 1 | 66,495 | CC BY 4.0 |
+| Padchasuwan 2026 sexual health literacy | 1 | 60,515 | CC BY 4.0 |
+| Lin 2026 advertising literacy | 1 | 45,680 | CC BY 4.0 |
+| Sabrina 2026 vaping + mental health | 3 (+items) | 43,605 | CC BY 4.0 |
+| Duque 2017 influenza KAP | 5 | 37,982 | CC BY 4.0 |
+| Wu 2025 streaming subscription | 8 | 32,890 | CC0 1.0 (Dataverse) |
+| Oppong 2026 procurement literacy | 1 | 27,692 | CC BY 4.0 |
+| Bock 2021 preservice teachers | 11 | 27,724 | CC BY 4.0 |
+| Li 2024 digital educational games | 4 | 25,606 | CC BY 4.0 |
+| Guo 2026 adventure sports tourism | 11 (+9 items) | 25,470 | CC BY 4.0 |
+| Ghekiere 2022 housing discrimination | 1 | 25,300 | CC BY 4.0 |
+| Lin 2024 e-scooter metro transfer | 8 | 24,588 | CC BY 4.0 |
+| Zhao 2025 social media acculturation | 7 | 17,958 | CC BY 4.0 (figshare) |
+| Natesan 2019 ED satisfaction | 1 | 17,307 | CC BY 4.0 |
+| Diop 2019 VMS acceptance | 5 | 12,954 | CC BY 4.0 |
+| Chen 2026 urban tourism co-creation | 6 | 12,168 | CC BY 4.0 (Mendeley) |
+
+### What generalises from deposits 5-21
+
+**Off-site deposits need their own licence check, and `wu_2025` is the case
+that proves it.** Six of the twenty-one host their data off-site
+(figshare/Dataverse/Mendeley). Five agreed with the article; `wu_2025` did not
+-- article CC BY 4.0, Dataverse deposit **CC0 1.0**. Also: Mendeley's public
+API version endpoint 404s for some datasets while its file listing works, so
+read the deposit PAGE (`chen_2026`, `guo_2026`'s neighbour `10.17632/kb9f2c8xw4`).
+
+**A scale can run backwards invisibly.** `li_2024_deg_*` is coded resp=1 =
+STRONGEST agreement, "varying from high to low". No range, distribution or
+validator check can see it; only the prose does. Queued as a `datastandard.md`
+suggestion: require scale direction to be positively confirmed from the paper.
+
+**Reconstruct codings from reported statistics where the paper gives you
+enough.** All three of `duque_2017`'s ambiguous codings were pinned against
+published figures (symptom shares 93.5/91.9/87.1/78.0 against the paper's
+94/92/87/78; `Vac_workplace` 49.3% against "only 49%"). The 9-item risk-groups
+battery HELD -- no published statistic distinguishes which of 1/2 means "yes",
+so it is not shipped rather than guessed.
+
+**Mojibake can multiply a design.** `ghekiere_2022`'s 14 vignette conditions
+looked like 28 until the UTF-8-via-MacRoman round trip was repaired with
+`.encode("mac_roman").decode("utf-8")`.
+
+**A choice experiment can be titled so that the detector misses it.**
+`10.1371/journal.pone.0337225` triaged `good` -- see the routing note at the
+end of this entry.
+
+**LLM responses are allowed when marked.** Per Ben's ruling this session,
+`wang_2026_research_quality_gpt4o` ships with the machine-generated status in
+its description, its tags and a `rater` column; the `jiang_2026_openeval_*`
+tables are the format precedent. What is unacceptable is LLM or simulated
+responses that look like human ones.
+
+**Rotated-booklet planned missingness, asserted not assumed.** `bock_2021`
+ships two partial-credit achievement tests (PCK 34 items, CK 38, scored 0/1/2)
+whose per-item n runs 36-211 by design.
+
+**Guo 2026 is the cleanest deposit of the batch and the sharpest rights call.**
+Every item column is headed with its subscale in words, so nothing had to be
+inferred. Its S3 File prints Boley & McGehee's (2014) ORIGINAL RETS wording
+beside the authors' adaptation; only the adaptation ships. A CC BY licence on
+an article is the authors' grant over the authors' material and does not
+launder a third-party instrument quoted inside the file -- registered
+`RETS-ADAPTED-GUO`, `ship_with_note`, because the restriction is inside the
+source file rather than on it. An adaptation table printing both wordings is a
+common shape in tourism and health research.
 
 ### The four things that would have gone wrong quietly
 
@@ -90,8 +157,12 @@ failure rather than being settled by silence.
 
 ### Item text
 
-None shipped; all 15 provenance rows record why, and the reasons differ in kind
-rather than all being "no licence":
+Ten tables ship it, 83 do not, and all 93 provenance rows record why -- the
+reasons differ in kind rather than all being "no licence". Shipped:
+`sabrina_2026_gad7` (GAD-7 stems verbatim from the export's column headers plus
+the instrument's own published anchors) and the nine `guo_2026_adv_*` tables
+(36 of that study's 45 items, from S1 and the adapted column of S3). Both carry
+mapping_verification rows. For the four largest deposits, none shipped:
 - `kendall_2018_*` (9 tables) -- AVAILABLE and rights-clear, registered
   `ship`: all 77 stems and targets are in the deposit's 'Variable View' sheet
   and the questionnaire is the authors' own. Queued, not blocked. Two
@@ -105,8 +176,8 @@ rather than all being "no licence":
 - the other three `huang_2025_*` and `kimuli_2025_*` -- no wording in the
   deposit at all, and third-party instruments on top.
 
-Six `instrument_rights_register.csv` rows written, five of them for instruments
-with no row at all before (Stimulus, Van Rie TB stigma, Jia school climate,
+Six `instrument_rights_register.csv` rows written for these four deposits, five
+of them for instruments with no row at all before (Stimulus, Van Rie TB stigma, Jia school climate,
 Watson & Friend SADS, Hu & Gan APRS) plus the Kendall `ship`.
 
 ## PLOS recycled terms, 2026-10-30 -- 467 terms, 11,011 candidates, 104 good
