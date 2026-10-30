@@ -64,11 +64,15 @@
 
 import os
 import re
+import sys
 
 import pandas as pd
 
-OUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                       "..", "automated_finding", "irw_output")
+REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, REPO_ROOT)
+from irw_validate._checks import run_qc  # noqa: E402
+
+OUT_DIR = os.path.join(REPO_ROOT, "automated_finding", "irw_output")
 
 RAW = os.environ.get("TUNG_RAW",
                      "Tung_Gibson_2026_Math_anxiety_and_financial_literacy_"
@@ -155,6 +159,15 @@ def convert():
 
     os.makedirs(OUT_DIR, exist_ok=True)
     long = long[["id", "item", "resp"] + cov_cols]
+
+    # gate before writing: the dichotomy above is the only permitted coding
+    checks = run_qc(long, permitted_values={i: [0, 1] for i in ITEMS})
+    fails = [(c.name, c.detail) for c in checks if c.status == "fail"]
+    assert not fails, fails
+    for c in checks:
+        if c.status == "warn":
+            print(f"  [qc warn] {c.name}: {c.detail[:180]}")
+
     long.to_csv(os.path.join(OUT_DIR, TABLE + ".csv"), index=False)
     print(f"{TABLE}: rows={len(long)} ids={long['id'].nunique()} "
           f"items={long['item'].nunique()} "
