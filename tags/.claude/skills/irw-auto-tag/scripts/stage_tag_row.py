@@ -80,6 +80,15 @@ ENUM_VOCAB = {
     "Child Age (for child-focused studies)": {
         "Early (<6y)", "Child (6-12y)", "Adolescent (12-18y)", "NA",
     },
+    ##Also not in TAG_VOCAB. Added 2026-10-30 (#3322) after a batch wrote the
+    ##instrument's name ("DASS-21, Chinese version validated by ...") and its
+    ##response scale ("Likert (4-point)") into these two columns instead of
+    ##the enum. The site filter lists every distinct value it finds.
+    "Measurement tool": {"Observational rating", "Survey/questionnaire", "Test"},
+    "Item format": {
+        "Likert Scale/selected response", "Constructed Response", "Mixed",
+        "Slider/continuous",
+    },
 }
 
 KEY_MAP = {

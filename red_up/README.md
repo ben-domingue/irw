@@ -30,8 +30,8 @@ anything else. The old scripts `chdir`'d into their own directory first, so
 
 **Picks a default dataset.** Any `*__items.csv` present ⇒ the newest item-text
 shard, unless `ITEMTEXT_DEFAULT` in `targets.py` pins one (currently none, so
-new item text goes to `irw_text_3`: Ben switched on 2026-09-25, with `irw_text`
-at 965 of ~990 tables); otherwise the core shard pinned by `CORE_DEFAULT`, or
+new item text goes to `irw_text_4`, registered 2026-10-30 with `irw_text_3` at
+954 tables; before that `irw_text_3`, from 2026-09-25); otherwise the core shard pinned by `CORE_DEFAULT`, or
 the newest core shard when that is `None` (currently none, so new response
 data goes to `item_response_warehouse_8`: unpinned 2026-10-15 with shards 5
 and 6 both near the cap, and shard 8 registered 2026-10-21 with shard 7 at

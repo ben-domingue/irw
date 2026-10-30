@@ -1,0 +1,108 @@
+# The metadata pipeline's last step: when metadata CSVs land on main, upload
+# them into the DRAFT of datapages/irw_meta (Workflow 3 of
+# .claude/skills/irw-site-update/SKILL.md, `upload_meta.py`).
+#
+# Until 2026-10-30 this step was manual: the pipeline (metadata-pipeline.yml)
+# opened its pull request, someone merged it, and someone was then meant to
+# `git pull` and run upload_meta.py by hand. Nobody did after the 2026-10-28
+# run, irw_meta v55.0 was cut from a checkout taken before that run merged,
+# and 28 released tables (tolomeo_2026_icar16 among them) had no site page for
+# two days while the drift report (#2085) classed the lag as normal
+# (datapages/irw#404). Ben, 2026-10-30: "the whole point of the pipeline is to
+# upload the metadata."
+#
+# Why on merge to main rather than inside the pipeline run: the pull request
+# IS the review (see metadata-pipeline.yml's header). Merging it is the human
+# signal that the rows are right, so that is the moment they go to the
+# warehouse. It also covers hand edits to metadata/ (#2830 was one), which the
+# 2026-10-05 revert showed must reach irw_meta before the next run or stage 01
+# writes stale values back over them.
+#
+# What this does NOT do: publish. red_up only ever writes the draft ("next")
+# version; releasing irw_meta stays a hand step on the Redivis site, within the
+# one-week draft window (src/ARCHITECTURE.md §4). And a release does not render
+# the site: dispatch quarto_publish.yaml in datapages/irw afterwards
+# (datapages/irw#404 proposes wiring that too).
+#
+# item_classical is not here: its 78 MB CSV is not committed, so upload_meta.py
+# does not find it in metadata/ and skips it. Regenerate and upload it by hand
+# with 19_item_classical.py as before.
+name: metadata upload
+
+on:
+  push:
+    branches: [main]
+    paths:
+      # The committed CSVs that FILE_TABLE_MAP in upload_meta.py maps to
+      # irw_meta tables. version_manifest.tsv, status.json and the run logs
+      # are not Redivis tables and do not trigger this.
+      - "metadata/metadata.csv"
+      - "metadata/biblio.csv"
+      - "metadata/tags.csv"
+      - "metadata/nominal_tags.csv"
+      - "metadata/comps_biblio.csv"
+      - "metadata/nominal_biblio.csv"
+      - "metadata/simsyn_biblio.csv"
+      - "metadata/simsyn_metadata.csv"
+      - "metadata/comps_metadata.csv"
+      - "metadata/nominal_metadata.csv"
+      - "metadata/conj_metadata.csv"
+      - "metadata/conj_biblio.csv"
+      - "metadata/conj_outcomes.csv"
+      - "metadata/rank_metadata.csv"
+      - "metadata/rank_biblio.csv"
+      - "metadata/itemtext_metadata.csv"
+      - "metadata/collections.csv"
+      - "metadata/collection_members.csv"
+      - "metadata/covariate_labels.csv"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Two merges minutes apart must not race each other's delete-and-recreate of
+# the same draft table. Queue them; the later one uploads the later main.
+concurrency:
+  group: metadata-upload
+  cancel-in-progress: false
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Python dependencies
+        # red_up imports only redivis beyond the standard library.
+        run: python -m pip install --upgrade pip && python -m pip install --quiet redivis
+
+      - name: Upload metadata CSVs to the irw_meta draft
+        env:
+          # The data.edit token, a SEPARATE secret from REDIVIS_API_TOKEN,
+          # which is the read-only one every other workflow here uses
+          # (drift-report.yml says why). irw_secrets.load_write_token takes an
+          # exported REDIVIS_API_TOKEN first, so it is handed over under that
+          # name.
+          REDIVIS_API_TOKEN: ${{ secrets.REDIVIS_WRITE_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [ -z "${REDIVIS_API_TOKEN}" ]; then
+            echo "::error::REDIVIS_WRITE_TOKEN secret is not set; nothing uploaded"
+            exit 1
+          fi
+          python3 .claude/skills/irw-site-update/scripts/upload_meta.py --dir metadata --yes 2>&1 | tee upload.log
+          {
+            echo "## irw_meta draft upload"
+            echo
+            echo "Uploaded to \`datapages/irw_meta:next\` from \`${GITHUB_SHA::9}\`. The draft is NOT released:"
+            echo "publish it on Redivis, then dispatch \`quarto_publish.yaml\` in datapages/irw for the site."
+            echo
+            echo '```'
+            grep -E "^\s*(UPDATE|CREATE|SKIP|verified|FAILED|OK|red_up)" upload.log || tail -40 upload.log
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"

@@ -91,6 +91,13 @@ jobs:
       - name: itemtext live_tables
         run: python -m unittest discover -s itemtext/tests -t . -v
 
+      # tags/tags_auto.csv against the controlled vocabulary (#3322). The
+      # pipeline halts in 03_tags.R on an off-vocabulary Construct type or
+      # Sample, and the staging script refuses one, but a batch that appends
+      # rows by hand meets neither check until the next Monday run fails.
+      - name: tags_auto vocabulary
+        run: python -m unittest discover -s tags/tests -t . -v
+
       # The R validator is the copy external contributors source from a raw
       # GitHub URL, so it has to keep parsing even though nothing here imports
       # it. irw_validate's parity test checks that its `# @check` markers still

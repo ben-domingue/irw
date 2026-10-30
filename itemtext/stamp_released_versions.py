@@ -30,7 +30,7 @@ idx = json.loads(index_path.read_text())
 IDX = {ds: {v: set(names) for v, names in vers.items() if names}
        for ds, vers in idx.items()}
 
-TEXT = ["irw_text", "irw_text_2", "irw_text_3"]
+TEXT = ["irw_text", "irw_text_2", "irw_text_3", "irw_text_4"]
 RESP = ["item_response_warehouse"] + [f"item_response_warehouse_{i}" for i in range(2, 9)]
 
 

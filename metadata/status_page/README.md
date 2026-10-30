@@ -29,7 +29,7 @@ reading tag coverage as 75% when seven of eight columns sit at 55%.
 
 Redivis caps a dataset at 1000 tables, so item text is split across shards:
 `irw_text` (from 2025), `irw_text_2` (from 2026-09-05, full at 988 on 2026-09-24)
-and `irw_text_3` (from 2026-09-24). New tables go to whichever shard `red_up`'s
+`irw_text_3` (from 2026-09-24) and `irw_text_4` (from 2026-10-30). New tables go to whichever shard `red_up`'s
 `ITEMTEXT_DEFAULT` names, which is not always the newest. **Never count against
 one shard alone.** A count that reads one dataset does not fail -- it returns a
 smaller number, which reads as item text having lost tables overnight.
