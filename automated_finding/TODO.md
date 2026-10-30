@@ -5,16 +5,12 @@
 Full write-up in `BATCH_LOG.md` (2026-10-29f). Two discovery passes were fired
 and the standing leads backlog was reconciled and worked.
 
-- [ ] **17 response tables (145,844 responses) + 5 item text tables need
-  uploading.** `automated_finding/irw_output/` with
-  `MANIFEST_2026-10-29f.txt`, and `itemtext_output/`. **Response tables
-  first.** All 17 pass `irw-validate --profile upload`; all 5 item text tables
-  pass the four-gate chain. Dictionary, codebook, tag, provenance,
-  mapping-verification and rights-register rows are all staged, so nothing
-  needs pasting. Stamp `uploaded=` on the 5 shipped `itemtext_provenance.csv`
-  rows and the 5 `itemtext/mapping_verification.csv` rows only once Ben
-  confirms; the 12 provenance rows recorded NOT SHIPPED keep a blank
-  `uploaded`.
+- [x] **UPLOADED 2026-10-30** — 17 response tables (145,844 responses) and
+  the 5 item text tables, confirmed by Ben. Manifest renamed
+  `irw_output/MANIFEST_2026-10-29f_uploaded.txt`; both staging folders are
+  empty again, which is the upload clearing them, not a sync fault. The 5
+  shipped `itemtext_provenance.csv` rows are stamped `uploaded=2026-10-30`
+  (the 12 rows recorded NOT SHIPPED keep a blank `uploaded`, by design).
 
   From the leads backlog:
   - `aguilar_latorre_2022_covid_{knowledge,risk,practices}` — 354 Spanish
@@ -32,14 +28,20 @@ and the standing leads backlog was reconciled and worked.
   - `tung_2026_financial_literacy` — 393 US undergraduates,
     10.23668/psycharchives.22277, CC BY 4.0.
 
-- [ ] **The PLOS recycled-terms search is STILL RUNNING** and will be for
-  hours: 466 clean English terms from `search_terms_log.csv` that had never
+- [ ] **The PLOS recycled-terms search is STILL RUNNING**, now 456 of 466
+  terms in: 466 clean English terms from `search_terms_log.csv` that had never
   been run against that journal, out of a pool of 4,663 distinct terms of which
   only 704 have ever hit PLOS. Output goes to
-  `runs/plos_triage_2026-10-29f.csv`; at the time of writing it was 14 terms in
-  with 571 candidates already triaged. **It still owes: Step 2b, a
-  `leads/plos_leads_2026-10-29.csv`, the `search_terms_log.csv` appends for its
-  466 terms, and a BATCH_LOG entry.** `irw_discover_plos.py` triages in
+  `runs/plos_triage_2026-10-29f.csv`. **The premise is confirmed and then
+  some: 10,707 candidates triaged, 104 `good`** — the largest single discovery
+  haul this pipeline has produced, from terms that were already sitting in the
+  log. Also 1,938 `human_assistance` rows, which on the PsychArchives run was
+  the bucket that yielded 35 `recoverable_format` leads. 104 `good` is far
+  more than one batch can carry, so the plan is to rank them, ship the best
+  tranche, and write the remainder to `leads/plos_leads_2026-10-30.csv` as
+  `unworked` rather than let them die in a gitignored run file. **It still
+  owes: a `leads/plos_leads_2026-10-30.csv`, the `search_terms_log.csv`
+  appends for its 466 terms, and a BATCH_LOG entry.** `irw_discover_plos.py` triages in
   process and runs Step 2b unconditionally at the end, so the retriage will be
   there; the rest is bookkeeping a later session must do.
 

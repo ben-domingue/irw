@@ -14,6 +14,18 @@ another search when you are done? keep on going!", then "when searches report
 back, move immediately to triage and staging. i'll upload everything when
 possible." Six pieces, in that order.
 
+**UPLOADED 2026-10-30.** All 17 response tables and all 5 item text tables, on
+Ben's confirmation. `irw_output/MANIFEST_2026-10-29f_uploaded.txt`; the 5
+shipped `itemtext_provenance.csv` rows and the 5
+`itemtext/mapping_verification.csv` rows carry `uploaded=2026-10-30`, stamped
+by editing those rows' bytes in place (both files hold mixed line endings, and
+`itemtext_provenance.csv` is CRLF throughout -- a whole-file rewrite churns
+every line). The 12 provenance rows recorded NOT SHIPPED keep a blank
+`uploaded` deliberately: a blank there means "no item text table exists", not
+"not yet uploaded". Still owed once the tables are live: the
+`itemtext_issues.qmd` entries for `maywegpaus_2021_dialls_oer` and the four
+`trusz_2022_*` item text tables, which join the `lee_whiting_2025_*` handoff.
+
 ### 1. The term backlogs: one was already empty, one was the queued job
 
 `pmc_term_backlog_2026-09-25.csv` is **exhausted** -- all 508 ranked terms carry
