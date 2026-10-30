@@ -7,13 +7,13 @@ checkboxes here just mean "this line item is settled," not "actionable."
 
 **For currently open action items, see `TODO.md`.**
 
-## PLOS leads worked, 2026-10-30 -- 95 tables, 1,682,135 responses
+## PLOS leads worked, 2026-10-30 -- 103 tables, 1,699,095 responses
 
-Twenty-two deposits, the largest `good` leads of the pass below, worked
+Twenty-three deposits, the largest `good` leads of the pass below, worked
 largest-first off `leads/plos_leads_2026-10-30.csv`. NOTHING UPLOADED; manifest
 `irw_output/MANIFEST_2026-10-30.txt`, which carries the per-deposit narrative.
-All 95 pass `irw-validate --profile upload`; ten item text tables pass the
-four-gate chain. 63 actionable `good` leads remain.
+All 103 pass `irw-validate --profile upload`; 18 item text tables pass the
+four-gate chain. 62 actionable `good` leads remain.
 
 | deposit | tables | responses | licence |
 |---|---|---|---|
@@ -39,6 +39,7 @@ four-gate chain. 63 actionable `good` leads remain.
 | Diop 2019 VMS acceptance | 5 | 12,954 | CC BY 4.0 |
 | Chen 2026 urban tourism co-creation | 6 | 12,168 | CC BY 4.0 (Mendeley) |
 | Robles-Mariños 2023 cyberchondria CSS-12 | 2 | 19,710 | CC BY 4.0 (Zenodo) |
+| Xu 2026 GAI and student creativity | 8 (+8 items) | 16,960 | CC BY 4.0 |
 
 ### What generalises from deposits 5-21
 
@@ -78,6 +79,27 @@ responses that look like human ones.
 **Rotated-booklet planned missingness, asserted not assumed.** `bock_2021`
 ships two partial-credit achievement tests (PCK 34 items, CK 38, scored 0/1/2)
 whose per-item n runs 36-211 by design.
+
+**A deposit can contradict its own paper in one half and reproduce it in the
+other.** `xu_2026`'s eight demographic columns are NAMED in the appendix, not
+opaque, yet not one of the four published distributions reproduces (gender
+242/181/1 against 218/206; level 62/174/188 against 102/163/159; and so on,
+each summing to 424). That warranted distrusting the whole file — so the item
+side was tested the same way, and it passes: each five-item block's Cronbach
+alpha lands on the paper's reported CR (Exploration 0.874 vs 0.874, Co-Creation
+0.858 vs 0.857, Flow 0.873 vs 0.871, Self-efficacy 0.870 vs 0.874), all eight
+inside the stated 0.850–0.874, with Exploration–Exploitation the highest
+inter-construct correlation as reported. So the 40 items ship and all eight
+demographic columns are dropped — and the script ASSERTS the mismatch, so a
+corrected deposit would fail loudly rather than pass silently.
+
+**Code-keyed appendices are the item-text gold standard.** Xu's Appendix A
+tabulates every item against the same Q-number the data column carries, so
+wording reaches a column by name, not position — a one-position slip is not
+expressible, and those eight mapping_verification rows say VERIFIED rather than
+NO_ROUTE. Three deposits this session sit at three different strengths:
+code-level (Xu), block heading plus printed order (Guo), block membership only
+from permutation-invariant sums (Robles-Mariños, hence no item text at all).
 
 **A codebook-free deposit can still be resolved, if it ships its own totals.**
 `robles_marinos_2023` is `v1`..`v41` with no codebook and an image-only Table 1.
