@@ -9,6 +9,17 @@ checkboxes here just mean "this line item is settled," not "actionable."
 
 ## PLOS leads worked, 2026-10-30 -- 214 tables, 1,897,743 responses
 
+**UPLOADED 2026-10-30.** All 214 response tables and all 62 item text tables,
+the latter into **irw_text_4**. Confirmed by Ben in-session; not re-verified
+against Redivis (uploads sit on the unreleased draft anyway). The 62 shipped
+`itemtext_provenance.csv` rows and the 61 `itemtext/mapping_verification.csv`
+rows carry `uploaded=2026-10-30`; manifest renamed
+`irw_output/MANIFEST_2026-10-30_uploaded.txt`. Provenance rows whose note is
+not SHIPPED keep a blank `uploaded` by design -- the column marks the item
+text upload, not the response table. (62 item text tables against 61
+mapping_verification rows is not a gap: `sabrina_2026_gad7` was carried over
+from the 2026-10-29f batch and already had its row.)
+
 FORTY-FOUR deposits: every `good` lead of the pass below above 5,000
 responses, worked largest-first off `leads/plos_leads_2026-10-30.csv`. Of the
 104 `good` leads, 44 shipped, 18 were blocked on licence, 7 were rejected on
