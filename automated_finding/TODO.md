@@ -35,15 +35,15 @@ and the standing leads backlog was reconciled and worked.
   `leads/plos_leads_2026-10-30.csv` written with 1,780 rows, BATCH_LOG entry
   written (2026-10-30). Full numbers there.
 
-- [ ] **24 response tables (1,290,303 responses) + 1 item text table need
+- [ ] **25 response tables (1,335,983 responses) + 1 item text table need
   uploading.** `automated_finding/irw_output/` with `MANIFEST_2026-10-30.txt`,
   and `itemtext_output/sabrina_2026_gad7__items.csv`. **Response tables
   first.** Ben is uploading this batch at the end, so the folder stays open and
-  tables keep accumulating. All 24 pass `irw-validate --profile upload`; the
-  item text table passes the four-gate chain. 24 dictionary rows, 24 codebook
-  rows, 24 tag rows (already appended into `tags/tags_auto.csv`), 24
-  `itemtext_provenance` rows and 13 `instrument_rights_register` rows (9 hold,
-  3 ship, 1 ship_with_note) are staged, so nothing needs pasting. Eight
+  tables keep accumulating. All 25 pass `irw-validate --profile upload`; the
+  item text table passes the four-gate chain. 25 dictionary rows, 25 codebook
+  rows, 25 tag rows (already appended into `tags/tags_auto.csv`), 25
+  `itemtext_provenance` rows and 14 `instrument_rights_register` rows (10 hold,
+  3 ship, 1 ship_with_note) are staged, so nothing needs pasting. Nine
   deposits:
   - `hocine_2016_psychosocial_stressors` -- 10,000 French employees x 58 items,
     figshare 10.6084/m9.figshare.3156154, CC BY 4.0 (verified on the DEPOSIT;
@@ -67,6 +67,32 @@ and the standing leads backlog was reconciled and worked.
     10.6084/m9.figshare.30931064, CC BY 4.0 (verified on the deposit). Seven of
     its eight dimension prefixes also exist as composite-mean columns with the
     same name.
+  - `lin_2026_advertising_literacy` -- 3,267 Taiwanese high-school students,
+    figshare 30304291, CC BY 4.0 (verified on the deposit). An experiment whose
+    randomised arm is deliberately NOT shipped -- see the open question below.
+
+- [ ] **A STANDARDS QUESTION ONLY BEN CAN SETTLE: what does `treat` do in a
+  multi-arm design?** `lin_2026_advertising_literacy` (shipped in this batch)
+  is a three-arm experiment -- full disclosure, partial disclosure, and no
+  disclosure (control) -- individually randomised within 36 schools.
+  `datastandard.md` defines `treat` as exactly "`1` = treatment, `0` =
+  control" and tells scripts to map the source's coding onto that. Neither
+  half works here:
+  - there are TWO treatment arms, so a 0/1 column cannot represent the design
+    without collapsing two distinct manipulations into one; and
+  - the deposit never says which of its codes 1/2/3 is the control, so any
+    mapping risks computing effects against the wrong baseline.
+  I shipped the responses and left the arm out entirely, because 1/2/3 in
+  `treat` would look conformant while being wrong, and the standard explicitly
+  forbids hiding a treatment in `cov_group`. Two things worth a ruling:
+  (a) whether IRW wants a convention for >2 arms (a `treat_arm` column, or
+  `treat` plus an `itemcov_`/design column naming the arm), since this will
+  recur -- multi-arm message-framing experiments are common in the PLOS
+  corpus; and (b) whether the code-to-arm mapping here is worth recovering
+  from the paper's reported per-arm means, which is the same
+  reconstruct-from-published-statistics route that verified `trusz_2022_iieq`
+  on 2026-10-29. Until then the table is complete and honest, just without the
+  manipulation.
 
 - [ ] **Four item-text extractions are rights-clear and blocked only on
   mechanics or mapping**, which is a different queue from the rights holds.
@@ -91,10 +117,10 @@ and the standing leads backlog was reconciled and worked.
   split off into section text with the target becoming `item_text`. Nine
   `__items` tables when done.
 
-- [ ] **78 actionable `good` PLOS leads, unworked** -- top of
+- [ ] **77 actionable `good` PLOS leads, unworked** -- top of
   `leads/plos_leads_2026-10-30.csv` (sorted unworked-first by response count).
-  The eight largest were worked on 2026-10-30 and are marked `shipped` there;
-  78 remain. 18 more `good` rows are `blocked_licence` (17 `unknown`, 1
+  The nine largest were worked on 2026-10-30 and are marked `shipped` there;
+  77 remain. 18 more `good` rows are `blocked_licence` (17 `unknown`, 1
   `no-license`) and recorded rather than dropped. The largest: a 60-item
   psychosocial-factors instrument at 10,000 respondents (600,000 responses,
   cc-by), a tuberculosis-stigma study at 33,349 respondents (cc0), a
