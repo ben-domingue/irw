@@ -7,6 +7,311 @@ checkboxes here just mean "this line item is settled," not "actionable."
 
 **For currently open action items, see `TODO.md`.**
 
+## Two searches + the leads backlog, 2026-10-29f/g/h -- 17 tables, 145,844 responses; 86 stale lead rows reconciled
+
+Ben: "fire an automated search! start with any backlogged lists", then "let's do
+another search when you are done? keep on going!", then "when searches report
+back, move immediately to triage and staging. i'll upload everything when
+possible." Six pieces, in that order.
+
+### 1. The term backlogs: one was already empty, one was the queued job
+
+`pmc_term_backlog_2026-09-25.csv` is **exhausted** -- all 508 ranked terms carry
+a run marker across the 09-25, 10-04, 10-04b and 10-05b passes (208 of them only
+partially, against peerj and screports, which is a different gap). The older
+`pmc_term_backlog.csv` is a subset of the same work. So there was no unrun PMC
+term list to fire, which is worth recording because this file has referred to
+"the backlog" as if it were one thing.
+
+The job that WAS queued is the one `TODO.md` opened on 2026-10-29d:
+**PsychArchives wants RECYCLED terms, not fresh ones.** 135 fresh terms had
+returned 0 candidates there, because ZPID holds mainstream psychology constructs
+and that sweep deliberately searched elsewhere.
+
+Fired `irw_discover_updated.py --sources psycharchives` over **346 terms**: every
+distinct term in `search_terms_log.csv` first logged on or before 2026-06-09
+(the oldest and most ordinary in the file) that had never been run against this
+source, Latin-script, in English, German, Spanish, French, Dutch and Portuguese.
+The German and Dutch share matters for ZPID and was kept deliberately rather
+than filtered to English.
+
+Yield: **221 candidates**, against 0 from the 135 fresh terms. The recycling rule
+the PLOS and PMC modes follow transfers to PsychArchives, and that is now
+measured rather than argued.
+
+### 2. The lead backlog: 86 of the 573 "unworked" rows were already shipped
+
+Before working anything, every `unworked` lead row with a real triage flag
+(dropping the 780 `origin_flag=untriaged` rows in `repos_leads_2026-10-20.csv`,
+which 2026-10-21 established are duplicate deposits carrying ledger verdicts)
+was matched against **every DOI in every `data/` script header**, not just the
+`# DOI:` line. 86 of 573 had already been turned into a processing script by a
+later batch, with nobody going back to mark the row.
+
+That is the widening `TODO.md` has had open since 2026-10-21, when
+`10.7910/DVN/VWRTAW` was built twice and `sadish` reached consolidation because
+`grep -rl "DOI: <doi>"` misses a script whose `# DOI:` line holds the paper DOI
+while the data DOI sits on `# Source:`. The same one-script check that prevents a
+double build also recovers a stale backlog, so it is worth re-running after any
+batch; the verdicts are written back into the nine `leads/*.csv` files, each
+file's own quoting and line terminator preserved.
+
+Real unworked leads: **487, not 573.**
+
+### 3. Two deposits worked, both from leads an earlier batch had left
+
+**`aguilar_latorre_2022_covid_*` -- 3 tables, 14,160 responses.**
+Zenodo 10.5281/zenodo.14748660, CC BY 4.0 verified on the record. 354 Spanish
+adolescents aged 12-18; Aguilar-Latorre et al. (2022), Front Psychol 12:804531.
+
+  aguilar_latorre_2022_covid_knowledge   6,018   354 x 17, resp 0-2
+  aguilar_latorre_2022_covid_risk        3,540   354 x 10, resp 1-5
+  aguilar_latorre_2022_covid_practices   4,602   354 x 13, resp 1-5
+
+Triaged `good` on 2026-10-20 and left unworked, recorded as "only 4 item columns
+in 'dateset validation.csv'". **That was a text-Likert artifact**: every item
+column holds a Spanish label ("Parcialmente correcto", "Bastante", "A menudo")
+rather than a code, so the numeric-column heuristic found almost nothing. This is
+exactly the README Step 1b case -- "Could not confidently identify item columns"
+rows are disproportionately real -- arriving on a `good` row instead of a
+`human_review` one. 40 items across three documented scales were sitting there.
+
+The knowledge table is deliberately mixed-width: the paper states eight knowledge
+questions offered three options and nine offered only correct vs.
+incorrect/not-knowing. Both are mapped to the same anchors (0 = completely
+incorrect or does not know, 2 = completely correct), so "2 means fully correct"
+holds for every item and the width warning is documented rather than suppressed.
+K8's top category was never endorsed -- an unendorsed anchor, not a construct
+boundary.
+
+Dropped: the province of residence (state-level administrative geography, under
+the 2026-10-20 geographic ruling and the 2026-10-29 `cov_state` ruling that
+followed it), the free-text country of birth, two multi-select strings, three
+relative-type pickers, and P14-P18 (four unrelated yes/no screening questions
+plus one nominal item -- not a scale). The source's demographic headers are the
+question text truncated at 63 characters, which makes @18 and @20 byte-identical;
+the script addresses them by their "@NN." question tag for that reason.
+
+**Item text NOT shipped, and the wording was never the obstacle.** All 40
+questions are in the deposit's own `meaning - dateset validation.csv` in the
+administered Spanish, keyed by the same K/A/P codes. The rights are the problem,
+on two layers, and both now have register rows:
+
+  * Honarvar, B., et al. (2020), Int J Public Health 65:731-739 -- the original
+    KAP questionnaire this is a translation of. Crossref lists only
+    springer.com/tdm, Unpaywall calls it bronze, and copyright is the Swiss
+    School of Public Health rather than the authors. Its ONLY permission is the
+    PMC COVID-19 emergency grant, expressly scoped "for the duration of the
+    World Health Organization (WHO) declaration of COVID-19 as a global
+    pandemic" -- which the WHO ended on 2023-05-05. A lapsed grant is silence,
+    and silence does not ship.
+  * The authors' Spanish translation. **This is the inverse of the
+    `gerou_2023_dass21` shape** and worth naming as such: there, the original was
+    public domain and the adaptation unestablished, so the original shipped as a
+    stand-in. Here the ADAPTATION is openly licensed (the Frontiers article and
+    the Zenodo deposit are both CC BY 4.0, by the adapting authors themselves)
+    and the ORIGINAL is not -- so there is no stand-in to fall back on. A
+    depositor's CC licence covers the depositor's own material, not the
+    third-party instrument inside it, and a translation is substantially that
+    instrument's content. Held, with the open question handed to Ben in
+    `TODO.md` rather than blocking the batch.
+
+**`maywegpaus_2021_dialls_oer` -- 1 table + item text, 7,144 responses.**
+Zenodo 10.5281/zenodo.5553923, CC BY 4.0 on the record and again in the
+description PDF. 138 teachers in the UK, Portugal, Israel and Germany,
+Sept 2020 - Feb 2021; H2020 DIALLS WP4 deliverable 4.1.
+
+  maywegpaus_2021_dialls_oer         7,144   138 x 79, resp 1-5
+  maywegpaus_2021_dialls_oer__items    395   79 items x 5 options
+
+**The `pii_suspected` flag on it was a FALSE POSITIVE**, and this is the lesson
+worth keeping: the detector reads column NAMES and LABELS, so it fired on
+`RGPC_1_Name`, whose variable label begins "Respondent-Generated-Personal-Code 1:
+First letter of your first name". The four RGPC_* columns are a
+respondent-generated linkage code -- one letter of a first name, one day of the
+month, one letter of a city, one digit of a phone number -- and the deposit's
+"Anonymisation of the data" section says in terms: "At no point of the survey was
+it possible to draw conclusions about the individual from the data. The use of a
+respondent generated personal code ... enabled a completely anonymous
+participation in the four different surveys." No name, email, date of birth or
+phone number in the file. **`pii_suspected` is a lead, not a verdict** -- read the
+column, not its label.
+
+ONE table, not four: the four surveys (PD materials on cultural literacy, on
+dialogue and argumentation and on wordless films; lesson plans; the SPCLL; the
+discussion forum) apply the SAME study-authored instrument -- three items each on
+a resource's application, content, design and value, after Kirkpatrick &
+Kirkpatrick (2006) -- on the SAME five-point agreement scale to the SAME
+teachers, linked across surveys by that code. Following the `trust_actors` merge
+Ben asked for earlier the same day. Splitting by survey would also drop three of
+the four pieces below the N>=100 floor (LP n=71, SPCLL n=65, DF n=62) and throw
+them away. The sparsity is by design and the PDF says so: "not all teachers
+answered all four surveys".
+
+`resp = 0` dropped: 67 of 7,211 observed cells, over all 79 items, at most 3 per
+item, against value labels that define 1-5 only. What settles it is that the same
+undocumented 0 appears in covariate columns whose labels run 1-2 and 1-3 -- it is
+this export's no-answer code, not a sixth category. `id` is the row index because
+the deposit's VP_NR, described as "Continuous participant numbers as specific
+identifier", repeats for two rows.
+
+Item text SHIPPED from the .sav's own variable labels (stems) and value labels
+(anchors), both levels present for all 79. Study-authored: the PDF states "UBER,
+as responsible partner, developed the items", three stems were searched verbatim
+and match no published scale, and Kirkpatrick & Kirkpatrick is the evaluation
+MODEL behind the four facets, not copied wording. Rights: study-authored under
+the deposit's own CC BY 4.0. Item codes are the source's own column names kept
+verbatim, so a one-position slip is not expressible -- `mapping_verification.csv`
+records that as `data_labels` / `NOT_NEEDED` with both label levels named.
+**Public note owed once live**: the shipped wording is the project's English
+master while the surveys were fielded in German, UK English, Portuguese and
+Hebrew, so for three of the four partners it is a stand-in. Same shape as the
+four `lee_whiting_2025_*` notes already queued.
+
+Also not shipped from that file: `DF_exp_1..4` (four discussion-forum EXPERIENCE
+items on their own five-point experience scale, n=62, under the floor), the
+derived `re_*` reverse-codes and `*_mean_*` composites, the four open-feedback
+boxes (PII-screened, clean), and the survey-specific age-group multi-selects and
+counts, several carrying stray undocumented codes (`AG_1` holds a 6 against
+labels 0-1; `realistic_use` a 10 against 1-2).
+
+### Three more leads closed without a download
+
+  * `10.5061/dryad.r5d54` -- `pii_suspected` on a column named `DOB` in a
+    BIRDSONG study. A bird's hatch date is not human PII and non-human subjects
+    are explicitly not a reason to skip, so the flag is void; left
+    `worth_retrying` because the content question (repeated-measures trial
+    structure vs. acoustic summaries per bird) is untouched.
+  * `10.5281/zenodo.14999619` -- 2 item columns, below the >=3-item floor.
+  * `10.5281/zenodo.18489957` (an `Email` column) and
+    `10.6084/m9.figshare.19354781.v1` (a "What is your full name?" column) --
+    re-checked against the 2026-10-20 ruling, name/email tier, skips stand.
+    `10.7910/dvn/kdz60y` also stands, but on its `phone` column rather than its
+    `zip_code`: under the 2026-10-20 ruling the zip alone would be
+    drop-the-column-and-ship, while a phone number was not among the identifiers
+    that ruling moved and reads as the email tier. 2,862 CC0 respondents ride on
+    that reading, so it is in `TODO.md` as a one-line question.
+
+### 4. What the PsychArchives pass actually returned, and what it shipped
+
+227 candidates, 23 already in the seen ledger, **204 triaged**: 2 `good`, 57
+`human_assistance`, 107 `no_usable_file`, 19 `download_failed`, 12
+`below_min_n`, 7 `not_item_response`. Step 2b on the 57: 35
+`recoverable_format`, 11 `human_review`, 6 `not_item_response`, 3
+`worth_retrying`, 2 `aggregate_continuous`, 0 conj. All three confirmation
+lines were in the run output -- `[step 2b] retriaging 57`, `[human_review]
+archived 11 row(s)`, `[step 2b] 57 refined flag(s) recorded in
+repo_triage_seen_keys.csv`. Standing record: `leads/psycharchives_leads_2026-10-29.csv`.
+
+The `no_usable_file` share (52%) is high but not surprising for ZPID: a large
+part of what it holds is `Primärdaten` deposited as a zip or an `.sav` behind a
+landing page the resolver cannot reach, plus scale documentation rather than
+data. The `recoverable_format` bucket is the seam worth returning to -- Step
+2b's note on most of the 35 is "Re-read with no change to the reader, keeping
+only the N columns that share one small integer domain", i.e. the file opened
+fine and the item-column selector chose badly.
+
+**`rosman_2022_*` -- 7 tables, 70,085 responses.** PsychArchives
+10.23668/psycharchives.6495, CC BY-SA 4.0 (SA propagates into
+Derived_License). Rosman et al. (2022), Public Understanding of Science; 504 +
+588 German respondents over two studies. Triage saw only Study 2 because it
+opens one file per candidate.
+
+This deposit is **a trap for the collapse-same-instrument rule, and the trap is
+worth recording**: the METI is the same 14 columns with the same names in both
+files -- precisely the shape that invites a merge -- and the value labels say
+Study 1 ran them on 1-5 and Study 2 on 1-7, with different anchor adjectives
+("inkompetent - kompetent" vs. "unqualifiziert - qualifiziert"). A merged table
+would have put two response formats on one `resp` with nothing downstream
+complaining. Two tables, and the script now ASSERTS the anchors still differ,
+so a future read that finds them equal reopens the question instead of silently
+settling it. The three tables that DO merge across studies were each confirmed
+first -- identical columns, stems and anchors; the single differing stem,
+`trustf_osp_03`, differs by a trailing full stop.
+
+Also here: `wave` (Study 2 measured the 5-item trust scale pre and post reading
+four study descriptions, Study 1 once -- unbalanced by design, and the occasion
+is stripped out of the item code because `wave` is what carries it), study-
+prefixed ids (both files number from their own `lfdn` and the ranges overlap),
+and `resp = 0` dropped again as an undocumented no-answer code. That is the
+**third deposit in this one batch** with an undeclared 0 against value labels
+that define only the real range -- DIALLS, Rosman and (as a covariate)
+Aguilar-Latorre. It is worth treating as a standing expectation for `.sav`
+exports rather than a surprise each time.
+
+Item text NOT shipped, on cost: all 92 German stems and anchors are in the
+`.sav` labels, both levels, every item. The standard wants the German wording
+plus an English translation in the `*_translated` columns, and 92
+IRW-generated translations is content that owes its own issues-page entry and
+provenance. In TODO.md with that diagnosis.
+
+**`tung_2026_financial_literacy` -- 1 table, 1,179 responses.** PsychArchives
+10.23668/psycharchives.22277, CC BY 4.0, 393 US undergraduates. A small table,
+and the honest reading is that most of the deposit is not item-level: math
+anxiety and reading anxiety are ONE question each, and `Financial.Anxiety` is
+the deposit's own mean of Shapiro & Burchell's 12-item scale whose items were
+not deposited -- the better table is the one that is not there. What remains is
+the Lusardi & Mitchell "Big Three", which is canonical enough to be worth three
+items.
+
+Its `resp` coding is a real choice, not a default: the source records Correct /
+Incorrect / Nonresponse ("I don't know or Refuse"), and those three are NOT
+ordered, so 0/1/2 would be a nominal scale wearing an ordinal mask. They ship
+as the dichotomy the depositors used for their own composite -- verified, since
+`Financial.Literacy.Score` equals "all three Correct" for all 393 rows. The
+cost is that a 0 may be wrong OR declined, and the declined share is large and
+uneven (60, 79, 185 of 393); the table description says so.
+
+One PII-screen lesson, the mirror image of the usual one: the file is read with
+`dtype=str`, so every column arrives as a string, and the long decimals in
+`Financial.Anxiety` ("3.58333333333333") matched the screen's
+nine-or-more-digits phone pattern. The usual failure is a screen selecting too
+FEW columns and reporting clean; this one selected too many and reported a hit
+on a composite score. The fix is to exclude columns whose every value parses as
+a number, not to loosen the pattern.
+
+### 5. Four rights-register rows, two for instruments that had no row at all
+
+Written because this batch met them, and because a missing row warns nobody:
+
+  * **AMAS** (Abbreviated Math Anxiety Scale, Hopko et al. 2003) -- `hold`.
+    SAGE subscription article; no permission or distribution statement located.
+    Common in this corpus's territory, so the row is worth having even though
+    it holds. Effective for `trusz_2022_amas`, whose wording was not in the
+    deposit either.
+  * **Lusardi & Mitchell "Big Three"** -- `hold`. GFLEC's own "About the Big
+    Three" page states no reuse terms; the NBER front matter grants only short
+    quotation with credit, which covers the paper. These three questions have
+    been re-fielded in 40+ surveys worldwide and that **ubiquity is not a
+    grant**.
+  * **Trusz's IIEQ and LAS** -- `ship`. The originator published both
+    instruments item by item in his own CC0 deposit, the strongest shape there
+    is. Note that `load_register()` keeps only hold/note verdicts, so this row
+    is invisible to the gate and must be read by name.
+  * **METI** (Hendriks, Kienhues & Bromme 2015) -- `note`, deliberately
+    recording the lead rather than claiming a verdict, because this batch did
+    not need one. Its originating PLOS ONE article is CC BY, which is where
+    whoever ships `rosman_2022_meti_*` item text should start.
+
+### 6. Second search, same recycling rule, this time against PLOS -- STILL RUNNING
+
+Ben asked for another, so the same method was pointed at the mode-1 surface.
+`search_terms_log.csv` holds 4,663 distinct terms of which only 704 have ever
+been run against PLOS; filtering to all-ASCII terms whose every word is in
+`/usr/share/dict/american-english` (plus a whitelist of instrument names and
+acronyms -- Zarit, Oswestry, WHOQOL, SERVQUAL, EQ-5D and the like) leaves **466
+clean English terms never run against that journal**. All 466 fired through
+`irw_discover_plos.py` -> `runs/plos_triage_2026-10-29f.csv`.
+
+At the time of writing it was 14 terms in with 571 candidates already triaged,
+so expect several thousand and many hours. **It still owes its
+`search_terms_log.csv` appends (466 rows), a
+`leads/plos_leads_2026-10-29.csv`, and its own BATCH_LOG entry**; the Step 2b
+retriage it does unconditionally in-process. One caveat for whoever picks it
+up: the term pool is recycled, so a handful read oddly out of their original
+context -- "absorption" pulled iron-absorption nutrition papers on the first
+pass. That is the expected cost of recycling and not a defect in the filter.
+
 ## One-off 2026-10-22: Luettgau 2026 (PNAS Nexus) eligibility check -> 2 tables, 384,573 responses
 
 Ben asked whether the data behind
