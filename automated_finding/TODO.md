@@ -35,14 +35,16 @@ and the standing leads backlog was reconciled and worked.
   `leads/plos_leads_2026-10-30.csv` written with 1,780 rows, BATCH_LOG entry
   written (2026-10-30). Full numbers there.
 
-- [ ] **18 response tables (1,136,223 responses) + 1 item text table need
+- [ ] **82 response tables (1,636,955 responses) + 1 item text table need
   uploading.** `automated_finding/irw_output/` with `MANIFEST_2026-10-30.txt`,
   and `itemtext_output/sabrina_2026_gad7__items.csv`. **Response tables
-  first.** All 18 pass `irw-validate --profile upload`; the item text table
-  passes the four-gate chain. 18 dictionary rows, 18 codebook rows, 18 tag rows
-  (already appended into `tags/tags_auto.csv`), 18 `itemtext_provenance` rows
-  and 8 `instrument_rights_register` rows (6 hold, 1 ship, 1 ship_with_note)
-  are staged, so nothing needs pasting. Five deposits:
+  first.** Ben is uploading this batch at the end, so the folder stays open and
+  tables keep accumulating. All 82 pass `irw-validate --profile upload`; the
+  item text table passes the four-gate chain. 82 dictionary rows, 82 codebook
+  rows, 82 tag rows (already appended into `tags/tags_auto.csv`), 82
+  `itemtext_provenance` rows and 21 `instrument_rights_register` rows (14 hold,
+  6 ship, 1 ship_with_note) are staged, so nothing needs pasting. Twenty
+  deposits -- see `MANIFEST_2026-10-30.txt` for the per-deposit write-ups.
   - `hocine_2016_psychosocial_stressors` -- 10,000 French employees x 58 items,
     figshare 10.6084/m9.figshare.3156154, CC BY 4.0 (verified on the DEPOSIT;
     the data is off-site, so the article's licence could not grant it).
@@ -54,6 +56,175 @@ and the standing leads backlog was reconciled and worked.
     students in Bangladesh, CC BY 4.0. Three published instruments, three
     different item-text outcomes: GAD-7 shipped, CES-D-10 held on missing
     option labels (rights are clear, stems in hand), K10 held on rights.
+  - `padchasuwan_2026_sexual_health_literacy` -- 1,235 Thai undergraduates,
+    CC BY 4.0. The 49-item ADMINISTERED form, not the published 45-item
+    instrument (EFA dropped 2, CFA 2 more; which ones is stated nowhere).
+  - `zhang_2025_{mfes,gds15,aaq,lsns6}` -- 1,117 adults aged 60-102 in
+    Shenzhen, figshare 10.6084/m9.figshare.29994334, CC BY 4.0 (verified on the
+    deposit). The AAQ values are already reverse-adjusted and the deposit says
+    so in its SHEET NAME.
+  - `oppong_2026_procurement_literacy` -- 554 Ghanaian students, figshare
+    10.6084/m9.figshare.30931064, CC BY 4.0 (verified on the deposit). Seven of
+    its eight dimension prefixes also exist as composite-mean columns with the
+    same name.
+  - `lin_2026_advertising_literacy` -- 3,267 Taiwanese high-school students,
+    figshare 30304291, CC BY 4.0 (verified on the deposit). An experiment whose
+    randomised arm is deliberately NOT shipped -- see the open question below.
+  - 8 `lin_2024_escooter_*` tables -- 683 Changsha metro users, CC BY 4.0. The
+    cleanest construct split in the batch: the paper's measurement model names
+    all eight and the column prefixes match one-for-one. No covariates, because
+    the deposit's nine demographic columns are bare integers with no codebook.
+  - `wang_2026_research_quality_gpt4o` -- 66,495 MACHINE-GENERATED ratings:
+    GPT-4o scored 2,145 published papers on 31 rubric indicators, 1-10. CC BY
+    4.0. Marked as machine responses throughout, with `rater` on every row.
+  - 8 `wu_2025_streaming_*` tables -- 506 Chinese streaming viewers, Harvard
+    Dataverse 10.7910/DVN/OHWKPD, **CC0 1.0** -- the first deposit in this
+    batch whose licence DIFFERS from its article's (CC BY 4.0), which is the
+    case that justifies checking every time. Its two listed files are
+    byte-identical duplicates.
+  - 4 `li_2024_deg_*` tables -- 434 students at three Thai universities,
+    CC BY 4.0. **The 1-5 scale runs BACKWARDS here** (resp=1 is strongest
+    agreement, per the paper's "varying from high to low"), which nothing in
+    the data reveals. Stated in all four descriptions and tags.
+
+- [x] **RESOLVED 2026-10-30 — LLM-generated responses belong in IRW, marked.**
+  I initially rejected `10.1371/journal.pone.0341620` (Wang & Wang 2026) as
+  "not human item responses": GPT-4o scored 2,145 published papers on 31
+  rubric indicators, 1-10. Ben's ruling: machine responses are fine provided
+  they are **marked accordingly** — what IRW does not want is "responses that
+  look like human responses but are actually LLMs or simulations". The
+  `jiang_2026_openeval_*` tables are the format precedent (their descriptions
+  open "AI models as respondents:"). Shipped as
+  `wang_2026_research_quality_gpt4o` with the machine provenance stated first
+  in the description and a `rater` column carrying the model name on every
+  row, and the lead is re-marked `shipped`.
+
+  **The operational consequence for this pipeline is worth keeping:** an
+  LLM-as-rater or simulated dataset is structurally indistinguishable from a
+  human rating study, so it will always triage `good`, and nothing short of
+  reading the paper's methods will reveal it. The check is therefore not
+  "should this be excluded" but "is the machine provenance named in the
+  description, the tags and a `rater` column" — and the failure mode to guard
+  against is shipping such a table with a description that reads as though
+  people answered it.
+
+- [ ] **Transcribing one questionnaire would unlock 36 item stems.** The
+  `lin_2024_escooter_*` deposit ships its questionnaire as a second SI file
+  (`journal.pone.0309953_S1_File.xlsx`, 10 KB) which was NOT transcribed. The
+  article quotes item fragments verbatim ("wide enough bike lanes", "shaded
+  paths", "willingness to recommend to others"), so the stems plausibly all sit
+  in that file with their construct labels -- which would also recover the nine
+  dropped demographic columns' meanings. An extraction job, not a rights
+  problem; the register row is a `hold` lead rather than a verdict.
+
+- [ ] **A STANDARDS QUESTION ONLY BEN CAN SETTLE: what does `treat` do in a
+  multi-arm design?** `lin_2026_advertising_literacy` (shipped in this batch)
+  is a three-arm experiment -- full disclosure, partial disclosure, and no
+  disclosure (control) -- individually randomised within 36 schools.
+  `datastandard.md` defines `treat` as exactly "`1` = treatment, `0` =
+  control" and tells scripts to map the source's coding onto that. Neither
+  half works here:
+  - there are TWO treatment arms, so a 0/1 column cannot represent the design
+    without collapsing two distinct manipulations into one; and
+  - the deposit never says which of its codes 1/2/3 is the control, so any
+    mapping risks computing effects against the wrong baseline.
+  I shipped the responses and left the arm out entirely, because 1/2/3 in
+  `treat` would look conformant while being wrong, and the standard explicitly
+  forbids hiding a treatment in `cov_group`. Two things worth a ruling:
+  (a) whether IRW wants a convention for >2 arms (a `treat_arm` column, or
+  `treat` plus an `itemcov_`/design column naming the arm), since this will
+  recur -- multi-arm message-framing experiments are common in the PLOS
+  corpus; and (b) whether the code-to-arm mapping here is worth recovering
+  from the paper's reported per-arm means, which is the same
+  reconstruct-from-published-statistics route that verified `trusz_2022_iieq`
+  on 2026-10-29. Until then the table is complete and honest, just without the
+  manipulation.
+
+- [ ] **A choice experiment the conjoint detector missed, now routed.**
+  `10.1371/journal.pone.0337225` (organic produce choices, Japan and China)
+  triaged `good` and its title says neither "conjoint" nor "discrete choice
+  experiment", so it would have been written as a core table. It is a choice
+  experiment: 8 choice sets per vegetable x 3 vegetables, each set offering 3
+  alternatives including None, so the 1/2/3 values are WHICH ALTERNATIVE WAS
+  CHOSEN -- nominal, not ordinal. Routed by hand to
+  `data/conjoint/candidates.csv` as `todo`, with the data located (Mendeley
+  10.17632/9jv5bdvbpj.4, CC BY 4.0 verified, 834 respondents) and the gap
+  named: the alternative-level attribute design is in the article's Fig 3, not
+  in the deposit. **The detector gap is the reusable finding** -- a choice
+  experiment whose title says only "choices" will keep slipping through, and
+  the only tell in the data is a small integer range on blocks named after
+  the goods being chosen.
+
+- [ ] **One battery held for want of a codebook, recoverable if one surfaces.**
+  `duque_2017_influenza_kap`'s 9-item influenza RISK-GROUPS battery
+  (preg_women, HC_workers, Older_65, Pers_HIV, Pers_TB, Pers_asthma, Gen_pop,
+  Young_child, Chronic_med) is not shipped. Its codes are 1, 2 and a very rare
+  3 -- almost certainly an undocumented "don't know" -- and no statistic the
+  paper reports pins which of 1/2 means "yes". The circumstantial case is
+  strong (HIV+ scores 1 at 97% in a study about influenza in HIV-infected
+  people; the general population, the one non-high-risk group listed, scores 1
+  at only 39%), but on a KNOWLEDGE battery an inverted code ships every correct
+  answer as incorrect, so strong-but-unproven was not enough. 9 items x 1,164
+  respondents is worth recovering: a word from the authors, or a codebook in
+  any later deposit, would settle it. Everything else in that deposit shipped
+  because three separate paper statistics could be reconstructed exactly.
+
+- [ ] **Worth a look: are rotated-booklet designs being flagged anywhere?**
+  `bock_2021_{pck,ck}_test` carry a multi-matrix design -- per-item n ranges
+  36-211 because each respondent saw a subset of the item pool -- and nothing
+  in the pipeline or the validator distinguishes that from attrition. The two
+  have opposite consequences: planned missingness is ignorable and an IRT
+  model handles it natively, while a raw sum score over it is meaningless. I
+  asserted the shape in the script and said so in both descriptions, but there
+  is no corpus-level convention for marking it. If IRW holds other
+  multi-matrix tests (large-scale assessments almost certainly qualify), a
+  flag in the dictionary or a `booklet`-style design column would be worth
+  more than a sentence in each description.
+
+- [ ] **A reversed Likert direction is invisible to every check we have, and
+  this batch found one.** `li_2024_deg_*` scores 1 as the STRONGEST agreement
+  ("varying from high to low" in the paper's Measures section). The data looks
+  completely ordinary: clean 1-5 range, unremarkable distributions, no QC
+  signal of any kind. Only the prose reveals it. Two things follow. (a) It is
+  worth asking whether `datastandard.md` should require the direction to be
+  positively confirmed from the paper's text the way it already requires the
+  meaning of a recurring `0` to be confirmed -- the failure is the same shape
+  (a plausible value whose meaning is only in the prose) and the consequence
+  is worse, because it silently flips the sign of every correlation rather
+  than adding noise. (b) Any table in the corpus whose script did not check
+  this could already be carrying a reversed scale undetected; a targeted
+  re-read of Measures sections for the Likert tables would be the way to find
+  out, but that is a corpus-audit decision, not something to start here.
+
+- [ ] **A general ruling on the UTAUT/TAM item pool would retire a lot of
+  individual register rows.** Three of this batch's hold-style rows are the
+  same shape: `TAM-SERVQUAL-SE` (lin_2024_escooter_*), `ADLIT-PKM`
+  (lin_2026_advertising_literacy) and `UTAUT2-STREAM` (wu_2025_streaming_*).
+  In every case the items are "adapted from" Venkatesh et al. and a handful of
+  other cited papers rather than authored by the depositors, so each needs its
+  own hold even though the underlying item pool is the same small set of
+  canonical UTAUT/TAM/SERVQUAL stems. These instruments recur constantly in
+  this corpus. A single ruling on the UTAUT item pool -- or a decision that
+  "adapted from" wording re-worded for a new domain is the adapters' own --
+  would settle all three and most future ones. Make that FOUR: a fifth
+  deposit, `diop_2019_vms_*`, has the same provenance and was deliberately
+  given no new row, pointing at the existing ones instead. Worth noting the asymmetry the
+  `UTAUT2-STREAM` row records: that deposit's DATA is CC0 1.0, maximally
+  permissive, and it still does not clear the instrument wording, because a
+  depositor cannot CC0 someone else's items.
+
+- [ ] **Four item-text extractions are rights-clear and blocked only on
+  mechanics or mapping**, which is a different queue from the rights holds.
+  `kendall_2018_*` (9 tables) is the only one that is purely mechanical; the
+  other three are blocked because no stem-to-code key exists:
+  `padchasuwan_2026_sexual_health_literacy` and
+  `oppong_2026_procurement_literacy` (both scale-development papers whose own
+  instruments are registered `ship`, but whose deposits carry bare column
+  codes while the article tables list retained items against loadings), and
+  `zhang_2025_gds15` (the GDS-15 itself is registered `ship`; the deposit's
+  columns are just `Depre1..Depre15`). For the two development papers the
+  mapping is worse than usual because items were dropped between
+  administration and publication, so even the counts do not line up.
 
 - [ ] **The `kendall_2018_*` item text is a queued extraction, not a block** --
   the only item-text job in this batch that is rights-clear. All 77 stems and
@@ -65,10 +236,11 @@ and the standing leads backlog was reconciled and worked.
   split off into section text with the target becoming `item_text`. Nine
   `__items` tables when done.
 
-- [ ] **81 actionable `good` PLOS leads, unworked** -- top of
+- [ ] **65 actionable `good` PLOS leads, unworked** -- top of
   `leads/plos_leads_2026-10-30.csv` (sorted unworked-first by response count).
-  The five largest were worked on 2026-10-30 and are marked `shipped` there;
-  81 remain. 18 more `good` rows are `blocked_licence` (17 `unknown`, 1
+  Twenty were worked on 2026-10-30 (18 shipped to core, 1 routed to conjoint,
+  1 rejected); 65 remain. Plan agreed with Ben: work the leads above 5,000
+  responses and leave the sub-5k tail recorded as `unworked` for a later pass. 18 more `good` rows are `blocked_licence` (17 `unknown`, 1
   `no-license`) and recorded rather than dropped. The largest: a 60-item
   psychosocial-factors instrument at 10,000 respondents (600,000 responses,
   cc-by), a tuberculosis-stigma study at 33,349 respondents (cc0), a
