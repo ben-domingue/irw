@@ -7,13 +7,13 @@ checkboxes here just mean "this line item is settled," not "actionable."
 
 **For currently open action items, see `TODO.md`.**
 
-## PLOS leads worked, 2026-10-30 -- 93 tables, 1,662,425 responses
+## PLOS leads worked, 2026-10-30 -- 95 tables, 1,682,135 responses
 
-Twenty-one deposits, the largest `good` leads of the pass below, worked
+Twenty-two deposits, the largest `good` leads of the pass below, worked
 largest-first off `leads/plos_leads_2026-10-30.csv`. NOTHING UPLOADED; manifest
 `irw_output/MANIFEST_2026-10-30.txt`, which carries the per-deposit narrative.
-All 93 pass `irw-validate --profile upload`; ten item text tables pass the
-four-gate chain. 64 actionable `good` leads remain.
+All 95 pass `irw-validate --profile upload`; ten item text tables pass the
+four-gate chain. 63 actionable `good` leads remain.
 
 | deposit | tables | responses | licence |
 |---|---|---|---|
@@ -38,6 +38,7 @@ four-gate chain. 64 actionable `good` leads remain.
 | Natesan 2019 ED satisfaction | 1 | 17,307 | CC BY 4.0 |
 | Diop 2019 VMS acceptance | 5 | 12,954 | CC BY 4.0 |
 | Chen 2026 urban tourism co-creation | 6 | 12,168 | CC BY 4.0 (Mendeley) |
+| Robles-Mariños 2023 cyberchondria CSS-12 | 2 | 19,710 | CC BY 4.0 (Zenodo) |
 
 ### What generalises from deposits 5-21
 
@@ -77,6 +78,18 @@ responses that look like human ones.
 **Rotated-booklet planned missingness, asserted not assumed.** `bock_2021`
 ships two partial-credit achievement tests (PCK 34 items, CK 38, scored 0/1/2)
 whose per-item n runs 36-211 by design.
+
+**A codebook-free deposit can still be resolved, if it ships its own totals.**
+`robles_marinos_2023` is `v1`..`v41` with no codebook and an image-only Table 1.
+Its four derived sums reproduce exactly on all 657 rows and identify every
+block at once (SHAI 18 = v8..v25, its 14/4 sections, CSS-12 = v26..v37). The
+limit matters as much as the result: a sum is permutation-invariant, so this
+pins block MEMBERSHIP and not within-block order — hence the deposit's own
+v-numbers as item ids, and no item text even though the CSS-12's Spanish
+wording is CC BY and registered `ship`. It also caught the off-by-one that
+didn't happen: `v7` shares the SHAI's 0-3 range and sits right before the
+block, but the total excludes it and r = -0.09 against the 14-item subtotal
+where real items run 0.43-0.69.
 
 **Guo 2026 is the cleanest deposit of the batch and the sharpest rights call.**
 Every item column is headed with its subscale in words, so nothing had to be
