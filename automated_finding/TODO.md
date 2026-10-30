@@ -35,15 +35,15 @@ and the standing leads backlog was reconciled and worked.
   `leads/plos_leads_2026-10-30.csv` written with 1,780 rows, BATCH_LOG entry
   written (2026-10-30). Full numbers there.
 
-- [ ] **62 response tables (1,526,240 responses) + 1 item text table need
+- [ ] **67 response tables (1,564,222 responses) + 1 item text table need
   uploading.** `automated_finding/irw_output/` with `MANIFEST_2026-10-30.txt`,
   and `itemtext_output/sabrina_2026_gad7__items.csv`. **Response tables
   first.** Ben is uploading this batch at the end, so the folder stays open and
-  tables keep accumulating. All 62 pass `irw-validate --profile upload`; the
-  item text table passes the four-gate chain. 62 dictionary rows, 62 codebook
-  rows, 62 tag rows (already appended into `tags/tags_auto.csv`), 62
+  tables keep accumulating. All 67 pass `irw-validate --profile upload`; the
+  item text table passes the four-gate chain. 67 dictionary rows, 67 codebook
+  rows, 67 tag rows (already appended into `tags/tags_auto.csv`), 67
   `itemtext_provenance` rows and 20 `instrument_rights_register` rows (14 hold,
-  5 ship, 1 ship_with_note) are staged, so nothing needs pasting. Fifteen
+  5 ship, 1 ship_with_note) are staged, so nothing needs pasting. Sixteen
   deposits:
   - `hocine_2016_psychosocial_stressors` -- 10,000 French employees x 58 items,
     figshare 10.6084/m9.figshare.3156154, CC BY 4.0 (verified on the DEPOSIT;
@@ -140,6 +140,20 @@ and the standing leads backlog was reconciled and worked.
   on 2026-10-29. Until then the table is complete and honest, just without the
   manipulation.
 
+- [ ] **One battery held for want of a codebook, recoverable if one surfaces.**
+  `duque_2017_influenza_kap`'s 9-item influenza RISK-GROUPS battery
+  (preg_women, HC_workers, Older_65, Pers_HIV, Pers_TB, Pers_asthma, Gen_pop,
+  Young_child, Chronic_med) is not shipped. Its codes are 1, 2 and a very rare
+  3 -- almost certainly an undocumented "don't know" -- and no statistic the
+  paper reports pins which of 1/2 means "yes". The circumstantial case is
+  strong (HIV+ scores 1 at 97% in a study about influenza in HIV-infected
+  people; the general population, the one non-high-risk group listed, scores 1
+  at only 39%), but on a KNOWLEDGE battery an inverted code ships every correct
+  answer as incorrect, so strong-but-unproven was not enough. 9 items x 1,164
+  respondents is worth recovering: a word from the authors, or a codebook in
+  any later deposit, would settle it. Everything else in that deposit shipped
+  because three separate paper statistics could be reconstructed exactly.
+
 - [ ] **Worth a look: are rotated-booklet designs being flagged anywhere?**
   `bock_2021_{pck,ck}_test` carry a multi-matrix design -- per-item n ranges
   36-211 because each respondent saw a subset of the item pool -- and nothing
@@ -207,9 +221,9 @@ and the standing leads backlog was reconciled and worked.
   split off into section text with the target becoming `item_text`. Nine
   `__items` tables when done.
 
-- [ ] **71 actionable `good` PLOS leads, unworked** -- top of
+- [ ] **70 actionable `good` PLOS leads, unworked** -- top of
   `leads/plos_leads_2026-10-30.csv` (sorted unworked-first by response count).
-  Fifteen were worked on 2026-10-30 and are marked `shipped` there; 71
+  Sixteen were worked on 2026-10-30 and are marked `shipped` there; 70
   remain. 18 more `good` rows are `blocked_licence` (17 `unknown`, 1
   `no-license`) and recorded rather than dropped. The largest: a 60-item
   psychosocial-factors instrument at 10,000 respondents (600,000 responses,
