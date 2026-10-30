@@ -35,15 +35,15 @@ and the standing leads backlog was reconciled and worked.
   `leads/plos_leads_2026-10-30.csv` written with 1,780 rows, BATCH_LOG entry
   written (2026-10-30). Full numbers there.
 
-- [ ] **25 response tables (1,335,983 responses) + 1 item text table need
+- [ ] **33 response tables (1,360,571 responses) + 1 item text table need
   uploading.** `automated_finding/irw_output/` with `MANIFEST_2026-10-30.txt`,
   and `itemtext_output/sabrina_2026_gad7__items.csv`. **Response tables
   first.** Ben is uploading this batch at the end, so the folder stays open and
-  tables keep accumulating. All 25 pass `irw-validate --profile upload`; the
-  item text table passes the four-gate chain. 25 dictionary rows, 25 codebook
-  rows, 25 tag rows (already appended into `tags/tags_auto.csv`), 25
-  `itemtext_provenance` rows and 14 `instrument_rights_register` rows (10 hold,
-  3 ship, 1 ship_with_note) are staged, so nothing needs pasting. Nine
+  tables keep accumulating. All 33 pass `irw-validate --profile upload`; the
+  item text table passes the four-gate chain. 33 dictionary rows, 33 codebook
+  rows, 33 tag rows (already appended into `tags/tags_auto.csv`), 33
+  `itemtext_provenance` rows and 16 `instrument_rights_register` rows (12 hold,
+  3 ship, 1 ship_with_note) are staged, so nothing needs pasting. Ten
   deposits:
   - `hocine_2016_psychosocial_stressors` -- 10,000 French employees x 58 items,
     figshare 10.6084/m9.figshare.3156154, CC BY 4.0 (verified on the DEPOSIT;
@@ -70,6 +70,33 @@ and the standing leads backlog was reconciled and worked.
   - `lin_2026_advertising_literacy` -- 3,267 Taiwanese high-school students,
     figshare 30304291, CC BY 4.0 (verified on the deposit). An experiment whose
     randomised arm is deliberately NOT shipped -- see the open question below.
+  - 8 `lin_2024_escooter_*` tables -- 683 Changsha metro users, CC BY 4.0. The
+    cleanest construct split in the batch: the paper's measurement model names
+    all eight and the column prefixes match one-for-one. No covariates, because
+    the deposit's nine demographic columns are bare integers with no codebook.
+
+- [ ] **A `good` lead REJECTED for core, and a possible `simsyn` candidate --
+  Ben's call.** `10.1371/journal.pone.0341620` (Wang & Wang 2026) looks exactly
+  like item response data: 2,145 units x 31 indicators, uniform 1-10 scale,
+  zero missing cells. But the units are PUBLISHED PAPERS and the responses are
+  GPT-4o output. The paper states it is "utilizing a large language model as a
+  data simulation tool, treating its generated analyses as the primary research
+  data". `datastandard.md` permits a non-person `id`, so the units are not the
+  objection -- machine-generated responses are. Marked `rejected_content` in
+  `leads/plos_leads_2026-10-30.csv` with that reasoning. If IRW wants it, it
+  belongs in the `simsyn` dictionary (`stage_dict_row.py --source sim`), not
+  core, and that is a ruling rather than an automated decision. Worth noting
+  the general shape too: LLM-as-rater datasets will keep triaging `good`,
+  because they are structurally indistinguishable from a rating study.
+
+- [ ] **Transcribing one questionnaire would unlock 36 item stems.** The
+  `lin_2024_escooter_*` deposit ships its questionnaire as a second SI file
+  (`journal.pone.0309953_S1_File.xlsx`, 10 KB) which was NOT transcribed. The
+  article quotes item fragments verbatim ("wide enough bike lanes", "shaded
+  paths", "willingness to recommend to others"), so the stems plausibly all sit
+  in that file with their construct labels -- which would also recover the nine
+  dropped demographic columns' meanings. An extraction job, not a rights
+  problem; the register row is a `hold` lead rather than a verdict.
 
 - [ ] **A STANDARDS QUESTION ONLY BEN CAN SETTLE: what does `treat` do in a
   multi-arm design?** `lin_2026_advertising_literacy` (shipped in this batch)
@@ -117,10 +144,10 @@ and the standing leads backlog was reconciled and worked.
   split off into section text with the target becoming `item_text`. Nine
   `__items` tables when done.
 
-- [ ] **77 actionable `good` PLOS leads, unworked** -- top of
+- [ ] **75 actionable `good` PLOS leads, unworked** -- top of
   `leads/plos_leads_2026-10-30.csv` (sorted unworked-first by response count).
-  The nine largest were worked on 2026-10-30 and are marked `shipped` there;
-  77 remain. 18 more `good` rows are `blocked_licence` (17 `unknown`, 1
+  Ten were worked on 2026-10-30 and are marked `shipped` there, and one was
+  rejected (see below); 75 remain. 18 more `good` rows are `blocked_licence` (17 `unknown`, 1
   `no-license`) and recorded rather than dropped. The largest: a 60-item
   psychosocial-factors instrument at 10,000 respondents (600,000 responses,
   cc-by), a tuberculosis-stigma study at 33,349 respondents (cc0), a
