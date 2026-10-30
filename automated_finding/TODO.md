@@ -35,15 +35,15 @@ and the standing leads backlog was reconciled and worked.
   `leads/plos_leads_2026-10-30.csv` written with 1,780 rows, BATCH_LOG entry
   written (2026-10-30). Full numbers there.
 
-- [ ] **34 response tables (1,427,066 responses) + 1 item text table need
+- [ ] **42 response tables (1,459,956 responses) + 1 item text table need
   uploading.** `automated_finding/irw_output/` with `MANIFEST_2026-10-30.txt`,
   and `itemtext_output/sabrina_2026_gad7__items.csv`. **Response tables
   first.** Ben is uploading this batch at the end, so the folder stays open and
-  tables keep accumulating. All 34 pass `irw-validate --profile upload`; the
-  item text table passes the four-gate chain. 34 dictionary rows, 34 codebook
-  rows, 34 tag rows (already appended into `tags/tags_auto.csv`), 34
-  `itemtext_provenance` rows and 17 `instrument_rights_register` rows (12 hold,
-  4 ship, 1 ship_with_note) are staged, so nothing needs pasting. Eleven
+  tables keep accumulating. All 42 pass `irw-validate --profile upload`; the
+  item text table passes the four-gate chain. 42 dictionary rows, 42 codebook
+  rows, 42 tag rows (already appended into `tags/tags_auto.csv`), 42
+  `itemtext_provenance` rows and 18 `instrument_rights_register` rows (13 hold,
+  4 ship, 1 ship_with_note) are staged, so nothing needs pasting. Twelve
   deposits:
   - `hocine_2016_psychosocial_stressors` -- 10,000 French employees x 58 items,
     figshare 10.6084/m9.figshare.3156154, CC BY 4.0 (verified on the DEPOSIT;
@@ -77,6 +77,11 @@ and the standing leads backlog was reconciled and worked.
   - `wang_2026_research_quality_gpt4o` -- 66,495 MACHINE-GENERATED ratings:
     GPT-4o scored 2,145 published papers on 31 rubric indicators, 1-10. CC BY
     4.0. Marked as machine responses throughout, with `rater` on every row.
+  - 8 `wu_2025_streaming_*` tables -- 506 Chinese streaming viewers, Harvard
+    Dataverse 10.7910/DVN/OHWKPD, **CC0 1.0** -- the first deposit in this
+    batch whose licence DIFFERS from its article's (CC BY 4.0), which is the
+    case that justifies checking every time. Its two listed files are
+    byte-identical duplicates.
 
 - [x] **RESOLVED 2026-10-30 — LLM-generated responses belong in IRW, marked.**
   I initially rejected `10.1371/journal.pone.0341620` (Wang & Wang 2026) as
@@ -131,6 +136,21 @@ and the standing leads backlog was reconciled and worked.
   on 2026-10-29. Until then the table is complete and honest, just without the
   manipulation.
 
+- [ ] **A general ruling on the UTAUT/TAM item pool would retire a lot of
+  individual register rows.** Three of this batch's hold-style rows are the
+  same shape: `TAM-SERVQUAL-SE` (lin_2024_escooter_*), `ADLIT-PKM`
+  (lin_2026_advertising_literacy) and `UTAUT2-STREAM` (wu_2025_streaming_*).
+  In every case the items are "adapted from" Venkatesh et al. and a handful of
+  other cited papers rather than authored by the depositors, so each needs its
+  own hold even though the underlying item pool is the same small set of
+  canonical UTAUT/TAM/SERVQUAL stems. These instruments recur constantly in
+  this corpus. A single ruling on the UTAUT item pool -- or a decision that
+  "adapted from" wording re-worded for a new domain is the adapters' own --
+  would settle all three and most future ones. Worth noting the asymmetry the
+  `UTAUT2-STREAM` row records: that deposit's DATA is CC0 1.0, maximally
+  permissive, and it still does not clear the instrument wording, because a
+  depositor cannot CC0 someone else's items.
+
 - [ ] **Four item-text extractions are rights-clear and blocked only on
   mechanics or mapping**, which is a different queue from the rights holds.
   `kendall_2018_*` (9 tables) is the only one that is purely mechanical; the
@@ -154,9 +174,9 @@ and the standing leads backlog was reconciled and worked.
   split off into section text with the target becoming `item_text`. Nine
   `__items` tables when done.
 
-- [ ] **75 actionable `good` PLOS leads, unworked** -- top of
+- [ ] **74 actionable `good` PLOS leads, unworked** -- top of
   `leads/plos_leads_2026-10-30.csv` (sorted unworked-first by response count).
-  Eleven were worked on 2026-10-30 and are marked `shipped` there; 75 remain. 18 more `good` rows are `blocked_licence` (17 `unknown`, 1
+  Twelve were worked on 2026-10-30 and are marked `shipped` there; 74 remain. 18 more `good` rows are `blocked_licence` (17 `unknown`, 1
   `no-license`) and recorded rather than dropped. The largest: a 60-item
   psychosocial-factors instrument at 10,000 respondents (600,000 responses,
   cc-by), a tuberculosis-stigma study at 33,349 respondents (cc0), a
