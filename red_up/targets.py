@@ -261,6 +261,7 @@ def newest_text_shard(targets: list[Target]) -> Target | None:
 #: that exist nowhere yet are created. Do not reorder IRW_TEXT_DATASETS
 #: instead: clients read that order to resolve newest-first.
 #: 2026-09-25: Ben switched new item text to irw_text_3 (irw_text at 965 of ~990).
+#: 2026-10-30: irw_text_4 registered (irw_text_3 at 954); new item text goes there.
 ITEMTEXT_DEFAULT: str | None = None
 
 

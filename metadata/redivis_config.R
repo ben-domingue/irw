@@ -45,7 +45,8 @@ IRW_CORE_DATASETS <- c(
 IRW_TEXT_DATASETS <- c(
   "irw_text",
   "irw_text_2",
-  "irw_text_3"
+  "irw_text_3",
+  "irw_text_4"
 )
 
 ## Conjoint shards, oldest to newest. Conjoint experiments in their own layout,
