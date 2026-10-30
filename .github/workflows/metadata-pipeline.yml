@@ -4,11 +4,12 @@
 # Regenerates the metadata CSVs from Redivis and the dictionary Google Sheets,
 # runs the cross-table audit, and opens a pull request with whatever changed.
 #
-# Workflow 3 (upload_meta.py) is deliberately NOT run here, exactly as it was
-# deliberately not run by the cron script this replaces. Nothing in this job
-# touches Redivis publish state. Merging its pull request commits metadata to
-# the repository, not to the warehouse; the upload stays a manual, explicit
-# step you take afterwards, against the CSVs a `git pull` puts back on disk.
+# Workflow 3 (upload_meta.py) is NOT run here. Nothing in this job touches
+# Redivis. It runs when this job's pull request MERGES: metadata-upload.yml
+# fires on a push to main that changes the metadata CSVs and uploads them to
+# the irw_meta DRAFT (since 2026-10-30; before that the upload was a hand step
+# after the merge, and skipping it once left 28 tables without a site page,
+# datapages/irw#404). Publishing the draft is still done by hand on Redivis.
 #
 # Why the outputs are committed at all:
 # the product of this job is the DIFF -- what changed since last week -- and a
