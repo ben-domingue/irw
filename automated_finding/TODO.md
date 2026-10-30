@@ -46,12 +46,37 @@ and the standing leads backlog was reconciled and worked.
   here -- the item-level matrix is in the Supporting Information because
   reviewers asked for it.
 
-- [ ] **1,143 `recoverable_format` PLOS leads -- the bigger find than the 104
-  `good`.** In the same leads file. Same flag that yielded 35 workable leads on
-  the PsychArchives pass; at 1,143 it is a backlog of its own, and the shape is
-  known (wrong delimiter, per-scale split, or item columns holding text-coded
-  Likert labels rather than numeric codes -- the `aguilar_latorre_2022`
-  artifact). Worth a pilot of ~10 before deciding how to work the rest.
+- [ ] **1,143 `recoverable_format` PLOS leads -- PILOTED 2026-10-30, and the
+  bucket splits cleanly in two.** 10 leads were sampled (6 from the
+  "keeping only N columns" sub-bucket, 4 from `resp_scale_mixed`) and each
+  file was opened. **4 of 10 hold a real wide item matrix**; a 5th
+  (10.1371/journal.pone.0277625) holds genuine item-response data that is
+  already in long format, so 5 of 10 are workable.
+
+  **The split is the finding, and it should drive the ranking:**
+  - the **column-selection** sub-bucket (731 rows) converted **4 of 6**;
+  - the **`resp_scale_mixed`** sub-bucket (181 rows) converted **0 of 4**, and
+    none of those four had any items at all -- two were animal studies whose
+    `n_participants` (302, 260) counted repeated-measure rows as people.
+  So work the 731 and deprioritise the 181. On a 4-in-6 rate the
+  column-selection subset implies roughly 400-500 workable datasets, which is
+  larger than everything this pipeline has shipped to date -- it needs a plan,
+  not a sprint.
+
+  Also measured, against expectation: **text-coded Likert labels did not
+  appear once** in the pilot. That artifact (the `aguilar_latorre_2022` shape)
+  was the motivating hypothesis for this bucket and it is not what is in it;
+  every real item block was numeric codes. Multi-instrument files appeared in
+  3 of 10 and are the dominant workable shape.
+
+  Verified by hand rather than taken on the subagent's word: pilot lead 6,
+  10.1371/journal.pone.0260676 (dog owners, depression/anxiety/happiness), has
+  1,505 respondents and seven scale blocks -- M1 18 items 1-7, M2 10 items 1-5,
+  M3 12 items 1-7, M4 20 items 1-5, M5 7 items 0-3, M7 29 items 1-6, S6 4 items
+  1-5 -- i.e. ~100 items and ~150,000 responses, **plus a `Datamap` sheet
+  carrying the stem and option text for every item**, so it is an item-text
+  candidate too. That one is worth building next after the `good` rows.
+
   Alongside them: 295 `worth_retrying` (mostly repeated-measures designs
   tripping `dup_id_item` at a ~1.0x ratio) and 143 `aggregate_continuous`.
 
