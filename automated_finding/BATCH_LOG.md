@@ -7,6 +7,109 @@ checkboxes here just mean "this line item is settled," not "actionable."
 
 **For currently open action items, see `TODO.md`.**
 
+## PLOS recycled terms, 2026-10-30 -- 467 terms, 11,011 candidates, 104 good
+
+Second half of the 2026-10-29f pair. The PsychArchives pass had just shown that
+RECYCLED terms outperform fresh ones on a connector that had gone quiet (227
+candidates from 346 recycled terms, against 0 from 135 fresh). The obvious next
+question was whether the same held for PLOS, and the arithmetic said it should:
+`search_terms_log.csv` holds 4,663 distinct terms and only 704 had ever been
+pointed at PLOS.
+
+Term selection: all-ASCII terms from the log, never run against PLOS, filtered
+so that every word appears in `/usr/share/dict/american-english` plus an
+instrument whitelist (Zarit, Oswestry, WHOQOL, SERVQUAL, EQ-5D and the like).
+That left **467 terms** -- not 466, which is what `wc -l` reports for a file
+with no trailing newline and what the first three status reports in this session
+said. The 467 `[query]` lines in the log were the honest count.
+
+```
+python3 irw_discover_plos.py "${T[@]}" --out runs/plos_triage_2026-10-29f.csv
+```
+
+**11,011 candidates in 11h20m, 104 `good`** -- the largest single discovery haul
+this pipeline has produced, from terms that were already sitting in the log. The
+recycling hypothesis is now confirmed on two independent connectors.
+
+| flag | n |
+|------|---|
+| no_usable_file | 7,277 |
+| human_assistance | 1,990 |
+| below_min_n | 640 |
+| not_item_response | 332 |
+| external_unresolved | 295 |
+| download_failed | 179 |
+| **good** | **104** |
+| pii_suspected | 95 |
+| already_in_irw | 73 |
+| error / license_restricted / file_too_large / timeout / crashed | 26 |
+
+Step 2b ran in-process, all three confirmation lines present:
+
+```
+[step 2b] retriaging 1990 human_assistance row(s)
+[human_review] archived 293 row(s) -> human_review/human_review_plos_2026-10-30.csv
+[step 2b] 1990 refined flag(s) recorded in plos_seen_dois.csv
+```
+
+| refined_flag | n | share |
+|--------------|---|-------|
+| **recoverable_format** | **1,143** | 57% |
+| worth_retrying | 295 | 15% |
+| human_review | 293 | 15% |
+| aggregate_continuous | 143 | 7% |
+| not_item_response | 115 | 6% |
+| conj | 1 | 0% |
+
+**The 1,143 `recoverable_format` rows are the bigger find than the 104 `good`.**
+On the PsychArchives pass that same flag meant "wrong delimiter or per-scale
+split -- re-read and re-triage", and 35 of them were a real seam. At 1,143 it is
+a standing backlog of its own. The `worth_retrying` sample reads well too:
+repeated-measures designs tripping `dup_id_item` at a ~1.0x ratio, and a run of
+hits on item columns holding text-coded Likert labels rather than numeric codes
+-- which is exactly the artifact that had `aguilar_latorre_2022` sitting
+mis-triaged as "only 4 item columns" until the day before.
+
+7 conjoints were routed to `data/conjoint/candidates.csv` as `todo`.
+
+### What is durable
+
+`leads/plos_leads_2026-10-30.csv`, **1,780 rows**: every `good`, every
+`pii_suspected`, and every `human_assistance` row whose Step 2b verdict was
+`recoverable_format`, `worth_retrying` or `aggregate_continuous`. Sorted
+unworked-first then by response count.
+
+| status | n |
+|--------|---|
+| unworked | 1,345 |
+| blocked_licence | 340 |
+| skipped_pii | 95 |
+
+Of the 104 `good`, **86 are actionable** (82 cc-by, 4 cc0) and 18 are
+licence-blocked (17 `unknown`, 1 `no-license`) -- recorded rather than dropped,
+because a licence can be clarified later and the DOI is already in
+`plos_seen_dois.csv`, so a future run will skip it. That ledger now holds 16,533
+DOIs.
+
+Deliberately NOT in the leads file: the 293 `human_review` rows (already durable
+in `human_review/human_review_plos_2026-10-30.csv` -- duplicating them would
+mean two places to update), and the 295 `external_unresolved` rows, excluded on
+the err-on-exclusion rule rather than because they were examined.
+
+The 467 terms are appended to `search_terms_log.csv` (11,701 rows). The four
+pre-existing malformed 5-field rows at 3325/3332/3387/3513 are untouched, which
+is the point of appending rather than rewriting.
+
+### A process note worth keeping
+
+For about an hour I reported this run as "still going" after it had finished.
+The waiter was `until ! pgrep -f "irw_discover_plos.py"`, and my own
+`bash -c` checking command contains that string on its command line, so pgrep
+matched the checker instead of the job and the loop could never terminate. The
+rule already in memory -- wait on PIDs, not pgrep patterns -- exists for exactly
+this and I used a pattern anyway. `ps -p <pid>` is the check; the three stale
+waiters from this session have been stopped.
+
 ## Two searches + the leads backlog, 2026-10-29f/g/h -- 17 tables, 145,844 responses; 86 stale lead rows reconciled
 
 Ben: "fire an automated search! start with any backlogged lists", then "let's do

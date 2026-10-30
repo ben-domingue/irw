@@ -28,22 +28,41 @@ and the standing leads backlog was reconciled and worked.
   - `tung_2026_financial_literacy` — 393 US undergraduates,
     10.23668/psycharchives.22277, CC BY 4.0.
 
-- [ ] **The PLOS recycled-terms search is STILL RUNNING**, now 456 of 466
-  terms in: 466 clean English terms from `search_terms_log.csv` that had never
-  been run against that journal, out of a pool of 4,663 distinct terms of which
-  only 704 have ever hit PLOS. Output goes to
-  `runs/plos_triage_2026-10-29f.csv`. **The premise is confirmed and then
-  some: 10,707 candidates triaged, 104 `good`** — the largest single discovery
-  haul this pipeline has produced, from terms that were already sitting in the
-  log. Also 1,938 `human_assistance` rows, which on the PsychArchives run was
-  the bucket that yielded 35 `recoverable_format` leads. 104 `good` is far
-  more than one batch can carry, so the plan is to rank them, ship the best
-  tranche, and write the remainder to `leads/plos_leads_2026-10-30.csv` as
-  `unworked` rather than let them die in a gitignored run file. **It still
-  owes: a `leads/plos_leads_2026-10-30.csv`, the `search_terms_log.csv`
-  appends for its 466 terms, and a BATCH_LOG entry.** `irw_discover_plos.py` triages in
-  process and runs Step 2b unconditionally at the end, so the retriage will be
-  there; the rest is bookkeeping a later session must do.
+- [x] **The PLOS recycled-terms search is DONE** -- 467 terms (not 466; `wc -l`
+  undercounts a file with no trailing newline), **11,011 candidates, 104
+  `good`**, the largest single haul this pipeline has produced. Step 2b ran with
+  all three confirmation lines. 467 terms appended to `search_terms_log.csv`,
+  `leads/plos_leads_2026-10-30.csv` written with 1,780 rows, BATCH_LOG entry
+  written (2026-10-30). Full numbers there.
+
+- [ ] **86 actionable `good` PLOS leads, unworked** -- top of
+  `leads/plos_leads_2026-10-30.csv` (sorted unworked-first by response count).
+  82 cc-by, 4 cc0. 18 more `good` rows are `blocked_licence` (17 `unknown`, 1
+  `no-license`) and recorded rather than dropped. The largest: a 60-item
+  psychosocial-factors instrument at 10,000 respondents (600,000 responses,
+  cc-by), a tuberculosis-stigma study at 33,349 respondents (cc0), a
+  107-item school-climate study at 1,507, and a Sexual Health Literacy scale
+  development paper at 1,235 x 49. Psychometric validation papers convert best
+  here -- the item-level matrix is in the Supporting Information because
+  reviewers asked for it.
+
+- [ ] **1,143 `recoverable_format` PLOS leads -- the bigger find than the 104
+  `good`.** In the same leads file. Same flag that yielded 35 workable leads on
+  the PsychArchives pass; at 1,143 it is a backlog of its own, and the shape is
+  known (wrong delimiter, per-scale split, or item columns holding text-coded
+  Likert labels rather than numeric codes -- the `aguilar_latorre_2022`
+  artifact). Worth a pilot of ~10 before deciding how to work the rest.
+  Alongside them: 295 `worth_retrying` (mostly repeated-measures designs
+  tripping `dup_id_item` at a ~1.0x ratio) and 143 `aggregate_continuous`.
+
+- [ ] **293 PLOS `human_review` rows** in
+  `human_review/human_review_plos_2026-10-30.csv`, deliberately not duplicated
+  into the leads file.
+
+- [ ] **295 `external_unresolved` PLOS rows were excluded from the leads file**
+  on the err-on-exclusion rule, without being examined. Their DOIs are in
+  `plos_seen_dois.csv`, so a future run will skip them -- if that bucket is ever
+  worth a pass, it has to come off the triage CSV before it is deleted.
 
 - [ ] **Two item-text jobs, both with the wording already in hand.**
   - `rosman_2022_*`: all 92 German stems and anchors are in the two `.sav`
