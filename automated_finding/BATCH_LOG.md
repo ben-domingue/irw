@@ -7,6 +7,108 @@ checkboxes here just mean "this line item is settled," not "actionable."
 
 **For currently open action items, see `TODO.md`.**
 
+## PLOS leads worked, 2026-10-30 -- 15 tables, 1,092,618 responses
+
+The four largest `good` leads of the pass below, worked largest-first off
+`leads/plos_leads_2026-10-30.csv`. NOTHING UPLOADED; manifest
+`irw_output/MANIFEST_2026-10-30.txt`. All 15 pass `irw-validate --profile
+upload`. 82 actionable `good` leads remain.
+
+| deposit | tables | responses | licence |
+|---|---|---|---|
+| Hocine 2016 psychosocial stressors | 1 | 580,000 | CC BY 4.0 (figshare) |
+| Kimuli 2025 TB stigma | 1 | 294,962 | CC0 1.0 |
+| Huang 2025 (4 scales) | 4 | 152,206 | CC BY 4.0 |
+| Kendall 2018 food integrity | 9 | 65,450 | CC BY 4.0 |
+
+### The four things that would have gone wrong quietly
+
+**1. An off-site deposit's licence is not the article's.** Hocine's Data
+Availability statement points to figshare, so the article's CC BY governs the
+article, not the data. Checked `api.figshare.com/v2/articles/3156154`
+separately: CC BY 4.0 there too. They agreed -- but a batch that reads the
+article licence and stops would ship unlicensed data the first time they do
+not, and nothing in the triage output distinguishes the two cases.
+
+**2. A proof instead of a plausible guess.** Kimuli's ten stigma items arrive
+as four TEXT labels, and the deposit ships its own `tb_stigma_score`. Rather
+than assume an ordering, the script tries all 24 assignments of {0,1,2,3} to
+the four labels and asserts that exactly one reproduces the score on all 33,349
+rows. It does: `Dont know = 0, Not true at all = 1, Somewhat true = 2,
+Very True = 3`. So the depositors scored a non-answer BELOW the lowest
+substantive level on a stigma scale, and the consequence is concrete and also
+asserted -- 2,012 respondents answered "Dont know" to all ten items and every
+one of them carries `tb_stigma_score = 0`, the published score's floor. A
+respondent who knew nothing is indistinguishable from the least-stigmatising
+respondent in Uganda. Those cells are dropped, `resp` ships 1-3, and the table
+loses those 2,012 ids. Had the 0 been kept, the table would have looked clean
+and been wrong.
+
+**3. Opaque labels whose blocks the DATA confirms.** Huang's file is Q1..Q104
+with no block markers. The paper's composition (25/21/28/27/3 = 104) matches
+the column count, but the printed order is only a claim until something
+independent agrees. Something does: the social avoidance scale is the only
+2-point instrument in the questionnaire, and the columns whose observed domain
+is exactly {1,2} are precisely Q47..Q74 -- 28 of them, starting and ending
+where the order predicts. Asserted. Note the limit: this pins block
+BOUNDARIES, not within-block order, which is why no item text ships even for
+the DASS-21, whose wording already carries a `ship` verdict in the register.
+Also one stray cell (Q3 = 5 on a documented 4-point scale, the only
+out-of-range value in either 4-point block) dropped as a data-entry error, and
+asserted as exactly one cell so a genuinely 1-5 block fails loudly instead.
+
+**4. An id that encodes the geography you just dropped.** Kendall's `S1` (city)
+goes under the geographic rulings. The subtler one is the questionnaire serial
+`QrNo1`, whose own variable label documents it as "One City Number+One Round
+Number+Three Swift Number" -- it ENCODES the dropped city. So it is discarded
+rather than used as `id`, and the row index is used. Reading the label is what
+caught it; the column name says nothing.
+
+### A merge call worth recording, because it is the inverse of a known one
+
+Kendall's Q3_3 and Q3_4 ask about the SAME eight organisations on the SAME 1-5
+scale -- exactly the shape that invited the right merge in
+`lee_whiting_2025_trust_actors`. They are NOT merged, because there one stem
+was asked across many actors (so the actors became the items), whereas here two
+different stems are asked across one fixed actor list: 3.3 is trust to
+*protect the consumer from* unsafe food, 3.4 is trust to *provide accurate
+information about* authenticity -- protection versus disclosure. Two tables,
+and the script asserts the stems still differ so the question reopens on
+failure rather than being settled by silence.
+
+### Excluded rather than padded in
+
+- Huang's 3-item physical exercise index: the paper says its frequency item
+  runs 0-4 while intensity and duration run 1-5, yet all three deposited
+  columns run 1-5, so paper and deposit disagree about at least one item's
+  anchors -- and the published measure is a PRODUCT of the three, not a summed
+  battery.
+- Kimuli's three binary knowledge items: they would clear the 3-item floor, but
+  `tbknowlegde` runs 0-15, so they are 3 surviving components of a 15-part
+  score whose other parts are constant-zero or nominal multi-selects, and they
+  mix a misconception item with a fact item.
+
+### Item text
+
+None shipped; all 15 provenance rows record why, and the reasons differ in kind
+rather than all being "no licence":
+- `kendall_2018_*` (9 tables) -- AVAILABLE and rights-clear, registered
+  `ship`: all 77 stems and targets are in the deposit's 'Variable View' sheet
+  and the questionnaire is the authors' own. Queued, not blocked. Two
+  mechanical obstacles: GBK/CP1252 round-trip mojibake in the labels, and the
+  crossed stems needing to be split from their targets.
+- `hocine_2016_*` -- wording is printed in the article's S2 Table but the
+  instrument is Stimulus's commercial product. Rights hold.
+- `huang_2025_dass21` -- NO_ROUTE, not a hold: the DASS-21 already carries a
+  `ship` verdict, so the text is distributable; what is missing is any route
+  from a published DASS-21 item to a specific Q26-Q46 column.
+- the other three `huang_2025_*` and `kimuli_2025_*` -- no wording in the
+  deposit at all, and third-party instruments on top.
+
+Six `instrument_rights_register.csv` rows written, five of them for instruments
+with no row at all before (Stimulus, Van Rie TB stigma, Jia school climate,
+Watson & Friend SADS, Hu & Gan APRS) plus the Kendall `ship`.
+
 ## PLOS recycled terms, 2026-10-30 -- 467 terms, 11,011 candidates, 104 good
 
 Second half of the 2026-10-29f pair. The PsychArchives pass had just shown that

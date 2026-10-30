@@ -1329,6 +1329,7 @@ hobolt_2021_brexit_bbc_dg,conj,https://dataverse.harvard.edu/api/access/datafile
 hobolt_2021_brexit_lodger,conj,https://dataverse.harvard.edu/api/access/datafile/3724348,2026-10-09
 hobolt_2022_brexit_negotiations,conj,https://dataverse.harvard.edu/api/access/datafile/3891319,2026-10-09
 hobolt_2024_authoritarian_reactions,conj,https://dataverse.harvard.edu/api/access/datafile/10431854,2026-10-07
+hocine_2016_psychosocial_stressors,core,none,2026-10-30
 hoellerbauer_2023_civil_society_orgs,conj,https://dataverse.harvard.edu/api/access/datafile/5149220,2026-10-07
 hoffmann_2025_immigrant_sexuality,conj,https://dataverse.harvard.edu/api/access/datafile/10871358,2026-10-07
 hohn_2024_library_agreement,core,none,2026-10-28
@@ -1362,9 +1363,13 @@ hu_2026_digital_nomad_wellbeing,core,none,2026-10-18
 hu_2026_psqi,core,none,2026-10-18
 huang_2025_academic_burnout,core,none,2026-10-15
 huang_2025_core_self_evaluation,core,none,2026-10-15
+huang_2025_dass21,core,none,2026-10-30
 huang_2025_family_cohesion,core,none,2026-10-15
 huang_2025_parental_phubbing,core,none,2026-10-15
 huang_2025_perceived_social_support,core,none,2026-10-15
+huang_2025_resilience,core,none,2026-10-30
+huang_2025_school_climate,core,none,2026-10-30
+huang_2025_social_avoidance,core,none,2026-10-30
 huber_2017_dating_profiles,conj,https://dataverse.harvard.edu/api/access/datafile/3859139,2026-10-11
 huber_2020_car_policy_instruments,conj,https://dataverse.harvard.edu/api/access/datafile/3451165,2026-10-09
 huebner_2021_weightlifting_attraction,core,https://zenodo.org/api/records/5500789/files/wldat_dictionary.xlsx/content,2026-10-21
@@ -1576,6 +1581,15 @@ kellstedt_2017_nep,core,none,2026-10-15
 kellstedt_2017_policy_support,core,none,2026-10-15
 kellstedt_2017_science_quiz,core,none,2026-10-15
 kembara_2026_civic_agency,core,https://ndownloader.figshare.com/files/64974195,2026-10-19
+kendall_2018_adulteration_risks,core,none,2026-10-30
+kendall_2018_authenticity_benefits,core,none,2026-10-30
+kendall_2018_food_worry,core,none,2026-10-30
+kendall_2018_origin_importance,core,none,2026-10-30
+kendall_2018_purchase_attitudes,core,none,2026-10-30
+kendall_2018_purchase_intention,core,none,2026-10-30
+kendall_2018_quality_cues,core,none,2026-10-30
+kendall_2018_trust_information,core,none,2026-10-30
+kendall_2018_trust_protect,core,none,2026-10-30
 kennedy_2022_policy_algorithms,conj,https://dataverse.harvard.edu/api/access/datafile/4422313,2026-10-09
 kennedy_2023_hr_partner_s1,conj,none,2026-10-14
 kennedy_2023_hr_partner_s2,conj,none,2026-10-14
@@ -1620,6 +1634,7 @@ kim_2025_karrot_econ_motiv,core,none,2026-10-09
 kim_2025_karrot_env_motiv,core,none,2026-10-09
 kim_2025_karrot_interact_motiv,core,none,2026-10-09
 kim_2025_karrot_reput_motiv,core,none,2026-10-09
+kimuli_2025_tb_stigma,core,none,2026-10-30
 king_2026_biodiversity_woodland,conj,none,2026-10-14
 king_2026_urban_meadows,conj,none,2026-10-14
 kiratli_2024_intervention_turkey,conj,none,2026-10-08

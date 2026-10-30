@@ -35,9 +35,35 @@ and the standing leads backlog was reconciled and worked.
   `leads/plos_leads_2026-10-30.csv` written with 1,780 rows, BATCH_LOG entry
   written (2026-10-30). Full numbers there.
 
-- [ ] **86 actionable `good` PLOS leads, unworked** -- top of
+- [ ] **15 response tables (1,092,618 responses) need uploading.**
+  `automated_finding/irw_output/` with `MANIFEST_2026-10-30.txt`. Response
+  tables only -- no item text in this batch. All 15 pass
+  `irw-validate --profile upload`. 15 dictionary rows, 15 codebook rows, 15 tag
+  rows (already appended into `tags/tags_auto.csv`), 15 `itemtext_provenance`
+  rows and 6 `instrument_rights_register` rows (5 hold, 1 ship) are staged, so
+  nothing needs pasting. Four deposits:
+  - `hocine_2016_psychosocial_stressors` -- 10,000 French employees x 58 items,
+    figshare 10.6084/m9.figshare.3156154, CC BY 4.0 (verified on the DEPOSIT;
+    the data is off-site, so the article's licence could not grant it).
+  - `kimuli_2025_tb_stigma` -- 31,337 Ugandan respondents x 10 items, CC0 1.0.
+  - `huang_2025_{school_climate,dass21,social_avoidance,resilience}` -- 1,507
+    Chinese students in grades 5-9, CC BY 4.0.
+  - 9 `kendall_2018_*` tables -- 850 urban Chinese consumers, CC BY 4.0.
+
+- [ ] **The `kendall_2018_*` item text is a queued extraction, not a block** --
+  the only item-text job in this batch that is rights-clear. All 77 stems and
+  targets are in the deposit's own 'Variable View' sheet and the instrument is
+  the authors' own, registered `ship`. Two obstacles, both mechanical: the
+  labels carry GBK/CP1252 round-trip mojibake (an apostrophe arrives as the
+  bytes for GBK's quote characters, so a naive read ships corrupted text), and
+  each of the nine batteries is stem-crossed-with-target, so the stem must be
+  split off into section text with the target becoming `item_text`. Nine
+  `__items` tables when done.
+
+- [ ] **82 actionable `good` PLOS leads, unworked** -- top of
   `leads/plos_leads_2026-10-30.csv` (sorted unworked-first by response count).
-  82 cc-by, 4 cc0. 18 more `good` rows are `blocked_licence` (17 `unknown`, 1
+  The four largest were worked on 2026-10-30 and are marked `shipped` there;
+  82 remain. 18 more `good` rows are `blocked_licence` (17 `unknown`, 1
   `no-license`) and recorded rather than dropped. The largest: a 60-item
   psychosocial-factors instrument at 10,000 respondents (600,000 responses,
   cc-by), a tuberculosis-stigma study at 33,349 respondents (cc0), a
