@@ -35,15 +35,15 @@ and the standing leads backlog was reconciled and worked.
   `leads/plos_leads_2026-10-30.csv` written with 1,780 rows, BATCH_LOG entry
   written (2026-10-30). Full numbers there.
 
-- [ ] **33 response tables (1,360,571 responses) + 1 item text table need
+- [ ] **34 response tables (1,427,066 responses) + 1 item text table need
   uploading.** `automated_finding/irw_output/` with `MANIFEST_2026-10-30.txt`,
   and `itemtext_output/sabrina_2026_gad7__items.csv`. **Response tables
   first.** Ben is uploading this batch at the end, so the folder stays open and
-  tables keep accumulating. All 33 pass `irw-validate --profile upload`; the
-  item text table passes the four-gate chain. 33 dictionary rows, 33 codebook
-  rows, 33 tag rows (already appended into `tags/tags_auto.csv`), 33
-  `itemtext_provenance` rows and 16 `instrument_rights_register` rows (12 hold,
-  3 ship, 1 ship_with_note) are staged, so nothing needs pasting. Ten
+  tables keep accumulating. All 34 pass `irw-validate --profile upload`; the
+  item text table passes the four-gate chain. 34 dictionary rows, 34 codebook
+  rows, 34 tag rows (already appended into `tags/tags_auto.csv`), 34
+  `itemtext_provenance` rows and 17 `instrument_rights_register` rows (12 hold,
+  4 ship, 1 ship_with_note) are staged, so nothing needs pasting. Eleven
   deposits:
   - `hocine_2016_psychosocial_stressors` -- 10,000 French employees x 58 items,
     figshare 10.6084/m9.figshare.3156154, CC BY 4.0 (verified on the DEPOSIT;
@@ -74,20 +74,30 @@ and the standing leads backlog was reconciled and worked.
     cleanest construct split in the batch: the paper's measurement model names
     all eight and the column prefixes match one-for-one. No covariates, because
     the deposit's nine demographic columns are bare integers with no codebook.
+  - `wang_2026_research_quality_gpt4o` -- 66,495 MACHINE-GENERATED ratings:
+    GPT-4o scored 2,145 published papers on 31 rubric indicators, 1-10. CC BY
+    4.0. Marked as machine responses throughout, with `rater` on every row.
 
-- [ ] **A `good` lead REJECTED for core, and a possible `simsyn` candidate --
-  Ben's call.** `10.1371/journal.pone.0341620` (Wang & Wang 2026) looks exactly
-  like item response data: 2,145 units x 31 indicators, uniform 1-10 scale,
-  zero missing cells. But the units are PUBLISHED PAPERS and the responses are
-  GPT-4o output. The paper states it is "utilizing a large language model as a
-  data simulation tool, treating its generated analyses as the primary research
-  data". `datastandard.md` permits a non-person `id`, so the units are not the
-  objection -- machine-generated responses are. Marked `rejected_content` in
-  `leads/plos_leads_2026-10-30.csv` with that reasoning. If IRW wants it, it
-  belongs in the `simsyn` dictionary (`stage_dict_row.py --source sim`), not
-  core, and that is a ruling rather than an automated decision. Worth noting
-  the general shape too: LLM-as-rater datasets will keep triaging `good`,
-  because they are structurally indistinguishable from a rating study.
+- [x] **RESOLVED 2026-10-30 — LLM-generated responses belong in IRW, marked.**
+  I initially rejected `10.1371/journal.pone.0341620` (Wang & Wang 2026) as
+  "not human item responses": GPT-4o scored 2,145 published papers on 31
+  rubric indicators, 1-10. Ben's ruling: machine responses are fine provided
+  they are **marked accordingly** — what IRW does not want is "responses that
+  look like human responses but are actually LLMs or simulations". The
+  `jiang_2026_openeval_*` tables are the format precedent (their descriptions
+  open "AI models as respondents:"). Shipped as
+  `wang_2026_research_quality_gpt4o` with the machine provenance stated first
+  in the description and a `rater` column carrying the model name on every
+  row, and the lead is re-marked `shipped`.
+
+  **The operational consequence for this pipeline is worth keeping:** an
+  LLM-as-rater or simulated dataset is structurally indistinguishable from a
+  human rating study, so it will always triage `good`, and nothing short of
+  reading the paper's methods will reveal it. The check is therefore not
+  "should this be excluded" but "is the machine provenance named in the
+  description, the tags and a `rater` column" — and the failure mode to guard
+  against is shipping such a table with a description that reads as though
+  people answered it.
 
 - [ ] **Transcribing one questionnaire would unlock 36 item stems.** The
   `lin_2024_escooter_*` deposit ships its questionnaire as a second SI file
@@ -146,8 +156,7 @@ and the standing leads backlog was reconciled and worked.
 
 - [ ] **75 actionable `good` PLOS leads, unworked** -- top of
   `leads/plos_leads_2026-10-30.csv` (sorted unworked-first by response count).
-  Ten were worked on 2026-10-30 and are marked `shipped` there, and one was
-  rejected (see below); 75 remain. 18 more `good` rows are `blocked_licence` (17 `unknown`, 1
+  Eleven were worked on 2026-10-30 and are marked `shipped` there; 75 remain. 18 more `good` rows are `blocked_licence` (17 `unknown`, 1
   `no-license`) and recorded rather than dropped. The largest: a 60-item
   psychosocial-factors instrument at 10,000 respondents (600,000 responses,
   cc-by), a tuberculosis-stigma study at 33,349 respondents (cc0), a
