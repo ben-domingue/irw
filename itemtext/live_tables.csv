@@ -1,6 +1,7 @@
-# item-text tables in the Redivis shards as of 2026-10-28
+# item-text tables in the Redivis shards as of 2026-10-30
 # status=published: a reader can fetch it. status=draft: uploaded, not released yet.
 # generated -- do not hand-edit; rerun itemtext/refresh_live_tables.py (irw#1828)
+# draft not listable by this token (needs data.edit) for irw_text_3; its draft rows carried forward from the snapshot taken 2026-10-28
 table,shard,status
 16_personalityfactors,irw_text,published
 360emergencymed_azami_2024,irw_text,published
@@ -99,6 +100,13 @@ aiquipa_2026_dgs,irw_text_2,published
 ajaykumar_2023_experience,irw_text_3,published
 ajaykumar_2023_nasa_tlx,irw_text,published
 ajlan_2025_stemcell_knowledge,irw_text_3,published
+akter_2026_climate_adaptation,irw_text_3,published
+akter_2026_climate_incentives,irw_text_3,published
+akter_2026_climate_risk_perception,irw_text_3,published
+akter_2026_climate_self_efficacy,irw_text_3,published
+akter_2026_climate_social_norms,irw_text_3,published
+akter_2026_proenv_private_behaviour,irw_text_3,published
+akter_2026_proenv_public_behaviour,irw_text_3,published
 alan_2018_student_gender_attitudes,irw_text,published
 alan_2018_teacher_extrinsic_motivation,irw_text,published
 alan_2018_teacher_gender_attitudes,irw_text,published
@@ -154,6 +162,8 @@ amatus_cipora_2024_sdq_m,irw_text,published
 amatus_cipora_2024_tai,irw_text,published
 american_multiracial_face,irw_text,published
 an_2020_efl_self_regulated,irw_text,published
+andreu_sanchez_2023_information_sources,irw_text_3,published
+andreu_sanchez_2023_lifestyle,irw_text_3,published
 andrich_mudfold,irw_text,published
 anh_2026_ai_adoption,irw_text,published
 anh_2026_digitaltrust,irw_text,published
@@ -538,6 +548,13 @@ eammi_grahe_2018_socmedia,irw_text,published
 eammi_grahe_2018_support,irw_text,published
 eammi_grahe_2018_swb,irw_text,published
 eammi_grahe_2018_transgressions,irw_text,published
+earja_2026_ai_literacy,irw_text_3,published
+earja_2026_algorithmic_transparency,irw_text_3,published
+earja_2026_anthropomorphism,irw_text_3,published
+earja_2026_fomo,irw_text_3,published
+earja_2026_perceived_risk,irw_text_3,published
+earja_2026_purchase_intention,irw_text_3,published
+earja_2026_trust,irw_text_3,published
 ecps_sahm_2024_distrust,irw_text,published
 ecps_sahm_2024_dtl,irw_text,published
 ecps_sahm_2024_ia,irw_text,published
@@ -1048,6 +1065,7 @@ hoai_2026_learning_experience,irw_text_2,published
 hoai_2026_social_presence,irw_text_2,published
 hoai_2026_student_engagement,irw_text_2,published
 hoai_2026_teaching_presence,irw_text_2,published
+hohn_2024_library_agreement,irw_text_3,published
 hoorani_2022_child_help,irw_text_2,published
 hoorani_2022_epreas,irw_text,published
 hoorani_2022_ps,irw_text_2,published
@@ -1238,10 +1256,15 @@ komura_2026_mdmt_ethical,irw_text_2,published
 komura_2026_mdmt_reliable,irw_text_2,published
 komura_2026_mdmt_sincere,irw_text_2,published
 konerding_2019_patientsatisfaction,irw_text_2,published
+kopczynski_2021_fcv19s,irw_text_3,published
+kopczynski_2021_mspss,irw_text_3,published
+kopczynski_2021_pandemic_appraisal,irw_text_3,published
 kotsou_2016_panas,irw_text_3,published
 kraft_todd_2017_competence,irw_text_2,published
 kraft_todd_2017_warmth,irw_text_2,published
 kreps_2023_ai_attitudes,irw_text_3,published
+kubilay_2023_scam_confidence,irw_text_3,published
+kubilay_2023_scam_identification,irw_text_3,published
 kuczyk_2024_facemask_fba,irw_text_2,published
 kuczyk_2024_facemask_fbe,irw_text_2,published
 kuehner_2017_mw_rumination,irw_text_2,published
@@ -1256,6 +1279,10 @@ lee2024_relative_clause,irw_text,published
 lee_2020_alcohol_use,irw_text_3,published
 lee_2020_vr_usability,irw_text_2,published
 lee_2025_nursing_exam,irw_text_2,published
+lee_whiting_2025_ai_nurse_tradeoff,irw_text_3,published
+lee_whiting_2025_ai_vs_human_choice,irw_text_3,published
+lee_whiting_2025_digital_government,irw_text_3,published
+lee_whiting_2025_job_loss_expectations,irw_text_3,published
 leis_2025_english_motivation,irw_text_3,published
 leon_guereno_2020_breq,irw_text_2,published
 leon_rubio_2025_cdpe_antecedents,irw_text_3,published
@@ -2021,6 +2048,7 @@ safiye_2023_rfq,irw_text_2,published
 sakal_2026_ai_resistance,irw_text_3,published
 salleh_2023_aim_iam_fim,irw_text_2,published
 sapa_personality,irw_text,published
+sariyska_2019_food_frequency,irw_text_3,published
 sas_deters_2022,irw_text,published
 schafer_2016_music_effects,irw_text_2,published
 schafer_2016_music_goals,irw_text_2,published
@@ -2111,6 +2139,7 @@ song_2025_er,irw_text_2,published
 song_2025_pj,irw_text_2,published
 song_2025_pwb,irw_text_2,published
 song_2025_sc,irw_text_2,published
+soressa_2024_dam_attitudes,irw_text_3,published
 spain_2012_entrepreneurship_barriers,irw_text_3,published
 spain_2012_entrepreneurship_economy,irw_text_3,published
 spain_2012_entrepreneurship_education,irw_text_3,published
@@ -2473,6 +2502,7 @@ tenseness_pcmrs,irw_text,published
 teodorini_2020_modafinil_attitudes,irw_text_2,published
 teq_novak_2021_scbs,irw_text_2,published
 teq_novak_2021_selfesteem,irw_text_2,published
+teriba_2026_self_compassion,irw_text_3,published
 thanh_2025_attitude,irw_text_2,published
 thanh_2025_environ_concern,irw_text_2,published
 thanh_2025_green_behavior,irw_text_2,published
