@@ -35,14 +35,16 @@ and the standing leads backlog was reconciled and worked.
   `leads/plos_leads_2026-10-30.csv` written with 1,780 rows, BATCH_LOG entry
   written (2026-10-30). Full numbers there.
 
-- [ ] **18 response tables (1,136,223 responses) + 1 item text table need
+- [ ] **24 response tables (1,290,303 responses) + 1 item text table need
   uploading.** `automated_finding/irw_output/` with `MANIFEST_2026-10-30.txt`,
   and `itemtext_output/sabrina_2026_gad7__items.csv`. **Response tables
-  first.** All 18 pass `irw-validate --profile upload`; the item text table
-  passes the four-gate chain. 18 dictionary rows, 18 codebook rows, 18 tag rows
-  (already appended into `tags/tags_auto.csv`), 18 `itemtext_provenance` rows
-  and 8 `instrument_rights_register` rows (6 hold, 1 ship, 1 ship_with_note)
-  are staged, so nothing needs pasting. Five deposits:
+  first.** Ben is uploading this batch at the end, so the folder stays open and
+  tables keep accumulating. All 24 pass `irw-validate --profile upload`; the
+  item text table passes the four-gate chain. 24 dictionary rows, 24 codebook
+  rows, 24 tag rows (already appended into `tags/tags_auto.csv`), 24
+  `itemtext_provenance` rows and 13 `instrument_rights_register` rows (9 hold,
+  3 ship, 1 ship_with_note) are staged, so nothing needs pasting. Eight
+  deposits:
   - `hocine_2016_psychosocial_stressors` -- 10,000 French employees x 58 items,
     figshare 10.6084/m9.figshare.3156154, CC BY 4.0 (verified on the DEPOSIT;
     the data is off-site, so the article's licence could not grant it).
@@ -54,6 +56,30 @@ and the standing leads backlog was reconciled and worked.
     students in Bangladesh, CC BY 4.0. Three published instruments, three
     different item-text outcomes: GAD-7 shipped, CES-D-10 held on missing
     option labels (rights are clear, stems in hand), K10 held on rights.
+  - `padchasuwan_2026_sexual_health_literacy` -- 1,235 Thai undergraduates,
+    CC BY 4.0. The 49-item ADMINISTERED form, not the published 45-item
+    instrument (EFA dropped 2, CFA 2 more; which ones is stated nowhere).
+  - `zhang_2025_{mfes,gds15,aaq,lsns6}` -- 1,117 adults aged 60-102 in
+    Shenzhen, figshare 10.6084/m9.figshare.29994334, CC BY 4.0 (verified on the
+    deposit). The AAQ values are already reverse-adjusted and the deposit says
+    so in its SHEET NAME.
+  - `oppong_2026_procurement_literacy` -- 554 Ghanaian students, figshare
+    10.6084/m9.figshare.30931064, CC BY 4.0 (verified on the deposit). Seven of
+    its eight dimension prefixes also exist as composite-mean columns with the
+    same name.
+
+- [ ] **Four item-text extractions are rights-clear and blocked only on
+  mechanics or mapping**, which is a different queue from the rights holds.
+  `kendall_2018_*` (9 tables) is the only one that is purely mechanical; the
+  other three are blocked because no stem-to-code key exists:
+  `padchasuwan_2026_sexual_health_literacy` and
+  `oppong_2026_procurement_literacy` (both scale-development papers whose own
+  instruments are registered `ship`, but whose deposits carry bare column
+  codes while the article tables list retained items against loadings), and
+  `zhang_2025_gds15` (the GDS-15 itself is registered `ship`; the deposit's
+  columns are just `Depre1..Depre15`). For the two development papers the
+  mapping is worse than usual because items were dropped between
+  administration and publication, so even the counts do not line up.
 
 - [ ] **The `kendall_2018_*` item text is a queued extraction, not a block** --
   the only item-text job in this batch that is rights-clear. All 77 stems and
@@ -65,10 +91,10 @@ and the standing leads backlog was reconciled and worked.
   split off into section text with the target becoming `item_text`. Nine
   `__items` tables when done.
 
-- [ ] **81 actionable `good` PLOS leads, unworked** -- top of
+- [ ] **78 actionable `good` PLOS leads, unworked** -- top of
   `leads/plos_leads_2026-10-30.csv` (sorted unworked-first by response count).
-  The five largest were worked on 2026-10-30 and are marked `shipped` there;
-  81 remain. 18 more `good` rows are `blocked_licence` (17 `unknown`, 1
+  The eight largest were worked on 2026-10-30 and are marked `shipped` there;
+  78 remain. 18 more `good` rows are `blocked_licence` (17 `unknown`, 1
   `no-license`) and recorded rather than dropped. The largest: a 60-item
   psychosocial-factors instrument at 10,000 respondents (600,000 responses,
   cc-by), a tuberculosis-stigma study at 33,349 respondents (cc0), a

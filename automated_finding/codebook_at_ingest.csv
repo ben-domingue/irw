@@ -2310,6 +2310,7 @@ ono_2020_gender_stereotypes,conj,https://dataverse.harvard.edu/api/access/datafi
 ono_2025_bicameral_gender,conj,https://dataverse.harvard.edu/api/access/datafile/10856375,2026-10-09
 ono_2026_multiple_vote,conj,https://dataverse.harvard.edu/api/access/datafile/13664276,2026-10-09
 openpowerlifting,core,https://gitlab.com/openpowerlifting/opl-data/-/blob/main/docs/data-readme.md,2026-10-29
+oppong_2026_procurement_literacy,core,none,2026-10-30
 ornelasherrera_2023_circular_farming,conj,https://zenodo.org/api/records/8338014/files/N2C_Consumers_Readme.xlsx/content,2026-10-14
 ornstein_2024_hometown_advantage,conj,https://dataverse.harvard.edu/api/access/datafile/10539720,2026-10-07
 orsini_2018_ams,core,none,2026-10-10
@@ -2325,6 +2326,7 @@ osorio_2025_parenting,core,https://zenodo.org/records/15345328/files/final_db_su
 osorio_2025_substance_use,core,https://zenodo.org/records/15345328/files/final_db_substances.dta,2026-10-18
 otago_2018_library_support,core,https://ndownloader.figshare.com/files/13837841,2026-10-21
 oviedo_2026_waterbirds,conj,https://zenodo.org/api/records/21133199/files/README_SEV_BIO_paper_ERE.txt/content,2026-10-09
+padchasuwan_2026_sexual_health_literacy,core,none,2026-10-30
 pan_2023_hiring_managers,conj,https://dataverse.harvard.edu/api/access/datafile/5378695,2026-10-07
 pan_2023_resume_pretest,conj,https://dataverse.harvard.edu/api/access/datafile/5378695,2026-10-07
 pan_2025_crossstrait_agreement,conj,https://dataverse.harvard.edu/api/access/datafile/10706960,2026-10-09
@@ -3731,12 +3733,16 @@ zhang_2023_threat_appraisal,core,none,2026-10-10
 zhang_2024_bureaucrat_cooperation,conj,https://dataverse.harvard.edu/api/access/datafile/10547923,2026-10-09
 zhang_2024_hotline_operator,conj,https://dataverse.harvard.edu/api/access/datafile/10547923,2026-10-09
 zhang_2024_volunteer_projects,conj,none,2026-10-08
+zhang_2025_aaq,core,none,2026-10-30
 zhang_2025_chatgpt_use,core,https://zenodo.org/api/records/17958610/files/Supp_Mat_B_Codebook.docx/content,2026-10-15
 zhang_2025_child_preliteracy,core,https://zenodo.org/api/records/14795430/files/parent%20survey%20questions.docx/content,2026-10-15
 zhang_2025_cognitive_load,core,https://zenodo.org/api/records/17958610/files/Supp_Mat_B_Codebook.docx/content,2026-10-15
 zhang_2025_deep_learning,core,https://zenodo.org/api/records/17958610/files/Supp_Mat_B_Codebook.docx/content,2026-10-15
+zhang_2025_gds15,core,none,2026-10-30
 zhang_2025_grit,core,none,2026-10-09
 zhang_2025_learning_engagement,core,none,2026-10-09
+zhang_2025_lsns6,core,none,2026-10-30
+zhang_2025_mfes,core,none,2026-10-30
 zhang_2025_mslq,core,https://zenodo.org/api/records/17958610/files/Supp_Mat_B_Codebook.docx/content,2026-10-15
 zhang_2025_parent_literacy_beliefs,core,https://zenodo.org/api/records/14795430/files/parent%20survey%20questions.docx/content,2026-10-15
 zhang_2025_relative_grades,core,none,2026-10-09
