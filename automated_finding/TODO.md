@@ -35,15 +35,15 @@ and the standing leads backlog was reconciled and worked.
   `leads/plos_leads_2026-10-30.csv` written with 1,780 rows, BATCH_LOG entry
   written (2026-10-30). Full numbers there.
 
-- [ ] **46 response tables (1,485,562 responses) + 1 item text table need
+- [ ] **57 response tables (1,513,286 responses) + 1 item text table need
   uploading.** `automated_finding/irw_output/` with `MANIFEST_2026-10-30.txt`,
   and `itemtext_output/sabrina_2026_gad7__items.csv`. **Response tables
   first.** Ben is uploading this batch at the end, so the folder stays open and
-  tables keep accumulating. All 46 pass `irw-validate --profile upload`; the
-  item text table passes the four-gate chain. 46 dictionary rows, 46 codebook
-  rows, 46 tag rows (already appended into `tags/tags_auto.csv`), 46
+  tables keep accumulating. All 57 pass `irw-validate --profile upload`; the
+  item text table passes the four-gate chain. 57 dictionary rows, 57 codebook
+  rows, 57 tag rows (already appended into `tags/tags_auto.csv`), 57
   `itemtext_provenance` rows and 20 `instrument_rights_register` rows (14 hold,
-  5 ship, 1 ship_with_note) are staged, so nothing needs pasting. Thirteen
+  5 ship, 1 ship_with_note) are staged, so nothing needs pasting. Fourteen
   deposits:
   - `hocine_2016_psychosocial_stressors` -- 10,000 French employees x 58 items,
     figshare 10.6084/m9.figshare.3156154, CC BY 4.0 (verified on the DEPOSIT;
@@ -140,6 +140,18 @@ and the standing leads backlog was reconciled and worked.
   on 2026-10-29. Until then the table is complete and honest, just without the
   manipulation.
 
+- [ ] **Worth a look: are rotated-booklet designs being flagged anywhere?**
+  `bock_2021_{pck,ck}_test` carry a multi-matrix design -- per-item n ranges
+  36-211 because each respondent saw a subset of the item pool -- and nothing
+  in the pipeline or the validator distinguishes that from attrition. The two
+  have opposite consequences: planned missingness is ignorable and an IRT
+  model handles it natively, while a raw sum score over it is meaningless. I
+  asserted the shape in the script and said so in both descriptions, but there
+  is no corpus-level convention for marking it. If IRW holds other
+  multi-matrix tests (large-scale assessments almost certainly qualify), a
+  flag in the dictionary or a `booklet`-style design column would be worth
+  more than a sentence in each description.
+
 - [ ] **A reversed Likert direction is invisible to every check we have, and
   this batch found one.** `li_2024_deg_*` scores 1 as the STRONGEST agreement
   ("varying from high to low" in the paper's Measures section). The data looks
@@ -193,9 +205,10 @@ and the standing leads backlog was reconciled and worked.
   split off into section text with the target becoming `item_text`. Nine
   `__items` tables when done.
 
-- [ ] **73 actionable `good` PLOS leads, unworked** -- top of
+- [ ] **72 actionable `good` PLOS leads, unworked** -- top of
   `leads/plos_leads_2026-10-30.csv` (sorted unworked-first by response count).
-  Thirteen were worked on 2026-10-30 and are marked `shipped` there; 73 remain. 18 more `good` rows are `blocked_licence` (17 `unknown`, 1
+  Fourteen were worked on 2026-10-30 and are marked `shipped` there; 72
+  remain. 18 more `good` rows are `blocked_licence` (17 `unknown`, 1
   `no-license`) and recorded rather than dropped. The largest: a 60-item
   psychosocial-factors instrument at 10,000 respondents (600,000 responses,
   cc-by), a tuberculosis-stigma study at 33,349 respondents (cc0), a
