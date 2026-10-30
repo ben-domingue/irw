@@ -1409,6 +1409,14 @@ huang_2025_perceived_social_support,core,none,2026-10-15
 huang_2025_resilience,core,none,2026-10-30
 huang_2025_school_climate,core,none,2026-10-30
 huang_2025_social_avoidance,core,none,2026-10-30
+huang_2026_mh_attitude,core,none,2026-10-30
+huang_2026_mh_convenience,core,none,2026-10-30
+huang_2026_mh_ease_of_use,core,none,2026-10-30
+huang_2026_mh_intention,core,none,2026-10-30
+huang_2026_mh_quality,core,none,2026-10-30
+huang_2026_mh_risk,core,none,2026-10-30
+huang_2026_mh_trust,core,none,2026-10-30
+huang_2026_mh_usefulness,core,none,2026-10-30
 huber_2017_dating_profiles,conj,https://dataverse.harvard.edu/api/access/datafile/3859139,2026-10-11
 huber_2020_car_policy_instruments,conj,https://dataverse.harvard.edu/api/access/datafile/3451165,2026-10-09
 huebner_2021_weightlifting_attraction,core,https://zenodo.org/api/records/5500789/files/wldat_dictionary.xlsx/content,2026-10-21
@@ -3003,6 +3011,10 @@ reinhardt_2023_materialism,core,none,2026-10-15
 reinhardt_2023_risk_aversion,core,none,2026-10-15
 reinhardt_2023_self_concept_clarity,core,none,2026-10-15
 reinsberg_2026_imf_messages,conj,none,2026-10-09
+ren_2026_amoral_management,core,none,2026-10-30
+ren_2026_creative_unethicality,core,none,2026-10-30
+ren_2026_job_creativity_requirement,core,none,2026-10-30
+ren_2026_moral_decoupling,core,none,2026-10-30
 repochat_arena_2024_2025,comps,none,2026-10-27
 rexand_galais_2022_ipo,core,https://data.mendeley.com/public-files/datasets/tv6w6yyfy8/files/c2423e76-508e-4568-acc8-fea752230367/file_downloaded,2026-10-07
 rexand_galais_2022_ipofr,core,https://data.mendeley.com/public-files/datasets/tv6w6yyfy8/files/c2423e76-508e-4568-acc8-fea752230367/file_downloaded,2026-10-07
@@ -3573,6 +3585,9 @@ wang_2021_grit_perseverance,core,none,2026-10-19
 wang_2021_positive_emotions,core,none,2026-10-19
 wang_2021_self_rated_english,core,none,2026-10-19
 wang_2021_tolerance_ambiguity,core,none,2026-10-19
+wang_2023_eco_perception,core,none,2026-10-30
+wang_2023_eco_resident_erb,core,none,2026-10-30
+wang_2023_eco_tourist_erb,core,none,2026-10-30
 wang_2026_chatgpt_acceptance,core,none,2026-10-21
 wang_2026_cognitive_load,core,none,2026-10-09
 wang_2026_green_space_heat,conj,none,2026-10-09
