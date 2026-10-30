@@ -35,16 +35,16 @@ and the standing leads backlog was reconciled and worked.
   `leads/plos_leads_2026-10-30.csv` written with 1,780 rows, BATCH_LOG entry
   written (2026-10-30). Full numbers there.
 
-- [ ] **69 response tables (1,606,829 responses) + 1 item text table need
+- [ ] **82 response tables (1,636,955 responses) + 1 item text table need
   uploading.** `automated_finding/irw_output/` with `MANIFEST_2026-10-30.txt`,
   and `itemtext_output/sabrina_2026_gad7__items.csv`. **Response tables
   first.** Ben is uploading this batch at the end, so the folder stays open and
-  tables keep accumulating. All 69 pass `irw-validate --profile upload`; the
-  item text table passes the four-gate chain. 69 dictionary rows, 69 codebook
-  rows, 69 tag rows (already appended into `tags/tags_auto.csv`), 69
+  tables keep accumulating. All 82 pass `irw-validate --profile upload`; the
+  item text table passes the four-gate chain. 82 dictionary rows, 82 codebook
+  rows, 82 tag rows (already appended into `tags/tags_auto.csv`), 82
   `itemtext_provenance` rows and 21 `instrument_rights_register` rows (14 hold,
-  6 ship, 1 ship_with_note) are staged, so nothing needs pasting. Eighteen
-  deposits:
+  6 ship, 1 ship_with_note) are staged, so nothing needs pasting. Twenty
+  deposits -- see `MANIFEST_2026-10-30.txt` for the per-deposit write-ups.
   - `hocine_2016_psychosocial_stressors` -- 10,000 French employees x 58 items,
     figshare 10.6084/m9.figshare.3156154, CC BY 4.0 (verified on the DEPOSIT;
     the data is off-site, so the article's licence could not grant it).
@@ -140,6 +140,21 @@ and the standing leads backlog was reconciled and worked.
   on 2026-10-29. Until then the table is complete and honest, just without the
   manipulation.
 
+- [ ] **A choice experiment the conjoint detector missed, now routed.**
+  `10.1371/journal.pone.0337225` (organic produce choices, Japan and China)
+  triaged `good` and its title says neither "conjoint" nor "discrete choice
+  experiment", so it would have been written as a core table. It is a choice
+  experiment: 8 choice sets per vegetable x 3 vegetables, each set offering 3
+  alternatives including None, so the 1/2/3 values are WHICH ALTERNATIVE WAS
+  CHOSEN -- nominal, not ordinal. Routed by hand to
+  `data/conjoint/candidates.csv` as `todo`, with the data located (Mendeley
+  10.17632/9jv5bdvbpj.4, CC BY 4.0 verified, 834 respondents) and the gap
+  named: the alternative-level attribute design is in the article's Fig 3, not
+  in the deposit. **The detector gap is the reusable finding** -- a choice
+  experiment whose title says only "choices" will keep slipping through, and
+  the only tell in the data is a small integer range on blocks named after
+  the goods being chosen.
+
 - [ ] **One battery held for want of a codebook, recoverable if one surfaces.**
   `duque_2017_influenza_kap`'s 9-item influenza RISK-GROUPS battery
   (preg_women, HC_workers, Older_65, Pers_HIV, Pers_TB, Pers_asthma, Gen_pop,
@@ -221,11 +236,11 @@ and the standing leads backlog was reconciled and worked.
   split off into section text with the target becoming `item_text`. Nine
   `__items` tables when done.
 
-- [ ] **68 actionable `good` PLOS leads, unworked** -- top of
+- [ ] **65 actionable `good` PLOS leads, unworked** -- top of
   `leads/plos_leads_2026-10-30.csv` (sorted unworked-first by response count).
-  Eighteen were worked on 2026-10-30 and are marked `shipped` there; 68
-  remain. Plan agreed with Ben: work the ~35 leads above 5,000 responses and
-  leave the sub-5k tail recorded as `unworked` for a later pass. 18 more `good` rows are `blocked_licence` (17 `unknown`, 1
+  Twenty were worked on 2026-10-30 (18 shipped to core, 1 routed to conjoint,
+  1 rejected); 65 remain. Plan agreed with Ben: work the leads above 5,000
+  responses and leave the sub-5k tail recorded as `unworked` for a later pass. 18 more `good` rows are `blocked_licence` (17 `unknown`, 1
   `no-license`) and recorded rather than dropped. The largest: a 60-item
   psychosocial-factors instrument at 10,000 respondents (600,000 responses,
   cc-by), a tuberculosis-stigma study at 33,349 respondents (cc0), a
