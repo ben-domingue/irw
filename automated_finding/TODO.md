@@ -187,7 +187,7 @@ Full write-up in `BATCH_LOG.md` (2026-10-29e). The staging folder now holds
 SAPA's 1 and Akter's 7 -- plus 18 item text tables. (GPO-AI's three
 `trust_actors_*` tables were merged into one crossed 24-item table on
 2026-10-29f, at Ben's prompting; see BATCH_LOG.) One MANIFEST covers all
-four, `irw_output/MANIFEST_2026-10-29b.txt`.
+four, `irw_output/MANIFEST_2026-10-29b_uploaded.txt`.
 
 - [x] **UPLOADED 2026-10-29 (ben-domingue).** 34 response tables, 8,464,014
   responses, and 18 item text tables. `uploaded=2026-10-29` is stamped on the
@@ -256,15 +256,14 @@ four, `irw_output/MANIFEST_2026-10-29b.txt`.
 
 Full write-up in `BATCH_LOG.md` (2026-10-29d).
 
-- [ ] **7 response tables (3,936 responses) + 7 item text tables need
-  uploading.** `automated_finding/irw_output/` (with
-  `MANIFEST_2026-10-29b.txt`) and `itemtext_output/`. **Response tables
-  first.** All 7 pass `irw-validate --profile upload`; all 7 item text tables
-  pass normalize_nulls.R -> validate_items.R --resp-csv -> audit_batch.R
-  --resp-dir -> irw-validate (7/7 PASS, no anomalies). Dictionary and tag rows
-  are staged, so nothing needs pasting. Stamp `uploaded=` on the 7
-  `itemtext_provenance.csv` rows and the 7 `itemtext/mapping_verification.csv`
-  rows only once Ben confirms.
+- [x] **UPLOADED 2026-10-29** — these are the 7 `earja_2026_*` tables (3,936
+  responses) and their 7 item text tables. They went up inside the combined
+  34-table manifest, not separately, which is why this block sat open after
+  the fact: the upload was recorded against the 2026-10-29e entry above while
+  this per-sweep copy was never closed. Confirmed by Ben on 2026-10-30, and
+  all 7 `itemtext_provenance.csv` and 7 `itemtext/mapping_verification.csv`
+  rows already carry `uploaded=2026-10-29`. Manifest renamed
+  `irw_output/MANIFEST_2026-10-29b_uploaded.txt`.
 
 - [ ] **40 unworked leads** in `leads/repos_leads_2026-10-29b.csv`: 18
   `recoverable_format`, 7 `wrong_file_selected`, 6 `worth_retrying`, 2
