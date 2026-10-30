@@ -203,6 +203,14 @@ diff output.** This is the manual-merge step workflows 1/2's docs used to
 describe as entirely out of scope — it's now in scope, as its own explicit,
 confirmed action, added 2026-08-02.
 
+**Since 2026-10-30 this runs on its own:** `.github/workflows/metadata-upload.yml`
+runs `upload_meta.py --yes` on every push to `main` that changes one of the
+committed irw_meta CSVs, so merging a pipeline PR (or a hand edit to
+`metadata/`) uploads to the irw_meta draft within minutes. Running it by hand
+is now for a local checkout that is ahead of main, for `item_classical`
+(uncommitted, see the script's `FILE_TABLE_MAP` note), or to redo a failed
+run. Publishing the draft on Redivis is still by hand.
+
 ```bash
 cd metadata
 python3 ../.claude/skills/irw-site-update/scripts/upload_meta.py            # all known files present in cwd

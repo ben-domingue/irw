@@ -412,7 +412,8 @@ def check_warehouse_behind_repo(root: Path, now: dt.datetime) -> Check:
                  f"`metadata/` is **{lag:.1f}d ahead** of published irw_meta {tag}",
                  [f"irw_meta {tag} released {released:%Y-%m-%d %H:%M} UTC",
                   f"`metadata/` last changed {repo_at:%Y-%m-%d %H:%M} UTC",
-                  "Fix: `git pull`, then `python3 upload_meta.py`, then Publish on Redivis."],
+                  "Fix: Publish the irw_meta draft on Redivis (metadata-upload.yml fills it on "
+                  "each merge; if that run failed, `python3 upload_meta.py` by hand)."],
                  days_since(released, now))
 
 

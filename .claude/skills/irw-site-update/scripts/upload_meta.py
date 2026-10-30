@@ -17,9 +17,11 @@ Usage is unchanged:
     python3 ../.claude/skills/irw-site-update/scripts/upload_meta.py --dry-run
     python3 ../.claude/skills/irw-site-update/scripts/upload_meta.py --yes
 
-Still never runs automatically: not from run_pipeline.sh, not from the weekly
-cron. Still only ever writes the draft ("next") version -- review and publish
-by hand on the Redivis site afterwards.
+Not run by run_pipeline.sh or by the pipeline workflow's run itself. Since
+2026-10-30 it IS run by .github/workflows/metadata-upload.yml on every push to
+main that changes one of the CSVs below, i.e. when a pipeline pull request (or
+a hand edit) merges. Still only ever writes the draft ("next") version --
+publish by hand on the Redivis site afterwards.
 """
 import argparse
 import sys
