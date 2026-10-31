@@ -7,6 +7,98 @@ checkboxes here just mean "this line item is settled," not "actionable."
 
 **For currently open action items, see `TODO.md`.**
 
+## PLOS leads backlog, 2026-10-31 -- 10 deposits, 43 tables, 2,253,170 responses
+
+The 2026-10-30 session worked the 104 `good` leads of the recycled-terms pass
+and stopped; the other 1,259 rows of `leads/plos_leads_2026-10-30.csv` (every
+`human_assistance` row, 922 `recoverable_format` and 229 `worth_retrying`
+among them) had never been opened. This session ranked those by instrument
+shape (`100 <= N <= 50,000`, `8 <= items <= 700`: 962 of 1,294 unworked rows
+qualify), downloaded the 33 largest, read each file and its paper, and built
+the ten that are real item-response deposits. NOTHING UPLOADED; manifest
+`irw_output/MANIFEST_2026-10-31.txt` carries the per-deposit narrative.
+
+| deposit | tables | responses | licence |
+|---|---|---|---|
+| Howe 2019 gambling in Victoria | 18 (+13 items) | 591,165 | CC BY 4.0 |
+| Roskam 2015 French PID-5 | 1 | 557,040 | CC BY 4.0 |
+| Denning 2020 HCW burnout, 3 countries | 3 (+1 items) | 216,052 | CC BY 4.0 |
+| van der Horst 2017 toddler feeding | 5 | 169,845 | CC BY 4.0 |
+| Li 2017 Guangzhou outpatient screening | 3 | 163,804 | CC0 1.0 |
+| Hofmann 2017 HOPE palliative symptoms | 1 | 145,840 | CC BY 4.0 |
+| Velten 2018 SESII-W/M + SIS/SES-SF | 2 | 113,619 | CC BY 4.0 |
+| Thoma 2018 SOC-R representative sample | 3 (+1 items) | 112,197 | CC BY 4.0 |
+| Dhital 2019 Nepal cluster RCT | 3 | 93,654 | CC BY 4.0 (figshare) |
+| Clemente 2019 custody dispute | 4 | 89,954 | CC BY 4.0 (figshare) |
+
+All 43 pass `irw-validate --profile upload`; the 15 item text tables pass the
+four-gate chain. Staged: 43 dictionary + 43 codebook + 43 tag rows, 43
+`itemtext_provenance` rows, 15 `mapping_verification` rows, 18 register rows
+(all `hold`). 33 leads rows re-marked: 10 `shipped`, 9 `rejected_content`,
+1 `held`, 13 annotated `inspected 2026-10-31` and left `unworked`.
+
+### What the leads pool is made of, now that it has been opened
+
+**The `n_participants` column is row count, and the biggest rows are
+third-party microdata.** Of the ten largest shaped leads, four were
+re-uploads of somebody else's survey: a Ghana DHS men's recode on Borealis
+(`10.5683/SP3/TRKRWL`, CC0 -- the re-uploader's), two Pew American Trends
+Panel waves, the Chinese Social Survey, and the Korean National Leisure
+Activity Survey. `datastandard.md` is explicit that the re-uploader's licence
+does not clear them. A fifth (`10.6084/m9.figshare.5203633`) was a stacked
+multiple-imputation file: 37,875 rows = 375 patients x 101, sum scores only.
+None of this is visible from the triage row; it takes opening the file.
+
+**The `recoverable_format` bucket is where the instruments are.** Nine of
+the ten shipped deposits were `recoverable_format` or `worth_retrying`, and
+eight of those were SPSS files with full variable and value labels. The
+triage reader had simply failed to pick the item block out of a wide file.
+
+**A deposit's recode is not the response.** Denning's CSV holds every item
+twice -- the chosen option in words and the authors' numeric recode -- and
+the recode is a dichotomy for the SAQ and the scored (reversed) direction for
+the OLBI. The words are the raw response; the script reads those and uses the
+recode only as an assertion. The same shape as the `dup_id_item` lesson:
+check which column is derived before melting.
+
+**Three deposits contradict their papers in a block, and the block is
+withheld rather than reconciled.** Clemente's M block has 33 columns on 1-5
+where the paper's Mach-IV has 20 on 1-7; its P block runs 1-6 where the LPSP
+is 1-5. Hofmann's value labels say 0 = 'no data' on 0-3 items. The first two
+are withheld with the contradiction in the script header; the third ships,
+because three independent facts (the paper's none/mild dichotomy, a separate
+NaN state on every item, 0 modal on rare symptoms) pin 0 as 'none'.
+
+**One deposit needs Ben.** `10.1371/journal.pone.0299048` (SCI-2, ISPARC):
+the Data Availability statement says the authors refrain from sharing for
+patient confidentiality and offers access on request, yet a 25 MB S1 File
+with 16,924 respondents x 82 SCI-2 items (0-6, 11 countries) is attached
+under CC BY. Stated intent and deposit contradict; parked as `held` in the
+leads file, not processed.
+
+**Thirteen inspected leads are annotated and left for a return**, each with
+what it holds (inequality/COVID Q29x blocks with no wording; crypto's Short
+Dark Tetrad and conspiracy short scales with a questionnaire in S1; Norwegian
+SF-36 x2 occasions; wastewater attitudes 37 items; consumer food beliefs;
+Korean 2012 voters; dog owners; silver linings x5 waves; two Chinese-labelled
+conspiracy surveys; rural consumption literacy; a transposed SDQ workbook; an
+oTree fact-checking experiment). The notes are in the leads CSV so the next
+pass starts from an answer.
+
+Item text, one line per shipped table family: howe_2019 activity batteries
+(12 tables) and depression SHIPPED from the .sav labels; howe cpgi /
+luck / OCW / urgency / esteem NOT SHIPPED (PGSI, GRCS, UPPS-P, unidentified --
+register); li_2017 NOT SHIPPED (no labels in the deposit); hofmann NOT
+SHIPPED (bare symptom names); thoma phq4 SHIPPED, socr/ctq NOT SHIPPED
+(rights); dhital NOT SHIPPED (no labels); roskam NOT SHIPPED (PID-5 block);
+denning saq SHIPPED, olbi/hads NOT SHIPPED (rights); velten NOT SHIPPED (no
+stems); clemente NOT SHIPPED (no stems); vanderhorst NOT SHIPPED (rights;
+stems in hand in the workbook).
+
+`covariate_labels/harvest.py` is owed for the seven scripts that read .sav
+files and ship `cov_*` columns (howe, li, hofmann, thoma, dhital, velten,
+clemente); see TODO.md.
+
 ## PLOS leads worked, 2026-10-30 -- 214 tables, 1,897,743 responses
 
 **UPLOADED 2026-10-30.** All 214 response tables and all 62 item text tables,
