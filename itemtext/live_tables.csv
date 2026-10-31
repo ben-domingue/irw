@@ -1,7 +1,7 @@
-# item-text tables in the Redivis shards as of 2026-10-30
+# item-text tables in the Redivis shards as of 2026-10-31
 # status=published: a reader can fetch it. status=draft: uploaded, not released yet.
 # generated -- do not hand-edit; rerun itemtext/refresh_live_tables.py (irw#1828)
-# draft not listable by this token (needs data.edit) for irw_text_3; its draft rows carried forward from the snapshot taken 2026-10-28
+# draft not listable by this token (needs data.edit) for irw_text_3; its draft rows carried forward from the snapshot taken 2026-10-30
 table,shard,status
 16_personalityfactors,irw_text,published
 360emergencymed_azami_2024,irw_text,published
@@ -282,6 +282,11 @@ brand_raffaelli_2024_familiarity_24,irw_text,published
 brand_raffaelli_2024_liking_20,irw_text,published
 brand_raffaelli_2024_liking_24,irw_text,published
 brand_raffaelli_2024_recognition_20,irw_text_2,published
+bredbenner_2019_format_preference,irw_text_4,published
+bredbenner_2019_reactions_cohn,irw_text_4,published
+bredbenner_2019_reactions_takata,irw_text_4,published
+bredbenner_2019_updates_in_field,irw_text_4,published
+bredbenner_2019_updates_outside_field,irw_text_4,published
 brederecke_2020_phq4,irw_text,published
 brederecke_2020_sis,irw_text,published
 broadband_inventories,irw_text,published
@@ -986,6 +991,15 @@ guess_2023_tech_attitudes,irw_text_3,published
 gumus_2025_dietarian_identity,irw_text_2,published
 guo_2025_ar,irw_text_3,published
 guo_2025_ase,irw_text_3,published
+guo_2026_adv_motiv_accomplishment,irw_text_4,published
+guo_2026_adv_motiv_external_reg,irw_text_4,published
+guo_2026_adv_motiv_identified_reg,irw_text_4,published
+guo_2026_adv_motiv_introjected_reg,irw_text_4,published
+guo_2026_adv_motiv_stimulation,irw_text_4,published
+guo_2026_adv_motiv_to_know,irw_text_4,published
+guo_2026_adv_political_empowerment,irw_text_4,published
+guo_2026_adv_psych_empowerment,irw_text_4,published
+guo_2026_adv_social_empowerment,irw_text_4,published
 gwen_2025_interpersonal_comm,irw_text_3,published
 gwen_2025_mental_health,irw_text_3,published
 gwen_2025_self_esteem,irw_text_3,published
@@ -1082,6 +1096,14 @@ hua_2023_efl_course_experience,irw_text_2,published
 huang_2016_cesd,irw_text_2,published
 huang_2023_d_scale,irw_text_2,published
 huang_2023_medseq,irw_text_2,published
+huang_2026_mh_attitude,irw_text_4,published
+huang_2026_mh_convenience,irw_text_4,published
+huang_2026_mh_ease_of_use,irw_text_4,published
+huang_2026_mh_intention,irw_text_4,published
+huang_2026_mh_quality,irw_text_4,published
+huang_2026_mh_risk,irw_text_4,published
+huang_2026_mh_trust,irw_text_4,published
+huang_2026_mh_usefulness,irw_text_4,published
 huebner_2021_weightlifting_attraction,irw_text_3,published
 huebner_2021_weightlifting_barriers,irw_text_3,published
 huebner_2021_weightlifting_pandemic,irw_text_3,published
@@ -1302,6 +1324,14 @@ li_2021_org_cultural_diversity,irw_text,published
 li_2021_sustainable_innov_behav,irw_text_2,published
 li_2023_self_efficacy,irw_text_3,published
 li_2023_social_support,irw_text_3,published
+li_2024_vr_ease_of_use,irw_text_4,published
+li_2024_vr_enjoyment,irw_text_4,published
+li_2024_vr_immersion,irw_text_4,published
+li_2024_vr_intention_to_use,irw_text_4,published
+li_2024_vr_interactivity,irw_text_4,published
+li_2024_vr_presence,irw_text_4,published
+li_2024_vr_usefulness,irw_text_4,published
+li_2024_vr_visit_actual_site,irw_text_4,published
 li_2025_corporate_performance,irw_text_2,published
 li_2025_market_environment,irw_text_2,published
 li_2025_marketing_culture,irw_text_2,published
@@ -2044,6 +2074,7 @@ rzeszutek_2020_wwii_matgrandmother,irw_text_2,published
 rzeszutek_2020_wwii_patgrandfather,irw_text_2,published
 rzeszutek_2020_wwii_patgrandmother,irw_text_2,published
 sabers_vesper2023,irw_text_2,published
+sabrina_2026_gad7,irw_text_4,published
 safiye_2023_rfq,irw_text_2,published
 sakal_2026_ai_resistance,irw_text_3,published
 salleh_2023_aim_iam_fim,irw_text_2,published
@@ -2139,6 +2170,16 @@ song_2025_er,irw_text_2,published
 song_2025_pj,irw_text_2,published
 song_2025_pwb,irw_text_2,published
 song_2025_sc,irw_text_2,published
+song_2026_mm_aesthetic_novelty,irw_text_4,published
+song_2026_mm_avatar_customization,irw_text_4,published
+song_2026_mm_emotional_resonance,irw_text_4,published
+song_2026_mm_emotional_value,irw_text_4,published
+song_2026_mm_flow_experience,irw_text_4,published
+song_2026_mm_multi_sensory,irw_text_4,published
+song_2026_mm_narrativity,irw_text_4,published
+song_2026_mm_social_experience,irw_text_4,published
+song_2026_mm_social_presence,irw_text_4,published
+song_2026_mm_technology_acceptance,irw_text_4,published
 soressa_2024_dam_attitudes,irw_text_3,published
 spain_2012_entrepreneurship_barriers,irw_text_3,published
 spain_2012_entrepreneurship_economy,irw_text_3,published
@@ -2522,6 +2563,13 @@ threat_isler_2024_exp3_cog_panas,irw_text,published
 threat_isler_2024_exp4_cog_crt,irw_text,published
 threat_isler_2024_exp4_cog_panas,irw_text,published
 tian2026_digital_competence,irw_text_2,published
+tian_2021_app_affective_engagement,irw_text_4,published
+tian_2021_app_behavioral_engagement,irw_text_4,published
+tian_2021_app_cognitive_engagement,irw_text_4,published
+tian_2021_app_compatibility,irw_text_4,published
+tian_2021_app_ease_of_use,irw_text_4,published
+tian_2021_app_purchase_intention,irw_text_4,published
+tian_2021_app_ui_attractiveness,irw_text_4,published
 tolomeo_2026_icar16,irw_text_3,published
 tomioka_2022_srh_future_needs,irw_text_2,published
 tomioka_2022_srh_importance,irw_text_2,published
@@ -2618,6 +2666,9 @@ wang_2016_study1_se,irw_text_2,published
 wang_2016_study3_auth,irw_text_2,published
 wang_2016_study3_power,irw_text_2,published
 wang_2016_study3_se,irw_text_2,published
+wang_2023_eco_perception,irw_text_4,published
+wang_2023_eco_resident_erb,irw_text_4,published
+wang_2023_eco_tourist_erb,irw_text_4,published
 wang_2024_self_efficacy_sources,irw_text,published
 wang_2024_speaking_self_efficacy,irw_text,published
 wang_2025_green_space_wellbeing,irw_text_2,published
@@ -2681,6 +2732,14 @@ xie_2026_student_questionnaire,irw_text,published
 xiong_2025_dass21,irw_text_2,published
 xu_2022_ples_aa,irw_text_2,published
 xu_2025_hcq_p,irw_text_2,published
+xu_2026_gai_cocreation,irw_text_4,published
+xu_2026_gai_cognitive_stimulation,irw_text_4,published
+xu_2026_gai_creative_self_efficacy,irw_text_4,published
+xu_2026_gai_exploitation,irw_text_4,published
+xu_2026_gai_exploration,irw_text_4,published
+xu_2026_gai_flow,irw_text_4,published
+xu_2026_gai_reflection,irw_text_4,published
+xu_2026_gai_student_creativity,irw_text_4,published
 xu_2026_game_experience,irw_text_3,published
 xu_2026_participation,irw_text_3,published
 xu_2026_substitutability,irw_text_3,published
@@ -2772,6 +2831,9 @@ zhao_2025_psych_recovery_eval,irw_text_2,published
 zhou_2016_burnout,irw_text,published
 zhou_2016_coping_style,irw_text,published
 zhou_2016_personality,irw_text,published
+zhou_2024_esspri,irw_text_4,published
+zhou_2024_pssqol_impact,irw_text_4,published
+zhou_2024_pssqol_symptoms,irw_text_4,published
 zhou_2024_smart_home_intention,irw_text_2,published
 zhu_2026_llm_meteorology_performance,irw_text_2,published
 znidarsic_2021_coworker_support,irw_text,published
