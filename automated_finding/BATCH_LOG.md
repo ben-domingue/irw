@@ -15,8 +15,9 @@ and stopped; the other 1,259 rows of `leads/plos_leads_2026-10-30.csv` (every
 among them) had never been opened. This session ranked those by instrument
 shape (`100 <= N <= 50,000`, `8 <= items <= 700`: 962 of 1,294 unworked rows
 qualify), downloaded the 33 largest, read each file and its paper, and built
-the ten that are real item-response deposits. NOTHING UPLOADED; manifest
-`irw_output/MANIFEST_2026-10-31.txt` carries the per-deposit narrative.
+the ten that are real item-response deposits. **UPLOADED 2026-10-31**, confirmed
+by Ben in-session, not re-verified against Redivis; manifest
+`irw_output/MANIFEST_2026-10-31_uploaded.txt` carries the per-deposit narrative.
 
 | deposit | tables | responses | licence |
 |---|---|---|---|

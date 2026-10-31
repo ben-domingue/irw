@@ -6,8 +6,10 @@ Full write-up in `BATCH_LOG.md` (2026-10-31). The `human_assistance` rows of
 `leads/plos_leads_2026-10-30.csv`, which the 2026-10-30 session never opened,
 ranked by instrument shape and worked largest-first.
 
-- [ ] **43 response tables (2,253,170 responses) + 15 item text tables need
-  uploading.** `automated_finding/irw_output/` with `MANIFEST_2026-10-31.txt`;
+- [x] **UPLOADED 2026-10-31** -- 43 response tables (2,253,170 responses)
+  and the 15 item text tables, confirmed by Ben in-session; manifest renamed
+  `MANIFEST_2026-10-31_uploaded.txt`, the 15 shipped provenance rows stamped.
+  Both staging folders empty once the upload clears them, which is expected. `automated_finding/irw_output/` with `MANIFEST_2026-10-31.txt`;
   `itemtext_output/` holds the 15 `__items.csv`. **Response tables first.**
   All 43 pass `irw-validate --profile upload`; the item text passes the
   four-gate chain. 43 dictionary rows, 43 codebook rows, 43 tag rows (in
