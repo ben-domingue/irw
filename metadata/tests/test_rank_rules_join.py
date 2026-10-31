@@ -104,11 +104,11 @@ class RulesJoin(unittest.TestCase):
         """A count, so a key that stops matching is a failure and not a quiet zero.
 
         The four jurisdictions whose rules are written down: Minneapolis (88),
-        Alaska (63), the Debian Project (33). New South Wales (279) has the key
-        but no rule set yet, so it is counted on the key, not on the join.
+        Alaska (63), the Debian Project (33) and New South Wales (279), whose
+        tables are also counted on the key below.
         """
         joined = [r for r in self.design if matching(self.rules, r)]
-        self.assertEqual(len(joined), 184)
+        self.assertEqual(len(joined), 463)
         keyed = [r for r in self.design if (r["rules_jurisdiction"] or "").strip()]
         self.assertEqual(len(keyed), 279)
         self.assertEqual({rules_key(r) for r in keyed}, {"New South Wales (Legislative Assembly)"})
