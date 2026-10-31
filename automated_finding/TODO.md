@@ -34,13 +34,12 @@ ranked by instrument shape and worked largest-first.
   PHQ-9 and GAD-7 for subsets. Roughly 1.4M responses. The licence is clean;
   the stated intent is not. Marked `held` in the leads file.
 
-- [ ] **`covariate_labels/harvest.py` is owed** for the seven new scripts
-  that read .sav files and ship `cov_*` columns: `howe_2019_gambling`,
-  `li_2017_outpatient_screening`, `hofmann_2017_hope_symptoms`,
-  `thoma_2018_socr_survey`, `dhital_2019_nepal_adolescents`,
-  `velten_2018_sexual_excitation`, `clemente_2019_custody_dispute`. Each
-  reads its raw file from a `*_RAW` env var (the SI files are not fetched by
-  the script), so the harvest needs those files on disk.
+- [x] **`covariate_labels/harvest.py` has run** (2026-10-31, `--commit HEAD`
+  at 8efbfab2) for the seven new scripts that read .sav files and ship
+  `cov_*` columns; the logs sit in `~/.cache/irw/covariate_labels/logs/`.
+  `build.py` only emits rows for tables in `metadata/metadata.csv`, so the
+  labels reach `covariate_labels.csv` on the first `build.py` run after this
+  batch is released -- nothing further is owed here.
 
 - [ ] **Thirteen inspected leads left in the file with notes** (all
   `unworked`, note begins `inspected 2026-10-31`): the richest are the crypto

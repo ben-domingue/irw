@@ -95,9 +95,10 @@ denning saq SHIPPED, olbi/hads NOT SHIPPED (rights); velten NOT SHIPPED (no
 stems); clemente NOT SHIPPED (no stems); vanderhorst NOT SHIPPED (rights;
 stems in hand in the workbook).
 
-`covariate_labels/harvest.py` is owed for the seven scripts that read .sav
-files and ship `cov_*` columns (howe, li, hofmann, thoma, dhital, velten,
-clemente); see TODO.md.
+`covariate_labels/harvest.py` ran (`--commit HEAD`, 8efbfab2) for the seven
+scripts that read .sav files and ship `cov_*` columns (howe, li, hofmann,
+thoma, dhital, velten, clemente). `build.py` emits rows only for live tables,
+so the labels land on its first run after release.
 
 ## PLOS leads worked, 2026-10-30 -- 214 tables, 1,897,743 responses
 
