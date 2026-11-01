@@ -1,5 +1,56 @@
 # IRW Automated Finding — TODO
 
+## PLOS leads backlog, 2026-10-31 -- 10 deposits, 43 tables, 2,253,170 responses
+
+Full write-up in `BATCH_LOG.md` (2026-10-31). The `human_assistance` rows of
+`leads/plos_leads_2026-10-30.csv`, which the 2026-10-30 session never opened,
+ranked by instrument shape and worked largest-first.
+
+- [x] **UPLOADED 2026-10-31** -- 43 response tables (2,253,170 responses)
+  and the 15 item text tables, confirmed by Ben in-session; manifest renamed
+  `MANIFEST_2026-10-31_uploaded.txt`, the 15 shipped provenance rows stamped.
+  Both staging folders empty once the upload clears them, which is expected. `automated_finding/irw_output/` with `MANIFEST_2026-10-31.txt`;
+  `itemtext_output/` holds the 15 `__items.csv`. **Response tables first.**
+  All 43 pass `irw-validate --profile upload`; the item text passes the
+  four-gate chain. 43 dictionary rows, 43 codebook rows, 43 tag rows (in
+  `tags/tags_auto.csv`), 43 `itemtext_provenance` rows, 15
+  `mapping_verification` rows and 18 register rows (all hold) are staged.
+  - `howe_2019_*` -- 18 tables from one Victorian gambling survey (3,361
+    adults): CPGI/PGSI, approval x4 referents, participation x4, four
+    4-item short scales, four exposure batteries. 591,165 responses.
+  - `roskam_2015_pid5` -- the full 220-item French PID-5, 2,532 adults.
+  - `denning_2020_{saq,olbi,hads}` -- 3,537 healthcare workers, 2020.
+  - `vanderhorst_2017_*` -- CEBQ, CFSQ, CGPQ, CFPQ x2, 1,005 US caregivers.
+  - `li_2017_{gad7,phq9,phq15}` -- 5,284 Guangzhou outpatients, CC0.
+  - `hofmann_2017_hope_symptoms` -- 9,924 palliative patients, care-team rated.
+  - `velten_2018_{sesii_wm,sis_ses_sf}`, `thoma_2018_{socr,phq4,ctq}`,
+    `dhital_2019_{cpss,dsrs,chs}` (cluster RCT, 2 waves),
+    `clemente_2019_{pmd,npi,lying_court,retaliation}`.
+
+- [ ] **A DEPOSIT THAT CONTRADICTS ITS OWN DATA AVAILABILITY STATEMENT --
+  Ben's call.** `10.1371/journal.pone.0299048` (Barzilay et al., ISPARC
+  SCI-2 short form): the DAS says the authors "refrain from including the
+  database" for patient confidentiality and offers access on request from
+  Dr Buxbaum, yet S1 File (25 MB) is attached to the CC BY article and holds
+  16,924 respondents x 82 SCI-2 items (0-6) across 11 countries, plus C-SSRS,
+  PHQ-9 and GAD-7 for subsets. Roughly 1.4M responses. The licence is clean;
+  the stated intent is not. Marked `held` in the leads file.
+
+- [x] **`covariate_labels/harvest.py` has run** (2026-10-31, `--commit HEAD`
+  at 8efbfab2) for the seven new scripts that read .sav files and ship
+  `cov_*` columns; the logs sit in `~/.cache/irw/covariate_labels/logs/`.
+  `build.py` only emits rows for tables in `metadata/metadata.csv`, so the
+  labels reach `covariate_labels.csv` on the first `build.py` run after this
+  batch is released -- nothing further is owed here.
+
+- [ ] **Thirteen inspected leads left in the file with notes** (all
+  `unworked`, note begins `inspected 2026-10-31`): the richest are the crypto
+  survey (`10.7910/DVN/CG3MWN`, 2,001 US, many short dark-trait and
+  conspiracy scales with the questionnaire in S1), the inequality/COVID
+  six-country survey (`10.7910/DVN/RIKJAY`, 6,089, three 15-item blocks but
+  no wording found yet), and the Norwegian SF-36 at two occasions. 1,248
+  `human_assistance` rows remain unopened below the 33 inspected here.
+
 ## Two searches + the leads backlog, 2026-10-29f/g/h — 17 tables, 145,844 responses
 
 Full write-up in `BATCH_LOG.md` (2026-10-29f). Two discovery passes were fired
