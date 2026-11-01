@@ -72,6 +72,22 @@ class TagsAutoVocabTest(unittest.TestCase):
             seen.add(r["table"])
         self.assertEqual(dupes, [], "stage_tag_row.py refuses these; a hand append does not")
 
+    def test_line_endings_are_uniformly_crlf(self):
+        """The file is CRLF throughout. A reader opened in text mode applies
+        universal-newline translation, and writing it back rewrites every
+        line as LF: two whole-file rewrites on 2026-10-30 were caught only by
+        counting diff lines afterwards. Read in binary, so the check cannot
+        make the same mistake."""
+        raw = CSV.read_bytes()
+        lines = raw.count(b"\n")
+        crlf = raw.count(b"\r\n")
+        self.assertEqual(
+            crlf, lines,
+            f"{lines - crlf} of {lines} line(s) end in bare LF; the file is CRLF "
+            f"(see irw-csvs-are-crlf). Read and write it in binary or with newline=''.",
+        )
+        self.assertTrue(raw.endswith(b"\r\n"), "file does not end with a newline")
+
     def test_stager_vocab_matches_pipeline(self):
         """ENUM_VOCAB must mirror TAG_VOCAB in metadata/tag_normalize.R for
         the columns the pipeline halts on."""

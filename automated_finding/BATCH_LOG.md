@@ -103,6 +103,8 @@ so the labels land on its first run after release.
 
 ## PLOS leads worked, 2026-10-30 -- 214 tables, 1,897,743 responses
 
+## PLOS leads worked, 2026-10-30 -- 214 tables, 1,897,743 responses
+
 **UPLOADED 2026-10-30.** All 214 response tables and all 62 item text tables,
 the latter into **irw_text_4**. Confirmed by Ben in-session; not re-verified
 against Redivis (uploads sit on the unreleased draft anyway). The 62 shipped
