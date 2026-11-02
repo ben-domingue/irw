@@ -3403,6 +3403,13 @@ rcv_oakland_20241105_schooldirectord5,rank,none,2026-11-01
 rcv_oakland_20241105_schooldirectord7,rank,none,2026-11-01
 rcv_oakland_20250415_councild2,rank,none,2026-11-01
 rcv_oakland_20250415_mayor,rank,none,2026-11-01
+rcv_portlandme_20210608_chartertab1,rank,none,2026-11-01
+rcv_portlandme_20211102_councilal,rank,none,2026-11-01
+rcv_portlandme_20220614_schoolboardal,rank,none,2026-11-01
+rcv_portlandme_20220614_schoolboardd5,rank,none,2026-11-01
+rcv_portlandme_20221108_schoolboardd3,rank,none,2026-11-01
+rcv_portlandme_20241105_councilal,rank,none,2026-11-01
+rcv_portlandme_20241105_councild2,rank,none,2026-11-01
 rcv_portlandor_20241105_auditor,rank,none,2026-11-01
 rcv_portlandor_20241105_councild1,rank,none,2026-11-01
 rcv_portlandor_20241105_councild2,rank,none,2026-11-01
@@ -3517,6 +3524,7 @@ rcv_stlouispark_20211102_councilward2,rank,none,2026-11-01
 rcv_stlouispark_20211102_councilward3,rank,none,2026-11-01
 rcv_stlouispark_20211102_councilward4,rank,none,2026-11-01
 rcv_takoma_20221108_councilward4,rank,none,2026-10-15
+rcv_westbrook_20241105_mayor,rank,none,2026-11-01
 reeves_2026_councillor_candidates,conj,https://dataverse.harvard.edu/api/access/datafile/14104944,2026-10-08
 reher_2025_disabled_candidates,conj,https://dataverse.harvard.edu/api/access/datafile/7609848,2026-10-07
 rehmert_2022_party_delegates,conj,https://dataverse.harvard.edu/api/access/datafile/4054984,2026-10-08
