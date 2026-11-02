@@ -205,7 +205,7 @@ def convert(src: Path, meta: dict) -> tuple[list[dict], dict, list[str]]:
         live = {row[pcol] for row, m in zip(raw, marked_flags) if m}
         eligible = sum(row[pcol] in live for row in raw)
     design = {"table": meta["table"], "source_file": src.name, "collection": meta["collection"],
-              "jurisdiction": src.name.split("_")[0], "date": re.sub(r"(\d{4})(\d{2})(\d{2})", r"\1-\2-\3", src.name.split("_")[1]),
+              "jurisdiction": src.name.split("_")[0], "rules_jurisdiction": "", "date": re.sub(r"(\d{4})(\d{2})(\d{2})", r"\1-\2-\3", src.name.split("_")[1]),
               "office": src.name[:-4].split("_", 2)[2], "method": meta["method"], "seats": "unknown",
               "n_positions": max(p for p, _ in rank_cols), "n_candidates": len(names),
               "n_ballots_cast": len(raw), "n_ballots_eligible_est": eligible, "n_ballots_with_marks": with_marks,
@@ -218,9 +218,11 @@ def convert(src: Path, meta: dict) -> tuple[list[dict], dict, list[str]]:
 
 
 ##Fields a person fills from the jurisdiction's own documents (seats, write_in_allowed,
-##candidate_order, evidence). The script's values for them are placeholders, so a rebuild
-##keeps whatever is already recorded for the table and only refreshes the counts.
-HUMAN_FIELDS = ("seats", "write_in_allowed", "candidate_order", "evidence")
+##candidate_order, evidence) and the counting-rules key (rules_jurisdiction, #3301; empty
+##unless the rules are written under another key). The script's values for them are
+##placeholders, so a rebuild keeps whatever is already recorded for the table and only
+##refreshes the counts.
+HUMAN_FIELDS = ("seats", "write_in_allowed", "candidate_order", "evidence", "rules_jurisdiction")
 
 
 def upsert_design(record: dict) -> None:
@@ -239,6 +241,10 @@ def upsert_design(record: dict) -> None:
                 record[field] = kept[field]
     rows.append(record)
     rows.sort(key=lambda r: r["table"])
+    ##The file's columns are the record's, in the record's order; a column one has and the
+    ##other lacks means this script and design_tables.csv have drifted, so stop.
+    stray = {k for r in rows for k in r} ^ set(record)
+    assert not stray, f"design_tables.csv and fairvote_cvr.py disagree on columns: {sorted(stray)}"
     with open(DESIGN, "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=list(record), lineterminator="\n")
         w.writeheader()
