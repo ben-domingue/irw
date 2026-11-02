@@ -1583,6 +1583,98 @@ LICENSE_OVERRIDES <- list(
             "naming a licence: nothing there grants redistribution, so contact",
             "CEEY before relying on it. Checked on 2026-10-28."),
         why = "R-36: CEEY publishes EMOVI openly and declares no terms"
+    ),
+
+    ## #3316 (2026-11-02): rows that published `Permission via Email` as the
+    ## OUTBOUND licence, which no reuser can act on. Ten rest on a CC BY 4.0 OSF
+    ## node, read from the API; nine on a reply to the standard letter, read
+    ## from the mail itself. NOT converted, deliberately: the 15
+    ## parentalempathy_gonzalez_2021_* rows (osf.io/75crd declares no licence
+    ## and no grant is on file, so the recorded CC BY 4.0 source is unverified),
+    ## imps2025_hf (workshop data from the Obradovic lab; its terms are not the
+    ## standard letter's) and sel_marca_2025_* (still waiting on Luis, #1849).
+    list(
+        url        = "osf\\.io/rjbx2",
+        issue      = "#3316",
+        superseded = "Permission via Email",
+        derived    = "CC BY 4.0",
+        why        = "OSF node rjbx2 is CC BY 4.0 (API, 2026-11-02); the source licence already said so, so no permission was needed and the outbound licence mirrors the deposit"
+    ),
+    list(
+        url        = "osf\\.io/3w6ap",
+        issue      = "#3316",
+        superseded = "Permission via Email",
+        derived    = "CC BY 4.0",
+        original   = "CC BY 4.0",
+        why        = "OSF node 3w6ap is CC BY 4.0 (API, 2026-11-02); the source cell was blank"
+    ),
+    list(
+        url        = "osf\\.io/6nm2s",
+        issue      = "#3316",
+        superseded = "Permission via Email",
+        derived    = "CC BY 4.0",
+        original   = "CC BY 4.0",
+        why        = "OSF node 6nm2s is CC BY 4.0 (API, 2026-11-02); the source cell was blank"
+    ),
+    list(
+        url        = "osf\\.io/3cgbt",
+        issue      = "#3316",
+        superseded = "Permission via Email, CC BY 4.0",
+        derived    = "CC BY 4.0",
+        why        = "Jovanovic replied 2026-05-27 to the standard letter (which states the CC BY 4.0 plan and invites a counter): 'Please feel free to modify the data in accordance with your needs.' No counter, so CC BY 4.0; the cell held two answers"
+    ),
+    list(
+        url        = "osf\\.io/kqxd5",
+        issue      = "#3316",
+        superseded = "Permission via Email",
+        derived    = "CC BY 4.0",
+        original   = "Permission via Email",
+        why        = "West replied 2026-02-04 to the standard letter, naming osf.io/kqxd5: 'welcome to use my data so long as it is properly cited'. The node declares no licence, so the source right is the email"
+    ),
+    list(
+        url        = "osf\\.io/mbywd",
+        issue      = "#3316",
+        superseded = "Permission via Email",
+        derived    = "CC BY 4.0",
+        original   = "Permission via Email",
+        why        = "West's 2026-02-04 reply also names osf.io/mbywd, with the same terms. The node declares no licence, so the source right is the email"
+    ),
+    ## #3316 part 2 (R-38): the outbound CC BY 4.0 was right; the SOURCE cell
+    ## said Missing (NA), so a reader could not see what licensed it. Open
+    ## Psychometrics' site states no licence; Eric Jorgenson replied "Yes, that
+    ## is fine" on 2023-08-25 to a letter stating the CC BY 4.0 plan
+    ## (licenseinfo/emails/Gmail - Request to modify and reshare data.pdf).
+    list(
+        url        = "openpsychometrics\\.org",
+        issue      = "#3316",
+        superseded = "CC BY 4.0",
+        derived    = "CC BY 4.0",
+        original   = "Permission via Email",
+        why        = "Jorgenson (openpsychometrics.org), 2023-08-25: 'Yes, that is fine', replying to a letter that states the CC BY 4.0 plan"
+    ),
+    list(
+        url        = "osf\\.io/k2453",
+        issue      = "#3316",
+        superseded = "CC BY 4.0",
+        derived    = "CC BY 4.0",
+        original   = "Permission via Email",
+        why        = "Siwiak, 2024-09-29, replying to the standard letter: 'you are, of course, welcome to take them, transform them, and add them to your database' (licenseinfo/emails, SSUB thread)"
+    ),
+    list(
+        url        = "osf\\.io/psgk8",
+        issue      = "#3316",
+        superseded = "CC BY 4.0",
+        derived    = "CC BY 4.0",
+        original   = "Permission via Email",
+        why        = "Sonmez, 2024-09-17, replying to the standard letter: 'I grant the permission; please proceed.' (licenseinfo/emails, Aspiration Index thread)"
+    ),
+    list(
+        url        = "github\\.com/ashleyaedwards/SpellingToPronunciationTransparencyRatings",
+        issue      = "#3316",
+        superseded = "CC BY 4.0",
+        derived    = "CC BY 4.0",
+        original   = "Permission via Email",
+        why        = "Edwards, 2024-09-17, replying to the standard letter: 'You are welcome to include my data in your IRW.' (licenseinfo/emails/spelling2pronounce_edwards2023.Rdata.pdf)"
     )
 )
 
