@@ -36,6 +36,18 @@ COV_COLS = {
 ITEM_COLS = ["Q14_drought", "Q15_disaster", "Q36_know"]
 
 
+
+def split_colliding_ids(df: pd.DataFrame, col: str = "id") -> pd.DataFrame:
+    """irw#3245: the source types one participant id onto rows that are
+    different people (their own covariates disagree). The first row keeps the
+    id; each later row gets the next unused number above the file's maximum,
+    so every other published id and the column's numeric type are unchanged."""
+    dup = df[col].notna() & df[col].duplicated(keep="first")
+    start = df[col].max() + 1
+    df = df.copy()
+    df.loc[dup, col] = [start + k for k in range(int(dup.sum()))]
+    return df
+
 def convert():
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     r = requests.get(URL, headers=UA, timeout=120)
@@ -47,11 +59,12 @@ def convert():
 
     # #2401: survey# 155 is in the file twice, identical in every column (the
     # same record entered twice); keep one copy. survey# 53 and 133 also repeat
-    # but the two rows differ (different respondents under one number); they
-    # stay as they are, for #1856.
+    # but the two rows differ (different respondents under one number); the
+    # second of each gets a fresh id below (#3245).
     df = df.drop_duplicates().reset_index(drop=True)
 
     df = df.rename(columns={"survey#": "id", **COV_COLS})
+    df = split_colliding_ids(df)
     for c in ITEM_COLS + list(COV_COLS.values()):
         df[c] = pd.to_numeric(df[c], errors="coerce")
 

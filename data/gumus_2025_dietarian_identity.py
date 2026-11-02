@@ -23,12 +23,25 @@ UA = {"User-Agent": "irw-batch/1.0 (research)"}
 URL = "https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0327116.s002"
 
 
+
+def split_colliding_ids(df: pd.DataFrame, col: str = "id") -> pd.DataFrame:
+    """irw#3245: the source types one participant id onto rows that are
+    different people (their own covariates disagree). The first row keeps the
+    id; each later row gets the next unused number above the file's maximum,
+    so every other published id and the column's numeric type are unchanged."""
+    dup = df[col].notna() & df[col].duplicated(keep="first")
+    start = df[col].max() + 1
+    df = df.copy()
+    df.loc[dup, col] = [start + k for k in range(int(dup.sum()))]
+    return df
+
 def convert():
     r = requests.get(URL, headers=UA, timeout=60)
     r.raise_for_status()
     df = pd.read_excel(io.BytesIO(r.content))
     df = df.rename(columns={"No": "id", "Age": "cov_age", "Gender": "cov_gender",
                              "Employement": "cov_employment", "dietarypattern": "cov_diet_pattern"})
+    df = split_colliding_ids(df)
 
     item_cols = [c for c in df.columns if c.startswith("DIQ") and c.endswith("value")]
     cov_cols = ["cov_age", "cov_gender", "cov_employment", "cov_diet_pattern"]
