@@ -8,4 +8,7 @@ for (i in 1:10) {
 }
 df<-data.frame(do.call("rbind",L))
 
-write.csv(df,file="kalichman1995_scs.csv",sep="|")
+## row.names = FALSE: the default wrote R's row index as an unnamed first
+## column, which reached the published table as `_unnamed_var` (irw#3229).
+## (write.csv ignores `sep`; the old sep="|" did nothing.)
+write.csv(df, file = "kalichman1995_scs.csv", row.names = FALSE)

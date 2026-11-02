@@ -15,6 +15,9 @@ import pandas as pd
 url = 'https://raw.githubusercontent.com/manuelbohn/previc/main/data/previc_data.csv'
 
 df = pd.read_csv(url)
+# The source CSV's first column is an unnamed row index; it reached the
+# published table as `_unnamed_var` (irw#3229). Drop it.
+df = df.loc[:, ~df.columns.str.startswith('Unnamed')]
 
 df = df.rename(columns={
 'subjID': 'id', # Person ID
