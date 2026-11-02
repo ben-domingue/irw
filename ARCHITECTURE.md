@@ -72,10 +72,12 @@ shard that holds it. `red_up` refuses any upload that would take a dataset past
 the 1000-table cap, counting its open draft.
 
 **Rankings shard the same way**, from the family's registration on 2026-10-15:
-`irw_rank`, … in `IRW_RANK_DATASETS` (one shard so far; the dataset's display
-name on Redivis is `IRW_rank`, and the reference id `93f5` is what resolves
-it). A shard list from day one because FairVote's cast vote records alone are
-657 contests. Conjoint's rules apply unchanged: newest-first, a name in two
+`irw_rank`, `irw_rank_2`, … in `IRW_RANK_DATASETS` (the display names on
+Redivis are `IRW_rank` and `IRW_rank 2`; the reference ids `93f5` and `byyj`
+are what resolve them). A shard list from day one because FairVote's cast vote
+records alone are 657 contests, and the second shard followed on 2026-11-01
+when that backlog was built, with `irw_rank` held at about 950 tables.
+Conjoint's rules apply unchanged: newest-first, a name in two
 shards flagged by `18_rankings.R` and both packages, `RANK_DEFAULT` in
 `red_up/targets.py` for where NEW tables go.
 

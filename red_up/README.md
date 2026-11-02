@@ -46,8 +46,10 @@ Conjoint and rankings uploads name their shard with `--dataset` (a rankings
 table has `id`/`item`/`resp`, so nothing in its shape says it is not response
 data; `--dataset irw_rank` is what routes it to the rankings validator);
 `CONJ_DEFAULT` in `targets.py` (None: the newest shard, `irw_conjoint_2` since
-2026-10-09) and `RANK_DEFAULT` (None) record where NEW tables of each family
-go, and a table already in another shard of its family is updated there.
+2026-10-09) and `RANK_DEFAULT` (None: the newest shard, `irw_rank_2` since
+2026-11-01, with `irw_rank` held at ~950 by naming it explicitly) record where
+NEW tables of each family go, and a table already in another shard of its
+family is updated there.
 
 **Refuses to pass the table cap.** Redivis caps a dataset at 1000 tables and
 refuses the 1001st mid-run, after the earlier tables have gone in. Before
