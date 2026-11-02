@@ -1638,6 +1638,19 @@ LICENSE_OVERRIDES <- list(
         derived    = "CC BY 4.0",
         original   = "Permission via Email",
         why        = "West's 2026-02-04 reply also names osf.io/mbywd, with the same terms. The node declares no licence, so the source right is the email"
+    ),
+    ## #3316 part 2 (R-38): the outbound CC BY 4.0 was right; the SOURCE cell
+    ## said Missing (NA), so a reader could not see what licensed it. Open
+    ## Psychometrics' site states no licence; Eric Jorgenson replied "Yes, that
+    ## is fine" on 2023-08-25 to a letter stating the CC BY 4.0 plan
+    ## (licenseinfo/emails/Gmail - Request to modify and reshare data.pdf).
+    list(
+        url        = "openpsychometrics\\.org",
+        issue      = "#3316",
+        superseded = "CC BY 4.0",
+        derived    = "CC BY 4.0",
+        original   = "Permission via Email",
+        why        = "Jorgenson (openpsychometrics.org), 2023-08-25: 'Yes, that is fine', replying to a letter that states the CC BY 4.0 plan"
     )
 )
 
