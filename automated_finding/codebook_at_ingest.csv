@@ -2791,6 +2791,8 @@ rcv_berkeley_20241105_councild3,rank,none,2026-11-01
 rcv_berkeley_20241105_councild5,rank,none,2026-11-01
 rcv_berkeley_20241105_councild6,rank,none,2026-11-01
 rcv_berkeley_20241105_mayor,rank,none,2026-11-01
+rcv_bloomington_20231107_councilal,rank,none,2026-11-01
+rcv_bloomington_20231107_councild4,rank,none,2026-11-01
 rcv_burlington_20060307_mayor,rank,none,2026-10-15
 rcv_cambridge_20011106_council,rank,none,2026-11-01
 rcv_cambridge_20031104_council,rank,none,2026-11-01
@@ -2827,6 +2829,13 @@ rcv_maine_20200714_statehd90demnominee,rank,none,2026-11-01
 rcv_maine_20200714_statesd11demnominee,rank,none,2026-11-01
 rcv_maine_20221108_congressionald2,rank,none,2026-11-01
 rcv_maine_20241105_cd2,rank,none,2026-11-01
+rcv_minnetonka_20211102_councilalseata,rank,none,2026-11-01
+rcv_minnetonka_20211102_councilalseatb,rank,none,2026-11-01
+rcv_minnetonka_20211102_mayor,rank,none,2026-11-01
+rcv_minnetonka_20231107_councilward1,rank,none,2026-11-01
+rcv_minnetonka_20231107_councilward2,rank,none,2026-11-01
+rcv_minnetonka_20231107_councilward3,rank,none,2026-11-01
+rcv_minnetonka_20231107_councilward4,rank,none,2026-11-01
 rcv_mpls_20091106_boardoftaxational,rank,none,2026-10-21
 rcv_mpls_20091106_mayor,rank,none,2026-10-21
 rcv_mpls_20091106_parksboardal,rank,none,2026-10-21
@@ -3503,6 +3512,10 @@ rcv_sf_20241105_dattorney,rank,none,2026-11-01
 rcv_sf_20241105_mayor,rank,none,2026-11-01
 rcv_sf_20241105_sheriff,rank,none,2026-11-01
 rcv_sf_20241105_treasurer,rank,none,2026-11-01
+rcv_stlouispark_20211102_councilward1,rank,none,2026-11-01
+rcv_stlouispark_20211102_councilward2,rank,none,2026-11-01
+rcv_stlouispark_20211102_councilward3,rank,none,2026-11-01
+rcv_stlouispark_20211102_councilward4,rank,none,2026-11-01
 rcv_takoma_20221108_councilward4,rank,none,2026-10-15
 reeves_2026_councillor_candidates,conj,https://dataverse.harvard.edu/api/access/datafile/14104944,2026-10-08
 reher_2025_disabled_candidates,conj,https://dataverse.harvard.edu/api/access/datafile/7609848,2026-10-07
