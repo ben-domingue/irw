@@ -120,3 +120,27 @@ whose root is `src/`. It holds 152 `__items.csv` files and an `INDEX.csv`. The
 hazard was only that `data/itemtext` reads identically to the repo's own
 tracked `data/` tree of 3,000+ public build scripts, so the path is now in
 `.gitignore` and a test fails if the directory ever appears inside the repo.
+
+## Removed, 2026-11-02 (#3017 triage withdrawal, #3360)
+
+The 238-table withdrawal left 19 tracked files carrying wording for withdrawn tables: 9 wording CSVs (whole `__items` tables, language-backfill snapshots, one post-release copy) and 10 `verify_*.R` harnesses quoting the stems they check. All removed; the local store holds the copies. The 238 tables were added to `blocked_wording_tables.csv` so the check keeps seeing them.
+
+- `itemtext/fixes/post_release_0927/liu_2025_ydcy__items.live_irw_text_2_v9.0.csv`
+- `itemtext/itemtables/batch_026/verify_dinic_2025_shortdarktriad.R`
+- `itemtext/itemtables/batch_083/verify_liu_2023_purchase_intention.R`
+- `itemtext/itemtables/batch_086/verify_liu_2025_speaking_selfefficacy.R`
+- `itemtext/itemtables/batch_086/verify_liu_2025_willingness_communicate.R`
+- `itemtext/itemtables/batch_131/verify_pellerin2020_gq6.R`
+- `itemtext/itemtables/batch_161/rosetti_2023_cas__items.csv`
+- `itemtext/itemtables/batch_187/verify_thanh_2025_perceived_control.R`
+- `itemtext/itemtables/batch_196/verify_tsai_2017_treeit_tam_bi.R`
+- `itemtext/itemtables/batch_197/verify_tsai_2017_treeit_tam_peou.R`
+- `itemtext/itemtables/batch_202/lys_2020_rape_3_sj__items.csv`
+- `itemtext/itemtables/batch_205/teq_novak_2021_scbs__items.csv`
+- `itemtext/itemtables/batch_276/verify_song_2025_cs.R`
+- `itemtext/language_backfill/round2/published/algner2022_cse__published.csv`
+- `itemtext/language_backfill/round2/published/avilesgonzalez2019_ces__published.csv`
+- `itemtext/language_backfill/round2/published/buzgova_2023_gai__published.csv`
+- `itemtext/language_backfill/round2/published/buzgova_2023_lsita__published.csv`
+- `itemtext/language_backfill/round2/published/buzgova_2023_soc__published.csv`
+- `itemtext/language_backfill/round2/published/chen_2022_sasc__published.csv`
