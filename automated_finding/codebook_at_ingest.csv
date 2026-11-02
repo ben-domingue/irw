@@ -2793,6 +2793,7 @@ rcv_berkeley_20241105_councild6,rank,none,2026-11-01
 rcv_berkeley_20241105_mayor,rank,none,2026-11-01
 rcv_bloomington_20231107_councilal,rank,none,2026-11-01
 rcv_bloomington_20231107_councild4,rank,none,2026-11-01
+rcv_boulder_20231107_mayor,rank,none,2026-11-01
 rcv_burlington_20060307_mayor,rank,none,2026-10-15
 rcv_burlington_20090303_mayor,rank,none,2026-11-01
 rcv_burlington_20230307_councilcentrald,rank,none,2026-11-01
@@ -2823,7 +2824,12 @@ rcv_cambridge_20211102_council,rank,none,2026-11-01
 rcv_cambridge_20211102_school,rank,none,2026-11-01
 rcv_cambridge_20231107_council,rank,none,2026-11-01
 rcv_cambridge_20231107_school,rank,none,2026-11-01
+rcv_corvallis_20221108_councilward9,rank,none,2026-11-01
+rcv_corvallis_20221108_mayor,rank,none,2026-11-01
+rcv_easthampton_20211102_mayor,rank,none,2026-11-01
 rcv_eastpointe_20191105_council,rank,none,2026-10-15
+rcv_eastpointe_20201103_council,rank,none,2026-11-01
+rcv_eastpointe_20211102_council,rank,none,2026-11-01
 rcv_elkridge_20211102_mayor,rank,none,2026-11-01
 rcv_genola_20211102_council,rank,none,2026-10-15
 rcv_lascruces_20191105_councild2,rank,none,2026-11-01
@@ -3559,6 +3565,7 @@ rcv_takoma_20221108_councilward4,rank,none,2026-10-15
 rcv_takoma_20221108_councilward5,rank,none,2026-11-01
 rcv_takoma_20221108_councilward6,rank,none,2026-11-01
 rcv_takoma_20221108_mayor,rank,none,2026-11-01
+rcv_usvi_20240208_reppresidentialnominee,rank,none,2026-11-01
 rcv_vineyard_20191105_council,rank,none,2026-11-01
 rcv_vineyard_20211102_council,rank,none,2026-11-01
 rcv_vineyard_20211102_mayor,rank,none,2026-11-01
