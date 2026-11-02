@@ -39,6 +39,18 @@ facet  <- vapply(parts, `[`, "", 4)
 rank   <- ave(word, sub, FUN = function(w) match(w, sort(unique(w))))
 df$item[promis] <- sprintf("promis_%s_%02d_%s", sub, as.integer(rank), facet)
 
+# The same recode for the three sibling instruments (2026-11-02, Ben). Their
+# codes carry a one- or two-word gloss of each item -- for WHODAS close to the
+# item itself -- and WHODAS 2.0, WEMWBS and the UCLA Loneliness Scale are all
+# register `block`, so the gloss is replaced by its alphabetical rank within the
+# instrument. As above, no word list is stored and the rule regenerates from the
+# raw file alone. The numbers do NOT follow the instruments' published order.
+for (nm in c("whodas", "wemwbs", "ucla")) {
+  hit  <- grepl(paste0("^", nm, "_"), df$item)
+  word <- sub(paste0("^", nm, "_"), "", df$item[hit])
+  df$item[hit] <- sprintf("%s_%02d", nm, match(word, sort(unique(word))))
+}
+
 write.csv(df, "BF_BrummerHoffman_2021.csv", row.names=FALSE)
 
 ##bd add'n
