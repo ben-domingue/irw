@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Item text for the four clemente_2024 tables (10.1016/j.heliyon.2024.e36260).
+"""Item text for the clemente_2024 attitude tables (formerly four) (10.1016/j.heliyon.2024.e36260).
 
 Source: the article's own SI, mmc1.pdf (Europe PMC supplementaryFiles zip for
 PMC11378926), which prints (a) the authors' English translation of the
@@ -27,6 +27,11 @@ names as `item`):
     Attribution_of_blame), in the order of Moore et al.'s (2012) 8-item PMD,
     which is the printed order of items 1-8 here; item 9 is the attention check.
 Every Spanish string below is asserted to occur, in block order, in the PDF.
+
+2026-11-02: the SD4 and PMD blocks were removed from this script and their two
+item-text tables withdrawn (tools/withdrawals/withdraw_weak_hits_2026-11-02.py):
+the Short Dark Tetrad is blocked and Moore et al.'s PMD is held in
+itemtext/instrument_rights_register.csv. Only the two attitude tables are built.
 """
 import csv
 import io
@@ -84,111 +89,7 @@ OPT5_ES = ["Completamente en desacuerdo", "En desacuerdo", "Ni de acuerdo ni en 
            "De acuerdo", "Completamente de acuerdo"]
 OPT5_PARENT_EN = ["Completely disagree", "Disagreement", "Neither agree nor disagree",
                   "Agree", "Completely agree"]
-OPT5_IRW_EN = ["Completely disagree", "Disagree", "Neither agree nor disagree", "Agree",
-               "Completely agree"]
 
-SD4_ES = [
-    "No es prudente/inteligente dejar que la gente conozca tus secretos.",
-    "Debes tener a gente importante de tu parte, cueste lo que cueste.",
-    "Evita los conflictos directos con los demás porque pueden serte útiles en el futuro.",
-    "Mantén un perfil bajo si quieres salirte con la tuya.",
-    "Manipular la situación requiere planificación.",
-    "Hacer halagos en una buena manera de conseguir que la gente se ponga de tu lado.",
-    "Me encanta cuando un plan tramposo tiene éxito.",
-    "La gente me ve como un líder natural.",
-    "Tengo un talento único para persuadir a la gente.",
-    "Las actividades grupales suelen ser aburridas sin mí.",
-    "Sé que soy especial porque la gente me lo dice continuamente.",
-    "Tengo algunas cualidades excepcionales.",
-    "Es probable que acabe siendo una estrella en algún ámbito.",
-    "Me gusta lucirme de vez en cuando.",
-    "La gente suele decir que estoy fuera de control.",
-    "Tiendo a ir en contra de las autoridades y sus reglas.",
-    "He estado en más peleas que la mayoría de la gente de mi edad y sexo.",
-    "Tiendo a lanzarme primero y hacer preguntas después.",
-    "He tenido problemas con la ley.",
-    "A veces me meto en situaciones peligrosas.",
-    "La gente que se mete conmigo siempre se arrepiente.",
-    "Ver una pelea a puñetazos me emociona/excita.",
-    "Realmente disfruto con películas y videojuegos violentos.",
-    "Es divertido cuando gente idiota se cae de bruces.",
-    "Disfruto viendo deportes violentos.",
-    "Algunas personas merecen sufrir.",
-    "He dicho cosas malas en las redes sociales solo por diversión.",
-    "Sé cómo herir a alguien sólo con palabras."]
-SD4_EN = [  # IRW's rendering of the Spanish, not the published English SD4
-    "It is not prudent/smart to let people know your secrets.",
-    "You should have important people on your side, whatever it costs.",
-    "Avoid direct conflict with others because they may be useful to you in the future.",
-    "Keep a low profile if you want to get your way.",
-    "Manipulating the situation takes planning.",
-    "Flattery is a good way to get people on your side.",
-    "I love it when a tricky plan succeeds.",
-    "People see me as a natural leader.",
-    "I have a unique talent for persuading people.",
-    "Group activities tend to be boring without me.",
-    "I know that I am special because people keep telling me so.",
-    "I have some exceptional qualities.",
-    "I am likely to end up being a star in some area.",
-    "I like to show off now and then.",
-    "People often say I am out of control.",
-    "I tend to go against authorities and their rules.",
-    "I have been in more fights than most people of my age and sex.",
-    "I tend to dive in first and ask questions later.",
-    "I have had problems with the law.",
-    "I sometimes get into dangerous situations.",
-    "People who mess with me always regret it.",
-    "Watching a fistfight thrills/excites me.",
-    "I really enjoy violent films and video games.",
-    "It is funny when idiots fall flat on their face.",
-    "I enjoy watching violent sports.",
-    "Some people deserve to suffer.",
-    "I have said mean things on social media just for fun.",
-    "I know how to hurt someone with words alone."]
-SD4_INSTR_ES = ("Indique su grado de acuerdo con cada una de las siguientes afirmaciones. "
-                "Para ello tenga en cuenta la siguiente valoración:")
-SD4_INSTR_EN = ("Indicate how much you agree with each of the following statements, "
-                "using the following rating:")
-
-PMD_COLS = ["Moral_justification", "Euphemistic_labelling", "Advantageous_comparison",
-            "Displacement_of_responsability", "Difussion_of_responsability",
-            "Distortion_of_consequences", "Dehumanization", "Attribution_of_blame"]
-PMD_ES = [
-    "Está justificado contar chismes de otros si eso protege a las personas que te importan.",
-    "Coger algo sin el permiso del dueño no está mal mientras solamente lo hayas cogido prestado.",
-    "Teniendo en cuenta como la gente exagera sobre ellos mismos, no es ningún pecado “inflar” "
-    "un poco nuestro currículo.",
-    "Las personas no deberían considerarse responsables de hacer cosas incorrectas cuando "
-    "simplemente hacen lo que les dice una autoridad.",
-    "No se puede culpar a la gente de cosas que están técnicamente mal si todos sus amigos "
-    "hacen lo mismo.",
-    "Decir que se te han ocurrido a ti ideas que son de otros no es para tanto.",
-    "Algunas personas tienen que ser tratadas duramente porque no tienen sentimientos que "
-    "puedan ser heridos.",
-    "La gente que es maltratada normalmente hace cosas para merecérselo."]
-PMD_EN = [  # IRW's rendering of the Spanish, not the published English PMD
-    "It is justified to gossip about others if that protects the people you care about.",
-    "Taking something without the owner's permission is not wrong as long as you have only "
-    "borrowed it.",
-    "Considering how people exaggerate about themselves, it is no sin to \"inflate\" our "
-    "résumé a little.",
-    "People should not be considered responsible for doing wrong things when they are simply "
-    "doing what an authority tells them.",
-    "People cannot be blamed for doing things that are technically wrong if all their friends "
-    "do the same.",
-    "Saying that ideas that are other people's came to you is no big deal.",
-    "Some people have to be treated harshly because they have no feelings that can be hurt.",
-    "People who are mistreated usually do things to deserve it."]
-PMD_INSTR_ES = ("Nos gustaría saber el grado de acuerdo o desacuerdo en el que se encuentra "
-                "con respecto a las siguientes afirmaciones. Por favor, indique la puntuación "
-                "correspondiente en la escala que se presenta a continuación:")
-PMD_INSTR_EN = ("We would like to know how much you agree or disagree with the following "
-                "statements. Please indicate the corresponding score on the scale below:")
-OPT7_ES = ["Totalmente en desacuerdo", "Bastante en desacuerdo", "En desacuerdo",
-           "Ni de acuerdo ni en desacuerdo", "De acuerdo", "Bastante de acuerdo",
-           "Totalmente de acuerdo"]
-OPT7_EN = ["Totally disagree", "Quite disagree", "Disagree", "Neither agree nor disagree",
-           "Agree", "Quite agree", "Totally agree"]
 
 
 def norm(s: str) -> str:
@@ -227,10 +128,6 @@ def main() -> None:
     assert norm(PARENT_INSTR_EN) in txt[:en]
     p = in_order(txt, en, FATHER_EN)
     in_order(txt, p, MOTHER_EN)
-    sd = txt.index("SD4. Indique")
-    in_order(txt, sd, [SD4_INSTR_ES] + OPT5_ES + SD4_ES)
-    pm = txt.index("PMD. Nos")
-    in_order(txt, pm, [PMD_INSTR_ES] + OPT7_ES + PMD_ES)
 
     specs = {
         "clemente_2024_attitude_father": dict(
@@ -245,16 +142,6 @@ def main() -> None:
             instr=(PARENT_INSTR_ES, PARENT_INSTR_EN),
             prompt=("Preguntas sobre la madre de los niños:", "Questions about the children’s mother:"),
             opts=(OPT5_ES, OPT5_PARENT_EN)),
-        "clemente_2024_sd4": dict(
-            instrument="Short Dark Tetrad (SD4; Paulhus et al., 2021), Spanish version",
-            items=[f"SD4_{i}" for i in range(1, 29)], es=SD4_ES, en=SD4_EN,
-            instr=(SD4_INSTR_ES, SD4_INSTR_EN), prompt=(None, None),
-            opts=(OPT5_ES, OPT5_IRW_EN)),
-        "clemente_2024_pmd": dict(
-            instrument="Propensity to Morally Disengage scale (PMD-8; Moore et al., 2012), Spanish version",
-            items=PMD_COLS, es=PMD_ES, en=PMD_EN,
-            instr=(PMD_INSTR_ES, PMD_INSTR_EN), prompt=(None, None),
-            opts=(OPT7_ES, OPT7_EN)),
     }
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     for table, s in specs.items():
