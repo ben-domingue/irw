@@ -66,7 +66,8 @@ def record(tables, *, dataset: str, reason: str, kind: str = "whole",
     rows = rows or {}
     new = not path.exists()
     with path.open("a", newline="") as fh:
-        w = csv.DictWriter(fh, COLUMNS, quoting=csv.QUOTE_MINIMAL)
+        w = csv.DictWriter(fh, COLUMNS, quoting=csv.QUOTE_MINIMAL,
+                           lineterminator="\n")  # the ledger is LF; the csv default is CRLF
         if new:
             w.writeheader()
         n = 0
