@@ -41,13 +41,7 @@ if (length(tables.new) == 0) {
     message("No new tables to process; updating existing rows only.")
 }
 
-fk_score <- function(texts) {
-    texts <- texts[!is.na(texts) & nchar(trimws(texts)) > 0]
-    if (length(texts) == 0) return(NA_real_)
-    texts <- ifelse(grepl("[.!?]\\s*$", trimws(texts)), texts, paste0(trimws(texts), "."))
-    corp <- quanteda::corpus(paste(texts, collapse = " "))
-    quanteda.textstats::textstat_readability(corp, measure = "Flesch.Kincaid")$Flesch.Kincaid
-}
+source(file.path(here, "fk_grade.R"))  # fk_grade(), fk_text_is_english(): definition there
 
 ## IRW's published null is the literal string "NA", so a cell reading NA is unset
 ## rather than a language called NA (see irw-corpus-listing-and-null-traps).
@@ -78,7 +72,9 @@ summarize_table <- function(x) {
         mean_word                = mean(x$nw,        na.rm = TRUE),
         mean_character           = mean(x$nc,        na.rm = TRUE),
         mean_character_responses = mean(x$nc.option, na.rm = TRUE),
-        FK_grade                 = fk_score(x$item_text),
+        FK_grade                 = if (fk_text_is_english(any(x$translated),
+                                                      if (is.na(lang)) "English" else lang))
+                                       fk_grade(x$item_text) else NA_real_,
         ## No language column on a table built under the current standard means
         ## an English administration -- the standard says to omit it rather than
         ## emit it empty (references/itemtext_standard.md). That inference is
@@ -113,7 +109,8 @@ for (ii in seq_along(tables.new)) {
                 else rep(NA_character_, length(z))
     L[[tab]] <- data.frame(table = tab, instrument = instrument, item = items$item,
                            item_text = z, nw = nw, nc = nc, nc.option = nc.option,
-                           language = language)
+                           language = language,
+                           translated = "item_text_translated" %in% names(items))
 }
 
 save(L, file = file.path(here, "items_alltext.Rdata"))
