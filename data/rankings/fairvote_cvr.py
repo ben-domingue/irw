@@ -52,10 +52,14 @@ API = "https://dataverse.harvard.edu/api"
 COLLECTIONS = [("10.7910/DVN/AMK8PJ", "irv"), ("10.7910/DVN/STVUET", "stv"), ("10.7910/DVN/04LOQX", "sequential")]
 
 ##Tokens seen in rank cells, lower-cased with spaces and hyphens removed.
-KNOWN_TOKENS = {"skipped": None, "undervote": None, "overvote": "(overvote)", "writein": "(write-in)"}
+KNOWN_TOKENS = {"skipped": None, "undervote": None, "overvote": "(overvote)", "writein": "(write-in)",
+                ##Utah's exports (Vineyard 2021) print an unresolved write-in as "uwi" (#3024, 2026-11-01).
+                "uwi": "(write-in)"}
 ##Source columns that identify the ballot row or the file, not a covariate.
 ID_COLS = {"ballotid", "index", "cast.vote.record", "cast_vote_record", "source_file", "id", "cvr_id"}
 RANK = re.compile(r"^rank(\d+)$", re.I)
+##One file (Easthampton 2021 Mayor) names its rank columns X1..X4; used only when no rank<n> column exists (#3024, 2026-11-01).
+RANK_X = re.compile(r"^X(\d+)$")
 
 JUR = {"NewYorkCity": "nyc", "SanFrancisco": "sf", "Minneapolis": "mpls", "SanLeandro": "sanleandro",
        "PierceCounty": "pierce", "PortlandME": "portlandme", "PortlandOR": "portlandor", "TakomaPark": "takoma",
@@ -135,10 +139,11 @@ def convert(src: Path, meta: dict) -> tuple[list[dict], dict, list[str]]:
         reader = csv.reader(f, delimiter="\t")
         header = next(reader)
         raw = list(reader)
-    rank_cols = sorted(((int(RANK.match(h).group(1)), i) for i, h in enumerate(header) if RANK.match(h)))
+    rank_re = RANK if any(RANK.match(h) for h in header) else RANK_X
+    rank_cols = sorted(((int(rank_re.match(h).group(1)), i) for i, h in enumerate(header) if rank_re.match(h)))
     assert rank_cols, f"{src.name}: no rank columns in {header}"
     cov_cols = [(snake(h), i) for i, h in enumerate(header)
-                if not RANK.match(h) and h.lower() not in ID_COLS]
+                if not rank_re.match(h) and h.lower() not in ID_COLS]
     ##The 2023 Minneapolis files lead with a Count column: the number of identical ballots
     ##the row stands for. It is 1 on every row of every file read so far, so it says nothing
     ##and is dropped rather than stored as cov_count. A value other than 1 is a ballot
@@ -205,7 +210,7 @@ def convert(src: Path, meta: dict) -> tuple[list[dict], dict, list[str]]:
         live = {row[pcol] for row, m in zip(raw, marked_flags) if m}
         eligible = sum(row[pcol] in live for row in raw)
     design = {"table": meta["table"], "source_file": src.name, "collection": meta["collection"],
-              "jurisdiction": src.name.split("_")[0], "date": re.sub(r"(\d{4})(\d{2})(\d{2})", r"\1-\2-\3", src.name.split("_")[1]),
+              "jurisdiction": src.name.split("_")[0], "rules_jurisdiction": "", "date": re.sub(r"(\d{4})(\d{2})(\d{2})", r"\1-\2-\3", src.name.split("_")[1]),
               "office": src.name[:-4].split("_", 2)[2], "method": meta["method"], "seats": "unknown",
               "n_positions": max(p for p, _ in rank_cols), "n_candidates": len(names),
               "n_ballots_cast": len(raw), "n_ballots_eligible_est": eligible, "n_ballots_with_marks": with_marks,
@@ -218,9 +223,11 @@ def convert(src: Path, meta: dict) -> tuple[list[dict], dict, list[str]]:
 
 
 ##Fields a person fills from the jurisdiction's own documents (seats, write_in_allowed,
-##candidate_order, evidence). The script's values for them are placeholders, so a rebuild
-##keeps whatever is already recorded for the table and only refreshes the counts.
-HUMAN_FIELDS = ("seats", "write_in_allowed", "candidate_order", "evidence")
+##candidate_order, evidence) and the counting-rules key (rules_jurisdiction, #3301; empty
+##unless the rules are written under another key). The script's values for them are
+##placeholders, so a rebuild keeps whatever is already recorded for the table and only
+##refreshes the counts.
+HUMAN_FIELDS = ("seats", "write_in_allowed", "candidate_order", "evidence", "rules_jurisdiction")
 
 
 def upsert_design(record: dict) -> None:
@@ -239,6 +246,10 @@ def upsert_design(record: dict) -> None:
                 record[field] = kept[field]
     rows.append(record)
     rows.sort(key=lambda r: r["table"])
+    ##The file's columns are the record's, in the record's order; a column one has and the
+    ##other lacks means this script and design_tables.csv have drifted, so stop.
+    stray = {k for r in rows for k in r} ^ set(record)
+    assert not stray, f"design_tables.csv and fairvote_cvr.py disagree on columns: {sorted(stray)}"
     with open(DESIGN, "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=list(record), lineterminator="\n")
         w.writeheader()
