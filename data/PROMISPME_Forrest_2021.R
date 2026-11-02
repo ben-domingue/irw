@@ -1,16 +1,19 @@
 # Paper:https://link.springer.com/article/10.1007/s11136-017-1629-y
 # Data: https://osf.io/f7rp3/
 #
-# KNOWN DEFECT, ACCEPTED AS-IS (irw#1856, ruled 2026-09-24): four proxy tables
-# carry a small number of repeated (id, item) pairs, some of which disagree on resp:
-#   PROMISPME_Forrest_2021_LS_Proxy        56 excess rows of 54,040
-#   PROMISPME_Forrest_2021_MP_Proxy        55 of 51,040
-#   PROMISPME_Forrest_2021_Physical_Proxy  79 of 121,418
-#   PROMISPME_Forrest_2021_Strength_Proxy  25 of 22,975
-# (irw_validate.live_dup, v414). They cannot be resolved: the OSF node now holds a
-# single 714 KB .sav that cannot be the source of these tables, so there is nothing
-# to check the conflicting pairs against. Every other row is one response per
-# person-item. If your analysis needs unique (id, item), drop the repeated pairs.
+# ONE ID, TWO RESPONDENTS -- DROPPED FROM THE PUBLISHED TABLES (irw#3245, ruled
+# 2026-11-02; supersedes the #1856 "accept as-is" of 2026-09-24). In each proxy
+# table below a single parent id carries two complete response sets, so it is
+# two people under one key and cannot be split without inventing a pairing:
+#   PROMISPME_Forrest_2021_LS_Proxy        TX-PX-10-0069  (56 items x 2)
+#   PROMISPME_Forrest_2021_MP_Proxy        TX-PX-10-0069  (55 items x 2)
+#   PROMISPME_Forrest_2021_Strength_Proxy  TX-PX-17-0323  (25 items x 2)
+#   PROMISPME_Forrest_2021_Physical_Proxy  TX-PX-17-0323  (79 PAC_M items x 2)
+# The OSF node (osf.io/f7rp3) now holds a single 714 KB .sav that is not this
+# data, so this script cannot be re-run and the fix was applied to the live
+# tables directly: every row of that id was removed (0.1-0.2% of each table).
+# If the vF CSVs are ever recovered, apply the same drop after pivoting:
+#   df <- df[df$id != "<id above>", ]
 
 library(haven)
 library(dplyr)

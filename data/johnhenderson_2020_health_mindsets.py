@@ -27,6 +27,18 @@ UA = {"User-Agent": "IRW-Finder/1.0 (ben.domingue@gmail.com)"}
 COV_MAP = {"age": "cov_age", "sex": "cov_sex", "income": "cov_income"}
 
 
+
+def split_colliding_ids(df: pd.DataFrame, col: str = "id") -> pd.DataFrame:
+    """irw#3245: the source types one participant id onto rows that are
+    different people (their own covariates disagree). The first row keeps the
+    id; each later row gets the next unused number above the file's maximum,
+    so every other published id and the column's numeric type are unchanged."""
+    dup = df[col].notna() & df[col].duplicated(keep="first")
+    start = df[col].max() + 1
+    df = df.copy()
+    df.loc[dup, col] = [start + k for k in range(int(dup.sum()))]
+    return df
+
 def fetch() -> pd.DataFrame:
     r = requests.get(URL, headers=UA, timeout=120)
     r.raise_for_status()
@@ -35,7 +47,7 @@ def fetch() -> pd.DataFrame:
 
 
 def convert():
-    df = fetch()
+    df = split_colliding_ids(fetch())
     cov_cols = [c for c in COV_MAP.values() if c in df.columns]
     OUT_DIR.mkdir(parents=True, exist_ok=True)
 
