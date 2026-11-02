@@ -52,10 +52,14 @@ API = "https://dataverse.harvard.edu/api"
 COLLECTIONS = [("10.7910/DVN/AMK8PJ", "irv"), ("10.7910/DVN/STVUET", "stv"), ("10.7910/DVN/04LOQX", "sequential")]
 
 ##Tokens seen in rank cells, lower-cased with spaces and hyphens removed.
-KNOWN_TOKENS = {"skipped": None, "undervote": None, "overvote": "(overvote)", "writein": "(write-in)"}
+KNOWN_TOKENS = {"skipped": None, "undervote": None, "overvote": "(overvote)", "writein": "(write-in)",
+                ##Utah's exports (Vineyard 2021) print an unresolved write-in as "uwi" (#3024, 2026-11-01).
+                "uwi": "(write-in)"}
 ##Source columns that identify the ballot row or the file, not a covariate.
 ID_COLS = {"ballotid", "index", "cast.vote.record", "cast_vote_record", "source_file", "id", "cvr_id"}
 RANK = re.compile(r"^rank(\d+)$", re.I)
+##One file (Easthampton 2021 Mayor) names its rank columns X1..X4; used only when no rank<n> column exists (#3024, 2026-11-01).
+RANK_X = re.compile(r"^X(\d+)$")
 
 JUR = {"NewYorkCity": "nyc", "SanFrancisco": "sf", "Minneapolis": "mpls", "SanLeandro": "sanleandro",
        "PierceCounty": "pierce", "PortlandME": "portlandme", "PortlandOR": "portlandor", "TakomaPark": "takoma",
@@ -135,10 +139,11 @@ def convert(src: Path, meta: dict) -> tuple[list[dict], dict, list[str]]:
         reader = csv.reader(f, delimiter="\t")
         header = next(reader)
         raw = list(reader)
-    rank_cols = sorted(((int(RANK.match(h).group(1)), i) for i, h in enumerate(header) if RANK.match(h)))
+    rank_re = RANK if any(RANK.match(h) for h in header) else RANK_X
+    rank_cols = sorted(((int(rank_re.match(h).group(1)), i) for i, h in enumerate(header) if rank_re.match(h)))
     assert rank_cols, f"{src.name}: no rank columns in {header}"
     cov_cols = [(snake(h), i) for i, h in enumerate(header)
-                if not RANK.match(h) and h.lower() not in ID_COLS]
+                if not rank_re.match(h) and h.lower() not in ID_COLS]
     ##The 2023 Minneapolis files lead with a Count column: the number of identical ballots
     ##the row stands for. It is 1 on every row of every file read so far, so it says nothing
     ##and is dropped rather than stored as cov_count. A value other than 1 is a ballot
