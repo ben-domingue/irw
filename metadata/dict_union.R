@@ -1653,7 +1653,7 @@ LICENSE_OVERRIDES <- list(
         why        = "Jorgenson (openpsychometrics.org), 2023-08-25: 'Yes, that is fine', replying to a letter that states the CC BY 4.0 plan"
     ),
     list(
-        url        = "osf\\\\.io/k2453",
+        url        = "osf\\.io/k2453",
         issue      = "#3316",
         superseded = "CC BY 4.0",
         derived    = "CC BY 4.0",
@@ -1661,7 +1661,7 @@ LICENSE_OVERRIDES <- list(
         why        = "Siwiak, 2024-09-29, replying to the standard letter: 'you are, of course, welcome to take them, transform them, and add them to your database' (licenseinfo/emails, SSUB thread)"
     ),
     list(
-        url        = "osf\\\\.io/psgk8",
+        url        = "osf\\.io/psgk8",
         issue      = "#3316",
         superseded = "CC BY 4.0",
         derived    = "CC BY 4.0",
@@ -1669,7 +1669,7 @@ LICENSE_OVERRIDES <- list(
         why        = "Sonmez, 2024-09-17, replying to the standard letter: 'I grant the permission; please proceed.' (licenseinfo/emails, Aspiration Index thread)"
     ),
     list(
-        url        = "github\\\\.com/ashleyaedwards/SpellingToPronunciationTransparencyRatings",
+        url        = "github\\.com/ashleyaedwards/SpellingToPronunciationTransparencyRatings",
         issue      = "#3316",
         superseded = "CC BY 4.0",
         derived    = "CC BY 4.0",
