@@ -2702,6 +2702,9 @@ rcv_alaska_20221108_ussenator,rank,none,2026-10-25
 rcv_burlington_20060307_mayor,rank,none,2026-10-15
 rcv_eastpointe_20191105_council,rank,none,2026-10-15
 rcv_genola_20211102_council,rank,none,2026-10-15
+rcv_lascruces_20191105_councild2,rank,none,2026-11-01
+rcv_lascruces_20191105_councild4,rank,none,2026-11-01
+rcv_lascruces_20191105_mayor,rank,none,2026-11-01
 rcv_mpls_20091106_boardoftaxational,rank,none,2026-10-21
 rcv_mpls_20091106_mayor,rank,none,2026-10-21
 rcv_mpls_20091106_parksboardal,rank,none,2026-10-21
@@ -3070,6 +3073,9 @@ rcv_nsw_20230325_la_wollondilly,rank,none,2026-10-15
 rcv_nsw_20230325_la_wollongong,rank,none,2026-10-15
 rcv_nsw_20230325_la_wyong,rank,none,2026-10-15
 rcv_nyc_20210622_demcouncild49,rank,none,2026-10-15
+rcv_santafe_20180306_councild2,rank,none,2026-11-01
+rcv_santafe_20180306_councild4,rank,none,2026-11-01
+rcv_santafe_20180306_mayor,rank,none,2026-11-01
 rcv_takoma_20221108_councilward4,rank,none,2026-10-15
 reeves_2026_councillor_candidates,conj,https://dataverse.harvard.edu/api/access/datafile/14104944,2026-10-08
 reher_2025_disabled_candidates,conj,https://dataverse.harvard.edu/api/access/datafile/7609848,2026-10-07
