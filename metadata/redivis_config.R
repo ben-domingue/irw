@@ -65,15 +65,17 @@ IRW_CONJ_DATASETS <- c(
 ## Rankings shards, oldest to newest. Ranked-choice ballots, jury rankings and
 ## survey ranking questions in their own layout, see data/rankings/README.md.
 ## A shard list from day one, October 2026: FairVote's cast vote records alone
-## are 657 contests, so the 1000-table cap is a matter of time. Clients search
-## these newest-first. The dataset's display name on Redivis is IRW_rank, the
-## reference id 93f5 resolves it, and Redivis matches names case-insensitively.
+## are 657 contests, and building them took the family past the 1000-table cap
+## on 2026-11-01, when irw_rank_2 was added. Clients search these newest-first.
+## The display names on Redivis are IRW_rank and IRW_rank 2, the reference ids
+## 93f5 and byyj resolve them, and Redivis matches names case-insensitively.
 ## Append a shard here only once it has a PUBLISHED release, and together with
 ## Rpkg's .irw_datasource_specs$rank and Python-pkg's RANK_REFS, in that order.
 ## Where NEW rankings tables go is RANK_DEFAULT in red_up/targets.py.
 ## No parentheses in comments inside this c, red_up/targets.py reads up to the first one.
 IRW_RANK_DATASETS <- c(
-  "irw_rank"
+  "irw_rank",    ## held at ~950 tables since 2026-11-01, display name IRW_rank
+  "irw_rank_2"   ## added 2026-11-01, display name IRW_rank 2; new tables go here
 )
 
 ## The data families other than core, by the `source` name the irw package uses,

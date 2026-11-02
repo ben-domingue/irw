@@ -317,8 +317,11 @@ def rank_shards(targets: list[Target]) -> list[Target]:
 #: Where NEW rankings tables go: the rank twin of CONJ_DEFAULT, with the same
 #: meaning (None: the newest shard in IRW_RANK_DATASETS; a table that already
 #: lives in some rank shard is still updated there). One shard, irw_rank, at
-#: registration (2026-10-15); set this when a second shard exists and Ben
-#: wants the first filled to a particular count.
+#: registration (2026-10-15). 2026-11-01: irw_rank_2 registered, because the
+#: FairVote backlog (501 tables onto 514 live) passes the cap; irw_rank is
+#: filled to ~950 by naming it with `--dataset irw_rank`, and with this None
+#: every new table that does not name a shard goes to irw_rank_2. The cli's
+#: table-cap check refuses an upload that would take irw_rank past 1000.
 RANK_DEFAULT: str | None = None
 
 
