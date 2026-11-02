@@ -1651,6 +1651,30 @@ LICENSE_OVERRIDES <- list(
         derived    = "CC BY 4.0",
         original   = "Permission via Email",
         why        = "Jorgenson (openpsychometrics.org), 2023-08-25: 'Yes, that is fine', replying to a letter that states the CC BY 4.0 plan"
+    ),
+    list(
+        url        = "osf\\\\.io/k2453",
+        issue      = "#3316",
+        superseded = "CC BY 4.0",
+        derived    = "CC BY 4.0",
+        original   = "Permission via Email",
+        why        = "Siwiak, 2024-09-29, replying to the standard letter: 'you are, of course, welcome to take them, transform them, and add them to your database' (licenseinfo/emails, SSUB thread)"
+    ),
+    list(
+        url        = "osf\\\\.io/psgk8",
+        issue      = "#3316",
+        superseded = "CC BY 4.0",
+        derived    = "CC BY 4.0",
+        original   = "Permission via Email",
+        why        = "Sonmez, 2024-09-17, replying to the standard letter: 'I grant the permission; please proceed.' (licenseinfo/emails, Aspiration Index thread)"
+    ),
+    list(
+        url        = "github\\\\.com/ashleyaedwards/SpellingToPronunciationTransparencyRatings",
+        issue      = "#3316",
+        superseded = "CC BY 4.0",
+        derived    = "CC BY 4.0",
+        original   = "Permission via Email",
+        why        = "Edwards, 2024-09-17, replying to the standard letter: 'You are welcome to include my data in your IRW.' (licenseinfo/emails/spelling2pronounce_edwards2023.Rdata.pdf)"
     )
 )
 
