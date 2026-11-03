@@ -647,6 +647,7 @@ conroykrutz_2025_media_restrictions,conj,https://dataverse.harvard.edu/api/acces
 contreras_valdez_2026_cpq,core,none,2026-10-18
 contreras_valdez_2026_perci,core,none,2026-10-18
 contreras_valdez_2026_rses,core,none,2026-10-18
+corbelli_2026_ema_positivity,core,none,2026-11-02
 cordellieri_2026_bsss8,core,https://zenodo.org/api/records/22375285/files/SCEDD_codebook.xlsx/content,2026-10-15
 cordellieri_2026_rpodd,core,https://zenodo.org/api/records/22375285/files/SCEDD_codebook.xlsx/content,2026-10-15
 cordellieri_2026_scedd,core,https://zenodo.org/api/records/22375285/files/SCEDD_codebook.xlsx/content,2026-10-15
@@ -3881,6 +3882,11 @@ shen_2025_dass21,core,https://doi.org/10.7717/peerj.19707/supp-3,2026-10-04
 shen_2025_igds9sf,core,https://doi.org/10.7717/peerj.19707/supp-3,2026-10-04
 shen_2025_sabas,core,https://doi.org/10.7717/peerj.19707/supp-3,2026-10-04
 shi_2025_restaurant_hiring,conj,https://dataverse.harvard.edu/api/access/datafile/11091135,2026-10-07
+shiota_2026_dass21,core,none,2026-11-02
+shiota_2026_ecr_s,core,none,2026-11-02
+shiota_2026_loneliness,core,none,2026-11-02
+shiota_2026_panas,core,none,2026-11-02
+shiota_2026_tipi,core,none,2026-11-02
 shockley_2024_qatar_groups,conj,none,2026-10-07
 shockley_2024_qatar_residency,conj,none,2026-10-07
 short_2025_candidate_pilot,conj,https://dataverse.harvard.edu/api/access/datafile/11890312,2026-10-11
