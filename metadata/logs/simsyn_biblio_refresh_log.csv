@@ -1,1 +1,13 @@
 table,column,kind,was,now
+aberrance_pk_sim,Original_License,conflict,Generated (no upstream data licence),CC0 1.0
+aberrance_speeded_sim,Original_License,conflict,Generated (no upstream data licence),CC0 1.0
+estcrm,Derived_License,conflict,CC0 1.0,CC BY 4.0
+hmcdm_learning_sim,Original_License,conflict,Generated (no upstream data licence),CC0 1.0
+hrm_rater_sim,Original_License,conflict,Generated (no upstream data licence),CC0 1.0
+ising_network_sim,Original_License,conflict,Generated (no upstream data licence),CC0 1.0
+lnirt_sim,Original_License,conflict,Generated (no upstream data licence),CC0 1.0
+mirt_ggum,Derived_License,conflict,CC0 1.0,CC BY 4.0
+mirt_mixed,Derived_License,conflict,CC0 1.0,CC BY 4.0
+mirt_nonlin,Derived_License,conflict,CC0 1.0,CC BY 4.0
+nbashots_sim,Derived_License,conflict,CC0 1.0,CC BY 4.0
+raschmix_rost2_sim,Original_License,conflict,Generated (no upstream data licence),CC0 1.0
