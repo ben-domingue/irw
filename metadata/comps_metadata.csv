@@ -1,5 +1,6 @@
 table,n_responses,n_actors
 acpc_poker_2010_2017,683,91
+aiide_starcraft_2017_2025,173155,55
 amboseli_baboons_g1,4118,61
 amboseli_baboons_g2,1667,28
 amboseli_baboons_g3,2387,36
@@ -15,6 +16,7 @@ carlson_2017_treebank,9996,504
 carlson_2017_wiscads,9528,935
 clark_2018_strength_study2,7835,82
 coertjens_2021_selfreflections,202,22
+cog_starcraft_2026,14425,10
 collegefb_2021and2022,5816,706
 costa_gine_2023_wpt_matches,17583,5353
 cricsheet_domestic_men_2008_2026,10374,245
