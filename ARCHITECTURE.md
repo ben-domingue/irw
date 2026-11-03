@@ -192,6 +192,16 @@ metadata that is not derivable from the data itself:
 The sheet URLs live in the scripts that read them; this file does not repeat
 them.
 
+> **A dictionary sheet is only half of the dictionary.** The authoritative
+> dictionary for a family is its sheet (every row of the input tab, Private rows
+> included) unioned with its `automated_finding/dictionary_auto*.csv` file, merged
+> column-wise as described below. Neither half is complete on its own: 3,090 core
+> tables have their row only in `dictionary_auto.csv` (2026-11-03), and conjoint
+> and rankings have no sheet at all. `metadata/*biblio*.csv` is not the dictionary
+> either. It is `02_biblio.R`'s output, filtered to public live tables, and it
+> lags its sources. Any check of whether IRW already knows a table or a source has
+> to read both halves.
+
 `competitions` and `simsyn` have **no** tags sheet. That is a decision, not a
 gap — see `Rpkg/inst/developer/tags.md`. Conjoint has no tags sheet either and
 no core-schema tags: its topic tags (`domain`, `choice_object`) live in
