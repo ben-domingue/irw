@@ -10,7 +10,7 @@ processing script written this batch.
   (BATCH_LOG 2026-11-02b).
 - [x] **All 24 lead rows worked 2026-11-02** (BATCH_LOG 2026-11-02b): 8
   deposits shipped as 42 tables; every row's `status` is set.
-- [ ] **UPLOAD the 42 tables** (ben-domingue): moved 2026-11-02 to `/tmp/dl/` (not `irw_output/`), which holds
+- [ ] **UPLOAD the 42 tables** (ben-domingue): moved 2026-11-02 to `/tmp/dl/up/` (not `irw_output/`), which holds
   nurmalita_2026_* (4), hung_2026e_* (5), gabardo_martins_2026_* (5),
   jiang_2026_* (9), lukita_2026_* (5), lochmannova_2026_* (8),
   corbelli_2026_ema_positivity, shiota_2026_* (5). Tags not yet written.
