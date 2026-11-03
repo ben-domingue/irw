@@ -25,7 +25,14 @@
 ##stamps file), which recomputes everything, as every run did before.
 ##
 ##Columns:
-##  table, n_respondents (distinct id), n_rows, n_tasks (largest task index),
+##  table, n_respondents (distinct id), n_rows,
+##  n_tasks (tasks per respondent: the median over respondents of the number of
+##  distinct task values, taking the lower middle value when the count of
+##  respondents is even, so it is always a count some respondent has),
+##  max_task (largest task index; differs from n_tasks when task numbers have
+##  gaps or do not start at 1 -- a blocked design numbered by design set, a
+##  dropped or repeated task, a second conjoint numbered on from the first, or
+##  respondents who stopped early; the script header says which),
 ##  n_profiles (largest profile index; 1 = single-profile design),
 ##  n_attributes (attr_ columns), outcomes (choice/rating columns, ";"-joined),
 ##  n_optout_tasks (tasks where `choice` exists and no profile was chosen; 0
@@ -110,7 +117,10 @@ lit <- function(x) sprintf("'%s'", gsub("'", "\\\\'", x))
 base_file <- "conj_metadata.csv"
 stamps_file <- "conj_refresh_stamps.csv"
 refresh.per.run <- 40   ##two batches, about 80 s; sweeps the corpus in ~6 months
-computed_cols <- c("table", "n_respondents", "n_rows", "n_tasks", "n_profiles",
+##Adding a column here makes every base row incomplete, so the next run
+##recomputes everything once (below), as max_task did (n_tasks was MAX(task)
+##until 2026-11-03).
+computed_cols <- c("table", "n_respondents", "n_rows", "n_tasks", "max_task", "n_profiles",
                    "n_attributes", "outcomes", "n_optout_tasks")
 stamp_cols <- c("table", "updated_at", "num_rows", "hash", "attrs", "outcomes",
                 "empty_pairs", "max_level_ratio", "refreshed_at")
@@ -189,14 +199,17 @@ todo <- live$table[redo]
 batches <- if (length(todo)) split(todo, ceiling(seq_along(todo) / BATCH)) else list()
 
 ##Counts, and opt-out tasks: choice tasks where no profile was chosen (0 for a
-##forced choice, NA without a `choice` column).
+##forced choice, NA without a `choice` column). n_tasks is PERCENTILE_DISC(0.5)
+##of tasks per respondent: exact, and the lower middle value on an even count.
 counts_sql <- function(t) {
   optout <- if ("choice" %in% t$cols)
     sprintf("(SELECT COUNTIF(s = 0) FROM (SELECT SUM(choice) AS s FROM `%s` WHERE choice IS NOT NULL GROUP BY id, task))", t$ref)
   else "CAST(NULL AS INT64)"
   sprintf(paste("SELECT %s AS tbl, COUNT(*) AS n_rows, COUNT(DISTINCT id) AS n_respondents,",
-                "CAST(MAX(task) AS FLOAT64) AS n_tasks, CAST(MAX(profile) AS FLOAT64) AS n_profiles,",
-                "%s AS n_optout_tasks FROM `%s`"), lit(t$name), optout, t$ref)
+                "(SELECT CAST(ANY_VALUE(m) AS FLOAT64) FROM (SELECT PERCENTILE_DISC(nt, 0.5) OVER () AS m",
+                "FROM (SELECT COUNT(DISTINCT task) AS nt FROM `%s` GROUP BY id))) AS n_tasks,",
+                "CAST(MAX(task) AS FLOAT64) AS max_task, CAST(MAX(profile) AS FLOAT64) AS n_profiles,",
+                "%s AS n_optout_tasks FROM `%s`"), lit(t$name), t$ref, optout, t$ref)
 }
 
 ##Level shares, leaving out '(not shown)', which is the design hiding an
@@ -248,7 +261,8 @@ for (b in batches) {
     t <- info[[n]]; r <- cnt[cnt$tbl == n, ]
     rows[[n]] <- data.frame(table = n,
                             n_respondents = as.numeric(r$n_respondents), n_rows = as.numeric(r$n_rows),
-                            n_tasks = as.numeric(r$n_tasks), n_profiles = as.numeric(r$n_profiles),
+                            n_tasks = as.numeric(r$n_tasks), max_task = as.numeric(r$max_task),
+                            n_profiles = as.numeric(r$n_profiles),
                             n_attributes = length(t$attrs),
                             outcomes = paste(t$outcomes, collapse = ";"),
                             n_optout_tasks = as.numeric(r$n_optout_tasks))
