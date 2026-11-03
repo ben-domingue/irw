@@ -202,6 +202,20 @@ local({
 })
 
 local({
+    readr::write_csv(fake_auto(auto_row("a_2020", reshare = "Yes"),
+                               auto_row("b_2020", reshare = "no")), tmp)
+    got <- suppressMessages(read_dict_auto(tmp, "core"))
+    check(identical(got[["Public Reshare?"]], c("Public", "Private")),
+          "Yes/No are read as Public/Private, which is all 02_biblio.R keeps")
+})
+
+local({
+    readr::write_csv(fake_auto(auto_row("a_2020", reshare = "Maybe")), tmp)
+    expect_error(read_dict_auto(tmp, "core"), "not Public or Private",
+                 "a Public Reshare? outside the vocabulary is refused")
+})
+
+local({
     readr::write_csv(fake_auto(auto_row("a_2020"), auto_row("A_2020")), tmp)
     expect_error(read_dict_auto(tmp, "core"), "more than once",
                  "the same table staged twice is refused, case-insensitively")
