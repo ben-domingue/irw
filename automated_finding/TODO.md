@@ -5,25 +5,45 @@
 Full write-up in `BATCH_LOG.md` (2026-11-02). Discovery + triage only; no
 processing script written this batch.
 
-- [ ] **Write the processing script for the one `good` row:** "Dataset,
-  Questionnaire, dan Codebook: ... Paylater Usage Intensity ... Generation Z
-  in the Greater Jakarta Area" — zenodo 10.5281/zenodo.22135733, CC BY, 177
-  participants, 16 items. In `leads/repos_leads_2026-11-03.csv`, status
-  `unworked`.
-- [ ] **Work the 23 leads in `leads/repos_leads_2026-11-03.csv`** (5
-  `worth_retrying`, 18 `recoverable_format`), all `unworked`. Most of the
-  `recoverable_format` rows need only a narrower column selection or a
-  mixed-scale split per their `note`; three (`fear_of_missing_out`,
-  `anti-tick attachment`, `culture_resilience_depression`) failed on
-  `resp_scale_mixed` and need the questionnaire split into per-instrument
-  files before re-triage.
-- [ ] **`scholars_portal` was not just low-yield this run, it was completely
-  unreachable** — 0/125 terms, every query hit a proxy 403 on
-  `borealisdata.ca`. This is on top of its already-measured 0.8% shipped rate
-  (2026-10-29b, which moved it to `OPTIONAL_SOURCES`). Worth deciding whether
-  to drop `--sources scholars_portal` from the monthly sweep's stored command
-  entirely now that it needs an explicit opt-in flag to reach at all, rather
-  than relying on scheduled runs to keep re-discovering it's blocked.
+- [x] **The one `good` row** shipped 2026-11-02 as
+  `nurmalita_2026_{financial_literacy,self_control,paylater_use,financial_stability}`
+  (BATCH_LOG 2026-11-02b).
+- [x] **All 24 lead rows worked 2026-11-02** (BATCH_LOG 2026-11-02b): 8
+  deposits shipped as 42 tables; every row's `status` is set.
+- [x] **UPLOADED 2026-11-02 by ben-domingue** to the `item_response_warehouse_8` draft (release pending). Was: **UPLOAD the 42 tables** (ben-domingue): moved 2026-11-02 to `/tmp/dl/up/` (not `irw_output/`), which holds
+  nurmalita_2026_* (4), hung_2026e_* (5), gabardo_martins_2026_* (5),
+  jiang_2026_* (9), lukita_2026_* (5), lochmannova_2026_* (8),
+  corbelli_2026_ema_positivity, shiota_2026_* (5). Tags not yet written.
+- [ ] **Decide (ben-domingue): four deposits held on integrity or terms, not
+  shipped.** Numbers are in BATCH_LOG 2026-11-02b.
+  - zenodo.23201796 (Hung, five-wave FoMO): lagged correlations exceed the
+    same-wave ones, which reads as generated data. Script drafted, not in
+    `data/`. If it is generated, the other hung_2026* deposits deserve a look.
+  - DVN/EX7UTR (Akrofi, coastal resilience): inter-item r ~0 in all eight
+    subscales.
+  - zenodo.23573609 (Hu, creative self-efficacy): rows 242-425 copy rows
+    1-184 on every column except a `RAND` column (181 exact, 3 differ only in
+    the AE block), i.e. ~241 real respondents padded to 425.
+  - zenodo.22665420 (Vorac, adolescents and AI): tagged CC BY, but the record
+    says the data come from a children's counselling service and access is by
+    justified request.
+  - Not integrity, but also yours: zenodo.22083506 (DWI 2023 extract,
+    35,018 x 35 countries) is "deposited with permission" from Ithra SYNC,
+    whose own site publishes no licence. GAD-7 + UCLA-3 tables are ready if
+    the depositor's CC BY is accepted.
+- [ ] **Follow-ups, not decisions:** Shiota (zenodo.23890112) daily coping
+  battery, the paper's focal measure, left out as messy (two wordings, two
+  anchor sets); gabardo_martins' 42 ESPCOG columns (0-5, a likely "does not
+  apply" 0, no codebook); lukita bedtime items bp5/bp7 carry 24 cells of 5 on
+  an otherwise 1-4 file; DASS-21 item text for shiota_2026_dass21 is a cheap
+  follow-up (register `ship`, wording in the .sav labels).
+- [ ] **`scholars_portal`: the sweep's 403 was the cloud sandbox's egress
+  proxy, not Borealis** — from a terminal on 2026-11-02 every one of the 125
+  terms searched cleanly (31 candidates, 21 already seen, 10 triaged: 9
+  `aggregate_continuous`, 1 `no_usable_file`, nothing to work). Two options:
+  allow `borealisdata.ca` in the routine environment's network settings, or
+  drop the source from the stored command. Given its 0.8% shipped rate
+  (2026-10-29b) and today's 0 of 10, dropping it costs little.
 - [ ] **3 `human_review` rows archived** to
   `human_review/human_review_zenodo_2026-11-03.csv` — genuinely ambiguous,
   needs a human read.
