@@ -1,9 +1,3 @@
 table,column,kind,was,now
-acpc_poker_2010_2017,Original_License,fill,NA,CC BY 4.0
-genai_arena_edit,Original_License,fill,NA,CC BY 4.0
-genai_arena_t2i,Original_License,fill,NA,CC BY 4.0
-genai_arena_t2v,Original_License,fill,NA,CC BY 4.0
-lmarena_text_2025,Original_License,fill,NA,CC BY 4.0
-lmarena_text_55k,Original_License,fill,NA,Apache 2.0
-mtbench_human_2023,Original_License,fill,NA,CC BY 4.0
-repochat_arena_2024_2025,Original_License,fill,NA,CC BY 4.0
+aiide_starcraft_2017_2025,Original_License,fill,NA,Custom
+cog_starcraft_2026,Original_License,fill,NA,Custom
