@@ -25734,3 +25734,119 @@ identical for every respondent, so the `conj` route does not apply.
 Staging after this revision: **34 response tables, 8,464,014 responses**, and
 18 item text tables. Dictionary, tag and provenance rows were reconciled (-3
 +1 in each).
+
+## 2026-11-02 — backlog first (PLOS `recoverable_format`), then a repos sweep: 186 tables, 2,130,111 responses
+
+Ben: "fire an automated search (but beginning with any backlogged items)".
+
+### The backlog: 63 PLOS column-selection leads, 59 shipped
+
+The `good` PLOS leads above 5k responses were already exhausted (35 sub-5k
+`good` rows remain, deliberately deferred). The next backlog was the
+`recoverable_format` column-selection sub-bucket of
+`leads/plos_leads_2026-10-30.csv` (713 rows; 4-of-6 conversion in the
+2026-10-30 pilot). Ranked by **instrument shape, not N** (sorting by N put
+Chinese listed-firm panels, immunisation surveys and alligator telemetry on
+top -- every one binary covariates, none an item battery): +2 for a
+scale/questionnaire/validation title, -3 for firm/credit/species/cohort
+titles, +2 for >=8 items, +2 for a >=4-point non-negative range, +2 for item
+columns sharing an alphanumeric prefix. 78 leads scored the maximum 8. Worked
+in five slices of 12-15, one agent at a time:
+
+| slice | leads | shipped | tables | responses |
+|---|---|---|---|---|
+| 1 | 12 | 10 (+1 later, see rulings) | 21 | 667,509 |
+| 2 | 12 | 12 | 47 | 671,753 |
+| 3 | 12 | 12 | 23 | 261,706 |
+| 4 | 14 | 12 | 47 | 149,225 |
+| 5 | 15 | 14 | 26 | 164,093 |
+
+**The score-8 conversion rate was 61 of 65 (94%)**, against 4 of 6 in the
+unranked pilot -- the shape score is doing real work. Rejections: 0331789
+(outlier-trimmed deposit, truncated items), 0283720 (~95% "strongly agree" to
+everything, incl. items about churches on a Mecca pilgrimage survey), 0297050
+(construct mapping only in image tables), 0321485 (direction stated nowhere).
+Per-table write-ups are in `irw_output/MANIFEST_2026-11-02.txt` and each
+script header. Recurring patterns worth knowing:
+- **Deposits in scored direction.** RSA, ACQ-SF-R, AAS/BAM, CSE, HADS, SIS
+  were deposited with reverse-keyed items already flipped; each was confirmed
+  by the items summing exactly to the deposit's own subscale totals, and
+  shipped as deposited with the header saying so.
+- **Backwards scales.** pet_commitment (martin_2021), DMI (maraz_2015),
+  societal_risk (capacci_2018), drain_2019 GAD/PHQ: 1 = strongest agreement
+  or 4 = "not at all". Stated in descriptions and tags.
+- **Missing-category codes.** Zarit (summart_2025, code 3 absent from 3,660
+  cells), PSS-14 ("very often" absent), CSE 0-10 (codes 6 and 11 absent):
+  the stored codes can't be mapped back to the options, so not shipped.
+- **Unreconcilable with the paper.** Brief COPE, FATCOD-B, a palliative-care
+  knowledge test, Social Support (mixed 1-4 ratings and 0-9 counts): not shipped.
+
+### The sweep (mode 3)
+
+**135 term variants**: 15 new English topics x 9 languages, each verified
+absent from `search_terms_log.csv` even as a substring -- tinnitus handicap,
+dizziness handicap, syllogistic reasoning, analogical reasoning, attitudes
+toward homosexuality, algorithm aversion, money attitudes, gambling motives,
+negative attitudes toward robots, neighbourhood social cohesion, exercise
+dependence, handwriting assessment, stuttering severity, ageism, music
+perception. Appended to the log (11,701 -> 11,836 rows).
+
+**680 candidates** (zenodo 318, dataverse 276, figshare 66, datacite 14,
+mendeley 5, osf 1); **220 triaged** after the seen ledger: 11 good, 49
+human_assistance, 100 no_usable_file, 34 download_failed, 7 pii_suspected, 7
+not_item_response, 5 below_min_n, 3 license_restricted, 3 error, 1
+file_too_large. Step 2b (chained via `--retriage`): 23 recoverable_format, 14
+worth_retrying, 9 human_review, 2 not_item_response, 1 aggregate_continuous,
+0 conj. **All three confirmation lines printed**: 49 refined flags recorded in
+`repo_triage_seen_keys.csv`, 9 rows archived to
+`human_review/human_review_zenodo_2026-11-02.csv`, conj routed 0.
+`leads/repos_leads_2026-11-02.csv` holds all 220 rows.
+
+Worked: **19 tables, 142,552 responses, 8 deposits** -- menke_2020_asci_*
+(chemistry/biology/math attitudes, ~1,400; semester-start only because there
+is no id to link semester-end), manson_2022_* (HEXACO emotionality; sample 4
+deposited with its reverse-keyed items flipped, detected by the sex gap and
+item correlations changing sign, restored to raw), fang_2026_aihealth_* (7),
+perez_vasquez_2026_paykel, esteves_pairazaman_2022_meds_*,
+kasali_2025_atole_dental, brandao_2025_sniffin_sticks, claudy_2022_* (2).
+Skipped: a `Nama` column of 399 real names (zenodo.20746155), student emails
+(zenodo.17364355), patient names (sr53hxs8jx), the LLM benchmark (3 "respondents"),
+three below N. **Held on direction** (1-5 anchors stated nowhere, no paper
+found): dvn/pilpa3, zenodo.15590902, 10.17632/g8nb469756 -- left `unworked`
+with a note. Blocked: dvn/7hxjkl (Dataverse guestbook).
+
+### Rulings (ben-domingue, in-session)
+
+1. **Date of birth, droppable when it's the only blocker.** 0115799 (Li 2014,
+   1,559 nurses) shipped as `li_2014_nurses_{cse,scsq,mbigs}` with `birth`
+   dropped, and `age`/`age3group` with it (both derived from it). Ben: "yes
+   drop". 73,273 responses.
+2. **drain_2019 GAD-7/PHQ-9 ship in the deposited coding** (1-4, 4 = "not at
+   all"); "you can leave it in original form". Descriptions say 4 - resp gives
+   the usual 0-3.
+3. **Multi-arm / no-control experiments** -> irw#3381, opened for discussion
+   with Josh Gilbert; Ben's concern is backwards compatibility. Affected:
+   hazell_2022, cassaday_2023, oconnor_2019, claudy_2022 (and the live
+   lin_2026_advertising_literacy) -- all shipped with the arm left out.
+
+### Item text
+
+5 tables shipped: martin_2021_{gad7,mspss,cesdr,covid_impact} (from the
+deposit's Datamap sheet) and schoultz_2022_pfa_wellbeing (`.sav` labels,
+stems match no published scale, study-authored under CC0). Register rows: 19
+new (CESD-R and DMI and PFA `ship`, the rest `hold` -- Pet Attitude,
+Miller-Rada, INQ, AQ, IASMHS, ORTO-15, BQSPS, EFS, ACQ-SF-R, FPQ-III, MITAG,
+JDS, AFA-WMA, TRI 2.0, EORTC SWB32, OCRSIEP). Not shipped elsewhere: either no
+wording in the deposit, or the wording is English for a non-English
+administration; per-table reasons are in each script header.
+
+### Staging
+
+186 response tables (2,130,111 responses) + 5 item text tables, all passing
+`irw-validate --profile upload`; 186 dictionary/codebook/tag/provenance rows
+staged. `covariate_labels/harvest.py` not yet run for the new .sav scripts
+(needs the commit; covariates already ship as text labels).
+
+**Before upload (Ben agreed):** `summart_2025_caregiver_dass21` dropped (DASS-21 by column position only) and `hu_2025_*` kept with its caveat. **Handed over: 185 response tables, 2,123,706 responses, + 5 item text tables.**
+
+**UPLOADED 2026-11-02** (Ben, in-session): 185 response tables + 5 item text tables. Manifest renamed `MANIFEST_2026-11-02_uploaded.txt`.
