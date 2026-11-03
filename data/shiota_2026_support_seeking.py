@@ -119,9 +119,12 @@
 #                           value label (Strongly conservative .. Strongly
 #                           liberal; the source codes are 1, 5-10)
 #
-# Item text: NOT shipped. The full English wording is in the SPSS variable
-#   labels. DASS-21 is a `ship` row in the rights register and could follow
-#   cheaply; PANAS, UCLA-L and ECR are `block` rows; standalone TIPI has no
+# Item text: shiota_2026_dass21 SHIPPED 2026-11-02 (staged, not yet uploaded)
+#   by automated_finding/itemtext_verification/make_itemtext_shiota_2026.R:
+#   stems from the .sav variable labels, anchors from its value labels (1 Not
+#   at all .. 4 Most of the time), data_labels + study_materials; rights =
+#   the DASS register `ship` row (public-domain FAQ). The other four tables
+#   ship none: PANAS, UCLA-L and ECR are `block` rows; standalone TIPI has no
 #   register row of its own.
 #
 # PII: no names, emails, dates of birth or locations. The six text columns
