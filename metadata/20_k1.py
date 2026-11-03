@@ -371,7 +371,9 @@ def main() -> int:
         def run(sql):
             for attempt in range(RETRIES):
                 try:
-                    return redivis.query(sql).to_pandas_dataframe()
+                    # progress=False: see 19_item_classical.py -- redivis 0.22
+                    # with tqdm 4.70 raises TypeError on every query otherwise.
+                    return redivis.query(sql).to_pandas_dataframe(progress=False)
                 except Exception as exc:  # noqa: BLE001
                     if "429" in str(exc) and attempt < RETRIES - 1:
                         time.sleep(15)
