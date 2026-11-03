@@ -148,6 +148,11 @@ COLUMNS = [
 ]
 
 CONTRIBUTOR = "automated"
+##`Public Reshare?` spellings accepted on the way in, and what is written.
+##"Yes"/"No" are what a reader means by the question; only Public/Private are
+##what 02_biblio.R understands.
+RESHARE_VOCAB = {"public": "Public", "yes": "Public",
+                 "private": "Private", "no": "Private"}
 
 KEY_MAP = {
     "table": "table",
@@ -360,6 +365,14 @@ def main():
     if not row["Public Reshare?"]:
         sys.exit("'public_reshare' is required (e.g. \"Public\" or \"Private\"); "
                  "02_biblio.R silently drops rows that leave it blank")
+    ##Closed vocabulary, for the same reason: 02_biblio.R keeps a row only when
+    ##the cell is exactly "Public", so "Yes" is as invisible as a blank. 237
+    ##rows went in as Yes/yes before this check and never reached biblio.
+    reshare = RESHARE_VOCAB.get(row["Public Reshare?"].strip().lower())
+    if reshare is None:
+        sys.exit(f"'public_reshare' must be \"Public\" or \"Private\", not "
+                 f"{row['Public Reshare?']!r}; 02_biblio.R drops anything but Public")
+    row["Public Reshare?"] = reshare
     ##A public row with no licence cannot be published, and finding that out at
     ##export time means finding it out for a whole batch at once.
     if row["Public Reshare?"] == "Public" and not row["Derived License"]:

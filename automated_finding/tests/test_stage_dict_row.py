@@ -136,6 +136,21 @@ class StageDictRowTest(unittest.TestCase):
         self.assertNotEqual(r.returncode, 0)
         self.assertIn("public_reshare", r.stderr)
 
+    def test_yes_and_no_are_written_as_public_and_private(self):
+        for given, written in (("Yes", "Public"), ("yes", "Public"), ("public", "Public"),
+                               ("No", "Private"), ("PRIVATE", "Private")):
+            with self.subTest(given=given):
+                if os.path.exists(self.path):
+                    os.unlink(self.path)
+                r = self.stage(self.ok_payload(public_reshare=given))
+                self.assertEqual(r.returncode, 0, r.stderr)
+                self.assertEqual(self.rows()[0]["Public Reshare?"], written)
+
+    def test_unknown_public_reshare_is_refused(self):
+        r = self.stage(self.ok_payload(public_reshare="Maybe"))
+        self.assertNotEqual(r.returncode, 0)
+        self.assertIn("Public", r.stderr)
+
     def test_public_row_without_licence_is_refused(self):
         r = self.stage('{"table": "a_2026", "public_reshare": "Public"}')
         self.assertNotEqual(r.returncode, 0)

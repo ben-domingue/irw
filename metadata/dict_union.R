@@ -184,6 +184,26 @@ read_dict_auto <- function(path, label) {
              "). 02_biblio.R drops non-Public rows, so a blank one would ",
              "silently never reach biblio.")
     }
+    ##Same failure, other spelling: 02_biblio.R keeps only an exact "Public",
+    ##so a "Yes" row is dropped as silently as a blank one. 237 rows went in
+    ##that way (2026-10-30 PLOS batch, #3326) and missed biblio. Yes/No are
+    ##mapped onto the vocabulary; anything else stops the run.
+    low <- tolower(reshare)
+    mapped <- c(public = "Public", yes = "Public", private = "Private", no = "Private")[low]
+    unknown <- is.na(mapped)
+    if (any(unknown)) {
+        stop(label, ": ", path, " has ", sum(unknown), " row(s) whose ",
+             "`Public Reshare?` is not Public or Private (row ",
+             paste(which(unknown), collapse = ", "), ": ",
+             paste(unique(reshare[unknown]), collapse = ", "), ").")
+    }
+    respelled <- mapped != reshare
+    if (any(respelled)) {
+        message(label, ": read ", sum(respelled), " `Public Reshare?` cell(s) as ",
+                "Public/Private (they said ", paste(unique(reshare[respelled]), collapse = ", "),
+                ") -- fix them in ", path)
+    }
+    auto[["Public Reshare?"]] <- unname(mapped)
 
     key <- dict_key(auto[["table.lower"]])
     key[dict_blank(key)] <- dict_key(auto[["table"]])[dict_blank(key)]
