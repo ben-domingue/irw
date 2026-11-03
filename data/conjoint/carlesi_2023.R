@@ -8,7 +8,9 @@
 ##
 ##800 Italian household respondents (the Mendeley description says the data are the reduced sample of 544 without
 ##lexicographic preferences or attribute non-attendance, but both files hold 800 ids and no flag identifying 544:
-##N MISMATCH, all 800 kept). 9 choice sets each (BLOCK 1-4, fixed blocked design; idd = set 1-9). Each set: a
+##N MISMATCH, all 800 kept). 9 choice sets each (BLOCK 1-4, fixed blocked design). task = cset, the set number within the
+##respondent's block (1-9; the order shown is not recorded beyond this). NOT idd: idd is a table-wide counter
+##(1-7,200, = 9*(ID-1) + cset, checked), which the first release stored as task (n_tasks 7200 in conj_metadata). Each set: a
 ##submarine canyon alternative (altij 1), a cold-water coral alternative (altij 2) and "nessuna" (none, altij 3, all
 ##attributes 0): an opt-out (opt_out = yes; row dropped; choice 0 on both profiles when chosen, 3,264 of 7,200 sets;
 ##45%). The labelled habitat is a level of attr_habitat (Canyon / Coral).
@@ -23,13 +25,14 @@
 library(data.table); library(haven)
 a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]
 x <- as.data.table(read_dta(list.files(raw, pattern = "[.]dta$", full.names = TRUE)[1]))
-stopifnot(nrow(x) == 21600, uniqueN(x$ID) == 800, x[, .N, .(ID, idd)][, all(N == 3)], x[, sum(choice), .(ID, idd)][, all(V1 == 1)])
+stopifnot(nrow(x) == 21600, uniqueN(x$ID) == 800, x[, .N, .(ID, idd)][, all(N == 3)], x[, sum(choice), .(ID, idd)][, all(V1 == 1)],
+  x[, all(idd == 9 * (ID - 1) + cset)], x[, uniqueN(cset), ID][, all(V1 == 9)], all(x$cset %in% 1:9))
 stopifnot(x[altij == 3, all(scie == 0 & clima == 0 & bio == 0 & price == 0)], x[altij < 3, all(price > 0 & bio > 0 & clima > 0)])
 lab <- function(v) as.character(as_factor(v))
 x[, `:=`(g = lab(Male), edu = lab(Edu), inc = lab(Income), area = lab(zona))]
 inc_clean <- function(s) gsub("&#39;", "'", gsub("&ugrave;", "u", s))
 p <- x[altij < 3]
-d <- p[, .(id = ID, task = as.integer(idd), profile = as.integer(altij), choice = as.integer(choice),
+d <- p[, .(id = ID, task = as.integer(cset), profile = as.integer(altij), choice = as.integer(choice),
   attr_habitat = c("Canyon", "Coral")[altij], attr_biodiversity = as.character(bio), attr_climate_regulation = as.character(clima),
   attr_scientific_value = as.character(scie), attr_price = as.character(price), trial_block = as.integer(BLOCK),
   cov_gender = ifelse(g == "Maschio", "male", ifelse(g == "Femmina", "female", NA_character_)), cov_age = ifelse(Age >= 15 & Age <= 100, as.integer(Age), NA_integer_),
