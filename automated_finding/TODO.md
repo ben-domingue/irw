@@ -1,5 +1,33 @@
 # IRW Automated Finding — TODO
 
+## Repos monthly discovery+triage, 2026-11-02 — 1 `good`, 23 leads, scholars_portal blocked
+
+Full write-up in `BATCH_LOG.md` (2026-11-02). Discovery + triage only; no
+processing script written this batch.
+
+- [ ] **Write the processing script for the one `good` row:** "Dataset,
+  Questionnaire, dan Codebook: ... Paylater Usage Intensity ... Generation Z
+  in the Greater Jakarta Area" — zenodo 10.5281/zenodo.22135733, CC BY, 177
+  participants, 16 items. In `leads/repos_leads_2026-11-03.csv`, status
+  `unworked`.
+- [ ] **Work the 23 leads in `leads/repos_leads_2026-11-03.csv`** (5
+  `worth_retrying`, 18 `recoverable_format`), all `unworked`. Most of the
+  `recoverable_format` rows need only a narrower column selection or a
+  mixed-scale split per their `note`; three (`fear_of_missing_out`,
+  `anti-tick attachment`, `culture_resilience_depression`) failed on
+  `resp_scale_mixed` and need the questionnaire split into per-instrument
+  files before re-triage.
+- [ ] **`scholars_portal` was not just low-yield this run, it was completely
+  unreachable** — 0/125 terms, every query hit a proxy 403 on
+  `borealisdata.ca`. This is on top of its already-measured 0.8% shipped rate
+  (2026-10-29b, which moved it to `OPTIONAL_SOURCES`). Worth deciding whether
+  to drop `--sources scholars_portal` from the monthly sweep's stored command
+  entirely now that it needs an explicit opt-in flag to reach at all, rather
+  than relying on scheduled runs to keep re-discovering it's blocked.
+- [ ] **3 `human_review` rows archived** to
+  `human_review/human_review_zenodo_2026-11-03.csv` — genuinely ambiguous,
+  needs a human read.
+
 ## PLOS leads backlog, 2026-10-31 -- 10 deposits, 43 tables, 2,253,170 responses
 
 Full write-up in `BATCH_LOG.md` (2026-10-31). The `human_assistance` rows of

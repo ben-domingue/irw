@@ -7,7 +7,59 @@ checkboxes here just mean "this line item is settled," not "actionable."
 
 **For currently open action items, see `TODO.md`.**
 
-## PLOS leads backlog, 2026-10-31 -- 10 deposits, 43 tables, 2,253,170 responses
+## 2026-11-02 — Repos monthly discovery+triage: scholars_portal fully unreachable, 1 `good`, 23 leads
+
+Scheduled monthly run (repos connector, full sweep), discovery + triage only —
+**no processing script was written in this batch**, per the routine's scope.
+Fresh checkout at `f57fc2f` before starting.
+
+**Discovery.** `irw_discover_monthly.py --mode full` over the 125-term
+`TERM_LIST` (each term's own `--since` watermark from its last run against
+this source set), `--sources osf dataverse zenodo dryad figshare datacite
+scholars_portal surf`. 1,767 candidates →
+`runs/monthly_candidates_full_2026-11-02.csv`. All 125 term rows appended to
+`search_terms_log.csv`.
+
+**Coverage gap — `scholars_portal` is not transient, it is fully blocked from
+this sandbox.** 0/125 terms searched: every single query failed with
+`ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed:
+403 Forbidden'))` against `borealisdata.ca`. None of those terms' watermarks
+advanced, so a future run re-attempts all 125 once the connector is reachable
+again — but per the SKILL's own rule, a source missing an entire run is a bug
+to chase, not a transient to wave off, especially stacked on top of
+`scholars_portal`'s already-measured 0.8% shipped rate (2026-10-29b). `surf`
+missed 15/125 (self-reported JSON decode errors, "Expecting value: line 1
+column 1"), `datacite` missed 2, `zenodo` missed 1 — those three look like
+ordinary transient misses by comparison.
+
+**Triage** (`irw_batch_updated.py --retriage --resume --limit 150`) — hit the
+150 cap; 8,477 already-seen keys were excluded before the cap even started
+counting. `good` 1 · `human_assistance` 27 · `no_usable_file` 69 ·
+`download_failed` 43 (figshare 35, osf 3, datacite 3, surf 1, dryad 1) ·
+`below_min_n` 3 · `license_restricted` 3 · `pii_suspected` 3 ·
+`not_item_response` 1.
+
+**Step 2b ran** (chained via `--retriage`) over the 27 `human_assistance`
+rows: `recoverable_format` 18 (67%) · `worth_retrying` 5 (19%) ·
+`human_review` 3 (11%) · `not_item_response` 1 (4%) · `conj`/
+`wrong_file_selected`/`aggregate_continuous` 0 each. The 3 `human_review` rows
+were archived to `human_review/human_review_zenodo_2026-11-03.csv`; all 27
+refined flags were written back into `repo_triage_seen_keys.csv`.
+
+**The one `good` row:** "Dataset, Questionnaire, dan Codebook: The Impact of
+Financial Literacy, Self-Control, and Paylater Usage Intensity on the
+Financial Stability of Income-Earning Generation Z in the Greater Jakarta
+Area" — zenodo 10.5281/zenodo.22135733, CC BY, 177 participants, 16 items.
+Not yet fit/licence-judged beyond what the triage script itself computed
+(e.g. the `good` flag doesn't re-check the N>=100 floor or composite-score
+columns).
+
+**23 more leads** (5 `worth_retrying`, 18 `recoverable_format`) carried as
+`unworked` alongside the `good` row in `leads/repos_leads_2026-11-03.csv`
+(columns `source,title,url,doi,license,flag,refined_flag,n_participants,
+n_items,status,note`), so none of them dies in `runs/`.
+
+**Item text:** not assessed — Step 3 was never reached in this batch.
 
 The 2026-10-30 session worked the 104 `good` leads of the recycled-terms pass
 and stopped; the other 1,259 rows of `leads/plos_leads_2026-10-30.csv` (every
