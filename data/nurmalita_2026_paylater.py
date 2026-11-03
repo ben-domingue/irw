@@ -31,13 +31,14 @@
 # Covariates: none. The file holds Id and the 16 items and nothing else; the
 # questionnaire PDF's demographics were not deposited.
 #
-# Item text: NOT shipped in this batch. The wording is in hand -- Kuesioner.pdf
-# prints all 16 statements in Indonesian beside their codes, so the code-to-
-# text tie is explicit rather than positional -- but the item text standard
-# needs the Indonesian wording plus an English translation, and an IRW-made
-# translation must also be listed on the public issues page. Label levels: not
-# applicable, the .xlsx carries no variable or value labels; the wording is in
-# Kuesioner.pdf and the scale anchors in Codebook.pdf.
+# Item text: SHIPPED for all four tables 2026-11-02 (staged, not yet
+# uploaded) by automated_finding/itemtext_verification/
+# make_itemtext_repos_2026-11-02.py. Indonesian statements from Kuesioner.pdf,
+# which prints each code beside its statement (explicit, not positional);
+# anchors from Codebook.pdf; English in *_translated is IRW's machine
+# translation, which owes an itemtext_issues.qmd entry. Study-authored, CC BY
+# 4.0; register row NURMALITA-PAYLATER (ship). Label levels: not applicable,
+# the .xlsx carries no variable or value labels.
 #
 # PII: none possible -- every column is an integer (Id and 16 items in 1-5),
 # asserted below, so there is no text column to screen.

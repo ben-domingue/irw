@@ -98,8 +98,12 @@
 #   2026-11-02 WHO-5 and HLS-EU-Q16 are BLOCK rows, GSE is a SHIP row, Williams
 #   & Vaske place attachment has a SHIP row only for one adaptation; PRS-11,
 #   NR-6 and SCI-2 have no row (silence holds). The eight spa items are
-#   study-authored under the deposit's CC BY and could ship on their own; not
-#   done in this pass.
+#   study-authored under the deposit's CC BY: lochmannova_2026_spa_environment
+#   SHIPPED 2026-11-02 (staged, not yet uploaded) by automated_finding/
+#   itemtext_verification/make_itemtext_repos_2026-11-02.py -- Czech as
+#   administered with the depositors' own English in *_translated, from the
+#   codebook, data_labels; register row LOCHMANNOVA-SPA (ship). The other
+#   seven tables still ship none.
 #
 # PII: none. Five free-text "Other -- specify" columns (economic activity,
 #   marital status, employment sector, work schedule, housing type; 1-8
