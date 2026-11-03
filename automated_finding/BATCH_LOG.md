@@ -35,6 +35,11 @@ Shiota: CA283 dropped as the same person as AZ283 (all 266 shared battery
 cells agree); five isolated week-3 out-of-range cells dropped as entry slips.
 No item text shipped for any table; no tags yet.
 
+**Uploaded 2026-11-02** by ben-domingue from `/tmp/dl/up/` to the
+`item_response_warehouse_8` draft (597 -> 639 tables), after shiota_2026's PANAS
+and TIPI codes were renamed to `panas1-20`/`tipi1-10` (the old codes were the
+items' wording). Release pending.
+
 **Held on integrity — not shipped, for ben-domingue:**
 - zenodo.23201796 (Hung, five-wave FoMO): within-wave correlations near
   zero (T4 engagement x T4 procrastination -0.02; trait x state FoMO 0.16)
