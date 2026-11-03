@@ -1,5 +1,35 @@
 # IRW Automated Finding — TODO
 
+## Backlog + repos sweep, 2026-11-02 -- 186 tables, 2,130,111 responses
+
+Full write-up in `BATCH_LOG.md` (2026-11-02).
+
+- [x] **UPLOADED 2026-11-02** -- 185 response tables (2,123,706 responses)
+  and 5 item text tables, confirmed by Ben in-session; manifest renamed
+  `MANIFEST_2026-11-02_uploaded.txt`, the 5 item text provenance rows stamped.
+  Was: `irw_output/` with `MANIFEST_2026-11-02.txt`;
+  `itemtext_output/` holds the 5 `__items.csv`. **Response tables first.**
+  Dictionary, codebook, tag, provenance, mapping-verification and register
+  rows are all staged in the repo -- nothing to paste.
+- [x] **Ben agreed 2026-11-02:** `hu_2025_*` kept with its direction caveat;
+  `summart_2025_caregiver_dass21` dropped before upload (DASS-21 identified by
+  column position only). Ben is uploading.
+- [ ] **irw#3381 -- multi-arm `treat`**, with Josh Gilbert. Backfill
+  `hazell_2022`, `cassaday_2023`, `oconnor_2019`, `claudy_2022`,
+  `lin_2026_advertising_literacy` once settled.
+- [ ] **Remaining PLOS `recoverable_format` backlog**: 14 unworked leads at the
+  maximum shape score (all N < 175), then ~600 lower-scoring ones. The ranking
+  converted 61 of 65 at score 8; rerun the score (BATCH_LOG 2026-11-02) before
+  picking the next slice.
+- [ ] **repos 2026-11-02 leftovers** in `leads/repos_leads_2026-11-02.csv`: 20
+  `recoverable_format`, 14 `worth_retrying`, and 3 direction holds
+  (dvn/pilpa3, zenodo.15590902, 10.17632/g8nb469756).
+- [ ] **Cheap item text queued:** `esteves_pairazaman_2022_meds_attitude`
+  (Spanish + English questionnaire in the deposit, study-authored) and
+  `claudy_2022_*` (wording in the column headers).
+- [ ] **`covariate_labels/harvest.py --commit HEAD`** for the new .sav scripts
+  once committed.
+
 ## PLOS leads backlog, 2026-10-31 -- 10 deposits, 43 tables, 2,253,170 responses
 
 Full write-up in `BATCH_LOG.md` (2026-10-31). The `human_assistance` rows of
