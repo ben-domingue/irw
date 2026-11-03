@@ -7,7 +7,133 @@ checkboxes here just mean "this line item is settled," not "actionable."
 
 **For currently open action items, see `TODO.md`.**
 
-## PLOS leads backlog, 2026-10-31 -- 10 deposits, 43 tables, 2,253,170 responses
+## 2026-11-02b — The 2026-11-02 sweep's good row + all 23 leads worked: 42 tables; scholars_portal re-covered
+
+Worked from a local terminal after PR #3380 merged. Branch
+`wt/repos-monthly-1102-followups`.
+
+**Shipped, 8 deposits, 42 tables, all CC BY 4.0 (each resolved at the source
+API), all passing `irw-validate --profile upload`:**
+
+| deposit | tables | ids |
+|---|---|---|
+| zenodo.22135733 Nurmalita & Seillah (the `good` row) | nurmalita_2026_{financial_literacy,self_control,paylater_use,financial_stability} | 177 |
+| zenodo.23164084 Hung, mindsets | hung_2026e_{mindset,fomo,problematic_video,procrastination,social_desirability} | 545 |
+| zenodo.23512666 grit/hope, Brazil | gabardo_martins_2026_{grit,emotional_hope,positive_function,flourishing,life_satisfaction} | 791 |
+| zenodo.23476418 Jiang, narcissism | jiang_2026_* (9: four narcissism dimensions, need satisfaction, mental health, work engagement, exhaustion, objectification) | 746 |
+| zenodo.23877402 Lukita & Syahputra, school burnout | lukita_2026_{burnout,self_regulated,bedtime_procrast,social_support,academic_resilience} | 453 |
+| DVN/38ZOKO Lochmannova, spa towns | lochmannova_2026_{restorativeness,nature_relatedness,spa_environment,place_attachment,sense_of_community,health_literacy,wellbeing,self_efficacy} | 918 |
+| zenodo.21970195 Corbelli, EMA | corbelli_2026_ema_positivity (84 prompts as `wave`) | 166 |
+| zenodo.23890112 Shiota, support seeking | shiota_2026_{panas,dass21,loneliness,ecr_s,tipi} (first three x 4 weekly waves) | 312-313 |
+
+hung_2026e is a different sample from hung_2026d (0 of 527 FoMO patterns
+shared). Item codes were renamed where they would trip a rights-register
+matcher for the wrong instrument: lukita `pss1-12` -> `sup1-12` (Perceived
+Stress Scale pattern), shiota `lone1-20` -> `ucla1-20` (De Jong Gierveld),
+jiang dropped "narcissism" from codes (its "ciss" substring hits CISS).
+Shiota: CA283 dropped as the same person as AZ283 (all 266 shared battery
+cells agree); five isolated week-3 out-of-range cells dropped as entry slips.
+No item text shipped for any table; no tags yet.
+
+**Uploaded 2026-11-02** by ben-domingue from `/tmp/dl/up/` to the
+`item_response_warehouse_8` draft (597 -> 639 tables), after shiota_2026's PANAS
+and TIPI codes were renamed to `panas1-20`/`tipi1-10` (the old codes were the
+items' wording). Release pending.
+
+**Held on integrity — not shipped, for ben-domingue:**
+- zenodo.23201796 (Hung, five-wave FoMO): within-wave correlations near
+  zero (T4 engagement x T4 procrastination -0.02; trait x state FoMO 0.16)
+  while the hypothesised lagged paths are larger (T4 procrastination -> T5
+  engagement -0.28; T1 trait FoMO -> T2 upward comparison 0.36). Real panels
+  almost never look like that.
+- DVN/EX7UTR (Akrofi): the 36-item 1-5 battery exists (the triage's item
+  guess was wrong), but block mean inter-item r is -0.05 to .07 in all eight
+  subscales and subscale means are uncorrelated.
+- zenodo.23573609 (Hu): rows 242-425 equal rows 1-184 on all 35 columns but
+  `RAND` for 181 rows, and differ only in the AE block for the other 3.
+  Checked independently of the agent that found it.
+
+**Held on terms:** zenodo.22665420 (Vorac; CC BY tag vs. a record stating
+counselling-service data, access on justified request); zenodo.22083506
+(DWI 2023 extract "deposited with permission" from Ithra SYNC, which
+publishes no licence).
+
+**Blocked licence:** DVN/DVYTK6 (extract of SNU IPUS's Unification Perception
+Survey, KOSSDA member access); zenodo.23732941 (Eurobarometer 82.4/87.1,
+GESIS terms; content fails anyway). Neither strong enough for
+`license_blocked_candidates.csv`.
+
+**Rejected:** zenodo.23862088 (national birth registers), zenodo.23161461
+(systematic-review supplement), DVN/KGZJ13 (rodents), zenodo.22809788
+(single item + a sum score), DVN/Z8JEZV and DVN/TSIWM1 (scale totals only),
+DVN/75AK75 (unrelated single items), zenodo.23435151 (scale means only).
+**Routed to conjoint:** DVN/YFBPT6 (a DCE, 11,352 x 6 tasks, not text Likert).
+
+**scholars_portal re-covered.** The cloud run's proxy 403 was its own
+sandbox: from a terminal all 125 terms searched (90-day lookback on the
+sole-source watermark, logged with a note), 31 candidates, 21 already seen,
+10 triaged -> 9 `aggregate_continuous`, 1 `no_usable_file`.
+
+**The 43 `download_failed` rows** were never ledgered (inconclusive flags are
+not), and the candidate CSV died in the sandbox's `runs/`, so they can only
+be recovered by re-running discovery for the other seven sources over the
+same windows. Running in a scratch copy with the 11-02 log rows stripped so
+the real watermarks are untouched; triage of whatever it returns that is not
+already in the seen ledger follows in this branch.
+
+## 2026-11-02 — Repos monthly discovery+triage: scholars_portal fully unreachable, 1 `good`, 23 leads
+
+Scheduled monthly run (repos connector, full sweep), discovery + triage only —
+**no processing script was written in this batch**, per the routine's scope.
+Fresh checkout at `f57fc2f` before starting.
+
+**Discovery.** `irw_discover_monthly.py --mode full` over the 125-term
+`TERM_LIST` (each term's own `--since` watermark from its last run against
+this source set), `--sources osf dataverse zenodo dryad figshare datacite
+scholars_portal surf`. 1,767 candidates →
+`runs/monthly_candidates_full_2026-11-02.csv`. All 125 term rows appended to
+`search_terms_log.csv`.
+
+**Coverage gap — `scholars_portal` is not transient, it is fully blocked from
+this sandbox.** 0/125 terms searched: every single query failed with
+`ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed:
+403 Forbidden'))` against `borealisdata.ca`. None of those terms' watermarks
+advanced, so a future run re-attempts all 125 once the connector is reachable
+again — but per the SKILL's own rule, a source missing an entire run is a bug
+to chase, not a transient to wave off, especially stacked on top of
+`scholars_portal`'s already-measured 0.8% shipped rate (2026-10-29b). `surf`
+missed 15/125 (self-reported JSON decode errors, "Expecting value: line 1
+column 1"), `datacite` missed 2, `zenodo` missed 1 — those three look like
+ordinary transient misses by comparison.
+
+**Triage** (`irw_batch_updated.py --retriage --resume --limit 150`) — hit the
+150 cap; 8,477 already-seen keys were excluded before the cap even started
+counting. `good` 1 · `human_assistance` 27 · `no_usable_file` 69 ·
+`download_failed` 43 (figshare 35, osf 3, datacite 3, surf 1, dryad 1) ·
+`below_min_n` 3 · `license_restricted` 3 · `pii_suspected` 3 ·
+`not_item_response` 1.
+
+**Step 2b ran** (chained via `--retriage`) over the 27 `human_assistance`
+rows: `recoverable_format` 18 (67%) · `worth_retrying` 5 (19%) ·
+`human_review` 3 (11%) · `not_item_response` 1 (4%) · `conj`/
+`wrong_file_selected`/`aggregate_continuous` 0 each. The 3 `human_review` rows
+were archived to `human_review/human_review_zenodo_2026-11-03.csv`; all 27
+refined flags were written back into `repo_triage_seen_keys.csv`.
+
+**The one `good` row:** "Dataset, Questionnaire, dan Codebook: The Impact of
+Financial Literacy, Self-Control, and Paylater Usage Intensity on the
+Financial Stability of Income-Earning Generation Z in the Greater Jakarta
+Area" — zenodo 10.5281/zenodo.22135733, CC BY, 177 participants, 16 items.
+Not yet fit/licence-judged beyond what the triage script itself computed
+(e.g. the `good` flag doesn't re-check the N>=100 floor or composite-score
+columns).
+
+**23 more leads** (5 `worth_retrying`, 18 `recoverable_format`) carried as
+`unworked` alongside the `good` row in `leads/repos_leads_2026-11-03.csv`
+(columns `source,title,url,doi,license,flag,refined_flag,n_participants,
+n_items,status,note`), so none of them dies in `runs/`.
+
+**Item text:** not assessed — Step 3 was never reached in this batch.
 
 The 2026-10-30 session worked the 104 `good` leads of the recycled-terms pass
 and stopped; the other 1,259 rows of `leads/plos_leads_2026-10-30.csv` (every

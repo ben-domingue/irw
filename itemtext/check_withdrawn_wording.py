@@ -112,13 +112,25 @@ def store_drift():
     """
     if not STORE.is_dir():
         return ()
-    have = blocked_before_shipping()
+    #: A reinstated table keeps its store copy as history but is published
+    #: again, so it belongs on neither list.
+    have = blocked_before_shipping() | reinstated()
     return tuple(sorted(
         re.sub(r"__items\.csv$", "", name).lower()
         for name in os.listdir(STORE)
         if name.endswith("__items.csv")
         and re.sub(r"__items\.csv$", "", name).lower() not in have
     ))
+
+
+def reinstated():
+    """Tables whose rights withdrawal was undone by a later grant."""
+    with open(WITHDRAWALS, encoding="utf-8-sig") as f:
+        return {
+            re.sub(r"__items$", "", (row.get("table") or "")).lower()
+            for row in csv.DictReader(f)
+            if (row.get("reinstated") or "").strip()
+        }
 
 
 def withdrawn_for_rights():

@@ -1,0 +1,141 @@
+collection,table,verdict,basis,n_items,n_mapped,n_near,proposal,reason
+bfi10,christensen_2017_bfi10,NAME_ONLY,name,10.0,0.0,0.0,ACCEPT,10 items vs 10: full scale by count; basis name
+bfi10,heekerens_2025_bfi10,NAME_ONLY,name,10.0,0.0,0.0,ACCEPT,10 items vs 10: full scale by count; basis name
+bfi10,mendezlopez_2023_bfi10,NAME_ONLY,name,11.0,0.0,0.0,ACCEPT,11 items vs 10: full scale by count; basis name
+bfi10,schadelbauer_2023_bfi,NAME_ONLY,name,11.0,0.0,0.0,ACCEPT,11 items vs 10: full scale by count; basis name
+bfi10,thiessen_2023_bfi10,NAME_ONLY,name,10.0,0.0,0.0,ACCEPT,10 items vs 10: full scale by count; basis name
+bfi10,zhang_2019_bfi10,NAME_ONLY,name,10.0,0.0,0.0,ACCEPT,10 items vs 10: full scale by count; basis name
+brief_cope,kolanska_stronka_2026_mini_cope,NAME_ONLY,name,28.0,0.0,0.0,ACCEPT,28 items vs 28: full scale by count; basis name
+cesd,american_multiracial_face,NOT_A_CANDIDATE,,,,,DECIDE,scout did not pick it up (name token only in the arrears check); hand call
+cesd,chen_2022_cesd,NAME_ONLY,name,10.0,0.0,0.0,REJECT,10 items vs 20: short form by count
+cesd,chen_2024_cesd,NAME_ONLY,name,20.0,0.0,0.0,ACCEPT,20 items vs 20: full scale by count; basis name
+cesd,goldberg_2018_eps_cesd,PARTIAL,,24.0,8.0,8.0,DECIDE,24 items vs 20: more items than the instrument (combined table or lengthened form?)
+cesd,granwald_2025_cesd,NAME_ONLY,name,20.0,0.0,0.0,ACCEPT,20 items vs 20: full scale by count; basis name
+cesd,hissink_2025_physical_demands,NOT_A_CANDIDATE,,,,,DECIDE,scout did not pick it up (name token only in the arrears check); hand call
+cesd,perez_hernandez_2021_cesd7,NAME_ONLY,name,7.0,0.0,0.0,REJECT,7 items vs 20: short form by count
+cesd,RD_PPCSEDSOF_Afable_2023,PARTIAL,,11.0,10.0,1.0,REJECT,11 items vs 20: short form by count
+cesd,syafrijon_2026_sdc,NOT_A_CANDIDATE,,,,,DECIDE,scout did not pick it up (name token only in the arrears check); hand call
+cesd,szigeti_2022_cesd,NAME_ONLY,name,20.0,0.0,0.0,ACCEPT,20 items vs 20: full scale by count; basis name
+dass21,bak_sosnowska_2025_dass21,NAME_ONLY,name,21.0,0.0,0.0,ACCEPT,21 items vs 21: full scale by count; basis name
+dass21,bateman_2026_dass21,NAME_ONLY,name,21.0,0.0,0.0,ACCEPT,21 items vs 21: full scale by count; basis name
+dass21,bottesi_2019_dass21,NAME_ONLY,name,21.0,0.0,0.0,ACCEPT,21 items vs 21: full scale by count; basis name
+dass21,dass21_2026_22766055,NAME_ONLY,name,21.0,0.0,0.0,ACCEPT,21 items vs 21: full scale by count; basis name
+dass21,dassean_2025_dass21,NAME_ONLY,name,21.0,0.0,0.0,ACCEPT,21 items vs 21: full scale by count; basis name
+dass21,espinoza_2024_dass21,NAME_ONLY,name,21.0,0.0,0.0,ACCEPT,21 items vs 21: full scale by count; basis name
+dass21,gerou_2023_dass21,MATCH,supplied,21.0,21.0,0.0,ACCEPT,wording matches (21.0/21 key items); basis supplied
+dass21,mclean_2022_dass21,NAME_ONLY,name,21.0,0.0,0.0,ACCEPT,21 items vs 21: full scale by count; basis name
+dass21,premkumar_2020_dass21,MATCH,supplied,21.0,21.0,0.0,ACCEPT,wording matches (21.0/21 key items); basis supplied
+dass21,rathod_2026_dass21,MATCH,supplied,21.0,17.0,3.0,ACCEPT,wording matches (17.0/21 key items); basis supplied
+dass21,shen_2025_dass21,MATCH,supplied,21.0,21.0,0.0,ACCEPT,wording matches (21.0/21 key items); basis supplied
+dass21,tornoczky_2026_dass21,NAME_ONLY,name,21.0,0.0,0.0,ACCEPT,21 items vs 21: full scale by count; basis name
+dass21,yu_2025_dass21,NAME_ONLY,name,21.0,0.0,0.0,ACCEPT,21 items vs 21: full scale by count; basis name
+erq,yang_2026_erq,NAME_ONLY,name,14.0,0.0,0.0,REJECT,"14 items: the Chinese 14-item ERQ, which collections/README names as a lengthened adaptation (not a member)"
+fcv19s,fcv19s_hossain_2022_anxiety,NO_MATCH,,7.0,0.0,0.0,REJECT,"English text, under 2 key items match: a different instrument"
+fcv19s,fcv19s_hossain_2022_depression,NAME_ONLY,name,5.0,0.0,0.0,REJECT,5 items vs 7: short form by count
+gad7,baseke_2026_gad7,PARTIAL,,7.0,4.0,1.0,ACCEPT,"7/7 items, partial wording map (4.0 mapped): check form"
+gad7,chaple_gil_2021_gad7,NAME_ONLY,name,7.0,0.0,0.0,ACCEPT,7 items vs 7: full scale by count; basis name
+gad7,faruk_2021_gad7,MATCH,supplied,7.0,6.0,1.0,ACCEPT,wording matches (6.0/7 key items); basis supplied
+gad7,fox_2023_gad7,MATCH,supplied,7.0,7.0,0.0,ACCEPT,wording matches (7.0/7 key items); basis supplied
+gad7,gao_2024_gad7,NAME_ONLY,name,7.0,0.0,0.0,ACCEPT,7 items vs 7: full scale by count; basis name
+gad7,heekerens_2025_gad7,NAME_ONLY,name,7.0,0.0,0.0,ACCEPT,7 items vs 7: full scale by count; basis name
+gad7,kasparek_2025_gad7,MATCH,supplied,7.0,6.0,0.0,ACCEPT,wording matches (6.0/7 key items); basis supplied
+gad7,luttenberger_2021_gad7,NAME_ONLY,name,7.0,0.0,0.0,ACCEPT,7 items vs 7: full scale by count; basis name
+gad7,mendezlopez_2023_gad7,NAME_ONLY,name,7.0,0.0,0.0,ACCEPT,7 items vs 7: full scale by count; basis name
+gad7,perez_hernandez_2021_gad7,NAME_ONLY,name,7.0,0.0,0.0,ACCEPT,7 items vs 7: full scale by count; basis name
+gad7,takacs_2026_gad7,MATCH,supplied,7.0,6.0,0.0,ACCEPT,wording matches (6.0/7 key items); basis supplied
+gad7,zhang_2019_gad7,NAME_ONLY,name,7.0,0.0,0.0,ACCEPT,7 items vs 7: full scale by count; basis name
+gse,guzmanmuzante_2025_gse,NAME_ONLY,name,10.0,0.0,0.0,ACCEPT,10 items vs 10: full scale by count; basis name
+gse,heekerens_2025_gse,NAME_ONLY,name,3.0,0.0,0.0,REJECT,3 items vs 10: short form by count
+gse,luttenberger_2021_gse,NAME_ONLY,name,10.0,0.0,0.0,ACCEPT,10 items vs 10: full scale by count; basis name
+gse,makkiyah_2023_gse,NAME_ONLY,name,10.0,0.0,0.0,ACCEPT,10 items vs 10: full scale by count; basis name
+gse,mutuyimana_2026_gse,NAME_ONLY,name,9.0,0.0,0.0,ACCEPT,9 items vs 10: full scale by count; basis name
+gse,sun_2018_gse,NAME_ONLY,name,10.0,0.0,0.0,ACCEPT,10 items vs 10: full scale by count; basis name
+isi,begum_2026_isi,NAME_ONLY,name,7.0,0.0,0.0,ACCEPT,7 items vs 7: full scale by count; basis name
+lotr,antunez_2015_lotr,NAME_ONLY,name,10.0,0.0,0.0,ACCEPT,10 items vs 10: full scale by count; basis name
+lotr,islam_2021_lotr,NAME_ONLY,name,10.0,0.0,0.0,ACCEPT,10 items vs 10: full scale by count; basis name
+lotr,stapleton_2021_lotr,NAME_ONLY,name,6.0,0.0,0.0,REJECT,6 items vs 10: short form by count
+mspss,cao_2024_mspss,NAME_ONLY,name,12.0,0.0,0.0,ACCEPT,12 items vs 12: full scale by count; basis name
+mspss,gwen_2025_social_support,NAME_ONLY,name,3.0,0.0,0.0,REJECT,3 items vs 12: short form by count
+mspss,huang_2025_perceived_social_support,NAME_ONLY,name,12.0,0.0,0.0,ACCEPT,12 items vs 12: full scale by count; basis name
+mspss,li_2023_social_support,NAME_ONLY,name,12.0,1.0,0.0,ACCEPT,12 items vs 12: full scale by count; basis name
+panas,andreu_sanchez_2023_panas,NAME_ONLY,name,20.0,0.0,0.0,ACCEPT,20 items vs 20: full scale by count; basis name
+panas,caprara_2020_panas,NAME_ONLY,name,20.0,0.0,0.0,ACCEPT,20 items vs 20: full scale by count; basis name
+panas,diazgarcia_2018_panas,NAME_ONLY,name,20.0,0.0,0.0,ACCEPT,20 items vs 20: full scale by count; basis name
+panas,fcupanas_cffsdas_reyna_2018_7pt,NOT_A_CANDIDATE,,,,,DECIDE,scout did not pick it up (name token only in the arrears check); hand call
+panas,ghasemy_2025_ipanas_sf,NAME_ONLY,name,9.0,0.0,0.0,REJECT,9 items vs 20: short form by count
+panas,iwai_2023_panas10,NAME_ONLY,name,10.0,0.0,0.0,ACCEPT,10 items = one whole subscale by count; basis name
+panas,kankova_2025_postpartum_panas,NAME_ONLY,name,20.0,0.0,0.0,ACCEPT,20 items vs 20: full scale by count; basis name
+panas,mairean_2024_panas,NAME_ONLY,name,20.0,0.0,0.0,ACCEPT,20 items vs 20: full scale by count; basis name
+panas,manylabs2_klein_2018_panas,NAME_ONLY,name,20.0,0.0,0.0,ACCEPT,20 items vs 20: full scale by count; basis name
+panas,manylabs4_klein_2022_panasx,NAME_ONLY,name,60.0,0.0,0.0,REJECT,"60 items: PANAS-X, the expanded form, not the PANAS (README: lengthened adaptations are out)"
+panas,rajeev_2025_panas,MATCH,supplied,20.0,20.0,0.0,ACCEPT,wording matches (20.0/20 key items); basis supplied
+panas,tang_2024_panas_negative,NAME_ONLY,name,7.0,0.0,0.0,REJECT,7 items vs 20: short form by count
+panas,tang_2024_panas_positive,NAME_ONLY,name,5.0,0.0,0.0,REJECT,5 items vs 20: short form by count
+panas,tornoczky_2026_panas,NAME_ONLY,name,20.0,0.0,0.0,ACCEPT,20 items vs 20: full scale by count; basis name
+panas,van_beveren_2019_panasc,NAME_ONLY,name,30.0,0.0,0.0,REJECT,"30 items: PANAS-C, the children's instrument, a different scale from the PANAS"
+panas,wang_2026_panas_na,NAME_ONLY,name,5.0,0.0,0.0,REJECT,5 items vs 20: short form by count
+panas,wang_2026_panas_pa,NAME_ONLY,name,5.0,0.0,0.0,REJECT,5 items vs 20: short form by count
+panas,wolf_2017_study1_posaff,PARTIAL,,12.0,12.0,0.0,REJECT,12 items vs 20: short form by count
+panas,wolf_2017_study2_posaff_post,PARTIAL,,12.0,12.0,0.0,REJECT,12 items vs 20: short form by count
+panas,wolf_2017_study2_posaff_pre,PARTIAL,,8.0,8.0,0.0,REJECT,8 items vs 20: short form by count
+pcl5,ahmed_2025_pcl5,NAME_ONLY,name,20.0,0.0,0.0,ACCEPT,20 items vs 20: full scale by count; basis name
+pcl5,gulec_2023_pcl5,NAME_ONLY,name,20.0,0.0,0.0,ACCEPT,20 items vs 20: full scale by count; basis name
+pcl5,sandoz_2021_pcl5,NAME_ONLY,name,20.0,0.0,0.0,ACCEPT,20 items vs 20: full scale by count; basis name
+phq9,ashik_2026_phq9,NAME_ONLY,name,9.0,0.0,0.0,ACCEPT,9 items vs 9: full scale by count; basis name
+phq9,bacon_2025_phq9,NAME_ONLY,name,9.0,0.0,0.0,ACCEPT,9 items vs 9: full scale by count; basis name
+phq9,burchert_2019_phq9,NAME_ONLY,name,9.0,0.0,0.0,ACCEPT,9 items vs 9: full scale by count; basis name
+phq9,diazgarcia_2018_phq9,NAME_ONLY,name,9.0,0.0,0.0,ACCEPT,9 items vs 9: full scale by count; basis name
+phq9,faruk_2021_phq9,MATCH,supplied,9.0,8.0,2.0,ACCEPT,wording matches (8.0/9 key items); basis supplied
+phq9,gambin_2020_phq9,MATCH,supplied,9.0,9.0,2.0,ACCEPT,wording matches (9.0/9 key items); basis supplied
+phq9,gao_2024_phq9,NAME_ONLY,name,9.0,0.0,0.0,ACCEPT,9 items vs 9: full scale by count; basis name
+phq9,granwald_2025_phq9,NAME_ONLY,name,9.0,0.0,0.0,ACCEPT,9 items vs 9: full scale by count; basis name
+phq9,heekerens_2025_phq9,NAME_ONLY,name,9.0,0.0,0.0,ACCEPT,9 items vs 9: full scale by count; basis name
+phq9,islam_2021_phq9,NAME_ONLY,name,9.0,0.0,0.0,ACCEPT,9 items vs 9: full scale by count; basis name
+phq9,karim_2022_phq9,MATCH,wording,9.0,9.0,2.0,ACCEPT,wording matches (9.0/9 key items); basis wording
+phq9,luttenberger_2021_phq9,NAME_ONLY,name,9.0,0.0,0.0,ACCEPT,9 items vs 9: full scale by count; basis name
+phq9,marian_2023_phq9,MATCH,supplied,9.0,9.0,0.0,ACCEPT,wording matches (9.0/9 key items); basis supplied
+phq9,mendezlopez_2023_phq9,NAME_ONLY,name,9.0,0.0,0.0,ACCEPT,9 items vs 9: full scale by count; basis name
+phq9,sekowski_2023_phq9,NAME_ONLY,name,9.0,0.0,0.0,ACCEPT,9 items vs 9: full scale by count; basis name
+phq9,takacs_2026_phq9,MATCH,supplied,9.0,9.0,0.0,ACCEPT,wording matches (9.0/9 key items); basis supplied
+phq9,usc_2026_phq9,NAME_ONLY,name,9.0,0.0,0.0,ACCEPT,9 items vs 9: full scale by count; basis name
+phq9,wilkins_2018_phq9,NAME_ONLY,name,9.0,0.0,0.0,ACCEPT,9 items vs 9: full scale by count; basis name
+phq9,yao_2023_depression,NAME_ONLY,name,9.0,0.0,0.0,ACCEPT,9 items vs 9: full scale by count; basis name
+phq9,zhang_2019_phq9,NAME_ONLY,name,9.0,0.0,0.0,ACCEPT,9 items vs 9: full scale by count; basis name
+pss10,duplaga_2026_pss10,NAME_ONLY,name,10.0,0.0,0.0,ACCEPT,10 items vs 10: full scale by count; basis name
+pss10,fox_2023_pss10,NAME_ONLY,name,10.0,0.0,0.0,ACCEPT,10 items vs 10: full scale by count; basis name
+pss10,gori_2020_pss10,NAME_ONLY,name,10.0,0.0,0.0,ACCEPT,10 items vs 10: full scale by count; basis name
+pss10,kankova_2025_postpartum_pss10,NAME_ONLY,name,10.0,0.0,0.0,ACCEPT,10 items vs 10: full scale by count; basis name
+pss10,lane_2020_pss,NAME_ONLY,name,10.0,0.0,0.0,ACCEPT,10 items vs 10: full scale by count; basis name
+pss10,meyer_2022_pss10,NAME_ONLY,name,10.0,0.0,0.0,ACCEPT,10 items vs 10: full scale by count; basis name
+pss10,tavolacci_2017_pss10,NAME_ONLY,name,10.0,0.0,0.0,ACCEPT,10 items vs 10: full scale by count; basis name
+pss10,zheng_2017_pss10,NAME_ONLY,name,10.0,0.0,0.0,ACCEPT,10 items vs 10: full scale by count; basis name
+rses,altinsoy_2024_ol_satisfaction,NOT_A_CANDIDATE,,,,,DECIDE,scout did not pick it up (name token only in the arrears check); hand call
+rses,contreras_valdez_2026_rses,NAME_ONLY,name,8.0,0.0,0.0,ACCEPT,8 items vs 10: full scale by count; basis name
+rses,darko_2025_rses,MATCH,supplied,10.0,10.0,0.0,ACCEPT,wording matches (10.0/10 key items); basis supplied
+rses,duplaga_2026_dcqfn,NOT_A_CANDIDATE,,,,,DECIDE,scout did not pick it up (name token only in the arrears check); hand call
+rses,ehealth_rioux_2025_rses,NAME_ONLY,name,4.0,0.0,0.0,REJECT,4 items vs 10: short form by count
+rses,fong_2023_rses,NAME_ONLY,name,10.0,0.0,0.0,ACCEPT,10 items vs 10: full scale by count; basis name
+rses,gomez_meza_2025_rses,NAME_ONLY,name,10.0,0.0,0.0,ACCEPT,10 items vs 10: full scale by count; basis name
+rses,luttenberger_2021_rses,NAME_ONLY,name,10.0,0.0,0.0,ACCEPT,10 items vs 10: full scale by count; basis name
+rses,mclean_2022_rses,NAME_ONLY,name,10.0,0.0,0.0,ACCEPT,10 items vs 10: full scale by count; basis name
+rses,mendezlopez_2023_rses,NAME_ONLY,name,10.0,0.0,0.0,ACCEPT,10 items vs 10: full scale by count; basis name
+rses,vezhodulu_2025_rses,NAME_ONLY,name,10.0,0.0,0.0,ACCEPT,10 items vs 10: full scale by count; basis name
+swls,atik_2025_swls,NAME_ONLY,name,5.0,0.0,0.0,ACCEPT,5 items vs 5: full scale by count; basis name
+swls,gori_2020_swls,NAME_ONLY,name,5.0,0.0,0.0,ACCEPT,5 items vs 5: full scale by count; basis name
+swls,hung_2026_swls,NAME_ONLY,name,5.0,0.0,0.0,ACCEPT,5 items vs 5: full scale by count; basis name
+swls,hung_2026b_swls,NAME_ONLY,name,5.0,0.0,0.0,ACCEPT,5 items vs 5: full scale by count; basis name
+swls,manylabs2_klein_2018_swls,NAME_ONLY,name,5.0,0.0,0.0,ACCEPT,5 items vs 5: full scale by count; basis name
+swls,ramirezparedes_2026_swls,NAME_ONLY,name,5.0,0.0,0.0,ACCEPT,5 items vs 5: full scale by count; basis name
+swls,rzeszutek_2023_swls,NAME_ONLY,name,5.0,0.0,0.0,ACCEPT,5 items vs 5: full scale by count; basis name
+swls,tornoczky_2026_swls,NAME_ONLY,name,5.0,0.0,0.0,ACCEPT,5 items vs 5: full scale by count; basis name
+swls,zheng_2017_swls,NAME_ONLY,name,5.0,0.0,0.0,ACCEPT,5 items vs 5: full scale by count; basis name
+tipi,blaszyk_2023_tipi,NAME_ONLY,name,10.0,0.0,0.0,ACCEPT,10 items vs 10: full scale by count; basis name
+tipi,degirolamo_2022_tipi,NAME_ONLY,name,10.0,0.0,0.0,ACCEPT,10 items vs 10: full scale by count; basis name
+tipi,gulec_2023_tipi,NAME_ONLY,name,10.0,0.0,0.0,ACCEPT,10 items vs 10: full scale by count; basis name
+tipi,henderson_2023_lapanel_tipi,NAME_ONLY,name,10.0,0.0,0.0,ACCEPT,10 items vs 10: full scale by count; basis name
+tipi,kam_2015_tipi,NAME_ONLY,name,10.0,0.0,0.0,ACCEPT,10 items vs 10: full scale by count; basis name
+tipi,kayir_2026_tipi,NAME_ONLY,name,10.0,0.0,0.0,ACCEPT,10 items vs 10: full scale by count; basis name
+tipi,manylabs2_klein_2018_tipi,NAME_ONLY,name,10.0,0.0,0.0,ACCEPT,10 items vs 10: full scale by count; basis name
+tipi,manylabs3_ebersole_2016_tipi,NAME_ONLY,name,10.0,0.0,0.0,ACCEPT,10 items vs 10: full scale by count; basis name
+tipi,martindelcampo_2020_tipi,PARTIAL,,10.0,4.0,0.0,ACCEPT,"10/10 items, partial wording map (4.0 mapped): check form"
+tipi,stapleton_2021_tipi,NAME_ONLY,name,10.0,0.0,0.0,ACCEPT,10 items vs 10: full scale by count; basis name

@@ -1,3 +1,8 @@
+## SUPERSEDED -- DO NOT RUN AS IS (ben-domingue/irw#3229, 2026-11-02).
+## It rebuilds itemtext_metadata.csv from scratch with the columns of its day,
+## so it would DROP `language` and `language_source` (#3224), and its fk_score()
+## is the whole-text definition #3229 replaced. For FK_grade use
+## hotfixes/fk_grade_per_item.R, which patches that one column.
 ## One-time full recompute of itemtext_metadata.csv for ALL tables.
 ## Run this when adding FK_grade or other new columns to the schema,
 ## then switch back to 08_itemtext.R for incremental updates.
