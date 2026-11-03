@@ -36,7 +36,14 @@
 #   column stems, lower-cased (except the loneliness codes, see below):
 #   shiota_2026_panas        PANAS, 20 adjectives, 1 = not at all ..
 #       5 = extremely. Weekly, wave 1-4 = survey days 1/8/15/22. Codes are
-#       panas_<adjective> (panas_interested ... panas_afraid).
+#       panas1-panas20 in the standard PANAS order (Watson, Clark & Tellegen
+#       1988), which is the order of the PANAS list below: panas1 interested,
+#       2 distressed, 3 excited, 4 upset, 5 strong, 6 guilty, 7 scared,
+#       8 hostile, 9 enthusiastic, 10 proud, 11 irritable, 12 alert,
+#       13 ashamed, 14 inspired, 15 nervous, 16 determined, 17 attentive,
+#       18 jittery, 19 active, 20 afraid. NOT panas_<adjective>: each PANAS
+#       item IS its one adjective, so that code would publish the wording,
+#       which the rights register blocks (renamed 2026-11-02 before upload).
 #   shiota_2026_dass21       DASS-21, dass1-dass21 in DASS-21 order, coded
 #       1 = not at all, 2 = rarely, 3 = sometimes, 4 = most of the time (NOT
 #       the usual 0-3: shipped as recorded). Weekly, wave 1-4 = weeks 1-4.
@@ -55,9 +62,12 @@
 #       abandoned") and the avoidance items worded toward closeness are NOT
 #       reversed.
 #   shiota_2026_tipi         Ten-Item Personality Inventory (TIPI) word pairs
-#       ("Extraverted, enthusiastic", ...), b5_<first word> codes, 1 = disagree
-#       strongly .. 7 = agree strongly. Baseline only. Reverse items NOT
-#       reversed.
+#       ("Extraverted, enthusiastic", ...), codes tipi1-tipi10 in the
+#       published TIPI item order (TIPI_ORDER below; source columns are
+#       B5_<first word>, in a different order), 1 = disagree strongly ..
+#       7 = agree strongly. Baseline only. Reverse items (2, 4, 6, 8, 10) NOT
+#       reversed. Not b5_<word>: that code carries half of each item's
+#       wording, and TIPI has no rights-register row (renamed 2026-11-02).
 #
 # Five isolated out-of-range cells are DROPPED (data-entry slips: each occurs
 #   once, in week 3, against thousands of in-range responses on the same
@@ -147,6 +157,12 @@ REL = ["time_of_need", "reassurance", "pulling_back", "get_close",
        "nervous_too_close", "worry_care_as_much"]
 B5 = ["extraverted", "reserved", "sympathetic", "critical", "dependable",
       "disorganized", "calm", "anxious", "open", "conventional"]
+# TIPI item numbers as published (Gosling, Rentfrow & Swann 2003): the codes
+# are tipi1-tipi10 in that order, not the source's column order above.
+TIPI_ORDER = ["extraverted", "critical", "dependable", "anxious", "open",
+              "reserved", "sympathetic", "disorganized", "calm",
+              "conventional"]
+assert sorted(TIPI_ORDER) == sorted(B5)
 RACE = ["White", "Black", "Hispanic", "EastAsian", "SouthAsian",
         "NativeAmerican", "MiddleEastern", "Other"]
 SLIPS = {"PANAS_inspired_day15": 6, "PANAS_attentive_day15": 6,
@@ -189,7 +205,8 @@ def tables(df):
     """table -> (list of (wave or None, {source col: item code}), scale)."""
     out = {}
     out["shiota_2026_panas"] = (
-        [(w + 1, {f"PANAS_{a}_day{d}": f"panas_{a}" for a in PANAS})
+        [(w + 1, {f"PANAS_{a}_day{d}": f"panas{i}"
+          for i, a in enumerate(PANAS, start=1)})
          for w, d in enumerate(PANAS_DAYS)], [1, 2, 3, 4, 5])
     out["shiota_2026_dass21"] = (
         [(w, {f"dass{i}_w{w}": f"dass{i}" for i in range(1, 22)})
@@ -200,7 +217,7 @@ def tables(df):
     out["shiota_2026_ecr_s"] = (
         [(None, {f"REL_{s}": f"rel_{s}" for s in REL})], list(range(1, 8)))
     out["shiota_2026_tipi"] = (
-        [(None, {f"B5_{s}": f"b5_{s}" for s in B5})], list(range(1, 8)))
+        [(None, {f"B5_{s}": f"tipi{TIPI_ORDER.index(s) + 1}" for s in B5})], list(range(1, 8)))
     return out
 
 
