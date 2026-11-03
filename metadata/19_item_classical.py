@@ -105,9 +105,11 @@ from __future__ import annotations
 
 import argparse
 import csv
+import io
 import math
 import os
 import re
+import subprocess
 import sys
 import time
 from concurrent.futures import ThreadPoolExecutor
@@ -241,6 +243,25 @@ def summarise(rs: list[dict]) -> dict:
             "prop_items_extreme": fmt(extreme, 4)}
 
 
+def committed_summaries() -> dict[str, dict]:
+    """The tier-0 columns as committed: metadata.csv at git HEAD, keyed by
+    table. Read from git rather than the working file because 01_metadata.R
+    has already rewritten that without them by the time this stage runs.
+    Empty when there is no git (a tarball) or no such columns yet."""
+    try:
+        out = subprocess.run(["git", "-C", str(HERE), "show", "HEAD:./metadata.csv"],
+                             capture_output=True, text=True, encoding="utf-8",
+                             check=True).stdout
+    except (OSError, subprocess.CalledProcessError):
+        return {}
+    rows = list(csv.DictReader(io.StringIO(out.lstrip("\ufeff"))))
+    if not rows or not all(f in rows[0] for f in SUMMARY_FIELDS):
+        return {}
+    return {r["table"]: {k: ("" if r.get(k) in (None, "NA") else r[k])
+                         for k in SUMMARY_FIELDS + ["n_responses"]}
+            for r in rows}
+
+
 def plan_batches(todo: list[dict]) -> list[list[dict]]:
     """Greedy packing under all three caps. Tables arrive in rotation order and
     stay in it: a batch is a contiguous run, so an interrupted run resumes where
@@ -338,6 +359,7 @@ def main() -> int:
 
     now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
     failures: list[tuple[str, str]] = []
+    done_tables: set[str] = set()
 
     if batches:
         tok = Path("~/.redivis_api_token").expanduser()
@@ -349,7 +371,10 @@ def main() -> int:
         def run(sql):
             for attempt in range(RETRIES):
                 try:
-                    return redivis.query(sql).to_pandas_dataframe()
+                    # progress=False: redivis 0.22 tests its tqdm bar for
+                    # truth, which tqdm 4.70 makes raise TypeError when the
+                    # row count is unknown -- every query failed on CI 11-02.
+                    return redivis.query(sql).to_pandas_dataframe(progress=False)
                 except Exception as exc:  # noqa: BLE001
                     if "429" in str(exc) and attempt < RETRIES - 1:
                         time.sleep(15)
@@ -371,7 +396,6 @@ def main() -> int:
                 return rows, bad
 
         t0 = time.time()
-        done_tables: set[str] = set()
         with ThreadPoolExecutor(max_workers=args.workers) as pool:
             for w in range(0, len(batches), args.workers):
                 elapsed = time.time() - t0
@@ -441,16 +465,33 @@ def main() -> int:
     # every run. 01_metadata.R rebuilds metadata.csv from base.cols and drops
     # anything else, so these have to be re-joined each time rather than carried
     # -- which also means the store, not metadata.csv, is the single source.
-    n_filled = 0
+    #
+    # Except where the store has nothing for a table this run did not compute.
+    # The store is not committed (.gitignore), so a fresh checkout -- every CI
+    # run -- starts it empty, and a run that cannot reach every table (budget,
+    # failures) would otherwise blank the columns for the rest. On 2026-11-02
+    # that was 6,973 of 7,144 rows (PR #3379). Those rows keep the values the
+    # committed metadata.csv carries, provided n_responses has not moved since.
+    previous = committed_summaries()
+    n_filled = n_carried = 0
     for r in meta:
         rs = items_by_table.get(r["table"], [])
         r.update(summarise(rs))
         if rs:
             n_filled += 1
+            continue
+        old = previous.get(r["table"])
+        if (r["table"] not in done_tables and old is not None
+                and num(old.get("n_responses")) == r["_n_responses"]
+                and any(old.get(f) for f in SUMMARY_FIELDS)):
+            r.update({f: old.get(f, "") for f in SUMMARY_FIELDS})
+            n_filled += 1
+            n_carried += 1
     fields = [f for f in meta[0] if not f.startswith("_") and f not in SUMMARY_FIELDS]
     write_csv(METADATA, fields + SUMMARY_FIELDS, meta)
     print(f"metadata.csv: {n_filled} of {len(meta)} row(s) carry tier-0 columns "
-          f"({100 * n_filled / len(meta):.1f}%)")
+          f"({100 * n_filled / len(meta):.1f}%; {n_carried} carried from the "
+          f"committed metadata.csv, not recomputed)")
     return 0
 
 
