@@ -12084,3 +12084,4 @@ date,query,output_file,notes
 2026-11-02,اختبار الإدراك الموسيقي,candidates_2026-11-02.csv,"repos sweep 2026-11-02 (mode 3); 15 new topics x 9 languages; 680 candidates, 220 triaged (11 good, 49 human_assistance)"
 2026-11-02,muziekwaarneming test,candidates_2026-11-02.csv,"repos sweep 2026-11-02 (mode 3); 15 new topics x 9 languages; 680 candidates, 220 triaged (11 good, 49 human_assistance)"
 2026-11-02,음악 지각 검사,candidates_2026-11-02.csv,"repos sweep 2026-11-02 (mode 3); 15 new topics x 9 languages; 680 candidates, 220 triaged (11 good, 49 human_assistance)"
+2026-11-03,[weekly] 15 terms x journals=plosone,runs/plos_monthly_candidates_weekly_2026-11-03.csv,"plos monthly-script automated run; mode=weekly; 60 candidates triaged; 13/15 terms visited (10 hit per-term cap 4, 0 out of attempts)"
