@@ -446,6 +446,7 @@ dss_mouta_2021,"Escala de Estilos de Decisão (DSS) -- Brazilian Portuguese adap
 duckmayr_2023_immigration,"Immigration policy statements (Duck-Mayr & Montgomery 2023, Lucid survey)",19.4,118.7,17.6,12.463431372549,English,standard_omission
 dudasova_2021_cpc12,"Compound Psychological Capital Scale (CPC-12), Czech translation",9.33333333333333,45.8333333333333,14,4.23666666666667,Czech,table
 dudasova_2021_cpc12_study3,Compound Psychological Capital Scale (CPC-12),12.1666666666667,60.1666666666667,6.5,4.84271929824562,German,table
+dudasova_2021_gratitude,Gratitude Questionnaire-Six Item Form (GQ-6),1,2,11.7142857142857,-3.4,Czech,table
 dulger2024_wordcompletion,Scenario Completion Task and Memory Recognition Task (word-fragment completion component),1,8.23333333333333,19,8.4,English,standard_omission
 dumas_Organisciak_2022,NA,1,4.7,7.4,NA,unknown,unestablished
 dumas_organisciak_2022,NA,1,4.7,7.4,NA,unknown,unestablished
@@ -796,6 +797,7 @@ gilbert_meta_94,Collection of poverty indicators,4.11764705882353,26.88235294117
 gilbert_meta_95,"Key Features Questions on clinical reasoning in urinary tract infection, from a randomised trial of ChatGPT versus expert feedback (Cicek, Ulker, Ozer & Kiyak, 'ChatGPT versus expert feedback on clinical reasoning questions and their effect on learning: a randomized controlled trial', Postgraduate Medical Journal, doi:10.1093/postmj/qgae170); deposit zenodo.org/records/13769970, CC BY 4.0",23.6666666666667,147.333333333333,2,13.4366666666667,English,standard_omission
 gilbert_meta_96,AI attitudes,12.5,69,6.42857142857143,NA,unknown,unestablished
 gilbert_meta_97,Psychological capital,11.1666666666667,57.3333333333333,12.5,NA,unknown,unestablished
+gilbert_meta_98,Gratitude,15,72.1666666666667,11.7142857142857,5.92277777777778,English,standard_omission
 gilbert_meta_99,religiosity,15.5625,86.75,5.125,NA,unknown,unestablished
 girma_2021_oslo3,Oslo Social Support Scale (OSSS-3),15.3571428571429,76.1428571428571,6,5.20666666666667,English,standard_omission
 girma_2021_phq9,"Patient Health Questionnaire-9 (PHQ-9; Kroenke, Spitzer & Williams, 2001)",1,2,15.25,-3.4,Amharic or Afaan Oromo,table
@@ -1675,6 +1677,7 @@ pellerin2020_asti,"Adult Self-Transcendence Inventory (ASTI), self-transcendence
 pellerin2020_cpc_hope,"Compound Psychological Capital Questionnaire (CPC-12), Hope subscale",13,60,5.85714285714286,NA,French,table
 pellerin2020_cpc_optimism,"Compound Psychological Capital Scale (CPC-12), Optimism subscale",1,2,5.85714285714286,-3.4,French,table
 pellerin2020_cpc_selfefficacy,"Compound Psychological Capital Questionnaire (CPC-12), Self-efficacy subscale",12.3333333333333,70.6666666666667,5.85714285714286,NA,French,table
+pellerin2020_gq6,Gratitude Questionnaire-Six Item Form (GQ-6),15,72.3333333333333,11.7142857142857,NA,French,table
 pemaiw_qiu_2020_dass,"Depression Anxiety Stress Scales - 21 Items (DASS-21; Lovibond & Lovibond, 1995)",9.66666666666667,50.5238095238095,44.75,NA,unknown,unestablished
 PEMAIW_Qiu_2020_DASS,Depression Anxiety Stress Scales - 21 Items (DASS-21),9.71428571428571,51.3809523809524,45,4.79090909090909,English,standard_omission
 PEMAIW_Qiu_2020_FFMQ,Five Facet Mindfulness Questionnaire (FFMQ),13.1282051282051,72.6410256410256,17,7.77333333333333,English,standard_omission
@@ -1791,6 +1794,7 @@ psychoneurotic_inventory,Woodworth Psychoneurotic Inventory,9.26724137931035,46.
 psychotools_conspiracist,Measure of belief in conspiracy theories,15.5333333333333,98.4666666666667,17.2,NA,unknown,unestablished
 psychotools_gratitude_gac,"The GAC is the sum of the affect adjectives grateful, thankful, and appreciative. The GAC can be used to measure gratitude as an emotion, mood, or disposition depending on the timeframe specified in the instructions",1,9.33333333333333,9.6,NA,unknown,unestablished
 psychotools_gratitude_gart,measures adults’ sense of abundance in life and appreciation of others.,14.375,76.5,16.4444444444444,NA,unknown,unestablished
+psychotools_gratitude_gq6,a six-item self-report scale for measuring a grateful disposition in adult populations,15,72.1666666666667,11.7142857142857,5.92277777777778,English,standard_omission
 psychtools_athenstaedt,Gender role self-concept inventory,3.93243243243243,21.6486486486486,5.71428571428571,NA,unknown,unestablished
 psychtools_bfi,ipip personality data from the SAPA project,4.4,25.72,17.3333333333333,NA,unknown,unestablished
 psychtools_msq,Motivational State Questionnaire,1.06666666666667,7.09333333333333,9.25,NA,unknown,unestablished

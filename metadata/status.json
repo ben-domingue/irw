@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-03T03:30:58+0000",
+  "generated": "2026-11-04T21:09:41+0000",
   "source": "metadata/11_status.R -- local pipeline CSVs, no Redivis calls",
   "n_tables": 7371,
   "coverage": {
@@ -115,7 +115,7 @@
       }
     },
     "itemtext": {
-      "n": 2608,
+      "n": 2612,
       "pct": 35.4
     }
   },
