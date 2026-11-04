@@ -275,11 +275,30 @@ if (refresh.per.run>0) {
   just.fetched<-if (length(nms)>0) nms else character(0)
   candidates<-setdiff(intersect(summaries$table,new.tables),just.fetched)
   rlog<-read_refresh_log()
-  ##never-refreshed tables sort first, then oldest refresh first
+  ##Tables whose live content hash differs from the hash their row was computed
+  ##against sort FIRST: the row is known to describe a previous version of the
+  ##table. Age alone missed these for weeks (#3391): a re-upload that keeps the
+  ##row count but renames or drops a column -- gilbert_meta_56 (#2800),
+  ##gries_2011_moral_foundations (#3299/#3300) -- or a rebuild like
+  ##figure_skating waited its turn in a five-week rotation while metadata.csv
+  ##published columns that no longer existed. The live hash comes from the
+  ##list_tables() properties already in hand, so this costs no query. A row
+  ##logged before the hash column existed (NA) cannot be judged and keeps its
+  ##place by age. Then never-refreshed tables, then oldest refresh first.
   last.at<-rlog$refreshed_at[match(candidates,rlog$table)]
   last.time<-suppressWarnings(as.POSIXct(last.at,tz="UTC"))
-  ord<-order(is.na(last.time)==FALSE, last.time, candidates) ##NA (never) first, then oldest, name as tiebreak
+  logged.hash<-as.character(rlog$hash[match(candidates,rlog$table)])
+  live.hash<-vapply(candidates,function(tb) {
+    h<-tryCatch(tables[[match(tb,new.tables)]]$properties$hash,error=function(e) NULL)
+    if (is.null(h)) NA_character_ else as.character(h)
+  },character(1),USE.NAMES=FALSE)
+  hash.moved<-!is.na(logged.hash) & nzchar(logged.hash) & !is.na(live.hash) & logged.hash!=live.hash
+  ord<-order(!hash.moved, is.na(last.time)==FALSE, last.time, candidates) ##moved first, then NA (never), then oldest, name as tiebreak
   todo.refresh<-head(candidates[ord],refresh.per.run)
+  if (any(hash.moved))
+    message("refresh pass: ",sum(hash.moved)," table(s) changed since their row was computed, taken first: ",
+            paste(utils::head(candidates[hash.moved],20),collapse=", "),
+            if (sum(hash.moved)>20) ", ..." else "")
   message("refresh pass: ",length(todo.refresh)," of ",length(candidates),
           " existing table(s) this run (refresh.per.run=",refresh.per.run,")")
 

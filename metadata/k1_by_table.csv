@@ -2025,7 +2025,7 @@ figalova_2021_stai_trait,3,cov_age|cov_education|cov_sex,387,137,387,49,0.1266,0
 figueroaquinones_2026_jss4,2,cov_age|cov_sex,1215,74,1215,13,0.0107,0.0642,ok
 figueroaquinones_2026_nmq,2,cov_age|cov_sex,1215,74,1215,13,0.0107,0.0642,ok
 figueroaquinones_2026_phq4,2,cov_age|cov_sex,1215,74,1215,13,0.0107,0.0642,ok
-figure_skating,0,,1676,1,1676,0,0,0,no_qi
+figure_skating,0,,319,1,319,0,0,0,no_qi
 fims_tam,0,,6371,1,6371,0,0,0,no_qi
 firstborn_personality,0,,41841,1,41841,0,0,0,no_qi
 fischer_2018_eq5d5l,9,cov_age|cov_country|cov_education|cov_gender|cov_household|cov_income|cov_marital|cov_occupation|cov_weight,4512,4486,4512,4462,0.9889,1,ok
@@ -2350,6 +2350,7 @@ gilbert_meta_52,1,cov_household_size,102873,10,102873,0,0,0,ok
 gilbert_meta_53,0,,1880,1,1880,0,0,0,no_qi
 gilbert_meta_54,0,,1880,1,1880,0,0,0,no_qi
 gilbert_meta_55,3,cov_age|cov_income|cov_male,1763,1682,1763,1607,0.9115,1,ok
+gilbert_meta_56,2,cov_age|cov_female,2712,22,2712,2,0.0007,0.0044,ok
 gilbert_meta_57,3,cov_age|cov_educ|cov_household_size,1154,858,1154,651,0.5641,0.9662,ok
 gilbert_meta_58,3,cov_age|cov_educ|cov_household_size,1154,858,1154,651,0.5641,0.9662,ok
 gilbert_meta_59,3,cov_age|cov_educ|cov_household_size,1154,858,1154,651,0.5641,0.9662,ok
@@ -2557,7 +2558,7 @@ graziotin_2021_f5,0,,142,1,142,0,0,0,no_qi
 green_2025_job_impact,3,cov_age|cov_degree|cov_female,3975,209,3975,9,0.0023,0.0093,ok
 green_2025_policy_preferences,3,cov_age|cov_degree|cov_female,4041,207,4041,8,0.002,0.0101,ok
 greenhough_2021_tri2,2,cov_age_band|cov_gender,207,17,207,3,0.0145,0.087,ok
-gries_2011_moral_foundations,8,cov_age|cov_education|cov_hispanic|cov_ideology_5pt|cov_income|cov_male|cov_race|cov_state,1000,1000,1000,1000,1,1,ok
+gries_2011_moral_foundations,7,cov_age|cov_education|cov_hispanic|cov_ideology_5pt|cov_income|cov_male|cov_race,1000,981,1000,962,0.962,1,ok
 grit,0,,3162,1,3162,0,0,0,no_qi
 grit_BrummerHoffman_2021,0,,1828,1,1828,0,0,0,no_qi
 guatemala_2024_homes_avenues,3,cov_age|cov_educ|cov_sex,6868,737,6868,149,0.0217,0.091,ok
@@ -5121,17 +5122,17 @@ PROMISPME_Forrest_2021_Family_Proxy,0,,1845,1,1845,0,0,0,no_qi
 PROMISPME_Forrest_2021_GHGlobal_Children,0,,3635,1,3635,0,0,0,no_qi
 PROMISPME_Forrest_2021_GHGlobal_Proxy,0,,1807,1,1807,0,0,0,no_qi
 PROMISPME_Forrest_2021_LS_Children,0,,1992,1,1992,0,0,0,no_qi
-PROMISPME_Forrest_2021_LS_Proxy,0,,964,1,964,0,0,0,no_qi
+PROMISPME_Forrest_2021_LS_Proxy,0,,963,1,963,0,0,0,no_qi
 PROMISPME_Forrest_2021_MP_Children,0,,1895,1,1895,0,0,0,no_qi
-PROMISPME_Forrest_2021_MP_Proxy,0,,927,1,927,0,0,0,no_qi
+PROMISPME_Forrest_2021_MP_Proxy,0,,926,1,926,0,0,0,no_qi
 PROMISPME_Forrest_2021_Physical_Children,0,,3854,1,3854,0,0,0,no_qi
-PROMISPME_Forrest_2021_Physical_Proxy,0,,1957,1,1957,0,0,0,no_qi
+PROMISPME_Forrest_2021_Physical_Proxy,0,,1956,1,1956,0,0,0,no_qi
 PROMISPME_Forrest_2021_PosAff_Children,0,,1874,1,1874,0,0,0,no_qi
 PROMISPME_Forrest_2021_PosAff_Proxy,0,,909,1,909,0,0,0,no_qi
 PROMISPME_Forrest_2021_Psych_Children,0,,1874,1,1874,0,0,0,no_qi
 PROMISPME_Forrest_2021_Psych_Proxy,0,,913,1,913,0,0,0,no_qi
 PROMISPME_Forrest_2021_Strength_Children,0,,1824,1,1824,0,0,0,no_qi
-PROMISPME_Forrest_2021_Strength_Proxy,0,,918,1,918,0,0,0,no_qi
+PROMISPME_Forrest_2021_Strength_Proxy,0,,917,1,917,0,0,0,no_qi
 protestant_workethic,0,,1350,1,1350,0,0,0,no_qi
 przybylski_2016_igd,6,cov_age_band|cov_country|cov_gender|cov_income|cov_region|cov_urban_density,8658,497,8658,167,0.0193,0.0655,ok
 psa001_jones_2021_face_traits,0,,120,1,120,0,0,0,no_qi
