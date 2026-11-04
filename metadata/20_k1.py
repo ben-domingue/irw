@@ -432,9 +432,26 @@ def main() -> int:
                 print(f"  {min(w + args.workers, len(batches))}/{len(batches)} batches  "
                       f"{int(time.time() - t0)}s  {len(done)} tables", flush=True)
         print(f"queried {len(done)} table(s) in {int(time.time() - t0)}s")
-        if failures:
-            print(f"  ! {len(failures)} table(s) failed and keep their previous row:")
-            for t, err in failures[:20]:
+        # A column metadata.csv names that the live table does not have is not
+        # a transient failure: `variables` is stale, so the previous k=1 row was
+        # computed over a schema that has since been replaced. Carrying it would
+        # keep publishing a figure that counts a dropped column (gries_2011's
+        # cov_state, #3391). Blank the row instead and say why; it is recomputed
+        # once metadata.csv is refreshed (refresh_rows.R, or stage 01, which
+        # takes tables whose content hash moved first). The QI list is NOT
+        # intersected with the live schema -- that would hide the next one.
+        stale = [(t, err) for t, err in failures if "Unrecognized name" in err]
+        if stale:
+            print(f"  ! {len(stale)} table(s) query a column metadata.csv lists but the "
+                  f"live table lacks -- `variables` is stale; k=1 row blanked, "
+                  f"refresh these rows (metadata/refresh_rows.R):")
+            for t, err in stale:
+                stored.pop(t, None)
+                print(f"    {t}: {err}")
+        other = [(t, err) for t, err in failures if "Unrecognized name" not in err]
+        if other:
+            print(f"  ! {len(other)} table(s) failed and keep their previous row:")
+            for t, err in other[:20]:
                 print(f"    {t}: {err}")
 
     # The no-QI tables, every run: they cost nothing and #3273 asked for them.
