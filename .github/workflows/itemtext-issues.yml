@@ -97,7 +97,17 @@ jobs:
           rm -f refresh.txt
           # The header carries the snapshot date, so compare the table rows only;
           # a date-only change is not worth a PR.
-          if git diff -U0 -- itemtext/live_tables.csv | grep -E '^[+-][^+#-]' -q; then
+          #
+          # No `grep -q` on a pipe here: under pipefail, grep -q exiting at the
+          # first match can SIGPIPE `git diff` and turn a real change into
+          # "unchanged". From 2026-11-02 the refresh found 2,627 tables against
+          # the committed 2,837 and still skipped the snapshot PR three days
+          # running, so the checker judged liveness from a stale file and
+          # reported 96 withdrawn tables as owing entries. Count instead, and
+          # say what was decided so a skip is never silent again.
+          n=$(git diff -U0 -- itemtext/live_tables.csv | grep -cE '^[+-][^+#-]' || true)
+          echo "live_tables.csv: $n table row(s) added or removed vs main"
+          if [ "${n:-0}" -gt 0 ]; then
             echo "changed=true" >> "$GITHUB_OUTPUT"
           else
             echo "changed=false" >> "$GITHUB_OUTPUT"
