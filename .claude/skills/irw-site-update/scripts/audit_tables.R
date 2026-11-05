@@ -105,10 +105,13 @@ dict_urls <- c(
 ## Each sheet's automated rows (#1732, #2628). They reach biblio without ever
 ## being in the sheet, so a sheet-only read reports every staged table as
 ## missing from the dictionary. Relative to --dir, which is metadata/.
+## conj has no sheet at all (Ben, 2026-10-07; see 02_biblio.R): its dictionary is
+## dictionary_auto_conj.csv alone, so it appears here and not in dict_urls.
 dict_auto_csvs <- c(core = "../automated_finding/dictionary_auto.csv",
                     comp = "../automated_finding/dictionary_auto_comps.csv",
                     nom  = "../automated_finding/dictionary_auto_nom.csv",
-                    sim  = "../automated_finding/dictionary_auto_sim.csv")
+                    sim  = "../automated_finding/dictionary_auto_sim.csv",
+                    conj = "../automated_finding/dictionary_auto_conj.csv")
 
 lc <- function(x) tolower(trimws(as.character(x)))
 
@@ -123,13 +126,20 @@ get_live <- function(src) {
 
 get_dict <- function(src) {
   if (skip_dict) return(NULL)
-  tab <- tryCatch(gsheet::gsheet2tbl(dict_urls[[src]]), error = function(e) {
-    message("  ! dictionary sheet fetch failed for '", src, "': ", conditionMessage(e))
-    NULL
-  })
-  if (is.null(tab) || !"table" %in% names(tab)) return(NULL)
-  if ("Public Reshare?" %in% names(tab)) tab <- tab[tab$`Public Reshare?` == "Public", ]
-  out <- lc(tab$table)
+  if (src %in% names(dict_urls)) {
+    tab <- tryCatch(gsheet::gsheet2tbl(dict_urls[[src]]), error = function(e) {
+      message("  ! dictionary sheet fetch failed for '", src, "': ", conditionMessage(e))
+      NULL
+    })
+    if (is.null(tab) || !"table" %in% names(tab)) return(NULL)
+    if ("Public Reshare?" %in% names(tab)) tab <- tab[tab$`Public Reshare?` == "Public", ]
+    out <- lc(tab$table)
+  } else if (src %in% names(dict_auto_csvs)) {
+    ## A sheetless source (conj): the automated file is the whole dictionary.
+    out <- character(0)
+  } else {
+    return(NULL)
+  }
   auto_path <- file.path(dir_path, dict_auto_csvs[[src]])
   if (file.exists(auto_path)) {
     auto <- suppressMessages(readr::read_csv(auto_path, show_col_types = FALSE,
