@@ -39,6 +39,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 DESIGN = HERE / "design_tables.csv"
+from rank_common import upsert_design as upsert
 API = "https://en.wikipedia.org/w/api.php"
 UA = {"User-Agent": "irw-rankings/1.0 (https://github.com/ben-domingue/irw; itemresponsewarehouse@stanford.edu)"}
 YEARS = {2023: (6, 4, 3, 2, 1), 2024: (15, 12, 10, 8, 7, 5, 4, 3, 2, 1), 2025: (15, 12, 10, 8, 7, 5, 4, 3, 2, 1)}
@@ -170,20 +171,6 @@ def build(raw_dir: Path, out_dir: Path, years: list[int]) -> int:
         print(f"{table}: {len(rows)} jurors, {len(players)} players, {len(out)} rows, totals {'match the standings' if not mism else 'MISMATCH ' + str(mism[:3])}")
         assert not mism, mism
     return 0
-
-
-def upsert(record: dict) -> None:
-    rows = []
-    with open(DESIGN, newline="") as f:
-        for r in csv.DictReader(f):
-            if r["table"] != record["table"]:
-                rows.append(r)
-    rows.append(record)
-    rows.sort(key=lambda r: r["table"])
-    with open(DESIGN, "w", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=list(record), lineterminator="\n")
-        w.writeheader()
-        w.writerows(rows)
 
 
 if __name__ == "__main__":
