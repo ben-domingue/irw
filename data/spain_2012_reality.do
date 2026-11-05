@@ -468,7 +468,7 @@ export delimited using "spain_2012_reality_participation.csv", replace
 * ============================================================
 * personality (P3701 to P3710)
 * 1-5 self-description on ten cognitive and personality statements, si completamente to no en absoluto
-* code 3 (Ni si ni no) is marked (NO LEER) and is recoded to missing per the NO LEER rule; exported values are 1, 2, 4, 5
+* code 3 (Ni si ni no) is marked (NO LEER) and kept as the middle answer (irw#2864, as #2843)
 * 8/9 recoded
 * ============================================================
 
@@ -478,16 +478,16 @@ local survey_cols p3701 p3702 p3703 p3704 p3705 p3706 p3707 p3708 p3709 p3710
 
 keep id cov_* `survey_cols'
 
-replace p3701 = . if inlist(p3701, 3, 8, 9)
-replace p3702 = . if inlist(p3702, 3, 8, 9)
-replace p3703 = . if inlist(p3703, 3, 8, 9)
-replace p3704 = . if inlist(p3704, 3, 8, 9)
-replace p3705 = . if inlist(p3705, 3, 8, 9)
-replace p3706 = . if inlist(p3706, 3, 8, 9)
-replace p3707 = . if inlist(p3707, 3, 8, 9)
-replace p3708 = . if inlist(p3708, 3, 8, 9)
-replace p3709 = . if inlist(p3709, 3, 8, 9)
-replace p3710 = . if inlist(p3710, 3, 8, 9)
+replace p3701 = . if inlist(p3701, 8, 9)
+replace p3702 = . if inlist(p3702, 8, 9)
+replace p3703 = . if inlist(p3703, 8, 9)
+replace p3704 = . if inlist(p3704, 8, 9)
+replace p3705 = . if inlist(p3705, 8, 9)
+replace p3706 = . if inlist(p3706, 8, 9)
+replace p3707 = . if inlist(p3707, 8, 9)
+replace p3708 = . if inlist(p3708, 8, 9)
+replace p3709 = . if inlist(p3709, 8, 9)
+replace p3710 = . if inlist(p3710, 8, 9)
 
 tempfile long_data
 save `long_data', emptyok replace

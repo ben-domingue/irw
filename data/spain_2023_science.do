@@ -438,7 +438,7 @@ export delimited using "spain_2023_science_dangers.csv", replace
 * ============================================================
 * future (P12, P13)
 * 1-5 benefits and risks in the next 20 years
-* code 3 is a (NO LEER) volunteered midpoint, recoded to missing
+* code 3 is a (NO LEER) volunteered midpoint, kept as the middle answer (irw#2864, as #2843)
 * ============================================================
 
 use "spain_2023_science_master.dta", clear
@@ -447,8 +447,8 @@ local survey_cols p12 p13
 
 keep id cov_* `survey_cols'
 
-replace p12 = . if inlist(p12, 3, 8, 9)
-replace p13 = . if inlist(p13, 3, 8, 9)
+replace p12 = . if inlist(p12, 8, 9)
+replace p13 = . if inlist(p13, 8, 9)
 
 tempfile long_data
 save `long_data', emptyok replace

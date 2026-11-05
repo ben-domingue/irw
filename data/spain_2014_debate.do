@@ -177,7 +177,7 @@ export delimited using "spain_2014_debate_debate.csv", replace
 * ============================================================
 * leaders (P13_1 to P13_17)
 * 1-5 rating of each leader's performance in the debate, muy bien to muy mal
-* code 3 (Regular) is marked (No leer) and is recoded to missing per the NO LEER rule
+* code 3 (Regular) is marked (No leer) and kept as the middle answer (irw#2864, as #2843)
 * code 7 (No leer) does not know the leader is a non-scale code, recoded to missing; 8/9 recoded
 * ============================================================
 
@@ -187,23 +187,23 @@ local survey_cols p13_1 p13_2 p13_3 p13_4 p13_5 p13_6 p13_7 p13_8 p13_9 p13_10 p
 
 keep id cov_* `survey_cols'
 
-replace p13_1 = . if inlist(p13_1, 3, 7, 8, 9)
-replace p13_2 = . if inlist(p13_2, 3, 7, 8, 9)
-replace p13_3 = . if inlist(p13_3, 3, 7, 8, 9)
-replace p13_4 = . if inlist(p13_4, 3, 7, 8, 9)
-replace p13_5 = . if inlist(p13_5, 3, 7, 8, 9)
-replace p13_6 = . if inlist(p13_6, 3, 7, 8, 9)
-replace p13_7 = . if inlist(p13_7, 3, 7, 8, 9)
-replace p13_8 = . if inlist(p13_8, 3, 7, 8, 9)
-replace p13_9 = . if inlist(p13_9, 3, 7, 8, 9)
-replace p13_10 = . if inlist(p13_10, 3, 7, 8, 9)
-replace p13_11 = . if inlist(p13_11, 3, 7, 8, 9)
-replace p13_12 = . if inlist(p13_12, 3, 7, 8, 9)
-replace p13_13 = . if inlist(p13_13, 3, 7, 8, 9)
-replace p13_14 = . if inlist(p13_14, 3, 7, 8, 9)
-replace p13_15 = . if inlist(p13_15, 3, 7, 8, 9)
-replace p13_16 = . if inlist(p13_16, 3, 7, 8, 9)
-replace p13_17 = . if inlist(p13_17, 3, 7, 8, 9)
+replace p13_1 = . if inlist(p13_1, 7, 8, 9)
+replace p13_2 = . if inlist(p13_2, 7, 8, 9)
+replace p13_3 = . if inlist(p13_3, 7, 8, 9)
+replace p13_4 = . if inlist(p13_4, 7, 8, 9)
+replace p13_5 = . if inlist(p13_5, 7, 8, 9)
+replace p13_6 = . if inlist(p13_6, 7, 8, 9)
+replace p13_7 = . if inlist(p13_7, 7, 8, 9)
+replace p13_8 = . if inlist(p13_8, 7, 8, 9)
+replace p13_9 = . if inlist(p13_9, 7, 8, 9)
+replace p13_10 = . if inlist(p13_10, 7, 8, 9)
+replace p13_11 = . if inlist(p13_11, 7, 8, 9)
+replace p13_12 = . if inlist(p13_12, 7, 8, 9)
+replace p13_13 = . if inlist(p13_13, 7, 8, 9)
+replace p13_14 = . if inlist(p13_14, 7, 8, 9)
+replace p13_15 = . if inlist(p13_15, 7, 8, 9)
+replace p13_16 = . if inlist(p13_16, 7, 8, 9)
+replace p13_17 = . if inlist(p13_17, 7, 8, 9)
 
 tempfile long_data
 save `long_data', emptyok replace
