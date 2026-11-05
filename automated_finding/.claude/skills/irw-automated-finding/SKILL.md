@@ -213,6 +213,11 @@ python irw_batch_updated.py runs/candidates.csv --out runs/irw_triage.csv --retr
 python irw_batch_updated.py runs/candidates.csv --out runs/irw_triage.csv --retriage --resume   # if interrupted
 ```
 
+**The scheduled repos run also passes `--backlog repo_triage_backlog.csv`**
+(#3388). It triages candidates an earlier capped or failed run still owes before
+the new ones, and writes back what this run's `--limit` left. Without it the
+remainder past the cap is lost for good. PLOS/PMC/one-off runs leave it off.
+
 **Pass `--retriage` on any scheduled or unattended run.** It chains Step 2b
 in-process over this run's `human_assistance` rows, writing
 `<out>.retriage_ha.csv`. Without it the step was reliably skipped — see
