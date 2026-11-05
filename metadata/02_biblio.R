@@ -431,6 +431,10 @@ getrows<-function(l) {
                      "URL__for_data_",
                      "Original_License", "Derived_License", "Custom_License_Terms",
                      "Description", "BibTex", "Source_via")]
+    ## A table found directly has no `Source_via`. write_csv() would print that NA
+    ## as the text "NA", which every reader takes as an aggregator named NA: 7,454
+    ## rows on 2026-11-05, and R's irw_save_bibtex() collected it (#2886). Blank it.
+    biblio$Source_via[is.na(biblio$Source_via)] <- ""
     readr::write_csv(biblio, file.out)
 }
 
