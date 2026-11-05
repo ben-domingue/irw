@@ -44,15 +44,15 @@ local survey_cols p5_1 p5_2 p5_3 p5_4 p5_5 p5_6 p5_7 p5_8 p5_9
 
 keep id cov_* `survey_cols'
 
-replace p5_1 = . if inlist(p5_1, 3, 8, 9)
-replace p5_2 = . if inlist(p5_2, 3, 8, 9)
-replace p5_3 = . if inlist(p5_3, 3, 8, 9)
-replace p5_4 = . if inlist(p5_4, 3, 8, 9)
-replace p5_5 = . if inlist(p5_5, 3, 8, 9)
-replace p5_6 = . if inlist(p5_6, 3, 8, 9)
-replace p5_7 = . if inlist(p5_7, 3, 8, 9)
-replace p5_8 = . if inlist(p5_8, 3, 8, 9)
-replace p5_9 = . if inlist(p5_9, 3, 8, 9)
+replace p5_1 = . if inlist(p5_1, 8, 9)
+replace p5_2 = . if inlist(p5_2, 8, 9)
+replace p5_3 = . if inlist(p5_3, 8, 9)
+replace p5_4 = . if inlist(p5_4, 8, 9)
+replace p5_5 = . if inlist(p5_5, 8, 9)
+replace p5_6 = . if inlist(p5_6, 8, 9)
+replace p5_7 = . if inlist(p5_7, 8, 9)
+replace p5_8 = . if inlist(p5_8, 8, 9)
+replace p5_9 = . if inlist(p5_9, 8, 9)
 
 tempfile long_data
 save `long_data', emptyok replace

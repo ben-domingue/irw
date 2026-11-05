@@ -350,7 +350,7 @@ export delimited using "spain_2017_politics_agreement.csv", replace
 **# Table 9: attitudes
 
 * ============================================================
-* attitudes (P25) | code 3 is the volunteered (NO LEER) midpoint, recoded to missing
+* attitudes (P25) | code 3 is the volunteered (NO LEER) midpoint, kept as the middle answer (irw#2864, as #2843)
 * ============================================================
 
 use "spain_2017_master.dta", clear
@@ -359,9 +359,9 @@ local survey_cols p2501 p2502 p2503
 
 keep id cov_* `survey_cols'
 
-replace p2501 = . if inlist(p2501, 3, 8, 9)
-replace p2502 = . if inlist(p2502, 3, 8, 9)
-replace p2503 = . if inlist(p2503, 3, 8, 9)
+replace p2501 = . if inlist(p2501, 8, 9)
+replace p2502 = . if inlist(p2502, 8, 9)
+replace p2503 = . if inlist(p2503, 8, 9)
 
 tempfile long_data
 save `long_data', emptyok replace

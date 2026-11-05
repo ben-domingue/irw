@@ -260,7 +260,7 @@ export delimited using "spain_2016_pain_frequency.csv", replace
 * ============================================================
 * difficulty (P16, P17)
 * 1-5 difficulty the most relevant pain causes in daily and social activity
-* code 3 (Algo) is a (NO LEER) volunteered midpoint, recoded to missing; 0 is N.P., recoded to missing
+* code 3 (Algo) is a (NO LEER) volunteered midpoint, kept as the middle answer (irw#2864, as #2843); 0 is N.P., recoded to missing
 * ============================================================
 
 use "spain_2016_pain_master.dta", clear
@@ -269,8 +269,8 @@ local survey_cols p16 p17
 
 keep id cov_* `survey_cols'
 
-replace p16 = . if inlist(p16, 0, 3, 8, 9)
-replace p17 = . if inlist(p17, 0, 3, 8, 9)
+replace p16 = . if inlist(p16, 0, 8, 9)
+replace p17 = . if inlist(p17, 0, 8, 9)
 
 * QC: tabulate every item after recodes
 
@@ -544,7 +544,7 @@ export delimited using "spain_2016_pain_social.csv", replace
 * ============================================================
 * personality (P27_1 to P27_10)
 * 1-5 self-description on personality traits
-* code 3 (Ni si, ni no) is a (NO LEER) volunteered midpoint, recoded to missing
+* code 3 (Ni si, ni no) is a (NO LEER) volunteered midpoint, kept as the middle answer (irw#2864, as #2843)
 * ============================================================
 
 use "spain_2016_pain_master.dta", clear
@@ -553,16 +553,16 @@ local survey_cols p27_1 p27_2 p27_3 p27_4 p27_5 p27_6 p27_7 p27_8 p27_9 p27_10
 
 keep id cov_* `survey_cols'
 
-replace p27_1 = . if inlist(p27_1, 3, 8, 9)
-replace p27_2 = . if inlist(p27_2, 3, 8, 9)
-replace p27_3 = . if inlist(p27_3, 3, 8, 9)
-replace p27_4 = . if inlist(p27_4, 3, 8, 9)
-replace p27_5 = . if inlist(p27_5, 3, 8, 9)
-replace p27_6 = . if inlist(p27_6, 3, 8, 9)
-replace p27_7 = . if inlist(p27_7, 3, 8, 9)
-replace p27_8 = . if inlist(p27_8, 3, 8, 9)
-replace p27_9 = . if inlist(p27_9, 3, 8, 9)
-replace p27_10 = . if inlist(p27_10, 3, 8, 9)
+replace p27_1 = . if inlist(p27_1, 8, 9)
+replace p27_2 = . if inlist(p27_2, 8, 9)
+replace p27_3 = . if inlist(p27_3, 8, 9)
+replace p27_4 = . if inlist(p27_4, 8, 9)
+replace p27_5 = . if inlist(p27_5, 8, 9)
+replace p27_6 = . if inlist(p27_6, 8, 9)
+replace p27_7 = . if inlist(p27_7, 8, 9)
+replace p27_8 = . if inlist(p27_8, 8, 9)
+replace p27_9 = . if inlist(p27_9, 8, 9)
+replace p27_10 = . if inlist(p27_10, 8, 9)
 
 * QC: tabulate every item after recodes
 
