@@ -38,4 +38,4 @@ df_long <- df %>%
   ) %>%
   select(id, item, resp, cov_sample)
 #Export Data
-write.csv(df_long, "selfcompassionscale_shortform_fuochi_2025.csv", row.names = FALSE)
+write.csv(df_long, "selfcompassionscale_shortform_fuochi_2025.csv", row.names = FALSE, na = "")
