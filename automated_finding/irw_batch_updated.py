@@ -1103,10 +1103,69 @@ def append_oversized(rows) -> None:
           flush=True)
 
 
+# Candidates found but not yet triaged, carried between runs (irw#3388, ruled
+# 2026-11-04 option b). A capped run (--limit) used to drop everything past the
+# cap: the candidate CSV lives in the gitignored runs/ directory and dies with
+# the cloud container, while each search term's watermark has already moved to
+# the run date, so the remainder never came back. With --backlog the run
+# triages these rows first and writes back what is still owed:
+#   * rows the cap did not reach, unchanged;
+#   * download_failed / error rows, with `attempts` + 1 -- they are kept out of
+#     the ledger so they can be retried, and this file is now where the retry
+#     comes from. After BACKLOG_MAX_ATTEMPTS they are dropped and listed.
+# A row already in the seen-keys ledger is dropped on read. An option, not the
+# default: the PLOS, PMC and one-off runs share this script.
+BACKLOG_EXTRA = ["first_seen", "attempts"]
+BACKLOG_MAX_ATTEMPTS = 3
+
+
+def load_backlog(path: str) -> tuple[list[dict], list[str]]:
+    if not os.path.exists(path):
+        return [], []
+    with open(path, newline="", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        return list(reader), list(reader.fieldnames or [])
+
+
+def write_backlog(path: str, rows: list[dict], fieldnames: list[str]) -> None:
+    cols = [c for c in fieldnames if c not in BACKLOG_EXTRA] + BACKLOG_EXTRA
+    tmp = path + ".tmp"
+    with open(tmp, "w", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=cols, extrasaction="ignore", lineterminator="\n")
+        w.writeheader()
+        for r in rows:
+            w.writerow({c: r.get(c, "") for c in cols})
+    os.replace(tmp, path)
+
+
+def _merge_backlog(backlog_rows: list[dict], new_rows: list[dict], today: str) -> list[dict]:
+    """Backlog first, then new candidates; one row per key, the backlog's copy winning
+    (it carries first_seen and attempts)."""
+    out, keys = [], set()
+    for r in backlog_rows + [{**r, "first_seen": r.get("first_seen") or today,
+                              "attempts": r.get("attempts") or "0"} for r in new_rows]:
+        k = _key(r)
+        if k in keys:
+            continue
+        keys.add(k)
+        out.append(r)
+    return out
+
+
 def run_batch(candidates_csv: str, out_csv: str, limit: int | None,
               resume: bool, checkpoint: str = CHECKPOINT,
-              ignore_seen_keys: bool = False) -> pd.DataFrame:
-    rows = list(csv.DictReader(open(candidates_csv, encoding="utf-8")))
+              ignore_seen_keys: bool = False,
+              backlog: str | None = None) -> pd.DataFrame:
+    with open(candidates_csv, newline="", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        rows = list(reader)
+        fieldnames = list(reader.fieldnames or [])
+
+    if backlog:
+        backlog_rows, backlog_cols = load_backlog(backlog)
+        fieldnames += [c for c in backlog_cols if c not in fieldnames]
+        rows = _merge_backlog(backlog_rows, rows, datetime.date.today().isoformat())
+        print(f"Backlog {backlog}: {len(backlog_rows):,} row(s) triaged first", flush=True)
 
     global_seen = set() if ignore_seen_keys else load_seen_keys()
     if global_seen:
@@ -1114,8 +1173,9 @@ def run_batch(candidates_csv: str, out_csv: str, limit: int | None,
               f"run (manual or scheduled -- see {SEEN_KEYS_PATH})")
         rows = [r for r in rows if _key(r) not in global_seen]
 
+    leftover = []
     if limit:
-        rows = rows[:limit]
+        rows, leftover = rows[:limit], rows[limit:]
 
     done = load_done(checkpoint) if resume else {}
     if resume and done:
@@ -1124,6 +1184,7 @@ def run_batch(candidates_csv: str, out_csv: str, limit: int | None,
         os.remove(checkpoint)   # fresh run
 
     results = list(done.values())
+    by_key = dict(done)
     newly_seen = []
     n_retryable = 0
     blocked_srcs: dict[str, str] = {}   # source -> why, once it hard-blocks
@@ -1146,6 +1207,7 @@ def run_batch(candidates_csv: str, out_csv: str, limit: int | None,
                    "density": "", "data_file": ""}
             append_checkpoint(checkpoint, k, res)
             results.append(res)
+            by_key[k] = res
             n_retryable += 1
             continue
         print(f"[{i}/{len(rows)}] {row.get('source',''):9} "
@@ -1157,6 +1219,7 @@ def run_batch(candidates_csv: str, out_csv: str, limit: int | None,
                   f"rows this run (they stay retryable)", flush=True)
         append_checkpoint(checkpoint, k, res)
         results.append(res)
+        by_key[k] = res
         if res.get("flag") not in TRANSIENT_FLAGS:
             newly_seen.append((k, res.get("flag")))
         else:
@@ -1177,6 +1240,26 @@ def run_batch(candidates_csv: str, out_csv: str, limit: int | None,
 
     if not ignore_seen_keys:
         append_seen_keys(newly_seen)
+
+    if backlog:
+        owed, retired = [], []
+        for row in rows:
+            res = by_key.get(_key(row))
+            if res is None:            # not reached (a crash mid-run): still owed
+                owed.append(row)
+            elif res.get("flag") in TRANSIENT_FLAGS:
+                # a row skipped because its source was blocked was never tried
+                tried = not str(res.get("reasons", "")).startswith("skipped --")
+                n = int(row.get("attempts") or 0) + (1 if tried else 0)
+                (retired if n >= BACKLOG_MAX_ATTEMPTS else owed).append({**row, "attempts": str(n)})
+        owed += leftover
+        write_backlog(backlog, owed, fieldnames)
+        print(f"Backlog {backlog}: {len(owed):,} row(s) still owed "
+              f"({len(leftover):,} past the cap, {len(owed) - len(leftover):,} to retry)",
+              flush=True)
+        for r in retired:
+            print(f"        dropped after {BACKLOG_MAX_ATTEMPTS} failed attempts: "
+                  f"{r.get('source', '')} {_key(r)}", flush=True)
 
     df = pd.DataFrame(results)
     if not df.empty:
@@ -1200,6 +1283,12 @@ def main():
                     help=f"don't consult/update {SEEN_KEYS_PATH} (the cross-run dedup "
                          "store shared with the scheduled repos routine) -- use to "
                          "deliberately re-triage a candidate, e.g. after a script fix")
+    ap.add_argument("--backlog", default=None,
+                    help="tracked CSV of candidates still owed a triage (irw#3388): "
+                         "triaged before CANDIDATES_CSV, and rewritten with whatever "
+                         "the --limit cap left plus download_failed/error rows to "
+                         f"retry (dropped after {BACKLOG_MAX_ATTEMPTS} attempts). The "
+                         "repos routine passes repo_triage_backlog.csv")
     ap.add_argument("--retriage", action="store_true",
                     help="on finishing, run irw_retriage_ha.py over this run's "
                          "human_assistance rows (Step 2b) and write "
@@ -1216,7 +1305,8 @@ def main():
     args.checkpoint = os.path.splitext(args.out)[0] + ".checkpoint.jsonl"
     df = run_batch(args.candidates_csv, args.out, args.limit, args.resume,
                    checkpoint=args.checkpoint,
-                   ignore_seen_keys=args.ignore_seen_keys)
+                   ignore_seen_keys=args.ignore_seen_keys,
+                   backlog=args.backlog)
     print("\n" + "=" * 50)
     if df.empty:
         print("No results.")

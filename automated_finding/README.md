@@ -629,10 +629,32 @@ Because `file_too_large` is a sticky verdict, capped candidates are also
 appended to **`oversized_candidates.csv`** (date, source, title, url, doi,
 licence, file, reason) — they are real datasets a person can still process
 on a bigger machine, and the ledger would otherwise swallow them silently.
+
+**`--backlog <csv>` carries what a run still owes into the next one** (#3388,
+ruled 2026-11-04). The repos routine passes `repo_triage_backlog.csv`. Without
+it, a `--limit` run lost everything past the cap: the candidate CSV lives in the
+gitignored `runs/` and dies with the cloud container, while every search term's
+watermark has already moved to the run date, so the 2026-11-02 run silently
+dropped 587 candidates. With it:
+
+- backlog rows are triaged **before** the new candidates (backlog's copy wins a
+  duplicate key, keeping `first_seen` and `attempts`);
+- rows already in `repo_triage_seen_keys.csv` are dropped on read;
+- what the cap did not reach is written back unchanged;
+- `download_failed` / `error` rows (kept out of the ledger so they can be
+  retried) go back with `attempts` + 1 and are dropped, and listed, after 3. A
+  row skipped because its source was blocked earlier in the run is not counted
+  as an attempt;
+- every other verdict leaves the backlog and enters the ledger as before.
+
+It is an option, not the default, because the PLOS, PMC and one-off runs share
+this script. Columns: the candidate CSV's (`source,title,doi,published,url`)
+plus `first_seen`, `attempts`.
 ```
---limit <n>    process only the first N rows
---resume       continue from checkpoint after interruption
---out <path>   output path (default: runs/irw_triage.csv)
+--limit <n>       process only the first N rows (with --backlog, the rest are kept)
+--resume          continue from checkpoint after interruption
+--out <path>      output path (default: runs/irw_triage.csv)
+--backlog <csv>   triage this file's rows first and write back what is still owed
 ```
 
 ### `irw_process_queue.py` — retired, do not run, do not benchmark
