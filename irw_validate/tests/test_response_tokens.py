@@ -114,7 +114,15 @@ class ResponseTokens(unittest.TestCase):
             self.assertEqual(validate_file(path, profile=profile).to_dict(), expected.to_dict())
         frame = pd.DataFrame({"id": range(201), "item": ["q1"] * 201,
                               "resp": [0, 1] * 100 + ["NA"]})
-        self.assertEqual(next(c.status for c in run_qc(frame) if c.name == "resp_numeric"), "pass")
+        # still under the raw/triage 1% tolerance, so not a failure -- but no
+        # longer a silent pass: the upload gate refuses it, and run_qc says so
+        # with the token (#3018)
+        check = next(c for c in run_qc(frame) if c.name == "resp_numeric")
+        self.assertEqual(check.status, "warn")
+        self.assertIn("'NA'", check.detail)
+        self.assertIn("upload gate", check.detail)
+        clean = pd.DataFrame({"id": range(200), "item": ["q1"] * 200, "resp": [0, 1] * 100})
+        self.assertEqual(next(c.status for c in run_qc(clean) if c.name == "resp_numeric"), "pass")
 
     def test_item_text_option_keys_are_not_response_data(self):
         path = Path(self.tmp.name) / "responses_2026_test__items.csv"

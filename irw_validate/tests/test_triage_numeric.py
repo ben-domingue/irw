@@ -74,11 +74,16 @@ class SharedNumericCheck(unittest.TestCase):
                 self.assertIn("67%", numeric.detail)
                 self.assertEqual(results["resp_na"].status, "warn")
 
-    def test_exactly_ninety_nine_percent_of_present_values_still_passes(self):
+    def test_exactly_ninety_nine_percent_of_present_values_warns_not_fails(self):
+        # inside the 1% tolerance, so not a failure; but the upload gate refuses
+        # the token, so run_qc names it instead of passing silently (#3018)
         for missing in (0, 30):
             with self.subTest(missing=missing):
                 data = frame([0, 1, 2] * 33 + ["NA"] + [None] * missing)
-                self.assertEqual(checks_by_name(run_qc(data))["resp_numeric"].status, "pass")
+                numeric = checks_by_name(run_qc(data))["resp_numeric"]
+                self.assertEqual(numeric.status, "warn")
+                self.assertIn("1 non-numeric", numeric.detail)
+                self.assertIn("'NA'", numeric.detail)
 
     def test_below_ninety_nine_percent_of_present_values_still_fails(self):
         data = frame([0, 1, 2] * 33 + ["bad", "NA"] + [None] * 30)
@@ -128,7 +133,9 @@ class NumericProfiles(unittest.TestCase):
                     self.assertIn("100 non-missing", numeric[0].message)
                     self.assertIn("'NA'", numeric[0].message)
                 else:
-                    self.assertEqual(numeric, [])
+                    # a warning, never an error, on the raw profiles (#3018)
+                    self.assertEqual([f.severity for f in numeric], ["warn"])
+                    self.assertTrue(report.ok, report.findings)
                 pd.testing.assert_frame_equal(data, original)
 
 
