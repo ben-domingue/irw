@@ -137,7 +137,8 @@ def convert(year: str, slug: str, marks: list[dict], source_file: str) -> tuple[
     formality = Counter(rs[0]["Formality"] for rs in papers.values())
     dropped_txt = "; ".join(f"{k}: {v}" for k, v in sorted(dropped.items())) or "none"
     design = {"table": table_name(year, slug), "source_file": source_file, "collection": "pastvtr.elections.nsw.gov.au",
-              "jurisdiction": f"New South Wales, district of {slug.replace('-', ' ').title()}", "date": ELECTIONS[year][1],
+              "jurisdiction": f"New South Wales, district of {slug.replace('-', ' ').title()}",
+              "rules_jurisdiction": "New South Wales (Legislative Assembly)", "date": ELECTIONS[year][1],
               "office": f"Legislative Assembly, {year} state general election", "method": "irv", "seats": 1,
               "n_positions": n_cand, "n_candidates": n_cand,
               "n_ballots_cast": len(papers), "n_ballots_eligible_est": len(papers),

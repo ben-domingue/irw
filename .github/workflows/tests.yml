@@ -327,6 +327,10 @@ jobs:
       # through `rules_jurisdiction` (Ben, 2026-10-29, #3024).
       - name: rankings counting-rules join
         run: python metadata/tests/test_rank_rules_join.py -v
+      # The writer every rankings builder shares must keep design_tables.csv's
+      # columns: rules_jurisdiction was one write from being dropped (#3330).
+      - name: rankings design_tables writer
+        run: python metadata/tests/test_rank_design_upsert.py -v
 
   # A PR to data/ contains a conversion SCRIPT, never a table --
   # automated_finding/irw_output/ is gitignored, so no output is ever in the

@@ -40,6 +40,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 DESIGN = HERE / "design_tables.csv"
+from rank_common import upsert_design
 COMMIT = "d70e25d4871b84d1502dfe65c9713e217bfdd716"
 URL = f"https://raw.githubusercontent.com/Amsterdam-Music-Lab/mirovision/{COMMIT}/data/CSV/jurors.csv"
 COLLECTION = "10.5281/zenodo.10265412"
@@ -99,19 +100,6 @@ def convert(year: str, rnd: str, rows: list[dict]) -> tuple[list[dict], dict]:
                           f"1..{n_pos - 1}; songs shown in the published running order (candidate_order fixed); "
                           f"no seats (a jury ranking, not an election); counts computed by eurovision_jurors.py"}
     return out, design
-
-
-def upsert_design(record: dict) -> None:
-    rows = []
-    if DESIGN.exists():
-        with open(DESIGN, newline="") as f:
-            rows = [r for r in csv.DictReader(f) if r["table"] != record["table"]]
-    rows.append(record)
-    rows.sort(key=lambda r: r["table"])
-    with open(DESIGN, "w", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=list(record), lineterminator="\n")
-        w.writeheader()
-        w.writerows(rows)
 
 
 def build(raw_dir: Path, out_dir: Path, tables: list[str] | None) -> int:
