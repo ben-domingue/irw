@@ -80,3 +80,4 @@ ucla_ls,mhscdc_fried_2020_loneliness,REJECT,,,8-item revised UCLA scale: a short
 ucla_ls,ren_2024_loneliness,REJECT,,,3-item loneliness scale: a short form
 ucla_ls,ucla_BrummerHoffman_2021,REJECT,,,3-item UCLA scale: a short form
 cesd,saha_2026_cesd,REJECT,,,"withdrawn 2026-09-30 (#2565, the author removed the deposit); was accepted before the withdrawal reached metadata.csv"
+erq,li_2024_bdyz,ACCEPT,supplied,subscale: suppression (4/10),"matched the suppression subscale 4/4 when scouted (2026-09-30); its item text was withdrawn 2026-10-18 (#3082), so the rule can no longer re-check it. Membership in erq.csv stands"

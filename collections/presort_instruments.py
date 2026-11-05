@@ -114,7 +114,14 @@ def main():
             if v == "MATCH":
                 sugg, why = "ACCEPT", f"{r.n_mapped}/{k} items match"
             elif v == "PARTIAL":
-                tx = sc.itemtext(r.table, avail) or {}
+                tx = sc.itemtext(r.table, avail)
+                if tx is None:  # scouted on text that has since been withdrawn: the rule can't re-check it
+                    rows.append(dict(instrument=label, slug=slug, table=r.table, suggestion="DECIDE",
+                                     decision="", basis="supplied", member_note="",
+                                     why="PARTIAL on text since withdrawn; the subscale rule can't re-check it",
+                                     language=r.language, text_source=r.text_source, n_items=r.n_items,
+                                     k=k, construct_name=r.construct_name, instrument_field=r.instrument))
+                    continue
                 words = set(tx.values())
                 hit = [w for w in key if w in words or any(sc.close(w, x) for x in words)]
                 owners = {subscale_of(slug, w) for w in hit}
@@ -160,9 +167,16 @@ def main():
     out = pd.DataFrame(rows)
     # hand calls on rows the rules leave open, each with its reason (curated/instruments_overrides.csv)
     ov = pd.read_csv(os.path.join(sc.CUR, "instruments_overrides.csv"), dtype=str, keep_default_na=False)
+    # An override whose table the scout no longer returns (withdrawn, renamed, or a stray
+    # name a re-scout drops) is stale, not an error: report it and move on. Matching two
+    # rows is still a bug in the review sheet and stops the run.
+    stale = []
     for o in ov.itertuples():
         hit = (out.slug == o.slug) & (out.table == o.table)
-        assert hit.sum() == 1, f"override matches {hit.sum()} rows: {o.slug} {o.table}"
+        assert hit.sum() <= 1, f"override matches {hit.sum()} rows: {o.slug} {o.table}"
+        if hit.sum() == 0:
+            stale.append(f"{o.slug} {o.table}")
+            continue
         out.loc[hit, ["suggestion", "basis", "member_note"]] = [o.suggestion, o.basis, o.member_note]
         out.loc[hit, "why"] = "hand call: " + o.reason
     out["_o"] = out.suggestion.map({"DECIDE": 0, "REJECT": 1, "ACCEPT": 2})
@@ -170,6 +184,9 @@ def main():
     out.to_csv(os.path.join(sc.CUR, "instruments_presort.csv"), index=False)
     print(out.groupby(["slug", "suggestion"]).size().unstack(fill_value=0).to_string())
     print(out.suggestion.value_counts().to_string())
+    if stale:
+        print(f"\n{len(stale)} override(s) match no review row (stale; prune from instruments_overrides.csv):")
+        print("\n".join("  " + s for s in stale))
 
 
 if __name__ == "__main__":
