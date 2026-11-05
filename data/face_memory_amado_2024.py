@@ -49,6 +49,11 @@ def convert_to_irw(input_file, output_file):
 
     df_long.columns = [c.lower() for c in df_long.columns]
 
+    # Phase 2 and Phase 3 are separate samples whose P_IDs both start at 1: the same id carries a
+    # different age, sex and group in each (irw#3237). Offset phase-2 ids so each person is one id.
+    assert df_long['id'].max() < 1000
+    df_long['id'] = df_long['id'] + (df_long['cov_phase'] == 2).astype(int) * 1000
+
     first_cols = ['id', 'item', 'resp']
     rest_cols = [c for c in df_long.columns if c not in first_cols]
     final_order = first_cols + rest_cols
