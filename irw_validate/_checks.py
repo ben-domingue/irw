@@ -417,6 +417,19 @@ def run_qc(df: pd.DataFrame, coercion_method: str = "",
                             f"resp is not numeric (only "
                             f"{n_numeric}/{n_present} non-missing responses "
                             f"parse as numbers, {n_numeric / n_present:.0%})"))
+    elif n_numeric < n_present:
+        # Under the 1% the raw/triage profile tolerates, but the upload gate
+        # (core.py) refuses every one of them. Say so here, with the tokens,
+        # so a data/ script does not go green on a table red_up will refuse
+        # (#3018).
+        invalid = df["resp"][present & resp_num.isna()]
+        examples = ", ".join(repr(v)[:100] for v in invalid.drop_duplicates().head(5))
+        checks.append(Check("resp_numeric", "warn",
+                            f"{n_present - n_numeric} non-numeric resp value(s) "
+                            f"among {n_present} non-missing responses; examples: "
+                            f"{examples}. Under this profile's 1% tolerance, but "
+                            "the upload gate refuses any: verify their meaning in "
+                            "the source before recoding or removing rows."))
     else:
         checks.append(Check("resp_numeric", "pass", "resp is numeric"))
 
