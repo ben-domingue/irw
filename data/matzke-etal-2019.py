@@ -84,11 +84,27 @@ def convert_osari_to_irw(df, experiment_name):
     if 'cov_ssd' in irw_df.columns:
         irw_df['cov_ssd'] = irw_df['cov_ssd'].replace([np.inf, -np.inf], np.nan)
     
-    irw_df = irw_df.drop_duplicates()
-    irw_df = irw_df.sort_values(['id', 'item']).reset_index(drop=True)
+    # Trials are the unit, and two trials can match on every column (same stimulus, same
+    # response, same SSD, RT NA on a successful stop). drop_duplicates() used to delete
+    # them: 66% of Experiment 2's trials and nearly all successful stops (irw#3237).
+    # `trialnum` is the trial's position within the participant in the deposit; the
+    # rows are in presentation order, and gaps in the deposit's row names are trials
+    # the authors excluded.
+    irw_df['trialnum'] = irw_df.groupby('id', sort=False).cumcount() + 1
+    irw_df = irw_df.sort_values(['id', 'trialnum']).reset_index(drop=True)
     
     
     return irw_df
+
+# deposit file -> published IRW table name
+TABLE_NAMES = {
+    "Matzke_etal_2019": "matzke-etal-2019",
+    "Experiment1": "matzke-experiment1-2022",
+    "Experiment2": "matzke-experiment2-2022",
+    "Experiment3_gamified": "matzke-experiment3-gamified-2022",
+    "Experiment3_standard": "matzke-experiment3-standard",
+}
+
 
 def convert_all_osari_files(data_dir, output_dir):
     rdata_files = glob.glob(os.path.join(data_dir, "*.RData"))
@@ -108,11 +124,9 @@ def convert_all_osari_files(data_dir, output_dir):
             
             irw_df = convert_osari_to_irw(df, experiment_name)
             
-            output_file = os.path.join(output_dir, f"{experiment_name}_irw_format.csv")
-            irw_df.to_csv(output_file, index=False)
+            output_file = os.path.join(output_dir, f"{TABLE_NAMES[experiment_name]}.csv")
+            irw_df.to_csv(output_file, index=False, na_rep="")
             print(f"  Saved to: {output_file}")
-            
-            irw_df['cov_experiment'] = experiment_name
             
         except Exception as e:
             print(f"  ERROR processing {file_name}: {str(e)}")
@@ -123,8 +137,9 @@ def convert_all_osari_files(data_dir, output_dir):
 if __name__ == "__main__":
     import sys
     
-    data_dir = "/Users/francesraphael/projects/research/irw/osari/data"
-    output_dir = "/Users/francesraphael/projects/research/irw/osari"
+    # data.zip from https://osf.io/tw46u/ (OSARI, He et al. 2022), unzipped: data/*.RData
+    data_dir = sys.argv[1] if len(sys.argv) > 1 else "data"
+    output_dir = sys.argv[2] if len(sys.argv) > 2 else "out"
     
     try:
         convert_all_osari_files(data_dir, output_dir)
