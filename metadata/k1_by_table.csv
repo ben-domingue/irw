@@ -1301,10 +1301,10 @@ CPDMMC_Kunnari_2020_PDP,0,,1043,1,1043,0,0,0,no_qi
 CQTMS_Hur_2023,0,,767,1,767,0,0,0,no_qi
 credentialform_lnirt,0,,1636,1,1636,0,0,0,no_qi
 criticalperiod_syntax,0,,1131401,1,1131401,0,0,0,no_qi
-crspolish_wiesyk_2024_crs,2,cov_country|cov_sex,783,4,1336,0,0,0,ok
-crspolish_wiesyk_2024_enrich,2,cov_country|cov_sex,783,4,1336,0,0,0,ok
-crspolish_wiesyk_2024_lie,2,cov_country|cov_sex,783,4,1336,0,0,0,ok
-crspolish_wiesyk_2024_p_stress,2,cov_country|cov_sex,783,4,1336,0,0,0,ok
+crspolish_wiesyk_2024_crs,2,cov_country|cov_sex,1448,4,1448,0,0,0,ok
+crspolish_wiesyk_2024_enrich,2,cov_country|cov_sex,1448,4,1448,0,0,0,ok
+crspolish_wiesyk_2024_lie,2,cov_country|cov_sex,1448,4,1448,0,0,0,ok
+crspolish_wiesyk_2024_p_stress,2,cov_country|cov_sex,1448,4,1448,0,0,0,ok
 crysdale_2020_big5,0,,407,1,407,0,0,0,no_qi
 crysdale_2020_storyboards,0,,407,1,407,0,0,0,no_qi
 CSE_Bayazit_2022,0,,651,1,651,0,0,0,no_qi
@@ -1924,7 +1924,7 @@ extremera_2016_sbq,4,cov_age|cov_education|cov_marital_status|cov_sex,961,561,96
 extremera_2016_shs,4,cov_age|cov_education|cov_marital_status|cov_sex,1125,621,1125,399,0.3547,0.784,ok
 extremera_2016_swls,4,cov_age|cov_education|cov_marital_status|cov_sex,1125,621,1125,399,0.3547,0.784,ok
 eyrenci_2025_mental_health_literacy,6,cov_age|cov_education|cov_employment|cov_health_worker|cov_marital_status|cov_sex,240,219,240,201,0.8375,1,ok
-face_memory_amado_2024,3,cov_age|cov_education|cov_gender,597,104,694,66,0.0951,0.17,ok
+face_memory_amado_2024,3,cov_age|cov_education|cov_gender,702,104,702,66,0.094,0.1681,ok
 face_memory_test,0,,1768,1,1768,0,0,0,no_qi
 FACES_Spanish_Vegas_2022_FACES,0,,1196,1,1196,0,0,0,no_qi
 FACES_Spanish_Vegas_2022_FSS,0,,1196,1,1196,0,0,0,no_qi
@@ -5171,7 +5171,7 @@ PTAM_Kretzschmar_2017_MicroFIN,0,,253,1,253,0,0,0,no_qi
 PTAM_Kretzschmar_2017_Raven,0,,238,1,238,0,0,0,no_qi
 PTAM_Kretzschmar_2017_Reasoning,0,,234,1,234,0,0,0,no_qi
 PTCI_Chinese_Zhan_2024,0,,2436,1,2436,0,0,0,no_qi
-ptcichina_zhan_2024,3,cov_age|cov_location|cov_sex,1206,120,2326,23,0.0099,0.0507,ok
+ptcichina_zhan_2024,3,cov_age|cov_location|cov_sex,2375,120,2375,23,0.0097,0.0497,ok
 purizaca_2012_parenting_styles,0,,100,1,100,0,0,0,no_qi
 purizaca_2012_self_esteem,0,,100,1,100,0,0,0,no_qi
 purnama_2023_attitude,0,,515,1,515,0,0,0,no_qi
@@ -5662,7 +5662,7 @@ sekowski_2025_pies,4,cov_age|cov_education|cov_gender|cov_work_situation,607,109
 sel_marca_2025_estudantes,0,,13984,1,13984,0,0,0,no_qi
 sel_marca_2025_familiares,0,,9072,1,9072,0,0,0,no_qi
 sel_marca_2025_professores,0,,1560,1,1560,0,0,0,no_qi
-selfcompassionscale_shortform_fuochi_2025,0,,1816,1,1816,0,0,0,no_qi
+selfcompassionscale_shortform_fuochi_2025,0,,2043,1,2043,0,0,0,no_qi
 selm_2019_climate_knowledge,3,cov_age|cov_education|cov_race,199,175,201,154,0.7662,0.9751,ok
 sem_cnes,0,,1529,1,1529,0,0,0,no_qi
 senge_2025_app_facil_conditions,6,cov_education|cov_gender|cov_household_size|cov_income|cov_location|cov_state,520,481,520,443,0.8519,1,ok
