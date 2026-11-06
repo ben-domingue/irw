@@ -424,6 +424,7 @@ den_kay_2025,Denialism Scale,8.25,50.25,17.5714285714286,7.06388888888889,Englis
 denning_2020_saq,"Safety Attitudes Questionnaire (SAQ), 36 statements as administered",10.8888888888889,65.8055555555556,13.8,9.25571428571429,English,standard_omission
 depression_anxiety_stress,"Depression Anxiety Stress Scales (DASS-42), Ten Item Personality Inventory (TIPI), and a 16-word vocabulary checklist",6.78148148148148,39.1518518518519,34.2814814814815,NA,unknown,unestablished
 depue_2023_gds15,"Geriatric Depression Scale, 15-item short form (GDS-15; Sheikh & Yesavage, 1986), administered in the Dutch translation (Bleeker, Frohn de Winter & Cornelissen, 1985)",9,44.9333333333333,2.5,NA,Dutch,table
+depue_2023_pwi,"Personal Wellbeing Index - Adult (PWI-A), 5th edition (International Wellbeing Group, 2013), with the optional general life satisfaction item; administered in the Dutch version (Van Beuningen & de Jonge, 2011)",11,58.375,5.45454545454545,NA,Dutch,table
 depue_2023_subjcog,"Subjective cognitive change questions (ad hoc, De Pue et al. 2021, 2023); administered in Dutch",14.2083333333333,98.3333333333333,13.2708333333333,NA,Dutch,table
 derubeis_2017_arsq,"Adult Rejection Sensitivity Questionnaire (ARSQ), German version",17.75,93.425,7.25,7.27791979949875,German,table
 di_riso_2025_contact_behavior,Ad hoc Socio-Demographic Interview: Attitudes toward physical touch,1,2,8.2,-3.4,Italian,table
@@ -929,6 +930,7 @@ hayek_2022_subj_norm,Social norms towards getting good academic grades (I-Change
 he_2019_flipped_classroom_attitudes,"Student attitudes toward the teaching model (He et al. 2019 flipped-classroom questionnaire, attitude items)",1,2,7.4,-3.4,Chinese,table
 he_2019_flipped_classroom_satisfaction,"Student satisfaction with the teaching model questionnaire (He et al., 2019)",6.875,43.875,7.4,NA,Chinese,table
 heard_roch_2022_k6,KESS depression scale in last 2 weeks asked of refugees,38.5,180,16.6,NA,unknown,unestablished
+heard_roch_2022_swlpwi,Life satisfaction asked of refugees,9.75,57.25,5.22727272727273,7.685,English,standard_omission
 heekerens2025_bfi_extraversion,"Measures the degree to which adults are sociable, assertive, and energetic, using the 2-item Extraversion subscale from the German BFI-10",3.5,18,18.6,8.00166666666667,German,table
 heekerens2025_dss,"Dissociative Symptoms Scale – German Version (G-DSS): Assesses moderately severe dissociative symptoms in the past week across four domains: Depersonalization/Derealization, Gaps in Awareness and Memory, Cognitive-Behavioral Reexperiencing, and Sensory Misperceptions",1,2,15,5.83534188034188,German,table
 heekerens2025_phq,"Gesundheitsfragebogen für Patienten (PHQ-D), 8-item depression module (PHQ-8), German version",11.625,68.25,20.25,8.08611111111111,German,table
