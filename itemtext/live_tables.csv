@@ -1,4 +1,4 @@
-# item-text tables in the Redivis shards as of 2026-11-04
+# item-text tables in the Redivis shards as of 2026-11-06
 # status=published: a reader can fetch it. status=draft: uploaded, not released yet.
 # generated -- do not hand-edit; rerun itemtext/refresh_live_tables.py (irw#1828)
 table,shard,status
@@ -462,6 +462,7 @@ den_kay_2025,irw_text_3,published
 denning_2020_saq,irw_text_4,published
 depression_anxiety_stress,irw_text,published
 depue_2023_gds15,irw_text_3,published
+depue_2023_pwi,irw_text_3,published
 depue_2023_subjcog,irw_text_3,published
 derubeis_2017_arsq,irw_text,published
 di_riso_2025_contact_behavior,irw_text_2,published
@@ -956,6 +957,7 @@ hayek_2022_subj_norm,irw_text_2,published
 he_2019_flipped_classroom_attitudes,irw_text_2,published
 he_2019_flipped_classroom_satisfaction,irw_text_2,published
 heard_roch_2022_k6,irw_text,published
+heard_roch_2022_swlpwi,irw_text,published
 heekerens2025_bfi_extraversion,irw_text,published
 heekerens2025_dss,irw_text,published
 heekerens2025_phq,irw_text_3,published
