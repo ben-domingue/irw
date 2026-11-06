@@ -1034,6 +1034,16 @@ local({
 })
 
 local({
+    ##A Private row never publishes: still dropped, but not named every run.
+    d <- fake_sheet(sheet_row("a_2020"), sheet_row("Tests of vocabulary_TSQ"))
+    d[["Public Reshare?"]][2] <- "Private"
+    msg <- capture.output(kept <- drop_unshaped_dict_rows(d, "core"), type = "message")
+    check(nrow(kept) == 1L && kept$table[1] == "a_2020",
+          "an unshaped Private row is still dropped")
+    check(length(msg) == 0L, "but it is not logged")
+})
+
+local({
     d <- fake_sheet(sheet_row("a_2020"))
     check(identical(suppressMessages(drop_unshaped_dict_rows(d, "core")), d),
           "a clean frame is returned untouched")

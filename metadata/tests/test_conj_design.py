@@ -158,6 +158,25 @@ CONCEPTS = {"profile_gender": {"female", "male"}}
 CROSSWALK_COLS = ["concept", "table", "attribute", "level", "value", "signal", "evidence"]
 
 
+class CrosswalkExemptFile(unittest.TestCase):
+    """Gender-named attributes that are deliberately not mapped, each with a reason."""
+    def test_rows(self):
+        cols, rows = read("crosswalk_exempt.csv")
+        self.assertEqual(cols, ["table", "attribute", "reason"])
+        _, xw = read("crosswalk.csv")
+        mapped = {(r["table"], r["attribute"]) for r in xw}
+        _, tabs = read("design_tables.csv")
+        tables = {r["table"] for r in tabs}
+        keys = [(r["table"], r["attribute"]) for r in rows]
+        self.assertEqual(len(keys), len(set(keys)))
+        for r in rows:
+            k = (r["table"], r["attribute"])
+            self.assertTrue(r["reason"].strip(), k)
+            self.assertTrue(r["attribute"].startswith("attr_"), k)
+            self.assertIn(r["table"], tables, k)
+            self.assertNotIn(k, mapped, f"{k} is both mapped and exempt")
+
+
 class CrosswalkFile(unittest.TestCase):
     def setUp(self):
         self.cols, self.rows = read("crosswalk.csv")

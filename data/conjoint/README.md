@@ -125,7 +125,7 @@ Attribute columns keep the text respondents saw, so the same idea arrives under 
 | `signal` | `explicit` when the attribute states the concept; `name` when it is carried by a gendered first name and the authors' own coding says which names are which; `photo` when it is shown only in a photograph and the authors' own coding of the photo says which |
 | `evidence` | where the mapping comes from |
 
-Every displayed level of a mapped attribute has a row (`(not shown)` has none, since nothing was shown), and each concept maps to at most one attribute per table. A `name` signal carries other things too: Pedersen's names also mark ethnicity (majority versus Turkish), so a gender contrast there is within the names the authors chose. A new concept is added with its allowed values in `metadata/tests/test_conj_design.py` (`CONCEPTS`) and a line here.
+Every displayed level of a mapped attribute has a row (`(not shown)` has none, since nothing was shown), and each concept maps to at most one attribute per table. A `name` signal carries other things too: Pedersen's names also mark ethnicity (majority versus Turkish), so a gender contrast there is within the names the authors chose. A gender-named attribute that is not a profile's gender (a committee's composition, a policy stance), or that cannot map because a profile describes two people, goes in `crosswalk_exempt.csv` (`table`, `attribute`, `reason`) instead; the pipeline and `red_up` treat it as covered. A new concept is added with its allowed values in `metadata/tests/test_conj_design.py` (`CONCEPTS`) and a line here.
 
 ## Topic tags
 

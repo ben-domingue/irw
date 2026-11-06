@@ -1046,7 +1046,7 @@ class ValidatorGate(unittest.TestCase):
     CONJ = Target(name="irw_conjoint", label="conjoint experiments", kind="aux", source="conj")
 
     def _conj_design(self, tables=("smith_2024_candidates",), outcomes=("choice", "rating"),
-                     crosswalk=(), opt_out="", tagged=None):
+                     crosswalk=(), opt_out="", tagged=None, exempt=()):
         """Design records in a scratch dir, pointed to by IRW_CONJ_DESIGN_DIR."""
         d = Path(tempfile.mkdtemp())
         self.addCleanup(shutil.rmtree, d, ignore_errors=True)
@@ -1060,6 +1060,9 @@ class ValidatorGate(unittest.TestCase):
         (d / "crosswalk.csv").write_text(
             "concept,table,attribute,level,value\n" + "".join(
                 f"profile_gender,{t},{a},Female,female\n" for t, a in crosswalk), encoding="utf-8")
+        (d / "crosswalk_exempt.csv").write_text(
+            "table,attribute,reason\n" + "".join(
+                f"{t},{a},not a profile's gender\n" for t, a in exempt), encoding="utf-8")
         (d / "tags.csv").write_text(
             "table,domain,choice_object\n" + "".join(
                 f"{t},candidate_choice,person\n" for t in (tables if tagged is None else tagged)),
@@ -1102,6 +1105,13 @@ class ValidatorGate(unittest.TestCase):
 
     def test_a_gender_attribute_with_crosswalk_rows_is_quiet(self):
         self._conj_design(crosswalk=(("smith_2024_candidates", "attr_gender"),))
+        rows = self._conj_rows().replace("attr_age", "attr_gender")
+        path = self._csv("smith_2024_candidates.csv", rows)
+        report = self._check(path, "smith_2024_candidates", target=self.CONJ)
+        self.assertFalse(any("conj_crosswalk" in w for w in report.warnings), report.warnings)
+
+    def test_an_exempt_gender_attribute_is_quiet(self):
+        self._conj_design(exempt=(("smith_2024_candidates", "attr_gender"),))
         rows = self._conj_rows().replace("attr_age", "attr_gender")
         path = self._csv("smith_2024_candidates.csv", rows)
         report = self._check(path, "smith_2024_candidates", target=self.CONJ)

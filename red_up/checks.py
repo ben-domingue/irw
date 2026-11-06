@@ -198,6 +198,9 @@ def check_conj_design(report: FileReport) -> tuple[list[str], list[str]]:
             outcomes = {(r["table"], r["outcome"]) for r in csv.DictReader(f)}
         with open(d / "crosswalk.csv", newline="", encoding="utf-8") as f:
             crosswalk = {(r["table"], r["attribute"]) for r in csv.DictReader(f)}
+        # Gender-named attributes that are not a profile's gender, each with a reason.
+        with open(d / "crosswalk_exempt.csv", newline="", encoding="utf-8") as f:
+            crosswalk |= {(r["table"], r["attribute"]) for r in csv.DictReader(f)}
         with open(d / "tags.csv", newline="", encoding="utf-8") as f:
             tagged = {r["table"] for r in csv.DictReader(f)}
     except (OSError, KeyError) as exc:
