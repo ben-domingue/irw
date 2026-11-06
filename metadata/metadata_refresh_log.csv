@@ -1302,10 +1302,10 @@
 "CQTMS_Hur_2023","2026-10-15 18:19:26",NA,NA
 "credentialform_lnirt","2026-10-15 18:19:28",NA,NA
 "criticalperiod_syntax","2026-10-15 18:19:29",NA,NA
-"crspolish_wiesyk_2024_crs","2026-10-15 18:19:30",NA,NA
-"crspolish_wiesyk_2024_enrich","2026-10-15 18:19:31",NA,NA
-"crspolish_wiesyk_2024_lie","2026-10-15 18:19:32",NA,NA
-"crspolish_wiesyk_2024_p_stress","2026-10-15 18:19:33",NA,NA
+"crspolish_wiesyk_2024_crs","2026-11-06 14:51:44",50680,"445502e76e8f1dc400682665baf9c43b"
+"crspolish_wiesyk_2024_enrich","2026-11-06 14:51:48",21720,"c05b98fbb40330964d1b8ba3c1e3d36d"
+"crspolish_wiesyk_2024_lie","2026-11-06 14:51:51",17376,"bd513ebb2196bea710fdb42c7b45d39c"
+"crspolish_wiesyk_2024_p_stress","2026-11-06 14:51:54",10136,"83d01ee79cbd29685d8c9b2109f4e388"
 "crysdale_2020_big5","2026-10-15 18:19:34",NA,NA
 "crysdale_2020_storyboards","2026-10-15 18:19:35",NA,NA
 "CSE_Bayazit_2022","2026-10-15 18:19:36",NA,NA
@@ -1365,7 +1365,7 @@
 "darkfactorfrench_pischel_2026_callousness","2026-10-19 19:25:47",NA,NA
 "darkfactorfrench_pischel_2026_civic_behavior","2026-10-19 19:25:49",NA,NA
 "darkfactorfrench_pischel_2026_crime_analog","2026-10-19 19:25:53",NA,NA
-"darkfactorfrench_pischel_2026_d70","2026-11-04 23:37:41",12079270,"9fa9bf792c0576188859df572724cfb1"
+"darkfactorfrench_pischel_2026_d70","2026-11-06 15:01:41",12079270,"42b54ea4f473481f58c7e27b2c73da5d"
 "darkfactorfrench_pischel_2026_dictator_game","2026-10-19 19:25:59",NA,NA
 "darkfactorfrench_pischel_2026_exploitative","2026-10-19 19:26:02",NA,NA
 "darkfactorfrench_pischel_2026_interp_dysfx","2026-10-19 19:26:05",NA,NA
@@ -1925,7 +1925,7 @@
 "extremera_2016_shs","2026-10-21 18:08:39",NA,NA
 "extremera_2016_swls","2026-10-21 18:09:01",NA,NA
 "eyrenci_2025_mental_health_literacy","2026-10-21 18:09:04",NA,NA
-"face_memory_amado_2024","2026-10-21 18:09:06",NA,NA
+"face_memory_amado_2024","2026-11-06 14:51:14",56160,"5a7a16806f16eb613760e838d39a6069"
 "face_memory_test","2026-10-21 18:09:07",NA,NA
 "FACES_Spanish_Vegas_2022_FACES","2026-10-21 18:09:08",NA,NA
 "FACES_Spanish_Vegas_2022_FSS","2026-10-21 18:09:08",NA,NA
@@ -3817,6 +3817,11 @@
 "lotfi_bejestani_2023_org_justice","2026-11-04 20:27:45",9943,"0e255fb2c6abce7f63819b9169d58931"
 "lozano_2018_cognition","2026-11-04 20:27:47",1644,"32cf30d673ddea7fb48bbb8ad25a5f08"
 "lys_2020_rape_1_rma","2026-10-24 15:51:48",16755,"04986b5cce1b1efb9c7ce349a0086d15"
+"matzke-etal-2019","2026-11-06 14:51:19",30528,"7c1bc9eca7394806e6a1191d9f012da3"
+"matzke-experiment1-2022","2026-11-06 14:51:22",2783,"a84a0f979c3e64680baa53c2897f4089"
+"matzke-experiment2-2022","2026-11-06 14:51:26",58831,"3007a4c801937de17020cf8396ac0714"
+"matzke-experiment3-gamified-2022","2026-11-06 14:51:31",8465,"3ea7eb84d4b7b3bc272a6130efddaf10"
+"matzke-experiment3-standard","2026-11-06 14:51:35",8617,"5995226596bab5746e6e13c8f3ead81e"
 "mclaughlin_samuel_2025_auditory_session_2","2026-10-24 15:51:57",8360,"fc25b20634ede2fbfb1057d409f02e42"
 "mhscdc_fried_2020_ema","2026-10-24 15:52:04",70958,"a9888f70714e9f3cf2f9427154356ac1"
 "motion","2026-10-25 14:31:05",31800,"609fefd10a9551be42cd6475fc598450"
@@ -3843,7 +3848,7 @@
 "PEMAIW_Qiu_2020_SWLS","2026-10-25 14:30:57",5460,"3f2a59bf21748c1dd35213dbfe5ed4ca"
 "PEPABAS2C_Kubicka_2024","2026-10-24 15:47:57",4841,"738ebd47e6f8630ed7d515dcc528b0a0"
 "piterova-slovak-science-related-populism","2026-10-24 15:52:59",61223,"797f3277a540d3200a48a5afd7054def"
-"previc_bohn2023","2026-11-04 23:45:28",451010,"d41c06731c4cc3eba7afe3e2bbee7c8f"
+"previc_bohn2023","2026-11-06 15:00:57",451010,"9cd1784a5c3b51a922314605196e5caa"
 "PROMISPME_Forrest_2021_Family_Children","2026-10-24 15:47:58",208485,"cbe693e5069bd631e4f6e3b112dfc9d1"
 "PROMISPME_Forrest_2021_Family_Proxy","2026-10-24 15:47:59",208485,"cbe693e5069bd631e4f6e3b112dfc9d1"
 "PROMISPME_Forrest_2021_LS_Children","2026-10-24 15:48:00",111552,"90f2cae511b9b9808531cc765851ee7d"
@@ -3855,6 +3860,7 @@
 "PROMISPME_Forrest_2021_Strength_Children","2026-10-24 15:48:03",45600,"366a6639534aeb74553fea67ff3bfe9f"
 "PROMISPME_Forrest_2021_Strength_Proxy","2026-11-04 23:37:45",22925,"5da2d0802f96722fa5f9cd9ea0c8db0e"
 "PTCI_Chinese_Zhan_2024","2026-10-25 14:30:59",80388,"ba651c4b9954bd6748ccfd7b4bbb6500"
+"ptcichina_zhan_2024","2026-11-06 14:51:40",78375,"128ad649c85f1de538adc514affe260f"
 "RD_EppSCQRK_Kipkemoi_2024_scq","2026-10-24 15:48:05",9720,"a94c6b64821f1504cf1ef6c35ce3ab59"
 "robison_2026_retesting_antisaccade","2026-10-24 15:53:04",29912,"a86ac218a888226024208e1349cc0240"
 "robison_2026_retesting_color","2026-10-24 15:53:10",30001,"bbce0712d8812cdde143a0196c736bb3"
@@ -3869,6 +3875,7 @@
 "sel_marca_2025_estudantes","2026-10-24 15:53:52",918812,"8519735e14add15e8a5a0ddf4d58d705"
 "sel_marca_2025_familiares","2026-10-24 15:53:55",593043,"1fc9d401a919372c22836a99de83dd98"
 "sel_marca_2025_professores","2026-10-24 15:53:58",126843,"32ea24befa003253611900c4d752cfb3"
+"selfcompassionscale_shortform_fuochi_2025","2026-11-06 14:51:10",24816,"c89d282bdcd8f19a37ff95898f6c15a2"
 "selm_2019_climate_knowledge","2026-11-04 23:37:36",603,"269450f85c1092d739ee5437dfa2b6b5"
 "shan_2020_cs","2026-11-04 23:37:19",609,"8c307f2cce2ccce345f7c2d37af39791"
 "shan_2020_f","2026-11-04 23:37:21",812,"a0d37f6676312d456a10c0c9b85c2091"
@@ -3877,6 +3884,13 @@
 "shan_2020_pd","2026-11-04 23:37:28",1624,"d97cc7f94af783af4ff321bee645ff06"
 "shan_2020_ph","2026-11-04 23:37:29",1015,"46d055b964225285e149648cd0c497a5"
 "smoking_perseverance_mcneish_2025","2026-10-24 15:54:08",10569,"905ccbc3a2615ce086fd8c20711e9512"
+"spain_2012_reality_personality","2026-11-06 14:50:51",29138,"7c2640815138f4fa563c33aa9476c7cd"
+"spain_2014_debate_leaders","2026-11-06 14:50:54",6770,"904574d2a2537d346c79e1340f1205ee"
+"spain_2016_pain_difficulty","2026-11-06 14:50:56",4581,"367c6c92cc3913212cdbc092749572ad"
+"spain_2016_pain_personality","2026-11-06 14:50:58",24338,"f2d73d54a6de7e8a929a1f094cd2563c"
+"spain_2017_politics_attitudes","2026-11-06 14:51:01",7041,"e26e02517094f93c9b3155e38fb2b744"
+"spain_2023_identity_identification","2026-11-06 14:51:04",67441,"30e64461b931e89192da590636998557"
+"spain_2023_science_future","2026-11-06 14:51:07",5732,"9196d79dc4b3ff004970af8df2f8a2bc"
 "sris_silvia2022","2026-10-25 14:31:36",23840,"9d1bdca680cf18fc4de92cc2ba3f2520"
 "timss_tam","2026-10-24 15:54:11",19419,"a97941b43acbb5fffa30a72e112dbbef"
 "uti_newlands_2023_wpai","2026-10-24 15:54:19",908,"3eb9c3a56a8fe2f8b250d94930b3c3cb"
