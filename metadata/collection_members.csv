@@ -1073,6 +1073,8 @@ ffm_OPN,response_time,rule:var:rt
 figueroaquinones_2026_phq4,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 figueroaquinones_2026_phq4,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 figure_skating,continuous_response,curated:scout
+figure_skating,longitudinal,rule:meta:longitudinal
+figure_skating,rater_mediated,rule:var:rater
 fims_tam,math,rule:cname:^(?!.*(anxi|attitude|self.?efficacy|self.?concept|emotion|motivat|interest|enjoy|belief|confiden|value|stereotype)).*(\bmath|arithmetic|algebra|fraction)
 firstborn_personality,longitudinal,rule:meta:longitudinal
 fischer_2018_promis29_anxiety,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
@@ -2146,11 +2148,9 @@ menghini_2023_task_demands,longitudinal,rule:meta:longitudinal
 mental_health_wang_2024_gad,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 mental_health_wang_2024_gad,gad7,supplied
 mental_health_wang_2024_gad,longitudinal,rule:meta:longitudinal
-mental_health_wang_2024_gad,response_time,rule:var:rt
 mental_health_wang_2024_phq,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 mental_health_wang_2024_phq,longitudinal,rule:meta:longitudinal
 mental_health_wang_2024_phq,phq9,supplied
-mental_health_wang_2024_phq,response_time,rule:var:rt
 meule_2025_state_disgust,longitudinal,rule:meta:longitudinal
 mexico_2023_quality_wellbeing,wellbeing,rule:cname:well.?being|life satisfaction|\bswls\b|quality of life|whoqol
 mexico_2023_quality_wellbeingservice,wellbeing,rule:cname:well.?being|life satisfaction|\bswls\b|quality of life|whoqol
