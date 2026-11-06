@@ -255,6 +255,17 @@ NORM = {
     " ": " ",        # HAIR SPACE
 }
 
+# A ligature the font drew as one glyph can extract as "fi" plus a GAP of two
+# or more spaces before the rest of the word: "intensifi  cação", "fl  uxo",
+# "Geográfi  co". Same defect as the glyph map above, one step later. Measured
+# over all 48 tables: 211 occurrences (2013, 2016, 2020, 2021, 2022); every
+# joined word is a real word (wordfreq knows 191; the other 20 are Spanish
+# "unificación" and "específicoJ", whose stray J is a separate defect). A
+# single space is NOT joined: "fi" / "fl" never end a Portuguese word, but a
+# single space is also how ordinary words are separated, so only the gap
+# that the ligature leaves is taken as its signature.
+LIGATURE_GAP = re.compile(r"(f[il]) {2,}(?=[a-zà-ÿ])")
+
 COLS = ("item_text", "option_text", "section_prompt", "instructions")
 
 
@@ -281,6 +292,9 @@ def fix(v, year=None, item=None, column=None, letter=None):
     for a, b in {**WRONG, **NORM}.items():
         if a in v:
             n[a] += v.count(a); v = v.replace(a, b)
+    v, k = LIGATURE_GAP.subn(r"\1", v)
+    if k:
+        n["fi/fl ligature gap joined"] += k
     for p in PATCH:
         if year != p["year"] or item != p["item"] or column != p["column"]:
             continue

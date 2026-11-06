@@ -50,9 +50,17 @@ FURNITURE = [
     re.compile(r"^Caderno\s*\d+\s*[-–|]\s*[A-ZÇÃÕÉ]+\s*[-–|]\s*P[áa]gina\s*\d+$", re.I),
     re.compile(r"^\d{2}/\d{2}/\d{4}\s+\d{2}:\d{2}:\d{2}.*$"),        # 2025 render timestamps
     re.compile(r"^.*\|\s*\d\s*[ºO]\s*DIA\s*\|\s*CADERNO\s*\d+\s*\|\s*[A-ZÇÃÕÉ]+\s*\d*$"),
+    # The class must hold every capital the four area names use: without Ó,
+    # "LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS" never matched, and it shipped at
+    # the end of option E in 2020/2021/2022 LC (23296, 89505, 118230).
     re.compile(r"^(CI[ÊE]NCIAS DA NATUREZA|CI[ÊE]NCIAS HUMANAS|LINGUAGENS|"
-               r"MATEM[ÁA]TICA)[A-ZÇÃÕÉ\s,]*TECNOLOGIAS$", re.I),
+               r"MATEM[ÁA]TICA)[A-ZÀ-Ý\s,]*TECNOLOGIAS$", re.I),
     re.compile(r"^Quest[õo]es\s+de\s+\d+\s+a\s+\d+$", re.I),
+    # The foreign-language block head, "Questões de 01 a 05 (opção espanhol)",
+    # with or without the colon 2022 prints (STATUS.md trap 12).
+    re.compile(r"^Quest[õo]es\s+de\s+\d+\s+a\s+\d+\s*\(op[çc][ãa]o:?\s*(espanhol|ingl[êe]s)\)$", re.I),
+    # The essay page's instruction, after the last CH item of day 1 (2018 CH 89113, 2019 CH 111877).
+    re.compile(r"^Transcreva a sua Reda[çc][ãa]o para a Folha de Reda[çc][ãa]o\.?$", re.I),
     re.compile(r"^P[áa]gina\s*\d+$", re.I),
 ]
 
@@ -170,10 +178,31 @@ def truncate_blocks(v):
     return v, 0
 
 
-def strip_tail(v, year=None):
+PAGE_NO = re.compile(r"^\s*\d{1,2}\s*$")
+SENT_END = re.compile(r"[.;!?…”\"’)]\s*$")
+
+
+# `instructions` keeps the behaviour it shipped with. The corrected area class
+# and the two new furniture lines are for ITEM CONTENT: applied to the cover
+# page they would also strip the LC area head and its "Questões de ..." lines
+# from every LC/CH table's instructions (476 cells a year), which is a change
+# to a different column than the one the findings are about. The original area
+# pattern (whose class lacked Ó, so it never matched LINGUAGENS, CÓDIGOS ...)
+# is kept for instructions, so a rebuild leaves every instructions cell as it was.
+ITEM_ONLY = {r"^(CI[ÊE]NCIAS DA NATUREZA|CI[ÊE]NCIAS HUMANAS|LINGUAGENS|MATEM[ÁA]TICA)[A-ZÀ-Ý\s,]*TECNOLOGIAS$",
+             r"^Quest[õo]es\s+de\s+\d+\s+a\s+\d+\s*\(op[çc][ãa]o:?\s*(espanhol|ingl[êe]s)\)$",
+             r"^Transcreva a sua Reda[çc][ãa]o para a Folha de Reda[çc][ãa]o\.?$"}
+AREA_HEAD_INSTRUCTIONS = re.compile(r"^(CI[ÊE]NCIAS DA NATUREZA|CI[ÊE]NCIAS HUMANAS|LINGUAGENS|"
+                                    r"MATEM[ÁA]TICA)[A-ZÇÃÕÉ\s,]*TECNOLOGIAS$", re.I)
+
+
+def strip_tail(v, year=None, col=None):
     """Remove furniture lines from the END of a field only."""
     if not v:
         return v, 0
+    FURNITURE = globals()["FURNITURE"]
+    if col == "instructions":
+        FURNITURE = [p for p in FURNITURE if p.pattern not in ITEM_ONLY] + [AREA_HEAD_INSTRUCTIONS]
     # The bare-year footer is accepted ONLY as this booklet's own year. A loose
     # \d{4} rule would delete a legitimate option that is just a date, which is
     # a real ENEM answer shape ("A 1990 / B 1995 / C 2000").
@@ -185,6 +214,16 @@ def strip_tail(v, year=None):
         if last == "":
             lines.pop(); removed += 1; continue
         if any(p.match(last) for p in FURNITURE + extra):
+            lines.pop(); removed += 1; continue
+        # A bare page number (2021's LEDOR booklet prints it alone on a line) is
+        # removed only when the line before it ends a sentence, so a numeric
+        # option or a number wrapped onto its own line is never touched. At most
+        # two (2021 CH 125655 carries "34" and "35"). Measured over all 48 tables:
+        # this matches 28 option_text cells, all 2021 -- the 27 page_number
+        # findings and 2021 LC 89505 -- and nothing else.
+        if col != "instructions" and PAGE_NO.match(last) and len(lines) >= 2 and (
+                SENT_END.search(lines[-2]) or
+                (len(lines) >= 3 and PAGE_NO.match(lines[-2]) and SENT_END.search(lines[-3]))):
             lines.pop(); removed += 1; continue
         # A furniture line can be WRAPPED: 2016 sets the next area's header as
         # "CIÊNCIAS DA NATUREZA E SUAS \n TECNOLOGIAS", so the trailing line is
@@ -225,7 +264,7 @@ def main():
                     continue
                 mid, drop = strip_anywhere(r[col], year)
                 mid, nb = truncate_blocks(mid)
-                new, k = strip_tail(mid, year)
+                new, k = strip_tail(mid, year, col)
                 k += len(drop) + nb
                 if k:
                     hits.append((r["item"], col, k, r[col][len(new):][:80]))

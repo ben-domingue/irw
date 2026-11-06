@@ -1647,7 +1647,7 @@ CADERNO
 7
 AZUL",NA,"De forma geral, os pneus radiais trazem em 
 sua lateral uma marcação do tipo abc/deRfg, como 
-185/65R15. Essa marcação ident ifica as medidas do 
+185/65R15. Essa marcação identifica as medidas do 
 pneu da seguinte forma: 
 • abc é a medida da largura do pneu, em milímetro;
 • de é igual ao produto de 100 pela razão entre a 
@@ -1720,7 +1720,7 @@ CADERNO
 7
 AZUL",NA,"De forma geral, os pneus radiais trazem em 
 sua lateral uma marcação do tipo abc/deRfg, como 
-185/65R15. Essa marcação ident ifica as medidas do 
+185/65R15. Essa marcação identifica as medidas do 
 pneu da seguinte forma: 
 • abc é a medida da largura do pneu, em milímetro;
 • de é igual ao produto de 100 pela razão entre a 
@@ -1793,7 +1793,7 @@ CADERNO
 7
 AZUL",NA,"De forma geral, os pneus radiais trazem em 
 sua lateral uma marcação do tipo abc/deRfg, como 
-185/65R15. Essa marcação ident ifica as medidas do 
+185/65R15. Essa marcação identifica as medidas do 
 pneu da seguinte forma: 
 • abc é a medida da largura do pneu, em milímetro;
 • de é igual ao produto de 100 pela razão entre a 
@@ -1866,7 +1866,7 @@ CADERNO
 7
 AZUL",NA,"De forma geral, os pneus radiais trazem em 
 sua lateral uma marcação do tipo abc/deRfg, como 
-185/65R15. Essa marcação ident ifica as medidas do 
+185/65R15. Essa marcação identifica as medidas do 
 pneu da seguinte forma: 
 • abc é a medida da largura do pneu, em milímetro;
 • de é igual ao produto de 100 pela razão entre a 
@@ -1939,7 +1939,7 @@ CADERNO
 7
 AZUL",NA,"De forma geral, os pneus radiais trazem em 
 sua lateral uma marcação do tipo abc/deRfg, como 
-185/65R15. Essa marcação ident ifica as medidas do 
+185/65R15. Essa marcação identifica as medidas do 
 pneu da seguinte forma: 
 • abc é a medida da largura do pneu, em milímetro;
 • de é igual ao produto de 100 pela razão entre a 
@@ -4650,7 +4650,7 @@ sonora, e o custo é diretamente proporcional ao volume
 do material do revestimento.
 Uma expressão que fornece o custo para revestir 
 uma parede de área A (em metro quadrado), situada 
-a D metros da fonte sonora, é","B","500 . 81/(A . D^2)",0,NA,NA,NA,NA,"Portuguese","A"
+a D metros da fonte sonora, é","B","(500 . 81)/(A . D^2)",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2016_1mil_mt","enem_2016_1mil_mt_1",24747,"ENEM 2016 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -4707,7 +4707,7 @@ sonora, e o custo é diretamente proporcional ao volume
 do material do revestimento.
 Uma expressão que fornece o custo para revestir 
 uma parede de área A (em metro quadrado), situada 
-a D metros da fonte sonora, é","B","500 . A/D^2",1,NA,NA,NA,NA,"Portuguese","B"
+a D metros da fonte sonora, é","B","(500 . A)/D^2",1,NA,NA,NA,NA,"Portuguese","B"
 "enem_2016_1mil_mt","enem_2016_1mil_mt_1",24747,"ENEM 2016 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -4764,7 +4764,7 @@ sonora, e o custo é diretamente proporcional ao volume
 do material do revestimento.
 Uma expressão que fornece o custo para revestir 
 uma parede de área A (em metro quadrado), situada 
-a D metros da fonte sonora, é","B","500 . D^2/A",0,NA,NA,NA,NA,"Portuguese","C"
+a D metros da fonte sonora, é","B","(500 . D^2)/A",0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2016_1mil_mt","enem_2016_1mil_mt_1",24747,"ENEM 2016 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -4821,7 +4821,7 @@ sonora, e o custo é diretamente proporcional ao volume
 do material do revestimento.
 Uma expressão que fornece o custo para revestir 
 uma parede de área A (em metro quadrado), situada 
-a D metros da fonte sonora, é","B","500 . A . D^2/81",0,NA,NA,NA,NA,"Portuguese","D"
+a D metros da fonte sonora, é","B","(500 . A . D^2)/81",0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2016_1mil_mt","enem_2016_1mil_mt_1",24747,"ENEM 2016 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -4878,7 +4878,7 @@ sonora, e o custo é diretamente proporcional ao volume
 do material do revestimento.
 Uma expressão que fornece o custo para revestir 
 uma parede de área A (em metro quadrado), situada 
-a D metros da fonte sonora, é","B","500 . 3 . D^2/A",0,NA,NA,NA,NA,"Portuguese","E"
+a D metros da fonte sonora, é","B","(500 . 3 . D^2)/A",0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2016_1mil_mt","enem_2016_1mil_mt_1",96774,"ENEM 2016 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -7902,7 +7902,7 @@ CADERNO
 7
 AZUL",NA,"Uma liga metálica sai do forno a uma temperatura de 
 3 000 °C e diminui 1% de sua temperatura a cada 30 min.
-Use 0,477 como aproximação para log 10(3) e 1,041 
+Use 0,477 como aproximação para log_10(3) e 1,041 
 como aproximação para log_10(11).
 O tempo decorrido, em hora, até que a liga atinja 30 °C é 
 mais próximo de","D","22.",0,NA,NA,NA,NA,"Portuguese","A"
@@ -7954,7 +7954,7 @@ CADERNO
 7
 AZUL",NA,"Uma liga metálica sai do forno a uma temperatura de 
 3 000 °C e diminui 1% de sua temperatura a cada 30 min.
-Use 0,477 como aproximação para log 10(3) e 1,041 
+Use 0,477 como aproximação para log_10(3) e 1,041 
 como aproximação para log_10(11).
 O tempo decorrido, em hora, até que a liga atinja 30 °C é 
 mais próximo de","D","50.",0,NA,NA,NA,NA,"Portuguese","B"
@@ -8006,7 +8006,7 @@ CADERNO
 7
 AZUL",NA,"Uma liga metálica sai do forno a uma temperatura de 
 3 000 °C e diminui 1% de sua temperatura a cada 30 min.
-Use 0,477 como aproximação para log 10(3) e 1,041 
+Use 0,477 como aproximação para log_10(3) e 1,041 
 como aproximação para log_10(11).
 O tempo decorrido, em hora, até que a liga atinja 30 °C é 
 mais próximo de","D","100.",0,NA,NA,NA,NA,"Portuguese","C"
@@ -8058,7 +8058,7 @@ CADERNO
 7
 AZUL",NA,"Uma liga metálica sai do forno a uma temperatura de 
 3 000 °C e diminui 1% de sua temperatura a cada 30 min.
-Use 0,477 como aproximação para log 10(3) e 1,041 
+Use 0,477 como aproximação para log_10(3) e 1,041 
 como aproximação para log_10(11).
 O tempo decorrido, em hora, até que a liga atinja 30 °C é 
 mais próximo de","D","200.",1,NA,NA,NA,NA,"Portuguese","D"
@@ -8110,7 +8110,7 @@ CADERNO
 7
 AZUL",NA,"Uma liga metálica sai do forno a uma temperatura de 
 3 000 °C e diminui 1% de sua temperatura a cada 30 min.
-Use 0,477 como aproximação para log 10(3) e 1,041 
+Use 0,477 como aproximação para log_10(3) e 1,041 
 como aproximação para log_10(11).
 O tempo decorrido, em hora, até que a liga atinja 30 °C é 
 mais próximo de","D","400.",0,NA,NA,NA,NA,"Portuguese","E"
@@ -10313,7 +10313,7 @@ calcular a área sob o arco parabólico em questão. Usando
 o eixo horizontal no nível do chão e o eixo de simetria da 
 parábola como eixo vertical, obteve a seguinte equação 
 para a parábola:
-y = 9 − x2, sendo x e y medidos em metros. 
+y = 9 − x^2, sendo x e y medidos em metros. 
 Sabe-se que a área sob uma parábola como esta é 
 igual a 2/3
  da área do retângulo cujas dimensões são, 
@@ -10374,7 +10374,7 @@ calcular a área sob o arco parabólico em questão. Usando
 o eixo horizontal no nível do chão e o eixo de simetria da 
 parábola como eixo vertical, obteve a seguinte equação 
 para a parábola:
-y = 9 − x2, sendo x e y medidos em metros. 
+y = 9 − x^2, sendo x e y medidos em metros. 
 Sabe-se que a área sob uma parábola como esta é 
 igual a 2/3
  da área do retângulo cujas dimensões são, 
@@ -10435,7 +10435,7 @@ calcular a área sob o arco parabólico em questão. Usando
 o eixo horizontal no nível do chão e o eixo de simetria da 
 parábola como eixo vertical, obteve a seguinte equação 
 para a parábola:
-y = 9 − x2, sendo x e y medidos em metros. 
+y = 9 − x^2, sendo x e y medidos em metros. 
 Sabe-se que a área sob uma parábola como esta é 
 igual a 2/3
  da área do retângulo cujas dimensões são, 
@@ -10496,7 +10496,7 @@ calcular a área sob o arco parabólico em questão. Usando
 o eixo horizontal no nível do chão e o eixo de simetria da 
 parábola como eixo vertical, obteve a seguinte equação 
 para a parábola:
-y = 9 − x2, sendo x e y medidos em metros. 
+y = 9 − x^2, sendo x e y medidos em metros. 
 Sabe-se que a área sob uma parábola como esta é 
 igual a 2/3
  da área do retângulo cujas dimensões são, 
@@ -10557,7 +10557,7 @@ calcular a área sob o arco parabólico em questão. Usando
 o eixo horizontal no nível do chão e o eixo de simetria da 
 parábola como eixo vertical, obteve a seguinte equação 
 para a parábola:
-y = 9 − x2, sendo x e y medidos em metros. 
+y = 9 − x^2, sendo x e y medidos em metros. 
 Sabe-se que a área sob uma parábola como esta é 
 igual a 2/3
  da área do retângulo cujas dimensões são, 
@@ -10911,7 +10911,7 @@ funcionários (%)
 A
 B
 P
-O Índice de Gini, q ue mede o grau de concentração 
+O Índice de Gini, que mede o grau de concentração 
 de renda de um determinado grupo, pode ser calculado 
 pela razão A/(A + B), em que A e B são as medidas das 
 áreas indicadas no gráfico.
@@ -10989,7 +10989,7 @@ funcionários (%)
 A
 B
 P
-O Índice de Gini, q ue mede o grau de concentração 
+O Índice de Gini, que mede o grau de concentração 
 de renda de um determinado grupo, pode ser calculado 
 pela razão A/(A + B), em que A e B são as medidas das 
 áreas indicadas no gráfico.
@@ -11067,7 +11067,7 @@ funcionários (%)
 A
 B
 P
-O Índice de Gini, q ue mede o grau de concentração 
+O Índice de Gini, que mede o grau de concentração 
 de renda de um determinado grupo, pode ser calculado 
 pela razão A/(A + B), em que A e B são as medidas das 
 áreas indicadas no gráfico.
@@ -11145,7 +11145,7 @@ funcionários (%)
 A
 B
 P
-O Índice de Gini, q ue mede o grau de concentração 
+O Índice de Gini, que mede o grau de concentração 
 de renda de um determinado grupo, pode ser calculado 
 pela razão A/(A + B), em que A e B são as medidas das 
 áreas indicadas no gráfico.
@@ -11223,7 +11223,7 @@ funcionários (%)
 A
 B
 P
-O Índice de Gini, q ue mede o grau de concentração 
+O Índice de Gini, que mede o grau de concentração 
 de renda de um determinado grupo, pode ser calculado 
 pela razão A/(A + B), em que A e B são as medidas das 
 áreas indicadas no gráfico.
@@ -11285,8 +11285,8 @@ de pessoas que saem do elevador em cada um dos andares do edifício onde ele tra
 registros do ascensorista durante a primeira subida do térreo, de onde partem ele e mais três pessoas, ao quinto andar 
 do edifício.
 Número de pessoas Térreo 1 o andar 2 o andar 3 o andar 4 o andar 5 o andar
-que entram no elevador 4 41222
-que saem do elevador 0 31206
+que entram no elevador 4 4 1 2 2 2
+que saem do elevador 0 3 1 2 0 6
 Com base no quadro, qual é a moda do número de pessoas no elevador durante a subida do térreo ao quinto andar?","D","2",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2016_1mil_mt","enem_2016_1mil_mt_1",30029,"ENEM 2016 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
@@ -11339,8 +11339,8 @@ de pessoas que saem do elevador em cada um dos andares do edifício onde ele tra
 registros do ascensorista durante a primeira subida do térreo, de onde partem ele e mais três pessoas, ao quinto andar 
 do edifício.
 Número de pessoas Térreo 1 o andar 2 o andar 3 o andar 4 o andar 5 o andar
-que entram no elevador 4 41222
-que saem do elevador 0 31206
+que entram no elevador 4 4 1 2 2 2
+que saem do elevador 0 3 1 2 0 6
 Com base no quadro, qual é a moda do número de pessoas no elevador durante a subida do térreo ao quinto andar?","D","3",0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2016_1mil_mt","enem_2016_1mil_mt_1",30029,"ENEM 2016 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
@@ -11393,8 +11393,8 @@ de pessoas que saem do elevador em cada um dos andares do edifício onde ele tra
 registros do ascensorista durante a primeira subida do térreo, de onde partem ele e mais três pessoas, ao quinto andar 
 do edifício.
 Número de pessoas Térreo 1 o andar 2 o andar 3 o andar 4 o andar 5 o andar
-que entram no elevador 4 41222
-que saem do elevador 0 31206
+que entram no elevador 4 4 1 2 2 2
+que saem do elevador 0 3 1 2 0 6
 Com base no quadro, qual é a moda do número de pessoas no elevador durante a subida do térreo ao quinto andar?","D","4",0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2016_1mil_mt","enem_2016_1mil_mt_1",30029,"ENEM 2016 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
@@ -11447,8 +11447,8 @@ de pessoas que saem do elevador em cada um dos andares do edifício onde ele tra
 registros do ascensorista durante a primeira subida do térreo, de onde partem ele e mais três pessoas, ao quinto andar 
 do edifício.
 Número de pessoas Térreo 1 o andar 2 o andar 3 o andar 4 o andar 5 o andar
-que entram no elevador 4 41222
-que saem do elevador 0 31206
+que entram no elevador 4 4 1 2 2 2
+que saem do elevador 0 3 1 2 0 6
 Com base no quadro, qual é a moda do número de pessoas no elevador durante a subida do térreo ao quinto andar?","D","5",1,NA,NA,NA,NA,"Portuguese","D"
 "enem_2016_1mil_mt","enem_2016_1mil_mt_1",30029,"ENEM 2016 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
@@ -11501,8 +11501,8 @@ de pessoas que saem do elevador em cada um dos andares do edifício onde ele tra
 registros do ascensorista durante a primeira subida do térreo, de onde partem ele e mais três pessoas, ao quinto andar 
 do edifício.
 Número de pessoas Térreo 1 o andar 2 o andar 3 o andar 4 o andar 5 o andar
-que entram no elevador 4 41222
-que saem do elevador 0 31206
+que entram no elevador 4 4 1 2 2 2
+que saem do elevador 0 3 1 2 0 6
 Com base no quadro, qual é a moda do número de pessoas no elevador durante a subida do térreo ao quinto andar?","D","6",0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2016_1mil_mt","enem_2016_1mil_mt_1",53721,"ENEM 2016 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
@@ -13792,8 +13792,7 @@ que passa por A e B e, o trecho de B até C se dê sobre o
 meridiano que passa por B e C. Considere que o plano D
 é paralelo à linha do equador na figura.
 A projeção ortogonal, no plano D, do caminho traçado no 
-globo pode ser representada por
-A","E",NA,0,NA,NA,NA,NA,"Portuguese","A"
+globo pode ser representada por","E",NA,0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2016_1mil_mt","enem_2016_1mil_mt_1",39198,"ENEM 2016 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -13850,8 +13849,7 @@ que passa por A e B e, o trecho de B até C se dê sobre o
 meridiano que passa por B e C. Considere que o plano D
 é paralelo à linha do equador na figura.
 A projeção ortogonal, no plano D, do caminho traçado no 
-globo pode ser representada por
-A","E",NA,0,NA,NA,NA,NA,"Portuguese","B"
+globo pode ser representada por","E",NA,0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2016_1mil_mt","enem_2016_1mil_mt_1",39198,"ENEM 2016 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -13908,8 +13906,7 @@ que passa por A e B e, o trecho de B até C se dê sobre o
 meridiano que passa por B e C. Considere que o plano D
 é paralelo à linha do equador na figura.
 A projeção ortogonal, no plano D, do caminho traçado no 
-globo pode ser representada por
-A","E",NA,0,NA,NA,NA,NA,"Portuguese","C"
+globo pode ser representada por","E",NA,0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2016_1mil_mt","enem_2016_1mil_mt_1",39198,"ENEM 2016 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -13966,8 +13963,7 @@ que passa por A e B e, o trecho de B até C se dê sobre o
 meridiano que passa por B e C. Considere que o plano D
 é paralelo à linha do equador na figura.
 A projeção ortogonal, no plano D, do caminho traçado no 
-globo pode ser representada por
-A","E",NA,0,NA,NA,NA,NA,"Portuguese","D"
+globo pode ser representada por","E",NA,0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2016_1mil_mt","enem_2016_1mil_mt_1",39198,"ENEM 2016 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
@@ -14024,8 +14020,7 @@ que passa por A e B e, o trecho de B até C se dê sobre o
 meridiano que passa por B e C. Considere que o plano D
 é paralelo à linha do equador na figura.
 A projeção ortogonal, no plano D, do caminho traçado no 
-globo pode ser representada por
-A","E",NA,1,NA,NA,NA,NA,"Portuguese","E"
+globo pode ser representada por","E",NA,1,NA,NA,NA,NA,"Portuguese","E"
 "enem_2016_1mil_mt","enem_2016_1mil_mt_1",88786,"ENEM 2016 - MT","A COR DA CAPA DO SEU CADERNO DE QUESTÕES É AZUL. MARQUE-A EM SEU CARTÃO-RESPOSTA.
 PROVA DE REDAÇÃO E DE LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS

@@ -76,7 +76,8 @@ DESCRIPTIONS = [
     # though it described that image. Split so each description sits with the
     # figure it describes. The text itself is unchanged and still verified.
     dict(year="2013", area="ch", item="25217", kind="mixed", conf="high",
-         insert_after="Confl  itos em terras ind\u00edgenas",
+         # anchor follows 43_normalize_glyphs: the fi/fl ligature gap ("Confl  itos") is now joined before this pass runs
+         insert_after="Conflitos em terras ind\u00edgenas",
          text="Descri\u00e7\u00e3o do Mapa 2 (gerada por IA): Mapa do Brasil com os limites estaduais tra\u00e7ados, sobre o qual se distribuem tr\u00eas s\u00edmbolos diferentes, correspondentes \u00e0s tr\u00eas categorias da legenda: pequenas manchas de contorno fino, estrelas cheias em preto e estrelas em cinza-claro. As estrelas pretas concentram-se na Amaz\u00f4nia: h\u00e1 um agrupamento muito denso no extremo oeste da regi\u00e3o, outros ao longo de toda a faixa norte e v\u00e1rios no sul e no sudeste da Amaz\u00f4nia. As estrelas cinzentas predominam da faixa central do pa\u00eds para o sul e para o leste, com grupos no litoral do Nordeste, no leste da Bahia, no litoral do Sudeste e no Sul. As pequenas manchas de contorno aparecem dispersas pelo interior da Amaz\u00f4nia e reunidas em grupos no centro-sul e no Sul do pa\u00eds. Uma ampla \u00e1rea do interior do Nordeste e do centro-leste do pa\u00eds aparece quase sem s\u00edmbolos. A legenda ocupa um ret\u00e2ngulo no canto inferior esquerdo, parcialmente sobreposto ao contorno do mapa."),
     dict(year="2013", area="ch", item="44785", kind="mixed", conf="high",
          insert_after="START",

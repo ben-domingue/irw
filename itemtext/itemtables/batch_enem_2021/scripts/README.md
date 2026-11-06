@@ -18,9 +18,9 @@ batch, so the build can be reproduced exactly:
 | 20_verify_gabarito_microdata.py | 20_verify_gabarito_microdata.v3.py | `b8f9628250df9dd5ff7cb3bb14b30efa` |
 | 23_decode_symbolmt.py | 23_decode_symbolmt.v2.py | `a88f54b15f7658a46b5c5548e364b088` |
 | 25_repair_2021.py | 25_repair_2021.v1.py | `2dc1f84f6a30b6f95907adc4e4fe17ce` |
-| 26_strip_page_furniture.py | 26_strip_page_furniture.v11.py | `91a2b32477ecb2f0db325fd1fa6293a7` |
+| 26_strip_page_furniture.py | 26_strip_page_furniture.v12.py | `80208faf8bfacc0c3b4f3b1c8bf3f81b` |
 | 29_decode_2021_notation.py | 29_decode_2021_notation.v4.py | `e0f129e6b0a43838cbaf467115bb97a0` |
-| 43_normalize_glyphs.py | 43_normalize_glyphs.v4.py | `621ac099a9c6acaf17085fb2300ffe39` |
+| 43_normalize_glyphs.py | 43_normalize_glyphs.v5.py | `e2ee13ed7ac1747ad126f029f8380f51` |
 | 46_strip_option_letter.py | 46_strip_option_letter.v3.py | `86b69494098458373fb90d662417ddde` |
 | 48_mark_scripts.py | 48_mark_scripts.v8.py | `0d8e4edd1507be45fbb7db367694d2f2` |
 | 49_option_conventions.py | 49_option_conventions.v2.py | `a7c7870a5774efa50e1ce52d3e1acb66` |
@@ -29,6 +29,6 @@ batch, so the build can be reproduced exactly:
 | 55_recover_tables.py | 55_recover_tables.v1.py | `cf542ff149350b004527ec0c4cd13884` |
 | 56_reading_order.py | 56_reading_order.v1.py | `2b7bee366d7958c02091c4444eaba694` |
 | 57_drawn_glyphs.py | 57_drawn_glyphs.v1.py | `9879b9c689311247083ea46c9b32e1d1` |
-| 58_verified_patches.py | 58_verified_patches.v3.py | `b92423109e16043f74d87c9879f00d63` |
-| 59_strip_essay_section.py | 59_strip_essay_section.v2.py | `8783d4254587569974e0c12ea8563e21` |
-| 60_stimulus_descriptions.py | 60_stimulus_descriptions.v2.py | `b011fed09d1b7ad18c783b7fa41a651e` |
+| 58_verified_patches.py | 58_verified_patches.v4.py | `f3227cecfc2b4d35e562a20f7bce231e` |
+| 59_strip_essay_section.py | 59_strip_essay_section.v3.py | `f0f5285b7df11e6e672054e3fbd82f0c` |
+| 60_stimulus_descriptions.py | 60_stimulus_descriptions.v3.py | `00b080b6f43621b4451c8fbfd73e4ba3` |

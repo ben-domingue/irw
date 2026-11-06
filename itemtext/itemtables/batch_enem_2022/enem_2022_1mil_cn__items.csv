@@ -874,9 +874,9 @@ ligação simples O, ligação simples CH_3; Segundo grupo: ligação simples OH
 Anetol (no óleo de anis): Anel aromático com dois grupos: Primeiro grupo: O ligação simples CH3; Segundo grupo: 
 C ligação dupla C, ligação simples CH_3.
 Vanilina (no óleo de baunilha): Anel aromático com três grupos: Primeiro grupo: C ligação dupla O, ligação simples 
-H; Segundo grupo: O ligação simples CH3; T erceiro grupo: ligação simples OH.
+H; Segundo grupo: O ligação simples CH3; Terceiro grupo: ligação simples OH.
 Eugenol (no óleo de cravos): Anel aromático com três grupos: Primeiro grupo: CH 2 ligação simples CH, ligação 
-dupla CH_2; Segundo grupo: O ligação simples CH3; T erceiro grupo: ligação simples OH.
+dupla CH_2; Segundo grupo: O ligação simples CH3; Terceiro grupo: ligação simples OH.
 Cinamaldeído (no óleo de canela): Anel aromático com o grupo CH ligação dupla CH, ligação simples C, ligação 
 dupla O ligação simples H.
 HO
@@ -955,9 +955,9 @@ ligação simples O, ligação simples CH_3; Segundo grupo: ligação simples OH
 Anetol (no óleo de anis): Anel aromático com dois grupos: Primeiro grupo: O ligação simples CH3; Segundo grupo: 
 C ligação dupla C, ligação simples CH_3.
 Vanilina (no óleo de baunilha): Anel aromático com três grupos: Primeiro grupo: C ligação dupla O, ligação simples 
-H; Segundo grupo: O ligação simples CH3; T erceiro grupo: ligação simples OH.
+H; Segundo grupo: O ligação simples CH3; Terceiro grupo: ligação simples OH.
 Eugenol (no óleo de cravos): Anel aromático com três grupos: Primeiro grupo: CH 2 ligação simples CH, ligação 
-dupla CH_2; Segundo grupo: O ligação simples CH3; T erceiro grupo: ligação simples OH.
+dupla CH_2; Segundo grupo: O ligação simples CH3; Terceiro grupo: ligação simples OH.
 Cinamaldeído (no óleo de canela): Anel aromático com o grupo CH ligação dupla CH, ligação simples C, ligação 
 dupla O ligação simples H.
 HO
@@ -1036,9 +1036,9 @@ ligação simples O, ligação simples CH_3; Segundo grupo: ligação simples OH
 Anetol (no óleo de anis): Anel aromático com dois grupos: Primeiro grupo: O ligação simples CH3; Segundo grupo: 
 C ligação dupla C, ligação simples CH_3.
 Vanilina (no óleo de baunilha): Anel aromático com três grupos: Primeiro grupo: C ligação dupla O, ligação simples 
-H; Segundo grupo: O ligação simples CH3; T erceiro grupo: ligação simples OH.
+H; Segundo grupo: O ligação simples CH3; Terceiro grupo: ligação simples OH.
 Eugenol (no óleo de cravos): Anel aromático com três grupos: Primeiro grupo: CH 2 ligação simples CH, ligação 
-dupla CH_2; Segundo grupo: O ligação simples CH3; T erceiro grupo: ligação simples OH.
+dupla CH_2; Segundo grupo: O ligação simples CH3; Terceiro grupo: ligação simples OH.
 Cinamaldeído (no óleo de canela): Anel aromático com o grupo CH ligação dupla CH, ligação simples C, ligação 
 dupla O ligação simples H.
 HO
@@ -1117,9 +1117,9 @@ ligação simples O, ligação simples CH_3; Segundo grupo: ligação simples OH
 Anetol (no óleo de anis): Anel aromático com dois grupos: Primeiro grupo: O ligação simples CH3; Segundo grupo: 
 C ligação dupla C, ligação simples CH_3.
 Vanilina (no óleo de baunilha): Anel aromático com três grupos: Primeiro grupo: C ligação dupla O, ligação simples 
-H; Segundo grupo: O ligação simples CH3; T erceiro grupo: ligação simples OH.
+H; Segundo grupo: O ligação simples CH3; Terceiro grupo: ligação simples OH.
 Eugenol (no óleo de cravos): Anel aromático com três grupos: Primeiro grupo: CH 2 ligação simples CH, ligação 
-dupla CH_2; Segundo grupo: O ligação simples CH3; T erceiro grupo: ligação simples OH.
+dupla CH_2; Segundo grupo: O ligação simples CH3; Terceiro grupo: ligação simples OH.
 Cinamaldeído (no óleo de canela): Anel aromático com o grupo CH ligação dupla CH, ligação simples C, ligação 
 dupla O ligação simples H.
 HO
@@ -1198,9 +1198,9 @@ ligação simples O, ligação simples CH_3; Segundo grupo: ligação simples OH
 Anetol (no óleo de anis): Anel aromático com dois grupos: Primeiro grupo: O ligação simples CH3; Segundo grupo: 
 C ligação dupla C, ligação simples CH_3.
 Vanilina (no óleo de baunilha): Anel aromático com três grupos: Primeiro grupo: C ligação dupla O, ligação simples 
-H; Segundo grupo: O ligação simples CH3; T erceiro grupo: ligação simples OH.
+H; Segundo grupo: O ligação simples CH3; Terceiro grupo: ligação simples OH.
 Eugenol (no óleo de cravos): Anel aromático com três grupos: Primeiro grupo: CH 2 ligação simples CH, ligação 
-dupla CH_2; Segundo grupo: O ligação simples CH3; T erceiro grupo: ligação simples OH.
+dupla CH_2; Segundo grupo: O ligação simples CH3; Terceiro grupo: ligação simples OH.
 Cinamaldeído (no óleo de canela): Anel aromático com o grupo CH ligação dupla CH, ligação simples C, ligação 
 dupla O ligação simples H.
 HO
@@ -1851,17 +1851,7 @@ carro por segundo.
 Rota 1: ddp 510 e corrente 4.
 Rota 2: ddp 608 e corrente 4.
 Rota 3: ddp 575 e corrente 3.
-Rota d.d.p. J
-carrom⋅
-⎛
-⎝⎜
-⎞
-⎠⎟ Corrente carro
-s
-⎛
-⎝⎜
-⎞
-⎠⎟
+Rota d.d.p. (J/(carro⋅m)) Corrente (carro/s)
 1 510 4
 2 608 4
 3 575 3
@@ -1919,17 +1909,7 @@ carro por segundo.
 Rota 1: ddp 510 e corrente 4.
 Rota 2: ddp 608 e corrente 4.
 Rota 3: ddp 575 e corrente 3.
-Rota d.d.p. J
-carrom⋅
-⎛
-⎝⎜
-⎞
-⎠⎟ Corrente carro
-s
-⎛
-⎝⎜
-⎞
-⎠⎟
+Rota d.d.p. (J/(carro⋅m)) Corrente (carro/s)
 1 510 4
 2 608 4
 3 575 3
@@ -1987,17 +1967,7 @@ carro por segundo.
 Rota 1: ddp 510 e corrente 4.
 Rota 2: ddp 608 e corrente 4.
 Rota 3: ddp 575 e corrente 3.
-Rota d.d.p. J
-carrom⋅
-⎛
-⎝⎜
-⎞
-⎠⎟ Corrente carro
-s
-⎛
-⎝⎜
-⎞
-⎠⎟
+Rota d.d.p. (J/(carro⋅m)) Corrente (carro/s)
 1 510 4
 2 608 4
 3 575 3
@@ -2055,17 +2025,7 @@ carro por segundo.
 Rota 1: ddp 510 e corrente 4.
 Rota 2: ddp 608 e corrente 4.
 Rota 3: ddp 575 e corrente 3.
-Rota d.d.p. J
-carrom⋅
-⎛
-⎝⎜
-⎞
-⎠⎟ Corrente carro
-s
-⎛
-⎝⎜
-⎞
-⎠⎟
+Rota d.d.p. (J/(carro⋅m)) Corrente (carro/s)
 1 510 4
 2 608 4
 3 575 3
@@ -2123,17 +2083,7 @@ carro por segundo.
 Rota 1: ddp 510 e corrente 4.
 Rota 2: ddp 608 e corrente 4.
 Rota 3: ddp 575 e corrente 3.
-Rota d.d.p. J
-carrom⋅
-⎛
-⎝⎜
-⎞
-⎠⎟ Corrente carro
-s
-⎛
-⎝⎜
-⎞
-⎠⎟
+Rota d.d.p. (J/(carro⋅m)) Corrente (carro/s)
 1 510 4
 2 608 4
 3 575 3
@@ -2197,13 +2147,11 @@ Bactérias
 nitrificantesNitrificaçãoAmonificação
 Bactérias fixadoras
 de N2 no solo Bactérias nitrificantes
-Bactérias fixa-
-doras de N_2 nos 
+Bactérias fixadoras de N_2 nos 
 nódulos de raízes 
 de leguminosas
 Bactérias
-desnitri-
-ficantes
+desnitrificantes
 (fungos e bactérias
 aeróbicas e anaeróbicas)
 Decompositores
@@ -2278,13 +2226,11 @@ Bactérias
 nitrificantesNitrificaçãoAmonificação
 Bactérias fixadoras
 de N2 no solo Bactérias nitrificantes
-Bactérias fixa-
-doras de N_2 nos 
+Bactérias fixadoras de N_2 nos 
 nódulos de raízes 
 de leguminosas
 Bactérias
-desnitri-
-ficantes
+desnitrificantes
 (fungos e bactérias
 aeróbicas e anaeróbicas)
 Decompositores
@@ -2359,13 +2305,11 @@ Bactérias
 nitrificantesNitrificaçãoAmonificação
 Bactérias fixadoras
 de N2 no solo Bactérias nitrificantes
-Bactérias fixa-
-doras de N_2 nos 
+Bactérias fixadoras de N_2 nos 
 nódulos de raízes 
 de leguminosas
 Bactérias
-desnitri-
-ficantes
+desnitrificantes
 (fungos e bactérias
 aeróbicas e anaeróbicas)
 Decompositores
@@ -2440,13 +2384,11 @@ Bactérias
 nitrificantesNitrificaçãoAmonificação
 Bactérias fixadoras
 de N2 no solo Bactérias nitrificantes
-Bactérias fixa-
-doras de N_2 nos 
+Bactérias fixadoras de N_2 nos 
 nódulos de raízes 
 de leguminosas
 Bactérias
-desnitri-
-ficantes
+desnitrificantes
 (fungos e bactérias
 aeróbicas e anaeróbicas)
 Decompositores
@@ -2521,13 +2463,11 @@ Bactérias
 nitrificantesNitrificaçãoAmonificação
 Bactérias fixadoras
 de N2 no solo Bactérias nitrificantes
-Bactérias fixa-
-doras de N_2 nos 
+Bactérias fixadoras de N_2 nos 
 nódulos de raízes 
 de leguminosas
 Bactérias
-desnitri-
-ficantes
+desnitrificantes
 (fungos e bactérias
 aeróbicas e anaeróbicas)
 Decompositores
@@ -4440,13 +4380,7 @@ Vazão igual a 3 — variação de temperatura: 10 para
 o morno, 20 para o quente e 30 para o superquente.
 Vazão igual a 6 — variação de temperatura: 5 para o 
 morno, 10 para o quente e 15 para o superquente.
-Vazão L
-min
-⎛
-⎝⎜
-⎞
-⎠⎟
- ΔTC()°
+Vazão (L/min) ΔT (°C)
 Morno Quente Superquente
 3 10 20 30
 6 5 10 15
@@ -4504,13 +4438,7 @@ Vazão igual a 3 — variação de temperatura: 10 para
 o morno, 20 para o quente e 30 para o superquente.
 Vazão igual a 6 — variação de temperatura: 5 para o 
 morno, 10 para o quente e 15 para o superquente.
-Vazão L
-min
-⎛
-⎝⎜
-⎞
-⎠⎟
- ΔTC()°
+Vazão (L/min) ΔT (°C)
 Morno Quente Superquente
 3 10 20 30
 6 5 10 15
@@ -4568,13 +4496,7 @@ Vazão igual a 3 — variação de temperatura: 10 para
 o morno, 20 para o quente e 30 para o superquente.
 Vazão igual a 6 — variação de temperatura: 5 para o 
 morno, 10 para o quente e 15 para o superquente.
-Vazão L
-min
-⎛
-⎝⎜
-⎞
-⎠⎟
- ΔTC()°
+Vazão (L/min) ΔT (°C)
 Morno Quente Superquente
 3 10 20 30
 6 5 10 15
@@ -4632,13 +4554,7 @@ Vazão igual a 3 — variação de temperatura: 10 para
 o morno, 20 para o quente e 30 para o superquente.
 Vazão igual a 6 — variação de temperatura: 5 para o 
 morno, 10 para o quente e 15 para o superquente.
-Vazão L
-min
-⎛
-⎝⎜
-⎞
-⎠⎟
- ΔTC()°
+Vazão (L/min) ΔT (°C)
 Morno Quente Superquente
 3 10 20 30
 6 5 10 15
@@ -4696,13 +4612,7 @@ Vazão igual a 3 — variação de temperatura: 10 para
 o morno, 20 para o quente e 30 para o superquente.
 Vazão igual a 6 — variação de temperatura: 5 para o 
 morno, 10 para o quente e 15 para o superquente.
-Vazão L
-min
-⎛
-⎝⎜
-⎞
-⎠⎟
- ΔTC()°
+Vazão (L/min) ΔT (°C)
 Morno Quente Superquente
 3 10 20 30
 6 5 10 15
@@ -4751,7 +4661,7 @@ Não queira perder a sua alma
 2 ",NA,"Um grupo de alunos realizou um experimento para 
 observar algumas propriedades dos ácidos, adicionando 
 um pedaço de mármore (CaCO 3) a uma solução aquosa 
-de ácido clorídrico (HC l), observando a liberação de um 
+de ácido clorídrico (HCl), observando a liberação de um 
 gás e o aumento da temperatura.
 Gás
 Ácido
@@ -4790,7 +4700,7 @@ Não queira perder a sua alma
 2 ",NA,"Um grupo de alunos realizou um experimento para 
 observar algumas propriedades dos ácidos, adicionando 
 um pedaço de mármore (CaCO 3) a uma solução aquosa 
-de ácido clorídrico (HC l), observando a liberação de um 
+de ácido clorídrico (HCl), observando a liberação de um 
 gás e o aumento da temperatura.
 Gás
 Ácido
@@ -4829,7 +4739,7 @@ Não queira perder a sua alma
 2 ",NA,"Um grupo de alunos realizou um experimento para 
 observar algumas propriedades dos ácidos, adicionando 
 um pedaço de mármore (CaCO 3) a uma solução aquosa 
-de ácido clorídrico (HC l), observando a liberação de um 
+de ácido clorídrico (HCl), observando a liberação de um 
 gás e o aumento da temperatura.
 Gás
 Ácido
@@ -4868,7 +4778,7 @@ Não queira perder a sua alma
 2 ",NA,"Um grupo de alunos realizou um experimento para 
 observar algumas propriedades dos ácidos, adicionando 
 um pedaço de mármore (CaCO 3) a uma solução aquosa 
-de ácido clorídrico (HC l), observando a liberação de um 
+de ácido clorídrico (HCl), observando a liberação de um 
 gás e o aumento da temperatura.
 Gás
 Ácido
@@ -4907,7 +4817,7 @@ Não queira perder a sua alma
 2 ",NA,"Um grupo de alunos realizou um experimento para 
 observar algumas propriedades dos ácidos, adicionando 
 um pedaço de mármore (CaCO 3) a uma solução aquosa 
-de ácido clorídrico (HC l), observando a liberação de um 
+de ácido clorídrico (HCl), observando a liberação de um 
 gás e o aumento da temperatura.
 Gás
 Ácido
@@ -5519,7 +5429,7 @@ com 2 H_2O (líquido) e 3 O_2 gasoso formando o produto
 Uma forma de garantir a durabilidade da estrutura 
 metálica e a sua resistência à umidade consiste na 
 deposição de filmes finos nanocerâmicos à base de 
-zircônia (ZrO 2) e alumina (A l2O3) sobre a superfície do 
+zircônia (ZrO 2) e alumina (Al2O3) sobre a superfície do 
 objeto que se deseja proteger.
 Essa nanotecnologia aplicada na proteção contra a 
 corrosão se baseia no(a)","D","proteção catódica, que utiliza um metal fortemente 
@@ -5570,7 +5480,7 @@ com 2 H_2O (líquido) e 3 O_2 gasoso formando o produto
 Uma forma de garantir a durabilidade da estrutura 
 metálica e a sua resistência à umidade consiste na 
 deposição de filmes finos nanocerâmicos à base de 
-zircônia (ZrO 2) e alumina (A l2O3) sobre a superfície do 
+zircônia (ZrO 2) e alumina (Al2O3) sobre a superfície do 
 objeto que se deseja proteger.
 Essa nanotecnologia aplicada na proteção contra a 
 corrosão se baseia no(a)","D","uso de metais de sacrifício, que se oxidam no lugar 
@@ -5621,7 +5531,7 @@ com 2 H_2O (líquido) e 3 O_2 gasoso formando o produto
 Uma forma de garantir a durabilidade da estrutura 
 metálica e a sua resistência à umidade consiste na 
 deposição de filmes finos nanocerâmicos à base de 
-zircônia (ZrO 2) e alumina (A l2O3) sobre a superfície do 
+zircônia (ZrO 2) e alumina (Al2O3) sobre a superfície do 
 objeto que se deseja proteger.
 Essa nanotecnologia aplicada na proteção contra a 
 corrosão se baseia no(a)","D","passivação do ferro, que fica revestido pelo seu 
@@ -5672,7 +5582,7 @@ com 2 H_2O (líquido) e 3 O_2 gasoso formando o produto
 Uma forma de garantir a durabilidade da estrutura 
 metálica e a sua resistência à umidade consiste na 
 deposição de filmes finos nanocerâmicos à base de 
-zircônia (ZrO 2) e alumina (A l2O3) sobre a superfície do 
+zircônia (ZrO 2) e alumina (Al2O3) sobre a superfície do 
 objeto que se deseja proteger.
 Essa nanotecnologia aplicada na proteção contra a 
 corrosão se baseia no(a)","D","efeito de barreira, que impede o contato com o agente 
@@ -5723,7 +5633,7 @@ com 2 H_2O (líquido) e 3 O_2 gasoso formando o produto
 Uma forma de garantir a durabilidade da estrutura 
 metálica e a sua resistência à umidade consiste na 
 deposição de filmes finos nanocerâmicos à base de 
-zircônia (ZrO 2) e alumina (A l2O3) sobre a superfície do 
+zircônia (ZrO 2) e alumina (Al2O3) sobre a superfície do 
 objeto que se deseja proteger.
 Essa nanotecnologia aplicada na proteção contra a 
 corrosão se baseia no(a)","D","galvanização, que usa outros metais de menor 
@@ -5959,7 +5869,7 @@ Não queira perder a sua alma
 11
 2 ",NA,"Mudanças climáticas e ilhas de calor urbanas
 A variação da incidência de radiação solar sobre 
-a superfície da T erra resulta em uma variação de 
+a superfície da Terra resulta em uma variação de 
 temperatura ao longo de um dia denominada amplitude 
 térmica. Edificações e pavimentações realizadas nas 
 áreas urbanas contribuem para alterar as amplitudes 
@@ -5980,17 +5890,7 @@ quilograma por metro cúbico, e calores específicos, em
 joule por grama por grau Celsius, da água e do concreto.
 Água — Densidade: 1 000; e Calor específico: 4,2.
 Concreto — Densidade: 2 500; e Calor específico: 0,8.
-Densidade kg
-m 3
-⎛
-⎝⎜
-⎞
-⎠⎟Calor específi  coJ
-gC°°
-⎛
-⎝⎜
-⎞
-⎠⎟
+Densidade (kg/m^3) Calor específico (J/(g °C))
 Água 1 000 4,2
 Concreto 2 500 0,8
 A razão entre as variações de temperatura nas áreas 
@@ -6027,7 +5927,7 @@ Não queira perder a sua alma
 11
 2 ",NA,"Mudanças climáticas e ilhas de calor urbanas
 A variação da incidência de radiação solar sobre 
-a superfície da T erra resulta em uma variação de 
+a superfície da Terra resulta em uma variação de 
 temperatura ao longo de um dia denominada amplitude 
 térmica. Edificações e pavimentações realizadas nas 
 áreas urbanas contribuem para alterar as amplitudes 
@@ -6048,17 +5948,7 @@ quilograma por metro cúbico, e calores específicos, em
 joule por grama por grau Celsius, da água e do concreto.
 Água — Densidade: 1 000; e Calor específico: 4,2.
 Concreto — Densidade: 2 500; e Calor específico: 0,8.
-Densidade kg
-m 3
-⎛
-⎝⎜
-⎞
-⎠⎟Calor específi  coJ
-gC°°
-⎛
-⎝⎜
-⎞
-⎠⎟
+Densidade (kg/m^3) Calor específico (J/(g °C))
 Água 1 000 4,2
 Concreto 2 500 0,8
 A razão entre as variações de temperatura nas áreas 
@@ -6095,7 +5985,7 @@ Não queira perder a sua alma
 11
 2 ",NA,"Mudanças climáticas e ilhas de calor urbanas
 A variação da incidência de radiação solar sobre 
-a superfície da T erra resulta em uma variação de 
+a superfície da Terra resulta em uma variação de 
 temperatura ao longo de um dia denominada amplitude 
 térmica. Edificações e pavimentações realizadas nas 
 áreas urbanas contribuem para alterar as amplitudes 
@@ -6116,17 +6006,7 @@ quilograma por metro cúbico, e calores específicos, em
 joule por grama por grau Celsius, da água e do concreto.
 Água — Densidade: 1 000; e Calor específico: 4,2.
 Concreto — Densidade: 2 500; e Calor específico: 0,8.
-Densidade kg
-m 3
-⎛
-⎝⎜
-⎞
-⎠⎟Calor específi  coJ
-gC°°
-⎛
-⎝⎜
-⎞
-⎠⎟
+Densidade (kg/m^3) Calor específico (J/(g °C))
 Água 1 000 4,2
 Concreto 2 500 0,8
 A razão entre as variações de temperatura nas áreas 
@@ -6163,7 +6043,7 @@ Não queira perder a sua alma
 11
 2 ",NA,"Mudanças climáticas e ilhas de calor urbanas
 A variação da incidência de radiação solar sobre 
-a superfície da T erra resulta em uma variação de 
+a superfície da Terra resulta em uma variação de 
 temperatura ao longo de um dia denominada amplitude 
 térmica. Edificações e pavimentações realizadas nas 
 áreas urbanas contribuem para alterar as amplitudes 
@@ -6184,17 +6064,7 @@ quilograma por metro cúbico, e calores específicos, em
 joule por grama por grau Celsius, da água e do concreto.
 Água — Densidade: 1 000; e Calor específico: 4,2.
 Concreto — Densidade: 2 500; e Calor específico: 0,8.
-Densidade kg
-m 3
-⎛
-⎝⎜
-⎞
-⎠⎟Calor específi  coJ
-gC°°
-⎛
-⎝⎜
-⎞
-⎠⎟
+Densidade (kg/m^3) Calor específico (J/(g °C))
 Água 1 000 4,2
 Concreto 2 500 0,8
 A razão entre as variações de temperatura nas áreas 
@@ -6231,7 +6101,7 @@ Não queira perder a sua alma
 11
 2 ",NA,"Mudanças climáticas e ilhas de calor urbanas
 A variação da incidência de radiação solar sobre 
-a superfície da T erra resulta em uma variação de 
+a superfície da Terra resulta em uma variação de 
 temperatura ao longo de um dia denominada amplitude 
 térmica. Edificações e pavimentações realizadas nas 
 áreas urbanas contribuem para alterar as amplitudes 
@@ -6252,17 +6122,7 @@ quilograma por metro cúbico, e calores específicos, em
 joule por grama por grau Celsius, da água e do concreto.
 Água — Densidade: 1 000; e Calor específico: 4,2.
 Concreto — Densidade: 2 500; e Calor específico: 0,8.
-Densidade kg
-m 3
-⎛
-⎝⎜
-⎞
-⎠⎟Calor específi  coJ
-gC°°
-⎛
-⎝⎜
-⎞
-⎠⎟
+Densidade (kg/m^3) Calor específico (J/(g °C))
 Água 1 000 4,2
 Concreto 2 500 0,8
 A razão entre as variações de temperatura nas áreas 
@@ -6594,7 +6454,7 @@ anfíbios anuros, os cientistas já descreveram diferentes
 padrões reprodutivos, como os exemplificados a seguir:
 Espécie 1 – As fêmeas produzem cerca de 
 5 000 gametas, que são fecundados na água, em 
-lagoas temporárias de estação chuvosa. T odo o 
+lagoas temporárias de estação chuvosa. Todo o 
 desenvolvimento embrionário, do ovo à metamorfose, 
 ocorre, nesse ambiente, independente dos pais.
 Espécie 2 – As fêmeas produzem aproximadamente 
@@ -6648,7 +6508,7 @@ anfíbios anuros, os cientistas já descreveram diferentes
 padrões reprodutivos, como os exemplificados a seguir:
 Espécie 1 – As fêmeas produzem cerca de 
 5 000 gametas, que são fecundados na água, em 
-lagoas temporárias de estação chuvosa. T odo o 
+lagoas temporárias de estação chuvosa. Todo o 
 desenvolvimento embrionário, do ovo à metamorfose, 
 ocorre, nesse ambiente, independente dos pais.
 Espécie 2 – As fêmeas produzem aproximadamente 
@@ -6702,7 +6562,7 @@ anfíbios anuros, os cientistas já descreveram diferentes
 padrões reprodutivos, como os exemplificados a seguir:
 Espécie 1 – As fêmeas produzem cerca de 
 5 000 gametas, que são fecundados na água, em 
-lagoas temporárias de estação chuvosa. T odo o 
+lagoas temporárias de estação chuvosa. Todo o 
 desenvolvimento embrionário, do ovo à metamorfose, 
 ocorre, nesse ambiente, independente dos pais.
 Espécie 2 – As fêmeas produzem aproximadamente 
@@ -6757,7 +6617,7 @@ anfíbios anuros, os cientistas já descreveram diferentes
 padrões reprodutivos, como os exemplificados a seguir:
 Espécie 1 – As fêmeas produzem cerca de 
 5 000 gametas, que são fecundados na água, em 
-lagoas temporárias de estação chuvosa. T odo o 
+lagoas temporárias de estação chuvosa. Todo o 
 desenvolvimento embrionário, do ovo à metamorfose, 
 ocorre, nesse ambiente, independente dos pais.
 Espécie 2 – As fêmeas produzem aproximadamente 
@@ -6812,7 +6672,7 @@ anfíbios anuros, os cientistas já descreveram diferentes
 padrões reprodutivos, como os exemplificados a seguir:
 Espécie 1 – As fêmeas produzem cerca de 
 5 000 gametas, que são fecundados na água, em 
-lagoas temporárias de estação chuvosa. T odo o 
+lagoas temporárias de estação chuvosa. Todo o 
 desenvolvimento embrionário, do ovo à metamorfose, 
 ocorre, nesse ambiente, independente dos pais.
 Espécie 2 – As fêmeas produzem aproximadamente 
@@ -6860,12 +6720,12 @@ PROVA DE CIÊNCIAS DA NATUREZA E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
 Não queira perder a sua alma
 11
-2 ",NA,"O eixo de rotação da T erra apresenta uma inclinação em relação ao plano de sua órbita em torno do Sol, interferindo 
+2 ",NA,"O eixo de rotação da Terra apresenta uma inclinação em relação ao plano de sua órbita em torno do Sol, interferindo 
 na duração do dia e da noite ao longo do ano. 
 Descrição da imagem: Representação esquemática do globo terrestre em 21 de dezembro. O globo é 
 representado por um círculo dividido ao meio por uma linha vertical, com a incidência direta de raios solares 
 ao meio-dia, representados por setas horizontais da esquerda para a direita. A metade esquerda representa a 
-parte iluminada (dia) e a metade direita representa a parte sombreada (noite). O eixo de rotação da T erra está 
+parte iluminada (dia) e a metade direita representa a parte sombreada (noite). O eixo de rotação da Terra está 
 inclinado em relação à vertical e é representado por uma reta com a metade superior na parte sombreada e a 
 metade inferior na parte iluminada. Perpendicularmente ao eixo de rotação estão indicados, de cima para baixo, 
 o Polo Norte, com o Círculo Polar Ártico, o Trópico de Câncer, a Linha do Equador, o Trópico de Capricórnio e 
@@ -6926,12 +6786,12 @@ PROVA DE CIÊNCIAS DA NATUREZA E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
 Não queira perder a sua alma
 11
-2 ",NA,"O eixo de rotação da T erra apresenta uma inclinação em relação ao plano de sua órbita em torno do Sol, interferindo 
+2 ",NA,"O eixo de rotação da Terra apresenta uma inclinação em relação ao plano de sua órbita em torno do Sol, interferindo 
 na duração do dia e da noite ao longo do ano. 
 Descrição da imagem: Representação esquemática do globo terrestre em 21 de dezembro. O globo é 
 representado por um círculo dividido ao meio por uma linha vertical, com a incidência direta de raios solares 
 ao meio-dia, representados por setas horizontais da esquerda para a direita. A metade esquerda representa a 
-parte iluminada (dia) e a metade direita representa a parte sombreada (noite). O eixo de rotação da T erra está 
+parte iluminada (dia) e a metade direita representa a parte sombreada (noite). O eixo de rotação da Terra está 
 inclinado em relação à vertical e é representado por uma reta com a metade superior na parte sombreada e a 
 metade inferior na parte iluminada. Perpendicularmente ao eixo de rotação estão indicados, de cima para baixo, 
 o Polo Norte, com o Círculo Polar Ártico, o Trópico de Câncer, a Linha do Equador, o Trópico de Capricórnio e 
@@ -6992,12 +6852,12 @@ PROVA DE CIÊNCIAS DA NATUREZA E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
 Não queira perder a sua alma
 11
-2 ",NA,"O eixo de rotação da T erra apresenta uma inclinação em relação ao plano de sua órbita em torno do Sol, interferindo 
+2 ",NA,"O eixo de rotação da Terra apresenta uma inclinação em relação ao plano de sua órbita em torno do Sol, interferindo 
 na duração do dia e da noite ao longo do ano. 
 Descrição da imagem: Representação esquemática do globo terrestre em 21 de dezembro. O globo é 
 representado por um círculo dividido ao meio por uma linha vertical, com a incidência direta de raios solares 
 ao meio-dia, representados por setas horizontais da esquerda para a direita. A metade esquerda representa a 
-parte iluminada (dia) e a metade direita representa a parte sombreada (noite). O eixo de rotação da T erra está 
+parte iluminada (dia) e a metade direita representa a parte sombreada (noite). O eixo de rotação da Terra está 
 inclinado em relação à vertical e é representado por uma reta com a metade superior na parte sombreada e a 
 metade inferior na parte iluminada. Perpendicularmente ao eixo de rotação estão indicados, de cima para baixo, 
 o Polo Norte, com o Círculo Polar Ártico, o Trópico de Câncer, a Linha do Equador, o Trópico de Capricórnio e 
@@ -7058,12 +6918,12 @@ PROVA DE CIÊNCIAS DA NATUREZA E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
 Não queira perder a sua alma
 11
-2 ",NA,"O eixo de rotação da T erra apresenta uma inclinação em relação ao plano de sua órbita em torno do Sol, interferindo 
+2 ",NA,"O eixo de rotação da Terra apresenta uma inclinação em relação ao plano de sua órbita em torno do Sol, interferindo 
 na duração do dia e da noite ao longo do ano. 
 Descrição da imagem: Representação esquemática do globo terrestre em 21 de dezembro. O globo é 
 representado por um círculo dividido ao meio por uma linha vertical, com a incidência direta de raios solares 
 ao meio-dia, representados por setas horizontais da esquerda para a direita. A metade esquerda representa a 
-parte iluminada (dia) e a metade direita representa a parte sombreada (noite). O eixo de rotação da T erra está 
+parte iluminada (dia) e a metade direita representa a parte sombreada (noite). O eixo de rotação da Terra está 
 inclinado em relação à vertical e é representado por uma reta com a metade superior na parte sombreada e a 
 metade inferior na parte iluminada. Perpendicularmente ao eixo de rotação estão indicados, de cima para baixo, 
 o Polo Norte, com o Círculo Polar Ártico, o Trópico de Câncer, a Linha do Equador, o Trópico de Capricórnio e 
@@ -7124,12 +6984,12 @@ PROVA DE CIÊNCIAS DA NATUREZA E SUAS TECNOLOGIAS
 PROVA DE MATEMÁTICA E SUAS TECNOLOGIAS
 Não queira perder a sua alma
 11
-2 ",NA,"O eixo de rotação da T erra apresenta uma inclinação em relação ao plano de sua órbita em torno do Sol, interferindo 
+2 ",NA,"O eixo de rotação da Terra apresenta uma inclinação em relação ao plano de sua órbita em torno do Sol, interferindo 
 na duração do dia e da noite ao longo do ano. 
 Descrição da imagem: Representação esquemática do globo terrestre em 21 de dezembro. O globo é 
 representado por um círculo dividido ao meio por uma linha vertical, com a incidência direta de raios solares 
 ao meio-dia, representados por setas horizontais da esquerda para a direita. A metade esquerda representa a 
-parte iluminada (dia) e a metade direita representa a parte sombreada (noite). O eixo de rotação da T erra está 
+parte iluminada (dia) e a metade direita representa a parte sombreada (noite). O eixo de rotação da Terra está 
 inclinado em relação à vertical e é representado por uma reta com a metade superior na parte sombreada e a 
 metade inferior na parte iluminada. Perpendicularmente ao eixo de rotação estão indicados, de cima para baixo, 
 o Polo Norte, com o Círculo Polar Ártico, o Trópico de Câncer, a Linha do Equador, o Trópico de Capricórnio e 
@@ -8293,15 +8153,7 @@ Penicilamina
 Qual estrutura derivada da penicilamina é 
 predominantemente encontrada na urina?","C","Descrição da estrutura química: Estrutura 
 derivada da penicilamina com os grupos: S de 
-carga negativa, COO de carga negativa e NH_2.
-C C
-CH3
-CH3
-NH2
-H
-−
-S COO
-−",0,NA,NA,NA,NA,"Portuguese","A"
+carga negativa, COO de carga negativa e NH_2.",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2022_1mil_cn","enem_2022_1mil_cn_1",97915,"ENEM 2022 - CN","11
 LARANJA
 2º DIA
@@ -9967,10 +9819,7 @@ Qual associação de baterias foi responsável pelo acidente?","A","Descrição 
 está ligado ao polo positivo da primeira bateria, o 
 polo negativo da primeira bateria está ligado ao polo 
 positivo da segunda bateria, e o polo negativo da 
-segunda bateria está ligado ao ponto B.
--+
-A B
--+",1,NA,NA,NA,NA,"Portuguese","A"
+segunda bateria está ligado ao ponto B.",1,NA,NA,NA,NA,"Portuguese","A"
 "enem_2022_1mil_cn","enem_2022_1mil_cn_1",81969,"ENEM 2022 - CN","11
 LARANJA
 2º DIA
@@ -10760,8 +10609,7 @@ Considerando apenas o campo magnético por causa da
 corrente i, as respectivas configurações das bússolas nos 
 pontos A, B e C serão","D","Descrição da imagem: Todas as bússolas 
 indicam o polo sul apontado para o centro da 
-circunferência.
-i",0,NA,NA,NA,NA,"Portuguese","A"
+circunferência.",0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2022_1mil_cn","enem_2022_1mil_cn_1",111558,"ENEM 2022 - CN","11
 LARANJA
 2º DIA
@@ -11049,7 +10897,7 @@ Descrição das equações químicas da figura: O
 radical SO 4 de carga negativa provoca as reações 
 a seguir: o reagente TCE (ligação dupla entre os 
 carbonos de número 1 e 2, dois Cl ligados ao carbono 
-de número 1 e um C l e um H ligados ao carbono 
+de número 1 e um Cl e um H ligados ao carbono 
 de número 2) forma o ácido dicloroetanoico (ligação 
 simples entre o grupo COOH e um carbono ligado a 
 dois Cl e um H), que forma o ácido etanodioico (dois 
@@ -11139,7 +10987,7 @@ Descrição das equações químicas da figura: O
 radical SO 4 de carga negativa provoca as reações 
 a seguir: o reagente TCE (ligação dupla entre os 
 carbonos de número 1 e 2, dois Cl ligados ao carbono 
-de número 1 e um C l e um H ligados ao carbono 
+de número 1 e um Cl e um H ligados ao carbono 
 de número 2) forma o ácido dicloroetanoico (ligação 
 simples entre o grupo COOH e um carbono ligado a 
 dois Cl e um H), que forma o ácido etanodioico (dois 
@@ -11229,7 +11077,7 @@ Descrição das equações químicas da figura: O
 radical SO 4 de carga negativa provoca as reações 
 a seguir: o reagente TCE (ligação dupla entre os 
 carbonos de número 1 e 2, dois Cl ligados ao carbono 
-de número 1 e um C l e um H ligados ao carbono 
+de número 1 e um Cl e um H ligados ao carbono 
 de número 2) forma o ácido dicloroetanoico (ligação 
 simples entre o grupo COOH e um carbono ligado a 
 dois Cl e um H), que forma o ácido etanodioico (dois 
@@ -11319,7 +11167,7 @@ Descrição das equações químicas da figura: O
 radical SO 4 de carga negativa provoca as reações 
 a seguir: o reagente TCE (ligação dupla entre os 
 carbonos de número 1 e 2, dois Cl ligados ao carbono 
-de número 1 e um C l e um H ligados ao carbono 
+de número 1 e um Cl e um H ligados ao carbono 
 de número 2) forma o ácido dicloroetanoico (ligação 
 simples entre o grupo COOH e um carbono ligado a 
 dois Cl e um H), que forma o ácido etanodioico (dois 
@@ -11409,7 +11257,7 @@ Descrição das equações químicas da figura: O
 radical SO 4 de carga negativa provoca as reações 
 a seguir: o reagente TCE (ligação dupla entre os 
 carbonos de número 1 e 2, dois Cl ligados ao carbono 
-de número 1 e um C l e um H ligados ao carbono 
+de número 1 e um Cl e um H ligados ao carbono 
 de número 2) forma o ácido dicloroetanoico (ligação 
 simples entre o grupo COOH e um carbono ligado a 
 dois Cl e um H), que forma o ácido etanodioico (dois 

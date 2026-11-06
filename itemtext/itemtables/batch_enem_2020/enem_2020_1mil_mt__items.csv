@@ -896,7 +896,7 @@ Lote
 4
 1 1
 10
-10^10
+10 10
 4
 4 4
 2
@@ -906,7 +906,7 @@ Lote
 4
 11
 22
-20 2020
+20 20 20
 Rua
 4
 4
@@ -975,7 +975,7 @@ Lote
 4
 1 1
 10
-10^10
+10 10
 4
 4 4
 2
@@ -985,7 +985,7 @@ Lote
 4
 11
 22
-20 2020
+20 20 20
 Rua
 4
 4
@@ -1054,7 +1054,7 @@ Lote
 4
 1 1
 10
-10^10
+10 10
 4
 4 4
 2
@@ -1064,7 +1064,7 @@ Lote
 4
 11
 22
-20 2020
+20 20 20
 Rua
 4
 4
@@ -1133,7 +1133,7 @@ Lote
 4
 1 1
 10
-10^10
+10 10
 4
 4 4
 2
@@ -1143,7 +1143,7 @@ Lote
 4
 11
 22
-20 2020
+20 20 20
 Rua
 4
 4
@@ -1212,7 +1212,7 @@ Lote
 4
 1 1
 10
-10^10
+10 10
 4
 4 4
 2
@@ -1222,7 +1222,7 @@ Lote
 4
 11
 22
-20 2020
+20 20 20
 Rua
 4
 4
@@ -1267,7 +1267,7 @@ garrafa é constante e cessa quando atinge o nível de
 envasamento.
 Nível de envasamento
 da garrafa
-Qual esboço de gráfi  co melhor representa a variação da 
+Qual esboço de gráfico melhor representa a variação da 
 altura do líquido em função do tempo, na garrafa indicada 
 na imagem?","B",NA,0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2020_1mil_mt","enem_2020_1mil_mt_1",111530,"ENEM 2020 - MT","LARANJA
@@ -1308,7 +1308,7 @@ garrafa é constante e cessa quando atinge o nível de
 envasamento.
 Nível de envasamento
 da garrafa
-Qual esboço de gráfi  co melhor representa a variação da 
+Qual esboço de gráfico melhor representa a variação da 
 altura do líquido em função do tempo, na garrafa indicada 
 na imagem?","B",NA,1,NA,NA,NA,NA,"Portuguese","B"
 "enem_2020_1mil_mt","enem_2020_1mil_mt_1",111530,"ENEM 2020 - MT","LARANJA
@@ -1349,7 +1349,7 @@ garrafa é constante e cessa quando atinge o nível de
 envasamento.
 Nível de envasamento
 da garrafa
-Qual esboço de gráfi  co melhor representa a variação da 
+Qual esboço de gráfico melhor representa a variação da 
 altura do líquido em função do tempo, na garrafa indicada 
 na imagem?","B",NA,0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2020_1mil_mt","enem_2020_1mil_mt_1",111530,"ENEM 2020 - MT","LARANJA
@@ -1390,7 +1390,7 @@ garrafa é constante e cessa quando atinge o nível de
 envasamento.
 Nível de envasamento
 da garrafa
-Qual esboço de gráfi  co melhor representa a variação da 
+Qual esboço de gráfico melhor representa a variação da 
 altura do líquido em função do tempo, na garrafa indicada 
 na imagem?","B",NA,0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2020_1mil_mt","enem_2020_1mil_mt_1",111530,"ENEM 2020 - MT","LARANJA
@@ -1431,7 +1431,7 @@ garrafa é constante e cessa quando atinge o nível de
 envasamento.
 Nível de envasamento
 da garrafa
-Qual esboço de gráfi  co melhor representa a variação da 
+Qual esboço de gráfico melhor representa a variação da 
 altura do líquido em função do tempo, na garrafa indicada 
 na imagem?","B",NA,0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2020_1mil_mt","enem_2020_1mil_mt_1",111566,"ENEM 2020 - MT","LARANJA
@@ -1463,15 +1463,15 @@ Eu fiz meu próprio caminho e meu caminho me fez.
 9
 10
 11
-12",NA,"No período de fi  m de ano, o síndico de um condomínio resolveu colocar, em um poste, uma iluminação natalina 
-em formato de cone, lembrando uma árvore de Natal, conforme as fi guras 1 e 2.
+12",NA,"No período de fim de ano, o síndico de um condomínio resolveu colocar, em um poste, uma iluminação natalina 
+em formato de cone, lembrando uma árvore de Natal, conforme as figuras 1 e 2.
 Poste
 Figura 2Figura 1
 h = 3 m
 c
 A árvore deverá ser feita colocando-se mangueiras de iluminação, consideradas segmentos de reta de mesmo 
 comprimento, a partir de um ponto situado a 3 metros de altura no poste até um ponto de uma circunferência de 
-fi  xação, no chão, de tal forma que esta fi  que dividida em 20 arcos iguais. O poste está fi  xado no ponto C (centro 
+fixação, no chão, de tal forma que esta fique dividida em 20 arcos iguais. O poste está fixado no ponto C (centro 
 da circunferência) perpendicularmente ao plano do chão.
 Para economizar, ele utilizará mangueiras de iluminação aproveitadas de anos anteriores, que juntas totalizaram 
 pouco mais de 100 metros de comprimento, dos quais ele decide usar exatamente 100 metros e deixar o restante 
@@ -1506,15 +1506,15 @@ Eu fiz meu próprio caminho e meu caminho me fez.
 9
 10
 11
-12",NA,"No período de fi  m de ano, o síndico de um condomínio resolveu colocar, em um poste, uma iluminação natalina 
-em formato de cone, lembrando uma árvore de Natal, conforme as fi guras 1 e 2.
+12",NA,"No período de fim de ano, o síndico de um condomínio resolveu colocar, em um poste, uma iluminação natalina 
+em formato de cone, lembrando uma árvore de Natal, conforme as figuras 1 e 2.
 Poste
 Figura 2Figura 1
 h = 3 m
 c
 A árvore deverá ser feita colocando-se mangueiras de iluminação, consideradas segmentos de reta de mesmo 
 comprimento, a partir de um ponto situado a 3 metros de altura no poste até um ponto de uma circunferência de 
-fi  xação, no chão, de tal forma que esta fi  que dividida em 20 arcos iguais. O poste está fi  xado no ponto C (centro 
+fixação, no chão, de tal forma que esta fique dividida em 20 arcos iguais. O poste está fixado no ponto C (centro 
 da circunferência) perpendicularmente ao plano do chão.
 Para economizar, ele utilizará mangueiras de iluminação aproveitadas de anos anteriores, que juntas totalizaram 
 pouco mais de 100 metros de comprimento, dos quais ele decide usar exatamente 100 metros e deixar o restante 
@@ -1549,15 +1549,15 @@ Eu fiz meu próprio caminho e meu caminho me fez.
 9
 10
 11
-12",NA,"No período de fi  m de ano, o síndico de um condomínio resolveu colocar, em um poste, uma iluminação natalina 
-em formato de cone, lembrando uma árvore de Natal, conforme as fi guras 1 e 2.
+12",NA,"No período de fim de ano, o síndico de um condomínio resolveu colocar, em um poste, uma iluminação natalina 
+em formato de cone, lembrando uma árvore de Natal, conforme as figuras 1 e 2.
 Poste
 Figura 2Figura 1
 h = 3 m
 c
 A árvore deverá ser feita colocando-se mangueiras de iluminação, consideradas segmentos de reta de mesmo 
 comprimento, a partir de um ponto situado a 3 metros de altura no poste até um ponto de uma circunferência de 
-fi  xação, no chão, de tal forma que esta fi  que dividida em 20 arcos iguais. O poste está fi  xado no ponto C (centro 
+fixação, no chão, de tal forma que esta fique dividida em 20 arcos iguais. O poste está fixado no ponto C (centro 
 da circunferência) perpendicularmente ao plano do chão.
 Para economizar, ele utilizará mangueiras de iluminação aproveitadas de anos anteriores, que juntas totalizaram 
 pouco mais de 100 metros de comprimento, dos quais ele decide usar exatamente 100 metros e deixar o restante 
@@ -1592,15 +1592,15 @@ Eu fiz meu próprio caminho e meu caminho me fez.
 9
 10
 11
-12",NA,"No período de fi  m de ano, o síndico de um condomínio resolveu colocar, em um poste, uma iluminação natalina 
-em formato de cone, lembrando uma árvore de Natal, conforme as fi guras 1 e 2.
+12",NA,"No período de fim de ano, o síndico de um condomínio resolveu colocar, em um poste, uma iluminação natalina 
+em formato de cone, lembrando uma árvore de Natal, conforme as figuras 1 e 2.
 Poste
 Figura 2Figura 1
 h = 3 m
 c
 A árvore deverá ser feita colocando-se mangueiras de iluminação, consideradas segmentos de reta de mesmo 
 comprimento, a partir de um ponto situado a 3 metros de altura no poste até um ponto de uma circunferência de 
-fi  xação, no chão, de tal forma que esta fi  que dividida em 20 arcos iguais. O poste está fi  xado no ponto C (centro 
+fixação, no chão, de tal forma que esta fique dividida em 20 arcos iguais. O poste está fixado no ponto C (centro 
 da circunferência) perpendicularmente ao plano do chão.
 Para economizar, ele utilizará mangueiras de iluminação aproveitadas de anos anteriores, que juntas totalizaram 
 pouco mais de 100 metros de comprimento, dos quais ele decide usar exatamente 100 metros e deixar o restante 
@@ -1635,15 +1635,15 @@ Eu fiz meu próprio caminho e meu caminho me fez.
 9
 10
 11
-12",NA,"No período de fi  m de ano, o síndico de um condomínio resolveu colocar, em um poste, uma iluminação natalina 
-em formato de cone, lembrando uma árvore de Natal, conforme as fi guras 1 e 2.
+12",NA,"No período de fim de ano, o síndico de um condomínio resolveu colocar, em um poste, uma iluminação natalina 
+em formato de cone, lembrando uma árvore de Natal, conforme as figuras 1 e 2.
 Poste
 Figura 2Figura 1
 h = 3 m
 c
 A árvore deverá ser feita colocando-se mangueiras de iluminação, consideradas segmentos de reta de mesmo 
 comprimento, a partir de um ponto situado a 3 metros de altura no poste até um ponto de uma circunferência de 
-fi  xação, no chão, de tal forma que esta fi  que dividida em 20 arcos iguais. O poste está fi  xado no ponto C (centro 
+fixação, no chão, de tal forma que esta fique dividida em 20 arcos iguais. O poste está fixado no ponto C (centro 
 da circunferência) perpendicularmente ao plano do chão.
 Para economizar, ele utilizará mangueiras de iluminação aproveitadas de anos anteriores, que juntas totalizaram 
 pouco mais de 100 metros de comprimento, dos quais ele decide usar exatamente 100 metros e deixar o restante 
@@ -2975,11 +2975,11 @@ Eu fiz meu próprio caminho e meu caminho me fez.
 11
 12",NA,"Um hotel de 3 andares está sendo construído. Cada 
 andar terá 100 quartos. Os quartos serão numerados de 
-100 a 399 e cada um terá seu número afi  xado à porta. 
+100 a 399 e cada um terá seu número afixado à porta. 
 Cada número será composto por peças individuais, 
 cada uma simbolizando um único algarismo.
 Qual a quantidade mínima de peças simbolizando o 
-algarismo 2 necessárias para identifi  car o número de 
+algarismo 2 necessárias para identificar o número de 
 todos os quartos?","A","160",1,NA,NA,NA,NA,"Portuguese","A"
 "enem_2020_1mil_mt","enem_2020_1mil_mt_1",29531,"ENEM 2020 - MT","LARANJA
 Eu fiz meu próprio caminho e meu caminho me fez.
@@ -3012,11 +3012,11 @@ Eu fiz meu próprio caminho e meu caminho me fez.
 11
 12",NA,"Um hotel de 3 andares está sendo construído. Cada 
 andar terá 100 quartos. Os quartos serão numerados de 
-100 a 399 e cada um terá seu número afi  xado à porta. 
+100 a 399 e cada um terá seu número afixado à porta. 
 Cada número será composto por peças individuais, 
 cada uma simbolizando um único algarismo.
 Qual a quantidade mínima de peças simbolizando o 
-algarismo 2 necessárias para identifi  car o número de 
+algarismo 2 necessárias para identificar o número de 
 todos os quartos?","A","157",0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2020_1mil_mt","enem_2020_1mil_mt_1",29531,"ENEM 2020 - MT","LARANJA
 Eu fiz meu próprio caminho e meu caminho me fez.
@@ -3049,11 +3049,11 @@ Eu fiz meu próprio caminho e meu caminho me fez.
 11
 12",NA,"Um hotel de 3 andares está sendo construído. Cada 
 andar terá 100 quartos. Os quartos serão numerados de 
-100 a 399 e cada um terá seu número afi  xado à porta. 
+100 a 399 e cada um terá seu número afixado à porta. 
 Cada número será composto por peças individuais, 
 cada uma simbolizando um único algarismo.
 Qual a quantidade mínima de peças simbolizando o 
-algarismo 2 necessárias para identifi  car o número de 
+algarismo 2 necessárias para identificar o número de 
 todos os quartos?","A","130",0,NA,NA,NA,NA,"Portuguese","C"
 "enem_2020_1mil_mt","enem_2020_1mil_mt_1",29531,"ENEM 2020 - MT","LARANJA
 Eu fiz meu próprio caminho e meu caminho me fez.
@@ -3086,11 +3086,11 @@ Eu fiz meu próprio caminho e meu caminho me fez.
 11
 12",NA,"Um hotel de 3 andares está sendo construído. Cada 
 andar terá 100 quartos. Os quartos serão numerados de 
-100 a 399 e cada um terá seu número afi  xado à porta. 
+100 a 399 e cada um terá seu número afixado à porta. 
 Cada número será composto por peças individuais, 
 cada uma simbolizando um único algarismo.
 Qual a quantidade mínima de peças simbolizando o 
-algarismo 2 necessárias para identifi  car o número de 
+algarismo 2 necessárias para identificar o número de 
 todos os quartos?","A","120",0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2020_1mil_mt","enem_2020_1mil_mt_1",29531,"ENEM 2020 - MT","LARANJA
 Eu fiz meu próprio caminho e meu caminho me fez.
@@ -3123,11 +3123,11 @@ Eu fiz meu próprio caminho e meu caminho me fez.
 11
 12",NA,"Um hotel de 3 andares está sendo construído. Cada 
 andar terá 100 quartos. Os quartos serão numerados de 
-100 a 399 e cada um terá seu número afi  xado à porta. 
+100 a 399 e cada um terá seu número afixado à porta. 
 Cada número será composto por peças individuais, 
 cada uma simbolizando um único algarismo.
 Qual a quantidade mínima de peças simbolizando o 
-algarismo 2 necessárias para identifi  car o número de 
+algarismo 2 necessárias para identificar o número de 
 todos os quartos?","A","60",0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2020_1mil_mt","enem_2020_1mil_mt_1",30344,"ENEM 2020 - MT","LARANJA
 Eu fiz meu próprio caminho e meu caminho me fez.
@@ -5817,8 +5817,7 @@ respectivos valores do frete para cada quilômetro e
 a distância, em quilômetro, entre a casa da pessoa 
 e o depósito.
 Depósito A − Saco de cimento: 23 reais; valor do 
-frete para cada quilômetro: 1 real; distância: 10 qui-
-lômetros.
+frete para cada quilômetro: 1 real; distância: 10 quilômetros.
 Depósito B − Saco de cimento: 21,50 reais; valor 
 do frete para cada quilômetro: 3 reais; distância: 
 12 quilômetros.
@@ -5832,8 +5831,7 @@ Depósito E − Saco de cimento: 24 reais; valor do
 frete para cada quilômetro: 2,50 reais; distância: 2 
 quilômetros.
 A pessoa escolherá um desses depósitos para realizar 
-sua compra, considerando os preços do cimento e do fre-
-te oferecidos em cada opção. 
+sua compra, considerando os preços do cimento e do frete oferecidos em cada opção. 
 Se a pessoa decidir pela opção mais econômica, o depósito 
 escolhido para a realização dessa compra será o","C",NA,0,NA,NA,NA,NA,"Portuguese","A"
 "enem_2020_1mil_mt","enem_2020_1mil_mt_1",60666,"ENEM 2020 - MT","LARANJA
@@ -5878,8 +5876,7 @@ respectivos valores do frete para cada quilômetro e
 a distância, em quilômetro, entre a casa da pessoa 
 e o depósito.
 Depósito A − Saco de cimento: 23 reais; valor do 
-frete para cada quilômetro: 1 real; distância: 10 qui-
-lômetros.
+frete para cada quilômetro: 1 real; distância: 10 quilômetros.
 Depósito B − Saco de cimento: 21,50 reais; valor 
 do frete para cada quilômetro: 3 reais; distância: 
 12 quilômetros.
@@ -5893,8 +5890,7 @@ Depósito E − Saco de cimento: 24 reais; valor do
 frete para cada quilômetro: 2,50 reais; distância: 2 
 quilômetros.
 A pessoa escolherá um desses depósitos para realizar 
-sua compra, considerando os preços do cimento e do fre-
-te oferecidos em cada opção. 
+sua compra, considerando os preços do cimento e do frete oferecidos em cada opção. 
 Se a pessoa decidir pela opção mais econômica, o depósito 
 escolhido para a realização dessa compra será o","C",NA,0,NA,NA,NA,NA,"Portuguese","B"
 "enem_2020_1mil_mt","enem_2020_1mil_mt_1",60666,"ENEM 2020 - MT","LARANJA
@@ -5939,8 +5935,7 @@ respectivos valores do frete para cada quilômetro e
 a distância, em quilômetro, entre a casa da pessoa 
 e o depósito.
 Depósito A − Saco de cimento: 23 reais; valor do 
-frete para cada quilômetro: 1 real; distância: 10 qui-
-lômetros.
+frete para cada quilômetro: 1 real; distância: 10 quilômetros.
 Depósito B − Saco de cimento: 21,50 reais; valor 
 do frete para cada quilômetro: 3 reais; distância: 
 12 quilômetros.
@@ -5954,8 +5949,7 @@ Depósito E − Saco de cimento: 24 reais; valor do
 frete para cada quilômetro: 2,50 reais; distância: 2 
 quilômetros.
 A pessoa escolherá um desses depósitos para realizar 
-sua compra, considerando os preços do cimento e do fre-
-te oferecidos em cada opção. 
+sua compra, considerando os preços do cimento e do frete oferecidos em cada opção. 
 Se a pessoa decidir pela opção mais econômica, o depósito 
 escolhido para a realização dessa compra será o","C",NA,1,NA,NA,NA,NA,"Portuguese","C"
 "enem_2020_1mil_mt","enem_2020_1mil_mt_1",60666,"ENEM 2020 - MT","LARANJA
@@ -6000,8 +5994,7 @@ respectivos valores do frete para cada quilômetro e
 a distância, em quilômetro, entre a casa da pessoa 
 e o depósito.
 Depósito A − Saco de cimento: 23 reais; valor do 
-frete para cada quilômetro: 1 real; distância: 10 qui-
-lômetros.
+frete para cada quilômetro: 1 real; distância: 10 quilômetros.
 Depósito B − Saco de cimento: 21,50 reais; valor 
 do frete para cada quilômetro: 3 reais; distância: 
 12 quilômetros.
@@ -6015,8 +6008,7 @@ Depósito E − Saco de cimento: 24 reais; valor do
 frete para cada quilômetro: 2,50 reais; distância: 2 
 quilômetros.
 A pessoa escolherá um desses depósitos para realizar 
-sua compra, considerando os preços do cimento e do fre-
-te oferecidos em cada opção. 
+sua compra, considerando os preços do cimento e do frete oferecidos em cada opção. 
 Se a pessoa decidir pela opção mais econômica, o depósito 
 escolhido para a realização dessa compra será o","C",NA,0,NA,NA,NA,NA,"Portuguese","D"
 "enem_2020_1mil_mt","enem_2020_1mil_mt_1",60666,"ENEM 2020 - MT","LARANJA
@@ -6061,8 +6053,7 @@ respectivos valores do frete para cada quilômetro e
 a distância, em quilômetro, entre a casa da pessoa 
 e o depósito.
 Depósito A − Saco de cimento: 23 reais; valor do 
-frete para cada quilômetro: 1 real; distância: 10 qui-
-lômetros.
+frete para cada quilômetro: 1 real; distância: 10 quilômetros.
 Depósito B − Saco de cimento: 21,50 reais; valor 
 do frete para cada quilômetro: 3 reais; distância: 
 12 quilômetros.
@@ -6076,8 +6067,7 @@ Depósito E − Saco de cimento: 24 reais; valor do
 frete para cada quilômetro: 2,50 reais; distância: 2 
 quilômetros.
 A pessoa escolherá um desses depósitos para realizar 
-sua compra, considerando os preços do cimento e do fre-
-te oferecidos em cada opção. 
+sua compra, considerando os preços do cimento e do frete oferecidos em cada opção. 
 Se a pessoa decidir pela opção mais econômica, o depósito 
 escolhido para a realização dessa compra será o","C",NA,0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2020_1mil_mt","enem_2020_1mil_mt_1",62498,"ENEM 2020 - MT","LARANJA
@@ -6788,16 +6778,16 @@ Eu fiz meu próprio caminho e meu caminho me fez.
 troféu que ganhou no último campeonato. O troféu está 
 representado na Figura 1 e é composto por uma base em 
 formato de um paralelepípedo reto-retângulo de madeira, 
-sobre a qual estão fi  xadas três hastes verticais que 
+sobre a qual estão fixadas três hastes verticais que 
 sustentam uma esfera de 30 centímetros de diâmetro, 
-que fi  ca centralizada sobre a base de madeira. O troféu 
+que fica centralizada sobre a base de madeira. O troféu 
 tem 100 centímetros de altura, incluída sua base.
-Descrição da fi  gura 1:Desenho de um troféu cuja 
+Descrição da figura 1:Desenho de um troféu cuja 
 forma é um paralelepípedo reto-retângulo de base 
 quadrada de lados medindo 50 centímetros, no qual 
-estão fi  xadas três hastes verticais que sustentam 
+estão fixadas três hastes verticais que sustentam 
 uma esfera.
-Descrição da fi  gura 2:Desenho de uma caixa cuja 
+Descrição da figura 2:Desenho de uma caixa cuja 
 base retangular tem indicações de 10 centímetros 
 de comprimento, 8 centímetros de largura e altura 
 desconhecida.
@@ -6850,16 +6840,16 @@ Eu fiz meu próprio caminho e meu caminho me fez.
 troféu que ganhou no último campeonato. O troféu está 
 representado na Figura 1 e é composto por uma base em 
 formato de um paralelepípedo reto-retângulo de madeira, 
-sobre a qual estão fi  xadas três hastes verticais que 
+sobre a qual estão fixadas três hastes verticais que 
 sustentam uma esfera de 30 centímetros de diâmetro, 
-que fi  ca centralizada sobre a base de madeira. O troféu 
+que fica centralizada sobre a base de madeira. O troféu 
 tem 100 centímetros de altura, incluída sua base.
-Descrição da fi  gura 1:Desenho de um troféu cuja 
+Descrição da figura 1:Desenho de um troféu cuja 
 forma é um paralelepípedo reto-retângulo de base 
 quadrada de lados medindo 50 centímetros, no qual 
-estão fi  xadas três hastes verticais que sustentam 
+estão fixadas três hastes verticais que sustentam 
 uma esfera.
-Descrição da fi  gura 2:Desenho de uma caixa cuja 
+Descrição da figura 2:Desenho de uma caixa cuja 
 base retangular tem indicações de 10 centímetros 
 de comprimento, 8 centímetros de largura e altura 
 desconhecida.
@@ -6912,16 +6902,16 @@ Eu fiz meu próprio caminho e meu caminho me fez.
 troféu que ganhou no último campeonato. O troféu está 
 representado na Figura 1 e é composto por uma base em 
 formato de um paralelepípedo reto-retângulo de madeira, 
-sobre a qual estão fi  xadas três hastes verticais que 
+sobre a qual estão fixadas três hastes verticais que 
 sustentam uma esfera de 30 centímetros de diâmetro, 
-que fi  ca centralizada sobre a base de madeira. O troféu 
+que fica centralizada sobre a base de madeira. O troféu 
 tem 100 centímetros de altura, incluída sua base.
-Descrição da fi  gura 1:Desenho de um troféu cuja 
+Descrição da figura 1:Desenho de um troféu cuja 
 forma é um paralelepípedo reto-retângulo de base 
 quadrada de lados medindo 50 centímetros, no qual 
-estão fi  xadas três hastes verticais que sustentam 
+estão fixadas três hastes verticais que sustentam 
 uma esfera.
-Descrição da fi  gura 2:Desenho de uma caixa cuja 
+Descrição da figura 2:Desenho de uma caixa cuja 
 base retangular tem indicações de 10 centímetros 
 de comprimento, 8 centímetros de largura e altura 
 desconhecida.
@@ -6974,16 +6964,16 @@ Eu fiz meu próprio caminho e meu caminho me fez.
 troféu que ganhou no último campeonato. O troféu está 
 representado na Figura 1 e é composto por uma base em 
 formato de um paralelepípedo reto-retângulo de madeira, 
-sobre a qual estão fi  xadas três hastes verticais que 
+sobre a qual estão fixadas três hastes verticais que 
 sustentam uma esfera de 30 centímetros de diâmetro, 
-que fi  ca centralizada sobre a base de madeira. O troféu 
+que fica centralizada sobre a base de madeira. O troféu 
 tem 100 centímetros de altura, incluída sua base.
-Descrição da fi  gura 1:Desenho de um troféu cuja 
+Descrição da figura 1:Desenho de um troféu cuja 
 forma é um paralelepípedo reto-retângulo de base 
 quadrada de lados medindo 50 centímetros, no qual 
-estão fi  xadas três hastes verticais que sustentam 
+estão fixadas três hastes verticais que sustentam 
 uma esfera.
-Descrição da fi  gura 2:Desenho de uma caixa cuja 
+Descrição da figura 2:Desenho de uma caixa cuja 
 base retangular tem indicações de 10 centímetros 
 de comprimento, 8 centímetros de largura e altura 
 desconhecida.
@@ -7036,16 +7026,16 @@ Eu fiz meu próprio caminho e meu caminho me fez.
 troféu que ganhou no último campeonato. O troféu está 
 representado na Figura 1 e é composto por uma base em 
 formato de um paralelepípedo reto-retângulo de madeira, 
-sobre a qual estão fi  xadas três hastes verticais que 
+sobre a qual estão fixadas três hastes verticais que 
 sustentam uma esfera de 30 centímetros de diâmetro, 
-que fi  ca centralizada sobre a base de madeira. O troféu 
+que fica centralizada sobre a base de madeira. O troféu 
 tem 100 centímetros de altura, incluída sua base.
-Descrição da fi  gura 1:Desenho de um troféu cuja 
+Descrição da figura 1:Desenho de um troféu cuja 
 forma é um paralelepípedo reto-retângulo de base 
 quadrada de lados medindo 50 centímetros, no qual 
-estão fi  xadas três hastes verticais que sustentam 
+estão fixadas três hastes verticais que sustentam 
 uma esfera.
-Descrição da fi  gura 2:Desenho de uma caixa cuja 
+Descrição da figura 2:Desenho de uma caixa cuja 
 base retangular tem indicações de 10 centímetros 
 de comprimento, 8 centímetros de largura e altura 
 desconhecida.
@@ -7709,17 +7699,7 @@ Descrição da imagem: Imagem do interior de um ônibus com a informação dos a
 ainda disponíveis em um determinado instante. Dos 42 assentos, os já vendidos são: 01; 02; 03; 04; 05; 07; 
 09; 12; 13; 14; 15; 17; 19; 23; 27 e 33.
 A razão entre o número de assentos já vendidos e o total de assentos desse ônibus, no instante considerado na 
-imagem, é","A","Fração de numerador 42 e denominador 16.
-02
-11
-5
-6
-7
-8
-9
-10
-11
-12",0,NA,NA,NA,NA,"Portuguese","E"
+imagem, é","A","Fração de numerador 42 e denominador 16.",0,NA,NA,NA,NA,"Portuguese","E"
 "enem_2020_1mil_mt","enem_2020_1mil_mt_1",83638,"ENEM 2020 - MT","LARANJA
 Eu fiz meu próprio caminho e meu caminho me fez.
 2
@@ -9107,9 +9087,9 @@ Eu fiz meu próprio caminho e meu caminho me fez.
 11
 12",NA,"O fenômeno das manifestações populares de massa traz à discussão como estimar o número de pessoas 
 presentes nesse tipo de evento. Uma metodologia usada é: no momento do ápice do evento, é feita uma foto aérea 
-da via pública principal na área ocupada, bem como das vias afl  uentes que apresentem aglomerações de pessoas 
+da via pública principal na área ocupada, bem como das vias afluentes que apresentem aglomerações de pessoas 
 que acessam a via principal. A foto é sobreposta por um mapa virtual das vias, ambos na mesma escala, fazendo-se 
-um esboço geométrico da situação. Em seguida, subdivide-se o espaço total em trechos, quantifi  cando a densidade, 
+um esboço geométrico da situação. Em seguida, subdivide-se o espaço total em trechos, quantificando a densidade, 
 da seguinte forma:
 • 4 pessoas por metro quadrado, se elas estiverem andando em uma mesma direção;
 • 5 pessoas por metro quadrado, se elas estiverem se movimentando sem deixar o local;
@@ -9117,7 +9097,7 @@ da seguinte forma:
 É feito, então, o cálculo do total de pessoas, considerando os diversos trechos, e desconta-se daí 1 000 pessoas 
 para cada carro de som fotografado.
 Com essa metodologia, procederam-se aos cálculos para estimar o número de participantes na manifestação cujo 
-esboço geométrico é dado na fi  gura. Há três trechos na via principal: MN, NO e OP, e um trecho numa via afl  uente 
+esboço geométrico é dado na figura. Há três trechos na via principal: MN, NO e OP, e um trecho numa via afluente 
 da principal: QR .
 Legenda:
 30 m
@@ -9167,9 +9147,9 @@ Eu fiz meu próprio caminho e meu caminho me fez.
 11
 12",NA,"O fenômeno das manifestações populares de massa traz à discussão como estimar o número de pessoas 
 presentes nesse tipo de evento. Uma metodologia usada é: no momento do ápice do evento, é feita uma foto aérea 
-da via pública principal na área ocupada, bem como das vias afl  uentes que apresentem aglomerações de pessoas 
+da via pública principal na área ocupada, bem como das vias afluentes que apresentem aglomerações de pessoas 
 que acessam a via principal. A foto é sobreposta por um mapa virtual das vias, ambos na mesma escala, fazendo-se 
-um esboço geométrico da situação. Em seguida, subdivide-se o espaço total em trechos, quantifi  cando a densidade, 
+um esboço geométrico da situação. Em seguida, subdivide-se o espaço total em trechos, quantificando a densidade, 
 da seguinte forma:
 • 4 pessoas por metro quadrado, se elas estiverem andando em uma mesma direção;
 • 5 pessoas por metro quadrado, se elas estiverem se movimentando sem deixar o local;
@@ -9177,7 +9157,7 @@ da seguinte forma:
 É feito, então, o cálculo do total de pessoas, considerando os diversos trechos, e desconta-se daí 1 000 pessoas 
 para cada carro de som fotografado.
 Com essa metodologia, procederam-se aos cálculos para estimar o número de participantes na manifestação cujo 
-esboço geométrico é dado na fi  gura. Há três trechos na via principal: MN, NO e OP, e um trecho numa via afl  uente 
+esboço geométrico é dado na figura. Há três trechos na via principal: MN, NO e OP, e um trecho numa via afluente 
 da principal: QR .
 Legenda:
 30 m
@@ -9227,9 +9207,9 @@ Eu fiz meu próprio caminho e meu caminho me fez.
 11
 12",NA,"O fenômeno das manifestações populares de massa traz à discussão como estimar o número de pessoas 
 presentes nesse tipo de evento. Uma metodologia usada é: no momento do ápice do evento, é feita uma foto aérea 
-da via pública principal na área ocupada, bem como das vias afl  uentes que apresentem aglomerações de pessoas 
+da via pública principal na área ocupada, bem como das vias afluentes que apresentem aglomerações de pessoas 
 que acessam a via principal. A foto é sobreposta por um mapa virtual das vias, ambos na mesma escala, fazendo-se 
-um esboço geométrico da situação. Em seguida, subdivide-se o espaço total em trechos, quantifi  cando a densidade, 
+um esboço geométrico da situação. Em seguida, subdivide-se o espaço total em trechos, quantificando a densidade, 
 da seguinte forma:
 • 4 pessoas por metro quadrado, se elas estiverem andando em uma mesma direção;
 • 5 pessoas por metro quadrado, se elas estiverem se movimentando sem deixar o local;
@@ -9237,7 +9217,7 @@ da seguinte forma:
 É feito, então, o cálculo do total de pessoas, considerando os diversos trechos, e desconta-se daí 1 000 pessoas 
 para cada carro de som fotografado.
 Com essa metodologia, procederam-se aos cálculos para estimar o número de participantes na manifestação cujo 
-esboço geométrico é dado na fi  gura. Há três trechos na via principal: MN, NO e OP, e um trecho numa via afl  uente 
+esboço geométrico é dado na figura. Há três trechos na via principal: MN, NO e OP, e um trecho numa via afluente 
 da principal: QR .
 Legenda:
 30 m
@@ -9287,9 +9267,9 @@ Eu fiz meu próprio caminho e meu caminho me fez.
 11
 12",NA,"O fenômeno das manifestações populares de massa traz à discussão como estimar o número de pessoas 
 presentes nesse tipo de evento. Uma metodologia usada é: no momento do ápice do evento, é feita uma foto aérea 
-da via pública principal na área ocupada, bem como das vias afl  uentes que apresentem aglomerações de pessoas 
+da via pública principal na área ocupada, bem como das vias afluentes que apresentem aglomerações de pessoas 
 que acessam a via principal. A foto é sobreposta por um mapa virtual das vias, ambos na mesma escala, fazendo-se 
-um esboço geométrico da situação. Em seguida, subdivide-se o espaço total em trechos, quantifi  cando a densidade, 
+um esboço geométrico da situação. Em seguida, subdivide-se o espaço total em trechos, quantificando a densidade, 
 da seguinte forma:
 • 4 pessoas por metro quadrado, se elas estiverem andando em uma mesma direção;
 • 5 pessoas por metro quadrado, se elas estiverem se movimentando sem deixar o local;
@@ -9297,7 +9277,7 @@ da seguinte forma:
 É feito, então, o cálculo do total de pessoas, considerando os diversos trechos, e desconta-se daí 1 000 pessoas 
 para cada carro de som fotografado.
 Com essa metodologia, procederam-se aos cálculos para estimar o número de participantes na manifestação cujo 
-esboço geométrico é dado na fi  gura. Há três trechos na via principal: MN, NO e OP, e um trecho numa via afl  uente 
+esboço geométrico é dado na figura. Há três trechos na via principal: MN, NO e OP, e um trecho numa via afluente 
 da principal: QR .
 Legenda:
 30 m
@@ -9347,9 +9327,9 @@ Eu fiz meu próprio caminho e meu caminho me fez.
 11
 12",NA,"O fenômeno das manifestações populares de massa traz à discussão como estimar o número de pessoas 
 presentes nesse tipo de evento. Uma metodologia usada é: no momento do ápice do evento, é feita uma foto aérea 
-da via pública principal na área ocupada, bem como das vias afl  uentes que apresentem aglomerações de pessoas 
+da via pública principal na área ocupada, bem como das vias afluentes que apresentem aglomerações de pessoas 
 que acessam a via principal. A foto é sobreposta por um mapa virtual das vias, ambos na mesma escala, fazendo-se 
-um esboço geométrico da situação. Em seguida, subdivide-se o espaço total em trechos, quantifi  cando a densidade, 
+um esboço geométrico da situação. Em seguida, subdivide-se o espaço total em trechos, quantificando a densidade, 
 da seguinte forma:
 • 4 pessoas por metro quadrado, se elas estiverem andando em uma mesma direção;
 • 5 pessoas por metro quadrado, se elas estiverem se movimentando sem deixar o local;
@@ -9357,7 +9337,7 @@ da seguinte forma:
 É feito, então, o cálculo do total de pessoas, considerando os diversos trechos, e desconta-se daí 1 000 pessoas 
 para cada carro de som fotografado.
 Com essa metodologia, procederam-se aos cálculos para estimar o número de participantes na manifestação cujo 
-esboço geométrico é dado na fi  gura. Há três trechos na via principal: MN, NO e OP, e um trecho numa via afl  uente 
+esboço geométrico é dado na figura. Há três trechos na via principal: MN, NO e OP, e um trecho numa via afluente 
 da principal: QR .
 Legenda:
 30 m
