@@ -365,10 +365,15 @@ for (t in intersect(names(design_obs), out$table)) {
 
 ##A table with a gender attribute but no crosswalk rows does not pool with the
 ##others (data/conjoint/README.md, "Attribute crosswalk"). Reported, not fatal.
+##crosswalk_exempt.csv lists the gender-named attributes that are not a
+##profile's gender (a committee's composition, a policy stance) or cannot map
+##under the one-attribute rule; each carries its reason.
 xw <- read_design("crosswalk.csv")
+xw_ex <- read_design("crosswalk_exempt.csv")
+covered <- c(paste(xw$table, xw$attribute), paste(xw_ex$table, xw_ex$attribute))
 no_xw <- unlist(lapply(names(gender_attrs), function(t) {
   a <- gender_attrs[[t]]
-  a <- a[!paste(t, a) %in% paste(xw$table, xw$attribute)]
+  a <- a[!paste(t, a) %in% covered]
   if (length(a)) paste0(t, ":", a)
 }))
 if (length(no_xw)) message("  ! gender attribute with no crosswalk rows (data/conjoint/crosswalk.csv): ",

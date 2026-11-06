@@ -2138,11 +2138,17 @@ drop_unshaped_dict_rows <- function(df, label, what = "dictionary") {
     if (is.null(df) || !nrow(df) || !"table" %in% names(df)) return(df)
     keep <- dict_name_ok(df[["table"]])
     keep[is.na(keep)] <- TRUE
-    if (any(!keep)) {
-        message(label, ": dropping ", sum(!keep), " ", what, " row(s) whose ",
+    ##A Private row never publishes, so naming it every run is noise: the ten
+    ##`Tests of vocabulary_*` sheet rows logged on every run from #2079 to
+    ##2026-11-06. They are still dropped, just not listed.
+    private <- if ("Public Reshare?" %in% names(df))
+        trimws(as.character(df[["Public Reshare?"]])) %in% "Private" else rep(FALSE, nrow(df))
+    loud <- !keep & !private
+    if (any(loud)) {
+        message(label, ": dropping ", sum(loud), " ", what, " row(s) whose ",
                 "`table` cell is not a table name (#2079) -- fix the cell at ",
                 "the source; nothing here edits the sheet:")
-        for (v in df[["table"]][!keep]) {
+        for (v in df[["table"]][loud]) {
             message("    ", substr(gsub("\\s+", " ", v), 1L, 120L))
         }
     }
