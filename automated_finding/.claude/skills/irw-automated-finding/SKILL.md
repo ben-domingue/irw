@@ -372,6 +372,61 @@ ones — see README's Step 1b for why and the two specific fixes to try
 (header-row offset, text-Likert item columns) before spending real time on
 one.
 
+## Step 2c — Claude checks the `human_review` archive
+
+`human_review/` holds about 1,650 rows that the code could not classify.
+Until now each one waited for a person to open the raw file. Step 2c lets
+Claude look first:
+
+```bash
+python irw_claude_assist.py --archive --limit 25 --backend cli
+```
+
+For each unchecked row it downloads the file, profiles the columns (names,
+types, sample values, three rows; never the full data), and gives Claude the
+profile with `datastandard.md` as the system prompt. Claude returns either a
+column mapping or a flag with a `flag_kind`. The code, not Claude, applies the
+mapping and runs `run_qc()`. Results go to `leads/claude_assist_ledger.csv`,
+one row per output scale, and a DOI already in the ledger is skipped unless
+`--recheck`. `--backend cli` uses the logged-in `claude -p`; `--backend api`
+wants `ANTHROPIC_API_KEY`.
+
+| `verdict` | Meaning | What to do |
+|---|---|---|
+| `not_item_response` | Claude, high confidence: no person x item data in this file | Nothing. The row is closed; `detail` says why. |
+| `lead` | Mapped and QC clean | Build it in Step 3 from `mapping_json`. |
+| `needs_human` | QC failed on the mapping, mapping rejected by the code, wrong file or sheet read, below the 100-id floor, or a flag short of high confidence | Open it, as before, but start from Claude's `detail` and `reasoning`. |
+| `already_worked` | The deposit is cited by a `data/*.py` script, `metadata/biblio.csv` or a `leads/human_review_recheck_*.csv` ledger; Claude is not asked | Nothing; `detail` names the file. Discovery's DOI exclusion misses these because the dictionary often holds the paper DOI, not the deposit's: 250 of the 1,660 archive rows on 2026-11-06. |
+| `not_checked` | Never reached Claude: several data files, no tabular file, blocked licence, download error | As before. Several data files is deliberate: the standard says not to guess. |
+
+**A `lead` is a proposal, not a table.** The script never writes IRW output.
+Step 3 still writes `data/<name>.py`, reads the paper or codebook for scale
+identities and ranges, and runs Step 4. The mapping saves the column work; it
+does not replace the check. Scale names from Claude (`scale_a`, `risk`) are
+placeholders, and its `valid_min`/`valid_max` may be inferred from the data
+rather than read from the source, which `reasoning` usually says.
+
+**What the code refuses to do on Claude's say-so** (pinned by
+`tests/test_claude_assist.py`): drop a response for being outside the
+declared range (it fails QC as `resp_out_of_range`); drop a response for not
+being a number (`resp_nonnumeric`, the literal-"NA" lesson from #2029); map
+text responses through `value_labels` that miss a category (refused); or use a
+column name that is not in the file (refused).
+
+**Validation at intake (2026-11-06).** On 32 archive rows already worked by
+hand (16 shipped, 16 rejected): Claude flagged 3 shipped datasets, all at
+medium confidence, each naming the real difficulty the builder solved
+(a mixed conspiracy block, a carried-forward PHQ-9 in an EMA panel, a wide
+pre/post design), so none would have been closed. All 4 high-confidence
+flags were rejected datasets. 5 rejected datasets mapped cleanly: they were
+turned down for reasons outside the file (synthetic-looking data, one per
+series, a duplicate deposit), which is why a `lead` is a proposal. On a
+dataset built by hand (zenodo 14870714, `sanchezgarcia_2025_*`) the mapping
+matched the build exactly: 4 scales, 80 items, 4 covariates, the same
+reverse-coded copies and composites dropped.
+
+Written by Stacy Cremer in June 2026 and brought in on 2026-11-06.
+
 ## Step 3 — Write the processing script and QC it
 
 **Note:** the README still documents an older `irw_process_queue.py` →

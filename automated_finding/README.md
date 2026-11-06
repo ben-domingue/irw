@@ -70,6 +70,7 @@ readable: before it, every scheduled cloud run committed another
 | top level | `search_terms_log.csv`, `plos_seen_dois.csv`, `pmc_seen_dois.csv`, `repo_triage_seen_keys.csv`, `license_blocked_candidates.csv`, `plos_deferred_candidates.csv`, `itemtext_provenance.csv`, `cov_vocabulary.json`, `biblio_*.csv`, `BATCH_LOG.md`, `TODO.md` | Standing records — never delete, never move into `runs/`. Tracked. |
 | `human_review/` | `human_review_<mode>_batch<N>.csv` | Permanent archive of genuinely-ambiguous rows. Tracked. |
 | `leads/` | `<mode>_leads_<date>.csv`, `lead_worklist_*.csv` — the tracked, per-lead verdicts (`status` column) from a batch that ranked more leads than it ran | Standing records. Tracked. |
+| `leads/claude_assist_ledger.csv` | Step 1c's verdict per `human_review` DOI and output scale, with Claude's mapping and QC result | Standing record; a recheck replaces that DOI's rows. Tracked. |
 | `itemtext_verification/` | `verify_<table>.R` (Step 5b mapping checks) and `make_itemtext_<table>.py` (scripts that built a table's item text) | Cited by path from `itemtext_provenance.csv`. Tracked. |
 | `naming_audit/` | the #1686 table-name audit: tool, `FINDINGS.md`, `decision.md`, `HANDOFF.md`, `naming_audit_suspects.csv` | Closed study, kept as evidence. Tracked. |
 | `journal_scout/` | the yield study used to decide which journals go on `irw_discover_pmc.py`'s list | Tracked. |
@@ -181,6 +182,15 @@ if it's specifically "Could not confidently identify item columns" (rather
 than a dup_id_item conflict or similar), open the raw file and check for these
 two patterns before spending time on anything else — they resolve fast and
 disproportionately turn into real, eligible datasets.
+
+### Step 1c — Claude checks the `human_review` archive
+
+`irw_claude_assist.py --archive --limit 25 --backend cli` asks Claude to map
+or reject unchecked `human_review/` rows and records each verdict
+(`not_item_response`, `lead`, `needs_human`, `not_checked`) in
+`leads/claude_assist_ledger.csv`. It never writes IRW tables; a `lead` still
+gets a `data/<name>.py` script. Run it before opening `human_review` rows by
+hand. Details: SKILL.md, Step 2c.
 
 ---
 
@@ -728,6 +738,19 @@ The idea and the mining approach are from the covariate vocabulary in
 `AryanSudhirDev/automated-finding-v2` (`v2/knowledge/`,
 `v2/stages/precoerce.py`), re-implemented here as a check on output instead
 of a step inside an automatic converter.
+
+### `irw_claude_assist.py`
+Claude-in-the-loop column mapping for `human_review` rows (Step 1c; SKILL.md
+Step 2c). By Stacy Cremer.
+```
+--archive        unchecked rows of human_review/ -> leads/claude_assist_ledger.csv
+--input <path>   a triage CSV instead (rows whose flag is in --flags)
+--file <path>    one local file
+--limit N        stop after N datasets
+--recheck        --archive: include DOIs already in the ledger
+--backend cli    use the logged-in `claude -p` (default api: ANTHROPIC_API_KEY)
+--model <id>     default claude-sonnet-5-5
+```
 
 ### `irw_retriage_ha.py`
 Post-hoc refinement of `human_assistance` rows using metadata already in the
