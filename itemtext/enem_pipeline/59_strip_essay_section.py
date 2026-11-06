@@ -66,7 +66,9 @@ CUTS = [
          keep_through="construído por uma",
          why="Ed Mort cronica item. Essay section (theme 'Democratização do acesso "
              "ao cinema no Brasil') follows the question closer."),
-    dict(year="2021", area="lc", item="120165", expect_removed=1815,
+    # 1815 before 26_strip_page_furniture learned the 2021 bare page number: the essay block carried one ("21"),
+    # which 26 now removes first, so the block this pass cuts is that much shorter.
+    dict(year="2021", area="lc", item="120165", expect_removed=1809,
          keep_through="uma concepção de língua que",
          why="Manoel de Barros 'A draga' item. Essay section (theme 'Invisibilidade "
              "e registro civil') begins at the 'Mapa da invisibilidade' poster "
