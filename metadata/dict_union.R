@@ -1695,6 +1695,30 @@ LICENSE_OVERRIDES <- list(
         derived    = "CC BY 4.0",
         original   = "Permission via Email",
         why        = "Edwards, 2024-09-17, replying to the standard letter: 'You are welcome to include my data in your IRW.' (licenseinfo/emails/spelling2pronounce_edwards2023.Rdata.pdf)"
+    ),
+    ## #3316 part 2 (R-38), INEP (Brazil): 52 ENEM + 56 ENCCEJA rows published
+    ## CC BY 4.0 over a source cell of Missing (NA). INEP's microdata pages sit
+    ## on gov.br, whose footer places the site's content under CC BY-ND 3.0, and
+    ## INEP grants nothing broader. Ruled 2026-11-05 (Ben, with Mateus): IRW's
+    ## tables are INEP's data reformatted to long, not changed, so they may be
+    ## hosted -- but on that same reading they carry INEP's terms, and an
+    ## outbound CC BY 4.0 would offer reusers adaptation rights INEP never gave.
+    ## Both cells therefore say CC BY-ND 3.0.
+    list(
+        url        = "gov\\.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados/enem",
+        issue      = "#3316",
+        superseded = "CC BY 4.0",
+        derived    = "CC BY-ND 3.0",
+        original   = "CC BY-ND 3.0",
+        why        = "ENEM microdata, INEP via gov.br: site content is CC BY-ND 3.0 (gov.br footer); ruled 2026-11-05 that IRW's long-format tables are the same data and carry INEP's terms"
+    ),
+    list(
+        url        = "download\\.inep\\.gov\\.br/microdados/microdados_encceja_",
+        issue      = "#3316",
+        superseded = "CC BY 4.0",
+        derived    = "CC BY-ND 3.0",
+        original   = "CC BY-ND 3.0",
+        why        = "ENCCEJA microdata, INEP, published from gov.br/inep: site content is CC BY-ND 3.0 (gov.br footer); ruled 2026-11-05 that IRW's long-format tables are the same data and carry INEP's terms"
     )
 )
 
