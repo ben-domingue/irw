@@ -35099,6 +35099,7 @@ mthimkhulu_2023_pirls_reading,cov_test_language,standard_family,renamed,ITLANG_S
 mthimkhulu_2023_pirls_reading,id,standard,renamed,IDSTUD,data/mthimkhulu_2023_pirls_reading.py,109,exact,true
 mthimkhulu_2023_pirls_reading,item,standard,built,,data/mthimkhulu_2023_pirls_reading.py,9,exact,true
 mthimkhulu_2023_pirls_reading,resp,standard,built,,data/mthimkhulu_2023_pirls_reading.py,17,exact,true
+mthimkhulu_2023_pirls_reading,resp_raw,standard,built,,data/mthimkhulu_2023_pirls_reading.py,17,exact,true
 mturkddm_by,block,,built,,data/mturk_ddm.R,64,index,false
 mturkddm_by,id,standard,built,,data/mturk_ddm.R,63,index,true
 mturkddm_by,item,standard,built,,data/mturk_ddm.R,67,index,true
@@ -35627,6 +35628,7 @@ narcissism_schneider_2025_study2_audit,cov_age,standard_family,built,,data/narci
 narcissism_schneider_2025_study2_audit,cov_biosex,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_audit,cov_country_curr,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_audit,cov_country_orig,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
+narcissism_schneider_2025_study2_audit,cov_dispcode,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_audit,cov_edu,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_audit,cov_einverst_bedingungen,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_audit,cov_fam,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
@@ -35646,6 +35648,7 @@ narcissism_schneider_2025_study2_bfi,cov_age,standard_family,built,,data/narciss
 narcissism_schneider_2025_study2_bfi,cov_biosex,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_bfi,cov_country_curr,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_bfi,cov_country_orig,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
+narcissism_schneider_2025_study2_bfi,cov_dispcode,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_bfi,cov_edu,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_bfi,cov_einverst_bedingungen,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_bfi,cov_fam,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
@@ -35665,6 +35668,7 @@ narcissism_schneider_2025_study2_cape,cov_age,standard_family,built,,data/narcis
 narcissism_schneider_2025_study2_cape,cov_biosex,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_cape,cov_country_curr,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_cape,cov_country_orig,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
+narcissism_schneider_2025_study2_cape,cov_dispcode,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_cape,cov_edu,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_cape,cov_einverst_bedingungen,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_cape,cov_fam,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
@@ -35684,6 +35688,7 @@ narcissism_schneider_2025_study2_det,cov_age,standard_family,built,,data/narciss
 narcissism_schneider_2025_study2_det,cov_biosex,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_det,cov_country_curr,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_det,cov_country_orig,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
+narcissism_schneider_2025_study2_det,cov_dispcode,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_det,cov_edu,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_det,cov_einverst_bedingungen,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_det,cov_fam,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
@@ -35703,6 +35708,7 @@ narcissism_schneider_2025_study2_ffni,cov_age,standard_family,built,,data/narcis
 narcissism_schneider_2025_study2_ffni,cov_biosex,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_ffni,cov_country_curr,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_ffni,cov_country_orig,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
+narcissism_schneider_2025_study2_ffni,cov_dispcode,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_ffni,cov_edu,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_ffni,cov_einverst_bedingungen,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_ffni,cov_fam,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
@@ -35722,6 +35728,7 @@ narcissism_schneider_2025_study2_hexaco,cov_age,standard_family,built,,data/narc
 narcissism_schneider_2025_study2_hexaco,cov_biosex,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_hexaco,cov_country_curr,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_hexaco,cov_country_orig,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
+narcissism_schneider_2025_study2_hexaco,cov_dispcode,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_hexaco,cov_edu,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_hexaco,cov_einverst_bedingungen,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_hexaco,cov_fam,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
@@ -35741,6 +35748,7 @@ narcissism_schneider_2025_study2_hsns,cov_age,standard_family,built,,data/narcis
 narcissism_schneider_2025_study2_hsns,cov_biosex,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_hsns,cov_country_curr,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_hsns,cov_country_orig,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
+narcissism_schneider_2025_study2_hsns,cov_dispcode,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_hsns,cov_edu,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_hsns,cov_einverst_bedingungen,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_hsns,cov_fam,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
@@ -35760,6 +35768,7 @@ narcissism_schneider_2025_study2_idasii,cov_age,standard_family,built,,data/narc
 narcissism_schneider_2025_study2_idasii,cov_biosex,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_idasii,cov_country_curr,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_idasii,cov_country_orig,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
+narcissism_schneider_2025_study2_idasii,cov_dispcode,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_idasii,cov_edu,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_idasii,cov_einverst_bedingungen,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_idasii,cov_fam,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
@@ -35779,6 +35788,7 @@ narcissism_schneider_2025_study2_lpfs,cov_age,standard_family,built,,data/narcis
 narcissism_schneider_2025_study2_lpfs,cov_biosex,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_lpfs,cov_country_curr,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_lpfs,cov_country_orig,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
+narcissism_schneider_2025_study2_lpfs,cov_dispcode,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_lpfs,cov_edu,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_lpfs,cov_einverst_bedingungen,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_lpfs,cov_fam,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
@@ -35798,6 +35808,7 @@ narcissism_schneider_2025_study2_narq,cov_age,standard_family,built,,data/narcis
 narcissism_schneider_2025_study2_narq,cov_biosex,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_narq,cov_country_curr,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_narq,cov_country_orig,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
+narcissism_schneider_2025_study2_narq,cov_dispcode,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_narq,cov_edu,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_narq,cov_einverst_bedingungen,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_narq,cov_fam,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
@@ -35817,6 +35828,7 @@ narcissism_schneider_2025_study2_npi,cov_age,standard_family,built,,data/narciss
 narcissism_schneider_2025_study2_npi,cov_biosex,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_npi,cov_country_curr,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_npi,cov_country_orig,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
+narcissism_schneider_2025_study2_npi,cov_dispcode,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_npi,cov_edu,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_npi,cov_einverst_bedingungen,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_npi,cov_fam,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
@@ -35836,6 +35848,7 @@ narcissism_schneider_2025_study2_phq,cov_age,standard_family,built,,data/narciss
 narcissism_schneider_2025_study2_phq,cov_biosex,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_phq,cov_country_curr,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_phq,cov_country_orig,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
+narcissism_schneider_2025_study2_phq,cov_dispcode,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_phq,cov_edu,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_phq,cov_einverst_bedingungen,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_phq,cov_fam,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
@@ -35855,6 +35868,7 @@ narcissism_schneider_2025_study2_pid,cov_age,standard_family,built,,data/narciss
 narcissism_schneider_2025_study2_pid,cov_biosex,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_pid,cov_country_curr,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_pid,cov_country_orig,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
+narcissism_schneider_2025_study2_pid,cov_dispcode,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_pid,cov_edu,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_pid,cov_einverst_bedingungen,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_pid,cov_fam,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
@@ -35894,6 +35908,7 @@ narcissism_schneider_2025_study2_rses,cov_age,standard_family,built,,data/narcis
 narcissism_schneider_2025_study2_rses,cov_biosex,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_rses,cov_country_curr,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_rses,cov_country_orig,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
+narcissism_schneider_2025_study2_rses,cov_dispcode,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_rses,cov_edu,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_rses,cov_einverst_bedingungen,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_rses,cov_fam,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
@@ -35913,6 +35928,7 @@ narcissism_schneider_2025_study2_shs,cov_age,standard_family,built,,data/narciss
 narcissism_schneider_2025_study2_shs,cov_biosex,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_shs,cov_country_curr,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_shs,cov_country_orig,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
+narcissism_schneider_2025_study2_shs,cov_dispcode,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_shs,cov_edu,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_shs,cov_einverst_bedingungen,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_shs,cov_fam,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
@@ -35932,6 +35948,7 @@ narcissism_schneider_2025_study2_swls,cov_age,standard_family,built,,data/narcis
 narcissism_schneider_2025_study2_swls,cov_biosex,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_swls,cov_country_curr,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_swls,cov_country_orig,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
+narcissism_schneider_2025_study2_swls,cov_dispcode,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_swls,cov_edu,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_swls,cov_einverst_bedingungen,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_swls,cov_fam,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
@@ -35951,6 +35968,7 @@ narcissism_schneider_2025_study2_who,cov_age,standard_family,built,,data/narciss
 narcissism_schneider_2025_study2_who,cov_biosex,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_who,cov_country_curr,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_who,cov_country_orig,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
+narcissism_schneider_2025_study2_who,cov_dispcode,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_who,cov_edu,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_who,cov_einverst_bedingungen,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false
 narcissism_schneider_2025_study2_who,cov_fam,standard_family,built,,data/narcissism_schneider_2025.py,81,prefix,false

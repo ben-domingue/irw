@@ -1,7 +1,5 @@
 table,column,kind,was,now
 16_personalityfactors,Original_License,conflict,Permission via Email,Missing (NA)
-amornsriwatanakul_2025_family_support,Original_License,fill,NA,CC0 1.0
-amornsriwatanakul_2025_friend_support,Original_License,fill,NA,CC0 1.0
 anunciacao_2025_emotional_management,Derived_License,conflict,CC BY 4.0,Permission via Email
 anunciacao_2025_emotional_relationships,Derived_License,conflict,CC BY 4.0,Permission via Email
 anunciacao_2025_emotional_responsibility,Derived_License,conflict,CC BY 4.0,Permission via Email
@@ -21,15 +19,9 @@ anunciacao_2025_personality_order,Derived_License,conflict,CC BY 4.0,Permission 
 anunciacao_2025_personality_persistence,Derived_License,conflict,CC BY 4.0,Permission via Email
 anunciacao_2025_personality_succorance,Derived_License,conflict,CC BY 4.0,Permission via Email
 Aspirations_Sonmez_2022,Original_License,conflict,Permission via Email,Missing (NA)
-austin_2021_media_literacy,Original_License,fill,NA,CC0 1.0
-baysan_2026_ai_attitudes,Original_License,fill,NA,CC0 1.0
-baysan_2026_self_directed_learning,Original_License,fill,NA,CC0 1.0
 brain_hemisphere,Original_License,conflict,Permission via Email,Missing (NA)
 broadband_inventories,Original_License,conflict,Permission via Email,Missing (NA)
 cdm_timss07,Description,conflict,Subsample of TIMSS 2007 grade 4 mathematics items from Austria (booklets 4 and 5) with Q matrix,Subsample of TIMSS items from Australia with Q matrix
-chen_2026_genai_learning,Original_License,fill,NA,CC0 1.0
-christensen_2017_bfi10,Original_License,fill,NA,CC0 1.0
-christensen_2017_unethical,Original_License,fill,NA,CC0 1.0
 close_relationships,Original_License,conflict,Permission via Email,Missing (NA)
 COACH_Chen_2022_CSQ,Description,conflict,"Consultation Satisfaction Questionnaire short form (CSQ-9), items 1-8, 5-point agree-disagree",Client Satisfaction Questionnaire 8-item
 colombia_2023_politics_anticorruption,Derived_License,conflict,Custom,Permission via Email
@@ -69,20 +61,224 @@ colombia_2023_politics_wellbeing,Derived_License,conflict,Custom,Permission via 
 conner_2017_vitality,Description,conflict,"SF-36 Vitality (energy/fatigue) subscale, 4 items scored 0-100 in steps of 20 (6 ordinal levels), baseline/follow-up, N=171. The 'worn out' and 'tired' items are stored already reverse-scored.","Subjective Vitality Scale (4 items, 0-100 continuous), baseline/follow-up, N=171."
 consideration_future_consequences,Original_License,conflict,Permission via Email,Missing (NA)
 cordova2019_clinical_edu_environment,Description,conflict,"Perception of clinical educational environment by physiotherapy interns (PHEEM, 40 items, Chile)","Perception of clinical educational environment by physiotherapy interns (DREEM-based, Chile)"
-delapena_2026_fscale,Original_License,fill,NA,CC0 1.0
 depression_anxiety_stress,Original_License,conflict,Permission via Email,Missing (NA)
 dmirt_forsberg_2024,Derived_License,conflict,GPL-3.0,CC BY 4.0
-dutwin_2023_cominv,Original_License,fill,NA,CC0 1.0
-dutwin_2023_fear,Original_License,fill,NA,CC0 1.0
-dutwin_2023_narcissism,Original_License,fill,NA,CC0 1.0
-dutwin_2023_personality,Original_License,fill,NA,CC0 1.0
-eichmeier_2019_aot,Original_License,fill,NA,CC0 1.0
-eichmeier_2019_epistemic_beliefs,Original_License,fill,NA,CC0 1.0
-eichmeier_2019_moralized_rationality,Original_License,fill,NA,CC0 1.0
-eichmeier_2019_need_for_affect,Original_License,fill,NA,CC0 1.0
-eichmeier_2019_need_for_closure,Original_License,fill,NA,CC0 1.0
-eichmeier_2019_nfc,Original_License,fill,NA,CC0 1.0
-espinoza_2024_dass21,Original_License,fill,NA,CC0 1.0
+encceja_2018_ef_ci,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2018_ef_ci,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2018_ef_hg,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2018_ef_hg,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2018_ef_lp,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2018_ef_lp,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2018_ef_ma,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2018_ef_ma,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2018_em_ch,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2018_em_ch,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2018_em_cn,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2018_em_cn,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2018_em_lc,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2018_em_lc,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2018_em_mt,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2018_em_mt,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2019_ef_ci,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2019_ef_ci,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2019_ef_hg,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2019_ef_hg,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2019_ef_lp,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2019_ef_lp,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2019_ef_ma,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2019_ef_ma,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2019_em_ch,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2019_em_ch,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2019_em_cn,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2019_em_cn,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2019_em_lc,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2019_em_lc,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2019_em_mt,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2019_em_mt,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2020_ef_ci,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2020_ef_ci,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2020_ef_hg,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2020_ef_hg,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2020_ef_lp,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2020_ef_lp,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2020_ef_ma,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2020_ef_ma,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2020_em_ch,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2020_em_ch,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2020_em_cn,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2020_em_cn,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2020_em_lc,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2020_em_lc,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2020_em_mt,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2020_em_mt,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2022_ef_ci,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2022_ef_ci,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2022_ef_hg,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2022_ef_hg,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2022_ef_lp,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2022_ef_lp,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2022_ef_ma,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2022_ef_ma,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2022_em_ch,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2022_em_ch,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2022_em_cn,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2022_em_cn,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2022_em_lc,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2022_em_lc,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2022_em_mt,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2022_em_mt,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2023_ef_ci,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2023_ef_ci,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2023_ef_hg,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2023_ef_hg,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2023_ef_lp,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2023_ef_lp,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2023_ef_ma,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2023_ef_ma,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2023_em_ch,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2023_em_ch,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2023_em_cn,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2023_em_cn,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2023_em_lc,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2023_em_lc,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2023_em_mt,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2023_em_mt,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2024_ef_ci,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2024_ef_ci,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2024_ef_hg,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2024_ef_hg,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2024_ef_lp,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2024_ef_lp,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2024_ef_ma,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2024_ef_ma,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2024_em_ch,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2024_em_ch,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2024_em_cn,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2024_em_cn,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2024_em_lc,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2024_em_lc,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2024_em_mt,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2024_em_mt,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2025_ef_ci,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2025_ef_ci,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2025_ef_hg,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2025_ef_hg,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2025_ef_lp,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2025_ef_lp,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2025_ef_ma,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2025_ef_ma,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2025_em_ch,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2025_em_ch,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2025_em_cn,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2025_em_cn,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2025_em_lc,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2025_em_lc,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+encceja_2025_em_mt,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+encceja_2025_em_mt,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+enem_2013_1mil_ch,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+enem_2013_1mil_ch,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+enem_2013_1mil_cn,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+enem_2013_1mil_cn,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+enem_2013_1mil_lc,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+enem_2013_1mil_lc,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+enem_2013_1mil_mt,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+enem_2013_1mil_mt,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+enem_2014_1mil_ch,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+enem_2014_1mil_ch,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+enem_2014_1mil_cn,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+enem_2014_1mil_cn,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+enem_2014_1mil_lc,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+enem_2014_1mil_lc,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+enem_2014_1mil_mt,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+enem_2014_1mil_mt,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+enem_2015_1mil_ch,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+enem_2015_1mil_ch,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+enem_2015_1mil_cn,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+enem_2015_1mil_cn,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+enem_2015_1mil_lc,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+enem_2015_1mil_lc,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+enem_2015_1mil_mt,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+enem_2015_1mil_mt,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+enem_2016_1mil_ch,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+enem_2016_1mil_ch,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+enem_2016_1mil_cn,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+enem_2016_1mil_cn,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+enem_2016_1mil_lc,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+enem_2016_1mil_lc,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+enem_2016_1mil_mt,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+enem_2016_1mil_mt,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+enem_2017_1mil_ch,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+enem_2017_1mil_ch,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+enem_2017_1mil_cn,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+enem_2017_1mil_cn,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+enem_2017_1mil_lc,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+enem_2017_1mil_lc,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+enem_2017_1mil_mt,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+enem_2017_1mil_mt,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+enem_2018_1mil_ch,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+enem_2018_1mil_ch,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+enem_2018_1mil_cn,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+enem_2018_1mil_cn,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+enem_2018_1mil_lc,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+enem_2018_1mil_lc,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+enem_2018_1mil_mt,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+enem_2018_1mil_mt,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+enem_2019_1mil_ch,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+enem_2019_1mil_ch,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+enem_2019_1mil_cn,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+enem_2019_1mil_cn,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+enem_2019_1mil_lc,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+enem_2019_1mil_lc,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+enem_2019_1mil_mt,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+enem_2019_1mil_mt,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+enem_2020_1mil_ch,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+enem_2020_1mil_ch,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+enem_2020_1mil_cn,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+enem_2020_1mil_cn,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+enem_2020_1mil_lc,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+enem_2020_1mil_lc,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+enem_2020_1mil_mt,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+enem_2020_1mil_mt,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+enem_2021_1mil_ch,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+enem_2021_1mil_ch,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+enem_2021_1mil_cn,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+enem_2021_1mil_cn,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+enem_2021_1mil_lc,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+enem_2021_1mil_lc,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+enem_2021_1mil_mt,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+enem_2021_1mil_mt,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+enem_2022_1mil_ch,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+enem_2022_1mil_ch,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+enem_2022_1mil_cn,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+enem_2022_1mil_cn,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+enem_2022_1mil_lc,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+enem_2022_1mil_lc,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+enem_2022_1mil_mt,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+enem_2022_1mil_mt,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+enem_2023_1mil_ch,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+enem_2023_1mil_ch,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+enem_2023_1mil_cn,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+enem_2023_1mil_cn,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+enem_2023_1mil_lc,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+enem_2023_1mil_lc,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+enem_2023_1mil_mt,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+enem_2023_1mil_mt,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+enem_2024_1mil_ch,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+enem_2024_1mil_ch,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+enem_2024_1mil_cn,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+enem_2024_1mil_cn,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+enem_2024_1mil_lc,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+enem_2024_1mil_lc,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+enem_2024_1mil_mt,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+enem_2024_1mil_mt,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+enem_2025_1mil_ch,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+enem_2025_1mil_ch,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+enem_2025_1mil_cn,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+enem_2025_1mil_cn,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+enem_2025_1mil_lc,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+enem_2025_1mil_lc,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
+enem_2025_1mil_mt,Derived_License,conflict,CC BY-ND 3.0,CC BY 4.0
+enem_2025_1mil_mt,Original_License,conflict,CC BY-ND 3.0,Missing (NA)
 evpromisi_stone_2021_cdiag,Description,conflict,"Study's own 12-item chronic-diagnosis checklist (3 response levels). Not a PROMIS instrument, despite the evpromisi_ prefix.",PROMIS fatigue
 experimental_iq,Original_License,conflict,Permission via Email,Missing (NA)
 face_memory_test,Original_License,conflict,Permission via Email,Missing (NA)
@@ -93,12 +289,9 @@ ffm_EST,Original_License,conflict,Permission via Email,Missing (NA)
 ffm_EXT,Original_License,conflict,Permission via Email,Missing (NA)
 ffm_OPN,Original_License,conflict,Permission via Email,Missing (NA)
 fisher_temperment,Original_License,conflict,Permission via Email,Missing (NA)
-gambin_2020_pandemic_diff,Original_License,fill,NA,CC0 1.0
-gambin_2020_phq9,Original_License,fill,NA,CC0 1.0
 gcbs_brotherton_2013,Original_License,conflict,Permission via Email,Missing (NA)
 gcbs_brotherton_2013_tipi,Original_License,conflict,Permission via Email,Missing (NA)
 gcbs_brotherton_2013_vcl,Original_License,conflict,Permission via Email,Missing (NA)
-goldberg_2018_mpq,Original_License,fill,NA,CC0 1.0
 grit,Original_License,conflict,Permission via Email,Missing (NA)
 guatemala_2024_homes_avenues,Derived_License,conflict,Custom,Permission via Email
 guatemala_2024_homes_country,Derived_License,conflict,Custom,Permission via Email
@@ -117,9 +310,6 @@ guatemala_2024_homes_transparency,Derived_License,conflict,Custom,Permission via
 guatemala_2024_homes_transport,Derived_License,conflict,Custom,Permission via Email
 guatemala_2024_homes_trash,Derived_License,conflict,Custom,Permission via Email
 guatemala_2024_homes_water,Derived_License,conflict,Custom,Permission via Email
-guess_2023_tech_attitudes,Original_License,fill,NA,CC0 1.0
-guess_2023_web_skills,Original_License,fill,NA,CC0 1.0
-hollibaugh_2024_ambition_reasons,Original_License,fill,NA,CC0 1.0
 humor_styles,Original_License,conflict,Permission via Email,Missing (NA)
 hypersensitive_narcissism,Original_License,conflict,Permission via Email,Missing (NA)
 iat_difference,Derived_License,conflict,CC0 1.0,CC BY 4.0
@@ -135,16 +325,10 @@ jovanovic_2026_conscientiousness_dass_d,Derived_License,conflict,CC BY 4.0,"Perm
 jovanovic_2026_conscientiousness_panas_na,Derived_License,conflict,CC BY 4.0,"Permission via Email, CC BY 4.0"
 jovanovic_2026_conscientiousness_spane_na,Derived_License,conflict,CC BY 4.0,"Permission via Email, CC BY 4.0"
 jovanovic_2026_conscientiousness_yips,Derived_License,conflict,CC BY 4.0,"Permission via Email, CC BY 4.0"
-kar_2022_ghq12,Original_License,fill,NA,CC0 1.0
-karim_2022_phq9,Original_License,fill,NA,CC0 1.0
-khongsirisombat_2025_aaq_sf,Original_License,fill,NA,CC0 1.0
-ksiazkiewicz_2025_gspq,Original_License,fill,NA,CC0 1.0
 li_2024_bdyz,Description,conflict,"4-item Expressive Suppression subscale of the ERQ (Gross & John, 2003; 1-7 Likert; deposit ships the items labelled 1/2/6/9), same sample as li_2024_fa","4-item body-image scale subset (items 1/2/6/9 only, 1-7 Likert), same sample as li_2024_fa"
 machivallianism_test_main,Original_License,conflict,Permission via Email,Missing (NA)
 machivallianism_test_tipi,Original_License,conflict,Permission via Email,Missing (NA)
 machivallianism_test_vcl,Original_License,conflict,Permission via Email,Missing (NA)
-maruyama_2023_madagascar_math,Original_License,fill,NA,CC0 1.0
-mesaric_2020_saq_primary_care,Original_License,fill,NA,CC0 1.0
 mexico_2023_quality_administration,Derived_License,conflict,Custom,Permission via Email
 mexico_2023_quality_buses,Derived_License,conflict,Custom,Permission via Email
 mexico_2023_quality_cablecars,Derived_License,conflict,Custom,Permission via Email
@@ -208,7 +392,6 @@ mexico_2025_q4safety_govperformance,Derived_License,conflict,Custom,Permission v
 mexico_2025_q4safety_harassment,Derived_License,conflict,Custom,Permission via Email
 mexico_2025_q4safety_perception,Derived_License,conflict,Custom,Permission via Email
 mindfulness_assessment,Original_License,conflict,Permission via Email,Missing (NA)
-munoztroncoso_2024_vi_gec,Original_License,fill,NA,CC BY 4.0
 NAMPRB_Siwiak_2024_AOT,Original_License,conflict,Permission via Email,Missing (NA)
 NAMPRB_Siwiak_2024_BSR10,Original_License,conflict,Permission via Email,Missing (NA)
 NAMPRB_Siwiak_2024_DESRPL,Original_License,conflict,Permission via Email,Missing (NA)
@@ -226,8 +409,6 @@ opladen2025_edeq,Description,conflict,Eating Disorder Examination Questionnaire 
 opladen2025_fkg,Description,conflict,"Health/illness-cognition items FKG (20 items, 1-4), probably the Fragebogen zu Körper und Gesundheit (Hiller et al., 1997) -- the deposit never names it; German clinical sample BN/BDD/IAD N=217",Body feelings questionnaire FKG (20 items); German clinical sample BN/BDD/IAD N≈210; 1-4
 opladen2025_fks,Description,conflict,"Fragebogen körperdysmorpher Symptome (FKS; Buhlmann et al., 2009), a German self-report screener for body dysmorphic disorder (17 of 18 items; FKS_2 absent from the deposit); German clinical sample BN/BDD/IAD N=217; 1-5",Body schema questionnaire FKS (17 items); German clinical sample BN/BDD/IAD N≈211; 0-5
 opladen2025_wi,Description,conflict,"Whiteley Index (WI; 14 items, binary 1-2), a health-anxiety (hypochondriasis) screener; German clinical sample BN/BDD/IAD N=217","Body image scale WI (14 items, binary 1-2); German clinical sample BN/BDD/IAD N≈210"
-pakpour_2023_ehealth_literacy,Original_License,fill,NA,CC0 1.0
-pakpour_2023_helia,Original_License,fill,NA,CC0 1.0
 personalitychange_kramer_2025_bfi,Original_License,conflict,CC BY 4.0,CC BY-SA 4.0
 personalitychange_kramer_2025_mls,Original_License,conflict,CC BY 4.0,CC BY-SA 4.0
 personalitychange_kramer_2025_rses,Original_License,conflict,CC BY 4.0,CC BY-SA 4.0
@@ -241,15 +422,10 @@ riasec,Original_License,conflict,Permission via Email,Missing (NA)
 rightwing_authoritariansim,Original_License,conflict,Permission via Email,Missing (NA)
 rosenberg_selfesteem,Original_License,conflict,Permission via Email,Missing (NA)
 sapa_personality,Derived_License,conflict,CC0 1.0,CC BY 4.0
-sekowski_2023_ada,Original_License,fill,NA,CC0 1.0
-sekowski_2023_phq9,Original_License,fill,NA,CC0 1.0
-sekowski_2023_rfq8,Original_License,fill,NA,CC0 1.0
 sexual_compulsivity,Original_License,conflict,Permission via Email,Missing (NA)
 sexual_selfconcept,Original_License,conflict,Permission via Email,Missing (NA)
-shan_2024_bfi_s,Original_License,fill,NA,CC0 1.0
 short_dark_triad,Original_License,conflict,Permission via Email,Missing (NA)
 spelling2pronounce_edwards2023,Original_License,conflict,Permission via Email,Missing (NA)
-stiglic_2019_wemwbs,Original_License,fill,NA,CC0 1.0
 test_taking_patterns_over_time,Derived_License,conflict,CC0 1.0,CC BY 4.0
 tma,Original_License,conflict,Permission via Email,Missing (NA)
 transyouth_leshin_2026_parents_anx,Original_License,conflict,CC BY-NC 4.0,CC BY-NC-SA 4.0
@@ -260,11 +436,6 @@ transyouth_leshin_2026_youth_anx,Original_License,conflict,CC BY-NC 4.0,CC BY-NC
 transyouth_leshin_2026_youth_dep,Original_License,conflict,CC BY-NC 4.0,CC BY-NC-SA 4.0
 transyouth_leshin_2026_youth_posaff,Original_License,conflict,CC BY-NC 4.0,CC BY-NC-SA 4.0
 vocabulary_iq,Original_License,conflict,Permission via Email,Missing (NA)
-vocabulary_iq_survey,Original_License,fill,NA,Permission via Email
-vuong_2020_pss,Original_License,fill,NA,CC0 1.0
-wicki_2021_av_concern,Original_License,fill,NA,CC0 1.0
 wilkins_2018_phq9,Derived_License,conflict,CC0 1.0,CC0
 wilkins_2018_phq9,Original_License,conflict,CC0 1.0,CC0
-wu2021_affect,Original_License,fill,NA,CC BY 4.0
-wu2021_basic_empathy,Original_License,fill,NA,CC BY 4.0
 xu2024_noncompliance,Original_License,conflict,CC0 1.0,CC0
