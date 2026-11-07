@@ -25850,3 +25850,62 @@ staged. `covariate_labels/harvest.py` not yet run for the new .sav scripts
 **Before upload (Ben agreed):** `summart_2025_caregiver_dass21` dropped (DASS-21 by column position only) and `hu_2025_*` kept with its caveat. **Handed over: 185 response tables, 2,123,706 responses, + 5 item text tables.**
 
 **UPLOADED 2026-11-02** (Ben, in-session): 185 response tables + 5 item text tables. Manifest renamed `MANIFEST_2026-11-02_uploaded.txt`.
+
+## 2026-11-07 — repos sweep (monthly terms, osf/dataverse/datacite): 6 tables, 167,738 responses
+
+First run under the reserved-source guard (#3432): `reserved.py selftest` ok
+before the run, `check-diff origin/main` before the push.
+
+### Search and triage
+
+`irw_discover_updated.py`, the 125 monthly `TERM_LIST` terms, sources osf,
+dataverse, datacite, `--since 2026-10-02` -> 448 candidates. One DataCite
+query ("emotion recognition accuracy") hit a 502 and was re-run; its one hit
+was already in the set. The monthly watermark in `search_terms_log.csv` is
+NOT advanced by this run (it used the discovery script directly), so the
+12-02 routine re-covers the window.
+
+`irw_batch_updated.py --retriage`: 238 of the 448 already in
+`repo_triage_seen_keys.csv`, 210 triaged: no_usable_file 176,
+human_assistance 9, download_failed 8 (left out of the ledger for retry),
+license_restricted 6, below_min_n 5, not_item_response 3, pii_suspected 2,
+error 1. No `good` row. Step 2b on the 9 human_assistance rows:
+recoverable_format 6, worth_retrying 1, aggregate_continuous 1, human_review 1
+(-> `human_review/human_review_datacite_2026-11-07.csv`).
+
+### The 7 leads
+
+Shipped (CC0 1.0, all Harvard Dataverse, no linked article yet):
+- dvn/tyc6ri -> `bialowolski_2026_financial_literacy` (8-item quiz, 0/1,
+  17,965 respondents; don't-know dropped, not scored 0; the Stata mi
+  imputations unused). Not the same data as bialowolski_2024.
+- dvn/qkl3q6 -> `shi_2026_ai_offloading` (6 items, 1-7, six waves, 1,166
+  undergraduates; the per-wave problem-solving columns are aggregates and
+  are dropped; platform-style ids replaced by the row index).
+- dvn/akvgxj -> `du_2026_{utaut,teacher_identity,ai_use_intention,aiab}`
+  (714 K-12 teachers, 1-5, no labels or covariates in the file; constructs
+  read from the deposit title and item prefixes).
+
+Not shipped:
+- dvn/ji10q6 (Sazonava & Butkouskaya, FMCG brand perception, 38 + 19 items,
+  453 consumers): **held as likely simulated.** The 38 agreement items form
+  six-item blocks with r ~ .7 inside and r ~ 0 between blocks, and the 19
+  importance items have mean inter-item r = 0.00; real survey data shows
+  positive cross-construct correlation from response style alone. 31 of 38
+  items have one value covering > 60% of answers. Erred on exclusion; script
+  not written.
+- osf/hyp3u: no licence on the node. osf/vptus: no licence on the node or its
+  parent (dqv8f).
+- osf/92g6v (n-back trials, CC BY 4.0): 58 participant files, below the
+  100-id floor.
+
+### Staging
+
+6 response tables, 167,738 responses, all `irw-validate --profile upload`
+pass (two expected WARNs: easy quiz items; the UTAUT subscale prefixes are
+one instrument on purpose). 6 dictionary rows (`stage_dict_row.py`,
+codebook_url none), 6 tag rows, 6 itemtext_provenance rows (NOT SHIPPED: no
+wording in any deposit). No item text tables. Covariates ship as text
+labels, so `covariate_labels/harvest.py` is not needed for them.
+Tables handed over in `src/automated_finding/irw_output/`
+(`MANIFEST_2026-11-07.txt`).

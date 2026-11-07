@@ -305,6 +305,7 @@ bi_2026_agency_maintenance,core,https://zenodo.org/records/22040756/files/AI_Lit
 bi_2026_ai_literacy,core,https://zenodo.org/records/22040756/files/AI_Literacy_618_Final_README.txt,2026-10-11
 bi_2026_creative_ai_use,core,https://zenodo.org/records/22040756/files/AI_Literacy_618_Final_README.txt,2026-10-11
 bi_2026_trust_calibration,core,https://zenodo.org/records/22040756/files/AI_Literacy_618_Final_README.txt,2026-10-11
+bialowolski_2026_financial_literacy,core,none,2026-11-07
 biggs_2024_burnout,core,none,2026-10-20
 biggs_2024_moral_injury,core,none,2026-10-20
 biggs_2024_perfectionism,core,none,2026-10-20
@@ -888,6 +889,10 @@ drent_2026_teacher_expectations,conj,https://ssh.datastations.nl/api/access/data
 drewniak_2022_ecls_start,conj,none,2026-10-09
 drewniak_2022_ecls_stop,conj,none,2026-10-09
 driscoll_2023_court_curbing,conj,https://dataverse.harvard.edu/api/access/datafile/6182903,2026-10-07
+du_2026_ai_use_intention,core,none,2026-11-07
+du_2026_aiab,core,none,2026-11-07
+du_2026_teacher_identity,core,none,2026-11-07
+du_2026_utaut,core,none,2026-11-07
 duch_2021_vaccine_priority,conj,https://dataverse.harvard.edu/api/access/datafile/4789434,2026-10-07
 duch_2022_destination_country,conj,https://dataverse.harvard.edu/api/access/datafile/3824114,2026-10-07
 duch_2022_destination_deportation,conj,https://dataverse.harvard.edu/api/access/datafile/3824114,2026-10-07
@@ -4065,6 +4070,7 @@ shen_2025_dass21,core,https://doi.org/10.7717/peerj.19707/supp-3,2026-10-04
 shen_2025_igds9sf,core,https://doi.org/10.7717/peerj.19707/supp-3,2026-10-04
 shen_2025_sabas,core,https://doi.org/10.7717/peerj.19707/supp-3,2026-10-04
 shi_2025_restaurant_hiring,conj,https://dataverse.harvard.edu/api/access/datafile/11091135,2026-10-07
+shi_2026_ai_offloading,core,none,2026-11-07
 shiota_2026_dass21,core,none,2026-11-02
 shiota_2026_ecr_s,core,none,2026-11-02
 shiota_2026_loneliness,core,none,2026-11-02

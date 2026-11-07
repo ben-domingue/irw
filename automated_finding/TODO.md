@@ -1,5 +1,20 @@
 # IRW Automated Finding — TODO
 
+## Repos sweep, 2026-11-07 — 6 tables staged
+
+Full write-up in `BATCH_LOG.md` (2026-11-07).
+
+- [ ] **UPLOAD the 6 tables** (ben-domingue): `src/automated_finding/irw_output/`,
+  `MANIFEST_2026-11-07.txt`. bialowolski_2026_financial_literacy,
+  shi_2026_ai_offloading, du_2026_{utaut,teacher_identity,ai_use_intention,aiab}.
+- [ ] **dvn/ji10q6 held as likely simulated** (Sazonava, FMCG, 57 items, 453
+  consumers); numbers in BATCH_LOG. Ship only if Ben overrules.
+- [ ] **2026-11-10 (Claude): check the 11-09 run of "IRW Monthly Discovery —
+  PLOS"** (trig_017FX5HNMNFjDKrK3BfQHi5m; RemoteTrigger list_runs, then
+  get_run_log). Confirm `reserved.py selftest` printed "ok (key matches)"
+  (IRW_RESERVED_KEY added to the routines' cloud environment 2026-11-07) and
+  that no source shows as not_searched. Report to Ben.
+
 ## Repos monthly discovery+triage, 2026-11-02 — 1 `good`, 23 leads, scholars_portal blocked
 
 Full write-up in `BATCH_LOG.md` (2026-11-02). Discovery + triage only; no
