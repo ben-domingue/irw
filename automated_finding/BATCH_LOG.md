@@ -26173,3 +26173,5 @@ staged response CSVs), `audit_batch.R` and `irw-validate`.
 wording; the BIS-11 had no row and is now a `hold` (named third-party
 instrument, no grant located). The deposit's CC0 covers the data, not the
 instruments.
+
+**UPLOADED 2026-11-07** (Ben, in-session): 7 item text tables. Manifest renamed `MANIFEST_2026-11-07_itemtext_uploaded.txt`; `uploaded` stamped in itemtext_provenance.csv and mapping_verification.csv.
