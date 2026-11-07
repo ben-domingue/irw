@@ -25911,6 +25911,7 @@ Tables handed over in `src/automated_finding/irw_output/`
 (`MANIFEST_2026-11-07.txt`).
 
 **UPLOADED 2026-11-07** (Ben, in-session): 6 response tables. Manifest renamed `MANIFEST_2026-11-07_uploaded.txt`. PR #3433.
+
 ## 2026-11-07 — cleaned-leads batch 1: 7 deposits, 13 tables, 14,324 responses
 
 Worked from a cleaned, ranked union of the 38 `leads/*.csv` files
@@ -25968,3 +25969,5 @@ its S1 File), manger (rubric in Code book.docx). Each script header says where.
 statuses set in their source files. No .sav/.dta sources, so no covariate-label
 harvest. Tables in the worktree's `automated_finding/irw_output/` with
 `MANIFEST_2026-11-07_leads1.txt`.
+
+**UPLOADED 2026-11-07** (Ben, in-session): 13 response tables. Manifest renamed `MANIFEST_2026-11-07_leads1_uploaded.txt`.
