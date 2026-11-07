@@ -1,0 +1,53 @@
+# Backstop for automated_finding/reserved.py: fail any PR whose added lines,
+# file names, title or body name a reserved source.
+#
+# The scripts drop reserved sources as they find them, but tables are also
+# built by hand (data scripts, dictionary rows, BATCH_LOG entries, PR bodies),
+# and none of that passes through a script. This check sees every PR however
+# its content was made.
+#
+# It never prints what matched: this log is public. Find it locally with
+#   python automated_finding/reserved.py check-diff origin/main --show
+#
+# Fails closed: if reserved.txt is non-empty and the IRW_RESERVED_KEY secret
+# is unavailable (PRs from forks don't get secrets), the check fails and a
+# maintainer runs it locally instead.
+name: reserved-guard
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, edited]
+
+permissions:
+  contents: read
+
+jobs:
+  reserved-guard:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Key matches the list
+        env:
+          IRW_RESERVED_KEY: ${{ secrets.IRW_RESERVED_KEY }}
+        run: python automated_finding/reserved.py selftest
+
+      - name: Changed lines and file names
+        env:
+          IRW_RESERVED_KEY: ${{ secrets.IRW_RESERVED_KEY }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: python automated_finding/reserved.py check-diff "$BASE_SHA"
+
+      - name: PR title and body
+        env:
+          IRW_RESERVED_KEY: ${{ secrets.IRW_RESERVED_KEY }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: printf '%s\n%s\n' "$PR_TITLE" "$PR_BODY" | python automated_finding/reserved.py check-stdin

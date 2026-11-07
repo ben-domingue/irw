@@ -46,9 +46,10 @@ from concurrent.futures import TimeoutError as FutureTimeoutError
 
 import requests
 
+from reserved import row_is_reserved
 from irw_discover_updated import (
     Hit, is_relevant, norm_doi, _load_auto_exclusions, in_runs_dir,
-    is_excluded,
+    is_excluded, hit_is_reserved,
 )
 from irw_batch_updated import (
     check_license, TABULAR_EXT, polite_get, FileTooLarge,
@@ -467,10 +468,14 @@ def main():
                 print(f"[{journal}] [query] {q}", flush=True)
                 for hit in from_plos(q, journal):
                     if (hit.doi in seen or hit.doi in global_seen
+                            or hit_is_reserved(hit)
                             or is_excluded(hit.doi, exclude)):
                         continue
                     seen.add(hit.doi)
                     row, pool = process_one_isolated(hit, pool)
+                    # The article can be clean while the deposit it links is reserved.
+                    if row_is_reserved(row):
+                        continue
                     if row["flag"] not in INCONCLUSIVE_FLAGS:
                         newly_seen.append((hit.doi, row["flag"]))
                     writer.writerow(row)

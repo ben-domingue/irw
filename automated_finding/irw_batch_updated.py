@@ -51,6 +51,7 @@ from urllib.parse import urlparse
 import requests
 import pandas as pd
 
+from reserved import drop_reserved
 from irw_triage_updated import load_table, reread_hint, triage_dataset, irw_metadata, preflight_deps
 from irw_discover_updated import (SourceBlocked, in_runs_dir, resolve_in_path,
                                   canonical_doi)
@@ -1124,7 +1125,7 @@ def load_backlog(path: str) -> tuple[list[dict], list[str]]:
         return [], []
     with open(path, newline="", encoding="utf-8") as f:
         reader = csv.DictReader(f)
-        return list(reader), list(reader.fieldnames or [])
+        return drop_reserved(reader), list(reader.fieldnames or [])
 
 
 def write_backlog(path: str, rows: list[dict], fieldnames: list[str]) -> None:
@@ -1133,7 +1134,7 @@ def write_backlog(path: str, rows: list[dict], fieldnames: list[str]) -> None:
     with open(tmp, "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=cols, extrasaction="ignore", lineterminator="\n")
         w.writeheader()
-        for r in rows:
+        for r in drop_reserved(rows):
             w.writerow({c: r.get(c, "") for c in cols})
     os.replace(tmp, path)
 
@@ -1158,7 +1159,9 @@ def run_batch(candidates_csv: str, out_csv: str, limit: int | None,
               backlog: str | None = None) -> pd.DataFrame:
     with open(candidates_csv, newline="", encoding="utf-8") as f:
         reader = csv.DictReader(f)
-        rows = list(reader)
+        # Reserved sources leave here, before any ledger, backlog, checkpoint
+        # or human_review output can see them (reserved.py).
+        rows = drop_reserved(reader)
         fieldnames = list(reader.fieldnames or [])
 
     if backlog:

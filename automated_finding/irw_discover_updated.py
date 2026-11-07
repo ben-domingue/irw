@@ -348,29 +348,11 @@ _RE_SUPPLEMENTARY = re.compile(
 )
 
 
-# Repositories that mint a DOI *per version* of the same deposit. DataCite
-# indexes every version as its own record, so one Mendeley deposit arrives as
-# `10.17632/j33ytz7wsx`, `.1` and `.2` -- three candidates, three downloads,
-# three triage verdicts, and three rows for a human to read, all of the same
-# data. Figshare does the same with a `.vN` suffix. Collapsing the suffix is
-# scoped to these prefixes on purpose: most DOIs legitimately end in `.digits`
-# (`10.1371/journal.pone.0235154`), so a blanket rule would corrupt them.
-_VERSIONED_DOI_RULES = (
-    (re.compile(r"^10\.17632/[^/]+?(\.\d+)$"),               1),  # Mendeley Data
-    (re.compile(r"^10\.6084/m9\.figshare\.[^/]+?(\.v\d+)$"), 1),  # figshare
-    (re.compile(r"^10\.5061/dryad\.[^/]+?(\.\d+)$"),         1),  # Dryad
-)
-
-
-def canonical_doi(doi: str) -> str:
-    """Strip a repository version suffix so every version of one deposit maps
-    to a single dedup key. Returns the DOI unchanged when no rule applies."""
-    d = (doi or "").strip().lower()
-    for rx, grp in _VERSIONED_DOI_RULES:
-        m = rx.match(d)
-        if m:
-            return d[: m.start(grp)]
-    return d
+# Repositories that mint a DOI per version (Mendeley, figshare, Dryad) are
+# collapsed by canonical_doi, so one deposit is one candidate. It and norm_doi
+# live in reserved.py so the reserved-source guard and discovery normalize DOIs
+# the same way.
+from reserved import canonical_doi, hit_is_reserved, norm_doi  # noqa: E402,F401
 
 
 @dataclass
@@ -380,15 +362,6 @@ class Hit:
     url: str
     doi: str = ""
     published: str = ""
-
-
-def norm_doi(s: str) -> str:
-    if not s:
-        return ""
-    s = s.strip().lower()
-    s = re.sub(r"^https?://(dx\.)?doi\.org/", "", s)
-    s = re.sub(r"^doi:\s*", "", s)
-    return s
 
 
 def is_relevant(h: Hit, enabled: bool, query: str = "") -> bool:
@@ -1423,6 +1396,10 @@ def discover(queries, exclude: set, relevance_on: bool, sources=None,
                     key = (canonical_doi(hit.doi) if hit.doi
                            else f"{hit.source}:{hit.title.strip().lower()}")
                     if not key or key in seen:
+                        continue
+                    # Reserved sources go first, before anything counts or
+                    # records the hit. Silent by design (see reserved.py).
+                    if hit_is_reserved(hit):
                         continue
                     how = is_excluded(hit.doi, exclude)
                     if how:
