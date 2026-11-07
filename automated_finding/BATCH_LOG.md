@@ -25971,3 +25971,71 @@ harvest. Tables in the worktree's `automated_finding/irw_output/` with
 `MANIFEST_2026-11-07_leads1.txt`.
 
 **UPLOADED 2026-11-07** (Ben, in-session): 13 response tables. Manifest renamed `MANIFEST_2026-11-07_leads1_uploaded.txt`.
+
+## 2026-11-07b — cleaned-leads batch 2 (`recoverable_format`): 7 deposits, 36 tables, 919,993 responses
+
+Second batch from `~/irw-leads-clean/leads_clean_2026-11-07.csv`. Pool:
+open licence, `refined_flag=recoverable_format`, 100-50,000 respondents and
+8-700 items, no PII/reject/hold note (829 rows, 704 from
+`plos_leads_2026-10-30.csv`). Screened by title first: most of the top of the
+pool is firm/city panel data, census extracts or animal studies. Took 15
+survey-shaped rows; all passed the reserved check, none had a script or
+dictionary row.
+
+**Shipped (all pass `irw-validate --profile upload`):**
+- `hawlader_2021_{whoqol_bref,postcovid_symptoms}` (pone.0257421, .dta) --
+  WHOQOL-BREF 26 items and a 22-symptom checklist, 3,203 kept of 3,244: 31
+  groups of rows agree on all 26 WHOQOL answers plus age, gender and income
+  (5 pairs identical on every column but ID), read as repeat entries, first
+  kept.
+- `nurnberger_2022_*` (pone.0264357, .sav, SI **s002** not s001) -- 9 tables:
+  BAI, WHO-5, IAS, SPQ fear, SPQ interference, MOS SSS, STAI state, STAI
+  trait, Whiteley. The SPQ's 100 columns are 50 stimuli x {fear,
+  interference} in adjacent columns; parity fixed by the deposit's own
+  composites (spq_vomiting_fear = mean(SPQ33, SPQ49) exactly). 48 empty rows
+  dropped.
+- `kirkland_2015_{panas,shs,bfas,hps,asrm}` (pone.0132438) -- the file's
+  `wave` is three INDEPENDENT samples (undergrads, two MTurk), so `id` =
+  sample*1000 + subject and `cov_sample`, not `wave`. BDI dropped (12 of the
+  paper's 13 items, 448 cells coded 6/7 on a 0-3 scale). HPS kept in the
+  deposit's 1/2 coding.
+- `weeldenburg_2020_{bpnsfs,mcsys,agpeq,brpeq}` (pone.0228859) -- four PE
+  motivation instruments, 2,562 Dutch pupils, `cluster_id` = school.
+- `wang_2016_cultural_orientation` (pone.0165858) -- all 116 administered
+  CCOQ items (the paper's final scale keeps 67).
+- `bullock_2023_*` (pone.0281002) -- 10 tables. Identification and fusion
+  items split by the deposit's two prompts. Three columns with blanked
+  headers but live values (city, region code, postal code) dropped under the
+  2026-10-20 geography ruling; identified as places by nesting in country,
+  without printing values. The neighbours checklist dropped (unmarked =
+  blank, so "not chosen" and "skipped" are indistinguishable).
+- `lusk_2019_*` (pone.0223098, Dataverse IEHI3U, CC0) -- 5 tables from the
+  codebook-documented grids. Q14_9 is the attention check ("Click somewhat
+  disagree if you're paying attention", constant 2) and Q28_9 is constant
+  (27) across all 1,290: both dropped. Q28 recoded 24-28 -> 1-5.
+
+**Not shipped:** `pone.0125988` (dance addiction) and `pone.0294681`
+(conspiracy mentality, OSF xjdac 2020 file) skipped for an IP-address column
+(structural PII). Rejected: pone.0178863 (totals and T-scores only),
+pone.0237056 (OSF 5af3u, trait/facet means only), pone.0234997 (already
+rejected three times; status now set). Deferred: pone.0305178 (crypto,
+Dataverse CG3MWN, CC0; answers stored as text with no codebook). Not
+attempted, left `unworked`: pone.0253485 (LAPOP Haiti extract on Dataverse
+AU6ROZ, CC0, a mixed-format omnibus survey) and psycharchives.5318 (Unified
+Narcissism Scale).
+
+**Item text:** none shipped. Stems are in hand for hawlader (Stata labels),
+bullock (column headers) and lusk (codebook PDF, study-authored, CC0), but
+the first two are published instruments the register blocks or has not
+ruled on (WHOQOL, BFI, identity fusion) -- `irw-validate` flags WHOQOL,
+PANAS, SHS, STAI and BFI as register `block` rows. lusk is the cheap one
+left. Each script header says where the wording is.
+
+**Staging:** 36 dictionary + codebook rows, 36 tag rows
+(`tags_auto_2026-11-07b.csv`, appended to `tags/tags_auto.csv`), 13 lead
+statuses set. Covariate-label harvest run for the two .sav/.dta scripts
+(hawlader, nurnberger): it adds nothing, because both ship their covariates
+as text labels already; `build.py`'s rebuild also rewrote rows for unrelated
+tables from harvest logs on disk, so that change was not committed.
+Tables in `~/irw-wt/leads-batch-2/automated_finding/irw_output/` with
+`MANIFEST_2026-11-07_leads2.txt`.
