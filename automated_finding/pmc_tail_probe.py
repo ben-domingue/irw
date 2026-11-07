@@ -23,6 +23,7 @@ import sys
 
 from irw_triage_updated import preflight_deps
 from irw_discover_updated import _load_auto_exclusions, in_runs_dir
+from reserved import row_is_reserved
 from irw_batch_updated import (check_license, extract_external_link,
                                triage_external_link)
 from irw_discover_pmc import (fetch_core_license, fetch_fulltext_xml,
@@ -131,6 +132,10 @@ def main():
                 row = probe_one(doi)
             except Exception as e:
                 row = {"doi": doi, "flag": "error", "reasons": str(e)[:200]}
+            # The article is public, but its availability statement can link
+            # a reserved deposit (reserved.py). Silent by design.
+            if row_is_reserved(row):
+                continue
             w.writerow(row)
             fh.flush()
             print(f"  {i:3}/{len(sample)} [{row.get('flag', ''):20}] {doi}",

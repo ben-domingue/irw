@@ -23,6 +23,7 @@ import time
 from irw_triage_updated import preflight_deps
 from irw_discover_updated import _load_auto_exclusions, in_runs_dir, Hit, is_relevant, norm_doi
 from irw_discover_pmc import JOURNALS, _europepmc_get, load_seen_dois
+from reserved import is_reserved
 
 FIELDNAMES = ["term", "hits", "relevant", "with_suppl", "new", "journals"]
 
@@ -55,7 +56,8 @@ def scout(term: str, issns: list[str], exclude: set, seen: set,
                 continue
             with_suppl += 1
             doi = norm_doi(d.get("doi", ""))
-            if doi and doi not in exclude and doi not in seen:
+            # Reserved sources aren't counted either (reserved.py).
+            if doi and doi not in exclude and doi not in seen and not is_reserved(doi=doi):
                 new_dois.add(doi)
                 journals.add(d.get("journalTitle", "")[:40])
         fetched += len(results)

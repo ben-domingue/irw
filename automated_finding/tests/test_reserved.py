@@ -145,6 +145,10 @@ CALL_SITES = {
     "irw_batch_updated.py": "drop_reserved(",
     "irw_claude_assist.py": "drop_reserved(",
     "stage_dict_row.py": "row_is_reserved(",
+    "pmc_term_scout.py": "is_reserved(",
+    "pmc_tail_probe.py": "row_is_reserved(",
+    "remine_ledger.py": "drop_reserved(",
+    "openesm_ingest.py": "text_is_reserved(",
 }
 
 
