@@ -59,6 +59,19 @@ the environment, not to skip the check.
 
 ## Before doing anything
 
+0. **Reserved sources.** Some sources are held back and must not be found,
+   triaged, staged or named anywhere in this repo (`automated_finding/reserved.py`,
+   which holds only keyed hashes). The scripts drop them silently, but nothing
+   catches a table built by hand except CI, and by then the branch is public.
+   So, with the key in place (`~/.config/irw/reserved_key`, from Ben):
+   - run `python automated_finding/reserved.py selftest` before a run; if it
+     says the key is missing or wrong, stop and tell Ben. Don't work around it.
+   - before writing a data script, a dictionary row, a BATCH_LOG entry or a PR
+     body for a source, check its DOI/URL:
+     `echo "<doi or url>" | python automated_finding/reserved.py check-stdin`.
+     Exit 1 means reserved: drop it and don't mention it anywhere, including
+     the log, the PR and your summary.
+   - before pushing, run `python automated_finding/reserved.py check-diff origin/main`.
 1. Read `TODO.md` — the short list of currently open action items (on-hold
    datasets, unresolved `worth_retrying` cases, pending uploads). Check
    whether anything you're about to do overlaps with it.

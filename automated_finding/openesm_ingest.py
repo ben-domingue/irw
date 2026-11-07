@@ -313,6 +313,16 @@ def plan(args):
                  "Read it and rule on it first (datastandard.md, 'Before you start').")
 
     zrec = zenodo_record(rec["zenodo_doi"])
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from reserved import text_is_reserved
+    if text_is_reserved(" ".join(str(x) for x in (
+            rec.get("zenodo_doi", ""), rec.get("doi", ""), rec.get("url", ""),
+            f"https://zenodo.org/records/{zrec.get('id', '')}",
+            zrec.get("doi", ""), zrec.get("conceptdoi", ""),
+            zrec.get("conceptrecid", "") and
+            f"https://zenodo.org/records/{zrec.get('conceptrecid')}"))):
+        sys.exit("This dataset is on the reserved list (automated_finding/"
+                 "reserved.py) and can't be planned. Ask Ben.")
     files = [f["key"] for f in zrec["files"]]
     ts_file = next((f for f in files if f.endswith("_ts.tsv")), None)
     if not ts_file:

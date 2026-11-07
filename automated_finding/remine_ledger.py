@@ -54,6 +54,8 @@ import random
 import re
 import sys
 
+from reserved import drop_reserved
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 
 # DOI prefix -> the `source` name _resolve_data_files_any_order() dispatches on.
@@ -297,7 +299,7 @@ def cmd_candidates(a):
         w = csv.DictWriter(fh, fieldnames=["source", "title", "url", "doi"],
                            lineterminator="\n")
         w.writeheader()
-        w.writerows(picked)
+        w.writerows(drop_reserved(picked))
     for why, n in skipped.most_common():
         print(f"  skipped {n:5}  {why}")
     print(f"\n{len(picked)} candidate(s) -> {out}")
@@ -364,7 +366,7 @@ def cmd_leads(a):
     with open(out, "w", newline="", encoding="utf-8") as fh:
         w = csv.DictWriter(fh, fieldnames=LEADS_COLS, lineterminator="\n")
         w.writeheader()
-        w.writerows(out_rows)
+        w.writerows(drop_reserved(out_rows))
     for st, n in tally.most_common():
         print(f"  {st:10} {n}")
     print(f"\n{len(out_rows)} row(s) -> {out}")
@@ -408,7 +410,7 @@ def cmd_shipcheck(a):
         with open(path, "w", newline="", encoding="utf-8") as fh:
             w = csv.DictWriter(fh, fieldnames=fields, lineterminator="\n")
             w.writeheader()
-            w.writerows(rows)
+            w.writerows(drop_reserved(rows))
         print(f"{os.path.basename(path):55} "
               + ", ".join(f"{n} {k}" for k, n in changed.most_common()))
 

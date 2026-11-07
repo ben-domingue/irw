@@ -39,6 +39,7 @@ import argparse
 from datetime import datetime, timezone
 
 from irw_discover_updated import _load_auto_exclusions, resolve_out_path
+from reserved import hit_is_reserved, row_is_reserved
 from irw_discover_pmc import (
     from_pmc, process_one_isolated, _new_pool, JOURNALS, DEFAULT_JOURNALS,
     FIELDNAMES, SEEN_DOIS_PATH, load_seen_dois, append_seen_dois,
@@ -164,10 +165,13 @@ def main():
             term_exhausted = False
             for journal in journals:
                 for hit in from_pmc(term, journal):
-                    if hit.doi in skip:
+                    if hit.doi in skip or hit_is_reserved(hit):
                         continue
                     skip.add(hit.doi)
                     row, pool = process_one_isolated(hit, pool)
+                    # The article can be clean while the deposit it links is reserved.
+                    if row_is_reserved(row):
+                        continue
                     inconclusive = row["flag"] in INCONCLUSIVE_FLAGS
                     # Same guard as irw_discover_pmc.py's main(). Without it
                     # an infra failure (e.g. a missing xlrd) retired the DOI.

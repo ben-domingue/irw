@@ -26,6 +26,10 @@ permissions:
 jobs:
   tests:
     runs-on: ubuntu-latest
+    # These tests exercise other code and get no key, so they run against an
+    # empty reserved list. The reserved-guard workflow checks the real one.
+    env:
+      IRW_RESERVED_LIST: /dev/null
     # Nothing bounded this job, so a stuck step ran to GitHub's 6h default.
     # The suite's own work is ~4 minutes; 30 turns a hang into a fast,
     # re-runnable failure instead of an afternoon (#1775 follow-on).

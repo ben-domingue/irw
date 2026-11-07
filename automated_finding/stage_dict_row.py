@@ -55,6 +55,10 @@ import sys
 from pathlib import Path
 
 from doi_hygiene import classify, normalize
+from reserved import row_is_reserved
+
+_RESERVED_STOP = ("This row names a source on the reserved list "
+                  "(automated_finding/reserved.py). It can't be staged; ask Ben.")
 
 ##IRW_DICT_AUTO_PATH exists so metadata/tests/manual_dict_test.R can exercise
 ##this writer for real -- same quoting, same refusals -- against a scratch file
@@ -225,6 +229,8 @@ def _raw_records(raw):
 
 def replace_row(path, row):
     """Swap the record(s) for row's table for one new record, in place."""
+    if row_is_reserved(row):
+        sys.exit(_RESERVED_STOP)
     with open(path, newline="", encoding="utf-8") as f:
         raw = f.read()
     records = _raw_records(raw)
@@ -406,6 +412,8 @@ def main():
             print(f"recorded codebook for {row['table']} -> {CODEBOOK_PATH}")
         return
 
+    if row_is_reserved(row):
+        sys.exit(_RESERVED_STOP)
     if row["table.lower"] in existing and not force:
         sys.exit(f"{row['table']} is already in {path} "
                  f"-- use --replace to swap it, or --force to add a duplicate row")

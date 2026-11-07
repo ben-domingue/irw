@@ -55,6 +55,7 @@ import pandas as pd
 import requests
 
 from irw_triage_updated import load_table, run_qc
+from reserved import drop_reserved
 
 API_URL = "https://api.anthropic.com/v1/messages"
 DEFAULT_MODEL = "claude-sonnet-5-5"          # swap via --model if needed
@@ -647,6 +648,8 @@ def main():
             with open(a.input, newline="", encoding="utf-8") as f:
                 todo = [r for r in csv.DictReader(f) if r.get("flag") in wanted]
             print(f"{len(todo)} triage rows with flag in {sorted(wanted)}")
+        # Nothing about a reserved source goes to the API or the ledger.
+        todo = drop_reserved(todo)
         if a.limit:
             todo = todo[:a.limit]
         today = time.strftime("%Y-%m-%d")
