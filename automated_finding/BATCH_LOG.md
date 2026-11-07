@@ -25909,3 +25909,5 @@ wording in any deposit). No item text tables. Covariates ship as text
 labels, so `covariate_labels/harvest.py` is not needed for them.
 Tables handed over in `src/automated_finding/irw_output/`
 (`MANIFEST_2026-11-07.txt`).
+
+**UPLOADED 2026-11-07** (Ben, in-session): 6 response tables. Manifest renamed `MANIFEST_2026-11-07_uploaded.txt`. PR #3433.

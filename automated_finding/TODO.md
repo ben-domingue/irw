@@ -4,8 +4,8 @@
 
 Full write-up in `BATCH_LOG.md` (2026-11-07).
 
-- [ ] **UPLOAD the 6 tables** (ben-domingue): `src/automated_finding/irw_output/`,
-  `MANIFEST_2026-11-07.txt`. bialowolski_2026_financial_literacy,
+- [x] **UPLOADED 2026-11-07 by ben-domingue** (PR #3433 merged). Was: UPLOAD the 6 tables from `src/automated_finding/irw_output/`,
+  `MANIFEST_2026-11-07_uploaded.txt`. bialowolski_2026_financial_literacy,
   shi_2026_ai_offloading, du_2026_{utaut,teacher_identity,ai_use_intention,aiab}.
 - [ ] **dvn/ji10q6 held as likely simulated** (Sazonava, FMCG, 57 items, 453
   consumers); numbers in BATCH_LOG. Ship only if Ben overrules.
