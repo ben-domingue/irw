@@ -34,12 +34,8 @@ Full write-up in `BATCH_LOG.md` (2026-11-07c).
 - [x] **UPLOADED 2026-11-07 by ben-domingue** -- 11 response tables (433,618
   responses) from the worktree's `irw_output/`, listed in
   `MANIFEST_2026-11-07_leads3_uploaded.txt`. No item text tables.
-
-- [ ] **UPLOAD 11 response tables (433,618 responses)** from
-  `~/irw-wt/leads-batch-3/automated_finding/irw_output/` (a worktree),
-  listed in `MANIFEST_2026-11-07_leads3.txt`. No item text tables.
 - [ ] Next leads, open and promising: pone.0175019, pone.0249058 (DANS),
-  pone.0185725 (Figshare, three samples).
+  pone.0185725 (Figshare, three samples). Batch 4 in progress 2026-11-07.
 
 ## Cleaned-leads batch 1, 2026-11-07 — 13 tables staged
 
