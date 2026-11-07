@@ -26086,3 +26086,60 @@ covariates). Tables in `~/irw-wt/leads-batch-3/automated_finding/irw_output/`
 with `MANIFEST_2026-11-07_leads3.txt`.
 
 **UPLOADED 2026-11-07** (Ben, in-session): 11 response tables. Manifest renamed `MANIFEST_2026-11-07_leads3_uploaded.txt`.
+
+## 2026-11-07d — cleaned-leads batch 4 (`recoverable_format`): 5 deposits, 16 tables, 695,628 responses
+
+The three leads carried from batch 3, then the next survey-shaped rows of the
+batch-2 pool. All passed the reserved check.
+
+**Shipped (all pass `irw-validate --profile upload`):**
+- `rees_2017_{grief,anger_reactions,anger_physiological,anger_beliefs}`
+  (pone.0175019, .dta with value labels) -- 2,964 Timorese adults. Grief 4
+  items 1-5 (code 0, unlabelled, = no loss reported: 46 cells, dropped);
+  explosive-anger reactions 5 items 0-6 (one 99 sentinel dropped); 12 bodily
+  reactions 0/1; 11 anger beliefs 0-6. Screening items, conditional
+  follow-ups and single items on their own scales dropped.
+- `vicens_2021_{pss,hads,bis11,erq}` (pone.0249058, DANS dans-za8-qpmw, CC0,
+  codebook PDF) -- 1,607 adults during the 2020 lockdown. Items suffixed "i"
+  are deposited already reversed (the deposit's totals equal the plain sums
+  of the stored columns; asserted in the script) and keep the suffix. Town,
+  postal code and distance to the petrochemical focus dropped (geography);
+  the near/far flag dropped because its coding contradicts the paper (the
+  codebook's "1 = near" holds 1,024 rows, the paper's far group). Four
+  negative ages set missing. HADS ships as one 14-item table (A/D prefixes),
+  as most existing HADS tables do.
+- `yang_2016_{mmse,cdt}` (pone.0168949, .xls, no codebook) -- 2,015 adults
+  65+ in Zhejiang. MMSE = 30 0/1 columns identified from the data: their sum
+  equals the deposit's 0-30 total on 96.5% of rows, and the flag column has
+  the paper's 705 MMSE positives. CDT = 5 0/1 criteria (sum = the 0-5 score
+  on 99.8%; one "11" dropped). AD8 dropped: its items carry an undocumented
+  code 3 and sum to the total on only 66% of rows. Mini-Cog under 3 items.
+- `muscio_2022_{phd_rating,drivers,obstacles,university_env}`
+  (pone.0261495, .dta) -- 11,835 Italian Ph.D. students. 9 programme
+  ratings, 15 drivers and 9 university-environment items 1-6; 12 obstacles
+  shipped 1-5 as deposited (the paper says 1-6, no 6 occurs). "Other"
+  write-in driver dropped.
+- `baseler_2022_{cognitive,sensory}` (pone.0269353, .xlsx) -- 5,428 adults;
+  "more problems during COVID-19 with ...", none/mild/moderate/severe 1-4, 9
+  cognitive and 7 sensory items (the paper's components). Participant code
+  replaced by row index; country/UK region codes and the unlabelled group and
+  gender codes dropped; no item-level quiz data.
+
+**Not shipped:** pone.0185725 (community collectivism) skipped for PII: both
+Study 2 files on Figshare 5411215 carry an IP-address column and Study 3
+(5411224) has location coordinates, so the whole candidate is out (Study 1,
+5411206, has neither; ship it only if Ben overrules). pone.0287766 rejected
+(discrete-choice experiment). pone.0163763 deferred (mixed 0/99/999-coded
+questions, needs its code book worked through). Not reached, left `unworked`:
+pone.0341946 (Zenodo 18957284), pone.0272972 (Dataverse RIKJAY),
+pone.0264316 (Dataverse JGOCKI).
+
+**Item text:** none shipped. Cheap later: vicens (codebook PDF has every
+English item, CC0); rees and muscio variable labels hold short wordings.
+
+**Staging:** 16 dictionary + codebook rows, 16 tag rows
+(`tags_auto_2026-11-07d.csv`, appended to `tags/tags_auto.csv`), 8 lead
+statuses set. No covariate-label harvest: the two .dta scripts ship their
+covariates as text labels already. Tables in
+`~/irw-wt/leads-batch-4/automated_finding/irw_output/` with
+`MANIFEST_2026-11-07_leads4.txt`.

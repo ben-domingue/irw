@@ -27,6 +27,20 @@ Full write-up in `BATCH_LOG.md` (2026-11-07b).
 - [ ] pone.0305178 (crypto, Dataverse CG3MWN): answers stored as text, no
   codebook; deferred.
 
+## Cleaned-leads batch 4, 2026-11-07 — 16 tables staged
+
+Full write-up in `BATCH_LOG.md` (2026-11-07d).
+
+- [ ] **UPLOAD 16 response tables (695,628 responses)** from
+  `~/irw-wt/leads-batch-4/automated_finding/irw_output/` (a worktree),
+  listed in `MANIFEST_2026-11-07_leads4.txt`. No item text tables.
+- [ ] pone.0185725 Study 1 (Figshare 5411206) has no PII of its own; the
+  paper was skipped whole because Study 2/3 files carry IP addresses and
+  coordinates. Ship Study 1 only if Ben overrules.
+- [ ] Item text for `vicens_2021_*`: the DANS codebook PDF has every English
+  item (CC0). Cheap; not built.
+- [ ] Next leads not reached: pone.0341946, pone.0272972, pone.0264316.
+
 ## Cleaned-leads batch 3, 2026-11-07 — 11 tables staged
 
 Full write-up in `BATCH_LOG.md` (2026-11-07c).
@@ -34,8 +48,7 @@ Full write-up in `BATCH_LOG.md` (2026-11-07c).
 - [x] **UPLOADED 2026-11-07 by ben-domingue** -- 11 response tables (433,618
   responses) from the worktree's `irw_output/`, listed in
   `MANIFEST_2026-11-07_leads3_uploaded.txt`. No item text tables.
-- [ ] Next leads, open and promising: pone.0175019, pone.0249058 (DANS),
-  pone.0185725 (Figshare, three samples). Batch 4 in progress 2026-11-07.
+- [x] Next leads pone.0175019, pone.0249058, pone.0185725: worked in batch 4.
 
 ## Cleaned-leads batch 1, 2026-11-07 — 13 tables staged
 
