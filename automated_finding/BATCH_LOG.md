@@ -26084,3 +26084,5 @@ not identified against published scales); SDQ is a register `block`.
 statuses set. No covariate-label harvest needed (the one .sav script ships no
 covariates). Tables in `~/irw-wt/leads-batch-3/automated_finding/irw_output/`
 with `MANIFEST_2026-11-07_leads3.txt`.
+
+**UPLOADED 2026-11-07** (Ben, in-session): 11 response tables. Manifest renamed `MANIFEST_2026-11-07_leads3_uploaded.txt`.
