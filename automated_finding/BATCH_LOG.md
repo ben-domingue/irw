@@ -26134,8 +26134,9 @@ questions, needs its code book worked through). Not reached, left `unworked`:
 pone.0341946 (Zenodo 18957284), pone.0272972 (Dataverse RIKJAY),
 pone.0264316 (Dataverse JGOCKI).
 
-**Item text:** none shipped. Cheap later: vicens (codebook PDF has every
-English item, CC0); rees and muscio variable labels hold short wordings.
+**Item text:** none shipped here. baseler built in the follow-up item-text PR;
+vicens held (PSS/HADS/ERQ blocked, BIS-11 hold); rees and muscio variable labels
+hold short wordings only.
 
 **Staging:** 16 dictionary + codebook rows, 16 tag rows
 (`tags_auto_2026-11-07d.csv`, appended to `tags/tags_auto.csv`), 8 lead

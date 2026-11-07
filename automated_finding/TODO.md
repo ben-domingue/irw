@@ -37,8 +37,8 @@ Full write-up in `BATCH_LOG.md` (2026-11-07d).
 - [ ] pone.0185725 Study 1 (Figshare 5411206) has no PII of its own; the
   paper was skipped whole because Study 2/3 files carry IP addresses and
   coordinates. Ship Study 1 only if Ben overrules.
-- [ ] Item text for `vicens_2021_*`: the DANS codebook PDF has every English
-  item (CC0). Cheap; not built.
+- [x] Item text for `vicens_2021_*`: HELD, not built (2026-11-07). PSS, HADS and
+  ERQ are `block` in the rights register; BIS-11 now a `hold` row (itemtext PR).
 - [ ] Next leads not reached: pone.0341946, pone.0272972, pone.0264316.
 
 ## Cleaned-leads batch 3, 2026-11-07 — 11 tables staged
