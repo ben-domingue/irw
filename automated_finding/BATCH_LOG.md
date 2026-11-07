@@ -26041,3 +26041,48 @@ Tables in `~/irw-wt/leads-batch-2/automated_finding/irw_output/` with
 `MANIFEST_2026-11-07_leads2.txt`.
 
 **UPLOADED 2026-11-07** (Ben, in-session): 36 response tables. Manifest renamed `MANIFEST_2026-11-07_leads2_uploaded.txt`.
+
+## 2026-11-07c — cleaned-leads batch 3 (`recoverable_format`): 4 deposits, 11 tables, 433,618 responses
+
+Next 13 survey-shaped rows of the batch-2 pool. All passed the reserved check.
+
+**Shipped (all pass `irw-validate --profile upload`):**
+- `banerjee_2025_sepq` (pone.0332297, OSF cjzt6, CC BY) -- the pupils'
+  43-item self-report questionnaire, 0-3, 1,311 pupils in 60 classrooms;
+  `id` = classroom_code, `cluster_id` = classroom. Peer-nomination counts
+  dropped (counts received, not responses). The deposit's codebook carries the
+  full wording.
+- `turunen_2021_sdq` (pone.0249112, .sav) -- self-report SDQ, 25 items x 3
+  waves (Grades 6, 7, 9). Items 7/11/14/21/25 are deposited already reversed
+  ("r" suffix, kept in the item code). 377 cells hold 0.5 or 1.5 (not
+  mean-imputed: column means are about 1.58); read as a mark between two boxes,
+  undocumented, dropped.
+- `ou_2025_*` (pone.0338543) -- 7 tables: digital technology experience,
+  five UTAUT constructs (UB dropped, 2 items), and the 28-item teacher digital
+  literacy scale (administered, unanalysed in the paper). Demographic codes
+  unlabelled, dropped.
+- `morse_2020_{activity_change,nature_values}` (pone.0243697) -- 15
+  activities in the deposit's labelled 3-point less/same/more coding
+  ("doesn't do" dropped; the raw 7-point codes are undocumented), and 13
+  nature-value items 1-7. Zip dropped.
+
+**Not shipped:** rejected pone.0172855 (dyad scale scores), pone.0269003
+(recoded composite categories), pone.0270651 (Figshare 16879426: check-all
+lists and free text), pone.0233831 (already rejected; status set). Deferred:
+pone.0334137 (combined adolescent/parent file, the paper's SFLQ columns not
+identifiable) and pone.0308745 (unlabelled Q blocks). Not reached, left
+`unworked`, all open and promising: pone.0175019 (Timor-Leste grief/anger,
+.dta), pone.0249058 (petrochemical COVID survey, DANS dans-za8-qpmw, CC0, with
+a variables PDF), pone.0185725 (community collectivism, three Figshare .sav
+samples, CC BY, questionnaires included).
+
+**Item text:** none shipped. banerjee's codebook holds all 43 stems (instrument
+not identified against published scales); SDQ is a register `block`.
+
+**Staging:** 11 dictionary + codebook rows, 11 tag rows
+(`tags_auto_2026-11-07c.csv`, appended to `tags/tags_auto.csv`), 10 lead
+statuses set. No covariate-label harvest needed (the one .sav script ships no
+covariates). Tables in `~/irw-wt/leads-batch-3/automated_finding/irw_output/`
+with `MANIFEST_2026-11-07_leads3.txt`.
+
+**UPLOADED 2026-11-07** (Ben, in-session): 11 response tables. Manifest renamed `MANIFEST_2026-11-07_leads3_uploaded.txt`.

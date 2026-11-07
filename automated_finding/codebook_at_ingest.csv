@@ -189,6 +189,7 @@ ballondor_2023_jury,rank,none,2026-11-01
 ballondor_2024_jury,rank,none,2026-11-01
 ballondor_2025_jury,rank,none,2026-11-01
 banda_2022_filibuster,conj,https://dataverse.harvard.edu/api/access/datafile/7591775,2026-10-14
+banerjee_2025_sepq,core,https://osf.io/download/3fysx/,2026-11-07
 bankert_2023_consumer_origin,conj,https://static.cambridge.org/content/id/urn:cambridge.org:id:article:S2049847022000401/resource/name/S2049847022000401sup001.docx,2026-10-07
 bansak_2016_asylum,conj,https://dataverse.harvard.edu/api/access/datafile/2863400,2026-10-07
 bansak_2019_satisficing_candidates_ssi,conj,https://dataverse.harvard.edu/api/access/datafile/3340509,2026-10-07
@@ -2545,6 +2546,8 @@ moreno_jorquera_2025_amtb_intensity,core,https://dataverse.harvard.edu/api/acces
 moreno_jorquera_2025_amtb_interest,core,https://dataverse.harvard.edu/api/access/datafile/13255557,2026-10-09
 moreno_jorquera_2025_amtb_teacher,core,https://dataverse.harvard.edu/api/access/datafile/13255557,2026-10-09
 morote_2017_rsa,core,none,2026-11-02
+morse_2020_activity_change,core,none,2026-11-07
+morse_2020_nature_values,core,none,2026-11-07
 mortenson_2025_democracy_tradeoffs,conj,https://dataverse.harvard.edu/api/access/datafile/13099404,2026-10-08
 mtbench_human_2023,comps,none,2026-10-27
 mueller_2024_covid_governance,conj,none,2026-10-09
@@ -2724,6 +2727,13 @@ osorio_2025_dsi,core,https://zenodo.org/records/15345328/files/final_db_substanc
 osorio_2025_parenting,core,https://zenodo.org/records/15345328/files/final_db_substances.dta,2026-10-18
 osorio_2025_substance_use,core,https://zenodo.org/records/15345328/files/final_db_substances.dta,2026-10-18
 otago_2018_library_support,core,https://ndownloader.figshare.com/files/13837841,2026-10-21
+ou_2025_det,core,none,2026-11-07
+ou_2025_digital_literacy,core,none,2026-11-07
+ou_2025_utaut_bi,core,none,2026-11-07
+ou_2025_utaut_ee,core,none,2026-11-07
+ou_2025_utaut_fc,core,none,2026-11-07
+ou_2025_utaut_pe,core,none,2026-11-07
+ou_2025_utaut_si,core,none,2026-11-07
 oviedo_2026_waterbirds,conj,https://zenodo.org/api/records/21133199/files/README_SEV_BIO_paper_ERE.txt/content,2026-10-09
 padchasuwan_2026_sexual_health_literacy,core,none,2026-10-30
 pakpour_2023_ehealth_literacy,core,https://dataverse.harvard.edu/api/access/datafile/6970292,2026-11-04
@@ -4395,6 +4405,7 @@ turnbulldugarte_2025_dating_spain,conj,none,2026-10-11
 turnbulldugarte_2025_dating_uk,conj,none,2026-10-11
 turska_kawa_2025_conspiracy_beliefs,core,https://zenodo.org/records/17234245/files/Religiosity%20and%20Conspiracy%20Beliefs%20Patterns%20of%20Relationships.sav,2026-10-18
 turska_kawa_2025_religiosity,core,https://zenodo.org/records/17234245/files/Religiosity%20and%20Conspiracy%20Beliefs%20Patterns%20of%20Relationships.sav,2026-10-18
+turunen_2021_sdq,core,none,2026-11-07
 tuszynska_bogucka_2024_family_apgar,core,none,2026-10-15
 tyllianakis_2025_agri_schemes_uk,conj,https://zenodo.org/api/records/17551096/files/Survey_EN.pdf/content,2026-10-09
 tzouras_2025_mode_safety,conj,https://zenodo.org/api/records/17779261/files/README_perceivedSafetyChoices_v2.0.rtf/content,2026-10-14

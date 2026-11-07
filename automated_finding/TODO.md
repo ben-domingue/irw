@@ -14,6 +14,7 @@ Full write-up in `BATCH_LOG.md` (2026-11-07).
   get_run_log). Confirm `reserved.py selftest` printed "ok (key matches)"
   (IRW_RESERVED_KEY added to the routines' cloud environment 2026-11-07) and
   that no source shows as not_searched. Report to Ben.
+
 ## Cleaned-leads batch 2, 2026-11-07 — 36 tables staged
 
 Full write-up in `BATCH_LOG.md` (2026-11-07b).
@@ -21,14 +22,20 @@ Full write-up in `BATCH_LOG.md` (2026-11-07b).
 - [x] **UPLOADED 2026-11-07 by ben-domingue** -- 36 response tables (919,993
   responses) from the worktree's `irw_output/`, listed in
   `MANIFEST_2026-11-07_leads2_uploaded.txt`. No item text tables.
-
-- [ ] **UPLOAD 36 response tables (919,993 responses)** from
-  `~/irw-wt/leads-batch-2/automated_finding/irw_output/` (a worktree, not
-  `src/`), listed in `MANIFEST_2026-11-07_leads2.txt`. No item text tables.
 - [ ] Item text for `lusk_2019_*`: wording and labels are in the deposit's
   codebook PDF (study-authored, CC0). Cheap; not built.
 - [ ] pone.0305178 (crypto, Dataverse CG3MWN): answers stored as text, no
   codebook; deferred.
+
+## Cleaned-leads batch 3, 2026-11-07 — 11 tables staged
+
+Full write-up in `BATCH_LOG.md` (2026-11-07c).
+
+- [x] **UPLOADED 2026-11-07 by ben-domingue** -- 11 response tables (433,618
+  responses) from the worktree's `irw_output/`, listed in
+  `MANIFEST_2026-11-07_leads3_uploaded.txt`. No item text tables.
+- [ ] Next leads, open and promising: pone.0175019, pone.0249058 (DANS),
+  pone.0185725 (Figshare, three samples). Batch 4 in progress 2026-11-07.
 
 ## Cleaned-leads batch 1, 2026-11-07 — 13 tables staged
 
