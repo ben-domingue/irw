@@ -14,6 +14,15 @@ Full write-up in `BATCH_LOG.md` (2026-11-07).
   get_run_log). Confirm `reserved.py selftest` printed "ok (key matches)"
   (IRW_RESERVED_KEY added to the routines' cloud environment 2026-11-07) and
   that no source shows as not_searched. Report to Ben.
+## Cleaned-leads batch 1, 2026-11-07 — 13 tables staged
+
+Full write-up in `BATCH_LOG.md` (2026-11-07).
+
+- [ ] **UPLOAD 13 response tables (14,324 responses)** from
+  `~/irw-wt/leads-batch-1/automated_finding/irw_output/` (the worktree, not
+  `src/`), listed in `MANIFEST_2026-11-07_leads1.txt`. No item text tables.
+- [ ] pone.0229132 (trust calibration): bit-packed trial outcomes, deferred;
+  decode and build if worth it.
 
 ## Repos monthly discovery+triage, 2026-11-02 — 1 `good`, 23 leads, scholars_portal blocked
 

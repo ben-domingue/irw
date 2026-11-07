@@ -16,6 +16,7 @@ abdollahi_2023_job_hardiness,core,none,2026-10-15
 abdollahi_2023_job_passion,core,none,2026-10-15
 abdollahi_2026_aps,core,none,2026-10-20
 abdollahi_2026_tuckman,core,none,2026-10-20
+abeck_2026_soc_diagnosis,core,none,2026-11-07
 abu_tabar_2021_muis,core,none,2026-10-09
 abu_tabar_2021_stai_s,core,none,2026-10-09
 acharya_2018_democratic_peace,conj,none,2026-10-09
@@ -500,6 +501,8 @@ capacci_2018_policy_support,core,none,2026-11-02
 capacci_2018_societal_risk,core,none,2026-11-02
 caprara_2020_mnesres,core,none,2026-10-14
 caprara_2020_panas,core,none,2026-10-14
+carbone_2026_fakenews_share,core,none,2026-11-07
+carbone_2026_fakenews_truth,core,none,2026-11-07
 carey_2020_democracy_donors,conj,https://dataverse.harvard.edu/api/access/datafile/3874939,2026-10-09
 carey_2020_democracy_public,conj,https://dataverse.harvard.edu/api/access/datafile/3874953,2026-10-09
 carey_2020_democracy_public_oct,conj,https://dataverse.harvard.edu/api/access/datafile/3874952,2026-10-09
@@ -893,6 +896,7 @@ du_2026_ai_use_intention,core,none,2026-11-07
 du_2026_aiab,core,none,2026-11-07
 du_2026_teacher_identity,core,none,2026-11-07
 du_2026_utaut,core,none,2026-11-07
+duc_2026_pirogov_perceptions,core,none,2026-11-07
 duch_2021_vaccine_priority,conj,https://dataverse.harvard.edu/api/access/datafile/4789434,2026-10-07
 duch_2022_destination_country,conj,https://dataverse.harvard.edu/api/access/datafile/3824114,2026-10-07
 duch_2022_destination_deportation,conj,https://dataverse.harvard.edu/api/access/datafile/3824114,2026-10-07
@@ -1736,6 +1740,12 @@ jung_2024_value_conjoint,conj,https://dataverse.harvard.edu/api/access/datafile/
 jurado_2022_brexit_deal_germany,conj,https://static.cambridge.org/content/id/urn:cambridge.org:id:article:S0020818321000412/resource/name/S0020818321000412sup001.docx,2026-10-07
 jurado_2022_brexit_deal_spain,conj,https://static.cambridge.org/content/id/urn:cambridge.org:id:article:S0020818321000412/resource/name/S0020818321000412sup001.docx,2026-10-07
 justesen_2025_brazil_clientelism,conj,none,2026-10-22
+kabir_2023_tam_atu,core,https://zenodo.org/records/8326513/files/TAM_Questionnaires.pdf,2026-11-07
+kabir_2023_tam_bi,core,https://zenodo.org/records/8326513/files/TAM_Questionnaires.pdf,2026-11-07
+kabir_2023_tam_peu,core,https://zenodo.org/records/8326513/files/TAM_Questionnaires.pdf,2026-11-07
+kabir_2023_tam_pi,core,https://zenodo.org/records/8326513/files/TAM_Questionnaires.pdf,2026-11-07
+kabir_2023_tam_pu,core,https://zenodo.org/records/8326513/files/TAM_Questionnaires.pdf,2026-11-07
+kabir_2023_tam_ta,core,https://zenodo.org/records/8326513/files/TAM_Questionnaires.pdf,2026-11-07
 kacovsky_2022_imi,core,none,2026-10-10
 kage_2019_elect_politician,conj,https://dataverse.harvard.edu/api/access/datafile/12515434,2026-10-09
 kage_2019_promote_politician,conj,https://dataverse.harvard.edu/api/access/datafile/12515434,2026-10-09
@@ -2314,6 +2324,7 @@ malhotra_2017_immigrant_skill,conj,https://dataverse.harvard.edu/api/access/data
 malik_2025_afghan_refugees,conj,none,2026-10-07
 mandrik_2019_breast_screening,conj,none,2026-10-14
 manekin_2019_disputed_territory,conj,none,2026-10-09
+manger_2025_analytic_rigor,core,https://dataverse.nl/api/access/datafile/555979,2026-11-07
 manson_2022_hexaco100_emo,core,https://zenodo.org/records/6532900/files/README_Manson-et-al_corrected.txt,2026-11-02
 manson_2022_ipip_hexaco_emo,core,https://zenodo.org/records/6532900/files/README_Manson-et-al_corrected.txt,2026-11-02
 manylabs1_klein_2014_art_attitude,core,https://osf.io/download/pqf9r/,2026-10-14
@@ -2629,6 +2640,7 @@ novara_2019_ocir,core,none,2026-11-02
 novara_2019_panas,core,none,2026-11-02
 nukui_2025_female_successors,conj,https://dataverse.harvard.edu/api/access/datafile/11677496,2026-10-09
 nunes_2015_jellyfish_beach,conj,none,2026-10-14
+nunes_2020_ciss,core,none,2026-11-07
 nunez_2016_bqsps,core,https://doi.org/10.1371/journal.pone.0167982.s003,2026-11-02
 nurmalita_2026_financial_literacy,core,https://zenodo.org/api/records/22135733/files/Codebook.pdf/content,2026-11-02
 nurmalita_2026_financial_stability,core,https://zenodo.org/api/records/22135733/files/Codebook.pdf/content,2026-11-02
@@ -2704,6 +2716,7 @@ paramartha_2026_feedback_literacy,core,none,2026-10-19
 paramartha_2026_language_mindsets,core,none,2026-10-19
 paramartha_2026_metacognitive_awareness,core,none,2026-10-19
 pardosprado_2026_nhs_tax,conj,https://dataverse.harvard.edu/api/access/datafile/13985160,2026-10-09
+parisien_2026_bayesian_reasoning,core,none,2026-11-07
 parkins_2025_forest_disturbance,conj,https://borealisdata.ca/api/access/datafile/971606,2026-10-09
 parra_fernandez_2018_orto15,core,none,2026-11-02
 pedersen_2019_candidate_background,conj,https://dataverse.harvard.edu/api/access/datafile/3354200,2026-10-09
