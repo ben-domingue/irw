@@ -26144,3 +26144,5 @@ statuses set. No covariate-label harvest: the two .dta scripts ship their
 covariates as text labels already. Tables in
 `~/irw-wt/leads-batch-4/automated_finding/irw_output/` with
 `MANIFEST_2026-11-07_leads4.txt`.
+
+**UPLOADED 2026-11-07** (Ben, in-session): 16 response tables. Manifest renamed `MANIFEST_2026-11-07_leads4_uploaded.txt`.

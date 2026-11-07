@@ -31,9 +31,9 @@ Full write-up in `BATCH_LOG.md` (2026-11-07b).
 
 Full write-up in `BATCH_LOG.md` (2026-11-07d).
 
-- [ ] **UPLOAD 16 response tables (695,628 responses)** from
-  `~/irw-wt/leads-batch-4/automated_finding/irw_output/` (a worktree),
-  listed in `MANIFEST_2026-11-07_leads4.txt`. No item text tables.
+- [x] **UPLOADED 2026-11-07 by ben-domingue** -- 16 response tables (695,628
+  responses) from the worktree's `irw_output/`, listed in
+  `MANIFEST_2026-11-07_leads4_uploaded.txt`.
 - [ ] pone.0185725 Study 1 (Figshare 5411206) has no PII of its own; the
   paper was skipped whole because Study 2/3 files carry IP addresses and
   coordinates. Ship Study 1 only if Ben overrules.
