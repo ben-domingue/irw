@@ -26146,3 +26146,32 @@ covariates as text labels already. Tables in
 `MANIFEST_2026-11-07_leads4.txt`.
 
 **UPLOADED 2026-11-07** (Ben, in-session): 16 response tables. Manifest renamed `MANIFEST_2026-11-07_leads4_uploaded.txt`.
+
+## 2026-11-07e — cleaned-leads item text: 7 `__items` tables (lusk_2019, baseler_2022)
+
+Item text for the cheap cases flagged in batches 2 and 4. Staged in
+`~/irw-wt/itemtext-leads/automated_finding/itemtext_output/` with
+`MANIFEST_2026-11-07_itemtext.txt`; all pass `validate_items.R` (against the
+staged response CSVs), `audit_batch.R` and `irw-validate`.
+
+- `lusk_2019_{natural_processing,natural_farming,natural_beliefs,healthy_foods,healthy_beliefs}__items`
+  -- the deposit's CC0 codebook PDF, study-authored. **The deposit renumbers two
+  blocks against the codebook**: data Q9_10/11/12 = codebook Q9_12/13/15 and
+  data Q28_6/7/8/9 = codebook Q28_7/8/9/10. Data Q28_9 (dropped, constant 27)
+  is the "click somewhat agree" attention check, not the "individual needs"
+  item the batch-2 script header named; header corrected, shipped rows were
+  already right. Verified (`itemtext_verification/verify_lusk_2019.R`) against
+  the deposit's weighted topline: reweighted by the deposit's `wts`, every
+  item lands within 0.1 points of its own topline row and the optimal
+  assignment is the shipped one in all five blocks. Public notes written for
+  the two renumbered tables (issues-page entry owed once uploaded).
+- `baseler_2022_{cognitive,sensory}__items` -- the S1 column headers (words
+  plus bracketed examples) and the article's stem and None/Mild/Moderate/Severe
+  labels; study-authored questions.
+
+**Held, not built:** `vicens_2021_*`. The register blocks the PSS, HADS and ERQ
+wording; the BIS-11 had no row and is now a `hold` (named third-party
+instrument, no grant located). The deposit's CC0 covers the data, not the
+instruments.
+
+**UPLOADED 2026-11-07** (Ben, in-session): 7 item text tables. Manifest renamed `MANIFEST_2026-11-07_itemtext_uploaded.txt`; `uploaded` stamped in itemtext_provenance.csv and mapping_verification.csv.

@@ -30,11 +30,18 @@
 #     2 Neither healthy nor unhealthy, 3 Unhealthy (fresh fruit, frozen fruit,
 #     canned fruit, ...)
 #   lusk_2019_healthy_beliefs     Q28_1-8, agreement ("Healthy food is more
-#     natural", ...). Q28_9 ("Individual needs determine whether various foods
-#     are healthy for an individual") is dropped: all 1,290 respondents hold
-#     the same code (27), so it carries no information and was most likely a
-#     second screen behind the codebook's "respondents who met exclusionary
-#     criteria". The deposit codes this scale 24 (Strongly disagree)
+#     natural", ...). Q28_9 is dropped: all 1,290 respondents hold the same
+#     code (27 = Somewhat Agree), because it is the codebook's Q28_10 attention
+#     check ("Click somewhat agree if you're paying attention"). The data file
+#     numbers this block consecutively while the codebook's Qualtrics codes
+#     skip 6, so data Q28_6/7/8/9 = codebook Q28_7/8/9/10 (Q28_8 here is
+#     "Individual needs determine whether various foods are healthy for an
+#     individual"). Corrected 2026-11-07: this note first read Q28_9 as that
+#     "individual needs" item; the shipped rows were right either way, and
+#     itemtext_verification/verify_lusk_2019.R checks the mapping against the
+#     deposit's topline. Q9 is renumbered the same way: data Q9_10/11/12 =
+#     codebook Q9_12/13/15 (starch, vegetable oil, washing).
+#     The deposit codes this scale 24 (Strongly disagree)
 #     to 28 (Strongly agree), Qualtrics' own numbering; resp = code - 23, so
 #     1-5 like Q14, and the original code is not otherwise informative.
 # Covariates: gender, age group, education group, region, race, Hispanic,
@@ -47,8 +54,8 @@
 #   dummy (age*, inc*, edu dummies, party dummies, qq*/v*/vv*).
 # `id` is the deposit's ID ("an internal code used to track participants").
 #
-# Item text: NOT SHIPPED. The wording and response labels are in the
-#   deposit's codebook PDF (study-authored, CC0); not built in this batch.
+# Item text: shipped separately (2026-11-07, make_itemtext_lusk_2019.py), from the
+#   deposit's codebook PDF (study-authored, CC0).
 
 import io
 import os
