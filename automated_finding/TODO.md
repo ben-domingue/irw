@@ -18,6 +18,10 @@ Full write-up in `BATCH_LOG.md` (2026-11-07).
 
 Full write-up in `BATCH_LOG.md` (2026-11-07b).
 
+- [x] **UPLOADED 2026-11-07 by ben-domingue** -- 36 response tables (919,993
+  responses) from the worktree's `irw_output/`, listed in
+  `MANIFEST_2026-11-07_leads2_uploaded.txt`. No item text tables.
+
 - [ ] **UPLOAD 36 response tables (919,993 responses)** from
   `~/irw-wt/leads-batch-2/automated_finding/irw_output/` (a worktree, not
   `src/`), listed in `MANIFEST_2026-11-07_leads2.txt`. No item text tables.

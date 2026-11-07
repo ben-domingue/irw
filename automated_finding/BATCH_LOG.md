@@ -26039,3 +26039,5 @@ as text labels already; `build.py`'s rebuild also rewrote rows for unrelated
 tables from harvest logs on disk, so that change was not committed.
 Tables in `~/irw-wt/leads-batch-2/automated_finding/irw_output/` with
 `MANIFEST_2026-11-07_leads2.txt`.
+
+**UPLOADED 2026-11-07** (Ben, in-session): 36 response tables. Manifest renamed `MANIFEST_2026-11-07_leads2_uploaded.txt`.
