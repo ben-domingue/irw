@@ -25911,3 +25911,63 @@ Tables handed over in `src/automated_finding/irw_output/`
 (`MANIFEST_2026-11-07.txt`).
 
 **UPLOADED 2026-11-07** (Ben, in-session): 6 response tables. Manifest renamed `MANIFEST_2026-11-07_uploaded.txt`. PR #3433.
+
+## 2026-11-07 — cleaned-leads batch 1: 7 deposits, 13 tables, 14,324 responses
+
+Worked from a cleaned, ranked union of the 38 `leads/*.csv` files
+(`~/irw-leads-clean/leads_clean_2026-11-07.csv`, 2,755 rows, built by
+`clean_leads.py` in the same folder: deduplicated, shipped rows dropped, hard
+rules applied, ranked). Took the `flag=good`, `licence_status=open` rows whose
+note named no PII/reject/hold/deferral (40 rows) in rank order, and worked the
+top of them. The pool thins fast: past rank ~44 it is mostly 2-item files and
+non-survey data (bacterial typing, MICs, proteomics, football runs, Reddit
+text), so the triage `good` flag is a weak signal on this list.
+
+**Shipped (all pass `irw-validate --profile upload`; scripts in `data/`):**
+- `nunes_2020_ciss` (pone.0229511) -- CISS, 15 items, 0-4, 183 students. S1
+  and S2 Dataset are identical; S1 read.
+- `duc_2026_pirogov_perceptions` (pone.0341597) -- 10-item perception
+  questionnaire, 1-5, 188 medical students. Pre/post knowledge tests are
+  scores only, dropped.
+- `abeck_2026_soc_diagnosis` (pone.0342922) -- 8 image diagnoses, 0/1, pre
+  and post (`wave`), 142 students. Reproduces the paper's 54.8% -> 92.5% and
+  57.7% female exactly.
+- `parisien_2026_bayesian_reasoning` (pone.0351694) -- 8 scenarios, option
+  rank 1-4, 142 surgeons; 1,044 responses, the paper's own denominator.
+  Unlabelled demographic codes dropped.
+- `kabir_2023_tam_{pu,peu,atu,ta,pi,bi}` (pone.0293608, data on Zenodo
+  10.5281/zenodo.8320738, CC BY) -- six TAM constructs, 1-4, 150
+  participants. SN and PBC (2 items each) dropped under the 3-item floor.
+- `carbone_2026_fakenews_{truth,share}` (pone.0348391, data on OSF sgz2f:
+  public node, CC0, despite the article's `view_only` link) -- 4 news items x
+  2 phases (`wave`); `treat` = the item's phase-2 condition (group vs
+  individual argumentation, assigned within person); `cluster_id` = group.
+  All 128 shipped; the paper's 111 excluded dyads (flagged by
+  `cov_group_type`) and one unidentified group.
+- `manger_2025_analytic_rigor` (10.34894/JLKINY, DataverseNL, CC BY-NC-SA)
+  -- 7 rubric criteria, 0-3, `id` = the intelligence product (105); the
+  deposit's rigor_score equals the sum of the shipped criteria on every row.
+
+**Rejected:** pone.0294407 (emotion counts summed over learners),
+pone.0131613 (game kill/utterance counts). Four rows the list still carried
+as `unworked` were already rejected in this log (pone.0352434, 0249033,
+0142551, 0201698); their status is now set. **Deferred:** pone.0229132
+(trust calibration) -- bit-packed per-checkpoint trial outcomes, decodable from
+the deposit's "How to decode" sheet, left `unworked` with a note. Rank 6
+(zenodo.18993680) not attempted: its note records a construct-mapping problem
+from 2026-10-07.
+
+**Item text:** none shipped. nunes (published CISS, Portuguese translation not
+in the deposit), duc (Table 1 is an image), abeck (images), parisien (stems in
+the file's second header row, options only in an image table), kabir (wording
+in the deposit's TAM_Questionnaires.pdf, but adopted/adapted from earlier TAM
+studies -- rights not resolved), carbone (questions in the paper, news texts in
+its S1 File), manger (rubric in Code book.docx). Each script header says where.
+
+**Staging:** 13 dictionary + codebook rows (`stage_dict_row.py`), 13 tag rows
+(`tags_auto_2026-11-07.csv`, appended to `tags/tags_auto.csv`), 14 lead
+statuses set in their source files. No .sav/.dta sources, so no covariate-label
+harvest. Tables in the worktree's `automated_finding/irw_output/` with
+`MANIFEST_2026-11-07_leads1.txt`.
+
+**UPLOADED 2026-11-07** (Ben, in-session): 13 response tables. Manifest renamed `MANIFEST_2026-11-07_leads1_uploaded.txt`.
