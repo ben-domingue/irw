@@ -22,8 +22,13 @@ Full write-up in `BATCH_LOG.md` (2026-11-07b).
 - [x] **UPLOADED 2026-11-07 by ben-domingue** -- 36 response tables (919,993
   responses) from the worktree's `irw_output/`, listed in
   `MANIFEST_2026-11-07_leads2_uploaded.txt`. No item text tables.
-- [ ] Item text for `lusk_2019_*`: wording and labels are in the deposit's
-  codebook PDF (study-authored, CC0). Cheap; not built.
+- [x] Item text for `lusk_2019_*`: built 2026-11-07 (BATCH_LOG 2026-11-07e).
+- [ ] **UPLOAD 7 item text tables** (lusk_2019 x5, baseler_2022 x2) from
+  `~/irw-wt/itemtext-leads/automated_finding/itemtext_output/`, listed in
+  `MANIFEST_2026-11-07_itemtext.txt`. baseler's needs its response tables
+  (batch 4, PR #3439) uploaded first. After upload: stamp `uploaded` in
+  `itemtext_provenance.csv` and add the two lusk issues-page entries
+  (public notes written).
 - [ ] pone.0305178 (crypto, Dataverse CG3MWN): answers stored as text, no
   codebook; deferred.
 
