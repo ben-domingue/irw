@@ -26254,3 +26254,5 @@ ICS, PSAS) or have no wording deposited.
 statuses set. No covariate-label harvest: the .sav scripts ship covariates as
 text labels. Tables in `~/irw-wt/leads-batch-6/automated_finding/irw_output/`
 with `MANIFEST_2026-11-07_leads6.txt`.
+
+**UPLOADED 2026-11-08** (Ben, in-session): 22 response tables. Manifest renamed `MANIFEST_2026-11-07_leads6_uploaded.txt`.

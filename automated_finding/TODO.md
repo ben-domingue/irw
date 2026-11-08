@@ -4,9 +4,9 @@
 
 Full write-up in `BATCH_LOG.md` (2026-11-07g).
 
-- [ ] **UPLOAD** the 22 response tables (433,688 responses) from
-  `~/irw-wt/leads-batch-6/automated_finding/irw_output/`, listed in
-  `MANIFEST_2026-11-07_leads6.txt`: mendes_lobao_2018 x2, pytlikzillig_2017
+- [x] **UPLOADED 2026-11-08 by ben-domingue** -- 22 response tables (433,688
+  responses) from the worktree's `irw_output/`, listed in
+  `MANIFEST_2026-11-07_leads6_uploaded.txt`: mendes_lobao_2018 x2, pytlikzillig_2017
   x4, zhang_2015 x2, bhullar_2023 x6, kabir_2021 x1, bando_2026 x7. No item
   text tables.
 - [ ] Item text, cheap: `mendes_lobao_2018_*` (S1/S2 Questionnaire, CC BY,
