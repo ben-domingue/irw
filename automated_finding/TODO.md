@@ -1,5 +1,36 @@
 # IRW Automated Finding — TODO
 
+## Cleaned-leads batch 7, 2026-11-08 — 21 tables + 1 item text table staged
+
+Full write-up in `BATCH_LOG.md` (2026-11-08 — cleaned-leads batch 7).
+
+- [ ] **UPLOAD** the 21 response tables (286,561 responses) from
+  `~/irw-wt/leads-batch-7/automated_finding/irw_output/`, listed in
+  `MANIFEST_2026-11-08_leads7.txt`: mojsa_kaja_2023 x3, beshai_2017 x3,
+  chew_2016 x2, chinvararak_2022 x3, kawakami_2020 x2,
+  talarowska_dublicka_2026 x3, li_2017_saq, perez_fuentes_2020_affect_balance,
+  shen_2018 x3.
+- [ ] **UPLOAD** item text `li_2017_saq__items` from `itemtext_output/`
+  (`MANIFEST_2026-11-08_itemtext7.txt`), after its response table; then stamp
+  `uploaded` in itemtext_provenance.csv and mapping_verification.csv.
+- [ ] Ben's call: pone.0153205 held (DA statement says not public, SI has the
+  .sav files anyway). Ship if the SI posting is read as the release.
+- [ ] Item text, not clear-cut (ship rows exist, but the administered wording
+  is not deposited): `kawakami_2020_dass21` (Vietnamese; English DASS-21 as a
+  stand-in per the DASS row and irw#2121; columns sit in canonical order, needs
+  a paper_order verify script), `chinvararak_2022_{gad7,phq9}` (Thai; PHQ
+  family ship row covers translations, Thai text not deposited), and
+  `chew_2016_phq9` (English labels in the .sav, but administered in English,
+  Malay or Mandarin by preference, no per-row language).
+- [ ] Item text, new `hold` rows to read at source if wanted: K6 (Harvard NCS
+  page hosts the Vietnamese K6), DDS-17, FIQR, SF-MPQ, YSQ-S3, BANPS, PDBS, DBQ,
+  DDDI. The wording for all but K6 and FIQR is fully in the deposits.
+- [ ] Next leads not reached: pone.0254644, pone.0321946, pone.0116510,
+  pone.0313426, pone.0243193, pone.0258228, pone.0133716, pone.0251984,
+  pone.0272871, pone.0243805, pone.0296039, pone.0219136, pone.0177172,
+  pone.0234240, pone.0259392, pone.0166410, pone.0268232, pone.0284944 (and
+  pone.0334137, deferred in batch 3).
+
 ## Repos sweep, 2026-11-07 — 6 tables staged
 
 Full write-up in `BATCH_LOG.md` (2026-11-07).

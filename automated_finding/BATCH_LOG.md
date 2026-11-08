@@ -26175,3 +26175,99 @@ instrument, no grant located). The deposit's CC0 covers the data, not the
 instruments.
 
 **UPLOADED 2026-11-07** (Ben, in-session): 7 item text tables. Manifest renamed `MANIFEST_2026-11-07_itemtext_uploaded.txt`; `uploaded` stamped in itemtext_provenance.csv and mapping_verification.csv.
+
+## 2026-11-08 — cleaned-leads batch 7 (`recoverable_format`): 9 deposits, 21 tables, 286,561 responses; 1 item text table
+
+The twenty leads carried from batch 6 plus pone.0334137, then eight more
+screened by title (pone.0296039 ... pone.0284944). All passed the reserved
+check; none had a script or dictionary row here or in the batch 5/6
+worktrees, and no table name collides with metadata.csv. Worked in list
+order and stopped at 21 tables (ten leads touched).
+
+**Shipped (all pass `irw-validate --profile upload`):**
+- `mojsa_kaja_2023_{bdi2,stai_s,ais}` (pone.0285797, RODBUK doi:10.57903/UJ/DPIPJO,
+  CC BY 4.0 on the Dataverse record) -- 1,025 Polish men aged 18-35. BDI-II 21,
+  STAI-S 20 as answered, AIS 8. The deposit carries reversed copies RX1 ... RX20
+  for the ten anxiety-absent STAI items; each equals 5 - x of its raw column on
+  every row and raw + copies reproduce the deposited total, so the raw items ship
+  and the copies don't. All three item sums equal the deposited totals; N and
+  mean age 24.08 match the paper. Social isolation index (derived 0/1 indicators)
+  dropped.
+- `beshai_2017_{prds_r,fiqr,sf_mpq}` (pone.0189666, labelled .sav) -- 525
+  CrowdFlower workers (517 completers in the paper). PRDS-R 5 items as answered
+  (reverse items 2 and 4 by their quoted wording; deposit's copies are 8 - x);
+  the deposit's value labels have seven points where the paper says six.
+  FIQR 21 items on the survey's own scales (function 1-9, overall 1-11, symptoms
+  0-10; sum + 10 = deposited NewFIQR). SF-MPQ 15 descriptors 1-4 (not analysed
+  in the paper). Dropped: body map and 41-symptom checklist (check-all boxes,
+  unchecked = unanswered = 0; first two body-map boxes coded differently), the
+  3-item severity block, Gastro-Questionnaire (1 of 26 items deposited), DASS-21
+  (totals only).
+- `chew_2016_{dds17,phq9}` (pone.0152095, figshare 3103060, CC BY 4.0) -- 700
+  Malaysian adults with type 2 diabetes. Item sums equal the deposited totals;
+  697 DDS means and 684 PHQ totals as in Table 1. Ethnicity/marital/education
+  codes unlabelled, dropped.
+- `chinvararak_2022_{mbi_gs,gad7,phq9}` (pone.0268704, S1 .dta) -- 986 Thai
+  hospital workers. MBI-GS 16 (personal accomplishment positively scored, per
+  the paper's cut-points; subscale sums equal the deposit's), GAD-7, and PHQ-9
+  for the 403 who screened positive on the 2Q (the paper's two-step design).
+  PTSD (3 criteria) and 2Q dropped as thin; Thai free text dropped.
+- `kawakami_2020_{k6,dass21}` (pone.0233119, figshare 12005511, CC BY 4.0) --
+  949 Hanoi nurses; K6 mean total 4.57 as in the paper. DASS-21 columns sit in
+  canonical DASS-21 order. **JCQ dropped (2026-11-08 rule):** 22 Job Content
+  Questionnaire items; the negatively worded ones (4, 8, 22, 23) correlate near
+  zero rather than negatively with their scale-mates, so it can't be told
+  whether they were recoded. EQ-5D-5L not shipped.
+- `talarowska_dublicka_2026_{ysq_s3,ucla,banps}` (pone.0358449, OSF 7uqe9, CC
+  BY 4.0, node public) -- 323 Polish adults; YSQ-S3-PL 90 (1-6), R-UCLA 20
+  (1-4), BANPS 33 (1-5), items in survey order. A reversed copy follows each
+  reverse-keyed item (10 UCLA, 18 BANPS) and equals (k+1) - x of the column
+  before it on every row, so raw items ship. Sex/marital/education codes have no
+  codebook, dropped; one age of 10.66 set missing.
+- `li_2017_saq` (pone.0179486, S1 .xlsx with codebook) -- 1,689 staff of 27
+  Heilongjiang hospitals, 30 SAQ items 1-5, 999 (missing/not applicable)
+  dropped. The two (R) items correlate negatively with their scale-mates, so
+  they are as answered. 35 rows repeat the previous row's answers (straight
+  4s/5s, different age/sex), kept.
+- `perez_fuentes_2020_affect_balance` (pone.0235305, labelled .sav) -- 1,014
+  Spanish adults, first lockdown week. ABS 18 items 1-3; positive and negative
+  sums equal EBApos/EBAneg; 681 women and mean age 40.87 match. **EVEA dropped:**
+  EVEA2 and EVEA8 are identical on every row (one anger item's answers lost) and
+  the deposit runs 1-10 against the paper's 0-10. **BIP-Q dropped:** 5 items,
+  the sum is the deposited total, and the deposit doesn't show whether the
+  control items were reversed before entry.
+- `shen_2018_{pdbs,dbq,dddi}` (pone.0190746, S1 Table with full English item
+  wording in row 2) -- 448 Beijing drivers (the paper dropped 27 careless
+  responders, unnamed, so all 448 kept). No reverse-keyed items in any of the
+  three; every inter-item correlation positive. **BFI-44 dropped:** its
+  reverse-keyed items correlate -0.10 to +0.07 with their own scale's direct
+  items, so recoding can't be determined.
+
+**Not shipped:** pone.0153205 `held` -- the Data Availability statement says
+the data cannot be made public for participant-privacy reasons (on request
+only), yet two .sav files sit in the SI; read as a contradiction, not as an
+open licence.
+
+**Item text (Ben, 2026-11-08: clear cases only):** one table,
+`li_2017_saq__items` -- the S1 File's codebook sheet ties t1..w4 to the English
+SAQ statements; register row SAQ is `ship`. Administered in Chinese and the
+Chinese wording is not deposited, so the English ships in the base fields
+(language=Chinese, `_translated` empty, translation_source study_supplied).
+Gated: `validate_items.R` (against the staged CSV), `audit_batch.R` (report in
+`runs/`), `irw-validate`. Provenance and a NOT_NEEDED mapping row written.
+Everything else is either blocked in the register (BDI-II, STAI, AIS, MBI-GS,
+UCLA, PRDS hold), now has a new `hold` row (DDS-17, FIQR, SF-MPQ, YSQ-S3, BANPS,
+PDBS, DBQ, DDDI, K6), or is not clear-cut (see TODO).
+
+**Staging:** 21 dictionary + codebook rows, 21 tag rows
+(`tags_auto_2026-11-08.csv`, appended to `tags/tags_auto.csv`), 10 lead
+statuses set, 9 register rows. Tables in
+`~/irw-wt/leads-batch-7/automated_finding/irw_output/` with
+`MANIFEST_2026-11-08_leads7.txt`; item text in `itemtext_output/` with
+`MANIFEST_2026-11-08_itemtext7.txt`.
+
+**Not reached, left `unworked`:** pone.0254644, pone.0321946, pone.0116510,
+pone.0313426, pone.0243193, pone.0258228, pone.0133716, pone.0251984,
+pone.0272871, pone.0243805, pone.0334137 (deferred in batch 3), pone.0296039,
+pone.0219136, pone.0177172, pone.0234240, pone.0259392, pone.0166410,
+pone.0268232, pone.0284944.
