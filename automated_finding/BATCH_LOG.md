@@ -26175,3 +26175,82 @@ instrument, no grant located). The deposit's CC0 covers the data, not the
 instruments.
 
 **UPLOADED 2026-11-07** (Ben, in-session): 7 item text tables. Manifest renamed `MANIFEST_2026-11-07_itemtext_uploaded.txt`; `uploaded` stamped in itemtext_provenance.csv and mapping_verification.csv.
+
+## 2026-11-07g — cleaned-leads batch 6 (`recoverable_format`): 6 deposits, 23 tables, 449,956 responses
+
+The twelve leads carried from batch 5 plus pone.0334137, then fifteen more
+survey-shaped rows screened by title. All passed the reserved check; none
+had a script or dictionary row. Worked in list order until the table count
+passed 20.
+
+**Shipped (all pass `irw-validate --profile upload`):**
+- `mendes_lobao_2018_hpv_{knowledge,attitudes}` (pone.0206726, .sav without
+  value labels; codes from the S2 English questionnaire) -- 826 Brazilian
+  parents, telephone KAP survey. Knowledge = the paper's 21 true/false
+  statements (Table 2: B2-B11, C22, C31-C40), scored 1 correct / 0 incorrect
+  against the paper's key; attitudes = the other 19 statements C11-C30, 1
+  agree / 0 disagree as answered. Code 2 ("I don't know", not read aloud)
+  dropped in both. Codes checked against Table 2: endorsement of true
+  statements matches the paper's % correct (B3 92/92, B6 55/55, B11 88/89);
+  for false statements the paper's % is 100 minus % yes, i.e. it counted
+  "don't know" as correct; these tables do not. Sex blank for 673 rows,
+  dropped; free text dropped.
+- `pytlikzillig_2017_{institutional_trust,dispositional_trust,government_trust,water_knowledge}`
+  (pone.0175387, S3 csv, wide over six surveys -> `wave` 1-6) -- 185
+  Nebraska science students. Every 1-7 item is deposited 1 = strongly agree
+  (the authors' SAS builds each scale as 8 minus the mean); stored 8 - x so
+  7 = strongly agree as in the paper, and Table 1 survey-1 means then match
+  (dispositional 5.23, governmental 4.95; asserted). Institutional trust =
+  4 confidence + 40 trustworthiness items, rated for both water agencies
+  (NDNR_/NRD_ prefixes, 88 items; the paper combined the two). Knowledge
+  quiz 0/1 as scored by the deposit, survey-1 mean 3.692 matches; cells kept
+  only for surveys the person took (the deposit zero-fills some absent
+  ones); KN14 dropped (every answer scored correct). DL1-DL5 (not in the
+  appendix of measures), gender/ethnicity and condition codes (unlabelled)
+  dropped.
+- `zhang_2015_{phq13,earthquake_exposure}` (pone.0137101, labelled .sav) --
+  3,053 pupils after the 2013 Lushan earthquake. PHQ-13 0-2 (sum = the
+  deposit's total on every complete row); 8 earthquake experiences recoded
+  yes = 1. CRIES deposited as a total only.
+- `bhullar_2023_*` (pone.0265634, Figshare 19354313, CC BY) -- 6 tables:
+  expected_benefits (8), farming_concerns (36), self_efficacy (11),
+  tpb (10: attitudes 5, norms 3, control 2), bfi10 (10), ztpi (21). The beef
+  (471) and poultry (426) samples answered the same questionnaire: stacked
+  with `cov_study`, ids prefixed. Items as answered; the deposit's reversed
+  copies unused (SUMAgreeableness = Fa2 + reversed Fa7 confirms the late
+  Fa2..Fa10 columns are raw). KoboID dropped for the row index; farm
+  business, household and free-text questions dropped.
+- `kabir_2021_elearning_{readiness,stress}` (pone.0259281, Zenodo 5068463,
+  CC BY) -- 1,162 Bangladeshi university students. Readiness 39 items 1-5.
+  The 14-item perceived e-learning stress scale is deposited already scored
+  (the plain item sum equals sum_stress_scale on every row), so the seven
+  items the paper reverse-scores (1, 2, 3, 8, 11, 12, 14) carry an "r"
+  suffix.
+- `bando_2026_{spaq,aaq2,ais,dbas16,srbq,ics,psas}` (pone.0358990, OSF 8cgdb,
+  CC BY, codebook) -- 861 Japanese adults with insomnia disorder from an
+  online panel; 371 retook everything (`wave` 2). Raw, not reverse-scored
+  (codebook). ICS and PSAS ship as one table each with their two subscales.
+
+**Not shipped:** pone.0287686 rejected (the KITE minimal dataset holds only
+derived totals and categories, no item responses).
+
+**Not reached, left `unworked`:** pone.0153205, pone.0285797, pone.0189666,
+pone.0152095, pone.0268704, pone.0334137 (deferred in batch 3), pone.0233119,
+pone.0358449, pone.0179486, pone.0235305, pone.0190746, pone.0254644,
+pone.0321946, pone.0116510, pone.0313426, pone.0243193, pone.0258228,
+pone.0133716, pone.0251984, pone.0272871, pone.0243805.
+
+**Item text:** none shipped. Cheap: mendes_lobao (study-written KAP
+questionnaire in English and Portuguese, S1/S2, CC BY), pytlikzillig (S1
+appendix carries every item, [institution] placeholder, CC BY), the
+study-written bhullar benefits and concerns blocks (wording in the .sav
+variable labels), bando_2026_spaq (SPAQ-J questionnaire PDF on the OSF node;
+the SPAQ original is Bothelius et al.'s, check the register). The rest are
+published instruments (PHQ, BFI-10, ZTPI, NGSE, AAQ-II, AIS, DBAS-16, SRBQ,
+ICS, PSAS) or have no wording deposited.
+
+**Staging:** 23 dictionary + codebook rows, 23 tag rows
+(`tags_auto_2026-11-07g.csv`, appended to `tags/tags_auto.csv`), 7 lead
+statuses set. No covariate-label harvest: the .sav scripts ship covariates as
+text labels. Tables in `~/irw-wt/leads-batch-6/automated_finding/irw_output/`
+with `MANIFEST_2026-11-07_leads6.txt`.
