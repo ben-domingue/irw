@@ -12,7 +12,7 @@
 # Worked from the cleaned leads list of 2026-11-07 (refined_flag
 # recoverable_format; source leads/plos_leads_2026-10-30.csv), leads batch 6.
 #
-# TWO output tables:
+# ONE output table (the stress scale described below was dropped 2026-11-08):
 #   kabir_2021_elearning_readiness  39 items, 1 strongly disagree to 5
 #     strongly agree (availability of technology 6, use of technology 11,
 #     self-confidence 12, acceptance 7, training 3). The item sum equals the
@@ -88,11 +88,8 @@ def convert():
     df = df.rename(columns={c: c.replace("readiness_item_", "ready") for c in ready})
     save(df, covs, [f"ready{i}" for i in range(1, 40)], "kabir_2021_elearning_readiness", range(1, 6))
 
-    src = [f"stress_item_{r}" for r in ROMAN]
-    assert (df[src].sum(axis=1) == df["sum_stress_scale"]).all()
-    new = [f"plss{i}r" if i in REVERSED else f"plss{i}" for i in range(1, 15)]
-    df = df.rename(columns=dict(zip(src, new)))
-    save(df, covs, new, "kabir_2021_elearning_stress", range(0, 5))
+    # Stress scale NOT shipped (Ben, 2026-11-08): deposited already scored,
+    # and the paper's reversed-item list cannot be checked against wording.
 
 
 if __name__ == "__main__":

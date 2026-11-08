@@ -1,13 +1,13 @@
 # IRW Automated Finding — TODO
 
-## Cleaned-leads batch 6, 2026-11-07 — 23 tables staged
+## Cleaned-leads batch 6, 2026-11-07 — 22 tables staged
 
 Full write-up in `BATCH_LOG.md` (2026-11-07g).
 
-- [ ] **UPLOAD** the 23 response tables (449,956 responses) from
+- [ ] **UPLOAD** the 22 response tables (433,688 responses) from
   `~/irw-wt/leads-batch-6/automated_finding/irw_output/`, listed in
   `MANIFEST_2026-11-07_leads6.txt`: mendes_lobao_2018 x2, pytlikzillig_2017
-  x4, zhang_2015 x2, bhullar_2023 x6, kabir_2021 x2, bando_2026 x7. No item
+  x4, zhang_2015 x2, bhullar_2023 x6, kabir_2021 x1, bando_2026 x7. No item
   text tables.
 - [ ] Item text, cheap: `mendes_lobao_2018_*` (S1/S2 Questionnaire, CC BY,
   study-written), `pytlikzillig_2017_*` (S1 appendix of measures, CC BY),

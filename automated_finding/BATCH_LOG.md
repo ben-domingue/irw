@@ -26176,7 +26176,7 @@ instruments.
 
 **UPLOADED 2026-11-07** (Ben, in-session): 7 item text tables. Manifest renamed `MANIFEST_2026-11-07_itemtext_uploaded.txt`; `uploaded` stamped in itemtext_provenance.csv and mapping_verification.csv.
 
-## 2026-11-07g — cleaned-leads batch 6 (`recoverable_format`): 6 deposits, 23 tables, 449,956 responses
+## 2026-11-07g — cleaned-leads batch 6 (`recoverable_format`): 6 deposits, 22 tables, 433,688 responses
 
 The twelve leads carried from batch 5 plus pone.0334137, then fifteen more
 survey-shaped rows screened by title. All passed the reserved check; none
@@ -26220,12 +26220,12 @@ passed 20.
   copies unused (SUMAgreeableness = Fa2 + reversed Fa7 confirms the late
   Fa2..Fa10 columns are raw). KoboID dropped for the row index; farm
   business, household and free-text questions dropped.
-- `kabir_2021_elearning_{readiness,stress}` (pone.0259281, Zenodo 5068463,
-  CC BY) -- 1,162 Bangladeshi university students. Readiness 39 items 1-5.
-  The 14-item perceived e-learning stress scale is deposited already scored
-  (the plain item sum equals sum_stress_scale on every row), so the seven
-  items the paper reverse-scores (1, 2, 3, 8, 11, 12, 14) carry an "r"
-  suffix.
+- `kabir_2021_elearning_readiness` (pone.0259281, Zenodo 5068463, CC BY) --
+  1,162 Bangladeshi university students, 39 items 1-5. **Stress table
+  dropped (Ben, 2026-11-08):** the 14-item perceived e-learning stress scale
+  is deposited already scored, and the paper's reversed-item list (1, 2, 3,
+  8, 11, 12, 14) departs from the PSS-14's positive items with no wording to
+  check it against.
 - `bando_2026_{spaq,aaq2,ais,dbas16,srbq,ics,psas}` (pone.0358990, OSF 8cgdb,
   CC BY, codebook) -- 861 Japanese adults with insomnia disorder from an
   online panel; 371 retook everything (`wave` 2). Raw, not reverse-scored
@@ -26249,7 +26249,7 @@ the SPAQ original is Bothelius et al.'s, check the register). The rest are
 published instruments (PHQ, BFI-10, ZTPI, NGSE, AAQ-II, AIS, DBAS-16, SRBQ,
 ICS, PSAS) or have no wording deposited.
 
-**Staging:** 23 dictionary + codebook rows, 23 tag rows
+**Staging:** 22 dictionary + codebook rows, 22 tag rows
 (`tags_auto_2026-11-07g.csv`, appended to `tags/tags_auto.csv`), 7 lead
 statuses set. No covariate-label harvest: the .sav scripts ship covariates as
 text labels. Tables in `~/irw-wt/leads-batch-6/automated_finding/irw_output/`
