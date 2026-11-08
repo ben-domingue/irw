@@ -4,16 +4,12 @@
 
 Full write-up in `BATCH_LOG.md` (2026-11-08b).
 
-- [ ] **UPLOAD 14 item text tables** from
-  `~/irw-wt/itemtext-leads-b56/automated_finding/itemtext_output/`, listed in
-  `MANIFEST_2026-11-08_itemtext56.txt`: burghartswieser_2021 x7 (German +
-  IRW English), mendes_lobao_2018 x2 (Portuguese + the authors' English),
-  pytlikzillig_2017 x3, bhullar_2023 x2. Their response tables are batches 5
-  and 6 (PRs #3441, #3442). After upload: stamp `uploaded` in
-  `itemtext_provenance.csv` and `mapping_verification.csv`; issues-page
-  entries owed for the 7 burghartswieser tables (machine_translation) and
-  the public notes on mendes_lobao_2018_hpv_knowledge and
-  pytlikzillig_2017_institutional_trust.
+- [x] **UPLOADED 2026-11-08 by ben-domingue** -- 14 item text tables
+  (burghartswieser_2021 x7, mendes_lobao_2018 x2, pytlikzillig_2017 x3,
+  bhullar_2023 x2), `MANIFEST_2026-11-08_itemtext56_uploaded.txt`; `uploaded`
+  stamped; 9 issues-page entries added (the 7 burghartswieser IRW
+  translations, mendes_lobao_2018_hpv_knowledge,
+  pytlikzillig_2017_institutional_trust).
 - [ ] **Ben: H-PEPSS block (bergs_2021_hpepss).** Written as `block` on York's
   "If you are interested in using the H-PEPSS, contact Liane Ginsburg" plus
   the Dutch translators' advice to obtain the originators' permission. If

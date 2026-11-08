@@ -26237,3 +26237,5 @@ reads the York line as contact information only.
 Skipped by instruction: zhao_2024 (PHQ/GAD wording not deposited),
 kasneci_2022_cft (commercial test). The "Item text: NOT SHIPPED" headers in
 the batch-5/6 data scripts live on those branches and were not touched.
+
+**UPLOADED 2026-11-08** (Ben, in-session): 14 item text tables. Manifest renamed `MANIFEST_2026-11-08_itemtext56_uploaded.txt`; `uploaded` stamped in itemtext_provenance.csv and mapping_verification.csv; 9 issues-page entries added to irw_site.
