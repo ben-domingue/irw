@@ -1,5 +1,25 @@
 # IRW Automated Finding — TODO
 
+## Cleaned-leads batch 6, 2026-11-07 — 22 tables staged
+
+Full write-up in `BATCH_LOG.md` (2026-11-07g).
+
+- [x] **UPLOADED 2026-11-08 by ben-domingue** -- 22 response tables (433,688
+  responses) from the worktree's `irw_output/`, listed in
+  `MANIFEST_2026-11-07_leads6_uploaded.txt`: mendes_lobao_2018 x2, pytlikzillig_2017
+  x4, zhang_2015 x2, bhullar_2023 x6, kabir_2021 x1, bando_2026 x7. No item
+  text tables.
+- [ ] Item text, cheap: `mendes_lobao_2018_*` (S1/S2 Questionnaire, CC BY,
+  study-written), `pytlikzillig_2017_*` (S1 appendix of measures, CC BY),
+  `bhullar_2023_{expected_benefits,farming_concerns}` (.sav variable labels),
+  `bando_2026_spaq` (SPAQ-J PDF on OSF 8cgdb; check the register for the
+  SPAQ original).
+- [ ] Next leads not reached: pone.0153205, pone.0285797, pone.0189666,
+  pone.0152095, pone.0268704, pone.0233119, pone.0358449, pone.0179486,
+  pone.0235305, pone.0190746, pone.0254644, pone.0321946, pone.0116510,
+  pone.0313426, pone.0243193, pone.0258228, pone.0133716, pone.0251984,
+  pone.0272871, pone.0243805 (and pone.0334137, deferred in batch 3).
+
 ## Repos sweep, 2026-11-07 — 6 tables staged
 
 Full write-up in `BATCH_LOG.md` (2026-11-07).
