@@ -26247,3 +26247,5 @@ statuses set. No covariate-label harvest: the one .sav script ships its
 covariates as text labels already. Tables in
 `~/irw-wt/leads-batch-5/automated_finding/irw_output/` with
 `MANIFEST_2026-11-07_leads5.txt`.
+
+**UPLOADED 2026-11-08** (Ben, in-session): 18 response tables. Manifest renamed `MANIFEST_2026-11-07_leads5_uploaded.txt`.

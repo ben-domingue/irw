@@ -20,9 +20,9 @@ Full write-up in `BATCH_LOG.md` (2026-11-07).
 
 Full write-up in `BATCH_LOG.md` (2026-11-07f).
 
-- [ ] **UPLOAD** the 18 response tables (255,181 responses) from
-  `~/irw-wt/leads-batch-5/automated_finding/irw_output/`, listed in
-  `MANIFEST_2026-11-07_leads5.txt`: burghartswieser_2021 x10,
+- [x] **UPLOADED 2026-11-08 by ben-domingue** -- 18 response tables (255,181
+  responses) from the worktree's `irw_output/`, listed in
+  `MANIFEST_2026-11-07_leads5_uploaded.txt`: burghartswieser_2021 x10,
   kasneci_2022_cft, bergs_2021_hpepss, zhao_2024_{phq9,gad7},
   zeilinger_2020 x4. No item text tables.
 - [ ] Item text, cheap: `bergs_2021_hpepss` (CC BY 4.0 Dutch questionnaire,
