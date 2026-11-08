@@ -26175,3 +26175,75 @@ instrument, no grant located). The deposit's CC0 covers the data, not the
 instruments.
 
 **UPLOADED 2026-11-07** (Ben, in-session): 7 item text tables. Manifest renamed `MANIFEST_2026-11-07_itemtext_uploaded.txt`; `uploaded` stamped in itemtext_provenance.csv and mapping_verification.csv.
+## 2026-11-07f — cleaned-leads batch 5 (`recoverable_format`): 5 deposits, 18 tables, 255,181 responses
+
+The three leads carried from batch 4, then the next survey-shaped rows of the
+batch-2 pool as screened by title. All passed the reserved check; none had a
+script or dictionary row.
+
+**Shipped (all pass `irw-validate --profile upload`):**
+- `kasneci_2022_cft` (pone.0264316, Dataverse JGOCKI "TueEyeQ", CC0) -- CFT
+  20-R, 54 tasks scored 0/1, 315 adults aged 18-30. Deposited long already.
+  Blank cells are tasks not reached in the timed subtests and are dropped, not
+  scored 0; the scored sum equals the deposit's `cft_sum_full` for all 315.
+  Gender and handedness are unlabelled 1/2 codes, dropped.
+- `burghartswieser_2021_*` (pone.0259445, SI CSV + the full SoSci
+  questionnaire) -- 10 tables, 897 German internet users: refugee_attitudes
+  (16 items: the paper combines 8 normative and 8 factual beliefs into one
+  measure, alpha .89; reversing the 4 refugee-friendly items gives M 4.06 / SD
+  0.97 against the paper's 4.08 / 0.96), refugee_threat (4), political_info
+  (5), participation (5), refugee_news (4), opinion_exposure (3),
+  facebook_exposure (5, Facebook users only, 507), authoritarianism (KSA-3,
+  9), sdo (12: two item pages, three wordings repeated and kept as separate
+  answers), pvq (25 portraits, gendered wordings pooled). The panel ID
+  IV02_01 dropped for the row index. PE06/07 (filtered engagement with
+  write-in slots), the 2+2 justice-sensitivity items and the two anger items
+  of PG02 dropped. `political_participation` was renamed `participation`
+  (44-character name over the 40 cap).
+- `bergs_2021_hpepss` (pone.0247869) -- Dutch H-PEPSS, 51 items 1-5 (20
+  domain items rated for classroom and clinical setting, plus 7 + 4), one
+  table. Seven adjacent row pairs identical on all 51 items and every
+  covariate dropped as double submissions (1,702 kept of 1,709). The
+  translators' questionnaire PDF is itself CC BY 4.0.
+- `zhao_2024_{phq9,gad7}` (pone.0295105, .xlsx) -- 1,219 nurses in Quanzhou.
+  Both stored 1-4: item sum minus 9 / minus 7 equals the deposit's totals on
+  every row; kept as deposited. Covariate codes labelled from Table 1 (counts
+  match code by code). PSQI dropped (only the seven derived component scores
+  are deposited); SSRS dropped (-3 codes in its source checklists, mixed
+  scoring).
+- `zeilinger_2020_{idls_causes,idls_interventions,social_distance,emotional_reactions}`
+  (pone.0239936, Figshare 12972884, CC BY) -- 1,046 adults in Austria,
+  Germany and the UK, labelled/unlabelled ID vignette. IDLS causes 22 and
+  interventions 22, social distance 5 (the paper says 4; the deposit has 5 and
+  all ship, as answered, not the deposit's reversed copies), emotional
+  reactions 8. Six isolated 0/888 cells in the emotional block dropped. The
+  free-text "what is going on with James" answer and the mixed participant
+  codes dropped.
+
+**Not shipped:** pone.0341946 (Zenodo 18957284) and pone.0272972 (Dataverse
+RIKJAY) are re-deposits of third-party surveys (Eurobarometer 95.2; the Belot
+et al. six-country COVID survey), so the re-uploader's licence does not clear
+them: `blocked_licence`. pone.0303183 rejected (bibliometric review: citation
+matrices, no respondents).
+
+**Not reached, left `unworked`:** pone.0334137 (deferred in batch 3; still
+open), pone.0206726, pone.0175387, pone.0287686, pone.0137101, pone.0265634,
+pone.0259281, pone.0358990, pone.0153205, pone.0285797, pone.0189666,
+pone.0152095, pone.0268704.
+
+**Ben's rulings recorded:** dvn/ji10q6 (likely simulated) and pone.0185725
+Study 1 are SKIPPED for good (TODO ticked; pone.0185725 stays `skipped_pii`;
+ji10q6 never had a leads row, and the seen ledger already closes it).
+
+**Item text:** none shipped. Cheap: bergs (the questionnaire PDF is CC BY 4.0
+and study-authored as a translation, though the H-PEPSS original is York
+University's) and burghartswieser's study-written blocks (refugee attitudes,
+threat, exposure; German wording in the S2 questionnaire, CC BY). The KSA-3,
+SDO, PVQ, PHQ-9, GAD-7, IDLS and CFT 20-R are third-party instruments.
+
+**Staging:** 18 dictionary + codebook rows, 18 tag rows
+(`tags_auto_2026-11-07f.csv`, appended to `tags/tags_auto.csv`), 8 lead
+statuses set. No covariate-label harvest: the one .sav script ships its
+covariates as text labels already. Tables in
+`~/irw-wt/leads-batch-5/automated_finding/irw_output/` with
+`MANIFEST_2026-11-07_leads5.txt`.

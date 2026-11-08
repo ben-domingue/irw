@@ -291,6 +291,7 @@ bergquist_2020_gnd_social,conj,none,2026-10-09
 bergquist_2023_covid_climate_ca,conj,https://dataverse.harvard.edu/api/access/datafile/6297538,2026-10-09
 bergquist_2023_covid_climate_us,conj,https://dataverse.harvard.edu/api/access/datafile/6297538,2026-10-09
 bergquist_2023_covid_climate_us2,conj,https://dataverse.harvard.edu/api/access/datafile/6297538,2026-10-09
+bergs_2021_hpepss,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0247869.s001,2026-11-07
 berinsky_2020_immigrant_admission,conj,https://dataverse.harvard.edu/api/access/datafile/3316957,2026-10-07
 bernauer_2022_ev_purchase_zurich,conj,https://dataverse.harvard.edu/api/access/datafile/4165291,2026-10-08
 bernik_2026_ase,core,none,2026-10-15
@@ -469,6 +470,16 @@ bulman_2025_project_indonesia,conj,https://dataverse.harvard.edu/api/access/data
 bulman_2025_project_malaysia,conj,https://dataverse.harvard.edu/api/access/datafile/11183198,2026-10-09
 burchert_2019_momentary_mood,core,none,2026-10-18
 burchert_2019_phq9,core,none,2026-10-18
+burghartswieser_2021_authoritarianism,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0259445.s002,2026-11-07
+burghartswieser_2021_facebook_exposure,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0259445.s002,2026-11-07
+burghartswieser_2021_opinion_exposure,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0259445.s002,2026-11-07
+burghartswieser_2021_participation,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0259445.s002,2026-11-07
+burghartswieser_2021_political_info,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0259445.s002,2026-11-07
+burghartswieser_2021_pvq,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0259445.s002,2026-11-07
+burghartswieser_2021_refugee_attitudes,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0259445.s002,2026-11-07
+burghartswieser_2021_refugee_news,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0259445.s002,2026-11-07
+burghartswieser_2021_refugee_threat,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0259445.s002,2026-11-07
+burghartswieser_2021_sdo,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0259445.s002,2026-11-07
 butler_2019_elite_trust_game,conj,https://dataverse.harvard.edu/api/access/datafile/3610921,2026-10-11
 buttler_2026_hiring_vignettes,conj,https://osf.io/download/2hp6e/,2026-10-09
 buzzi_2025_autonomy,core,https://zenodo.org/records/15305238/files/results-survey220905_grezzi%20per%20correlazione.xlsx,2026-10-09
@@ -1822,6 +1833,7 @@ karpowitz_2023_masculinity_2018,conj,https://dataverse.harvard.edu/api/access/da
 karsen_2025_mooc_motivation,core,none,2026-10-10
 kasali_2024_anatomy_attitude,core,none,2026-10-20
 kasali_2025_atole_dental,core,none,2026-11-02
+kasneci_2022_cft,core,none,2026-11-07
 kasparek_2025_audit,core,https://dataverse.harvard.edu/api/access/datafile/12014415?format=original,2026-10-07
 kasparek_2025_bhs,core,https://dataverse.harvard.edu/api/access/datafile/12014415?format=original,2026-10-07
 kasparek_2025_bpaq,core,https://dataverse.harvard.edu/api/access/datafile/12014415?format=original,2026-10-07
@@ -4773,6 +4785,10 @@ zang_2022_po_fit,core,none,2026-10-15
 zangger_2020_childcare,conj,none,2026-10-11
 zara_2024_opd_sqs,core,none,2026-10-18
 zara_2024_phq4,core,none,2026-10-18
+zeilinger_2020_emotional_reactions,core,none,2026-11-07
+zeilinger_2020_idls_causes,core,none,2026-11-07
+zeilinger_2020_idls_interventions,core,none,2026-11-07
+zeilinger_2020_social_distance,core,none,2026-11-07
 zeng_2022_academic_burnout,core,none,2026-10-07
 zeng_2022_core_beliefs,core,none,2026-10-07
 zeng_2022_ptgi,core,none,2026-10-07
@@ -4833,6 +4849,8 @@ zhao_2023_growth_mindset,core,none,2026-10-10
 zhao_2023_iwm,core,none,2026-10-10
 zhao_2023_ose,core,none,2026-10-10
 zhao_2023_vbl,core,none,2026-10-10
+zhao_2024_gad7,core,none,2026-11-07
+zhao_2024_phq9,core,none,2026-11-07
 zhao_2025_chinese_orientation,core,none,2026-10-30
 zhao_2025_ea_unidentified,core,none,2026-10-30
 zhao_2025_eheals,core,none,2026-10-14
