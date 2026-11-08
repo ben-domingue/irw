@@ -26175,6 +26175,161 @@ instrument, no grant located). The deposit's CC0 covers the data, not the
 instruments.
 
 **UPLOADED 2026-11-07** (Ben, in-session): 7 item text tables. Manifest renamed `MANIFEST_2026-11-07_itemtext_uploaded.txt`; `uploaded` stamped in itemtext_provenance.csv and mapping_verification.csv.
+## 2026-11-07f — cleaned-leads batch 5 (`recoverable_format`): 5 deposits, 18 tables, 255,181 responses
+
+The three leads carried from batch 4, then the next survey-shaped rows of the
+batch-2 pool as screened by title. All passed the reserved check; none had a
+script or dictionary row.
+
+**Shipped (all pass `irw-validate --profile upload`):**
+- `kasneci_2022_cft` (pone.0264316, Dataverse JGOCKI "TueEyeQ", CC0) -- CFT
+  20-R, 54 tasks scored 0/1, 315 adults aged 18-30. Deposited long already.
+  Blank cells are tasks not reached in the timed subtests and are dropped, not
+  scored 0; the scored sum equals the deposit's `cft_sum_full` for all 315.
+  Gender and handedness are unlabelled 1/2 codes, dropped.
+- `burghartswieser_2021_*` (pone.0259445, SI CSV + the full SoSci
+  questionnaire) -- 10 tables, 897 German internet users: refugee_attitudes
+  (16 items: the paper combines 8 normative and 8 factual beliefs into one
+  measure, alpha .89; reversing the 4 refugee-friendly items gives M 4.06 / SD
+  0.97 against the paper's 4.08 / 0.96), refugee_threat (4), political_info
+  (5), participation (5), refugee_news (4), opinion_exposure (3),
+  facebook_exposure (5, Facebook users only, 507), authoritarianism (KSA-3,
+  9), sdo (12: two item pages, three wordings repeated and kept as separate
+  answers), pvq (25 portraits, gendered wordings pooled). The panel ID
+  IV02_01 dropped for the row index. PE06/07 (filtered engagement with
+  write-in slots), the 2+2 justice-sensitivity items and the two anger items
+  of PG02 dropped. `political_participation` was renamed `participation`
+  (44-character name over the 40 cap).
+- `bergs_2021_hpepss` (pone.0247869) -- Dutch H-PEPSS, 51 items 1-5 (20
+  domain items rated for classroom and clinical setting, plus 7 + 4), one
+  table. Seven adjacent row pairs identical on all 51 items and every
+  covariate dropped as double submissions (1,702 kept of 1,709). The
+  translators' questionnaire PDF is itself CC BY 4.0.
+- `zhao_2024_{phq9,gad7}` (pone.0295105, .xlsx) -- 1,219 nurses in Quanzhou.
+  Both stored 1-4: item sum minus 9 / minus 7 equals the deposit's totals on
+  every row; kept as deposited. Covariate codes labelled from Table 1 (counts
+  match code by code). PSQI dropped (only the seven derived component scores
+  are deposited); SSRS dropped (-3 codes in its source checklists, mixed
+  scoring).
+- `zeilinger_2020_{idls_causes,idls_interventions,social_distance,emotional_reactions}`
+  (pone.0239936, Figshare 12972884, CC BY) -- 1,046 adults in Austria,
+  Germany and the UK, labelled/unlabelled ID vignette. IDLS causes 22 and
+  interventions 22, social distance 5 (the paper says 4; the deposit has 5 and
+  all ship, as answered, not the deposit's reversed copies), emotional
+  reactions 8. Six isolated 0/888 cells in the emotional block dropped. The
+  free-text "what is going on with James" answer and the mixed participant
+  codes dropped.
+
+**Not shipped:** pone.0341946 (Zenodo 18957284) and pone.0272972 (Dataverse
+RIKJAY) are re-deposits of third-party surveys (Eurobarometer 95.2; the Belot
+et al. six-country COVID survey), so the re-uploader's licence does not clear
+them: `blocked_licence`. pone.0303183 rejected (bibliometric review: citation
+matrices, no respondents).
+
+**Not reached, left `unworked`:** pone.0334137 (deferred in batch 3; still
+open), pone.0206726, pone.0175387, pone.0287686, pone.0137101, pone.0265634,
+pone.0259281, pone.0358990, pone.0153205, pone.0285797, pone.0189666,
+pone.0152095, pone.0268704.
+
+**Ben's rulings recorded:** dvn/ji10q6 (likely simulated) and pone.0185725
+Study 1 are SKIPPED for good (TODO ticked; pone.0185725 stays `skipped_pii`;
+ji10q6 never had a leads row, and the seen ledger already closes it).
+
+**Item text:** none shipped. Cheap: bergs (the questionnaire PDF is CC BY 4.0
+and study-authored as a translation, though the H-PEPSS original is York
+University's) and burghartswieser's study-written blocks (refugee attitudes,
+threat, exposure; German wording in the S2 questionnaire, CC BY). The KSA-3,
+SDO, PVQ, PHQ-9, GAD-7, IDLS and CFT 20-R are third-party instruments.
+
+**Staging:** 18 dictionary + codebook rows, 18 tag rows
+(`tags_auto_2026-11-07f.csv`, appended to `tags/tags_auto.csv`), 8 lead
+statuses set. No covariate-label harvest: the one .sav script ships its
+covariates as text labels already. Tables in
+`~/irw-wt/leads-batch-5/automated_finding/irw_output/` with
+`MANIFEST_2026-11-07_leads5.txt`.
+
+**UPLOADED 2026-11-08** (Ben, in-session): 18 response tables. Manifest renamed `MANIFEST_2026-11-07_leads5_uploaded.txt`.
+
+## 2026-11-07g — cleaned-leads batch 6 (`recoverable_format`): 6 deposits, 22 tables, 433,688 responses
+
+The twelve leads carried from batch 5 plus pone.0334137, then fifteen more
+survey-shaped rows screened by title. All passed the reserved check; none
+had a script or dictionary row. Worked in list order until the table count
+passed 20.
+
+**Shipped (all pass `irw-validate --profile upload`):**
+- `mendes_lobao_2018_hpv_{knowledge,attitudes}` (pone.0206726, .sav without
+  value labels; codes from the S2 English questionnaire) -- 826 Brazilian
+  parents, telephone KAP survey. Knowledge = the paper's 21 true/false
+  statements (Table 2: B2-B11, C22, C31-C40), scored 1 correct / 0 incorrect
+  against the paper's key; attitudes = the other 19 statements C11-C30, 1
+  agree / 0 disagree as answered. Code 2 ("I don't know", not read aloud)
+  dropped in both. Codes checked against Table 2: endorsement of true
+  statements matches the paper's % correct (B3 92/92, B6 55/55, B11 88/89);
+  for false statements the paper's % is 100 minus % yes, i.e. it counted
+  "don't know" as correct; these tables do not. Sex blank for 673 rows,
+  dropped; free text dropped.
+- `pytlikzillig_2017_{institutional_trust,dispositional_trust,government_trust,water_knowledge}`
+  (pone.0175387, S3 csv, wide over six surveys -> `wave` 1-6) -- 185
+  Nebraska science students. Every 1-7 item is deposited 1 = strongly agree
+  (the authors' SAS builds each scale as 8 minus the mean); stored 8 - x so
+  7 = strongly agree as in the paper, and Table 1 survey-1 means then match
+  (dispositional 5.23, governmental 4.95; asserted). Institutional trust =
+  4 confidence + 40 trustworthiness items, rated for both water agencies
+  (NDNR_/NRD_ prefixes, 88 items; the paper combined the two). Knowledge
+  quiz 0/1 as scored by the deposit, survey-1 mean 3.692 matches; cells kept
+  only for surveys the person took (the deposit zero-fills some absent
+  ones); KN14 dropped (every answer scored correct). DL1-DL5 (not in the
+  appendix of measures), gender/ethnicity and condition codes (unlabelled)
+  dropped.
+- `zhang_2015_{phq13,earthquake_exposure}` (pone.0137101, labelled .sav) --
+  3,053 pupils after the 2013 Lushan earthquake. PHQ-13 0-2 (sum = the
+  deposit's total on every complete row); 8 earthquake experiences recoded
+  yes = 1. CRIES deposited as a total only.
+- `bhullar_2023_*` (pone.0265634, Figshare 19354313, CC BY) -- 6 tables:
+  expected_benefits (8), farming_concerns (36), self_efficacy (11),
+  tpb (10: attitudes 5, norms 3, control 2), bfi10 (10), ztpi (21). The beef
+  (471) and poultry (426) samples answered the same questionnaire: stacked
+  with `cov_study`, ids prefixed. Items as answered; the deposit's reversed
+  copies unused (SUMAgreeableness = Fa2 + reversed Fa7 confirms the late
+  Fa2..Fa10 columns are raw). KoboID dropped for the row index; farm
+  business, household and free-text questions dropped.
+- `kabir_2021_elearning_readiness` (pone.0259281, Zenodo 5068463, CC BY) --
+  1,162 Bangladeshi university students, 39 items 1-5. **Stress table
+  dropped (Ben, 2026-11-08):** the 14-item perceived e-learning stress scale
+  is deposited already scored, and the paper's reversed-item list (1, 2, 3,
+  8, 11, 12, 14) departs from the PSS-14's positive items with no wording to
+  check it against.
+- `bando_2026_{spaq,aaq2,ais,dbas16,srbq,ics,psas}` (pone.0358990, OSF 8cgdb,
+  CC BY, codebook) -- 861 Japanese adults with insomnia disorder from an
+  online panel; 371 retook everything (`wave` 2). Raw, not reverse-scored
+  (codebook). ICS and PSAS ship as one table each with their two subscales.
+
+**Not shipped:** pone.0287686 rejected (the KITE minimal dataset holds only
+derived totals and categories, no item responses).
+
+**Not reached, left `unworked`:** pone.0153205, pone.0285797, pone.0189666,
+pone.0152095, pone.0268704, pone.0334137 (deferred in batch 3), pone.0233119,
+pone.0358449, pone.0179486, pone.0235305, pone.0190746, pone.0254644,
+pone.0321946, pone.0116510, pone.0313426, pone.0243193, pone.0258228,
+pone.0133716, pone.0251984, pone.0272871, pone.0243805.
+
+**Item text:** none shipped. Cheap: mendes_lobao (study-written KAP
+questionnaire in English and Portuguese, S1/S2, CC BY), pytlikzillig (S1
+appendix carries every item, [institution] placeholder, CC BY), the
+study-written bhullar benefits and concerns blocks (wording in the .sav
+variable labels), bando_2026_spaq (SPAQ-J questionnaire PDF on the OSF node;
+the SPAQ original is Bothelius et al.'s, check the register). The rest are
+published instruments (PHQ, BFI-10, ZTPI, NGSE, AAQ-II, AIS, DBAS-16, SRBQ,
+ICS, PSAS) or have no wording deposited.
+
+**Staging:** 22 dictionary + codebook rows, 22 tag rows
+(`tags_auto_2026-11-07g.csv`, appended to `tags/tags_auto.csv`), 7 lead
+statuses set. No covariate-label harvest: the .sav scripts ship covariates as
+text labels. Tables in `~/irw-wt/leads-batch-6/automated_finding/irw_output/`
+with `MANIFEST_2026-11-07_leads6.txt`.
+
+**UPLOADED 2026-11-08** (Ben, in-session): 22 response tables. Manifest renamed `MANIFEST_2026-11-07_leads6_uploaded.txt`.
 
 ## 2026-11-08 — cleaned-leads batch 7 (`recoverable_format`): 9 deposits, 21 tables, 286,561 responses; 1 item text table
 
