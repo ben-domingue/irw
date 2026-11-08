@@ -1,5 +1,40 @@
 # IRW Automated Finding — TODO
 
+## Cleaned-leads item text, batches 5-6, 2026-11-08 — 14 `__items` tables staged
+
+Full write-up in `BATCH_LOG.md` (2026-11-08b).
+
+- [ ] **UPLOAD 14 item text tables** from
+  `~/irw-wt/itemtext-leads-b56/automated_finding/itemtext_output/`, listed in
+  `MANIFEST_2026-11-08_itemtext56.txt`: burghartswieser_2021 x7 (German +
+  IRW English), mendes_lobao_2018 x2 (Portuguese + the authors' English),
+  pytlikzillig_2017 x3, bhullar_2023 x2. Their response tables are batches 5
+  and 6 (PRs #3441, #3442). After upload: stamp `uploaded` in
+  `itemtext_provenance.csv` and `mapping_verification.csv`; issues-page
+  entries owed for the 7 burghartswieser tables (machine_translation) and
+  the public notes on mendes_lobao_2018_hpv_knowledge and
+  pytlikzillig_2017_institutional_trust.
+- [ ] **Ben: H-PEPSS block (bergs_2021_hpepss).** Written as `block` on York's
+  "If you are interested in using the H-PEPSS, contact Liane Ginsburg" plus
+  the Dutch translators' advice to obtain the originators' permission. If
+  that reads as contact information only, it becomes a `hold`.
+- [ ] Held, wording parked in `~/Dropbox/projects/irw/data/itemtext/`:
+  burghartswieser_2021_authoritarianism (KSA-3), burghartswieser_2021_sdo
+  (German SDO), bando_2026_spaq (SPAQ-J; translators' CC BY does not reach
+  Bothelius et al.'s original). Register `hold` rows written. The KSA-3
+  hold may be a block (search snippets quote "contact the authors" and a
+  no-redistribution deposit licence; not read on the source page).
+- [ ] Held, not built: zeilinger_2020_{idls_causes,idls_interventions,social_distance}
+  (IDLS, `hold`; only terse English label paraphrases deposited, the German
+  wording not at all). Not clear-cut: zeilinger_2020_emotional_reactions
+  (8 terse labels, unattributed, German wording not deposited).
+- [ ] Not built: pytlikzillig_2017_water_knowledge (quiz items not in the
+  appendix); burghartswieser_2021_pvq (register blocks Schwartz).
+- [ ] mendes_lobao_2018_hpv_knowledge response table: the article's Table 2
+  scores C32/C33 with its own key inverted; the table follows the printed
+  (V)/(F) markers. Noted in the public note; nothing to change unless Ben
+  prefers the article's scoring.
+
 ## Repos sweep, 2026-11-07 — 6 tables staged
 
 Full write-up in `BATCH_LOG.md` (2026-11-07).
