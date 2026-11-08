@@ -31,6 +31,57 @@ Full write-up in `BATCH_LOG.md` (2026-11-08b).
   (V)/(F) markers. Noted in the public note; nothing to change unless Ben
   prefers the article's scoring.
 
+## Cleaned-leads batch 7, 2026-11-08 — 21 tables + 1 item text table staged
+
+Full write-up in `BATCH_LOG.md` (2026-11-08 — cleaned-leads batch 7).
+
+- [x] **UPLOADED 2026-11-08 by ben-domingue** -- 21 response tables (286,561
+  responses) from the worktree's `irw_output/`, listed in
+  `MANIFEST_2026-11-08_leads7_uploaded.txt`: mojsa_kaja_2023 x3, beshai_2017 x3,
+  chew_2016 x2, chinvararak_2022 x3, kawakami_2020 x2,
+  talarowska_dublicka_2026 x3, li_2017_saq, perez_fuentes_2020_affect_balance,
+  shen_2018 x3.
+- [x] **UPLOADED 2026-11-08 by ben-domingue** -- item text `li_2017_saq__items`
+  (`MANIFEST_2026-11-08_itemtext7_uploaded.txt`); `uploaded` stamped in
+  itemtext_provenance.csv and mapping_verification.csv.
+- [ ] Ben's call: pone.0153205 held (DA statement says not public, SI has the
+  .sav files anyway). Ship if the SI posting is read as the release.
+- [ ] Item text, not clear-cut (ship rows exist, but the administered wording
+  is not deposited): `kawakami_2020_dass21` (Vietnamese; English DASS-21 as a
+  stand-in per the DASS row and irw#2121; columns sit in canonical order, needs
+  a paper_order verify script), `chinvararak_2022_{gad7,phq9}` (Thai; PHQ
+  family ship row covers translations, Thai text not deposited), and
+  `chew_2016_phq9` (English labels in the .sav, but administered in English,
+  Malay or Mandarin by preference, no per-row language).
+- [ ] Item text, new `hold` rows to read at source if wanted: K6 (Harvard NCS
+  page hosts the Vietnamese K6), DDS-17, FIQR, SF-MPQ, YSQ-S3, BANPS, PDBS, DBQ,
+  DDDI. The wording for all but K6 and FIQR is fully in the deposits.
+- [ ] Next leads not reached: pone.0254644, pone.0321946, pone.0116510,
+  pone.0313426, pone.0243193, pone.0258228, pone.0133716, pone.0251984,
+  pone.0272871, pone.0243805, pone.0296039, pone.0219136, pone.0177172,
+  pone.0234240, pone.0259392, pone.0166410, pone.0268232, pone.0284944 (and
+  pone.0334137, deferred in batch 3).
+
+## Cleaned-leads batch 6, 2026-11-07 — 22 tables staged
+
+Full write-up in `BATCH_LOG.md` (2026-11-07g).
+
+- [x] **UPLOADED 2026-11-08 by ben-domingue** -- 22 response tables (433,688
+  responses) from the worktree's `irw_output/`, listed in
+  `MANIFEST_2026-11-07_leads6_uploaded.txt`: mendes_lobao_2018 x2, pytlikzillig_2017
+  x4, zhang_2015 x2, bhullar_2023 x6, kabir_2021 x1, bando_2026 x7. No item
+  text tables.
+- [ ] Item text, cheap: `mendes_lobao_2018_*` (S1/S2 Questionnaire, CC BY,
+  study-written), `pytlikzillig_2017_*` (S1 appendix of measures, CC BY),
+  `bhullar_2023_{expected_benefits,farming_concerns}` (.sav variable labels),
+  `bando_2026_spaq` (SPAQ-J PDF on OSF 8cgdb; check the register for the
+  SPAQ original).
+- [ ] Next leads not reached: pone.0153205, pone.0285797, pone.0189666,
+  pone.0152095, pone.0268704, pone.0233119, pone.0358449, pone.0179486,
+  pone.0235305, pone.0190746, pone.0254644, pone.0321946, pone.0116510,
+  pone.0313426, pone.0243193, pone.0258228, pone.0133716, pone.0251984,
+  pone.0272871, pone.0243805 (and pone.0334137, deferred in batch 3).
+
 ## Repos sweep, 2026-11-07 — 6 tables staged
 
 Full write-up in `BATCH_LOG.md` (2026-11-07).
@@ -38,13 +89,32 @@ Full write-up in `BATCH_LOG.md` (2026-11-07).
 - [x] **UPLOADED 2026-11-07 by ben-domingue** (PR #3433 merged). Was: UPLOAD the 6 tables from `src/automated_finding/irw_output/`,
   `MANIFEST_2026-11-07_uploaded.txt`. bialowolski_2026_financial_literacy,
   shi_2026_ai_offloading, du_2026_{utaut,teacher_identity,ai_use_intention,aiab}.
-- [ ] **dvn/ji10q6 held as likely simulated** (Sazonava, FMCG, 57 items, 453
-  consumers); numbers in BATCH_LOG. Ship only if Ben overrules.
+- [x] **dvn/ji10q6: SKIPPED -- Ben ruled 2026-11-07, not shipping.** Was: held as
+  likely simulated (Sazonava, FMCG, 57 items, 453 consumers); numbers in
+  BATCH_LOG. It never had a leads row; the seen ledger closes it.
 - [ ] **2026-11-10 (Claude): check the 11-09 run of "IRW Monthly Discovery —
   PLOS"** (trig_017FX5HNMNFjDKrK3BfQHi5m; RemoteTrigger list_runs, then
   get_run_log). Confirm `reserved.py selftest` printed "ok (key matches)"
   (IRW_RESERVED_KEY added to the routines' cloud environment 2026-11-07) and
   that no source shows as not_searched. Report to Ben.
+
+## Cleaned-leads batch 5, 2026-11-07 — 18 tables staged
+
+Full write-up in `BATCH_LOG.md` (2026-11-07f).
+
+- [x] **UPLOADED 2026-11-08 by ben-domingue** -- 18 response tables (255,181
+  responses) from the worktree's `irw_output/`, listed in
+  `MANIFEST_2026-11-07_leads5_uploaded.txt`: burghartswieser_2021 x10,
+  kasneci_2022_cft, bergs_2021_hpepss, zhao_2024_{phq9,gad7},
+  zeilinger_2020 x4. No item text tables.
+- [ ] Item text, cheap: `bergs_2021_hpepss` (CC BY 4.0 Dutch questionnaire,
+  S1 File; original H-PEPSS is York University's, check the register) and the
+  study-written burghartswieser_2021 blocks (refugee_attitudes,
+  refugee_threat, the exposure tables; S2 questionnaire, German).
+- [ ] Next leads not reached: pone.0206726, pone.0175387, pone.0287686,
+  pone.0137101, pone.0265634, pone.0259281, pone.0358990, pone.0153205,
+  pone.0285797, pone.0189666, pone.0152095, pone.0268704 (and pone.0334137,
+  deferred in batch 3).
 
 ## Cleaned-leads batch 2, 2026-11-07 — 36 tables staged
 
@@ -67,9 +137,9 @@ Full write-up in `BATCH_LOG.md` (2026-11-07d).
 - [x] **UPLOADED 2026-11-07 by ben-domingue** -- 16 response tables (695,628
   responses) from the worktree's `irw_output/`, listed in
   `MANIFEST_2026-11-07_leads4_uploaded.txt`.
-- [ ] pone.0185725 Study 1 (Figshare 5411206) has no PII of its own; the
-  paper was skipped whole because Study 2/3 files carry IP addresses and
-  coordinates. Ship Study 1 only if Ben overrules.
+- [x] **pone.0185725 Study 1: SKIPPED -- Ben ruled 2026-11-07, not shipping.**
+  Was: Study 1 (Figshare 5411206) has no PII of its own, but Study 2/3 files
+  carry IP addresses and coordinates. Lead status stays `skipped_pii`.
 - [x] Item text for `vicens_2021_*`: HELD, not built (2026-11-07). PSS, HADS and
   ERQ are `block` in the rights register; BIS-11 now a `hold` row (itemtext PR).
 - [ ] Next leads not reached: pone.0341946, pone.0272972, pone.0264316.
