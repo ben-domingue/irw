@@ -26271,3 +26271,5 @@ pone.0313426, pone.0243193, pone.0258228, pone.0133716, pone.0251984,
 pone.0272871, pone.0243805, pone.0334137 (deferred in batch 3), pone.0296039,
 pone.0219136, pone.0177172, pone.0234240, pone.0259392, pone.0166410,
 pone.0268232, pone.0284944.
+
+**UPLOADED 2026-11-08** (Ben, in-session): 21 response tables + `li_2017_saq__items`. Manifests renamed `MANIFEST_2026-11-08_leads7_uploaded.txt` and `MANIFEST_2026-11-08_itemtext7_uploaded.txt`.

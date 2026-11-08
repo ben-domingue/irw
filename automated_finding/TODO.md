@@ -4,15 +4,15 @@
 
 Full write-up in `BATCH_LOG.md` (2026-11-08 — cleaned-leads batch 7).
 
-- [ ] **UPLOAD** the 21 response tables (286,561 responses) from
-  `~/irw-wt/leads-batch-7/automated_finding/irw_output/`, listed in
-  `MANIFEST_2026-11-08_leads7.txt`: mojsa_kaja_2023 x3, beshai_2017 x3,
+- [x] **UPLOADED 2026-11-08 by ben-domingue** -- 21 response tables (286,561
+  responses) from the worktree's `irw_output/`, listed in
+  `MANIFEST_2026-11-08_leads7_uploaded.txt`: mojsa_kaja_2023 x3, beshai_2017 x3,
   chew_2016 x2, chinvararak_2022 x3, kawakami_2020 x2,
   talarowska_dublicka_2026 x3, li_2017_saq, perez_fuentes_2020_affect_balance,
   shen_2018 x3.
-- [ ] **UPLOAD** item text `li_2017_saq__items` from `itemtext_output/`
-  (`MANIFEST_2026-11-08_itemtext7.txt`), after its response table; then stamp
-  `uploaded` in itemtext_provenance.csv and mapping_verification.csv.
+- [x] **UPLOADED 2026-11-08 by ben-domingue** -- item text `li_2017_saq__items`
+  (`MANIFEST_2026-11-08_itemtext7_uploaded.txt`); `uploaded` stamped in
+  itemtext_provenance.csv and mapping_verification.csv.
 - [ ] Ben's call: pone.0153205 held (DA statement says not public, SI has the
   .sav files anyway). Ship if the SI posting is read as the release.
 - [ ] Item text, not clear-cut (ship rows exist, but the administered wording
