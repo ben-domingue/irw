@@ -1,4 +1,4 @@
-# item-text tables in the Redivis shards as of 2026-11-06
+# item-text tables in the Redivis shards as of 2026-11-08
 # status=published: a reader can fetch it. status=draft: uploaded, not released yet.
 # generated -- do not hand-edit; rerun itemtext/refresh_live_tables.py (irw#1828)
 table,shard,status
@@ -217,6 +217,8 @@ baruah_2026_trr_att,irw_text_3,published
 baruah_2026_trr_own,irw_text_3,published
 baseke_2026_gad7,irw_text_3,published
 baseke_2026_phq8,irw_text_3,published
+baseler_2022_cognitive,irw_text_4,published
+baseler_2022_sensory,irw_text_4,published
 bate_2019_srq,irw_text_3,published
 baumgaertner_2018_vaccine_trust,irw_text_3,published
 bauwens_2022_autonomy,irw_text_3,published
@@ -235,6 +237,8 @@ bfi_goldberg_1992_conscientiousness,irw_text_2,published
 bfi_goldberg_1992_extraversion,irw_text_2,published
 bfi_goldberg_1992_neuroticism,irw_text_2,published
 bfi_goldberg_1992_openness_to_experience,irw_text_2,published
+bhullar_2023_expected_benefits,irw_text_4,published
+bhullar_2023_farming_concerns,irw_text_4,published
 bi_2026_agency_maintenance,irw_text_3,published
 bi_2026_ai_literacy,irw_text_3,published
 bi_2026_creative_ai_use,irw_text_3,published
@@ -270,6 +274,13 @@ buczel_2022_inoculation_belief,irw_text,published
 bukhori_2024_dass,irw_text_2,published
 bukurov_2022_sf36,irw_text,published
 burgess_2025_soas,irw_text,published
+burghartswieser_2021_facebook_exposure,irw_text_4,published
+burghartswieser_2021_opinion_exposure,irw_text_4,published
+burghartswieser_2021_participation,irw_text_4,published
+burghartswieser_2021_political_info,irw_text_4,published
+burghartswieser_2021_refugee_attitudes,irw_text_4,published
+burghartswieser_2021_refugee_news,irw_text_4,published
+burghartswieser_2021_refugee_threat,irw_text_4,published
 busch_2022_course_alleviate,irw_text,published
 busch_2022_course_exacerbate,irw_text_2,published
 busch_2023_stigma,irw_text,published
@@ -369,6 +380,7 @@ chile_2023_social-welfare-survey_u,irw_text_2,published
 chile_2023_social-welfare-survey_vv,irw_text_2,published
 chile_2023_social-welfare-survey_yy,irw_text_2,published
 chinvararak_2021_phq15,irw_text,published
+chinvararak_2022_gad7,irw_text_4,published
 choy_2022_extraneous_events,irw_text,published
 chuemchit_2024_nonpartner_violence,irw_text,published
 cinar_tanriverdi_2023_gad7,irw_text,published
@@ -1307,6 +1319,11 @@ lu_2017_phq9,irw_text_2,published
 luettgau_2026_source_trust,irw_text_3,published
 luo_2021_acculturation_index,irw_text_3,published
 luo_2021_conational_ties,irw_text_2,published
+lusk_2019_healthy_beliefs,irw_text_4,published
+lusk_2019_healthy_foods,irw_text_4,published
+lusk_2019_natural_beliefs,irw_text_4,published
+lusk_2019_natural_farming,irw_text_4,published
+lusk_2019_natural_processing,irw_text_4,published
 ly_2021_animal_empathy,irw_text_2,published
 lys_2020_rape_2_rma,irw_text,published
 lys_2020_rape_2_rma_pre,irw_text,published
@@ -1400,6 +1417,8 @@ meloni_2015_parent_divers_ed,irw_text_2,published
 meloni_2015_parent_interests,irw_text_2,published
 menaldi_2023_brief_cope,irw_text_2,published
 mendes_2019_snycq,irw_text_2,published
+mendes_lobao_2018_hpv_attitudes,irw_text_4,published
+mendes_lobao_2018_hpv_knowledge,irw_text_4,published
 mendezhinojosa_2026_ebea,irw_text_3,published
 meng_2017_referent_assignment,irw_text_2,published
 menghini_2023_task_control,irw_text_3,published
@@ -1822,6 +1841,9 @@ purnama_2023_digital_need,irw_text_3,published
 purnama_2023_environment,irw_text_3,published
 purnama_2023_program_benefit,irw_text_3,published
 purnama_2023_threat,irw_text_3,published
+pytlikzillig_2017_dispositional_trust,irw_text_4,published
+pytlikzillig_2017_government_trust,irw_text_4,published
+pytlikzillig_2017_institutional_trust,irw_text_4,published
 qaslu_lopez_2024,irw_text,published
 qaslu_prado_2024,irw_text,published
 qi_2024_mspss,irw_text_2,published
@@ -2618,6 +2640,8 @@ zhang_2026_ipip_patience,irw_text_3,published
 zhang_2026_tcs_honesty,irw_text_3,published
 zhang_2026_virtue_states,irw_text_3,published
 zhang_2026_wisdom,irw_text_3,published
+zhao_2024_gad7,irw_text_4,published
+zhao_2024_phq9,irw_text_4,published
 zhao_2025_digital_literacy,irw_text_2,published
 zhao_2025_place_attachment,irw_text_2,published
 zhou_2016_burnout,irw_text,published
