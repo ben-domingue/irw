@@ -26428,3 +26428,50 @@ pone.0219136, pone.0177172, pone.0234240, pone.0259392, pone.0166410,
 pone.0268232, pone.0284944.
 
 **UPLOADED 2026-11-08** (Ben, in-session): 21 response tables + `li_2017_saq__items`. Manifests renamed `MANIFEST_2026-11-08_leads7_uploaded.txt` and `MANIFEST_2026-11-08_itemtext7_uploaded.txt`.
+
+## 2026-11-08c — item text: PHQ-9/GAD-7/DASS-21 for zhao_2024, chinvararak_2022, kawakami_2020
+
+There are 3 `__items` tables staged in
+`~/irw-wt/itemtext-phq-dass/automated_finding/itemtext_output/` with
+`MANIFEST_2026-11-08_itemtext_phq.txt`. All pass `validate_items.R`, checked
+against the staged response CSVs in `~/irw-wt/leads-batch-{5,7}`. They also
+pass `audit_batch.R --resp-dir` (3 PASS after `normalize_nulls.R`; report
+written to scratch, not committed) and `irw-validate --profile upload`. The
+builder is `itemtext_verification/make_itemtext_phq_gad_2026_11_08.py` (run
+`normalize_nulls.R` afterwards). The mapping check is
+`itemtext_verification/verify_phq_gad_2026_11_08.py`. Neither study prints
+its items or deposits their wording. The text is the official phqscreeners.com
+translation, with the official English in `_translated`
+(`official_instrument_english`). Register: the PHQ/GAD family is `ship`, and
+its express grant covers translations.
+
+- `zhao_2024_{phq9,gad7}__items` (9/7 items): from phqscreeners' "Simplified
+  Chinese for Mainland China" PHQ-9 and GAD-7. phqscreeners also lists a
+  second mainland GAD-7 ("Chinese for China"), recorded in provenance. resp is
+  1-4 as deposited: the published 0-3 plus one, asserted by the data script's
+  sum-minus-n = total check. So resp 1 carries the printed 0 anchor. The
+  PHQ-9 mapping is PARTIAL (item 9 has the lowest mean). The GAD-7 mapping is
+  NO_ROUTE: all PHQ x GAD correlations fall in 0.58-0.72, so the restlessness
+  marker does not discriminate. The PHQ-9 prints the traditional form 沒 and a
+  U+2500 dash, both kept.
+- `chinvararak_2022_gad7__items` (7): from phqscreeners' Thai GAD-7. The paper
+  says only "Thai version of ... GAD-7". The PDF's CordiaNew font encodes tone
+  marks as Windows-Thai private-use glyphs. The builder maps them back, and the
+  result was checked by eye against a render. The mapping is PARTIAL: gad7_5 and
+  phq9_8 are reciprocal top correlates (0.471).
+
+**Held:** `chinvararak_2022_phq9`. The paper says Thai PHQ-9 (Lotrakul 2008),
+but the deposit shows the Thai DMH 2Q/9Q protocol: a yes/no "2Q" screener and
+9Q severity bands 0-6/7-12/13-18/>=19. So it is unclear whether respondents
+read the phqscreeners Thai PHQ-9 or the 9Q; this is Ben's call in TODO. The
+deposit also has 403 complete PHQ-9 rows against the paper's n = 312, because
+91 screen-negatives answered it too.
+
+**Held:** `kawakami_2020_dass21`. The paper cites Tran, Tran & Fisher 2013 for
+the Vietnamese DASS-21. Its wording is neither in that paper nor on the DASS
+site, which links only the Dang and Pham translations. The new register `hold`
+row is "DASS-21 VIETNAMESE translation (DASS21-V)". The English stand-in
+remains an option, and the item order is settled.
+
+**Not built:** `chew_2016_phq9`. Respondents chose English, Malay or Mandarin,
+and no row records which language they used.
