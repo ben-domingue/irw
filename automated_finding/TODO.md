@@ -1,5 +1,36 @@
 # IRW Automated Finding — TODO
 
+## Cleaned-leads item text, batches 5-6, 2026-11-08 — 14 `__items` tables staged
+
+Full write-up in `BATCH_LOG.md` (2026-11-08b).
+
+- [x] **UPLOADED 2026-11-08 by ben-domingue** -- 14 item text tables
+  (burghartswieser_2021 x7, mendes_lobao_2018 x2, pytlikzillig_2017 x3,
+  bhullar_2023 x2), `MANIFEST_2026-11-08_itemtext56_uploaded.txt`; `uploaded`
+  stamped; 9 issues-page entries added (the 7 burghartswieser IRW
+  translations, mendes_lobao_2018_hpv_knowledge,
+  pytlikzillig_2017_institutional_trust).
+- [ ] **Ben: H-PEPSS block (bergs_2021_hpepss).** Written as `block` on York's
+  "If you are interested in using the H-PEPSS, contact Liane Ginsburg" plus
+  the Dutch translators' advice to obtain the originators' permission. If
+  that reads as contact information only, it becomes a `hold`.
+- [ ] Held, wording parked in `~/Dropbox/projects/irw/data/itemtext/`:
+  burghartswieser_2021_authoritarianism (KSA-3), burghartswieser_2021_sdo
+  (German SDO), bando_2026_spaq (SPAQ-J; translators' CC BY does not reach
+  Bothelius et al.'s original). Register `hold` rows written. The KSA-3
+  hold may be a block (search snippets quote "contact the authors" and a
+  no-redistribution deposit licence; not read on the source page).
+- [ ] Held, not built: zeilinger_2020_{idls_causes,idls_interventions,social_distance}
+  (IDLS, `hold`; only terse English label paraphrases deposited, the German
+  wording not at all). Not clear-cut: zeilinger_2020_emotional_reactions
+  (8 terse labels, unattributed, German wording not deposited).
+- [ ] Not built: pytlikzillig_2017_water_knowledge (quiz items not in the
+  appendix); burghartswieser_2021_pvq (register blocks Schwartz).
+- [ ] mendes_lobao_2018_hpv_knowledge response table: the article's Table 2
+  scores C32/C33 with its own key inverted; the table follows the printed
+  (V)/(F) markers. Noted in the public note; nothing to change unless Ben
+  prefers the article's scoring.
+
 ## Cleaned-leads batch 7, 2026-11-08 — 21 tables + 1 item text table staged
 
 Full write-up in `BATCH_LOG.md` (2026-11-08 — cleaned-leads batch 7).

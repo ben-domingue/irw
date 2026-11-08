@@ -26428,3 +26428,67 @@ pone.0219136, pone.0177172, pone.0234240, pone.0259392, pone.0166410,
 pone.0268232, pone.0284944.
 
 **UPLOADED 2026-11-08** (Ben, in-session): 21 response tables + `li_2017_saq__items`. Manifests renamed `MANIFEST_2026-11-08_leads7_uploaded.txt` and `MANIFEST_2026-11-08_itemtext7_uploaded.txt`.
+
+## 2026-11-08b — cleaned-leads item text: batches 5-6
+
+Item text for the clear-cut candidates flagged in batches 5 (2026-11-07f) and
+6 (2026-11-07g). 14 tables staged in
+`~/irw-wt/itemtext-leads-b56/automated_finding/itemtext_output/` with
+`MANIFEST_2026-11-08_itemtext56.txt`; all pass `validate_items.R` (against
+the staged response CSVs in `~/irw-wt/leads-batch-{5,6}`), `audit_batch.R
+--resp-dir` (14 PASS after `normalize_nulls.R`) and `irw-validate`.
+Builders in `itemtext_verification/make_itemtext_*.py` (run
+`normalize_nulls.R` on the output afterwards).
+
+- `burghartswieser_2021_{refugee_attitudes,refugee_threat,political_info,participation,refugee_news,opinion_exposure,facebook_exposure}__items`
+  (16/4/5/5/4/3/5 items) -- German, from the S2 SoSci questionnaire, whose
+  variable list prints each code beside its wording and value labels (code
+  tie at the source). Study-authored or the study's own adaptations
+  (threat "adapted from Gollwitzer and Keller", news "adapted from
+  Baumgartner and Morris"). The agreement scales label only their endpoints;
+  midpoints ship blank. English in `_translated` is IRW's
+  (machine_translation): issues-page entries owed after upload.
+- `mendes_lobao_2018_hpv_{knowledge,attitudes}__items` (21/19) -- the
+  administered Portuguese questionnaire (S2) with the authors' English (S3)
+  in `_translated`. Codes are the printed item numbers. Verified
+  (`verify_mendes_lobao_2018.py`): all 30 statements in the article's
+  Table 2 matched by their own code's raw percentage within 2 points. The
+  .docx drops spaces at run boundaries; restored, asserted unchanged
+  otherwise. Knowledge is scored, so `option_text` is blank and
+  `correct_response` carries the keyed answer. Table 2 scores C32/C33 with
+  its key inverted; the response table follows the printed markers (public
+  note).
+- `pytlikzillig_2017_{institutional_trust,dispositional_trust,government_trust}__items`
+  (88/9/7) -- English, the S1 appendix of measures. Government codes are
+  self-describing. Institutional: construct abbreviations resolve to the 13
+  appendix headings with exact counts; position within construct is the
+  inference, PARTIAL (`verify_pytlikzillig_2017.py`: the reverse-scored
+  PfI4 is the appendix's one positively-worded Bias item, r +0.59/+0.55 with
+  trustworthiness, while PfI1-3 and Cyn run negative). Dispositional is
+  positional with no route (one factor, one polarity). The `[institution]`
+  placeholder is kept; NDNR_/NRD_ name the target. `water_knowledge` not
+  built (the quiz is not in the appendix).
+- `bhullar_2023_{expected_benefits,farming_concerns}__items` (8/36) -- the
+  .sav variable labels ("B1. I wil be able ..."), verbatim with typos;
+  anchors from the article's Measures (endpoints only).
+
+**Held:** `burghartswieser_2021_authoritarianism` (KSA-3) and `_sdo` (German
+SDO), `bando_2026_spaq` (SPAQ-J: the translators' CC BY 4.0 does not reach
+Bothelius et al.'s original): new `hold` rows; wording built and parked in
+`~/Dropbox/projects/irw/data/itemtext/`. `zeilinger_2020_{idls_causes,idls_interventions,social_distance}`:
+IDLS `hold` row, not built (terse English label paraphrases only, the German
+wording not deposited). `zeilinger_2020_emotional_reactions` not clear-cut
+(8 terse unattributed labels, German not deposited), not built.
+`burghartswieser_2021_pvq`: the existing SCHWARTZ block applies.
+
+**Blocked:** `bergs_2021_hpepss`. New `block` row for the H-PEPSS: York's
+page says "If you are interested in using the H-PEPSS, contact Liane
+Ginsburg", and the Dutch translators (who obtained permission) tell users to
+obtain the originators' permission too. Flagged for Ben in TODO, in case he
+reads the York line as contact information only.
+
+Skipped by instruction: zhao_2024 (PHQ/GAD wording not deposited),
+kasneci_2022_cft (commercial test). The "Item text: NOT SHIPPED" headers in
+the batch-5/6 data scripts live on those branches and were not touched.
+
+**UPLOADED 2026-11-08** (Ben, in-session): 14 item text tables. Manifest renamed `MANIFEST_2026-11-08_itemtext56_uploaded.txt`; `uploaded` stamped in itemtext_provenance.csv and mapping_verification.csv; 9 issues-page entries added to irw_site.
