@@ -27,13 +27,32 @@ Full write-up in `BATCH_LOG.md` (2026-11-07).
 - [x] **UPLOADED 2026-11-07 by ben-domingue** (PR #3433 merged). Was: UPLOAD the 6 tables from `src/automated_finding/irw_output/`,
   `MANIFEST_2026-11-07_uploaded.txt`. bialowolski_2026_financial_literacy,
   shi_2026_ai_offloading, du_2026_{utaut,teacher_identity,ai_use_intention,aiab}.
-- [ ] **dvn/ji10q6 held as likely simulated** (Sazonava, FMCG, 57 items, 453
-  consumers); numbers in BATCH_LOG. Ship only if Ben overrules.
+- [x] **dvn/ji10q6: SKIPPED -- Ben ruled 2026-11-07, not shipping.** Was: held as
+  likely simulated (Sazonava, FMCG, 57 items, 453 consumers); numbers in
+  BATCH_LOG. It never had a leads row; the seen ledger closes it.
 - [ ] **2026-11-10 (Claude): check the 11-09 run of "IRW Monthly Discovery —
   PLOS"** (trig_017FX5HNMNFjDKrK3BfQHi5m; RemoteTrigger list_runs, then
   get_run_log). Confirm `reserved.py selftest` printed "ok (key matches)"
   (IRW_RESERVED_KEY added to the routines' cloud environment 2026-11-07) and
   that no source shows as not_searched. Report to Ben.
+
+## Cleaned-leads batch 5, 2026-11-07 — 18 tables staged
+
+Full write-up in `BATCH_LOG.md` (2026-11-07f).
+
+- [x] **UPLOADED 2026-11-08 by ben-domingue** -- 18 response tables (255,181
+  responses) from the worktree's `irw_output/`, listed in
+  `MANIFEST_2026-11-07_leads5_uploaded.txt`: burghartswieser_2021 x10,
+  kasneci_2022_cft, bergs_2021_hpepss, zhao_2024_{phq9,gad7},
+  zeilinger_2020 x4. No item text tables.
+- [ ] Item text, cheap: `bergs_2021_hpepss` (CC BY 4.0 Dutch questionnaire,
+  S1 File; original H-PEPSS is York University's, check the register) and the
+  study-written burghartswieser_2021 blocks (refugee_attitudes,
+  refugee_threat, the exposure tables; S2 questionnaire, German).
+- [ ] Next leads not reached: pone.0206726, pone.0175387, pone.0287686,
+  pone.0137101, pone.0265634, pone.0259281, pone.0358990, pone.0153205,
+  pone.0285797, pone.0189666, pone.0152095, pone.0268704 (and pone.0334137,
+  deferred in batch 3).
 
 ## Cleaned-leads batch 2, 2026-11-07 — 36 tables staged
 
@@ -56,9 +75,9 @@ Full write-up in `BATCH_LOG.md` (2026-11-07d).
 - [x] **UPLOADED 2026-11-07 by ben-domingue** -- 16 response tables (695,628
   responses) from the worktree's `irw_output/`, listed in
   `MANIFEST_2026-11-07_leads4_uploaded.txt`.
-- [ ] pone.0185725 Study 1 (Figshare 5411206) has no PII of its own; the
-  paper was skipped whole because Study 2/3 files carry IP addresses and
-  coordinates. Ship Study 1 only if Ben overrules.
+- [x] **pone.0185725 Study 1: SKIPPED -- Ben ruled 2026-11-07, not shipping.**
+  Was: Study 1 (Figshare 5411206) has no PII of its own, but Study 2/3 files
+  carry IP addresses and coordinates. Lead status stays `skipped_pii`.
 - [x] Item text for `vicens_2021_*`: HELD, not built (2026-11-07). PSS, HADS and
   ERQ are `block` in the rights register; BIS-11 now a `hold` row (itemtext PR).
 - [ ] Next leads not reached: pone.0341946, pone.0272972, pone.0264316.
