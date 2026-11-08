@@ -1,5 +1,34 @@
 # IRW Automated Finding — TODO
 
+## Item text PHQ-9/GAD-7/DASS-21, batches 5 and 7, 2026-11-08 — 3 `__items` tables staged
+
+Full write-up in `BATCH_LOG.md` (2026-11-08c).
+
+- [x] **UPLOADED 2026-11-08 by ben-domingue** -- 3 item text tables
+  (zhao_2024_phq9, zhao_2024_gad7, chinvararak_2022_gad7),
+  `MANIFEST_2026-11-08_itemtext_phq_uploaded.txt`; `uploaded` stamped. No
+  issues-page entries: the public notes record a source gap (items not
+  printed), not a text-vs-table mismatch.
+- [ ] **Ben: chinvararak_2022_phq9 held.** The paper says "Thai PHQ-9"
+  (citing Lotrakul 2008), but the deposit shows the Thai Department of Mental
+  Health 2Q/9Q protocol. The screener `d2q1`/`d2q2` is labelled "2Q" and is
+  yes/no, not the 0-3 PHQ-2. The severity bands in `phq9` are 0-6/7-12/13-18/>=19,
+  which are the 9Q bands, not PHQ-9's 5/10/15/20. The 9Q wording and anchors
+  differ from the phqscreeners Thai PHQ-9. Ship the official Thai PHQ-9 only
+  if you read the citation as decisive. Response-table caveat: 403 rows have a
+  full PHQ-9, but only 312 screened positive (`pos2q`). The paper reports
+  n = 312, so 91 screen-negatives answered it too.
+- [ ] Held: kawakami_2020_dass21. The paper cites Tran, Tran & Fisher 2013
+  for its Vietnamese DASS-21. That paper prints no items and has no
+  supplement. The DASS site's Vietnamese page links only the Dang (DASS-42)
+  and Pham translations, which the paper does not name. A new register `hold`
+  row records it. Option: ship the public-domain English DASS-21 as a stand-in
+  (gerou_2023 precedent). The order is settled: the deposit's DASS column
+  sequence reproduces the canonical S/A/D pattern at all 21 positions.
+- [ ] Held, not built: chew_2016_phq9. Respondents chose English, Malay or
+  Mandarin, and no row records which, so no single wording or `language` is
+  true per row.
+
 ## Cleaned-leads item text, batches 5-6, 2026-11-08 — 14 `__items` tables staged
 
 Full write-up in `BATCH_LOG.md` (2026-11-08b).
@@ -46,7 +75,8 @@ Full write-up in `BATCH_LOG.md` (2026-11-08 — cleaned-leads batch 7).
   itemtext_provenance.csv and mapping_verification.csv.
 - [ ] Ben's call: pone.0153205 held (DA statement says not public, SI has the
   .sav files anyway). Ship if the SI posting is read as the release.
-- [ ] Item text, not clear-cut (ship rows exist, but the administered wording
+- [x] (Taken up in 2026-11-08c: chinvararak_2022_gad7 built, the rest held;
+  see the top section.) Item text, not clear-cut (ship rows exist, but the administered wording
   is not deposited): `kawakami_2020_dass21` (Vietnamese; English DASS-21 as a
   stand-in per the DASS row and irw#2121; columns sit in canonical order, needs
   a paper_order verify script), `chinvararak_2022_{gad7,phq9}` (Thai; PHQ
