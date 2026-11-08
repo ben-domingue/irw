@@ -26475,3 +26475,5 @@ remains an option, and the item order is settled.
 
 **Not built:** `chew_2016_phq9`. Respondents chose English, Malay or Mandarin,
 and no row records which language they used.
+
+**UPLOADED 2026-11-08** (Ben, in-session): 3 item text tables. Manifest renamed `MANIFEST_2026-11-08_itemtext_phq_uploaded.txt`; `uploaded` stamped in itemtext_provenance.csv and mapping_verification.csv.

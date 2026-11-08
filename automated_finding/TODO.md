@@ -4,15 +4,11 @@
 
 Full write-up in `BATCH_LOG.md` (2026-11-08c).
 
-- [ ] **UPLOAD 3 item text tables** from
-  `~/irw-wt/itemtext-phq-dass/automated_finding/itemtext_output/`, listed in
-  `MANIFEST_2026-11-08_itemtext_phq.txt`: zhao_2024_phq9, zhao_2024_gad7
-  (official Simplified Chinese, English in `_translated`, resp 1-4),
-  chinvararak_2022_gad7 (official Thai, English in `_translated`). Their
-  response tables are live (batches 5 and 7). After upload: stamp `uploaded`
-  in `itemtext_provenance.csv` and `mapping_verification.csv`. Each carries a
-  public note: the official translation ships because the study does not
-  print its items.
+- [x] **UPLOADED 2026-11-08 by ben-domingue** -- 3 item text tables
+  (zhao_2024_phq9, zhao_2024_gad7, chinvararak_2022_gad7),
+  `MANIFEST_2026-11-08_itemtext_phq_uploaded.txt`; `uploaded` stamped. No
+  issues-page entries: the public notes record a source gap (items not
+  printed), not a text-vs-table mismatch.
 - [ ] **Ben: chinvararak_2022_phq9 held.** The paper says "Thai PHQ-9"
   (citing Lotrakul 2008), but the deposit shows the Thai Department of Mental
   Health 2Q/9Q protocol. The screener `d2q1`/`d2q2` is labelled "2Q" and is
