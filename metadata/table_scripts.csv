@@ -437,6 +437,9 @@ berntzen_2025_political_violence,data/conjoint/berntzen_2025.R
 berz_2022_candidate_selection,data/conjoint/berz_2022.R
 berz_2026_crisis_accountability,data/conjoint/berz_2026.R
 besaa_s_2026_22766055,data/autoestima_corporal_2026_22766055.py
+beshai_2017_fiqr,data/beshai_2017_relative_deprivation.py
+beshai_2017_prds_r,data/beshai_2017_relative_deprivation.py
+beshai_2017_sf_mpq,data/beshai_2017_relative_deprivation.py
 beza_2017_motivation,data/beza_2017_citizen_science.py
 bhandari_2023_trade_partners,data/conjoint/bhandari_2023.R
 bhandari_2026_clientelism_consumers,data/conjoint/bhandari_2026.R
@@ -786,6 +789,8 @@ chen_2026_tourist_resident_interaction,data/chen_2026_urban_tourism_cocreation.p
 chen_2026_usability,data/chen_2026_urban_tourism_cocreation.py
 chen_2026_uwes9,data/chen_2026_technostress_burnout.py
 chess_lnirt,data/lnirt.R
+chew_2016_dds17,data/chew_2016_diabetes_distress.py
+chew_2016_phq9,data/chew_2016_diabetes_distress.py
 chewning_2024_campaign_volunteers,data/conjoint/chewning_2024.R
 chile_2024_safety_aggression,data/chile_2024_safety.do
 chile_2024_safety_assault,data/chile_2024_safety.do
@@ -836,6 +841,9 @@ chinvararak_2021_ecr,data/chinvararak_2021_attachment_depression.py
 chinvararak_2021_phq15,data/chinvararak_2021_attachment_depression.py
 chinvararak_2021_ssq,data/chinvararak_2021_attachment_depression.py
 chinvararak_2021_ylseq,data/chinvararak_2021_attachment_depression.py
+chinvararak_2022_gad7,data/chinvararak_2022_thai_hcw.py
+chinvararak_2022_mbi_gs,data/chinvararak_2022_thai_hcw.py
+chinvararak_2022_phq9,data/chinvararak_2022_thai_hcw.py
 cho_2023_ipss,data/cho_2023_prostatectomy_ipss.py
 cho_2023_oabss,data/cho_2023_prostatectomy_ipss.py
 cho_2026_asian_coethnic,data/conjoint/cho_2026.R
@@ -2422,6 +2430,7 @@ jovanovic_2026_conscientiousness_yips,data/jovanovic_2026_conscientiousness.py
 justesen_2025_brazil_clientelism,data/conjoint/justesen_2025.R
 jutte_2024_loneliness,data/jutte_2024_loneliness_battery.py
 jutte_2024_personality,data/jutte_2024_loneliness_battery.py
+kabir_2021_elearning_readiness,data/kabir_2021_elearning.py
 kabir_2023_bms10,data/kabir_2023_nurse_bullying.py
 kabir_2023_sidas,data/kabir_2023_nurse_bullying.py
 kabir_2023_snaq,data/kabir_2023_nurse_bullying.py
@@ -2495,6 +2504,8 @@ kassas_2021_covid_exposure,data/kassas_2021_covid_risk.py
 kassas_2021_covid_mitigation,data/kassas_2021_covid_risk.py
 kato_2025_candidates_jan22,data/conjoint/kato_2025.R
 kato_2025_candidates_mar22,data/conjoint/kato_2025.R
+kawakami_2020_dass21,data/kawakami_2020_k6_vietnam.py
+kawakami_2020_k6,data/kawakami_2020_k6_vietnam.py
 kawakami_2026_visa_england,data/conjoint/kawakami_2026.R
 kawakami_2026_visa_japan,data/conjoint/kawakami_2026.R
 kayir_2026_ai_use,data/kayir_2026_ai_teacher.py
@@ -2769,6 +2780,7 @@ li_2017_fdi_china,data/conjoint/li_2017.R
 li_2017_gad7,data/li_2017_outpatient_screening.py
 li_2017_phq15,data/li_2017_outpatient_screening.py
 li_2017_phq9,data/li_2017_outpatient_screening.py
+li_2017_saq,data/li_2017_saq_heilongjiang.py
 li_2021_china_intervention,data/conjoint/li_2021.R
 li_2021_china_peacekeeping,data/conjoint/li_2021.R
 li_2021_knowledge_sharing,data/li_2021_cultural_intelligence.py
@@ -3212,6 +3224,8 @@ meloni_2015_parent_divers_ed,data/meloni_2015_disability.py
 meloni_2015_parent_interests,data/meloni_2015_disability.py
 menaldi_2023_brief_cope,data/menaldi_2023_mbi_cope.py
 menaldi_2023_mbi,data/menaldi_2023_mbi_cope.py
+mendes_lobao_2018_hpv_attitudes,data/mendes_lobao_2018_hpv.py
+mendes_lobao_2018_hpv_knowledge,data/mendes_lobao_2018_hpv.py
 mendezlopez_2023_bfi10,data/mendezlopez_2023_ict_mental_health.py
 mendezlopez_2023_cdrisc10,data/mendezlopez_2023_ict_mental_health.py
 mendezlopez_2023_gad7,data/mendezlopez_2023_ict_mental_health.py
@@ -3354,6 +3368,9 @@ mohammed_2021_job_satisfaction,data/mohammed_2021_patient_safety.py
 mohammed_2021_patient_safety_culture,data/mohammed_2021_patient_safety.py
 mohr_2024_museum_visits,data/conjoint/mohr_2024.R
 moise_2025_eu_defence,data/conjoint/moise_2025.R
+mojsa_kaja_2023_ais,data/mojsa_kaja_2023_covid_men.py
+mojsa_kaja_2023_bdi2,data/mojsa_kaja_2023_covid_men.py
+mojsa_kaja_2023_stai_s,data/mojsa_kaja_2023_covid_men.py
 molin_2026_vacation_positional,data/conjoint/molin_2026.R
 molino_2018_d5_scale,data/molino_2018_entrepreneurial_intention.py
 molino_2018_d6_scale,data/molino_2018_entrepreneurial_intention.py
@@ -3757,6 +3774,7 @@ penningroth_2019_pm_concerns,data/penningroth_2019_pm_goals_concerns.py
 penningroth_2019_pm_goals,data/penningroth_2019_pm_goals_concerns.py
 pepinsky_2023_refugee_gender,data/conjoint/pepinsky_2023.R
 perales_2026_financial_resilience,data/perales_2026_digital_financial_literacy.py
+perez_fuentes_2020_affect_balance,data/perez_fuentes_2020_covid_affect.py
 perez_hernandez_2021_cesd7,data/perez_hernandez_2021_encovid.py
 perez_hernandez_2021_elcsa,data/perez_hernandez_2021_encovid.py
 perez_hernandez_2021_gad7,data/perez_hernandez_2021_encovid.py
@@ -3975,6 +3993,10 @@ putro_2024_eo,data/putro_2024_it_adoption.py
 putro_2024_tam_emarket,data/putro_2024_it_adoption.py
 putro_2024_tam_etax,data/putro_2024_it_adoption.py
 putro_2025_indonesian_coffee,data/conjoint/putro_2025.R
+pytlikzillig_2017_dispositional_trust,data/pytlikzillig_2017_trust.py
+pytlikzillig_2017_government_trust,data/pytlikzillig_2017_trust.py
+pytlikzillig_2017_institutional_trust,data/pytlikzillig_2017_trust.py
+pytlikzillig_2017_water_knowledge,data/pytlikzillig_2017_trust.py
 qi_2024_ciss,data/qi_2024_nurses.py
 qi_2024_mspss,data/qi_2024_nurses.py
 qi_2024_phq9,data/qi_2024_nurses.py
@@ -4389,6 +4411,9 @@ shehayeb_2024_math_anxiety,data/shehayeb_2024_math_attitudes.py
 shehayeb_2024_math_teacher,data/shehayeb_2024_math_attitudes.py
 shelat_2022_covid_train_long,data/conjoint/shelat_2022.R
 shelat_2022_covid_train_short,data/conjoint/shelat_2022.R
+shen_2018_dbq,data/shen_2018_driving_behavior.py
+shen_2018_dddi,data/shen_2018_driving_behavior.py
+shen_2018_pdbs,data/shen_2018_driving_behavior.py
 shen_2025_bsmas,data/shen_2025_teacher_distress.py
 shen_2025_dass21,data/shen_2025_teacher_distress.py
 shen_2025_igds9sf,data/shen_2025_teacher_distress.py
@@ -4920,6 +4945,9 @@ talaifar_2025_study1_lifestyle_survey,data/talaifar_2025_lifestyle_polarization.
 talaifar_2025_study1_tivi,data/talaifar_2025_lifestyle_polarization.py
 talaifar_2025_study2_plp,data/talaifar_2025_lifestyle_polarization.py
 talaifar_2025_study2_thermometer,data/talaifar_2025_lifestyle_polarization.py
+talarowska_dublicka_2026_banps,data/talarowska_dublicka_2026_loneliness.py
+talarowska_dublicka_2026_ucla,data/talarowska_dublicka_2026_loneliness.py
+talarowska_dublicka_2026_ysq_s3,data/talarowska_dublicka_2026_loneliness.py
 talayero_2023_flood_management_adequacy,data/talayero_2023_flood.py
 talayero_2023_flood_mitigation_attitudes,data/talayero_2023_flood.py
 talayero_2023_flood_risk_perception,data/talayero_2023_flood.py
@@ -5498,6 +5526,8 @@ zeng_2026_gai_learning_effect,data/zeng_2026_gai_learning.py
 zeng_2026_gai_role_adapt,data/zeng_2026_gai_learning.py
 zeng_2026_gai_self_efficacy,data/zeng_2026_gai_learning.py
 zeng_2026_gai_ttf,data/zeng_2026_gai_learning.py
+zhang_2015_earthquake_exposure,data/zhang_2015_lushan_somatic.py
+zhang_2015_phq13,data/zhang_2015_lushan_somatic.py
 zhang_2019_bfi10,data/zhang_2019_cbfpi.py
 zhang_2019_bis_brief,data/zhang_2019_cbfpi.py
 zhang_2019_cbfpi_b,data/zhang_2019_cbfpi.py

@@ -232,6 +232,20 @@ balparda_2021_kepaq_emotional,https://dataverse.harvard.edu/api/access/datafile/
 balparda_2021_kepaq_functional,https://dataverse.harvard.edu/api/access/datafile/4417576/metadata/ddi,Database.tab,dataverse,dataverse_ddi,,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/LTMAHE,,2026-10-02
 balparda_2021_korq_activity_limitation,https://dataverse.harvard.edu/api/access/datafile/4285103/metadata/ddi,Database for KORQ Validation in Colombian Patients.tab,dataverse,dataverse_ddi,,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/URNE8Q,,2026-10-02
 balparda_2021_korq_symptoms,https://dataverse.harvard.edu/api/access/datafile/4285103/metadata/ddi,Database for KORQ Validation in Colombian Patients.tab,dataverse,dataverse_ddi,,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/URNE8Q,,2026-10-02
+bando_2026_aaq2,https://osf.io/8cgdb/files/osfstorage/69fb01875e4c973b830d4120,Codebook.pdf,osf,name_codebook,1,https://osf.io/8cgdb/,,2026-11-09
+bando_2026_aaq2,https://osf.io/download/rw9cx/,rw9cx,osf.io,recorded_at_ingest,1,,,2026-11-07
+bando_2026_ais,https://osf.io/8cgdb/files/osfstorage/69fb01875e4c973b830d4120,Codebook.pdf,osf,name_codebook,1,https://osf.io/8cgdb/,,2026-11-09
+bando_2026_ais,https://osf.io/download/rw9cx/,rw9cx,osf.io,recorded_at_ingest,1,,,2026-11-07
+bando_2026_dbas16,https://osf.io/8cgdb/files/osfstorage/69fb01875e4c973b830d4120,Codebook.pdf,osf,name_codebook,1,https://osf.io/8cgdb/,,2026-11-09
+bando_2026_dbas16,https://osf.io/download/rw9cx/,rw9cx,osf.io,recorded_at_ingest,1,,,2026-11-07
+bando_2026_ics,https://osf.io/8cgdb/files/osfstorage/69fb01875e4c973b830d4120,Codebook.pdf,osf,name_codebook,1,https://osf.io/8cgdb/,,2026-11-09
+bando_2026_ics,https://osf.io/download/rw9cx/,rw9cx,osf.io,recorded_at_ingest,1,,,2026-11-07
+bando_2026_psas,https://osf.io/8cgdb/files/osfstorage/69fb01875e4c973b830d4120,Codebook.pdf,osf,name_codebook,1,https://osf.io/8cgdb/,,2026-11-09
+bando_2026_psas,https://osf.io/download/rw9cx/,rw9cx,osf.io,recorded_at_ingest,1,,,2026-11-07
+bando_2026_spaq,https://osf.io/8cgdb/files/osfstorage/69fb01875e4c973b830d4120,Codebook.pdf,osf,name_codebook,1,https://osf.io/8cgdb/,,2026-11-09
+bando_2026_spaq,https://osf.io/download/rw9cx/,rw9cx,osf.io,recorded_at_ingest,1,,,2026-11-07
+bando_2026_srbq,https://osf.io/8cgdb/files/osfstorage/69fb01875e4c973b830d4120,Codebook.pdf,osf,name_codebook,1,https://osf.io/8cgdb/,,2026-11-09
+bando_2026_srbq,https://osf.io/download/rw9cx/,rw9cx,osf.io,recorded_at_ingest,1,,,2026-11-07
 banerjee_2025_arithmetic_market,https://dataverse.harvard.edu/api/access/datafile/10749672/metadata/ddi,study2_mm_noord_20230913.tab,dataverse,dataverse_ddi,,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VPVH00,,2026-10-02
 banerjee_2025_arithmetic_market,https://dataverse.harvard.edu/api/access/datafile/10749674/metadata/ddi,abstract_anchored_data.tab,dataverse,dataverse_ddi,,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VPVH00,,2026-10-02
 banerjee_2025_arithmetic_market,https://dataverse.harvard.edu/api/access/datafile/10749675/metadata/ddi,study2_mktchi_20230913.tab,dataverse,dataverse_ddi,,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VPVH00,,2026-10-02
@@ -308,6 +322,9 @@ banerjee_2025_arithmetic_school,https://dataverse.harvard.edu/api/access/datafil
 banerjee_2025_arithmetic_school,https://dataverse.harvard.edu/api/access/datafile/10749768/metadata/ddi,3_long_calculation_data.tab,dataverse,dataverse_ddi,,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VPVH00,,2026-10-02
 banerjee_2025_arithmetic_school,https://dataverse.harvard.edu/api/access/datafile/10749769/metadata/ddi,market_data.tab,dataverse,dataverse_ddi,,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VPVH00,,2026-10-02
 banerjee_2025_arithmetic_school,https://dataverse.harvard.edu/file.xhtml?fileId=10749681,Readme.docx,dataverse,name_readme,1,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VPVH00,unreadable,2026-10-02
+banerjee_2025_sepq,https://osf.io/cjzt6/files/osfstorage/68a05004f045f0fd4573cdac,OSF readme.txt,osf,name_readme,1,https://osf.io/cjzt6/,names 0/35,2026-11-09
+banerjee_2025_sepq,https://osf.io/cjzt6/files/osfstorage/68a0774715c938479cabd9c4,sepq codebook.csv,osf,name_codebook,1,https://osf.io/cjzt6/,,2026-11-09
+banerjee_2025_sepq,https://osf.io/download/3fysx/,3fysx,osf.io,recorded_at_ingest,1,,,2026-11-07
 bang_2023_anxiety,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0284340.s004,Data dictionary (sheet in S1_Dataset.xlsx),plos,name_codebook,1,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0284340,sheet name,2026-10-02
 bang_2023_depression,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0284340.s004,Data dictionary (sheet in S1_Dataset.xlsx),plos,name_codebook,1,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0284340,sheet name,2026-10-02
 bang_2023_health,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0284340.s004,Data dictionary (sheet in S1_Dataset.xlsx),plos,name_codebook,1,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0284340,sheet name,2026-10-02
@@ -371,11 +388,16 @@ belyakova_2026_maas,https://zenodo.org/api/records/22829237/files/codebook.csv/c
 belyakova_2026_maas,https://zenodo.org/records/22829237/files/codebook.csv,codebook.csv,zenodo,name_codebook,1,https://zenodo.org/records/22829237,,2026-10-12
 belyakova_2026_pil,https://zenodo.org/api/records/22829237/files/codebook.csv/content,content,zenodo.org,recorded_at_ingest,1,,,2026-10-07
 belyakova_2026_pil,https://zenodo.org/records/22829237/files/codebook.csv,codebook.csv,zenodo,name_codebook,1,https://zenodo.org/records/22829237,,2026-10-12
+bergs_2021_hpepss,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0247869.s001,file,journals.plos.org,recorded_at_ingest,1,,,2026-11-07
+beshai_2017_fiqr,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0189666.s001,file,journals.plos.org,recorded_at_ingest,1,,,2026-11-08
+beshai_2017_prds_r,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0189666.s001,file,journals.plos.org,recorded_at_ingest,1,,,2026-11-08
+beshai_2017_sf_mpq,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0189666.s001,file,journals.plos.org,recorded_at_ingest,1,,,2026-11-08
 bi_2026_agency_maintenance,https://zenodo.org/records/22040756/files/AI_Literacy_618_Final_README.txt,AI_Literacy_618_Final_README.txt,zenodo.org,recorded_at_ingest,1,,,2026-10-11
 bi_2026_ai_literacy,https://zenodo.org/records/22040756/files/AI_Literacy_618_Final_README.txt,AI_Literacy_618_Final_README.txt,zenodo.org,recorded_at_ingest,1,,,2026-10-11
 bi_2026_creative_ai_use,https://zenodo.org/records/22040756/files/AI_Literacy_618_Final_README.txt,AI_Literacy_618_Final_README.txt,zenodo.org,recorded_at_ingest,1,,,2026-10-11
 bi_2026_trust_calibration,https://zenodo.org/records/22040756/files/AI_Literacy_618_Final_README.txt,AI_Literacy_618_Final_README.txt,zenodo.org,recorded_at_ingest,1,,,2026-10-11
 bialowolski_2024_financial_literacy,https://dataverse.harvard.edu/api/access/datafile/10629129/metadata/ddi,for_replication.tab,dataverse,dataverse_ddi,,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/MTQGSF,,2026-10-02
+bialowolski_2026_financial_literacy,https://dataverse.harvard.edu/api/access/datafile/14372566/metadata/ddi,for_replication.tab,dataverse,dataverse_ddi,,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/TYC6RI,,2026-11-09
 big5_sirt,https://search.r-project.org/CRAN/refmans/sirt/html/data.big5.html,sirt::data.big5,cran,package_doc,1,https://cran.r-project.org/package=sirt,,2026-10-02
 bland_2024_gcos_autonomy,https://dataverse.harvard.edu/api/access/datafile/10162134/metadata/ddi,GCO_MFT_PSM.tab,dataverse,dataverse_ddi,,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/MHVAJZ,,2026-10-12
 bland_2024_gcos_control,https://dataverse.harvard.edu/api/access/datafile/10162134/metadata/ddi,GCO_MFT_PSM.tab,dataverse,dataverse_ddi,,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/MHVAJZ,,2026-10-12
@@ -439,6 +461,16 @@ budianto_2026_intention,https://zenodo.org/records/21502225/files/Questionnaire%
 budianto_2026_perceived_ease,https://zenodo.org/records/21502225/files/Questionnaire%20Items.xlsx,Questionnaire Items.xlsx,zenodo.org,recorded_at_ingest,1,,,2026-10-18
 budianto_2026_perceived_usefulness,https://zenodo.org/records/21502225/files/Questionnaire%20Items.xlsx,Questionnaire Items.xlsx,zenodo.org,recorded_at_ingest,1,,,2026-10-18
 budianto_2026_trust,https://zenodo.org/records/21502225/files/Questionnaire%20Items.xlsx,Questionnaire Items.xlsx,zenodo.org,recorded_at_ingest,1,,,2026-10-18
+burghartswieser_2021_authoritarianism,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0259445.s002,file,journals.plos.org,recorded_at_ingest,1,,,2026-11-07
+burghartswieser_2021_facebook_exposure,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0259445.s002,file,journals.plos.org,recorded_at_ingest,1,,,2026-11-07
+burghartswieser_2021_opinion_exposure,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0259445.s002,file,journals.plos.org,recorded_at_ingest,1,,,2026-11-07
+burghartswieser_2021_participation,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0259445.s002,file,journals.plos.org,recorded_at_ingest,1,,,2026-11-07
+burghartswieser_2021_political_info,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0259445.s002,file,journals.plos.org,recorded_at_ingest,1,,,2026-11-07
+burghartswieser_2021_pvq,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0259445.s002,file,journals.plos.org,recorded_at_ingest,1,,,2026-11-07
+burghartswieser_2021_refugee_attitudes,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0259445.s002,file,journals.plos.org,recorded_at_ingest,1,,,2026-11-07
+burghartswieser_2021_refugee_news,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0259445.s002,file,journals.plos.org,recorded_at_ingest,1,,,2026-11-07
+burghartswieser_2021_refugee_threat,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0259445.s002,file,journals.plos.org,recorded_at_ingest,1,,,2026-11-07
+burghartswieser_2021_sdo,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0259445.s002,file,journals.plos.org,recorded_at_ingest,1,,,2026-11-07
 busch_2023_stigma,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0287795.s006,S1_Appendix.docx,plos,questionnaire,1,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0287795,caption: Copy of survey questions analyzed. (DOCX),2026-10-02
 butt_2022_actual_usage,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0269609.s001,S1_Appendix.docx,plos,questionnaire,1,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0269609,caption: Questionnaire. (DOCX),2026-10-02
 butt_2022_cognitive_absorption,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0269609.s001,S1_Appendix.docx,plos,questionnaire,1,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0269609,caption: Questionnaire. (DOCX),2026-10-02
@@ -870,6 +902,8 @@ chen_2026_entre_intention,https://dataverse.harvard.edu/api/access/datafile/8145
 chen_2026_entre_motivation,https://dataverse.harvard.edu/api/access/datafile/8145337/metadata/ddi,dataset1ESatisfactionEN.tab,dataverse,dataverse_ddi,,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/N56YBG,,2026-10-12
 chen_2026_genai_learning,https://dataverse.harvard.edu/api/access/datafile/13656768/metadata/ddi,data794.tab,dataverse,dataverse_ddi,,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/WITW8F,,2026-11-06
 chess_lnirt,https://search.r-project.org/CRAN/refmans/LNIRT/html/AmsterdamChess.html,LNIRT::AmsterdamChess,cran,package_doc,1,https://cran.r-project.org/package=LNIRT,,2026-10-02
+chew_2016_dds17,https://ndownloader.figshare.com/files/4823968,4823968,ndownloader.figshare.com,recorded_at_ingest,1,,,2026-11-08
+chew_2016_phq9,https://ndownloader.figshare.com/files/4823968,4823968,ndownloader.figshare.com,recorded_at_ingest,1,,,2026-11-08
 chile_2023_children-adolescents-survey_aa,https://observatorio.ministeriodesarrollosocial.gob.cl/storage/docs/eanna/2023/Cuestionario_Ninos_Ninas_y_Adolescentes_9_a_17_anos_EANNA_2023.pdf,Cuestionario_Ninos_Ninas_y_Adolescentes_9_a_17_anos_EANNA_2023.pdf,observatorio.ministeriodesarrollosocial.gob.cl,questionnaire,1,,"EANNA 2023's own 'Niños, Niñas y Adolescentes 9 a 17 años' questionnaire (cover: CUESTIONARIO Niños, Niñas y Adolescentes 9 a 17 años; text names EANNA 2023), linked from the codebook's Cuestionarios sheet; covers the table's questions (a8_*/a9_*/a11_* are option codes of multi-select questions a8, a9, a11)",2026-10-04
 chile_2023_children-adolescents-survey_aa,https://observatorio.ministeriodesarrollosocial.gob.cl/storage/docs/eanna/2023/Libro_de_codigos_EANNA_2023.xlsx,Libro_de_codigos_EANNA_2023.xlsx,observatorio.ministeriodesarrollosocial.gob.cl,recorded_by_review,1,,"MDSF 'LIBRO DE CÓDIGOS BASE DE DATOS EANNA 2023' (same codebook listed on the bidat.gob.cl dataset page) for 'Base de datos EANNA 2023.dta', which the build script reads; sheet '4. NNA' lists the table's items a3 a5_1 a5_2 ... a11_99 a12 (all 38)",2026-10-04
 chile_2023_children-adolescents-survey_cp_a,https://observatorio.ministeriodesarrollosocial.gob.cl/storage/docs/eanna/2023/Cuestionario_Cuidador_Principal_EANNA_2023.pdf,Cuestionario_Cuidador_Principal_EANNA_2023.pdf,observatorio.ministeriodesarrollosocial.gob.cl,questionnaire,1,,"EANNA 2023's own 'Cuidador(a) Principal' questionnaire (cover: CUESTIONARIO Cuidador(a) Principal; text names EANNA 2023), linked from the codebook's Cuestionarios sheet; covers the table's questions",2026-10-04
@@ -1387,6 +1421,11 @@ dora_2024_selfcontrol_demands,https://osf.io/download/zy639/,zy639,osf.io,record
 double_marking_steele_2022,https://osf.io/nd3k8/files/osfstorage/63230796718a5201726a0748,Dissertation Rubric.pdf,osf,doc_names_columns,1,https://osf.io/nd3k8/,"names 7/11: abstract, discussion, introduction, method, presentation, results, section",2026-10-04
 ds14_mokken,https://search.r-project.org/CRAN/refmans/mokken/html/DS14.html,mokken::DS14,cran,package_doc,1,https://cran.r-project.org/package=mokken,,2026-10-02
 dss_mouta_2021,https://osf.io/4xz8s/files/osfstorage/5f3990ca3bf25200f7a24ed2,READ_ME.txt,osf,name_readme,1,https://osf.io/4xz8s/,unreadable,2026-10-02
+du_2026_ai_use_intention,https://dataverse.harvard.edu/api/access/datafile/14345805/metadata/ddi,The primary dataset for analysis(1).tab,dataverse,dataverse_ddi,,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/AKVGXJ,,2026-11-09
+du_2026_aiab,https://dataverse.harvard.edu/api/access/datafile/14345805/metadata/ddi,The primary dataset for analysis(1).tab,dataverse,dataverse_ddi,,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/AKVGXJ,,2026-11-09
+du_2026_teacher_identity,https://dataverse.harvard.edu/api/access/datafile/14345805/metadata/ddi,The primary dataset for analysis(1).tab,dataverse,dataverse_ddi,,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/AKVGXJ,,2026-11-09
+du_2026_utaut,https://dataverse.harvard.edu/api/access/datafile/14345805/metadata/ddi,The primary dataset for analysis(1).tab,dataverse,dataverse_ddi,,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/AKVGXJ,,2026-11-09
+duc_2026_pirogov_perceptions,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0341597.s001,S1_File.docx,plos,questionnaire,1,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0341597,caption: Pre-test and post-test instrument. A validated 20-item multiple-choice question (MCQ) test used to assess students’ anatomy knowledge immediately before (pre-test) and after (post-test) the instructio,2026-11-09
 duckmayr_2023_immigration,https://dataverse.harvard.edu/api/access/datafile/6573346/metadata/ddi,H110_members.tab,dataverse,dataverse_ddi,,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/HXORK9,,2026-10-02
 duckmayr_2023_immigration,https://dataverse.harvard.edu/api/access/datafile/6573348/metadata/ddi,H115_votes.tab,dataverse,dataverse_ddi,,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/HXORK9,,2026-10-02
 duckmayr_2023_immigration,https://dataverse.harvard.edu/api/access/datafile/6573350/metadata/ddi,S113_members.tab,dataverse,dataverse_ddi,,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/HXORK9,,2026-10-02
@@ -4248,6 +4287,12 @@ jung_2018_media_use,https://journals.plos.org/plosone/article/file?type=suppleme
 jung_2018_media_use,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0200333.s004,S4_File.pdf,plos,questionnaire,3,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0200333,caption: Questionnaire (Korean). (PDF),2026-10-02
 K-PCQ_Huh_2022,https://dataverse.harvard.edu/api/access/datafile/4144406/metadata/ddi,Suppl_2_response_data_358.tab,dataverse,dataverse_ddi,,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/SHCUI4,,2026-10-02
 K-PCQ_Huh_2022,https://dataverse.harvard.edu/api/access/datafile/4144410/metadata/ddi,Suppl_1_Korean_translatioin_PCQ.tab,dataverse,dataverse_ddi,,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/SHCUI4,,2026-10-02
+kabir_2023_tam_atu,https://zenodo.org/records/8326513/files/TAM_Questionnaires.pdf,TAM_Questionnaires.pdf,zenodo.org,recorded_at_ingest,1,,,2026-11-07
+kabir_2023_tam_bi,https://zenodo.org/records/8326513/files/TAM_Questionnaires.pdf,TAM_Questionnaires.pdf,zenodo.org,recorded_at_ingest,1,,,2026-11-07
+kabir_2023_tam_peu,https://zenodo.org/records/8326513/files/TAM_Questionnaires.pdf,TAM_Questionnaires.pdf,zenodo.org,recorded_at_ingest,1,,,2026-11-07
+kabir_2023_tam_pi,https://zenodo.org/records/8326513/files/TAM_Questionnaires.pdf,TAM_Questionnaires.pdf,zenodo.org,recorded_at_ingest,1,,,2026-11-07
+kabir_2023_tam_pu,https://zenodo.org/records/8326513/files/TAM_Questionnaires.pdf,TAM_Questionnaires.pdf,zenodo.org,recorded_at_ingest,1,,,2026-11-07
+kabir_2023_tam_ta,https://zenodo.org/records/8326513/files/TAM_Questionnaires.pdf,TAM_Questionnaires.pdf,zenodo.org,recorded_at_ingest,1,,,2026-11-07
 kalani_2026_bat,https://dataverse.harvard.edu/api/access/datafile/13419526/metadata/ddi,Physicians BAT.tab,dataverse,dataverse_ddi,,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/RODGFE,,2026-10-05
 kalani_2026_boredom,https://dataverse.harvard.edu/api/access/datafile/13419526/metadata/ddi,Physicians BAT.tab,dataverse,dataverse_ddi,,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/RODGFE,,2026-10-05
 kalani_2026_flourishing,https://dataverse.harvard.edu/api/access/datafile/13419526/metadata/ddi,Physicians BAT.tab,dataverse,dataverse_ddi,,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/RODGFE,,2026-10-05
@@ -4286,6 +4331,8 @@ karim_2026_mhl,https://ndownloader.figshare.com/files/69360969,69360969,ndownloa
 karlsson_2023_climate_risk,https://osf.io/k6vp9/files/osfstorage/63c7e77064e509027c521fcd,Survey/Data/Codebook.pdf,osf,name_codebook,1,https://osf.io/k6vp9/,,2026-10-02
 karpudewan_2022_stp_cca,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0268509.s003,S3_Appendix.docx,plos,doc_names_columns,1,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0268509,"names 27/29: KN2, KN3, KN4, KN5, KN6, KN7, PD1, PD10",2026-10-02
 karpudewan_2022_stp_efa,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0268509.s003,S3_Appendix.docx,plos,doc_names_columns,1,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0268509,"names 15/33: KN2, KN3, KN4, KN5, KN6, KN7, KN8, STP1",2026-10-02
+kasneci_2022_cft,https://dataverse.harvard.edu/api/access/datafile/4197145/metadata/ddi,cft_full.tab,dataverse,dataverse_ddi,,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/JGOCKI,,2026-11-09
+kasneci_2022_cft,https://dataverse.harvard.edu/api/access/datafile/4437454/metadata/ddi,eye_features_aggregated.tab,dataverse,dataverse_ddi,,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/JGOCKI,,2026-11-09
 kasparek_2025_audit,https://dataverse.harvard.edu/api/access/datafile/12014410/metadata/ddi,KasparekEtAl_2025_SEESAW_Data_v2revision.tab,dataverse,dataverse_ddi,,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/CCMJTJ,,2026-10-12
 kasparek_2025_audit,https://dataverse.harvard.edu/api/access/datafile/12014411/metadata/ddi,KasparekEtAl_2025_SEESAW_IATData_Raw.tab,dataverse,dataverse_ddi,,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/CCMJTJ,,2026-10-12
 kasparek_2025_audit,https://dataverse.harvard.edu/api/access/datafile/12014415?format=original,12014415,dataverse.harvard.edu,recorded_at_ingest,1,,,2026-10-07
@@ -4524,6 +4571,7 @@ lestari_2026_working_memory,https://data.mendeley.com/public-files/datasets/6y7s
 leuteritz_2019_afa_wma,https://doi.org/10.1371/journal.pone.0224485.s001,journal.pone.0224485.s001,doi.org,recorded_at_ingest,1,,,2026-11-02
 leuteritz_2019_jds,https://doi.org/10.1371/journal.pone.0224485.s001,journal.pone.0224485.s001,doi.org,recorded_at_ingest,1,,,2026-11-02
 leuteritz_2019_mitag,https://doi.org/10.1371/journal.pone.0224485.s001,journal.pone.0224485.s001,doi.org,recorded_at_ingest,1,,,2026-11-02
+li_2017_saq,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0179486.s001,file,journals.plos.org,recorded_at_ingest,1,,,2026-11-08
 li_2021_cultural_intelligence,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0250878.s001,S1_Appendix.docx,plos,questionnaire,1,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0250878,caption: Questionnaire. (DOCX),2026-10-02
 li_2021_knowledge_sharing,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0250878.s001,S1_Appendix.docx,plos,questionnaire,1,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0250878,caption: Questionnaire. (DOCX),2026-10-02
 li_2021_org_cultural_diversity,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0250878.s001,S1_Appendix.docx,plos,questionnaire,1,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0250878,caption: Questionnaire. (DOCX),2026-10-02
@@ -4701,6 +4749,21 @@ luettgau_2026_political_knowledge,https://github.com/UKGovernmentBEIS/dhi1-analy
 luettgau_2026_source_trust,https://github.com/UKGovernmentBEIS/dhi1-analysis-public/blob/main/data/survey_data/options_codebook.csv,data/survey_data/options_codebook.csv,github,name_codebook,2,https://github.com/UKGovernmentBEIS/dhi1-analysis-public,,2026-10-23
 luettgau_2026_source_trust,https://github.com/UKGovernmentBEIS/dhi1-analysis-public/blob/main/data/survey_data/survey_codebook.csv,survey_codebook.csv,github.com,recorded_at_ingest,1,,,2026-10-22
 luettgau_2026_source_trust,https://github.com/UKGovernmentBEIS/dhi1-analysis-public/blob/main/README.md,README.md,github,name_readme,1,https://github.com/UKGovernmentBEIS/dhi1-analysis-public,names 1/39: sub_compliance,2026-10-23
+lusk_2019_healthy_beliefs,https://dataverse.harvard.edu/api/access/datafile/3594770,3594770,dataverse.harvard.edu,recorded_at_ingest,1,,,2026-11-07
+lusk_2019_healthy_beliefs,https://dataverse.harvard.edu/api/access/datafile/3792855/metadata/ddi,data_to_share_2.tab,dataverse,dataverse_ddi,,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/IEHI3U,,2026-11-09
+lusk_2019_healthy_beliefs,https://dataverse.harvard.edu/file.xhtml?fileId=3594770,CRA Survey Codebook.pdf,dataverse,name_codebook,1,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/IEHI3U,,2026-11-09
+lusk_2019_healthy_foods,https://dataverse.harvard.edu/api/access/datafile/3594770,3594770,dataverse.harvard.edu,recorded_at_ingest,1,,,2026-11-07
+lusk_2019_healthy_foods,https://dataverse.harvard.edu/api/access/datafile/3792855/metadata/ddi,data_to_share_2.tab,dataverse,dataverse_ddi,,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/IEHI3U,,2026-11-09
+lusk_2019_healthy_foods,https://dataverse.harvard.edu/file.xhtml?fileId=3594770,CRA Survey Codebook.pdf,dataverse,name_codebook,1,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/IEHI3U,,2026-11-09
+lusk_2019_natural_beliefs,https://dataverse.harvard.edu/api/access/datafile/3594770,3594770,dataverse.harvard.edu,recorded_at_ingest,1,,,2026-11-07
+lusk_2019_natural_beliefs,https://dataverse.harvard.edu/api/access/datafile/3792855/metadata/ddi,data_to_share_2.tab,dataverse,dataverse_ddi,,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/IEHI3U,,2026-11-09
+lusk_2019_natural_beliefs,https://dataverse.harvard.edu/file.xhtml?fileId=3594770,CRA Survey Codebook.pdf,dataverse,name_codebook,1,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/IEHI3U,,2026-11-09
+lusk_2019_natural_farming,https://dataverse.harvard.edu/api/access/datafile/3594770,3594770,dataverse.harvard.edu,recorded_at_ingest,1,,,2026-11-07
+lusk_2019_natural_farming,https://dataverse.harvard.edu/api/access/datafile/3792855/metadata/ddi,data_to_share_2.tab,dataverse,dataverse_ddi,,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/IEHI3U,,2026-11-09
+lusk_2019_natural_farming,https://dataverse.harvard.edu/file.xhtml?fileId=3594770,CRA Survey Codebook.pdf,dataverse,name_codebook,1,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/IEHI3U,,2026-11-09
+lusk_2019_natural_processing,https://dataverse.harvard.edu/api/access/datafile/3594770,3594770,dataverse.harvard.edu,recorded_at_ingest,1,,,2026-11-07
+lusk_2019_natural_processing,https://dataverse.harvard.edu/api/access/datafile/3792855/metadata/ddi,data_to_share_2.tab,dataverse,dataverse_ddi,,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/IEHI3U,,2026-11-09
+lusk_2019_natural_processing,https://dataverse.harvard.edu/file.xhtml?fileId=3594770,CRA Survey Codebook.pdf,dataverse,name_codebook,1,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/IEHI3U,,2026-11-09
 lyu_2024_ate,https://static-content.springer.com/esm/art%3A10.1038%2Fs41598-024-58060-4/MediaObjects/41598_2024_58060_MOESM1_ESM.docx,41598_2024_58060_MOESM1_ESM.docx,static-content.springer.com,recorded_at_ingest,1,,,2026-10-05
 lyu_2024_nfa,https://static-content.springer.com/esm/art%3A10.1038%2Fs41598-024-58060-4/MediaObjects/41598_2024_58060_MOESM1_ESM.docx,41598_2024_58060_MOESM1_ESM.docx,static-content.springer.com,recorded_at_ingest,1,,,2026-10-05
 lyu_2024_org,https://static-content.springer.com/esm/art%3A10.1038%2Fs41598-024-58060-4/MediaObjects/41598_2024_58060_MOESM1_ESM.docx,41598_2024_58060_MOESM1_ESM.docx,static-content.springer.com,recorded_at_ingest,1,,,2026-10-05
@@ -4727,6 +4790,9 @@ makovi_2021_symbolic_racism,https://static-content.springer.com/esm/art%3A10.103
 malik_2018_individual_motivation,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0209546.s002,S1_Questionnaire.pdf,plos,questionnaire,1,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0209546,caption: (PDF),2026-10-02
 malik_2018_organizational_motivation,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0209546.s002,S1_Questionnaire.pdf,plos,questionnaire,1,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0209546,caption: (PDF),2026-10-02
 malik_2018_social_motivation,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0209546.s002,S1_Questionnaire.pdf,plos,questionnaire,1,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0209546,caption: (PDF),2026-10-02
+manger_2025_analytic_rigor,https://dataverse.nl/api/access/datafile/555979,555979,dataverse.nl,recorded_at_ingest,1,,,2026-11-07
+manger_2025_analytic_rigor,https://dataverse.nl/file.xhtml?fileId=555979,Code book.docx,dataverse,name_codebook,1,https://dataverse.nl/dataset.xhtml?persistentId=doi:10.34894/JLKINY,,2026-11-09
+manger_2025_analytic_rigor,https://dataverse.nl/file.xhtml?fileId=555984,README supplemental materials.txt,dataverse,name_readme,1,https://dataverse.nl/dataset.xhtml?persistentId=doi:10.34894/JLKINY,names 0/9,2026-11-09
 manolika_2021_dirty_dozen,https://dataverse.harvard.edu/api/access/datafile/5600028/metadata/ddi,The Big Five and Beyond.tab,dataverse,dataverse_ddi,,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/23NDKX,,2026-10-02
 manolika_2021_mini_ipip,https://dataverse.harvard.edu/api/access/datafile/5600028/metadata/ddi,The Big Five and Beyond.tab,dataverse,dataverse_ddi,,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/23NDKX,,2026-10-02
 manolika_2021_movie_preferences,https://dataverse.harvard.edu/api/access/datafile/5600028/metadata/ddi,The Big Five and Beyond.tab,dataverse,dataverse_ddi,,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/23NDKX,,2026-10-02
@@ -6208,6 +6274,10 @@ mendes_2019_snycq,https://dataverse.harvard.edu/api/access/datafile/3322881/meta
 mendes_2019_snycq,https://dataverse.harvard.edu/api/access/datafile/3322882/metadata/ddi,sub-010069_ses-02_task-CPTS_events.tab,dataverse,dataverse_ddi,,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VMJ6NV,,2026-10-02
 mendes_2019_snycq,https://dataverse.harvard.edu/api/access/datafile/3322883/metadata/ddi,sub-010047_ses-02_task-ETS_events.tab,dataverse,dataverse_ddi,,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VMJ6NV,,2026-10-02
 mendes_2019_snycq,https://dataverse.harvard.edu/api/access/datafile/3322884/metadata/ddi,sub-010049_ses-02_task-CPTS_events.tab,dataverse,dataverse_ddi,,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VMJ6NV,,2026-10-02
+mendes_lobao_2018_hpv_attitudes,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0206726.s002,S1_Questionnaire.docx,plos,doc_names_columns,2,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0206726,"names 27/43: b10, b11, c12, c13, c16, c18, c19, c20",2026-11-09
+mendes_lobao_2018_hpv_attitudes,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0206726.s003,file,journals.plos.org,recorded_at_ingest,1,,,2026-11-07
+mendes_lobao_2018_hpv_knowledge,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0206726.s002,S1_Questionnaire.docx,plos,doc_names_columns,2,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0206726,"names 12/24: b10, b11, c22, c31, c33, c34, c35, c36",2026-11-09
+mendes_lobao_2018_hpv_knowledge,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0206726.s003,file,journals.plos.org,recorded_at_ingest,1,,,2026-11-07
 menghini_2023_mdmq,https://osf.io/download/ehw38/,ehw38,osf.io,recorded_at_ingest,1,,,2026-10-04
 menghini_2023_task_control,https://osf.io/download/ehw38/,ehw38,osf.io,recorded_at_ingest,1,,,2026-10-04
 menghini_2023_task_demands,https://osf.io/download/ehw38/,ehw38,osf.io,recorded_at_ingest,1,,,2026-10-04
@@ -6511,6 +6581,8 @@ moreno_jorquera_2025_amtb_integr,https://dataverse.harvard.edu/api/access/datafi
 moreno_jorquera_2025_amtb_intensity,https://dataverse.harvard.edu/api/access/datafile/13255557,13255557,dataverse.harvard.edu,recorded_at_ingest,1,,,2026-10-09
 moreno_jorquera_2025_amtb_interest,https://dataverse.harvard.edu/api/access/datafile/13255557,13255557,dataverse.harvard.edu,recorded_at_ingest,1,,,2026-10-09
 moreno_jorquera_2025_amtb_teacher,https://dataverse.harvard.edu/api/access/datafile/13255557,13255557,dataverse.harvard.edu,recorded_at_ingest,1,,,2026-10-09
+morse_2020_activity_change,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0243697.s010,S1_File.pdf,plos,questionnaire,1,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0243697,caption: Survey instrument. (PDF),2026-11-09
+morse_2020_nature_values,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0243697.s010,S1_File.pdf,plos,questionnaire,1,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0243697,caption: Survey instrument. (PDF),2026-11-09
 mountain_chickadees_2019_2020,https://zenodo.org/records/5576298/files/README.docx,README.docx,zenodo,name_readme,1,https://zenodo.org/records/5576298,not checked,2026-10-02
 movac_pakpour2022,https://dataverse.harvard.edu/api/access/datafile/5796039/metadata/ddi,imputate(fivecountries).tab,dataverse,dataverse_ddi,,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/U8ZYDF,,2026-10-02
 mpsycho_asti,https://search.r-project.org/CRAN/refmans/MPsychoR/html/ASTI.html,MPsychoR::ASTI,cran,package_doc,1,https://cran.r-project.org/package=MPsychoR,,2026-10-02
@@ -6558,6 +6630,10 @@ muir_2025_resilience_opinions,https://journals.plos.org/plosone/article/file?typ
 mullinix_2015_political_knowledge,https://dataverse.harvard.edu/api/access/datafile/2711363/metadata/ddi,Mullinix_PolBeh_Data.tab,dataverse,dataverse_ddi,,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/JC2QJ0,,2026-10-12
 munoztroncoso_2024_vi_gec,https://dataverse.harvard.edu/api/access/datafile/8554715/metadata/ddi,bbdd.tab,dataverse,dataverse_ddi,,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/CQJGFH,,2026-11-06
 munoztroncoso_2024_vi_gec,https://dataverse.harvard.edu/api/access/datafile/8554716,8554716,dataverse.harvard.edu,recorded_at_ingest,1,,,2026-11-04
+muscio_2022_drivers,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0261495.s002,S1_Questionnaire.docx,plos,questionnaire,1,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0261495,caption: (DOCX),2026-11-09
+muscio_2022_obstacles,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0261495.s002,S1_Questionnaire.docx,plos,questionnaire,1,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0261495,caption: (DOCX),2026-11-09
+muscio_2022_phd_rating,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0261495.s002,S1_Questionnaire.docx,plos,questionnaire,1,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0261495,caption: (DOCX),2026-11-09
+muscio_2022_university_env,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0261495.s002,S1_Questionnaire.docx,plos,questionnaire,1,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0261495,caption: (DOCX),2026-11-09
 musifeast17_vanderwalle_2025,https://osf.io/5ebz2/files/osfstorage/66fa8f39f21f872702a85665,2. Participant Data/Raw_data_description.pdf,osf,doc_names_columns,1,https://osf.io/5ebz2/,"names 33/35: PROLIFIC_PID, clip_response.Arousal, clip_response.Contrast, clip_response.Enjoyment, clip_response.Familiarity_specific, clip_response.Familiarity_style, clip_response.Valence, correct_genre",2026-10-04
 musifeast17_vanderwalle_2025,https://osf.io/5ebz2/files/osfstorage/6756d45999dd14fe0703deb6,1. MUSIFEAST-17 Stimuli and Information/MUSIFEAST-17 Normative Data Tables/README_M17_norm_data_description.pdf,osf,name_readme,2,https://osf.io/5ebz2/,names 0/35,2026-10-02
 musifeast17_vanderwalle_2025,https://osf.io/5ebz2/files/osfstorage/6756f6d904f0b76ed856377a,README.pdf,osf,name_readme,2,https://osf.io/5ebz2/,names 0/35,2026-10-02
@@ -7281,6 +7357,7 @@ PEMAIW_Qiu_2020_MLQ,https://osf.io/ph6ks/files/osfstorage/604293ed035cf704dcc7f6
 PEMAIW_Qiu_2020_PANAS,https://osf.io/ph6ks/files/osfstorage/604293ed035cf704dcc7f66b,README.txt,osf,name_readme,1,https://osf.io/ph6ks/,names 0/24,2026-10-02
 PEMAIW_Qiu_2020_SWLS,https://osf.io/ph6ks/files/osfstorage/604293ed035cf704dcc7f66b,README.txt,osf,name_readme,1,https://osf.io/ph6ks/,names 0/9,2026-10-02
 PEPABAS2C_Kubicka_2024,https://dataverse.harvard.edu/api/access/datafile/10477149/metadata/ddi,BAS2_Children_dataset.tab,dataverse,dataverse_ddi,,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/LGXP5A,,2026-10-02
+perez_fuentes_2020_affect_balance,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0235305.s002,file,journals.plos.org,recorded_at_ingest,1,,,2026-11-08
 perez_hernandez_2021_cesd7,https://zenodo.org/api/records/4602365/files/Cuestionario%20Junio%202020.pdf/content,content,zenodo.org,recorded_at_ingest,1,,,2026-10-10
 perez_hernandez_2021_cesd7,https://zenodo.org/records/4602374/files/READ%20Me%20file.txt,READ Me file.txt,zenodo,name_readme,1,https://zenodo.org/records/4602374,names 1/38: state,2026-10-12
 perez_hernandez_2021_elcsa,https://zenodo.org/api/records/4602365/files/Cuestionario%20Junio%202020.pdf/content,content,zenodo.org,recorded_at_ingest,1,,,2026-10-10
@@ -8129,6 +8206,10 @@ purnama_2023_digital_need,https://datadryad.org/downloads/file_stream/2037150,20
 purnama_2023_environment,https://datadryad.org/downloads/file_stream/2037150,2037150,datadryad.org,recorded_at_ingest,1,,,2026-10-09
 purnama_2023_program_benefit,https://datadryad.org/downloads/file_stream/2037150,2037150,datadryad.org,recorded_at_ingest,1,,,2026-10-09
 purnama_2023_threat,https://datadryad.org/downloads/file_stream/2037150,2037150,datadryad.org,recorded_at_ingest,1,,,2026-10-09
+pytlikzillig_2017_dispositional_trust,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0175387.s001,file,journals.plos.org,recorded_at_ingest,1,,,2026-11-07
+pytlikzillig_2017_government_trust,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0175387.s001,file,journals.plos.org,recorded_at_ingest,1,,,2026-11-07
+pytlikzillig_2017_institutional_trust,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0175387.s001,file,journals.plos.org,recorded_at_ingest,1,,,2026-11-07
+pytlikzillig_2017_water_knowledge,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0175387.s001,file,journals.plos.org,recorded_at_ingest,1,,,2026-11-07
 QaSLu_lopez_2024,https://dataverse.harvard.edu/api/access/datafile/10344735/metadata/ddi,Qaslu.tab,dataverse,dataverse_ddi,,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/LUUDQC,,2026-10-02
 QaSLu_lopez_2024,https://dataverse.harvard.edu/api/access/datafile/10364119/metadata/ddi,Qaslu-2.tab,dataverse,dataverse_ddi,,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/LUUDQC,,2026-10-02
 QaSLU_Prado_2024,https://dataverse.harvard.edu/api/access/datafile/10344735/metadata/ddi,Qaslu.tab,dataverse,dataverse_ddi,,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/LUUDQC,,2026-10-02
@@ -8410,6 +8491,9 @@ sexual_selfconcept,https://openpsychometrics.org/_rawdata/MSSCQ.zip,codebook.txt
 SF12_MLCIRTwithin,https://search.r-project.org/CRAN/refmans/MLCIRTwithin/html/SF12.html,MLCIRTwithin::SF12,cran,package_doc,1,https://cran.r-project.org/package=MLCIRTwithin,,2026-10-02
 shan_2024_bfi_s,https://dataverse.harvard.edu/api/access/datafile/10762294,10762294,dataverse.harvard.edu,recorded_at_ingest,1,,,2026-11-04
 shan_2024_bfi_s,https://dataverse.harvard.edu/file.xhtml?fileId=10762294,readme_sz.pdf,dataverse,name_readme,1,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/HIT56P,unreadable,2026-11-06
+shen_2018_dbq,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0190746.s001,file,journals.plos.org,recorded_at_ingest,1,,,2026-11-08
+shen_2018_dddi,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0190746.s001,file,journals.plos.org,recorded_at_ingest,1,,,2026-11-08
+shen_2018_pdbs,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0190746.s001,file,journals.plos.org,recorded_at_ingest,1,,,2026-11-08
 shen_2025_bsmas,https://doi.org/10.7717/peerj.19707/supp-3,supp-3,doi.org,recorded_at_ingest,1,,,2026-10-04
 shen_2025_bsmas,https://pmc.ncbi.nlm.nih.gov/articles/instance/12296581/bin/peerj-13-19707-s003.doc,peerj-13-19707-s003.doc,epmc,name_codebook,1,https://europepmc.org/article/PMC/PMC12296581,caption: Codebook,2026-10-05
 shen_2025_dass21,https://doi.org/10.7717/peerj.19707/supp-3,supp-3,doi.org,recorded_at_ingest,1,,,2026-10-04
@@ -8418,6 +8502,7 @@ shen_2025_igds9sf,https://doi.org/10.7717/peerj.19707/supp-3,supp-3,doi.org,reco
 shen_2025_igds9sf,https://pmc.ncbi.nlm.nih.gov/articles/instance/12296581/bin/peerj-13-19707-s003.doc,peerj-13-19707-s003.doc,epmc,name_codebook,1,https://europepmc.org/article/PMC/PMC12296581,caption: Codebook,2026-10-05
 shen_2025_sabas,https://doi.org/10.7717/peerj.19707/supp-3,supp-3,doi.org,recorded_at_ingest,1,,,2026-10-04
 shen_2025_sabas,https://pmc.ncbi.nlm.nih.gov/articles/instance/12296581/bin/peerj-13-19707-s003.doc,peerj-13-19707-s003.doc,epmc,name_codebook,1,https://europepmc.org/article/PMC/PMC12296581,caption: Codebook,2026-10-05
+shi_2026_ai_offloading,https://dataverse.harvard.edu/api/access/datafile/14381801/metadata/ddi,analysis_wide.tab,dataverse,dataverse_ddi,,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/QKL3Q6,,2026-11-09
 short_dark_triad,https://openpsychometrics.org/_rawdata/SD3.zip,codebook.txt (inside SD3.zip),opsych,name_codebook,1,https://openpsychometrics.org/_rawdata/SD3.zip,in zip: SD3/codebook.txt,2026-10-02
 siguenza_2025_ucla,https://osf.io/9zw43/,9zw43,osf.io,recorded_at_ingest,1,,,2026-10-27
 sijbrandij_2018_eq5d5l,https://dataverse.nl/api/access/datafile/11674,11674,dataverse.nl,recorded_at_ingest,1,,,2026-10-07
@@ -9118,6 +9203,9 @@ talaifar_2025_study2_plp,https://osf.io/rf9k8/files/osfstorage/662825d1c5851a0b4
 talaifar_2025_study2_plp,https://osf.io/rf9k8/files/osfstorage/662825d580d25c0b58f91935,Study 1 - Actual Lifestyle Polarization/Survey Materials/Handbook_ Spring 2017 Survey measures.pdf,osf,doc_names_columns,2,https://osf.io/rf9k8/,"names 10/201: demog_academicclass, demog_age, demog_currentemployment, demog_currentlylivinginaustin, demog_ethnicity, demog_perceivedses, demog_politicalorientation, demog_relationshipstatus",2026-10-04
 talaifar_2025_study2_thermometer,https://osf.io/rf9k8/files/osfstorage/662825d1c5851a0b44f66f2e,Study 1 - Actual Lifestyle Polarization/Survey Materials/Handbook_ Fall 2016 Survey measures.pdf,osf,doc_names_columns,2,https://osf.io/rf9k8/,"names 12/173: conservative, demog_academicclass, demog_age, demog_currentemployment, demog_currentlylivinginaustin, demog_ethnicity, demog_perceivedses, demog_politicalorientation",2026-10-04
 talaifar_2025_study2_thermometer,https://osf.io/rf9k8/files/osfstorage/662825d580d25c0b58f91935,Study 1 - Actual Lifestyle Polarization/Survey Materials/Handbook_ Spring 2017 Survey measures.pdf,osf,doc_names_columns,2,https://osf.io/rf9k8/,"names 12/173: conservative, demog_academicclass, demog_age, demog_currentemployment, demog_currentlylivinginaustin, demog_ethnicity, demog_perceivedses, demog_politicalorientation",2026-10-04
+talarowska_dublicka_2026_banps,https://osf.io/download/6a8c59d0861c2a5862ff208e/,6a8c59d0861c2a5862ff208e,osf.io,recorded_at_ingest,1,,,2026-11-08
+talarowska_dublicka_2026_ucla,https://osf.io/download/6a8c59d0861c2a5862ff208e/,6a8c59d0861c2a5862ff208e,osf.io,recorded_at_ingest,1,,,2026-11-08
+talarowska_dublicka_2026_ysq_s3,https://osf.io/download/6a8c59d0861c2a5862ff208e/,6a8c59d0861c2a5862ff208e,osf.io,recorded_at_ingest,1,,,2026-11-08
 talek_hyenas_females_1988_2015,https://zenodo.org/records/5009497/files/README_for_FinalSubmissionDryad.pdf,README_for_FinalSubmissionDryad.pdf,zenodo,name_readme,1,https://zenodo.org/records/5009497,not checked,2026-10-02
 talek_hyenas_males_1988_2014,https://zenodo.org/records/5009497/files/README_for_FinalSubmissionDryad.pdf,README_for_FinalSubmissionDryad.pdf,zenodo,name_readme,1,https://zenodo.org/records/5009497,not checked,2026-10-02
 talukder_2024_dmss_conditional_value,https://doi.org/10.1371/journal.pone.0315009.s004,journal.pone.0315009.s004,doi.org,recorded_at_ingest,1,,,2026-11-02
@@ -9364,6 +9452,10 @@ vezhodulu_2025_celebrity_worship,https://ndownloader.figshare.com/files/60549590
 vezhodulu_2025_rses,https://ndownloader.figshare.com/files/60549590,60549590,ndownloader.figshare.com,recorded_at_ingest,1,,,2026-10-20
 vezhodulu_2025_yabis_a,https://ndownloader.figshare.com/files/60549590,60549590,ndownloader.figshare.com,recorded_at_ingest,1,,,2026-10-20
 vezhodulu_2025_yabis_b,https://ndownloader.figshare.com/files/60549590,60549590,ndownloader.figshare.com,recorded_at_ingest,1,,,2026-10-20
+vicens_2021_bis11,https://ssh.datastations.nl/api/access/datafile/20885,20885,ssh.datastations.nl,recorded_at_ingest,1,,,2026-11-07
+vicens_2021_erq,https://ssh.datastations.nl/api/access/datafile/20885,20885,ssh.datastations.nl,recorded_at_ingest,1,,,2026-11-07
+vicens_2021_hads,https://ssh.datastations.nl/api/access/datafile/20885,20885,ssh.datastations.nl,recorded_at_ingest,1,,,2026-11-07
+vicens_2021_pss,https://ssh.datastations.nl/api/access/datafile/20885,20885,ssh.datastations.nl,recorded_at_ingest,1,,,2026-11-07
 vila_lopez_2023_awareness,https://zenodo.org/records/10254868/files/base%20de%20datos%20general.sav,base de datos general.sav,zenodo.org,recorded_at_ingest,1,,,2026-10-18
 vila_lopez_2023_credibility,https://zenodo.org/records/10254868/files/base%20de%20datos%20general.sav,base de datos general.sav,zenodo.org,recorded_at_ingest,1,,,2026-10-18
 vila_lopez_2023_loyalty,https://zenodo.org/records/10254868/files/base%20de%20datos%20general.sav,base de datos general.sav,zenodo.org,recorded_at_ingest,1,,,2026-10-18
