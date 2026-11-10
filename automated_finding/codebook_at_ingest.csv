@@ -80,6 +80,10 @@ alhatmi_2026_oman_graduate_hiring,conj,https://dataverse.harvard.edu/api/access/
 ali_2022_covid_headlines,core,none,2026-10-15
 ali_2022_info_source_freq,core,none,2026-10-15
 ali_2026_gses,core,none,2026-10-07
+aljabry_2026_bes,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0360433.s001,2026-11-09
+aljabry_2026_msg_ffq,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0360433.s001,2026-11-09
+aljabry_2026_pss4,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0360433.s001,2026-11-09
+aljabry_2026_yfas,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0360433.s001,2026-11-09
 almuqrin_2021_ks_altruism,core,none,2026-11-02
 almuqrin_2021_ks_collection,core,none,2026-11-02
 almuqrin_2021_ks_community_outcome,core,none,2026-11-02
@@ -2029,6 +2033,11 @@ kul_2026_math_self_concept,core,https://ndownloader.figshare.com/files/67746372,
 kul_2026_math_self_efficacy,core,https://ndownloader.figshare.com/files/67746372,2026-10-02
 kustov_2026_populism_mobilization,conj,https://dataverse.harvard.edu/api/access/datafile/13439087,2026-10-11
 kyrkopoulou_2026_immigrants_greece,conj,none,2026-10-09
+lam_2015_chq12,core,none,2026-11-09
+lam_2015_clotr,core,none,2026-11-09
+lam_2015_cpps_stage1,core,none,2026-11-09
+lam_2015_cpps_stage2,core,none,2026-11-09
+lam_2015_gses,core,none,2026-11-09
 landgrave_2025_pac_contributions,conj,https://dataverse.harvard.edu/api/access/datafile/12019812,2026-10-09
 lane_2020_pss,core,https://zenodo.org/api/records/4264764/files/Stress_Questionnaire_for_Medical_Students_November_2020.docx/content,2026-10-06
 lara_2024_equality_mobility,conj,https://dataverse.harvard.edu/api/access/datafile/6415312,2026-10-09
@@ -4431,6 +4440,13 @@ torcal_2026_neighbours_chile,conj,https://osf.io/download/u59c2/,2026-10-07
 torcal_2026_neighbours_italy,conj,https://osf.io/download/y8ntj/,2026-10-07
 torcal_2026_neighbours_portugal,conj,https://osf.io/download/tu5wh/,2026-10-07
 torcal_2026_neighbours_spain,conj,https://osf.io/download/w56b2/,2026-10-07
+tran_2026_ai_advisory_transparency,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0353922.s002,2026-11-09
+tran_2026_cyber_risk_self_protection,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0353922.s002,2026-11-09
+tran_2026_digital_financial_literacy,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0353922.s002,2026-11-09
+tran_2026_digital_wealth_mgmt_behavior,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0353922.s002,2026-11-09
+tran_2026_investment_knowledge,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0353922.s002,2026-11-09
+tran_2026_trust_hybrid_ai_advisory,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0353922.s002,2026-11-09
+tran_2026_wealth_mgmt_capability,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0353922.s002,2026-11-09
 tranvag_2021_precision_medicine,conj,https://ndownloader.figshare.com/files/27956723,2026-10-11
 traunmuller_2020_religion_vignette,conj,none,2026-10-11
 treger_2022_policy_party_cues,conj,https://dataverse.harvard.edu/api/access/datafile/14319674,2026-10-11
@@ -4549,6 +4565,8 @@ vocabulary_iq_survey,core,https://openpsychometrics.org/_rawdata/VIQT_data.zip,2
 vogel_2024_attribute_valence_s3,core,https://zenodo.org/records/12732523/files/Study3_Codebook.xlsx,2026-10-11
 vogel_2024_citizen_attributes_s2,core,https://zenodo.org/records/12732523/files/Study2_Codebook.xlsx,2026-10-11
 vogel_2024_citizen_attributes_s3,core,https://zenodo.org/records/12732523/files/Study3_Codebook.xlsx,2026-10-11
+vonborck_2026_kidkindl_selfesteem,core,none,2026-11-09
+vonborck_2026_ppasc,core,none,2026-11-09
 vossler_2025_farmworker_projects,conj,https://dataverse.harvard.edu/api/access/datafile/14100684,2026-10-08
 voterautrement_2017_borda4,rank,https://zenodo.org/records/1199545/files/voter-autrement-online.pdf,2026-10-15
 voterautrement_2017_irv1,rank,https://zenodo.org/records/1199545/files/voter-autrement-online.pdf,2026-10-15
