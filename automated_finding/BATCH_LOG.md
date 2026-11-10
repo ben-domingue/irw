@@ -27143,11 +27143,11 @@ nodes whose listing errored (a000424 `2rmsj`, a000465 `528qe`).
   sample with date of birth, diagnoses and medication), a000410 and a000413 (no
   data files).
 
-## 2026-11-10h — hour run lane B (lane C's unworked leads, JEEHP collection first): 15 deposits, 24 tables, 584,832 responses; 5 held
+## 2026-11-10h — hour run lane B (lane C's unworked leads, JEEHP collection first): 16 deposits, 25 tables, 587,820 responses; 5 held
 
 No new searches. Worked the leads lane C left `unworked` overnight, ranked by instrument shape
 (item-level scale data with a paper to check against first). Hand-off:
-`~/irw-wt/hour-1110/hour-1110-b.md`. All 24 tables pass `irw-validate --profile upload` and
+`~/irw-wt/hour-1110/hour-1110-b.md`. All 25 tables pass `irw-validate --profile upload` and
 `irw_lint_covariates.py`; no `__items` tables (no register rows for these instruments).
 
 - **Shipped, JEEHP collection (CC0, Harvard Dataverse):** kim_2024_dreem + kim_2024_ams_im
@@ -27163,6 +27163,10 @@ No new searches. Worked the leads lane C left `unworked` overnight, ranked by in
 - **Shipped, lane C sweep 2:** flegr_2021_stai_trait + flegr_2021_pss (figshare 14651490,
   CC BY 4.0). Items ship raw: the documented reverse-keyed items are exactly the ones with
   negative item-rest correlations, although the deposit's total columns equal raw means.
+  mastrothanasis_2026_sprs_s (DVN/JJ0C6Z, CC0, .sav): students rate the simulated patient;
+  covariates ship as codes with SPSS value labels. The covariate-label harvest was run
+  (`--commit HEAD`) and logged the labels, but `build.py` only writes rows for tables already
+  in metadata.csv, so covariate_labels.csv picks this table up on its first build after release.
 - **Held (write-ups in the hand-off):** XD2QMD Chile dental (946 rows vs paper 935, splits off
   by a handful, a 4.2 cell, an undocumented 28-item block); 3JDN9S self-directed learning
   (pre-scored reversals unverifiable); BVYQBN R-SPQ-2F (paper's deep mean does not reproduce);
@@ -27173,4 +27177,4 @@ No new searches. Worked the leads lane C left `unworked` overnight, ranked by in
   BUGCNN/F1RSQA/UAOMR7/DJNHCM/WFBF0U deferred (reversal, scale-vs-paper or layout questions).
 - Item codes renamed to get past the covariate linter: KIRA `w_surv_role` -> `w_surv_roles_clear`;
   teleOSCE "Family & psychology background" -> `*_Family_psych_history`.
-- Remaining leads (64 unworked + 5 deferred) are carried in `leads/repos_leads_2026-11-10hb.csv`.
+- Remaining leads (63 unworked + 5 deferred) are carried in `leads/repos_leads_2026-11-10hb.csv`.
