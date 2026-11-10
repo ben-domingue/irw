@@ -24,6 +24,7 @@
 # Item text: not shipped -- Spanish stems in the SPSS variable labels; cheap later, needs
 #   register rows for BFI-15P/MBI-SS/PANSI (MBI is proprietary).
 import tempfile
+import sys
 from pathlib import Path
 
 import pandas as pd
@@ -31,6 +32,14 @@ import pyreadstat
 import requests
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(REPO_ROOT))
+from irw_validate._checks import run_qc  # noqa: E402
+
+
+def gate(t):
+    fails = [c for c in run_qc(t) if c.status == "fail"]
+    assert not fails, fails
+
 OUT = REPO_ROOT / "automated_finding" / "irw_output"
 URL = "https://zenodo.org/api/records/23790531/files/Analisis%20de%20datos.sav/content"
 
@@ -60,6 +69,7 @@ def main():
         t["item"] = name + "_" + t["item"].str[len(p):]   # Items_02_07 -> mbiss_07
         assert t["resp"].between(lo, hi).all()
         t = t[["id", "item", "resp"] + covs].sort_values(["id", "item"])
+        gate(t)
         t.to_csv(OUT / f"veramendoza_2026_{name}.csv", index=False)
         print(name, len(t), t.id.nunique(), t.item.nunique())
 

@@ -16,12 +16,21 @@
 #   administered wording is in the paper's Additional file 1 / Imaizumi et al. 2016, not
 #   in this deposit.
 import io
+import sys
 from pathlib import Path
 
 import pandas as pd
 import requests
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(REPO_ROOT))
+from irw_validate._checks import run_qc  # noqa: E402
+
+
+def gate(t):
+    fails = [c for c in run_qc(t) if c.status == "fail"]
+    assert not fails, fails
+
 OUT = REPO_ROOT / "automated_finding" / "irw_output"
 URL = "https://ndownloader.figshare.com/files/10489654"
 
@@ -40,6 +49,7 @@ def main():
     t["resp"] = t["resp"].astype(int)
     assert t["resp"].between(1, 5).all()
     t = t[["id", "item", "resp", "cov_sex", "cov_age"]].sort_values(["id", "item"])
+    gate(t)
     t.to_csv(OUT / "imaizumi_2018_trypophobia.csv", index=False)
     print(len(t), t.id.nunique(), t.item.nunique())
 

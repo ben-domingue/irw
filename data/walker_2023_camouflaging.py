@@ -30,12 +30,21 @@
 #   cov_sexuality, cov_ethnicity (as deposited).
 # Item text: not shipped -- the deposit has item numbers only.
 import io
+import sys
 from pathlib import Path
 
 import pandas as pd
 import requests
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(REPO_ROOT))
+from irw_validate._checks import run_qc  # noqa: E402
+
+
+def gate(t):
+    fails = [c for c in run_qc(t) if c.status == "fail"]
+    assert not fails, fails
+
 OUT = REPO_ROOT / "automated_finding" / "irw_output"
 URL = "https://ndownloader.figshare.com/files/41894244"
 
@@ -73,6 +82,7 @@ def main():
         t["item"] = name + "_" + t["item"].astype(int).astype(str).str.zfill(2)
         t = t.merge(demo[["id"] + covs], on="id", how="left", validate="many_to_one")
         t = t[["id", "item", "resp"] + covs].sort_values(["id", "item"])
+        gate(t)
         t.to_csv(OUT / f"walker_2023_{name}.csv", index=False)
         print(name, len(t), t.id.nunique(), t.item.nunique())
 

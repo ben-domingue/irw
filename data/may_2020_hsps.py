@@ -21,12 +21,21 @@
 #   labels; BTT "Mixed ancestry" kept as is), cov_age and cov_home_language (students only).
 # Item text: not shipped -- item numbers only; HSPS wording is in Aron & Aron (1997).
 import io
+import sys
 from pathlib import Path
 
 import pandas as pd
 import requests
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(REPO_ROOT))
+from irw_validate._checks import run_qc  # noqa: E402
+
+
+def gate(t):
+    fails = [c for c in run_qc(t) if c.status == "fail"]
+    assert not fails, fails
+
 OUT = REPO_ROOT / "automated_finding" / "irw_output"
 BASE = "https://data.mendeley.com/public-files/datasets/32p7btkgr4/files/"
 URL_BTT = BASE + "2d9395fe-55ce-49cc-9e7c-074aec346de3/file_downloaded"
@@ -67,6 +76,7 @@ def main():
     t["resp"] = t["resp"].astype(int)
     assert t["resp"].between(1, 7).all() and not t.duplicated(["id", "item"]).any()
     t = t[["id", "item", "resp"] + covs].sort_values(["id", "item"])
+    gate(t)
     t.to_csv(OUT / "may_2020_hsps.csv", index=False)
     print(len(t), t.id.nunique(), t.item.nunique())
 

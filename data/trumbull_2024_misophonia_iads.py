@@ -39,6 +39,7 @@
 #   snap/iip/aim and value labels carry options; not attempted this batch (no register
 #   row for PAI/SNAP/IIP; time). Sound items have no labels naming the IADS stimulus.
 import io
+import sys
 from pathlib import Path
 import re
 import tempfile
@@ -49,6 +50,14 @@ import pyreadstat
 import requests
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(REPO_ROOT))
+from irw_validate._checks import run_qc  # noqa: E402
+
+
+def gate(t):
+    fails = [c for c in run_qc(t) if c.status == "fail"]
+    assert not fails, fails
+
 OUT = REPO_ROOT / "automated_finding" / "irw_output"
 URL = "https://zenodo.org/api/records/10927571/files/IADS_Data_Clean.sav/content"
 
@@ -105,6 +114,7 @@ def main():
         long["resp"] = long["resp"].astype(int)
         long = long[["id", "item", "resp"] + covs].sort_values(["id", "item"])
         out = OUT / f"trumbull_2024_{name}.csv"
+        gate(long)
         long.to_csv(out, index=False)
         print(out.name, len(long), long["id"].nunique(), long["item"].nunique(),
               sorted(long["resp"].unique()))

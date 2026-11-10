@@ -24,6 +24,7 @@
 # Item text: not shipped -- SPSS variable labels carry English stems for all 46 items;
 #   cheap later, needs register rows for CDAT/CM-R/KPS-S2.
 import tempfile
+import sys
 from pathlib import Path
 
 import pandas as pd
@@ -31,6 +32,14 @@ import pyreadstat
 import requests
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(REPO_ROOT))
+from irw_validate._checks import run_qc  # noqa: E402
+
+
+def gate(t):
+    fails = [c for c in run_qc(t) if c.status == "fail"]
+    assert not fails, fails
+
 OUT = REPO_ROOT / "automated_finding" / "irw_output"
 URL = ("https://data.mendeley.com/public-files/datasets/gbh5mt36hk/files/"
        "f1362f05-cda3-4521-ab9e-fe1bc36adb00/file_downloaded")
@@ -63,6 +72,7 @@ def main():
         t["resp"] = t["resp"].astype(int)
         assert t["resp"].between(1, top).all()
         t = t[["id", "item", "resp"] + covs].sort_values(["id", "item"])
+        gate(t)
         t.to_csv(OUT / f"paszkowskarogacz_2023_{name}.csv", index=False)
         print(name, len(t), t.id.nunique(), t.item.nunique())
 

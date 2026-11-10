@@ -47,12 +47,21 @@
 #   (Field Label / Choices); no register rows yet for DMSS/IHS/OASIS/ODSIS/RLSS/SSS-8.
 #   Cheap later from that one file.
 from io import BytesIO
+import sys
 from pathlib import Path
 
 import pandas as pd
 import requests
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(REPO_ROOT))
+from irw_validate._checks import run_qc  # noqa: E402
+
+
+def gate(t):
+    fails = [c for c in run_qc(t) if c.status == "fail"]
+    assert not fails, fails
+
 OUT_DIR = REPO_ROOT / "automated_finding" / "irw_output"
 URL_DATA = "https://osf.io/download/3xamc/"
 URL_DICT = "https://osf.io/download/efr89/"
@@ -112,6 +121,7 @@ def main():
             assert t["item"].notna().all() and t["item"].nunique() == len(cols)
         t = t[["id", "item", "resp"] + covs].sort_values(["id", "item"]).reset_index(drop=True)
         assert not t.duplicated(["id", "item"]).any() and t["id"].nunique() >= 100
+        gate(t)
         t.to_csv(OUT_DIR / f"williams_2022_{name}.csv", index=False)
         print(f"williams_2022_{name}: rows={len(t)} ids={t['id'].nunique()} items={t['item'].nunique()} "
               f"resp={sorted(t['resp'].unique())}")

@@ -28,6 +28,7 @@
 #   stems; MisoQuest_TurkishVersion.pdf is in the deposit. No register row yet.
 import io
 import tempfile
+import sys
 from pathlib import Path
 
 import pandas as pd
@@ -35,6 +36,14 @@ import pyreadstat
 import requests
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(REPO_ROOT))
+from irw_validate._checks import run_qc  # noqa: E402
+
+
+def gate(t):
+    fails = [c for c in run_qc(t) if c.status == "fail"]
+    assert not fails, fails
+
 OUT = REPO_ROOT / "automated_finding" / "irw_output"
 URL1 = "https://ndownloader.figshare.com/files/45381304"
 URL2 = "https://ndownloader.figshare.com/files/45381310"
@@ -75,6 +84,7 @@ def main():
     covs = ["cov_age", "cov_gender", "cov_education", "cov_study"]
     mq = pd.concat([long(a, M, covs), long(b, M, covs)], ignore_index=True)
     assert mq["resp"].between(1, 5).all() and not mq.duplicated(["id", "item"]).any()
+    gate(mq)
     mq.to_csv(OUT / "ay_2024_misoquest.csv", index=False)
     print("misoquest", len(mq), mq.id.nunique())
 
@@ -85,6 +95,7 @@ def main():
     for name, cols in (("stai_state", state), ("stai_trait", trait)):
         t = long(b, cols, covs2, rename={c: c.split("_")[0] for c in cols})
         assert t["resp"].between(1, 4).all() and t["item"].nunique() == 20
+        gate(t)
         t.to_csv(OUT / f"ay_2024_{name}.csv", index=False)
         print(name, len(t), t.id.nunique())
 

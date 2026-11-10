@@ -24,12 +24,21 @@
 # Item text: not shipped -- the deposit has column codes only; instruments are published
 #   elsewhere (Italian YSQ-S3, PID-5-BF, BDI-II are copyrighted).
 import io
+import sys
 from pathlib import Path
 
 import pandas as pd
 import requests
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(REPO_ROOT))
+from irw_validate._checks import run_qc  # noqa: E402
+
+
+def gate(t):
+    fails = [c for c in run_qc(t) if c.status == "fail"]
+    assert not fails, fails
+
 OUT = REPO_ROOT / "automated_finding" / "irw_output"
 URL = ("https://data.mendeley.com/public-files/datasets/wybf5zgdmj/files/"
        "8ab54c45-6e02-424d-854e-90968d1474fc/file_downloaded")
@@ -61,6 +70,7 @@ def main():
         t["resp"] = t["resp"].astype(int)
         assert t["resp"].between(lo, hi).all(), name
         t = t[["id", "item", "resp"] + covs].sort_values(["id", "item"])
+        gate(t)
         t.to_csv(OUT / f"fazi_2026_{name}.csv", index=False)
         print(name, len(t), t.id.nunique(), t.item.nunique())
 
