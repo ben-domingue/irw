@@ -1,5 +1,24 @@
 # IRW Automated Finding — TODO
 
+## Hour run 2026-11-10 lane E (repos mode 3, 8 new terms x 9 languages) — 37 tables staged, 1 held
+
+Full write-up in `BATCH_LOG.md` (2026-11-10 — Hour run lane E). Hand-off: `~/irw-wt/hour-1110/hour-1110-e.md`.
+
+- [ ] **Upload (orchestrator)**: 37 response tables (321,037 responses) from
+  `~/irw-wt/hour-1110-e/automated_finding/irw_output/`: trumbull_2024 x10, williams_2022 x7
+  (companions to the live williams_2022_dvmsq, same ids), imaizumi_2018_trypophobia,
+  ay_2024 x3, paszkowskarogacz_2023 x3, fazi_2026 x5, veramendoza_2026 x3, walker_2023 x5.
+  No item text tables.
+- [ ] **Ben rules on hold**: jakubovski_2022 (Mendeley zjrt56tcnx, German population misophonia
+  survey, n=2,519, 6 tables built in `runs/held/jakubovski_2022/`). The raw file has birth
+  month + birth year (no day) for every respondent; the script drops both. Is month+year
+  a date of birth under the PII rule? Yes-it-is = skip; no = ship the 6 tables.
+- [ ] Item text is cheap later from deposit files for williams_2022_* (REDCap dictionary),
+  trumbull_2024 questionnaires (SPSS labels), paszkowskarogacz_2023 and veramendoza_2026
+  (SPSS labels), ay_2024 (Turkish SPSS labels + MisoQuest PDF); all need register rows.
+- [ ] Zenodo returned 429 on 22 of the 72 queries during the parallel run; a zenodo-only
+  re-run of those 22 recovered 15 new candidates (5 triaged, none usable).
+
 ## Overnight 2026-11-10 lane D (Europe PMC) — 36 tables staged, 6 held
 
 Full write-up in `BATCH_LOG.md` (2026-11-10 — Overnight lane D). Hand-off: `~/irw-wt/overnight-1110/overnight-1110-d.md`.
