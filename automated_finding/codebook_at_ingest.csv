@@ -2004,6 +2004,9 @@ kolcava_2022_supply_chain_switzerland,conj,https://dataverse.harvard.edu/api/acc
 kolcava_2022_supply_chain_uk,conj,https://dataverse.harvard.edu/api/access/datafile/6491246,2026-10-08
 kolcava_2022_supply_chain_us,conj,https://dataverse.harvard.edu/api/access/datafile/6491246,2026-10-08
 koliev_2026_unfccc_reform,conj,https://dataverse.harvard.edu/api/access/datafile/14011609,2026-10-09
+komalasari_2026_behav_intention,core,none,2026-11-09
+komalasari_2026_financial_risk,core,none,2026-11-09
+komalasari_2026_initial_trust,core,none,2026-11-09
 konuralp_2026_climate_attitudes,core,https://zenodo.org/records/20734378/files/igdir_survey_codebook.csv,2026-10-18
 konuralp_2026_party_environment,core,https://zenodo.org/records/20734378/files/igdir_survey_codebook.csv,2026-10-18
 koob_2026_protest_dimensions,conj,none,2026-10-09
@@ -2661,6 +2664,14 @@ myrick_2019_covert_exp2,conj,https://dataverse.harvard.edu/api/access/datafile/3
 myrick_2019_covert_exp3,conj,https://dataverse.harvard.edu/api/access/datafile/3338457,2026-10-11
 myrick_2019_covert_exp4,conj,https://dataverse.harvard.edu/api/access/datafile/3338457,2026-10-11
 nadar_2024_art_pedodontists,conj,none,2026-10-12
+nadif_2026_genai_use,core,none,2026-11-09
+nadif_2026_integrity,core,none,2026-11-09
+nadif_2026_memory_loss,core,none,2026-11-09
+nadif_2026_performance,core,none,2026-11-09
+nadif_2026_procrastination,core,none,2026-11-09
+nadif_2026_reward_seeking,core,none,2026-11-09
+nadif_2026_study_pressure,core,none,2026-11-09
+nadif_2026_time_pressure,core,none,2026-11-09
 nagawa_2026_aid_departments,conj,none,2026-10-09
 nagawa_2026_aid_projects,conj,none,2026-10-09
 nair_2022_covax_agreement_lucid,conj,https://dataverse.harvard.edu/api/access/datafile/6413680,2026-10-09
@@ -3957,6 +3968,8 @@ ren_2026_moral_decoupling,core,none,2026-10-30
 repochat_arena_2024_2025,comps,none,2026-10-27
 rexand_galais_2022_ipo,core,https://data.mendeley.com/public-files/datasets/tv6w6yyfy8/files/c2423e76-508e-4568-acc8-fea752230367/file_downloaded,2026-10-07
 rexand_galais_2022_ipofr,core,https://data.mendeley.com/public-files/datasets/tv6w6yyfy8/files/c2423e76-508e-4568-acc8-fea752230367/file_downloaded,2026-10-07
+ribar_2026_bfi2,core,none,2026-11-09
+ribar_2026_delta,core,none,2026-11-09
 ridge_2024_regime_egypt,conj,https://dataverse.harvard.edu/api/access/datafile/7094634,2026-10-07
 ridge_2024_regime_morocco,conj,https://dataverse.harvard.edu/api/access/datafile/7094634,2026-10-07
 rimisp_2021_care_work,core,https://dataverse.harvard.edu/api/access/datafile/6550055,2026-10-21
@@ -4027,6 +4040,7 @@ rumangkit_2025_cloy,core,none,2026-10-18
 rumangkit_2025_commitment,core,none,2026-10-18
 rumangkit_2025_csat,core,none,2026-10-18
 rumangkit_2025_esq,core,none,2026-10-18
+rumangkit_2025_ewom_purchase,core,none,2026-11-09
 rumangkit_2025_gamification,core,none,2026-10-18
 rumangkit_2025_intention,core,none,2026-10-18
 rumangkit_2025_passion,core,none,2026-10-18
