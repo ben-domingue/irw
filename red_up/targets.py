@@ -225,6 +225,8 @@ def newest_shard(targets: list[Target]) -> Target:
 #: released), so new tables go to the newest shard. Still unpinned on
 #: 2026-10-21, when that newest shard became item_response_warehouse_8:
 #: registering a shard is all it takes to redirect new tables to it.
+#: 2026-11-09: still unpinned; item_response_warehouse_9 registered with shard 8
+#: at 864 released tables, so new tables now go to shard 9.
 CORE_DEFAULT: str | None = None
 
 
