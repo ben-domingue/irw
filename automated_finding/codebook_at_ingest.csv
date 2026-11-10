@@ -1343,6 +1343,9 @@ gori_2020_cope,core,none,2026-10-06
 gori_2020_dsq40,core,none,2026-10-06
 gori_2020_pss10,core,none,2026-10-06
 gori_2020_swls,core,none,2026-10-06
+gori_2021_dsq40,core,none,2026-11-09
+gori_2021_iesr,core,none,2026-11-09
+gori_2021_tipi,core,none,2026-11-09
 gosciak_2026_immigrant_admission,conj,https://dataverse.harvard.edu/api/access/datafile/13311158,2026-10-08
 gothreau_2026_women_candidates,conj,https://dataverse.harvard.edu/api/access/datafile/13638282,2026-10-07
 graham_2020_undemocratic_candidates,conj,https://dataverse.harvard.edu/api/access/datafile/3654018,2026-10-09
@@ -1781,6 +1784,10 @@ jin_2025_folk_inheritance_intermediary,core,none,2026-10-30
 jin_2025_folk_inheritance_object,core,none,2026-10-30
 jin_2025_folk_inheritance_subject,core,none,2026-10-30
 jo_2023_via_adoption,core,https://zenodo.org/api/records/7982557/files/README.md/content,2026-10-10
+johansson_2020_c30,core,none,2026-11-09
+johansson_2020_gtq,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0243805.s002,2026-11-09
+johansson_2020_hads,core,none,2026-11-09
+johansson_2020_hn35,core,none,2026-11-09
 johnston_2024_csi,core,none,2026-10-20
 johnston_2024_satq,core,none,2026-10-20
 johnston_2024_spsq,core,none,2026-10-20
@@ -2060,6 +2067,10 @@ lam_2015_cpps_stage2,core,none,2026-11-09
 lam_2015_gses,core,none,2026-11-09
 landgrave_2025_pac_contributions,conj,https://dataverse.harvard.edu/api/access/datafile/12019812,2026-10-09
 lane_2020_pss,core,https://zenodo.org/api/records/4264764/files/Stress_Questionnaire_for_Medical_Students_November_2020.docx/content,2026-10-06
+lara_2022_cfq_g56,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0272871.s001,2026-11-09
+lara_2022_cfq_g78,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0272871.s001,2026-11-09
+lara_2022_sce_g56,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0272871.s001,2026-11-09
+lara_2022_sce_g78,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0272871.s001,2026-11-09
 lara_2024_equality_mobility,conj,https://dataverse.harvard.edu/api/access/datafile/6415312,2026-10-09
 larsen_2024_apartment_opposition,conj,https://dataverse.harvard.edu/api/access/datafile/10163619,2026-10-11
 larsen_2025_welfare_chauvinism,conj,https://dataverse.harvard.edu/api/access/datafile/11579096,2026-10-09
@@ -4300,6 +4311,9 @@ spilker_2016_pta_partners_nicaragua,conj,https://dataverse.harvard.edu/api/acces
 spilker_2018_trade_costa_rica,conj,none,2026-10-07
 spilker_2018_trade_nicaragua,conj,none,2026-10-07
 spilker_2018_trade_vietnam,conj,none,2026-10-07
+stahl_2021_bfas,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0258228.s001,2026-11-09
+stahl_2021_irs,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0258228.s001,2026-11-09
+stahl_2021_mrs,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0258228.s001,2026-11-09
 stamm_2023_vaccine_campaign,conj,https://dataverse.harvard.edu/api/access/datafile/6909130,2026-10-08
 stamm_2023_vaccine_media,conj,https://dataverse.harvard.edu/api/access/datafile/6909130,2026-10-08
 stamuli_2020_fnp_outcomes_a,conj,https://dataverse.harvard.edu/api/access/datafile/3892213,2026-10-08
