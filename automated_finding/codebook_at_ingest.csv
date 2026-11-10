@@ -1496,6 +1496,8 @@ harlianto_2025_cyberloafing,core,none,2026-10-07
 harlianto_2025_job_stress,core,none,2026-10-07
 harris_2023_neighbor_cooperation,conj,none,2026-10-08
 harsgor_2023_covid_aid_palestinians,conj,https://dataverse.harvard.edu/api/access/datafile/7276978,2026-10-08
+hart_2021_covid_concern,core,none,2026-11-10
+hart_2021_trump_support,core,none,2026-11-10
 hartman_2020_refugee_hosting,conj,https://dataverse.harvard.edu/api/access/datafile/3052167,2026-10-09
 hartmann_2023_covid_restrictions,conj,https://dataverse.harvard.edu/api/access/datafile/7103007,2026-10-08
 hartmann_2026_ai_env_awareness,core,none,2026-10-18
@@ -1781,6 +1783,7 @@ jackson_2020_leq,core,none,2026-11-02
 jackson_2020_pni,core,none,2026-11-02
 jager_2023_security_liberties,conj,none,2026-10-09
 jamal_2022_fdi_tunisia,conj,none,2026-10-07
+jankowska_2021_eq5d5l,core,none,2026-11-10
 jankowski_2020_hiring_civil_servants,conj,none,2026-10-08
 jankowski_2020_hiring_private,conj,none,2026-10-08
 jankowski_2020_hiring_students,conj,none,2026-10-08
@@ -1920,6 +1923,10 @@ karahan_kaplan_2024_mindfulness,core,none,2026-10-29
 karahan_kaplan_2024_uwes9,core,none,2026-10-29
 karas_2022_cetscale_en,core,none,2026-10-18
 karas_2022_cetscale_pl,core,none,2026-10-18
+karawekpanyawong_2021_chalder,core,https://ndownloader.figshare.com/files/26634500,2026-11-10
+karawekpanyawong_2021_phq9,core,https://ndownloader.figshare.com/files/26634500,2026-11-10
+karawekpanyawong_2021_qlq_c30,core,https://ndownloader.figshare.com/files/26634500,2026-11-10
+karawekpanyawong_2021_qlq_cx24,core,https://ndownloader.figshare.com/files/26634500,2026-11-10
 karim_2022_phq9,core,https://dataverse.harvard.edu/api/access/datafile/6308544,2026-11-04
 karim_2026_mhl,core,https://ndownloader.figshare.com/files/69360969,2026-10-15
 karinen_2019_immigrant_attitudes,core,none,2026-10-15
@@ -4626,7 +4633,12 @@ tran_2026_ai_advisory_transparency,core,https://journals.plos.org/plosone/articl
 tran_2026_cyber_risk_self_protection,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0353922.s002,2026-11-09
 tran_2026_digital_financial_literacy,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0353922.s002,2026-11-09
 tran_2026_digital_wealth_mgmt_behavior,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0353922.s002,2026-11-09
+tran_2026_eq5d,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0342909.s008,2026-11-10
+tran_2026_hama,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0342909.s008,2026-11-10
 tran_2026_investment_knowledge,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0353922.s002,2026-11-09
+tran_2026_isi,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0342909.s008,2026-11-10
+tran_2026_madrs,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0342909.s008,2026-11-10
+tran_2026_phq9,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0342909.s008,2026-11-10
 tran_2026_trust_hybrid_ai_advisory,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0353922.s002,2026-11-09
 tran_2026_wealth_mgmt_capability,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0353922.s002,2026-11-09
 tranvag_2021_precision_medicine,conj,https://ndownloader.figshare.com/files/27956723,2026-10-11
