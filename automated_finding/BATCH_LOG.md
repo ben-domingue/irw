@@ -27227,3 +27227,38 @@ archived 4 human_review rows. Zenodo answered 429 on 8 non-English queries; thes
   with 4 digits. Needs a dedup rule and a PII read first. The 14 recoverable_format rows are
   mostly political-science "personality" replication files, not opened.
 
+## 2026-11-10h — hour run lane B (lane C's unworked leads, JEEHP collection first): 16 deposits, 25 tables, 587,820 responses; 5 held
+
+No new searches. Worked the leads lane C left `unworked` overnight, ranked by instrument shape
+(item-level scale data with a paper to check against first). Hand-off:
+`~/irw-wt/hour-1110/hour-1110-b.md`. All 25 tables pass `irw-validate --profile upload` and
+`irw_lint_covariates.py`; no `__items` tables (no register rows for these instruments).
+
+- **Shipped, JEEHP collection (CC0, Harvard Dataverse):** kim_2024_dreem + kim_2024_ams_im
+  (ZINJH6), sohn_2021_kira_resident_survey (QWXJJE, 14,139 residents, repeated cross-section
+  2016-19), dennis_2019_chirp + dennis_2019_ipas (GL0RPU), cho_2022_pscse (SSQDDL),
+  chong_2018_osce_examiner (PBNE4K, rater = examiner), felthun_2021_teleosce (0XDXKS),
+  uhm_2024_pemt_frequency / _importance / _difficulty (BSUYWS, 253 task elements),
+  kim_2023_learning_immersion / _selfefficacy / _transfer (3JDN9S), thompson_2024_sprp_pte
+  (F5POU5), park_2020_osce_palpitations (FHWPHK, one-hot partial-credit columns recombined),
+  kim_2021_faculty_roles_importance / _current / _preferred (EVYTJP),
+  elnaem_2021_virtual_osce (AWC1IP), kim_2024_dentist_cst_objectives (XSCXDR),
+  kim_2017_pharmacy_skills_attitude (XSF8XW).
+- **Shipped, lane C sweep 2:** flegr_2021_stai_trait + flegr_2021_pss (figshare 14651490,
+  CC BY 4.0). Items ship raw: the documented reverse-keyed items are exactly the ones with
+  negative item-rest correlations, although the deposit's total columns equal raw means.
+  mastrothanasis_2026_sprs_s (DVN/JJ0C6Z, CC0, .sav): students rate the simulated patient;
+  covariates ship as codes with SPSS value labels. The covariate-label harvest was run
+  (`--commit HEAD`) and logged the labels, but `build.py` only writes rows for tables already
+  in metadata.csv, so covariate_labels.csv picks this table up on its first build after release.
+- **Held (write-ups in the hand-off):** XD2QMD Chile dental (946 rows vs paper 935, splits off
+  by a handful, a 4.2 cell, an undocumented 28-item block); 3JDN9S self-directed learning
+  (pre-scored reversals unverifiable); BVYQBN R-SPQ-2F (paper's deep mean does not reproduce);
+  XSF8XW include/feasible table (one answer split into two binary items);
+  zenodo.18219501 Indonesian tolerance (no paper or anchors, undocumented code 8).
+- **Not shipped, recorded on the lead:** BPSA2A (AI-model responses), XUN9PU (t-scores),
+  KRDOWB (one total score), pone.0142551 (per-task counts), UVG1TU (85 respondents),
+  BUGCNN/F1RSQA/UAOMR7/DJNHCM/WFBF0U deferred (reversal, scale-vs-paper or layout questions).
+- Item codes renamed to get past the covariate linter: KIRA `w_surv_role` -> `w_surv_roles_clear`;
+  teleOSCE "Family & psychology background" -> `*_Family_psych_history`.
+- Remaining leads (63 unworked + 5 deferred) are carried in `leads/repos_leads_2026-11-10hb.csv`.

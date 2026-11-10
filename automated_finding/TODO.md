@@ -22,6 +22,21 @@ Full write-up in `BATCH_LOG.md` (2026-11-10 — Hour run lane E). Hand-off: `~/i
   Zenodo-unsearched queries, not re-run (listed in search_terms_log notes).
 - [ ] Polish HSPS (Mendeley 7mj932wh75): needs a dedup rule for consecutive duplicate rows and
   a PII read of `nrakrusza` before building (see leads/repos_leads_2026-11-10h.csv).
+## Hour run lane B 2026-11-10h (lane C's unworked leads) — 25 tables staged, 5 held
+
+Full write-up in `BATCH_LOG.md` (2026-11-10h lane B). Hand-off: `~/irw-wt/hour-1110/hour-1110-b.md`.
+
+- [ ] **Upload (orchestrator)**: 25 response tables (587,820 responses) from
+  `~/irw-wt/hour-1110-b/automated_finding/irw_output/`. No item text tables.
+- [ ] **Ben: 5 holds** -- XD2QMD Chile dental (N 946 vs 935), 3JDN9S SDL (pre-scored
+  reversals), BVYQBN R-SPQ-2F (paper mean off), kim_2017_pharmacy_skills_inclusion (split
+  answers), zenodo.18219501 (no anchors). Details and yes/no actions in the hand-off.
+- [ ] 63 `unworked` + 5 `deferred` leads in `leads/repos_leads_2026-11-10hb.csv`. Next: DVN/DJNHCM (8-case OSCE checklists,
+  4 days), DVN/CQD7CX (accreditation-standard ratings by rater group), DVN/0SNQKN (pain vignettes).
+- [ ] Re-run `metadata/covariate_labels/build.py` after release so mastrothanasis_2026_sprs_s
+  (harvest log already in ~/.cache/irw/covariate_labels/logs) gets its value labels.
+- [ ] Cheap item text follow-ups (need register rows): CHIRP/IPAS stems are in the GL0RPU
+  Variable Labels sheets; virtual-OSCE statements are the AWC1IP column headers.
 
 ## Overnight 2026-11-10 lane D (Europe PMC) — 36 tables staged, 6 held
 
