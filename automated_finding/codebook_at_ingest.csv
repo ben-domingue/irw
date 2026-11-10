@@ -1295,6 +1295,9 @@ gerou_2023_hexaco_honesty_humility,core,none,2026-10-19
 gerou_2023_quiet_ego,core,none,2026-10-19
 gest_2025_climate_migration,conj,none,2026-10-08
 getmansky_2024_refugees,conj,none,2026-10-07
+gezgin_2026_bsmas,core,none,2026-11-10
+gezgin_2026_fomo,core,none,2026-11-10
+gezgin_2026_maas,core,none,2026-11-10
 ghasemy_2020_commitment,core,none,2026-10-09
 ghasemy_2020_job_satisfaction,core,none,2026-10-09
 ghasemy_2020_motivation,core,none,2026-10-09
@@ -2353,6 +2356,7 @@ lischer_2021_phq4,core,https://zenodo.org/api/records/5708255/files/Q%20Covid%20
 littmann_2026_terror_women_candidates,conj,none,2026-10-08
 liu_2019_cadre_selection,conj,https://dataverse.harvard.edu/api/access/datafile/3137549,2026-10-07
 liu_2023_program_evaluation,conj,none,2026-10-07
+liu_2024_bdi2,core,none,2026-11-10
 liu_2024_igd27,core,none,2026-10-19
 liu_2024_partisan_collaboration,conj,none,2026-10-08
 liu_2024_teacher_grit,core,none,2026-10-15
@@ -4440,7 +4444,9 @@ sobczak_2024_dddt,core,https://data.mendeley.com/public-files/datasets/735s7fvt9
 sohn_2024_dietitian_frequency,core,none,2026-11-09
 sohn_2024_dietitian_future,core,none,2026-11-09
 sohn_2024_dietitian_importance,core,none,2026-11-09
+song_2026_chatbot_use,core,none,2026-11-10
 song_2026_fqol,core,none,2026-10-07
+song_2026_gwb,core,none,2026-11-10
 song_2026_irs_achievement,core,none,2026-10-30
 song_2026_irs_attention,core,none,2026-10-30
 song_2026_irs_confidence,core,none,2026-10-30
@@ -4449,6 +4455,7 @@ song_2026_irs_learning_support,core,none,2026-10-30
 song_2026_irs_participation,core,none,2026-10-30
 song_2026_irs_peer_interaction,core,none,2026-10-30
 song_2026_irs_teacher_interaction,core,none,2026-10-30
+song_2026_loneliness,core,none,2026-11-10
 song_2026_migrants_japan,conj,https://dataverse.harvard.edu/api/access/datafile/14231692,2026-10-07
 song_2026_migrants_korea,conj,https://dataverse.harvard.edu/api/access/datafile/14231692,2026-10-07
 song_2026_mm_aesthetic_novelty,core,none,2026-10-30
@@ -4462,8 +4469,10 @@ song_2026_mm_narrativity,core,none,2026-10-30
 song_2026_mm_social_experience,core,none,2026-10-30
 song_2026_mm_social_presence,core,none,2026-10-30
 song_2026_mm_technology_acceptance,core,none,2026-10-30
+song_2026_mspss,core,none,2026-11-10
 song_2026_parenting_self_efficacy,core,none,2026-10-07
 song_2026_parenting_style,core,none,2026-10-07
+song_2026_self_efficacy,core,none,2026-11-10
 sorelle_2024_student_debt,conj,https://dataverse.harvard.edu/api/access/datafile/7080920,2026-10-07
 soressa_2024_dam_attitudes,core,none,2026-10-28
 spasovski_2020_perma,core,none,2026-10-10
