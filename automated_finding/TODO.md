@@ -22,6 +22,7 @@ Full write-up in `BATCH_LOG.md` (2026-11-10 — Hour run lane E). Hand-off: `~/i
   Zenodo-unsearched queries, not re-run (listed in search_terms_log notes).
 - [ ] Polish HSPS (Mendeley 7mj932wh75): needs a dedup rule for consecutive duplicate rows and
   a PII read of `nrakrusza` before building (see leads/repos_leads_2026-11-10h.csv).
+
 ## Hour run lane B 2026-11-10h (lane C's unworked leads) — 25 tables staged, 5 held
 
 Full write-up in `BATCH_LOG.md` (2026-11-10h lane B). Hand-off: `~/irw-wt/hour-1110/hour-1110-b.md`.
