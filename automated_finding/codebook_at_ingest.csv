@@ -447,6 +447,9 @@ breitenstein_2019_corrupt_mayors,conj,https://dataverse.harvard.edu/api/access/d
 bremer_2022_social_spending,conj,https://dataverse.harvard.edu/api/access/datafile/5373544,2026-10-14
 breyer_2025_social_status,conj,none,2026-10-08
 brooks_2026_mining_argentina,conj,none,2026-10-08
+brouwer_2026_meat_justification,core,https://www.psycharchives.org/rest/bitstreams/268796e1-f325-497f-bd17-b5c80dc9a474/retrieve,2026-11-09
+brouwer_2026_reading_emotions,core,https://www.psycharchives.org/rest/bitstreams/268796e1-f325-497f-bd17-b5c80dc9a474/retrieve,2026-11-09
+brouwer_2026_state_self_regard,core,https://www.psycharchives.org/rest/bitstreams/268796e1-f325-497f-bd17-b5c80dc9a474/retrieve,2026-11-09
 bruckmann_2020_ev_policy,conj,https://dataverse.harvard.edu/api/access/datafile/7094655,2026-10-08
 brueckmann_2023_charging_stations,conj,https://zenodo.org/api/records/18232568/files/SurveyInstrumentForPublishing.pdf/content,2026-10-11
 brugge_2024_circular_products,conj,https://dataverse.harvard.edu/api/access/datafile/10698541,2026-10-08
@@ -1447,6 +1450,7 @@ haltia_2022_carbon_farm_contracts,conj,https://zenodo.org/api/records/7505626/fi
 haltia_2022_carbon_forest_contracts,conj,https://zenodo.org/api/records/7505626/files/CodesQuestionsAndVariableCoding_2022.11.03.xlsx/content,2026-10-14
 hamdan_2021_mobile_money,conj,https://ndownloader.figshare.com/files/31284026,2026-10-14
 hamzawi_2025_party_valence,conj,none,2026-10-08
+han_2020_hads,core,none,2026-11-09
 han_2026_fairness_packages,conj,https://dataverse.harvard.edu/api/access/datafile/14015009,2026-10-08
 han_2026_party_newcomers,conj,https://dataverse.harvard.edu/api/access/datafile/14136609,2026-10-14
 hankinson_2024_housing_compensation,conj,https://dataverse.harvard.edu/api/access/datafile/10392261,2026-10-14
@@ -2313,8 +2317,13 @@ lotfi_bejestani_2023_moral_courage,core,none,2026-10-28
 lotfi_bejestani_2023_moral_distress,core,none,2026-10-28
 lotfi_bejestani_2023_moral_sensitivity,core,none,2026-10-28
 lotfi_bejestani_2023_org_justice,core,none,2026-10-28
+lu_2025_chd_motivation_s1,core,none,2026-11-09
+lu_2025_chd_motivation_s2,core,none,2026-11-09
+lu_2025_mcl_general,core,none,2026-11-09
 lu_2025_property_tax_lab,conj,https://dataverse.harvard.edu/api/access/datafile/10792189,2026-10-08
 lu_2025_property_tax_online,conj,https://dataverse.harvard.edu/api/access/datafile/10792189,2026-10-08
+lu_2025_soee,core,none,2026-11-09
+lu_2025_ssee,core,none,2026-11-09
 lublin_2023_candidate_pairs,conj,https://dataverse.harvard.edu/api/access/datafile/6962034,2026-10-14
 lublin_2023_candidate_vignette,conj,https://dataverse.harvard.edu/api/access/datafile/6962034,2026-10-14
 lueders_2025_relocation,conj,none,2026-10-09
@@ -2681,6 +2690,9 @@ nagawa_2026_aid_projects,conj,none,2026-10-09
 nair_2022_covax_agreement_lucid,conj,https://dataverse.harvard.edu/api/access/datafile/6413680,2026-10-09
 nair_2022_covax_agreement_norc,conj,https://dataverse.harvard.edu/api/access/datafile/6413680,2026-10-09
 nair_2022_vaccine_recipients,conj,https://dataverse.harvard.edu/api/access/datafile/6413680,2026-10-09
+nakai_2020_immigration,core,https://dataverse.harvard.edu/api/access/datafile/3831094,2026-11-09
+nakai_2020_inst_trust,core,https://dataverse.harvard.edu/api/access/datafile/3831094,2026-11-09
+nakai_2020_values,core,https://dataverse.harvard.edu/api/access/datafile/3831094,2026-11-09
 narjes_2021_native_bee_policy,conj,none,2026-10-14
 natesan_2019_ed_satisfaction,core,none,2026-10-30
 naulia_2026_chatgpt_use,core,none,2026-10-10
@@ -4217,6 +4229,9 @@ setsoafia_2026_genai_literacy,core,none,2026-10-15
 setsoafia_2026_sdr,core,none,2026-10-15
 sevi_2025_promise_keeping,conj,none,2026-10-23
 sevi_2026_election_outcomes,conj,none,2026-10-08
+sevim_2026_djgls,core,none,2026-11-09
+sevim_2026_sf12,core,none,2026-11-09
+sevim_2026_tfi,core,none,2026-11-09
 shaffer_2020_local_refugees,conj,none,2026-10-08
 shafranek_2021_roommate_choice,conj,none,2026-10-07
 shan_2024_bfi_s,core,https://dataverse.harvard.edu/api/access/datafile/10762294,2026-11-04
