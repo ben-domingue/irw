@@ -7,6 +7,48 @@ checkboxes here just mean "this line item is settled," not "actionable."
 
 **For currently open action items, see `TODO.md`.**
 
+## 2026-11-10 hour-1110 lane C (repos leads 2026-11-10b + Step 2c archive) — 58 tables staged, 5 held
+
+One-hour acquisition run, lane `hour-1110-c`, worktree `~/irw-wt/hour-1110-c`. Hand-off:
+`~/irw-wt/hour-1110/hour-1110-c.md`. Worked all 19 rows of `leads/repos_leads_2026-11-10b.csv`
+(statuses updated in place), then 45 rows of the Step 2c archive pass
+(`irw_claude_assist.py --archive --backend cli`, 0 `lead` verdicts), then by hand the archive's
+multi-file rows. No discovery searches were run, so `search_terms_log.csv` is unchanged.
+
+Shipped (58 tables, 213,861 responses, all `irw-validate --profile upload` clean):
+- gracio_michelon_2026 x30 (mendeley wjw7b6ghc8, CC BY): two labelled .sav experiments on applicant
+  reactions to human/AI/hybrid rejection. Nine blocks worded identically in both studies merged with
+  cov_study (n=509); 15 Study 1 blocks (n=125, incl. nine SPJS subscales, PANAS PA/NA); 6 Study 2
+  blocks (n=384). Two-item blocks not shipped. Item text: not shipped (SPSS labels have it; no
+  register rows; PANAS is `block`).
+- hernandezamaro_2026_fcd (zenodo.19196911, CC BY): 25-statement Spanish crime-victim questionnaire,
+  n=217; free-text accounts dropped. Item text: not shipped (stems are the headers; no register row).
+- gray_2026 x6 (zenodo.23623141, CC BY): BES, IRI, SEE, EFQ, BPNS, Ryff PWB-18, n=398; 12
+  mean-imputed non-integer cells dropped. Item text: not shipped (positional labels).
+- amorim_2026_ctar (figshare.34515174, CC BY): CTAR-25, n=237, RCT arm as cov_group. Item text: not shipped.
+- song_2026 x5 (figshare.34829139, CC BY): chatbot use, MSPSS, loneliness, self-efficacy, GWB, n=519;
+  codes q<number> from the header numbers. Item text: not shipped (Chinese stems in headers; no register rows).
+- liu_2024_bdi2 (figshare.27211653, CC BY): BDI-II-C only, n=646. Shyness/CSES/FFMQ stored
+  pre-reversed with no record of which items (memory: pre-scored reversals), not shipped.
+- gezgin_2026 x3 (zenodo.21794626, CC BY): FoMO, MAAS (BF), BSMAS, n=863; unnamed PIO/AT blocks not shipped.
+- gavinchocano_2026_tmms_{attention,clarity,repair} (zenodo.23585324, CC BY): TMMS-24, n=695,
+  PRETEST ONLY: 108 pupils' posttest rows equal their pretest on all 24 items.
+- ma_2025 x6 (figshare.29235896, CC BY): healthcare supply-chain constructs, n=359 after dropping
+  one row recorded twice.
+- camacho_2025_mil_{students,teachers} (zenodo.17102406, CC BY; anonymous twin 17821828): 43-item
+  MIL self-assessment, n=188 / 173.
+
+Held (Ben decides; details in the hand-off): samwel_2026 (figshare.34700217, looks generated; built,
+in `runs/held/`), sultan_2023 PedsQL MFS (borealis WLAHQQ, exact diagnosis dates), sandham IPOS
+(mendeley ry2dvfydjd, clinical free text + admission date), boateng_2026 nursing (figshare.34807290,
+no codebook), shen_2026 exercise motivation (figshare.32780847, 87 duplicated rows).
+
+Skipped: up.ac.za 28322483 (ad hoc single questions); figshare.34797447 (617 children's names, name
+tier); zenodo.23602328 (scale means only); figshare.33126869 (already in IRW via Dataverse FCNTSN);
+dvn/ZH6ZZN Thai wage survey (1,100 rows = 110 distinct rows each repeated 10 times: rejected_content);
+zenodo.5670305 (bibliometric records). Unreached: dryad.s1634 and dryad.xd2547dg9 (Dryad token),
+in `leads/repos_leads_2026-11-10hc.csv`.
+
 ## 2026-11-02b — The 2026-11-02 sweep's good row + all 23 leads worked: 42 tables; scholars_portal re-covered
 
 Worked from a local terminal after PR #3380 merged. Branch

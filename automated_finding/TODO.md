@@ -1,5 +1,19 @@
 # IRW Automated Finding — TODO
 
+## hour-1110 lane C 2026-11-10 (repos leads + Step 2c) — 58 tables staged, 5 held
+
+Full write-up in `BATCH_LOG.md` (2026-11-10 hour-1110 lane C). Hand-off: `~/irw-wt/hour-1110/hour-1110-c.md`.
+
+- [ ] **Upload (orchestrator)**: 58 response tables (213,861 responses) from
+  `~/irw-wt/hour-1110-c/automated_finding/irw_output/`: gracio_michelon_2026 x30,
+  hernandezamaro_2026_fcd, gray_2026 x6, amorim_2026_ctar, song_2026 x5, liu_2024_bdi2,
+  gezgin_2026 x3, gavinchocano_2026_tmms x3, ma_2025 x6, camacho_2025_mil x2. No item text tables.
+- [ ] **Ben rules on holds**: samwel_2026 (looks generated; built in `runs/held/`), sultan_2023
+  PedsQL MFS (exact diagnosis dates), sandham IPOS (clinical free text + admission date),
+  boateng_2026 nursing (no codebook), shen_2026 (87 duplicated rows).
+- [ ] Item text is cheap later for gracio_michelon_2026, hernandezamaro_2026_fcd, song_2026,
+  gavinchocano_2026 and camacho_2025 (wording in labels/headers); each needs a rights-register row first.
+
 ## Overnight 2026-11-10 lane D (Europe PMC) — 36 tables staged, 6 held
 
 Full write-up in `BATCH_LOG.md` (2026-11-10 — Overnight lane D). Hand-off: `~/irw-wt/overnight-1110/overnight-1110-d.md`.
