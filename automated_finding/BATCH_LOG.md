@@ -27117,3 +27117,28 @@ both need a register row.
 - `leads/pmc_leads_2026-11-10.csv`, and lead statuses updated in the 09-20,
   09-24 and 09-25 lead files.
 - Covariate label harvest run for `huang_2016` (the only .sav script).
+
+## 2026-11-10 — Journal of Individual Differences scout (Hogrefe, hand pass): 0 tables, 1 PII skip, 7 licence asks queued
+
+Crossref listed 95 JID items for vol 44-47 (2023-2026). OSF title search
+(share.osf.io trove) matched about 20 to OSF projects/preprints; Hogrefe 403s
+scripted fetches, so data statements were not read and unmatched articles may
+still have data. Not covered: pre-2023 volumes, 7 preprint-only matches, and two
+nodes whose listing errored (a000424 `2rmsj`, a000465 `528qe`).
+
+- **Already in IRW:** a000440 (Blötner, `uv6mf`, 8 tables) and a000455
+  (Jovanović, `3cgbt`, 5 tables).
+- **PII skip:** a000439, García-Fernández et al., D factor x Schwartz values,
+  `osf.io/hgkaz`, CC BY 4.0, n=719 (PVQ-57 + D70). `db.csv` has an `ipAddress`
+  column holding a full IPv4 address for all 719 rows (690 distinct), beside
+  `byear` and a to-the-second Unix timestamp. Structural (the column's job is
+  to record the IP); IP addresses are outside the 2026-10-20 drop-the-column
+  ruling. Skipped on ben-domingue's call 2026-11-10. Not raised with the authors.
+- **No licence, queued for asks (7):** guf74, wn3v6, pjrza, x8vp6, kgebj, mzvpt,
+  ycdxe. Rows in `license_blocked_candidates.csv`; queued in
+  `oneoff/licence-asks-2026-10/queue.csv` as `skipped_no_address`. No
+  corresponding-author address was found on any page the authors or their
+  institutions publish.
+- **Not pursued:** a000423 and a000398 (scale scores only), a000427 (clinical
+  sample with date of birth, diagnoses and medication), a000410 and a000413 (no
+  data files).
