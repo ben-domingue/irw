@@ -1,6 +1,6 @@
 # IRW Automated Finding — TODO
 
-## Overnight 2026-11-10 lane D (Europe PMC) — 36 tables staged, 5 held
+## Overnight 2026-11-10 lane D (Europe PMC) — 36 tables staged, 6 held
 
 Full write-up in `BATCH_LOG.md` (2026-11-10 — Overnight lane D). Hand-off: `~/irw-wt/overnight-1110/overnight-1110-d.md`.
 
@@ -15,6 +15,7 @@ Full write-up in `BATCH_LOG.md` (2026-11-10 — Overnight lane D). Hand-off: `~/
   - masuyama_2022 DSRS-C: coding and total inconsistent with the paper. Not built.
   - yang_2023 m-health: 1,280 of 2,068 rows exactly duplicated. Recommend no.
   - wang_2026 BRBQ: 132 deposit items vs the paper's 97. Not built.
+  - sharifnia_2024 hemodialysis (Iran, 411): stored scale totals disagree with item sums in 17-27% of rows. Not built.
 - [ ] **Licence asks drafted, not sent**: Learmonth (OSF y9fjk) and Eitze (OSF xg2r5), in
   `~/irw-wt/overnight-1110-d/oneoff/email-drafts-2026-11-10/`.
 - [ ] Item text is cheap later for irmer_2026 (OSF codebook, German + English) and

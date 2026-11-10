@@ -26966,12 +26966,15 @@ All 36 tables pass `run_qc()`, `irw-validate --profile upload` and
 - Masuyama 2022 DSRS-C: coding, total and correlations do not match the paper.
 - Yang 2023 m-health: 1,280 exact-duplicate rows; recommend no.
 - Wang 2026 BRBQ: 132 deposit items vs the paper's 97; block mapping unknown.
+- Sharif-Nia 2024 hemodialysis: the stored FAS/TDS/adherence totals disagree with
+  the item sums in 17-27% of rows, by up to +/-30.
 
 **PII:** `10.7717/peerj.18456` has an email column, so the whole candidate is
 skipped. The 08-12 GPS skip of `s41598-024-58598-3` is restated in its lead row.
 
 **Licence:**
-- No licence on 10 OSF nodes (y9fjk, xg2r5, f25j9, 7n2jx, 3g6ze, gveqm, 876fe,
+- Private OSF (401): 9yp4r, 87ew5, r3xfy, 3s6ze.
+- No licence on 11 OSF nodes (y9fjk, xg2r5, f25j9, 7n2jx, 3g6ze, gveqm, 876fe,
   g6xnf, va4jh, ea9kd, b5jah).
 - The three strong ones are in `license_blocked_candidates.csv`.
 - Ask drafts (not sent) for Learmonth/Kotiusheva and Eitze.
