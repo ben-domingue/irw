@@ -17,5 +17,7 @@ lu_2017_pss10,name,table name names it and it has 10 items
 mhscdc_fried_2020_ps,name,hand call: instrument field: 10-item Perceived Stress Scale
 park_2021_pss10,name,table name names it and it has 10 items
 qi_2024_pss10,name,table name names it and it has 10 items
+sierakowska_2022_pss10,name,table name names it and it has 10 items (Polish)
 singh_2025_identity_pss,name,table name names it and it has 10 items
 teshome_2021_pss10,name,table name names it and it has 10 items
+yamada_2021_covidistress_pss10,name,"table name names it and it has 10 items; scored 1-5 not 0-4, items 6 and 7 swapped in the Bengali-language source rows"
