@@ -12,7 +12,7 @@ checkboxes here just mean "this line item is settled," not "actionable."
 One-hour acquisition run, lane `hour-1110-c`, worktree `~/irw-wt/hour-1110-c`. Hand-off:
 `~/irw-wt/hour-1110/hour-1110-c.md`. Worked all 19 rows of `leads/repos_leads_2026-11-10b.csv`
 (statuses updated in place), then 45 rows of the Step 2c archive pass
-(`irw_claude_assist.py --archive --backend cli`, 105 rows, 3 `lead` verdicts, all GREI), then by hand the archive's
+(`irw_claude_assist.py --archive --backend cli`, 135 rows, 7 `lead` verdicts, all GREI; the last four, zenodo.7489123/7489099 TSR-CR and 20599464/7499887 Friendship, are other waves of instruments already represented, so they were not built), then by hand the archive's
 multi-file rows. No discovery searches were run, so `search_terms_log.csv` is unchanged.
 
 Shipped (64 tables, 248,433 responses, all `irw-validate --profile upload` clean):
