@@ -105,10 +105,10 @@ class RulesJoin(unittest.TestCase):
 
         The jurisdictions whose rules are written down: Minneapolis (88),
         Alaska (115: 63 of 2022 and 52 of 2024), the Debian Project (33) and New South Wales (279), whose
-        tables are also counted on the key below. From the FairVote pool: New York City (127), Oakland (73), Berkeley (36), San Leandro (21), Maine (11), San Francisco (82).
+        tables are also counted on the key below. From the FairVote pool: New York City (127), Oakland (73), Berkeley (36), San Leandro (21), Maine (11), San Francisco (82), Burlington (8).
         """
         joined = [r for r in self.design if matching(self.rules, r)]
-        self.assertEqual(len(joined), 865)
+        self.assertEqual(len(joined), 873)
         keyed = [r for r in self.design if (r["rules_jurisdiction"] or "").strip()]
         self.assertEqual(len(keyed), 279)
         self.assertEqual({rules_key(r) for r in keyed}, {"New South Wales (Legislative Assembly)"})
