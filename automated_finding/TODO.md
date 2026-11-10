@@ -39,6 +39,41 @@ Full write-up in `BATCH_LOG.md` (2026-11-10h lane B). Hand-off: `~/irw-wt/hour-1
 - [ ] Cheap item text follow-ups (need register rows): CHIRP/IPAS stems are in the GL0RPU
   Variable Labels sheets; virtual-OSCE statements are the AWC1IP column headers.
 
+## Hour-run 2026-11-10h lane D (Europe PMC) — 0 tables, 25 terms run
+
+- `pmc_term_backlog_2026-11-10.csv`: 25 more terms run (the 20 English terms at new=3, plus 5 at new=2); 0 shippable from 42 candidates. The remaining 156 terms all project `new<=2`, so a new scout beats running this tail.
+- Dryad 10.5061/dryad.5mkkwh7f8 (CC0, AMR diagnostic-AI survey, 9 CSVs) needs a Dryad API token to download; still `unworked` in `leads/pmc_leads_2026-11-10.csv`.
+- `leads/pmc_leads_2026-11-10h.csv`: 1 unworked (peerj.18306, Europe PMC 500).
+
+## hour-1110 lane C 2026-11-10 (repos leads + Step 2c) — 64 tables staged, 5 held
+
+Full write-up in `BATCH_LOG.md` (2026-11-10 hour-1110 lane C). Hand-off: `~/irw-wt/hour-1110/hour-1110-c.md`.
+
+- [ ] **Upload (orchestrator)**: 64 response tables (248,433 responses) from
+  `~/irw-wt/hour-1110-c/automated_finding/irw_output/`: gracio_michelon_2026 x30,
+  hernandezamaro_2026_fcd, gray_2026 x6, amorim_2026_ctar, song_2026 x5, liu_2024_bdi2,
+  gezgin_2026 x3, gavinchocano_2026_tmms x3, ma_2025 x6, camacho_2025_mil x2, garciabacete_2023
+  qti_ep + tsr_cr + friendship_features, frochte_2024_selaq x2, afriana_2026_sslp. No item text tables.
+- [ ] **Ben rules on holds**: samwel_2026 (looks generated; built in `runs/held/`), sultan_2023
+  PedsQL MFS (exact diagnosis dates), sandham IPOS (clinical free text + admission date),
+  boateng_2026 nursing (no codebook), shen_2026 (87 duplicated rows).
+- [ ] Item text is cheap later for gracio_michelon_2026, hernandezamaro_2026_fcd, song_2026,
+  gavinchocano_2026 and camacho_2025 (wording in labels/headers); each needs a rights-register row first.
+
+## Hour run 2026-11-10 lane A (PLOS leads plos_leads_2026-11-10a.csv) — 69 tables staged, 2 held
+
+Full write-up in `BATCH_LOG.md` (2026-11-10h — hour lane A); hand-off in `~/irw-wt/hour-1110/hour-1110-a.md`.
+
+- [ ] 69 response tables (471,798 responses) in `~/irw-wt/hour-1110-a/automated_finding/irw_output/` need
+  uploading (orchestrator), then Ben publishes. No item text this run.
+- [ ] Ben: pone.0324731 (deposit's 8 construct blocks don't match the paper's 7) -- recommend skip.
+- [ ] Ben: pone.0285773 (eWOM survey, between-construct r ~0: looks generated) -- recommend skip.
+- [ ] Item text candidates not attempted: ogden_2022_dass21 (DASS-21 is public domain), zoorob_2021_brs,
+  li_2022_* (bilingual stems in the .sav labels), cordero_2026_* (Dictionary sheet wording),
+  stahl_2016_moralized_rationality / _importance_rationality (labels hold full stems).
+- [ ] botella_guijarro_2022: capability / parents' attitude / risk-perception blocks not shipped (keying unverified).
+- [ ] Next leads: `leads/plos_leads_2026-11-10ha.csv` (pone.0239444 was claimed by another lane; 2 held rows).
+
 ## Overnight 2026-11-10 lane D (Europe PMC) — 36 tables staged, 6 held
 
 Full write-up in `BATCH_LOG.md` (2026-11-10 — Overnight lane D). Hand-off: `~/irw-wt/overnight-1110/overnight-1110-d.md`.
