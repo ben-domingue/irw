@@ -1,5 +1,20 @@
 # IRW Automated Finding — TODO
 
+## Hour run lane B 2026-11-10h (lane C's unworked leads) — 24 tables staged, 5 held
+
+Full write-up in `BATCH_LOG.md` (2026-11-10h lane B). Hand-off: `~/irw-wt/hour-1110/hour-1110-b.md`.
+
+- [ ] **Upload (orchestrator)**: 24 response tables (584,832 responses) from
+  `~/irw-wt/hour-1110-b/automated_finding/irw_output/`. No item text tables.
+- [ ] **Ben: 5 holds** -- XD2QMD Chile dental (N 946 vs 935), 3JDN9S SDL (pre-scored
+  reversals), BVYQBN R-SPQ-2F (paper mean off), kim_2017_pharmacy_skills_inclusion (split
+  answers), zenodo.18219501 (no anchors). Details and yes/no actions in the hand-off.
+- [ ] 64 `unworked` + 5 `deferred` leads in `leads/repos_leads_2026-11-10hb.csv`. Next: DVN/JJ0C6Z
+  (SPRS-S .sav, CC0, needs the covariate-label harvest), DVN/DJNHCM (8-case OSCE checklists,
+  4 days), DVN/CQD7CX (accreditation-standard ratings by rater group), DVN/0SNQKN (pain vignettes).
+- [ ] Cheap item text follow-ups (need register rows): CHIRP/IPAS stems are in the GL0RPU
+  Variable Labels sheets; virtual-OSCE statements are the AWC1IP column headers.
+
 ## Overnight 2026-11-10 lane D (Europe PMC) — 36 tables staged, 6 held
 
 Full write-up in `BATCH_LOG.md` (2026-11-10 — Overnight lane D). Hand-off: `~/irw-wt/overnight-1110/overnight-1110-d.md`.
