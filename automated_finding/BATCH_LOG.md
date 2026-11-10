@@ -27267,3 +27267,32 @@ Branch `auto/hour-1110-d`. One-hour afternoon run; Ben's instruction 2026-11-10 
 - Yield note: 0 shippable from 25 terms. The backlog's remaining terms all have `new<=2`. The scout-3
   pool now looks exhausted for this connector; pick the next terms from a fresh scout, not from this
   backlog's tail.
+
+## 2026-11-10h — hour lane A (PLOS leads `plos_leads_2026-11-10a.csv`): 69 tables, 471,798 responses
+
+One-hour acquisition run, lane A (`auto/hour-1110-a`, brief `~/irw-wt/hour-1110/BRIEF.md`). Worked all 40 rows of
+last night's lane-A leftover PLOS leads in rank order. No searches were run (leads only), so no
+search_terms_log rows. Hand-off: `~/irw-wt/hour-1110/hour-1110-a.md`.
+
+Shipped (25 deposits, 69 tables): ogden_2022 (DASS-21, TLX), bacchini_2015 (Olweus victimization/bullying,
+figshare), yoshida_2026 (SBI-C, RSS, SRAS-R-JA), tran_2026 (PHQ-9, MADRS, HAM-A, ISI, EQ-5D-5L),
+karawekpanyawong_2021 (PHQ-9, Chalder, QLQ-C30, QLQ-CX24; figshare CC0), hart_2021 (Trump support, COVID concern;
+`treat` = priming), jankowska_2021 (EQ-5D-5L, 2,973), senanayake_2019 (EQ-5D-3L), atal_2024 (EQ-5D-5L x 3 recalled
+moments as `wave`; Dataverse CC0; weighted Table 1 reproduced), grandahl_2017 (school-nurse HPV attitudes, 2013+2016),
+ngo_2024 (10 SEM constructs), alshawaf_2026 (BFI-2-S, Fonseca), zoorob_2021 (Resident Well-Being Index, BRS with
+2/4/6 pre-reversed), gurung_2025 (KDQOL-36), mostova_2022 (5 scales, couples stacked, `cluster_id` = couple),
+li_2022 (8 UTAUT constructs), sogbesan_2026 (11 COVID statements, don't-know dropped), suzuki_2019 (3 sleep items x
+4 seasons as `wave`), lee_2026 (social exclusion, loneliness), botella_guijarro_2022 (gambling intent, peer norms;
+Mendeley CC BY, waves 1/3), stahl_2016 (MRS, IRS, MFQ-30 stacked over studies with `cov_study`), stroman_2020
+(landowner reasons), cordero_2026 (6 constructs; Zenodo), tavares_da_silva_2024 (FCV-19S, lifestyle; figshare),
+magnus_2025 (vaccine readiness; OSF).
+
+Held: pone.0324731 (deposit blocks don't match the paper's constructs), pone.0285773 (between-construct r ~0;
+looks generated). Skipped for PII: pone.0233338 (birth dates), pone.0230255 (postal codes + free text).
+Rejected (no item-level data / not item responses): 0340670, 0328077, 0197147, 0293760, 0306041, 0319050,
+0183195, 0218044, 0126508, 0319300 (unlabelled columns). pone.0239444 was TAKEN by another lane.
+
+QC: every table passes `irw-validate --profile upload`, `run_qc()` (in-script) and `irw_lint_covariates.py`;
+per-script asserts reproduce paper counts/sums where available. Two lint false positives (item names containing
+`selfcare` / `covid`) were fixed by renaming items. Covariate-label harvest ran for the five .sav scripts; it
+added nothing (labels are mapped in-script) and its unrelated coverage.csv churn was reverted.

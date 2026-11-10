@@ -37,6 +37,20 @@ Full write-up in `BATCH_LOG.md` (2026-11-10 hour-1110 lane C). Hand-off: `~/irw-
 - [ ] Item text is cheap later for gracio_michelon_2026, hernandezamaro_2026_fcd, song_2026,
   gavinchocano_2026 and camacho_2025 (wording in labels/headers); each needs a rights-register row first.
 
+## Hour run 2026-11-10 lane A (PLOS leads plos_leads_2026-11-10a.csv) — 69 tables staged, 2 held
+
+Full write-up in `BATCH_LOG.md` (2026-11-10h — hour lane A); hand-off in `~/irw-wt/hour-1110/hour-1110-a.md`.
+
+- [ ] 69 response tables (471,798 responses) in `~/irw-wt/hour-1110-a/automated_finding/irw_output/` need
+  uploading (orchestrator), then Ben publishes. No item text this run.
+- [ ] Ben: pone.0324731 (deposit's 8 construct blocks don't match the paper's 7) -- recommend skip.
+- [ ] Ben: pone.0285773 (eWOM survey, between-construct r ~0: looks generated) -- recommend skip.
+- [ ] Item text candidates not attempted: ogden_2022_dass21 (DASS-21 is public domain), zoorob_2021_brs,
+  li_2022_* (bilingual stems in the .sav labels), cordero_2026_* (Dictionary sheet wording),
+  stahl_2016_moralized_rationality / _importance_rationality (labels hold full stems).
+- [ ] botella_guijarro_2022: capability / parents' attitude / risk-perception blocks not shipped (keying unverified).
+- [ ] Next leads: `leads/plos_leads_2026-11-10ha.csv` (pone.0239444 was claimed by another lane; 2 held rows).
+
 ## Overnight 2026-11-10 lane D (Europe PMC) — 36 tables staged, 6 held
 
 Full write-up in `BATCH_LOG.md` (2026-11-10 — Overnight lane D). Hand-off: `~/irw-wt/overnight-1110/overnight-1110-d.md`.
