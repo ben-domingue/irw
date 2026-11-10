@@ -1626,6 +1626,8 @@ hu_2025_employability,core,none,2026-11-02
 hu_2025_internship_attitude,core,none,2026-11-02
 hu_2026_digital_nomad_wellbeing,core,none,2026-10-18
 hu_2026_psqi,core,none,2026-10-18
+huang_2016_bdi2,core,none,2026-11-09
+huang_2016_pdsq_depression,core,none,2026-11-09
 huang_2025_academic_burnout,core,none,2026-10-15
 huang_2025_core_self_evaluation,core,none,2026-10-15
 huang_2025_dass21,core,none,2026-10-30
@@ -1949,6 +1951,7 @@ khan_2023_perceived_purpose,core,none,2026-10-09
 khashaba_2023_waste_attitude,core,none,2026-10-28
 khashaba_2023_waste_knowledge,core,none,2026-10-28
 khongsirisombat_2025_aaq_sf,core,none,2026-11-04
+kilintzis_2026_dhp_features,core,none,2026-11-09
 kim_2019_trade_policy_firms,conj,https://dataverse.harvard.edu/api/access/datafile/3450330,2026-10-08
 kim_2022_immigration_covid,conj,none,2026-10-08
 kim_2024_carbon_tax_korea,conj,none,2026-10-09
@@ -4232,6 +4235,9 @@ shum_2026_hk_diaspora_policy_au,conj,none,2026-10-08
 shum_2026_hk_diaspora_policy_ca,conj,none,2026-10-08
 shum_2026_hk_diaspora_policy_uk,conj,none,2026-10-08
 shum_2026_hk_diaspora_policy_us,conj,none,2026-10-08
+sierakowska_2022_gses,core,none,2026-11-09
+sierakowska_2022_minicope,core,none,2026-11-09
+sierakowska_2022_pss10,core,none,2026-11-09
 sievert_2024_burden_perceptions,conj,https://dataverse.harvard.edu/api/access/datafile/7280205,2026-10-14
 siguenza_2025_ucla,plos,https://osf.io/9zw43/,2026-10-27
 sijbrandij_2018_eq5d5l,core,https://dataverse.nl/api/access/datafile/11674,2026-10-07
@@ -4807,6 +4813,20 @@ xue_2026_mcq,core,none,2026-10-10
 xue_2026_peou,core,none,2026-10-18
 xue_2026_pu,core,none,2026-10-18
 xue_2026_ta,core,none,2026-10-18
+yamada_2021_covidistress_bffagr,core,https://osf.io/e2y7w/,2026-11-09
+yamada_2021_covidistress_bffcon,core,https://osf.io/e2y7w/,2026-11-09
+yamada_2021_covidistress_bffext,core,https://osf.io/e2y7w/,2026-11-09
+yamada_2021_covidistress_bffneu,core,https://osf.io/e2y7w/,2026-11-09
+yamada_2021_covidistress_bffope,core,https://osf.io/e2y7w/,2026-11-09
+yamada_2021_covidistress_compliance,core,https://osf.io/e2y7w/,2026-11-09
+yamada_2021_covidistress_concerns,core,https://osf.io/e2y7w/,2026-11-09
+yamada_2021_covidistress_coping,core,https://osf.io/e2y7w/,2026-11-09
+yamada_2021_covidistress_distress,core,https://osf.io/e2y7w/,2026-11-09
+yamada_2021_covidistress_media,core,https://osf.io/e2y7w/,2026-11-09
+yamada_2021_covidistress_pss10,core,https://osf.io/e2y7w/,2026-11-09
+yamada_2021_covidistress_slon3,core,https://osf.io/e2y7w/,2026-11-09
+yamada_2021_covidistress_sps10,core,https://osf.io/e2y7w/,2026-11-09
+yamada_2021_covidistress_trust_inst,core,https://osf.io/e2y7w/,2026-11-09
 yamagishi_2016_pd,core,none,2026-10-04
 yamaguchi_2024_lottocracy,conj,https://dataverse.harvard.edu/api/access/datafile/10119317,2026-10-11
 yamao_2025_armed_iraq,conj,none,2026-10-14
