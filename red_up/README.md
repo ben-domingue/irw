@@ -33,9 +33,9 @@ shard, unless `ITEMTEXT_DEFAULT` in `targets.py` pins one (currently none, so
 new item text goes to `irw_text_4`, registered 2026-10-30 with `irw_text_3` at
 954 tables; before that `irw_text_3`, from 2026-09-25); otherwise the core shard pinned by `CORE_DEFAULT`, or
 the newest core shard when that is `None` (currently none, so new response
-data goes to `item_response_warehouse_8`: unpinned 2026-10-15 with shards 5
-and 6 both near the cap, and shard 8 registered 2026-10-21 with shard 7 at
-961). A table that already exists is still updated where it lives. The menu shows every dataset in
+data goes to `item_response_warehouse_9`: unpinned 2026-10-15 with shards 5
+and 6 both near the cap, shard 8 registered 2026-10-21 with shard 7 at
+961, and shard 9 registered 2026-11-09 with shard 8 at 864 released). A table that already exists is still updated where it lives. The menu shows every dataset in
 `metadata/redivis_config.R` — Enter takes the default.
 
 Response data, item text, conjoint and rankings are **shard lists**, because
