@@ -2822,6 +2822,16 @@ ng_2026_shc_attitude,core,none,2026-10-30
 ng_2026_shc_knowledge,core,none,2026-10-30
 ng_2026_shc_price_sensitivity,core,none,2026-10-30
 ng_2026_shc_purchase_practice,core,none,2026-10-30
+ngo_2024_environmental_attitude,core,none,2026-11-10
+ngo_2024_environmental_concern,core,none,2026-11-10
+ngo_2024_environmental_knowledge,core,none,2026-11-10
+ngo_2024_green_perceived_quality,core,none,2026-11-10
+ngo_2024_green_perceived_value,core,none,2026-11-10
+ngo_2024_perceived_price,core,none,2026-11-10
+ngo_2024_product_attitude,core,none,2026-11-10
+ngo_2024_product_design,core,none,2026-11-10
+ngo_2024_purchase_intention,core,none,2026-11-10
+ngo_2024_social_influence,core,none,2026-11-10
 nguyen_2021_farm_subsidies_ch,conj,none,2026-10-09
 nguyen_2021_farm_subsidies_us,conj,none,2026-10-09
 nguyen_2024_cpd_benefits,core,none,2026-10-09
