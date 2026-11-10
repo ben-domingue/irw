@@ -26540,3 +26540,159 @@ remains an option, and the item order is settled.
 and no row records which language they used.
 
 **UPLOADED 2026-11-08** (Ben, in-session): 3 item text tables. Manifest renamed `MANIFEST_2026-11-08_itemtext_phq_uploaded.txt`; `uploaded` stamped in itemtext_provenance.csv and mapping_verification.csv.
+
+## 2026-11-09 — PLOS monthly run: 12 deposits, 53 tables, 249,324 responses; Su 2025 held; 2 item text tables
+
+Source: the 2026-11-09 PLOS monthly discovery run (PR #3448) plus a terminal
+replay of its 71 `download_failed` rows (commit 55acadb6), which together left
+32 leads in `leads/plos_leads_2026-11-09.csv`. Four agents triaged them in
+blocks of eight (commits ed5d0f14, e702444a, 4bf30550, 6b83d87d): 13 built,
+11 rejected, 8 licence-blocked. Ben then held one of the 13 (Su 2025, below),
+so 12 deposits ship. All 53 tables pass `irw-validate --profile upload` (the
+only WARNs are `imputed_values*` response-concentration notes on 0/1 and
+ordinal items); `reserved.py check-diff origin/main` is clean.
+
+**Shipped:**
+- `vonborck_2026_{kidkindl_selfesteem,ppasc}` (pone.0361479, article SI, CC BY
+  4.0) -- 218 US fourth- and fifth-graders, two waves (September, February),
+  `treat` = modified LiiNK recess. KID-KINDL self-esteem 4 items (1-5), PPASC 6
+  items (1-4). Judgment call (approved by Ben): Time 1 dropped for the 46
+  children D253-D298 whose Time 1 columns are shifted in the source (SES_Q1 holds
+  SEX, SES_Q2 race); their Time 2 is kept. KTK subtest sums and composites are
+  scores, not items, and were dropped.
+- `aljabry_2026_{msg_ffq,yfas,bes,pss4}` (pone.0360433, CC BY 4.0) -- 553
+  Palestinian university students (555 in the paper). Food frequency 17, YFAS
+  adaptation 13 (11 symptoms + 2 yes/no clinical-significance), BES 7
+  (statement choice scored 0-2/0-3, chosen statement in `resp_raw`), PSS-4 4.
+  Text labels mapped through the S1 questionnaire. Judgment calls (approved):
+  BES options ordered least to most severe from the questionnaire; 5 exact
+  duplicate rows dropped.
+- `lam_2015_{cpps_stage1,cpps_stage2,gses,chq12,clotr}` (pone.0142620, CC BY)
+  -- Hong Kong Chinese adults. Draft CPPS 28 items for Stage I (290: HBsAg
+  carriers + non-patients) and Stage II (450: controls, smokers, passive
+  smokers), kept separate because the samples answered in different designs;
+  GSES 10 (739, both stages, `cov_study`); CHQ-12 12 (Stage I); C-LOT-R 6
+  (Stage II only). 999/777/888 codes and 6 mean-imputed fractional cells
+  dropped. Judgment call (approved): Stage I C-LOT-R not shipped -- it is coded
+  0-4 against the paper's 4-point scale.
+- `tran_2026_*` (pone.0353922, CC BY 4.0) -- 7 tables of 3 items each (digital
+  financial literacy, trust in hybrid AI advisory, wealth-management
+  capability, AI advisory transparency, cyber-risk self-protection, investment
+  knowledge, digital wealth-management behaviour), 249 Vietnamese retail
+  investors, 1-5, codebook S2.
+- `humayun_2026_{living_calling,collab_crafting,team_performance}`
+  (pone.0355477, CC BY 4.0) -- 198 employees in 49 teams, 1-5. Judgment call
+  (approved): the deposit's `id` is the TEAM, so the row index is the person
+  id and the team is `cov_team`. LMX1-7 is a leader rating, constant within
+  team (49 raters), not shipped.
+- `jin_2024_*` (pone.0306629, CC BY 4.0) -- 5 tables of 3 items (teamwork
+  understanding, information sharing, effort-reward balance, communication
+  effect, innovation performance), 580 employees of Chinese high-tech firms,
+  1-5. Headers mapped to codes by an explicit dict; 5 trailing mean columns
+  dropped (verified equal to the item means).
+- `chen_2026_museum_*` (pone.0357563, CC BY 4.0) -- 9 UTAUT2/culture tables of
+  3 items each, 623 museum visitors (316 China + 307 Russia, `cov_country`),
+  1-7. Respondent_ID restarts per country (the dup_id_item flag), so the row
+  index is the id.
+- `wasike_2026_{news_literacy,crt,tolerance_ambiguity,signal_detection,clickbait_detection,clickbait_engagement}`
+  (pone.0359401, figshare CC BY 4.0) -- 857 US social-media users (Qualtrics
+  panel, 2025), clickbait-training experiment; detection and engagement carry
+  `wave` (pre/post) and `treat`. Judgment calls (approved): the deposit's own
+  scored columns score blank answers as 0 or 1, so news literacy, CRT and
+  clickbait detection are rescored from the raw answers with blanks dropped
+  (option code in `resp_raw`); the clickbait-detection key is inferred from the
+  headline design.
+- `chhajer_2025_who5` (pone.0323712, figshare 27612366 CC BY 4.0) -- 2,282
+  Indian young adults, WHO-5 0-5; sum/average/indicator dropped (asserted equal
+  to recomputation); single-item INS as `cov_nis`; free-text work-experience
+  column dropped.
+- `tong_2017_{swls,flourishing,spane}` (pone.0181616, DANS
+  doi:10.17026/dans-z4j-vats CC BY 4.0) -- 1,008 Macau adults, random household
+  telephone survey, traditional Chinese. SWLS 5 (1-7), FS 8 (1-7), SPANE 12
+  (1-5). Judgment call (approved): codebook codes 8/9 read as missing and
+  dropped.
+- `takamatsu_2018_sacrificial_dilemmas` (pone.0203826, Mendeley CC BY 4.0) --
+  445 MTurk workers, Study 1 (275 x 2 dilemmas) + Study 2 (170 x 6) merged with
+  `cov_study`, 0-3. Judgment call (approved): Study 2's file stores 1-4 against
+  the documented 0-3 and was shifted by -1. Every other measure is deposited as
+  sum scores only.
+- `mo_2026_sft_*` (pone.0361990, figshare 33440560 CC BY 4.0) -- 7 tables of
+  4 items each, 526 Chinese Gen Z university students, 1-5; Case Number is the
+  id; 2 constant screeners dropped.
+
+Ben, 2026-11-09: the 3- and 4-item one-table-per-construct splits (tran, jin,
+chen, mo, humayun) stay as built, and every judgment call above is approved.
+
+**HELD by Ben, 2026-11-09: `su_2025_{self_directed_learning,interdisciplinary_competency,psycap}`**
+(pone.0319305, figshare 28830521, 408 STEM lecturers). Possible generated data:
+near-identical item means, two different instruments with near-identical
+response distributions, and a flat low tail. The three CSVs were moved out of
+`irw_output/` to `runs/held/`, their dictionary and codebook rows removed, and
+`data/su_2025_stem_lecturers.py` kept with a HELD header. Lead status `held`.
+
+**Rejected (11, `rejected_content`):** pone.0220784 (totals and subscale sums
+only), pone.0198450 (LCA frequency tables, no person-level data), pone.0241982
+(summed/imputed totals only), pone.0214204 (single-item measures only),
+pone.0352494 (47 students + 9 instructors, N<100), pone.0187098 (30 subjects,
+per-session task aggregates), pone.0145030 (81 five-year-olds, N<100),
+pone.0190818 (MRC/GCS totals and neuropsychometry totals), pone.0233906 (six
+attachment subscale scores, no items; OSF node also unlicensed), pone.0273636
+(lists of tweet ids), pone.0213026 (Simon-task trials, no fixed items, 82 and
+52 participants).
+
+**Licence-blocked (8, `blocked_licence`, rows in `license_blocked_candidates.csv`):**
+data on unlicensed OSF nodes or under the DANS Licence, which the CC BY
+article does not reach. Ben is sending licence asks on 2026-11-09 to Zhang
+(pone.0329651, private OSF dczf3, 1,013 x ~62), Brunell (pone.0194106, OSF
+j2r8t, NPI-40 + BFI-44 x 4 studies), Cai (Wu et al., pone.0218076, OSF f4bsq,
+400 x 42), Götz (pone.0176921, OSF 2nmhu, Big Five, 1,081 + 2,036), McCain
+(pone.0142200, OSF u25x9, NPI-40/RSE/geek identity), Bieleke (pone.0272443, OSF
+3pmr4, 414 x ~44) and Lenferink (pone.0358123, DANS SS/TWHH2D, 290 x 55); Vigl
+(pone.0264511, OSF f8m7a, 3,242 x RAS/BFI-2-XS/ECR-RD) was also sent
+2026-11-09.
+
+**Item text (pass of 2026-11-09, per Step 3.5; 2 tables staged, 22 new register rows):**
+- `aljabry_2026_msg_ffq` -- SHIPPED. Study-authored food list (register
+  ALJABRY-FFQ, ship); English half of the bilingual headers, language
+  `English; Arabic`; `make_itemtext_aljabry_2026.py`; data_labels, NOT_NEEDED.
+  `aljabry_2026_{yfas,bes,pss4}` held: YFAS-2 and BES (hold, new), PSS (block).
+- `lam_2015_gses` -- SHIPPED. GSE register row (ship, originators' FAQ grant);
+  Chinese wording not deposited and the CGSES translation's terms unestablished
+  (CGSES, hold, new), so the originators' English from engscal.htm ships as
+  translated_substitute, language Chinese; positional gses1..10, NO_ROUTE
+  (`verify_lam_2015.py`: one polarity, one factor). `make_itemtext_lam_2015.py`.
+  `lam_2015_cpps_*` held (CPPS, hold, new: domain-swapped IPQ-R-GP);
+  `lam_2015_chq12` held (CHQ, hold, new; GHQ derivative); `lam_2015_clotr` not
+  built (LOT-R is ship_with_note but no Chinese wording deposited and the six
+  codes cannot be tied to LOT-R positions without it).
+- `vonborck_2026_*` -- held: KINDL and PPASC (hold, new); no wording deposited.
+- `tran_2026_*` (7) -- held: TRAN-HAI-WEALTH (hold, new). Stems in S2 Codebook.
+- `jin_2024_*` (5) -- held: JIN-TPS (hold, new). Stems only in article Table 2.
+- `chen_2026_museum_*` (9) -- held: Chen2026-Museum-UTAUT2 and
+  Chen2026-Museum-CVSCALE (hold, new). Stems in S1 File in Chinese and Russian
+  (administered) + English reference translation (not administered).
+- `mo_2026_sft_*` (7) -- held: Mo2026-SFT (hold, new). English stems in S1
+  Appendix; Chinese (administered) not deposited.
+- `humayun_2026_*` -- held: LCS, LEANA-COLLAB-CRAFTING, MAKIKANGAS-TEAMPERF
+  (hold, new).
+- `wasike_2026_*` -- held: ASHLEY-NL2023, CRT-2, TFA-Herman,
+  WASIKE-SIGNAL-HEADLINES, WASIKE-CLICKBAIT-HEADLINES (hold, new); clickbait
+  headline order does not map to H1-H10 regardless.
+- `chhajer_2025_who5` -- held: WHO5 (block). `tong_2017_*` -- held: SWLS and
+  DIENER-NC (block). `takamatsu_2018_sacrificial_dilemmas` -- held:
+  GREENE-DILEMMAS (hold, new); no scenario text deposited.
+- Open for Ben: (1) tran/jin/chen/mo stems read as freshly written under cited
+  construct labels rather than noun-swaps of the source items; held under the
+  2026-11-02 domain-swap ruling, but the 2026-09-23 R16 class row
+  ("study-authored adaptations ... ship") points the other way. (2) CRT-2:
+  originators' PDF says CC BY 3.0, Crossref lists CC BY-NC-ND 3.0.
+Gates: normalize_nulls -> validate_items --resp-csv (both PASS) -> audit_batch
+--resp-dir (2/2 PASS, report in runs/), irw-validate ok, check_provenance.R no
+new failures; issues-page scan found nothing (no entries owed).
+
+**Staging:** 53 dictionary + codebook rows (`stage_dict_row.py`), 53 tag rows
+(`tags_auto_2026-11-09.csv`, appended to `tags/tags_auto.csv`), 32 lead
+statuses (12 `shipped`, 1 `held`, 11 `rejected_content`, 8 `blocked_licence`),
+8 rows in `license_blocked_candidates.csv`. Tables in
+`~/irw-wt/plos-monthly-1109-refetch/automated_finding/irw_output/` with
+`MANIFEST_2026-11-09_plos_monthly.txt`. Nothing uploaded.
