@@ -26865,7 +26865,7 @@ status column, plus 18 unworked next leads in rank order). Covariate-label harve
 the one .sav script with covariates (yu_2021): adds nothing (labels shipped as text);
 `build.py`'s unrelated churn in coverage.csv not committed. Tables in
 `~/irw-wt/overnight-1110-b/automated_finding/irw_output/`.
-## 2026-11-10c — overnight lane C: repos sweep (mode 3) + the Harvard Dataverse JEEHP collection: 42 tables, 13,961,832 responses
+## 2026-11-10c — overnight lane C: two repos sweeps (mode 3) + the Harvard Dataverse JEEHP collection: 45 tables, 14,009,222 responses
 
 Lane C of the 2026-11-10 overnight run (`~/irw-wt/overnight-1110/BRIEF.md`). Reserved-source
 guard: `selftest` ok before the run, `check-diff origin/main` before every push. Every DOI was
@@ -26919,7 +26919,7 @@ JEEHP requires raw data on Harvard Dataverse, all CC0, in one collection
 triaged 233 not yet in the seen ledger: **16 good**, 92 human_assistance, 63 below_min_n, 45
 no_usable_file, 11 not_item_response, 2 download_failed. Step 2b: 33 recoverable_format, 32
 human_review (archived), 18 worth_retrying, 6 aggregate_continuous, 3 not_item_response.
-`leads/repos_leads_2026-11-10c_jeehp.csv`: 110 rows, 57 still `unworked` -- this collection
+`leads/repos_leads_2026-11-10c_jeehp.csv`: 110 rows, 56 still `unworked` -- this collection
 is the best-yielding lead pool of the night and is not exhausted.
 
 Shipped (each checked against its paper's N and sex split at least):
@@ -26942,13 +26942,32 @@ Shipped (each checked against its paper's N and sex split at least):
   `choi_2020_pt_competency_{importance,frequency}` (the sheet's last row is a row of column
   means and drops out with the consent filter), `berrani_2020_pheem`, `ezeala_2023_csas`,
   `oanh_2021_{sssc,confidence_scale}`, `oanh_2024_{ctsq,psi,gses}` (pre/post, wave),
-  `naciri_2022_dl_satisfaction` (the sheet carries its own coding legend below the data).
+  `naciri_2022_dl_satisfaction` (the sheet carries its own coding legend below the data),
+  `gelston_2019_ophtho_confidence` (1,025 US residents; program, sex and race counts reproduce).
 Held: `chatterjee_2017_jse` (DVN/LOGUCL, not built) -- N, sex and the mean 96.01 reproduce,
 but the paper replaced up to 4 blank items per form with the person's item mean, and the
 integer-only file cannot show which cells. Skipped for PII: DVN/GU4QKY (populated mobile
 phone column). Not reached, in the leads file: DVN/XD2QMD (Chile dental, 946 x 5 scales, N
-off the paper's 935 by 11 and an unexplained 28-item block), EIHNEJ, 0SNQKN, WBTRMW, 3JDN9S
-and the rest of the `unworked` rows.
+off the paper's 935 by 11 and an unexplained 28-item block), 3JDN9S (item blocks don't match
+the paper's description), EIHNEJ, 0SNQKN and the rest of the `unworked` rows.
+
+### Sweep 2 (mode 3): 15 education and cognitive-test topics x 9 languages
+
+Run because sweep 1's clinical topics were thin. Terms: arithmetic test, numerical reasoning
+test, number series test, mathematical olympiad, placement test, objective structured clinical
+examination, ECG interpretation, first aid knowledge, nutrition knowledge test, Bebras
+challenge, science achievement test, nonword reading, vocabulary size test, chess puzzles,
+confidence judgments. 134 new rows in `search_terms_log.csv`; "rekentoets" was already
+logged, so it was re-run but not re-logged. **548 candidates**, **230 triaged**: 6 good, 31
+human_assistance, 146 no_usable_file, 23 download_failed, 12 below_min_n, 6
+not_item_response, 1 license_restricted, 2 error. Step 2b: 12 recoverable_format, 8
+human_review (archived to `human_review/human_review_zenodo_2026-11-09.csv`), 6
+worth_retrying, 4 aggregate_continuous, 1 not_item_response; 31 refined flags recorded.
+`leads/repos_leads_2026-11-10c2.csv`: 62 rows, 24 `unworked`. Shipped:
+`viljoen_2021_ecg_context` (UCT ZivaHub, CC BY-NC 4.0: 25 ECGs without and then with a
+vignette, item_family pairs; one ambiguous Test 2 column left out) and
+`fernandez_mendez_2026_section_test` (Zenodo, 20-item spatial section test, 0/1 with
+`resp_raw` = option chosen).
 
 ### Item text
 
@@ -26962,8 +26981,8 @@ positive, no text ships.
 
 ### Staging
 
-42 response tables, 13,961,832 responses, all `irw-validate --profile upload` pass and
-`irw_lint_covariates.py` clean; 42 dictionary + codebook rows, 42 tag rows, 42
-itemtext_provenance rows (NOT SHIPPED), 3 register rows. Tables in
+45 response tables, 14,009,222 responses, all `irw-validate --profile upload` pass and
+`irw_lint_covariates.py` clean; 45 dictionary + codebook rows, 45 tag rows, 45
+itemtext_provenance rows (NOT SHIPPED), 3 register rows. 23 deposits shipped. Tables in
 `~/irw-wt/overnight-1110-c/automated_finding/irw_output/`; hand-off
 `~/irw-wt/overnight-1110/overnight-1110-c.md`.
