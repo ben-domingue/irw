@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+# HELD 2026-11-09 by Ben: possible generated data, see BATCH_LOG
+#   (automated_finding/BATCH_LOG.md, 2026-11-09 PLOS monthly). Near-identical
+#   item means, two different instruments with near-identical response
+#   distributions, a flat low tail. The three outputs were pulled from
+#   irw_output/ to automated_finding/runs/held/ and their dictionary and
+#   codebook rows removed. Do not upload unless Ben lifts the hold.
+#
 # Source: https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0319305
 # DOI: 10.1371/journal.pone.0319305
 # Paper: Su W, Fadzil HM, Rauf RAA (2025). Bridging self-directed
