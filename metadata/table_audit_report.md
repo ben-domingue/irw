@@ -1,4 +1,4 @@
-# IRW table-name consistency audit -- 2026-11-06
+# IRW table-name consistency audit -- 2026-11-09
 
 Ground truth: `irw::irw_list_tables(source = c("core","comp","nom","sim"))`. 
 Dictionary sheets plus automated_finding/dictionary_auto*.csv included (Public rows only).

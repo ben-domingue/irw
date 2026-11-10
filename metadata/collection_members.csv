@@ -4,6 +4,7 @@ abbasi_2024_bfi,big_five,rule:cname:big.?five|five.?factor|\bipip\b|neo.?(pi|ffi
 abbasi_2024_epds,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 abdelrheem_2026_ffmq,mindfulness,rule:cname:mindful|\bffmq\b|\bmaas\b
 abdullah_2024_blqol,wellbeing,rule:cname:well.?being|life satisfaction|\bswls\b|quality of life|whoqol
+abeck_2026_soc_diagnosis,longitudinal,rule:meta:longitudinal
 abramson_2026_israel_attachment,longitudinal,rule:meta:longitudinal
 abramson_2026_israel_attachment,rct,rule:var:treat
 abramson_2026_israel_policy,longitudinal,rule:meta:longitudinal
@@ -129,8 +130,16 @@ bakker_2020_rses,rses,wording
 bakker_2021_authoritarianism,rct,rule:var:treat
 bakker_2021_bfi15,big_five,rule:cname:big.?five|five.?factor|\bipip\b|neo.?(pi|ffi)|\bbfi\b|hexaco
 bakker_2021_bfi15,rct,rule:var:treat
+bando_2026_aaq2,longitudinal,rule:meta:longitudinal
+bando_2026_ais,longitudinal,rule:meta:longitudinal
+bando_2026_dbas16,longitudinal,rule:meta:longitudinal
+bando_2026_ics,longitudinal,rule:meta:longitudinal
+bando_2026_psas,longitudinal,rule:meta:longitudinal
+bando_2026_spaq,longitudinal,rule:meta:longitudinal
+bando_2026_srbq,longitudinal,rule:meta:longitudinal
 banerjee_2025_arithmetic_market,math,rule:cname:^(?!.*(anxi|attitude|self.?efficacy|self.?concept|emotion|motivat|interest|enjoy|belief|confiden|value|stereotype)).*(\bmath|arithmetic|algebra|fraction)
 banerjee_2025_arithmetic_school,math,rule:cname:^(?!.*(anxi|attitude|self.?efficacy|self.?concept|emotion|motivat|interest|enjoy|belief|confiden|value|stereotype)).*(\bmath|arithmetic|algebra|fraction)
+banerjee_2025_sepq,clustered,rule:var:cluster_id
 bang_2023_anxiety,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 bang_2023_anxiety,rct,rule:var:treat
 bang_2023_depression,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
@@ -187,6 +196,7 @@ bfi_goldberg_1992_conscientiousness,big_five,rule:cname:big.?five|five.?factor|\
 bfi_goldberg_1992_extraversion,big_five,rule:cname:big.?five|five.?factor|\bipip\b|neo.?(pi|ffi)|\bbfi\b|hexaco
 bfi_goldberg_1992_neuroticism,big_five,rule:cname:big.?five|five.?factor|\bipip\b|neo.?(pi|ffi)|\bbfi\b|hexaco
 bfi_goldberg_1992_openness_to_experience,big_five,rule:cname:big.?five|five.?factor|\bipip\b|neo.?(pi|ffi)|\bbfi\b|hexaco
+bhullar_2023_bfi10,big_five,rule:cname:big.?five|five.?factor|\bipip\b|neo.?(pi|ffi)|\bbfi\b|hexaco
 bitew_2020_anxiety,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 bitew_2020_phq9,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 bitew_2020_phq9,phq9,supplied
@@ -219,6 +229,7 @@ broadband_inventories,response_time,rule:var:rt
 buczel_2022_inoculation_belief,rct,rule:var:treat
 bukhori_2024_dass,dass21,name
 bukurov_2022_comq12,longitudinal,rule:meta:longitudinal
+bullock_2023_bfi10,big_five,rule:cname:big.?five|five.?factor|\bipip\b|neo.?(pi|ffi)|\bbfi\b|hexaco
 burchert_2019_momentary_mood,longitudinal,rule:meta:longitudinal
 burchert_2019_phq9,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 burgess_2025_soas,longitudinal,rule:meta:longitudinal
@@ -394,6 +405,12 @@ cao_2026_cdss_intention_to_use,rct,rule:var:treat
 cao_2026_cdss_perceived_autonomy,rct,rule:var:treat
 cao_2026_cdss_professional_knowledge,rct,rule:var:treat
 caprara_2020_panas,affect_panas,rule:cname:panas|positive and negative af
+carbone_2026_fakenews_share,clustered,rule:var:cluster_id
+carbone_2026_fakenews_share,longitudinal,rule:meta:longitudinal
+carbone_2026_fakenews_share,rct,rule:var:treat
+carbone_2026_fakenews_truth,clustered,rule:var:cluster_id
+carbone_2026_fakenews_truth,longitudinal,rule:meta:longitudinal
+carbone_2026_fakenews_truth,rct,rule:var:treat
 caselli_2023_abc,longitudinal,rule:meta:longitudinal
 caselli_2023_bbs,longitudinal,rule:meta:longitudinal
 cayetano_2012_self_esteem,self_esteem,rule:cname:rosenberg|self.?esteem|\brses\b
@@ -439,6 +456,7 @@ chen_2025_social_anxiety,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 chen_2026_clubs_social_anxiety,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 chen_2026_social_anxiety,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 chess_lnirt,response_time,rule:var:rt
+chew_2016_phq9,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 chile_2023_social-welfare-survey_a,longitudinal,rule:meta:longitudinal
 chile_2023_social-welfare-survey_a,wellbeing,rule:cname:well.?being|life satisfaction|\bswls\b|quality of life|whoqol
 chile_2023_social-welfare-survey_ee,longitudinal,rule:meta:longitudinal
@@ -451,6 +469,8 @@ chile_2023_social-welfare-survey_ss,longitudinal,rule:meta:longitudinal
 chile_2023_social-welfare-survey_u,longitudinal,rule:meta:longitudinal
 chile_2023_social-welfare-survey_vv,longitudinal,rule:meta:longitudinal
 chile_2023_social-welfare-survey_yy,longitudinal,rule:meta:longitudinal
+chinvararak_2022_gad7,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
+chinvararak_2022_phq9,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 cho_2023_ipss,longitudinal,rule:meta:longitudinal
 cho_2023_oabss,longitudinal,rule:meta:longitudinal
 choi_2020_ednet_listening,longitudinal,rule:meta:longitudinal
@@ -458,6 +478,7 @@ choi_2020_ednet_listening,response_time,rule:var:rt
 choi_2020_ednet_reading,longitudinal,rule:meta:longitudinal
 choi_2020_ednet_reading,reading_vocab,rule:cname:read(ing)?\b|vocab|lexical|spelling
 choi_2020_ednet_reading,response_time,rule:var:rt
+christensen_2017_bfi10,big_five,rule:cname:big.?five|five.?factor|\bipip\b|neo.?(pi|ffi)|\bbfi\b|hexaco
 christensen_2017_bfi10,rct,rule:var:treat
 christensen_2017_unethical,rct,rule:var:treat
 cifar10h,response_time,rule:var:rt
@@ -667,6 +688,7 @@ duraj_2026_pee,math,rule:cname:^(?!.*(anxi|attitude|self.?efficacy|self.?concept
 duraj_2026_te,longitudinal,rule:meta:longitudinal
 duraj_2026_te,math,rule:cname:^(?!.*(anxi|attitude|self.?efficacy|self.?concept|emotion|motivat|interest|enjoy|belief|confiden|value|stereotype)).*(\bmath|arithmetic|algebra|fraction)
 durand_2022_phq9,phq9,supplied
+dutwin_2023_narcissism,dark_triad,rule:cname:dark triad|machiavell|narciss|psychopath
 dwyer_2019_clinton_cesd,cesd,wording
 dwyer_2019_clinton_cesd,longitudinal,rule:meta:longitudinal
 eammi_grahe_2018_american_dream,longitudinal,rule:meta:longitudinal
@@ -1010,6 +1032,8 @@ enke_2023_crt,response_time,rule:var:rt
 enke_2023_wason,rct,rule:var:treat
 enke_2023_wason,response_time,rule:var:rt
 erf_breuer_2017_tai,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
+espinoza_2024_dass21,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
+espinoza_2024_dass21,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 estcrm_epia,continuous_response,curated:review
 estcrm_selfeff,continuous_response,curated:review
 esteves_2026_dddt,dark_triad,rule:cname:dark triad|machiavell|narciss|psychopath
@@ -1141,6 +1165,7 @@ gad_BrummerHoffman_2021,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 gad_BrummerHoffman_2021,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 gad_BrummerHoffman_2021,longitudinal,rule:meta:longitudinal
 galanis_2025_phq4,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
+gambin_2020_phq9,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 gan_2015_cesd,cesd,supplied
 gan_2024_depression,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 gao2025_spiritual_wellbeing,wellbeing,rule:cname:well.?being|life satisfaction|\bswls\b|quality of life|whoqol
@@ -1623,6 +1648,7 @@ hannachi_2025_eco_anxiety_cope,brief_cope,name
 hannachi_2025_eco_anxiety_heas,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 hao_2025_foreign_language_anxiety,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 hartmann_2026_climate_anxiety,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
+hawlader_2021_whoqol_bref,wellbeing,rule:cname:well.?being|life satisfaction|\bswls\b|quality of life|whoqol
 hazell_2022_aq,longitudinal,rule:meta:longitudinal
 hazell_2022_iasmhs,longitudinal,rule:meta:longitudinal
 he_2026_mind_wandering,longitudinal,rule:meta:longitudinal
@@ -1835,6 +1861,7 @@ jovanovic_2026_conscientiousness_dass_d,depression,rule:cname:depress|\bphq\b|ce
 jovanovic_2026_conscientiousness_panas_na,affect_panas,rule:cname:panas|positive and negative af
 jovanovic_2026_conscientiousness_panas_na,panas,name; subscale: negative affect (10/20)
 jutte_2024_loneliness,longitudinal,rule:meta:longitudinal
+kabir_2023_tam_ta,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 kahraman_2026_bai,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 kalimahnorms_alzahrani_2025,rater_mediated,rule:var:rater
 kalimahnorms_alzahrani_2025,response_time,rule:var:rt
@@ -1863,10 +1890,13 @@ karahan_kaplan_2024_mindfulness,mindfulness,rule:cname:mindful|\bffmq\b|\bmaas\b
 karas_2022_cetscale_en,rct,rule:var:treat
 karas_2022_cetscale_pl,rct,rule:var:treat
 Karim2022_tmoca_subscales_longitudinal,longitudinal,rule:meta:longitudinal
+karim_2022_phq9,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 karlsson_2023_climate_risk,longitudinal,rule:meta:longitudinal
 karlsson_2023_climate_risk,rct,rule:var:treat
 kasparek_2025_gad7,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 kasparek_2025_phq8,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
+kawakami_2020_dass21,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
+kawakami_2020_dass21,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 kayir_2026_tipi,big_five,rule:cname:big.?five|five.?factor|\bipip\b|neo.?(pi|ffi)|\bbfi\b|hexaco
 kazarovytska_2026_ingroup_event_attrib,rater_mediated,rule:var:rater
 kazarovytska_2026_ingroup_event_presence,rater_mediated,rule:var:rater
@@ -1899,6 +1929,7 @@ kim_2023_gad7,gad7,supplied
 kim_2023_phq9,phq9,supplied
 kim_2023_pss10,pss10,name
 kim_2025_isi,isi,supplied
+kirkland_2015_bfas,big_five,rule:cname:big.?five|five.?factor|\bipip\b|neo.?(pi|ffi)|\bbfi\b|hexaco
 kitayama_2022_hweat_retest,longitudinal,rule:meta:longitudinal
 klippel_irw,continuous_response,curated:bd
 knight_2026_crt,rct,rule:var:treat
@@ -2046,6 +2077,7 @@ manylabs2_klein_2018_bauer,rct,rule:var:treat
 manylabs2_klein_2018_giessner,clustered,rule:var:cluster_id
 manylabs2_klein_2018_giessner,rct,rule:var:treat
 manylabs2_klein_2018_mfq,clustered,rule:var:cluster_id
+manylabs2_klein_2018_panas,affect_panas,rule:cname:panas|positive and negative af
 manylabs2_klein_2018_panas,clustered,rule:var:cluster_id
 manylabs2_klein_2018_panas,rct,rule:var:treat
 manylabs2_klein_2018_swls,clustered,rule:var:cluster_id
@@ -2063,6 +2095,7 @@ manylabs3_ebersole_2016_stress,clustered,rule:var:cluster_id
 manylabs3_ebersole_2016_tipi,clustered,rule:var:cluster_id
 manylabs4_klein_2022_essay,clustered,rule:var:cluster_id
 manylabs4_klein_2022_essay,rct,rule:var:treat
+manylabs4_klein_2022_panasx,affect_panas,rule:cname:panas|positive and negative af
 manylabs4_klein_2022_panasx,clustered,rule:var:cluster_id
 manylabs4_klein_2022_panasx,rct,rule:var:treat
 manysmiles_coles_2022_body_awareness,clustered,rule:var:cluster_id
@@ -2077,6 +2110,7 @@ margaretto_2025_translation_study_2_readingcomprehension,reading_vocab,rule:cnam
 margaretto_2025_translation_study_2_vocabulary_full,reading_vocab,rule:cname:read(ing)?\b|vocab|lexical|spelling
 marian_2023_gad,intensive_longitudinal,rule:var:date+wave
 marian_2023_gad,longitudinal,rule:meta:longitudinal
+marian_2023_phq9,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 marian_2023_phq9,intensive_longitudinal,rule:var:date+wave
 marian_2023_phq9,longitudinal,rule:meta:longitudinal
 marian_2023_thoughts,intensive_longitudinal,rule:var:date+wave
@@ -2174,6 +2208,8 @@ mindfulness_assessment,mindfulness,rule:cname:mindful|\bffmq\b|\bmaas\b
 mironshatz_2015_swls,swls,name
 moe2025_erq,erq,supplied
 mohamed_2024_ppos,longitudinal,rule:meta:longitudinal
+mojsa_kaja_2023_bdi2,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
+mojsa_kaja_2023_stai_s,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 montana_blasco_2026_tiktok_wellbeing,wellbeing,rule:cname:well.?being|life satisfaction|\bswls\b|quality of life|whoqol
 moon_2023_selfesteem,self_esteem,rule:cname:rosenberg|self.?esteem|\brses\b
 moore_2023_ptgi,longitudinal,rule:meta:longitudinal
@@ -2288,10 +2324,12 @@ nature_relatedness,tipi,supplied
 neivasantos_2026_bes,longitudinal,rule:meta:longitudinal
 neivasantos_2026_comm_channels,longitudinal,rule:meta:longitudinal
 neivasantos_2026_oeq,longitudinal,rule:meta:longitudinal
+nepal_2024_phq4,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 nepal_2024_phq4,intensive_longitudinal,rule:var:date+wave
 nepal_2024_phq4,longitudinal,rule:meta:longitudinal
 nepal_2024_state_self_esteem,intensive_longitudinal,rule:var:date+wave
 nepal_2024_state_self_esteem,longitudinal,rule:meta:longitudinal
+nepal_2024_state_self_esteem,self_esteem,rule:cname:rosenberg|self.?esteem|\brses\b
 neubauer_2021_paco_autonomy_support,intensive_longitudinal,rule:var:date+wave
 neubauer_2021_paco_autonomy_support,longitudinal,rule:meta:longitudinal
 neubauer_2021_paco_bmpn,intensive_longitudinal,rule:var:date+wave
@@ -2302,6 +2340,7 @@ neubauer_2021_paco_corona_info,intensive_longitudinal,rule:var:date+wave
 neubauer_2021_paco_corona_info,longitudinal,rule:meta:longitudinal
 neubauer_2021_paco_mindfulness,intensive_longitudinal,rule:var:date+wave
 neubauer_2021_paco_mindfulness,longitudinal,rule:meta:longitudinal
+neubauer_2021_paco_mindfulness,mindfulness,rule:cname:mindful|\bffmq\b|\bmaas\b
 neubauer_2021_paco_parent_affect,intensive_longitudinal,rule:var:date+wave
 neubauer_2021_paco_parent_affect,longitudinal,rule:meta:longitudinal
 neubauer_2021_paco_parenting,intensive_longitudinal,rule:var:date+wave
@@ -2349,6 +2388,10 @@ nonverbal_immediacy,response_time,rule:var:rt
 novara_2019_asir,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 novara_2019_panas,affect_panas,rule:cname:panas|positive and negative af
 number_pattern_game,response_time,rule:var:rt
+nurnberger_2022_bai,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
+nurnberger_2022_stai_state,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
+nurnberger_2022_stai_trait,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
+nurnberger_2022_who5,wellbeing,rule:cname:well.?being|life satisfaction|\bswls\b|quality of life|whoqol
 odachi_2022_fear_covid19,fcv19s,name
 offlinefriend_bigfive,big_five,rule:cname:big.?five|five.?factor|\bipip\b|neo.?(pi|ffi)|\bbfi\b|hexaco
 okoro_2022_interest_inventory,rct,rule:var:treat
@@ -2451,6 +2494,7 @@ PEMAIW_Qiu_2020_SWLS,mindfulness,rule:cname:mindful|\bffmq\b|\bmaas\b
 PEMAIW_Qiu_2020_SWLS,swls,name
 PEMAIW_Qiu_2020_SWLS,wellbeing,rule:cname:well.?being|life satisfaction|\bswls\b|quality of life|whoqol
 perazzo_2020_pohw,wellbeing,rule:cname:well.?being|life satisfaction|\bswls\b|quality of life|whoqol
+perez_fuentes_2020_affect_balance,affect_panas,rule:cname:panas|positive and negative af
 perez_hernandez_2021_cesd7,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 perez_hernandez_2021_cesd7,longitudinal,rule:meta:longitudinal
 perez_hernandez_2021_elcsa,longitudinal,rule:meta:longitudinal
@@ -2557,6 +2601,7 @@ pisa2022_read,response_time,rule:var:rt
 pisa2022_science,intl_assessment,rule:cname:\bpisa\b|timss|\bpirls\b|\bnaep\b
 pisa2022_science,response_time,rule:var:rt
 pks_probability,longitudinal,rule:meta:longitudinal
+pks_probability,q_matrix,rule:var_prefix:qmatrix
 platte_2026_challenges,math,rule:cname:^(?!.*(anxi|attitude|self.?efficacy|self.?concept|emotion|motivat|interest|enjoy|belief|confiden|value|stereotype)).*(\bmath|arithmetic|algebra|fraction)
 platte_2026_effort,math,rule:cname:^(?!.*(anxi|attitude|self.?efficacy|self.?concept|emotion|motivat|interest|enjoy|belief|confiden|value|stereotype)).*(\bmath|arithmetic|algebra|fraction)
 platte_2026_help_seeking,math,rule:cname:^(?!.*(anxi|attitude|self.?efficacy|self.?concept|emotion|motivat|interest|enjoy|belief|confiden|value|stereotype)).*(\bmath|arithmetic|algebra|fraction)
@@ -2636,6 +2681,7 @@ protestant_workethic,response_time,rule:var:rt
 protestant_workethic,tipi,wording
 psa001_jones_2021_face_traits,rater_mediated,rule:var:rater
 psa001_jones_2021_face_traits,response_time,rule:var:rt
+psacr001_dorison_2022_anxiety,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 psacr001_dorison_2022_anxiety,rct,rule:var:treat
 psacr001_dorison_2022_behint,rct,rule:var:treat
 psacr001_dorison_2022_policy,rct,rule:var:treat
@@ -2652,6 +2698,10 @@ ptacek2023_swls,swls,name
 ptam1_immer,rater_mediated,rule:var:rater
 PTAM_Kretzschmar_2017_MicroFIN,longitudinal,rule:meta:longitudinal
 purizaca_2012_self_esteem,self_esteem,rule:cname:rosenberg|self.?esteem|\brses\b
+pytlikzillig_2017_dispositional_trust,longitudinal,rule:meta:longitudinal
+pytlikzillig_2017_government_trust,longitudinal,rule:meta:longitudinal
+pytlikzillig_2017_institutional_trust,longitudinal,rule:meta:longitudinal
+pytlikzillig_2017_water_knowledge,longitudinal,rule:meta:longitudinal
 QADT_Kleka_2023,longitudinal,rule:meta:longitudinal
 qi_2024_mspss,mspss,name
 qi_2024_phq9,phq9,name
@@ -2864,6 +2914,7 @@ schalet_2016_hrsd,longitudinal,rule:meta:longitudinal
 schalet_2016_hrsd,rct,rule:var:treat
 scharbert_2024_esm_affect,intensive_longitudinal,rule:var:date+wave
 scharbert_2024_esm_affect,longitudinal,rule:meta:longitudinal
+scharbert_2024_esm_affect,wellbeing,rule:cname:well.?being|life satisfaction|\bswls\b|quality of life|whoqol
 scheerhagen_2019_reproq,longitudinal,rule:meta:longitudinal
 schoen_2007_neoffi,big_five,rule:cname:big.?five|five.?factor|\bipip\b|neo.?(pi|ffi)|\bbfi\b|hexaco
 schoen_2019_to_2022_mkt,longitudinal,rule:meta:longitudinal
@@ -2882,6 +2933,7 @@ sd3ypl_klimczak_2019_sd3,sd3,name; partial: 26/27 items
 sd3ypl_klimczak_2019_ses,rses,name
 sd3ypl_klimczak_2019_ses,self_esteem,rule:cname:rosenberg|self.?esteem|\brses\b
 sejna_2025_saqc,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
+sekowski_2023_phq9,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 sel_marca_2025_estudantes,longitudinal,rule:meta:longitudinal
 sel_marca_2025_familiares,longitudinal,rule:meta:longitudinal
 sel_marca_2025_professores,longitudinal,rule:meta:longitudinal
@@ -2889,6 +2941,7 @@ senosy_2025_anxiety_state,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 senosy_2025_anxiety_trait,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 sensorimotor_repetto_2022,rater_mediated,rule:var:rater
 SF12_MLCIRTwithin,wellbeing,rule:cname:well.?being|life satisfaction|\bswls\b|quality of life|whoqol
+shan_2024_bfi_s,big_five,rule:cname:big.?five|five.?factor|\bipip\b|neo.?(pi|ffi)|\bbfi\b|hexaco
 shan_2024_bfi_s,longitudinal,rule:meta:longitudinal
 shehayeb_2024_math_anxiety,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 shehayeb_2024_math_teacher,math,rule:cname:^(?!.*(anxi|attitude|self.?efficacy|self.?concept|emotion|motivat|interest|enjoy|belief|confiden|value|stereotype)).*(\bmath|arithmetic|algebra|fraction)
@@ -2898,6 +2951,7 @@ shi_2025_dass21,longitudinal,rule:meta:longitudinal
 shi_2025_maas,longitudinal,rule:meta:longitudinal
 shi_2025_resilience,longitudinal,rule:meta:longitudinal
 shi_2025_rrs,longitudinal,rule:meta:longitudinal
+shi_2026_ai_offloading,longitudinal,rule:meta:longitudinal
 shiota_2026_dass21,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 shiota_2026_dass21,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 shiota_2026_dass21,longitudinal,rule:meta:longitudinal
@@ -2973,6 +3027,7 @@ SPQVS_Barnby_2017_WHO,wellbeing,rule:cname:well.?being|life satisfaction|\bswls\
 stecula_2020_antivax,longitudinal,rule:meta:longitudinal
 steinberg_2023_mentalizing_momentary,longitudinal,rule:meta:longitudinal
 stenhouse_2026_math_anxiety,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
+stiglic_2019_wemwbs,wellbeing,rule:cname:well.?being|life satisfaction|\bswls\b|quality of life|whoqol
 stoyel_2021_athlete_internal,longitudinal,rule:meta:longitudinal
 stoyel_2021_body_dissat,longitudinal,rule:meta:longitudinal
 stoyel_2021_bulimia,longitudinal,rule:meta:longitudinal
@@ -3040,6 +3095,7 @@ takacs_2026_phq9,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 talaifar_2025_study1_bfi,bfi44,name
 talaifar_2025_study1_bfi,big_five,rule:cname:big.?five|five.?factor|\bipip\b|neo.?(pi|ffi)|\bbfi\b|hexaco
 tammilehto_2022_emotion_regulation,longitudinal,rule:meta:longitudinal
+tammilehto_2022_ipip_neuroticism,big_five,rule:cname:big.?five|five.?factor|\bipip\b|neo.?(pi|ffi)|\bbfi\b|hexaco
 tammilehto_2022_state_attachment,longitudinal,rule:meta:longitudinal
 tanck_2021_bcq,longitudinal,rule:meta:longitudinal
 tanck_2021_edeq,longitudinal,rule:meta:longitudinal
@@ -3138,6 +3194,8 @@ trusz_2025_techno_anxiety,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 tsujimura_2022_bdi,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 tuason_2021_wellbeing,wellbeing,rule:cname:well.?being|life satisfaction|\bswls\b|quality of life|whoqol
 turpochaparro_2026_self_esteem,self_esteem,rule:cname:rosenberg|self.?esteem|\brses\b
+turunen_2021_sdq,clustered,rule:var:cluster_id
+turunen_2021_sdq,longitudinal,rule:meta:longitudinal
 ucla_BrummerHoffman_2021,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 ucla_BrummerHoffman_2021,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 ucla_BrummerHoffman_2021,longitudinal,rule:meta:longitudinal
@@ -3173,6 +3231,8 @@ vermeiren_2022_nd,reading_vocab,rule:cname:read(ing)?\b|vocab|lexical|spelling
 vermeiren_2022_rf,reading_vocab,rule:cname:read(ing)?\b|vocab|lexical|spelling
 vermeiren_2022_vocab,reading_vocab,rule:cname:read(ing)?\b|vocab|lexical|spelling
 vezhodulu_2025_rses,self_esteem,rule:cname:rosenberg|self.?esteem|\brses\b
+vicens_2021_hads,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
+vicens_2021_hads,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 vilela_estrada_2025_hads,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 vilela_estrada_2025_hads,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 vinasvelazquez_2022_vsabhc,longitudinal,rule:meta:longitudinal
@@ -3242,7 +3302,12 @@ wang_2026_research_quality_gpt4o,rater_mediated,rule:var:rater
 wang_2026_social_desirability,rct,rule:var:treat
 wang_2026_technology_anxiety,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 wang_onlineriskexp_2025_anxiety,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
+weeldenburg_2020_agpeq,clustered,rule:var:cluster_id
+weeldenburg_2020_bpnsfs,clustered,rule:var:cluster_id
+weeldenburg_2020_brpeq,clustered,rule:var:cluster_id
+weeldenburg_2020_mcsys,clustered,rule:var:cluster_id
 wekker_2018_mfsq,rct,rule:var:treat
+wellbeing_kocar_2025_swb,wellbeing,rule:cname:well.?being|life satisfaction|\bswls\b|quality of life|whoqol
 wemwbs_BrummerHoffman_2021,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 wemwbs_BrummerHoffman_2021,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 wemwbs_BrummerHoffman_2021,longitudinal,rule:meta:longitudinal
@@ -3322,6 +3387,8 @@ wondie_2020_hads,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 wondie_2020_hads,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 wong_2026_eca_disclosure,longitudinal,rule:meta:longitudinal
 woodall_2020_bfi44,bfi44,name
+wu2021_affect,affect_panas,rule:cname:panas|positive and negative af
+wu2021_affect,wellbeing,rule:cname:well.?being|life satisfaction|\bswls\b|quality of life|whoqol
 wu2021_swls,swls,name
 wu_2025_flow_state,longitudinal,rule:meta:longitudinal
 wunn_2026_cognitive_load,rct,rule:var:treat
@@ -3364,6 +3431,7 @@ ye_2025_q25_scale,gse,name
 yin_2022_gad7,gad7,supplied
 yu2025,continuous_response,curated:review
 yu2025,trials,curated:scout
+yu_2015_bdi,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 yu_2025_bedtime_procrastination,longitudinal,rule:meta:longitudinal
 yu_2025_dass21,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 yu_2025_mobile_addiction,longitudinal,rule:meta:longitudinal
@@ -3396,7 +3464,9 @@ zhao_2024_anxiety,longitudinal,rule:meta:longitudinal
 zhao_2024_depression,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 zhao_2024_depression,longitudinal,rule:meta:longitudinal
 zhao_2024_erq,erq,supplied
+zhao_2024_gad7,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 zhao_2024_nssi,longitudinal,rule:meta:longitudinal
+zhao_2024_phq9,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 zhao_2025_digital_literacy,longitudinal,rule:meta:longitudinal
 zheng_2017_personality,big_five,rule:cname:big.?five|five.?factor|\bipip\b|neo.?(pi|ffi)|\bbfi\b|hexaco
 zheng_2017_sds_sas,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
