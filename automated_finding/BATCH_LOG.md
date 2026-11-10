@@ -27143,7 +27143,7 @@ nodes whose listing errored (a000424 `2rmsj`, a000465 `528qe`).
   sample with date of birth, diagnoses and medication), a000410 and a000413 (no
   data files).
 
-## 2026-11-10 — Hour run lane E (repos mode 3, new terms): 8 deposits, 37 tables, 321,037 responses; 1 held
+## 2026-11-10 — Hour run lane E (repos mode 3, new terms): 9 deposits, 38 tables, 379,002 responses; 1 held
 
 **Terms (8 English x 9 languages = 72 queries, all logged in `search_terms_log.csv`):**
 misophonia, autistic camouflaging, zero-sum beliefs, nostalgia scale, trypophobia,
@@ -27210,5 +27210,20 @@ no description/paper and the file is named "sample data"; left as `unworked`), I
 (trumbull questionnaires, paszkowskarogacz, veramendoza, ay Data2), the REDCap dictionary
 in the OSF deposit (williams), headers only (imaizumi, fazi, walker).
 
-**Bookkeeping:** 37 dictionary + codebook rows (`stage_dict_row.py`), 37 tag rows in
-`tags/tags_auto.csv`, 72 `search_terms_log.csv` rows, seen-key ledger appends + refined flags.
+**Bookkeeping (both rounds):** 38 dictionary + codebook rows (`stage_dict_row.py`), 38 tag rows in
+`tags/tags_auto.csv`, 108 `search_terms_log.csv` rows, seen-key ledger appends + refined flags.
+
+**Round 2 (same lane, 15:36-15:45):** 4 more terms x 9 languages (36 queries), all absent from
+the log: hyperacusis, misokinesia, noise sensitivity, highly sensitive person. That gave 146 new
+candidates; 74 were triaged (the rest were already in the seen ledger): good 1, human_assistance 26,
+no_usable_file 28, download_failed 10, plus a few rejects. Step 2b ran in all 4 processes and
+archived 4 human_review rows. Zenodo answered 429 on 8 non-English queries; these were not re-run.
+- **Shipped:** `may_2020_hsps` (Mendeley 32p7btkgr4, Current Psychology 2020, CC BY):
+  Highly Sensitive Person Scale, 27 items, 1-7, with Birth to Twenty (1,400) and students (750)
+  stacked with cov_study. The deposits' ids are replaced by sample-prefixed row indices. The 3
+  "researcher-generated reverse-scored items" were not shipped (reversal state unknown).
+- **Unworked:** Polish HSPS (Mendeley 7mj932wh75, 683 emerging adults). It has 4+ consecutive
+  exact-duplicate rows that look like double entry, and the sheet-number column mixes initials
+  with 4 digits. Needs a dedup rule and a PII read first. The 14 recoverable_format rows are
+  mostly political-science "personality" replication files, not opened.
+
