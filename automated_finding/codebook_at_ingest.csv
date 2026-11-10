@@ -1273,6 +1273,9 @@ garciaramirez_2025_crossing_noncompliant,conj,none,2026-10-14
 garciaramirez_2026_parking_loja,conj,none,2026-10-14
 garciaramirez_2026_parking_national,conj,none,2026-10-14
 gatto_2025_candidate_selection,conj,none,2026-10-07
+gavinchocano_2026_tmms_attention,core,none,2026-11-10
+gavinchocano_2026_tmms_clarity,core,none,2026-11-10
+gavinchocano_2026_tmms_repair,core,none,2026-11-10
 gazmararian_2024_net_metering,conj,https://dataverse.harvard.edu/api/access/datafile/8125328,2026-10-09
 gazmararian_2024_transition_fair,conj,https://dataverse.harvard.edu/api/access/datafile/7514613,2026-10-09
 gazmararian_2024_transition_national,conj,https://dataverse.harvard.edu/api/access/datafile/7514613,2026-10-09
@@ -2474,6 +2477,12 @@ ma_2024_performance_expectancy,core,none,2026-10-19
 ma_2024_privacy_risk,core,none,2026-10-19
 ma_2024_security_risk,core,none,2026-10-19
 ma_2024_social_influence,core,none,2026-10-19
+ma_2025_absorptive_capability,core,none,2026-11-10
+ma_2025_decision_optimization,core,none,2026-11-10
+ma_2025_digital_intelligence,core,none,2026-11-10
+ma_2025_innovation_capability,core,none,2026-11-10
+ma_2025_response_capability,core,none,2026-11-10
+ma_2025_restorative_capability,core,none,2026-11-10
 ma_2026_psec,core,https://dataverse.harvard.edu/api/access/datafile/13956107,2026-10-15
 ma_2026_towb,core,https://dataverse.harvard.edu/api/access/datafile/13956107,2026-10-15
 ma_2026_tpi,core,https://dataverse.harvard.edu/api/access/datafile/13956107,2026-10-15
