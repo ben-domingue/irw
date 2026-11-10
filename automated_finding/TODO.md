@@ -4,7 +4,7 @@
 
 Full write-up in `BATCH_LOG.md` (2026-11-10 hour-1110 lane C). Hand-off: `~/irw-wt/hour-1110/hour-1110-c.md`.
 
-- [ ] **Upload (orchestrator)**: 63 response tables (239,046 responses) from
+- [ ] **Upload (orchestrator)**: 63 response tables (245,606 responses) from
   `~/irw-wt/hour-1110-c/automated_finding/irw_output/`: gracio_michelon_2026 x30,
   hernandezamaro_2026_fcd, gray_2026 x6, amorim_2026_ctar, song_2026 x5, liu_2024_bdi2,
   gezgin_2026 x3, gavinchocano_2026_tmms x3, ma_2025 x6, camacho_2025_mil x2, garciabacete_2023

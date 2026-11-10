@@ -15,7 +15,7 @@ One-hour acquisition run, lane `hour-1110-c`, worktree `~/irw-wt/hour-1110-c`. H
 (`irw_claude_assist.py --archive --backend cli`, 75 rows, 2 `lead` verdicts), then by hand the archive's
 multi-file rows. No discovery searches were run, so `search_terms_log.csv` is unchanged.
 
-Shipped (63 tables, 239,046 responses, all `irw-validate --profile upload` clean):
+Shipped (63 tables, 245,606 responses, all `irw-validate --profile upload` clean):
 - gracio_michelon_2026 x30 (mendeley wjw7b6ghc8, CC BY): two labelled .sav experiments on applicant
   reactions to human/AI/hybrid rejection. Nine blocks worded identically in both studies merged with
   cov_study (n=509); 15 Study 1 blocks (n=125, incl. nine SPJS subscales, PANAS PA/NA); 6 Study 2
