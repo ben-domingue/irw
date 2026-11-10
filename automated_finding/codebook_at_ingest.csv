@@ -680,6 +680,7 @@ cho_2026_asian_panethnic,conj,none,2026-10-09
 choi_2020_pt_competency_frequency,core,https://dataverse.harvard.edu/api/access/datafile/4074462,2026-11-09
 choi_2020_pt_competency_importance,core,https://dataverse.harvard.edu/api/access/datafile/4074462,2026-11-09
 choi_2021_job_satisfaction,core,none,2026-10-20
+chong_2018_osce_examiner,core,none,2026-11-10
 chou_2021_party_candidates,conj,https://dataverse.harvard.edu/api/access/datafile/4297888,2026-10-09
 choy_2024_shark_fin,conj,none,2026-10-14
 christensen_2017_bfi10,core,none,2026-11-04
@@ -1137,6 +1138,7 @@ favero_2020_covid_attitudes,core,https://dataverse.harvard.edu/api/access/datafi
 favero_2020_prosocial_motivation,core,https://dataverse.harvard.edu/api/access/datafile/3829236,2026-10-09
 favero_2020_social_distancing,core,https://dataverse.harvard.edu/api/access/datafile/3829236,2026-10-09
 fecker_2026_mansplaining,core,https://zenodo.org/records/22014024/files/Data%20set_Mansplaining%20and%20Flow%20Experience%20in%20Alpine%20Outdoor%20Winter%20Sports.sav,2026-10-18
+felthun_2021_teleosce,core,none,2026-11-10
 feng_2023_fas,core,https://zenodo.org/api/records/10070595/files/README.md/content,2026-10-20
 feng_2025_qlq_swb32,core,none,2026-11-02
 fernandez_dominguez_2017_cvp,core,none,2026-11-09
@@ -4673,6 +4675,9 @@ tuszynska_bogucka_2024_family_apgar,core,none,2026-10-15
 tuxhorn_2026_tax_equity,conj,none,2026-11-10
 tyllianakis_2025_agri_schemes_uk,conj,https://zenodo.org/api/records/17551096/files/Survey_EN.pdf/content,2026-10-09
 tzouras_2025_mode_safety,conj,https://zenodo.org/api/records/17779261/files/README_perceivedSafetyChoices_v2.0.rtf/content,2026-10-14
+uhm_2024_pemt_difficulty,core,https://dataverse.harvard.edu/api/access/datafile/10361407,2026-11-10
+uhm_2024_pemt_frequency,core,https://dataverse.harvard.edu/api/access/datafile/10361407,2026-11-10
+uhm_2024_pemt_importance,core,https://dataverse.harvard.edu/api/access/datafile/10361407,2026-11-10
 umit_2022_wind_turbines,conj,https://dataverse.harvard.edu/api/access/datafile/6160242,2026-10-09
 upegui_arango_2020_inq,core,https://doi.org/10.1371/journal.pone.0232030.s001,2026-11-02
 uritani_2023_ases8,core,none,2026-10-06
