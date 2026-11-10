@@ -1974,6 +1974,8 @@ kirkland_2015_shs,core,none,2026-11-07
 kirkland_2018_candidates_mturk,conj,https://dataverse.harvard.edu/api/access/datafile/3027904,2026-10-07
 kirkland_2018_candidates_yougov,conj,https://dataverse.harvard.edu/api/access/datafile/3027897,2026-10-07
 kjoller_2025_council_positions,conj,https://dataverse.harvard.edu/api/access/datafile/10095495,2026-10-07
+knedlikova_2024_rsq_coping,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0313426.s001,2026-11-09
+knedlikova_2024_rsq_stressors,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0313426.s001,2026-11-09
 knudsen_2019_news_trust,conj,none,2026-10-21
 kobayashi_2021_hk_demands_wave1,conj,https://dataverse.harvard.edu/api/access/datafile/5117158,2026-10-07
 kobayashi_2021_hk_demands_wave2,conj,https://dataverse.harvard.edu/api/access/datafile/5117158,2026-10-07
@@ -3950,6 +3952,11 @@ reinhardt_2023_materialism,core,none,2026-10-15
 reinhardt_2023_risk_aversion,core,none,2026-10-15
 reinhardt_2023_self_concept_clarity,core,none,2026-10-15
 reinsberg_2026_imf_messages,conj,none,2026-10-09
+reiss_2020_affect,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0243193.s002,2026-11-09
+reiss_2020_covid_knowledge,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0243193.s002,2026-11-09
+reiss_2020_discrepancy,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0243193.s002,2026-11-09
+reiss_2020_loneliness,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0243193.s002,2026-11-09
+reiss_2020_system_justification,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0243193.s002,2026-11-09
 ren_2026_amoral_management,core,none,2026-10-30
 ren_2026_creative_unethicality,core,none,2026-10-30
 ren_2026_job_creativity_requirement,core,none,2026-10-30
@@ -4307,6 +4314,7 @@ stapleton_2021_lotr,core,none,2026-10-10
 stapleton_2021_polknow,core,none,2026-10-10
 stapleton_2021_polknow18,core,none,2026-10-10
 stapleton_2021_tipi,core,none,2026-10-10
+stark_2021_pic_expectations,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0254644.s002,2026-11-09
 stecula_2020_antivax,core,none,2026-10-10
 steenwegen_2024_community_education,conj,https://dataverse.harvard.edu/api/access/datafile/9849455,2026-10-09
 stiglic_2019_wemwbs,core,none,2026-11-04
@@ -4645,6 +4653,8 @@ wang_2026_research_quality_gpt4o,core,none,2026-10-30
 wang_2026_social_desirability,core,none,2026-10-09
 wang_2026_wtc_inclass,core,none,2026-10-15
 wang_2026_wtc_outclass,core,none,2026-10-15
+waqas_2015_hads,core,none,2026-11-09
+waqas_2015_sps,core,none,2026-11-09
 ward_2025_korean_candidates,conj,https://dataverse.harvard.edu/api/access/datafile/13987847,2026-10-08
 wasike_2026_clickbait_detection,core,none,2026-11-09
 wasike_2026_clickbait_engagement,core,none,2026-11-09
