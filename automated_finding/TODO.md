@@ -22,6 +22,21 @@ Full write-up in `BATCH_LOG.md` (2026-11-10h lane B). Hand-off: `~/irw-wt/hour-1
 - Dryad 10.5061/dryad.5mkkwh7f8 (CC0, AMR diagnostic-AI survey, 9 CSVs) needs a Dryad API token to download; still `unworked` in `leads/pmc_leads_2026-11-10.csv`.
 - `leads/pmc_leads_2026-11-10h.csv`: 1 unworked (peerj.18306, Europe PMC 500).
 
+## hour-1110 lane C 2026-11-10 (repos leads + Step 2c) — 64 tables staged, 5 held
+
+Full write-up in `BATCH_LOG.md` (2026-11-10 hour-1110 lane C). Hand-off: `~/irw-wt/hour-1110/hour-1110-c.md`.
+
+- [ ] **Upload (orchestrator)**: 64 response tables (248,433 responses) from
+  `~/irw-wt/hour-1110-c/automated_finding/irw_output/`: gracio_michelon_2026 x30,
+  hernandezamaro_2026_fcd, gray_2026 x6, amorim_2026_ctar, song_2026 x5, liu_2024_bdi2,
+  gezgin_2026 x3, gavinchocano_2026_tmms x3, ma_2025 x6, camacho_2025_mil x2, garciabacete_2023
+  qti_ep + tsr_cr + friendship_features, frochte_2024_selaq x2, afriana_2026_sslp. No item text tables.
+- [ ] **Ben rules on holds**: samwel_2026 (looks generated; built in `runs/held/`), sultan_2023
+  PedsQL MFS (exact diagnosis dates), sandham IPOS (clinical free text + admission date),
+  boateng_2026 nursing (no codebook), shen_2026 (87 duplicated rows).
+- [ ] Item text is cheap later for gracio_michelon_2026, hernandezamaro_2026_fcd, song_2026,
+  gavinchocano_2026 and camacho_2025 (wording in labels/headers); each needs a rights-register row first.
+
 ## Hour run 2026-11-10 lane A (PLOS leads plos_leads_2026-11-10a.csv) — 69 tables staged, 2 held
 
 Full write-up in `BATCH_LOG.md` (2026-11-10h — hour lane A); hand-off in `~/irw-wt/hour-1110/hour-1110-a.md`.
