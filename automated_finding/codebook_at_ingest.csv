@@ -99,6 +99,8 @@ alqerem_2025_gina_control,core,none,2026-10-02
 alqerem_2025_mars5,core,none,2026-10-02
 alqerem_2025_pedsql_asthma,core,none,2026-10-02
 alrababah_2023_refugee_return,conj,https://dataverse.harvard.edu/api/access/datafile/6488293,2026-10-09
+alshawaf_2026_bfi2s,core,none,2026-11-10
+alshawaf_2026_fonseca,core,none,2026-11-10
 altarawneh_2023_pcps,core,none,2026-11-02
 altinsoy_2024_ol_engagement,core,none,2026-10-15
 altinsoy_2024_ol_readiness,core,none,2026-10-15
@@ -1435,6 +1437,7 @@ guo_2026_adv_political_empowerment,core,none,2026-10-30
 guo_2026_adv_psych_empowerment,core,none,2026-10-30
 guo_2026_adv_risk_perception,core,none,2026-10-30
 guo_2026_adv_social_empowerment,core,none,2026-10-30
+gurung_2025_kdqol36,core,none,2026-11-10
 gutierrez_2025_pupil_digital_competence,core,none,2026-10-15
 guul_2021_caseworker_creaming,conj,https://dataverse.harvard.edu/api/access/datafile/4003264,2026-10-14
 gwen_2025_interpersonal_comm,core,none,2026-10-07
@@ -2723,6 +2726,11 @@ morse_2020_activity_change,core,none,2026-11-07
 morse_2020_nature_values,core,none,2026-11-07
 mortenson_2025_democracy_tradeoffs,conj,https://dataverse.harvard.edu/api/access/datafile/13099404,2026-10-08
 mortenson_2026_democracy_frames,conj,https://dataverse.harvard.edu/api/access/datafile/14398314,2026-11-10
+mostova_2022_iri,core,none,2026-11-10
+mostova_2022_iss,core,none,2026-11-10
+mostova_2022_lls_express,core,none,2026-11-10
+mostova_2022_lls_felt,core,none,2026-11-10
+mostova_2022_ras,core,none,2026-11-10
 mtbench_human_2023,comps,none,2026-10-27
 mueller_2024_covid_governance,conj,none,2026-10-09
 mugisha_2026_ehr_competence,core,none,2026-10-15
@@ -5222,4 +5230,6 @@ zhu_2026_lsb_social_presence,core,none,2026-10-30
 zhu_2026_lsb_streamer_relationship,core,none,2026-10-30
 zia_2026_ai_decision_support,conj,https://dataverse.harvard.edu/api/access/datafile/13463735,2026-10-08
 ziller_2021_state_surveillance,conj,https://dataverse.harvard.edu/api/access/datafile/4189200,2026-10-11
+zoorob_2021_brs,core,none,2026-11-10
+zoorob_2021_wellbeing,core,none,2026-11-10
 zou_2020_ev_purchase,conj,https://dataverse.harvard.edu/api/access/datafile/4619721,2026-10-08
