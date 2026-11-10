@@ -49,8 +49,13 @@
 #
 # Imputation: none; no missing choice cells (asserted).
 #
-# Item text: not shipped -- the paper quotes only the footbridge question; the
-#   other scenarios are cited from earlier studies.
+# Item text: HELD. Label levels checked: both Mendeley records (dilemma names
+#   only), .sav variable labels ("moral judgment in footbridge" etc.), S1 File
+#   and the article (only the footbridge question quoted). Instruments: the
+#   Greene et al. sacrificial dilemmas (Footbridge, Raftboat, Crying Baby,
+#   Vaccine, Modified Safari, Sophie's Choice), cited to Greene et al. 2004
+#   (Neuron). No scenario text is deposited. Register GREENE-DILEMMAS (hold,
+#   new 2026-11-09).
 #
 # PII: none -- age, gender, ethnicity and political orientation only.
 

@@ -54,13 +54,26 @@
 #   "invalid responses ... or incomplete answers were removed"); no missing
 #   cells; every item cell is an integer 1-7 (asserted).
 #
-# Item text: NOT SHIPPED, though cheap in form: S1 File holds every stem in
-#   Chinese and Russian (administered) and English (reference translation,
-#   not administered). The table mixes two administered languages keyed by
-#   cov_country, and the stems were written for this study by adapting UTAUT2
-#   and Hofstede-based scales; both the per-language table shape and the
-#   adapted-from-the-literature rights question are left for the itemtext
-#   pass rather than decided here. Stems: S1 File, "Part 2. Measurement items".
+# Item text: HELD. Label levels checked: S1 Data headers (codes PE1..LTO3) and
+#   its Codebook (labels like "Performance expectancy item", no stems); S1 File
+#   "Part 2. Measurement items" prints every stem beside its code in Chinese and
+#   Russian (administered, split by cov_country) and English (a reference
+#   translation the file says "was not administered"). Identification (S1 File
+#   "Measurement sources and coding notes"): PE/EE/SI/FC/HM/BI "adapted and
+#   contextualized" from UTAUT2 (Venkatesh, Thong & Xu 2012); COL/UAI/LTO from
+#   CVSCALE (Yoo, Donthu & Lenartowicz 2011). Read against the UTAUT2 appendix:
+#   BI1, FC1, HM2 are near noun-swaps, EE2/FC3 paraphrases, the other 13 are
+#   museum-specific; UAI1/UAI3 resemble CVSCALE UA stems, COL/LTO do not. 17
+#   verbatim searches matched no prior source. Register Chen2026-Museum-UTAUT2
+#   and Chen2026-Museum-CVSCALE (hold, new 2026-11-09). Language, if ever
+#   shipped: two administered languages in one table -> language "Chinese;
+#   Russian", base fields hold one version, public_note says who read the other
+#   (itemtext_standard.md "Administered language"); or a per-country split.
+#   Rights: the paper declares the items adapted from named sources, so they
+#   are held under the 2026-11-02 domain-swap ruling (silence holds). BUT the
+#   stems read as freshly written under the cited construct labels; whether
+#   that shape is the 11-02 'still the instrument' case or the 09-23 R16
+#   'study-authored adaptation ships' class is a question for Ben.
 #
 # PII: README: "No names, email addresses, telephone numbers, free-text
 #   responses, or other direct personal identifiers are included." Screened:

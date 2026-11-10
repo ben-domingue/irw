@@ -26541,7 +26541,7 @@ and no row records which language they used.
 
 **UPLOADED 2026-11-08** (Ben, in-session): 3 item text tables. Manifest renamed `MANIFEST_2026-11-08_itemtext_phq_uploaded.txt`; `uploaded` stamped in itemtext_provenance.csv and mapping_verification.csv.
 
-## 2026-11-09 — PLOS monthly run: 12 deposits, 53 tables, 249,324 responses; Su 2025 held; no item text
+## 2026-11-09 — PLOS monthly run: 12 deposits, 53 tables, 249,324 responses; Su 2025 held; 2 item text tables
 
 Source: the 2026-11-09 PLOS monthly discovery run (PR #3448) plus a terminal
 replay of its 71 `download_failed` rows (commit 55acadb6), which together left
@@ -26651,13 +26651,44 @@ j2r8t, NPI-40 + BFI-44 x 4 studies), Cai (Wu et al., pone.0218076, OSF f4bsq,
 (pone.0264511, OSF f8m7a, 3,242 x RAS/BFI-2-XS/ECR-RD) was also sent
 2026-11-09.
 
-**Item text:** none shipped. Per deposit: vonborck (KID-KINDL/PPASC, not in
-the deposit), aljabry (PSS register block; YFAS/BES no register row), lam
-(Chinese wording not deposited), tran and jin (adapted items, not shipped),
-humayun (positional codes only), chen (stems complete in the S1 File, but two
-administered languages; cheap later), wasike (S1 headline order does not map
-to H1-H10), chhajer (WHO-5, not deposited), tong (traditional Chinese wording
-not deposited), takamatsu (dilemma texts not deposited), mo (not deposited).
+**Item text (pass of 2026-11-09, per Step 3.5; 2 tables staged, 22 new register rows):**
+- `aljabry_2026_msg_ffq` -- SHIPPED. Study-authored food list (register
+  ALJABRY-FFQ, ship); English half of the bilingual headers, language
+  `English; Arabic`; `make_itemtext_aljabry_2026.py`; data_labels, NOT_NEEDED.
+  `aljabry_2026_{yfas,bes,pss4}` held: YFAS-2 and BES (hold, new), PSS (block).
+- `lam_2015_gses` -- SHIPPED. GSE register row (ship, originators' FAQ grant);
+  Chinese wording not deposited and the CGSES translation's terms unestablished
+  (CGSES, hold, new), so the originators' English from engscal.htm ships as
+  translated_substitute, language Chinese; positional gses1..10, NO_ROUTE
+  (`verify_lam_2015.py`: one polarity, one factor). `make_itemtext_lam_2015.py`.
+  `lam_2015_cpps_*` held (CPPS, hold, new: domain-swapped IPQ-R-GP);
+  `lam_2015_chq12` held (CHQ, hold, new; GHQ derivative); `lam_2015_clotr` not
+  built (LOT-R is ship_with_note but no Chinese wording deposited and the six
+  codes cannot be tied to LOT-R positions without it).
+- `vonborck_2026_*` -- held: KINDL and PPASC (hold, new); no wording deposited.
+- `tran_2026_*` (7) -- held: TRAN-HAI-WEALTH (hold, new). Stems in S2 Codebook.
+- `jin_2024_*` (5) -- held: JIN-TPS (hold, new). Stems only in article Table 2.
+- `chen_2026_museum_*` (9) -- held: Chen2026-Museum-UTAUT2 and
+  Chen2026-Museum-CVSCALE (hold, new). Stems in S1 File in Chinese and Russian
+  (administered) + English reference translation (not administered).
+- `mo_2026_sft_*` (7) -- held: Mo2026-SFT (hold, new). English stems in S1
+  Appendix; Chinese (administered) not deposited.
+- `humayun_2026_*` -- held: LCS, LEANA-COLLAB-CRAFTING, MAKIKANGAS-TEAMPERF
+  (hold, new).
+- `wasike_2026_*` -- held: ASHLEY-NL2023, CRT-2, TFA-Herman,
+  WASIKE-SIGNAL-HEADLINES, WASIKE-CLICKBAIT-HEADLINES (hold, new); clickbait
+  headline order does not map to H1-H10 regardless.
+- `chhajer_2025_who5` -- held: WHO5 (block). `tong_2017_*` -- held: SWLS and
+  DIENER-NC (block). `takamatsu_2018_sacrificial_dilemmas` -- held:
+  GREENE-DILEMMAS (hold, new); no scenario text deposited.
+- Open for Ben: (1) tran/jin/chen/mo stems read as freshly written under cited
+  construct labels rather than noun-swaps of the source items; held under the
+  2026-11-02 domain-swap ruling, but the 2026-09-23 R16 class row
+  ("study-authored adaptations ... ship") points the other way. (2) CRT-2:
+  originators' PDF says CC BY 3.0, Crossref lists CC BY-NC-ND 3.0.
+Gates: normalize_nulls -> validate_items --resp-csv (both PASS) -> audit_batch
+--resp-dir (2/2 PASS, report in runs/), irw-validate ok, check_provenance.R no
+new failures; issues-page scan found nothing (no entries owed).
 
 **Staging:** 53 dictionary + codebook rows (`stage_dict_row.py`), 53 tag rows
 (`tags_auto_2026-11-09.csv`, appended to `tags/tags_auto.csv`), 32 lead

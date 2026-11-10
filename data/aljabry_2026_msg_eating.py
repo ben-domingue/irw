@@ -56,11 +56,26 @@
 #   questionnaires that had been completed in full"); all values are option
 #   labels, so nothing can be fractional.
 #
-# Item text: NOT SHIPPED, though it is cheap here (headers carry the English
-#   stems and S1 File carries every option). Rights block it: the PSS is
-#   registered `block` in itemtext/instrument_rights_register.csv; the YFAS 2.0
-#   and the BES have no register row, and silence does not ship. The FFQ food
-#   list is study-authored and could ship alone later.
+# Item text: SHIPPED for aljabry_2026_msg_ffq only; the other three HELD.
+#   Label levels checked: the S2 CSV has no variable/value labels (a plain CSV);
+#   its column HEADERS carry the bilingual stems (English kept, Arabic lost to
+#   '?') and its cell values are the option labels; S1 File (the bilingual
+#   Google Forms questionnaire) carries every stem and option in English and
+#   Arabic. Instruments, named from the stems (read against the article's
+#   Methods and refs 11-13):
+#   - FFQ: study-authored food list + frequency stem; the article cites no FFQ
+#     source. Register ALJABRY-FFQ (ship, article CC BY 4.0). Built by
+#     automated_finding/itemtext_verification/make_itemtext_aljabry_2026.py
+#     (English half of each header; language "English; Arabic").
+#   - YFAS: 13 items whose stems are YFAS 2.0 statements, lightly reworded
+#     (Gearhardt, Corbin & Brownell 2016; e.g. "I ate certain foods so often or
+#     in such large amounts..."; read from memory of the YFAS 2.0, not
+#     against a fetched copy).
+#     Register YFAS-2 (hold, new 2026-11-09): no redistribution grant located.
+#   - BES: 7 of the 16 Gormally et al. (1982) Binge Eating Scale statement
+#     groups. Register BES (hold, new 2026-11-09).
+#   - PSS-4: Cohen's PSS-4 stems ("unable to control the important things");
+#     register PSS (block).
 #
 # PII: screened over all 47 columns (42 string columns, every one a closed
 #   option list; 2 numeric: height, weight). No names, emails, dates, IDs,

@@ -43,13 +43,22 @@
 #   values in the analytic variables, and all 21 measurement items contain
 #   only values from 1 to 5"; asserted below. No "imput" in the article.
 #
-# Item text: NOT SHIPPED. Cheap in form (the S2 codebook gives every stem), but
-#   the paper says "Measurement items were adapted from established
-#   construct-specific scales reported in prior studies, as summarized in
-#   Table 1", so the rights question has to be answered per source scale; same
-#   adapted-from-the-literature shape as zhao_2025_* (2026-10-30), left for a
-#   general ruling rather than decided here. Stems are in S2 File, sheet
-#   "Codebook", column "Description".
+# Item text: HELD. Label levels checked: S1 XLSX headers (codes DFL1..PWMC3,
+#   the authors' own labels), S2 File sheet "Codebook" column "Description"
+#   (every stem, tied to its code) and S3 File (questionnaire PDF, English +
+#   Vietnamese, same English). Identification (paper Table 1, per construct):
+#   DFL "informed by" Lyons & Kass-Hanna 2021, Choung et al. 2023; PAAT Shin
+#   2021, de Fine Licht 2020; THA "adapted from" Gefen, Karahanna & Straub
+#   2003 and McKnight et al. 2011; IWK "based on" van Rooij, Lusardi & Alessie
+#   2011 (a knowledge test, here recast as self-ratings); DWMB Jung et al. 2018,
+#   Xiao, Tang & Shim 2009; CSP Xu et al. 2012, Bada et al. 2019; PWMC Xiao,
+#   Chen & Chen 2014. Verbatim web searches of 10 stems (1-2 per construct)
+#   matched no published scale. Register TRAN-HAI-WEALTH (hold, new 2026-11-09).
+#   Rights: the paper declares the items adapted from named sources, so they
+#   are held under the 2026-11-02 domain-swap ruling (silence holds). BUT the
+#   stems read as freshly written under the cited construct labels; whether
+#   that shape is the 11-02 'still the instrument' case or the 09-23 R16
+#   'study-authored adaptation ships' class is a question for Ben.
 #
 # PII: screened over all 28 columns; the only string column is the artificial
 #   respondent code. Demographics are banded by the depositors.

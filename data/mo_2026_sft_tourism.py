@@ -40,8 +40,20 @@
 #
 # Imputation: none; no missing cells; every item cell an integer 1-5 (asserted).
 #
-# Item text: not shipped -- S1 Appendix holds the 28 items, adapted from cited
-#   sources; left for the itemtext pass with its rights question.
+# Item text: HELD. Label levels checked: figshare data headers (codes
+#   ATT1..SVPUI4, no value labels) and the article's S1 Appendix (English stem
+#   beside each code, with a Sources column). Administered in Chinese
+#   (Wenjuanxing); the Chinese wording is not deposited. Identification: ATT,
+#   INT, PBC follow Ajzen's TPB item templates (Ajzen 1991; Han, Hsu & Sheu
+#   2010; Lam & Hsu 2006; Han et al. 2017; Soliman 2021 ...); BEH, PCA, PCT,
+#   SVPUI are SFT/short-video specific (cited: Ayeh, Au & Law 2013; Choi et al.
+#   2021; Ye et al. 2025 ...). 14 verbatim searches matched no prior source.
+#   Register Mo2026-SFT (hold, new 2026-11-09).
+#   Rights: the paper declares the items adapted from named sources, so they
+#   are held under the 2026-11-02 domain-swap ruling (silence holds). BUT the
+#   stems read as freshly written under the cited construct labels; whether
+#   that shape is the 11-02 'still the instrument' case or the 09-23 R16
+#   'study-authored adaptation ships' class is a question for Ben.
 #
 # PII: none -- every column is a coded screener, demographic or item.
 

@@ -45,9 +45,11 @@
 # Imputation: none -- missing answers are coded 8/9, and the deposit's own
 #   means are #NULL! for respondents with one (no fill-in).
 #
-# Item text: not shipped -- headers are positional; the Codebook points to
-#   Diener et al. (1985, 2010) for the stems, and the Traditional Chinese
-#   wording is not in the deposit.
+# Item text: HELD. Label levels checked: positional headers, no value labels;
+#   the DANS Codebook names the scales and points to Diener et al. (1985, 2010)
+#   for wording, and the traditional Chinese wording is not deposited.
+#   Instruments: SWLS (register SWLS, block), Flourishing Scale and SPANE
+#   (register DIENER-NC, block) -- confirmed 2026-11-09; nothing to ship.
 #
 # PII: none -- every column is a coded item, demographic or derived mean.
 

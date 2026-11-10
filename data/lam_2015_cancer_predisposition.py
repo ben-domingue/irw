@@ -60,9 +60,29 @@
 #     about imputation (no "imput" in the text), so the integer cells cannot
 #     be cleared of other imputation methods either; noted, not acted on.
 #
-# Item text: not shipped. No labels in the CSVs; the CPPS wording is in the
-#   paper's Table 1, which is an image (not cheap), and the GSES/CHQ-12/C-LOT-R
-#   are published third-party instruments.
+# Item text: SHIPPED for lam_2015_gses only (English original as a stand-in);
+#   the other four HELD. Label levels checked: the two CSVs carry no labels
+#   (headers are codes; no codebook in the SI; S1/S2 Table are demographics).
+#   The article's Table 1 prints English wording for 27 Stage I CPPS items as
+#   text (numbered I1..I27, not the deposit's IP_06..IP_38, with no key between
+#   the two), the English of a Chinese administration; Stage II's ip_ numbering
+#   is not tied to it either. Instruments, from the Methods:
+#   - GSES: Schwarzer & Jerusalem's General Self-Efficacy Scale, Chinese version
+#     (CGSES; Cheung & Sun 1999). Register GSE (ship, originators' FAQ grant).
+#     Chinese wording not deposited, and the CGSES translation's terms are
+#     unestablished (register CGSES, hold, new 2026-11-09), so the originators'
+#     English (userpage.fu-berlin.de/health/engscal.htm) ships as
+#     translated_substitute, language Chinese, gsesK = item K (positional;
+#     NO_ROUTE, verify_lam_2015.py). Built by make_itemtext_lam_2015.py.
+#   - CPPS (cpps_stage1/2): the authors' "unofficial adaptation" of the IPQ-R
+#     for genetic predisposition (Kaptein et al.), domain-swapped to cancer.
+#     Register CPPS (hold, new 2026-11-09; domain-swap rule).
+#   - CHQ-12: Chinese Health Questionnaire (Cheng & Williams; Chong & Wilkinson
+#     1989), an adaptation of Goldberg's GHQ. Register CHQ (hold, new
+#     2026-11-09; the GHQ row is block for all versions).
+#   - C-LOT-R: register LOT-R is ship_with_note, but the Chinese wording is not
+#     deposited and clot_1..6 cannot be tied to the LOT-R's scored items
+#     without it (6 of 10 positions); not cheap, left for a later pass.
 #
 # PII: screened over all 86 + 54 columns. Two Stage I columns (d9.2, d9.4) read
 #   as strings only because a blank ' ' cell sits among 0/1 codes; neither is

@@ -41,11 +41,14 @@
 # Imputation: none stated ("imput" absent from the article); every cell is an
 #   integer 1-5, no missing values (asserted).
 #
-# Item text: not shipped -- the deposit's headers are positional (C1, CC1,
-#   TP1); the Living a Calling items are in Duffy et al. (paper ref 19), the
-#   collaborative crafting stems are quoted in the paper's Measures section
-#   (Leana et al., ref 16), team performance in Makikangas et al. (ref 48). No register rows checked for either, since the stems
-#   are not in hand for all items.
+# Item text: HELD. Label levels checked: S1 CSV headers (positional C1-C6,
+#   CC1-CC3, TP1-TP5; no labels) and the article's Measures section.
+#   Instruments: Living a Calling Scale (Duffy, Bott, Allan, Torrey & Dik 2012,
+#   6 items; one sample item quoted; register LCS, hold); collaborative crafting
+#   (Leana, Appelbaum & Shevchuk 2009, 3 items, all quoted in the Measures
+#   section, a non-originator reprint; LEANA-COLLAB-CRAFTING, hold); team
+#   performance (Makikangas, Aunola, Seppala & Hakanen 2016, 5 items; one
+#   sample item; MAKIKANGAS-TEAMPERF, hold). All rows new 2026-11-09.
 #
 # PII: no string columns at all (all 22 columns integer); asserted.
 

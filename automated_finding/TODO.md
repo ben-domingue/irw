@@ -9,8 +9,13 @@ Full write-up in `BATCH_LOG.md` (2026-11-09 — PLOS monthly run).
   (`red_up irw_output`), listed in `MANIFEST_2026-11-09_plos_monthly.txt`:
   vonborck_2026 x2, aljabry_2026 x4, lam_2015 x5, tran_2026 x7, humayun_2026 x3,
   jin_2024 x5, chen_2026_museum x9, wasike_2026 x6, chhajer_2025_who5,
-  tong_2017 x3, takamatsu_2018_sacrificial_dilemmas, mo_2026_sft x7. No item
-  text. Rename the manifest `_uploaded` and stamp BATCH_LOG once done.
+  tong_2017 x3, takamatsu_2018_sacrificial_dilemmas, mo_2026_sft x7. Rename
+  the manifest `_uploaded` and stamp BATCH_LOG once done.
+- [ ] **Ben uploads** 2 item text tables from
+  `~/irw-wt/plos-monthly-1109-refetch/automated_finding/itemtext_output/`
+  (`red_up` to irw_text): `aljabry_2026_msg_ffq__items.csv`,
+  `lam_2015_gses__items.csv`. Then stamp `uploaded` in itemtext_provenance.csv
+  and mapping_verification.csv. No issues-page entries owed.
 - [ ] **su_2025_* HELD by Ben (2026-11-09)**: possible generated data. Outputs
   in `runs/held/`, script kept with a HELD header, no dictionary/codebook/tag
   rows. Ships only if Ben lifts the hold.
@@ -19,8 +24,12 @@ Full write-up in `BATCH_LOG.md` (2026-11-09 — PLOS monthly run).
   Bieleke (pone.0272443), Zhang (pone.0329651), Lenferink (pone.0358123, DANS
   Licence), Vigl (pone.0264511). All 8 sent 2026-11-09. Leads stay
   `blocked_licence` until a reply grants terms.
-- [ ] Item text, cheap later: `chen_2026_museum_*` stems are complete in the
-  S1 File (Chinese and Russian administrations; needs a language decision).
+- [ ] **Ben rules** whether freshly written stems under cited construct labels
+  (tran_2026, jin_2024, chen_2026_museum, mo_2026_sft) are the 2026-11-02
+  "still the instrument" case (hold, as now) or the R16 "study-authored
+  adaptation" class (ship). If ship: chen needs `language` "Chinese; Russian"
+  (or a per-country split) and mo has only non-administered English. Also
+  CRT-2's licence conflict (register row CRT-2).
 
 ## Item text PHQ-9/GAD-7/DASS-21, batches 5 and 7, 2026-11-08 — 3 `__items` tables staged
 

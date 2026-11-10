@@ -80,10 +80,19 @@
 # Imputation: none stated; every item cell is an integer in its scale or
 #   "#NULL!" (asserted).
 #
-# Item text: not shipped. Headline wording is in S1 File, but in a different
-#   order from the deposit's H1-H10 and with no mapping given; the news
-#   literacy and CRT items are cited to Ashley et al. and not reproduced; the
-#   TFA (Herman et al.) and signal headlines are not reproduced in the deposit.
+# Item text: HELD. Label levels checked: figshare CSV headers (NL_, CRT_,
+#   TFA_, Signal_, H codes; no value labels), the article, and S1 File.
+#   Instruments: news literacy = 15 knowledge items of Ashley, Craft, Maksl,
+#   Tully & Vraga 2023 (ref 43), modified; wording not deposited (register
+#   ASHLEY-NL2023, hold). CRT = Thomson & Oppenheimer's CRT-2 (4 items) + one
+#   study-authored item, as multiple choice; not deposited (register CRT-2,
+#   hold; the originators' PDF says CC BY 3.0 but Crossref lists CC BY-NC-ND
+#   3.0 -- unresolved). TFA = Herman et al. 2010, 12 items; not deposited
+#   (TFA-Herman, hold). Signal headlines: publishers' headlines (NBC Select,
+#   HuffPost, Wirecutter), not deposited (WASIKE-SIGNAL-HEADLINES, hold).
+#   Clickbait headlines: Bena, Rouard & Corneille 2023 + AP/NYT, printed in S1
+#   but in an order that does not map to H1-H10, and third-party
+#   (WASIKE-CLICKBAIT-HEADLINES, hold) -- unmappable regardless of rights.
 #
 # PII: with "#NULL!" read as missing, the string columns are StartDate,
 #   EndDate, ResponseID, transaction_id, Ethnicity and Ethnicity2.

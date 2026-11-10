@@ -52,11 +52,14 @@
 # Imputation: the article text has no imputation language ("imput", "MICE",
 #   "mean substitution" all absent); every shipped value is an integer.
 #
-# Item text: not shipped -- no labels in the XLSX (headers are codes) and no
-#   questionnaire in the SI. The KID-KINDL self-esteem items are in the
-#   published KINDL-R manual (Ravens-Sieberer & Bullinger); the 6-item PPASC
-#   revision is in Colella et al. 2008 (paper ref 19). Neither has a row in
-#   itemtext/instrument_rights_register.csv.
+# Item text: HELD. Label levels checked: the XLSX has no labels (headers are
+#   codes, no value labels) and the SI has no questionnaire, so no stems are in
+#   hand. Instruments, from the article's Methods: the KINDL-R self-esteem
+#   subscale, children's version (Kid-KINDL; Ravens-Sieberer & Bullinger), and
+#   the 6-item revision of the Perceived Physical Ability Scale for Children
+#   (PPASC; Colella et al. 2008, ref 19). Register KINDL and PPASC (both hold,
+#   new 2026-11-09): KINDL's own terms grant free RESEARCH use with citation,
+#   which does not reach redistribution (irw#3082); no PPASC grant located.
 #
 # PII: screened over all 61 columns; the only string column is the ID
 #   (D-prefixed study codes), which is not shipped.

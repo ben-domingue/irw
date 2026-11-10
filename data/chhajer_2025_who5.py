@@ -34,8 +34,11 @@
 # Imputation: none (incomplete responses removed before deposit, paper);
 #   no missing item cells; every item cell an integer 0-5 (asserted).
 #
-# Item text: not shipped -- headers are positional ("WHO 1"); the stems are
-#   the published WHO-5, not in the deposit.
+# Item text: HELD. Label levels checked: the deposit's headers are positional
+#   ("WHO 1".."WHO 5"), no value labels, no questionnaire in the deposit.
+#   Instrument: the WHO-5 Well-Being Index (the article names it; 5 items,
+#   0-5). Register WHO5 is `block` (WHO's CC BY-NC-SA 3.0 IGO) -- confirmed
+#   2026-11-09; nothing to ship.
 #
 # PII: no names, emails, dates or locations finer than city. The one free-text
 #   column (work experience) is dropped.

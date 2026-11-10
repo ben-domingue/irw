@@ -41,11 +41,20 @@
 # Imputation: none stated ("imput" absent from the article); no missing cells
 #   and every item cell is an integer 1-5 (asserted).
 #
-# Item text: not shipped -- the deposit's headers name only the construct; the
-#   paper says "all items in this study refer to relevant literature" and were
-#   refined with executives, so wording would come from the paper's scale
-#   table plus a per-source rights question (same adapted-from-the-literature
-#   shape as tran_2026_*, left for a general ruling).
+# Item text: HELD. Label levels checked: S1 XLSX headers (construct name +
+#   number only, no codebook, no value labels); the wording is ONLY in the
+#   article's Table 2 (3 items per construct), tied to headers by row order
+#   (an assumption). Identification: the paper says items "refer to relevant
+#   literature" and cites, per construct, Hang et al. 2024, Rao & Mattarelli
+#   2024, Ikhide et al. 2024 and Groulx et al. 2024 -- substantive papers, none
+#   a scale-development paper; the stems are not Edmondson's team
+#   psychological safety items. Verbatim web searches of 6 stems matched no
+#   published scale. Register JIN-TPS (hold, new 2026-11-09).
+#   Rights: the paper declares the items adapted from named sources, so they
+#   are held under the 2026-11-02 domain-swap ruling (silence holds). BUT the
+#   stems read as freshly written under the cited construct labels; whether
+#   that shape is the 11-02 'still the instrument' case or the 09-23 R16
+#   'study-authored adaptation ships' class is a question for Ben.
 #
 # PII: no string columns (all 21 columns numeric); asserted.
 
