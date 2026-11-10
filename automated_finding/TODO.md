@@ -57,6 +57,21 @@ Full write-up in `BATCH_LOG.md` (2026-11-10 -- overnight lane B); hand-off in
 - [ ] Next leads: `leads/repos_leads_2026-11-10b.csv` (18 unworked in rank order, plus
   Mendeley wjw7b6ghc8, a strong labelled .sav lead, and dryad.s1634 once Dryad
   downloads work with a token).
+## Overnight lane C 2026-11-10 (two repos sweeps + JEEHP collection) — 45 tables staged
+
+Full write-up in `BATCH_LOG.md` (2026-11-10c). Hand-off: `~/irw-wt/overnight-1110/overnight-1110-c.md`.
+
+- [ ] **Upload (orchestrator)**: 45 response tables (14,009,222 responses) from
+  `~/irw-wt/overnight-1110-c/automated_finding/irw_output/`. No item text tables.
+- [ ] **Ben: rabeya_2021_bdi held** (zenodo.5808314): the paper's BDI severity bands do not
+  reproduce from the item sums (N and sex do). Script + CSV in `runs/held/rabeya_2021_bdi/`.
+- [ ] **Ben: chatterjee_2017_jse held, not built** (DVN/LOGUCL): the paper mean-imputed up to
+  4 blank JSE items per form; the integer-only file cannot show which.
+- [ ] JEEHP collection: 56 `unworked` leads in `leads/repos_leads_2026-11-10c_jeehp.csv`
+  (incl. DVN/XD2QMD Chile dental, which needs an N reconciliation); the sweep's own
+  `leads/repos_leads_2026-11-10c.csv` has 21 more and `_10c2.csv` 24, incl. DVN/I2JO58 Kilifi (CC BY,
+  guestbook-gated). Cheap item text follow-ups: `pugliese_2023_gses` (GSE, register ship),
+  `ezeala_2023_csas` (needs a register row), Korean task names in `sohn_2024_*`/`choi_2020_*`.
 
 ## PLOS monthly 2026-11-09 — 53 tables staged, Su 2025 held
 

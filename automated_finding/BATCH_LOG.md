@@ -26865,6 +26865,127 @@ status column, plus 18 unworked next leads in rank order). Covariate-label harve
 the one .sav script with covariates (yu_2021): adds nothing (labels shipped as text);
 `build.py`'s unrelated churn in coverage.csv not committed. Tables in
 `~/irw-wt/overnight-1110-b/automated_finding/irw_output/`.
+## 2026-11-10c — overnight lane C: two repos sweeps (mode 3) + the Harvard Dataverse JEEHP collection: 45 tables, 14,009,222 responses
+
+Lane C of the 2026-11-10 overnight run (`~/irw-wt/overnight-1110/BRIEF.md`). Reserved-source
+guard: `selftest` ok before the run, `check-diff origin/main` before every push. Every DOI was
+claimed in `claims.tsv` before a script was written. Nothing uploaded; the orchestrator uploads.
+
+### Sweep 1 (mode 3): 15 new topics x 9 languages
+
+135 term variants, verified absent from `search_terms_log.csv` (12,088 -> 12,223 rows):
+Hamilton depression rating scale, positive and negative syndrome scale, Young mania rating
+scale, brief psychiatric rating scale, neuropsychiatric inventory, Boston naming test, clock
+drawing test, early grade reading assessment, university entrance examination, exam item
+analysis, statistics concept inventory, medical licensing examination, programming
+assessment, general knowledge test, dyscalculia screening.
+
+**691 candidates** (zenodo 238, dataverse 193, figshare 177, datacite 61, mendeley 9, dryad 8,
+osf 5); 5,103 hits dropped by `_UNREACHABLE_DOI_PREFIXES`. **332 triaged** after the seen
+ledger: 3 good, 43 human_assistance, 184 no_usable_file, 77 download_failed, 16 below_min_n,
+8 not_item_response, 1 error. Step 2b chained (`--retriage`): 19 recoverable_format, 9
+aggregate_continuous, 8 human_review, 5 worth_retrying, 2 not_item_response, 0 conj. Both
+confirmation lines printed: 43 refined flags recorded, 8 rows archived to
+`human_review/human_review_dataverse_2026-11-09.csv` (the script's local date).
+`leads/repos_leads_2026-11-10c.csv`: 124 rows with status.
+
+The clinical rating-scale topics mostly found patient datasets that deposit scale totals only
+(BDI, HDRS, BRFSS, Bach-flower trial, ToolsK, Pelotas) -- such leads closed
+`rejected_content`. 47 of the 77 download failures are HTTP 404s on SciELO figshare objects
+(mostly Dementia & Neuropsychologia article tables), not data; they stay out of the ledger
+for retry by the script's own rule. Shipped from the sweep:
+- `seo_2018_kmle` (DVN/PETWZF via DVN/X2DRTE): the January 2017 Korean Medical Licensing
+  Examination, 3,259 examinees x 360 items, 0/1, with the DINA paper's 8-domain Q-matrix as
+  `qmatrix1-8`. 1,173,240 responses.
+- `clarke_2022_plagiarism_{knowledge,attitude,recognition}` (10.17632/46v7bhb7sr): Rwandan
+  university students; N, age, mean knowledge 83.1% and both "high" counts reproduce.
+- `wakhata_2023_atmi_lp` (10.17632/cb4pmz9rnk, CC BY-NC 3.0): Ugandan grade 11, ATMI-SF
+  adapted to linear programming, treat = ALHPS classes. The ALHPSA items in the same file are
+  NOT shipped: on 9 of its 12 items response 4 is used 0-7 times of 608 while 5 is used 27-64.
+- `wong_2016_npi_stroke` (pone.0162846 S1): NPI domain scores (F x S) for 518 stroke/TIA
+  patients; 9999 missing and one impossible 5 dropped; the paper's "244 female" is a typo for
+  264 (its own 51%).
+Held: `rabeya_2021_bdi` (zenodo.5808314) -- N and sex reproduce, the paper's BDI severity
+bands do not (62.1% severe vs 45.6% from the items). Skipped for PII: figshare 31082350
+(full-name column). Two Dataverse deposits were guestbook/DUA-gated (DVN/I2JO58 Kilifi
+mental health, CC BY; DVN/AS5YNB HAALSI HCAP).
+
+### The Harvard Dataverse JEEHP collection (mode 3, a repository collection, not a term)
+
+The KMLE lead came from a Journal of Educational Evaluation for Health Professions deposit.
+JEEHP requires raw data on Harvard Dataverse, all CC0, in one collection
+(`/api/dataverses/jeehp/contents`, 287 datasets). 262 were not in the dictionary exclusion;
+`irw_batch_updated.py --retriage` on them (as `runs/candidates_2026-11-10c_jeehp.csv`)
+triaged 233 not yet in the seen ledger: **16 good**, 92 human_assistance, 63 below_min_n, 45
+no_usable_file, 11 not_item_response, 2 download_failed. Step 2b: 33 recoverable_format, 32
+human_review (archived), 18 worth_retrying, 6 aggregate_continuous, 3 not_item_response.
+`leads/repos_leads_2026-11-10c_jeehp.csv`: 110 rows, 56 still `unworked` -- this collection
+is the best-yielding lead pool of the night and is not exhausted.
+
+Shipped (each checked against its paper's N and sex split at least):
+- `seo_2026_kmle_<year>` (DVN/FF5NYZ): ten KMLE administrations, 2012-2016 and 2018-2022,
+  3,098-3,364 examinees x 320-450 items each, 12.3M responses. The deposit's 2017 file is the
+  same exam as `seo_2018_kmle` (3,263 vs 3,259 examinees, items reordered) and is NOT built.
+  The sweep had triaged FF5NYZ `no_usable_file` because its zip has no extension.
+- `shin_2026_knle_mai` + `_mai_perception` (DVN/IEIDXS): mock Korean nursing licensing exam,
+  29 items each as text and as multimedia (item_family pairs), counterbalanced order.
+- `lim_2018_kemtle_form_a/_b` + `lim_2018_sbt_acceptability` (DVN/UUIC8V): 130-item tablet
+  practice test of the Korean EMT licensing exam; the two booklets order items differently
+  (item 5: p .95 vs .22), so one table per booklet.
+- `shawahna_2017_psychotropic` (DVN/ARRAGK): 19 true/false statements; the answer key (all
+  true but the olanzapine dose) is verified by rebuilding the paper's median 55.3% and its
+  280 pharmacists >= 50%; "I don't know" dropped as non-response; `resp_raw` kept.
+- `espejo_2022_vax` (DVN/KZ66ES, found in the same Dataverse search): Spanish VAX, 581.
+- `jongchidklang_2026_tails_{knowledge,ns}`, `panthumas_2024_21csas`, `huang_2023_strict`
+  (155 mean-imputed cells dropped; every one equals its column mean), `pugliese_2023_{bcsq12,
+  gses}` (2,813 US physical therapists), `sohn_2024_dietitian_{importance,frequency,future}`,
+  `choi_2020_pt_competency_{importance,frequency}` (the sheet's last row is a row of column
+  means and drops out with the consent filter), `berrani_2020_pheem`, `ezeala_2023_csas`,
+  `oanh_2021_{sssc,confidence_scale}`, `oanh_2024_{ctsq,psi,gses}` (pre/post, wave),
+  `naciri_2022_dl_satisfaction` (the sheet carries its own coding legend below the data),
+  `gelston_2019_ophtho_confidence` (1,025 US residents; program, sex and race counts reproduce).
+Held: `chatterjee_2017_jse` (DVN/LOGUCL, not built) -- N, sex and the mean 96.01 reproduce,
+but the paper replaced up to 4 blank items per form with the person's item mean, and the
+integer-only file cannot show which cells. Skipped for PII: DVN/GU4QKY (populated mobile
+phone column). Not reached, in the leads file: DVN/XD2QMD (Chile dental, 946 x 5 scales, N
+off the paper's 935 by 11 and an unexplained 28-item block), 3JDN9S (item blocks don't match
+the paper's description), EIHNEJ, 0SNQKN and the rest of the `unworked` rows.
+
+### Sweep 2 (mode 3): 15 education and cognitive-test topics x 9 languages
+
+Run because sweep 1's clinical topics were thin. Terms: arithmetic test, numerical reasoning
+test, number series test, mathematical olympiad, placement test, objective structured clinical
+examination, ECG interpretation, first aid knowledge, nutrition knowledge test, Bebras
+challenge, science achievement test, nonword reading, vocabulary size test, chess puzzles,
+confidence judgments. 134 new rows in `search_terms_log.csv`; "rekentoets" was already
+logged, so it was re-run but not re-logged. **548 candidates**, **230 triaged**: 6 good, 31
+human_assistance, 146 no_usable_file, 23 download_failed, 12 below_min_n, 6
+not_item_response, 1 license_restricted, 2 error. Step 2b: 12 recoverable_format, 8
+human_review (archived to `human_review/human_review_zenodo_2026-11-09.csv`), 6
+worth_retrying, 4 aggregate_continuous, 1 not_item_response; 31 refined flags recorded.
+`leads/repos_leads_2026-11-10c2.csv`: 62 rows, 24 `unworked`. Shipped:
+`viljoen_2021_ecg_context` (UCT ZivaHub, CC BY-NC 4.0: 25 ECGs without and then with a
+vignette, item_family pairs; one ambiguous Test 2 column left out) and
+`fernandez_mendez_2026_section_test` (Zenodo, 20-item spatial section test, 0/1 with
+`resp_raw` = option chosen).
+
+### Item text
+
+None shipped. Per table, the script header says where the wording is. Cheap follow-ups:
+`pugliese_2023_gses` (headers are the ten GSE stems, register `ship`; anchors not deposited),
+`ezeala_2023_csas` (English CSAS statements in Sheet2; no register row), and the Korean
+task/competency names in `sohn_2024_*` and `choi_2020_*` (study-authored). Three new register
+`hold` rows: VAX (full scale + Spanish version), ATMI-SF, the Wauters psychotropic knowledge
+test. The rights_register gate WARNs on A1/K1-style codes (Honarvar-KAP row pattern); false
+positive, no text ships.
+
+### Staging
+
+45 response tables, 14,009,222 responses, all `irw-validate --profile upload` pass and
+`irw_lint_covariates.py` clean; 45 dictionary + codebook rows, 45 tag rows, 45
+itemtext_provenance rows (NOT SHIPPED), 3 register rows. 23 deposits shipped. Tables in
+`~/irw-wt/overnight-1110-c/automated_finding/irw_output/`; hand-off
+`~/irw-wt/overnight-1110/overnight-1110-c.md`.
 
 ## 2026-11-10 — Overnight lane D (Europe-PMC, mode 2): PMC leads worked, COVIDiSTRESS I, scout-3 sweep
 
