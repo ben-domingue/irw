@@ -7,15 +7,15 @@ checkboxes here just mean "this line item is settled," not "actionable."
 
 **For currently open action items, see `TODO.md`.**
 
-## 2026-11-10 hour-1110 lane C (repos leads 2026-11-10b + Step 2c archive) — 58 tables staged, 5 held
+## 2026-11-10 hour-1110 lane C (repos leads 2026-11-10b + Step 2c archive) — 63 tables staged, 5 held
 
 One-hour acquisition run, lane `hour-1110-c`, worktree `~/irw-wt/hour-1110-c`. Hand-off:
 `~/irw-wt/hour-1110/hour-1110-c.md`. Worked all 19 rows of `leads/repos_leads_2026-11-10b.csv`
 (statuses updated in place), then 45 rows of the Step 2c archive pass
-(`irw_claude_assist.py --archive --backend cli`, 0 `lead` verdicts), then by hand the archive's
+(`irw_claude_assist.py --archive --backend cli`, 75 rows, 2 `lead` verdicts), then by hand the archive's
 multi-file rows. No discovery searches were run, so `search_terms_log.csv` is unchanged.
 
-Shipped (58 tables, 213,861 responses, all `irw-validate --profile upload` clean):
+Shipped (63 tables, 239,046 responses, all `irw-validate --profile upload` clean):
 - gracio_michelon_2026 x30 (mendeley wjw7b6ghc8, CC BY): two labelled .sav experiments on applicant
   reactions to human/AI/hybrid rejection. Nine blocks worded identically in both studies merged with
   cov_study (n=509); 15 Study 1 blocks (n=125, incl. nine SPJS subscales, PANAS PA/NA); 6 Study 2
@@ -37,6 +37,12 @@ Shipped (58 tables, 213,861 responses, all `irw-validate --profile upload` clean
   one row recorded twice.
 - camacho_2025_mil_{students,teachers} (zenodo.17102406, CC BY; anonymous twin 17821828): 43-item
   MIL self-assessment, n=188 / 173.
+- garciabacete_2023_qti_ep (zenodo.7487238, n=357) and garciabacete_2023_tsr_cr (zenodo.7489024,
+  n=202), CC BY, GREI series: one representative wave per instrument (the 2026-10 backlog rule); the
+  other TSR-CR waves (7489009/37/53/62/70/76/89 in `repo_leads_2026-08-27.csv`) are the same
+  instrument at other times. Both were Step 2c `lead` verdicts.
+- frochte_2024_selaq_{ideal,predicted} (zenodo.11638469, CC BY): SELAQ, 566 German students.
+- afriana_2026_sslp (zenodo.20568661, CC BY): 29-item lab-personnel competency scale, n=252.
 
 Held (Ben decides; details in the hand-off): samwel_2026 (figshare.34700217, looks generated; built,
 in `runs/held/`), sultan_2023 PedsQL MFS (borealis WLAHQQ, exact diagnosis dates), sandham IPOS
@@ -46,7 +52,7 @@ no codebook), shen_2026 exercise motivation (figshare.32780847, 87 duplicated ro
 Skipped: up.ac.za 28322483 (ad hoc single questions); figshare.34797447 (617 children's names, name
 tier); zenodo.23602328 (scale means only); figshare.33126869 (already in IRW via Dataverse FCNTSN);
 dvn/ZH6ZZN Thai wage survey (1,100 rows = 110 distinct rows each repeated 10 times: rejected_content);
-zenodo.5670305 (bibliometric records). Unreached: dryad.s1634 and dryad.xd2547dg9 (Dryad token),
+zenodo.5670305 (bibliometric records); zenodo.22067403 chatbot empathy (unlabelled CAP/CAA/FHU/RED blocks whose construct names don't match the deposit's own averages, so no construct can be named). Unreached: dryad.s1634 and dryad.xd2547dg9 (Dryad token),
 in `leads/repos_leads_2026-11-10hc.csv`.
 
 ## 2026-11-02b — The 2026-11-02 sweep's good row + all 23 leads worked: 42 tables; scholars_portal re-covered
