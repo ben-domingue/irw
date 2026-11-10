@@ -105,13 +105,13 @@ class RulesJoin(unittest.TestCase):
 
         The jurisdictions whose rules are written down: Minneapolis (88),
         Alaska (115: 63 of 2022 and 52 of 2024), the Debian Project (33) and New South Wales (279), whose
-        tables are also counted on the key below. From the FairVote pool: New York City (127), Oakland (73), Berkeley (36), San Leandro (21), Maine (11), San Francisco (82), Burlington (8), St. Louis Park (4), Minnetonka (7), Bloomington (2), Takoma Park (7), Redondo Beach (5), Pierce County (4), Westbrook (1), Boulder (1), Easthampton (1), Corvallis (2), Las Cruces (3), Santa Fe (3).
+        tables are also counted on the key below. From the FairVote pool: New York City (127), Oakland (73), Berkeley (36), San Leandro (21), Maine (11), San Francisco (82), Burlington (8), St. Louis Park (4), Minnetonka (7), Bloomington (2), Takoma Park (7), Redondo Beach (5), Pierce County (4), Westbrook (1), Boulder (1), Easthampton (1), Corvallis (2), Las Cruces (3), Santa Fe (3), Portland, Oregon (6), Eastpointe (3).
         """
         joined = [r for r in self.design if matching(self.rules, r)]
-        self.assertEqual(len(joined), 913)
+        self.assertEqual(len(joined), 922)
         keyed = [r for r in self.design if (r["rules_jurisdiction"] or "").strip()]
-        self.assertEqual(len(keyed), 279)
-        self.assertEqual({rules_key(r) for r in keyed}, {"New South Wales (Legislative Assembly)"})
+        self.assertEqual(len(keyed), 288)
+        self.assertEqual({rules_key(r) for r in keyed}, {"New South Wales (Legislative Assembly)", "Eastpointe (one seat)", "Eastpointe (two seats)", "PortlandOR (Council)", "PortlandOR (Mayor and Auditor)"})
 
     def test_an_override_is_never_redundant(self):
         """A key that duplicates an exact match on the table's own jurisdiction
