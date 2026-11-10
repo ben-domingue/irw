@@ -1,5 +1,21 @@
 # IRW Automated Finding — TODO
 
+## Hour run lane B 2026-11-10h (lane C's unworked leads) — 25 tables staged, 5 held
+
+Full write-up in `BATCH_LOG.md` (2026-11-10h lane B). Hand-off: `~/irw-wt/hour-1110/hour-1110-b.md`.
+
+- [ ] **Upload (orchestrator)**: 25 response tables (587,820 responses) from
+  `~/irw-wt/hour-1110-b/automated_finding/irw_output/`. No item text tables.
+- [ ] **Ben: 5 holds** -- XD2QMD Chile dental (N 946 vs 935), 3JDN9S SDL (pre-scored
+  reversals), BVYQBN R-SPQ-2F (paper mean off), kim_2017_pharmacy_skills_inclusion (split
+  answers), zenodo.18219501 (no anchors). Details and yes/no actions in the hand-off.
+- [ ] 63 `unworked` + 5 `deferred` leads in `leads/repos_leads_2026-11-10hb.csv`. Next: DVN/DJNHCM (8-case OSCE checklists,
+  4 days), DVN/CQD7CX (accreditation-standard ratings by rater group), DVN/0SNQKN (pain vignettes).
+- [ ] Re-run `metadata/covariate_labels/build.py` after release so mastrothanasis_2026_sprs_s
+  (harvest log already in ~/.cache/irw/covariate_labels/logs) gets its value labels.
+- [ ] Cheap item text follow-ups (need register rows): CHIRP/IPAS stems are in the GL0RPU
+  Variable Labels sheets; virtual-OSCE statements are the AWC1IP column headers.
+
 ## Hour-run 2026-11-10h lane D (Europe PMC) — 0 tables, 25 terms run
 
 - `pmc_term_backlog_2026-11-10.csv`: 25 more terms run (the 20 English terms at new=3, plus 5 at new=2); 0 shippable from 42 candidates. The remaining 156 terms all project `new<=2`, so a new scout beats running this tail.
