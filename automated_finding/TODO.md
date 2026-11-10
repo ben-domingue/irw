@@ -17,7 +17,7 @@ Full write-up in `BATCH_LOG.md` (2026-11-09 — PLOS monthly run).
 - [ ] **Licence asks sent 2026-11-09 (Ben)**: Brunell (pone.0194106), Cai /
   Wu et al. (pone.0218076), Götz (pone.0176921), McCain (pone.0142200),
   Bieleke (pone.0272443), Zhang (pone.0329651), Lenferink (pone.0358123, DANS
-  Licence). **Queued for the next wave:** Vigl (pone.0264511). Leads stay
+  Licence), Vigl (pone.0264511). All 8 sent 2026-11-09. Leads stay
   `blocked_licence` until a reply grants terms.
 - [ ] Item text, cheap later: `chen_2026_museum_*` stems are complete in the
   S1 File (Chinese and Russian administrations; needs a language decision).

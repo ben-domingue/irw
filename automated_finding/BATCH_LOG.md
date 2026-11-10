@@ -26648,8 +26648,8 @@ j2r8t, NPI-40 + BFI-44 x 4 studies), Cai (Wu et al., pone.0218076, OSF f4bsq,
 400 x 42), Götz (pone.0176921, OSF 2nmhu, Big Five, 1,081 + 2,036), McCain
 (pone.0142200, OSF u25x9, NPI-40/RSE/geek identity), Bieleke (pone.0272443, OSF
 3pmr4, 414 x ~44) and Lenferink (pone.0358123, DANS SS/TWHH2D, 290 x 55); Vigl
-(pone.0264511, OSF f8m7a, 3,242 x RAS/BFI-2-XS/ECR-RD) is queued for the next
-wave.
+(pone.0264511, OSF f8m7a, 3,242 x RAS/BFI-2-XS/ECR-RD) was also sent
+2026-11-09.
 
 **Item text:** none shipped. Per deposit: vonborck (KID-KINDL/PPASC, not in
 the deposit), aljabry (PSS register block; YFAS/BES no register row), lam
