@@ -26986,3 +26986,134 @@ positive, no text ships.
 itemtext_provenance rows (NOT SHIPPED), 3 register rows. 23 deposits shipped. Tables in
 `~/irw-wt/overnight-1110-c/automated_finding/irw_output/`; hand-off
 `~/irw-wt/overnight-1110/overnight-1110-c.md`.
+
+## 2026-11-10 — Overnight lane D (Europe-PMC, mode 2): PMC leads worked, COVIDiSTRESS I, scout-3 sweep
+
+One agent, lane D of the four-lane overnight run (`~/irw-wt/overnight-1110/BRIEF.md`).
+The orchestrator uploads; nothing was uploaded or published from this lane.
+Every DOI was claimed in `claims.tsv` before a script was written. PR #3456.
+
+**Starting point.** Both ranked PMC term backlogs were already fully run:
+`pmc_term_backlog.csv` closed on 09-24, and `pmc_term_backlog_2026-09-25.csv`
+had every term run by 10-05b. So the cheap volume was the 69 unworked leads
+(`pmc_leads_2026-09-20.csv` 17, `_09-24` 1, `_09-25` 51) plus the seven
+"worth a human read" rows from the 10-18 monthly re-triage. After that came a
+new scout:
+- **Pool:** the 736 `search_terms_log.csv` queries dated 2026-09-25 or later
+  that were never run against PMC and are not in either backlog.
+- **Trim:** Europe PMC degraded to roughly 1 request a minute (503/500), so the
+  run was cut to the 270 English-language terms.
+- **Yield:** 748 + 108 projected new DOIs.
+- **Output:** the ranking is tracked in `pmc_term_backlog_2026-11-10.csv`, with
+  a `run_2026_11_10` column.
+
+**Europe PMC was degraded all night.** Search and `supplementaryFiles` returned
+503/500 for long stretches. Several sweep candidates came back
+`download_failed` because of this. Those rows were not added to
+`pmc_seen_dois.csv` by hand; they are unworked rows in
+`leads/pmc_leads_2026-11-10.csv`. One sweep (3a) was split mid-run into a
+Sci Rep `--resume` process plus a separate process for the other 9 journals.
+The killed process's 33 non-failed DOIs were appended to the ledger by hand.
+Step 2b ran in-process on every sweep, and this is the first write-back of
+`refined_flag` into `pmc_seen_dois.csv`, which adds the column to every row.
+
+**Shipped: 11 deposits, 36 tables, 10,365,865 responses.**
+
+| table(s) | script | ids | items | resp |
+|---|---|---|---|---|
+| `yamada_2021_covidistress_*` x14 (pss10, slon3, trust_inst, concerns, compliance, bffneu/ext/ope/agr/con, distress, sps10, coping, media) | `data/yamada_2021_covidistress.py` | 93k-116k | 3-24 | 1-5 / 1-6 / 0-10 |
+| `huang_2016_bdi2`, `_pdsq_depression` | `data/huang_2016_depression_egypt_canada.py` | 152 | 21 / 21 | 0-3 / 0-1 |
+| `sierakowska_2022_minicope`, `_pss10`, `_gses` | `data/sierakowska_2022_nurses_coping.py` | 220 | 28 / 10 / 10 | 0-3 / 0-4 / 1-4 |
+| `kilintzis_2026_dhp_features` | `data/kilintzis_2026_dhp_features.py` | 493 | 28 | 1-5 |
+| `balami_2019_imb_information`, `_motivation`, `_skills` | `data/balami_2019_imb_llin.py` | 380 | 18 / 3 / 5 | 0-1 / 1-6 / 1-4 |
+| `lu_2026_phq9` (wave 1-4) | `data/lu_2026_phq9_longitudinal.py` | 454 | 9 | 0-3 |
+| `balik_2026_eq5d5l` (wave 1-2) | `data/balik_2026_eq5d5l_hiv.py` | 157 | 5 | 1-5 |
+| `irmer_2026_childs` (wave 1-2), `_daily_upward`, `_daily_negaffect` (wave = day) | `data/irmer_2026_zebra.py` | 200 | 8 / 6 / 4 | 1-5 |
+| `mondino_2023_snore` (dogs) | `data/mondino_2023_snore_dogs.py` | 194 | 7 | 1-10 |
+| `hosgorur_2026_fair_learning`, `_financial_wb`, `_need_sat`, `_uwes9s` | `data/hosgorur_2026_academic_engagement.py` | 1,000-1,019 | 15 / 10 / 12 / 9 | 1-5 |
+| `schaap_2026_cbi`, `_study_demands`, `_study_resources` | `data/schaap_2026_cbi_students.py` | 1,938 | 19 / 5 / 18 | 1-5 / 1-4 / 1-4 |
+
+All 36 tables pass `run_qc()`, `irw-validate --profile upload` and
+`irw_lint_covariates.py`. Notes per deposit:
+
+- **COVIDiSTRESS I** (`10.1038/s41597-020-00784-9`, OSF z39us, CC0) was not in
+  the IRW; only COVIDiSTRESS II (`ECPS_Sahm_2024_*`) was. It was reached through
+  a Sci Rep DAS that points at `COVIDiSTRESS June 17.csv`.
+  - Source file: the corrected `COVIDiSTRESS_May_30_cleaned_final.csv` (v2,
+    2020-12-02), 125,306 rows, the data descriptor's exact N. The OSF note says
+    every earlier cleaned file, the June 17 one included, has PSS items 6/7
+    swapped for Bengali rows.
+  - Items are unreversed: `PSS10_avg` reproduces from them with the published
+    keys.
+  - Recodes: Distress 99 ("does not apply") is dropped.
+  - Not shipped: OECD trust-in-people (2 items, below the floor); the
+    war-trauma sub-study (about 50 respondents); free text; and `Dem_state`
+    (free-text region).
+  - Renames: PSS/SLON items drop the `Scale_` prefix, because the covariate lint
+    reads it as a scale-group covariate.
+- **Text-coded and multi-file deposits the triage misread:**
+  - `sierakowska_2022`: "2 = często tak postępuję" cells, so the leading digit
+    is the code. GSES mean 29.1 and PSS 20.7 match the paper.
+  - `balami_2019`: Correct/Incorrect/Don't know verdicts; "don't know" is
+    dropped as a non-response.
+  - `kilintzis_2026`: "4: Important"; the paper's >=80%-rated rule reproduces
+    its N = 493 and its Table 2 counts exactly.
+  - `huang_2016`: the .sav triage read 6 columns. 152 rows have questionnaires,
+    and 131 of them are the paper's eligible sample, with exact cell counts.
+    `Participant_Number` is reused across arms, so `id` = row index.
+- **Trust and consistency fixes, each documented in its script header:**
+  - `lu_2026_phq9` drops two rows whose 36 PHQ responses copy another row while
+    their activity data differ (the Csibra exact-copy precedent).
+  - `huang_2016_bdi2` drops 5 mean-imputed cells.
+  - `balik_2026`: the derived `state` string disagrees with the items on 2 rows,
+    and the items ship. The `*_3l` columns are a UK crosswalk, not
+    administered, so they are not shipped.
+- **Layout and coding:**
+  - `irmer_2026` is from the Mplus `.dat`, with column names from the `.inp`
+    file. ChilD-S items 1 and 7 are stored reverse-scored. sexc = 1 is female
+    (103/200, as in the paper).
+  - `schaap_2026`: the deposit's demographics were deliberately shuffled away
+    from the item rows, so none are joined. On the CBI, higher = less burnout.
+  - `hosgorur_2026`: two non-overlapping samples merged per scale
+    (`cov_sample`; sample 2 ids +1000). CC BY-NC-SA carries through.
+  - `mondino_2023_snore` is an animal table (owners rate their dogs). The
+    test-retest file is not shipped: its time-1 answers do not match the
+    confirmatory file for the same dog codes.
+
+**Held** (details in the hand-off file and TODO):
+- `braniecka_2022_bdi`: built, in `runs/held/`. Item sums vs the stored total
+  disagree in 20 of 122 rows, against the paper's <=16 inclusion rule.
+- Maasai faces (Butovskaya 2024): 3 stimuli only.
+- Masuyama 2022 DSRS-C: coding, total and correlations do not match the paper.
+- Yang 2023 m-health: 1,280 exact-duplicate rows; recommend no.
+- Wang 2026 BRBQ: 132 deposit items vs the paper's 97; block mapping unknown.
+- Sharif-Nia 2024 hemodialysis: the stored FAS/TDS/adherence totals disagree with
+  the item sums in 17-27% of rows, by up to +/-30.
+
+**PII:** `10.7717/peerj.18456` has an email column, so the whole candidate is
+skipped. The 08-12 GPS skip of `s41598-024-58598-3` is restated in its lead row.
+
+**Licence:**
+- Private OSF (401): 9yp4r, 87ew5, r3xfy, 3s6ze.
+- No licence on 11 OSF nodes (y9fjk, xg2r5, f25j9, 7n2jx, 3g6ze, gveqm, 876fe,
+  g6xnf, va4jh, ea9kd, b5jah).
+- The three strong ones are in `license_blocked_candidates.csv`.
+- Ask drafts (not sent) for Learmonth/Kotiusheva and Eitze.
+- A re-check of all 71 OSF nodes behind earlier PMC `blocked_licence` leads
+  found none newly licensed.
+
+**Item text:** not shipped for any table. Per-table reasons are in
+`itemtext_provenance.csv` (36 rows). Cheap later for `irmer_2026_*` (OSF
+codebook has German + English stems) and `mondino_2023_snore` (SI PDF);
+both need a register row.
+
+**Bookkeeping:**
+- 36 dictionary + codebook rows (`stage_dict_row.py`) and 36 tag rows
+  (`tags/tags_auto.csv`).
+- 89 `search_terms_log.csv` rows.
+- `pmc_seen_dois.csv`: the connector's Step 2b write-back plus hand-appended
+  rows for the two killed processes. `download_failed` rows were not
+  hand-appended.
+- `leads/pmc_leads_2026-11-10.csv`, and lead statuses updated in the 09-20,
+  09-24 and 09-25 lead files.
+- Covariate label harvest run for `huang_2016` (the only .sav script).
