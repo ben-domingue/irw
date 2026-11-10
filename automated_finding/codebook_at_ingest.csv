@@ -655,6 +655,7 @@ chen_2026_uwes9,core,none,2026-10-15
 chew_2016_dds17,core,https://ndownloader.figshare.com/files/4823968,2026-11-08
 chew_2016_phq9,core,https://ndownloader.figshare.com/files/4823968,2026-11-08
 chewning_2024_campaign_volunteers,conj,https://dataverse.harvard.edu/api/access/datafile/6579996,2026-10-09
+chhajer_2025_who5,core,none,2026-11-09
 chilton_2020_fdi_reciprocity_cn,conj,none,2026-10-08
 chilton_2020_fdi_reciprocity_us,conj,none,2026-10-08
 chinvararak_2022_gad7,core,none,2026-11-08
@@ -2577,6 +2578,13 @@ miwa_2024_populist_pilot2,conj,https://dataverse.harvard.edu/api/access/datafile
 miwa_2024_populist_pilot3,conj,https://dataverse.harvard.edu/api/access/datafile/10365346,2026-10-08
 miwa_2024_populist_study1,conj,https://dataverse.harvard.edu/api/access/datafile/10365346,2026-10-08
 miwa_2024_populist_study2,conj,https://dataverse.harvard.edu/api/access/datafile/10365346,2026-10-08
+mo_2026_sft_attitude,core,none,2026-11-09
+mo_2026_sft_behavior,core,none,2026-11-09
+mo_2026_sft_content_appeal,core,none,2026-11-09
+mo_2026_sft_content_trust,core,none,2026-11-09
+mo_2026_sft_intention,core,none,2026-11-09
+mo_2026_sft_pbc,core,none,2026-11-09
+mo_2026_sft_platform_use,core,none,2026-11-09
 moehlecke_2025_fdi,conj,none,2026-10-07
 mohamed_2021_covid_attitude,core,none,2026-10-04
 mohamed_2021_covid_practice,core,none,2026-10-04
@@ -4311,6 +4319,9 @@ strojny_2026_gdt,core,https://osf.io/download/tpfa8/,2026-10-04
 strojny_2026_gis,core,https://osf.io/download/tpfa8/,2026-10-04
 strojny_2026_gmi,core,https://osf.io/download/tpfa8/,2026-10-04
 strojny_2026_igds9sf,core,https://osf.io/download/tpfa8/,2026-10-04
+su_2025_interdisciplinary_competency,core,none,2026-11-09
+su_2025_psycap,core,none,2026-11-09
+su_2025_self_directed_learning,core,none,2026-11-09
 suasapha_2023_tourism_education,conj,none,2026-10-12
 summart_2026_isss8,core,none,2026-11-02
 summart_2026_sicpa,core,none,2026-11-02
@@ -4343,6 +4354,7 @@ takacs_2026_cdrisc10,core,https://ndownloader.figshare.com/files/64031017,2026-1
 takacs_2026_gad7,core,https://ndownloader.figshare.com/files/64031017,2026-10-07
 takacs_2026_maas,core,https://ndownloader.figshare.com/files/64031017,2026-10-07
 takacs_2026_phq9,core,https://ndownloader.figshare.com/files/64031017,2026-10-07
+takamatsu_2018_sacrificial_dilemmas,core,none,2026-11-09
 takei_2024_public_threats,conj,none,2026-10-07
 takei_2026_audience_costs,conj,none,2026-10-11
 talarowska_dublicka_2026_banps,core,https://osf.io/download/6a8c59d0861c2a5862ff208e/,2026-11-08
@@ -4450,6 +4462,9 @@ tomz_2020_ballistic,conj,none,2026-10-11
 tomz_2020_hr_war_africa,conj,none,2026-10-11
 tomz_2020_hr_war_uk,conj,none,2026-10-11
 tomz_2020_hr_war_us,conj,none,2026-10-11
+tong_2017_flourishing,core,https://ssh.datastations.nl/api/access/datafile/181371,2026-11-09
+tong_2017_spane,core,https://ssh.datastations.nl/api/access/datafile/181371,2026-11-09
+tong_2017_swls,core,https://ssh.datastations.nl/api/access/datafile/181371,2026-11-09
 torcal_2026_epade_candidates,conj,https://osf.io/download/69aaa889f8981fcaa759cb9e/,2026-10-09
 torcal_2026_epade_candidates_chile,conj,https://osf.io/download/eaqtg/,2026-10-09
 torcal_2026_neighbours_argentina,conj,https://osf.io/download/q936m/,2026-10-07
