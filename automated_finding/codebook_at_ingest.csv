@@ -181,6 +181,8 @@ babenko_2018_basic_needs,core,none,2026-10-09
 babenko_2018_olbi_engagement,core,none,2026-10-09
 babenko_2018_olbi_exhaustion,core,none,2026-10-09
 babenko_2018_scs_sf,core,none,2026-10-09
+bacchini_2015_bullying,core,none,2026-11-10
+bacchini_2015_victimization,core,none,2026-11-10
 bacon_2025_cfni45,core,none,2026-10-02
 bacon_2025_phq9,core,none,2026-10-02
 bacon_2025_stss,core,none,2026-10-02
@@ -2870,6 +2872,8 @@ ocampo_2025_latinos_american,conj,https://dataverse.harvard.edu/api/access/dataf
 oconnor_2019_gender_theories,core,https://doi.org/10.1371/journal.pone.0218333.s001,2026-11-02
 oconnor_2020_srs,core,none,2026-10-19
 ofosu_2026_malawi_women_candidates,conj,https://dataverse.harvard.edu/api/access/datafile/10367465,2026-10-07
+ogden_2022_dass21,core,none,2026-11-10
+ogden_2022_tlx,core,none,2026-11-10
 ogrady_2026_immigration_sanctions,conj,https://dataverse.harvard.edu/api/access/datafile/14200814,2026-10-14
 ogrady_2026_welfare_sanctions,conj,https://dataverse.harvard.edu/api/access/datafile/14200814,2026-10-14
 ogs_go_2005_2021,comps,https://archive.org/download/ogs2021/readme.txt,2026-10-23
@@ -5038,6 +5042,9 @@ ylisalo_2025_pledges_finland,conj,https://dataverse.harvard.edu/api/access/dataf
 ylisalo_2025_pledges_germany,conj,https://dataverse.harvard.edu/api/access/datafile/11837285,2026-10-08
 ylisalo_2025_pledges_germany_ptv,conj,https://dataverse.harvard.edu/api/access/datafile/11837283,2026-10-08
 yoh_2024_journal_choice,conj,https://zenodo.org/records/8276263/files/ChoiceExperiment_Finaldata_Zenodo.xlsx,2026-10-09
+yoshida_2026_rss,core,none,2026-11-10
+yoshida_2026_sbi_c,core,none,2026-11-10
+yoshida_2026_sras_r_ja,core,none,2026-11-10
 yu_2015_bdi,core,none,2026-10-05
 yu_2018_ehr_success,core,https://doi.org/10.1371/journal.pone.0190749.s002,2026-11-02
 yu_2021_domain_satisfaction,core,none,2026-11-09
