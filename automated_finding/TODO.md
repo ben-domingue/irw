@@ -1,5 +1,39 @@
 # IRW Automated Finding — TODO
 
+## Overnight lane A (PLOS cleaned leads), 2026-11-10 — 48 tables + 1 item text table staged
+
+Full write-up in `BATCH_LOG.md` (2026-11-10 — overnight lane A); hand-off with the
+decisions owed in `~/irw-wt/overnight-1110/overnight-1110-a.md`.
+
+- [ ] 48 response tables (487,474 responses) in `~/irw-wt/overnight-1110-a/automated_finding/irw_output/`
+  + `mifsud_2023_worldviews__items` in `itemtext_output/` need uploading (orchestrator), then Ben publishes.
+  Stamp `uploaded` in itemtext_provenance.csv / mapping_verification.csv after.
+- [ ] Ben: reiss_2020 action ratings x3 (paper "1-7", deposit 1-5) -- ship as 1-5?
+- [ ] Ben: pone.0133716 liu_2015 x5 -- free-text per-resident meal narrative column: droppable or whole-candidate skip?
+- [ ] Ben: pone.0259392 useche_2021_cie_a -- non-integer imputed cells, paper says listwise deletion: ship with them dropped?
+- [ ] Ben: pone.0343699 he_2026 x4 -- items uncorrelated (alpha ~0 vs .83-.91): recommend skip.
+- [ ] Ben: pone.0334137 (SI is an unrelated adolescent survey), pone.0345260 (one wave of a pre/post study),
+  pone.0216266 (half-point/imputed items) -- not built; see hand-off.
+- [ ] Next leads: `leads/plos_leads_2026-11-10a.csv` (40 rows; pone.0166332 scouted: 8 study files).
+## Overnight lane B 2026-11-10 (cleaned leads, non-PLOS) -- 44 tables staged, 4 held
+
+Full write-up in `BATCH_LOG.md` (2026-11-10 -- overnight lane B); hand-off in
+`~/irw-wt/overnight-1110/overnight-1110-b.md`.
+
+- [ ] **Upload (orchestrator)**: 44 response tables (186,807 responses) from
+  `~/irw-wt/overnight-1110-b/automated_finding/irw_output/` (`red_up irw_output`):
+  ribar_2026 x2, komalasari_2026 x3, nadif_2026 x8, rumangkit_2025_ewom_purchase,
+  fezzey_2023 x4, yu_2021 x11, nakai_2020 x3, lu_2025 x5, han_2020_hads,
+  brouwer_2026 x3, sevim_2026 x3. No item text tables.
+- [ ] **Ben rules on 4 holds** (possible generated data x3, undocumented scale x1):
+  zenodo.23245865 (Aksu), zenodo.21802067 (Binus), zenodo.19415589 (Tiurida),
+  zenodo.23646039 (Sothornwit). Evidence and yes/no consequences in the hand-off file.
+- [ ] Cheap item text left for a round: yu_2021 (SPSS labels), brouwer_2026
+  (codebooks), nakai_2020 (English questionnaire), rumangkit_2025_ewom_purchase
+  (Indonesian stems).
+- [ ] Next leads: `leads/repos_leads_2026-11-10b.csv` (18 unworked in rank order, plus
+  Mendeley wjw7b6ghc8, a strong labelled .sav lead, and dryad.s1634 once Dryad
+  downloads work with a token).
 ## Overnight lane C 2026-11-10 (repos sweep + JEEHP collection) — 42 tables staged
 
 Full write-up in `BATCH_LOG.md` (2026-11-10c). Hand-off: `~/irw-wt/overnight-1110/overnight-1110-c.md`.
@@ -133,7 +167,7 @@ Full write-up in `BATCH_LOG.md` (2026-11-08 — cleaned-leads batch 7).
 - [ ] Item text, new `hold` rows to read at source if wanted: K6 (Harvard NCS
   page hosts the Vietnamese K6), DDS-17, FIQR, SF-MPQ, YSQ-S3, BANPS, PDBS, DBQ,
   DDDI. The wording for all but K6 and FIQR is fully in the deposits.
-- [ ] Next leads not reached: pone.0254644, pone.0321946, pone.0116510,
+- [x] (Worked by overnight lane A, 2026-11-10.) Next leads not reached: pone.0254644, pone.0321946, pone.0116510,
   pone.0313426, pone.0243193, pone.0258228, pone.0133716, pone.0251984,
   pone.0272871, pone.0243805, pone.0296039, pone.0219136, pone.0177172,
   pone.0234240, pone.0259392, pone.0166410, pone.0268232, pone.0284944 (and

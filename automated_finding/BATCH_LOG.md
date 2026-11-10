@@ -26697,6 +26697,174 @@ statuses (12 `shipped`, 1 `held`, 11 `rejected_content`, 8 `blocked_licence`),
 `~/irw-wt/plos-monthly-1109-refetch/automated_finding/irw_output/` with
 `MANIFEST_2026-11-09_plos_monthly.txt`. Nothing uploaded.
 
+## 2026-11-10 — overnight lane A (cleaned leads, PLOS rows): 16 deposits, 48 tables, 487,474 responses; 1 item text table
+
+Overnight run, lane A (`auto/overnight-1110-a`, brief `~/irw-wt/overnight-1110/BRIEF.md`).
+Worked the PLOS rows of `~/irw-leads-clean/leads_clean_2026-11-07.csv`: the
+nineteen leads batch 7 left unreached (TODO), then six more in rank order. DOIs
+claimed in the shared `claims.tsv`; all passed the reserved check; none had a
+script, dictionary row or metadata row. Uploads are the orchestrator's; Ben
+publishes. Hand-off: `~/irw-wt/overnight-1110/overnight-1110-a.md`.
+
+**Shipped (all pass `irw-validate --profile upload`, `run_qc` and
+`irw_lint_covariates.py`; every table was also screened for inter-item
+correlation after the He 2026 find below):**
+- `stark_2021_pic_expectations` (pone.0254644) -- PiC module B, 10 items. The
+  deposit is post-recode: module B reversed (restored, 5 - x), module A merged
+  answers 1 and 4 through a typo in the authors' SPSS recode and is dropped.
+  `treatment` coding contradicts the paper's Table 5; not shipped.
+- `waqas_2015_{hads,sps}` (pone.0116510) -- 500 pregnant women, Lahore. SPS
+  negative items deposited already reversed (all correlate positively); item
+  sums and means match the paper.
+- `knedlikova_2024_rsq_{stressors,coping}` (pone.0313426) -- RSQ-COVID-19, 344
+  Czech parents (ASD vs controls). Check-all follow-ups dropped.
+- `reiss_2020_{discrepancy,affect,system_justification,loneliness,covid_knowledge}`
+  (pone.0243193) -- 404 adults, DE/AT, March 2020. Knowledge scored with a key
+  that reproduces the paper's 78% correct; "unsure" dropped.
+- `stahl_2021_{mrs,irs,bfas}` (pone.0258228) -- two samples, identical
+  materials per Methods, merged with `cov_study`; BFAS raw (deposit's rec
+  copies unused).
+- `gori_2021_{iesr,dsq40,tipi}` (pone.0251984, figshare 14139944) -- one
+  mean-imputed constant per column dropped (37 respondents). TIPI deposited
+  1-7 (paper says 0-7; reversed copies are 8 - x).
+- `lara_2022_{sce,cfq}_{g56,g78}` (pone.0272871) -- two grade versions with
+  different wording, so four tables.
+- `johansson_2020_{gtq,c30,hn35,hads}` (pone.0243805) -- 234 Swedish patients
+  (HNC 90, TMD 26, controls 117).
+- `wiwattarangkul_2023_lgbtq_{attitude,meded}` (pone.0296039, Dataverse
+  ELRWTI, CC0) -- attitude items as scored; every item mean matches Table 2.
+- `luo_2019_cpti` (pone.0219136) -- mother-rated CPTI, 2 waves.
+- `fernandez_dominguez_2017_{hsebp73,hsebp72,ebpq,rtc,mbi,cvp}`
+  (pone.0177172) -- pilot (73-item HS-EBP) and validation (72-item) samples as
+  separate tables.
+- `kubota_2020_{iddl,epds}` (pone.0234240) -- 558 pregnant women, Nagoya;
+  `cluster_id` = hospital.
+- `zeng_2016_{las,sas,neo_deliberation,neo_dutifulness,neo_self_discipline}`
+  (pone.0166410) -- EM-imputed (non-integer) cells dropped, as the paper
+  discloses EM imputation.
+- `yeo_2022_{mhcsf,who5,hads}` (pone.0268232, figshare 19174205).
+- `mifsud_2023_{pvq_rr,worldviews}` (pone.0288451).
+- `mashaal_2024_{gad7,teique_sf,brief_cope}` (pone.0300057) -- TEIQue-SF raw;
+  the deposit's EI total is an unreversed sum.
+
+**Held (Ben decides; details in the hand-off):** reiss_2020 action ratings x3
+(paper 1-7, deposit 1-5); pone.0133716 liu_2015 x5 (free-text per-resident meal
+narrative column); pone.0259392 useche_2021_cie_a (non-integer imputed cells
+though the paper says listwise deletion); pone.0343699 he_2026 x4 (items
+uncorrelated: alpha ~0 against the paper's .83-.91, possible generated data);
+not built: pone.0334137 (SI is an unrelated adolescent survey), pone.0345260
+(single wave of a pre/post study, wave not identified), pone.0216266 (half-point
+and imputed values). **Rejected:** pone.0321946 and pone.0284944 (scale scores
+only).
+
+**Item text:** one table, `mifsud_2023_worldviews__items` (study-authored
+vignettes; .sav labels completed from Table 3 where SPSS truncated them; new
+register `ship` row MIFSUD-WORLDVIEWS). All others not shipped; each script
+header says where the wording is (cheap later: lara_2022 g56 labels, stark PiC
+S1/S2, mifsud PVQ labels are Schwartz's -- block).
+
+**Staging:** 48 dictionary + codebook rows, 48 tag rows (`tags/tags_auto.csv`),
+lead statuses set (plos_leads_2026-10-30 plus the secondary files), next 40
+PLOS leads in `leads/plos_leads_2026-11-10a.csv` (incl. pone.0166332, claimed and
+scouted only). Covariate-label harvest run for the eight .sav scripts: nothing to
+add (covariates shipped as text labels); `build.py`'s coverage churn on other
+tables not committed. Tables in `~/irw-wt/overnight-1110-a/automated_finding/irw_output/`.
+## 2026-11-10 — overnight lane B (cleaned leads, non-PLOS repositories): 11 deposits, 44 tables, 186,807 responses; 4 held
+
+Lane B of the four-lane overnight run (`~/irw-wt/overnight-1110/BRIEF.md`). Source:
+`~/irw-leads-clean/leads_clean_2026-11-07.csv`, non-PLOS rows only (Lane A had PLOS).
+The list was re-derived first with its own `clean_leads.py` pointed at this branch
+(current main), so lead statuses set since 11-07 count: 797 open non-PLOS rows. Worked in
+rank order, skipping rows earlier batches had shipped, held or rejected, and the
+`psycharchives_leads_2026-10-29.csv` rows that came up in rank order. Every DOI was claimed
+in `claims.tsv` and passed the reserved check. Uploads are the orchestrator's; nothing
+was uploaded or published here.
+
+**Shipped (all pass `irw-validate --profile upload`, `run_qc()` with permitted values,
+and `irw_lint_covariates.py` except the one false positive noted):**
+- `ribar_2026_{bfi2,delta}` (zenodo.23157249, CC BY; preprint 10.31234/osf.io/e5hma_v1)
+  -- 156 Croatian psychology students; BFI-2 60 and DELTA 20, 1-5, read once per person
+  from the diary file (identical on every diary row, asserted). 156 / 916 observations
+  match the preprint. Daily PHQ-2/GAD-2 (2 items) and rumination (no day index) not shipped.
+- `komalasari_2026_{initial_trust,financial_risk,behav_intention}` (zenodo.23808632, CC BY)
+  -- 160 prospective ACC One users, 3 items each, 1-5. TP (2 items) dropped.
+- `nadif_2026_*` (figshare 34754553, CC BY; paper 10.32674/vt55r634) -- 8 tables (GenAI use
+  7, study pressure 4, time pressure 4, reward seeking 3, performance 3, procrastination 4,
+  memory loss 3, integrity 3), 206 Moroccan students (matches the paper). Free-text
+  institution and unlabelled education codes dropped.
+- `rumangkit_2025_ewom_purchase` (zenodo.14903363, CC BY; deferred 2026-10-18 for want of a
+  code rule) -- 21 items, 280 respondents. Headers are full Indonesian stems; codes
+  ewom_01-21 are assigned BY STEM (prefix match, asserted one-to-one), one table as with
+  rumangkit_2025_gamification.
+- `fezzey_2023_{narq,riasec60,voc_interests,work_values}` (psycharchives.12668, CC BY) --
+  386 US employees (matches the abstract), codebook in the deposit. -99 dropped.
+  `irw_lint_covariates.py` flags WV4/WV5/WV12_status as marital status: a false positive
+  on the word "status" (the codebook's Status work value); codes kept.
+- `yu_2021_*` (psycharchives.2530, CC BY-SA; paper 10.1177/0047287520933688) -- 11 tables
+  from the Study 3 .sav (500 UK panel members): shopping satisfaction 20, overspending 3,
+  trip pleasure/detachment/meaning/reflection/satisfaction 3 each, SWLS 5, domain
+  satisfaction 4, money stress 5, financial security 5. Code 0 = "No Opinion" (value
+  label) dropped. The survey repeats the five SWLS statements later (Section Db); only the
+  first administration ships.
+- `nakai_2020_{inst_trust,values,immigration}` (dvn/J3AAF8, CC0) -- 1,013 Estonian and
+  Latvian web respondents. The data store DK as the next code after the scale, not the
+  codebook's 8/88; confirmed to the hundredth against the deposit's own Summary Report
+  and asserted. Region codes dropped (geography rule).
+- `lu_2025_*` (Mendeley m7k8638rmc, CC BY) -- 5 tables: the developed CHD
+  health-behaviour motivation scale at stage 1 (749, 18 items) and stage 2 (347, 12
+  retained items) kept separate (different samples and forms), plus MCLHB-DRR general
+  motivation 4, SSEE 4, SOEE 5. Stage-1 ID repeats on 8 pairs of different patients, so
+  stage-1 id is the row index.
+- `han_2020_hads` (Mendeley b6ht48w4hm, CC BY) -- 140 people living with HIV x 3 waves,
+  HADS 14 stored 1-4 (= scored 0-3 + 1; item sums equal the deposit's Anxiety/Depression/
+  HADS totals, asserted). Arm is `cov_group` (1/2 unlabelled, so not `treat`).
+- `brouwer_2026_{state_self_regard,reading_emotions,meat_justification}`
+  (psycharchives.21746, CC BY-SA) -- Study 1 (456) 15 state self-regard items; Study 2
+  (446) 8 reading emotions and 6 meat-justification statements; 1-7; 4 vignette
+  conditions as `cov_condition`.
+- `sevim_2026_{tfi,djgls,sf12}` (dvn/XMLRKT, CC0) -- 484 Turkish older adults in Türkiye
+  and Germany: TFI 15 (0/1), De Jong Gierveld 11 (0-2 as scored by the depositor), SF-12
+  12 as answered. Item sums equal the deposit's totals (asserted). id = country*1000 + ID.
+  A free-text stressful-life-event field dropped.
+
+**Held (Ben decides; entries in `~/irw-wt/overnight-1110/overnight-1110-b.md`):**
+- zenodo.23245865 (Aksu, intuitive eating, 590): possibly generated -- near-flat U-shaped
+  distributions on every item of four instruments, all 253 IES-2 inter-item r positive.
+- zenodo.23646039 (Sothornwit, depression and contraception, 406 Thai women): the only
+  scale is an undocumented a1-a9 block that looks like PHQ-9; no codebook entry, no paper.
+- zenodo.21802067 (Binus TikTok live shopping, 255): likely generated -- all submissions
+  within 1h45m at 20-50 s spacing, every inter-item r ~0.8 across five constructs.
+- zenodo.19415589 (Tiurida, AR cosmetics, 366): likely generated -- flat distributions,
+  constructs indistinguishable, a short final row.
+
+**Not shipped:** Mendeley wcszkbp9z8 (Duraj & Trusz) is already live as
+`duraj_2026_{amas,pe,te,pee}` from its Dataverse twin DVN/XOPDQ5 -- caught at staging, script
+and rows removed, `already_in_irw`; yorksj 32113705 already live as `milson_2026_*`;
+Mendeley hd2z967zjh already handled by `nguyen_2026_online_learning_misfit`.
+zenodo.15172677 (test anxiety) skipped for a source IP-address column; zenodo.4266238 (Baby
+Steps) and Mendeley kh5zvysyph (visual-spatial) are totals/aggregates only; Mendeley
+4n5x4ffzn5 (Javanese marital quality) deferred (documentation is a .rar, sections
+unlabelled). Dryad (dryad.s1634) now answers file downloads with 401/403 without a token:
+not recorded as dead.
+
+**Lesson:** the cleaned list does not see cross-repository twins (Mendeley vs Dataverse, a
+figshare institutional portal vs the dictionary DOI). Before writing a script, grep `data/`
+and the dictionaries for the first author's surname, not only for the DOI.
+
+**Item text:** none shipped. In hand but not attempted: yu_2021 (SPSS labels; adapted
+published scales, SWLS `block`), brouwer_2026 (codebooks carry every stem),
+rumangkit_2025_ewom_purchase (Indonesian stems in the headers; translation round),
+nakai_2020 (English questionnaire; ESS/Schwartz items). The rest have no wording in the
+deposit or are register `block`/`hold` instruments (BFI-2, AMAS, HADS, NARQ). Each script
+header says where the text is.
+
+**Staging:** 44 dictionary + codebook rows (`stage_dict_row.py`), 44 tag rows
+(`tags/tags_auto.csv` via `stage_tag_row.py`), lead statuses set in 11 source leads files,
+and `leads/repos_leads_2026-11-10b.csv` (4 decisions for rows whose source file has no
+status column, plus 18 unworked next leads in rank order). Covariate-label harvest run for
+the one .sav script with covariates (yu_2021): adds nothing (labels shipped as text);
+`build.py`'s unrelated churn in coverage.csv not committed. Tables in
+`~/irw-wt/overnight-1110-b/automated_finding/irw_output/`.
 ## 2026-11-10c — overnight lane C: repos sweep (mode 3) + the Harvard Dataverse JEEHP collection: 42 tables, 13,961,832 responses
 
 Lane C of the 2026-11-10 overnight run (`~/irw-wt/overnight-1110/BRIEF.md`). Reserved-source
