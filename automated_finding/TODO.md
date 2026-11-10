@@ -1,5 +1,25 @@
 # IRW Automated Finding — TODO
 
+## Overnight lane B 2026-11-10 (cleaned leads, non-PLOS) -- 44 tables staged, 4 held
+
+Full write-up in `BATCH_LOG.md` (2026-11-10 -- overnight lane B); hand-off in
+`~/irw-wt/overnight-1110/overnight-1110-b.md`.
+
+- [ ] **Upload (orchestrator)**: 44 response tables (186,807 responses) from
+  `~/irw-wt/overnight-1110-b/automated_finding/irw_output/` (`red_up irw_output`):
+  ribar_2026 x2, komalasari_2026 x3, nadif_2026 x8, rumangkit_2025_ewom_purchase,
+  fezzey_2023 x4, yu_2021 x11, nakai_2020 x3, lu_2025 x5, han_2020_hads,
+  brouwer_2026 x3, sevim_2026 x3. No item text tables.
+- [ ] **Ben rules on 4 holds** (possible generated data x3, undocumented scale x1):
+  zenodo.23245865 (Aksu), zenodo.21802067 (Binus), zenodo.19415589 (Tiurida),
+  zenodo.23646039 (Sothornwit). Evidence and yes/no consequences in the hand-off file.
+- [ ] Cheap item text left for a round: yu_2021 (SPSS labels), brouwer_2026
+  (codebooks), nakai_2020 (English questionnaire), rumangkit_2025_ewom_purchase
+  (Indonesian stems).
+- [ ] Next leads: `leads/repos_leads_2026-11-10b.csv` (18 unworked in rank order, plus
+  Mendeley wjw7b6ghc8, a strong labelled .sav lead, and dryad.s1634 once Dryad
+  downloads work with a token).
+
 ## PLOS monthly 2026-11-09 — 53 tables staged, Su 2025 held
 
 Full write-up in `BATCH_LOG.md` (2026-11-09 — PLOS monthly run).
