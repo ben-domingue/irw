@@ -1,5 +1,27 @@
 # IRW Automated Finding — TODO
 
+## Overnight 2026-11-10 lane D (Europe PMC) — 36 tables staged, 5 held
+
+Full write-up in `BATCH_LOG.md` (2026-11-10 — Overnight lane D). Hand-off: `~/irw-wt/overnight-1110/overnight-1110-d.md`.
+
+- [ ] **Upload (orchestrator)**: 36 response tables (10,365,865 responses) from
+  `~/irw-wt/overnight-1110-d/automated_finding/irw_output/`: yamada_2021_covidistress x14,
+  huang_2016 x2, sierakowska_2022 x3, kilintzis_2026, balami_2019 x3, lu_2026_phq9,
+  balik_2026_eq5d5l, irmer_2026 x3, mondino_2023_snore, hosgorur_2026 x4, schaap_2026 x3.
+  No item text tables.
+- [ ] **Ben rules on holds**:
+  - braniecka_2022_bdi: item sums vs stored BDItotal disagree in 20 of 122 rows. Built, in `runs/held/`.
+  - butovskaya_2024 Maasai faces: 3 stimuli, so the stimulus-norming layout has 3 ids. Not built.
+  - masuyama_2022 DSRS-C: coding and total inconsistent with the paper. Not built.
+  - yang_2023 m-health: 1,280 of 2,068 rows exactly duplicated. Recommend no.
+  - wang_2026 BRBQ: 132 deposit items vs the paper's 97. Not built.
+- [ ] **Licence asks drafted, not sent**: Learmonth (OSF y9fjk) and Eitze (OSF xg2r5), in
+  `~/irw-wt/overnight-1110-d/oneoff/email-drafts-2026-11-10/`.
+- [ ] Item text is cheap later for irmer_2026 (OSF codebook, German + English) and
+  mondino_2023_snore (SI PDF); both need a rights-register row first.
+- [ ] `pmc_term_backlog_2026-11-10.csv`: 181 scouted terms are unrun (all with <4 projected
+  new DOIs). The 466 non-English terms of the scout-3 pool were not scouted.
+
 ## Overnight lane A (PLOS cleaned leads), 2026-11-10 — 48 tables + 1 item text table staged
 
 Full write-up in `BATCH_LOG.md` (2026-11-10 — overnight lane A); hand-off with the
