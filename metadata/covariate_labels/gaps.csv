@@ -25,6 +25,9 @@ sahin_2026_life_satisfaction,data/sahin_2026_pmas_ai.py,considered_none_kept,"am
 sahin_2026_mind_attribution,data/sahin_2026_pmas_ai.py,considered_none_kept,"ambiguous source column: cinsiyet_gender,edu,egitim_educatıon,gelir_ıncome,ıncome"
 sahin_2026_pmas,data/sahin_2026_pmas_ai.py,considered_none_kept,"ambiguous source column: cinsiyet_gender,edu,egitim_educatıon,gelir_ıncome,ıncome"
 sahin_2026_social_desirability,data/sahin_2026_pmas_ai.py,considered_none_kept,"ambiguous source column: cinsiyet_gender,edu,egitim_educatıon,gelir_ıncome,ıncome"
+stahl_2021_bfas,data/stahl_2021_epistemic_values.py,considered_none_kept,"ambiguous source column: Ass1,Ass10R,Ass2,Ass3R,Ass4"
+stahl_2021_irs,data/stahl_2021_epistemic_values.py,considered_none_kept,"ambiguous source column: Ass1,Ass10R,Ass2,Ass3R,Ass4"
+stahl_2021_mrs,data/stahl_2021_epistemic_values.py,considered_none_kept,"ambiguous source column: Ass1,Ass10R,Ass2,Ass3R,Ass4"
 alcoholhealthwarninglabel_brennan_2022_awareness_harms_followup,data/alcoholhealthwarninglabel_brennan_2022.py,harvest_empty,the raw source file was not on disk when the harvest ran
 alcoholhealthwarninglabel_brennan_2022_emotional_arousal_followup,data/alcoholhealthwarninglabel_brennan_2022.py,harvest_empty,the raw source file was not on disk when the harvest ran
 alcoholhealthwarninglabel_brennan_2022_intentions_postexposure,data/alcoholhealthwarninglabel_brennan_2022.py,harvest_empty,the raw source file was not on disk when the harvest ran
@@ -292,6 +295,9 @@ gillman_2023_pss,data/gillman_2023_social_support_appraisals.py,never_examined,n
 gonzalezros_2025_eqi,data/gonzalezros_2025_ei_teacher.py,never_examined,no harvest log was ever built for this script
 gonzalezros_2025_ostes,data/gonzalezros_2025_ei_teacher.py,never_examined,no harvest log was ever built for this script
 gonzalezros_2025_tmms24,data/gonzalezros_2025_ei_teacher.py,never_examined,no harvest log was ever built for this script
+gori_2021_dsq40,data/gori_2021_covid_defense.py,never_examined,no harvest log was ever built for this script
+gori_2021_iesr,data/gori_2021_covid_defense.py,never_examined,no harvest log was ever built for this script
+gori_2021_tipi,data/gori_2021_covid_defense.py,never_examined,no harvest log was ever built for this script
 hellstrom_2019_isi,data/hellstrom_2019_sleep_battery.py,never_examined,no harvest log was ever built for this script
 hellstrom_2019_psqi,data/hellstrom_2019_sleep_battery.py,never_examined,no harvest log was ever built for this script
 hellstrom_2019_pss14,data/hellstrom_2019_sleep_battery.py,never_examined,no harvest log was ever built for this script
@@ -330,6 +336,8 @@ khashaba_2023_waste_attitude,data/khashaba_2023_waste_knowledge.py,never_examine
 kim_2023_gad7,data/kim_2023_pss_phq_gad.py,never_examined,no harvest log was ever built for this script
 kim_2023_phq9,data/kim_2023_pss_phq_gad.py,never_examined,no harvest log was ever built for this script
 kim_2023_pss10,data/kim_2023_pss_phq_gad.py,never_examined,no harvest log was ever built for this script
+knedlikova_2024_rsq_coping,data/knedlikova_2024_rsq_covid.py,never_examined,no harvest log was ever built for this script
+knedlikova_2024_rsq_stressors,data/knedlikova_2024_rsq_covid.py,never_examined,no harvest log was ever built for this script
 kopczynski_2021_core_self_evaluations,data/kopczynski_2021_covid_wellbeing.py,never_examined,no harvest log was ever built for this script
 kopczynski_2021_fcv19s,data/kopczynski_2021_covid_wellbeing.py,never_examined,no harvest log was ever built for this script
 kopczynski_2021_mspss,data/kopczynski_2021_covid_wellbeing.py,never_examined,no harvest log was ever built for this script
@@ -411,6 +419,8 @@ mendezlopez_2023_multicage_ict,data/mendezlopez_2023_ict_mental_health.py,never_
 mendezlopez_2023_phq9,data/mendezlopez_2023_ict_mental_health.py,never_examined,no harvest log was ever built for this script
 mendezlopez_2023_rses,data/mendezlopez_2023_ict_mental_health.py,never_examined,no harvest log was ever built for this script
 mendezlopez_2023_soc13,data/mendezlopez_2023_ict_mental_health.py,never_examined,no harvest log was ever built for this script
+mifsud_2023_pvq_rr,data/mifsud_2023_worldviews_values.py,never_examined,no harvest log was ever built for this script
+mifsud_2023_worldviews,data/mifsud_2023_worldviews_values.py,never_examined,no harvest log was ever built for this script
 moe2025_erq,data/moe2025_selfcompassion.py,never_examined,no harvest log was ever built for this script
 moe2025_scs,data/moe2025_selfcompassion.py,never_examined,no harvest log was ever built for this script
 moe2025_sis,data/moe2025_selfcompassion.py,never_examined,no harvest log was ever built for this script
@@ -611,9 +621,25 @@ ye_2025_jl,data/ye_2025_imposter_battery.py,never_examined,no harvest log was ev
 ye_2025_mm,data/ye_2025_imposter_battery.py,never_examined,no harvest log was ever built for this script
 ye_2025_tq,data/ye_2025_imposter_battery.py,never_examined,no harvest log was ever built for this script
 ye_2025_xc,data/ye_2025_imposter_battery.py,never_examined,no harvest log was ever built for this script
+yu_2021_domain_satisfaction,data/yu_2021_shopping_travel.py,never_examined,no harvest log was ever built for this script
+yu_2021_financial_security,data/yu_2021_shopping_travel.py,never_examined,no harvest log was ever built for this script
+yu_2021_money_stress,data/yu_2021_shopping_travel.py,never_examined,no harvest log was ever built for this script
+yu_2021_overspending,data/yu_2021_shopping_travel.py,never_examined,no harvest log was ever built for this script
+yu_2021_shopping_satisfaction,data/yu_2021_shopping_travel.py,never_examined,no harvest log was ever built for this script
+yu_2021_swls,data/yu_2021_shopping_travel.py,never_examined,no harvest log was ever built for this script
+yu_2021_trip_detachment,data/yu_2021_shopping_travel.py,never_examined,no harvest log was ever built for this script
+yu_2021_trip_meaning,data/yu_2021_shopping_travel.py,never_examined,no harvest log was ever built for this script
+yu_2021_trip_pleasure,data/yu_2021_shopping_travel.py,never_examined,no harvest log was ever built for this script
+yu_2021_trip_reflection,data/yu_2021_shopping_travel.py,never_examined,no harvest log was ever built for this script
+yu_2021_trip_satisfaction,data/yu_2021_shopping_travel.py,never_examined,no harvest log was ever built for this script
 zautra_2015_caug,data/zautra_2015_social_intelligence_battery.py,never_examined,no harvest log was ever built for this script
 zautra_2015_iri,data/zautra_2015_social_intelligence_battery.py,never_examined,no harvest log was ever built for this script
 zautra_2015_tmms24,data/zautra_2015_social_intelligence_battery.py,never_examined,no harvest log was ever built for this script
+zeng_2016_las,data/zeng_2016_love_attitudes.py,never_examined,no harvest log was ever built for this script
+zeng_2016_neo_deliberation,data/zeng_2016_love_attitudes.py,never_examined,no harvest log was ever built for this script
+zeng_2016_neo_dutifulness,data/zeng_2016_love_attitudes.py,never_examined,no harvest log was ever built for this script
+zeng_2016_neo_self_discipline,data/zeng_2016_love_attitudes.py,never_examined,no harvest log was ever built for this script
+zeng_2016_sas,data/zeng_2016_love_attitudes.py,never_examined,no harvest log was ever built for this script
 zeng_2025_adoption_flipped,data/zeng_2025_flipped_learning.py,never_examined,no harvest log was ever built for this script
 zeng_2025_attitude_flipped,data/zeng_2025_flipped_learning.py,never_examined,no harvest log was ever built for this script
 zeng_2025_motivation_for_learning,data/zeng_2025_flipped_learning.py,never_examined,no harvest log was ever built for this script
