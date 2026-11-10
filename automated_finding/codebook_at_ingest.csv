@@ -665,6 +665,8 @@ cho_2023_ipss,core,none,2026-10-15
 cho_2023_oabss,core,none,2026-10-15
 cho_2026_asian_coethnic,conj,none,2026-10-09
 cho_2026_asian_panethnic,conj,none,2026-10-09
+choi_2020_pt_competency_frequency,core,https://dataverse.harvard.edu/api/access/datafile/4074462,2026-11-09
+choi_2020_pt_competency_importance,core,https://dataverse.harvard.edu/api/access/datafile/4074462,2026-11-09
 choi_2021_job_satisfaction,core,none,2026-10-20
 chou_2021_party_candidates,conj,https://dataverse.harvard.edu/api/access/datafile/4297888,2026-10-09
 choy_2024_shark_fin,conj,none,2026-10-14
