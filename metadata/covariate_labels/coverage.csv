@@ -589,6 +589,18 @@ cisneros_2023_digital_competence,cov_employment,data/cisneros_2023_teaching_digi
 cisneros_2023_digital_competence,cov_faculty,data/cisneros_2023_teaching_digital_competence.py,Facultad,included,,4,4,
 cisneros_2023_digital_competence,cov_gender,data/cisneros_2023_teaching_digital_competence.py,Género,included,,2,2,
 cisneros_2023_digital_competence,cov_years_experience,data/cisneros_2023_teaching_digital_competence.py,Años_de_experiencia_docente,included,,5,5,
+clemente_2019_lying_court,cov_age_band,data/clemente_2019_custody_dispute.py,AgeR,included,,5,5,
+clemente_2019_lying_court,cov_n_children_band,data/clemente_2019_custody_dispute.py,AgeR,excluded,"shipped counts exceed source counts for code(s) 1,2: the script recoded this column",5,5,
+clemente_2019_lying_court,cov_sex_code,data/clemente_2019_custody_dispute.py,Sex,included,,2,2,
+clemente_2019_npi,cov_age_band,data/clemente_2019_custody_dispute.py,AgeR,included,,5,5,
+clemente_2019_npi,cov_n_children_band,data/clemente_2019_custody_dispute.py,AgeR,excluded,"shipped counts exceed source counts for code(s) 1,2: the script recoded this column",5,5,
+clemente_2019_npi,cov_sex_code,data/clemente_2019_custody_dispute.py,Sex,included,,2,2,
+clemente_2019_pmd,cov_age_band,data/clemente_2019_custody_dispute.py,AgeR,included,,5,5,
+clemente_2019_pmd,cov_n_children_band,data/clemente_2019_custody_dispute.py,AgeR,excluded,"shipped counts exceed source counts for code(s) 1,2: the script recoded this column",5,5,
+clemente_2019_pmd,cov_sex_code,data/clemente_2019_custody_dispute.py,Sex,included,,2,2,
+clemente_2019_retaliation,cov_age_band,data/clemente_2019_custody_dispute.py,AgeR,included,,5,5,
+clemente_2019_retaliation,cov_n_children_band,data/clemente_2019_custody_dispute.py,AgeR,excluded,"shipped counts exceed source counts for code(s) 1,2: the script recoded this column",5,5,
+clemente_2019_retaliation,cov_sex_code,data/clemente_2019_custody_dispute.py,Sex,included,,2,2,
 clemente_2024_attitude_father,cov_child_lives_father_or_both,data/clemente_2024_divorced_parents.py,Lives_with_father_or_both,included,,3,3,
 clemente_2024_attitude_father,cov_child_lives_mother_or_both,data/clemente_2024_divorced_parents.py,Lives_with_mother_or_both,included,,3,3,
 clemente_2024_attitude_father,cov_child_lives_with_father,data/clemente_2024_divorced_parents.py,Lives_with_father,included,,2,2,
@@ -1493,6 +1505,10 @@ hitlan_2025_dirty_dozen,cov_gender,data/hitlan_2025_dark_triad_celebrity.py,gend
 hitlan_2025_dirty_dozen,cov_location,data/hitlan_2025_dark_triad_celebrity.py,location,included,,4,4,
 hitlan_2025_dirty_dozen,cov_relationship_status,data/hitlan_2025_dark_triad_celebrity.py,relatstatus,included,,6,6,
 hitlan_2025_dirty_dozen,cov_sex,data/hitlan_2025_dark_triad_celebrity.py,sex_,included,,2,2,
+hofmann_2017_hope_symptoms,cov_brain_tumor,data/hofmann_2017_hope_symptoms.py,brain_metastases,included,,2,2,
+hofmann_2017_hope_symptoms,cov_cancer,data/hofmann_2017_hope_symptoms.py,Type_disease,excluded,shipped counts exceed source counts for code(s) 0: the script recoded this column,2,1,0
+hofmann_2017_hope_symptoms,cov_ecog,data/hofmann_2017_hope_symptoms.py,ECOG,included,,5,5,
+hofmann_2017_hope_symptoms,cov_nursing_care_level,data/hofmann_2017_hope_symptoms.py,level_nursing_care_support,included,,6,6,
 hou_2022_cyberbullying,cov_grade,data/hou_2022_dark_triad_cyberbullying.py,grade,included,,3,3,
 hou_2022_cyberbullying,cov_hometown,data/hou_2022_dark_triad_cyberbullying.py,hometown,included,,2,2,
 hou_2022_cyberbullying,cov_only_child,data/hou_2022_dark_triad_cyberbullying.py,only_children,included,,2,2,
@@ -1517,6 +1533,96 @@ hou_2022_trait_anger,cov_grade,data/hou_2022_dark_triad_cyberbullying.py,grade,i
 hou_2022_trait_anger,cov_hometown,data/hou_2022_dark_triad_cyberbullying.py,hometown,included,,2,2,
 hou_2022_trait_anger,cov_only_child,data/hou_2022_dark_triad_cyberbullying.py,only_children,included,,2,2,
 hou_2022_trait_anger,cov_sex,data/hou_2022_dark_triad_cyberbullying.py,sex,included,,2,2,
+howe_2019_ads_seen,cov_born_australia,data/howe_2019_gambling.py,Loctn,excluded,shipped counts exceed source counts for code(s) 0: the script recoded this column,2,1,0
+howe_2019_ads_seen,cov_english_at_home,data/howe_2019_gambling.py,Lang,excluded,shipped counts exceed source counts for code(s) 0: the script recoded this column,2,1,0
+howe_2019_ads_seen,cov_failed_check_s2,data/howe_2019_gambling.py,,excluded,"ambiguous source column: Consent,Gndr,Lang,Loctn,MStat",2,0,
+howe_2019_ads_seen,cov_failed_check_s5,data/howe_2019_gambling.py,,excluded,"ambiguous source column: Consent,Gndr,Lang,Loctn,MStat",2,0,
+howe_2019_ads_seen,cov_marital_status,data/howe_2019_gambling.py,MStat,included,,6,6,
+howe_2019_approval_family,cov_born_australia,data/howe_2019_gambling.py,Loctn,excluded,shipped counts exceed source counts for code(s) 0: the script recoded this column,2,1,0
+howe_2019_approval_family,cov_english_at_home,data/howe_2019_gambling.py,Lang,excluded,shipped counts exceed source counts for code(s) 0: the script recoded this column,2,1,0
+howe_2019_approval_family,cov_failed_check_s2,data/howe_2019_gambling.py,,excluded,"ambiguous source column: Consent,Gndr,Lang,Loctn,MStat",2,0,
+howe_2019_approval_family,cov_failed_check_s5,data/howe_2019_gambling.py,,excluded,"ambiguous source column: Consent,Gndr,Lang,Loctn,MStat",2,0,
+howe_2019_approval_family,cov_marital_status,data/howe_2019_gambling.py,MStat,included,,6,6,
+howe_2019_approval_others,cov_born_australia,data/howe_2019_gambling.py,Loctn,excluded,shipped counts exceed source counts for code(s) 0: the script recoded this column,2,1,0
+howe_2019_approval_others,cov_english_at_home,data/howe_2019_gambling.py,Lang,excluded,shipped counts exceed source counts for code(s) 0: the script recoded this column,2,1,0
+howe_2019_approval_others,cov_failed_check_s2,data/howe_2019_gambling.py,,excluded,"ambiguous source column: Consent,Gndr,Lang,Loctn,MStat",2,0,
+howe_2019_approval_others,cov_failed_check_s5,data/howe_2019_gambling.py,,excluded,"ambiguous source column: Consent,Gndr,Lang,Loctn,MStat",2,0,
+howe_2019_approval_others,cov_marital_status,data/howe_2019_gambling.py,MStat,included,,6,6,
+howe_2019_approval_peers,cov_born_australia,data/howe_2019_gambling.py,Loctn,excluded,shipped counts exceed source counts for code(s) 0: the script recoded this column,2,1,0
+howe_2019_approval_peers,cov_english_at_home,data/howe_2019_gambling.py,Lang,excluded,shipped counts exceed source counts for code(s) 0: the script recoded this column,2,1,0
+howe_2019_approval_peers,cov_failed_check_s2,data/howe_2019_gambling.py,,excluded,"ambiguous source column: Consent,Gndr,Lang,Loctn,MStat",2,0,
+howe_2019_approval_peers,cov_failed_check_s5,data/howe_2019_gambling.py,,excluded,"ambiguous source column: Consent,Gndr,Lang,Loctn,MStat",2,0,
+howe_2019_approval_peers,cov_marital_status,data/howe_2019_gambling.py,MStat,included,,6,6,
+howe_2019_approval_self,cov_born_australia,data/howe_2019_gambling.py,Loctn,excluded,shipped counts exceed source counts for code(s) 0: the script recoded this column,2,1,0
+howe_2019_approval_self,cov_english_at_home,data/howe_2019_gambling.py,Lang,excluded,shipped counts exceed source counts for code(s) 0: the script recoded this column,2,1,0
+howe_2019_approval_self,cov_failed_check_s2,data/howe_2019_gambling.py,,excluded,"ambiguous source column: Consent,Gndr,Lang,Loctn,MStat",2,0,
+howe_2019_approval_self,cov_failed_check_s5,data/howe_2019_gambling.py,,excluded,"ambiguous source column: Consent,Gndr,Lang,Loctn,MStat",2,0,
+howe_2019_approval_self,cov_marital_status,data/howe_2019_gambling.py,MStat,included,,6,6,
+howe_2019_cpgi,cov_born_australia,data/howe_2019_gambling.py,Loctn,excluded,shipped counts exceed source counts for code(s) 0: the script recoded this column,2,1,0
+howe_2019_cpgi,cov_english_at_home,data/howe_2019_gambling.py,Lang,excluded,shipped counts exceed source counts for code(s) 0: the script recoded this column,2,1,0
+howe_2019_cpgi,cov_failed_check_s2,data/howe_2019_gambling.py,,excluded,"ambiguous source column: Consent,Gndr,Lang,Loctn,MStat",2,0,
+howe_2019_cpgi,cov_failed_check_s5,data/howe_2019_gambling.py,,excluded,"ambiguous source column: Consent,Gndr,Lang,Loctn,MStat",2,0,
+howe_2019_cpgi,cov_marital_status,data/howe_2019_gambling.py,MStat,included,,6,6,
+howe_2019_depression,cov_born_australia,data/howe_2019_gambling.py,Loctn,excluded,shipped counts exceed source counts for code(s) 0: the script recoded this column,2,1,0
+howe_2019_depression,cov_english_at_home,data/howe_2019_gambling.py,Lang,excluded,shipped counts exceed source counts for code(s) 0: the script recoded this column,2,1,0
+howe_2019_depression,cov_failed_check_s2,data/howe_2019_gambling.py,,excluded,"ambiguous source column: Consent,Gndr,Lang,Loctn,MStat",2,0,
+howe_2019_depression,cov_failed_check_s5,data/howe_2019_gambling.py,,excluded,"ambiguous source column: Consent,Gndr,Lang,Loctn,MStat",2,0,
+howe_2019_depression,cov_marital_status,data/howe_2019_gambling.py,MStat,included,,6,6,
+howe_2019_discussed_offline,cov_born_australia,data/howe_2019_gambling.py,Loctn,excluded,shipped counts exceed source counts for code(s) 0: the script recoded this column,2,1,0
+howe_2019_discussed_offline,cov_english_at_home,data/howe_2019_gambling.py,Lang,excluded,shipped counts exceed source counts for code(s) 0: the script recoded this column,2,1,0
+howe_2019_discussed_offline,cov_failed_check_s2,data/howe_2019_gambling.py,,excluded,"ambiguous source column: Consent,Gndr,Lang,Loctn,MStat",2,0,
+howe_2019_discussed_offline,cov_failed_check_s5,data/howe_2019_gambling.py,,excluded,"ambiguous source column: Consent,Gndr,Lang,Loctn,MStat",2,0,
+howe_2019_discussed_offline,cov_marital_status,data/howe_2019_gambling.py,MStat,included,,6,6,
+howe_2019_discussed_online,cov_born_australia,data/howe_2019_gambling.py,Loctn,excluded,shipped counts exceed source counts for code(s) 0: the script recoded this column,2,1,0
+howe_2019_discussed_online,cov_english_at_home,data/howe_2019_gambling.py,Lang,excluded,shipped counts exceed source counts for code(s) 0: the script recoded this column,2,1,0
+howe_2019_discussed_online,cov_failed_check_s2,data/howe_2019_gambling.py,,excluded,"ambiguous source column: Consent,Gndr,Lang,Loctn,MStat",2,0,
+howe_2019_discussed_online,cov_failed_check_s5,data/howe_2019_gambling.py,,excluded,"ambiguous source column: Consent,Gndr,Lang,Loctn,MStat",2,0,
+howe_2019_discussed_online,cov_marital_status,data/howe_2019_gambling.py,MStat,included,,6,6,
+howe_2019_low_esteem,cov_born_australia,data/howe_2019_gambling.py,Loctn,excluded,shipped counts exceed source counts for code(s) 0: the script recoded this column,2,1,0
+howe_2019_low_esteem,cov_english_at_home,data/howe_2019_gambling.py,Lang,excluded,shipped counts exceed source counts for code(s) 0: the script recoded this column,2,1,0
+howe_2019_low_esteem,cov_failed_check_s2,data/howe_2019_gambling.py,,excluded,"ambiguous source column: Consent,Gndr,Lang,Loctn,MStat",2,0,
+howe_2019_low_esteem,cov_failed_check_s5,data/howe_2019_gambling.py,,excluded,"ambiguous source column: Consent,Gndr,Lang,Loctn,MStat",2,0,
+howe_2019_low_esteem,cov_marital_status,data/howe_2019_gambling.py,MStat,included,,6,6,
+howe_2019_luck_perseverance,cov_born_australia,data/howe_2019_gambling.py,Loctn,excluded,shipped counts exceed source counts for code(s) 0: the script recoded this column,2,1,0
+howe_2019_luck_perseverance,cov_english_at_home,data/howe_2019_gambling.py,Lang,excluded,shipped counts exceed source counts for code(s) 0: the script recoded this column,2,1,0
+howe_2019_luck_perseverance,cov_failed_check_s2,data/howe_2019_gambling.py,,excluded,"ambiguous source column: Consent,Gndr,Lang,Loctn,MStat",2,0,
+howe_2019_luck_perseverance,cov_failed_check_s5,data/howe_2019_gambling.py,,excluded,"ambiguous source column: Consent,Gndr,Lang,Loctn,MStat",2,0,
+howe_2019_luck_perseverance,cov_marital_status,data/howe_2019_gambling.py,MStat,included,,6,6,
+howe_2019_overestimate_winning,cov_born_australia,data/howe_2019_gambling.py,Loctn,excluded,shipped counts exceed source counts for code(s) 0: the script recoded this column,2,1,0
+howe_2019_overestimate_winning,cov_english_at_home,data/howe_2019_gambling.py,Lang,excluded,shipped counts exceed source counts for code(s) 0: the script recoded this column,2,1,0
+howe_2019_overestimate_winning,cov_failed_check_s2,data/howe_2019_gambling.py,,excluded,"ambiguous source column: Consent,Gndr,Lang,Loctn,MStat",2,0,
+howe_2019_overestimate_winning,cov_failed_check_s5,data/howe_2019_gambling.py,,excluded,"ambiguous source column: Consent,Gndr,Lang,Loctn,MStat",2,0,
+howe_2019_overestimate_winning,cov_marital_status,data/howe_2019_gambling.py,MStat,included,,6,6,
+howe_2019_participation_family,cov_born_australia,data/howe_2019_gambling.py,Loctn,excluded,shipped counts exceed source counts for code(s) 0: the script recoded this column,2,1,0
+howe_2019_participation_family,cov_english_at_home,data/howe_2019_gambling.py,Lang,excluded,shipped counts exceed source counts for code(s) 0: the script recoded this column,2,1,0
+howe_2019_participation_family,cov_failed_check_s2,data/howe_2019_gambling.py,,excluded,"ambiguous source column: Consent,Gndr,Lang,Loctn,MStat",2,0,
+howe_2019_participation_family,cov_failed_check_s5,data/howe_2019_gambling.py,,excluded,"ambiguous source column: Consent,Gndr,Lang,Loctn,MStat",2,0,
+howe_2019_participation_family,cov_marital_status,data/howe_2019_gambling.py,MStat,included,,6,6,
+howe_2019_participation_others,cov_born_australia,data/howe_2019_gambling.py,Loctn,excluded,shipped counts exceed source counts for code(s) 0: the script recoded this column,2,1,0
+howe_2019_participation_others,cov_english_at_home,data/howe_2019_gambling.py,Lang,excluded,shipped counts exceed source counts for code(s) 0: the script recoded this column,2,1,0
+howe_2019_participation_others,cov_failed_check_s2,data/howe_2019_gambling.py,,excluded,"ambiguous source column: Consent,Gndr,Lang,Loctn,MStat",2,0,
+howe_2019_participation_others,cov_failed_check_s5,data/howe_2019_gambling.py,,excluded,"ambiguous source column: Consent,Gndr,Lang,Loctn,MStat",2,0,
+howe_2019_participation_others,cov_marital_status,data/howe_2019_gambling.py,MStat,included,,6,6,
+howe_2019_participation_peers,cov_born_australia,data/howe_2019_gambling.py,Loctn,excluded,shipped counts exceed source counts for code(s) 0: the script recoded this column,2,1,0
+howe_2019_participation_peers,cov_english_at_home,data/howe_2019_gambling.py,Lang,excluded,shipped counts exceed source counts for code(s) 0: the script recoded this column,2,1,0
+howe_2019_participation_peers,cov_failed_check_s2,data/howe_2019_gambling.py,,excluded,"ambiguous source column: Consent,Gndr,Lang,Loctn,MStat",2,0,
+howe_2019_participation_peers,cov_failed_check_s5,data/howe_2019_gambling.py,,excluded,"ambiguous source column: Consent,Gndr,Lang,Loctn,MStat",2,0,
+howe_2019_participation_peers,cov_marital_status,data/howe_2019_gambling.py,MStat,included,,6,6,
+howe_2019_participation_self,cov_born_australia,data/howe_2019_gambling.py,Loctn,excluded,shipped counts exceed source counts for code(s) 0: the script recoded this column,2,1,0
+howe_2019_participation_self,cov_english_at_home,data/howe_2019_gambling.py,Lang,excluded,shipped counts exceed source counts for code(s) 0: the script recoded this column,2,1,0
+howe_2019_participation_self,cov_failed_check_s2,data/howe_2019_gambling.py,,excluded,"ambiguous source column: Consent,Gndr,Lang,Loctn,MStat",2,0,
+howe_2019_participation_self,cov_failed_check_s5,data/howe_2019_gambling.py,,excluded,"ambiguous source column: Consent,Gndr,Lang,Loctn,MStat",2,0,
+howe_2019_participation_self,cov_marital_status,data/howe_2019_gambling.py,MStat,included,,6,6,
+howe_2019_positive_urgency,cov_born_australia,data/howe_2019_gambling.py,Loctn,excluded,shipped counts exceed source counts for code(s) 0: the script recoded this column,2,1,0
+howe_2019_positive_urgency,cov_english_at_home,data/howe_2019_gambling.py,Lang,excluded,shipped counts exceed source counts for code(s) 0: the script recoded this column,2,1,0
+howe_2019_positive_urgency,cov_failed_check_s2,data/howe_2019_gambling.py,,excluded,"ambiguous source column: Consent,Gndr,Lang,Loctn,MStat",2,0,
+howe_2019_positive_urgency,cov_failed_check_s5,data/howe_2019_gambling.py,,excluded,"ambiguous source column: Consent,Gndr,Lang,Loctn,MStat",2,0,
+howe_2019_positive_urgency,cov_marital_status,data/howe_2019_gambling.py,MStat,included,,6,6,
+howe_2019_promotions_received,cov_born_australia,data/howe_2019_gambling.py,Loctn,excluded,shipped counts exceed source counts for code(s) 0: the script recoded this column,2,1,0
+howe_2019_promotions_received,cov_english_at_home,data/howe_2019_gambling.py,Lang,excluded,shipped counts exceed source counts for code(s) 0: the script recoded this column,2,1,0
+howe_2019_promotions_received,cov_failed_check_s2,data/howe_2019_gambling.py,,excluded,"ambiguous source column: Consent,Gndr,Lang,Loctn,MStat",2,0,
+howe_2019_promotions_received,cov_failed_check_s5,data/howe_2019_gambling.py,,excluded,"ambiguous source column: Consent,Gndr,Lang,Loctn,MStat",2,0,
+howe_2019_promotions_received,cov_marital_status,data/howe_2019_gambling.py,MStat,included,,6,6,
 hung_2026_fomo,cov_gender,data/hung_2026_short_form_video.py,gender,excluded,code 2 carries 75% of respondents and has no source label: the label set does not describe this column,2,1,2
 hung_2026_fomo,cov_grade,data/hung_2026_short_form_video.py,grace,included,,5,5,
 hung_2026_grit,cov_gender,data/hung_2026_grit_mindset.py,gender,included,,2,2,
@@ -2206,6 +2312,24 @@ lei_2024_internal_motivation,cov_gender,data/lei_2024_learning_motivation.py,Gen
 lei_2024_internal_motivation,cov_grade,data/lei_2024_learning_motivation.py,Grade,included,,4,4,
 lei_2024_internal_motivation,cov_major,data/lei_2024_learning_motivation.py,ProfessionMajor,included,,3,3,
 lei_2024_internal_motivation,cov_origin,data/lei_2024_learning_motivation.py,Origin,included,,2,2,
+li_2017_gad7,cov_anxiety_disorder,data/li_2017_outpatient_screening.py,Anxietydisorders,included,,2,2,
+li_2017_gad7,cov_bipolar_disorder,data/li_2017_outpatient_screening.py,Bipolordisorders,included,,2,2,
+li_2017_gad7,cov_employed,data/li_2017_outpatient_screening.py,occupationgroup,excluded,shipped counts exceed source counts for code(s) 0: the script recoded this column,2,1,0
+li_2017_gad7,cov_insomnia,data/li_2017_outpatient_screening.py,insomnia,included,,2,2,
+li_2017_gad7,cov_mdd,data/li_2017_outpatient_screening.py,MDD,included,,2,2,
+li_2017_gad7,cov_suicide_risk,data/li_2017_outpatient_screening.py,suiciderisk,included,,2,2,
+li_2017_phq15,cov_anxiety_disorder,data/li_2017_outpatient_screening.py,Anxietydisorders,included,,2,2,
+li_2017_phq15,cov_bipolar_disorder,data/li_2017_outpatient_screening.py,Bipolordisorders,included,,2,2,
+li_2017_phq15,cov_employed,data/li_2017_outpatient_screening.py,occupationgroup,excluded,shipped counts exceed source counts for code(s) 0: the script recoded this column,2,1,0
+li_2017_phq15,cov_insomnia,data/li_2017_outpatient_screening.py,insomnia,included,,2,2,
+li_2017_phq15,cov_mdd,data/li_2017_outpatient_screening.py,MDD,included,,2,2,
+li_2017_phq15,cov_suicide_risk,data/li_2017_outpatient_screening.py,suiciderisk,included,,2,2,
+li_2017_phq9,cov_anxiety_disorder,data/li_2017_outpatient_screening.py,Anxietydisorders,included,,2,2,
+li_2017_phq9,cov_bipolar_disorder,data/li_2017_outpatient_screening.py,Bipolordisorders,included,,2,2,
+li_2017_phq9,cov_employed,data/li_2017_outpatient_screening.py,occupationgroup,excluded,shipped counts exceed source counts for code(s) 0: the script recoded this column,2,1,0
+li_2017_phq9,cov_insomnia,data/li_2017_outpatient_screening.py,insomnia,included,,2,2,
+li_2017_phq9,cov_mdd,data/li_2017_outpatient_screening.py,MDD,included,,2,2,
+li_2017_phq9,cov_suicide_risk,data/li_2017_outpatient_screening.py,suiciderisk,included,,2,2,
 li_2024_csc,cov_age,data/li_2024_classroom_wtc.py,Age,included,,5,5,
 li_2024_csc,cov_cultural_background,data/li_2024_classroom_wtc.py,AsiaNonAsia,included,,2,2,
 li_2024_csc,cov_gender,data/li_2024_classroom_wtc.py,Gender,included,,2,2,
@@ -3373,6 +3497,33 @@ tatala_2023_ucla_loneliness,cov_religious_community,data/tatala_2023_loneliness.
 tatala_2023_ucla_loneliness,cov_residence_poland,data/tatala_2023_loneliness.py,Place_of_residents_PL,included,,3,3,
 tatala_2023_ucla_loneliness,cov_time_abroad,data/tatala_2023_loneliness.py,Time_abroad,included,,3,3,
 teodorini_2020_modafinil_attitudes,cov_sex,data/teodorini_2020_modafinil_attitudes.py,sex,included,,2,2,
+thoma_2018_ctq,cov_children_under_18,data/thoma_2018_socr_survey.py,,excluded,"ambiguous source column: Age_groups,Budget_group,CTQ_1,CTQ_10,CTQ_11",6,0,
+thoma_2018_ctq,cov_education,data/thoma_2018_socr_survey.py,Education,included,,10,10,
+thoma_2018_ctq,cov_employment,data/thoma_2018_socr_survey.py,Employment,included,,9,9,
+thoma_2018_ctq,cov_federal_state,data/thoma_2018_socr_survey.py,Federal_state,included,,17,17,
+thoma_2018_ctq,cov_german_national,data/thoma_2018_socr_survey.py,Nationality,excluded,shipped counts exceed source counts for code(s) 0: the script recoded this column,2,1,0
+thoma_2018_ctq,cov_household_size,data/thoma_2018_socr_survey.py,,excluded,"ambiguous source column: Age_groups,Budget_group,CTQ_1,CTQ_10,CTQ_11",9,0,
+thoma_2018_ctq,cov_income_band,data/thoma_2018_socr_survey.py,Income,included,,14,14,
+thoma_2018_ctq,cov_marital_status,data/thoma_2018_socr_survey.py,Marital_status,included,,5,5,
+thoma_2018_ctq,cov_religion,data/thoma_2018_socr_survey.py,Religion,included,,5,5,
+thoma_2018_phq4,cov_children_under_18,data/thoma_2018_socr_survey.py,,excluded,"ambiguous source column: Age_groups,Budget_group,CTQ_1,CTQ_10,CTQ_11",6,0,
+thoma_2018_phq4,cov_education,data/thoma_2018_socr_survey.py,Education,included,,10,10,
+thoma_2018_phq4,cov_employment,data/thoma_2018_socr_survey.py,Employment,included,,9,9,
+thoma_2018_phq4,cov_federal_state,data/thoma_2018_socr_survey.py,Federal_state,included,,17,17,
+thoma_2018_phq4,cov_german_national,data/thoma_2018_socr_survey.py,Nationality,excluded,shipped counts exceed source counts for code(s) 0: the script recoded this column,2,1,0
+thoma_2018_phq4,cov_household_size,data/thoma_2018_socr_survey.py,,excluded,"ambiguous source column: Age_groups,Budget_group,CTQ_1,CTQ_10,CTQ_11",9,0,
+thoma_2018_phq4,cov_income_band,data/thoma_2018_socr_survey.py,Income,included,,14,14,
+thoma_2018_phq4,cov_marital_status,data/thoma_2018_socr_survey.py,Marital_status,included,,5,5,
+thoma_2018_phq4,cov_religion,data/thoma_2018_socr_survey.py,Religion,included,,5,5,
+thoma_2018_socr,cov_children_under_18,data/thoma_2018_socr_survey.py,,excluded,"ambiguous source column: Age_groups,Budget_group,CTQ_1,CTQ_10,CTQ_11",6,0,
+thoma_2018_socr,cov_education,data/thoma_2018_socr_survey.py,Education,included,,10,10,
+thoma_2018_socr,cov_employment,data/thoma_2018_socr_survey.py,Employment,included,,9,9,
+thoma_2018_socr,cov_federal_state,data/thoma_2018_socr_survey.py,Federal_state,included,,17,17,
+thoma_2018_socr,cov_german_national,data/thoma_2018_socr_survey.py,Nationality,excluded,shipped counts exceed source counts for code(s) 0: the script recoded this column,2,1,0
+thoma_2018_socr,cov_household_size,data/thoma_2018_socr_survey.py,,excluded,"ambiguous source column: Age_groups,Budget_group,CTQ_1,CTQ_10,CTQ_11",9,0,
+thoma_2018_socr,cov_income_band,data/thoma_2018_socr_survey.py,Income,included,,14,14,
+thoma_2018_socr,cov_marital_status,data/thoma_2018_socr_survey.py,Marital_status,included,,5,5,
+thoma_2018_socr,cov_religion,data/thoma_2018_socr_survey.py,Religion,included,,5,5,
 tiemensma_2018_iesr,cov_latino,data/tiemensma_2018_iesr.py,latino_nonLat,included,,2,2,
 tims_2017_autonomy,cov_country,data/tims_2017_core_self_evaluations.py,Country,included,,2,2,
 tims_2017_autonomy,cov_education,data/tims_2017_core_self_evaluations.py,Edu,included,,4,4,
@@ -3518,6 +3669,20 @@ vanteffelen_2020_trait_anger,cov_work,data/vanteffelen_2020_hostility.py,work,in
 vasquez_2013_reading_comprehension,cov_gender,data/vasquez_2013_reading_comprehension.py,género,included,,2,2,
 vasquez_2013_reading_comprehension,cov_section,data/vasquez_2013_reading_comprehension.py,grado,included,,4,4,
 vasquez_2013_reading_comprehension,cov_shift,data/vasquez_2013_reading_comprehension.py,turno,included,,2,2,
+velten_2018_sesii_wm,cov_couple_study,data/velten_2018_sexual_excitation.py,couple,included,,2,2,
+velten_2018_sesii_wm,cov_high_school_degree,data/velten_2018_sexual_excitation.py,highschool,included,,2,2,
+velten_2018_sesii_wm,cov_income_band,data/velten_2018_sexual_excitation.py,income,included,,9,9,
+velten_2018_sesii_wm,cov_n_children,data/velten_2018_sexual_excitation.py,,excluded,"ambiguous source column: freq_mast,income,job1,job2,porn_freq",9,0,
+velten_2018_sesii_wm,cov_relationship_status,data/velten_2018_sexual_excitation.py,rel_status,included,,7,7,
+velten_2018_sesii_wm,cov_sexual_orientation,data/velten_2018_sexual_excitation.py,sex_orient,included,,8,8,
+velten_2018_sesii_wm,cov_steady_partner,data/velten_2018_sexual_excitation.py,rel_group,excluded,shipped counts exceed source counts for code(s) 0: the script recoded this column,2,1,0
+velten_2018_sis_ses_sf,cov_couple_study,data/velten_2018_sexual_excitation.py,couple,included,,2,2,
+velten_2018_sis_ses_sf,cov_high_school_degree,data/velten_2018_sexual_excitation.py,highschool,included,,2,2,
+velten_2018_sis_ses_sf,cov_income_band,data/velten_2018_sexual_excitation.py,income,included,,9,9,
+velten_2018_sis_ses_sf,cov_n_children,data/velten_2018_sexual_excitation.py,,excluded,"ambiguous source column: freq_mast,income,job1,job2,porn_freq",9,0,
+velten_2018_sis_ses_sf,cov_relationship_status,data/velten_2018_sexual_excitation.py,rel_status,included,,7,7,
+velten_2018_sis_ses_sf,cov_sexual_orientation,data/velten_2018_sexual_excitation.py,sex_orient,included,,8,8,
+velten_2018_sis_ses_sf,cov_steady_partner,data/velten_2018_sexual_excitation.py,rel_group,excluded,shipped counts exceed source counts for code(s) 0: the script recoded this column,2,1,0
 vogel_2024_attribute_valence_s3,cov_academic_degree,data/vogel_2024_implicit_citizenship.py,academic_degree,included,,2,2,
 vogel_2024_attribute_valence_s3,cov_admin_level,data/vogel_2024_implicit_citizenship.py,admin_level,included,,5,5,
 vogel_2024_attribute_valence_s3,cov_admin_subfield,data/vogel_2024_implicit_citizenship.py,admin_subfield,included,,11,11,

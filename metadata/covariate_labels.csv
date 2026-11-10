@@ -2876,6 +2876,34 @@ cisneros_2023_digital_competence,cov_years_experience,2,6-10 años
 cisneros_2023_digital_competence,cov_years_experience,3,11-15 años
 cisneros_2023_digital_competence,cov_years_experience,4,16-20 años
 cisneros_2023_digital_competence,cov_years_experience,5,20 o más años
+clemente_2019_lying_court,cov_age_band,1,18 to 24
+clemente_2019_lying_court,cov_age_band,2,25 to 34
+clemente_2019_lying_court,cov_age_band,3,35 to 44
+clemente_2019_lying_court,cov_age_band,4,45 to 54
+clemente_2019_lying_court,cov_age_band,5,55 to 64
+clemente_2019_lying_court,cov_sex_code,1,Male
+clemente_2019_lying_court,cov_sex_code,2,Female
+clemente_2019_npi,cov_age_band,1,18 to 24
+clemente_2019_npi,cov_age_band,2,25 to 34
+clemente_2019_npi,cov_age_band,3,35 to 44
+clemente_2019_npi,cov_age_band,4,45 to 54
+clemente_2019_npi,cov_age_band,5,55 to 64
+clemente_2019_npi,cov_sex_code,1,Male
+clemente_2019_npi,cov_sex_code,2,Female
+clemente_2019_pmd,cov_age_band,1,18 to 24
+clemente_2019_pmd,cov_age_band,2,25 to 34
+clemente_2019_pmd,cov_age_band,3,35 to 44
+clemente_2019_pmd,cov_age_band,4,45 to 54
+clemente_2019_pmd,cov_age_band,5,55 to 64
+clemente_2019_pmd,cov_sex_code,1,Male
+clemente_2019_pmd,cov_sex_code,2,Female
+clemente_2019_retaliation,cov_age_band,1,18 to 24
+clemente_2019_retaliation,cov_age_band,2,25 to 34
+clemente_2019_retaliation,cov_age_band,3,35 to 44
+clemente_2019_retaliation,cov_age_band,4,45 to 54
+clemente_2019_retaliation,cov_age_band,5,55 to 64
+clemente_2019_retaliation,cov_sex_code,1,Male
+clemente_2019_retaliation,cov_sex_code,2,Female
 clemente_2024_attitude_father,cov_child_lives_father_or_both,1,Father only
 clemente_2024_attitude_father,cov_child_lives_father_or_both,2,no
 clemente_2024_attitude_father,cov_child_lives_father_or_both,3,Both parents
@@ -6436,6 +6464,19 @@ hitlan_2025_dirty_dozen,cov_relationship_status,9,Cohabitate
 hitlan_2025_dirty_dozen,cov_relationship_status,10,In a relationship
 hitlan_2025_dirty_dozen,cov_sex,1,Male
 hitlan_2025_dirty_dozen,cov_sex,2,Female
+hofmann_2017_hope_symptoms,cov_brain_tumor,0,non or no data
+hofmann_2017_hope_symptoms,cov_brain_tumor,1,primary or secondary braim tumor
+hofmann_2017_hope_symptoms,cov_ecog,0,fully active
+hofmann_2017_hope_symptoms,cov_ecog,1,able to carry out work of light nature
+hofmann_2017_hope_symptoms,cov_ecog,2,"capable of selfcare, up and about >50% of waking hours"
+hofmann_2017_hope_symptoms,cov_ecog,3,"limited selfcare, confined to bed or chair >50% of waking hours"
+hofmann_2017_hope_symptoms,cov_ecog,4,"cannot carry on any selfcare, totally confined to bed or chair"
+hofmann_2017_hope_symptoms,cov_nursing_care_level,0,no level
+hofmann_2017_hope_symptoms,cov_nursing_care_level,1,level 1
+hofmann_2017_hope_symptoms,cov_nursing_care_level,2,level 2
+hofmann_2017_hope_symptoms,cov_nursing_care_level,3,level 3
+hofmann_2017_hope_symptoms,cov_nursing_care_level,4,level 3+
+hofmann_2017_hope_symptoms,cov_nursing_care_level,5,applied for
 hou_2022_cyberbullying,cov_grade,1,大一
 hou_2022_cyberbullying,cov_grade,2,大二
 hou_2022_cyberbullying,cov_grade,3,大三
@@ -6490,6 +6531,114 @@ hou_2022_trait_anger,cov_only_child,1,是
 hou_2022_trait_anger,cov_only_child,2,否
 hou_2022_trait_anger,cov_sex,1,男
 hou_2022_trait_anger,cov_sex,2,女
+howe_2019_ads_seen,cov_marital_status,1,Married
+howe_2019_ads_seen,cov_marital_status,2,"Living with a partner (e.g. a de facto, or boyfriend/girlfriend)"
+howe_2019_ads_seen,cov_marital_status,3,"Single, that is, never married"
+howe_2019_ads_seen,cov_marital_status,4,Separated (still legally married)
+howe_2019_ads_seen,cov_marital_status,5,Divorced
+howe_2019_ads_seen,cov_marital_status,6,Widowed
+howe_2019_approval_family,cov_marital_status,1,Married
+howe_2019_approval_family,cov_marital_status,2,"Living with a partner (e.g. a de facto, or boyfriend/girlfriend)"
+howe_2019_approval_family,cov_marital_status,3,"Single, that is, never married"
+howe_2019_approval_family,cov_marital_status,4,Separated (still legally married)
+howe_2019_approval_family,cov_marital_status,5,Divorced
+howe_2019_approval_family,cov_marital_status,6,Widowed
+howe_2019_approval_others,cov_marital_status,1,Married
+howe_2019_approval_others,cov_marital_status,2,"Living with a partner (e.g. a de facto, or boyfriend/girlfriend)"
+howe_2019_approval_others,cov_marital_status,3,"Single, that is, never married"
+howe_2019_approval_others,cov_marital_status,4,Separated (still legally married)
+howe_2019_approval_others,cov_marital_status,5,Divorced
+howe_2019_approval_others,cov_marital_status,6,Widowed
+howe_2019_approval_peers,cov_marital_status,1,Married
+howe_2019_approval_peers,cov_marital_status,2,"Living with a partner (e.g. a de facto, or boyfriend/girlfriend)"
+howe_2019_approval_peers,cov_marital_status,3,"Single, that is, never married"
+howe_2019_approval_peers,cov_marital_status,4,Separated (still legally married)
+howe_2019_approval_peers,cov_marital_status,5,Divorced
+howe_2019_approval_peers,cov_marital_status,6,Widowed
+howe_2019_approval_self,cov_marital_status,1,Married
+howe_2019_approval_self,cov_marital_status,2,"Living with a partner (e.g. a de facto, or boyfriend/girlfriend)"
+howe_2019_approval_self,cov_marital_status,3,"Single, that is, never married"
+howe_2019_approval_self,cov_marital_status,4,Separated (still legally married)
+howe_2019_approval_self,cov_marital_status,5,Divorced
+howe_2019_approval_self,cov_marital_status,6,Widowed
+howe_2019_cpgi,cov_marital_status,1,Married
+howe_2019_cpgi,cov_marital_status,2,"Living with a partner (e.g. a de facto, or boyfriend/girlfriend)"
+howe_2019_cpgi,cov_marital_status,3,"Single, that is, never married"
+howe_2019_cpgi,cov_marital_status,4,Separated (still legally married)
+howe_2019_cpgi,cov_marital_status,5,Divorced
+howe_2019_cpgi,cov_marital_status,6,Widowed
+howe_2019_depression,cov_marital_status,1,Married
+howe_2019_depression,cov_marital_status,2,"Living with a partner (e.g. a de facto, or boyfriend/girlfriend)"
+howe_2019_depression,cov_marital_status,3,"Single, that is, never married"
+howe_2019_depression,cov_marital_status,4,Separated (still legally married)
+howe_2019_depression,cov_marital_status,5,Divorced
+howe_2019_depression,cov_marital_status,6,Widowed
+howe_2019_discussed_offline,cov_marital_status,1,Married
+howe_2019_discussed_offline,cov_marital_status,2,"Living with a partner (e.g. a de facto, or boyfriend/girlfriend)"
+howe_2019_discussed_offline,cov_marital_status,3,"Single, that is, never married"
+howe_2019_discussed_offline,cov_marital_status,4,Separated (still legally married)
+howe_2019_discussed_offline,cov_marital_status,5,Divorced
+howe_2019_discussed_offline,cov_marital_status,6,Widowed
+howe_2019_discussed_online,cov_marital_status,1,Married
+howe_2019_discussed_online,cov_marital_status,2,"Living with a partner (e.g. a de facto, or boyfriend/girlfriend)"
+howe_2019_discussed_online,cov_marital_status,3,"Single, that is, never married"
+howe_2019_discussed_online,cov_marital_status,4,Separated (still legally married)
+howe_2019_discussed_online,cov_marital_status,5,Divorced
+howe_2019_discussed_online,cov_marital_status,6,Widowed
+howe_2019_low_esteem,cov_marital_status,1,Married
+howe_2019_low_esteem,cov_marital_status,2,"Living with a partner (e.g. a de facto, or boyfriend/girlfriend)"
+howe_2019_low_esteem,cov_marital_status,3,"Single, that is, never married"
+howe_2019_low_esteem,cov_marital_status,4,Separated (still legally married)
+howe_2019_low_esteem,cov_marital_status,5,Divorced
+howe_2019_low_esteem,cov_marital_status,6,Widowed
+howe_2019_luck_perseverance,cov_marital_status,1,Married
+howe_2019_luck_perseverance,cov_marital_status,2,"Living with a partner (e.g. a de facto, or boyfriend/girlfriend)"
+howe_2019_luck_perseverance,cov_marital_status,3,"Single, that is, never married"
+howe_2019_luck_perseverance,cov_marital_status,4,Separated (still legally married)
+howe_2019_luck_perseverance,cov_marital_status,5,Divorced
+howe_2019_luck_perseverance,cov_marital_status,6,Widowed
+howe_2019_overestimate_winning,cov_marital_status,1,Married
+howe_2019_overestimate_winning,cov_marital_status,2,"Living with a partner (e.g. a de facto, or boyfriend/girlfriend)"
+howe_2019_overestimate_winning,cov_marital_status,3,"Single, that is, never married"
+howe_2019_overestimate_winning,cov_marital_status,4,Separated (still legally married)
+howe_2019_overestimate_winning,cov_marital_status,5,Divorced
+howe_2019_overestimate_winning,cov_marital_status,6,Widowed
+howe_2019_participation_family,cov_marital_status,1,Married
+howe_2019_participation_family,cov_marital_status,2,"Living with a partner (e.g. a de facto, or boyfriend/girlfriend)"
+howe_2019_participation_family,cov_marital_status,3,"Single, that is, never married"
+howe_2019_participation_family,cov_marital_status,4,Separated (still legally married)
+howe_2019_participation_family,cov_marital_status,5,Divorced
+howe_2019_participation_family,cov_marital_status,6,Widowed
+howe_2019_participation_others,cov_marital_status,1,Married
+howe_2019_participation_others,cov_marital_status,2,"Living with a partner (e.g. a de facto, or boyfriend/girlfriend)"
+howe_2019_participation_others,cov_marital_status,3,"Single, that is, never married"
+howe_2019_participation_others,cov_marital_status,4,Separated (still legally married)
+howe_2019_participation_others,cov_marital_status,5,Divorced
+howe_2019_participation_others,cov_marital_status,6,Widowed
+howe_2019_participation_peers,cov_marital_status,1,Married
+howe_2019_participation_peers,cov_marital_status,2,"Living with a partner (e.g. a de facto, or boyfriend/girlfriend)"
+howe_2019_participation_peers,cov_marital_status,3,"Single, that is, never married"
+howe_2019_participation_peers,cov_marital_status,4,Separated (still legally married)
+howe_2019_participation_peers,cov_marital_status,5,Divorced
+howe_2019_participation_peers,cov_marital_status,6,Widowed
+howe_2019_participation_self,cov_marital_status,1,Married
+howe_2019_participation_self,cov_marital_status,2,"Living with a partner (e.g. a de facto, or boyfriend/girlfriend)"
+howe_2019_participation_self,cov_marital_status,3,"Single, that is, never married"
+howe_2019_participation_self,cov_marital_status,4,Separated (still legally married)
+howe_2019_participation_self,cov_marital_status,5,Divorced
+howe_2019_participation_self,cov_marital_status,6,Widowed
+howe_2019_positive_urgency,cov_marital_status,1,Married
+howe_2019_positive_urgency,cov_marital_status,2,"Living with a partner (e.g. a de facto, or boyfriend/girlfriend)"
+howe_2019_positive_urgency,cov_marital_status,3,"Single, that is, never married"
+howe_2019_positive_urgency,cov_marital_status,4,Separated (still legally married)
+howe_2019_positive_urgency,cov_marital_status,5,Divorced
+howe_2019_positive_urgency,cov_marital_status,6,Widowed
+howe_2019_promotions_received,cov_marital_status,1,Married
+howe_2019_promotions_received,cov_marital_status,2,"Living with a partner (e.g. a de facto, or boyfriend/girlfriend)"
+howe_2019_promotions_received,cov_marital_status,3,"Single, that is, never married"
+howe_2019_promotions_received,cov_marital_status,4,Separated (still legally married)
+howe_2019_promotions_received,cov_marital_status,5,Divorced
+howe_2019_promotions_received,cov_marital_status,6,Widowed
 hung_2026_fomo,cov_grade,1,Freshman
 hung_2026_fomo,cov_grade,2,Sophomore
 hung_2026_fomo,cov_grade,3,Junior
@@ -9221,6 +9370,36 @@ lei_2024_internal_motivation,cov_major,2,LiteratureAndHistory
 lei_2024_internal_motivation,cov_major,3,ArtAndSports
 lei_2024_internal_motivation,cov_origin,1,village
 lei_2024_internal_motivation,cov_origin,2,CityAndTown
+li_2017_gad7,cov_anxiety_disorder,0,without Anxiety disorders
+li_2017_gad7,cov_anxiety_disorder,1,Anxiety disorders
+li_2017_gad7,cov_bipolar_disorder,0,without Bipolor disorders
+li_2017_gad7,cov_bipolar_disorder,1,Bipolordisorders
+li_2017_gad7,cov_insomnia,0,without insomnia
+li_2017_gad7,cov_insomnia,1,insomnia
+li_2017_gad7,cov_mdd,0,without MDD
+li_2017_gad7,cov_mdd,1,MDD
+li_2017_gad7,cov_suicide_risk,0,without suicide risk
+li_2017_gad7,cov_suicide_risk,1,suicide risk
+li_2017_phq15,cov_anxiety_disorder,0,without Anxiety disorders
+li_2017_phq15,cov_anxiety_disorder,1,Anxiety disorders
+li_2017_phq15,cov_bipolar_disorder,0,without Bipolor disorders
+li_2017_phq15,cov_bipolar_disorder,1,Bipolordisorders
+li_2017_phq15,cov_insomnia,0,without insomnia
+li_2017_phq15,cov_insomnia,1,insomnia
+li_2017_phq15,cov_mdd,0,without MDD
+li_2017_phq15,cov_mdd,1,MDD
+li_2017_phq15,cov_suicide_risk,0,without suicide risk
+li_2017_phq15,cov_suicide_risk,1,suicide risk
+li_2017_phq9,cov_anxiety_disorder,0,without Anxiety disorders
+li_2017_phq9,cov_anxiety_disorder,1,Anxiety disorders
+li_2017_phq9,cov_bipolar_disorder,0,without Bipolor disorders
+li_2017_phq9,cov_bipolar_disorder,1,Bipolordisorders
+li_2017_phq9,cov_insomnia,0,without insomnia
+li_2017_phq9,cov_insomnia,1,insomnia
+li_2017_phq9,cov_mdd,0,without MDD
+li_2017_phq9,cov_mdd,1,MDD
+li_2017_phq9,cov_suicide_risk,0,without suicide risk
+li_2017_phq9,cov_suicide_risk,1,suicide risk
 li_2024_csc,cov_age,1,below 18
 li_2024_csc,cov_age,2,18-20
 li_2024_csc,cov_age,3,21-23
@@ -13088,6 +13267,186 @@ tatala_2023_ucla_loneliness,cov_time_abroad,2,from 1 to 5 year
 tatala_2023_ucla_loneliness,cov_time_abroad,3,more than 5 year
 teodorini_2020_modafinil_attitudes,cov_sex,1,Male
 teodorini_2020_modafinil_attitudes,cov_sex,2,Female
+thoma_2018_ctq,cov_education,1,Without primary ‎/ national school education
+thoma_2018_ctq,cov_education,2,Primary ‎/ national school certificate
+thoma_2018_ctq,cov_education,3,Secondary school certificate
+thoma_2018_ctq,cov_education,4,Completion of the polytechnic secondary school (10th grade)
+thoma_2018_ctq,cov_education,5,Community college (without recognition)
+thoma_2018_ctq,cov_education,6,High school diploma without university degree
+thoma_2018_ctq,cov_education,7,Completed university studies
+thoma_2018_ctq,cov_education,8,Other school graduation
+thoma_2018_ctq,cov_education,9,Student in general secondary school
+thoma_2018_ctq,cov_education,10,Special education school
+thoma_2018_ctq,cov_employment,1,Full-time employment (from 35 hours)
+thoma_2018_ctq,cov_employment,2,Part-time work (15-34 hours)
+thoma_2018_ctq,cov_employment,3,Employed by the hour
+thoma_2018_ctq,cov_employment,4,Voluntary work ‎/ maternity‎/parental leave
+thoma_2018_ctq,cov_employment,5,Currently employed ‎/ 0-hour contract
+thoma_2018_ctq,cov_employment,6,Retired ‎/ pensioner ‎/ in early retirement
+thoma_2018_ctq,cov_employment,7,Not working (e.g. housewife‎/househusband)
+thoma_2018_ctq,cov_employment,8,Community college for vocational training
+thoma_2018_ctq,cov_employment,9,"In school education (also university, high school)"
+thoma_2018_ctq,cov_federal_state,1,Schleswig-Holstein
+thoma_2018_ctq,cov_federal_state,2,Hamburg
+thoma_2018_ctq,cov_federal_state,3,Niedersachsen
+thoma_2018_ctq,cov_federal_state,4,Bremen
+thoma_2018_ctq,cov_federal_state,5,Nordrhein-Westfalen
+thoma_2018_ctq,cov_federal_state,6,Hessen
+thoma_2018_ctq,cov_federal_state,7,Rheinland-Pfalz
+thoma_2018_ctq,cov_federal_state,8,Baden-Württemberg
+thoma_2018_ctq,cov_federal_state,9,Bayern
+thoma_2018_ctq,cov_federal_state,10,Saarland
+thoma_2018_ctq,cov_federal_state,11,Berlin-West
+thoma_2018_ctq,cov_federal_state,12,Brandenburg
+thoma_2018_ctq,cov_federal_state,13,Mecklenburg-Vorpommern
+thoma_2018_ctq,cov_federal_state,14,Sachsen
+thoma_2018_ctq,cov_federal_state,15,Sachsen-Anhalt
+thoma_2018_ctq,cov_federal_state,16,Thüringen
+thoma_2018_ctq,cov_federal_state,17,Berlin-Ost
+thoma_2018_ctq,cov_income_band,0,No personal income
+thoma_2018_ctq,cov_income_band,1,Up to 500 Euro
+thoma_2018_ctq,cov_income_band,2,500 to less than 650 Euro
+thoma_2018_ctq,cov_income_band,3,560 to less than 750 Euro
+thoma_2018_ctq,cov_income_band,4,750 to less than 900 Euro
+thoma_2018_ctq,cov_income_band,5,"900 to less than 1,000 Euro"
+thoma_2018_ctq,cov_income_band,6,"1,000 to less than 1,150 Euro"
+thoma_2018_ctq,cov_income_band,7,"1,150 to less than 1,250 Euro"
+thoma_2018_ctq,cov_income_band,8,"1,250 to less than 1,500 Euro"
+thoma_2018_ctq,cov_income_band,9,"1,500 to less than 2,000 Euro"
+thoma_2018_ctq,cov_income_band,10,"2,000 to less than 2,500 Euro"
+thoma_2018_ctq,cov_income_band,11,"2,500 to less than 3,500 Euro"
+thoma_2018_ctq,cov_income_band,12,"3,500 to less than 5,000 Euro"
+thoma_2018_ctq,cov_income_band,13,"5,000 Euro and more"
+thoma_2018_ctq,cov_marital_status,1,Married / Living together
+thoma_2018_ctq,cov_marital_status,2,Married / Living apart
+thoma_2018_ctq,cov_marital_status,3,Single
+thoma_2018_ctq,cov_marital_status,4,Divorced
+thoma_2018_ctq,cov_marital_status,5,Widowed
+thoma_2018_ctq,cov_religion,1,Protestant ‎/ Evangelical
+thoma_2018_ctq,cov_religion,2,Catholic (Roman-Catholic)
+thoma_2018_ctq,cov_religion,3,Muslim / Islamic
+thoma_2018_ctq,cov_religion,4,Other religion / denomination
+thoma_2018_ctq,cov_religion,5,None
+thoma_2018_phq4,cov_education,1,Without primary ‎/ national school education
+thoma_2018_phq4,cov_education,2,Primary ‎/ national school certificate
+thoma_2018_phq4,cov_education,3,Secondary school certificate
+thoma_2018_phq4,cov_education,4,Completion of the polytechnic secondary school (10th grade)
+thoma_2018_phq4,cov_education,5,Community college (without recognition)
+thoma_2018_phq4,cov_education,6,High school diploma without university degree
+thoma_2018_phq4,cov_education,7,Completed university studies
+thoma_2018_phq4,cov_education,8,Other school graduation
+thoma_2018_phq4,cov_education,9,Student in general secondary school
+thoma_2018_phq4,cov_education,10,Special education school
+thoma_2018_phq4,cov_employment,1,Full-time employment (from 35 hours)
+thoma_2018_phq4,cov_employment,2,Part-time work (15-34 hours)
+thoma_2018_phq4,cov_employment,3,Employed by the hour
+thoma_2018_phq4,cov_employment,4,Voluntary work ‎/ maternity‎/parental leave
+thoma_2018_phq4,cov_employment,5,Currently employed ‎/ 0-hour contract
+thoma_2018_phq4,cov_employment,6,Retired ‎/ pensioner ‎/ in early retirement
+thoma_2018_phq4,cov_employment,7,Not working (e.g. housewife‎/househusband)
+thoma_2018_phq4,cov_employment,8,Community college for vocational training
+thoma_2018_phq4,cov_employment,9,"In school education (also university, high school)"
+thoma_2018_phq4,cov_federal_state,1,Schleswig-Holstein
+thoma_2018_phq4,cov_federal_state,2,Hamburg
+thoma_2018_phq4,cov_federal_state,3,Niedersachsen
+thoma_2018_phq4,cov_federal_state,4,Bremen
+thoma_2018_phq4,cov_federal_state,5,Nordrhein-Westfalen
+thoma_2018_phq4,cov_federal_state,6,Hessen
+thoma_2018_phq4,cov_federal_state,7,Rheinland-Pfalz
+thoma_2018_phq4,cov_federal_state,8,Baden-Württemberg
+thoma_2018_phq4,cov_federal_state,9,Bayern
+thoma_2018_phq4,cov_federal_state,10,Saarland
+thoma_2018_phq4,cov_federal_state,11,Berlin-West
+thoma_2018_phq4,cov_federal_state,12,Brandenburg
+thoma_2018_phq4,cov_federal_state,13,Mecklenburg-Vorpommern
+thoma_2018_phq4,cov_federal_state,14,Sachsen
+thoma_2018_phq4,cov_federal_state,15,Sachsen-Anhalt
+thoma_2018_phq4,cov_federal_state,16,Thüringen
+thoma_2018_phq4,cov_federal_state,17,Berlin-Ost
+thoma_2018_phq4,cov_income_band,0,No personal income
+thoma_2018_phq4,cov_income_band,1,Up to 500 Euro
+thoma_2018_phq4,cov_income_band,2,500 to less than 650 Euro
+thoma_2018_phq4,cov_income_band,3,560 to less than 750 Euro
+thoma_2018_phq4,cov_income_band,4,750 to less than 900 Euro
+thoma_2018_phq4,cov_income_band,5,"900 to less than 1,000 Euro"
+thoma_2018_phq4,cov_income_band,6,"1,000 to less than 1,150 Euro"
+thoma_2018_phq4,cov_income_band,7,"1,150 to less than 1,250 Euro"
+thoma_2018_phq4,cov_income_band,8,"1,250 to less than 1,500 Euro"
+thoma_2018_phq4,cov_income_band,9,"1,500 to less than 2,000 Euro"
+thoma_2018_phq4,cov_income_band,10,"2,000 to less than 2,500 Euro"
+thoma_2018_phq4,cov_income_band,11,"2,500 to less than 3,500 Euro"
+thoma_2018_phq4,cov_income_band,12,"3,500 to less than 5,000 Euro"
+thoma_2018_phq4,cov_income_band,13,"5,000 Euro and more"
+thoma_2018_phq4,cov_marital_status,1,Married / Living together
+thoma_2018_phq4,cov_marital_status,2,Married / Living apart
+thoma_2018_phq4,cov_marital_status,3,Single
+thoma_2018_phq4,cov_marital_status,4,Divorced
+thoma_2018_phq4,cov_marital_status,5,Widowed
+thoma_2018_phq4,cov_religion,1,Protestant ‎/ Evangelical
+thoma_2018_phq4,cov_religion,2,Catholic (Roman-Catholic)
+thoma_2018_phq4,cov_religion,3,Muslim / Islamic
+thoma_2018_phq4,cov_religion,4,Other religion / denomination
+thoma_2018_phq4,cov_religion,5,None
+thoma_2018_socr,cov_education,1,Without primary ‎/ national school education
+thoma_2018_socr,cov_education,2,Primary ‎/ national school certificate
+thoma_2018_socr,cov_education,3,Secondary school certificate
+thoma_2018_socr,cov_education,4,Completion of the polytechnic secondary school (10th grade)
+thoma_2018_socr,cov_education,5,Community college (without recognition)
+thoma_2018_socr,cov_education,6,High school diploma without university degree
+thoma_2018_socr,cov_education,7,Completed university studies
+thoma_2018_socr,cov_education,8,Other school graduation
+thoma_2018_socr,cov_education,9,Student in general secondary school
+thoma_2018_socr,cov_education,10,Special education school
+thoma_2018_socr,cov_employment,1,Full-time employment (from 35 hours)
+thoma_2018_socr,cov_employment,2,Part-time work (15-34 hours)
+thoma_2018_socr,cov_employment,3,Employed by the hour
+thoma_2018_socr,cov_employment,4,Voluntary work ‎/ maternity‎/parental leave
+thoma_2018_socr,cov_employment,5,Currently employed ‎/ 0-hour contract
+thoma_2018_socr,cov_employment,6,Retired ‎/ pensioner ‎/ in early retirement
+thoma_2018_socr,cov_employment,7,Not working (e.g. housewife‎/househusband)
+thoma_2018_socr,cov_employment,8,Community college for vocational training
+thoma_2018_socr,cov_employment,9,"In school education (also university, high school)"
+thoma_2018_socr,cov_federal_state,1,Schleswig-Holstein
+thoma_2018_socr,cov_federal_state,2,Hamburg
+thoma_2018_socr,cov_federal_state,3,Niedersachsen
+thoma_2018_socr,cov_federal_state,4,Bremen
+thoma_2018_socr,cov_federal_state,5,Nordrhein-Westfalen
+thoma_2018_socr,cov_federal_state,6,Hessen
+thoma_2018_socr,cov_federal_state,7,Rheinland-Pfalz
+thoma_2018_socr,cov_federal_state,8,Baden-Württemberg
+thoma_2018_socr,cov_federal_state,9,Bayern
+thoma_2018_socr,cov_federal_state,10,Saarland
+thoma_2018_socr,cov_federal_state,11,Berlin-West
+thoma_2018_socr,cov_federal_state,12,Brandenburg
+thoma_2018_socr,cov_federal_state,13,Mecklenburg-Vorpommern
+thoma_2018_socr,cov_federal_state,14,Sachsen
+thoma_2018_socr,cov_federal_state,15,Sachsen-Anhalt
+thoma_2018_socr,cov_federal_state,16,Thüringen
+thoma_2018_socr,cov_federal_state,17,Berlin-Ost
+thoma_2018_socr,cov_income_band,0,No personal income
+thoma_2018_socr,cov_income_band,1,Up to 500 Euro
+thoma_2018_socr,cov_income_band,2,500 to less than 650 Euro
+thoma_2018_socr,cov_income_band,3,560 to less than 750 Euro
+thoma_2018_socr,cov_income_band,4,750 to less than 900 Euro
+thoma_2018_socr,cov_income_band,5,"900 to less than 1,000 Euro"
+thoma_2018_socr,cov_income_band,6,"1,000 to less than 1,150 Euro"
+thoma_2018_socr,cov_income_band,7,"1,150 to less than 1,250 Euro"
+thoma_2018_socr,cov_income_band,8,"1,250 to less than 1,500 Euro"
+thoma_2018_socr,cov_income_band,9,"1,500 to less than 2,000 Euro"
+thoma_2018_socr,cov_income_band,10,"2,000 to less than 2,500 Euro"
+thoma_2018_socr,cov_income_band,11,"2,500 to less than 3,500 Euro"
+thoma_2018_socr,cov_income_band,12,"3,500 to less than 5,000 Euro"
+thoma_2018_socr,cov_income_band,13,"5,000 Euro and more"
+thoma_2018_socr,cov_marital_status,1,Married / Living together
+thoma_2018_socr,cov_marital_status,2,Married / Living apart
+thoma_2018_socr,cov_marital_status,3,Single
+thoma_2018_socr,cov_marital_status,4,Divorced
+thoma_2018_socr,cov_marital_status,5,Widowed
+thoma_2018_socr,cov_religion,1,Protestant ‎/ Evangelical
+thoma_2018_socr,cov_religion,2,Catholic (Roman-Catholic)
+thoma_2018_socr,cov_religion,3,Muslim / Islamic
+thoma_2018_socr,cov_religion,4,Other religion / denomination
+thoma_2018_socr,cov_religion,5,None
 tiemensma_2018_iesr,cov_latino,0,non_Latino
 tiemensma_2018_iesr,cov_latino,1,Latino
 tims_2017_autonomy,cov_country,1,Netherlands
@@ -13874,6 +14233,62 @@ vasquez_2013_reading_comprehension,cov_section,3,sexto C
 vasquez_2013_reading_comprehension,cov_section,4,sexto D
 vasquez_2013_reading_comprehension,cov_shift,1,mañana
 vasquez_2013_reading_comprehension,cov_shift,2,tarde
+velten_2018_sesii_wm,cov_couple_study,0,no
+velten_2018_sesii_wm,cov_couple_study,1,yes
+velten_2018_sesii_wm,cov_high_school_degree,0,no
+velten_2018_sesii_wm,cov_high_school_degree,1,yes
+velten_2018_sesii_wm,cov_income_band,1,< 1.000 Euro
+velten_2018_sesii_wm,cov_income_band,2,1.000 to 1.500 Euro
+velten_2018_sesii_wm,cov_income_band,3,1.500 to  2.000 Euro
+velten_2018_sesii_wm,cov_income_band,4,2.000 to 2.500 Euro
+velten_2018_sesii_wm,cov_income_band,5,2.500 to 3.000 Euro
+velten_2018_sesii_wm,cov_income_band,6,3.000 to 3.500 Euro
+velten_2018_sesii_wm,cov_income_band,7,3.500 to 4.000 Euro
+velten_2018_sesii_wm,cov_income_band,8,4.000 to 4.500 Euro
+velten_2018_sesii_wm,cov_income_band,9,4.500 Euro and more
+velten_2018_sesii_wm,cov_relationship_status,1,Married and living together
+velten_2018_sesii_wm,cov_relationship_status,2,Civil union and living together
+velten_2018_sesii_wm,cov_relationship_status,3,"Married, not living together"
+velten_2018_sesii_wm,cov_relationship_status,4,"Civil union, not living together"
+velten_2018_sesii_wm,cov_relationship_status,5,single
+velten_2018_sesii_wm,cov_relationship_status,6,Divorced
+velten_2018_sesii_wm,cov_relationship_status,7,Widowed
+velten_2018_sesii_wm,cov_sexual_orientation,1,Exclusively heterosexual
+velten_2018_sesii_wm,cov_sexual_orientation,2,Mostly heterosexual
+velten_2018_sesii_wm,cov_sexual_orientation,3,Equally heterosexual and homosexual (bisexual)
+velten_2018_sesii_wm,cov_sexual_orientation,4,Mostly homosexual
+velten_2018_sesii_wm,cov_sexual_orientation,5,Exclusively heterosexual
+velten_2018_sesii_wm,cov_sexual_orientation,6,Asexual (no sociosexual contacts or responses)
+velten_2018_sesii_wm,cov_sexual_orientation,8,pansexual
+velten_2018_sesii_wm,cov_sexual_orientation,9,transsexual
+velten_2018_sis_ses_sf,cov_couple_study,0,no
+velten_2018_sis_ses_sf,cov_couple_study,1,yes
+velten_2018_sis_ses_sf,cov_high_school_degree,0,no
+velten_2018_sis_ses_sf,cov_high_school_degree,1,yes
+velten_2018_sis_ses_sf,cov_income_band,1,< 1.000 Euro
+velten_2018_sis_ses_sf,cov_income_band,2,1.000 to 1.500 Euro
+velten_2018_sis_ses_sf,cov_income_band,3,1.500 to  2.000 Euro
+velten_2018_sis_ses_sf,cov_income_band,4,2.000 to 2.500 Euro
+velten_2018_sis_ses_sf,cov_income_band,5,2.500 to 3.000 Euro
+velten_2018_sis_ses_sf,cov_income_band,6,3.000 to 3.500 Euro
+velten_2018_sis_ses_sf,cov_income_band,7,3.500 to 4.000 Euro
+velten_2018_sis_ses_sf,cov_income_band,8,4.000 to 4.500 Euro
+velten_2018_sis_ses_sf,cov_income_band,9,4.500 Euro and more
+velten_2018_sis_ses_sf,cov_relationship_status,1,Married and living together
+velten_2018_sis_ses_sf,cov_relationship_status,2,Civil union and living together
+velten_2018_sis_ses_sf,cov_relationship_status,3,"Married, not living together"
+velten_2018_sis_ses_sf,cov_relationship_status,4,"Civil union, not living together"
+velten_2018_sis_ses_sf,cov_relationship_status,5,single
+velten_2018_sis_ses_sf,cov_relationship_status,6,Divorced
+velten_2018_sis_ses_sf,cov_relationship_status,7,Widowed
+velten_2018_sis_ses_sf,cov_sexual_orientation,1,Exclusively heterosexual
+velten_2018_sis_ses_sf,cov_sexual_orientation,2,Mostly heterosexual
+velten_2018_sis_ses_sf,cov_sexual_orientation,3,Equally heterosexual and homosexual (bisexual)
+velten_2018_sis_ses_sf,cov_sexual_orientation,4,Mostly homosexual
+velten_2018_sis_ses_sf,cov_sexual_orientation,5,Exclusively heterosexual
+velten_2018_sis_ses_sf,cov_sexual_orientation,6,Asexual (no sociosexual contacts or responses)
+velten_2018_sis_ses_sf,cov_sexual_orientation,8,pansexual
+velten_2018_sis_ses_sf,cov_sexual_orientation,9,transsexual
 vogel_2024_attribute_valence_s3,cov_academic_degree,1,Yes
 vogel_2024_attribute_valence_s3,cov_academic_degree,2,No
 vogel_2024_attribute_valence_s3,cov_admin_level,1,Federal
