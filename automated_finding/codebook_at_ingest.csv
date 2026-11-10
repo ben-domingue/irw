@@ -1115,6 +1115,12 @@ favero_2020_social_distancing,core,https://dataverse.harvard.edu/api/access/data
 fecker_2026_mansplaining,core,https://zenodo.org/records/22014024/files/Data%20set_Mansplaining%20and%20Flow%20Experience%20in%20Alpine%20Outdoor%20Winter%20Sports.sav,2026-10-18
 feng_2023_fas,core,https://zenodo.org/api/records/10070595/files/README.md/content,2026-10-20
 feng_2025_qlq_swb32,core,none,2026-11-02
+fernandez_dominguez_2017_cvp,core,none,2026-11-09
+fernandez_dominguez_2017_ebpq,core,none,2026-11-09
+fernandez_dominguez_2017_hsebp72,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0177172.s002,2026-11-09
+fernandez_dominguez_2017_hsebp73,core,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0177172.s001,2026-11-09
+fernandez_dominguez_2017_mbi,core,none,2026-11-09
+fernandez_dominguez_2017_rtc,core,none,2026-11-09
 fernandez_prados_2025_ai_uses,core,https://data.mendeley.com/public-files/datasets/2gwnjx729x/files/ab51170e-2b75-43e5-add1-577cfc24bf9f/file_downloaded,2026-10-07
 fernandez_prados_2025_aias,core,https://data.mendeley.com/public-files/datasets/2gwnjx729x/files/ab51170e-2b75-43e5-add1-577cfc24bf9f/file_downloaded,2026-10-07
 fernandez_prados_2025_attari,core,https://data.mendeley.com/public-files/datasets/2gwnjx729x/files/ab51170e-2b75-43e5-add1-577cfc24bf9f/file_downloaded,2026-10-07
@@ -2054,6 +2060,8 @@ kubicka_2025_physical_closeness,core,none,2026-10-15
 kubicka_2025_security_scale,core,none,2026-10-15
 kubilay_2023_scam_confidence,core,https://dataverse.harvard.edu/api/access/datafile/7240091,2026-10-28
 kubilay_2023_scam_identification,core,https://dataverse.harvard.edu/api/access/datafile/7240091,2026-10-28
+kubota_2020_epds,core,none,2026-11-09
+kubota_2020_iddl,core,none,2026-11-09
 kuecuekbalaban_2017_selftest,conj,https://ndownloader.figshare.com/files/8857876,2026-10-11
 kul_2026_academic_buoyancy,core,https://ndownloader.figshare.com/files/67746372,2026-10-02
 kul_2026_math_self_concept,core,https://ndownloader.figshare.com/files/67746372,2026-10-02
@@ -2331,6 +2339,7 @@ lukita_2026_bedtime_procrast,core,none,2026-11-02
 lukita_2026_burnout,core,none,2026-11-02
 lukita_2026_self_regulated,core,none,2026-11-02
 lukita_2026_social_support,core,none,2026-11-02
+luo_2019_cpti,core,none,2026-11-09
 lupu_2024_laws_of_war_fr,conj,https://dataverse.harvard.edu/api/access/datafile/10542362,2026-10-11
 lupu_2024_laws_of_war_uk,conj,https://dataverse.harvard.edu/api/access/datafile/10542362,2026-10-11
 lupu_2024_laws_of_war_us,conj,https://dataverse.harvard.edu/api/access/datafile/10542362,2026-10-11
@@ -4727,6 +4736,8 @@ williamson_2025_aid_bilendi2024,conj,https://dataverse.harvard.edu/api/access/da
 williamson_2025_aid_yougov2017,conj,https://dataverse.harvard.edu/api/access/datafile/12128175,2026-10-11
 wimmer_2024_rivalry_immigrants,conj,https://dataverse.harvard.edu/api/access/datafile/10060439,2026-10-07
 wisniewski_2021_nihss,core,none,2026-10-02
+wiwattarangkul_2023_lgbtq_attitude,core,none,2026-11-09
+wiwattarangkul_2023_lgbtq_meded,core,none,2026-11-09
 wiyono_2026_digital_fatigue,core,none,2026-10-18
 woen_2024_tofu_preferences,conj,none,2026-10-12
 wolbers_2017_class_contact,core,https://ssh.datastations.nl/api/access/datafile/184799,2026-10-09
@@ -4907,6 +4918,11 @@ zeilinger_2020_emotional_reactions,core,none,2026-11-07
 zeilinger_2020_idls_causes,core,none,2026-11-07
 zeilinger_2020_idls_interventions,core,none,2026-11-07
 zeilinger_2020_social_distance,core,none,2026-11-07
+zeng_2016_las,core,none,2026-11-09
+zeng_2016_neo_deliberation,core,none,2026-11-09
+zeng_2016_neo_dutifulness,core,none,2026-11-09
+zeng_2016_neo_self_discipline,core,none,2026-11-09
+zeng_2016_sas,core,none,2026-11-09
 zeng_2022_academic_burnout,core,none,2026-10-07
 zeng_2022_core_beliefs,core,none,2026-10-07
 zeng_2022_ptgi,core,none,2026-10-07
