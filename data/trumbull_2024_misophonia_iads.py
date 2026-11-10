@@ -33,7 +33,7 @@
 # id = row index (the file has no participant id column). Free-text "specify" columns
 #   are not carried. No names, emails, IPs or dates of birth in the file.
 # Covariates: cov_group (misophonia/control), cov_gender, cov_age, cov_hispanic,
-#   cov_race, cov_education, cov_income (value-label codes; see SPSS labels).
+#   cov_race, cov_education, cov_income (SPSS value labels applied).
 #
 # Item text: not shipped -- SPSS variable labels carry full stems for mq/panas/pai/
 #   snap/iip/aim and value labels carry options; not attempted this batch (no register
@@ -59,23 +59,24 @@ def load():
     with tempfile.NamedTemporaryFile(suffix=".sav") as f:
         f.write(r.content); f.flush()
         df, meta = pyreadstat.read_sav(f.name)
-    return df
+    return df, meta
 
 
 def main():
-    df = load()
+    df, meta = load()
+    vl = meta.variable_value_labels
     df = df.reset_index(drop=True)
     df["id"] = np.arange(1, len(df) + 1)
     df["cov_group"] = np.where(df["MQincluded"] == 1, "misophonia", "control")
-    df["cov_gender"] = df["dem1"]
+    df["cov_gender"] = df["dem1"].map(vl["dem1"])
     df["cov_age"] = pd.to_numeric(df["dem2"].astype(str).str.extract(r"(\d+)")[0], errors="coerce")
     # One respondent typed a 4-digit year (1978) into the free-text age field; it is
     # nulled rather than converted (survey date not in the file).
     df.loc[df["cov_age"] > 120, "cov_age"] = np.nan
-    df["cov_hispanic"] = df["dem3"]
-    df["cov_race"] = df["dem4"]
-    df["cov_education"] = df["dem5"]
-    df["cov_income"] = df["dem6"]
+    df["cov_hispanic"] = df["dem3"].map(vl["dem3"])
+    df["cov_race"] = df["dem4"].map(vl["dem4"])
+    df["cov_education"] = df["dem5"].map(vl["dem5"])
+    df["cov_income"] = df["dem6"].map(vl["dem6"])
     covs = ["cov_group", "cov_gender", "cov_age", "cov_hispanic", "cov_race",
             "cov_education", "cov_income"]
 
