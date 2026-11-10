@@ -16,6 +16,12 @@ Full write-up in `BATCH_LOG.md` (2026-11-10h lane B). Hand-off: `~/irw-wt/hour-1
 - [ ] Cheap item text follow-ups (need register rows): CHIRP/IPAS stems are in the GL0RPU
   Variable Labels sheets; virtual-OSCE statements are the AWC1IP column headers.
 
+## Hour-run 2026-11-10h lane D (Europe PMC) — 0 tables, 25 terms run
+
+- `pmc_term_backlog_2026-11-10.csv`: 25 more terms run (the 20 English terms at new=3, plus 5 at new=2); 0 shippable from 42 candidates. The remaining 156 terms all project `new<=2`, so a new scout beats running this tail.
+- Dryad 10.5061/dryad.5mkkwh7f8 (CC0, AMR diagnostic-AI survey, 9 CSVs) needs a Dryad API token to download; still `unworked` in `leads/pmc_leads_2026-11-10.csv`.
+- `leads/pmc_leads_2026-11-10h.csv`: 1 unworked (peerj.18306, Europe PMC 500).
+
 ## Overnight 2026-11-10 lane D (Europe PMC) — 36 tables staged, 6 held
 
 Full write-up in `BATCH_LOG.md` (2026-11-10 — Overnight lane D). Hand-off: `~/irw-wt/overnight-1110/overnight-1110-d.md`.
