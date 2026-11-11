@@ -74,6 +74,15 @@ Full write-up in `BATCH_LOG.md` (2026-11-10h — hour lane A); hand-off in `~/ir
 - [ ] botella_guijarro_2022: capability / parents' attitude / risk-perception blocks not shipped (keying unverified).
 - [ ] Next leads: `leads/plos_leads_2026-11-10ha.csv` (pone.0239444 was claimed by another lane; 2 held rows).
 
+## Held-ship 2026-11-11 -- 7 held deposits Ben ruled SHIP, 12 tables staged
+
+Full write-up in `BATCH_LOG.md` (2026-11-11 -- held-ship). Hand-off: `~/irw-wt/overnight-1110/held-ship-1111.md`.
+
+- [ ] **Upload (orchestrator)**: 12 response tables (89,786 responses) from
+  `~/irw-wt/held-ship-1111/automated_finding/irw_output/`: reiss_2020_action x3, useche_2021_cie_a,
+  rabeya_2021_bdi, braniecka_2022_bdi, chatterjee_2017_jse, mee_2019 x4 (mbp/bai/bdi/bhs), wang_2026_brbq.
+  No item text tables. Then Ben publishes.
+
 ## Overnight 2026-11-10 lane D (Europe PMC) — 36 tables staged, 6 held
 
 Full write-up in `BATCH_LOG.md` (2026-11-10 — Overnight lane D). Hand-off: `~/irw-wt/overnight-1110/overnight-1110-d.md`.
@@ -129,10 +138,6 @@ Full write-up in `BATCH_LOG.md` (2026-11-10c). Hand-off: `~/irw-wt/overnight-111
 
 - [ ] **Upload (orchestrator)**: 45 response tables (14,009,222 responses) from
   `~/irw-wt/overnight-1110-c/automated_finding/irw_output/`. No item text tables.
-- [ ] **Ben: rabeya_2021_bdi held** (zenodo.5808314): the paper's BDI severity bands do not
-  reproduce from the item sums (N and sex do). Script + CSV in `runs/held/rabeya_2021_bdi/`.
-- [ ] **Ben: chatterjee_2017_jse held, not built** (DVN/LOGUCL): the paper mean-imputed up to
-  4 blank JSE items per form; the integer-only file cannot show which.
 - [ ] JEEHP collection: 56 `unworked` leads in `leads/repos_leads_2026-11-10c_jeehp.csv`
   (incl. DVN/XD2QMD Chile dental, which needs an N reconciliation); the sweep's own
   `leads/repos_leads_2026-11-10c.csv` has 21 more and `_10c2.csv` 24, incl. DVN/I2JO58 Kilifi (CC BY,

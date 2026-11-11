@@ -27366,3 +27366,35 @@ QC: every table passes `irw-validate --profile upload`, `run_qc()` (in-script) a
 per-script asserts reproduce paper counts/sums where available. Two lint false positives (item names containing
 `selfcare` / `covid`) were fixed by renaming items. Covariate-label harvest ran for the five .sav scripts; it
 added nothing (labels are mapped in-script) and its unrelated coverage.csv churn was reverted.
+
+## 2026-11-11 — held-ship: 7 deposits held on 2026-11-10 that Ben ruled SHIP; 12 tables, 89,786 responses
+
+Branch `auto/held-ship-1111` (brief `~/irw-wt/overnight-1110/BRIEF.md`, scope limited to the seven rulings).
+Hand-off: `~/irw-wt/overnight-1110/held-ship-1111.md`. No searches run, no new leads.
+
+Shipped (Ben's ruling in brackets):
+- pone.0243193 `reiss_2020_action_{sensible,intention,feel_better}` (5,252 rows / 404 ids each) [ship as 1-5;
+  the paper's "1-7" read as a slip]. `data/reiss_2020_covid_threat_defense.py` now writes all eight tables; the
+  `--held` switch is gone. Only the three action tables are new.
+- pone.0259392 `useche_2021_cie_a` (28,382 / 794) [ship with every non-integer cell dropped, gori_2021
+  precedent]: 778 non-integer cells (94 students) dropped; data note in the header.
+- zenodo.5808314 `rabeya_2021_bdi` (7,098 / 338) [ship as deposited]: header notes the item sums do not
+  reproduce the paper's severity bands (N and sex do). Items recoded bdi1..bdi21 from the symptom-name columns
+  (asserted name list) because "loss_interest_sex" etc. tripped the covariate lint; covariates decoded from the
+  Zenodo description; Receiving_HIV_Treatment dropped (its codes are undocumented).
+- Mendeley 9rc79r8nyw `braniecka_2022_bdi` (2,562 / 122) [ship items as deposited]: data note on the stored
+  total vs item sum mismatch in 20 of 122 rows. Author list in the header corrected from Crossref.
+- DVN/LOGUCL `chatterjee_2017_jse` (8,360 / 418) [ship the 20 raw items]: Item_1..Item_20, 1-7; N, sex, the
+  mean 96.01 and hostel/home 266/147 reproduce; note on the paper's undetectable mean imputation.
+- pone.0216266 `mee_2019_{mbp,bai,bdi,bhs}` (2,827/289, 5,798/280, 5,751/281, 5,058/255) [ship with every
+  non-integer cell dropped]: 1,374 cells dropped (half points and column-mean substitutions). Age by sex,
+  ethnicity, completion, MBP/BAI/BHS means and all four alphas reproduce; the paper's sex split (212/77 vs the
+  deposit's 188/101) and BDI mean (8.54 vs 17.20) do not; recorded in the header as paper slips. CC0.
+- figshare 32991527 `wang_2026_brbq` (8,194 / 241) [block C1 only, 34-item BRBQ, 1-5]: sex, crash counts by
+  sex and age (once one age of 96 is set to missing) reproduce the paper's Sample 1.
+
+Item text: none shipped (BDI/BAI/BHS Pearson; JSE copyrighted; CIE-A, MBP, BRBQ and the reiss action items have
+no wording in the deposits or need a rights-register row first).
+QC: all 12 pass `irw-validate --profile upload`, in-script `run_qc()` + `validate_frame`, and
+`irw_lint_covariates.py`. Covariate-label harvest ran for the two .sav scripts (useche, braniecka) and added
+nothing (labels are mapped in-script); its unrelated coverage.csv churn was reverted.

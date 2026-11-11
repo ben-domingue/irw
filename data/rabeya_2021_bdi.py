@@ -19,8 +19,10 @@
 #
 # ONE table: rabeya_2021_bdi, the 21 Beck Depression Inventory-II items
 #   (named by symptom in the deposit -- Sadness ... Loss_Interest_Sex --
-#   which match BDI-II item content and order), 0-3. Items keep the deposit's
-#   column names, lower-cased.
+#   which match BDI-II item content and order), 0-3. Items are coded bdi1..bdi21
+#   by BDI-II item number, tied to the deposit's column names by the NAMES list
+#   below (asserted against the file's column order): the symptom names
+#   themselves trip the covariate lint ("loss_interest_sex" reads as sex).
 #
 # DATA NOTE -- SEVERITY BANDS DO NOT REPRODUCE: N = 338 and the sex split
 #   297 / 20 / 21 match the paper exactly, so this is the analysed sample. But
@@ -58,6 +60,12 @@ URL = "https://zenodo.org/records/5808314/files/Dataset_HIV_Depression_Study.xls
 RAW = os.environ.get("RABEYA2021_RAW")
 NAME = "rabeya_2021_bdi"
 
+NAMES = ["Sadness", "Pesimism", "Past_Failure", "Loss_of_Pleasure", "Guilty_Feelings",
+         "Punishment_Feelings", "Self_Dislike", "Self_Criticalness", "Suicidal_Thoughts_or_Wishes",
+         "Crying", "Agitation", "Loss_of_Interest", "Indecisiveness", "Worthlessness",
+         "Loss_of_Energy", "Changes_in_Sleeping_Pattern", "Irritability", "Changes_in_Appetite",
+         "Concentration_Difficulty", "Tiredness_or_Fatigue", "Loss_Interest_Sex"]
+CODE = {n: f"bdi{k}" for k, n in enumerate(NAMES, 1)}
 YN = {1: "yes", 2: "no"}
 CODES = {
     "Sex": ("cov_sex", {1: "male", 2: "female", 3: "transgender"}),
@@ -88,7 +96,7 @@ def main():
     d = load()
     assert d.shape == (338, 37), d.shape
     items = list(d.columns[16:])
-    assert len(items) == 21 and items[0] == "Sadness" and items[-1] == "Loss_Interest_Sex"
+    assert items == NAMES, items
     assert d[items].isin([0, 1, 2, 3]).all().all()
     assert (d["Sex"].value_counts().to_dict() == {1: 297, 3: 21, 2: 20})
     s = d[items].sum(axis=1)
@@ -103,10 +111,10 @@ def main():
     covs = ["cov_age"] + [dst for dst, _ in CODES.values()]
     long = d[["id"] + covs + items].melt(id_vars=["id"] + covs, var_name="item", value_name="resp")
     long = long.dropna(subset=["resp"])
-    long["item"] = long["item"].str.lower()
+    long["item"] = long["item"].map(CODE)
     long["resp"] = long["resp"].astype(int)
     long = long[["id", "item", "resp"] + covs].sort_values(["id", "item"]).reset_index(drop=True)
-    pv = {i.lower(): {0, 1, 2, 3} for i in items}
+    pv = {CODE[i]: {0, 1, 2, 3} for i in items}
     checks = run_qc(long, permitted_values=pv)
     fails = [(c.name, c.detail) for c in checks if c.status == "fail"]
     assert not fails, fails

@@ -2,8 +2,8 @@
 # Source: https://data.mendeley.com/datasets/9rc79r8nyw/1
 # DOI: 10.1038/s41598-022-11515-y
 #   "Differential effects of stress-related and stress-unrelated humor in
-#   remitted depression" (Braniecka, Hanc, Wolkowicz, Chrzczonowicz-Stepien,
-#   Mikolajek-Bedner & Lukasik, 2022), Scientific Reports 12:7946.
+#   remitted depression" (Braniecka, Wolkowicz, Orylska, Antosik-Wojcinska,
+#   Chrzczonowicz-Stepien & Bolek, 2022), Scientific Reports 12:7946.
 # Data DOI: 10.17632/9rc79r8nyw.1 (Mendeley Data, "Humor types and emotion
 #   regulation in remitted depression"), one SPSS file
 #   "Braniecka_Dataset_Humor types and emotion regulation in remitted
