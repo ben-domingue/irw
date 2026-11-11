@@ -15,7 +15,7 @@
 # recoverable_format; leads/plos_leads_2026-10-30.csv), overnight lane A
 # 2026-11-10.
 #
-# FIVE output tables (items keep the survey's codes):
+# EIGHT output tables (items keep the survey's codes):
 #   reiss_2020_discrepancy   15 items (aut/uncer/agenc motivational-affective,
 #     expec epistemic), 1-5, raw (reverse-worded items not recoded).
 #   reiss_2020_affect        34 state-affect adjectives, 1-5 (the paper's
@@ -29,10 +29,13 @@
 #     0 incorrect, `resp_raw` = Y/N as answered. Key: 4, 5, 7 true, the rest
 #     false; with "unsure" counted wrong this reproduces the paper's 78%
 #     correct (78.2%). "U" (unsure) is a non-response here and is dropped.
-# HELD (not written by default; `--held` writes them to
-#   automated_finding/runs/held/): the three action-rating tables (13 actions
-#   rated sensible / intended / helps feel better). The paper says "scaled
-#   1-7"; the deposit holds 1-5 only.
+#   reiss_2020_action_sensible / _intention / _feel_better  13 coping actions
+#     rated three ways (how sensible, how much one intends to do it, how much
+#     it helps one feel better), 1-5 each, items keyed by the survey's action
+#     code. The paper says these were "scaled 1-7"; the deposit holds integers
+#     1-5 only on all 39 columns, and the other 5-point blocks of the same
+#     survey match the paper, so "1-7" is read as a slip in the paper (held
+#     2026-11-10, ruled ship as 1-5 by Ben 2026-11-11).
 # Dropped: zip code (2-digit area, geography), the free-text pre-existing
 #   condition and "other action" answers, referrer URL, LimeSurvey seed and
 #   timestamps, the infection-count guess (open number), education (the
@@ -59,7 +62,6 @@ sys.path.insert(0, REPO_ROOT)
 from irw_validate._checks import run_qc  # noqa: E402
 
 OUT_DIR = os.path.join(REPO_ROOT, "automated_finding", "irw_output")
-HELD_DIR = os.path.join(REPO_ROOT, "automated_finding", "runs", "held")
 URL = "https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0243193.s004"
 RAW = os.environ.get("REISS2020_RAW")
 HDR = {"User-Agent": "IRW-Finder/1.0"}
@@ -76,17 +78,15 @@ def load():
     return pd.read_csv(StringIO(r.content.decode("utf-8")))
 
 
-def save(long, covs, name, values, out_dir=OUT_DIR, raw=False):
+def save(long, covs, name, values, raw=False):
     cols = ["id", "item", "resp"] + (["resp_raw"] if raw else []) + covs
     long = long[cols].sort_values(["id", "item"])
     assert set(long["resp"]) <= set(values)
     checks = run_qc(long, permitted_values=list(values))
     fails = [(c.name, c.detail) for c in checks if c.status == "fail"]
     assert not fails, fails
-    if out_dir != OUT_DIR:
-        out_dir = os.path.join(out_dir, name)
-    os.makedirs(out_dir, exist_ok=True)
-    long.to_csv(os.path.join(out_dir, name + ".csv"), index=False)
+    os.makedirs(OUT_DIR, exist_ok=True)
+    long.to_csv(os.path.join(OUT_DIR, name + ".csv"), index=False)
     print(f"{name}: rows={len(long)} ids={long['id'].nunique()} items={long['item'].nunique()}")
 
 
@@ -99,7 +99,7 @@ def block(df, covs, prefix):
     return long, cols
 
 
-def convert(held=False):
+def convert():
     df = load()
     assert len(df) == 404 and df["id"].is_unique
     df["cov_age"] = df["age"]
@@ -130,14 +130,13 @@ def convert(held=False):
     long["resp"] = (long["resp_raw"] == truth).astype(int)
     save(long, covs, "reiss_2020_covid_knowledge", [0, 1], raw=True)
 
-    if held:
-        for prefix, name in [("sinnv", "reiss_2020_action_sensible"),
-                             ("handlint", "reiss_2020_action_intention"),
-                             ("coping", "reiss_2020_action_feel_better")]:
-            long, cols = block(df, covs, prefix)
-            assert len(cols) == 13
-            save(long, covs, name, range(1, 6), out_dir=HELD_DIR)
+    for prefix, name in [("sinnv", "reiss_2020_action_sensible"),
+                         ("handlint", "reiss_2020_action_intention"),
+                         ("coping", "reiss_2020_action_feel_better")]:
+        long, cols = block(df, covs, prefix)
+        assert len(cols) == 13
+        save(long, covs, name, range(1, 6))
 
 
 if __name__ == "__main__":
-    convert(held="--held" in sys.argv)
+    convert()
