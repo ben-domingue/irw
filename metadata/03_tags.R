@@ -487,15 +487,14 @@ dbs <- list(
                 file.derived = "../tags/age_range/age_range_derived.csv",
                 file.live = "metadata.csv",
                 file.out = "tags.csv"),
-    ##`nom` has no file.auto on purpose. tags/nominal_tags_staging.csv looks like
-    ##an auto file -- same 13 columns -- but it is an empty scaffold: every Rater
-    ##and every Construct Name is blank, and it still carries the sheet's
-    ##instruction row. It is a paste queue for a human, not tagger output. Wiring
-    ##it here would publish 14 tag-less rows and a table named "should match what
-    ##is on redivis". Give it a file.auto only once something writes real tags to
-    ##it with Rater = claude-auto.
+    ##`nom` reads tags/nominal_tags_auto.csv (claude-auto rows, same layout as
+    ##tags_auto.csv). NOT tags/nominal_tags_staging.csv: that is an empty paste
+    ##scaffold for a human, with the sheet's instruction row in it, and wiring it
+    ##here would publish 14 tag-less rows and a table named "should match what
+    ##is on redivis".
     nom  = list(name = "nom",
                 url = 'https://docs.google.com/spreadsheets/d/1v3toO6OPts_HIjcjHTOb9_v2Ne2oXZSTkGTeO6fUyrg/edit?gid=126134123#gid=126134123',
+                file.auto = "../tags/nominal_tags_auto.csv",
                 file.out = "nominal_tags.csv")
 )
 
