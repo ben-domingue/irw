@@ -197,6 +197,8 @@ class CrosswalkFile(unittest.TestCase):
             self.assertIn(r["value"], CONCEPTS[r["concept"]], k)
             self.assertIn(r["signal"], {"explicit", "name", "photo"}, k)
             self.assertTrue(r["attribute"].startswith("attr_"), k)
+            # attr_<name>_code holds codes with no displayed text (#3474): nothing to map
+            self.assertFalse(r["attribute"].endswith("_code"), f"{k}: a _code attribute is not crosswalked")
             self.assertTrue(r["level"] and r["evidence"], k)
             self.assertIn(r["table"], self.tables, f"{k}: table has no design record")
 

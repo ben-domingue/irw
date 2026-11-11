@@ -174,7 +174,7 @@ def conj_opt_out(table: str) -> dict[str, str]:
         return {}
 
 
-_CONJ_GENDER = re.compile(r"^attr_(.*_)?(gender|sex)$")
+_CONJ_GENDER = re.compile(r"^attr_(.*_)?(gender|sex)$")  # attr_gender_code: codes, not crosswalked (#3474)
 
 
 def check_conj_design(report: FileReport) -> tuple[list[str], list[str]]:

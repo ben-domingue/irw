@@ -30,6 +30,14 @@ class ConjointTest(unittest.TestCase):
     def test_valid_table_has_no_errors(self):
         self.assertEqual(checks(table(), "error"), set())
 
+    def test_numeric_codes_warn_unless_suffixed_code(self):
+        """#3474: codes with no source for the text live in attr_<name>_code, unwarned."""
+        codes = [1, 2, 3, 1, 2, 3, 1, 2]
+        self.assertIn("conj_attributes", checks(table(attr_price=codes), "warn"))
+        df = table(attr_price_code=codes)
+        self.assertNotIn("conj_attributes", checks(df, "warn"))
+        self.assertEqual(checks(df, "error"), set())
+
     def test_missing_profile_is_an_error(self):
         self.assertIn("conj_required_columns", checks(table().drop(columns="profile"), "error"))
 
