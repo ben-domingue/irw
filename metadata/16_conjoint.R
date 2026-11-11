@@ -36,7 +36,9 @@
 ##  n_profiles (largest profile index; 1 = single-profile design),
 ##  n_attributes (attr_ columns), outcomes (choice/rating columns, ";"-joined),
 ##  n_optout_tasks (tasks where `choice` exists and no profile was chosen; 0
-##  for a forced choice, NA when the table has no `choice`).
+##  for a forced choice, NA when the table has no `choice`),
+##  levels_labelled (full / partial / none: whether attr_ columns hold displayed
+##  text or, as attr_<name>_code, only the deposit's codes; #3474).
 ##Design columns, joined from the hand-kept data/conjoint/design_tables.csv (the
 ##numbers above come from the data; these come from the scripts' headers and the
 ##deposits, and say what the numbers mean): country, display_language,
@@ -286,6 +288,14 @@ if (length(slice) && !is.null(fresh)) for (n in intersect(slice, base$table)) {
 }
 out <- rbind(fresh, carried)
 out <- out[order(out$table), ]
+##levels_labelled (#3474): an attr_<name>_code column holds the deposit's codes
+##because no source gives the displayed text. full = no such column, none = every
+##attribute coded, partial = some. Read from the column names, so it costs nothing
+##and is not a computed column (adding one would force a full recompute).
+out$levels_labelled <- vapply(out$table, function(n) {
+  a <- info[[n]]$attrs; k <- sum(grepl("_code$", a))
+  if (k == 0) "full" else if (k == length(a)) "none" else "partial"
+}, character(1), USE.NAMES = FALSE)
 stopifnot(nrow(out) == length(tabs), !anyNA(out$n_respondents))
 for (n in live$table[!redo]) {
   o <- old[match(n, live$table), ]
