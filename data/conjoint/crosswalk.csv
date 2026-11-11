@@ -1828,3 +1828,7 @@
 "profile_gender","mortenson_2026_democracy_frames","attr_gender","Male","male","explicit","level text"
 "profile_gender","thomann_2026_intersectional_bureaucrats","attr_gender","Female","female","explicit","level text"
 "profile_gender","thomann_2026_intersectional_bureaucrats","attr_gender","Male","male","explicit","level text"
+"profile_gender","sances_2026_prosecutors_forthright","attr_sex","Female","female","explicit","level text (codebook_voters.txt sex)"
+"profile_gender","sances_2026_prosecutors_forthright","attr_sex","Male","male","explicit","level text (codebook_voters.txt sex)"
+"profile_gender","sances_2026_prosecutors_mturk","attr_sex","Female","female","explicit","level text (codebook_voters.txt sex)"
+"profile_gender","sances_2026_prosecutors_mturk","attr_sex","Male","male","explicit","level text (codebook_voters.txt sex)"
