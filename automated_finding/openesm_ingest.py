@@ -204,8 +204,10 @@ def irw_state():
         text = p.read_text(errors="ignore")
         if "openesm" not in text.lower():
             continue
-        # "openESM 0012_dejonckheere", "Listed by openESM as 0071_scharbert"
-        for m in re.finditer(r"\b(00\d\d)_[a-z]", text):
+        # "openESM 0012_dejonckheere", "Listed by openESM as 0071_scharbert".
+        # Anchor on "openESM": a bare id can be a cross-reference (the Study 1
+        # ryvkina script mentions 0057_ryvkina, which is Study 2).
+        for m in re.finditer(r"openESM(?: as)? (00\d\d)_[a-z]", text):
             state.setdefault(m.group(1), f"built: data/{p.name}")
     for p in sorted(SPEC_DIR.glob("*.json")):
         state.setdefault(p.name[:4], f"planned: {p.relative_to(SRC)}")
