@@ -4,7 +4,7 @@
 
 Full write-up in `BATCH_LOG.md` (2026-11-10 — Hour run lane E). Hand-off: `~/irw-wt/hour-1110/hour-1110-e.md`.
 
-- [ ] **Upload (orchestrator)**: 38 response tables (379,002 responses) from
+- [x] **UPLOADED 2026-11-10 by Claude (Ben authorized in-session)** to item_response_warehouse_9 draft, 38/38 row-count verified; Ben publishes. Was: 38 response tables (379,002 responses) from
   `~/irw-wt/hour-1110-e/automated_finding/irw_output/`: trumbull_2024 x10, williams_2022 x7
   (companions to the live williams_2022_dvmsq, same ids), imaizumi_2018_trypophobia,
   ay_2024 x3, paszkowskarogacz_2023 x3, fazi_2026 x5, veramendoza_2026 x3, walker_2023 x5,
@@ -27,7 +27,7 @@ Full write-up in `BATCH_LOG.md` (2026-11-10 — Hour run lane E). Hand-off: `~/i
 
 Full write-up in `BATCH_LOG.md` (2026-11-10h lane B). Hand-off: `~/irw-wt/hour-1110/hour-1110-b.md`.
 
-- [ ] **Upload (orchestrator)**: 25 response tables (587,820 responses) from
+- [x] **UPLOADED 2026-11-10 by Claude (Ben authorized in-session)** to item_response_warehouse_9 draft, 25/25 row-count verified; Ben publishes. Was: 25 response tables (587,820 responses) from
   `~/irw-wt/hour-1110-b/automated_finding/irw_output/`. No item text tables.
 - [ ] **Ben: 5 holds** -- XD2QMD Chile dental (N 946 vs 935), 3JDN9S SDL (pre-scored
   reversals), BVYQBN R-SPQ-2F (paper mean off), kim_2017_pharmacy_skills_inclusion (split
@@ -49,7 +49,7 @@ Full write-up in `BATCH_LOG.md` (2026-11-10h lane B). Hand-off: `~/irw-wt/hour-1
 
 Full write-up in `BATCH_LOG.md` (2026-11-10 hour-1110 lane C). Hand-off: `~/irw-wt/hour-1110/hour-1110-c.md`.
 
-- [ ] **Upload (orchestrator)**: 64 response tables (248,433 responses) from
+- [x] **UPLOADED 2026-11-10 by Claude (Ben authorized in-session)** to item_response_warehouse_9 draft, 64/64 row-count verified; Ben publishes. Was: 64 response tables (248,433 responses) from
   `~/irw-wt/hour-1110-c/automated_finding/irw_output/`: gracio_michelon_2026 x30,
   hernandezamaro_2026_fcd, gray_2026 x6, amorim_2026_ctar, song_2026 x5, liu_2024_bdi2,
   gezgin_2026 x3, gavinchocano_2026_tmms x3, ma_2025 x6, camacho_2025_mil x2, garciabacete_2023
@@ -64,7 +64,7 @@ Full write-up in `BATCH_LOG.md` (2026-11-10 hour-1110 lane C). Hand-off: `~/irw-
 
 Full write-up in `BATCH_LOG.md` (2026-11-10h — hour lane A); hand-off in `~/irw-wt/hour-1110/hour-1110-a.md`.
 
-- [ ] 69 response tables (471,798 responses) in `~/irw-wt/hour-1110-a/automated_finding/irw_output/` need
+- [x] **UPLOADED 2026-11-10 by Claude (Ben authorized in-session)** to item_response_warehouse_9 draft, 69/69 row-count verified; Ben publishes. Was: 69 response tables (471,798 responses) in `~/irw-wt/hour-1110-a/automated_finding/irw_output/` need
   uploading (orchestrator), then Ben publishes. No item text this run.
 - [ ] Ben: pone.0324731 (deposit's 8 construct blocks don't match the paper's 7) -- recommend skip.
 - [ ] Ben: pone.0285773 (eWOM survey, between-construct r ~0: looks generated) -- recommend skip.
