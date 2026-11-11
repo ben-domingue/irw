@@ -16,13 +16,11 @@
 # ONE table: useche_2021_cie_a, CIE1..CIE36, 0-2 (value labels 0/1/2), raw.
 #
 # DATA NOTE -- NON-INTEGER CELLS DROPPED: 778 of 29,160 CIE item cells (94
-#   respondents) hold non-integer, non-constant values on the 0/1/2 scale
-#   (e.g. 0.155, 1.0182, -0.066), and Age has values like 14.293. That is the
-#   signature of model-based imputation, although the paper says it used
-#   listwise deletion and no imputation. Every non-integer item cell is
-#   dropped (the gori_2021 precedent); integer cells are kept as deposited.
-#   Integer-valued imputed cells, if any, cannot be detected. Age ships only
-#   where it is a whole number.
+#   respondents) hold non-integer values on the 0/1/2 scale (e.g. 0.155,
+#   1.0182, -0.066), and Age has values like 14.293. The paper describes
+#   listwise deletion and does not mention these values. Every non-integer
+#   item cell is dropped (the gori_2021 precedent); integer cells are kept as
+#   deposited. Age ships only where it is a whole number.
 # Not shipped: the composite scores (redes social networks, SWLS, Psychological
 #   Distress), which are single summary columns, not items.
 # Covariates: gender (value labels), grade (1ESO..4ESO, 1BACH; code 6 is
