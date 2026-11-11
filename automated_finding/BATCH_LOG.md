@@ -27386,7 +27386,7 @@ Shipped (Ben's ruling in brackets):
   total vs item sum mismatch in 20 of 122 rows. Author list in the header corrected from Crossref.
 - DVN/LOGUCL `chatterjee_2017_jse` (8,360 / 418) [ship the 20 raw items]: Item_1..Item_20, 1-7; N, sex, the
   mean 96.01 and hostel/home 266/147 reproduce; note on the paper's undetectable mean imputation.
-- pone.0216266 `mee_2019_{mbp,bai,bdi,bhs}` (2,827/289, 5,798/280, 5,751/281, 5,058/255) [ship with every
+- **HELD 2026-11-11 by Ben: the deposit does not reproduce the paper's sex split (188/101 vs 212/77) or BDI mean (17.2 vs 8.54); built, uploaded and then removed from the shard 9 draft; script kept with a HELD header, dictionary/codebook/tag rows removed.** pone.0216266 `mee_2019_{mbp,bai,bdi,bhs}` (2,827/289, 5,798/280, 5,751/281, 5,058/255) [ship with every
   non-integer cell dropped]: 1,374 cells dropped (half points and column-mean substitutions). Age by sex,
   ethnicity, completion, MBP/BAI/BHS means and all four alphas reproduce; the paper's sex split (212/77 vs the
   deposit's 188/101) and BDI mean (8.54 vs 17.20) do not; recorded in the header as paper slips. CC0.

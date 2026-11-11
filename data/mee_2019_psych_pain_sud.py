@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# HELD 2026-11-11 by Ben: the deposit does not reproduce the paper's sex split (188/101 vs 212/77) or BDI mean (17.2 vs 8.54).
+# built, uploaded and then removed from the shard 9 draft.
+# script kept with a HELD header, dictionary/codebook/tag rows removed.
 # Source: https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0216266
 # DOI: 10.1371/journal.pone.0216266
 # Paper: Mee S, Bunney BG, Fujimoto K, Penner J, Seward G, Crowfoot K, Bunney WE,
