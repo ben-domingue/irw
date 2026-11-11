@@ -27193,6 +27193,90 @@ nodes whose listing errored (a000424 `2rmsj`, a000465 `528qe`).
   sample with date of birth, diagnoses and medication), a000410 and a000413 (no
   data files).
 
+## 2026-11-10 — Hour run lane E (repos mode 3, new terms): 9 deposits, 38 tables, 379,002 responses; 1 held
+
+**Terms (8 English x 9 languages = 72 queries, all logged in `search_terms_log.csv`):**
+misophonia, autistic camouflaging, zero-sum beliefs, nostalgia scale, trypophobia,
+tolerance of ambiguity, magical ideation, skin picking. Each was absent from the log.
+Discovery ran in 4 parallel shards; Zenodo answered 429 on 22 queries, so those 22 were
+re-run Zenodo-only afterwards (15 more candidates).
+
+**Triage:** 189 + 15 unique candidates; 88 + 10 were already in `repo_triage_seen_keys.csv`.
+106 triaged with `--retriage` in 5 processes: good 1, human_assistance 22, no_usable_file 67,
+not_item_response 5, below_min_n 4, license_restricted 3, pii_suspected 3, download_failed 1.
+Step 2b ran in every process (`[step 2b] N refined flag(s) recorded` present each time;
+checked afterwards that all 22 refined flags reached the ledger): recoverable_format 11,
+human_review 5 (archived to `human_review/human_review_{dataverse,figshare}_2026-11-10.csv`),
+aggregate_continuous 3, worth_retrying 2, not_item_response 1; conj 0. Every row has a
+status in `leads/repos_leads_2026-11-10h.csv`.
+
+Misophonia was the productive term: 6 of the 8 deposits came from it.
+
+**Shipped (8 deposits):**
+- `trumbull_2024_*` (Dryad 10.5061/dryad.gtht76hv4, pone.0301105, CC0), 377 MTurk adults:
+  mq, panas, pai_bor, snap_ocpd, iip47, aim, and four IADS-2 sound-rating tables (valence,
+  arousal, similarity, avoidance; 167 sounds, blocked design, ~126 raters per sound). An
+  unnamed trigger-checklist block and unnamed social-support items were not shipped. One
+  free-text age of "1978" was nulled.
+- `williams_2022_{dmss,ihs,phonophobia,oasis,odsis,rlss,sss8}` (OSF y6edb, CC BY). This
+  deposit's DVMSQ is already live as `williams_2022_dvmsq` (#2484), whose script listed these
+  instruments as "not taken" on scope. They come from the same file and use the same ids. DMSS
+  and OASIS/ODSIS are branched: unasked items are blank, not zero-filled, and are dropped. IHS is
+  exported 1-4 against a 0-3 dictionary, and is shipped as exported. The REDCap descriptive
+  suffixes on OASIS/ODSIS/RLSS/SSS-8 names were cut (`oasis_q1_frequency` -> `oasis_q1`) because
+  `irw_lint_covariates.py` read "frequency"/"interest"/"satisfied" as covariates. CUANGOS was
+  not shipped because the instrument is unnamed. Caught in time: I first rewrote
+  `data/williams_2022_dvmsq.py` without knowing it existed, then restored it from git. Grep
+  `metadata/biblio.csv` for the deposit before naming a script.
+- `imaizumi_2018_trypophobia` (figshare 5891146, BMC Res Notes, CC BY), 582 Japanese
+  adults, 17 TQ items; 2 DUMMY filler items dropped.
+- `ay_2024_{misoquest,stai_state,stai_trait}` (figshare 24903288, fpsyg.2024.1361645, CC BY):
+  two independent Turkish samples (548 + 117) stacked for MisoQuest with cov_study; STAI from
+  the 117. SF-36 was deposited as 0-100 transformed item scores, so it was not shipped.
+- `paszkowskarogacz_2023_{cdat,cmr,spq}` (Mendeley gbh5mt36hk, CC BY), 229 Polish young
+  adults (145 women / 84 men, asserted).
+- `fazi_2026_{dmss,dmq_imp,pid5bf,ysqs3,bdi2}` (Mendeley wybf5zgdmj, CC BY), 144 Italian adults
+  (72 misophonia / 72 controls, asserted). STAI-Y was not shipped: several columns carry "(r)" and the
+  deposit does not say whether they were already reversed (pre-scored-reversals rule).
+- `veramendoza_2026_{bfi15p,mbiss,pansi}` (Zenodo 23790531, CC BY), 110 Peruvian
+  health-sciences undergraduates; item codes `Items_0k_nn` -> `<scale>_nn` (the lint read
+  "Items_" as a covariate).
+- `walker_2023_{spin,catq,bapq,inq15,acssfad}` (Newcastle 10.25405/data.ncl.23895822, CC BY),
+  148 UK women with anxiety; text Likert recoded with an assert on unmapped labels. BAPQ has
+  35 of 36 columns as deposited. HADS was not shipped: per-item option wording is mixed with a
+  bare numeric 4 in every item.
+
+**Held (1):** Jakubovski et al. 2022 (Mendeley zjrt56tcnx, fpsyt.2022.1012424, CC BY), German
+representative survey, n=2,519, 6 tables (MQ, AMISOS-R, FMPS-8, SF-8, NJRE-Q-R x2) built in
+`runs/held/jakubovski_2022/`. The raw file has birth month + birth year columns for everyone.
+The script drops them, but DOB sits outside the drop-the-column tier, so this needs Ben's call.
+
+**Not pursued:** trypophobia SD/DA framework (figshare 19507855, category means only),
+SAVi-M (OSF 86kah, n=96 participants), Misophonia-NFD (Zenodo 22019361, Persian MQ n=156 but
+no description/paper and the file is named "sample data"; left as `unworked`), Italian DMQ
+(OSF pjwyh, email column -> PII skip), attachment-in-misophonia (OSF k7u8a, licence unknown).
+
+**Item text:** not shipped for any table this lane. Where the text is: SPSS variable labels
+(trumbull questionnaires, paszkowskarogacz, veramendoza, ay Data2), the REDCap dictionary
+in the OSF deposit (williams), headers only (imaizumi, fazi, walker).
+
+**Bookkeeping (both rounds):** 38 dictionary + codebook rows (`stage_dict_row.py`), 38 tag rows in
+`tags/tags_auto.csv`, 108 `search_terms_log.csv` rows, seen-key ledger appends + refined flags.
+
+**Round 2 (same lane, 15:36-15:45):** 4 more terms x 9 languages (36 queries), all absent from
+the log: hyperacusis, misokinesia, noise sensitivity, highly sensitive person. That gave 146 new
+candidates; 74 were triaged (the rest were already in the seen ledger): good 1, human_assistance 26,
+no_usable_file 28, download_failed 10, plus a few rejects. Step 2b ran in all 4 processes and
+archived 4 human_review rows. Zenodo answered 429 on 8 non-English queries; these were not re-run.
+- **Shipped:** `may_2020_hsps` (Mendeley 32p7btkgr4, Current Psychology 2020, CC BY):
+  Highly Sensitive Person Scale, 27 items, 1-7, with Birth to Twenty (1,400) and students (750)
+  stacked with cov_study. The deposits' ids are replaced by sample-prefixed row indices. The 3
+  "researcher-generated reverse-scored items" were not shipped (reversal state unknown).
+- **Unworked:** Polish HSPS (Mendeley 7mj932wh75, 683 emerging adults). It has 4+ consecutive
+  exact-duplicate rows that look like double entry, and the sheet-number column mixes initials
+  with 4 digits. Needs a dedup rule and a PII read first. The 14 recoverable_format rows are
+  mostly political-science "personality" replication files, not opened.
+
 ## 2026-11-10h — hour run lane B (lane C's unworked leads, JEEHP collection first): 16 deposits, 25 tables, 587,820 responses; 5 held
 
 No new searches. Worked the leads lane C left `unworked` overnight, ranked by instrument shape
