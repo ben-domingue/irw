@@ -5,7 +5,7 @@ Dictionary sheets plus automated_finding/dictionary_auto*.csv included (Public r
 
 ## A. Incomplete coverage (missing >=2 sources, tag-only rows dropped -- matches metadata/04_tables.R's `zz`)
 
-Full list, aligned columns: `table_audit_report_incomplete.txt`. Same data as CSV: `table_audit_report_incomplete.csv` (200 rows). Nothing here is auto-fixed -- triage by hand.
+Full list, aligned columns: `table_audit_report_incomplete.txt`. Same data as CSV: `table_audit_report_incomplete.csv` (208 rows). Nothing here is auto-fixed -- triage by hand.
 
 | table | category | redivis | dictionary_sheet | biblio_csv | metadata_csv | tags_csv |
 |---|---|---|---|---|---|---|
@@ -21,7 +21,9 @@ Full list, aligned columns: `table_audit_report_incomplete.txt`. Same data as CS
 | agusta_2023_intrinsic_motivation | core |  | 1 |  |  |  |
 | alomari_2025_student_questionnaire | core |  |  | 1 |  |  |
 | altahla_2024_whoqol_bref | core |  |  | 1 |  |  |
+| braniecka_2022_bdi | core |  | 1 |  |  |  |
 | cao_2026_digital_health_literacy | core |  | 1 |  |  |  |
+| chatterjee_2017_jse | core |  | 1 |  |  |  |
 | diazguerra_2024_uef1 | core |  | 1 |  |  |  |
 | dvivdtws_ppmial_marcatto_2023_cwb | core |  |  | 1 |  |  |
 | hachenberger_2025_gonogo | core |  |  | 1 |  |  |
@@ -37,9 +39,7 @@ Full list, aligned columns: `table_audit_report_incomplete.txt`. Same data as CS
 | liu_2025_self_esteem_study1 | core |  | 1 |  |  |  |
 | liu_2025_self_esteem_study2 | core |  | 1 |  |  |  |
 | moral_absolutism_goyal_2025_moral | core |  |  | 1 |  |  |
-| moral_absolutism_goyal_2025_nfc | core |  |  | 1 |  |  |
-| putwain_2020_rcads | core |  | 1 |  |  |  |
-_...and 170 more, see the .txt or .csv._
+_...and 178 more, see the .txt or .csv._
 
 ## B. Urgent -- live in Redivis, not in any local CSV yet
 

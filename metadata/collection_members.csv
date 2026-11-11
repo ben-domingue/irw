@@ -2047,6 +2047,7 @@ lin_2022_cis_gad7,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 lin_2022_cis_phq9,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 lin_2023_depression,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 lin_2026_advertising_literacy,clustered,rule:var:cluster_id
+lindstrom2021_collective_narcissism,dark_triad,rule:cname:dark triad|machiavell|narciss|psychopath
 lischer_2021_phq4,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 liu_2018_gse,gse,supplied
 liu_2018_lot_r,lotr,name
@@ -2183,6 +2184,7 @@ martineztomas_2026_pseudowords,rater_mediated,rule:var:rater
 martineztomas_2026_pseudowords,stimulus_norms,curated:inventory #2983
 maruyama_2023_madagascar_math,clustered,rule:var:cluster_id
 maruyama_2023_madagascar_math,longitudinal,rule:meta:longitudinal
+maruyama_2023_madagascar_math,math,rule:cname:^(?!.*(anxi|attitude|self.?efficacy|self.?concept|emotion|motivat|interest|enjoy|belief|confiden|value|stereotype)).*(\bmath|arithmetic|algebra|fraction)
 maruyama_2023_madagascar_math,rct,rule:var:treat
 mascherini_2021_meddiet,longitudinal,rule:meta:longitudinal
 mashaal_2024_brief_cope,brief_cope,name
@@ -3074,7 +3076,6 @@ smpi_lorenzoluaces_2020_gad7,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 smpi_lorenzoluaces_2020_gad7,gad7,supplied
 smpi_lorenzoluaces_2020_phq9,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 smpi_lorenzoluaces_2020_phq9,phq9,supplied
-sned_bendall_2024,response_time,rule:var:rt
 sobczak_2024_dddt,dark_triad,rule:cname:dark triad|machiavell|narciss|psychopath
 socialstereotype_hughes_2025_judgement,rater_mediated,rule:var:rater
 socialstereotype_hughes_2025_personality_other,big_five,rule:cname:big.?five|five.?factor|\bipip\b|neo.?(pi|ffi)|\bbfi\b|hexaco
