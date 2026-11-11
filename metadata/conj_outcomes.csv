@@ -41,6 +41,8 @@ albers_2026_marine_user_rights,choice,choice,Which of the two policy bundles do 
 albert_2024_negative_partisanship,choice,choice,"Which of the two candidates would you vote for? (paraphrase; authors' 'strategic choice', plot title 'Vote for')",no,,,,
 albert_2024_negative_partisanship,choice_represent,choice,"Which of the two candidates do you think would best represent your interests? (paraphrase; authors' 'sincere choice', plot title 'Thinks represents best')",no,,,,
 aleksovska_2021_accountability_priority,choice,choice,"Two stakeholders have communicated demands to your organization. You have been asked to perform tasks to respond to both demands, however, you can only do one at a time, so you must decide which one to perform first. Which stakeholder's demand would you prioritize?",no,,,,
+algara_2026_median_ces_general,choice,choice,unknown,no,,,,
+algara_2026_median_lucid_primary,choice,choice,unknown,no,,,,
 alhatmi_2026_oman_graduate_hiring,rating_hire,rating,How likely is it that you would hire this applicant?,,0,100,unknown,unknown
 alhatmi_2026_oman_graduate_hiring,rating_train,rating,"If this applicant is hired, how likely is it that the applicant would be easy to train to meet the job demands? (wording from the design document)",,0,100,unknown,unknown
 alrababah_2023_refugee_return,choice,choice,"Under these conditions, would you be willing to return to Syria? (translated)",yes,,,,
@@ -208,6 +210,7 @@ bhatia_2025_afghan_leaders,rating,rating,"On a scale of 1-5, where one indicates
 binningsbo_2025_party_platforms,choice,choice,"Which party would you vote for, Parti A or Parti B? (paraphrase)",no,,,,
 bischof_2026_simple_language_high,choice,choice,Which of the two members of parliament do you prefer? (paraphrase; codebook: 'whether the respondent chose the candidate'),no,,,,
 bischof_2026_simple_language_low,choice,choice,Which of the two members of parliament do you prefer? (paraphrase; codebook: 'whether the respondent chose the candidate'),no,,,,
+blachly_2023_dam_removal,choice,choice,Which would you choose? check one box ONLY,no,,,,
 blackman_2021_tunisia_household,choice,choice,Choice of one of two candidates (paraphrase; wording not in the deposit),no,,,,
 blackman_2021_tunisia_online,choice,choice,Choice of one of two candidates (paraphrase; wording not in the deposit),no,,,,
 blackman_2025_aid_tunisia,choice,choice,"After you are a member of the municipal council, you will have the opportunity to vote for or against different project proposals for your municipality. Imagine that you are presented with two different development projects for your municipality and can only support one of them. Below you are presented with the details of the two projects. Which project do you prefer for your municipality?",no,,,,
@@ -262,6 +265,8 @@ brooks_2026_mining_argentina,choice,choice,¿Qué proyecto es mejor?,no,,,,
 brooks_2026_mining_argentina,rating,rating,Califica cada proyecto de 1 estrella (malo) a 5 estrellas (bueno),,0,5,1 estrella (malo),5 estrellas (bueno)
 bruckmann_2020_ev_policy,choice,choice,Which of the two policy proposals do you prefer? (paraphrase),no,,,,
 bruckmann_2020_ev_policy,rating,rating,Rating of each policy proposal on a 7-point Likert scale (paraphrase),,1,7,unknown,unknown
+bruckmann_2025_solar_abstention,choice,choice,unknown,yes,,,,
+bruckmann_2025_solar_abstention,rating,rating,unknown,,1,5,lowest rating,highest rating
 brueckmann_2023_charging_stations,choice,choice,Welche Ladestation würden Sie nutzen? (Ladestation A / Ladestation B) (translated: Which charging station would you use?),no,,,,
 brugge_2024_circular_products,choice,choice,Which of these two products would you buy? (paraphrase),no,,,,
 bueno_2017_credit_claiming,choice,choice,"Qual prefeito você prefere? Mesmo que você ache que os dois prefeitos são semelhantes, escolha o prefeito que você ache melhor.",no,,,,
@@ -363,6 +368,10 @@ chauchard_2019_wealth_accumulation,rating_corrupt,rating,How likely is it that t
 chauchard_2019_wealth_accumulation,rating_personal,rating,How helpful would the politician be for you personally? (paraphrase),,1,5,unknown,unknown
 chauchard_2019_wealth_accumulation,rating_repr,rating,How good a job would the politician do in addressing constituents' problems? (paraphrase),,1,5,unknown,unknown
 chauchard_2019_wealth_accumulation,rating_violence,rating,How likely is it that the politician would engage in violent activities? (paraphrase),,1,5,unknown,unknown
+chen_2023_trade_democracy_elites,rating,rating,unknown,,1,6,unknown,unknown
+chen_2023_trade_democracy_lucid,rating,rating,unknown,,1,6,unknown,unknown
+chen_2023_trade_democracy_mturk,rating,rating,unknown,,1,6,unknown,unknown
+chen_2023_trade_democracy_study2,rating,rating,unknown,,1,6,unknown,unknown
 chen_2025_bere_barley_scot,choice,choice,Which option would you buy? (paraphrase),yes,,,,
 chen_2025_hanging_tomato_es,choice,choice,Which option would you buy? (paraphrase),yes,,,,
 chen_2025_ideal_tomato_bg,choice,choice,Which option would you buy? (paraphrase),yes,,,,
@@ -422,6 +431,8 @@ chu_2025_democracy_tradeoff_us,choice,choice,"If you had to choose, which countr
 chu_2025_democracy_tradeoff_us,rating,rating,Now just think about Country A [B]. How happy would you be to have been born and grown up in this country?,,1,7,Extremely unhappy,Extremely happy
 claassen_2026_democratic_backsliding,choice,choice,Which candidate do you prefer? (Candidate 1 / Candidate 2),no,,,,
 clarke_2021_birth_weight,choice,choice,Which of these two birth scenarios would you choose?,no,,,,
+clary_2021_pakistan_candidates,choice,choice,unknown,no,,,,
+clary_2021_pakistan_candidates,rating,rating,unknown,,1,7,unknown,unknown
 clayton_2021_france_immigrants,choice,choice,"If you had to choose between the two, which of these two immigrants should be admitted to live in France? (translated)",no,,,,
 clayton_2025_gender_quotas,rating_fair_process,rating,"Thinking for a moment about the gender composition of the council, how fair was the decision-making process?",,1,4,very unfair,very fair
 clayton_2025_gender_quotas,rating_fair_target,rating,How fair was this decision to women / for the treatment of animals?,,1,4,very unfair,very fair
@@ -473,6 +484,8 @@ dassonneville_2021_mp_vote,rating,rating,Suppose the following situation. Please
 davenport_2026_black_classification,choice,choice,Which person is more Black? (paraphrase),no,,,,
 davenport_2026_black_classification,rating,rating,How Black is this person? (paraphrase),,0,10,Not at all,Very
 davis_2026_ethnic_federalism,choice,choice,Which of the two arrangements do you prefer? (paraphrase; codebook: 'Whether the conjoint profile was chosen by the respondent'),no,,,,
+dean_2026_participatory_processes,choice,choice,Welches Verfahren ist Ihrer Meinung nach die bessere Form der Bürgerbeteiligung? (VERFAHREN A / VERFAHREN B),no,,,,
+dean_2026_participatory_processes,rating,rating,Und inwieweit befürworten oder lehnen Sie Verfahren A und B als Formen der Bürgerbeteiligung ab?,,0,6,Lehne stark ab (strongly oppose),Befürworte sehr (strongly support)
 debele_2026_opendata_portal,rating,rating,Rank these four alternatives from most preferred (Rank 1) to least preferred (Rank 4). (paraphrase),,1,4,most preferred,least preferred
 debenedictiskessner_2022_opioid_identity,rating_blame,rating,Would you agree or disagree that individuals addicted to opioids are to blame for their own addiction?,,1,5,Strongly agree,Strongly disagree
 debenedictiskessner_2022_opioid_identity,rating_enforcement,rating,"If you were making up the budget for the federal government this year, would you increase, decrease, or keep spending the same for law enforcement to arrest and prosecute those addicted to opioids?",,1,5,Increase a lot,Decrease a lot
@@ -614,6 +627,14 @@ endo_2025_candidate_ambition,rating_decisive,rating,Perceived personal trait of 
 endo_2025_candidate_ambition,rating_favorability,rating,How favorable an impression do you have of this candidate? (paraphrase),,1,4,not favorable at all,very favorable
 endo_2025_candidate_ambition,rating_popular,rating,How likely is it that this candidate would be popular among people around you? (paraphrase),,1,5,highly unlikely,very likely
 endo_2025_candidate_ambition,rating_trust,rating,Perceived personal trait of the candidate: trustworthy (paraphrase),,1,5,unknown,unknown
+endo_2026_presiding_elites,rating_chair_success,rating,"If this person served as the chair of your council, how likely do you think he/she would be able to manage the council effectively?",,1,4,He/she would not be able to manage the council effectively,He/she would be able to manage the council effectively
+endo_2026_presiding_elites,rating_chair_support,rating,"If this person were nominated as a candidate for chair of your municipal council, and setting aside [his/her] council group affiliation and any personal relationships, how likely would you be to support this person?",,1,4,I would not support him/her,I would support him/her
+endo_2026_presiding_elites,rating_vice_success,rating,How well do you think this person would perform as the vice-chair of your council?,,1,4,He/she would not be able to manage the council effectively,He/she would be able to manage the council effectively
+endo_2026_presiding_elites,rating_vice_support,rating,"Next, suppose this person were nominated as a candidate for vice-chair of your council? Setting aside his/her council group affiliation and any personal relationships, how likely would you be to support this person?",,1,4,I would not support him/her,I would support him/her
+endo_2026_presiding_voters,rating_chair_success,rating,"If this person served as the chair of your council, how likely do you think he/she would be able to manage the council effectively?",,1,4,I think he/she would not be able to manage the council effectively,I think he/she would be able to manage the council effectively
+endo_2026_presiding_voters,rating_chair_support,rating,"If this person were nominated as a candidate for the chair of your municipal council, and setting aside [his/her] party/group affiliation, how likely do you think this person would be supported within the council?",,1,4,I think he/she would not be supported,I think he/she would be supported
+endo_2026_presiding_voters,rating_vice_success,rating,How well do you think this person could perform as the vice-chair of your municipal council?,,1,4,I think he/she would not be able to manage the council effectively,I think he/she would be able to manage the council effectively
+endo_2026_presiding_voters,rating_vice_support,rating,"Next, how about if this person were nominated as a candidate for vice-chair? Setting aside his/her party/group affiliation, how likely do you think this person would be supported within the council?",,1,4,I think he/she would not be supported,I think he/she would be supported
 erlich_2023_ukraine_candidates,rating,rating,Would you vote for these candidates? (translated),,0,1,No,Yes
 erlich_2023_ukraine_candidates,rating_win,rating,Do you think these candidates could win local election? (translated),,0,1,No,Yes
 erlich_2025_bribery_clinic,choice,choice,Please read the additional information below about scenario A and scenario B and then indicate in which scenario - A or B - Petro would be more likely to pay a bribe in order to receive treatment more quickly. (translated),no,,,,
@@ -627,6 +648,9 @@ erlich_2025_corruption_harms,choice_frequent,choice,"And in the end, please tell
 erlich_2025_corruption_harms,choice_moral,choice,"And now, please tell me in which of the following scenarios do you think the official's action is more morally wrong? Scenario A or Scenario B. (translated)",no,,,,
 erlich_2025_corruption_harms,choice_personal,choice,"First, please indicate which of the scenarios is likely to harm you and your family the most՝ Scenario A or Scenario B. (translated)",no,,,,
 erlich_2025_corruption_harms,choice_trust,choice,Would you indicate which of the scenarios would most likely reduce your confidence in the political system of Armenia? Scenario A or Scenario B. (translated),no,,,,
+esaiasson_2023_good_loser_no,rating_accept,rating,How willing to accept the decision. (translated),,1,5,Very willing (worded) / 1 Most willing (numbered),Not at all willing (worded) / 5 Not willing (numbered)
+esaiasson_2023_good_loser_no,rating_fairness,rating,How fair was the way the decision was made. (translated),,1,5,Very fair (worded) / 1 Most fair (numbered),Not at all fair (worded) / 5 Not fair (numbered)
+esaiasson_2023_good_loser_no,rating_reasonable,rating,How reasonable was the decision. (translated),,1,5,Very reasonable (worded) / 1 Most reasonable (numbered),Not reasonable at all (worded) / 5 Not reasonable (numbered)
 escribafolch_2021_democracy_promotion,rating_democracy_aid,rating,"Even if you aren't entirely sure, please indicate whether you would support the use of these foreign policies (i.e., military intervention, economic sanctions or foreign aid) in each of the two cases separately. [democracy aid: yes/no] (paraphrase)",,0,1,no,yes
 escribafolch_2021_democracy_promotion,rating_economic_sanctions,rating,"Even if you aren't entirely sure, please indicate whether you would support the use of these foreign policies (i.e., military intervention, economic sanctions or foreign aid) in each of the two cases separately. [economic sanctions: yes/no] (paraphrase)",,0,1,no,yes
 escribafolch_2021_democracy_promotion,rating_military_intervention,rating,"Even if you aren't entirely sure, please indicate whether you would support the use of these foreign policies (i.e., military intervention, economic sanctions or foreign aid) in each of the two cases separately. [military intervention: yes/no] (paraphrase)",,0,1,no,yes
@@ -764,6 +788,7 @@ getmansky_2024_refugees,choice_work_permit,choice,"Now, imagine if you had to ch
 getmansky_2024_refugees,rating_citizenship,rating,"On a scale from 1 to 7, where 1 indicates that you definitely don’t want the refugee to be granted Turkish citizenship, and 7 indicates that you definitely want the refugee to be granted Turkish citizenship, how would you rate each of the refugee profiles described above? (translated)",,1,7,definitely don’t want the refugee to be granted Turkish citizenship,definitely want the refugee to be granted Turkish citizenship
 getmansky_2024_refugees,rating_neighbor,rating,"On a scale from 1 to 7, where 1 indicates that you definitely don’t want the refugee to be your neighbor, and 7 indicates that you definitely want the refugee to be your neighbor, how would you rate each of the refugee profiles described above? (translated)",,1,7,definitely don’t want the refugee to be your neighbor,definitely want the refugee to be your neighbor
 getmansky_2024_refugees,rating_work_permit,rating,"On a scale from 1 to 7, where 1 indicates that you definitely don’t want the refugee to be given a work permit, and 7 indicates that you definitely want the refugee to be given a work permit, how would you rate each of the refugee profiles described above? (translated)",,1,7,definitely don’t want the refugee to be given a work permit,definitely want the refugee to be given a work permit
+gherghina_2024_clientelism_romania,choice,choice,"If you had to choose between these two candidates in elections, which one would you vote for? (translated)",no,,,,
 ghosn_2021_refugee_return,choice,choice,"I would like you to imagine a person, like yourself, but this person is considering a return to Syria. I would like you to consider the following two places in Syria, where there is currently no fighting taking place and tell me which place in Syria you think this person should go to. [...] Now tell me, which place in Syria would you choose to return to? (translated)",no,,,,
 giannoni_2025_firm_jobs,choice_antimigrant_protest,choice,"Which of the two workers (profiles) is the one who said / would do: ""Participar de protestos contra a migração"" (item text verbatim in Portuguese; question stem is paraphrased from the article: respondents chose which of two workers they thought said a phrase manifesting a political attitude or engaged in a certain political behavior)",no,,,,
 giannoni_2025_firm_jobs,choice_antisystem_vote,choice,"Which of the two workers (profiles) is the one who said / would do: ""Votar em partidos que se opõem ao atual sistema político."" (item text verbatim in Portuguese; question stem is paraphrased from the article: respondents chose which of two workers they thought said a phrase manifesting a political attitude or engaged in a certain political behavior)",no,,,,
@@ -941,6 +966,7 @@ helbling_2023_integration_policy,choice,choice,Which of the two integration poli
 helbling_2023_naturalization_policy,choice,choice,Which of the two naturalization policies do you prefer? (paraphrase; Natchoice),no,,,,
 helbling_2023_numbers_rights_s2,rating,rating,Inwieweit wären Sie mit einer solchen Zuwanderungspolitik einverstanden?,,1,5,Voll und ganz,Überhaupt nicht
 helbling_2023_numbers_rights_s3,rating,rating,Support for the proposed immigration policy (question wording not in the deposit; answer options 'voll und ganz ablehnen' ... 'Voll und ganz unterstützen'),,1,6,voll und ganz ablehnen,Voll und ganz unterstützen
+hemesath_2024_av_regulation,choice,choice,unknown,no,,,,
 hemesath_2024_chatbot_citizens,choice,choice,Which of the two chatbots do you prefer? (paraphrase),no,,,,
 hemesath_2024_chatbot_officers,choice,choice,Which of the two chatbots do you prefer? (paraphrase),no,,,,
 henderson_2014_party_guess,rating,rating,How favorably or unfavorably do you feel toward this candidate? Neither Unfavorable nor Favorable,,0,10,Very Unfavorable,Very Favorable
@@ -981,6 +1007,7 @@ holloway_2025_indigenous_candidates,rating_hardworking,rating,Q13 candidate trai
 holloway_2025_indigenous_candidates,rating_intelligent,rating,Q13 candidate trait perceptions: agreement that the candidate is intelligent (paraphrase),,1,5,Strongly disagree,Strongly agree
 holloway_2025_indigenous_candidates,rating_likeable,rating,Q13 candidate trait perceptions: agreement that the candidate is likeable (paraphrase),,1,5,Strongly disagree,Strongly agree
 holloway_2025_indigenous_candidates,rating_trustworthy,rating,Q13 candidate trait perceptions: agreement that the candidate is trustworthy (paraphrase),,1,5,Strongly disagree,Strongly agree
+holtmaat_2026_climate_adaptation,choice,choice,We will present two policy packages side-by-side.  Which policy would have your support?,no,,,,
 horiuchi_2018_japan_manifestos,choice,choice,"Suppose that the following two parties were nominating candidates in this general election. Which party would you support? Even if you are not entirely sure, please indicate which of the two you would dare to support. (translated)",no,,,,
 horiuchi_2020_japan_politicians,choice,choice,"次の２人の人物のうち、どちらがより小選挙区選出の衆議院議員として望ましいと思いますか。もし、どちらが望ましいかはっきりとは言えない場合でも、どちらか一方、あえていえばより望ましいと思われる方を選んでください。 (lower house, district-tier wording; house and tier words vary by block)",no,,,,
 horiuchi_2022_sdb_candidates,rating,rating,How likely or unlikely do you think you would be to vote for each candidate from the [Democratic/Republican] Party instead of the candidate from the [Republican/Democratic] Party in each of the two elections?,,1,7,Very Unlikely,Very Likely
@@ -1459,6 +1486,8 @@ lublin_2023_candidate_pairs,choice,choice,"Now, imagine that the two candidates 
 lublin_2023_candidate_vignette,rating,rating,Michael [surname] is the kind of candidate that understands the political issues that matter to me. (Do you agree or disagree with the following statements?),,0,4,Strongly disagree,Strongly agree
 lublin_2023_candidate_vignette,rating_more_like_him,rating,I would like to see more people like Michael [surname] in Congress.,,0,4,Strongly disagree,Strongly agree
 lublin_2023_candidate_vignette,rating_represent_well,rating,"If he won, Michael [surname] would represent my district well in Congress.",,0,4,Strongly disagree,Strongly agree
+lucas_2025_municipal_partisanship,choice,choice,"If you had to choose between Candidate A and Candidate B, which candidate would you vote for?",no,,,,
+lucas_2025_municipal_partisanship,rating_vote,rating,How likely would you be to vote for Candidate A if they were running in your ward? (same for Candidate B),,0,10,No Chance,Certain to Support
 lueders_2025_relocation,choice,choice,Which of these two cities would you rather move to? (paraphrase),no,,,,
 lueders_2025_relocation,rating_alone,rating,"In this city, would you expect to / would this hold: Feel alone (paraphrase of the authors' figure label; asked in question version B only)",,0,1,no,yes
 lueders_2025_relocation,rating_discrimination,rating,"In this city, would you expect to / would this hold: Fear discrimination (paraphrase of the authors' figure label; asked in question version B only)",,0,1,no,yes
@@ -1552,18 +1581,34 @@ mbozi_2024_tally_sheets,rating_misconduct,rating,"In your opinion, what is the l
 mbozi_2024_tally_sheets,rating_officer_pressure,rating,To what extent do you agree with the following statements: The presiding officer may have been put under pressure from other groups in the polling station.,,1,5,Strongly disagree,Strongly agree
 mbozi_2024_tally_sheets,rating_party_influence,rating,To what extent do you agree with the following statements: It is very possible that a political party had too much influence at this polling station.,,1,5,Strongly disagree,Strongly agree
 mbozi_2024_tally_sheets,rating_tally_changed,rating,To what extent do you agree with the following statements: The vote tallies may have been changed in favor of a specific candidate.,,1,5,Strongly disagree,Strongly agree
+mccallum_2026_wine_ch,choice,choice,unknown,yes,,,,
+mccallum_2026_wine_us,choice,choice,unknown,yes,,,,
 mccammon_2024_phage_therapy,choice,choice,"Which of the two treatments would you personally prefer to recommend to treat an infection, presuming they are both a suitable option for the patient?",no,,,,
 mccammon_2024_phage_therapy,rating,rating,"On a scale from 1 to 10, where 1 indicates 'not at all likely' and 10 indicates 'very likely', what is your likelihood of recommending Treatment 1? (and, using the same scale, Treatment 2)",,0,10,not at all likely,very likely
 mccrea_2026_therapist_choice,choice,choice,Which of the two therapists would you choose? (paraphrase),no,,,,
 mccrea_2026_therapist_choice,rating,rating,Rating of each therapist on a 1-7 scale (paraphrase),,1,7,unknown,unknown
 mcdonnell_2022_gp_referral,choice,choice,"Given the information provided above, would you refer the patient to the ED or not refer?",yes,,,,
 mcdowell_2025_immigrant_partisanship,rating,rating,"In the last ten years, a significant number of immigrants into the United States have come from [Vietnam/Venezuela]. [A majority of immigrants from [Vietnam/Venezuela] support Donald Trump and the Republican Party.] Do you agree or disagree that the United States should permit higher levels of immigration from [Vietnam/Venezuela]?",,0,10,strongly disagree,strongly agree
+mclaughlin_2024_veteran_candidates_s1,rating_cand_ideology,rating,unknown,,1,7,Very liberal,Very conservative
+mclaughlin_2024_veteran_candidates_s1,rating_courage,rating,unknown,,0,10,unknown,unknown
+mclaughlin_2024_veteran_candidates_s1,rating_defense_own,rating,unknown,,0,10,unknown,unknown
+mclaughlin_2024_veteran_candidates_s1,rating_patriotism,rating,unknown,,0,10,unknown,unknown
+mclaughlin_2024_veteran_candidates_s1,rating_therm,rating,unknown,,0,100,unknown,unknown
+mclaughlin_2024_veteran_candidates_s1,rating_vote,rating,unknown,,1,7,Extremely unlikely,Extremely likely
+mclaughlin_2024_veteran_candidates_s2,rating_cand_ideology,rating,unknown,,1,7,Very liberal,Very conservative
+mclaughlin_2024_veteran_candidates_s2,rating_courage,rating,unknown,,0,10,unknown,unknown
+mclaughlin_2024_veteran_candidates_s2,rating_defense_own,rating,unknown,,0,10,unknown,unknown
+mclaughlin_2024_veteran_candidates_s2,rating_patriotism,rating,unknown,,0,10,unknown,unknown
+mclaughlin_2024_veteran_candidates_s2,rating_therm,rating,unknown,,0,100,unknown,unknown
+mclaughlin_2024_veteran_candidates_s2,rating_vote,rating,unknown,,1,7,Extremely unlikely,Extremely likely
 mclaughlin_2025_spending_projects,choice,choice,unknown (the deposit has no question text; the answer is Project 1 or Project 2),no,,,,
 mclaughlin_2025_spending_projects,rating,rating,unknown (a 1-7 rating of each project; no question text in the deposit),,1,7,unknown,unknown
 mclean_2017_sanctions,choice,choice,Should the U.S. impose the sanctions recommended by the President? (Yes / No),yes,,,,
 mclean_2017_sanctions,rating_pain_leaders,rating,How painful do you think the sanctions will be for the Erqatan leaders?,,1,10,Not Painful,Very Painful
 mclean_2017_sanctions,rating_pain_public,rating,How painful do you think the sanctions will be for the Erqatan public?,,1,10,Not Painful,Very Painful
 mclean_2017_sanctions,rating_success,rating,How likely do you think the sanctions are to succeed? (0-100),,0,100,0,100
+meier_2023_school_district_income,rating,rating,"If you were in need of a new school district, how comfortable would you be placing your child in Greenwood School District?",,1,5,Very uncomfortable,Very comfortable
+meier_2023_school_district_race,rating,rating,"If you were in need of a new school district, how comfortable would you be placing your child in Greenwood School District?",,1,5,Very uncomfortable,Very comfortable
 meisels_2024_donor_candidates,rating,rating,"Likelihood of contributing to the vignette candidate, reported by the authors as 1 = very likely or almost certain to contribute, 0 otherwise (paraphrase; raw question not deposited)",,0,1,less than very likely to contribute,very likely or almost certain to contribute
 mercea_2025_movement_parties,choice,choice,"If you had to choose between them, which candidate do you prefer?",no,,,,
 mercea_2025_movement_parties,rating,rating,How much do you approve or disapprove of this candidate? (paraphrase),,1,7,Strongly disapprove,Strongly approve
@@ -1621,6 +1666,7 @@ molin_2026_vacation_positional,choice,choice,"Choose between two hypothetical va
 mon_2024_covid_democracy,choice,choice,1 if the profile is selected as the preferred alternative (paraphrase),no,,,,
 montal_2024_journal_choice,choice,choice,Which of the two journals would you submit your article to? (paraphrase),no,,,,
 mortenson_2025_democracy_tradeoffs,choice,choice,"Democracy comes in many different flavors. Below are two countries with different features to their democracy. Please select which country you would MOST prefer to live in from the selections below. Read each item CAREFULLY, as the options will vary in each round.",no,,,,
+mortenson_2026_democracy_frames,choice,choice,"If an election were held today, which of these candidates would you vote for? Please select one.",no,,,,
 mueller_2024_covid_governance,choice,choice,Which of the two scenarios of how COVID-19 responses should be taken do you prefer? (paraphrase),no,,,,
 mummolo_2016_news_choice,choice,choice,Which of these two news stories would you choose to read? (paraphrase),no,,,,
 mummolo_2016_news_choice_mturk,choice,choice,Which of these two news stories would you choose to read? (paraphrase),no,,,,
@@ -1691,10 +1737,13 @@ neuner_2025_populism_us2,rating_crooked,rating,How likely do you think the two p
 neuner_2025_populism_us2,rating_ideology,rating,How liberal or conservative do you think the two politicians are?,,1,5,Very liberal,Very conservative
 neuner_2025_populism_us2,rating_immigration,rating,How likely do you think the two politicians are to say that “immigration should be reduced”?,,1,5,Not at all likely,Extremely likely
 neuner_2025_populism_us2,rating_listen,rating,How likely do you think the two politicians are to say that “politicians should always listen to the people”?,,1,5,Not at all likely,Extremely likely
+neurorights_2026_neurodata_dce,choice,choice,unknown,yes,,,,
 nguyen_2021_farm_subsidies_ch,choice,choice,Which proposal do you prefer?,no,,,,
 nguyen_2021_farm_subsidies_ch,rating,rating,Rating of each proposal on a seven-point scale (paraphrase),,1,7,not like,unknown
 nguyen_2021_farm_subsidies_us,choice,choice,Which proposal do you prefer?,no,,,,
 nguyen_2021_farm_subsidies_us,rating,rating,Rating of each proposal on a seven-point scale (paraphrase),,1,7,not like,unknown
+nguyen_2026_urine_sanitation,choice,choice,unknown,no,,,,
+nguyen_2026_urine_sanitation,choice_least_preferred,choice,unknown,no,,,,
 nicholson_2023_paediatric_care,choice,choice,Please choose the service that you would prefer to attend (paraphrase),no,,,,
 nicoli_2025_defense_union,choice,choice,Which of the two packages on the screen do you prefer? (paraphrase),no,,,,
 nicoli_2025_defense_union,rating,rating,How much are you in favor of or against this package? (paraphrase),,1,5,strongly against,strongly in favor
@@ -1707,10 +1756,12 @@ nukui_2025_female_successors,rating_support,rating,"If this person were to becom
 nunes_2015_jellyfish_beach,choice,choice,"Choice of Beach A, Beach B, or a third option (stay at home or do any other recreational activity) on a hypothetical day of leisure (paraphrase)",yes,,,,
 nyholt_2024_local_candidates,choice,choice,Hvilken kandidat foretrækker du?,yes,,,,
 nyholt_2024_local_candidates,rating,rating,How likely is it that you would vote for Candidate A [B]? (translated),,1,5,Meget usandsynligt,Meget sandsynligt
+obrian_2025_doctor_choice,choice,choice,Suppose you need to schedule a dermatology appointment and are choosing which dermatologist to go to. Which dermatologist are you more likely to schedule an appointment and visit? Doctor A or Doctor B?,no,,,,
 ocampo_2025_latinos_american,choice,choice,"These two people are either immigrants or come from a family with a history of immigration. If you had to choose between them, which of them do you personally believe is more American?",no,,,,
 ocampo_2025_latinos_american,rating,rating,"On a scale from 1 to 7, where 1 indicates that you would not rate this person as American at all and 7 indicates that you would very much rate this person as American, how would you rate each person?",,1,7,would not rate this person as American at all,would very much rate this person as American
 ofosu_2026_malawi_women_candidates,choice,choice,Which of these two candidates would you vote for as your MP?,no,,,,
 ofosu_2026_malawi_women_candidates,choice_others,choice,Which of these two candidates do you think others in your constituency would vote for as their MP?,no,,,,
+ogbo_2021_mobile_plans_ng,choice,choice,"Choose between two different mobile bundled plans or going without mobile service, assuming the current mobile plan ends the next day (paraphrase)",yes,,,,
 ogrady_2026_immigration_sanctions,rating_fair_immigration_system,rating,How fair is the UK immigration system's treatment of the migrant? (paraphrase of ImmiV_FairImmiSystem),,1,4,fairest,least fair
 ogrady_2026_immigration_sanctions,rating_migrant_likely_to_migrate,rating,How likely is a migrant like this one to try to migrate to the UK? (paraphrase of ImmiV_LikelyMigrate),,1,4,most likely,least likely
 ogrady_2026_immigration_sanctions,rating_self_likely_to_migrate,rating,How likely would you yourself be to migrate in this situation? (paraphrase of ImmiV_MigrateMyself),,1,4,most likely,least likely
@@ -1747,6 +1798,7 @@ panel_2023_technocrats_fr,choice,choice,The respondent's preferred profile of th
 panel_2023_technocrats_it,choice,choice,The respondent's preferred profile of the two (paraphrase of the codebook; wording not deposited),no,,,,
 panel_2023_technocrats_pl,choice,choice,The respondent's preferred profile of the two (paraphrase of the codebook; wording not deposited),no,,,,
 panel_2023_technocrats_uk,choice,choice,The respondent's preferred profile of the two (paraphrase of the codebook; wording not deposited),no,,,,
+papenfus_2025_salmon_recovery,choice,choice,"Choose the program you would prefer, or the status quo (neither of the policy options) (paraphrase)",yes,,,,
 papp_2023_covid_vaccine_hungary,choice,choice,Which of the two vaccines would you choose? (paraphrase; do-file: 'The respondent selected the vaccine in a task'),no,,,,
 papp_2024_democracy_satisfaction,choice,choice,"On the whole, in which country would you say you would be more satisfied with the way democracy works? (journal abstract page; country A or B)",no,,,,
 papp_2024_democracy_satisfaction,rating,rating,"satisfaction with the way democracy works in this country, 0-10 (paraphrase)",,0,10,least satisfied,most satisfied
@@ -1854,6 +1906,7 @@ qi_2024_welfare_programs,choice,choice,unknown (forced choice between the two pr
 qi_2024_welfare_programs,rating,rating,"unknown (program support for each program; source program_support, 'Program support'; wording not in the deposit)",,1,7,unknown,unknown
 qi_2025_health_redistribution,choice,choice,Which of the two programs do you prefer? (paraphrase),no,,,,
 qi_2026_welfare_taxes,choice,choice,Which of these two programs would you prefer? (paraphrase; value labels 'Chose this program' / 'Chose other program'),no,,,,
+qiankai_2026_mealtime_ltc,choice,choice,unknown,no,,,,
 rains_2023_ward_candidate,choice,choice,Which of the two hypothetical ward leader candidates do you prefer? (paraphrase),no,,,,
 ramamurthi_2022_india_coal_policy,choice,choice,unknown,no,,,,
 raman_2022_covid_booster,choice,choice,"If you had to choose, would you choose to get this vaccine [booster]?",yes,,,,
@@ -1891,6 +1944,7 @@ reinsberg_2026_imf_messages,rating_imf_confidence,rating,"On a scale of 0-10 whe
 reinsberg_2026_imf_messages,rating_imf_responsible,rating,To what extent do you think the IMF is responsible for this program?,,1,3,Not responsible,Much responsible
 ridge_2024_regime_egypt,choice,choice,Which of these two political systems of government would you prefer the most?,no,,,,
 ridge_2024_regime_morocco,choice,choice,Which of these two political systems of government would you prefer the most?,no,,,,
+rigby_2026_contract_cheating,choice,choice,unknown,yes,,,,
 rinscheid_2019_coal_phaseout_germany,choice,choice,Which of the two scenarios do you prefer? (paraphrase),no,,,,
 rinscheid_2019_coal_phaseout_germany,rating,rating,How do you rate this scenario? (paraphrase),,1,7,very poor,very good
 rinscheid_2019_coal_phaseout_lusatia,choice,choice,Which of the two scenarios do you prefer? (paraphrase),no,,,,
@@ -1954,6 +2008,8 @@ sagebiel_2026_tofu,choice,choice,Vilken produkt skulle du föredra?,yes,,,,
 saha_2023_meat_candidates,choice,choice,Which candidate would you be most likely to vote for in the presidential primary? (paraphrase),no,,,,
 saikkonen_2023_elite_transgressions,choice,choice,Pick the profile you would prefer as prime minister of Finland (paraphrase),no,,,,
 saikkonen_2023_elite_transgressions,choice_vote,choice,Would you also vote for the leader selected? (paraphrase),yes,,,,
+sances_2026_prosecutors_forthright,choice,choice,unknown,no,,,,
+sances_2026_prosecutors_mturk,choice,choice,unknown,no,,,,
 sasmaz_2026_candidate_selection,choice,choice,"During the preparations for elections, important decisions have been made about who will be included in the lists. Imagine that these two people have been suggested to you to be included in your list. Which person would you contact first to offer a place in your list? (translated)",no,,,,
 scarpa_2023_nfm_contracts,choice,choice,"Which of the available options do you prefer? (Option A, Option B or I want neither A nor B)",yes,,,,
 scarpa_2023_nfm_corridors,choice,choice,"Which of the available options do you prefer? (Option A, Option B or I want neither A nor B)",yes,,,,
@@ -1967,6 +2023,7 @@ schaap_2023_ai_agency_incentivized,rating_invest,rating,The investor predicts an
 schick_2026_hazard_adaptation,choice,choice,Which option do you prefer?,no,,,,
 schick_2026_hazard_adaptation,rating_acceptance,rating,"Irrespective of your choice, how acceptable do you find the two options?",,1,6,Totally unacceptable,Totally acceptable
 schillemans_2025_accountability,choice,choice,Which of the two demands would you prioritize? (paraphrase),no,,,,
+schmid_2024_peacebuilding_colombia,choice,choice,unknown,no,,,,
 scholten_2025_military_action,choice,choice,Against which of the two countries is military action more justified? (paraphrase),no,,,,
 scholten_2025_military_action,rating,rating,How justified would military action against this country be? (paraphrase),,0,10,Completely unjustified,Completely justified
 scholten_2025_return_migrants,choice,choice,¿Cuál de estas opciones prefieres?,no,,,,
@@ -2008,6 +2065,8 @@ shum_2026_hk_diaspora_policy_au,choice,choice,Choose between two parties/candida
 shum_2026_hk_diaspora_policy_ca,choice,choice,Choose between two parties/candidates described by their policy proposals (paraphrase),no,,,,
 shum_2026_hk_diaspora_policy_uk,choice,choice,Choose between two parties/candidates described by their policy proposals (paraphrase),no,,,,
 shum_2026_hk_diaspora_policy_us,choice,choice,Choose between two parties/candidates described by their policy proposals (paraphrase),no,,,,
+sibanda_2026_trophy_carnivores,rating,rating,unknown,,1,7,Very unacceptable,Very acceptable
+sibanda_2026_trophy_herbivores,rating,rating,unknown,,1,7,Very unacceptable,Very acceptable
 sievert_2024_burden_perceptions,rating,rating,Do you approve or disapprove of the ALG II? (translated),,1,7,disapprove (assumed),approve (assumed)
 sievert_2024_burden_perceptions,rating_legit_appropriate_rules,rating,I personally think that the rules and procedures of the Arbeitsagentur are appropriate. (translated),,1,7,"unknown (disagreement, assumed)","unknown (agreement, assumed)"
 sievert_2024_burden_perceptions,rating_legit_benefits_stakeholders,rating,I personally think that the activities of the Arbeitsagentur benefit its immediate stakeholders. (translated),,1,7,"unknown (disagreement, assumed)","unknown (agreement, assumed)"
@@ -2087,6 +2146,13 @@ stoop_2025_host_communities,rating_trust_community,rating,I could trust the memb
 suasapha_2023_tourism_education,rating,rating,"unknown (no question wording in the deposit); preference score for the stimulus card, larger = more preferred (SPSS CONJOINT /SCORE)",,1,4,unknown,unknown
 sung_2023_chemical_compounds,rating,rating,"purchase probability of the compound described by the profile, 0 to 10 (paraphrase of 'purchase probability (ranging between zero and 10)')",,0,10,lowest purchase probability,highest purchase probability
 suring_2025_forest_contracts,choice,choice,"Vi vil nu bede dig om at træffe 9 valg mellem to forskellige kontraktversioner A og B ... Hvis ingen af de to præsenterede kontraktversioner er attraktive for dig, kan du vælge ""Ingen af dem"". [Dit valg: Kontrakt A / Kontrakt B / Ingen af dem]",yes,,,,
+svensson_2026_forest_biodiversity,choice,choice,Vilket av följande val föredrar du? Markera en av cirklarna. (Which of the following do you prefer? Mark one of the circles.) (translated),yes,,,,
+syed_2026_resume_coursework,choice,choice,Would you move this candidate forward to an interview?,yes,,,,
+syed_2026_resume_coursework,rating_communication,rating,This candidate demonstrates strong communication ability.,,0,7,Strongly disagree,Strongly agree
+syed_2026_resume_coursework,rating_engineering_team_fit,rating,This candidate would fit well on an engineering-heavy team.,,0,7,Strongly disagree,Strongly agree
+syed_2026_resume_coursework,rating_interview_likelihood,rating,How likely are you to recommend interviewing this candidate?,,0,100,Extremely unlikely,Extremely likely
+syed_2026_resume_coursework,rating_long_ramp_up,rating,This candidate would require a long ramp-up period to be effective.,,0,7,Strongly disagree,Strongly agree
+syed_2026_resume_coursework,rating_technical_competence,rating,This candidate has sufficient technical competence for this role.,,0,7,Strongly disagree,Strongly agree
 takei_2024_public_threats,choice,choice,"If you had to choose between them, which of the two countries is more likely to stand firm? (paraphrase)",no,,,,
 takei_2024_public_threats,rating,rating,"Given the information available, what is your best estimate about whether Country A will stand firm in this dispute, ranging form 0 percent to 100 percent?",,0,100,0 percent,100 percent
 takei_2026_audience_costs,rating_general_s1,rating,"general approval, stage 1; wording not in deposit (authors' do-file label: general approval, 7-point composite of approve/disapprove/neither plus intensity)",,1,7,disapprove very strongly,approve very strongly
@@ -2097,6 +2163,7 @@ takei_2026_audience_costs,rating_threat_credibility,rating,"threat credibility, 
 tavarez_2024_water_puerto_rico,choice,choice,Choose one of three water-service packages or none (paraphrase; wording not available),yes,,,,
 tellez_2021_peace_packages,choice,choice,Which peace agreement do you prefer? (paraphrase; prof_chosen = Acuerdo de Paz A / B),no,,,,
 theodoridis_2023_discrimination,choice,choice,"Which of the two people, Person A or Person B, would you choose [as a relative / neighbor / to lend money to / to give to charity / as a juror, depending on trial_context]? (paraphrase)",no,,,,
+thomann_2026_intersectional_bureaucrats,choice,choice,For which individual will you write a detailed personalized answer?,no,,,,
 thontwa_2024_food_cassava,choice,choice,Which of the two cassava products would you buy? (paraphrase),no,,,,
 thontwa_2024_food_maize,choice,choice,Which of the two maize products would you buy? (paraphrase),no,,,,
 thontwa_2024_food_oil,choice,choice,Which of the two cooking oil products would you buy? (paraphrase),no,,,,
@@ -2170,6 +2237,8 @@ turnbulldugarte_2023_ivoting,rating_support,rating,unknown,,0,6,unknown,unknown
 turnbulldugarte_2023_ivoting,rating_trust,rating,unknown,,0,6,unknown,unknown
 turnbulldugarte_2025_dating_spain,choice,choice,Whether the respondent selected the profile (response code 1 = not selected; 2 or 4 = selected; question text not documented in the deposit),yes,,,,
 turnbulldugarte_2025_dating_uk,choice,choice,Whether the respondent selected the profile (response code 1 = not selected; 2 or 4 = selected; question text not documented in the deposit),yes,,,,
+tuxhorn_2026_tax_equity,choice,choice,Which tax policy do you think is more fair?,no,,,,
+tuxhorn_2026_tax_equity,choice_preferred,choice,Would you prefer Canada to adopt Tax Policy 1 or Tax Policy 2?,no,,,,
 tyllianakis_2025_agri_schemes_uk,choice,choice,"Scenario x/6: Please choose your preferred scheme. Click here to reopen the summary of the scheme characteristics. If you do not have permanent grassland, please do not consider the option ""Maintaining permanent grassland"".",yes,,,,
 tyllianakis_2025_agri_schemes_uk,rating_land_share,rating,I would apply the chosen scheme on ________ % of my arable land. / I would apply the chosen scheme on ________ % of my permanent grassland. (asked of the chosen scheme only; grassland wording after Maintaining permanent grassland),,0,100,0 %,100 %
 tzouras_2025_mode_safety,choice,choice,"Your daily route consists of urban roads with traffic conditions like above. Which transport mode would you select, if you were aware of the travel time and cost?",no,,,,
@@ -2240,6 +2309,7 @@ vilaca_2024_corruption_crusaders,rating_unemployment,rating,Quão efetivo você 
 villamizar_2024_afro_districts,choice,choice,Select your preferred district for voting (paraphrase),no,,,,
 visconti_2021_chile_candidates,choice,choice,Who would you select for president? (translated),yes,,,,
 visconti_2022_flood_candidates,choice,choice,"if you have to vote for one of these two candidates, whom do you prefer for mayor? (translated)",unknown,,,,
+vonhaefen_2023_stream_quality,choice,choice,Vote for or against the proposed action plan in a county-level referendum (paraphrase),yes,,,,
 vossler_2025_farmworker_projects,choice,choice,Which option do you vote for?,yes,,,,
 vuk_2026_participation_legitimacy,rating_acceptance,rating,unknown (acceptance_score; wording not in the deposit),,1,10,unknown,unknown
 vuk_2026_participation_legitimacy,rating_fairness,rating,unknown (fairness_score; wording not in the deposit),,1,10,unknown,unknown
@@ -2249,6 +2319,7 @@ wagner_2025_provider_choice,choice,choice,Choose one of the two providers (parap
 wakefield_2025_latino_appeals,choice,choice,Which of the two candidates the respondent would vote for (paraphrase),no,,,,
 wang_2026_green_space_heat,choice,choice,Choice among two urban-green-space visit options and a 'no UGS visit' option (cancel the planned visit and reschedule it for another day) (paraphrase),yes,,,,
 ward_2025_korean_candidates,choice,choice,Which of these two candidates do you support the most? (paraphrase),no,,,,
+was_2022_dairy_contracts_pl,choice,choice,unknown,yes,,,,
 weaver_2021_peru_mayors,choice,choice,Which of the two mayoral candidates the respondent would vote for (paraphrase),no,,,,
 wehr_2026_housing_densification,choice,choice,Which of the two proposals would you prefer? Please consider the following two proposals.,no,,,,
 wehr_2026_housing_densification,rating_accept,rating,Would you accept or reject this proposal? (paraphrase),,0,1,No,Yes
@@ -2271,6 +2342,7 @@ wicki_2019_passenger_transport,rating,rating,unknown,,1,7,strongly opposed,stron
 wicki_2020_vehicle_emissions,choice,choice,If you had to decide: Which of the two proposals would you choose? (translated),no,,,,
 wicki_2020_vehicle_emissions,rating,rating,How much do you agree or disagree with proposal 1/2? (translated),,1,7,unknown,unknown
 wiesenthal_2026_energy_sharing,choice,choice,"Bitte wählen Sie, ob Sie das Angebot der Bürgerenergiegemeinschaft (BEG) gegenüber Ihrem derzeitigen Stromanbieter bevorzugen würden und sich bei einem entsprechenden Angebot tatsächlich einen Wechsel vorstellen könnten.",yes,,,,
+williams_2026_legislature_prefs,choice,choice,unknown,no,,,,
 williamson_2023_preacher_authority,choice,choice,Who would you personally trust more as an authority on religious matters?,no,,,,
 williamson_2023_preacher_authority,choice_listen,choice,"If you could only listen to a sermon by one of these preachers, which one would you choose to listen to?",no,,,,
 williamson_2023_preacher_authority,rating,rating,How much would you personally trust each of the preachers above as an authority on religious matters?,,0,4,Not trust at all,Completely trust

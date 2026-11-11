@@ -64,6 +64,7 @@ algner2022_oss,"Occupational Self-Efficacy Scale - Short Form (OSS-SF; Rigotti, 
 ali_2021_gad7,"GAD-7 (Generalized Anxiety Disorder 7-item scale; Spitzer et al., 2006)",6.42857142857143,37.8571428571429,15.25,NA,unknown,unestablished
 ali_2021_phq9,"Patient Health Questionnaire-9 (PHQ-9; Kroenke, Spitzer & Williams, 2001)",12,69.2222222222222,15.25,7.81888888888889,English,standard_omission
 ali_2021_spfi,"Stanford Professional Fulfillment Index (SPFI; Trockel et al., 2018)",6.6875,40.25,10.65,NA,unknown,unestablished
+aljabry_2026_msg_ffq,Food frequency questionnaire for MSG-rich processed foods (study-authored; Al Jabry et al. 2026),1,2,16.8,-3.4,English; Arabic,table
 alkouri_2025_coping,"Coping Behavior Inventory (CBI) (Sheu et al., 2002)",7.73684210526316,45.6315789473684,7.2,NA,unknown,unestablished
 alkouri_2025_icu_stressors,"Perceived Stress Scale (PSS) -- ICU/clinical placement stressor subscale (Sheu et al., 1997)",9.3448275862069,61.9655172413793,7.2,NA,unknown,unestablished
 allen_2025_delaydiscount,"Monetary Choice Questionnaire (MCQ; Kirby, Petry & Bickel, 1999), 27-item version",11,51.2222222222222,11.6111111111111,NA,unknown,unestablished
@@ -1206,6 +1207,7 @@ kumlander_2018_scs,Self-Compassion Scale (SCS),14.6923076923077,79.1923076923077
 kushnir2017_anrt,"Attitudes toward Nicotine Replacement Therapy (ANRT), 12 items",10.6666666666667,61.1666666666667,16,5.42,English,standard_omission
 kushnir2017_ftnd,Fagerström Test for Nicotine Dependence (FTND),13.625,70,9.1875,3.84,English,standard_omission
 laksmita_2020_mspss,"Multidimensional Scale of Perceived Social Support (MSPSS), Indonesian version",1,2,15.1428571428571,-3.4,Indonesian,table
+lam_2015_gses,"General Self-Efficacy Scale (GSE), Schwarzer & Jerusalem (1995); administered in its Chinese version (CGSES), English original shown",1,2,13.25,-3.4,Chinese,table
 latifi_2026_insect_fear,Insect Fear Questionnaire for School-Aged Children,1,2,9.075,-3.4,Persian,table
 le_2024_digicas_hps,"Digital Competence Assessment Scale for Health Professions Students (DigiCAS-HPS), 37 items",1,2,10.2,-3.4,unknown,unestablished
 lec5_xiong_2025,Life Events Checklist for DSM-5 (LEC-5),8.82352941176471,60.2352941176471,2,NA,Chinese,table
@@ -1491,6 +1493,7 @@ mhscdc_fried_2020_se,General Self-Efficacy Scale (Schwarzer & Jerusalem 1995),12
 mhscdc_fried_2020_smartphone,"Smartphone Addiction Scale - Short Version (Kwon, Kim, Cho & Yang 2013)",12.0975609756098,69.0365853658537,12.890243902439,8.18,English,standard_omission
 mhscdc_fried_2020_tired,EMA Tiredness Scale,6.5,34.2,17,NA,unknown,unestablished
 miedema_2023_ecs40,"Economic Coercion Scale (ECS) item pool, 40 lifetime-experience items (basis of the ECS-36 and ECS-20)",17.25,94.525,3.5,NA,Bengali,table
+mifsud_2023_worldviews,Worldview vignettes (Mifsud & Sammut 2023),43.8,238.2,5.2,7.00809523809524,English,standard_omission
 milson_2026_self_esteem,Rosenberg Self-Esteem Scale (RSES),10.2,46.4,11,3.7025,English,standard_omission
 mindfulness_assessment,Kentucky Inventory of Mindfulness Skills (KIMS),13.7948717948718,74.5384615384615,17,6.72615384615385,English,standard_omission
 mironshatz_2015_happiness_beliefs,"General attitudes and values: beliefs about happiness and pleasure (Columbus, Ohio Day Reconstruction Method survey)",13.7142857142857,68.2857142857143,2,5.19666666666667,English,standard_omission

@@ -1,25 +1,25 @@
 {
-  "generated": "2026-11-10T15:13:28+0000",
+  "generated": "2026-11-11T13:28:14+0000",
   "source": "metadata/11_status.R -- local pipeline CSVs, no Redivis calls",
-  "n_tables": 7740,
+  "n_tables": 7936,
   "coverage": {
     "tags": {
-      "n": 7663,
+      "n": 7859,
       "pct": 99
     },
     "tags_by_column": {
       "age range": {
         "class": "derived",
-        "n": 5819,
-        "pct": 75.2
+        "n": 6015,
+        "pct": 75.8
       },
       "child age (for child-focused studies)": {
         "class": "derived",
-        "n": 896,
-        "pct": 66.5,
-        "denominator": 1348,
+        "n": 904,
+        "pct": 66.3,
+        "denominator": 1364,
         "of": "tables whose `age range` is Child (<18y) or Mixed",
-        "pct_of_all_tables": 11.6
+        "pct_of_all_tables": 11.4
       },
       "sample": {
         "class": "definitional",
@@ -32,8 +32,8 @@
           "registry": "tags/decisions/value_definitions.csv"
         },
         "coverage_footnote": {
-          "n": 7040,
-          "pct": 91
+          "n": 7236,
+          "pct": 91.2
         }
       },
       "construct type": {
@@ -47,13 +47,13 @@
           "registry": "tags/decisions/value_definitions.csv"
         },
         "coverage_footnote": {
-          "n": 5281,
-          "pct": 68.2
+          "n": 5477,
+          "pct": 69
         }
       },
       "measurement tool": {
         "class": "tagger",
-        "n": 7624,
+        "n": 7820,
         "pct": 98.5,
         "accuracy": {
           "exact_pct": 86.8,
@@ -65,7 +65,7 @@
       },
       "item format": {
         "class": "tagger",
-        "n": 7505,
+        "n": 7701,
         "pct": 97,
         "accuracy": {
           "exact_pct": 90.9,
@@ -77,8 +77,8 @@
       },
       "primary language(s)": {
         "class": "tagger",
-        "n": 7023,
-        "pct": 90.7,
+        "n": 7218,
+        "pct": 91,
         "accuracy": {
           "exact_pct": 90.9,
           "precision_pct": 100,
@@ -91,8 +91,8 @@
       },
       "construct name": {
         "class": "description",
-        "n": 5482,
-        "pct": 70.8,
+        "n": 5678,
+        "pct": 71.5,
         "note": "free text, not a controlled vocabulary -- a fill rate, not a coverage target (#1837)"
       }
     },
@@ -115,8 +115,8 @@
       }
     },
     "itemtext": {
-      "n": 2638,
-      "pct": 34.1
+      "n": 2641,
+      "pct": 33.3
     }
   },
   "tags_by_shard": {
@@ -161,8 +161,8 @@
       "pct": 99.8
     },
     "item_response_warehouse_9": {
-      "n_tables": 174,
-      "tagged": 174,
+      "n_tables": 370,
+      "tagged": 370,
       "pct": 100
     }
   },

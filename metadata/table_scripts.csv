@@ -111,6 +111,8 @@ aldhi_2025_acad_procrastination,data/aldhi_2025_procrastination.py
 aldhi_2025_disorganization,data/aldhi_2025_procrastination.py
 aldhi_2025_fear_of_failure,data/aldhi_2025_procrastination.py
 aleksovska_2021_accountability_priority,data/conjoint/aleksovska_2021.R
+algara_2026_median_ces_general,data/conjoint/algara_2026.R
+algara_2026_median_lucid_primary,data/conjoint/algara_2026.R
 algner2022_cse,data/algner2022_mimi.py
 algner2022_mimi16,data/algner2022_mimi.py
 algner2022_mimi_pool,data/algner2022_mimi.py
@@ -154,6 +156,8 @@ ALSECYPIAMH_WU_2022_PIL,data/ALSECYPIAMH_WU_2022.r
 ALSECYPIAMH_WU_2022_SDQ,data/ALSECYPIAMH_WU_2022.r
 ALSECYPIAMH_WU_2022_SWEMWBS,data/ALSECYPIAMH_WU_2022.r
 ALSECYPIAMH_WU_2022_SWLS,data/ALSECYPIAMH_WU_2022.r
+alshawaf_2026_bfi2s,data/alshawaf_2026_tmd_personality.py
+alshawaf_2026_fonseca,data/alshawaf_2026_tmd_personality.py
 alsuhibani_2022_consp_s1,data/alsuhibani_2022_conspiracy_paranoia.py
 alsuhibani_2022_ecrs_s3,data/alsuhibani_2022_conspiracy_paranoia.py
 alsuhibani_2022_gcbs,data/alsuhibani_2022_conspiracy_paranoia.py
@@ -286,6 +290,7 @@ aspell_2019_sataq,data/aspell_2019_maia.py
 aspide_2025_debt_austerity,data/conjoint/aspide_2025.R
 assanangkornchai_2022_cannabis_benefits,data/assanangkornchai_2022_cannabis.py
 assanangkornchai_2022_cannabis_harms,data/assanangkornchai_2022_cannabis.py
+atal_2024_eq5d5l,data/atal_2024_eq5d5l_covid.py
 atik_2025_ai_life_satisfaction,data/atik_2025_life_satisfaction.py
 atik_2025_gwb,data/atik_2025_life_satisfaction.py
 atik_2025_swls,data/atik_2025_life_satisfaction.py
@@ -305,6 +310,8 @@ aziz_2020_bmq,data/aziz_2020_hypertension.py
 babaei_2023_child_hygiene_behavior,data/babaei_2023_oral_health.py
 babaei_2023_mother_hygiene_behavior,data/babaei_2023_oral_health.py
 babaei_2023_oral_kap,data/babaei_2023_oral_health.py
+bacchini_2015_bullying,data/bacchini_2015_bullying_obesity.py
+bacchini_2015_victimization,data/bacchini_2015_bullying_obesity.py
 bacon_2025_cfni45,data/bacon_2025_self_silencing.py
 bacon_2025_phq9,data/bacon_2025_self_silencing.py
 bacon_2025_stss,data/bacon_2025_self_silencing.py
@@ -472,6 +479,7 @@ bitew_2020_lte,data/bitew_2020_ethiopia_battery.py
 bitew_2020_osss3,data/bitew_2020_ethiopia_battery.py
 bitew_2020_phq9,data/bitew_2020_ethiopia_battery.py
 bitew_2020_self_efficacy,data/bitew_2020_ethiopia_battery.py
+blachly_2023_dam_removal,data/conjoint/blachly_2023.R
 blackman_2021_tunisia_household,data/conjoint/blackman_2021.R
 blackman_2021_tunisia_online,data/conjoint/blackman_2021.R
 blackman_2025_aid_tunisia,data/conjoint/blackman_2025.R
@@ -529,6 +537,8 @@ borges_brazil_residency_2024_pbt,data/borges_brazil_residency_2024.R|data/nomina
 borges_brazil_residency_2024_pbt_nom,data/nominal/borges_brazil.R
 borry_2018_rule_following,data/conjoint/borry_2018.R
 bostouwen_2017_selfmanagement,data/conjoint/bostouwen_2017.R
+botella_guijarro_2022_gambling_intent,data/botella_guijarro_2022_gambling.py
+botella_guijarro_2022_peer_norms,data/botella_guijarro_2022_gambling.py
 bottesi_2019_bai,data/bottesi_2019_ius_r.py
 bottesi_2019_bdi2,data/bottesi_2019_ius_r.py
 bottesi_2019_caq35,data/bottesi_2019_ius_r.py
@@ -576,6 +586,7 @@ brouwer_2026_meat_justification,data/brouwer_2026_vegn_judgment.py
 brouwer_2026_reading_emotions,data/brouwer_2026_vegn_judgment.py
 brouwer_2026_state_self_regard,data/brouwer_2026_vegn_judgment.py
 bruckmann_2020_ev_policy,data/conjoint/bruckmann_2020.R
+bruckmann_2025_solar_abstention,data/conjoint/bruckmann_2025.R
 brueckmann_2023_charging_stations,data/conjoint/brueckmann_2023.R
 brugge_2024_circular_products,data/conjoint/brugge_2024.R
 budianto_2026_actual_use,data/budianto_2026_ai_acceptance.py
@@ -629,6 +640,8 @@ caldwell_2026_seq_dod,data/caldwell_2026_film_tv_burnout.py
 caldwell_2026_sf12,data/caldwell_2026_film_tv_burnout.py
 caldwell_2026_stig9,data/caldwell_2026_film_tv_burnout.py
 calvo_2026_milei_framing,data/conjoint/calvo_2026.R
+camacho_2025_mil_students,data/camacho_2025_mil.py
+camacho_2025_mil_teachers,data/camacho_2025_mil.py
 camir_security_2026_22766055,data/autoestima_corporal_2026_22766055.py
 cammett_2024_clientelism_lebanon,data/conjoint/cammett_2024.R
 campbell_2019_dissent_frequency,data/conjoint/campbell_2019_dissent.R
@@ -759,6 +772,10 @@ chen_2021_enculturation,data/chen_2021_bidimensional_acculturation.py
 chen_2022_cesd,data/mental_health_covid19/src/src/src/src/process_chen_2022_mental_health.R
 chen_2022_gad,data/mental_health_covid19/src/src/src/src/process_chen_2022_mental_health.R
 chen_2022_sasc,data/mental_health_covid19/src/src/src/src/process_chen_2022_mental_health.R
+chen_2023_trade_democracy_elites,data/conjoint/chen_2023.R
+chen_2023_trade_democracy_lucid,data/conjoint/chen_2023.R
+chen_2023_trade_democracy_mturk,data/conjoint/chen_2023.R
+chen_2023_trade_democracy_study2,data/conjoint/chen_2023.R
 chen_2024_ae,data/chen_2024_fitness_coach_creativity.py
 chen_2024_aeq,data/chen_2024_childhood_trauma_psychache.py
 chen_2024_bisbas,data/chen_2024_childhood_trauma_psychache.py
@@ -918,6 +935,7 @@ clarke_2021_birth_weight,data/conjoint/clarke_2021.R
 clarke_2022_plagiarism_attitude,data/clarke_2022_plagiarism.py
 clarke_2022_plagiarism_knowledge,data/clarke_2022_plagiarism.py
 clarke_2022_plagiarism_recognition,data/clarke_2022_plagiarism.py
+clary_2021_pakistan_candidates,data/conjoint/clary_2021.R
 claudy_2022_hiring_criteria_importance,data/claudy_2022_algorithmic_preferences.py
 claudy_2022_procedure_judgments,data/claudy_2022_algorithmic_preferences.py
 clayton_2021_france_immigrants,data/conjoint/clayton_2021.R
@@ -1091,6 +1109,7 @@ de_vries_2022_eudaimonic_wellb,data/de_vries_2022_hexaco.py
 de_vries_2022_hexaco_meta,data/de_vries_2022_hexaco.py
 de_vries_2022_hexaco_other,data/de_vries_2022_hexaco.py
 de_vries_2022_hexaco_self,data/de_vries_2022_hexaco.py
+dean_2026_participatory_processes,data/conjoint/dean_2026.R
 debacker_2018_decisionjustification,data/debacker_2018_coaching_justice.py
 debacker_2018_justice_appraisal,data/debacker_2018_coaching_justice.py
 debele_2026_opendata_portal,data/conjoint/debele_2026.R
@@ -1158,6 +1177,8 @@ den_kay_2025,data/kay_2025.R
 denning_2020_hads,data/denning_2020_hcw_covid.py
 denning_2020_olbi,data/denning_2020_hcw_covid.py
 denning_2020_saq,data/denning_2020_hcw_covid.py
+dennis_2019_chirp,data/dennis_2019_interprofessional.py
+dennis_2019_ipas,data/dennis_2019_interprofessional.py
 denny_2022_police_cooperation,data/conjoint/denny_2022.R
 depue_2021_brs,data/depue_2023_covid_older_adults.py
 depue_2021_lsns6,data/depue_2023_covid_older_adults.py
@@ -1413,6 +1434,8 @@ enders_2022_science_literacy,data/enders_2022_conspiracy_vaccine.py
 enders_2022_vaccine_hesitancy,data/enders_2022_conspiracy_vaccine.py
 enders_2022_victimhood,data/enders_2022_conspiracy_vaccine.py
 endo_2025_candidate_ambition,data/conjoint/endo_2025.R
+endo_2026_presiding_elites,data/conjoint/endo_2026.R
+endo_2026_presiding_voters,data/conjoint/endo_2026.R
 enkavi_2019_ant_flanker,data/enkavi_2019_conflict_tasks.py
 enkavi_2019_dpx_axcpt,data/enkavi_2019_conflict_tasks.py
 enkavi_2019_gonogo,data/enkavi_2019_conflict_tasks.py
@@ -1433,6 +1456,7 @@ erlich_2023_ukraine_candidates,data/conjoint/erlich_2023.R
 erlich_2025_bribery_clinic,data/conjoint/erlich_2025.R
 erlich_2025_bribery_license,data/conjoint/erlich_2025.R
 erlich_2025_corruption_harms,data/conjoint/erlich_2025_corruption.R
+esaiasson_2023_good_loser_no,data/conjoint/esaiasson_2023.R
 escribafolch_2021_democracy_promotion,data/conjoint/escribafolch_2021.R
 eshima_2022_age_candidates,data/conjoint/eshima_2022.R
 esiason_2024_aaqii,data/esiason_2024_nmosd.py
@@ -1557,6 +1581,8 @@ FIVPEI_Perrig_2023_AttDiff,data/FIVPEI_Perrig_2023.R
 FIVPEI_Perrig_2023_IMI,data/FIVPEI_Perrig_2023.R
 FIVPEI_Perrig_2023_PENS,data/FIVPEI_Perrig_2023.R
 FIVPEI_Perrig_2023_PXI,data/FIVPEI_Perrig_2023.R
+flegr_2021_pss,data/flegr_2021_stai_pss.py
+flegr_2021_stai_trait,data/flegr_2021_stai_pss.py
 floresmacias_2022_militarization,data/conjoint/floresmacias_2022.R
 florida_twins_auth,data/florida_twins.R
 florida_twins_behavior_cads,data/florida_twins_behavior.R
@@ -1638,6 +1664,8 @@ friedman_2018_risks_discrimination,data/friedman_2018_risks.do
 friedman_2018_risks_government,data/friedman_2018_risks.do
 frikha_2023_pe_acrs,data/frikha_2023_motivation.py
 frikha_2023_pe_ms,data/frikha_2023_motivation.py
+frochte_2024_selaq_ideal,data/frochte_2024_selaq.py
+frochte_2024_selaq_predicted,data/frochte_2024_selaq.py
 fu_2026_victory_abstract,data/conjoint/fu_2026.R
 fu_2026_victory_concrete,data/conjoint/fu_2026.R
 fukuda_2021_health_literacy,data/fukuda_2021_healthliteracy.py
@@ -1713,12 +1741,17 @@ gao_2024_gad7,data/gao_2024_athlete_burnout.py
 gao_2024_phq9,data/gao_2024_athlete_burnout.py
 gapinski_2021_river_large_wood,data/conjoint/gapinski_2021.R
 garbe_2025_digital_id,data/conjoint/garbe_2025.R
+garciabacete_2023_qti_ep,data/garciabacete_2023_teacher_relationship.py
+garciabacete_2023_tsr_cr,data/garciabacete_2023_teacher_relationship.py
 garciabatista_2021_erq,data/garciabatista_2021_erq_covid_healthworkers.py
 garciaramirez_2025_crossing_compliant,data/conjoint/garciaramirez_2025.R
 garciaramirez_2025_crossing_noncompliant,data/conjoint/garciaramirez_2025.R
 garciaramirez_2026_parking_loja,data/conjoint/garciaramirez_2026_loja.R
 garciaramirez_2026_parking_national,data/conjoint/garciaramirez_2026_national.R
 gatto_2025_candidate_selection,data/conjoint/gatto_2025.R
+gavinchocano_2026_tmms_attention,data/gavinchocano_2026_tmms24.py
+gavinchocano_2026_tmms_clarity,data/gavinchocano_2026_tmms24.py
+gavinchocano_2026_tmms_repair,data/gavinchocano_2026_tmms24.py
 gazmararian_2024_transition_fair,data/conjoint/gazmararian_2024.R
 gazmararian_2024_transition_national,data/conjoint/gazmararian_2024.R
 gcb5_2025,data/kay_2025.R
@@ -1757,6 +1790,9 @@ gerou_2023_hexaco_honesty_humility,data/gerou_2023_humility_quiet_ego.py
 gerou_2023_quiet_ego,data/gerou_2023_humility_quiet_ego.py
 gest_2025_climate_migration,data/conjoint/gest_2025.R
 getmansky_2024_refugees,data/conjoint/getmansky_2024.R
+gezgin_2026_bsmas,data/gezgin_2026_fomo_maas_bsmas.py
+gezgin_2026_fomo,data/gezgin_2026_fomo_maas_bsmas.py
+gezgin_2026_maas,data/gezgin_2026_fomo_maas_bsmas.py
 ghanbari_2016_helma_access,data/ghanbari_2016_helma.py
 ghanbari_2016_helma_appraise,data/ghanbari_2016_helma.py
 ghanbari_2016_helma_comm,data/ghanbari_2016_helma.py
@@ -1764,6 +1800,7 @@ ghanbari_2016_helma_numeracy,data/ghanbari_2016_helma.py
 ghanbari_2016_helma_reading,data/ghanbari_2016_helma.py
 ghanbari_2016_helma_understand,data/ghanbari_2016_helma.py
 ghanbari_2016_helma_use,data/ghanbari_2016_helma.py
+gherghina_2024_clientelism_romania,data/conjoint/gherghina_2024.R
 ghosh_2020_cas,data/ghosh_2020_covid_hcw.py
 ghosh_2020_jaws,data/ghosh_2020_covid_hcw.py
 ghosh_2020_ocs,data/ghosh_2020_covid_hcw.py
@@ -1939,6 +1976,7 @@ gothreau_2026_women_candidates,data/conjoint/gothreau_2026.R
 graham_2020_undemocratic_candidates,data/conjoint/graham_2020.R
 grahn_2025_tariffs_de,data/conjoint/grahn_2025.R
 grahn_2025_tariffs_uk,data/conjoint/grahn_2025.R
+grandahl_2017_hpv_attitudes,data/grandahl_2017_hpv_nurses.py
 granwald_2025_ami,data/granwald_2025_apathy_anhedonia.py
 granwald_2025_bis_bas,data/granwald_2025_apathy_anhedonia.py
 granwald_2025_cesd,data/granwald_2025_apathy_anhedonia.py
@@ -1948,6 +1986,12 @@ granwald_2025_zung_sds,data/granwald_2025_apathy_anhedonia.py
 graphmapping_study1,data/graphmapping.R
 graves_2021_brief_cope,data/graves_2021_stress_coping.py
 graves_2021_pss10,data/graves_2021_stress_coping.py
+gray_2026_bes,data/gray_2026_empathy_bpns.py
+gray_2026_bpns,data/gray_2026_empathy_bpns.py
+gray_2026_efq,data/gray_2026_empathy_bpns.py
+gray_2026_iri,data/gray_2026_empathy_bpns.py
+gray_2026_pwb,data/gray_2026_empathy_bpns.py
+gray_2026_see,data/gray_2026_empathy_bpns.py
 griffin_2020_candidate_income,data/conjoint/griffin_2020.R
 grimmer_2017_credit_claiming,data/conjoint/grimmer_2017.R
 gross_2026_cordon_dilemma,data/conjoint/gross_2026.R
@@ -2048,6 +2092,8 @@ harlianto_2025_burnout,data/harlianto_2025_cyberloafing.py
 harlianto_2025_job_stress,data/harlianto_2025_cyberloafing.py
 harris_2023_neighbor_cooperation,data/conjoint/harris_2023.R
 harsgor_2023_covid_aid_palestinians,data/conjoint/harsgor_2023.R
+hart_2021_covid_concern,data/hart_2021_trump_pandemic.py
+hart_2021_trump_support,data/hart_2021_trump_pandemic.py
 hartman_2020_refugee_hosting,data/conjoint/hartman_2020.R
 hartmann_2023_covid_restrictions,data/conjoint/hartmann_2023.R
 hartmann_2026_ai_env_awareness,data/hartmann_2026_ai_climate.py
@@ -2093,6 +2139,7 @@ hellstrom_2019_isi,data/hellstrom_2019_sleep_battery.py
 hellstrom_2019_psqi,data/hellstrom_2019_sleep_battery.py
 hellstrom_2019_pss14,data/hellstrom_2019_sleep_battery.py
 hellstrom_2019_sci,data/hellstrom_2019_sleep_battery.py
+hemesath_2024_av_regulation,data/conjoint/hemesath_2024_av.R
 hemesath_2024_chatbot_citizens,data/conjoint/hemesath_2024.R
 hemesath_2024_chatbot_officers,data/conjoint/hemesath_2024.R
 henderson_2014_party_guess,data/conjoint/henderson_2014.R
@@ -2157,6 +2204,7 @@ holland_2024_migrants_ven,data/conjoint/holland_2024.R
 holliday_2026_policy_municipal,data/conjoint/holliday_2026.R
 holliday_2026_policy_state_2021,data/conjoint/holliday_2026.R
 holliday_2026_policy_state_2022,data/conjoint/holliday_2026.R
+holtmaat_2026_climate_adaptation,data/conjoint/holtmaat_2026.R
 hoorani_2022_child_help,data/hoorani_2022_young_lives_battery.py
 hoorani_2022_epreas,data/hoorani_2022_young_lives_battery.py
 hoorani_2022_nps,data/hoorani_2022_young_lives_battery.py
@@ -2536,6 +2584,10 @@ karahan_kaplan_2024_mindfulness,data/karahan_kaplan_2024_work_engagement.py
 karahan_kaplan_2024_uwes9,data/karahan_kaplan_2024_work_engagement.py
 karas_2022_cetscale_en,data/karas_2022_cetscale.py
 karas_2022_cetscale_pl,data/karas_2022_cetscale.py
+karawekpanyawong_2021_chalder,data/karawekpanyawong_2021_cervical_cancer.py
+karawekpanyawong_2021_phq9,data/karawekpanyawong_2021_cervical_cancer.py
+karawekpanyawong_2021_qlq_c30,data/karawekpanyawong_2021_cervical_cancer.py
+karawekpanyawong_2021_qlq_cx24,data/karawekpanyawong_2021_cervical_cancer.py
 Karim2022_tmoca_mci,data/Karim2022_tmoca.py
 Karim2022_tmoca_subscales_longitudinal,data/Karim2022_tmoca.py
 Karim2022_tmoca_subscales_single,data/Karim2022_tmoca.py
@@ -2636,11 +2688,16 @@ khatun_2026_paus,data/khatun_2026_smartphone_addiction.py
 khatun_2026_sas,data/khatun_2026_smartphone_addiction.py
 kilic_2024_mental_toughness,data/kilic_2024_taekwondo.py
 kilic_2024_nutrition_attitude,data/kilic_2024_taekwondo.py
+kim_2017_pharmacy_skills_attitude,data/kim_2017_pharmacy_skills_exam.py
 kim_2019_trade_policy_firms,data/conjoint/kim_2019.R
 kim_2022_immigration_covid,data/conjoint/kim_2022.R
 kim_2023_gad7,data/kim_2023_pss_phq_gad.py
+kim_2023_learning_immersion,data/kim_2023_nursing_learning.py
+kim_2023_learning_selfefficacy,data/kim_2023_nursing_learning.py
+kim_2023_learning_transfer,data/kim_2023_nursing_learning.py
 kim_2023_phq9,data/kim_2023_pss_phq_gad.py
 kim_2023_pss10,data/kim_2023_pss_phq_gad.py
+kim_2024_ams_im,data/kim_2024_dreem.py
 kim_2024_carbon_tax_korea,data/conjoint/kim_2024.R
 kim_2024_class_gender_uk,data/conjoint/kim_2024_class_gender.R
 kim_2024_class_gender_us,data/conjoint/kim_2024_class_gender.R
@@ -2786,6 +2843,8 @@ lee_2024_social_support,data/lee_2024_cloninger.py
 lee_2024_swls,data/lee_2024_cloninger.py
 lee_2024_tci,data/lee_2024_cloninger.py
 lee_2025_constituent_feedback,data/conjoint/lee_2025.R
+lee_2026_loneliness,data/lee_2026_ai_conformity.py
+lee_2026_social_exclusion,data/lee_2026_ai_conformity.py
 lee_whiting_2025_ai_decision_support,data/lee_whiting_2025_gpo_ai.py
 lee_whiting_2025_ai_education,data/lee_whiting_2025_gpo_ai.py
 lee_whiting_2025_ai_government,data/lee_whiting_2025_gpo_ai.py
@@ -3044,6 +3103,7 @@ lu_2026_phq9,data/lu_2026_phq9_longitudinal.py
 lu_2026_stai,data/lu_2026_risk_emotion.py
 lublin_2023_candidate_pairs,data/conjoint/lublin_2023.R
 lublin_2023_candidate_vignette,data/conjoint/lublin_2023.R
+lucas_2025_municipal_partisanship,data/conjoint/lucas_2025.R
 lueders_2025_relocation,data/conjoint/lueders_2025.R
 luettgau_2026_political_knowledge,data/luettgau_2026_political_ai.py
 luettgau_2026_source_trust,data/luettgau_2026_political_ai.py
@@ -3087,6 +3147,12 @@ ma_2024_performance_expectancy,data/ma_2024_ecny_utaut.py
 ma_2024_privacy_risk,data/ma_2024_ecny_utaut.py
 ma_2024_security_risk,data/ma_2024_ecny_utaut.py
 ma_2024_social_influence,data/ma_2024_ecny_utaut.py
+ma_2025_absorptive_capability,data/ma_2025_healthcare_supply_chain.py
+ma_2025_decision_optimization,data/ma_2025_healthcare_supply_chain.py
+ma_2025_digital_intelligence,data/ma_2025_healthcare_supply_chain.py
+ma_2025_innovation_capability,data/ma_2025_healthcare_supply_chain.py
+ma_2025_response_capability,data/ma_2025_healthcare_supply_chain.py
+ma_2025_restorative_capability,data/ma_2025_healthcare_supply_chain.py
 machivallianism_test_main,data/machivallianism_test.R
 machivallianism_test_tipi,data/machivallianism_test.R
 machivallianism_test_vcl,data/machivallianism_test.R
@@ -3254,6 +3320,8 @@ mcdowell_2025_immigrant_partisanship,data/conjoint/mcdowell_2025.R
 mcenaney_2023_aq10,data/mcenaney_2023_alexithymia.py
 mcenaney_2023_bvaq,data/mcenaney_2023_alexithymia.py
 mcenaney_2023_wordsum,data/mcenaney_2023_alexithymia.py
+mclaughlin_2024_veteran_candidates_s1,data/conjoint/mclaughlin_2024.R
+mclaughlin_2024_veteran_candidates_s2,data/conjoint/mclaughlin_2024.R
 mclaughlin_2025_spending_projects,data/conjoint/mclaughlin_2025.R
 mclaughlin_samuel_2025_auditory_session_1,data/mclaughlin_samuel_2025_auditory_study.py
 mclaughlin_samuel_2025_auditory_session_2,data/mclaughlin_samuel_2025_auditory_study.py
@@ -3287,6 +3355,8 @@ meden_2026_podcast_depth,data/meden_2026_podcast.py
 meden_2026_podcast_learning,data/meden_2026_podcast.py
 MEFSIRODGAS_Nileksela_2023_freq,data/MEFSIRODGAS_Nileksela_2023.R
 MEFSIRODGAS_Nileksela_2023_severity,data/MEFSIRODGAS_Nileksela_2023.R
+meier_2023_school_district_income,data/conjoint/meier_2023.R
+meier_2023_school_district_race,data/conjoint/meier_2023.R
 meisels_2024_donor_candidates,data/conjoint/meisels_2024.R
 meloni_2015_child_disab_knowledge,data/meloni_2015_disability.py
 meloni_2015_child_ia_frequency,data/meloni_2015_disability.py
@@ -3474,6 +3544,7 @@ morales_2021_erq,data/morales_2021_asmr.py
 morano_2019_enjoyment,data/morano_2019_pe.py
 morano_2019_self_efficacy,data/morano_2019_pe.py
 mortenson_2025_democracy_tradeoffs,data/conjoint/mortenson_2025.R
+mortenson_2026_democracy_frames,data/conjoint/mortenson_2026.R
 motion,data/motion_discrimination.R
 mountain_chickadees_2019_2020,data/competitions/mountain_chickadees.R
 mpsycho_asti,data/MPsychoR.R
@@ -3621,6 +3692,7 @@ neurodegenerative_huizinga_2019_sims,data/neurodegenerative_huizinga_2019.R
 neurodegenerative_huizinga_2019_svc,data/neurodegenerative_huizinga_2019.R
 neurodegenerative_huizinga_2019_user,data/neurodegenerative_huizinga_2019.R
 neurodegenerative_huizinga_2019_vfq,data/neurodegenerative_huizinga_2019.R
+neurorights_2026_neurodata_dce,data/conjoint/neurorights_2026.R
 nfc_kay_2025,data/kay_2025.R
 nflverse_nfl_1999_2025,data/competitions/nflverse.R
 ng_2026_shc_attitude,data/ng_2026_secondhand_clothing.py
@@ -3646,6 +3718,7 @@ nguyen_2026_factcheck_info_self_efficacy,data/nguyen_2026_factcheck.py
 nguyen_2026_factcheck_intention,data/nguyen_2026_factcheck.py
 nguyen_2026_factcheck_systematic_proc,data/nguyen_2026_factcheck.py
 nguyen_2026_factcheck_user_heuristics,data/nguyen_2026_factcheck.py
+nguyen_2026_urine_sanitation,data/conjoint/nguyen_2026.R
 ni_2025_knowledge_transfer,data/ni_2025_sme_innovation.py
 ni_2025_open_innovation,data/ni_2025_sme_innovation.py
 ni_2025_relationship_network,data/ni_2025_sme_innovation.py
@@ -3690,6 +3763,7 @@ oanh_2021_confidence_scale,data/oanh_2021_sssc.py
 oanh_2024_ctsq,data/oanh_2024_simulation.py
 oanh_2024_gses,data/oanh_2024_simulation.py
 oanh_2024_psi,data/oanh_2024_simulation.py
+obrian_2025_doctor_choice,data/conjoint/obrian_2025.R
 ocampo_2025_latinos_american,data/conjoint/ocampo_2025.R
 odachi_2022_bfs,data/odachi_2022_nurses_covid.py
 odachi_2022_fear_covid19,data/odachi_2022_nurses_covid.py
@@ -3698,6 +3772,9 @@ offlinefriend_bigfive,data/offline_friend.R
 offlinefriend_dospert,data/offline_friend.R
 offlinefriend_ofaq,data/offline_friend.R
 ofosu_2026_malawi_women_candidates,data/conjoint/ofosu_2026.R
+ogbo_2021_mobile_plans_ng,data/conjoint/ogbo_2021.R
+ogden_2022_dass21,data/ogden_2022_lockdown_duration.py
+ogden_2022_tlx,data/ogden_2022_lockdown_duration.py
 ogrady_2026_immigration_sanctions,data/conjoint/ogrady_2026.R
 ogrady_2026_welfare_sanctions,data/conjoint/ogrady_2026.R
 ogs_go_2005_2021,data/competitions/ogs_go.py
@@ -3791,6 +3868,7 @@ pang_2023_perceived_usefulness,data/pang_2023_nev_adoption.py
 pang_2023_social_norms,data/pang_2023_nev_adoption.py
 panth_2026_bipq,data/panth_2026_cancer_resilience.py
 panth_2026_cdrisc10,data/panth_2026_cancer_resilience.py
+papenfus_2025_salmon_recovery,data/conjoint/papenfus_2025.R
 papousek_2017_anatomy_nom,data/papousek_2017_anatomy.py
 papp_2023_covid_vaccine_hungary,data/conjoint/papp_2023.R
 papp_2024_democracy_satisfaction,data/conjoint/papp_2024.R
@@ -4017,6 +4095,13 @@ premkumar_2020_bpaq,data/premkumar_2020_schizotypy.py
 premkumar_2020_dass21,data/premkumar_2020_schizotypy.py
 premkumar_2020_lee,data/premkumar_2020_schizotypy.py
 premkumar_2020_olife,data/premkumar_2020_schizotypy.py
+preschool_sel_akt,data/preschool_sel_split.py
+preschool_sel_box,data/preschool_sel_split.py
+preschool_sel_dn,data/preschool_sel_split.py
+preschool_sel_emt,data/preschool_sel_split.py
+preschool_sel_htks,data/preschool_sel_split.py
+preschool_sel_pl,data/preschool_sel_split.py
+preschool_sel_wj,data/preschool_sel_split.py
 project_kids_ctopp,data/project_kids_items.R
 project_kids_kbit,data/project_kids_items.R
 project_kids_told_grade,data/project_kids_items.R
@@ -4123,6 +4208,7 @@ qiang_2025_job_performance,data/qiang_2025_red_tape.py
 qiang_2025_ne_scale,data/qiang_2025_red_tape.py
 qiang_2025_value_suppression,data/qiang_2025_red_tape.py
 qiang_2025_workplace_friendship,data/qiang_2025_red_tape.py
+qiankai_2026_mealtime_ltc,data/conjoint/qiankai_2026.R
 qin_2025_behavioral_intention,data/qin_2025_cultural_tourism.py
 qin_2025_cultural_identity,data/qin_2025_cultural_tourism.py
 qin_2025_perceived_cultural_distance,data/qin_2025_cultural_tourism.py
@@ -4198,6 +4284,7 @@ retrosheet_mlb_1871_2025,data/competitions/retrosheet_mlb.R
 rexand_galais_2022_ipofr,data/rexand_galais_2022_ipo.py
 ribar_2026_bfi2,data/ribar_2026_disintegration.py
 ribar_2026_delta,data/ribar_2026_disintegration.py
+rigby_2026_contract_cheating,data/conjoint/rigby_2026.R
 rimisp_2021_care_work,data/rimisp_2021_valle_del_cauca.py
 rimisp_2021_household_services,data/rimisp_2021_valle_del_cauca.py
 ringhand_2024_ccam_importance,data/ringhand_2024_ccam.py
@@ -4437,6 +4524,7 @@ schalet_2016_hrsa,data/schalet_2016_paroxetine.py
 schalet_2016_hrsd,data/schalet_2016_paroxetine.py
 schick_2026_hazard_adaptation,data/conjoint/schick_2026.R
 schillemans_2025_accountability,data/conjoint/schillemans_2025.R
+schmid_2024_peacebuilding_colombia,data/conjoint/schmid_2024.R
 scholten_2025_military_action,data/conjoint/scholten_2025_foreign_policy.R
 scholten_2025_return_migrants,data/conjoint/scholten_2025.R
 schroeder_2025_vp_nominee,data/conjoint/schroeder_2025.R
@@ -4567,6 +4655,8 @@ shu_2025_translation_pcd,data/shu_2025_translation.do
 shu_2025_translation_pgv,data/shu_2025_translation.do
 shu_2025_translation_srt,data/shu_2025_translation.do
 si09_sirt,data/sirt.R
+sibanda_2026_trophy_carnivores,data/conjoint/sibanda_2026.R
+sibanda_2026_trophy_herbivores,data/conjoint/sibanda_2026.R
 sierakowska_2022_gses,data/sierakowska_2022_nurses_coping.py
 sierakowska_2022_minicope,data/sierakowska_2022_nurses_coping.py
 sierakowska_2022_pss10,data/sierakowska_2022_nurses_coping.py
@@ -4629,7 +4719,9 @@ sohn_2024_dietitian_importance,data/sohn_2024_dietitian_tasks.py
 song_2023_mpats,data/song_2023_efl_writing_anxiety.py
 song_2023_rses,data/song_2023_efl_writing_anxiety.py
 song_2023_slwai,data/song_2023_efl_writing_anxiety.py
+song_2026_chatbot_use,data/song_2026_ai_chatbot_wellbeing.py
 song_2026_fqol,data/song_2026_family_quality_of_life.py
+song_2026_gwb,data/song_2026_ai_chatbot_wellbeing.py
 song_2026_irs_achievement,data/song_2026_irs_efl_attitudes.py
 song_2026_irs_attention,data/song_2026_irs_efl_attitudes.py
 song_2026_irs_confidence,data/song_2026_irs_efl_attitudes.py
@@ -4638,6 +4730,7 @@ song_2026_irs_learning_support,data/song_2026_irs_efl_attitudes.py
 song_2026_irs_participation,data/song_2026_irs_efl_attitudes.py
 song_2026_irs_peer_interaction,data/song_2026_irs_efl_attitudes.py
 song_2026_irs_teacher_interaction,data/song_2026_irs_efl_attitudes.py
+song_2026_loneliness,data/song_2026_ai_chatbot_wellbeing.py
 song_2026_mm_aesthetic_novelty,data/song_2026_metaverse_music.py
 song_2026_mm_avatar_customization,data/song_2026_metaverse_music.py
 song_2026_mm_content_creation,data/song_2026_metaverse_music.py|data/song_2026_metaverse_music_itemtext.py
@@ -4649,8 +4742,10 @@ song_2026_mm_narrativity,data/song_2026_metaverse_music.py
 song_2026_mm_social_experience,data/song_2026_metaverse_music.py
 song_2026_mm_social_presence,data/song_2026_metaverse_music.py
 song_2026_mm_technology_acceptance,data/song_2026_metaverse_music.py
+song_2026_mspss,data/song_2026_ai_chatbot_wellbeing.py
 song_2026_parenting_self_efficacy,data/song_2026_family_quality_of_life.py
 song_2026_parenting_style,data/song_2026_family_quality_of_life.py
+song_2026_self_efficacy,data/song_2026_ai_chatbot_wellbeing.py
 sorelle_2024_student_debt,data/conjoint/sorelle_2024.R
 spain_2011_immigrant_catalan,data/spain_2011_immigrant.do
 spain_2011_immigrant_citizenship,data/spain_2011_immigrant.do
@@ -4958,6 +5053,8 @@ SPQVS_Barnby_2017_SENPQ,data/SPQVS_Barnby_2017.R
 SPQVS_Barnby_2017_SIAS,data/SPQVS_Barnby_2017.R
 SPQVS_Barnby_2017_WHO,data/SPQVS_Barnby_2017.R
 sscait_ladder_2021_2024,data/competitions/sscait_ladder.R
+stahl_2016_importance_rationality,data/stahl_2016_moralized_rationality.py
+stahl_2016_mfq30,data/stahl_2016_moralized_rationality.py
 stahl_2021_bfas,data/stahl_2021_epistemic_values.py
 stahl_2021_irs,data/stahl_2021_epistemic_values.py
 stahl_2021_mrs,data/stahl_2021_epistemic_values.py
@@ -4984,6 +5081,7 @@ strojny_2026_gdt,data/strojny_2026_gaming_motivation.py
 strojny_2026_gis,data/strojny_2026_gaming_motivation.py
 strojny_2026_gmi,data/strojny_2026_gaming_motivation.py
 strojny_2026_igds9sf,data/strojny_2026_gaming_motivation.py
+stroman_2020_ownership_reasons,data/stroman_2020_landowner_reasons.py
 su_2024_gad7,data/su_2024_xinxiang_assessments.R
 su_2024_isi,data/su_2024_xinxiang_assessments.R
 su_2024_phq9,data/su_2024_xinxiang_assessments.R
@@ -5035,9 +5133,12 @@ sun_2026_eap_usage,data/sun_2026_eap_syllabus.py
 sung_2023_chemical_compounds,data/conjoint/sung_2023.R
 suring_2025_forest_contracts,data/conjoint/suring_2025.R
 suyato_2023_democracy,data/suyato_2023_cbq.py
+suzuki_2019_sleep_problems,data/suzuki_2019_seasonal_sleep.py
+svensson_2026_forest_biodiversity,data/conjoint/svensson_2026.R
 swmd_mokken,data/mokken.R
 syafrijon_2026_digital_use,data/syafrijon_2026_student_digital_competence.py
 syafrijon_2026_sdc,data/syafrijon_2026_student_digital_competence.py
+syed_2026_resume_coursework,data/conjoint/syed_2026.R
 szabo_2025_bwas,data/szabo_2025_entrepreneur_burnout.py
 szabo_2025_family_conflict,data/szabo_2025_entrepreneur_burnout.py
 szabo_2025_molbi,data/szabo_2025_entrepreneur_burnout.py
@@ -5108,6 +5209,8 @@ tasaygar_2025_bai,data/tasaygar_2025_dermatitis.py
 tasaygar_2025_sdasi,data/tasaygar_2025_dermatitis.py
 tatala_2023_religious_experience,data/tatala_2023_loneliness.py
 tatala_2023_ucla_loneliness,data/amiot_2022_pets.py|data/tatala_2023_loneliness.py
+tavares_da_silva_2024_fcv19s,data/tavares_da_silva_2024_fcv19s_lifestyle.py
+tavares_da_silva_2024_lifestyle,data/tavares_da_silva_2024_fcv19s_lifestyle.py
 tavarez_2024_water_puerto_rico,data/conjoint/tavarez_2024.R
 tavolacci_2017_audit,data/tavolacci_2017_student_burnout.py
 tavolacci_2017_mbi_ee,data/tavolacci_2017_student_burnout.py
@@ -5157,6 +5260,7 @@ thiessen_2023_scs,data/thiessen_2023_choking.py
 thoma_2018_ctq,data/thoma_2018_socr_survey.py
 thoma_2018_phq4,data/thoma_2018_socr_survey.py
 thoma_2018_socr,data/thoma_2018_socr_survey.py
+thomann_2026_intersectional_bureaucrats,data/conjoint/thomann_2026.R
 tian_2021_app_affective_engagement,data/tian_2021_travel_app_engagement.py
 tian_2021_app_behavioral_engagement,data/tian_2021_travel_app_engagement.py
 tian_2021_app_cognitive_engagement,data/tian_2021_travel_app_engagement.py
@@ -5232,7 +5336,12 @@ tran_2026_ai_advisory_transparency,data/tran_2026_digital_wealth.py
 tran_2026_cyber_risk_self_protection,data/tran_2026_digital_wealth.py
 tran_2026_digital_financial_literacy,data/tran_2026_digital_wealth.py
 tran_2026_digital_wealth_mgmt_behavior,data/tran_2026_digital_wealth.py
+tran_2026_eq5d,data/tran_2026_ra_psychiatric.py
+tran_2026_hama,data/tran_2026_ra_psychiatric.py
 tran_2026_investment_knowledge,data/tran_2026_digital_wealth.py
+tran_2026_isi,data/tran_2026_ra_psychiatric.py
+tran_2026_madrs,data/tran_2026_ra_psychiatric.py
+tran_2026_phq9,data/tran_2026_ra_psychiatric.py
 tran_2026_trust_hybrid_ai_advisory,data/tran_2026_digital_wealth.py
 tran_2026_wealth_mgmt_capability,data/tran_2026_digital_wealth.py
 trang_2023_vocabulary_beliefs,data/trang_2023_vocabulary_learning.py
@@ -5282,6 +5391,7 @@ turpochaparro_2026_family_communication,data/turpochaparro_2026_social_network_a
 turpochaparro_2026_self_esteem,data/turpochaparro_2026_social_network_addiction.py
 turpochaparro_2026_teacher_self_efficacy,data/turpochaparro_2026_procrastination.py
 turpochaparro_2026_workload,data/turpochaparro_2026_procrastination.py
+tuxhorn_2026_tax_equity,data/conjoint/tuxhorn_2026.R
 twis_2024_adverse_experience_types,data/twis_2024_sex_trafficking_coping.py
 tyllianakis_2025_agri_schemes_uk,data/conjoint/tyllianakis_2025.R
 tzouras_2025_mode_safety,data/conjoint/tzouras_2025.R
@@ -5358,6 +5468,7 @@ vocabulary_iq_survey,data/vocabulary_iq.R
 vogel_2024_attribute_valence_s3,data/vogel_2024_implicit_citizenship.py
 vonborck_2026_kidkindl_selfesteem,data/vonborck_2026_recess.py
 vonborck_2026_ppasc,data/vonborck_2026_recess.py
+vonhaefen_2023_stream_quality,data/conjoint/vonhaefen_2023.R
 voropaeva_2026_health_media_nom,data/nominal/voropaeva_2026_health_media.R
 vossler_2025_farmworker_projects,data/conjoint/vossler_2025.R
 voterautrement_2017_borda4,data/rankings/voter_autrement.py
@@ -5429,6 +5540,7 @@ wang_onlineriskexp_2025_negativeatt,data/wang_onlineriskexp_2025.R
 waqas_2015_hads,data/waqas_2015_antenatal_pakistan.py
 waqas_2015_sps,data/waqas_2015_antenatal_pakistan.py
 ward_2025_korean_candidates,data/conjoint/ward_2025.R
+was_2022_dairy_contracts_pl,data/conjoint/was_2022.R
 wasike_2026_clickbait_detection,data/wasike_2026_clickbait.py
 wasike_2026_clickbait_engagement,data/wasike_2026_clickbait.py
 wasike_2026_crt,data/wasike_2026_clickbait.py
@@ -5470,6 +5582,7 @@ white_2022_covid_vac_items_1_6,data/white_2022_covid_vaccine_survey.py
 wicki_2019_passenger_transport,data/conjoint/wicki_2019.R
 wicki_2020_vehicle_emissions,data/conjoint/wicki_2020.R
 wiesenthal_2026_energy_sharing,data/conjoint/wiesenthal_2026.R
+williams_2026_legislature_prefs,data/conjoint/williams_2026.R
 williamson_2023_preacher_authority,data/conjoint/williamson_2023.R
 williamson_2025_aid_bilendi2024,data/conjoint/williamson_2025.R
 williamson_2025_aid_yougov2017,data/conjoint/williamson_2025.R
@@ -5622,6 +5735,9 @@ ylisalo_2025_pledges_finland,data/conjoint/ylisalo_2025.R
 ylisalo_2025_pledges_germany,data/conjoint/ylisalo_2025.R
 ylisalo_2025_pledges_germany_ptv,data/conjoint/ylisalo_2025.R
 yoh_2024_journal_choice,data/conjoint/yoh_2024.R
+yoshida_2026_rss,data/yoshida_2026_school_refusal.py
+yoshida_2026_sbi_c,data/yoshida_2026_school_refusal.py
+yoshida_2026_sras_r_ja,data/yoshida_2026_school_refusal.py
 yoshimura_2026_es_scale,data/yoshimura_2026_psych_safety.py
 yoshimura_2026_isu_scale,data/yoshimura_2026_psych_safety.py
 yu_2021_domain_satisfaction,data/yu_2021_shopping_travel.py
@@ -5829,6 +5945,8 @@ znidarsic_2021_leader_support,data/znidarsic_2021_work_family_balance.py
 znidarsic_2021_org_practices,data/znidarsic_2021_work_family_balance.py
 znidarsic_2021_uwes,data/znidarsic_2021_work_family_balance.py
 znidarsic_2021_wf_balance,data/znidarsic_2021_work_family_balance.py
+zoorob_2021_brs,data/zoorob_2021_resident_wellness.py
+zoorob_2021_wellbeing,data/zoorob_2021_resident_wellness.py
 zorowitz_2023_marsib_nom,data/nominal/zorowitz_2023_marsib.R
 zou_2020_ev_purchase,data/conjoint/zou_2020.R
 zubair_2021_altruism,data/zubair_2021_psm.py
