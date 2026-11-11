@@ -1,11 +1,11 @@
 {
-  "generated": "2026-11-11T13:28:14+0000",
+  "generated": "2026-11-11T20:38:56+0000",
   "source": "metadata/11_status.R -- local pipeline CSVs, no Redivis calls",
   "n_tables": 7936,
   "coverage": {
     "tags": {
-      "n": 7859,
-      "pct": 99
+      "n": 7880,
+      "pct": 99.3
     },
     "tags_by_column": {
       "age range": {
@@ -32,8 +32,8 @@
           "registry": "tags/decisions/value_definitions.csv"
         },
         "coverage_footnote": {
-          "n": 7236,
-          "pct": 91.2
+          "n": 7249,
+          "pct": 91.3
         }
       },
       "construct type": {
@@ -47,14 +47,14 @@
           "registry": "tags/decisions/value_definitions.csv"
         },
         "coverage_footnote": {
-          "n": 5477,
-          "pct": 69
+          "n": 5494,
+          "pct": 69.2
         }
       },
       "measurement tool": {
         "class": "tagger",
-        "n": 7820,
-        "pct": 98.5,
+        "n": 7839,
+        "pct": 98.8,
         "accuracy": {
           "exact_pct": 86.8,
           "n_answered": 38,
@@ -65,8 +65,8 @@
       },
       "item format": {
         "class": "tagger",
-        "n": 7701,
-        "pct": 97,
+        "n": 7715,
+        "pct": 97.2,
         "accuracy": {
           "exact_pct": 90.9,
           "n_answered": 22,
@@ -77,7 +77,7 @@
       },
       "primary language(s)": {
         "class": "tagger",
-        "n": 7218,
+        "n": 7220,
         "pct": 91,
         "accuracy": {
           "exact_pct": 90.9,
@@ -91,8 +91,8 @@
       },
       "construct name": {
         "class": "description",
-        "n": 5678,
-        "pct": 71.5,
+        "n": 5699,
+        "pct": 71.8,
         "note": "free text, not a controlled vocabulary -- a fill rate, not a coverage target (#1837)"
       }
     },
@@ -122,18 +122,18 @@
   "tags_by_shard": {
     "item_response_warehouse": {
       "n_tables": 980,
-      "tagged": 974,
-      "pct": 99.4
+      "tagged": 980,
+      "pct": 100
     },
     "item_response_warehouse_2": {
       "n_tables": 885,
-      "tagged": 878,
-      "pct": 99.2
+      "tagged": 885,
+      "pct": 100
     },
     "item_response_warehouse_3": {
       "n_tables": 957,
-      "tagged": 955,
-      "pct": 99.8
+      "tagged": 957,
+      "pct": 100
     },
     "item_response_warehouse_4": {
       "n_tables": 979,
@@ -147,18 +147,18 @@
     },
     "item_response_warehouse_6": {
       "n_tables": 926,
-      "tagged": 867,
-      "pct": 93.6
+      "tagged": 870,
+      "pct": 94
     },
     "item_response_warehouse_7": {
       "n_tables": 961,
-      "tagged": 960,
-      "pct": 99.9
+      "tagged": 961,
+      "pct": 100
     },
     "item_response_warehouse_8": {
       "n_tables": 916,
-      "tagged": 914,
-      "pct": 99.8
+      "tagged": 916,
+      "pct": 100
     },
     "item_response_warehouse_9": {
       "n_tables": 370,
