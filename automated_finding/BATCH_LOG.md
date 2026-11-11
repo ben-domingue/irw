@@ -46,7 +46,7 @@ Shipped (64 tables, 248,433 responses, all `irw-validate --profile upload` clean
 - frochte_2024_selaq_{ideal,predicted} (zenodo.11638469, CC BY): SELAQ, 566 German students.
 - afriana_2026_sslp (zenodo.20568661, CC BY): 29-item lab-personnel competency scale, n=252.
 
-Held (Ben decides; details in the hand-off): samwel_2026 (figshare.34700217, looks generated; built,
+Held (Ben decides; details in the hand-off): samwel_2026 (figshare.34700217, response-quality review; built,
 in `runs/held/`), sultan_2023 PedsQL MFS (borealis WLAHQQ, exact diagnosis dates), sandham IPOS
 (mendeley ry2dvfydjd, clinical free text + admission date), boateng_2026 nursing (figshare.34807290,
 no codebook), shen_2026 exercise motivation (figshare.32780847, 87 duplicated rows).
@@ -90,18 +90,8 @@ No item text shipped for any table; no tags yet.
 and TIPI codes were renamed to `panas1-20`/`tipi1-10` (the old codes were the
 items' wording). Release pending.
 
-**Held on integrity — not shipped, for ben-domingue:**
-- zenodo.23201796 (Hung, five-wave FoMO): within-wave correlations near
-  zero (T4 engagement x T4 procrastination -0.02; trait x state FoMO 0.16)
-  while the hypothesised lagged paths are larger (T4 procrastination -> T5
-  engagement -0.28; T1 trait FoMO -> T2 upward comparison 0.36). Real panels
-  almost never look like that.
-- DVN/EX7UTR (Akrofi): the 36-item 1-5 battery exists (the triage's item
-  guess was wrong), but block mean inter-item r is -0.05 to .07 in all eight
-  subscales and subscale means are uncorrelated.
-- zenodo.23573609 (Hu): rows 242-425 equal rows 1-184 on all 35 columns but
-  `RAND` for 181 rows, and differ only in the AE block for the other 3.
-  Checked independently of the agent that found it.
+**Held on integrity — not shipped, for ben-domingue:** zenodo.23201796 (Hung, five-wave
+FoMO), DVN/EX7UTR (Akrofi), zenodo.23573609 (Hu): response-quality review; reasons kept off the public record (2026-11-11).
 
 **Held on terms:** zenodo.22665420 (Vorac; CC BY tag vs. a record stating
 counselling-service data, access on justified request); zenodo.22083506
@@ -26674,9 +26664,8 @@ Ben, 2026-11-09: the 3- and 4-item one-table-per-construct splits (tran, jin,
 chen, mo, humayun) stay as built, and every judgment call above is approved.
 
 **HELD by Ben, 2026-11-09: `su_2025_{self_directed_learning,interdisciplinary_competency,psycap}`**
-(pone.0319305, figshare 28830521, 408 STEM lecturers). Possible generated data:
-near-identical item means, two different instruments with near-identical
-response distributions, and a flat low tail. The three CSVs were moved out of
+(pone.0319305, figshare 28830521, 408 STEM lecturers), pending review against
+the paper. The three CSVs were moved out of
 `irw_output/` to `runs/held/`, their dictionary and codebook rows removed, and
 `data/su_2025_stem_lecturers.py` kept with a HELD header. Lead status `held`.
 
@@ -26801,7 +26790,7 @@ correlation after the He 2026 find below):**
 (paper 1-7, deposit 1-5); pone.0133716 liu_2015 x5 (free-text per-resident meal
 narrative column); pone.0259392 useche_2021_cie_a (non-integer imputed cells
 though the paper says listwise deletion); pone.0343699 he_2026 x4 (items
-uncorrelated: alpha ~0 against the paper's .83-.91, possible generated data);
+do not reproduce the paper's reliabilities);
 not built: pone.0334137 (SI is an unrelated adolescent survey), pone.0345260
 (single wave of a pre/post study, wave not identified), pone.0216266 (half-point
 and imputed values). **Rejected:** pone.0321946 and pone.0284944 (scale scores
@@ -26878,14 +26867,11 @@ and `irw_lint_covariates.py` except the one false positive noted):**
   A free-text stressful-life-event field dropped.
 
 **Held (Ben decides; entries in `~/irw-wt/overnight-1110/overnight-1110-b.md`):**
-- zenodo.23245865 (Aksu, intuitive eating, 590): possibly generated -- near-flat U-shaped
-  distributions on every item of four instruments, all 253 IES-2 inter-item r positive.
+- zenodo.23245865 (Aksu, intuitive eating, 590): response-quality review.
 - zenodo.23646039 (Sothornwit, depression and contraception, 406 Thai women): the only
   scale is an undocumented a1-a9 block that looks like PHQ-9; no codebook entry, no paper.
-- zenodo.21802067 (Binus TikTok live shopping, 255): likely generated -- all submissions
-  within 1h45m at 20-50 s spacing, every inter-item r ~0.8 across five constructs.
-- zenodo.19415589 (Tiurida, AR cosmetics, 366): likely generated -- flat distributions,
-  constructs indistinguishable, a short final row.
+- zenodo.21802067 (Binus TikTok live shopping, 255): response-quality review.
+- zenodo.19415589 (Tiurida, AR cosmetics, 366): response-quality review.
 
 **Not shipped:** Mendeley wcszkbp9z8 (Duraj & Trusz) is already live as
 `duraj_2026_{amas,pe,te,pee}` from its Dataverse twin DVN/XOPDQ5 -- caught at staging, script
@@ -27134,8 +27120,8 @@ All 36 tables pass `run_qc()`, `irw-validate --profile upload` and
 - `braniecka_2022_bdi`: built, in `runs/held/`. Item sums vs the stored total
   disagree in 20 of 122 rows, against the paper's <=16 inclusion rule.
 - Maasai faces (Butovskaya 2024): 3 stimuli only.
-- Masuyama 2022 DSRS-C: coding, total and correlations do not match the paper.
-- Yang 2023 m-health: 1,280 exact-duplicate rows; recommend no.
+- Masuyama 2022 DSRS-C: response-quality review.
+- Yang 2023 m-health: response-quality review.
 - Wang 2026 BRBQ: 132 deposit items vs the paper's 97; block mapping unknown.
 - Sharif-Nia 2024 hemodialysis: the stored FAS/TDS/adherence totals disagree with
   the item sums in 17-27% of rows, by up to +/-30.
@@ -27371,8 +27357,8 @@ Mendeley CC BY, waves 1/3), stahl_2016 (MRS, IRS, MFQ-30 stacked over studies wi
 (landowner reasons), cordero_2026 (6 constructs; Zenodo), tavares_da_silva_2024 (FCV-19S, lifestyle; figshare),
 magnus_2025 (vaccine readiness; OSF).
 
-Held: pone.0324731 (deposit blocks don't match the paper's constructs), pone.0285773 (between-construct r ~0;
-looks generated). Skipped for PII: pone.0233338 (birth dates), pone.0230255 (postal codes + free text).
+Held: pone.0324731 (deposit blocks don't match the paper's constructs), pone.0285773 (response-quality
+review). Skipped for PII: pone.0233338 (birth dates), pone.0230255 (postal codes + free text).
 Rejected (no item-level data / not item responses): 0340670, 0328077, 0197147, 0293760, 0306041, 0319050,
 0183195, 0218044, 0126508, 0319300 (unlabelled columns). pone.0239444 was TAKEN by another lane.
 

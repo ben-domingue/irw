@@ -54,7 +54,7 @@ Full write-up in `BATCH_LOG.md` (2026-11-10 hour-1110 lane C). Hand-off: `~/irw-
   hernandezamaro_2026_fcd, gray_2026 x6, amorim_2026_ctar, song_2026 x5, liu_2024_bdi2,
   gezgin_2026 x3, gavinchocano_2026_tmms x3, ma_2025 x6, camacho_2025_mil x2, garciabacete_2023
   qti_ep + tsr_cr + friendship_features, frochte_2024_selaq x2, afriana_2026_sslp. No item text tables.
-- [ ] **Ben rules on holds**: samwel_2026 (looks generated; built in `runs/held/`), sultan_2023
+- [ ] **Ben rules on holds**: samwel_2026 (response-quality review; built in `runs/held/`), sultan_2023
   PedsQL MFS (exact diagnosis dates), sandham IPOS (clinical free text + admission date),
   boateng_2026 nursing (no codebook), shen_2026 (87 duplicated rows).
 - [ ] Item text is cheap later for gracio_michelon_2026, hernandezamaro_2026_fcd, song_2026,
@@ -67,7 +67,7 @@ Full write-up in `BATCH_LOG.md` (2026-11-10h — hour lane A); hand-off in `~/ir
 - [x] **UPLOADED 2026-11-10 by Claude (Ben authorized in-session)** to item_response_warehouse_9 draft, 69/69 row-count verified; Ben publishes. Was: 69 response tables (471,798 responses) in `~/irw-wt/hour-1110-a/automated_finding/irw_output/` need
   uploading (orchestrator), then Ben publishes. No item text this run.
 - [ ] Ben: pone.0324731 (deposit's 8 construct blocks don't match the paper's 7) -- recommend skip.
-- [ ] Ben: pone.0285773 (eWOM survey, between-construct r ~0: looks generated) -- recommend skip.
+- [ ] Ben: pone.0285773 (eWOM survey): response-quality review -- recommend skip.
 - [ ] Item text candidates not attempted: ogden_2022_dass21 (DASS-21 is public domain), zoorob_2021_brs,
   li_2022_* (bilingual stems in the .sav labels), cordero_2026_* (Dictionary sheet wording),
   stahl_2016_moralized_rationality / _importance_rationality (labels hold full stems).
@@ -83,13 +83,9 @@ Full write-up in `BATCH_LOG.md` (2026-11-10 — Overnight lane D). Hand-off: `~/
   huang_2016 x2, sierakowska_2022 x3, kilintzis_2026, balami_2019 x3, lu_2026_phq9,
   balik_2026_eq5d5l, irmer_2026 x3, mondino_2023_snore, hosgorur_2026 x4, schaap_2026 x3.
   No item text tables.
-- [ ] **Ben rules on holds**:
-  - braniecka_2022_bdi: item sums vs stored BDItotal disagree in 20 of 122 rows. Built, in `runs/held/`.
-  - butovskaya_2024 Maasai faces: 3 stimuli, so the stimulus-norming layout has 3 ids. Not built.
-  - masuyama_2022 DSRS-C: coding and total inconsistent with the paper. Not built.
-  - yang_2023 m-health: 1,280 of 2,068 rows exactly duplicated. Recommend no.
-  - wang_2026 BRBQ: 132 deposit items vs the paper's 97. Not built.
-  - sharifnia_2024 hemodialysis (Iran, 411): stored scale totals disagree with item sums in 17-27% of rows. Not built.
+- [x] **Ruled 2026-11-11 (Ben)**: ship braniecka_2022_bdi (data note on the total mismatch) and
+  wang_2026 BRBQ block C1 only -- built in auto/held-ship-1111. Rejected: butovskaya_2024 (stimulus-norming
+  rule as it stands), masuyama_2022, yang_2023, sharifnia_2024.
 - [ ] **Licence asks drafted, not sent**: Learmonth (OSF y9fjk) and Eitze (OSF xg2r5), in
   `~/irw-wt/overnight-1110-d/oneoff/email-drafts-2026-11-10/`.
 - [ ] Item text is cheap later for irmer_2026 (OSF codebook, German + English) and
@@ -105,12 +101,9 @@ decisions owed in `~/irw-wt/overnight-1110/overnight-1110-a.md`.
 - [ ] 48 response tables (487,474 responses) in `~/irw-wt/overnight-1110-a/automated_finding/irw_output/`
   + `mifsud_2023_worldviews__items` in `itemtext_output/` need uploading (orchestrator), then Ben publishes.
   Stamp `uploaded` in itemtext_provenance.csv / mapping_verification.csv after.
-- [ ] Ben: reiss_2020 action ratings x3 (paper "1-7", deposit 1-5) -- ship as 1-5?
-- [ ] Ben: pone.0133716 liu_2015 x5 -- free-text per-resident meal narrative column: droppable or whole-candidate skip?
-- [ ] Ben: pone.0259392 useche_2021_cie_a -- non-integer imputed cells, paper says listwise deletion: ship with them dropped?
-- [ ] Ben: pone.0343699 he_2026 x4 -- items uncorrelated (alpha ~0 vs .83-.91): recommend skip.
-- [ ] Ben: pone.0334137 (SI is an unrelated adolescent survey), pone.0345260 (one wave of a pre/post study),
-  pone.0216266 (half-point/imputed items) -- not built; see hand-off.
+- [x] Ruled 2026-11-11 (Ben): ship reiss_2020 x3 as 1-5, useche_2021_cie_a (non-integer cells dropped),
+  pone.0216266 (non-integer cells dropped) -- built in auto/held-ship-1111. Rejected: pone.0343699,
+  pone.0334137, pone.0345260. pone.0133716 liu_2015 skipped_pii (whole-candidate rule).
 - [ ] Next leads: `leads/plos_leads_2026-11-10a.csv` (40 rows; pone.0166332 scouted: 8 study files).
 ## Overnight lane B 2026-11-10 (cleaned leads, non-PLOS) -- 44 tables staged, 4 held
 
@@ -122,9 +115,8 @@ Full write-up in `BATCH_LOG.md` (2026-11-10 -- overnight lane B); hand-off in
   ribar_2026 x2, komalasari_2026 x3, nadif_2026 x8, rumangkit_2025_ewom_purchase,
   fezzey_2023 x4, yu_2021 x11, nakai_2020 x3, lu_2025 x5, han_2020_hads,
   brouwer_2026 x3, sevim_2026 x3. No item text tables.
-- [ ] **Ben rules on 4 holds** (possible generated data x3, undocumented scale x1):
-  zenodo.23245865 (Aksu), zenodo.21802067 (Binus), zenodo.19415589 (Tiurida),
-  zenodo.23646039 (Sothornwit). Evidence and yes/no consequences in the hand-off file.
+- [x] Ruled 2026-11-11 (Ben): zenodo.23245865 (Aksu), zenodo.21802067 (Binus), zenodo.19415589
+  (Tiurida) rejected_content; zenodo.23646039 (Sothornwit) held until a paper documents a1-a9.
 - [ ] Cheap item text left for a round: yu_2021 (SPSS labels), brouwer_2026
   (codebooks), nakai_2020 (English questionnaire), rumangkit_2025_ewom_purchase
   (Indonesian stems).
@@ -163,7 +155,7 @@ Full write-up in `BATCH_LOG.md` (2026-11-09 — PLOS monthly run).
   (`red_up` to irw_text): `aljabry_2026_msg_ffq__items.csv`,
   `lam_2015_gses__items.csv`. Then stamp `uploaded` in itemtext_provenance.csv
   and mapping_verification.csv. No issues-page entries owed.
-- [ ] **su_2025_* HELD by Ben (2026-11-09)**: possible generated data. Outputs
+- [ ] **su_2025_* HELD by Ben (2026-11-09)** pending review against the paper. Outputs
   in `runs/held/`, script kept with a HELD header, no dictionary/codebook/tag
   rows. Ships only if Ben lifts the hold.
 - [ ] **Licence asks sent 2026-11-09 (Ben)**: Brunell (pone.0194106), Cai /
@@ -387,14 +379,8 @@ processing script written this batch.
   corbelli_2026_ema_positivity, shiota_2026_* (5). Tags not yet written.
 - [ ] **Decide (ben-domingue): four deposits held on integrity or terms, not
   shipped.** Numbers are in BATCH_LOG 2026-11-02b.
-  - zenodo.23201796 (Hung, five-wave FoMO): lagged correlations exceed the
-    same-wave ones, which reads as generated data. Script drafted, not in
-    `data/`. If it is generated, the other hung_2026* deposits deserve a look.
-  - DVN/EX7UTR (Akrofi, coastal resilience): inter-item r ~0 in all eight
-    subscales.
-  - zenodo.23573609 (Hu, creative self-efficacy): rows 242-425 copy rows
-    1-184 on every column except a `RAND` column (181 exact, 3 differ only in
-    the AE block), i.e. ~241 real respondents padded to 425.
+  - zenodo.23201796 (Hung, five-wave FoMO), DVN/EX7UTR (Akrofi), zenodo.23573609 (Hu):
+    response-quality review; reasons kept off the public record (2026-11-11).
   - zenodo.22665420 (Vorac, adolescents and AI): tagged CC BY, but the record
     says the data come from a children's counselling service and access is by
     justified request.
