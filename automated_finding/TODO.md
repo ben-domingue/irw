@@ -2,7 +2,11 @@
 
 ## Repos sweep 2026-11-12 (mode 3, 15 new topics x 9 languages) — 11 tables + 1 item text table
 
-Full write-up in `BATCH_LOG.md` (2026-11-12 — repos sweep). Claude uploads this one (Ben's go-ahead in-session).
+Full write-up in `BATCH_LOG.md` (2026-11-12 — repos sweep).
+
+- [x] **UPLOADED 2026-11-12 by Claude (Ben's go-ahead in-session)**: 11 response tables (86,606 responses) to
+  item_response_warehouse_9 draft + `ruizjimenez_2026_health_eval__items` to irw_text_4 draft, all row-count verified; provenance stamped.
+- [ ] **Ben publishes** the item_response_warehouse_9 and irw_text_4 drafts.
 
 - [ ] **Ben: Cognitive Assessment Questionnaire (Mendeley m2b8563ks5, CC BY, 1,399 x 25 CFQ-style items) held, not built.**
   787 of 1,399 response rows exactly duplicate another row, and the README is unfinished deposit boilerplate
