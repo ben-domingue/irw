@@ -4936,6 +4936,11 @@ vicens_2021_bis11,core,https://ssh.datastations.nl/api/access/datafile/20885,202
 vicens_2021_erq,core,https://ssh.datastations.nl/api/access/datafile/20885,2026-11-07
 vicens_2021_hads,core,https://ssh.datastations.nl/api/access/datafile/20885,2026-11-07
 vicens_2021_pss,core,https://ssh.datastations.nl/api/access/datafile/20885,2026-11-07
+vigl_2022_bfi2xs,core,none,2026-11-12
+vigl_2022_pandemic_worries,core,none,2026-11-12
+vigl_2022_ras_before,core,none,2026-11-12
+vigl_2022_ras_now,core,none,2026-11-12
+vigl_2022_shared_time_change,core,none,2026-11-12
 vik_2025_unelected_representation,conj,https://dataverse.harvard.edu/api/access/datafile/10807066,2026-10-07
 vila_lopez_2023_awareness,core,https://zenodo.org/records/10254868/files/base%20de%20datos%20general.sav,2026-10-18
 vila_lopez_2023_credibility,core,https://zenodo.org/records/10254868/files/base%20de%20datos%20general.sav,2026-10-18
