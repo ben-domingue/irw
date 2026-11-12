@@ -38,7 +38,9 @@ Usage (from src/):
 
 `plan` refuses a record that is already in IRW (built from openESM, or held
 from the original deposit) unless --force; --force exists to re-plan a built
-record as a check on this tool, not to ingest it twice.
+record as a check on this tool, not to ingest it twice. A record with fewer
+than 100 people is flagged rather than refused: datastandard.md's floor would
+skip it, but whether that floor binds ESM data is open (#3421).
 
 Network: the openESM metadata bundle (GitHub), the Zenodo API, and the OSF or
 Zenodo API for the original deposit's licence. Downloads are cached in
@@ -114,6 +116,7 @@ NA_LABEL = re.compile(r"not applicable|\bn/?a\b|don.?t know|no answer|"
 ANCHOR = re.compile(r"(-?\d+(?:\.\d+)?)\s*=\s*(.*?)\s*"
                     r"(?=(?:\s-?\d+(?:\.\d+)?\s*=)|\n|$)")
 TODO = "TODO"
+MIN_IDS = 100                               # datastandard.md sample floor
 
 
 # --------------------------------------------------------------------------
@@ -348,6 +351,13 @@ def plan(args):
              f"present but undescribed {extra}")
     if "id" not in df.columns:
         sys.exit(f"{did}: no `id` column")
+    n_ids = int(df["id"].nunique())
+    if n_ids < MIN_IDS:
+        # A flag, not a refusal: whether the floor binds intensive longitudinal
+        # data, where each person contributes many observations, is open (#3421).
+        flag(f"{n_ids} people, under the {MIN_IDS}-person floor (datastandard.md, "
+             "'Before you start': skipped outright). Do not ingest unless Ben "
+             "has ruled ESM records exempt (#3421); cite the ruling here.")
 
     # ---- order, wave, date -------------------------------------------------
     times = [c for c in df.columns if feats.get(c, {}).get("variable_type") in TIME_TYPES]
