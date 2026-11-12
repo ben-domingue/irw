@@ -1,6 +1,7 @@
-# item-text tables in the Redivis shards as of 2026-11-08
+# item-text tables in the Redivis shards as of 2026-11-12
 # status=published: a reader can fetch it. status=draft: uploaded, not released yet.
 # generated -- do not hand-edit; rerun itemtext/refresh_live_tables.py (irw#1828)
+# draft not listable by this token (needs data.edit) for irw_text_4; its draft rows carried forward from the snapshot taken 2026-11-08
 table,shard,status
 16_personalityfactors,irw_text,published
 360emergencymed_azami_2024,irw_text,published
@@ -118,6 +119,7 @@ algner2022_oss,irw_text,published
 ali_2021_gad7,irw_text,published
 ali_2021_phq9,irw_text,published
 ali_2021_spfi,irw_text,published
+aljabry_2026_msg_ffq,irw_text_4,published
 alkouri_2025_coping,irw_text,published
 alkouri_2025_icu_stressors,irw_text,published
 allen_2025_delaydiscount,irw_text,published
@@ -1229,6 +1231,7 @@ kumlander_2018_scs,irw_text_2,published
 kushnir2017_anrt,irw_text,published
 kushnir2017_ftnd,irw_text_2,published
 laksmita_2020_mspss,irw_text_2,published
+lam_2015_gses,irw_text_4,published
 latifi_2026_insect_fear,irw_text_2,published
 le_2024_digicas_hps,irw_text_3,published
 lec5_xiong_2025,irw_text_3,published
@@ -1513,6 +1516,7 @@ mhscdc_fried_2020_se,irw_text_2,published
 mhscdc_fried_2020_smartphone,irw_text_2,published
 mhscdc_fried_2020_tired,irw_text,published
 miedema_2023_ecs40,irw_text_3,published
+mifsud_2023_worldviews,irw_text_4,published
 milson_2026_self_esteem,irw_text_2,published
 mindfulness_assessment,irw_text_2,published
 mironshatz_2015_happiness_beliefs,irw_text_3,published
