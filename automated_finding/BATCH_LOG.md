@@ -27428,3 +27428,63 @@ scale and the paper gives no range; the depositors' composites count the zeros. 
 Item text: not shipped. No wording in the deposit; ECR items are quoted in the paper (table held), RAS and
 BFI-2-XS (register: BFI-2 block) wording lives in the published instruments, worries items in S1 File Table S3d.
 QC: all 5 pass `irw-validate` (upload), in-script `run_qc()`, `irw_lint_covariates.py`; tags pass tags/tests.
+
+## 2026-11-12 — repos sweep (mode 3): 15 new topics x 9 languages, 11 tables, 86,606 responses; 1 item text table
+
+Ben, in-session: "Fire a search ... find, format, upload, merge PR ... make sure we have everything". Reserved-source
+guard: `selftest` ok before the run, every DOI checked before a script, `check-diff origin/main` before push.
+Worktree `~/irw-wt/sweep-1112`, branch `ben-domingue/repos-sweep-2026-11-12`.
+
+**Terms** (135 variants, none in the log before; English + Spanish, German, French, Chinese, Japanese, Arabic,
+Dutch, Korean): emotion recognition test, face recognition test, recognition memory, false memory,
+attractiveness ratings, aesthetic ratings, hazard perception test, C-test, dyslexia screening, peer
+victimization, trivia questions, anagram task, pitch discrimination, sensory evaluation panel, climate change
+knowledge. **603 candidates** (zenodo 192, dataverse 170, figshare 106, osf 48, datacite 32, mendeley 32,
+dryad 23); 308 already in the seen ledger, **295 triaged** with `--retriage`: 3 good, 62 human_assistance,
+138 no_usable_file, 41 download_failed, 23 not_item_response, 16 below_min_n, 6 pii_suspected,
+3 license_restricted (all ND), 3 error. Step 2b: 24 recoverable_format, 19 human_review (archived to
+`human_review/human_review_zenodo_2026-11-12.csv`), 10 worth_retrying, 5 aggregate_continuous,
+4 not_item_response; `[step 2b] 62 refined flag(s) recorded in repo_triage_seen_keys.csv`. 0 conjoints.
+Every good/recoverable/worth_retrying/aggregate row has a status in `leads/repos_leads_2026-11-12.csv`
+(43 rows: 7 shipped, 22 rejected_content, 7 blocked_licence, 6 unworked, 1 held).
+
+The memory topics (recognition/false memory, face recognition) mostly surfaced lab experiments with 30-70
+participants or unlicensed OSF nodes; the yield came from the survey topics (climate change knowledge, peer
+victimization, aesthetic ratings) and from adjacent deposits the queries happened to hit.
+
+**Shipped** (all `irw-validate --profile upload` pass, `run_qc` no fails, `irw_lint_covariates.py` clean):
+- `ruizjimenez_2026_health_eval` (Zenodo 23880944, CC BY): FEDER UPO-1381076 survey, 1,201 Spanish adults in
+  Andalucia/Cataluna, P6 public-healthcare assessment, 12 items 1-10. P10-P12 are rankings, not built.
+- `kuhlmann_2021_schiphol_{noise_annoyance,sleep_disturbance,worries}` (Zenodo 4655400, CC BY): ANIMA survey
+  of 1,212 residents around Schiphol; ISO/TS 15666 annoyance and sleep disturbance 0-10 for 7 noise sources,
+  and 9 worries (Dutch labels recoded 1-3 per the deposit's own description). N matches the deposit PDF.
+- `fernandeztalaverano_2026_{eqim20,vei,pss}` (Mendeley r3kwfdb84d v2, CC BY): 311 Lima secondary students;
+  every stored dimension and total equals its item sum in all rows.
+- `meng_2023_generative_art` (pone.0291647 S8, CC BY): 1,701 raters (paper: 1,701), 8 artworks x 12 images,
+  7-point; item = sequence x image.
+- `connor_2022_{cc_knowledge,rice_attributes}` (DVN/1CT07N, CC0; same file as DVN/JBLPYY): 410 Vietnamese
+  rice consumers. The knowledge key T F F T T F F T reproduces the deposit's SKCC/SKCG/SKCQ in all 410 rows;
+  resp = correct, resp_raw = T/F/DK code. Gender/education codes have no key in the deposit; not shipped.
+- `lonnqvist_2015_state_selfesteem` (Zenodo 5025376 / Dryad 5f017, CC0): 3 State Self-Esteem Scale items,
+  pre/post (wave), 205 (paper: 205).
+
+**Held:** Mendeley m2b8563ks5 (CFQ-style, 1,399): 787 duplicate response rows and an unfinished README; see TODO.
+
+**Skipped:** GERT medical students (Zenodo 12517444, scale scores only); ICOT climate-KM readiness (Zenodo
+23331730, N exactly 100 conference tabulation); VR emotional faces (rates only); Game of Thrones face
+recognition (32), Kelley's paradox (70), word-frequency recognition (35), music perception (70) all < 100.
+PII: DVN/RVKJQQ (Nyhan, truth discernment) carries 1,236 distinct IP addresses and 1,152 GPS coordinates --
+structural, skipped; OSF 5fbdn, DVN/LCVPPJ, DVN/ZE07EO are Qualtrics exports flagged the same way and left
+skipped. Zenodo 21964330 was flagged only for a column named "Block Number" (false positive) -> leads, unworked.
+Licence: OSF p5jrh/9pdyf (DRM sleep registered report) and qs3fx (false memory) have no licence ->
+`license_blocked_candidates.csv`; jmfet, mbrfc, nt4jk, b23a8 also unlicensed.
+
+**Item text:** shipped for `ruizjimenez_2026_health_eval` only -- data_labels + study_materials (the .sav
+variable labels; the English is the depositors' own codebook). Register row FEDER-P6 (ship);
+mapping_verification NOT_NEEDED. Gates: normalize_nulls, validate_items (PASS), audit_batch (PASS),
+irw-validate clean. Not shipped, with where the text is: Schiphol (deposit PDF, list order), Peru (.sav labels,
+third-party instruments with no register row), Connor (questionnaire .docx, by order), Lonnqvist (paper, SSES
+third-party), Meng (items are images).
+
+Staged: 11 dictionary_auto + codebook_at_ingest rows, 11 tags/tags_auto.csv rows, 11 itemtext_provenance
+rows, 1 register row, 2 license_blocked rows.
