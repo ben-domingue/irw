@@ -27398,3 +27398,33 @@ no wording in the deposits or need a rights-register row first).
 QC: all 12 pass `irw-validate --profile upload`, in-script `run_qc()` + `validate_frame`, and
 `irw_lint_covariates.py`. Covariate-label harvest ran for the two .sav scripts (useche, braniecka) and added
 nothing (labels are mapped in-script); its unrelated coverage.csv churn was reverted.
+
+## 2026-11-12 — Vigl 2022 (osf f8m7a): licence granted, 5 tables, 132,963 responses
+
+PLOS monthly 2026-11-09 lead pone.0264511, licence-blocked until Julia Vigl set CC BY 4.0 on node f8m7a on
+2026-11-12 (verified via the OSF API; email grant the same day; outreach rows in PR #3486). Script
+`data/vigl_2022_relationship_covid.py`; one file, love_corona_data.csv, 3,243 rows = the paper's final N.
+
+Staged in `irw_output/` (not uploaded), all 3,243 ids:
+- `vigl_2022_ras_before` / `vigl_2022_ras_now` (25,944 each): RAS 7 items + the added sexual-satisfaction item,
+  1-5. Two tables, not `wave`: the "before" rating is a retrospective recall given at the same sitting
+  (mazzini_2026 precedent). RAS4/RAS7 stored already reverse-scored (the deposit's RAS_0/RAS_1 = plain mean of
+  the 8 stored items, asserted).
+- `vigl_2022_bfi2xs` (48,645): 15 items, 1-5, stored reverse-scored (BFI_* = plain item means, asserted).
+- `vigl_2022_pandemic_worries` (19,458): 6 items, 1-10.
+- `vigl_2022_shared_time_change` (12,972): contact (-3..3) + talks/activities/sex (-4..4), the paper's
+  "decrease in shared time" items, in source direction.
+
+`id` is the row index: PersonID is a self-generated respondent code (not carried) and is shared by two rows
+that are two different people (different gender and answers, 8 minutes apart); both kept, as the paper does.
+Covariate codes confirmed against the paper's reported percentages/counts (gender, cohabiting, partner distance,
+children, relationship type, country group); `city` (size of living area), education, job, sexorientation,
+partnergender, typeof_relation not carried, codes undocumented. Two items renamed for the covariate lint:
+worries_work -> worries_livelihood, activitieschange_sex -> activitieschange_intimacy.
+
+HELD: ECR short form (8 items) — stored 0-7 (eight values, 68-274 zeros per item) where the ECR is a 7-point
+scale and the paper gives no range; the depositors' composites count the zeros. Ask the depositor what 0-7 is.
+
+Item text: not shipped. No wording in the deposit; ECR items are quoted in the paper (table held), RAS and
+BFI-2-XS (register: BFI-2 block) wording lives in the published instruments, worries items in S1 File Table S3d.
+QC: all 5 pass `irw-validate` (upload), in-script `run_qc()`, `irw_lint_covariates.py`; tags pass tags/tests.

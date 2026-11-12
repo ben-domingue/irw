@@ -1,5 +1,11 @@
 # IRW Automated Finding — TODO
 
+## Vigl 2022 (osf f8m7a), 2026-11-12 — 5 tables staged, ECR held
+
+- [ ] **Upload**: 5 response tables (132,963 responses) from `~/irw-wt/vigl-2022/automated_finding/irw_output/`
+  (vigl_2022_ras_before, _ras_now, _bfi2xs, _pandemic_worries, _shared_time_change). No item text.
+- [ ] ECR short form held: stored 0-7, scale undocumented. Ask Vigl what the 0-7 coding is; ship on her answer.
+
 ## Hour run 2026-11-10 lane E (repos mode 3, 12 new terms x 9 languages) — 38 tables staged, 1 held
 
 Full write-up in `BATCH_LOG.md` (2026-11-10 — Hour run lane E). Hand-off: `~/irw-wt/hour-1110/hour-1110-e.md`.
