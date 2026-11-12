@@ -27488,3 +27488,26 @@ third-party), Meng (items are images).
 
 Staged: 11 dictionary_auto + codebook_at_ingest rows, 11 tags/tags_auto.csv rows, 11 itemtext_provenance
 rows, 1 register row, 2 license_blocked rows.
+
+## 2026-11-12b — the 2026-11-12 sweep's six unworked leads: 5 tables, 66,863 responses from 4 deposits
+
+Ben: "go ahead and work those". Worktree `~/irw-wt/leads-1112`. Reserved guard checked on every DOI; all
+tables pass `irw-validate --profile upload`, `run_qc` (no fails) and `irw_lint_covariates.py`.
+- `elkjaer_2024_policy_support` (DVN/QQGCLX, CC0; PSRM 2024): 4,809 US adults x 8 support/oppose policy items;
+  treat = randomly offered an explicit don't-know option; DK/skip cells (2,878) are not rows. The stored
+  Roe v. Wade item is kept as worded (the authors reverse it to "keep Roe").
+- `ananda_2020_political_knowledge` (DVN/BTEIDE, CC0; IJPOR 2020): 8 Indonesian political-knowledge items,
+  2,686 citizens. The authors never score the quiz, so the key is IRW's, from public record (PDI-P; Gubernur
+  Jakarta; Rencana Kerja Pemerintah; PDI-P/Demokrat/Golkar/PAN; Mahkamah Konstitusi); it is the modal answer
+  on every item (54-96% correct). DK = 0, refusal = no row; q0015 is a checkbox list, correct = PDI-P alone.
+  resp_raw = option chosen. City of residence not carried.
+- `tsuboi_2020_cued_recall` (Mendeley jcwyb2knb6, CC BY-NC 3.0; JML 2020): Experiment 1 cued recall,
+  143 x 40 words, scored from the experimenters' block in each participant workbook; every participant's
+  40 scores sum to 10 x the .sav's four recall proportions. EM22 dropped (its AC block repeats the AA list).
+  Item codes `recall_<word>_en` because "place"/"response" trip the covariate lint as bare words.
+- `delem_2026_vviq` + `delem_2026_osivq` (OSF 3649s, CC BY): 115 adults from all_data_surveys.csv. OSIVQ is
+  stored as answered: v3 had four reverse-keyed items pre-reversed (codebook), put back; then the item sums
+  reproduce object/spatial/verbal_score for all 116 rows. One person in both v1 and v3: v1 row kept.
+Closed: Mendeley n63pcf4vn5 (24-36 per experiment), Zenodo 21964330 (66 participants).
+Item text: none shipped (paper-only wording, IRW-derived key, word pairs, or third-party scales withheld by the
+codebook); provenance rows say where. 5 dictionary + codebook rows, 5 tag rows, 5 provenance rows.

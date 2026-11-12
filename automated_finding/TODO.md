@@ -11,9 +11,11 @@ Full write-up in `BATCH_LOG.md` (2026-11-12 — repos sweep).
 - [ ] **Ben: Cognitive Assessment Questionnaire (Mendeley m2b8563ks5, CC BY, 1,399 x 25 CFQ-style items) held, not built.**
   787 of 1,399 response rows exactly duplicate another row, and the README is unfinished deposit boilerplate
   ("the researcher should confirm ... consent/ethics approval permits public deposition"), no named study. Recommend no.
-- [ ] Next leads: `leads/repos_leads_2026-11-12.csv` (6 `unworked`: DVN/QQGCLX dont-know experiment 4,810 x 8,
-  DVN/BTEIDE Indonesian political-knowledge quiz (key would be IRW-derived), Mendeley n63pcf4vn5 and jcwyb2knb6,
-  OSF 3649s, Zenodo 21964330).
+- [x] Leads worked 2026-11-12 (second pass): 5 more tables uploaded (elkjaer_2024_policy_support,
+  ananda_2020_political_knowledge, tsuboi_2020_cued_recall, delem_2026_vviq, delem_2026_osivq); the other two
+  leads closed (N < 100). No `unworked` rows left in `leads/repos_leads_2026-11-12.csv`.
+- [ ] Ben: `ananda_2020_political_knowledge` scores the quiz with an IRW-derived key (the authors never scored
+  it); it matches the modal answer on all 8 items. Say if you'd rather not ship an IRW key.
 - [ ] Item text later, each needs a register row first: kuhlmann_2021_schiphol_* (ISO/TS 15666 wording in the
   deposit PDF, by list order), connor_2022_* (questionnaire .docx, by order), fernandeztalaverano_2026_* (Spanish
   stems in the .sav labels; third-party EQ-i-M20/VE-I/PSS).
