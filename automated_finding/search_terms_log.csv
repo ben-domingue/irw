@@ -12577,3 +12577,138 @@ date,query,output_file,notes
 2026-11-10,الشخص شديد الحساسية,runs/triage2_1110e.csv,"repos mode 3 (hour-1110 lane e, round 2); ""highly sensitive person"" x9 languages; 36 queries, 146 new candidates; zenodo 429 (not searched) on: 听觉过敏;聴覚過敏;misokinesie;騒音感受性;الحساسية للضوضاء;geluidsgevoeligheid;高敏感人群;ひといちばい敏感な人;"
 2026-11-10,hoogsensitief persoon,runs/triage2_1110e.csv,"repos mode 3 (hour-1110 lane e, round 2); ""highly sensitive person"" x9 languages; 36 queries, 146 new candidates; zenodo 429 (not searched) on: 听觉过敏;聴覚過敏;misokinesie;騒音感受性;الحساسية للضوضاء;geluidsgevoeligheid;高敏感人群;ひといちばい敏感な人;"
 2026-11-10,매우 민감한 사람,runs/triage2_1110e.csv,"repos mode 3 (hour-1110 lane e, round 2); ""highly sensitive person"" x9 languages; 36 queries, 146 new candidates; zenodo 429 (not searched) on: 听觉过敏;聴覚過敏;misokinesie;騒音感受性;الحساسية للضوضاء;geluidsgevoeligheid;高敏感人群;ひといちばい敏感な人;"
+2026-11-12,emotion recognition test,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,prueba de reconocimiento de emociones,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,Emotionserkennungstest,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,test de reconnaissance des émotions,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,情绪识别测试,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,感情認識課題,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,اختبار التعرف على المشاعر,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,emotieherkenningstest,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,정서 인식 검사,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,face recognition test,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,prueba de reconocimiento facial,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,Gesichtserkennungstest,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,test de reconnaissance des visages,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,面孔识别测验,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,顔認識テスト,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,اختبار التعرف على الوجوه,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,gezichtsherkenningstest,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,얼굴 재인 검사,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,recognition memory,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,memoria de reconocimiento,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,Wiedererkennungsgedächtnis,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,mémoire de reconnaissance,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,再认记忆,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,再認記憶,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,ذاكرة التعرف,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,herkenningsgeheugen,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,재인 기억,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,false memory,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,memoria falsa,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,falsche Erinnerungen,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,faux souvenirs,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,虚假记忆,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,虚記憶,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,الذاكرة الزائفة,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,valse herinneringen,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,허위 기억,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,attractiveness ratings,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,valoraciones de atractivo,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,Attraktivitätsbewertungen,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,évaluations de l'attractivité,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,吸引力评分,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,魅力評定,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,تقييمات الجاذبية,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,aantrekkelijkheidsbeoordelingen,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,매력도 평정,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,aesthetic ratings,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,juicios estéticos,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,ästhetische Urteile,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,jugements esthétiques,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,审美评价,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,美的評価,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,الأحكام الجمالية,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,esthetische oordelen,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,미적 평가,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,hazard perception test,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,prueba de percepción de riesgos,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,Gefahrenwahrnehmungstest,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,test de perception des dangers,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,危险感知测试,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,危険予測テスト,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,اختبار إدراك المخاطر,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,gevaarherkenningstest,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,위험 지각 검사,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,C-test,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,prueba C,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,C-Test Sprachstand,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,test C langue,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,C测试,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,Cテスト,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,اختبار سي,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,C-toets,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,C-테스트,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,dyslexia screening,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,cribado de dislexia,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,Legasthenie-Screening,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,dépistage de la dyslexie,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,阅读障碍筛查,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,ディスレクシア スクリーニング,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,فحص عسر القراءة,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,dyslexiescreening,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,난독증 선별검사,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,peer victimization,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,victimización entre iguales,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,Viktimisierung durch Gleichaltrige,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,victimisation par les pairs,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,同伴侵害,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,仲間からの被害,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,الإيذاء من الأقران,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,slachtofferschap pesten,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,또래 괴롭힘 피해,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,trivia questions,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,preguntas de cultura general,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,Quizfragen Allgemeinwissen,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,questions de culture générale,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,常识问答,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,雑学クイズ,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,أسئلة المعلومات العامة,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,quizvragen algemene kennis,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,상식 퀴즈,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,anagram task,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,tarea de anagramas,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,Anagrammaufgabe,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,tâche d'anagrammes,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,字谜任务,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,アナグラム課題,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,مهمة الجناس,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,anagramtaak,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,철자 바꾸기 과제,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,pitch discrimination,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,discriminación de tono,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,Tonhöhenunterscheidung,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,discrimination de hauteur,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,音高辨别,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,音高弁別,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,تمييز طبقة الصوت,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,toonhoogtediscriminatie,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,음높이 변별,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,sensory evaluation panel,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,evaluación sensorial,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,sensorische Bewertung,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,évaluation sensorielle,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,感官评价,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,官能評価,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,التقييم الحسي,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,sensorische evaluatie,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,관능 평가,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,climate change knowledge,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,conocimiento sobre el cambio climático,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,Wissen über den Klimawandel,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,connaissances sur le changement climatique,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,气候变化知识,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,気候変動の知識,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,المعرفة بتغير المناخ,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,kennis over klimaatverandering,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates
+2026-11-12,기후변화 지식,runs/candidates_2026-11-12.csv,repos sweep 2026-11-12 (mode 3): 15 new topics x 9 languages; 603 candidates

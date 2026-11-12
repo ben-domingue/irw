@@ -783,6 +783,8 @@ comeau_2015_provincial_process,core,https://borealisdata.ca/api/access/datafile/
 condon_2010_sapa_ipip,core,https://dataverse.harvard.edu/api/access/datafile/11004017,2026-10-29
 condon_2025_caq,core,none,2026-10-11
 condon_2025_caq_freq,core,none,2026-10-11
+connor_2022_cc_knowledge,core,https://dataverse.harvard.edu/api/access/datafile/6152547,2026-11-12
+connor_2022_rice_attributes,core,https://dataverse.harvard.edu/api/access/datafile/6152547,2026-11-12
 conroykrutz_2025_media_restrictions,conj,https://dataverse.harvard.edu/api/access/datafile/8072167,2026-10-07
 contreras_valdez_2026_cpq,core,none,2026-10-18
 contreras_valdez_2026_perci,core,none,2026-10-18
@@ -1189,6 +1191,9 @@ fernandez_prados_2025_attari,core,https://data.mendeley.com/public-files/dataset
 fernandez_prados_2025_digcomp_comm,core,https://data.mendeley.com/public-files/datasets/2gwnjx729x/files/ab51170e-2b75-43e5-add1-577cfc24bf9f/file_downloaded,2026-10-07
 fernandez_prados_2025_digcomp_info,core,https://data.mendeley.com/public-files/datasets/2gwnjx729x/files/ab51170e-2b75-43e5-add1-577cfc24bf9f/file_downloaded,2026-10-07
 fernandez_prados_2025_gaais,core,https://data.mendeley.com/public-files/datasets/2gwnjx729x/files/ab51170e-2b75-43e5-add1-577cfc24bf9f/file_downloaded,2026-10-07
+fernandeztalaverano_2026_eqim20,core,none,2026-11-12
+fernandeztalaverano_2026_pss,core,none,2026-11-12
+fernandeztalaverano_2026_vei,core,none,2026-11-12
 ferrari_2025_status_threat,conj,https://osf.io/download/78vb3/,2026-10-07
 ferree_2023_covid_neighbor_mw,conj,https://dataverse.harvard.edu/api/access/datafile/6692512,2026-10-09
 ferree_2023_covid_neighbor_zm,conj,https://dataverse.harvard.edu/api/access/datafile/6692512,2026-10-09
@@ -2220,6 +2225,9 @@ kubilay_2023_scam_identification,core,https://dataverse.harvard.edu/api/access/d
 kubota_2020_epds,core,none,2026-11-09
 kubota_2020_iddl,core,none,2026-11-09
 kuecuekbalaban_2017_selftest,conj,https://ndownloader.figshare.com/files/8857876,2026-10-11
+kuhlmann_2021_schiphol_noise_annoyance,core,https://zenodo.org/records/4655400/files/ANIMA_ST312_Schiphol%20Airport_survey.pdf,2026-11-12
+kuhlmann_2021_schiphol_sleep_disturbance,core,https://zenodo.org/records/4655400/files/ANIMA_ST312_Schiphol%20Airport_survey.pdf,2026-11-12
+kuhlmann_2021_schiphol_worries,core,https://zenodo.org/records/4655400/files/ANIMA_ST312_Schiphol%20Airport_survey.pdf,2026-11-12
 kul_2026_academic_buoyancy,core,https://ndownloader.figshare.com/files/67746372,2026-10-02
 kul_2026_math_self_concept,core,https://ndownloader.figshare.com/files/67746372,2026-10-02
 kul_2026_math_self_efficacy,core,https://ndownloader.figshare.com/files/67746372,2026-10-02
@@ -2485,6 +2493,7 @@ loi_2018_pos,core,none,2026-10-15
 loi_2018_teacher_self_efficacy,core,none,2026-10-15
 loi_2018_workload_increase,core,none,2026-10-15
 lomholt_2025_teacher_expectations,conj,https://data.mendeley.com/public-files/datasets/mg9cw32z2c/files/23aba98c-8946-4f52-a3ac-1b8612502bfa/file_downloaded,2026-10-14
+lonnqvist_2015_state_selfesteem,core,none,2026-11-12
 lopezgarcia_2023_mx_military_proposal,conj,https://dataverse.harvard.edu/api/access/datafile/7327606,2026-10-14
 lopezgarcia_2023_mx_police_recruits,conj,https://dataverse.harvard.edu/api/access/datafile/7327606,2026-10-14
 lopezgarcia_2023_mx_security_officers,conj,https://dataverse.harvard.edu/api/access/datafile/7327606,2026-10-14
@@ -2755,6 +2764,7 @@ mendezlopez_2023_multicage_ict,core,none,2026-10-02
 mendezlopez_2023_phq9,core,none,2026-10-02
 mendezlopez_2023_rses,core,none,2026-10-02
 mendezlopez_2023_soc13,core,none,2026-10-02
+meng_2023_generative_art,core,none,2026-11-12
 menghini_2023_mdmq,core,https://osf.io/download/ehw38/,2026-10-04
 menghini_2023_task_control,core,https://osf.io/download/ehw38/,2026-10-04
 menghini_2023_task_demands,core,https://osf.io/download/ehw38/,2026-10-04
@@ -4296,6 +4306,7 @@ rudolph_2026_ukraine_support,conj,https://dataverse.harvard.edu/api/access/dataf
 rudolph_2026_ukraine_western,conj,https://dataverse.harvard.edu/api/access/datafile/13172307,2026-10-09
 ruedin_2020_hiring_population,conj,https://dataverse.harvard.edu/api/access/datafile/3815112,2026-10-08
 ruedin_2020_hiring_students,conj,https://dataverse.harvard.edu/api/access/datafile/3815112,2026-10-08
+ruizjimenez_2026_health_eval,core,https://zenodo.org/records/23880944/files/FEDER2020_codebook_EN.pdf,2026-11-12
 rumangkit_2025_attitude,core,none,2026-10-18
 rumangkit_2025_cex,core,none,2026-10-18
 rumangkit_2025_chatbot_cs,core,none,2026-10-18
