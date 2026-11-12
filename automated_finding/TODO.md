@@ -8,9 +8,6 @@ Full write-up in `BATCH_LOG.md` (2026-11-12 — repos sweep).
   item_response_warehouse_9 draft + `ruizjimenez_2026_health_eval__items` to irw_text_4 draft, all row-count verified; provenance stamped.
 - [ ] **Ben publishes** the item_response_warehouse_9 and irw_text_4 drafts.
 
-- [ ] **Ben: Cognitive Assessment Questionnaire (Mendeley m2b8563ks5, CC BY, 1,399 x 25 CFQ-style items) held, not built.**
-  787 of 1,399 response rows exactly duplicate another row, and the README is unfinished deposit boilerplate
-  ("the researcher should confirm ... consent/ethics approval permits public deposition"), no named study. Recommend no.
 - [x] Leads worked 2026-11-12 (second pass): 5 more tables UPLOADED by Claude to the item_response_warehouse_9 draft, count(*) verified (elkjaer_2024_policy_support,
   ananda_2020_political_knowledge, tsuboi_2020_cued_recall, delem_2026_vviq, delem_2026_osivq); the other two
   leads closed (N < 100). No `unworked` rows left in `leads/repos_leads_2026-11-12.csv`.

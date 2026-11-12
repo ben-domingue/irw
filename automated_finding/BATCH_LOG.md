@@ -27511,3 +27511,5 @@ tables pass `irw-validate --profile upload`, `run_qc` (no fails) and `irw_lint_c
 Closed: Mendeley n63pcf4vn5 (24-36 per experiment), Zenodo 21964330 (66 participants).
 Item text: none shipped (paper-only wording, IRW-derived key, word pairs, or third-party scales withheld by the
 codebook); provenance rows say where. 5 dictionary + codebook rows, 5 tag rows, 5 provenance rows.
+
+2026-11-12 ruling: the held Cognitive Assessment Questionnaire deposit (Mendeley m2b8563ks5; 787 of 1,399 response rows duplicated, unfinished README) is skipped (ben-domingue). Leads row set to rejected_content.
