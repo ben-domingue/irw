@@ -1,23 +1,23 @@
-# Coverage audit -- 2026-11-11
+# Coverage audit -- 2026-11-13
 
-Denominator: **10435 live tables** (10397 after excluding 38 withdrawn). Definitions in the header of `metadata/17_coverage.R`; per-table rows in `coverage_matrix.csv`. Report-only: nothing here is fixed automatically.
+Denominator: **10511 live tables** (10473 after excluding 38 withdrawn). Definitions in the header of `metadata/17_coverage.R`; per-table rows in `coverage_matrix.csv`. Report-only: nothing here is fixed automatically.
 
 ## Per dimension (active tables)
 
 | dimension | applicable | covered | missing | pct |
 |---|---|---|---|---|
-| metadata_row | 10397 | 10397 | 0 | 100 |
-| biblio_row | 10397 | 10397 | 0 | 100 |
-| citation | 10397 | 10397 | 0 | 100 |
-| licence | 10397 | 10397 | 0 | 100 |
-| page | 10397 | 10397 | 0 | 100 |
-| tag_row | 8038 | 7926 | 112 | 98.6 |
-| script | 10397 | 5944 | 4453 | 57.2 |
-| codebook_link | 8159 | 3042 | 5117 | 37.3 |
-| column_docs | 7898 | 4774 | 3124 | 60.4 |
-| data_note | 10381 | 1888 | 8493 | 18.2 |
-| has_construct_name | 8038 | 7926 | 112 | 98.6 |
-| itemtext_shipped | 10397 | 2633 | 7764 | 25.3 |
+| metadata_row | 10473 | 10473 | 0 | 100 |
+| biblio_row | 10473 | 10473 | 0 | 100 |
+| citation | 10473 | 10473 | 0 | 100 |
+| licence | 10473 | 10473 | 0 | 100 |
+| page | 10473 | 10473 | 0 | 100 |
+| tag_row | 8114 | 8002 | 112 | 98.6 |
+| script | 10473 | 5988 | 4485 | 57.2 |
+| codebook_link | 8235 | 3074 | 5161 | 37.3 |
+| column_docs | 7974 | 4786 | 3188 | 60 |
+| data_note | 10457 | 1889 | 8568 | 18.1 |
+| has_construct_name | 8114 | 8002 | 112 | 98.6 |
+| itemtext_shipped | 10473 | 2636 | 7837 | 25.2 |
 
 ## Item-text status
 
@@ -25,8 +25,8 @@ Issues against the public item-text page are the daily `itemtext-issues.yml` che
 
 | itemtext_status | n |
 |---|---|
-| unassessed | 6775 |
-| shipped | 2633 |
+| unassessed | 6848 |
+| shipped | 2636 |
 | excluded | 402 |
 | blocked | 307 |
 | done_not_shipped | 267 |
@@ -38,7 +38,7 @@ Issues against the public item-text page are the daily `itemtext-issues.yml` che
 |---|---|---|---|---|---|---|
 | comp | 121 | 0 | 0 | 0 | 0 | 69 |
 | conj | 1204 | 0 | 0 | 0 | 0 | 228 |
-| core | 7898 | 0 | 0 | 0 | 56 | 3069 |
+| core | 7974 | 0 | 0 | 0 | 56 | 3101 |
 | nom | 140 | 0 | 0 | 0 | 56 | 115 |
 | rank | 1018 | 0 | 0 | 0 | 0 | 961 |
 | sim | 16 | 0 | 0 | 0 | 0 | 11 |
@@ -55,7 +55,7 @@ Issues against the public item-text page are the daily `itemtext-issues.yml` che
 | item_response_warehouse_6 | 926 | 0 | 56 | 277 |
 | item_response_warehouse_7 | 961 | 0 | 0 | 155 |
 | item_response_warehouse_8 | 916 | 0 | 0 | 183 |
-| item_response_warehouse_9 | 370 | 0 | 0 | 1 |
+| item_response_warehouse_9 | 446 | 0 | 0 | 4 |
 
 ## Worst 20 tables (by n_gaps)
 
