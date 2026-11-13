@@ -1,5 +1,17 @@
 # IRW Automated Finding — TODO
 
+## Repos sweep 2026-11-13 (mode 3, 15 new topics x 9 languages) — 47 tables + 2 item text tables
+
+Full write-up in `BATCH_LOG.md` (2026-11-13 — repos sweep).
+
+- [x] **UPLOADED 2026-11-13 by Claude (Ben's go-ahead in-session)**: 47 response tables (579,716 responses) to the
+  item_response_warehouse_9 draft + 2 item text tables to the irw_text_4 draft, all row-count verified; provenance stamped.
+- [ ] **Ben publishes** the item_response_warehouse_9 and irw_text_4 drafts.
+- [ ] 10 `unworked` leads in `leads/repos_leads_2026-11-13.csv` (malaria KAP, diabetes knowledge, Zimbabwe 2015
+  surveys, NATO opinion experiment, chatbot pilot, ...).
+- [ ] Item text later, cheap from deposit files: dey_2024_fish_* (questionnaire PDFs, numbered), okan_2019/2024 and
+  petrova_2019 (codebook labels + survey PDFs), alwahaibi_2023 (Table_3 headers); each needs a register row first.
+
 ## Repos sweep 2026-11-12 (mode 3, 15 new topics x 9 languages) — 11 tables + 1 item text table
 
 Full write-up in `BATCH_LOG.md` (2026-11-12 — repos sweep).
