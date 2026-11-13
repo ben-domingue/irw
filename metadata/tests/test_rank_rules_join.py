@@ -14,8 +14,8 @@ that matches no rule set (a table whose rules cannot be found) and two rows that
 both match (a table with two answers, from overlapping date windows or a rule set
 entered twice). Both are cheap to check and neither is visible in a diff.
 
-A table matching NO rule set is normal and is not checked here: most of the 515
-rows are jurisdictions whose rules nobody has written down, and that is the
+A table matching NO rule set is normal and is not checked here: some rows are
+jurisdictions whose rules nobody has written down, and that is the
 file's own stated condition ("Other jurisdictions get rows when their rules are
 written down").
 
@@ -103,15 +103,15 @@ class RulesJoin(unittest.TestCase):
     def test_the_join_reaches_the_tables_it_should(self):
         """A count, so a key that stops matching is a failure and not a quiet zero.
 
-        The four jurisdictions whose rules are written down: Minneapolis (88),
+        The jurisdictions whose rules are written down: Minneapolis (88),
         Alaska (115: 63 of 2022 and 52 of 2024), the Debian Project (33) and New South Wales (279), whose
-        tables are also counted on the key below.
+        tables are also counted on the key below. From the FairVote pool: New York City (127), Oakland (73), Berkeley (36), San Leandro (21), Maine (11), San Francisco (82), Burlington (8), St. Louis Park (4), Minnetonka (7), Bloomington (2), Takoma Park (7), Redondo Beach (5), Pierce County (4), Westbrook (1), Boulder (1), Easthampton (1), Corvallis (2), Las Cruces (3), Santa Fe (3), Portland, Oregon (6), Eastpointe (3), the Utah pilot cities (13), Portland, Maine (7).
         """
         joined = [r for r in self.design if matching(self.rules, r)]
-        self.assertEqual(len(joined), 515)
+        self.assertEqual(len(joined), 942)
         keyed = [r for r in self.design if (r["rules_jurisdiction"] or "").strip()]
-        self.assertEqual(len(keyed), 279)
-        self.assertEqual({rules_key(r) for r in keyed}, {"New South Wales (Legislative Assembly)"})
+        self.assertEqual(len(keyed), 301)
+        self.assertEqual({rules_key(r) for r in keyed}, {"New South Wales (Legislative Assembly)", "Eastpointe (one seat)", "Eastpointe (two seats)", "PortlandOR (Council)", "PortlandOR (Mayor and Auditor)", "Utah (municipal pilot)"})
 
     def test_an_override_is_never_redundant(self):
         """A key that duplicates an exact match on the table's own jurisdiction
