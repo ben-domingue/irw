@@ -27513,3 +27513,80 @@ Item text: none shipped (paper-only wording, IRW-derived key, word pairs, or thi
 codebook); provenance rows say where. 5 dictionary + codebook rows, 5 tag rows, 5 provenance rows.
 
 2026-11-12 ruling: the held Cognitive Assessment Questionnaire deposit (Mendeley m2b8563ks5; 787 of 1,399 response rows duplicated, unfinished README) is skipped (ben-domingue). Leads row set to rejected_content.
+
+## 2026-11-13 — repos sweep (mode 3): 15 new topics x 9 languages, 47 tables, 579,716 responses; 2 item text tables
+
+Ben, in-session: "fire a search ... finding, processing, uploading, merging PRs; we'll need tables, itemtext,
+dictionary/tags". Reserved-source guard: `selftest` ok, every DOI/URL checked before its script,
+`check-diff origin/main` clean. Worktree `~/irw-wt/sweep-1113`, branch `ben-domingue/repos-sweep-2026-11-13`.
+
+**Terms** (135 variants, none in the log; English + Spanish, German, French, Chinese, Japanese, Arabic, Dutch,
+Korean): HIV knowledge, antibiotic knowledge, malaria knowledge, diabetes knowledge, food safety knowledge, hand
+hygiene, contraceptive knowledge, cancer screening, blood donation, organ donation attitudes, road safety
+attitudes, writing apprehension, student evaluation of teaching, chemistry test, nature connectedness.
+**544 candidates**; 244 already in the seen ledger, **300 triaged** with `--retriage`: 7 good, 83 human_assistance,
+161 no_usable_file, 23 download_failed (mostly restricted Dataverse files, 403), 8 below_min_n, 7 not_item_response,
+7 pii_suspected, 4 license_restricted (ND). Step 2b: 33 recoverable_format, 20 worth_retrying, 8 aggregate_continuous,
+16 human_review (archived to `human_review/human_review_zenodo_2026-11-13.csv`), 5 not_item_response, 1 conj;
+`[step 2b] 83 refined flag(s) recorded in repo_triage_seen_keys.csv`; `[conj] routed 2` to data/conjoint/candidates.csv.
+Every good/recoverable/worth_retrying/aggregate row has a status in `leads/repos_leads_2026-11-13.csv`
+(69 rows: 18 shipped, 34 rejected_content, 10 unworked, 6 blocked_licence, 1 conj).
+
+The knowledge/KAP topics and "cancer screening" carried the batch (KAP surveys with codebooks, screening-
+communication experiments with authors' scoring); road safety, writing apprehension and chemistry test
+contributed nothing usable.
+
+**Shipped** (all `irw-validate --profile upload` pass, `run_qc` no fails, `irw_lint_covariates.py` clean):
+- `dey_2024_fish_{consumer,producer,trader}_{knowledge,attitudes,practices}` (DVN/GXVPSM, CC0): Bangladesh fish
+  value-chain KAP, 600/240/300; codebook-driven. Practice items the codebook labels 5 = Never are stored reversed by
+  the depositors (shipped as stored). District dropped; 40 consumer `advice` cells coded 2 (undefined) -> missing.
+- `hooyberg_2023_coastal_{experiences,activities,barriers,company}`, `hooyberg_2023_sf36_mental_health`: 1,939
+  Flemish adults. The Zenodo records (13844677 = 22654002) are AISDL re-deposits; the ORIGINAL is VLIZ
+  10.14284/625, CC BY 4.0 per marineinfo.org, so the data ship credited to Hooyberg et al. Postal codes and their
+  distances, free-text diagnoses and birth year dropped.
+- `okan_2024_cervical_results_{comprehension,affect,evaluation}`, `okan_2024_{numeracy,graph_literacy}` (OSF uhrv4,
+  CC BY): 3,100 UK women, 3x2 format/text experiment, T2 for 1,575; authors' 0/1 scoring, totals reproduce.
+- `okan_2019_cervical_leaflet_knowledge` (23 items), `okan_2019_numeracy` (OSF 8wqzv, CC BY): 602; k_tot reproduces.
+- `petrova_2019_{screening_beliefs,numeracy,screening_statistics,science_literacy}` (OSF qn9a2, CC BY;
+  PLoS ONE 2019): 172 Peruvian physicians in training; scoring from the authors' Variables R1.sps.
+- `ng_2026_{cns,sdo,policy_support}` (figshare 31156927, CC BY): 1,604; treat = nature images. As answered.
+- `hartmann_2026_{food_forest_wtp,monoculture_health_risk,climate_concern,nature_connectedness,need_for_uniqueness}`
+  (Zenodo 22035305, CC BY): 845 US consumers.
+- `halvorsonfried_2025_{cancer_fatalism,message_ratings}` (DVN/XKMAUT, CC0): 1,536 US women; message items coded
+  question x theme x message number (39 items).
+- `bakirdemir_2020_{nature_connectedness,cerq,pss}` (Mendeley c5ptknsjvm, CC BY): 140; raw items used, depositors'
+  R_ reversed copies ignored (each = 6 - raw; PSS total reproduces).
+- `akulume_2024_donation_{intention,pbc,norms}` (figshare 27934290, CC BY): 336 Ugandan secondary students;
+  composites reproduce. Attitudes dropped: negatively worded items run with the scale (pre-reversed) while the
+  value labels say otherwise.
+- `alwahaibi_2023_organ_donation_knowledge` (Frontiers SI, CC BY): 2,125 Omani students, 15 items Yes=1/No=0, DK not
+  a row; reproduces the paper's Table 2. Attitude file NOT shipped: its columns are shifted one question off the
+  paper's Table 4, Q1 missing, two columns identical.
+- `timsina_2026_cancer_stigma` (figshare 33919306, CC BY): 310 Nepali women, 25 items 1-6, baseline/endline,
+  treat = ITT arm; domain means reproduce. Ward (randomisation cluster) not carried (admin area code).
+- `he_2026_handwashing_timing` (Mendeley h5ydkf3mjt, CC BY): 248 children, 12 scored items, T0/T1, treat.
+  6 stored totals off by 1 from the item sums (hand-entered totals).
+- `bakhtiar_2026_blood_donation_attitudes` (figshare 33943117, CC BY): 209 MBBS students; knowledge not shipped
+  (no key). `muffato_2023_spatial_anxiety` (figshare 24511318): 649; CNS collapsed to 3 values, BFI/AtOT/PEBS
+  pre-reversed -> not shipped. `truongvien_2020_ipss` (DVN/CMOHLS, CC0): 260.
+
+Item codes renamed for the covariate lint: he_2026 drops a trailing "_time" (and fixes "toliet"),
+halvorsonfried control items `<q>_ctrlmsg`, hooyberg company items `Coast<name>`. Each script header says so.
+
+**Skipped:** PII -- Mendeley v99zfx2ssv (food safety, Tanzania: names and phone numbers), figshare 29803565 (AI+X
+micro-credentials: IP addresses; also N=100), DVN/LLPPIE (house numbers, phone, birthday), Zenodo 4411040 (names,
+SSN). Mendeley 37d9kgtwvt (Jiangsu cancer screening): flagged on a "Known Dept." label (false positive) but skipped:
+description restricts use to validating the authors' paper, coding only in an absent appendix. UAE HIV (figshare
+33415513): undocumented four-file structure, 87 rows without consent. Materialism/China (Frontiers 794816):
+pre-reversed items. Licence: OSF gs792, b29vx, wd4bf, twes3, ywtrp (no licence) -> `license_blocked_candidates.csv`;
+DVN/S5YMS7 custom no-redistribution terms. Lead-by-lead verdicts in the leads CSV.
+
+**Item text:** shipped for `hartmann_2026_food_forest_wtp` and `hartmann_2026_monoculture_health_risk` --
+data_labels + study_materials (.sav variable + value labels; stems searched verbatim, study-authored). Register rows
+HARTMANN-FF (ship) and CNFU-S (hold); mapping_verification NOT_NEEDED x2. Gates: normalize_nulls, validate_items
+(PASS x2), audit_batch (PASS), irw-validate clean. Not shipped, with where the text is: in each provenance row
+(Dey: questionnaire PDFs by item number; Okan/Petrova: codebook labels + survey PDFs; Hooyberg: Dutch administration,
+English docx; others third-party or wording not deposited).
+
+Staged: 47 dictionary_auto + codebook_at_ingest rows, 47 tags/tags_auto.csv rows, 47 itemtext_provenance rows,
+2 register rows, 5 license_blocked rows, 135 search_terms_log rows.

@@ -66,6 +66,9 @@ akter_2026_climate_self_efficacy,core,none,2026-10-29
 akter_2026_climate_social_norms,core,none,2026-10-29
 akter_2026_proenv_private_behaviour,core,none,2026-10-29
 akter_2026_proenv_public_behaviour,core,none,2026-10-29
+akulume_2024_donation_intention,core,none,2026-11-13
+akulume_2024_donation_norms,core,none,2026-11-13
+akulume_2024_donation_pbc,core,none,2026-11-13
 al_daraiseh_2026_aip,core,https://doi.org/10.1371/journal.pone.0354305.s002,2026-11-02
 alamer_2025_arabic_vlt,core,none,2026-10-28
 albers_2026_marine_user_rights,conj,https://data.mendeley.com/public-files/datasets/w2x33kmwhc/files/5682f613-acfe-48cd-a7d9-92d1c2a4113a/file_downloaded,2026-10-14
@@ -113,6 +116,7 @@ alvarado_2024_tax_fairness_us,conj,https://dataverse.harvard.edu/api/access/data
 alvarezgarcia_2024_chehk,core,none,2026-10-02
 alvarezgarcia_2024_chehs,core,none,2026-10-02
 alvarezgarcia_2024_sans2,core,none,2026-10-02
+alwahaibi_2023_organ_donation_knowledge,core,none,2026-11-13
 amiruddin_2023_andragogy,core,none,2026-10-11
 amiruddin_2023_cybergogy,core,none,2026-10-11
 amiruddin_2023_heutagogy,core,none,2026-10-11
@@ -198,6 +202,10 @@ bacon_2025_stss,core,none,2026-10-02
 bado_2018_ohla_b,core,none,2026-10-05
 bajka_2025_occupation_choice,conj,none,2026-10-08
 bak_sosnowska_2025_dass21,core,none,2026-10-07
+bakhtiar_2026_blood_donation_attitudes,core,none,2026-11-13
+bakirdemir_2020_cerq,core,none,2026-11-13
+bakirdemir_2020_nature_connectedness,core,none,2026-11-13
+bakirdemir_2020_pss,core,none,2026-11-13
 bakker_2021_authoritarianism,core,https://dataverse.harvard.edu/api/access/datafile/4785762,2026-10-15
 bakker_2021_bfi15,core,https://dataverse.harvard.edu/api/access/datafile/4785762,2026-10-15
 bakker_2021_populist_appeal,conj,https://dataverse.harvard.edu/api/access/datafile/3582314,2026-10-09
@@ -930,6 +938,15 @@ devine_2024_climate_policy,conj,none,2026-10-07
 devine_2025_class_political_success,conj,none,2026-10-11
 dey_2017_mistreatment_observed,core,none,2026-10-09
 dey_2017_mistreatment_selfreport,core,none,2026-10-09
+dey_2024_fish_consumer_attitudes,core,https://dataverse.harvard.edu/api/access/datafile/10227466,2026-11-13
+dey_2024_fish_consumer_knowledge,core,https://dataverse.harvard.edu/api/access/datafile/10227466,2026-11-13
+dey_2024_fish_consumer_practices,core,https://dataverse.harvard.edu/api/access/datafile/10227466,2026-11-13
+dey_2024_fish_producer_attitudes,core,https://dataverse.harvard.edu/api/access/datafile/10227461,2026-11-13
+dey_2024_fish_producer_knowledge,core,https://dataverse.harvard.edu/api/access/datafile/10227461,2026-11-13
+dey_2024_fish_producer_practices,core,https://dataverse.harvard.edu/api/access/datafile/10227461,2026-11-13
+dey_2024_fish_trader_attitudes,core,https://dataverse.harvard.edu/api/access/datafile/10227462,2026-11-13
+dey_2024_fish_trader_knowledge,core,https://dataverse.harvard.edu/api/access/datafile/10227462,2026-11-13
+dey_2024_fish_trader_practices,core,https://dataverse.harvard.edu/api/access/datafile/10227462,2026-11-13
 dhammapeera_2026_gaid,core,none,2026-10-15
 dhammapeera_2026_mhl,core,none,2026-10-15
 dhammapeera_2026_mhsas,core,none,2026-10-15
@@ -1578,6 +1595,8 @@ halim_2025_fin_stress,core,none,2026-10-09
 halim_2025_fin_wellbeing,core,none,2026-10-09
 haltia_2022_carbon_farm_contracts,conj,https://zenodo.org/api/records/7505626/files/CodesQuestionsAndVariableCoding_2022.11.03.xlsx/content,2026-10-14
 haltia_2022_carbon_forest_contracts,conj,https://zenodo.org/api/records/7505626/files/CodesQuestionsAndVariableCoding_2022.11.03.xlsx/content,2026-10-14
+halvorsonfried_2025_cancer_fatalism,core,https://dataverse.harvard.edu/api/access/datafile/12125970,2026-11-13
+halvorsonfried_2025_message_ratings,core,https://dataverse.harvard.edu/api/access/datafile/12125970,2026-11-13
 hamdan_2021_mobile_money,conj,https://ndownloader.figshare.com/files/31284026,2026-10-14
 hamzawi_2025_party_valence,conj,none,2026-10-08
 han_2020_hads,core,none,2026-11-09
@@ -1603,7 +1622,12 @@ hartmann_2026_ai_env_awareness,core,none,2026-10-18
 hartmann_2026_ai_use_intensity,core,none,2026-10-18
 hartmann_2026_climate_anxiety,core,none,2026-10-18
 hartmann_2026_climate_commitment,core,none,2026-10-18
+hartmann_2026_climate_concern,core,none,2026-11-13
 hartmann_2026_disaster_relief,conj,none,2026-10-07
+hartmann_2026_food_forest_wtp,core,none,2026-11-13
+hartmann_2026_monoculture_health_risk,core,none,2026-11-13
+hartmann_2026_nature_connectedness,core,none,2026-11-13
+hartmann_2026_need_for_uniqueness,core,none,2026-11-13
 hartmann_2026_pro_climate_intention,core,none,2026-10-18
 hassan_2019_wetland_malaysia,conj,none,2026-10-14
 hassell_2020_journalist_coverage,conj,none,2026-10-11
@@ -1615,6 +1639,7 @@ hawlader_2021_whoqol_bref,core,none,2026-11-07
 hayashi_2024_nuclear_waste_site,conj,https://dataverse.harvard.edu/api/access/datafile/9267232,2026-10-08
 hazell_2022_aq,core,none,2026-11-02
 hazell_2022_iasmhs,core,none,2026-11-02
+he_2026_handwashing_timing,core,none,2026-11-13
 he_2026_mind_wandering,core,none,2026-10-19
 heekerens_2025_altered_sense_of_self,core,none,2026-10-18
 heekerens_2025_anomalous_experiences,core,none,2026-10-18
@@ -1727,6 +1752,11 @@ holliday_2026_policy_state_2022,conj,none,2026-10-07
 holloway_2025_indigenous_candidates,conj,https://dataverse.harvard.edu/api/access/datafile/11581058,2026-10-11
 holtmaat_2026_climate_adaptation,conj,https://static.cambridge.org/content/id/urn%3Acambridge.org%3Aid%3Aarticle%3AS1755773926100319/resource/name/S1755773926100319sup001.docx,2026-11-10
 holzknecht_2022_listening,core,none,2026-10-09
+hooyberg_2023_coastal_activities,core,https://zenodo.org/api/records/13844677/files/Hooyberg_SurveyCoastalVisits_Codebook.csv/content,2026-11-13
+hooyberg_2023_coastal_barriers,core,https://zenodo.org/api/records/13844677/files/Hooyberg_SurveyCoastalVisits_Codebook.csv/content,2026-11-13
+hooyberg_2023_coastal_company,core,https://zenodo.org/api/records/13844677/files/Hooyberg_SurveyCoastalVisits_Codebook.csv/content,2026-11-13
+hooyberg_2023_coastal_experiences,core,https://zenodo.org/api/records/13844677/files/Hooyberg_SurveyCoastalVisits_Codebook.csv/content,2026-11-13
+hooyberg_2023_sf36_mental_health,core,https://zenodo.org/api/records/13844677/files/Hooyberg_SurveyCoastalVisits_Codebook.csv/content,2026-11-13
 horiuchi_2018_japan_manifestos,conj,https://dataverse.harvard.edu/api/access/datafile/3084603,2026-10-07
 horiuchi_2020_japan_politicians,conj,https://dataverse.harvard.edu/api/access/datafile/3154939,2026-10-07
 horiuchi_2022_sdb_candidates,conj,https://dataverse.harvard.edu/api/access/datafile/4984594,2026-10-07
@@ -2870,6 +2900,7 @@ mostova_2022_lls_felt,core,none,2026-11-10
 mostova_2022_ras,core,none,2026-11-10
 mtbench_human_2023,comps,none,2026-10-27
 mueller_2024_covid_governance,conj,none,2026-10-09
+muffato_2023_spatial_anxiety,core,none,2026-11-13
 mugisha_2026_ehr_competence,core,none,2026-10-15
 mugisha_2026_ehr_status,core,none,2026-10-15
 mugisha_2026_ehr_use,core,none,2026-10-15
@@ -2963,6 +2994,9 @@ neuner_2025_populism_uk,conj,https://osf.io/download/vm7j8/,2026-10-08
 neuner_2025_populism_us1,conj,https://osf.io/download/vm7j8/,2026-10-08
 neuner_2025_populism_us2,conj,https://osf.io/download/vm7j8/,2026-10-08
 neurorights_2026_neurodata_dce,conj,https://zenodo.org/api/records/23719183/files/repkg_dce_neurorights_v2.zip/content,2026-11-10
+ng_2026_cns,core,https://ndownloader.figshare.com/files/62900512,2026-11-13
+ng_2026_policy_support,core,https://ndownloader.figshare.com/files/62900512,2026-11-13
+ng_2026_sdo,core,https://ndownloader.figshare.com/files/62900512,2026-11-13
 ng_2026_shc_attitude,core,none,2026-10-30
 ng_2026_shc_knowledge,core,none,2026-10-30
 ng_2026_shc_price_sensitivity,core,none,2026-10-30
@@ -3047,6 +3081,13 @@ ogs_go_2005_2021,comps,https://archive.org/download/ogs2021/readme.txt,2026-10-2
 ogura_2022_partisan_labels,conj,https://dataverse.harvard.edu/api/access/datafile/5257951,2026-10-08
 ohmura_2022_covid_vaccination_lucid,conj,none,2026-10-08
 ohmura_2022_covid_vaccination_ycs,conj,none,2026-10-08
+okan_2019_cervical_leaflet_knowledge,core,https://osf.io/download/u9rh6/,2026-11-13
+okan_2019_numeracy,core,https://osf.io/download/u9rh6/,2026-11-13
+okan_2024_cervical_results_affect,core,https://osf.io/download/y6urw/,2026-11-13
+okan_2024_cervical_results_comprehension,core,https://osf.io/download/y6urw/,2026-11-13
+okan_2024_cervical_results_evaluation,core,https://osf.io/download/y6urw/,2026-11-13
+okan_2024_graph_literacy,core,https://osf.io/download/y6urw/,2026-11-13
+okan_2024_numeracy,core,https://osf.io/download/y6urw/,2026-11-13
 olajubu_2024_srh_hlq,core,none,2026-10-02
 oliveira_2026_healthcare_experiences,core,https://ndownloader.figshare.com/files/68527174,2026-10-15
 oliveira_2026_wbis,core,https://ndownloader.figshare.com/files/68527174,2026-10-15
@@ -3148,6 +3189,10 @@ pertiwi_2025_educational_fashion,conj,none,2026-10-12
 petersen_2025_online_abuse,conj,https://dataverse.harvard.edu/api/access/datafile/10480094,2026-10-11
 peterson_2017_information_environment,conj,none,2026-10-07
 peterson_2024_economic_statecraft,conj,none,2026-10-09
+petrova_2019_numeracy,core,https://osf.io/download/d3g2z/,2026-11-13
+petrova_2019_science_literacy,core,https://osf.io/download/d3g2z/,2026-11-13
+petrova_2019_screening_beliefs,core,https://osf.io/download/d3g2z/,2026-11-13
+petrova_2019_screening_statistics,core,https://osf.io/download/d3g2z/,2026-11-13
 petrovic_2026_ai_hiring_score,conj,none,2026-10-09
 petrovici_2025_cultural_participation,core,https://ndownloader.figshare.com/files/41431944,2026-10-11
 petrovici_2025_culture_appreciation,core,https://ndownloader.figshare.com/files/41431944,2026-10-11
@@ -4785,6 +4830,7 @@ tilley_2026_protest_tolerance,conj,none,2026-10-11
 tilley_2026_school_speaker,conj,none,2026-10-11
 timbreza_2026_mbi_es,core,none,2026-10-15
 timbreza_2026_nctwcs,core,none,2026-10-15
+timsina_2026_cancer_stigma,core,none,2026-11-13
 tingley_2021_paris_reply,conj,https://dataverse.harvard.edu/api/access/datafile/4898253,2026-10-11
 tingley_2021_paris_shamers,conj,https://dataverse.harvard.edu/api/access/datafile/4898253,2026-10-11
 tingley_2021_paris_shaming,conj,https://dataverse.harvard.edu/api/access/datafile/4898253,2026-10-11
@@ -4864,6 +4910,7 @@ trump_2025_tax_rich_dk,conj,https://dataverse.harvard.edu/api/access/datafile/10
 trump_2025_tax_rich_pilot,conj,https://dataverse.harvard.edu/api/access/datafile/10586102,2026-10-09
 trump_2025_tax_rich_us,conj,https://dataverse.harvard.edu/api/access/datafile/10586101,2026-10-09
 trump_endorsement_2022_mitchell,conj,https://dataverse.harvard.edu/api/access/datafile/8140013,2026-10-14
+truongvien_2020_ipss,core,none,2026-11-13
 trusz_2022_amas,core,https://dataverse.harvard.edu/api/access/datafile/6318584,2026-10-29
 trusz_2022_iieq_parent,core,https://dataverse.harvard.edu/api/access/datafile/6318584,2026-10-29
 trusz_2022_iieq_self,core,https://dataverse.harvard.edu/api/access/datafile/6318584,2026-10-29
