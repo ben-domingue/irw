@@ -936,6 +936,8 @@ hao_2025_social_regulation,"Foreign Language Learning Resilience Scale (FLLRS; G
 hartmann_2026_ai_env_awareness,Awareness of AI's environmental impact items (author-developed),1,2,7.4,-3.4,English,table
 hartmann_2026_ai_use_intensity,AI use intensity items (author-developed),1,2,13,-3.4,English,table
 hartmann_2026_climate_commitment,Climate commitment items (author-developed),1,2,7.4,-3.4,English,table
+hartmann_2026_food_forest_wtp,"Willingness to pay for food forest products (Hartmann 2026, TRANSCLIMA survey)",1,2,7.4,-3.4,English,table
+hartmann_2026_monoculture_health_risk,"Perceived health risk of monoculture farming (Hartmann 2026, TRANSCLIMA survey)",1,2,7.4,-3.4,English,table
 hartmann_2026_pro_climate_intention,Pro-climate behavioural intention items (author-developed),1,2,6,-3.4,English,table
 hayek_2022_attitude,Attitude toward getting good academic grades (I-Change Model socio-cognitive questionnaire),10.75,58.5,14,3.84333333333333,English,standard_omission
 hayek_2022_self_efficacy,Self-efficacy towards getting good academic grades (I-Change model socio-cognitive questionnaire),12.4,58.8,14,4.19857142857143,English,standard_omission
@@ -1918,6 +1920,7 @@ roy_2024_phq9,Patient Health Questionnaire-9 (PHQ-9),12,69.2222222222222,15.25,N
 roy_2024_sas_sv,Smartphone Addiction Scale - Short Version (SAS-SV),13,71.3,11.8333333333333,NA,Bengali,table
 rr98_accuracy,"Ratcliff & Rouder (1998, Experiment 1) brightness discrimination task, accuracy-instruction blocks",8.3030303030303,55.7878787878788,81,6.705,English,standard_omission
 ruiz_parra_2023_rfq8,"Reflective Functioning Questionnaire (RFQ-8), Spanish version",9.625,47.75,5.85714285714286,4.22357142857143,Spanish,table
+ruizjimenez_2026_health_eval,"Assessment of the current state of public healthcare (P6), FEDER UPO-1381076 survey on deservingness criteria in public services (Ruiz Jimenez et al., 2023 fieldwork)",9.83333333333333,72.0833333333333,5,12.9888636363636,Spanish,table
 RvKDCS_Romiacg_Miroshnik_2020_CBI,"Creative Behavior Inventory (CBI), 11-item Russian version",5.81818181818182,31.8181818181818,18.25,3.67,Russian,table
 rvobgvmaas_lsf_lehing_2024,"Maternal Antenatal Attachment Scale (MAAS; Condon 1993), German version (Mütterliche Antenatale Bindungsskala, MABS; Wittich, Hansche, Knappe & Martini 2009)",18.4736842105263,91.6842105263158,21.9789473684211,6.93545454545454,German,table
 ryvkina_2023_s1_activity_affect,EMOTIONS ESM: affect after the last activity (partly after the PANAS/PANAS-X),1,7.33333333333333,21,14.3,German,table
