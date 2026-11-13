@@ -1,7 +1,6 @@
-# item-text tables in the Redivis shards as of 2026-11-12
+# item-text tables in the Redivis shards as of 2026-11-13
 # status=published: a reader can fetch it. status=draft: uploaded, not released yet.
 # generated -- do not hand-edit; rerun itemtext/refresh_live_tables.py (irw#1828)
-# draft not listable by this token (needs data.edit) for irw_text_4; its draft rows carried forward from the snapshot taken 2026-11-08
 table,shard,status
 16_personalityfactors,irw_text,published
 360emergencymed_azami_2024,irw_text,published
@@ -964,6 +963,8 @@ hao_2025_social_regulation,irw_text_3,published
 hartmann_2026_ai_env_awareness,irw_text_3,published
 hartmann_2026_ai_use_intensity,irw_text_3,published
 hartmann_2026_climate_commitment,irw_text_3,published
+hartmann_2026_food_forest_wtp,irw_text_4,published
+hartmann_2026_monoculture_health_risk,irw_text_4,published
 hartmann_2026_pro_climate_intention,irw_text_3,published
 hayek_2022_attitude,irw_text_2,published
 hayek_2022_self_efficacy,irw_text_2,published
@@ -1931,6 +1932,7 @@ roy_2024_phq9,irw_text_3,published
 roy_2024_sas_sv,irw_text_3,published
 rr98_accuracy,irw_text_2,published
 ruiz_parra_2023_rfq8,irw_text_2,published
+ruizjimenez_2026_health_eval,irw_text_4,published
 rvobgvmaas_lsf_lehing_2024,irw_text_3,published
 ryvkina_2023_s1_activity_affect,irw_text_3,published
 ryvkina_2023_s1_activity_experience,irw_text_3,published
