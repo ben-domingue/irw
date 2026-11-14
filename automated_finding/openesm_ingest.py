@@ -114,6 +114,7 @@ NA_LABEL = re.compile(r"not applicable|\bn/?a\b|don.?t know|no answer|"
 ANCHOR = re.compile(r"(-?\d+(?:\.\d+)?)\s*=\s*(.*?)\s*"
                     r"(?=(?:\s-?\d+(?:\.\d+)?\s*=)|\n|$)")
 TODO = "TODO"
+COMPOSITE = re.compile(r"\b(?:mean|average|sum|total|product(?: term)?) of\b", re.I)
 
 
 # --------------------------------------------------------------------------
@@ -165,18 +166,31 @@ def download(rec, filename):
     return path
 
 
+def osf_node(guid):
+    """The OSF project behind a guid. openESM sometimes links a file
+    (0039_kuczynski's osf.io/huz67 is DailyDiary.csv in project wtbx8), and a
+    licence belongs to the project, so follow a file to the node holding it."""
+    r = requests.get(f"https://api.osf.io/v2/nodes/{guid}/", headers=HEADERS, timeout=60)
+    if r.status_code == 404:
+        f = get_json(f"https://api.osf.io/v2/files/{guid}/")
+        node = f["data"]["relationships"]["target"]["data"]["id"]
+        return get_json(f"https://api.osf.io/v2/nodes/{node}/"), f"file {guid} in node {node}"
+    r.raise_for_status()
+    return r.json(), f"node {guid}"
+
+
 def original_licence(link):
     """Best effort: the original deposit's licence from OSF or Zenodo."""
     link = link or ""
     try:
         m = re.search(r"osf\.io/([a-z0-9]{5})", link, re.I)
         if m:
-            node = get_json(f"https://api.osf.io/v2/nodes/{m.group(1)}/")
+            node, where = osf_node(m.group(1))
             rel = node["data"]["relationships"].get("license")
             if not rel:
-                return "none recorded on OSF", f"OSF API, node {m.group(1)}"
+                return "none recorded on OSF", f"OSF API, {where}"
             lic = get_json(rel["links"]["related"]["href"])
-            return lic["data"]["attributes"]["name"], f"OSF API, node {m.group(1)}"
+            return lic["data"]["attributes"]["name"], f"OSF API, {where}"
         m = re.search(r"figshare\.com/articles/(?:[^/]+/)*?(\d{6,})", link)
         if m:
             art = get_json(f"https://api.figshare.com/v2/articles/{m.group(1)}")
@@ -350,6 +364,9 @@ def plan(args):
         sys.exit(f"{did}: no `id` column")
 
     # ---- order, wave, date -------------------------------------------------
+    # A structure column can be present and empty: 0046_ringwald ships day and
+    # beep as NA throughout.
+    filled = lambda c: c in df.columns and df[c].notna().any()
     times = [c for c in df.columns if feats.get(c, {}).get("variable_type") in TIME_TYPES]
     prefer = ["answer", "start", "creat", "complet", "end", "issued", "sent", "schedul"]
     times.sort(key=lambda c: next((i for i, p in enumerate(prefer)
@@ -382,21 +399,22 @@ def plan(args):
         if dup:
             flag(f"{dup} prompts share a time stamp with another prompt of the "
                  "same person; they will be numbered in file order. Check why.")
-        if "counter" in df.columns or {"day", "beep"} <= set(df.columns):
-            key = ["counter"] if "counter" in df.columns else ["day", "beep"]
+        key = (["counter"] if filled("counter")
+               else [c for c in ("day", "beep") if filled(c)] if filled("day") else [])
+        if key:
             o = df[["id"] + key].assign(_t=ts).dropna(subset=["_t"])
             disagree = int((o.groupby("id")["_t"].rank(method="first")
-                            != o.sort_values(key).groupby("id").cumcount()
+                            != o.sort_values(key, kind="stable").groupby("id").cumcount()
                             .reindex(o.index) + 1).sum())
             if disagree:
                 flag(f"time order and {key} order disagree for {disagree} prompts. "
                      "Usually the time stamp is right (in 0018_bailon the file "
                      "listed App rows before Web rows); confirm.")
-    elif "counter" in df.columns:
+    elif filled("counter"):
         order = {"by": "counter", "column": "counter"}
         flag("no time stamps: `wave` = openESM `counter` (the scheduled prompt "
              "number), so missed prompts leave gaps; no `date`.")
-    elif {"day", "beep"} <= set(df.columns):
+    elif filled("day") and filled("beep"):
         b = pd.to_numeric(df["beep"], errors="coerce")
         d = pd.to_numeric(df["day"], errors="coerce")
         order = {"by": "day_beep", "day_min": int(d.min()), "beep_min": int(b.min()),
@@ -406,7 +424,11 @@ def plan(args):
              f"the sampling scheme ({rec.get('sampling_scheme')!r}); no `date`.")
     else:
         order = {"by": TODO}
-        flag("no time stamp, counter or day/beep: decide what `wave` is")
+        empty = [c for c in ("counter", "day", "beep") if c in df.columns and not filled(c)]
+        flag("no time stamp, counter or day/beep"
+             + (f" ({', '.join(empty)} present but empty throughout)" if empty else "")
+             + ": decide what `wave` is. File order is not evidence of time order; "
+             "check the paper or the original deposit before using it.")
 
     # ---- items ---------------------------------------------------------------
     issues = {"range": [], "na": Counter(), "ac": [], "noanchor": []}
@@ -557,11 +579,24 @@ def plan(args):
     for (v, lab), n in issues["na"].items():
         flag(f"{v} ({lab!r}) is read as missing in {n} item(s). Confirm it is "
              "not a scale point.")
-    singles = [t["name"] for t in tables if len(t["items"]) == 1]
-    if singles:
-        flag(f"{len(singles)} proposed table(s) hold a single item ({', '.join(singles)}). "
-             "Decide for each whether it belongs with a neighbouring table of the "
-             "same questionnaire, stands alone, or is not shipped.")
+    small = [f"{t['name']} ({len(t['items'])})" for t in tables if len(t["items"]) < 3]
+    if small:
+        flag(f"{len(small)} proposed table(s) hold fewer than 3 items: {', '.join(small)}. "
+             "datastandard.md's floor is 3 distinct items (ruled 2026-10-19), and "
+             "merging with an unrelated block does not clear it. Merge each into a "
+             "neighbouring table only if it is the same questionnaire; otherwise "
+             "move it to `not_shipped`.")
+    composite = []
+    for e in [e for t in tables for e in t["items"]] + candidates:
+        f = feats[e["column"]]
+        m = COMPOSITE.search(f.get("description", "") + " " + coding_of(f))
+        if m:
+            composite.append(f"{e['column']} ({m.group(0)!r})")
+    if composite:
+        flag("Described as computed from other items, so a composite, not a "
+             f"response (datastandard.md, 'Subscale aggregate columns'): "
+             f"{'; '.join(composite)}. Move each to `not_shipped` unless the paper "
+             "or deposit shows it is a single raw rating.")
     for t in tables:
         if len(t["name"]) > 40:
             flag(f"table name {t['name']} is over 40 characters")
