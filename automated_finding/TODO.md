@@ -7,8 +7,10 @@ Full write-up in `BATCH_LOG.md` (2026-11-14 — repos sweep).
 - [x] **UPLOADED 2026-11-14 by Claude (Ben's go-ahead in-session)**: 146 response tables (682,722 responses) to the
   item_response_warehouse_9 draft + 2 item text tables to the irw_text_4 draft, all row-count verified; provenance stamped.
 - [ ] **Ben publishes** the item_response_warehouse_9 and irw_text_4 drafts.
-- [ ] 6 `unworked` leads in `leads/repos_leads_2026-11-14.csv` (Romanian IPIP-NEO-300 stored keyed; LLM-vs-examiner
-  rater scores; Italian AI training needs; wood-stove questionnaire; Coyhaique soundscape; Indonesian AI-BI).
+- [x] Romanian IPIP-NEO-300 lead (Mendeley r2bdvzkzbj) worked 2026-11-14: 7 `gaianu_2021_*` tables (121,620 responses),
+  **UPLOADED by Claude** to the item_response_warehouse_9 draft (Ben's go-ahead in-session); see BATCH_LOG.
+- [ ] 5 `unworked` leads in `leads/repos_leads_2026-11-14.csv` (LLM-vs-examiner rater scores; Italian AI training
+  needs; wood-stove questionnaire; Coyhaique soundscape; Indonesian AI-BI).
 - [ ] Item text later: jin_2026_ipip_neo120 (Chinese headers = administered stems, IPIP English; a translated_substitute
   build needs the translation's terms), rexandgalais_2022_ipo_fr (codebook PDF with explicit codes; IPO needs a
   register row), lombard_2025_* and yumna_2025_* (statements are the headers; instruments unidentified).

@@ -27683,3 +27683,31 @@ Staged: 146 dictionary_auto + codebook_at_ingest rows, 146 tags/tags_auto.csv ro
 **Uploaded 2026-11-14** by Claude (Ben's go-ahead in-session): 146/146 response tables to the item_response_warehouse_9
 draft and 2/2 item text tables to the irw_text_4 draft, every one row-count verified by red_up; the two yousuf
 provenance rows stamped. PR #3501.
+
+## 2026-11-14 — repos sweep follow-up: Romanian IPIP-NEO-300 lead (Mendeley r2bdvzkzbj) -> 7 tables
+
+The sweep's top unworked lead. Gaianu P-A (2021), Mendeley Data V3, CC BY 4.0: 236 Romanian drivers, one .sav,
+no names/emails/IPs. Script `data/gaianu_2021_driver_personality.py`; all 7 tables pass `irw-validate --profile
+upload`, covariate lint clean.
+
+- `gaianu_2021_ipip_neo300` (300 items, 70,798 responses). **Stored keyed, shipped un-reversed to the answers as given.**
+  The keying check the sweep deferred: each variable label carries the Romanian item *and* its IPIP-NEO-300
+  administration number, and all 300 line up in order with the ipip.ori.org facet key, with + keyed items first
+  in every facet. Every deposited facet score is the plain sum of its 10 stored items, and every domain score is the
+  sum of its 6 facets. So the script asserts those sums and then stores 6 - x for the 148 - keyed items. Afterwards
+  140/148 - keyed items correlate negatively with their facet's + items. The 7 near-zero ones are already-weak
+  items (n5_6/10, e4_6/8/9, o4_8, o6_10) and the eighth is a2_5. **a2_5 is a mistranslation**: IPIP "Know how to get around
+  the rules" (-) became "Știu să mă supun regulilor" ("I know how to obey the rules"). Its keyed item-rest r was
+  -0.39 and its raw r with the + Morality items is +0.45. As shipped (raw), it is a positively worded item. This is
+  noted in the script header and the dictionary description. n4_9 is blank for 2 people.
+- `gaianu_2021_dbq` (Romanian DBQ, 27 items, 1-6). No reversals: the subscale totals are plain sums. The rights-register
+  DBQ row (hold) matched the item codes. Those codes are subscale+number, not wording, and no item text is shipped.
+- `gaianu_2021_tpb_{intention,attitude,subjective_norm,descriptive_norm,perceived_control}`: TPB questionnaire x 7
+  traffic-violation situations (21/91/21/21/28 items, 1-7). Item-rest r > 0.2 everywhere and the situation totals
+  are plain sums. One s2q15_ccp cell = 21 dropped. 214/236 answered any PBC item. q11 ("trecere") is not shipped, since
+  it is in no deposited score.
+- Covariates: age, gender, education, driving purpose (Romanian labels translated), driving experience (years).
+  CI_3 (distance) is dropped because its units are undocumented.
+- Item text: not shipped. The .sav stored ă/ș/ț as "?", so the Romanian wording is not exactly recoverable.
+
+**Upload:** red_up to the item_response_warehouse_9 draft by Claude (Ben's go-ahead in-session): 7/7 uploaded and row-count verified. Ben publishes.
