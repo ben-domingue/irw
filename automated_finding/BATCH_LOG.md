@@ -27710,4 +27710,4 @@ upload`, covariate lint clean.
   CI_3 (distance) is dropped because its units are undocumented.
 - Item text: not shipped. The .sav stored ă/ș/ț as "?", so the Romanian wording is not exactly recoverable.
 
-**Upload:** red_up to the item_response_warehouse_9 draft by Claude (Ben's go-ahead in-session).
+**Upload:** red_up to the item_response_warehouse_9 draft by Claude (Ben's go-ahead in-session): 7/7 uploaded and row-count verified. Ben publishes.
