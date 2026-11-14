@@ -27679,3 +27679,7 @@ third-party instruments).
 
 Staged: 146 dictionary_auto + codebook_at_ingest rows, 146 tags/tags_auto.csv rows, 146 itemtext_provenance rows,
 1 register row, 2 mapping_verification rows, 3 license_blocked rows, 133 search_terms_log rows.
+
+**Uploaded 2026-11-14** by Claude (Ben's go-ahead in-session): 146/146 response tables to the item_response_warehouse_9
+draft and 2/2 item text tables to the irw_text_4 draft, every one row-count verified by red_up; the two yousuf
+provenance rows stamped. PR #3501.

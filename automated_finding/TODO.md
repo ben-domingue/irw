@@ -4,8 +4,9 @@
 
 Full write-up in `BATCH_LOG.md` (2026-11-14 — repos sweep).
 
-- [ ] **Upload** 146 response tables (682,722 responses) + `yousuf_2026_osce_{experience,discrepancy}__items`, from
-  `~/irw-wt/sweep-1114/automated_finding/{irw_output,itemtext_output}/`.
+- [x] **UPLOADED 2026-11-14 by Claude (Ben's go-ahead in-session)**: 146 response tables (682,722 responses) to the
+  item_response_warehouse_9 draft + 2 item text tables to the irw_text_4 draft, all row-count verified; provenance stamped.
+- [ ] **Ben publishes** the item_response_warehouse_9 and irw_text_4 drafts.
 - [ ] 6 `unworked` leads in `leads/repos_leads_2026-11-14.csv` (Romanian IPIP-NEO-300 stored keyed; LLM-vs-examiner
   rater scores; Italian AI training needs; wood-stove questionnaire; Coyhaique soundscape; Indonesian AI-BI).
 - [ ] Item text later: jin_2026_ipip_neo120 (Chinese headers = administered stems, IPIP English; a translated_substitute
