@@ -27590,3 +27590,92 @@ English docx; others third-party or wording not deposited).
 
 Staged: 47 dictionary_auto + codebook_at_ingest rows, 47 tags/tags_auto.csv rows, 47 itemtext_provenance rows,
 2 register rows, 5 license_blocked rows, 135 search_terms_log rows.
+
+## 2026-11-14 — repos sweep (mode 3): 15 new topics x 9 languages, 146 tables, 682,722 responses from 31 deposits; 2 item text tables
+
+Ben, in-session: "run an automated search (including uploads and merges)". Reserved-source guard: `selftest` ok,
+every lead URL/DOI checked (`check-stdin`, all clear), `check-diff origin/main` before push. Worktree
+`~/irw-wt/sweep-1114`, branch `ben-domingue/repos-sweep-2026-11-14`.
+
+**Terms** (133 variants; English + Spanish, German, French, Chinese, Japanese, Arabic, Dutch, Korean; the Chinese and
+Japanese "OSCE" translations were already logged and were dropped): computer anxiety, odor identification, color
+vision test, speech perception, musical aptitude, tourist satisfaction, soundscape, thermal comfort, IPIP, OSCE,
+wine tasting, pharmacy students survey, riddles, pairwise comparison, customer loyalty. **988 candidates** (zenodo 424,
+dataverse 190, figshare 148, datacite 98, mendeley 72, osf 42, dryad 14); **618 triaged** with `--retriage`: 9 good,
+172 human_assistance, 320 no_usable_file, 66 download_failed (left out of the seen ledger for retry), 20 below_min_n,
+15 not_item_response, 8 pii_suspected, 7 license_restricted, 1 file_too_large. Step 2b: 71 recoverable_format,
+45 human_review (archived to `human_review/human_review_zenodo_2026-11-14.csv`), 23 worth_retrying,
+18 not_item_response, 14 aggregate_continuous, 1 conj; `[step 2b] 172 refined flag(s) recorded in
+repo_triage_seen_keys.csv`. The one conjoint routing was a false positive (zenodo 3818583, a French speech-perception
+sentence database whose title says "rôle conjoint", i.e. joint role) and was not added to `data/conjoint/candidates.csv`.
+Every good/pii/recoverable/worth_retrying/aggregate row (125) has a status in `leads/repos_leads_2026-11-14.csv`:
+32 shipped, 73 rejected_content, 9 blocked_licence, 6 unworked, 5 skipped_pii.
+
+What carried the batch: "customer loyalty" and "tourist satisfaction" (Indonesian/Asian PLS-SEM survey deposits with
+codes, plus a few documented ones), "soundscape" (ISO 12913-2 PAQ surveys), and adjacent personality/health-education
+deposits. Speech perception, odor identification, colour vision, riddles, wine tasting and thermal comfort surfaced
+trial-level experiments, sensor logs and acoustic recordings -- nothing shippable.
+
+**Shipped** (all `irw-validate --profile upload` pass, `run_qc` no fails, `irw_lint_covariates.py` clean):
+- `castagnetto_2024_{jse,jsapnc,jeffspll,selsa,swls,phq4}` (Zenodo 11270872, CC BY; Sci Data 2025): 1,707 Peruvian
+  medicine/nursing students. Items with an `r` suffix are stored reversed (codebook); every deposited total equals the
+  plain sum of the stored items, so shipped keyed, names keep the `r`. Region (IP-geolocated) dropped.
+- `yang_2025_{igd9,bsmas,mspss,ucla3,dass21,psqi_disturbance,ese}` (Zenodo 16738481, CC BY): 2,267 Hong Kong students.
+  DASS-21 stored 1-4 (deposit's subscale = 2 x stored sum). Triage's pii flag was a false positive.
+- `mitchell_2024_isd_{paq,sound_sources,who5}` (International Soundscape Database v1.0, Zenodo 10672568, CC BY): 3,589
+  in-situ questionnaires, 26 locations. No participant id (id = row). Gender left missing where the Chinese versions
+  store unkeyed 1/2; survey-point lat/long not carried.
+- `rexandgalais_2022_ipo` (602, Study 1's two samples collapsed with cov_sample) and `_ipo_fr` (607, the 40-item
+  IPO-fr) (Mendeley tv6w6yyfy8, CC BY). Workbooks have a title row above the header.
+- `jin_2026_ipip_neo120` (figshare 29596547, CC BY): 300 Chinese adults; item = neo_<k> from the numbered Chinese
+  headers (= IPIP-NEO-120 order; the English file's values are identical). Sparse adjective ratings not shipped.
+- `lombard_2025_*` x12 (figshare 30588839, CC0): 494 South African online grocery shoppers (the 69 screened-out rows
+  dropped), word responses coded 1-5, one table per questionnaire sub-section.
+- `yousuf_2026_osce_{experience,discrepancy}` (Zenodo 21407793, CC BY): 400 Somali health-sciences students; the
+  discrepancy block has its own anchors, so its own table. Codebook with scoring key in the deposit.
+- `chiba_2026_*` x6 (J-STAGE Data 32359635, CC BY): 403 Japanese tourists, 4-scenario experiment (cov_scenario); every
+  code documented on the record. The panel's respondent account id not carried.
+- `su_2025_*` x4 (figshare 30264874 = PLOS ONE S1 Data, CC BY): 381 Silk Road tourists. Headers are statements, so
+  items are coded dimension_k; the tie is checked against the deposited dimension means (all 381 rows, 9 dims).
+- `almousa_2026_pgx_*` x4 (figshare 31436659, CC BY): 279 Jordanian pharmacy/medical students. Knowledge: resp = 1 if
+  scored right, else 0, resp_raw keeps the depositors' 1/0/-1; attitude/confidence -2..2 shifted to 1-5.
+- `atsiz_2021_*` x3 (Mendeley r3v4xznjkp, CC BY): 411 Istanbul visitors. **182 mean-imputed cells dropped** (each
+  column's fractional values are one value equal to its integer-cell mean); one `guides` = 11 dropped.
+- `mombeuil_2025_*` x5 (DVN/OCF1FA, CC0) and `ali_2024_*` x5 (DVN/Z6HW2X, CC0): read from `format=original` .sav --
+  the .tab conversion had lost the value labels, which is what made their covariates usable.
+- `cunha_2026_{aias,psyflex,phq4}` (Zenodo 24193363, CC BY): 299-302 Portuguese adults; totals reproduce.
+- `doz_2025_{statistics_attitudes,research_competence,research_attitudes}` (Zenodo 15692867, CC BY): 1KA export, -3/-1
+  codes are missing; Q12 (stem and anchors not exported) not shipped.
+- `li_2025_indoor_*` x3 (Mendeley dkm73c7s6z), `gao_2026_pocket_park_*` x2 (Mendeley 9w9t8skvjp; `other_noise` renamed
+  `misc_noise` for the covariate lint), `keskin_2026_antalya_*` x2 (Mendeley 7yh3n7n824): soundscape surveys, CC BY.
+- PLS-SEM code-only deposits, one table per construct (names are IRW's reading of codes + record text):
+  `inanna_2026_*` x4, `setyawati_2025_*` x3, `utama_2025_*` x5, `radensatria_2026_*` x7, `anita_2026_*` x4,
+  `widjaja_2025_delivery_*` x6, `widjaja_2025_ent_*` x5, `tanuwijaya_2025_*` x7, `syamsuar_2025_*` x6 (1-6),
+  `go_2026_*` x6 (1-4), `kurniawati_2025_*` x8 (one BI2 = 6 cell dropped), `yumna_2025_*` x6 (1-6),
+  `nanda_2025_*` x6. Unkeyed demographic codes not carried.
+- Names shortened for the 40-character cap: widjaja `food_delivery_` -> `delivery_`, `entertainment_` -> `ent_`;
+  radensatria `other_customer_perception` -> `other_customers`.
+
+**Skipped:** PII -- Mendeley dm9dbndrn9 (name column, 209 filled), 3nscrfxyw9 (141 IP addresses + an email), Zenodo
+23243721 (Email_merge, Telefon), figshare 30315763 (Email), figshare 30662138 (ip). Pre-scored reversals -- Mendeley
+88kb9t8my6 (NEO IPIP 120, 573; non-standard numbering, reversed items unverifiable), Zenodo 20153132 (STAI, N=101).
+Synthetic-looking -- OSF zy5c7 (ships target_alpha / target_beta beside the achieved values). Duplicates of IRW's
+openpsychometrics BIG5 (`bfi_goldberg_1992_*`): figshare 96542, Zenodo 7596072. Undocumented codes: masstige
+(DVN/GFX52J), Shibuya CSR (Zenodo 7928253/7882674), Turkish smartphone addiction (13380083), Bali brand
+experience (23182815, duplicated .1 columns), food platform (14234145/14577345). Licence -- OSF au6m5, 234ng and
+Zenodo 15577841 -> `license_blocked_candidates.csv`; six more unlicensed OSF speech nodes left in leads.
+
+**Unworked leads** (6, in the leads CSV): Romanian IPIP-NEO-300 + DBQ (Mendeley r2bdvzkzbj, 236, stored keyed --
+shippable once reversals are checked against the IPIP key), LLM-vs-examiner rater scores (Zenodo 23945719, 8,405
+item scores, a `rater` table), Italian AI training needs (13890780), wood-stove questionnaire (zfp3j4nv3c, has a PDF),
+Coyhaique soundscape trail (249ts68x9m), Indonesian AI-BI statements (18076667).
+
+**Item text:** shipped for `yousuf_2026_osce_experience` and `_discrepancy` -- data_labels + study_materials (.sav
+variable labels = questions, value labels = all five anchors); two stems searched verbatim, no published match;
+register row YOUSUF-OSCE (ship); mapping_verification NOT_NEEDED x2. Gates: normalize_nulls, validate_items (PASS x2),
+audit_batch (PASS), irw-validate clean. Not shipped, with where the text is, in each provenance row (jin: Chinese
+headers + IPIP English, translation terms unestablished; IPO-fr: codebook PDF, third-party; others codes only or
+third-party instruments).
+
+Staged: 146 dictionary_auto + codebook_at_ingest rows, 146 tags/tags_auto.csv rows, 146 itemtext_provenance rows,
+1 register row, 2 mapping_verification rows, 3 license_blocked rows, 133 search_terms_log rows.
