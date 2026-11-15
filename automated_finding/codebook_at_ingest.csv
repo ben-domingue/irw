@@ -1575,6 +1575,10 @@ gries_2011_moral_foundations,core,none,2026-10-21
 griffin_2020_candidate_income,conj,https://dataverse.harvard.edu/api/access/datafile/3792889,2026-10-09
 grimmer_2017_credit_claiming,conj,none,2026-10-09
 gross_2026_cordon_dilemma,conj,https://dataverse.harvard.edu/api/access/datafile/13674600,2026-10-09
+grugan_2026_mps15,core,none,2026-11-15
+grugan_2026_psp_hes,core,none,2026-11-15
+grugan_2026_psps,core,none,2026-11-15
+grugan_2026_social_anxiety,core,none,2026-11-15
 gubitz_2022_incivility,conj,https://dataverse.harvard.edu/api/access/datafile/3868822,2026-10-08
 guerra_2010_teacher_resilience,core,none,2026-10-18
 guerra_2019_electric_motorcycle,conj,none,2026-10-14
@@ -1929,6 +1933,9 @@ hung_2026e_mindset,core,none,2026-11-02
 hung_2026e_problematic_video,core,none,2026-11-02
 hung_2026e_procrastination,core,none,2026-11-02
 hung_2026e_social_desirability,core,none,2026-11-02
+hussain_2026_ai_self_expression,core,https://zenodo.org/records/23231886/files/Numeric%20data.xlsx,2026-11-15
+hussain_2026_digital_flourishing,core,https://zenodo.org/records/23231886/files/Numeric%20data.xlsx,2026-11-15
+hussain_2026_self_concept_clarity,core,https://zenodo.org/records/23231886/files/Numeric%20data.xlsx,2026-11-15
 hutchinson_2023_household_arrangements,conj,https://dataverse.harvard.edu/api/access/datafile/6384150,2026-10-07
 huwyler_2025_side_income,conj,https://dataverse.harvard.edu/api/access/datafile/11982775,2026-10-09
 ibaceta_2026_daydreaming,core,https://zenodo.org/api/records/23498072/files/Data%20Sharable.xlsx/content,2026-10-28
@@ -2231,6 +2238,10 @@ kim_2025_karrot_econ_motiv,core,none,2026-10-09
 kim_2025_karrot_env_motiv,core,none,2026-10-09
 kim_2025_karrot_interact_motiv,core,none,2026-10-09
 kim_2025_karrot_reput_motiv,core,none,2026-10-09
+kim_2026_mips,core,none,2026-11-15
+kim_2026_pps_s,core,none,2026-11-15
+kim_2026_smps2,core,none,2026-11-15
+kim_2026_spes,core,none,2026-11-15
 kimuli_2025_tb_stigma,core,none,2026-10-30
 king_2026_biodiversity_woodland,conj,none,2026-10-14
 king_2026_urban_meadows,conj,none,2026-10-14
@@ -2492,6 +2503,7 @@ li_2025_indoor_sound_sources,core,none,2026-11-14
 li_2025_indoor_soundscape_attributes,core,none,2026-11-14
 li_2025_noise_sensitivity,core,none,2026-11-14
 li_2025_self_esteem,core,none,2026-10-20
+li_2026_aas,core,none,2026-11-15
 li_2026_academic_self_efficacy,core,https://ndownloader.figshare.com/files/70373055,2026-11-15
 li_2026_ai_anxiety,core,none,2026-10-19
 li_2026_ai_self_efficacy,core,none,2026-10-19
@@ -2952,6 +2964,8 @@ moise_2025_eu_defence,conj,https://dataverse.harvard.edu/api/access/datafile/105
 mojsa_kaja_2023_ais,core,none,2026-11-08
 mojsa_kaja_2023_bdi2,core,none,2026-11-08
 mojsa_kaja_2023_stai_s,core,none,2026-11-08
+mokhtar_2026_growth_mindset,core,none,2026-11-15
+mokhtar_2026_stem_self_efficacy,core,none,2026-11-15
 molin_2026_vacation_positional,conj,https://data.4tu.nl/file/81910815-0b19-4304-872d-6c31255c8e61/7a4de988-b133-4433-a8b7-b2951d565ba5,2026-10-14
 mombeuil_2025_crm,core,none,2026-11-14
 mombeuil_2025_csr_associations,core,none,2026-11-14
@@ -3321,6 +3335,11 @@ pickering_2025_peacekeeping_uk,conj,https://dataverse.harvard.edu/api/access/dat
 pickering_2026_ebike_policy,conj,https://dataverse.harvard.edu/api/access/datafile/13913901,2026-10-08
 pickett_2024_officer_conjoint,conj,none,2026-10-09
 pickett_2024_officer_photos,conj,none,2026-10-09
+pimchangthong_2026_attitude,core,none,2026-11-15
+pimchangthong_2026_perceived_control,core,none,2026-11-15
+pimchangthong_2026_subjective_norms,core,none,2026-11-15
+pimchangthong_2026_tech_readiness,core,none,2026-11-15
+pimchangthong_2026_usage_intention,core,none,2026-11-15
 pinedo_2026_genai_utaut2,core,https://zenodo.org/records/20400330/files/Database.xlsx,2026-10-11
 pinheiro_2024_naqr,core,none,2026-10-10
 pinheiro_2024_srq20,core,none,2026-10-10
