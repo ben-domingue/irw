@@ -84,7 +84,7 @@ def main():
         if c.status == "warn":
             print(f"[warn] {TABLE} {c.name}: {c.detail[:120]}")
     OUT_DIR.mkdir(parents=True, exist_ok=True)
-    (OUT_DIR / f"{TABLE}.csv").write_text(long.to_csv(index=False))
+    long.to_csv(OUT_DIR / f"{TABLE}.csv", index=False)
     print(f"[write] {TABLE}: {len(long)} responses, "
           f"{long['id'].nunique()} ids x {long['item'].nunique()} items")
 

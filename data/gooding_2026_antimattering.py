@@ -85,7 +85,7 @@ def main():
         for c in checks:
             if c.status == "warn":
                 print(f"[warn] {table} {c.name}: {c.detail[:120]}")
-        (OUT_DIR / f"{table}.csv").write_text(long.to_csv(index=False))
+        long.to_csv(OUT_DIR / f"{table}.csv", index=False)
         print(f"[write] {table}: {len(long)} responses, "
               f"{long['id'].nunique()} ids x {long['item'].nunique()} items")
 
