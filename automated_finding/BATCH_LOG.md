@@ -27711,3 +27711,104 @@ upload`, covariate lint clean.
 - Item text: not shipped. The .sav stored ă/ș/ț as "?", so the Romanian wording is not exactly recoverable.
 
 **Upload:** red_up to the item_response_warehouse_9 draft by Claude (Ben's go-ahead in-session): 7/7 uploaded and row-count verified. Ben publishes.
+
+## 2026-11-15 — replay-ha (the 72 unworked human_assistance rows of `leads/repos_replay_2026-11-02_good_ha.csv`): 15 deposits, 45 tables, 262,423 responses; 11 held
+
+Worktree `~/irw-wt/replay-ha-1102`, branch `auto/replay-ha-1102`. Source: the 72 rows of the 11-02 repos replay file
+whose `status` was empty (48 figshare, 17 zenodo, 5 datacite, 2 dataverse). Reserved-source guard: `selftest` ok,
+`check-diff origin/main` before every push. Every row was checked against `data/`, the dictionaries, `leads/` and
+`human_review/` by DOI and by deposit id; licences were read from each repository's API record, not the CSV column.
+Nothing was uploaded or published; uploads are Ben's. Every row's outcome is in its `status` cell.
+
+**Already decided elsewhere (9 rows):** the 2026-11-10 hour run (hour-1110-c) had worked these from
+`leads/repos_leads_2026-11-10b.csv`, where the replay rows were re-listed; their statuses are copied over (4 shipped:
+`song_2026_*`, `amorim_2026_ctar`, `gavinchocano_2026_tmms_*`, `gray_2026_*`; 3 held; 1 PII skip; 1 rejected). Two
+further rows are twin records of a deposit worked here (Manchester 34167447 with and without `.v1`; Poulin 34317003 /
+34316694) and take its status.
+
+**Shipped (all pass `irw-validate --profile upload`, `run_qc()` with permitted values, `irw_lint_covariates.py`):**
+- `hill_2026_{mps15,mbi}` (yorksj 29533175, CC BY; paper 10.1177/13591053261449051) -- 339 UK surgeons, brief MPS 15
+  and MBI 22 (stored 1-7). All 339 rows ship; the deposit's syntax drops 37 >5%-missing cases and then outliers, giving
+  the paper's 298. ID repeats on two pairs of different people, so id = row index.
+- `gooding_2026_{ssosh,anti_mattering,dass21}` (Manchester 34167447, CC BY) -- 172 students = the record's N; free-text
+  ethnicity/gender/discipline not carried.
+- `pesen_2026_ai_adoption` (figshare 34868748, CC BY) -- 352 Turkish teachers (= the CFA sample in the description),
+  22-item DOI-theory scale; the 591-teacher EFA sample is a jamovi workspace and is not shipped.
+- `dostiyarova_2026_kdocs` (zenodo 23452364, CC BY) -- K-DOCS 50 items, 288 = the README's N; codebook sheet in the
+  workbook.
+- `oseianim_2026_{entrepreneurial_mindset,research_self_efficacy,academic_integrity,cheating_pressure}` (figshare
+  34779651, CC BY) -- 247 Ghanaian tertiary students (= the description). Headers are stems; block boundaries from the
+  deposit's own scoring script; codes numbered within block, boundary stems asserted.
+- `zemrani_2026_{hadith_discrimination,verification_criteria,ai_verification_attitudes}` (figshare 34754181, CC BY) --
+  134 Moroccan Islamic Studies students (= the description). The 40 discrimination cells are 1 = "judged authentic";
+  the file's score equals sum(H) + sum(1 - A) on all 134 rows, so A items are flipped and resp = correct. Its
+  `rights_register` warning (codes H1-A20 hitting the Honarvar-KAP pattern) is a code-pattern false positive; no item
+  text ships.
+- `li_2026_{teacher_student_interaction,academic_self_efficacy,english_learning_interest,english_learning_engagement}`
+  (figshare 32112169, CC BY) -- 201 = the description; all four deposited totals reproduce from the items. The data
+  column headed Q42 is the item the deposit's key and descriptions call Q43 (the LE total reproduces only with it);
+  it ships as Q43.
+- `shafique_2026_{risk_governance,public_participation,institutional_trust,community_resilience,preparedness_behavior}`
+  (figshare 34874724, CC BY) -- 370 flood-affected households, Jalalpur Pirwala; bilingual questionnaire in the deposit.
+  Union council and flood-zone columns dropped (geography rule).
+- `saputra_2026_{rpa,supply_chain_resilience,sustainable_growth}` (figshare 34691808, CC BY) -- 146 = the description.
+- `grugan_2026_{psps,psp_hes,social_anxiety,mps15}` (Northumbria 34094325, CC BY) -- raw student (537) and community
+  (353) files merged with `cov_sample`; 537 + 353 = the record's 539 + 354 less its three straight-liners.
+- `li_2026_aas` (figshare 34399539, CC BY) -- 18-item AAS: Study 1 (1,205, one wave) and Study 2 (1,112, three waves)
+  merged with `cov_study`. Genotype columns not carried; Study 3 (164, undocumented repeated blocks) not shipped.
+- `pimchangthong_2026_{tech_readiness,attitude,subjective_norms,perceived_control,usage_intention}` (figshare 34704774,
+  CC BY) -- 487 = the description.
+- `hussain_2026_{ai_self_expression,self_concept_clarity,digital_flourishing}` (zenodo 23231886, CC BY) -- 484. Two
+  more 3-item blocks (SRAR, PASI) are not shipped: their constructs are named nowhere and the codebook's "ASI" does not
+  match the data's PASI.
+- `mokhtar_2026_{growth_mindset,stem_self_efficacy}` (figshare 34075200, CC BY) -- 600 children, 301 boys / 299 girls
+  (= the description, asserted). Eight isolated code-4 cells on a labelled 1-3 scale dropped as entry errors.
+- `kim_2026_{pps_s,mips,smps2,spes}` (yorksj 32961659, CC BY) -- 263 athletes. Every item column is an SPSS `SMEAN()`
+  copy; the 31 non-integer (imputed) cells are dropped. Instruments identified from codes and published item counts.
+
+**Held (11 rows; Ben decides):**
+- figshare 34867032 (nurse managers, 393) and PLOS pone.0361505 S1 (solar terms, 350): response-quality review;
+  reasons kept off the public record. Built tables in `runs/held/`.
+- zenodo 23575980 (health literacy, Türkiye): the English sheet (421, coded) and Turkish sheet (400, labelled) share no
+  rows and differ in N.
+- figshare 32614038 (Hangzhou park, 293): 35 exact duplicate rows across all 21 items; no id links ratings to
+  demographics.
+- zenodo 23376616 (obesity and depression): no licence on the record.
+- Third-party extracts: dataverse SBQWLX (WVS Nigeria), figshare 34859118 (NHIS 2025), figshare 30104377 (OECD Risks
+  that Matter). The originators' terms govern; take from source if wanted.
+- figshare 32668833 v3 (JobCannon): the new instrument files hold answer indices with per-item ranges up to 0-8 on
+  5-point instruments and no key; only `career_match` (v1) is in IRW.
+- zenodo 23693213 (Bangladesh climate/migration panel): a merged regression file, 14 satisfaction ratings stored as
+  text labels.
+- zenodo 23691068 (Spanish young adults): the only item block is three NutSo-HH single items the authors analyse
+  separately.
+
+**Rejected (36 rows):** 20 are not person-by-item data at all (pKa tables, steel fatigue, patents, microbiome,
+transcriptomics, regional economics, eye-tracking features, classifier parameters, evidence maps, a scoping review,
+coded comments, an instrument catalogue, physical and refraction measurements). The rest deposit only scale totals,
+z-scores or factor scores (Gomez IGD, Saylik, Kassahun, Zhang resilience, Saleem, Li ACEs, Calatrava ECR, Kubis, the
+loneliness networks), or fall below the floors (N = 41, 50, 95; one data row).
+
+**Item text:** none shipped. In hand but not attempted: pesen_2026 (Turkish stems in the .sav variable labels,
+study-authored; no anchors in the file), dostiyarova_2026 (every K-DOCS stem in the Codebook sheet; no register row),
+oseianim_2026 (stems are the headers), li_2026 EFL (Chinese stems in Item_Descriptions), shafique_2026 (English/Urdu
+questionnaire docx), zemrani_2026 (Arabic Likert stems in the headers; the 40 texts are not deposited). The rest have
+no wording in the deposit. Each script header says where the text is.
+
+**Staging:** 45 dictionary + codebook rows (`stage_dict_row.py`), 45 tag rows (`stage_tag_row.py`), 72 statuses in the
+replay file, and the solar-terms row of `leads/plos_leads_2026-10-30.csv`. Covariate-label harvest run for the five
+.sav scripts with covariates (hill, pesen, pimchangthong, mokhtar, kim); `build.py` emits labels only for live tables,
+so nothing lands until after release, and its unrelated churn was not committed. Tables are in
+`~/irw-wt/replay-ha-1102/automated_finding/irw_output/`.
+
+**Lesson:** the profile flags (`imputed_values*`, `item_scale_outlier`) do not screen response quality. Before
+staging a multi-scale deposit, compare its columns with each other: within- vs between-scale correlations, item means
+and spreads across constructs, and pairs of columns with identical value distributions.
+
+**Upload:** red_up to the item_response_warehouse_9 draft by Claude (Ben's go-ahead in-session, 2026-11-15): 45/45
+uploaded and row-count verified. The first pass lost DNS after 19 tables; the 26 failures dry-ran as NEW (no partial
+tables) and uploaded on retry. Ben publishes.
+
+**Ruled 2026-11-15 (Ben):** the three third-party extracts (WVS Nigeria, NHIS 2025, OECD Risks that Matter) are
+dropped for now; statuses set to `rejected_content`. If one is ever wanted, build from the source survey (OECD's
+terms unchecked). Holds now 8.
