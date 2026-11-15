@@ -1203,3 +1203,4 @@ singleton_2021_roundabout_bicycle,climate_energy_environment,place,claude 2026-1
 "vonhaefen_2023_stream_quality","climate_energy_environment","policy","claude 2026-11-11 (#3474 coded-levels build)","stream water quality action plans funded by a stormwater fee"
 "qiankai_2026_mealtime_ltc","health_covid","product_service","claude 2026-11-11 (#3474 coded-levels build)","mealtime arrangements in long-term care (care service); consumer_products considered"
 "nguyen_2026_urine_sanitation","climate_energy_environment","policy","claude 2026-11-11 (#3474 coded-levels build)","urine-separating sanitation systems with nutrient recovery: water and environmental infrastructure"
+"meijer_2006_dutch_rail","consumer_products","product_service","claude 2026-11-15 (mlogit scout build)","travellers choosing between two train journeys by fare, time, interchanges and comfort; climate_energy_environment considered (transport) but the setting is a consumer service choice, not policy"
