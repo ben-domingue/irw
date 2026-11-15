@@ -32,6 +32,7 @@
 ##                           as 1-101 (the file's own *_n columns are value - 1 = the 0-100 count); stored raw.
 ##  rating_legit_*           LE01_01..09 Alexiou & Wiggins legitimacy items, 1-7; column order follows Variables.pdf (inter-item correlations agree:
 ##                           the first two, "general public approves" and "most people think practices morally correct", form their own cluster).
+##Missing: -9, SoSci Survey's "not answered" code (one LE01_07 value), -> NA (stored as -9 until 2026-11-15).
 ##Dropped: the authors' derived scales (prejudices_means, PU*_n, PU*_nreverse), manipulation check (MC), attention checks, ZG01_CP (duration-like
 ##code), IV01_01 (block order), FL01 literacy items, education (10 unlabelled codes), income (unlabelled), employment, job security, ALG II
 ##experience, free-text education and employment (SD_edu_other, CV_empl_stat_other).
@@ -56,6 +57,10 @@ for (n in names(pj)) d[[paste0("rating_prejudice_", n)]] <- x[[pj[[n]]]]
 lg <- c(public_approves = 1, morally_correct = 2, common_good = 3, ethical_standards = 4, appropriate_rules = 5, better_world = 6,
         creates_value = 7, in_stakeholder_interest = 8, benefits_stakeholders = 9)
 for (n in names(lg)) d[[paste0("rating_legit_", n)]] <- x[[sprintf("LE01_%02d", lg[[n]])]]
+# -9 is SoSci Survey's "not answered" code (one LE01_07 value); stored as -9 until 2026-11-15.
+rc0 <- grep("^rating", names(d), value = TRUE)
+for (n in rc0) d[get(n) == -9, (n) := NA]
+stopifnot(all(unlist(d[, ..rc0]) >= 1, na.rm = TRUE))
 d[, `:=`(attr_learning_demands = ifelse(bitwAnd(g, 1L) > 0, LD, NS), attr_compliance_demands = ifelse(bitwAnd(g, 2L) > 0, CD, NS),
          attr_sanctions = ifelse(bitwAnd(g, 4L) > 0, SA, NS),
          cov_gender = c("female", "male", "other")[x$SD_gender], cov_age = as.integer(x$SD_age), cov_left_right_code = as.integer(x$pol_ideology))]
