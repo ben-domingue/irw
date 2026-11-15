@@ -1,55 +1,35 @@
 instrument,slug,table,suggestion,decision,basis,member_note,why,language,text_source,n_items,k,construct_name,instrument_field
-BFI-10,bfi10,mendezlopez_2023_bfi10,DECIDE,,name,,table name names it; 11 items vs 10,spa,none_recorded,11,10,Big Five personality (BFI-10),
-BFI-44,bfi44,batool_2024_big_five,DECIDE,,name,,table name does not name it; 44 items vs 44,eng,none_recorded,44,44,Five-factor personality (BFI-44),
-BFI-44,bfi44,bfi_goldberg_1992_extraversion,DECIDE,,wording,,"9/44 items match, not one whole subscale: short form or mixed table?",eng,study_materials,10,44,Big Five Inventory: Extraversion,"IPIP Big-Five Factor Markers (50-item set; Goldberg, 1992), Factor I: Extraversion (Surgency)"
-BFI-44,bfi44,bfi_goldberg_1992_openness_to_experience,DECIDE,,wording,,"4/44 items match, not one whole subscale: short form or mixed table?",eng,study_materials,10,44,Big Five Inventory: Openness to Experience,"IPIP Big-Five Factor Markers (50-item set; Goldberg, 1992), Factor V: Intellect or Imagination, coded O1-O10 as Openness to Experience in the source codebook"
+BFI-44,bfi44,bfi_goldberg_1992_extraversion,DECIDE,,wording,,"1/44 items match, not one whole subscale: short form or mixed table?",eng,study_materials,10,44,Big Five Inventory: Extraversion,"IPIP Big-Five Factor Markers (50-item set; Goldberg, 1992), Factor I: Extraversion (Surgency)"
+BFI-44,bfi44,bfi_goldberg_1992_neuroticism,DECIDE,,wording,,"0/44 items match, not one whole subscale: short form or mixed table?",eng,study_materials,10,44,Big Five Inventory: Neuroticism,"IPIP Big-Five Factor Markers (50-item set; Goldberg, 1992), Factor IV: Emotional Stability, coded N1-N10 as Neuroticism in the source codebook"
+BFI-44,bfi44,bfi_goldberg_1992_openness_to_experience,DECIDE,,wording,,"0/44 items match, not one whole subscale: short form or mixed table?",eng,study_materials,10,44,Big Five Inventory: Openness to Experience,"IPIP Big-Five Factor Markers (50-item set; Goldberg, 1992), Factor V: Intellect or Imagination, coded O1-O10 as Openness to Experience in the source codebook"
 BFI-44,bfi44,meyer_2022_bfi,DECIDE,,name,,table name names it; 22 items vs 44,"fre, eng",none_recorded,22,44,"Big Five personality (22 items from the BFI, John & Srivastava)",
 BFI-44,bfi44,schadelbauer_2023_bfi,DECIDE,,name,,table name names it; 11 items vs 44,eng,none_recorded,11,44,Big Five Inventory short form (BFI-10/-S),
 BFI-44,bfi44,shan_2024_bfi_s,DECIDE,,name,,table name names it; 25 items vs 44,NA,none_recorded,25,44,"Big Five Inventory, short version (BFI-S)",
 Brief COPE,brief_cope,gori_2020_cope,DECIDE,,name,,table name names it; 60 items vs 28,ita,none_recorded,60,28,"Coping Orientation to Problems Experienced, New Italian Version (COPE-NVI)",
-CES-D,cesd,martin_2021_cesdr,DECIDE,,supplied,,"5/20 items match, not one whole subscale: short form or mixed table?",eng,none_recorded,20,20,Center for Epidemiologic Studies Depression Scale - Revised (CESD-R),Center for Epidemiologic Studies Depression Scale - Revised (CESD-R)
-Fear of COVID-19 Scale,fcv19s,fcv19s_hossain_2022_fear,DECIDE,,supplied,,"4/7 items match, not one whole subscale: short form or mixed table?",eng,none_recorded,7,7,Fear of COVID-19,Fear of COVID-19
-Fear of COVID-19 Scale,fcv19s,kfcovid_fear_Li2020,DECIDE,,supplied,,"4/7 items match, not one whole subscale: short form or mixed table?",eng,none_recorded,7,7,Fear of COVID-19 Scale (FCV-19S),Fear of COVID
-Fear of COVID-19 Scale,fcv19s,kopczynski_2021_fcv19s,DECIDE,,supplied,,"3/7 items match, not one whole subscale: short form or mixed table?",pol,none_recorded,7,7,Fear of COVID-19,"Fear of COVID-19 Scale (FCV-19S, 7 items), Ahorsu, Lin, Imani, Saffari, Griffiths & Pakpour (2020), Polish administration"
-Fear of COVID-19 Scale,fcv19s,pilch_2021_fcv19s_validation,DECIDE,,supplied,,"3/7 items match, not one whole subscale: short form or mixed table?",pol,none_recorded,7,7,NA,"Fear of COVID-19 Scale (FCV-19S), Polish version"
-GAD-7,gad7,baseke_2026_gad7,DECIDE,,supplied,,"4/7 items match, not one whole subscale: short form or mixed table?",eng,none_recorded,7,7,"GAD-7 anxiety symptoms (7 items, 0-3)",Generalized Anxiety Disorder 7-item scale (GAD-7)
+Fear of COVID-19 Scale,fcv19s,fcv19s_hossain_2022_fear,DECIDE,,supplied,,"6/7 items match, not one whole subscale: short form or mixed table?",eng,none_recorded,7,7,Fear of COVID-19,Fear of COVID-19
+Fear of COVID-19 Scale,fcv19s,kfcovid_fear_Li2020,DECIDE,,supplied,,"6/7 items match, not one whole subscale: short form or mixed table?",eng,none_recorded,7,7,Fear of COVID-19 Scale (FCV-19S),Fear of COVID
+Fear of COVID-19 Scale,fcv19s,pilch_2021_fcv19s_validation,DECIDE,,supplied,,"1/7 items match, not one whole subscale: short form or mixed table?",pol,none_recorded,7,7,NA,"Fear of COVID-19 Scale (FCV-19S), Polish version"
 GAD-7,gad7,marian_2023_gad,DECIDE,,name,,table name names it; 8 items vs 7,rum,none_recorded,8,7,GAD-Q-IV (EMA adaptation),"GAD-Q-IV, adapted for EMA"
 General Self-Efficacy Scale,gse,ali_2026_gses,DECIDE,,name,,table name does not name it; 10 items vs 10,NA,none_recorded,10,10,General Self-Efficacy Scale (GSES; Schwarzer & Jerusalem),
-General Self-Efficacy Scale,gse,heekerens_2025_gse,DECIDE,,name,,table name names it; 3 items vs 10,ger,none_recorded,3,10,general self efficacy,
 General Self-Efficacy Scale,gse,jeilani_2024_self_efficacy,DECIDE,,wording,,"5/10 items match, not one whole subscale: short form or mixed table?",NA,study_materials,7,10,Self-efficacy scale (SEF),General Self-Efficacy Scale (GSE)
 General Self-Efficacy Scale,gse,kolanska_stronka_2026_gses,DECIDE,,name,,table name does not name it; 10 items vs 10,pol,none_recorded,10,10,General Self-Efficacy Scale (GSES),
 General Self-Efficacy Scale,gse,li_2023_self_efficacy,DECIDE,,name,,table name does not name it; 10 items vs 10,chi,none_recorded,10,10,"General Self-Efficacy Scale (GSE), 10 items","General Self-Efficacy Scale (GSE), Schwarzer & Jerusalem (1995), Chinese version"
 General Self-Efficacy Scale,gse,lochmannova_2026_self_efficacy,DECIDE,,name,,table name does not name it; 10 items vs 10,cze,none_recorded,10,10,General Self-Efficacy Scale (GSE),
-General Self-Efficacy Scale,gse,mutuyimana_2026_gse,DECIDE,,name,,table name names it; 9 items vs 10,"eng, kin, swa",none_recorded,9,10,General self-efficacy,
 General Self-Efficacy Scale,gse,oanh_2024_gses,DECIDE,,name,,table name does not name it; 10 items vs 10,NA,none_recorded,10,10,General Self-Efficacy Scale (GSES),
 General Self-Efficacy Scale,gse,pugliese_2023_gses,DECIDE,,name,,table name does not name it; 10 items vs 10,eng,none_recorded,10,10,General Self-Efficacy Scale (GSES),
 General Self-Efficacy Scale,gse,song_2026_self_efficacy,DECIDE,,name,,table name does not name it; 10 items vs 10,chi,none_recorded,10,10,General self-efficacy,
-LOT-R,lotr,ramirez_maestre_2020_lotr,DECIDE,,name,,table name names it; 6 items vs 10,spa,none_recorded,6,10,"Optimism and pessimism (Life Orientation Test-Revised, Spanish)",
-LOT-R,lotr,stapleton_2021_lotr,DECIDE,,name,,table name names it; 6 items vs 10,eng,none_recorded,6,10,Life Orientation Test-Revised (LOT-R),
-MSPSS,mspss,huang_2025_perceived_social_support,DECIDE,,name,,table name does not name it; 12 items vs 12,chi,none_recorded,12,12,Perceived social support (MSPSS),
-MSPSS,mspss,li_2023_social_support,DECIDE,,name,,table name does not name it; 12 items vs 12,chi,none_recorded,12,12,"Multidimensional Scale of Perceived Social Support (MSPSS), 12 items","Multidimensional Scale of Perceived Social Support (MSPSS), Zimet et al. (1988), Chinese version"
-PANAS,panas,gracio_michelon_2026_panas_na,DECIDE,,name,,table name names it; 5 items vs 20,eng,none_recorded,5,20,PANAS short form: negative affect,
-PANAS,panas,gracio_michelon_2026_panas_pa,DECIDE,,name,,table name names it; 5 items vs 20,eng,none_recorded,5,20,PANAS short form: positive affect,
 PANAS,panas,ha_2026_aspire_affect,DECIDE,,wording,,"2/20 items match, not one whole subscale: short form or mixed table?",eng,study_materials,7,20,NA,ASPIRE twice-weekly daily diary affect ratings (items based on the PANAS and prior daily diary studies)
-PANAS,panas,manylabs4_klein_2022_panasx,DECIDE,,name,,table name names it; 60 items vs 20,NA,none_recorded,60,20,PANAS-X,
-PANAS,panas,van_beveren_2019_panasc,DECIDE,,name,,table name names it; 30 items vs 20,dut,none_recorded,30,20,PANAS for Children (PANAS-C),
-PANAS,panas,wang_2026_panas_na,DECIDE,,name,,table name names it; 5 items vs 20,chi,none_recorded,5,20,"Positive and Negative Affect Schedule (short), negative affect",
-PANAS,panas,wang_2026_panas_pa,DECIDE,,name,,table name names it; 5 items vs 20,chi,none_recorded,5,20,"Positive and Negative Affect Schedule (short), positive affect",
 PCL-5,pcl5,guo_2015_pcl,DECIDE,,name,,table name names it; 17 items vs 20,chi,none_recorded,17,20,PTSD symptoms (PCL-C),
-PHQ-9,phq9,yao_2023_depression,DECIDE,,name,,table name does not name it; 9 items vs 9,chi,none_recorded,9,9,Patient Health Questionnaire-9 (PHQ-9),
 Perceived Stress Scale (PSS-10),pss10,bakirdemir_2020_pss,DECIDE,,name,,table name names it; 14 items vs 10,tur,none_recorded,14,10,Perceived stress,
 Perceived Stress Scale (PSS-10),pss10,danielgonzalez_2020_pss,DECIDE,,name,,table name names it; 14 items vs 10,spa,none_recorded,14,10,Perceived stress (PSS-14),
 Perceived Stress Scale (PSS-10),pss10,fernandeztalaverano_2026_pss,DECIDE,,name,,table name names it; 5 items vs 10,spa,none_recorded,5,10,Suicidal ideation (Paykel Suicide Scale),
 Perceived Stress Scale (PSS-10),pss10,vicens_2021_pss,DECIDE,,name,,table name names it; 14 items vs 10,spa,none_recorded,14,10,Perceived stress (PSS-14),
-Rosenberg Self-Esteem Scale,rses,apaza_2026_self_esteem,DECIDE,,name,,table name does not name it; 10 items vs 10,spa,none_recorded,10,10,"Rosenberg Self-Esteem Scale (RSES), Spanish",
-Rosenberg Self-Esteem Scale,rses,contreras_valdez_2026_rses,DECIDE,,name,,table name names it; 8 items vs 10,spa,none_recorded,8,10,Rosenberg Self-Esteem Scale,
 Rosenberg Self-Esteem Scale,rses,li_2025_self_esteem,DECIDE,,name,,table name does not name it; 10 items vs 10,chi,none_recorded,10,10,Rosenberg Self-Esteem Scale (SES),
 Rosenberg Self-Esteem Scale,rses,orsini_2018_self_esteem,DECIDE,,name,,table name does not name it; 10 items vs 10,spa,none_recorded,10,10,Self-esteem (Rosenberg length),
 Short Dark Triad,sd3,qi_2025_dark_triad,DECIDE,,name,,table name does not name it; 27 items vs 27,chi,translated_substitute,27,27,Short Dark Triad—Chinese Version (SD3-C),
 Short Dark Triad,sd3,sariyska_2019_dark_triad,DECIDE,,name,,table name does not name it; 27 items vs 27,NA,none_recorded,27,27,Dark Triad (SD3),
 Short Dark Triad,sd3,short_dark_triad,DECIDE,,name,,table name does not name it; 27 items vs 27,eng,study_materials,27,27,Short Dark Triad (SD3),
 TIPI,tipi,galindo_2026_personality,DECIDE,,name,,table name does not name it; 10 items vs 10,"baq, spa, gre",none_recorded,10,10,Ten-item personality inventory,
-TIPI,tipi,martindelcampo_2020_tipi,DECIDE,,supplied,,"1/10 items match, not one whole subscale: short form or mixed table?",spa,translated_substitute,10,10,NA,"Ten-Item Personality Inventory (TIPI; Gosling, Rentfrow & Swann, 2003)"
 UCLA Loneliness Scale (20 items),ucla_ls,chen_2026_clubs_ucla_loneliness,DECIDE,,name,,table name names it; 7 items vs 20,chi,none_recorded,7,20,UCLA Loneliness Scale (short form),
 UCLA Loneliness Scale (20 items),ucla_ls,euls_2022_ucla,DECIDE,,name,,table name names it; 3 items vs 20,NA,none_recorded,3,20,UCLA 3-item Loneliness Scale,
 UCLA Loneliness Scale (20 items),ucla_ls,shiota_2026_loneliness,DECIDE,,name,,table name does not name it; 20 items vs 20,eng,none_recorded,20,20,UCLA Loneliness Scale (version 3),
@@ -58,7 +38,6 @@ BFI-44,bfi44,RvKDCS_Romiacg_Miroshnik_2020_BFI,REJECT,,,,hand call: 60 items: th
 BFI-44,bfi44,SABFI2_Gallardo_Pujol_2018_BFI,REJECT,,,,hand call: 60 items: the BFI-2 (a different instrument),spa,none_recorded,60,44,Big Five Inventory-2 (BFI-2),
 BFI-44,bfi44,bfi_goldberg_1992_agreeableness,REJECT,,,,hand call: IPIP Big-Five Factor Markers (Goldberg 1992): a different instrument,eng,study_materials,10,44,Big Five Inventory: Agreeableness,"IPIP Big-Five Factor Markers (50-item set; Goldberg, 1992), Factor II: Agreeableness"
 BFI-44,bfi44,bfi_goldberg_1992_conscientiousness,REJECT,,,,hand call: IPIP Big-Five Factor Markers (Goldberg 1992): a different instrument,eng,study_materials,10,44,Big Five Inventory: Conscientiousness,"IPIP Big-Five Factor Markers (50-item set; Goldberg, 1992), Factor III: Conscientiousness"
-BFI-44,bfi44,bfi_goldberg_1992_neuroticism,REJECT,,wording,,"short form: all 10 of its items are instrument items, but only 10/44 (short forms are out)",eng,study_materials,10,44,Big Five Inventory: Neuroticism,"IPIP Big-Five Factor Markers (50-item set; Goldberg, 1992), Factor IV: Emotional Stability, coded N1-N10 as Neuroticism in the source codebook"
 BFI-44,bfi44,christensen_2017_bfi10,REJECT,,,,name hit is from a description; table name doesn't name it and 10 items != 44,eng,none_recorded,10,44,Big Five Inventory short form (BFI-10),
 BFI-44,bfi44,goldberg_2018_spa_bfi_forced_choice,REJECT,,,,hand call: 80-item forced-choice format: not the BFI-44,eng,none_recorded,80,44,NA,
 BFI-44,bfi44,heekerens2025_bfi_extraversion,REJECT,,,,hand call: BFI-10 subscale (listed under bfi10),ger,none_recorded,2,44,Big Five Inventory – Extraversion (German BFI-10),"Measures the degree to which adults are sociable, assertive, and energetic, using the 2-item Extraversion subscale from the German BFI-10"
@@ -79,6 +58,7 @@ CES-D,cesd,chen_2022_cesd,REJECT,,,,hand call: construct name says CESD-10: a sh
 CES-D,cesd,goldberg_2018_eps_cesd,REJECT,,,,hand call: instrument field says the Revised CES-D (24 items): a different instrument,eng,study_materials,24,20,NA,"Revised CES-Depression Scale (24 items; Experimental Personality Survey, Eugene-Springfield Community Sample)"
 CES-D,cesd,howe_2019_depression,REJECT,,,,English item text matches 0-1 key items; first item: i feel that i could not shake off the blues even with the help of family and fri,eng,none_recorded,4,20,Depression (4-item CES-D short form),"Depression (four-item CES-D short form, as administered)"
 CES-D,cesd,jeon_2019_cesd10,REJECT,,,,table name says a 10-item form (short forms are out),kor,translated_substitute,10,20,NA,Korean version of the 10-item short-form Center for Epidemiological Studies Depression (CESD-10) scale
+CES-D,cesd,martin_2021_cesdr,REJECT,,,,hand call: Ben 11-15: CESD-R (revised): a different instrument,eng,none_recorded,20,20,Center for Epidemiologic Studies Depression Scale - Revised (CESD-R),Center for Epidemiologic Studies Depression Scale - Revised (CESD-R)
 CES-D,cesd,mexico_2023_mobility_mood,REJECT,,,,name hit is from a description; table name doesn't name it and None items != 20,,study_materials,,20,,"ESRU Encuesta de Movilidad Social en México 2023 (ESRU-EMOVI 2023), Cuestionario básico, P107 Estado de ánimo (depressive-symptom items drawn from the CES-D)"
 CES-D,cesd,perez_hernandez_2021_cesd7,REJECT,,,,table name says a 7-item form (short forms are out),spa,none_recorded,7,20,CES-D-7 (depressive symptoms),"CES-D-7 (Escala de Depresión del Centro de Estudios Epidemiológicos, 7 items), ENCOVID-19 October 2020"
 CES-D,cesd,sabrina_2026_cesd10,REJECT,,,,table name says a 10-item form (short forms are out),eng,none_recorded,10,20,Depressive symptoms,
@@ -99,6 +79,7 @@ Fear of COVID-19 Scale,fcv19s,fcv19s_hossain_2022_anxiety,REJECT,,,,English item
 Fear of COVID-19 Scale,fcv19s,fcv19s_hossain_2022_depression,REJECT,,,,hand call: the WHO-5 from the same deposit,eng,none_recorded,5,7,WHO-5 Well-Being Index to evaluate depression.,
 GAD-7,gad7,gad_BrummerHoffman_2021,REJECT,,,,"hand call: ""Augmented GAD-7"": a question-framing experiment that rewords the items (the invariance study excluded it as a wording manipulation)","eng, por",study_materials,35,7,"Depression and anxiety question framing: The impact of asking about symptom's frequency, context, duration, ability and botherement - generalized anxiety disorder",Augmented GAD-7
 GAD-7,gad7,suicide_reinbergs_2025_gad,REJECT,,supplied,,"short form: all 2 of its items are instrument items, but only 2/7 (short forms are out)",eng,none_recorded,2,7,Generalized Anxiety Disorder–2 (GAD-2),The GAD-2 assesses anxiety symptoms over the past two weeks.
+General Self-Efficacy Scale,gse,heekerens_2025_gse,REJECT,,,,hand call: Ben 11-15: 3 items: a short form,ger,none_recorded,3,10,general self efficacy,
 General Self-Efficacy Scale,gse,kermen_2019_self_efficacy,REJECT,,,,name hit is from a description; table name doesn't name it and 17 items != 10,tur,none_recorded,17,10,General Self-Efficacy Scale,
 General Self-Efficacy Scale,gse,kermen_2022_self_efficacy,REJECT,,,,name hit is from a description; table name doesn't name it and 17 items != 10,tur,canonical_instrument,17,10,NA,"Genel Özyeterlilik Ölçeği (General Self-Efficacy Scale, Sherer et al. 1982; Turkish form, Yıldırım & İlhan 2010)"
 General Self-Efficacy Scale,gse,mendezlopez_2023_gses12,REJECT,,,,name hit is from a description; table name doesn't name it and 12 items != 10,spa,none_recorded,12,10,General self-efficacy (GSES-12),
@@ -106,7 +87,10 @@ General Self-Efficacy Scale,gse,soderberg_2024_general_selfefficacy,REJECT,,supp
 MSPSS,mspss,gwen_2025_social_support,REJECT,,,,name hit is from a description; table name doesn't name it and 3 items != 12,ind,none_recorded,3,12,"Perceived social support (record names the Multidimensional Scale of Perceived Social Support, MSPSS)",Social support
 PANAS,panas,alcoholhealthwarninglabel_brennan_2022_emotional_arousal_followup,REJECT,,,,hand call: emotional-arousal ratings to warning labels; shares 2 affect words with PANAS,eng,study_materials,6,20,Positive Emotional Arousal to Alcohol Warning Labels,"Emotional Arousal Ratings (Positive and Negative Affect), Follow-up"
 PANAS,panas,ghasemy_2025_ipanas_sf,REJECT,,,,name hit is from a description; table name doesn't name it and 9 items != 20,NA,none_recorded,9,20,"positive and negative affect (I-PANAS-SF, revised 9-item)",
+PANAS,panas,gracio_michelon_2026_panas_na,REJECT,,,,hand call: Ben 11-15: 5-item negative affect form (I-PANAS-SF half): a short form,eng,none_recorded,5,20,PANAS short form: negative affect,
+PANAS,panas,gracio_michelon_2026_panas_pa,REJECT,,,,hand call: Ben 11-15: 5-item positive affect form (I-PANAS-SF half): a short form,eng,none_recorded,5,20,PANAS short form: positive affect,
 PANAS,panas,iwai_2023_panas10,REJECT,,,,table name says a 10-item form (short forms are out),por,none_recorded,10,20,Positive and negative affect (PANAS-10),
+PANAS,panas,manylabs4_klein_2022_panasx,REJECT,,,,hand call: Ben 11-15: PANAS-X (60 items): a different instrument,NA,none_recorded,60,20,PANAS-X,
 PANAS,panas,perez_fuentes_2020_affect_balance,REJECT,,,,name hit is from a description; table name doesn't name it and 18 items != 20,spa,none_recorded,18,20,Positive and negative affect,
 PANAS,panas,reiss_2020_affect,REJECT,,,,name hit is from a description; table name doesn't name it and 34 items != 20,ger,none_recorded,34,20,"State affect: reactance, PANAS-X fear/hostility/sadness, BIS/BAS states",
 PANAS,panas,ryvkina_2023_s1_activity_affect,REJECT,,,,name hit is from a description; table name doesn't name it and 12 items != 20,ger,none_recorded,12,20,Momentary affect after non-social activity (EMOTIONS project ESM),EMOTIONS ESM: affect after the last activity (partly after the PANAS/PANAS-X)
@@ -115,6 +99,9 @@ PANAS,panas,ryvkina_2023_s2_activity_affect,REJECT,,,,name hit is from a descrip
 PANAS,panas,ryvkina_2023_s2_interaction_affect,REJECT,,,,name hit is from a description; table name doesn't name it and 14 items != 20,ger,none_recorded,14,20,Momentary affect after social interaction (ESM),EMOTIONS ESM: affect after the last social interaction (partly after the PANAS/PANAS-X)
 PANAS,panas,tang_2024_panas_negative,REJECT,,,,hand call: 7 of the 10 negative-affect items: below 80% of the subscale,chi,none_recorded,7,20,NA,
 PANAS,panas,tang_2024_panas_positive,REJECT,,,,hand call: 5 of the 10 positive-affect items: below 80% of the subscale,chi,none_recorded,5,20,NA,
+PANAS,panas,van_beveren_2019_panasc,REJECT,,,,"hand call: Ben 11-15: PANAS-C (30 items, children): a different instrument",dut,none_recorded,30,20,PANAS for Children (PANAS-C),
+PANAS,panas,wang_2026_panas_na,REJECT,,,,hand call: Ben 11-15: 5-item negative affect form: a short form,chi,none_recorded,5,20,"Positive and Negative Affect Schedule (short), negative affect",
+PANAS,panas,wang_2026_panas_pa,REJECT,,,,hand call: Ben 11-15: 5-item positive affect form: a short form,chi,none_recorded,5,20,"Positive and Negative Affect Schedule (short), positive affect",
 PANAS,panas,wolf_2017_study1_posaff,REJECT,,wording,,"short form: all 12 of its items are instrument items, but only 12/20 (short forms are out)",eng,study_materials,12,20,Positive and Negative Affect Schedule (PANAS) - positive affect,"Positive and Negative Affect Schedule (PANAS), 12-item selection"
 PANAS,panas,wolf_2017_study2_posaff_post,REJECT,,wording,,"short form: all 12 of its items are instrument items, but only 12/20 (short forms are out)",eng,study_materials,12,20,PANAS positive affect - 12-item follow-up form (Study 2),"Positive and Negative Affect Schedule (PANAS), 12-item selection"
 PANAS,panas,wolf_2017_study2_posaff_pre,REJECT,,wording,,"short form: all 8 of its items are instrument items, but only 8/20 (short forms are out)",eng,study_materials,8,20,PANAS positive affect - 8-item baseline form (Study 2),"Positive and Negative Affect Schedule (PANAS), 8-item selection"
@@ -150,11 +137,13 @@ BFI-10,bfi10,heekerens2025_bfi_extraversion,ACCEPT,,name,subscale: extraversion 
 BFI-10,bfi10,heekerens2025_bfi_neuroticism,ACCEPT,,name,subscale: neuroticism (2/10),hand call: the German BFI-10's 2-item neuroticism subscale (its instrument field wrongly says openness: a metadata lead),ger,none_recorded,2,10,Big Five Inventory – Neuroticism (German BFI-10),
 BFI-10,bfi10,heekerens2025_bfi_openness,ACCEPT,,name,subscale: openness (2/10),hand call: the German BFI-10's 2-item openness subscale,ger,none_recorded,2,10,Big Five Inventory – Openness (German BFI-10),
 BFI-10,bfi10,heekerens_2025_bfi10,ACCEPT,,name,,table name names it and it has 10 items,ger,none_recorded,10,10,BFI-10,
+BFI-10,bfi10,mendezlopez_2023_bfi10,ACCEPT,,name,,hand call: Ben 11-15: 11 items: the BFI-10 plus its optional 11th agreeableness item,spa,none_recorded,11,10,Big Five personality (BFI-10),
 BFI-10,bfi10,thiessen_2023_bfi10,ACCEPT,,name,,table name names it and it has 10 items,eng,none_recorded,10,10,Big Five personality (BFI-10),
 BFI-10,bfi10,zhang_2019_bfi10,ACCEPT,,name,,table name names it and it has 10 items,chi,none_recorded,10,10,Big Five personality (BFI-10),
 BFI-44,bfi44,CV_OASIS_ODSIS_PPE_Novak_2020_BFI,ACCEPT,,name,subscale: neuroticism (8/44),hand call: instrument field: BFI-44 neuroticism subscale (8 items),cze,translated_substitute,8,44,"The Big Five Inventory (BFI), Czech version",
 BFI-44,bfi44,abbasi_2024_bfi,ACCEPT,,name,,table name names it and it has 44 items,urd,none_recorded,44,44,Big Five personality traits (BFI-44),
 BFI-44,bfi44,amatus_cipora_2024_bfi_n,ACCEPT,,supplied,subscale: neuroticism (8/44),hand call: all 8 items are the BFI-44 neuroticism items,"ger, fre",none_recorded,8,44,Big Five Inventory - Neuroticism,
+BFI-44,bfi44,batool_2024_big_five,ACCEPT,,name,,hand call: Ben 11-15: construct tag names BFI-44 and it has 44 items,eng,none_recorded,44,44,Five-factor personality (BFI-44),
 BFI-44,bfi44,celik_2026_bfi,ACCEPT,,name,,table name names it and it has 44 items,tur,none_recorded,44,44,NA,
 BFI-44,bfi44,conner_2017_bfi,ACCEPT,,name,,table name names it and it has 44 items,eng,canonical_instrument,44,44,NA,
 BFI-44,bfi44,ibrahim_2015_bfi,ACCEPT,,name,,table name names it and it has 44 items,"may, eng",canonical_instrument,44,44,NA,
@@ -231,6 +220,7 @@ Emotion Regulation Questionnaire,erq,moe2025_erq,ACCEPT,,name,,table name names 
 Emotion Regulation Questionnaire,erq,morales_2021_erq,ACCEPT,,name,,table name names it and it has 10 items,spa,translated_substitute,10,10,NA,
 Emotion Regulation Questionnaire,erq,vicens_2021_erq,ACCEPT,,name,,table name names it and it has 10 items,spa,none_recorded,10,10,Emotion regulation (ERQ),
 Emotion Regulation Questionnaire,erq,zhao_2024_erq,ACCEPT,,name,,table name names it and it has 10 items,chi,translated_substitute,10,10,NA,
+Fear of COVID-19 Scale,fcv19s,kopczynski_2021_fcv19s,ACCEPT,,name,,hand call: Ben 11-15: instrument field names the FCV-19S (Ahorsu) and it has 7 items; Polish text,pol,none_recorded,7,7,Fear of COVID-19,"Fear of COVID-19 Scale (FCV-19S, 7 items), Ahorsu, Lin, Imani, Saffari, Griffiths & Pakpour (2020), Polish administration"
 Fear of COVID-19 Scale,fcv19s,odachi_2022_fear_covid19,ACCEPT,,name,,hand call: instrument field: FCV-19S Japanese version (7 items),jpn,canonical_instrument,7,7,NA,"Fear of COVID-19 Scale (FCV-19S), Japanese version"
 Fear of COVID-19 Scale,fcv19s,pilch_2021_fear_covid19,ACCEPT,,name,,hand call: instrument field: FCV-19S Polish version (7 items),pol,canonical_instrument,7,7,NA,"Fear of COVID-19 Scale (FCV-19S), Polish version"
 Fear of COVID-19 Scale,fcv19s,tavares_da_silva_2024_fcv19s,ACCEPT,,name,,table name names it and it has 7 items,por,none_recorded,7,7,Fear of COVID-19 (FCV-19S),
@@ -239,6 +229,7 @@ GAD-7,gad7,amatus_cipora_2024_gad,ACCEPT,,supplied,,7/7 items match,"ger, fre",n
 GAD-7,gad7,anjum_2022_gad7,ACCEPT,,supplied,,hand call: GAD-7 (7 items) in Bengali; 5/7 match the English key through translation variants,ben,study_materials,7,7,NA,Generalized Anxiety Disorder 7-item scale (GAD-7)
 GAD-7,gad7,assessment_time_fournier_2025_gad,ACCEPT,,supplied,,7/7 items match,eng,none_recorded,7,7,Assessment Time - Anxiety,Generalised Anxiety Disorder scale (GAD-7)
 GAD-7,gad7,baquerotomas_2026_gad7,ACCEPT,,name,,table name names it and it has 7 items,spa,canonical_instrument,7,7,NA,"Generalized Anxiety Disorder-7 (GAD-7), Spanish version"
+GAD-7,gad7,baseke_2026_gad7,ACCEPT,,name,,hand call: Ben 11-15: instrument field names the GAD-7 and it has 7 items; wording paraphrased (4/7 key items match),eng,none_recorded,7,7,"GAD-7 anxiety symptoms (7 items, 0-3)",Generalized Anxiety Disorder 7-item scale (GAD-7)
 GAD-7,gad7,brederecke_2020_cancer_gad7,ACCEPT,,name,,table name names it and it has 7 items,ger,none_recorded,7,7,Generalized anxiety (GAD-7),
 GAD-7,gad7,c19prc_uk_mcbride_2021_gad7,ACCEPT,,wording,,7/7 items match,eng,study_materials,7,7,Anxiety,Generalized Anxiety Disorder Scale (GAD-7)
 GAD-7,gad7,chaple_gil_2021_gad7,ACCEPT,,name,,table name names it and it has 7 items,NA,none_recorded,7,7,GAD-7 anxiety screener,
@@ -290,6 +281,7 @@ General Self-Efficacy Scale,gse,lorenz_2016_efficacy1,ACCEPT,,name,,hand call: i
 General Self-Efficacy Scale,gse,luttenberger_2021_gse,ACCEPT,,name,,table name names it and it has 10 items,ger,none_recorded,10,10,General self-efficacy (SWE),
 General Self-Efficacy Scale,gse,makkiyah_2023_gse,ACCEPT,,name,,table name names it and it has 10 items,ind,none_recorded,10,10,General Self-Efficacy Scale (GSE),General Self-Efficacy Scale (10 items)
 General Self-Efficacy Scale,gse,mhscdc_fried_2020_se,ACCEPT,,wording,,10/10 items match,missing description,study_materials,10,10,NA,General Self-Efficacy Scale (Schwarzer & Jerusalem 1995)
+General Self-Efficacy Scale,gse,mutuyimana_2026_gse,ACCEPT,,name,partial: 9/10 items,hand call: Ben 11-15: 9 of 10 items clears the 80% partial-table rule (by count; text not checkable),"eng, kin, swa",none_recorded,9,10,General self-efficacy,
 General Self-Efficacy Scale,gse,santos_2018_gse,ACCEPT,,name,,table name names it and it has 10 items,eng,unknown,10,10,NA,
 General Self-Efficacy Scale,gse,sun_2018_gse,ACCEPT,,name,,table name names it and it has 10 items,chi,none_recorded,10,10,Generalized self-efficacy,
 General Self-Efficacy Scale,gse,ye_2025_q25_scale,ACCEPT,,name,,hand call: instrument field: GSE-10 Chinese adaptation,chi,study_materials,10,10,NA,"General Self-Efficacy Scale (GSE-10), Chinese adaptation"
@@ -311,12 +303,16 @@ LOT-R,lotr,conner_2017_lot,ACCEPT,,name,scored items: 6/10 (fillers not deposite
 LOT-R,lotr,islam_2021_lotr,ACCEPT,,name,,table name names it and it has 10 items,ben,none_recorded,10,10,Life Orientation Test-Revised (LOT-R),
 LOT-R,lotr,liu_2018_lot_r,ACCEPT,,name,,hand call: instrument field: LOT-R (10 items) in Chinese,chi,translated_substitute,10,10,NA,Life Orientation Test-Revised (LOT-R)
 LOT-R,lotr,lorenz_2016_optimism2,ACCEPT,,name,,hand call: instrument field: LOT-R German version (10 items),ger,canonical_instrument,10,10,NA,"Life-Orientation-Test - Revised (LOT-R), deutsche Version / Life Orientation Test-Revised, German version, 10 items"
+LOT-R,lotr,ramirez_maestre_2020_lotr,ACCEPT,,name,scored items only: 6/10,"hand call: Ben 11-15: 6 items = the LOT-R's scored items, its 4 fillers dropped",spa,none_recorded,6,10,"Optimism and pessimism (Life Orientation Test-Revised, Spanish)",
+LOT-R,lotr,stapleton_2021_lotr,ACCEPT,,name,scored items only: 6/10,"hand call: Ben 11-15: 6 items = the LOT-R's scored items, its 4 fillers dropped",eng,none_recorded,6,10,Life Orientation Test-Revised (LOT-R),
 MSPSS,mspss,cao_2024_mspss,ACCEPT,,name,,table name names it and it has 12 items,chi,none_recorded,12,12,Perceived social support (MSPSS),
 MSPSS,mspss,chen2022b_socsupport,ACCEPT,,supplied,,12/12 items match,chi,translated_substitute,12,12,NA,Multidimensional Scale of Perceived Social Support (MSPSS)
 MSPSS,mspss,ehealth_rioux_2025_mssps,ACCEPT,,wording,,12/12 items match,eng,study_materials,12,12,Multidimensional Scale of Perceived Social Support,Multidimensional Scale of Perceived Social Support (MSPSS)
+MSPSS,mspss,huang_2025_perceived_social_support,ACCEPT,,name,,hand call: Ben 11-15: construct tag names the MSPSS and it has 12 items; Chinese,chi,none_recorded,12,12,Perceived social support (MSPSS),
 MSPSS,mspss,jeilani_2024_social_outcomes,ACCEPT,,supplied,subscale: significant other (4/12),hand call: instrument field: the MSPSS significant-other subscale (4 items),NA,study_materials,4,12,Social outcomes scale (SO),"Multidimensional Scale of Perceived Social Support (MSPSS), Significant Other subscale (Zimet, Dahlem, Zimet & Farley, 1988)"
 MSPSS,mspss,kopczynski_2021_mspss,ACCEPT,,name,,table name names it and it has 12 items,pol,none_recorded,12,12,Perceived social support,"Multidimensional Scale of Perceived Social Support (MSPSS, 12 items), Zimet, Dahlem, Zimet & Farley (1988), Polish administration"
 MSPSS,mspss,laksmita_2020_mspss,ACCEPT,,supplied,,12/12 items match,ind,translated_substitute,12,12,NA,"Multidimensional Scale of Perceived Social Support (MSPSS), Indonesian version"
+MSPSS,mspss,li_2023_social_support,ACCEPT,,name,,"hand call: Ben 11-15: construct tag and instrument field name the MSPSS (Zimet 1988, Chinese) and it has 12 items",chi,none_recorded,12,12,"Multidimensional Scale of Perceived Social Support (MSPSS), 12 items","Multidimensional Scale of Perceived Social Support (MSPSS), Zimet et al. (1988), Chinese version"
 MSPSS,mspss,martin_2021_mspss,ACCEPT,,supplied,,12/12 items match,eng,none_recorded,12,12,Multidimensional Scale of Perceived Social Support (MSPSS),Multidimensional Scale of Perceived Social Support (MSPSS)
 MSPSS,mspss,nguyen_2026_mspss,ACCEPT,,supplied,,11/12 items match,vie,translated_substitute,12,12,Perceived social support (MSPSS),Multidimensional Scale of Perceived Social Support (MSPSS)
 MSPSS,mspss,qi_2024_mspss,ACCEPT,,name,,table name names it and it has 12 items,chi,none_recorded,12,12,NA,"Perceived Social Support Scale (PSSS / MSPSS), Chinese version"
@@ -433,6 +429,7 @@ PHQ-9,phq9,tran_2026_phq9,ACCEPT,,name,,table name names it and it has 9 items,v
 PHQ-9,phq9,usc_2026_phq9,ACCEPT,,name,,table name names it and it has 9 items,spa,none_recorded,9,9,Depressive symptoms (PHQ-9),
 PHQ-9,phq9,uti_newlands_2023_phq,ACCEPT,,supplied,,9/9 items match,eng,canonical_instrument,9,9,Depression,Patient Health Questionnaire-9 (PHQ-9)
 PHQ-9,phq9,wilkins_2018_phq9,ACCEPT,,name,,table name names it and it has 9 items,NA,none_recorded,9,9,Patient Health Questionnaire-9 (PHQ-9),
+PHQ-9,phq9,yao_2023_depression,ACCEPT,,name,,hand call: Ben 11-15: construct tag names the PHQ-9 and it has 9 items; Chinese,chi,none_recorded,9,9,Patient Health Questionnaire-9 (PHQ-9),
 PHQ-9,phq9,zhang_2019_phq9,ACCEPT,,name,,table name names it and it has 9 items,chi,none_recorded,9,9,Depression (PHQ-9),
 PHQ-9,phq9,zhao_2024_phq9,ACCEPT,,name,,table name names it and it has 9 items,chi,none_recorded,9,9,Depression (PHQ-9),"Patient Health Questionnaire-9 (PHQ-9), official Simplified Chinese version for Mainland China (phqscreeners.com)"
 Perceived Stress Scale (PSS-10),pss10,BPAQ_Christopher_2024_PSS10,ACCEPT,,name,,table name names it and it has 10 items,eng,none_recorded,10,10,Perceived stress scale amongst police officers,
@@ -471,6 +468,7 @@ Perceived Stress Scale (PSS-10),pss10,zheng_2017_pss10,ACCEPT,,name,,table name 
 Rosenberg Self-Esteem Scale,rses,CV_OASIS_ODSIS_PPE_Novak_2020_RSES,ACCEPT,,supplied,,10/10 items match,cze,translated_substitute,10,10,"Rosenberg's Self-Esteem Scale, Czech Version",Rosenberg Self-Esteem Scale (RSES)
 Rosenberg Self-Esteem Scale,rses,EEEDPRM_Bulut_2021,ACCEPT,,supplied,,10/10 items match,eng,none_recorded,10,10,Rosenberg Self-Esteem Scale,Rosenberg Self-Esteem Scale
 Rosenberg Self-Esteem Scale,rses,Rosenberg_fadplus_goto2021,ACCEPT,,supplied,,9/10 items match,jpn,none_recorded,10,10,Measure of Belief in Free Will and Determinism,Rosenberg Self-Esteem Scale
+Rosenberg Self-Esteem Scale,rses,apaza_2026_self_esteem,ACCEPT,,name,,hand call: Ben 11-15: construct tag names the RSES (Spanish) and it has 10 items,spa,none_recorded,10,10,"Rosenberg Self-Esteem Scale (RSES), Spanish",
 Rosenberg Self-Esteem Scale,rses,aspell_2019_rses,ACCEPT,,name,,table name names it and it has 10 items,may,none_recorded,10,10,Self-esteem,
 Rosenberg Self-Esteem Scale,rses,bakker_2020_rses,ACCEPT,,wording,,10/10 items match,amh,study_materials,10,10,NA,"Rosenberg Self-Esteem Scale (RSES), Amharic version"
 Rosenberg Self-Esteem Scale,rses,bang_2023_self_esteem,ACCEPT,,supplied,,10/10 items match,kor,translated_substitute,10,10,Rosenberg Self-Esteem Scale (Korean version),"Korean version of the Rosenberg Self-Esteem Scale (RSES; Jon, 1974)"
@@ -478,6 +476,7 @@ Rosenberg Self-Esteem Scale,rses,buzgova_2023_rses,ACCEPT,,supplied,,10/10 items
 Rosenberg Self-Esteem Scale,rses,chen2022_ses,ACCEPT,,supplied,,10/10 items match,chi,translated_substitute,10,10,NA,"Rosenberg Self-Esteem Scale (SES), Chinese adaptation (Ji and Yu, 1999)"
 Rosenberg Self-Esteem Scale,rses,chen2022b_selfesteem,ACCEPT,,name,,hand call: instrument field: RSES Chinese version (Ji and Yu 1999),chi,translated_substitute,10,10,"Rosenberg Self-Esteem Scale (SES), Chinese version","Rosenberg Self-Esteem Scale (SES), Chinese version (Ji and Yu, 1999)"
 Rosenberg Self-Esteem Scale,rses,contreras_valdez_2022_rses,ACCEPT,,name,,table name names it and it has 10 items,spa,unknown,10,10,NA,
+Rosenberg Self-Esteem Scale,rses,contreras_valdez_2026_rses,ACCEPT,,name,partial: 8/10 items,hand call: Ben 11-15: 8 of 10 items clears the 80% partial-table rule (by count; text not checkable),spa,none_recorded,8,10,Rosenberg Self-Esteem Scale,
 Rosenberg Self-Esteem Scale,rses,darko_2025_rses,ACCEPT,,supplied,,10/10 items match,eng,none_recorded,10,10,Rosenberg Self-Esteem Scale,Rosenberg Self-Esteem Scale
 Rosenberg Self-Esteem Scale,rses,fong_2023_rses,ACCEPT,,name,,table name names it and it has 10 items,chi,none_recorded,10,10,NA,
 Rosenberg Self-Esteem Scale,rses,gomez_meza_2025_rses,ACCEPT,,name,,table name names it and it has 10 items,spa,none_recorded,10,10,Self-esteem (RSES),
@@ -546,10 +545,11 @@ TIPI,tipi,gori_2021_tipi,ACCEPT,,name,,table name names it and it has 10 items,i
 TIPI,tipi,gulec_2023_tipi,ACCEPT,,name,,table name names it and it has 10 items,tur,none_recorded,10,10,Big Five personality (TIPI),
 TIPI,tipi,henderson_2023_lapanel_tipi,ACCEPT,,name,,table name names it and it has 10 items,eng,none_recorded,10,10,"Ten-Item Personality Inventory (TIPI), wave 5 only",
 TIPI,tipi,kam_2015_tipi,ACCEPT,,name,,table name names it and it has 10 items,eng,none_recorded,10,10,Big Five personality (TIPI),
-TIPI,tipi,kayir_2026_tipi,ACCEPT,,name,,table name names it and it has 10 items,tur,none_recorded,10,10,Big Five personality (TIPI),
+TIPI,tipi,kayir_2026_tipi,ACCEPT,,name,,"hand call: Ben 11-15: construct tag names the TIPI and it has 10 items; Turkish, responses 1-5 (TIPI is usually 1-7)",tur,none_recorded,10,10,Big Five personality (TIPI),
 TIPI,tipi,machivallianism_test_tipi,ACCEPT,,wording,,10/10 items match,eng,study_materials,10,10,Ten Item Personality Inventory,Ten Item Personality Inventory (TIPI)
 TIPI,tipi,manylabs2_klein_2018_tipi,ACCEPT,,name,,table name names it and it has 10 items,NA,none_recorded,10,10,Ten-Item Personality Inventory,
 TIPI,tipi,manylabs3_ebersole_2016_tipi,ACCEPT,,name,,table name names it and it has 10 items,eng,none_recorded,10,10,Ten-Item Personality Inventory,
+TIPI,tipi,martindelcampo_2020_tipi,ACCEPT,,name,,hand call: Ben 11-15: instrument field names the TIPI (Gosling 2003) and it has 10 items; Spanish text,spa,translated_substitute,10,10,NA,"Ten-Item Personality Inventory (TIPI; Gosling, Rentfrow & Swann, 2003)"
 TIPI,tipi,nature_relatedness,ACCEPT,,wording,,10/10 items match,eng,study_materials,32,10,Nature Relatedness Scale,"Nature Relatedness Scale, 6-item short form (NR-6; Nisbet & Zelenski, 2013), administered with the Ten Item Personality Inventory (Gosling, Rentfrow & Swann, 2003) and a 16-word vocabulary check-list"
 TIPI,tipi,protestant_workethic,ACCEPT,,wording,,10/10 items match,eng,study_materials,45,10,Protestant Work Ethic Scale,"Protestant Work Ethic Scale (Mirels & Garrett, 1971), administered with the Ten Item Personality Inventory (Gosling, Rentfrow & Swann, 2003) and a 16-word vocabulary check-list"
 TIPI,tipi,riasec,ACCEPT,,wording,,10/10 items match,eng,study_materials,74,10,Holland Code (RIASEC) Test,"Holland Code (RIASEC) Test (IIP RIASEC Markers), administered with the Ten Item Personality Inventory and a 16-word vocabulary check-list"
