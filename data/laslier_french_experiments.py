@@ -63,10 +63,10 @@
 #          not carried (Ben, 2026-11-15: ballots only, as the letter said).
 #   Sciences Po ratings (laslier_2002_sciencespo_rating; same id as the approval table): a 0-10 scale
 #          in half points. PrefLib calls it a "20 point scale", which the values do not match: they are
-#          0..10, mostly whole numbers (29 cells at a half point, one 0.1, kept as recorded), plus 6
-#          cells above 10 (11, 11, 13, 15, 17 on one student, 11 on another). Ben ruled on 2026-11-15
-#          that those 6 cells are dropped (no row), as data/voterautrement_insitu.py drops off-scale
-#          Strasbourg 2017 cells. -1 (no input) is no row; 2 students rated no one and have no rows.
+#          0..10, mostly whole numbers (29 cells at a half point, one 0.1), plus 6 cells above 10
+#          (11, 11, 13, 15, 17 on one student, 11 on another). Ben ruled on 2026-11-15 that those 6
+#          cells are dropped (no row), as data/voterautrement_insitu.py drops off-scale Strasbourg 2017
+#          cells, and later the same day that the one 0.1 cell (off the half-point grid) is dropped too. -1 (no input) is no row; 2 students rated no one and have no rows.
 #
 # Usage: python3 -P -E data/laslier_french_experiments.py <raw dir> <out dir>
 #   <raw dir>/preflib/<5-digit series>/<file> and <raw dir>/votepluriel/votes/approval.csv
@@ -182,8 +182,8 @@ put("laslier_2002_sciencespo_approval", long, [0, 1])
 assert ((R % 0.5) != 0).sum() == 1 and (R > 10).sum() == 6 and R.min() == -1  # one 0.1, six > 10
 long = pd.DataFrame({"id": np.repeat(ids, 15), "item": [code(k) for k in range(1, 16)] * len(d),
                      "resp": R.ravel()})
-long = long[(long.resp != -1) & (long.resp <= 10)]  # no input; the 6 off-scale cells (Ben, 2026-11-15)
-assert len(long) == (R != -1).sum() - 6 and long.resp.between(0, 10).all()
+long = long[(long.resp != -1) & (long.resp <= 10) & (long.resp % 0.5 == 0)]  # no input; 6 off-scale + the 0.1 (Ben, 2026-11-15)
+assert len(long) == (R != -1).sum() - 7 and long.resp.between(0, 10).all() and (long.resp % 0.5 == 0).all()
 put("laslier_2002_sciencespo_rating", long, None)
 
 # ---- Vote au pluriel 2012, approval -----------------------------------------
