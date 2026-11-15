@@ -2605,6 +2605,8 @@ yin_2022_values_importance,"Importance of relationships, safety, achievements an
 yoshimura_2026_es_scale,"Supervisor emotional support (情緒的サポート), 8 items of Komaki's (1994) workplace social support scale, as used in Yoshimura et al. (2026)",11.75,63.25,10.2,6.78,Japanese,table
 yoshimura_2026_isu_scale,"Supervisor instrumental support (道具的サポート), 6 items of Komaki's (1994) workplace social support scale, as used in Yoshimura et al. (2026)",11.3333333333333,62.1666666666667,10.2,4.86705128205128,Japanese,table
 yoshimura_2026_psych_safety,"Psychological safety - Section 1 (team leader), Japanese version of the survey measure of psychological safety (Sasaki et al., 2022; O'Donovan et al., 2020), as used in Yoshimura et al. (2026)",17.8888888888889,89.2222222222222,3.57142857142857,8.25826086956522,Japanese,table
+yousuf_2026_osce_discrepancy,"OSCE experience questionnaire (Yousuf et al. 2026, Citycot University, Somalia)",1,2,18,-3.4,English,standard_omission
+yousuf_2026_osce_experience,"OSCE experience questionnaire (Yousuf et al. 2026, Citycot University, Somalia)",1,2,10.2,-3.4,English,standard_omission
 yu_2025_bedtime_procrastination,"Bedtime Procrastination Scale (BPS), Chinese version (Zhang, Huang & You, 2021), after Kroese et al. (2014)",12.5555555555556,53.4444444444444,6.8,NA,Chinese,table
 yuan_2024_contact,Intergroup Contact Experience Scale (Yang et al. revision),1,2,3.85714285714286,-3.4,Chinese,table
 yuan_2024_trust,Intergroup Trust Scale,1,2,7,-3.4,Chinese,table

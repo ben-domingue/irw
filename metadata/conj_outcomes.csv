@@ -1609,6 +1609,7 @@ mclean_2017_sanctions,rating_pain_public,rating,How painful do you think the san
 mclean_2017_sanctions,rating_success,rating,How likely do you think the sanctions are to succeed? (0-100),,0,100,0,100
 meier_2023_school_district_income,rating,rating,"If you were in need of a new school district, how comfortable would you be placing your child in Greenwood School District?",,1,5,Very uncomfortable,Very comfortable
 meier_2023_school_district_race,rating,rating,"If you were in need of a new school district, how comfortable would you be placing your child in Greenwood School District?",,1,5,Very uncomfortable,Very comfortable
+meijer_2006_dutch_rail,choice,choice,unknown,no,,,,
 meisels_2024_donor_candidates,rating,rating,"Likelihood of contributing to the vignette candidate, reported by the authors as 1 = very likely or almost certain to contribute, 0 otherwise (paraphrase; raw question not deposited)",,0,1,less than very likely to contribute,very likely or almost certain to contribute
 mercea_2025_movement_parties,choice,choice,"If you had to choose between them, which candidate do you prefer?",no,,,,
 mercea_2025_movement_parties,rating,rating,How much do you approve or disapprove of this candidate? (paraphrase),,1,7,Strongly disapprove,Strongly approve
