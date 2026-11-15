@@ -1,4 +1,4 @@
-# item-text tables in the Redivis shards as of 2026-11-13
+# item-text tables in the Redivis shards as of 2026-11-15
 # status=published: a reader can fetch it. status=draft: uploaded, not released yet.
 # generated -- do not hand-edit; rerun itemtext/refresh_live_tables.py (irw#1828)
 table,shard,status
@@ -2607,6 +2607,8 @@ yin_2022_values_importance,irw_text_2,published
 yoshimura_2026_es_scale,irw_text_3,published
 yoshimura_2026_isu_scale,irw_text_3,published
 yoshimura_2026_psych_safety,irw_text_3,published
+yousuf_2026_osce_discrepancy,irw_text_4,published
+yousuf_2026_osce_experience,irw_text_4,published
 yu_2025_bedtime_procrastination,irw_text_2,published
 yuan_2024_contact,irw_text_3,published
 yuan_2024_trust,irw_text_3,published
