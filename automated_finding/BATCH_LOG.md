@@ -27808,3 +27808,7 @@ and spreads across constructs, and pairs of columns with identical value distrib
 **Upload:** red_up to the item_response_warehouse_9 draft by Claude (Ben's go-ahead in-session, 2026-11-15): 45/45
 uploaded and row-count verified. The first pass lost DNS after 19 tables; the 26 failures dry-ran as NEW (no partial
 tables) and uploaded on retry. Ben publishes.
+
+**Ruled 2026-11-15 (Ben):** the three third-party extracts (WVS Nigeria, NHIS 2025, OECD Risks that Matter) are
+dropped for now; statuses set to `rejected_content`. If one is ever wanted, build from the source survey (OECD's
+terms unchecked). Holds now 8.

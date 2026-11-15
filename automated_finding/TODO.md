@@ -10,7 +10,7 @@ Full write-up in `BATCH_LOG.md` (2026-11-15 — replay-ha). Every row's outcome 
 - [ ] **Ben publishes** the item_response_warehouse_9 draft.
 - [ ] **Holds for Ben:** nurse managers (figshare 34867032) and PLOS pone.0361505 S1, response-quality review (built
   tables in the worktree's `runs/held/`); health literacy zenodo 23575980 (two sheets disagree); Hangzhou park figshare
-  32614038 (35 duplicate rows); zenodo 23376616 (no licence); WVS/NHIS/OECD extracts (take from source?); JobCannon v3
+  32614038 (35 duplicate rows); zenodo 23376616 (no licence); JobCannon v3
   (answer indices, no key); Bangladesh panel zenodo 23693213; NutSo-HH 3 single items zenodo 23691068.
 - [ ] Item text later: pesen_2026_ai_adoption (Turkish stems in .sav labels; anchors needed), dostiyarova_2026_kdocs
   (K-DOCS stems in the Codebook sheet; register row needed), oseianim_2026_*, li_2026_* EFL, shafique_2026_*,
