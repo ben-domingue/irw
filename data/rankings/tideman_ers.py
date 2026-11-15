@@ -38,7 +38,9 @@
 ##
 ##Built: elections with at least 50 ballots with marks (the family floor and the letter's promise).
 ##Not built: under the floor (A4, A22, A31, A33, A51, A68 -- A68 has 50 ballot papers, one empty);
-##HELD: A34 and A35, gathered by David Hill, not Tideman (see candidates.csv) -- ruling owed.
+##A33-A35 were gathered by David Hill, not Tideman. Ben ruled 2026-11-15 that Tideman's permission
+##covers them: Tideman distributes all 87 as one collection and is its named contact, and the letter
+##asked about all 87. A34 and A35 are built and credit Hill as gatherer; A33 is under the floor.
 ##
 ##Usage: python3 tideman_ers.py build <raw dir> <out dir> [--all | a01 a02 ...]
 ##Table: tideman_ers_a<kk> (Tideman's own election number, two digits).
@@ -58,8 +60,7 @@ SOI_URL = ("https://raw.githubusercontent.com/PrefLib/PrefLib-Data/" + PREFLIB_C
            + "/datasets/00007%20-%20ers/00007-{n:08d}.soi")
 COLLECTION = "https://www.preflib.org/dataset/00007"
 ELECTIONS = list(range(1, 36)) + list(range(48, 100))  # 87; 36-47 were never assigned
-HELD = {34: "gathered by David Hill, not Tideman; permission came from Tideman",
-        35: "gathered by David Hill, not Tideman; permission came from Tideman"}
+HELD: dict[int, str] = {}  # A34/A35 released by Ben 2026-11-15
 FLOOR = 50
 PREFLIB_SET = {k: i for i, k in enumerate(sorted(ELECTIONS, key=lambda k: f"A{k}.HIL"), start=1)}
 
@@ -131,7 +132,9 @@ def build(raw_dir: Path, out_dir: Path, wanted: list[int]) -> int:
         n_short = sum(1 for o in marked if len(o) == n_cands - 1)
         unranked = n_cands - counts["n_candidates"]
         sha = hashlib.sha256(hil.read_bytes()).hexdigest()
-        gatherer = "Nicolaus Tideman, 1987" if k <= 32 else "Nicolaus Tideman, 1988"
+        gatherer = ("Nicolaus Tideman, 1987" if k <= 32 else
+                    "David Hill (year not recorded); distributed by Tideman in the same collection" if k <= 35 else
+                    "Nicolaus Tideman, 1988")
         design = {
             "table": t, "source_file": f"TiData/A{k}.HIL (rangevoting.org)", "collection": COLLECTION,
             "jurisdiction": "Anonymous British organisation (ERS collection)", "date": "unknown",
