@@ -1777,6 +1777,29 @@ LICENSE_OVERRIDES <- list(
         derived    = "CC BY 4.0",
         original   = "Permission via Email",
         why        = "Obradovic lab shared the data for the IMPS 2025 workshop; Ben's 2026-11-15 email to Obradovic states the CC BY 4.0 licence"
+    ),
+    ## joreskog_moustaki_2001: Ben rebuilt the response patterns from the
+    ## frequency table (Table 3) of the paper, which is a subscription article
+    ## with no licence. Both cells said Missing (NA). The paper's empirical
+    ## example appears to be the USA sample of the Political Action Survey
+    ## (unconfirmed; full text not reachable here). Ruled 2026-11-15 (Ben): keep
+    ## it -- the table is not sensitive -- and publish it as what it is, a
+    ## transcription of a published table, with the paper to cite.
+    list(
+        url        = "researchgate\\.net/profile/Ir-Moustaki/publication/255572793",
+        issue      = "#3316",
+        superseded = "Missing (NA)",
+        derived    = "Custom",
+        original   = "Transcribed from a published table (no data licence)",
+        terms      = paste(
+            "Response patterns and their frequencies transcribed from Table 3 of",
+            "Joreskog, K. G., & Moustaki, I. (2001). Factor analysis of ordinal",
+            "variables: A comparison of three approaches. Multivariate Behavioral",
+            "Research, 36(3), 347-387 (https://doi.org/10.1207/S15327906347-387).",
+            "The article carries no open licence and IRW holds no grant; the table",
+            "is published here as factual data reconstructed from it. Cite the",
+            "article."),
+        why        = "Ben, 2026-11-15: keep; the rebuilt table is not sensitive"
     )
 )
 
