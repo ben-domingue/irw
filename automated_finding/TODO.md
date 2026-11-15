@@ -4,8 +4,10 @@
 
 Full write-up in `BATCH_LOG.md` (2026-11-15 — replay-ha). Every row's outcome is in its `status` cell.
 
-- [ ] **Upload (Ben):** 45 response tables (262,423 responses) in `~/irw-wt/replay-ha-1102/automated_finding/irw_output/`;
-  no item text tables. Then Ben publishes.
+- [x] **UPLOADED 2026-11-15 by Claude (Ben's go-ahead in-session):** 45 response tables (262,423 responses) to the
+  item_response_warehouse_9 draft, all row-count verified (19 on the first pass, 26 retried after a DNS drop); no item
+  text tables.
+- [ ] **Ben publishes** the item_response_warehouse_9 draft.
 - [ ] **Holds for Ben:** nurse managers (figshare 34867032) and PLOS pone.0361505 S1, response-quality review (built
   tables in the worktree's `runs/held/`); health literacy zenodo 23575980 (two sheets disagree); Hangzhou park figshare
   32614038 (35 duplicate rows); zenodo 23376616 (no licence); WVS/NHIS/OECD extracts (take from source?); JobCannon v3

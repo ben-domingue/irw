@@ -27804,3 +27804,7 @@ so nothing lands until after release, and its unrelated churn was not committed.
 **Lesson:** the profile flags (`imputed_values*`, `item_scale_outlier`) do not screen response quality. Before
 staging a multi-scale deposit, compare its columns with each other: within- vs between-scale correlations, item means
 and spreads across constructs, and pairs of columns with identical value distributions.
+
+**Upload:** red_up to the item_response_warehouse_9 draft by Claude (Ben's go-ahead in-session, 2026-11-15): 45/45
+uploaded and row-count verified. The first pass lost DNS after 19 tables; the 26 failures dry-ran as NEW (no partial
+tables) and uploaded on retry. Ben publishes.
