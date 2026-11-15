@@ -14,6 +14,7 @@ for (nm in names(files)) {
                   colClasses = "character", na.strings = character(0))
     before <- b$Derived_License
     before_o <- if ("Original_License" %in% names(b)) b$Original_License else NULL
+    b <- suppressMessages(apply_data_url_overrides(b, nm))
     ov <- suppressMessages(suppressWarnings(apply_license_overrides(b, nm)))
     b2 <- suppressMessages(canonicalise_license_spelling(ov$biblio, nm))
     b2 <- suppressMessages(suppressWarnings(apply_generated_license(b2, nm)))

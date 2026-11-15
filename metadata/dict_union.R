@@ -1719,8 +1719,123 @@ LICENSE_OVERRIDES <- list(
         derived    = "CC BY-ND 3.0",
         original   = "CC BY-ND 3.0",
         why        = "ENCCEJA microdata, INEP, published from gov.br/inep: site content is CC BY-ND 3.0 (gov.br footer); ruled 2026-11-05 that IRW's long-format tables are the same data and carry INEP's terms"
+    ),
+    ## #3316 part 2 (R-38), the per-deposit read of 2026-11-15. Each of these
+    ## published CC BY 4.0 over a source cell of Missing (NA) or NA; the deposit
+    ## itself turns out to say CC BY 4.0, so only the source cell changes. The
+    ## six hexaco_ashton_2014_* rows are not here: their data URL was wrong
+    ## (see DATA_URL_OVERRIDES) and the openpsychometrics entry above covers
+    ## them once it is right.
+    list(
+        url        = "github\\.com/IanEisenberg/Self_Regulation_Ontology",
+        issue      = "#3316",
+        superseded = "CC BY 4.0",
+        derived    = "CC BY 4.0",
+        original   = "CC BY 4.0",
+        why        = "Self_Regulation_Ontology README, 'License' section: 'The data in this repository are made available under ... CC-BY 4.0' (added by Eisenberg 2026-07-18; read 2026-11-15)"
+    ),
+    list(
+        url        = "figshare\\.com/articles/dataset/31837640",
+        issue      = "#3316",
+        superseded = "CC BY 4.0",
+        derived    = "CC BY 4.0",
+        original   = "CC BY 4.0",
+        why        = "figshare 31837640 (PLOS ONE supplement, pone.0345759.s002) is CC BY 4.0 (figshare API, 2026-11-15)"
+    ),
+    list(
+        url        = "plos\\.figshare\\.com/articles/dataset/31091356",
+        issue      = "#3316",
+        superseded = "CC BY 4.0",
+        derived    = "CC BY 4.0",
+        original   = "CC BY 4.0",
+        why        = "figshare 31091356 (PLOS ONE supplement, pone.0340806.s001) is CC BY 4.0 (figshare API, 2026-11-15)"
+    ),
+    list(
+        url        = "su\\.figshare\\.com/articles/dataset/Data_and_code_for_-_Personality_and_Team_Identifi",
+        issue      = "#3316",
+        superseded = "CC BY 4.0",
+        derived    = "CC BY 4.0",
+        original   = "CC BY 4.0",
+        why        = "Stockholm University figshare 14980251 is CC BY 4.0 (figshare API, 2026-11-15)"
+    ),
+    list(
+        url        = "peerj\\.com/articles/18709",
+        issue      = "#3316",
+        superseded = "CC BY 4.0",
+        derived    = "CC BY 4.0",
+        original   = "CC BY 4.0",
+        why        = "PeerJ 10.7717/peerj.18709 is published CC BY 4.0 (Crossref licence), which covers its supplementary data"
+    ),
+    ## imps2025_hf: workshop data from the Obradovic lab, held out of the 11-02
+    ## conversion above because no terms were on file. Ben wrote to Jelena
+    ## Obradovic on 2026-11-15 that IRW will license it CC BY 4.0, inviting an
+    ## objection (oneoff/email-drafts-2026-11-15/obradovic_imps2025.txt).
+    list(
+        url        = "itemresponsewarehouse\\.org/training\\.html",
+        issue      = "#3316",
+        superseded = "Permission via Email",
+        derived    = "CC BY 4.0",
+        original   = "Permission via Email",
+        why        = "Obradovic lab shared the data for the IMPS 2025 workshop; Ben's 2026-11-15 email to Obradovic states the CC BY 4.0 licence"
     )
 )
+
+##---------------------------------------------------------------------------
+##Data URLs the sheet has wrong (#3316, 2026-11-15).
+##
+##Same shape and guard as DESCRIPTION_OVERRIDES: keyed on the table, fires only
+##where the sheet still holds `superseded` exactly, and disarms itself the
+##moment someone corrects the sheet by hand. The sheet is never written.
+##
+##MUST run before apply_license_overrides(), which is keyed on the data URL:
+##hexaco_ashton_2014_* picks up the openpsychometrics entry only once its URL
+##names openpsychometrics.
+DATA_URL_OVERRIDES <- list(
+    list(
+        tables     = paste0("hexaco_ashton_2014_", c("a", "c", "e", "h", "o", "x")),
+        issue      = "#3316",
+        superseded = "https://ipip.ori.org/newhexaco_pi_key.htm",
+        corrected  = "http://openpsychometrics.org/_rawdata/",
+        why        = "data/hexaco_ashton_2014.r reads the Open Psychometrics HEXACO raw data; the IPIP page is the scoring key, not the data"
+    ),
+    list(
+        tables     = c("MEFSIRODGAS_Nileksela_2023_freq", "MEFSIRODGAS_Nileksela_2023_severity"),
+        issue      = "#3316",
+        superseded = "https://osf.io/khwzy/?view_only=",
+        corrected  = "https://osf.io/khwzy/",
+        why        = "the project is public (OSF API, 2026-11-15); the empty view_only link is a leftover"
+    )
+)
+
+apply_data_url_overrides <- function(biblio, label = "core",
+                                     overrides = DATA_URL_OVERRIDES) {
+    if (!length(overrides) || !all(c("table", "URL__for_data_") %in% names(biblio))) {
+        return(biblio)
+    }
+    url_norm <- function(x) trimws(as.character(x))
+    applied <- character(0)
+    stale   <- character(0)
+    for (ov in overrides) {
+        rows <- which(dict_key(biblio$table) %in% dict_key(ov$tables))
+        for (row in rows) {
+            have <- url_norm(biblio$URL__for_data_[row])
+            if (identical(have, url_norm(ov$superseded))) {
+                biblio$URL__for_data_[row] <- ov$corrected
+                applied <- c(applied, biblio$table[row])
+            } else if (!identical(have, url_norm(ov$corrected))) {
+                stale <- c(stale, paste0(biblio$table[row], " (", ov$issue,
+                                         ": sheet says something else)"))
+            }
+        }
+    }
+    message(label, ": corrected the data URL on ", length(applied), " row(s)")
+    if (length(stale)) {
+        warning(label, ": ", length(stale), " data-URL override(s) did not match and were ",
+                "skipped -- delete the entry in DATA_URL_OVERRIDES if the sheet is now ",
+                "right: ", paste(stale, collapse = "; "), call. = FALSE)
+    }
+    biblio
+}
 
 apply_license_overrides <- function(biblio, label = "core",
                                     overrides = LICENSE_OVERRIDES,

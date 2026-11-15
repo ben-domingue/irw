@@ -348,6 +348,10 @@ getrows<-function(l) {
     }
     refreshed <- refresh_biblio_from_dict(biblio, irw_dict, name, log.file = file.refresh)
     biblio <- refreshed$biblio
+    ## Data URLs the sheet has wrong (#3316). After the refresh, which re-asserts
+    ## the sheet's value, and before anything keyed on the URL -- above all
+    ## apply_license_overrides(). See DATA_URL_OVERRIDES.
+    biblio <- apply_data_url_overrides(biblio, name)
     ## Runs before apply_data_doi(): the refresh never blanks a paper DOI, and
     ## the deposit-DOI retirement below is the one thing entitled to.
 
