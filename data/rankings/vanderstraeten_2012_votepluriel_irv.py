@@ -30,7 +30,7 @@
 ##recorded. Three ballots are irregular: one puts three candidates at 3 and two at 10, one puts two at
 ##9 after a gap at 7, one has positions 1, 2, 8, 9, 10. Ties and gaps are kept as recorded (README,
 ##Layout).
-##No covariates: voters.csv and weights.csv are not carried (a decision left to Ben).
+##No covariates: voters.csv and weights.csv are not carried (Ben, 2026-11-15: ballots only, as the letter said).
 ##
 ##Usage: python3 -I data/rankings/vanderstraeten_2012_votepluriel_irv.py build <raw dir> <out dir>
 ##  <raw dir>/votepluriel/votes/irv.csv (the zip unzipped into <raw dir>/votepluriel/) and

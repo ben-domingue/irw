@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-# Three French voting experiments (Laslier and co-authors) -> IRW core tables of approval ballots,
-# one row per ballot x candidate. The IRV ballots of Vote au pluriel 2012 are a rankings table,
+# Three French voting experiments (Laslier and co-authors) -> IRW core tables of approval ballots and
+# the Sciences Po students' ratings, one row per ballot x candidate. The IRV ballots of Vote au pluriel 2012 are a rankings table,
 # built by data/rankings/vanderstraeten_2012_votepluriel_irv.py from the same files.
 #
 # Rights: Jean-Francois Laslier, email of 2026-11-15, "You can redistribute these data sets.", in
@@ -60,12 +60,13 @@
 #          not flag the spoiled ones, so 10 spoiled ballots are in the table and cannot be told apart.
 #   No covariates in the other tables: the Vote au pluriel release's voters.csv (gender, birth year,
 #          intended vote, favourite rule, three yes/no and three 0-10 questions) and weights.csv are
-#          not carried (a decision left to Ben; the letter described ballots only).
-#
-# Held (written to <out dir>/held/, not registered): laslier_2002_sciencespo_rating, the students'
-#   ratings. PrefLib calls them a "20 point scale"; the values are 0..10, mostly whole numbers (29 cells
-#   at a half point, one 0.1), plus 6 cells above 10 (11, 11, 13, 15, 17 on one student, 11 on
-#   another), so the scale needs a ruling before the table can be described. -1 (no input) is no row.
+#          not carried (Ben, 2026-11-15: ballots only, as the letter said).
+#   Sciences Po ratings (laslier_2002_sciencespo_rating; same id as the approval table): a 0-10 scale
+#          in half points. PrefLib calls it a "20 point scale", which the values do not match: they are
+#          0..10, mostly whole numbers (29 cells at a half point, one 0.1, kept as recorded), plus 6
+#          cells above 10 (11, 11, 13, 15, 17 on one student, 11 on another). Ben ruled on 2026-11-15
+#          that those 6 cells are dropped (no row), as data/voterautrement_insitu.py drops off-scale
+#          Strasbourg 2017 cells. -1 (no input) is no row; 2 students rated no one and have no rows.
 #
 # Usage: python3 -P -E data/laslier_french_experiments.py <raw dir> <out dir>
 #   <raw dir>/preflib/<5-digit series>/<file> and <raw dir>/votepluriel/votes/approval.csv
@@ -83,7 +84,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from irw_validate._checks import run_qc  # noqa: E402
 
 RAW, OUT = sys.argv[1], sys.argv[2]
-os.makedirs(os.path.join(OUT, "held"), exist_ok=True)
+os.makedirs(OUT, exist_ok=True)
 
 PINNED = {  # SHA-256 of every file read, as downloaded 2026-11-15
     "preflib/00026/00026-00000001.cat": "70c2cc2c928e5f6c05ac562e0760dbee20bc0ed422600e603dbc64fcf24f34fc",
@@ -108,8 +109,8 @@ def check(rel):
 TABLES = {}
 
 
-def put(name, long, permitted, held=False):
-    TABLES[name] = (long, permitted, held)
+def put(name, long, permitted):
+    TABLES[name] = (long, permitted)
 
 
 def code(k, width=2):
@@ -181,7 +182,9 @@ put("laslier_2002_sciencespo_approval", long, [0, 1])
 assert ((R % 0.5) != 0).sum() == 1 and (R > 10).sum() == 6 and R.min() == -1  # one 0.1, six > 10
 long = pd.DataFrame({"id": np.repeat(ids, 15), "item": [code(k) for k in range(1, 16)] * len(d),
                      "resp": R.ravel()})
-put("laslier_2002_sciencespo_rating", long[long.resp != -1], None, held=True)
+long = long[(long.resp != -1) & (long.resp <= 10)]  # no input; the 6 off-scale cells (Ben, 2026-11-15)
+assert len(long) == (R != -1).sum() - 6 and long.resp.between(0, 10).all()
+put("laslier_2002_sciencespo_rating", long, None)
 
 # ---- Vote au pluriel 2012, approval -----------------------------------------
 v = pd.read_csv(check("votepluriel/votes/approval.csv"))
@@ -200,16 +203,15 @@ put("vanderstraeten_2012_votepluriel_approval", long_from_sets(
     [frozenset((np.flatnonzero(r) + 1).tolist()) for r in M], 10), [0, 1])
 
 # ---- QC + write --------------------------------------------------------------
-for name, (t, permitted, held) in sorted(TABLES.items()):
+for name, (t, permitted) in sorted(TABLES.items()):
     t = t.sort_values(["id", "item"]).reset_index(drop=True)
     for c in t.columns:
         if c.startswith("cov_"):
             assert (t.groupby("id")[c].nunique(dropna=False) == 1).all(), (name, c)
-    if not held:
-        checks = run_qc(t, permitted_values=permitted)
-        fails = [(c.name, c.detail) for c in checks if c.status == "fail"]
-        assert not fails, (name, fails)
+    checks = run_qc(t, permitted_values=permitted) if permitted is not None else run_qc(t)
+    fails = [(c.name, c.detail) for c in checks if c.status == "fail"]
+    assert not fails, (name, fails)
     assert t.id.nunique() >= 100, name
-    t.to_csv(os.path.join(OUT, "held" if held else "", name + ".csv"), index=False)
-    print(f"{'HELD ' if held else ''}{name}: {len(t)} rows, {t.id.nunique()} ballots, "
+    t.to_csv(os.path.join(OUT, name + ".csv"), index=False)
+    print(f"{name}: {len(t)} rows, {t.id.nunique()} ballots, "
           f"{t.item.nunique()} items, resp {t.resp.min()}..{t.resp.max()}")
