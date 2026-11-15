@@ -2492,6 +2492,7 @@ li_2025_indoor_sound_sources,core,none,2026-11-14
 li_2025_indoor_soundscape_attributes,core,none,2026-11-14
 li_2025_noise_sensitivity,core,none,2026-11-14
 li_2025_self_esteem,core,none,2026-10-20
+li_2026_academic_self_efficacy,core,https://ndownloader.figshare.com/files/70373055,2026-11-15
 li_2026_ai_anxiety,core,none,2026-10-19
 li_2026_ai_self_efficacy,core,none,2026-10-19
 li_2026_coab,core,https://data.mendeley.com/public-files/datasets/sjyrmwbcbx/files/6f0a4c00-63e0-426f-977e-b63e5e6dea90/file_downloaded,2026-10-11
@@ -2503,6 +2504,8 @@ li_2026_efl_listening_lts,core,none,2026-10-15
 li_2026_efl_listening_ms,core,none,2026-10-15
 li_2026_efl_listening_ps,core,none,2026-10-15
 li_2026_empathy,core,https://data.mendeley.com/public-files/datasets/sjyrmwbcbx/files/6f0a4c00-63e0-426f-977e-b63e5e6dea90/file_downloaded,2026-10-11
+li_2026_english_learning_engagement,core,https://ndownloader.figshare.com/files/70373055,2026-11-15
+li_2026_english_learning_interest,core,https://ndownloader.figshare.com/files/70373055,2026-11-15
 li_2026_fh,core,none,2026-10-19
 li_2026_hsc_awareness,core,https://dataverse.harvard.edu/api/access/datafile/14092647,2026-10-15
 li_2026_hsc_competence,core,https://dataverse.harvard.edu/api/access/datafile/14092647,2026-10-15
@@ -2515,6 +2518,7 @@ li_2026_pd,core,https://data.mendeley.com/public-files/datasets/sjyrmwbcbx/files
 li_2026_pev,core,https://data.mendeley.com/public-files/datasets/sjyrmwbcbx/files/6f0a4c00-63e0-426f-977e-b63e5e6dea90/file_downloaded,2026-10-11
 li_2026_pl,core,none,2026-10-19
 li_2026_psmus,core,https://doi.org/10.7717/peerj.21138/supp-4,2026-10-04
+li_2026_teacher_student_interaction,core,https://ndownloader.figshare.com/files/70373055,2026-11-15
 li_2026_vocational_ct,core,none,2026-10-15
 li_2026_vocational_dc,core,none,2026-10-15
 li_2026_vocational_jts,core,none,2026-10-15
@@ -3219,6 +3223,10 @@ orsini_2018_bpns,core,none,2026-10-10
 orsini_2018_learning_strategy,core,none,2026-10-10
 orsini_2018_self_esteem,core,none,2026-10-10
 orsini_2018_vitality,core,none,2026-10-10
+oseianim_2026_academic_integrity,core,https://ndownloader.figshare.com/files/70627032,2026-11-15
+oseianim_2026_cheating_pressure,core,https://ndownloader.figshare.com/files/70627032,2026-11-15
+oseianim_2026_entrepreneurial_mindset,core,https://ndownloader.figshare.com/files/70627032,2026-11-15
+oseianim_2026_research_self_efficacy,core,https://ndownloader.figshare.com/files/70627032,2026-11-15
 oskooii_2024_amid,core,none,2026-10-15
 oskooii_2024_anti_muslim_policy,core,none,2026-10-15
 oskooii_2024_muslim_resentment,core,none,2026-10-15
@@ -4567,6 +4575,9 @@ sanz_martos_2024_stai_state,core,none,2026-10-09
 sanz_martos_2024_stai_trait,core,none,2026-10-09
 sanzmartos_2024_contraceptive_knowledge,core,none,2026-10-19
 saputra_2025_fomo_consumer,core,https://zenodo.org/api/records/15363490/files/DAtaset%20NIKE%20100%20ISICO.xlsx/content,2026-10-21
+saputra_2026_rpa,core,none,2026-11-15
+saputra_2026_supply_chain_resilience,core,none,2026-11-15
+saputra_2026_sustainable_growth,core,none,2026-11-15
 sariyska_2019_dark_triad,core,https://doi.org/10.3389/fpsyg.2019.02591.s001,2026-10-28
 sariyska_2019_food_frequency,core,https://doi.org/10.3389/fpsyg.2019.02591.s001,2026-10-28
 sasmaz_2026_candidate_selection,conj,https://dataverse.harvard.edu/api/access/datafile/12547476,2026-10-07
@@ -4678,6 +4689,11 @@ sevim_2026_djgls,core,none,2026-11-09
 sevim_2026_sf12,core,none,2026-11-09
 sevim_2026_tfi,core,none,2026-11-09
 shaffer_2020_local_refugees,conj,none,2026-10-08
+shafique_2026_community_resilience,core,https://ndownloader.figshare.com/files/70942734,2026-11-15
+shafique_2026_institutional_trust,core,https://ndownloader.figshare.com/files/70942734,2026-11-15
+shafique_2026_preparedness_behavior,core,https://ndownloader.figshare.com/files/70942734,2026-11-15
+shafique_2026_public_participation,core,https://ndownloader.figshare.com/files/70942734,2026-11-15
+shafique_2026_risk_governance,core,https://ndownloader.figshare.com/files/70942734,2026-11-15
 shafranek_2021_roommate_choice,conj,none,2026-10-07
 shan_2024_bfi_s,core,https://dataverse.harvard.edu/api/access/datafile/10762294,2026-11-04
 shandler_2023_cyberterror,conj,none,2026-10-07
@@ -5527,6 +5543,9 @@ zeilinger_2020_emotional_reactions,core,none,2026-11-07
 zeilinger_2020_idls_causes,core,none,2026-11-07
 zeilinger_2020_idls_interventions,core,none,2026-11-07
 zeilinger_2020_social_distance,core,none,2026-11-07
+zemrani_2026_ai_verification_attitudes,core,none,2026-11-15
+zemrani_2026_hadith_discrimination,core,none,2026-11-15
+zemrani_2026_verification_criteria,core,none,2026-11-15
 zeng_2016_las,core,none,2026-11-09
 zeng_2016_neo_deliberation,core,none,2026-11-09
 zeng_2016_neo_dutifulness,core,none,2026-11-09
