@@ -56,8 +56,10 @@ import hashlib
 import os
 import sys
 
-import numpy as np
 import pandas as pd
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from irw_validate._checks import run_qc  # noqa: E402
 
 RAW, OUT = sys.argv[1], sys.argv[2]
 os.makedirs(OUT, exist_ok=True)
@@ -153,6 +155,9 @@ tables = {
 for name, t in tables.items():
     t = t[["id", "item", "resp", "wave", "date", "cluster_id"] + COV]
     t = t.sort_values(["wave", "id", "item"])
+    checks = run_qc(t, permitted_values=[0, 1])
+    fails = [(c.name, c.detail) for c in checks if c.status == "fail"]
+    assert not fails, (name, fails)
     t.to_csv(os.path.join(OUT, name + ".csv"), index=False)
     print(f"{name}: {len(t)} rows, {t.id.nunique()} children, {t.item.nunique()} items, "
           f"waves {t.groupby('wave').id.nunique().to_dict()}")
