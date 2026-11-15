@@ -1490,6 +1490,42 @@ local({
           "the unversioned values are reported as leads instead")
 })
 
+##------------------------------------------------------ data URL overrides ---
+##DATA_URL_OVERRIDES (#3316): exact match on the sheet's URL, self-disarming,
+##and it has to feed apply_license_overrides(), which is keyed on the URL.
+cat("\ndata URL overrides\n")
+local({
+    ov <- list(list(tables = c("t_a", "t_b"), issue = "#1",
+                    superseded = "https://wrong.example/key.htm",
+                    corrected  = "http://right.example/_rawdata/", why = "test"))
+    b <- data.frame(table = c("t_a", "t_b", "t_c"),
+                    URL__for_data_ = c("https://wrong.example/key.htm",
+                                       "https://hand-fixed.example/",
+                                       "https://wrong.example/key.htm"),
+                    Derived_License = "CC BY 4.0", Original_License = "Missing (NA)",
+                    stringsAsFactors = FALSE)
+    w <- NULL
+    out <- withCallingHandlers(suppressMessages(apply_data_url_overrides(b, "core", ov)),
+                               warning = function(x) { w <<- conditionMessage(x)
+                                                       invokeRestart("muffleWarning") })
+    check(identical(out$URL__for_data_[1], "http://right.example/_rawdata/"),
+          "a named table holding the superseded URL is corrected")
+    check(identical(out$URL__for_data_[2], "https://hand-fixed.example/"),
+          "a URL someone changed in the sheet is left alone")
+    check(!is.null(w) && grepl("t_b", w, fixed = TRUE),
+          "and reported as a stale entry")
+    check(identical(out$URL__for_data_[3], "https://wrong.example/key.htm"),
+          "a table not named is never touched")
+    again <- suppressMessages(suppressWarnings(apply_data_url_overrides(out[1, ], "core", ov)))
+    check(identical(again$URL__for_data_, out$URL__for_data_[1]),
+          "a second pass is a no-op")
+    lic <- list(list(url = "right\\.example", issue = "#1", superseded = "CC BY 4.0",
+                     derived = "CC BY 4.0", original = "Permission via Email", why = "test"))
+    fed <- suppressMessages(suppressWarnings(apply_license_overrides(out, "core", lic)))$biblio
+    check(identical(fed$Original_License[1], "Permission via Email"),
+          "the corrected URL reaches a licence override keyed on it")
+})
+
 ##------------------------------------------------------------------ result ---
 cat("\n")
 if (failures > 0L) { cat(failures, "FAILURE(S)\n"); quit(status = 1L) }
