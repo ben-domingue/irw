@@ -21,11 +21,18 @@
 ##to its attribute by its form ($ / % / Yes-No, as the author does) and the row is kept as attrpos_.
 ##The attribute-name rows (F-t-k) were not exported; attribute names are the author's.
 ##Outcome: choice = conjoint<t> ("Choice 1" / "Choice 2"), forced, no opt-out.
-##Sample (the author's final sample, do file L9-18): drop consent = No, age "Under 18", state "I do
-##not reside in the United States", and check2 != "Red,Green" (non-completes / Lucid terminates),
-##then respondents who failed attention check 1 ("please select - 'Somewhat disagree'"): 1,862
-##respondents, the deposit's stated n. Tasks with no answer are omitted (19 tasks; one respondent
-##answered none, so the table has 1,861 respondents, 18,591 tasks).
+##Sample: the author's eligibility drops are kept (do file L9-18: consent = No, age "Under 18", state "I
+##do not reside in the United States"), and every eligible respondent who answered at least one task is
+##kept: 3,000 (IRW conjoint ruling, Ben 2026-11-10: no author sample exclusions). Tasks with no answer are
+##omitted. The author's final sample (1,862 respondents, the deposit's stated n; 1,861 of them answered a
+##task) excludes respondents who failed either attention check: check2 != "Red,Green" (the do file calls
+##these "noncompletes (Lucid's terminate redirects)"; check2 comes after the conjoint in the export, so
+##974 who failed it had answered conjoint tasks) and check1 != "Somewhat disagree"; reproduce it with
+##cov_attention_pass_1 == 1 & cov_attention_pass_2 == 1 (1,861 respondents, 18,591 tasks).
+##  cov_attention_pass_1  check1 "Help us keep track of who is paying attention, please select -
+##                        'Somewhat disagree' ...": 1 = Somewhat disagree, 0 = another answer, NA = none
+##  cov_attention_pass_2  check2 "... select only red and green among the alternatives below ...":
+##                        1 = exactly Red and Green, 0 = any other selection, NA = not answered
 ##PII in the export, dropped: IPAddress, LocationLatitude/Longitude, ResponseId, rid (Lucid ID),
 ##zip codes, UserAgent, free-text comment and *_TEXT fields. IDs re-keyed to integers in file order.
 ##Also dropped: timers, the other experiments' items, the author's derived dummies.
@@ -37,14 +44,14 @@
 ##(education...93 "What is the highest level of school you have completed ..."), cov_party_id
 ##(partisan: Democrat / Republican / Independent / Something else), cov_party_lean (leaner),
 ##cov_ideology, cov_income, cov_state, cov_duration_sec (Duration (in seconds), whole survey).
-##All kept respondents passed check1 and check2 (no attention covariate). No survey weight.
+##No survey weight.
 library(readxl); library(data.table)
 a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]
 r <- suppressMessages(as.data.table(read_excel(file.path(raw, "CCA_Data.xlsx"), col_types = "text")))
 r <- r[-1]   # question-text row
-r <- r[!(consent %in% "No") & !(`age...28` %in% "Under 18") & !(state %in% "I do not reside in the United States") &
-         check2 %in% "Red,Green" & check1 %in% "Somewhat disagree"]
-stopifnot(nrow(r) == 1862)
+stopifnot(r[!(consent %in% "No") & !(`age...28` %in% "Under 18") & !(state %in% "I do not reside in the United States") &
+         check2 %in% "Red,Green" & check1 %in% "Somewhat disagree", .N] == 1862)
+r <- r[!(consent %in% "No") & !(`age...28` %in% "Under 18") & !(state %in% "I do not reside in the United States")]
 r[, id := seq_len(.N)]
 d <- rbindlist(lapply(1:10, function(t) rbindlist(lapply(1:2, function(p) {
   lv <- sapply(1:3, function(k) r[[sprintf("F-%d-%d-%d", t, p, k)]])
@@ -65,9 +72,12 @@ stopifnot(d[, sum(choice), .(id, task)][, all(V1 == 1)], d[, .N, .(id, task)][, 
 cv <- r[, .(id, trial_cca_treatment = as.integer(ccatreatment),
             cov_gender = c(Female = "female", Male = "male")[sex], cov_age_group = `age...28`, cov_age = as.integer(`age...320`),
             cov_education = `education...93`, cov_party_id = partisan, cov_party_lean = leaner, cov_ideology = ideology,
-            cov_income = income, cov_state = state, cov_duration_sec = as.integer(`Duration (in seconds)`))]
+            cov_income = income, cov_state = state, cov_duration_sec = as.integer(`Duration (in seconds)`),
+            cov_attention_pass_1 = fifelse(is.na(check1), NA_integer_, as.integer(check1 == "Somewhat disagree")),
+            cov_attention_pass_2 = fifelse(is.na(check2), NA_integer_, as.integer(check2 == "Red,Green")))]
 stopifnot(all(r$sex %in% c("Female", "Male", NA)))
 d <- merge(d, cv, by = "id")
 d[, id := match(id, sort(unique(id)))]
+stopifnot(uniqueN(d$id) == 3000, d[cov_attention_pass_1 %in% 1 & cov_attention_pass_2 %in% 1, .(uniqueN(id), uniqueN(paste(id, task)))] == c(1861, 18591))
 setorder(d, id, task, profile)
 fwrite(d, file.path(out, "wu_2024_energy_mix.csv"))
