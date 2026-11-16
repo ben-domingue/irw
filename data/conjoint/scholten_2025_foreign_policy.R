@@ -34,9 +34,10 @@
 ##1 Democrat, 2 Republican, stored as that text; blank for independents/experts not answering). The ethnocentrism and hawkishness
 ##battery scores (ethnoc, hawk) and their median splits are derived scales and are dropped.
 ##Respondent ids are the authors' sequential respid.
-##Rows with neither a choice nor a rating (57) are dropped; one mass respondent answered
-##nothing: 1,131 respondents (984 mass, 147 expert), 13,527 rows; 37 rows have a choice but no
-##rating. Count check: the article and the logs report 985 + 147 respondents (11,820 / 1,764
+##Tasks with neither a choice nor a rating (27 tasks, 54 rows) are dropped; a country left unrated
+##in a task with no choice keeps its row with both outcomes NA (3 tasks; #3536); one mass respondent
+##answered nothing: 1,131 respondents (984 mass, 147 expert), 13,530 rows; 37 rows have a choice
+##but no rating. Count check: the article and the logs report 985 + 147 respondents (11,820 / 1,764
 ##rows, counting unanswered tasks as not chosen).
 ##Spot check: the mass-sample choice AMCEs (unanswered tasks set to 0) reproduce the authors'
 ##log to within 0.001 (e.g. Democracy -0.032, U.S. ally -0.059, Strong +0.041; SE 0.010).
@@ -56,7 +57,7 @@ d[, r := NULL]
 stopifnot(d[, sum(choice), .(id, task)][, all(V1 <= 1)])
 d[, none := sum(choice) == 0, .(id, task)][none == TRUE, choice := NA_integer_][, none := NULL]
 stopifnot(d[is.na(choice), .N] == 264, d[cov_sample == "Mass", uniqueN(id)] == 985, d[cov_sample == "Expert", uniqueN(id)] == 147)
-d <- d[!(is.na(choice) & is.na(rating))]
+d <- d[d[, .I[any(!is.na(choice) | !is.na(rating))], .(id, task)]$V1]   # task-level: a shown profile stays
 setcolorder(d, c("id", "task", "profile", "choice", "rating"))
 setorder(d, id, task, profile)
 fwrite(d, file.path(out, "scholten_2025_military_action.csv"))

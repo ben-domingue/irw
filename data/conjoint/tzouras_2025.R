@@ -30,7 +30,9 @@
 ##Outcomes: choice = the mode selected (1 on the chosen alternative; the Munich file spells e-scooter "escooter", pooled with
 ##"escoot"); rating_perceived_safety = the respondent's own 1-7 safety rating for that mode in the scenario (1 = very unsafe,
 ##7 = very safe; the NA ratings, 74 rows, stay NA).
-##Pooling: Athens and Munich pooled with cov_city, as the deposit does; one design and shared level text.
+##Pooling: Athens and Munich pooled with cov_city, as the deposit does; one design and shared level text. Two countries:
+##cov_country = Greece (Athens) / Germany (Munich), from the deposit's description ("129 respondents from Athens, Greece",
+##"50 respondents from Munich, Germany"); the file itself records only the city.
 ##Covariates joined by pid from the rating file (constant within pid, verified): cov_gender (0 male, 1 female, README),
 ##cov_age_group_code (README lists "1: <18, 2: 18-30, 3: 31-40, 3: 41-50, 5: 50-65, 6: 65+": code 3 is duplicated and code 1 = 51% of rows is implausible for '<18', so the codes are kept unmapped), cov_education (README text),
 ##cov_income_band_eur_month (README text), cov_car_owner. 1 respondent in the choice file has no rating-file covariates (NA).
@@ -58,7 +60,7 @@ mk <- function(k) {
   data.table(id = ch$id, task = ch$task, profile = k, choice = as.integer(ch$choice == m),
              rating_perceived_safety = as.integer(ch[[paste0(m, "psafe")]]),
              attr_mode = labs[[m]], attr_travel_time = paste(fmt(tt), "minutes"), attr_cost = cs,
-             cov_city = ch$city,
+             cov_city = ch$city, cov_country = c(Athens = "Greece", Munich = "Germany")[ch$city],
              cov_gender = ifelse(cv$gender == 0, "male", ifelse(cv$gender == 1, "female", NA)),
              cov_age_group_code = as.integer(cv$age),
              cov_education = c("no education", "primary", "secondary", "higher", "master")[cv$education + 1L],
@@ -68,6 +70,6 @@ mk <- function(k) {
 o <- rbindlist(lapply(1:4, mk))
 setorder(o, id, task, profile)
 stopifnot(o[, sum(choice), .(id, task)][, all(V1 == 1)], !anyNA(o$attr_travel_time), !anyNA(o$attr_cost),
-          ch[, uniqueN(city), pid][, all(V1 == 1)])
+          ch[, uniqueN(city), pid][, all(V1 == 1)], !anyNA(o$cov_country))
 dir.create(out, showWarnings = FALSE, recursive = TRUE)
 fwrite(o, file.path(out, "tzouras_2025_mode_safety.csv"))

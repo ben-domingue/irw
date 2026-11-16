@@ -14,7 +14,7 @@
 ##dropout). 7 binary attributes, independently randomized; attributes grouped in democracy,
 ##security and society blocks whose order was randomized once per respondent (not recorded in
 ##the file, so no attrpos_). The article analyses all countries pooled (with country subgroups),
-##so this is one table with cov_nationality.
+##so this is one table with cov_country (and cov_nationality).
 ##Structure: one row per respondentid x countryprofile (_1.._20; plus one "der" row per
 ##Turkish respondent holding no profile, dropped). task = (k+1) %/% 2 and profile = 2 - k %% 2
 ##for countryprofile _k, i.e. _1/_2 = task 1 profile 1/2. Checked: in every one of the 141,369
@@ -39,11 +39,21 @@
 ##           read), also only as the 0-1 rescale.
 ##Respondents: 35,306 with an answered pair in the file (35,292 after the drop below) vs the article's 35,281 valid respondents
 ##(282,560 profiles; 282,738 answered profiles here). Partial completers are kept (2-20 profiles).
-##41 tasks with a missing attribute recode are dropped whole. Rows with no outcome are omitted;
-##36,261 respondents have some answer, 35,292 a choice. Spot check: choice AMCEs for elections
+##41 tasks with a missing attribute recode are dropped whole. Tasks with no outcome are omitted; a
+##profile with no outcome in an answered task keeps its row with the outcomes NA (1,567 tasks, all
+##with no choice and one profile rated; #3536), so 312,482 rows; 36,261 respondents have some
+##answer, 35,292 a choice. Spot check: choice AMCEs for elections
 ##(0.157) and economy (0.150) match the article's 16 and 15 points; crime has no effect (0.000),
 ##as the article reports.
-##Covariates: cov_nationality = ccnumeric value label text as in the source (respondent
+##Covariates: cov_country = the country's English name for ccnumeric, as the authors' conjoint.do
+##names its codes in the by-country AMCEs (Figure A.15): 35 codes -> 32 countries (4 and 17
+##"'+Chilenos+" Chile; 11 and 29 "Mexicano(a)" Mexico; 24 and 25 "Hong+Kongers" Hong Kong; 37
+##"turkish" Turkey; 19 American United States; 21 British United Kingdom; 22 Filipino Philippines;
+##the rest the plain country of the label). Two codes are NA because the authors place them in
+##no country: 8 "Filipino(a)" (Spanish-language survey, 2 respondents in the table) and 18
+##"'--sanitized--" (11). The variable is the respondent's nationality answer, used by the authors
+##as the country of the fielding; country of residence is not recorded separately.
+##cov_nationality = ccnumeric value label text as in the source (respondent
 ##nationality / country group used by the authors as country fixed effect; labels are the
 ##survey's own words, e.g. "Argentinos", "Kenyan", "turkish", with a few junk labels:
 ##"'+Chilenos+", "'--sanitized--", "Hong+Kongers" kept as is); cov_language = "English" /
@@ -64,7 +74,7 @@ z <- z[countryprofile != "der"]
 z[, kk := as.integer(sub("^_", "", countryprofile))]
 stopifnot(!anyNA(z$kk), z[, anyDuplicated(paste(respondentid, kk))] == 0)
 z[, `:=`(task = (kk + 1L) %/% 2L, profile = 2L - kk %% 2L)]
-z <- z[!(is.na(live) & is.na(democ) & is.na(qol))]
+z <- z[z[, .I[any(!is.na(live) | !is.na(democ) | !is.na(qol))], .(respondentid, task)]$V1]   # task-level: a shown profile stays
 av <- c("elections", "checks", "freespeech", "economy", "crime", "genderequality", "diversity")
 bad <- z[, .(b = any(!complete.cases(.SD))), .(respondentid, task), .SDcols = av][b == TRUE]
 cat("tasks dropped for a missing attribute:", nrow(bad), "\n")
@@ -81,7 +91,12 @@ d <- data.table(id = as.integer(z$respondentid), task = z$task, profile = z$prof
 for (v in av) { stopifnot(all(z[[v]] %in% 0:1)); d[, paste0("attr_", nm[[v]]) := lv[[v]][z[[v]] + 1L]] }
 stopifnot(all(round(d$rating_democracy * 10, 4) %in% c(0:10, NA)), all(round(d$rating_quality_of_life * 10, 4) %in% c(0:10, NA)))
 d[, `:=`(rating_democracy = round(rating_democracy, 1), rating_quality_of_life = round(rating_quality_of_life, 1))]
-d[, `:=`(cov_nationality = names(ccl)[match(z$ccnumeric, ccl)],
+ctry <- c("Argentina", "Bangladesh", "Bolivia", "Chile", "Colombia", "Dominican Republic", "Ecuador", NA, "Guatemala",
+          "Honduras", "Mexico", "Nicaragua", "Paraguay", "Peru", "El Salvador", "Venezuela", "Chile", NA, "United States",
+          "Australia", "United Kingdom", "Philippines", "Ghana", "Hong Kong", "Hong Kong", "India", "Kenya", "Malaysia",
+          "Mexico", "Nigeria", "Pakistan", "Singapore", "South Africa", "Tanzania", "Uganda", "Zambia", "Turkey")
+stopifnot(identical(unname(ccl), as.numeric(seq_along(ctry))), uniqueN(na.omit(ctry)) == 32)
+d[, `:=`(cov_country = ctry[z$ccnumeric], cov_nationality = names(ccl)[match(z$ccnumeric, ccl)],
          cov_language = fifelse(z$english %in% 1, "English", fifelse(z$spanish %in% 1, "Spanish", NA_character_)),
          cov_age = as.integer(z$age), cov_birth_year = as.integer(z$birth_year), cov_gender_code = as.integer(z$gender),
          cov_education = fifelse(z$education == "", NA_character_, z$education), cov_duration_sec = as.numeric(z$duration))]

@@ -42,8 +42,8 @@
 ##           admit the immigrant, how would you rate Immigrant 1 and Immigrant 2?" 7 = definitely
 ##           admit (higher = more favourable).
 ##  70 tasks have ratings but no choice (choice blank); 15 tasks have a choice but a rating
-##  for one or neither profile. Rows with no outcome are omitted, so one task (rated for one
-##  immigrant only, no choice) has a single row.
+##  for one or neither profile. A profile with no outcome in an answered task keeps its row with
+##  the outcomes NA (1 task, rated for one immigrant only, no choice; #3536).
 ##Covariates (source codes unless said; wording from the report). The .dta carries no value
 ##labels for respondent variables; text mappings are from SSI_conjoint2014_qualtricsreport.pdf
 ##(Q1 "What is your gender?" 1 Male 2 Female; Q4 "What is the highest level of education you
@@ -105,7 +105,7 @@ d[, cov_education := txt(s$education_resp, c("Did not graduate from high school"
   "Some college, but no degree", "2-year college degree", "4-year college degree",
   "Postgraduate degree (MA, MBA, MD, JD, PhD, etc.)"))]
 d[, cov_party_id := txt(s$pid, c("Democrat", "Republican", "Independent", "Other Party"))]
-d <- d[!is.na(choice) | !is.na(rating)]
+d <- d[d[, .I[any(!is.na(choice) | !is.na(rating))], .(id, task)]$V1]   # task-level: a shown profile stays
 stopifnot(!anyNA(d[, .SD, .SDcols = patterns("^attr_")]), d[, sum(choice), .(id, task)][!is.na(V1), all(V1 == 1)])
 setorder(d, id, task, profile)
 fwrite(d, file.path(out, "berinsky_2020_immigrant_admission.csv"))

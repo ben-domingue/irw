@@ -28,8 +28,9 @@
 ##  rating_democrat: how democratic the candidate is, 0-10 (authors: "Democracy Rating"; higher =
 ##    more democratic assumed from the authors' table, not stated).
 ##  rating_like: support / liking of the candidate, 1-5 (authors: "Support"; direction not stated).
-##231 of 2,575 tasks have no selection (choice NA on both profiles); rows with no outcome at all are
-##dropped (273 rows; 5 respondents answered nothing): 510 respondents, 4,877 rows. The authors drop 5 respondents with time_min < 14 (speeders); kept here, with
+##231 of 2,575 tasks have no selection (choice NA on both profiles); tasks with no outcome at all are
+##dropped (136 tasks, 272 rows; 5 respondents answered nothing), and a profile with no outcome in an
+##answered task keeps its row with the outcomes NA (1 task; #3536): 510 respondents, 4,878 rows. The authors drop 5 respondents with time_min < 14 (speeders); kept here, with
 ##cov_time_min so they can be filtered. Covariates kept: cov_gender (female 1 -> "female", 0 -> "male"),
 ##cov_age, cov_ideology (0-10 as stored, labels unknown), cov_erdogan_voter (0/1), cov_time_min
 ##(survey duration, minutes). Education/income codes have no labels and are left out, as are the
@@ -56,7 +57,7 @@ d <- s[, .(id = as.integer(id), task, profile, choice = as.integer(selection),
            rating_democrat = democrat, rating_like = like,
            attr_judiciary_law = law, attr_social_policy = soc, trial_version = as.integer(signal))]
 d <- merge(d, p[, id := as.integer(id)], by = "id", all.x = TRUE)
-d <- d[!(is.na(choice) & is.na(rating_democrat) & is.na(rating_like))]
+d <- d[d[, .I[any(!is.na(choice) | !is.na(rating_democrat) | !is.na(rating_like))], .(id, task)]$V1]   # task-level: a shown profile stays
 setorder(d, id, task, profile)
 fwrite(d, file.path(out, "adiguzel_2025_checks_balances.csv"))
 x <- d[!is.na(choice) & cov_time_min > 13]
