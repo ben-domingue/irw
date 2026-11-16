@@ -1,8 +1,7 @@
 # Notes for the next scheduled pipeline run
 
 Runs as **`.github/workflows/metadata-pipeline.yml`, Mondays, Wednesdays and
-Fridays at 13:00 UTC** (Monday always; the other two are gated -- see
-`scripts/pipeline_gate.py`) -- a
+Fridays at 13:00 UTC**, every slot, ungated -- a
 GitHub Action, not a crontab on anyone's machine, and it opens a pull request
 rather than an issue. Nothing reads this file: it is for the human reviewing
 that PR. Delete or trim entries once they have been checked off.
