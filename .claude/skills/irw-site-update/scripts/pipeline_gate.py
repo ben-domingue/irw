@@ -2,7 +2,8 @@
 """Decide whether a scheduled metadata-pipeline run has anything to do.
 
 The pipeline runs Mondays, Wednesdays and Fridays (metadata-pipeline.yml).
-Monday always runs. The other slots run when EITHER of two things is true, and
+Every scheduled slot is gated (Mondays too, since 2026-11-16; dispatches are
+never gated). A slot runs when EITHER of two things is true, and
 a run does useful work in both cases:
 
 1. Intake. A table is live in a core warehouse shard with no row in
@@ -25,7 +26,8 @@ it is just no longer the only kind of work a run can have.
 
 Only the core shards are checked for intake -- they are where almost all of it
 lands, and stage 12 uses the same definition. A new competitions, simsyn,
-nominal or conjoint table with no core table alongside waits for Monday.
+nominal or conjoint table with no core table alongside waits for the next
+run that something else triggers, or for a dispatch.
 
 Fails OPEN: if Redivis cannot be listed, or the listing looks truncated, the
 answer is "run" -- a wasted run costs an hour, a skipped one costs a week. The
