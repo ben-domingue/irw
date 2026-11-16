@@ -39,18 +39,24 @@
 ##Level probabilities are unequal by design (plumber files): ethnicity UK Black .065 / Asian .075 /
 ##White .86; US White .63, Black .13, Asian .06, Hispanic .18; DE no migration background .8, each
 ##other .2/3; sexuality heterosexual .9 / homosexual .1; others uniform.
-##Kept: consenting respondents with Progress 100 and tasks with an answer; tasks whose sentences are
-##missing are dropped. Not applied (recorded instead): the authors' speeder rule (duration < 300 s;
-##cov_duration_sec) and attention check (pers_rep1_5 must be "Agree" / "Stimme zu";
-##cov_attention_pass). Many completes have no conjoint answers (they were not routed to it).
-##N check: respondents with cov_attention_pass == 1 and cov_duration_sec >= 300 number UK 2,202 /
+##Kept: every consenting respondent with at least one answered task (IRW conjoint ruling, Ben 2026-11-10:
+##no author sample exclusions), including those who left the survey before the end (Progress < 100:
+##UK 47, US 73, DE 49; the consent form says only that participants are "free to withdraw from the
+##study at any time", not that a partial response is discarded); tasks whose sentences are missing are
+##dropped. Not applied (recorded instead): the authors' completion rule (01_prep_fa.r: Progress == 100,
+##DE Finished; cov_progress, cov_finished), speeder rule (duration < 300 s; cov_duration_sec) and
+##attention check (pers_rep1_5 must be "Agree" / "Stimme zu"; cov_attention_pass). The table as first
+##built kept only Progress 100; reproduce that with cov_progress == 100. Many completes have no conjoint
+##answers (they were not routed to it).
+##N check: respondents with cov_progress == 100, cov_attention_pass == 1 and cov_duration_sec >= 300 number UK 2,202 /
 ##US 2,175 / DE 2,121 vs the article's analysis samples 2,204 / 2,178 / 2,049 (the DE prep also
 ##drops missing education and unfinished cases; the US prep times "Duration (in seconds)").
 ##Covariates (answer text as exported): cov_gender (Male/Female, DE Männlich/Weiblich -> male/female;
 ##blank NA), cov_birth_year (plausible 1900-2005), cov_education, cov_class, cov_sexuality,
 ##cov_ethnicity (UK/US; DE cov_migration_background), cov_vote_last (gen_election_retro; US
 ##house_election_retro), cov_ideology (general_ideology), cov_region (UK result.0.region or
-##result.0.country, US State, DE Region), cov_attention_pass, cov_duration_sec (Q_TotalDuration).
+##result.0.country, US State, DE Region), cov_attention_pass, cov_duration_sec (Q_TotalDuration), cov_progress (Qualtrics
+##Progress, percent), cov_finished (Qualtrics Finished, 1/0).
 ##The authors' raking weights are computed in 01_prep_fa.r, not deposited (survey_weight not_kept).
 ##PII in the exports, not read: Prolific IDs, postcodes, UK parliamentary constituency, free-text
 ##answers (rep_chosen). No IP addresses. Respondents re-keyed to integers in export order.
@@ -74,9 +80,12 @@ for (cc in names(cfg)) {
   C <- cfg[[cc]]
   sc <- c(outer(outer(1:2, 1:7, function(p, k) paste0("mp_", p, "_sentence_", k)), 1:5, function(pk, t) paste0(pk, "_", t, ".0")))
   keep <- c("ResponseId", "Consent", "Progress", "Gender", "Birth", "Education", "Class", "Sexuality", C$eth, C$vote, "general_ideology",
-            C$region, "pers_rep1_5", "Q_TotalDuration", paste0("conjoint_", 1:5), sc, if (cc == "uk") "result.0.country")
+            C$region, "pers_rep1_5", "Q_TotalDuration", "Finished", paste0("conjoint_", 1:5), sc, if (cc == "uk") "result.0.country")
   x <- fread(file.path(raw, C$f), select = keep, encoding = "UTF-8", colClasses = "character")[-(1:2)]
-  x <- x[Progress == "100" & Consent != "" & !grepl("do not want|möchte nicht", Consent) & conjoint_1 != ""]
+  ans <- Reduce(`|`, lapply(paste0("conjoint_", 1:5), function(v) x[[v]] != ""))
+  stopifnot(identical(ans, x$conjoint_1 != ""))  # nobody answered a later task without task 1
+  x <- x[Consent != "" & !grepl("do not want|möchte nicht", Consent) & ans]
+  stopifnot(all(x$Finished %in% c("True", "False")), !anyNA(as.integer(x$Progress)))
   x[, rid := .I]
   # sentence types from task 1, politician 1; the same order must hold for every task and politician
   ty <- function(s) fifelse(grepl(C$surr, s), "surrogation", fifelse(grepl(C$resp, s), "responsiveness", fifelse(grepl(C$subst, s), "substantive",
@@ -120,10 +129,13 @@ for (cc in names(cfg)) {
                    cov_class = bl(x$Class), cov_sexuality = bl(x$Sexuality), cov_vote_last = bl(x[[C$vote]]),
                    cov_ideology = bl(x$general_ideology), cov_region = reg,
                    cov_attention_pass = fifelse(bl(x$pers_rep1_5) == C$att, 1L, 0L, NA_integer_),
-                   cov_duration_sec = suppressWarnings(as.integer(x$Q_TotalDuration)))
+                   cov_duration_sec = suppressWarnings(as.integer(x$Q_TotalDuration)),
+                   cov_progress = as.integer(x$Progress), cov_finished = as.integer(x$Finished == "True"))
   cv[, (if (cc == "de") "cov_migration_background" else "cov_ethnicity") := bl(x[[C$eth]])]
   d <- merge(d, cv, by = "rid")
   setnames(d, "rid", "id")
   setorder(d, id, task, profile)
+  cat(cc, ": ", uniqueN(d$id), " respondents (", d[cov_progress == 100, uniqueN(id)], " with Progress 100), ", nrow(d), " rows\n", sep = "")
+  stopifnot(uniqueN(d$id) == c(uk = 3149, us = 2989, de = 3099)[[cc]], d[cov_progress == 100, uniqueN(id)] == c(uk = 3102, us = 2916, de = 3050)[[cc]])
   fwrite(d, file.path(out, paste0("blumenau_2024_representation_", cc, ".csv")))
 }

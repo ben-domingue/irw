@@ -20,18 +20,22 @@
 ##  rating_trust  trust in the candidate ('trustworthiness'): 1 Nada, 2 Poco, 3 Algo, 4 Mucho (numeric `trust`); 'No se' = NA (216)
 ##Higher = more likely / more trust. The wide columns cleanmanvote..corruptwomantrust (one per condition) are reduced to these
 ##three; the text answers and the numeric codes agree (checked cross-tab). No choice or opt-out.
-##Sample: the authors' analysis uses incomplete == 0 (3,215 respondents; Chile 843, Guatemala 996, Mexico 865, Uruguay 511);
-##the 74 respondents flagged incomplete (they answered the vignette items) are dropped to match. 1,156 rows have no
-##condition (never reached the experiment) and are dropped. Manipulation-check variables (manicheck*, passed*) are not kept.
+##Sample: every respondent assigned a condition is kept (IRW conjoint ruling, Ben 2026-11-10: no author sample exclusions):
+##3,289, including the 74 the authors flag incomplete (all consented, all with a vote and tell answer; 67 did not finish the
+##survey, 7 did). The authors' analysis sample excludes respondents flagged incomplete; reproduce it with cov_incomplete == 0
+##(3,215 respondents; Chile 843, Guatemala 996, Mexico 865, Uruguay 511). 1,156 rows have no condition (never reached the
+##experiment) and are dropped. Manipulation-check variables (manicheck*, passed*) are not kept.
 ##Covariates kept: cov_country, cov_gender (sex: Hombre = male, Mujer = female, 'Otro/Prefiero no decirlo' = NA), cov_age_group
-##(age bands as in the source; the bands differ by country; '85 o mas' accent repaired), cov_duration_sec (Durationinseconds).
+##(age bands as in the source; the bands differ by country; '85 o mas' accent repaired), cov_duration_sec (Durationinseconds),
+##cov_incomplete (the authors' flag `incomplete`, 1 = flagged; how it was set is not documented), cov_finished (Qualtrics Finished, 1/0).
 ##Dropped (no IP or coordinates in this file): Qualtrics ResponseId, StartDate/EndDate, ticket (a UUID), state, consent, education text
 ##(accents garbled in the .tab export), stereotype and ideology items, the authors' derived variables and model outputs.
 ##Respondents also saw an unrelated 'ICJCondition' module (not part of this experiment); not kept.
 library(data.table)
 a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]
 d <- fread(file.path(raw, "data.tab"), encoding = "UTF-8", showProgress = FALSE)
-d <- d[incomplete == 0 & !is.na(condition)]
+d <- d[!is.na(condition)]
+stopifnot(nrow(d) == 3289, d[incomplete == 0, .N] == 3215, all(d$incomplete %in% 0:1))
 vote_txt <- c("Muy improbable" = 1, "Algo improbable" = 2, "Ni probable ni improbable" = 3, "Algo probable" = 4, "Muy probable" = 5)
 pick <- function(cols) { m <- as.matrix(d[, ..cols]); apply(m, 1, function(r) { r <- r[!is.na(r) & r != ""]; if (length(r) == 1) r else NA_character_ }) }
 vt <- pick(c("cleanmanvote", "cleanwomanvote", "corruptmanvote", "corruptwomanvote"))
@@ -46,7 +50,9 @@ o <- data.table(id = seq_len(nrow(d)), task = 1L, profile = 1L, rating_vote = as
   rating_trust = as.integer(d$trust),
   attr_candidate_sex = ifelse(d$condition %in% c(1, 3), "Man", "Woman"),
   attr_scandal = ifelse(d$condition %in% c(1, 2), "No scandal", "Corruption scandal"),
-  cov_country = d$Country, cov_gender = sx, cov_age_group = ag, cov_duration_sec = as.integer(d$Durationinseconds))
+  cov_country = d$Country, cov_gender = sx, cov_age_group = ag, cov_duration_sec = as.integer(d$Durationinseconds),
+  cov_incomplete = as.integer(d$incomplete), cov_finished = as.integer(as.logical(d$Finished)))
+stopifnot(!anyNA(o$cov_finished), !anyNA(o$rating_vote), !anyNA(o$rating_tell))
 setorder(o, id, task, profile)
 fwrite(o, file.path(out, "elia_2024_scandal_women_candidates.csv"))
 print(table(o$cov_country))

@@ -14,10 +14,23 @@
 ##("has an MD, and works as a cardiologist", "straight (that is, not lesbian)"). The pronoun and
 ##possessive fields are display helpers that follow gender and are dropped. 6 of 1,873 raw records
 ##show gdp "middle-income" (not a codebook level); none is in the analysed sample.
-##Sample: the authors' filters (main_replication.Rmd): Prolific status APPROVED or AWAITING REVIEW,
-##two Prolific IDs excluded (one failed attention check, one "extra person"), Finished, and Prolific
-##age available (29 respondents with expired Prolific data dropped). 1,621 respondents; the article
-##reports 1,650 (the count before the age filter).
+##Sample (IRW conjoint ruling, Ben 2026-11-10: no author sample exclusions): every participant of this
+##Prolific study whose submission is APPROVED, AWAITING REVIEW or REJECTED in prolific.csv and who
+##answered at least one task: 1,653 respondents, all of whom consented. Kept now, unlike the authors:
+##the one REJECTED submission (the participant the authors drop for a failed attention check), the
+##"extra person" the authors drop by ID (AWAITING REVIEW; main_replication.Rmd gives no other reason),
+##1 participant who did not finish (Progress 95, all 4 choices and 7 of 8 ratings answered), and 29
+##respondents whose Prolific demographics had expired (cov_age NA; Prolific requires 18+).
+##Still out: the 3 RETURNED submissions (on Prolific, returning a submission withdraws it from the
+##study, so they count as withdrawals); records with no submission in prolific.csv (Qualtrics test and
+##pilot runs from January-June 2023 before the 20-23 June fielding, a survey preview, and 31 records
+##from the fielding window, 5 finished and 26 not, whose Prolific status, and so whether they
+##withdrew, is unknown); 2 non-consenting records (no outcome). Two participants have two records each
+##(one finished, one abandoned); the finished record is kept.
+##The authors' analysis sample (main_replication.Rmd) excludes respondents who did not finish, the two
+##hand-excluded IDs and REJECTED/RETURNED submissions; reproduce it with cov_finished == 1 &
+##cov_author_excluded == 0 (1,650, the article's N). The table as first built (live until 2026-11)
+##also dropped respondents with no Prolific age: add !is.na(cov_age) (1,621).
 ##task = (immigrant number + 1) %/% 2, profile = 1 for odd, 2 for even immigrant numbers (recorded).
 ##Outcomes (qualtrics_codebook.csv):
 ##  choice        = choice_a..d, "Based on their descriptions, which of these two immigrants would you
@@ -41,7 +54,9 @@
 ##cov_education (resp_education, as worded), cov_religion, cov_attend, cov_know_lg (lesbian or gay
 ##friends/family), cov_imm_1 .. cov_imm_11 (the 11 immigration statements, codebook order); from
 ##Prolific: cov_age, cov_sex_panel (Prolific's "Sex: Male, Female", kept as text; cov_gender is the
-##survey's own question), cov_ethnicity. The survey's two attention checks (attention_color,
+##survey's own question), cov_ethnicity; cov_finished (Qualtrics Finished, 1/0), cov_panel_status (APPROVED,
+##AWAITING REVIEW or REJECTED: the Prolific submission status), cov_author_excluded (1 = one of the two Prolific IDs main_replication.Rmd drops by hand:
+##"failed attention check" and "extra person"; else 0). The survey's two attention checks (attention_color,
 ##attention_number) and "Duration (in seconds)" are not kept. The authors' post-stratification weights (raked to Pew
 ##ATP wave 112, not deposited) are not built.
 ##PII in the deposit, not kept: Prolific IDs (prolific_pid, PROLIFIC_PID; Participant id and Submission id
@@ -50,11 +65,17 @@
 library(data.table)
 a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]
 d <- fread(file.path(raw, "qualtrics.csv"), header = TRUE, colClasses = "character")[-(1:2)]
-p <- fread(file.path(raw, "prolific.csv"), colClasses = "character")[Status %in% c("APPROVED", "AWAITING REVIEW")]
-s <- d[PROLIFIC_PID %in% p$`Participant id` & !PROLIFIC_PID %in% c("644af405d31dd25adf037157", "6048622d518a190008dfbe38") & Finished == "True"]
+p <- fread(file.path(raw, "prolific.csv"), colClasses = "character")
+stopifnot(all(p$Status %in% c("APPROVED", "AWAITING REVIEW", "REJECTED", "RETURNED")), !anyDuplicated(p$`Participant id`))
+p <- p[Status != "RETURNED"]
+drop2 <- c("644af405d31dd25adf037157", "6048622d518a190008dfbe38")  # authors: failed attention check; extra person
+oc <- c(paste0("choice_", letters[1:4]), paste0("value_", letters[1:4]), paste0("rating", 1:8), paste0("value", 1:8))
+s <- d[PROLIFIC_PID %in% p$`Participant id` & Reduce(`|`, lapply(oc, function(v) d[[v]] != ""))]
+stopifnot(all(s$consent == "I hereby give my consent to be the subject of the research."))
+s <- s[order(PROLIFIC_PID, Finished != "True")][!duplicated(PROLIFIC_PID)][order(as.integer(factor(ResponseId, levels = d$ResponseId)))]
 s[, age := suppressWarnings(as.integer(p$Age[match(PROLIFIC_PID, p$`Participant id`)]))]
-s <- s[!is.na(age)]
-stopifnot(nrow(s) == 1621L, !anyDuplicated(s$PROLIFIC_PID))
+stopifnot(nrow(s) == 1653L, s[Finished == "True" & !PROLIFIC_PID %in% drop2, .N] == 1650L,
+          s[Finished == "True" & !PROLIFIC_PID %in% drop2 & !is.na(age), .N] == 1621L)
 num <- function(x) { y <- as.integer(substr(x, 1, 1)); y[x == ""] <- NA; y }
 rows <- list()
 for (k in 1:8) {
@@ -66,13 +87,15 @@ for (k in 1:8) {
                   rating = num(s[[paste0("rating", k)]]), rating_values = num(s[[paste0("value", k)]]))
   x[ch == "", choice := NA_integer_]
   for (v in c("gender", "sexuality", "gdp", "skill", "lang", "religion", "reason")) x[, paste0("attr_", v) := s[[paste0(v, k)]]]
+  x <- x[!is.na(choice) | !is.na(choice_values) | !is.na(rating) | !is.na(rating_values)]
   rows[[k]] <- x
 }
 x <- rbindlist(rows)
 setnames(x, c("attr_gdp", "attr_lang"), c("attr_country_wealth", "attr_english"))
-stopifnot(!anyNA(x$choice), x[, sum(choice), .(id, task)][, all(V1 == 1)],
+stopifnot(x[, .N, .(id, task)][, all(N == 2)], x[, uniqueN(is.na(choice)), .(id, task)][, all(V1 == 1)],
+          x[!is.na(choice), sum(choice), .(id, task)][, all(V1 == 1)],
           x[!is.na(choice_values), sum(choice_values), .(id, task)][, all(V1 == 1)],
-          all(x$rating %in% 1:7), !anyNA(x[, .SD, .SDcols = patterns("^attr_")]), all(x$attr_country_wealth %in% c("low-income", "moderately wealthy")))
+          all(x$rating %in% c(NA, 1:7)), !anyNA(x[, .SD, .SDcols = patterns("^attr_")]), all(x$attr_country_wealth %in% c("low-income", "moderately wealthy")))
 cv <- c(cov_gender = "resp_gender", cov_citizen = "resp_citizen", cov_born_citizen = "resp_born", cov_party_id = "resp_politics",
         cov_sexuality = "resp_sexuality", cov_education = "resp_education", cov_religion = "resp_religion", cov_attend = "resp_attend",
         cov_know_lg = "resp_knowlg", setNames(paste0("resp_imm_support_", 1:11), paste0("cov_imm_", 1:11)))
@@ -84,6 +107,9 @@ c2[, cov_age := s$age]
 pm <- match(s$PROLIFIC_PID, p$`Participant id`)
 c2[, cov_sex_panel := p$Sex[pm]][, cov_ethnicity := p$`Ethnicity simplified`[pm]]
 c2[cov_sex_panel %in% c("DATA_EXPIRED", ""), cov_sex_panel := NA][cov_ethnicity %in% c("DATA_EXPIRED", ""), cov_ethnicity := NA]
+c2[, cov_finished := as.integer(s$Finished == "True")][, cov_panel_status := p$Status[pm]]
+c2[, cov_author_excluded := as.integer(s$PROLIFIC_PID %in% drop2)]
 x <- merge(x, c2, by = "id")
+stopifnot(uniqueN(x$id) == 1653L, x[cov_finished == 1 & cov_author_excluded == 0, uniqueN(id)] == 1650L)
 setorder(x, id, task, profile)
 fwrite(x, file.path(out, "hoffmann_2025_immigrant_sexuality.csv"))

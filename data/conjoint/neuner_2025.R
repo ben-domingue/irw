@@ -10,9 +10,13 @@
 ##the UK instrument on OSF was not downloadable (403).
 ##Usage: Rscript neuner_2025.R <dir holding Prolific_*_Raw.csv> <output dir>
 ##
-##Prolific samples; the analysis keeps Finished == 1 (script_02/03/04), as here: sample 1 (US,
-##`Sample` ONE) 699, sample 2 (US, TWO) 704, sample 3 (UK) 730 finished respondents; 41 finished
-##UK respondents have no conjoint answers at all and 40 of them drop out (no outcome), leaving 690.
+##Prolific samples; every respondent consented (consent == 1 in all rows). Every respondent with at
+##least one conjoint answer is kept (IRW conjoint ruling, Ben 2026-11-10: no author sample
+##exclusions): sample 1 (US, `Sample` ONE) 699 finished + 24 unfinished = 723, sample 2 (US, TWO)
+##704 + 24 = 728, sample 3 (UK) 690 + 12 = 702 (41 finished UK respondents have no conjoint answers
+##at all and 40 of them drop out, no outcome). Unfinished respondents keep the tasks and outcomes
+##they answered. The authors' analysis sample (script_04) excludes respondents who did not finish;
+##reproduce it with cov_finished == 1 (699 / 704 / 690).
 ##Each respondent compared 6 pairs of hypothetical politicians. Text vignette (instrument):
 ##"Please read the statements from two hypothetical politicians and then answer the questions
 ##below. Politician 1: <people-centrism> <anti-elitism> <filler> Politician 2: ..." In sample 2 the
@@ -42,7 +46,8 @@
 ##as recorded), cov_age (yearborn when the respondent typed an age instead of a year, < 1000; the
 ##authors use 2024 [UK 2025] - yearborn or the typed age), cov_gender (1 Male, 2 Female, 3 Other -> male/female/other; US
 ##instrument, authors' recode in both countries), cov_attention_pass (attent_vignette_out == 4
-##"movies" topic, the authors' `attentive`; NA if unanswered). US only: cov_race, cov_education,
+##"movies" topic, the authors' `attentive`; NA if unanswered), cov_finished (Finished: 1 = finished,
+##0 = not). US only: cov_race, cov_education,
 ##cov_income (instrument answer text; "Prefer not to answer" -> NA), cov_party_id (pid0:
 ##Republican / Democrat / Independent). UK only: cov_party_id (pid0 1-10 -> the authors' labels
 ##Conservative, Labour, Liberal Democrat, SNP, Plaid Cymru, Reform UK, UKIP, Green Party, Other,
@@ -58,7 +63,6 @@ ch <- c(listen = 1, crooked = 2, immigration = 3, conservative = 4)
 rt <- c(listen = "people", crooked = "elite", immigration = "immigration", ideology = "ideology")
 lab <- function(x, l) { r <- unname(l[x]); r[x == ""] <- NA; r }
 build <- function(x, s, show_party, tab, cov) {
-  x <- x[Finished == "1"]
   x[, id := .I]
   rows <- rbindlist(lapply(1:6, function(t) rbindlist(lapply(1:2, function(p) {
     d <- data.table(id = x$id, task = t, profile = p)
@@ -74,7 +78,11 @@ build <- function(x, s, show_party, tab, cov) {
   rows <- rows[rowSums(!is.na(rows[, ..oc])) > 0]
   for (nm in names(ch)) { cc <- paste0("choice_", nm); z <- rows[, .(s = sum(get(cc)), n = sum(!is.na(get(cc)))), .(id, task)]; stopifnot(all(z$n %in% c(0, 2)), all(z[n == 2]$s == 1)) }
   stopifnot(all(unlist(rows[, lapply(.SD, function(v) all(v %in% c(NA, 1:5))), .SDcols = patterns("^rating_")])))
-  d <- merge(rows, cov(x), by = "id")
+  d <- merge(rows, cov(x)[, cov_finished := as.integer(x$Finished == "1")], by = "id")
+  cat(tab, ": ", uniqueN(d$id), " respondents (", d[cov_finished == 1, uniqueN(id)], " finished), ", nrow(d), " rows\n", sep = "")
+  n_all <- c(neuner_2025_populism_us1 = 723, neuner_2025_populism_us2 = 728, neuner_2025_populism_uk = 702)
+  n_fin <- c(neuner_2025_populism_us1 = 699, neuner_2025_populism_us2 = 704, neuner_2025_populism_uk = 690)
+  stopifnot(uniqueN(d$id) == n_all[[tab]], d[cov_finished == 1, uniqueN(id)] == n_fin[[tab]])
   setorder(d, id, task, profile)
   fwrite(d, file.path(out, paste0(tab, ".csv")))
 }
