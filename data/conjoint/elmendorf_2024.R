@@ -27,16 +27,28 @@
 ##(left column "Set A" shows the original Set B positions) and, by the authors' oversight (qmd
 ##L4838), an extra "Issue" column naming each issue; trial_repeat_of = 1 on its rows. Its wording:
 ##"Give this choice, which set of positions would you prefer?" (sic). Profile 1 = left column.
-##Sample (as the qmd): Finished == 1, passed the two screening/attention items (Q2.1 == 1,
-##Q2.2 == "1,2"), and not a speeder (duration > 1/3 of the median duration among those kept).
-##Tasks without an answer omitted. Covariates: cov_state (State embedded field, as text),
-##cov_duration_sec (Qualtrics "Duration (in seconds)", whole survey). The rest of the survey
+##Sample: every respondent with at least one answered task is kept (IRW conjoint ruling, Ben
+##2026-11-10: no author sample exclusions); tasks without an answer are omitted. The authors'
+##analysis sample (qmd) excludes respondents who did not finish, did not pass the two
+##screening/attention items (Q2.1 == 1, Q2.2 == "1,2") or were speeders (duration <= 1/3 of the
+##median duration among those passing the first filters = 1008 / 3 = 336 seconds); reproduce it with
+##cov_finished == 1 & cov_screen_q2_1_code %in% 1 & cov_attention_pass == 1 & cov_duration_sec > 336
+##(5,127 respondents, checked below). Most respondents who failed Q2.1 or Q2.2 were screened out
+##before the conjoint and have no outcome, so they are not in the table.
+##Covariates: cov_state (State embedded field, as text), cov_duration_sec (Qualtrics "Duration (in
+##seconds)", whole survey; for an unfinished response, up to when Qualtrics closed it),
+##cov_finished (Qualtrics Finished, 1/0), cov_attention_pass (Q2.2 "To show that you've read this
+##much, answer both 'extremely interested' and 'very interested'": 1 = exactly options 1 and 2
+##selected, 0 = any other selection), cov_screen_q2_1_code (Q2.1, the screening statement "We check
+##responses in order to make sure that people have read instructions ... If you get these wrong, you
+##may be ineligible"; raw code as exported, the option text is not in the deposit; the qmd keeps
+##code 1; NA = not answered). The rest of the survey
 ##(efficacy pairs, own policy positions, demographics) is not carried here.
 ##Dropped and NOT redistributed: IP addresses, LocationLatitude/Longitude (PII in the deposit's
 ##raw export), the Forthright panel ID (PID), Qualtrics ResponseId (re-keyed to integers),
 ##browser metadata, free text.
-##N: 6,050 records in the export; 5,127 respondents after the qmd's filters, with at least one
-##answered task (the article's count was not checked; press coverage says a national online survey
+##N: 6,050 records in the export; 5,306 respondents with at least one answered task, of whom
+##5,127 are in the authors' sample (the article's count was not checked; press coverage says a national online survey
 ##of about 5,000 urban and suburban adults). Spot check: when taxes on the wealthy is in the task,
 ##the set with "Increase taxes on the wealthy" is chosen 68% of the time; 81% of retest answers
 ##(task 6) pick the same platform as task 1.
@@ -48,9 +60,8 @@ keep <- c("ResponseId", "Finished", "Q2.1", "Q2.2", "Duration (in seconds)", "St
 s <- fread(file.path(raw, "NEO.csv"), select = keep, colClasses = "character", encoding = "UTF-8")
 stopifnot(grepl("ImportId", s$ResponseId[2]))   # rows 1-2: question text and ImportId
 s <- s[-(1:2)]
-s <- s[Finished == "1" & Q2.1 == "1" & Q2.2 == "1,2"]
 s[, dur := as.numeric(`Duration (in seconds)`)]
-s <- s[dur > median(dur, na.rm = TRUE) / 3]
+stopifnot(!anyNA(s$dur), s[Finished == "1" & Q2.1 == "1" & Q2.2 == "1,2", median(dur)] / 3 == 336)
 s[, id := seq_len(.N)]
 q <- paste0("Q13.", c(2, 4, 6, 8, 10))
 L <- rbindlist(lapply(1:5, function(t) rbindlist(lapply(1:3, function(r) {
@@ -76,7 +87,10 @@ for (i in seq_along(iss)) {
   setnames(d, c("a", "p"), paste0(c("attr_", "attrpos_"), cn[i]))
 }
 d[, trial_repeat_of := fifelse(task == 6L, 1L, NA_integer_)]
-d[, `:=`(cov_state = s$State[id], cov_duration_sec = as.integer(s$dur[id]))]
+d[, `:=`(cov_state = s$State[id], cov_duration_sec = as.integer(s$dur[id]), cov_finished = as.integer(s$Finished[id] == "1"),
+         cov_attention_pass = as.integer(s$Q2.2[id] == "1,2"), cov_screen_q2_1_code = as.integer(s$Q2.1[id]))]
+stopifnot(all(s$Finished %in% c("0", "1")), d[cov_finished == 1 & cov_screen_q2_1_code %in% 1 & cov_attention_pass == 1 &
+          cov_duration_sec > 336, uniqueN(id)] == 5127, uniqueN(d$id) == 5306)
 d[cov_state == "", cov_state := NA]
 d[, id := match(id, sort(unique(id)))]
 stopifnot(d[, sum(choice), .(id, task)][, all(V1 == 1)], d[, .N, .(id, task)][, all(N == 2)])
