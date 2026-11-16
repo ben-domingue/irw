@@ -41,6 +41,7 @@
 ##country median incomes. No survey weight in the deposit.
 ##N = 8,330 respondents (press release 8,334). Spot check: see return; the paper's AMCE
 ##tables were not accessible.
+##Shown profiles (#3536, 2026-11-15): a profile with no outcome in an answered task keeps its row with the outcomes NA (37 tasks restored); only a task with no answer at all is dropped.
 library(haven); library(data.table)
 a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]
 k <- as.data.table(read_dta(file.path(raw, "replication_data_min.dta")))
@@ -64,7 +65,9 @@ d[, cov_fert_ideal_trad_life := as.integer(zap_labels(k$fert_ideal_trad_life))]
 d[, cov_hhincome_ppp := k$hhincome_ppp][, cov_pincome_ppp := k$pincome_ppp]
 stopifnot(d[, .N, .(rid, task)][, all(N == 2)], all(d$rating %in% c(1:10, NA)),
           d[, .(s = sum(choice), n = sum(is.na(choice))), .(rid, task)][, all((n == 0 & s == 1) | n == 2)])
-d <- d[!(is.na(choice) & is.na(rating))]
+# task-level: a shown profile stays when its task has any answer (#3536); a task with none is dropped.
+d[, .keep := any(!is.na(choice) | !is.na(rating)), by = .(rid, task)]
+d <- d[(.keep)][, .keep := NULL]
 d[, id := rid][, rid := NULL]
 setcolorder(d, c("id", "task", "profile", "choice", "rating"))
 setorder(d, id, task, profile)
