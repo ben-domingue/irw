@@ -31,15 +31,16 @@
 ##  rating_influential: how influential it would be, 1 Not influential .. 4 Very influential.
 ##Dropped: 149 respondents whose profiles have no attributes in the deposit (all but one of them
 ##also have no ratings; that one rated every message "Not" and is dropped as the levels were not
-##saved), messages with neither rating (202 rows).
+##saved), and issues where neither message has a rating (200 rows). A message left unrated on a
+##rated issue keeps its row with both ratings NA (2 tasks; #3536).
 ##Covariates (cleaned_survey.rds, linked by Qualtrics ResponseId; 96 conjoint respondents are
 ##not in the survey file and have NA): cov_age, cov_gender (Male/Female/Other), cov_education
 ##(educ text), cov_party_id (pid5 text: Democrat .. Republican, incl. leaners), cov_salary
 ##(salary for the office), cov_job_exp, cov_gov_exp (years, as deposited), cov_progress.
 ##Dropped: ResponseId (re-keyed), PersonID (sample-frame id), county, state, fips, dates,
 ##open-ended text. No survey weight.
-##N: 573 officials with at least one rated message (598 with attributes; 747 rows of ids in the
-##conjoint file). Spot check in the return.
+##N: 573 officials with at least one rated message, 3,388 rows (598 with attributes; 747 rows of
+##ids in the conjoint file). Spot check in the return.
 library(data.table)
 a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]
 x <- as.data.table(readRDS(file.path(raw, "cleaned_conjoint.rds")))
@@ -50,7 +51,8 @@ ifl <- c("Not influential", "Somewhat influential", "Moderately influential", "V
 x[, ri := match(informative, inf)][, rf := match(influential, ifl)]
 stopifnot(x[!is.na(ri), all(ri == informative_num)], x[!is.na(rf), all(rf == influential_num)],
           all(x$informative %in% c("", inf)), all(x$influential %in% c("", ifl)))
-x <- x[typeconst != "" & !(is.na(ri) & is.na(rf))]
+x <- x[typeconst != ""]
+x <- x[x[, .I[any(!is.na(ri) | !is.na(rf))], .(responseid, conjoint_id)]$V1]   # task-level: a shown profile stays
 stopifnot(!is.na(x$commtype), !is.na(x$numconst), x$typearg != "", x$position %in% c("Support", "Oppose"))
 stopifnot(x[, uniqueN(position), .(responseid, conjoint_id)][, all(V1 == 1)])
 ids <- sort(unique(x$responseid))

@@ -152,10 +152,14 @@ def validate_conjoint_frame(df, *, label: str = "", opt_out: dict | None = None)
             if not pd.api.types.is_numeric_dtype(df[c]):
                 out.append(_f("conj_rating", "error", f"[J3] {c} is not numeric", table))
     if outcomes and not missing:
-        allna = df[outcomes].isna().all(axis=1).sum()
-        if allna:
+        # A shown profile with no answer keeps its row when its task has any answer
+        # (README "Other rules", #3536); only a task with no answer at all is omitted.
+        rowna = df[outcomes].isna().all(axis=1)
+        task_na = rowna.groupby([df["id"], df["task"]]).all()
+        empty = int(task_na.sum())
+        if empty:
             out.append(_f("conj_outcomes", "warn",
-                          f"[J3] {int(allna)} rows with no outcome at all; omit them", table))
+                          f"[J3] {empty} tasks with no outcome at all; omit them", table))
 
     # J4: attributes, as displayed text
     attrs = [c for c in cols if c.startswith("attr_")]

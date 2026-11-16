@@ -73,6 +73,18 @@ class ConjointTest(unittest.TestCase):
         df.loc[(df.id == 1) & (df.task == 1) & (df.profile == 1), "rating"] = None
         self.assertEqual(checks(df, "error"), set())
 
+    def test_a_shown_profile_with_no_answer_in_an_answered_task_is_fine(self):
+        # #3536: the unanswered profile keeps its row, all outcomes NA.
+        df = table(choice=None)
+        df.loc[(df.id == 1) & (df.task == 1) & (df.profile == 2), "rating"] = None
+        self.assertEqual(checks(df, "error"), set())
+        self.assertNotIn("conj_outcomes", checks(df, "warn"))
+
+    def test_a_task_with_no_answer_at_all_warns(self):
+        df = table(choice=None)
+        df.loc[(df.id == 1) & (df.task == 1), "rating"] = None
+        self.assertIn("conj_outcomes", checks(df, "warn"))
+
     def test_no_chosen_profile_is_an_error_when_the_design_had_no_opt_out(self):
         df = table()
         df.loc[(df.id == 1) & (df.task == 1), "choice"] = 0

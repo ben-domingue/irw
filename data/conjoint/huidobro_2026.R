@@ -29,8 +29,9 @@
 ##      political preferences to the mayor's own, easy to communicate with, capacity to govern,
 ##      trustworthy; exact wording in the article's Appendix B). Task 2 only; empty in task 1.
 ##  Counts: 1,018 respondent ids; 133 tasks have no attributes and 273 no choice. Rows without
-##  attributes or without any outcome are dropped: 913 respondents remain, 905 with at least one
-##  choice. The author's main model uses 3,526 rows / 905 clusters, which this table reproduces;
+##  attributes and tasks without any outcome are dropped; a leader left unanswered in an answered
+##  task keeps its row with outcomes NA (2 tasks; #3536): 913 respondents remain, 3,566 rows, 905
+##  with at least one choice. The author's main model uses 3,526 rows / 905 clusters, which this table reproduces;
 ##  the article text reports 979 mayors and 3,324 observations (not reconciled here).
 ##  Covariates (the deposit's grouped codes; the author withheld ungrouped data because the
 ##  combination would identify mayors): cov_gender (genderresp, "Respondent gender": 0 = male,
@@ -64,8 +65,8 @@ d <- data.table(id = as.integer(k$id_conjoint), task = as.integer(k$task), profi
 stopifnot(d[, all(attr_education %in% c("Primary", "Secondary", "University", "Doctorate", NA))])
 d <- d[!is.na(attr_gender)]
 stopifnot(!anyNA(d[, .(attr_age, attr_education, attr_terms, attr_ideology, attr_seats)]))
-d <- d[!(is.na(choice) & is.na(rating_similar_preferences) & is.na(rating_easy_communication) &
-         is.na(rating_capacity_to_govern) & is.na(rating_trustworthy))]
+d <- d[d[, .I[any(!is.na(choice) | !is.na(rating_similar_preferences) | !is.na(rating_easy_communication) |
+                   !is.na(rating_capacity_to_govern) | !is.na(rating_trustworthy))], .(id, task)]$V1]   # task-level: a shown profile stays
 stopifnot(d[!is.na(choice), .N] == 3526, d[!is.na(choice), uniqueN(id)] == 905)
 setorder(d, id, task, profile)
 fwrite(d, file.path(out, "huidobro_2026_coalition_partner.csv"))

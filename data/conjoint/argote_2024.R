@@ -26,8 +26,9 @@
 ##Design: one task, so no repeated task; attribute order and presentation (grid or read
 ##aloud) are not documented. Survey weight: none in the deposit; `ipw` is the authors'
 ##inverse-probability weight for answering the conjoint (derived, dropped).
-##Rows: 1,515 respondents (2 rows each). 5 have no attributes (dropped). Kept: profiles
-##with choice or rating; choice is missing (not an opt-out) for 423 rows answered only on
+##Rows: 1,515 respondents (2 rows each). 5 have no attributes (dropped). Kept: tasks with a
+##choice or rating on either profile; a profile with neither keeps its row with both NA (7
+##tasks; #3536), so 2,858 rows. choice is missing (not an opt-out) for 423 rows answered only on
 ##support. 1,429 respondents kept; 1,214 answered the choice (2,428 rows) and 2,811 rows
 ##carry support, matching the Obs. counts of the authors' Table D1 (2,428 / 2,811). The
 ##article's total N is not checked (paywalled).
@@ -66,7 +67,7 @@ for (v in names(src)) d[, paste0("attr_", v) := lv[[v]][k[[src[[v]]]]]]
 fixenc <- function(x) { y <- iconv(x, "UTF-8", "latin1"); y <- ifelse(is.na(y), x, y); y[y == ""] <- NA; y }
 d[, `:=`(cov_age = as.integer(k$age_continuous), cov_gender = c("male", "female")[k$gender], cov_urban = as.integer(k$urban_cat == 1),
          cov_nse = as.integer(k$nse), cov_education_code = as.integer(k$education), cov_region = fixenc(k$region))]
-d <- d[!is.na(choice) | !is.na(rating)]
+d <- d[d[, .I[any(!is.na(choice) | !is.na(rating))], .(id, task)]$V1]   # task-level: a shown profile stays
 stopifnot(!anyNA(d[, .SD, .SDcols = patterns("^attr_")]), d[!is.na(choice), sum(choice), .(id, task)][, all(V1 == 1)],
           d[!is.na(choice), .N] == 2428, d[!is.na(rating), .N] == 2811, all(d$rating %in% c(1:7, NA)))
 ids <- unique(d$id); d[, id := match(id, ids)]
