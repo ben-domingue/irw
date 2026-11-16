@@ -3887,6 +3887,9 @@ lara_2022_cfq_g56,0,,334,1,334,0,0,0,no_qi
 lara_2022_cfq_g78,0,,579,1,579,0,0,0,no_qi
 lara_2022_sce_g56,0,,334,1,334,0,0,0,no_qi
 lara_2022_sce_g78,0,,579,1,579,0,0,0,no_qi
+laslier_2002_insitu_approval,1,cov_city,2597,2,2597,0,0,0,ok
+laslier_2002_sciencespo_approval,0,,408,1,408,0,0,0,no_qi
+laslier_2002_sciencespo_rating,0,,406,1,406,0,0,0,no_qi
 laslier_2017_allevard_ev_m05to1,4,cov_age|cov_educ|cov_gender|cov_work,247,102,247,61,0.247,0.5223,ok
 laslier_2017_allevard_ev_m1to1,4,cov_age|cov_educ|cov_gender|cov_work,280,100,280,48,0.1714,0.4536,ok
 laslier_2017_allevard_ev_m2to1,4,cov_age|cov_educ|cov_gender|cov_work,309,102,309,51,0.165,0.4045,ok
@@ -7428,6 +7431,7 @@ vanderhorst_2017_cfpq_a,2,cov_caregiver_age|cov_education_code,1005,152,1005,31,
 vanderhorst_2017_cfpq_b,2,cov_caregiver_age|cov_education_code,1005,152,1005,31,0.0308,0.1542,ok
 vanderhorst_2017_cfsq,2,cov_caregiver_age|cov_education_code,1005,152,1005,31,0.0308,0.1542,ok
 vanderhorst_2017_cgpq,2,cov_caregiver_age|cov_education_code,1005,152,1005,31,0.0308,0.1542,ok
+vanderstraeten_2012_votepluriel_approval,0,,8078,1,8078,0,0,0,no_qi
 vanteffelen_2020_aq_hostility,5,cov_age|cov_education|cov_gender|cov_nationality|cov_work,376,231,376,170,0.4521,0.7952,ok
 vanteffelen_2020_foa,5,cov_age|cov_education|cov_gender|cov_nationality|cov_work,376,231,376,170,0.4521,0.7952,ok
 vanteffelen_2020_pid5_hostility,5,cov_age|cov_education|cov_gender|cov_nationality|cov_work,376,231,376,170,0.4521,0.7952,ok
@@ -7435,7 +7439,7 @@ vanteffelen_2020_rpq,5,cov_age|cov_education|cov_gender|cov_nationality|cov_work
 vanteffelen_2020_trait_anger,5,cov_age|cov_education|cov_gender|cov_nationality|cov_work,376,231,376,170,0.4521,0.7952,ok
 vaporova_2020_imitation,0,,82,1,82,0,0,0,no_qi
 vasquez_2013_reading_comprehension,1,cov_gender,120,2,120,0,0,0,ok
-VCISM_Polish_Trzcinska_2023,0,,104,1,104,0,0,0,no_qi
+VCISM_Polish_Trzcinska_2023,0,,115,1,115,0,0,0,no_qi
 vegetti_2021_aggression,5,cov_birth_year|cov_degree|cov_gender|cov_ideology|cov_income,694,670,694,648,0.9337,1,ok
 vegetti_2021_conspiracy,5,cov_birth_year|cov_degree|cov_gender|cov_ideology|cov_income,694,670,694,648,0.9337,1,ok
 vegetti_2021_intself,5,cov_birth_year|cov_degree|cov_gender|cov_ideology|cov_income,694,670,694,648,0.9337,1,ok
@@ -7459,13 +7463,13 @@ veramendoza_2026_mbiss,2,cov_age|cov_sex,110,25,110,10,0.0909,0.2273,ok
 veramendoza_2026_pansi,2,cov_age|cov_sex,110,25,110,10,0.0909,0.2273,ok
 verbagg,0,,316,1,316,0,0,0,no_qi
 vermeiren_2022_art,5,cov_age|cov_country|cov_education|cov_gender|cov_workstatus,573,143,573,69,0.1204,0.281,ok
-vermeiren_2022_bfi,5,cov_age|cov_country|cov_education|cov_gender|cov_workstatus,236,143,573,69,0.1204,0.281,ok
+vermeiren_2022_bfi,5,cov_age|cov_country|cov_education|cov_gender|cov_workstatus,573,143,573,69,0.1204,0.281,ok
 vermeiren_2022_comp,5,cov_age|cov_country|cov_education|cov_gender|cov_workstatus,766,179,766,79,0.1031,0.2637,ok
 vermeiren_2022_gk,5,cov_age|cov_country|cov_education|cov_gender|cov_workstatus,573,143,573,69,0.1204,0.281,ok
 vermeiren_2022_nd,5,cov_age|cov_country|cov_education|cov_gender|cov_workstatus,573,143,573,69,0.1204,0.281,ok
-vermeiren_2022_rf,3,cov_age|cov_gender|cov_workstatus,236,68,391,26,0.0665,0.1714,ok
-vermeiren_2022_vocab,5,cov_age|cov_country|cov_education|cov_gender|cov_workstatus,236,224,961,104,0.1082,0.256,ok
-Veterans_Affairs_SSVF_Survey_2016-17,0,,5809,1,5809,0,0,0,no_qi
+vermeiren_2022_rf,3,cov_age|cov_gender|cov_workstatus,391,68,391,26,0.0665,0.1714,ok
+vermeiren_2022_vocab,5,cov_age|cov_country|cov_education|cov_gender|cov_workstatus,961,224,961,104,0.1082,0.256,ok
+Veterans_Affairs_SSVF_Survey_2016-17,0,,8575,1,8575,0,0,0,no_qi
 Veterans_Affairs_SSVF_Survey_2018-20,0,,26347,1,26347,0,0,0,no_qi
 vezhodulu_2025_celebrity_worship,4,cov_age_band|cov_gender|cov_health_issues|cov_residence,601,28,601,4,0.0067,0.0449,ok
 vezhodulu_2025_rses,4,cov_age_band|cov_gender|cov_health_issues|cov_residence,601,28,601,4,0.0067,0.0449,ok

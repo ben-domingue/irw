@@ -1,16 +1,16 @@
 {
-  "generated": "2026-11-15T17:02:20+0000",
+  "generated": "2026-11-16T06:24:13+0000",
   "source": "metadata/11_status.R -- local pipeline CSVs, no Redivis calls",
-  "n_tables": 8260,
+  "n_tables": 8264,
   "coverage": {
     "tags": {
-      "n": 8204,
+      "n": 8208,
       "pct": 99.3
     },
     "tags_by_column": {
       "age range": {
         "class": "derived",
-        "n": 6320,
+        "n": 6324,
         "pct": 76.5
       },
       "child age (for child-focused studies)": {
@@ -19,7 +19,7 @@
         "pct": 66,
         "denominator": 1384,
         "of": "tables whose `age range` is Child (<18y) or Mixed",
-        "pct_of_all_tables": 11.1
+        "pct_of_all_tables": 11
       },
       "sample": {
         "class": "definitional",
@@ -32,7 +32,7 @@
           "registry": "tags/decisions/value_definitions.csv"
         },
         "coverage_footnote": {
-          "n": 7573,
+          "n": 7577,
           "pct": 91.7
         }
       },
@@ -47,13 +47,13 @@
           "registry": "tags/decisions/value_definitions.csv"
         },
         "coverage_footnote": {
-          "n": 5818,
-          "pct": 70.4
+          "n": 5822,
+          "pct": 70.5
         }
       },
       "measurement tool": {
         "class": "tagger",
-        "n": 8163,
+        "n": 8167,
         "pct": 98.8,
         "accuracy": {
           "exact_pct": 86.8,
@@ -65,7 +65,7 @@
       },
       "item format": {
         "class": "tagger",
-        "n": 8036,
+        "n": 8040,
         "pct": 97.3,
         "accuracy": {
           "exact_pct": 90.9,
@@ -77,7 +77,7 @@
       },
       "primary language(s)": {
         "class": "tagger",
-        "n": 7529,
+        "n": 7533,
         "pct": 91.2,
         "accuracy": {
           "exact_pct": 90.9,
@@ -91,7 +91,7 @@
       },
       "construct name": {
         "class": "description",
-        "n": 6023,
+        "n": 6027,
         "pct": 72.9,
         "note": "free text, not a controlled vocabulary -- a fill rate, not a coverage target (#1837)"
       }
@@ -161,8 +161,8 @@
       "pct": 100
     },
     "item_response_warehouse_9": {
-      "n_tables": 694,
-      "tagged": 694,
+      "n_tables": 698,
+      "tagged": 698,
       "pct": 100
     }
   },
