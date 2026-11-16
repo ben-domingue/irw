@@ -22,7 +22,7 @@
 ##   cost to household, distribution of costs, distribution of benefits, external supply agreements
 ##   allowed, sharing of technology, monitoring). choice = "Which of these two agreements do you
 ##   prefer?" (forced; 36 tasks have no choice but keep their ratings); rating = vote "definitely
-##   against (1)" to "definitely in favor (7)". 1,749 respondents after dropping rows with no outcome.
+##   against (1)" to "definitely in favor (7)". 1,749 respondents after dropping tasks with no outcome.
 ##3. nair_2022_covax_agreement_norc (NORC AmeriSpeak, Sep-Oct 2021, N = 4,214): 2 pairs, 5
 ##   attributes (overall cost, proportion paid by the U.S., funding use, beneficiaries, duration).
 ##   choice = "If you had to choose, which agreement do you favor?" (forced; 277 tasks without a
@@ -31,8 +31,9 @@
 ##   0-1 rescale (0, .25, .5, .75, 1); stored as deposited (0 = definitely against). Duration
 ##   levels in the data are 1/3/5/7/9 years while SM S2.2 lists 1-5 years: data kept.
 ##   burden_ (cost x proportion, a derived quantity) and burden_prob are dropped. 4,204 respondents
-##   after dropping rows with no outcome (paper 4,214).
-##Rows with neither choice nor rating are omitted, so a few tasks keep only one profile.
+##   after dropping tasks with no outcome (paper 4,214).
+##Tasks with neither choice nor rating on either profile are omitted; a profile with no outcome in an
+##answered task keeps its row with the outcomes NA (NORC 9 tasks; none in the Lucid tables; #3536).
 ##Spot check: in US-vs-other pairs, low-illness-risk Americans are chosen with probability 0.52,
 ##as the paper reports (p. 3).
 ##Task = the k in the source profile code (p_cand_k_j / a_cand_k_j / p_conj_k_j), profile = j.
@@ -66,7 +67,7 @@ stopifnot(!anyNA(lcov$cov_gender), uniqueN(lcov$admin_ResponseId) == nrow(lcov))
 lcov[cov_education == "Prefer not to answer", cov_education := NA]
 fin <- function(d, nm) {
   d <- merge(d, lcov, by = "admin_ResponseId"); d[, admin_ResponseId := NULL]
-  d <- d[!(is.na(choice) & is.na(rating))]
+  d <- d[d[, .I[any(!is.na(choice) | !is.na(rating))], .(id, task)]$V1]   # task-level: a shown profile stays
   stopifnot(d[, .N, .(id, task)][, all(N <= 2)], d[!is.na(choice), sum(choice), .(id, task)][, all(V1 == 1)])
   setcolorder(d, c("id", "task", "profile", "choice", "rating")); setorder(d, id, task, profile)
   fwrite(d, file.path(out, paste0(nm, ".csv")))
@@ -102,7 +103,7 @@ n <- n[, .(CaseId, task, profile, choice = as.integer(conjoint_chosen), rating =
            attr_overall_cost = as.character(cost_), attr_us_share = as.character(prop_), attr_funding_use = as.character(purpose_),
            attr_beneficiaries = as.character(benefit_), attr_duration = as.character(duration_))]
 n <- merge(n, ncov, by = "CaseId"); n[, CaseId := NULL]
-n <- n[!(is.na(choice) & is.na(rating))]
+n <- n[n[, .I[any(!is.na(choice) | !is.na(rating))], .(id, task)]$V1]   # task-level: a shown profile stays
 stopifnot(n[, .N, .(id, task)][, all(N <= 2)], n[!is.na(choice), sum(choice), .(id, task)][, all(V1 == 1)],
           all(n$rating %in% c(0, .25, .5, .75, 1, NA)))
 setcolorder(n, c("id", "task", "profile", "choice", "rating")); setorder(n, id, task, profile)

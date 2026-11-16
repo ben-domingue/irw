@@ -43,6 +43,8 @@
 ##Dropped: Qualtrics ResponseId (re-keyed to integers in file order), IP_country, recaptcha score,
 ##consent, news/vote/armedforces/combat/income (codings not documented), the authors' derived
 ##variables (successbi, college, reversed duplicates SecurityOutcome .. TargetRegime).
+##Tasks with neither a choice nor a rating are dropped; an intervention with no outcome in an answered
+##task keeps its row with the outcomes NA (1 task; #3536).
 ##N: 1,214 respondents in the file, one with no answers; 1,213 kept = the authors' AMCE run
 ##(12,054 profiles; the article itself was not read). Spot check: the authors' rating regression
 ##(output.smcl, 12,118 obs) gives can attack -0.1375, weak democracy -0.1839; this table gives
@@ -65,6 +67,6 @@ d <- s[, .(id = as.integer(id), task = as.integer(task), profile = as.integer(pr
            cov_attention_pass = as.integer(attention1 == 3))]
 stopifnot(!anyNA(d[, .SD, .SDcols = patterns("^attr_")]), all(d$rating %in% c(1:4, NA)),
           d[!is.na(choice), sum(choice), .(id, task)][, all(V1 == 1)], d[, uniqueN(is.na(choice)), .(id, task)][, all(V1 == 1)])
-d <- d[!(is.na(choice) & is.na(rating))]
+d <- d[d[, .I[any(!is.na(choice) | !is.na(rating))], .(id, task)]$V1]   # task-level: a shown profile stays
 setorder(d, id, task, profile)
 fwrite(d, file.path(out, "maxey_2025_intervention_success.csv"))

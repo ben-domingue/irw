@@ -33,7 +33,8 @@
 ##No 3-category party ID in the deposit. No survey weight in the deposit or codebook.
 ##Dropped: ResponseId (Qualtrics/MTurk response ID; re-keyed to integers in source order).
 ##N: 1,363 ids, arms 683/662 match the authors' log; 1,326 respondents (679 no-party, 647 party)
-##have >= 1 answer and are kept; rows with no answer are omitted (1 task keeps one profile).
+##have >= 1 answer and are kept; tasks with no answer are omitted, and a candidate with no outcome
+##in an answered task keeps its row with the outcomes NA (1 task; #3536).
 ##Spot check: the authors' feols of choice on attributes + task in the no-party arm (log,
 ##6,350 obs) gives Race Black 0.083, Experience 3+ 0.270; reproduced exactly (all coefficients).
 library(haven); library(data.table)
@@ -49,7 +50,7 @@ d <- data.table(id = as.integer(s$id), task = as.integer(s$scenario), profile = 
                 attr_job = lab(s$job), attr_experience = lab(s$exp),
                 trial_party_info = ifelse(zap_labels(s$experiment1) == 1, "Party information", "No party information"),
                 cov_party_id7 = lab(s$partyc))
-d <- d[!(is.na(choice) & is.na(rating_guess_democrat))]
+d <- d[d[, .I[any(!is.na(choice) | !is.na(rating_guess_democrat))], .(id, task)]$V1]   # task-level: a shown profile stays
 stopifnot(d[trial_party_info == "No party information", all(is.na(attr_party))],
           d[trial_party_info == "Party information", !anyNA(attr_party)],
           d[!is.na(rating_guess_democrat), all(task == 5 & trial_party_info == "No party information")])

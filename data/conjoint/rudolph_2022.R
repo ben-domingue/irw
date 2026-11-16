@@ -24,9 +24,10 @@
 ##Q12/Q14/Q16 "Wenn Sie heute in einer Volksabstimmung zwischen beiden Vorschlägen entscheiden
 ##müssten, welchen Vorschlag würden Sie eher annehmen?" (A/B, no opt-out). In 70 tasks neither
 ##profile has policychosen = 1 (the source codes the unanswered choice 0): choice is set NA on
-##both rows of those tasks (46 after the drop below); their ratings are kept. The 47 profile rows
-##with neither a choice nor a rating are dropped (rows with no outcome are omitted), so 47 tasks
-##keep only one profile row (choice NA there). Result: 17,937 rows, 3,006 respondents. task = `task`; profile = `conjoint` element order within the task (odd = 1, even =
+##both rows of those tasks (47 after the drop below); their ratings are kept. Tasks with neither a
+##choice nor a rating on either profile are dropped (23 tasks, 46 rows); a profile with no outcome in
+##an answered task keeps its row with the outcomes NA (1 task; #3536). Result: 17,938 rows, 3,006
+##respondents. task = `task`; profile = `conjoint` element order within the task (odd = 1, even =
 ##2), taken to be Vorschlag A / B: the codebook only says "Conjoint element 1 to 6" (inferred).
 ##Dropped: 38 tasks (38 respondents, 76 rows) whose two profiles have no reciprocity/stringency
 ##level in the source although choices and ratings exist (levels not saved).
@@ -77,8 +78,9 @@ d <- x[, .(id = nid, task = as.integer(task), profile = as.integer(profile),
 d <- cbind(d, cov(x))
 d <- d[!is.na(attr_reciprocity) & !is.na(attr_stringency)]
 stopifnot(d[, .N, .(id, task)][, all(N == 2)], !anyNA(d$attr_reciprocity), !anyNA(d$attr_stringency))
-cat("rows with no outcome dropped:", d[is.na(choice) & is.na(rating), .N], "\n")
-d <- d[!(is.na(choice) & is.na(rating))]
+d[, ans := any(!is.na(choice) | !is.na(rating)), .(id, task)]
+cat("rows of tasks with no outcome dropped:", d[ans == FALSE, .N], "\n")
+d <- d[ans == TRUE][, ans := NULL]   # task-level: a shown profile stays
 cat("conjoint", nrow(d), uniqueN(d$id), d[, sum(is.na(choice)) / 2], "\n")
 setorder(d, id, task, profile)
 fwrite(d, file.path(out, "rudolph_2022_supply_law_conjoint.csv"))
