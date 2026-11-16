@@ -7,6 +7,18 @@ GitHub Action, not a crontab on anyone's machine, and it opens a pull request
 rather than an issue. Nothing reads this file: it is for the human reviewing
 that PR. Delete or trim entries once they have been checked off.
 
+## NEW: stage 18 adds `n_tied_ballots` to rank_metadata (2026-11-15)
+
+`rank_metadata.csv` gains a computed column, `n_tied_ballots`: the number of
+`id x task` with two or more rows at one `resp`. Expected nonzero values: all 33
+`debian_*` tables (e.g. 147 in `debian_2021_gr_fsf_statement`), 1,327 in
+`ojwang_2020_sweetpotato_traits`, 4 in `farvaque_2007_faches_irv`, 2 in
+`vanderstraeten_2012_votepluriel_irv`; every other table 0. Because the carried
+`rank_metadata.csv` lacks the column, the **first run after merge recomputes
+every rankings table** (stage 18's "lacks n_tied_ballots; recomputing
+everything" message). That is expected and happens once; it takes longer than
+a normal stage 18. Delete this entry once a run has shown those numbers.
+
 ## What happened on 2026-08-24 (all resolved -- background only)
 
 The run **failed at stage 02**, so 03/05/06/07/09 never executed and had to be
