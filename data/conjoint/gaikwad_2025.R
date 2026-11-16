@@ -36,7 +36,9 @@
 ##Randomization: the article says the US policy attribute values were "fully randomized" (restrictions
 ##none for that table); no source documents restrictions for the others. Level shares are near equal.
 ##No covariates and no survey weight in these files (the deposit's respondent-level covariates are
-##not attached to the conjoint frames). Race (white / not white) is a country-profile attribute, not
+##not attached to the conjoint frames). The deposit's App I cj_US.rds does hold 12 respondent
+##covariates for the same US respondents (the heterogeneity appendix uses 4 of them); they are not
+##attached here, so join them from the deposit if needed. Race (white / not white) is a country-profile attribute, not
 ##a respondent covariate; no gender attribute, so no crosswalk.
 ##N: article reports 2,006 US and 1,459 Indian respondents; these files hold 2,019 US respondents
 ##(13 more than the article; the 2,006 may exclude failures of its two comprehension checks) and 1,459.

@@ -22,10 +22,12 @@
 ##    rights, need to discuss its proposals, need to accept its decisions), stored 0-1 (the codebook gives "Numeric 0-1"; the values are
 ##    k/6, so a rescaled 7-point item; higher = more legitimacy). Leg_01 (their mean index) is derived and dropped.
 ##  rating_democratic_practices (PercDemnorm): 1 "challenges current democratic practices" - 7 "endorses current democratic practices".
-##  rating_threat (threat): 1 "it will pose a real threat to democracy if in power" - 7 "it will definitely not pose a threat"
-##    (the codebook calls it reversed coding: higher = LESS threat).
-##  rating_ideology (PercIdeol): perceived ideological position, "1 right wing, 2 centre right, 3 centre, 4 centre left, 5 left wing"
-##    (reversed coding: higher = further left).
+##  rating_threat (threat): the codebook gives 1 "it will pose a real threat to democracy if in power" - 7 "it will definitely
+##    not pose a threat" and calls it reversed coding (higher = LESS threat), but the stored values run the OTHER way:
+##    higher = MORE threat (anti-democratic parties have the highest mean, 3.7; the control group the lowest, 2.7).
+##  rating_ideology (PercIdeol): the codebook gives "1 right wing, 2 centre right, 3 centre, 4 centre left, 5 left wing"
+##    (reversed coding), but the stored values run the OTHER way: 1 = left wing, 5 = right wing (means 2.2 left-wing,
+##    2.4 centre-left, 3.2 centre, 3.9 centre-right, 4.3 right-wing). Both checked 2026-11-16 (conjoint-paper audit).
 ##  Missing outcome values are NA (item non-response / not asked): rows are kept when at least one outcome is present.
 ##No opt-out; no covariates in the file (the experimental file has none). No weights. Randomization restrictions: none documented.
 ##Respondent count: file 4,423 = the Readme's 4,423 (the paper's figure is not checked here). Rows kept = respondents with any outcome.

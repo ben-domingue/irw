@@ -15,7 +15,10 @@
 ##respondents who fall in none of the three race groups; they are kept here (cov_race).
 ##5 tasks x 2 hypothetical people (Person A/B, C/D, ... I/J): task and profile RECORDED in the
 ##column names (traits<task>a/b; the "more Black" item per task).
-##FOUR FORMS, randomized between respondents and pooled by the authors, so one table:
+##FOUR FORMS, randomized between respondents. The authors do NOT pool them: 02_analysis.R fits
+##the ancestry-shown forms (f1) and the no-ancestry forms (f2) separately, with the skin-tone-row
+##variant as a control, so pooling this table does not reproduce their Table 2. One table is kept
+##because the split is fully recoverable (the two trial_ columns match the form in every row):
 ##  trial_ancestry_shown  yes/no: whether the parents' race attribute was in the profile ("race"
 ##                        vs "nr" forms); without it attr_parents is the text "(not shown)".
 ##  trial_skin_tone_row   top/bottom: the "bst" (bottom skin tone) forms list skin tone after

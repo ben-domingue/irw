@@ -15,11 +15,11 @@
 ##     services and taxation); 3,026 respondents with data (462 respondents have these variables missing: not shown them or lost).
 ##  franchino_2017_fiscal_union: choice between two fiscal union schemes, 6 attributes (tax rate, tax type, spending
 ##     destination, spending type, spending institution, auditing institution); 3,118 respondents (370 missing).
-##TASK / PROFILE ARE INFERRED. The rows of the file are in random order across respondents, but a respondent's 4 rows keep
-##their relative file order, and in rows 1-2 and rows 3-4 of every respondent exactly one profile is chosen in each experiment
-##(all 3,026 / 3,118 respondents), which fixes the pairing; task = 1 for the first pair of rows, 2 for the second, profile = 1
-##for the first row of the pair. Which pair was shown first and which profile on the left cannot be verified (the chosen
-##profile is first in 50% of pairs: 0-1 and 1-0 patterns are balanced), the same row pairs hold both experiments.
+##TASK / PROFILE ARE RECORDED. dataset2.dta numbers each respondent's 4 rows in `programme` (economic policy) and `union`
+##(fiscal union), both "(1...4)", and the authors' framing diagnostics (Figure_S6.do / Figure_S7.do) use 1-2 vs 3-4 as task 1 vs 2
+##and 3 vs 4 as profile order. The script derives task and profile from the respondent's file order: task = 1 for the first pair
+##of rows, 2 for the second, profile = 1 for the first row of the pair. That equals programme/union in every row (checked
+##2026-11-16), and in each pair exactly one profile is chosen in each experiment (all 3,026 / 3,118 respondents).
 ##Level text: Stata value labels, completed from the appendix (Table S6/S7) where the label is abbreviated. Economic policy:
 ##unemployment 13%/7%/3%/1% (the appendix lists the last as "1% (full employment)", the example screen shows bare percentages:
 ##stored "1%"); inflation 0.5%/2%/5%/8%; taxsoc Same tax-spend = "Social services and taxation are adequate", Less tax-spend =
