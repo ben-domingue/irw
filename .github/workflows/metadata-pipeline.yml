@@ -78,39 +78,16 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  decide:
-    # Dispatches always run. Every scheduled slot (Mon/Wed/Fri) runs only when
-    # pipeline_gate.py finds work: a core-shard table has appeared or
-    # disappeared since metadata.csv was last committed, or the rolling refresh
-    # is behind -- otherwise the run's whole diff would be a status.json
-    # timestamp and emptied logs (#2342). Mondays used to be exempt; they are
-    # gated like Wed/Fri since 2026-11-16, so a weekend dispatch no longer
-    # leaves Monday to open a duplicate PR. The gate fails open.
-    runs-on: ubuntu-latest
-    outputs:
-      run: ${{ steps.gate.outputs.run }}
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: main
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-      - id: gate
-        env:
-          REDIVIS_API_TOKEN: ${{ secrets.REDIVIS_API_TOKEN }}
-        run: |
-          if [[ "${{ github.event_name }}" != "schedule" ]]; then
-            echo "run=true" >> "$GITHUB_OUTPUT"
-            echo "run=true: ${{ github.event_name }}; not gated"
-            exit 0
-          fi
-          python -m pip install --quiet redivis
-          python .claude/skills/irw-site-update/scripts/pipeline_gate.py
-
   pipeline:
-    needs: decide
-    if: needs.decide.outputs.run == 'true'
+    # Every slot runs, ungated (2026-11-16). A skip gate (pipeline_gate.py,
+    # #2342) used to hold Wed/Fri -- and from #3548, Mondays -- unless a core
+    # table had appeared or disappeared or the rolling refresh was behind. It
+    # was removed because every run does useful work now: 01_metadata.R
+    # re-checks refresh.per.run existing tables per run, so a slot with no new
+    # tables still refreshes 400 rows. The cost is that a dispatch on a
+    # scheduled day is followed by the cron run as well; if that second PR is
+    # only a status.json timestamp and emptied per-run logs, close it unmerged
+    # (merging erases the first run's log record).
     runs-on: ubuntu-latest
     # 240, not 120: the 2026-10-12 run took 117 minutes in Workflow 1 and was
     # cancelled by the old limit six seconds after opening its PR (#2971). The
