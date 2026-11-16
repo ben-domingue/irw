@@ -17,9 +17,11 @@
 ##with more than one quality flag were already excluded by the depositors (codebook); one flag is
 ##kept (cov_sum_of_flags, cov_flag_comment). One vignette = one task with one profile
 ##(task = vorder, the display order, randomized per respondent; profile = 1).
-##ONE TABLE with cov_country: the descriptor presents one harmonized dataset (vignettes nested in
-##respondents nested in countries), one codebook, one English set of level labels and the same
-##design (144 vignettes, 24 decks) in every country.
+##SPLIT BY COUNTRY (#3536, 2026-11-15): one table per country, buttler_2026_hiring_vignettes_<iso2>
+##(de, no, pl, ro), replacing the pooled buttler_2026_hiring_vignettes (the descriptor presents one
+##harmonized dataset with one codebook and the same 144-vignette design), because the level text
+##differs by country: attr_origin level 3 is a different nationality in each country (Syrian in
+##Germany and Norway, Nepali in Romania, Belarusian in Poland). Respondents: de 758, pl 689, ro 618, no 441.
 ##FIXED BLOCKED DESIGN: SAS %Mktex Resolution IV fraction of 144 vignettes (D-efficiency 86.46%),
 ##24 decks ("versions") of 6, decks randomly assigned to respondents, vignette order randomized
 ##within deck (descriptor); every deck x vignette number holds one fixed combination (checked).
@@ -102,4 +104,8 @@ stopifnot(!anyNA(d[, .(rating_interview, rating_employ, rating_final_comparison)
             .(trial_deck, trial_vignette)][, all(V1 == 1)],
           d[attr_origin == "native", all(attr_education_location == "in host country" & attr_language_level == "proficient level (C2)")])
 setorder(d, id, task, profile)
-fwrite(d, file.path(out, "buttler_2026_hiring_vignettes.csv"))
+iso <- c(Germany = "de", Poland = "pl", Romania = "ro", Norway = "no")
+stopifnot(all(d$cov_country %in% names(iso)), all(names(iso) %in% d$cov_country))
+nw <- sum(vapply(names(iso), function(cn) { x <- d[cov_country == cn]
+  fwrite(x, file.path(out, paste0("buttler_2026_hiring_vignettes_", iso[[cn]], ".csv"))); nrow(x) }, 0L))
+stopifnot(nw == nrow(d))

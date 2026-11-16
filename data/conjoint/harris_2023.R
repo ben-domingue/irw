@@ -23,10 +23,12 @@
 ##Sample: LGPI 2019 (Local Governance and Performance Index), face-to-face, May-October 2019, rural
 ##localities within 100 km of the Malawi-Zambia border (and of the Tanzania border); 12,362 respondents
 ##(6,798 Malawi, 5,564 Zambia; matches the paper). The paper's main analyses use the 7,242 respondents
-##without a land title (cov_have_gov_title = 0), pooling the two countries with a Malawi dummy, so this
-##is ONE table with cov_country: the attribute set and wording are shared, only the list of ethnic groups
-##differs by country (Malawi: Chewa, Tumbuka, Ngoni, Lambya, Yao, Lomwe, Senga, Ndali; Zambia: Chewa,
-##Tumbuka, Ngoni, Namwanga, Bemba, Senga, Bisa, Nyika). Survey language(s) are not documented.
+##without a land title (cov_have_gov_title = 0), pooling the two countries with a Malawi dummy.
+##SPLIT BY COUNTRY (#3536, 2026-11-15): one table per country, harris_2023_neighbor_cooperation_<iso2>
+##(mw, zm), replacing the pooled harris_2023_neighbor_cooperation, because the level text differs by
+##country: attr_ethnic_group is drawn from each country's own list (Malawi: Chewa, Tumbuka, Ngoni, Lambya,
+##Yao, Lomwe, Senga, Ndali; Zambia: Chewa, Tumbuka, Ngoni, Namwanga, Bemba, Senga, Bisa, Nyika), and
+##attr_migration names the country. Survey language(s) are not documented. Respondents: mw 3,424, zm 2,764.
 ##
 ##Vignette (manuscript p.19): "Imagine you have a neighbor, who is a [ethnic group] [man/woman], who is
 ##[25/50] years old, and whose family [has lived here for a very long time/migrated here only one year
@@ -122,4 +124,8 @@ oc <- grep("^rating", names(d), value = TRUE)
 d <- d[rowSums(!is.na(d[, ..oc])) > 0]
 d[, id := as.integer(factor(id))]
 setorder(d, id, task, profile)
-fwrite(d, file.path(out, "harris_2023_neighbor_cooperation.csv"))
+iso <- c(Malawi = "mw", Zambia = "zm")
+stopifnot(all(d$cov_country %in% names(iso)), all(names(iso) %in% d$cov_country))
+nw <- sum(vapply(names(iso), function(cn) { x <- d[cov_country == cn]
+  fwrite(x, file.path(out, paste0("harris_2023_neighbor_cooperation_", iso[[cn]], ".csv"))); nrow(x) }, 0L))
+stopifnot(nw == nrow(d))

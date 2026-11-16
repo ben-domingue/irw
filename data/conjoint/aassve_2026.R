@@ -20,8 +20,10 @@
 ##levels per country: AR 500/800/1200/1700/2300, DE 1700/2300/3100/4200/5500, IT 1200/1600/
 ##2200/3000/4000, US 1770/3400/5600/8500/11000 = the authors' Much lower .. Much higher),
 ##attr_climate, attr_economy, attr_politics, attr_war (macro outlook Optimistic / Pessimistic).
-##ONE TABLE with cov_country: the authors pool the four countries (country fixed effects)
-##and the attribute labels are common; income amounts are in each country's currency.
+##SPLIT BY COUNTRY (#3536, 2026-11-15): one table per country, aassve_2026_parenthood_<iso2>
+##(ar, de, it, us), replacing the pooled aassve_2026_parenthood (the authors pool with country fixed
+##effects), because the level text differs by country: attr_income amounts are each country's own
+##five values in local currency. Respondents: ar 2,096, de 2,090, it 2,069, us 2,075.
 ##Outcomes (wording not deposited; paraphrase from the .dta labels and the press release):
 ##  choice = conjointchoice, "Outcome: forced choice" (which scenario would make the
 ##    respondent more inclined to have a child), one per task, no opt-out; 399 tasks have no choice (NA on
@@ -66,4 +68,8 @@ d <- d[!(is.na(choice) & is.na(rating))]
 d[, id := rid][, rid := NULL]
 setcolorder(d, c("id", "task", "profile", "choice", "rating"))
 setorder(d, id, task, profile)
-fwrite(d, file.path(out, "aassve_2026_parenthood.csv"))
+iso <- c(Argentina = "ar", Germany = "de", Italy = "it", "United States" = "us")
+stopifnot(all(d$cov_country %in% names(iso)), all(names(iso) %in% d$cov_country))
+nw <- sum(vapply(names(iso), function(cn) { x <- d[cov_country == cn]
+  fwrite(x, file.path(out, paste0("aassve_2026_parenthood_", iso[[cn]], ".csv"))); nrow(x) }, 0L))
+stopifnot(nw == nrow(d))

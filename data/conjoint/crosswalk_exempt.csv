@@ -12,3 +12,5 @@
 "pickett_2024_officer_photos","attr_officer2_sex","two officers per profile; profile_gender maps one attribute per table, so neither is mapped until a concept for this is ruled"
 "schwartz_2020_audience_costs_mturk","attr_opponent_gender","profile_gender already maps the US president's gender via attr_president_name (name signal); the opponent is a second person, and a concept maps one attribute per table"
 "schwartz_2020_audience_costs_tess","attr_opponent_gender","profile_gender already maps the US president's gender via attr_president_name (name signal); the opponent is a second person, and a concept maps one attribute per table"
+"gereke_2023_trust_ch","attr_gender","every profile in this country table is female, so there is no gender contrast (split from the pooled table 2026-11-15, #3536)"
+"gereke_2023_trustworthiness_ch","attr_gender","every profile in this country table is male, so there is no gender contrast (split from the pooled table 2026-11-15, #3536)"

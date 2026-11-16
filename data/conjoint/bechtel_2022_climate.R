@@ -21,7 +21,12 @@
 ##saw the cost-path conjoint. 8,075 respondents in all, 8 tasks each. The authors pool the four countries in the main analysis (Fig. 3, N = 129,280
 ##task-profile rows reported = 8,080 respondents x 16; Supplementary Fig. 6 gives US N = 33,280 =
 ##2,080 x 16, so the paper counts 5 more US respondents than the 2,075 in the deposit; flagged,
-##not fixed) and show country panels as a robustness check, so this is ONE table with cov_country.
+##not fixed) and show country panels as a robustness check.
+##SPLIT BY COUNTRY (#3536, 2026-11-15): one table per country, bechtel_2022_climate_multilateralism_<iso2>
+##(us, gb, de, fr), replacing the pooled bechtel_2022_climate_multilateralism, because the level text
+##and the design differ by country: attr_own_cost and attr_other_cost are each country's own amounts in
+##its currency, and rating_effectiveness was asked in the US only (all NA in gb, de, fr; the column is
+##kept so the four tables share one column set). Respondents: us 2,075, gb 2,000, de 2,000, fr 2,000.
 ##The instruction text is shared across countries; display languages were English (US, UK), French
 ##and German (translations not in the deposit), so labels are English.
 ##Design (Supplementary Fig. 5): each task shows two multilateral climate-policy scenarios (Scenario 1
@@ -129,4 +134,10 @@ cv <- data.table(id = d$id, cov_country = ctry, cov_gender = unname(gen[g]), cov
                  cov_survey_weight = as.numeric(d$mbweight))
 res <- merge(res, cv, by = "id")
 setorder(res, id, task, profile)
-fwrite(res, file.path(out, "bechtel_2022_climate_multilateralism.csv"))
+iso <- c("United States" = "us", "United Kingdom" = "gb", Germany = "de", France = "fr")
+stopifnot(all(res$cov_country %in% names(iso)), all(names(iso) %in% res$cov_country))
+# A column that is NA for every respondent of a country was not asked there; the country table leaves it out (#3536).
+nw <- sum(vapply(names(iso), function(cn) { x <- res[cov_country == cn]
+  x <- x[, names(x)[!vapply(x, function(v) all(is.na(v)), NA)], with = FALSE]
+  fwrite(x, file.path(out, paste0("bechtel_2022_climate_multilateralism_", iso[[cn]], ".csv"))); nrow(x) }, 0L))
+stopifnot(nw == nrow(res))

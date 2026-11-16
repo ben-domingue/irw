@@ -9,8 +9,11 @@
 ##Online samples in Argentina (1,336 respondents) and Brazil (1,356); each saw 5 pairs of
 ##candidate profiles with 6 binary attributes (sex; positions on abortion, taxes, same-sex
 ##marriage, environment, crime/public security) and chose one. The paper pools the two countries
-##(laterzo_cps_2023c.RDS, country column; 2,301 respondents after its ideology filter), so one
-##table with cov_country. Attribute text: the codebook's English wording of each level (the
+##(laterzo_cps_2023c.RDS, country column; 2,301 respondents after its ideology filter).
+##SPLIT BY COUNTRY (#3536, 2026-11-15): one table per country, laterzo_2023_crime_candidates_<iso2> (br, ar),
+##replacing the pooled laterzo_2023_crime_candidates, because the level text differs by country: the
+##attr_environment level names Patagonia in Argentina and the Amazon in Brazil. Respondents: br 1,356, ar 1,332.
+##Attribute text: the codebook's English wording of each level (the
 ##deposit stores short labels, mapped here one-to-one from the codebook rows); the environment
 ##level names Patagonia in Argentina and the Amazon in Brazil (codebook note). Respondents saw
 ##Spanish (Argentina) or Portuguese (Brazil); that text is not deposited.
@@ -95,5 +98,9 @@ setorder(d, id, task, key, tb)
 d[, profile := seq_len(.N), by = .(id, task)][, c("key", "tie", "tb") := NULL]
 cat("share chosen at profile 1:", d[profile == 1, mean(choice)], "\n")
 setorder(d, id, task, profile)
-fwrite(d, file.path(out, "laterzo_2023_crime_candidates.csv"))
+iso <- c(brazil = "br", argentina = "ar")
+stopifnot(all(d$cov_country %in% names(iso)), all(names(iso) %in% d$cov_country))
+nw <- sum(vapply(names(iso), function(cn) { x <- d[cov_country == cn]
+  fwrite(x, file.path(out, paste0("laterzo_2023_crime_candidates_", iso[[cn]], ".csv"))); nrow(x) }, 0L))
+stopifnot(nw == nrow(d))
 cat(nrow(d), uniqueN(d$id), "\n"); print(d[, .N, .(cov_country, attr_environment)])

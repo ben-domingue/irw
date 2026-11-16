@@ -14,8 +14,11 @@
 ##party); which came first was randomized. Source `candidate` 1-2 = first comparison (A, B),
 ##3-4 = second, so task = display order (recorded) and profile = A/B (recorded);
 ##trial_party_shown says which experiment the task was. The author pooled the two countries
-##(country fixed effect), so ONE table with cov_country; level wording differs by country
-##where the instrument did (teacher, disability, office, party).
+##(country fixed effect).
+##SPLIT BY COUNTRY (#3536, 2026-11-15): one table per country, reher_2025_disabled_candidates_<iso2> (gb, us),
+##replacing the pooled reher_2025_disabled_candidates, because the level text differs by country: attr_job
+##(teacher), attr_disability, attr_office and attr_party use each country's own wording and parties.
+##Respondents: gb 2,990, us 2,979.
 ##Outcomes (same pairs):
 ##  choice = vote.n, "Which candidate would you be more likely to vote for?" (A or B), forced,
 ##     no opt-out. 2,632 tasks have no vote answer (missing; left blank).
@@ -100,4 +103,8 @@ stopifnot(all(s$age.n %in% 0:5), all(s$gender %in% c("Male", "Female", "Other"))
 stopifnot(d[!is.na(choice), sum(choice), .(id, task)][, all(V1 == 1)])
 d <- d[!(is.na(choice) & is.na(rating_ideology) & is.na(rating_represent))]
 setorder(d, id, task, profile)
-fwrite(d, file.path(out, "reher_2025_disabled_candidates.csv"))
+iso <- c(UK = "gb", US = "us")
+stopifnot(all(d$cov_country %in% names(iso)), all(names(iso) %in% d$cov_country))
+nw <- sum(vapply(names(iso), function(cn) { x <- d[cov_country == cn]
+  fwrite(x, file.path(out, paste0("reher_2025_disabled_candidates_", iso[[cn]], ".csv"))); nrow(x) }, 0L))
+stopifnot(nw == nrow(d))

@@ -21,6 +21,12 @@
 ##(0-10 in the article; the file stores 1-11, which looks like a +1 shift; kept raw, higher = more support), and choice (file
 ##column CJxTradeOff) = "Which of the two organizations/scenarios would you be more likely to vote for?" Forced choice, no opt-out.
 ##Both outcomes in one table per experiment (same tasks).
+##SPLIT BY COUNTRY, borbath_2025_party_rebranding ONLY (#3536, 2026-11-15): one table per country,
+##borbath_2025_party_rebranding_<iso2> (at, hu, it), replacing the pooled borbath_2025_party_rebranding, because
+##the design differs by country: the party being rebranded (trial_party_rebranded) is one of the country's own
+##parties, and the attr_name_change level set is conditional on that party's current name (below), so the
+##allowed levels come from country-specific party lists. borbath_2025_new_party_brand stays pooled.
+##Respondents: at 2,068, hu 1,961, it 1,870.
 ##Structure. The file is long: six rows per respondent. In the Austrian and Hungarian/Italian files the rows of a respondent are
 ##contiguous and each consecutive pair (1,2), (3,4), (5,6) has exactly one chosen profile in BOTH experiments (checked below, 100%),
 ##so task = (row+1)%/%2 and profile = 1/2 by row order are INFERRED (task_source/profile_source = inferred). In the German file
@@ -85,4 +91,8 @@ for (t in list(t1, t2)) { ac <- grep("^attr_", names(t), value = TRUE); stopifno
 stopifnot(t1[, uniqueN(id)] == 2110 + 4289, t1[, uniqueN(attr_name)] == 3)
 stopifnot(sum(t2$cov_country == "AT") == (2110 - 42) * 6)
 fwrite(t1, file.path(out, "borbath_2025_new_party_brand.csv"))
-fwrite(t2, file.path(out, "borbath_2025_party_rebranding.csv"))
+iso <- c(AT = "at", HU = "hu", IT = "it")
+stopifnot(all(t2$cov_country %in% names(iso)), all(names(iso) %in% t2$cov_country))
+nw <- sum(vapply(names(iso), function(cn) { x <- t2[cov_country == cn]
+  fwrite(x, file.path(out, paste0("borbath_2025_party_rebranding_", iso[[cn]], ".csv"))); nrow(x) }, 0L))
+stopifnot(nw == nrow(t2))
