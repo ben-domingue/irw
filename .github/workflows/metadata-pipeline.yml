@@ -79,10 +79,13 @@ concurrency:
 
 jobs:
   decide:
-    # Mondays and dispatches always run. Other scheduled slots run only when a
-    # core-shard table has appeared or disappeared since metadata.csv was last
-    # committed -- otherwise the run's whole diff would be a status.json
-    # timestamp and emptied logs (#2342). The gate fails open.
+    # Dispatches always run. Every scheduled slot (Mon/Wed/Fri) runs only when
+    # pipeline_gate.py finds work: a core-shard table has appeared or
+    # disappeared since metadata.csv was last committed, or the rolling refresh
+    # is behind -- otherwise the run's whole diff would be a status.json
+    # timestamp and emptied logs (#2342). Mondays used to be exempt; they are
+    # gated like Wed/Fri since 2026-11-16, so a weekend dispatch no longer
+    # leaves Monday to open a duplicate PR. The gate fails open.
     runs-on: ubuntu-latest
     outputs:
       run: ${{ steps.gate.outputs.run }}
@@ -97,9 +100,9 @@ jobs:
         env:
           REDIVIS_API_TOKEN: ${{ secrets.REDIVIS_API_TOKEN }}
         run: |
-          if [[ "${{ github.event_name }}" != "schedule" || "$(date -u +%u)" == "1" ]]; then
+          if [[ "${{ github.event_name }}" != "schedule" ]]; then
             echo "run=true" >> "$GITHUB_OUTPUT"
-            echo "run=true: ${{ github.event_name }} on $(date -u +%A); not gated"
+            echo "run=true: ${{ github.event_name }}; not gated"
             exit 0
           fi
           python -m pip install --quiet redivis
