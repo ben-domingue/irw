@@ -5709,7 +5709,7 @@ vonborck_2026_ppasc,data/vonborck_2026_recess.py
 vonhaefen_2023_stream_quality,data/conjoint/vonhaefen_2023.R
 voropaeva_2026_health_media_nom,data/nominal/voropaeva_2026_health_media.R
 vossler_2025_farmworker_projects,data/conjoint/vossler_2025.R
-voterautrement_2017_borda4,data/rankings/voter_autrement.py
+voterautrement_2017_borda4,data/rankings/kamwa_2017_fortdefrance.py|data/rankings/voter_autrement.py
 voterautrement_2017_irv1,data/rankings/voter_autrement.py
 voterautrement_2017_irv4,data/rankings/voter_autrement.py
 voterautrement_2022_borda4,data/rankings/voter_autrement.py
