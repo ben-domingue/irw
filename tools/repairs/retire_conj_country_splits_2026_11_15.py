@@ -13,7 +13,7 @@ targets and nothing else (KEEP = everything else).
 Resumable: a target already gone from the draft is skipped. Dry run by default; APPLY=1 deletes.
 """
 import json, os, sys
-sys.path.insert(0, "/home/ben/Dropbox/projects/irw/src")
+sys.path.insert(0, "/home/ben/Dropbox/projects/irw/src")  # tools/repairs: not a withdrawal, so no itemtext/withdrawals.csv rows
 import irw_secrets
 
 os.environ["REDIVIS_API_TOKEN"] = irw_secrets.load_write_token("retire_conj_country_splits")
