@@ -3832,6 +3832,9 @@ lara_2022_cfq_g56,Child (<18y),"Child (6-12y),Adolescent (12-18y)",Educational,O
 lara_2022_cfq_g78,Child (<18y),"Child (6-12y),Adolescent (12-18y)",Educational,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,spa,"Contextual Factors Questionnaire (CFC): family, teacher and peer support"
 lara_2022_sce_g56,Child (<18y),"Child (6-12y),Adolescent (12-18y)",Educational,"Affective/mental health, Behavioral",Survey/questionnaire,Likert Scale/selected response,spa,School Engagement Questionnaire (SCQ)
 lara_2022_sce_g78,Child (<18y),"Child (6-12y),Adolescent (12-18y)",Educational,"Affective/mental health, Behavioral",Survey/questionnaire,Likert Scale/selected response,spa,School Engagement Questionnaire (SCQ)
+laslier_2002_insitu_approval,Adult (18+),NA,Targeted/specific,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,fre,Candidate evaluation (vote intention under an alternative voting rule)
+laslier_2002_sciencespo_approval,Adult (18+),NA,Educational,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,fre,Candidate evaluation (vote intention under an alternative voting rule)
+laslier_2002_sciencespo_rating,Adult (18+),NA,Educational,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,fre,Candidate evaluation (vote intention under an alternative voting rule)
 laslier_2017_allevard_ev_m05to1,Adult (18+),NA,Targeted/specific,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,fre,Candidate evaluation (vote intention under an alternative voting rule)
 laslier_2017_allevard_ev_m1to1,Adult (18+),NA,Targeted/specific,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,fre,Candidate evaluation (vote intention under an alternative voting rule)
 laslier_2017_allevard_ev_m2to1,Adult (18+),NA,Targeted/specific,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,fre,Candidate evaluation (vote intention under an alternative voting rule)
@@ -7377,6 +7380,7 @@ vanderhorst_2017_cfpq_a,Adult (18+),NA,Internet-based,Behavioral,Survey/question
 vanderhorst_2017_cfpq_b,Adult (18+),NA,Internet-based,Behavioral,Survey/questionnaire,Likert Scale/selected response,eng,"Comprehensive Feeding Practices Questionnaire (CFPQ), agreement items"
 vanderhorst_2017_cfsq,Adult (18+),NA,Internet-based,Behavioral,Survey/questionnaire,Likert Scale/selected response,eng,Caregiver's Feeding Styles Questionnaire (CFSQ)
 vanderhorst_2017_cgpq,Adult (18+),NA,Internet-based,"Behavioral, Personality",Survey/questionnaire,Likert Scale/selected response,eng,Comprehensive General Parenting Questionnaire (CGPQ)
+vanderstraeten_2012_votepluriel_approval,Adult (18+),NA,Internet-based,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,fre,Candidate evaluation (vote intention under an alternative voting rule)
 vanteffelen_2020_aq_hostility,Adult (18+),NA,Clinical,NA,Survey/questionnaire,Likert Scale/selected response,dut,NA
 vanteffelen_2020_foa,Adult (18+),NA,Clinical,NA,Survey/questionnaire,Likert Scale/selected response,dut,NA
 vanteffelen_2020_pid5_hostility,Adult (18+),NA,Clinical,NA,Survey/questionnaire,Likert Scale/selected response,dut,NA

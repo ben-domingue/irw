@@ -30700,6 +30700,17 @@ lara_2022_sce_g56,resp,standard,,,,,none,true
 lara_2022_sce_g78,id,standard,,,,,none,true
 lara_2022_sce_g78,item,standard,,,,,none,true
 lara_2022_sce_g78,resp,standard,,,,,none,true
+laslier_2002_insitu_approval,cov_city,standard_family,built,,data/laslier_french_experiments.py,164,index,false
+laslier_2002_insitu_approval,cov_polling_station,standard_family,built,,data/laslier_french_experiments.py,165,index,false
+laslier_2002_insitu_approval,id,standard,built,,data/laslier_french_experiments.py,145,index,true
+laslier_2002_insitu_approval,item,standard,built,,data/laslier_french_experiments.py,145,index,true
+laslier_2002_insitu_approval,resp,standard,built,,data/laslier_french_experiments.py,145,index,true
+laslier_2002_sciencespo_approval,id,standard,built,,data/laslier_french_experiments.py,145,index,true
+laslier_2002_sciencespo_approval,item,standard,built,,data/laslier_french_experiments.py,145,index,true
+laslier_2002_sciencespo_approval,resp,standard,built,,data/laslier_french_experiments.py,145,index,true
+laslier_2002_sciencespo_rating,id,standard,built,,data/laslier_french_experiments.py,145,index,true
+laslier_2002_sciencespo_rating,item,standard,built,,data/laslier_french_experiments.py,145,index,true
+laslier_2002_sciencespo_rating,resp,standard,built,,data/laslier_french_experiments.py,145,index,true
 laslier_2017_allevard_ev_m05to1,cov_age,standard_family,,,,,none,false
 laslier_2017_allevard_ev_m05to1,cov_educ,standard_family,,,,,none,false
 laslier_2017_allevard_ev_m05to1,cov_gender,standard_family,,,,,none,false
@@ -57175,6 +57186,9 @@ vanderhorst_2017_cgpq,cov_us_region_code,standard_family,built,,data/vanderhorst
 vanderhorst_2017_cgpq,id,standard,renamed,Respondent_Serial,data/vanderhorst_2017_toddler_feeding.py,118,index,true
 vanderhorst_2017_cgpq,item,standard,built,,data/vanderhorst_2017_toddler_feeding.py,120,index,true
 vanderhorst_2017_cgpq,resp,standard,built,,data/vanderhorst_2017_toddler_feeding.py,120,index,true
+vanderstraeten_2012_votepluriel_approval,id,standard,built,,data/laslier_french_experiments.py,145,index,true
+vanderstraeten_2012_votepluriel_approval,item,standard,built,,data/laslier_french_experiments.py,145,index,true
+vanderstraeten_2012_votepluriel_approval,resp,standard,built,,data/laslier_french_experiments.py,145,index,true
 vanteffelen_2020_aq_hostility,cov_age,standard_family,renamed,age,data/vanteffelen_2020_hostility.py,33,index,true
 vanteffelen_2020_aq_hostility,cov_education,standard_family,renamed,education,data/vanteffelen_2020_hostility.py,35,index,true
 vanteffelen_2020_aq_hostility,cov_gender,standard_family,renamed,gender,data/vanteffelen_2020_hostility.py,32,index,true

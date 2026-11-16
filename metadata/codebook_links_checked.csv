@@ -4060,6 +4060,9 @@ lara_2022_cfq_g56,https://journals.plos.org/plosone/article/file?type=supplement
 lara_2022_cfq_g78,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0272871.s002,plos,10.1371/journal.pone.0272871,no_match,2026-11-10
 lara_2022_sce_g56,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0272871.s002,plos,10.1371/journal.pone.0272871,no_match,2026-11-10
 lara_2022_sce_g78,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0272871.s002,plos,10.1371/journal.pone.0272871,no_match,2026-11-10
+laslier_2002_insitu_approval,https://www.preflib.org/dataset/00026,skip,,out_of_scope:host:preflib.org,
+laslier_2002_sciencespo_approval,https://www.preflib.org/dataset/00029,skip,,out_of_scope:host:preflib.org,
+laslier_2002_sciencespo_rating,https://www.preflib.org/dataset/00029,skip,,out_of_scope:host:preflib.org,
 laslier_2017_allevard_ev_m05to1,https://doi.org/10.5281/zenodo.3547607,zenodo,3547607,no_match,2026-11-15
 laslier_2017_allevard_ev_m1to1,https://doi.org/10.5281/zenodo.3547607,zenodo,3547607,no_match,2026-11-15
 laslier_2017_allevard_ev_m2to1,https://doi.org/10.5281/zenodo.3547607,zenodo,3547607,no_match,2026-11-15
@@ -7617,7 +7620,7 @@ tsai_2017_treeit_h9_error,https://doi.org/10.1371/journal.pone.0180102.s003,plos
 tsai_2017_treeit_tam_bi,https://doi.org/10.1371/journal.pone.0180102.s003,plos,10.1371/journal.pone.0180102,hit:questionnaire,2026-10-02
 tsai_2017_treeit_tam_peou,https://doi.org/10.1371/journal.pone.0180102.s003,plos,10.1371/journal.pone.0180102,hit:questionnaire,2026-10-02
 tsai_2017_treeit_tam_pu,https://doi.org/10.1371/journal.pone.0180102.s003,plos,10.1371/journal.pone.0180102,hit:questionnaire,2026-10-02
-tsuboi_2020_cued_recall,https://doi.org/10.17632/jcwyb2knb6.1,mendeley,jcwyb2knb6,deep_timeout,2026-11-15
+tsuboi_2020_cued_recall,https://doi.org/10.17632/jcwyb2knb6.1,mendeley,jcwyb2knb6,deep_timeout,2026-11-16
 tsujimura_2022_ams,https://doi.org/10.7910/DVN/AHCDXA,dataverse,dataverse.harvard.edu|doi:10.7910/DVN/AHCDXA,hit:dataverse_ddi,2026-10-05
 tsujimura_2022_bdi,https://doi.org/10.7910/DVN/AHCDXA,dataverse,dataverse.harvard.edu|doi:10.7910/DVN/AHCDXA,hit:dataverse_ddi,2026-10-05
 tsujimura_2022_ipss,https://doi.org/10.7910/DVN/AHCDXA,dataverse,dataverse.harvard.edu|doi:10.7910/DVN/AHCDXA,hit:dataverse_ddi,2026-10-05
@@ -7699,6 +7702,7 @@ vanderhorst_2017_cfpq_a,https://doi.org/10.1371/journal.pone.0178149.s002,plos,1
 vanderhorst_2017_cfpq_b,https://doi.org/10.1371/journal.pone.0178149.s002,plos,10.1371/journal.pone.0178149,no_match,2026-11-03
 vanderhorst_2017_cfsq,https://doi.org/10.1371/journal.pone.0178149.s002,plos,10.1371/journal.pone.0178149,no_match,2026-11-03
 vanderhorst_2017_cgpq,https://doi.org/10.1371/journal.pone.0178149.s002,plos,10.1371/journal.pone.0178149,hit:questionnaire,2026-11-03
+vanderstraeten_2012_votepluriel_approval,https://www.preflib.org/dataset/00074,skip,,out_of_scope:host:preflib.org,
 vanteffelen_2020_aq_hostility,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0239631.s001,plos,10.1371/journal.pone.0239631,no_match,2026-10-02
 vanteffelen_2020_foa,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0239631.s001,plos,10.1371/journal.pone.0239631,no_match,2026-10-02
 vanteffelen_2020_pid5_hostility,https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0239631.s001,plos,10.1371/journal.pone.0239631,no_match,2026-10-02
