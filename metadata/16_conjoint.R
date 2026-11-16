@@ -43,7 +43,7 @@
 ##numbers above come from the data; these come from the scripts' headers and the
 ##deposits, and say what the numbers mean): country, display_language,
 ##label_language, restrictions, level_weights, restrictions_note, attr_order,
-##survey_weight, presentation, task_source, profile_source.
+##survey_weight, presentation, task_source, profile_source, repeat_source.
 ##Their codes are documented in data/conjoint/README.md.
 ##
 ##Design check (reported, not fatal): for each table, the level shares of every
@@ -335,7 +335,7 @@ dtab <- read_design("design_tables.csv")
 dout <- read_design("design_outcomes.csv")
 design_cols <- c("country", "display_language", "label_language", "restrictions",
                  "level_weights", "restrictions_note", "attr_order", "survey_weight",
-                 "presentation", "task_source", "profile_source")
+                 "presentation", "task_source", "profile_source", "repeat_source")
 out <- merge(out, dtab[, c("table", design_cols)], by = "table", all.x = TRUE, sort = TRUE)
 no_design <- out$table[is.na(out$restrictions)]
 if (length(no_design)) message("  ! no design record (data/conjoint/design_tables.csv): ",
