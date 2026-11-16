@@ -37,9 +37,13 @@
 ##  differs between the two candidates); in BOTH arms exactly one candidate per pair has the
 ##  sexual-harassment scandal (observed in the data); trial_prime = 1 if shown the face-to-face-interview
 ##  prime (Q6.2) before the tasks. Attribute order randomized per respondent (attrpos_*).
-##  Kept: Finished == TRUE respondents with at least one rating (the authors further drop those
-##  failing attention check Q4.1, flagged here as cov_attention_pass_1 (1 = selected exactly "Every
-##  day" and "Never" as instructed), and one with missing income; cov_attention_pass_2 = second
+##  Kept: every respondent with at least one rating (IRW conjoint ruling, Ben 2026-11-10: no author
+##  sample exclusions): 2,248, all of whom agreed to participate (Q1.2), including 39 who did not
+##  finish the survey (cov_finished = 0; they keep the ratings they gave). The authors' sample
+##  (step01_wrangle_data.R) excludes respondents who did not finish, those failing attention check
+##  Q4.1, flagged here as cov_attention_pass_1 (1 = selected exactly "Every day" and "Never" as
+##  instructed), and one with missing income; the table as first built kept Finished respondents
+##  only: reproduce it with cov_finished == 1 (2,209); cov_attention_pass_2 = second
 ##  attention check Q36.1, 1 = selected exactly "Donald Trump" and "Joe Biden" as instructed, NA if
 ##  unanswered; the authors' step02_check_response_quality.R reads both as acheck1/acheck2).
 ##  Covariates: raw text of Q3.2 age band (cov_age_group), Q3.3 education (cov_education), Q3.4
@@ -116,14 +120,16 @@ fwrite(s1, file.path(out, "horiuchi_2022_sdb_shoes.csv"))
 
 ## ---------------- Study 2 -----------------
 x <- as.data.table(readRDS(file.path(rp, "study2/data/study2.RDS")))
-x <- x[Finished == TRUE & !is.na(type)]
+stopifnot(all(x$Q1.2 == "I agree to participate"), !anyNA(x$Finished))
+x <- x[!is.na(type)]
 qn <- c(3, 6, 9, 12, 15, 18, 21, 24, 27, 30)
 rc <- lapply(1:10, function(t) paste0("Q7.", qn[t], "_", 1:2))
 s2 <- widen(stack_block(x, "K", "-", 10, 8, rc), 8)
 s2 <- s2[!is.na(rating)]
 s2[, `:=`(rid = x$ResponseId[row], trial_design = x$type[row], trial_prime = as.integer(x$Treatment[row]),
           trial_candidate_party = x$party[row], cov_attention_pass_1 = as.integer(x$Q4.1[row] == "Every day,Never"),
-          cov_attention_pass_2 = as.integer(x$Q36.1[row] == "Donald Trump,Joe Biden"))]
+          cov_attention_pass_2 = as.integer(x$Q36.1[row] == "Donald Trump,Joe Biden"),
+          cov_finished = as.integer(x$Finished[row]))]
 for (q in c("3.2", "3.3", "3.4", "3.5", "3.6", "3.7", "3.8", "3.9", "3.10", "3.11"))
   s2[, paste0("cov_q", sub(".", "_", q, fixed = TRUE)) := x[[paste0("Q", q)]][row]]
 setnames(s2, c("cov_q3_2", "cov_q3_3", "cov_q3_4", "cov_q3_5", "cov_q3_6", "cov_q3_7", "cov_q3_8", "cov_q3_9", "cov_q3_10", "cov_q3_11"),
@@ -139,4 +145,5 @@ s2[, row := NULL]
 s2[, id := as.integer(factor(rid))][, rid := NULL]
 setcolorder(s2, c("id", "task", "profile", "rating"))
 setorder(s2, id, task, profile)
+stopifnot(uniqueN(s2$id) == 2248, s2[cov_finished == 1, uniqueN(id)] == 2209)
 fwrite(s2, file.path(out, "horiuchi_2022_sdb_candidates.csv"))
