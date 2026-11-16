@@ -18,7 +18,8 @@
 ##    "No priority<k>"), so WHICH was first and which second is lost. Each priority is one
 ##    attr_priority_* column holding its displayed text (from the .Rmd relabelling and README,
 ##    e.g. "Fight political corruption") when it was one of the candidate's two priorities and
-##    "(not shown)" otherwise. Every profile has exactly two priorities shown (checked).
+##    "(not shown)" otherwise. Every profile has exactly two priorities shown (checked). The
+##    authors' own model uses the same 12 indicators, so their main estimates are reproducible.
 ##  Positions (displayed text as stored): attr_immigration, attr_military, attr_redistribution
 ##    (taxes on the rich), attr_globalization, 4 levels each ("Is for much higher taxes on the
 ##    rich" ...).

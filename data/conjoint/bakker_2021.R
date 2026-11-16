@@ -20,7 +20,9 @@
 ##are omitted. Tasks WITH a choice but all 12 attribute cells empty (round 1: 6, round 2: 7; the
 ##profiles shown were not saved) are DROPPED. Result: 863 round-1 and 861 round-2 tasks, 865
 ##respondents (the preprint reports 868 completing and 1,736 choices; 1,724 tasks here plus the 13
-##unsaved ones is 1,737; the one-task difference is not resolved).
+##unsaved ones is 1,737; the one-task difference is not resolved). The authors' Study2_coding.R
+##reads the question-text row as data and codes a blank round-1 choice as chosen for BOTH A and B,
+##so about 11 round-1 tasks with attributes but no choice enter their models; they are not here.
 ##Outcomes (question-text row of the export; scale from the preprint):
 ##  choice: Popchoice1 / Q159, "Which candidate do you prefer?" (1 = Candidate A, 2 = B), forced
 ##          choice: exactly one per task (checked).
