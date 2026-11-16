@@ -16,8 +16,12 @@
 ##consecutive row pair has exactly one chosen scenario (checked), so task = pair index and
 ##profile = position within the pair are INFERRED from row order (which scenario was shown first
 ##on screen is not recorded).
-##One table: the authors run the same experiment in all countries and compare groups (cregg by
-##country / mother tongue); cov_country and cov_mother_tongue identify the samples.
+##SPLIT BY COUNTRY (#3536, 2026-11-15): one table per country, mueller_2024_covid_governance_<iso2>
+##(ch, be, ca, us, fr, au), replacing the pooled mueller_2024_covid_governance (the authors run the same
+##experiment in all countries and compare groups with cregg by country / mother tongue), because the level
+##text differs by country: attr_level names each country's own tiers (national vs federal; state, province,
+##community and region, canton, region; county or city vs municipality). cov_mother_tongue still identifies
+##the language samples within a country. Respondents: ch 1,520, be 1,512, ca 1,220, us 1,136, fr 1,118, au 1,093.
 ##Attribute text: the article's Table 1 English wording (the survey ran in Dutch, English, French,
 ##German; translations not deposited), mapped from the authors' short labels in the .rds:
 ##  attr_level (govt): central -> "Decision made at the {federal|national} level";
@@ -76,4 +80,8 @@ d <- m[, .(id = match(id, sort(unique(id))), task, profile, choice = as.integer(
            cov_attention_pass = fifelse(trimws(CovidTest) == "pass", 1L, fifelse(trimws(CovidTest) == "fail", 0L, NA_integer_)))]
 stopifnot(all(d$cov_gender %in% c("female", "male", NA)), !anyNA(d$cov_attention_pass))
 setorder(d, id, task, profile)
-fwrite(d, file.path(out, "mueller_2024_covid_governance.csv"))
+iso <- c(Switzerland = "ch", Belgium = "be", Canada = "ca", USA = "us", France = "fr", Australia = "au")
+stopifnot(all(d$cov_country %in% names(iso)), all(names(iso) %in% d$cov_country))
+nw <- sum(vapply(names(iso), function(cn) { x <- d[cov_country == cn]
+  fwrite(x, file.path(out, paste0("mueller_2024_covid_governance_", iso[[cn]], ".csv"))); nrow(x) }, 0L))
+stopifnot(nw == nrow(d))

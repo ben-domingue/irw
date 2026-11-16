@@ -10,8 +10,11 @@
 ##1) ibbett_2024_pa_sanction_fairness. Experiment 1, respondents living near Gunung Leuser National Park (Indonesia)
 ##   and the Ruaha-Rungwa ecosystem (Tanzania). Each saw 8 of 32 vignettes (a full 4 x 2 x 2 x 2 factorial, 4 fixed
 ##   blocks of 8, one block per respondent): 229 Indonesian + 217 Tanzanian respondents, 3,568 rows. The authors fit
-##   the two countries side by side with the same model, so they are POOLED here with cov_country (a judgement; the
-##   attribute set is shared and ids restart at 1 in each country, so ids are re-keyed). Attributes (level text from
+##   the two countries side by side with the same model (ids restart at 1 in each country, so ids are re-keyed).
+##   SPLIT BY COUNTRY (#3536, 2026-11-15): one table per country, ibbett_2024_pa_sanction_fairness_<iso2> (id, tz),
+##   replacing the pooled ibbett_2024_pa_sanction_fairness, because the level text differs by country: attr_crime
+##   has country-specific levels (hunting worded differently, logging in Indonesia only, grazing in Tanzania only).
+##   Respondents: id 229, tz 217. ibbett_2024_pa_compliance_scenario (below) stays pooled. Attributes (level text from
 ##   the article's Table 1 as quoted on PMC7617185; the deposit stores tags such as hunting/insider/big/arrest):
 ##     crime: Hunting protected sambar in the national park / Logging high-value timber in the national park
 ##       (Indonesia only); Hunting wildlife in the nearest protected area / Grazing livestock in the nearest
@@ -73,7 +76,11 @@ r1 <- d[, .(id = rid, task, profile = 1L, rating = as.integer(fairness),
 stopifnot(!anyNA(r1[, .(attr_crime, attr_offender_origin, attr_offender_power, attr_sanction)]))
 r1 <- r1[!is.na(rating)]
 setorder(r1, id, task, profile)
-fwrite(r1, file.path(out, "ibbett_2024_pa_sanction_fairness.csv"))
+iso <- c(Indonesia = "id", Tanzania = "tz")
+stopifnot(all(r1$cov_country %in% names(iso)), all(names(iso) %in% r1$cov_country))
+nw <- sum(vapply(names(iso), function(cn) { x <- r1[cov_country == cn]
+  fwrite(x, file.path(out, paste0("ibbett_2024_pa_sanction_fairness_", iso[[cn]], ".csv"))); nrow(x) }, 0L))
+stopifnot(nw == nrow(r1))
 ## ---- Experiment 2
 e <- as.data.table(read_excel(file.path(raw, "e2.xlsx"), sheet = "Experiment_2", na = "NA"))
 stopifnot(nrow(e) == 464)

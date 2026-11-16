@@ -12,8 +12,13 @@
 ##Tunisia, Egypt, Jordan, Lebanon, Turkey, Kuwait, Qatar, UAE, Bahrain, Saudi Arabia (plus one in
 ##Libya). The authors analyse only Sunni (incl. Salafi) respondents: 12,025, which is the article's
 ##N; everyone is kept here and cov_sect lets users apply that filter. The authors pool the
-##countries in one analysis (country fixed effects in a robustness model), so one table with
-##cov_country.
+##countries in one analysis (country fixed effects in a robustness model).
+##SPLIT BY COUNTRY (#3536, 2026-11-15): one table per country, williamson_2023_preacher_authority_<iso2>
+##(eg, ma, ae, sa, tr, tn, jo, qa, kw, lb, bh), replacing the pooled williamson_2023_preacher_authority,
+##because the level text differs by country: attr_nationality's own-country level is the respondent's
+##country (piped "$q_country"), and Saudi respondents never see the "Saudi Arabia" foreign level.
+##LIBYA IS LEFT OUT ENTIRELY (Ben's ruling on #3536): the single Libya respondent gets no table (no _ly) and
+##is in none of the country tables. Respondents: eg 3,013, ma 2,990, ae 2,011, sa 2,010, tr 1,972, tn 798, jo 778, qa 245, kw 243, lb 228, bh 177.
 ##2 tasks x 2 hypothetical preachers, 9 attributes ("fully randomized without restrictions",
 ##article). The file's `variable` 1-4 is task 1 preacher 1, task 1 preacher 2, task 2 preacher 3,
 ##task 2 preacher 4: checked, since each row's rating is the q21a/q22a grid item of that preacher
@@ -69,4 +74,12 @@ stopifnot(all(d$choice == x$binary_trust), all(d$choice_listen == x$binary_prefe
 stopifnot(d[, sum(choice), .(id, task)][, all(V1 == 1)], d[, sum(choice_listen), .(id, task)][, all(V1 == 1)])
 stopifnot(!anyNA(d[, .SD, .SDcols = patterns("^attr_")]), !anyNA(d$cov_gender))
 setorder(d, id, task, profile)
-fwrite(d, file.path(out, "williamson_2023_preacher_authority.csv"))
+## Libya (1 respondent) is dropped before the split (#3536); the country files must sum to the rest
+n0 <- nrow(d); nly <- sum(d$cov_country == "Libya"); stopifnot(d[cov_country == "Libya", uniqueN(id)] == 1L)
+d <- d[cov_country != "Libya"]
+iso <- c(Egypt = "eg", Morocco = "ma", "United Arab Emirates" = "ae", "Saudi Arabia" = "sa", Turkey = "tr", Tunisia = "tn", Jordan = "jo", Qatar = "qa", Kuwait = "kw", Lebanon = "lb", Bahrain = "bh")
+stopifnot(all(d$cov_country %in% names(iso)), all(names(iso) %in% d$cov_country))
+nw <- sum(vapply(names(iso), function(cn) { x <- d[cov_country == cn]
+  fwrite(x, file.path(out, paste0("williamson_2023_preacher_authority_", iso[[cn]], ".csv"))); nrow(x) }, 0L))
+stopifnot(nw == nrow(d))
+stopifnot(nw == n0 - nly)
