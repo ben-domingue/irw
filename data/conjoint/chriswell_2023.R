@@ -47,8 +47,10 @@
 ##otherwise documented). Restrictions (yes): the private response and the result texts are
 ##conditional on the problem (see the stored levels). One respondent with English attribute
 ##text (user_language EN) answered no vignette question. One respondent answered all three
-##sets but has no attribute values (not saved): dropped. Rows with no outcome are omitted
-##(4 tasks in the pairs table keep only one colonia).
+##sets but has no attribute values (not saved): dropped. Tasks with no outcome on either colonia
+##are omitted; a colonia left unanswered in an answered set keeps its row with the outcomes NA
+##(4 tasks in the pairs table, 1 in the formal table; #3536). Pairs: 4,186 rows, 1,071
+##respondents; formal: 1,932 rows, 966 respondents.
 ##Personal data in the deposit, dropped: location_latitude / location_longitude (Qualtrics),
 ##colonia of residence (colonia_name, cve_col, colonia_*_other free text), free-text answers;
 ##Qualtrics response_id re-keyed to integers (row order).
@@ -98,10 +100,11 @@ d3 <- rbindlist(lapply(1:2, function(p) data.table(rid = s$rid, task = 1L, profi
   attr_group = s[[paste0("choice1_resp1_", p)]], attr_result = s[[paste0("choice1_resp2_", p)]],
   trial_problem_asked = s$choice1_prob2_1)))
 finish <- function(d, outs, name) {
-  d <- d[d[, Reduce(`|`, lapply(.SD, function(v) !is.na(v))), .SDcols = outs]]
+  d[, ans := Reduce(`|`, lapply(.SD, function(v) !is.na(v))), .SDcols = outs]
+  d <- d[d[, .I[any(ans)], .(rid, task)]$V1][, ans := NULL]   # task-level: a shown profile stays
   ac <- grep("^attr_|^trial_", names(d), value = TRUE)
   miss <- d[, Reduce(`|`, lapply(.SD, function(v) is.na(v) | v == "")), .SDcols = ac]
-  cat(name, "rows with an outcome but missing attribute text (dropped):", sum(miss), "\n")
+  cat(name, "rows of answered tasks with missing attribute text (dropped):", sum(miss), "\n")
   d <- d[!miss]
   stopifnot(d[, all(grepl("[áéíóúñ]|Problemas|aumento|vecinos|organizaron|crimen|agua|Crearon|Compartieron", get(ac[1])))])
   d <- merge(d, cv, by = "rid", sort = FALSE)

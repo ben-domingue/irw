@@ -152,10 +152,14 @@ def validate_conjoint_frame(df, *, label: str = "", opt_out: dict | None = None)
             if not pd.api.types.is_numeric_dtype(df[c]):
                 out.append(_f("conj_rating", "error", f"[J3] {c} is not numeric", table))
     if outcomes and not missing:
-        allna = df[outcomes].isna().all(axis=1).sum()
-        if allna:
+        # A shown profile with no answer keeps its row when its task has any answer
+        # (README "Other rules", #3536); only a task with no answer at all is omitted.
+        rowna = df[outcomes].isna().all(axis=1)
+        task_na = rowna.groupby([df["id"], df["task"]]).all()
+        empty = int(task_na.sum())
+        if empty:
             out.append(_f("conj_outcomes", "warn",
-                          f"[J3] {int(allna)} rows with no outcome at all; omit them", table))
+                          f"[J3] {empty} tasks with no outcome at all; omit them", table))
 
     # J4: attributes, as displayed text
     attrs = [c for c in cols if c.startswith("attr_")]
@@ -182,13 +186,17 @@ def validate_conjoint_frame(df, *, label: str = "", opt_out: dict | None = None)
         out.append(_f("conj_attributes", "warn",
                       f"[J4] attr_ column(s) with a 'not shown' variant: {', '.join(variant)}; the reserved text is "
                       f"exactly '{NOT_SHOWN}'", table, tuple(variant)))
-    coded = [c for c in attrs if c not in empty and pd.api.types.is_numeric_dtype(df[c])
+    # attr_<name>_code holds the deposit's codes because no source gives the displayed
+    # text (#3474); codes are what it promises, so it is not warned about.
+    coded = [c for c in attrs if c not in empty and not c.endswith("_code")
+             and pd.api.types.is_numeric_dtype(df[c])
              and df[c].dropna().nunique() > 1 and (df[c].dropna() % 1 == 0).all()
              and df[c].dropna().max() <= 20]
     if coded:
         out.append(_f("conj_attributes", "warn",
                       f"[J4] attr_ column(s) look like numeric codes, not displayed text: "
-                      f"{', '.join(coded)}. Fine if the levels really are numbers (an age, a size).",
+                      f"{', '.join(coded)}. Fine if the levels really are numbers (an age, a size); codes with no "
+                      f"source for the text take a _code suffix (attr_<name>_code).",
                       table, tuple(coded)))
 
     # J7: column names

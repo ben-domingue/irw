@@ -22,8 +22,9 @@
 ##     97 NA.
 ##  rating_trust_municipality = trust_m, same wording for "the municipality"; 0-1 as above.
 ##  rating_inclined_to_complain = q5 "Hvor tilbøjelig er du til at klage over afgørelsen?" (How inclined are you to complain about
-##     the decision?) 1 Meget tilbøjelig (very inclined) ... 7 Meget utilbøjelig (very disinclined); 88 = Ved ikke (don't know,
-##     kept as 88). HIGHER 1-7 = LESS inclined. Translated wording.
+##     the decision?) 1 Meget tilbøjelig (very inclined) ... 7 Meget utilbøjelig (very disinclined); 88 = Ved ikke (don't know)
+##     -> NA, as 97 is for the trust items (it was kept as 88 until 2026-11-15, outside the 1-7 scale; 229 values).
+##     HIGHER 1-7 = LESS inclined. Translated wording.
 ##Dropped: the author's perception items and indices (fair, neutral, unbiased, warm, friendly, likable, competent,
 ##intelligent, capable; perc_*), the manipulation check attention, derived dummies (age_1, edu), caseid.
 ##Covariates, mapped from the codebook (Table 1) because the .dta value labels disagree with the data for gender
@@ -33,7 +34,8 @@
 ##  5 left per codebook; text from the .dta Danish labels: Højreorienteret, Moderat højreorienteret, Centrum, Moderat
 ##  venstreorienteret, Venstreorienteret; "don't know"/refused are NA here), cov_elderly_care_user (0 no, 1 yes: has a close
 ##  relative in a nursing home; 8 NA).
-##N: 1,613 respondents = the article (n = 1,613).
+##N: 1,562 respondents with at least one outcome, of the 1,613 in the article (n = 1,613): 51 answered "don't know"
+##or nothing on all three items, so their rows hold no outcome and are dropped (since 2026-11-15, when 88 became NA).
 library(haven); library(data.table)
 a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]
 k <- as.data.table(read_dta(file.path(raw, "data.dta")))
@@ -43,7 +45,8 @@ stopifnot(identical(as.integer(k$treatment_groups), ifelse(w == 1 & o == 0, 1L, 
 d <- data.table(id = seq_len(nrow(k)), task = 1L, profile = 1L)
 d[, rating_trust_caseworker := round(as.numeric(k$trust_b), 1)]
 d[, rating_trust_municipality := round(as.numeric(k$trust_m), 1)]
-d[, rating_inclined_to_complain := as.integer(zap_labels(k$q5))]
+q5 <- as.integer(zap_labels(k$q5)); stopifnot(all(q5 %in% c(1:7, 88L) | is.na(q5)))
+d[, rating_inclined_to_complain := ifelse(q5 == 88L, NA_integer_, q5)]
 d[, attr_decision := c("application rejected (unfavorable decision)", "application approved (favorable decision)")[o + 1L]]
 d[, attr_caseworker_warmth := c("low warmth (caseworker unfriendly, not very likable and good-natured)", "high warmth (caseworker friendly, kind, likable, good-natured and warm)")[w + 1L]]
 g <- as.integer(zap_labels(k$gender)); stopifnot(all(g %in% 0:1))

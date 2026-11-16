@@ -29,6 +29,8 @@
 ##All level pairs occur and shares are near-equal (1/2 or 1/5). Spot check (article not
 ##available to compare): LPM of choice gives US citizen +0.36, no income taxes -0.20, lived in
 ##the US 15 years +0.22 vs lived in Europe 15 years.
+##Tasks with neither a choice nor a rating are dropped; a profile with no outcome in an answered
+##task keeps its row with the outcomes NA (1 task; #3536).
 ##Sample: the long file has 999 respondents; the authors analyse only Qualtrics "good
 ##completers" (gc == "1", their `use` == 1): 980, the wide file's N. The 19 others are dropped.
 ##Covariates (wide-file value labels): cov_age (years), cov_gender (genderrespondent 0 Male ->
@@ -59,7 +61,7 @@ s[, `:=`(cov_age = as.integer(l$age), cov_gender = c("male", "female")[as.intege
 s <- s[use == 1]
 stopifnot(uniqueN(s$rid) == 980, s[, .N, rid][, all(N == 12)], all(s$task %in% 1:6), all(s$profile %in% 1:2),
           s[!is.na(chosen), sum(chosen), .(rid, task)][, all(V1 == 1)], !anyNA(s[, .SD, .SDcols = patterns("^attr_")]))
-s <- s[!(is.na(chosen) & is.na(rating))]
+s <- s[s[, .I[any(!is.na(chosen) | !is.na(rating))], .(rid, task)]$V1]   # task-level: a shown profile stays
 s[, id := match(rid, sort(unique(rid)))]
 d <- s[, c("id", "task", "profile", "chosen", "rating", grep("^(attr|cov)_", names(s), value = TRUE)), with = FALSE]
 setnames(d, "chosen", "choice")

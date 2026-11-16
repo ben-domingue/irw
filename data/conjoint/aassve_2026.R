@@ -20,8 +20,10 @@
 ##levels per country: AR 500/800/1200/1700/2300, DE 1700/2300/3100/4200/5500, IT 1200/1600/
 ##2200/3000/4000, US 1770/3400/5600/8500/11000 = the authors' Much lower .. Much higher),
 ##attr_climate, attr_economy, attr_politics, attr_war (macro outlook Optimistic / Pessimistic).
-##ONE TABLE with cov_country: the authors pool the four countries (country fixed effects)
-##and the attribute labels are common; income amounts are in each country's currency.
+##SPLIT BY COUNTRY (#3536, 2026-11-15): one table per country, aassve_2026_parenthood_<iso2>
+##(ar, de, it, us), replacing the pooled aassve_2026_parenthood (the authors pool with country fixed
+##effects), because the level text differs by country: attr_income amounts are each country's own
+##five values in local currency. Respondents: ar 2,096, de 2,090, it 2,069, us 2,075.
 ##Outcomes (wording not deposited; paraphrase from the .dta labels and the press release):
 ##  choice = conjointchoice, "Outcome: forced choice" (which scenario would make the
 ##    respondent more inclined to have a child), one per task, no opt-out; 399 tasks have no choice (NA on
@@ -39,6 +41,7 @@
 ##country median incomes. No survey weight in the deposit.
 ##N = 8,330 respondents (press release 8,334). Spot check: see return; the paper's AMCE
 ##tables were not accessible.
+##Shown profiles (#3536, 2026-11-15): a profile with no outcome in an answered task keeps its row with the outcomes NA (37 tasks restored); only a task with no answer at all is dropped.
 library(haven); library(data.table)
 a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]
 k <- as.data.table(read_dta(file.path(raw, "replication_data_min.dta")))
@@ -62,8 +65,14 @@ d[, cov_fert_ideal_trad_life := as.integer(zap_labels(k$fert_ideal_trad_life))]
 d[, cov_hhincome_ppp := k$hhincome_ppp][, cov_pincome_ppp := k$pincome_ppp]
 stopifnot(d[, .N, .(rid, task)][, all(N == 2)], all(d$rating %in% c(1:10, NA)),
           d[, .(s = sum(choice), n = sum(is.na(choice))), .(rid, task)][, all((n == 0 & s == 1) | n == 2)])
-d <- d[!(is.na(choice) & is.na(rating))]
+# task-level: a shown profile stays when its task has any answer (#3536); a task with none is dropped.
+d[, .keep := any(!is.na(choice) | !is.na(rating)), by = .(rid, task)]
+d <- d[(.keep)][, .keep := NULL]
 d[, id := rid][, rid := NULL]
 setcolorder(d, c("id", "task", "profile", "choice", "rating"))
 setorder(d, id, task, profile)
-fwrite(d, file.path(out, "aassve_2026_parenthood.csv"))
+iso <- c(Argentina = "ar", Germany = "de", Italy = "it", "United States" = "us")
+stopifnot(all(d$cov_country %in% names(iso)), all(names(iso) %in% d$cov_country))
+nw <- sum(vapply(names(iso), function(cn) { x <- d[cov_country == cn]
+  fwrite(x, file.path(out, paste0("aassve_2026_parenthood_", iso[[cn]], ".csv"))); nrow(x) }, 0L))
+stopifnot(nw == nrow(d))

@@ -32,15 +32,16 @@
 ##  rating_vote       "How likely is it that you would vote for candidate 1 (2)?" (seven points;
 ##    anchors not reported)
 ##The deposit stores all four RESCALED to 0-1 by the authors ((k - 1) / 6); they are kept as stored.
-##"Don't know" was coded missing by the authors; candidates with no answer are omitted (rows with
-##no outcome). Higher = more dominant / warm / competent / likely to vote.
+##"Don't know" was coded missing by the authors; a pair with no answer on either candidate is omitted,
+##and an unanswered candidate in an answered pair keeps its row with the outcome NA
+##(165 tasks; #3536). Higher = more dominant / warm / competent / likely to vote.
 ##Covariates (answer text as stored): cov_age (ageres), cov_gender (Female/Male/Non-binary / Other
 ##-> female/male/other; blank -> NA), cov_education (edures), cov_income (incomeres), cov_party_id7
 ##(PIDres value-label text, ANES 7-point built by the authors from Q6-Q9), cov_state (stateres
 ##labels), cov_duration_sec. Dropped: Qualtrics ResponseId (PII), respondent number `resp`, the raw
 ##party items, countryres (all "The United States"), the authors' recodes (candemmg, item*,
 ##aggressives, cantax..., partymatch, socleft, redileft).
-##Counts: 1,795 respondents in the file, 1,788 with at least one answer; 8,798 dominance
+##Counts: 1,795 respondents in the file, 1,788 with at least one answer, 35,456 rows; 8,798 dominance
 ##observations here + 9,597 in experiment 1 = the article's 18,395. Spot check: undemocratic minus
 ##democratic behaviour = +0.157 on dominance, -0.100 warmth, -0.087 competence, -0.084 vote (the
 ##article pools both experiments: +0.20 dominance, -0.11 to -0.12 on the others).
@@ -67,7 +68,8 @@ stopifnot(d[, .N, src][, all(N == 20)], uniqueN(d$src) == 1795, !anyNA(d[, .SD, 
           d[, sum(!is.na(c(rating_dominance, rating_warmth, rating_competence, rating_vote))), .(src)][, all(V1 >= 0)])
 nout <- d[, (!is.na(rating_dominance)) + (!is.na(rating_warmth)) + (!is.na(rating_competence)) + (!is.na(rating_vote))]
 stopifnot(all(nout <= 1))
-d <- d[nout == 1]
+d[, ans := nout == 1]
+d <- d[d[, .I[any(ans)], .(src, task)]$V1][, ans := NULL]   # task-level: a shown profile stays
 d[, id := match(src, sort(unique(src)))][, c("src", "candid") := NULL]
 setcolorder(d, c("id", "task", "profile"))
 setorder(d, id, task, profile)

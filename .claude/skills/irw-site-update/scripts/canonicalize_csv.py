@@ -38,6 +38,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import io
 import sys
 from pathlib import Path
 
@@ -80,17 +81,28 @@ def main() -> int:
     rows.sort(key=lambda r: tuple((r.get(k) or "").lower() for k in keys))
     after = [tuple(r.get(k) or "" for k in keys) for r in rows]
 
-    if before == after:
-        print(f"canonicalize: {args.path.name} already in key order ({len(rows)} rows)")
+    # The canonical form is the ORDER and the BYTES: CRLF and minimal quoting
+    # (the csv module's defaults, which 19_item_classical.py and 20_k1.py also
+    # write). Deciding on order alone let a file flip format from run to run:
+    # 08_itemtext.R writes quoted LF with new rows on top, so a run that added
+    # rows got re-sorted to CRLF and a run that added none kept R's LF -- every
+    # line of itemtext_metadata.csv rewritten each time it flipped (2,655 lines
+    # in the 2026-11-10 run, #3460, with no field changed).
+    buf = io.StringIO(newline="")
+    writer = csv.DictWriter(buf, fieldnames=fieldnames)
+    writer.writeheader()
+    writer.writerows(rows)
+    out = buf.getvalue().encode("utf-8")
+
+    if out == args.path.read_bytes():
+        print(f"canonicalize: {args.path.name} already canonical ({len(rows)} rows)")
         return 0
 
     tmp = args.path.with_suffix(args.path.suffix + ".tmp")
-    with tmp.open("w", newline="", encoding="utf-8") as fh:
-        writer = csv.DictWriter(fh, fieldnames=fieldnames)
-        writer.writeheader()
-        writer.writerows(rows)
+    tmp.write_bytes(out)
     tmp.replace(args.path)
-    print(f"canonicalize: {args.path.name} sorted by {args.key} ({len(rows)} rows)")
+    what = f"sorted by {args.key}" if before != after else "rewritten in canonical form"
+    print(f"canonicalize: {args.path.name} {what} ({len(rows)} rows)")
     return 0
 
 

@@ -1,10 +1,23 @@
 table,construct_name,instrument,language,text_source,n_items,n_participants,k,n_mapped,n_near,verdict,basis,note
 artistic_preferences,Artistic Preferences Scales 1.2,"Artistic Preferences Scales 1.2 (APS), with the Ten Item Personality Inventory (TIPI) and a vocabulary check list (VCL)",eng,study_materials,56,18575,10,10,0,MATCH,wording,
 depression_anxiety_stress,Depression Anxiety Stress Scales.,"Depression Anxiety Stress Scales (DASS-42), Ten Item Personality Inventory (TIPI), and a 16-word vocabulary checklist",NA,study_materials,68,39775,10,10,0,MATCH,wording,
-gcbs_brotherton_2013_tipi,Ten Item Personality Inventory,"Ten Item Personality Inventory (TIPI; Gosling, Rentfrow & Swann, 2003)",eng,none_recorded,10,2495,10,10,0,MATCH,supplied,
+gcbs_brotherton_2013_tipi,Ten Item Personality Inventory,"Ten Item Personality Inventory (TIPI; Gosling, Rentfrow & Swann, 2003)",eng,study_materials,10,2495,10,10,0,MATCH,wording,
 machivallianism_test_tipi,Ten Item Personality Inventory,Ten Item Personality Inventory (TIPI),eng,study_materials,10,73264,10,10,0,MATCH,wording,
-nature_relatedness,Nature Relatedness Scale,"Nature Relatedness Scale, 6-item short form (NR-6; Nisbet & Zelenski, 2013), administered with the Ten Item Personality Inventory (Gosling, Rentfrow & Swann, 2003) and a 16-word vocabulary check-list",eng,none_recorded,32,1522,10,10,0,MATCH,supplied,
+nature_relatedness,Nature Relatedness Scale,"Nature Relatedness Scale, 6-item short form (NR-6; Nisbet & Zelenski, 2013), administered with the Ten Item Personality Inventory (Gosling, Rentfrow & Swann, 2003) and a 16-word vocabulary check-list",eng,study_materials,32,1522,10,10,0,MATCH,wording,
 protestant_workethic,Protestant Work Ethic Scale,"Protestant Work Ethic Scale (Mirels & Garrett, 1971), administered with the Ten Item Personality Inventory (Gosling, Rentfrow & Swann, 2003) and a 16-word vocabulary check-list",eng,study_materials,45,1350,10,10,0,MATCH,wording,
 riasec,Holland Code (RIASEC) Test,"Holland Code (RIASEC) Test (IIP RIASEC Markers), administered with the Ten Item Personality Inventory and a 16-word vocabulary check-list",eng,study_materials,74,145828,10,10,0,MATCH,wording,
 rightwing_authoritariansim,Right Wing Authoritarianism,"Right-wing Authoritarianism Scale (RWAS), with the Ten Item Personality Inventory (TIPI) and a vocabulary check list (VCL)",eng,study_materials,48,9881,10,10,0,MATCH,wording,
-celik_2026_tipi,NA,"On-Maddeli Kişilik Ölçeği (OMKÖ) -- Turkish adaptation (Atak, 2013) of the Ten-Item Personality Inventory (TIPI; Gosling, Rentfrow & Swann, 2003)",tur,none_recorded,10,412,10,0,0,NAME_ONLY,name,item text not in English
+blaszyk_2023_tipi,Ten-Item Personality Inventory (TIPI),,pol,none_recorded,10,254,10,0,0,NAME_ONLY,name,no item text
+celik_2026_tipi,NA,"On-Maddeli Kişilik Ölçeği (OMKÖ) -- Turkish adaptation (Atak, 2013) of the Ten-Item Personality Inventory (TIPI; Gosling, Rentfrow & Swann, 2003)",tur,study_materials,10,412,10,0,0,NAME_ONLY,name,item text not in English
+degirolamo_2022_tipi,NA,"Ten-Item Personality Inventory, revised Italian version (I-TIPI-R; Chiorri et al., 2014/2015, after Gosling et al., 2003), as administered in wave 4 of the COSMO Italy COVID-19 survey",ita,study_materials,10,2500,10,0,0,NAME_ONLY,name,item text not in English
+galindo_2026_personality,Ten-item personality inventory,,"baq, spa, gre",none_recorded,10,949,10,0,0,NAME_ONLY,name,no item text
+gori_2021_tipi,Ten Item Personality Inventory (I-TIPI),,ita,none_recorded,10,554,10,0,0,NAME_ONLY,name,no item text
+gulec_2023_tipi,Big Five personality (TIPI),,tur,none_recorded,10,503,10,0,0,NAME_ONLY,name,no item text
+henderson_2023_lapanel_tipi,"Ten-Item Personality Inventory (TIPI), wave 5 only",,eng,none_recorded,10,1000,10,0,0,NAME_ONLY,name,no item text
+kam_2015_tipi,Big Five personality (TIPI),,eng,none_recorded,10,1500,10,0,0,NAME_ONLY,name,no item text
+kayir_2026_tipi,Big Five personality (TIPI),,tur,none_recorded,10,392,10,0,0,NAME_ONLY,name,no item text
+manylabs2_klein_2018_tipi,Ten-Item Personality Inventory,,NA,none_recorded,10,15197,10,0,0,NAME_ONLY,name,no item text
+manylabs3_ebersole_2016_tipi,Ten-Item Personality Inventory,,eng,none_recorded,10,3212,10,0,0,NAME_ONLY,name,no item text
+shiota_2026_tipi,Ten-Item Personality Inventory (TIPI),,eng,none_recorded,10,313,10,0,0,NAME_ONLY,name,no item text
+stapleton_2021_tipi,Ten-Item Personality Inventory (TIPI),,eng,none_recorded,10,19659,10,0,0,NAME_ONLY,name,no item text
+martindelcampo_2020_tipi,NA,"Ten-Item Personality Inventory (TIPI; Gosling, Rentfrow & Swann, 2003)",spa,translated_substitute,10,298,10,4,0,PARTIAL,,first item: critic fighter

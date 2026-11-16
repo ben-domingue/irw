@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# HELD 2026-11-09 by Ben: possible generated data, see BATCH_LOG
+# HELD 2026-11-09 by Ben pending review against the paper, see BATCH_LOG
 #   (automated_finding/BATCH_LOG.md, 2026-11-09 PLOS monthly). Near-identical
 #   item means, two different instruments with near-identical response
 #   distributions, a flat low tail. The three outputs were pulled from

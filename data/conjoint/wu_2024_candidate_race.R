@@ -48,8 +48,16 @@
 ##cattr<k>_asian hold 21 and 31 for that vector. The sentence follows the export's field names
 ##(Hispanic = cattr_hispa); which number respondents saw next to "Hispanic" vs "Asian" cannot be
 ##confirmed from the deposit.
-##Sample: the authors' pre-registered attention-check rule (1_clean_data.do: keep if acq_pass == 1 or
-##acq_identity == "Because he left his ID"): 1,447 respondents (= article).
+##Sample: all 1,858 respondents in the export who answered at least one outcome: 1,478 (IRW conjoint
+##ruling, Ben 2026-11-10: no author sample exclusions). The authors' analysis sample excludes respondents
+##who failed the pre-registered attention check (1_clean_data.do: keep if acq_pass == 1 or acq_identity ==
+##"Because he left his ID"): 1,447 respondents (= article); reproduce it with cov_attention_pass_1 %in% 1 |
+##cov_attention_pass_2 %in% 1. Everyone with acq_pass == 0 was screened out before the vignettes (no outcome),
+##so the 31 added respondents all have acq_pass missing and a different answer to the identity question.
+##  cov_attention_pass_1  acq_pass, the export's own pass flag (1 / 0 / NA as stored; the rule that set it
+##                        is not in the deposit)
+##  cov_attention_pass_2  acq_identity (how the thief in a short passage was identified): 1 = "Because he
+##                        left his ID", 0 = another answer, NA = not answered
 ##Outcomes (labels in the export; wording in the article): rating_vote (vote likelihood; 1 = Very
 ##unlikely .. 5 = Very likely; wording not in the deposit), rating_ideology (1 = Extremely Liberal ..
 ##7 = Extremely Conservative; middle option "Moderate/Middle of the road"), rating_prioritize_<group>
@@ -117,8 +125,7 @@ fwrite(d, file.path(out, "wu_2024_candidate_race_s1.csv"))
 
 ## ---- Study 2
 s <- fread(file.path(raw, "study_2_raw.csv"), colClasses = "character")
-s <- s[acq_pass == "1" | acq_identity == "Because he left his ID"]
-stopifnot(nrow(s) == 1447)
+stopifnot(nrow(s) == 1858, all(s$acq_pass %in% c("0", "1", "NA")), s[acq_pass == "1" | acq_identity == "Because he left his ID", .N] == 1447)
 s[, id := seq_len(.N)]
 ideo2 <- replace(ideo, 4, "Moderate/Middle of the road")
 vote <- c("Very unlikely", "Somewhat unlikely", "Equally likely or unlikely", "Somewhat likely", "Very likely")
@@ -126,7 +133,9 @@ prio <- c("None at all", "A littlebit", "Somewhat", "A moderateamount", "A great
 grp <- c(whites = "whites", blacks = "blacks", asians = "asians", hispanics = "hispanics", republicans = "gop", democrats = "dem", men = "men", women = "women")
 cv2 <- cbind(s[, .(id, cov_birth_year = by_ok(dem_birthyr), cov_employment = nz(dem_emp), cov_race = nz(dem_race),
   cov_party_id = nz(dem_pid), cov_party_strength_rep = nz(dem_pid_strongr), cov_party_strength_dem = nz(dem_pid_strongd),
-  cov_party_lean = nz(dem_pid_lean), cov_ideology = nz(dem_ideo), cov_vote20 = nz(dem_vote20))], lucid(s))
+  cov_party_lean = nz(dem_pid_lean), cov_ideology = nz(dem_ideo), cov_vote20 = nz(dem_vote20),
+  cov_attention_pass_1 = suppressWarnings(as.integer(acq_pass)),
+  cov_attention_pass_2 = fifelse(nz(acq_identity) %in% NA, NA_integer_, as.integer(acq_identity == "Because he left his ID")))], lucid(s))
 d2 <- rbindlist(lapply(1:5, function(k) {
   g <- function(v) s[[sprintf("cattr%d_%s", k, v)]]
   x <- data.table(id = s$id, task = k, profile = 1L, attr_age = g("age"), attr_sex = g("sex"), attr_race = g("race"),
@@ -139,10 +148,13 @@ d2 <- rbindlist(lapply(1:5, function(k) {
   for (gg in names(grp)) x[, paste0("rating_prioritize_", gg) := code(s[[paste0("cattr_fair_", grp[[gg]], sfx)]], prio)]
   x
 }))
-stopifnot(d2[, all(c("Asian", "Black", "Hispanic", "White") %in% attr_race), id][, all(V1)])
+rc <- grep("^rating", names(d2), value = TRUE)
+stopifnot(d2[id %in% d2[rowSums(!is.na(d2[, ..rc])) > 0, id], all(c("Asian", "Black", "Hispanic", "White") %in% attr_race), id][, all(V1)])
 d2 <- merge(d2, cv2, by = "id")
 rc <- grep("^rating", names(d2), value = TRUE)
 d2 <- d2[rowSums(!is.na(d2[, ..rc])) > 0]
 for (v in grep("^attr_", names(d2), value = TRUE)) stopifnot(!anyNA(d2[[v]]), all(d2[[v]] != ""), !any(grepl("NA", d2[[v]])))
+d2[, id := match(id, sort(unique(id)))]
+stopifnot(uniqueN(d2$id) == 1478, d2[cov_attention_pass_1 %in% 1 | cov_attention_pass_2 %in% 1, uniqueN(id)] == 1447)
 setorder(d2, id, task, profile)
 fwrite(d2, file.path(out, "wu_2024_candidate_race_s2.csv"))

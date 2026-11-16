@@ -13,8 +13,8 @@
 ##Two tables, one per country: separate samples, separate fieldings and displayed text in
 ##different languages (Chinese / Japanese); the authors analyse them separately (Fig. 2-4).
 ##  incerti_2021_china_japan_cn: Chinese online respondents, 3,639 (the authors' dat_conjoint)
-##  incerti_2021_china_japan_jp: Japanese online respondents, 3,331 with a conjoint (3,335 pass the
-##    sample rules; the authors' data_conjoint has the same 19,986 rows)
+##  incerti_2021_china_japan_jp: Japanese online respondents, 3,460 with an answered conjoint task
+##    (the authors' sample is 3,331 of them; their data_conjoint has the same 19,986 rows)
 ##Each respondent saw 3 tasks (task 1-3) of two hypothetical Japan-China policy packages
 ##(profile 1 = 政策1 / Proposal 1, 2 = 政策2), 7 attributes (Yasukuni visits, economic
 ##cooperation / One Belt One Road, Japanese tariffs on Chinese goods, Chinese tariffs on Japanese
@@ -36,18 +36,26 @@
 ##  if China has sovereignty]" and "Resource development by China only [... if Japan has
 ##  sovereignty]". (The authors' cjoint constraint_list names other pairs; the appendix and the
 ##  data are followed: those two pairs never occur.) Level weights not documented.
-##Sample (authors' rules): CN drops early terminations (blank education, 116) and keeps
-##  respondents with a conjoint (f11 non-blank): 3,639. JP keeps Finished, consent, Japanese
-##  citizen, 20+, living in Japan, non-blank panel id, and drops 4 duplicated responses (the
-##  authors' ResponseId exclusions); then rows with a conjoint (F_1_1 non-blank). JP tasks with no
-##  answer to the choice question would be dropped (none occur; the authors keep them as NA).
+##Sample: CN drops early terminations (blank education, 116: screened out for age or foreign
+##  residence per the authors) and keeps respondents with a conjoint (f11 non-blank): 3,639; none of
+##  the 116 has a conjoint, so the CN table is the authors' sample. JP keeps the authors' eligibility
+##  rules (Q11 == 1 agreed to start the survey, Q21 == 1 Japanese citizen, Q22 != 1 not under 20,
+##  Q24 != 48 not living abroad) and drops the 4 later duplicates of a panel member's response (the
+##  authors' ResponseId exclusions; the same panel id answered earlier), then keeps respondents with
+##  an answered conjoint task (F_1_1 non-blank; JP tasks with no answer to the choice question are
+##  dropped). Under the IRW conjoint ruling (Ben 2026-11-10: no author sample exclusions) it does NOT
+##  apply the authors' two other rules: Finished != 0 (122 unfinished respondents with a conjoint are
+##  kept) and NID != "" (7 respondents with no panel id, all finished, are kept; the authors' code
+##  comment counts 1). The authors' analysis sample excludes them; reproduce it with cov_finished == 1 &
+##  cov_panel_id_missing == 0 (3,331).
 ##Dropped identifiers: JP ResponseId and NID (panel respondent id); ids are re-keyed as the
 ##  authors do (row number after the sample rules). Dates and free-text fields not kept.
 ##Covariates: CN cov_gender from q23 (男性 male, 女性 female; answer text), cov_age_group (q22
 ##  band text as exported, e.g. "25-29"), cov_education (q27 answer text). JP cov_gender from Q23
 ##  (authors' recode: 1 = male, otherwise not male; only codes 1/2 occur, 2 = female),
 ##  cov_age_group_code (Q22) and cov_education_code (Q26) keep codes: the JP export has no value
-##  labels. No survey weight in either export.
+##  labels; cov_finished (Qualtrics Finished, 1/0) and cov_panel_id_missing (1 = NID blank, else 0).
+##  No survey weight in either export.
 library(haven); library(data.table)
 a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]
 build <- function(x, fname, fprof, fq) {
@@ -97,8 +105,8 @@ stopifnot(!anyNA(cv$cov_gender), all(cv$cov_age_group != ""))
 wcn <- merge(wcn, cv, by = "id")
 ## ---- Japan ----
 jp <- as.data.table(read_dta(file.path(raw, "Japan_Data_FINAL.dta")))
-jp <- jp[Finished != 0 & Q11 == 1 & Q21 == 1 & Q22 != 1 & Q24 != 48 & NID != "" &
-           !(ResponseId %in% c(1894, 1840, 3549, 3183))]
+jp <- jp[Q11 == 1 & Q21 == 1 & Q22 != 1 & Q24 != 48 & !(ResponseId %in% c(1894, 1840, 3549, 3183))]
+stopifnot(all(jp$Finished %in% 0:1))
 jp[, id := .I]
 jp <- jp[F_1_1 != ""]
 ljp <- build(jp, function(t, k) paste0("F_", t, "_", k), function(t, p, k) paste0("F_", t, "_", p, "_", k), c("Q42", "Q45", "Q48"))
@@ -110,8 +118,11 @@ wjp <- wjp[!is.na(ch)]
 stopifnot(all(wjp$ch %in% 1:2))
 wjp[, choice := as.integer(ch == profile)][, ch := NULL]
 stopifnot(all(jp$Q23 %in% 1:2))
-cv <- jp[, .(id, cov_gender = c("male", "female")[Q23], cov_age_group_code = as.integer(Q22), cov_education_code = as.integer(Q26))]
+cv <- jp[, .(id, cov_gender = c("male", "female")[Q23], cov_age_group_code = as.integer(Q22), cov_education_code = as.integer(Q26),
+              cov_finished = as.integer(Finished), cov_panel_id_missing = as.integer(is.na(NID) | as.character(NID) == ""))]
 wjp <- merge(wjp, cv, by = "id")
+stopifnot(uniqueN(wjp$id) == 3460, wjp[cov_finished == 1 & cov_panel_id_missing == 0, uniqueN(id)] == 3331,
+          wjp[cov_finished == 1 & cov_panel_id_missing == 0, .N] == 19986)
 ## ---- checks + write ----
 for (nm in c("cn", "jp")) {
   w <- get(paste0("w", nm))

@@ -29,7 +29,8 @@
 ##          0 corresponding to no support and 100 corresponding to full support." - Policy A/B
 ##          (Q261_/Q267_/Q270_, con_rate_t_), 0-100.
 ##A task is kept when its choice or at least one rating was answered; choice stays NA on the few
-##tasks with ratings but no choice, and a profile row with neither choice nor rating is omitted. Respondents who never reached the conjoint (no G- values;
+##tasks with ratings but no choice, and a profile left unrated in such a task keeps its row with both
+##outcomes NA (#3536; US 3, CA 2, US2 3 tasks). Respondents who never reached the conjoint (no G- values;
 ##consent declined or broke off) are dropped. trial_page_sec is the Qualtrics page-submit time of
 ##that task (Q272/Q248/Q273; Q135/Q139/Q143), which the authors sum for their attention split.
 ##Covariates (export text where the export has text): cov_duration_sec (survey duration),
@@ -74,8 +75,7 @@ build <- function(d, k, ch, rt, pg, cov) {
     x }))))
   L[chans == FALSE, choice := NA_integer_]
   keep <- L[, .(k = any(chans) | any(!is.na(rating))), .(id, task)][k == TRUE, .(id, task)]
-  L <- L[keep, on = .(id, task)][, chans := NULL]
-  L <- L[!(is.na(choice) & is.na(rating))]
+  L <- L[keep, on = .(id, task)][, chans := NULL]   # task-level: a shown profile stays
   stopifnot(L[!is.na(choice), sum(choice), .(id, task)][, all(V1 == 1)], L[, uniqueN(is.na(choice)), .(id, task)][, all(V1 == 1)],
             L[, all(is.na(rating) | rating %in% 0:100)])
   ac <- grep("^attr_", names(L), value = TRUE); stopifnot(length(ac) == k, !anyNA(L[, ..ac]), all(L[, ..ac] != ""))

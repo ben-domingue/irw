@@ -15,8 +15,9 @@
 ##race/ethnicity, education, English proficiency, prior trips to the U.S.
 ##Outcome: rating = "preference for being admitted to the United States", 11-point scale,
 ##0 = Definitely not admit .. 10 = Definitely admit (higher = more favourable). Each profile
-##was rated separately; there is no choice question. 7 missing ratings are omitted (rows
-##with no outcome), so 27,863 rows rather than 27,870.
+##was rated separately; there is no choice question. 7 ratings are missing, each in a task whose
+##other profile was rated: those profiles keep their rows with rating NA (7 tasks; #3536), so all
+##27,870 rows are kept.
 ##Attribute levels are the text shown (age as the number). Values were fully and independently
 ##randomized with uniform probabilities (article). Attribute ROW ORDER was randomized per
 ##respondent and fixed across that respondent's 15 tasks (source F_<task>_<k> headers, checked
@@ -39,7 +40,7 @@
 ##1 = Yes). Dropped: the authors' derived ethnocentrism scale score (the item responses are
 ##not deposited). No survey weight, attention check or duration in the deposit (readme).
 ##Profiles were shown as the usual two-column conjoint table (article Figure 1). No task is
-##repeated (checked). The 7 omitted missing ratings leave 7 tasks with one profile.
+##repeated (checked).
 ##Count check: 929 respondents matches the article. Spot check: OLS of rating on the
 ##dichotomized attributes (as in the authors' Figure 2), clustered by id, gives no prior
 ##violation +1.473 (SE .071), college +0.665, good English +0.626, female +0.085; the deposited
@@ -67,7 +68,7 @@ d <- rbindlist(lapply(1:15, function(t) rbindlist(lapply(1:2, function(p) {
 }))))
 setcolorder(d, c("id", "task", "profile", "rating", paste0("attr_", nm), paste0("attrpos_", nm)))
 stopifnot(d[, all(rating %in% c(0:10, NA))], !anyNA(d[, paste0("attr_", nm), with = FALSE]))
-d <- d[!is.na(rating)]
+d <- d[d[, .I[any(!is.na(rating))], .(id, task)]$V1]   # task-level: a shown profile stays
 s <- as.data.table(read_dta(file.path(raw, "data_01_survey.dta")))
 vl <- function(v) { l <- attr(v, "labels"); x <- names(l)[match(as.numeric(v), l)]; stopifnot(all(is.na(v) | !is.na(x))); x }
 stopifnot(all(s$gender %in% 1:2), identical(vl(haven::labelled(1:2, attr(s$gender, "labels"))), c("Male", "Female")))

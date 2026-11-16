@@ -48,7 +48,8 @@
 ##  rating = "How likely is it that you will vote for the PARTY in the upcoming national elections if
 ##           candidate [1/2] becomes party president?" slider 0-100 per cent; (Don't know) = source
 ##           999 -> NA (source PRVOTE). Asked for each candidate; higher = more likely.
-##Rows with neither outcome are dropped (count printed).
+##Tasks with neither outcome on either profile are dropped (count printed); a profile with neither
+##outcome in an answered task keeps its row with both NA (29 tasks; #3536). 14,632 rows.
 ##Covariates (Stata value labels, English, as text): cov_gender (WOMAN 0 Man -> male, 1 Woman ->
 ##female; GENDER code 2, WOMAN missing -> other: the questionnaire's third option is "Other");
 ##cov_age (years), cov_age_group (REC_AGE bands), cov_education (EDUC labels, e.g. "Vocational
@@ -103,7 +104,7 @@ stopifnot(all(gend[is.na(wom)] == 2), all(d$rating %in% c(0:100, NA)),
           d[, .(s = sum(choice), na = sum(is.na(choice))), .(id, task)][, all((s == 1 & na == 0) | na == 2, na.rm = TRUE)],
           d[, .N, .(id, task)][, all(N == 2)], d[, uniqueN(cov_conjoint_party), id][, all(V1 == 1)])
 stopifnot(all(mapply(grepl, c("wohlhabenden", "Lehrerfamilie", "Arbeiterfamilie")[orig], d$attr_class_origin)))
-n0 <- nrow(d); d <- d[!(is.na(choice) & is.na(rating))]; cat("rows with no outcome dropped:", n0 - nrow(d), "\n")
+n0 <- nrow(d); d <- d[d[, .I[any(!is.na(choice) | !is.na(rating))], .(id, task)]$V1]; cat("rows with no outcome dropped:", n0 - nrow(d), "\n")
 print(d[!is.na(choice), .(mm = round(mean(choice), 3), .N), attr_cultural_consumption])
 setorder(d, id, task, profile)
 fwrite(d, file.path(out, "weisstanner_2025_symbolic_class.csv"))

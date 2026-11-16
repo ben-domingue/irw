@@ -22,7 +22,8 @@
 ##  rating = rating, 7-point Likert rating of each proposal (article: "ratings of each proposed policy,
 ##           irrespectively if chosen or not"); anchors not seen; chosen proposals average 4.7, others 3.0,
 ##           so higher = more support (inferred from the data, not stated).
-##Rows with neither outcome are dropped.
+##Tasks with neither outcome on either proposal are dropped. A proposal left unanswered in an answered
+##task keeps its row with both outcomes NA (410 tasks; #3536). 49,332 rows, 4,973 respondents.
 ##Attributes (level text = the article's English Table 1; respondents saw German):
 ##  attr_charging (charging 0-3), attr_subsidy (subsidy 0-3), attr_information (info 0 keep / 1 stricter /
 ##  2 abolish), attr_registration (registration 0 allowed / 1 forbid from 2020), attr_funding (financing
@@ -77,7 +78,7 @@ stopifnot(!anyNA(d[, .(attr_charging, attr_subsidy, attr_information, attr_regis
           d[attr_funding == "No additional funding", all(attr_charging %like% "^No new" & attr_subsidy == "No subsidy")],
           d[trial_funding_shown == 1 & attr_charging %like% "^No new" & attr_subsidy == "No subsidy", all(attr_funding == "No additional funding")],
           d[!is.na(choice), sum(choice), .(id, task)][, all(V1 == 1)], d[, all(rating %in% c(1:7, NA))])
-d <- d[!(is.na(choice) & is.na(rating))]
+d <- d[d[, .I[any(!is.na(choice) | !is.na(rating))], .(id, task)]$V1]   # task-level: a shown profile stays
 setorder(d, id, task, profile)
 fwrite(d, file.path(out, "bruckmann_2020_ev_policy.csv"))
 cat(nrow(d), "rows,", uniqueN(d$id), "respondents\n")

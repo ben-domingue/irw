@@ -43,8 +43,9 @@
 ##expenditure of the official's jurisdiction (with state and type these point to one government),
 ##job/income/fundraising-history items, free-text *_TEXT fields, merged state salary/fundraising
 ##contextual variables, authors' derived age/college/run_interest. No survey weight.
-##Rows with neither rating are omitted. Count check: 807 respondents saw the tasks; those with any
-##rating are kept: 745 respondents, 4,297 rows (687 rated all 6 scenarios). The PAP reports 734
+##Tasks with neither rating on either scenario are omitted; an unrated scenario in a rated task keeps
+##its row with both ratings NA (17 tasks; #3536). Count check: 807 respondents saw the tasks; those
+##with any rating are kept: 745 respondents, 4,314 rows (687 rated all 6 scenarios). The PAP reports 734
 ##responses collected Feb 23 - Apr 20, 2017 (the 02 script comment says "around ~700"); 745 vs 734
 ##not reconciled. Spot check (lm with respondent FE, interest rescaled 0-1, SE clustered by id):
 ##fundraising $300,000 vs $25,000 = -0.149 (SE 0.013), salary $80,000 vs $15,000 = +0.060.
@@ -91,7 +92,7 @@ d <- rbindlist(rows, fill = TRUE)
 ord <- unique(d[!is.na(attrpos_salary), .(rid, attrpos_salary, attrpos_fundraising, attrpos_opp_experience,
                                           attrpos_opp_advertising, attrpos_opp_ideology)])
 stopifnot(!anyDuplicated(ord$rid))
-d <- d[!(is.na(rating) & is.na(rating_winprob))]
+d <- d[d[, .I[any(!is.na(rating) | !is.na(rating_winprob))], .(rid, task)]$V1]   # task-level: a shown profile stays
 stopifnot(d[, all(!is.na(attr_salary) & !is.na(attr_fundraising) & !is.na(attr_opp_experience) &
                   !is.na(attr_opp_advertising) & !is.na(attr_opp_ideology))])
 x[, gsex := fifelse(Gender == "Male", "male", fifelse(Gender == "Female", "female", fifelse(Gender == "Other", "other", NA_character_)))]

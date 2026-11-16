@@ -14,8 +14,11 @@
 ##(do-file L71); all are kept here with cov_duration (the deposit's `duration`, unit not
 ##documented, presumably seconds). After that filter the counts match the article's N
 ##exactly: Brazil 1,910 x 14 = 26,740, France 1,693 x 14 = 23,702, US 1,624 x 14 = 22,736.
-##One table with cov_country: same six attributes, design and questions in all three
-##countries, and the authors estimate pooled ("all") as well as by-country models.
+##SPLIT BY COUNTRY (#3536, 2026-11-15): one table per country, adsera_2023_value_of_democracy_<iso2>
+##(br, fr, us), replacing the pooled adsera_2023_value_of_democracy (same six attributes and questions,
+##and the authors estimate pooled as well as by-country models), because the level text differs by
+##country: attr_ individual income, society income and inequality carry each country's own currency
+##amounts (R$ / EUR / $). Respondents: br 2,001, fr 2,003, us 2,010.
 ##Outcomes (both asked of every pair; SI Fig. S2):
 ##  choice: "We ask you to choose which society you consider to be the best one for you;
 ##    that is, the society in which you will be most content." Forced choice, no opt-out
@@ -86,4 +89,8 @@ stopifnot(all(s$democracy %in% 0:1), all(s$public_health %in% 0:1), all(s$effort
           d[, sum(choice), .(id, task)][, all(V1 == 1)], d[, .N, .(id, task)][, all(N == 2)], !anyNA(d$rating),
           d[, uniqueN(cov_country), id][, all(V1 == 1)])
 setorder(d, id, task, profile)
-fwrite(d, file.path(out, "adsera_2023_value_of_democracy.csv"))
+iso <- c(BR = "br", FR = "fr", US = "us")
+stopifnot(all(d$cov_country %in% names(iso)), all(names(iso) %in% d$cov_country))
+nw <- sum(vapply(names(iso), function(cn) { x <- d[cov_country == cn]
+  fwrite(x, file.path(out, paste0("adsera_2023_value_of_democracy_", iso[[cn]], ".csv"))); nrow(x) }, 0L))
+stopifnot(nw == nrow(d))

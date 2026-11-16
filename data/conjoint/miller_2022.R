@@ -36,8 +36,8 @@
 ##           so higher = more interest).
 ##Tasks with neither outcome are dropped (657 tasks), leaving 670 respondents (= the rows of
 ##resp_data.csv; paper N not checked); 18 tasks have rankings but no choice
-##(choice NA on both profiles) and 15 have a choice with one or both rankings missing; 1 profile
-##row with neither outcome (its task has no choice, the other profile is ranked) is dropped.
+##(choice NA on both profiles) and 15 have a choice with one or both rankings missing; a profile
+##with neither outcome in an answered task keeps its row with the outcomes NA (1 task; #3536).
 ##Covariates from resp_data.csv (all 670 kept respondents match), answer text as
 ##stored: cov_gender (Female/Male -> female/male), cov_age_group, cov_education, cov_race,
 ##cov_income, cov_ideology, cov_party_id (PID3), cov_party_id7 (PID7, the branched party
@@ -59,14 +59,13 @@ d <- r[, .(id, task = match(issue, c("ACR", "SCA")), profile = as.integer(mem), 
            attr_position = position, attr_cmte = cmte, attr_mov = mov, attr_pac = PAC, attr_cosponsor = cosponsor,
            attr_cmteldr = cmteldr, trial_issue = issue, trial_stage = stage, respondent)]
 d[, keep := any(!is.na(choice) | !is.na(rating)), .(id, task)]
-d <- d[keep == TRUE][, keep := NULL]
+d <- d[keep == TRUE][, keep := NULL]   # task-level: a shown profile stays
 stopifnot(d[, .(n = .N, s = sum(choice), na = sum(is.na(choice))), .(id, task)][, all(n == 2 & (na == 2 | (na == 0 & s == 1)))],
           all(d$rating %in% c(1:5, NA)), !anyNA(d[, .SD, .SDcols = patterns("^attr_")]),
           d[attr_cmte == "No", all(attr_cmteldr == "None")],
           d[attr_pty == "Democrat", !any(attr_cmteldr == "Subcommittee ranking member")],
           d[attr_pty == "Republican", !any(attr_cmteldr == "Subcommittee chair")],
           d[attr_cosponsor == "Yes", all(attr_position == "Support")])
-d <- d[!(is.na(choice) & is.na(rating))]   # 1 profile row: its task has no choice and only the other profile was ranked
 p <- fread(file.path(raw, "resp_data.csv"), na.strings = c("NA", ""))
 stopifnot(!anyDuplicated(p$ResponseID))
 yn <- function(x) as.integer(!is.na(x) & x != "No")

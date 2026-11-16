@@ -6639,6 +6639,88 @@ howe_2019_promotions_received,cov_marital_status,3,"Single, that is, never marri
 howe_2019_promotions_received,cov_marital_status,4,Separated (still legally married)
 howe_2019_promotions_received,cov_marital_status,5,Divorced
 howe_2019_promotions_received,cov_marital_status,6,Widowed
+huang_2016_bdi2,cov_birthplace,1,Canada
+huang_2016_bdi2,cov_birthplace,2,Egypt
+huang_2016_bdi2,cov_dep_status,0,Depressed
+huang_2016_bdi2,cov_dep_status,1,Healthy
+huang_2016_bdi2,cov_education,1,No Degree or Certificate
+huang_2016_bdi2,cov_education,2,Secondary
+huang_2016_bdi2,cov_education,3,Trades Certificate
+huang_2016_bdi2,cov_education,4,Other non-uni certificate/dipoloma
+huang_2016_bdi2,cov_education,5,University certificate below bachelor's
+huang_2016_bdi2,cov_education,6,Bachelor's Degree
+huang_2016_bdi2,cov_education,7,University certificate/diploma above bachelor's
+huang_2016_bdi2,cov_education,8,"Degree in Medicine, dentistry, optometry"
+huang_2016_bdi2,cov_education,9,Master's
+huang_2016_bdi2,cov_eligible,1,Eligible
+huang_2016_bdi2,cov_eligible,2,not-eligible
+huang_2016_bdi2,cov_first_language,1,English
+huang_2016_bdi2,cov_first_language,2,Arabic
+huang_2016_bdi2,cov_first_language,3,Other
+huang_2016_bdi2,cov_gender,1,Male
+huang_2016_bdi2,cov_gender,2,Female
+huang_2016_bdi2,cov_income,1,I'm Unemployed/No yearly income
+huang_2016_bdi2,cov_income,2,"10,000-30,000"
+huang_2016_bdi2,cov_income,3,"30,000-50,000"
+huang_2016_bdi2,cov_income,4,"50,000-75,000"
+huang_2016_bdi2,cov_income,5,"75,000 and over"
+huang_2016_bdi2,cov_income,6,None of the above
+huang_2016_bdi2,cov_marital,1,Single Never Married
+huang_2016_bdi2,cov_marital,2,Married
+huang_2016_bdi2,cov_marital,3,Seperated/Divorced
+huang_2016_bdi2,cov_marital,4,Widowed
+huang_2016_bdi2,cov_nationality,3,Canadian
+huang_2016_bdi2,cov_nationality,4,Egyptian
+huang_2016_bdi2,cov_primary_language,1,English
+huang_2016_bdi2,cov_primary_language,2,Arabic
+huang_2016_bdi2,cov_primary_language,3,Other
+huang_2016_bdi2,cov_religion,1,Christianity
+huang_2016_bdi2,cov_religion,2,Islam
+huang_2016_bdi2,cov_religion,4,Buddhism
+huang_2016_bdi2,cov_religion,5,Atheism
+huang_2016_bdi2,cov_religion,6,Agnosticism
+huang_2016_bdi2,cov_religion,7,Other
+huang_2016_pdsq_depression,cov_birthplace,1,Canada
+huang_2016_pdsq_depression,cov_birthplace,2,Egypt
+huang_2016_pdsq_depression,cov_dep_status,0,Depressed
+huang_2016_pdsq_depression,cov_dep_status,1,Healthy
+huang_2016_pdsq_depression,cov_education,1,No Degree or Certificate
+huang_2016_pdsq_depression,cov_education,2,Secondary
+huang_2016_pdsq_depression,cov_education,3,Trades Certificate
+huang_2016_pdsq_depression,cov_education,4,Other non-uni certificate/dipoloma
+huang_2016_pdsq_depression,cov_education,5,University certificate below bachelor's
+huang_2016_pdsq_depression,cov_education,6,Bachelor's Degree
+huang_2016_pdsq_depression,cov_education,7,University certificate/diploma above bachelor's
+huang_2016_pdsq_depression,cov_education,8,"Degree in Medicine, dentistry, optometry"
+huang_2016_pdsq_depression,cov_education,9,Master's
+huang_2016_pdsq_depression,cov_eligible,1,Eligible
+huang_2016_pdsq_depression,cov_eligible,2,not-eligible
+huang_2016_pdsq_depression,cov_first_language,1,English
+huang_2016_pdsq_depression,cov_first_language,2,Arabic
+huang_2016_pdsq_depression,cov_first_language,3,Other
+huang_2016_pdsq_depression,cov_gender,1,Male
+huang_2016_pdsq_depression,cov_gender,2,Female
+huang_2016_pdsq_depression,cov_income,1,I'm Unemployed/No yearly income
+huang_2016_pdsq_depression,cov_income,2,"10,000-30,000"
+huang_2016_pdsq_depression,cov_income,3,"30,000-50,000"
+huang_2016_pdsq_depression,cov_income,4,"50,000-75,000"
+huang_2016_pdsq_depression,cov_income,5,"75,000 and over"
+huang_2016_pdsq_depression,cov_income,6,None of the above
+huang_2016_pdsq_depression,cov_marital,1,Single Never Married
+huang_2016_pdsq_depression,cov_marital,2,Married
+huang_2016_pdsq_depression,cov_marital,3,Seperated/Divorced
+huang_2016_pdsq_depression,cov_marital,4,Widowed
+huang_2016_pdsq_depression,cov_nationality,3,Canadian
+huang_2016_pdsq_depression,cov_nationality,4,Egyptian
+huang_2016_pdsq_depression,cov_primary_language,1,English
+huang_2016_pdsq_depression,cov_primary_language,2,Arabic
+huang_2016_pdsq_depression,cov_primary_language,3,Other
+huang_2016_pdsq_depression,cov_religion,1,Christianity
+huang_2016_pdsq_depression,cov_religion,2,Islam
+huang_2016_pdsq_depression,cov_religion,4,Buddhism
+huang_2016_pdsq_depression,cov_religion,5,Atheism
+huang_2016_pdsq_depression,cov_religion,6,Agnosticism
+huang_2016_pdsq_depression,cov_religion,7,Other
 hung_2026_fomo,cov_grade,1,Freshman
 hung_2026_fomo,cov_grade,2,Sophomore
 hung_2026_fomo,cov_grade,3,Junior

@@ -1,12 +1,28 @@
 table,construct_name,instrument,language,text_source,n_items,n_participants,k,n_mapped,n_near,verdict,basis,note
-bitew_2020_self_efficacy,General Self-Efficacy Scale,"General Self-Efficacy Scale (GSE), 10-item",amh,translated_substitute,9,690,10,10,0,MATCH,supplied,
-eammi_grahe_2018_efficacy,General Self-Efficacy,General Self-Efficacy,eng,none_recorded,11,3180,10,10,0,MATCH,supplied,
+bitew_2020_self_efficacy,General Self-Efficacy Scale,"General Self-Efficacy Scale (GSE), 10-item",amh,translated_substitute,10,690,10,10,0,MATCH,supplied,
+eammi_grahe_2018_efficacy,General Self-Efficacy,General Self-Efficacy,eng,none_recorded,10,3180,10,10,0,MATCH,supplied,
+lam_2015_gses,General self-efficacy,"General Self-Efficacy Scale (GSE), Schwarzer & Jerusalem (1995); administered in its Chinese version (CGSES), English original shown",chi,none_recorded,10,739,10,10,0,MATCH,supplied,
 liu_2018_gse,NA,General Self-Efficacy Scale (GSES),chi,translated_substitute,10,208,10,10,0,MATCH,supplied,
 mhscdc_fried_2020_se,NA,General Self-Efficacy Scale (Schwarzer & Jerusalem 1995),missing description,study_materials,10,80,10,10,0,MATCH,wording,
+ali_2026_gses,General Self-Efficacy Scale (GSES; Schwarzer & Jerusalem),,NA,none_recorded,10,120,10,0,0,NAME_ONLY,name,no item text
+guzmanmuzante_2025_gse,General self-efficacy,,spa,none_recorded,10,200,10,0,0,NAME_ONLY,name,no item text
+heekerens_2025_gse,general self efficacy,,ger,none_recorded,3,243,10,0,0,NAME_ONLY,name,no item text
+kermen_2019_self_efficacy,General Self-Efficacy Scale,,tur,none_recorded,17,334,10,0,0,NAME_ONLY,name,no item text
 kermen_2022_self_efficacy,NA,"Genel Özyeterlilik Ölçeği (General Self-Efficacy Scale, Sherer et al. 1982; Turkish form, Yıldırım & İlhan 2010)",tur,canonical_instrument,17,325,10,0,0,NAME_ONLY,name,item text not in English
+kolanska_stronka_2026_gses,General Self-Efficacy Scale (GSES),,pol,none_recorded,10,375,10,0,0,NAME_ONLY,name,no item text
+li_2023_self_efficacy,"General Self-Efficacy Scale (GSE), 10 items","General Self-Efficacy Scale (GSE), Schwarzer & Jerusalem (1995), Chinese version",chi,none_recorded,10,990,10,0,0,NAME_ONLY,name,item text not in English
+lochmannova_2026_self_efficacy,General Self-Efficacy Scale (GSE),,cze,none_recorded,10,918,10,0,0,NAME_ONLY,name,no item text
 lorenz_2016_efficacy1,NA,"Skala zur Allgemeinen Selbstwirksamkeitserwartung (SWE) / General Self-Efficacy Scale (GSE), 10 items",ger,canonical_instrument,10,321,10,0,0,NAME_ONLY,name,item text not in English
+luttenberger_2021_gse,General self-efficacy (SWE),,ger,none_recorded,10,156,10,0,0,NAME_ONLY,name,no item text
+makkiyah_2023_gse,General Self-Efficacy Scale (GSE),General Self-Efficacy Scale (10 items),ind,none_recorded,10,211,10,0,0,NAME_ONLY,name,item text not in English
+mendezlopez_2023_gses12,General self-efficacy (GSES-12),,spa,none_recorded,12,391,10,0,0,NAME_ONLY,name,no item text
+mutuyimana_2026_gse,General self-efficacy,,"eng, kin, swa",none_recorded,9,1208,10,0,0,NAME_ONLY,name,no item text
+oanh_2024_gses,General Self-Efficacy Scale (GSES),,NA,none_recorded,10,173,10,0,0,NAME_ONLY,name,no item text
+pugliese_2023_gses,General Self-Efficacy Scale (GSES),,eng,none_recorded,10,2813,10,0,0,NAME_ONLY,name,no item text
 santos_2018_gse,NA,,eng,unknown,10,306,10,0,0,NAME_ONLY,name,no item text
+song_2026_self_efficacy,General self-efficacy,,chi,none_recorded,10,519,10,0,0,NAME_ONLY,name,no item text
+sun_2018_gse,Generalized self-efficacy,,chi,none_recorded,10,309,10,0,0,NAME_ONLY,name,no item text
 ye_2025_q25_scale,NA,"General Self-Efficacy Scale (GSE-10), Chinese adaptation",chi,study_materials,10,4513,10,0,0,NAME_ONLY,name,item text not in English
 zautra_2015_caug,NA,"General Self-Efficacy Scale (GSES), Spanish version",spa,study_materials,10,349,10,0,0,NAME_ONLY,name,item text not in English
-jeilani_2024_self_efficacy,Self-efficacy scale (SEF),General Self-Efficacy Scale (GSE),NA,study_materials,5,663,10,5,0,PARTIAL,,first item: i am confident that i could deal efficiently with unexpected events
+jeilani_2024_self_efficacy,Self-efficacy scale (SEF),General Self-Efficacy Scale (GSE),NA,study_materials,7,663,10,5,0,PARTIAL,,first item: i am confident that i could deal efficiently with unexpected events
 soderberg_2024_general_selfefficacy,NA,Short General Self-Efficacy scale (start-up survey),NA,none_recorded,5,300,10,5,0,PARTIAL,,first item: i can remain calm when facing difficulties because i can rely on my coping abili

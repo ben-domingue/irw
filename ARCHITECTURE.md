@@ -306,10 +306,9 @@ Two things about this are easy to get wrong:
 
 **Everything scheduled is a GitHub Action.** There is no crontab anywhere, on
 any machine. `.github/workflows/metadata-pipeline.yml` runs Mondays,
-Wednesdays and Fridays at 13:00 UTC (Monday always; the other two when a
-core-shard table has appeared or disappeared since the last run, or when the
-rolling refresh in `01_metadata.R` has fallen behind; `scripts/pipeline_gate.py`
-decides): it regenerates the metadata CSVs, runs `audit_tables.R` (which cross-checks
+Wednesdays and Fridays at 13:00 UTC, every slot, ungated -- each run also
+re-checks 400 existing tables in `01_metadata.R`'s rolling refresh, so there is
+always work: it regenerates the metadata CSVs, runs `audit_tables.R` (which cross-checks
 table names across the metadata, tags and biblio outputs against the live
 Redivis datasets), and opens a **pull request** with the diff. It does not open
 an issue and does not auto-merge — there, the review is the product.

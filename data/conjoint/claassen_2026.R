@@ -29,9 +29,11 @@
 ##  journalists) and the other a pro-democratic level (2, 4 or 6: keep polling stations; respect rulings; do not prosecute), which candidate
 ##  is anti-democratic being a coin flip. Verified here that every task has exactly one odd and one even code.
 ##  restrictions = yes, level_weights = nonuniform.
-##Countries pooled in ONE table (cov_country US/KR/PL) as the authors do (their `pool` file): the attribute set and the English master
-##text are shared; the party attribute holds the country's own parties (so party levels differ by country) and the wording of the
-##executive differs. Language: US English, South Korea Korean, Poland Polish; label_language is the English master text.
+##SPLIT BY COUNTRY (#3536, 2026-11-15): one table per country, claassen_2026_democratic_backsliding_<iso2> (kr, us, pl), replacing
+##the pooled claassen_2026_democratic_backsliding (the authors pool the countries in their `pool` file), because the level text and
+##design differ by country: attr_party holds each country's own parties (two in the US and South Korea, four in Poland, with
+##country-specific weights), and attr_system_change names the executive ("president" vs "prime minister"). Respondents: kr 2,028, us 2,016, pl 2,010.
+##Language: US English, South Korea Korean, Poland Polish; label_language is the English master text.
 ##Samples: online panel survey, fielded 2025 (the files date from October 2025). Exclusion: the authors drop "speedsters" (duration <
 ##40% of the country median) and their pooled analytic file has 5,945 respondents (US 1,979, KR 2,000, PL 1,966) against 6,054 in the
 ##three files (US 2,016, KR 2,028, PL 2,010): 109 dropped. Applying the stated rule to the files gives 103 (33, 27, 43), so 6 further
@@ -93,4 +95,8 @@ t[, sys_code := NULL]
 t[, id := match(src, unique(src))][, src := NULL]
 setcolorder(t, c("id", "task", "profile", "choice"))
 setorder(t, id, task, profile)
-fwrite(t, file.path(out, "claassen_2026_democratic_backsliding.csv"))
+iso <- c(KR = "kr", US = "us", PL = "pl")
+stopifnot(all(t$cov_country %in% names(iso)), all(names(iso) %in% t$cov_country))
+nw <- sum(vapply(names(iso), function(cn) { x <- t[cov_country == cn]
+  fwrite(x, file.path(out, paste0("claassen_2026_democratic_backsliding_", iso[[cn]], ".csv"))); nrow(x) }, 0L))
+stopifnot(nw == nrow(t))

@@ -8,8 +8,11 @@
 ##
 ##YouGov matched web panel, US, 25-31 January 2024; 2,030 raw respondents, each assigned to ONE of six vignettes (columns B1-B6; exactly one
 ##is non-missing per respondent: Split_Sample 1-6). The authors analyse only attentive partisans (QAttention == 4; strong or not-very-strong
-##Democrats/Republicans and leaners): 1,521 respondents, and this table keeps exactly that sample (898 Democrats, 623 Republicans), because
-##the inparty/outparty tokens of the vignette are filled from the respondent's party and are undefined for non-partisans.
+##Democrats/Republicans and leaners): 1,521 respondents (898 Democrats, 623 Republicans). Under the IRW conjoint ruling (Ben 2026-11-10: no
+##author sample exclusions) this table keeps all 1,607 partisans, attentive or not; the authors' analysis sample excludes respondents who
+##failed the attention check; reproduce it with cov_attention_pass == 1 (1,521). The 423 non-partisans (pure independents and those leaning
+##to neither party) stay out: the inparty/outparty tokens of vignettes B3-B6 are filled from the respondent's party, and no source says what
+##a non-partisan saw there, so their party-condition level is undefined.
 ##Attributes (codebook B1-B6):
 ##  party condition: B1, B2 = no party labels (control: "(not shown)"); B3, B4 = the respondent's own-party people beat disruptors of the
 ##    opposing party; B5, B6 = opposing-party people beat disruptors of the respondent's own party ("Inparty"/"Outparty" in the authors' code is the
@@ -21,9 +24,11 @@
 ##Covariates: cov_age; cov_party_id (the authors' party family from pid3 and the leaner item A3: Democrat or Republican, leaners included);
 ##cov_partisan_strength (Strong / Moderate, authors' recode from A2 and A3); cov_gender_code, cov_race_code, cov_region_code, cov_income_code (the codes
 ##have no value labels in the deposit: gender order Male, Female, Other is the codebook's list but not a stated mapping); cov_survey_weight (the file's
-##weight, which the authors do NOT use: "Analyses are unweighted"); cov_attention_pass (QAttention == 4 for all kept rows, so omitted). Dropped: timings,
+##weight, which the authors do NOT use: "Analyses are unweighted"); cov_attention_pass (QAttention "Please select the number four below.": 1 = 4,
+##0 = any other answer; 86 partisans failed). Dropped: timings,
 ##the dark-personality item (C1), parent items, marital status.
-##Count check: 1,521 = codebook analysis sample; cell sizes No Party 498, Inparty 501, Outparty 522; Mild 744, Severe 777 (checked by stopifnot).
+##Count check: 1,521 = codebook analysis sample (cov_attention_pass == 1); its cell sizes No Party 498, Inparty 501, Outparty 522; Mild 744,
+##Severe 777 (checked by stopifnot).
 library(data.table); library(haven)
 a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]
 d <- as.data.table(read_sav(list.files(raw, pattern = "\\.sav$", full.names = TRUE)[1]))
@@ -33,16 +38,18 @@ d[, arm := max.col(!is.na(as.matrix(d[, ..Bc])), ties.method = "first")]
 d[, response := as.numeric(fcoalesce(B1, B2, B3, B4, B5, B6))]
 d[, party := fcase(pid3 %in% 1:2, c("Democrat", "Republican")[pid3], pid3 == 3 & A3 == 1, "Democrat", pid3 == 3 & A3 == 2, "Republican")]
 d[, strength := fcase(pid3 %in% 1:2 & A2 == 1, "Strong", pid3 %in% 1:2 & A2 == 2, "Moderate", pid3 == 3 & A3 %in% 1:2, "Moderate")]
-k <- d[!is.na(strength) & QAttention == 4 & !is.na(response)]
-stopifnot(nrow(k) == 1521, k[, sum(party == "Democrat")] == 898, all(k$response %in% 1:7))
+k <- d[!is.na(strength) & !is.na(response)]
+stopifnot(nrow(k) == 1607, !anyNA(k$QAttention), k[QAttention == 4, .N] == 1521, k[QAttention == 4, sum(party == "Democrat")] == 898,
+          all(k$response %in% 1:7))
+ka <- k[QAttention == 4]
 cond <- c("(not shown)", "(not shown)", "own party attendees beat disruptors of the opposing party", "own party attendees beat disruptors of the opposing party",
           "opposing party attendees beat disruptors of the respondent's own party", "opposing party attendees beat disruptors of the respondent's own party")[k$arm]
 sev <- rep(c("mild: the disruptors shout and scream", "severe: the disruptors physically block the entrance to the venue"), 3)[k$arm]
-stopifnot(table(c("No Party", "No Party", "Outparty", "Outparty", "Inparty", "Inparty")[k$arm]) [c("No Party", "Inparty", "Outparty")] == c(498, 501, 522),
-          table(rep(c("Mild", "Severe"), 3)[k$arm]) == c(744, 777))
+stopifnot(table(c("No Party", "No Party", "Outparty", "Outparty", "Inparty", "Inparty")[ka$arm]) [c("No Party", "Inparty", "Outparty")] == c(498, 501, 522),
+          table(rep(c("Mild", "Severe"), 3)[ka$arm]) == c(744, 777))
 r <- data.table(id = seq_len(nrow(k)), task = 1L, profile = 1L, rating = as.integer(k$response), attr_party_condition = cond, attr_disruption_severity = sev,
   cov_age = as.integer(k$age), cov_party_id = k$party, cov_partisan_strength = k$strength, cov_gender_code = as.integer(k$Q_Gender),
   cov_race_code = as.integer(k$race), cov_region_code = as.integer(k$region), cov_income_code = as.integer(k$profile_gross_household),
-  cov_survey_weight = as.numeric(k$weight))
+  cov_survey_weight = as.numeric(k$weight), cov_attention_pass = as.integer(k$QAttention == 4))
 print(r[, .(n = .N, mean = mean(rating)), .(attr_party_condition, attr_disruption_severity)])
 fwrite(r, file.path(out, "berntzen_2025_political_violence.csv")); cat("rows", nrow(r), "\n")

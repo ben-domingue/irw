@@ -30,6 +30,14 @@ class ConjointTest(unittest.TestCase):
     def test_valid_table_has_no_errors(self):
         self.assertEqual(checks(table(), "error"), set())
 
+    def test_numeric_codes_warn_unless_suffixed_code(self):
+        """#3474: codes with no source for the text live in attr_<name>_code, unwarned."""
+        codes = [1, 2, 3, 1, 2, 3, 1, 2]
+        self.assertIn("conj_attributes", checks(table(attr_price=codes), "warn"))
+        df = table(attr_price_code=codes)
+        self.assertNotIn("conj_attributes", checks(df, "warn"))
+        self.assertEqual(checks(df, "error"), set())
+
     def test_missing_profile_is_an_error(self):
         self.assertIn("conj_required_columns", checks(table().drop(columns="profile"), "error"))
 
@@ -64,6 +72,18 @@ class ConjointTest(unittest.TestCase):
         df = table()
         df.loc[(df.id == 1) & (df.task == 1) & (df.profile == 1), "rating"] = None
         self.assertEqual(checks(df, "error"), set())
+
+    def test_a_shown_profile_with_no_answer_in_an_answered_task_is_fine(self):
+        # #3536: the unanswered profile keeps its row, all outcomes NA.
+        df = table(choice=None)
+        df.loc[(df.id == 1) & (df.task == 1) & (df.profile == 2), "rating"] = None
+        self.assertEqual(checks(df, "error"), set())
+        self.assertNotIn("conj_outcomes", checks(df, "warn"))
+
+    def test_a_task_with_no_answer_at_all_warns(self):
+        df = table(choice=None)
+        df.loc[(df.id == 1) & (df.task == 1), "rating"] = None
+        self.assertIn("conj_outcomes", checks(df, "warn"))
 
     def test_no_chosen_profile_is_an_error_when_the_design_had_no_opt_out(self):
         df = table()
