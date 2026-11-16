@@ -31,7 +31,9 @@
 ##    stored values run 0-10 (0 is the most frequent), so the range is 0-10 despite the label;
 ##    the code calls it "rating of impression toward immigrants" (L1251); anchors not in the
 ##    deposit. -99 Refuse to answer -> NA.
-##  Rows where both outcomes are missing are dropped.
+##  Tasks where both outcomes are missing on both profiles are dropped; a profile with neither in an
+##  answered task keeps its row with both NA (13 tasks in the volunteer table, none in the
+##  probability table; #3536). Volunteer 14,314 rows, probability 2,038 rows.
 ##Restrictions OBSERVED: nationality "mainland Chinese citizens only" never appears with quota
 ##40,000/year (0 of 16,360 rows); the authors model Nationality*Quota (code L177-181). Other pairs
 ##all occur. Hence the unequal shares of those two attributes.
@@ -72,7 +74,7 @@ stopifnot(all(v$DM1 %in% c("1", "2", "8881", "-99")), all(v$PanelMemberType %in%
 stopifnot(d[!is.na(choice), .(s = sum(choice), n = .N), .(id, task)][, all(s == 1 & n == 2)])
 stopifnot(d[, uniqueN(is.na(choice)), .(id, task)][, all(V1 == 1)], all(d$rating %in% c(0:10, NA)))
 stopifnot(nrow(d[attr_nationality == "只接受中國內地居民申請" & attr_quota == "每年40,000人"]) == 0)
-d <- d[!(is.na(choice) & is.na(rating))]
+d <- d[d[, .I[any(!is.na(choice) | !is.na(rating))], .(id, task)]$V1]   # task-level: a shown profile stays
 setorder(d, id, task, profile)
 fwrite(d[panel == "2"][, panel := NULL], file.path(out, "lee_2024_skilled_immig_volunteer.csv"))
 fwrite(d[panel == "1"][, panel := NULL], file.path(out, "lee_2024_skilled_immig_probability.csv"))

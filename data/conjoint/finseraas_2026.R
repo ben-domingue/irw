@@ -37,7 +37,9 @@
 ##Outcomes (same tasks):
 ##  choice = selected: which of the two candidates they would prefer if they had to vote for one
 ##    of them. Forced, no opt-out. Norway: 228 of 6,380 tasks have no choice (choice NA, rows kept
-##    when a rating is present).
+##    when a rating is present). Norway tasks with no outcome on either profile are dropped; a
+##    profile with none in an answered task keeps its row with all outcomes NA (16 tasks; #3536);
+##    12,676 rows.
 ##  rating_represent = represented: to what extent the candidate would represent "someone like
 ##    you", 1 (not at all) to 7 (to a very great extent); higher = more represented.
 ##  rating_leftright = rightrating: placement of the candidate from 1 (far left) to 7 (far right).
@@ -110,7 +112,7 @@ dn[, `:=`(cov_gender = c("female", "male")[as.integer(n$male) + 1L], cov_working
           cov_vote_conservative = as.integer(n$hvoter), cov_university = as.integer(zap_labels(n$uniedu)),
           cov_leftright_scaled = round(as.numeric(n$rightscale), 4))]
 stopifnot(!anyNA(dn[, .(attr_immigration, attr_climate, attr_abortion)]), dn[, .N, .(id, task, profile)][, all(N == 1)])
-dn <- dn[!(is.na(choice) & is.na(rating_represent) & is.na(rating_leftright))]
+dn <- dn[dn[, .I[any(!is.na(choice) | !is.na(rating_represent) | !is.na(rating_leftright))], .(id, task)]$V1]   # task-level: a shown profile stays
 stopifnot(dn[!is.na(choice), sum(choice), .(id, task)][, all(V1 == 1)], uniqueN(dn$id) == 3171)
 setorder(dn, id, task, profile)
 fwrite(dn, file.path(out, "finseraas_2026_group_appeals_norway.csv"))

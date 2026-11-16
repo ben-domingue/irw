@@ -20,8 +20,9 @@
 ##           "muy probable," ¿qué tan probable es que usted vote por el/la candidato/a A [B]?"
 ##           1 very unlikely ... 5 very likely; 832 profile ratings NA. The author's 0-1
 ##           rescaling (selected_Rating_rescaled) is dropped.
-##  Rows where both are missing (787) are omitted: 1,528 respondents remain (61 answered no
-##  task) and 90 of them have fewer than 4 tasks. Choice rows: 11,224 (= the author's FC data).
+##  Tasks where both are missing on both profiles (768 rows) are omitted; a profile with neither
+##  in an answered task keeps its row with both NA (19 tasks; #3536). 11,944 rows: 1,528
+##  respondents remain (61 answered no task) and 90 of them have fewer than 4 tasks. Choice rows: 11,224 (= the author's FC data).
 ##Attributes: the data file stores shortened English translations; this table stores the
 ##Spanish level text "presented to respondents" from the codebook (mapping English -> Spanish
 ##is the codebook's own table). Where the codebook writes a gendered form as "/a" (e.g.
@@ -83,6 +84,6 @@ d[, `:=`(cov_gender = c("male", "female", "other")[match(x$ResGender, 1:3)], cov
          cov_ideology = as.integer(x$Ideology), cov_economic = as.integer(x$Economic),
          cov_peace_vote_2016 = as.integer(x$PeaceAgreementVote))]
 stopifnot(d[!is.na(choice), sum(choice), .(id, task)][, all(V1 == 1)], d[, uniqueN(is.na(choice)), .(id, task)][, all(V1 == 1)])
-d <- d[!(is.na(choice) & is.na(rating))]
+d <- d[d[, .I[any(!is.na(choice) | !is.na(rating))], .(id, task)]$V1]   # task-level: a shown profile stays
 setorder(d, id, task, profile)
 fwrite(d, file.path(out, "levy_2022_perpetrator_candidates.csv"))

@@ -35,7 +35,9 @@
 ##  rating = perceived effectiveness of each mission, 1 = Not at all effective, 2 = Not very
 ##           effective, 3 = Somewhat effective, 4 = Effective, 5 = Extremely effective
 ##           (labels from replication_code.r). UK code 8 (non-substantive) -> NA.
-##Rows with neither outcome are omitted. Respondent IDs are already sequential integers.
+##Tasks with neither outcome on either profile are omitted; a profile with neither in an answered
+##task keeps its row with both NA (Japan 10 tasks, UK 1; #3536). Japan 12,044 rows, UK 7,752 rows.
+##Respondent IDs are already sequential integers.
 ##No covariates or weights are in XKSZCU (ZI4PBD has them, including postcode district and
 ##constituency, which would need stripping; not merged here).
 library(data.table)
@@ -55,7 +57,7 @@ build <- function(w, nt, chv, rtv) {
     for (k in 1:5) x[, paste0("attr_", names(lv)[k]) := lv[[k]][w[[sprintf("src_%d_attribute%d_%d", t, k, p)]]]]
     x
   }))))
-  d <- d[!(is.na(choice) & is.na(rating))]
+  d <- d[d[, .I[any(!is.na(choice) | !is.na(rating))], .(id, task)]$V1]   # task-level: a shown profile stays
   stopifnot(d[!is.na(choice), sum(choice), .(id, task)][, all(V1 == 1)])
   setorder(d, id, task, profile); d
 }

@@ -25,7 +25,8 @@
 ##Outcomes (wording not in deposit): choice = Y (one candidate of the pair chosen; 339 of 3,393
 ##tasks have no choice recorded and keep choice NA where a rating exists); rating = scale, a
 ##1-7 rating of each candidate (direction inferred only from its association with choice: mean
-##rating of chosen profiles 4.8 vs 3.3). Rows with neither outcome are dropped.
+##rating of chosen profiles 4.8 vs 3.3). Tasks with neither outcome on either profile are dropped;
+##a profile with neither in an answered task keeps its row with both NA (11 tasks; #3536). 6,776 rows.
 ##Covariates as deposited (author recodes, no codebook): cov_pid (PID: Conservative, Liberal,
 ##NDP, Non-partisan), cov_male (0/1), cov_post_secondary (0/1), cov_citizen (0/1),
 ##cov_province_code (1-13, no labels), cov_income (as stored). cov_assoc_* (cc1..he2) are the
@@ -59,6 +60,6 @@ d <- s[, .(id = as.integer(id), task = as.integer(task), profile = as.integer(pr
            cov_assoc_cost_1 = co1, cov_assoc_cost_2 = co2, cov_assoc_deficit_1 = de1, cov_assoc_deficit_2 = de2,
            cov_assoc_housing_1 = ho1, cov_assoc_housing_2 = ho2, cov_assoc_healthcare_1 = he1, cov_assoc_healthcare_2 = he2)]
 for (v in grep("^attr_", names(d), value = TRUE)) stopifnot(!anyNA(d[[v]]), d[, uniqueN(get(v))] %in% 2:3)
-d <- d[!(is.na(choice) & is.na(rating))]
+d <- d[d[, .I[any(!is.na(choice) | !is.na(rating))], .(id, task)]$V1]   # task-level: a shown profile stays
 setorder(d, id, task, profile)
 fwrite(d, file.path(out, "treger_2026_party_or_policy.csv"))

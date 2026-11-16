@@ -57,7 +57,8 @@
 ##since it is part of the design the paper conditions on.
 ##Dropped: all *SD standardized copies, conjoint_reverse, derived dummies (higher_education,
 ##catholic, WW2, concern_job, good_econ_cont, empathyscore_mean: authors' derived scales).
-##Rows with no outcome at all are omitted.
+##Tasks with no outcome on either profile are omitted; a profile with no outcome in an answered task
+##keeps its row with all outcomes NA (109 tasks; #3536). 28,764 rows, 2,476 respondents.
 library(haven); library(data.table)
 a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]
 k <- read_dta(file.path(raw, "data_conjoint.dta"))
@@ -91,6 +92,7 @@ d[, `:=`(cov_gender = c("male", "female")[z$Q1_Female + 1L], cov_age = as.intege
          cov_jobs_threat = as.integer(ifelse(z$Q51_Jobs %in% 0:1, z$Q51_Jobs, NA)),
          cov_survey_weight = as.numeric(z$Q0_Weights))]
 oc <- grep("^(choice|rating)", names(d), value = TRUE)
-d <- d[rowSums(!is.na(d[, ..oc])) > 0]
+d[, ans := rowSums(!is.na(.SD)) > 0, .SDcols = oc]
+d <- d[d[, .I[any(ans)], .(id, task)]$V1][, ans := NULL]   # task-level: a shown profile stays
 setorder(d, id, task, profile)
 fwrite(d, file.path(out, "charnysh_2026_refugee_assistance.csv"))
