@@ -19,7 +19,9 @@
 ##Outcome rating = the block's single acceptance item, stored raw 1-5. In the authors' code
 ##out = 6 - raw and their figure axis runs "Not Acceptance <- -> Acceptance", so RAW 1 = most
 ##accepting, 5 = least (LOWER = more favourable in this table). Item wording is not in the codebook
-##(paraphrase: how acceptable the decision is to the respondent).
+##(paraphrase: how acceptable the decision is to the respondent). Raw 6 (39 respondents) is not labelled in the
+##codebook and the authors' code sends it to NA (case_when ... TRUE ~ NA), so it is NA here and those rows,
+##having no outcome, are dropped (2026-11-15; until then 6 was stored, outside the 1-5 scale).
 ##Covariates: cov_gender (codebook: Male = 1, Female = 2), cov_age (18-79), cov_education (Q2.1,
 ##codebook text: Middle school / High school / Junior college, technical college, vocational school /
 ##Four-year university / Graduate school; 6 "Prefer not to say" -> NA), cov_income_band (Q2.2: 21
@@ -30,7 +32,7 @@
 ##the respondent's own arm; 1 = both correct, 1,013 of 2,398; the answer options are not labelled in
 ##the codebook, the correct codes come from the authors' code).
 ##No weight; no restrictions (between-subject, all 8 cells filled 279-331). Dropped: nothing else.
-##N: 2,398 respondents (the authors' code divides by 2,398).
+##N: 2,359 respondents with an outcome, of the 2,398 in the file (the authors' code divides by 2,398).
 library(data.table)
 a <- commandArgs(TRUE); raw <- a[1]; out <- a[2]
 k <- fread(file.path(raw, "data.tab"))
@@ -49,6 +51,8 @@ d[, cov_know_term := as.integer(k$Q7.2)]; d[, cov_know_turnout := as.integer(k$Q
 ok <- ((g <= 4 & k$Q17.1 == 1) | (g > 4 & k$Q17.1 == 4)) & k$Q17.2 == c(4, 1, 2, 3)[(g - 1L) %% 4L + 1L]
 d[, cov_attention_pass := as.integer(!is.na(ok) & ok)]
 cat("attention pass:", sum(d$cov_attention_pass), "\n")
-stopifnot(!anyNA(d$rating), d[, .N, .(attr_decision_model, attr_policy)][, .N] == 8)
+stopifnot(!anyNA(d$rating), all(d$rating %in% 1:6), sum(d$rating == 6L) == 39L)
+d <- d[rating != 6L]
+stopifnot(nrow(d) == 2359L, d[, .N, .(attr_decision_model, attr_policy)][, .N] == 8)
 setorder(d, id, task, profile)
 fwrite(d, file.path(out, "yamaguchi_2024_lottocracy.csv"))
