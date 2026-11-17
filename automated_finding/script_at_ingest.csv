@@ -43,6 +43,7 @@ pollack_2012_estress9,cov,data/covariance/batch_rpackages2.R,2026-11-17
 reise_2007_health16,cov,data/covariance/pilot_rpackages.R,2026-11-17
 roorda_2011_engagement,cov,data/covariance/batch_metasem.R,2026-11-17
 scalco_2017_tpborganic,cov,data/covariance/batch_metasem.R,2026-11-17
+scherhag_2026_hexacod7,cov,data/covariance/zenodo_scherhag2026_hexacod.py,2026-11-17
 smith_1983_ability6,cov,data/covariance/pilot_rpackages.R,2026-11-17
 thurstone_1941_ability9,cov,data/covariance/pilot_rpackages.R,2026-11-17
 tucker_1958_ability9,cov,data/covariance/pilot_rpackages.R,2026-11-17
