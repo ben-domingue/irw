@@ -66,6 +66,8 @@
 #   itemtext_status  one string, first match wins:
 #                      withdrawn   -- an irw_text* withdrawal (kind=whole)
 #                      shipped     -- itemtext_shipped
+#                      blocked     -- in itemtext/blocked_wording_tables.csv
+#                                     (wording may not ship; #3560)
 #                      done_not_shipped -- queue_state says done, nothing shipped:
 #                                     the silent-backlog shape, reported on its own
 #                      blocked / excluded / failed -- queue_state.csv status
@@ -193,6 +195,11 @@ notes    <- read_csv_or_null(file.path(dir_path, "data_notes.csv"))
 itemtext <- read_csv_or_null(file.path(dir_path, "itemtext_metadata.csv"))
 queue    <- read_csv_or_null(file.path(itemtext_dir, "extraction_batches", "queue_state.csv"))
 wd       <- read_csv_or_null(file.path(itemtext_dir, "withdrawals.csv"))
+## irw_text* withdrawals are keyed `<table>__items`; match on the response table
+if (!is.null(wd)) wd$table <- sub("__items$", "", key(wd$table))
+## tables whose wording may not ship (register block/hold, rights withdrawals;
+## #3560): never a backlog, whatever queue_state.csv says
+bw       <- read_csv_or_null(file.path(itemtext_dir, "blocked_wording_tables.csv"))
 
 TAG_GAP_COLS <- c("age range", "sample", "measurement tool", "item format", "primary language(s)")
 tag_col_name <- function(cn) paste0("tag_", gsub("[^a-z]+", "_", gsub("\\(s\\)", "", cn)))
@@ -273,8 +280,9 @@ build <- function(src) {
   qs <- if (is.null(queue)) rep(NA_character_, length(k)) else queue$status[match(k, key(queue$table))]
   m$itemtext_status <- ifelse(text_wd, "withdrawn",
                        ifelse(m$itemtext_shipped, "shipped",
+                       ifelse(in_file(k, bw) %in% TRUE, "blocked",
                        ifelse(qs %in% "done", "done_not_shipped",
-                       ifelse(qs %in% c("blocked", "excluded", "failed"), qs, "unassessed"))))
+                       ifelse(qs %in% c("blocked", "excluded", "failed"), qs, "unassessed")))))
 
   ## source-level n/a: an input with no row for any of this source's tables
   ## is a catalogue that does not cover the source, not a source missing it all

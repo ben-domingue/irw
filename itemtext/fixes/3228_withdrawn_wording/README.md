@@ -144,3 +144,11 @@ The 238-table withdrawal left 19 tracked files carrying wording for withdrawn ta
 - `itemtext/language_backfill/round2/published/buzgova_2023_lsita__published.csv`
 - `itemtext/language_backfill/round2/published/buzgova_2023_soc__published.csv`
 - `itemtext/language_backfill/round2/published/chen_2022_sasc__published.csv`
+
+## Removed, 2026-11-16 (#3560, register blocks that were never shipped)
+
+Coverage-audit stage 17 listed seven tables as `done_not_shipped` that are register `block` instruments: `cormier_2024_pss4`, `gillman_2023_pss` (PSS), `hui_2024_who5` (WHO-5), `lindstrom2021_honesty_humility` (HEXACO), `liu_2018_shyness` (RCBS), `luo_2021_ecr` (ECR), `shen_2020_sas20` (Zung SAS). Their extraction finished but was never uploaded. All seven were added to `blocked_wording_tables.csv`, and the check then found three whole wording tables still tracked. They were removed from HEAD, and copies are in `rights_held/2026-11-16_register_block_wording/` (outside git):
+
+- `itemtext/itemtables/batch_078/lindstrom2021_honesty_humility__items.csv` (70 rows)
+- `itemtext/itemtables/batch_080/liu_2018_shyness__items.csv` (65 rows)
+- `itemtext/itemtables/batch_171/shen_2020_sas20__items.csv` (80 rows)
