@@ -1,23 +1,27 @@
 candidate,via,status,reason,next_step
-WJIV_ages_3_5 .. WJIV_ages_40_90 (6 matrices),EFAtools::WJIV_*,held: licence,"Woodcock-Johnson IV technical manual (Riverside); EFAtools says the tables are reproduced with the publisher's permission, which is permission to EFAtools, not necessarily to reshare onward",Ben: decide whether the GPL package rule covers a publisher-permitted table or ask Riverside/HMH
-neo,psychTools::neo,held: licence,"NEO-PI-R manual facet correlations (Costa & McCrae 1992, PAR), N = 1000; commercial test manual",Ben: same question as WJ IV
 Damian; Spengler,psychTools::Damian / Spengler,held: N,"Project Talent; package gives N = 346,660 but the 11- and 50-year follow-up variables exist only for subsamples, so one N would mislead an SEM fit",read the Damian et al. (2019) and Spengler et al. (2018) supplements for the n each cell rests on
 Jackson67,fungible::Jackson67,held: values,"fungible says the harmfulness variable was reverse coded, so signs may differ from the published table",check Jackson & Singer (1967) and build only if the values match the paper
 RiskDimensions,EFAtools::RiskDimensions,held: values and N,"strongly non-PD (smallest eigenvalue -0.92) with sign patterns that look like dropped minus signs; Fischhoff et al. (1978) correlated mean ratings across 30 hazards, so N = 76 raters is not the N of the correlations",check against the paper
 DOSPERT,EFAtools::DOSPERT,out: raw data exists,"computed by EFAtools from the Basel-Berlin Risk Study raw data, which is on OSF (rce7g) under CC BY 4.0",better ingested as a core response table
-"Cor.Mat.Lomax; Cor.Mat.MM",MBESS,pending: N,no N in the package,get N from Lomax (1983) and Maruyama & McGarvey (1980)
-"cattell; Dwyer; Gorsuch; Harman.political; Harman_5",psych / psychTools,pending: N,no N in the package,get N from the original papers (Harman.political: Harman 1976 p. 166)
+Cor.Mat.Lomax; Cor.Mat.MM,MBESS,pending: N,no N in the package,get N from Lomax (1983) and Maruyama & McGarvey (1980)
+cattell; Dwyer; Gorsuch; Harman.political; Harman_5,psych / psychTools,pending: N,no N in the package,get N from the original papers (Harman.political: Harman 1976 p. 166)
 Schutz,psychTools::Schutz,pending: N,no N in the package (issue #3582 names it),get N from Schutz (1958)
 stress,ggm::stress,pending: N and source,"no N, variables unnamed in ggm",Cox & Wermuth (1996); Slangen et al. (1993)
 Harman.Holzinger,psych,pending: provenance,"N = 696, 9 tests; which Holzinger study and how it relates to holzinger_1937_bifactor14 (N = 355) is unclear",check Harman (1967)
 data.mcdonald.act15,sirt,pending: N and source,"covariance matrix from a table in McDonald (1999), Test theory",check the book for N and the original study
-BadRJN; BadRBY,fungible,pending: N,"improper matrices reported in Joseph & Newman (2010, meta-analytic) and Bentler & Yuan (2011); no N","check whether the papers give an N (a harmonic-mean N for the meta-analytic one)"
+BadRJN; BadRBY,fungible,pending: N,"improper matrices reported in Joseph & Newman (2010, meta-analytic) and Bentler & Yuan (2011); no N",check whether the papers give an N (a harmonic-mean N for the meta-analytic one)
 zola,psychTools::zola,pending: scope,"165 x 165 polychoric matrix of SAPA SPI items with peer ratings; pairwise n varies (mean 18,180)",check whether the SAPA SPI responses are already IRW tables (then out of scope)
 blant,psychTools::blant,out: no N,"personal communication, no N, no published source",
 USAF,psychTools::USAF,out: not published,computed by psych from raw data shipped in the Anthropometry package,
 Thurstone41,fungible::Thurstone41,out: duplicate,identical to psych::Tucker (tucker_1958_ability9),
 Harman.8,psych::Harman.8,out: duplicate,the Mullen physical-measures matrix (mullen_1939_physical8),
-"BadRKtB; BadRLG; BadRRM; Box20; Box26; ThurstoneBox20; ThurstoneBox26; AmzBoxes",fungible,out: artificial,illustrative or box-problem matrices,
-"data.reck*",sirt,out: simulated,Reckase (2009) simulated examples and model parameters,
-"derived",ggm,out: not published,covariance of derived variables computed from raw data in the package,
-"Schmid; schmid.leiman; West",psych,out: artificial,already excluded in the pilot,
+BadRKtB; BadRLG; BadRRM; Box20; Box26; ThurstoneBox20; ThurstoneBox26; AmzBoxes,fungible,out: artificial,illustrative or box-problem matrices,
+data.reck*,sirt,out: simulated,Reckase (2009) simulated examples and model parameters,
+derived,ggm,out: not published,covariance of derived variables computed from raw data in the package,
+Schmid; schmid.leiman; West,psych,out: artificial,already excluded in the pilot,
+"1 study of boer_2016_lmx: De Cremer, & van Knippenberg, 2004",metaSEM::Boer16,out: no data,fewer than two measured variables,
+"8 studies of boer_2016_lmx: Howell, & Hall-Merenda, 1999; Judge, & Bono, 2000; Liden et al., 2008; Rubin et al., 2009; van Dierendonck et al., 2014; Wang et al., 2005; Williams, Gavin, & Williams, 1996; Wofford, Goodwin, & Whittington, 1998",metaSEM::Boer16,held: blank cells,a cell among the variables the study did measure is blank; the rest of the corpus is built,build if blank cells are allowed (open decision in the README to-do)
+"21 studies of cheung_2000_tpb: Ajzen & Madden (1986a); Ajzen & Madden (1986b); Borgida & Conner (1992); Godin, Valois, Lepage, & Desharnais (1992a); Godin, Valois, Lepage, & Desharnais (1992b); Godin, Fortin, Michaud, Bradet, & Kok (1997); Hillhouse, Adler, Drinnon, & Turrisi (1997); Kelly & Breinlinger (1995a); Kelly & Breinlinger (1995b); Millstein (1996); Netemeyer, Burton, & Johnston (1991a); Netemeyer, Burton, & Johnston (1991b); Netemeyer & Andrews (1993a); Norman & Conner (1996); Edwared (1996); Randall (1994); Reinecke, Schmidt, & Ajzen (1996); Owen (1990a); Owen (1990b); Theodorakis (1992); Yordy & Lent (1993)",metaSEM::Cheung00,held: blank cells,a cell among the variables the study did measure is blank; the rest of the corpus is built,build if blank cells are allowed (open decision in the README to-do)
+"1 study of scalco_2017_tpborganic: Vermeir & Verbeke, 2008",metaSEM::Scalco17,held: blank cells,a cell among the variables the study did measure is blank; the rest of the corpus is built,build if blank cells are allowed (open decision in the README to-do)
+Digman97 (14 matrices),metaSEM::Digman97,pending: scope,"metaSEM calls these ""factor correlation matrices"" of the Big Five; if they are correlations among latent factors they are model output, if among scale scores they are in scope","check Digman (1997), JPSP 73, 1246-1256"
+Cheung09 (4 matrices),metaSEM::Cheung09,out: altered,four issp89 studies with variables deleted at random by the package author to illustrate missing data,
