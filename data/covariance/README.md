@@ -4,7 +4,7 @@ Processing scripts and records for the **covariance** data family (`source = "co
 
 Not to be confused with `cov_*` columns in other families, which are person-level covariates.
 
-**Status (2026-11-17).** Draft standard. 45 tables (551 matrices) are built locally and pass `irw_validate.cov`, and every one has been checked to equal its package original exactly. `matrices.csv` records each matrix; `held.csv` records every candidate not built. On Redivis, `irw_cov:4e2q` v1.0 holds one table, `holzinger_1939_grantwhite9` (released by Ben on 2026-11-17).
+**Status (2026-11-17).** Draft standard. 48 tables (652 matrices) are built locally and pass `irw_validate.cov`, and every one has been checked to equal its package original exactly. `matrices.csv` records each matrix; `held.csv` records every candidate not built. On Redivis, `irw_cov:4e2q` v1.0 holds one table, `holzinger_1939_grantwhite9` (released by Ben on 2026-11-17).
 
 **Second batch (2026-11-17, #3582).** `batch_rpackages2.R` adds 7 tables (11 matrices) from `fungible`, `ggm`, `EFAtools`, `GPArotation` and `psychTools`. `fungible`, `ggm` and `EFAtools` are read from pinned CRAN source tarballs instead of being installed (`fungible` pulls in OpenMx). `held.csv` lists every candidate considered and not built, and why: held for licence, values or N; pending an N from the original paper; or out of scope. Dictionary rows for all tables are in `automated_finding/dictionary_auto_cov.csv` (`stage_dict_row.py --source cov`). `02_biblio.R` does not read it yet. `holzinger_1939_grantwhite9` is released on Redivis as `irw_cov` v1.0 (Ben, 2026-11-17).
 
@@ -15,6 +15,8 @@ Not to be confused with `cov_*` columns in other families, which are person-leve
 - A matrix in a GPL package is GPL even when it comes from a commercial test manual. `batch_rpackages3.R` builds the WJ IV norming matrices (six age groups) and the NEO PI-R facets on that basis.
 
 Gnambs18 keeps only its 36 reported matrices: the other 77 were reproduced from factor loadings, which is model output. Values are written at full precision (the ISSP covariances are not short decimals). `batch_sem.R` adds five classic SEM teaching matrices shipped with `sem` (Duncan–Haller–Portes, Wheaton, Kerckhoff, Blau–Duncan, McDonald–Clelland union sentiment), and `batch_rpackages3.R` adds `psych::cattell`. `zenodo_brady2005.py` builds Brady et al. (2005) from an MIT-licensed Zenodo deposit.
+
+**CC BY MASEM deposits (2026-11-17, #3582 source 4).** Three corpora are built from open OSF/Zenodo deposits, parsing the deposited files as text without executing them: `osf_li2019_class.py` (26 CLASS samples), `osf_innami2022_listening.py` (32 L2-listening samples) and `zenodo_or2024_tam.py` (43 TAM studies; one with blank cells is held). A survey of further deposits, with licence and contents, is summarised in the PR for #3582.
 
 ```
 Rscript data/covariance/pilot_rpackages.R <out dir>
