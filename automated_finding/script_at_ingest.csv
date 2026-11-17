@@ -24,9 +24,11 @@ holzinger_1937_bifactor14,cov,data/covariance/pilot_rpackages.R,2026-11-17
 holzinger_1939_grantwhite24,cov,data/covariance/pilot_rpackages.R,2026-11-17
 holzinger_1939_grantwhite9,cov,data/covariance/pilot_rpackages.R,2026-11-17
 hunter_1983_jobperf4,cov,data/covariance/batch_metasem.R,2026-11-17
+innami_2022_l2listening6,cov,data/covariance/osf_innami2022_listening.py,2026-11-17
 issp_1989_workorient9,cov,data/covariance/batch_metasem.R,2026-11-17
 issp_2005_workorient7,cov,data/covariance/batch_metasem.R,2026-11-17
 kerckhoff_1974_ambition7,cov,data/covariance/batch_sem.R,2026-11-17
+li_2019_class10,cov,data/covariance/osf_li2019_class.py,2026-11-17
 malmi_1979_learning12,cov,data/covariance/batch_rpackages2.R,2026-11-17
 mathieu_2015_cohesion4,cov,data/covariance/batch_metasem.R,2026-11-17
 mcdonald_1984_union5,cov,data/covariance/batch_sem.R,2026-11-17
@@ -35,6 +37,7 @@ mullen_1939_physical8,cov,data/covariance/pilot_rpackages.R,2026-11-17
 nohe_2015_fwcstrain4,cov,data/covariance/batch_metasem.R,2026-11-17
 nohe_2015_wfcstrain4,cov,data/covariance/batch_metasem.R,2026-11-17
 norton_2013_hads14,cov,data/covariance/batch_metasem.R,2026-11-17
+or_2024_tam4,cov,data/covariance/zenodo_or2024_tam.py,2026-11-17
 pollack_2012_estress9,cov,data/covariance/batch_rpackages2.R,2026-11-17
 reise_2007_health16,cov,data/covariance/pilot_rpackages.R,2026-11-17
 roorda_2011_engagement,cov,data/covariance/batch_metasem.R,2026-11-17
