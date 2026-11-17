@@ -45,6 +45,14 @@ source ships no codebook; never a guess, and never the deposit's landing page
 codebook_at_ingest.csv beside this file, which metadata/find_codebook_links.py
 reads as its strongest evidence (`how_found = recorded_at_ingest`). Restaging
 a table replaces its codebook row.
+
+`script` (2026-11-16): the data/ build script that wrote this table, as a repo
+path (`data/foo_2024_battery.py`). Give it whenever the script is not named
+exactly after the table -- a battery script writing several tables, names
+assembled at run time -- because metadata/13_script_index.py cannot find those
+by reading code (the coverage audit counted ~2,400 such tables script-less).
+Written to script_at_ingest.csv beside this file, which stage 13 folds into
+table_scripts.csv. Must name a file that exists under data/.
 """
 import csv
 import io
@@ -100,22 +108,38 @@ AGGREGATORS_PATH = Path(os.environ.get("IRW_AGGREGATORS_PATH")
                         / "metadata" / "aggregators.csv")
 CODEBOOK_COLUMNS = ["table", "source", "codebook_url", "recorded_at"]
 
+##The build script, recorded when the table is built (2026-11-16). One row per
+##table; restaging replaces it. Read by metadata/13_script_index.py.
+SCRIPT_PATH = Path(os.environ.get("IRW_SCRIPT_INGEST_PATH")
+                   or Path(__file__).resolve().parent / "script_at_ingest.csv")
+SCRIPT_COLUMNS = ["table", "source", "script", "recorded_at"]
+REPO_ROOT = Path(__file__).resolve().parents[1]
+
+
+def _upsert(path, columns, table, row):
+    """Replace `table`'s row in a one-row-per-table side file, keep it sorted."""
+    from datetime import date
+    rows = []
+    if path.exists():
+        with open(path, newline="", encoding="utf-8") as f:
+            rows = [r for r in csv.DictReader(f)
+                    if (r.get("table") or "").strip().lower() != table.lower()]
+    rows.append({**row, "table": table, "recorded_at": date.today().isoformat()})
+    rows.sort(key=lambda r: r["table"].lower())
+    with open(path, "w", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=columns, lineterminator="\n")
+        w.writeheader()
+        w.writerows(rows)
+
 
 def record_codebook(table, source, url):
     """Upsert `table`'s codebook row. `url` is already validated."""
-    from datetime import date
-    rows = []
-    if CODEBOOK_PATH.exists():
-        with open(CODEBOOK_PATH, newline="", encoding="utf-8") as f:
-            rows = [r for r in csv.DictReader(f)
-                    if (r.get("table") or "").strip().lower() != table.lower()]
-    rows.append({"table": table, "source": source, "codebook_url": url,
-                 "recorded_at": date.today().isoformat()})
-    rows.sort(key=lambda r: r["table"].lower())
-    with open(CODEBOOK_PATH, "w", newline="", encoding="utf-8") as f:
-        w = csv.DictWriter(f, fieldnames=CODEBOOK_COLUMNS, lineterminator="\n")
-        w.writeheader()
-        w.writerows(rows)
+    _upsert(CODEBOOK_PATH, CODEBOOK_COLUMNS, table, {"source": source, "codebook_url": url})
+
+
+def record_script(table, source, script):
+    """Upsert `table`'s build-script row. `script` is already validated."""
+    _upsert(SCRIPT_PATH, SCRIPT_COLUMNS, table, {"source": source, "script": script})
 
 
 def staging_path(source):
@@ -284,6 +308,11 @@ def main():
     if codebook.lower() == "none":
         codebook = "none"
 
+    ##Not a dictionary column either: the build script (13_script_index.py).
+    script = clean(payload.pop("script", None)).replace("\\", "/").removeprefix("./")
+    if script and not (script.startswith("data/") and (REPO_ROOT / script).is_file()):
+        sys.exit(f"'script' must be the build script's path under data/, and exist: {script!r}")
+
     ##A `Source via` that names no aggregator is not an intermediary collection
     ##(see AGGREGATORS_PATH above). Rejected here rather than filtered later, so
     ##the staged row says what biblio will carry.
@@ -304,7 +333,7 @@ def main():
     for key, value in payload.items():
         col = KEY_MAP.get(key)
         if col is None:
-            sys.exit(f"unknown field: {key} (known: {', '.join(sorted(KEY_MAP) + ['codebook_url'])})")
+            sys.exit(f"unknown field: {key} (known: {', '.join(sorted(KEY_MAP) + ['codebook_url', 'script'])})")
         row[col] = clean(value)
 
     if not row["table"]:
@@ -410,6 +439,9 @@ def main():
         if codebook:
             record_codebook(row["table"], source, codebook)
             print(f"recorded codebook for {row['table']} -> {CODEBOOK_PATH}")
+        if script:
+            record_script(row["table"], source, script)
+            print(f"recorded script for {row['table']} -> {SCRIPT_PATH}")
         return
 
     if row_is_reserved(row):
@@ -428,6 +460,9 @@ def main():
     if codebook:
         record_codebook(row["table"], source, codebook)
         print(f"recorded codebook for {row['table']} -> {CODEBOOK_PATH}")
+    if script:
+        record_script(row["table"], source, script)
+        print(f"recorded script for {row['table']} -> {SCRIPT_PATH}")
 
 
 if __name__ == "__main__":

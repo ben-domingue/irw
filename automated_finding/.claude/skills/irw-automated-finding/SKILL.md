@@ -1385,6 +1385,15 @@ and the table page links it from its Codebook section
 it the weekly sweep (pipeline stage 15) can only find a codebook by its file
 name.
 
+**Give `script` whenever the build script is not named exactly after the
+table** (a battery script writing several tables, or names assembled at run
+time like `f"rcv_{jur}_{date}_{office}"`): `"script": "data/foo_2026_battery.py"`,
+a repo path that exists. It goes to `automated_finding/script_at_ingest.csv`,
+which pipeline stage 13 folds into `table_scripts.csv`, so the MCP's
+`get_processing_notes` and the table page's Codebook section can find the
+script. Code reading cannot see run-time names; on 2026-11-16 ~2,400 live
+tables had no findable script for that reason.
+
 **Coded covariates: run the label harvest before opening the data PR.** If the
 new script reads an SPSS or Stata file (`.sav`, `.dta`) and ships `cov_*`
 columns, their value labels (1 = hombre, 2 = mujer) reach the table page only

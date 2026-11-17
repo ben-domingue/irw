@@ -54,7 +54,12 @@
 #   column_docs      share of the table's columns with documented=true in
 #                    column_docs.csv (stage 14); a gap when < 1. Core only.
 #   codebook_link    a codebook_links_checked.csv row whose outcome starts
-#                    `hit:` (stage 15 / find_codebook_links.py)
+#                    `hit:` (stage 15 / find_codebook_links.py). Blank (n/a)
+#                    when there is no hit and someone who looked recorded
+#                    that the source ships none: codebook_url "none" in
+#                    automated_finding/codebook_at_ingest.csv, or doc_type
+#                    "none" in codebook_by_review.csv (2026-11-16; before
+#                    that 1,980 such tables counted as gaps).
 #   data_note        in data_notes.csv -- INFO ONLY, never a gap: most tables
 #                    legitimately carry no caveat.
 #   itemtext_shipped in itemtext_metadata.csv and not withdrawn from irw_text*
@@ -178,6 +183,12 @@ script_match <- local({
 })
 coldocs  <- read_csv_or_null(file.path(dir_path, "column_docs.csv"))
 cblinks  <- read_csv_or_null(file.path(dir_path, "codebook_links_checked.csv"))
+cb_ingest <- read_csv_or_null(file.path(repo_root, "automated_finding", "codebook_at_ingest.csv"))
+cb_review <- read_csv_or_null(file.path(dir_path, "codebook_by_review.csv"))
+## Tables whose source, by the word of someone who looked, ships no codebook.
+cb_none <- unique(c(
+  if (!is.null(cb_ingest)) key(cb_ingest$table[key(cb_ingest$codebook_url) == "none"]),
+  if (!is.null(cb_review)) key(cb_review$table[key(cb_review$doc_type) == "none"])))
 notes    <- read_csv_or_null(file.path(dir_path, "data_notes.csv"))
 itemtext <- read_csv_or_null(file.path(dir_path, "itemtext_metadata.csv"))
 queue    <- read_csv_or_null(file.path(itemtext_dir, "extraction_batches", "queue_state.csv"))
@@ -251,8 +262,7 @@ build <- function(src) {
 
   if (!is.null(cblinks) && all(c("table", "outcome") %in% names(cblinks))) {
     hit <- unique(key(cblinks$table[grepl("^hit:", cblinks$outcome)]))
-    checked <- unique(key(cblinks$table))
-    m$codebook_link <- ifelse(k %in% checked, k %in% hit, FALSE)
+    m$codebook_link <- ifelse(k %in% hit, TRUE, ifelse(k %in% cb_none, NA, FALSE))
   } else m$codebook_link <- NA
 
   m$data_note <- in_file(k, notes)
@@ -313,6 +323,11 @@ dims <- bind_rows(lapply(c(gap_cols_all, "data_note", "has_construct_name", "ite
 tag_dims <- tag_col_name(TAG_GAP_COLS)
 same_as_row <- dims$covered[match(tag_dims, dims$dimension)] == dims$covered[dims$dimension == "tag_row"]
 dims <- dims[!(dims$dimension %in% tag_dims[same_as_row %in% TRUE]), , drop = FALSE]
+## data_note is info, never a gap: say so in its label, so a reader of the
+## PR body does not take 19% for a backlog (2026-11-16).
+dims$dimension[dims$dimension == "data_note"] <- "data_note (info)"
+## column_docs is all-or-nothing per table; the mean share says how close.
+cd_mean <- round(100 * mean(active$column_docs, na.rm = TRUE), 1)
 status_counts <- active %>% count(itemtext_status, name = "n") %>% arrange(desc(n))
 by_source <- active %>% group_by(source) %>%
   summarise(live = n(), no_metadata = sum(metadata_row %in% FALSE), no_licence = sum(licence %in% FALSE),
@@ -352,6 +367,8 @@ md_out <- c(
   "## Per dimension (active tables)", "", fmt_tbl(dims), "",
   "## Item-text status", "",
   "Issues against the public item-text page are the daily `itemtext-issues.yml` check, not this report.",
+  "", paste0("column_docs is all-or-nothing per table; the mean share of a table's columns documented is ",
+             cd_mean, "%."),
   "", fmt_tbl(status_counts), "",
   "## Per source", "", fmt_tbl(by_source), "",
   "## Core, per shard", "", fmt_tbl(by_shard), "",
@@ -371,6 +388,7 @@ cat(sprintf("Coverage audit: %d live tables, %d active (%d withdrawn)\n",
 cat(sprintf("  %-20s %6s %8s %8s %6s\n", "dimension", "applic", "covered", "missing", "pct"))
 for (i in seq_len(nrow(dims))) cat(sprintf("  %-20s %6d %8d %8d %6s\n", dims$dimension[i],
     dims$applicable[i], dims$covered[i], dims$missing[i], ifelse(is.na(dims$pct[i]), "", dims$pct[i])))
+cat(sprintf("  column_docs: mean share of a table's columns documented %s%%\n", cd_mean))
 cat("  item text:", paste(sprintf("%s=%d", status_counts$itemtext_status, status_counts$n), collapse = ", "), "\n")
 cat(sprintf("  no metadata row yet (arrivals, see stage 12): %d\n", nrow(arrivals)))
 cat(sprintf("  tables with >= 3 gaps: %d; worst %d (arrivals excluded) in coverage_report.md\n",
