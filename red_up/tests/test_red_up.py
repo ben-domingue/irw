@@ -77,7 +77,9 @@ class Registry(unittest.TestCase):
         conj = [t.name for t in targets_mod.conj_shards(targets)]
         rank = [t.name for t in targets_mod.rank_shards(targets)]
         aux = [t.name for t in targets
-               if t.kind == "aux" and not t.is_itemtext and not t.is_conj and not t.is_rank]
+               if t.kind == "aux" and not t.is_itemtext and not t.is_conj and not t.is_rank
+               and not t.is_cov]
+        cov = [t.name for t in targets if t.is_cov]
 
         # Both families are shard lists that grow, so assert their shape rather
         # than a frozen tail -- pinning the newest name here means every future
@@ -101,9 +103,13 @@ class Registry(unittest.TestCase):
         self.assertEqual(sorted(aux),
                          ["irw_competitions", "irw_meta", "irw_nominal", "irw_simsyn"])
 
+        # irw_cov is a single dataset, registered 2026-11-17, last in AUX_LABELS.
+        self.assertEqual(cov, ["irw_cov"])
+
         # Core first, then text shards, then the rest in AUX_LABELS order, the
-        # conj and rank shards where AUX_LABELS puts them -- the menu order.
-        self.assertEqual(names, core + text + aux + conj + rank)
+        # conj and rank shards and irw_cov where AUX_LABELS puts them -- the
+        # menu order.
+        self.assertEqual(names, core + text + aux + conj + rank + cov)
         self.assertEqual(newest_shard(targets).name, core[-1])
         self.assertEqual(newest_text_shard(targets).name, text[-1])
         # New conjoint tables go to the newest conj shard (Ben, 2026-10-09).
@@ -233,6 +239,10 @@ class RankShards(unittest.TestCase):
     def test_the_real_config_registers_the_rank_shard(self):
         _, targets = targets_mod.load_registry()
         self.assertEqual([t.name for t in targets_mod.rank_shards(targets)][:1], ["irw_rank"])
+
+    def test_the_real_config_registers_irw_cov(self):
+        _, targets = targets_mod.load_registry()
+        self.assertEqual([t.name for t in targets if t.is_cov], ["irw_cov"])
 
 
 class TwoConjShards(unittest.TestCase):

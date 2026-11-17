@@ -89,7 +89,7 @@ Data acquisition is tracked in #3582. Everything else lives here until the famil
   - `source = "cov"`;
   - `irw_cov2matrix()` returning matrix, n, sd and mean, ready for `lavaan(sample.cov=, sample.nobs=)` (prototype in `check_roundtrip.R`);
   - **compute on fetch**: `irw_fetch(<core table>, source = "cov")` returns the table's item matrix in this layout. It takes a method argument (Pearson by default, polychoric on request) and is labelled as computed, with method and IRW version, so it is never mistaken for a published matrix. It refuses tables with too many items, repeated measures without a wave filter, and non-core families. Pairwise `n` is kept.
-- [ ] First release of `irw_cov`, **then** the client config (the six symbols, in the order in `Rpkg/inst/developer/warehouses.md`). Never name the dataset in config before its first release.
+- [x] First release of `irw_cov` (v1.0, 2026-11-17, `irw_cov:4e2q`; Ben), **then** the client config (Rpkg#236, Python-pkg#151, and `redivis_config.R` here) (the six symbols, in the order in `Rpkg/inst/developer/warehouses.md`). Never name the dataset in config before its first release.
 
 **Site and docs.**
 
