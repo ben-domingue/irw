@@ -26,7 +26,10 @@
 ##IMMIGRATION"), attr_human_trafficking ("HUMAN TRAFFICKING"), attr_drug_trafficking ("EFFECT ON
 ##DRUG TRAFFICKING"), attr_terrorism ("EFFECT ON TERRORISM"); attribute names are the authors'
 ##plot labels in 00_preprocess.R. Randomization restrictions and attribute order are not
-##documented in the deposit.
+##documented in the deposit. Level weights are not documented either, but four attributes
+##(immigration, human trafficking, drug trafficking, terrorism) are clearly weighted in both
+##tables: 0-5% reduction about 0.3, 5-10% and 10-20% about 0.2, the three larger reductions
+##about 0.1 each (about 3:2:2:1:1:1; level_weights observed). The rest are near-uniform.
 ##Outcome: choice = chosen, from policy_preference<k> ("Policy A" / "Policy B"); forced choice.
 ##The question wording is not in the deposit (paraphrase in the design record). Tasks with no
 ##answer (chosen NA; respondents who stopped) are omitted: survey 1 has none; survey 2 loses

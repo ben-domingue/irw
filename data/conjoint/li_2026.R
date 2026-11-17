@@ -17,7 +17,9 @@
 ##time commitment 1/3/6/12 months; service reviews from the general public (Only positive reviews / Mainly positive reviews
 ##but also some criticisms / Mainly negative reviews but also some positive / Mainly negative reviews); share of the
 ##subscription among family members, friends and colleagues, each 0%/25%/50%/75%. Every level occurs exactly 2,598 times
-##(balanced design); restrictions and level probabilities not stated; attribute order not stated.
+##(balanced design); restrictions and level probabilities not stated; attribute order not stated. It is a FIXED
+##fractional design: only 128 of the 4^6 = 4,096 combinations occur, in 16 blocks of 8 tasks (78-83 respondents each),
+##so restrictions = observed; main effects are identified, interactions only partly.
 ##Covariates (dictionary): cov_gender_code (gender: 1 = female, 0 = otherwise per the dictionary, so kept as a code, not as cov_gender), cov_age (age_N, years),
 ##cov_marital_status (text), cov_income_band_eur_year (individual annual income, text; 7 = "Income unknown" kept as text),
 ##cov_urban_density (5-level text). Dropped: the six attitudinal indicator items (IND_MM1-3, IND_PT1-3). No survey weight.

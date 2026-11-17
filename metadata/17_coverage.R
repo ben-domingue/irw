@@ -43,17 +43,31 @@
 #                    is a description not a category (#1837, 2026-09-02) -- none
 #                    of those three is a gap. construct name's fill is reported
 #                    as info (`has_construct_name`).
-#   script           in table_scripts.csv (stage 13)
+#   script           a build script under data/ is found the way the irw MCP
+#                    finds it (exact stem, then table_scripts.csv, then a
+#                    separator-bounded name prefix; script_match.py runs
+#                    14_column_docs.py's matcher). Before 2026-11-16 this was
+#                    "in table_scripts.csv", which leaves out every exact-name
+#                    match by design and under-counted ~2,150 tables.
+#   script_match     exact / index / prefix / ambiguous / none: how it was
+#                    found. ambiguous (several candidates) counts as covered.
 #   column_docs      share of the table's columns with documented=true in
 #                    column_docs.csv (stage 14); a gap when < 1. Core only.
 #   codebook_link    a codebook_links_checked.csv row whose outcome starts
-#                    `hit:` (stage 15 / find_codebook_links.py)
+#                    `hit:` (stage 15 / find_codebook_links.py). Blank (n/a)
+#                    when there is no hit and someone who looked recorded
+#                    that the source ships none: codebook_url "none" in
+#                    automated_finding/codebook_at_ingest.csv, or doc_type
+#                    "none" in codebook_by_review.csv (2026-11-16; before
+#                    that 1,980 such tables counted as gaps).
 #   data_note        in data_notes.csv -- INFO ONLY, never a gap: most tables
 #                    legitimately carry no caveat.
 #   itemtext_shipped in itemtext_metadata.csv and not withdrawn from irw_text*
 #   itemtext_status  one string, first match wins:
 #                      withdrawn   -- an irw_text* withdrawal (kind=whole)
 #                      shipped     -- itemtext_shipped
+#                      blocked     -- in itemtext/blocked_wording_tables.csv
+#                                     (wording may not ship; #3560)
 #                      done_not_shipped -- queue_state says done, nothing shipped:
 #                                     the silent-backlog shape, reported on its own
 #                      blocked / excluded / failed -- queue_state.csv status
@@ -156,12 +170,36 @@ bib <- lapply(bib_files, function(f) read_csv_or_null(file.path(dir_path, f)))
 tg  <- lapply(tag_files, function(f) read_csv_or_null(file.path(dir_path, f)))
 
 scripts  <- read_csv_or_null(file.path(dir_path, "table_scripts.csv"))
+## How the MCP would find each live table's script. Falls back to the old
+## table_scripts.csv membership, loudly, if the helper cannot run.
+script_match <- local({
+  tf <- tempfile(fileext = ".txt"); of <- tempfile(fileext = ".csv")
+  writeLines(unique(live$table), tf)
+  rc <- tryCatch(system2(Sys.getenv("PYTHON", "python3"),
+                         c(shQuote(file.path(here, "script_match.py")), "--repo", shQuote(repo_root),
+                           "--tables", shQuote(tf), "--out", shQuote(of))),
+                 error = function(e) 1L)
+  sm <- if (identical(as.integer(rc), 0L) && file.exists(of)) read_csv_or_null(of) else NULL
+  if (is.null(sm)) message("  ! script_match.py failed; script falls back to table_scripts.csv membership")
+  sm
+})
 coldocs  <- read_csv_or_null(file.path(dir_path, "column_docs.csv"))
 cblinks  <- read_csv_or_null(file.path(dir_path, "codebook_links_checked.csv"))
+cb_ingest <- read_csv_or_null(file.path(repo_root, "automated_finding", "codebook_at_ingest.csv"))
+cb_review <- read_csv_or_null(file.path(dir_path, "codebook_by_review.csv"))
+## Tables whose source, by the word of someone who looked, ships no codebook.
+cb_none <- unique(c(
+  if (!is.null(cb_ingest)) key(cb_ingest$table[key(cb_ingest$codebook_url) == "none"]),
+  if (!is.null(cb_review)) key(cb_review$table[key(cb_review$doc_type) == "none"])))
 notes    <- read_csv_or_null(file.path(dir_path, "data_notes.csv"))
 itemtext <- read_csv_or_null(file.path(dir_path, "itemtext_metadata.csv"))
 queue    <- read_csv_or_null(file.path(itemtext_dir, "extraction_batches", "queue_state.csv"))
 wd       <- read_csv_or_null(file.path(itemtext_dir, "withdrawals.csv"))
+## irw_text* withdrawals are keyed `<table>__items`; match on the response table
+if (!is.null(wd)) wd$table <- sub("__items$", "", key(wd$table))
+## tables whose wording may not ship (register block/hold, rights withdrawals;
+## #3560): never a backlog, whatever queue_state.csv says
+bw       <- read_csv_or_null(file.path(itemtext_dir, "blocked_wording_tables.csv"))
 
 TAG_GAP_COLS <- c("age range", "sample", "measurement tool", "item format", "primary language(s)")
 tag_col_name <- function(cn) paste0("tag_", gsub("[^a-z]+", "_", gsub("\\(s\\)", "", cn)))
@@ -215,7 +253,13 @@ build <- function(src) {
     m$has_construct_name <- NA
   }
 
-  m$script <- in_file(k, scripts)
+  if (!is.null(script_match)) {
+    m$script_match <- script_match$match[match(k, key(script_match$table))]
+    m$script <- !is.na(m$script_match) & m$script_match != "none"
+  } else {
+    m$script_match <- NA_character_
+    m$script <- in_file(k, scripts)
+  }
 
   if (!is.null(coldocs) && all(c("table", "documented") %in% names(coldocs))) {
     cd <- coldocs %>% mutate(tk = key(table), doc = tolower(documented) == "true") %>%
@@ -225,8 +269,7 @@ build <- function(src) {
 
   if (!is.null(cblinks) && all(c("table", "outcome") %in% names(cblinks))) {
     hit <- unique(key(cblinks$table[grepl("^hit:", cblinks$outcome)]))
-    checked <- unique(key(cblinks$table))
-    m$codebook_link <- ifelse(k %in% checked, k %in% hit, FALSE)
+    m$codebook_link <- ifelse(k %in% hit, TRUE, ifelse(k %in% cb_none, NA, FALSE))
   } else m$codebook_link <- NA
 
   m$data_note <- in_file(k, notes)
@@ -237,8 +280,9 @@ build <- function(src) {
   qs <- if (is.null(queue)) rep(NA_character_, length(k)) else queue$status[match(k, key(queue$table))]
   m$itemtext_status <- ifelse(text_wd, "withdrawn",
                        ifelse(m$itemtext_shipped, "shipped",
+                       ifelse(in_file(k, bw) %in% TRUE, "blocked",
                        ifelse(qs %in% "done", "done_not_shipped",
-                       ifelse(qs %in% c("blocked", "excluded", "failed"), qs, "unassessed"))))
+                       ifelse(qs %in% c("blocked", "excluded", "failed"), qs, "unassessed")))))
 
   ## source-level n/a: an input with no row for any of this source's tables
   ## is a catalogue that does not cover the source, not a source missing it all
@@ -267,7 +311,7 @@ mat$n_gaps[mat$withdrawn] <- 0L
 mat <- mat[order(mat$source, mat$table), , drop = FALSE]
 out_cols <- c("table", "source", "dataset", "withdrawn", "metadata_row", "biblio_row", "citation",
               "licence", "page", "tag_row", tag_col_name(TAG_GAP_COLS), "has_construct_name",
-              "script", "column_docs", "codebook_link", "data_note",
+              "script", "script_match", "column_docs", "codebook_link", "data_note",
               "itemtext_shipped", "itemtext_status", "n_gaps")
 write_csv(mat[, out_cols], file.path(dir_path, "coverage_matrix.csv"), na = "")
 
@@ -287,6 +331,11 @@ dims <- bind_rows(lapply(c(gap_cols_all, "data_note", "has_construct_name", "ite
 tag_dims <- tag_col_name(TAG_GAP_COLS)
 same_as_row <- dims$covered[match(tag_dims, dims$dimension)] == dims$covered[dims$dimension == "tag_row"]
 dims <- dims[!(dims$dimension %in% tag_dims[same_as_row %in% TRUE]), , drop = FALSE]
+## data_note is info, never a gap: say so in its label, so a reader of the
+## PR body does not take 19% for a backlog (2026-11-16).
+dims$dimension[dims$dimension == "data_note"] <- "data_note (info)"
+## column_docs is all-or-nothing per table; the mean share says how close.
+cd_mean <- round(100 * mean(active$column_docs, na.rm = TRUE), 1)
 status_counts <- active %>% count(itemtext_status, name = "n") %>% arrange(desc(n))
 by_source <- active %>% group_by(source) %>%
   summarise(live = n(), no_metadata = sum(metadata_row %in% FALSE), no_licence = sum(licence %in% FALSE),
@@ -326,6 +375,8 @@ md_out <- c(
   "## Per dimension (active tables)", "", fmt_tbl(dims), "",
   "## Item-text status", "",
   "Issues against the public item-text page are the daily `itemtext-issues.yml` check, not this report.",
+  "", paste0("column_docs is all-or-nothing per table; the mean share of a table's columns documented is ",
+             cd_mean, "%."),
   "", fmt_tbl(status_counts), "",
   "## Per source", "", fmt_tbl(by_source), "",
   "## Core, per shard", "", fmt_tbl(by_shard), "",
@@ -345,6 +396,7 @@ cat(sprintf("Coverage audit: %d live tables, %d active (%d withdrawn)\n",
 cat(sprintf("  %-20s %6s %8s %8s %6s\n", "dimension", "applic", "covered", "missing", "pct"))
 for (i in seq_len(nrow(dims))) cat(sprintf("  %-20s %6d %8d %8d %6s\n", dims$dimension[i],
     dims$applicable[i], dims$covered[i], dims$missing[i], ifelse(is.na(dims$pct[i]), "", dims$pct[i])))
+cat(sprintf("  column_docs: mean share of a table's columns documented %s%%\n", cd_mean))
 cat("  item text:", paste(sprintf("%s=%d", status_counts$itemtext_status, status_counts$n), collapse = ", "), "\n")
 cat(sprintf("  no metadata row yet (arrivals, see stage 12): %d\n", nrow(arrivals)))
 cat(sprintf("  tables with >= 3 gaps: %d; worst %d (arrivals excluded) in coverage_report.md\n",

@@ -170,6 +170,13 @@ CODEBOOK = re.compile(
     re.I,
 )
 README = re.compile(r"read[\s_-]?me|l[eé]ame", re.I)
+##A repository file NAMED as the questionnaire (2026-11-16 hand sample: OSF
+##`Questionnaire_Study1.docx`, Mendeley `Questionnaire.pdf`). Documents only:
+##`questionnaire_data.csv` is the responses.
+QUESTIONNAIRE_NAME = re.compile(r"questionn?aire|cuestionario|question[aá]rio|fragebogen|"
+                                r"survey[\s_-]?(instrument|items|questions)", re.I)
+QUESTIONNAIRE_DOC_EXT = re.compile(r"\.(pdf|docx?|rtf|odt|txt|md|html?)$", re.I)
+QUESTIONNAIRE_NOT = re.compile(r"\b(data|responses?|raw|results?|answers)\b|_(data|responses?|raw|results?)\b", re.I)
 ##A file named `codebook.R` is the code that writes one, not the codebook; an
 ##.Rdata/.rds file is data, whatever it is called.
 CODE_EXT = re.compile(r"\.(r|py|do|sps|sas|jl|m|ipynb|rdata|rds)$", re.I)
@@ -187,6 +194,9 @@ def match(name: str) -> Optional[str]:
         return "name_codebook"
     if README.search(name):
         return "name_readme"
+    if (QUESTIONNAIRE_NAME.search(name) and QUESTIONNAIRE_DOC_EXT.search(name)
+            and not QUESTIONNAIRE_NOT.search(name)):
+        return "questionnaire"
     return None
 
 
@@ -444,7 +454,38 @@ def list_osf(key: str) -> dict:
     if s == 200:
         for c in d.get("data") or []:
             _osf_walk(f"https://api.osf.io/v2/{base}/{c['id']}/files/osfstorage/", 3, out, f"{c['id']}:")
+    out += osf_sibling_docs(base, key)
     return {"status": "ok", "landing": f"https://osf.io/{key}/", "files": out}
+
+
+##A sibling component whose title says it holds the documentation (2026-11-16:
+##sun_2025's data sit in "Data and Code", its Codebook.xlsx in the sibling
+##"Codebooks and Materials"). Only such siblings are walked, and only a
+##codebook- or questionnaire-named file in one counts (see `sibling`).
+OSF_DOC_SIBLING = re.compile(r"code[\s_-]?book|material|documentation|instrument|measure|questionn?aire|"
+                             r"dictionar|variables", re.I)
+
+
+def osf_sibling_docs(base: str, key: str) -> List[dict]:
+    s, d = get(f"https://api.osf.io/v2/{base}/{key}/", "osf")
+    if s != 200:
+        return []
+    parent = (((d.get("data") or {}).get("relationships") or {}).get("parent") or {}) \
+        .get("links", {}).get("related", {}).get("href")
+    if not parent:
+        return []
+    s, d = get(parent.rstrip("/") + "/children/", "osf")
+    if s != 200:
+        return []
+    out: List[dict] = []
+    for c in d.get("data") or []:
+        title = (c.get("attributes") or {}).get("title", "")
+        if c.get("id") == key or not OSF_DOC_SIBLING.search(title):
+            continue
+        found: List[dict] = []
+        _osf_walk(f"https://api.osf.io/v2/{base}/{c['id']}/files/osfstorage/", 2, found, f"{title}/")
+        out += [{**f, "sibling": True} for f in found]
+    return out
 
 
 def resolve_doi(doi: str) -> Tuple[str, str]:
@@ -599,9 +640,18 @@ CAPTION_RESULTS = re.compile(r"correlat|coefficient|loading|descriptive|statisti
 ##documents no column (pilot: "Interview codebook").
 CAPTION_EXPLICIT = re.compile(r"code[\s_-]?book|dictionar|variable[\s_-]?(description|definition)s?", re.I)
 CAPTION_QUALITATIVE = re.compile(r"interview|qualitative|thematic|open[- ]ended|focus group|translation", re.I)
+##Matched against the sheet name with `_`/`-` read as spaces (sheet_is_codebook).
+##2026-11-16 sample: "Keys", "Variable codes", "Names_of_variables".
 SHEET_CODEBOOK = re.compile(r"^\s*(variables?|legend|descriptions?|data description|variable description|"
+                            r"keys|variable (codes|names|labels|list|key)|names of (the )?variables|"
+                            r"value labels|item (key|list|labels|wording)|labels|"
                             r"key|codes|coding)\s*$", re.I)
 WORKBOOK_EXT = {"xlsx", "xlsm", "xls"}
+
+
+def sheet_is_codebook(sheet: str) -> bool:
+    return bool(CODEBOOK.search(sheet) or SHEET_CODEBOOK.match(re.sub(r"[_-]+", " ", sheet)))
+
 TEXT_DOC_EXT = {"docx", "doc", "pdf", "txt", "rtf", "odt"}
 SUPP_CAP = 60_000_000           ##bytes; a larger file is listed but not opened
 ##--deep budgets (#3045): the 2026-10-15 pipeline run opened a 434-file OSF
@@ -766,6 +816,15 @@ def sheet_names(raw: bytes, ext: str) -> Optional[List[str]]:
 def caption_kind(label: str, caption: str) -> Optional[str]:
     """What the authors' own label + caption says the file is."""
     lc = f"{label} {caption}"
+    ##2026-11-16 hand sample: "Data File README" (a CSV dictionary) and
+    ##"Questionnaire used for collection of data for this study" both lost to
+    ##the data rule below. A caption that LEADS with the README or the
+    ##questionnaire is that document, whatever data it goes on to mention.
+    if re.match(r"\W*(data\s+(file\s+)?)?read[\s_-]?me\b", caption, re.I):
+        return "name_readme"
+    if (re.match(r"\W*(the\s+|a\s+)?(questionn?aires?|cuestionarios?|question[aá]rios?|survey instruments?)\b",
+                 caption, re.I) and not re.search(r"\b(responses|answers|results|scores)\b", caption, re.I)):
+        return "questionnaire"
     if CAPTION_CODEBOOK.search(lc) and not CAPTION_QUALITATIVE.search(lc):
         ##"Dataset ... with English variable labels" is the data file
         if not (CAPTION_IS_DATA.search(lc) and not CAPTION_EXPLICIT.search(lc)):
@@ -947,10 +1006,10 @@ def supp_hits(t: str, h: str, res: dict, own_ids: set, checked_at: str,
         owners = caption_owners(f.get("caption", ""), siblings or set())
         if owners and t not in owners:
             continue
-        if kind == "name_codebook":
-            hits.append({**row, "how_found": "name_codebook", "evidence": f"caption: {f['caption'][:200]}"})
+        if kind in ("name_codebook", "name_readme"):
+            hits.append({**row, "how_found": kind, "evidence": f"caption: {f['caption'][:200]}"})
             continue
-        sheets = [x for x in (f.get("sheets") or []) if CODEBOOK.search(x) or SHEET_CODEBOOK.match(x)]
+        sheets = [x for x in (f.get("sheets") or []) if sheet_is_codebook(x)]
         for sh in sheets:
             hits.append({**row, "url": f["url"], "file_name": f"{sh} (sheet in {f['name']})",
                          "how_found": "name_codebook", "evidence": "sheet name"})
@@ -1307,17 +1366,39 @@ def ingest_links(live: set) -> List[dict]:
     return out
 
 
+def lift_side_hits(checked: List[dict], side: List[dict]) -> None:
+    """Mark a checked row `hit:` when a side file (ingest, review) links its table.
+
+    Those links are the strongest evidence there is, and they do not depend on
+    what the crawl made of the deposit, so any non-hit outcome gives way.
+    """
+    kinds: Dict[str, set] = {}
+    for x in side:
+        kinds.setdefault(x["table"], set()).add(x["how_found"])
+    for row in checked:
+        if row["table"] in kinds and not row["outcome"].startswith("hit:"):
+            row["outcome"] = "hit:" + "+".join(sorted(kinds[row["table"]]))
+
+
 def review_links(live: set) -> List[dict]:
     """Rows from codebook_by_review.csv, for live tables (#2787 step 3).
 
     Found by a person or an agent who opened the document, never by a crawler
     guessing: doc_type codebook -> recorded_by_review, questionnaire ->
-    questionnaire. A row without a url or with another doc_type is an error in
+    questionnaire. doc_type `none` (2026-11-16) records that the reviewer saw
+    the deposit's whole file list and nothing in it documents the variables;
+    it carries no url and yields no link (17_coverage.R reads it, like
+    codebook_at_ingest.csv's "none", as "the source ships no codebook").
+    A row without a url or with another doc_type is an error in
     the side file, so it stops the run rather than vanishing.
     """
     out = []
     for r in read_csv(REVIEW_CODEBOOKS):
         table, url, kind = (r.get(k, "").strip() for k in ("table", "url", "doc_type"))
+        if kind == "none":
+            if url:
+                sys.exit(f"{REVIEW_CODEBOOKS.name}: doc_type none for {table!r} carries a url ({url!r})")
+            continue
         if not url.lower().startswith("http") or kind not in ("codebook", "questionnaire"):
             sys.exit(f"{REVIEW_CODEBOOKS.name}: bad row for {table!r} (url {url!r}, doc_type {kind!r})")
         if table not in live:
@@ -1343,6 +1424,9 @@ def main() -> int:
     ap.add_argument("--rematch", default="",
                     help="with --new-only: comma list of hosts whose tables are matched again "
                          "(from the listing cache, so rule changes apply)")
+    ap.add_argument("--retry-no-match", action="store_true",
+                    help="with --new-only: sweep again every table whose outcome is no_match, "
+                         "e.g. after a rule change (2026-11-16 finder patterns)")
     ap.add_argument("--sample", type=int, default=0,
                     help="seed: crawl deposits in a seeded random order (pilots, with --limit)")
     ap.add_argument("--recheck", action="store_true", help="re-list deposits already in the cache")
@@ -1383,6 +1467,8 @@ def main() -> int:
                  if r["outcome"].startswith("out_of_scope") and route(r["data_url"])[0] != "skip"}
         rematch = set(filter(None, args.rematch.split(",")))
         newly |= {r["table"] for r in prev_checked if r["host"] in rematch}
+        if args.retry_no_match:
+            newly |= {r["table"] for r in prev_checked if r["outcome"] == "no_match"}
         done = {r["table"] for r in prev_checked if r["outcome"] not in ("not_yet_checked", "deep_timeout")} - newly
         kept_checked = [r for r in prev_checked if r["table"] in done]
         ##ingest and review rows are re-read from their side files below, so
@@ -1500,6 +1586,13 @@ def main() -> int:
                                      "host": h, "how_found": "package_doc", "checked_at": row["checked_at"]})
                     continue
                 how = "typed_codebook" if f.get("typed") else match(f["name"])
+                if f.get("sibling"):
+                    ##another component's file: its name must say what it is
+                    if how in ("name_codebook", "questionnaire"):
+                        hits.append({"table": t, "url": f["url"], "file_name": f.get("path") or f["name"],
+                                     "raw": "", "host": h, "how_found": how,
+                                     "checked_at": row["checked_at"], "evidence": "sibling OSF component"})
+                    continue
                 if not how and h in REPO_HOSTS and args.deep and not deep_over(f"{h}|{k}"):
                     ##past the name (#2787 follow-up): sheets, zip members, text
                     if not args.offline:
@@ -1509,7 +1602,7 @@ def main() -> int:
                             _deep["opened"] += 1
                         deep_spend(f"{h}|{k}", t0)
                     shown_name = f.get("path") or f["name"]
-                    for sh in [x for x in (f.get("sheets") or []) if CODEBOOK.search(x) or SHEET_CODEBOOK.match(x)]:
+                    for sh in [x for x in (f.get("sheets") or []) if sheet_is_codebook(x)]:
                         ##a one-sheet workbook called 'Variables' is the data itself
                         if len(f.get("sheets") or []) > 1:
                             hits.append({"table": t, "url": f["url"], "file_name": f"{sh} (sheet in {shown_name})",
@@ -1568,7 +1661,8 @@ def main() -> int:
     for x in links:
         x.setdefault("evidence", "")
     review = review_links(live_tables)
-    links = ingest_links(live_tables) + review + kept_links + links
+    ingest = ingest_links(live_tables)
+    links = ingest + review + kept_links + links
     ##one row per (table, url): a deposit reached by two routes (a multi-URL
     ##cell, a child component) lists the same file twice. Keep the strongest.
     rank = {"recorded_at_ingest": 0, "recorded_by_review": 0, "typed_codebook": 1, "package_doc": 1, "name_codebook": 1,
@@ -1597,14 +1691,13 @@ def main() -> int:
         if f"{row['host']}|{row['deposit']}" in _deep["timed_out"] and not row["outcome"].startswith("hit:"):
             row["outcome"] = "deep_timeout"
     checked = kept_checked + checked
-    ##a table no crawler can list, documented by review: say so in the
-    ##checked file rather than leaving it out_of_scope
-    review_kinds: Dict[str, set] = {}
-    for x in review:
-        review_kinds.setdefault(x["table"], set()).add(x["how_found"])
-    for row in checked:
-        if row["table"] in review_kinds and row["outcome"].startswith("out_of_scope"):
-            row["outcome"] = "hit:" + "+".join(sorted(review_kinds[row["table"]]))
+    ##a table documented by review or recorded at ingest: say so in the
+    ##checked file, whatever the crawl made of its deposit. Until 2026-11-16
+    ##only review rows, and only over out_of_scope, were lifted: 692 live
+    ##tables with a codebook recorded at ingest sat at no_match /
+    ##out_of_scope here, and the coverage audit (which reads this file)
+    ##counted them as having none.
+    lift_side_hits(checked, review + ingest)
     links.sort(key=lambda x: (x["table"].lower(), x["how_found"], x["url"]))
     checked.sort(key=lambda x: (x["table"].lower(), x["data_url"]))
     write_csv(LINKS_OUT, links, LINK_FIELDS)

@@ -10293,7 +10293,7 @@ west_2021_retaliatory_aggression_study4_deq,core,item_response_warehouse_2,FALSE
 west_2022_psychnet_pclsv,core,item_response_warehouse_2,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,1,FALSE,FALSE,FALSE,unassessed,2
 west_2024_representation_men,conj,irw_conjoint,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,,,,,,,,TRUE,,,TRUE,FALSE,unassessed,0
 west_2024_representation_women,conj,irw_conjoint,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,,,,,,,,TRUE,,,TRUE,FALSE,unassessed,0
-western_reserve_project,core,item_response_warehouse,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,0.8,TRUE,FALSE,FALSE,unassessed,2
+western_reserve_project,core,item_response_warehouse,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,0.833,TRUE,FALSE,FALSE,unassessed,2
 westhoff2023_pbat,core,item_response_warehouse_2,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,1,FALSE,FALSE,FALSE,unassessed,2
 westhoff2023_stopd,core,item_response_warehouse_2,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,1,FALSE,FALSE,FALSE,unassessed,1
 white_2022_covid_vac_items_15_20,core,item_response_warehouse_7,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,1,FALSE,FALSE,FALSE,unassessed,1
@@ -10354,9 +10354,9 @@ williamson_2023_preacher_authority_tr,conj,irw_conjoint,FALSE,TRUE,TRUE,TRUE,TRU
 williamson_2025_aid_bilendi2024,conj,irw_conjoint,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,,,,,,,,TRUE,,,TRUE,FALSE,unassessed,0
 williamson_2025_aid_yougov2017,conj,irw_conjoint,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,,,,,,,,TRUE,,,TRUE,FALSE,unassessed,0
 wilmer-mrmet-and-rmet-validation-data-set-2022,core,item_response_warehouse_2,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,0.211,TRUE,FALSE,FALSE,unassessed,2
-wilmer-mrmet-normative-data-set-2022,core,item_response_warehouse_2,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,0.294,TRUE,FALSE,FALSE,unassessed,2
+wilmer-mrmet-normative-data-set-2022,core,item_response_warehouse_2,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,0.353,TRUE,FALSE,FALSE,unassessed,2
 wilmer-mrmet-normative-data-set-2022_nom,nom,irw_nominal,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,,TRUE,FALSE,FALSE,unassessed,1
-wilmer-rmet-normative-data-set-2022,core,item_response_warehouse_2,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,0.286,TRUE,FALSE,FALSE,unassessed,2
+wilmer-rmet-normative-data-set-2022,core,item_response_warehouse_2,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,0.357,TRUE,FALSE,FALSE,unassessed,2
 wilmer-rmet-normative-data-set-2022_nom,nom,irw_nominal,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,,TRUE,FALSE,FALSE,unassessed,1
 wilson_2022_kelpie_personality,core,item_response_warehouse_3,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,1,FALSE,FALSE,TRUE,shipped,2
 wimmer_2024_rivalry_immigrants_ar,conj,irw_conjoint,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,,,,,,,,FALSE,,,TRUE,FALSE,unassessed,1

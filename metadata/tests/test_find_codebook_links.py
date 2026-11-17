@@ -268,3 +268,44 @@ class JournalSupplementTest(unittest.TestCase):
         self.assertEqual(fcl.caption_kind("S1 File", "Empirical dataset and the corresponding codebook. (XLSX)"),
                          "name_codebook")
         self.assertIsNone(fcl.caption_kind("S10 File", "Translation Codebook"))
+
+
+class LiftSideHits(unittest.TestCase):
+    """A codebook recorded at ingest or by review outranks the crawl's verdict (2026-11-16)."""
+
+    def test_ingest_and_review_lift_any_non_hit(self):
+        checked = [{"table": "a", "outcome": "no_match"},
+                   {"table": "b", "outcome": "out_of_scope:host:kaggle.com"},
+                   {"table": "c", "outcome": "hit:name_codebook"},
+                   {"table": "d", "outcome": "no_match"}]
+        side = [{"table": "a", "how_found": "recorded_at_ingest"},
+                {"table": "b", "how_found": "recorded_by_review"},
+                {"table": "c", "how_found": "recorded_at_ingest"}]
+        fcl.lift_side_hits(checked, side)
+        self.assertEqual([r["outcome"] for r in checked],
+                         ["hit:recorded_at_ingest", "hit:recorded_by_review",
+                          "hit:name_codebook", "no_match"])
+
+
+class HandSamplePatterns(unittest.TestCase):
+    """Misses from the 2026-11-16 hand sample of 50 no_match tables."""
+
+    def test_questionnaire_named_documents(self):
+        for n in ("Questionnaire.pdf", "Questionnaire_Study1.docx", "cuestionario.pdf"):
+            self.assertEqual(fcl.match(n), "questionnaire", n)
+        for n in ("questionnaire_data.csv", "Questionnaire.sav", "Questionnaire responses.docx",
+                  "questionnaire.R"):
+            self.assertIsNone(fcl.match(n), n)
+
+    def test_codebook_sheets_in_a_data_workbook(self):
+        for sh in ("Keys", "Variable codes", "Names_of_variables", "Labels", "Codebook"):
+            self.assertTrue(fcl.sheet_is_codebook(sh), sh)
+        for sh in ("Data", "Sheet1", "Raw", "Study 2"):
+            self.assertFalse(fcl.sheet_is_codebook(sh), sh)
+
+    def test_captions_that_lead_with_the_document(self):
+        ck = fcl.caption_kind
+        self.assertEqual(ck("S1 File", "Questionnaire used for collection of data for this study"), "questionnaire")
+        self.assertEqual(ck("S2 File", "Data File README"), "name_readme")
+        self.assertEqual(ck("S3 File", "Questionnaire responses of all participants"), "data_or_results")
+        self.assertEqual(ck("S4 File", "Raw data"), "data_or_results")

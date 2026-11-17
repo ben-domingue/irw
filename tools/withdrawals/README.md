@@ -20,6 +20,18 @@ list, dry run first -- and, once its draft assertions pass, one call to
 `ledger.record(...)` so each withdrawn table gets a row in
 `itemtext/withdrawals.csv`, then commit that file with the script.
 
+Two things a new script gets wrong easily (both missed on #3017, 2026-11-02):
+
+- The `family` it passes to `ledger.record()` is the register's `family`
+  value, not the instrument's long name;
+  `test_rights_families_exist_in_the_register` fails otherwise.
+- An item-text withdrawal also rewrites the table's `public_note` in its
+  `provenance.csv` (or `language_backfill/*provenance.csv`) to open with
+  "IRW does not offer item text for this instrument." That opening is how
+  `itemtext/check_provenance.R` knows the table is withdrawn and exempts it
+  from the disclosure check. Two scripts left it out and 252 notes had to be
+  fixed afterwards (#3369).
+
 ## `itemtext/withdrawals.csv` -- the record keyed by table name (#2155)
 
 The rights register is organised by instrument, and only tables built by the

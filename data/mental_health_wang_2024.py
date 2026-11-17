@@ -17,7 +17,10 @@ def convert_to_irw(input_file, output_file):
 
     # parse as UTC 
     _ts = pd.to_datetime(responses_df['date_time'], utc=True, errors='coerce')
-    responses_df['date'] = ((_ts.astype('int64') // 10**9).where(_ts.notna())).astype('Int64')
+    # Unix seconds by subtraction: astype('int64') // 10**9 is 1000x too small under pandas 3 (#3565)
+    responses_df['date'] = ((_ts - pd.Timestamp("1970-01-01", tz="UTC")) // pd.Timedelta(seconds=1)).astype('Int64')
+    _d = responses_df['date'].dropna()
+    assert _d.between(1672531200, 1675209600).all(), "dates outside Jan 2023 collection window"  # 2023-01-01 .. 2023-02-01
 
     responses_df = responses_df.rename(columns={'serial_no': 'id', 'time_taken_in_seconds': 'rt'})
 

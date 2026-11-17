@@ -367,8 +367,12 @@ jobs:
       # to unstick.
       - name: Contract
         run: |
-          base="origin/${{ github.base_ref }}"
-          git fetch -q origin "${{ github.base_ref }}"
+          # Always diff against main (#3566): a PR based on another branch
+          # (e.g. a contributor's patch branch) otherwise sees every data/
+          # script as "added" and pre-existing warnings become blocking.
+          base="origin/main"
+          git fetch -q origin main
+          echo "base=$base"
           added=$(git diff --name-only --diff-filter=A "$base"...HEAD -- 'data/*.py' 'data/*.R' || true)
           modified=$(git diff --name-only --diff-filter=M "$base"...HEAD -- 'data/*.py' 'data/*.R' || true)
           if [ -z "$added$modified" ]; then echo "no data/ scripts in this PR"; exit 0; fi
@@ -382,6 +386,6 @@ jobs:
       # label harvest gets a warning naming the command to run.
       - name: Covariate label harvest (advisory)
         run: |
-          base="origin/${{ github.base_ref }}"
+          base="origin/main"
           files=$(git diff --name-only --diff-filter=AM "$base"...HEAD -- 'data/*.py' 'data/*.R' || true)
           if [ -n "$files" ]; then python metadata/check_label_harvest.py --annotate $files; fi

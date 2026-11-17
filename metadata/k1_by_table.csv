@@ -7727,7 +7727,7 @@ wilmer-mrmet-and-rmet-validation-data-set-2022,7,cov_age|cov_country|cov_educati
 wilmer-mrmet-normative-data-set-2022,7,cov_age|cov_country|cov_education|cov_education_raw|cov_ethnicity|cov_ethnicity_raw|cov_gender,9295,5522,9295,4264,0.4587,0.7228,ok
 wilmer-rmet-normative-data-set-2022,7,cov_age|cov_country|cov_education|cov_education_raw|cov_ethnicity|cov_ethnicity_raw|cov_gender,17680,9171,17680,6753,0.382,0.6406,ok
 wilson_2022_kelpie_personality,3,cov_age_years|cov_sex|cov_work_type,228,156,228,117,0.5132,0.8991,ok
-wine_luckett2021,0,,17,1,17,0,0,0,no_qi
+wine_luckett2021,0,,12,1,12,0,0,0,no_qi
 wirs,0,,1005,1,1005,0,0,0,no_qi
 wisniewski_2021_nihss,2,cov_age|cov_sex,225,85,225,29,0.1289,0.6533,ok
 witus_2022_narrator_perception,0,,809,1,809,0,0,0,no_qi
@@ -7873,7 +7873,7 @@ xuan_2026_procedural_knowledge,4,cov_age_band|cov_gender|cov_grade|cov_major,919
 xuan_2026_regulation_strategies,4,cov_age_band|cov_gender|cov_grade|cov_major,919,46,919,7,0.0076,0.0479,ok
 xuan_2026_self_evaluation,4,cov_age_band|cov_gender|cov_grade|cov_major,919,46,919,7,0.0076,0.0479,ok
 xue_2024_study2_efa,5,cov_age|cov_employment_field|cov_employment_status|cov_employment_wfh|cov_gender,333,326,333,319,0.958,1,ok
-xue_2024_study3_cfa,4,cov_age|cov_country|cov_gender|cov_work_env,944,386,945,191,0.2021,0.6138,ok
+xue_2024_study3_cfa,4,cov_age|cov_country|cov_gender|cov_work_env,945,386,945,191,0.2021,0.6138,ok
 xue_2025_academic_procrastination,0,,579,1,579,0,0,0,no_qi
 xue_2025_academic_stress,0,,579,1,579,0,0,0,no_qi
 xue_2025_coping_style,0,,579,1,579,0,0,0,no_qi

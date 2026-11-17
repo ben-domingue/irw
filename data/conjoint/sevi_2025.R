@@ -34,10 +34,14 @@
 ##tasks and the other 23 answered between one and six, so the per-task counts fall slightly.
 ##This is WIDER than the paper's analysis sample of 1,495, which also requires
 ##Finished == "True" and both attention checks passed (analyses.Rmd L159-165, L211). The two
-##checks are kept as covariates instead, so that sample can be reconstructed:
+##checks and Finished are kept as covariates instead, so that sample can be reconstructed
+##(all 7 tasks + cov_finished == 1 + both checks passed):
 ##  cov_attention_pass_1  Q3, 1 = "I understand."
 ##  cov_attention_pass_2  Q4, 1 = "Extremely interested,Very interested" -- the item asks
 ##                        respondents who are reading to select both options
+##  cov_finished          Qualtrics Finished, 1 = "True", 0 = "False" (added 2026-11-16: without
+##                        it 5 unfinished respondents who answered all 7 tasks and passed both
+##                        checks could not be excluded, giving 1,500 instead of 1,495)
 ##Other covariates: cov_gender (Q5 "Do you describe yourself as a man, woman, or in some
 ##other way?", Man -> male, Woman -> female, "Other (Specify)" -> other), cov_age (Q6,
 ##years), cov_education (Q10 answer text), cov_race (Q11 answer text, a multi-select whose
@@ -48,7 +52,7 @@
 ##attribute mattered most), cov_duration_sec (Qualtrics survey duration).
 ##Dropped: IP address, latitude/longitude, ZIP code, the Lucid respondent id (rid), the
 ##Qualtrics ResponseId (id is re-keyed to 1..n), the free-text "Other (Specify)" fields
-##(Q5_3_TEXT, Q11_6_TEXT, Q30_6_TEXT), start/end/recorded timestamps, Progress, Finished,
+##(Q5_3_TEXT, Q11_6_TEXT, Q30_6_TEXT), start/end/recorded timestamps, Progress,
 ##consent, and the Lucid panel columns age/gender/hhi/ethnicity/hispanic/education/region/
 ##political_party, which repeat the Q items as bare numeric codes with no codebook.
 ##No survey weight in the deposit.
@@ -114,7 +118,8 @@ cv <- data.table(
                                    "Previous record", "Other")),
   cov_attention_pass_1 = as.integer(chk(r$Q3, c("I understand.", "I do not understand.")) == "I understand."),
   cov_attention_pass_2 = as.integer(!is.na(r$Q4) & r$Q4 == "Extremely interested,Very interested"),
-  cov_duration_sec = as.integer(r[["Duration (in seconds)"]]))
+  cov_duration_sec = as.integer(r[["Duration (in seconds)"]]),
+  cov_finished = as.integer(chk(r$Finished, c("True", "False")) == "True"))
 cv[is.na(r$Q4), cov_attention_pass_2 := NA_integer_]
 stopifnot(all(cv$cov_age %in% c(18:120, NA)), is.na(r$Q13) | is.na(r$Q14))
 
