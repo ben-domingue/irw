@@ -22,6 +22,7 @@ gnambs_2018_rses10,cov,data/covariance/batch_metasem.R,2026-11-17
 griffith_1998_interpersonal24,cov,data/covariance/batch_rpackages2.R,2026-11-17
 grob_2018_ids2_14,cov,data/covariance/batch_rpackages2.R,2026-11-17
 hagger_2018_raa9,cov,data/covariance/osf_hagger2018_raa.py,2026-11-17
+he_2026_utaut17,cov,data/covariance/zenodo_he2026_utaut.py,2026-11-17
 holzinger_1937_bifactor14,cov,data/covariance/pilot_rpackages.R,2026-11-17
 holzinger_1939_grantwhite24,cov,data/covariance/pilot_rpackages.R,2026-11-17
 holzinger_1939_grantwhite9,cov,data/covariance/pilot_rpackages.R,2026-11-17
@@ -48,5 +49,6 @@ scherhag_2026_hexacod7,cov,data/covariance/zenodo_scherhag2026_hexacod.py,2026-1
 smith_1983_ability6,cov,data/covariance/pilot_rpackages.R,2026-11-17
 thurstone_1941_ability9,cov,data/covariance/pilot_rpackages.R,2026-11-17
 tucker_1958_ability9,cov,data/covariance/pilot_rpackages.R,2026-11-17
+wang_2026_aidependence4,cov,data/covariance/zenodo_wang2026_aidependence.py,2026-11-17
 wheaton_1977_alienation6,cov,data/covariance/batch_sem.R,2026-11-17
 wvs_1994_jobsat3,cov,data/covariance/batch_metasem.R,2026-11-17
