@@ -168,7 +168,7 @@ Some numbers a count needs belong to the vote, not to its rule set: Debian's quo
 |---|---|
 | `table` | as in `design_tables.csv` |
 | `item` | the table's own `item` string, for a value of one option; empty for a value of the whole table |
-| `quantity` | what the value is: `developers` (the number of current Developers, which gives the quorum's Q; whole table) or `majority` (an option's required majority, `S:1`; an option without a row needs 1:1), or `writein_filed` (`yes` or `no`: whether a write-in candidate had declared for the contest, as far as a count depends on it; whole table) |
+| `quantity` | what the value is: `developers` (the number of current Developers, which gives the quorum's Q; whole table) or `majority` (an option's required majority, `S:1`; an option without a row needs 1:1), or `writein_filed` (`yes` or `no`: whether the count gives the pooled write-in line votes, as it does where a write-in candidate declared for the contest; whole table, and only where a count depends on it). It is inferred from the round reports, not read from a list of declared candidates, which no saved source prints: `yes` where a report prints or counts a write-in row with votes, `no` where it prints none, or one with no votes; for a table with no published rounds, `no` rests on the jurisdiction's statement that a write-in for a candidate who did not qualify is not counted |
 | `value` | the value the count used |
 | `evidence` | where the value comes from, quoted, as in `counting_rules.csv` |
 | `source_url` | the page the value comes from |
