@@ -52,7 +52,9 @@ def convert_to_irw_format(input_file, output_file):
     
     
     irw_df['date'] = pd.to_datetime(irw_df['date'])
-    irw_df['date'] = irw_df['date'].astype('int64') // 10**9
+    # Unix seconds by subtraction: astype('int64') // 10**9 is 1000x too small under pandas 3 (#3565)
+    irw_df['date'] = (irw_df['date'] - pd.Timestamp("1970-01-01")) // pd.Timedelta(seconds=1)
+    assert irw_df['date'].between(1738368000, 1743465600).all(), "dates outside the Feb-Mar 2025 collection window"  # 2025-02-01 .. 2025-04-01
     
     
     irw_df = irw_df.drop_duplicates()
