@@ -80,7 +80,7 @@ Data acquisition is tracked in #3582. Everything else lives here until the famil
 
 **Plumbing.** This can be built now, but it is not released until #3582 shows a few hundred matrices are reachable.
 
-- [ ] `red_up --dataset irw_cov`: route uploads to `irw_validate.cov` (the destination chooses the validator, as for rankings), with `matrices.csv` as the gate. A table with no record row is refused.
+- [x] `red_up --dataset irw_cov` (code only; `irw_cov` is not yet in `redivis_config.R` because the dataset doesn't exist): route uploads to `irw_validate.cov` (the destination chooses the validator, as for rankings), with `matrices.csv` as the gate. A table with no record row is refused.
 - [ ] `metadata/NN_cov.R` → `cov_metadata`: one row per table × group, with n_vars, N, matrix_type, PD flag, minimum eigenvalue and has_sd. Register it in `red_up/cli.py` `META_TABLES` and `upload_meta.py` `FILE_TABLE_MAP`.
 - [ ] `automated_finding/dictionary_auto_cov.csv` plus `metadata/02_biblio.R` → `cov_biblio` (no sheet, as for conjoint and rankings).
 - [ ] Packages (R and Python):
