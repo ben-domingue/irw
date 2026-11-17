@@ -4,6 +4,7 @@ becker_1992_ability3,cov,data/covariance/batch_metasem.R,2026-11-17
 becker_1994_ability3,cov,data/covariance/batch_metasem.R,2026-11-17
 boer_2016_lmx,cov,data/covariance/batch_metasem.R,2026-11-17
 boruch_1970_mtmm14,cov,data/covariance/batch_rpackages2.R,2026-11-17
+brady_2005_service15,cov,data/covariance/zenodo_brady2005.py,2026-11-17
 brigham_1932_ability9,cov,data/covariance/pilot_rpackages.R,2026-11-17
 burt_1915_emotions11,cov,data/covariance/pilot_rpackages.R,2026-11-17
 chen_2006_hrqol18,cov,data/covariance/pilot_rpackages.R,2026-11-17
