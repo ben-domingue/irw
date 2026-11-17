@@ -382,6 +382,42 @@ right — but where the drafting genuinely leaves it ambiguous, escalate rather 
   further back — `liu_2025_speaking_selfefficacy`'s items are Wang & Sun's, which are themselves
   near-verbatim MSLQ, and the MSLQ is public domain. Ask whose page the wording *originated* on.
 
+### Rulings that settle common cases
+
+Ruled by Ben on irw#2382 (2026-09-25). Triage applies them through `itemtext/reaudit/TRIAGE_BRIEF.md`;
+they bind extraction too.
+
+- **Partial coverage** ships only when more than half of the table's items are worded, the rest
+  left blank and the count stated in the provenance note. Exactly half is not enough.
+- **Short item titles or descriptors** ("Grandiose", a one-word key) are not item text.
+- **A respondent-produced target scored against a rubric** (a kanji to write, a sentence to
+  transcribe) is the answer key, not item text.
+- **PISA:** skip it.
+- **A commercially sold test whose publisher states no terms:** hold.
+- **An originator who deliberately withholds the wording** ("not distributed", "cannot be
+  republished"): block.
+- **An instrument inferred rather than named** (from composite columns or the item count) may be
+  used, but verify the inference first (do the item p-values fit the canonical items?) and file an
+  issue for each such table.
+- **CC BY-SA wording ships with a per-table notice**, by the same route as NC wording: a row in
+  `itemtext/itemtext_licences.csv` (source, licence link, changes made; IRW's translations are
+  released CC BY-SA) and `itemtext/set_licence_notices.py` after upload. Re-run the script after
+  any new upload of a listed table: a replaced table keeps its description, a new one starts blank.
+- **Check which file the wording came from.** One deposit can carry two licences: the SSVF tables'
+  wording comes from FOIA files the repository marks public domain, and only its derived files are
+  CC BY-SA, so no notice applied.
+
+**A PsycTESTS record blocks a named instrument.** The record's permissions line (APA's standard
+boilerplate: reproduction for non-commercial research and education only, other uses need
+permission) is a reservation, so an instrument with a record does not ship without a grant. Ruled a
+hold on 2026-09-23 and a block on 2026-10-15, after counsel's advice. Agents cannot read PsycNET, so
+look for a record through Crossref before recommending a ship:
+`https://api.crossref.org/works?query.bibliographic=<instrument name>&filter=prefix:10.1037,type:dataset&rows=5`.
+Records are DOIs of the form `10.1037/tNNNNN-000`. Pause about 3 s between calls or Crossref returns
+429, and treat a miss as no evidence either way. An express grant or a CC BY first publication
+outranks the block, and a record for a later translation only does not block the original. Record
+the lookup in the provenance note either way.
+
 ### Mechanics
 
 **A rights block with no quote in it is not a rights block.** Put the quoted sentence, its URL,

@@ -24,6 +24,23 @@ the families); the rest are groups inside core.
 
 Everything else sits at the top level.
 
+## CIS (Spain) studies
+
+The `spain_*` scripts read CIS microdata. Three coding traps, found on
+`spain_2013_services` (#2401) and the seven tables of #2864:
+
+- **Code 0 means "No procede" (not asked) only for the items listed in the
+  `MISSING VALUES` block** of the study's SPSS syntax file (`ES<study>`).
+  Never recode 0 to missing across all `p*` columns: on a 0-10 rating item
+  whose value labels list only 98/99, 0 is a real answer.
+- **Mark-all-that-apply lists** (RESPUESTA MÚLTIPLE) code 1 = marked,
+  BLANK = asked but not marked, 0 = not asked. The N.C. and "Otra" flags are
+  separate 0/1 columns.
+- **Code 3 on a 5-point scale labelled "(NO LEER)"** is the volunteered
+  middle answer and is kept. Check the label in each study's `ES<study>`
+  file: in `spain_2013_services` p27c, 3 is a status ("still being
+  processed"), not an answer. See `tools/repairs/spain_cis_code3_2864.py`.
+
 ## Older names
 
 Many older scripts predate the naming rule: upper-case acronyms, no year,
