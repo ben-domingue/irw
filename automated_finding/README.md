@@ -824,3 +824,16 @@ Run the `--check` form against a merged candidate file before triaging it,
 same as the license/dictionary checks. It's a heuristic (only catches
 datasets mentioned with a recognizable ID in `BATCH_LOG.md`'s prose) —
 treat a 0-match result as "no repeats caught," not "no repeats exist."
+
+## Tests
+
+CI runs `automated_finding/tests` under unittest discovery
+(`python -m unittest discover -s automated_finding/tests -t .`, in
+`.github/workflows/tests.yml`), in an environment with **neither pytest nor
+openpyxl**. Some existing tests are pytest-style and pass locally under
+pytest, so the mismatch only shows in CI. Write new tests as
+`unittest.TestCase` classes with `unittest.mock`, with no `pytest` import or
+fixture arguments. A test that writes an `.xlsx` needs a guarded openpyxl
+import and `@unittest.skipUnless(HAVE_OPENPYXL, ...)`, and the cases that
+cover the actual defect should not depend on that file. Run the unittest
+command above before pushing.

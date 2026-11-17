@@ -910,6 +910,13 @@ output-format one:
   (don't carry it into a `cov_*` column), say in `BATCH_LOG.md` which cell it
   was and why it was read as incidental, and process the rest.
 
+  **`screen_for_pii` will not find these for you.** Its value checks fire
+  only on a column OF identifiers (at least 5 matches and 20% of values), so
+  one email typed into a free-text `Edad` (age) column screens clean, as it
+  did on `10.7910/DVN/VSFCVG` (2026-10-19). When a questionnaire collects age
+  or any other demographic as free text, read that column's distinct values
+  yourself before shipping.
+
   **Narrowed 2026-10-19** from the blanket form, which had been reaffirmed
   earlier the same day. It bit on the Parkins Energy Literacy deposit over
   ONE respondent who typed their own email address and first name into a
@@ -1452,6 +1459,16 @@ otherwise.** Chase it: if the non-integer cells each equal the column's mean
 over the integer cells (or its reflection, when a reverse-code was applied
 after imputation), the file is mean-imputed and those cells must be dropped,
 not shipped.
+
+Test the pattern per item before dropping anything (Ben approved "flag and
+remove", 2026-10-06). **Exactly one distinct non-integer value per item** is
+item-mean imputation, and dropping the non-integer cells removes every imputed
+cell. Under multiple or person-mean imputation, imputed cells can be whole
+numbers, so dropping the fractions misses some: hold that deposit rather than
+ship it. **Halves and thirds are not imputation at all**: in pone.0263022 they
+were the averages of repeat attempts by the same respondent (built as
+`meyer_2022_*`, with those respondents' rows dropped whole). Check for them
+before calling fractions imputation.
 
 **An item's observed range is not its permitted response set.** A rarely used
 extreme can make one item's observed range narrower than another's. The shared

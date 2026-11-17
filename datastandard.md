@@ -36,6 +36,11 @@ either silently.*
   site or an API, broadcast video, a Kaggle re-upload of someone else's data):
   **do not host**, even under a permissive licence. The re-uploader's licence
   does not clear data they did not own; the originator's terms govern.
+- **A README that says the data cannot be shared**: check which file it means
+  before holding. "The raw data cannot be shared due to data protection laws"
+  governs a raw file that is then not in the deposit; the prepared analysis
+  file the authors did deposit is covered by the deposit's licence and can be
+  ingested (Ben, 2026-10-21, irw#3141).
 
 Anything that fits none of these goes to ben-domingue. Do not process it on your
 own judgment, and do not skip it silently either: say what it is and ask.
@@ -337,6 +342,9 @@ If column names are in a non-English language, create a mapping to `item_1`, `it
 
 ### Subscale aggregate columns
 Aggregate columns often share a prefix with item columns but have a suffix like `_total`, `_TT`, `_FAMIL`, `_001`, `_002`. Exclude them explicitly by checking for these suffixes before building the item column list.
+
+### Counts and measured quantities
+Ruled by ben-domingue on #1700 (2026-10-01). **A self-reported count is a response**: how many drinks, binge episodes, close friends, times played sport. Keep it as an item, with a data note when it sits beside ratings. **A measure of time, length or mass is not a response**, even when self-reported: minutes per day, hh:mm durations, amounts consumed. Take those columns out of the items and keep the rest of the table; a person-level one that is useful (hours of work missed, say) may ship as a `cov_*` column. When this changes a live table, add `metadata/data_notes.csv` and `metadata/table_changes.csv` rows. The `continuous_response` collection (`collections/registry.csv`) holds tables that are mainly (at least half their items) judgements on a continuum, bounded or not; scored or graded values (partial credit, essay marks) are not members, and neither are counts or measured quantities.
 
 ### Verifying a continuous-looking column is actually a raw response
 Not every column with plausible, in-range-looking values is a raw single-observation response — some are already a mean/contrast/index computed across several trials or items, which is a composite (see "Subscale aggregate columns" above), not a `resp`. This is easy to miss when the composite happens to fall in a plausible range, or when its non-integer look is (wrongly) taken as evidence it's a legitimate continuous rating rather than checked. Before accepting a continuous or oddly-fractional column as `resp`:
