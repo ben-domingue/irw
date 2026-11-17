@@ -35,7 +35,7 @@ Usage: pass one row as JSON on stdin, e.g.:
     echo '{"table": "foo_2024", "description": "...", "derived_license": "CC BY 4.0"}' \\
         | python stage_dict_row.py
 
-For a comps, nominal, simsyn, conjoint or rankings table add `--source comps|nom|sim|conj|rank`; each
+For a comps, nominal, simsyn, conjoint, rankings or covariance table add `--source comps|nom|sim|conj|rank|cov`; each
 dictionary has its own automated file (#2628). Default is core.
 
 `codebook_url` (#2770): the source's own codebook FILE -- whoever builds a
@@ -88,6 +88,9 @@ SOURCE_FILES = {
     ##Rankings (irw_rank, data/rankings/README.md). Read by metadata/02_biblio.R
     ##alone, with no sheet, as conj (dbs$rank, since 2026-10-15).
     "rank": "dictionary_auto_rank.csv",
+    ##Published correlation/covariance matrices (irw_cov, data/covariance/
+    ##README.md). No sheet, as conj and rank; not yet read by 02_biblio.R.
+    "cov": "dictionary_auto_cov.csv",
 }
 
 

@@ -248,7 +248,8 @@ class DataDoiRoutingTest(StageDictRowTest):
                               ("comps", "dictionary_auto_comps.csv"),
                               ("nom", "dictionary_auto_nom.csv"),
                               ("sim", "dictionary_auto_sim.csv"),
-                              ("conj", "dictionary_auto_conj.csv")]:
+                              ("conj", "dictionary_auto_conj.csv"),
+                              ("cov", "dictionary_auto_cov.csv")]:
                 with self.subTest(source=src):
                     self.assertEqual(stage_dict_row.staging_path(src),
                                      SCRIPT.parent / name)
