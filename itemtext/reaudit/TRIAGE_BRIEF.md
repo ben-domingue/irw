@@ -174,12 +174,13 @@ below changes what you write.
 - **Commercially sold test, publisher states no terms** -> NEEDS_HUMAN, `evidence` starting `HOLD:commercial`.
 - **DSM diagnostic criteria text** -> RIGHTS_BLOCK (APA: written permission required for any use).
 - **CC BY-SA wording is not a block** (rule 18). Write OBTAINABLE, with `rights` starting `CC BY-SA:` and naming the
-  source. The table will need a licence notice. **CC BY-NC-SA still blocks.**
-- **PsycTESTS hold (2026-09-23).** Before any `silence` ship on a named instrument, query Crossref:
+  source. The table will need a licence notice. **CC BY-NC-SA is not a block either** (non-commercial use is
+  permitted): write OBTAINABLE with `rights` starting `CC BY-NC-SA:`; the table carries the NC licence notice.
+- **PsycTESTS block (ruled 2026-10-15, replacing the 2026-09-23 hold).** Before any `silence` ship on a named instrument, query Crossref:
   `https://api.crossref.org/works?query.bibliographic=<instrument name>&filter=prefix:10.1037,type:dataset&rows=5`
-  (pause 3 s between calls). If a `10.1037/t…` record matches the instrument, the verdict is NEEDS_HUMAN with
-  `evidence` starting `PSYCTESTS:<doi>`. An express grant or a CC BY first publication outranks the hold. A record for
-  a later translation only does not hold the original. Record the lookup in `rights` either way.
+  (pause 3 s between calls). If a `10.1037/t…` record matches the instrument, the verdict is RIGHTS_BLOCK with
+  `evidence` starting `PSYCTESTS:<doi>`. An express grant or a CC BY first publication outranks the block. A record for
+  a later translation only does not block the original. Record the lookup in `rights` either way.
 - Register rows ruled since wave 4 include HADS, DAS/MHS (incl. DAS-4), BDI-II/Pearson, BSI-18, NEO-FFI/PAR, UCLA-L
   (ship), RES (ship), MSPSS (ship), AUDIT and SRQ (ship_with_note), STOP-Bang, GCBS (ship), MFQ-2 (ship). Read the
   register first.
