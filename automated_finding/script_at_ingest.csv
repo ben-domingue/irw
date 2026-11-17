@@ -2,6 +2,7 @@ table,source,script,recorded_at
 bechtoldt_1961_ability17,cov,data/covariance/pilot_rpackages.R,2026-11-17
 becker_1992_ability3,cov,data/covariance/batch_metasem.R,2026-11-17
 becker_1994_ability3,cov,data/covariance/batch_metasem.R,2026-11-17
+berki_2026_sportcommit7,cov,data/covariance/osf_berki2026_sportcommit.py,2026-11-17
 blau_1967_occupation5,cov,data/covariance/batch_sem.R,2026-11-17
 boer_2016_lmx,cov,data/covariance/batch_metasem.R,2026-11-17
 boruch_1970_mtmm14,cov,data/covariance/batch_rpackages2.R,2026-11-17
@@ -20,6 +21,7 @@ duncan_1968_peer10,cov,data/covariance/batch_sem.R,2026-11-17
 gnambs_2018_rses10,cov,data/covariance/batch_metasem.R,2026-11-17
 griffith_1998_interpersonal24,cov,data/covariance/batch_rpackages2.R,2026-11-17
 grob_2018_ids2_14,cov,data/covariance/batch_rpackages2.R,2026-11-17
+hagger_2018_raa9,cov,data/covariance/osf_hagger2018_raa.py,2026-11-17
 holzinger_1937_bifactor14,cov,data/covariance/pilot_rpackages.R,2026-11-17
 holzinger_1939_grantwhite24,cov,data/covariance/pilot_rpackages.R,2026-11-17
 holzinger_1939_grantwhite9,cov,data/covariance/pilot_rpackages.R,2026-11-17
@@ -42,6 +44,7 @@ pollack_2012_estress9,cov,data/covariance/batch_rpackages2.R,2026-11-17
 reise_2007_health16,cov,data/covariance/pilot_rpackages.R,2026-11-17
 roorda_2011_engagement,cov,data/covariance/batch_metasem.R,2026-11-17
 scalco_2017_tpborganic,cov,data/covariance/batch_metasem.R,2026-11-17
+scherhag_2026_hexacod7,cov,data/covariance/zenodo_scherhag2026_hexacod.py,2026-11-17
 smith_1983_ability6,cov,data/covariance/pilot_rpackages.R,2026-11-17
 thurstone_1941_ability9,cov,data/covariance/pilot_rpackages.R,2026-11-17
 tucker_1958_ability9,cov,data/covariance/pilot_rpackages.R,2026-11-17
