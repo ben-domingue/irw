@@ -31,6 +31,7 @@ Run: python metadata/tests/test_rank_rules_join.py -v
 """
 import csv
 import unittest
+from collections import Counter
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -42,6 +43,24 @@ RULES = ROOT / "data" / "rankings" / "counting_rules.csv"
 #: file was written after its tables. Name one here rather than dropping
 #: test_no_rule_set_is_unreachable, so the exception stays visible.
 RULES_AHEAD_OF_DATA = ()
+
+#: Tables joined, per rule set, in the order of counting_rules.csv. A date or key edit
+#: that moves a table from one rule set to another fails here although the total holds.
+JOINED = {
+    "mpls_2009": 22, "mpls_2013": 8, "mpls_2015plus": 58, "ak_2020plus": 115,
+    "debian_2003": 18, "debian_2015": 8, "debian_2022plus": 7, "nsw_la_1979plus": 279,
+    "nyc_2019plus": 127, "oakland_2006plus": 73, "berkeley_2004plus": 36, "sanleandro_2010plus": 21,
+    "maine_2016": 10, "maine_2023plus": 1,
+    "sf_2002": 15, "sf_2008": 17, "sf_2015": 3, "sf_2016plus": 47,
+    "burlington_2005": 2, "burlington_2021plus": 6,
+    "stlouispark_2018plus": 4, "minnetonka_2020plus": 7, "bloomington_2023plus": 2,
+    "takoma_2019plus": 7, "redondo_2023plus": 5, "pierce_2007": 4, "westbrook_2021plus": 1,
+    "boulder_2020plus": 1, "easthampton_2019plus": 1, "corvallis_2022plus": 2,
+    "lascruces_2019plus": 3, "santafe_2008plus": 3,
+    "portlandor_council_2022plus": 4, "portlandor_exec_2022plus": 2,
+    "eastpointe_2019plus": 2, "eastpointe_single_2019plus": 1,
+    "utah_2018plus": 13, "portlandme_2020": 4, "portlandme_2022plus": 3,
+}
 
 
 def read(path):
@@ -101,14 +120,19 @@ class RulesJoin(unittest.TestCase):
         self.assertFalse(twice, f"{len(twice)} tables match more than one rule set: {twice[:4]}")
 
     def test_the_join_reaches_the_tables_it_should(self):
-        """A count, so a key that stops matching is a failure and not a quiet zero.
+        """A count, so a key that stops matching is a failure and not a quiet zero, and a
+        count per rule set, JOINED, so that a table moving between rule sets fails too.
 
-        The jurisdictions whose rules are written down: Minneapolis (88),
+        The jurisdictions whose rules are written down, with the sums of JOINED by jurisdiction: Minneapolis (88),
         Alaska (115: 63 of 2022 and 52 of 2024), the Debian Project (33) and New South Wales (279), whose
         tables are also counted on the key below. From the FairVote pool: New York City (127), Oakland (73), Berkeley (36), San Leandro (21), Maine (11), San Francisco (82), Burlington (8), St. Louis Park (4), Minnetonka (7), Bloomington (2), Takoma Park (7), Redondo Beach (5), Pierce County (4), Westbrook (1), Boulder (1), Easthampton (1), Corvallis (2), Las Cruces (3), Santa Fe (3), Portland, Oregon (6), Eastpointe (3), the Utah pilot cities (13), Portland, Maine (7).
         """
-        joined = [r for r in self.design if matching(self.rules, r)]
+        joined = [m[0]["rule_set"] for m in (matching(self.rules, r) for r in self.design) if m]
         self.assertEqual(len(joined), 942)
+        self.assertEqual(sum(JOINED.values()), 942)
+        self.assertEqual(dict(Counter(joined)), JOINED)
+        self.assertEqual(list(JOINED), [r["rule_set"] for r in self.rules],
+                         "JOINED names every rule set once, in the file's order")
         keyed = [r for r in self.design if (r["rules_jurisdiction"] or "").strip()]
         self.assertEqual(len(keyed), 301)
         self.assertEqual({rules_key(r) for r in keyed}, {"New South Wales (Legislative Assembly)", "Eastpointe (one seat)", "Eastpointe (two seats)", "PortlandOR (Council)", "PortlandOR (Mayor and Auditor)", "Utah (municipal pilot)"})
