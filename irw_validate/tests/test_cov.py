@@ -3,7 +3,10 @@ import unittest
 
 import pandas as pd
 
-from irw_validate.cov import validate_cov_frame
+import tempfile
+from pathlib import Path
+
+from irw_validate.cov import validate_cov_file, validate_cov_frame
 
 LABEL = "smith_1990_abilities.csv"
 
@@ -28,6 +31,22 @@ class CovTest(unittest.TestCase):
         self.assertEqual(r.findings, [])
         self.assertEqual(r.stats["n_vars"], {"": 3})
         self.assertTrue(r.stats["has_sd"][""])
+
+    def test_moment_rows_survive_a_csv_round_trip(self):
+        ## Read from CSV under pandas 3 a blank var2 is string-dtype NaN, which was
+        ## stringified to "nan" and failed V3 on every sd/mean row.
+        with tempfile.TemporaryDirectory() as d:
+            path = Path(d) / LABEL
+            table().to_csv(path, index=False)
+            r = validate_cov_file(path)
+        self.assertEqual([f.check for f in r.findings if f.severity == "error"], [])
+
+    def test_blank_group_is_refused(self):
+        ## groupby dropped blank-group rows, so a table whose groups were all
+        ## blank passed without a single matrix being checked.
+        df = table().assign(group="g1")
+        df.loc[df.index[:3], "group"] = None
+        self.assertIn("cov_group", checks(df, "error"))
 
     def test_non_pd_is_a_warning_not_an_error(self):
         df = table(r12=0.9, r13=0.9, r23=-0.9)

@@ -161,8 +161,14 @@ def validate_cov_frame(df, *, label: str = "") -> Report:
     df = df.assign(stat=stat, value=val, n=n.astype(int),
                    var1=df["var1"].astype(str).str.strip(),
                    var2=df["var2"].where(~_blank(df["var2"]), None))
-    df["var2"] = df["var2"].map(lambda x: None if x is None else str(x).strip())
-    groups = [(None, df)] if "group" not in cols else [(g, s) for g, s in df.groupby("group", sort=False)]
+    df["var2"] = df["var2"].map(lambda x: None if x is None or pd.isna(x) else str(x).strip())
+    if "group" in cols and _blank(df["group"]).any():
+        ## groupby drops a blank group, so its rows were never checked at all.
+        out.append(_f("cov_group", "error",
+                      f"{int(_blank(df['group']).sum())} rows with a blank group (a table with a group column needs one on every row)", table))
+        out.extend(check_name(table))
+        return report
+    groups = [(None, df)] if "group" not in cols else [(g, s) for g, s in df.groupby("group", sort=False, dropna=False)]
     report.stats["n_groups"] = len(groups)
     for gname, sub in groups:
         where = f" (group {gname})" if gname is not None else ""

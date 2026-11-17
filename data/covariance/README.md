@@ -4,9 +4,17 @@ Processing scripts and records for the **covariance** data family (`source = "co
 
 Not to be confused with `cov_*` columns in other families, which are person-level covariates.
 
-**Status (2026-11-17).** Draft standard, pilot only. `pilot_rpackages.R` builds 12 tables (14 matrices) from matrices already transcribed into `psychTools`, `psych` and base R `datasets`. All pass `irw_validate.cov`, and `check_roundtrip.R` confirms that each rebuilt matrix equals its package original exactly and that lavaan fits on the IRW copy match fits on the original. Nothing is on Redivis. `irw_cov` does not exist yet and is named in no client config, per the rule that a dataset is configured only after its first release.
+**Status (2026-11-17).** Draft standard. 45 tables (551 matrices) are built locally and pass `irw_validate.cov`, and every one has been checked to equal its package original exactly. `matrices.csv` records each matrix; `held.csv` records every candidate not built. On Redivis, `irw_cov:4e2q` v1.0 holds one table, `holzinger_1939_grantwhite9` (released by Ben on 2026-11-17).
 
 **Second batch (2026-11-17, #3582).** `batch_rpackages2.R` adds 7 tables (11 matrices) from `fungible`, `ggm`, `EFAtools`, `GPArotation` and `psychTools`. `fungible`, `ggm` and `EFAtools` are read from pinned CRAN source tarballs instead of being installed (`fungible` pulls in OpenMx). `held.csv` lists every candidate considered and not built, and why: held for licence, values or N; pending an N from the original paper; or out of scope. Dictionary rows for all tables are in `automated_finding/dictionary_auto_cov.csv` (`stage_dict_row.py --source cov`). `02_biblio.R` does not read it yet. `holzinger_1939_grantwhite9` is released on Redivis as `irw_cov` v1.0 (Ben, 2026-11-17).
+
+**metaSEM and test manuals (2026-11-17, #3582).** `batch_metasem.R` builds 17 tables (511 study matrices) from `metaSEM` 2.0, read from its pinned CRAN tarball. Rulings (Ben, 2026-11-17):
+- A variable a study never measured (a blank diagonal) is dropped from that study's matrix, and `notes` names it.
+- A study still holding a blank cell after that is not built: 30 studies in `boer_2016_lmx`, `cheung_2000_tpb` and `scalco_2017_tpborganic`, listed in `held.csv`.
+- Matrices computed by a package author from survey microdata (ISSP, WVS) are in scope, with a note.
+- A matrix in a GPL package is GPL even when it comes from a commercial test manual. `batch_rpackages3.R` builds the WJ IV norming matrices (six age groups) and the NEO PI-R facets on that basis.
+
+Gnambs18 keeps only its 36 reported matrices: the other 77 were reproduced from factor loadings, which is model output. Values are written at full precision (the ISSP covariances are not short decimals). `batch_sem.R` adds five classic SEM teaching matrices shipped with `sem` (Duncan–Haller–Portes, Wheaton, Kerckhoff, Blau–Duncan, McDonald–Clelland union sentiment), and `batch_rpackages3.R` adds `psych::cattell`. `zenodo_brady2005.py` builds Brady et al. (2005) from an MIT-licensed Zenodo deposit.
 
 ```
 Rscript data/covariance/pilot_rpackages.R <out dir>
