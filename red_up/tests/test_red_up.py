@@ -1194,6 +1194,70 @@ class ValidatorGate(unittest.TestCase):
         self.assertFalse(report.ok)
         self.assertTrue(any("unreadable" in e for e in report.errors), report.errors)
 
+    COV = Target(name="irw_cov", label="covariance matrices", kind="aux", source="cov")
+
+    def _cov_record(self, rows=(("smith_1990_abilities", ""),)):
+        """A matrices.csv in a scratch dir, pointed to by IRW_COV_RECORD_DIR."""
+        d = Path(tempfile.mkdtemp())
+        self.addCleanup(shutil.rmtree, d, ignore_errors=True)
+        (d / "matrices.csv").write_text(
+            "table,group,n_obs,matrix_type\n" + "".join(f"{t},{g},200,pearson\n" for t, g in rows),
+            encoding="utf-8")
+        patcher = mock.patch.dict(os.environ, {"IRW_COV_RECORD_DIR": str(d)})
+        patcher.start()
+        self.addCleanup(patcher.stop)
+        return d
+
+    def _cov_rows(self, r=0.5, group=None):
+        cells = [("a", "a", 1.0), ("b", "a", r), ("b", "b", 1.0)]
+        head = "stat,var1,var2,value,n" + (",group" if group else "")
+        tail = f",{group}" if group else ""
+        return head + "\n" + "".join(f"cor,{a},{b},{v},200{tail}\n" for a, b, v in cells)
+
+    def test_a_cov_table_with_a_record_row_passes(self):
+        """No id/item/resp: the destination selects irw_validate.cov."""
+        self._cov_record()
+        path = self._csv("smith_1990_abilities.csv", self._cov_rows())
+        report = self._check(path, "smith_1990_abilities", target=self.COV)
+        self.assertTrue(report.ok, report.errors)
+
+    def test_a_cov_table_without_a_record_row_is_blocked(self):
+        self._cov_record(rows=())
+        path = self._csv("smith_1990_abilities.csv", self._cov_rows())
+        report = self._check(path, "smith_1990_abilities", target=self.COV)
+        self.assertFalse(report.ok)
+        self.assertTrue(any("cov_record" in e and "matrices.csv" in e for e in report.errors), report.errors)
+
+    def test_cov_record_groups_must_match_the_table(self):
+        self._cov_record(rows=(("smith_1990_abilities", "boys"), ("smith_1990_abilities", "girls")))
+        path = self._csv("smith_1990_abilities.csv", self._cov_rows(group="boys"))
+        report = self._check(path, "smith_1990_abilities", target=self.COV)
+        self.assertTrue(any("cov_record" in e and "groups" in e for e in report.errors), report.errors)
+
+    def test_a_bad_cov_matrix_is_blocked_by_its_validator(self):
+        self._cov_record()
+        path = self._csv("smith_1990_abilities.csv", self._cov_rows(r=1.4))
+        report = self._check(path, "smith_1990_abilities", target=self.COV)
+        self.assertTrue(any("[V5]" in e for e in report.errors), report.errors)
+
+    def test_unreadable_cov_records_block(self):
+        d = self._cov_record()
+        (d / "matrices.csv").unlink()
+        path = self._csv("smith_1990_abilities.csv", self._cov_rows())
+        report = self._check(path, "smith_1990_abilities", target=self.COV)
+        self.assertTrue(any("unreadable" in e for e in report.errors), report.errors)
+
+    def test_cov_registers_as_a_single_aux_dataset(self):
+        config = ('IRW_OWNER <- "datapages"\nIRW_CORE_DATASETS <- c("item_response_warehouse")\n'
+                  'IRW_TEXT_DATASETS <- c("irw_text")\n'
+                  'IRW_AUX_DATASETS <- c(meta = "irw_meta", cov = "irw_cov")\n')
+        with tempfile.TemporaryDirectory() as d:
+            path = Path(d) / "redivis_config.R"
+            path.write_text(config)
+            _, targets = targets_mod.load_registry(path)
+        cov = [t for t in targets if t.is_cov]
+        self.assertEqual([(t.name, t.kind, t.label) for t in cov], [("irw_cov", "aux", "covariance matrices")])
+
     def _conj_rows(self, chosen_both=False, opted_out=0):
         rows = []
         for i in range(1, 121):

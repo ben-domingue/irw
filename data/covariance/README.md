@@ -74,6 +74,40 @@ Rules (the validator's V1-V8):
 - **N is required.** A matrix whose source gives no sample size is not taken: an SEM fit needs it. This is why the pilot leaves out `Schutz` and `Harman.political`.
 - **Table names:** the usual `author_year_construct`, lowercase, at most 40 characters. The author is the first author of the study that collected the data, not of the book that reprinted the matrix (for example `mullen_1939_physical8`, reprinted in Harman 1976).
 
+## To do (non-data)
+
+Data acquisition is tracked in #3582. Everything else lives here until the family has its own tracker.
+
+**Plumbing.** This can be built now, but it is not released until #3582 shows a few hundred matrices are reachable.
+
+- [x] `red_up --dataset irw_cov` (code only; `irw_cov` is not yet in `redivis_config.R` because the dataset doesn't exist): route uploads to `irw_validate.cov` (the destination chooses the validator, as for rankings), with `matrices.csv` as the gate. A table with no record row is refused.
+- [ ] `metadata/NN_cov.R` → `cov_metadata`: one row per table × group, with n_vars, N, matrix_type, PD flag, minimum eigenvalue and has_sd. Register it in `red_up/cli.py` `META_TABLES` and `upload_meta.py` `FILE_TABLE_MAP`.
+- [ ] `automated_finding/dictionary_auto_cov.csv` plus `metadata/02_biblio.R` → `cov_biblio` (no sheet, as for conjoint and rankings).
+- [ ] Packages (R and Python). R: compute on fetch, `irw_cov_compute()` and `irw_cov2matrix()` are in Rpkg#235, and `method` also takes a user-defined function (Ben, 2026-11-17). Python: the same in itemresponsewarehouse/Python-pkg#150, with polychoric and tetrachoric written in numpy because scipy is not a dependency. Not started in either client: `source = "cov"` for published matrices.
+  - `source = "cov"`;
+  - `irw_cov2matrix()` returning matrix, n, sd and mean, ready for `lavaan(sample.cov=, sample.nobs=)` (prototype in `check_roundtrip.R`);
+  - **compute on fetch**: `irw_fetch(<core table>, source = "cov")` returns the table's item matrix in this layout. It takes a method argument (Pearson by default, polychoric on request) and is labelled as computed, with method and IRW version, so it is never mistaken for a published matrix. It refuses tables with too many items, repeated measures without a wave filter, and non-core families. Pairwise `n` is kept.
+- [ ] First release of `irw_cov`, **then** the client config (the six symbols, in the order in `Rpkg/inst/developer/warehouses.md`). Never name the dataset in config before its first release.
+
+**Site and docs.**
+
+- [ ] `irw_site/cov_standard.qmd`: the standard, a "what the family holds" block and a worked lavaan example (Holzinger–Swineford).
+- [ ] A row in the families table on `overview.qmd`, and the `src/ARCHITECTURE.md` families row.
+- [ ] **The home page.** Not needed straight away, but in the long run the family appears there alongside the others.
+
+**Standard decisions still open.**
+
+- [ ] Matrices printed with blank cells: V4 refuses them today, but MASEM study matrices are incomplete by design. Allow `value` blank with a count in `cov_metadata`? #3582 reports how many there are.
+- [ ] Variable labels (e.g. "Vocabulary, WAIS subtest"): a small labels table, the analogue of item text. Where does it live?
+- [ ] Overlapping matrices: a free-text `notes` today. Is a `subset_of` column worth it?
+
+**Later.**
+
+- [ ] Linked IRW tables (one study, shared respondents, joined by `irw_merge()`): revisit whether the cross-table matrix is computed on fetch or stored. The prerequisite is a linkage record (study, tables, whether ids link: yes, no or unknown) instead of `irw_merge()`'s warning, which would also serve `irw_merge()`. Item-level only until reverse-keying exists.
+- [ ] A validation pass: compare published item-level matrices against what compute-on-fetch gives for the matching IRW table. A mismatch is likely to point to a conversion bug.
+
 ## Rulings
 
 - 2026-11-17 (Ben): the family holds published matrices only, for now. IRW-derived matrices are computed client-side, not stored. Name `cov` / `irw_cov`. SEM users come first.
+- 2026-11-17 (Ben): derived matrices for single IRW tables are never stored; `irw_fetch()` on a core table with `source = "cov"` computes one. Linked multi-table matrices may be revisited.
+- 2026-11-17 (Ben): in the long run the family goes on the home page.

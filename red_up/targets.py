@@ -35,6 +35,7 @@ AUX_LABELS = {
     "sim": "simulated + synthetic",
     "conj": "conjoint experiments",
     "rank": "rankings",
+    "cov": "covariance matrices",
 }
 
 
@@ -66,6 +67,10 @@ class Target:
     @property
     def is_rank(self) -> bool:
         return self.source == "rank"
+
+    @property
+    def is_cov(self) -> bool:
+        return self.source == "cov"
 
 
 #: The aux sources declared as their own shard-list vector in redivis_config.R
@@ -358,6 +363,11 @@ REQUIRED_COLUMNS: dict[str, tuple[str, ...]] = {
     #: The column check alone cannot tell a rankings table from a core one;
     #: the destination does.
     "rank": ("id", "task", "item", "resp"),
+    #: Covariance tables hold one published matrix, not responses: a row per
+    #: cell of the lower triangle plus optional sd/mean rows
+    #: (data/covariance/README.md). checks.validate_for_target runs
+    #: irw_validate.cov for this source, gated on data/covariance/matrices.csv.
+    "cov": ("stat", "var1", "var2", "value", "n"),
 }
 
 
