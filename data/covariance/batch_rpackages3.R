@@ -11,7 +11,8 @@
 ## Modification (2026-11-17): reshaped to the long lower-triangle layout in
 ## data/covariance/README.md. No value is changed.
 ##
-## Also psych::cattell (Cattell, 1963), whose N the psych help page gives.
+## Also psych::cattell (Cattell, 1963) and psych::Harman.Holzinger (Harman, 1967),
+## whose N the psych help pages give.
 ##
 ## Usage:  Rscript data/covariance/batch_rpackages3.R <out dir>
 
@@ -91,6 +92,17 @@ add("cattell_1963_ability12", "", 277, "7th and 8th graders",
     "Cattell, R. B. (1963). Theory of fluid and crystallized intelligence: A critical experiment. Journal of Educational Psychology, 54(1), 1-22.",
     "as used by Rindskopf & Rose (1988), Multivariate Behavioral Research 23, 51-67", "psych::cattell", "GPL (>= 2)",
     "eight Thurstone primary-ability tests and four IPAT culture-fair tests; N = 277 from the psych help page")
+
+## --- psych::Harman.Holzinger (added 2026-11-17) ----------------------------
+## Its help page gives N = 696 and the source: Harman (1967, p. 244), nine of 12
+## tests from K. J. Holzinger's unpublished class notes. A different sample and
+## test set from holzinger_1937_bifactor14 (N = 355) and the Grant-White tables.
+e <- new.env(); utils::data("Harman", package = "psych", envir = e)
+write_table(to_long(e$Harman.Holzinger, "cor", 696), "harman_1967_holzinger9")
+add("harman_1967_holzinger9", "", 696, "",
+    "Harman, H. H. (1967). Modern factor analysis (2nd ed.). University of Chicago Press.",
+    "p. 244; from unpublished class notes of K. J. Holzinger (nine of 12 tests)", "psych::Harman.Holzinger", "GPL (>= 2)",
+    "N = 696 from the psych help page; population not described there")
 
 utils::write.csv(do.call(rbind, rec), file.path(out, "matrices.csv"), row.names = FALSE, na = "")
 cat("wrote", length(unique(sapply(rec, `[[`, "table"))), "tables,", length(rec), "matrices to", out, "\n")
