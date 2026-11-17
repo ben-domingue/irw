@@ -92,5 +92,11 @@ IRW_AUX_DATASETS <- c(
   meta = "irw_meta",
   sim  = "irw_simsyn",
   comp = "irw_competitions",
-  nom  = "irw_nominal"
+  nom  = "irw_nominal",
+  ## Covariance matrices, standard in data/covariance/README.md: published
+  ## correlation and covariance matrices, one row per cell of the lower triangle.
+  ## First released 2026-11-17; display name "IRW cov", reference id 4e2q.
+  ## No parentheses in comments inside this vector: red_up's parser stops at
+  ## the first closing one.
+  cov  = "irw_cov"
 )
