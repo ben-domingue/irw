@@ -43,7 +43,8 @@ LOCAL_PATH = re.compile(r"""['"](?:[A-Za-z]:[\\/]|/Users/|/home/|/mnt/[a-z]/)"""
 #: (data/conjoint/byun_2026_mascot.py, the first Python conjoint builder, 2026-10-23).
 VALIDATOR_NAMES = ("run_qc", "irw_validate", "validate_frame", "validate_file",
                    "validate_conjoint_frame", "validate_conjoint_file",
-                   "validate_rankings_frame", "validate_rankings_file")
+                   "validate_rankings_frame", "validate_rankings_file",
+                   "validate_cov_frame", "validate_cov_file")
 
 
 def _corpus_names(root: pathlib.Path) -> set:
