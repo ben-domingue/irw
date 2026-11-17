@@ -544,6 +544,27 @@ if (length(IRW_RANK_DATASETS) > 0) {
                      bootstrap=TRUE)
 }
 
+##Covariance matrices (irw_cov): no dictionary sheet, as rank -- the dictionary
+##is dictionary_auto_cov.csv alone, staged with stage_dict_row.py --source cov.
+##Its liveness oracle is cov_metadata.csv from 22_cov.R (one row per table x
+##group; getrows keys on table). min.live is 1: the family was released with one
+##table (2026-11-17).
+if ("cov" %in% names(IRW_AUX_DATASETS) && file.exists("../automated_finding/dictionary_auto_cov.csv")) {
+    dbs$cov <- list(name="cov",
+                    irw_dict=empty_sheet_dict(),
+                    user=IRW_OWNER,
+                    dataset="irw_meta",
+                    table="cov_biblio",
+                    file.out="cov_biblio.csv",
+                    file.auto="../automated_finding/dictionary_auto_cov.csv",
+                    file.live="cov_metadata.csv",
+                    file.prov="cov_biblio_provenance.csv",
+                    file.pending="cov_biblio_pending.csv",
+                    min.live=1,
+                    drop.retired=TRUE,
+                    bootstrap=TRUE)
+}
+
 for (i in 1:length(dbs)) {
     print(i)
     getrows(dbs[[i]])

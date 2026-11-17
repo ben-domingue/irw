@@ -39,7 +39,7 @@ META_TABLES = {
     "nominal_biblio", "simsyn_biblio", "simsyn_metadata", "comps_metadata",
     "nominal_metadata", "itemtext_metadata", "collections",
     "collection_members", "covariate_labels", "conj_metadata", "conj_biblio",
-    "conj_outcomes", "rank_metadata", "rank_biblio",
+    "conj_outcomes", "rank_metadata", "rank_biblio", "cov_metadata", "cov_biblio",
     # Tier-0 per-item statistics (#1710, stage 19). The only irw_meta table that
     # is not keyed on `table`: it is LONG, one row per (table, item), 1.1M rows.
     "item_classical",
