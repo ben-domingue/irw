@@ -285,3 +285,27 @@ class LiftSideHits(unittest.TestCase):
         self.assertEqual([r["outcome"] for r in checked],
                          ["hit:recorded_at_ingest", "hit:recorded_by_review",
                           "hit:name_codebook", "no_match"])
+
+
+class HandSamplePatterns(unittest.TestCase):
+    """Misses from the 2026-11-16 hand sample of 50 no_match tables."""
+
+    def test_questionnaire_named_documents(self):
+        for n in ("Questionnaire.pdf", "Questionnaire_Study1.docx", "cuestionario.pdf"):
+            self.assertEqual(fcl.match(n), "questionnaire", n)
+        for n in ("questionnaire_data.csv", "Questionnaire.sav", "Questionnaire responses.docx",
+                  "questionnaire.R"):
+            self.assertIsNone(fcl.match(n), n)
+
+    def test_codebook_sheets_in_a_data_workbook(self):
+        for sh in ("Keys", "Variable codes", "Names_of_variables", "Labels", "Codebook"):
+            self.assertTrue(fcl.sheet_is_codebook(sh), sh)
+        for sh in ("Data", "Sheet1", "Raw", "Study 2"):
+            self.assertFalse(fcl.sheet_is_codebook(sh), sh)
+
+    def test_captions_that_lead_with_the_document(self):
+        ck = fcl.caption_kind
+        self.assertEqual(ck("S1 File", "Questionnaire used for collection of data for this study"), "questionnaire")
+        self.assertEqual(ck("S2 File", "Data File README"), "name_readme")
+        self.assertEqual(ck("S3 File", "Questionnaire responses of all participants"), "data_or_results")
+        self.assertEqual(ck("S4 File", "Raw data"), "data_or_results")
