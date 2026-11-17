@@ -1307,17 +1307,39 @@ def ingest_links(live: set) -> List[dict]:
     return out
 
 
+def lift_side_hits(checked: List[dict], side: List[dict]) -> None:
+    """Mark a checked row `hit:` when a side file (ingest, review) links its table.
+
+    Those links are the strongest evidence there is, and they do not depend on
+    what the crawl made of the deposit, so any non-hit outcome gives way.
+    """
+    kinds: Dict[str, set] = {}
+    for x in side:
+        kinds.setdefault(x["table"], set()).add(x["how_found"])
+    for row in checked:
+        if row["table"] in kinds and not row["outcome"].startswith("hit:"):
+            row["outcome"] = "hit:" + "+".join(sorted(kinds[row["table"]]))
+
+
 def review_links(live: set) -> List[dict]:
     """Rows from codebook_by_review.csv, for live tables (#2787 step 3).
 
     Found by a person or an agent who opened the document, never by a crawler
     guessing: doc_type codebook -> recorded_by_review, questionnaire ->
-    questionnaire. A row without a url or with another doc_type is an error in
+    questionnaire. doc_type `none` (2026-11-16) records that the reviewer saw
+    the deposit's whole file list and nothing in it documents the variables;
+    it carries no url and yields no link (17_coverage.R reads it, like
+    codebook_at_ingest.csv's "none", as "the source ships no codebook").
+    A row without a url or with another doc_type is an error in
     the side file, so it stops the run rather than vanishing.
     """
     out = []
     for r in read_csv(REVIEW_CODEBOOKS):
         table, url, kind = (r.get(k, "").strip() for k in ("table", "url", "doc_type"))
+        if kind == "none":
+            if url:
+                sys.exit(f"{REVIEW_CODEBOOKS.name}: doc_type none for {table!r} carries a url ({url!r})")
+            continue
         if not url.lower().startswith("http") or kind not in ("codebook", "questionnaire"):
             sys.exit(f"{REVIEW_CODEBOOKS.name}: bad row for {table!r} (url {url!r}, doc_type {kind!r})")
         if table not in live:
@@ -1568,7 +1590,8 @@ def main() -> int:
     for x in links:
         x.setdefault("evidence", "")
     review = review_links(live_tables)
-    links = ingest_links(live_tables) + review + kept_links + links
+    ingest = ingest_links(live_tables)
+    links = ingest + review + kept_links + links
     ##one row per (table, url): a deposit reached by two routes (a multi-URL
     ##cell, a child component) lists the same file twice. Keep the strongest.
     rank = {"recorded_at_ingest": 0, "recorded_by_review": 0, "typed_codebook": 1, "package_doc": 1, "name_codebook": 1,
@@ -1597,14 +1620,13 @@ def main() -> int:
         if f"{row['host']}|{row['deposit']}" in _deep["timed_out"] and not row["outcome"].startswith("hit:"):
             row["outcome"] = "deep_timeout"
     checked = kept_checked + checked
-    ##a table no crawler can list, documented by review: say so in the
-    ##checked file rather than leaving it out_of_scope
-    review_kinds: Dict[str, set] = {}
-    for x in review:
-        review_kinds.setdefault(x["table"], set()).add(x["how_found"])
-    for row in checked:
-        if row["table"] in review_kinds and row["outcome"].startswith("out_of_scope"):
-            row["outcome"] = "hit:" + "+".join(sorted(review_kinds[row["table"]]))
+    ##a table documented by review or recorded at ingest: say so in the
+    ##checked file, whatever the crawl made of its deposit. Until 2026-11-16
+    ##only review rows, and only over out_of_scope, were lifted: 692 live
+    ##tables with a codebook recorded at ingest sat at no_match /
+    ##out_of_scope here, and the coverage audit (which reads this file)
+    ##counted them as having none.
+    lift_side_hits(checked, review + ingest)
     links.sort(key=lambda x: (x["table"].lower(), x["how_found"], x["url"]))
     checked.sort(key=lambda x: (x["table"].lower(), x["data_url"]))
     write_csv(LINKS_OUT, links, LINK_FIELDS)

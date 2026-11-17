@@ -17,14 +17,18 @@ row per (table, column):
                    built      named in the code but not by a simple rename (a
                               pivot, a mutate, a recode), or built from its
                               prefix (`paste0("cov_", x)`): script_line points
-                              at the first such line
+                              at the first such line. When a line recodes it
+                              from exactly ONE named source column
+                              (derived_source), source_column holds that name
+                              and script_line points there instead
                  blank when the script never names the column, or no script
                  was found, or the match was ambiguous. A column the code never
                  names is NOT taken to have kept its source name: a sample of
                  those (2026-10-02) was about half wrong -- names rewritten by a
                  helper, `.` turned into `_`, columns made in another file.
   documented     true when the standard defines the column or the script
-                 renames it from a named source column. False is the honest
+                 renames it from a named source column, or (2026-11-16)
+                 recodes it from exactly one named source column. False is the honest
                  answer for everything else: the meaning is in the source's
                  codebook, and the page must not guess it from the name.
 
@@ -169,6 +173,43 @@ def rename_source(column: str, path: str, line: str) -> Optional[str]:
     return None
 
 
+R_WRAPPERS = ("as.numeric", "as.integer", "as.character", "as.factor", "factor", "recode",
+              "dplyr::recode", "case_match", "round", "trimws", "tolower", "toupper",
+              "ifelse", "na_if", "as.Date")
+PY_SUBSCRIPT = re.compile(r"""\b\w+\[\s*["']([^"']+)["']\s*\]""")
+
+
+def derived_source(column: str, path: str, line: str) -> Optional[str]:
+    """The ONE source column a line recodes `column` from, or None (2026-11-16).
+
+    Not a rename -- the values may be recoded, retyped or relabelled -- but the
+    line names exactly one source column, so the source's codebook entry for
+    it is where the meaning lives. Shapes: pandas `df["col"] = <expr>` or a
+    dict entry `"col": <expr>` whose expression subscripts exactly one column
+    (`df["Age"]`, `inf["SEXO"].map(SEX)`); R `col = f(src, ...)` for a short
+    list of value-level wrappers (as.numeric, factor, recode, ifelse...).
+    Before this, 10,687 cov_* columns built this way counted as undocumented.
+    """
+    c = re.escape(column)
+    suffix = path.rsplit(".", 1)[-1].lower()
+    if suffix == "py":
+        m = (re.search(r"""\w+\[\s*["']""" + c + r"""["']\s*\]\s*=(?!=)\s*(.+)$""", line)
+             or re.search(r"""["']""" + c + r"""["']\s*:\s*(\w+\[.+)$""", line))
+        if m:
+            ##a dict literal's next entry is not this column's expression
+            rhs = re.split(r"""[,{]\s*["'][^"']+["']\s*:""", m.group(1))[0]
+            srcs = set(PY_SUBSCRIPT.findall(rhs))
+            ##`df["resp"] = f(df["item"], df["resp"])` transforms itself: not one source
+            if len(srcs) == 1 and column not in srcs:
+                return srcs.pop()
+    elif suffix == "r":
+        wrappers = "|".join(re.escape(w) for w in R_WRAPPERS)
+        m = re.search(r"(?<![\w.$])`?" + c + r"`?\s*=\s*(?:" + wrappers + r")\(\s*`?([A-Za-z.][\w.]*)`?\s*[,)=!<>%]", line)
+        if m and m.group(1) not in NOT_A_COLUMN and m.group(1) != column:
+            return m.group(1)
+    return None
+
+
 def dynamic_prefix_line(column: str, scripts: Dict[str, str]) -> Optional[Tuple[str, int]]:
     """First line that builds names from the column's prefix as a string.
 
@@ -193,6 +234,7 @@ def column_basis(column: str, scripts: Dict[str, str], match: str) -> Tuple[str,
         return "", "", "", ""
     token = re.compile(r"(?<![\w.$])" + re.escape(column) + r"(?![\w])")
     first: Optional[Tuple[str, int]] = None
+    derived: Optional[Tuple[str, str, int]] = None
     for path, text in scripts.items():
         for n, line in code_lines(text):
             if not token.search(line):
@@ -200,8 +242,14 @@ def column_basis(column: str, scripts: Dict[str, str], match: str) -> Tuple[str,
             src = rename_source(column, path, line)
             if src and src != column:
                 return "renamed", src, path, str(n)
+            if derived is None:
+                d = derived_source(column, path, line)
+                if d:
+                    derived = (d, path, n)
             if first is None:
                 first = (path, n)
+    if derived is not None:
+        return "built", derived[0], derived[1], str(derived[2])
     if first is not None:
         return "built", "", first[0], str(first[1])
     dynamic = dynamic_prefix_line(column, scripts)
@@ -223,9 +271,10 @@ def build(tables: Dict[str, List[str]], paths: List[str], texts: Dict[str, str],
             basis, src, script, line = column_basis(column, scripts, match)
             rows.append({
                 "table": table, "column": column, "defined_by": d,
-                "basis": basis, "source_column": src if basis == "renamed" else "",
+                "basis": basis, "source_column": src,
                 "script": script, "script_line": line, "match": match,
-                "documented": "true" if d == "standard" or basis == "renamed" else "false",
+                "documented": "true" if d == "standard" or basis == "renamed"
+                or (basis == "built" and bool(src)) else "false",
             })
     return rows
 

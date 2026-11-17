@@ -302,3 +302,34 @@ class CodebookAtIngestTest(StageDictRowTest):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class ScriptAtIngestTest(StageDictRowTest):
+    """`script` records the build script for 13_script_index.py (2026-11-16)."""
+
+    def stage(self, payload):
+        env = dict(os.environ, IRW_DICT_AUTO_PATH=self.path,
+                   IRW_CODEBOOK_INGEST_PATH=self.path + ".codebook.csv",
+                   IRW_SCRIPT_INGEST_PATH=self.path + ".script.csv")
+        return subprocess.run([sys.executable, str(SCRIPT)], input=payload,
+                              text=True, capture_output=True, env=env)
+
+    def tearDown(self):
+        super().tearDown()
+        if os.path.exists(self.path + ".script.csv"):
+            os.unlink(self.path + ".script.csv")
+
+    def test_records_an_existing_script(self):
+        r = self.stage(self.ok_payload(script="data/encceja.py"))
+        self.assertEqual(r.returncode, 0, r.stderr)
+        with open(self.path + ".script.csv", newline="", encoding="utf-8") as f:
+            got = list(csv.DictReader(f))
+        self.assertEqual([(x["table"], x["script"]) for x in got], [("a_2026", "data/encceja.py")])
+        self.assertNotIn("script", self.rows()[0])
+
+    def test_refuses_a_missing_or_outside_script(self):
+        for bad in ("data/no_such_script_2026.py", "metadata/17_coverage.R"):
+            with self.subTest(bad=bad):
+                r = self.stage(self.ok_payload(table="b_2026", script=bad))
+                self.assertNotEqual(r.returncode, 0)
+                self.assertIn("'script'", r.stderr)

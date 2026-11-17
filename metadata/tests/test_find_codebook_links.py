@@ -268,3 +268,20 @@ class JournalSupplementTest(unittest.TestCase):
         self.assertEqual(fcl.caption_kind("S1 File", "Empirical dataset and the corresponding codebook. (XLSX)"),
                          "name_codebook")
         self.assertIsNone(fcl.caption_kind("S10 File", "Translation Codebook"))
+
+
+class LiftSideHits(unittest.TestCase):
+    """A codebook recorded at ingest or by review outranks the crawl's verdict (2026-11-16)."""
+
+    def test_ingest_and_review_lift_any_non_hit(self):
+        checked = [{"table": "a", "outcome": "no_match"},
+                   {"table": "b", "outcome": "out_of_scope:host:kaggle.com"},
+                   {"table": "c", "outcome": "hit:name_codebook"},
+                   {"table": "d", "outcome": "no_match"}]
+        side = [{"table": "a", "how_found": "recorded_at_ingest"},
+                {"table": "b", "how_found": "recorded_by_review"},
+                {"table": "c", "how_found": "recorded_at_ingest"}]
+        fcl.lift_side_hits(checked, side)
+        self.assertEqual([r["outcome"] for r in checked],
+                         ["hit:recorded_at_ingest", "hit:recorded_by_review",
+                          "hit:name_codebook", "no_match"])
