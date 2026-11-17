@@ -6,6 +6,8 @@ Not to be confused with `cov_*` columns in other families, which are person-leve
 
 **Status (2026-11-17).** Draft standard, pilot only. `pilot_rpackages.R` builds 12 tables (14 matrices) from matrices already transcribed into `psychTools`, `psych` and base R `datasets`. All pass `irw_validate.cov`, and `check_roundtrip.R` confirms that each rebuilt matrix equals its package original exactly and that lavaan fits on the IRW copy match fits on the original. Nothing is on Redivis. `irw_cov` does not exist yet and is named in no client config, per the rule that a dataset is configured only after its first release.
 
+**Second batch (2026-11-17, #3582).** `batch_rpackages2.R` adds 7 tables (11 matrices) from `fungible`, `ggm`, `EFAtools`, `GPArotation` and `psychTools`. `fungible`, `ggm` and `EFAtools` are read from pinned CRAN source tarballs instead of being installed (`fungible` pulls in OpenMx). `held.csv` lists every candidate considered and not built, and why: held for licence, values or N; pending an N from the original paper; or out of scope. Dictionary rows for all tables are in `automated_finding/dictionary_auto_cov.csv` (`stage_dict_row.py --source cov`). `02_biblio.R` does not read it yet. `holzinger_1939_grantwhite9` is released on Redivis as `irw_cov` v1.0 (Ben, 2026-11-17).
+
 ```
 Rscript data/covariance/pilot_rpackages.R <out dir>
 python3 -m irw_validate.cov <out dir>/*.csv        # skip matrices.csv
