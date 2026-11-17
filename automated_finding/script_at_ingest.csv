@@ -20,6 +20,7 @@ duncan_1968_peer10,cov,data/covariance/batch_sem.R,2026-11-17
 gnambs_2018_rses10,cov,data/covariance/batch_metasem.R,2026-11-17
 griffith_1998_interpersonal24,cov,data/covariance/batch_rpackages2.R,2026-11-17
 grob_2018_ids2_14,cov,data/covariance/batch_rpackages2.R,2026-11-17
+hagger_2018_raa9,cov,data/covariance/osf_hagger2018_raa.py,2026-11-17
 holzinger_1937_bifactor14,cov,data/covariance/pilot_rpackages.R,2026-11-17
 holzinger_1939_grantwhite24,cov,data/covariance/pilot_rpackages.R,2026-11-17
 holzinger_1939_grantwhite9,cov,data/covariance/pilot_rpackages.R,2026-11-17
