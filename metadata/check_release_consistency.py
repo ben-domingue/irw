@@ -174,7 +174,9 @@ FAMILIES = {
 #: `donnaloja_2022_citizenship` and the two `avina_2026_immigrant_*`) when all
 #: six are live, which is the exact failure mode this gate exists to catch,
 #: inverted: a record and the data agreeing, reported as a disagreement.
-ALL_FAMILY_KEYS = tuple(FAMILIES) + ("conj",)
+#: cov (2026-11-17) is here for the same reason as conj: its tables are served,
+#: and they carry no item/resp, so it is in no schema or counts check.
+ALL_FAMILY_KEYS = tuple(FAMILIES) + ("conj", "cov")
 
 
 class SourceError(RuntimeError):

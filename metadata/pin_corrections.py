@@ -72,6 +72,8 @@ FAMILY_CSVS = {
     #: for the `conj` source key. Leaving it out is how the one correction this
     #: script could not place went unplaced on the first run.
     "conj_metadata.csv": "irw_conjoint",
+    #: One row per table x group; the table -> dataset map is the same either way.
+    "cov_metadata.csv": "irw_cov",
 }
 
 

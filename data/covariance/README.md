@@ -83,8 +83,8 @@ Data acquisition is tracked in #3582. Everything else lives here until the famil
 **Plumbing.** This can be built now, but it is not released until #3582 shows a few hundred matrices are reachable.
 
 - [x] `red_up --dataset irw_cov` (code only; `irw_cov` is not yet in `redivis_config.R` because the dataset doesn't exist): route uploads to `irw_validate.cov` (the destination chooses the validator, as for rankings), with `matrices.csv` as the gate. A table with no record row is refused.
-- [ ] `metadata/NN_cov.R` → `cov_metadata`: one row per table × group, with n_vars, N, matrix_type, PD flag, minimum eigenvalue and has_sd. Register it in `red_up/cli.py` `META_TABLES` and `upload_meta.py` `FILE_TABLE_MAP`.
-- [ ] `automated_finding/dictionary_auto_cov.csv` plus `metadata/02_biblio.R` → `cov_biblio` (no sheet, as for conjoint and rankings).
+- [x] `metadata/22_cov.R` → `cov_metadata` (also `n_missing_cells`; `min_eigenvalue` and `is_pd` are NA for an incomplete matrix): one row per table × group, with n_vars, N, matrix_type, PD flag, minimum eigenvalue and has_sd. Register it in `red_up/cli.py` `META_TABLES` and `upload_meta.py` `FILE_TABLE_MAP`.
+- [x] `automated_finding/dictionary_auto_cov.csv` (#3584) plus `metadata/02_biblio.R` → `cov_biblio` (first produced by the next pipeline run) (no sheet, as for conjoint and rankings).
 - [ ] Packages (R and Python). R: compute on fetch, `irw_cov_compute()` and `irw_cov2matrix()` are in Rpkg#235, and `method` also takes a user-defined function (Ben, 2026-11-17). Python: the same in itemresponsewarehouse/Python-pkg#150, with polychoric and tetrachoric written in numpy because scipy is not a dependency. Not started in either client: `source = "cov"` for published matrices.
   - `source = "cov"`;
   - `irw_cov2matrix()` returning matrix, n, sd and mean, ready for `lavaan(sample.cov=, sample.nobs=)` (prototype in `check_roundtrip.R`);
