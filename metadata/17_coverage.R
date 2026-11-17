@@ -43,7 +43,14 @@
 #                    is a description not a category (#1837, 2026-09-02) -- none
 #                    of those three is a gap. construct name's fill is reported
 #                    as info (`has_construct_name`).
-#   script           in table_scripts.csv (stage 13)
+#   script           a build script under data/ is found the way the irw MCP
+#                    finds it (exact stem, then table_scripts.csv, then a
+#                    separator-bounded name prefix; script_match.py runs
+#                    14_column_docs.py's matcher). Before 2026-11-16 this was
+#                    "in table_scripts.csv", which leaves out every exact-name
+#                    match by design and under-counted ~2,150 tables.
+#   script_match     exact / index / prefix / ambiguous / none: how it was
+#                    found. ambiguous (several candidates) counts as covered.
 #   column_docs      share of the table's columns with documented=true in
 #                    column_docs.csv (stage 14); a gap when < 1. Core only.
 #   codebook_link    a codebook_links_checked.csv row whose outcome starts
@@ -156,6 +163,19 @@ bib <- lapply(bib_files, function(f) read_csv_or_null(file.path(dir_path, f)))
 tg  <- lapply(tag_files, function(f) read_csv_or_null(file.path(dir_path, f)))
 
 scripts  <- read_csv_or_null(file.path(dir_path, "table_scripts.csv"))
+## How the MCP would find each live table's script. Falls back to the old
+## table_scripts.csv membership, loudly, if the helper cannot run.
+script_match <- local({
+  tf <- tempfile(fileext = ".txt"); of <- tempfile(fileext = ".csv")
+  writeLines(unique(live$table), tf)
+  rc <- tryCatch(system2(Sys.getenv("PYTHON", "python3"),
+                         c(shQuote(file.path(here, "script_match.py")), "--repo", shQuote(repo_root),
+                           "--tables", shQuote(tf), "--out", shQuote(of))),
+                 error = function(e) 1L)
+  sm <- if (identical(as.integer(rc), 0L) && file.exists(of)) read_csv_or_null(of) else NULL
+  if (is.null(sm)) message("  ! script_match.py failed; script falls back to table_scripts.csv membership")
+  sm
+})
 coldocs  <- read_csv_or_null(file.path(dir_path, "column_docs.csv"))
 cblinks  <- read_csv_or_null(file.path(dir_path, "codebook_links_checked.csv"))
 notes    <- read_csv_or_null(file.path(dir_path, "data_notes.csv"))
@@ -215,7 +235,13 @@ build <- function(src) {
     m$has_construct_name <- NA
   }
 
-  m$script <- in_file(k, scripts)
+  if (!is.null(script_match)) {
+    m$script_match <- script_match$match[match(k, key(script_match$table))]
+    m$script <- !is.na(m$script_match) & m$script_match != "none"
+  } else {
+    m$script_match <- NA_character_
+    m$script <- in_file(k, scripts)
+  }
 
   if (!is.null(coldocs) && all(c("table", "documented") %in% names(coldocs))) {
     cd <- coldocs %>% mutate(tk = key(table), doc = tolower(documented) == "true") %>%
@@ -267,7 +293,7 @@ mat$n_gaps[mat$withdrawn] <- 0L
 mat <- mat[order(mat$source, mat$table), , drop = FALSE]
 out_cols <- c("table", "source", "dataset", "withdrawn", "metadata_row", "biblio_row", "citation",
               "licence", "page", "tag_row", tag_col_name(TAG_GAP_COLS), "has_construct_name",
-              "script", "column_docs", "codebook_link", "data_note",
+              "script", "script_match", "column_docs", "codebook_link", "data_note",
               "itemtext_shipped", "itemtext_status", "n_gaps")
 write_csv(mat[, out_cols], file.path(dir_path, "coverage_matrix.csv"), na = "")
 
