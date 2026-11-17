@@ -9,7 +9,7 @@ Schutz,psychTools::Schutz,pending: N,no N in the package (issue #3582 names it),
 stress,ggm::stress,pending: N and source,"no N, variables unnamed in ggm",Cox & Wermuth (1996); Slangen et al. (1993)
 data.mcdonald.act15,sirt,pending: N and source,"covariance matrix from a table in McDonald (1999), Test theory",check the book for N and the original study
 BadRJN; BadRBY,fungible,pending: N,"improper matrices reported in Joseph & Newman (2010, meta-analytic) and Bentler & Yuan (2011); no N",check whether the papers give an N (a harmonic-mean N for the meta-analytic one)
-zola,psychTools::zola,pending: scope,"165 x 165 polychoric matrix of SAPA SPI items with peer ratings; pairwise n varies (mean 18,180)",check whether the SAPA SPI responses are already IRW tables (then out of scope)
+zola,psychTools::zola,held: N,"polychorics among 135 SAPA SPI self-report items (raw SAPA responses are already in IRW, condon_2024_sapa_personality) and 30 peer ratings from 908 people; pairwise n runs from about 18,000 (self-report pairs) to at most 908 (peer pairs) and is not given per cell, so no n can be written honestly","build only if Zola, Condon & Revelle (2021, Collabra 7, 25983) or the authors give pairwise n"
 blant,psychTools::blant,out: no N,"personal communication, no N, no published source",
 USAF,psychTools::USAF,out: not published,computed by psych from raw data shipped in the Anthropometry package,
 Thurstone41,fungible::Thurstone41,out: duplicate,identical to psych::Tucker (tucker_1958_ability9),
