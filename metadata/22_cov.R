@@ -10,8 +10,11 @@
 ##  largest cell n: the matrix N, or the largest pairwise n), stat ("cor" or
 ##  "cov"), has_sd, has_mean, min_eigenvalue, is_pd (min_eigenvalue > 0; a
 ##  non-PD matrix is kept as published and flagged here, rule V8), and
-##  n_missing_cells (lower-triangle cells with no value; min_eigenvalue and
-##  is_pd are NA for such a matrix, since it has no eigenvalues).
+##  n_missing_cells (lower-triangle cells the source did not report, held as
+##  rows with an empty value; Ben, 2026-11-18). For a matrix with blank cells,
+##  min_eigenvalue and is_pd describe its complete part: the matrix after
+##  dropping the fewest variables that leaves no blank, the same rule as
+##  irw_validate.cov.complete_drop and the packages' complete = TRUE.
 ##Record columns, joined from the hand-kept data/covariance/matrices.csv on
 ##table + group: matrix_type, missing, population, source_citation,
 ##source_location, via, capture, verified, licence, licence_source, notes.
@@ -32,13 +35,42 @@ tabs <- ds$list_tables()
 message("  ", IRW_AUX_DATASETS[["cov"]], ": ", length(tabs), " tables")
 if (!length(tabs)) stop("no tables listed in ", IRW_AUX_DATASETS[["cov"]])
 
+##The fewest variables to drop so no cell is blank; ties keep the variables
+##listed first (candidates tried latest-first). Mirrors complete_drop() in
+##irw_validate/cov.py -- keep the two in step.
+complete_drop <- function(v, m, exact_max = 20) {
+  idx <- which(is.na(m) & lower.tri(m), arr.ind = TRUE)
+  if (!nrow(idx)) return(character(0))
+  pairs <- lapply(seq_len(nrow(idx)), function(i) v[idx[i, ]])
+  involved <- unique(unlist(pairs))
+  involved <- involved[order(-match(involved, v))]
+  covers <- function(drop) all(vapply(pairs, function(p) any(p %in% drop), logical(1)))
+  if (length(involved) <= exact_max) {
+    for (size in seq_along(involved)) {
+      cand <- utils::combn(involved, size, simplify = FALSE)
+      for (drop in cand) if (covers(drop)) return(v[v %in% drop])
+    }
+  }
+  drop <- character(0); left <- pairs
+  while (length(left)) {
+    cnt <- vapply(involved, function(x) sum(vapply(left, function(p) x %in% p, logical(1))), numeric(1))
+    best <- involved[order(-cnt, -match(involved, v))][1]
+    drop <- c(drop, best)
+    left <- Filter(function(p) !best %in% p, left)
+  }
+  v[v %in% drop]
+}
+
 one_matrix <- function(name, d, g) {
   cells <- d[d$stat %in% c("cor", "cov"), , drop = FALSE]
   v <- unique(c(cells$var1, cells$var2))
   m <- matrix(NA_real_, length(v), length(v), dimnames = list(v, v))
   m[cbind(cells$var1, cells$var2)] <- cells$value
   m[cbind(cells$var2, cells$var1)] <- cells$value
-  ev <- if (anyNA(m)) NA_real_ else min(eigen(m, symmetric = TRUE, only.values = TRUE)$values)
+  ##A blank cell has no eigenvalues; judge the complete part (header).
+  keep <- setdiff(v, complete_drop(v, m))
+  ev <- if (!length(keep) || anyNA(m[keep, keep])) NA_real_ else
+    min(eigen(m[keep, keep, drop = FALSE], symmetric = TRUE, only.values = TRUE)$values)
   data.frame(table = name, group = g, n_vars = length(v), n_obs = max(as.numeric(cells$n)),
              stat = paste(unique(cells$stat), collapse = "+"),
              has_sd = any(d$stat == "sd"), has_mean = any(d$stat == "mean"),

@@ -11,6 +11,12 @@ C1; this module runs instead of them, and a contributor can check a table first:
 
     python3 -m irw_validate.cov table.csv [table.csv ...]
 
+A cell the source left blank among variables it did measure is held as a row
+with an empty `value` (V4, reported as info; Ben, 2026-11-18). Every row of the
+lower triangle must still be present; a row that is absent is an error, so a
+blank is always something the source did not report, never a transcription gap.
+A variable the source never measured is left out of that sample instead.
+
 A matrix that is not positive definite is reported (V8, a warning) and never
 blocked. Published matrices are often non-PD through rounding, pairwise deletion
 or a typo in the original (Burt 1915), and the table keeps the numbers as
@@ -46,6 +52,37 @@ def _blank(s):
     return s.isna() | (s.astype(str).str.strip() == "")
 
 
+def complete_drop(order, blanks, exact_max=20):
+    """The fewest variables to drop so a matrix has no blank cell.
+
+    `order` is the variable order; `blanks` the unordered pairs {a, b} with no
+    value. Exact (smallest set) when at most `exact_max` variables touch a
+    blank, else greedy (drop the variable in the most blanks). Ties keep the
+    variables listed first: candidates are tried latest-first. The packages'
+    complete = TRUE (irw_cov2matrix / irw.cov2matrix) use the same rule, so
+    the record and the client agree on what "the complete part" is.
+    """
+    from itertools import combinations
+    pairs = [tuple(p) for p in blanks if len(p) == 2]
+    if not pairs:
+        return []
+    pos = {v: i for i, v in enumerate(order)}
+    involved = sorted({v for p in pairs for v in p}, key=lambda v: -pos[v])
+    covers = lambda drop: all(a in drop or b in drop for a, b in pairs)
+    if len(involved) <= exact_max:
+        for size in range(1, len(involved) + 1):
+            for drop in combinations(involved, size):
+                if covers(set(drop)):
+                    return sorted(drop, key=pos.get)
+    drop, left = [], list(pairs)
+    while left:
+        count = {v: sum(v in p for p in left) for v in involved}
+        best = max(involved, key=lambda v: (count[v], pos[v]))
+        drop.append(best)
+        left = [p for p in left if best not in p]
+    return sorted(drop, key=pos.get)
+
+
 def _check_matrix(sub, gname, table, out, stats):
     """V4, V5 and V8 for one group's matrix rows. Returns the variable order."""
     import numpy as np
@@ -64,24 +101,36 @@ def _check_matrix(sub, gname, table, out, stats):
     m = np.full((k, k), np.nan)
     seen = set()
     dup = []
+    blanks = []
     for a, b, v in zip(sub["var1"], sub["var2"], sub["value"]):
         key = frozenset((a, b))
         if key in seen:
             dup.append(f"{a}~{b}")
             continue
         seen.add(key)
+        if v != v:   # NaN: a cell the source did not report (V1 allows it off the diagonal only)
+            blanks.append(key)
+            continue
         m[pos[a], pos[b]] = m[pos[b], pos[a]] = v
     if dup:
         out.append(_f("cov_cells", "error", f"[V4] {len(dup)} cells given twice{where}: {dup[:4]}",
                       table, tuple(dup)))
-    missing = int(np.isnan(m).sum())
-    if missing:
-        holes = [f"{order[i]}~{order[j]}" for i in range(k) for j in range(i + 1) if np.isnan(m[i, j])]
+    holes = [f"{order[i]}~{order[j]}" for i in range(k) for j in range(i + 1)
+             if frozenset((order[i], order[j])) not in seen]
+    if holes:
         out.append(_f("cov_cells", "error",
-                      f"[V4] {len(holes)} cells missing from the lower triangle{where}: {holes[:4]}; "
-                      "a cell the source left blank is not a table this family can hold",
+                      f"[V4] {len(holes)} cells have no row in the lower triangle{where}: {holes[:4]}; "
+                      "a cell the source left blank is a row with an empty value",
                       table, tuple(holes)))
         return order
+    gkey = gname if gname is not None else ""
+    stats.setdefault("n_missing_cells", {})[gkey] = len(blanks)
+    drop = complete_drop(order, blanks)
+    if blanks:
+        out.append(_f("cov_cells", "info",
+                      f"[V4] {len(blanks)} cells not reported by the source{where}; complete part "
+                      f"drops {len(drop)} of {k} variables ({', '.join(drop[:4])})",
+                      table, tuple("~".join(sorted(b)) for b in blanks)))
     d = np.diag(m)
     if kind == "cor":
         off = np.abs(d - 1) > TOL
@@ -101,11 +150,15 @@ def _check_matrix(sub, gname, table, out, stats):
                 out.append(_f("cov_values", "error",
                               f"[V5] {big} covariances imply a correlation outside [-1, 1]{where}", table))
     if all(f.severity != "error" for f in out[start:]):
-        ev = float(np.linalg.eigvalsh(m).min())
-        stats.setdefault("min_eigenvalue", {})[gname if gname is not None else ""] = ev
+        # A matrix with blank cells has no eigenvalues; V8 is judged on its
+        # complete part (complete_drop), as cov_metadata's is_pd is.
+        keep = [i for i, v in enumerate(order) if v not in set(drop)]
+        ev = float(np.linalg.eigvalsh(m[np.ix_(keep, keep)]).min()) if len(keep) else float("nan")
+        stats.setdefault("min_eigenvalue", {})[gkey] = ev
         if ev <= 0:
             out.append(_f("cov_pd", "warn",
-                          f"[V8] matrix is not positive definite{where} (smallest eigenvalue {ev:.4g}); "
+                          f"[V8] matrix is not positive definite{where} (smallest eigenvalue {ev:.4g}"
+                          f"{', complete part' if drop else ''}); "
                           "kept as published, flagged in cov_metadata", table))
     stats.setdefault("matrix_type", {})[gname if gname is not None else ""] = kind
     stats.setdefault("n_vars", {})[gname if gname is not None else ""] = k
@@ -128,10 +181,20 @@ def validate_cov_frame(df, *, label: str = "") -> Report:
         out.append(_f("cov_required_columns", "error", f"[V1] missing required column(s): {', '.join(missing)}", table))
         out.extend(check_name(table))
         return report
-    for c in ("stat", "var1", "value", "n"):
+    for c in ("stat", "var1", "n"):
         nb = int(_blank(df[c]).sum())
         if nb:
             out.append(_f("cov_required_columns", "error", f"[V1] {nb} rows with no {c}", table))
+    # value may be blank only on an off-diagonal cor/cov row: a cell the source
+    # did not report. A blank diagonal (a variable never measured) means the
+    # variable is left out of that sample; a blank sd or mean means no row.
+    offdiag = (df["stat"].astype(str).str.strip().isin(MATRIX_STATS) & ~_blank(df["var2"])
+               & (df["var1"].astype(str).str.strip() != df["var2"].astype(str).str.strip()))
+    nb = int((_blank(df["value"]) & ~offdiag).sum())
+    if nb:
+        out.append(_f("cov_required_columns", "error",
+                      f"[V1] {nb} rows with no value on a diagonal, sd or mean row "
+                      "(only an off-diagonal cell the source did not report may be blank)", table))
 
     # V7 (columns): nothing undefined
     undefined = [c for c in cols if c not in REQUIRED + OPTIONAL]

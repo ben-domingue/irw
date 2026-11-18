@@ -62,6 +62,35 @@ class CovTest(unittest.TestCase):
         df = df[~((df.var1 == "c") & (df.var2 == "b"))]
         self.assertIn("cov_cells", checks(df, "error"))
 
+    def test_blank_cell_is_info_and_pd_uses_the_complete_part(self):
+        ## Ben, 2026-11-18: a cell the source did not report is a row with an
+        ## empty value. It passes, is reported, and V8 is judged on the
+        ## complete part.
+        df = table()
+        df.loc[(df.var1 == "c") & (df.var2 == "b"), "value"] = float("nan")
+        r = validate_cov_frame(df, label=LABEL)
+        self.assertEqual(r.errors, [])
+        self.assertIn("cov_cells", {f.check for f in r.findings if f.severity == "info"})
+        self.assertEqual(r.stats["n_missing_cells"], {"": 1})
+        self.assertGreater(r.stats["min_eigenvalue"][""], 0)
+
+    def test_blank_diagonal_or_moment_is_still_refused(self):
+        df = table()
+        df.loc[0, "value"] = float("nan")
+        self.assertIn("cov_required_columns", checks(df, "error"))
+        df = table()
+        df.loc[df.stat == "sd", "value"] = float("nan")
+        self.assertIn("cov_required_columns", checks(df, "error"))
+
+    def test_complete_drop_is_smallest_and_keeps_earlier_variables(self):
+        from irw_validate.cov import complete_drop
+        order = list("abcde")
+        self.assertEqual(complete_drop(order, [frozenset("ab")]), ["b"])
+        # c touches both blanks, so dropping c alone beats dropping a and e
+        self.assertEqual(complete_drop(order, [frozenset("ac"), frozenset("ce")]), ["c"])
+        self.assertEqual(complete_drop(order, [frozenset("ab"), frozenset("de")]), ["b", "e"])
+        self.assertEqual(complete_drop(order, []), [])
+
     def test_cor_out_of_range_and_bad_diagonal(self):
         self.assertIn("cov_values", checks(table(r12=1.2), "error"))
         df = table()
