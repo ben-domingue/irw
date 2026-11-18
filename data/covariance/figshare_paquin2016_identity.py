@@ -1,6 +1,9 @@
 """Covariance family (irw_cov, source = "cov"): Paquin & Keating (2016), identity in
 the reasoned action framework, study-level correlation matrices.
 
+HELD (2026-11-17): not in irw_cov. Ben is holding this table pending a ruling on
+CC BY supplements to paywalled articles (data/covariance/held.csv).
+
 Source: figshare (Taylor & Francis) item 2306437, https://doi.org/10.6084/m9.figshare.2306437,
 supplementary material to Paquin, R. S., & Keating, D. M. (2016/2017). Fitting identity
 in the reasoned action framework: A meta-analysis and model comparison. The Journal of
