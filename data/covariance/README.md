@@ -62,7 +62,7 @@ Rules (the validator's V1-V8):
 - **A script** with the usual IRW header: citation, where the matrix was taken from, its licence, and anything changed in shape (never in value).
 - **A row per matrix in `matrices.csv`** (keyed by `table` + `group`):
   - `n_obs`;
-  - `matrix_type` (`pearson`, `polychoric`, `tetrachoric`, `mixed`, `unknown`);
+  - `matrix_type` (`pearson`, `spearman`, `polychoric`, `tetrachoric`, `mixed`, `unknown`);
   - `missing` (`listwise`, `pairwise`, `unknown`);
   - `population`;
   - `source_citation` and `source_location` (table and page);
