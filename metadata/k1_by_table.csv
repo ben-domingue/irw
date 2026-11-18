@@ -2,7 +2,7 @@ table,n_qi,qi,n_participants,cells,people,k1_n,k1_prop,klt5_prop,status
 16_personalityfactors,0,,49159,1,49159,0,0,0,no_qi
 360emergencymed_azami_2024,0,,295,1,295,0,0,0,no_qi
 4thgrade_math_sirt,0,,664,1,664,0,0,0,no_qi
-5personalityfactors,0,,8954,1,8954,0,0,0,no_qi
+5personalityfactors,1,cov_age,8954,8,8954,0,0,0,ok
 aa1_Silvia_2023,0,,1071,1,1071,0,0,0,no_qi
 aappss_malpas_2019_scl,2,cov_age|cov_gender,611,113,611,11,0.018,0.2226,ok
 abbasi_2024_bfi,4,cov_age|cov_education|cov_employment|cov_wife_age,400,298,400,236,0.59,0.955,ok
