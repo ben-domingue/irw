@@ -6,9 +6,10 @@ source's published order, separated by " | ", each optionally followed by
 
 The build scripts write every matrix in published order, one diagonal row per
 variable, so the order is the order of a group's diagonal rows in the built CSV.
-This script fills names only, and only where `variables` is blank: a value
-already present (for example one with descriptions) is checked against the
-built CSV and kept. It refuses a group whose CSV it cannot find, whose
+Descriptions come from variable_labels.csv (table, var, description, source),
+which records where each label was taken from. A description already in
+`variables` is kept; a name without one gets the label when there is one. A
+value already present is checked against the built CSV (same names, once each). It refuses a group whose CSV it cannot find, whose
 diagonal is missing a variable, or whose existing value names a different set.
 
 Usage: python3 data/covariance/fill_variables.py <dir with built table CSVs> [...]
@@ -20,6 +21,7 @@ from collections import OrderedDict
 from pathlib import Path
 
 MATRICES = Path(__file__).with_name("matrices.csv")
+LABELS = Path(__file__).with_name("variable_labels.csv")
 SEP = " | "
 
 
@@ -56,6 +58,14 @@ def main(dirs):
         rows = list(reader)
     if "variables" not in cols:
         cols.append("variables")
+    labels = {}
+    if LABELS.exists():
+        with open(LABELS, newline="", encoding="utf-8") as f:
+            for r in csv.DictReader(f):
+                if "|" in r["description"] or " = " in r["var"]:
+                    raise SystemExit(f"variable_labels.csv: bad entry {r}")
+                labels[(r["table"], r["var"])] = r["description"]
+    used = set()
     cache, filled, kept = {}, 0, 0
     for r in rows:
         t = r["table"]
@@ -70,12 +80,25 @@ def main(dirs):
         if cur:
             if sorted(names(cur)) != sorted(order) or len(set(names(cur))) != len(names(cur)):
                 raise SystemExit(f"{t} group {r['group']!r}: variables {names(cur)} != built {order}")
+            entries = cur.split(SEP)
             kept += 1
         else:
-            r["variables"] = SEP.join(order)
+            entries = list(order)
             filled += 1
+        out = []
+        for e in entries:
+            if " = " not in e and (t, e) in labels:
+                e = f"{e} = {labels[(t, e)]}"
+                used.add((t, e.split(" = ", 1)[0]))
+            elif " = " in e:
+                used.add((t, e.split(" = ", 1)[0]))
+            out.append(e)
+        r["variables"] = SEP.join(out)
         if any("|" in v for v in order):
             raise SystemExit(f"{t}: a variable name contains '|'")
+    unused = sorted(k for k in labels if k not in used and k[0] in cache)
+    if unused:
+        print(f"note: {len(unused)} labels name no variable in any group, e.g. {unused[:5]}")
     with open(MATRICES, "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=cols, quoting=csv.QUOTE_NONNUMERIC, lineterminator="\n")
         w.writeheader()
