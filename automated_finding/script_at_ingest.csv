@@ -68,7 +68,6 @@ nohe_2015_wfcstrain4,cov,data/covariance/batch_metasem.R,2026-11-17
 norton_2013_hads14,cov,data/covariance/batch_metasem.R,2026-11-17
 or_2024_tam4,cov,data/covariance/zenodo_or2024_tam.py,2026-11-17
 ozdemir_2026_mentormindsets8,cov,data/covariance/pmc_article_tables.py,2026-11-17
-paquin_2016_identity6,cov,data/covariance/figshare_paquin2016_identity.py,2026-11-17
 pollack_2012_estress9,cov,data/covariance/batch_rpackages2.R,2026-11-17
 reise_2007_health16,cov,data/covariance/pilot_rpackages.R,2026-11-17
 roorda_2011_engagement,cov,data/covariance/batch_metasem.R,2026-11-17
