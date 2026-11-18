@@ -8,8 +8,17 @@
 ##    U.S." file ("The correlations are based on 2200 U.S. children."); its upper
 ##    triangle matches neither the U.S. nor the Israel file. Only the lower
 ##    triangle is used (mirrored); no value is changed.
-##  - smacof::crimes (50 U.S. states) is not built: correlations over aggregate
-##    units await Ben's scope ruling (held.csv).
+##  - smacof::crimes: correlations of seven crime rates over the 50 U.S. states
+##    (U.S. Statistical Abstract 1970, via Wilkinson, 1990), N = 50 states. The
+##    units are states, not persons; Ben ruled 2026-11-17 that correlations over
+##    aggregate units are in scope, with the unit noted.
+##  - smacof::KIPT: eight Kennedy Institute Phonics Test subtests, 19 young normal
+##    readers (Guthrie, 1973). smacof stores the matrix in similarity form with 0
+##    on the diagonal; the diagonal is written as 1 (a correlation with itself),
+##    the only change. Two cells differ from Table 4 of Guthrie's 1973 AERA
+##    handout (ERIC ED075796): the handout has SLP-CCR = .59 and NR-CCR = .62,
+##    smacof has 0.62 and 0.59. Built from smacof as-is with the swap noted
+##    (Ben, 2026-11-17).
 ##
 ## Modification (2026-11-17): reshaped to the long lower-triangle layout in
 ## data/covariance/README.md. No value is changed.
@@ -62,4 +71,13 @@ m <- g; m[upper.tri(m)] <- t(g)[upper.tri(g)]   # mirror the lower triangle
 stopifnot(all(m[lower.tri(m, diag = TRUE)] == g[lower.tri(g, diag = TRUE)]))
 write_table(to_long(m, "cor", 2200), "guttman_1991_wiscr12")
 
-cat("wrote 1 table to", out, "\n")
+## --- U.S. state crime rates -------------------------------------------------
+cr <- from_tarball("smacof", "2.1-7", "crimes.rda", "crimes")
+write_table(to_long(cr, "cor", 50), "wilkinson_1990_crimes7")
+
+## --- KIPT (Guthrie, 1973) ---------------------------------------------------
+k <- from_tarball("smacof", "2.1-7", "KIPT.rda", "KIPT")
+stopifnot(all(diag(k) == 0))
+diag(k) <- 1
+write_table(to_long(k, "cor", 19), "guthrie_1973_kipt8")
+cat("wrote 3 tables to", out, "\n")

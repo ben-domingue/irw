@@ -11,8 +11,8 @@
 ## Modification (2026-11-17): reshaped to the long lower-triangle layout in
 ## data/covariance/README.md. No value is changed.
 ##
-## Also psych::cattell (Cattell, 1963) and psych::Harman.Holzinger (Harman, 1967),
-## whose N the psych help pages give.
+## Also psych::cattell (Cattell, 1963), psych::Harman.Holzinger and
+## psych::Harman.political (Harman, 1967), whose N the psych help pages give.
 ##
 ## Usage:  Rscript data/covariance/batch_rpackages3.R <out dir>
 
@@ -103,6 +103,17 @@ add("harman_1967_holzinger9", "", 696, "",
     "Harman, H. H. (1967). Modern factor analysis (2nd ed.). University of Chicago Press.",
     "p. 244; from unpublished class notes of K. J. Holzinger (nine of 12 tests)", "psych::Harman.Holzinger", "GPL (>= 2)",
     "N = 696 from the psych help page; population not described there")
+
+## --- psych::Harman.political (added 2026-11-17) ---------------------------
+## Eight political and social variables over 147 election areas (Harman, 1967,
+## p. 166). The units are areas, not persons: Ben ruled 2026-11-17 that
+## correlations over aggregate units are in scope, with the unit noted.
+e <- new.env(); utils::data("Harman.political", package = "psych", envir = e)
+write_table(to_long(e$Harman.political, "cor", 147), "harman_1967_political8")
+add("harman_1967_political8", "", 147, "147 election areas (aggregate units, not persons)",
+    "Harman, H. H. (1967). Modern factor analysis (2nd ed.). University of Chicago Press.",
+    "p. 166", "psych::Harman.political", "GPL (>= 2)",
+    "units are 147 election areas, not persons: the n is the number of areas; N = 147 from the psych help page ('8 political variables taken over 147 election areas')")
 
 utils::write.csv(do.call(rbind, rec), file.path(out, "matrices.csv"), row.names = FALSE, na = "")
 cat("wrote", length(unique(sapply(rec, `[[`, "table"))), "tables,", length(rec), "matrices to", out, "\n")

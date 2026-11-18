@@ -27,15 +27,18 @@ cox_1996_coping4,cov,data/covariance/batch_rpackages4.R,2026-11-17
 craft_2003_csai4,cov,data/covariance/batch_metasem.R,2026-11-17
 digman_1997_bigfive5,cov,data/covariance/batch_rpackages4.R,2026-11-17
 duncan_1968_peer10,cov,data/covariance/batch_sem.R,2026-11-17
+feraco_2026_seb,cov,data/covariance/github_feraco2026_seb.py,2026-11-17
 fischbein_1977_weight6,cov,data/covariance/batch_semPackages.R,2026-11-17
 fried_2018_ptsd16,cov,data/covariance/batch_semPackages.R,2026-11-17
 gnambs_2018_rses10,cov,data/covariance/batch_metasem.R,2026-11-17
 green_2026_caregiverwellness9,cov,data/covariance/pmc_article_tables.py,2026-11-17
 griffith_1998_interpersonal24,cov,data/covariance/batch_rpackages2.R,2026-11-17
 grob_2018_ids2_14,cov,data/covariance/batch_rpackages2.R,2026-11-17
+guthrie_1973_kipt8,cov,data/covariance/batch_smacof.R,2026-11-17
 guttman_1991_wiscr12,cov,data/covariance/batch_smacof.R,2026-11-17
 hagger_2018_raa9,cov,data/covariance/osf_hagger2018_raa.py,2026-11-17
 harman_1967_holzinger9,cov,data/covariance/batch_rpackages3.R,2026-11-17
+harman_1967_political8,cov,data/covariance/batch_rpackages3.R,2026-11-17
 he_2026_tam22,cov,data/covariance/mendeley_he2026_tam.py,2026-11-17
 he_2026_utaut17,cov,data/covariance/zenodo_he2026_utaut.py,2026-11-17
 holzinger_1937_bifactor14,cov,data/covariance/pilot_rpackages.R,2026-11-17
@@ -80,6 +83,7 @@ tucker_1958_ability9,cov,data/covariance/pilot_rpackages.R,2026-11-17
 wang_2026_aidependence4,cov,data/covariance/zenodo_wang2026_aidependence.py,2026-11-17
 wansbeek_2000_tvviewing7,cov,data/covariance/batch_rpackages_b.R,2026-11-17
 wheaton_1977_alienation6,cov,data/covariance/batch_sem.R,2026-11-17
+wilkinson_1990_crimes7,cov,data/covariance/batch_smacof.R,2026-11-17
 wvs_1994_jobsat3,cov,data/covariance/batch_metasem.R,2026-11-17
 yu_2026_digitalreadiness11,cov,data/covariance/pmc_article_tables_o.py,2026-11-17
 zhang_2019_hapa10,cov,data/covariance/osf_zhang2019_hapa.py,2026-11-17
