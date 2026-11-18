@@ -136,6 +136,19 @@ process_area <- function(area) {
                    year, area, n_off / nrow(microdata)))
   }
 
+  # One 2013 CH record (booklet 169) has eleven "9"s, a code INEP does not use for
+  # answers. Records with a code outside ALPHABET are dropped like off-length
+  # ones; LC is exempt, because there "9" pads the language block not sat.
+  bad_chr <- if (area == "LC") "[^A-E.*9]" else "[^A-E.*]"
+  n_bad   <- sum(grepl(bad_chr, md[[txcol]]))
+  if (n_bad > 0) {
+    cat(sprintf("  %s: dropped %d of %d examinees whose %s has a code outside A-E . *\n",
+                area, n_bad, nrow(md), txcol))
+    if (n_bad / nrow(md) > 0.01)
+      stop(sprintf("%s %s: %.4f of records have unexpected codes", year, area, n_bad / nrow(md)))
+    md <- md[!grepl(bad_chr, md[[txcol]]), ]
+  }
+
   # where the LC string is 5 wider than the position span it holds both
   # language blocks: slots 1-5 are TP_LINGUA 0, slots 6-10 TP_LINGUA 1, slots
   # 11-50 the shared questions. The block not sat is padded with "9".
