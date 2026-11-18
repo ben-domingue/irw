@@ -4,7 +4,7 @@ Processing scripts and records for the **covariance** data family (`source = "co
 
 Not to be confused with `cov_*` columns in other families, which are person-level covariates.
 
-**Status (2026-11-17).** Draft standard. 84 tables (1256 matrices) are built locally and pass `irw_validate.cov`, and every one has been checked to equal its package original exactly. `matrices.csv` records each matrix; `held.csv` records every candidate not built. On Redivis, `irw_cov:4e2q` v1.0 holds one table, `holzinger_1939_grantwhite9` (released by Ben on 2026-11-17).
+**Status (2026-11-17).** Draft standard. 88 tables (1294 matrices) are built locally and pass `irw_validate.cov`, and every one has been checked to equal its package original exactly. `matrices.csv` records each matrix; `held.csv` records every candidate not built. On Redivis, `irw_cov:4e2q` v1.0 holds one table, `holzinger_1939_grantwhite9` (released by Ben on 2026-11-17).
 
 **Second batch (2026-11-17, #3582).** `batch_rpackages2.R` adds 7 tables (11 matrices) from `fungible`, `ggm`, `EFAtools`, `GPArotation` and `psychTools`. `fungible`, `ggm` and `EFAtools` are read from pinned CRAN source tarballs instead of being installed (`fungible` pulls in OpenMx). `held.csv` lists every candidate considered and not built, and why: held for licence, values or N; pending an N from the original paper; or out of scope. Dictionary rows for all tables are in `automated_finding/dictionary_auto_cov.csv` (`stage_dict_row.py --source cov`). `02_biblio.R` does not read it yet. `holzinger_1939_grantwhite9` is released on Redivis as `irw_cov` v1.0 (Ben, 2026-11-17).
 
@@ -83,7 +83,10 @@ Rules (the validator's V1-V8):
   - Paywalled or unlicensed articles, and archives with no stated terms (for example the WMF Human Cognitive Abilities archive of Carroll's matrices), need written permission. Until then, link to them and do not reshare.
 
   Whether a published correlation table is a non-copyrightable fact is a question for counsel. Do not assume it.
-- **N is required.** A matrix whose source gives no sample size is not taken: an SEM fit needs it. This is why the pilot leaves out `Schutz` and `Harman.political`.
+- **N is required.** A matrix whose source gives no sample size is not taken: an SEM fit needs it. This is why the pilot left out `Schutz` (and `Harman.political`, until its N of 147 areas was found in the psych help page).
+- **Pairwise n not given.** A matrix computed with pairwise deletion whose source gives only the sample N is built with that N on every row and `missing = "pairwise"`; its notes say the n is an upper bound, since cells with missing data rest on fewer cases. When the source gives per-cell n, that is used.
+- **Aggregate units.** A matrix computed over units other than persons (election areas, states) is in scope. `population` names the units and `n` is the number of units.
+- **A package copy that differs from the original source** is built from the package as-is, with each differing cell named in the notes (for example the two swapped cells of `guthrie_1973_kipt8`).
 - **Table names:** the usual `author_year_construct`, lowercase, at most 40 characters. The author is the first author of the study that collected the data, not of the book that reprinted the matrix (for example `mullen_1939_physical8`, reprinted in Harman 1976).
 
 ## To do (non-data)
@@ -123,3 +126,4 @@ Data acquisition is tracked in #3582. Everything else lives here until the famil
 - 2026-11-17 (Ben): the family holds published matrices only, for now. IRW-derived matrices are computed client-side, not stored. Name `cov` / `irw_cov`. SEM users come first.
 - 2026-11-17 (Ben): derived matrices for single IRW tables are never stored; `irw_fetch()` on a core table with `source = "cov"` computes one. Linked multi-table matrices may be revisited.
 - 2026-11-17 (Ben): in the long run the family goes on the home page.
+- 2026-11-17 (Ben): pairwise-deletion matrices with only a sample N are built, the n noted as an upper bound (`feraco_2026_seb`). Correlations over aggregate units are in scope (`harman_1967_political8`, `wilkinson_1990_crimes7`). A package matrix that differs from its source is built as-is with the difference noted (`guthrie_1973_kipt8`). Licence requests to depositors wait until the family is more mature.
