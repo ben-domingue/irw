@@ -10,7 +10,7 @@ Not to be confused with `cov_*` columns in other families, which are person-leve
 
 **metaSEM and test manuals (2026-11-17, #3582).** `batch_metasem.R` builds 17 tables (511 study matrices) from `metaSEM` 2.0, read from its pinned CRAN tarball. Rulings (Ben, 2026-11-17):
 - A variable a study never measured (a blank diagonal) is dropped from that study's matrix, and `notes` names it.
-- A study still holding a blank cell after that is not built: 30 studies in `boer_2016_lmx`, `cheung_2000_tpb` and `scalco_2017_tpborganic`, listed in `held.csv`.
+- A study still holding a blank cell after that was not built: 30 studies in `boer_2016_lmx`, `cheung_2000_tpb` and `scalco_2017_tpborganic`, listed in `held.csv`. Since 2026-11-18 blank cells are allowed (V4 below), so these can be built.
 - Matrices computed by a package author from survey microdata (ISSP, WVS) are in scope, with a note.
 - A matrix in a GPL package is GPL even when it comes from a commercial test manual. `batch_rpackages3.R` builds the WJ IV norming matrices (six age groups) and the NEO PI-R facets on that basis.
 
@@ -48,14 +48,14 @@ One table holds one source's matrix, or several matrices published together for 
 
 Rules (the validator's V1-V8):
 
-- **V1:** `stat`, `var1`, `var2`, `value` and `n` are present; `stat`, `var1`, `value` and `n` are never blank.
+- **V1:** `stat`, `var1`, `var2`, `value` and `n` are present; `stat`, `var1` and `n` are never blank, and `value` is blank only on an off-diagonal `cor`/`cov` row (V4).
 - **V2:** `stat` is one of `cor`, `cov`, `sd`, `mean`, with one matrix kind per group.
 - **V3:** cell rows name two variables; moment rows name one.
-- **V4:** every cell of the lower triangle appears exactly once, and (a, b) and (b, a) count as the same cell. A matrix the source printed with blanks cannot be held.
+- **V4:** every cell of the lower triangle has a row, exactly once, and (a, b) and (b, a) count as the same cell. A cell the source did not report, between two variables it did measure, is a row with an **empty `value`**: reported (info), never an error, and counted in `cov_metadata`'s `n_missing_cells`. A variable the source never measured is left out of that sample's matrix instead, so a blank is always "not reported", never "not measured" and never a transcription gap. A diagonal, `sd` or `mean` value is never blank.
 - **V5:** a `cor` diagonal is 1, and every correlation (or the correlation a covariance implies) is in [-1, 1], with a tolerance of 0.001 for published rounding.
 - **V6:** `value` is numeric, and `n` is a positive integer.
 - **V7:** no columns beyond those above. Moments are given at most once per variable, only for variables in the matrix, and SD > 0.
-- **V8:** a matrix that is **not positive definite is a warning, never an error.** Rounding, pairwise deletion and typos make many published matrices non-PD (`burt_1915_emotions11` is one), and the user is better served by the matrix as published plus a flag than by a silently repaired one.
+- **V8:** a matrix that is **not positive definite is a warning, never an error.** For a matrix with blank cells it is judged on the complete part: the matrix after dropping the fewest variables that leaves no blank (ties keep the variables listed first). `cov_metadata`'s `min_eigenvalue` and `is_pd`, `irw_validate.cov.complete_drop` and the packages' `complete = TRUE` all use this rule. Rounding, pairwise deletion and typos make many published matrices non-PD (`burt_1915_emotions11` is one), and the user is better served by the matrix as published plus a flag than by a silently repaired one.
 
 ## Records kept for every table
 
@@ -112,9 +112,9 @@ Data acquisition is tracked in #3582. Everything else lives here until the famil
 
 **Standard decisions still open.**
 
-- [ ] Matrices printed with blank cells: V4 refuses them today, but MASEM study matrices are incomplete by design. Allow `value` blank with a count in `cov_metadata`? #3582 reports how many there are.
-- [ ] Variable labels (e.g. "Vocabulary, WAIS subtest"): a small labels table, the analogue of item text. Where does it live?
-- [ ] Overlapping matrices: a free-text `notes` today. Is a `subset_of` column worth it?
+- [x] Matrices printed with blank cells: allowed as an empty `value` (V4), with `complete = TRUE` in the packages (Ben, 2026-11-18; #3594).
+- [ ] Variable labels: decided as a free-text column in `matrices.csv` describing the variables or where the source describes them (Ben, 2026-11-17; #3594). Not yet added.
+- [x] Overlapping matrices: a free-text note in the record naming the overlapping table, no `subset_of` column (Ben, 2026-11-17; #3594).
 
 **Later.**
 
@@ -126,4 +126,5 @@ Data acquisition is tracked in #3582. Everything else lives here until the famil
 - 2026-11-17 (Ben): the family holds published matrices only, for now. IRW-derived matrices are computed client-side, not stored. Name `cov` / `irw_cov`. SEM users come first.
 - 2026-11-17 (Ben): derived matrices for single IRW tables are never stored; `irw_fetch()` on a core table with `source = "cov"` computes one. Linked multi-table matrices may be revisited.
 - 2026-11-17 (Ben): in the long run the family goes on the home page.
+- 2026-11-18 (Ben, #3594): a cell the source did not report is held as a row with an empty `value` rather than leaving the study out ("this seems better than skipping and is objective/reversible"). `irw_cov2matrix()` returns NA there with a warning, and `complete = TRUE` returns the complete part; `irw_cov2list()` keeps NA for metaSEM. Positive definiteness is judged on the complete part.
 - 2026-11-17 (Ben): pairwise-deletion matrices with only a sample N are built, the n noted as an upper bound (`feraco_2026_seb`). Correlations over aggregate units are in scope (`harman_1967_political8`, `wilkinson_1990_crimes7`). A package matrix that differs from its source is built as-is with the difference noted (`guthrie_1973_kipt8`). Licence requests to depositors wait until the family is more mature. Matrices from a CC BY supplement to a paywalled article are held pending a ruling (`paquin_2016_identity6`).
