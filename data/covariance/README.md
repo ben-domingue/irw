@@ -75,9 +75,10 @@ Rules (the validator's V1-V8):
     - `year` is `YYYY` or a range as the source gives it, `YYYY-YYYY`; a range is never collapsed to one year.
     - `country` is ISO 3166-1 alpha-2 only. A place with no code of its own takes its state's code, and `notes` names it (Northern Cyprus: `CY`). Blank when the source does not state the sample's country; it is never inferred from author affiliations.
     - `moderators` names are snake_case. Use these names whenever they apply, so the fields are comparable across tables: `mean_age`, `sd_age`, `median_age` (years); `age_range` (`12-18`); `women` (a proportion from 0 to 1; a published percentage divided by 100 is the one conversion allowed); `design` (`cross-sectional`, `longitudinal`, `experimental` or `other`); `language` (ISO 639-1 codes, `;`-separated); `setting` (free text: school, clinical, online, ...); `unit` (what one observation was, when not a person: team, country, ...). Other names are free. A value never contains `|` or ` = `;
+  - `overlaps`: the other IRW tables, of any family, whose data include this sample, `;`-separated (Ben, 2026-11-18). Examples: the `Opd2014` samples of `gnambs_2018_rses10` were computed from the same Open Psychometrics data as the core table `rosenberg_selfesteem`; the two `nohe_2015` tables share 13 studies; `becker_1992_ability3` and `becker_1994_ability3` share 4. Blank when no overlap is known. When a fetched table has any, the packages print a one-line note naming them, so a matrix is not pooled with its own data twice;
   - `notes`.
 
-  Several pilot tables overlap: one sample's matrix is a subset of another's. The `notes` column says so instead of one being dropped, because each is a canonical matrix in its own right.
+  Several pilot tables overlap: one sample's matrix is a subset of another's. Each is kept, because each is a canonical matrix in its own right, and `overlaps` names the other. A matrix computed from an IRW table is normally never stored (Rulings, 2026-11-17); one is kept only when it cannot be recomputed from the IRW copy, such as Gnambs's per-country Open Psychometrics samples (the IRW copy has no country column), and then `overlaps` always names the table it came from.
 - **A dictionary row** in `automated_finding/dictionary_auto_cov.csv` (planned; no sheet, as for conjoint and rankings).
 
 ## Intake rules
@@ -119,7 +120,7 @@ Data acquisition is tracked in #3582. Everything else lives here until the famil
 
 - [x] Matrices printed with blank cells: allowed as an empty `value` (V4), with `complete = TRUE` in the packages (Ben, 2026-11-18; #3594).
 - [ ] Variable order and labels: the `variables` record field (Ben, 2026-11-18; #3594). Spec, checks and package support are in; backfill for the built tables is pending (irw-7b).
-- [x] Overlapping matrices: a free-text note in the record naming the overlapping table, no `subset_of` column (Ben, 2026-11-17; #3594).
+- [x] Overlapping matrices: the `overlaps` record field, with a note on fetch (Ben, 2026-11-18; replaces the free-text note of 2026-11-17, #3594).
 
 **Later.**
 
@@ -131,6 +132,7 @@ Data acquisition is tracked in #3582. Everything else lives here until the famil
 - 2026-11-17 (Ben): the family holds published matrices only, for now. IRW-derived matrices are computed client-side, not stored. Name `cov` / `irw_cov`. SEM users come first.
 - 2026-11-17 (Ben): derived matrices for single IRW tables are never stored; `irw_fetch()` on a core table with `source = "cov"` computes one. Linked multi-table matrices may be revisited.
 - 2026-11-17 (Ben): in the long run the family goes on the home page.
+- 2026-11-18 (Ben): `gnambs_2018_rses10`'s Opd2014 samples stay, although computed from the same data as `rosenberg_selfesteem`: they cannot be recomputed from the IRW copy (no country column) and make a didactic example of a published matrix beside its raw data. Overlaps are recorded in `overlaps`, and the packages note them on fetch.
 - 2026-11-18 (Ben): study-level moderators are in scope when the source publishes them (record fields `year`, `country`, `moderators`), and per-variable reliability is a `rel` row beside `sd` and `mean`. Prompted by a reviewer: MASEM routinely uses year, country and reliability.
 - 2026-11-18 (Ben, #3594): published variable order and variable labels live in one record field, `variables`, not in row order, which Redivis does not keep.
 - 2026-11-18 (Ben, #3594): a cell the source did not report is held as a row with an empty `value` rather than leaving the study out ("this seems better than skipping and is objective/reversible"). `irw_cov2matrix()` returns NA there with a warning, and `complete = TRUE` returns the complete part; `irw_cov2list()` keeps NA for metaSEM. Positive definiteness is judged on the complete part.
