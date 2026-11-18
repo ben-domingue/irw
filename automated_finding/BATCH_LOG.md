@@ -27812,3 +27812,22 @@ tables) and uploaded on retry. Ben publishes.
 **Ruled 2026-11-15 (Ben):** the three third-party extracts (WVS Nigeria, NHIS 2025, OECD Risks that Matter) are
 dropped for now; statuses set to `rejected_content`. If one is ever wanted, build from the source survey (OECD's
 terms unchecked). Holds now 8.
+
+## 2026-11-18 — Bieleke 2022 (osf 3pmr4): licence granted, 2 tables, 14,517 responses
+
+PLOS monthly 2026-11-09 lead pone.0272443, licence-blocked until Maik Bieleke set CC BY 4.0 on node 3pmr4
+(verified via the OSF API 2026-11-18; he also granted by email). Script `data/bieleke_2022_assessment_emotions.py`;
+one file, data/dataset.xlsx (sha256 pinned), 414 rows = the paper's N.
+
+Staged in `irw_output/` (not uploaded), all 414 ids, `wave` 1-4 (two weeks before / day of an unannounced
+assessment, then two weeks before / day of an announced one), `cluster_id` = class (19 classes):
+- `bieleke_2022_assess_enjoyment` (4,839): 3 items, 1-4.
+- `bieleke_2022_assess_anxiety` (9,678): 6 items (dx1-3, ta1-3), 1-4. One table: the paper treats the six as one
+  anxiety scale and the deposit's composite is their plain mean. The validator's multi_scale warning on dx/ta is
+  answered by that; the prefixes are undocumented (possibly the two source instruments, PISA 2003 and the AFS).
+Composites (jo1-4, ax1-4) equal the item means and the per-wave means reproduce the paper's Table 1 (asserted).
+Blank time points (7-13 students per wave) dropped. Covariates: sex, track (lower/upper), subject, and the grade on
+each assessment as stored (negated German grade, higher = better).
+
+Item text: not shipped. No wording in the deposit; the paper quotes one example item per construct.
+QC: both pass `irw-validate` (upload), in-script `run_qc()`, `irw_lint_covariates.py`; tags pass tags/tests.
