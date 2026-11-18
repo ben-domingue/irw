@@ -1244,6 +1244,19 @@ class ValidatorGate(unittest.TestCase):
         report = self._check(path, "smith_1990_abilities", target=self.COV)
         self.assertTrue(any("cov_record" in e and "groups" in e for e in report.errors), report.errors)
 
+    def test_cov_record_variables_must_name_the_matrix(self):
+        """The `variables` field (published order and labels, #3594): blank passes,
+        an exact list passes, a list missing or inventing a variable is blocked."""
+        for field, ok in (("", True), ("b = second | a = first", True), ("a", False), ("a | b | c", False),
+                          ("a | a | b", False)):
+            d = self._cov_record()
+            (d / "matrices.csv").write_text(
+                "table,group,n_obs,matrix_type,variables\n"
+                f"smith_1990_abilities,,200,pearson,{field}\n", encoding="utf-8")
+            path = self._csv("smith_1990_abilities.csv", self._cov_rows())
+            report = self._check(path, "smith_1990_abilities", target=self.COV)
+            self.assertEqual(report.ok, ok, (field, report.errors))
+
     def test_a_bad_cov_matrix_is_blocked_by_its_validator(self):
         self._cov_record()
         path = self._csv("smith_1990_abilities.csv", self._cov_rows(r=1.4))
