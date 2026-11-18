@@ -20,13 +20,16 @@ Appendixes.xlsx:
 Study ID 17 has two samples ("17-CN", "17-INT"); there is no study 19.
 
 The script checks that N is constant within a study and no pair is repeated.
-A study missing a pair among the constructs it measured is not built (blank
-cell rule) and is printed and listed under "held" in <TABLE>_records.json.
+A pair among the constructs a study measured that it did not report is
+written as a row with an empty value (blank cells allowed, Ben, 2026-11-18);
+the missing pairs are listed per study in <TABLE>_records.json.
 Values are written in shortest round-trip form, i.e. as stored.
 
 Modification (2026-11-17): pivoted from pairwise rows to the long lower-triangle
 layout in data/covariance/README.md, one group per study, labelled
 "study <ID>: <citation>".
+Modification (2026-11-18): unreported pairs among measured constructs are
+written as empty values instead of holding the study.
 
 Usage: python3 data/covariance/mendeley_he2026_tam.py <out dir>
 """
@@ -87,20 +90,17 @@ def main(out):
             r_of[frozenset((a, b))] = float(r[4])
         v = [x for x in ORDER if any(x in p for p in r_of)]
         base = sid.split("-")[0]
-        if len(r_of) != len(v) * (len(v) - 1) // 2:
-            held.append({"group": f"study {sid}: {cite.get(sid) or cite[base]}", "n_obs": ni, "vars": v,
-                         "missing": sorted("-".join(sorted(p)) for p in
-                                           (frozenset((x, y)) for i, x in enumerate(v) for y in v[:i])
-                                           if p not in r_of)})
-            continue
+        missing = sorted("-".join(sorted(p)) for p in
+                         (frozenset((x, y)) for i, x in enumerate(v) for y in v[:i]) if p not in r_of)
         group = f"study {sid}: {cite.get(sid) or cite[base]}"
         for a, i in enumerate(v):
             for j in v[:a + 1]:
                 long.append({"stat": "cor", "var1": i, "var2": j,
-                             "value": "1" if i == j else repr(r_of[frozenset((i, j))]),
+                             "value": "1" if i == j else (repr(r_of[frozenset((i, j))])
+                                                          if frozenset((i, j)) in r_of else ""),
                              "n": ni, "group": group})
         c = chars.get(sid) or chars[base]
-        records.append({"group": group, "n_obs": ni, "vars": v,
+        records.append({"group": group, "n_obs": ni, "vars": v, "missing": missing,
                         "population": "; ".join(x for x in (clean(c[4]), clean(c[5]), clean(c[9])) if x)})
     with open(out / f"{TABLE}.csv", "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=["stat", "var1", "var2", "value", "n", "group"])
@@ -109,8 +109,9 @@ def main(out):
     with open(out / f"{TABLE}_records.json", "w") as f:
         json.dump({"table": TABLE, "records": records, "held": held}, f, indent=1, ensure_ascii=False)
     print(f"wrote {TABLE}.csv: {len(records)} studies built, {len(held)} held")
-    for h in held:
-        print("held:", h["group"], h["missing"])
+    for rec in records:
+        if rec["missing"]:
+            print("blank cells:", rec["group"], rec["missing"])
 
 
 if __name__ == "__main__":

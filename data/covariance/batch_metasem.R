@@ -12,8 +12,14 @@
 ## that groups are unique; the order is metaSEM's.
 ##
 ## A variable a study never measured (blank diagonal) is dropped from that
-## study's matrix (Ben, 2026-11-17); a study still holding a blank cell is not
-## built and is listed in held.csv.
+## study's matrix (Ben, 2026-11-17), as is a variable whose cells with every
+## other measured variable are all blank. A pair of measured variables that the study
+## did not report keeps its row with an empty `value` (Ben, 2026-11-18); a study
+## with fewer than two measured variables, no reported off-diagonal cell, or an
+## off-diagonal |r| >= 1 among its blank-cell matrices is not built (held.csv).
+##
+## Modification (2026-11-18): measured pairs the study did not report are now
+## written as rows with an empty `value` instead of holding the study.
 ## Gnambs18 is the exception: 77 of its 113 matrices were reproduced from
 ## published factor loadings (CorMat = 0), which is model output and out of
 ## scope, so only the 36 observed matrices (CorMat = 1) are kept.
@@ -50,7 +56,9 @@ to_long <- function(m, stat, n, group) {
   m <- as.matrix(m)
   v <- colnames(m)
   if (is.null(v) || anyDuplicated(v)) stop("matrix needs unique column names")
-  if (anyNA(m)) stop("blank cell in ", group)
+  ## Ben 2026-11-18: an off-diagonal cell may be blank (written empty); a
+  ## diagonal may not.
+  if (anyNA(diag(m))) stop("blank diagonal in ", group)
   if (!isTRUE(all.equal(unname(m), unname(t(m)), tolerance = 0))) stop("matrix is not symmetric: ", group)
   idx <- which(lower.tri(m, diag = TRUE), arr.ind = TRUE)
   idx <- idx[order(idx[, "row"], idx[, "col"]), , drop = FALSE]
@@ -63,7 +71,9 @@ to_long <- function(m, stat, n, group) {
 ## back as exactly the same double instead.
 exact <- function(x) {
   s <- formatC(x, digits = 15, format = "g")
-  redo <- as.numeric(s) != x
+  redo <- rep(FALSE, length(x))
+  redo[!is.na(x)] <- as.numeric(s[!is.na(x)]) != x[!is.na(x)]
+  s[is.na(x)] <- ""
   s[redo] <- formatC(x[redo], digits = 17, format = "g")
   trimws(s)
 }
@@ -89,14 +99,30 @@ build <- function(table, name, stat, citation, location, pop = NULL, keep = NULL
   for (i in which(keep)) {
     m <- mats[[i]]
     ## Ben 2026-11-17: a variable the study never measured (blank diagonal) is
-    ## dropped from that study's matrix; no value changes. A study left with a
-    ## blank cell, or with fewer than two variables, is not built (held.csv).
+    ## dropped from that study's matrix; no value changes. Ben 2026-11-18: a
+    ## measured pair the study did not report keeps its row with an empty value.
+    ## A study with fewer than two variables, no reported off-diagonal cell, an
+    ## off-diagonal |r| >= 1 (blank-cell matrices) or a blank mean is not built.
     measured <- !is.na(diag(m))
-    dropped <- colnames(m)[!measured]
     m <- m[measured, measured, drop = FALSE]
-    if (ncol(m) < 2 || anyNA(m)) {
-      skipped[[length(skipped) + 1]] <<- data.frame(table = table, group = groups[i],
-        reason = if (ncol(m) < 2) "fewer than two measured variables" else "blank cell among measured variables")
+    ## A variable whose cells with every other remaining variable are all blank
+    ## was not measured either and is dropped (Ben's standing rule). Only matrices
+    ## with blank cells are affected; one with no reported cell at all is held.
+    repeat {
+      if (ncol(m) < 3 || all(is.na(m[lower.tri(m)]))) break
+      nob <- vapply(seq_len(ncol(m)), function(j) all(is.na(m[-j, j])), logical(1))
+      if (!any(nob)) break
+      m <- m[!nob, !nob, drop = FALSE]
+    }
+    dropped <- colnames(mats[[i]])[!colnames(mats[[i]]) %in% colnames(m)]
+    off <- if (ncol(m) >= 2) m[lower.tri(m)] else numeric(0)
+    nblank <- sum(is.na(off))
+    why <- if (ncol(m) < 2) "fewer than two measured variables" else
+      if (all(is.na(off))) "no reported off-diagonal cell among measured variables" else
+      if (nblank > 0 && stat == "cor" && any(abs(off) >= 1, na.rm = TRUE)) "off-diagonal |r| >= 1" else
+      if (!is.null(means) && anyNA(means[i, colnames(m)])) "blank mean for a measured variable" else ""
+    if (nzchar(why)) {
+      skipped[[length(skipped) + 1]] <<- data.frame(table = table, group = groups[i], reason = why)
       next
     }
     mats[[i]] <- m
@@ -111,7 +137,9 @@ build <- function(table, name, stat, citation, location, pop = NULL, keep = NULL
       population = pop[i], source_citation = citation, source_location = location,
       via = paste0("metaSEM::", name), capture = "package transcription", verified = "no",
       licence = LICENCE, licence_source = "metaSEM",
-      notes = if (length(dropped)) paste0(notes, "; not measured in this study, dropped: ", paste(dropped, collapse = ", ")) else notes)
+      notes = paste0(notes,
+        if (length(dropped)) paste0("; not measured in this study, dropped: ", paste(dropped, collapse = ", ")) else "",
+        if (nblank > 0) paste0("; ", nblank, " measured pair", if (nblank > 1) "s" else "", " not reported (blank cells, Ben 2026-11-18)") else ""))
   }
   tab <- do.call(rbind, rows)
   tab$value <- exact(tab$value)

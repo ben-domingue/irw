@@ -20,11 +20,15 @@ Three deposit files are read:
   by n and all 55 stacked values.
 
 A variable with no correlation in a study was not measured there and is
-dropped (Ben, 2026-11-17); a study still holding a blank cell is not built
-and is listed in records.json. A study with an off-diagonal |r| >= 1 is held.
+dropped (Ben, 2026-11-17). A pair between two measured variables that the
+study did not report is written as a row with an empty value (blank cells
+allowed, Ben, 2026-11-18); a study with fewer than two measured variables or
+an off-diagonal |r| >= 1 is held and listed in records.json.
 
 Modification (2026-11-17): reshaped to the long lower-triangle layout in
 data/covariance/README.md, one group per study (the sheet's label).
+Modification (2026-11-18): unreported pairs among measured variables are
+written as empty values instead of holding the study.
 
 Usage: python3 data/covariance/osf_zhang2019_hapa.py <out dir>
 """
@@ -137,20 +141,27 @@ def main(out):
         M = unstack(vals)
         if any(float(M[i][i]) != 1 for i in range(K)):
             raise SystemExit(f"{label}: diagonal is not 1")
-        keep = [i for i in range(K) if any(M[i][x] != "NA" for x in range(K) if x != i)]
+        keep = list(range(K))
+        while True:   # drop variables with no reported cell among those still kept
+            k2 = [i for i in keep if any(M[i][x] != "NA" for x in keep if x != i)]
+            if k2 == keep:
+                break
+            keep = k2
         dropped = [V[i] for i in range(K) if i not in keep]
         cells = [M[i][x] for a, i in enumerate(keep) for x in keep[:a]]
-        if len(keep) < 2 or "NA" in cells:
-            held.append((label, "blank cells"))
+        if len(keep) < 2 or all(c == "NA" for c in cells):
+            held.append((label, "fewer than two measured variables"))
             continue
-        if any(abs(float(c)) >= 1 for c in cells):
+        if any(c != "NA" and abs(float(c)) >= 1 for c in cells):
             held.append((label, "|r| >= 1"))
             continue
         for a, i in enumerate(keep):
             for x in keep[:a + 1]:
                 long.append({"stat": "cor", "var1": V[i], "var2": V[x],
-                             "value": "1" if i == x else M[i][x], "n": ni, "group": label})
+                             "value": "1" if i == x else ("" if M[i][x] == "NA" else M[i][x]),
+                             "n": ni, "group": label})
         records.append({"group": label, "n_obs": ni, "dropped": dropped,
+                        "n_blank": cells.count("NA"),
                         "behaviour": re.sub(r"\s+", " ", str(r[beh] or "")).strip()})
     with open(out / f"{TABLE}.csv", "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=["stat", "var1", "var2", "value", "n", "group"])
