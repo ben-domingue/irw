@@ -17,6 +17,11 @@
 ## record says so rather than dropping one, because each is a canonical
 ## teaching matrix in its own right.
 ##
+## Modification (2026-11-18, #3582): rel rows (per-variable reliability, the
+## README's `rel` stat) for holzinger_1939_grantwhite9, value as stated in the
+## psych help page (?bifactor): the Grant-White reliabilities from Keith
+## Widaman (personal communication, 2020). Matrix rows are unchanged.
+##
 ## Usage:  Rscript data/covariance/pilot_rpackages.R <out dir>
 ## Then:   python3 -m irw_validate.cov <out dir>/*.csv
 
@@ -49,6 +54,14 @@ to_long <- function(m, stat, n, group = NA_character_) {
              value = m[idx], n = as.integer(n), group = group, stringsAsFactors = FALSE)
 }
 
+## Per-variable reliability rows, value as stated, in the matrix's variable order.
+rel_rows <- function(m, values, n, group = NA_character_) {
+  v <- colnames(as.matrix(m))
+  if (length(values) != length(v)) stop("one reliability per variable needed")
+  data.frame(stat = "rel", var1 = v, var2 = NA_character_, value = values,
+             n = as.integer(n), group = group, stringsAsFactors = FALSE)
+}
+
 write_table <- function(df, table) {
   if (all(is.na(df$group))) df$group <- NULL
   utils::write.csv(df, file.path(out, paste0(table, ".csv")), row.names = FALSE, na = "")
@@ -76,7 +89,10 @@ add("holzinger_1939_grantwhite24", "", hs24$n.obs, "pearson", "Grant-White schoo
     "as reproduced in Harman (1976), Modern Factor Analysis, 24 psychological variables",
     "datasets::Harman74.cor")
 
-write_table(to_long(get_data("Holzinger.9"), "cor", 145), "holzinger_1939_grantwhite9")
+hz9 <- get_data("Holzinger.9")
+write_table(rbind(to_long(hz9, "cor", 145),
+                  rel_rows(hz9, c(.76, .57, .94, .65, .75, .87, .95, .84, .89), 145)),
+            "holzinger_1939_grantwhite9")
 add("holzinger_1939_grantwhite9", "", 145, "pearson", "Grant-White school, grades 7-8",
     "Holzinger, K. J., & Swineford, F. (1939). A study in factor analysis: The stability of a bi-factor solution. Supplementary Educational Monographs, 48.",
     "LISREL example NPV.KM; the x1-x9 of lavaan::HolzingerSwineford1939 for Grant-White",
