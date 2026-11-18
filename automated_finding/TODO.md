@@ -60,6 +60,11 @@ Full write-up in `BATCH_LOG.md` (2026-11-12 — repos sweep).
   deposit PDF, by list order), connor_2022_* (questionnaire .docx, by order), fernandeztalaverano_2026_* (Spanish
   stems in the .sav labels; third-party EQ-i-M20/VE-I/PSS).
 
+## Bieleke 2022 (osf 3pmr4), 2026-11-18 — 2 tables staged
+
+- [ ] **Upload**: 2 response tables (14,517 responses) from `~/irw-wt/bieleke-2022/automated_finding/irw_output/`
+  (bieleke_2022_assess_enjoyment, bieleke_2022_assess_anxiety). No item text.
+
 ## Vigl 2022 (osf f8m7a), 2026-11-12 — 5 tables staged, ECR held
 
 - [ ] **Upload**: 5 response tables (132,963 responses) from `~/irw-wt/vigl-2022/automated_finding/irw_output/`
