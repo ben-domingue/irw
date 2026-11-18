@@ -16,8 +16,14 @@ The file is R code. It is parsed as TEXT and never evaluated.
 Modification (2026-11-17): reshaped to the long lower-triangle layout in
 data/covariance/README.md, one group per study (the deposit's own object names).
 A variable whose diagonal is NA was not measured in that study and is dropped
-there (Ben, 2026-11-17); a study still holding a blank cell is not built and is
-printed.
+there (Ben, 2026-11-17), as is a variable whose cells with every other measured
+variable are all NA. A pair of measured variables whose cell is NA keeps
+its row with an empty `value` (Ben, 2026-11-18); a study with fewer than two
+measured variables, no reported off-diagonal cell, or (with blank cells) an
+off-diagonal |r| >= 1 is not built and is printed.
+
+Modification (2026-11-18): measured pairs the study did not report are now
+written as rows with an empty `value` instead of holding the study.
 
 Usage: python3 data/covariance/zenodo_or2024_tam.py <out dir>
 """
@@ -78,15 +84,30 @@ def main(out):
         if any(M[i][j] != M[j][i] for i in range(k) for j in range(k)):
             raise SystemExit(f"{study}: not symmetric")
         keep = [i for i in range(k) if M[i][i] != "NA"]
+        # A variable whose cells with every other kept variable are all NA was
+        # not measured either and is dropped (Ben's standing rule); a matrix with
+        # no reported off-diagonal cell at all is held below instead.
+        while len(keep) >= 3 and any(M[i][j] != "NA" for i in keep for j in keep if i != j):
+            nob = [i for i in keep if all(M[i][j] == "NA" for j in keep if j != i)]
+            if not nob:
+                break
+            keep = [i for i in keep if i not in nob]
         dropped = [rn[i] for i in range(k) if i not in keep]
-        if len(keep) < 2 or any(M[i][j] == "NA" for a, i in enumerate(keep) for j in keep[:a]):
+        # Ben 2026-11-18: an NA cell between measured variables is written empty.
+        off = [M[i][j] for a, i in enumerate(keep) for j in keep[:a]]
+        blank = sum(x == "NA" for x in off)
+        if (len(keep) < 2 or blank == len(off)
+                or (blank and any(abs(float(x)) >= 1 for x in off if x != "NA"))):
             held.append(study)
             continue
         for a, i in enumerate(keep):
             for j in keep[:a + 1]:
-                long.append({"stat": "cor", "var1": rn[i], "var2": rn[j], "value": M[i][j],
-                             "n": ni, "group": study})
-        records.append({"group": study, "n_obs": ni, "dropped": dropped})
+                long.append({"stat": "cor", "var1": rn[i], "var2": rn[j],
+                             "value": "" if M[i][j] == "NA" else M[i][j], "n": ni, "group": study})
+        rec = {"group": study, "n_obs": ni, "dropped": dropped}
+        if blank:
+            rec["blank_cells"] = blank
+        records.append(rec)
     with open(out / f"{TABLE}.csv", "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=["stat", "var1", "var2", "value", "n", "group"])
         w.writeheader()

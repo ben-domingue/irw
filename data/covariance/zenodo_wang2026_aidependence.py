@@ -14,12 +14,17 @@ MASEM_Coding_Table_Final.xlsx:
 - "Study-Level Coding": region, object type (school level) per study.
 - "Data Notes": abbreviations and exclusions.
 
-Coverage is sparse (81 correlations over 31 studies). A study is built when it
-reports every pair among the constructs it measured; a study with a missing
-pair is not built and is printed. Values are kept as the stored text.
+Coverage is sparse (81 correlations over 31 studies). A construct is measured in
+a study when the study reports at least one pair with it (checked repeatedly
+among the constructs that remain). A pair between two
+constructs the study measured but did not report is written as a row with an
+empty value (Ben, 2026-11-18); a study with an off-diagonal |r| >= 1 is not
+built and is printed. Values are kept as the stored text.
 
 Modification (2026-11-17): pivoted from pairwise rows to the long lower-triangle
 layout in data/covariance/README.md, one group per study (the deposit's Study_ID).
+Modification (2026-11-18): unreported pairs among measured constructs are empty
+values instead of holding the study (blank cells allowed, #3582).
 
 Usage: python3 data/covariance/zenodo_wang2026_aidependence.py <out dir>
 """
@@ -66,16 +71,27 @@ def main(out):
         if len(n[sid]) != 1 or int(study[sid][5]) not in n[sid]:
             raise SystemExit(f"{sid}: sample sizes disagree {n[sid]} {study[sid][5]}")
         ni = n[sid].pop()
-        v = [x for x in V if any(x in p for p in cells)]
-        if len(cells) != len(v) * (len(v) - 1) // 2:
+        v = list(V)
+        while True:                       # drop constructs with no reported pair among the rest
+            v2 = [x for x in v if any(x in p and p <= set(v) for p in cells)]
+            if v2 == v:
+                break
+            v = v2
+        if len(v) < 2:
+            held.append(sid)
+            continue
+        if any(abs(float(x)) >= 1 for x in cells.values()):
             held.append(sid)
             continue
         for a, i in enumerate(v):
             for j in v[:a + 1]:
                 long.append({"stat": "cor", "var1": i, "var2": j,
-                             "value": "1" if i == j else cells[frozenset((i, j))], "n": ni, "group": sid})
+                             "value": "1" if i == j else cells.get(frozenset((i, j)), ""),
+                             "n": ni, "group": sid})
         s = study[sid]
         records.append({"group": sid, "n_obs": ni, "vars": v,
+                        "blank": [f"{i}-{j}" for a, i in enumerate(v) for j in v[:a]
+                                  if frozenset((i, j)) not in cells],
                         "population": f"object type {s[3]}, {s[2]}"})
     with open(out / f"{TABLE}.csv", "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=["stat", "var1", "var2", "value", "n", "group"])

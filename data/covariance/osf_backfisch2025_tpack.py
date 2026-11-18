@@ -15,11 +15,15 @@ and TK (columns CorrXY, per the RQ1-RQ2-Codebook sheet). Excel doubles are
 written in their shortest round-trip form.
 
 A dimension with no correlation in a sample was not measured there and is
-dropped (Ben, 2026-11-17); a sample still holding a blank cell, or an
-off-diagonal |r| >= 1, is not built and is listed in the records file.
+dropped (Ben, 2026-11-17). A pair between two measured dimensions that the
+sample did not report is written as a row with an empty value (blank cells
+allowed, Ben, 2026-11-18); a sample with fewer than two measured dimensions
+or an off-diagonal |r| >= 1 is not built and is listed in the records file.
 
 Modification (2026-11-17): reshaped to the long lower-triangle layout in
 data/covariance/README.md, one group per sample (the sheet's Reference).
+Modification (2026-11-18): unreported pairs among measured dimensions are
+written as empty values instead of holding the sample.
 
 Usage: python3 data/covariance/osf_backfisch2025_tpack.py <out dir>
 """
@@ -90,19 +94,26 @@ def main(out):
         ni = int(r[hdr.index("N")])
         if any(rec["group"] == label for rec in records) or label in [h[0] for h in held]:
             raise SystemExit(f"duplicate label {label}")
-        keep = [i for i in range(len(V)) if any(r[col[(i, x)]] is not None for x in range(len(V)) if x != i)]
+        keep = list(range(len(V)))
+        while True:   # drop dimensions with no reported cell among those still kept
+            k2 = [i for i in keep if any(r[col[(i, x)]] is not None for x in keep if x != i)]
+            if k2 == keep:
+                break
+            keep = k2
         cells = [r[col[(i, x)]] for a, i in enumerate(keep) for x in keep[:a]]
-        if len(keep) < 2 or any(c is None for c in cells):
-            held.append((label, "blank cells"))
+        if len(keep) < 2 or all(c is None for c in cells):
+            held.append((label, "fewer than two measured dimensions"))
             continue
-        if any(abs(c) >= 1 for c in cells):
+        if any(c is not None and abs(c) >= 1 for c in cells):
             held.append((label, "|r| >= 1"))
             continue
         for a, i in enumerate(keep):
             for x in keep[:a + 1]:
                 long.append({"stat": "cor", "var1": V[i], "var2": V[x],
-                             "value": "1" if i == x else fmt(r[col[(i, x)]]), "n": ni, "group": label})
+                             "value": "1" if i == x else ("" if r[col[(i, x)]] is None else fmt(r[col[(i, x)]])),
+                             "n": ni, "group": label})
         records.append({"group": label, "n_obs": ni, "dropped": [V[i] for i in range(len(V)) if i not in keep],
+                        "n_blank": sum(c is None for c in cells),
                         "population": r[hdr.index("Population")], "sample_id": r[hdr.index("SampleID")],
                         "article_id": r[hdr.index("ArticleID")]})
     with open(out / f"{TABLE}.csv", "w", newline="", encoding="utf-8") as f:

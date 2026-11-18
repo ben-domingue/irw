@@ -14,12 +14,17 @@ enjoyment, valuable opportunities, other priorities, personal investments-loss,
 social constraints, social support-emotional), and are kept as deposited.
 
 A variable with no correlation in a sample was not measured there and is
-dropped (Ben, 2026-11-17); a sample still holding a blank cell is not built and
-is printed. Values are written in shortest round-trip form, i.e. as stored.
+dropped (Ben, 2026-11-17), repeating until every remaining variable has a
+reported cell with another one. A pair between two variables the sample did measure
+but did not report is written as a row with an empty value (Ben, 2026-11-18). A
+sample with fewer than two measured variables, or an off-diagonal |r| >= 1, is
+not built and is printed. Values are written in shortest round-trip form, i.e. as stored.
 
 Modification (2026-11-17): reshaped to the long lower-triangle layout in
 data/covariance/README.md, one group per sample (the sheet's label, whitespace
 collapsed).
+Modification (2026-11-18): unreported pairs among measured variables are empty
+values instead of holding the sample (blank cells allowed, #3582).
 
 Usage: python3 data/covariance/osf_berki2026_sportcommit.py <out dir>
 """
@@ -81,16 +86,25 @@ def main(out):
         M = [[1.0 if i == j else None for j in range(K)] for i in range(K)]
         for col, (i, j) in pairs.items():
             M[i][j] = M[j][i] = num(r[ix[col]])
-        keep = [i for i in range(K) if any(M[i][j] is not None for j in range(K) if j != i)]
+        keep = list(range(K))
+        while True:                       # drop variables with no reported cell among the rest
+            k2 = [i for i in keep if any(M[i][j] is not None for j in keep if j != i)]
+            if k2 == keep:
+                break
+            keep = k2
         dropped = [V[i] for i in range(K) if i not in keep]
-        if len(keep) < 2 or any(M[i][j] is None for a, i in enumerate(keep) for j in keep[:a]):
+        lower = [M[i][j] for a, i in enumerate(keep) for j in keep[:a]]
+        if len(keep) < 2 or any(x is not None and abs(x) >= 1 for x in lower):
             held.append(group)
             continue
         for a, i in enumerate(keep):
             for j in keep[:a + 1]:
+                value = "1" if i == j else ("" if M[i][j] is None else repr(M[i][j]))
                 long.append({"stat": "cor", "var1": V[i], "var2": V[j],
-                             "value": "1" if i == j else repr(M[i][j]), "n": ni, "group": group})
-        records.append({"group": group, "n_obs": ni, "dropped": dropped, "age": r[ix["Age"]]})
+                             "value": value, "n": ni, "group": group})
+        records.append({"group": group, "n_obs": ni, "dropped": dropped, "age": r[ix["Age"]],
+                        "blank": [f"{V[i]}-{V[j]}" for a, i in enumerate(keep) for j in keep[:a]
+                                  if M[i][j] is None]})
     with open(out / f"{TABLE}.csv", "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=["stat", "var1", "var2", "value", "n", "group"])
         w.writeheader()
