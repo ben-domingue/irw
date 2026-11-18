@@ -8,7 +8,7 @@
 ##Columns computed from the live table:
 ##  table, group ("" when the table has no group column), n_vars, n_obs (the
 ##  largest cell n: the matrix N, or the largest pairwise n), stat ("cor" or
-##  "cov"), has_sd, has_mean, min_eigenvalue, is_pd (min_eigenvalue > 0; a
+##  "cov"), has_sd, has_mean, has_rel (reliability rows), min_eigenvalue, is_pd (min_eigenvalue > 0; a
 ##  non-PD matrix is kept as published and flagged here, rule V8), and
 ##  n_missing_cells (lower-triangle cells the source did not report, held as
 ##  rows with an empty value; Ben, 2026-11-18). For a matrix with blank cells,
@@ -77,6 +77,7 @@ one_matrix <- function(name, d, g) {
   data.frame(table = name, group = g, n_vars = length(v), n_obs = max(as.numeric(cells$n)),
              stat = paste(unique(cells$stat), collapse = "+"),
              has_sd = any(d$stat == "sd"), has_mean = any(d$stat == "mean"),
+             has_rel = any(d$stat == "rel"),
              min_eigenvalue = signif(ev, 6), is_pd = if (is.na(ev)) NA else ev > 0,
              n_missing_cells = sum(is.na(m[lower.tri(m, diag = TRUE)])),
              stringsAsFactors = FALSE)

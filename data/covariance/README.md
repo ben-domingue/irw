@@ -40,7 +40,7 @@ One table holds one source's matrix, or several matrices published together for 
 
 | column | |
 |---|---|
-| `stat` | `cor` or `cov` for a matrix cell; `sd` or `mean` for a per-variable moment. One group's matrix is all `cor` or all `cov`. |
+| `stat` | `cor` or `cov` for a matrix cell; `sd`, `mean` or `rel` (reliability) for a per-variable row. One group's matrix is all `cor` or all `cov`. |
 | `var1`, `var2` | variable names as the source gives them (shortened only when the source has none). `var2` is blank on `sd`/`mean` rows. |
 | `value` | the number **as published**: never rounded, smoothed or corrected. A suspected typo stays and goes in the record's `notes`. |
 | `n` | the sample size the cell rests on: the pairwise n when the source reports one, otherwise the matrix N on every row. Never blank, so a table is enough on its own for `sample.nobs`. |
@@ -49,12 +49,12 @@ One table holds one source's matrix, or several matrices published together for 
 Rules (the validator's V1-V8):
 
 - **V1:** `stat`, `var1`, `var2`, `value` and `n` are present; `stat`, `var1` and `n` are never blank, and `value` is blank only on an off-diagonal `cor`/`cov` row (V4).
-- **V2:** `stat` is one of `cor`, `cov`, `sd`, `mean`, with one matrix kind per group.
+- **V2:** `stat` is one of `cor`, `cov`, `sd`, `mean`, `rel`, with one matrix kind per group.
 - **V3:** cell rows name two variables; moment rows name one.
-- **V4:** every cell of the lower triangle has a row, exactly once, and (a, b) and (b, a) count as the same cell. A cell the source did not report, between two variables it did measure, is a row with an **empty `value`**: reported (info), never an error, and counted in `cov_metadata`'s `n_missing_cells`. A variable the source never measured is left out of that sample's matrix instead, so a blank is always "not reported", never "not measured" and never a transcription gap. A diagonal, `sd` or `mean` value is never blank.
+- **V4:** every cell of the lower triangle has a row, exactly once, and (a, b) and (b, a) count as the same cell. A cell the source did not report, between two variables it did measure, is a row with an **empty `value`**: reported (info), never an error, and counted in `cov_metadata`'s `n_missing_cells`. A variable the source never measured is left out of that sample's matrix instead, so a blank is always "not reported", never "not measured" and never a transcription gap. A diagonal, `sd`, `mean` or `rel` value is never blank.
 - **V5:** a `cor` diagonal is 1, and every correlation (or the correlation a covariance implies) is in [-1, 1], with a tolerance of 0.001 for published rounding.
 - **V6:** `value` is numeric, and `n` is a positive integer.
-- **V7:** no columns beyond those above. Moments are given at most once per variable, only for variables in the matrix, and SD > 0.
+- **V7:** no columns beyond those above. Per-variable rows are given at most once per variable, only for variables in the matrix; SD > 0, and a reliability is at most 1.
 - **V8:** a matrix that is **not positive definite is a warning, never an error.** For a matrix with blank cells it is judged on the complete part: the matrix after dropping the fewest variables that leaves no blank (ties keep the variables listed first). `cov_metadata`'s `min_eigenvalue` and `is_pd`, `irw_validate.cov.complete_drop` and the packages' `complete = TRUE` all use this rule. Rounding, pairwise deletion and typos make many published matrices non-PD (`burt_1915_emotions11` is one), and the user is better served by the matrix as published plus a flag than by a silently repaired one.
 
 ## Records kept for every table
@@ -71,6 +71,7 @@ Rules (the validator's V1-V8):
   - `verified` (`no`, `double entry`, or `reproduces published fit`);
   - `licence` and `licence_source`;
   - `variables`: the matrix's variables **in the source's published order**, separated by ` | ` (space, pipe, space). Each entry is the exact `var1`/`var2` name, optionally followed by ` = ` and a description: `x1 = father's education | x2 = father's occupation | y3 = son's education`, or names alone. Every variable of that sample's matrix appears once; a description never contains `|`, and may say where the source describes the variable ("see Table 1"). Blank means the order is unknown. The packages re-sort a fetched table by it, so matrices come back in published order (Ben, 2026-11-18; #3594);
+  - **study-level moderators**, as the source publishes them (Ben, 2026-11-18): `year` (of data collection, or of publication when that is all the source gives; the `notes` say which), `country` (ISO 3166 codes, `;`-separated for a multinational sample), and `moderators` for anything else the source reports per sample, as `name = value` entries separated by ` | ` (`design = longitudinal | mean_age = 34.2 | women = 0.61`). Only moderators the source publishes go here, never ones the IRW codes itself: like the matrix, they are kept as published. Blank when the source gives none;
   - `notes`.
 
   Several pilot tables overlap: one sample's matrix is a subset of another's. The `notes` column says so instead of one being dropped, because each is a canonical matrix in its own right.
@@ -127,6 +128,7 @@ Data acquisition is tracked in #3582. Everything else lives here until the famil
 - 2026-11-17 (Ben): the family holds published matrices only, for now. IRW-derived matrices are computed client-side, not stored. Name `cov` / `irw_cov`. SEM users come first.
 - 2026-11-17 (Ben): derived matrices for single IRW tables are never stored; `irw_fetch()` on a core table with `source = "cov"` computes one. Linked multi-table matrices may be revisited.
 - 2026-11-17 (Ben): in the long run the family goes on the home page.
+- 2026-11-18 (Ben): study-level moderators are in scope when the source publishes them (record fields `year`, `country`, `moderators`), and per-variable reliability is a `rel` row beside `sd` and `mean`. Prompted by a reviewer: MASEM routinely uses year, country and reliability.
 - 2026-11-18 (Ben, #3594): published variable order and variable labels live in one record field, `variables`, not in row order, which Redivis does not keep.
 - 2026-11-18 (Ben, #3594): a cell the source did not report is held as a row with an empty `value` rather than leaving the study out ("this seems better than skipping and is objective/reversible"). `irw_cov2matrix()` returns NA there with a warning, and `complete = TRUE` returns the complete part; `irw_cov2list()` keeps NA for metaSEM. Positive definiteness is judged on the complete part.
 - 2026-11-17 (Ben): pairwise-deletion matrices with only a sample N are built, the n noted as an upper bound (`feraco_2026_seb`). Correlations over aggregate units are in scope (`harman_1967_political8`, `wilkinson_1990_crimes7`). A package matrix that differs from its source is built as-is with the difference noted (`guthrie_1973_kipt8`). Licence requests to depositors wait until the family is more mature. Matrices from a CC BY supplement to a paywalled article are held pending a ruling (`paquin_2016_identity6`).
