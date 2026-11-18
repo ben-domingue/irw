@@ -1,0 +1,199 @@
+table,var,description,source
+cox_1996_anger4,X,anxiety state,ggm help page (via matrices.csv notes)
+cox_1996_anger4,Y,anger state,ggm help page (via matrices.csv notes)
+cox_1996_anger4,Z,anxiety trait,ggm help page (via matrices.csv notes)
+cox_1996_anger4,U,anger trait,ggm help page (via matrices.csv notes)
+issp_1989_workorient9,JP1,job security,metaSEM help page issp89
+issp_1989_workorient9,JP2,income,metaSEM help page issp89
+issp_1989_workorient9,JP3,advancement opportunity,metaSEM help page issp89
+issp_1989_workorient9,JN1,interesting job,metaSEM help page issp89
+issp_1989_workorient9,JN2,independent work,metaSEM help page issp89
+issp_1989_workorient9,JN3,help other people,metaSEM help page issp89
+issp_1989_workorient9,JN4,useful to society,metaSEM help page issp89
+issp_1989_workorient9,TD1,flexible working hours,metaSEM help page issp89
+issp_1989_workorient9,TD2,lots of leisure time,metaSEM help page issp89
+issp_2005_workorient7,JP1,job security,metaSEM help page issp05
+issp_2005_workorient7,JP2,high income,metaSEM help page issp05
+issp_2005_workorient7,JP3,opportunity for advancement,metaSEM help page issp05
+issp_2005_workorient7,JA1,work independently,metaSEM help page issp05
+issp_2005_workorient7,JA2,decide time of work,metaSEM help page issp05
+issp_2005_workorient7,CS1,help other people,metaSEM help page issp05
+issp_2005_workorient7,CS2,a job useful to society,metaSEM help page issp05
+wvs_1994_jobsat3,LS,life satisfaction,metaSEM help page wvs94b
+wvs_1994_jobsat3,JS,job satisfaction,metaSEM help page wvs94b
+wvs_1994_jobsat3,JA,job autonomy,metaSEM help page wvs94b
+mathieu_2015_cohesion4,C1,"cohesion, wave 1",matrices.csv notes
+mathieu_2015_cohesion4,P1,"performance, wave 1",matrices.csv notes
+mathieu_2015_cohesion4,C2,"cohesion, wave 2",matrices.csv notes
+mathieu_2015_cohesion4,P2,"performance, wave 2",matrices.csv notes
+nohe_2015_wfcstrain4,W1,"work-to-family conflict, wave 1",matrices.csv notes
+nohe_2015_wfcstrain4,S1,"strain, wave 1",matrices.csv notes
+nohe_2015_wfcstrain4,W2,"work-to-family conflict, wave 2",matrices.csv notes
+nohe_2015_wfcstrain4,S2,"strain, wave 2",matrices.csv notes
+nohe_2015_fwcstrain4,F1,"family-to-work conflict, wave 1",matrices.csv notes
+nohe_2015_fwcstrain4,S1,"strain, wave 1",matrices.csv notes
+nohe_2015_fwcstrain4,F2,"family-to-work conflict, wave 2",matrices.csv notes
+nohe_2015_fwcstrain4,S2,"strain, wave 2",matrices.csv notes
+digman_1997_bigfive5,A,agreeableness,metaSEM help page Digman97
+digman_1997_bigfive5,C,conscientiousness,metaSEM help page Digman97
+digman_1997_bigfive5,ES,emotional stability,metaSEM help page Digman97
+digman_1997_bigfive5,E,extraversion,metaSEM help page Digman97
+digman_1997_bigfive5,I,intellect,metaSEM help page Digman97
+costa_1992_neopir30,N1,Anxiety,psychTools help page neo
+costa_1992_neopir30,N2,Angry Hostility,psychTools help page neo
+costa_1992_neopir30,N3,Depression,psychTools help page neo
+costa_1992_neopir30,N4,Self-Consciousness,psychTools help page neo
+costa_1992_neopir30,N5,Impulsiveness,psychTools help page neo
+costa_1992_neopir30,N6,Vulnerability,psychTools help page neo
+costa_1992_neopir30,E1,Warmth,psychTools help page neo
+costa_1992_neopir30,E2,Gregariousness,psychTools help page neo
+costa_1992_neopir30,E3,Assertiveness,psychTools help page neo
+costa_1992_neopir30,E4,Activity,psychTools help page neo
+costa_1992_neopir30,E5,Excitement-Seeking,psychTools help page neo
+costa_1992_neopir30,E6,Positive Emotions,psychTools help page neo
+costa_1992_neopir30,O1,Fantasy,psychTools help page neo
+costa_1992_neopir30,O2,Aesthetics,psychTools help page neo
+costa_1992_neopir30,O3,Feelings,psychTools help page neo
+costa_1992_neopir30,O4,Ideas,psychTools help page neo
+costa_1992_neopir30,O5,Actions,psychTools help page neo
+costa_1992_neopir30,O6,Values,psychTools help page neo
+costa_1992_neopir30,A1,Trust,psychTools help page neo
+costa_1992_neopir30,A2,Straightforwardness,psychTools help page neo
+costa_1992_neopir30,A3,Altruism,psychTools help page neo
+costa_1992_neopir30,A4,Compliance,psychTools help page neo
+costa_1992_neopir30,A5,Modesty,psychTools help page neo
+costa_1992_neopir30,A6,Tender-Mindedness,psychTools help page neo
+costa_1992_neopir30,C1,Competence,psychTools help page neo
+costa_1992_neopir30,C2,Order,psychTools help page neo
+costa_1992_neopir30,C3,Dutifulness,psychTools help page neo
+costa_1992_neopir30,C4,Achievement Striving,psychTools help page neo
+costa_1992_neopir30,C5,Self-Discipline,psychTools help page neo
+costa_1992_neopir30,C6,Deliberation,psychTools help page neo
+tucker_1958_ability9,t42,Prefixes,psych help page Tucker
+tucker_1958_ability9,t54,Suffixes,psych help page Tucker
+tucker_1958_ability9,t45,Chicago Reading Test: Vocabulary,psych help page Tucker
+tucker_1958_ability9,t46,Chicago Reading Test: Sentences,psych help page Tucker
+tucker_1958_ability9,t23,First and last letters,psych help page Tucker
+tucker_1958_ability9,t24,First letters,psych help page Tucker
+tucker_1958_ability9,t27,Four letter words,psych help page Tucker
+tucker_1958_ability9,t10,Completion,psych help page Tucker
+tucker_1958_ability9,t51,Same or Opposite,psych help page Tucker
+blau_1967_occupation5,x1,father's education,matrices.csv notes
+blau_1967_occupation5,x2,father's occupation,matrices.csv notes
+blau_1967_occupation5,y3,respondent's education,matrices.csv notes
+blau_1967_occupation5,y4,first job,matrices.csv notes
+blau_1967_occupation5,y5,occupation in 1962,matrices.csv notes
+mcdonald_1984_union5,y1,deference to managers,matrices.csv notes
+mcdonald_1984_union5,y2,support for labour activism,matrices.csv notes
+mcdonald_1984_union5,y3,sentiment towards unions,matrices.csv notes
+mcdonald_1984_union5,x1,years in the mill,matrices.csv notes
+mcdonald_1984_union5,x2,age,matrices.csv notes
+innami_2022_l2listening6,LC,listening comprehension,matrices.csv notes
+innami_2022_l2listening6,DA,MALQ directed attention,matrices.csv notes
+innami_2022_l2listening6,MT,MALQ mental translation,matrices.csv notes
+innami_2022_l2listening6,PK,MALQ person knowledge,matrices.csv notes
+innami_2022_l2listening6,PE,MALQ planning and evaluation,matrices.csv notes
+innami_2022_l2listening6,PS,MALQ problem solving,matrices.csv notes
+hagger_2018_raa9,Int,intention,matrices.csv notes
+hagger_2018_raa9,AA,affective attitude,matrices.csv notes
+hagger_2018_raa9,IA,instrumental attitude,matrices.csv notes
+hagger_2018_raa9,SN,injunctive norm,matrices.csv notes
+hagger_2018_raa9,DN,descriptive norm,matrices.csv notes
+hagger_2018_raa9,Aut,autonomy,matrices.csv notes
+hagger_2018_raa9,Cap,capacity,matrices.csv notes
+hagger_2018_raa9,Beh,behaviour,matrices.csv notes
+hagger_2018_raa9,PB,past behaviour,matrices.csv notes
+scherhag_2026_hexacod7,H,HEXACO honesty-humility,matrices.csv notes
+scherhag_2026_hexacod7,E,HEXACO emotionality,matrices.csv notes
+scherhag_2026_hexacod7,X,HEXACO extraversion,matrices.csv notes
+scherhag_2026_hexacod7,A,HEXACO agreeableness,matrices.csv notes
+scherhag_2026_hexacod7,C,HEXACO conscientiousness,matrices.csv notes
+scherhag_2026_hexacod7,O,HEXACO openness to experience,matrices.csv notes
+scherhag_2026_hexacod7,D,Disintegration (DELTA),matrices.csv notes
+berki_2026_sportcommit7,EC,enthusiastic commitment,matrices.csv notes
+berki_2026_sportcommit7,SE,sport enjoyment,matrices.csv notes
+berki_2026_sportcommit7,VO,valuable opportunities,matrices.csv notes
+berki_2026_sportcommit7,OP,other priorities,matrices.csv notes
+berki_2026_sportcommit7,PI_L,personal investments-loss,matrices.csv notes
+berki_2026_sportcommit7,SC,social constraints,matrices.csv notes
+berki_2026_sportcommit7,SS_E,social support-emotional,matrices.csv notes
+he_2026_utaut17,PE,performance expectancy,matrices.csv notes
+he_2026_utaut17,EE,effort expectancy,matrices.csv notes
+he_2026_utaut17,SI,social influence,matrices.csv notes
+he_2026_utaut17,FC,facilitating conditions,matrices.csv notes
+he_2026_utaut17,HM,hedonic motivation,matrices.csv notes
+he_2026_utaut17,PV,price value,matrices.csv notes
+he_2026_utaut17,HB,habit,matrices.csv notes
+he_2026_utaut17,BI,behavioural intention,matrices.csv notes
+he_2026_utaut17,UB,use behaviour,matrices.csv notes
+he_2026_utaut17,ATT,attitude,matrices.csv notes
+he_2026_utaut17,SE,self-efficacy,matrices.csv notes
+he_2026_utaut17,AILI,AI literacy,matrices.csv notes
+he_2026_utaut17,PI,personal innovativeness,matrices.csv notes
+he_2026_utaut17,SA,satisfaction,matrices.csv notes
+he_2026_utaut17,PEN,perceived enjoyment,matrices.csv notes
+he_2026_utaut17,PT,trust,matrices.csv notes
+he_2026_utaut17,PR,perceived risk,matrices.csv notes
+wang_2026_aidependence4,U,AI use,matrices.csv notes
+wang_2026_aidependence4,D,AI dependency,matrices.csv notes
+wang_2026_aidependence4,CT,critical thinking,matrices.csv notes
+wang_2026_aidependence4,LM,learning motivation,matrices.csv notes
+ruzzano_2015_asdocd17,CI,autism repetitive-behaviour symptom,"matrices.csv notes (codes only; autism 9, OCD 8)"
+ruzzano_2015_asdocd17,UP,autism repetitive-behaviour symptom,"matrices.csv notes (codes only; autism 9, OCD 8)"
+ruzzano_2015_asdocd17,RO,autism repetitive-behaviour symptom,"matrices.csv notes (codes only; autism 9, OCD 8)"
+ruzzano_2015_asdocd17,CR,autism repetitive-behaviour symptom,"matrices.csv notes (codes only; autism 9, OCD 8)"
+ruzzano_2015_asdocd17,SI,autism repetitive-behaviour symptom,"matrices.csv notes (codes only; autism 9, OCD 8)"
+ruzzano_2015_asdocd17,SM,autism repetitive-behaviour symptom,"matrices.csv notes (codes only; autism 9, OCD 8)"
+ruzzano_2015_asdocd17,SU,autism repetitive-behaviour symptom,"matrices.csv notes (codes only; autism 9, OCD 8)"
+ruzzano_2015_asdocd17,NIL,autism repetitive-behaviour symptom,"matrices.csv notes (codes only; autism 9, OCD 8)"
+ruzzano_2015_asdocd17,VR,autism repetitive-behaviour symptom,"matrices.csv notes (codes only; autism 9, OCD 8)"
+ruzzano_2015_asdocd17,CD,OCD symptom,"matrices.csv notes (codes only; autism 9, OCD 8)"
+ruzzano_2015_asdocd17,TB,OCD symptom,"matrices.csv notes (codes only; autism 9, OCD 8)"
+ruzzano_2015_asdocd17,CT,OCD symptom,"matrices.csv notes (codes only; autism 9, OCD 8)"
+ruzzano_2015_asdocd17,HP,OCD symptom,"matrices.csv notes (codes only; autism 9, OCD 8)"
+ruzzano_2015_asdocd17,CW,OCD symptom,"matrices.csv notes (codes only; autism 9, OCD 8)"
+ruzzano_2015_asdocd17,CCh,OCD symptom,"matrices.csv notes (codes only; autism 9, OCD 8)"
+ruzzano_2015_asdocd17,CC,OCD symptom,"matrices.csv notes (codes only; autism 9, OCD 8)"
+ruzzano_2015_asdocd17,RD,OCD symptom,"matrices.csv notes (codes only; autism 9, OCD 8)"
+zhang_2019_hapa10,PB,past behaviour,matrices.csv notes
+zhang_2019_hapa10,B,behaviour,matrices.csv notes
+zhang_2019_hapa10,ASE,action self-efficacy,matrices.csv notes
+zhang_2019_hapa10,MSE,maintenance self-efficacy,matrices.csv notes
+zhang_2019_hapa10,RSE,recovery self-efficacy,matrices.csv notes
+zhang_2019_hapa10,OE,outcome expectancies,matrices.csv notes
+zhang_2019_hapa10,RP,risk perception,matrices.csv notes
+zhang_2019_hapa10,INT,intention,matrices.csv notes
+zhang_2019_hapa10,AP,action planning,matrices.csv notes
+zhang_2019_hapa10,CP,coping planning,matrices.csv notes
+backfisch_2025_tpack7,CK,content knowledge,matrices.csv notes
+backfisch_2025_tpack7,PK,pedagogical knowledge,matrices.csv notes
+backfisch_2025_tpack7,PCK,pedagogical content knowledge,matrices.csv notes
+backfisch_2025_tpack7,TCK,technological content knowledge,matrices.csv notes
+backfisch_2025_tpack7,TPK,technological pedagogical knowledge,matrices.csv notes
+backfisch_2025_tpack7,TPCK,technological pedagogical content knowledge,matrices.csv notes
+backfisch_2025_tpack7,TK,technological knowledge,matrices.csv notes
+cammarata_2026_gibs6,GIBS,Gender Ideology Belief Scale,matrices.csv notes
+cammarata_2026_gibs6,RWA,Right-Wing Authoritarianism,matrices.csv notes
+cammarata_2026_gibs6,MHS-G,Modern Homonegativity Scale (gay men),matrices.csv notes
+cammarata_2026_gibs6,ATG-S,Attitudes Toward Gay Men Scale,matrices.csv notes
+cammarata_2026_gibs6,GCBS,Generic Conspiracist Beliefs Scale,matrices.csv notes
+cammarata_2026_gibs6,PrejTot,composite of MHS-G and ATG-S,matrices.csv notes
+shen_2022_tpbfood5,ATT,attitude,matrices.csv notes
+shen_2022_tpbfood5,SN,subjective norm,matrices.csv notes
+shen_2022_tpbfood5,PBC,perceived behavioral control,matrices.csv notes
+shen_2022_tpbfood5,PI,purchase intention,matrices.csv notes
+shen_2022_tpbfood5,PB,purchase behaviour,matrices.csv notes
+cooke_2016_tpbalcohol,ATT,attitude,theory of planned behaviour (matrices.csv notes)
+cooke_2016_tpbalcohol,SN,subjective norm,theory of planned behaviour (matrices.csv notes)
+cooke_2016_tpbalcohol,PBC,perceived behavioural control,theory of planned behaviour (matrices.csv notes)
+cooke_2016_tpbalcohol,BI,behavioural intention,theory of planned behaviour (matrices.csv notes)
+cooke_2016_tpbalcohol,BEH,behaviour,theory of planned behaviour (matrices.csv notes)
+scalco_2017_tpborganic,ATT,attitude,theory of planned behaviour (matrices.csv notes)
+scalco_2017_tpborganic,SN,subjective norm,theory of planned behaviour (matrices.csv notes)
+scalco_2017_tpborganic,PBC,perceived behavioural control,theory of planned behaviour (matrices.csv notes)
+scalco_2017_tpborganic,BI,behavioural intention,theory of planned behaviour (matrices.csv notes)
+scalco_2017_tpborganic,BEH,behaviour,theory of planned behaviour (matrices.csv notes)
+or_2024_tam4,PU,perceived usefulness,Technology Acceptance Model (matrices.csv notes)
+or_2024_tam4,PEOU,perceived ease of use,Technology Acceptance Model (matrices.csv notes)
+or_2024_tam4,ITU,intention to use,Technology Acceptance Model (matrices.csv notes)
+or_2024_tam4,AU,actual use,Technology Acceptance Model (matrices.csv notes)
