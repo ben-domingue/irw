@@ -27,6 +27,14 @@
 ## pending a check of the paper) and Cheung09 (variables deleted at random by
 ## the package author to illustrate missing data: an altered subset of issp89).
 ##
+## Modification (2026-11-18): per-study reliabilities that metaSEM ships
+## (Nohe15A1/A2 RelXX, Boer16 RelLMX/RelTFL) are written as `rel` rows after
+## each study's matrix rows, value as stored, only for variables in that study's
+## matrix; a blank reliability gets no row. The help pages do not name the
+## coefficient. Nohe15A2 names both strain reliabilities `RelS2`, so which is S1
+## is not stated: only its F1 and F2 reliabilities are written. No existing
+## row changes.
+##
 ## Usage:  Rscript data/covariance/batch_metasem.R <out dir>
 
 args <- commandArgs(trailingOnly = TRUE)
@@ -86,7 +94,8 @@ uniq <- function(x) {
 rec <- list()
 skipped <- list()
 ## One table per corpus. `pop` gives each study's population label (or "").
-build <- function(table, name, stat, citation, location, pop = NULL, keep = NULL, means = NULL, notes = "") {
+## `rel`: a data frame with one row per study and one column per variable.
+build <- function(table, name, stat, citation, location, pop = NULL, keep = NULL, means = NULL, rel = NULL, notes = "") {
   x <- msem(name)
   mats <- x$data; n <- x$n
   if (is.null(keep)) keep <- rep(TRUE, length(mats))
@@ -131,6 +140,12 @@ build <- function(table, name, stat, citation, location, pop = NULL, keep = NULL
       mu <- means[i, colnames(mats[[i]])]
       rows[[length(rows) + 1]] <- data.frame(stat = "mean", var1 = names(mu), var2 = NA_character_, value = unname(mu),
                                              n = as.integer(n[i]), group = groups[i], stringsAsFactors = FALSE)
+    }
+    if (!is.null(rel)) {
+      r <- unlist(rel[i, intersect(colnames(mats[[i]]), names(rel)), drop = FALSE])
+      r <- r[!is.na(r)]
+      if (length(r)) rows[[length(rows) + 1]] <- data.frame(stat = "rel", var1 = names(r), var2 = NA_character_, value = unname(r),
+                                                            n = as.integer(n[i]), group = groups[i], stringsAsFactors = FALSE)
     }
     rec[[length(rec) + 1]] <<- data.frame(
       table = table, group = groups[i], n_obs = as.integer(n[i]), matrix_type = "unknown", missing = "unknown",
@@ -185,9 +200,15 @@ build("mathieu_2015_cohesion4", "Mathieu15", "cor",
       "Table 1", pop = as.character(x$Sample), notes = "panel studies: cohesion (C) and performance (P) at two waves")
 
 nohe <- "Nohe, C., Meier, L. L., Sonntag, K., & Michel, A. (2015). The chicken or the egg? A meta-analysis of panel studies of the relationship between work-family conflict and strain. Journal of Applied Psychology, 100(2), 522-536. https://doi.org/10.1037/a0038012"
+x <- msem("Nohe15A1")
+stopifnot(identical(names(x)[3:6], c("RelW1", "RelW2", "RelS1", "RelS2")))
 build("nohe_2015_wfcstrain4", "Nohe15A1", "cor", nohe, "Table A1",
+      rel = data.frame(W1 = x[[3]], W2 = x[[4]], S1 = x[[5]], S2 = x[[6]]),
       notes = "panel studies: work-to-family conflict (W) and strain (S) at two waves")
+x <- msem("Nohe15A2")
+stopifnot(identical(names(x)[3:4], c("RelF1", "RelF2")))
 build("nohe_2015_fwcstrain4", "Nohe15A2", "cor", nohe, "Table A2",
+      rel = data.frame(F1 = x[[3]], F2 = x[[4]]),  # both strain fields are named RelS2: not used
       notes = "panel studies: family-to-work conflict (F) and strain (S) at two waves")
 
 x <- msem("Norton13")
@@ -200,9 +221,10 @@ build("craft_2003_csai4", "Becker09", "cor",
       "Craft, L. L., Magyar, T. M., Becker, B. J., & Feltz, D. L. (2003). The relationship between the Competitive State Anxiety Inventory-2 and sport performance: A meta-analysis. Journal of Sport and Exercise Psychology, 25(1), 44-65.",
       "metaSEM Becker09 (a subset was used in Becker, 2009)", pop = as.character(msem("Becker09")$Type_of_sport),
       notes = "CSAI-2 subscales and sport performance")
+x <- msem("Boer16")
 build("boer_2016_lmx", "Boer16", "cor",
       "Boer, D., Deinert, A., Homan, A. C., & Voelpel, S. C. (2016). Revisiting the mediating role of leader-member exchange in transformational leadership: The differential impact model. European Journal of Work and Organizational Psychology, 25(6), 883-899.",
-      "", notes = "leader-member exchange and transformational leadership")
+      "", rel = data.frame(LMX = x$RelLMX, TFL = x$RelTFL), notes = "leader-member exchange and transformational leadership")
 build("cheung_2000_tpb", "Cheung00", "cor",
       "Cheung, S.-F., & Chan, D. K.-S. (2000). The role of perceived behavioral control in predicting human behavior: A meta-analytic review of studies on the theory of planned behavior. Unpublished manuscript, Chinese University of Hong Kong.",
       "", notes = "theory of planned behaviour")
