@@ -36,7 +36,7 @@ Not here:
 
 ## Layout
 
-One table holds one source's matrix, or several matrices published together for different samples. There is one row per cell of the **lower triangle, diagonal included**, written row by row in the published variable order, plus optional rows for per-variable moments.
+One table holds one source's matrix, or several matrices published together for different samples. There is one row per cell of the **lower triangle, diagonal included**, plus optional rows for per-variable moments. Row order carries no meaning: Redivis does not keep it (`burt_1915_emotions11` comes back alphabetical). The published variable order is kept as data, in the record's `variables` field (below).
 
 | column | |
 |---|---|
@@ -70,6 +70,7 @@ Rules (the validator's V1-V8):
   - `capture` (`package transcription`, `digital deposit`, `hand-entered`, `extracted`);
   - `verified` (`no`, `double entry`, or `reproduces published fit`);
   - `licence` and `licence_source`;
+  - `variables`: the matrix's variables **in the source's published order**, separated by ` | ` (space, pipe, space). Each entry is the exact `var1`/`var2` name, optionally followed by ` = ` and a description: `x1 = father's education | x2 = father's occupation | y3 = son's education`, or names alone. Every variable of that sample's matrix appears once; a description never contains `|`, and may say where the source describes the variable ("see Table 1"). Blank means the order is unknown. The packages re-sort a fetched table by it, so matrices come back in published order (Ben, 2026-11-18; #3594);
   - `notes`.
 
   Several pilot tables overlap: one sample's matrix is a subset of another's. The `notes` column says so instead of one being dropped, because each is a canonical matrix in its own right.
@@ -113,7 +114,7 @@ Data acquisition is tracked in #3582. Everything else lives here until the famil
 **Standard decisions still open.**
 
 - [x] Matrices printed with blank cells: allowed as an empty `value` (V4), with `complete = TRUE` in the packages (Ben, 2026-11-18; #3594).
-- [ ] Variable labels: decided as a free-text column in `matrices.csv` describing the variables or where the source describes them (Ben, 2026-11-17; #3594). Not yet added.
+- [ ] Variable order and labels: the `variables` record field (Ben, 2026-11-18; #3594). Spec, checks and package support are in; backfill for the built tables is pending (irw-7b).
 - [x] Overlapping matrices: a free-text note in the record naming the overlapping table, no `subset_of` column (Ben, 2026-11-17; #3594).
 
 **Later.**
@@ -126,5 +127,6 @@ Data acquisition is tracked in #3582. Everything else lives here until the famil
 - 2026-11-17 (Ben): the family holds published matrices only, for now. IRW-derived matrices are computed client-side, not stored. Name `cov` / `irw_cov`. SEM users come first.
 - 2026-11-17 (Ben): derived matrices for single IRW tables are never stored; `irw_fetch()` on a core table with `source = "cov"` computes one. Linked multi-table matrices may be revisited.
 - 2026-11-17 (Ben): in the long run the family goes on the home page.
+- 2026-11-18 (Ben, #3594): published variable order and variable labels live in one record field, `variables`, not in row order, which Redivis does not keep.
 - 2026-11-18 (Ben, #3594): a cell the source did not report is held as a row with an empty `value` rather than leaving the study out ("this seems better than skipping and is objective/reversible"). `irw_cov2matrix()` returns NA there with a warning, and `complete = TRUE` returns the complete part; `irw_cov2list()` keeps NA for metaSEM. Positive definiteness is judged on the complete part.
 - 2026-11-17 (Ben): pairwise-deletion matrices with only a sample N are built, the n noted as an upper bound (`feraco_2026_seb`). Correlations over aggregate units are in scope (`harman_1967_political8`, `wilkinson_1990_crimes7`). A package matrix that differs from its source is built as-is with the difference noted (`guthrie_1973_kipt8`). Licence requests to depositors wait until the family is more mature. Matrices from a CC BY supplement to a paywalled article are held pending a ruling (`paquin_2016_identity6`).

@@ -314,7 +314,29 @@ def check_cov_record(report: FileReport) -> tuple[list[str], list[str]]:
     if want != have:
         return ([f"cov_record: groups in matrices.csv {sorted(want)} do not match the table's "
                  f"groups {sorted(have)}"], [])
-    return ([], [])
+    # `variables` (published order and labels): when given, it names exactly the
+    # variables of that group's matrix, once each. Blank is allowed (order unknown).
+    from irw_validate.cov import MATRIX_STATS, parse_variables
+    try:
+        with open(report.path, newline="", encoding="utf-8") as f:
+            cells = [r for r in csv.DictReader(f) if (r.get("stat") or "").strip() in MATRIX_STATS]
+    except OSError as exc:
+        return ([f"cov_record: cannot read {report.path} ({exc})"], [])
+    errors = []
+    for r in rows:
+        listed = [n for n, _ in parse_variables(r.get("variables"))]
+        if not listed:
+            continue
+        g = (r.get("group") or "").strip()
+        actual = {v.strip() for c in cells if (c.get("group") or "").strip() == g
+                  for v in (c.get("var1") or "", c.get("var2") or "") if v.strip()}
+        where = f" (group {g})" if g else ""
+        dup = sorted({n for n in listed if listed.count(n) > 1})
+        if dup or set(listed) != actual:
+            errors.append(f"cov_record: `variables`{where} does not list the matrix's variables once each"
+                          f" (missing {sorted(actual - set(listed))[:4]}, unknown {sorted(set(listed) - actual)[:4]},"
+                          f" repeated {dup[:4]})")
+    return (errors, [])
 
 
 #: The rankings design records (data/rankings/README.md, "Design record").

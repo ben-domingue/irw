@@ -82,6 +82,13 @@ class CovTest(unittest.TestCase):
         df.loc[df.stat == "sd", "value"] = float("nan")
         self.assertIn("cov_required_columns", checks(df, "error"))
 
+    def test_parse_variables(self):
+        from irw_validate.cov import parse_variables
+        self.assertEqual(parse_variables(""), [])
+        self.assertEqual(parse_variables(None), [])
+        self.assertEqual(parse_variables("x1 = father's education | x2"),
+                         [("x1", "father's education"), ("x2", "")])
+
     def test_complete_drop_is_smallest_and_keeps_earlier_variables(self):
         from irw_validate.cov import complete_drop
         order = list("abcde")

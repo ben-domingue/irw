@@ -17,7 +17,10 @@
 ##  irw_validate.cov.complete_drop and the packages' complete = TRUE.
 ##Record columns, joined from the hand-kept data/covariance/matrices.csv on
 ##table + group: matrix_type, missing, population, source_citation,
-##source_location, via, capture, verified, licence, licence_source, notes.
+##source_location, via, capture, verified, licence, licence_source, variables
+##(published variable order and labels, " | "-separated; the packages re-sort a
+##fetched table by it), notes. Every record column is copied, so a new one
+##needs no change here.
 ##
 ##Every table is downloaded and recomputed each run. The tables are tiny (a
 ##24-variable matrix is 300 rows) and the family is small; when it is not, add
@@ -80,6 +83,7 @@ one_matrix <- function(name, d, g) {
 }
 
 rows <- list()
+var_sets <- list()   # table \r group -> the matrix's variable names, for the `variables` check
 for (tab in tabs) {
   d <- NULL
   for (attempt in 1:4) {
@@ -95,8 +99,12 @@ for (tab in tabs) {
     d$group[is.na(d$group)] <- ""
     for (g in unique(d$group)) rows[[length(rows) + 1]] <- one_matrix(tab$name, d[d$group == g, ], g)
   } else {
+    d$group <- ""
     rows[[length(rows) + 1]] <- one_matrix(tab$name, d, "")
   }
+  cl <- d[d$stat %in% c("cor", "cov"), , drop = FALSE]
+  for (g in unique(d$group))
+    var_sets[[paste(tab$name, g, sep = "\r")]] <- unique(c(cl$var1[cl$group == g], cl$var2[cl$group == g]))
 }
 out <- do.call(rbind, rows)
 
@@ -116,6 +124,20 @@ if (any(bad)) message("  ! n_obs in matrices.csv disagrees with the live table: 
                       paste(sprintf("%s/%s (%s vs %s)", out$table[bad], out$group[bad],
                                     out$n_obs_record[bad], out$n_obs[bad]), collapse = ", "))
 out$n_obs_record <- NULL
+##`variables` against the live matrix (reported, not fatal; red_up refuses the
+##upload of a mismatched record).
+live_vars <- list()
+if ("variables" %in% names(out)) {
+  for (i in seq_len(nrow(out))) {
+    f <- out$variables[i]
+    if (is.na(f) || !nzchar(trimws(f))) next
+    listed <- trimws(sub(" = .*$", "", strsplit(f, " | ", fixed = TRUE)[[1]]))
+    k <- paste(out$table[i], out$group[i], sep = "\r")
+    if (!is.null(var_sets[[k]]) && (anyDuplicated(listed) || !setequal(listed, var_sets[[k]])))
+      message("  ! `variables` in matrices.csv does not match the live matrix: ", out$table[i],
+              if (nzchar(out$group[i])) paste0(" / ", out$group[i]) else "")
+  }
+}
 nonpd <- out$table[out$is_pd %in% FALSE]
 if (length(nonpd)) message("  non-positive-definite as published (V8, kept): ", paste(unique(nonpd), collapse = ", "))
 

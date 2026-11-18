@@ -52,6 +52,22 @@ def _blank(s):
     return s.isna() | (s.astype(str).str.strip() == "")
 
 
+def parse_variables(field):
+    """The `variables` record field (README, "Records kept for every table")
+    -> [(name, description)] in published order; [] when blank.
+
+    Entries are separated by " | "; each is a name, optionally followed by
+    " = description". The packages parse it the same way.
+    """
+    if field is None or str(field).strip() == "":
+        return []
+    out = []
+    for entry in str(field).split(" | "):
+        name, _, desc = entry.partition(" = ")
+        out.append((name.strip(), desc.strip()))
+    return out
+
+
 def complete_drop(order, blanks, exact_max=20):
     """The fewest variables to drop so a matrix has no blank cell.
 
