@@ -271,11 +271,11 @@ rcv_cambridge_20231107_school,21352,98929,1,45,11,147,0,Cambridge_20231107_Schoo
 rcv_corvallis_20221108_councilward9,2432,6612,1,5,3,30,0,Corvallis_20221108_CityCouncilWard9.tab,10.7910/DVN/AMK8PJ,Corvallis,2022-11-08,CityCouncilWard9,irv,1,3,3,2929,2929,2432,30,11,58,yes,fixed
 rcv_corvallis_20221108_mayor,20717,57274,1,5,3,287,0,Corvallis_20221108_Mayor.tab,10.7910/DVN/AMK8PJ,Corvallis,2022-11-08,Mayor,irv,1,3,3,23879,23879,20717,287,72,782,yes,fixed
 rcv_easthampton_20211102_mayor,4124,7038,1,67,4,4,0,Easthampton_20211102_Mayor.tab,10.7910/DVN/AMK8PJ,Easthampton,2021-11-02,Mayor,irv,1,4,67,4178,4178,4124,4,0,0,yes,unknown
-rcv_eastpointe_20191105_council,5027,15370,1,6,4,734,0,Eastpointe_20191105_CityCouncil.tab,10.7910/DVN/STVUET,Eastpointe,2019-11-05,CityCouncil,stv,unknown,4,4,5145,5145,5027,734,57,201,yes,unknown
+rcv_eastpointe_20191105_council,5027,15370,1,6,4,734,0,Eastpointe_20191105_CityCouncil.tab,10.7910/DVN/STVUET,Eastpointe,2019-11-05,CityCouncil,stv,2,4,4,5145,5145,5027,734,57,201,yes,unknown
 rcv_eastpointe_20201103_council,13954,37210,1,4,3,2275,0,Eastpointe_20201103_CityCouncil.tab,10.7910/DVN/AMK8PJ,Eastpointe,2020-11-03,CityCouncil,irv,1,3,3,18093,18093,13954,2275,161,0,unknown,unknown
 rcv_eastpointe_20211102_council,3831,11568,1,7,4,465,0,Eastpointe_20211102_CityCouncil.tab,10.7910/DVN/STVUET,Eastpointe,2021-11-02,CityCouncil,stv,2,4,6,3916,3916,3831,465,66,0,unknown,unknown
 rcv_elkridge_20211102_mayor,1309,3463,1,4,3,55,0,ElkRidge_20211102_Mayor.tab,10.7910/DVN/AMK8PJ,ElkRidge,2021-11-02,Mayor,irv,1,3,3,1311,1311,1309,55,3,0,yes,fixed
-rcv_genola_20211102_council,384,1058,1,4,4,13,0,Genola_20211102_CityCouncil.tab,10.7910/DVN/04LOQX,Genola,2021-11-02,CityCouncil,sequential,unknown,4,3,393,393,384,13,6,0,unknown,unknown
+rcv_genola_20211102_council,384,1058,1,4,4,13,0,Genola_20211102_CityCouncil.tab,10.7910/DVN/04LOQX,Genola,2021-11-02,CityCouncil,sequential,2,4,3,393,393,384,13,6,0,unknown,unknown
 rcv_lascruces_20191105_councild2,2253,5697,1,5,4,49,0,LasCruces_20191105_CityCouncilDistrict2.tab,10.7910/DVN/AMK8PJ,LasCruces,2019-11-05,CityCouncilDistrict2,irv,1,4,4,2394,2394,2253,49,17,0,yes,unknown
 rcv_lascruces_20191105_councild4,1562,3598,1,4,3,41,0,LasCruces_20191105_CityCouncilDistrict4.tab,10.7910/DVN/AMK8PJ,LasCruces,2019-11-05,CityCouncilDistrict4,irv,1,3,3,1689,1689,1562,41,9,0,yes,unknown
 rcv_lascruces_20191105_mayor,14107,70688,1,11,10,1229,0,LasCruces_20191105_Mayor.tab,10.7910/DVN/AMK8PJ,LasCruces,2019-11-05,Mayor,irv,1,10,10,14156,14156,14107,1229,489,0,yes,unknown
@@ -873,7 +873,7 @@ rcv_pierce_20081104_executivemember,299664,693034,1,6,3,31322,0,PierceCounty_200
 rcv_pierce_20091103_auditor,153721,366397,1,5,3,27238,0,PierceCounty_20091103_CountyAuditor.tab,10.7910/DVN/AMK8PJ,PierceCounty,2009-11-03,CountyAuditor,irv,1,3,3,159987,159987,153721,27238,533,5464,yes,fixed
 rcv_portlandme_20210608_chartertab1,8881,43259,1,12,11,693,0,PortlandME_20210608_CharterCommission_tab1.tab,10.7910/DVN/04LOQX,PortlandME,2021-06-08,CharterCommission_tab1,sequential,4,11,11,9031,9031,8881,693,253,0,yes,fixed
 rcv_portlandme_20211102_councilal,19269,54521,1,5,4,755,0,PortlandME_20211102_CityCouncilAL.tab,10.7910/DVN/AMK8PJ,PortlandME,2021-11-02,CityCouncilAL,irv,1,4,4,21284,21284,19269,755,205,0,yes,fixed
-rcv_portlandme_20220614_schoolboardal,8987,30951,1,8,7,430,0,PortlandME_20220614_SchoolboardAL.tab,10.7910/DVN/04LOQX,PortlandME,2022-06-14,SchoolboardAL,sequential,3,7,7,9464,9464,8987,430,200,0,yes,fixed
+rcv_portlandme_20220614_schoolboardal,8987,30951,1,8,7,430,0,PortlandME_20220614_SchoolboardAL.tab,10.7910/DVN/04LOQX,PortlandME,2022-06-14,SchoolboardAL,sequential,2,7,7,9464,9464,8987,430,200,0,yes,fixed
 rcv_portlandme_20220614_schoolboardd5,1957,4799,1,7,5,92,0,PortlandME_20220614_SchoolBoardDistrict5.tab,10.7910/DVN/AMK8PJ,PortlandME,2022-06-14,SchoolBoardDistrict5,irv,1,5,6,2131,2131,1957,92,14,0,yes,fixed
 rcv_portlandme_20221108_schoolboardd3,6222,13179,1,4,3,278,0,PortlandME_20221108_SchoolBoardDistrict3.tab,10.7910/DVN/AMK8PJ,PortlandME,2022-11-08,SchoolBoardDistrict3,irv,1,3,3,7518,7518,6222,278,41,0,yes,fixed
 rcv_portlandme_20241105_councilal,33840,95497,1,7,6,3738,0,PortlandME_20241105_CityCouncilAtLarge.tab,10.7910/DVN/AMK8PJ,PortlandME,2024-11-05,CityCouncilAtLarge,irv,1,6,5,39765,39765,33840,3738,537,1005,yes,fixed
