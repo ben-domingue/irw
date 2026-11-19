@@ -4,7 +4,7 @@ Processing scripts and records for the **covariance** data family (`source = "co
 
 Not to be confused with `cov_*` columns in other families, which are person-level covariates.
 
-**Status (2026-11-17).** Draft standard. 221 tables (1828 matrices) are built locally and pass `irw_validate.cov`, and every one has been checked to equal its package original exactly. `matrices.csv` records each matrix; `held.csv` records every candidate not built. On Redivis, `irw_cov:4e2q` v2.1 holds all 87 (released by Ben on 2026-11-17).
+**Status (2026-11-17).** Draft standard. 232 tables (1839 matrices) are built locally and pass `irw_validate.cov`, and every one has been checked to equal its package original exactly. `matrices.csv` records each matrix; `held.csv` records every candidate not built. On Redivis, `irw_cov:4e2q` v2.1 holds all 87 (released by Ben on 2026-11-17).
 
 **Second batch (2026-11-17, #3582).** `batch_rpackages2.R` adds 7 tables (11 matrices) from `fungible`, `ggm`, `EFAtools`, `GPArotation` and `psychTools`. `fungible`, `ggm` and `EFAtools` are read from pinned CRAN source tarballs instead of being installed (`fungible` pulls in OpenMx). `held.csv` lists every candidate considered and not built, and why: held for licence, values or N; pending an N from the original paper; or out of scope. Dictionary rows for all tables are in `automated_finding/dictionary_auto_cov.csv` (`stage_dict_row.py --source cov`). `02_biblio.R` does not read it yet. `holzinger_1939_grantwhite9` is released on Redivis as `irw_cov` v1.0 (Ben, 2026-11-17).
 
@@ -62,7 +62,7 @@ Rules (the validator's V1-V8):
 - **A script** with the usual IRW header: citation, where the matrix was taken from, its licence, and anything changed in shape (never in value).
 - **A row per matrix in `matrices.csv`** (keyed by `table` + `group`):
   - `n_obs`;
-  - `matrix_type` (`pearson`, `spearman`, `polychoric`, `tetrachoric`, `mixed`, `unknown`);
+  - `matrix_type` (`pearson`, `spearman`, `polychoric`, `tetrachoric`, `kendall`, `mixed`, `unknown`; most SEM software cannot fit a `kendall` matrix directly);
   - `missing` (`listwise`, `pairwise`, `unknown`);
   - `population`;
   - `source_citation` and `source_location` (table and page);
