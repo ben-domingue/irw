@@ -1,0 +1,233 @@
+table,construct_type,sample,framework,notes
+holzinger_1937_bifactor14,Cognitive/educational,Educational,,
+holzinger_1939_grantwhite24,Cognitive/educational,"Educational, General/non-specific",,
+holzinger_1939_grantwhite9,Cognitive/educational,"Educational, General/non-specific",,
+thurstone_1941_ability9,Cognitive/educational,Educational,,
+bechtoldt_1961_ability17,Cognitive/educational,Educational,,"two samples from one source study, treated as single-source not pooled"
+brigham_1932_ability9,Cognitive/educational,Educational,,exam candidates reached through the College Board
+tucker_1958_ability9,Cognitive/educational,,,population not recorded; Thurstone 1941 data not carried across records
+mullen_1939_physical8,Physical health/functioning,,,anthropometric growth measures; Developmental considered; recruitment not described
+burt_1915_emotions11,"Affective/mental health, Personality",Educational,,ratings of children's emotional tendencies
+reise_2007_health16,Opinion/attitude,Clinical,,CAHPS ratings of health care received; respondents reached as health-care consumers
+smith_1983_ability6,Cognitive/educational,,,
+chen_2006_hrqol18,"Affective/mental health, Physical health/functioning",,,quality-of-life items: mood plus energy/fatigue
+boruch_1970_mtmm14,"Behavioral, Opinion/attitude",Workplace,,"ratings of supervisor behaviour (consideration, structure) and satisfaction"
+malmi_1979_learning12,Cognitive/educational,"Educational, General/non-specific",,paid college-student volunteers
+cox_1996_anger4,"Affective/mental health, Personality",Educational,,state and trait anxiety/anger
+grob_2018_ids2_14,Cognitive/educational,,,standardization sample; representativeness not stated in record
+griffith_1998_interpersonal24,Personality,"Educational, General/non-specific",,students rating stereotypical persons on trait adjectives
+pollack_2012_estress9,"Affective/mental health, Opinion/attitude",Workplace,,entrepreneurs reached by occupation
+colom_2002_wais14,Cognitive/educational,,,standardization sample; representativeness not stated in record
+becker_1992_ability3,Cognitive/educational,,,
+becker_1994_ability3,Cognitive/educational,,,
+gnambs_2018_rses10,"Affective/mental health, Personality",,,self-esteem; groups record only country and language
+issp_1989_workorient9,Opinion/attitude,,,"work values; per-country survey samples, pooled so frame blank"
+issp_2005_workorient7,Opinion/attitude,,,"work values; per-country survey samples, pooled so frame blank"
+wvs_1994_jobsat3,"Affective/mental health, Opinion/attitude",,,"life satisfaction, job satisfaction and autonomy"
+mathieu_2015_cohesion4,"Behavioral, Opinion/attitude",Non-person unit,,team-level panel data (teams are the units)
+nohe_2015_wfcstrain4,"Affective/mental health, Opinion/attitude",Workplace,,setting from design: all groups are employee panel studies
+nohe_2015_fwcstrain4,"Affective/mental health, Opinion/attitude",Workplace,,setting from design: all groups are employee panel studies
+norton_2013_hads14,Affective/mental health,Clinical,,
+craft_2003_csai4,"Affective/mental health, Behavioral",,,competitive anxiety and sport performance; athletes fit no setting atom
+boer_2016_lmx,"Behavioral, Opinion/attitude",Workplace,,setting from design: leader-follower studies
+cheung_2000_tpb,"Behavioral, Opinion/attitude",,TPB,
+cooke_2016_tpbalcohol,Opinion/attitude,,TPB,behaviour column dropped
+hunter_1983_jobperf4,"Behavioral, Cognitive/educational",Workplace,,setting from design: employees with supervisor ratings
+roorda_2011_engagement,"Cognitive/educational, Opinion/attitude",Educational,,setting from design: students; relationship quality read as Opinion/attitude
+scalco_2017_tpborganic,Opinion/attitude,,TPB,behaviour column dropped
+mcgrew_2014_wjiv47,Cognitive/educational,,,standardization sample; representativeness not stated in record
+costa_1992_neopir30,Personality,,,normative sample; recruitment not in record
+brady_2005_service15,Opinion/attitude,,,service customers fit no setting atom
+duncan_1968_peer10,"Cognitive/educational, Opinion/attitude, Socioeconomic/attainment",Educational,status_attainment,aspirations read as Opinion/attitude
+wheaton_1977_alienation6,"Opinion/attitude, Socioeconomic/attainment",,,anomia and powerlessness read as Opinion/attitude
+kerckhoff_1974_ambition7,"Cognitive/educational, Opinion/attitude, Socioeconomic/attainment",Educational,status_attainment,
+blau_1967_occupation5,Socioeconomic/attainment,Representative,status_attainment,"Representative: the source describes OCG as a supplement to the Current Population Survey, a national probability sample"
+mcdonald_1984_union5,Opinion/attitude,Workplace,,
+cattell_1963_ability12,Cognitive/educational,Educational,,
+li_2019_class10,Behavioral,Educational,,"CLASS observer ratings of classroom interactions; unit is the classroom, so Non-person unit also arguable"
+innami_2022_l2listening6,Cognitive/educational,Educational,,setting from design: L2 learners; groups record no population
+or_2024_tam4,"Behavioral, Opinion/attitude",,TAM,
+hagger_2018_raa9,"Behavioral, Opinion/attitude",,RAA,"groups record behaviours, not populations"
+scherhag_2026_hexacod7,"Affective/mental health, Personality","Clinical, Educational, Internet-based",,"Disintegration (psychosis-proneness trait) adds Affective; setting union over visible groups (online, students, couple-therapy clients)"
+berki_2026_sportcommit7,Opinion/attitude,,,commitment and enjoyment; athletes fit no setting atom
+he_2026_utaut17,"Behavioral, Opinion/attitude",Educational,UTAUT,
+wang_2026_aidependence4,"Behavioral, Opinion/attitude","Educational, Workplace",,AI use and dependency; university plus professional/corporate groups
+harman_1967_holzinger9,Cognitive/educational,,,
+fischbein_1977_weight6,Physical health/functioning,Targeted/specific,,body weight over puberty in a twin growth study; twins as restricted frame; Developmental considered
+maes_1998_assortmating10,Affective/mental health,Representative,,title claims 'population-based samples'
+fried_2018_ptsd16,Affective/mental health,"Clinical, Targeted/specific",,"PTSD patients in treatment: diagnosis as restricted frame (core lists diagnosis as a restriction); four sites of one study, not pooled"
+bi_2024_ccai14,Behavioral,"General/non-specific, Internet-based",,"MTurk; denier exclusion read as analytic cleaning, not a frame"
+wansbeek_2000_tvviewing7,Behavioral,,,TV viewership; recruitment not described
+ruzzano_2015_asdocd17,"Affective/mental health, Developmental",Clinical,,"autism and OCD symptoms; setting from design (diagnosed groups), population not recorded"
+hoorelbeke_2016_cogrisk6,"Affective/mental health, Cognitive/educational","Clinical, Targeted/specific",,PASAT and working-memory complaints plus emotion regulation and depression
+serdyuk_2026_riasec18,"Opinion/attitude, Personality","Educational, Targeted/specific, Workplace",,vocational interests; ICT students and IT professionals at named sites
+digman_1997_bigfive5,Personality,,,groups record only age bands
+cox_1996_coping4,Behavioral,Educational,,coping strategies read as Behavioral
+zhang_2019_hapa10,"Behavioral, Opinion/attitude",,HAPA,
+backfisch_2025_tpack7,Cognitive/educational,"Educational, Workplace",,self-reported teacher knowledge; pre-service (Educational) and in-service teachers (Workplace)
+guttman_1991_wiscr12,Cognitive/educational,,,WISC-R norm sample; representativeness not stated in record
+he_2026_tam22,Opinion/attitude,Educational,TAM,higher-education students by design
+cammarata_2026_gibs6,Opinion/attitude,,,recruitment not described in record
+almutairi_2026_tpbsocialmedia5,"Affective/mental health, Behavioral, Opinion/attitude","Educational, Targeted/specific",TPB,nursing students (a major) as restricted frame; BSMAS as Behavioral
+ozdemir_2026_mentormindsets8,Opinion/attitude,,,
+green_2026_caregiverwellness9,"Affective/mental health, Physical health/functioning",Targeted/specific,,caregivers as restricted frame
+morillosarto_2025_adolescentdistress5,"Affective/mental health, Behavioral, Opinion/attitude, Personality","Educational, General/non-specific",,"distress, intolerance of uncertainty, social media disorder, perceived family/community"
+chen_2025_aistories3,"Behavioral, Opinion/attitude",Educational,,preschool children
+shen_2022_tpbfood5,Opinion/attitude,,TPB,
+yu_2026_digitalreadiness11,"Behavioral, Cognitive/educational, Opinion/attitude",,,"learning engagement, digital readiness/self-efficacy, digital learning duration"
+huang_2026_familycommunication10,"Affective/mental health, Opinion/attitude",,,family communication patterns read as Opinion/attitude
+liu_2026_peteachingstyle8,"Behavioral, Opinion/attitude",Educational,,
+muller_2026_dogleisure10,"Behavioral, Opinion/attitude, Personality","Internet-based, Targeted/specific",,online quota panel restricted to dog owners
+mulugeta_2026_mlhfq21,"Affective/mental health, Physical health/functioning","Clinical, Targeted/specific",,heart-failure patients
+moros_2025_koospf11,Physical health/functioning,"Clinical, Targeted/specific",,
+alsaad_2025_arsaps7,Opinion/attitude,"Clinical, General/non-specific",,"general-practice patients, no diagnosis restriction"
+alzhrani_2022_koospf11,Physical health/functioning,"Clinical, Targeted/specific",,
+wilkinson_1990_crimes7,Behavioral,Non-person unit,,state-level crime rates
+harman_1967_political8,"Behavioral, Socioeconomic/attainment",Non-person unit,,election areas
+guthrie_1973_kipt8,Cognitive/educational,Targeted/specific,,'normal readers' selected against reading-disabled group
+feraco_2026_seb,"Affective/mental health, Behavioral, Cognitive/educational, Opinion/attitude, Personality",,,"SEB skills, Big Five, achievement, relationships, anxiety/depression/life satisfaction"
+wolfson_2025_smmconditions27,Physical health/functioning,"Clinical, Targeted/specific",,severe maternal morbidity events from surveillance; one mental-health and one SUD indicator among 27 conditions not counted
+tilahun_2026_trustoncologist18,Opinion/attitude,"Clinical, Targeted/specific",,
+crescenzi_2023_deprivation11,Socioeconomic/attainment,,,household survey; sampling design not stated in record
+garney_2025_totalteen22,"Affective/mental health, Behavioral","Clinical, General/non-specific",,"sexual health, mental health, substance use screening items"
+chen_2026_attachmentprosocial12,"Behavioral, Opinion/attitude, Personality",Educational,,attachment read as Opinion/attitude; empathy and gratitude as Personality
+brouwer_2025_mslq15,"Cognitive/educational, Opinion/attitude","Educational, General/non-specific",,MSLQ motivation and strategies
+wieteskamilek_2026_emphasis10,"Affective/mental health, Physical health/functioning","Clinical, Targeted/specific",,
+kilic_2026_teacherclimate12,"Affective/mental health, Opinion/attitude","General/non-specific, Workplace",,"climate perceptions, attitudes to profession, burnout"
+brod_2026_acemimpact25,"Affective/mental health, Physical health/functioning","Clinical, Targeted/specific",,achondroplasia
+rosalin_2026_osce15,Opinion/attitude,"Educational, Targeted/specific",,medical students as restricted frame
+ma_2026_appearanceanxiety10,"Affective/mental health, Behavioral",Targeted/specific,,young women who use named platforms; channel not stated
+banoschaparro_2026_quptw9,"Affective/mental health, Opinion/attitude","General/non-specific, Internet-based",,online survey read as Internet-based
+ryder_2026_resilience8,"Affective/mental health, Personality","Targeted/specific, Workplace",,educators selected for exposure to missile threat
+alghadban_2026_selfstigma11,"Affective/mental health, Opinion/attitude","Educational, General/non-specific",,"university students; online is the mode, the channel is the university"
+dallari_2026_ioiha7,"Behavioral, Opinion/attitude, Physical health/functioning","Clinical, Targeted/specific",,"hearing-aid outcomes: use, benefit, limitation, satisfaction"
+miniati_2025_maasmaia10,"Affective/mental health, Personality","General/non-specific, Internet-based",,
+pretorius_2025_isi7,"Affective/mental health, Physical health/functioning","General/non-specific, Workplace",,insomnia; police and paramedics
+linnet_2026_bedq7,Affective/mental health,"Clinical, Targeted/specific",,
+hamatani_2024_bbqj6,Affective/mental health,"General/non-specific, Internet-based",,subjective quality of life
+mattingsdal_2026_decisionclaims9,Opinion/attitude,"Educational, General/non-specific, Workplace",,military personnel reached at a staff college
+bartholomew_2008_testanxiety20,Affective/mental health,Educational,,
+lomax_1983_reading14,Cognitive/educational,Targeted/specific,,learning-disabled children
+lawler_1967_jobperf9,Behavioral,Workplace,,job performance ratings
+thurstone_1941_intelligence21,Cognitive/educational,Educational,,
+jehn_1997_ocp54,Opinion/attitude,Workplace,,organisational culture values Q-sorted by employees
+wnuk_2026_ewaq8,Opinion/attitude,"Internet-based, Targeted/specific",,employees via LinkedIn snowball; one-year job tenure criterion
+austriacorrales_2023_cssrs6,Affective/mental health,"General/non-specific, Internet-based",,"'general population' online, no representativeness claim"
+spahn_2026_pqm10,"Affective/mental health, Behavioral",Targeted/specific,,"performance anxiety, coping, self-rated performance; musicians as restricted frame"
+sun_2026_teacher5cs8,Opinion/attitude,"Educational, Targeted/specific",,English majors in a thesis course
+banoschaparro_2026_lwms5,Behavioral,"Internet-based, Targeted/specific",,exposure to mobbing acts read as Behavioral; employment criterion
+banoschaparro_2026_fsii5,Affective/mental health,"Clinical, Targeted/specific",,pregnant women in perinatal care
+banoschaparro_2026_rmhi5,Affective/mental health,"Educational, General/non-specific",,Quechua version matches the study population; not read as a language restriction
+kattan_2026_cas5,Affective/mental health,"Internet-based, Targeted/specific",,mothers of infants
+yue_2026_selfobjectification7,"Affective/mental health, Opinion/attitude","Educational, General/non-specific",,
+li_2026_coresidence6,"Affective/mental health, Opinion/attitude","Educational, Representative",,'region-wide census' of a district's schools read as covering a defined population
+beachy_2026_edtransitions7,"Affective/mental health, Opinion/attitude","Clinical, Targeted/specific",,ED patients with a symptom-based diagnosis
+popovac_2025_ohip5srb5,Physical health/functioning,General/non-specific,,convenience sample at cinemas and clinic waiting rooms
+silva_2025_biajs4,Opinion/attitude,"General/non-specific, Workplace",,
+huang_2026_athletestress5,"Affective/mental health, Behavioral, Opinion/attitude","Educational, Targeted/specific",,student-athletes; coping Behavioral; stress mindset Opinion
+jung_2026_digitalcompetence7,"Affective/mental health, Behavioral, Cognitive/educational",General/non-specific,,"national survey but analytic sample drops proxy cases, so not Representative; digital task competence as Cognitive"
+contreraslopez_2026_fvpurchase6,Opinion/attitude,"General/non-specific, Internet-based",TPB,"extended TPB (attitude, PBC, family influence as norm, intention) plus health consciousness"
+lv_2026_visualart7,"Affective/mental health, Behavioral","Educational, General/non-specific",,
+dipetrillo_2026_teacherprocrast5,"Affective/mental health, Personality","General/non-specific, Workplace",,procrastination as Personality (core rule 3)
+zhang_2026_aidelegation7,"Affective/mental health, Behavioral, Opinion/attitude","Targeted/specific, Workplace",,
+wood_2024_psychedelicchallenge11,"Affective/mental health, Behavioral","Internet-based, Targeted/specific",,
+liang_2026_eventdigital5,Opinion/attitude,,,event participants fit no setting atom
+mohdrasdi_2020_scct7,"Affective/mental health, Opinion/attitude, Personality",Educational,SCCT,
+gnambs_2018_ghq12,Affective/mental health,,,groups record country and language only
+gnambs_2024_cses12,Personality,,,
+yilmazkogar_2023_pss10,Affective/mental health,"Educational, Workplace",,"union: accounting students, military personnel, accounting firms"
+gnambs_2013_gfp10,Personality,,,
+warne_2019_nonwesterng,Cognitive/educational,Educational,,union over groups (students and school children); 80 groups unseen
+ruchensky_2018_ppi8,Personality,Educational,,offender groups fit no setting atom
+ruchensky_2018_ppir8,Personality,"Clinical, Educational",,substance-treatment groups read as Clinical
+jahrami_2025_nmpq20,Affective/mental health,"General/non-specific, Internet-based",,
+djukanovic_2017_hads14,Affective/mental health,Representative,,random sample from the national population register
+freyer_2019_wai10,Physical health/functioning,"Representative, Workplace",,'nationwide representative sample' of employees; Targeted/specific for the employee frame also arguable
+frounfelker_2021_syfor12,Opinion/attitude,"Educational, General/non-specific",,
+viejo_2020_aicqc35,Behavioral,"Educational, General/non-specific",,romantic competence read as Behavioral
+siegel_2019_pen13,Opinion/attitude,"Clinical, Representative",,random sample of a health care system's members; patient enablement read as Opinion/attitude
+zhao_2021_doctoralidentity12,Opinion/attitude,"Educational, General/non-specific, Internet-based",,doctoral-student identity; online snowball
+sultana_2022_gdssf16,Affective/mental health,Targeted/specific,,retired older adults
+nelsen_2019_ers12,Physical health/functioning,"Clinical, Targeted/specific",,trial patients with asthma-COPD overlap
+escalantebarrios_2020_cprs15,Opinion/attitude,"Educational, Program-based, Targeted/specific",,caregiver-rated relationship quality; preschools (TR) and Educare programme (US); low-income frame
+aubouinbonnaventure_2021_vopi24,Opinion/attitude,"General/non-specific, Workplace",,
+montanesmuro_2022_ercbs24,Affective/mental health,"General/non-specific, Workplace",,
+zapataospina_2025_etam22,Affective/mental health,"Clinical, General/non-specific",,"medically ill inpatients, no single diagnosis"
+papamitsiou_2021_edl21,"Cognitive/educational, Opinion/attitude","General/non-specific, Workplace",,professionals rating data-literacy competence statements; what the rating scale asks is unclear from the record
+agudelohernandez_2025_ids18,Opinion/attitude,"Program-based, Workplace",,health personnel trained in the mhGAP programme
+zieff_2023_snapiv18,"Affective/mental health, Developmental","Clinical, Targeted/specific",,ADHD symptoms in children with neurodevelopmental disorders
+martinanton_2016_tops17,Behavioral,"Educational, Targeted/specific",,peer-rejected children rated by teachers
+penasanchez_2020_4cornersat17,Opinion/attitude,"General/non-specific, Workplace",,
+henderson_2017_gainss11,"Affective/mental health, Behavioral","Clinical, General/non-specific",,youth presenting at service agencies
+paschke_2021_somedisa10,"Affective/mental health, Behavioral","Internet-based, Targeted/specific",,"representative panel, but restricted to weekly social-media users, so Representative dropped"
+rostiotajarvi_2017_fss9,Physical health/functioning,"Clinical, Representative, Targeted/specific",,random sample from an MS patient pool
+acostaprado_2022_wleis16,Personality,"Targeted/specific, Workplace",,trait emotional intelligence; purposive sample of managers
+cerveragarvi_2017_faamadl15,Physical health/functioning,"Clinical, Targeted/specific",,
+fackrell_2015_hq14,"Affective/mental health, Physical health/functioning","Clinical, Targeted/specific",,tinnitus research participants
+fischer_2023_orgtrust15,Opinion/attitude,"Internet-based, Targeted/specific",,Prolific plus snowball; employed adults with a manager
+boateng_2019_bsesebf11,Opinion/attitude,"Clinical, Targeted/specific",,breastfeeding self-efficacy; postpartum cohort at a hospital
+larsson_2021_fsds13,"Affective/mental health, Opinion/attitude","Clinical, Targeted/specific",,
+boyer_2023_sasec12,"Behavioral, Developmental","Educational, General/non-specific",,observed self-regulation in preschoolers
+padmanabhanunni_2023_vax12,Opinion/attitude,"Educational, Representative",,random sample of students (21.5% response)
+rogers_2025_mwas12,Opinion/attitude,"Educational, Targeted/specific",,biomedical graduate trainees
+kahaki_2022_wdq23,"Affective/mental health, Opinion/attitude","Targeted/specific, Workplace",,"work design, job satisfaction, perceived stress; one-year experience criterion"
+caychorodriguez_2023_who5,Affective/mental health,"General/non-specific, Internet-based",,twelve country samples of one study
+kang_2022_obsqor12,"Affective/mental health, Physical health/functioning","Clinical, Targeted/specific",,
+morrison_2015_motivation11,Opinion/attitude,"General/non-specific, Workplace",,work motivation of nurses
+fereidooni_2024_ssod11,Opinion/attitude,"Educational, Internet-based, Targeted/specific",,sex motives read as Opinion/attitude; women with dating-app casual sex
+swain_2022_perfusion10,Physical health/functioning,Targeted/specific,,healthy volunteers screened for no disease or medication; measured at a hospital lab but not reached as patients
+caychorodriguez_2021_pcibs5,Behavioral,"General/non-specific, Internet-based",,preventive COVID-19 behaviours; twelve country samples of one study
+tareke_2022_hbmpractice11,Behavioral,"Educational, General/non-specific",,"practice items only, not HBM constructs, so no framework"
+shirabe_2023_praqr2_10,Affective/mental health,"Clinical, Targeted/specific",,
+footer_2020_pps10,Behavioral,Targeted/specific,,frequency of police behaviours experienced; street-based sex workers
+mach_2020_mppus10,"Affective/mental health, Behavioral","Educational, Targeted/specific",,problematic phone use; medical students
+perski_2020_dbci10,"Behavioral, Opinion/attitude","Program-based, Targeted/specific",,app users (the intervention studied) with AUDIT >= 8
+stanifer_2015_ckdknowledge10,Cognitive/educational,Representative,,cluster probability sample
+stanifer_2015_ckdattitudes8,Opinion/attitude,Representative,,cluster probability sample
+stanifer_2015_ckdpractices8,Behavioral,Representative,,cluster probability sample
+pretorius_2022_pis10,Opinion/attitude,"General/non-specific, Internet-based, Workplace",,teachers via Facebook groups
+duman_2019_ipat10,Affective/mental health,"Clinical, Targeted/specific",,
+done_2023_idaf8,Affective/mental health,"Clinical, Targeted/specific",,"dental-clinic patients and acquaintances; online is the mode, not the channel"
+rogers_2025_pesns9,Opinion/attitude,"Clinical, Representative, Targeted/specific",,random sample of Medicare/Medicaid patients screened for social needs
+morenolavaho_2024_paknow9,Cognitive/educational,"Educational, Representative, Targeted/specific",,simple random sample of education-faculty students
+plesec_2024_tdshf8,Physical health/functioning,"Clinical, Targeted/specific",,thirst distress in heart failure
+razki_2023_iped8,"Affective/mental health, Socioeconomic/attainment","Internet-based, Targeted/specific",,perceived economic distress; unemployed adults
+ulusoy_2023_eds8,Behavioral,"General/non-specific, Workplace",,experienced discrimination read as Behavioral (as for mobbing)
+diviani_2017_eheals8,Cognitive/educational,"General/non-specific, Internet-based",,self-rated eHealth literacy
+aguilarraab_2015_evos9,Opinion/attitude,"Educational, General/non-specific, Internet-based",,
+halman_2018_ocat9,"Behavioral, Cognitive/educational","Educational, Workplace",,units are assessment forms on residents; read as human (residents in training)
+jacobs_2017_uewd8,"Behavioral, Physical health/functioning","General/non-specific, Workplace",,self-reported upper-extremity work demands
+chaudhary_2022_coidp8,Physical health/functioning,"Educational, General/non-specific",,
+lindig_2021_icansdm8,Opinion/attitude,"Program-based, Workplace",,clinicians in an SDM implementation study
+almuhanna_2022_psychknow5,Opinion/attitude,"Clinical, General/non-specific",,patients' views of a good psychiatrist
+almuhanna_2022_psychsocial8,Opinion/attitude,"Clinical, General/non-specific",,patients' views of a good psychiatrist
+almuhanna_2022_psychclinic5,Opinion/attitude,"Clinical, General/non-specific",,patients' views of a good psychiatrist
+bimbashi_2015_oes8,"Opinion/attitude, Physical health/functioning","Clinical, Educational, General/non-specific",,self-rated orofacial appearance; prosthodontic patients plus dental students
+manzar_2019_ess8,Physical health/functioning,"Educational, Representative",,'randomly selected' from a university health survey
+chang_2018_eheals8,Cognitive/educational,"Clinical, Targeted/specific",,eHealth literacy in chronic-condition outpatients
+zakariya_2023_almq8,Cognitive/educational,"Educational, Targeted/specific",,approaches to learning maths; purposive sample of engineering students
+fabry_2023_mcpi8,Opinion/attitude,"Educational, Targeted/specific",,medical students rating placements
+agrazalgarcia_2022_hanta8,Behavioral,Targeted/specific,,one hantavirus-endemic village
+amilani_2020_oidp8,Physical health/functioning,"Educational, General/non-specific",,
+aridi_2025_hdcqperf7,Behavioral,"General/non-specific, Internet-based",,
+jiao_2022_emoselfeff7,Opinion/attitude,"General/non-specific, Internet-based",,emotional self-efficacy read as Opinion; native-speaker residency criterion
+caychorodriguez_2022_mfs7,Affective/mental health,"General/non-specific, Internet-based",,
+guevaraperez_2022_canoetalent7,Opinion/attitude,Targeted/specific,,people linked to canoeing clubs
+montagni_2022_dvl7,Cognitive/educational,"General/non-specific, Internet-based",,digital vaccine literacy; open online cohort
+barello_2019_ches7,Opinion/attitude,"Clinical, Targeted/specific",,family caregivers recruited through GPs
+leebaggley_2026_bws7,Opinion/attitude,"General/non-specific, Workplace",,survey circulated through workplace committees
+xue_2026_sdtqols7,Affective/mental health,"Clinical, General/non-specific",,psychiatric outpatients
+elemo_2020_fcv19s7,Affective/mental health,"General/non-specific, Internet-based",,
+mahmood_2023_ppfvd6,Affective/mental health,"General/non-specific, Internet-based",,
+stewart_2020_chymhanx6,Affective/mental health,"Clinical, Targeted/specific",,clinically referred youth; second group restricted to developmental disabilities
+mauricio_2021_apais6,"Affective/mental health, Opinion/attitude","Clinical, Targeted/specific",,preoperative anxiety and desire for information; cancer surgery patients
+vergararomero_2017_apais6,"Affective/mental health, Opinion/attitude","Clinical, General/non-specific",,elective surgery across specialties
+paredes_2018_mhpqintensity6,Physical health/functioning,"Clinical, Targeted/specific",,men with haemophilia and pain
+baptiste_2021_bbsurvey6,Opinion/attitude,"Educational, General/non-specific",,
+lie_2017_mcmasterottawa7,"Behavioral, Cognitive/educational","Educational, Targeted/specific",,faculty-rated team competencies; health-professions students
+espejo_2022_swls5,Affective/mental health,"General/non-specific, Internet-based",,
+diazgamarra_2025_who5,Affective/mental health,"Clinical, General/non-specific, Internet-based",,"hospitals, care centres, community and online"
+zhan_2020_cet5,Physical health/functioning,"Clinical, Targeted/specific",,
+chinh_2023_bsci5,"Affective/mental health, Personality","Clinical, Targeted/specific",,self-compassion in cancer patients
+alhajj_2018_ohip5,Physical health/functioning,"Clinical, General/non-specific",,dental patients and accompanying persons
+mateorodriguez_2021_wai7,Physical health/functioning,"General/non-specific, Workplace",,health-centre workers at routine occupational health checks

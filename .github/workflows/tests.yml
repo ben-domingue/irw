@@ -315,6 +315,11 @@ jobs:
       - name: conjoint design records
         run: python metadata/tests/test_conj_design.py -v
 
+      # The covariance family's subject tags (#3645): core's construct type and
+      # sample values plus the cov additions, and a row for every recorded table.
+      - name: cov subject tags
+        run: python metadata/tests/test_cov_tags.py -v
+
       # The rankings dictionary's release claim. Rankings has no dictionary
       # sheet, and nothing rewrites dictionary_auto_rank.csv after staging, so
       # "Not on Redivis yet." staged with a local table stayed true only until

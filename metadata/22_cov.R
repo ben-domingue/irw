@@ -139,6 +139,29 @@ if ("variables" %in% names(out)) {
               if (nzchar(out$group[i])) paste0(" / ", out$group[i]) else "")
   }
 }
+##Subject tags (data/covariance/tags.csv; README "Subject tags", #3645): core's
+##`construct type` and `sample` (TAG_VOCAB, core's rules) plus cov additions,
+##and a cov-only `framework`. Normalised and checked by core's own function, so
+##a value outside the vocabulary stops the run here as it does in 03_tags.R.
+##A table with no row gets NA and is reported; metadata/tests/test_cov_tags.py
+##catches that earlier.
+source("tag_normalize.R")
+COV_TAG_EXTRA <- list("construct type" = "Socioeconomic/attainment", "sample" = character(0))
+COV_FRAMEWORKS <- c("TPB", "RAA", "HAPA", "TAM", "UTAUT", "SCCT", "HBM", "status_attainment")
+cov_vocab <- TAG_VOCAB
+for (k in names(COV_TAG_EXTRA)) cov_vocab[[k]] <- c(cov_vocab[[k]], COV_TAG_EXTRA[[k]])
+ctags <- read.csv(file.path("..", "data", "covariance", "tags.csv"), colClasses = "character",
+                  na.strings = "", check.names = FALSE)
+ctags$construct_type <- normalize_multiselect(ctags$construct_type, "construct type", vocab = cov_vocab)
+ctags$sample <- normalize_multiselect(ctags$sample, "sample", vocab = cov_vocab)
+bad_fw <- setdiff(na.omit(ctags$framework), COV_FRAMEWORKS)
+if (length(bad_fw)) stop("framework outside the README list (data/covariance/tags.csv): ",
+                         paste(bad_fw, collapse = ", "))
+out <- merge(out, ctags[, c("table", "construct_type", "sample", "framework")], by = "table",
+             all.x = TRUE, sort = FALSE)
+no_tags <- unique(out$table[!out$table %in% ctags$table])
+if (length(no_tags)) message("  ! no subject tags (data/covariance/tags.csv): ", paste(no_tags, collapse = ", "))
+
 nonpd <- out$table[out$is_pd %in% FALSE]
 if (length(nonpd)) message("  non-positive-definite as published (V8, kept): ", paste(unique(nonpd), collapse = ", "))
 
