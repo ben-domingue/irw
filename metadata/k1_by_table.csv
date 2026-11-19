@@ -647,6 +647,8 @@ bi_2026_trust_calibration,0,,618,1,618,0,0,0,no_qi
 bialowolski_2024_financial_literacy,7,cov_age_group|cov_education|cov_employment|cov_income|cov_male|cov_marital_status|cov_residence,4389,2603,4389,1808,0.4119,0.7845,ok
 bialowolski_2026_financial_literacy,7,cov_age_group|cov_country|cov_education|cov_employment|cov_gender|cov_household_income|cov_marital,17965,8175,17965,5854,0.3259,0.564,ok
 bicb-j_ishiguro_2025,2,cov_age|cov_male,1974,122,1974,14,0.0071,0.0137,ok
+bieleke_2022_assess_anxiety,1,cov_sex,414,2,414,0,0,0,ok
+bieleke_2022_assess_enjoyment,1,cov_sex,414,2,414,0,0,0,ok
 big5_sirt,0,,500,1,500,0,0,0,no_qi
 biggs_2024_burnout,5,cov_age|cov_employer|cov_ethnicity|cov_gender|cov_works_outside_contract,402,129,402,83,0.2065,0.398,ok
 biggs_2024_moral_injury,5,cov_age|cov_employer|cov_ethnicity|cov_gender|cov_works_outside_contract,402,129,402,83,0.2065,0.398,ok

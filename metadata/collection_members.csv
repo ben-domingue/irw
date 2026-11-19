@@ -228,6 +228,11 @@ bfi_goldberg_1992_neuroticism,big_five,rule:cname:big.?five|five.?factor|\bipip\
 bfi_goldberg_1992_openness_to_experience,big_five,rule:cname:big.?five|five.?factor|\bipip\b|neo.?(pi|ffi)|\bbfi\b|hexaco
 bhullar_2023_bfi10,bfi10,name
 bhullar_2023_bfi10,big_five,rule:cname:big.?five|five.?factor|\bipip\b|neo.?(pi|ffi)|\bbfi\b|hexaco
+bieleke_2022_assess_anxiety,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
+bieleke_2022_assess_anxiety,clustered,rule:var:cluster_id
+bieleke_2022_assess_anxiety,longitudinal,rule:meta:longitudinal
+bieleke_2022_assess_enjoyment,clustered,rule:var:cluster_id
+bieleke_2022_assess_enjoyment,longitudinal,rule:meta:longitudinal
 bitew_2020_anxiety,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 bitew_2020_phq9,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 bitew_2020_phq9,phq9,supplied

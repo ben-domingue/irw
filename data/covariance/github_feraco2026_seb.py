@@ -16,11 +16,18 @@ the primary papers. Files read (never executed):
 - data/3.meta_data/coding/records.csv: the sample N (`n`) and citation per matrix;
 - data/3.meta_data/pair_n/<id>.csv: pairwise n per cell, where given (0145a, 0150a).
 
-Matrices left out: extracted from the primary paper rather than computed
-(0087a, 0128a, 0138a, 0141a), and 0104a (no records row; review-only for data
-quality, config/coding/matrix_exclusions.csv).
+0128a (Springstein et al., 2026) is different: the review team transcribed it
+from the primary paper's Table 2 (between-person correlations; records.csv
+open_data = NO, no computation in the repo). It is built as the repo stores it
+(Ben, 2026-11-19), with one difference from the paper: the repo's "sex" row has
+the opposite sign to the paper's "Cis Man (0 = No, 1 = Yes)" row, i.e. the repo
+codes it the other way. The repo header is "sex " (trailing space), read as "sex".
 
-Modification (2026-11-17): reshaped to the long lower-triangle layout in
+Matrices left out, also transcribed from the primary paper: 0087a (latent-factor
+correlations from a bifactor ESEM, out), 0138a and 0141a (held); and 0104a (no
+records row; review-only for data quality, config/coding/matrix_exclusions.csv).
+
+Modification (2026-11-17; 0128a added 2026-11-19): reshaped to the long lower-triangle layout in
 data/covariance/README.md, one group per matrix id. Values unchanged.
 
 Usage: python3 data/covariance/github_feraco2026_seb.py <out dir>
@@ -41,6 +48,9 @@ IDS = ["0013a", "0018a", "0018b", "0026a", "0030a", "0030b", "0034a", "0035a", "
        "0045a", "0048a", "0049a", "0050a", "0050b", "0053c", "0053d", "0053e", "0053f",
        "0053g", "0068a", "0070a", "0071a", "0080a", "0095a", "0100a", "0107a", "0108a",
        "0118a", "0120a", "0120b", "0126a", "0132a", "0134a", "0145a", "0150a"]
+# transcribed by the review team from the primary paper; built after IDS so the
+# rows of the 35 computed matrices are written first, unchanged
+TRANSCRIBED = ["0128a"]
 CSV_IDS = {"0132a", "0145a", "0150a"}
 PAIR_IDS = {"0145a", "0150a"}
 
@@ -70,6 +80,8 @@ def read_matrix(mid):
                                     read_only=True, data_only=True).worksheets[0]
         rows = list(ws.iter_rows(values_only=True))
         V = [str(v) for v in rows[0]]
+        if mid in TRANSCRIBED:
+            V = [v.strip() for v in V]  # 0128a: header "sex " has a trailing space
         M = [[num(c) for c in r] for r in rows[1:]]
     if len(M) != len(V) or any(len(r) != len(V) for r in M):
         raise SystemExit(f"{mid}: not square")
@@ -82,7 +94,7 @@ def main(out):
     rec = {r["matrix_id"]: r for r in csv.DictReader(io.StringIO(
         get("data/3.meta_data/coding/records.csv").decode("utf-8")))}
     long, records, held = [], [], []
-    for mid in IDS:
+    for mid in IDS + TRANSCRIBED:
         r = rec[mid]
         N = int(r["n"])
         V, M = read_matrix(mid)
@@ -110,7 +122,8 @@ def main(out):
                         "n_vars": len(keep), "dropped": dropped, "doi": r["doi"],
                         "author_et_al": r["author_et_al"], "year": r["year"],
                         "title": r["title"], "journal": r["journal"], "open_data": r["open_data"],
-                        "country": r["country"], "age_class": r["age_class"], "age": r["age"]})
+                        "country": r["country"], "age_class": r["age_class"], "age": r["age"],
+                        "transcribed": mid in TRANSCRIBED})
     with open(out / f"{TABLE}.csv", "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=["stat", "var1", "var2", "value", "n", "group"])
         w.writeheader()
