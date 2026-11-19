@@ -1072,6 +1072,9 @@ zhang_2015_phq13,data/zhang_2015_lushan_somatic.py,never_examined,no harvest log
 zhang_2026_pe_burnout,data/zhang_2026_pe_teacher_burnout.py,never_examined,no harvest log was ever built for this script
 zhang_2026_pe_identity,data/zhang_2026_pe_teacher_burnout.py,never_examined,no harvest log was ever built for this script
 zhang_2026_pe_uwes9,data/zhang_2026_pe_teacher_burnout.py,never_examined,no harvest log was ever built for this script
+AOMT_BR_SF_EDPANAB_Geiger_2021_AOT,data/AOMT_BR_SF_EDPANAB_Geiger_2021.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+AOMT_BR_SF_EDPANAB_Geiger_2021_BRS,data/AOMT_BR_SF_EDPANAB_Geiger_2021.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
+AOMT_BR_SF_EDPANAB_Geiger_2021_RF,data/AOMT_BR_SF_EDPANAB_Geiger_2021.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
 PEMAIW_Qiu_2020_BWSS,data/PEMAIW_Qiu_2020.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
 PEMAIW_Qiu_2020_DASS,data/PEMAIW_Qiu_2020.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
 PEMAIW_Qiu_2020_FFMQ,data/PEMAIW_Qiu_2020.R,r_script,harvest.py cannot re-run R; needs a hand-checked manual.csv row
