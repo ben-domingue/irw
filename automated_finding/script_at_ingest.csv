@@ -1,8 +1,12 @@
 table,source,script,recorded_at
 acostaprado_2022_wleis16,cov,data/covariance/pmc_article_tables_ae.py,2026-11-18
+agrazalgarcia_2022_hanta8,cov,data/covariance/pmc_article_tables_ah.py,2026-11-18
 agudelohernandez_2025_ids18,cov,data/covariance/pmc_article_tables_ad.py,2026-11-18
 aguilarraab_2015_evos9,cov,data/covariance/pmc_article_tables_ag.py,2026-11-18
 alghadban_2026_selfstigma11,cov,data/covariance/pmc_article_tables_u.py,2026-11-18
+almuhanna_2022_psychclinic5,cov,data/covariance/pmc_article_tables_ah.py,2026-11-18
+almuhanna_2022_psychknow5,cov,data/covariance/pmc_article_tables_ah.py,2026-11-18
+almuhanna_2022_psychsocial8,cov,data/covariance/pmc_article_tables_ah.py,2026-11-18
 almutairi_2026_tpbsocialmedia5,cov,data/covariance/pmc_article_tables.py,2026-11-17
 alsaad_2025_arsaps7,cov,data/covariance/pmc_article_tables_n.py,2026-11-17
 alzhrani_2022_koospf11,cov,data/covariance/pmc_article_tables_n.py,2026-11-17
@@ -20,6 +24,7 @@ becker_1992_ability3,cov,data/covariance/batch_metasem.R,2026-11-17
 becker_1994_ability3,cov,data/covariance/batch_metasem.R,2026-11-17
 berki_2026_sportcommit7,cov,data/covariance/osf_berki2026_sportcommit.py,2026-11-17
 bi_2024_ccai14,cov,data/covariance/batch_rpackages_b.R,2026-11-17
+bimbashi_2015_oes8,cov,data/covariance/pmc_article_tables_ah.py,2026-11-18
 blau_1967_occupation5,cov,data/covariance/batch_sem.R,2026-11-17
 boateng_2019_bsesebf11,cov,data/covariance/pmc_article_tables_ae.py,2026-11-18
 boer_2016_lmx,cov,data/covariance/batch_metasem.R,2026-11-17
@@ -35,6 +40,8 @@ cattell_1963_ability12,cov,data/covariance/batch_rpackages3.R,2026-11-17
 caychorodriguez_2021_pcibs5,cov,data/covariance/pmc_article_tables_af.py,2026-11-18
 caychorodriguez_2023_who5,cov,data/covariance/pmc_article_tables_ae.py,2026-11-18
 cerveragarvi_2017_faamadl15,cov,data/covariance/pmc_article_tables_ae.py,2026-11-18
+chang_2018_eheals8,cov,data/covariance/pmc_article_tables_ah.py,2026-11-18
+chaudhary_2022_coidp8,cov,data/covariance/pmc_article_tables_ah.py,2026-11-18
 chen_2006_hrqol18,cov,data/covariance/pilot_rpackages.R,2026-11-17
 chen_2025_aistories3,cov,data/covariance/pmc_article_tables.py,2026-11-17
 chen_2026_attachmentprosocial12,cov,data/covariance/pmc_article_tables_p.py,2026-11-18
@@ -56,6 +63,7 @@ done_2023_idaf8,cov,data/covariance/pmc_article_tables_ag.py,2026-11-18
 duman_2019_ipat10,cov,data/covariance/pmc_article_tables_ag.py,2026-11-18
 duncan_1968_peer10,cov,data/covariance/batch_sem.R,2026-11-17
 escalantebarrios_2020_cprs15,cov,data/covariance/pmc_article_tables_ac.py,2026-11-18
+fabry_2023_mcpi8,cov,data/covariance/pmc_article_tables_ah.py,2026-11-18
 fackrell_2015_hq14,cov,data/covariance/pmc_article_tables_ae.py,2026-11-18
 feraco_2026_seb,cov,data/covariance/github_feraco2026_seb.py,2026-11-17
 fereidooni_2024_ssod11,cov,data/covariance/pmc_article_tables_af.py,2026-11-18
@@ -93,6 +101,7 @@ hunter_1983_jobperf4,cov,data/covariance/batch_metasem.R,2026-11-17
 innami_2022_l2listening6,cov,data/covariance/osf_innami2022_listening.py,2026-11-17
 issp_1989_workorient9,cov,data/covariance/batch_metasem.R,2026-11-17
 issp_2005_workorient7,cov,data/covariance/batch_metasem.R,2026-11-17
+jacobs_2017_uewd8,cov,data/covariance/pmc_article_tables_ah.py,2026-11-18
 jahrami_2025_nmpq20,cov,data/covariance/pmc_article_tables_ac.py,2026-11-18
 jehn_1997_ocp54,cov,data/covariance/batch_rpackages5.R,2026-11-18
 jung_2026_digitalcompetence7,cov,data/covariance/pmc_article_tables_y.py,2026-11-18
@@ -106,6 +115,7 @@ lawler_1967_jobperf9,cov,data/covariance/batch_rpackages5.R,2026-11-18
 li_2019_class10,cov,data/covariance/osf_li2019_class.py,2026-11-17
 li_2026_coresidence6,cov,data/covariance/pmc_article_tables_x.py,2026-11-18
 liang_2026_eventdigital5,cov,data/covariance/mendeley_liang2026_eventdigital.py,2026-11-18
+lindig_2021_icansdm8,cov,data/covariance/pmc_article_tables_ah.py,2026-11-18
 linnet_2026_bedq7,cov,data/covariance/pmc_article_tables_u.py,2026-11-18
 liu_2026_peteachingstyle8,cov,data/covariance/pmc_article_tables_o.py,2026-11-17
 lomax_1983_reading14,cov,data/covariance/batch_rpackages5.R,2026-11-18
@@ -114,6 +124,7 @@ ma_2026_appearanceanxiety10,cov,data/covariance/pmc_article_tables_u.py,2026-11-
 mach_2020_mppus10,cov,data/covariance/pmc_article_tables_af.py,2026-11-18
 maes_1998_assortmating10,cov,data/covariance/batch_semPackages.R,2026-11-17
 malmi_1979_learning12,cov,data/covariance/batch_rpackages2.R,2026-11-17
+manzar_2019_ess8,cov,data/covariance/pmc_article_tables_ah.py,2026-11-18
 martinanton_2016_tops17,cov,data/covariance/pmc_article_tables_ad.py,2026-11-18
 mathieu_2015_cohesion4,cov,data/covariance/batch_metasem.R,2026-11-17
 mattingsdal_2026_decisionclaims9,cov,data/covariance/pmc_article_tables_u.py,2026-11-18
@@ -191,6 +202,7 @@ wvs_1994_jobsat3,cov,data/covariance/batch_metasem.R,2026-11-17
 yilmazkogar_2023_pss10,cov,data/covariance/osf_yilmazkogar2023_pss.py,2026-11-18
 yu_2026_digitalreadiness11,cov,data/covariance/pmc_article_tables_o.py,2026-11-17
 yue_2026_selfobjectification7,cov,data/covariance/pmc_article_tables_x.py,2026-11-18
+zakariya_2023_almq8,cov,data/covariance/pmc_article_tables_ah.py,2026-11-18
 zapataospina_2025_etam22,cov,data/covariance/pmc_article_tables_ad.py,2026-11-18
 zhang_2019_hapa10,cov,data/covariance/osf_zhang2019_hapa.py,2026-11-17
 zhang_2026_aidelegation7,cov,data/covariance/pmc_article_tables_y.py,2026-11-18
