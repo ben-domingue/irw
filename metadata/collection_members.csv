@@ -70,7 +70,6 @@ amatus_cipora_2024_stai,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 amiot_2022_swls,swls,name
 amiot_2022_ucla_loneliness,ucla_ls,name
 amorim_2026_ctar,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
-an_2020_efl_self_regulated,response_time,rule:var:rt
 andreu_sanchez_2023_panas,affect_panas,rule:cname:panas|positive and negative af
 andreu_sanchez_2023_panas,panas,name
 anh_2026_finwellbeing,wellbeing,rule:cname:well.?being|life satisfaction|\bswls\b|quality of life|whoqol
