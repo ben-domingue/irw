@@ -1551,7 +1551,7 @@ de_vries_2022_hexaco_self,0,,434,1,434,0,0,0,no_qi
 debacker_2018_decisionjustification,0,,96,1,96,0,0,0,no_qi
 debacker_2018_justice_appraisal,0,,96,1,96,0,0,0,no_qi
 decamp_2022_online_discussion,1,cov_female,117,3,117,1,0.0085,0.0085,ok
-deception_game,0,,636,1,636,0,0,0,no_qi
+deception_game,1,cov_age,636,53,636,8,0.0126,0.1085,ok
 deception_professors,0,,568,1,568,0,0,0,no_qi
 degirolamo_2022_brs,8,cov_age|cov_education|cov_employed|cov_health_worker|cov_region|cov_sex|cov_urban|cov_weight,10013,8056,10013,6914,0.6905,0.9395,ok
 degirolamo_2022_cmq,8,cov_age|cov_education|cov_employed|cov_health_worker|cov_region|cov_sex|cov_urban|cov_weight,10013,8056,10013,6914,0.6905,0.9395,ok

@@ -14,7 +14,7 @@ Denominator: **10967 live tables** (10929 after excluding 38 withdrawn). Definit
 | tag_row | 8389 | 8277 | 112 | 98.7 |
 | script | 10929 | 10759 | 170 | 98.4 |
 | codebook_link | 6568 | 3995 | 2573 | 60.8 |
-| column_docs | 8228 | 6405 | 1823 | 77.8 |
+| column_docs | 8228 | 6403 | 1825 | 77.8 |
 | data_note (info) | 10913 | 2073 | 8840 | 19 |
 | has_construct_name | 8389 | 8277 | 112 | 98.7 |
 | itemtext_shipped | 10929 | 2631 | 8298 | 24.1 |
