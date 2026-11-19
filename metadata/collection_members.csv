@@ -673,6 +673,7 @@ dennis_2019_ipas,longitudinal,rule:meta:longitudinal
 depression_anxiety_stress,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 depression_anxiety_stress,dass21,wording
 depression_anxiety_stress,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
+depression_anxiety_stress,item_position,rule:var:position
 depression_anxiety_stress,response_time,rule:var:rt
 depression_anxiety_stress,tipi,wording
 depression_hymcohort_tang2022,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
