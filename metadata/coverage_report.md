@@ -1,33 +1,33 @@
-# Coverage audit -- 2026-11-18
+# Coverage audit -- 2026-11-19
 
-Denominator: **10963 live tables** (10925 after excluding 38 withdrawn). Definitions in the header of `metadata/17_coverage.R`; per-table rows in `coverage_matrix.csv`. Report-only: nothing here is fixed automatically.
+Denominator: **10967 live tables** (10929 after excluding 38 withdrawn). Definitions in the header of `metadata/17_coverage.R`; per-table rows in `coverage_matrix.csv`. Report-only: nothing here is fixed automatically.
 
 ## Per dimension (active tables)
 
 | dimension | applicable | covered | missing | pct |
 |---|---|---|---|---|
-| metadata_row | 10925 | 10925 | 0 | 100 |
-| biblio_row | 10925 | 10925 | 0 | 100 |
-| citation | 10925 | 10925 | 0 | 100 |
-| licence | 10925 | 10925 | 0 | 100 |
-| page | 10925 | 10925 | 0 | 100 |
-| tag_row | 8387 | 8275 | 112 | 98.7 |
-| script | 10925 | 10755 | 170 | 98.4 |
+| metadata_row | 10929 | 10929 | 0 | 100 |
+| biblio_row | 10929 | 10929 | 0 | 100 |
+| citation | 10929 | 10929 | 0 | 100 |
+| licence | 10929 | 10929 | 0 | 100 |
+| page | 10929 | 10929 | 0 | 100 |
+| tag_row | 8389 | 8277 | 112 | 98.7 |
+| script | 10929 | 10759 | 170 | 98.4 |
 | codebook_link | 6568 | 3995 | 2573 | 60.8 |
-| column_docs | 8226 | 6406 | 1820 | 77.9 |
-| data_note (info) | 10909 | 2073 | 8836 | 19 |
-| has_construct_name | 8387 | 8275 | 112 | 98.7 |
-| itemtext_shipped | 10925 | 2631 | 8294 | 24.1 |
+| column_docs | 8228 | 6405 | 1823 | 77.8 |
+| data_note (info) | 10913 | 2073 | 8840 | 19 |
+| has_construct_name | 8389 | 8277 | 112 | 98.7 |
+| itemtext_shipped | 10929 | 2631 | 8298 | 24.1 |
 
 ## Item-text status
 
 Issues against the public item-text page are the daily `itemtext-issues.yml` check, not this report.
 
-column_docs is all-or-nothing per table; the mean share of a table's columns documented is 91.1%.
+column_docs is all-or-nothing per table; the mean share of a table's columns documented is 91%.
 
 | itemtext_status | n |
 |---|---|
-| unassessed | 7138 |
+| unassessed | 7142 |
 | shipped | 2631 |
 | withdrawn | 420 |
 | excluded | 402 |
@@ -41,9 +41,9 @@ column_docs is all-or-nothing per table; the mean share of a table's columns doc
 |---|---|---|---|---|---|---|
 | comp | 121 | 0 | 0 | 0 | 0 | 6 |
 | conj | 1292 | 0 | 0 | 0 | 0 | 0 |
-| core | 8226 | 0 | 0 | 0 | 56 | 164 |
+| core | 8228 | 0 | 0 | 0 | 56 | 164 |
 | nom | 161 | 0 | 0 | 0 | 56 | 0 |
-| rank | 1109 | 0 | 0 | 0 | 0 | 0 |
+| rank | 1111 | 0 | 0 | 0 | 0 | 0 |
 | sim | 16 | 0 | 0 | 0 | 0 | 0 |
 
 ## Core, per shard
@@ -58,7 +58,7 @@ column_docs is all-or-nothing per table; the mean share of a table's columns doc
 | item_response_warehouse_6 | 926 | 0 | 56 | 276 |
 | item_response_warehouse_7 | 961 | 0 | 0 | 155 |
 | item_response_warehouse_8 | 916 | 0 | 0 | 183 |
-| item_response_warehouse_9 | 698 | 0 | 0 | 6 |
+| item_response_warehouse_9 | 700 | 0 | 0 | 6 |
 
 ## Worst 20 tables (by n_gaps)
 
