@@ -81,6 +81,41 @@ Rules (the validator's V1-V8):
   Several pilot tables overlap: one sample's matrix is a subset of another's. Each is kept, because each is a canonical matrix in its own right, and `overlaps` names the other. A matrix computed from an IRW table is normally never stored (Rulings, 2026-11-17); one is kept only when it cannot be recomputed from the IRW copy, such as Gnambs's per-country Open Psychometrics samples (the IRW copy has no country column), and then `overlaps` always names the table it came from.
 - **A dictionary row** in `automated_finding/dictionary_auto_cov.csv` (planned; no sheet, as for conjoint and rankings).
 
+## Subject tags (#3645)
+
+What a table is about, so it can be found by subject. Held in `tags.csv` here (`table`, `construct_type`, `sample`, `framework`, `notes`; one row per table), joined into `cov_metadata` by `metadata/22_cov.R`. Not in the core tags Sheet or `03_tags.R`, for the reasons conjoint gave (`tags/decisions/2919_conjoint_topic_tags.md`). Tags are living: corrections go by PR against `tags.csv`.
+
+**`construct_type` and `sample` are core's columns**, with core's values and rules: `TAG_VOCAB` in `metadata/tag_normalize.R`, and the decision rules in `tags/.claude/skills/irw-auto-tag/references/vocab.md` (#1837 for `construct type`, #1760 and #1704 for `sample`). Multi-select, comma-joined, as in core, so one filter value finds core and cov tables alike. A cov table is tagged by what its matrix's variables measure, not by what the paper was about (core's rule 1). Demographic covariates in a matrix (age, sex, grade) do not add a value.
+
+Codes are shared with core wherever they fit (Ben, 2026-11-18: "codes should intersect with core when possible"). Where none of core's values fits, cov may add one, recorded here. The cov additions so far:
+
+- `construct_type` **`Socioeconomic/attainment`**: socioeconomic status and attainment measured as variables in their own right: education and occupation (one's own or a parent's), income, deprivation, and area indicators such as unemployment or homeownership rates. The classic status-attainment path models (`blau_1967_occupation5`, `duncan_1968_peer10`, `kerckhoff_1974_ambition7`) are the core case. Not for a parental-education covariate beside a psychological battery, by the demographic rule above. Votes cast and crime counts are `Behavioral` (what people did), which an aggregate table may carry alongside this value (`harman_1967_political8`).
+
+**`sample` on a pooled table.** A table whose groups come from many separate studies (most MASEM tables) has no single recruitment, which core never needed to cover. Rule (Ben, 2026-11-18):
+
+- **Setting** values (`Clinical`, `Educational`, `Workplace`, `Internet-based`, `Program-based`) are the union over the groups: a value is given when any group was reached that way, as in core's "a study that samples both takes both". `norton_2013_hads14` pools patients and community samples and is `Clinical`. A setting may be read from the design when every group shares it by construction (supervisor-subordinate leadership studies are `Workplace`), and `notes` says so.
+- **Frame** values (`Representative`, `Targeted/specific`, `General/non-specific`) are left blank.
+- When the groups record no population and the design implies none, `sample` is blank.
+
+A **respondent-type** value applies as in core: a matrix over states or election areas is `Non-person unit`, alone.
+
+On a single-sample table, the frame follows core's rules, read from the record (`population`, `notes`) or the source; when recruitment is not described, the frame is blank.
+
+**`framework`** (cov only; single value; usually blank) names the theory a matrix was assembled to test, when its variables are that model's constructs: the paper fits the model, or the meta-analysis pooled studies of it. An extended model is still that model (TPB plus health consciousness is `TPB`). A matrix that borrows one construct from a theory gets no framework. Values:
+
+| value | model |
+|---|---|
+| `TPB` | theory of planned behaviour (attitude, subjective norm, perceived behavioural control, intention, behaviour) |
+| `RAA` | reasoned action approach (TPB with the attitude and norm components split) |
+| `HAPA` | health action process approach |
+| `TAM` | technology acceptance model |
+| `UTAUT` | unified theory of acceptance and use of technology |
+| `SCCT` | social cognitive career theory |
+| `HBM` | health belief model |
+| `status_attainment` | Blau-Duncan status attainment and its extensions (Wisconsin model) |
+
+A new value is added here first, with the tables that need it.
+
 ## Intake rules
 
 - **Licence:** a matrix takes the licence of where it was taken from, under the IRW licensing summary table:
@@ -138,4 +173,5 @@ Data acquisition is tracked in #3582. Everything else lives here until the famil
 - 2026-11-18 (Ben, #3594): a cell the source did not report is held as a row with an empty `value` rather than leaving the study out ("this seems better than skipping and is objective/reversible"). `irw_cov2matrix()` returns NA there with a warning, and `complete = TRUE` returns the complete part; `irw_cov2list()` keeps NA for metaSEM. Positive definiteness is judged on the complete part.
 - 2026-11-17 (Ben): pairwise-deletion matrices with only a sample N are built, the n noted as an upper bound (`feraco_2026_seb`). Correlations over aggregate units are in scope (`harman_1967_political8`, `wilkinson_1990_crimes7`). A package matrix that differs from its source is built as-is with the difference noted (`guthrie_1973_kipt8`). Licence requests to depositors wait until the family is more mature. Matrices from a CC BY supplement to a paywalled article are held pending a ruling (`paquin_2016_identity6`).
 - 2026-11-19 (Ben): meta-analysts' averaged cells are not as reported (yang_2022_phomath15 out). Latent-factor correlations stay out (Feraco 0087a). A repo matrix whose dummy variable is coded the other way from the paper is built as-is with the coding noted (Feraco 0128a). Kendall's tau is allowed as matrix_type `kendall`.
+- 2026-11-18 (Ben, #3645): subject tags reuse core's `construct type` and `sample` (values and rules) plus a cov-only `framework`, rather than a cov vocabulary; new values are allowed where core has none that fits ("codes should intersect with core when possible"), the first being `Socioeconomic/attainment`. On a pooled table, `sample` is the union of the groups' settings with the frame blank.
 - 2026-11-19 (Ben): a matrix copied from a commercial test manual into a CC BY deposit takes the deposit's licence (ruchensky_2018_ppir8), as for GPL packages. Kosovo samples get a blank country with a note (no official ISO 3166-1 code; XK is user-assigned).
