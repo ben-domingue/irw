@@ -109,6 +109,8 @@ pretorius_2025_isi7,cov,data/covariance/pmc_article_tables_u.py,2026-11-18
 reise_2007_health16,cov,data/covariance/pilot_rpackages.R,2026-11-17
 roorda_2011_engagement,cov,data/covariance/batch_metasem.R,2026-11-17
 rosalin_2026_osce15,cov,data/covariance/pmc_article_tables_p.py,2026-11-18
+ruchensky_2018_ppi8,cov,data/covariance/osf_ruchensky2018_ppi.py,2026-11-18
+ruchensky_2018_ppir8,cov,data/covariance/osf_ruchensky2018_ppi.py,2026-11-18
 ruzzano_2015_asdocd17,cov,data/covariance/batch_rpackages_b.R,2026-11-17
 ryder_2026_resilience8,cov,data/covariance/pmc_article_tables_u.py,2026-11-18
 scalco_2017_tpborganic,cov,data/covariance/batch_metasem.R,2026-11-17
