@@ -41,10 +41,14 @@ crescenzi_2023_deprivation11,cov,data/covariance/pmc_article_tables_p.py,2026-11
 dallari_2026_ioiha7,cov,data/covariance/pmc_article_tables_u.py,2026-11-18
 digman_1997_bigfive5,cov,data/covariance/batch_rpackages4.R,2026-11-17
 dipetrillo_2026_teacherprocrast5,cov,data/covariance/pmc_article_tables_y.py,2026-11-18
+djukanovic_2017_hads14,cov,data/covariance/pmc_article_tables_ac.py,2026-11-18
 duncan_1968_peer10,cov,data/covariance/batch_sem.R,2026-11-17
+escalantebarrios_2020_cprs15,cov,data/covariance/pmc_article_tables_ac.py,2026-11-18
 feraco_2026_seb,cov,data/covariance/github_feraco2026_seb.py,2026-11-17
 fischbein_1977_weight6,cov,data/covariance/batch_semPackages.R,2026-11-17
+freyer_2019_wai10,cov,data/covariance/pmc_article_tables_ac.py,2026-11-18
 fried_2018_ptsd16,cov,data/covariance/batch_semPackages.R,2026-11-17
+frounfelker_2021_syfor12,cov,data/covariance/pmc_article_tables_ac.py,2026-11-18
 garney_2025_totalteen22,cov,data/covariance/pmc_article_tables_p.py,2026-11-18
 gnambs_2013_gfp10,cov,data/covariance/osf_gnambs2013_gfp.py,2026-11-18
 gnambs_2018_ghq12,cov,data/covariance/osf_gnambs2018_ghq.py,2026-11-18
@@ -71,6 +75,7 @@ hunter_1983_jobperf4,cov,data/covariance/batch_metasem.R,2026-11-17
 innami_2022_l2listening6,cov,data/covariance/osf_innami2022_listening.py,2026-11-17
 issp_1989_workorient9,cov,data/covariance/batch_metasem.R,2026-11-17
 issp_2005_workorient7,cov,data/covariance/batch_metasem.R,2026-11-17
+jahrami_2025_nmpq20,cov,data/covariance/pmc_article_tables_ac.py,2026-11-18
 jehn_1997_ocp54,cov,data/covariance/batch_rpackages5.R,2026-11-18
 jung_2026_digitalcompetence7,cov,data/covariance/pmc_article_tables_y.py,2026-11-18
 kattan_2026_cas5,cov,data/covariance/pmc_article_tables_x.py,2026-11-18
@@ -98,6 +103,7 @@ moros_2025_koospf11,cov,data/covariance/pmc_article_tables_n.py,2026-11-17
 mullen_1939_physical8,cov,data/covariance/pilot_rpackages.R,2026-11-17
 muller_2026_dogleisure10,cov,data/covariance/pmc_article_tables_n.py,2026-11-17
 mulugeta_2026_mlhfq21,cov,data/covariance/pmc_article_tables_n.py,2026-11-17
+nelsen_2019_ers12,cov,data/covariance/pmc_article_tables_ac.py,2026-11-18
 nohe_2015_fwcstrain4,cov,data/covariance/batch_metasem.R,2026-11-17
 nohe_2015_wfcstrain4,cov,data/covariance/batch_metasem.R,2026-11-17
 norton_2013_hads14,cov,data/covariance/batch_metasem.R,2026-11-17
@@ -117,14 +123,17 @@ scalco_2017_tpborganic,cov,data/covariance/batch_metasem.R,2026-11-17
 scherhag_2026_hexacod7,cov,data/covariance/zenodo_scherhag2026_hexacod.py,2026-11-17
 serdyuk_2026_riasec18,cov,data/covariance/zenodo_serdyuk2026_riasec.py,2026-11-17
 shen_2022_tpbfood5,cov,data/covariance/plos_shen2022_tpbfood.py,2026-11-17
+siegel_2019_pen13,cov,data/covariance/pmc_article_tables_ac.py,2026-11-18
 silva_2025_biajs4,cov,data/covariance/pmc_article_tables_y.py,2026-11-18
 smith_1983_ability6,cov,data/covariance/pilot_rpackages.R,2026-11-17
 spahn_2026_pqm10,cov,data/covariance/pmc_article_tables_x.py,2026-11-18
+sultana_2022_gdssf16,cov,data/covariance/pmc_article_tables_ac.py,2026-11-18
 sun_2026_teacher5cs8,cov,data/covariance/pmc_article_tables_x.py,2026-11-18
 thurstone_1941_ability9,cov,data/covariance/pilot_rpackages.R,2026-11-17
 thurstone_1941_intelligence21,cov,data/covariance/batch_rpackages5.R,2026-11-18
 tilahun_2026_trustoncologist18,cov,data/covariance/pmc_article_tables_p.py,2026-11-18
 tucker_1958_ability9,cov,data/covariance/pilot_rpackages.R,2026-11-17
+viejo_2020_aicqc35,cov,data/covariance/pmc_article_tables_ac.py,2026-11-18
 wang_2026_aidependence4,cov,data/covariance/zenodo_wang2026_aidependence.py,2026-11-17
 wansbeek_2000_tvviewing7,cov,data/covariance/batch_rpackages_b.R,2026-11-17
 warne_2019_nonwesterng,cov,data/covariance/osf_warne2019_g.py,2026-11-18
@@ -140,3 +149,4 @@ yu_2026_digitalreadiness11,cov,data/covariance/pmc_article_tables_o.py,2026-11-1
 yue_2026_selfobjectification7,cov,data/covariance/pmc_article_tables_x.py,2026-11-18
 zhang_2019_hapa10,cov,data/covariance/osf_zhang2019_hapa.py,2026-11-17
 zhang_2026_aidelegation7,cov,data/covariance/pmc_article_tables_y.py,2026-11-18
+zhao_2021_doctoralidentity12,cov,data/covariance/pmc_article_tables_ac.py,2026-11-18
