@@ -1032,3 +1032,5 @@ scherhag_2026_hexacod7,,2026-11-19,"Covariance table: per-variable reliability r
 wang_2026_aidependence4,,2026-11-19,Covariance table: 14 studies added that had been held for blank cells (pairs measured but not reported are now empty cells); existing groups unchanged.,#3582,,
 yu_2026_digitalreadiness11,,2026-11-19,"Covariance table: per-variable reliability rows (`rel`, Cronbach's alpha) added; existing rows unchanged.",#3582,,
 zhang_2019_hapa10,,2026-11-19,Covariance table: 46 studies added that had been held for blank cells (pairs measured but not reported are now empty cells); existing groups unchanged.,#3582,,
+feraco_2026_seb,,2026-11-19,"Covariance table: group 0128a (Springstein et al. 2026, N = 215) added, as the Living SEB repo transcribes it from the paper; its sex variable is coded the other way from the paper's 'Cis Man' row (signs reversed), as noted. Existing groups unchanged.",#3582,,
+brady_2005_service15,,2026-11-19,"Covariance table: source and licence changed (Zenodo 23912643, MIT, withdrawn by its depositor as a duplicate -> Zenodo 12579101, CC BY 4.0). Data unchanged (byte-identical).",#3582,,
