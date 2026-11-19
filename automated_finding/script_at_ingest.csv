@@ -46,7 +46,10 @@ feraco_2026_seb,cov,data/covariance/github_feraco2026_seb.py,2026-11-17
 fischbein_1977_weight6,cov,data/covariance/batch_semPackages.R,2026-11-17
 fried_2018_ptsd16,cov,data/covariance/batch_semPackages.R,2026-11-17
 garney_2025_totalteen22,cov,data/covariance/pmc_article_tables_p.py,2026-11-18
+gnambs_2013_gfp10,cov,data/covariance/osf_gnambs2013_gfp.py,2026-11-18
+gnambs_2018_ghq12,cov,data/covariance/osf_gnambs2018_ghq.py,2026-11-18
 gnambs_2018_rses10,cov,data/covariance/batch_metasem.R,2026-11-17
+gnambs_2024_cses12,cov,data/covariance/osf_gnambs2024_cses.py,2026-11-18
 green_2026_caregiverwellness9,cov,data/covariance/pmc_article_tables.py,2026-11-17
 griffith_1998_interpersonal24,cov,data/covariance/batch_rpackages2.R,2026-11-17
 grob_2018_ids2_14,cov,data/covariance/batch_rpackages2.R,2026-11-17
@@ -122,6 +125,7 @@ tilahun_2026_trustoncologist18,cov,data/covariance/pmc_article_tables_p.py,2026-
 tucker_1958_ability9,cov,data/covariance/pilot_rpackages.R,2026-11-17
 wang_2026_aidependence4,cov,data/covariance/zenodo_wang2026_aidependence.py,2026-11-17
 wansbeek_2000_tvviewing7,cov,data/covariance/batch_rpackages_b.R,2026-11-17
+warne_2019_nonwesterng,cov,data/covariance/osf_warne2019_g.py,2026-11-18
 wheaton_1977_alienation6,cov,data/covariance/batch_sem.R,2026-11-17
 wieteskamilek_2026_emphasis10,cov,data/covariance/pmc_article_tables_p.py,2026-11-18
 wilkinson_1990_crimes7,cov,data/covariance/batch_smacof.R,2026-11-17
@@ -129,6 +133,7 @@ wnuk_2026_ewaq8,cov,data/covariance/pmc_article_tables_x.py,2026-11-18
 wolfson_2025_smmconditions27,cov,data/covariance/pmc_article_tables_p.py,2026-11-18
 wood_2024_psychedelicchallenge11,cov,data/covariance/pmc_article_tables_y.py,2026-11-18
 wvs_1994_jobsat3,cov,data/covariance/batch_metasem.R,2026-11-17
+yilmazkogar_2023_pss10,cov,data/covariance/osf_yilmazkogar2023_pss.py,2026-11-18
 yu_2026_digitalreadiness11,cov,data/covariance/pmc_article_tables_o.py,2026-11-17
 yue_2026_selfobjectification7,cov,data/covariance/pmc_article_tables_x.py,2026-11-18
 zhang_2019_hapa10,cov,data/covariance/osf_zhang2019_hapa.py,2026-11-17
