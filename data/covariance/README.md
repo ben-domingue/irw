@@ -83,7 +83,7 @@ Rules (the validator's V1-V8):
 
 ## Subject tags (#3645)
 
-What a table is about, so it can be found by subject. Held in `tags.csv` here (`table`, `construct_type`, `sample`, `framework`, `notes`; one row per table), joined into `cov_metadata` by `metadata/22_cov.R`. Not in the core tags Sheet or `03_tags.R`, for the reasons conjoint gave (`tags/decisions/2919_conjoint_topic_tags.md`). Tags are living: corrections go by PR against `tags.csv`.
+What a table is about, so it can be found by subject. Held in `tags.csv` here (`table`, `construct_type`, `sample`, `framework`, `notes`; one row per table), joined into `cov_metadata` by `metadata/22_cov.R`. Not in the core tags Sheet or `03_tags.R`, for the reasons conjoint gave (`tags/decisions/2919_conjoint_topic_tags.md`). Tags are living: corrections go by PR against `tags.csv`. An intake PR does not have to tag its tables: new tables are tagged in batches, under these rules. Until then they have NA tags in `cov_metadata`, and both `22_cov.R` and `metadata/tests/test_cov_tags.py` list them.
 
 **`construct_type` and `sample` are core's columns**, with core's values and rules: `TAG_VOCAB` in `metadata/tag_normalize.R`, and the decision rules in `tags/.claude/skills/irw-auto-tag/references/vocab.md` (#1837 for `construct type`, #1760 and #1704 for `sample`). Multi-select, comma-joined, as in core, so one filter value finds core and cov tables alike. A cov table is tagged by what its matrix's variables measure, not by what the paper was about (core's rule 1). Demographic covariates in a matrix (age, sex, grade) do not add a value.
 

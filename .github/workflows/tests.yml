@@ -316,7 +316,7 @@ jobs:
         run: python metadata/tests/test_conj_design.py -v
 
       # The covariance family's subject tags (#3645): core's construct type and
-      # sample values plus the cov additions, and a row for every recorded table.
+      # sample values plus the cov additions; untagged tables are listed, not failed.
       - name: cov subject tags
         run: python metadata/tests/test_cov_tags.py -v
 

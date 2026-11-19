@@ -75,6 +75,15 @@ all applications of core's existing rules rather than new ones:
 - **Team-level data are `Non-person unit`** (`mathieu_2015_cohesion4`, whose n
   counts teams).
 
+## Tables added after the passes
+
+Eleven tables from batch AK (#3646) landed on main while the PR was open. They
+were tagged by one rater under the rules above, not by two blind passes; their
+`notes` give the non-obvious calls. One of them, `li_2019_fallhealthbelief26`,
+is the first table carrying `HBM`. New tables from then on are tagged in
+batches: an intake PR need not tag its tables, and CI lists untagged tables
+rather than failing on them, so intake is never blocked by tagging.
+
 ## Still open
 
 - Package filters (`construct_type`, `sample`, `framework`) in R and Python, once

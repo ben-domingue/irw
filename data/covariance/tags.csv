@@ -231,3 +231,14 @@ zhan_2020_cet5,Physical health/functioning,"Clinical, Targeted/specific",,
 chinh_2023_bsci5,"Affective/mental health, Personality","Clinical, Targeted/specific",,self-compassion in cancer patients
 alhajj_2018_ohip5,Physical health/functioning,"Clinical, General/non-specific",,dental patients and accompanying persons
 mateorodriguez_2021_wai7,Physical health/functioning,"General/non-specific, Workplace",,health-centre workers at routine occupational health checks
+crysel_2018_schadenfreude29,Personality,"General/non-specific, Internet-based",,"MTurk; attention-check exclusions are cleaning, not a frame"
+dibaj_2025_ber5,Affective/mental health,"Clinical, Program-based, Targeted/specific",,follow-up of an RCT cohort (DBT trial) recruited by self-harm and BPD features
+filia_2022_fsim16,"Opinion/attitude, Socioeconomic/attainment",Clinical,,"social inclusion incl. housing and participation; serious-mental-illness and community samples, so frame blank"
+imkome_2025_tibscsm32,Affective/mental health,"Clinical, Targeted/specific",,"caregivers of inpatients with schizophrenia and methamphetamine use, reached through psychiatric hospitals"
+kaman_2022_promisanger5,Affective/mental health,Representative,,parent proxy; families randomly selected from residents registration offices
+li_2019_fallhealthbelief26,Opinion/attitude,Targeted/specific,HBM,"HBM dimensions (perceived severity, susceptibility, ...); able-to-walk criterion; multi-stage sampling without a representativeness claim"
+pretorius_2023_tss5,Opinion/attitude,"General/non-specific, Internet-based, Workplace",,teachers via Facebook groups and school liaison officers
+remr_2026_cps8,Opinion/attitude,Representative,,address-based population sample; the random split half keeps Representative
+shek_2023_covidmentalhealth22,"Affective/mental health, Opinion/attitude","Educational, General/non-specific",,"quota sample, not a probability claim; self-efficacy as Opinion/attitude"
+souesme_2020_needsmotivation19,"Opinion/attitude, Personality","Clinical, Targeted/specific",,rehabilitation inpatients 65+ with MMSE criterion; causality orientations as Personality
+zampetakis_2015_anticipatedaffect20,Affective/mental health,"Educational, General/non-specific",,"anticipated PANAS affect, students of six universities"

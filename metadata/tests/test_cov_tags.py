@@ -2,8 +2,9 @@
 
 Offline. `construct_type` and `sample` take core's values (TAG_VOCAB in
 metadata/tag_normalize.R, read from that file so the two cannot drift) plus the
-cov additions below; `framework` takes the README's closed list. Every table
-with a record in matrices.csv has exactly one tags row.
+cov additions below; `framework` takes the README's closed list. A table has at
+most one tags row, and every row names a table recorded in matrices.csv.
+Untagged tables are listed, not failed: new tables are tagged in batches.
 
 Run: python metadata/tests/test_cov_tags.py -v
 """
@@ -57,10 +58,18 @@ class CovTags(unittest.TestCase):
         names = [r["table"] for r in self.rows]
         self.assertEqual(len(names), len(set(names)))
 
-    def test_every_record_table_tagged(self):
+    def test_no_orphan_rows(self):
+        """A tags row names a table that has a record. A recorded table WITHOUT a
+        tags row is not a failure: intake PRs add tables faster than they are
+        tagged, and tagging is done in batches (README, "Subject tags"). Those
+        tables are printed here and reported by 22_cov.R."""
         _, rec = read("matrices.csv")
-        missing = {r["table"] for r in rec} - {r["table"] for r in self.rows}
-        self.assertFalse(missing, f"tables in matrices.csv with no tags row: {sorted(missing)}")
+        recorded = {r["table"] for r in rec}
+        tagged = {r["table"] for r in self.rows}
+        self.assertFalse(tagged - recorded, f"tags rows with no record in matrices.csv: {sorted(tagged - recorded)}")
+        untagged = sorted(recorded - tagged)
+        if untagged:
+            print(f"\n  note: {len(untagged)} recorded table(s) not yet tagged: {', '.join(untagged)}")
 
     def test_codes(self):
         for r in self.rows:

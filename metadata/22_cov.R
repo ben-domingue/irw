@@ -143,8 +143,8 @@ if ("variables" %in% names(out)) {
 ##`construct type` and `sample` (TAG_VOCAB, core's rules) plus cov additions,
 ##and a cov-only `framework`. Normalised and checked by core's own function, so
 ##a value outside the vocabulary stops the run here as it does in 03_tags.R.
-##A table with no row gets NA and is reported; metadata/tests/test_cov_tags.py
-##catches that earlier.
+##A table with no row gets NA and is reported (new tables are tagged in batches;
+##metadata/tests/test_cov_tags.py lists them too).
 source("tag_normalize.R")
 COV_TAG_EXTRA <- list("construct type" = "Socioeconomic/attainment", "sample" = character(0))
 COV_FRAMEWORKS <- c("TPB", "RAA", "HAPA", "TAM", "UTAUT", "SCCT", "HBM", "status_attainment")
