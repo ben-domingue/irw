@@ -186,6 +186,41 @@ class ReviewLinksTest(unittest.TestCase):
                 self._run([bad], {"t"})
 
 
+class Sample1120Misses(unittest.TestCase):
+    """Misses from the 2026-11-20 seeded sample of 50 no_match tables."""
+
+    def test_readthisfirst_is_a_readme(self):
+        for n in ("ReadThisFirst.txt", "Read_this_first.docx", "How to read the data.pdf"):
+            self.assertEqual(fcl.match(n), "name_readme", n)
+
+    def test_survey_named_documents(self):
+        for n in ("survey.pdf", "Survey_2_ReadingComprehensionTest.pdf", "Survey Polish.docx"):
+            self.assertEqual(fcl.match(n), "questionnaire", n)
+        for n in ("Survey report.pdf", "survey_data.csv", "Survey_results.pdf", "surveyed.pdf",
+                  "Survey methodology.docx", "survey.R"):
+            self.assertIsNone(fcl.match(n), n)
+
+    def test_variables_label_sheet(self):
+        for n in ("Variables_Label", "variable_names", "Variables Labels"):
+            self.assertTrue(fcl.sheet_is_codebook(n), n)
+        for n in ("Data_label", "Data_Code", "Sheet1"):
+            self.assertFalse(fcl.sheet_is_codebook(n), n)
+
+    def test_text_that_opens_as_the_questionnaire(self):
+        for t in ("Appendix 2 Vocabulary Learning Questionnaire ( Bang khao sat",
+                  "Appendix 1 Gu's (2018) Vocabulary Learning Questionnaire, with items tagged",
+                  "S1 File. Questionnaire used in the study"):
+            self.assertTrue(fcl.opens_as_questionnaire(t), t)
+        for t in ("Results of the questionnaire were analysed", "Validation of the Brief Questionnaire",
+                  "Table S1 . Poisson regression model", "A technical appendix for the SEM modelling"):
+            self.assertFalse(fcl.opens_as_questionnaire(t), t)
+
+    def test_questionnaire_text_must_name_the_table_topic(self):
+        self.assertTrue(fcl.names_table_topic("liu_2023_brand_trust", "Brand trust toward agricultural products"))
+        self.assertTrue(fcl.names_table_topic("vonhippel_2023_fsfi", "the FSFI items"))
+        self.assertFalse(fcl.names_table_topic("johansson_2020_hads", "Gothenburg Trismus Questionnaire"))
+
+
 if __name__ == "__main__":
     unittest.main()
 

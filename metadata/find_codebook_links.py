@@ -177,12 +177,18 @@ CODEBOOK = re.compile(
     r"dicion[aá]rio|codificaci[oó]n|code[\s_-]?sheet|coding[\s_-]?(scheme|manual|key)",
     re.I,
 )
-README = re.compile(r"read[\s_-]?me|l[eé]ame", re.I)
+##`ReadThisFirst.txt` explained all 285 columns of depue_2023_pwi (11-20 sample)
+README = re.compile(r"read[\s_-]?me|l[eé]ame|read[\s_-]?this[\s_-]?first|how[\s_-]?to[\s_-]?read", re.I)
 ##A repository file NAMED as the questionnaire (2026-11-16 hand sample: OSF
 ##`Questionnaire_Study1.docx`, Mendeley `Questionnaire.pdf`). Documents only:
 ##`questionnaire_data.csv` is the responses.
 QUESTIONNAIRE_NAME = re.compile(r"questionn?aire|cuestionario|question[aá]rio|fragebogen|"
                                 r"survey[\s_-]?(instrument|items|questions)", re.I)
+##A document named just "survey" (`survey.pdf`, `Survey_2_ReadingComprehensionTest.pdf`,
+##11-20 sample) is the instrument, unless the name says it is about the survey.
+SURVEY_NAME = re.compile(r"(^|[^a-z])surveys?([^a-z]|$)", re.I)
+SURVEY_NOT = re.compile(r"report|analys|summar|method|manuscript|paper|preprint|protocol|consent|"
+                        r"supplement|appendix_?table|figure|codes?\b", re.I)
 QUESTIONNAIRE_DOC_EXT = re.compile(r"\.(pdf|docx?|rtf|odt|txt|md|html?)$", re.I)
 QUESTIONNAIRE_NOT = re.compile(r"\b(data|responses?|raw|results?|answers)\b|_(data|responses?|raw|results?)\b", re.I)
 ##A file named `codebook.R` is the code that writes one, not the codebook; an
@@ -205,8 +211,8 @@ def match(name: str) -> Optional[str]:
         return "name_codebook"
     if README.search(name):
         return "name_readme"
-    if (QUESTIONNAIRE_NAME.search(name) and QUESTIONNAIRE_DOC_EXT.search(name)
-            and not QUESTIONNAIRE_NOT.search(name)):
+    if ((QUESTIONNAIRE_NAME.search(name) or (SURVEY_NAME.search(name) and not SURVEY_NOT.search(name)))
+            and QUESTIONNAIRE_DOC_EXT.search(name) and not QUESTIONNAIRE_NOT.search(name)):
         return "questionnaire"
     if LABELLED_DATA.search(name):
         return "labelled_data"
@@ -656,7 +662,7 @@ CAPTION_QUALITATIVE = re.compile(r"interview|qualitative|thematic|open[- ]ended|
 ##Matched against the sheet name with `_`/`-` read as spaces (sheet_is_codebook).
 ##2026-11-16 sample: "Keys", "Variable codes", "Names_of_variables".
 SHEET_CODEBOOK = re.compile(r"^\s*(variables?|legend|descriptions?|data description|variable description|"
-                            r"keys|variable (codes|names|labels|list|key)|names of (the )?variables|"
+                            r"keys|variables? (codes?|names?|labels?|lists?|keys?)|names of (the )?variables|"
                             r"value labels|item (key|list|labels|wording)|labels|"
                             r"key|codes|coding)\s*$", re.I)
 WORKBOOK_EXT = {"xlsx", "xlsm", "xls"}
@@ -696,6 +702,31 @@ STATS_OUTPUT = re.compile(r"library\(|\bloadings?\b|eigenvalue|\b(?:EFA|CFA|PCA|
                           r"standard deviations?|\bM\s+SD\b|correlations?\b|confidence intervals?|skewness|kurtosis|"
                           r"\bMplus\b|\bMODEL:|\bMODINDICES\b|\bSTANDARDIZED\b|\bESTIMATOR\b", re.I)
 STATS_OUTPUT_MIN = 2
+##A document's first words, after an optional "Appendix 2" / "S1 File" heading:
+##a title of at most ~12 words that names the questionnaire or survey instrument.
+QUESTIONNAIRE_OPENING = re.compile(
+    r"\W*((appendix|annex|anexo|supplement(ary)?( (file|material|information))?|s\d+( file| appendix)?)\s*[\w.]*\W+)?"
+    r"(\S+\s+){0,12}?(questionn?aires?|cuestionarios?|question[aá]rios?|survey instruments?)\b", re.I)
+##"Results of the questionnaire ...", "Validation of the X questionnaire": about it, not it
+QUESTIONNAIRE_OPENING_NOT = re.compile(r"result|analys|validat|psychometr|propert|reliab|factor|scor|respons|"
+                                       r"adaptation|translation|development|evaluation|table|figure", re.I)
+
+
+def names_table_topic(table: str, text: str) -> bool:
+    """The text uses a word from the table name after its year (brand_trust,
+    msk_hq, fsfi). An article's questionnaire can be for another of its
+    instruments: johansson_2020's S1 is a trismus questionnaire, not the C30 or
+    HADS (11-20 re-match). Costs the translated instruments (a French text for
+    bled_2021_imagery_use), which is the side to err on."""
+    parts = re.split(r"[_\W]+", table.lower())
+    i = next((k for k, p in enumerate(parts) if re.fullmatch(r"(19|20)\d\d", p)), 0)
+    low = text.lower()
+    return any(p in low for p in parts[i + 1:] if len(p) >= 3 and not p.isdigit())
+
+
+def opens_as_questionnaire(text: str) -> bool:
+    m = QUESTIONNAIRE_OPENING.match(" ".join(text[:400].split()))
+    return bool(m) and not QUESTIONNAIRE_OPENING_NOT.search(m.group(0))
 
 
 def looks_like_output(text: str) -> bool:
@@ -1270,6 +1301,12 @@ def check_readmes(links: List[dict], offline: bool) -> None:
             if len(hit) >= README_MIN_NAMES and items_hit:
                 x["how_found"] = ("doc_names_columns" if x["how_found"] == "doc_candidate"
                                   else "readme_names_columns")
+            elif (x["how_found"] == "doc_candidate" and opens_as_questionnaire(text)
+                  and not looks_like_output(text) and names_table_topic(x["table"], text)):
+                ##the caption says nothing ("Multimedia component 2") but the
+                ##text opens as the questionnaire (trang_2023, 11-20 sample)
+                x["how_found"] = "questionnaire"
+                x["evidence"] += " (text opens as the questionnaire)"
         print(f"[{i + 1}/{len(readmes)}] doc {x['table']}: {x['file_name'][:60]} -> {x['how_found']}, "
               f"{x['evidence'][:60]}", file=sys.stderr, flush=True)
         if not offline and i % 25 == 24:
