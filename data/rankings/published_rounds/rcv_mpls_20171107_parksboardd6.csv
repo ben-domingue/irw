@@ -1,0 +1,16 @@
+round,item,votes
+1,(source),https://vote.minneapolismn.gov/media/-www-content-assets/documents/archive/elections/2017-Park-District-6-RCV-Tabulation-Summary.pdf
+1,c01,7491
+1,c02,8084
+1,c03,2273
+1,c04,584
+1,(exhausted),0
+1,(write-in),56
+2,c01,8471
+2,c02,8785
+2,c03,0
+2,c04,0
+2,(exhausted),1232
+2,(write-in),0
+1,(threshold),9245
+1,(elected:c02),
