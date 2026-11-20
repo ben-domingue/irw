@@ -10,10 +10,10 @@ The format of the Minneapolis rounds files of #3166: columns `round,item,votes`,
 |---|---|
 | `<round>,<code>,<votes>` | a candidate's tally at the start of the round, as printed (a candidate not listed has 0) |
 | `<round>,(write-in),<votes>` | the write-in line; `<round>,(exhausted),<votes>` the exhausted ballots (optional) |
-| `1,(source),<url>` | where the figures come from; one row per document, at least one |
+| `1,(source),<url>` | where the figures come from; one row per document, at least one. A second row for the same document is a Wayback Machine snapshot of it, added for the Alameda County, San Francisco and Burlington pages that have moved; each snapshot holds the page as read or the round 1 figures of the file |
 | `1,(threshold),<votes>` | the threshold the source prints (optional) |
 | `1,(elected:<code>),` | one row per elected candidate |
-| `<round>,(lot:<code>),` | the candidate a draw settled in that round, where the count reaches a tie |
+| `<round>,(lot:<code>),` | the candidate a draw settled in that round, numbered as the count numbers its rounds; only where the source shows the draw or the defeat the tie leads to |
 | `1,(first_marks),` | round 1 is the first marks as voted, from a page that prints no tabulation |
 | `1,(seat:<k>),` | a sequential count whose source prints one page per seat: the rows after this one are seat `k`, rounds from 1 again |
 
@@ -36,9 +36,9 @@ A difference is a warning with its first figure, never a failure. `recount_resul
 
 | class | meaning |
 |---|---|
-| `same_outcome_source_differs` | the source holds a different set of ballots than the deposit, or a rule the table cannot show; the winners match |
+| `same_outcome_source_differs` | the source holds a different set of ballots than the deposit, or a rule the table cannot show; the winners match, unless the count stops at a tie that the source does not have |
 | `writein_pooling` | the source and the deposit pool or split the write-ins differently; the winners match |
 | `official_page_error` | the source's own pages disagree with each other or with the jurisdiction's later statement |
-| `rule_question` | the source follows a reading of the rules that no saved text settles |
+| `rule_question` | the source prints a round, or follows a reading, that the rule set's text does not (for example a table after the last seat is filled) |
 | `seats_unknown` | the design row's `seats` is `unknown`, so the table is not counted |
 | `unexplained` | a difference with no known reason |
