@@ -1,0 +1,16 @@
+round,item,votes
+1,(source),http://www.acgov.org/rov/rcv/results/230/rcvresults_8080.htm
+1,c01,4941
+1,c02,1456
+1,c03,2122
+1,c04,4786
+2,c01,4941
+2,c02,1456
+2,c03,2122
+2,c04,4786
+3,c01,5525
+3,c03,2275
+3,c04,5150
+4,c01,6009
+4,c04,6277
+1,(elected:c04),
