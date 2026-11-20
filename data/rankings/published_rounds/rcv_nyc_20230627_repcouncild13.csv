@@ -1,0 +1,12 @@
+round,item,votes
+1,(source),https://www.vote.nyc/sites/default/files/pdf/election_results/2023/20230627Primary%20Election/rcv/025927_1.html
+1,c01,836
+1,c02,160
+1,c03,909
+1,(write-in),10
+2,c01,841
+2,c02,163
+2,c03,910
+3,c01,902
+3,c03,957
+1,(elected:c03),

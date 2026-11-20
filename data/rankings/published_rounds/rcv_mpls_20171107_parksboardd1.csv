@@ -1,0 +1,14 @@
+round,item,votes
+1,(source),https://vote.minneapolismn.gov/media/-www-content-assets/documents/archive/elections/2017-Park-Board-District-1-Results-Summary.pdf
+1,c01,5070
+1,c02,6358
+1,c03,2793
+1,(exhausted),0
+1,(write-in),82
+2,c01,5831
+2,c02,7210
+2,c03,0
+2,(exhausted),1262
+2,(write-in),0
+1,(threshold),7152
+1,(elected:c02),
