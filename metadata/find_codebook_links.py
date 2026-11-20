@@ -52,6 +52,14 @@ codebook named `S1_File.pdf` gets no link; that is the honest answer.
                  questionnaire   a supplementary file the authors caption as
                                  the questionnaire / instrument; kept only when
                                  nothing above documents the table (#2792)
+                 labelled_data   an SPSS (.sav/.zsav/.por) or Stata (.dta) data
+                                 file in the deposit. It carries its own
+                                 variable and value labels, which Ben ruled
+                                 (2026-11-20) count as the source documenting
+                                 its variables. A 50-table sample of no_match
+                                 tables found 21 whose only documentation was a
+                                 .sav. Counted by stage 17; the page and MCP do
+                                 not show this kind yet
                  recorded_at_ingest
                                  the codebook file whoever built the table
                                  named, via stage_dict_row.py `codebook_url`
@@ -180,6 +188,9 @@ QUESTIONNAIRE_NOT = re.compile(r"\b(data|responses?|raw|results?|answers)\b|_(da
 ##A file named `codebook.R` is the code that writes one, not the codebook; an
 ##.Rdata/.rds file is data, whatever it is called.
 CODE_EXT = re.compile(r"\.(r|py|do|sps|sas|jl|m|ipynb|rdata|rds)$", re.I)
+##An SPSS or Stata data file carries its variable and value labels
+##(labelled_data). .sps and .do are syntax, caught by CODE_EXT first.
+LABELLED_DATA = re.compile(r"\.(sav|zsav|por|dta)$", re.I)
 
 HOST_PACE = {"osf": 2.5, "dataverse": 0.5, "figshare": 0.5, "figshare_collection": 0.5, "zenodo": 0.7,
              "mendeley": 0.7, "doi": 0.5, "github": 1.0, "gitlab": 1.0, "ldbase": 1.5, "cran": 0.5,
@@ -197,6 +208,8 @@ def match(name: str) -> Optional[str]:
     if (QUESTIONNAIRE_NAME.search(name) and QUESTIONNAIRE_DOC_EXT.search(name)
             and not QUESTIONNAIRE_NOT.search(name)):
         return "questionnaire"
+    if LABELLED_DATA.search(name):
+        return "labelled_data"
     return None
 
 
@@ -1021,6 +1034,8 @@ def supp_hits(t: str, h: str, res: dict, own_ids: set, checked_at: str,
             hits.append({**row, "how_found": "doc_candidate", "evidence": ""})
         if kind == "questionnaire":
             hits.append({**row, "how_found": "questionnaire", "evidence": f"caption: {f['caption'][:200]}"})
+        if LABELLED_DATA.search(f["name"]):
+            hits.append({**row, "how_found": "labelled_data", "evidence": ""})
     return hits
 
 
@@ -1565,7 +1580,7 @@ def main() -> int:
             if h in ("plos", "epmc"):
                 own = {sid for uu, hh, _ in routed[t] if hh == "plos" for sid in re.findall(r"\.(s\d{3})\b", uu)}
                 hits = supp_hits(t, h, res, own, row["checked_at"], siblings.get((h, k), set()))
-                for kind in ("name_codebook",):
+                for kind in ("name_codebook", "labelled_data"):
                     same = [x for x in hits if x["how_found"] == kind]
                     for x in same:
                         x["n_same_kind_in_deposit"] = len(same)
@@ -1633,7 +1648,7 @@ def main() -> int:
             ##decoding abbreviations (FamBel = family_belonging), which is the
             ##guessing this script refuses; record the count and the deposit's
             ##landing page so a page can say "19 codebook files in the deposit".
-            for kind in ("name_codebook", "name_readme", "typed_codebook", "package_doc"):
+            for kind in ("name_codebook", "name_readme", "typed_codebook", "package_doc", "labelled_data"):
                 same = [x for x in hits if x["how_found"] == kind]
                 for x in same:
                     x["n_same_kind_in_deposit"] = len(same)

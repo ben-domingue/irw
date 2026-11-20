@@ -37,6 +37,20 @@ class NameMatchTest(unittest.TestCase):
                   "CODEBOOK_TEMPLATE.docx"]:
             self.assertIsNone(fcl.match(n), n)
 
+    def test_labelled_data_files(self):
+        ##SPSS and Stata files' embedded variable/value labels count (Ben,
+        ##2026-11-20); .sps and .do are syntax, not data
+        for n in ["S1_Dataset.sav", "Data_Effects of Response Format.sav", "x.ZSAV", "old.por", "data.dta"]:
+            self.assertEqual(fcl.match(n), "labelled_data", n)
+        for n in ["SPSScode_Effects of Response Format.sps", "clean.do", "data.savx", "data.csv"]:
+            self.assertIsNone(fcl.match(n), n)
+
+    def test_labelled_supplement_is_a_hit(self):
+        res = {"files": [{"name": "S1_File.sav", "url": "u1", "caption": "Dataset. (SAV)", "label": "S1 File"},
+                         {"name": "S2_Table.docx", "url": "u2", "caption": "Fit indices. (DOCX)", "label": "S2 Table"}]}
+        hits = fcl.supp_hits("t", "plos", res, set(), "")
+        self.assertEqual([(h["file_name"], h["how_found"]) for h in hits], [("S1_File.sav", "labelled_data")])
+
 
 class RouteTest(unittest.TestCase):
     def test_hosts(self):
@@ -293,9 +307,10 @@ class HandSamplePatterns(unittest.TestCase):
     def test_questionnaire_named_documents(self):
         for n in ("Questionnaire.pdf", "Questionnaire_Study1.docx", "cuestionario.pdf"):
             self.assertEqual(fcl.match(n), "questionnaire", n)
-        for n in ("questionnaire_data.csv", "Questionnaire.sav", "Questionnaire responses.docx",
-                  "questionnaire.R"):
+        for n in ("questionnaire_data.csv", "Questionnaire responses.docx", "questionnaire.R"):
             self.assertIsNone(fcl.match(n), n)
+        ##the responses, not the questionnaire; but an SPSS file's labels count
+        self.assertEqual(fcl.match("Questionnaire.sav"), "labelled_data")
 
     def test_codebook_sheets_in_a_data_workbook(self):
         for sh in ("Keys", "Variable codes", "Names_of_variables", "Labels", "Codebook"):
