@@ -55,6 +55,8 @@ burt_1915_emotions11,cov,data/covariance/pilot_rpackages.R,2026-11-17
 caci_2019_fbmemento8,cov,data/covariance/pmc_article_tables_ar.py,2026-11-19
 cammarata_2026_gibs6,cov,data/covariance/pmc_article_tables.py,2026-11-17
 canova_2020_energytpb7,cov,data/covariance/pmc_article_tables_as.py,2026-11-19
+caragiannis_2017_patrasiq_costofliving,rank,data/rankings/caragiannis_2017_patrasiq.py,2026-11-20
+caragiannis_2017_patrasiq_population,rank,data/rankings/caragiannis_2017_patrasiq.py,2026-11-20
 carcaustohuamani_2026_imevid7,cov,data/covariance/pmc_article_tables_at.py,2026-11-19
 cattell_1963_ability12,cov,data/covariance/batch_rpackages3.R,2026-11-17
 caychorodriguez_2021_pcibs5,cov,data/covariance/pmc_article_tables_af.py,2026-11-18
