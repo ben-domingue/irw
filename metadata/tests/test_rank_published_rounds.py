@@ -147,6 +147,10 @@ def problems(text, design_row, rule_rows):
         out.append(f"the table joins {len(hit)} rule sets, not one")
     elif hit[0].get("condorcet_method", "na") != "na":
         out.append(f"rule set {hit[0]['rule_set']} is a Condorcet count, which recount.py does not count")
+    elif (hit[0].get("surplus_transfer") == "seat_by_seat_restart" and design_row["seats"].isdigit()
+          and int(design_row["seats"]) > 1 and seats_seen != int(design_row["seats"])):
+        out.append(f"rule set {hit[0]['rule_set']} counts seat by seat, so the file needs a (seat:k) row for each of the "
+                   f"{design_row['seats']} seats")
     return out
 
 
@@ -175,6 +179,7 @@ class PublishedRounds(unittest.TestCase):
     def test_the_recount_reads_every_file(self):
         """recount.py reads the folder it was written for; its reader and this check must agree."""
         spec = importlib.util.spec_from_file_location("rank_recount", RANKINGS / "recount.py")
+        assert spec is not None and spec.loader is not None
         recount = importlib.util.module_from_spec(spec)
         sys.modules["rank_recount"] = recount  # a dataclass looks its module up here
         spec.loader.exec_module(recount)
@@ -221,6 +226,15 @@ class PublishedRounds(unittest.TestCase):
         self.assertTrue(problems(good, design, [{**rules[0], "condorcet_method": "schwartz_sequential_dropping"}]),
                         "a Condorcet rule set")
         self.assertEqual(problems(good, {**design, "seats": "unknown"}, rules), [], "seats unknown is the design row's gap")
+        seat_rules = [{**rules[0], "surplus_transfer": "seat_by_seat_restart"}]
+        two = {**design, "seats": "2"}
+        by_seat = ("round,item,votes\n1,(source),https://example.org/r\n1,(seat:1),\n1,c01,5\n1,c02,3\n"
+                   "1,(seat:2),\n1,c02,4\n1,c03,2\n1,(elected:c01),\n1,(elected:c02),\n")
+        self.assertEqual(problems(by_seat, two, seat_rules), [])
+        no_seat_rows = ("round,item,votes\n1,(source),https://example.org/r\n1,c01,5\n1,c02,3\n2,c02,4\n2,c03,2\n"
+                        "1,(elected:c01),\n1,(elected:c02),\n")
+        self.assertEqual(problems(no_seat_rows, two, rules), [], "well formed without them under another rule set")
+        self.assertEqual(len(problems(no_seat_rows, two, seat_rules)), 1, "a seat-by-seat rule needs a (seat:k) row per seat")
 
 
 if __name__ == "__main__":

@@ -18,7 +18,7 @@
 ##  1,(source),<url>            where the figures come from; one row per document, at least one
 ##  1,(threshold),<votes>       the threshold the source prints (optional)
 ##  1,(elected:<code>),         one row per elected candidate
-##  <round>,(lot:<code>),       the candidate a draw settled in that round (see Ties)
+##  <round>,(lot:<code>),       the candidate a draw settled in that round, only where the source shows the draw (see Ties)
 ##  1,(first_marks),            round 1 is the first marks as voted, from a page that prints no tabulation (see First marks)
 ##  1,(seat:<k>),               a sequential count with one page per seat: the rows after this one are seat k, rounds from 1 again
 ##A candidate that is not listed in a round has 0 votes there. Figures are compared exactly.
@@ -32,10 +32,10 @@
 ##or blank is left out of the page even when it counts for a later choice. Round 1 of the count here uses the first valid
 ##choice. With (first_marks), round 1 is compared with the marks in first place as voted; later rounds are compared as usual.
 ##Ties. A tie for fewest votes, or for the largest surplus, is never broken silently. The count stops with UNRESOLVED_TIE
-##(a warning). To follow a draw the source shows, add the (lot:<code>) row of that round (rounds after folding). The status is
+##(a warning). To follow a draw the source shows, add the (lot:<code>) row of that round, numbered as the count numbers its rounds. The status is
 ##then `match_by_lot` and not `match`.
 ##
-##A table is read as ballots: one ballot is one id; the item at position p is the row with resp = p; a position with no row is a
+##A table is read as ballots: one ballot is one (task, id); the item at position p is the row with resp = p; a position with no row is a
 ##skipped ranking; (overvote) is an overvote; a ballot with no rows is counted from n_ballots_cast of the design row.
 ##Multiple seats (STV) use exact fractions with the rule set's truncation. The order inside a round, from Minneapolis ch. 167:
 ##  a. count; enough candidates at the threshold are elected and the count ends; so does as few continuing as seats left;
@@ -206,9 +206,9 @@ def walk(ballot: tuple, continuing: set[str], c: Cells, writein_passed: bool) ->
 
 def ballots_of(table_rows: Iterable[dict], n_positions: int, n_ballots: int) -> Counter:
     """Identical ballots grouped: {(item or None per position): count}, empty ballots included as all None."""
-    marks: dict[str, dict[int, str]] = defaultdict(dict)
+    marks: dict[tuple, dict[int, str]] = defaultdict(dict)
     for r in table_rows:
-        b, pos = marks[str(r["id"])], int(r["resp"])
+        b, pos = marks[str(r.get("task", "1")), str(r["id"])], int(r["resp"])
         if pos in b:
             raise ValueError(f"ballot {r['id']}: two rows at position {pos}")
         b[pos] = r["item"]
@@ -286,8 +286,13 @@ def _held_at_threshold(row: dict, c: Cells, groups: Counter, design: dict, input
     last_defeat_transfer says; then all continuing are elected."""
     together = c.surplus == "fractional_all_votes_truncated_together"
     seats = int(design["seats"])
+    if c.decimals is None:
+        raise ValueError(f"{c.rule_set}: surplus_transfer is {c.surplus!r} and surplus_decimals is 'na'")
     lots = {int(k): v for k, v in (inputs.get("lots") or {}).items()}
-    writein_passed = c.writein_declared_test and inputs.get("writein_filed") is False
+    filed = inputs.get("writein_filed")
+    if c.writein_declared_test and any(WRITEIN in b for b in groups) and filed is None:
+        raise ValueError(f"{c.rule_set}: whether a write-in candidate filed is unknown, and a write-in mark is present")
+    writein_passed = c.writein_declared_test and filed is False
     empty_key = next((b for b in groups if all(x is None for x in b)), None)
     cont = {x for b in groups for x in b if x is not None and x != OVERVOTE and not (x == WRITEIN and writein_passed)}
     live = []
@@ -734,6 +739,8 @@ def compare(ours: dict, pub: Published, groups: Counter) -> dict:
     for rd in ours["rounds"]:
         by_seat[rd.get("seat", 1)].append(rd)
     ours_n = pub_n = 0
+    for seat in sorted(set(by_seat) - set(pub.rounds)):  # a sequential count has a page per seat; the file must have them
+        diffs.append(f"seat {seat}: our count has rounds, the published file has no (seat:{seat}) rows")
     for seat, theirs_all in sorted(pub.rounds.items()):
         mine_all = by_seat.get(seat, [])
         base = _inactive(mine_all[0]) if mine_all else Fraction(0)
