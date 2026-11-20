@@ -41,8 +41,9 @@ from the original deposit) unless --force; --force exists to re-plan a built
 record as a check on this tool, not to ingest it twice.
 
 Sample floor (datastandard.md, ruled on #3421): an ESM table needs 30 unique
-ids, and each item answered a median of 20 times per person (zero for a
-person who skipped it), in the table as shipped;
+ids, and a median of 20 responses per person per item, pooled over the
+table's person x item grid (zero where a person skipped an item), in the
+table as shipped;
 a table with 100 or more people clears the ordinary floor and needs neither.
 `plan` flags a record under 30 people (counted in the data file, not openESM's
 n_participants) as a stop, and each proposed table that misses the floor as a
@@ -125,29 +126,26 @@ ANCHOR = re.compile(r"(-?\d+(?:\.\d+)?)\s*=\s*(.*?)\s*"
 TODO = "TODO"
 MIN_IDS = 100                               # datastandard.md sample floor
 ESM_MIN_IDS = 30                            # ESM floor (#3421): people, and
-ESM_MIN_MEDIAN = 20                         # each item's median responses per person
+ESM_MIN_MEDIAN = 20                         # pooled median responses per person per item
 
 
 def floor_check(counts):
     """`counts`: responses per person (rows) per item (columns), zero where a
-    person in the table never answered an item. Each item's median over people
-    must reach ESM_MIN_MEDIAN: Ben's "the median person answers each item at
-    least 20 times" (#3421), read per item rather than pooled. Returns (people,
-    lowest item median, shortfall); shortfall is "" when the table clears."""
+    person in the table never answered an item. The median over that whole
+    person x item grid must reach ESM_MIN_MEDIAN (#3421: one pooled median, so
+    a thin item can stay in a table that clears 20 overall). Returns (people,
+    median, shortfall); shortfall is "" when the table clears."""
     n = len(counts)
-    meds = counts.median() if n else pd.Series(0.0, index=counts.columns)
-    low = float(meds.min()) if len(meds) else 0.0
+    med = float(counts.stack().median()) if counts.size else 0.0
     if n >= MIN_IDS:
-        return n, low, ""
+        return n, med, ""
     why = []
     if n < ESM_MIN_IDS:
         why.append(f"{n} people, under {ESM_MIN_IDS}")
-    thin = meds[meds < ESM_MIN_MEDIAN]
-    if len(thin):
-        why.append(f"{len(thin)} of {len(meds)} item(s) answered a median of under "
-                   f"{ESM_MIN_MEDIAN} times per person ("
-                   + ", ".join(f"{c} {m:g}" for c, m in thin.items()) + ")")
-    return n, low, "; ".join(why)
+    if med < ESM_MIN_MEDIAN:
+        why.append(f"median of {med:g} responses per person per item, under "
+                   f"{ESM_MIN_MEDIAN}")
+    return n, med, "; ".join(why)
 
 
 # --------------------------------------------------------------------------
@@ -606,13 +604,14 @@ def plan(args):
         counts = answered.groupby(df["id"]).sum()
         counts = counts[counts.sum(axis=1) > 0]
         n, med, short = floor_check(counts)
-        t["floor"] = OrderedDict(people=n, lowest_item_median=med)
+        t["floor"] = OrderedDict(people=n, median=med)
         if short and n_ids >= ESM_MIN_IDS:       # else the record stop covers it
             flag(f"STOP for table {t['name']}: {short} (ESM floor, datastandard.md, "
-                 f"ruled on #3421: {ESM_MIN_IDS} people and each item a median "
-                 f"of {ESM_MIN_MEDIAN} per person, unless {MIN_IDS}+ people). Move "
-                 "a thin item to not_shipped, or merge the table into one that "
-                 "clears the floor only if it is the same instrument. The "
+                 f"ruled on #3421: {ESM_MIN_IDS} people and a median of "
+                 f"{ESM_MIN_MEDIAN} responses per person per item, pooled over the "
+                 f"table, unless {MIN_IDS}+ people). Move thin items to "
+                 "not_shipped, or merge the table into one that clears the floor "
+                 "only if it is the same instrument. The "
                  "generated script checks the tables as shipped.")
     singles = [t["name"] for t in tables if len(t["items"]) == 1]
     if singles:
@@ -730,8 +729,8 @@ def report(spec, rec, df):
                      f"{tb['items'][0]['scale'][0]}..{tb['items'][0]['scale'][1]}"
                      + (f", missing codes {tb['items'][0]['na_codes']}"
                         if tb['items'][0]['na_codes'] else "")
-                     + (f"; {tb['floor']['people']} people, lowest item median "
-                        f"{tb['floor']['lowest_item_median']:g} responses per person"
+                     + (f"; {tb['floor']['people']} people, median "
+                        f"{tb['floor']['median']:g} responses per person per item"
                         if "floor" in tb else "") + ")")
         for e in tb["items"]:
             lines.append(f"- `{e['item']}`: {e['stem'][:90]} "
@@ -845,7 +844,8 @@ CACHE = Path.home() / ".cache" / "irw" / "openesm"
 HEADERS = {{"User-Agent": "IRW-openESM-ingest/1.0"}}
 
 # Sample floor (datastandard.md, #3421): 100 people, or for ESM tables 30
-# people and each item answered a median of 20 times per person.
+# people and a median of 20 responses per person per item, pooled over the
+# table's person x item grid (zero where a person skipped an item).
 MIN_IDS, ESM_MIN_IDS, ESM_MIN_MEDIAN = {min_ids}, {esm_min_ids}, {esm_min_median}
 
 REC = {zrec!r}
@@ -974,10 +974,10 @@ def main():
         if DATE:
             assert (long.groupby("id")["date"].diff().dropna() >= 0).all()
         counts = long.groupby(["id", "item"]).size().unstack(fill_value=0)
-        n, low = len(counts), counts.median().min()
-        assert n >= MIN_IDS or (n >= ESM_MIN_IDS and low >= ESM_MIN_MEDIAN), (
-            table["name"], f"{{n}} people, lowest item median {{low:g}} responses "
-            "per person: under the sample floor")
+        n, med = len(counts), counts.stack().median()
+        assert n >= MIN_IDS or (n >= ESM_MIN_IDS and med >= ESM_MIN_MEDIAN), (
+            table["name"], f"{{n}} people, median {{med:g}} responses per person "
+            "per item: under the sample floor")
         bad = [c for c in run_qc(long) if c.status == "fail"]
         assert not bad, (table["name"], [(c.name, c.detail) for c in bad])
         path = os.path.join(OUTDIR, f"{{table['name']}}.csv")
