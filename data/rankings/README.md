@@ -19,6 +19,7 @@ python3 -I data/rankings/tideman_ers.py build <raw dir> <out dir> --all         
 python3 -I data/rankings/mao_2013_mturk_rankings.py build <raw dir> <out dir>    # MTurk dots/8-puzzle rankings (PrefLib 00024-00025)
 python3 -I data/rankings/vanderstraeten_2012_votepluriel_irv.py build <raw dir> <out dir>  # Vote au pluriel 2012 IRV (PrefLib 00074)
 python3 -I data/rankings/kamwa_2017_fortdefrance.py build <raw dir> <out dir>  # Fort-de-France 2017 IRV and Borda-4 (PrefLib 00072)
+python3 -I data/rankings/caragiannis_2017_patrasiq.py build <raw dir> <out dir>  # PatrasIQ 2016 cities survey, two questions (PrefLib 00034)
 python3 -m irw_validate.rankings --design data/rankings/design_tables.csv <out dir>/*.csv
 ```
 
