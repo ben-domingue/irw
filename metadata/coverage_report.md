@@ -1,4 +1,4 @@
-# Coverage audit -- 2026-11-19
+# Coverage audit -- 2026-11-20
 
 Denominator: **10967 live tables** (10929 after excluding 38 withdrawn). Definitions in the header of `metadata/17_coverage.R`; per-table rows in `coverage_matrix.csv`. Report-only: nothing here is fixed automatically.
 
@@ -13,7 +13,7 @@ Denominator: **10967 live tables** (10929 after excluding 38 withdrawn). Definit
 | page | 10929 | 10929 | 0 | 100 |
 | tag_row | 8389 | 8277 | 112 | 98.7 |
 | script | 10929 | 10759 | 170 | 98.4 |
-| codebook_link | 6568 | 3995 | 2573 | 60.8 |
+| codebook_link | 7221 | 5570 | 1651 | 77.1 |
 | column_docs | 8228 | 6403 | 1825 | 77.8 |
 | data_note (info) | 10913 | 2073 | 8840 | 19 |
 | has_construct_name | 8389 | 8277 | 112 | 98.7 |
