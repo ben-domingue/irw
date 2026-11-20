@@ -728,6 +728,8 @@ def check_spec(spec):
     ex = spec.get("exclude_ids", [])
     if not isinstance(ex, list) or len(set(map(str, ex))) != len(ex):
         errs.append("exclude_ids: a list of distinct ids")
+    errs += [f"{t['name']}: dict_note must be a string" for t in spec["tables"]
+             if not isinstance(t.get("dict_note", ""), str)]
     if spec["candidates"]:
         errs.append("candidates is not empty: move each into a table or not_shipped")
     names = [t["name"] for t in spec["tables"]]
@@ -1023,6 +1025,7 @@ def emit(args):
                     if licence_note else
                     f"; original deposit {o['link_to_data']}, also {olic}.")
                  + (f" {spec['licence_note']}" if spec.get("licence_note") else "")
+                 + (f" {t['dict_note']}" if t.get("dict_note") else "")
                  + f" See data/{spec['script']}.py.")
         dict_rows.append(OrderedDict(
             table=t["name"], description=t["description"],

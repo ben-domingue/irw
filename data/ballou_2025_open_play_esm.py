@@ -43,8 +43,7 @@ Coding notes
   and time stamp.
 * For the openESM report (#1698): 0075_ballou predates open-play v1.3.0,
   which removed 17 of its people (68 rows) as unqualified or partial; and
-  openESM types Wed Nov 18 15:34:07 EST 2026 as Date although it holds full
-  ISO time stamps.
+  openESM types `date` as Date although it holds full ISO time stamps.
 * The deposit's BANGS items carry the lead-in 'In my most recent session of
   [game]...' (codebook.xlsx, Daily tab); openESM's wording omits it. The
   stems here include it.

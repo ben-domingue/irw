@@ -48,6 +48,7 @@
    "name": "ballou_2025_bangs",
    "instrument": "Basic Needs in Games Scale (BANGS; Ballou & Deterding, 2024), 6-item daily version",
    "description": "Daily diary (US participants, 30 days): six BANGS items about the participant's most recent gaming session, asked on days they had played in the previous 24 hours. 1 = strongly disagree .. 7 = strongly agree.",
+   "dict_note": "Sparse per person: the median person answers each item 7 times (interquartile range 2 to 19), because most people completed only a few of the 30 daily surveys and BANGS is asked only on days they had played. These are short diaries for most people, not a dense diary.",
    "items": [
     {
      "column": "gaming_autonomy",
@@ -211,6 +212,7 @@
    "name": "ballou_2025_bpnsfs",
    "instrument": "Basic Psychological Need Satisfaction and Frustration Scale (BPNSFS), brief daily version",
    "description": "Daily diary (US participants, 30 days): one BPNSFS item for each of autonomy, competence and relatedness satisfaction and frustration, about the day. 1 = very strongly disagree .. 7 = very strongly agree.",
+   "dict_note": "Sparse per person: the median person answers each item 8 times (interquartile range 2 to 23), because most people completed only a few of the 30 daily surveys. These are short diaries for most people, not a dense diary.",
    "items": [
     {
      "column": "needs_autonomy_satisfied",
@@ -442,7 +444,7 @@
  },
  "notes": [
   "17 people (68 rows) are dropped (EXCLUDE_IDS). openESM built its copy on 2026-07-22 from open-play v1.2.3; open-play v1.3.0 (2026-10-16) 'corrected participant qualification' and 'fixed partial-survey-response filtering', and these 17 are not in its survey_daily: 12 are gone from the release, 3 are qualified=FALSE in its intake, 2 are qualified but filtered out. Every shipped value in the remaining rows matches v1.3.0 where rows match on id and time stamp.",
-  "For the openESM report (#1698): 0075_ballou predates open-play v1.3.0, which removed 17 of its people (68 rows) as unqualified or partial; and openESM types Wed Nov 18 15:34:07 EST 2026 as Date although it holds full ISO time stamps.",
+  "For the openESM report (#1698): 0075_ballou predates open-play v1.3.0, which removed 17 of its people (68 rows) as unqualified or partial; and openESM types `date` as Date although it holds full ISO time stamps.",
   "The deposit's BANGS items carry the lead-in 'In my most recent session of [game]...' (codebook.xlsx, Daily tab); openESM's wording omits it. The stems here include it.",
   "bpnsfs_dup_item / bpnsfs_dup_score repeat one BPNSFS item as a consistency check (v2 preprint, data quality, says BANGS; the data say BPNSFS). Not shipped: it duplicates an item already in the table, and no row fails the check (bpnsfs_failed_att_check is FALSE throughout)."
  ],
