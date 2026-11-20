@@ -109,6 +109,7 @@ duman_2019_ipat10,cov,data/covariance/pmc_article_tables_ag.py,2026-11-18
 duncan_1968_peer10,cov,data/covariance/batch_sem.R,2026-11-17
 elam_2021_alcoholprs7,cov,data/covariance/pmc_article_tables_as.py,2026-11-19
 elemo_2020_fcv19s7,cov,data/covariance/pmc_article_tables_ai.py,2026-11-18
+ersche_2017_cohs6,cov,data/covariance/pmc_article_tables_av.py,2026-11-19
 escalantebarrios_2020_cprs15,cov,data/covariance/pmc_article_tables_ac.py,2026-11-18
 espejo_2022_swls5,cov,data/covariance/pmc_article_tables_aj.py,2026-11-18
 ewen_2022_ims9,cov,data/covariance/pmc_article_tables_aq.py,2026-11-19
@@ -147,6 +148,7 @@ hagger_2018_raa9,cov,data/covariance/osf_hagger2018_raa.py,2026-11-17
 halman_2018_ocat9,cov,data/covariance/pmc_article_tables_ag.py,2026-11-18
 hamatani_2024_bbqj6,cov,data/covariance/pmc_article_tables_u.py,2026-11-18
 han_2022_gistw9,cov,data/covariance/pmc_article_tables_ap.py,2026-11-19
+han_2025_phubbing7,cov,data/covariance/pmc_article_tables_av.py,2026-11-19
 hardee_2026_drinkmotives12,cov,data/covariance/pmc_article_tables_an.py,2026-11-19
 harman_1967_holzinger9,cov,data/covariance/batch_rpackages3.R,2026-11-17
 harman_1967_political8,cov,data/covariance/batch_rpackages3.R,2026-11-17
@@ -232,12 +234,15 @@ mohdrasdi_2020_scct7,cov,data/covariance/plos_mohdrasdi2020_scct.py,2026-11-18
 montagni_2022_dvl7,cov,data/covariance/pmc_article_tables_ai.py,2026-11-18
 montanesmuro_2022_ercbs24,cov,data/covariance/pmc_article_tables_ad.py,2026-11-18
 morenolavaho_2024_paknow9,cov,data/covariance/pmc_article_tables_ag.py,2026-11-18
+morgan_2026_prenatalconflict5,cov,data/covariance/pmc_article_tables_av.py,2026-11-19
 morillosarto_2025_adolescentdistress5,cov,data/covariance/pmc_article_tables.py,2026-11-17
 moros_2025_koospf11,cov,data/covariance/pmc_article_tables_n.py,2026-11-17
 morrison_2015_motivation11,cov,data/covariance/pmc_article_tables_af.py,2026-11-18
+muis_2024_vaxemotion8,cov,data/covariance/pmc_article_tables_av.py,2026-11-19
 mullen_1939_physical8,cov,data/covariance/pilot_rpackages.R,2026-11-17
 muller_2026_dogleisure10,cov,data/covariance/pmc_article_tables_n.py,2026-11-17
 mulugeta_2026_mlhfq21,cov,data/covariance/pmc_article_tables_n.py,2026-11-17
+nakirikanti_2026_schizotypy7,cov,data/covariance/pmc_article_tables_av.py,2026-11-19
 nelsen_2019_ers12,cov,data/covariance/pmc_article_tables_ac.py,2026-11-18
 nohe_2015_fwcstrain4,cov,data/covariance/batch_metasem.R,2026-11-17
 nohe_2015_wfcstrain4,cov,data/covariance/batch_metasem.R,2026-11-17
@@ -245,9 +250,13 @@ norton_2013_hads14,cov,data/covariance/batch_metasem.R,2026-11-17
 nothel_2023_albs10,cov,data/covariance/pmc_article_tables_an.py,2026-11-19
 okorn_2024_workresume9,cov,data/covariance/pmc_article_tables_ao.py,2026-11-19
 or_2024_tam4,cov,data/covariance/zenodo_or2024_tam.py,2026-11-17
+ornaghi_2026_teacherstress7,cov,data/covariance/pmc_article_tables_av.py,2026-11-19
 oviedo_2023_panama9,cov,data/covariance/pmc_article_tables_ap.py,2026-11-19
 ozdemir_2026_mentormindsets8,cov,data/covariance/pmc_article_tables.py,2026-11-17
+padmanabhanunni_2023_covidptsd7,cov,data/covariance/pmc_article_tables_av.py,2026-11-19
 padmanabhanunni_2023_vax12,cov,data/covariance/pmc_article_tables_ae.py,2026-11-18
+padmanabhanunni_2025_loneliness7,cov,data/covariance/pmc_article_tables_av.py,2026-11-19
+padmanabhanunni_2025_smartphoneptsd7,cov,data/covariance/pmc_article_tables_av.py,2026-11-19
 papamitsiou_2021_edl21,cov,data/covariance/pmc_article_tables_ad.py,2026-11-18
 paredes_2018_mhpqintensity6,cov,data/covariance/pmc_article_tables_aj.py,2026-11-18
 paschke_2021_somedisa10,cov,data/covariance/pmc_article_tables_ad.py,2026-11-18
@@ -260,6 +269,7 @@ pisanti_2016_jobburnout14,cov,data/covariance/pmc_article_tables_al.py,2026-11-1
 plesec_2024_tdshf8,cov,data/covariance/pmc_article_tables_ag.py,2026-11-18
 pollack_2012_estress9,cov,data/covariance/batch_rpackages2.R,2026-11-17
 popovac_2025_ohip5srb5,cov,data/covariance/pmc_article_tables_y.py,2026-11-18
+pretorius_2022_coherence7,cov,data/covariance/pmc_article_tables_av.py,2026-11-19
 pretorius_2022_pis10,cov,data/covariance/pmc_article_tables_ag.py,2026-11-18
 pretorius_2023_tss5,cov,data/covariance/pmc_article_tables_ak.py,2026-11-18
 pretorius_2025_isi7,cov,data/covariance/pmc_article_tables_u.py,2026-11-18
@@ -285,12 +295,14 @@ scalco_2017_tpborganic,cov,data/covariance/batch_metasem.R,2026-11-17
 scherhag_2026_hexacod7,cov,data/covariance/zenodo_scherhag2026_hexacod.py,2026-11-17
 schmalbach_2019_sharedreality18,cov,data/covariance/pmc_article_tables_al.py,2026-11-19
 schneider_2022_genderpaygap8,cov,data/covariance/pmc_article_tables_ar.py,2026-11-19
+schnell_2023_maps7,cov,data/covariance/pmc_article_tables_av.py,2026-11-19
 schnettler_2024_ftowcdyad6,cov,data/covariance/pmc_article_tables_at.py,2026-11-19
 selvi_2026_alexithymia9,cov,data/covariance/pmc_article_tables_ar.py,2026-11-19
 serdyuk_2026_riasec18,cov,data/covariance/zenodo_serdyuk2026_riasec.py,2026-11-17
 servidio_2021_darktriad7,cov,data/covariance/pmc_article_tables_at.py,2026-11-19
 shefferhilel_2026_presenteeism7,cov,data/covariance/pmc_article_tables_au.py,2026-11-19
 shek_2023_covidmentalhealth22,cov,data/covariance/pmc_article_tables_ak.py,2026-11-18
+shen_2022_leadercwb7,cov,data/covariance/pmc_article_tables_av.py,2026-11-19
 shen_2022_tpbfood5,cov,data/covariance/plos_shen2022_tpbfood.py,2026-11-17
 shirabe_2023_praqr2_10,cov,data/covariance/pmc_article_tables_af.py,2026-11-18
 siegel_2019_pen13,cov,data/covariance/pmc_article_tables_ac.py,2026-11-18
@@ -354,6 +366,8 @@ zayed_2023_wemwbs14,cov,data/covariance/pmc_article_tables_al.py,2026-11-19
 zhan_2020_cet5,cov,data/covariance/pmc_article_tables_aj.py,2026-11-18
 zhang_2019_hapa10,cov,data/covariance/osf_zhang2019_hapa.py,2026-11-17
 zhang_2026_aidelegation7,cov,data/covariance/pmc_article_tables_y.py,2026-11-18
+zhao_2017_osas6,cov,data/covariance/pmc_article_tables_av.py,2026-11-19
 zhao_2021_doctoralidentity12,cov,data/covariance/pmc_article_tables_ac.py,2026-11-18
 zieff_2023_snapiv18,cov,data/covariance/pmc_article_tables_ad.py,2026-11-18
 zmavc_2022_bsmas6,cov,data/covariance/pmc_article_tables_at.py,2026-11-19
+zulkiewicz_2024_antiindustry7,cov,data/covariance/pmc_article_tables_av.py,2026-11-19
