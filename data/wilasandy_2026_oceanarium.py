@@ -28,6 +28,7 @@ sys.path.insert(0, str(REPO_ROOT))
 from irw_validate._checks import run_qc  # noqa: E402
 
 OUT = REPO_ROOT / "automated_finding" / "irw_output"
+OUT.mkdir(parents=True, exist_ok=True)
 URL = 'https://zenodo.org/api/records/20180227/files/Data%20Modeling%20Revisit%20Intention%20in%20Experience%20Based%20Tourism.xlsx/content'
 N_ROWS = 146
 ID_COL = None

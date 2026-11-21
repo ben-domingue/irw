@@ -26,6 +26,7 @@ sys.path.insert(0, str(REPO_ROOT))
 from irw_validate._checks import run_qc  # noqa: E402
 
 OUT = REPO_ROOT / "automated_finding" / "irw_output"
+OUT.mkdir(parents=True, exist_ok=True)
 URL = 'https://zenodo.org/api/records/15699015/files/Data_Millennials%20Voluntary%20Tax%20Compliance%20Behavior-%20TPB%20Framework.xlsx/content'
 N_ROWS = 438
 ID_COL = None

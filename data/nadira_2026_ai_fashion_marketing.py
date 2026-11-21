@@ -30,6 +30,7 @@ sys.path.insert(0, str(REPO_ROOT))
 from irw_validate._checks import run_qc  # noqa: E402
 
 OUT = REPO_ROOT / "automated_finding" / "irw_output"
+OUT.mkdir(parents=True, exist_ok=True)
 URL = 'https://zenodo.org/api/records/21953535/files/Responden%20Kuisioner%20Thesis%20The%20Influence%20of%20Artificial%20Intelligence%20AI%20Based%20Social%20Media%20Marketing%20Content%20on%20Brand%20Trust%20and%20Purchase%20Decision%20Among%20Generation%20Z%20in%20the%20Fashion%20and%20Beauty%20Industry.xlsx/content'
 N_ROWS = 320
 ID_COL = None

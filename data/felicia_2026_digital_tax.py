@@ -24,6 +24,7 @@ sys.path.insert(0, str(REPO_ROOT))
 from irw_validate._checks import run_qc  # noqa: E402
 
 OUT = REPO_ROOT / "automated_finding" / "irw_output"
+OUT.mkdir(parents=True, exist_ok=True)
 URL = 'https://zenodo.org/api/records/20738648/files/Dataset_Trust%2C%20Power%2C%20and%20Digital%20Tax%20Compliance%20Across%20Generations.xlsx/content'
 N_ROWS = 555
 ID_COL = None

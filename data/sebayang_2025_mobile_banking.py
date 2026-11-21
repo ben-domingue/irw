@@ -21,6 +21,7 @@ sys.path.insert(0, str(REPO_ROOT))
 from irw_validate._checks import run_qc  # noqa: E402
 
 OUT = REPO_ROOT / "automated_finding" / "irw_output"
+OUT.mkdir(parents=True, exist_ok=True)
 URL = 'https://ndownloader.figshare.com/files/58587418'
 N_ROWS = 200
 ID_COL = 'No.'

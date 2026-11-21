@@ -24,6 +24,7 @@ sys.path.insert(0, str(REPO_ROOT))
 from irw_validate._checks import run_qc  # noqa: E402
 
 OUT = REPO_ROOT / "automated_finding" / "irw_output"
+OUT.mkdir(parents=True, exist_ok=True)
 URL = 'https://zenodo.org/api/records/21155959/files/Survey_Dataset_EWallet.xlsx/content'
 N_ROWS = 120
 ID_COL = 'RespondenID'

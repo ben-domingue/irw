@@ -27,6 +27,7 @@ sys.path.insert(0, str(REPO_ROOT))
 from irw_validate._checks import run_qc  # noqa: E402
 
 OUT = REPO_ROOT / "automated_finding" / "irw_output"
+OUT.mkdir(parents=True, exist_ok=True)
 URL = 'https://data.mendeley.com/public-files/datasets/6bc2mbztmy/files/092c9c3c-fe1d-49fb-9ed3-9c7b3fbaf181/file_downloaded'
 N_ROWS = 452
 ID_COL = 'ResponseId'

@@ -28,6 +28,7 @@ sys.path.insert(0, str(REPO_ROOT))
 from irw_validate._checks import run_qc  # noqa: E402
 
 OUT = REPO_ROOT / "automated_finding" / "irw_output"
+OUT.mkdir(parents=True, exist_ok=True)
 URL = 'https://zenodo.org/api/records/15703337/files/Online%20Shopping%20Platform%20Preferences%20The%20Role%20of%20Product%20Assortment%20and%20Social%20Influence_RESPONSE%20DATA.xlsx/content'
 N_ROWS = 430
 ID_COL = None
