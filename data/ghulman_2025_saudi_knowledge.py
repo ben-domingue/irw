@@ -9,7 +9,8 @@
 #   largest animal, capital, flag colour, provinces, religion, seas, beaches, UNESCO sites); the .sav value labels
 #   give the options, and the file's own score columns (Q5.Score, Q.7 .. Q.16) mark each answer right (1) or wrong (0).
 #   Checked: every score equals (answer == the keyed option), and TotalScore is their sum for all 543 rows.
-# Table: ghulman_2025_saudi_knowledge -- item = the .sav variable name of the question (Continent, Capital, ...),
+# Table: ghulman_2025_saudi_knowledge -- item = the question number the deposit's score columns use (Q5, Q7..Q16;
+#   SCORES below maps each to its .sav answer variable: Q5 Continent, Q7 GeographicalSizeComparison, ...),
 #   resp = the deposit's own score. The deposit scores an unanswered question 0; here it is missing instead (5-25
 #   per question). Open-ended questions 6 and 17-20 are not carried.
 # Covariates: cov_gender (Female/Male/Other; the label "NA" -> missing), cov_generation, cov_nationality_group
@@ -62,7 +63,7 @@ def main():
     covs = list(COVS.values())
     w = d[["id"] + covs].copy()
     for ans, sc in SCORES.items():
-        w[ans] = d[sc].where(d[ans].notna())
+        w["Q" + sc.replace("Q.", "").replace("Q", "").replace(".Score", "")] = d[sc].where(d[ans].notna())
     t = w.melt(id_vars=["id"] + covs, var_name="item", value_name="resp").dropna(subset=["resp"])
     t["resp"] = t["resp"].astype(int)
     assert set(t["resp"]) == {0, 1}
