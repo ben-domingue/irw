@@ -1,5 +1,21 @@
 # IRW Automated Finding — TODO
 
+## Repos sweep 2026-11-20 (mode 3, 15 new topics x 9 languages) — 169 tables uploaded to the shard 9 draft
+
+Full write-up in `BATCH_LOG.md` (2026-11-20 — repos sweep).
+
+- [x] **UPLOADED 2026-11-21 by Claude (Ben's go-ahead in-session, "please do the uploads")**: 169 response tables
+  (396,057 responses) to the item_response_warehouse_9 draft, 169/169 row-count verified; Ben publishes.
+  (35 deposits; list in BATCH_LOG). No item text.
+- [ ] 104 `unworked` leads in `leads/repos_leads_2026-11-20.csv`: 36 never opened because Mendeley's public API
+  returned 502 all session (re-profile them first), ~66 Zenodo/figshare/Dataverse/OSF rows not yet opened (green
+  purchase, destination image, service quality, tax-compliance experiments), and 2 holds below.
+- [ ] Holds: Novela (Zenodo 17302208, blocks observed 1-4 vs 2-5 -- a shifted 4-point scale?) and Rigglets (Mendeley
+  wv525y5dn2, anchors printed Strongly agree..Strongly disagree; which end is 1?). Both need the paper or the authors.
+- [ ] Item text later, cheap from deposit files: fransisca_2026_*, prihatna_2025/2026_* (stems are the headers,
+  anchors the option labels), apsari_2025_* (form PDF), endeshaw_2026_healthperf (codebook PDF), ghulman_2025_*
+  (.sav labels + key), setiawan_2026_* (codebook). CAS / HEAS / EGuiQ / UTAUT2 need register rows first.
+
 ## Replay-ha 2026-11-15 (72 unworked rows of leads/repos_replay_2026-11-02_good_ha.csv) — 45 tables staged, 11 held
 
 Full write-up in `BATCH_LOG.md` (2026-11-15 — replay-ha). Every row's outcome is in its `status` cell.

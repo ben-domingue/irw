@@ -12981,3 +12981,138 @@ date,query,output_file,notes
 2026-11-14,klantloyaliteit,runs/candidates_2026-11-14.csv,repos sweep 2026-11-14 (mode 3): 15 new topics x 9 languages (2 OSCE translations already logged); 988 candidates
 2026-11-14,고객 충성도,runs/candidates_2026-11-14.csv,repos sweep 2026-11-14 (mode 3): 15 new topics x 9 languages (2 OSCE translations already logged); 988 candidates
 2026-11-16,[full] 125 terms x journals=all,runs/pmc_monthly_candidates_full_2026-11-16.csv,"pmc monthly-script automated run; mode=full; 66 candidates triaged; 123/125 terms visited (52 hit per-term cap 1, 0 out of attempts); run was hard-killed at the 2-hour background limit 2 terms short of the full list (youth development, employability skills unreached) -- post-loop bookkeeping (ledger append, Step 2b, this log row) completed by hand after the fact."
+2026-11-20,brand trust,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,confianza en la marca,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,Markenvertrauen,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,confiance envers la marque,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,品牌信任,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,ブランド信頼,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,الثقة بالعلامة التجارية,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,merkvertrouwen,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,브랜드 신뢰,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,service quality,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,calidad del servicio,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,Servicequalität,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,qualité de service,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,服务质量,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,サービス品質,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,جودة الخدمة,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,servicekwaliteit,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,서비스 품질,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,green purchase intention,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,intención de compra verde,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,grüne Kaufabsicht,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,intention d'achat vert,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,绿色购买意愿,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,グリーン購買意図,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,نية الشراء الأخضر,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,groene aankoopintentie,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,녹색 구매 의도,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,mobile banking adoption,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,adopción de banca móvil,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,Mobile-Banking-Nutzung,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,adoption de la banque mobile,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,手机银行采纳,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,モバイルバンキング利用意図,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,تبني الخدمات المصرفية عبر الهاتف المحمول,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,adoptie van mobiel bankieren,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,모바일 뱅킹 수용,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,e-wallet,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run; re-run in runs/candidates_2026-11-20_supp_*.csv against the source(s) a network outage left unsearched
+2026-11-20,billetera electrónica,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,elektronische Geldbörse,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,portefeuille électronique,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,电子钱包,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,電子マネー,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,المحفظة الإلكترونية,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,digitale portemonnee,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,전자지갑,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,destination image,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,imagen del destino,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,Destinationsimage,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,image de la destination,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,目的地形象,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,観光地イメージ,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,صورة الوجهة السياحية,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,bestemmingsimago,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,관광지 이미지,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,hotel guest satisfaction,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,satisfacción del huésped hotel,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run; re-run in runs/candidates_2026-11-20_supp_*.csv against the source(s) a network outage left unsearched
+2026-11-20,Hotelgästezufriedenheit,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,satisfaction des clients de l'hôtel,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,酒店顾客满意度,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,ホテル顧客満足度,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,رضا نزلاء الفندق,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,tevredenheid hotelgasten,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,호텔 고객 만족,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,dental anxiety,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,ansiedad dental,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,Zahnbehandlungsangst,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,anxiété dentaire,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,牙科焦虑,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,歯科不安,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,القلق من طب الأسنان,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,tandartsangst,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,치과 불안,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,oral health knowledge,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,conocimientos de salud oral,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,Mundgesundheitswissen,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,connaissances en santé bucco-dentaire,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,口腔健康知识,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,口腔保健知識,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,المعرفة بصحة الفم,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,kennis mondgezondheid,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,구강건강 지식,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,antibiotic use knowledge,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,conocimiento sobre uso de antibióticos,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,Wissen über Antibiotikagebrauch,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,connaissances sur l'utilisation des antibiotiques,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,抗生素使用知识,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,抗菌薬使用に関する知識,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,المعرفة باستخدام المضادات الحيوية,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,kennis over antibioticagebruik,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,항생제 사용 지식,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,food neophobia,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,neofobia alimentaria,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,Nahrungsneophobie,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,néophobie alimentaire,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,食物新奇恐惧,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,食物新奇性恐怖,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,رهاب الأطعمة الجديدة,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,voedselneofobie,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,음식 신공포증,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,climate change anxiety,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,ansiedad por el cambio climático,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,Klimaangst,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,éco-anxiété,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,气候焦虑,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,気候不安,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,القلق من تغير المناخ,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,klimaatangst,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,기후 불안,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,tax compliance,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,cumplimiento tributario,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,Steuerehrlichkeit,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,conformité fiscale,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,纳税遵从,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,納税コンプライアンス,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,الامتثال الضريبي,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,belastingnaleving,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,납세 순응,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,recycling behavior,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run; re-run in runs/candidates_2026-11-20_supp_*.csv against the source(s) a network outage left unsearched
+2026-11-20,comportamiento de reciclaje,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,Recyclingverhalten,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,comportement de recyclage,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,回收行为,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,リサイクル行動,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,سلوك إعادة التدوير,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,recyclinggedrag,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,재활용 행동,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run
+2026-11-20,ChatGPT acceptance,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run; re-run in runs/candidates_2026-11-20_supp_*.csv against the source(s) a network outage left unsearched
+2026-11-20,aceptación de ChatGPT,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run; re-run in runs/candidates_2026-11-20_supp_*.csv against the source(s) a network outage left unsearched
+2026-11-20,ChatGPT-Akzeptanz,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run; re-run in runs/candidates_2026-11-20_supp_*.csv against the source(s) a network outage left unsearched
+2026-11-20,acceptation de ChatGPT,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run; re-run in runs/candidates_2026-11-20_supp_*.csv against the source(s) a network outage left unsearched
+2026-11-20,ChatGPT接受度,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run; re-run in runs/candidates_2026-11-20_supp_*.csv against the source(s) a network outage left unsearched
+2026-11-20,ChatGPTの受容,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run; re-run in runs/candidates_2026-11-20_supp_*.csv against the source(s) a network outage left unsearched
+2026-11-20,تقبل ChatGPT,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run; re-run in runs/candidates_2026-11-20_supp_*.csv against the source(s) a network outage left unsearched
+2026-11-20,acceptatie van ChatGPT,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run; re-run in runs/candidates_2026-11-20_supp_*.csv against the source(s) a network outage left unsearched
+2026-11-20,ChatGPT 수용,runs/candidates_2026-11-20.csv,repos sweep 2026-11-20 (mode 3): 15 new topics x 9 languages; 872 candidates after merging the supplementary re-run; re-run in runs/candidates_2026-11-20_supp_*.csv against the source(s) a network outage left unsearched
