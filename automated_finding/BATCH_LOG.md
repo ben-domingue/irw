@@ -27831,3 +27831,101 @@ each assessment as stored (negated German grade, higher = better).
 
 Item text: not shipped. No wording in the deposit; the paper quotes one example item per construct.
 QC: both pass `irw-validate` (upload), in-script `run_qc()`, `irw_lint_covariates.py`; tags pass tags/tests.
+
+## 2026-11-20 — repos sweep (mode 3): 15 new topics x 9 languages, 169 tables, 396,057 responses from 35 deposits; no item text
+
+Ben, in-session: "please do an automated search", paused and resumed twice ("let it finish, then pick it back up",
+"keep going"). Not uploaded. Reserved-source guard: `selftest` ok, every lead URL/DOI checked (`check-stdin`, all
+clear), `check-diff origin/main` before push. Worktree `~/irw-wt/sweep-1120`, branch
+`ben-domingue/repos-sweep-2026-11-20`.
+
+**Terms** (135; English + Spanish, German, French, Chinese, Japanese, Arabic, Dutch, Korean, none previously logged):
+brand trust, service quality, green purchase intention, mobile banking adoption, e-wallet, destination image, hotel
+guest satisfaction, dental anxiety, oral health knowledge, antibiotic use knowledge, food neophobia, climate change
+anxiety, tax compliance, recycling behavior, ChatGPT acceptance. **Outage:** the run took 4.7 h instead of ~1.5; the
+machine lost network between queries 127 and 128, so the eight ChatGPT-acceptance translations searched 0/8
+sources, and four earlier queries missed one to three sources (e-wallet, the Spanish hotel term, recycling
+behavior, English ChatGPT acceptance). Those 12 were re-run against exactly the sources they missed
+(`runs/candidates_2026-11-20_supp_*.csv`, every source answered) and merged: **872 candidates** (zenodo 308,
+dataverse 283, figshare 126, mendeley 68, datacite 49, osf 27, dryad 11); 369 already in the seen ledger or
+dictionary, **503 triaged** with `--retriage`: 201 no_usable_file, 180 human_assistance, 44 download_failed (left out
+of the ledger for retry), 34 good, 17 pii_suspected, 14 below_min_n, 11 not_item_response, 1 license_restricted, 1
+error. Step 2b: 94 recoverable_format, 40 worth_retrying, 32 human_review (archived to
+`human_review/human_review_zenodo_2026-11-21.csv`), 8 not_item_response, 6 aggregate_continuous, 0 conj. The
+`[step 2b] ... refined flag(s) recorded` line under-counted because of the bug below; the ledger was repaired by
+hand and all 180 refined flags are recorded.
+
+**Pipeline fix: `--resume` lost the interrupted run's ledger rows.** Ben paused triage at 297/503; the resumed run
+skipped the checkpointed rows without adding them to `newly_seen`, so only the 206 post-resume keys reached
+`repo_triage_seen_keys.csv` (the checkpointed run never got to `append_seen_keys()`). A later run would have
+re-triaged all 297. Fixed in `irw_batch_updated.py` (checkpointed rows with a non-transient flag are appended on
+resume), regression test `tests/test_seen_ledger.py::test_resume_records_the_rows_the_interrupted_run_already_triaged`
+(fails without the fix). This run's 259 missing keys were appended and Step 2b's flags re-recorded: 458 ledger rows
+= 503 - 45 transient. Separately, a 10-row `--limit` sanity triage writes its keys to the ledger too; those 9 were
+reverted before the full run so it would triage them.
+
+**Mendeley:** the public API returned 502 for most of the session, so 36 Mendeley leads were never opened (status
+`unworked`, note says so). The data scripts here download from `data.mendeley.com/public-files/...`, which did work.
+
+Every good / pii / recoverable / worth_retrying / aggregate row (191) has a status in
+`leads/repos_leads_2026-11-20.csv`: 35 shipped, 41 rejected_content, 11 skipped_pii, 104 unworked (36
+Mendeley-blocked, 2 holds, the rest not yet opened).
+
+**Shipped** (all `irw-validate --profile upload` pass, `run_qc` no fails, `irw_lint_covariates.py` clean; every
+script balances its columns and asserts its row count; built from a shared template, one self-contained script per
+deposit). Most are Indonesian PLS-SEM questionnaires, one table per construct, item = the deposit's own code;
+where the headers are the statements, codes are construct + position and each script says how the stems were read:
+- `nadira_2026_*` x6 (Zenodo 21953535; name/phone columns empty for all 320 rows, dropped), `marveli_2026_*` x5
+  (Zenodo 20419368, codebook), `suryanegara_2026_*` x5 (figshare 33390886, CC0; SERVQUAL as one table),
+  `gunawan_2026_*` x4, `setiawan_2026_*` x4 (Mendeley wxskmjb6m5; raw 185 kept, the authors' 18 zero-variance
+  drops flagged `cov_zero_variance`), `suwadi_2025_*` x5, `wilasandy_2026_*` x5, `lie_2026_*` x5 (Zenodo 22749662;
+  18193377 and 18432488 are cell-identical copies), `kadi_2025_*` x2 (X/Y split fixed by the author's own Sheet1),
+  `hu_2026_*` x7 (Taiwan, 1-7; construct names read from codes), `sebayang_2025_*` x5, `altarawneh_2021_*` x11
+  (figshare 14882307, UTAUT2 + six perceived-risk facets, questionnaire PDF), `rendra_2026_*` x3,
+  `setiawati_2025_*` x4, `apsari_2025_*` x5, `mardiyah_2025_*` x4, `ilham_2025_*` x8, `felicia_2026_*` x4 (the
+  tax-compliance deposits' "Name" columns are "Respondent N" placeholders, checked), `saputra_2026_*` x4 (9 exact
+  duplicate rows dropped), `febriyanti_2026_*` x7 (250 rows, 101 exact copies; de-duplicated to the record's
+  N=150), `arifah_2026_*` x4, `fransisca_2026_*` x5 (text anchors coded; the form's second "BF" block renamed BFAM),
+  `prihatna_2025_*` x5 and `prihatna_2026_*` x4 (numbered text anchors), `chandra_2026_*` x5, `leo_2026_*` x5,
+  `rumangkit_2024_*` x3, `berlian_2026_*` x4 (1-7).
+- `herisi_2025_*` x11 (figshare 29965790, 508 Malaysian students, 1-7; reversed items named on the record and stored
+  keyed, each r .60-.68 with its scale; 29965250 and 29586560 are the same file by MD5).
+- `perttula_2026_*` x3 (Mendeley 6bc2mbztmy, CSU students): Clayton & Karazsia's Climate Change Anxiety Scale from
+  the .sav, split anxiety (13) / experience (3) / behavioural engagement (6). Sexual orientation and free-text
+  income not carried.
+- `krejcova_2025_heas` (Czech HEAS-13, 694) and `villarrealzegarra_2025_{heas,eguiq,phq4}` (Peru, 576 rows; two age
+  typos set missing in the two deposits).
+- `endeshaw_2026_healthperf` (figshare 34966957, 961 patients and staff at three Addis Ababa hospitals, 60 items,
+  1-7, codebook PDF; the bare-.sav record is the same file).
+- `balakova_2026_*` x11 (figshare 31575919, 750-person Czech panel, eleven 7-point blocks on reuse, upcycling and
+  sustainable cosmetics; covariates decoded from the workbook's labelled sheet).
+- `ghulman_2025_saudi_knowledge` (Loughborough 29314136, CC BY-NC): 11 scored factual questions; every score
+  checked equal to (answer == key); the deposit's 0 for an unanswered question is missing here.
+
+**Rejected on content** (integrity checks earned their keep this batch): Palomino Flores (Mendeley ncxdfbdbx4),
+1,500 firms x 6 items x 3 years with inter-item r = -0.02..0.00 in every year and identical marginals, i.e.
+independent draws -- script written, then withdrawn; Syahputra (Zenodo 14679248), 90 rows of fill patterns
+(1,2,3,4,5,1,2,...); Yuniarty (Zenodo 19143960 and 21535034), one 250-person sample re-used across two papers with
+1-7% of cells altered; Dharmawan (21444488) and Wijaya (24154064), 6-8% exact non-straight-line copies with no N to
+reconcile; Al-Mulla (21462918, 2,038 x 45) and Rafli (15621791), codes with no description, labels or codebook. Also
+out: content-coded newspapers, review texts, Scopus exports, 311 records, voter files, ENAHO extracts, a SlangLane
+glossary, and 13 econ replication / aggregate rows closed on title and shape without opening (each says so).
+
+**Skipped, PII** (11): names -- Hasnul (Zenodo 20995293), Carissa (17933699), Rivaldy (Mendeley g2djvyjrny),
+Komansilan (20670431), Prasetyo (figshare 26072389), Singh dental anxiety (figshare 22354831); emails -- Hartono
+(21483546), Rumangkit bottled water (16069162), Tan (23476162, in Sheet2 beside a clean Sheet1); IP addresses --
+Lopez Ortega (OSF z5egr), Pretoria reciprocity nudges (UP research data 15059994, geo-IP too).
+
+**Held** (in the leads CSV as `unworked`): Novela (Zenodo 17302208), four-category blocks observed 1-4 or 2-5, a
+shifted 4-point scale is the likelier reading but nothing in the deposit settles it; Rigglets (Mendeley wv525y5dn2),
+the questionnaire prints anchors Strongly agree..Strongly disagree and the file does not say which end is 1.
+
+**Item text:** none shipped. Each provenance row says where the text is; the cheap ones for a later pass are the
+deposits whose headers or files carry the stems and anchors together (fransisca, prihatna x2, apsari form PDF,
+endeshaw codebook, ghulman .sav labels, setiawan codebook); the third-party instruments (CAS, HEAS, EGuiQ, UTAUT2)
+need register rows first.
+
+Staged: 169 dictionary_auto + codebook_at_ingest + script_at_ingest rows, 169 tags/tags_auto.csv rows, 169
+itemtext_provenance rows, 135 search_terms_log rows. No covariate_labels change: none of these tables is live yet
+and every coded covariate is shipped as its label text. No licence-blocked candidate (the unknown-licence leads are
+among the unopened).
