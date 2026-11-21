@@ -180,3 +180,29 @@ def test_retriage_output_is_keyed_the_way_the_ledger_was_written(tmp_path):
     assert (written, unmatched) == (2, 0)
     assert [r["refined_flag"] for r in _rows(led)[1]] == ["recoverable_format",
                                                           "not_item_response"]
+
+
+def test_resume_records_the_rows_the_interrupted_run_already_triaged(tmp_path, monkeypatch):
+    """A --resume must ledger the checkpointed rows too, not just the new ones."""
+    import json
+    monkeypatch.chdir(tmp_path)   # SEEN_KEYS_PATH and friends are relative
+    cands = tmp_path / "c.csv"
+    cands.write_text("source,title,doi,published,url\n"
+                     "zenodo,A,10.5281/zenodo.1,,https://zenodo.org/records/1\n"
+                     "zenodo,B,10.5281/zenodo.2,,https://zenodo.org/records/2\n"
+                     "zenodo,C,10.5281/zenodo.3,,https://zenodo.org/records/3\n",
+                     encoding="utf-8")
+    ck = tmp_path / "ck.jsonl"
+    with open(ck, "w", encoding="utf-8") as f:   # what the interrupted run left
+        f.write(json.dumps({"_key": "10.5281/zenodo.1", "flag": "good"}) + "\n")
+        f.write(json.dumps({"_key": "10.5281/zenodo.2", "flag": "download_failed"}) + "\n")
+    monkeypatch.setattr(irw_batch_updated, "process_one",
+                        lambda row: {"source": "zenodo", "title": row["title"],
+                                     "url": row["url"], "doi": row["doi"], "license": "",
+                                     "flag": "no_usable_file", "reasons": "",
+                                     "n_responses": "", "n_participants": "",
+                                     "n_items": "", "density": "", "data_file": ""})
+    irw_batch_updated.run_batch(str(cands), str(tmp_path / "out.csv"), None,
+                                resume=True, checkpoint=str(ck))
+    got = {r["key"]: r["flag"] for r in _rows(irw_batch_updated.SEEN_KEYS_PATH)[1]}
+    assert got == {"10.5281/zenodo.1": "good", "10.5281/zenodo.3": "no_usable_file"}
