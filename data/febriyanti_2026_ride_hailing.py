@@ -7,7 +7,7 @@
 # Data: hasil data.csv (semicolon-separated; the SmartPLS input), TAM items on ride-hailing in Jabodetabek. The record
 #   reports 150 active users. The file has 250 rows but only 149 distinct response patterns: 101 rows are exact
 #   copies of other rows (pairs, not straight-liners), i.e. the file was padded. Exact duplicates are dropped,
-#   leaving 149 rows, which matches the record's N. No respondent id, so id = row order after de-duplication.
+#   leaving 149 rows (the record's N is 150); one of them is blank throughout, so 148 respondents ship. No respondent id, so id = row order after de-duplication.
 #   Every item observed within 1-6, and no 7 occurs anywhere, so the range is taken as 1-6 (the record states none).
 # Tables, one per construct (item = column code; the file's own "SQ" for the first service-quality item is kept):
 #   _trust (T1-3), _service_quality (SQ, SQ2, SQ3), _perceived_usefulness (PU1-3), _perceived_ease_of_use (PEOU1-3),

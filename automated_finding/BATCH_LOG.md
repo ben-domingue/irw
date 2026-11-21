@@ -27884,8 +27884,8 @@ where the headers are the statements, codes are construct + position and each sc
   (figshare 14882307, UTAUT2 + six perceived-risk facets, questionnaire PDF), `rendra_2026_*` x3,
   `setiawati_2025_*` x4, `apsari_2025_*` x5, `mardiyah_2025_*` x4, `ilham_2025_*` x8, `felicia_2026_*` x4 (the
   tax-compliance deposits' "Name" columns are "Respondent N" placeholders, checked), `saputra_2026_*` x4 (9 exact
-  duplicate rows dropped), `febriyanti_2026_*` x7 (250 rows, 101 exact copies; de-duplicated to the record's
-  N=150), `arifah_2026_*` x4, `fransisca_2026_*` x5 (text anchors coded; the form's second "BF" block renamed BFAM),
+  duplicate rows dropped), `febriyanti_2026_*` x7 (250 rows, 101 exact copies and one blank row;
+  148 respondents ship, record N 150), `arifah_2026_*` x4, `fransisca_2026_*` x5 (text anchors coded; the form's second "BF" block renamed BFAM),
   `prihatna_2025_*` x5 and `prihatna_2026_*` x4 (numbered text anchors), `chandra_2026_*` x5, `leo_2026_*` x5,
   `rumangkit_2024_*` x3, `berlian_2026_*` x4 (1-7).
 - `herisi_2025_*` x11 (figshare 29965790, 508 Malaysian students, 1-7; reversed items named on the record and stored
