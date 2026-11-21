@@ -1,10 +1,11 @@
 # IRW Automated Finding — TODO
 
-## Repos sweep 2026-11-20 (mode 3, 15 new topics x 9 languages) — 169 tables staged, not uploaded
+## Repos sweep 2026-11-20 (mode 3, 15 new topics x 9 languages) — 169 tables uploaded to the shard 9 draft
 
 Full write-up in `BATCH_LOG.md` (2026-11-20 — repos sweep).
 
-- [ ] **Upload**: 169 response tables (396,057 responses) from `~/irw-wt/sweep-1120/automated_finding/irw_output/`
+- [x] **UPLOADED 2026-11-21 by Claude (Ben's go-ahead in-session, "please do the uploads")**: 169 response tables
+  (396,057 responses) to the item_response_warehouse_9 draft, 169/169 row-count verified; Ben publishes.
   (35 deposits; list in BATCH_LOG). No item text.
 - [ ] 104 `unworked` leads in `leads/repos_leads_2026-11-20.csv`: 36 never opened because Mendeley's public API
   returned 502 all session (re-profile them first), ~66 Zenodo/figshare/Dataverse/OSF rows not yet opened (green

@@ -27835,7 +27835,9 @@ QC: both pass `irw-validate` (upload), in-script `run_qc()`, `irw_lint_covariate
 ## 2026-11-20 — repos sweep (mode 3): 15 new topics x 9 languages, 169 tables, 396,057 responses from 35 deposits; no item text
 
 Ben, in-session: "please do an automated search", paused and resumed twice ("let it finish, then pick it back up",
-"keep going"). Not uploaded. Reserved-source guard: `selftest` ok, every lead URL/DOI checked (`check-stdin`, all
+"keep going"). **Uploaded 2026-11-21** by Claude on Ben's in-session go-ahead ("please do the uploads"):
+169 response tables to the item_response_warehouse_9 draft (700 -> 869 tables), 169/169 row-count verified by
+`red_up`; Ben publishes. Reserved-source guard: `selftest` ok, every lead URL/DOI checked (`check-stdin`, all
 clear), `check-diff origin/main` before push. Worktree `~/irw-wt/sweep-1120`, branch
 `ben-domingue/repos-sweep-2026-11-20`.
 
