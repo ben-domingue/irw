@@ -1,5 +1,28 @@
 # IRW Automated Finding — TODO
 
+## Repos sweep 2026-11-23 (mode 3, 15 new topics x 9 languages) — 128 tables uploaded to shards 9 and 2
+
+Full write-up in `BATCH_LOG.md` (2026-11-23 — repos sweep).
+
+- [x] **UPLOADED 2026-11-23 by Claude (Ben's go-ahead in-session):** 93 response tables to the item_response_warehouse_9
+  draft and 35 to the item_response_warehouse_2 draft, 128/128 row-count verified; no item text tables.
+- [ ] **Ben publishes** the item_response_warehouse_9 and item_response_warehouse_2 drafts. Shard 9 is now at 990 of
+  1000: the next batch needs another shard.
+- [ ] Ben: ship zenodo 15260103 (name-free twin of the named-respondent figshare 28667843)? Pant 2023/2025 organic
+  pair (PV1-3 disagree): hold both, or ship one?
+- [ ] After merge: `metadata/covariate_labels/harvest.py --commit HEAD` for vilkaitevaitone_2026_ewom, kadlera_2025_ppis,
+  kadlera_2025_pops, then `build.py`.
+- [ ] 143 `unworked` leads in `leads/repos_leads_2026-11-23.csv` -- lane 2 in progress.
+- [ ] Item text later: tothe_2021 ("details" sheet), upoma_2026 (codebook + docx), vilkaitevaitone_2026 (.sav labels).
+
+## Handoff 2026-11-23: merge PR #3693 (psychophysics collection) AFTER the shard-9 release
+
+- [ ] Once Ben publishes the item_response_warehouse_9 release holding the 28 Confidence Database tables (#3686;
+  uploaded 2026-11-23, PRs #3691/#3694 merged): confirm all 28 are in the released version (names = the data rows of
+  #3691's and #3694's PR bodies), then `gh pr ready 3693`, wait for green CI, merge. **Not before**: 
+  `metadata/10_collections.R` halts if a curated member is missing from published metadata. Branch
+  `data/psychophysics-collection`, worktree `~/irw-wt/psychophysics-collection`.
+
 ## Repos sweep 2026-11-20 (mode 3, 15 new topics x 9 languages) — 169 tables uploaded to the shard 9 draft
 
 Full write-up in `BATCH_LOG.md` (2026-11-20 — repos sweep).
