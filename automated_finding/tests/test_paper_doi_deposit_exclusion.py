@@ -102,11 +102,61 @@ class SourceLoadersTest(unittest.TestCase):
             Path(td, "conjoint", "treger_2026.R").write_text(
                 '# https://doi.org/10.7910/DVN/AEZ83R\n')
             got = _load_build_script_exclusions(td)
-        self.assertIn("10.1371/journal.pone.0346573", got)
+        # The paper DOI on a "# DOI:" comment is not the script's source;
+        # biblio.csv / the dictionary exclude it when it is the table's paper.
+        self.assertNotIn("10.1371/journal.pone.0346573", got)
         self.assertIn("10.5281/zenodo.14870714", got)
         self.assertIn("10.7910/dvn/aez83r", got)
         self.assertEqual(is_excluded("10.5281/zenodo.14870714",
                                      _with_supplement_bases(got)), "exact")
+
+
+class BuildScriptSourceOnlyTest(unittest.TestCase):
+    """#3573 follow-up: a build script contributes the data it builds FROM,
+    not every DOI it mentions. An instrument's validation paper cited in a
+    comment or docstring must stay discoverable."""
+
+    def _load(self, files):
+        with tempfile.TemporaryDirectory() as td:
+            for name, body in files.items():
+                Path(td, name).write_text(body)
+            return _load_build_script_exclusions(td)
+
+    def test_python_instrument_citations_are_not_sources(self):
+        got = self._load({"x_2024_scale.py": (
+            '"""Builds x_2024_scale.\n\n'
+            'Instrument: Smith (2010), doi:10.1037/a0012345.\n"""\n'
+            '# Scoring manual: https://doi.org/10.1016/j.paid.2011.01.001\n'
+            '# Same data also deposited as 10.5281/zenodo.222\n'
+            'URL = ("https://journals.plos.org/plosone/article/file"\n'
+            '       "?type=supplementary&id=10.1371/journal.pone.0111111.s001")\n'
+            'r = requests.get("https://zenodo.org/api/records/111/files/a.csv")\n'
+        )})
+        self.assertNotIn("10.1037/a0012345", got)              # docstring
+        self.assertNotIn("10.1016/j.paid.2011.01.001", got)   # comment
+        self.assertIn("10.1371/journal.pone.0111111.s001", got)  # code string
+        self.assertIn("10.5281/zenodo.111", got)                 # download
+        # A repository deposit counts even in a comment: it is data
+        self.assertIn("10.5281/zenodo.222", got)
+
+    def test_declared_source_line_counts(self):
+        got = self._load({"y_2023.py": (
+            '# Source: https://doi.org/10.3389/fpsyg.2023.123456.s001\n'
+            '# Validation paper: doi 10.1177/1073191199999999\n'
+            'df = pd.read_csv("y.csv")\n')})
+        self.assertIn("10.3389/fpsyg.2023.123456.s001", got)
+        self.assertNotIn("10.1177/1073191199999999", got)
+
+    def test_r_comments_vs_code(self):
+        got = self._load({"z.R": (
+            '## Instrument: https://doi.org/10.1080/00223891.2010.000001\n'
+            'url <- "https://osf.io/abcde/download" # see 10.1007/s11136-000-0001\n'
+            'x <- read.csv(paste0("https://doi.org/", "10.1186/s12889-020-00001-1"))\n'
+        )})
+        self.assertNotIn("10.1080/00223891.2010.000001", got)
+        self.assertNotIn("10.1007/s11136-000-0001", got)
+        self.assertIn("10.17605/osf.io/abcde", got)
+        self.assertIn("10.1186/s12889-020-00001-1", got)
 
 
 if __name__ == "__main__":

@@ -13,8 +13,8 @@ Three things this does that a naive search doesn't:
   - EXCLUDE   : automatically skips datasets already in the IRW, or already
                 logged as a genuinely-ambiguous human_review row in a past
                 batch. The exclusion set is fetched live from the IRW
-                dictionary Google Sheet, metadata/biblio.csv, the DOIs and
-                deposit URLs cited by data/ build scripts, plus every doi
+                dictionary Google Sheet, metadata/biblio.csv, the data sources of
+                data/ build scripts (not every DOI they mention), plus every doi
                 column found under human_review/*.csv on every run
                 (_load_auto_exclusions()); paper DOI, data DOI and the
                 deposit behind a repository URL all count (#3573) —
@@ -1275,11 +1275,98 @@ def _load_biblio_exclusions(path: str = BIBLIO_CSV) -> set:
 
 
 BUILD_SCRIPT_GLOBS = ("*.py", "*.R", "*.r")
+# DOI prefixes of data repositories: a deposit under one of these names data,
+# never an instrument paper, so a build script mentioning it anywhere counts.
+_DATA_REPO_PREFIXES = (
+    "10.5281/",   # Zenodo
+    "10.17605/",  # OSF
+    "10.17632/",  # Mendeley Data
+    "10.6084/",   # figshare (incl. journal SI portals)
+    "10.7910/",   # Harvard Dataverse
+    "10.5061/",   # Dryad
+    "10.34894/",  # DataverseNL
+    "10.17026/",  # DANS
+    "10.15139/",  # Odum / UNC Dataverse
+    "10.4121/",   # 4TU.ResearchData
+    "10.3886/",   # ICPSR / openICPSR
+    "10.11587/",  # AUSSDA
+    "10.5683/",   # Borealis (Scholars Portal)
+    "10.23668/",  # PsychArchives
+    "10.5255/",   # UK Data Service
+    "10.4232/",   # GESIS
+    "10.6071/",   # UC Merritt / Dryad (UC)
+    "10.17639/",  # Nottingham Research Data Management Repository
+    "10.33009/",  # LDbase
+)
 _SCRIPT_URL_RX = re.compile(r"https?://[^\s\"'<>,;|\]\[(){}]+", re.I)
+# A header line declaring where a script's data comes from:
+# "# Source: https://zenodo.org/records/N", "# Data: Mendeley Data ... doi",
+# "Dataset (OSF): https://osf.io/abcde". Comment or docstring, any case.
+_SOURCE_LINE_RX = re.compile(
+    r"^\s*(?:#+'?|\"{3}|'{3})?\s*(?:source|data|dataset|deposit|download|"
+    r"repository|raw data|data source)\b[^:\n]{0,40}:", re.I)
+
+
+def _python_code_strings(text: str) -> str | None:
+    """The string literals a Python script's code uses, without comments or
+    docstrings; None if it does not parse."""
+    import ast
+    try:
+        tree = ast.parse(text)
+    except (SyntaxError, ValueError):
+        return None
+    # A string standing alone as a statement is a docstring (or a bare
+    # comment-string), not something the code reads.
+    skip = {id(n.value) for n in ast.walk(tree)
+            if isinstance(n, ast.Expr) and isinstance(n.value, ast.Constant)}
+    out = [n.value for n in ast.walk(tree)
+           if isinstance(n, ast.Constant) and isinstance(n.value, str)
+           and id(n) not in skip]
+    return "\n".join(out)
+
+
+def _r_code_text(text: str) -> str:
+    """An R script with its comments removed (a '#' outside quotes)."""
+    lines = []
+    for line in text.splitlines():
+        q, cut = None, len(line)
+        for i, ch in enumerate(line):
+            if q:
+                if ch == "\\":
+                    continue
+                if ch == q:
+                    q = None
+            elif ch in "\"'":
+                q = ch
+            elif ch == "#":
+                cut = i
+                break
+        lines.append(line[:cut])
+    return "\n".join(lines)
+
+
+def _script_source_text(path: str, text: str) -> str:
+    """The parts of a build script that name its data SOURCE: the code (the
+    URLs and DOIs it downloads or reads) plus any declared source line.
+
+    Comments and docstrings are otherwise left out, because that is where a
+    script cites the instrument's validation paper, the scoring manual or a
+    related study -- citations, not data this script built (#3573 follow-up).
+    """
+    if path.endswith(".py"):
+        code = _python_code_strings(text)
+        if code is None:          # does not parse: fall back to line rule
+            code = "\n".join(l for l in text.splitlines()
+                             if not l.lstrip().startswith("#"))
+    else:
+        code = _r_code_text(text)
+    declared = [l for l in text.splitlines() if _SOURCE_LINE_RX.match(l)]
+    return code + "\n" + "\n".join(declared)
 
 
 def _load_build_script_exclusions(root: str | None = None) -> set:
-    """Every DOI and repository deposit cited anywhere in data/ build scripts.
+    """DOIs and repository deposits that data/ build scripts take their data
+    FROM.
 
     A build script is the one place a worked deposit is always named by its
     own identifier: the dictionary often records only the PAPER DOI plus a
@@ -1290,10 +1377,24 @@ def _load_build_script_exclusions(root: str | None = None) -> set:
     discovery and only irw_claude_assist.already_worked() (#3424) caught them,
     after they had already been triaged into human_review/.
 
-    Deliberately broad: a script's citation of an instrument paper's DOI also
-    lands here, which hides that paper as a candidate. Those are papers whose
-    instrument is already in IRW, so the cost is small and the direction is
-    the safe one (see is_excluded() on re-surfacing vs. double-shipping)."""
+    Only the source counts (#3573 follow-up). Two signals:
+
+    * Any DOI or URL in the code (download and read calls, URL constants)
+      or on a declared "Source:"/"Data:" line -- see _script_source_text().
+    * A DATA-REPOSITORY deposit (_DATA_REPO_PREFIXES: Zenodo, OSF, Mendeley,
+      figshare, Dataverses, Dryad, ...) anywhere in the script, comments
+      included. Older scripts name their source only in a header comment
+      ("##https://osf.io/25m8a", "Original deposit: 10.5281/zenodo.3774526",
+      "# DOI: 10.6084/m9.figshare.24081459.v1"), and the rest are the same
+      data deposited twice (mairean_2024c_*: zenodo.13905610 built,
+      zenodo.13905612 the duplicate). A repository deposit is data, never an
+      instrument paper.
+
+    A journal DOI the script merely mentions -- the instrument's validation
+    paper in a comment, a citation in the docstring, even the table's own
+    paper on a "# DOI:" line -- is not excluded on this script's account. If
+    it is the table's own paper or data DOI, metadata/biblio.csv and the
+    dictionary exclude it anyway (_load_biblio_exclusions)."""
     root = root or os.path.join(_HERE, os.pardir, "data")
     dois = set()
     paths = []
@@ -1302,23 +1403,32 @@ def _load_build_script_exclusions(root: str | None = None) -> set:
     for path in paths:
         try:
             with open(path, encoding="utf-8", errors="replace") as f:
-                text = f.read()
+                full = f.read()
         except OSError:
             continue
-        for m in _URL_DOI_RX.finditer(text):
-            d = norm_doi(m.group(0).rstrip("./"))
-            if "/" in d:
-                dois.add(d)
-        for m in _SCRIPT_URL_RX.finditer(text):
-            url_doi = _extract_doi_from_url(m.group(0))
-            if url_doi:
-                dois.add(url_doi)
+        dois |= _dois_in(_script_source_text(path, full))
+        dois |= {d for d in _dois_in(full)
+                 if d.startswith(_DATA_REPO_PREFIXES)}
     return dois
+
+
+def _dois_in(text: str) -> set:
+    """Every DOI in `text`, bare or behind a repository URL."""
+    out = set()
+    for m in _URL_DOI_RX.finditer(text):
+        d = norm_doi(m.group(0).rstrip("./`"))
+        if "/" in d:
+            out.add(d)
+    for m in _SCRIPT_URL_RX.finditer(text):
+        url_doi = _extract_doi_from_url(m.group(0))
+        if url_doi:
+            out.add(url_doi.rstrip("./`"))
+    return out
 
 
 def _load_auto_exclusions() -> set:
     """Load DOIs to exclude: already in the IRW dictionary or biblio.csv,
-    cited by a data/ build script, already staged in this repo's own
+    the data source of a data/ build script, already staged in this repo's own
     dictionary_auto*.csv, already logged as a human_review row in a past
     batch, or already in the conjoint ledger. Each source contributes paper
     DOIs, data DOIs and the deposit DOI behind any repository URL, so a
@@ -1331,7 +1441,7 @@ def _load_auto_exclusions() -> set:
     staged = _load_staged_dict_exclusions()
     print(f"[exclude] {len(existing)} DOIs already in IRW, "
           f"{len(biblio)} in metadata/biblio.csv, "
-          f"{len(scripts)} cited by data/ build scripts, "
+          f"{len(scripts)} named as a source by data/ build scripts, "
           f"{len(reviewed)} already logged in human_review/, "
           f"{len(conj)} in the conjoint ledger, "
           f"{len(staged)} staged in dictionary_auto*.csv but not yet in the "
