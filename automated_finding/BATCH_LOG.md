@@ -27993,3 +27993,35 @@ draft (897 -> 990) and 35 to the item_response_warehouse_2 draft (885 -> 920; th
 elizondogarcia, ellur, grace, hindarwati, kadlera, li_2025, ocal, pratista and tong deposits). 128/128 row-count
 verified by `red_up`. Ben publishes both drafts. Room left at upload time: shard 2 80, shard 8 84, shard 6 74, shard
 7 39, shard 5 38, shard 3 43, shard 4 21, shard 1 20, shard 9 10.
+
+## 2026-11-23b — the sweep's 143 unworked leads (lane 2): 69 deposits, 402 tables, 1,075,073 responses
+
+Ben, in-session: "then work the 143 unworked leads". Every lead now has a status in
+`leads/repos_leads_2026-11-23.csv` (`[repos sweep 2026-11-23 lane 2]` notes): 69 shipped, 57 rejected_content, 8
+skipped_pii, 5 blocked_licence, 4 left unworked (deferred: lead 3, three Dutch Qualtrics studies with Q-codes; 54, 35
+ungrouped gamification statements; 66, shopping-addiction items with no scale key; 86, three near-duplicate nurse
+.sav files). All 402 tables pass `irw-validate --profile upload`, `run_qc` no fails, `irw_lint_covariates.py`
+clean; every script balances its source columns and asserts its row count.
+
+**Largest:** sakai_2026 (2,092 Japanese respondents), shorbaji_2026 (three AI-delegation experiments, 1,829 pooled
+with cov_study, 18 tables), roostika_2025 (1,473), deoliveira_2024 (MBI, 1,332 Brazilian anaesthesiologists), wen_2024
+(TCSQ, 1,297 students), tenan_2024 (ECCB, 1,398), nguyen_2026 (1,274), bhutto_2024 (Lithuanian organic food, 1,000,
+15 tables). The rest are mainly Indonesian, Vietnamese and Indian consumer/workplace PLS-SEM surveys of 100-700.
+
+**Rejected:** duplicated response rows -- leads 63, 65, 77 and four Anita T.L. deposits (74, 76, 88, 91), 29-75% of
+respondents duplicating another's exact pattern; duplicates of other data -- 17 (subset of 16), 36 (= 34), 107 (v2
+of the halal deposit shipped as `oemar_2022`), 72 (unlicensed, same sample as 71); the rest composites only,
+bibliometric records, model output or experiment logs. **PII:** 123, 124, 126 (names/emails); 115, 128, 129, 130, 141
+(IP or GPS). **Licence:** OSF nodes 11, 14, 109, 134 (no licence, logged in `license_blocked_candidates.csv`); 62
+(record says the data "is not free to use" despite a CC BY tag).
+
+About 30 deposits name tables from item codes the record never expands (e.g. `binus_2025_vstream_pc`,
+`kristianingsih_2026_x1`); each header says "IRW's reading". `xing_2026` mixes 1-5/1-9/1-7 by instrument;
+`efendi_2025` taken as six-point (every item observed 2-6). No item text shipped; every provenance row says where
+the text is. Covariate-label harvest after merge: bhutto_2024_organic_lithuania, gutierrezvelilla_2022_work_life_quality,
+fatemah_2024_compassion_fatigue, liu_2021_decent_work_iwb, tenan_2024_nudge_emcb, valenzuela_2026_ai_attitudes_mx.
+
+**Upload: pending.** The existing shards hold 319 of the 402 below the 990 warning line, packed by whole deposit
+(shard 8 74, shard 2 70, shard 6 64, shard 3 33, shard 7 29, shard 5 28, shard 4 11, shard 1 10; every
+`red_up --dry-run` passes). The other 83 tables (26 deposits) need a new shard: luo_2026_ai_reliance_iwb, messarra_2026_ei_engagement, ntt_2026_vietnam_bank_loyalty, rohden_2026_chatbot_empathy, zaheer_2026_influencer_trust, ismail_2026_feedback_use, jabutay_2025_escapism_impulse, nguyen_2026_ai_education_value, saky_2025_online_reviews, sari_2026_remote_work_iwb, sestino_2023_luxury_intelligent_tech, wani_2026_ai_chatbot_shopping, wibowo_2026_ai_recommend_impulse, ogbu_2024_parental_involvement_math, sakai_2026_brand_attachment_value, saputra_2025_digital_mastery_iwb, singh_2026_digital_consumer_rights, xing_2026_pe_teacher_iwb, fatemah_2024_compassion_fatigue, prilyasinta_2025_balinese_attitudes, valenzuela_2026_ai_attitudes_mx, deoliveira_2024_anaesthesiologist_mbi, gutierrezvelilla_2022_work_life_quality, tenan_2024_nudge_emcb, ucarer_2026_mindful_eating, wen_2024_online_learning_tcsq.
+Plan files: `runs/upload2/` (gitignored).

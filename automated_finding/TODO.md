@@ -12,7 +12,11 @@ Full write-up in `BATCH_LOG.md` (2026-11-23 — repos sweep).
   pair (PV1-3 disagree): hold both, or ship one?
 - [ ] After merge: `metadata/covariate_labels/harvest.py --commit HEAD` for vilkaitevaitone_2026_ewom, kadlera_2025_ppis,
   kadlera_2025_pops, then `build.py`.
-- [ ] 143 `unworked` leads in `leads/repos_leads_2026-11-23.csv` -- lane 2 in progress.
+- [x] 143 leads worked (lane 2): 69 deposits, 402 tables staged; 4 deferred leads still `unworked` (3, 54, 66, 86).
+- [ ] **Lane 2 upload pending:** 319 tables fit shards 1-8 at 990 each (dry runs pass); 83 tables (26 deposits) need a
+  new shard. Plan in BATCH_LOG 2026-11-23b. Covariate-label harvest after merge for the 6 .sav scripts listed there.
+- [ ] Ben: lane 2's ~30 code-named deposits ("IRW's reading") -- ship as is? Lead 107 halal v2 (137 rows) instead of
+  oemar_2022's v1 (100)?
 - [ ] Item text later: tothe_2021 ("details" sheet), upoma_2026 (codebook + docx), vilkaitevaitone_2026 (.sav labels).
 
 ## Handoff 2026-11-23: merge PR #3693 (psychophysics collection) AFTER the shard-9 release
