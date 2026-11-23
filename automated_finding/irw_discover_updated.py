@@ -1299,12 +1299,15 @@ _DATA_REPO_PREFIXES = (
     "10.33009/",  # LDbase
 )
 _SCRIPT_URL_RX = re.compile(r"https?://[^\s\"'<>,;|\]\[(){}]+", re.I)
-# A header line declaring where a script's data comes from:
-# "# Source: https://zenodo.org/records/N", "# Data: Mendeley Data ... doi",
-# "Dataset (OSF): https://osf.io/abcde". Comment or docstring, any case.
+# A header line declaring where a script's data comes from, or the paper its
+# table belongs to: "# Source: https://zenodo.org/records/N", "# Data:
+# Mendeley Data ... doi", "Dataset (OSF): https://osf.io/abcde", "# Paper:
+# https://link.springer.com/article/10.1007/...", "# DOI: 10.29059/...".
+# Comment or docstring, any case. "doi:10.x" written inline as a DOI URI
+# ("##doi:10.1017/S0007...; a 48-column subset") is a citation, not a label.
 _SOURCE_LINE_RX = re.compile(
     r"^\s*(?:#+'?|\"{3}|'{3})?\s*(?:source|data|dataset|deposit|download|"
-    r"repository|raw data|data source)\b[^:\n]{0,40}:", re.I)
+    r"repository|raw data|data source|paper|doi(?!:10\.))\b[^:\n]{0,40}:", re.I)
 
 
 def _python_code_strings(text: str) -> str | None:
@@ -1390,10 +1393,13 @@ def _load_build_script_exclusions(root: str | None = None) -> set:
       zenodo.13905612 the duplicate). A repository deposit is data, never an
       instrument paper.
 
-    A journal DOI the script merely mentions -- the instrument's validation
-    paper in a comment, a citation in the docstring, even the table's own
-    paper on a "# DOI:" line -- is not excluded on this script's account. If
-    it is the table's own paper or data DOI, metadata/biblio.csv and the
+    A "# Paper:" or "# DOI:" header line counts too: it names the table's
+    own paper, which biblio.csv sometimes records under a different DOI or
+    not at all (Aspirations_Sonmez_2022: script 10.1504/IJHD.2023.131527,
+    biblio 10.1504/IJHD.2023.10055261). A journal DOI the script merely
+    mentions elsewhere -- the instrument's validation paper in a comment, a
+    citation in the docstring -- is not excluded on this script's account;
+    if it is the table's own paper or data DOI, metadata/biblio.csv and the
     dictionary exclude it anyway (_load_biblio_exclusions)."""
     root = root or os.path.join(_HERE, os.pardir, "data")
     dois = set()

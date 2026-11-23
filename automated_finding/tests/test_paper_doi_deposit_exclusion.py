@@ -102,9 +102,8 @@ class SourceLoadersTest(unittest.TestCase):
             Path(td, "conjoint", "treger_2026.R").write_text(
                 '# https://doi.org/10.7910/DVN/AEZ83R\n')
             got = _load_build_script_exclusions(td)
-        # The paper DOI on a "# DOI:" comment is not the script's source;
-        # biblio.csv / the dictionary exclude it when it is the table's paper.
-        self.assertNotIn("10.1371/journal.pone.0346573", got)
+        # A "# DOI:" header line names the table's own paper: excluded.
+        self.assertIn("10.1371/journal.pone.0346573", got)
         self.assertIn("10.5281/zenodo.14870714", got)
         self.assertIn("10.7910/dvn/aez83r", got)
         self.assertEqual(is_excluded("10.5281/zenodo.14870714",
@@ -146,6 +145,19 @@ class BuildScriptSourceOnlyTest(unittest.TestCase):
             'df = pd.read_csv("y.csv")\n')})
         self.assertIn("10.3389/fpsyg.2023.123456.s001", got)
         self.assertNotIn("10.1177/1073191199999999", got)
+
+    def test_paper_and_doi_header_lines_count(self):
+        got = self._load({"w.R": (
+            '# Paper: https://link.springer.com/article/10.1007/s11136-017-1629-y\n'
+            '# DOI: 10.29059/rpcc.20201215-114\n'
+            '##doi:10.1017/S0007123418000054; a subset, not built here\n'
+            '## Instrument paper cited: 10.1037/t48268-000\n'
+            'x <- read.csv("w.csv")\n')})
+        self.assertIn("10.1007/s11136-017-1629-y", got)
+        self.assertIn("10.29059/rpcc.20201215-114", got)
+        # an inline doi:10.x URI is a citation, not a "DOI:" label
+        self.assertNotIn("10.1017/s0007123418000054", got)
+        self.assertNotIn("10.1037/t48268-000", got)
 
     def test_r_comments_vs_code(self):
         got = self._load({"z.R": (
