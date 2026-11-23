@@ -211,10 +211,16 @@ describe_chat <- function(prompt) {
 
 ##------------------------------------------------------- text utilities -----
 
+##Letters and digits in ANY script, not just a-z (#2325). The earlier
+##`[^a-z0-9 ]` stripped every non-ASCII character, so Cyrillic or Chinese item
+##wording tokenized to nothing and could never be flagged -- a silent exemption
+##for exactly the tables whose items are not in English. \p{M} keeps combining
+##marks (decomposed accents, Indic vowel signs) inside their word. Output on
+##ASCII text is unchanged.
 tokenize <- function(x) {
     if (is.na(x) || !nzchar(x)) return(character(0))
-    x <- tolower(x)
-    x <- gsub("[^a-z0-9 ]+", " ", x)
+    x <- tolower(enc2utf8(x))
+    x <- gsub("[^\\p{L}\\p{M}\\p{N} ]+", " ", x, perl = TRUE)
     t <- strsplit(trimws(x), "\\s+")[[1]]
     t[nzchar(t)]
 }
@@ -663,6 +669,16 @@ gate_self_test <- function() {
     ck(identical(apply_title_gate(none)$unit_key, "table:x_2020_y"),
        "an untagged table is untouched")
 
+    ##The overlap guard on non-English input (#2325): echoed Cyrillic item
+    ##wording must flag, and ASCII tokenization must not have moved.
+    ru <- "Оцените важность знания родного языка и народных песен"
+    ck(overlap(ru, ru)$flag, "echoed Cyrillic item wording is flagged")
+    ck(identical(tokenize("Fear of COVID-19, (early) stage."),
+                 c("fear", "of", "covid", "19", "early", "stage")),
+       "ASCII tokenization is unchanged")
+    ck(identical(tokenize("évaluation précoce"), c("évaluation", "précoce")),
+       "an accented word stays one token")
+
     cat("\n", if (fail == 0L) "PASS" else "FAIL", " -- ", fail,
         " failure(s)\n", sep = "")
     quit(save = "no", status = if (fail == 0L) 0L else 1L)
@@ -965,10 +981,17 @@ for (i in seq_along(todo_keys)) {
     txt <- clean_reply(txt)
     ov  <- overlap(b$restricted, txt)
 
-    if (is.na(txt) || identical(txt, "INSUFFICIENT") || is_chatter(txt)) {
+    ##The rights guard is consulted BEFORE the chatter filter (#2325). CHATTER
+    ##is unanchored, so a reply that copies an item such as "I cannot sleep..."
+    ##matched `i cannot` and was filed as "no description" without the guard
+    ##ever being asked. Nothing was published either way, but a copied reply
+    ##must be recorded as what it is: flagged for review.
+    if (is.na(txt) || identical(txt, "INSUFFICIENT")) {
         prov <- "no description"; flag <- FALSE; txt <- NA_character_
     } else if (ov$flag) {
         prov <- "pending review"; flag <- TRUE
+    } else if (is_chatter(txt)) {
+        prov <- "no description"; flag <- FALSE; txt <- NA_character_
     } else {
         prov <- "described"; flag <- FALSE
     }
