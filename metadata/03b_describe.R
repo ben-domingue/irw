@@ -246,6 +246,11 @@ overlap <- function(restricted, description) {
     for (src in restricted) {
         ts <- tokenize(src)
         n <- min(N_GRAM, length(ts))
+        ##One-word inputs are exempt, by Ben's ruling on #2325 (2026-11-23). A
+        ##single word in common is not reproduction of protected wording: a
+        ##one-word Context Text such as "Edadismo" is a label for the construct,
+        ##and a description is expected to use it. Reproduction needs a run of
+        ##at least two words, so the window never shrinks below 2.
         if (n < 2) next
         hit <- intersect(ngrams(ts, n), ngrams(dt, n))
         if (length(hit)) {
@@ -678,6 +683,13 @@ gate_self_test <- function() {
        "ASCII tokenization is unchanged")
     ck(identical(tokenize("évaluation précoce"), c("évaluation", "précoce")),
        "an accented word stays one token")
+    ##Documented exemption (#2325): one word in common is not reproduction of
+    ##protected wording, so a one-word restricted input never flags, while
+    ##two words already do.
+    ck(!overlap("Edadismo", "Edadismo is prejudice based on age.")$flag,
+       "a one-word restricted input is exempt (ruling on #2325)")
+    ck(overlap("ageism scale", "An ageism scale.")$flag,
+       "a two-word restricted input still flags")
 
     cat("\n", if (fail == 0L) "PASS" else "FAIL", " -- ", fail,
         " failure(s)\n", sep = "")
@@ -946,7 +958,13 @@ if (length(todo_keys) > 0 && !OPT_STUB && !OPT_STUBCOPY) invisible(gateway_key()
 new <- list(); flushed <- 0
 ##Parallel to `new`, and only read by the --stub-copy verdict: a unit with no
 ##restricted input has nothing to leak, so it must NOT be counted as a miss.
+##Neither must a unit whose only restricted inputs are single words: overlap()
+##exempts those on purpose (#2325), so echoing them back is an expected pass.
 had_restricted <- logical(0)
+one_word_only  <- logical(0)
+flaggable <- function(restricted) {
+    any(vapply(restricted, function(s) length(tokenize(s)) >= 2, logical(1)))
+}
 for (i in seq_along(todo_keys)) {
     u <- todo_keys[i]
     rows <- units[units$unit_key == u, ]
@@ -965,6 +983,7 @@ for (i in seq_along(todo_keys)) {
             stringsAsFactors = FALSE)
         cat("[", i, "/", length(todo_keys), "] ", u, "  no evidence\n", sep = "")
         had_restricted <- c(had_restricted, FALSE)
+        one_word_only  <- c(one_word_only, FALSE)
         next
     }
 
@@ -1002,7 +1021,9 @@ for (i in seq_along(todo_keys)) {
         sources_used = b$used, similarity_flag = flag, provenance = prov,
         reviewed = FALSE, stringsAsFactors = FALSE)
 
-    had_restricted <- c(had_restricted, length(b$restricted) > 0)
+    had_restricted <- c(had_restricted, flaggable(b$restricted))
+    one_word_only  <- c(one_word_only,
+                        length(b$restricted) > 0 && !flaggable(b$restricted))
 
     cat("[", i, "/", length(todo_keys), "] ", substr(u, 1, 52), "  ", prov,
         if (flag) "  <-- FLAGGED" else "", "\n", sep = "")
@@ -1023,8 +1044,10 @@ if (OPT_STUBCOPY) {
     cat("\n", strrep("=", 60), "\nADVERSARIAL TEST: ", sum(had_restricted),
         " of ", nrow(res), " unit(s) carried restricted input; ",
         sum(had_restricted) - sum(miss), " flagged.\n",
-        nrow(res) - sum(had_restricted),
-        " unit(s) had no restricted input and nothing to leak.\n", sep = "")
+        nrow(res) - sum(had_restricted) - sum(one_word_only),
+        " unit(s) had no restricted input and nothing to leak.\n",
+        sum(one_word_only), " unit(s) had only one-word restricted input,",
+        " exempt by ruling on #2325 (expected pass).\n", sep = "")
     if (any(miss)) {
         cat("FAIL -- restricted text was echoed back and NOT caught:\n")
         print(res$unit_key[miss])
