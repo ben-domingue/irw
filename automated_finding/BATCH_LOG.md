@@ -28021,7 +28021,9 @@ About 30 deposits name tables from item codes the record never expands (e.g. `bi
 the text is. Covariate-label harvest after merge: bhutto_2024_organic_lithuania, gutierrezvelilla_2022_work_life_quality,
 fatemah_2024_compassion_fatigue, liu_2021_decent_work_iwb, tenan_2024_nudge_emcb, valenzuela_2026_ai_attitudes_mx.
 
-**Upload: pending.** The existing shards hold 319 of the 402 below the 990 warning line, packed by whole deposit
-(shard 8 74, shard 2 70, shard 6 64, shard 3 33, shard 7 29, shard 5 28, shard 4 11, shard 1 10; every
-`red_up --dry-run` passes). The other 83 tables (26 deposits) need a new shard: luo_2026_ai_reliance_iwb, messarra_2026_ei_engagement, ntt_2026_vietnam_bank_loyalty, rohden_2026_chatbot_empathy, zaheer_2026_influencer_trust, ismail_2026_feedback_use, jabutay_2025_escapism_impulse, nguyen_2026_ai_education_value, saky_2025_online_reviews, sari_2026_remote_work_iwb, sestino_2023_luxury_intelligent_tech, wani_2026_ai_chatbot_shopping, wibowo_2026_ai_recommend_impulse, ogbu_2024_parental_involvement_math, sakai_2026_brand_attachment_value, saputra_2025_digital_mastery_iwb, singh_2026_digital_consumer_rights, xing_2026_pe_teacher_iwb, fatemah_2024_compassion_fatigue, prilyasinta_2025_balinese_attitudes, valenzuela_2026_ai_attitudes_mx, deoliveira_2024_anaesthesiologist_mbi, gutierrezvelilla_2022_work_life_quality, tenan_2024_nudge_emcb, ucarer_2026_mindful_eating, wen_2024_online_learning_tcsq.
-Plan files: `runs/upload2/` (gitignored).
+**Uploaded 2026-11-23** by Claude (Ben's go-ahead in-session): all 402 tables to the new
+item_response_warehouse_10 draft (0 -> 402), 402/402 row-count verified by `red_up`. Ben created shard 10 that day;
+it is registered in this PR (`metadata/redivis_config.R`, `red_up/targets.py`, `red_up/README.md`, same pattern as
+#3453), so it is now the default for new response data. An earlier plan to pack 319 of the 402 into shards 1-8 at
+990 each (83 left over) was dropped in its favour. Until this PR merges, the installed `red_up` reads the main
+checkout's registry and does not know shard 10 -- run `python3 -m red_up` from this branch. Ben publishes.

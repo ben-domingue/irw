@@ -13,8 +13,10 @@ Full write-up in `BATCH_LOG.md` (2026-11-23 — repos sweep).
 - [ ] After merge: `metadata/covariate_labels/harvest.py --commit HEAD` for vilkaitevaitone_2026_ewom, kadlera_2025_ppis,
   kadlera_2025_pops, then `build.py`.
 - [x] 143 leads worked (lane 2): 69 deposits, 402 tables staged; 4 deferred leads still `unworked` (3, 54, 66, 86).
-- [ ] **Lane 2 upload pending:** 319 tables fit shards 1-8 at 990 each (dry runs pass); 83 tables (26 deposits) need a
-  new shard. Plan in BATCH_LOG 2026-11-23b. Covariate-label harvest after merge for the 6 .sav scripts listed there.
+- [x] **UPLOADED 2026-11-23 by Claude (Ben's go-ahead in-session):** lane 2's 402 tables to the new
+  item_response_warehouse_10 draft, 402/402 row-count verified. Shard 10 registered in PR #3697.
+- [ ] **Ben publishes** the item_response_warehouse_10 draft. Covariate-label harvest after merge for the 6 .sav
+  scripts listed in BATCH_LOG 2026-11-23b.
 - [ ] Ben: lane 2's ~30 code-named deposits ("IRW's reading") -- ship as is? Lead 107 halal v2 (137 rows) instead of
   oemar_2022's v1 (100)?
 - [ ] Item text later: tothe_2021 ("details" sheet), upoma_2026 (codebook + docx), vilkaitevaitone_2026 (.sav labels).
