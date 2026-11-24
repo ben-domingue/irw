@@ -10,13 +10,15 @@ Full write-up in `BATCH_LOG.md` (2026-11-23 — repos sweep).
   1000: the next batch needs another shard.
 - [ ] Ben: ship zenodo 15260103 (name-free twin of the named-respondent figshare 28667843)? Pant 2023/2025 organic
   pair (PV1-3 disagree): hold both, or ship one?
-- [ ] After merge: `metadata/covariate_labels/harvest.py --commit HEAD` for vilkaitevaitone_2026_ewom, kadlera_2025_ppis,
-  kadlera_2025_pops, then `build.py`.
+- [ ] Covariate labels: the 9 .sav scripts (vilkaitevaitone_2026_ewom, kadlera_2025_ppis/_pops and lane 2's six) were
+  HARVESTED 2026-11-24; logs in ~/.cache/irw/covariate_labels/logs. `build.py` only labels tables in metadata.csv, which
+  the 2026-11-24 pipeline built before the shards were published. After the next weekly pipeline run: `build.py`,
+  `audit_gaps.py --write`, PR. endeshaw_2026, ghulman_2025, perttula_2026 sit in gaps.csv as never_examined although
+  harvested (build drops their pairs silently) -- worth a look then.
 - [x] 143 leads worked (lane 2): 69 deposits, 402 tables staged; 4 deferred leads still `unworked` (3, 54, 66, 86).
 - [x] **UPLOADED 2026-11-23 by Claude (Ben's go-ahead in-session):** lane 2's 402 tables to the new
   item_response_warehouse_10 draft, 402/402 row-count verified. Shard 10 registered in PR #3697.
-- [x] **Published** item_response_warehouse_10 v1.0 (402 tables). Covariate-label harvest after merge for the 6 .sav
-  scripts listed in BATCH_LOG 2026-11-23b.
+- [x] **Published** item_response_warehouse_10 v1.0 (402 tables). Covariate labels: see the item above.
 - [ ] Ben: lane 2's ~30 code-named deposits ("IRW's reading") -- ship as is? Lead 107 halal v2 (137 rows) instead of
   oemar_2022's v1 (100)?
 - [ ] Item text later: tothe_2021 ("details" sheet), upoma_2026 (codebook + docx), vilkaitevaitone_2026 (.sav labels).
